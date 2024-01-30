@@ -1,0 +1,17 @@
+const RaceInfo = require('#/data/race/model/race-info');
+
+module.exports = new RaceInfo(
+  "Prix de l'Arc de Triomphe",
+  '凯旋门赏',
+  RaceInfo.class_enum.G1,
+  RaceInfo.track_enum.longchamp,
+  RaceInfo.ground_enum.grass,
+  2400,
+  RaceInfo.distance_enum.medium,
+  RaceInfo.rotation_enum.right,
+  20,
+  RaceInfo.limit_enum.post3,
+  37,
+  15000,
+  11203,
+);

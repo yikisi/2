@@ -1,0 +1,1000 @@
+const era = require('#/era-electron');
+
+const have_baby = require('#/system/ero/sub/sys-have-baby');
+const auto_update_ero_skills = require('#/system/ero/sys-auto-update');
+const {
+  check_pregnant_unprotect,
+} = require('#/system/ero/sys-calc-ero-status');
+const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
+const check_new_activities = require('#/system/next-week/check-new-activities');
+const sys_call_check = require('#/system/script/sys-call-check');
+const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
+const call_ero_script = require('#/system/script/sys-call-ero-script');
+const {
+  sys_change_motivation,
+  sys_change_attr_and_print,
+  sys_fix_chara_base,
+  sys_change_lust,
+  sys_get_billings,
+  sys_reg_race,
+} = require('#/system/sys-calc-base-cflag');
+const {
+  sys_like_chara,
+  sys_love_uma,
+} = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_debuff,
+  sys_check_train_enabled,
+  sys_check_awake,
+} = require('#/system/sys-calc-chara-param');
+const { sys_change_money, sys_change_fame } = require('#/system/sys-calc-flag');
+const filter_chara = require('#/system/sys-filter-chara');
+const sys_handle_palace = require('#/system/sys-handle-palace');
+const { get_success_base_reward } = require('#/system/sys-train-uma');
+
+const { remove_special_events } = require('#/event/queue');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_entry, sort_list } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
+
+const { buff_colors, money_color } = require('#/data/color-const');
+const { trainer_salary } = require('#/data/const.json');
+const {
+  baby_limit,
+  birth_percent,
+  lust_border,
+} = require('#/data/ero/orgasm-const');
+const { part_enum, part_talents } = require('#/data/ero/part-const');
+const { slavery_enum } = require('#/data/ero/sex-mark-const');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const check_stages = require('#/data/event/check-stages');
+const { ero_hooks } = require('#/data/event/ero-hooks');
+const event_hooks = require('#/data/event/event-hooks');
+const recruit_flags = require('#/data/event/recruit-flags');
+const {
+  get_trainer_title,
+  get_breast_cup,
+  get_talent_bust_size,
+} = require('#/data/info-generator');
+const {
+  attr_names,
+  attr_enum,
+  fail_sta_border,
+  time_cost,
+  pressure_border,
+} = require('#/data/train-const');
+
+async function sys_next_week() {
+  const in_team_list = filter_chara(
+      'cflag',
+      '招募状态',
+      recruit_flags.yes,
+    ).filter((e) => e),
+    health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes,
+    me = get_chara_talk(0),
+    punish_level = era.get('flag:惩戒力度'),
+    your_race = era.get('cflag:0:种族');
+  let temp;
+  era.set('status:0:沉睡', 1);
+  era.set('status:0:熬夜', 0);
+  era.set('status:0:摸鱼', 0);
+
+  // 回合结束结算
+  for (const chara_id of in_team_list) {
+    const stamina = era.get(`base:${chara_id}:体力`),
+      stamina_ratio = stamina / era.get(`maxbase:${chara_id}:体力`),
+      time = era.get(`base:${chara_id}:精力`);
+    let debuff = sys_get_debuff(chara_id);
+    debuff >= 0.5 && (debuff = 1000);
+    if (
+      sys_check_train_enabled(chara_id) &&
+      era.get(`cflag:${chara_id}:自主训练`) &&
+      !era.get(`status:${chara_id}:摸鱼`) &&
+      stamina_ratio >= fail_sta_border.intelligence &&
+      time >= time_cost.uma * (1 + debuff)
+    ) {
+      const train_need_attrs = Object.values(attr_enum).filter(
+        (attr) =>
+          era.get(`base:${chara_id}:${attr_names[attr]}`) <=
+          era.get(`maxbase:${chara_id}:${attr_names[attr]}`),
+      );
+      const changes = {
+          attr_change: new Array(5).fill(0),
+          pt_change: 2,
+        },
+        train_attr =
+          stamina_ratio >= fail_sta_border.other
+            ? get_random_entry(
+                train_need_attrs.filter(
+                  (attr) => attr !== attr_enum.intelligence,
+                ),
+              )
+            : attr_enum.intelligence,
+        train_cost = {
+          stamina: -time_cost.uma * (0.9 + Math.random() * 0.3), // -400*[0.9,1.2]
+          time: -time_cost.uma,
+        },
+        cost_result = [
+          sys_change_attr_and_print(chara_id, '体力', train_cost.stamina),
+          sys_change_attr_and_print(chara_id, '精力', train_cost.time),
+        ];
+      era.add(
+        `exp:${chara_id}:${attr_names[train_attr]}训练经验`,
+        100 + era.get(`cflag:${chara_id}:${attr_names[train_attr]}加成`),
+      );
+      get_success_base_reward(
+        chara_id,
+        train_attr,
+        era.get(`abl:${chara_id}:${attr_names[train_attr]}训练等级`) || 1,
+        train_cost,
+        changes,
+        true,
+      );
+      era.printMultiColumns([
+        {
+          content: [
+            get_chara_talk(chara_id).get_colored_name(),
+            ' 进行了自主训练……',
+          ],
+          type: 'text',
+        },
+        ...cost_result.map((e) => {
+          return {
+            content: e,
+            config: { offset: 1, width: 23 },
+            type: 'text',
+          };
+        }),
+        ...changes.attr_change
+          .map((stat, attr) => sys_change_attr_and_print(chara_id, attr, stat))
+          .filter((e) => e.length)
+          .map((e) => {
+            return {
+              content: e,
+              config: { offset: 1, width: 23 },
+              type: 'text',
+            };
+          }),
+        {
+          content: [
+            { content: `获得了 ${changes.pt_change} 点技能点数` },
+            { isBr: true },
+            { isBr: true },
+          ],
+          config: { offset: 1, width: 23 },
+          type: 'text',
+        },
+      ]);
+      era.add(`exp:${chara_id}:技能点数`, changes.pt_change);
+    }
+    if (
+      era.get(`cflag:${chara_id}:种族`) &&
+      era.get(`cflag:${chara_id}:成长阶段`) >= 2
+    ) {
+      era.set(
+        `status:${chara_id}:熬夜`,
+        Math.random() < 0.05 + 0.025 * era.get(`talent:${chara_id}:时间观念`),
+      );
+      if (
+        chara_id &&
+        era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) <
+          3 * 48
+      ) {
+        era.set(
+          `status:${chara_id}:摸鱼`,
+          Math.random() < 0.02 + 0.01 * era.get(`talent:${chara_id}:偷懒克制`),
+        );
+      }
+    } else {
+      era.set(`status:${chara_id}:熬夜`, 0);
+      era.set(`status:${chara_id}:摸鱼`, 0);
+    }
+    era.set(`cflag:${chara_id}:自主训练`, 1);
+  }
+  // 极端事件判定
+  // 极端事件发生在回合的结束
+  if (check_pregnant_unprotect(0)) {
+    const your_position = era.get('cflag:0:位置');
+    /** @type {{chara_id:number,prison:boolean,[supporter]:number}[]} */
+    let act_list = [];
+    let prepared_list =
+      (temp = era.get('flag:床伴')) &&
+      era.get(`base:${temp}:体力`) &&
+      era.get(`base:${temp}:精力`) &&
+      !era.get(`status:${temp}:马跳S`)
+        ? [temp].filter(check_pregnant_unprotect)
+        : in_team_list.filter(
+            (chara_id) =>
+              chara_id !== temp &&
+              era.get(`cflag:${chara_id}:成长阶段`) >= 2 &&
+              era.get(`base:${chara_id}:体力`) &&
+              era.get(`base:${chara_id}:精力`) &&
+              !era.get(`status:${chara_id}:马跳S`) &&
+              check_pregnant_unprotect(chara_id) &&
+              era.get(`cflag:${chara_id}:位置`) === your_position,
+          );
+    prepared_list.forEach((chara_id) => {
+      if (
+        era.get('flag:地下室之主') === chara_id ||
+        sys_call_check(chara_id, check_stages.prison)
+      ) {
+        act_list.push({ chara_id, prison: true });
+      } else if (sys_call_check(chara_id, check_stages.rape_in_sleeping)) {
+        act_list.push({ chara_id, prison: false });
+      }
+    });
+    let tmp;
+    if (
+      !act_list.length &&
+      punish_level >= 2 &&
+      sys_call_check(
+        (tmp = get_random_entry(
+          filter_chara('cflag', '招募状态', recruit_flags.no).filter(
+            (e) => era.get(`cflag:${e}:成长阶段`) >= 2,
+          ),
+        )),
+        check_stages.rape_in_sleeping,
+      )
+    ) {
+      act_list.push({
+        chara_id: tmp,
+        prison: false,
+      });
+    }
+    tmp = true;
+    act_list = sort_list(act_list, Math.random).filter(
+      (e) => tmp && (tmp = !e.prison) !== undefined,
+    );
+    // 睡奸归并
+    const final_act_list = [];
+    tmp = -1;
+    for (const act of act_list) {
+      if (
+        final_act_list[tmp] &&
+        final_act_list[tmp].prison === act.prison &&
+        era.get(`relation:${final_act_list[tmp].chara_id}:${act.chara_id}`) >
+          375 &&
+        era.get(`relation:${act.chara_id}:${final_act_list[tmp].chara_id}`) > 75
+      ) {
+        final_act_list[tmp].supporter = act.chara_id;
+        tmp = final_act_list.length;
+        continue;
+      }
+      final_act_list.push(act);
+      tmp = final_act_list.length - 1;
+    }
+    for (const act of final_act_list) {
+      if (act.prison) {
+        await call_ero_script(act.chara_id, ero_hooks.prison);
+      } else {
+        await sys_rape_in_sleeping(act.chara_id, act.supporter);
+      }
+    }
+  }
+  in_team_list.forEach(
+    (chara_id) => sys_check_awake(chara_id) && auto_update_ero_skills(chara_id),
+  );
+
+  // 新回合开始
+  let cur_year = era.get('flag:当前年'),
+    cur_month = era.get('flag:当前月'),
+    cur_week = era.get('flag:当前周');
+  cur_week++;
+  const cur_round = era.add('flag:当前回合数', 1),
+    salary =
+      !your_race *
+      trainer_salary[get_trainer_title().substring(0, 2)] *
+      (1 + (cur_month === 12));
+  let money = era.get('flag:当前马币');
+  era.set('flag:收支', (cur_week === 4) * salary);
+  era.set(
+    'flag:账单',
+    sys_get_billings()
+      .map((e) => {
+        if (!e) {
+          return undefined;
+        }
+        if (e.timer) {
+          money = sys_change_money(e.repay);
+          e.timer--;
+        }
+        if (e.timer) {
+          era.add('flag:收支', e.repay);
+        }
+        return e;
+      })
+      .filter((e, i) => !i || (e && e.timer)),
+  );
+  if (cur_week === 5) {
+    cur_week = 1;
+    cur_month++;
+    // 人类训练员有工资拿
+    // 马娘训练员？自己跑比赛去！
+    if (salary) {
+      era.print([
+        '收到了学园发放的训练员工资 ',
+        { color: money_color, content: salary.toLocaleString() },
+        ' 马币',
+        { isBr: true },
+        { isBr: true },
+      ]);
+      money = sys_change_money(salary);
+    }
+    // 季节判定只在换月的时候考虑
+    if (cur_month === 5) {
+      era.set('flag:季节', 1);
+    } else if (cur_month === 11) {
+      era.set('flag:季节', 0);
+    }
+  }
+  if (money < 0) {
+    sys_change_money(money * 0.05);
+  }
+  if (cur_month === 13) {
+    cur_month = 1;
+    cur_year++;
+  }
+  era.set('flag:当前年', cur_year);
+  era.set('flag:当前月', cur_month);
+  era.set('flag:当前周', cur_week);
+  if (punish_level < 3) {
+    sys_change_fame(era.get('flag:回合声望惩罚'));
+  }
+
+  // 新回合开始
+  in_team_list.unshift(0);
+  const out_race_list = [];
+  let race_punish = 0;
+  era.set('status:0:马语者', 0);
+  for (const chara_id of in_team_list) {
+    sys_fix_chara_base(chara_id);
+    let stay_up = era.get(`status:${chara_id}:熬夜`);
+    if (era.get(`base:${chara_id}:性欲`) >= lust_border.absent_mind) {
+      stay_up++;
+      sys_change_lust(chara_id, -get_random_value(0, 2000));
+    }
+    // 体力精力恢复
+    era.add(
+      `base:${chara_id}:体力`,
+      Math.floor(era.get(`maxbase:${chara_id}:体力`) * (0.6 - 0.2 * stay_up)),
+    );
+    era.add(
+      `base:${chara_id}:精力`,
+      Math.floor(era.get(`maxbase:${chara_id}:精力`) * (1 - 0.25 * stay_up)),
+    );
+
+    let motivation_change = 0;
+    if (chara_id) {
+      let status_hate = era.get(`status:${chara_id}:讨厌药`);
+      if (status_hate) {
+        status_hate = era.add(`status:${chara_id}:讨厌药`, -1);
+      }
+      /** @type {{limit:number,cache:number}|undefined} */
+      let status_limit = era.get(`status:${chara_id}:抑制药`);
+      if (
+        status_limit &&
+        cur_round > status_limit.limit &&
+        Math.random() > Math.pow(2, status_limit.limit - cur_round) + 0.5
+      ) {
+        era.set(`love:${chara_id}`, status_limit.cache);
+        const limit_delta = status_limit.limit - cur_round;
+        status_limit = era.set(`status:${chara_id}:抑制药`, 0);
+        sys_love_uma(chara_id, limit_delta * 2 + 8);
+      }
+
+      // 回合惩罚，不受其他加成影响
+      // 长大了再来谈好感和爱吧……
+      if (era.get(`cflag:${chara_id}:成长阶段`) >= 2) {
+        if (
+          (temp = era.get('flag:回合好感惩罚')) ||
+          era.get(`status:${chara_id}:讨厌药`)
+        ) {
+          sys_like_chara(
+            chara_id,
+            0,
+            temp - (era.get(`status:${chara_id}:讨厌药`) > 0) * 50,
+            false,
+          );
+        }
+        if ((temp = era.get('flag:回合爱慕惩罚'))) {
+          sys_love_uma(
+            chara_id,
+            (1 - (era.get(`status:${chara_id}:讨厌药`) > 0)) *
+              (1 - !!era.get(`status:${chara_id}:抑制药`)) *
+              temp,
+            false,
+          );
+        }
+      }
+
+      // 殿堂计算
+      // 玩家不进殿堂
+      if (chara_id) {
+        if (cur_round - era.get(`cflag:${chara_id}:育成回合计时`) === 3 * 48) {
+          sys_handle_palace(chara_id);
+          await era.waitAnyKey();
+        } else if (
+          cur_round - era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 &&
+          (era.get(`status:${chara_id}:摸鱼`) ||
+            (stay_up && Math.random() < 0.2))
+        ) {
+          // 没进殿堂，摸鱼和熬夜才会正常造成干劲下降
+          motivation_change -= 1;
+        }
+      }
+    }
+    sys_change_motivation(chara_id, motivation_change);
+
+    const chara = get_chara_talk(chara_id);
+    const weight_delta = era.get(`base:${chara_id}:体重偏差`);
+    if (!era.get(`status:${chara_id}:发胖`) && weight_delta >= 4000) {
+      era.set(`status:${chara_id}:发胖`, 1);
+      era.print([
+        chara.get_colored_name(),
+        ' ',
+        { color: buff_colors[0], content: '[发胖]' },
+        '了……',
+      ]);
+    } else if (era.get(`status:${chara_id}:发胖`) && weight_delta <= 2000) {
+      era.set(`status:${chara_id}:发胖`, 0);
+      era.print([chara.get_colored_name(), ' 的体重恢复了正常……']);
+    }
+
+    const health_talent = era.get(`talent:${chara_id}:身体素质`);
+    const race = era.get(`cflag:${chara_id}:种族`);
+    let drug_delta = era.add(
+      `base:${chara_id}:药物残留`,
+      ((15 * era.get(`status:${chara_id}:马跳Z`) +
+        25 * era.get(`status:${chara_id}:马跳S`) +
+        80 * era.get(`status:${chara_id}:超马跳Z`) +
+        25 * era.get(`status:${chara_id}:弗隆K`) +
+        30 * era.get(`status:${chara_id}:弗隆P`) +
+        65 * (era.get(`status:${chara_id}:长效避孕药`) > 0) +
+        15 * (era.get(`status:${chara_id}:短效避孕药`) > 0) +
+        10 * (era.get(`talent:${chara_id}:泌乳`) === 2)) *
+        (10 - 2 * health_buff)) /
+        10 -
+        (5 + health_talent + health_buff) *
+          (1 + race + 0.5 * era.get(`status:${chara_id}:健康茶`)),
+    );
+    if (
+      !era.get(`status:${chara_id}:头风`) &&
+      drug_delta >= 100 + 20 * health_talent + 50 * race
+    ) {
+      era.set(`status:${chara_id}:头风`, 1);
+      era.print([
+        chara.get_colored_name(),
+        ' 罹患了 ',
+        { color: buff_colors[0], content: '[头风]' },
+        '……',
+      ]);
+    } else if (
+      era.get(`status:${chara_id}:头风`) &&
+      drug_delta <= 80 + 20 * health_talent + 50 * race
+    ) {
+      era.set(`status:${chara_id}:头风`, 0);
+      era.print([
+        chara.get_colored_name(),
+        ' 的 ',
+        { color: buff_colors[0], content: '[头风]' },
+        ' 痊愈了……',
+      ]);
+    }
+
+    era.set(`cflag:${chara_id}:子宫内精液`, 0);
+    era.set(`cflag:${chara_id}:肠道内精液`, 0);
+    era.set(`cflag:${chara_id}:腹中精液`, 0);
+    era.set(`status:${chara_id}:马跳Z`, 0);
+    if (
+      era.get(`cflag:${chara_id}:阴茎尺寸`) &&
+      era.get(`cflag:${chara_id}:阴茎尺寸`) < 4 &&
+      Math.random() <
+        0.05 * era.get(`status:${chara_id}:弗隆K`) +
+          0.1 * era.get(`status:${chara_id}:弗隆P`)
+    ) {
+      era.add(`cflag:${chara_id}:阴茎尺寸`, 1);
+      era.set(
+        `abl:${chara_id}:阴茎耐性`,
+        Math.max(era.get(`abl:${chara_id}:阴茎耐性`) - 2, 0),
+      );
+    }
+    era.set(`status:${chara_id}:弗隆K`, 0);
+    era.set(`status:${chara_id}:弗隆P`, 0);
+    era.set(`status:${chara_id}:超马跳Z`, 0);
+    era.set(`status:${chara_id}:马跳S`, 0);
+    era.set(`status:${chara_id}:沉睡`, 0);
+    era.set(`status:${chara_id}:短效避孕药`, 0);
+    era.set(`status:${chara_id}:避孕套溶解剂`, 0);
+    if (era.get(`status:${chara_id}:长效避孕药`)) {
+      era.add(`status:${chara_id}:长效避孕药`, -1);
+    }
+    if (era.get(`status:${chara_id}:疲惫`)) {
+      era.add(`status:${chara_id}:疲惫`, -1);
+    }
+    if (era.get(`status:${chara_id}:伤病`)) {
+      era.add(`status:${chara_id}:伤病`, -1);
+    }
+    era.set(`status:${chara_id}:健康茶`, 0);
+    // 药物泌乳只维持一回合
+    if (era.get(`talent:${chara_id}:泌乳`) === 2) {
+      if (Math.random() < 0.05) {
+        era.set(`talent:${chara_id}:泌乳`, 3);
+        await era.printAndWait([
+          chara.get_colored_name(),
+          ' 在 [母乳药剂] 的影响下变成 ',
+          { color: buff_colors[2], content: '[母乳体质]' },
+          ' 了！',
+        ]);
+      } else {
+        era.set(`talent:${chara_id}:泌乳`, 0);
+      }
+    }
+
+    // 避战惩罚
+    const registered_race = sys_reg_race(chara_id);
+    if (
+      registered_race.last.week > 0 &&
+      registered_race.last.week < cur_round &&
+      !era.get(`cflag:${chara_id}:育成成绩`)[
+        cur_round - era.get(`cflag:${chara_id}:育成回合计时`) - 1
+      ]
+    ) {
+      out_race_list.push(chara_id);
+      race_punish += 100;
+      registered_race.curr = { race: -1, week: -1 };
+    }
+    registered_race.last.race = registered_race.curr.race;
+    registered_race.last.week = registered_race.curr.week;
+  }
+
+  let hentai_punish = 0,
+    hentai_reward = 0,
+    hentai_marks = [false, false];
+
+  // 在新回合开始时删除所有节日事件
+  const removed_specials = remove_special_events();
+  for (const chara_id of in_team_list) {
+    if (chara_id) {
+      const relation_punish =
+        (removed_specials[chara_id] || 0) +
+        (era.get(`love:${chara_id}`) >= 50) *
+          (era.get(`cflag:${chara_id}:节日事件标记`) || 0);
+      if (relation_punish) {
+        era.print([
+          '因为 ',
+          me.get_colored_name(),
+          ' 的忽视，',
+          get_chara_talk(chara_id).get_colored_name(),
+          ' ',
+          relation_punish > 2 ? '无比' : '有些',
+          '失望……',
+        ]);
+        sys_like_chara(chara_id, 0, -50 * relation_punish);
+        await era.waitAnyKey();
+      }
+    }
+  }
+  for (const chara_id of era.getAddedCharacters()) {
+    if (chara_id === 9017) {
+      continue;
+    }
+    const birth_month = era.get(`cflag:${chara_id}:出生月份`),
+      birth_week = Math.min(
+        Math.floor((era.get(`cflag:${chara_id}:出生日期`) + 6) / 7),
+        4,
+      );
+    let growth_stage = era.get(`cflag:${chara_id}:成长阶段`);
+    const race = era.get(`cflag:${chara_id}:种族`);
+
+    era.get(`status:${chara_id}:生日`) && era.set(`status:${chara_id}:生日`, 0);
+    if (birth_week === cur_week && birth_month === cur_month) {
+      era.set(`status:${chara_id}:生日`, 1);
+      if (growth_stage < 4) {
+        growth_stage = era.add(`cflag:${chara_id}:成长阶段`, 1);
+        if (growth_stage === 1) {
+          if (era.get(`talent:${chara_id}:阴毛成长`)) {
+            era.set(`talent:${chara_id}:茎核类型`, get_random_value(0, 2));
+          } else {
+            era.set(`talent:${chara_id}:茎核类型`, 0);
+          }
+          if (era.get(`talent:${chara_id}:乳头类型`) !== 2) {
+            era.set(`talent:${chara_id}:乳头类型`, get_random_value(0, 1));
+          }
+          await sys_call_daily_event(chara_id, event_hooks.growth, {
+            stage: 0,
+          });
+        } else if (growth_stage === 2) {
+          await sys_call_daily_event(chara_id, event_hooks.growth, {
+            stage: 1,
+          });
+        }
+      }
+    }
+    if (
+      growth_stage >= 2 &&
+      cur_month === 1 &&
+      cur_week === 1 &&
+      era.get(`cflag:${chara_id}:育成回合计时`) === -200
+    ) {
+      era.set(`cflag:${chara_id}:育成回合计时`, cur_round);
+      await sys_call_daily_event(chara_id, event_hooks.growth, { stage: 2 });
+    }
+
+    const is_pregnant_slave =
+        era.get(`equip:${chara_id}:淫纹奴役`) === slavery_enum.pregnant,
+      is_always_special = is_pregnant_slave;
+
+    let pregnant_stage = era.get(`cflag:${chara_id}:妊娠阶段`);
+    if (pregnant_stage >> pregnant_stage_enum.embryo) {
+      sys_change_lust(chara_id, lust_border.itch / 40);
+      const timer = era.add(
+          `cflag:${chara_id}:妊娠回合计时`,
+          1 + is_pregnant_slave,
+        ),
+        o_timer = timer - 1;
+      const pregnant_times = era.get(`exp:${chara_id}:生产次数`);
+      era.add(
+        `base:${chara_id}:体重偏差`,
+        get_random_value(50 + timer * 5, 150 + timer * 10),
+      );
+      if (!o_timer) {
+        const father_id = era.get(`cflag:${chara_id}:孩子父亲`);
+        // 常规事件：马娘发现怀孕
+        await call_ero_script(
+          chara_id || father_id,
+          ero_hooks.report_pregnant_between_weeks,
+          {
+            father_id,
+            mother_id: chara_id,
+          },
+        );
+      } else if (timer < 13) {
+        // 1-12周孕早期
+        // 空，不做处理
+      } else if (timer < 28) {
+        // 13-29周安定期，可以做爱了
+        pregnant_stage = era.set(
+          `cflag:${chara_id}:妊娠阶段`,
+          1 << pregnant_stage_enum.fetal,
+        );
+        if (20 === timer) {
+          // 20周腰围+15cm，到此+15cm
+          era.add(`cflag:${chara_id}:腰围`, 15);
+        }
+      } else if (timer < 36) {
+        // 28-35周孕晚期，开始泌乳
+        pregnant_stage = era.set(
+          `cflag:${chara_id}:妊娠阶段`,
+          1 << pregnant_stage_enum.late,
+        );
+        // 孕育泌乳+5cm胸围，孕晚期+3，临产期+2
+        if (!era.get(`talent:${chara_id}:泌乳`)) {
+          era.set(`talent:${chara_id}:泌乳`, 1);
+          era.add(`cflag:${chara_id}:胸围`, 3);
+        }
+        if (30 === timer) {
+          // 15周腰围+15cm，到此+30cm
+          era.add(`cflag:${chara_id}:腰围`, 15);
+        }
+      } else {
+        // H事件：出生
+        // 37周以后概率生，最晚42周
+        // 现实是40周，这里为了游戏性折叠了
+        pregnant_stage = era.set(
+          `cflag:${chara_id}:妊娠阶段`,
+          1 << pregnant_stage_enum.pre_birth,
+        );
+        if (timer === 36) {
+          // 孕育泌乳在临产期+2cm胸围
+          // 通过哺乳期怀孕的办法可以反复叠加该奖励
+          if (era.get(`talent:${chara_id}:泌乳`) === 1) {
+            era.add(`cflag:${chara_id}:胸围`, 2);
+          }
+          if (!pregnant_times) {
+            // 头胎在临产期+1cm臀围
+            era.add(`cflag:${chara_id}:臀围`, 1);
+          }
+          // 临产期腰围+10cm，到此+40cm
+          era.add(`cflag:${chara_id}:腰围`, 10);
+        }
+        // 孩子只能在中央特雷森出生
+        // 不然会涉及好几个回合的产妇无法移动问题！
+        if (
+          !era.get(`cflag:${chara_id}:位置`) &&
+          Math.random() < birth_percent[timer - 36]
+        ) {
+          // 出生
+          if (pregnant_times < 2) {
+            // 头两胎在生产后+2cm
+            era.add(`cflag:${chara_id}:臀围`, 2);
+          }
+          // 出生后腰围-32cm，到此+8cm
+          era.add(`cflag:${chara_id}:腰围`, -32);
+          pregnant_stage = era.set(
+            `cflag:${chara_id}:妊娠阶段`,
+            1 << pregnant_stage_enum.resume,
+          );
+          era.set(`cflag:${chara_id}:妊娠回合计时`, 4);
+          // 一年即48周内会泌乳
+          // 本回合会马上进行判定，所以+1
+          era.set(`cflag:${chara_id}:泌乳回合计时`, 48 + 1);
+          await have_baby(chara_id);
+          if (chara_id) {
+            if (
+              era.get(`cflag:${chara_id}:招募状态`) === recruit_flags.yes &&
+              growth_stage >= 2 &&
+              cur_round - era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48
+            ) {
+              hentai_punish += 100;
+              hentai_marks[1] = true;
+            }
+          } else if (punish_level === 3) {
+            hentai_reward += 100;
+          } else if (race) {
+            hentai_punish += 100;
+            hentai_marks[1] = true;
+          } else {
+            hentai_punish += 50;
+            hentai_marks[0] = true;
+          }
+          era.add(`base:${chara_id}:体重偏差`, -4000);
+        }
+      }
+    } else if (pregnant_stage === 1 << pregnant_stage_enum.resume) {
+      sys_change_lust(chara_id, lust_border.itch / 20);
+      // 恢复期计算
+      const timer = era.add(`cflag:${chara_id}:妊娠回合计时`, -1);
+      // 恢复期结束，腰围逐渐恢复正常
+      // 4回合恢复期，每回合-2cm，总共-8cm
+      era.add(`cflag:${chara_id}:腰围`, -2);
+      if (timer === 0) {
+        pregnant_stage = era.set(
+          `cflag:${chara_id}:妊娠阶段`,
+          1 << pregnant_stage_enum.no,
+        );
+        era.set(`cflag:${chara_id}:月经周`, ((cur_week + 1) % 4) + 1);
+        if (is_pregnant_slave) {
+          era.set('status:0:排卵期', 1);
+        }
+      }
+    }
+
+    if (growth_stage >= 2) {
+      era.set(
+        `talent:${chara_id}:乳房尺寸`,
+        get_talent_bust_size(get_breast_cup(chara_id, true)),
+      );
+    }
+
+    let special_month = era.get(`status:${chara_id}:发情`),
+      special_body = era.get(`status:${chara_id}:排卵期`);
+    // 只有马娘需要计算发情期
+    // 好吧，给马郎留个口子
+    if (growth_stage === 4 && race && !is_always_special) {
+      // 发情期为出生月的下一个月
+      const _special_month = (birth_month % 12) + 1;
+      // 第二年开始计算发情期，限定本格期，发情期内无经期
+      // 安定期继续发情
+      if (cur_month === _special_month && (pregnant_stage & 0xa) > 0) {
+        if (!era.get(`status:${chara_id}:发情`)) {
+          special_month = era.set(`status:${chara_id}:发情`, 1);
+        }
+      } else if (era.get(`status:${chara_id}:发情`)) {
+        special_month = era.set(`status:${chara_id}:发情`, 0);
+      }
+    }
+
+    // 只有性成熟且有浦西才需要算经期和排卵期
+    // 注意虽然成长期就性成熟了，但是开发者保护在本格期才会怀孕
+    // 一个月四个星期，假设生日在第二周，则四周分别为：排卵期 出生周 经期 无
+    if (
+      growth_stage >= 1 &&
+      era.get(`cflag:${chara_id}:性别`) - 1 &&
+      !is_pregnant_slave
+    ) {
+      // 经期为出生周的下一周（简单计算）
+      let special_week =
+        era.get(`cflag:${chara_id}:月经周`) ||
+        era.set(`cflag:${chara_id}:月经周`, (birth_week % 4) + 1);
+      // 成长期以上计算经期和排卵期
+      // 非发情期且未怀孕时计算经期
+      if (
+        cur_week === special_week &&
+        pregnant_stage === 1 << pregnant_stage_enum.no &&
+        !era.get(`status:${chara_id}:发情`)
+      ) {
+        era.set(`status:${chara_id}:经期`, 1);
+      } else {
+        era.set(`status:${chara_id}:经期`, 0);
+      }
+      // 经期再下一周（出生周上一周）排卵期
+      special_week = ((special_week + 1) % 4) + 1;
+      // 排卵期只和怀孕有冲突
+      if (
+        cur_week === special_week &&
+        pregnant_stage === 1 << pregnant_stage_enum.no &&
+        // 生育次数检查
+        era.get(`exp:${chara_id}:生产次数`) < baby_limit
+      ) {
+        special_body = era.set(`status:${chara_id}:排卵期`, 1);
+      } else {
+        special_body = era.set(`status:${chara_id}:排卵期`, 0);
+      }
+    }
+    if (growth_stage >= 1 && era.get(`cflag:${chara_id}:性别`) - 1) {
+      // 泌乳的相关判定
+      let milk_timer = era.get(`cflag:${chara_id}:泌乳回合计时`);
+      if (milk_timer) {
+        switch (era.get(`talent:${chara_id}:泌乳`)) {
+          case 1:
+            milk_timer = era.add(`cflag:${chara_id}:泌乳回合计时`, -1);
+            // 20周、25周、30周、35周减一次胸围
+            if (
+              28 === milk_timer ||
+              23 === milk_timer ||
+              18 === milk_timer ||
+              13 === milk_timer
+            ) {
+              era.add(`cflag:${chara_id}:胸围`, -1);
+            }
+            // 40周后概率停奶，泌乳时间越长概率越高
+            // 孕育泌乳在孕育结束后减少胸围
+            if (milk_timer < 8 && Math.random() < Math.pow(2, -milk_timer)) {
+              // 胸围加成消失
+              era.add(`cflag:${chara_id}:胸围`, -1);
+              era.set(`cflag:${chara_id}:泌乳回合计时`, 0);
+              era.set(`talent:${chara_id}:泌乳`, 0);
+            }
+            break;
+          case 3:
+            // 母乳体质直接停止计时
+            era.set(`cflag:${chara_id}:泌乳回合计时`, 0);
+        }
+      }
+    }
+
+    if (growth_stage >= 1) {
+      const body_hair_talent = era.get(`talent:${chara_id}:腋毛成长`),
+        sex_hair_talent = era.get(`talent:${chara_id}:阴毛成长`);
+      let body_hair = era.get(`cflag:${chara_id}:腋毛`),
+        sex_hair = era.get(`cflag:${chara_id}:阴毛`);
+      body_hair = era.set(
+        `cflag:${chara_id}:腋毛`,
+        Math.min(body_hair + body_hair_talent, 4 + (body_hair_talent === 2)),
+      );
+      sex_hair = era.set(
+        `cflag:${chara_id}:阴毛`,
+        Math.min(sex_hair + sex_hair_talent, 4 + (sex_hair_talent === 2)),
+      );
+      if (
+        !era.get(`status:${chara_id}:马跳S`) &&
+        (!chara_id || !era.get(`status:${chara_id}:沉睡`))
+      ) {
+        switch (era.get(`talent:${chara_id}:洁净重视`)) {
+          case 0:
+            body_hair > 3 && (body_hair = era.set(`cflag:${chara_id}:腋毛`, 0));
+            sex_hair > 3 && (sex_hair = era.set(`cflag:${chara_id}:阴毛`, 2));
+            break;
+          case -1:
+            body_hair > 2 && (body_hair = era.set(`cflag:${chara_id}:腋毛`, 0));
+            sex_hair > 3 && (sex_hair = era.set(`cflag:${chara_id}:阴毛`, 1));
+        }
+      }
+
+      const pressure = era.get(`base:${chara_id}:压力`);
+      if (pressure === pressure_border.limit) {
+        sys_change_lust(chara_id, -lust_border.itch / 2);
+      } else if (pressure >= pressure_border.depression) {
+        sys_change_lust(chara_id, -lust_border.itch / 4);
+      } else if (pressure >= pressure_border.apprehension) {
+        sys_change_lust(chara_id, lust_border.itch / 30);
+      } else if (pressure >= pressure_border) {
+        sys_change_lust(chara_id, lust_border.itch / 25);
+      }
+
+      if (special_month) {
+        sys_change_lust(chara_id, lust_border.itch / 15);
+        if (special_body) {
+          sys_change_lust(chara_id, lust_border.itch / 60);
+        }
+      }
+
+      const tmp_parts = [
+        part_enum.mouth,
+        part_enum.breast,
+        part_enum.body,
+        part_enum.anal,
+      ];
+      switch (era.get(`cflag:${chara_id}:性别`)) {
+        case 0:
+          tmp_parts.push(part_enum.clitoris);
+          tmp_parts.push(part_enum.virgin);
+          break;
+        case 1:
+          tmp_parts.push(part_enum.penis);
+          break;
+        case 10:
+          tmp_parts.push(part_enum.penis);
+          tmp_parts.push(part_enum.virgin);
+      }
+      sys_change_lust(
+        chara_id,
+        (tmp_parts.filter(
+          (e) => era.get(`talent:${chara_id}:${part_talents[e]}`) === 2,
+        ).length *
+          lust_border.itch) /
+          40,
+      );
+    }
+
+    sys_call_check(chara_id, check_stages.next_week);
+  }
+
+  in_team_list.shift();
+  // 惩罚结算
+  if (race_punish && punish_level < 3) {
+    const buffer = [];
+    out_race_list.forEach((e, i) => {
+      i && buffer.push('，');
+      buffer.push(get_chara_talk(e).get_colored_name());
+    });
+    era.print([
+      '因为 ',
+      ...buffer,
+      ' 的避战行为，社会对 ',
+      me.get_colored_name(),
+      ' 的评价降低了！',
+    ]);
+    sys_change_fame(-race_punish);
+  }
+  if (hentai_reward) {
+    era.print([me.get_colored_name(), ' 履行了职责，作为孕袋的评价上升了……']);
+    era.add('flag:当前声望', hentai_reward);
+  }
+  if (hentai_punish) {
+    if (punish_level === 3) {
+      era.print([
+        '让马娘主人怀孕的 ',
+        me.get_colored_name(),
+        ' 因为孕袋失格，受到了特雷森的处罚！',
+      ]);
+      era.add('flag:当前马币', -hentai_punish);
+    } else {
+      if (hentai_marks[0]) {
+        era.print([
+          '因为现役训练员的私生子丑闻，社会对 ',
+          me.get_colored_name(),
+          ' 的评价降低了！',
+        ]);
+      }
+      if (hentai_marks[1]) {
+        era.print([
+          '因为现役马娘的私生子丑闻，社会对 ',
+          me.get_colored_name(),
+          ' 的评价降低了！',
+        ]);
+      }
+      sys_change_fame(-hentai_punish);
+      era.set('flag:变态行为', 1);
+    }
+  }
+  await check_new_activities(cur_round, in_team_list);
+
+  if (!era.get('flag:当前互动角色') && in_team_list.length) {
+    era.set(
+      'flag:当前互动角色',
+      era.get('flag:床伴') ||
+        get_random_entry(
+          in_team_list.filter(
+            (e) =>
+              era.get('cflag:0:位置') === era.get(`cflag:${e}:位置`) &&
+              era.get(`cflag:${e}:成长阶段`) >= 1,
+          ),
+        ),
+    );
+  }
+  era.set('flag:床伴', 0);
+}
+
+module.exports = sys_next_week;

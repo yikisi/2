@@ -1,0 +1,6 @@
+[submodule "lines"]
+	path = lines
+	url = https://github.com/umalib/EraUmaLine.git
+[submodule "engine"]
+	path = engine
+	url = https://gitgud.io/SLeader/era-electron.git

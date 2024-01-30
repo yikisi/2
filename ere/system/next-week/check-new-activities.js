@@ -1,0 +1,232 @@
+const era = require('#/era-electron');
+
+const {
+  sys_reg_race,
+  sys_change_attr_and_print,
+} = require('#/system/sys-calc-base-cflag');
+const {
+  check_pregnant_unprotect,
+} = require('#/system/ero/sys-calc-ero-status');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const { celebration_color } = require('#/data/color-const');
+const { get_celebration } = require('#/data/info-generator');
+const { location_enum } = require('#/data/locations');
+const { track_enum } = require('#/data/race/model/race-info');
+const { race_infos, race_enum } = require('#/data/race/race-const');
+
+/**
+ * @param {number} cur_round
+ * @param {number[]} in_team_list
+ */
+async function check_new_activities(cur_round, in_team_list) {
+  era.drawLine();
+  const celebration = get_celebration(cur_round);
+  if (celebration) {
+    era.print([
+      '本周有 ',
+      { content: celebration, color: celebration_color },
+      '，马娘们也许有什么活动需要你关注哦',
+    ]);
+    era.set('cflag:0:节日事件标记', 0);
+    in_team_list.forEach((chara_id) =>
+      era.set(
+        `cflag:${chara_id}:节日事件标记`,
+        !era.get(`cflag:${chara_id}:种族`) ||
+          era.get('flag:当前回合数') -
+            era.get(`cflag:${chara_id}:育成回合计时`) >
+            47 ||
+          era.get(`love:${chara_id}`) >= 60,
+      ),
+    );
+    if (celebration === '庙会') {
+      in_team_list.forEach((chara_id) =>
+        era.set(
+          `cflag:${chara_id}:节日事件标记`,
+          era.get(`cflag:${chara_id}:节日事件标记`) &&
+            era.get(`cflag:${chara_id}:位置`) === location_enum.beach,
+        ),
+      );
+    }
+  } else {
+    in_team_list.forEach((chara_id) =>
+      era.set(`cflag:${chara_id}:节日事件标记`, 0),
+    );
+  }
+  if (
+    era.get('flag:当前马币') > 0 &&
+    era.get('flag:当前马币') + era.get('flag:收支') <= 0
+  ) {
+    era.print([get_chara_talk(0).get_colored_name(), ' 即将破产！']);
+  }
+  in_team_list.forEach((chara_id) => {
+    const registered_race = sys_reg_race(chara_id).curr;
+    if (registered_race.week === cur_round) {
+      era.print([
+        '本周有 ',
+        get_chara_talk(chara_id).get_colored_name(),
+        ' 报名参加的 ',
+        race_infos[registered_race.race].get_colored_name_with_class(),
+      ]);
+    }
+  });
+  const event_weeks = (cur_round - 1) % 48;
+  let race, is_begin;
+  for (const r of Object.values(race_enum)) {
+    const { date, track } = race_infos[r];
+    if (track >= track_enum.longchamp) {
+      if (event_weeks === date - 2) {
+        race = r;
+        is_begin = true;
+      } else if (event_weeks === date) {
+        race = r;
+        is_begin = false;
+      }
+      if (race) {
+        break;
+      }
+    }
+  }
+  if (race) {
+    if (is_begin) {
+      // 远征开始
+    } else {
+      // 远征结束
+      era.print([
+        era.get('cflag:0:位置') ? '' : '远征海外的人员',
+        '回到特雷森了……',
+      ]);
+      in_team_list.forEach((chara_id) => {
+        if (era.get(`cflag:${chara_id}:位置`)) {
+          sys_change_attr_and_print(chara_id, '体力', -100);
+          sys_change_attr_and_print(chara_id, '精力', -600);
+          era.set(`cflag:${chara_id}:位置`, 0);
+        }
+      });
+      if (era.get('cflag:0:位置')) {
+        era.set('flag:当前位置', location_enum.office);
+        sys_change_attr_and_print(0, '体力', -100);
+        sys_change_attr_and_print(0, '精力', -600);
+        era.set('cflag:0:位置', 0);
+      }
+    }
+  } else if (event_weeks === 29 - 1) {
+    // 夏合宿
+    const beach_group = in_team_list.filter((chara_id) => {
+      const edu_weeks = cur_round - era.get(`cflag:${chara_id}:育成回合计时`);
+      const flag =
+        era.get(`cflag:${chara_id}:成长阶段`) >= 2 &&
+        !era.get(`status:${chara_id}:伤病`) &&
+        // 未处于孕期保护的可以夏合宿
+        check_pregnant_unprotect(chara_id) &&
+        edu_weeks < 3 * 48 &&
+        edu_weeks > 48;
+      flag && era.set(`cflag:${chara_id}:位置`, location_enum.beach);
+      return flag;
+    });
+    beach_group.length &&
+      era.printMultiColumns([
+        {
+          content: [
+            '八月到了，今年 ',
+            get_chara_talk(0).get_colored_name(),
+            ' 的队伍中以下成员需要参加夏合宿：',
+          ],
+          type: 'text',
+        },
+        ...beach_group.map((chara_id) => {
+          const chara = get_chara_talk(chara_id);
+          sys_change_attr_and_print(chara_id, '体力', -10);
+          sys_change_attr_and_print(chara_id, '精力', -400);
+          return {
+            config: { align: 'center', width: 2, color: chara.color },
+            content: chara.name,
+            type: 'text',
+          };
+        }),
+      ]);
+    // temp大于0是不参加夏合宿，所以这里判断的是不能参加夏合宿的情况
+    let temp =
+      // 地下室就只能错过夏合宿了
+      era.get('flag:当前位置') === location_enum.basement ||
+      !check_pregnant_unprotect(0) ||
+      // 要么队伍里有人要参加夏合宿，要么就是自己参加夏合宿
+      (!beach_group.length && !era.get('cflag:0:种族'));
+    // 条件允许，弹选项让玩家选参加不参加
+    if (!temp) {
+      era.print(`要${beach_group.length ? '跟随' : ''}参加夏合宿吗？`);
+      era.printMultiColumns(
+        ['是', '否'].map((e, i) => {
+          return {
+            content: e,
+            type: 'button',
+            accelerator: i * 100,
+            config: { width: 12, align: 'center' },
+          };
+        }),
+      );
+      temp = await era.input();
+    }
+    if (!temp) {
+      era.set('cflag:0:位置', location_enum.beach);
+      era.set('flag:当前位置', location_enum.beach);
+    }
+    const follow_group = in_team_list.filter((chara_id) => {
+      const race = era.get(`cflag:${chara_id}:种族`);
+      const flag =
+        era.get(`cflag:${chara_id}:位置`) !== location_enum.beach &&
+        !era.get(`status:${chara_id}:伤病`) &&
+        check_pregnant_unprotect(chara_id) &&
+        // 和主控到达一定关系会跟着去
+        ((!temp &&
+          (era.get(`cflag:${chara_id}:殿堂`) || !race) &&
+          era.get(`love:${chara_id}`) >= 75) ||
+          // 或者就是小孩跟着妈妈移动
+          (era.get(`cflag:${chara_id}:成长阶段`) < 2 &&
+            era.get(`cflag:${era.get(`cflag:${chara_id}:母方角色`)}:位置`) ===
+              location_enum.beach));
+      flag && era.set(`cflag:${chara_id}:位置`, location_enum.beach);
+      return flag;
+    });
+    if (!temp) {
+      follow_group.unshift(0);
+    }
+    if (follow_group.length) {
+      era.printMultiColumns([
+        { content: '今年以下人员会跟随参加夏合宿：', type: 'text' },
+        ...follow_group.map((chara_id) => {
+          const chara = get_chara_talk(chara_id);
+          sys_change_attr_and_print(chara_id, '体力', -10);
+          sys_change_attr_and_print(chara_id, '精力', -400);
+          return {
+            config: { align: 'center', color: chara.color, width: 2 },
+            content: chara.name,
+            type: 'text',
+          };
+        }),
+      ]);
+    }
+  } else if (event_weeks === 33 - 1) {
+    // 夏合宿结束
+    era.print([
+      era.get('cflag:0:位置') ? '' : '前往夏合宿的人员',
+      '回到特雷森了……',
+    ]);
+    in_team_list.forEach((chara_id) => {
+      if (era.get(`cflag:${chara_id}:位置`)) {
+        sys_change_attr_and_print(chara_id, '体力', -10);
+        sys_change_attr_and_print(chara_id, '精力', -400);
+        era.set(`cflag:${chara_id}:位置`, 0);
+      }
+    });
+    if (era.get('cflag:0:位置')) {
+      era.set('flag:当前位置', location_enum.office);
+      sys_change_attr_and_print(0, '体力', -10);
+      sys_change_attr_and_print(0, '精力', -400);
+      era.set('cflag:0:位置', 0);
+    }
+  }
+}
+
+module.exports = check_new_activities;

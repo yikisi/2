@@ -1,0 +1,160 @@
+const vp_status_enum = {
+  // 俺寻思（训练员视角）
+  i_think: -2,
+  // 无自觉
+  dont_know: -1,
+  // 非处女
+  no: 0,
+  // 处女
+  virgin: 1,
+  // 再生处女
+  reborn: 2,
+};
+Object.keys(vp_status_enum).forEach((k, i) => (vp_status_enum[k] = i - 2));
+
+const penis_state = {
+  /** 训练员视角角色的童贞情况 */
+  chara: {},
+  /** 训练员视角自己的童贞情况 */
+  player: {},
+};
+penis_state.chara[vp_status_enum.i_think] =
+  penis_state.chara[vp_status_enum.virgin] =
+  penis_state.player[vp_status_enum.dont_know] =
+  penis_state.player[vp_status_enum.virgin] =
+    '童贞';
+penis_state.chara[vp_status_enum.dont_know] = '无自觉非童贞';
+
+const virgin_state = {
+  /** 训练员视角角色的处女情况 */
+  chara: {},
+  /** 训练员视角自己的处女情况 */
+  player: {},
+};
+virgin_state.chara[vp_status_enum.i_think] =
+  virgin_state.chara[vp_status_enum.virgin] =
+  virgin_state.player[vp_status_enum.dont_know] =
+  virgin_state.player[vp_status_enum.virgin] =
+    '处女';
+virgin_state.chara[vp_status_enum.dont_know] = '无自觉非处女';
+virgin_state.chara[vp_status_enum.reborn] = virgin_state.player[
+  vp_status_enum.reborn
+] = '再生处女';
+
+const pregnant_stage_enum = {
+  resume: 0,
+  no: 0,
+  embryo: 0,
+  fetal: 0,
+  late: 0,
+  pre_birth: 0,
+};
+Object.keys(pregnant_stage_enum).forEach((e, i) => {
+  pregnant_stage_enum[e] = i;
+});
+
+const pregnant_stage_names = {};
+pregnant_stage_names[1 << pregnant_stage_enum.resume] =
+  '孩子已经顺利出生，现在是时候专注身体了';
+pregnant_stage_names[1 << pregnant_stage_enum.no] =
+  '宝宝的房间等待着爸爸的临幸❤️';
+pregnant_stage_names[1 << pregnant_stage_enum.embryo] = '小小的新生命已在孕育';
+pregnant_stage_names[1 << pregnant_stage_enum.fetal] =
+  '胎盘已经完全形成，母亲和孩子要摄入优质蛋白哦';
+pregnant_stage_names[1 << pregnant_stage_enum.late] =
+  '胎儿正在迎来最后的成熟，小腹已经高高隆起';
+pregnant_stage_names[1 << pregnant_stage_enum.pre_birth] =
+  '迎接生命奇迹的时刻即将到来，该做好准备了';
+
+/*** @type {Record<string,Record>} */
+const trained_talent_names = {};
+[
+  { '-4': '口腔钝感', 0: '口腔正常', 1: '口腔敏感', 2: '淫口' },
+  {
+    '-4': '胸部钝感',
+    0: '胸部正常',
+    1: '胸部敏感',
+    2: '淫乳',
+  },
+  {
+    '-4': '身体钝感',
+    0: '身体正常',
+    1: '身体敏感',
+    2: '淫身',
+  },
+  {
+    '-4': '外阴钝感',
+    0: '外阴正常',
+    1: '外阴敏感',
+    2: '淫核',
+  },
+  {
+    '-4': '阴道钝感',
+    0: '阴道正常',
+    1: '阴道敏感',
+    2: '淫壶',
+  },
+  {
+    '-4': '臀部钝感',
+    0: '臀部正常',
+    1: '臀部敏感',
+    2: '淫臀',
+  },
+  {
+    '-4': '阴茎钝感',
+    0: '阴茎正常',
+    1: '阴茎敏感',
+    2: '早泄',
+  },
+].forEach((e) => (trained_talent_names[e[2]] = e));
+
+module.exports = {
+  breast_size: {
+    AA: '可爱',
+    A: '娇小',
+    B: '小巧',
+    C: '可人',
+    D: '可人',
+    E: '丰满',
+    F: '丰满',
+    G: '硕大',
+  },
+  chara_desc: ['弱气', '胆小', '认真', '普通', '要强', '顽固', '热血'],
+  child_title: { 0: '女儿', 1: '儿子', 10: '女儿？' },
+  growth_stage: ['幼年期', '成长期', '本格期'],
+  hair_desc: [
+    '稀疏的绒毛',
+    '整齐的短毛',
+    '浓密的丛林',
+    '杂乱的曲毛',
+    '刚硬的毛发',
+  ],
+  human_growth_stage: ['幼年', '少年', '青年'],
+  human_sex_title: {
+    0: '女性',
+    1: '男性',
+    10: '女性？',
+  },
+  penis_colors: ['粉嫩', '泛紫', '黝黑'],
+  penis_desc: ['', '可怜', '寒酸', '健壮', '凶恶', '骇人'],
+  penis_state,
+  player_sex_title: {
+    0: '女士',
+    1: '先生',
+    10: '女士……？',
+  },
+  pregnant_stage_enum,
+  pregnant_stage_names,
+  // SM时的称呼
+  sex_slave_title: { 0: '母马', 1: '公马', 10: '扶她母马' },
+  sex_title: { 0: '马娘', 1: '马郎', 10: '马娘？' },
+  skin_desc: ['雪白', '健康', '红润', '麦黄'],
+  trained_talent_names,
+  unexpected_pregnant_enum: {
+    father_sleep: -1,
+    mother_sleep: 1,
+    no: 0,
+  },
+  virgin_state,
+  vp_status_enum,
+};

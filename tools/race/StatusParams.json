@@ -1,0 +1,57 @@
+[
+  {
+    "status_id": 1,
+    "status_1": "速度",
+    "status_2": "无"
+  },
+  {
+    "status_id": 2,
+    "status_1": "耐力",
+    "status_2": "无"
+  },
+  {
+    "status_id": 3,
+    "status_1": "力量",
+    "status_2": "无"
+  },
+  {
+    "status_id": 4,
+    "status_1": "毅力",
+    "status_2": "无"
+  },
+  {
+    "status_id": 5,
+    "status_1": "智力",
+    "status_2": "无"
+  },
+  {
+    "status_id": 6,
+    "status_1": "速度",
+    "status_2": "耐力"
+  },
+  {
+    "status_id": 7,
+    "status_1": "耐力",
+    "status_2": "力量"
+  },
+  {
+    "status_id": 8,
+    "status_1": "耐力",
+    "status_2": "毅力"
+  },
+  {
+    "status_id": 9,
+    "status_1": "力量",
+    "status_2": "智力"
+  },
+  {
+    "status_id": 10,
+    "status_1": "耐力",
+    "status_2": "智力"
+  },
+  {
+    "status_id": 11,
+    "status_1": "毅力",
+    "status_2": "智力"
+  }
+]

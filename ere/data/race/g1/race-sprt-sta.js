@@ -1,0 +1,17 @@
+const RaceInfo = require('#/data/race/model/race-info');
+
+module.exports = new RaceInfo(
+  'Sprinters Stakes',
+  '短途马锦标',
+  RaceInfo.class_enum.G1,
+  RaceInfo.track_enum.nakayama,
+  RaceInfo.ground_enum.grass,
+  1200,
+  RaceInfo.distance_enum.short,
+  RaceInfo.rotation_enum.right,
+  16,
+  RaceInfo.limit_enum.post3,
+  37,
+  4250,
+  10501,
+);

@@ -1,0 +1,10 @@
+﻿{
+  "system": {
+    "collapseBlankLines": true,
+    "extendedCharaTables": [
+      "Skill",
+      "Status"
+    ],
+    "saveCompressedData": true
+  }
+}

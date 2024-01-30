@@ -1,0 +1,7865 @@
+[
+  {
+    "id": "10101",
+    "lane": [
+      {
+        "end": 400,
+        "length": 400,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 675,
+        "length": 275,
+        "name": "3弯",
+        "start": 400,
+        "type": "弯道"
+      },
+      {
+        "end": 934,
+        "length": 259,
+        "name": "终弯",
+        "start": 675,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 266,
+        "name": "终直",
+        "start": 934,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10102",
+    "lane": [
+      {
+        "end": 425,
+        "length": 275,
+        "name": "2弯",
+        "start": 150,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 275,
+        "name": "2直",
+        "start": 425,
+        "type": "直线"
+      },
+      {
+        "end": 975,
+        "length": 275,
+        "name": "3弯",
+        "start": 700,
+        "type": "弯道"
+      },
+      {
+        "end": 1234,
+        "length": 259,
+        "name": "终弯",
+        "start": 975,
+        "type": "弯道"
+      },
+      {
+        "end": 1500,
+        "length": 266,
+        "name": "终直",
+        "start": 1234,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10103",
+    "lane": [
+      {
+        "end": 175,
+        "length": 175,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 450,
+        "length": 275,
+        "name": "1弯",
+        "start": 175,
+        "type": "弯道"
+      },
+      {
+        "end": 725,
+        "length": 275,
+        "name": "2弯",
+        "start": 450,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 275,
+        "name": "2直",
+        "start": 725,
+        "type": "直线"
+      },
+      {
+        "end": 1275,
+        "length": 275,
+        "name": "3弯",
+        "start": 1000,
+        "type": "弯道"
+      },
+      {
+        "end": 1534,
+        "length": 259,
+        "name": "终弯",
+        "start": 1275,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 266,
+        "name": "终直",
+        "start": 1534,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10104",
+    "lane": [
+      {
+        "end": 375,
+        "length": 375,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 650,
+        "length": 275,
+        "name": "1弯",
+        "start": 375,
+        "type": "弯道"
+      },
+      {
+        "end": 925,
+        "length": 275,
+        "name": "2弯",
+        "start": 650,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 275,
+        "name": "2直",
+        "start": 925,
+        "type": "直线"
+      },
+      {
+        "end": 1475,
+        "length": 275,
+        "name": "3弯",
+        "start": 1200,
+        "type": "弯道"
+      },
+      {
+        "end": 1734,
+        "length": 259,
+        "name": "终弯",
+        "start": 1475,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 266,
+        "name": "终直",
+        "start": 1734,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10105",
+    "lane": [
+      {
+        "end": 175,
+        "length": 175,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 450,
+        "length": 275,
+        "name": "3弯",
+        "start": 175,
+        "type": "弯道"
+      },
+      {
+        "end": 725,
+        "length": 275,
+        "name": "4弯",
+        "start": 450,
+        "type": "弯道"
+      },
+      {
+        "end": 975,
+        "length": 250,
+        "name": "1直",
+        "start": 725,
+        "type": "直线"
+      },
+      {
+        "end": 1250,
+        "length": 275,
+        "name": "1弯",
+        "start": 975,
+        "type": "弯道"
+      },
+      {
+        "end": 1525,
+        "length": 275,
+        "name": "2弯",
+        "start": 1250,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 275,
+        "name": "2直",
+        "start": 1525,
+        "type": "直线"
+      },
+      {
+        "end": 2075,
+        "length": 275,
+        "name": "3弯",
+        "start": 1800,
+        "type": "弯道"
+      },
+      {
+        "end": 2334,
+        "length": 259,
+        "name": "终弯",
+        "start": 2075,
+        "type": "弯道"
+      },
+      {
+        "end": 2600,
+        "length": 266,
+        "name": "终直",
+        "start": 2334,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10106",
+    "lane": [
+      {
+        "end": 280,
+        "length": 280,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 510,
+        "length": 230,
+        "name": "3弯",
+        "start": 280,
+        "type": "弯道"
+      },
+      {
+        "end": 736,
+        "length": 226,
+        "name": "终弯",
+        "start": 510,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 264,
+        "name": "终直",
+        "start": 736,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10107",
+    "lane": [
+      {
+        "end": 240,
+        "length": 240,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 470,
+        "length": 230,
+        "name": "1弯",
+        "start": 240,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 230,
+        "name": "2弯",
+        "start": 470,
+        "type": "弯道"
+      },
+      {
+        "end": 980,
+        "length": 280,
+        "name": "2直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1210,
+        "length": 230,
+        "name": "3弯",
+        "start": 980,
+        "type": "弯道"
+      },
+      {
+        "end": 1436,
+        "length": 226,
+        "name": "终弯",
+        "start": 1210,
+        "type": "弯道"
+      },
+      {
+        "end": 1700,
+        "length": 264,
+        "name": "终直",
+        "start": 1436,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10108",
+    "lane": [
+      {
+        "end": 200,
+        "length": 200,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 430,
+        "length": 230,
+        "name": "3弯",
+        "start": 200,
+        "type": "弯道"
+      },
+      {
+        "end": 660,
+        "length": 230,
+        "name": "4弯",
+        "start": 430,
+        "type": "弯道"
+      },
+      {
+        "end": 940,
+        "length": 280,
+        "name": "1直",
+        "start": 660,
+        "type": "直线"
+      },
+      {
+        "end": 1170,
+        "length": 230,
+        "name": "1弯",
+        "start": 940,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 230,
+        "name": "2弯",
+        "start": 1170,
+        "type": "弯道"
+      },
+      {
+        "end": 1680,
+        "length": 272,
+        "name": "2直",
+        "start": 1408,
+        "type": "直线"
+      },
+      {
+        "end": 1910,
+        "length": 230,
+        "name": "3弯",
+        "start": 1680,
+        "type": "弯道"
+      },
+      {
+        "end": 2136,
+        "length": 226,
+        "name": "终弯",
+        "start": 1910,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 264,
+        "name": "终直",
+        "start": 2136,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10201",
+    "lane": [
+      {
+        "end": 310,
+        "length": 310,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 530,
+        "length": 220,
+        "name": "3弯",
+        "start": 310,
+        "type": "弯道"
+      },
+      {
+        "end": 738,
+        "length": 208,
+        "name": "终弯",
+        "start": 530,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 262,
+        "name": "终直",
+        "start": 738,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 555,
+        "length": 555,
+        "slope": 1.0,
+        "start": 0,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10202",
+    "lane": [
+      {
+        "end": 510,
+        "length": 510,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 730,
+        "length": 220,
+        "name": "3弯",
+        "start": 510,
+        "type": "弯道"
+      },
+      {
+        "end": 938,
+        "length": 208,
+        "name": "终弯",
+        "start": 730,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 262,
+        "name": "终直",
+        "start": 938,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 755,
+        "length": 755,
+        "slope": 1.0,
+        "start": 0,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10203",
+    "lane": [
+      {
+        "end": 320,
+        "length": 320,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 540,
+        "length": 220,
+        "name": "1弯",
+        "start": 320,
+        "type": "弯道"
+      },
+      {
+        "end": 760,
+        "length": 220,
+        "name": "2弯",
+        "start": 540,
+        "type": "弯道"
+      },
+      {
+        "end": 1110,
+        "length": 350,
+        "name": "2直",
+        "start": 760,
+        "type": "直线"
+      },
+      {
+        "end": 1330,
+        "length": 220,
+        "name": "3弯",
+        "start": 1110,
+        "type": "弯道"
+      },
+      {
+        "end": 1538,
+        "length": 208,
+        "name": "终弯",
+        "start": 1330,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 262,
+        "name": "终直",
+        "start": 1538,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 420,
+        "length": 200,
+        "slope": -1.0,
+        "start": 220,
+        "type": "坡道"
+      },
+      {
+        "end": 1385,
+        "length": 720,
+        "slope": 1.0,
+        "start": 665,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10204",
+    "lane": [
+      {
+        "end": 520,
+        "length": 520,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 740,
+        "length": 220,
+        "name": "1弯",
+        "start": 520,
+        "type": "弯道"
+      },
+      {
+        "end": 960,
+        "length": 220,
+        "name": "2弯",
+        "start": 740,
+        "type": "弯道"
+      },
+      {
+        "end": 1310,
+        "length": 350,
+        "name": "2直",
+        "start": 960,
+        "type": "直线"
+      },
+      {
+        "end": 1530,
+        "length": 220,
+        "name": "3弯",
+        "start": 1310,
+        "type": "弯道"
+      },
+      {
+        "end": 1738,
+        "length": 208,
+        "name": "终弯",
+        "start": 1530,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 262,
+        "name": "终直",
+        "start": 1738,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 620,
+        "length": 200,
+        "slope": -1.0,
+        "start": 420,
+        "type": "坡道"
+      },
+      {
+        "end": 1585,
+        "length": 720,
+        "slope": 1.0,
+        "start": 865,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10205",
+    "lane": [
+      {
+        "end": 260,
+        "length": 260,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 500,
+        "length": 240,
+        "name": "3弯",
+        "start": 260,
+        "type": "弯道"
+      },
+      {
+        "end": 730,
+        "length": 230,
+        "name": "4弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 1120,
+        "length": 390,
+        "name": "1直",
+        "start": 730,
+        "type": "直线"
+      },
+      {
+        "end": 1340,
+        "length": 220,
+        "name": "1弯",
+        "start": 1120,
+        "type": "弯道"
+      },
+      {
+        "end": 1560,
+        "length": 220,
+        "name": "2弯",
+        "start": 1340,
+        "type": "弯道"
+      },
+      {
+        "end": 1910,
+        "length": 350,
+        "name": "2直",
+        "start": 1560,
+        "type": "直线"
+      },
+      {
+        "end": 2130,
+        "length": 220,
+        "name": "3弯",
+        "start": 1910,
+        "type": "弯道"
+      },
+      {
+        "end": 2338,
+        "length": 208,
+        "name": "终弯",
+        "start": 2130,
+        "type": "弯道"
+      },
+      {
+        "end": 2600,
+        "length": 262,
+        "name": "终直",
+        "start": 2338,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 495,
+        "length": 495,
+        "slope": 1.0,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 1170,
+        "length": 200,
+        "slope": -1.0,
+        "start": 970,
+        "type": "坡道"
+      },
+      {
+        "end": 2145,
+        "length": 720,
+        "slope": 1.0,
+        "start": 1425,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10206",
+    "lane": [
+      {
+        "end": 370,
+        "length": 370,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 560,
+        "length": 190,
+        "name": "3弯",
+        "start": 370,
+        "type": "弯道"
+      },
+      {
+        "end": 740,
+        "length": 180,
+        "name": "终弯",
+        "start": 560,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 260,
+        "name": "终直",
+        "start": 740,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10207",
+    "lane": [
+      {
+        "end": 350,
+        "length": 350,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 540,
+        "length": 190,
+        "name": "1弯",
+        "start": 350,
+        "type": "弯道"
+      },
+      {
+        "end": 730,
+        "length": 190,
+        "name": "2弯",
+        "start": 540,
+        "type": "弯道"
+      },
+      {
+        "end": 1070,
+        "length": 340,
+        "name": "2直",
+        "start": 730,
+        "type": "直线"
+      },
+      {
+        "end": 1260,
+        "length": 190,
+        "name": "3弯",
+        "start": 1070,
+        "type": "弯道"
+      },
+      {
+        "end": 1440,
+        "length": 180,
+        "name": "终弯",
+        "start": 1260,
+        "type": "弯道"
+      },
+      {
+        "end": 1700,
+        "length": 260,
+        "name": "终直",
+        "start": 1440,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 615,
+        "length": 340,
+        "slope": -1.0,
+        "start": 275,
+        "type": "坡道"
+      },
+      {
+        "end": 1285,
+        "length": 670,
+        "slope": 1.0,
+        "start": 615,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10208",
+    "lane": [
+      {
+        "end": 292,
+        "length": 292,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 482,
+        "length": 190,
+        "name": "3弯",
+        "start": 292,
+        "type": "弯道"
+      },
+      {
+        "end": 672,
+        "length": 190,
+        "name": "4弯",
+        "start": 482,
+        "type": "弯道"
+      },
+      {
+        "end": 1040,
+        "length": 368,
+        "name": "1直",
+        "start": 672,
+        "type": "直线"
+      },
+      {
+        "end": 1230,
+        "length": 190,
+        "name": "1弯",
+        "start": 1040,
+        "type": "弯道"
+      },
+      {
+        "end": 1420,
+        "length": 190,
+        "name": "2弯",
+        "start": 1230,
+        "type": "弯道"
+      },
+      {
+        "end": 1770,
+        "length": 350,
+        "name": "2直",
+        "start": 1420,
+        "type": "直线"
+      },
+      {
+        "end": 1960,
+        "length": 190,
+        "name": "3弯",
+        "start": 1770,
+        "type": "弯道"
+      },
+      {
+        "end": 2140,
+        "length": 180,
+        "name": "终弯",
+        "start": 1960,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 260,
+        "name": "终直",
+        "start": 2140,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10301",
+    "lane": [
+      {
+        "end": 1000,
+        "length": 1000,
+        "name": "终直",
+        "start": 0,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10302",
+    "lane": [
+      {
+        "end": 450,
+        "length": 450,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 650,
+        "length": 200,
+        "name": "3弯",
+        "start": 450,
+        "type": "弯道"
+      },
+      {
+        "end": 842,
+        "length": 192,
+        "name": "终弯",
+        "start": 650,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 358,
+        "name": "终直",
+        "start": 842,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10303",
+    "lane": [
+      {
+        "end": 650,
+        "length": 650,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 850,
+        "length": 200,
+        "name": "3弯",
+        "start": 650,
+        "type": "弯道"
+      },
+      {
+        "end": 1042,
+        "length": 192,
+        "name": "终弯",
+        "start": 850,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 358,
+        "name": "终直",
+        "start": 1042,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10304",
+    "lane": [
+      {
+        "end": 550,
+        "length": 550,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 750,
+        "length": 200,
+        "name": "3弯",
+        "start": 550,
+        "type": "弯道"
+      },
+      {
+        "end": 942,
+        "length": 192,
+        "name": "终弯",
+        "start": 750,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 658,
+        "name": "终直",
+        "start": 942,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 600,
+        "length": 350,
+        "slope": 1.0,
+        "start": 250,
+        "type": "坡道"
+      },
+      {
+        "end": 900,
+        "length": 300,
+        "slope": -1.5,
+        "start": 600,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10305",
+    "lane": [
+      {
+        "end": 750,
+        "length": 750,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 950,
+        "length": 200,
+        "name": "3弯",
+        "start": 750,
+        "type": "弯道"
+      },
+      {
+        "end": 1142,
+        "length": 192,
+        "name": "终弯",
+        "start": 950,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 658,
+        "name": "终直",
+        "start": 1142,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 800,
+        "length": 350,
+        "slope": 1.0,
+        "start": 450,
+        "type": "坡道"
+      },
+      {
+        "end": 1100,
+        "length": 300,
+        "slope": -1.5,
+        "start": 800,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10306",
+    "lane": [
+      {
+        "end": 420,
+        "length": 420,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 620,
+        "length": 200,
+        "name": "1弯",
+        "start": 420,
+        "type": "弯道"
+      },
+      {
+        "end": 820,
+        "length": 200,
+        "name": "2弯",
+        "start": 620,
+        "type": "弯道"
+      },
+      {
+        "end": 1250,
+        "length": 430,
+        "name": "2直",
+        "start": 820,
+        "type": "直线"
+      },
+      {
+        "end": 1450,
+        "length": 200,
+        "name": "3弯",
+        "start": 1250,
+        "type": "弯道"
+      },
+      {
+        "end": 1642,
+        "length": 192,
+        "name": "终弯",
+        "start": 1450,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 358,
+        "name": "终直",
+        "start": 1642,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10307",
+    "lane": [
+      {
+        "end": 950,
+        "length": 950,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 1150,
+        "length": 200,
+        "name": "3弯",
+        "start": 950,
+        "type": "弯道"
+      },
+      {
+        "end": 1342,
+        "length": 192,
+        "name": "终弯",
+        "start": 1150,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 658,
+        "name": "终直",
+        "start": 1342,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1000,
+        "length": 350,
+        "slope": 1.0,
+        "start": 650,
+        "type": "坡道"
+      },
+      {
+        "end": 1300,
+        "length": 300,
+        "slope": -1.5,
+        "start": 1000,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10308",
+    "lane": [
+      {
+        "end": 650,
+        "length": 650,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 850,
+        "length": 200,
+        "name": "1弯",
+        "start": 650,
+        "type": "弯道"
+      },
+      {
+        "end": 1050,
+        "length": 200,
+        "name": "2弯",
+        "start": 850,
+        "type": "弯道"
+      },
+      {
+        "end": 1450,
+        "length": 400,
+        "name": "2直",
+        "start": 1050,
+        "type": "直线"
+      },
+      {
+        "end": 1650,
+        "length": 200,
+        "name": "3弯",
+        "start": 1450,
+        "type": "弯道"
+      },
+      {
+        "end": 1842,
+        "length": 192,
+        "name": "终弯",
+        "start": 1650,
+        "type": "弯道"
+      },
+      {
+        "end": 2200,
+        "length": 358,
+        "name": "终直",
+        "start": 1842,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10309",
+    "lane": [
+      {
+        "end": 810,
+        "length": 810,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 1010,
+        "length": 200,
+        "name": "1弯",
+        "start": 810,
+        "type": "弯道"
+      },
+      {
+        "end": 1210,
+        "length": 200,
+        "name": "2弯",
+        "start": 1010,
+        "type": "弯道"
+      },
+      {
+        "end": 1650,
+        "length": 440,
+        "name": "2直",
+        "start": 1210,
+        "type": "直线"
+      },
+      {
+        "end": 1850,
+        "length": 200,
+        "name": "3弯",
+        "start": 1650,
+        "type": "弯道"
+      },
+      {
+        "end": 2042,
+        "length": 192,
+        "name": "终弯",
+        "start": 1850,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 358,
+        "name": "终直",
+        "start": 2042,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10310",
+    "lane": [
+      {
+        "end": 540,
+        "length": 540,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 700,
+        "length": 160,
+        "name": "3弯",
+        "start": 540,
+        "type": "弯道"
+      },
+      {
+        "end": 847,
+        "length": 147,
+        "name": "终弯",
+        "start": 700,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 353,
+        "name": "终直",
+        "start": 847,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10311",
+    "lane": [
+      {
+        "end": 400,
+        "length": 400,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 560,
+        "length": 160,
+        "name": "1弯",
+        "start": 400,
+        "type": "弯道"
+      },
+      {
+        "end": 720,
+        "length": 160,
+        "name": "2弯",
+        "start": 560,
+        "type": "弯道"
+      },
+      {
+        "end": 1140,
+        "length": 420,
+        "name": "2直",
+        "start": 720,
+        "type": "直线"
+      },
+      {
+        "end": 1300,
+        "length": 160,
+        "name": "3弯",
+        "start": 1140,
+        "type": "弯道"
+      },
+      {
+        "end": 1447,
+        "length": 147,
+        "name": "终弯",
+        "start": 1300,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 353,
+        "name": "终直",
+        "start": 1447,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10312",
+    "lane": [
+      {
+        "end": 380,
+        "length": 380,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 540,
+        "length": 160,
+        "name": "3弯",
+        "start": 380,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 160,
+        "name": "4弯",
+        "start": 540,
+        "type": "弯道"
+      },
+      {
+        "end": 1120,
+        "length": 420,
+        "name": "1直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1280,
+        "length": 160,
+        "name": "1弯",
+        "start": 1120,
+        "type": "弯道"
+      },
+      {
+        "end": 1440,
+        "length": 160,
+        "name": "2弯",
+        "start": 1280,
+        "type": "弯道"
+      },
+      {
+        "end": 1850,
+        "length": 410,
+        "name": "2直",
+        "start": 1440,
+        "type": "直线"
+      },
+      {
+        "end": 2010,
+        "length": 160,
+        "name": "3弯",
+        "start": 1850,
+        "type": "弯道"
+      },
+      {
+        "end": 2170,
+        "length": 160,
+        "name": "终弯",
+        "start": 2010,
+        "type": "弯道"
+      },
+      {
+        "end": 2500,
+        "length": 330,
+        "name": "终直",
+        "start": 2170,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10401",
+    "lane": [
+      {
+        "end": 420,
+        "length": 420,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 720,
+        "length": 300,
+        "name": "3弯",
+        "start": 420,
+        "type": "弯道"
+      },
+      {
+        "end": 908,
+        "length": 188,
+        "name": "终弯",
+        "start": 720,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 292,
+        "name": "终直",
+        "start": 908,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 280,
+        "length": 100,
+        "slope": 1.5,
+        "start": 180,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10402",
+    "lane": [
+      {
+        "end": 330,
+        "length": 330,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 530,
+        "length": 200,
+        "name": "1弯",
+        "start": 330,
+        "type": "弯道"
+      },
+      {
+        "end": 730,
+        "length": 200,
+        "name": "2弯",
+        "start": 530,
+        "type": "弯道"
+      },
+      {
+        "end": 1020,
+        "length": 290,
+        "name": "2直",
+        "start": 730,
+        "type": "直线"
+      },
+      {
+        "end": 1320,
+        "length": 300,
+        "name": "3弯",
+        "start": 1020,
+        "type": "弯道"
+      },
+      {
+        "end": 1508,
+        "length": 188,
+        "name": "终弯",
+        "start": 1320,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 292,
+        "name": "终直",
+        "start": 1508,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 880,
+        "length": 100,
+        "slope": 1.5,
+        "start": 780,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10403",
+    "lane": [
+      {
+        "end": 530,
+        "length": 530,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 730,
+        "length": 200,
+        "name": "1弯",
+        "start": 530,
+        "type": "弯道"
+      },
+      {
+        "end": 930,
+        "length": 200,
+        "name": "2弯",
+        "start": 730,
+        "type": "弯道"
+      },
+      {
+        "end": 1220,
+        "length": 290,
+        "name": "2直",
+        "start": 930,
+        "type": "直线"
+      },
+      {
+        "end": 1520,
+        "length": 300,
+        "name": "3弯",
+        "start": 1220,
+        "type": "弯道"
+      },
+      {
+        "end": 1708,
+        "length": 188,
+        "name": "终弯",
+        "start": 1520,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 292,
+        "name": "终直",
+        "start": 1708,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1080,
+        "length": 100,
+        "slope": 1.5,
+        "start": 980,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10404",
+    "lane": [
+      {
+        "end": 220,
+        "length": 220,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 520,
+        "length": 300,
+        "name": "3弯",
+        "start": 220,
+        "type": "弯道"
+      },
+      {
+        "end": 720,
+        "length": 200,
+        "name": "4弯",
+        "start": 520,
+        "type": "弯道"
+      },
+      {
+        "end": 1130,
+        "length": 410,
+        "name": "1直",
+        "start": 720,
+        "type": "直线"
+      },
+      {
+        "end": 1330,
+        "length": 200,
+        "name": "1弯",
+        "start": 1130,
+        "type": "弯道"
+      },
+      {
+        "end": 1530,
+        "length": 200,
+        "name": "2弯",
+        "start": 1330,
+        "type": "弯道"
+      },
+      {
+        "end": 1820,
+        "length": 290,
+        "name": "2直",
+        "start": 1530,
+        "type": "直线"
+      },
+      {
+        "end": 2120,
+        "length": 300,
+        "name": "3弯",
+        "start": 1820,
+        "type": "弯道"
+      },
+      {
+        "end": 2308,
+        "length": 188,
+        "name": "终弯",
+        "start": 2120,
+        "type": "弯道"
+      },
+      {
+        "end": 2600,
+        "length": 292,
+        "name": "终直",
+        "start": 2308,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 80,
+        "length": 80,
+        "slope": 1.5,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 1680,
+        "length": 100,
+        "slope": 1.5,
+        "start": 1580,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10405",
+    "lane": [
+      {
+        "end": 500,
+        "length": 500,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 710,
+        "length": 210,
+        "name": "3弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 855,
+        "length": 145,
+        "name": "终弯",
+        "start": 710,
+        "type": "弯道"
+      },
+      {
+        "end": 1150,
+        "length": 295,
+        "name": "终直",
+        "start": 855,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10406",
+    "lane": [
+      {
+        "end": 360,
+        "length": 360,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 530,
+        "length": 170,
+        "name": "1弯",
+        "start": 360,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 170,
+        "name": "2弯",
+        "start": 530,
+        "type": "弯道"
+      },
+      {
+        "end": 1050,
+        "length": 350,
+        "name": "2直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1260,
+        "length": 210,
+        "name": "3弯",
+        "start": 1050,
+        "type": "弯道"
+      },
+      {
+        "end": 1405,
+        "length": 145,
+        "name": "终弯",
+        "start": 1260,
+        "type": "弯道"
+      },
+      {
+        "end": 1700,
+        "length": 295,
+        "name": "终直",
+        "start": 1405,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 605,
+        "length": 320,
+        "slope": -1.0,
+        "start": 285,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10407",
+    "lane": [
+      {
+        "end": 310,
+        "length": 310,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 520,
+        "length": 210,
+        "name": "3弯",
+        "start": 310,
+        "type": "弯道"
+      },
+      {
+        "end": 680,
+        "length": 160,
+        "name": "4弯",
+        "start": 520,
+        "type": "弯道"
+      },
+      {
+        "end": 1060,
+        "length": 380,
+        "name": "1直",
+        "start": 680,
+        "type": "直线"
+      },
+      {
+        "end": 1230,
+        "length": 170,
+        "name": "1弯",
+        "start": 1060,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 170,
+        "name": "2弯",
+        "start": 1230,
+        "type": "弯道"
+      },
+      {
+        "end": 1750,
+        "length": 350,
+        "name": "2直",
+        "start": 1400,
+        "type": "直线"
+      },
+      {
+        "end": 1960,
+        "length": 210,
+        "name": "3弯",
+        "start": 1750,
+        "type": "弯道"
+      },
+      {
+        "end": 2105,
+        "length": 145,
+        "name": "终弯",
+        "start": 1960,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 295,
+        "name": "终直",
+        "start": 2105,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10501",
+    "lane": [
+      {
+        "end": 650,
+        "length": 350,
+        "name": "3弯",
+        "start": 300,
+        "type": "弯道"
+      },
+      {
+        "end": 890,
+        "length": 240,
+        "name": "终弯",
+        "start": 650,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 310,
+        "name": "终直",
+        "start": 890,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 200,
+        "length": 200,
+        "slope": -1.5,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 1135,
+        "length": 110,
+        "slope": 2.0,
+        "start": 1025,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10502",
+    "lane": [
+      {
+        "end": 500,
+        "length": 450,
+        "name": "2弯",
+        "start": 50,
+        "type": "弯道"
+      },
+      {
+        "end": 1050,
+        "length": 350,
+        "name": "3弯",
+        "start": 700,
+        "type": "弯道"
+      },
+      {
+        "end": 1290,
+        "length": 240,
+        "name": "终弯",
+        "start": 1050,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 310,
+        "name": "终直",
+        "start": 1290,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 600,
+        "length": 300,
+        "slope": -1.5,
+        "start": 300,
+        "type": "坡道"
+      },
+      {
+        "end": 1535,
+        "length": 110,
+        "slope": 2.0,
+        "start": 1425,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10503",
+    "lane": [
+      {
+        "end": 175,
+        "length": 175,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 425,
+        "length": 250,
+        "name": "1弯",
+        "start": 175,
+        "type": "弯道"
+      },
+      {
+        "end": 675,
+        "length": 250,
+        "name": "2弯",
+        "start": 425,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 325,
+        "name": "2直",
+        "start": 675,
+        "type": "直线"
+      },
+      {
+        "end": 1250,
+        "length": 250,
+        "name": "3弯",
+        "start": 1000,
+        "type": "弯道"
+      },
+      {
+        "end": 1490,
+        "length": 240,
+        "name": "终弯",
+        "start": 1250,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 310,
+        "name": "终直",
+        "start": 1490,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 36,
+        "length": 35,
+        "slope": 2.0,
+        "start": 1,
+        "type": "坡道"
+      },
+      {
+        "end": 325,
+        "length": 200,
+        "slope": 1.5,
+        "start": 125,
+        "type": "坡道"
+      },
+      {
+        "end": 825,
+        "length": 400,
+        "slope": -1.5,
+        "start": 425,
+        "type": "坡道"
+      },
+      {
+        "end": 1735,
+        "length": 110,
+        "slope": 2.0,
+        "start": 1625,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10504",
+    "lane": [
+      {
+        "end": 375,
+        "length": 375,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 625,
+        "length": 250,
+        "name": "1弯",
+        "start": 375,
+        "type": "弯道"
+      },
+      {
+        "end": 875,
+        "length": 250,
+        "name": "2弯",
+        "start": 625,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 325,
+        "name": "2直",
+        "start": 875,
+        "type": "直线"
+      },
+      {
+        "end": 1450,
+        "length": 250,
+        "name": "3弯",
+        "start": 1200,
+        "type": "弯道"
+      },
+      {
+        "end": 1690,
+        "length": 240,
+        "name": "终弯",
+        "start": 1450,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 310,
+        "name": "终直",
+        "start": 1690,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 235,
+        "length": 110,
+        "slope": 2.0,
+        "start": 125,
+        "type": "坡道"
+      },
+      {
+        "end": 525,
+        "length": 200,
+        "slope": 1.5,
+        "start": 325,
+        "type": "坡道"
+      },
+      {
+        "end": 1025,
+        "length": 400,
+        "slope": -1.5,
+        "start": 625,
+        "type": "坡道"
+      },
+      {
+        "end": 1935,
+        "length": 110,
+        "slope": 2.0,
+        "start": 1825,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10505",
+    "lane": [
+      {
+        "end": 403,
+        "length": 403,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 650,
+        "length": 247,
+        "name": "1弯",
+        "start": 403,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 450,
+        "name": "2弯",
+        "start": 650,
+        "type": "弯道"
+      },
+      {
+        "end": 1650,
+        "length": 350,
+        "name": "3弯",
+        "start": 1300,
+        "type": "弯道"
+      },
+      {
+        "end": 1890,
+        "length": 240,
+        "name": "终弯",
+        "start": 1650,
+        "type": "弯道"
+      },
+      {
+        "end": 2200,
+        "length": 310,
+        "name": "终直",
+        "start": 1890,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 263,
+        "length": 110,
+        "slope": 2.0,
+        "start": 153,
+        "type": "坡道"
+      },
+      {
+        "end": 553,
+        "length": 200,
+        "slope": 1.5,
+        "start": 353,
+        "type": "坡道"
+      },
+      {
+        "end": 1200,
+        "length": 300,
+        "slope": -1.5,
+        "start": 900,
+        "type": "坡道"
+      },
+      {
+        "end": 2135,
+        "length": 110,
+        "slope": 2.0,
+        "start": 2025,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10506",
+    "lane": [
+      {
+        "end": 246,
+        "length": 146,
+        "name": "3弯",
+        "start": 100,
+        "type": "弯道"
+      },
+      {
+        "end": 496,
+        "length": 250,
+        "name": "4弯",
+        "start": 246,
+        "type": "弯道"
+      },
+      {
+        "end": 875,
+        "length": 379,
+        "name": "1直",
+        "start": 496,
+        "type": "直线"
+      },
+      {
+        "end": 1125,
+        "length": 250,
+        "name": "1弯",
+        "start": 875,
+        "type": "弯道"
+      },
+      {
+        "end": 1375,
+        "length": 250,
+        "name": "2弯",
+        "start": 1125,
+        "type": "弯道"
+      },
+      {
+        "end": 1700,
+        "length": 325,
+        "name": "2直",
+        "start": 1375,
+        "type": "直线"
+      },
+      {
+        "end": 1950,
+        "length": 250,
+        "name": "3弯",
+        "start": 1700,
+        "type": "弯道"
+      },
+      {
+        "end": 2190,
+        "length": 240,
+        "name": "终弯",
+        "start": 1950,
+        "type": "弯道"
+      },
+      {
+        "end": 2500,
+        "length": 310,
+        "name": "终直",
+        "start": 2190,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 731,
+        "length": 110,
+        "slope": 2.0,
+        "start": 621,
+        "type": "坡道"
+      },
+      {
+        "end": 1025,
+        "length": 200,
+        "slope": 1.5,
+        "start": 825,
+        "type": "坡道"
+      },
+      {
+        "end": 1525,
+        "length": 400,
+        "slope": -1.5,
+        "start": 1125,
+        "type": "坡道"
+      },
+      {
+        "end": 2435,
+        "length": 110,
+        "slope": 2.0,
+        "start": 2325,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10507",
+    "lane": [
+      {
+        "end": 290,
+        "length": 290,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 540,
+        "length": 250,
+        "name": "1弯",
+        "start": 290,
+        "type": "弯道"
+      },
+      {
+        "end": 790,
+        "length": 250,
+        "name": "2弯",
+        "start": 540,
+        "type": "弯道"
+      },
+      {
+        "end": 1115,
+        "length": 325,
+        "name": "2直",
+        "start": 790,
+        "type": "直线"
+      },
+      {
+        "end": 1365,
+        "length": 250,
+        "name": "3弯",
+        "start": 1115,
+        "type": "弯道"
+      },
+      {
+        "end": 1615,
+        "length": 250,
+        "name": "4弯",
+        "start": 1365,
+        "type": "弯道"
+      },
+      {
+        "end": 1975,
+        "length": 360,
+        "name": "1直",
+        "start": 1615,
+        "type": "直线"
+      },
+      {
+        "end": 2225,
+        "length": 250,
+        "name": "1弯",
+        "start": 1975,
+        "type": "弯道"
+      },
+      {
+        "end": 2475,
+        "length": 250,
+        "name": "2弯",
+        "start": 2225,
+        "type": "弯道"
+      },
+      {
+        "end": 2800,
+        "length": 325,
+        "name": "2直",
+        "start": 2475,
+        "type": "直线"
+      },
+      {
+        "end": 3050,
+        "length": 250,
+        "name": "3弯",
+        "start": 2800,
+        "type": "弯道"
+      },
+      {
+        "end": 3290,
+        "length": 240,
+        "name": "终弯",
+        "start": 3050,
+        "type": "弯道"
+      },
+      {
+        "end": 3600,
+        "length": 310,
+        "name": "终直",
+        "start": 3290,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 150,
+        "length": 110,
+        "slope": 2.0,
+        "start": 40,
+        "type": "坡道"
+      },
+      {
+        "end": 440,
+        "length": 200,
+        "slope": 1.5,
+        "start": 240,
+        "type": "坡道"
+      },
+      {
+        "end": 940,
+        "length": 400,
+        "slope": -1.5,
+        "start": 540,
+        "type": "坡道"
+      },
+      {
+        "end": 1850,
+        "length": 110,
+        "slope": 2.0,
+        "start": 1740,
+        "type": "坡道"
+      },
+      {
+        "end": 2125,
+        "length": 200,
+        "slope": 1.5,
+        "start": 1925,
+        "type": "坡道"
+      },
+      {
+        "end": 2625,
+        "length": 400,
+        "slope": -1.5,
+        "start": 2225,
+        "type": "坡道"
+      },
+      {
+        "end": 3535,
+        "length": 110,
+        "slope": 2.0,
+        "start": 3425,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10508",
+    "lane": [
+      {
+        "end": 500,
+        "length": 500,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 700,
+        "length": 200,
+        "name": "3弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 892,
+        "length": 192,
+        "name": "终弯",
+        "start": 700,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 308,
+        "name": "终直",
+        "start": 892,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 350,
+        "length": 175,
+        "slope": -1.5,
+        "start": 175,
+        "type": "坡道"
+      },
+      {
+        "end": 1175,
+        "length": 175,
+        "slope": 1.5,
+        "start": 1000,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10509",
+    "lane": [
+      {
+        "end": 350,
+        "length": 350,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 550,
+        "length": 200,
+        "name": "1弯",
+        "start": 350,
+        "type": "弯道"
+      },
+      {
+        "end": 750,
+        "length": 200,
+        "name": "2弯",
+        "start": 550,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 350,
+        "name": "2直",
+        "start": 750,
+        "type": "直线"
+      },
+      {
+        "end": 1300,
+        "length": 200,
+        "name": "3弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1492,
+        "length": 192,
+        "name": "终弯",
+        "start": 1300,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 308,
+        "name": "终直",
+        "start": 1492,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 275,
+        "length": 175,
+        "slope": 1.5,
+        "start": 100,
+        "type": "坡道"
+      },
+      {
+        "end": 525,
+        "length": 175,
+        "slope": 1.0,
+        "start": 350,
+        "type": "坡道"
+      },
+      {
+        "end": 950,
+        "length": 175,
+        "slope": -1.5,
+        "start": 775,
+        "type": "坡道"
+      },
+      {
+        "end": 1775,
+        "length": 175,
+        "slope": 1.5,
+        "start": 1600,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10510",
+    "lane": [
+      {
+        "end": 200,
+        "length": 200,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 400,
+        "length": 200,
+        "name": "3弯",
+        "start": 200,
+        "type": "弯道"
+      },
+      {
+        "end": 600,
+        "length": 200,
+        "name": "4弯",
+        "start": 400,
+        "type": "弯道"
+      },
+      {
+        "end": 950,
+        "length": 350,
+        "name": "1直",
+        "start": 600,
+        "type": "直线"
+      },
+      {
+        "end": 1150,
+        "length": 200,
+        "name": "1弯",
+        "start": 950,
+        "type": "弯道"
+      },
+      {
+        "end": 1350,
+        "length": 200,
+        "name": "2弯",
+        "start": 1150,
+        "type": "弯道"
+      },
+      {
+        "end": 1700,
+        "length": 350,
+        "name": "2直",
+        "start": 1350,
+        "type": "直线"
+      },
+      {
+        "end": 1900,
+        "length": 200,
+        "name": "3弯",
+        "start": 1700,
+        "type": "弯道"
+      },
+      {
+        "end": 2092,
+        "length": 192,
+        "name": "终弯",
+        "start": 1900,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 308,
+        "name": "终直",
+        "start": 2092,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10511",
+    "lane": [
+      {
+        "end": 300,
+        "length": 300,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 500,
+        "length": 200,
+        "name": "3弯",
+        "start": 300,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 200,
+        "name": "4弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 1050,
+        "length": 350,
+        "name": "1直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1250,
+        "length": 200,
+        "name": "1弯",
+        "start": 1050,
+        "type": "弯道"
+      },
+      {
+        "end": 1450,
+        "length": 200,
+        "name": "2弯",
+        "start": 1250,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 350,
+        "name": "2直",
+        "start": 1450,
+        "type": "直线"
+      },
+      {
+        "end": 2000,
+        "length": 200,
+        "name": "3弯",
+        "start": 1800,
+        "type": "弯道"
+      },
+      {
+        "end": 2192,
+        "length": 192,
+        "name": "终弯",
+        "start": 2000,
+        "type": "弯道"
+      },
+      {
+        "end": 2500,
+        "length": 308,
+        "name": "终直",
+        "start": 2192,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10601",
+    "lane": [
+      {
+        "end": 350,
+        "length": 350,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 625,
+        "length": 275,
+        "name": "3弯",
+        "start": 350,
+        "type": "弯道"
+      },
+      {
+        "end": 875,
+        "length": 250,
+        "name": "终弯",
+        "start": 625,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 525,
+        "name": "终直",
+        "start": 875,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 200,
+        "length": 75,
+        "slope": 2.0,
+        "start": 125,
+        "type": "坡道"
+      },
+      {
+        "end": 500,
+        "length": 250,
+        "slope": -1.5,
+        "start": 250,
+        "type": "坡道"
+      },
+      {
+        "end": 1100,
+        "length": 150,
+        "slope": 1.5,
+        "start": 950,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10602",
+    "lane": [
+      {
+        "end": 550,
+        "length": 550,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 825,
+        "length": 275,
+        "name": "3弯",
+        "start": 550,
+        "type": "弯道"
+      },
+      {
+        "end": 1075,
+        "length": 250,
+        "name": "终弯",
+        "start": 825,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 525,
+        "name": "终直",
+        "start": 1075,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 400,
+        "length": 75,
+        "slope": 2.0,
+        "start": 325,
+        "type": "坡道"
+      },
+      {
+        "end": 700,
+        "length": 250,
+        "slope": -1.5,
+        "start": 450,
+        "type": "坡道"
+      },
+      {
+        "end": 1300,
+        "length": 150,
+        "slope": 1.5,
+        "start": 1150,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10603",
+    "lane": [
+      {
+        "end": 325,
+        "length": 250,
+        "name": "2弯",
+        "start": 75,
+        "type": "弯道"
+      },
+      {
+        "end": 750,
+        "length": 425,
+        "name": "2直",
+        "start": 325,
+        "type": "直线"
+      },
+      {
+        "end": 1025,
+        "length": 275,
+        "name": "3弯",
+        "start": 750,
+        "type": "弯道"
+      },
+      {
+        "end": 1275,
+        "length": 250,
+        "name": "终弯",
+        "start": 1025,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 525,
+        "name": "终直",
+        "start": 1275,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 600,
+        "length": 75,
+        "slope": 2.0,
+        "start": 525,
+        "type": "坡道"
+      },
+      {
+        "end": 900,
+        "length": 250,
+        "slope": -1.5,
+        "start": 650,
+        "type": "坡道"
+      },
+      {
+        "end": 1500,
+        "length": 150,
+        "slope": 1.5,
+        "start": 1350,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10604",
+    "lane": [
+      {
+        "end": 400,
+        "length": 200,
+        "name": "2弯",
+        "start": 200,
+        "type": "弯道"
+      },
+      {
+        "end": 950,
+        "length": 550,
+        "name": "2直",
+        "start": 400,
+        "type": "直线"
+      },
+      {
+        "end": 1225,
+        "length": 275,
+        "name": "3弯",
+        "start": 950,
+        "type": "弯道"
+      },
+      {
+        "end": 1475,
+        "length": 250,
+        "name": "终弯",
+        "start": 1225,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 525,
+        "name": "终直",
+        "start": 1475,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 800,
+        "length": 75,
+        "slope": 2.0,
+        "start": 725,
+        "type": "坡道"
+      },
+      {
+        "end": 1100,
+        "length": 250,
+        "slope": -1.5,
+        "start": 850,
+        "type": "坡道"
+      },
+      {
+        "end": 1700,
+        "length": 150,
+        "slope": 1.5,
+        "start": 1550,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10605",
+    "lane": [
+      {
+        "end": 225,
+        "length": 225,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 475,
+        "length": 250,
+        "name": "1弯",
+        "start": 225,
+        "type": "弯道"
+      },
+      {
+        "end": 800,
+        "length": 325,
+        "name": "2弯",
+        "start": 475,
+        "type": "弯道"
+      },
+      {
+        "end": 1250,
+        "length": 450,
+        "name": "2直",
+        "start": 800,
+        "type": "直线"
+      },
+      {
+        "end": 1525,
+        "length": 275,
+        "name": "3弯",
+        "start": 1250,
+        "type": "弯道"
+      },
+      {
+        "end": 1775,
+        "length": 250,
+        "name": "终弯",
+        "start": 1525,
+        "type": "弯道"
+      },
+      {
+        "end": 2300,
+        "length": 525,
+        "name": "终直",
+        "start": 1775,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1100,
+        "length": 75,
+        "slope": 2.0,
+        "start": 1025,
+        "type": "坡道"
+      },
+      {
+        "end": 1400,
+        "length": 250,
+        "slope": -1.5,
+        "start": 1150,
+        "type": "坡道"
+      },
+      {
+        "end": 2000,
+        "length": 150,
+        "slope": 1.5,
+        "start": 1850,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10606",
+    "lane": [
+      {
+        "end": 325,
+        "length": 325,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 575,
+        "length": 250,
+        "name": "1弯",
+        "start": 325,
+        "type": "弯道"
+      },
+      {
+        "end": 900,
+        "length": 325,
+        "name": "2弯",
+        "start": 575,
+        "type": "弯道"
+      },
+      {
+        "end": 1350,
+        "length": 450,
+        "name": "2直",
+        "start": 900,
+        "type": "直线"
+      },
+      {
+        "end": 1625,
+        "length": 275,
+        "name": "3弯",
+        "start": 1350,
+        "type": "弯道"
+      },
+      {
+        "end": 1875,
+        "length": 250,
+        "name": "终弯",
+        "start": 1625,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 525,
+        "name": "终直",
+        "start": 1875,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 40,
+        "length": 40,
+        "slope": 1.5,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 1200,
+        "length": 75,
+        "slope": 2.0,
+        "start": 1125,
+        "type": "坡道"
+      },
+      {
+        "end": 1500,
+        "length": 250,
+        "slope": -1.5,
+        "start": 1250,
+        "type": "坡道"
+      },
+      {
+        "end": 2100,
+        "length": 150,
+        "slope": 1.5,
+        "start": 1950,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10607",
+    "lane": [
+      {
+        "end": 425,
+        "length": 425,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 675,
+        "length": 250,
+        "name": "1弯",
+        "start": 425,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 325,
+        "name": "2弯",
+        "start": 675,
+        "type": "弯道"
+      },
+      {
+        "end": 1450,
+        "length": 450,
+        "name": "2直",
+        "start": 1000,
+        "type": "直线"
+      },
+      {
+        "end": 1725,
+        "length": 275,
+        "name": "3弯",
+        "start": 1450,
+        "type": "弯道"
+      },
+      {
+        "end": 1975,
+        "length": 250,
+        "name": "终弯",
+        "start": 1725,
+        "type": "弯道"
+      },
+      {
+        "end": 2500,
+        "length": 525,
+        "name": "终直",
+        "start": 1975,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 140,
+        "length": 140,
+        "slope": 1.5,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 1300,
+        "length": 75,
+        "slope": 2.0,
+        "start": 1225,
+        "type": "坡道"
+      },
+      {
+        "end": 1600,
+        "length": 250,
+        "slope": -1.5,
+        "start": 1350,
+        "type": "坡道"
+      },
+      {
+        "end": 2200,
+        "length": 150,
+        "slope": 1.5,
+        "start": 2050,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10608",
+    "lane": [
+      {
+        "end": 292,
+        "length": 292,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 567,
+        "length": 275,
+        "name": "3弯",
+        "start": 292,
+        "type": "弯道"
+      },
+      {
+        "end": 842,
+        "length": 275,
+        "name": "4弯",
+        "start": 567,
+        "type": "弯道"
+      },
+      {
+        "end": 1325,
+        "length": 483,
+        "name": "1直",
+        "start": 842,
+        "type": "直线"
+      },
+      {
+        "end": 1575,
+        "length": 250,
+        "name": "1弯",
+        "start": 1325,
+        "type": "弯道"
+      },
+      {
+        "end": 1900,
+        "length": 325,
+        "name": "2弯",
+        "start": 1575,
+        "type": "弯道"
+      },
+      {
+        "end": 2350,
+        "length": 450,
+        "name": "2直",
+        "start": 1900,
+        "type": "直线"
+      },
+      {
+        "end": 2625,
+        "length": 275,
+        "name": "3弯",
+        "start": 2350,
+        "type": "弯道"
+      },
+      {
+        "end": 2875,
+        "length": 250,
+        "name": "终弯",
+        "start": 2625,
+        "type": "弯道"
+      },
+      {
+        "end": 3400,
+        "length": 525,
+        "name": "终直",
+        "start": 2875,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 142,
+        "length": 75,
+        "slope": 2.0,
+        "start": 67,
+        "type": "坡道"
+      },
+      {
+        "end": 442,
+        "length": 250,
+        "slope": -1.5,
+        "start": 192,
+        "type": "坡道"
+      },
+      {
+        "end": 1042,
+        "length": 150,
+        "slope": 1.5,
+        "start": 892,
+        "type": "坡道"
+      },
+      {
+        "end": 2200,
+        "length": 75,
+        "slope": 2.0,
+        "start": 2125,
+        "type": "坡道"
+      },
+      {
+        "end": 2500,
+        "length": 250,
+        "slope": -1.5,
+        "start": 2250,
+        "type": "坡道"
+      },
+      {
+        "end": 3100,
+        "length": 150,
+        "slope": 1.5,
+        "start": 2950,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10609",
+    "lane": [
+      {
+        "end": 350,
+        "length": 350,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 575,
+        "length": 225,
+        "name": "3弯",
+        "start": 350,
+        "type": "弯道"
+      },
+      {
+        "end": 799,
+        "length": 224,
+        "name": "终弯",
+        "start": 575,
+        "type": "弯道"
+      },
+      {
+        "end": 1300,
+        "length": 501,
+        "name": "终直",
+        "start": 799,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 475,
+        "length": 200,
+        "slope": -1.0,
+        "start": 275,
+        "type": "坡道"
+      },
+      {
+        "end": 1050,
+        "length": 250,
+        "slope": 1.5,
+        "start": 800,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10610",
+    "lane": [
+      {
+        "end": 450,
+        "length": 450,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 675,
+        "length": 225,
+        "name": "3弯",
+        "start": 450,
+        "type": "弯道"
+      },
+      {
+        "end": 899,
+        "length": 224,
+        "name": "终弯",
+        "start": 675,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 501,
+        "name": "终直",
+        "start": 899,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 575,
+        "length": 200,
+        "slope": -1.0,
+        "start": 375,
+        "type": "坡道"
+      },
+      {
+        "end": 1150,
+        "length": 250,
+        "slope": 1.5,
+        "start": 900,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10611",
+    "lane": [
+      {
+        "end": 650,
+        "length": 650,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 875,
+        "length": 225,
+        "name": "3弯",
+        "start": 650,
+        "type": "弯道"
+      },
+      {
+        "end": 1099,
+        "length": 224,
+        "name": "终弯",
+        "start": 875,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 501,
+        "name": "终直",
+        "start": 1099,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 775,
+        "length": 200,
+        "slope": -1.0,
+        "start": 575,
+        "type": "坡道"
+      },
+      {
+        "end": 1350,
+        "length": 250,
+        "slope": 1.5,
+        "start": 1100,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10612",
+    "lane": [
+      {
+        "end": 200,
+        "length": 200,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 450,
+        "length": 250,
+        "name": "1弯",
+        "start": 200,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 250,
+        "name": "2弯",
+        "start": 450,
+        "type": "弯道"
+      },
+      {
+        "end": 1150,
+        "length": 450,
+        "name": "2直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1375,
+        "length": 225,
+        "name": "3弯",
+        "start": 1150,
+        "type": "弯道"
+      },
+      {
+        "end": 1599,
+        "length": 224,
+        "name": "终弯",
+        "start": 1375,
+        "type": "弯道"
+      },
+      {
+        "end": 2100,
+        "length": 501,
+        "name": "终直",
+        "start": 1599,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1275,
+        "length": 200,
+        "slope": -1.0,
+        "start": 1075,
+        "type": "坡道"
+      },
+      {
+        "end": 1850,
+        "length": 250,
+        "slope": 1.5,
+        "start": 1600,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10613",
+    "lane": [
+      {
+        "end": 500,
+        "length": 500,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 750,
+        "length": 250,
+        "name": "1弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 250,
+        "name": "2弯",
+        "start": 750,
+        "type": "弯道"
+      },
+      {
+        "end": 1450,
+        "length": 450,
+        "name": "2直",
+        "start": 1000,
+        "type": "直线"
+      },
+      {
+        "end": 1675,
+        "length": 225,
+        "name": "3弯",
+        "start": 1450,
+        "type": "弯道"
+      },
+      {
+        "end": 1900,
+        "length": 225,
+        "name": "终弯",
+        "start": 1675,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 500,
+        "name": "1直",
+        "start": 1900,
+        "type": "直线"
+      },
+      {
+        "end": 2848,
+        "length": 500,
+        "name": "90弯",
+        "start": 2348,
+        "type": "弯道"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10614",
+    "lane": [
+      {
+        "end": 481,
+        "length": 276,
+        "name": "4弯",
+        "start": 205,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 519,
+        "name": "1直",
+        "start": 481,
+        "type": "直线"
+      },
+      {
+        "end": 1250,
+        "length": 250,
+        "name": "1弯",
+        "start": 1000,
+        "type": "弯道"
+      },
+      {
+        "end": 1550,
+        "length": 300,
+        "name": "2弯",
+        "start": 1250,
+        "type": "弯道"
+      },
+      {
+        "end": 1950,
+        "length": 400,
+        "name": "2直",
+        "start": 1550,
+        "type": "直线"
+      },
+      {
+        "end": 2225,
+        "length": 275,
+        "name": "3弯",
+        "start": 1950,
+        "type": "弯道"
+      },
+      {
+        "end": 2500,
+        "length": 275,
+        "name": "终弯",
+        "start": 2225,
+        "type": "弯道"
+      },
+      {
+        "end": 3000,
+        "length": 500,
+        "name": "终直",
+        "start": 2500,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10701",
+    "lane": [
+      {
+        "end": 300,
+        "length": 300,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 550,
+        "length": 250,
+        "name": "3弯",
+        "start": 300,
+        "type": "弯道"
+      },
+      {
+        "end": 788,
+        "length": 238,
+        "name": "终弯",
+        "start": 550,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 412,
+        "name": "终直",
+        "start": 788,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 875,
+        "length": 775,
+        "slope": -1.0,
+        "start": 100,
+        "type": "坡道"
+      },
+      {
+        "end": 975,
+        "length": 100,
+        "slope": 2.0,
+        "start": 875,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10702",
+    "lane": [
+      {
+        "end": 500,
+        "length": 500,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 750,
+        "length": 250,
+        "name": "3弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 988,
+        "length": 238,
+        "name": "终弯",
+        "start": 750,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 412,
+        "name": "终直",
+        "start": 988,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1075,
+        "length": 775,
+        "slope": -1.0,
+        "start": 300,
+        "type": "坡道"
+      },
+      {
+        "end": 1175,
+        "length": 100,
+        "slope": 2.0,
+        "start": 1075,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10703",
+    "lane": [
+      {
+        "end": 300,
+        "length": 150,
+        "name": "2弯",
+        "start": 150,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 400,
+        "name": "2直",
+        "start": 300,
+        "type": "直线"
+      },
+      {
+        "end": 950,
+        "length": 250,
+        "name": "3弯",
+        "start": 700,
+        "type": "弯道"
+      },
+      {
+        "end": 1188,
+        "length": 238,
+        "name": "终弯",
+        "start": 950,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 412,
+        "name": "终直",
+        "start": 1188,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1275,
+        "length": 775,
+        "slope": -1.0,
+        "start": 500,
+        "type": "坡道"
+      },
+      {
+        "end": 1375,
+        "length": 100,
+        "slope": 2.0,
+        "start": 1275,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10704",
+    "lane": [
+      {
+        "end": 300,
+        "length": 300,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 500,
+        "length": 200,
+        "name": "1弯",
+        "start": 300,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 200,
+        "name": "2弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 400,
+        "name": "2直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1350,
+        "length": 250,
+        "name": "3弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1588,
+        "length": 238,
+        "name": "终弯",
+        "start": 1350,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 412,
+        "name": "终直",
+        "start": 1588,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 50,
+        "length": 50,
+        "slope": 2.0,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 1675,
+        "length": 775,
+        "slope": -1.0,
+        "start": 900,
+        "type": "坡道"
+      },
+      {
+        "end": 1775,
+        "length": 100,
+        "slope": 2.0,
+        "start": 1675,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10705",
+    "lane": [
+      {
+        "end": 500,
+        "length": 500,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 700,
+        "length": 200,
+        "name": "1弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 900,
+        "length": 200,
+        "name": "2弯",
+        "start": 700,
+        "type": "弯道"
+      },
+      {
+        "end": 1300,
+        "length": 400,
+        "name": "2直",
+        "start": 900,
+        "type": "直线"
+      },
+      {
+        "end": 1550,
+        "length": 250,
+        "name": "3弯",
+        "start": 1300,
+        "type": "弯道"
+      },
+      {
+        "end": 1788,
+        "length": 238,
+        "name": "终弯",
+        "start": 1550,
+        "type": "弯道"
+      },
+      {
+        "end": 2200,
+        "length": 412,
+        "name": "终直",
+        "start": 1788,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 150,
+        "length": 150,
+        "slope": -1.0,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 250,
+        "length": 100,
+        "slope": 2.0,
+        "start": 150,
+        "type": "坡道"
+      },
+      {
+        "end": 1875,
+        "length": 775,
+        "slope": -1.0,
+        "start": 1100,
+        "type": "坡道"
+      },
+      {
+        "end": 1975,
+        "length": 100,
+        "slope": 2.0,
+        "start": 1875,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10706",
+    "lane": [
+      {
+        "end": 400,
+        "length": 400,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 600,
+        "length": 200,
+        "name": "3弯",
+        "start": 400,
+        "type": "弯道"
+      },
+      {
+        "end": 790,
+        "length": 190,
+        "name": "终弯",
+        "start": 600,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 410,
+        "name": "终直",
+        "start": 790,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10707",
+    "lane": [
+      {
+        "end": 600,
+        "length": 600,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 800,
+        "length": 200,
+        "name": "3弯",
+        "start": 600,
+        "type": "弯道"
+      },
+      {
+        "end": 990,
+        "length": 190,
+        "name": "终弯",
+        "start": 800,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 410,
+        "name": "终直",
+        "start": 990,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1025,
+        "length": 600,
+        "slope": -1.5,
+        "start": 425,
+        "type": "坡道"
+      },
+      {
+        "end": 1175,
+        "length": 150,
+        "slope": 1.5,
+        "start": 1025,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10708",
+    "lane": [
+      {
+        "end": 270,
+        "length": 270,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 435,
+        "length": 165,
+        "name": "1弯",
+        "start": 270,
+        "type": "弯道"
+      },
+      {
+        "end": 600,
+        "length": 165,
+        "name": "2弯",
+        "start": 435,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 400,
+        "name": "2直",
+        "start": 600,
+        "type": "直线"
+      },
+      {
+        "end": 1200,
+        "length": 200,
+        "name": "3弯",
+        "start": 1000,
+        "type": "弯道"
+      },
+      {
+        "end": 1390,
+        "length": 190,
+        "name": "终弯",
+        "start": 1200,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 410,
+        "name": "终直",
+        "start": 1390,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 50,
+        "length": 50,
+        "slope": 1.5,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 1425,
+        "length": 600,
+        "slope": -1.5,
+        "start": 825,
+        "type": "坡道"
+      },
+      {
+        "end": 1575,
+        "length": 150,
+        "slope": 1.5,
+        "start": 1425,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10709",
+    "lane": [
+      {
+        "end": 370,
+        "length": 370,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 535,
+        "length": 165,
+        "name": "1弯",
+        "start": 370,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 165,
+        "name": "2弯",
+        "start": 535,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 400,
+        "name": "2直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1300,
+        "length": 200,
+        "name": "3弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1490,
+        "length": 190,
+        "name": "终弯",
+        "start": 1300,
+        "type": "弯道"
+      },
+      {
+        "end": 1900,
+        "length": 410,
+        "name": "终直",
+        "start": 1490,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10801",
+    "lane": [
+      {
+        "end": 320,
+        "length": 320,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 595,
+        "length": 275,
+        "name": "3弯",
+        "start": 320,
+        "type": "弯道"
+      },
+      {
+        "end": 872,
+        "length": 277,
+        "name": "终弯",
+        "start": 595,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 328,
+        "name": "终直",
+        "start": 872,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 295,
+        "length": 175,
+        "slope": 1.5,
+        "start": 120,
+        "type": "坡道"
+      },
+      {
+        "end": 570,
+        "length": 150,
+        "slope": -1.5,
+        "start": 420,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10802",
+    "lane": [
+      {
+        "end": 520,
+        "length": 520,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 795,
+        "length": 275,
+        "name": "3弯",
+        "start": 520,
+        "type": "弯道"
+      },
+      {
+        "end": 1072,
+        "length": 277,
+        "name": "终弯",
+        "start": 795,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 328,
+        "name": "终直",
+        "start": 1072,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 495,
+        "length": 175,
+        "slope": 1.5,
+        "start": 320,
+        "type": "坡道"
+      },
+      {
+        "end": 770,
+        "length": 150,
+        "slope": -1.5,
+        "start": 620,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10803",
+    "lane": [
+      {
+        "end": 500,
+        "length": 500,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 750,
+        "length": 250,
+        "name": "3弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 997,
+        "length": 247,
+        "name": "终弯",
+        "start": 750,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 403,
+        "name": "终直",
+        "start": 997,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 350,
+        "length": 100,
+        "slope": 2.0,
+        "start": 250,
+        "type": "坡道"
+      },
+      {
+        "end": 575,
+        "length": 225,
+        "slope": 1.0,
+        "start": 350,
+        "type": "坡道"
+      },
+      {
+        "end": 725,
+        "length": 150,
+        "slope": -2.0,
+        "start": 575,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10804",
+    "lane": [
+      {
+        "end": 720,
+        "length": 520,
+        "name": "2直",
+        "start": 200,
+        "type": "直线"
+      },
+      {
+        "end": 995,
+        "length": 275,
+        "name": "3弯",
+        "start": 720,
+        "type": "弯道"
+      },
+      {
+        "end": 1272,
+        "length": 277,
+        "name": "终弯",
+        "start": 995,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 328,
+        "name": "终直",
+        "start": 1272,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 695,
+        "length": 175,
+        "slope": 1.5,
+        "start": 520,
+        "type": "坡道"
+      },
+      {
+        "end": 970,
+        "length": 150,
+        "slope": -1.5,
+        "start": 820,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10805",
+    "lane": [
+      {
+        "end": 700,
+        "length": 500,
+        "name": "2直",
+        "start": 200,
+        "type": "直线"
+      },
+      {
+        "end": 950,
+        "length": 250,
+        "name": "3弯",
+        "start": 700,
+        "type": "弯道"
+      },
+      {
+        "end": 1197,
+        "length": 247,
+        "name": "终弯",
+        "start": 950,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 403,
+        "name": "终直",
+        "start": 1197,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 550,
+        "length": 100,
+        "slope": 2.0,
+        "start": 450,
+        "type": "坡道"
+      },
+      {
+        "end": 775,
+        "length": 225,
+        "slope": 1.0,
+        "start": 550,
+        "type": "坡道"
+      },
+      {
+        "end": 925,
+        "length": 150,
+        "slope": -2.0,
+        "start": 775,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10806",
+    "lane": [
+      {
+        "end": 900,
+        "length": 500,
+        "name": "2直",
+        "start": 400,
+        "type": "直线"
+      },
+      {
+        "end": 1150,
+        "length": 250,
+        "name": "3弯",
+        "start": 900,
+        "type": "弯道"
+      },
+      {
+        "end": 1397,
+        "length": 247,
+        "name": "终弯",
+        "start": 1150,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 403,
+        "name": "终直",
+        "start": 1397,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 750,
+        "length": 100,
+        "slope": 2.0,
+        "start": 650,
+        "type": "坡道"
+      },
+      {
+        "end": 975,
+        "length": 225,
+        "slope": 1.0,
+        "start": 750,
+        "type": "坡道"
+      },
+      {
+        "end": 1125,
+        "length": 150,
+        "slope": -2.0,
+        "start": 975,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10807",
+    "lane": [
+      {
+        "end": 400,
+        "length": 400,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 585,
+        "length": 185,
+        "name": "1弯",
+        "start": 400,
+        "type": "弯道"
+      },
+      {
+        "end": 770,
+        "length": 185,
+        "name": "2弯",
+        "start": 585,
+        "type": "弯道"
+      },
+      {
+        "end": 1120,
+        "length": 350,
+        "name": "2直",
+        "start": 770,
+        "type": "直线"
+      },
+      {
+        "end": 1395,
+        "length": 275,
+        "name": "3弯",
+        "start": 1120,
+        "type": "弯道"
+      },
+      {
+        "end": 1672,
+        "length": 277,
+        "name": "终弯",
+        "start": 1395,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 328,
+        "name": "终直",
+        "start": 1672,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1145,
+        "length": 175,
+        "slope": 1.5,
+        "start": 970,
+        "type": "坡道"
+      },
+      {
+        "end": 1420,
+        "length": 150,
+        "slope": -1.5,
+        "start": 1270,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10808",
+    "lane": [
+      {
+        "end": 400,
+        "length": 400,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 600,
+        "length": 200,
+        "name": "1弯",
+        "start": 400,
+        "type": "弯道"
+      },
+      {
+        "end": 800,
+        "length": 200,
+        "name": "2弯",
+        "start": 600,
+        "type": "弯道"
+      },
+      {
+        "end": 1300,
+        "length": 500,
+        "name": "2直",
+        "start": 800,
+        "type": "直线"
+      },
+      {
+        "end": 1550,
+        "length": 250,
+        "name": "3弯",
+        "start": 1300,
+        "type": "弯道"
+      },
+      {
+        "end": 1797,
+        "length": 247,
+        "name": "终弯",
+        "start": 1550,
+        "type": "弯道"
+      },
+      {
+        "end": 2200,
+        "length": 403,
+        "name": "终直",
+        "start": 1797,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1150,
+        "length": 100,
+        "slope": 2.0,
+        "start": 1050,
+        "type": "坡道"
+      },
+      {
+        "end": 1375,
+        "length": 225,
+        "slope": 1.0,
+        "start": 1150,
+        "type": "坡道"
+      },
+      {
+        "end": 1525,
+        "length": 150,
+        "slope": -2.0,
+        "start": 1375,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10809",
+    "lane": [
+      {
+        "end": 600,
+        "length": 600,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 800,
+        "length": 200,
+        "name": "1弯",
+        "start": 600,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 200,
+        "name": "2弯",
+        "start": 800,
+        "type": "弯道"
+      },
+      {
+        "end": 1500,
+        "length": 500,
+        "name": "2直",
+        "start": 1000,
+        "type": "直线"
+      },
+      {
+        "end": 1750,
+        "length": 250,
+        "name": "3弯",
+        "start": 1500,
+        "type": "弯道"
+      },
+      {
+        "end": 1997,
+        "length": 247,
+        "name": "终弯",
+        "start": 1750,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 403,
+        "name": "终直",
+        "start": 1997,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1350,
+        "length": 100,
+        "slope": 2.0,
+        "start": 1250,
+        "type": "坡道"
+      },
+      {
+        "end": 1575,
+        "length": 225,
+        "slope": 1.0,
+        "start": 1350,
+        "type": "坡道"
+      },
+      {
+        "end": 1725,
+        "length": 150,
+        "slope": -2.0,
+        "start": 1575,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10810",
+    "lane": [
+      {
+        "end": 261,
+        "length": 261,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 511,
+        "length": 250,
+        "name": "3弯",
+        "start": 261,
+        "type": "弯道"
+      },
+      {
+        "end": 761,
+        "length": 250,
+        "name": "4弯",
+        "start": 511,
+        "type": "弯道"
+      },
+      {
+        "end": 1250,
+        "length": 489,
+        "name": "1直",
+        "start": 761,
+        "type": "直线"
+      },
+      {
+        "end": 1450,
+        "length": 200,
+        "name": "1弯",
+        "start": 1250,
+        "type": "弯道"
+      },
+      {
+        "end": 1650,
+        "length": 200,
+        "name": "2弯",
+        "start": 1450,
+        "type": "弯道"
+      },
+      {
+        "end": 2100,
+        "length": 450,
+        "name": "2直",
+        "start": 1650,
+        "type": "直线"
+      },
+      {
+        "end": 2350,
+        "length": 250,
+        "name": "3弯",
+        "start": 2100,
+        "type": "弯道"
+      },
+      {
+        "end": 2597,
+        "length": 247,
+        "name": "终弯",
+        "start": 2350,
+        "type": "弯道"
+      },
+      {
+        "end": 3000,
+        "length": 403,
+        "name": "终直",
+        "start": 2597,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 111,
+        "length": 100,
+        "slope": 2.0,
+        "start": 11,
+        "type": "坡道"
+      },
+      {
+        "end": 336,
+        "length": 225,
+        "slope": 1.0,
+        "start": 111,
+        "type": "坡道"
+      },
+      {
+        "end": 486,
+        "length": 150,
+        "slope": -2.0,
+        "start": 336,
+        "type": "坡道"
+      },
+      {
+        "end": 1950,
+        "length": 100,
+        "slope": 2.0,
+        "start": 1850,
+        "type": "坡道"
+      },
+      {
+        "end": 2175,
+        "length": 225,
+        "slope": 1.0,
+        "start": 1950,
+        "type": "坡道"
+      },
+      {
+        "end": 2325,
+        "length": 150,
+        "slope": -2.0,
+        "start": 2175,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10811",
+    "lane": [
+      {
+        "end": 458,
+        "length": 458,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 708,
+        "length": 250,
+        "name": "3弯",
+        "start": 458,
+        "type": "弯道"
+      },
+      {
+        "end": 958,
+        "length": 250,
+        "name": "4弯",
+        "start": 708,
+        "type": "弯道"
+      },
+      {
+        "end": 1450,
+        "length": 492,
+        "name": "1直",
+        "start": 958,
+        "type": "直线"
+      },
+      {
+        "end": 1650,
+        "length": 200,
+        "name": "1弯",
+        "start": 1450,
+        "type": "弯道"
+      },
+      {
+        "end": 1850,
+        "length": 200,
+        "name": "2弯",
+        "start": 1650,
+        "type": "弯道"
+      },
+      {
+        "end": 2300,
+        "length": 450,
+        "name": "2直",
+        "start": 1850,
+        "type": "直线"
+      },
+      {
+        "end": 2550,
+        "length": 250,
+        "name": "3弯",
+        "start": 2300,
+        "type": "弯道"
+      },
+      {
+        "end": 2797,
+        "length": 247,
+        "name": "终弯",
+        "start": 2550,
+        "type": "弯道"
+      },
+      {
+        "end": 3200,
+        "length": 403,
+        "name": "终直",
+        "start": 2797,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 308,
+        "length": 100,
+        "slope": 2.0,
+        "start": 208,
+        "type": "坡道"
+      },
+      {
+        "end": 533,
+        "length": 225,
+        "slope": 1.0,
+        "start": 308,
+        "type": "坡道"
+      },
+      {
+        "end": 683,
+        "length": 150,
+        "slope": -2.0,
+        "start": 533,
+        "type": "坡道"
+      },
+      {
+        "end": 2150,
+        "length": 100,
+        "slope": 2.0,
+        "start": 2050,
+        "type": "坡道"
+      },
+      {
+        "end": 2375,
+        "length": 225,
+        "slope": 1.0,
+        "start": 2150,
+        "type": "坡道"
+      },
+      {
+        "end": 2525,
+        "length": 150,
+        "slope": -2.0,
+        "start": 2375,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10812",
+    "lane": [
+      {
+        "end": 400,
+        "length": 400,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 625,
+        "length": 225,
+        "name": "3弯",
+        "start": 400,
+        "type": "弯道"
+      },
+      {
+        "end": 871,
+        "length": 246,
+        "name": "终弯",
+        "start": 625,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 329,
+        "name": "终直",
+        "start": 871,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 375,
+        "length": 200,
+        "slope": 1.5,
+        "start": 175,
+        "type": "坡道"
+      },
+      {
+        "end": 675,
+        "length": 200,
+        "slope": -1.5,
+        "start": 475,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10813",
+    "lane": [
+      {
+        "end": 600,
+        "length": 500,
+        "name": "2直",
+        "start": 100,
+        "type": "直线"
+      },
+      {
+        "end": 825,
+        "length": 225,
+        "name": "3弯",
+        "start": 600,
+        "type": "弯道"
+      },
+      {
+        "end": 1071,
+        "length": 246,
+        "name": "终弯",
+        "start": 825,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 329,
+        "name": "终直",
+        "start": 1071,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 575,
+        "length": 200,
+        "slope": 1.5,
+        "start": 375,
+        "type": "坡道"
+      },
+      {
+        "end": 875,
+        "length": 200,
+        "slope": -1.5,
+        "start": 675,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10814",
+    "lane": [
+      {
+        "end": 300,
+        "length": 300,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 450,
+        "length": 150,
+        "name": "1弯",
+        "start": 300,
+        "type": "弯道"
+      },
+      {
+        "end": 600,
+        "length": 150,
+        "name": "2弯",
+        "start": 450,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 400,
+        "name": "2直",
+        "start": 600,
+        "type": "直线"
+      },
+      {
+        "end": 1225,
+        "length": 225,
+        "name": "3弯",
+        "start": 1000,
+        "type": "弯道"
+      },
+      {
+        "end": 1471,
+        "length": 246,
+        "name": "终弯",
+        "start": 1225,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 329,
+        "name": "终直",
+        "start": 1471,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 975,
+        "length": 200,
+        "slope": 1.5,
+        "start": 775,
+        "type": "坡道"
+      },
+      {
+        "end": 1275,
+        "length": 200,
+        "slope": -1.5,
+        "start": 1075,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10815",
+    "lane": [
+      {
+        "end": 400,
+        "length": 400,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 550,
+        "length": 150,
+        "name": "1弯",
+        "start": 400,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 150,
+        "name": "2弯",
+        "start": 550,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 400,
+        "name": "2直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1325,
+        "length": 225,
+        "name": "3弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1571,
+        "length": 246,
+        "name": "终弯",
+        "start": 1325,
+        "type": "弯道"
+      },
+      {
+        "end": 1900,
+        "length": 329,
+        "name": "终直",
+        "start": 1571,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1075,
+        "length": 200,
+        "slope": 1.5,
+        "start": 875,
+        "type": "坡道"
+      },
+      {
+        "end": 1375,
+        "length": 200,
+        "slope": -1.5,
+        "start": 1175,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10901",
+    "lane": [
+      {
+        "end": 250,
+        "length": 250,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 550,
+        "length": 300,
+        "name": "3弯",
+        "start": 250,
+        "type": "弯道"
+      },
+      {
+        "end": 844,
+        "length": 294,
+        "name": "终弯",
+        "start": 550,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 356,
+        "name": "终直",
+        "start": 844,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 995,
+        "length": 595,
+        "slope": -1.0,
+        "start": 400,
+        "type": "坡道"
+      },
+      {
+        "end": 1125,
+        "length": 125,
+        "slope": 2.0,
+        "start": 1000,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10902",
+    "lane": [
+      {
+        "end": 450,
+        "length": 450,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 750,
+        "length": 300,
+        "name": "3弯",
+        "start": 450,
+        "type": "弯道"
+      },
+      {
+        "end": 1044,
+        "length": 294,
+        "name": "终弯",
+        "start": 750,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 356,
+        "name": "终直",
+        "start": 1044,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1195,
+        "length": 595,
+        "slope": -1.0,
+        "start": 600,
+        "type": "坡道"
+      },
+      {
+        "end": 1325,
+        "length": 125,
+        "slope": 2.0,
+        "start": 1200,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10903",
+    "lane": [
+      {
+        "end": 450,
+        "length": 450,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 800,
+        "length": 350,
+        "name": "3弯",
+        "start": 450,
+        "type": "弯道"
+      },
+      {
+        "end": 1127,
+        "length": 327,
+        "name": "终弯",
+        "start": 800,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 473,
+        "name": "终直",
+        "start": 1127,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1350,
+        "length": 400,
+        "slope": -1.0,
+        "start": 950,
+        "type": "坡道"
+      },
+      {
+        "end": 1525,
+        "length": 120,
+        "slope": 2.0,
+        "start": 1405,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10904",
+    "lane": [
+      {
+        "end": 650,
+        "length": 650,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 1000,
+        "length": 350,
+        "name": "3弯",
+        "start": 650,
+        "type": "弯道"
+      },
+      {
+        "end": 1327,
+        "length": 327,
+        "name": "终弯",
+        "start": 1000,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 473,
+        "name": "终直",
+        "start": 1327,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1550,
+        "length": 400,
+        "slope": -1.0,
+        "start": 1150,
+        "type": "坡道"
+      },
+      {
+        "end": 1725,
+        "length": 120,
+        "slope": 2.0,
+        "start": 1605,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10905",
+    "lane": [
+      {
+        "end": 370,
+        "length": 370,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 560,
+        "length": 190,
+        "name": "1弯",
+        "start": 370,
+        "type": "弯道"
+      },
+      {
+        "end": 750,
+        "length": 190,
+        "name": "2弯",
+        "start": 560,
+        "type": "弯道"
+      },
+      {
+        "end": 1050,
+        "length": 300,
+        "name": "2直",
+        "start": 750,
+        "type": "直线"
+      },
+      {
+        "end": 1350,
+        "length": 300,
+        "name": "3弯",
+        "start": 1050,
+        "type": "弯道"
+      },
+      {
+        "end": 1644,
+        "length": 294,
+        "name": "终弯",
+        "start": 1350,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 356,
+        "name": "终直",
+        "start": 1644,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 140,
+        "length": 140,
+        "slope": -1.0,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 270,
+        "length": 125,
+        "slope": 2.0,
+        "start": 145,
+        "type": "坡道"
+      },
+      {
+        "end": 1795,
+        "length": 595,
+        "slope": -1.0,
+        "start": 1200,
+        "type": "坡道"
+      },
+      {
+        "end": 1925,
+        "length": 125,
+        "slope": 2.0,
+        "start": 1800,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10906",
+    "lane": [
+      {
+        "end": 520,
+        "length": 520,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 710,
+        "length": 190,
+        "name": "1弯",
+        "start": 520,
+        "type": "弯道"
+      },
+      {
+        "end": 900,
+        "length": 190,
+        "name": "2弯",
+        "start": 710,
+        "type": "弯道"
+      },
+      {
+        "end": 1250,
+        "length": 350,
+        "name": "2直",
+        "start": 900,
+        "type": "直线"
+      },
+      {
+        "end": 1550,
+        "length": 300,
+        "name": "3弯",
+        "start": 1250,
+        "type": "弯道"
+      },
+      {
+        "end": 1844,
+        "length": 294,
+        "name": "终弯",
+        "start": 1550,
+        "type": "弯道"
+      },
+      {
+        "end": 2200,
+        "length": 356,
+        "name": "终直",
+        "start": 1844,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 290,
+        "length": 290,
+        "slope": -1.0,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 420,
+        "length": 125,
+        "slope": 2.0,
+        "start": 295,
+        "type": "坡道"
+      },
+      {
+        "end": 1995,
+        "length": 595,
+        "slope": -1.0,
+        "start": 1400,
+        "type": "坡道"
+      },
+      {
+        "end": 2125,
+        "length": 125,
+        "slope": 2.0,
+        "start": 2000,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10907",
+    "lane": [
+      {
+        "end": 572,
+        "length": 190,
+        "name": "1弯",
+        "start": 382,
+        "type": "弯道"
+      },
+      {
+        "end": 748,
+        "length": 190,
+        "name": "2弯",
+        "start": 558,
+        "type": "弯道"
+      },
+      {
+        "end": 1250,
+        "length": 500,
+        "name": "2直",
+        "start": 750,
+        "type": "直线"
+      },
+      {
+        "end": 1600,
+        "length": 350,
+        "name": "3弯",
+        "start": 1250,
+        "type": "弯道"
+      },
+      {
+        "end": 1927,
+        "length": 327,
+        "name": "终弯",
+        "start": 1600,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 473,
+        "name": "终直",
+        "start": 1927,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 132,
+        "length": 132,
+        "slope": -1.0,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 307,
+        "length": 120,
+        "slope": 2.0,
+        "start": 187,
+        "type": "坡道"
+      },
+      {
+        "end": 2150,
+        "length": 400,
+        "slope": -1.0,
+        "start": 1750,
+        "type": "坡道"
+      },
+      {
+        "end": 2325,
+        "length": 120,
+        "slope": 2.0,
+        "start": 2205,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10908",
+    "lane": [
+      {
+        "end": 570,
+        "length": 570,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 760,
+        "length": 190,
+        "name": "1弯",
+        "start": 570,
+        "type": "弯道"
+      },
+      {
+        "end": 950,
+        "length": 190,
+        "name": "2弯",
+        "start": 760,
+        "type": "弯道"
+      },
+      {
+        "end": 1450,
+        "length": 500,
+        "name": "2直",
+        "start": 950,
+        "type": "直线"
+      },
+      {
+        "end": 1800,
+        "length": 350,
+        "name": "3弯",
+        "start": 1450,
+        "type": "弯道"
+      },
+      {
+        "end": 2127,
+        "length": 327,
+        "name": "终弯",
+        "start": 1800,
+        "type": "弯道"
+      },
+      {
+        "end": 2600,
+        "length": 473,
+        "name": "终直",
+        "start": 2127,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 315,
+        "length": 315,
+        "slope": -1.0,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 490,
+        "length": 120,
+        "slope": 2.0,
+        "start": 370,
+        "type": "坡道"
+      },
+      {
+        "end": 2350,
+        "length": 400,
+        "slope": -1.0,
+        "start": 1950,
+        "type": "坡道"
+      },
+      {
+        "end": 2525,
+        "length": 120,
+        "slope": 2.0,
+        "start": 2405,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10909",
+    "lane": [
+      {
+        "end": 348,
+        "length": 348,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 648,
+        "length": 300,
+        "name": "3弯",
+        "start": 348,
+        "type": "弯道"
+      },
+      {
+        "end": 948,
+        "length": 300,
+        "name": "4弯",
+        "start": 648,
+        "type": "弯道"
+      },
+      {
+        "end": 1320,
+        "length": 372,
+        "name": "1直",
+        "start": 948,
+        "type": "直线"
+      },
+      {
+        "end": 1510,
+        "length": 190,
+        "name": "1弯",
+        "start": 1320,
+        "type": "弯道"
+      },
+      {
+        "end": 1700,
+        "length": 190,
+        "name": "2弯",
+        "start": 1510,
+        "type": "弯道"
+      },
+      {
+        "end": 2050,
+        "length": 350,
+        "name": "2直",
+        "start": 1700,
+        "type": "直线"
+      },
+      {
+        "end": 2350,
+        "length": 300,
+        "name": "3弯",
+        "start": 2050,
+        "type": "弯道"
+      },
+      {
+        "end": 2644,
+        "length": 294,
+        "name": "终弯",
+        "start": 2350,
+        "type": "弯道"
+      },
+      {
+        "end": 3000,
+        "length": 356,
+        "name": "终直",
+        "start": 2644,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1093,
+        "length": 595,
+        "slope": -1.0,
+        "start": 498,
+        "type": "坡道"
+      },
+      {
+        "end": 1220,
+        "length": 125,
+        "slope": 2.0,
+        "start": 1095,
+        "type": "坡道"
+      },
+      {
+        "end": 2795,
+        "length": 595,
+        "slope": -1.0,
+        "start": 2200,
+        "type": "坡道"
+      },
+      {
+        "end": 2925,
+        "length": 125,
+        "slope": 2.0,
+        "start": 2800,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10910",
+    "lane": [
+      {
+        "end": 350,
+        "length": 350,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 600,
+        "length": 250,
+        "name": "3弯",
+        "start": 350,
+        "type": "弯道"
+      },
+      {
+        "end": 848,
+        "length": 248,
+        "name": "终弯",
+        "start": 600,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 352,
+        "name": "终直",
+        "start": 848,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "10911",
+    "lane": [
+      {
+        "end": 550,
+        "length": 550,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 800,
+        "length": 250,
+        "name": "3弯",
+        "start": 550,
+        "type": "弯道"
+      },
+      {
+        "end": 1048,
+        "length": 248,
+        "name": "终弯",
+        "start": 800,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 352,
+        "name": "终直",
+        "start": 1048,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1325,
+        "length": 125,
+        "slope": 1.5,
+        "start": 1200,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10912",
+    "lane": [
+      {
+        "end": 330,
+        "length": 330,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 480,
+        "length": 150,
+        "name": "1弯",
+        "start": 330,
+        "type": "弯道"
+      },
+      {
+        "end": 630,
+        "length": 150,
+        "name": "2弯",
+        "start": 480,
+        "type": "弯道"
+      },
+      {
+        "end": 950,
+        "length": 320,
+        "name": "2直",
+        "start": 630,
+        "type": "直线"
+      },
+      {
+        "end": 1200,
+        "length": 250,
+        "name": "3弯",
+        "start": 950,
+        "type": "弯道"
+      },
+      {
+        "end": 1448,
+        "length": 248,
+        "name": "终弯",
+        "start": 1200,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 352,
+        "name": "终直",
+        "start": 1448,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 230,
+        "length": 125,
+        "slope": 1.5,
+        "start": 105,
+        "type": "坡道"
+      },
+      {
+        "end": 1724,
+        "length": 125,
+        "slope": 1.5,
+        "start": 1599,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10913",
+    "lane": [
+      {
+        "end": 500,
+        "length": 500,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 650,
+        "length": 150,
+        "name": "1弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 800,
+        "length": 150,
+        "name": "2弯",
+        "start": 650,
+        "type": "弯道"
+      },
+      {
+        "end": 1150,
+        "length": 350,
+        "name": "2直",
+        "start": 800,
+        "type": "直线"
+      },
+      {
+        "end": 1400,
+        "length": 250,
+        "name": "3弯",
+        "start": 1150,
+        "type": "弯道"
+      },
+      {
+        "end": 1648,
+        "length": 248,
+        "name": "终弯",
+        "start": 1400,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 352,
+        "name": "终直",
+        "start": 1648,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 400,
+        "length": 125,
+        "slope": 1.5,
+        "start": 275,
+        "type": "坡道"
+      },
+      {
+        "end": 1925,
+        "length": 125,
+        "slope": 1.5,
+        "start": 1800,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "10914",
+    "lane": [
+      {
+        "end": 370,
+        "length": 370,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 720,
+        "length": 350,
+        "name": "3弯",
+        "start": 370,
+        "type": "弯道"
+      },
+      {
+        "end": 1070,
+        "length": 350,
+        "name": "4弯",
+        "start": 720,
+        "type": "弯道"
+      },
+      {
+        "end": 1520,
+        "length": 450,
+        "name": "1直",
+        "start": 1070,
+        "type": "直线"
+      },
+      {
+        "end": 1710,
+        "length": 190,
+        "name": "1弯",
+        "start": 1520,
+        "type": "弯道"
+      },
+      {
+        "end": 1900,
+        "length": 190,
+        "name": "2弯",
+        "start": 1710,
+        "type": "弯道"
+      },
+      {
+        "end": 2250,
+        "length": 350,
+        "name": "2直",
+        "start": 1900,
+        "type": "直线"
+      },
+      {
+        "end": 2550,
+        "length": 300,
+        "name": "3弯",
+        "start": 2250,
+        "type": "弯道"
+      },
+      {
+        "end": 2844,
+        "length": 294,
+        "name": "终弯",
+        "start": 2550,
+        "type": "弯道"
+      },
+      {
+        "end": 3200,
+        "length": 356,
+        "name": "终直",
+        "start": 2844,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1270,
+        "length": 400,
+        "slope": -1.0,
+        "start": 870,
+        "type": "坡道"
+      },
+      {
+        "end": 1445,
+        "length": 120,
+        "slope": 2.0,
+        "start": 1325,
+        "type": "坡道"
+      },
+      {
+        "end": 2995,
+        "length": 595,
+        "slope": -1.0,
+        "start": 2400,
+        "type": "坡道"
+      },
+      {
+        "end": 3125,
+        "length": 125,
+        "slope": 2.0,
+        "start": 3000,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "11001",
+    "lane": [
+      {
+        "end": 500,
+        "length": 500,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 705,
+        "length": 205,
+        "name": "3弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 907,
+        "length": 202,
+        "name": "终弯",
+        "start": 705,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 293,
+        "name": "终直",
+        "start": 907,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 60,
+        "length": 60,
+        "slope": -1.5,
+        "start": 0,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "11002",
+    "lane": [
+      {
+        "end": 290,
+        "length": 290,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 495,
+        "length": 205,
+        "name": "1弯",
+        "start": 290,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 205,
+        "name": "2弯",
+        "start": 495,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 400,
+        "name": "2直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1305,
+        "length": 205,
+        "name": "3弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1507,
+        "length": 202,
+        "name": "终弯",
+        "start": 1305,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 293,
+        "name": "终直",
+        "start": 1507,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 535,
+        "length": 255,
+        "slope": 1.5,
+        "start": 280,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "11003",
+    "lane": [
+      {
+        "end": 490,
+        "length": 490,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 695,
+        "length": 205,
+        "name": "1弯",
+        "start": 490,
+        "type": "弯道"
+      },
+      {
+        "end": 900,
+        "length": 205,
+        "name": "2弯",
+        "start": 695,
+        "type": "弯道"
+      },
+      {
+        "end": 1300,
+        "length": 400,
+        "name": "2直",
+        "start": 900,
+        "type": "直线"
+      },
+      {
+        "end": 1505,
+        "length": 205,
+        "name": "3弯",
+        "start": 1300,
+        "type": "弯道"
+      },
+      {
+        "end": 1707,
+        "length": 202,
+        "name": "终弯",
+        "start": 1505,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 293,
+        "name": "终直",
+        "start": 1707,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 735,
+        "length": 255,
+        "slope": 1.5,
+        "start": 480,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "11004",
+    "lane": [
+      {
+        "end": 309,
+        "length": 309,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 514,
+        "length": 205,
+        "name": "3弯",
+        "start": 309,
+        "type": "弯道"
+      },
+      {
+        "end": 719,
+        "length": 205,
+        "name": "4弯",
+        "start": 514,
+        "type": "弯道"
+      },
+      {
+        "end": 1110,
+        "length": 391,
+        "name": "1直",
+        "start": 719,
+        "type": "直线"
+      },
+      {
+        "end": 1315,
+        "length": 205,
+        "name": "1弯",
+        "start": 1110,
+        "type": "弯道"
+      },
+      {
+        "end": 1520,
+        "length": 205,
+        "name": "2弯",
+        "start": 1315,
+        "type": "弯道"
+      },
+      {
+        "end": 1900,
+        "length": 380,
+        "name": "2直",
+        "start": 1520,
+        "type": "直线"
+      },
+      {
+        "end": 2105,
+        "length": 205,
+        "name": "3弯",
+        "start": 1900,
+        "type": "弯道"
+      },
+      {
+        "end": 2307,
+        "length": 202,
+        "name": "终弯",
+        "start": 2105,
+        "type": "弯道"
+      },
+      {
+        "end": 2600,
+        "length": 293,
+        "name": "终直",
+        "start": 2307,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1355,
+        "length": 255,
+        "slope": 1.5,
+        "start": 1100,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "11005",
+    "lane": [
+      {
+        "end": 360,
+        "length": 360,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 540,
+        "length": 180,
+        "name": "3弯",
+        "start": 360,
+        "type": "弯道"
+      },
+      {
+        "end": 709,
+        "length": 169,
+        "name": "终弯",
+        "start": 540,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 291,
+        "name": "终直",
+        "start": 709,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11006",
+    "lane": [
+      {
+        "end": 340,
+        "length": 340,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 520,
+        "length": 180,
+        "name": "1弯",
+        "start": 340,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 180,
+        "name": "2弯",
+        "start": 520,
+        "type": "弯道"
+      },
+      {
+        "end": 1060,
+        "length": 360,
+        "name": "2直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1240,
+        "length": 180,
+        "name": "3弯",
+        "start": 1060,
+        "type": "弯道"
+      },
+      {
+        "end": 1409,
+        "length": 169,
+        "name": "终弯",
+        "start": 1240,
+        "type": "弯道"
+      },
+      {
+        "end": 1700,
+        "length": 291,
+        "name": "终直",
+        "start": 1409,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 520,
+        "length": 150,
+        "slope": 1.5,
+        "start": 370,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "11007",
+    "lane": [
+      {
+        "end": 312,
+        "length": 312,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 492,
+        "length": 180,
+        "name": "3弯",
+        "start": 312,
+        "type": "弯道"
+      },
+      {
+        "end": 672,
+        "length": 180,
+        "name": "4弯",
+        "start": 492,
+        "type": "弯道"
+      },
+      {
+        "end": 1040,
+        "length": 368,
+        "name": "1直",
+        "start": 672,
+        "type": "直线"
+      },
+      {
+        "end": 1220,
+        "length": 180,
+        "name": "1弯",
+        "start": 1040,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 180,
+        "name": "2弯",
+        "start": 1220,
+        "type": "弯道"
+      },
+      {
+        "end": 1760,
+        "length": 360,
+        "name": "2直",
+        "start": 1400,
+        "type": "直线"
+      },
+      {
+        "end": 1940,
+        "length": 180,
+        "name": "3弯",
+        "start": 1760,
+        "type": "弯道"
+      },
+      {
+        "end": 2109,
+        "length": 169,
+        "name": "终弯",
+        "start": 1940,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 291,
+        "name": "终直",
+        "start": 2109,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11101",
+    "lane": [
+      {
+        "end": 500,
+        "length": 500,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 650,
+        "length": 150,
+        "name": "3弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 814,
+        "length": 164,
+        "name": "终弯",
+        "start": 650,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 386,
+        "name": "终直",
+        "start": 814,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11102",
+    "lane": [
+      {
+        "end": 301,
+        "length": 301,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 450,
+        "length": 150,
+        "name": "1弯",
+        "start": 300,
+        "type": "弯道"
+      },
+      {
+        "end": 650,
+        "length": 150,
+        "name": "2弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 500,
+        "name": "2直",
+        "start": 600,
+        "type": "直线"
+      },
+      {
+        "end": 1250,
+        "length": 150,
+        "name": "3弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1414,
+        "length": 164,
+        "name": "终弯",
+        "start": 1250,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 386,
+        "name": "终直",
+        "start": 1414,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11103",
+    "lane": [
+      {
+        "end": 500,
+        "length": 500,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 650,
+        "length": 150,
+        "name": "1弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 800,
+        "length": 150,
+        "name": "2弯",
+        "start": 650,
+        "type": "弯道"
+      },
+      {
+        "end": 1300,
+        "length": 500,
+        "name": "2直",
+        "start": 800,
+        "type": "直线"
+      },
+      {
+        "end": 1450,
+        "length": 150,
+        "name": "3弯",
+        "start": 1300,
+        "type": "弯道"
+      },
+      {
+        "end": 1614,
+        "length": 164,
+        "name": "终弯",
+        "start": 1450,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 386,
+        "name": "终直",
+        "start": 1614,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11201",
+    "lane": [
+      {
+        "end": 600,
+        "length": 600,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 400,
+        "length": 200,
+        "name": "终弯",
+        "start": 200,
+        "type": "弯道"
+      },
+      {
+        "end": 600,
+        "length": 200,
+        "name": "2弯",
+        "start": 400,
+        "type": "弯道"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11203",
+    "lane": [
+      {
+        "end": 1000,
+        "length": 1000,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 1417,
+        "length": 417,
+        "name": "3弯",
+        "start": 1000,
+        "type": "弯道"
+      },
+      {
+        "end": 1617,
+        "length": 200,
+        "name": "终弯",
+        "start": 1417,
+        "type": "弯道"
+      },
+      {
+        "end": 1866,
+        "length": 249,
+        "name": "1直",
+        "start": 1617,
+        "type": "直线"
+      },
+      {
+        "end": 2400,
+        "length": 533,
+        "name": "终直",
+        "start": 1867,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 1000,
+        "length": 600,
+        "slope": 2.0,
+        "start": 400,
+        "type": "坡道"
+      },
+      {
+        "end": 1400,
+        "length": 383,
+        "slope": -2.0,
+        "start": 1017,
+        "type": "坡道"
+      },
+      {
+        "end": 1617,
+        "length": 217,
+        "slope": -1.5,
+        "start": 1400,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "11301",
+    "lane": [
+      {
+        "end": 300,
+        "length": 300,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 400,
+        "length": 100,
+        "name": "1弯",
+        "start": 300,
+        "type": "弯道"
+      },
+      {
+        "end": 500,
+        "length": 100,
+        "name": "2弯",
+        "start": 400,
+        "type": "弯道"
+      },
+      {
+        "end": 900,
+        "length": 400,
+        "name": "2直",
+        "start": 500,
+        "type": "直线"
+      },
+      {
+        "end": 1000,
+        "length": 100,
+        "name": "3弯",
+        "start": 900,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 100,
+        "name": "终弯",
+        "start": 1000,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 300,
+        "name": "终直",
+        "start": 1100,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11302",
+    "lane": [
+      {
+        "end": 500,
+        "length": 400,
+        "name": "1直",
+        "start": 100,
+        "type": "直线"
+      },
+      {
+        "end": 600,
+        "length": 100,
+        "name": "1弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 100,
+        "name": "2弯",
+        "start": 600,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 400,
+        "name": "2直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1200,
+        "length": 100,
+        "name": "3弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1300,
+        "length": 100,
+        "name": "终弯",
+        "start": 1200,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 300,
+        "name": "终直",
+        "start": 1300,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11303",
+    "lane": [
+      {
+        "end": 400,
+        "length": 400,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 500,
+        "length": 100,
+        "name": "3弯",
+        "start": 400,
+        "type": "弯道"
+      },
+      {
+        "end": 600,
+        "length": 100,
+        "name": "4弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 400,
+        "name": "1直",
+        "start": 600,
+        "type": "直线"
+      },
+      {
+        "end": 1100,
+        "length": 100,
+        "name": "1弯",
+        "start": 1000,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 100,
+        "name": "2弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 400,
+        "name": "2直",
+        "start": 1200,
+        "type": "直线"
+      },
+      {
+        "end": 1700,
+        "length": 100,
+        "name": "3弯",
+        "start": 1600,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 100,
+        "name": "终弯",
+        "start": 1700,
+        "type": "弯道"
+      },
+      {
+        "end": 2100,
+        "length": 300,
+        "name": "终直",
+        "start": 1800,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11401",
+    "lane": [
+      {
+        "end": 370,
+        "length": 370,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 540,
+        "length": 170,
+        "name": "3弯",
+        "start": 370,
+        "type": "弯道"
+      },
+      {
+        "end": 692,
+        "length": 152,
+        "name": "终弯",
+        "start": 540,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 308,
+        "name": "终直",
+        "start": 692,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11402",
+    "lane": [
+      {
+        "end": 260,
+        "length": 260,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 440,
+        "length": 180,
+        "name": "1弯",
+        "start": 260,
+        "type": "弯道"
+      },
+      {
+        "end": 600,
+        "length": 160,
+        "name": "2弯",
+        "start": 440,
+        "type": "弯道"
+      },
+      {
+        "end": 970,
+        "length": 370,
+        "name": "2直",
+        "start": 600,
+        "type": "直线"
+      },
+      {
+        "end": 1140,
+        "length": 170,
+        "name": "3弯",
+        "start": 970,
+        "type": "弯道"
+      },
+      {
+        "end": 1292,
+        "length": 152,
+        "name": "终弯",
+        "start": 1140,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 308,
+        "name": "终直",
+        "start": 1292,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11403",
+    "lane": [
+      {
+        "end": 460,
+        "length": 370,
+        "name": "1直",
+        "start": 90,
+        "type": "直线"
+      },
+      {
+        "end": 640,
+        "length": 180,
+        "name": "1弯",
+        "start": 460,
+        "type": "弯道"
+      },
+      {
+        "end": 800,
+        "length": 160,
+        "name": "2弯",
+        "start": 640,
+        "type": "弯道"
+      },
+      {
+        "end": 1170,
+        "length": 370,
+        "name": "2直",
+        "start": 800,
+        "type": "直线"
+      },
+      {
+        "end": 1340,
+        "length": 170,
+        "name": "3弯",
+        "start": 1170,
+        "type": "弯道"
+      },
+      {
+        "end": 1492,
+        "length": 152,
+        "name": "终弯",
+        "start": 1340,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 308,
+        "name": "终直",
+        "start": 1492,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11404",
+    "lane": [
+      {
+        "end": 370,
+        "length": 370,
+        "name": "2直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 540,
+        "length": 170,
+        "name": "3弯",
+        "start": 370,
+        "type": "弯道"
+      },
+      {
+        "end": 690,
+        "length": 150,
+        "name": "4弯",
+        "start": 540,
+        "type": "弯道"
+      },
+      {
+        "end": 1060,
+        "length": 370,
+        "name": "1直",
+        "start": 690,
+        "type": "直线"
+      },
+      {
+        "end": 1240,
+        "length": 180,
+        "name": "1弯",
+        "start": 1060,
+        "type": "弯道"
+      },
+      {
+        "end": 1400,
+        "length": 160,
+        "name": "2弯",
+        "start": 1240,
+        "type": "弯道"
+      },
+      {
+        "end": 1770,
+        "length": 370,
+        "name": "2直",
+        "start": 1400,
+        "type": "直线"
+      },
+      {
+        "end": 1940,
+        "length": 170,
+        "name": "3弯",
+        "start": 1770,
+        "type": "弯道"
+      },
+      {
+        "end": 2092,
+        "length": 152,
+        "name": "终弯",
+        "start": 1940,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 308,
+        "name": "终直",
+        "start": 2092,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": "11501",
+    "lane": [
+      {
+        "end": 500,
+        "length": 400,
+        "name": "2直",
+        "start": 100,
+        "type": "直线"
+      },
+      {
+        "end": 700,
+        "length": 200,
+        "name": "3弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 900,
+        "length": 200,
+        "name": "终弯",
+        "start": 700,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 300,
+        "name": "终直",
+        "start": 900,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 475,
+        "length": 375,
+        "slope": 1.0,
+        "start": 100,
+        "type": "坡道"
+      },
+      {
+        "end": 925,
+        "length": 450,
+        "slope": -1.5,
+        "start": 475,
+        "type": "坡道"
+      },
+      {
+        "end": 1150,
+        "length": 175,
+        "slope": 1.0,
+        "start": 975,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "11502",
+    "lane": [
+      {
+        "end": 900,
+        "length": 400,
+        "name": "2直",
+        "start": 500,
+        "type": "直线"
+      },
+      {
+        "end": 1100,
+        "length": 200,
+        "name": "3弯",
+        "start": 900,
+        "type": "弯道"
+      },
+      {
+        "end": 1300,
+        "length": 200,
+        "name": "终弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 300,
+        "name": "终直",
+        "start": 1300,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 875,
+        "length": 375,
+        "slope": 1.0,
+        "start": 500,
+        "type": "坡道"
+      },
+      {
+        "end": 1325,
+        "length": 450,
+        "slope": -1.5,
+        "start": 875,
+        "type": "坡道"
+      },
+      {
+        "end": 1550,
+        "length": 175,
+        "slope": 1.0,
+        "start": 1375,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "11503",
+    "lane": [
+      {
+        "end": 300,
+        "length": 300,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 500,
+        "length": 200,
+        "name": "1弯",
+        "start": 300,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 200,
+        "name": "2弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 400,
+        "name": "2直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1300,
+        "length": 200,
+        "name": "3弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1500,
+        "length": 200,
+        "name": "终弯",
+        "start": 1300,
+        "type": "弯道"
+      },
+      {
+        "end": 1800,
+        "length": 300,
+        "name": "终直",
+        "start": 1500,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 150,
+        "length": 150,
+        "slope": 1.0,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 1150,
+        "length": 450,
+        "slope": -1.5,
+        "start": 700,
+        "type": "坡道"
+      },
+      {
+        "end": 1750,
+        "length": 175,
+        "slope": 1.0,
+        "start": 1575,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": "11504",
+    "lane": [
+      {
+        "end": 500,
+        "length": 400,
+        "name": "1直",
+        "start": 100,
+        "type": "直线"
+      },
+      {
+        "end": 700,
+        "length": 200,
+        "name": "1弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 900,
+        "length": 200,
+        "name": "2弯",
+        "start": 700,
+        "type": "弯道"
+      },
+      {
+        "end": 1300,
+        "length": 400,
+        "name": "2直",
+        "start": 900,
+        "type": "直线"
+      },
+      {
+        "end": 1500,
+        "length": 200,
+        "name": "3弯",
+        "start": 1300,
+        "type": "弯道"
+      },
+      {
+        "end": 1700,
+        "length": 200,
+        "name": "终弯",
+        "start": 1500,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 300,
+        "name": "终直",
+        "start": 1700,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 350,
+        "length": 175,
+        "slope": 1.0,
+        "start": 175,
+        "type": "坡道"
+      },
+      {
+        "end": 1275,
+        "length": 375,
+        "slope": 1.0,
+        "start": 900,
+        "type": "坡道"
+      },
+      {
+        "end": 1725,
+        "length": 450,
+        "slope": -1.5,
+        "start": 1275,
+        "type": "坡道"
+      },
+      {
+        "end": 1950,
+        "length": 175,
+        "slope": 1.0,
+        "start": 1775,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": 33001,
+    "lane": [
+      {
+        "end": 850,
+        "length": 850,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 975,
+        "length": 125,
+        "name": "1弯",
+        "start": 850,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 125,
+        "name": "终弯",
+        "start": 975,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 500,
+        "name": "终直",
+        "start": 1100,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": 33002,
+    "lane": [
+      {
+        "end": 400,
+        "length": 400,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 600,
+        "length": 200,
+        "name": "1弯",
+        "start": 400,
+        "type": "弯道"
+      },
+      {
+        "end": 800,
+        "length": 200,
+        "name": "2弯",
+        "start": 600,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 300,
+        "name": "2直",
+        "start": 800,
+        "type": "直线"
+      },
+      {
+        "end": 1350,
+        "length": 250,
+        "name": "3弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 250,
+        "name": "终弯",
+        "start": 1350,
+        "type": "弯道"
+      },
+      {
+        "end": 2100,
+        "length": 500,
+        "name": "终直",
+        "start": 1600,
+        "type": "直线"
+      }
+    ],
+    "slopes": [
+      {
+        "end": 400,
+        "length": 400,
+        "slope": 1,
+        "start": 0,
+        "type": "坡道"
+      },
+      {
+        "end": 1350,
+        "length": 950,
+        "slope": -1.5,
+        "start": 400,
+        "type": "坡道"
+      },
+      {
+        "end": 2100,
+        "length": 750,
+        "slope": 1,
+        "start": 1350,
+        "type": "坡道"
+      }
+    ]
+  },
+  {
+    "id": 85201,
+    "lane": [
+      {
+        "end": 330,
+        "length": 330,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 565,
+        "length": 235,
+        "name": "1弯",
+        "start": 330,
+        "type": "弯道"
+      },
+      {
+        "end": 800,
+        "length": 235,
+        "name": "终弯",
+        "start": 565,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 400,
+        "name": "终直",
+        "start": 800,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": 85202,
+    "lane": [
+      {
+        "end": 730,
+        "length": 730,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 965,
+        "length": 235,
+        "name": "1弯",
+        "start": 730,
+        "type": "弯道"
+      },
+      {
+        "end": 1200,
+        "length": 235,
+        "name": "终弯",
+        "start": 965,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 400,
+        "name": "终直",
+        "start": 1200,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": 85203,
+    "lane": [
+      {
+        "end": 230,
+        "length": 230,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 465,
+        "length": 235,
+        "name": "1弯",
+        "start": 230,
+        "type": "弯道"
+      },
+      {
+        "end": 700,
+        "length": 235,
+        "name": "2弯",
+        "start": 465,
+        "type": "弯道"
+      },
+      {
+        "end": 1130,
+        "length": 430,
+        "name": "2直",
+        "start": 700,
+        "type": "直线"
+      },
+      {
+        "end": 1365,
+        "length": 235,
+        "name": "3弯",
+        "start": 1130,
+        "type": "弯道"
+      },
+      {
+        "end": 1600,
+        "length": 235,
+        "name": "终弯",
+        "start": 1365,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 400,
+        "name": "终直",
+        "start": 1600,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": 85204,
+    "lane": [
+      {
+        "end": 630,
+        "length": 630,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 865,
+        "length": 235,
+        "name": "1弯",
+        "start": 630,
+        "type": "弯道"
+      },
+      {
+        "end": 1100,
+        "length": 235,
+        "name": "2弯",
+        "start": 865,
+        "type": "弯道"
+      },
+      {
+        "end": 1530,
+        "length": 430,
+        "name": "2直",
+        "start": 1100,
+        "type": "直线"
+      },
+      {
+        "end": 1765,
+        "length": 235,
+        "name": "3弯",
+        "start": 1530,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 235,
+        "name": "终弯",
+        "start": 1765,
+        "type": "弯道"
+      },
+      {
+        "end": 2400,
+        "length": 400,
+        "name": "终直",
+        "start": 2000,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
+    "id": 86001,
+    "lane": [
+      {
+        "end": 2000,
+        "length": 2000,
+        "name": "终直",
+        "start": 0,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  }
+]

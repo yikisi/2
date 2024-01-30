@@ -1,0 +1,135 @@
+const era = require('#/era-electron');
+
+const sys_call_check = require('#/system/script/sys-call-check');
+
+const check_stages = require('#/data/event/check-stages');
+const { no_info } = require('#/data/exp-const');
+const { adaptability_names, out_of_train_type } = require('#/data/train-const');
+const { adaptability_colors } = require('#/data/color-const');
+const {
+  get_adaptability_rank,
+  get_train_time,
+} = require('#/data/info-generator');
+
+const page_name = '育成情况';
+
+module.exports = {
+  /**
+   * @param {CharaTalk} chara
+   * @returns {{print():void}}
+   */
+  generate(chara) {
+    const aim_list = [];
+    if (era.get(`cflag:${chara.id}:种族`)) {
+      if (
+        era.get('flag:当前回合数') - era.get(`cflag:${chara.id}:育成回合计时`) <
+          3 * 48 ||
+        era.get(`cflag:${chara.id}:殿堂`)
+      ) {
+        const out_of_train = era.get(`cflag:${chara.id}:殿堂`),
+          train_time = get_train_time(chara.id);
+        aim_list.push(
+          {
+            config: { content: '育成情况', position: 'left' },
+            type: 'divider',
+          },
+          {
+            content: out_of_train
+              ? out_of_train_type[out_of_train - 1]
+              : [
+                  train_time.length > 1
+                    ? get_train_time(chara.id) + ' ｜ '
+                    : '',
+                  '拥有 ',
+                  {
+                    content: era.get(`exp:${chara.id}:技能点数`),
+                    fontWeight: 'bold',
+                  },
+                  ' 点技能点数',
+                ],
+            type: 'text',
+          },
+          {
+            config: { content: '比赛适应', position: 'left' },
+            type: 'divider',
+          },
+          ...adaptability_names.map((e) => {
+            const adapt = era.get(`cflag:${chara.id}:${e}适性`);
+            return {
+              config: { width: 3 },
+              content: [
+                e,
+                '：',
+                {
+                  color: adaptability_colors[adapt],
+                  content: get_adaptability_rank(adapt),
+                  fontWeight: 'bold',
+                },
+              ],
+              type: 'text',
+            };
+          }),
+          {
+            config: { content: '习得技能', position: 'left' },
+            type: 'divider',
+          },
+          {
+            config: { content: '因子继承', position: 'left' },
+            type: 'divider',
+          },
+        );
+        if (chara.id) {
+          const aims = sys_call_check(chara.id, check_stages.aim_check),
+            aim_count = aims.filter((e) => e.check === 1).length;
+          aim_list.push(
+            {
+              config: {
+                content: `育成目标 (${
+                  aim_count === aims.length
+                    ? '完成！'
+                    : `${aim_count}/${aims.length}`
+                })`,
+                position: 'left',
+              },
+              type: 'divider',
+            },
+            ...aims.map((e) => {
+              return {
+                config: { color: e.color },
+                content: e.content,
+                type: 'text',
+              };
+            }),
+          );
+        }
+      } else {
+        aim_list.push(
+          {
+            config: {
+              content: page_name,
+              position: 'left',
+            },
+            type: 'divider',
+          },
+          { content: no_info, type: 'text' },
+        );
+      }
+    } else {
+      aim_list.push(
+        {
+          config: {
+            content: page_name,
+            position: 'left',
+          },
+          type: 'divider',
+        },
+        { content: '一介训练员而已……', type: 'text' },
+      );
+    }
+
+    return {
+      print: () => era.printMultiColumns(aim_list, { width: 18 }),
+    };
+  },
+  name: page_name,
+};

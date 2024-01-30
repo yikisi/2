@@ -1,0 +1,17 @@
+const RaceInfo = require('#/data/race/model/race-info');
+
+module.exports = new RaceInfo(
+  'Nakayama Kinen',
+  '中山纪念',
+  RaceInfo.class_enum.G2,
+  RaceInfo.track_enum.nakayama,
+  RaceInfo.ground_enum.grass,
+  1800,
+  RaceInfo.distance_enum.mile,
+  RaceInfo.rotation_enum.right,
+  16,
+  RaceInfo.limit_enum.post4,
+  8,
+  1675,
+  10503,
+);

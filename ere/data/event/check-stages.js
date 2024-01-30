@@ -1,0 +1,32 @@
+const stages = {
+  after_punish: 0,
+  after_race: 0,
+  aim_check: 0,
+  aim_race: 0,
+  birth: 0,
+  love_event: 0,
+  mec_action_debuff: 0,
+  mec_callname_customize: 0,
+  mec_ero_check: 0,
+  mec_maxbase_buff: 0,
+  mec_motivation: 0,
+  mec_pressure_buff: 0,
+  mec_race_buff: 0,
+  mec_race_cloth: 0,
+  mec_sex_acceptable: 0,
+  mec_status: 0,
+  mec_success_rate: 0,
+  mec_talents: 0,
+  mec_train_buff: 0,
+  next_week: 0,
+  palace_check: 0,
+  personal_action: 0,
+  personal_titles: 0,
+  prison: 0,
+  rape_in_sleeping: 0,
+  title_check: 0,
+  want_make_love: 0,
+};
+Object.keys(stages).forEach((e, i) => (stages[e] = i));
+
+module.exports = stages;

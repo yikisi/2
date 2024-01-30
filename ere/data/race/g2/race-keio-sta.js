@@ -1,0 +1,17 @@
+const RaceInfo = require('#/data/race/model/race-info');
+
+module.exports = new RaceInfo(
+  'Keio Hai Nisai Stakes',
+  '京王杯2岁锦标',
+  RaceInfo.class_enum.G2,
+  RaceInfo.track_enum.tokyo,
+  RaceInfo.ground_enum.grass,
+  1400,
+  RaceInfo.distance_enum.short,
+  RaceInfo.rotation_enum.left,
+  18,
+  RaceInfo.limit_enum.exact2,
+  41,
+  950,
+  10601,
+);

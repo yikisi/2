@@ -1,0 +1,155 @@
+﻿const era = require('#/era-electron');
+
+const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
+const { sys_change_status_by_base } = require('#/system/sys-calc-chara-others');
+const sys_get_random_event = require('#/system/sys-get-random-event');
+const { init_chara } = require('#/system/sys-init-chara');
+const sys_next_week = require('#/system/sys-next-week');
+
+const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
+
+const print_curr_chara = require('#/page/components/cur-chara-info');
+const check_game_over = require('#/page/components/game-over');
+const print_page_header = require('#/page/components/page-header');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { gacha } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
+
+const event_hooks = require('#/data/event/event-hooks');
+const { location_enum } = require('#/data/locations');
+
+const flags = {
+  after_select: true,
+  homepage: true,
+  week_start: false,
+};
+let random_event;
+
+async function next_week() {
+  era.drawLine();
+  era.print('时间开始流动……', { align: 'center', fontSize: '24px' });
+  await sys_next_week();
+  era.drawLine();
+  await era.printAndWait('新的一周开始了……', {
+    align: 'center',
+    fontSize: '24px',
+  });
+}
+
+/**
+ * @param {number} chara_id
+ * @param {number} cur_loc
+ * @param {number} rest_loc
+ */
+async function save_and_next_week(chara_id, cur_loc, rest_loc) {
+  await era.saveData(
+    0,
+    `${get_chara_talk(0).actual_name} 于 ${new Date().toLocaleString('zh-CN', {
+      timeZone: 'Asia/Shanghai',
+    })} 保存的进度 (${era.get('flag:当前年')} 年 ${era.get(
+      'flag:当前月',
+    )} 月 第 ${era.get('flag:当前周')} 周) (自动存档)`,
+  );
+  era.drawLine();
+  era.set('flag:当前互动角色', 0);
+  era.set('flag:当前位置', rest_loc);
+  chara_id && (await sys_call_daily_event(chara_id, event_hooks.good_night));
+  let continue_flag = true;
+  start_machine_gun(event_hooks.week_end);
+  while (
+    continue_flag &&
+    (random_event = sys_get_random_event(event_hooks.week_end))
+  ) {
+    era.drawLine();
+    continue_flag = !(await random_event(chara_id));
+  }
+  stop_machine_gun(event_hooks.week_end);
+  if (continue_flag) {
+    await next_week();
+    if (era.get('flag:当前位置') === rest_loc) {
+      era.set('flag:当前位置', cur_loc);
+    }
+  }
+}
+
+/** @type {Record<string,function(number,function(number,number,number):Promise,{after_select:boolean,homepage:boolean,week_start:boolean}):Promise<*>>} */
+const handlers = {};
+
+handlers[location_enum.basement] = require('#/page/homepage/basement');
+handlers[location_enum.beach] = require('#/page/homepage/beach');
+handlers[location_enum.guangzhou] =
+  handlers[location_enum.hongkong] =
+  handlers[location_enum.paris] =
+    require('#/page/homepage/foreign');
+handlers[location_enum.office] = require('#/page/homepage/office');
+
+module.exports = async () => {
+  while (flags.homepage) {
+    era.clear();
+    let flag_skip_this_week = false;
+    let cur_location = era.get('flag:当前位置');
+
+    if (!handlers[cur_location]) {
+      cur_location = era.set('flag:当前位置', location_enum.office);
+    }
+
+    if (flags.week_start) {
+      print_page_header();
+      if (await check_game_over()) {
+        return;
+      }
+      if (era.get('flag:当前回合数') % 4 === 1) {
+        const added_list = era.getAddedCharacters();
+        gacha(
+          era.getAllCharacters().filter((x) => !added_list.includes(x)),
+          get_random_value(2, 5),
+        ).forEach((chara_id) => init_chara(chara_id));
+      }
+      start_machine_gun(event_hooks.week_start);
+      while (
+        !flag_skip_this_week &&
+        (random_event = sys_get_random_event(event_hooks.week_start)) !==
+          undefined
+      ) {
+        era.drawLine();
+        flag_skip_this_week = (await random_event()) || flag_skip_this_week;
+      }
+      stop_machine_gun(event_hooks.week_start);
+      era.clear();
+    }
+    if (flag_skip_this_week) {
+      era.drawLine();
+      await next_week();
+      continue;
+    }
+
+    const chara_id = era.get('flag:当前互动角色');
+
+    sys_change_status_by_base(0);
+    chara_id && sys_change_status_by_base(chara_id);
+
+    print_page_header();
+    if (cur_location === location_enum.basement) {
+      print_curr_chara(era.get('flag:地下室之主'));
+    } else {
+      print_curr_chara(chara_id);
+    }
+
+    if (flags.week_start) {
+      flags.week_start = false;
+      if (chara_id) {
+        era.drawLine();
+        await sys_call_daily_event(chara_id, event_hooks.good_morning);
+      }
+    } else if (flags.after_select) {
+      flags.after_select = false;
+      if (chara_id) {
+        era.drawLine();
+        await sys_call_daily_event(chara_id, event_hooks.select);
+      }
+    }
+
+    await handlers[cur_location](chara_id, save_and_next_week, flags);
+  }
+};

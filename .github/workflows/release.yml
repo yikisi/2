@@ -1,0 +1,88 @@
+name: era-uma-release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-on-windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          submodules: true
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: engine/package-lock.json
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./engine
+      - name: Change config
+        run: cp vue-deploy.config.js vue.config.js
+        working-directory: ./engine
+      - name: Build
+        run: npm run electron:build
+        working-directory: ./engine
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Make game directory
+        run: |
+          mv ./engine/dist_electron/win-unpacked ./engine/dist_electron/win
+          mkdir ./engine/dist_electron/win/game
+          cp -r ./ere ./engine/dist_electron/win/game
+          cp -r ./csv ./engine/dist_electron/win/game
+          cp -r ./res ./engine/dist_electron/win/game
+      - name: Zip game and engine
+        uses: thedoctor0/zip-release@0.7.5
+        with:
+          type: '7z'
+          filename: 'era-uma-preview-with-win-engine-${{ github.ref_name }}.7z'
+          directory: ./engine/dist_electron
+          path: ./win
+          custom: -pera
+      - name: Zip game
+        uses: thedoctor0/zip-release@0.7.5
+        with:
+          type: '7z'
+          filename: 'era-uma-preview-${{ github.ref_name }}.7z'
+          directory: ./engine/dist_electron/win/game
+      - name: Move files
+        run: mv './engine/dist_electron/win/game/era-uma-preview-${{ github.ref_name }}.7z' ./engine/dist_electron
+      - name: Check files
+        run: ls
+        working-directory: ./engine/dist_electron
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: EraUma ${{ github.ref_name }}
+          body: built by Github Actions
+          draft: false
+          prerelease: false
+          files: './engine/dist_electron/era-uma-preview-${{ github.ref_name }}.7z'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: EraUma ${{ github.ref_name }}
+          body: built by Github Actions
+          draft: false
+          prerelease: false
+          files: './engine/dist_electron/era-uma-preview-with-win-engine-${{ github.ref_name }}.7z'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

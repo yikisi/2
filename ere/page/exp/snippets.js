@@ -1,0 +1,29 @@
+const { no_info } = require('#/data/exp-const');
+
+function check_line_break(e) {
+  return e instanceof Array && e.length && e[0].isBr;
+}
+
+module.exports = {
+  /** @param {array} list */
+  push_link_break(list) {
+    if (list.length && !check_line_break(list[list.length - 1])) {
+      list.push([{ isBr: true }]);
+    }
+  },
+  /** @param {(string|array)[]} list */
+  remove_end_line_breaks(list) {
+    let temp;
+    if (list.length) {
+      do {
+        temp = list.pop();
+      } while (check_line_break(temp));
+      if (temp) {
+        list.push(temp);
+      }
+    }
+    if (!list.length) {
+      list.push(no_info);
+    }
+  },
+};
