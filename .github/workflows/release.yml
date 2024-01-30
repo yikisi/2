@@ -24,7 +24,6 @@ jobs:
           token: ${{ secrets.PERSONAL_TOKEN }}
           repository: ${{ secrets.ENGINE_REPO }}
           path: engine
-          persist-credentials: false
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
@@ -64,6 +63,7 @@ jobs:
           type: '7z'
           filename: 'era-uma-preview-${{ github.ref_name }}.7z'
           directory: ./engine/dist_electron/win/game
+          custom: -pera
       - name: Move files
         run: mv './engine/dist_electron/win/game/era-uma-preview-${{ github.ref_name }}.7z' ./engine/dist_electron
       - name: Check files
