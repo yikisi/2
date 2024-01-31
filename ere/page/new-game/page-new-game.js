@@ -130,7 +130,7 @@ module.exports = async () => {
           era.set('flag:当前月', 1);
           era.set('flag:当前周', 0);
           era.set('flag:当前位置', location_enum.office);
-          era.set('flag:当前赛事', -1);
+          era.set('flag:极端粉丝', []);
 
           // 游戏设置
 

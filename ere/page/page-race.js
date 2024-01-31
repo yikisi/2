@@ -815,7 +815,7 @@ async function race_page(race) {
   await era.printAndWait('回去了……');
   era.println();
   await sys_get_random_event(event_hooks.back_school)(event_hooks.race);
-  era.set('flag:当前赛事', -1);
+  era.set('flag:当前赛事', 0);
 }
 
 module.exports = race_page;

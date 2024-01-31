@@ -213,12 +213,11 @@ module.exports = {
    * @returns {boolean}
    */
   sys_check_remote(chara_id) {
-    let cur_race;
     return (
       chara_id > 0 &&
       era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置') &&
-      ((cur_race = era.get('flag:当前赛事')) !== -1 ||
-        race_infos[cur_race].track >= track_enum.longchamp ||
+      (race_infos[Math.max(era.get('flag:当前赛事'), 0)].track >=
+        track_enum.longchamp ||
         era.get('cflag:0:位置') !== location_enum.office)
     );
   },
