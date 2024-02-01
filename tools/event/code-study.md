@@ -174,7 +174,6 @@ switch (edu_weeks) {
 `固定时间触发的事件必须在check-60.js里处理，因为这些事件的执行方式仍然是通过事件队列进行的，不add_event就不会在事件队列里，也就不会被系统执行到；在某次更新后变红和add_event绑定了，关于变红的说法是对的`
 
 ### 2.2 育成赛事目标
-没看懂，求风佬讲解（
 
 `育成目标：育成目标主要是在两个部分，一个是aim_races和check_stages.aim_race，这个是进行自动报名比赛、在比赛报名界面将赛事名变红、在比赛界面的赛前赛后事件变红。最主要的是aim_races，它是个Record<string,number>，key是赛事ID（也是个枚举，可以从race-const.js的race_enum获取），或者是${比赛对应的育成周数}_${赛事ID}`
 

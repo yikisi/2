@@ -464,6 +464,7 @@ handlers[event_hooks.celebration] = async () => {
   const me = get_chara_talk(0),
     teio = get_chara_talk(3),
     weeks = (era.get('flag:当前回合数') - 1) % 48;
+  let ret;
   switch (weeks) {
     case 0:
       await print_event_name('新年', teio);
@@ -494,7 +495,7 @@ handlers[event_hooks.celebration] = async () => {
       era.print(`${me.name} ——`);
       era.printButton('接受礼物', 1);
       era.get('love:3') >= 75 && era.printButton(`连${teio.sex}一起吃掉`, 2);
-      const ret = await era.input();
+      ret = await era.input();
       if (ret === 1) {
         await era.printAndWait(
           `${me.name} 接过，道了声谢，当着${teio.sex}的小心地打开包装，把里面的巧克力吃了下去。`,

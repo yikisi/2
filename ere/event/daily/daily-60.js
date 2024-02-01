@@ -311,21 +311,21 @@ handlers[event_hooks.out_shopping] = async function (stage_id) {
     chara_self_name = sys_get_callname(60, 60),
     chara_talk = get_chara_talk(60);
   const temp = await select_action_in_shopping_street();
-  stage_id.arg = temp <= 2;
+  stage_id.arg = temp <= 1;
   switch (temp) {
-    case 1:
+    case 0:
       await chara_talk.say_and_wait(
         Math.random() < 0.5
           ? `这爪子看起来好像没什么力道，真的能抓的上来吗？……什么？以前特训出来的秘技？没想到 ${callname} 也有这样青春的一面呢。那就让 ${chara_self_name} 见识一下吧？`
           : `街机厅吗……经常能看到很多年轻的孩子来这边玩呢。我？我又不是会经常来这里玩的那种角色啦！${chara_self_name} 可是家务派哦？嘛，偶尔一起来玩一下倒也不错啦，偶尔的话。`,
       );
       break;
-    case 2:
+    case 1:
       await chara_talk.say_and_wait(
         `会抽到什么呢？嘛，虽然大概率是三等奖就是了……不过万一呢？`,
       );
       break;
-    case 3:
+    case 2:
       await era.printAndWait(`与 ${chara_talk.name} 一同去了卡拉OK……`);
       await chara_talk.say_and_wait('——怎、怎么样，我唱的歌？');
       await era.printAndWait(`曲毕，${chara_talk.name} 有些紧张地等待着评价`);
@@ -337,7 +337,7 @@ handlers[event_hooks.out_shopping] = async function (stage_id) {
         `与 ${chara_talk.name} 一起度过了一段愉快的时光。`,
       );
       break;
-    case 4:
+    case 3:
       if (Math.random() < 0.5) {
         await chara_talk.say_and_wait(
           `恋爱电影吗？${callname} 意外地还挺少女心？觉得我会比较喜欢？哈哈哈——`,

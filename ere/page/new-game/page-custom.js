@@ -241,7 +241,7 @@ async function page_custom() {
   era.set('talent:0:童贞', 1);
   era.set('talent:0:处女', 1);
 
-  if (/鬼.*道/.test(era.get('callname:0:-1'))) {
+  if (/鬼.*鼠/.test(era.get('callname:0:-1'))) {
     era.set('flag:角色性别', 0);
     era.set('flag:彩蛋机制', 179);
     era.set('flag:声望不足替换', 1);
