@@ -6,7 +6,10 @@ const {
   sys_change_pressure,
   sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
-const { sys_change_fame } = require('#/system/sys-calc-flag');
+const {
+  sys_change_fame,
+  sys_push_crazy_fan,
+} = require('#/system/sys-calc-flag');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
@@ -259,7 +262,7 @@ handlers[check_stages.palace_check] = () => {
     ) {
       new TeioEventMarks().good_end++;
     } else if (era.get('flag:游戏结束')) {
-      era.get('flag:极端粉丝').push(3);
+      sys_push_crazy_fan(3);
     }
   }
   common_palace_check(3);

@@ -24,6 +24,48 @@ const {
 } = require('#/data/info-generator');
 
 /**
+ * @param {number} chara_id
+ * @param {number} new_love
+ */
+async function punish_unfaithful(chara_id, new_love) {
+  if (era.get('flag:不忠惩罚')) {
+    const me = get_chara_talk(0),
+      temp_chara_list = sys_filter_chara(
+        'cflag',
+        '招募状态',
+        recruit_flags.yes,
+      ).filter(
+        (e) =>
+          e > 0 &&
+          e !== chara_id &&
+          era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
+          era.get(`love:${e}`) >= 75 &&
+          !era.get(`talent:${e}:绿帽癖`),
+      );
+    for (const c_id of temp_chara_list) {
+      era.print([
+        me.get_colored_name(),
+        ' 的不忠让 ',
+        get_chara_talk(c_id).get_colored_name(),
+        ' 无比愤怒……',
+      ]);
+      like_chara(
+        c_id,
+        0,
+        -get_random_value(
+          100,
+          200 +
+            8 * (new_love - 75) +
+            8 * (era.get(`love:${c_id}`) - 75) +
+            100 * era.get(`talent:${c_id}:病娇`),
+        ),
+      );
+    }
+    temp_chara_list.length && (await era.waitAnyKey());
+  }
+}
+
+/**
  * @param {number} target the id of the character whose relation will be changed
  * @param {number} aim the id of the character that the target will change the relation between them
  * @param {number} val change value of relation
@@ -296,41 +338,8 @@ module.exports = {
     print_change(chara_id, new_val - 1, new_val);
     era.set(`cflag:${chara_id}:爱慕暂拒`, 0);
     await CharaTalk.me.say_and_wait('已经不能回头了……', true);
-    if (era.get('flag:不忠惩罚')) {
-      const me = get_chara_talk(0),
-        temp_chara_list = sys_filter_chara(
-          'cflag',
-          '招募状态',
-          recruit_flags.yes,
-        ).filter(
-          (e) =>
-            e > 0 &&
-            e !== chara_id &&
-            era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
-            era.get(`love:${e}`) >= 75 &&
-            !era.get(`talent:${e}:绿帽癖`),
-        );
-      for (const c_id of temp_chara_list) {
-        era.print([
-          me.get_colored_name(),
-          ' 的不忠让 ',
-          get_chara_talk(c_id).get_colored_name(),
-          ' 无比愤怒……',
-        ]);
-        like_chara(
-          c_id,
-          0,
-          -get_random_value(
-            100,
-            200 +
-              8 * (new_val - 75) +
-              8 * (era.get(`love:${c_id}`) - 75) +
-              100 * era.get(`talent:${c_id}:病娇`),
-          ),
-        );
-      }
-      temp_chara_list.length && (await era.waitAnyKey());
-    }
+    await punish_unfaithful(chara_id, new_val);
     return true;
   },
+  sys_punish_unfaithful: punish_unfaithful,
 };

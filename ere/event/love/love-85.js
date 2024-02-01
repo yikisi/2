@@ -1,17 +1,19 @@
 const era = require('#/era-electron');
 
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
+const { sys_push_crazy_fan } = require('#/system/sys-calc-flag');
 
+const { cb_enum, add_event } = require('#/event/queue');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const EduEventMarks = require('#/data/event/edu-event-marks');
 
+const EduEventMarks = require('#/data/event/edu-event-marks');
 const event_hooks = require('#/data/event/event-hooks');
-const ruby = get_chara_talk(85);
 const EventObject = require('#/data/event/event-object');
-const { cb_enum, add_event } = require('#/event/queue');
+
+const ruby = get_chara_talk(85);
 
 /**
  * 第一红宝石 - 爱慕
@@ -188,7 +190,7 @@ module.exports = async (hook, _, event_object) => {
           //TODO BE 好感-，爱慕-
           new EduEventMarks(85).add('burn_heart');
           era.set('flag:游戏结束', 1);
-          era.get('flag:极端粉丝').push(85);
+          sys_push_crazy_fan(85);
         } else {
           await ruby.say_and_wait(`我们…约好了…一起……`, true);
           await ruby.say_and_wait(`所以…`, true);
@@ -397,7 +399,7 @@ module.exports = async (hook, _, event_object) => {
         //TODO 进BE
         new EduEventMarks(85).add('burn_heart');
         era.set('flag:游戏结束', 1);
-        era.get('flag:极端粉丝').push(85);
+        sys_push_crazy_fan(85);
       } else {
         await ruby.say_and_wait(`诶？`);
         await era.printAndWait(`我们的孩子，我想快点见到。`);

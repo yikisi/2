@@ -62,25 +62,28 @@ handlers[event_hooks.office_gift] = async function (chara_id) {
 handlers[event_hooks.office_cook] = async (chara_id) => {
   era.println();
   let wait_flag = false;
-  let to_print = sys_change_attr_and_print(
-    0,
-    '体力',
-    -get_random_value(50, 100),
-  );
-  print_attr_change(0, to_print);
-  wait_flag = print_attr_change(0, to_print) || wait_flag;
-  to_print = sys_change_attr_and_print(0, '精力', get_random_value(0, 20));
-  wait_flag = print_attr_change(0, to_print) || wait_flag;
+  wait_flag =
+    print_attr_change(
+      0,
+      sys_change_attr_and_print(0, '体力', -get_random_value(50, 100)),
+    ) || wait_flag;
+  wait_flag =
+    print_attr_change(
+      0,
+      sys_change_attr_and_print(0, '精力', get_random_value(0, 20)),
+    ) || wait_flag;
   sys_change_weight(0, get_random_value(20, 40, true));
   if (chara_id) {
-    to_print = sys_change_attr_and_print(
-      chara_id,
-      '体力',
-      get_random_value(100, 200),
-    );
-    wait_flag = print_attr_change(chara_id, to_print) || wait_flag;
-    to_print = sys_change_attr_and_print(0, '精力', get_random_value(0, 50));
-    wait_flag = print_attr_change(chara_id, to_print) || wait_flag;
+    wait_flag =
+      print_attr_change(
+        chara_id,
+        sys_change_attr_and_print(chara_id, '体力', get_random_value(100, 200)),
+      ) || wait_flag;
+    wait_flag =
+      print_attr_change(
+        chara_id,
+        sys_change_attr_and_print(chara_id, '精力', get_random_value(0, 50)),
+      ) || wait_flag;
     wait_flag =
       sys_like_chara(chara_id, 0, get_random_value(5, 10)) || wait_flag;
     sys_change_weight(chara_id, get_random_value(20, 40, true));
@@ -106,27 +109,27 @@ handlers[event_hooks.office_study] = async function (chara_id) {
 handlers[event_hooks.office_rest] = async function (chara_id) {
   era.println();
   let wait_flag = false;
-  let to_print = sys_change_attr_and_print(
-    0,
-    '精力',
-    -get_random_value(50, 100),
-  );
-  wait_flag = print_attr_change(0, to_print) || wait_flag;
-  to_print = sys_change_attr_and_print(0, '体力', get_random_value(0, 20));
-  wait_flag = print_attr_change(0, to_print) || wait_flag;
+  wait_flag =
+    print_attr_change(
+      0,
+      sys_change_attr_and_print(0, '精力', -get_random_value(50, 100)),
+    ) || wait_flag;
+  wait_flag =
+    print_attr_change(
+      0,
+      sys_change_attr_and_print(0, '体力', get_random_value(0, 20)),
+    ) || wait_flag;
   if (chara_id) {
-    to_print = sys_change_attr_and_print(
-      chara_id,
-      '精力',
-      get_random_value(100, 200),
-    );
-    wait_flag = print_attr_change(chara_id, to_print) || wait_flag;
-    to_print = sys_change_attr_and_print(
-      chara_id,
-      '体力',
-      get_random_value(0, 50),
-    );
-    wait_flag = print_attr_change(chara_id, to_print) || wait_flag;
+    wait_flag =
+      print_attr_change(
+        chara_id,
+        sys_change_attr_and_print(chara_id, '精力', get_random_value(100, 200)),
+      ) || wait_flag;
+    wait_flag =
+      print_attr_change(
+        chara_id,
+        sys_change_attr_and_print(chara_id, '体力', get_random_value(0, 50)),
+      ) || wait_flag;
     wait_flag =
       sys_like_chara(chara_id, 0, get_random_value(5, 10)) || wait_flag;
   }

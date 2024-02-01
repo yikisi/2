@@ -25,6 +25,7 @@ module.exports = (handlers) => {
           ...sys_change_attr_and_print(0, '体力', 200),
         ]);
         sys_change_weight(0, get_random_value(20, 40, true));
+        era.add('item:情人节巧克力', -1);
       }
     } else {
       await era.printAndWait([me.get_colored_name(), ' 已经很饱了……']);
@@ -41,7 +42,7 @@ module.exports = (handlers) => {
         ' 不再发胖了……',
       ]);
       era.set(`status:${ret}:发胖`, 0);
-      era.set(`base:${ret}:体重偏差`, 1600);
+      era.set(`base:${ret}:体重偏差`, 3200);
       era.add(`base:${ret}:药物残留`, 50);
       era.add('item:速效减肥药', -1);
       return true;
@@ -67,7 +68,7 @@ module.exports = (handlers) => {
             0.8,
         ),
       );
-      era.add(`base:${ret}:体重偏差`, 1000);
+      era.add(`base:${ret}:体重偏差`, 2000);
       era.add('item:头痛飞飞', -1);
       return true;
     }

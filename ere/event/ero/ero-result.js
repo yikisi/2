@@ -1,7 +1,10 @@
 const era = require('#/era-electron');
 
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const {
+  sys_like_chara,
+  sys_punish_unfaithful,
+} = require('#/system/sys-calc-chara-others');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
@@ -124,6 +127,10 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
     );
   }
   wait_flag && (await era.waitAnyKey());
+  await sys_punish_unfaithful(
+    mother_id || father_id,
+    era.get(`love:${mother_id || father_id}`),
+  );
 };
 
 /**

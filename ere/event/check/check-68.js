@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_push_crazy_fan } = require('#/system/sys-calc-flag');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
@@ -163,7 +164,7 @@ handlers[check_stages.palace_check] = () => {
     ).length < 4
   ) {
     new KitaEventMarks().crazy_fan++;
-    era.get('flag:极端粉丝').push(68);
+    sys_push_crazy_fan(68);
   } else {
     add_event(event_hooks.week_end, new EventObject(68, cb_enum.edu));
   }

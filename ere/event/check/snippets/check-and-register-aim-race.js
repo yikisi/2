@@ -10,14 +10,17 @@ const { track_enum } = require('#/data/race/model/race-info');
 /**
  * @param {number} chara_id
  * @param {Record<string,number>} aim_races
- * @param {number} [edu_weeks]
+ * @param {number} [_edu_weeks]
  */
-function check_and_register_aim_race(chara_id, aim_races, edu_weeks) {
-  const temp_key = `${
-    edu_weeks === undefined
+function check_and_register_aim_race(chara_id, aim_races, _edu_weeks) {
+  const edu_weeks =
+    _edu_weeks === undefined
       ? era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`)
-      : edu_weeks
-  }_`;
+      : _edu_weeks;
+  if (edu_weeks >= 3 * 48) {
+    return;
+  }
+  const temp_key = `${edu_weeks}_`;
   if (Object.keys(era.get(`cflag:${chara_id}:育成成绩`)).length) {
     for (const e of Object.entries(aim_races)) {
       if (e[0].startsWith(temp_key)) {

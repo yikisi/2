@@ -1,7 +1,11 @@
 const era = require('#/era-electron');
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
-const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
+const {
+  sys_change_fame,
+  sys_change_money,
+  sys_push_crazy_fan,
+} = require('#/system/sys-calc-flag');
 
 const { add_event, cb_enum } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -398,7 +402,7 @@ module.exports = async () => {
         `${me.name} 再也没有勇气去见 ${teio.name}，${teio.sex}和 ${me.name} 的人生，就此分别。`,
       );
       era.set('flag:游戏结束', Math.max(era.get('flag:游戏结束'), 1));
-      era.get('flag:极端粉丝').push(3);
+      sys_push_crazy_fan(3);
       era.set('cflag:3:招募状态', recruit_flags.no);
     } else {
       await era.printAndWait(`${me.name} 听到自己的声音回荡在室内。`);

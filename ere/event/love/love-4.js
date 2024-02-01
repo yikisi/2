@@ -1,16 +1,13 @@
 const era = require('#/era-electron');
 
+const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 const {
   begin_and_init_ero,
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
-const { love_uma_in_event } = require('#/system/sys-love-uma');
 
-const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EroParticipant = require('#/data/ero/ero-participant');
-const { part_enum } = require('#/data/ero/part-const');
-const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const event_hooks = require('#/data/event/event-hooks');
 
 /**
@@ -19,10 +16,9 @@ const event_hooks = require('#/data/event/event-hooks');
  * @author 黑奴一号
  */
 module.exports = async (hook) => {
-  const chara_talk = new CharaTalk(4),
+  const chara_talk = get_chara_talk(4),
     chara_self_name = era.get(`callname:4:301`),
     chara_self_name1 = era.get(`callname:4:24`),
-    callname = era.get('callname:4:0'),
     love = era.get('love:4'),
     sex = era.get('cflag:4:性别') - 1;
   //爱欲:love=49时触发 24行起始到
@@ -120,7 +116,7 @@ module.exports = async (hook) => {
         `这份崭新的情感会像被埋进土里的种子一样顺利发芽吧.`,
       );
       era.println();
-      love_uma_in_event(4);
+      await sys_love_uma_in_event(4);
     } //热恋:love=74时触发 代码行152->212
     else if (love === 74) {
       begin_and_init_ero(4);
@@ -173,7 +169,7 @@ module.exports = async (hook) => {
         `${chara_talk.name}摸了摸你的头,然后走出了训练室,你开始无比期待明天的约会.`,
       );
       end_ero_and_train();
-      love_uma_in_event(4);
+      await sys_love_uma_in_event(4);
     } //佳偶:love=89时触发 代码行213->355
     else if (love === 89) {
       await chara_talk.say_and_wait(
@@ -395,7 +391,7 @@ module.exports = async (hook) => {
           );
           await era.printAndWait(`你开始和${chara_talk.name}同居了`);
           end_ero_and_train();
-          love_uma_in_event(4);
+          await sys_love_uma_in_event(4);
         } else {
           await chara_talk.say_and_wait(`训练员君真讨厌!那我自己一个人先游了.`);
           await era.printAndWait(`叮铃铃!!!`);

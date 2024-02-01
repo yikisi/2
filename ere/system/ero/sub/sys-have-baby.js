@@ -6,6 +6,7 @@ const sys_call_mec = require('#/system/script/sys-call-mec');
 const {
   sys_like_chara,
   sys_add_title,
+  sys_punish_unfaithful,
 } = require('#/system/sys-calc-chara-others');
 const { init_chara } = require('#/system/sys-init-chara');
 
@@ -332,6 +333,10 @@ async function sys_have_baby(mother_id) {
     sys_like_chara(mother_id || father_id, 0, 100);
     await add_juel_out_of_train(mother_id || father_id, '顺从', 300);
   }
+  await sys_punish_unfaithful(
+    mother_id || father_id,
+    era.get(`love:${mother_id || father_id}`),
+  );
 }
 
 module.exports = sys_have_baby;
