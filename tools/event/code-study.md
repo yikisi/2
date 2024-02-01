@@ -62,8 +62,7 @@ get_random_event比较好理解，入参是stage_id和random，后者是一个�
         ? undefined
         : async () => false;
 ```
-`获取到的随机事件一般需要function类型，否则获取之后会执行出错，所以默认返回一个空的function；week_start和week_end这两个钩子在获取随机事件执行的时候采取机关枪模式，会不断从队列里获取事件然后执行，所以需要有明确的不可执行的undefined来让机关枪停下来；为了避免有些事件在条件判断不通过后将自己再加回队列导致机关枪停不下来的情况，add_event里才会优先将事件加到temp_queue里
-`
+`获取到的随机事件一般需要function类型，否则获取之后会执行出错，所以默认返回一个空的function；week_start和week_end这两个钩子在获取随机事件执行的时候采取机关枪模式，会不断从队列里获取事件然后执行，所以需要有明确的不可执行的undefined来让机关枪停下来；为了避免有些事件在条件判断不通过后将自己再加回队列导致机关枪停不下来的情况，add_event里才会优先将事件加到temp_queue里`
 
 ## 二、育成事件和check
 

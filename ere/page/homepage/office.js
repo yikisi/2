@@ -395,11 +395,11 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
               ? {
                   accelerator: 305,
                   config: {
-                    disabled:
-                      !sys_check_train_enabled(chara_id) ||
-                      !sys_check_awake(chara_id) ||
-                      !sys_check_awake(0) ||
-                      not_in_same_loc,
+                    disabled: true,
+                    // !sys_check_train_enabled(chara_id) ||
+                    // !sys_check_awake(chara_id) ||
+                    // !sys_check_awake(0) ||
+                    // not_in_same_loc,
                     width: 6,
                   },
                   content: `${chara_id ? '' : '独自'}前往女神像 (继承)`,
