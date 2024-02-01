@@ -1,8 +1,11 @@
 const era = require('#/era-electron');
-const { add_event, cb_enum } = require('#/event/queue');
+
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
+const { add_event, cb_enum } = require('#/event/queue');
+
 const CharaTalk = require('#/utils/chara-talk');
+
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
@@ -14,13 +17,18 @@ const recruit_flags = require('#/data/event/recruit-flags');
  * @author Necroz
  */
 module.exports = {
-  async run(stage_id) {
+  /**
+   * @param {number} stage
+   * @param _
+   * @param {EventObject} event_object
+   */
+  async run(stage, _, event_object) {
     const your_name = era.get('callname:0:-2'),
       chara_talk = new CharaTalk(25);
     const callname = sys_get_callname(25, 0);
     const event_marks = new EventMarks(0);
     let ret = 0;
-    switch (stage_id) {
+    switch (stage) {
       case event_hooks.recruit:
         // 否则表示是在训练场直接招募的场合，招募会失败
         await era.printAndWait(
@@ -43,10 +51,7 @@ module.exports = {
         if (era.get('flag:当前互动角色')) {
           // 如果身边带着其他马娘，不触发
           // 把事件再塞回去，不然下次不触发了
-          add_event(
-            event_hooks.office_rest,
-            new EventObject(24, cb_enum.recruit),
-          );
+          add_event(stage, event_object);
           return false;
         }
         await era.printAndWait(
@@ -370,14 +375,12 @@ module.exports = {
           event_marks.sub(event_hooks.office_rest);
           era.set('cflag:25:招募状态', recruit_flags.yes);
           era.set('flag:物色对象', 0);
-          return true;
         } else {
           event_marks.sub(event_hooks.office_rest);
           era.set('flag:物色对象', 0);
           era.set('cflag:25:随机招募', 1);
-          era.set('cflag:25:招募状态', 0);
-          return false;
         }
+        return true;
     }
     return false;
   },
