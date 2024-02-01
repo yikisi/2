@@ -15,19 +15,80 @@ module.exports = async () => {
   while (flagTitle) {
     era.clear();
 
-    era.setAlign('center');
-    era.drawLine();
-    era.print('ERAUMA 测试');
-    era.print('无名路人');
-    era.drawLine();
-
-    era.printButton('开始新游戏', 0);
-    era.printButton('加载存档', 1);
-    era.printButton('自建角色', 2, { disabled: true });
-    era.printButton('帮助说明', 3, { disabled: true });
-    era.drawLine();
-
-    era.setAlign('left');
+    era.printMultiColumns([
+      { type: 'divider' },
+      { config: { align: 'center' }, content: 'ERAUMA 测试', type: 'text' },
+      { config: { align: 'center' }, content: '无名路人', type: 'text' },
+      { type: 'divider' },
+      {
+        accelerator: 0,
+        config: { align: 'center' },
+        content: '开始新游戏',
+        type: 'button',
+      },
+      {
+        accelerator: 1,
+        config: { align: 'center' },
+        content: '加载存档',
+        type: 'button',
+      },
+      {
+        accelerator: 2,
+        config: { align: 'center', disabled: true },
+        content: '自建角色',
+        type: 'button',
+      },
+      {
+        accelerator: 3,
+        config: { align: 'center', disabled: true },
+        content: '帮助说明',
+        type: 'button',
+      },
+      { type: 'divider' },
+      { config: { offset: 6, width: 4 }, content: '相关链接：', type: 'text' },
+      {
+        config: { width: 8 },
+        content: [
+          {
+            content: 'Discord erauma 频道',
+            url: 'https://discord.gg/2Fx3ajDZpq',
+          },
+          { isBr: true },
+          {
+            content: 'Discord 中文era遊戲社群',
+            url: 'https://discord.gg/xXXGfwddrw',
+          },
+          { isBr: true },
+          {
+            content: 'EraUma开源仓库地址（内源）',
+            url: 'https://gitgud.io/era-games-zh/doujin/erauma',
+          },
+          { isBr: true },
+          {
+            content: 'EraUma游戏发布页',
+            url: 'https://gitgud.io/era-games-zh/doujin/erauma/-/releases',
+          },
+          { isBr: true },
+          {
+            content: 'EraElectron引擎开源仓库地址（内源）',
+            url: 'https://gitgud.io/era-games-zh/meta/era-electron',
+          },
+        ],
+        type: 'text',
+      },
+      {
+        config: {
+          align: 'center',
+          color: 'red',
+          fontSize: '24px',
+          fontWeight: 'bold',
+          isParagraph: true,
+        },
+        content:
+          '本游戏仅供个人下载学习使用，禁止任何商业行为，包括但不限于贩卖/附送/直播等！',
+        type: 'text',
+      },
+    ]);
 
     let ret = await era.input();
     switch (ret) {
