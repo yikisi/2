@@ -151,7 +151,7 @@ module.exports = async () => {
               break;
             default:
               // 初始卡池：内恰帝王北黑（萌战四强 - 光钻） + 露娜 + 阿船
-              [60, 3, 68, 400, 7].forEach((e) => init_chara(e));
+              [60, 3, 68, 17, 7].forEach((e) => init_chara(e));
               era.set('flag:当前声望', era.get('global:初始声望增加量') + 100);
               era.set('flag:当前马币', era.get('global:初始金钱增加量') + 300);
           }
