@@ -719,7 +719,7 @@ ${chara_talk.name}的耳朵又立刻竖了起来，耳朵也开始随着车载�
       await chara_talk.say_and_wait(`
 作为师傅的训练员与身为徒弟的${chara_talk.get_uma_sex_title()}积累了非常深厚的羁绊，这份羁绊又化作力量带来了奇迹,然后二人朝着更大的目标前进.`);
       era.printButton(
-        '「作为训练员,衷心祝愿自己所负责的${chara_talk.get_uma_sex_title()}能在追求目标的道路上一帆风顺」',
+        `「作为训练员,衷心祝愿自己所负责的${chara_talk.get_uma_sex_title()}能在追求目标的道路上一帆风顺」`,
         1,
       );
       era.printButton('「除此之外，再向前一步就是三女神的宠爱了」', 1);

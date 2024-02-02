@@ -10,6 +10,9 @@ const EduEventMarks = require('#/data/event/edu-event-marks');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 const check_aim_race = require('#/event/snippets/check-aim-race');
+const {add_event, cb_enum} = require("#/event/queue");
+const event_hooks = require("#/data/event/event-hooks");
+const EventObject = require("#/data/event/event-object");
 /**
  * @param {HookArg} hook
  * @param {{race:number,rank:number,motivation_change:number,relation_change:number,attr_change:number[],pt_change:number,base_change:Record<string,number>}} extra_flag
@@ -175,9 +178,19 @@ module.exports = async (hook, extra_flag) => {
       extra_flag.motivation_change = 1;
       extra_flag.attr_change.fill(10);
       extra_flag.pt_change = 45;
-      event_marks.add('love');
+      new EduEventMarks(400).add('love');
+      add_event(event_hooks.week_end, new EventObject(400, cb_enum.edu));
+    }else{
+      new EduEventMarks(400).add('broken_love');
+      add_event(event_hooks.week_end, new EventObject(400, cb_enum.edu));
     }
-  } else if (
+  } else if(extra_flag.race === race_enum.kiku_sho && extra_flag.rank > 1 &&
+      edu_weeks < 96){
+    new EduEventMarks(400).add('broken_love');
+    add_event(event_hooks.week_end, new EventObject(400, cb_enum.edu));
+    throw new Error('unsupported stage!');
+  }
+  else if (
     extra_flag.race === race_enum.arim_kin &&
     extra_flag.rank === 1 &&
     edu_weeks < 96

@@ -9,6 +9,7 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const EduEventMarks = require('#/data/event/edu-event-marks');
 const event_hooks = require('#/data/event/event-hooks');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const SSEventMarks = require("#/data/event/edu-event-marks-extended/edu-event-marks-400");
 const handlers = {};
 
 handlers[
@@ -78,7 +79,7 @@ handlers[event_hooks.out_church] = async (_, __, event_object) => {
     );
     sys_like_chara(400, 0, 40) && (await era.waitAnyKey());
   } else if (edu_weeks === 95 + 1) {
-    await print_event_name('与${chara_talk.name}一起前往神社', chara_talk);
+    await print_event_name(`与${chara_talk.name}一起前往神社`, chara_talk);
     await era.printAndWait(`${chara_talk.name}温柔的拉着你的手`);
     await era.printAndWait(
       `她身上华丽的黑色和服让她看起来就好像是一位出尘绝艳的美丽女子一般，`,
@@ -132,9 +133,9 @@ handlers[event_hooks.school_atrium] = async (_, __, event_object) => {
   }
   const chara_talk = get_chara_talk(400),
     me = get_chara_talk(0);
-  const edu_event_marks = new EduEventMarks(400);
-  if (edu_event_marks.get('enjoy_cat') === 1) {
-    edu_event_marks.add('enjoy_cat');
+  const event_marks = new SSEventMarks();
+  if (event_marks.enjoy_cat === 1) {
+    event_marks.enjoy_cat++;
     await print_event_name('尝试和猫咪相处', chara_talk);
     await era.printAndWait(
       `${chara_talk.name}等在树丛的旁边，似乎在苦恼着什么事情。`,
