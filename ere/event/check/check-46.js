@@ -7,8 +7,6 @@ const check_and_add_event = require('#/event/check/snippets/check-and-add-event'
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const { cb_enum, add_event } = require('#/event/queue');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -33,6 +31,27 @@ aim_races[get_aim_race_index(race_enum.jbc_cls, 2)] = 3;
 aim_races[get_aim_race_index(race_enum.cham_cup, 2)] = 3;
 aim_races[get_aim_race_index(race_enum.toky_dai, 2)] = 3;
 
+/** @param {{edu_weeks:number,race:number}} extra_flag */
+handlers[check_stages.aim_race] = (extra_flag) =>
+  aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
+  aim_races[extra_flag.race];
+
+handlers[check_stages.love_event] = () => {
+  const love = era.get('love:46'),
+    event_obj = new EventObject(46, cb_enum.love);
+  if (love === 49) {
+    add_event(event_hooks.week_end, event_obj);
+  } else if (love === 74) {
+    add_event(event_hooks.week_end, event_obj);
+  } else if (love === 89) {
+    add_event(event_hooks.week_end, event_obj);
+  } else if (love === 99) {
+    add_event(event_hooks.week_end, event_obj);
+  } else if (love === 100) {
+    add_event(event_hooks.week_end, event_obj);
+  }
+};
+
 /**
  * @param {{race:number,rank:number,relation_change:number}} extra_flag
  */
@@ -40,6 +59,7 @@ handlers[check_stages.next_week] = (extra_flag) => {
   const edu_weeks =
     era.get('flag:当前回合数') - era.get('cflag:46:育成回合计时');
   if (edu_weeks < 3 * 48) {
+    const love = era.get('love:46');
     const event_marks = new FaEventMarks(46);
     const event_obj = new EventObject(46, cb_enum.edu);
     const event_obj_special = new EventObject(46, cb_enum.edu, true);
@@ -92,6 +112,15 @@ handlers[check_stages.next_week] = (extra_flag) => {
       event_hooks.school_atrium,
       event_obj,
     );
+    if (love === 100) {
+      check_and_add_event(
+        event_marks,
+        edu_weeks,
+        'lucky_girl',
+        event_hooks.week_start,
+        event_obj,
+      );
+    }
     switch (edu_weeks) {
       //6月第四周 油桐花
       case 24:
@@ -213,10 +242,11 @@ handlers[check_stages.after_race] = (extra_flag) => {
   }
 };
 
-handlers[check_stages.aim_check] = function () {
+handlers[check_stages.aim_check] = () => {
   const buffer = [],
     /** @type {Record<string,{race:number,rank:number}>} */
     races = era.get('cflag:46:育成成绩');
+  const event_marks = new FaEventMarks();
   buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
   buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 16)); //皋月赏出走
   buffer.push(check_aim_and_get_entry(races, race_enum.japa_dir, 1, 1)); //泥地德比5着以内
@@ -230,7 +260,26 @@ handlers[check_stages.aim_check] = function () {
   return buffer;
 };
 
+handlers[check_stages.palace_check] = () => {
+  const /** @type {Record<string,{race:number,rank:number}>} */
+    races = era.get('cflag:46:育成成绩');
+  if (
+    check_aim_race(races, race_enum.jbc_cls, 2, 1) &&
+    check_aim_race(races, race_enum.cham_cup, 2, 1) &&
+    check_aim_race(races, race_enum.toky_dai, 2, 1)
+  ) {
+    new FaEventMarks().sweet_dream++;
+    add_event(event_hooks.week_start, new EventObject(46, cb_enum.edu));
+  } else {
+    new FaEventMarks().idol_road++;
+    add_event(event_hooks.week_start, new EventObject(46, cb_enum.edu));
+  }
+  common_palace_check(46);
+  return handlers[check_stages.aim_check]();
+};
 //todo 称号 沙之飞隼
+
+handlers[check_stages.personal_titles] = () => ['沙之飞隼'];
 
 /**
  * @param {number} stage_id

@@ -3,6 +3,10 @@ const era = require('#/era-electron');
 const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { location_enum } = require('#/data/locations');
+const {
+  sys_like_chara,
+  sys_love_uma,
+} = require('#/system/sys-calc-chara-others');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const { add_event } = require('#/event/queue');
 const event_hooks = require('#/data/event/event-hooks');
@@ -10,7 +14,8 @@ const FaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-ma
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = async function (event_object) {
-  const me = get_chara_talk(0),
+  const love = era.get('love:46'),
+    me = get_chara_talk(0),
     chara_talk = get_chara_talk(46),
     event_marks = new FaEventMarks(),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:46:育成回合计时');
@@ -44,6 +49,219 @@ module.exports = async function (event_object) {
     await era.printAndWait(
       `随着发令枪的响起，充满尘土与沙砾的偶像之路开始了。`,
     );
+    wait_flag =
+      get_attr_and_print_in_event(46, [0, 0, 0, 0, 0], 30) || wait_flag;
+  } else if (event_marks.lucky_girl === 1) {
+    event_marks.lucky_girl++;
+    await print_event_name(`四叶幸运草`, chara_talk);
+    await me.say_and_wait(`辛苦了，醒目飞鹰。`);
+    await chara_talk.say_and_wait(
+      `为了与（玩家名）之间的幸福生活，飞鹰子要更加努力才行呢！`,
+    );
+    await era.printAndWait(
+      `婚后的醒目飞鹰在（玩家名）的支持下更加努力的追逐着自己的梦想。`,
+    );
+    await me.say_and_wait(`那么，接下来的话我来开车吧。`);
+    await chara_talk.say_and_wait(
+      `能够遇到训练员先生这样的丈夫，飞鹰子是天下最幸福的马娘了♪`,
+    );
+    await era.printAndWait(`开着车回到居住的公寓后，在浴池之中浑身放松下来。`);
+    await era.printAndWait(
+      `稍微整理了一下第二天要做的事宜之后，两人就早早上床睡觉了。`,
+    );
+    await chara_talk.say_and_wait(`晚安，（玩家名）。`);
+    await me.say_and_wait(`晚安，醒目飞鹰。`);
+    era.drawLine({ content: '醒目飞鹰的梦' });
+    await era.printAndWait(`唔，这里是哪里？`, { color: chara_talk.color });
+    await era.printAndWait(`似乎来到了一处陌生的土地。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`哇，好大的建筑啊`);
+    await era.printAndWait(`似乎来到了一处巨大的建筑物里呢。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`不管怎么样先联系（玩家名）先生吧。`);
+    await era.printAndWait(`习惯性的掏出手机准备打电话时才发现`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`欸？飞鹰子的手机怎么不见了啊？`);
+    await chara_talk.say_and_wait(`要是训练员先生找不到飞鹰子的话怎么办？`);
+    await era.printAndWait(`似乎急得团团转的飞鹰子得出了一个结论`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`周围的话似乎有很多人呢？`);
+    await chara_talk.say_and_wait(`要去问问看吗？`);
+    await era.printAndWait(`走到似乎是一对恋人身边。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`打扰一下，请问？`);
+    await era.printAndWait(`直接从两人之间穿过去了。`, {
+      color: chara_talk.color,
+    });
+    await era.printAndWait(`好像没什么用呢。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`该怎么办？`);
+    await chara_talk.say_and_wait(`如果（玩家名）在我身边就好了。`);
+    await era.printAndWait(`突然消沉下去的醒目飞鹰似乎找到了灵感。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(
+      `！我记得听训练员先生说过，关键线索说不定就在最显眼的地方。`,
+    );
+    await era.printAndWait(`醒目飞鹰将视线望向了那座巨大的建筑物中。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`先进去看看吧。`);
+    await era.printAndWait(
+      `走进建筑物之中，令人安心的柔和光线照在了醒目飞鹰的身上。`,
+      {
+        color: chara_talk.color,
+      },
+    );
+    await era.printAndWait(`越往建筑物中间走去，里面的人越多，`, {
+      color: chara_talk.color,
+    });
+    await era.printAndWait(
+      `像是男粉丝的影子A「听说了吗？有个可爱的偶像将在这里开演唱会！」`,
+      {
+        color: chara_talk.color,
+      },
+    );
+    await era.printAndWait(
+      `像是女游客的影子B「好像是一个参与泥地比赛胜利的小马娘第一次登场！」`,
+      {
+        color: chara_talk.color,
+      },
+    );
+    await chara_talk.say_and_wait(`泥地马娘吗？听起来是个很可爱的后辈呢`, true);
+    await era.printAndWait(
+      `向着高大建筑的二楼走去，从自动扶梯上往下看人头攒动的样子。`,
+      {
+        color: chara_talk.color,
+      },
+    );
+    await chara_talk.say_and_wait(`黑压压的一片似乎都是人呢。`, true);
+    await era.printAndWait(
+      `二楼似乎比一楼更加宽敞的样子，粉丝们的身影似乎也变得更多了起来。`,
+      {
+        color: chara_talk.color,
+      },
+    );
+    await era.printAndWait(
+      `像是学生马娘的影子A「听说了吗！引导着人们关注泥地的可爱偶像XXXX似乎就要开始表演了！」`,
+      {
+        color: chara_talk.color,
+      },
+    );
+    await era.printAndWait(
+      `像是小马娘的影子B「欸？XXXX是谁啊？今天是我第一次看到赛马娘的身影呢！」`,
+      {
+        color: chara_talk.color,
+      },
+    );
+    await chara_talk.say_and_wait(`......`);
+    await era.printAndWait(`继续向深处前进，似乎来到了一片完全黑暗的地方。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(
+      `稍微有点害怕呢......不！（玩家名）一定在某处保护我的！`,
+    );
+    await chara_talk.say_and_wait(`飞鹰子！加油！`);
+    await era.printAndWait(`鼓足干劲之后向前奔跑着。`, {
+      color: chara_talk.color,
+    });
+    await era.printAndWait(`周围似乎也出现了马娘幻影一样的存在。`, {
+      color: chara_talk.color,
+    });
+    await era.printAndWait(`眼前的场景再次变换，似乎变成了一处赛场。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`是比赛吗？飞鹰子可不会害怕的！`);
+    await era.printAndWait(
+      `来到了自己熟悉的地方之后，飞鹰子恢复了平时的状态。`,
+      {
+        color: chara_talk.color,
+      },
+    );
+    await chara_talk.say_and_wait(
+      `就让飞鹰子给这里的粉丝们也带来闪耀的一面吧⭐`,
+    );
+    await era.printAndWait(
+      `似乎完全没有体力消耗的样子，比平时的速度更快，就像飞起来了一样，将后面的幻影远远的甩在了后面。`,
+      {
+        color: chara_talk.color,
+      },
+    );
+    await era.printAndWait(`直到冲线为止，赛场的幻影再次发生了变换。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`好像是出道战时的舞台，不过大得多的多。`);
+    await era.printAndWait(`突然之间，所有的灯光都照到了醒目飞鹰的身上。`, {
+      color: chara_talk.color,
+    });
+    await era.printAndWait(`周围的舞台似乎坐满了前来围观的粉丝们。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`大家！这里是飞鹰子哦！`);
+    await era.printAndWait(`排练过无数次的本能反应，下意识说出口了。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`只能继续下去了！`, true);
+    await chara_talk.say_and_wait(`感谢大家一直支持着飞鹰子！`);
+    await chara_talk.say_and_wait(`那么，大家一起来！`);
+    await chara_talk.say_and_wait(`如果飞鹰子逃跑了~？`);
+    await era.printAndWait(`粉丝们「就只能追上去了！」`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`要追到地平线的尽头吗~？`);
+    await era.printAndWait(`粉丝们「那里就是飞鹰子的大舞台！」`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(
+      `没有路就让飞鹰子来找! 发现目标就快快去抓到!`,
+    );
+    await era.printAndWait(`粉丝们「——去抓住大大的爱吧！」`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`最强的马娘偶像，醒目飞鹰♪今天也送到了呢⭐`);
+    await era.printAndWait(`粉丝们「——哦哦哦哦哦！」`, {
+      color: chara_talk.color,
+    });
+    await era.printAndWait(`粉丝们「飞鹰子！飞鹰子！飞鹰子！」`, {
+      color: chara_talk.color,
+    });
+    await era.printAndWait(
+      `让身体随着肌肉记忆自己动了起来，台下的粉丝们挥舞着荧光棒在向醒目飞鹰喝彩。`,
+      {
+        color: chara_talk.color,
+      },
+    );
+    await era.printAndWait(
+      `一切的悲伤都被醒目飞鹰的笑容所感染，一切的痛苦都得到了治愈。`,
+      {
+        color: chara_talk.color,
+      },
+    );
+    await era.printAndWait(`然后————。`, {
+      color: chara_talk.color,
+    });
+    era.drawLine();
+    era.printButton(`飞鹰子！飞鹰子！马上就要上课了！`, 1);
+    await era.input();
+    await era.printAndWait(`似乎一觉睡到早上了。`, {
+      color: chara_talk.color,
+    });
+    await chara_talk.say_and_wait(`......`);
+    await chara_talk.say_and_wait(`......唔，这里是？`);
+    await chara_talk.say_and_wait(`训练员先生？`);
+    await era.printAndWait(`从床上苏醒的醒目飞鹰似乎觉得非常的轻松。`);
+    era.printButton(`怎么了吗？`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(`......飞鹰子做了很幸福的梦哦⭐`);
+    await era.printAndWait(`飞鹰子露出了最灿烂的笑容。`);
+    wait_flag =
+      get_attr_and_print_in_event(46, [20, 20, 20, 20, 20], 60) || wait_flag;
   } else if (edu_weeks === 24) {
     await print_event_name(`油桐花`, chara_talk);
     await era.printAndWait(`7月初的某一天。`);
@@ -90,6 +308,8 @@ module.exports = async function (event_object) {
     await era.printAndWait(`像是逃跑一般的离开了训练室。`);
     await me.say_and_wait(`接下来也要认真准备比赛的事情了。`);
     await era.printAndWait(`将飞鹰子的草稿收进文件夹后，你也离开了训练室。`);
+    wait_flag =
+      get_attr_and_print_in_event(46, [0, 0, 10, 0, 0], 0) || wait_flag;
   } else if (edu_weeks === 47 + 1) {
     await print_event_name('新年的感觉！', chara_talk);
     await era.printAndWait(`时间流逝，（玩家名）与醒目飞鹰进入了新的一年。`);
@@ -300,7 +520,7 @@ module.exports = async function (event_object) {
     await era.printAndWait(`你们就这样沉默的回到了特雷森。`);
   } else if (edu_weeks === 47 + 29) {
     if (era.get('flag:当前位置') === location_enum.beach) {
-      if (era.get('cflag:46:位置') !== era.get('cflag:0:位置')) {
+      if (era.get('cflag:46:位置') === era.get('cflag:0:位置')) {
         add_event(event_hooks.week_start, event_object);
       }
       return;
@@ -737,6 +957,363 @@ module.exports = async function (event_object) {
     await me.say_and_wait(`那么，现在开始准备训练吧！`);
     await chara_talk.say_and_wait(`嗯！飞鹰子会将最努力的一面展示给大家看的！`);
     await era.printAndWait(`你与飞鹰子之间第三年的夏季合宿开始了。`);
+  } else if (edu_weeks === 95 + 48) {
+    await print_event_name(`圣诞节♪`, chara_talk);
+    await era.printAndWait(`（玩家名）与醒目飞鹰度过的第三个圣诞。`);
+    await chara_talk.say_and_wait(`谢谢大家！`);
+    await era.printAndWait(`在圣诞当天依然举办着演唱会感谢着作为粉丝的大家。`);
+    await era.printAndWait(`粉丝们「飞鹰子！飞鹰子！」`);
+    await chara_talk.say_and_wait(
+      `为了感谢大家一直以来支持着飞鹰子，飞鹰子将自己的心意装在里面了哦！`,
+    );
+    await era.printAndWait(`粉丝A「非常感谢！」`);
+    await era.printAndWait(`粉丝B「今后也会一直支持着你的！」`);
+    await era.printAndWait(`粉丝C「每场比赛我都会去看的！」`);
+    await era.printAndWait(
+      `等到礼物分光之后，还有一些粉丝们因为拿不到礼物而灰心丧气。`,
+    );
+    await chara_talk.say_and_wait(
+      `参加飞鹰子感谢祭的粉丝们，接下来就用飞鹰子的笑容来温暖大家吧！`,
+    );
+    await era.printAndWait(`剩余的粉丝们收到了握手与一份笑容的礼物。`);
+    await era.printAndWait(
+      `粉丝D「虽然来晚了，没得到礼物，不过之后我也会一直支持飞鹰子的！」`,
+    );
+    await era.printAndWait(
+      `等到粉丝们纷纷散去之后，现场只剩下了（玩家名）和飞鹰子两人。`,
+    );
+    await chara_talk.say_and_wait(`终于结束了！`);
+    era.printButton(`收到礼物的粉丝们一定会很开心的`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(`嗯！`);
+    await chara_talk.say_and_wait(
+      `从一开始一个粉丝也没有一直到成为闪耀的偶像，没有训练员先生的帮助，飞鹰子是不可能做到这一步的！`,
+    );
+    await era.printAndWait(`低头向你鞠躬的飞鹰子让你有点意外。`);
+    era.printButton(
+      `不，再怎么说也是飞鹰子的功劳，我只是做了分内的事情罢了`,
+      1,
+    );
+    await era.input();
+    await chara_talk.say_and_wait(
+      `怎么会！如果没有训练员先生的话，飞鹰子连出场的机会都不存在！`,
+    );
+    await chara_talk.say_and_wait(`而且，我对训练员先生......啊，抱歉。`);
+    await chara_talk.say_and_wait(`接下来一起去哪里逛逛吧？`);
+    await chara_talk.say_and_wait(`外宿许可也已经申请了哦！`);
+    await era.printAndWait(`轻轻牵起你的手的醒目飞鹰拉着你前进。`);
+    await me.say_and_wait(`这边的摆放的道具呢？`);
+    await chara_talk.say_and_wait(`没关系的！`);
+    await era.printAndWait(
+      `从充满暖气的房间里走出来后，立刻感受到了寒冷的气息。`,
+    );
+    await chara_talk.say_and_wait(`外面比想象中还要冷呢。`);
+    await era.printAndWait(
+      `尽管戴上了保暖的手套，还是有冷气从摩擦的细缝之中溜了进来。`,
+    );
+    await me.say_and_wait(`一起去萨莉亚吃一顿大餐吧？`);
+    await era.printAndWait(
+      `经济实惠的萨莉亚对饥肠辘辘的两人来说具有非常大的吸引力。`,
+    );
+    await chara_talk.say_and_wait(
+      `醒目飞鹰也这么想的呢，而且和训练员先生一起吃饭的话，兴致突然就高涨起来了⭐`,
+    );
+    await me.say_and_wait(`那么我们加快脚步吧！`);
+    era.drawLine();
+    await era.printAndWait([
+      chara_talk.get_colored_name(),
+      '/',
+      me.get_colored_name(),
+      '「',
+      { content: '干', color: chara_talk.color },
+      '杯！」',
+    ]);
+    await era.printAndWait(
+      `在暖色调的灯光下，餐厅嘈杂的人声伴随着叮叮铛铛的道具碰撞声形成了独特的声音。`,
+    );
+    await chara_talk.say_and_wait(`萨莉亚的食物比想象中还要美味呢`);
+    await me.say_and_wait(`是因为节日的缘故吧？这里的人都洋溢着快乐的气息。`);
+    await chara_talk.say_and_wait(
+      `也有这一部分的缘故，不过更多的还是像普通马娘一样享受着节日的气息。`,
+    );
+    await me.say_and_wait(`飞鹰子对偶像感到疲惫了吗？`);
+    await chara_talk.say_and_wait(`不会哦？不如说飞鹰子很享受呢！`);
+    await era.printAndWait(`睁大了眼睛的飞鹰子露出了疑惑的神情。`);
+    await me.say_and_wait(`接下来的路飞鹰子也要努力才行。`);
+    await chara_talk.say_and_wait(`梦之杯吗？`);
+    await me.say_and_wait(
+      `除了比赛之外，还要注意自己的日程表不要过度劳累才行！`,
+    );
+    await era.printAndWait(`不知不觉恢复了平时说教的状态。`);
+    await chara_talk.say_and_wait(`咕~这种气氛下训练员先生真是木头呢。`);
+    await era.printAndWait(
+      `咕噜咕噜搅拌着还剩下一半果汁发出了不满声音的飞鹰子看着你。`,
+    );
+    await chara_talk.say_and_wait(
+      `不过，也许就是这样的训练员先生，醒目飞鹰才最喜欢了呢！`,
+    );
+    await era.printAndWait(`突然之间笑出来的飞鹰子看起来额外可爱。`);
+    await chara_talk.say_and_wait(`嗯——可以靠过来一点吗？`);
+    await era.printAndWait(`说着将自己的身体靠近了（玩家名）坐着的位子。`);
+    await me.say_and_wait(`......`);
+    await chara_talk.say_and_wait(`那么！一、二、三！`);
+    await era.printAndWait(`在手机上拍下了接吻瞬间的醒目飞鹰。`);
+    await era.printAndWait(`作为偶像来说绝对NG的吧？`);
+    await chara_talk.say_and_wait(
+      `作为偶像的飞鹰子必须把平等的爱给每一位粉丝，不过现在的我是醒目飞鹰！是随处可见的普通马娘哦！`,
+    );
+  } else if (edu_weeks === 143 + 1 && new FaEventMarks().sweet_dream === 1) {
+    event_marks.sweet_dream++;
+    await print_event_name(`飞鹰子大冒险`, chara_talk);
+    await chara_talk.say_and_wait(`唔，这里是哪里？`);
+    await era.printAndWait(
+      `粉色的世界，童话风格的城堡，脚下的土地竟然是用饼干做成的？！`,
+    );
+    await chara_talk.say_and_wait(`为，为什么还穿着决胜服啊？`);
+    await era.printAndWait(
+      `可爱风格的决胜服，以及挂在腰间的麦克风......似乎准备齐全的样子？！`,
+    );
+    await chara_talk.say_and_wait(`说起来的话之前也遇到过这种情况。`);
+    await chara_talk.say_and_wait(`这样的话想办法让自己醒来就可以了！`);
+    await chara_talk.say_and_wait(`飞鹰子头槌！`);
+    await era.printAndWait(`bang！！！`);
+    await chara_talk.say_and_wait(`呜——头好痛啊！`);
+    await era.printAndWait(`抱着头一屁股坐在了地上，努力克制着眩晕感。`);
+    await chara_talk.say_and_wait(`这个梦也太真实了吧？`);
+    await era.printAndWait(
+      `收拾好情绪之后，醒目飞鹰将目光看向了远处高耸的城堡。`,
+    );
+    await chara_talk.say_and_wait(`接下来的话，朝着这个方向努力就可以了吧？`);
+    await chara_talk.say_and_wait(`那么，飞鹰子全速前进！！`);
+    await era.printAndWait(
+      `朝着目标的方向全速前进的醒目飞鹰圈起了一大片的饼干碎屑。`,
+    );
+    era.drawLine();
+    era.printButton(`这是哪里？`, 1);
+    await era.input();
+    await era.printAndWait(`（玩家名）醒来的时候发现自己处在一处城堡之中。`);
+    await me.say_and_wait(`卧槽这是哪里？`);
+    await era.printAndWait(`看向了周围，似乎倒在一条走廊之中。`);
+    await me.say_and_wait(`......我一定在做梦。`);
+    await era.printAndWait(`轻轻拍了自己一下，似乎没有醒过来的迹象。`);
+    await me.say_and_wait(`......总之先找个窗户看一下吧。`);
+    await era.printAndWait(
+      `一边欣赏着由糖果和亮闪闪的宝石组成的走廊一边打开了走廊尽头的大门。`,
+    );
+    await era.printAndWait(`拧开门把手之后，来到了一间巧克力组成的房间。`);
+    await era.printAndWait(
+      `将巧克力棒制成的窗户打开之后，窗外的景色是你从未见过的童话风格。`,
+    );
+    await era.printAndWait(`由糖果与饼干组成的房子、街道以及脚下所处的城堡。`);
+    await era.printAndWait(`更远处似乎有什么骚动的样子。`);
+    await me.say_and_wait(`啊，我知道了，只要从楼上跳下去梦就醒了。`);
+    await era.printAndWait(
+      `半只脚踩在了虚空之中的（玩家名），感受到了狂风的吹拂。`,
+    );
+    await me.say_and_wait(`......真的不会死吗？`);
+    await era.printAndWait(`心虚的收回了脚。`);
+    await me.say_and_wait(`还是找找其他办法吧？`);
+    await era.printAndWait(`暂且从房间退出，回到了走廊之中。`);
+    era.printButton(`找找其他的出路会比较好吧？`, 1);
+    await era.input();
+    era.printButton(`也许飞鹰子会很喜欢这里的样子？`, 1);
+    await era.input();
+    await era.printAndWait(`不知为何的确信这一点？`);
+    await me.say_and_wait(`不过为什么是我做了这个梦呢。`);
+    await me.say_and_wait(`如果是飞鹰子的话，应该......好痛！`);
+    await era.printAndWait(
+      `一边思考着离开的方法没有注意前方的（玩家名）狠狠撞到了什么东西上面。`,
+    );
+    await era.printAndWait(`巧克力士兵「什么人！」`);
+    await era.printAndWait(
+      `穿着亮闪闪宝石盔甲的巧克力士兵将手中的长矛对准了你。`,
+    );
+    await me.say_and_wait(`抱歉，我也不知道。`);
+    await era.printAndWait(
+      `巧克力士兵「既然说不出自己的身份，那就是敌人！敌袭！」`,
+    );
+    await era.printAndWait(
+      `只有（玩家名）一半大小的巧克力一边说着一边将手中的巧克力长矛对准了（玩家名）。`,
+    );
+    era.printButton(`区区一个巧克力能干什么，看我把你给吃了！`, 1);
+    await era.input();
+    await era.printAndWait(
+      `怀着轻敌想法的（玩家名）傲慢的做好了战斗准备（？），然后被摔了一个四脚朝天。`,
+    );
+    await me.say_and_wait(`区区巧克力还敢嚣张！`);
+    await era.printAndWait(
+      `收起轻敌想法的（玩家名）认真对待着比自己小了一半的巧克力士兵。`,
+    );
+    await me.say_and_wait(`看招！`);
+    await era.printAndWait(`趁其不备一把抓住了巧克力士兵的长矛。`);
+    await me.say_and_wait(`怎么样，你还有什么办法！`);
+    await era.printAndWait(`用力将长矛掰做两半然后从开着的窗户扔了出去。`);
+    await era.printAndWait(`巧克力士兵「敌袭！敌袭！」`);
+    await era.printAndWait(`远处似乎有更多巧克力士兵组成的小队正在赶来。`);
+    await me.say_and_wait(`趁它们还没发现我的位置还是赶快逃跑吧！`);
+    await era.printAndWait(
+      `发现危机迫近的（玩家名）用蛮力撞飞了眼前的巧克力士兵。`,
+    );
+    await era.printAndWait(`巧克力士兵们「敌人就在那里！！！」`);
+    await era.printAndWait(`然后开始了漫无目的的逃亡。`);
+    era.drawLine();
+    await chara_talk.say_and_wait(`终于到了。`);
+    await era.printAndWait(
+      `望着高耸的内墙以及由巧克力士兵把守的城门，醒目飞鹰的决定是`,
+    );
+    await chara_talk.say_and_wait(
+      `不管是什么阻拦在飞鹰子前方，飞鹰子都会就这样一口气冲过去⭐`,
+    );
+    await era.printAndWait(
+      `巧克力士兵「没有女王的许可，谁也不可以，呜啊啊啊啊啊。」`,
+    );
+    await era.printAndWait(
+      `轻松冲烂巧克力组成的防线，向着城堡一路前进的醒目飞鹰的兴致更加高涨。`,
+    );
+    await chara_talk.say_and_wait(`城堡里会有什么在等着我呢？`, true);
+    era.drawLine();
+    await me.say_and_wait(`城堡里还会有什么在等着我呢？`, true);
+    await era.printAndWait(
+      `光是听着后面越来越嘈杂的声音，（玩家名）就失去了回头看的勇气。`,
+    );
+    await era.printAndWait(`直到来到了一间装饰得十分华丽的大门之前。`);
+    await era.printAndWait(`巧克力士兵「有刺客！有刺客！」`);
+    await era.printAndWait(`巧克力士兵「保护女王殿下！」`);
+    await me.say_and_wait(`没办法了。`, true);
+    await era.printAndWait(`用力推开沉重的大门，映在眼前的是。`);
+    era.printButton(`醒目飞鹰？`, 1);
+    await era.input();
+    await era.printAndWait(`穿着复杂考究的礼服，少女的眼睛看向了你。`);
+    await era.printAndWait(`醒目飞鹰（?）「你是谁？」`, {
+      color: chara_talk,
+    });
+    await me.say_and_wait(`不，她绝不可能是我认识的醒目飞鹰。`, true);
+    await era.printAndWait(
+      `那双飘忽不定的眼睛好奇的打量者（玩家名），之后便收回了目光。`,
+    );
+    era.printButton(`尊敬的女王殿下，我是作为训练员的（玩家名）。`, 1);
+    await era.input();
+    await era.printAndWait(
+      `索性破罐子破摔，就这样低下头向着熟悉的陌生人鞠躬。`,
+    );
+    await era.printAndWait(`巧克力士兵「女王大人没事吧！」`);
+    await era.printAndWait(`后面追来的士兵将你团团包围。`);
+    await era.printAndWait(`醒目飞鹰（?）「不，放开他。」`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(`巧克力士兵「可是......」`);
+    await era.printAndWait(`醒目飞鹰（?）「你想反抗我的命令吗！退下！」`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(`士兵们不情愿的将（玩家名）的包围圈撤开了。`);
+    await era.printAndWait(
+      `醒目飞鹰（?）「那么，这位训练员先生，请抬起你的头，我赋予你与我对话的权力。」`,
+      {
+        color: chara_talk,
+      },
+    );
+    await me.say_and_wait(`至少没有一见面就打起来。`, true);
+    await era.printAndWait(`得到女王许可的（玩家名）总算抬起了头。`);
+    await era.printAndWait(`看着与醒目飞鹰几乎相同的容貌，不禁有点错愕。`);
+    await me.say_and_wait(`与飞鹰子看起来真的很像`, true);
+    await era.printAndWait(
+      `醒目飞鹰（?）「我的名字是黑之女王。是这片黑巧克力王国的主人。」`,
+      {
+        color: chara_talk,
+      },
+    );
+    await era.printAndWait(`拿着黑之锡杖的女王向误入王国的访客点了点头。`);
+    await era.printAndWait(`黑女王「请问您为什么侵入我的宫殿？」`, {
+      color: chara_talk,
+    });
+    await me.say_and_wait(`不，没有这个意思`);
+    await me.say_and_wait(`我只是`);
+    await chara_talk.say_and_wait(`飞鹰子冲撞！`);
+    await era.printAndWait(`破墙而入的醒目飞鹰打断了你们之间的对话。`);
+    await chara_talk.say_and_wait(`（玩家名）没事吧！`);
+    await era.printAndWait(`紧紧抱着你的醒目飞鹰一脸担心的样子。`);
+    await era.printAndWait(`巧克力士兵「两个女王？怎么办？」`);
+    await era.printAndWait(`骚动起来的士兵们开始窃窃私语。`);
+    await era.printAndWait(`黑女王「肃静！」`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(
+      `在女王威严的喝止声中，巧克力们窃窃私语的声音慢慢停下来了。`,
+    );
+    await era.printAndWait(
+      `黑女王「与妾身长相相似的少女啊，该如何称呼是好？」`,
+      {
+        color: chara_talk,
+      },
+    );
+    await chara_talk.say_and_wait(`醒目飞鹰！请叫我飞鹰子⭐`);
+    await era.printAndWait(`露出了幸福笑容的醒目飞鹰回复着女王。`);
+    await era.printAndWait(`黑女王「......原来是这样吗。」`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(
+      `黑女王「那么，就让我来送你们回去吧。可爱的孩子们。」`,
+      {
+        color: chara_talk,
+      },
+    );
+    await era.printAndWait(
+      `随着锡杖顶端发出光芒，两位游客的身影慢慢开始消散。`,
+    );
+    await era.printAndWait(
+      `黑女王「如果我也能遇到（玩家名）的话，说不定也会很幸福。」`,
+      {
+        color: chara_talk,
+      },
+    );
+    await era.printAndWait(`黑女王「......失礼了，那么再见。」`, {
+      color: chara_talk,
+    });
+    era.drawLine();
+    await chara_talk.say_and_wait(`唔，这里是哪？`);
+    await era.printAndWait(`醒目飞鹰在熟悉的大床上醒了过来。`);
+    await era.printAndWait(
+      `面对着同样苏醒过来的（玩家名），醒目飞鹰露出了幸福的笑容。`,
+    );
+    await chara_talk.say_and_wait(`飞鹰子，现在也是训练员先生的女王殿下哦♪`);
+    await era.printAndWait(
+      `趁着（玩家名）意识尚未清醒之前，紧紧抱着（玩家名）的醒目飞鹰露出了安心的笑容。`,
+    );
+    await chara_talk.say_and_wait(`接下来的日子，也请多指教了♪`);
+    await era.printAndWait(`good end·kiss on my deity`);
+    era.drawLine({ content: 'THE END' });
+  } else if (edu_weeks === 143 + 1 && new FaEventMarks().idol_road === 1) {
+    event_marks.idol_road++;
+    await print_event_name(`依然闪耀的偶像`, chara_talk);
+    await era.printAndWait(
+      `在结束了三年的比赛之后，醒目飞鹰将目光瞄准了接下来的梦之杯。`,
+    );
+    await chara_talk.say_and_wait(`感谢大家一直支持着飞鹰子！`);
+    await era.printAndWait(`粉丝们「飞鹰子！飞鹰子！」`);
+    await chara_talk.say_and_wait(`接下来的梦之杯也要多多支持飞鹰子哦！`);
+    await era.printAndWait(
+      `因为飞鹰子的活跃表现，泥地赛道也慢慢进入了普通观众的关注列表。`,
+    );
+    await era.printAndWait(
+      `想必之后的话也会有更多的泥地马娘活跃在泥地赛道之中吧。`,
+    );
+    await chara_talk.say_and_wait(`训练员先生！`);
+    await chara_talk.say_and_wait(`接下来的话也请多多支持飞鹰子哦！`);
+    await era.printAndWait(`带着笑容的醒目飞鹰看上去一如既往的闪耀。`);
+    await era.printAndWait(
+      `接下来的日子里，你们也会像这三年一样，经历许多的挫折与闪耀的时刻吧。`,
+    );
+    await me.say_and_wait(`不过......`);
+    await era.printAndWait(
+      `可能的话，如果是可能的话，如果最后的偶像之路全部胜利，如果能与飞鹰子的关系更加亲密一点的话。`,
+    );
+    await me.say_and_wait(`现在这样就好了。`);
+    await me.say_and_wait(`我很幸福。`);
+    await era.printAndWait(
+      `看着在舞台之上闪耀着的飞鹰子，（玩家名）也开始挥舞起手中的应援棒了。`,
+    );
+    await era.printAndWait(`normal end·shine idol `);
+    era.drawLine({ content: 'THE END' });
   }
   wait_flag && (await era.waitAnyKey());
 };
