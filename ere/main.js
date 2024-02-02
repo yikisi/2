@@ -51,7 +51,7 @@ module.exports = async () => {
         content: [
           {
             content: 'Discord erauma 频道',
-            url: 'https://discord.gg/2Fx3ajDZpq',
+            url: 'https://discord.gg/jEYsxjzaYs',
           },
           { isBr: true },
           {
