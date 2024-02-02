@@ -86,7 +86,11 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
   const chara_talk = get_chara_talk(chara_id);
   era.print([chara_talk.get_colored_name(), ' 的训练顺利结束了！']);
   era.println();
-  if (chara_id && Math.random() < 0.2 * extra_flag.stamina_ratio) {
+  if (
+    chara_id &&
+    !era.get(`status:${chara_id}:摸鱼`) &&
+    Math.random() < 0.2 * extra_flag.stamina_ratio
+  ) {
     await era.waitAnyKey();
     await print_event_name('热血的追加训练！', chara_talk);
 

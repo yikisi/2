@@ -20,444 +20,436 @@ const chara_talk = new CharaTalk(24);
 
 const handlers = {};
 
-handlers[event_hooks.train_success] =
-  /**
-   * @param {HookArg} hook
-   * @param {{train:number,stamina_ratio:number}} extra_flag
-   */
-  async (hook, extra_flag) => {
-    era.print(
-      `${chara_talk.name} 的 ${attr_names[extra_flag.train]} 训练顺利成功了……`,
+/**
+ * @param {HookArg} hook
+ * @param {{train:number,stamina_ratio:number}} extra_flag
+ */
+handlers[event_hooks.train_success] = async (hook, extra_flag) => {
+  era.print(
+    `${chara_talk.name} 的 ${attr_names[extra_flag.train]} 训练顺利成功了……`,
+  );
+  const edu_weeks =
+    era.get('flag:当前回合数') - era.get('cflag:24:育成回合计时');
+  if (
+    !era.get('status:24:摸鱼') &&
+    Math.random() < 0.2 * extra_flag.stamina_ratio
+  ) {
+    era.println();
+    await era.printAndWait('事件：额外的自主训练', {
+      color: chara_talk.color,
+      fontSize: '24px',
+    });
+    era.println();
+    const chara_3 = new CharaTalk(3);
+    await chara_talk.say_and_wait(
+      '那个呀！训练也结束了～要不要和人家去个好地方？',
     );
-    const edu_weeks =
-      era.get('flag:当前回合数') - era.get('cflag:24:育成回合计时');
-    if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
-      era.println();
-      await era.printAndWait('事件：额外的自主训练', {
-        color: chara_talk.color,
-        fontSize: '24px',
-      });
-      era.println();
-      const chara_3 = new CharaTalk(3);
-      await chara_talk.say_and_wait(
-        '那个呀！训练也结束了～要不要和人家去个好地方？',
-      );
-      era.println();
-      era.printButton('「好地方是指哪里？」', 1);
-      await era.input();
-      await chara_talk.say_and_wait(
-        '跟你说跟你说！有一个景点，可以看见非常闪亮的夜景──',
-      );
-      await chara_3.say_and_wait('嘿哟，嘿哟……咦？是摩耶重炮～！');
-      await chara_talk.say_and_wait(`啊，是帝王酱！嗨！`);
+    era.println();
+    era.printButton('「好地方是指哪里？」', 1);
+    await era.input();
+    await chara_talk.say_and_wait(
+      '跟你说跟你说！有一个景点，可以看见非常闪亮的夜景──',
+    );
+    await chara_3.say_and_wait('嘿哟，嘿哟……咦？是摩耶重炮～！');
+    await chara_talk.say_and_wait(`啊，是帝王酱！嗨！`);
+    await chara_3.say_and_wait(
+      '我正好在找你！我想跟你说，我今天可能会晚点回去！',
+    );
+    await chara_talk.say_and_wait(
+      '呀☆居然会晚归，看来有进展～！帝王酱是大人了～！',
+    );
+    await chara_3.say_and_wait('嗯！刚才看了会长的比赛后，我就很想去跑一下！');
+    await chara_3.say_and_wait('以Maya的方式来说……可能是很闪闪发亮？');
+    await chara_talk.say_and_wait('哇……！我懂我懂！会长奔驰的样子真的很帅气！');
+    await chara_talk.say_and_wait('嗯～～我好像开始兴奋起来了……');
+    await chara_talk.say_and_wait(
+      '训练员，还是别看夜景了！人家现在想要闪闪发亮！',
+    );
+    era.printButton('「我陪你！」', 1);
+    era.printButton('「休息也是很重要的」', 2);
+    hook.arg = (await era.input()) === 1;
+    if (hook.arg) {
+      await chara_talk.say_and_wait(`嘿嘿，不愧是训练员！`);
       await chara_3.say_and_wait(
-        '我正好在找你！我想跟你说，我今天可能会晚点回去！',
+        '那我们一起并跑练习吧！这样我也比较能激起斗志！',
       );
-      await chara_talk.say_and_wait(
-        '呀☆居然会晚归，看来有进展～！帝王酱是大人了～！',
-      );
-      await chara_3.say_and_wait(
-        '嗯！刚才看了会长的比赛后，我就很想去跑一下！',
-      );
-      await chara_3.say_and_wait('以Maya的方式来说……可能是很闪闪发亮？');
-      await chara_talk.say_and_wait(
-        '哇……！我懂我懂！会长奔驰的样子真的很帅气！',
-      );
-      await chara_talk.say_and_wait('嗯～～我好像开始兴奋起来了……');
-      await chara_talk.say_and_wait(
-        '训练员，还是别看夜景了！人家现在想要闪闪发亮！',
-      );
-      era.printButton('「我陪你！」', 1);
-      era.printButton('「休息也是很重要的」', 2);
-      hook.arg = (await era.input()) === 1;
-      if (hook.arg) {
-        await chara_talk.say_and_wait(`嘿嘿，不愧是训练员！`);
-        await chara_3.say_and_wait(
-          '那我们一起并跑练习吧！这样我也比较能激起斗志！',
-        );
-        await chara_talk.say_and_wait(`没问题！我要起飞了☆`);
-        await era.printAndWait('摩耶重炮拿出全力进行了额外训练。');
-        era.println();
-      } else {
-        await chara_talk.say_and_wait(
-          '嗯！说得也是！跟肌肤一样，要休息才会变得充满光泽对吧！',
-        );
-        await chara_talk.say_and_wait(
-          '我知道了！就用闪闪发亮的夜景，来为人家的耀眼充电吧♪',
-        );
-        await chara_3.say_and_wait('那我先走了！我会在门禁前回来的～～！');
-        await era.printAndWait(
-          `于是你和摩耶重炮一起欣赏夜景，让${chara_talk.sex}的身体好好地休息了`,
-        );
-        era.println();
-      }
+      await chara_talk.say_and_wait(`没问题！我要起飞了☆`);
+      await era.printAndWait('摩耶重炮拿出全力进行了额外训练。');
       era.println();
-    } else if (edu_weeks === 16) {
-      await era.printAndWait('事件：我想闪闪发亮！', {
-        color: chara_talk.color,
-        fontSize: '24px',
-      });
+    } else {
+      await chara_talk.say_and_wait(
+        '嗯！说得也是！跟肌肤一样，要休息才会变得充满光泽对吧！',
+      );
+      await chara_talk.say_and_wait(
+        '我知道了！就用闪闪发亮的夜景，来为人家的耀眼充电吧♪',
+      );
+      await chara_3.say_and_wait('那我先走了！我会在门禁前回来的～～！');
+      await era.printAndWait(
+        `于是你和摩耶重炮一起欣赏夜景，让${chara_talk.sex}的身体好好地休息了`,
+      );
       era.println();
-      await era.printAndWait(
-        '这是在为了出道战，而持续进行训练时的某日所发生的事──',
-      );
-      await chara_talk.say_and_wait('训练员☆我跑完沙土赛道三圈咯！');
-      era.printButton('「辛苦了！」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('嘿嘿～♪人家还不累哦～！');
-      await chara_talk.say_and_wait('欸欸，接下来要训练什么？');
-      await chara_talk.say_and_wait(
-        '按照之前的训练项目来看，应该是比较轻松的训练？',
-      );
-      await era.printAndWait(
-        `──就跟${chara_talk.sex}说的一样，这次是以柔软沙土为主去安排训练内容。`,
-      );
-      await era.printAndWait(
-        `摩耶重炮的身体还在成长当中。${CharaTalk.me.name}原本想说不要让${chara_talk.sex}的脚有太多负担……`,
-      );
-      era.printButton('「你想再稍微努力一下？」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('不对！只有“稍微”是不够的！');
-      await chara_talk.say_and_wait('因为我要参赛的可是闪耀系列赛哦！');
-      await chara_talk.say_and_wait(
-        '令人兴奋，又充满我想知道的事情，场上的大家也都很耀眼……',
-      );
-      await chara_talk.say_and_wait(
-        '假如能在闪耀系列赛出赛，我想先让自己跑得更快！',
-      );
-      await chara_talk.say_and_wait('嘿嘿，而、且、啊～');
-      await chara_talk.say_and_wait('训练员应该也认为人家还能“做到更多”对吧？');
-      era.printButton('「那当然了！」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('耶，我答对了～☆');
-      await era.printAndWait(
-        `于是，${CharaTalk.me.name}在不改变基本方针的情况下，让${chara_talk.sex}尝试了各种不同的训练──`,
-      );
-      await chara_talk.say_and_wait('……研究比赛。研究……吗……！');
-      await chara_talk.say_and_wait(
-        '啊哈哈♪有种像是朝着大人的阶梯，冲刺迈进的感觉☆',
-      );
-      era.printButton('「这也是种训练」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('是是是，我知道☆而且，这方面人家很拿手！');
-      await chara_talk.say_and_wait('……嗯？');
-      await chara_talk.say_and_wait('咦，视频已经播完了吗？只过了半小时吧？');
-      await chara_talk.say_and_wait(
-        '啊，我懂了！是用这种方式，要吊人家胃口的作战吧～',
-      );
-      await chara_talk.say_and_wait('这、就、是……大人会用的欲擒故纵☆……呀☆');
-      await era.printAndWait('话虽如此──');
-      await chara_talk.say_and_wait('啊，训练员。这个视频不用再看了！');
-      await chara_talk.say_and_wait(
-        '进入第三弯道后，一号的女生会“咻──！”地提早超前吧？',
-      );
-      era.printButton('「是吗？」', 1);
-      await era.input();
-      await chara_talk.say_and_wait(
-        '嗯，因为我就是知道。你可以看我讲的对不对。',
-      );
-      await era.printAndWait(
-        `被${chara_talk.sex}这么催着，${CharaTalk.me.name}把视频快转进行确认……`,
-      );
-      await chara_talk.say_and_wait('你看～☆跟我讲的一样～！');
-      await chara_talk.say_and_wait('嘿嘿，那来看下一个！下一个！！');
-      await era.printAndWait(
-        `${chara_talk.sex}就照着这股气势，把${CharaTalk.me.name}准备的所有比赛视频都看完了……`,
-      );
-      await chara_talk.say_and_wait('咦？训练员。难道已经没了吗？');
-      era.printButton('「……来进行别的训练吧」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('啊！这样啊～！要继续训练我也很欢迎哦☆');
-      await era.printAndWait('──于是为了锻炼心肺功能，接着来到了泳池。');
-      await chara_talk.say_and_wait(
-        '也就是说，要测我在不换气的情况下，可以游多少距离，对吧！',
-      );
-      await chara_talk.say_and_wait(
-        '顺便问一下！大概要游多远，你才会称赞人家表现得超棒？',
-      );
-      await era.printAndWait(
-        '……平常有练习的话，大概能游75米。那么第一次……100米应该差不多。',
-      );
-      await era.printAndWait('不过曾经有赛马娘游了300米。既然都来这里测试了──');
-      era.printButton('「就试着以300米为目标吧」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('收到！那我开始游了！');
-      await chara_talk.say_and_wait('唉……');
-      await chara_talk.say_and_wait('可恶～为什么～！？只游一半就不行了～！');
-      await era.printAndWait(
-        '不过一半──150米也是很厉害的纪录了。如果之后能一点一滴持续练习，迟早能游300米……',
-      );
-      await chara_talk.say_and_wait('唔～再游一次！');
-      await chara_talk.say_and_wait('这次一定要游300米☆');
-      era.printButton('「这还只是第二次耶！？」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('嗯，已经是第二次了。');
-      await chara_talk.say_and_wait(
-        '而且，该说是出力的诀窍吗？我游到一半的时候也已经懂了☆',
-      );
-      await chara_talk.say_and_wait('嘿嘿♪赶快来试试看！');
-      await chara_talk.say_and_wait('啊！！');
-      await chara_talk.say_and_wait(
-        '训练员！要是我办到的话，要再给我新的课题！知道吗♪',
-      );
-      await chara_talk.say_and_wait('嘻嘻☆你收到了吗？');
-      await era.printAndWait(
-        `……于是，为了满足${chara_talk.sex}的要求，${CharaTalk.me.name}死命地绞尽脑汁。`,
-      );
-    } else if (edu_weeks === 28) {
-      await era.printAndWait('事件：来约会吧', {
-        color: chara_talk.color,
-        fontSize: '24px',
-      });
-      era.println();
-      await era.printAndWait(
-        '出道战结束后过了几个月。正当大家一如往常训练的时候──',
-      );
-      await chara_talk.say_and_wait('……');
-      await chara_talk.say_and_wait('……啊。');
-      era.printButton('「怎么了？」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('哇呀！？训练员！？');
-      await chara_talk.say_and_wait('没事，没什么！是没什么事啦……');
-      await chara_talk.say_and_wait('……唉。');
-      await era.printAndWait('──嘴巴上说没事，却大大地叹了一口气。');
-      era.printButton('「去散散心吧」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('散心……是要约会吗？');
-      era.printButton('「是啊」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('真的吗！？');
-      await chara_talk.say_and_wait(
-        '太棒了！那给我一分钟做准备！要和训练员去约会，约会☆',
-      );
-      await chara_talk.say_and_wait(
-        '嘿嘿，训练员会让我体验到怎样的大人约会呢～♪',
-      );
-      await era.printAndWait(
-        `……就这样决定要出门散心了。说到${chara_talk.sex}会开心的地方──`,
-      );
-      await chara_talk.say_and_wait(
-        '约会最后还是要去人家最能闪闪发亮的地方才行！',
-      );
-      await era.printAndWait('──果然只有那里吧。');
-      await era.printAndWait('（哇啊啊啊啊啊啊────！！）');
-      await chara_talk.say_and_wait('这里是……');
-      era.printButton('「是你最能闪闪发亮的地方哦」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('…………');
-      await chara_talk.say_and_wait('……训练员现在还这么认为吗？');
-      await chara_talk.say_and_wait(
-        '“其实跟我想的好像不太一样”假如人家现在说出这种话……你会生气吗？',
-      );
-      era.printButton('「怎么突然这么说？」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('嗯…………');
-      await chara_talk.say_and_wait(
-        '……人家啊，一直以为只要上场比赛，就一定能感受到兴奋的心情。',
-      );
-      await chara_talk.say_and_wait(
-        `在场上比赛的${chara_talk.get_child_sex_title()}，每一个都很耀眼吧？`,
-      );
-      await chara_talk.say_and_wait(
-        '所以不管是出道战还是其他比赛，我一直都非常期待。',
-      );
-      await chara_talk.say_and_wait(
-        '但是，实际上场比赛后才发现，总觉得……不太一样。',
-      );
-      await chara_talk.say_and_wait('……啊，原来就这样啊。好像有点没意思。');
-      await chara_talk.say_and_wait('我其实知道不能够讲这种话。可是……');
-      await chara_talk.say_and_wait('…………我就是会觉得好无聊。');
-      era.printButton('「这样啊」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('…………嗯。');
-      await chara_talk.say_and_wait('………………');
-      era.printButton('「还真是听到一件好事了！」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('咦……？');
-      await era.printAndWait(
-        `因为在闪耀系列赛上，${chara_talk.sex}体验到的只是出道战等级的水准。`,
-      );
-      await era.printAndWait(
-        '单纯只是这点程度无法满足摩耶重炮而已。既然这样，只要朝更高的目标迈进就好了。',
-      );
-      await era.printAndWait(
-        `将来会有更多和强者们竞争的机会，也还有${chara_talk.sex}所不知的比赛。`,
-      );
-      await era.printAndWait(
-        `所以如果现阶段造成${chara_talk.sex}烦恼的来源，是“感到无聊”这件事的话──`,
-      );
-      era.printButton('「就让之后变得更有趣吧！」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('……有趣？');
-      await chara_talk.say_and_wait('真的……办得到吗？因为我已经──');
-      era.printButton('「为了让你能闪闪发亮，我会加油哦」', 1);
-      await era.input();
-      await chara_talk.say_and_wait('……训练员。');
-      await era.printAndWait(
-        `摩耶重炮一定有属于${chara_talk.sex}自己，独一无二的闪耀方式。`,
-      );
-      await era.printAndWait(
-        '既然好不容易担任了像摩耶重炮这样如此有才能的赛马娘的签约训练员──',
-      );
-      await era.printAndWait(
-        `──为${chara_talk.sex}准备能发挥才能的舞台，找出专属于${chara_talk.sex}的成长方法，这些正是训练员的职责吧。`,
-      );
-    } else if (edu_weeks === 95 + 4) {
-      await era.printAndWait('事件：青春的闪耀', {
-        color: chara_talk.color,
-        fontSize: '24px',
-      });
-      era.println();
-      const chara3_talk = new CharaTalk(3);
-      await era.printAndWait('古马级的春天到来了。最近摩耶重炮的训练是──');
-      await chara_talk.say_and_wait('训练员！跑三圈赛道太没意思了！');
-      await chara_talk.say_and_wait('人家现在要跑三十圈才行！');
-      era.printButton('「这对脚的负担太大了哦」', 1);
-      await era.input();
-      await chara_talk.say_and_wait(
-        '咦──！？那么那么，赶快想接下来要做什么训练。',
-      );
-      await chara_talk.say_and_wait('人家可是知道，训练员一定会让我很开心！');
-      await chara_talk.say_and_wait(
-        '啊。昨天给我的课题列表，我已经全部种类都做得到了！所以最好是上面没有的☆',
-      );
-      await era.printAndWait('……就这样，我每天都被要求提供新的训练。');
-      await era.printAndWait(
-        '不过，摩耶重炮已经订下了目标，想要努力去达成。帮助她实现目标是训练员的职责──',
-      );
-      await chara_talk.say_and_wait('早安！训练员！今天也加油吧！');
-      await chara_talk.say_and_wait('咦，训练员。你的脸色好像很苍白……');
-      await chara_talk.say_and_wait('啊，训练员！？');
-      await era.printAndWait('（……咚）');
-      await era.printAndWait('菱亚马逊「……哎呀，好险啊。」');
-      await era.printAndWait('菱亚马逊「你差点就要倒下去了。」');
-      era.printButton('「是你扶住我的吗……？」', 1);
-      await era.input();
-      await era.printAndWait(
-        '菱亚马逊「哈哈，不用向我道谢。没什么大不了的。」',
-      );
-      await era.printAndWait(
-        '菱亚马逊「不过，你黑眼圈好重……看起来没什么睡啊。」',
-      );
-      await era.printAndWait('菱亚马逊「我说啊，摩耶重炮！」');
-      await chara_talk.say_and_wait('啊、啊哇哇……');
-      await era.printAndWait('菱亚马逊「摩耶重炮！别在那边害怕，快回话！」');
-      await chara_talk.say_and_wait('是、是的！！');
-      await era.printAndWait(
-        '菱亚马逊「……嗯，行了。那么，摩耶重炮的训练员，你就在这休息吧。」',
-      );
-      await era.printAndWait('菱亚马逊「这家伙就由我来照顾。」');
-      era.printButton('「咦！？」', 1);
-      await era.input();
-      await era.printAndWait(
-        '菱亚马逊「哈哈，别这么慌张啦。我又不会把她吃了。」',
-      );
-      await era.printAndWait(
-        '菱亚马逊「之前在“有马纪念”上的开战宣言……老实说，让我印象深刻。」',
-      );
-      await era.printAndWait('菱亚马逊「所以也让我帮你们一把吧。」');
-      await era.printAndWait(
-        '菱亚马逊「我也不想让人独占这么前途无量的孩子。」',
-      );
-      await chara_talk.say_and_wait('咦──！？菱亚……！？');
-      await chara_talk.say_and_wait(
-        '啊哇哇哇……！？对、对不起。我心中只有训练员……！',
-      );
-      await era.printAndWait(
-        '菱亚马逊「……我说，你可以冷静一点吗？这只是一个提案罢了。重点是你“想不想变强”。」',
-      );
-      await era.printAndWait(
-        '菱亚马逊「如何，摩耶重炮的训练员。要把她暂时交给我吗？」',
-      );
-      await era.printAndWait(
-        '──“女杰”菱亚马逊。她在去年和今年的“有马纪念”上，都可算是成田白仁的劲敌。',
-      );
-      await era.printAndWait(
-        '如果为摩耶重炮着想的话，我不应该坚持自己的策略，也应该要借助她的意见……！',
-      );
-      era.printButton('「那就拜托你了！」', 1);
-      await era.input();
-      await era.printAndWait(
-        '菱亚马逊「好，这才像话嘛！菱亚流的训练要开始了！」',
-      );
-      await era.printAndWait(
-        '菱亚马逊「所以说，摩耶重炮。你要不停跑来跑去，不要让我抓到尾巴。」',
-      );
-      await chara_talk.say_and_wait(
-        '咦，这不就是“抓尾巴游戏”？人家在幼稚园的时候是有玩过……',
-      );
-      await chara_talk.say_and_wait('这真的算是训练吗？……感觉只是在玩吧？');
-      await era.printAndWait('菱亚马逊「哦，还真从容啊。那就开始吧。」');
-      await chara_talk.say_and_wait('唔、唔唔……');
-      await era.printAndWait('菱亚马逊「喂喂，怎么啦？已经被抓超过十次咯！」');
-      await chara_talk.say_and_wait('还不是菱亚太奸诈了！突然增加鬼的数量！');
-      await chara3_talk.say_and_wait('呵呵！接着换我抓摩耶重炮哦！');
-      await era.printAndWait('优秀素质「哦哦，好像玩得很开心……」');
-      await era.printAndWait(
-        '优秀素质「我说，菱亚啊。像现在这样子帮忙就行了吗？」',
-      );
-      await era.printAndWait(
-        '菱亚马逊「嗯，这样很好！谢啦！……那么，摩耶重炮。」',
-      );
-      await era.printAndWait('菱亚马逊「简单来说，你的弱点就是察觉力不足。」');
-      await chara_talk.say_and_wait('……察觉力？');
-      await chara_talk.say_and_wait(
-        '察觉不就是指知道事情吗？那我已经知道了哦，不管是规则或逃跑方式。',
-      );
-      await chara_talk.say_and_wait(
-        '但是，菱亚立刻就改变鬼的数量和规则！太卑鄙了──',
-      );
-      await era.printAndWait(
-        '菱亚马逊「真是的，就说了你的察觉力……不对，应该说你都不打算去察觉。」',
-      );
-      await chara_talk.say_and_wait('……咦？');
-      await era.printAndWait(
-        '菱亚马逊「就我的观察，你好像有很优秀的才能跟训练员。」',
-      );
-      await era.printAndWait(
-        '菱亚马逊「你应该是真的什么都办得到吧。所以你身边的大人也都为你付出很多。」',
-      );
-      await era.printAndWait('菱亚马逊「只是啊，你太过依赖他人了。」');
-      await era.printAndWait(
-        '菱亚马逊「现在也是，你一旦懂了……不对，是认为自己懂了之后……」',
-      );
-      await era.printAndWait(
-        '菱亚马逊「“就不打算理解自己不懂的事”……是你自己养成了这种习惯。」',
-      );
-      await era.printAndWait(
-        '菱亚马逊「我并不是在玩“抓尾巴游戏”。这是比赛的训练。」',
-      );
-      await era.printAndWait(
-        '菱亚马逊「再动点脑筋去想。在真正的赛场上，你会被好几个选手盯上。途中战略也会改变。」',
-      );
-      await era.printAndWait(
-        '菱亚马逊「到时候你该怎么办？应该会根据当下情况灵活的逃跑……我没说错吧？」',
-      );
-      await chara_talk.say_and_wait('……唔。');
-      await era.printAndWait('菱亚马逊「……我就顺便提一下，今天早上也是。」');
-      await era.printAndWait(
-        '菱亚马逊「你之前有注意到，你的训练员为了你逞强过头了吗？」',
-      );
-      await chara_talk.say_and_wait('……！');
-      await era.printAndWait(
-        '菱亚马逊「你难得有这么优秀的才能，就该把它发挥到极致。」',
-      );
-      await era.printAndWait(
-        '菱亚马逊「还是说你要当个会哭着说“我不跑了！”，让训练员一个头两个大的小孩子吗？」',
-      );
-      await chara_talk.say_and_wait('唔～～！人家才不会这样！！');
-      await chara_talk.say_and_wait('人家要成为成熟的女人！才不会哭！');
-      await chara_talk.say_and_wait('菱亚！再来一次！！这次我一定不会被抓到！');
-      await era.printAndWait('菱亚马逊「哈哈，不错。那就开始吧！！」');
-      await chara_talk.say_and_wait('哼──！再一次！我可是已经“懂了”呢！！');
-      await era.printAndWait(
-        '菱亚马逊「哦！很好，就是这种！要让身体记住，而不是脑袋！」',
-      );
-      await era.printAndWait(
-        '──在灿烂的夕阳余晖照耀下，一群少女流着汗，不断在赛道上奔跑。',
-      );
     }
-  };
+    era.println();
+  } else if (edu_weeks === 16) {
+    await era.printAndWait('事件：我想闪闪发亮！', {
+      color: chara_talk.color,
+      fontSize: '24px',
+    });
+    era.println();
+    await era.printAndWait(
+      '这是在为了出道战，而持续进行训练时的某日所发生的事──',
+    );
+    await chara_talk.say_and_wait('训练员☆我跑完沙土赛道三圈咯！');
+    era.printButton('「辛苦了！」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('嘿嘿～♪人家还不累哦～！');
+    await chara_talk.say_and_wait('欸欸，接下来要训练什么？');
+    await chara_talk.say_and_wait(
+      '按照之前的训练项目来看，应该是比较轻松的训练？',
+    );
+    await era.printAndWait(
+      `──就跟${chara_talk.sex}说的一样，这次是以柔软沙土为主去安排训练内容。`,
+    );
+    await era.printAndWait(
+      `摩耶重炮的身体还在成长当中。${CharaTalk.me.name}原本想说不要让${chara_talk.sex}的脚有太多负担……`,
+    );
+    era.printButton('「你想再稍微努力一下？」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('不对！只有“稍微”是不够的！');
+    await chara_talk.say_and_wait('因为我要参赛的可是闪耀系列赛哦！');
+    await chara_talk.say_and_wait(
+      '令人兴奋，又充满我想知道的事情，场上的大家也都很耀眼……',
+    );
+    await chara_talk.say_and_wait(
+      '假如能在闪耀系列赛出赛，我想先让自己跑得更快！',
+    );
+    await chara_talk.say_and_wait('嘿嘿，而、且、啊～');
+    await chara_talk.say_and_wait('训练员应该也认为人家还能“做到更多”对吧？');
+    era.printButton('「那当然了！」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('耶，我答对了～☆');
+    await era.printAndWait(
+      `于是，${CharaTalk.me.name}在不改变基本方针的情况下，让${chara_talk.sex}尝试了各种不同的训练──`,
+    );
+    await chara_talk.say_and_wait('……研究比赛。研究……吗……！');
+    await chara_talk.say_and_wait(
+      '啊哈哈♪有种像是朝着大人的阶梯，冲刺迈进的感觉☆',
+    );
+    era.printButton('「这也是种训练」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('是是是，我知道☆而且，这方面人家很拿手！');
+    await chara_talk.say_and_wait('……嗯？');
+    await chara_talk.say_and_wait('咦，视频已经播完了吗？只过了半小时吧？');
+    await chara_talk.say_and_wait(
+      '啊，我懂了！是用这种方式，要吊人家胃口的作战吧～',
+    );
+    await chara_talk.say_and_wait('这、就、是……大人会用的欲擒故纵☆……呀☆');
+    await era.printAndWait('话虽如此──');
+    await chara_talk.say_and_wait('啊，训练员。这个视频不用再看了！');
+    await chara_talk.say_and_wait(
+      '进入第三弯道后，一号的女生会“咻──！”地提早超前吧？',
+    );
+    era.printButton('「是吗？」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('嗯，因为我就是知道。你可以看我讲的对不对。');
+    await era.printAndWait(
+      `被${chara_talk.sex}这么催着，${CharaTalk.me.name}把视频快转进行确认……`,
+    );
+    await chara_talk.say_and_wait('你看～☆跟我讲的一样～！');
+    await chara_talk.say_and_wait('嘿嘿，那来看下一个！下一个！！');
+    await era.printAndWait(
+      `${chara_talk.sex}就照着这股气势，把${CharaTalk.me.name}准备的所有比赛视频都看完了……`,
+    );
+    await chara_talk.say_and_wait('咦？训练员。难道已经没了吗？');
+    era.printButton('「……来进行别的训练吧」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('啊！这样啊～！要继续训练我也很欢迎哦☆');
+    await era.printAndWait('──于是为了锻炼心肺功能，接着来到了泳池。');
+    await chara_talk.say_and_wait(
+      '也就是说，要测我在不换气的情况下，可以游多少距离，对吧！',
+    );
+    await chara_talk.say_and_wait(
+      '顺便问一下！大概要游多远，你才会称赞人家表现得超棒？',
+    );
+    await era.printAndWait(
+      '……平常有练习的话，大概能游75米。那么第一次……100米应该差不多。',
+    );
+    await era.printAndWait('不过曾经有赛马娘游了300米。既然都来这里测试了──');
+    era.printButton('「就试着以300米为目标吧」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('收到！那我开始游了！');
+    await chara_talk.say_and_wait('唉……');
+    await chara_talk.say_and_wait('可恶～为什么～！？只游一半就不行了～！');
+    await era.printAndWait(
+      '不过一半──150米也是很厉害的纪录了。如果之后能一点一滴持续练习，迟早能游300米……',
+    );
+    await chara_talk.say_and_wait('唔～再游一次！');
+    await chara_talk.say_and_wait('这次一定要游300米☆');
+    era.printButton('「这还只是第二次耶！？」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('嗯，已经是第二次了。');
+    await chara_talk.say_and_wait(
+      '而且，该说是出力的诀窍吗？我游到一半的时候也已经懂了☆',
+    );
+    await chara_talk.say_and_wait('嘿嘿♪赶快来试试看！');
+    await chara_talk.say_and_wait('啊！！');
+    await chara_talk.say_and_wait(
+      '训练员！要是我办到的话，要再给我新的课题！知道吗♪',
+    );
+    await chara_talk.say_and_wait('嘻嘻☆你收到了吗？');
+    await era.printAndWait(
+      `……于是，为了满足${chara_talk.sex}的要求，${CharaTalk.me.name}死命地绞尽脑汁。`,
+    );
+  } else if (edu_weeks === 28) {
+    await era.printAndWait('事件：来约会吧', {
+      color: chara_talk.color,
+      fontSize: '24px',
+    });
+    era.println();
+    await era.printAndWait(
+      '出道战结束后过了几个月。正当大家一如往常训练的时候──',
+    );
+    await chara_talk.say_and_wait('……');
+    await chara_talk.say_and_wait('……啊。');
+    era.printButton('「怎么了？」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('哇呀！？训练员！？');
+    await chara_talk.say_and_wait('没事，没什么！是没什么事啦……');
+    await chara_talk.say_and_wait('……唉。');
+    await era.printAndWait('──嘴巴上说没事，却大大地叹了一口气。');
+    era.printButton('「去散散心吧」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('散心……是要约会吗？');
+    era.printButton('「是啊」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('真的吗！？');
+    await chara_talk.say_and_wait(
+      '太棒了！那给我一分钟做准备！要和训练员去约会，约会☆',
+    );
+    await chara_talk.say_and_wait(
+      '嘿嘿，训练员会让我体验到怎样的大人约会呢～♪',
+    );
+    await era.printAndWait(
+      `……就这样决定要出门散心了。说到${chara_talk.sex}会开心的地方──`,
+    );
+    await chara_talk.say_and_wait(
+      '约会最后还是要去人家最能闪闪发亮的地方才行！',
+    );
+    await era.printAndWait('──果然只有那里吧。');
+    await era.printAndWait('（哇啊啊啊啊啊啊────！！）');
+    await chara_talk.say_and_wait('这里是……');
+    era.printButton('「是你最能闪闪发亮的地方哦」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('…………');
+    await chara_talk.say_and_wait('……训练员现在还这么认为吗？');
+    await chara_talk.say_and_wait(
+      '“其实跟我想的好像不太一样”假如人家现在说出这种话……你会生气吗？',
+    );
+    era.printButton('「怎么突然这么说？」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('嗯…………');
+    await chara_talk.say_and_wait(
+      '……人家啊，一直以为只要上场比赛，就一定能感受到兴奋的心情。',
+    );
+    await chara_talk.say_and_wait(
+      `在场上比赛的${chara_talk.get_child_sex_title()}，每一个都很耀眼吧？`,
+    );
+    await chara_talk.say_and_wait(
+      '所以不管是出道战还是其他比赛，我一直都非常期待。',
+    );
+    await chara_talk.say_and_wait(
+      '但是，实际上场比赛后才发现，总觉得……不太一样。',
+    );
+    await chara_talk.say_and_wait('……啊，原来就这样啊。好像有点没意思。');
+    await chara_talk.say_and_wait('我其实知道不能够讲这种话。可是……');
+    await chara_talk.say_and_wait('…………我就是会觉得好无聊。');
+    era.printButton('「这样啊」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('…………嗯。');
+    await chara_talk.say_and_wait('………………');
+    era.printButton('「还真是听到一件好事了！」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('咦……？');
+    await era.printAndWait(
+      `因为在闪耀系列赛上，${chara_talk.sex}体验到的只是出道战等级的水准。`,
+    );
+    await era.printAndWait(
+      '单纯只是这点程度无法满足摩耶重炮而已。既然这样，只要朝更高的目标迈进就好了。',
+    );
+    await era.printAndWait(
+      `将来会有更多和强者们竞争的机会，也还有${chara_talk.sex}所不知的比赛。`,
+    );
+    await era.printAndWait(
+      `所以如果现阶段造成${chara_talk.sex}烦恼的来源，是“感到无聊”这件事的话──`,
+    );
+    era.printButton('「就让之后变得更有趣吧！」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('……有趣？');
+    await chara_talk.say_and_wait('真的……办得到吗？因为我已经──');
+    era.printButton('「为了让你能闪闪发亮，我会加油哦」', 1);
+    await era.input();
+    await chara_talk.say_and_wait('……训练员。');
+    await era.printAndWait(
+      `摩耶重炮一定有属于${chara_talk.sex}自己，独一无二的闪耀方式。`,
+    );
+    await era.printAndWait(
+      '既然好不容易担任了像摩耶重炮这样如此有才能的赛马娘的签约训练员──',
+    );
+    await era.printAndWait(
+      `──为${chara_talk.sex}准备能发挥才能的舞台，找出专属于${chara_talk.sex}的成长方法，这些正是训练员的职责吧。`,
+    );
+  } else if (edu_weeks === 95 + 4) {
+    await era.printAndWait('事件：青春的闪耀', {
+      color: chara_talk.color,
+      fontSize: '24px',
+    });
+    era.println();
+    const chara3_talk = new CharaTalk(3);
+    await era.printAndWait('古马级的春天到来了。最近摩耶重炮的训练是──');
+    await chara_talk.say_and_wait('训练员！跑三圈赛道太没意思了！');
+    await chara_talk.say_and_wait('人家现在要跑三十圈才行！');
+    era.printButton('「这对脚的负担太大了哦」', 1);
+    await era.input();
+    await chara_talk.say_and_wait(
+      '咦──！？那么那么，赶快想接下来要做什么训练。',
+    );
+    await chara_talk.say_and_wait('人家可是知道，训练员一定会让我很开心！');
+    await chara_talk.say_and_wait(
+      '啊。昨天给我的课题列表，我已经全部种类都做得到了！所以最好是上面没有的☆',
+    );
+    await era.printAndWait('……就这样，我每天都被要求提供新的训练。');
+    await era.printAndWait(
+      '不过，摩耶重炮已经订下了目标，想要努力去达成。帮助她实现目标是训练员的职责──',
+    );
+    await chara_talk.say_and_wait('早安！训练员！今天也加油吧！');
+    await chara_talk.say_and_wait('咦，训练员。你的脸色好像很苍白……');
+    await chara_talk.say_and_wait('啊，训练员！？');
+    await era.printAndWait('（……咚）');
+    await era.printAndWait('菱亚马逊「……哎呀，好险啊。」');
+    await era.printAndWait('菱亚马逊「你差点就要倒下去了。」');
+    era.printButton('「是你扶住我的吗……？」', 1);
+    await era.input();
+    await era.printAndWait('菱亚马逊「哈哈，不用向我道谢。没什么大不了的。」');
+    await era.printAndWait(
+      '菱亚马逊「不过，你黑眼圈好重……看起来没什么睡啊。」',
+    );
+    await era.printAndWait('菱亚马逊「我说啊，摩耶重炮！」');
+    await chara_talk.say_and_wait('啊、啊哇哇……');
+    await era.printAndWait('菱亚马逊「摩耶重炮！别在那边害怕，快回话！」');
+    await chara_talk.say_and_wait('是、是的！！');
+    await era.printAndWait(
+      '菱亚马逊「……嗯，行了。那么，摩耶重炮的训练员，你就在这休息吧。」',
+    );
+    await era.printAndWait('菱亚马逊「这家伙就由我来照顾。」');
+    era.printButton('「咦！？」', 1);
+    await era.input();
+    await era.printAndWait(
+      '菱亚马逊「哈哈，别这么慌张啦。我又不会把她吃了。」',
+    );
+    await era.printAndWait(
+      '菱亚马逊「之前在“有马纪念”上的开战宣言……老实说，让我印象深刻。」',
+    );
+    await era.printAndWait('菱亚马逊「所以也让我帮你们一把吧。」');
+    await era.printAndWait('菱亚马逊「我也不想让人独占这么前途无量的孩子。」');
+    await chara_talk.say_and_wait('咦──！？菱亚……！？');
+    await chara_talk.say_and_wait(
+      '啊哇哇哇……！？对、对不起。我心中只有训练员……！',
+    );
+    await era.printAndWait(
+      '菱亚马逊「……我说，你可以冷静一点吗？这只是一个提案罢了。重点是你“想不想变强”。」',
+    );
+    await era.printAndWait(
+      '菱亚马逊「如何，摩耶重炮的训练员。要把她暂时交给我吗？」',
+    );
+    await era.printAndWait(
+      '──“女杰”菱亚马逊。她在去年和今年的“有马纪念”上，都可算是成田白仁的劲敌。',
+    );
+    await era.printAndWait(
+      '如果为摩耶重炮着想的话，我不应该坚持自己的策略，也应该要借助她的意见……！',
+    );
+    era.printButton('「那就拜托你了！」', 1);
+    await era.input();
+    await era.printAndWait(
+      '菱亚马逊「好，这才像话嘛！菱亚流的训练要开始了！」',
+    );
+    await era.printAndWait(
+      '菱亚马逊「所以说，摩耶重炮。你要不停跑来跑去，不要让我抓到尾巴。」',
+    );
+    await chara_talk.say_and_wait(
+      '咦，这不就是“抓尾巴游戏”？人家在幼稚园的时候是有玩过……',
+    );
+    await chara_talk.say_and_wait('这真的算是训练吗？……感觉只是在玩吧？');
+    await era.printAndWait('菱亚马逊「哦，还真从容啊。那就开始吧。」');
+    await chara_talk.say_and_wait('唔、唔唔……');
+    await era.printAndWait('菱亚马逊「喂喂，怎么啦？已经被抓超过十次咯！」');
+    await chara_talk.say_and_wait('还不是菱亚太奸诈了！突然增加鬼的数量！');
+    await chara3_talk.say_and_wait('呵呵！接着换我抓摩耶重炮哦！');
+    await era.printAndWait('优秀素质「哦哦，好像玩得很开心……」');
+    await era.printAndWait(
+      '优秀素质「我说，菱亚啊。像现在这样子帮忙就行了吗？」',
+    );
+    await era.printAndWait(
+      '菱亚马逊「嗯，这样很好！谢啦！……那么，摩耶重炮。」',
+    );
+    await era.printAndWait('菱亚马逊「简单来说，你的弱点就是察觉力不足。」');
+    await chara_talk.say_and_wait('……察觉力？');
+    await chara_talk.say_and_wait(
+      '察觉不就是指知道事情吗？那我已经知道了哦，不管是规则或逃跑方式。',
+    );
+    await chara_talk.say_and_wait(
+      '但是，菱亚立刻就改变鬼的数量和规则！太卑鄙了──',
+    );
+    await era.printAndWait(
+      '菱亚马逊「真是的，就说了你的察觉力……不对，应该说你都不打算去察觉。」',
+    );
+    await chara_talk.say_and_wait('……咦？');
+    await era.printAndWait(
+      '菱亚马逊「就我的观察，你好像有很优秀的才能跟训练员。」',
+    );
+    await era.printAndWait(
+      '菱亚马逊「你应该是真的什么都办得到吧。所以你身边的大人也都为你付出很多。」',
+    );
+    await era.printAndWait('菱亚马逊「只是啊，你太过依赖他人了。」');
+    await era.printAndWait(
+      '菱亚马逊「现在也是，你一旦懂了……不对，是认为自己懂了之后……」',
+    );
+    await era.printAndWait(
+      '菱亚马逊「“就不打算理解自己不懂的事”……是你自己养成了这种习惯。」',
+    );
+    await era.printAndWait(
+      '菱亚马逊「我并不是在玩“抓尾巴游戏”。这是比赛的训练。」',
+    );
+    await era.printAndWait(
+      '菱亚马逊「再动点脑筋去想。在真正的赛场上，你会被好几个选手盯上。途中战略也会改变。」',
+    );
+    await era.printAndWait(
+      '菱亚马逊「到时候你该怎么办？应该会根据当下情况灵活的逃跑……我没说错吧？」',
+    );
+    await chara_talk.say_and_wait('……唔。');
+    await era.printAndWait('菱亚马逊「……我就顺便提一下，今天早上也是。」');
+    await era.printAndWait(
+      '菱亚马逊「你之前有注意到，你的训练员为了你逞强过头了吗？」',
+    );
+    await chara_talk.say_and_wait('……！');
+    await era.printAndWait(
+      '菱亚马逊「你难得有这么优秀的才能，就该把它发挥到极致。」',
+    );
+    await era.printAndWait(
+      '菱亚马逊「还是说你要当个会哭着说“我不跑了！”，让训练员一个头两个大的小孩子吗？」',
+    );
+    await chara_talk.say_and_wait('唔～～！人家才不会这样！！');
+    await chara_talk.say_and_wait('人家要成为成熟的女人！才不会哭！');
+    await chara_talk.say_and_wait('菱亚！再来一次！！这次我一定不会被抓到！');
+    await era.printAndWait('菱亚马逊「哈哈，不错。那就开始吧！！」');
+    await chara_talk.say_and_wait('哼──！再一次！我可是已经“懂了”呢！！');
+    await era.printAndWait(
+      '菱亚马逊「哦！很好，就是这种！要让身体记住，而不是脑袋！」',
+    );
+    await era.printAndWait(
+      '──在灿烂的夕阳余晖照耀下，一群少女流着汗，不断在赛道上奔跑。',
+    );
+  }
+};
 
 handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
   const edu_weeks =

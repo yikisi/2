@@ -1865,110 +1865,112 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
   }
 };
 
-handlers[event_hooks.train_success] =
-  /**
-   * @param {HookArg} hook
-   * @param {{train:number,stamina_ratio:number}} extra_flag
-   */
-  async (hook, extra_flag) => {
-    if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
-      const chara49_talk = get_chara_talk(49);
-      await print_event_name('追加训练', chara_talk.color);
-      era.println();
-      await era.printAndWait('荣进闪耀以出色的表现完成了这一次的训练目标。');
+/**
+ * @param {HookArg} hook
+ * @param {{train:number,stamina_ratio:number}} extra_flag
+ */
+handlers[event_hooks.train_success] = async (hook, extra_flag) => {
+  if (
+    !era.get('status:37:摸鱼') &&
+    Math.random() < 0.2 * extra_flag.stamina_ratio
+  ) {
+    const chara49_talk = get_chara_talk(49);
+    await print_event_name('追加训练', chara_talk.color);
+    era.println();
+    await era.printAndWait('荣进闪耀以出色的表现完成了这一次的训练目标。');
+    await era.printAndWait(
+      `本该就此可以休息的${chara_talk.sex}，突然看到了正站在操场一旁的中山庆典。`,
+    );
+    await chara_talk.say_and_wait('中山同学，你现在是在训练时间吗？');
+    await era.printAndWait(
+      `见后者此时一脸慵懒的表情，${chara_talk.sex}好奇地问道。`,
+    );
+    await chara49_talk.say_and_wait('是啊……不过总觉得提不起干劲。');
+    await era.printAndWait('中山庆典则耸了耸肩膀，回应道。');
+    await chara_talk.say_and_wait('提不起干劲？');
+    await era.printAndWait('闻言，荣进闪耀的脸上浮现出一丝关切。');
+    await chara_talk.say_and_wait('是身体不舒服吗？');
+    await chara49_talk.say_and_wait(
+      '才不是啊，单纯只是自顾自的训练不够刺激而已。',
+    );
+    await chara_talk.say_and_wait('刺激？');
+    await era.printAndWait(
+      `听到面前人的话，${chara_talk.sex}若有所思地点了点头。`,
+    );
+    await chara_talk.say_and_wait(
+      '既然这样的话，那和我进行一场併走训练，你觉得如何呢？',
+    );
+    await chara49_talk.say_and_wait('併走？');
+    await era.printAndWait(
+      '听到荣进闪耀的提议，中山庆典的脸上一扫刚刚的懒散，转而露出感兴趣的微笑。',
+    );
+    await chara49_talk.say_and_wait('这倒是很有意思的方案。');
+    await chara49_talk.say_and_wait('喂，那边的训练员。');
+    era.printButton('「？」', 1);
+    await era.printAndWait(
+      `然后下一秒，${chara_talk.sex}将目光投向${your_name}。`,
+    );
+    await chara49_talk.say_and_wait(
+      `虽然我很想直接拉着荣进闪耀去痛快跑一场，但是${
+        chara_talk.sex
+      }是你负责的担当${chara_talk.get_uma_sex_title()}吧？`,
+    );
+    await chara49_talk.say_and_wait('你的意见呢？');
+    era.printButton('「去吧，闪耀。”」', 1);
+    era.printButton('「已经到休息时间了。”」', 0);
+    hook.arg = await era.input();
+    era.println();
+    if (hook.arg === 1) {
       await era.printAndWait(
-        `本该就此可以休息的${chara_talk.sex}，突然看到了正站在操场一旁的中山庆典。`,
+        `既然荣进闪耀想要带给中山庆典一场热血沸腾的刺激比赛，那就如${chara_talk.sex}所愿好了。`,
       );
-      await chara_talk.say_and_wait('中山同学，你现在是在训练时间吗？');
       await era.printAndWait(
-        `见后者此时一脸慵懒的表情，${chara_talk.sex}好奇地问道。`,
+        `于是，${your_name}向荣进闪耀挥手，示意${chara_talk.sex}加油。`,
       );
-      await chara49_talk.say_and_wait('是啊……不过总觉得提不起干劲。');
-      await era.printAndWait('中山庆典则耸了耸肩膀，回应道。');
-      await chara_talk.say_and_wait('提不起干劲？');
-      await era.printAndWait('闻言，荣进闪耀的脸上浮现出一丝关切。');
-      await chara_talk.say_and_wait('是身体不舒服吗？');
-      await chara49_talk.say_and_wait(
-        '才不是啊，单纯只是自顾自的训练不够刺激而已。',
-      );
-      await chara_talk.say_and_wait('刺激？');
+      await chara_talk.say_and_wait('嗯！');
+      await era.printAndWait('见此，荣进闪耀点了点头。');
+      await chara_talk.say_and_wait('那么，我会全力以赴的，中山同学！');
+      await chara49_talk.say_and_wait('哈哈！很好，就该这样！');
+      await era.printAndWait('闻言，中山庆典也发出一声充满期待的哈哈大笑。');
+      await era.printAndWait('就这样，两人奔赴赛道，认真进行着併走训练。');
+    } else {
       await era.printAndWait(
-        `听到面前人的话，${chara_talk.sex}若有所思地点了点头。`,
+        `荣进闪耀想要带给中山庆典一场热血沸腾的刺激比赛，虽然${your_name}也希望能够如${chara_talk.sex}所愿。`,
       );
+      await era.printAndWait(
+        '但是今天的运动量已经达标了，过度训练反而有可能导致身体出现问题。',
+      );
+      await era.printAndWait(`因此，${your_name}对着荣进闪耀摇了摇头。`);
+      await chara_talk.say_and_wait('唔……');
+      await era.printAndWait('见状，荣进闪耀面露遗憾之色。');
+      await chara_talk.say_and_wait('我知道了，过度训练确实不好呢。');
       await chara_talk.say_and_wait(
-        '既然这样的话，那和我进行一场併走训练，你觉得如何呢？',
+        '既然这样的话，那中山同学，我们可以改天再来一起奔跑吗？',
       );
-      await chara49_talk.say_and_wait('併走？');
       await era.printAndWait(
-        '听到荣进闪耀的提议，中山庆典的脸上一扫刚刚的懒散，转而露出感兴趣的微笑。',
+        '就这样，荣进闪耀从身后拿出计划本，在与中山庆典约定好的日期上面，画上了一个圈。',
       );
-      await chara49_talk.say_and_wait('这倒是很有意思的方案。');
-      await chara49_talk.say_and_wait('喂，那边的训练员。');
-      era.printButton('「？」', 1);
-      await era.printAndWait(
-        `然后下一秒，${chara_talk.sex}将目光投向${your_name}。`,
-      );
-      await chara49_talk.say_and_wait(
-        `虽然我很想直接拉着荣进闪耀去痛快跑一场，但是${
-          chara_talk.sex
-        }是你负责的担当${chara_talk.get_uma_sex_title()}吧？`,
-      );
-      await chara49_talk.say_and_wait('你的意见呢？');
-      era.printButton('「去吧，闪耀。”」', 1);
-      era.printButton('「已经到休息时间了。”」', 0);
-      hook.arg = await era.input();
-      era.println();
-      if (hook.arg === 1) {
-        await era.printAndWait(
-          `既然荣进闪耀想要带给中山庆典一场热血沸腾的刺激比赛，那就如${chara_talk.sex}所愿好了。`,
-        );
-        await era.printAndWait(
-          `于是，${your_name}向荣进闪耀挥手，示意${chara_talk.sex}加油。`,
-        );
-        await chara_talk.say_and_wait('嗯！');
-        await era.printAndWait('见此，荣进闪耀点了点头。');
-        await chara_talk.say_and_wait('那么，我会全力以赴的，中山同学！');
-        await chara49_talk.say_and_wait('哈哈！很好，就该这样！');
-        await era.printAndWait('闻言，中山庆典也发出一声充满期待的哈哈大笑。');
-        await era.printAndWait('就这样，两人奔赴赛道，认真进行着併走训练。');
-      } else {
-        await era.printAndWait(
-          `荣进闪耀想要带给中山庆典一场热血沸腾的刺激比赛，虽然${your_name}也希望能够如${chara_talk.sex}所愿。`,
-        );
-        await era.printAndWait(
-          '但是今天的运动量已经达标了，过度训练反而有可能导致身体出现问题。',
-        );
-        await era.printAndWait(`因此，${your_name}对着荣进闪耀摇了摇头。`);
-        await chara_talk.say_and_wait('唔……');
-        await era.printAndWait('见状，荣进闪耀面露遗憾之色。');
-        await chara_talk.say_and_wait('我知道了，过度训练确实不好呢。');
-        await chara_talk.say_and_wait(
-          '既然这样的话，那中山同学，我们可以改天再来一起奔跑吗？',
-        );
-        await era.printAndWait(
-          '就这样，荣进闪耀从身后拿出计划本，在与中山庆典约定好的日期上面，画上了一个圈。',
-        );
-      }
-    } else if (
-      era.get(`status:37:发胖`) &&
-      Math.random() < 0.1 * extra_flag.stamina_ratio
-    ) {
-      await chara_talk.say_and_wait('……诶？');
-      await era.printAndWait(
-        '某天，在例行的身体检查中，荣进闪耀发现体重秤上的数字相较于之前有所增长。',
-      );
-      await chara_talk.say_and_wait('体重……增加了？');
-      await era.printAndWait(`见此，${chara_talk.sex}皱紧眉头。`);
-      await chara_talk.say_and_wait(
-        '看来必须要在原定的行程表之外再添加额外的减肥计划了呢。',
-      );
-      await era.printAndWait(`想到这里，${chara_talk.sex}点了点头。`);
-      await era.printAndWait(
-        '就这样，经过未来一段时间的锻炼，荣进闪耀的体重又回归了正常。',
-      );
-      era.set(`status:37:发胖`, 0);
     }
-  };
+  } else if (
+    era.get(`status:37:发胖`) &&
+    Math.random() < 0.1 * extra_flag.stamina_ratio
+  ) {
+    await chara_talk.say_and_wait('……诶？');
+    await era.printAndWait(
+      '某天，在例行的身体检查中，荣进闪耀发现体重秤上的数字相较于之前有所增长。',
+    );
+    await chara_talk.say_and_wait('体重……增加了？');
+    await era.printAndWait(`见此，${chara_talk.sex}皱紧眉头。`);
+    await chara_talk.say_and_wait(
+      '看来必须要在原定的行程表之外再添加额外的减肥计划了呢。',
+    );
+    await era.printAndWait(`想到这里，${chara_talk.sex}点了点头。`);
+    await era.printAndWait(
+      '就这样，经过未来一段时间的锻炼，荣进闪耀的体重又回归了正常。',
+    );
+    era.set(`status:37:发胖`, 0);
+  }
+};
 
 handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
   extra_flag['args'] = extra_flag.fumble

@@ -43,7 +43,10 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   const gold_ship = get_chara_talk(7);
   era.print([gold_ship.get_colored_name(), ' 的训练顺利结束了！']);
   era.println();
-  if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
+  if (
+    !era.get('status:7:摸鱼') &&
+    Math.random() < 0.2 * extra_flag.stamina_ratio
+  ) {
     await era.waitAnyKey();
     await print_event_name(
       [{ color: color_7[1], content: '额外的自主训练' }],

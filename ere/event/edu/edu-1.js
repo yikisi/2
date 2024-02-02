@@ -31,7 +31,10 @@ handlers[event_hooks.race_end] = require('#/event/edu/edu-events-1/race-end');
  */
 handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   era.print(`${spe.name} 的 ${attr_names[extra_flag.train]} 训练顺利成功了……`);
-  if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
+  if (
+    !era.get('status:1:摸鱼') &&
+    Math.random() < 0.2 * extra_flag.stamina_ratio
+  ) {
     era.println();
     await print_event_name('额外自主训练！', spe);
     await era.printAndWait('训练结束后，特别周焦急地找到了你。');

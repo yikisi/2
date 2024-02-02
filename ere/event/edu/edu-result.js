@@ -14,7 +14,7 @@ const { get_random_value } = require('#/utils/value-utils');
 /** @type {Record<string,function(chara_id:number,hook:HookArg,extra_flag:*):Promise<*>>} */
 const handlers = {};
 
-handlers[event_hooks.train_success] = async function (chara_id, hook) {
+handlers[event_hooks.train_success] = async (chara_id, hook) => {
   if (hook.arg === true) {
     return {
       attr: 5,

@@ -479,7 +479,9 @@ handlers[event_hooks.out_shopping] = async (hook) => {
           `握紧了麦克风，${kita.name} 像往常那样唱起了老家的演歌。`,
         ],
         [
-          `今天不仅要训练唱歌也要训练舞步哦，训练员${me.get_adult_sex_title()}要看好了！沙吧嗒吧嗒～`,
+          [
+            `今天不仅要训练唱歌也要训练舞步哦，训练员${me.get_adult_sex_title()}要看好了！沙吧嗒吧嗒～`,
+          ],
           `踮着脚转起了圈，${kita.name} 蹦跳着模仿起了帝王的舞步。`,
         ],
         [
