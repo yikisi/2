@@ -61,12 +61,14 @@ module.exports = async () => {
         break;
       default:
         if (ret < 20) {
-          for (const chara_id of filter_chara(
-            'cflag',
-            '招募状态',
-            recruit_flags.yes,
-          )) {
-            await call_daily_script(chara_id, event_hooks.load_talk, false);
+          if (era.get('flag:读档对话')) {
+            for (const chara_id of filter_chara(
+              'cflag',
+              '招募状态',
+              recruit_flags.yes,
+            )) {
+              await call_daily_script(chara_id, event_hooks.load_talk);
+            }
           }
           if (!(await era.loadData(ret))) {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;

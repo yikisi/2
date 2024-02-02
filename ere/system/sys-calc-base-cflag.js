@@ -61,7 +61,7 @@ module.exports = {
             stat *
             (1 -
               0.4 * era.get(`status:${chara_id}:发胖`) +
-              0.5 * era.get(`status:${chara_id}:健康茶`));
+              era.get(`status:${chara_id}:健康茶`));
           era.add(`base:${chara_id}:体重偏差`, Math.ceil(lose_weight));
           if (
             -stat >= 500 ||

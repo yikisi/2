@@ -60,13 +60,13 @@ module.exports = async () => {
           },
           { isBr: true },
           {
-            content: 'EraUma开源仓库地址（内源）',
-            url: 'https://gitgud.io/era-games-zh/doujin/erauma',
+            content: 'EraUma游戏发布页',
+            url: 'https://gitgud.io/era-games-zh/doujin/erauma/-/releases/permalink/latest',
           },
           { isBr: true },
           {
-            content: 'EraUma游戏发布页',
-            url: 'https://gitgud.io/era-games-zh/doujin/erauma/-/releases',
+            content: 'EraUma开源仓库地址（内源）',
+            url: 'https://gitgud.io/era-games-zh/doujin/erauma',
           },
           { isBr: true },
           {

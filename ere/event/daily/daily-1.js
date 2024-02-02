@@ -312,7 +312,7 @@ handlers[event_hooks.out_station] = async function () {
   await chara_talk.say_and_wait(get_random_entry(talk_arr));
 };
 
-handlers[event_hooks.load_talk] = async function () {
+handlers[event_hooks.load_talk] = async () => {
   const chara_talk = get_chara_talk(1);
   if (Math.random() < 0.1) {
     await chara_talk.say_and_wait('训练员，你在找这个闹钟吗？');

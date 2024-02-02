@@ -456,7 +456,7 @@ async function sys_next_week() {
         (10 - 2 * health_buff)) /
         10 -
         (5 + health_talent + health_buff) *
-          (1 + race + 0.5 * era.get(`status:${chara_id}:健康茶`)),
+          (1 + race + era.get(`status:${chara_id}:健康茶`)),
     );
     if (
       !era.get(`status:${chara_id}:头风`) &&

@@ -734,7 +734,8 @@ async function page_ero(lover) {
   for (const chara_id of get_characters_in_train()) {
     if (chara_id && sys_check_awake(chara_id) && !check_satisfied(chara_id)) {
       sys_change_lust(chara_id, lust_from_palam / 2);
-      sys_like_chara(chara_id, 0, -100) && (await era.waitAnyKey());
+      sys_like_chara(chara_id, 0, -get_random_value(50, 100)) &&
+        (await era.waitAnyKey());
     }
   }
   if (era.get('flag:不忠惩罚')) {

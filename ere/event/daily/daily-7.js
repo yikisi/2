@@ -491,7 +491,7 @@ handlers[event_hooks.out_station] = async function (hook) {
   await chara_talk.say_and_wait(get_random_entry(talk_arr));
 };
 
-handlers[event_hooks.load_talk] = async function () {
+handlers[event_hooks.load_talk] = async () => {
   if (Math.random() < 0.5) {
     await chara_talk.say_and_wait([
       { content: '你要使用『那个』吗？记得不要滥用哦，' },

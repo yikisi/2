@@ -20,12 +20,11 @@ const event_hooks = require('#/data/event/event-hooks');
 /** @type {Record<string,function(HookArg,*):(Promise<*>|void)>} */
 const handlers = {};
 
-handlers[event_hooks.load_talk] = async (stage_id, extra_flag) => {
+handlers[event_hooks.load_talk] = async () => {
   if (
-    (era.get('cflag:3:妊娠阶段') > 1 << pregnant_stage_enum.no ||
-      (era.get('cflag:0:孩子父亲') === 3 &&
-        era.get('cflag:0:妊娠阶段') > 1 << pregnant_stage_enum.no)) &&
-    extra_flag
+    era.get('cflag:3:妊娠阶段') > 1 << pregnant_stage_enum.no ||
+    (era.get('cflag:0:孩子父亲') === 3 &&
+      era.get('cflag:0:妊娠阶段') > 1 << pregnant_stage_enum.no)
   ) {
     const chara_talk = get_chara_talk(3);
     chara_talk.say('训练员……要抛弃这个孩子？为什么……');

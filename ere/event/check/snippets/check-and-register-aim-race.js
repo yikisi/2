@@ -21,6 +21,7 @@ function check_and_register_aim_race(chara_id, aim_races, _edu_weeks) {
     return;
   }
   const temp_key = `${edu_weeks}_`;
+  let registered_race;
   if (Object.keys(era.get(`cflag:${chara_id}:育成成绩`)).length) {
     for (const e of Object.entries(aim_races)) {
       if (e[0].startsWith(temp_key)) {
@@ -41,8 +42,11 @@ function check_and_register_aim_race(chara_id, aim_races, _edu_weeks) {
         break;
       }
     }
-  } else if (era.get('flag:当前月') >= 6 && era.get('flag:当前周') === 4) {
-    const registered_race = sys_reg_race(chara_id);
+  } else if (
+    era.get('flag:当前月') === 6 &&
+    era.get('flag:当前周') === 4 &&
+    (registered_race = sys_reg_race(chara_id)).curr.race === -1
+  ) {
     registered_race.curr = registered_race.last = {
       race: race_enum.begin_race,
       week: era.get('flag:当前回合数'),

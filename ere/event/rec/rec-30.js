@@ -121,7 +121,6 @@ module.exports = {
         );
         era.set('cflag:30:随机招募', 1);
         new EventMarks(0).sub(event_hooks.recruit_start);
-        era.set('flag:物色对象', 0);
         break;
       case event_hooks.recruit:
         if (!era.get('cflag:30:招募状态')) {
@@ -154,7 +153,6 @@ module.exports = {
           );
           era.set('cflag:30:随机招募', 0);
           era.set('cflag:30:招募状态', -2);
-          era.set('flag:物色对象', 30);
         } else {
           if (await check_before_rec(30)) {
             return false;

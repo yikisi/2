@@ -524,6 +524,7 @@ module.exports = async () => {
         era.set('flag:声望不足替换', 0);
         era.set('flag:压力获取', 0);
         era.set('flag:不忠惩罚', 1);
+        era.set('flag:读档对话', 0);
         break;
       case 1:
         era.set('flag:训练难度', 0);
@@ -553,6 +554,7 @@ module.exports = async () => {
         era.set('flag:声望不足替换', 0);
         era.set('flag:压力获取', 1);
         era.set('flag:不忠惩罚', 1);
+        era.set('flag:读档对话', 0);
         break;
       case 2:
         era.set('flag:训练难度', -25);
@@ -582,6 +584,7 @@ module.exports = async () => {
         era.set('flag:声望不足替换', 1);
         era.set('flag:压力获取', 1);
         era.set('flag:不忠惩罚', 0);
+        era.set('flag:读档对话', 1);
         break;
       case 3:
         era.set('flag:训练难度', -25);
@@ -611,6 +614,7 @@ module.exports = async () => {
         era.set('flag:声望不足替换', 1);
         era.set('flag:压力获取', 1);
         era.set('flag:不忠惩罚', 0);
+        era.set('flag:读档对话', 1);
         break;
       case 4:
         era.set('flag:训练难度', 25);
@@ -640,6 +644,7 @@ module.exports = async () => {
         era.set('flag:声望不足替换', 0);
         era.set('flag:压力获取', 0);
         era.set('flag:不忠惩罚', 1);
+        era.set('flag:读档对话', 1);
         break;
       case 5:
         era.set('flag:训练难度', 25);
@@ -669,6 +674,7 @@ module.exports = async () => {
         era.set('flag:声望不足替换', 1);
         era.set('flag:压力获取', 0);
         era.set('flag:不忠惩罚', 1);
+        era.set('flag:读档对话', 1);
         break;
       case 6:
         era.set('flag:训练难度', 25);
@@ -698,6 +704,7 @@ module.exports = async () => {
         era.set('flag:声望不足替换', 0);
         era.set('flag:压力获取', 0);
         era.set('flag:不忠惩罚', 0);
+        era.set('flag:读档对话', 0);
         break;
       case 7:
         era.set('flag:训练难度', 25);
@@ -727,6 +734,7 @@ module.exports = async () => {
         era.set('flag:声望不足替换', 1);
         era.set('flag:压力获取', 0);
         era.set('flag:不忠惩罚', 1);
+        era.set('flag:读档对话', 1);
         break;
       default:
         theme = 10;
