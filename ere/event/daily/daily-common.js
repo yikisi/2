@@ -1,6 +1,10 @@
 const era = require('#/era-electron');
 
 const call_check_script = require('#/system/script/sys-call-check');
+const {
+  sys_get_colored_callname,
+  sys_get_callname,
+} = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const { sys_change_money } = require('#/system/sys-calc-flag');
@@ -21,7 +25,6 @@ const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_name } = require('#/data/locations');
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 /** @type {Record<string,function(number,HookArg,*):Promise<boolean|void>>} */
 const handlers = {};
@@ -840,6 +843,26 @@ handlers[event_hooks.basement_end] = async (chara_id) => {
       width: 12,
     },
   );
+};
+
+/** @param {number} chara_id */
+handlers[event_hooks.load_talk] = async (chara_id) => {
+  let temp;
+  switch (era.get(`cflag:${chara_id}:成长阶段`)) {
+    case 0:
+      temp = era.get(`cflag:${chara_id}:父方角色`) ? '麻麻' : '叭叭';
+      await get_chara_talk(chara_id).say_and_wait(
+        `呜呜哇哇哇——${temp}——我要${temp}——`,
+      );
+      break;
+    case 1:
+      await get_chara_talk(chara_id).say_and_wait(
+        `${sys_get_callname(
+          chara_id,
+          0,
+        )}……啊喏……能不能，不要丢下${sys_get_callname(0, chara_id)}……（抽泣）`,
+      );
+  }
 };
 
 /**

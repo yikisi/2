@@ -11,7 +11,9 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const EduEventMarks = require('#/data/event/edu-event-marks');
+const LunaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const color_17 = require('#/data/chara-colors')[17];
 
@@ -481,6 +483,33 @@ handlers[event_hooks.out_station] = async function (hook) {
       }
   }
   await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+};
+
+handlers[event_hooks.load_talk] = async () => {
+  const event_marks = new LunaEventMarks(),
+    chara = get_chara_talk(17);
+  if (event_marks.good_end) {
+    await chara.say_and_wait('愿太阳和月亮能继续陪伴着你');
+    await chara.say_and_wait('……但，请不要忘了皇帝，和露娜');
+    await chara.print_and_wait([chara.get_colored_name(), ' 转过身去，颤抖着']);
+    await chara.say_and_wait('注意……安全，我们会再相遇的（抽泣）');
+  } else if (event_marks.emperor) {
+    await chara.say_and_wait('弄臣，无用功还要一次再一次了？');
+  } else if (era.get('love:17') >= 75) {
+    await chara.print_and_wait([
+      chara.get_colored_name(),
+      ' 嘴唇微张，但发不出一丝声音',
+    ]);
+    await chara.say_and_wait('——！');
+    await chara.say_and_wait('——不要走……');
+    await chara.print_and_wait([
+      chara.get_colored_name(),
+      ' 抽泣着，但 ',
+      CharaTalk.me.get_colored_name(),
+      ' 已远去……',
+    ]);
+    await chara.say_and_wait('明明你答应过我……无论发生什么都不会离开——');
+  }
 };
 
 /**

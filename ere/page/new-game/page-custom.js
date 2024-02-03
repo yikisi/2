@@ -656,8 +656,14 @@ async function page_custom() {
             era.set('callname:0:-2', '主人公');
             break;
           case 3:
-            era.print('希望旁白君如何称呼您呢？');
-            era.set('callname:0:-2', await era.input());
+            era.print('希望旁白君如何称呼您呢？（6个字符以内）');
+            temp = '';
+            do {
+              if (temp) {
+                await era.printAndWait('太长了，请重新输入！');
+              }
+              temp = era.set('callname:0:-2', await era.input());
+            } while (temp.length > 6);
         }
       }
       CharaTalk.me = new CharaTalk(0);

@@ -131,7 +131,8 @@ async function goto_sex(chara_id) {
       await end_ero_and_show_result(true);
     }
   } else {
-    const check = get_sex_acceptable(chara_id);
+    const check =
+      era.get(`love:${chara_id}`) >= 50 ? get_sex_acceptable(chara_id) : -1;
     let ret;
     if (check >= 0) {
       era.printMultiColumns([

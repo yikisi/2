@@ -7,6 +7,7 @@ const filter_chara = require('#/system/sys-filter-chara');
 const print_page_header = require('#/page/components/page-header');
 
 const CharaTalk = require('#/utils/chara-talk');
+const { get_random_entry } = require('#/utils/list-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -62,13 +63,14 @@ module.exports = async () => {
       default:
         if (ret < 20) {
           if (era.get('flag:读档对话')) {
-            for (const chara_id of filter_chara(
-              'cflag',
-              '招募状态',
-              recruit_flags.yes,
-            )) {
-              await call_daily_script(chara_id, event_hooks.load_talk);
-            }
+            await call_daily_script(
+              get_random_entry(
+                filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+                  (e) => e,
+                ),
+              ),
+              event_hooks.load_talk,
+            );
           }
           if (!(await era.loadData(ret))) {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;

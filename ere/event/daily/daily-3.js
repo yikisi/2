@@ -10,6 +10,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const get_gradient_color = require('#/utils/gradient-color');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -22,16 +23,35 @@ const handlers = {};
 
 handlers[event_hooks.load_talk] = async () => {
   if (
-    era.get('cflag:3:妊娠阶段') > 1 << pregnant_stage_enum.no ||
+    era.get('cflag:3:妊娠阶段') !== 1 << pregnant_stage_enum.no ||
     (era.get('cflag:0:孩子父亲') === 3 &&
       era.get('cflag:0:妊娠阶段') > 1 << pregnant_stage_enum.no)
   ) {
-    const chara_talk = get_chara_talk(3);
-    chara_talk.say('训练员……要抛弃这个孩子？为什么……');
-    chara_talk.say(
-      '为什么……为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么',
+    const teio = get_chara_talk(3);
+    await teio.say_and_wait('训练员……要抛弃这个孩子？为什么……');
+    await era.printAndWait(
+      [
+        teio.get_colored_name(),
+        {
+          color: get_gradient_color(teio.color, '#ff0000', 0.5),
+          content:
+            '「为什么……为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么为什么」',
+          fontWeight: 'bold',
+        },
+      ],
+      { fontSize: '24px' },
     );
-    await chara_talk.say_and_wait('为什么……为什么为——');
+    await era.printAndWait(
+      [
+        teio.get_colored_name(),
+        {
+          color: 'red',
+          content: '「为什么……为什么为——」',
+          fontWeight: 'bold',
+        },
+      ],
+      { fontSize: '48px' },
+    );
   }
 };
 

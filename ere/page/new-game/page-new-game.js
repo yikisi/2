@@ -54,8 +54,14 @@ module.exports = async () => {
 
     if (player_name === '') {
       // 未输入姓名
-      era.print('——然后在左下角签上了自己的名字 (输入名字后回车)');
+      era.print(
+        '——然后在左下角签上了自己的名字（输入名字后回车，限定10个字符以内）',
+      );
       player_name = (await era.input()).toString();
+      if (player_name.length > 10) {
+        await era.printAndWait('太长了，请重新签名！');
+        player_name = '';
+      }
     } else if (!flag_select_gender) {
       // 不在输入性别子循环
       if (player_gender === 3) {
