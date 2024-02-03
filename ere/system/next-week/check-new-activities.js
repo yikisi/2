@@ -7,6 +7,7 @@ const {
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
+const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -15,6 +16,17 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
+
+const foreign_race_list = Object.values(race_enum).filter(
+  (e) => race_infos[e].track >= track_enum.longchamp,
+);
+const track2location = {};
+track2location[track_enum.longchamp] =
+  track2location[track_enum.chantilly] =
+  track2location[track_enum.st_cloud] =
+    location_enum.paris;
+track2location[track_enum.bashang] = location_enum.guangzhou;
+track2location[track_enum.shatin] = location_enum.hongkong;
 
 /**
  * @param {number} cur_round
@@ -73,24 +85,116 @@ async function check_new_activities(cur_round, in_team_list) {
   });
   const event_weeks = (cur_round - 1) % 48;
   let race, is_begin;
-  for (const r of Object.values(race_enum)) {
-    const { date, track } = race_infos[r];
-    if (track >= track_enum.longchamp) {
-      if (event_weeks === date - 2) {
-        race = r;
-        is_begin = true;
-      } else if (event_weeks === date) {
-        race = r;
-        is_begin = false;
-      }
-      if (race) {
-        break;
-      }
+  for (const r of foreign_race_list) {
+    const { date } = race_infos[r];
+    if (event_weeks === date - 2) {
+      race = r;
+      is_begin = true;
+    } else if (event_weeks === date) {
+      race = r;
+      is_begin = false;
+    }
+    if (race) {
+      break;
     }
   }
   if (race) {
     if (is_begin) {
       // 远征开始
+      let foreign_list = in_team_list
+        .filter((e) => sys_reg_race(e).curr.race === race)
+        .map((e) => {
+          return {
+            id: e,
+            pregnant: era.get(`cflag:${e}:妊娠回合计时`),
+          };
+        });
+      const info = race_infos[race],
+        location = track2location[info.track],
+        punish_list = foreign_list
+          .filter((e) => e.pregnant >= 33)
+          .map((e) => e.id);
+      foreign_list = foreign_list
+        .filter((e) => e.pregnant < 33)
+        .map((e) => e.id);
+      if (foreign_list.length) {
+        era.printMultiColumns([
+          {
+            content: [
+              info.get_colored_name_with_class(),
+              ' 即将举办，',
+              get_chara_talk(0).get_colored_name(),
+              ' 的队伍中以下成员报名了这场赛事：',
+            ],
+            type: 'text',
+          },
+          ...foreign_list.map((chara_id) => {
+            const chara = get_chara_talk(chara_id);
+            sys_change_attr_and_print(chara_id, '体力', -200);
+            sys_change_attr_and_print(chara_id, '精力', -500);
+            return {
+              config: { align: 'center', width: 3 },
+              content: [chara.get_colored_name()],
+              type: 'text',
+            };
+          }),
+        ]);
+      }
+      const me_in_race =
+        era.get('cflag:0:种族') && sys_reg_race(0).curr.race === race;
+      let temp =
+        era.get('flag:当前位置') === location_enum.basement ||
+        era.get('cflag:0:妊娠回合计时') >= 33 ||
+        (!foreign_list.length && !me_in_race);
+      if (!temp) {
+        era.printMultiColumns([
+          {
+            content: [
+              '要',
+              me_in_race ? '' : '陪同',
+              '参加',
+              info.get_colored_name_with_class(),
+              `吗？`,
+            ],
+            type: 'text',
+          },
+          ...['是', '否'].map((e, i) => {
+            return {
+              content: e,
+              type: 'button',
+              accelerator: i * 100,
+              config: { width: 12, align: 'center' },
+            };
+          }),
+        ]);
+        temp = await era.input();
+      }
+      if (!temp) {
+        sys_change_attr_and_print(0, '体力', -200);
+        sys_change_attr_and_print(0, '精力', -500);
+        era.set('cflag:0:位置', era.set('flag:当前位置', location));
+      } else if (me_in_race) {
+        punish_list.push(0);
+      }
+      if (punish_list.length) {
+        era.printMultiColumns([
+          { content: '这些选手的缺席让舆论界流言四起：', type: 'text' },
+          ...punish_list.map((chara_id) => {
+            const tmp = sys_reg_race(chara_id);
+            tmp.curr.race = tmp.last.race = -1;
+            tmp.curr.week = tmp.last.week = -1;
+            return {
+              config: { align: 'center', width: 3 },
+              content: [get_chara_talk(chara_id).get_colored_name()],
+              type: 'text',
+            };
+          }),
+        ]);
+        sys_change_fame(-25 - 25 * punish_list.length);
+      }
+      foreign_list.forEach((chara_id) =>
+        era.set(`cflag:${chara_id}:位置`, location),
+      );
     } else {
       // 远征结束
       era.print([
@@ -140,8 +244,8 @@ async function check_new_activities(cur_round, in_team_list) {
           sys_change_attr_and_print(chara_id, '体力', -10);
           sys_change_attr_and_print(chara_id, '精力', -400);
           return {
-            config: { align: 'center', width: 2, color: chara.color },
-            content: chara.name,
+            config: { align: 'center', width: 3 },
+            content: [chara.get_colored_name()],
             type: 'text',
           };
         }),
@@ -155,9 +259,12 @@ async function check_new_activities(cur_round, in_team_list) {
       (!beach_group.length && !era.get('cflag:0:种族'));
     // 条件允许，弹选项让玩家选参加不参加
     if (!temp) {
-      era.print(`要${beach_group.length ? '跟随' : ''}参加夏合宿吗？`);
-      era.printMultiColumns(
-        ['是', '否'].map((e, i) => {
+      era.printMultiColumns([
+        {
+          content: `要${beach_group.length ? '跟随' : ''}参加夏合宿吗？`,
+          type: 'text',
+        },
+        ...['是', '否'].map((e, i) => {
           return {
             content: e,
             type: 'button',
@@ -165,27 +272,29 @@ async function check_new_activities(cur_round, in_team_list) {
             config: { width: 12, align: 'center' },
           };
         }),
-      );
+      ]);
       temp = await era.input();
     }
     if (!temp) {
-      era.set('cflag:0:位置', location_enum.beach);
-      era.set('flag:当前位置', location_enum.beach);
+      era.set(
+        'cflag:0:位置',
+        location_enum.era.set('flag:当前位置', location_enum.beach),
+      );
     }
     const follow_group = in_team_list.filter((chara_id) => {
-      const race = era.get(`cflag:${chara_id}:种族`);
-      const flag =
-        era.get(`cflag:${chara_id}:位置`) !== location_enum.beach &&
-        !era.get(`status:${chara_id}:伤病`) &&
-        check_pregnant_unprotect(chara_id) &&
-        // 和主控到达一定关系会跟着去
-        ((!temp &&
-          (era.get(`cflag:${chara_id}:殿堂`) || !race) &&
-          era.get(`love:${chara_id}`) >= 75) ||
-          // 或者就是小孩跟着妈妈移动
-          (era.get(`cflag:${chara_id}:成长阶段`) < 2 &&
-            era.get(`cflag:${era.get(`cflag:${chara_id}:母方角色`)}:位置`) ===
-              location_enum.beach));
+      const race = era.get(`cflag:${chara_id}:种族`),
+        flag =
+          era.get(`cflag:${chara_id}:位置`) !== location_enum.beach &&
+          !era.get(`status:${chara_id}:伤病`) &&
+          check_pregnant_unprotect(chara_id) &&
+          // 和主控到达一定关系会跟着去
+          ((!temp &&
+            (era.get(`cflag:${chara_id}:殿堂`) || !race) &&
+            era.get(`love:${chara_id}`) >= 75) ||
+            // 或者就是小孩跟着妈妈移动
+            (era.get(`cflag:${chara_id}:成长阶段`) < 2 &&
+              era.get(`cflag:${era.get(`cflag:${chara_id}:母方角色`)}:位置`) ===
+                location_enum.beach));
       flag && era.set(`cflag:${chara_id}:位置`, location_enum.beach);
       return flag;
     });
@@ -200,8 +309,8 @@ async function check_new_activities(cur_round, in_team_list) {
           sys_change_attr_and_print(chara_id, '体力', -10);
           sys_change_attr_and_print(chara_id, '精力', -400);
           return {
-            config: { align: 'center', color: chara.color, width: 2 },
-            content: chara.name,
+            config: { align: 'center', width: 3 },
+            content: [chara.get_colored_name()],
             type: 'text',
           };
         }),

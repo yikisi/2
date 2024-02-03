@@ -338,9 +338,7 @@ async function sys_next_week() {
   era.set('flag:当前年', cur_year);
   era.set('flag:当前月', cur_month);
   era.set('flag:当前周', cur_week);
-  if (punish_level < 3) {
-    sys_change_fame(era.get('flag:回合声望惩罚'));
-  }
+  sys_change_fame(era.get('flag:回合声望惩罚'));
 
   // 新回合开始
   in_team_list.unshift(0);
@@ -933,7 +931,7 @@ async function sys_next_week() {
 
   in_team_list.shift();
   // 惩罚结算
-  if (race_punish && punish_level < 3) {
+  if (race_punish) {
     const buffer = [];
     out_race_list.forEach((e, i) => {
       i && buffer.push('，');

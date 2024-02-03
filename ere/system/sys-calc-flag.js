@@ -10,6 +10,9 @@ module.exports = {
       return 0;
     }
     if (delta < 0) {
+      if (era.get('flag:惩戒力度') === 3) {
+        return 0;
+      }
       delta = Math.min(
         delta *
           (1 - (era.get('cflag:303:招募状态') === recruit_flags.yes) * 0.2),

@@ -360,21 +360,32 @@ async function goto_sex(chara_id) {
           ' 回过神来，一定会对此羞愤难当吧……',
         ]);
         sys_like_chara(chara_id, 0, -400) && (await era.waitAnyKey());
-        const hate_mark = era.get(`mark:${chara_id}:反抗`);
-        if (hate_mark < 3 && !era.get(`ex:${chara_id}:反抗获取`)) {
-          era.set(`nowex:${chara_id}:反抗获取`, 1);
-        }
-        const shame_mark = era.get(`mark:${chara_id}:羞耻`);
-        if (shame_mark < 3 && !era.get(`ex:${chara_id}:羞耻获取`)) {
+        if (
+          era.get(`mark:${chara_id}:羞耻`) < 3 &&
+          !era.get(`ex:${chara_id}:羞耻获取`)
+        ) {
           era.set(`nowex:${chara_id}:羞耻获取`, 1);
         }
+        if (
+          era.get(`mark:${chara_id}:反抗`) < 3 &&
+          !era.get(`ex:${chara_id}:反抗获取`)
+        ) {
+          era.set(`nowex:${chara_id}:反抗获取`, 1);
+        }
         await update_marks(true, chara_id);
-      } else if (
-        era.get('tflag:强奸') === 0 &&
-        check < 0 &&
-        era.get(`mark:${chara_id}:反抗`) < 3
-      ) {
-        era.set(`nowex:${chara_id}:反抗获取`, 1);
+      } else if (era.get('tflag:强奸') === 0 && check < 0) {
+        if (
+          era.get(`mark:${chara_id}:苦痛`) < 3 &&
+          !era.get(`ex:${chara_id}:苦痛获取`)
+        ) {
+          era.set(`nowex:${chara_id}:苦痛获取`, 1);
+        }
+        if (
+          era.get(`mark:${chara_id}:反抗`) < 3 &&
+          !era.get(`ex:${chara_id}:反抗获取`)
+        ) {
+          era.set(`nowex:${chara_id}:反抗获取`, 1);
+        }
         await update_marks(true, chara_id);
       }
       await end_ero_and_show_result(true);
