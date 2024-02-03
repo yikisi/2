@@ -140,7 +140,7 @@ handlers[check_stages.next_week] = function () {
 handlers[check_stages.aim_check] = () => {
   const buffer = [],
     /** @type {Record<string,{race:number,rank:number}>} */
-    races = era.get('cflag:68:育成成绩');
+    races = era.get('cflag:19:育成成绩');
   buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
   buffer.push(check_aim_and_get_entry(races, race_enum.hyac_sta, 1, 1));
   buffer.push(check_aim_and_get_entry(races, race_enum.nhk_cup, 1, 3));

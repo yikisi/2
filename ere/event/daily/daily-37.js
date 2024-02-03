@@ -809,17 +809,23 @@ handlers[ero_hooks.load_talk] = async () => {
   const flash = get_chara_talk(37);
   if (era.get('cflag:37:妊娠回合计时')) {
     await flash.say_and_wait('是吗……你最终还是做出了这样的选择啊。');
+    await flash.print_and_wait([
+      flash.get_colored_name(),
+      ' 轻叹一声，言语中尽是失落。',
+    ]);
     await flash.say_and_wait(
       '……呵，看来是我的双眼被之前那份虚假的美好所蒙蔽了呢。',
     );
-    await flash.say_and_wait(
-      '抛妻弃子，背信弃义，对你而言，所谓的誓言，都是些一文不值的事物吗？',
+    await flash.print_and_wait(
+      `下一秒，明白一切都已无法逆转的${flash.sex}轻笑着摇了摇头。`,
     );
-    await flash.print_and_wait([
-      flash.get_colored_name(),
-      ' 噙着泪，坚强地质问着 ',
-      get_chara_talk(0).get_colored_name(),
-    ]);
+    await flash.say_and_wait('那么，请容我问出最后一个问题。');
+    await flash.print_and_wait(
+      `${flash.get_teen_sex_title()}抹去眼中的泪花，悲伤逐渐转变为一种清澈的质问。`,
+    );
+    await flash.say_and_wait(
+      '抛妻弃子，背信弃义。对你而言，所谓的誓言，都是些一文不值的事物吗？',
+    );
   }
 };
 

@@ -41,7 +41,7 @@ handlers[check_stages.aim_race] = (extra_flag) => {
   const ret =
     aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
     aim_races[extra_flag.race];
-  if (!ret) {
+  if (!ret && extra_flag.rank !== undefined) {
     const event_marks = new LunaEventMarks();
     if (
       extra_flag.rank <= 5 &&
