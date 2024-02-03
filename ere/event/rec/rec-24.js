@@ -161,7 +161,7 @@ module.exports = {
             );
           } else {
             await chara.say_and_wait(
-              '哎哎哎一！？等下一！为什么你答应${sex}了啊！？',
+              '哎哎哎一！？等下一！为什么你答应她了啊！？',
             );
             await chara.say_and_wait('真是的，还以为你是个温柔的训练员呢！');
             await era.printAndWait(

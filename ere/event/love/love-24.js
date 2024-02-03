@@ -5,6 +5,7 @@ const { add_event } = require('#/event/queue');
 const CharaTalk = require('#/utils/chara-talk');
 
 const event_hooks = require('#/data/event/event-hooks');
+const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
 /** @param {CharaTalk} chara_talk */
 async function love_49(chara_talk) {
@@ -25,9 +26,10 @@ async function love_49(chara_talk) {
     `${chara_talk.name}是一个天才，无论是什么都能很快的学会————或许很快有人就要被迫意识到这一点了。`,
   );
   era.println();
+  await sys_love_uma_in_event(24);
 }
 
-/** @param {CharaTalk} chara_talk*/
+/** @param {CharaTalk} chara_talk
 async function love_24(chara_talk) {
   await chara_talk.say_and_wait('Maya呢，从小就很向往着天空。');
   await chara_talk.say_and_wait('在Maya小的时候，爸爸曾经带我飞上过天空。');
@@ -45,6 +47,7 @@ async function love_24(chara_talk) {
   await chara_talk.say_and_wait('在Maya长大之前，可要一直陪着人家哦？');
   return true;
 }
+*/
 
 async function love_74_week_start(chara_talk) {
   const chara17_talk = new CharaTalk(17);
@@ -151,7 +154,7 @@ async function love_74_week_start(chara_talk) {
   era.printButton(`「请让我与你伴行」（暂停升级）`, 1);
   era.printButton(`「你当然是我最重要的人」（升级关系）`, 2);
   const ret = await era.input();
-  if (ret === 1) {
+  if (ret === 2) {
     await chara_talk.say_and_wait(
       '……真、真的吗？人家最特别？人家最重要，最闪闪发光吗？',
     );
@@ -168,14 +171,6 @@ async function love_74_week_start(chara_talk) {
     await chara18_talk.say_and_wait(
       `唉……那我就用训练员的名字提出申请咯。可别因为那个“不得了的话”惹出麻烦啊。`,
     );
-    await chara_talk.say_and_wait('耶耶～☆谢谢大家的支持！人家很幸福～！');
-    await chara_talk.say_and_wait(
-      '我发誓，接下来也会跟训练员一起带给大家闪耀光芒！',
-    );
-    await chara_talk.say_and_wait('对吧！训练员♪');
-    era.printButton('「！……当然，我也发誓！」', 1);
-    await era.input();
-    await era.printAndWait('听到两人的宣言，会场一片欢腾。');
     return true;
   } else {
     await chara_talk.say_and_wait('……好的！耶嘿嘿，我好开心。');
@@ -292,7 +287,6 @@ async function love_74_week_end(chara_talk) {
 
   era.printButton('「不管穿上什么衣服，重炮都是最闪耀的」（升级关系）', 1);
   era.printButton('「为了下次也能当上模特儿，继续努力吧！」（暂停升级）', 2);
-  await era.input();
   const ret = await era.input();
   if (ret === 1) {
     await chara_talk.say_and_wait('……！！');
@@ -306,6 +300,16 @@ async function love_74_week_end(chara_talk) {
       '这下训练员的太阳永远都是Maya咯☆我是不会输的～！',
     );
     await era.printAndWait('重炮如此说着，露出了兴高采烈的笑容。');
+    await chara_talk.say_and_wait('耶耶～☆谢谢大家的支持！人家很幸福～！');
+    await chara_talk.say_and_wait(
+      '我发誓，接下来也会跟训练员一起带给大家闪耀光芒！',
+    );
+    await chara_talk.say_and_wait('对吧！训练员♪');
+    era.printButton('「！……当然，我也发誓！」', 1);
+    await era.input();
+    await era.printAndWait('听到两人的宣言，会场一片欢腾。');
+    await sys_love_uma_in_event(24);
+    return true;
   } else {
     await chara_talk.say_and_wait(
       '好！别说下次，下下次也要当上模特儿。我要变得越来越适合这套服装，然后──',
@@ -328,6 +332,7 @@ async function love_74_week_end(chara_talk) {
     era.println();
     era.set('cflag:24:爱慕暂拒', 74);
     await era.waitAnyKey();
+    return false;
   }
 }
 
@@ -339,19 +344,19 @@ async function love_74_week_end(chara_talk) {
 module.exports = async (hook, _, event_object) => {
   const love = era.get('love:24');
   if (hook === event_hooks.week_end) {
-    if (love === 24) {
-      await love_24(new CharaTalk(24));
-    } else if (love === 49) {
+    if (love === 49) {
       await love_49(new CharaTalk(24));
     } else if (love === 74) {
       (await love_74_week_end(new CharaTalk(24))) &&
         add_event(event_hooks.week_start, event_object);
-    } else if (love === 89) {
+    } else if (love >= 89) {
       throw new Error('unsupported!');
     }
   } else if (hook === event_hooks.week_start) {
     if (love === 74) {
       await love_74_week_start(new CharaTalk(24));
+    } else if (love >= 89) {
+      throw new Error('unsupported!');
     }
   }
 };
