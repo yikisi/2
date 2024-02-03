@@ -20,6 +20,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean>>} */
 const handlers = {};
@@ -522,6 +523,47 @@ handlers[event_hooks.celebration] = async () => {
       throw new Error();
   }
   era.set('cflag:60:节日事件标记', 0);
+};
+
+handlers[event_hooks.load_talk] = async () => {
+  const nice_nature = get_chara_talk(60);
+  if (era.get('cflag:60:妊娠回合计时')) {
+    await nice_nature.say_and_wait(
+      `啊哈，是吗，果然内恰小姐还是……但是等等，不行，${sys_get_callname(
+        60,
+        0,
+      )}，我们的孩子，至少，至少给我们的孩子一个名字吧`,
+    );
+    await nice_nature.say_and_wait(
+      '这孩子没有爸爸也无所谓，我能一个人养大，但至少，求求你，一个名字',
+    );
+    await nice_nature.say_and_wait(
+      `『花月自然』？『优雅素质』？类似的，名字，这是内恰小姐麻烦你的最后一件事，${sys_get_callname(
+        60,
+        0,
+      )}，给我一个名字吧`,
+    );
+    await era.printAndWait(
+      [
+        nice_nature.get_colored_name(),
+        {
+          color: nice_nature.color,
+          content: `「${sys_get_callname(60, 0)}————！！」`,
+        },
+      ],
+      { fontSize: '48px' },
+    );
+  } else {
+    await nice_nature.say_and_wait(
+      `如果是 ${sys_get_callname(
+        60,
+        0,
+      )} 的话，一定能找到更好的路线吧……${sys_get_callname(
+        60,
+        60,
+      )} 相信着你哦？不管是现在还是之前，亦或是未来……`,
+    );
+  }
 };
 
 /**

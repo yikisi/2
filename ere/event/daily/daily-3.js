@@ -23,9 +23,8 @@ const handlers = {};
 
 handlers[event_hooks.load_talk] = async () => {
   if (
-    era.get('cflag:3:妊娠阶段') !== 1 << pregnant_stage_enum.no ||
-    (era.get('cflag:0:孩子父亲') === 3 &&
-      era.get('cflag:0:妊娠阶段') > 1 << pregnant_stage_enum.no)
+    era.get('cflag:3:妊娠回合计时') ||
+    (era.get('cflag:0:孩子父亲') === 3 && era.get('cflag:0:妊娠回合计时'))
   ) {
     const teio = get_chara_talk(3);
     await teio.say_and_wait('训练员……要抛弃这个孩子？为什么……');
