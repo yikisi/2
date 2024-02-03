@@ -7,7 +7,7 @@ const check_and_add_event = require('#/event/check/snippets/check-and-add-event'
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const {cb_enum, add_event} = require('#/event/queue');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const {get_chara_talk} = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
@@ -248,7 +248,6 @@ handlers[check_stages.aim_check] = () => {
     const buffer = [],
         /** @type {Record<string,{race:number,rank:number}>} */
         races = era.get('cflag:46:育成成绩');
-    const event_marks = new FaEventMarks();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 16)); //皋月赏出走
     buffer.push(check_aim_and_get_entry(races, race_enum.japa_dir, 1, 1)); //泥地德比5着以内
@@ -298,9 +297,8 @@ handlers[check_stages.title_check] = (extra_flag) => {
             c: get_chara_talk(46).color,
             n: 'top idol⭐',
         });
-        extra_flag.aim_check && sys_personal_achievement.set(400, 1);
-    }
-    else{
+        extra_flag.aim_check && sys_personal_achievement.set(46, 1);
+    } else {
         extra_flag.titles.push({
             c: get_chara_talk(46).color,
             n: '沙之飞隼⭐',
@@ -308,7 +306,7 @@ handlers[check_stages.title_check] = (extra_flag) => {
     }
 };
 
-handlers[check_stages.personal_titles] = () => ['top idol⭐','沙之飞隼'];
+handlers[check_stages.personal_titles] = () => ['top idol⭐', '沙之飞隼'];
 
 /**
  * @param {number} stage_id
