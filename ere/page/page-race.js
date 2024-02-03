@@ -697,7 +697,7 @@ async function race_page(race) {
   }
   let hentai_flag = false;
   const pregnant_check =
-    era.get('cflag:0:妊娠阶段') === pregnant_stage_enum.embryo &&
+    era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.embryo &&
     era.get('cflag:0:妊娠回合计时') === 0 &&
     era.get('cflag:0:孩子父亲');
   contestants.forEach((e) => {

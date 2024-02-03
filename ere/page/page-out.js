@@ -158,14 +158,14 @@ async function out_page() {
         sys_get_move_cost(positions[aim].l, chara_id),
         chara_id,
       );
-      if (!(await sys_get_random_event(positions[aim].s)(chara_id))) {
+      if (!(await sys_get_random_event(positions[aim].s)())) {
         await call_daily_event(chara_id, positions[aim].s);
       }
     }
     era.drawLine();
     await era.printAndWait('回去了……');
     era.println();
-    await sys_get_random_event(event_hooks.back_school)(positions[aim].s);
+    await sys_get_random_event(event_hooks.back_school)();
   }
   era.set('flag:当前位置', location_enum.office);
 }
