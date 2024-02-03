@@ -5,6 +5,7 @@ const {
   sys_change_motivation,
   sys_change_lust,
   sys_change_weight,
+  sys_change_pressure,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_money } = require('#/system/sys-calc-flag');
@@ -345,6 +346,7 @@ handlers[event_hooks.celebration] = async (chara_id) => {
     era.print('获得了【情人节巧克力】！');
     era.add('item:情人节巧克力', 1);
   }
+  sys_change_pressure(chara_id, -get_random_value(500, 1000));
   sys_like_chara(chara_id, 0, get_random_value(40, 80)) &&
     (await era.waitAnyKey());
 };

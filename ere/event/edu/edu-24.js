@@ -30,10 +30,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   );
   const edu_weeks =
     era.get('flag:当前回合数') - era.get('cflag:24:育成回合计时');
-  if (
-    !era.get('status:24:摸鱼') &&
-    Math.random() < 0.2 * extra_flag.stamina_ratio
-  ) {
+  if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
     era.println();
     await era.printAndWait('事件：额外的自主训练', {
       color: chara_talk.color,

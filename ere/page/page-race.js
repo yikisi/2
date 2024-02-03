@@ -769,12 +769,12 @@ async function race_page(race) {
   for (const chara_id of contestants) {
     if (race_rank[chara_id] === 1) {
       sys_change_lust(chara_id, lust_from_palam);
+      sys_change_pressure(chara_id, -2000);
     } else if (race_rank[chara_id] <= 5) {
       sys_change_lust(chara_id, lust_from_palam / 2);
-    } else if (race_rank[chara_id] <= 100) {
-      sys_change_pressure(chara_id, 500);
-    } else {
-      sys_change_pressure(chara_id, 1000);
+      sys_change_pressure(chara_id, -200 * (6 - race_rank[chara_id]));
+    } else if (race_rank[chara_id] <= 10) {
+      sys_change_pressure(chara_id, 300 * race_rank[chara_id]);
     }
     if (!chara_id) {
       continue;

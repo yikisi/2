@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_call_check = require('#/system/script/sys-call-check');
+const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const {
   sys_check_limit_relation_and_love,
@@ -49,6 +50,7 @@ async function punish_unfaithful(chara_id, new_love) {
         get_chara_talk(c_id).get_colored_name(),
         ' 无比愤怒……',
       ]);
+      sys_change_pressure(c_id, get_random_value(1000, 2000));
       like_chara(
         c_id,
         0,

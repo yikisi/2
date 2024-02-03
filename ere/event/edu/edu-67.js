@@ -25,10 +25,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   era.print(
     `${daiya.name} 的 ${attr_names[extra_flag.train]} 训练顺利成功了……`,
   );
-  if (
-    !era.get('status:67:摸鱼') &&
-    Math.random() < 0.2 * extra_flag.stamina_ratio
-  ) {
+  if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
     era.println();
     await print_event_name('额外的自主训练', daiya);
     const chara68_talk = get_chara_talk(68);

@@ -1870,10 +1870,7 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
  * @param {{train:number,stamina_ratio:number}} extra_flag
  */
 handlers[event_hooks.train_success] = async (hook, extra_flag) => {
-  if (
-    !era.get('status:37:摸鱼') &&
-    Math.random() < 0.2 * extra_flag.stamina_ratio
-  ) {
+  if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
     const chara49_talk = get_chara_talk(49);
     await print_event_name('追加训练', chara_talk.color);
     era.println();

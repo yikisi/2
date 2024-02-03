@@ -14,6 +14,7 @@ const {
   attr_enum,
   fail_sta_border,
   attr_names,
+  pressure_border,
 } = require('#/data/train-const');
 const { vehicle_influences, location_move_cost } = require('#/data/move-const');
 const { track_enum } = require('#/data/race/model/race-info');
@@ -46,7 +47,9 @@ function sys_check_train_enabled(chara_id) {
     era.get('flag:当前回合数') - era.get(`cflag:${tmp}:育成回合计时`) <
       3 * 48 &&
     (!era.get(`status:${chara_id}:摸鱼`) ||
-      era.get('cflag:0:位置') === era.get(`cflag:${chara_id}:位置`))
+      era.get('cflag:0:位置') === era.get(`cflag:${chara_id}:位置`)) &&
+    era.get(`base:${chara_id}:压力`) < pressure_border.depression &&
+    era.get(`base:${chara_id}:性欲`) < lust_border.want_sex
   );
 }
 

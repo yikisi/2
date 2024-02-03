@@ -267,7 +267,7 @@ function get_ex_result_in_the_end(chara_id) {
         type: 'text',
       });
     }
-    fill_part_ex(chara_id, buffer, '外阴', '完全肿起的豆豆通红地妖艳而痛苦');
+    fill_part_ex(chara_id, buffer, '外阴', '完全肿起的通红豆豆妖艳而痛苦');
     fill_part_ex(chara_id, buffer, '阴道', '翕动的小穴泛起阵阵热气');
     fill_part_ex(chara_id, buffer, '肛门', '屁穴一张一合地用热气诉说着饥渴');
     fill_spirit_ex(chara_id, buffer, '施虐');

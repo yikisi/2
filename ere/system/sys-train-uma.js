@@ -151,7 +151,7 @@ module.exports = {
       );
 
       const ret = await call_edu_script(chara_id, event_hooks.train_success, {
-        stamina_ratio,
+        stamina_ratio: stamina_ratio * !era.get(`status:${chara_id}:摸鱼`),
         train: attr,
       });
       ret.attr && (changes.attr_change[attr] += ret.attr);

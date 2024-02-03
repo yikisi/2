@@ -9,7 +9,10 @@ const check_ero_enabled = require('#/system/ero/sys-check-ero-action');
 const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
 const { get_characters_in_train } = require('#/system/ero/sys-prepare-ero');
 const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
-const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_change_lust,
+  sys_change_pressure,
+} = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const {
   sys_check_awake,
@@ -760,6 +763,10 @@ async function page_ero(lover) {
         get_chara_talk(chara_id).get_colored_name(),
         ' 无比愤怒……',
       ]);
+      sys_change_pressure(
+        chara_id,
+        get_random_value(2000, 4000) / (1 + (era.get('tflag:强奸') > 0)),
+      );
       sys_like_chara(
         chara_id,
         0,

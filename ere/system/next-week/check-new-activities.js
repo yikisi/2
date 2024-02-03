@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const {
   sys_reg_race,
   sys_change_attr_and_print,
+  sys_change_pressure,
 } = require('#/system/sys-calc-base-cflag');
 const {
   check_pregnant_unprotect,
@@ -16,6 +17,7 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
+const { get_random_value } = require('#/utils/value-utils');
 
 const foreign_race_list = Object.values(race_enum).filter(
   (e) => race_infos[e].track >= track_enum.longchamp,
@@ -132,6 +134,7 @@ async function check_new_activities(cur_round, in_team_list) {
             const chara = get_chara_talk(chara_id);
             sys_change_attr_and_print(chara_id, '体力', -200);
             sys_change_attr_and_print(chara_id, '精力', -500);
+            sys_change_pressure(chara_id, get_random_value(2000, 3000));
             return {
               config: { align: 'center', width: 3 },
               content: [chara.get_colored_name()],
@@ -173,6 +176,9 @@ async function check_new_activities(cur_round, in_team_list) {
         sys_change_attr_and_print(0, '体力', -200);
         sys_change_attr_and_print(0, '精力', -500);
         era.set('cflag:0:位置', era.set('flag:当前位置', location));
+        foreign_list.forEach((chara_id) =>
+          sys_change_pressure(chara_id, -1000),
+        );
       } else if (me_in_race) {
         punish_list.push(0);
       }

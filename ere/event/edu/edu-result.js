@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_change_motivation,
+  sys_change_pressure,
+} = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { gacha } = require('#/utils/list-utils');
@@ -15,13 +18,16 @@ const { get_random_value } = require('#/utils/value-utils');
 const handlers = {};
 
 handlers[event_hooks.train_success] = async (chara_id, hook) => {
+  sys_change_pressure(chara_id, -get_random_value(50, 100));
   if (hook.arg === true) {
+    sys_change_pressure(chara_id, -50);
     return {
       attr: 5,
       relation_change: 5,
       stamina: -50,
     };
   } else if (hook.arg === false) {
+    sys_change_pressure(chara_id, 50);
     return {
       stamina: 50,
     };
@@ -34,9 +40,10 @@ handlers[event_hooks.train_success] = async (chara_id, hook) => {
  * @param {HookArg} hook
  * @param {{args:*,fumble:boolean,train:number}} extra_flag
  */
-handlers[event_hooks.train_fail] = async function (chara_id, hook, extra_flag) {
+handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
   const args = extra_flag.args || fumble_result.fail;
   let attr_change = new Array(5).fill(0),
+    pressure_change = get_random_value(200, 500) + extra_flag.fumble * 500,
     relation_change = args.like,
     stamina = 0;
   if (extra_flag.train !== attr_enum.intelligence) {
@@ -53,6 +60,7 @@ handlers[event_hooks.train_fail] = async function (chara_id, hook, extra_flag) {
       ).forEach((e) => (attr_change[e] = args.attr_down_again));
       sys_change_motivation(chara_id, args.motivate_down);
       relation_change = args.like_fail_again;
+      pressure_change += 500;
     } else if (hook.arg === 0) {
       if (Math.random() < args.ratio.accept_talent) {
         change_buff = -1;
@@ -64,12 +72,14 @@ handlers[event_hooks.train_fail] = async function (chara_id, hook, extra_flag) {
       ).forEach((e) => (attr_change[e] = args.attr_down));
       sys_change_motivation(chara_id, args.motivate_down);
       relation_change = args.like;
+      pressure_change /= 2;
     } else {
       change_buff = extra_flag.fumble + 1;
       relation_change = args.like_success;
       if (extra_flag.fumble) {
         stamina = 100;
       }
+      pressure_change = 0;
     }
     if (era.get(`status:${chara_id}:练习X手`) !== change_buff) {
       era.set(`status:${chara_id}:练习X手`, change_buff);
@@ -82,6 +92,7 @@ handlers[event_hooks.train_fail] = async function (chara_id, hook, extra_flag) {
   } else if (extra_flag.fumble) {
     attr_change[attr_enum.intelligence] = -10;
   }
+  sys_change_pressure(chara_id, pressure_change);
   return { attr_change, relation_change, stamina };
 };
 

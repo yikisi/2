@@ -17,6 +17,7 @@ const { sys_change_fame } = require('#/system/sys-calc-flag');
 const print_ero_page = require('#/page/page-ero');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 async function select_medicine() {
   const item_list = ['超马跳Z', '马跳S']
@@ -286,8 +287,19 @@ async function goto_sex(chara_id) {
           return;
         }
         if (ret === 0) {
-          sys_change_attr_and_print(0, '体力', -200);
-          sys_change_attr_and_print(chara_id, '体力', -200);
+          sys_change_attr_and_print(
+            0,
+            '体力',
+            -get_random_value(0, Math.min(era.get('base:0:体力'), 200)),
+          );
+          sys_change_attr_and_print(
+            chara_id,
+            '体力',
+            -get_random_value(
+              0,
+              Math.min(era.get(`base:${chara_id}:体力`), 200),
+            ),
+          );
           if (
             !era.get('flag:雷普抵抗') ||
             sys_get_strength_ratio_in_fight(0, chara_id) > Math.random()
@@ -321,7 +333,11 @@ async function goto_sex(chara_id) {
           if (!ret) {
             return;
           }
-          sys_change_attr_and_print(0, '精力', -200);
+          sys_change_attr_and_print(
+            0,
+            '精力',
+            -get_random_value(0, Math.min(era.get('base:0:精力'), 200)),
+          );
           if (
             sys_get_intelligence_ratio_in_fight(0, chara_id) > Math.random()
           ) {

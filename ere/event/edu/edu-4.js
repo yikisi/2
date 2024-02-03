@@ -32,10 +32,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   era.print(
     `${chara_talk.name} 的 ${attr_names[extra_flag.train]} 训练顺利成功了……`,
   );
-  if (
-    !era.get('status:4:摸鱼') &&
-    Math.random() < 0.2 * extra_flag.stamina_ratio
-  ) {
+  if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
     await print_event_name('额外的自主训练', chara_talk);
 
     await era.printAndWait(`在${chara_talk.name}的训练结束后。`);

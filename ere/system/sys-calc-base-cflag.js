@@ -29,6 +29,28 @@ function sys_change_lust(chara_id, _val) {
   );
 }
 
+/**
+ * @param {number} chara_id
+ * @param {number} _val
+ */
+function sys_change_pressure(chara_id, _val) {
+  return (
+    era.get('flag:压力获取') &&
+    chara_id &&
+    era.add(
+      `base:${chara_id}:压力`,
+      _val > 0
+        ? Math.ceil(
+            _val *
+              (1 +
+                0.2 * era.get(`talent:${chara_id}:羞耻忍耐`) +
+                sys_call_mec(chara_id, check_stages.mec_pressure_buff)),
+          )
+        : _val,
+    )
+  );
+}
+
 module.exports = {
   /**
    * @param {number} chara_id
@@ -63,6 +85,7 @@ module.exports = {
               0.4 * era.get(`status:${chara_id}:发胖`) +
               era.get(`status:${chara_id}:健康茶`));
           era.add(`base:${chara_id}:体重偏差`, Math.ceil(lose_weight));
+          sys_change_pressure(chara_id, get_random_value(stat / 5, 0));
           if (
             -stat >= 500 ||
             Math.random() < Math.pow(2, (-stat - 500) / 100)
@@ -76,6 +99,7 @@ module.exports = {
           }
         } else {
           sys_change_lust(chara_id, get_random_value(stat, 0) / 4);
+          sys_change_pressure(chara_id, get_random_value(stat / 10, 0));
           if (
             -stat >= 500 ||
             Math.random() < Math.pow(2, (-stat - 500) / 100)
@@ -181,24 +205,7 @@ module.exports = {
     }
     return false;
   },
-  /**
-   * @param {number} chara_id
-   * @param {number} _val
-   */
-  sys_change_pressure: (chara_id, _val) =>
-    era.get('flag:压力获取') &&
-    chara_id &&
-    era.add(
-      `base:${chara_id}:压力`,
-      _val > 0
-        ? Math.ceil(
-            _val *
-              (1 +
-                0.2 * era.get(`talent:${chara_id}:羞耻忍耐`) +
-                sys_call_mec(chara_id, check_stages.mec_pressure_buff)),
-          )
-        : _val,
-    ),
+  sys_change_pressure,
   /**
    * @param {number} chara_id
    * @param {number} val

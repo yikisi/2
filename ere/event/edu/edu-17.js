@@ -402,10 +402,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
     await handle_debuff(event_marks, luna);
     hook.override = true;
     return { pt_change: 5 };
-  } else if (
-    !era.get('status:17:摸鱼') &&
-    Math.random() < 0.2 * extra_flag.stamina_ratio
-  ) {
+  } else if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
     era.println();
     await print_event_name('额外的自主训练', chara_talk);
 
