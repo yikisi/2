@@ -1,9 +1,12 @@
 const era = require('#/era-electron');
+
 const { add_event, cb_enum } = require('#/event/queue');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const CharaTalk = require('#/utils/chara-talk');
-const event_hooks = require('#/data/event/event-hooks');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const EventMarks = require('#/data/event/event-marks');
+const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
@@ -13,13 +16,18 @@ const recruit_flags = require('#/data/event/recruit-flags');
  * @author 爱放箭的袁本初
  */
 module.exports = {
-  async run(stage_id) {
+  /**
+   * @param {number} stage
+   * @param _
+   * @param {EventObject} event_object
+   */
+  async run(stage, _, event_object) {
     const your_name = era.get('callname:0:-2'),
       chara_talk = new CharaTalk(37);
     const me = get_chara_talk(0);
     const event_marks = new EventMarks(0);
     let ret = 0;
-    switch (stage_id) {
+    switch (stage) {
       case event_hooks.recruit:
         if (era.get('cflag:37:招募状态') === -2) {
           await era.printAndWait(
@@ -1034,10 +1042,7 @@ module.exports = {
         if (era.get('flag:当前互动角色')) {
           // 如果身边带着其他${chara_talk.get_uma_sex_title()}，不触发
           // 把事件再塞回去，不然下次不触发了
-          add_event(
-            event_hooks.office_rest,
-            new EventObject(24, cb_enum.recruit),
-          );
+          add_event(stage, event_object);
           return false;
         }
         await era.printAndWait(
