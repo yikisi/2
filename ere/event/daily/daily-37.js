@@ -12,6 +12,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
+const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @type {Record<string,function(stage_id:HookArg,extra_flag:*):Promise<boolean>>} */
 const handlers = {};
@@ -20,7 +21,6 @@ handlers[event_hooks.select] = function () {
   const callname = sys_get_callname(37, 0),
     talk_arr = [],
     relation = era.get(`relation:37:0`);
-  const me = get_chara_talk(0);
   if (relation < 0) {
     talk_arr.push(`……唉。请问有什么事情吗，${callname}？`);
   } else {
@@ -33,15 +33,12 @@ handlers[event_hooks.select] = function () {
       );
     if (era.get('love:37') > 76) {
       talk_arr.push(
-        `嗯，不必多说，早就已经准备好了呢，${
-          me.sex == '他' ? 'Mein Lieber' : 'Meine Lieben'
-        }。` +
-          `呵呵~我在这里，${
-            me.sex == '他' ? 'Mein Lieber' : 'Meine Lieben'
-          }，请问有什么事情吗？` +
-          `呼……感觉迫不及待了呢，让我们现在开始吧，${
-            me.sex == '他' ? 'Mein Lieber' : 'Meine Lieben'
-          }。`,
+        `嗯，不必多说，早就已经准备好了呢，${sys_get_callname(37, 0)}。` +
+          `呵呵~我在这里，${sys_get_callname(37, 0)}，请问有什么事情吗？` +
+          `呼……感觉迫不及待了呢，让我们现在开始吧，${sys_get_callname(
+            37,
+            0,
+          )}。`,
       );
     }
   }
@@ -805,6 +802,24 @@ handlers[event_hooks.out_station] = async function (hook) {
           '不过……呵呵~很感谢您的好意呢，我会认真铭记于心的。',
         );
       }
+  }
+};
+
+handlers[ero_hooks.load_talk] = async () => {
+  const flash = get_chara_talk(37);
+  if (era.get('cflag:37:妊娠回合计时')) {
+    await flash.say_and_wait('是吗……你最终还是做出了这样的选择啊。');
+    await flash.say_and_wait(
+      '……呵，看来是我的双眼被之前那份虚假的美好所蒙蔽了呢。',
+    );
+    await flash.say_and_wait(
+      '抛妻弃子，背信弃义，对你而言，所谓的誓言，都是些一文不值的事物吗？',
+    );
+    await flash.print_and_wait([
+      flash.get_colored_name(),
+      ' 噙着泪，坚强地质问着 ',
+      get_chara_talk(0).get_colored_name(),
+    ]);
   }
 };
 

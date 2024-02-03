@@ -602,6 +602,18 @@ handlers[event_hooks.office_game] = async function () {
       break;
   }
 };
+
+handlers[event_hooks.load_talk] = async () => {
+  const ruby = get_chara_talk(85);
+  await ruby.say_and_wait('……这就是，您的意愿吗？');
+  await ruby.say_and_wait('……');
+  await ruby.say_and_wait('……我知道了');
+  await ruby.say_and_wait([ruby.get_colored_name(), '，会，换一个，训练——']);
+  await ruby.print_and_wait(
+    `${ruby.sex}扔下没说完的话，跑走了，留下了点点泪痕……`,
+  );
+};
+
 /**
  * 第一红宝石的日常事件，角色id=85
  *
