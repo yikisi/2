@@ -6,10 +6,9 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EduEventMarks = require('#/data/event/edu-event-marks');
 const { location_enum } = require('#/data/locations');
 
-const quick_into_sex = require('#/event/snippets/quick-into-sex');
+const SSEventMarks = require("#/data/event/edu-event-marks-extended/edu-event-marks-400");
 
 /**
  * @param {HookArg} hook
@@ -20,12 +19,11 @@ module.exports = async function (hook, __, event_object) {
   const chara_talk = get_chara_talk(400),
     me = get_chara_talk(0),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:400:育成回合计时'),
-    event_marks = new EduEventMarks(400),
-    edu_event_marks = new EduEventMarks(400),
+    event_marks = new SSEventMarks(),
     chara25_talk = get_chara_talk(25);
   let wait_flag = false;
-  if (event_marks.get('beginning') === 1) {
-    event_marks.add('beginning');
+  if (event_marks.beginning === 1) {
+    event_marks.beginning++;
     await print_event_name(`初步磨合`, chara_talk);
     await chara_talk.say_and_wait(`是这样啊，我明白了。`);
     await chara_talk.say_and_wait(
@@ -86,8 +84,8 @@ module.exports = async function (hook, __, event_object) {
     );
     wait_flag =
       get_attr_and_print_in_event(400, [0, 5, 0, 5, 0], 0) || wait_flag;
-  } else if (edu_event_marks.get('sugar_or_milk') === 1) {
-    edu_event_marks.add('sugar_or_milk');
+  } else if (event_marks.sugar_or_milk === 1) {
+    event_marks.sugar_or_milk++;
     await print_event_name('咖啡的味道要怎么样比较好呢？', chara_talk);
     era.drawLine({ content: '休息室内' });
     await chara_talk.say_and_wait(`咖啡要加糖还是加奶？或者什么都不加？`);
@@ -116,8 +114,8 @@ module.exports = async function (hook, __, event_object) {
     await era.printAndWait(
       `就这样${chara_talk.name}垄断了休息室里面的饮料供应。`,
     );
-  } else if (edu_event_marks.get('play_dice') === 1) {
-    edu_event_marks.add('play_dice');
+  } else if (event_marks.play_dice === 1) {
+    event_marks.play_dice++;
     await print_event_name('要来试试运气吗？', chara_talk);
     era.drawLine({ content: '休息室内' });
     await era.printAndWait(
@@ -283,7 +281,6 @@ module.exports = async function (hook, __, event_object) {
     );
     wait_flag =
       get_attr_and_print_in_event(400, [3, 3, 3, 3, 3], 30) || wait_flag;
-    await quick_into_sex(400);
   } else if (edu_weeks === 47 + 47) {
     await print_event_name('为了圣诞节所做的准备', chara_talk);
     era.drawLine({ content: '家政教室内' });

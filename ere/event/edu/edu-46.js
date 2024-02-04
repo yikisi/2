@@ -24,9 +24,7 @@ handlers[
   event_hooks.race_start
 ] = require('#/event/edu/edu-events-46/race-start');
 
-handlers[
-  event_hooks.race_start
-] = require('#/event/edu/edu-events-46/race-end');
+handlers[event_hooks.race_end] = require('#/event/edu/edu-events-46/race-end');
 /**
  * @param {HookArg} hook
  * @param {{train:number,stamina_ratio:number}} extra_flag

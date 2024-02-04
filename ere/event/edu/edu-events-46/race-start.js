@@ -98,7 +98,7 @@ module.exports = async (hook, extra_flag) => {
       `为了准备比赛而提前换好决胜服的醒目飞鹰匆匆前往赛场。`,
     );
     await me.say_and_wait(`飞鹰子，要加油啊。`, true);
-  } else if (extra_flag.race === race_enum.toky_dai && edu_weeks < 95) {
+  } else if (extra_flag.race === race_enum.toky_dai && edu_weeks <= 95) {
     await print_event_name(`醒目飞鹰`, chara_talk);
     await era.printAndWait(
       `重振旗鼓的醒目飞鹰决定稍微放缓一点自己的脚步前行。`,
@@ -208,5 +208,41 @@ module.exports = async (hook, extra_flag) => {
     await me.say_and_wait(`祝你武运昌隆......如果不舒服的话来找我。`);
     await era.printAndWait(`稍微停顿之后，醒目飞鹰打开了准备室的门。`);
     await era.printAndWait(`在震耳欲聋的欢呼声之中，醒目飞鹰走上了赛场。`);
+  } else if (extra_flag.race === race_enum.toky_dai && edu_weeks > 95) {
+    await print_event_name(`东京大赏典·final`, chara_talk);
+    await era.printAndWait(`这一天的到来，比想象之中还要快。`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(`辛苦的汗水，努力的价值，都将在这一刻显露出来。`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(
+      `为了追逐作为顶级偶像的目标，为了那些支持着我的粉丝们，一直努力到现在。`,
+      {
+        color: chara_talk,
+      },
+    );
+    await era.printAndWait(`明明是这样的，但我一直无法说服自己。`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(
+      `内心深处一直传来的声音一直在询问我，这样做是对的吗？`,
+      {
+        color: chara_talk,
+      },
+    );
+    await era.printAndWait(`胸口好疼，像是被揪住了心脏一样。`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(`我不知道答案。`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(`但我隐隐有种感觉，最后的答案，将在此展现。`, {
+      color: chara_talk,
+    });
+    era.printButton(`差不多该出发了，飞鹰子。`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(`......出发吧，为了追寻那份答案。`);
+    await era.printAndWait(`醒目飞鹰走向了赛场之中。`);
   }
 };

@@ -21,6 +21,10 @@ class FaEventMarks extends EduEventMarks {
   petrichor_girl;
   //偶像之路
   fight_idol;
+  // GE 飞鹰子大冒险
+  sweet_dream;
+  // NE 偶像之路
+  idol_road;
   //目标达成
   target_finish;
   // 赛事胜利检查 - 胜利次数

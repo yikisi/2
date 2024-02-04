@@ -8,6 +8,7 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { cb_enum, add_event } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
@@ -15,6 +16,9 @@ const EduEventMarks = require('#/data/event/edu-event-marks');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { race_enum } = require('#/data/race/race-const');
+const FaEventMarks = require("#/data/event/edu-event-marks-extended/edu-event-marks-46");
+const SSEventMarks = require("#/data/event/edu-event-marks-extended/edu-event-marks-400");
+const common_palace_check = require("#/event/check/snippets/common-palace-check");
 
 const handlers = {};
 const aim_races = {};
@@ -34,15 +38,11 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
   aim_races[extra_flag.race];
 
-handlers[check_stages.love_event] = () => {
-  const love = era.get('love:400'),
-    event_obj = new EventObject(400, cb_enum.love);
-  if (love === 49) {
-    add_event(event_hooks.week_end, event_obj);
-  }
-};
+handlers[check_stages.love_event] = () =>
+  add_event(event_hooks.week_end, new EventObject(400, cb_enum.love));
 
-handlers[check_stages.next_week] = () => {
+
+  handlers[check_stages.next_week] = () => {
   const edu_weeks =
     era.get('flag:当前回合数') - era.get('cflag:400:育成回合计时');
   if (edu_weeks < 3 * 48) {
@@ -118,9 +118,11 @@ handlers[check_stages.next_week] = () => {
   }
 };
 
-handlers[check_stages.aim_check] = function () {
+handlers[check_stages.aim_check] =  () => {
   const buffer = [],
-    races = era.get('cflag:400:育成成绩');
+      /** @type {Record<string,{race:number,rank:number}>} */
+      races = era.get('cflag:400:育成成绩');
+
   buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
   buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 3));
   buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 1));
@@ -132,9 +134,14 @@ handlers[check_stages.aim_check] = function () {
   return buffer;
 };
 
+handlers[check_stages.palace_check] = () => {
+  common_palace_check(400);
+  return handlers[check_stages.aim_check]();
+};
+
 /** @param {{aim_check:boolean,titles:{n:string,c:string}[]}} extra_flag */
 handlers[check_stages.title_check] = (extra_flag) => {
-  /** @type {Record<string,{race:number,rank:number,st:number,pop:number}>} */
+  /** @type {Record<string,{race:number,rank:number}>} */
   const races = era.get('cflag:400:育成成绩');
   if (
     check_aim_race(races, race_enum.sats_sho, 1, 1) &&
@@ -151,7 +158,7 @@ handlers[check_stages.title_check] = (extra_flag) => {
   }
 };
 
-handlers[check_stages.personal_titles] = () => ['黑色君王'];
+handlers[check_stages.personal_titles] = () =>  ['黑色君王'];
 
 /**
  * @param {number} stage_id

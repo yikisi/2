@@ -513,8 +513,159 @@ module.exports = async function (hook, __, event_object) {
     await me.say_and_wait(`那么，就朝着梦想开始训练吧！`);
     await chara_talk.say_and_wait(`好！`);
   } else if (edu_weeks === 95 + 47) {
-    await print_event_name(`夜间来访的少女`, chara_talk);
-    await era.printAndWait(`夏天的炎热尚未完全散去，转眼之间来到了秋天。`);
+    await print_event_name(`迷茫少女`, chara_talk);
+    await era.printAndWait(
+      `下周就是预定好的东京大赏了，将整理好的文件放到原先的位置后。`,
+    );
+    await me.say_and_wait(`比想要之中还要疲惫啊。`);
+    await era.printAndWait(`伴随着放学铃的响起，差不多也到下班的时候了。`);
+    await me.say_and_wait(`就在这里稍微等一下醒目飞鹰吧。`);
+    await era.printAndWait(
+      `一反常态的是，直到倒好的咖啡热气消散为止，醒目飞鹰活泼的样子都没有出现。`,
+    );
+    await me.say_and_wait(`可能是被突然拉去参加什么活动一直抽不开身吧。`);
+    await era.printAndWait(`虽然很稀少，但这种情况也是出现过的。`);
+    await era.printAndWait(`一般来说，不久就会在手机上收到她发来的抱歉信息。`);
+    await me.say_and_wait(`既然这样的话，现在就先回宿舍吧。`);
+    await me.say_and_wait(`第二天早上的时候再去听她分享那些有趣的经历吧。`);
+    await era.printAndWait(
+      `不知不觉中，你与醒目飞鹰已经产生了相当程度的羁绊。`,
+    );
+    await era.printAndWait(
+      `以前从未有过整理习惯的你在遇到比你还要邋遢的醒目飞鹰被迫养成了整理的习惯。`,
+    );
+    await era.printAndWait(
+      `遇到学习就逃跑的醒目飞鹰现在也能安安静静坐在你的身边跟数学战斗了。`,
+    );
+    await era.printAndWait(
+      `训练员与马娘之间相互之间影响，最终都深刻影响了彼此之间的命运。`,
+    );
+    await me.say_and_wait(`飞鹰子的话，现在怎么样了呢？`);
+    await me.say_and_wait(`一定在拍摄的时候露出了可爱的笑脸吧。`);
+    await me.say_and_wait(`一定是这样的。`, true);
+    await era.printAndWait(`冬日的夜晚比想象中还要漫长。`);
+    await era.printAndWait(`思绪在独处的时刻延伸到了世界的尽头。`);
+    await era.printAndWait(`深不见底的情感也在延伸的过程中被无限的放大。`);
+    await era.printAndWait(`像沉默的大海，又像深不见底的井一样。`);
+    await era.printAndWait(`咚咚咚。`);
+    await me.say_and_wait(`这么晚的话，会是谁呢？`);
+    await era.printAndWait(`轻轻打开门锁，却看见了散着头发的栗色马娘。`);
+    await chara_talk.say_and_wait(`......训练员先生。`);
+    await me.say_and_wait(`为什么，飞鹰子——不，进来再说吧。`);
+    await era.printAndWait(
+      `比起传出奇奇怪怪的传言，（玩家名）更担心的是飞鹰子的情况。`,
+    );
+    await me.say_and_wait(
+      `喜欢喝什么饮料？红茶？果汁？还是咖啡？不，咖啡还是算了吧。`,
+    );
+    await era.printAndWait(`但在此之前，招待客人是作为主人的义务。`);
+    await chara_talk.say_and_wait(`......啊，飞鹰子的话都可以哦。`);
+    await me.say_and_wait(`心不在焉的样子，是发生了什么吗？`, true);
+    await me.say_and_wait(`这么冷的天气，还是喝杯红茶暖和一下吧。`);
+    await era.printAndWait(`像这样给客人倒茶对你来说还是一种新奇的体验。`);
+    await era.printAndWait(
+      `尽可能的将水壶慢慢倾倒下来，不让一滴茶水逸到桌子上。`,
+    );
+    await me.say_and_wait(`刚烧开的水有点烫，小心一点。`);
+    await chara_talk.say_and_wait(`好的！`);
+    await era.printAndWait(
+      `捧起杯子小心翼翼尝了一口之后，就这样抱着杯子盯着茶叶不知在想些什么的醒目飞鹰。`,
+    );
+    await me.say_and_wait(`那么，现在可以跟我说一下怎么了吗？`);
+    await era.printAndWait(
+      `现在的话，就算走到地铁站门口也来不及赶不上最后一班了。`,
+    );
+    await era.printAndWait(`如果开车的话，说不定还来得及？`);
+    await chara_talk.say_and_wait(`训练员先生，可以让我就这样呆一会吗？`);
+    await me.say_and_wait(`......个人的独处有时候也是必要的。`);
+    await era.printAndWait(
+      `与平静的外表相反，（玩家名）的内心开始了天人交战。`,
+    );
+    await era.printAndWait(
+      `强行按下尚不成熟的理智越来越激烈的警告，（玩家名）走到了阳台。`,
+    );
+    await era.printAndWait(`如果开车的话，说不定还来得及？`);
+    await me.say_and_wait(`没有一丝阴霾的天空，宁静的月神在空中的神殿端坐。`);
+    await me.say_and_wait(`明天也会是一个好天气。`, true);
+    await me.say_and_wait(`像这样在阳台之上来回踱步还蛮有意思的。`, true);
+    await me.say_and_wait(`有空的时候也这样子做吧！`, true);
+    await me.say_and_wait(`......`, true);
+    await me.say_and_wait(`飞鹰子，你怎么了？`, true);
+    await era.printAndWait(`刚升起的愉悦情感随即被更强烈的担忧冲击。`);
+    await era.printAndWait(`天空中的大圆盘似乎也在嘲笑着愚蠢的凡人自作多情。`);
+    await chara_talk.say_and_wait(`训练员先生，可以进来了哦？`);
+    await era.printAndWait(
+      `得到少女的许可，如蒙大赦的（玩家名）迅速推开了玻璃门。`,
+    );
+    await me.say_and_wait(`干脆在这里住一个晚上吧？`);
+    await era.printAndWait(`说出口的一瞬间（玩家名）就后悔了。`);
+    await era.printAndWait(`万千感情涌上心头，最后脱口而出的竟是这句。`);
+    await chara_talk.say_and_wait(`......`);
+    await me.say_and_wait(`这下要被讨厌了。`);
+    await chara_talk.say_and_wait(`嗯。`);
+    await me.say_and_wait(`果然......嗯？`);
+    await era.printAndWait(`为什么？`);
+    await me.say_and_wait(`外宿许可申请了吗？`);
+    await era.printAndWait(`学生在校外过夜需要提前向寮长进行申请`);
+    await chara_talk.say_and_wait(`......`);
+    await me.say_and_wait(`......我知道了，今天晚上的话现在这边休息吧。`);
+    await era.printAndWait(
+      `不久之后先后接到了富士奇石与作为室友的荣进闪耀担心的电话。`,
+    );
+    await me.say_and_wait(`抱歉耽误的时间太久了，已经的话已经找到地方住了。`);
+    await me.say_and_wait(`第二天我会让醒目飞鹰重新提交申请的。`);
+    await me.say_and_wait(`......嗯嗯，感谢理解。`);
+    await era.printAndWait(
+      `挂掉电话之后，看着醒目飞鹰的样子，忍不住还是叹了口气。`,
+    );
+    await me.say_and_wait(`......今天就先睡在床上吧，我去打地铺。`);
+    await era.printAndWait(`所幸上次野营时使用的垫板还没有处理掉。`);
+    await era.printAndWait(
+      `将垫板铺在腾出来的地上，往上面铺上一层床单，简单的床铺就完成了。`,
+    );
+    await me.say_and_wait(`晚安`, true);
+    await chara_talk.say_and_wait(`训练员先生晚安。`);
+    await era.printAndWait(`从语气听起来醒目飞鹰似乎恢复了平静。`);
+    await me.say_and_wait(`空调房里应该没有事情吧？`, true);
+    await era.printAndWait(`将灯关上后盖上了夏季的被子。`);
+    await me.say_and_wait(`为什么醒目飞鹰会突然过来呢？`, true);
+    await me.say_and_wait(`明明是这么乖的孩子。`, true);
+    await era.printAndWait(`盯着陌生的天花板却迟迟睡不着。`);
+    await chara_talk.say_and_wait(`训练员先生。`);
+    await era.printAndWait(`像是从遥远的地方一样传来的微弱声音。`);
+    await chara_talk.say_and_wait(
+      `如果最后失败的话，训练员先生会讨厌这样的我吗？`,
+    );
+    await era.printAndWait(`未曾听过的颤抖。`);
+    await me.say_and_wait(`不，怎么会。`);
+    await chara_talk.say_and_wait(
+      `我很害怕，真的很害怕，害怕失败的自己会被抛弃。`,
+    );
+    await chara_talk.say_and_wait(
+      `明明已经练习过无数遍了，但是，一想到失败的可能性。`,
+    );
+    await chara_talk.say_and_wait(`无论怎么努力，也无法消除那微弱的可能性。`);
+    await chara_talk.say_and_wait(`即使想要闭上眼睛，在脑海之中浮现的确是——`);
+    await chara_talk.say_and_wait(`——独自一人，在空荡荡的舞台之上。`);
+    await chara_talk.say_and_wait(`想要说些什么，但什么也说不出口。`);
+    await chara_talk.say_and_wait(
+      `想要哭泣却流不出眼泪，最后只是变成了一种扭曲的笑容。`,
+    );
+    await me.say_and_wait(`如果醒目飞鹰需要勇气的话，我来给你勇气。`);
+    await me.say_and_wait(
+      `不论飞鹰子成功也好，失败也好，我都会陪着你一起见证最终的结局。`,
+    );
+    await me.say_and_wait(`那个时候，我们一定会笑着谈论今晚的对话的。`);
+    await me.say_and_wait(`所以，飞鹰子不用害怕。`);
+    era.printButton(`抉择之时，我会推你一把`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(`......训练员先生。`);
+    await era.printAndWait(`（玩家名）紧紧握住了醒目飞鹰伸出的手`);
+    await chara_talk.say_and_wait(`训练员先生一定要记住今天说的话呦？`);
+    await me.say_and_wait(`嗯，已经记住了。`);
+    await era.printAndWait(
+      `第二天早上，起来的时候发现睡在旁边的醒目飞鹰就是后话了。`,
+    );
   }
   wait_flag && (await era.waitAnyKey());
 };

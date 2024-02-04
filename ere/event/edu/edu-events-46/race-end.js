@@ -173,7 +173,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`只要醒目飞鹰没事就好。`);
   } else if (
     extra_flag.race === race_enum.toky_dai &&
-    edu_weeks < 95 &&
+    edu_weeks <= 95 &&
     extra_flag.rank === 1
   ) {
     await print_event_name('东京大赏后・名为醒目飞鹰的泥地偶像', chara_talk);
@@ -325,5 +325,82 @@ module.exports = async (hook, extra_flag) => {
     await me.say_and_wait(`现在的话，就让她稍微睡一会吧。`);
     await era.printAndWait(`尽可能不惊动醒目飞鹰，慢慢将她背到背上。`);
     await era.printAndWait(`在回去的路上，飞鹰子的睡脸额外的可爱。`);
+  } else if (
+    extra_flag.race === race_enum.cham_cup &&
+    edu_weeks > 95 &&
+    extra_flag.rank === 1
+  ) {
+    await print_event_name('冠军杯后・目标——东京大赏', chara_talk);
+    await era.printAndWait(`醒目飞鹰轻松获得了冠军杯的胜利。`);
+    await era.printAndWait(`在舞台之上的醒目飞鹰变得更加闪耀。`);
+    await era.printAndWait(`休息室中`);
+    await chara_talk.say_and_wait(`训练员先生——接下来只剩下东京大赏了。`);
+    await me.say_and_wait(`我相信飞鹰子一定可以做到的。`);
+    await era.printAndWait(`平静的说出了自己的心情。`);
+    await era.printAndWait(`与其说是鼓励，不如是在坦述自己的确信。`);
+    await chara_talk.say_and_wait(`——现在的飞鹰子稍微有些紧张呢。`);
+    await era.printAndWait(
+      `是啊，面对即将踏出的最后一步，在结果到来之前的这段时间里是最紧张的时刻。`,
+    );
+    await me.say_and_wait(
+      `醒目飞鹰是我见过最坚强的马娘了，所以我希望你的梦想能够实现。`,
+    );
+    await era.printAndWait(
+      `轻轻抚摸着醒目飞鹰的小脑袋，比起一开始的抗拒，现在的她看上去十分平静。`,
+    );
+    await chara_talk.say_and_wait(`现在的心情稍微有些平复了，谢谢。`);
+    await me.say_and_wait(`既然平静下来的话，找个地方吃一顿庆祝一下吧？`);
+    await chara_talk.say_and_wait(`有点想去尝尝看烤肉呢，接下来一起去吃吧⭐`);
+    await era.printAndWait(
+      `在享受了美食之后，赶在宵禁前将醒目飞鹰送回了宿舍。`,
+    );
+    await chara_talk.say_and_wait(`训练员先生。`);
+    await era.printAndWait(`似乎打算说着什么的醒目飞鹰，稍微犹豫了一下。`);
+    await me.say_and_wait(`怎么了？`);
+    await chara_talk.say_and_wait(`什么都没有哦⭐`);
+    await era.printAndWait(`少女捂着嘴偷笑着跑回了宿舍中。`);
+  } else if (
+    extra_flag.race === race_enum.toky_dai &&
+    edu_weeks > 95 &&
+    extra_flag.rank === 1
+  ) {
+    await print_event_name('东京大赏典后・顶级偶像——醒目飞鹰', chara_talk);
+    await era.printAndWait(`偶像是什么？`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(`是在舞台之中挥洒着汗水，追逐着闪耀的刹那？`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(
+      `还是背负着粉丝们的期待，拼尽全力朝着闪耀的方向前行？`,
+      {
+        color: chara_talk,
+      },
+    );
+    await era.printAndWait(`冲线的瞬间，我得到的答案是`, {
+      color: chara_talk,
+    });
+    await era.printAndWait(`从内心之中静默燃烧的火焰`, {
+      color: chara_talk,
+    });
+    era.drawLine();
+    await era.printAndWait(`取得了胜利的醒目飞鹰，在舞台之上露出的美丽笑容。`);
+    await era.printAndWait(
+      `作为后辈的马娘们站在人群之中对着她下定了前进的决心。`,
+    );
+    await era.printAndWait(
+      `然而在作为偶像的背影之后，你也知道，她只是一个普普通通的少女罢了。`,
+    );
+    await era.printAndWait(
+      `与其他马娘一样，喜欢可爱的东西，期待着爱情的到来，希翼着美好的未来。`,
+    );
+    await era.printAndWait(
+      `少女啊，希望你能向天空中的雄鹰一样，在泥地的道路上不断振翅飞翔。`,
+    );
+    await chara_talk.say_and_wait(`训练员先生，你在想什么呢？`);
+    await era.printAndWait(`看着身边的少女，不禁对未来也产生了期待的样子。`);
+    await me.say_and_wait(`接下来的梦之杯，希望也能看到飞鹰子闪耀的背影。`);
+    await chara_talk.say_and_wait(`嗯！训练员先生就好好看着吧！`);
+    await era.printAndWait(`向你飞扑过来的少女露出了幸福的笑容。`);
   }
 };
