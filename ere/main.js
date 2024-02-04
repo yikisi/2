@@ -50,28 +50,18 @@ module.exports = async () => {
         config: { width: 8 },
         content: [
           {
-            content: 'Discord erauma 频道',
-            url: 'https://discord.gg/jEYsxjzaYs',
-          },
-          { isBr: true },
-          {
-            content: 'Discord 中文era遊戲社群',
-            url: 'https://discord.gg/xXXGfwddrw',
-          },
-          { isBr: true },
-          {
             content: 'EraUma游戏发布页',
-            url: 'https://gitgud.io/era-games-zh/doujin/erauma/-/releases/permalink/latest',
+            url: 'https://gitgud.io/SLeader/erauma/-/releases/permalink/latest',
           },
           { isBr: true },
           {
             content: 'EraUma开源仓库地址（内源）',
-            url: 'https://gitgud.io/era-games-zh/doujin/erauma',
+            url: 'https://gitgud.io/SLeader/erauma',
           },
           { isBr: true },
           {
             content: 'EraElectron引擎开源仓库地址（内源）',
-            url: 'https://gitgud.io/era-games-zh/meta/era-electron',
+            url: 'https://gitgud.io/SLeader/era-electron',
           },
         ],
         type: 'text',
