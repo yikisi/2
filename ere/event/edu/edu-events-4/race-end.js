@@ -488,13 +488,19 @@ module.exports = async (hook, extra_flag) => {
                 era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
             }的爱情便当吧♪`,
         );
-        era.printButton(`这次可不要做的半生不熟了哦`, 1);
-        await era.input();
-        await chara_talk.say_and_wait(`在料理课上我也不停地在磨练厨艺哦？`);
-        await chara_talk.say_and_wait(
-            `之后一定会做出让你舌头都想吃下去的料理，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}就在座位上好好期待吧。`,
+        await era.printAndWait(
+            `（玩家名）回忆起了松软奶酪与浇灌着蜂蜜的面包发出的香甜气息，以及丸善斯基在晴朗的天空之下露出的笑容。`,
         );
-        await era.printAndWait(`大阪杯在愉悦的气氛中结束了。`);
+        era.printButton(`丸善斯基的厨艺一直都是这么好呢`, 1);
+        await era.input();
+        await era.printAndWait(
+            `像是回忆起了什么一样，微笑之中露出了狡黠表情的（丸善斯基）轻轻摆动着尾巴。`,
+        );
+        await chara_talk.say_and_wait(`训练员君接下来也一直做我的试吃员吧。`);
+        await me.say_and_wait(`说起来的话，我明天想尝尝看中华料理。`,);
+        await chara_talk.say_and_wait(`呵呵♪训练员先生就拭目以待吧。`);
+        await era.printAndWait(
+            `丸善斯基用心烹饪的美食就像她在赛场之中奔跑时一样，有一种灵动的气息在里面。如果从一个人制作的饭菜之中可以窥见她的灵魂的话，那么，丸善斯基无疑就是最灵动的灵魂了。`);
     } else if (
         extra_flag.race === race_enum.tenn_sho &&
         edu_weeks > 95 &&
