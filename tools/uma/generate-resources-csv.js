@@ -1,9 +1,15 @@
 const { readFileSync, writeFileSync, existsSync } = require('fs');
 
 const lines = readFileSync('./uma-data.csv', 'utf-8')
+  .replace(/^\ufeff/, '')
   .split('\n')
   .filter((e) => e);
-lines.shift();
+const header = lines
+  .shift()
+  .split(',')
+  .map((e) => e.replace(/\s+$/, ''));
+const file_name_index = header.findIndex((e) => e === '文件名'),
+  image_index = header.findIndex((e) => e === '角色Str|头像');
 
 const buffer = {
   others: '\ufeff',
@@ -15,8 +21,8 @@ const buffer = {
 
 const chara_lines = lines.map((e) => {
   const l = e.split(',');
-  console.log(l[0]);
-  return { id: l[0], alias: l[42].replace(/\s+$/, '') };
+  console.log(l[file_name_index]);
+  return { id: l[file_name_index], alias: l[image_index].replace(/\s+$/, '') };
 });
 
 function check_and_add_to_csv(file_name, img_name, img_regex) {
