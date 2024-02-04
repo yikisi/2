@@ -327,10 +327,10 @@ async function select_target(type) {
             ],
             type: 'text',
           });
-        } else if (titles.length > 1) {
+        } else if (titles.length) {
           buffer.push({
             config: { align: 'center', width: 4 },
-            content: `（${titles.length - 1}）`,
+            content: `（${titles.length}）`,
             type: 'text',
           });
         } else {

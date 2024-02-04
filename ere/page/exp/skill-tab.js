@@ -13,12 +13,20 @@ const {
 
 const page_name = '育成情况';
 
+let skill_names = undefined;
+
 module.exports = {
   /**
    * @param {CharaTalk} chara
    * @returns {{print():void}}
    */
   generate(chara) {
+    if (!skill_names) {
+      skill_names = era
+        .get('ablentries')
+        .filter((e) => e[1] >= 15 && e[1] <= 17)
+        .map((e) => e[0]);
+    }
     const aim_list = [];
     if (era.get(`cflag:${chara.id}:种族`)) {
       if (
@@ -73,6 +81,21 @@ module.exports = {
             config: { content: '习得技能', position: 'left' },
             type: 'divider',
           },
+          ...skill_names
+            .map((e) => {
+              return {
+                n: e,
+                l: era.get(`abl:${chara.id}:${e}`),
+              };
+            })
+            .filter((e) => e.l)
+            .map((e) => {
+              return {
+                config: { width: 4 },
+                content: `${e.n} Lv.${e.l}`,
+                type: 'text',
+              };
+            }),
           {
             config: { content: '因子继承', position: 'left' },
             type: 'divider',

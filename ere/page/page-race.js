@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_change_tired = require('#/system/chara/sys-change-tired');
 const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
@@ -593,10 +594,7 @@ async function race_page(race) {
         year: cur_year,
       };
     }
-    era.add(
-      `status:${chara_id}:疲惫`,
-      3 - era.get(`talent:${chara_id}:身体素质`),
-    );
+    sys_change_tired(chara_id, 3);
     sys_call_check(chara_id, check_stages.after_race, {
       aim_race: aim_race_dict[chara_id] > 0,
       edu_weeks,

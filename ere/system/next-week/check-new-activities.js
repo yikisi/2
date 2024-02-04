@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_change_tired = require('#/system/chara/sys-change-tired');
 const {
   sys_reg_race,
   sys_change_attr_and_print,
@@ -26,9 +27,44 @@ const track2location = {};
 track2location[track_enum.longchamp] =
   track2location[track_enum.chantilly] =
   track2location[track_enum.st_cloud] =
-    location_enum.paris;
-track2location[track_enum.bashang] = location_enum.guangzhou;
-track2location[track_enum.shatin] = location_enum.hongkong;
+    { lan: '法', loc: location_enum.paris };
+track2location[track_enum.bashang] = {
+  lan: '粤',
+  loc: location_enum.guangzhou,
+};
+track2location[track_enum.shatin] = {
+  lan: '粤',
+  loc: location_enum.hongkong,
+};
+
+/**
+ * @param {number} chara_id
+ * @param {string} language
+ */
+function handle_foreign_debuff(chara_id, language) {
+  sys_change_attr_and_print(chara_id, '体力', -200);
+  sys_change_attr_and_print(chara_id, '精力', -500);
+  sys_change_tired(chara_id, 2);
+  if (era.get(`cflag:${chara_id}:种族`)) {
+    era.set(
+      `status:${chara_id}:语言不通`,
+      Math.max(
+        5 -
+          (era.get(`abl:${chara_id}:${language}语`) || 0) +
+          era.get(`talent:${chara_id}:社交态度`),
+        0,
+      ),
+    );
+    era.set(
+      `status:${chara_id}:水土不服`,
+      4 - era.get(`talent:${chara_id}:身体素质`),
+    );
+    era.set(
+      `status:${chara_id}:客场作战`,
+      4 - era.get(`talent:${chara_id}:自信程度`),
+    );
+  }
+}
 
 /**
  * @param {number} cur_round
@@ -132,8 +168,7 @@ async function check_new_activities(cur_round, in_team_list) {
           },
           ...foreign_list.map((chara_id) => {
             const chara = get_chara_talk(chara_id);
-            sys_change_attr_and_print(chara_id, '体力', -200);
-            sys_change_attr_and_print(chara_id, '精力', -500);
+            handle_foreign_debuff(chara_id, location.lan);
             sys_change_pressure(chara_id, get_random_value(2000, 3000));
             return {
               config: { align: 'center', width: 3 },
@@ -173,9 +208,8 @@ async function check_new_activities(cur_round, in_team_list) {
         temp = await era.input();
       }
       if (!temp) {
-        sys_change_attr_and_print(0, '体力', -200);
-        sys_change_attr_and_print(0, '精力', -500);
-        era.set('cflag:0:位置', era.set('flag:当前位置', location));
+        handle_foreign_debuff(0, location.lan);
+        era.set('cflag:0:位置', era.set('flag:当前位置', location.loc));
         foreign_list.forEach((chara_id) =>
           sys_change_pressure(chara_id, -1000),
         );
@@ -189,6 +223,7 @@ async function check_new_activities(cur_round, in_team_list) {
             const tmp = sys_reg_race(chara_id);
             tmp.curr.race = tmp.last.race = -1;
             tmp.curr.week = tmp.last.week = -1;
+            sys_change_pressure(chara_id, get_random_value(3000, 4000));
             return {
               config: { align: 'center', width: 3 },
               content: [get_chara_talk(chara_id).get_colored_name()],
@@ -199,7 +234,7 @@ async function check_new_activities(cur_round, in_team_list) {
         sys_change_fame(-25 - 25 * punish_list.length);
       }
       foreign_list.forEach((chara_id) =>
-        era.set(`cflag:${chara_id}:位置`, location),
+        era.set(`cflag:${chara_id}:位置`, location.loc),
       );
     } else {
       // 远征结束
@@ -211,6 +246,10 @@ async function check_new_activities(cur_round, in_team_list) {
         if (era.get(`cflag:${chara_id}:位置`)) {
           sys_change_attr_and_print(chara_id, '体力', -100);
           sys_change_attr_and_print(chara_id, '精力', -600);
+          era.set(`status:${chara_id}:语言不通`, 0);
+          era.set(`status:${chara_id}:水土不服`, 0);
+          era.set(`status:${chara_id}:客场作战`, 0);
+          sys_change_tired(chara_id, 1);
           era.set(`cflag:${chara_id}:位置`, 0);
         }
       });
@@ -218,6 +257,10 @@ async function check_new_activities(cur_round, in_team_list) {
         era.set('flag:当前位置', location_enum.office);
         sys_change_attr_and_print(0, '体力', -100);
         sys_change_attr_and_print(0, '精力', -600);
+        era.set('status:0:语言不通', 0);
+        era.set('status:0:水土不服', 0);
+        era.set('status:0:客场作战', 0);
+        sys_change_tired(0, 1);
         era.set('cflag:0:位置', 0);
       }
     }

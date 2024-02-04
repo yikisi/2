@@ -670,6 +670,18 @@ module.exports = {
         opacity: tired > 1 ? 1 : 0.5,
       });
     }
+    new Array(3).fill(0).forEach((_, i) => {
+      const status_id = 7 + i,
+        status_name = era.get(`statusname:${status_id}`),
+        num = era.get(`status:${chara_id}:${status_id}`);
+      if (num) {
+        status_list.push({
+          color: buff_colors[3],
+          content: `${status_name}(${num})`,
+          key: status_name,
+        });
+      }
+    });
     if (era.get(`status:${chara_id}:发胖`)) {
       status_list.push({ color: buff_colors[0], content: '发胖' });
     }

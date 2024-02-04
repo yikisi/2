@@ -17,6 +17,7 @@ const {
   sys_change_lust,
   sys_get_billings,
   sys_reg_race,
+  sys_change_pressure,
 } = require('#/system/sys-calc-base-cflag');
 const {
   sys_like_chara,
@@ -630,15 +631,22 @@ async function sys_next_week() {
           `cflag:${chara_id}:妊娠回合计时`,
           1 + is_pregnant_slave,
         ),
-        o_timer = timer - 1;
+        o_timer = timer - 1 - is_pregnant_slave;
       const pregnant_times = era.get(`exp:${chara_id}:生产次数`);
       era.add(
         `base:${chara_id}:体重偏差`,
         get_random_value(50 + timer * 5, 150 + timer * 10),
       );
       if (!o_timer) {
+        sys_change_pressure(
+          chara_id,
+          500 *
+            (1 +
+              (era.get('flag:当前回合数') -
+                era.get(`cflag:${chara_id}:育成回合计时`) <
+                3 * 48)),
+        );
         const father_id = era.get(`cflag:${chara_id}:孩子父亲`);
-        // 常规事件：马娘发现怀孕
         await call_ero_script(
           chara_id || father_id,
           ero_hooks.report_pregnant_between_weeks,
@@ -649,19 +657,18 @@ async function sys_next_week() {
         );
       } else if (timer < 13) {
         // 1-12周孕早期
-        // 空，不做处理
+        sys_change_pressure(chara_id, get_random_value(400, 600));
       } else if (timer < 28) {
         // 13-29周安定期，可以做爱了
         pregnant_stage = era.set(
           `cflag:${chara_id}:妊娠阶段`,
           1 << pregnant_stage_enum.fetal,
         );
-        if (20 === timer) {
-          // 20周腰围+15cm，到此+15cm
-          era.add(`cflag:${chara_id}:腰围`, 15);
-        }
+        // 20周腰围+15cm，到此+15cm
+        20 === timer && era.add(`cflag:${chara_id}:腰围`, 15);
       } else if (timer < 36) {
         // 28-35周孕晚期，开始泌乳
+        sys_change_pressure(chara_id, get_random_value(50, 150));
         pregnant_stage = era.set(
           `cflag:${chara_id}:妊娠阶段`,
           1 << pregnant_stage_enum.late,
@@ -671,11 +678,10 @@ async function sys_next_week() {
           era.set(`talent:${chara_id}:泌乳`, 1);
           era.add(`cflag:${chara_id}:胸围`, 3);
         }
-        if (30 === timer) {
-          // 15周腰围+15cm，到此+30cm
-          era.add(`cflag:${chara_id}:腰围`, 15);
-        }
+        // 15周腰围+15cm，到此+30cm
+        30 === timer && era.add(`cflag:${chara_id}:腰围`, 15);
       } else {
+        sys_change_pressure(chara_id, get_random_value(200, 400));
         // H事件：出生
         // 37周以后概率生，最晚42周
         // 现实是40周，这里为了游戏性折叠了
@@ -689,10 +695,8 @@ async function sys_next_week() {
           if (era.get(`talent:${chara_id}:泌乳`) === 1) {
             era.add(`cflag:${chara_id}:胸围`, 2);
           }
-          if (!pregnant_times) {
-            // 头胎在临产期+1cm臀围
-            era.add(`cflag:${chara_id}:臀围`, 1);
-          }
+          // 头胎在临产期+1cm臀围
+          !pregnant_times && era.add(`cflag:${chara_id}:臀围`, 1);
           // 临产期腰围+10cm，到此+40cm
           era.add(`cflag:${chara_id}:腰围`, 10);
         }
@@ -703,10 +707,8 @@ async function sys_next_week() {
           Math.random() < birth_percent[timer - 36]
         ) {
           // 出生
-          if (pregnant_times < 2) {
-            // 头两胎在生产后+2cm
-            era.add(`cflag:${chara_id}:臀围`, 2);
-          }
+          // 头两胎在生产后+2cm
+          pregnant_times < 2 && era.add(`cflag:${chara_id}:臀围`, 2);
           // 出生后腰围-32cm，到此+8cm
           era.add(`cflag:${chara_id}:腰围`, -32);
           pregnant_stage = era.set(
