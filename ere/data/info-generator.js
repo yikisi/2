@@ -664,7 +664,7 @@ module.exports = {
     const tired = era.get(`status:${chara_id}:疲惫`);
     if (tired) {
       status_list.push({
-        color: buff_colors[3],
+        color: buff_colors[0],
         content: `疲惫(${tired})`,
         key: '疲惫',
         opacity: tired > 1 ? 1 : 0.5,
@@ -676,7 +676,7 @@ module.exports = {
         num = era.get(`status:${chara_id}:${status_id}`);
       if (num) {
         status_list.push({
-          color: buff_colors[3],
+          color: buff_colors[0],
           content: `${status_name}(${num})`,
           key: status_name,
         });

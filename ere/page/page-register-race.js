@@ -1,5 +1,8 @@
 const era = require('#/era-electron');
 
+const {
+  check_pregnant_unprotect,
+} = require('#/system/ero/sys-calc-ero-status');
 const sys_call_check = require('#/system/script/sys-call-check');
 const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
@@ -10,6 +13,7 @@ const { el_danger_color, adaptability_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_adaptability_rank } = require('#/data/info-generator');
+const { location_enum } = require('#/data/locations');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
 const { adaptability_names } = require('#/data/train-const');
@@ -105,7 +109,11 @@ async function reg_race_page() {
     edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`),
     flag_race_reg = true,
     flag_filter_race = true,
-    flag_hide_adaptability = true;
+    flag_hide_adaptability = true,
+    in_foreign =
+      era.get(`cflag:${chara_id}:位置`) > 0 &&
+      era.get(`cflag:${chara_id}:位置`) !== location_enum.beach &&
+      registered_race.week > 0;
 
   while (flag_race_reg) {
     era.clear();
@@ -172,6 +180,8 @@ async function reg_race_page() {
                     buttonType: is_aim_race ? 'danger' : 'warning',
                     disabled:
                       era.get(`status:${chara_id}:伤病`) ||
+                      !check_pregnant_unprotect(chara_id) ||
+                      in_foreign ||
                       (is_foreign &&
                         race_infos[e].date + year_begin - cur_round <= 2),
                   },
@@ -298,6 +308,10 @@ async function reg_race_page() {
       );
       adaptability_dict = generate_adaptability_dict(chara_id);
       edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
+      in_foreign =
+        era.get(`cflag:${chara_id}:位置`) > 0 &&
+        era.get(`cflag:${chara_id}:位置`) !== location_enum.beach &&
+        registered_race.week > 0;
     } else {
       if (registered_race.race === ret) {
         registered_race.race = registered_race.week = -1;

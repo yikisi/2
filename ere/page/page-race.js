@@ -70,6 +70,26 @@ const adaptability2race = [
   race_enum.heia_sta,
 ];
 
+/**
+ * @param {number} chara_id
+ * @param {RaceInfo} info
+ */
+function generate_adaptability_info(chara_id, info) {
+  return {
+    ground: Math.max(
+      era.get(`cflag:${chara_id}:${adaptability_names[info.ground]}适性`) -
+        (era.get(`status:${chara_id}:客场作战`) || 0),
+      0,
+    ),
+    distance: Math.max(
+      era.get(
+        `cflag:${chara_id}:${adaptability_names[info.distance + 2]}适性`,
+      ) - (era.get(`status:${chara_id}:客场作战`) || 0),
+      0,
+    ),
+  };
+}
+
 /** @param {number} chara_id */
 function generate_attribute_info(chara_id) {
   const ret = [];
@@ -295,12 +315,7 @@ async function race_page(race) {
   let flag_prepare_race = true,
     cur_chara_id = contestants[0],
     motivation = era.get(`cflag:${cur_chara_id}:干劲`),
-    ground_ability = era.get(
-      `cflag:${cur_chara_id}:${adaptability_names[info.ground]}适性`,
-    ),
-    distance_ability = era.get(
-      `cflag:${cur_chara_id}:${adaptability_names[info.distance + 2]}适性`,
-    ),
+    adaptability_info = generate_adaptability_info(cur_chara_id, info),
     attribute_info = generate_attribute_info(cur_chara_id),
     strategy_ability = generate_strategy_ability(cur_chara_id),
     strategy = strategy_dict[cur_chara_id];
@@ -346,8 +361,8 @@ async function race_page(race) {
             content: [
               `${adaptability_names[info.ground]}适性：`,
               {
-                color: adaptability_colors[ground_ability],
-                content: get_adaptability_rank(ground_ability),
+                color: adaptability_colors[adaptability_info.ground],
+                content: get_adaptability_rank(adaptability_info.ground),
                 fontWeight: 'bold',
               },
             ],
@@ -358,8 +373,8 @@ async function race_page(race) {
             content: [
               `${adaptability_names[info.distance + 2]}适性：`,
               {
-                color: adaptability_colors[distance_ability],
-                content: get_adaptability_rank(distance_ability),
+                color: adaptability_colors[adaptability_info.distance],
+                content: get_adaptability_rank(adaptability_info.distance),
                 fontWeight: 'bold',
               },
             ],
@@ -441,6 +456,7 @@ async function race_page(race) {
       flag_prepare_race = false;
     } else {
       cur_chara_id = ret;
+      adaptability_info = generate_adaptability_info(ret, info);
       attribute_info = generate_attribute_info(ret);
       strategy_ability = generate_strategy_ability(ret);
       motivation = era.get(`cflag:${ret}:干劲`);

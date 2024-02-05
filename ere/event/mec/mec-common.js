@@ -32,6 +32,17 @@ handlers[check_stages.mec_callname_customize] = (chara_id) => {
 
 handlers[check_stages.mec_ero_check] = () => 0;
 
+handlers[check_stages.mec_foreign_debuff] = (chara_id) => {
+  era.set(
+    `status:${chara_id}:水土不服`,
+    4 - era.get(`talent:${chara_id}:身体素质`),
+  );
+  era.set(
+    `status:${chara_id}:客场作战`,
+    4 + era.get(`talent:${chara_id}:自信程度`),
+  );
+};
+
 handlers[check_stages.mec_maxbase_buff] = () => 0;
 
 handlers[check_stages.mec_motivation] = () => 0;

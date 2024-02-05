@@ -19,6 +19,8 @@ const { location_enum } = require('#/data/locations');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
 const { get_random_value } = require('#/utils/value-utils');
+const sys_call_mec = require('#/system/script/sys-call-mec');
+const { mec_foreign_debuff } = require('#/data/event/check-stages');
 
 const foreign_race_list = Object.values(race_enum).filter(
   (e) => race_infos[e].track >= track_enum.longchamp,
@@ -40,8 +42,9 @@ track2location[track_enum.shatin] = {
 /**
  * @param {number} chara_id
  * @param {string} language
+ * @param {number} loc
  */
-function handle_foreign_debuff(chara_id, language) {
+function handle_foreign_debuff(chara_id, language, loc) {
   sys_change_attr_and_print(chara_id, '体力', -200);
   sys_change_attr_and_print(chara_id, '精力', -500);
   sys_change_tired(chara_id, 2);
@@ -55,14 +58,7 @@ function handle_foreign_debuff(chara_id, language) {
         0,
       ),
     );
-    era.set(
-      `status:${chara_id}:水土不服`,
-      4 - era.get(`talent:${chara_id}:身体素质`),
-    );
-    era.set(
-      `status:${chara_id}:客场作战`,
-      4 - era.get(`talent:${chara_id}:自信程度`),
-    );
+    sys_call_mec(chara_id, mec_foreign_debuff, { loc });
   }
 }
 
@@ -168,7 +164,7 @@ async function check_new_activities(cur_round, in_team_list) {
           },
           ...foreign_list.map((chara_id) => {
             const chara = get_chara_talk(chara_id);
-            handle_foreign_debuff(chara_id, location.lan);
+            handle_foreign_debuff(chara_id, location.lan, location.loc);
             sys_change_pressure(chara_id, get_random_value(2000, 3000));
             return {
               config: { align: 'center', width: 3 },
@@ -190,9 +186,9 @@ async function check_new_activities(cur_round, in_team_list) {
             content: [
               '要',
               me_in_race ? '' : '陪同',
-              '参加',
+              '参加 ',
               info.get_colored_name_with_class(),
-              `吗？`,
+              ' 吗？',
             ],
             type: 'text',
           },
@@ -208,7 +204,7 @@ async function check_new_activities(cur_round, in_team_list) {
         temp = await era.input();
       }
       if (!temp) {
-        handle_foreign_debuff(0, location.lan);
+        handle_foreign_debuff(0, location.lan, location.loc);
         era.set('cflag:0:位置', era.set('flag:当前位置', location.loc));
         foreign_list.forEach((chara_id) =>
           sys_change_pressure(chara_id, -1000),

@@ -8,11 +8,11 @@ const {
 const {
   sys_check_awake,
   sys_check_train_enabled,
-  sys_check_race_ready,
 } = require('#/system/sys-calc-chara-param');
 
 const goto_sex = require('#/page/components/goto-sex');
 const select_target = require('#/page/components/select-target');
+const { generate_race_button } = require('#/page/homepage/snippets');
 const print_exp_page = require('#/page/page-exp');
 const print_load_page = require('#/page/page-load-game');
 const race_page = require('#/page/page-race');
@@ -34,6 +34,7 @@ const { location_enum } = require('#/data/locations');
 module.exports = async function (chara_id, save_and_next_week, flags) {
   const celebration = get_celebration(),
     celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1),
+    cur_weeks = era.get('flag:当前回合数'),
     growth_stage = era.get(`cflag:${chara_id}:成长阶段`),
     not_in_same_loc =
       era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置'),
@@ -58,30 +59,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         }训练`,
         type: 'button',
       },
-      registered_race.week === era.get('flag:当前回合数')
-        ? {
-            accelerator: 102,
-            config: {
-              buttonType: 'danger',
-              disabled: !sys_check_race_ready(chara_id) || !sys_check_awake(0),
-              width: 6,
-            },
-            content: '出走比赛',
-            type: 'button',
-          }
-        : {
-            accelerator: 102,
-            config: {
-              disabled:
-                !era.get(`cflag:${chara_id}:种族`) ||
-                era.get('flag:当前回合数') -
-                  era.get(`cflag:${chara_id}:育成回合计时`) >=
-                  48 * 3,
-              width: 6,
-            },
-            content: '登记出走',
-            type: 'button',
-          },
+      generate_race_button(chara_id, registered_race.week, cur_weeks),
       {
         accelerator: 103,
         config: {
@@ -176,7 +154,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       era.set('flag:当前位置', location_enum.beach);
       break;
     case 102:
-      if (registered_race.week === era.get('flag:当前回合数')) {
+      if (registered_race.week === cur_weeks) {
         era.set('flag:当前位置', location_enum.race);
         await race_page(registered_race.race);
         era.set('flag:当前位置', location_enum.beach);

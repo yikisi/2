@@ -11,7 +11,6 @@ const {
 const {
   sys_check_act_disabled,
   sys_check_awake,
-  sys_check_race_ready,
   sys_check_train_enabled,
   sys_get_move_cost,
 } = require('#/system/sys-calc-chara-param');
@@ -19,6 +18,7 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const goto_sex = require('#/page/components/goto-sex');
 const select_target = require('#/page/components/select-target');
+const { generate_race_button } = require('#/page/homepage/snippets');
 const print_exp_page = require('#/page/page-exp');
 const print_inherit_shop_page = require('#/page/page-inherit-shop');
 const print_juel_shop_page = require('#/page/page-juel-shop');
@@ -93,30 +93,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
           }训练`,
           type: 'button',
         },
-        registered_race.week === cur_weeks
-          ? {
-              accelerator: 102,
-              config: {
-                buttonType: 'danger',
-                disabled:
-                  !sys_check_race_ready(chara_id) || !sys_check_awake(0),
-                width: 6,
-              },
-              content: '出走比赛',
-              type: 'button',
-            }
-          : {
-              accelerator: 102,
-              config: {
-                disabled:
-                  !era.get(`cflag:${chara_id}:种族`) ||
-                  cur_weeks - era.get(`cflag:${chara_id}:育成回合计时`) >=
-                    48 * 3,
-                width: 6,
-              },
-              content: '登记出走',
-              type: 'button',
-            },
+        generate_race_button(chara_id, registered_race.week, cur_weeks),
         {
           accelerator: 103,
           config: {

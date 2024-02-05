@@ -8,6 +8,7 @@ const stages = {
   mec_action_debuff: 0,
   mec_callname_customize: 0,
   mec_ero_check: 0,
+  mec_foreign_debuff: 0,
   mec_maxbase_buff: 0,
   mec_motivation: 0,
   mec_pressure_buff: 0,

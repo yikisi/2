@@ -107,6 +107,9 @@ function get_success_base_reward(
       train_cost.stamina = -train_cost.stamina / 4;
       changes.pt_change = 2;
   }
+  if (era.get(`cflag:${chara_id}:气性`) === -1) {
+    changes.attr_change = changes.attr_change.map((e) => e + (e > 0));
+  }
 }
 
 module.exports = {
