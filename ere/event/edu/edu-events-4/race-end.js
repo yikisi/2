@@ -498,9 +498,16 @@ module.exports = async (hook, extra_flag) => {
         );
         await chara_talk.say_and_wait(`训练员君接下来也一直做我的试吃员吧。`);
         await me.say_and_wait(`说起来的话，我明天想尝尝看中华料理。`,);
-        await chara_talk.say_and_wait(`呵呵♪训练员先生就拭目以待吧。`);
+        await chara_talk.say_and_wait(`呵呵♪训练员君就拭目以待吧。`);
+        era.drawLine();
         await era.printAndWait(
-            `丸善斯基用心烹饪的美食就像她在赛场之中奔跑时一样，有一种灵动的气息在里面。如果从一个人制作的饭菜之中可以窥见她的灵魂的话，那么，丸善斯基无疑就是最灵动的灵魂了。`);
+            `等到晚上丸善斯基从厨房将做好的包菜炒肉端上来之后，尚未动筷，那鲜美的气味便急不可耐的从鼻腔之中钻入，搅的馋虫从胃中勾了出来。`);
+        await era.printAndWait(
+            `等到动筷之时，夹起一块猪肉，那嫩滑的感觉像是夹起了一块豆腐。放入口中，含有菜汁的猪肉在口中迸开，让人恨不得将舌头都吃下去。`);
+        await chara_talk.say_and_wait(`味道怎么样？`);
+        await era.printAndWait(
+            `看着正大块朵颐的（玩家名），丸善斯基露出了满意的笑容。`);
+
     } else if (
         extra_flag.race === race_enum.tenn_sho &&
         edu_weeks > 95 &&

@@ -62,7 +62,7 @@ module.exports = async function (hook, __, event_object) {
         await chara_talk.say_and_wait(`训......训练员先生？`);
         await me.say_and_wait(`接下来去训练场实际看一下吧。`);
         await chara_talk.say_and_wait(`嗯，飞鹰子一定会好好表现的！`);
-        await era.printAndWait(`从害怕转换到营业用笑容用时不到半秒，这就是专业偶像的修养吗？`);
+        await era.printAndWait(`从瑟瑟发抖的样子转换成兴奋的举起手臂，醒目飞鹰的心情转换着快啊。`);
         era.drawLine({content: '训练场'});
         await me.say_and_wait(`最后一圈！`);
         await era.printAndWait(
@@ -79,17 +79,15 @@ module.exports = async function (hook, __, event_object) {
         await era.printAndWait(
             `最后冲刺时刻，骤然发力的双腿所溅起的沙土，以及毫不畏惧衣服脏乱的勇气。`,
         );
-        await me.say_and_wait(`说不定醒目飞鹰真的能在泥地闪闪发光。`);
+        await me.say_and_wait(`说 不定醒目飞鹰真的能在泥地闪闪发光。`);
         await chara_talk.say_and_wait(`诶~真的吗？`);
         await era.printAndWait(`说者无心听着有意，飞鹰子耳朵抖动的样子非常可爱。`);
         await me.say_and_wait(
-            `嗯——今天的成果，我们讨论下接下来打算参加的比赛。`,
+            `嗯——我已经看到了，接下来讨论下打算参加的比赛吧。`,
         );
-        await chara_talk.say_and_wait(
-            `嗯-飞鹰子希望能让粉丝们看到自己闪耀的样子⭐`,
-        );
+        await chara_talk.say_and_wait(`接下来也请多指教了，粉丝一号先生！啊，训练员先生，抱歉！`);
         await era.printAndWait(
-            `谈笑之中，你与${chara_talk.name}的第一次训练结束了。`,
+            `如像是被火焰所熏烤之后的云朵在黄昏的天空之中漂浮，略显疲惫的醒目飞鹰畅想着未来闪耀的日子。`,
         );
         new EduEventMarks(46).add('start');
         add_event(event_hooks.week_start, new EventObject(46, cb_enum.edu));

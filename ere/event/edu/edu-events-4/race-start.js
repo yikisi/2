@@ -62,7 +62,7 @@ module.exports = async (hook, extra_flag) => {
         await me.say_and_wait(`接下来在观众席上为${chara_talk.sex_code - 1 ? '她' : '他'}加油吧`, true);
     } else if (extra_flag.race === race_enum.sprg_sta && edu_weeks < 95) {
         await print_event_name(
-            '春季锦标前・热情似火的${chara_talk.name}',
+            `春季锦标前・热情似火的${chara_talk.name}`,
             chara_talk,
         );
         await chara_talk.say_and_wait(`${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'},我已经准备好了`);
@@ -86,7 +86,7 @@ module.exports = async (hook, extra_flag) => {
         );
     } else if (extra_flag.race === race_enum.radi_shi && edu_weeks < 95) {
         await print_event_name(
-            '皐月賞前・重新振作起来的${chara_talk.name}',
+            `皐月賞前・重新振作起来的${chara_talk.name}`,
             chara_talk,
         );
         era.drawLine({content: '比赛开始前，记者会上'});

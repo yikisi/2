@@ -201,7 +201,7 @@ module.exports = async function (event_object) {
         wait_flag =
             get_attr_and_print_in_event(4, [10, 0, 0, 0, 0], 0) || wait_flag;
     } else if (edu_weeks === 41) {
-        await print_event_name('训练员与担当${chara_talk.get_uma_sex_title()}', chara_talk);
+        await print_event_name(`训练员与担当${chara_talk.get_uma_sex_title()}`, chara_talk);
         await chara_talk.say_and_wait(`${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'},训练结束后一起出去兜风吧?`);
         await era.printAndWait(
             `随着时间的经过,${me.name}与${chara_talk.name}之间的磨合也愈发紧密。`,
@@ -823,11 +823,12 @@ module.exports = async function (event_object) {
         wait_flag =
             get_attr_and_print_in_event(4, [0, 0, 0, 0, 10], 0) || wait_flag;
     } else if (edu_weeks === 47 + 29) {
-        if (era.get('flag:当前位置') === location_enum.beach) {
-            if (era.get('cflag:4:位置') !== era.get('cflag:0:位置')) {
-                add_event(event_hooks.week_start, event_object);
-            }
-            return;
+        if (
+            era.get('cflag:0:位置') !== location_enum.beach ||
+            era.get('cflag:4:位置') !== era.get('cflag:0:位置')
+        ) {
+            add_event(hook.hook, event_object);
+            return false;
         }
         await print_event_name('夏季合宿', chara_talk);
         await chara_talk.say_and_wait(`${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，我们比其他人都快了一步到沙滩了哦`);
@@ -856,7 +857,7 @@ module.exports = async function (event_object) {
             `看着在沙滩上邀请${me.name}一起享受的${chara_talk.name}，${me.name}下定了决心。`,
         );
     } else if (edu_weeks === 47 + 32) {
-        if (era.get('flag:当前位置') === location_enum.beach) {
+        if (era.get('flag:当前位置') !== location_enum.beach) {
             if (era.get('cflag:4:位置') !== era.get('cflag:0:位置')) {
                 add_event(event_hooks.week_start, event_object);
             }

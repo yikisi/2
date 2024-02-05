@@ -127,7 +127,7 @@ module.exports = async function (hook, __, event_object) {
         await era.printAndWait(`${chara_talk.name}似乎很开心的抖动着耳朵和尾巴。`);
         await era.printAndWait(`你与${chara_talk.name}的第一次训练开始了。`);
         wait_flag = get_attr_and_print_in_event(4, undefined, 120) || wait_flag;
-    } else if (event_marks.sister_annoyance === 1) {
+    } else if (edu_weeks === 47 + 12 && event_marks.sister_annoyance === 1) {
         event_marks.sister_annoyance++;
         await print_event_name(
             `${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}的烦恼`,
@@ -314,7 +314,7 @@ module.exports = async function (hook, __, event_object) {
         );
         await me.say_and_wait(`......今晚的话就辛苦自己吧`);
         await era.printAndWait(`你度过了相当煎熬的一个晚上。`);
-    } else if (event_marks.girls_blue === 1) {
+    } else if (edu_weeks === 47 + 25 && event_marks.girls_blue === 1) {
         event_marks.girls_blue++;
         await print_event_name(
             `${chara_talk.get_teen_sex_title()}的忧郁`,
@@ -894,31 +894,49 @@ module.exports = async function (hook, __, event_object) {
             color: chara_talk.color,
         });
         await era.printAndWait(
-            `在晨曦之中苏醒，被柔和的光抚摸着，跟随时节的变化起舞，整个世界都变得亮晶晶的。`,
+            `幼时所目睹的大红色超级跑车，帅气的外型深深吸引了当时的我。`,
             {
                 color: chara_talk.color,
             },
         );
         await era.printAndWait(
-            `突然有一天，风拜访了我的世界，我看到了它的脚步，听到了它的喃喃自语。`,
+            `我听到了它的呢喃，似乎和我一样，渴望着自由的奔跑。`,
             {
                 color: chara_talk.color,
             },
         );
         await era.printAndWait(
-            `为了追逐它的脚步，我学会了奔跑。听到它的低语后，我感受到了快乐。`,
+            `于是幼时的我暗暗发誓，将来买车时，一定要选择这辆车。`,
             {
                 color: chara_talk.color,
             },
         );
         await era.printAndWait(
-            `于是我希望能让更多的${chara_talk.get_uma_sex_title()}们也能看到它的脚步，同样感受到奔跑的快乐`,
+            `为了迎接与它共鸣的那天到来，一边看着目录上的照片，一边努力练习着驾驶技术。`,
             {
                 color: chara_talk.color,
             },
         );
         await era.printAndWait(
-            `所以我打算让更多的${chara_talk.get_uma_sex_title()}们追逐着我奔跑的背影`,
+            `后来，我拿到了驾照，如愿以偿的开着它到处跑。`,
+            {
+                color: chara_talk.color,
+            },
+        );
+        await era.printAndWait(
+            `那一刻的我，一定是最快乐的吧？不，虽说现在的每一天也过得非常快乐就是了。`,
+            {
+                color: chara_talk.color,
+            },
+        );
+        await era.printAndWait(
+            `比起胜利之后的荣誉，赛前自然地与赛马娘们聊天。倾听她们的对话，在草地上挥洒汗水的奔跑，急促的呼吸刺激着双腿爆发出更强的力量。`,
+            {
+                color: chara_talk.color,
+            },
+        );
+        await era.printAndWait(
+            `直到达到那个————只有探索者才知道的世界。`,
             {
                 color: chara_talk.color,
             },
@@ -932,16 +950,34 @@ module.exports = async function (hook, __, event_object) {
         await era.printAndWait(`然而，理想与现实可能永远存在矛盾。`, {
             color: chara_talk.color,
         });
+        await era.printAndWait(`很多马娘们也许终其一生都无法体会到这层境界，她们被层层围绕的荆棘扯住了衣服，拖住了步伐。`, {
+            color: chara_talk.color,
+        });
+        await era.printAndWait(`呼喊着，祈祷着有人能帮助她们。`, {
+            color: chara_talk.color,
+        });
+        await era.printAndWait(`然而，唯一的解决方法却只有她们自己领悟到才能挣脱。`, {
+            color: chara_talk.color,
+        });
         await era.printAndWait(
-            `我的奔跑注定会伤害到一些${chara_talk.get_uma_sex_title()}，我所期待着的后辈们`,
+            `祈祷着，祈祷着她们能原谅着缺乏才能的自己，卸下那份沉重的负担（日夜诅咒着无能的自己）。`,
             {
                 color: chara_talk.color,
             },
         );
-        await era.printAndWait(`难以言及的悲伤化为了灰色的阴影`, {
+        await era.printAndWait(`于是，难以言及的悲伤化为了灰色的阴影`, {
             color: chara_talk.color,
         });
-        await era.printAndWait(`现在依然在等着我去追逐${chara_talk.sex}`, {
+        await era.printAndWait(`在我的世界里默默矗立着，像一座缄默的城墙，灰色的幽灵。`, {
+            color: chara_talk.color,
+        });
+        await era.printAndWait(`所以，我决定迈出那一步。`, {
+            color: chara_talk.color,
+        });
+        await era.printAndWait(`不是为了回应后辈们的期待，而是为了我自己，为了救赎傲慢而不自知的自己。`, {
+            color: chara_talk.color,
+        });
+        await era.printAndWait(`因为直到最后，我都是在与自己在对决啊。`, {
             color: chara_talk.color,
         });
         era.drawLine();
