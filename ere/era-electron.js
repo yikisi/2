@@ -137,7 +137,7 @@ const era = {
   },
   /**
    * print some text
-   * @param {string|({[color]:string,content:string,[isBr]:boolean,[isDivider]:boolean,fontWeight:string,fontSize:string,url:string}|string)[]} content REQUIRED the text to be printed
+   * @param {string|({[color]:string,content:string,[fontWeight]:string,[fontSize]:string,[url]:string}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
    * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line
    * @returns {number} line number of the printed
    */
@@ -145,7 +145,7 @@ const era = {
   print(content, config) {},
   /**
    * print some text and wait any key from user
-   * @param {string|({[color]:string,content:string,[isBr]:boolean,[isDivider]:boolean,fontWeight:string,fontSize:string,url:string}|string)[]} content REQUIRED the text to be printed
+   * @param {string|({[color]:string,content:string,[fontWeight]:string,[fontSize]:string,[url]:string}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
    * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line   * @returns {Promise<number>} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
