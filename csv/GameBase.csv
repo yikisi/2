@@ -3,7 +3,7 @@
 ;----------------------------------------------------------------
 
 ; 游戏作者 [GAMEBASE_AUTHOR]
-作者,无名路人
+作者,雞雞|无名路人
 
 ; 游戏 slogan [GAMEBASE_INFO]
 追加情報,是什么让你选择不仅要玩赛马娘还要玩文字版
@@ -26,4 +26,4 @@
 ; 游戏当前支持的最低版本，低于此版本的存档会拒绝读取 [GAMEBASE_ALLOWVERSION]
 バージョン違い認める,0001
 
-发布页,https://gitgud.io/era-games-zh/doujin/erauma/-/releases
+发布页,https://gitgud.io/SLeader/erauma/-/releases

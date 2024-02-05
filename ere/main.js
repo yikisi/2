@@ -18,7 +18,7 @@ module.exports = async () => {
     era.printMultiColumns([
       { type: 'divider' },
       { config: { align: 'center' }, content: 'ERAUMA 测试', type: 'text' },
-      { config: { align: 'center' }, content: '无名路人', type: 'text' },
+      { config: { align: 'center' }, content: '雞雞 | 无名路人', type: 'text' },
       { type: 'divider' },
       {
         accelerator: 0,
