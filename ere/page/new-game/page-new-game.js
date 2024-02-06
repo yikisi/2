@@ -119,7 +119,6 @@ module.exports = async () => {
         case 1:
           era.set('callname:0:-1', player_name);
           era.set('cflag:0:性别', player_gender);
-          era.set('cflag:0:阴道尺寸', player_gender - 1 ? 1 : 0);
 
           if (await page_custom()) {
             return false;

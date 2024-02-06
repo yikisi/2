@@ -217,6 +217,7 @@ async function page_custom() {
   let buffer,
     flag_custom = true,
     temp;
+  era.set('cflag:0:阴道尺寸', era.get('cflag:0:性别') - 1 ? 1 : 0);
   era.set('abl:0:速度训练等级', 1);
   era.set('abl:0:耐力训练等级', 1);
   era.set('abl:0:力量训练等级', 1);

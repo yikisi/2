@@ -17,7 +17,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 function change_master(without_me, shown) {
   const master = era.get('tflag:主导权');
   const candidate = get_characters_in_train().filter(
-    (e) => e !== without_me && sys_check_awake(e) && !check_satisfied(e),
+    (e) => e !== without_me && sys_check_awake(e) && check_satisfied(e) < 2,
   );
   let new_master = master;
   if (!candidate.length) {

@@ -127,12 +127,16 @@ module.exports = {
   },
   check_lubrication,
   check_pregnant_unprotect,
-  check_satisfied: (chara_id) => {
+  /**
+   * @param chara_id
+   * @returns {number} 0 - 完全没爽够，1 - 爽够了但是还想再爽，2 - 不能再爽了
+   */
+  check_satisfied(chara_id) {
     if (
       era.get(`tcvar:${chara_id}:脱力`) ||
       era.get(`tcvar:${chara_id}:失神`)
     ) {
-      return true;
+      return 2;
     }
     if (
       !chara_id ||
@@ -141,16 +145,19 @@ module.exports = {
       era.get(`mark:${chara_id}:苦痛`) >= 2 ||
       era.get(`mark:${chara_id}:羞耻`) >= 2
     ) {
-      return false;
+      return 0;
     }
     const lust = era.get(`base:${chara_id}:性欲`);
-    return (
-      era.get(`tcvar:${chara_id}:高潮满足`) > 0 &&
-      !era.get(`tcvar:${chara_id}:接近高潮`) &&
-      lust < lust_border.itch &&
-      Math.random() >
+    if (
+      !era.get(`tcvar:${chara_id}:高潮满足`) ||
+      era.get(`tcvar:${chara_id}:接近高潮`) ||
+      lust >= lust_border.itch ||
+      Math.random() <
         (lust + era.get(`tcvar:${chara_id}:发情`) * 1000) / lust_border.itch
-    );
+    ) {
+      return 0;
+    }
+    return 1;
   },
   /**
    * 检查角色是否能进行阴道性行为<br>
