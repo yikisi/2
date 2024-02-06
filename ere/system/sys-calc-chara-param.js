@@ -260,12 +260,14 @@ module.exports = {
       1.25 * (era.get(`abl:${target}:${attr_names[type]}训练等级`) - 1);
 
     // 结算状态加成
+    // TODO 移除||容错
     success_rate +=
       2 * era.get(`status:${target}:练习X手`) +
       (extra_buff || 0) -
       10 * era.get(`status:${target}:摸鱼`) -
       era.get(`base:${target}:压力`) / 500 -
-      10 * era.get(`status:${target}:疲惫`) +
+      10 * era.get(`status:${target}:疲惫`) -
+      10 * (era.get(`status:${target}:水土不服`) || 0) +
       sys_call_mec(target, check_stages.mec_success_rate);
 
     success_rate *= (100 + era.get('flag:训练难度')) / 100;

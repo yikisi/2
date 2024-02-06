@@ -338,6 +338,7 @@ async function goto_sex(chara_id) {
             '精力',
             -get_random_value(0, Math.min(era.get('base:0:精力'), 200)),
           );
+          era.add(`item:${ret}`, -1);
           if (
             sys_get_intelligence_ratio_in_fight(0, chara_id) > Math.random()
           ) {
@@ -353,7 +354,6 @@ async function goto_sex(chara_id) {
                 : '然后被腾起的性欲烧灼了所有理智……',
             ]);
             era.set(`status:${chara_id}:${ret}`, 1);
-            era.add(`item:${ret}`, -1);
             begin_and_init_ero(0, chara_id);
           } else {
             await era.printAndWait([

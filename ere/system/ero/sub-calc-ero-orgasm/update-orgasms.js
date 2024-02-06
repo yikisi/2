@@ -1,11 +1,12 @@
 const era = require('#/era-electron');
 
-const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { clean_part_without_item } = require('#/system/ero/sys-calc-ero-part');
 const { check_erect } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { set_stain } = require('#/system/ero/sys-calc-stain');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
+const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { log_max_wp } = require('#/utils/value-utils');
@@ -70,7 +71,7 @@ async function update_orgasms(shown, ...ids) {
     if (
       !stamina &&
       !era.get(`tcvar:${chara_id}:脱力`) &&
-      !era.get(`status:${chara_id}:沉睡`)
+      sys_check_awake(chara_id)
     ) {
       era.set(`tcvar:${chara_id}:脱力`, 1);
       era.add(`nowex:${chara_id}:脱力`, 1);

@@ -49,6 +49,7 @@ function handle_foreign_debuff(chara_id, language, loc) {
   sys_change_attr_and_print(chara_id, '精力', -500);
   sys_change_tired(chara_id, 2);
   if (era.get(`cflag:${chara_id}:种族`)) {
+    // TODO 移除||容错
     era.set(
       `status:${chara_id}:语言不通`,
       Math.max(

@@ -35,16 +35,24 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[extra_flag.race];
 
 handlers[check_stages.next_week] = () => {
-  const event_obj = new EventObject(205, cb_enum.edu),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:205:育成回合计时');
-  if (edu_weeks < 3 * 48) {
-    check_and_register_aim_race(205, aim_races);
-  } else if (edu_weeks === 143 + 9) {
-    add_event(event_hooks.week_start, event_obj);
+  if (era.get('cflag:205:招募状态') === recruit_flags.yes) {
+    const event_obj = new EventObject(205, cb_enum.edu),
+      edu_weeks =
+        era.get('flag:当前回合数') - era.get('cflag:205:育成回合计时');
+    if (edu_weeks < 3 * 48) {
+      check_and_register_aim_race(205, aim_races);
+    } else if (edu_weeks === 143 + 9) {
+      add_event(event_hooks.week_start, event_obj);
+    }
+  } else if (
+    era.get('cflag:205:随机招募') < 0 &&
+    era.get('flag:当前声望') >= 1000
+  ) {
+    era.set('cflag:205:随机招募', 1);
   }
 };
 
-handlers[check_stages.aim_check] = function () {
+handlers[check_stages.aim_check] = () => {
   const buffer = [],
     /** @type {Record<string,{race:number,rank:number,st:number,pop:number}>} */
     races = era.get('cflag:205:育成成绩');
@@ -68,7 +76,7 @@ handlers[check_stages.aim_check] = function () {
   return buffer;
 };
 
-handlers[check_stages.palace_check] = function () {
+handlers[check_stages.palace_check] = () => {
   common_palace_check(205);
   return handlers[check_stages.aim_check]();
 };
@@ -95,10 +103,10 @@ handlers[check_stages.personal_titles] = () => ['凯旋门的维纳斯'];
 
 handlers[check_stages.prison] = handlers[check_stages.rape_in_sleeping] =
   () => {
-    if (era.get('cflag:205:招募状态') !== recruit_flags.yes) {
-      return false;
+    if (era.get('cflag:205:招募状态') === recruit_flags.yes) {
+      throw new Error();
     }
-    throw new Error();
+    return false;
   };
 
 /**

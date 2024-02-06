@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_train_enabled,
@@ -18,6 +19,7 @@ const print_save_page = require('#/page/page-save-game');
 const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
 
+const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 
 /**
@@ -138,6 +140,10 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       era.set('flag:当前位置', location_enum.hotel);
       await goto_sex(chara_id);
       era.set('flag:当前位置', cur_location);
+      break;
+    case 201:
+      era.drawLine();
+      await sys_call_daily_event(chara_id, event_hooks.talk);
       break;
     case 401:
       await print_exp_page();

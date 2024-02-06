@@ -822,6 +822,17 @@ async function race_page(race) {
       await era.waitAnyKey();
     }
   }
+  if (best_rank === 1) {
+    if (race === race_enum.prix_lat) {
+      !era.get('cflag:204:随机招募') && era.add('cflag:204:随机招募', -1);
+    }
+    if (race === race_enum.prix_lat || race === race_enum.prix_dia) {
+      [205, 206].forEach(
+        (e) =>
+          !era.get(`cflag:${e}:随机招募`) && era.add(`cflag:${e}:随机招募`, -1),
+      );
+    }
+  }
   for (const e of contestants) {
     sys_add_title(e, ...new_title_dict[e]) && (await era.waitAnyKey());
   }
