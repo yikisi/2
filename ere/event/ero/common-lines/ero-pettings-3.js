@@ -15,6 +15,8 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /**
  * @author O口口口口口
+ * @author 天马闪光蹄
+ *
  * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
  */
 module.exports = (handlers) => {
