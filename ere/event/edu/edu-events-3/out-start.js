@@ -9,7 +9,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 
-const TeioEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-3');
+const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const { attr_enum } = require('#/data/train-const');
 
 /**
@@ -22,7 +22,7 @@ module.exports = async (hook, _, event_object) => {
     add_event(hook.hook, event_object);
     return;
   }
-  const event_marks = new TeioEventMarks(),
+  const event_marks = new TeioEduMarks(),
     teio = get_chara_talk(3),
     me = get_chara_talk(0);
   let wait_flag = false;

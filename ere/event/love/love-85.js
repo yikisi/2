@@ -1,7 +1,6 @@
 const era = require('#/era-electron');
 
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
-const { sys_push_crazy_fan } = require('#/system/sys-calc-flag');
 
 const { cb_enum, add_event } = require('#/event/queue');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
@@ -9,7 +8,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 
@@ -20,7 +19,7 @@ const ruby = get_chara_talk(85);
  *
  * @author 梦露
  */
-module.exports = async (hook, _, event_object) => {
+module.exports = async (hook) => {
   const love = era.get('love:85'),
     me = get_chara_talk(0);
   if (hook === event_hooks.week_end) {
@@ -189,8 +188,7 @@ module.exports = async (hook, _, event_object) => {
         if (ret1 === 1) {
           //TODO BE 好感-，爱慕-
           new EduEventMarks(85).add('burn_heart');
-          era.set('flag:游戏结束', 1);
-          sys_push_crazy_fan(85);
+          era.set('flag:强制BE', 85);
         } else {
           await ruby.say_and_wait(`我们…约好了…一起……`, true);
           await ruby.say_and_wait(`所以…`, true);
@@ -398,8 +396,7 @@ module.exports = async (hook, _, event_object) => {
       if (ret1 === 1) {
         //TODO 进BE
         new EduEventMarks(85).add('burn_heart');
-        era.set('flag:游戏结束', 1);
-        sys_push_crazy_fan(85);
+        era.set('flag:强制BE', 85);
       } else {
         await ruby.say_and_wait(`诶？`);
         await era.printAndWait(`我们的孩子，我想快点见到。`);

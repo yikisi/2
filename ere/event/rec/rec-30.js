@@ -3,11 +3,11 @@ const era = require('#/era-electron');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_before_rec = require('#/event/rec/snippets/check-before-rec');
 
+const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
-const EduEventMarks = require('#/data/event/edu-event-marks');
 
 /**
  * 米浴的招募事件，id=30
@@ -259,7 +259,7 @@ module.exports = {
           era.println();
           await era.printAndWait(`${chara_name} 加入了队伍！`);
           era.set('callname:30:0', `${callname}大人`);
-          new EduEventMarks(30).add('beginning');
+          new RiceEduMarks().beginning++;
           add_event(event_hooks.week_end, new EventObject(30, cb_enum.edu));
         }
     }

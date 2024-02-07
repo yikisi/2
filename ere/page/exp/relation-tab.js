@@ -33,7 +33,7 @@ const page_name = '社交关系';
 module.exports = {
   /**
    * @param {CharaTalk} chara
-   * @returns {{print():void}}
+   * @returns {{print():*[]}}
    */
   generate(chara) {
     const relation_info_list = [],
@@ -216,54 +216,52 @@ module.exports = {
             ]);
         }
       },
-      print: () =>
-        era.printMultiColumns(
-          [
-            {
-              config: { content: '人际交往', position: 'left' },
-              type: 'divider',
-            },
-            ...relation_info_list,
-            {
-              config: { content: '直系亲属', position: 'left' },
-              type: 'divider',
-            },
-            ...family_info_list,
-            ...(chara.id
-              ? [
-                  { type: 'text', content: [{ isBr: true }] },
-                  {
-                    accelerator: 100,
-                    config: { width: 12 },
-                    content: `修改对 ${era.get('callname:0:-2')} 的称呼`,
-                    type: 'button',
-                  },
-                  {
-                    accelerator: 101,
-                    config: { width: 12 },
-                    content: `重置对 ${era.get('callname:0:-2')} 的称呼`,
-                    type: 'button',
-                  },
-                  {
-                    accelerator: 102,
-                    config: { width: 12 },
-                    content: `修改对该角色的称呼 (${sys_get_callname(
-                      0,
-                      chara.id,
-                    )})`,
-                    type: 'button',
-                  },
-                  {
-                    accelerator: 103,
-                    config: { width: 12 },
-                    content: `重置对该角色的称呼`,
-                    type: 'button',
-                  },
-                ]
-              : []),
-          ],
-          { width: 18 },
-        ),
+      print() {
+        return [
+          {
+            config: { content: '人际交往', position: 'left' },
+            type: 'divider',
+          },
+          ...relation_info_list,
+          {
+            config: { content: '直系亲属', position: 'left' },
+            type: 'divider',
+          },
+          ...family_info_list,
+          ...(chara.id
+            ? [
+                { type: 'text', content: [{ isBr: true }] },
+                {
+                  accelerator: 100,
+                  config: { width: 12 },
+                  content: `修改对 ${era.get('callname:0:-2')} 的称呼`,
+                  type: 'button',
+                },
+                {
+                  accelerator: 101,
+                  config: { width: 12 },
+                  content: `重置对 ${era.get('callname:0:-2')} 的称呼`,
+                  type: 'button',
+                },
+                {
+                  accelerator: 102,
+                  config: { width: 12 },
+                  content: `修改对该角色的称呼 (${sys_get_callname(
+                    0,
+                    chara.id,
+                  )})`,
+                  type: 'button',
+                },
+                {
+                  accelerator: 103,
+                  config: { width: 12 },
+                  content: `重置对该角色的称呼`,
+                  type: 'button',
+                },
+              ]
+            : []),
+        ];
+      },
     };
   },
   name: page_name,

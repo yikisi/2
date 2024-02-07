@@ -16,7 +16,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { location_enum } = require('#/data/locations');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
-const NiceNatureEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-60');
+const NNEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-60');
 const event_hooks = require('#/data/event/event-hooks');
 
 const handlers = {};
@@ -26,7 +26,7 @@ const handlers = {};
  * @param _
  * @param {EventObject} event_object
  */
-module.exports = async (hook, _, event_object) => {
+handlers[event_hooks.week_start] = async (hook, _, event_object) => {
   const chara_talk = get_chara_talk(60),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:60:育成回合计时');
   if (edu_weeks === 47 + 1 || edu_weeks === 95 + 1) {
@@ -375,7 +375,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
     return;
   }
   const nature = get_chara_talk(60),
-    event_marks = new NiceNatureEventMarks(),
+    event_marks = new NNEduMarks(),
     me = get_chara_talk(0);
   if (event_marks.hard_work_trainer === 1) {
     event_marks.hard_work_trainer++;
@@ -717,7 +717,7 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
     return;
   }
   const chara_talk = get_chara_talk(60),
-    edu_event_marks = new NiceNatureEventMarks(),
+    edu_event_marks = new NNEduMarks(),
     me = get_chara_talk(0);
   if (edu_event_marks.see_fish !== 1) {
     return false;

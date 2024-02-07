@@ -137,7 +137,7 @@ module.exports = {
       success_rate = sys_get_succ_rate(chara_id, attr, extra_buff);
     const flag_success = Math.random() * 100 < success_rate;
 
-    await call_edu_script(chara_id, event_hooks.train, attr);
+    await call_edu_script(chara_id, event_hooks.train, { attr });
     era.println();
 
     if (flag_success) {

@@ -18,7 +18,7 @@ module.exports = {
   /**
    * @param {CharaTalk} chara
    * @param {{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}} flags
-   * @returns {{print():void}}
+   * @returns {{print():*[]}}
    */
   generate(chara, flags) {
     const sm_exp_list = [];
@@ -100,19 +100,17 @@ module.exports = {
       remove_end_line_breaks(sm_exp_list);
     }
     return {
-      print: () =>
-        era.printMultiColumns(
-          [
-            {
-              type: 'divider',
-              config: { content: page_name, position: 'left' },
-            },
-            ...sm_exp_list.map((e) => {
-              return { content: e, type: 'text' };
-            }),
-          ],
-          { width: 18 },
-        ),
+      print() {
+        return [
+          {
+            type: 'divider',
+            config: { content: page_name, position: 'left' },
+          },
+          ...sm_exp_list.map((e) => {
+            return { content: e, type: 'text' };
+          }),
+        ];
+      },
     };
   },
   name: page_name,

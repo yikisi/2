@@ -17,7 +17,6 @@ const {
   get_breast_cup,
   get_talent_bust_size,
 } = require('#/data/info-generator');
-const { default_relation } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');
 
 /**
@@ -158,6 +157,8 @@ module.exports = {
       ) {
         era.set(`callname:${chara_id}:${chara_id}`, '我');
       }
+      era.set(`relation:${chara_id}:0`, era.get('flag:马娘初始好感'));
+      era.set(`love:${chara_id}`, era.get('flag:马娘初始爱慕'));
       reset_chara(chara_id);
       era.set(`base:${chara_id}:体力`, era.get(`maxbase:${chara_id}:体力`));
       era.set(`base:${chara_id}:精力`, era.get(`maxbase:${chara_id}:精力`));
@@ -216,20 +217,17 @@ module.exports = {
         Math.floor((era.get('flag:当前回合数') - 1) / 48) * 48 + 1,
       );
     era.set(`cflag:${chara_id}:自主训练`, 1);
+    era.set(`cflag:${chara_id}:腋毛`, 0);
     const honor = era.get('flag:当前声望');
     // 先结算声望奖励
     let relation = honor > 500 ? Math.floor((honor - 500) / 12) : 0;
     if (relation > 125) {
       relation = 125;
     }
-    const origin_relation = era.get(`relation:${chara_id}:0`);
-    relation +=
-      // 初始好感
-      era.get('flag:马娘初始好感') +
-      // 成就奖励
-      300 * sys_personal_achievement.get(chara_id) +
-      (origin_relation === undefined ? 0 : origin_relation - default_relation);
-    era.set(`relation:${chara_id}:0`, relation);
+    era.add(
+      `relation:${chara_id}:0`,
+      relation + 300 * sys_personal_achievement.get(chara_id),
+    );
     era.set(
       `love:${chara_id}`,
       era.get(`love:${chara_id}`) || era.get('flag:马娘初始爱慕'),

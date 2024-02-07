@@ -11,7 +11,7 @@ const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,number,{race:number,rank:number},DaiyaEventMarks):Promise<void>>} handlers */
+/** @param {Record<string,function(CharaTalk,CharaTalk,number,{race:number,rank:number},DaiyaEduMarks):Promise<void>>} handlers */
 module.exports = (handlers) => {
   handlers[race_enum.sank_hai] = async (daiya, me, edu_weeks, extra_flag) => {
     await print_event_name('共鸣', daiya);

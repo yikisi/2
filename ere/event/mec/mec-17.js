@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { buff_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 
 const color_17 = require('#/data/chara-colors')[17];
 
@@ -11,7 +11,7 @@ const handlers = {};
 handlers[check_stages.mec_race_buff] = () =>
   2 * era.get('status:17:皇帝') -
   5 * era.get('status:17:自毁') -
-  8 * era.get('status:17:神经衰弱') * !new EduEventMarks(17).get('emperor');
+  8 * era.get('status:17:神经衰弱') * !new LunaEduMarks().emperor;
 
 handlers[check_stages.mec_status] = () => {
   const ret_list = [];
@@ -47,7 +47,7 @@ handlers[check_stages.mec_success_rate] = () =>
 handlers[check_stages.mec_train_buff] = () => {
   let train_buff = era.get('status:17:精神损伤');
   if (train_buff) {
-    if (new EduEventMarks(17).get('emperor')) {
+    if (new LunaEduMarks().emperor) {
       train_buff *= 3;
     } else {
       train_buff *= -5;

@@ -8,7 +8,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const KitaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-68');
+const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const { location_enum } = require('#/data/locations');
 
 /**
@@ -20,7 +20,7 @@ module.exports = async function (hook, _, event_object) {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:68:育成回合计时'),
-    event_marks = new KitaEventMarks();
+    event_marks = new KitaEduMarks();
   let wait_flag = false;
   if (event_marks.beginning === 1) {
     event_marks.beginning++;

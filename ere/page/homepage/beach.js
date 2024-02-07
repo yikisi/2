@@ -23,6 +23,7 @@ const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
 
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
@@ -35,6 +36,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
   const celebration = get_celebration(),
     celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1),
     cur_weeks = era.get('flag:当前回合数'),
+    event_marks = new EventMarks(chara_id),
     growth_stage = era.get(`cflag:${chara_id}:成长阶段`),
     not_in_same_loc =
       era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置'),
@@ -77,7 +79,12 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       },
       {
         accelerator: 999,
-        config: { width: 6 },
+        config: {
+          buttonType: event_marks.get(event_hooks.week_end)
+            ? 'danger'
+            : 'warning',
+          width: 6,
+        },
         content: '休息到下周',
         type: 'button',
       },
@@ -163,8 +170,8 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       }
       break;
     case 103:
-      era.set('flag:当前位置', location_enum.summer_home);
-      await goto_sex(chara_id);
+      (await goto_sex(chara_id, location_enum.summer_home)) &&
+        (flags.week_start = true);
       era.set('flag:当前位置', location_enum.beach);
       break;
     case 201:
@@ -195,11 +202,12 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       await print_load_page();
       break;
     case 999:
-      await save_and_next_week(
-        chara_id,
-        location_enum.beach,
-        location_enum.summer_home,
-      );
       flags.week_start = true;
   }
+  flags.week_start &&
+    (await save_and_next_week(
+      chara_id,
+      location_enum.beach,
+      location_enum.summer_home,
+    ));
 };

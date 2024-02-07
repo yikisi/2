@@ -10,99 +10,99 @@ const chara_into_type = require('#/data/chara-info-type');
 const recruit_flags = require('#/data/event/recruit-flags');
 const exp_chara_info = require('#/page/exp/exp-chara-info');
 
-const abl_desc = {
-  // 快感忍耐的描述
-  endurance: {
-    anal: [
-      '暂时还一无所知',
-      '对痛苦感到恐惧',
-      '仍然有些抗拒',
-      '似乎能感到快乐了',
-      '已经习惯被填满了',
-      '空虚寂寞已无法忍耐',
-    ],
-    common: [
-      '一触即溃',
-      '食髓知味',
-      '稍能享受',
-      '乐在其中',
-      '习以为常',
-      '不可或缺',
-    ],
-    masochism: [
-      '暂时还一无所知',
-      '仍然有点抗拒',
-      '抖M肉奴候补生',
-      '开始享受性虐的快感',
-      '对凌辱习以为常',
-      '行走坐卧皆为受虐',
-    ],
-    mouth: [
-      '会因为快感怔忡失神',
-      '开始想多感受一些了',
-      '稍微能享受一些了',
-      '乐于通过嘴巴感受快乐',
-      '已经习以为常',
-      '中毒到不能失去了',
-    ],
-  },
-  // 部位掌握的描述
-  knowledge: {
-    common: [
-      '懵懂无知',
-      '本能探索',
-      '略知一二',
-      '条分缕析',
-      '头头是道',
-      '了若指掌',
-    ],
-    masochism: [
-      '暂时还懵懂无知',
-      '只会顺从本能',
-      '略微知晓了一些',
-      '可以分辨出对方的兴奋点了',
-      '能够谈得头头是道',
-      '对SM的手段了如指掌',
-    ],
-    mouth: [
-      '暂时还懵懂无知',
-      '只会顺从本能',
-      '略微知晓了一些',
-      '可以分辨一二了',
-      '能够谈得头头是道',
-      '已经了如指掌了',
-    ],
-  },
-  // 性爱技巧的描述
-  skill: {
-    common: [
-      '纯洁如纸',
-      '略显生疏',
-      '初见小成',
-      '不过不失',
-      '长于此道',
-      '登峰造极',
-    ],
-    mouth: [
-      '只通六窍的理解',
-      '略嫌生疏的嘴巴',
-      '初见小成的口技',
-      '不过不失的水准',
-      '口穴如阴的名器',
-      '业已穷究口淫道',
-    ],
-    sadism: [
-      '暂时还一无所知',
-      '生疏羞涩的施虐',
-      '抖S女王候补生',
-      '不过不失的水准',
-      '精彩绝伦的凌辱',
-      '业已穷究SM道',
-    ],
-  },
-};
+// const abl_desc = {
+//   // 快感忍耐的描述
+//   endurance: {
+//     anal: [
+//       '暂时还一无所知',
+//       '对痛苦感到恐惧',
+//       '仍然有些抗拒',
+//       '似乎能感到快乐了',
+//       '已经习惯被填满了',
+//       '空虚寂寞已无法忍耐',
+//     ],
+//     common: [
+//       '一触即溃',
+//       '食髓知味',
+//       '稍能享受',
+//       '乐在其中',
+//       '习以为常',
+//       '不可或缺',
+//     ],
+//     masochism: [
+//       '暂时还一无所知',
+//       '仍然有点抗拒',
+//       '抖M肉奴候补生',
+//       '开始享受性虐的快感',
+//       '对凌辱习以为常',
+//       '行走坐卧皆为受虐',
+//     ],
+//     mouth: [
+//       '会因为快感怔忡失神',
+//       '开始想多感受一些了',
+//       '稍微能享受一些了',
+//       '乐于通过嘴巴感受快乐',
+//       '已经习以为常',
+//       '中毒到不能失去了',
+//     ],
+//   },
+//   // 部位掌握的描述
+//   knowledge: {
+//     common: [
+//       '懵懂无知',
+//       '本能探索',
+//       '略知一二',
+//       '条分缕析',
+//       '头头是道',
+//       '了若指掌',
+//     ],
+//     masochism: [
+//       '暂时还懵懂无知',
+//       '只会顺从本能',
+//       '略微知晓了一些',
+//       '可以分辨出对方的兴奋点了',
+//       '能够谈得头头是道',
+//       '对SM的手段了如指掌',
+//     ],
+//     mouth: [
+//       '暂时还懵懂无知',
+//       '只会顺从本能',
+//       '略微知晓了一些',
+//       '可以分辨一二了',
+//       '能够谈得头头是道',
+//       '已经了如指掌了',
+//     ],
+//   },
+//   // 性爱技巧的描述
+//   skill: {
+//     common: [
+//       '纯洁如纸',
+//       '略显生疏',
+//       '初见小成',
+//       '不过不失',
+//       '长于此道',
+//       '登峰造极',
+//     ],
+//     mouth: [
+//       '只通六窍的理解',
+//       '略嫌生疏的嘴巴',
+//       '初见小成的口技',
+//       '不过不失的水准',
+//       '口穴如阴的名器',
+//       '业已穷究口淫道',
+//     ],
+//     sadism: [
+//       '暂时还一无所知',
+//       '生疏羞涩的施虐',
+//       '抖S女王候补生',
+//       '不过不失的水准',
+//       '精彩绝伦的凌辱',
+//       '业已穷究SM道',
+//     ],
+//   },
+// };
 
-/** @type {{generate:function(CharaTalk,{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}):{print:function,[handle]:function(number)},name:string,[virgin]:boolean}[]} */
+/** @type {{generate:function(CharaTalk,{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}):{print:function:*[],[handle]:function(number)},name:string,[virgin]:boolean}[]} */
 const handlers = [];
 handlers.push(require('#/page/exp/base-tab'));
 handlers.push(require('#/page/exp/skill-tab'));
@@ -150,17 +150,42 @@ async function print_chara_info(_id, chara_list, _page) {
   while (flag_exp) {
     era.clear();
     era.setToBottom();
-    exp_chara_info(chara);
     let page = _page === undefined ? era.get('flag:情报翻页') : _page;
     if (chara.sex_code === 1 && handlers[page].virgin) {
       page--;
     }
     const info_page = handlers[page].generate(chara, flags);
-    info_page.print();
+    era.setVerticalAlign('bottom');
+    era.printInColRows(
+      {
+        columns: [...exp_chara_info(chara), ...info_page.print()],
+        config: {
+          width: 18,
+        },
+      },
+      {
+        columns:
+          _page === undefined
+            ? handlers.map((e, i) => {
+                return {
+                  accelerator: i + 10,
+                  config: {
+                    buttonType: i === page ? 'warning' : 'info',
+                    disabled: chara.sex_code === 1 && e.virgin,
+                    offset: 2,
+                    width: 22,
+                  },
+                  content: e.name,
+                  type: 'button',
+                };
+              })
+            : [],
+        config: { width: 6 },
+      },
+    );
+    era.setVerticalAlign('top');
     let prev = -1,
-      next = -1,
-      prev_page = -1,
-      next_page = -1;
+      next = -1;
     if (chara_list) {
       prev =
         (chara_list.indexOf(chara_id) + chara_list.length - 1) %
@@ -168,79 +193,38 @@ async function print_chara_info(_id, chara_list, _page) {
       next = (prev + 2) % chara_list.length;
       prev = chara_list[prev];
       next = chara_list[next];
-      prev_page = (page + handlers.length - 1) % handlers.length;
-      next_page = (page + 1) % handlers.length;
-      if (chara.sex_code === 1) {
-        if (handlers[prev_page].virgin) {
-          prev_page--;
-        }
-        if (handlers[next_page].virgin) {
-          next_page++;
-        }
-      }
-      era.setVerticalAlign('middle');
-      era.printInColRows(
-        [{ type: 'divider' }],
-        {
-          columns: [
-            {
-              accelerator: 4,
-              content: handlers[prev_page].name,
-              type: 'button',
-            },
-          ],
-          config: { width: 6 },
-        },
-        {
-          columns:
-            prev !== chara_id
-              ? [
-                  {
-                    accelerator: 8,
-                    content: `前一位 — ${era.get(`callname:${prev}:-2`)}`,
-                    type: 'button',
-                  },
-                  {
-                    accelerator: 2,
-                    content: `后一位 — ${era.get(`callname:${next}:-2`)}`,
-                    type: 'button',
-                  },
-                ]
-              : [],
-          config: { width: 6 },
-        },
-        {
-          columns: [
-            {
-              accelerator: 6,
-              content: handlers[next_page].name,
-              type: 'button',
-            },
-          ],
-          config: { width: 6 },
-        },
-        {
-          columns: [
-            {
-              accelerator: 999,
-              config: { align: 'right' },
-              content: '返回',
-              type: 'button',
-            },
-          ],
-          config: { width: 6 },
-        },
+
+      era.printMultiColumns(
+        [
+          { type: 'divider' },
+          ...(prev !== chara_id
+            ? [
+                {
+                  accelerator: 4,
+                  config: { width: 7 },
+                  content: `前一位 — ${era.get(`callname:${prev}:-2`)}`,
+                  type: 'button',
+                },
+                {
+                  accelerator: 6,
+                  config: { width: 7 },
+                  content: `后一位 — ${era.get(`callname:${next}:-2`)}`,
+                  type: 'button',
+                },
+              ]
+            : []),
+          {
+            accelerator: 999,
+            config: { align: 'right', offset: 4, width: 6 },
+            content: '返回',
+            type: 'button',
+          },
+        ],
+        { horizontalAlign: 'end' },
       );
-      era.setVerticalAlign('top');
       const ret = await era.input();
       switch (ret) {
         case 4:
-          era.set('flag:情报翻页', prev_page);
-          break;
-        case 6:
-          era.set('flag:情报翻页', next_page);
-          break;
-        case 8:
           chara_id = prev;
           chara = get_chara_talk(prev);
           flags = get_flags(chara.id);
@@ -248,7 +232,7 @@ async function print_chara_info(_id, chara_list, _page) {
             era.add('flag:情报翻页', -1);
           }
           break;
-        case 2:
+        case 6:
           chara_id = next;
           chara = get_chara_talk(next);
           flags = get_flags(chara.id);
@@ -260,7 +244,11 @@ async function print_chara_info(_id, chara_list, _page) {
           flag_exp = false;
           break;
         default:
-          await info_page.handle(ret);
+          if (ret < handlers.length + 10) {
+            era.set('flag:情报翻页', ret - 10);
+          } else {
+            await info_page.handle(ret);
+          }
       }
     } else {
       await era.waitAnyKey();

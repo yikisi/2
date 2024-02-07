@@ -11,7 +11,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 const ruby = new CharaTalk(85);
 
@@ -275,6 +275,7 @@ handlers[event_hooks.out_church] = async function () {
     `向神主先生寒暄和结束参拜的礼节，到此全部完成。我们回去吧。`,
   );
 };
+
 handlers[event_hooks.out_river] = async function (hook) {
   const ret1 = await select_action_around_river(85);
   hook.arg = !!ret1;

@@ -16,16 +16,7 @@ handlers[check_stages.mec_callname_customize] = (chara_id) => {
   } else if (!era.get(`cflag:${chara_id}:母方角色`)) {
     callname = '妈妈';
   } else {
-    switch (era.get('flag:惩戒力度')) {
-      case 2:
-        callname = '性奴';
-        break;
-      case 3:
-        callname = '孕袋';
-        break;
-      default:
-        callname = '训练员' + get_chara_talk(0).get_adult_sex_title();
-    }
+    callname = '训练员' + get_chara_talk(0).get_adult_sex_title();
   }
   era.set(`callname:${chara_id}:0`, callname);
 };

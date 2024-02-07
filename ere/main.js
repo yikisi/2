@@ -17,7 +17,11 @@ module.exports = async () => {
 
     era.printMultiColumns([
       { type: 'divider' },
-      { config: { align: 'center' }, content: 'ERAUMA 测试', type: 'text' },
+      {
+        config: { width: 6, offset: 9 },
+        names: 'logo',
+        type: 'image.whole',
+      },
       {
         config: { align: 'center' },
         content: ['雞雞', { isDivider: true }, '无名路人'],
@@ -59,13 +63,8 @@ module.exports = async () => {
           },
           { isBr: true },
           {
-            content: 'EraUma开源仓库地址（内源）',
-            url: 'https://gitgud.io/SLeader/erauma',
-          },
-          { isBr: true },
-          {
-            content: 'EraElectron引擎开源仓库地址（内源）',
-            url: 'https://gitgud.io/SLeader/era-electron',
+            content: 'EraElectron引擎发布页',
+            url: 'https://gitgud.io/SLeader/era-electron/-/releases/permalink/latest',
           },
         ],
         type: 'text',
@@ -76,10 +75,9 @@ module.exports = async () => {
           color: 'red',
           fontSize: '24px',
           fontWeight: 'bold',
-          isParagraph: true,
         },
         content:
-          '本游戏仅供个人下载学习使用，请在下载后24小时内删除！\n禁止包括但不限于贩卖/附送/直播等在内的任何商业行为！',
+          '\n本游戏仅供个人下载学习使用，请在下载后24小时内删除！\n禁止包括但不限于贩卖/附送/直播等在内的任何商业行为！',
         type: 'text',
       },
     ]);

@@ -13,7 +13,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
-const NiceNatureEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-60');
+const NNEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-60');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { class_enum } = require('#/data/race/model/race-info');
@@ -46,15 +46,15 @@ handlers[check_stages.after_race] = (extra_flag) => {
     extra_flag.rank <= 3 &&
     race_infos[extra_flag.race].race_class === class_enum.G1
   ) {
-    new NiceNatureEventMarks().g1_count++;
+    new NNEduMarks().g1_count++;
   }
 };
 
-handlers[check_stages.next_week] = function () {
+handlers[check_stages.next_week] = () => {
   const event_obj = new EventObject(60, cb_enum.edu),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:60:育成回合计时');
   if (edu_weeks < 3 * 48) {
-    const event_marks = new NiceNatureEventMarks();
+    const event_marks = new NNEduMarks();
     const event_obj_special = new EventObject(60, cb_enum.edu, true);
     check_and_add_event(
       event_marks,
@@ -129,7 +129,7 @@ handlers[check_stages.title_check] = (extra_flag) => {
   /** @type {Record<string,{race:number,rank:number}>} */
   const races = era.get('cflag:60:育成成绩');
   if (
-    new NiceNatureEventMarks().g1_count >= 4 &&
+    new NNEduMarks().g1_count >= 4 &&
     check_aim_race(races, race_enum.arim_kin, 2, 1)
   ) {
     extra_flag.titles.push({

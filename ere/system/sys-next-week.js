@@ -826,34 +826,32 @@ async function sys_next_week() {
       // 泌乳的相关判定
       let milk_timer = era.get(`cflag:${chara_id}:泌乳回合计时`);
       if (milk_timer) {
-        switch (era.get(`talent:${chara_id}:泌乳`)) {
-          case 1:
-            milk_timer = era.add(`cflag:${chara_id}:泌乳回合计时`, -1);
-            // 20周、25周、30周、35周减一次胸围
-            if (
-              28 === milk_timer ||
-              23 === milk_timer ||
-              18 === milk_timer ||
-              13 === milk_timer
-            ) {
-              era.add(`cflag:${chara_id}:胸围`, -1);
-            }
-            // 40周后概率停奶，泌乳时间越长概率越高
-            // 孕育泌乳在孕育结束后减少胸围
-            if (milk_timer < 8 && Math.random() < Math.pow(2, -milk_timer)) {
-              // 胸围加成消失
-              era.add(`cflag:${chara_id}:胸围`, -1);
-              era.set(`cflag:${chara_id}:泌乳回合计时`, 0);
-              era.set(`talent:${chara_id}:泌乳`, 0);
-            }
-            break;
-          case 3:
-            // 母乳体质直接停止计时
+        const milk_status = era.get(`talent:${chara_id}:泌乳`);
+        if (milk_status === 1) {
+          milk_timer = era.add(`cflag:${chara_id}:泌乳回合计时`, -1);
+          // 20周、25周、30周、35周减一次胸围
+          if (
+            28 === milk_timer ||
+            23 === milk_timer ||
+            18 === milk_timer ||
+            13 === milk_timer
+          ) {
+            era.add(`cflag:${chara_id}:胸围`, -1);
+          }
+          // 40周后概率停奶，泌乳时间越长概率越高
+          // 孕育泌乳在孕育结束后减少胸围
+          if (milk_timer < 8 && Math.random() < Math.pow(2, -milk_timer)) {
+            // 胸围加成消失
+            era.add(`cflag:${chara_id}:胸围`, -1);
             era.set(`cflag:${chara_id}:泌乳回合计时`, 0);
+            era.set(`talent:${chara_id}:泌乳`, 0);
+          }
+        } else if (milk_status === 3) {
+          // 母乳体质直接停止计时
+          era.set(`cflag:${chara_id}:泌乳回合计时`, 0);
         }
       }
     }
-
     if (growth_stage >= 1) {
       const body_hair_talent = era.get(`talent:${chara_id}:腋毛成长`),
         sex_hair_talent = era.get(`talent:${chara_id}:阴毛成长`);

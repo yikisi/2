@@ -11,7 +11,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 
-const GoldShipEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-7');
+const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
 
@@ -452,8 +452,8 @@ module.exports = async (hook, _, event_object) => {
     era.println();
     sys_change_money(-5, 7);
     sys_like_chara(7, 0, 10, true, 5) && (await era.waitAnyKey());
-  } else if (edu_weeks === 144 && new GoldShipEventMarks().keywords === 4) {
-    new GoldShipEventMarks().keywords++;
+  } else if (edu_weeks === 144 && new GoldShipEduMarks().keywords === 4) {
+    new GoldShipEduMarks().keywords++;
     const your_callname = era.get('callname:7:0');
     const taste = get_chara_talk(302);
     await print_event_name(

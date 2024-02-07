@@ -824,7 +824,7 @@ async function race_page(race) {
   }
   if (best_rank === 1) {
     if (race === race_enum.prix_lat) {
-      !era.get('cflag:204:随机招募') && era.add('cflag:204:随机招募', -1);
+      era.get('cflag:204:随机招募') <= 0 && era.add('cflag:204:随机招募', -1);
     }
     if (race === race_enum.prix_lat || race === race_enum.prix_dia) {
       [205, 206].forEach(

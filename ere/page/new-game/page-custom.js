@@ -146,7 +146,7 @@ function set_height(height) {
 
 function random_chara() {
   if (era.get('flag:彩蛋机制') === 179) {
-    era.set('callname:0:-2', '鬼道');
+    era.set('callname:0:-2', '鬼鼠');
   } else {
     era.set('callname:0:-2', '你');
   }
@@ -287,7 +287,7 @@ async function page_custom() {
       era.set('cstr:0:毛色', uma_hairs[0]);
       Object.values(attr_names).forEach((v) => era.set(`base:0:${v}`, 20));
       if (era.get('flag:彩蛋机制') === 179) {
-        era.set('callname:0:-2', '鬼道');
+        era.set('callname:0:-2', '鬼鼠');
       } else {
         era.set('callname:0:-2', '你');
       }
@@ -640,7 +640,7 @@ async function page_custom() {
       if (era.get('flag:彩蛋机制') === 179) {
         era.drawLine();
         await era.printAndWait('哦哦，您取了一个很萝莉控的名字呢！');
-        era.set('callname:0:-2', '鬼道');
+        era.set('callname:0:-2', '鬼鼠');
       } else {
         era.printInColRows([
           { content: '希望旁白君如何称呼您呢？', type: 'text' },

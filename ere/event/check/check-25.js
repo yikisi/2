@@ -13,7 +13,7 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { race_enum } = require('#/data/race/race-const');
@@ -40,7 +40,7 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
   aim_races[extra_flag.race];
 
-handlers[check_stages.next_week] = function () {
+handlers[check_stages.next_week] = () => {
   era.set('callname:25:0', `训练员${get_chara_talk(0).get_adult_sex_title()}`);
   const edu_weeks =
     era.get('flag:当前回合数') - era.get('cflag:25:育成回合计时');
@@ -102,8 +102,9 @@ handlers[check_stages.next_week] = function () {
         add_event(event_hooks.week_start, event_obj_special);
         break;
     }
-
     check_and_register_aim_race(25, aim_races, edu_weeks);
+  } else if (edu_weeks === 143 + 9) {
+    add_event(event_hooks.week_start, new EventObject(25, cb_enum.edu));
   }
 };
 

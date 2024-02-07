@@ -8,7 +8,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaTalk = require('#/utils/chara-talk');
 
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
 
 /** @type {Record<string,function:Promise<void>>} */
@@ -298,7 +298,7 @@ module.exports = async (hook, _, event_object) => {
   const love = era.get('love:17');
   if (hook !== event_hooks.week_end || !event_object) {
     throw new Error('unsupported hook!');
-  } else if (new EduEventMarks(17).get('emperor')) {
+  } else if (new LunaEduMarks().emperor) {
     add_event(event_hooks.week_end, event_object);
   }
   await handlers[love]();

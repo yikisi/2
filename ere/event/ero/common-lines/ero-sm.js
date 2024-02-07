@@ -14,6 +14,7 @@ const {
 const { get_random_value } = require('#/utils/value-utils');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const { part_enum } = require('#/data/ero/part-const');
 
 /**
  * @author 黑衣剑士-星爆气流斩准备就绪
@@ -203,7 +204,14 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ' 践踏自己的阴部……】',
       ]);
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.clitoris,
+          part_enum.foot,
+        )
+      ) {
         await (get_random_value(0, 1)
           ? after_refusing_by_attacker
           : after_refusing_by_defender)(attacker, defender, hook);

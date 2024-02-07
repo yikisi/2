@@ -13,7 +13,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const KitaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-68');
+const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 
@@ -463,7 +463,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
             `在商店街的大家微笑着的宽慰中，${kita.name} 有些不好意思地把温泉旅行券收下了。`,
           );
           {
-            const event_marks = new KitaEventMarks();
+            const event_marks = new KitaEduMarks();
             if (!event_marks.hot_spring) {
               event_marks.hot_spring++;
             }

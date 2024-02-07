@@ -48,10 +48,10 @@ module.exports = {
   /**
    * @param {CharaTalk} chara
    * @param {{in_growth:boolean,mark_level:number,show_all_body:boolean,show_all_exp:boolean,show_body:boolean,show_exp:boolean}} flags
-   * @returns {{print():void}}
+   * @returns {{print():*[]}}
    */
   generate(chara, flags) {
-    const intro_list = [];
+    const right_intro_list = [];
 
     const body_hair_color = era.get(`cstr:${chara.id}:毛色`),
       hair_color = era.get(`cstr:${chara.id}:发色`),
@@ -70,105 +70,84 @@ module.exports = {
       '+',
     );
 
-    intro_list.push(
-      { config: { content: '个人情报', position: 'left' }, type: 'divider' },
+    right_intro_list.push(
+      { content: '个人情报', isDivider: true },
+      '肤色',
+      { color: skin_colors[skin], content: skin },
+      ' 的 ',
       {
-        content: [
-          '肤色',
-          { color: skin_colors[skin], content: skin },
-          ' 的 ',
-          {
-            color:
-              hair_colors[hair_color][3] ||
-              `hsl(${hair_colors[hair_color][0]}deg ${hair_colors[hair_color][1]}% ${hair_colors[hair_color][2]}%)`,
-            content: `${hair_color}发`,
-          },
-          race
-            ? {
-                color:
-                  hair_colors[body_hair_color][3] ||
-                  `hsl(${hair_colors[body_hair_color][0]}deg ${hair_colors[body_hair_color][1]}% ${hair_colors[body_hair_color][2]}%)`,
-                content: `${body_hair_color}毛`,
-              }
-            : '',
-          ' ',
-          ...(race
-            ? [
-                !growth
-                  ? '幼年'
-                  : chara_desc[era.get(`cflag:${chara.id}:气性`) + 3],
-                ' ',
-                sex_title[chara.sex_code],
-              ]
-            : [human_sex_title[chara.sex_code]]),
-        ],
-        type: 'text',
+        color:
+          hair_colors[hair_color][3] ||
+          `hsl(${hair_colors[hair_color][0]}deg ${hair_colors[hair_color][1]}% ${hair_colors[hair_color][2]}%)`,
+        content: `${hair_color}发`,
       },
-      {
-        config: { width: 12 },
-        content: hair ? ['发型：', hair] : '',
-        type: 'text',
-      },
-      !chara_has_ero_image[chara.id] &&
-        (!chara.id ||
-          era.get(`love:${chara.id}`) >= 75 ||
-          !era.get(`cflag:${chara.id}:父方角色`) ||
-          !era.get(`cflag:${chara.id}:母方角色`))
+      race
         ? {
-            accelerator: 10,
-            config: { showAcc: false, width: 12 },
-            content: '梳头',
-            type: 'button',
+            color:
+              hair_colors[body_hair_color][3] ||
+              `hsl(${hair_colors[body_hair_color][0]}deg ${hair_colors[body_hair_color][1]}% ${hair_colors[body_hair_color][2]}%)`,
+            content: `${body_hair_color}毛`,
           }
-        : { content: '', type: 'text' },
-      {
-        content:
-          era.get(`cstr:${chara.id}:出生经历`) ||
-          `出生于 ${era.get(`cflag:${chara.id}:出生月份`)} 月 ${era.get(
-            `cflag:${chara.id}:出生日期`,
-          )} 日`,
-        type: 'text',
-      },
-      { config: { content: '身体尺寸', position: 'left' }, type: 'divider' },
+        : '',
+      ' ',
+    );
+    if (race) {
+      right_intro_list.push(
+        !growth ? '幼年' : chara_desc[era.get(`cflag:${chara.id}:气性`) + 3],
+        ' ',
+        sex_title[chara.sex_code],
+      );
+    } else {
+      right_intro_list.push(human_sex_title[chara.sex_code]);
+    }
+    if (hair) {
+      right_intro_list.push({ isBr: true }, '发型：', hair);
+    }
+    right_intro_list.push(
+      { isBr: true },
+      era.get(`cstr:${chara.id}:出生经历`) ||
+        `出生于 ${era.get(`cflag:${chara.id}:出生月份`)} 月 ${era.get(
+          `cflag:${chara.id}:出生日期`,
+        )} 日`,
+      { content: '身体尺寸', isDivider: true },
     );
 
     if (flags.in_growth) {
-      intro_list.push({ content: growth_info, type: 'text' });
+      right_intro_list.push(growth_info);
     } else {
-      intro_list.push({
-        content: [
-          '身高：',
-          era.get(`cflag:${chara.id}:身高`).toString(),
-          'cm ｜ ',
-          '体重：',
-          era.get(`status:${chara.id}:发胖`)
-            ? '幸、幸福胖哦……'
-            : weight_delta >= 2000
-            ? '微增'
-            : '控制得当',
-        ],
-        type: 'text',
-      });
+      right_intro_list.push(
+        '身高：',
+        era.get(`cflag:${chara.id}:身高`).toString(),
+        'cm ｜ ',
+        '体重：',
+      );
+      if (era.get(`status:${chara.id}:发胖`)) {
+        right_intro_list.push('幸、幸福胖哦……');
+      } else {
+        right_intro_list.push(weight_delta >= 2000 ? '微增' : '控制得当');
+      }
       const w_delta = Math.floor(weight_delta / 1000),
         h_delta = Math.floor(weight_delta / 2000);
       if (chara.sex_code - 1) {
         if (flags.show_body) {
-          intro_list.push({
-            content: `三围：B${get_bust_size(
-              chara.id,
-              flags.show_all_body,
-            )} (${get_breast_cup(chara.id, flags.show_all_body)} Cup) · W${
-              era.get(`cflag:${chara.id}:腰围`) + w_delta
-            } · H${
+          right_intro_list.push(
+            { isBr: true },
+            '三围：B',
+            get_bust_size(chara.id, flags.show_all_body).toString(),
+            ' (',
+            get_breast_cup(chara.id, flags.show_all_body).toString(),
+            ' Cup) · W',
+            (era.get(`cflag:${chara.id}:腰围`) + w_delta).toString(),
+            ' · H',
+            (
               era.get(`cflag:${chara.id}:臀围`) +
               5 * (era.get(`talent:${chara.id}:淫臀`) === 2) +
               2 * era.get(`status:${chara.id}:发情`) +
               h_delta
-            }`,
-            type: 'text',
-          });
+            ).toString(),
+          );
         } else {
-          intro_list.push({ content: '没有更多数据了……', type: 'text' });
+          right_intro_list.push({ isBr: true }, '没有更多数据了……');
         }
       }
     }
@@ -183,7 +162,7 @@ module.exports = {
       cur_title = titles.filter((e) => e.s)[0];
     title_info_list.push(
       {
-        accelerator: 20,
+        accelerator: 30,
         config: {
           buttonType: cur_title ? 'warning' : 'info',
           disabled: !cur_title,
@@ -202,7 +181,7 @@ module.exports = {
     titles.forEach((e, i) => {
       title_info_list.push(
         {
-          accelerator: i + 21,
+          accelerator: i + 31,
           config: {
             buttonType: e.s ? 'info' : 'warning',
             disabled: e.s && i === 0,
@@ -220,85 +199,29 @@ module.exports = {
       );
     });
 
+    if (
+      !chara_has_ero_image[chara.id] &&
+      (!chara.id ||
+        era.get(`love:${chara.id}`) >= 75 ||
+        !era.get(`cflag:${chara.id}:父方角色`) ||
+        !era.get(`cflag:${chara.id}:母方角色`))
+    ) {
+      title_info_list.push(
+        { content: [{ isBr: true }], type: 'text' },
+        {
+          accelerator: 100,
+          config: { width: 12 },
+          content: '梳头',
+          type: 'button',
+        },
+      );
+    }
+
     let temp;
 
     return {
-      print: () =>
-        era.printInColRows(
-          {
-            columns: [
-              { content: [{ isBr: true }], type: 'text' },
-              { config: { width: 22 }, names: image, type: 'image.whole' },
-            ],
-            config: { width: 5 },
-          },
-          { columns: intro_list, config: { width: 13 } },
-          {
-            columns: [
-              {
-                config: { content: '特征', position: 'left' },
-                type: 'divider',
-              },
-              ...((temp = get_talent(chara.id)).length
-                ? [
-                    {
-                      config: { width: 2 },
-                      content: '性格',
-                      type: 'text',
-                    },
-                    {
-                      config: { width: 22 },
-                      content: temp,
-                      type: 'text',
-                    },
-                  ]
-                : []),
-              ...((temp = get_xp(chara.id)).length
-                ? [
-                    {
-                      config: { width: 2 },
-                      content: '其他',
-                      type: 'text',
-                    },
-                    {
-                      config: { width: 22 },
-                      content: temp,
-                      type: 'text',
-                    },
-                  ]
-                : []),
-              {
-                config: { content: '属性', position: 'left' },
-                type: 'divider',
-              },
-              ...(flags.in_growth
-                ? [{ content: growth_info, type: 'text' }]
-                : attr_names.map((e) => {
-                    const num = era.get(`base:${chara.id}:${e}`);
-                    return {
-                      config: { width: 4, color: attr_colors[e] },
-                      content: [
-                        e,
-                        '：',
-                        {
-                          content: num.toLocaleString(),
-                          fontWeight: 'bold',
-                        },
-                      ],
-                      type: 'text',
-                    };
-                  })),
-              {
-                config: { content: '称号', position: 'left' },
-                type: 'divider',
-              },
-              ...title_info_list,
-            ],
-            config: { width: 18 },
-          },
-        ),
       async handle(command) {
-        if (command === 10) {
+        if (command === 100) {
           let flag_hair = true,
             hair_indexes = generate_hair_index(chara.id);
           while (flag_hair) {
@@ -428,7 +351,7 @@ module.exports = {
             era.setToBottom();
           }
         } else {
-          const selected = command - 21;
+          const selected = command - 31;
           if (selected === -1) {
             titles.forEach((e) => (e.s = false));
           } else if (titles[selected].s) {
@@ -438,6 +361,75 @@ module.exports = {
             titles[selected].s = true;
           }
         }
+      },
+      print() {
+        return [
+          { content: [{ isBr: true }], type: 'text' },
+          { config: { width: 7 }, names: image, type: 'image.whole' },
+          {
+            config: { width: 17 },
+            content: right_intro_list,
+            type: 'text',
+          },
+          {
+            config: { content: '特征', position: 'left' },
+            type: 'divider',
+          },
+          ...((temp = get_talent(chara.id)).length
+            ? [
+                {
+                  config: { width: 2 },
+                  content: '性格',
+                  type: 'text',
+                },
+                {
+                  config: { width: 22 },
+                  content: temp,
+                  type: 'text',
+                },
+              ]
+            : []),
+          ...((temp = get_xp(chara.id)).length
+            ? [
+                {
+                  config: { width: 2 },
+                  content: '其他',
+                  type: 'text',
+                },
+                {
+                  config: { width: 22 },
+                  content: temp,
+                  type: 'text',
+                },
+              ]
+            : []),
+          {
+            config: { content: '属性', position: 'left' },
+            type: 'divider',
+          },
+          ...(flags.in_growth
+            ? [{ content: growth_info, type: 'text' }]
+            : attr_names.map((e) => {
+                const num = era.get(`base:${chara.id}:${e}`);
+                return {
+                  config: { width: 4, color: attr_colors[e] },
+                  content: [
+                    e,
+                    '：',
+                    {
+                      content: num.toLocaleString(),
+                      fontWeight: 'bold',
+                    },
+                  ],
+                  type: 'text',
+                };
+              })),
+          {
+            config: { content: '称号', position: 'left' },
+            type: 'divider',
+          },
+          ...title_info_list,
+        ];
       },
     };
   },

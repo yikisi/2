@@ -198,6 +198,7 @@ function handle_rest_cost(chara_id) {
 }
 
 handlers[event_hooks.foreign_rest] = async (chara_id) => {
+  era.println();
   sys_change_money(-50, chara_id);
   handle_rest_cost(chara_id);
   chara_id > 0 && handle_rest_cost(0);
@@ -279,7 +280,9 @@ handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
     sys_like_chara(
       chara_id,
       0,
-      extra_flag.relation_change || get_random_value(0, 50),
+      extra_flag.relation_change === undefined
+        ? 0
+        : extra_flag.relation_change || get_random_value(0, 25),
       true,
       extra_flag.love_change || 0,
     ) || ret_flag;

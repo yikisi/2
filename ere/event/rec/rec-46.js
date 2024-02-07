@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { add_event, cb_enum } = require('#/event/queue');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');

@@ -1,11 +1,7 @@
 const era = require('#/era-electron');
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
-const {
-  sys_change_fame,
-  sys_change_money,
-  sys_push_crazy_fan,
-} = require('#/system/sys-calc-flag');
+const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 
 const { add_event, cb_enum } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -14,7 +10,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const TeioEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-3');
+const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const HookArg = require('#/data/event/hook-arg');
@@ -24,7 +20,7 @@ module.exports = async () => {
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时'),
-    event_marks = new TeioEventMarks();
+    event_marks = new TeioEduMarks();
   let wait_flag = false;
   if (edu_weeks === 47 + 1) {
     await print_event_name('新年的抱负', teio);
@@ -401,8 +397,7 @@ module.exports = async () => {
       await era.printAndWait(
         `${me.name} 再也没有勇气去见 ${teio.name}，${teio.sex}和 ${me.name} 的人生，就此分别。`,
       );
-      era.set('flag:游戏结束', Math.max(era.get('flag:游戏结束'), 1));
-      sys_push_crazy_fan(3);
+      era.set('flag:强制BE', 3);
       era.set('cflag:3:招募状态', recruit_flags.no);
     } else {
       await era.printAndWait(`${me.name} 听到自己的声音回荡在室内。`);

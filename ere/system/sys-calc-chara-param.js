@@ -37,6 +37,7 @@ function sys_check_awake(chara_id) {
 function sys_check_train_enabled(chara_id) {
   const tmp = chara_id || 0;
   return (
+    (tmp || era.get(`cflag:${tmp}:种族`)) &&
     !era.get(`status:${tmp}:伤病`) &&
     era.get('flag:当前回合数') - era.get(`cflag:${tmp}:育成回合计时`) <
       3 * 48 &&

@@ -9,6 +9,7 @@ const {
 } = require('#/event/ero/common-lines/snippets');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const { part_enum } = require('#/data/ero/part-const');
 
 /**
  * @author O口口口口口
@@ -457,7 +458,16 @@ module.exports = (handlers) => {
             hook.hook === ero_hooks.ask_cowgirl ? '小穴' : '屁穴'
           }吞没肉棒……】`,
         ]);
-        if (await ask_action(attacker.id)) {
+        if (
+          await ask_action(
+            attacker.id,
+            defender.id,
+            part_enum.penis,
+            hook.hook === ero_hooks.ask_cowgirl
+              ? part_enum.virgin
+              : part_enum.anal,
+          )
+        ) {
           await after_refusing_by_defender(attacker, defender, hook);
           return;
         }
@@ -521,7 +531,16 @@ module.exports = (handlers) => {
         }套弄肉棒……】`,
       ]));
     if (hook.arg) {
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.penis,
+          hook.hook === ero_hooks.ask_stimulate_glans_by_virgin
+            ? part_enum.virgin
+            : part_enum.anal,
+        )
+      ) {
         await after_refusing_by_defender(attacker, defender, hook);
         return;
       }
@@ -631,7 +650,14 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ` 插入自己的${hook.hook === ero_hooks.ask_fuck ? '小穴' : '屁穴'}……】`,
       ]);
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          hook.hook === ero_hooks.ask_fuck ? part_enum.virgin : part_enum.anal,
+          part_enum.penis,
+        )
+      ) {
         await after_refusing_by_attacker(attacker, defender, hook);
         return;
       }
@@ -765,7 +791,16 @@ module.exports = (handlers) => {
       }……】`,
     ]);
     if (hook.arg) {
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          hook.hook === ero_hooks.ask_stimulate_g_spot
+            ? part_enum.virgin
+            : part_enum.anal,
+          part_enum.penis,
+        )
+      ) {
         await after_refusing_by_attacker(attacker, defender, hook);
         return;
       }

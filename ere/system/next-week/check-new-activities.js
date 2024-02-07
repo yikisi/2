@@ -30,7 +30,6 @@ const { race_infos, race_enum } = require('#/data/race/race-const');
 const foreign_race_list = Object.values(race_enum).filter(
   (e) => race_infos[e].track >= track_enum.longchamp,
 );
-console.log(foreign_race_list.map((e) => Object.keys(race_enum)[e]));
 const track2location = {};
 track2location[track_enum.longchamp] =
   track2location[track_enum.chantilly] =
@@ -174,12 +173,11 @@ async function check_new_activities(cur_round, in_team_list) {
       foreign_list = foreign_list
         .filter((e) => e.pregnant < 33 && !e.hurt)
         .map((e) => e.id);
+      era.print([race_colored_name, ' 即将举办，参赛选手们要踏上远征之路了……']);
       if (foreign_list.length) {
         era.printMultiColumns([
           {
             content: [
-              race_colored_name,
-              ' 即将举办，',
               get_chara_talk(0).get_colored_name(),
               ' 的队伍中以下成员报名了这场赛事：',
             ],
@@ -314,11 +312,12 @@ async function check_new_activities(cur_round, in_team_list) {
       flag && era.set(`cflag:${chara_id}:位置`, location_enum.beach);
       return flag;
     });
+    era.print('一年一度的夏合宿从本周开始……');
     beach_group.length &&
       era.printMultiColumns([
         {
           content: [
-            '八月到了，今年 ',
+            '今年 ',
             get_chara_talk(0).get_colored_name(),
             ' 的队伍中以下成员需要参加夏合宿：',
           ],

@@ -111,7 +111,12 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         },
         {
           accelerator: 999,
-          config: { width: 6 },
+          config: {
+            buttonType: event_marks.get(event_hooks.week_end)
+              ? 'danger'
+              : 'warning',
+            width: 6,
+          },
           content: '休息到下周',
           type: 'button',
         },
@@ -508,8 +513,8 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       }
       break;
     case 103:
-      era.set('flag:当前位置', location_enum.restroom);
-      await goto_sex(chara_id);
+      (await goto_sex(chara_id, location_enum.restroom)) &&
+        (flags.week_start = true);
       era.set('flag:当前位置', location_enum.office);
       break;
     case 201:
@@ -669,11 +674,12 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       await print_load_page();
       break;
     case 999:
-      await save_and_next_week(
-        chara_id,
-        location_enum.office,
-        location_enum.home,
-      );
       flags.week_start = true;
   }
+  flags.week_start &&
+    (await save_and_next_week(
+      chara_id,
+      location_enum.office,
+      location_enum.home,
+    ));
 };

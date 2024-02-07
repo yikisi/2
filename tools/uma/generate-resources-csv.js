@@ -13,7 +13,7 @@ const file_name_index = header.findIndex((e) => e === '文件名'),
 
 const buffer = {
   others: '\ufeff',
-  race: '\ufeffdefault,chr_icon_0000.png\n',
+  race: '\ufeffdefault,chr_icon_0000.png,0,0,200,219\n',
   sportswear: '\ufeff',
   'uniform-summer': '\ufeff',
   'uniform-winter': '\ufeff',
@@ -29,10 +29,10 @@ function check_and_add_to_csv(file_name, img_name, img_regex) {
   const icon = `chr_icon_${img_regex}_01.png`;
   const stand = `chara_stand_${img_regex}.png`;
   if (existsSync(`../../res/${file_name}/${icon}`)) {
-    buffer[file_name] += `${img_name},${icon}\n`;
+    buffer[file_name] += `${img_name},${icon},0,0,200,219\n`;
   }
   if (existsSync(`../../res/${file_name}/${stand}`)) {
-    buffer[file_name] += `${img_name}_半身,${stand}\n`;
+    buffer[file_name] += `${img_name}_半身,${stand},0,0,512,512\n`;
   }
 }
 

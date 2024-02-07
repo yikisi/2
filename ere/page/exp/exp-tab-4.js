@@ -13,7 +13,7 @@ module.exports = {
   /**
    * @param {CharaTalk} chara
    * @param {{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}} flags
-   * @returns {{print():void}}
+   * @returns {{print():*[]}}
    */
   generate(chara, flags) {
     const hand_exp_list = [],
@@ -116,26 +116,24 @@ module.exports = {
       remove_end_line_breaks(foot_exp_list);
     }
     return {
-      print: () =>
-        era.printMultiColumns(
-          [
-            {
-              type: 'divider',
-              config: { content: '身体情报 【手】', position: 'left' },
-            },
-            ...hand_exp_list.map((e) => {
-              return { content: e, type: 'text' };
-            }),
-            {
-              type: 'divider',
-              config: { content: '身体情报 【足】', position: 'left' },
-            },
-            ...foot_exp_list.map((e) => {
-              return { content: e, type: 'text' };
-            }),
-          ],
-          { width: 18 },
-        ),
+      print() {
+        return [
+          {
+            type: 'divider',
+            config: { content: '身体情报 【手】', position: 'left' },
+          },
+          ...hand_exp_list.map((e) => {
+            return { content: e, type: 'text' };
+          }),
+          {
+            type: 'divider',
+            config: { content: '身体情报 【足】', position: 'left' },
+          },
+          ...foot_exp_list.map((e) => {
+            return { content: e, type: 'text' };
+          }),
+        ];
+      },
     };
   },
   name: '肉体情报 【手足】',

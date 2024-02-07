@@ -22,7 +22,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { lust_border } = require('#/data/ero/orgasm-const');
-const GoldShipEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-7');
+const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
@@ -110,7 +110,7 @@ handlers[event_hooks.school_atrium] = async (
   }
   const gold_ship = get_chara_talk(7),
     me = get_chara_talk(0),
-    event_marks = new GoldShipEventMarks(),
+    event_marks = new GoldShipEduMarks(),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:7:育成回合计时');
   if (edu_weeks === 47 + 3) {
     await print_event_name(

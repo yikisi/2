@@ -6,10 +6,11 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const KitaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-68');
+const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_names, fumble_result, attr_enum } = require('#/data/train-const');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const { buff_colors } = require('#/data/color-const');
 
 const handlers = {};
 
@@ -19,11 +20,10 @@ handlers[
 
 handlers[event_hooks.week_end] = require('#/event/edu/edu-events-68/week-end');
 
-handlers[event_hooks.crazy_fan_end] = async function () {
+handlers[event_hooks.crazy_fan_end] = async () => {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0);
-  if (new KitaEventMarks().crazy_fan) {
-    await print_event_name(`归乡的 ${kita.name}`, kita);
+  if (new KitaEduMarks().crazy_fan) {
     await kita.say_and_wait(`抱歉，训练员${me.get_adult_sex_title()}。`);
     await era.printAndWait(
       `站在返回家乡的车站，${kita.name} 对 ${me.name} 深深地鞠了一躬。`,
@@ -71,11 +71,16 @@ handlers[event_hooks.crazy_fan_end] = async function () {
         me.name
       } 还是会想起那个${kita.get_teen_sex_title()}转身时，那脆弱而苍白的背影。`,
     );
-  } else if (era.get('love:68') < 75 && era.get('relation:68:0') > 75) {
     await print_event_name(
-      `训练员${me.get_adult_sex_title()}，最近还好么！`,
+      [
+        {
+          content: `归乡的 ${kita.name}`,
+          color: buff_colors[3],
+        },
+      ],
       kita,
     );
+  } else if (era.get('love:68') < 75 && era.get('relation:68:0') > 75) {
     await era.printAndWait(`在 ${kita.name} 毕业之后过了多久呢。`);
     await era.printAndWait(
       `时间已经记得不太清了，在那位黑色的${me.get_teen_sex_title()}离开之后，${
@@ -106,8 +111,17 @@ handlers[event_hooks.crazy_fan_end] = async function () {
     );
     await me.say_and_wait(`这样就好。`);
     await me.say_and_wait(`这样就可以了。`);
+    await print_event_name(
+      [
+        {
+          content: `训练员${me.get_adult_sex_title()}，最近还好么！`,
+          color: buff_colors[3],
+        },
+      ],
+      kita,
+    );
   } else {
-    throw new Error('unsupported!');
+    throw new Error();
   }
 };
 
@@ -205,7 +219,7 @@ handlers[event_hooks.back_school] = async (_, __, event_object) => {
     add_event(event_hooks.back_school, event_object);
     return;
   }
-  const event_marks = new KitaEventMarks(),
+  const event_marks = new KitaEduMarks(),
     kita = get_chara_talk(68),
     me = get_chara_talk(0);
   if (event_marks.kitasan_touch === 1) {
@@ -456,7 +470,7 @@ handlers[event_hooks.out_start] = async function (_, __, event_object) {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:68:育成回合计时'),
-    event_marks = new KitaEventMarks();
+    event_marks = new KitaEduMarks();
   if (edu_weeks === 95 + 1) {
     await print_event_name('新年拜访', kita);
     await era.printAndWait('众弟子「师父，新年快乐！！！」');

@@ -8,7 +8,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 const {

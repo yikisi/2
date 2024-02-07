@@ -18,7 +18,7 @@ let skill_names = undefined;
 module.exports = {
   /**
    * @param {CharaTalk} chara
-   * @returns {{print():void}}
+   * @returns {{print():*[]}}
    */
   generate(chara) {
     if (!skill_names) {
@@ -170,7 +170,9 @@ module.exports = {
     }
 
     return {
-      print: () => era.printMultiColumns(aim_list, { width: 18 }),
+      print() {
+        return aim_list;
+      },
     };
   },
   name: page_name,

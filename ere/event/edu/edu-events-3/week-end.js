@@ -21,14 +21,14 @@ const {
   touch_list,
   part_names,
 } = require('#/data/ero/part-const');
-const TeioEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-3');
+const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const { get_filtered_talents } = require('#/data/info-generator');
 
 module.exports = async function () {
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时'),
-    event_marks = new TeioEventMarks();
+    event_marks = new TeioEduMarks();
   if (edu_weeks === 95 + 17) {
     await print_event_name('依靠', teio);
     await era.printAndWait('雨夜，静寂无声。');
@@ -490,7 +490,7 @@ module.exports = async function () {
       '黄昏之下，大地借用落日最后的光亮裹住自己，披上了一件布料，星星点点的金线溜过它凹凸不平的表面。并没有积雪反射光芒，只有刚出头的绿色嫩芽贪婪地吸取着能量。',
     );
     await era.printAndWait('春天要来了。');
-    await era.printAndWait(`${me.name} 们的梦，也结束了。`);
+    await era.printAndWait(`${me.name}们 的梦，也结束了。`);
     await era.printAndWait('是时候说……');
     era.println();
 
@@ -550,7 +550,7 @@ module.exports = async function () {
     await era.printAndWait(
       `随后，是${teio.sex}动人的笑声，${me.name} 不禁也随之而笑。二人携手，继续向前。`,
     );
-    await era.printAndWait(`属于 ${me.name} 们的故事，还将继续。`);
+    await era.printAndWait(`属于 ${me.name}们 的故事，还将继续。`);
     era.println();
     era.set('status:3:腿伤', 0);
     if (era.get('talent:3:自信程度') === 1) {

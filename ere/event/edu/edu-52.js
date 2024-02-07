@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const CharaTalk = require('#/utils/chara-talk');
 
 const event_hooks = require('#/data/event/event-hooks');
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const { add_event } = require('#/event/queue');
 const event_queue = require('#/event/queue');
 
@@ -15,7 +15,7 @@ const chara_colors = require('#/data/chara-colors')[52];
  */
 const handlers = {};
 handlers[event_hooks.week_start] = async (_, __, event_obj) => {
-  const loop = new EduEventMarks(52).get('loop');
+  const loop = new UraraEduMarks().loop;
   switch (loop) {
     case 2:
       await CharaTalk.me.say_and_wait('诶？');
@@ -35,8 +35,8 @@ handlers[event_hooks.week_start] = async (_, __, event_obj) => {
 };
 
 handlers[event_hooks.week_end] = async (_, __, event_obj) => {
-  const event_marks = new EduEventMarks(52);
-  switch (event_marks.get('loop')) {
+  const event_marks = new UraraEduMarks();
+  switch (event_marks.loop) {
     case 1:
       await era.printAndWait('？？？「……」', { color: chara_colors[1] });
       break;
@@ -49,12 +49,12 @@ handlers[event_hooks.week_end] = async (_, __, event_obj) => {
     case 4:
       await chara_talk.say_and_wait('对不起……训练员……');
   }
-  if (event_marks.get('loop') < 4) {
+  if (event_marks.loop < 4) {
     await era.loadData(52);
     era.loadGlobal();
     event_queue.init();
     CharaTalk.me = new CharaTalk(0);
-    new EduEventMarks(52).add('loop');
+    new UraraEduMarks().loop++;
     add_event(event_hooks.week_start, event_obj);
     return true;
   }

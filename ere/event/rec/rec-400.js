@@ -1,13 +1,14 @@
 const era = require('#/era-electron');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { get_trainer_title } = require('#/data/info-generator');
-
-const recruit_flags = require('#/data/event/recruit-flags');
-const EduEventMarks = require('#/data/event/edu-event-marks');
 const { add_event, cb_enum } = require('#/event/queue');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const { get_trainer_title } = require('#/data/info-generator');
+const SSEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-400');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
  * 周日宁静的招募事件，id=400
@@ -180,7 +181,7 @@ module.exports = {
     }
     await era.printAndWait(`成功招募${chara_talk.name}！`);
     era.set(`cflag:400:招募状态`, recruit_flags.yes);
-    new EduEventMarks(400).add('beginning');
+    new SSEduMarks().beginning++;
     add_event(event_hooks.week_end, new EventObject(400, cb_enum.edu));
   },
 };

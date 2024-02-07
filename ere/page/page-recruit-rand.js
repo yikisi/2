@@ -30,6 +30,8 @@ async function print_rec_page() {
     ),
     5,
   );
+  today_list.push(era.get('flag:超得'));
+  today_list = today_list.filter((e, i, l) => e && l.indexOf(e) === i);
   era.clear();
   print_page_header();
   era.drawLine();
@@ -52,10 +54,8 @@ async function print_rec_page() {
   flag_recruit = !flag_leave;
 
   while (flag_recruit) {
-    era.clear();
-    print_page_header();
-    /** @type {*[]} */
-    const buffer = [[{ type: 'divider' }]];
+    const buffer = [];
+    buffer.push([{ type: 'divider' }]);
     const cur_recruit = era.get('flag:物色对象');
     today_list = today_list.filter((chara_id) =>
       era.get(`cflag:${chara_id}:随机招募`),
@@ -179,6 +179,10 @@ async function print_rec_page() {
       flag_leave = await call_recruit_event(ret, event_hooks.recruit);
       // 正常招募却没招募，说明招募没成功
       flag_recruit = era.get(`cflag:${ret}:招募状态`) <= 0 && !flag_leave;
+    }
+    if (flag_recruit) {
+      era.clear();
+      print_page_header();
     }
   }
   if (!flag_leave) {

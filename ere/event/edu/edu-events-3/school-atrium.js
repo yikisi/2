@@ -11,7 +11,7 @@ const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const TeioEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-3');
+const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const { attr_enum } = require('#/data/train-const');
 const { gacha } = require('#/utils/list-utils');
 
@@ -25,7 +25,7 @@ module.exports = async function (hook, __, event_object) {
     me = get_chara_talk(0),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时'),
     love = era.get('love:3'),
-    event_marks = new TeioEventMarks();
+    event_marks = new TeioEduMarks();
   let wait_flag = false;
   if (edu_weeks === 95 + 20 && era.get('status:3:腿伤')) {
     await print_event_name('回归', teio);

@@ -4,7 +4,7 @@ const { add_event } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const print_event_name = require('#/event/snippets/print-event-name');
 const { attr_names, fumble_result, attr_enum } = require('#/data/train-const');

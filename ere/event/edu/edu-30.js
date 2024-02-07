@@ -14,7 +14,7 @@ const {
   sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
-const riceEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-30');
+const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
 const chara_talk = new CharaTalk(30);
 const handlers = {};
 
@@ -598,7 +598,7 @@ handlers[event_hooks.school_atrium] = async (
   const me = get_chara_talk(0),
     chara47_talk = get_chara_talk(47),
     chara_talk = get_chara_talk(30),
-    event_marks = new riceEventMarks();
+    event_marks = new RiceEduMarks();
   if (event_marks.famous_educate === 1) {
     event_marks.famous_educate++;
   }
@@ -644,7 +644,7 @@ handlers[event_hooks.office_study] = async (hook, extra_flag, event_object) => {
   }
   const me = get_chara_talk(0),
     chara_talk = get_chara_talk(30),
-    event_marks = new riceEventMarks();
+    event_marks = new RiceEduMarks();
   if (event_marks.dance_study === 1) {
     event_marks.dance_study++;
   }
@@ -819,7 +819,7 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
   }
   const me = get_chara_talk(0),
     chara_talk = get_chara_talk(30),
-    event_marks = new riceEventMarks();
+    event_marks = new RiceEduMarks();
   if (event_marks.fans_letter === 1) {
     event_marks.fans_letter++;
     await print_event_name(`粉丝信`, chara_talk);

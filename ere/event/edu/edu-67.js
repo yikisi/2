@@ -10,7 +10,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const DaiyaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-67');
+const DaiyaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-67');
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_names, fumble_result } = require('#/data/train-const');
 
@@ -101,7 +101,7 @@ require('#/event/edu/edu-events-67/week-start-3')(week_start_handlers);
  */
 handlers[event_hooks.week_start] = async (hook, _, event_object) => {
   const daiya = get_chara_talk(67),
-    edu_marks = new DaiyaEventMarks(),
+    edu_marks = new DaiyaEduMarks(),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:67:育成回合计时'),
     me = get_chara_talk(0),
     flags = { wait: false };
@@ -516,7 +516,7 @@ handlers[event_hooks.office_study] = async (hook, _, event_object) => {
     add_event(hook.hook, event_object);
     return;
   }
-  const edu_marks = new DaiyaEventMarks();
+  const edu_marks = new DaiyaEduMarks();
   if (edu_marks.dance_practice !== 1) {
     return;
   }
@@ -624,7 +624,7 @@ handlers[event_hooks.office_cook] = async (hook, extra_flag, event_object) => {
     add_event(event_hooks.office_cook, event_object);
     return;
   }
-  const edu_marks = new DaiyaEventMarks();
+  const edu_marks = new DaiyaEduMarks();
   if (edu_marks.banned_coffee !== 1) {
     return;
   }
@@ -760,7 +760,7 @@ require('#/event/edu/edu-events-67/race-end-2')(race_end_handlers);
  */
 handlers[event_hooks.race_end] = async (_, extra_flag) => {
   const daiya = get_chara_talk(67),
-    edu_marks = new DaiyaEventMarks(),
+    edu_marks = new DaiyaEduMarks(),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:67:育成回合计时'),
     me = get_chara_talk(0);
   if (
@@ -775,7 +775,7 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
   ) {
     return;
   }
-  await race_end_67_common(daiya, me, edu_weeks, extra_flag, edu_marks);
+  await race_end_67_common(daiya, me, edu_weeks, extra_flag);
 };
 
 /**

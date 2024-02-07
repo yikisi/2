@@ -1,15 +1,16 @@
 const era = require('#/era-electron');
 
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+
 const { add_event } = require('#/event/queue');
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const SSEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-400');
 const event_hooks = require('#/data/event/event-hooks');
-const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const SSEventMarks = require("#/data/event/edu-event-marks-extended/edu-event-marks-400");
+
 const handlers = {};
 
 handlers[
@@ -133,7 +134,7 @@ handlers[event_hooks.school_atrium] = async (_, __, event_object) => {
   }
   const chara_talk = get_chara_talk(400),
     me = get_chara_talk(0);
-  const event_marks = new SSEventMarks();
+  const event_marks = new SSEduMarks();
   if (event_marks.enjoy_cat === 1) {
     event_marks.enjoy_cat++;
     await print_event_name('尝试和猫咪相处', chara_talk);

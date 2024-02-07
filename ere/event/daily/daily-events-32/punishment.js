@@ -6,18 +6,19 @@ const {
   begin_and_init_ero,
   end_ero_and_train,
   init_ero,
+  set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_entry } = require('#/utils/list-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
-const { yes } = require('#/data/event/recruit-flags');
-const { get_random_entry } = require('#/utils/list-utils');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const { yes } = require('#/data/event/recruit-flags');
 
 module.exports = async () => {
   const love = era.get('love:32'),
@@ -141,6 +142,8 @@ module.exports = async () => {
     await era.printAndWait(
       `在 ${me.name} 身下，那哪怕勃起到极限也没有马娘主人一边睪丸大的“阴蒂”，喷出了今天第四发，稀薄如水的液体`,
     );
+    era.add('exp:0:阴茎高潮次数', 3);
+    era.add('exp:0:射精量', 12);
     await era.printAndWait('这也惹得眼前的主人有些不悦');
     era.println();
 
@@ -403,9 +406,10 @@ module.exports = async () => {
     era.println();
 
     await era.printAndWait('说完后，速子穿好裤子便离开了实验室');
-    await era.printAndWait(
-      `留下躺在地板上，肚子如气球一般涨起，嘴角还在不停流淌着白汁的 ${me.name} 在室内无助的喘着气`,
-    );
+    love < 75 &&
+      (await era.printAndWait(
+        `留下躺在地板上，肚子如气球一般涨起，嘴角还在不停流淌着白汁的 ${me.name} 在室内无助的喘着气`,
+      ));
     await era.printAndWait(
       `奖励还是惩罚……${love < 75 ? `${me.name} 望向角落的扫具柜` : ''}`,
     );
@@ -413,22 +417,22 @@ module.exports = async () => {
 
     !get_penis_size(32) && era.set('status:32:弗隆P', 1);
     begin_and_init_ero(0, 32);
-    era.set('palam:0:阴茎快感', era.get('tcvar:0:阴茎快感上限'));
+    set_palam_to_max(0, part_enum.penis);
     await quick_make_love(
       new EroParticipant(0, part_enum.mouth),
       new EroParticipant(32, part_enum.penis),
       false,
     );
     if (love < 75) {
-      era.set('palam:32:阴茎快感', era.get('tcvar:32:阴茎快感上限'));
-      era.set('palam:0:阴道快感', era.get('tcvar:0:阴道快感上限'));
+      set_palam_to_max(32, part_enum.penis);
+      set_palam_to_max(0, part_enum.virgin);
       await quick_make_love(
         new EroParticipant(32, part_enum.penis),
         new EroParticipant(0, part_enum.virgin),
         false,
       );
-      era.set('palam:32:阴茎快感', era.get('tcvar:32:阴茎快感上限'));
-      era.set('palam:0:口腔快感', era.get('tcvar:0:口腔快感上限'));
+      set_palam_to_max(32, part_enum.penis);
+      set_palam_to_max(0, part_enum.mouth);
       await quick_make_love(
         new EroParticipant(32, part_enum.penis),
         new EroParticipant(0, part_enum.mouth),
@@ -437,6 +441,7 @@ module.exports = async () => {
       await quick_make_love(
         new EroParticipant(32, part_enum.foot),
         new EroParticipant(0, part_enum.body),
+        false,
       );
       await quick_make_love(
         new EroParticipant(32, part_enum.hit),
@@ -449,8 +454,8 @@ module.exports = async () => {
         new EroParticipant(0, part_enum.anal),
         false,
       );
-      era.set('palam:32:阴茎快感', era.get('tcvar:32:阴茎快感上限'));
-      era.set('palam:0:阴道快感', era.get('tcvar:0:阴道快感上限'));
+      set_palam_to_max(32, part_enum.penis);
+      set_palam_to_max(0, part_enum.virgin);
       await quick_make_love(
         new EroParticipant(32, part_enum.penis),
         new EroParticipant(0, part_enum.virgin),

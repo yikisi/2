@@ -9,7 +9,7 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const color_17 = require('#/data/chara-colors')[17];
-const LunaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-17');
+const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_enum } = require('#/data/train-const');
 
@@ -21,7 +21,7 @@ handlers[
 ] = require('#/event/edu/edu-events-17/week-start');
 
 handlers[event_hooks.week_end] = async () => {
-  const event_marks = new LunaEventMarks(),
+  const event_marks = new LunaEduMarks(),
     luna = new CharaTalk(event_marks.emperor ? 9017 : 17).set_color(
       color_17[0],
     ),
@@ -285,7 +285,7 @@ handlers[event_hooks.week_end] = async () => {
  * @param {{train:number,stamina_ratio:number}} extra_flag
  */
 handlers[event_hooks.train_success] = async (hook, extra_flag) => {
-  const event_marks = new LunaEventMarks();
+  const event_marks = new LunaEduMarks();
   const is_emperor = event_marks.emperor;
   const chara_talk = get_chara_talk(17);
   await era.printAndWait([

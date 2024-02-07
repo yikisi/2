@@ -52,7 +52,7 @@ function random_cost_in_action(chara_id, stamina, time) {
 /** @type {Record<string,function(chara_id:number,stage_id:HookArg):Promise<void>>} */
 const handlers = {};
 
-handlers[event_hooks.office_gift] = async function (chara_id) {
+handlers[event_hooks.office_gift] = async (chara_id) => {
   era.println();
   sys_change_money(-10);
   sys_change_attr_and_print(0, '精力', -get_random_value(100, 200));
@@ -92,7 +92,7 @@ handlers[event_hooks.office_cook] = async (chara_id) => {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.office_study] = async function (chara_id) {
+handlers[event_hooks.office_study] = async (chara_id) => {
   era.println();
   let wait_flag = false;
   random_cost_in_action(chara_id, [0, 0], [100, 300]);
@@ -108,7 +108,7 @@ handlers[event_hooks.office_study] = async function (chara_id) {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.office_rest] = async function (chara_id) {
+handlers[event_hooks.office_rest] = async (chara_id) => {
   era.println();
   let wait_flag = false;
   wait_flag =
@@ -138,7 +138,7 @@ handlers[event_hooks.office_rest] = async function (chara_id) {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.office_prepare] = async function (chara_id) {
+handlers[event_hooks.office_prepare] = async (chara_id) => {
   era.println();
   sys_change_money(-20);
   random_cost_in_action(chara_id, [0, 0], [100, 300]);
@@ -154,7 +154,7 @@ handlers[event_hooks.office_prepare] = async function (chara_id) {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.office_game] = async function (chara_id) {
+handlers[event_hooks.office_game] = async (chara_id) => {
   let wait_flag = false;
   random_cost_in_action(chara_id, [0, 0], [100, 300]);
   if (chara_id) {
@@ -167,7 +167,7 @@ handlers[event_hooks.office_game] = async function (chara_id) {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.good_night] = async function (chara_id, hook) {
+handlers[event_hooks.good_night] = async (chara_id, hook) => {
   if (hook.arg !== undefined) {
     if (hook.arg) {
       await quick_into_sex(chara_id, hook.arg === 2);
@@ -182,7 +182,7 @@ handlers[event_hooks.good_night] = async function (chara_id, hook) {
   }
 };
 
-handlers[event_hooks.school_atrium] = async function (chara_id, hook) {
+handlers[event_hooks.school_atrium] = async (chara_id, hook) => {
   if (hook.arg) {
     random_cost_in_action(chara_id, [0, 100], [100, 200]);
   } else {
@@ -199,7 +199,7 @@ handlers[event_hooks.school_atrium] = async function (chara_id, hook) {
   }
 };
 
-handlers[event_hooks.school_rooftop] = async function (chara_id) {
+handlers[event_hooks.school_rooftop] = async (chara_id) => {
   era.println();
   let wait_flag = false;
   let to_print = sys_change_attr_and_print(0, '体力', get_random_value(0, 100));
@@ -220,7 +220,7 @@ handlers[event_hooks.school_rooftop] = async function (chara_id) {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.out_river] = async function (chara_id, hook) {
+handlers[event_hooks.out_river] = async (chara_id, hook) => {
   let wait_flag = false;
   if (hook.arg) {
     random_cost_in_action(chara_id, [200, 600], [0, 100]);
@@ -248,7 +248,7 @@ handlers[event_hooks.out_river] = async function (chara_id, hook) {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.out_shopping] = async function (chara_id, stage_id) {
+handlers[event_hooks.out_shopping] = async (chara_id, stage_id) => {
   let wait_flag = false;
   era.println();
   if (stage_id.arg) {
@@ -282,7 +282,7 @@ handlers[event_hooks.out_shopping] = async function (chara_id, stage_id) {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.out_church] = async function (chara_id) {
+handlers[event_hooks.out_church] = async (chara_id) => {
   const condition_chara = chara_id && era.get(`status:${chara_id}:练习X手`) < 0;
   const condition_me = era.get('status:0:练习X手') < 0;
   if (condition_chara || condition_me) {
@@ -301,7 +301,7 @@ handlers[event_hooks.out_church] = async function (chara_id) {
   }
 };
 
-handlers[event_hooks.out_station] = async function (chara_id, hook) {
+handlers[event_hooks.out_station] = async (chara_id, hook) => {
   let temp,
     wait_flag = false;
   sys_change_money(-10);

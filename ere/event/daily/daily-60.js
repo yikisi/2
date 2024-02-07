@@ -20,7 +20,6 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
-const { pregnant_stage_enum } = require('#/data/ero/status-const');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean>>} */
 const handlers = {};

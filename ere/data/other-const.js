@@ -25,7 +25,6 @@ module.exports = {
     7: 1,
     9: 1,
   },
-  default_relation: 75,
   front_hairs: ['厚刘海', '齐刘海', '侧分', '排气口', '中分'],
   top_hairs: ['无', '短', '中', '长', '白'],
 };

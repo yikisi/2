@@ -583,7 +583,14 @@ module.exports = (handlers) => {
             defender.get_colored_name(),
             ' 舔弄小豆豆……】',
           ]);
-          if (await ask_action(attacker.id)) {
+          if (
+            await ask_action(
+              attacker.id,
+              defender.id,
+              part_enum.clitoris,
+              part_enum.mouth,
+            )
+          ) {
             await after_refusing_by_defender(attacker, defender, hook);
             return;
           }
@@ -726,7 +733,14 @@ module.exports = (handlers) => {
             defender.get_colored_name(),
             ' 舔吸小穴……】',
           ]);
-          if (await ask_action(attacker.id)) {
+          if (
+            await ask_action(
+              attacker.id,
+              defender.id,
+              part_enum.virgin,
+              part_enum.mouth,
+            )
+          ) {
             await after_refusing_by_defender(attacker, defender, hook);
             return;
           }
@@ -864,7 +878,14 @@ module.exports = (handlers) => {
             defender.get_colored_name(),
             ' 含住肉棒……】',
           ]);
-          if (await ask_action(attacker.id)) {
+          if (
+            await ask_action(
+              attacker.id,
+              defender.id,
+              part_enum.penis,
+              part_enum.mouth,
+            )
+          ) {
             await after_refusing_by_defender(attacker, defender, hook);
             return;
           }

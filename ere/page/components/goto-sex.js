@@ -99,7 +99,12 @@ async function fail(chara, me) {
   era.set('flag:当前互动角色', 0);
 }
 
-async function goto_sex(chara_id) {
+/**
+ * @param {number} chara_id
+ * @param {number} sex_loc
+ * @returns {Promise<boolean|undefined>} if skip the week
+ */
+async function goto_sex(chara_id, sex_loc) {
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
   if (!sys_check_awake(chara_id)) {
@@ -128,6 +133,7 @@ async function goto_sex(chara_id) {
     ]);
     const ret = await era.input();
     if (!ret) {
+      era.set('flag:当前位置', sex_loc);
       begin_and_init_ero(0, chara_id);
       await print_ero_page();
       await end_ero_and_show_result(true);
@@ -137,50 +143,64 @@ async function goto_sex(chara_id) {
       era.get(`love:${chara_id}`) >= 50 ? get_sex_acceptable(chara_id) : -1;
     let ret, dice;
     if (check >= 0) {
-      era.printMultiColumns([
-        {
-          content: [
-            chara.get_colored_name(),
-            ' 含情脉脉地看着 ',
-            me.get_colored_name(),
-            '……',
-            { isBr: true },
-            '要怎么做？',
-          ],
-          type: 'text',
-        },
-        {
-          accelerator: 0,
-          config: { align: 'center', width: 6 },
-          content: '正常求爱',
-          type: 'button',
-        },
-        {
-          accelerator: 1,
-          config: { align: 'center', width: 6 },
-          content: '强奸Play',
-          type: 'button',
-        },
-        {
-          accelerator: 2,
-          config: { align: 'center', width: 6 },
-          content: '情趣用药',
-          type: 'button',
-        },
-        {
-          accelerator: 3,
-          config: { align: 'center', width: 6 },
-          content: '还是算了',
-          type: 'button',
-        },
-      ]);
+      era.printMultiColumns(
+        [
+          {
+            content: [
+              chara.get_colored_name(),
+              ' 含情脉脉地看着 ',
+              me.get_colored_name(),
+              '……',
+              { isBr: true },
+              '要怎么做？',
+            ],
+            type: 'text',
+          },
+          {
+            accelerator: 0,
+            config: { align: 'center', width: 4 },
+            content: '正常求爱',
+            type: 'button',
+          },
+          {
+            accelerator: 1,
+            config: { align: 'center', width: 4 },
+            content: '邀请过夜',
+            type: 'button',
+          },
+          {
+            accelerator: 2,
+            config: { align: 'center', width: 4 },
+            content: '强奸Play',
+            type: 'button',
+          },
+          {
+            accelerator: 3,
+            config: { align: 'center', width: 4 },
+            content: '情趣用药',
+            type: 'button',
+          },
+          {
+            accelerator: 4,
+            config: { align: 'center', width: 4 },
+            content: '还是算了',
+            type: 'button',
+          },
+        ],
+        { horizontalAlign: 'space-around' },
+      );
       ret = await era.input();
-      if (ret === 3) {
+      if (ret === 4) {
         return;
+      } else if (ret === 1) {
+        era.set('flag:床伴', chara_id);
+        return true;
+      } else {
+        era.set('flag:当前位置', sex_loc);
       }
       begin_and_init_ero(0, chara_id);
       switch (ret) {
-        case 1:
+        case 2:
           await era.printAndWait([
             chara.get_colored_name(),
             ' 会意地装出了即将被强暴的惊恐神情……',
@@ -188,7 +208,7 @@ async function goto_sex(chara_id) {
           era.set('tflag:强奸', 0);
           update_juel_buff(chara_id);
           break;
-        case 2:
+        case 3:
           if (await ask_drink_medicine(chara)) {
             return;
           }
@@ -226,29 +246,40 @@ async function goto_sex(chara_id) {
           },
           {
             accelerator: 0,
-            config: { align: 'center', width: 8 },
+            config: { align: 'center', width: 6 },
             content: '开始调教',
             type: 'button',
           },
           {
             accelerator: 1,
-            config: { align: 'center', width: 8 },
-            content: '情趣用药',
+            config: { align: 'center', width: 6 },
+            content: '带回过夜',
             type: 'button',
           },
           {
             accelerator: 2,
-            config: { align: 'center', width: 8 },
+            config: { align: 'center', width: 6 },
+            content: '情趣用药',
+            type: 'button',
+          },
+          {
+            accelerator: 3,
+            config: { align: 'center', width: 6 },
             content: '还是算了',
             type: 'button',
           },
         ]);
         ret = await era.input();
-        if (ret === 2) {
+        if (ret === 3) {
           return;
+        } else if (ret === 1) {
+          era.set('flag:床伴', chara_id);
+          return true;
+        } else {
+          era.set('flag:当前位置', sex_loc);
         }
         begin_and_init_ero(0, chara_id);
-        if (ret === 1 && (await ask_drink_medicine(chara))) {
+        if (ret === 2 && (await ask_drink_medicine(chara))) {
           return;
         }
       } else {
@@ -286,8 +317,7 @@ async function goto_sex(chara_id) {
         ret = await era.input();
         if (ret === 2) {
           return;
-        }
-        if (ret === 0) {
+        } else if (ret === 0) {
           sys_change_attr_and_print(
             0,
             '体力',
@@ -317,6 +347,7 @@ async function goto_sex(chara_id) {
               ' 露出了惊恐的神情……',
             ]);
             sys_like_chara(chara_id, 0, -400) && (await era.waitAnyKey());
+            era.set('flag:当前位置', sex_loc);
             begin_and_init_ero(0, chara_id);
             era.set('tflag:强奸', 0);
             update_juel_buff(chara_id);
@@ -357,6 +388,7 @@ async function goto_sex(chara_id) {
                 : '然后被腾起的性欲烧灼了所有理智……',
             ]);
             era.set(`status:${chara_id}:${ret}`, 1);
+            era.set('flag:当前位置', sex_loc);
             begin_and_init_ero(0, chara_id);
           } else {
             await era.printAndWait([

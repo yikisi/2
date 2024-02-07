@@ -5,11 +5,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
 const { item_names, tequip_parts } = require('#/data/ero/item-const');
-const {
-  part_enum,
-  part_names,
-  part_names4item,
-} = require('#/data/ero/part-const');
+const { part_names, part_names4item } = require('#/data/ero/part-const');
 
 /**
  * @param {CharaTalk} chara

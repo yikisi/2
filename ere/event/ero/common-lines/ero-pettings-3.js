@@ -12,6 +12,7 @@ const {
 } = require('#/event/ero/common-lines/snippets');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const { part_enum } = require('#/data/ero/part-const');
 
 /**
  * @author O口口口口口
@@ -96,7 +97,14 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 的肉棒……】',
       ]);
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.penis,
+          part_enum.clitoris,
+        )
+      ) {
         await after_refusing_by_defender(attacker, defender, hook);
         return;
       }
@@ -233,7 +241,14 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ' 用头发缠住肉棒……】',
       ]);
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.penis,
+          part_enum.body,
+        )
+      ) {
         await after_refusing_by_attacker(attacker, defender, hook);
         return;
       }
@@ -557,7 +572,14 @@ module.exports = (handlers) => {
       ' 的肉棒……】',
     ]);
     if (hook.arg) {
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.penis,
+          part_enum.body,
+        )
+      ) {
         await after_refusing_by_attacker(attacker, defender, hook);
         return;
       }
@@ -684,7 +706,14 @@ module.exports = (handlers) => {
       ' 用双足踩踏肉棒……】',
     ]);
     if (hook.arg) {
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.penis,
+          part_enum.foot,
+        )
+      ) {
         await after_refusing_by_attacker(attacker, defender, hook);
         return;
       }
@@ -784,7 +813,14 @@ module.exports = (handlers) => {
       ' 用尾巴侍奉肉棒……】',
     ]);
     if (hook.arg) {
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.penis,
+          part_enum.body,
+        )
+      ) {
         await after_refusing_by_attacker(attacker, defender, hook);
         return;
       }
