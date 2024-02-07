@@ -14,6 +14,14 @@ const hooks = {
   edu_end: 0,
   // 声望不足结局时角色的对话
   end_talk: 0,
+  // 远征 - 调养
+  foreign_rest: 0,
+  // 远征 - 学外语
+  foreign_study: 0,
+  // 远征 - 适应训练
+  foreign_train: 0,
+  // 远征 - 观光
+  foreign_travel: 0,
   // 早安问候
   good_morning: 0,
   // 晚安问候

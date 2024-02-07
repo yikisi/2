@@ -22,6 +22,12 @@ const print_train_page = require('#/page/page-train');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 
+const location2language = {};
+location2language[location_enum.paris] = '法';
+location2language[location_enum.hongkong] = location2language[
+  location_enum.guangzhou
+] = '粤';
+
 /**
  * @param {number} chara_id
  * @param {function(number,number,number):Promise} save_and_next_week
@@ -30,7 +36,17 @@ const { location_enum } = require('#/data/locations');
 module.exports = async function (chara_id, save_and_next_week, flags) {
   const cur_location = era.get('flag:当前位置'),
     cur_weeks = era.get('flag:当前回合数'),
-    registered_race = sys_reg_race(chara_id).curr;
+    registered_race = sys_reg_race(chara_id).curr,
+    player_base = {
+      stamina: era.get('base:0:体力'),
+      time: era.get('base:0:精力'),
+    },
+    chara_base = chara_id
+      ? {
+          stamina: era.get(`base:${chara_id}:体力`),
+          time: era.get(`base:${chara_id}:精力`),
+        }
+      : undefined;
   era.drawLine();
   era.printInColRows(
     [
@@ -80,6 +96,64 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         // 虚空聊天就更过分了！
         config: { disabled: !chara_id || !sys_check_awake(0), width: 6 },
         content: '聊天',
+        type: 'button',
+      },
+      {
+        accelerator: 202,
+        config: {
+          disabled:
+            !sys_check_awake(chara_id) ||
+            !sys_check_awake(0) ||
+            (era.get(`abl:${chara_id}:${location2language[cur_location]}语`) ===
+              5 &&
+              era.get(`abl:0:${location2language[cur_location]}语`) === 5) ||
+            player_base.time < 400 ||
+            (chara_base && chara_base.time < 400),
+          width: 6,
+        },
+        content: `${location2language[cur_location]}语学习`,
+        type: 'button',
+      },
+      {
+        accelerator: 203,
+        config: {
+          disabled:
+            !sys_check_awake(chara_id) ||
+            !sys_check_awake(0) ||
+            player_base.time < 200 ||
+            (chara_base && chara_base.time < 200),
+          width: 6,
+        },
+        content: '休息调养',
+        type: 'button',
+      },
+      {
+        accelerator: 204,
+        config: {
+          disabled:
+            !sys_check_awake(chara_id) ||
+            !sys_check_awake(0) ||
+            !sys_check_train_enabled(chara_id) ||
+            player_base.stamina < 200 ||
+            player_base.time < 100 ||
+            (chara_base && (chara_base.stamina < 200 || chara_base.time < 100)),
+          width: 6,
+        },
+        content: '适应性训练',
+        type: 'button',
+      },
+      {
+        accelerator: 205,
+        config: {
+          disabled:
+            !sys_check_awake(chara_id) ||
+            !sys_check_awake(0) ||
+            player_base.stamina < 200 ||
+            player_base.time < 400 ||
+            (chara_base && (chara_base.stamina < 200 || chara_base.time < 400)),
+          width: 6,
+        },
+        content: '旅行观光',
         type: 'button',
       },
     ],
@@ -144,6 +218,22 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
     case 201:
       era.drawLine();
       await sys_call_daily_event(chara_id, event_hooks.talk);
+      break;
+    case 202:
+      era.drawLine();
+      await sys_call_daily_event(chara_id, event_hooks.foreign_study);
+      break;
+    case 203:
+      era.drawLine();
+      await sys_call_daily_event(chara_id, event_hooks.foreign_rest);
+      break;
+    case 204:
+      era.drawLine();
+      await sys_call_daily_event(chara_id, event_hooks.foreign_train);
+      break;
+    case 205:
+      era.drawLine();
+      await sys_call_daily_event(chara_id, event_hooks.foreign_travel);
       break;
     case 401:
       await print_exp_page();

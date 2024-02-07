@@ -339,6 +339,14 @@ handlers[event_hooks.out_station] = async function (chara_id, hook) {
   wait_flag && (await era.waitAnyKey());
 };
 
+handlers[event_hooks.foreign_study] = async () => {};
+
+handlers[event_hooks.foreign_rest] = async () => {};
+
+handlers[event_hooks.foreign_train] = async () => {};
+
+handlers[event_hooks.foreign_travel] = async () => {};
+
 handlers[event_hooks.celebration] = async (chara_id) => {
   era.set(`cflag:${chara_id}:节日事件标记`, 0);
   era.println();
