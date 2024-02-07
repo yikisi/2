@@ -232,14 +232,14 @@ async function sys_handle_ero_act(command, filters, _shown) {
     let option_flag = true;
     while (option_flag) {
       era.printMultiColumns([
-        ...new Array(6).fill(0).map((_, i) => {
+        ...new Array(8).fill(0).map((_, i) => {
           return {
             accelerator: i,
             config: {
               buttonType: era.get(`flag:${i + 950}`) ? 'warning' : 'info',
               width: 8,
             },
-            content: era.get(`flagname:${i + 950}`),
+            content: era.get(`flagname:${i + 950}`).toUpperCase(),
             type: 'button',
           };
         }),

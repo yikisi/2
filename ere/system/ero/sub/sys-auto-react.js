@@ -26,6 +26,8 @@ async function sys_auto_react(shown) {
       false,
       false,
       true,
+      false,
+      false,
     ]);
     const resist_ratio =
       era.get(`status:${lover}:超马跳Z`) ||

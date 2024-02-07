@@ -14,6 +14,7 @@ const {
   ero_hook_tags,
   ero_tagged_hooks,
   ero_actions,
+  ero_hooks,
 } = require('#/data/event/ero-hooks');
 const EroHookTag = require('#/data/event/ero-hook-tag');
 const { get_breast_cup } = require('#/data/info-generator');
@@ -145,11 +146,14 @@ function sys_filter_ero_act(attacker, defender, filters) {
   const is_master = attacker === era.get('tflag:主导权');
   return ero_actions.filter((e) => {
     const tags = ero_tagged_hooks[e] || EroHookTag.default_tags;
+    const hook_name = Object.keys(ero_hooks)[e];
     return (
       (tags.condition === EroHookTag.condition_type.no ||
         (is_master && tags.condition === EroHookTag.condition_type.active) ||
         (!is_master &&
           tags.condition === EroHookTag.condition_type.in_active)) &&
+      (!hook_name.startsWith('ask_') || !filters[5]) &&
+      (!hook_name.startsWith('force_') || !filters[6]) &&
       check_tags(
         tags.attacker_tags,
         tag_checks[attacker],

@@ -393,6 +393,8 @@ async function sys_auto_rape(shown) {
     false,
     false,
     true,
+    false,
+    false,
   ]).filter(
     (e) =>
       era.get(`love:${master}`) >= 75 ||
