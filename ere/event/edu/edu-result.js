@@ -164,7 +164,7 @@ function learn_language(chara_id, lan_name) {
   debuff &&
     era.set(
       `status:${chara_id}:语言不通`,
-      Math.max(debuff - 1, Number(level === 5)),
+      Math.max(debuff - 1, Number(level < 5)),
     );
 }
 
