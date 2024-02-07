@@ -1,7 +1,11 @@
 const era = require('#/era-electron');
 
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
-const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
+const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
+const {
+  sys_reg_race,
+  sys_change_attr_and_print,
+} = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_train_enabled,
   sys_check_awake,
@@ -20,6 +24,7 @@ const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
 
 const event_hooks = require('#/data/event/event-hooks');
+const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
 const location2language = {};
@@ -34,7 +39,9 @@ location2language[location_enum.hongkong] = location2language[
  * @param {{after_select:boolean,homepage:boolean,week_start:boolean}} flags
  */
 module.exports = async function (chara_id, save_and_next_week, flags) {
-  const cur_location = era.get('flag:当前位置'),
+  const celebration = get_celebration(),
+    celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1),
+    cur_location = era.get('flag:当前位置'),
     cur_weeks = era.get('flag:当前回合数'),
     registered_race = sys_reg_race(chara_id).curr,
     player_base = {
@@ -46,7 +53,10 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
           stamina: era.get(`base:${chara_id}:体力`),
           time: era.get(`base:${chara_id}:精力`),
         }
-      : undefined;
+      : undefined,
+    not_in_same_loc =
+      era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置'),
+    jpy = era.get('flag:当前马币');
   era.drawLine();
   era.printInColRows(
     [
@@ -102,6 +112,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         accelerator: 202,
         config: {
           disabled:
+            not_in_same_loc ||
             !sys_check_awake(chara_id) ||
             !sys_check_awake(0) ||
             (era.get(`abl:${chara_id}:${location2language[cur_location]}语`) ===
@@ -118,10 +129,13 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         accelerator: 203,
         config: {
           disabled:
+            not_in_same_loc ||
+            jpy < 50 ||
             !sys_check_awake(chara_id) ||
             !sys_check_awake(0) ||
             player_base.time < 200 ||
-            (chara_base && chara_base.time < 200),
+            (chara_base && chara_base.time < 200) ||
+            !era.get(`status:${chara_id}:水土不服`),
           width: 6,
         },
         content: '休息调养',
@@ -131,12 +145,15 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         accelerator: 204,
         config: {
           disabled:
+            not_in_same_loc ||
             !sys_check_awake(chara_id) ||
             !sys_check_awake(0) ||
             !sys_check_train_enabled(chara_id) ||
             player_base.stamina < 200 ||
             player_base.time < 100 ||
-            (chara_base && (chara_base.stamina < 200 || chara_base.time < 100)),
+            (chara_base &&
+              (chara_base.stamina < 200 || chara_base.time < 100)) ||
+            !era.get(`status:${chara_id}:客场作战`),
           width: 6,
         },
         content: '适应性训练',
@@ -146,6 +163,8 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         accelerator: 205,
         config: {
           disabled:
+            not_in_same_loc ||
+            jpy < 50 ||
             !sys_check_awake(chara_id) ||
             !sys_check_awake(0) ||
             player_base.stamina < 200 ||
@@ -156,6 +175,23 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         content: '旅行观光',
         type: 'button',
       },
+      chara_id && era.get(`cflag:${chara_id}:节日事件标记`)
+        ? {
+            accelerator: 206,
+            config: {
+              buttonType: 'danger',
+              disabled:
+                !sys_check_awake(chara_id) ||
+                !sys_check_awake(0) ||
+                era.get(`base:${chara_id}:精力`) < 50 ||
+                era.get('base:0:精力') < celebration_cost ||
+                not_in_same_loc,
+              width: 6,
+            },
+            content: `一起庆祝 ${celebration}`,
+            type: 'button',
+          }
+        : { content: '', type: 'text' },
     ],
     [
       {
@@ -221,19 +257,27 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       break;
     case 202:
       era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.foreign_study);
+      await sys_call_edu_event(chara_id, event_hooks.foreign_study, {
+        lan: location2language[cur_location],
+      });
       break;
     case 203:
       era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.foreign_rest);
+      await sys_call_edu_event(chara_id, event_hooks.foreign_rest);
       break;
     case 204:
       era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.foreign_train);
+      await sys_call_edu_event(chara_id, event_hooks.foreign_train);
       break;
     case 205:
       era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.foreign_travel);
+      await sys_call_edu_event(chara_id, event_hooks.foreign_travel);
+      break;
+    case 206:
+      sys_change_attr_and_print(0, '精力', -celebration_cost);
+      sys_change_attr_and_print(chara_id, '精力', -50);
+      era.drawLine();
+      await sys_call_daily_event(chara_id, event_hooks.celebration, {});
       break;
     case 401:
       await print_exp_page();

@@ -11,7 +11,7 @@ module.exports = new RaceInfo(
   RaceInfo.rotation_enum.right,
   14,
   RaceInfo.limit_enum.post4,
-  40,
+  41,
   3000,
   86001,
 );

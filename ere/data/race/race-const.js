@@ -234,8 +234,6 @@ const race_enum = {
   tenn_sho: 0,
   // 菊花赏
   kiku_sho: 0,
-  // 和谐锦标
-  chn_frt: 0,
   // 天鹅锦标
   swan_sta: 0,
   // 阿尔忒弥斯锦标
@@ -244,6 +242,8 @@ const race_enum = {
   jbc_spr: 0,
   // 日本育马场经典赛
   jbc_cls: 0,
+  // 和谐锦标
+  chn_frt: 0,
   // 京王杯2岁锦标
   keio_sta: 0,
   // 阿根廷共和国杯
@@ -420,11 +420,11 @@ race_infos[race_enum.fuji_sta] = require('#/data/race/g2/race-fuji-sta');
 race_infos[race_enum.fuch_sta] = require('#/data/race/g2/race-fuch-sta');
 race_infos[race_enum.tenn_sho] = require('#/data/race/g1/race-tenn-sho');
 race_infos[race_enum.kiku_sho] = require('#/data/race/g1/race-kiku-sho');
-race_infos[race_enum.chn_frt] = require('#/data/race/g1/race-chn-frt');
 race_infos[race_enum.swan_sta] = require('#/data/race/g2/race-swan-sta');
 race_infos[race_enum.arte_sta] = require('#/data/race/g3/race-arte-sta');
 race_infos[race_enum.jbc_spr] = require('#/data/race/g1/race-jbc-spr');
 race_infos[race_enum.jbc_cls] = require('#/data/race/g1/race-jbc-cls');
+race_infos[race_enum.chn_frt] = require('#/data/race/g1/race-chn-frt');
 race_infos[race_enum.keio_sta] = require('#/data/race/g2/race-keio-sta');
 race_infos[race_enum.copa_arg] = require('#/data/race/g2/race-copa-arg');
 race_infos[race_enum.fant_sta] = require('#/data/race/g3/race-fant-sta');

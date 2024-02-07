@@ -46,7 +46,7 @@ handlers[check_stages.next_week] = () => {
     }
   } else if (
     era.get('cflag:205:随机招募') < 0 &&
-    era.get('flag:当前声望') >= 1000
+    era.get('flag:当前声望') >= 500
   ) {
     era.set('cflag:205:随机招募', 1);
   }

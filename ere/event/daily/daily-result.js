@@ -96,14 +96,15 @@ handlers[event_hooks.office_study] = async function (chara_id) {
   era.println();
   let wait_flag = false;
   random_cost_in_action(chara_id, [0, 0], [100, 300]);
-  let to_print = sys_change_attr_and_print(
+  wait_flag ||= print_attr_change(
     chara_id,
-    attr_enum.intelligence,
-    get_random_value(5, 10),
+    sys_change_attr_and_print(
+      chara_id,
+      attr_enum.intelligence,
+      get_random_value(5, 10),
+    ),
   );
-  wait_flag ||= to_print.length > 0;
   wait_flag = sys_like_chara(chara_id, 0, get_random_value(5, 10)) || wait_flag;
-  print_attr_change(chara_id, to_print);
   wait_flag && (await era.waitAnyKey());
 };
 
@@ -339,16 +340,9 @@ handlers[event_hooks.out_station] = async function (chara_id, hook) {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.foreign_study] = async () => {};
-
-handlers[event_hooks.foreign_rest] = async () => {};
-
-handlers[event_hooks.foreign_train] = async () => {};
-
-handlers[event_hooks.foreign_travel] = async () => {};
-
 handlers[event_hooks.celebration] = async (chara_id) => {
   era.set(`cflag:${chara_id}:节日事件标记`, 0);
+  era.add('cflag:0:节日事件标记', 1);
   era.println();
   if ((era.get('flag:当前回合数') - 1) % 48 === 5) {
     era.print('获得了【情人节巧克力】！');

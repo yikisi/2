@@ -594,8 +594,6 @@ handlers[event_hooks.out_station] = async (chara_id, hook) => {
   ]);
 };
 
-require('#/event/daily/common-lines/foreign')(handlers);
-
 /**
  * @param {number} chara_id
  * @param _

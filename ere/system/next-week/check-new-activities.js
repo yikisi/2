@@ -20,6 +20,7 @@ const { mec_foreign_debuff } = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { expedition_weeks } = require('#/data/move-const');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
 
@@ -44,23 +45,25 @@ track2location[track_enum.shatin] = {
  * @param {number} chara_id
  * @param {string} language
  * @param {number} loc
+ * @param {boolean} before_race
  */
-function handle_foreign_debuff(chara_id, language, loc) {
+function handle_foreign_debuff(chara_id, language, loc, before_race) {
   sys_change_attr_and_print(chara_id, '体力', -200);
   sys_change_attr_and_print(chara_id, '精力', -500);
   sys_change_tired(chara_id, 2);
-  if (era.get(`cflag:${chara_id}:种族`)) {
-    era.set(
-      `status:${chara_id}:语言不通`,
-      Math.max(
-        5 -
-          era.get(`abl:${chara_id}:${language}语`) +
-          era.get(`talent:${chara_id}:社交态度`),
-        0,
-      ),
-    );
-    sys_call_mec(chara_id, mec_foreign_debuff, { loc });
-  }
+  era.set(
+    `status:${chara_id}:语言不通`,
+    Math.max(
+      5 -
+        era.get(`abl:${chara_id}:${language}语`) +
+        era.get(`talent:${chara_id}:社交态度`),
+      0,
+    ),
+  );
+  sys_call_mec(chara_id, mec_foreign_debuff, {
+    before_race,
+    loc,
+  });
 }
 
 /**
@@ -122,7 +125,7 @@ async function check_new_activities(cur_round, in_team_list) {
   let race, is_begin;
   for (const r of foreign_race_list) {
     const { date } = race_infos[r];
-    if (event_weeks === date - 2) {
+    if (event_weeks === date - expedition_weeks) {
       race = r;
       is_begin = true;
     } else if (event_weeks === date) {
@@ -166,7 +169,7 @@ async function check_new_activities(cur_round, in_team_list) {
           },
           ...foreign_list.map((chara_id) => {
             const chara = get_chara_talk(chara_id);
-            handle_foreign_debuff(chara_id, location.lan, location.loc);
+            handle_foreign_debuff(chara_id, location.lan, location.loc, true);
             sys_change_pressure(chara_id, get_random_value(2000, 3000));
             return {
               config: { align: 'center', width: 3 },
@@ -206,7 +209,7 @@ async function check_new_activities(cur_round, in_team_list) {
         temp = await era.input();
       }
       if (!temp) {
-        handle_foreign_debuff(0, location.lan, location.loc);
+        handle_foreign_debuff(0, location.lan, location.loc, false);
         era.set('flag:当前位置', location.loc);
         foreign_list.forEach((chara_id) =>
           sys_change_pressure(chara_id, -1000),
