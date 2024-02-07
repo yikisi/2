@@ -19,7 +19,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 const color_17 = require('#/data/chara-colors')[17];
 const { buff_colors } = require('#/data/color-const');
-const LunaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-17');
+const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const { attr_enum } = require('#/data/train-const');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -28,7 +28,7 @@ const { race_enum } = require('#/data/race/race-const');
  * @param {{race:number,rank:number}} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
-  const event_marks = new LunaEventMarks(),
+  const event_marks = new LunaEduMarks(),
     is_emperor = event_marks.emperor,
     { luna, emperor } = is_emperor
       ? { emperor: 17, luna: 9017 }

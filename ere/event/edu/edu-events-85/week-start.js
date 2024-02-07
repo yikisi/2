@@ -11,7 +11,7 @@ const {
 const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { location_enum } = require('#/data/locations');
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const edu_event_marks = new EduEventMarks(85);
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 

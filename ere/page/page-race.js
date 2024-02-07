@@ -281,7 +281,7 @@ async function race_page(race) {
     new_title_dict[e] = [];
   });
   wait_flag && (await era.waitAnyKey());
-  era.clear();
+  await era.clear();
   era.drawLine();
   const race_header = [
     {
@@ -320,7 +320,7 @@ async function race_page(race) {
     strategy_ability = generate_strategy_ability(cur_chara_id),
     strategy = strategy_dict[cur_chara_id];
   while (flag_prepare_race) {
-    era.clear();
+    await era.clear();
     era.setVerticalAlign('middle');
     era.printInColRows(
       [{ type: 'divider' }, ...race_header, { type: 'divider' }],
@@ -463,7 +463,7 @@ async function race_page(race) {
       strategy = strategy_dict[ret];
     }
   }
-  era.clear();
+  await era.clear();
   era.printMultiColumns([
     { type: 'divider' },
     { content: 'TEST 选择成绩', type: 'text' },
@@ -496,7 +496,7 @@ async function race_page(race) {
     end_count = start_count,
     time_cost = 0;
   while (start_count) {
-    era.clear();
+    await era.clear();
     page_race_header(info);
     const player_time = era.get('base:0:精力');
     era.setHorizontalAlign('space-around');
@@ -623,7 +623,7 @@ async function race_page(race) {
   await era.waitAnyKey();
   time_cost = 0;
   while (end_count) {
-    era.clear();
+    await era.clear();
     page_race_header(info);
     const player_time = era.get('base:0:精力');
     era.setHorizontalAlign('space-around');
@@ -824,7 +824,7 @@ async function race_page(race) {
   }
   if (best_rank === 1) {
     if (race === race_enum.prix_lat) {
-      !era.get('cflag:204:随机招募') && era.add('cflag:204:随机招募', -1);
+      era.get('cflag:204:随机招募') <= 0 && era.add('cflag:204:随机招募', -1);
     }
     if (race === race_enum.prix_lat || race === race_enum.prix_dia) {
       [205, 206].forEach(

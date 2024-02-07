@@ -4,7 +4,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
-const { default_relation } = require('#/data/other-const');
 
 /**
  * 东海帝王的招募事件，id=3
@@ -235,8 +234,8 @@ module.exports = {
       );
       era.println();
       await era.printAndWait(`${me.name}们 的故事从此开始。`);
-      era.set('relation:3:0', default_relation + (ret === 2) * 5);
-      era.set('love:3', era.get('flag:马娘初始爱慕') + (ret === 1));
+      era.add('relation:3:0', (ret === 2) * 5);
+      era.add('love:3', ret === 1);
       era.set(`cflag:3:招募状态`, recruit_flags.yes);
     } else {
       await era.printAndWait(

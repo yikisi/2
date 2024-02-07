@@ -22,7 +22,6 @@ const { buff_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
-const { get_trainer_title } = require('#/data/info-generator');
 
 const chara_colors = require('#/data/chara-colors')[7];
 
@@ -61,19 +60,16 @@ async function love_49(gold_ship) {
     `${CharaTalk.me.actual_name} 是一个训练员，没错。`,
   );
   era.println();
-  const trainer_title = get_trainer_title().substring(0, 2);
-  if (trainer_title !== '老练') {
-    if (trainer_title === '失格' || trainer_title === '新手') {
-      await gold_ship.print_and_wait(
-        `${CharaTalk.me.actual_name} 也许能帮助 ${gold_ship.name} 找到属于自己的伊甸园。`,
-      );
-    } else {
-      await gold_ship.print_and_wait(
-        `${CharaTalk.me.actual_name} 的实力很强，能帮助 ${gold_ship.name} 找到属于自己的伊甸园。`,
-      );
-    }
-    era.println();
+  if (era.get('flag:当前声望') < 1000) {
+    await gold_ship.print_and_wait(
+      `${CharaTalk.me.actual_name} 也许能帮助 ${gold_ship.name} 找到属于自己的伊甸园。`,
+    );
+  } else {
+    await gold_ship.print_and_wait(
+      `${CharaTalk.me.actual_name} 的实力很强，能帮助 ${gold_ship.name} 找到属于自己的伊甸园。`,
+    );
   }
+  era.println();
   if (era.get('exp:7:性爱次数')) {
     await gold_ship.print_and_wait(
       `虽然是马后炮，但 ${CharaTalk.me.actual_name} 确实能在床上为自己发烫的娇躯带来抚慰。`,
@@ -552,6 +548,10 @@ async function golden_ship_attack() {
  * 黄金船 - 爱慕
  *
  * @author 雞雞
+ *
+ * @param {HookArg} hook
+ * @param _
+ * @param {EventObject} event_object
  */
 module.exports = async (hook, _, event_object) => {
   const love = era.get('love:7');

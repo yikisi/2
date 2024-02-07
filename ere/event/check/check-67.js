@@ -13,7 +13,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
-const DaiyaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-67');
+const DaiyaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-67');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -62,7 +62,7 @@ handlers[check_stages.next_week] = () => {
   const event_obj = new EventObject(67, cb_enum.edu),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:67:育成回合计时');
   if (edu_weeks < 3 * 48) {
-    const edu_event_marks = new DaiyaEventMarks();
+    const edu_event_marks = new DaiyaEduMarks();
     const event_obj_special = new EventObject(67, cb_enum.edu, true);
     check_and_add_event(
       edu_event_marks,
@@ -231,7 +231,7 @@ handlers[check_stages.personal_titles] = () => ['实现愿望的宝石'];
 
 /** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
 handlers[check_stages.after_race] = (extra_flag) => {
-  const edu_marks = new DaiyaEventMarks();
+  const edu_marks = new DaiyaEduMarks();
   if (race_infos[extra_flag.race].race_class === class_enum.G1) {
     if (!edu_marks.run_g1) {
       edu_marks.run_g1 = 1;

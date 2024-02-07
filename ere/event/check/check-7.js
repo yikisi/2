@@ -13,7 +13,7 @@ const { cb_enum, add_event } = require('#/event/queue');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
-const GoldShipEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-7');
+const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { class_enum } = require('#/data/race/model/race-info');
@@ -50,7 +50,7 @@ handlers[check_stages.love_event] = () =>
   add_event(event_hooks.week_end, new EventObject(7, cb_enum.love));
 
 handlers[check_stages.next_week] = () => {
-  const event_marks = new GoldShipEventMarks(7),
+  const event_marks = new GoldShipEduMarks(7),
     event_obj = new EventObject(7, cb_enum.edu),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:7:育成回合计时');
   if (edu_weeks < 3 * 48) {
@@ -125,7 +125,7 @@ handlers[check_stages.aim_check] = function () {
 
 /** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
 handlers[check_stages.after_race] = (extra_flag) => {
-  const event_marks = new GoldShipEventMarks();
+  const event_marks = new GoldShipEduMarks();
   if (
     extra_flag.rank === 1 &&
     race_infos[extra_flag.race].race_class === class_enum.G1
@@ -139,7 +139,7 @@ handlers[check_stages.after_race] = (extra_flag) => {
 
 handlers[check_stages.palace_check] = function () {
   common_palace_check(7);
-  if (new GoldShipEventMarks().keywords === 4) {
+  if (new GoldShipEduMarks().keywords === 4) {
     add_event(event_hooks.week_start, new EventObject(7, cb_enum.edu));
   }
   return handlers[check_stages.aim_check]();
@@ -150,7 +150,7 @@ handlers[check_stages.title_check] = (extra_flag) => {
   /** @type {Record<string,{race:number,rank:number}>} */
   const races = era.get('cflag:7:育成成绩');
   const c = get_chara_talk(7).color,
-    event_marks = new GoldShipEventMarks();
+    event_marks = new GoldShipEduMarks();
   if (
     event_marks.title_check >= 6 &&
     check_aim_race(races, race_enum.sats_sho, 1, 1) &&

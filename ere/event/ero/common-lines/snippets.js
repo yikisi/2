@@ -4,6 +4,7 @@ const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 
 const { base_emotion_juel } = require('#/data/ero/juel-const');
+const { part_touch } = require('#/data/ero/part-const');
 
 module.exports = {
   /**
@@ -39,10 +40,22 @@ module.exports = {
   },
   /**
    * @param {number} attacker
+   * @param {number} [defender]
+   * @param {number} [attacker_part]
+   * @param {number} [defender_part]
    * @returns {Promise<boolean>}
    */
-  async ask_action(attacker) {
-    if (!attacker || era.get('tflag:强奸') > 0) {
+  async ask_action(attacker, defender, attacker_part, defender_part) {
+    let temp;
+    if (
+      !attacker ||
+      era.get('tflag:强奸') > 0 ||
+      (defender !== undefined &&
+        (temp = era.get(
+          `tcvar:${attacker}:${part_touch[attacker_part]}接触部位`,
+        )).owner === defender &&
+        temp.part === defender_part)
+    ) {
       return false;
     }
     era.printMultiColumns([

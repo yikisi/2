@@ -146,7 +146,7 @@ function set_height(height) {
 
 function random_chara() {
   if (era.get('flag:彩蛋机制') === 179) {
-    era.set('callname:0:-2', '鬼道');
+    era.set('callname:0:-2', '鬼鼠');
   } else {
     era.set('callname:0:-2', '你');
   }
@@ -251,7 +251,7 @@ async function page_custom() {
   CharaTalk.me = new CharaTalk(0);
   while (flag_custom) {
     Object.values(attr_names).forEach((v) => era.set(`base:0:${v}`, 25));
-    era.clear();
+    await era.clear();
     era.printMultiColumns([
       { type: 'divider' },
       {
@@ -287,7 +287,7 @@ async function page_custom() {
       era.set('cstr:0:毛色', uma_hairs[0]);
       Object.values(attr_names).forEach((v) => era.set(`base:0:${v}`, 20));
       if (era.get('flag:彩蛋机制') === 179) {
-        era.set('callname:0:-2', '鬼道');
+        era.set('callname:0:-2', '鬼鼠');
       } else {
         era.set('callname:0:-2', '你');
       }
@@ -297,7 +297,7 @@ async function page_custom() {
       let flag_hair = true,
         indexes = new Array(hair_content_cb.length).fill(0);
       while (flag_hair) {
-        era.clear();
+        await era.clear();
         era.printInColRows(
           [
             { type: 'divider' },
@@ -366,7 +366,7 @@ async function page_custom() {
         month = 1,
         day = 1;
       while (flag_height) {
-        era.clear();
+        await era.clear();
         era.printMultiColumns([
           { type: 'divider' },
           {
@@ -640,7 +640,7 @@ async function page_custom() {
       if (era.get('flag:彩蛋机制') === 179) {
         era.drawLine();
         await era.printAndWait('哦哦，您取了一个很萝莉控的名字呢！');
-        era.set('callname:0:-2', '鬼道');
+        era.set('callname:0:-2', '鬼鼠');
       } else {
         era.printInColRows([
           { content: '希望旁白君如何称呼您呢？', type: 'text' },
@@ -832,12 +832,12 @@ async function page_custom() {
           break;
         case 2:
           random_talent();
-          era.clear();
+          await era.clear();
           break;
         case 3:
           random_chara();
           random_talent();
-          era.clear();
+          await era.clear();
           break;
         case 4:
           flag_check = false;

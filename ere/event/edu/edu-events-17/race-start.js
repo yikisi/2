@@ -6,7 +6,7 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const color_17 = require('#/data/chara-colors')[17];
-const LunaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-17');
+const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
 
@@ -15,7 +15,7 @@ const { race_infos, race_enum } = require('#/data/race/race-const');
  * @param {{race:number,rank:number}} extra_flag
  */
 module.exports = async (_, extra_flag) => {
-  const event_marks = new LunaEventMarks(),
+  const event_marks = new LunaEduMarks(),
     { luna, emperor } = event_marks.emperor
       ? { emperor: 17, luna: 9017 }
       : {

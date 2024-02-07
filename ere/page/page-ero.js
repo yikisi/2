@@ -460,7 +460,7 @@ async function page_ero(lover) {
   await sys_call_ero_event(curr_lover, ero_hooks.ero_start);
 
   while (ero_flag) {
-    era.clear();
+    await era.clear();
 
     curr_lover = era.get('tflag:当前对手');
     let curr_supporter = era.get('tflag:当前助手');

@@ -4,7 +4,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
 const print_event_name = require('#/event/snippets/print-event-name');
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 module.exports = async function () {
   if (!new EduEventMarks(85).get('burn_heart')) {
@@ -42,8 +42,6 @@ module.exports = async function () {
     fontWeight: 'bold',
     isParagraph: true,
   });
-  await print_event_name('露比说不定会换个训练员', ruby);
-  era.println();
   era.drawLine({ content: '在那之后' });
   await era.printAndWait(`某一天，你收到了露比委托管家先生交给你的CD。`);
   era.println();
@@ -213,4 +211,5 @@ module.exports = async function () {
   );
   await era.printAndWait(`看到这一幕的未婚夫把露比随手扔到床上。`);
   await ruby.say_and_wait(`……对不起，训练员先生……`);
+  await print_event_name('露比说不定会换个训练员', ruby);
 };

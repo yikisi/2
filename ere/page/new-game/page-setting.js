@@ -21,7 +21,7 @@ module.exports = async () => {
   era.set('flag:雷普抵抗', 1);
 
   while (flag_setting) {
-    era.clear();
+    await era.clear();
     const enable_hurt = era.get('flag:可能伤病');
     const love_buff = era.get('flag:爱慕上升加成');
     const love_event = era.get('flag:爱慕限制');

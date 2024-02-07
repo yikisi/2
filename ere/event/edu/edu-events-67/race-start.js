@@ -5,7 +5,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const DaiyaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-67');
+const DaiyaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-67');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -139,7 +139,7 @@ async function sats_sho_event(daiya, me) {
  */
 module.exports = async (_, extra_flag) => {
   const daiya = get_chara_talk(67),
-    edu_marks = new DaiyaEventMarks(),
+    edu_marks = new DaiyaEduMarks(),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:67:育成回合计时'),
     me = get_chara_talk(0);
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
@@ -272,7 +272,7 @@ module.exports = async (_, extra_flag) => {
       );
       await first_g1_event(daiya);
       await era.printAndWait(
-        `${me.name} 们对于在“皋月赏”获胜更加充满了干劲。很期待她能顺利赢得第一个G1胜利。`,
+        `${me.name}们 对于在“皋月赏”获胜更加充满了干劲。很期待她能顺利赢得第一个G1胜利。`,
       );
       await era.printAndWait(
         '──然而，就像是老天爷要泼我们冷水一般，电视上的天气预报显示出令人担忧的资讯。',

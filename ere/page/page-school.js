@@ -13,7 +13,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { vehicle_verbs, vehicle_names } = require('#/data/move-const');
 
 module.exports = async (location) => {
-  era.clear();
+  await era.clear();
   era.set('flag:当前位置', location);
   const chara_id = era.get('flag:当前互动角色');
   print_page_header();

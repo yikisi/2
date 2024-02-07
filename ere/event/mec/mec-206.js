@@ -2,7 +2,6 @@ const era = require('#/era-electron');
 
 const check_stages = require('#/data/event/check-stages');
 const { location_enum } = require('#/data/locations');
-const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 
 const handlers = {};
 

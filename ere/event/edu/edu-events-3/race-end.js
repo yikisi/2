@@ -32,10 +32,10 @@ function fill_common_rewards(extra_flag) {
 }
 
 /**
- * @param {HookArg} hook
+ * @param {HookArg} _
  * @param {{race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number}} extra_flag
  */
-module.exports = async (hook, extra_flag) => {
+module.exports = async (_, extra_flag) => {
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时');

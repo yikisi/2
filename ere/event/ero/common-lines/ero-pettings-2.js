@@ -9,6 +9,7 @@ const {
 } = require('#/event/ero/common-lines/snippets');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const { part_enum } = require('#/data/ero/part-const');
 
 /**
  * @author O口口口口口
@@ -110,7 +111,14 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ' 将肉棒深深含入……】',
       ]);
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.penis,
+          part_enum.mouth,
+        )
+      ) {
         await after_refusing_by_defender(attacker, defender, hook);
         return;
       }
@@ -252,7 +260,14 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ' 将肉棒握在手心……】',
       ]);
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.penis,
+          part_enum.hand,
+        )
+      ) {
         await after_refusing_by_defender(attacker, defender, hook);
         return;
       }
@@ -374,7 +389,14 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ' 一边抚摸肉棒一边含住龟头……】',
       ]);
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.penis,
+          part_enum.mouth,
+        )
+      ) {
         await after_refusing_by_defender(attacker, defender, hook);
         return;
       }
@@ -506,7 +528,14 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ' 用双乳夹住肉棒……】',
       ]);
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.penis,
+          part_enum.breast,
+        )
+      ) {
         await after_refusing_by_attacker(attacker, defender, hook);
         return;
       }
@@ -642,7 +671,14 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ' 一边用乳房摩擦肉棒，一边用嘴唇亲吻龟头……】',
       ]);
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.penis,
+          part_enum.breast,
+        )
+      ) {
         await after_refusing_by_defender(attacker, defender, hook);
         return;
       }
@@ -826,7 +862,14 @@ module.exports = (handlers) => {
         ' 吮吸乳头，一边抚弄肉棒……】',
       ]));
     if (hook.arg) {
-      if (await ask_action(attacker.id)) {
+      if (
+        await ask_action(
+          attacker.id,
+          defender.id,
+          part_enum.breast,
+          part_enum.mouth,
+        )
+      ) {
         await after_refusing_by_attacker(attacker, defender, hook);
         return;
       }
@@ -901,7 +944,14 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' 咬自己的乳头……】',
     ]);
-    if (await ask_action(attacker.id)) {
+    if (
+      await ask_action(
+        attacker.id,
+        defender.id,
+        part_enum.breast,
+        part_enum.mouth,
+      )
+    ) {
       await after_refusing_by_defender(attacker, defender, hook);
       return;
     }

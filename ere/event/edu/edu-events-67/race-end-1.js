@@ -10,7 +10,7 @@ const EventObject = require('#/data/event/event-object');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,number,{race:number,rank:number},DaiyaEventMarks):Promise<void>>} handlers */
+/** @param {Record<string,function(CharaTalk,CharaTalk,number,{race:number,rank:number},DaiyaEduMarks):Promise<void>>} handlers */
 module.exports = (handlers) => {
   handlers[race_enum.begin_race] = async (
     daiya,

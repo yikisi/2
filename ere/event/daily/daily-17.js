@@ -10,17 +10,14 @@ const select_action_in_station = require('#/event/daily/snippets/select-action-i
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 
-const EduEventMarks = require('#/data/event/edu-event-marks');
-const LunaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-17');
+const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const color_17 = require('#/data/chara-colors')[17];
 
 function get_luna_or_emperor() {
-  return new CharaTalk(17).set_color(
-    color_17[new EduEventMarks(17).get('emperor')],
-  );
+  return new CharaTalk(17).set_color(color_17[new LunaEduMarks().emperor]);
 }
 
 /** @type {Record<string,function(stage_id:HookArg,extra_flag:*):Promise<boolean>>} */
@@ -29,7 +26,7 @@ const handlers = {};
 handlers[event_hooks.select] = function () {
   let talk_list;
   if (sys_check_awake(17)) {
-    const is_emperor = new EduEventMarks(17).get('emperor');
+    const is_emperor = new LunaEduMarks().emperor;
     if (is_emperor) {
       talk_list = [
         '是你啊，弄臣。',
@@ -51,7 +48,7 @@ handlers[event_hooks.select] = function () {
 
 handlers[event_hooks.good_morning] = function () {
   let talk_list;
-  const is_emperor = new EduEventMarks(17).get('emperor');
+  const is_emperor = new LunaEduMarks().emperor;
   if (is_emperor) {
     talk_list = ['不要浪费时间。', '不要犯下错误。', '不要让吾失望。'];
     if (era.get('status:17:精神损伤') || era.get('status:9017:精神损伤')) {
@@ -93,7 +90,7 @@ handlers[event_hooks.good_morning] = function () {
 
 handlers[event_hooks.talk] = async function () {
   const talk_list = [],
-    is_emperor = new EduEventMarks(17).get('emperor');
+    is_emperor = new LunaEduMarks().emperor;
   if (era.get('base:17:体力') < 0.4 * era.get('maxbase:17:体力')) {
     if (is_emperor) {
       talk_list.push('感觉疲劳正在堆积。', '你不必相信，你只需追随。');
@@ -161,7 +158,7 @@ handlers[event_hooks.talk] = async function () {
 
 handlers[event_hooks.office_gift] = async function () {
   const talk_list = [];
-  if (new EduEventMarks(17).get('emperor')) {
+  if (new LunaEduMarks().emperor) {
     talk_list.push(
       '哦？礼品？……哼，想要的，吾会自己去取。',
       '贡品就堆放到宝库中去。',
@@ -177,7 +174,7 @@ handlers[event_hooks.office_gift] = async function () {
 
 handlers[event_hooks.office_cook] = async function () {
   const talk_list = [];
-  if (new EduEventMarks(17).get('emperor')) {
+  if (new LunaEduMarks().emperor) {
     talk_list.push('食物的制成也大有学问。', '赏给你的，满怀敬畏地吃下去吧。');
   } else {
     talk_list.push(
@@ -190,7 +187,7 @@ handlers[event_hooks.office_cook] = async function () {
 
 handlers[event_hooks.office_study] = async function () {
   const talk_list = [];
-  if (new EduEventMarks(17).get('emperor')) {
+  if (new LunaEduMarks().emperor) {
     talk_list.push(
       '吾不需要学艺不精的教授。',
       '无论何种时代，智者理应得到尊崇。',
@@ -206,7 +203,7 @@ handlers[event_hooks.office_study] = async function () {
 
 handlers[event_hooks.office_rest] = async function () {
   const talk_list = [];
-  if (new EduEventMarks(17).get('emperor')) {
+  if (new LunaEduMarks().emperor) {
     talk_list.push('……沉睡……', '如果遇到棘手的事情，弄臣……吾允许你唤醒我。');
   } else {
     talk_list.push(
@@ -219,7 +216,7 @@ handlers[event_hooks.office_rest] = async function () {
 
 handlers[event_hooks.office_prepare] = async function () {
   const talk_list = [];
-  if (new EduEventMarks(17).get('emperor')) {
+  if (new LunaEduMarks().emperor) {
     talk_list.push(
       '美美此刻，血脉偾张！',
       '来，让我见识一下英雄和勇者的挣扎！！！',
@@ -232,7 +229,7 @@ handlers[event_hooks.office_prepare] = async function () {
 
 handlers[event_hooks.office_game] = async function () {
   const talk_list = [];
-  if (new EduEventMarks(17).get('emperor')) {
+  if (new LunaEduMarks().emperor) {
     talk_list.push('作为消遣而言，还算合格。', '还没准备好狩猎吗？');
   } else {
     talk_list.push(
@@ -246,7 +243,7 @@ handlers[event_hooks.office_game] = async function () {
 handlers[event_hooks.school_atrium] = async function () {
   const talk_list = [];
   const temp = await select_action_in_atrium();
-  if (new EduEventMarks(17).get('emperor')) {
+  if (new LunaEduMarks().emperor) {
     if (!temp) {
       talk_list.push(
         '吾能听见……失意和失败之人留存在此的苦恨。',
@@ -276,7 +273,7 @@ handlers[event_hooks.school_atrium] = async function () {
 
 handlers[event_hooks.school_rooftop] = async function () {
   const talk_list = [];
-  if (new EduEventMarks(17).get('emperor')) {
+  if (new LunaEduMarks().emperor) {
     talk_list.push('寻常的进食，能果腹即可。', '我对食物没有要求。');
   } else {
     talk_list.push(
@@ -290,7 +287,7 @@ handlers[event_hooks.school_rooftop] = async function () {
 handlers[event_hooks.out_river] = async function (hook) {
   const talk_list = [];
   hook.arg = !!(await select_action_around_river());
-  if (new EduEventMarks(17).get('emperor')) {
+  if (new LunaEduMarks().emperor) {
     if (!hook.arg) {
       talk_list.push('在赛场上狩猎，又何尝不是一种垂钓？', '水中的生灵……');
     } else {
@@ -318,7 +315,7 @@ handlers[event_hooks.out_river] = async function (hook) {
 handlers[event_hooks.out_shopping] = async function (hook) {
   const talk_list = [];
   hook.arg = await select_action_in_shopping_street();
-  const is_emperor = new EduEventMarks(17).get('emperor');
+  const is_emperor = new LunaEduMarks().emperor;
   switch (hook.arg) {
     case 0:
       if (is_emperor) {
@@ -375,7 +372,7 @@ handlers[event_hooks.out_shopping] = async function (hook) {
 
 handlers[event_hooks.out_church] = async function (hook) {
   const chara_talk = get_luna_or_emperor(),
-    is_emperor = new EduEventMarks(17).get('emperor');
+    is_emperor = new LunaEduMarks().emperor;
   await era.printAndWait(
     `神社对于 ${CharaTalk.me.name} 和 ${chara_talk.name} 而言，并没有什么特别的地方。`,
   );
@@ -444,7 +441,7 @@ handlers[event_hooks.out_church] = async function (hook) {
 handlers[event_hooks.out_station] = async function (hook) {
   const talk_list = [];
   hook.arg = await select_action_in_station(17);
-  const is_emperor = new EduEventMarks(17).get('emperor');
+  const is_emperor = new LunaEduMarks().emperor;
   switch (hook.arg) {
     case 0:
       if (is_emperor) {
@@ -486,7 +483,7 @@ handlers[event_hooks.out_station] = async function (hook) {
 };
 
 handlers[event_hooks.load_talk] = async () => {
-  const event_marks = new LunaEventMarks(),
+  const event_marks = new LunaEduMarks(),
     chara = get_chara_talk(17);
   if (event_marks.good_end) {
     await chara.say_and_wait('愿太阳和月亮能继续陪伴着你');

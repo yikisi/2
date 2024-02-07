@@ -19,7 +19,7 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { race_enum } = require('#/data/race/race-const');
 
 const { location_enum } = require('#/data/locations');
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const callname = sys_get_callname(25, 0);
 const chara_talk = get_chara_talk(25);

@@ -6,13 +6,16 @@ const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-ge
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
+const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { attr_change_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
-const GrandEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-89');
+const GrandEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-89');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -35,14 +38,20 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[extra_flag.race];
 
 handlers[check_stages.next_week] = () => {
-  check_and_register_aim_race(89, aim_races);
+  const edu_weeks =
+    era.get('flag:当前回合数') - era.get('cflag:89:育成回合计时');
+  if (edu_weeks < 3 * 48) {
+    check_and_register_aim_race(89, aim_races, edu_weeks);
+  } else if (edu_weeks === 143 + 9) {
+    add_event(event_hooks.week_start, new EventObject(89, cb_enum.edu));
+  }
 };
 
 handlers[check_stages.aim_check] = function () {
   const buffer = [],
     /** @type {Record<string,{race:number,rank:number,st:number,pop:number}>} */
     races = era.get('cflag:89:育成成绩');
-  const goal = (new GrandEventMarks().goal ||= 0);
+  const goal = (new GrandEduMarks().goal ||= 0);
   buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
   buffer.push({
     check: Math.min(goal, 3) - 2,
@@ -66,7 +75,7 @@ handlers[check_stages.after_race] = (extra_flag) => {
     race_infos[extra_flag.race].race_class <= class_enum.G3 &&
     extra_flag.edu_weeks <= 48 + 46
   ) {
-    new GrandEventMarks().goal++;
+    new GrandEduMarks().goal++;
   }
 };
 

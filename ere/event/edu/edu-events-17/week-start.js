@@ -15,7 +15,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const color_17 = require('#/data/chara-colors')[17];
-const LunaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-17');
+const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
 const HookArg = require('#/data/event/hook-arg');
 const { location_enum } = require('#/data/locations');
@@ -28,7 +28,7 @@ const { race_infos, race_enum } = require('#/data/race/race-const');
  * @param {EventObject} event_object
  */
 module.exports = async (hook, _, event_object) => {
-  const event_marks = new LunaEventMarks();
+  const event_marks = new LunaEduMarks();
   let ret = event_marks.emperor * 100,
     allow_transform = true;
   const { luna, emperor } = ret

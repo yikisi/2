@@ -14,7 +14,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
-const KitaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-68');
+const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { class_enum } = require('#/data/race/model/race-info');
@@ -52,11 +52,11 @@ handlers[check_stages.aim_race] = (extra_flag) =>
 handlers[check_stages.love_event] = () =>
   add_event(event_hooks.week_end, new EventObject(68, cb_enum.love));
 
-handlers[check_stages.next_week] = function () {
+handlers[check_stages.next_week] = () => {
   const event_obj = new EventObject(68, cb_enum.edu),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:68:育成回合计时');
   if (edu_weeks < 3 * 48) {
-    const event_marks = new KitaEventMarks();
+    const event_marks = new KitaEduMarks();
     const event_obj_special = new EventObject(68, cb_enum.edu, true);
     check_and_add_event(
       event_marks,
@@ -151,7 +151,7 @@ handlers[check_stages.after_race] = (extra_flag) => {
     extra_flag.rank === 1 &&
     race_infos[extra_flag.race].race_class === class_enum.G1
   ) {
-    new KitaEventMarks().g1_count++;
+    new KitaEduMarks().g1_count++;
   }
 };
 
@@ -163,7 +163,7 @@ handlers[check_stages.palace_check] = () => {
       (e) => e.rank === 1 && e.race !== race_enum.begin_race,
     ).length < 4
   ) {
-    new KitaEventMarks().crazy_fan++;
+    new KitaEduMarks().crazy_fan++;
     sys_push_crazy_fan(68);
   } else {
     add_event(event_hooks.week_end, new EventObject(68, cb_enum.edu));
@@ -183,7 +183,7 @@ handlers[check_stages.title_check] = (extra_flag) => {
       (check_aim_race(races, race_enum.takz_kin, 1, 1) ||
         check_aim_race(races, race_enum.takz_kin, 2, 1)) &&
       check_aim_race(races, race_enum.tenn_spr, 2, 1) &&
-      new KitaEventMarks().g1_count >= 7)
+      new KitaEduMarks().g1_count >= 7)
   ) {
     extra_flag.titles.push({
       c: get_chara_talk(68).color,

@@ -30,10 +30,10 @@ const era = {
   /**
    * clear printed lines
    * @param {number} [lineCount] how many lines to be cleared, leave undefined to clear all
-   * @returns {number} new line count
+   * @returns {Promise<number>} new line count
    */
   // eslint-disable-next-line no-unused-vars
-  clear(lineCount) {},
+  async clear(lineCount) {},
   /**
    * make the current function to wait for some time
    * @param delay time to delay, ms

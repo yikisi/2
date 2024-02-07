@@ -10,7 +10,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const check_stages = require('#/data/event/check-stages');
-const LunaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-17');
+const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { class_enum } = require('#/data/race/model/race-info');
@@ -42,7 +42,7 @@ handlers[check_stages.aim_race] = (extra_flag) => {
     aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
     aim_races[extra_flag.race];
   if (!ret && extra_flag.rank !== undefined) {
-    const event_marks = new LunaEventMarks();
+    const event_marks = new LunaEduMarks();
     if (
       extra_flag.rank <= 5 &&
       extra_flag.rank > 1 &&
@@ -65,7 +65,7 @@ handlers[check_stages.love_event] = () => {
   add_event(event_hooks.week_end, new EventObject(17, cb_enum.love));
 };
 
-handlers[check_stages.next_week] = function () {
+handlers[check_stages.next_week] = () => {
   const edu_object = new EventObject(17, cb_enum.edu),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:17:育成回合计时');
   if (edu_weeks < 3 * 48) {
@@ -80,7 +80,6 @@ handlers[check_stages.next_week] = function () {
     } else if (edu_weeks === 95 + 10) {
       add_event(event_hooks.week_end, edu_object);
     }
-
     check_and_register_aim_race(17, aim_races, edu_weeks);
   } else if (edu_weeks === 143 + 9) {
     add_event(event_hooks.week_start, edu_object);
@@ -109,7 +108,7 @@ const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date;
 /** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
 handlers[check_stages.after_race] = (extra_flag) => {
   if (extra_flag.rank !== 1 && extra_flag.edu_weeks < edu_weeks_kiku_sho) {
-    new LunaEventMarks().title_check = 1;
+    new LunaEduMarks().title_check = 1;
   }
 };
 
@@ -131,7 +130,7 @@ handlers[check_stages.title_check] = (extra_flag) => {
     check_aim_race(races, race_enum.arim_kin, 2, 1) &&
     (check_aim_race(races, race_enum.japa_cup, 1, 1) ||
       check_aim_race(races, race_enum.japa_cup, 2, 1));
-  if (is_invisible && !new LunaEventMarks().title_check) {
+  if (is_invisible && !new LunaEduMarks().title_check) {
     extra_flag.titles.push({
       c: get_chara_talk(17).color,
       n: '皇帝',
@@ -151,7 +150,7 @@ handlers[check_stages.personal_action] = function () {
     return {
       name: '日月交替',
       handle() {
-        const event_marks = new LunaEventMarks();
+        const event_marks = new LunaEduMarks();
         event_marks.want_emperor = 1 - event_marks.want_emperor;
         const { luna, emperor } = event_marks.emperor
             ? { luna: 9017, emperor: 17 }

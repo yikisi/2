@@ -44,7 +44,7 @@ module.exports = {
   /**
    * @param {CharaTalk} chara
    * @param {{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}} flags
-   * @returns {{print():void}}
+   * @returns {{print():*[]}}
    */
   generate(chara, flags) {
     const sex_info_list = [];
@@ -323,7 +323,9 @@ module.exports = {
       );
     }
     return {
-      print: () => era.printMultiColumns(sex_info_list, { width: 18 }),
+      print() {
+        return sex_info_list;
+      },
     };
   },
   name: page_name,

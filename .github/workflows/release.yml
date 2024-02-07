@@ -7,68 +7,38 @@ on:
 
 jobs:
   build-on-windows:
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        node-version: [ 14.x ]
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
-      - name: Clean engine
-        run: mv ./engine ./unused
-      - name: Checkout engine
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PERSONAL_TOKEN }}
-          repository: ${{ secrets.ENGINE_REPO }}
-          path: engine
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-          cache-dependency-path: engine/package-lock.json
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./engine
-      - name: Change config
-        run: cp vue-deploy.config.js vue.config.js
-        working-directory: ./engine
-      - name: Build
-        run: npm run electron:build
-        working-directory: ./engine
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Make game directory
+      - name: Make game main directory
         run: |
-          mv ./engine/dist_electron/win-unpacked ./engine/dist_electron/win
-          mkdir ./engine/dist_electron/win/game
-          cp -r ./ere ./engine/dist_electron/win/game
-          cp -r ./csv ./engine/dist_electron/win/game
-          cp -r ./res ./engine/dist_electron/win/game
-      - name: Zip game and engine
-        uses: thedoctor0/zip-release@0.7.5
-        with:
-          type: '7z'
-          filename: 'era-uma-preview-with-win-engine-${{ github.ref_name }}.7z'
-          directory: ./engine/dist_electron
-          path: ./win
-          custom: -pera
-      - name: Zip game
+          mkdir ./erauma${{ github.ref_name }}
+          cp -r ./ere ./erauma{{ github.ref_name }}
+          cp -r ./csv ./erauma{{ github.ref_name }}
+      - name: Zip game main
         uses: thedoctor0/zip-release@0.7.5
         with:
           type: '7z'
           filename: 'era-uma-preview-${{ github.ref_name }}.7z'
-          directory: ./engine/dist_electron/win/game
+          directory: ./erauma{{ github.ref_name }}
           custom: -pera
-      - name: Move files
-        run: mv './engine/dist_electron/win/game/era-uma-preview-${{ github.ref_name }}.7z' ./engine/dist_electron
+      - name: Make game res directory
+        run: |
+          mv ./erauma${{ github.ref_name }} ./unused
+          mkdir ./erauma${{ github.ref_name }}
+          cp -r ./res ./erauma{{ github.ref_name }}
+      - name: Zip game
+        uses: thedoctor0/zip-release@0.7.5
+        with:
+          type: '7z'
+          filename: 'era-uma-preview-res-${{ github.ref_name }}.7z'
+          directory: ./erauma{{ github.ref_name }}
+          custom: -pera
       - name: Check files
-        run: ls
-        working-directory: ./engine/dist_electron
+        run: ls ./
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -88,6 +58,6 @@ jobs:
           body: built by Github Actions
           draft: false
           prerelease: false
-          files: './engine/dist_electron/era-uma-preview-with-win-engine-${{ github.ref_name }}.7z'
+          files: './engine/dist_electron/era-uma-preview-res-${{ github.ref_name }}.7z'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

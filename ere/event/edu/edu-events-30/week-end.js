@@ -10,14 +10,14 @@ const { location_enum } = require('#/data/locations');
 const { gacha } = require('#/utils/list-utils');
 const { attr_enum } = require('#/data/train-const');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const riceEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-30');
+const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
 const your_name = era.get('callname:0:-2');
 
 module.exports = async function () {
   const chara52_talk = get_chara_talk(52),
     me = get_chara_talk(0),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:30:育成回合计时'),
-    event_marks = new riceEventMarks();
+    event_marks = new RiceEduMarks();
   if (event_marks.beginning === 1) {
     event_marks.beginning++;
     await print_event_name(`育成开始`, chara_talk);

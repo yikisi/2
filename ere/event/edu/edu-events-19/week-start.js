@@ -8,13 +8,13 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const AgEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-19');
+const AgEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-19');
 const { location_enum } = require('#/data/locations');
 
 const chara_talk = new CharaTalk(19);
 
 module.exports = async function () {
-  const event_marks = new AgEventMarks(),
+  const event_marks = new AgEduMarks(),
     chara58_talk = get_chara_talk(58),
     chara61_talk = get_chara_talk(61),
     me = get_chara_talk(0),

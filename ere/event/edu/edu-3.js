@@ -11,14 +11,15 @@ const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const TeioEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-3');
+const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_enum, fumble_result } = require('#/data/train-const');
 const { race_infos, race_enum } = require('#/data/race/race-const');
-const { get_random_value } = require('#/utils/value-utils');
 
+/** @type {Record<string,function(HookArg,*,EventObject):Promise>} */
 const handlers = {};
 
 /**
@@ -63,10 +64,10 @@ handlers[
 handlers[event_hooks.out_start] = require('#/event/edu/edu-events-3/out-start');
 
 /**
- * @param {HookArg} hook
+ * @param _
  * @param {{race:number,rank:number,relation_change:number,attr_change:number[],pt_change:number,love_change:number}} extra_flag
  */
-handlers[event_hooks.race_start] = async (hook, extra_flag) => {
+handlers[event_hooks.race_start] = async (_, extra_flag) => {
   const teio = get_chara_talk(3),
     relation = era.get(`relation:3:0`),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时'),
@@ -139,7 +140,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
         );
       } else {
         await era.printAndWait(
-          `${me.name} 们二人默契地伸出惯用手，松握成拳，相碰。`,
+          `${me.name}们 二人默契地伸出惯用手，松握成拳，相碰。`,
         );
         await era.printAndWait(
           `小小躯体中蕴藏的力量，以及如太阳般的温暖从触碰的表面传来。${me.name}们 看着对方，不禁都笑出了声。`,
@@ -197,7 +198,7 @@ handlers[event_hooks.office_prepare] = async (hook, _, event_object) => {
   }
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    event_marks = new TeioEventMarks();
+    event_marks = new TeioEduMarks();
   let wait_flag = false;
   if (event_marks.rehabilitation === 1) {
     event_marks.rehabilitation++;
@@ -288,7 +289,7 @@ handlers[event_hooks.school_rooftop] = async (hook, _, event_object) => {
   }
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    edu_event_marks = new TeioEventMarks();
+    edu_event_marks = new TeioEduMarks();
   let wait_flag = false;
   if (edu_event_marks.wing_and_sky === 1) {
     edu_event_marks.wing_and_sky++;
@@ -468,7 +469,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
   }
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    event_marks = new TeioEventMarks(),
+    event_marks = new TeioEduMarks(),
     love = era.get('love:3');
   let wait_flag = false;
   if (event_marks.honey_power === 1) {

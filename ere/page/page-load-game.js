@@ -21,7 +21,7 @@ module.exports = async () => {
   let msg_notification = '';
 
   while (flag_load_game) {
-    era.clear();
+    await era.clear();
     print_page_header();
 
     era.drawLine();
@@ -40,7 +40,7 @@ module.exports = async () => {
         content: comm_desc || '空存档栏位',
         type: 'button',
       });
-      if (enabled) {
+      if (comm_desc) {
         buffer.push({
           accelerator: e + 20,
           config: { align: 'right', width: 2 },
@@ -72,15 +72,19 @@ module.exports = async () => {
               event_hooks.load_talk,
             );
           }
-          if (!(await era.loadData(ret))) {
-            msg_notification = `未能成功读取 ${ret} 号栏位的存档`;
-          } else {
+          if (await era.loadData(ret)) {
             flag_load_game = false;
             event_queue.init();
             CharaTalk.me = new CharaTalk(0);
             return true;
+          } else {
+            msg_notification = `未能成功读取 ${ret} 号栏位的存档`;
           }
-        } else if (era.rmData(ret - 20)) {
+        } else if (
+          (era.get(`global:saves:${ret - 20}`) &&
+            !era.set(`global:saves:${ret - 20}`, '')) ||
+          era.rmData(ret - 20)
+        ) {
           msg_notification = `成功删除 ${ret - 20} 号栏位的存档`;
         }
         break;

@@ -15,13 +15,16 @@ const { sys_change_fame } = require('#/system/sys-calc-flag');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { celebration_color } = require('#/data/color-const');
+const {
+  adaptability_colors,
+  celebration_color,
+} = require('#/data/color-const');
 const { mec_foreign_debuff } = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { expedition_weeks } = require('#/data/move-const');
-const { track_enum } = require('#/data/race/model/race-info');
+const { class_enum, track_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
 
 const foreign_race_list = Object.values(race_enum).filter(
@@ -140,7 +143,13 @@ async function check_new_activities(cur_round, in_team_list) {
     if (is_begin) {
       // 远征开始
       let foreign_list = in_team_list
-        .filter((e) => sys_reg_race(e).curr.race === race)
+        .filter((e) => {
+          const chara_race = sys_reg_race(e).curr.race;
+          return (
+            chara_race >= 0 &&
+            race_infos[chara_race].track === race_infos[race].track
+          );
+        })
         .map((e) => {
           return {
             hurt: era.get(`status:${e}:伤病`),
@@ -152,16 +161,23 @@ async function check_new_activities(cur_round, in_team_list) {
         location = track2location[info.track],
         punish_list = foreign_list
           .filter((e) => e.pregnant >= 33 || e.hurt)
-          .map((e) => e.id);
+          .map((e) => e.id),
+        race_colored_name =
+          info.track === track_enum.shatin
+            ? {
+                color: adaptability_colors.at(-2 - class_enum.G1),
+                content: '香港国际赛事',
+                fontWeight: 'bold',
+              }
+            : info.get_colored_name_with_class();
       foreign_list = foreign_list
         .filter((e) => e.pregnant < 33 && !e.hurt)
         .map((e) => e.id);
+      era.print([race_colored_name, ' 即将举办，参赛选手们要踏上远征之路了……']);
       if (foreign_list.length) {
         era.printMultiColumns([
           {
             content: [
-              info.get_colored_name_with_class(),
-              ' 即将举办，',
               get_chara_talk(0).get_colored_name(),
               ' 的队伍中以下成员报名了这场赛事：',
             ],
@@ -192,7 +208,7 @@ async function check_new_activities(cur_round, in_team_list) {
               '要',
               me_in_race ? '' : '陪同',
               '参加 ',
-              info.get_colored_name_with_class(),
+              race_colored_name,
               ' 吗？',
             ],
             type: 'text',
@@ -296,11 +312,12 @@ async function check_new_activities(cur_round, in_team_list) {
       flag && era.set(`cflag:${chara_id}:位置`, location_enum.beach);
       return flag;
     });
+    era.print('一年一度的夏合宿从本周开始……');
     beach_group.length &&
       era.printMultiColumns([
         {
           content: [
-            '八月到了，今年 ',
+            '今年 ',
             get_chara_talk(0).get_colored_name(),
             ' 的队伍中以下成员需要参加夏合宿：',
           ],
@@ -343,10 +360,7 @@ async function check_new_activities(cur_round, in_team_list) {
       temp = await era.input();
     }
     if (!temp) {
-      era.set(
-        'cflag:0:位置',
-        location_enum.era.set('flag:当前位置', location_enum.beach),
-      );
+      era.set('cflag:0:位置', era.set('flag:当前位置', location_enum.beach));
     }
     const follow_group = in_team_list.filter((chara_id) => {
       const race = era.get(`cflag:${chara_id}:种族`),

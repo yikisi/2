@@ -12,10 +12,10 @@ function exp_chara_info(chara) {
   const relation_info = get_relation_info(chara.id, 0),
     love_info = get_love_info(chara.id),
     title = era.get(`cstr:${chara.id}:称号`).filter((e) => e.s)[0];
-  era.printMultiColumns([
+  return [
     { type: 'divider' },
     {
-      config: { width: 8 },
+      config: { width: 12 },
       content: [
         title ? { content: `[${title.n}] `, color: title.c } : '',
         chara.get_colored_full_name(),
@@ -23,7 +23,7 @@ function exp_chara_info(chara) {
       type: 'text',
     },
     {
-      config: { width: 4 },
+      config: { width: 6 },
       content: [
         ' 好感：',
         {
@@ -34,19 +34,19 @@ function exp_chara_info(chara) {
       type: 'text',
     },
     {
-      config: { width: 12 },
+      config: { width: 6 },
       content: [
         ' 爱慕：',
         { content: love_info.join(' '), color: love_colors[love_info[0]] },
       ],
       type: 'text',
     },
-    { config: { width: 1 }, content: '体力', type: 'text' },
+    { config: { width: 2 }, content: '体力', type: 'text' },
     {
       config: {
         color: attr_background_colors['体力'],
         height: 22,
-        width: 6,
+        width: 9,
       },
       inContent: `${era.get(`base:${chara.id}:体力`)}/${era.get(
         `maxbase:${chara.id}:体力`,
@@ -56,12 +56,12 @@ function exp_chara_info(chara) {
         era.get(`maxbase:${chara.id}:体力`),
       type: 'progress',
     },
-    { config: { width: 1, offset: 1 }, content: '精力', type: 'text' },
+    { config: { width: 2, offset: 1 }, content: '精力', type: 'text' },
     {
       config: {
         color: attr_background_colors['精力'],
         height: 22,
-        width: 6,
+        width: 9,
       },
       inContent: `${era.get(`base:${chara.id}:精力`)}/${era.get(
         `maxbase:${chara.id}:精力`,
@@ -71,7 +71,7 @@ function exp_chara_info(chara) {
         era.get(`maxbase:${chara.id}:精力`),
       type: 'progress',
     },
-  ]);
+  ];
 }
 
 module.exports = exp_chara_info;

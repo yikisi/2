@@ -5,6 +5,8 @@ const {
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
+const print_event_name = require('#/event/snippets/print-event-name');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
@@ -24,6 +26,7 @@ const { get_filtered_talents } = require('#/data/info-generator');
  * @param {CharaTalk} me
  */
 async function week_end_49(teio, me) {
+  await print_event_name('萌动', teio);
   await teio.say_and_wait('……搞不明白。');
   await teio.print_and_wait(
     `见到训练员自己就莫名奇妙地心跳加速，好像比赛前的反应……看到${
@@ -40,7 +43,7 @@ async function week_end_49(teio, me) {
   );
   await teio.print_and_wait('这种事情总不能去问训练员吧啊啊！！');
   await era.printAndWait(
-    `在床上扑腾了一阵，散开头发的${teio.get_uma_sex_title()}摇晃着小腿，趾间一下下地轻触着床沿。`,
+    `在床上扑腾了一阵，散开头发的${teio.get_uma_sex_title()}摇晃着小腿，趾尖一下下地轻触着床沿。`,
   );
   await teio.say_and_wait('算了，就算是恋爱，也难不倒帝王大人。');
   await teio.print_and_wait(
@@ -63,6 +66,7 @@ async function week_end_49(teio, me) {
  * @param {CharaTalk} me
  */
 async function week_start_74(teio, me) {
+  await print_event_name('不许变', teio);
   await era.printAndWait(
     `今天是和平常无甚区别的一天，${me.name} 像往常一样，站在田径场上，看着担当奔跑的身姿。`,
   );
@@ -186,6 +190,10 @@ async function week_start_74(teio, me) {
  * @param {CharaTalk} me
  */
 async function week_end_89(teio, me) {
+  await print_event_name(
+    era.get('status:3:腿伤') ? '契约已定' : 'Together, forever',
+    teio,
+  );
   await era.printAndWait('训练员宿舍');
   if (era.get('status:3:腿伤')) {
     await era.printAndWait('沉默。');
@@ -380,6 +388,7 @@ async function week_end_89(teio, me) {
  * @param {CharaTalk} me
  */
 async function week_start_99(teio, me) {
+  await print_event_name('明日再叙', teio);
   await era.printAndWait(`${me.name} 呼吸着清新的空气，在阳光沐浴下散着步。`);
   await era.printAndWait(
     `突然，身后传来沙沙的声响，柔软而有弹性的触感从腰后传来，一双穿着纯白色袖套的双手紧紧扣住了 ${me.name} 的身子。`,

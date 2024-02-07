@@ -1,10 +1,10 @@
-const ArdanEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-71');
+const ArdanEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-71');
 const event_hooks = require('#/data/event/event-hooks');
 
 const handlers = {};
 
 handlers[event_hooks.train_fail] = async () => {
-  const event_marks = new ArdanEventMarks();
+  const event_marks = new ArdanEduMarks();
   event_marks.train_fail++;
   throw new Error();
 };

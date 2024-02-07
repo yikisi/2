@@ -6,7 +6,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { default_relation } = require('#/data/other-const');
 const EventMarks = require('#/data/event/event-marks');
 const { add_event, cb_enum } = require('#/event/queue');
 const EventObject = require('#/data/event/event-object');
@@ -140,7 +139,7 @@ module.exports = {
       await era.printAndWait(
         `为何，不参加选拔赛？选到合适的训练员，出道，在赛事下留下自己的名字，是每一个${digital.get_uma_sex_title()}的梦想，不是这样吗？`,
       );
-      era.set('relation:19:0', default_relation + (ret === 1) * 5);
+      era.add('relation:19:0', (ret === 1) * 5);
       era.set('cflag:19:随机招募', 0);
       era.set('flag:物色对象', 19);
       new EventMarks(0).add(event_hooks.recruit_start);

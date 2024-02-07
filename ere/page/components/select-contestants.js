@@ -28,7 +28,7 @@ async function select_contestants(race) {
     ret.forEach((e) => (dict[e] = true));
     let contestant_count = contestants.length;
     while (flag_select_contestants) {
-      era.clear();
+      await era.clear();
       era.printInColRows(
         [
           { type: 'divider' },

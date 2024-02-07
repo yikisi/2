@@ -82,6 +82,14 @@ module.exports = async (hook, _, event_object) => {
       era.get('exp:68:受虐高潮次数') < 10 ||
       !era.get('status:68:发情')
     ) {
+      if (era.get('flag:当前互动角色') === 68) {
+        await get_chara_talk(0).say_as_unknown_and_wait([
+          '多欺负几次 ',
+          get_chara_talk(68).get_colored_name(),
+          '，趁发情期再来车站，或许会有意想不到的事件发生哦！',
+        ]);
+        await era.clear(1);
+      }
       add_event(hook, event_object);
       return false;
     }
@@ -195,6 +203,14 @@ module.exports = async (hook, _, event_object) => {
       era.get('flag:当前互动角色') !== 68 ||
       era.get('exp:68:受虐高潮次数') < 10
     ) {
+      if (era.get('flag:当前互动角色') === 68) {
+        await get_chara_talk(0).say_as_unknown_and_wait([
+          '多欺负几次 ',
+          get_chara_talk(68).get_colored_name(),
+          ' 再来商店街，或许会有意想不到的事件发生哦！',
+        ]);
+        await era.clear(1);
+      }
       add_event(hook, event_object);
       return false;
     }

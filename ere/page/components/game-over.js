@@ -8,6 +8,8 @@ const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const { sys_add_title } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const print_event_name = require('#/event/snippets/print-event-name');
+
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 
@@ -19,7 +21,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
-module.exports = async () => {
+async function game_over() {
   const game_over = era.get('flag:游戏结束');
   let end_talk = false,
     saying_arr,
@@ -53,16 +55,15 @@ module.exports = async () => {
     ];
   } else if (
     game_over &&
-    era.set(
-      'flag:极端粉丝',
-      era.get('flag:极端粉丝').filter((e) => e),
-    ).length
+    (temp = get_random_entry(
+      era.set(
+        'flag:极端粉丝',
+        era.get('flag:极端粉丝').filter((e) => e),
+      ),
+    ))
   ) {
     era.drawLine();
-    await sys_call_edu_event(
-      get_random_entry(era.get('flag:极端粉丝')),
-      event_hooks.crazy_fan_end,
-    );
+    await sys_call_edu_event(temp, event_hooks.crazy_fan_end);
     saying_arr = [
       '日蚀当先，万物无光。——丹尼斯・奥凯利',
       '杜鹃不鸣则杀之。——织田信长',
@@ -71,11 +72,10 @@ module.exports = async () => {
       '拥有一位伟大的赛马娘，就拥有了最伟大的宝座。——丘吉尔',
     ];
   } else {
-    era.set('flag:极端粉丝', []);
     let punish_level = era.get('flag:惩戒力度');
     if (
-      era.get('flag:当前声望') < 0 ||
-      (punish_level < 3 && era.get('flag:彩蛋机制') === 179)
+      punish_level < 3 &&
+      (era.get('flag:当前声望') < 0 || era.get('flag:彩蛋机制') === 179)
     ) {
       if (era.get('flag:声望不足替换')) {
         punish_level = era.add('flag:惩戒力度', 1);
@@ -359,7 +359,6 @@ module.exports = async () => {
         );
       } else {
         era.drawLine();
-        era.print('【BAD ENDING】', { align: 'center', fontWeight: 'bold' });
 
         if (era.get('flag:变态行为')) {
           for (const e of [
@@ -372,6 +371,12 @@ module.exports = async () => {
               width: 12,
             });
           }
+          await print_event_name(
+            [{ content: '身败名裂', color: buff_colors[3] }],
+            CharaTalk.me,
+            undefined,
+            6,
+          );
           saying_arr = [
             '人变得真正低劣时，除了高兴别人的不幸外，已无其他乐趣可言。——歌德',
             '自由不是随心所欲，而是不必身不由己。——康德',
@@ -390,6 +395,12 @@ module.exports = async () => {
               width: 12,
             });
           }
+          await print_event_name(
+            [{ content: '扫地出门', color: buff_colors[3] }],
+            CharaTalk.me,
+            undefined,
+            6,
+          );
           saying_arr = [
             '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗杰斯',
             '拥有一位伟大的赛马娘，就拥有了最伟大的宝座。——丘吉尔',
@@ -427,4 +438,6 @@ module.exports = async () => {
     return true;
   }
   return false;
-};
+}
+
+module.exports = game_over;

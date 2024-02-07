@@ -52,9 +52,10 @@ module.exports = async () => {
     era.printMultiColumns([
       { type: 'divider' },
       {
-        content: buffer.length
-          ? '目前拥有以下道具：（点击道具按钮可以使用或查看说明）'
-          : '没有持有任何道具……',
+        content:
+          buffer.length > 0
+            ? '目前拥有以下道具：（点击道具按钮可以使用或查看说明）'
+            : '没有持有任何道具……',
         type: 'text',
       },
       ...buffer,

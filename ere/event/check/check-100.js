@@ -36,7 +36,7 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
   aim_races[extra_flag.race];
 
-handlers[check_stages.next_week] = function () {
+handlers[check_stages.next_week] = () => {
   era.set('callname:100:0', `小${get_chara_talk(0).actual_name}`);
   era.set('callname:0:0', `我`);
   const edu_weeks =
@@ -62,6 +62,8 @@ handlers[check_stages.next_week] = function () {
         break;
     }
     check_and_register_aim_race(100, aim_races, edu_weeks);
+  } else if (edu_weeks === 143 + 9) {
+    add_event(event_hooks.week_start, new EventObject(100, cb_enum.edu));
   }
 };
 

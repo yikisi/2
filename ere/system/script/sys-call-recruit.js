@@ -13,16 +13,11 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
  * @param {number} chara_id
- * @param {number} stage_id
+ * @param {number} stage
  * @param [extra_flag]
  * @param {EventObject} [event_object]
  */
-async function sys_call_rec_event(
-  chara_id,
-  stage_id,
-  extra_flag,
-  event_object,
-) {
+async function sys_call_rec_event(chara_id, stage, extra_flag, event_object) {
   let aim_func = undefined;
   try {
     const { func, _extra } = get_aim_function('rec', chara_id, extra_flag);
@@ -34,7 +29,7 @@ async function sys_call_rec_event(
     }
   }
   if (
-    stage_id === event_hooks.recruit &&
+    stage === event_hooks.recruit &&
     (!aim_func || !aim_func.override) &&
     (await check_before_rec(chara_id))
   ) {
@@ -42,14 +37,14 @@ async function sys_call_rec_event(
   }
   try {
     const ret = aim_func
-      ? await aim_func.run(stage_id, extra_flag, event_object)
-      : await rec_common(chara_id, stage_id);
+      ? await aim_func.run(stage, extra_flag, event_object)
+      : await rec_common(chara_id, stage);
     // 招募成功时初始化好感并重置育成回合
     if (era.get(`cflag:${chara_id}:招募状态`) === recruit_flags.yes) {
       recruit_chara(chara_id);
       if (!aim_func || !aim_func.override) {
-        era.println();
         await era.printAndWait([
+          { isBr: true },
           get_chara_talk(chara_id).get_colored_name(),
           ' 加入了队伍！',
         ]);

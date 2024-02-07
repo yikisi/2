@@ -20,7 +20,7 @@ const page_name = '出走成绩';
 module.exports = {
   /**
    * @param {CharaTalk} chara
-   * @returns {{print():void}}
+   * @returns {{print():*[]}}
    */
   generate(chara) {
     const race_info_list = [];
@@ -141,7 +141,9 @@ module.exports = {
     }
 
     return {
-      print: () => era.printMultiColumns(race_info_list, { width: 18 }),
+      print() {
+        return race_info_list;
+      },
     };
   },
   name: page_name,

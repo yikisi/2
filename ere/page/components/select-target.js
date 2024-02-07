@@ -13,6 +13,7 @@ const chara_info_type = require('#/data/chara-info-type');
 const {
   adaptability_colors,
   motivation_colors,
+  el_danger_color,
 } = require('#/data/color-const');
 const {
   attr_background_colors,
@@ -27,6 +28,7 @@ const {
   sex_title,
   human_sex_title,
 } = require('#/data/ero/status-const');
+const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_chara_score,
@@ -210,7 +212,7 @@ async function select_target(type) {
     select_flag = true,
     ret;
   while (select_flag) {
-    era.clear();
+    await era.clear();
     print_page_header();
     const buffer = [];
     buffer.push({
@@ -304,10 +306,15 @@ async function select_target(type) {
       cur_list.forEach((chara_id) => {
         const chara = get_chara_talk(chara_id),
           titles = era.get(`cstr:${chara_id}:称号`),
-          title = titles.filter((e) => e.s)[0];
+          title = titles.filter((e) => e.s)[0],
+          event_counts =
+            type === undefined ? new EventMarks(chara_id).count() : 0;
         buffer.push({
           accelerator: chara_id,
-          config: { width: 4 },
+          config: {
+            buttonType: event_counts > 0 ? 'danger' : 'warning',
+            width: 4,
+          },
           content:
             chara.actual_name === chara.name
               ? chara.name
@@ -348,6 +355,20 @@ async function select_target(type) {
         config: { align: 'center' },
         type: 'text',
       });
+    }
+
+    if (type === undefined) {
+      buffer.push(
+        { type: 'divider' },
+        {
+          content: [
+            '* 选择按钮显示为',
+            { color: el_danger_color, content: '红色' },
+            '的角色本周有特殊事件需要你关注……',
+          ],
+          type: 'text',
+        },
+      );
     }
 
     buffer.push({ type: 'divider' });

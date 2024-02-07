@@ -4,7 +4,7 @@ const {
   sys_love_uma_in_event,
   sys_get_callname,
 } = require('#/system/sys-calc-chara-others');
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 const { add_event } = require('#/event/queue');
 

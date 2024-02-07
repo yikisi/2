@@ -9,7 +9,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { race_infos } = require('#/data/race/race-const');
 
 async function report_race_page() {
-  era.clear();
+  await era.clear();
   const cur_round = era.get('flag:当前回合数') - 1,
     begin_round = cur_round - (cur_round % 4);
   const dict = {};

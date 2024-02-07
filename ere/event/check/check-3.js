@@ -22,7 +22,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
-const TeioEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-3');
+const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const RaceInfo = require('#/data/race/model/race-info');
@@ -62,33 +62,33 @@ handlers[check_stages.love_event] = () => {
 };
 
 handlers[check_stages.next_week] = () => {
-  const event_marks = new TeioEventMarks(),
+  const event_marks = new TeioEduMarks(),
     event_obj = new EventObject(3, cb_enum.edu),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const event_obj_special = new EventObject(3, cb_enum.edu, true),
       races = era.get('cflag:3:育成成绩');
     let temp;
+    check_and_add_event(
+      event_marks,
+      edu_weeks,
+      'lets_go_together',
+      event_hooks.out_start,
+      event_obj,
+    );
+    check_and_add_event(
+      event_marks,
+      edu_weeks,
+      'dance_or_kongfu',
+      event_hooks.out_start,
+      event_obj,
+    );
     if (edu_weeks >= 48) {
-      check_and_add_event(
-        event_marks,
-        edu_weeks,
-        'lets_go_together',
-        event_hooks.out_start,
-        event_obj,
-      );
       check_and_add_event(
         event_marks,
         edu_weeks,
         'honey_power',
         event_hooks.out_shopping,
-        event_obj,
-      );
-      check_and_add_event(
-        event_marks,
-        edu_weeks,
-        'dance_or_kongfu',
-        event_hooks.out_start,
         event_obj,
       );
       check_and_add_event(
@@ -209,7 +209,7 @@ const edu_weeks_toky_yus = race_infos[race_enum.toky_yus].date + 48;
 
 /** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
 handlers[check_stages.after_race] = (extra_flag) => {
-  const event_marks = new TeioEventMarks();
+  const event_marks = new TeioEduMarks();
   if (extra_flag.rank !== 1) {
     event_marks.perfect_check = 1;
     if (extra_flag.edu_weeks < edu_weeks_toky_yus) {
@@ -238,7 +238,7 @@ handlers[check_stages.aim_check] = () => {
   const buffer = [],
     /** @type {Record<string,{race:number,rank:number}>} */
     races = era.get('cflag:3:育成成绩');
-  const event_marks = new TeioEventMarks();
+  const event_marks = new TeioEduMarks();
   buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
   buffer.push(check_aim_and_get_entry(races, race_enum.waka_sta, 1, 3));
   buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));
@@ -260,7 +260,7 @@ handlers[check_stages.palace_check] = () => {
       check_aim_race(races, race_enum.japa_cup, 2, 1) &&
       check_aim_race(races, race_enum.arim_kin, 2, 1)
     ) {
-      new TeioEventMarks().good_end++;
+      new TeioEduMarks().good_end++;
     } else if (era.get('flag:游戏结束')) {
       sys_push_crazy_fan(3);
     }
@@ -275,7 +275,7 @@ handlers[check_stages.personal_titles] = () => ['帝王', '无瑕帝王', '不�
 handlers[check_stages.title_check] = (extra_flag) => {
   /** @type {Record<string,{race:number,rank:number}>} */
   const races = era.get('cflag:3:育成成绩');
-  const event_marks = new TeioEventMarks();
+  const event_marks = new TeioEduMarks();
   let normal_title_check =
     check_aim_race(races, race_enum.sats_sho, 1, 1) &&
     check_aim_race(races, race_enum.toky_yus, 1, 1) &&

@@ -20,7 +20,7 @@ function flip_params(p1, p2) {
   era.set(p2, tmp);
 }
 
-/** @param {LunaEventMarks} event_marks */
+/** @param {LunaEduMarks} event_marks */
 function transform(event_marks) {
   event_marks.emperor = 1 - event_marks.emperor;
 
@@ -48,7 +48,7 @@ function transform(event_marks) {
 }
 
 module.exports = {
-  /** @param {LunaEventMarks} event_marks */
+  /** @param {LunaEduMarks} event_marks */
   good_end(event_marks) {
     if (event_marks.emperor) {
       transform(event_marks);
@@ -65,7 +65,7 @@ module.exports = {
     sys_like_chara(17, 0, 800, true, 10);
   },
   /**
-   * @param {LunaEventMarks} event_marks
+   * @param {LunaEduMarks} event_marks
    * @param {number} luna
    * @param {number} [extra_punish]
    */
@@ -91,7 +91,7 @@ module.exports = {
     }
   },
   /**
-   * @param {LunaEventMarks} event_marks
+   * @param {LunaEduMarks} event_marks
    * @param {boolean} luna_end
    */
   normal_end(event_marks, luna_end) {

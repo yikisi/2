@@ -11,19 +11,21 @@ const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 const print_curr_chara = require('#/page/components/cur-chara-info');
 const check_game_over = require('#/page/components/game-over');
 const print_page_header = require('#/page/components/page-header');
+const print_ero_page = require('#/page/page-ero');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { gacha } = require('#/utils/list-utils');
+const { gacha, get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
+const {
+  begin_and_init_ero,
+  end_ero_and_show_result,
+} = require('#/system/ero/sys-prepare-ero');
+const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
+const { buff_colors } = require('#/data/color-const');
 
-const flags = {
-  after_select: true,
-  homepage: true,
-  week_start: false,
-};
 let random_event;
 
 async function next_week() {
@@ -54,8 +56,11 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   era.drawLine();
   era.set('flag:当前互动角色', 0);
   era.set('flag:当前位置', rest_loc);
-  chara_id && (await sys_call_daily_event(chara_id, event_hooks.good_night));
-  let continue_flag = true;
+  chara_id &&
+    !era.get('flag:床伴') &&
+    (await sys_call_daily_event(chara_id, event_hooks.good_night));
+  let continue_flag = true,
+    temp;
   start_machine_gun(event_hooks.week_end);
   while (
     continue_flag &&
@@ -65,6 +70,11 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
     continue_flag = !(await random_event(chara_id));
   }
   stop_machine_gun(event_hooks.week_end);
+  if ((temp = era.get('flag:床伴'))) {
+    begin_and_init_ero(0, temp);
+    await print_ero_page(temp);
+    await end_ero_and_show_result(true);
+  }
   if (continue_flag) {
     await next_week();
     if (era.get('flag:当前位置') === rest_loc) {
@@ -85,8 +95,13 @@ handlers[location_enum.guangzhou] =
 handlers[location_enum.office] = require('#/page/homepage/office');
 
 module.exports = async () => {
+  const flags = {
+    after_select: true,
+    homepage: true,
+    week_start: false,
+  };
   while (flags.homepage) {
-    era.clear();
+    await era.clear();
     let flag_skip_this_week = false;
     let cur_location = era.get('flag:当前位置');
 
@@ -116,7 +131,30 @@ module.exports = async () => {
         flag_skip_this_week = (await random_event()) || flag_skip_this_week;
       }
       stop_machine_gun(event_hooks.week_start);
-      era.clear();
+      const force_be = era.get('flag:强制BE');
+      if (force_be) {
+        era.drawLine();
+        await sys_call_edu_event(force_be, event_hooks.crazy_fan_end);
+        era.print('GAME OVER', {
+          align: 'center',
+          color: buff_colors[3],
+          fontSize: '48px',
+          fontWeight: 'bold',
+          isParagraph: true,
+        });
+        await era.printAndWait(
+          get_random_entry([
+            '日蚀当先，万物无光。——丹尼斯・奥凯利',
+            '杜鹃不鸣则杀之。——织田信长',
+            '探案过程中，我是最后的、最高的上诉法庭。——福尔摩斯',
+            '世以成败论人物，故操得在英雄之列。——苏轼',
+            '拥有一位伟大的赛马娘，就拥有了最伟大的宝座。——丘吉尔',
+          ]),
+          {
+            align: 'center',
+          },
+        );
+      }
     }
     if (flag_skip_this_week) {
       era.drawLine();
@@ -129,6 +167,7 @@ module.exports = async () => {
     sys_change_status_by_base(0);
     chara_id && sys_change_status_by_base(chara_id);
 
+    await era.clear();
     print_page_header();
     if (cur_location === location_enum.basement) {
       print_curr_chara(era.get('flag:地下室之主'));

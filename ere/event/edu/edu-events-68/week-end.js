@@ -17,7 +17,7 @@ const { gacha } = require('#/utils/list-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
-const KitaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-68');
+const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
@@ -31,7 +31,7 @@ module.exports = async function (hook, __, event_object) {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:68:育成回合计时'),
-    event_marks = new KitaEventMarks();
+    event_marks = new KitaEduMarks();
   let wait_flag = false;
   if (event_marks.beginning === 1) {
     add_event(event_hooks.week_start, event_object);

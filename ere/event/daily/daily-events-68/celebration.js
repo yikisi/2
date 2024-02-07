@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
-const KitaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-68');
+const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 
 module.exports = async () => {
   const me = get_chara_talk(0),
@@ -41,7 +41,7 @@ module.exports = async () => {
         era.get('flag:当前回合数') - era.get('cflag:68:育成回合计时') ===
         47 + 6
       ) {
-        new KitaEventMarks().classical_valentine++;
+        new KitaEduMarks().classical_valentine++;
       }
       break;
     case 47:

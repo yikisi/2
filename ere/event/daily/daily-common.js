@@ -740,13 +740,8 @@ handlers[
   event_hooks.celebration
 ] = require('#/event/daily/common-lines/common-celebration');
 
-handlers[event_hooks.slave_end] = async () => {
+handlers[event_hooks.slave_end] = async (chara_id) => {
   const me = get_chara_talk(0);
-  era.print('【BAD ENDING】', {
-    align: 'center',
-    color: buff_colors[3],
-    fontWeight: 'bold',
-  });
   await era.printAndWait(
     [
       '被金钱腐朽的 ',
@@ -786,16 +781,17 @@ handlers[event_hooks.slave_end] = async () => {
       width: 12,
     },
   );
+  await print_event_name(
+    [{ content: '金钱奴隶', color: buff_colors[3] }],
+    get_chara_talk(chara_id),
+    undefined,
+    6,
+  );
 };
 
 handlers[event_hooks.basement_end] = async (chara_id) => {
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
-  era.print('【BAD ENDING】', {
-    align: 'center',
-    color: buff_colors[3],
-    fontWeight: 'bold',
-  });
   await era.printAndWait('在特雷森，一个任何探测器都检测不到的地下室中……', {
     offset: 6,
     width: 12,
@@ -842,6 +838,12 @@ handlers[event_hooks.basement_end] = async (chara_id) => {
       offset: 6,
       width: 12,
     },
+  );
+  await print_event_name(
+    [{ content: '情爱囹圄', color: buff_colors[3] }],
+    chara,
+    undefined,
+    6,
   );
 };
 

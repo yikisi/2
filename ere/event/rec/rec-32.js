@@ -139,6 +139,7 @@ module.exports = {
         new EventMarks(0).sub(event_hooks.recruit_start);
         era.set('cflag:32:招募状态', recruit_flags.yes);
         era.set('flag:物色对象', 0);
+        era.set('callname:32:0', '豚鼠君');
         return true;
     }
     return false;

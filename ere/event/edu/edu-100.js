@@ -428,8 +428,8 @@ handlers[event_hooks.week_start] = async () => {
     );
     await era.printAndWait('希望是好的变化吧……哈哈。（望天）');
     era.println();
-    sys_change_attr_and_print(100, [0, 0, 10, 0, 0], 10);
-    sys_change_attr_and_print(0, [0, 0, 0, 1, 0], 0);
+    get_attr_and_print_in_event(100, [0, 0, 10, 0, 0], 10);
+    get_attr_and_print_in_event(0, [0, 0, 0, 1, 0], 0);
     await era.waitAnyKey();
   } else if (edu_weeks === 95 + 1) {
     await print_event_name('新春的贺礼', chara_talk);
@@ -1024,7 +1024,7 @@ handlers[event_hooks.week_start] = async () => {
     await chara40_talk.say_and_wait(
       '曾经，为了健身美体的我，曾经在遥远的东方学习过一段时间的拳术。」',
     );
-    await await chara40_talk.say_and_wait('1.2……直拳、直拳、摆拳！');
+    await chara40_talk.say_and_wait('1.2……直拳、直拳、摆拳！');
     await era.printAndWait('另一方，是既是学生也是模特的超级黄金城。');
     await era.printAndWait('而裁判对这场大道之战给出的裁决是——');
     await era.printAndWait('裁判：「到此为止了！两位，可以退下了。」');

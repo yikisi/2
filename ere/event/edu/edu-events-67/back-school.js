@@ -6,7 +6,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const DaiyaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-67');
+const DaiyaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-67');
 const { location_enum } = require('#/data/locations');
 
 /**
@@ -23,7 +23,7 @@ module.exports = async (hook, _, event_object) => {
     return;
   }
   const daiya = get_chara_talk(67),
-    edu_marks = new DaiyaEventMarks(),
+    edu_marks = new DaiyaEduMarks(),
     me = get_chara_talk(0);
   let wait_flag = false;
   if (edu_marks.street_adv === 1) {

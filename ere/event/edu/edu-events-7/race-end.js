@@ -7,7 +7,7 @@ const { gacha } = require('#/utils/list-utils');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const GoldShipEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-7');
+const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_enum } = require('#/data/train-const');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -365,7 +365,7 @@ module.exports = async (hook, extra_flag) => {
       era.println();
       await era.printAndWait('黄金船对比赛的热情越来越高涨了！');
 
-      new GoldShipEventMarks().keywords++;
+      new GoldShipEduMarks().keywords++;
       extra_flag.attr_change = new Array(5).fill(3);
       extra_flag.pt_change = 45;
     } else if (extra_flag.race === race_enum.takz_kin && edu_weeks >= 96) {
@@ -469,7 +469,7 @@ module.exports = async (hook, extra_flag) => {
         extra_flag.attr_change = new Array(5).fill(3);
         extra_flag.pt_change = 45;
       }
-      new GoldShipEventMarks().keywords++;
+      new GoldShipEduMarks().keywords++;
     } else if (extra_flag.race === race_enum.tenn_sho && edu_weeks >= 96) {
       const gordan = get_chara_talk(48);
       // 资深年天皇赏秋
@@ -510,7 +510,7 @@ module.exports = async (hook, extra_flag) => {
         '那位大人这次还是好好地留下了新的线索，能使唤学生做出这种事情，难不成是什么位高权重的人物？',
       );
 
-      new GoldShipEventMarks().keywords++;
+      new GoldShipEduMarks().keywords++;
       extra_flag.attr_change = [3, 13, 3, 3, 3];
       extra_flag.pt_change = 45;
     } else if (extra_flag.race === race_enum.arim_kin && edu_weeks >= 96) {
@@ -552,7 +552,7 @@ module.exports = async (hook, extra_flag) => {
 
       await era.printAndWait('来揭晓这个最后的线索吧！');
 
-      new GoldShipEventMarks().keywords++;
+      new GoldShipEduMarks().keywords++;
       extra_flag.attr_change = new Array(5).fill(3);
       extra_flag.pt_change = 45;
     } else {

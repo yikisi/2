@@ -2,20 +2,13 @@ const era = require('#/era-electron');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
-const { race_infos } = require('#/data/race/race-const');
-const { class_enum } = require('#/data/race/model/race-info');
-
 /**
  * @param {CharaTalk} daiya
  * @param {CharaTalk} me
  * @param {number} edu_weeks
  * @param {{race:number,rank:number}} extra_flag
- * @param {DaiyaEventMarks} edu_marks
  */
-async function race_end_67_common(daiya, me, edu_weeks, extra_flag, edu_marks) {
+async function race_end_67_common(daiya, me, edu_weeks, extra_flag) {
   if (extra_flag.rank === 1) {
     await print_event_name('竞赛获胜！', daiya);
     await daiya.say_and_wait('成功了！我成功了！你有看到我的表现吗？训练员！');

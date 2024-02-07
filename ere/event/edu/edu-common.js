@@ -21,15 +21,14 @@ const handlers = {};
 /**
  * @param {number} chara_id
  * @param _
- * @param {number} extra_flag
- * @returns {Promise<void>}
+ * @param {{attr:number}} extra_flag
  */
 handlers[event_hooks.train] = async (chara_id, _, extra_flag) => {
   const chara = get_chara_talk(chara_id).get_colored_name();
   if (!chara_id) {
     chara.content = '自己';
   }
-  switch (extra_flag) {
+  switch (extra_flag.attr) {
     case attr_enum.speed:
       await era.printAndWait([
         '为了提高速度，',
@@ -404,12 +403,9 @@ handlers[event_hooks.race_end] = async (chara_id, _, extra_flag) => {
 };
 
 handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
-  const me = get_chara_talk(0);
-  era.print('【BAD ENDING】', {
-    align: 'center',
-    color: buff_colors[3],
-    fontWeight: 'bold',
-  });
+  console.log(chara_id);
+  const chara = get_chara_talk(chara_id),
+    me = get_chara_talk(0);
   await era.printAndWait(
     era.get(`relation:${chara_id}:0`) < 0
       ? [
@@ -437,7 +433,7 @@ handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
     [
       me.get_colored_name(),
       ' 手上提着要送给 ',
-      get_chara_talk(chara_id).get_colored_name(),
+      chara.get_colored_name(),
       ' 的蜂蜜蛋糕独自走在大雨的路上，只听身后传来一阵急促的脚步声，然后便是后腰钻心的痛楚。',
     ],
     {
@@ -468,6 +464,12 @@ handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
     offset: 6,
     width: 12,
   });
+  await print_event_name(
+    [{ content: '粉丝袭击', color: buff_colors[3] }],
+    chara,
+    undefined,
+    6,
+  );
 };
 
 /**

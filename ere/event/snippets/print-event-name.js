@@ -8,8 +8,10 @@ const CharaTalk = require('#/utils/chara-talk');
  * @param {string|array} name
  * @param {CharaTalk} chara
  * @param {string} [color]
+ * @param {number} [_offset]
  */
-async function print_event_name(name, chara, color) {
+async function print_event_name(name, chara, color, _offset) {
+  const offset = _offset || 0;
   if (!(chara instanceof CharaTalk)) {
     era.logger.debug('chara type error!');
     console.log('chara type error!', name, chara, color, new Error().stack);
@@ -24,7 +26,7 @@ async function print_event_name(name, chara, color) {
           type: 'image.whole',
         },
       ],
-      config: { width: 2 },
+      config: { offset, width: 2 },
     },
     {
       columns: [
@@ -43,7 +45,7 @@ async function print_event_name(name, chara, color) {
           type: 'text',
         },
       ],
-      config: { width: 16, verticalAlign: 'middle' },
+      config: { width: 22 - offset, verticalAlign: 'middle' },
     },
   );
   era.setVerticalAlign('top');

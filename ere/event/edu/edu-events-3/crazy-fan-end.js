@@ -5,15 +5,16 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
+const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = async function () {
+module.exports = async () => {
   if (!era.get('status:3:腿伤')) {
     throw new Error();
   }
-  const teio = get_chara_talk(3),
-    me = get_chara_talk(0);
+  const me = get_chara_talk(0),
+    teio = get_chara_talk(3);
 
-  if (era.get('cflag:3:招募状态')) {
+  if (era.get('cflag:3:招募状态') === recruit_flags.yes) {
     await era.printAndWait(
       '🎶You made one mistake, you got burned at the stake🎶',
       { align: 'center', isParagraph: true },
@@ -313,15 +314,15 @@ module.exports = async function () {
       isParagraph: true,
     });
   } else {
-    await print_event_name(
-      [{ content: '无为而终', color: buff_colors[3] }],
-      teio,
-    );
     await era.printAndWait(
       `与 ${teio.name} 解除契约后，为了避风头远离舆论，为了寻求平静，${me.name} 离开特雷森换了一个地方重新做起训练员的工作。然而，不知是什么原因，${me.name} 指导的马娘再也没有出过优异的成绩，${me.name} 的状态和能力也再没能回到和 ${teio.name} 搭档时的水准……${me.name} 的路，就这么简单地到头了，${me.name} 和 ${teio.name} 曾经的梦想，最终也没能实现。`,
     );
     await era.printAndWait(
       `内心仿佛缺少了什么的 ${me.name} 重复着一成不变的生活，工作逐渐变成负担，${me.name} 开始把烟酒当作提神和安慰的良药，不知不觉地，${me.name} 已经淡忘了自己当初的理想，失去了干劲，碌碌无为地走完了 ${me.name} 的后半段职业生涯……`,
+    );
+    await print_event_name(
+      [{ content: '无为而终', color: buff_colors[3] }],
+      teio,
     );
   }
 };

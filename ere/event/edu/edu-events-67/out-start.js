@@ -6,7 +6,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const DaiyaEventMarks = require('#/data/event/edu-event-marks-extended/edu-event-marks-67');
+const DaiyaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-67');
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 
 /**
@@ -20,7 +20,7 @@ module.exports = async (hook, _, event_object) => {
     return;
   }
   const daiya = get_chara_talk(67),
-    edu_marks = new DaiyaEventMarks(),
+    edu_marks = new DaiyaEduMarks(),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:67:育成回合计时'),
     me = get_chara_talk(0);
   let wait_flag = false;

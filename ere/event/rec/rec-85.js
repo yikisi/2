@@ -4,13 +4,12 @@ const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const { yes } = require('#/data/event/recruit-flags');
 const { get_breast_cup } = require('#/data/info-generator');
-const { default_relation } = require('#/data/other-const');
 
 /** @type {Record<string,function(extra_flag:*,event_object:EventObject):Promise<boolean>>} */
 const handlers = {};
@@ -656,8 +655,8 @@ handlers[event_hooks.week_start] = async function () {
 
   const temp = era.get('cflag:85:招募状态').special;
   if (temp) {
-    era.set('relation:85:0', default_relation - temp * 10);
-    era.set('love:85', era.get('flag:马娘初始爱慕') + temp);
+    era.add('relation:85:0', -temp * 10);
+    era.add('love:85', temp);
     await ruby.say_and_wait(
       '您坚持到了最后，做的很好。偷看未成年少女下体的变态先生。',
     );

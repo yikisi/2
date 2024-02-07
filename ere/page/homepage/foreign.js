@@ -10,6 +10,7 @@ const {
   sys_check_train_enabled,
   sys_check_awake,
 } = require('#/system/sys-calc-chara-param');
+const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const select_target = require('#/page/components/select-target');
 const goto_sex = require('#/page/components/goto-sex');
@@ -24,6 +25,7 @@ const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
 
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
@@ -38,11 +40,12 @@ location2language[location_enum.hongkong] = location2language[
  * @param {function(number,number,number):Promise} save_and_next_week
  * @param {{after_select:boolean,homepage:boolean,week_start:boolean}} flags
  */
-module.exports = async function (chara_id, save_and_next_week, flags) {
+module.exports = async (chara_id, save_and_next_week, flags) => {
   const celebration = get_celebration(),
     celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1),
     cur_location = era.get('flag:当前位置'),
     cur_weeks = era.get('flag:当前回合数'),
+    event_marks = new EventMarks(chara_id),
     registered_race = sys_reg_race(chara_id).curr,
     player_base = {
       stamina: era.get('base:0:体力'),
@@ -95,7 +98,12 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       },
       {
         accelerator: 999,
-        config: { width: 6 },
+        config: {
+          buttonType: event_marks.get(event_hooks.week_end)
+            ? 'danger'
+            : 'warning',
+          width: 6,
+        },
         content: '休息到下周',
         type: 'button',
       },
@@ -162,6 +170,9 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       {
         accelerator: 205,
         config: {
+          buttonType: event_marks.get(event_hooks.foreign_travel)
+            ? 'danger'
+            : 'warning',
           disabled:
             not_in_same_loc ||
             jpy < 50 ||
@@ -247,8 +258,8 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       }
       break;
     case 103:
-      era.set('flag:当前位置', location_enum.hotel);
-      await goto_sex(chara_id);
+      (await goto_sex(chara_id, location_enum.hotel)) &&
+        (flags.week_start = true);
       era.set('flag:当前位置', cur_location);
       break;
     case 201:
@@ -271,7 +282,10 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       break;
     case 205:
       era.drawLine();
-      await sys_call_edu_event(chara_id, event_hooks.foreign_travel);
+      if (!(await sys_get_random_event(event_hooks.foreign_travel)(chara_id))) {
+        era.drawLine();
+        await sys_call_edu_event(chara_id, event_hooks.foreign_travel);
+      }
       break;
     case 206:
       sys_change_attr_and_print(0, '精力', -celebration_cost);
@@ -295,7 +309,8 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       await print_load_page();
       break;
     case 999:
-      await save_and_next_week(chara_id, cur_location, location_enum.hotel);
       flags.week_start = true;
   }
+  flags.week_start &&
+    (await save_and_next_week(chara_id, cur_location, location_enum.hotel));
 };

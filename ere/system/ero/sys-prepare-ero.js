@@ -156,7 +156,7 @@ function update_ero_status(...ids) {
       set_stain(chara_id, part_enum.virgin, stain_enum.secretion);
     }
     // 肠道变湿
-    if (estrus || era.get(`talent:${chara_id}:淫臀`)) {
+    if (estrus || era.get(`talent:${chara_id}:淫臀`) === 2) {
       set_stain(chara_id, part_enum.anal, stain_enum.anal);
     }
     if (era.get(`cflag:${chara_id}:腋毛`) >= 3) {
@@ -741,7 +741,7 @@ async function end_ero_and_show_result(shown) {
       }
 
       while (result_flag) {
-        era.clear();
+        await era.clear();
         era.setToBottom();
         era.drawLine({ content: '马跳结果', position: 'left' });
         switch (page) {
@@ -832,9 +832,26 @@ module.exports = {
   begin_and_init_ero,
   end_ero_and_show_result,
   end_ero_and_train,
-  get_characters_in_train: () =>
-    era.getCharactersInTrain().filter((e) => !era.get(`tcvar:${e}:逃跑`)),
+  get_characters_in_train() {
+    return era
+      .getCharactersInTrain()
+      .filter((e) => !era.get(`tcvar:${e}:逃跑`));
+  },
   init_ero,
+  set_palam_to_max(chara_id, part) {
+    if (
+      part_names[part] &&
+      era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`)
+    ) {
+      era.set(
+        `palam:${chara_id}:${part_names[part]}快感`,
+        Math.max(
+          era.get(`palam:${chara_id}:${part_names[part]}快感`),
+          era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`),
+        ),
+      );
+    }
+  },
   update_ero_status,
   update_juel_buff,
   update_temp_base,

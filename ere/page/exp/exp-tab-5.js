@@ -24,9 +24,9 @@ module.exports = {
   /**
    * @param {CharaTalk} chara
    * @param {{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}} flags
-   * @returns {{print():void}}
+   * @returns {{print():*[]}}
    */
-  generate(chara, flags) {
+  generate: function (chara, flags) {
     const penis_exp_list = [];
     if (flags.in_growth) {
       penis_exp_list.push(chara.sex_code ? growth_info : '没有这个部位……');
@@ -157,19 +157,17 @@ module.exports = {
       remove_end_line_breaks(penis_exp_list);
     }
     return {
-      print: () =>
-        era.printMultiColumns(
-          [
-            {
-              type: 'divider',
-              config: { content: page_name, position: 'left' },
-            },
-            ...penis_exp_list.map((e) => {
-              return { content: e, type: 'text' };
-            }),
-          ],
-          { width: 18 },
-        ),
+      print() {
+        return [
+          {
+            type: 'divider',
+            config: { content: page_name, position: 'left' },
+          },
+          ...penis_exp_list.map((e) => {
+            return { content: e, type: 'text' };
+          }),
+        ];
+      },
     };
   },
   name: page_name,

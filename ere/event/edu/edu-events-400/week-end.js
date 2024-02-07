@@ -1,8 +1,7 @@
 const era = require('#/era-electron');
 
-const { sys_love_uma } = require('#/system/sys-calc-chara-others');
-
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
+const { sys_love_uma } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -10,9 +9,10 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const SSEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-400');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
+
 /**
  * @param {HookArg} hook
  * @param __
@@ -20,10 +20,9 @@ const { location_enum } = require('#/data/locations');
  */
 module.exports = async function (hook, __, event_object) {
   const chara_talk = get_chara_talk(400),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:400:育成回合计时'),
-    event_marks = new EduEventMarks(400);
+    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:400:育成回合计时');
   let wait_flag = false;
-  if (event_marks.get('beginning') === 1) {
+  if (new SSEduMarks().beginning === 1) {
     add_event(event_hooks.week_start, event_object);
     await print_event_name(`周日宁静登场`, chara_talk);
     await chara_talk.say_and_wait(`呦，心情很不错啊，我的拖雷纳君。`);

@@ -8,7 +8,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { location_enum } = require('#/data/locations');
 
-const SSEventMarks = require("#/data/event/edu-event-marks-extended/edu-event-marks-400");
+const SSEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-400');
 
 /**
  * @param {HookArg} hook
@@ -19,7 +19,7 @@ module.exports = async function (hook, __, event_object) {
   const chara_talk = get_chara_talk(400),
     me = get_chara_talk(0),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:400:育成回合计时'),
-    event_marks = new SSEventMarks(),
+    event_marks = new SSEduMarks(),
     chara25_talk = get_chara_talk(25);
   let wait_flag = false;
   if (event_marks.beginning === 1) {

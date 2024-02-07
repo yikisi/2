@@ -24,8 +24,6 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const {
   action_cost,
   attack_juel_reward,

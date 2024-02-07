@@ -12,7 +12,7 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { location_enum } = require('#/data/locations');
-const EduEventMarks = require('#/data/event/edu-event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_enum, attr_names, fumble_result } = require('#/data/train-const');
 
@@ -1812,7 +1812,7 @@ handlers[event_hooks.school_atrium] = async (
       );
       await chara_talk.say_and_wait('（既然这样……）');
       await chara_talk.say_and_wait('小花、小曙！人家要自己一个人做蛋糕！');
-      await chara28_talk.say_and_wait('咦？你可以吗～？」', 1);
+      await chara28_talk.say_and_wait('咦？你可以吗～？');
       await chara_talk.say_and_wait('完全没问题！人家可是最懂训练员的喜好！');
       await chara_talk.say_and_wait(
         `（为了赢过${chara_talk.sex}们两个，人家一定要靠自己做出更厉害的料理！）`,

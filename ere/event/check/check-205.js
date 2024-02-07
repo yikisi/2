@@ -18,15 +18,19 @@ const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
+const { location_enum } = require('#/data/locations');
+const EventMarks = require('#/data/event/event-marks');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 const handlers = {};
 
 const aim_races = {};
-aim_races[race_enum.begin_race] = 2;
+aim_races[race_enum.begin_race] = 4;
 
 aim_races[get_aim_race_index(race_enum.prix_prb, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.prix_dia, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.prix_lat, 1)] = 2;
+aim_races[get_aim_race_index(race_enum.prix_lat, 1)] = 3;
 aim_races[get_aim_race_index(race_enum.prix_lat, 2)] = 2;
 
 /** @param {{edu_weeks:number,race:number}} extra_flag */
@@ -35,18 +39,149 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[extra_flag.race];
 
 handlers[check_stages.next_week] = () => {
-  if (era.get('cflag:205:招募状态') === recruit_flags.yes) {
-    const event_obj = new EventObject(205, cb_enum.edu),
-      edu_weeks =
-        era.get('flag:当前回合数') - era.get('cflag:205:育成回合计时');
+  if (era.get('cflag:205:招募状态')) {
+    const edu_weeks =
+      era.get('flag:当前回合数') - era.get('cflag:205:育成回合计时');
     if (edu_weeks < 3 * 48) {
+      switch (edu_weeks) {
+        case 47 + 24:
+          if (
+            check_aim_race(
+              era.get('cflag:205:育成成绩'),
+              race_enum.prix_prb,
+              1,
+              1,
+            ) &&
+            check_aim_race(
+              era.get('cflag:205:育成成绩'),
+              race_enum.prix_prb,
+              1,
+              1,
+            )
+          ) {
+            add_event(
+              event_hooks.week_start,
+              new EventObject(205, cb_enum.edu).set_arg(47 + 24),
+            );
+          }
+          break;
+        case 47 + 33:
+          if (sys_reg_race(205).curr.race === race_enum.prix_lat) {
+            add_event(
+              event_hooks.week_start,
+              new EventObject(205, cb_enum.edu).set_arg(47 + 33),
+            );
+            add_event(
+              event_hooks.week_end,
+              new EventObject(205, cb_enum.edu).set_arg(47 + 33),
+            );
+          }
+          break;
+        case 47 + 35:
+          if (era.get('cflag:205:位置') === location_enum.paris) {
+            add_event(
+              event_hooks.foreign_travel,
+              new EventObject(205, cb_enum.edu, true).set_arg(47 + 35),
+            );
+          }
+          break;
+        case 95 + 25:
+          if (
+            check_aim_race(
+              era.get('cflag:205:育成成绩'),
+              race_enum.prix_lat,
+              1,
+              1,
+            )
+          ) {
+            add_event(
+              event_hooks.week_start,
+              new EventObject(205, cb_enum.edu).set_arg(95 + 25),
+            );
+            add_event(
+              event_hooks.out_start,
+              new EventObject(205, cb_enum.edu, true).set_arg(95 + 25),
+            );
+          }
+          break;
+        case 95 + 26:
+          if (new EduEventMarks(205).get('tea')) {
+            new EventMarks(0).sub(event_hooks.out_start);
+          }
+          era.set('cflag:205:招募状态', recruit_flags.yes);
+          if (!era.get('flag:当前互动角色')) {
+            era.set('flag:当前互动角色', 205);
+          }
+          break;
+        case 95 + 28:
+          if (
+            check_aim_race(
+              era.get('cflag:205:育成成绩'),
+              race_enum.prix_lat,
+              1,
+              1,
+            )
+          ) {
+            add_event(
+              event_hooks.week_end,
+              new EventObject(205, cb_enum.edu).set_arg(95 + 28),
+            );
+          }
+          break;
+        case 95 + 29:
+          if (
+            check_aim_race(
+              era.get('cflag:205:育成成绩'),
+              race_enum.prix_lat,
+              1,
+              1,
+            )
+          ) {
+            add_event(
+              event_hooks.week_start,
+              new EventObject(205, cb_enum.edu).set_arg(95 + 29),
+            );
+          }
+          break;
+        case 95 + 33:
+          if (era.get('cflag:205:招募状态') !== recruit_flags.yes) {
+            add_event(
+              event_hooks.week_end,
+              new EventObject(205, cb_enum.edu).set_arg(95 + 33),
+            );
+          }
+          break;
+        case 95 + 41:
+          if (
+            check_aim_race(
+              era.get('cflag:205:育成成绩'),
+              race_enum.prix_lat,
+              1,
+              1,
+            ) &&
+            check_aim_race(
+              era.get('cflag:205:育成成绩'),
+              race_enum.prix_lat,
+              2,
+              1,
+            )
+          ) {
+            add_event(
+              event_hooks.week_start,
+              new EventObject(205, cb_enum.edu).set_arg(95 + 41),
+            );
+          }
+      }
       check_and_register_aim_race(205, aim_races);
     } else if (edu_weeks === 143 + 9) {
-      add_event(event_hooks.week_start, event_obj);
+      add_event(
+        event_hooks.week_start,
+        new EventObject(205, cb_enum.edu).set_arg(143 + 9),
+      );
     }
   } else if (
     era.get('cflag:205:随机招募') < 0 &&
-    era.get('flag:当前声望') >= 500
+    era.get('flag:当前声望') >= 1000
   ) {
     era.set('cflag:205:随机招募', 1);
   }
