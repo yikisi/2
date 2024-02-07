@@ -29,6 +29,7 @@ const { get_breast_cup } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
 const current = new Date().getTime();
+
 /** @type {Record<string,function>} */
 const handlers = {},
   sleep_handlers = {};

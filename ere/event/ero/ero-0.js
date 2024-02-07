@@ -310,6 +310,10 @@ handlers[ero_hooks.shop_start] = () => {};
 handlers[ero_hooks.shop_end] = () => {};
 
 /**
+ * @author 雞雞
+ * @author 鬼鼠
+ * @author 黑奴队长
+ *
  * @param {HookArg} hook
  * @param {{shown:boolean}} extra_flag
  * @returns {Promise<*>}

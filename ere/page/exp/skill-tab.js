@@ -147,6 +147,25 @@ module.exports = {
           type: 'divider',
         },
         { content: '一介训练员而已……', type: 'text' },
+        {
+          config: { content: '习得技能', position: 'left' },
+          type: 'divider',
+        },
+        ...skill_names
+          .map((e) => {
+            return {
+              n: e,
+              l: era.get(`abl:${chara.id}:${e}`),
+            };
+          })
+          .filter((e) => e.l)
+          .map((e) => {
+            return {
+              config: { width: 4 },
+              content: `${e.n} Lv.${e.l}`,
+              type: 'text',
+            };
+          }),
       );
     }
 

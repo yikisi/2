@@ -200,7 +200,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
     [ero_action_tags.awake, ero_action_tags.insert],
     [
       ero_action_tags.anal,
-      ero_action_tags.virgin,
+      (chara_id) => era.get(`cflag:${chara_id}:阴道尺寸`) > 0,
       EroHookTag.penis_in_anal_check,
     ],
     EroHookTag.condition_type.no,
@@ -251,7 +251,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
     [
       ero_action_tags.anal,
       ero_action_tags.awake,
-      ero_action_tags.virgin,
+      (chara_id) => era.get(`cflag:${chara_id}:阴道尺寸`) > 0,
       EroHookTag.npc_anal_sex_check,
       EroHookTag.penis_in_anal_check,
     ],

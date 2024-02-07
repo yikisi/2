@@ -14,6 +14,7 @@ const check_stages = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_adaptability_rank } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { expedition_weeks } = require('#/data/move-const');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
 const { adaptability_names } = require('#/data/train-const');
@@ -113,7 +114,7 @@ async function reg_race_page() {
     in_foreign =
       era.get(`cflag:${chara_id}:位置`) > 0 &&
       era.get(`cflag:${chara_id}:位置`) !== location_enum.beach &&
-      registered_race.week > 0;
+      registered_race.race > 0;
 
   while (flag_race_reg) {
     era.clear();
@@ -183,7 +184,8 @@ async function reg_race_page() {
                       !check_pregnant_unprotect(chara_id) ||
                       in_foreign ||
                       (is_foreign &&
-                        race_infos[e].date + year_begin - cur_round <= 2),
+                        race_infos[e].date + year_begin - cur_round <=
+                          expedition_weeks),
                   },
                   content:
                     race_infos[e].get_colored_name_with_class().content +
@@ -311,7 +313,7 @@ async function reg_race_page() {
       in_foreign =
         era.get(`cflag:${chara_id}:位置`) > 0 &&
         era.get(`cflag:${chara_id}:位置`) !== location_enum.beach &&
-        registered_race.week > 0;
+        registered_race.race > 0;
     } else {
       if (registered_race.race === ret) {
         registered_race.race = registered_race.week = -1;

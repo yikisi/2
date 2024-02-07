@@ -1,26 +1,28 @@
 const era = require('#/era-electron');
 
+const {
+  check_pregnant_unprotect,
+} = require('#/system/ero/sys-calc-ero-status');
+const sys_call_mec = require('#/system/script/sys-call-mec');
 const sys_change_tired = require('#/system/chara/sys-change-tired');
 const {
   sys_reg_race,
   sys_change_attr_and_print,
   sys_change_pressure,
 } = require('#/system/sys-calc-base-cflag');
-const {
-  check_pregnant_unprotect,
-} = require('#/system/ero/sys-calc-ero-status');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { celebration_color } = require('#/data/color-const');
+const { mec_foreign_debuff } = require('#/data/event/check-stages');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { expedition_weeks } = require('#/data/move-const');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
-const { get_random_value } = require('#/utils/value-utils');
-const sys_call_mec = require('#/system/script/sys-call-mec');
-const { mec_foreign_debuff } = require('#/data/event/check-stages');
 
 const foreign_race_list = Object.values(race_enum).filter(
   (e) => race_infos[e].track >= track_enum.longchamp,
@@ -43,24 +45,25 @@ track2location[track_enum.shatin] = {
  * @param {number} chara_id
  * @param {string} language
  * @param {number} loc
+ * @param {boolean} before_race
  */
-function handle_foreign_debuff(chara_id, language, loc) {
+function handle_foreign_debuff(chara_id, language, loc, before_race) {
   sys_change_attr_and_print(chara_id, '体力', -200);
   sys_change_attr_and_print(chara_id, '精力', -500);
   sys_change_tired(chara_id, 2);
-  if (era.get(`cflag:${chara_id}:种族`)) {
-    // TODO 移除||容错
-    era.set(
-      `status:${chara_id}:语言不通`,
-      Math.max(
-        5 -
-          (era.get(`abl:${chara_id}:${language}语`) || 0) +
-          era.get(`talent:${chara_id}:社交态度`),
-        0,
-      ),
-    );
-    sys_call_mec(chara_id, mec_foreign_debuff, { loc });
-  }
+  era.set(
+    `status:${chara_id}:语言不通`,
+    Math.max(
+      5 -
+        era.get(`abl:${chara_id}:${language}语`) +
+        era.get(`talent:${chara_id}:社交态度`),
+      0,
+    ),
+  );
+  sys_call_mec(chara_id, mec_foreign_debuff, {
+    before_race,
+    loc,
+  });
 }
 
 /**
@@ -122,7 +125,7 @@ async function check_new_activities(cur_round, in_team_list) {
   let race, is_begin;
   for (const r of foreign_race_list) {
     const { date } = race_infos[r];
-    if (event_weeks === date - 2) {
+    if (event_weeks === date - expedition_weeks) {
       race = r;
       is_begin = true;
     } else if (event_weeks === date) {
@@ -140,6 +143,7 @@ async function check_new_activities(cur_round, in_team_list) {
         .filter((e) => sys_reg_race(e).curr.race === race)
         .map((e) => {
           return {
+            hurt: era.get(`status:${e}:伤病`),
             id: e,
             pregnant: era.get(`cflag:${e}:妊娠回合计时`),
           };
@@ -147,10 +151,10 @@ async function check_new_activities(cur_round, in_team_list) {
       const info = race_infos[race],
         location = track2location[info.track],
         punish_list = foreign_list
-          .filter((e) => e.pregnant >= 33)
+          .filter((e) => e.pregnant >= 33 || e.hurt)
           .map((e) => e.id);
       foreign_list = foreign_list
-        .filter((e) => e.pregnant < 33)
+        .filter((e) => e.pregnant < 33 && !e.hurt)
         .map((e) => e.id);
       if (foreign_list.length) {
         era.printMultiColumns([
@@ -165,7 +169,7 @@ async function check_new_activities(cur_round, in_team_list) {
           },
           ...foreign_list.map((chara_id) => {
             const chara = get_chara_talk(chara_id);
-            handle_foreign_debuff(chara_id, location.lan, location.loc);
+            handle_foreign_debuff(chara_id, location.lan, location.loc, true);
             sys_change_pressure(chara_id, get_random_value(2000, 3000));
             return {
               config: { align: 'center', width: 3 },
@@ -205,11 +209,12 @@ async function check_new_activities(cur_round, in_team_list) {
         temp = await era.input();
       }
       if (!temp) {
-        handle_foreign_debuff(0, location.lan, location.loc);
-        era.set('cflag:0:位置', era.set('flag:当前位置', location.loc));
+        handle_foreign_debuff(0, location.lan, location.loc, false);
+        era.set('flag:当前位置', location.loc);
         foreign_list.forEach((chara_id) =>
           sys_change_pressure(chara_id, -1000),
         );
+        foreign_list.push(0);
       } else if (me_in_race) {
         punish_list.push(0);
       }
@@ -233,6 +238,22 @@ async function check_new_activities(cur_round, in_team_list) {
       foreign_list.forEach((chara_id) =>
         era.set(`cflag:${chara_id}:位置`, location.loc),
       );
+      if (era.get('cflag:343:招募状态') === recruit_flags.yes) {
+        foreign_list.forEach((chara_id) => {
+          era.set(
+            `status:${chara_id}:语言不通`,
+            Math.ceil(era.get(`status:${chara_id}:语言不通`) / 2) || 0,
+          );
+          era.set(
+            `status:${chara_id}:水土不服`,
+            Math.ceil(era.get(`status:${chara_id}:水土不服`) / 2) || 0,
+          );
+          era.set(
+            `status:${chara_id}:客场作战`,
+            Math.ceil(era.get(`status:${chara_id}:客场作战`) / 2) || 0,
+          );
+        });
+      }
     } else {
       // 远征结束
       era.print([

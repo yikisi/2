@@ -304,8 +304,9 @@ function update_juel_buff(...ids) {
           era.get(`talent:${chara_id}:工口好奇`) +
           era.get(`talent:${chara_id}:情感活动`)) +
         is_raping +
-        hate_level / 10 -
-        meek_level / 20 -
+        hate_level / 10 +
+        pain_level / 20 +
+        shame_level / 20 -
         meek_level / 4 -
         love_buff -
         lust_buff / 2,

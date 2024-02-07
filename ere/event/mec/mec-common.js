@@ -32,15 +32,21 @@ handlers[check_stages.mec_callname_customize] = (chara_id) => {
 
 handlers[check_stages.mec_ero_check] = () => 0;
 
-handlers[check_stages.mec_foreign_debuff] = (chara_id) => {
+/**
+ * @param chara_id
+ * @param {{before_race:boolean}} extra_flag
+ */
+handlers[check_stages.mec_foreign_debuff] = (chara_id, extra_flag) => {
   era.set(
     `status:${chara_id}:水土不服`,
     4 - era.get(`talent:${chara_id}:身体素质`),
   );
-  era.set(
-    `status:${chara_id}:客场作战`,
-    4 + era.get(`talent:${chara_id}:自信程度`),
-  );
+  if (extra_flag.before_race) {
+    era.set(
+      `status:${chara_id}:客场作战`,
+      4 + era.get(`talent:${chara_id}:自信程度`),
+    );
+  }
 };
 
 handlers[check_stages.mec_maxbase_buff] = () => 0;

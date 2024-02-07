@@ -465,7 +465,7 @@ async function page_ero(lover) {
     curr_lover = era.get('tflag:当前对手');
     let curr_supporter = era.get('tflag:当前助手');
 
-    const filters = new Array(5)
+    const filters = new Array(7)
         .fill(0)
         .map((_, i) => era.get(`flag:${950 + i}`)),
       left_columns = [],

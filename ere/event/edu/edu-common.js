@@ -10,7 +10,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
-const { location_enum } = require('#/data/locations');
+const { location_enum, location_name } = require('#/data/locations');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_rewards } = require('#/data/race/race-const');
 const { fumble_result, attr_enum } = require('#/data/train-const');
@@ -122,7 +122,6 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
   }
 };
 
-/** @param {number} chara_id */
 handlers[event_hooks.week_start] = async (chara_id) => {
   const edu_weeks =
     era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`);
@@ -279,7 +278,92 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
   }
 };
 
-/** @param {number} chara_id */
+/**
+ * @param {number} chara_id
+ * @param {HookArg} hook
+ * @param {{lan:string}} extra_flag
+ */
+handlers[event_hooks.foreign_study] = async (chara_id, hook, extra_flag) => {
+  const chara = get_chara_talk(chara_id),
+    chara_name = chara.get_colored_name(),
+    me = get_chara_talk(0);
+  if (!chara_id) {
+    chara_name.content = '自己';
+  }
+  await era.printAndWait([
+    '为了能进行基本的外语交流，',
+    me.get_colored_name(),
+    ' 安排 ',
+    chara_name,
+    ' 在酒店房间学习……',
+  ]);
+  const abl = era.get(`abl:${chara_id}:${extra_flag.lan}语`);
+  hook.arg =
+    abl === 5 ||
+    Math.random() <
+      (5 - abl) / 5 + (era.get(`abl:0:${extra_flag.lan}语`) > abl) / 2;
+  if (hook.arg) {
+    await era.printAndWait('临急抱佛脚，起效了！');
+  } else {
+    await era.printAndWait(['不好！', chara.get_colored_name(), ' 看睡了！']);
+  }
+};
+
+handlers[event_hooks.foreign_rest] = async (chara_id) => {
+  const chara = get_chara_talk(chara_id),
+    chara_name = chara.get_colored_name(),
+    me = get_chara_talk(0);
+  if (!chara_id) {
+    chara_name.content = '自己';
+  }
+  await era.printAndWait([
+    '为了恢复状态，',
+    me.get_colored_name(),
+    ' 订购了当地理疗服务，安排 ',
+    chara_name,
+    ' 在酒店调理修养……',
+  ]);
+  await era.printAndWait([
+    chara.get_colored_name(),
+    ' 的身体素质似乎逐渐恢复了！',
+  ]);
+};
+
+handlers[event_hooks.foreign_train] = async (chara_id) => {
+  const chara = get_chara_talk(chara_id),
+    chara_name = chara.get_colored_name(),
+    me = get_chara_talk(0);
+  if (!chara_id) {
+    chara_name.content = '自己';
+  }
+  await era.printAndWait([
+    '为了习惯当地赛场，',
+    me.get_colored_name(),
+    ' 安排 ',
+    chara_name,
+    ' 在训练场进行适应训练……',
+  ]);
+  await era.printAndWait([
+    chara.get_colored_name(),
+    ' 似乎渐渐习惯当地赛道的质感了！',
+  ]);
+};
+
+handlers[event_hooks.foreign_travel] = async (chara_id) => {
+  const me = get_chara_talk(0);
+  await era.printAndWait([
+    '为了放松心情，',
+    me.get_colored_name(),
+    ...(chara_id
+      ? [' 和 ', get_chara_talk(chara_id).get_colored_name()]
+      : [' 独自']),
+    ' 在',
+    location_name[era.get('flag:当前位置')],
+    '观光……',
+  ]);
+  await era.printAndWait('虽然花了不少钱，但还是值得的！');
+};
+
 handlers[event_hooks.race_start] = async (chara_id) => {
   const chara_talk = get_chara_talk(chara_id);
   await print_event_name('竞赛之前', chara_talk);
@@ -390,6 +474,7 @@ handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
  * 通用育成事件
  *
  * @author 雞雞
+ * @author 黑奴队长（改编）
  *
  * @param {number} chara_id
  * @param {HookArg} hook

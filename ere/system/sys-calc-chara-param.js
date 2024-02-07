@@ -37,12 +37,6 @@ function sys_check_awake(chara_id) {
 function sys_check_train_enabled(chara_id) {
   const tmp = chara_id || 0;
   return (
-    // 非马娘不可训
-    era.get(`cflag:${tmp}:种族`) &&
-    // 非本格化不可训
-    era.get(`cflag:${tmp}:成长阶段`) >= 2 &&
-    // 殿堂不可训
-    !era.get(`cflag:${tmp}:殿堂`) &&
     !era.get(`status:${tmp}:伤病`) &&
     era.get('flag:当前回合数') - era.get(`cflag:${tmp}:育成回合计时`) <
       3 * 48 &&

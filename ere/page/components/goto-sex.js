@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
 const update_marks = require('#/system/ero/calc-sex/update-marks');
 const sys_get_intelligence_ratio_in_fight = require('#/system/ero/fight/sys-get-intelligence-ratio');
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
@@ -134,7 +135,7 @@ async function goto_sex(chara_id) {
   } else {
     const check =
       era.get(`love:${chara_id}`) >= 50 ? get_sex_acceptable(chara_id) : -1;
-    let ret;
+    let ret, dice;
     if (check >= 0) {
       era.printMultiColumns([
         {
@@ -302,7 +303,8 @@ async function goto_sex(chara_id) {
           );
           if (
             !era.get('flag:雷普抵抗') ||
-            sys_get_strength_ratio_in_fight(0, chara_id) > Math.random()
+            sys_get_strength_ratio_in_fight(0, chara_id) >
+              (dice = Math.random())
           ) {
             await era.printAndWait([
               me.get_colored_name(),
@@ -340,7 +342,8 @@ async function goto_sex(chara_id) {
           );
           era.add(`item:${ret}`, -1);
           if (
-            sys_get_intelligence_ratio_in_fight(0, chara_id) > Math.random()
+            sys_get_intelligence_ratio_in_fight(0, chara_id) >
+            (dice = Math.random())
           ) {
             await era.printAndWait([
               me.get_colored_name(),
@@ -369,40 +372,52 @@ async function goto_sex(chara_id) {
         era.set('tflag:主导权', chara_id);
       }
       await print_ero_page(chara_id);
-      if (era.get(`status:${chara_id}:超马跳Z`)) {
-        await era.printAndWait([
-          '虽然一时情动，但当 ',
-          chara.get_colored_name(),
-          ' 回过神来，一定会对此羞愤难当吧……',
-        ]);
-        sys_like_chara(chara_id, 0, -400) && (await era.waitAnyKey());
-        if (
-          era.get(`mark:${chara_id}:羞耻`) < 3 &&
-          !era.get(`ex:${chara_id}:羞耻获取`)
-        ) {
-          era.set(`nowex:${chara_id}:羞耻获取`, 1);
+      if (check < 0) {
+        if (era.get('tflag:强奸') === 0) {
+          if (
+            era.get(`mark:${chara_id}:苦痛`) < 3 &&
+            !era.get(`ex:${chara_id}:苦痛获取`)
+          ) {
+            era.set(`nowex:${chara_id}:苦痛获取`, 1);
+          }
+          if (
+            era.get(`mark:${chara_id}:反抗`) < 3 &&
+            !era.get(`ex:${chara_id}:反抗获取`)
+          ) {
+            era.set(`nowex:${chara_id}:反抗获取`, 1);
+          }
+          await update_marks(true, chara_id);
+          if (dice < 0.95) {
+            sys_hurt_uma(chara_id, 1 + (dice < 0.05));
+          }
+        } else if (era.get(`status:${chara_id}:超马跳Z`)) {
+          await era.printAndWait([
+            '虽然一时情动，但当 ',
+            chara.get_colored_name(),
+            ' 回过神来，一定会对此羞愤难当吧……',
+          ]);
+          sys_like_chara(chara_id, 0, -400) && (await era.waitAnyKey());
+          if (
+            era.get(`mark:${chara_id}:羞耻`) < 3 &&
+            !era.get(`ex:${chara_id}:羞耻获取`)
+          ) {
+            era.set(`nowex:${chara_id}:羞耻获取`, 1);
+          }
+          if (
+            era.get(`mark:${chara_id}:反抗`) < 3 &&
+            !era.get(`ex:${chara_id}:反抗获取`)
+          ) {
+            era.set(`nowex:${chara_id}:反抗获取`, 1);
+          }
+          await update_marks(true, chara_id);
+          if (dice < 0.95) {
+            era.add(`status:${chara_id}:疲惫`, 3 + (dice < 0.05));
+          }
+        } else {
+          if (dice < 0.95) {
+            era.add(`status:${chara_id}:疲惫`, 2 + (dice < 0.05));
+          }
         }
-        if (
-          era.get(`mark:${chara_id}:反抗`) < 3 &&
-          !era.get(`ex:${chara_id}:反抗获取`)
-        ) {
-          era.set(`nowex:${chara_id}:反抗获取`, 1);
-        }
-        await update_marks(true, chara_id);
-      } else if (era.get('tflag:强奸') === 0 && check < 0) {
-        if (
-          era.get(`mark:${chara_id}:苦痛`) < 3 &&
-          !era.get(`ex:${chara_id}:苦痛获取`)
-        ) {
-          era.set(`nowex:${chara_id}:苦痛获取`, 1);
-        }
-        if (
-          era.get(`mark:${chara_id}:反抗`) < 3 &&
-          !era.get(`ex:${chara_id}:反抗获取`)
-        ) {
-          era.set(`nowex:${chara_id}:反抗获取`, 1);
-        }
-        await update_marks(true, chara_id);
       }
       await end_ero_and_show_result(true);
     }

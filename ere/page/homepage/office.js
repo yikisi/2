@@ -391,8 +391,8 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
                     disabled:
                       !sys_check_awake(chara_id) ||
                       !sys_check_awake(0) ||
-                      era.get(`base:${chara_id}:精力`) < 50 ||
-                      era.get('base:0:精力') < celebration_cost ||
+                      chara_base.time < 50 ||
+                      player_base.time < celebration_cost ||
                       not_in_same_loc,
                     width: 6,
                   },

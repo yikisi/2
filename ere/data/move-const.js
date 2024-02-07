@@ -61,6 +61,7 @@ location_move_cost[location_enum.church] = 200;
 location_move_cost[location_enum.station] = 300;
 
 module.exports = {
+  expedition_weeks: 3,
   location_move_cost,
   vehicle_enum,
   vehicle_influences,

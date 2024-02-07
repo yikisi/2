@@ -105,6 +105,10 @@ handlers[event_hooks.out_station] = async (hook) => {
   ]);
 };
 
+/**
+ * @author 雞雞
+ * @author 黑奴队长（改编）
+ */
 module.exports = {
   /**
    * @param {HookArg} stage_id
