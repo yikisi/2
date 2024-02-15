@@ -39,6 +39,7 @@ const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const {
   get_adaptability_rank,
   get_attr_rank,
@@ -281,7 +282,7 @@ async function race_page(race) {
     new_title_dict[e] = [];
   });
   wait_flag && (await era.waitAnyKey());
-  era.clear();
+  await era.clear();
   era.drawLine();
   const race_header = [
     {
@@ -320,7 +321,7 @@ async function race_page(race) {
     strategy_ability = generate_strategy_ability(cur_chara_id),
     strategy = strategy_dict[cur_chara_id];
   while (flag_prepare_race) {
-    era.clear();
+    await era.clear();
     era.setVerticalAlign('middle');
     era.printInColRows(
       [{ type: 'divider' }, ...race_header, { type: 'divider' }],
@@ -463,7 +464,7 @@ async function race_page(race) {
       strategy = strategy_dict[ret];
     }
   }
-  era.clear();
+  await era.clear();
   era.printMultiColumns([
     { type: 'divider' },
     { content: 'TEST 选择成绩', type: 'text' },
@@ -496,7 +497,7 @@ async function race_page(race) {
     end_count = start_count,
     time_cost = 0;
   while (start_count) {
-    era.clear();
+    await era.clear();
     page_race_header(info);
     const player_time = era.get('base:0:精力');
     era.setHorizontalAlign('space-around');
@@ -623,7 +624,7 @@ async function race_page(race) {
   await era.waitAnyKey();
   time_cost = 0;
   while (end_count) {
-    era.clear();
+    await era.clear();
     page_race_header(info);
     const player_time = era.get('base:0:精力');
     era.setHorizontalAlign('space-around');
@@ -713,7 +714,7 @@ async function race_page(race) {
   const pregnant_check =
     era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.embryo &&
     era.get('cflag:0:妊娠回合计时') === 0 &&
-    era.get('cflag:0:孩子父亲');
+    new LifeEventMarks(0).sperm;
   contestants.forEach((e) => {
     const pregnant_stage = era.get(`cflag:${e}:妊娠阶段`);
     if (pregnant_stage >> pregnant_stage_enum.fetal > 0) {

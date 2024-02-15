@@ -52,6 +52,7 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const check_stages = require('#/data/event/check-stages');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const event_hooks = require('#/data/event/event-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_trainer_title,
@@ -80,15 +81,16 @@ async function sys_next_week() {
   era.set('status:0:沉睡', 1);
   era.set('status:0:熬夜', 0);
   era.set('status:0:摸鱼', 0);
+  era.set('status:0:马语者', 0);
 
   // 回合结束结算
   for (const chara_id of in_team_list) {
-    const stamina = era.get(`base:${chara_id}:体力`),
-      stamina_ratio = stamina / era.get(`maxbase:${chara_id}:体力`),
+    const stamina_ratio =
+        era.get(`base:${chara_id}:体力`) / era.get(`maxbase:${chara_id}:体力`),
       time = era.get(`base:${chara_id}:精力`);
-    let debuff = sys_get_debuff(chara_id);
-    debuff >= 0.5 && (debuff = 1000);
+    const debuff = sys_get_debuff(chara_id);
     if (
+      debuff < 0.5 &&
       sys_check_train_enabled(chara_id) &&
       era.get(`cflag:${chara_id}:自主训练`) &&
       !era.get(`status:${chara_id}:摸鱼`) &&
@@ -186,6 +188,7 @@ async function sys_next_week() {
           `status:${chara_id}:摸鱼`,
           Math.random() < 0.02 + 0.01 * era.get(`talent:${chara_id}:偷懒克制`),
         );
+        sys_change_pressure(chara_id, -500);
       }
     } else {
       era.set(`status:${chara_id}:熬夜`, 0);
@@ -194,7 +197,6 @@ async function sys_next_week() {
     era.set(`cflag:${chara_id}:自主训练`, 1);
   }
   // 极端事件判定
-  // 极端事件发生在回合的结束
   if (check_pregnant_unprotect(0)) {
     const your_position = era.get('cflag:0:位置');
     /** @type {{chara_id:number,prison:boolean,[supporter]:number}[]} */
@@ -345,7 +347,6 @@ async function sys_next_week() {
   in_team_list.unshift(0);
   const out_race_list = [];
   let race_punish = 0;
-  era.set('status:0:马语者', 0);
   for (const chara_id of in_team_list) {
     sys_fix_chara_base(chara_id);
     let stay_up = era.get(`status:${chara_id}:熬夜`);
@@ -362,6 +363,7 @@ async function sys_next_week() {
       `base:${chara_id}:精力`,
       Math.floor(era.get(`maxbase:${chara_id}:精力`) * (1 - 0.25 * stay_up)),
     );
+    stay_up > 0 && sys_change_pressure(chara_id, 100 + 200 * stay_up);
 
     let motivation_change = 0;
     if (chara_id) {
@@ -381,9 +383,6 @@ async function sys_next_week() {
         status_limit = era.set(`status:${chara_id}:抑制药`, 0);
         sys_love_uma(chara_id, limit_delta * 2 + 8);
       }
-
-      // 回合惩罚，不受其他加成影响
-      // 长大了再来谈好感和爱吧……
       if (era.get(`cflag:${chara_id}:成长阶段`) >= 2) {
         if (
           (temp = era.get('flag:回合好感惩罚')) ||
@@ -406,9 +405,7 @@ async function sys_next_week() {
           );
         }
       }
-
       // 殿堂计算
-      // 玩家不进殿堂
       if (chara_id) {
         if (cur_round - era.get(`cflag:${chara_id}:育成回合计时`) === 3 * 48) {
           sys_handle_palace(chara_id);
@@ -435,9 +432,14 @@ async function sys_next_week() {
         { color: buff_colors[0], content: '[发胖]' },
         '了……',
       ]);
-    } else if (era.get(`status:${chara_id}:发胖`) && weight_delta <= 2000) {
-      era.set(`status:${chara_id}:发胖`, 0);
-      era.print([chara.get_colored_name(), ' 的体重恢复了正常……']);
+      sys_change_pressure(chara_id, 1000);
+    } else if (era.get(`status:${chara_id}:发胖`)) {
+      if (weight_delta <= 2000) {
+        era.set(`status:${chara_id}:发胖`, 0);
+        era.print([chara.get_colored_name(), ' 的体重恢复了正常……']);
+      } else {
+        sys_change_pressure(chara_id, weight_delta - 1000);
+      }
     }
 
     const health_talent = era.get(`talent:${chara_id}:身体素质`);
@@ -468,19 +470,20 @@ async function sys_next_week() {
         { color: buff_colors[0], content: '[头风]' },
         '……',
       ]);
-    } else if (
-      era.get(`status:${chara_id}:头风`) &&
-      drug_delta <= 80 + 20 * health_talent + 50 * race
-    ) {
-      era.set(`status:${chara_id}:头风`, 0);
-      era.print([
-        chara.get_colored_name(),
-        ' 的 ',
-        { color: buff_colors[0], content: '[头风]' },
-        ' 痊愈了……',
-      ]);
+      sys_change_pressure(chara_id, get_random_value(500, 1500));
+    } else if (era.get(`status:${chara_id}:头风`)) {
+      if (drug_delta <= 80 + 20 * health_talent + 50 * race) {
+        era.set(`status:${chara_id}:头风`, 0);
+        era.print([
+          chara.get_colored_name(),
+          ' 的 ',
+          { color: buff_colors[0], content: '[头风]' },
+          ' 痊愈了……',
+        ]);
+      } else {
+        sys_change_pressure(chara_id, drug_delta * 8);
+      }
     }
-
     era.set(`cflag:${chara_id}:子宫内精液`, 0);
     era.set(`cflag:${chara_id}:肠道内精液`, 0);
     era.set(`cflag:${chara_id}:腹中精液`, 0);
@@ -646,7 +649,7 @@ async function sys_next_week() {
                 era.get(`cflag:${chara_id}:育成回合计时`) <
                 3 * 48)),
         );
-        const father_id = era.get(`cflag:${chara_id}:孩子父亲`);
+        const father_id = new LifeEventMarks(chara_id).sperm;
         await call_ero_script(
           chara_id || father_id,
           ero_hooks.report_pregnant_between_weeks,
@@ -704,7 +707,7 @@ async function sys_next_week() {
         // 不然会涉及好几个回合的产妇无法移动问题！
         if (
           !era.get(`cflag:${chara_id}:位置`) &&
-          Math.random() < birth_percent[timer - 36]
+          (timer >= 42 || Math.random() < birth_percent[timer - 36])
         ) {
           // 出生
           // 头两胎在生产后+2cm
@@ -925,7 +928,6 @@ async function sys_next_week() {
           40,
       );
     }
-
     sys_call_check(chara_id, check_stages.next_week);
   }
 
@@ -978,7 +980,6 @@ async function sys_next_week() {
     }
   }
   await check_new_activities(cur_round, in_team_list);
-
   if (!era.get('flag:当前互动角色') && in_team_list.length) {
     era.set(
       'flag:当前互动角色',

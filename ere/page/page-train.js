@@ -32,7 +32,7 @@ module.exports = async () => {
   let flag_train = true;
 
   while (flag_train) {
-    era.clear();
+    await era.clear();
 
     print_page_header();
 

@@ -25,6 +25,7 @@ const {
   ero_action_names,
   ero_tagged_hooks,
 } = require('#/data/event/ero-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
@@ -519,7 +520,7 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
   const father = get_chara_talk(extra_flag.father_id),
     mother = get_chara_talk(extra_flag.mother_id),
     love = era.get(`love:${mother.id || father.id}`),
-    unexpected_pregnant = era.get(`cflag:${mother.id}:意外怀孕`);
+    unexpected_pregnant = new LifeEventMarks(mother.id).unexpected_pregnant;
   era.drawLine();
   if (love >= 90) {
     await common_pregnant_report_in_love(father, mother, unexpected_pregnant);
@@ -629,6 +630,7 @@ handlers[ero_hooks.have_baby] = async (_, hook, extra_flag) => {
         ' 的眼神十分空虚，却对孩子露出了关爱的神情。',
       ]);
     }
+    era.println();
   }
 };
 

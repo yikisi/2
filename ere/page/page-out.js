@@ -34,7 +34,7 @@ async function out_page() {
         }
       : undefined;
 
-  era.clear();
+  await era.clear();
   print_page_header();
   print_chara_info(chara_id, chara_info_type.out);
   era.drawLine();

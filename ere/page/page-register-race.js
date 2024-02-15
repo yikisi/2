@@ -117,7 +117,7 @@ async function reg_race_page() {
       registered_race.race > 0;
 
   while (flag_race_reg) {
-    era.clear();
+    await era.clear();
     era.printInColRows(
       [
         { type: 'divider' },

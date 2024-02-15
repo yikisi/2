@@ -16,15 +16,17 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { buff_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_filtered_talents } = require('#/data/info-generator');
 const { adaptability_names } = require('#/data/train-const');
-const { buff_colors } = require('#/data/color-const');
 
 /** @param {number} mother_id */
 async function sys_have_baby(mother_id) {
-  const father_id = era.get(`cflag:${mother_id}:孩子父亲`),
+  const mother_life_marks = new LifeEventMarks(mother_id),
+    father_id = mother_life_marks.sperm,
     child_id = era.add('flag:新生儿ID', 1) - 1;
   let src_chara_id;
   if (mother_id) {
@@ -278,7 +280,7 @@ async function sys_have_baby(mother_id) {
   era.set(`cstr:${child_id}:出生经历`, `出生于 ${date}`);
   const father_check = era.add(`exp:${father_id}:孩子数量`, 1),
     mother_check = era.add(`exp:${mother_id}:生产次数`, 1);
-  era.set(`cflag:${mother_id}:孩子父亲`, -1);
+  mother_life_marks.sperm = 0;
   if (father_check >= 8) {
     sys_add_title(father_id, { c: buff_colors[2], n: '大种马' }) &&
       (await era.waitAnyKey());
@@ -319,8 +321,9 @@ async function sys_have_baby(mother_id) {
     ]);
   }
 
-  era.set(`cflag:${child_id}:意外之子`, era.get(`cflag:${mother_id}:意外怀孕`));
-  era.set(`cflag:${mother_id}:意外怀孕`, 0);
+  const child_life_marks = new LifeEventMarks(child_id);
+  child_life_marks.unexpected_child = mother_life_marks.unexpected_pregnant;
+  mother_life_marks.unexpected_pregnant = 0;
 
   if (!father_id && era.get(`love:${mother_id}`) < 90) {
     if (era.get(`mark:${mother_id}:同心`) >= 2) {

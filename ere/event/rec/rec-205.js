@@ -298,14 +298,10 @@ module.exports = {
       await era.printAndWait(
         `是做法不好。${me.name} 先和${vp.sex}坐到同一张长椅上，然后再面向对着 ${me.name} 看的 ${vp.name}。`,
       );
-
-      era.printButton(
-        `「听好了，凯旋门赏可以说是这个国家乃至全世界${vp.get_uma_sex_title()}的目标。」`,
-        1,
-      );
+      era.printButton(`展开解释`, 1);
       await era.input();
       await me.say_and_wait(
-        `如果是以草地中距离为主战场的${vp.get_uma_sex_title()}，最后到达的肯定是凯旋门赏。`,
+        `听好了，凯旋门赏可以说是这个国家乃至全世界${vp.get_uma_sex_title()}的目标。如果是以草地中距离为主战场的${vp.get_uma_sex_title()}，最后到达的肯定是凯旋门赏。`,
       );
       await era.printAndWait(
         `当然，点头的${vp.sex}的素质还不确定，但如果能定下这样的目标，对草地中距离有相当的自信吧。`,
@@ -483,7 +479,7 @@ module.exports = {
       era.set('flag:物色对象', 205);
       return true;
     } else if (stage === event_hooks.week_start) {
-      await print_event_name('EVENT0', vp);
+      await print_event_name('未有前人曾踏足', vp);
       await era.printAndWait('校园里的树木被季节染上了颜色。');
       await era.printAndWait('淡黄色的回廊，透明的大玻璃，棱角分明的立面。');
       await era.printAndWait('现代风格的校园建筑，与湛蓝色的天空交相辉映。');

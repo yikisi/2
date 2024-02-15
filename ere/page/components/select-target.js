@@ -212,7 +212,7 @@ async function select_target(type) {
     select_flag = true,
     ret;
   while (select_flag) {
-    era.clear();
+    await era.clear();
     print_page_header();
     const buffer = [];
     buffer.push({

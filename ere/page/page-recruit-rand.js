@@ -32,7 +32,7 @@ async function print_rec_page() {
   );
   today_list.push(era.get('flag:超得'));
   today_list = today_list.filter((e, i, l) => e && l.indexOf(e) === i);
-  era.clear();
+  await era.clear();
   print_page_header();
   era.drawLine();
   const vehicle = era.get('equip:0:单人载具');
@@ -181,7 +181,7 @@ async function print_rec_page() {
       flag_recruit = era.get(`cflag:${ret}:招募状态`) <= 0 && !flag_leave;
     }
     if (flag_recruit) {
-      era.clear();
+      await era.clear();
       print_page_header();
     }
   }

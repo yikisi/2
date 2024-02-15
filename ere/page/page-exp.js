@@ -148,7 +148,7 @@ async function print_chara_info(_id, chara_list, _page) {
     chara = get_chara_talk(chara_id),
     flags = get_flags(chara_id);
   while (flag_exp) {
-    era.clear();
+    await era.clear();
     era.setToBottom();
     let page = _page === undefined ? era.get('flag:情报翻页') : _page;
     if (chara.sex_code === 1 && handlers[page].virgin) {

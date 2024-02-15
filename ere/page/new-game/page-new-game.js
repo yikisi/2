@@ -30,7 +30,7 @@ module.exports = async () => {
   let player_gender = era.get('flag:角色性别') || 3;
 
   while (flag_new_game) {
-    era.clear();
+    await era.clear();
     era.setAlign('center');
     era.print(
       '十年寒窗终于金榜题名，\n邮箱里的那封信烫着金漆，\n闪着与你刚刚拿到的那块训练员徽章同样颜色的光芒。\n\n你用还在颤抖的手取下了上面的火漆————',

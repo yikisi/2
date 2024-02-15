@@ -4,6 +4,7 @@ const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -174,6 +175,7 @@ module.exports = async (chara_id, hook, extra_flag, event_object) => {
             ` 好好安慰着${chara.sex}，直到一切伤心的骤雨平静下来。`,
           ]);
           era.set(`cflag:${chara_id}:爱慕暂拒`, love);
+          await punish_rejecting_love(chara_id);
         }
         era.set('flag:当前互动角色', chara_id);
       }
@@ -235,6 +237,7 @@ module.exports = async (chara_id, hook, extra_flag, event_object) => {
             ' 也不由得心想：真的有必要考虑那么多吗……',
           ]);
           era.set(`cflag:${chara_id}:爱慕暂拒`, love);
+          await punish_rejecting_love(chara_id);
         }
         era.set('flag:当前互动角色', chara_id);
       } else if (love === 100) {

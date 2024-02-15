@@ -1,14 +1,9 @@
 const era = require('#/era-electron');
 
-const {
-  sys_change_lust,
-  sys_change_motivation,
-} = require('#/system/sys-calc-base-cflag');
-const {
-  sys_like_chara,
-  sys_love_uma_in_event,
-} = require('#/system/sys-calc-chara-others');
+const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
+const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
+const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event, cb_enum } = require('#/event/queue');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -324,9 +319,7 @@ async function love_74_week_start(gold_ship) {
     era.println();
 
     era.set('cflag:7:爱慕暂拒', 74);
-    sys_like_chara(7, 0, -100);
-    sys_change_lust(7, 5000);
-    await era.waitAnyKey();
+    await punish_rejecting_love(7);
   }
 }
 

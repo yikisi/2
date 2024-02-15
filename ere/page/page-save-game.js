@@ -9,7 +9,7 @@ module.exports = async () => {
   let msg_notification = '';
 
   while (flag_save_game) {
-    era.clear();
+    await era.clear();
     print_page_header();
 
     era.drawLine();

@@ -47,7 +47,7 @@ module.exports = async (_id) => {
     tab: 0,
   };
   while (page_pointer.flag) {
-    era.clear();
+    await era.clear();
     era.printInColRows({
       columns: [
         {

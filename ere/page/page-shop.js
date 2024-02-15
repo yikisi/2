@@ -230,7 +230,7 @@ module.exports = async (item_list) => {
         type: 'button',
       },
     );
-    era.clear();
+    await era.clear();
     era.printInColRows(
       [{ type: 'divider' }],
       {

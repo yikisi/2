@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-/** 用于育成事件标记的工具类 */
+/** 用于专属事件标记的工具类 */
 class PersonalEventMarks {
   chara_id;
   obj;
@@ -22,18 +22,18 @@ class PersonalEventMarks {
 
   /**
    * @param {number} chara_id
-   * @param {string} param
+   * @param {string} param_name
    */
-  constructor(chara_id, param) {
+  constructor(chara_id, param_name) {
     this.chara_id = chara_id;
     this.obj =
-      era.get(`cflag:${chara_id}:${param}`) ||
-      era.set(`cflag:${chara_id}:${param}`, {});
+      era.get(`cflag:${chara_id}:${param_name}`) ||
+      era.set(`cflag:${chara_id}:${param_name}`, {});
   }
 
   /** @param {string} param */
   add(param) {
-    return (this.obj[param] = (this.obj[param] || 0) + 1);
+    return (this.obj[param] = this.get(param) + 1);
   }
 
   /** @param {string} param */
@@ -47,13 +47,20 @@ class PersonalEventMarks {
    * @returns {*}
    */
   set(param, val) {
-    this.obj[param] = val;
+    if (!val) {
+      delete this.obj[param];
+    } else {
+      this.obj[param] = val;
+    }
     return val;
   }
 
   /** @param {string} param */
   sub(param) {
     this.obj[param]--;
+    if (!this.obj[param]) {
+      delete this.obj[param];
+    }
   }
 }
 

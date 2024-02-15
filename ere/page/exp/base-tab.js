@@ -347,7 +347,7 @@ module.exports = {
                 flag_hair = false;
             }
             sys_change_hair(chara.id);
-            era.clear();
+            await era.clear();
             era.setToBottom();
           }
         } else {

@@ -151,13 +151,16 @@ module.exports = {
     if (
       !era.get(`tcvar:${chara_id}:高潮满足`) ||
       era.get(`tcvar:${chara_id}:接近高潮`) ||
-      lust >= lust_border.itch ||
-      Math.random() <
-        (lust + era.get(`tcvar:${chara_id}:发情`) * 1000) / lust_border.itch
+      lust >= lust_border.itch
     ) {
       return 0;
+    } else if (
+      Math.random() <
+      (lust + era.get(`tcvar:${chara_id}:发情`) * 1000) / lust_border.itch
+    ) {
+      return 1;
     }
-    return 1;
+    return 2;
   },
   /**
    * 检查角色是否能进行阴道性行为<br>

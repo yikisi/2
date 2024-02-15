@@ -23,6 +23,7 @@ const { buff_colors, money_color } = require('#/data/color-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_name } = require('#/data/locations');
 
@@ -618,7 +619,7 @@ handlers[event_hooks.growth] = async (chara_id, _, extra_flag) => {
         ' 一起愉快地和孩子玩，三人度过了一段快乐的亲子时光。',
       ]);
       if (
-        era.get(`cflag:${chara_id}:意外之子`) ===
+        new LifeEventMarks(chara_id).unexpected_child ===
         unexpected_pregnant_enum.father_sleep
       ) {
         await era.printAndWait([
@@ -660,6 +661,7 @@ handlers[event_hooks.growth] = async (chara_id, _, extra_flag) => {
   } else if (extra_flag.stage === 1) {
     // 本格化
     await print_event_name('本格化', child);
+    new LifeEventMarks(chara_id).unexpected_child = 0;
     if (love >= 90) {
       await era.printAndWait([
         mother.get_colored_name(),

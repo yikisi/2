@@ -136,11 +136,11 @@ handlers[check_stages.want_make_love] = (chara_id) => {
     ratio = 0;
   }
   era.logger.debug(`角色 ${chara_id} 求爱：${(ratio * 100).toFixed(2)}%`);
-  const random_val = Math.random();
+  const dice = Math.random();
   if (ratio >= 1 || Math.random() < ratio) {
     return (
       1 + (era.get(`talent:${chara_id}:反抗意愿`) >= 0) &&
-      (random_val < 0.05 ||
+      (dice < 0.05 ||
         era.get('flag:惩戒力度') >= 2 ||
         era.get(`base:${chara_id}:性欲`) >= lust_border.want_sex ||
         era.get(`base:${chara_id}:压力`) >= pressure_border.apprehension ||

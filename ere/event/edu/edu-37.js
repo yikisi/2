@@ -415,7 +415,7 @@ handlers[event_hooks.week_start] = async () => {
       `鲁道夫象征：「虽然亲自来担任对手一职也并非不可。但比起我而言，荣进闪耀${chara_talk.sex}可能会需要另一个更加鲜艳的对手。」`,
     );
     await chara17_talk.say_and_wait('一道……自由的风。');
-    era.clear();
+    await era.clear();
     era.drawLine();
     await era.printAndWait(
       `在那之后，${your_name}根据鲁道夫象征的指示，来到了刚刚结束重赏级比赛的竞马场。`,
@@ -499,7 +499,7 @@ handlers[event_hooks.week_start] = async () => {
     await chara57_talk.say_and_wait(
       '已经可以预料到会是一场很尽兴的比赛了，我可不会放水的哦。',
     );
-    era.clear();
+    await era.clear();
     era.drawLine();
     // todo [转入闪耀与千明代表的一对一对决。赛道各项参数:等同于日本德比 千明代表:全属性1200 适性等同于游戏 技能:三冠之王（效果：对战时所有面板数据提升至3倍）]
     await era.printAndWait(
@@ -985,7 +985,7 @@ handlers[event_hooks.week_start] = async () => {
       `然后也就是在这时，代表联络的响铃突然自${chara_talk.sex}的手机中响起。`,
     );
     await chara_talk.say_and_wait('……母亲的来电？');
-    era.clear();
+    await era.clear();
     era.drawLine();
     await chara_talk.say_and_wait('………');
     await era.printAndWait('闪耀和父母的通话结束了。');
@@ -1408,7 +1408,7 @@ handlers[event_hooks.week_end] = async () => {
     await era.printAndWait(
       `而也令${your_name}不失所望的，荣进闪耀，完美地交出了自己的答卷。`,
     );
-    era.clear();
+    await era.clear();
     era.drawLine();
     await chara_talk.say_and_wait(
       '其实，在10年之前的小时候，我并没有养成现在这种凡事都寻求精确的习性。',
@@ -1680,7 +1680,7 @@ handlers[event_hooks.week_end] = async () => {
     );
     era.printButton('「让我再考虑一段时间吧。」', 1);
     await era.printAndWait(`最终，${your_name}如此说道。`);
-    era.clear();
+    await era.clear();
     era.drawLine();
     era.println();
     await chara_talk.say_and_wait('………');
@@ -1837,7 +1837,7 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
       `啊，看到学院的校门口。那么，由于接下来我还有事情需要去处理，所以先在此告别了，${callname}。`,
     );
     era.printButton('「路上小心。」', 1);
-    era.clear();
+    await era.clear();
     era.drawLine();
     await era.printAndWait('时间来到情人节当天。');
     await chara_talk.say_and_wait(`早上好，${callname}。`);
@@ -2297,7 +2297,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
     await era.printAndWait(
       '路人B：「是啊，再加上受病情影响，所以比较怀疑。现在的荣进闪耀，真的能够发挥出自己的全部实力吗？」',
     );
-    era.clear();
+    await era.clear();
     era.drawLine();
     if (
       check_aim_and_get_entry(
@@ -2503,7 +2503,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
     await era.printAndWait(
       '观众B：「但这对于经典级的那些孩子们来说，真的是件好事吗？」',
     );
-    era.clear();
+    await era.clear();
     era.drawLine();
     await chara_talk.say_and_wait('还真是……令人惊讶呢。');
     await era.printAndWait(
@@ -2789,7 +2789,7 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
       1,
     );
     await era.printAndWait(`深知劳逸结合道理的${your_name}开口提醒道。`);
-    era.clear();
+    await era.clear();
     era.drawLine();
     await chara_talk.say_and_wait('日本达比……荣进闪耀……评价……');
     await era.printAndWait(
@@ -3140,7 +3140,7 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
       '荣进闪耀深深鞠躬，漫天的喝彩化作实质的光芒自天空飘落。',
     );
     await era.printAndWait('这是对于一位荣誉而归的骑士，应有的奖赏。');
-    era.clear();
+    await era.clear();
     era.drawLine();
     await chara_talk.say_and_wait(`我回来了，${callname}。`);
     era.printButton('「欢迎回来，闪耀。」', 1);

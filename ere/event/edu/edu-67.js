@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 
 const race_end_67_common = require('#/event/edu/edu-events-67/race-end-common');
+const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -12,7 +13,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const DaiyaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-67');
 const event_hooks = require('#/data/event/event-hooks');
-const { attr_names, fumble_result } = require('#/data/train-const');
+const { attr_names, fumble_result, attr_enum } = require('#/data/train-const');
 
 const handlers = {};
 
@@ -128,47 +129,64 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
   extra_flag['args'] = extra_flag.fumble
     ? fumble_result.fumble
     : fumble_result.fail;
-  const daiya = get_chara_talk(67);
-  if (extra_flag.fumble) {
-    await print_event_name('严禁逞强！', daiya);
-    await era.printAndWait(
-      '里见光钻在训练中受伤了，所以我赶紧带她来到保健室。',
-    );
-    await daiya.say_and_wait('好痛……！');
-    await daiya.say_and_wait(
-      '只是稍微动一下而已就……看来伤势可能比我想像的还要严重……',
-    );
-    era.printButton('「休息一阵子吧」', 1);
-    await era.waitAnyKey();
-    await daiya.say_and_wait(
-      '可是……一直静养休息的话，感觉会离梦想越来越遥远的。',
-    );
-    await daiya.say_and_wait(
-      '现在最恰当的选择或许是休息没有错，但是我……我想要克服这个难关，让自己有更大的进步……！',
-    );
-    await daiya.say_and_wait(
-      '我一定会克服疼痛的问题给你看的……可不可以就让我继续做训练呢？',
-    );
-    era.printButton('「我不会让你勉强自己的」', 1);
-    era.printButton('「……知道了，我就相信你吧」', 2);
-    hook.arg = (await era.input()) === 1;
-    if (hook.arg) {
+  await print_fail_info_in_train(67, extra_flag.train, extra_flag.fumble);
+  const daiya = get_chara_talk(67),
+    me = get_chara_talk(0);
+  if (extra_flag.train !== attr_enum.intelligence) {
+    if (extra_flag.fumble) {
+      await print_event_name('严禁逞强！', daiya);
+      await era.printAndWait([
+        '里见光钻在训练中受伤了，所以 ',
+        me.get_colored_name(),
+        ` 赶紧带${daiya.sex}来到保健室。`,
+      ]);
+      await daiya.say_and_wait('好痛……！');
       await daiya.say_and_wait(
-        '可是，在我休养的时候，比赛中的其他对手们都会更加进步──',
+        '只是稍微动一下而已就……看来伤势可能比我想像的还要严重……',
       );
-      era.printButton('「你一定能追过她们的」', 1);
-      await era.waitAnyKey();
-      await daiya.say_and_wait('……我知道了。凡事都不能过于心急，对吧？');
+      era.printButton('「休息一阵子吧」', 1);
+      await era.input();
       await daiya.say_and_wait(
-        '虽然心情上会觉得很不甘心，但这份心情就等伤势复原后再用在训练上吧。',
+        '可是……一直静养休息的话，感觉会离梦想越来越遥远的。',
       );
-      await era.printAndWait('里见光钻在处理完伤势后，一脸遗憾地回宿舍了。');
-      era.println();
-    } else {
-      if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
-        await daiya.say_and_wait('（──这点程度的疼痛我还忍得住！）');
+      await daiya.say_and_wait(
+        '现在最恰当的选择或许是休息没有错，但是我……我想要克服这个难关，让自己有更大的进步……！',
+      );
+      await daiya.say_and_wait(
+        '我一定会克服疼痛的问题给你看的……可不可以就让我继续做训练呢？',
+      );
+      era.printButton('「我不会让你勉强自己的」', 1);
+      era.printButton('「……知道了，我就相信你吧」', 2);
+      hook.arg = (await era.input()) === 1;
+      if (hook.arg) {
         await daiya.say_and_wait(
-          '（再来就是小心不要造成太大的负担，一步一步……慢慢地去完成！）',
+          '可是，在我休养的时候，比赛中的其他对手们都会更加进步──',
+        );
+        era.printButton('「你一定能追过她们的」', 1);
+        await era.waitAnyKey();
+        await daiya.say_and_wait('……我知道了。凡事都不能过于心急，对吧？');
+        await daiya.say_and_wait(
+          '虽然心情上会觉得很不甘心，但这份心情就等伤势复原后再用在训练上吧。',
+        );
+        await era.printAndWait('里见光钻在处理完伤势后，一脸遗憾地回宿舍了。');
+        hook.arg = 0;
+      } else if (Math.random() < extra_flag['args'].ratio.fail_again) {
+        await daiya.say_and_wait('谢谢！那我们回到赛道上吧。');
+        await daiya.say_and_wait('──没事的，就这点小伤而已……！', true);
+        await daiya.say_and_wait('唔！？', true);
+        await daiya.say_and_wait('…………！');
+        era.printButton('「你没事吧！？」', 1);
+        await era.input();
+        await daiya.say_and_wait('──看来是我想得太天真了。真的很抱歉……');
+        await era.printAndWait(
+          `因为逞强的关系，反而让${daiya.sex}的伤势恶化，延长了复原所需要的时间。`,
+        );
+        hook.arg = -1;
+      } else {
+        await daiya.say_and_wait('──这点程度的疼痛我还忍得住！', true);
+        await daiya.say_and_wait(
+          '再来就是小心不要造成太大的负担，一步一步……慢慢地去完成！',
+          true,
         );
         await daiya.say_and_wait('……呀啊啊啊啊啊啊！');
         await daiya.say_and_wait(
@@ -177,74 +195,72 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
         await era.printAndWait(
           '里见光钻用强烈的克己之心，在注意不给伤势造成负担的状况下，顺利完成了训练。',
         );
-      } else {
-        await daiya.say_and_wait('谢谢！那我们回到赛道上吧。');
-        await daiya.say_and_wait('（──没事的，就这点小伤而已……！）');
-        await daiya.say_and_wait('（唔！？）');
-        await daiya.say_and_wait('…………！');
-        era.printButton('「你没事吧！？」', 1);
-        await era.waitAnyKey();
-        await daiya.say_and_wait('──看来是我想得太天真了。真的很抱歉……');
-        await era.printAndWait(
-          '因为逞强的关系，反而让她的伤势恶化，延长了复原所需要的时间。',
-        );
+        hook.arg = 1;
       }
-    }
-    era.println();
-  } else {
-    await print_event_name('保重身体！', daiya);
-
-    await era.printAndWait('我把受伤的里见光钻带来保健室。');
-    await daiya.say_and_wait('训练员，谢谢你这么照顾我。');
-    await daiya.say_and_wait('可是……我还是觉得这点伤势是可以继续训练的。');
-    await daiya.say_and_wait(
-      '伤势也已经做过紧急处理了，现在是不是可以做一点……训练了呢？',
-    );
-    era.printButton('「大意是很危险的哟」', 1);
-    era.printButton('「不然就谨慎一点训练看看好了」', 2);
-    hook.arg = (await era.input()) === 1;
-    if (hook.arg) {
-      await daiya.say_and_wait(
-        '可是我几乎都不觉得痛了呀。只要小心一点就不会有问题的……！',
-      );
-      era.printButton('「还是在伤势恶化之前打消念头吧」', 1);
-      await era.waitAnyKey();
-      await daiya.say_and_wait(
-        '……说得也是呢。轻伤也是有可能不小心变成重伤的。',
-      );
-      await daiya.say_and_wait('真抱歉……那我今天就先回去好好静养了。');
-      await era.printAndWait(
-        '里见光钻因为充满干劲，所以相对地也就对不能训练感到很失望，但她还是乖乖地回宿舍休息了。',
-      );
-      era.println();
     } else {
-      if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
-        await daiya.say_and_wait('……呼！这样就做完了！');
-        era.printButton('「受伤的地方没事吗？」', 1);
-        await era.waitAnyKey();
-        await daiya.say_and_wait('没事！你看！');
+      await print_event_name('保重身体！', daiya);
+
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 把受伤的里见光钻带来保健室。',
+      ]);
+      await daiya.say_and_wait('训练员，谢谢你这么照顾我。');
+      await daiya.say_and_wait('可是……我还是觉得这点伤势是可以继续训练的。');
+      await daiya.say_and_wait(
+        '伤势也已经做过紧急处理了，现在是不是可以做一点……训练了呢？',
+      );
+      era.printButton('「大意是很危险的哟」', 1);
+      era.printButton('「不然就谨慎一点训练看看好了」', 2);
+      hook.arg = (await era.input()) === 1;
+      if (hook.arg) {
         await daiya.say_and_wait(
-          '看来做一些轻微的运动还是没问题的呢！呵呵，真是太好了！',
+          '可是我几乎都不觉得痛了呀。只要小心一点就不会有问题的……！',
         );
+        era.printButton('「还是在伤势恶化之前打消念头吧」', 1);
+        await era.waitAnyKey();
+        await daiya.say_and_wait(
+          '……说得也是呢。轻伤也是有可能不小心变成重伤的。',
+        );
+        await daiya.say_and_wait('真抱歉……那我今天就先回去好好静养了。');
         await era.printAndWait(
-          '虽然我很不放心，但她看起来确实没有不适。可见伤势的确是非常轻微的。',
+          `里见光钻因为充满干劲，所以相对地也就对不能训练感到很失望，但${daiya.sex}还是乖乖地回宿舍休息了。`,
         );
-      } else {
+        hook.arg = 0;
+      } else if (Math.random() < extra_flag['args'].ratio.fail_again) {
         await daiya.say_and_wait('嗯！我想把今天的训练内容全都做完！');
-        await era.printAndWait('我选择尊重里见光钻的想法，让她继续训练，但──');
+        await era.printAndWait([
+          me.get_colored_name(),
+          ` 选择尊重里见光钻的想法，让${daiya.sex}继续训练，但──`,
+        ]);
         await daiya.say_and_wait('……呼……呼……');
         era.printButton('「……果然还是会痛的吧？」', 1);
-        await era.waitAnyKey();
+        await era.input();
         await daiya.say_and_wait('……唔！？');
         await daiya.say_and_wait(
           '……是的，其实还是会痛……很抱歉，是我想得太天真了……',
         );
-        await era.printAndWait(
-          '这次我决定立刻中止训练，让里见光钻好好地休养。',
+        await era.printAndWait([
+          '这次 ',
+          me.get_colored_name(),
+          ' 决定立刻中止训练，让里见光钻好好地休养。',
+        ]);
+        hook.arg = -1;
+      } else {
+        await daiya.say_and_wait('……呼！这样就做完了！');
+        era.printButton('「受伤的地方没事吗？」', 1);
+        await era.input();
+        await daiya.say_and_wait('没事！你看！');
+        await daiya.say_and_wait(
+          '看来做一些轻微的运动还是没问题的呢！呵呵，真是太好了！',
         );
+        await era.printAndWait([
+          '虽然 ',
+          me.get_colored_name(),
+          ` 很不放心，但${daiya.sex}看起来确实没有不适。可见伤势的确是非常轻微的。`,
+        ]);
+        hook.arg = 1;
       }
     }
-    era.println();
   }
 };
 

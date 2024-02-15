@@ -22,6 +22,7 @@ const {
   ero_action_names,
   ero_tagged_hooks,
 } = require('#/data/event/ero-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 const current = new Date().getTime();
 /** @type {Record<string,function>} */
@@ -96,7 +97,7 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
 ) => {
   const { father_id, mother_id } = extra_flag,
     love = era.get(`love:${mother_id || father_id}`),
-    unexpected_pregnant = era.get(`cflag:${mother_id}:意外怀孕`);
+    unexpected_pregnant = new LifeEventMarks(mother_id).unexpected_pregnant;
   era.println();
   let wait_flag;
   if (mother_id) {

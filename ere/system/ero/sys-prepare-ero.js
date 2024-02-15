@@ -741,7 +741,7 @@ async function end_ero_and_show_result(shown) {
       }
 
       while (result_flag) {
-        era.clear();
+        await era.clear();
         era.setToBottom();
         era.drawLine({ content: '马跳结果', position: 'left' });
         switch (page) {

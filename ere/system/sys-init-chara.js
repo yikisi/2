@@ -84,7 +84,6 @@ module.exports = {
       era.set(`base:${chara_id}:压力`, 0);
       era.set(`base:${chara_id}:体重偏差`, 0);
       era.set(`base:${chara_id}:药物残留`, 0);
-      era.set(`cflag:${chara_id}:孩子父亲`, -1);
 
       const auto_talent = chara_id ? era.get('flag:自带特性') : 0;
       switch (auto_talent) {

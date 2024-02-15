@@ -6,10 +6,12 @@ const { recruit_chara } = require('#/system/sys-init-chara');
 const rec_common = require('#/event/rec/rec-common');
 const check_before_rec = require('#/event/rec/snippets/check-before-rec');
 
+const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
+const notes = require('#/data/notes.json');
 
 /**
  * @param {number} chara_id
@@ -48,6 +50,30 @@ async function sys_call_rec_event(chara_id, stage, extra_flag, event_object) {
           get_chara_talk(chara_id).get_colored_name(),
           ' 加入了队伍！',
         ]);
+      }
+      if (notes[chara_id]) {
+        era.printMultiColumns([
+          {
+            content: '是否查看相关的小纸条？',
+            type: 'text',
+          },
+          {
+            accelerator: 0,
+            config: { width: 12, align: 'center' },
+            content: '查看',
+            type: 'button',
+          },
+          {
+            accelerator: 100,
+            config: { width: 12, align: 'center' },
+            content: '之后去首页确认',
+            type: 'button',
+          },
+        ]);
+        if (!(await era.input())) {
+          notes[chara_id].forEach((e) => say_by_passer_by(e.title, e.content));
+          await era.waitAnyKey();
+        }
       }
     }
     return ret;
