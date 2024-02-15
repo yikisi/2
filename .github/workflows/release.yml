@@ -22,6 +22,7 @@ jobs:
           mkdir ./$GAME_DIR
           cp -r ./ere ./$GAME_DIR
           cp -r ./csv ./$GAME_DIR
+          ls -la ./$GAME_DIR
       - name: Zip game main
         uses: thedoctor0/zip-release@0.7.5
         with:
@@ -31,9 +32,10 @@ jobs:
           custom: -pera
       - name: Make game res directory
         run: |
-          mv ./$GAME_DIR ./unused
+          rm -rf ./$GAME_DIR
           mkdir ./$GAME_DIR
           cp -r ./res ./$GAME_DIR
+          ls -la ./$GAME_DIR
       - name: Zip game
         uses: thedoctor0/zip-release@0.7.5
         with:
