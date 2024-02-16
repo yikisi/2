@@ -9,7 +9,7 @@ const load_game = require('#/page/page-load-game');
 module.exports = async () => {
   let flagTitle = true;
   const { title, gameCode } = era.get('gamebase');
-  era.setTitle(`${title} @ ${gameCode}`);
+  era.setTitle(`${title} v0.5 @ ${gameCode}`);
   sys_personal_achievement.init();
 
   while (flagTitle) {
