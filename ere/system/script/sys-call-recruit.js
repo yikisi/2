@@ -44,6 +44,9 @@ async function sys_call_rec_event(chara_id, stage, extra_flag, event_object) {
     // 招募成功时初始化好感并重置育成回合
     if (era.get(`cflag:${chara_id}:招募状态`) === recruit_flags.yes) {
       recruit_chara(chara_id);
+      if (era.get('flag:超得') === chara_id) {
+        era.set('flag:超得', 0);
+      }
       if (!aim_func || !aim_func.override) {
         await era.printAndWait([
           { isBr: true },
