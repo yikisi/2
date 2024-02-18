@@ -178,7 +178,7 @@ handlers[check_stages.next_week] = () => {
             );
           }
       }
-      check_and_register_aim_race(205, aim_races);
+      check_and_register_aim_race(205, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 9) {
       add_event(
         event_hooks.week_start,

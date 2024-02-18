@@ -25,6 +25,7 @@ const {
 } = require('#/data/info-generator');
 const { top_hairs, front_hairs, back_hairs } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');
+const CharaTitles = require('#/data/chara-titles');
 
 const body_hair_type = ['天生光滑', '普通类型', '生长快而硬'];
 const chara_full_desc = [
@@ -237,8 +238,6 @@ async function page_custom() {
   era.set('cflag:0:育成用变量', {});
   era.set('cflag:0:育成成绩', {});
 
-  era.set('cstr:0:称号', []);
-
   era.set('talent:0:童贞', 1);
   era.set('talent:0:处女', 1);
 
@@ -247,7 +246,7 @@ async function page_custom() {
     era.set('flag:彩蛋机制', 179);
     era.set('flag:声望不足替换', 1);
     era.set('flag:不忠惩罚', 0);
-    era.get('cstr:0:称号').push({ c: buff_colors[2], n: '萝莉控', s: true });
+    new CharaTitles(0).push({ c: buff_colors[2], n: '萝莉控', s: true });
   }
   CharaTalk.me = new CharaTalk(0);
   while (flag_custom) {

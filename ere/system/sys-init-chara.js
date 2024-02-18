@@ -9,6 +9,7 @@ const script_dict = require('#/event/script-dict.json');
 
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const { pleasure_list, part_names } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
@@ -126,16 +127,16 @@ module.exports = {
         get_talent_bust_size(get_breast_cup(chara_id, true)),
       );
 
-      era.set(`cstr:${chara_id}:称号`, []);
       era.set(`cstr:${chara_id}:决胜服`, -1);
       if (
         era.get(`abl:${chara_id}:粤语`) === 5 &&
         era.get(`abl:${chara_id}:英语`) === 5 &&
         era.get(`abl:${chara_id}:法语`) === 5
       ) {
-        era
-          .get(`cstr:${chara_id}:称号`)
-          .push({ n: 'Hello world!', c: buff_colors[1] });
+        new CharaTitles(chara_id).push({
+          n: 'Hello world!',
+          c: buff_colors[1],
+        });
       }
 
       try {

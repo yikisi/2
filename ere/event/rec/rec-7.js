@@ -16,7 +16,7 @@ module.exports = {
    * @returns {Promise<boolean>}
    */
   async run(stage_id) {
-    const chara_color = require('#/data/chara-colors')[7],
+    const chara_color = require('#/data/chara-colors').chara_colors[7],
       chara_name = era.get('callname:7:-2'),
       your_name = era.get('callname:0:-2');
     if (stage_id === event_hooks.recruit) {

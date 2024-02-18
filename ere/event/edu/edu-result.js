@@ -15,6 +15,8 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
+const CharaTitles = require('#/data/chara-titles');
+const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { fumble_result, attr_enum } = require('#/data/train-const');
 
@@ -177,6 +179,16 @@ function learn_language(chara_id, lan_name) {
       `status:${chara_id}:语言不通`,
       Math.max(debuff - 1, Number(level < 5)),
     );
+  if (
+    era.get(`abl:${chara_id}:粤语`) === 5 &&
+    era.get(`abl:${chara_id}:英语`) === 5 &&
+    era.get(`abl:${chara_id}:法语`) === 5
+  ) {
+    new CharaTitles(chara_id).push({
+      n: 'Hello world!',
+      c: buff_colors[1],
+    });
+  }
 }
 
 /**

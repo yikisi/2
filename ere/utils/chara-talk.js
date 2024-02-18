@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const chara_colors = require('#/data/chara-colors');
+const { get_chara_color } = require('#/data/chara-colors');
 
 class CharaTalk {
   /** @type {CharaTalk} */
@@ -70,10 +70,7 @@ class CharaTalk {
       this.name = era.get(`callname:${id}:-2`);
     }
     this.actual_name = era.get(`callname:${id}:-1`);
-    this.color = color || chara_colors[id];
-    if (this.color instanceof Array) {
-      this.color = this.color[0] || this.color;
-    }
+    this.color = color || get_chara_color(id);
     if (!this.color) {
       const id_color = this.id.toString(9).padStart(3, '0');
       this.color = `#${[id_color[0], id_color[1], id_color[2]]

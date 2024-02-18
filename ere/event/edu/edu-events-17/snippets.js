@@ -6,7 +6,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 
 const CharaTalk = require('#/utils/chara-talk');
 
-const color_17 = require('#/data/chara-colors')[17];
+const color_17 = require('#/data/chara-colors').chara_colors[17];
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 

@@ -54,6 +54,7 @@ const location_move_cost = {};
 location_move_cost[location_enum.playground] = 100;
 location_move_cost[location_enum.atrium] = 100;
 location_move_cost[location_enum.rooftop] = 100;
+location_move_cost[location_enum.chairman] = 100;
 location_move_cost[location_enum.gate] = 100;
 location_move_cost[location_enum.river] = 100;
 location_move_cost[location_enum.shopping] = 150;

@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_before_rec = require('#/event/rec/snippets/check-before-rec');
 
+const chara_color = require('#/data/chara-colors').chara_colors[30];
 const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
@@ -24,7 +25,6 @@ module.exports = {
    */
   async run(stage_id, extra_flag, event_object) {
     const callname = era.get('cflag:0:性别') === 1 ? '哥哥' : '姐姐',
-      chara_color = require('#/data/chara-colors')[30],
       chara_name = era.get('callname:30:-2'),
       chara_self_name = era.get('callname:30:30'),
       chara_sex = era.get('cflag:30:性别') === 1,

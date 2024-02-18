@@ -1,12 +1,12 @@
 const era = require('#/era-electron');
 
+const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_call_check = require('#/system/script/sys-call-check');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { remove_edu_events } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { distinct_list } = require('#/utils/list-utils');
 
 const {
   buff_colors,
@@ -81,8 +81,8 @@ function sys_handle_palace(chara_id) {
       type: 'text',
     });
   }
-  const titles = era.get(`cstr:${chara_id}:称号`),
-    title_count = titles.length;
+  /** @type {{c:string,n:string}[]} */
+  const titles = [];
   sys_call_check(chara_id, check_stages.title_check, {
     aim_check: !aim_punish_count,
     titles,
@@ -167,17 +167,7 @@ function sys_handle_palace(chara_id) {
     titles.push({ n: '纯净之魂', c: sex_colors[1] });
     pop_g1_count >= 2 && titles.push({ n: '完美偶像', c: sex_colors[0] });
   }
-  if (
-    era.set(
-      `cstr:${chara_id}:称号`,
-      distinct_list(titles, (e) => e.n),
-    ).length > title_count
-  ) {
-    buffer.push({
-      content: [chara.get_colored_name(), ' 获得了新称号！'],
-      type: 'text',
-    });
-  }
+  sys_add_titles(chara_id, ...titles);
   era.printMultiColumns(buffer);
   era.set(`cflag:${chara_id}:干劲`, 0);
   sys_like_chara(chara_id, 0, -(miss_count + aim_punish_count) * 100);

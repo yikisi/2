@@ -8,6 +8,7 @@ const load_game = require('#/page/page-load-game');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const notes = require('#/data/notes.json');
 
 module.exports = async () => {
@@ -83,14 +84,20 @@ module.exports = async () => {
       },
       {
         accelerator: 2,
-        config: { align: 'center', disabled: true },
-        content: '自建角色',
+        config: { align: 'center' },
+        content: '角色成就',
         type: 'button',
       },
       {
         accelerator: 3,
         config: { align: 'center' },
         content: '帮助说明',
+        type: 'button',
+      },
+      {
+        accelerator: 4,
+        config: { align: 'center', disabled: true },
+        content: '制作鸣谢',
         type: 'button',
       },
       { type: 'divider' },
@@ -125,8 +132,48 @@ module.exports = async () => {
         }
         break;
       case 2:
+        era.printMultiColumns([
+          { config: { content: '角色成就获取情况' }, type: 'divider' },
+          ...era
+            .get('chara')
+            .filter((e) => e)
+            .map((e) => {
+              const color = get_chara_color(e);
+              if (sys_personal_achievement.get(e)) {
+                return {
+                  config: {
+                    align: 'center',
+                    color,
+                    width: 6,
+                  },
+                  content: [
+                    era.get(`static:${e}:name`),
+                    '：',
+                    {
+                      content: era.get(`staticcstr:${e}:称号`),
+                      fontWeight: 'bold',
+                    },
+                  ],
+                  type: 'text',
+                };
+              } else {
+                return {
+                  config: { align: 'center', color, width: 6 },
+                  content: '？？？',
+                  type: 'text',
+                };
+              }
+            }),
+          {
+            content:
+              '* 同时完成角色育成目标与最高称号条件即可获得该角色的成就\n** 获得成就后，所有存档招募该角色时初始好感+300，欧洲马娘在一开始就可以招募',
+            type: 'text',
+          },
+        ]);
+        await era.waitAnyKey();
         break;
       case 3:
+        era.drawLine();
         for (const note of notes.common.sort((a, b) =>
           a.title > b.title ? 1 : -1,
         )) {
@@ -142,6 +189,8 @@ module.exports = async () => {
           }
           await era.waitAnyKey();
         }
+        break;
+      case 4:
     }
   }
 };

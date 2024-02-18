@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_change_tired = require('#/system/chara/sys-change-tired');
 const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
@@ -10,10 +11,7 @@ const {
   sys_change_lust,
   sys_change_pressure,
 } = require('#/system/sys-calc-base-cflag');
-const {
-  sys_like_chara,
-  sys_add_title,
-} = require('#/system/sys-calc-chara-others');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
@@ -321,10 +319,9 @@ async function race_page(race) {
     strategy_ability = generate_strategy_ability(cur_chara_id),
     strategy = strategy_dict[cur_chara_id];
   while (flag_prepare_race) {
-    await era.clear();
     era.setVerticalAlign('middle');
     era.printInColRows(
-      [{ type: 'divider' }, ...race_header, { type: 'divider' }],
+      [{ type: 'divider' }],
       {
         columns: [
           {
@@ -453,15 +450,19 @@ async function race_page(race) {
         `cflag:${cur_chara_id}:跑法`,
         ret - 1010,
       );
-    } else if (ret === 1000) {
-      flag_prepare_race = false;
-    } else {
+    } else if (ret < 1000) {
       cur_chara_id = ret;
       adaptability_info = generate_adaptability_info(ret, info);
       attribute_info = generate_attribute_info(ret);
       strategy_ability = generate_strategy_ability(ret);
       motivation = era.get(`cflag:${ret}:干劲`);
       strategy = strategy_dict[ret];
+    }
+    await era.clear();
+    if (ret === 1000) {
+      flag_prepare_race = false;
+    } else {
+      era.printMultiColumns([{ type: 'divider' }, ...race_header]);
     }
   }
   await era.clear();
@@ -835,7 +836,7 @@ async function race_page(race) {
     }
   }
   for (const e of contestants) {
-    sys_add_title(e, ...new_title_dict[e]) && (await era.waitAnyKey());
+    sys_add_titles(e, ...new_title_dict[e]) && (await era.waitAnyKey());
   }
   era.drawLine();
   await era.printAndWait('回去了……');

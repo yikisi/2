@@ -461,7 +461,7 @@ handlers[event_hooks.borrow_money] = async (chara_id) => {
       const ret = await era.input();
       if (ret) {
         sys_change_money(amount);
-        billing.creaditor = chara_id;
+        billing.creditor = chara_id;
         billing.repay = -repay;
         billing.timer = time;
         era.add('flag:收支', -repay);

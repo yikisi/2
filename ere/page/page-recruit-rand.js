@@ -1,5 +1,6 @@
 ﻿const era = require('#/era-electron');
 
+const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
 const call_recruit_event = require('#/system/script/sys-call-recruit');
 const { get_image } = require('#/system/sys-calc-image');
 const filter_chara = require('#/system/sys-filter-chara');
@@ -30,7 +31,7 @@ async function print_rec_page() {
     ),
     5,
   );
-  today_list.push(era.get('flag:超得'));
+  today_list.push(sys_get_star_premium_draw().chara);
   today_list = today_list.filter((e, i, l) => e && l.indexOf(e) === i);
   await era.clear();
   print_page_header();

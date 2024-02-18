@@ -1,11 +1,11 @@
 const era = require('#/era-electron');
 
+const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_call_check = require('#/system/script/sys-call-check');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 const sys_call_mec = require('#/system/script/sys-call-mec');
 const {
   sys_like_chara,
-  sys_add_title,
   sys_punish_unfaithful,
 } = require('#/system/sys-calc-chara-others');
 const { init_chara } = require('#/system/sys-init-chara');
@@ -282,11 +282,11 @@ async function sys_have_baby(mother_id) {
     mother_check = era.add(`exp:${mother_id}:生产次数`, 1);
   mother_life_marks.sperm = 0;
   if (father_check >= 8) {
-    sys_add_title(father_id, { c: buff_colors[2], n: '大种马' }) &&
+    sys_add_titles(father_id, { c: buff_colors[2], n: '大种马' }) &&
       (await era.waitAnyKey());
   }
   if (mother_check >= 8) {
-    sys_add_title(mother_id, { c: buff_colors[2], n: '英雄母亲' }) &&
+    sys_add_titles(mother_id, { c: buff_colors[2], n: '英雄母亲' }) &&
       (await era.waitAnyKey());
   }
 

@@ -5,6 +5,7 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
+const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const { add_event, cb_enum } = require('#/event/queue');
@@ -220,14 +221,18 @@ handlers[check_stages.personal_action] = () => ({});
 handlers[check_stages.personal_titles] = (chara_id) =>
   [era.get(`staticcstr:${chara_id}:称号`)].filter((e) => e);
 
+const aim_races = {};
+aim_races[race_enum.begin_race] = 2;
+
 handlers[check_stages.next_week] = (chara_id) => {
-  if (
-    chara_id &&
-    era.get(`cflag:${chara_id}:种族`) &&
-    era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) ===
-      143 + 9
-  ) {
-    add_event(event_hooks.week_start, new EventObject(chara_id, cb_enum.edu));
+  if (chara_id && era.get(`cflag:${chara_id}:种族`)) {
+    const edu_weeks =
+      era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`);
+    if (edu_weeks < 3 * 48) {
+      check_and_register_aim_race(chara_id, aim_races, edu_weeks);
+    } else if (edu_weeks === 143 + 9) {
+      add_event(event_hooks.week_start, new EventObject(chara_id, cb_enum.edu));
+    }
   }
 };
 

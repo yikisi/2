@@ -1,11 +1,11 @@
 const era = require('#/era-electron');
 
+const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
-const { sys_add_title } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -42,10 +42,10 @@ async function game_over() {
   } else if (
     game_over >= 2 &&
     era.get('flag:当前马币') < 0 &&
-    (temp = sys_get_billings()[0]).creaditor
+    (temp = sys_get_billings()[0]).creditor
   ) {
     era.drawLine();
-    await sys_call_daily_event(temp.creaditor, event_hooks.slave_end);
+    await sys_call_daily_event(temp.creditor, event_hooks.slave_end);
     saying_arr = [
       '九尺二间陋室里，红唇依竹共恩情。——高杉晋作',
       '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗杰斯',
@@ -264,7 +264,7 @@ async function game_over() {
               `${CharaTalk.me.name} 的身体已经被调整到敏感度绝佳的状态，请继续精进自己的性能力，取悦主人们，以获取声望吧！`,
             );
             await era.printAndWait('声望再次低于零，会遭受更严厉的惩罚！');
-            sys_add_title(0, { c: buff_colors[2], n: '万人骑' });
+            sys_add_titles(0, { c: buff_colors[2], n: '万人骑' });
             break;
           case 3:
             era.set('equip:0:淫纹奴役', slavery_enum.pregnant);
@@ -347,7 +347,7 @@ async function game_over() {
             await era.printAndWait(
               `假如足够幸运的话，也许 ${CharaTalk.me.name} 还能凭子而贵！`,
             );
-            sys_add_title(0, { c: buff_colors[2], n: '孕179' });
+            sys_add_titles(0, { c: buff_colors[2], n: '孕179' });
         }
         sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
           (e) => {
@@ -437,6 +437,7 @@ async function game_over() {
     }
     return true;
   }
+  era.set('flag:极端粉丝', []);
   return false;
 }
 

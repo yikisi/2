@@ -18,7 +18,7 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const color_17 = require('#/data/chara-colors')[17];
+const color_17 = require('#/data/chara-colors').chara_colors[17];
 
 const handlers = {};
 

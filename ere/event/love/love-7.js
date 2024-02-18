@@ -13,12 +13,11 @@ const quick_into_sex = require('#/event/snippets/quick-into-sex');
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const { buff_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
-
-const chara_colors = require('#/data/chara-colors')[7];
 
 /** @param {CharaTalk} gold_ship */
 async function love_49(gold_ship) {

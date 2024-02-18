@@ -1,5 +1,6 @@
 ﻿const era = require('#/era-electron');
 
+const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
 const get_aim_function = require('#/system/script/get-aim-function');
 const { recruit_chara } = require('#/system/sys-init-chara');
 
@@ -44,8 +45,10 @@ async function sys_call_rec_event(chara_id, stage, extra_flag, event_object) {
     // 招募成功时初始化好感并重置育成回合
     if (era.get(`cflag:${chara_id}:招募状态`) === recruit_flags.yes) {
       recruit_chara(chara_id);
-      if (era.get('flag:超得') === chara_id) {
-        era.set('flag:超得', 0);
+      let temp;
+      if ((temp = sys_get_star_premium_draw()).chara === chara_id) {
+        temp.chara = 0;
+        temp.time++;
       }
       if (!aim_func || !aim_func.override) {
         await era.printAndWait([

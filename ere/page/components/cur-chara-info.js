@@ -1,10 +1,13 @@
 const era = require('#/era-electron');
 
+const { get_image } = require('#/system/sys-calc-image');
+
 const race_indicator = require('#/page/components/race-indicator');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
+const CharaTitles = require('#/data/chara-titles');
 const { motivation_colors } = require('#/data/color-const');
 const {
   attr_background_colors,
@@ -18,9 +21,7 @@ const {
   get_status,
   get_train_time,
 } = require('#/data/info-generator');
-const title_desc = require('#/data/desc/title-desc.json');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
-const { get_image } = require('#/system/sys-calc-image');
 
 function cur_chara_component(chara_id, type) {
   if (!chara_id) {
@@ -33,7 +34,7 @@ function cur_chara_component(chara_id, type) {
     const relation = get_relation_info(chara_id),
       love = get_love_info(chara_id),
       growth = era.get(`cflag:${chara_id}:成长阶段`),
-      title = era.get(`cstr:${chara_id}:称号`).filter((e) => e.s)[0],
+      title = new CharaTitles(chara_id).get_colored_curr_title(true),
       in_train =
         growth >= 2 &&
         era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) <
@@ -43,16 +44,7 @@ function cur_chara_component(chara_id, type) {
     /** @type {*[]} */
     const name_columns = ['当前角色：'];
     if (title) {
-      name_columns.push(
-        {
-          color: title.c,
-          content: `[${title.n}]`,
-          title: title_desc[title.n]
-            ? `[${title.n}]：${title_desc[title.n]}`
-            : undefined,
-        },
-        { content: ' ' },
-      );
+      name_columns.push(title, { content: ' ' });
     }
     name_columns.push(get_chara_talk(chara_id).get_colored_name());
     if (out_of_train) {

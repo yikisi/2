@@ -240,7 +240,7 @@ module.exports = {
       ),
     );
   },
-  /** @returns {{creaditor:number,repay:number,timer:number}[]} */
+  /** @returns {{creditor:number,repay:number,timer:number}[]} */
   sys_get_billings() {
     return (
       era.get('flag:账单') ||

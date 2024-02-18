@@ -119,4 +119,10 @@ const chara_colors = {
   99: '#76e3de',
 };
 
-module.exports = chara_colors;
+module.exports = {
+  chara_colors,
+  get_chara_color(chara_id) {
+    const ret = chara_colors[chara_id];
+    return ret instanceof Array ? ret[0] : ret;
+  },
+};

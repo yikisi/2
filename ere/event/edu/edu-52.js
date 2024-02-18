@@ -8,7 +8,7 @@ const { add_event } = require('#/event/queue');
 const event_queue = require('#/event/queue');
 
 const chara_talk = new CharaTalk(52);
-const chara_colors = require('#/data/chara-colors')[52];
+const chara_colors = require('#/data/chara-colors').chara_colors[52];
 
 /**
  * @type {Record<string,function(hook:HookArg,extra_flag:*,event_object:EventObject):Promise<*>>}

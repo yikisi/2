@@ -8,6 +8,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum, location_name } = require('#/data/locations');
@@ -165,17 +166,17 @@ handlers[event_hooks.week_start] = async (chara_id) => {
     await era.printAndWait(seg);
   }
   era.println();
-  const title = era.get(`cstr:${chara_id}:称号`).filter((e) => e.s)[0];
+  const title = new CharaTitles(chara_id).get_colored_curr_title();
   if (check >= 6) {
     await era.printAndWait([
       `随着以${chara.sex}为蓝本的铜像揭幕，`,
-      title ? { color: title.c, content: `[${title.n}] ` } : '',
+      ...(title ? [title, ' '] : []),
       chara.get_colored_name(),
       ` 的传奇故事将会永远留在殿堂之中……`,
     ]);
   } else {
     await era.printAndWait([
-      title ? { color: title.c, content: `[${title.n}] ` } : '',
+      ...(title ? [title, ' '] : []),
       chara.get_colored_name(),
       ` 的传奇故事将会永远被世人所传颂……`,
     ]);
