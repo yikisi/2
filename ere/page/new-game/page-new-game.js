@@ -11,6 +11,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { player_sex_title } = require('#/data/ero/status-const');
 const { location_enum } = require('#/data/locations');
+const { first_child_id } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');
 
 /**
@@ -139,8 +140,7 @@ module.exports = async () => {
 
           // 游戏设置
 
-          era.set('flag:当前互动角色', 0);
-          era.set('flag:新生儿ID', era.set('flag:新生儿初始ID', 600));
+          era.set('flag:新生儿ID', first_child_id);
 
           require('#/event/queue').init();
 

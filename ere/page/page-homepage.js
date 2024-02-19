@@ -26,6 +26,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const notes = require('#/data/notes.json');
@@ -76,9 +77,15 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   }
   stop_machine_gun(event_hooks.week_end);
   if ((temp = era.get('flag:床伴'))) {
+    const life_marks = new LifeEventMarks(temp);
     begin_and_init_ero(0, temp);
+    if (life_marks.marital_rape) {
+      era.set('tflag:强奸', temp);
+      era.set('tflag:主导权', temp);
+    }
     await print_ero_page(temp);
     await end_ero_and_show_result(true);
+    life_marks.marital_rape = 0;
   }
   if (continue_flag) {
     await next_week();
@@ -138,6 +145,7 @@ module.exports = async () => {
       stop_machine_gun(event_hooks.week_start);
       const force_be = era.get('flag:强制BE');
       if (force_be) {
+        await era.clear();
         era.drawLine();
         await sys_call_edu_event(force_be, event_hooks.crazy_fan_end);
         era.print('GAME OVER', {

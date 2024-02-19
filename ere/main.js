@@ -9,12 +9,12 @@ const load_game = require('#/page/page-load-game');
 const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const { el_warning_color } = require('#/data/color-const');
 const notes = require('#/data/notes.json');
+const { first_child_id } = require('#/data/other-const');
 
 module.exports = async () => {
   let flagTitle = true;
-  const { title, gameCode } = era.get('gamebase');
-  era.setTitle(`${title} v0.5 @ ${gameCode}`);
   sys_personal_achievement.init();
 
   era.print('免责声明', {
@@ -31,7 +31,7 @@ module.exports = async () => {
       { isBr: true },
       '3. 本游戏在设计理念和游戏内容上缝合了大量era与其他各类作品，仅适合era系列玩家或文字黄油爱好者进行游玩，不适合普通玩家游玩，特别是严格禁止未成年人游玩。',
       { isBr: true },
-      '4. 本游戏所使用的素材资源包括开发者自制、互联网收集与协力者提供，开发者与协力者来自于不同的国家和民族，彼此之间也不存在经济关系。',
+      '4. 本游戏所使用的素材资源包括开发者自制、互联网收集与协力者提供，开发者与协力者来自于不同的世界、种族、国家和民族，彼此之间也不存在经济关系。',
       { isBr: true },
       '5. 本游戏目前没有官方的公开发布地址，且因为游戏本身的性质，禁止在任何未成年人可以接触到的公开场合展示或传播本游戏，更禁止任何人在任何商业活动（贩卖/附送等）和公开活动（直播等）中使用本游戏。',
       { isBr: true },
@@ -54,6 +54,7 @@ module.exports = async () => {
   if ((await era.input()) === 2) {
     process.exit(0);
   }
+  let buffer;
 
   while (flagTitle) {
     await era.clear();
@@ -96,7 +97,7 @@ module.exports = async () => {
       },
       {
         accelerator: 4,
-        config: { align: 'center', disabled: true },
+        config: { align: 'center' },
         content: '制作鸣谢',
         type: 'button',
       },
@@ -113,6 +114,11 @@ module.exports = async () => {
           {
             content: 'EraElectron引擎发布页',
             url: 'https://gitgud.io/SLeader/era-electron/-/releases/permalink/latest',
+          },
+          { isBr: true },
+          {
+            content: 'ERA特雷森学园（Discord社区）',
+            url: 'https://discord.gg/CCsqKXJJjd',
           },
         ],
         type: 'text',
@@ -136,33 +142,26 @@ module.exports = async () => {
           { config: { content: '角色成就获取情况' }, type: 'divider' },
           ...era
             .get('chara')
-            .filter((e) => e)
+            .filter((e) => e && e < first_child_id)
             .map((e) => {
-              const color = get_chara_color(e);
-              if (sys_personal_achievement.get(e)) {
-                return {
-                  config: {
-                    align: 'center',
-                    color,
-                    width: 6,
-                  },
-                  content: [
-                    era.get(`static:${e}:name`),
-                    '：',
-                    {
-                      content: era.get(`staticcstr:${e}:称号`),
-                      fontWeight: 'bold',
-                    },
-                  ],
-                  type: 'text',
-                };
-              } else {
-                return {
-                  config: { align: 'center', color, width: 6 },
-                  content: '？？？',
-                  type: 'text',
-                };
-              }
+              return {
+                config: {
+                  align: 'center',
+                  color: get_chara_color(e),
+                  width: 6,
+                },
+                content: sys_personal_achievement.get(e)
+                  ? [
+                      era.get(`static:${e}:name`),
+                      '：',
+                      {
+                        content: era.get(`staticcstr:${e}:称号`),
+                        fontWeight: 'bold',
+                      },
+                    ]
+                  : '？？？',
+                type: 'text',
+              };
             }),
           {
             content:
@@ -191,6 +190,250 @@ module.exports = async () => {
         }
         break;
       case 4:
+        era.drawLine();
+        await era.printAndWait('鸣谢', {
+          align: 'center',
+          color: el_warning_color,
+          fontSize: '24px',
+          fontWeight: 'bold',
+          isParagraph: true,
+        });
+        await era.printAndWait('主催', {
+          align: 'center',
+          color: el_warning_color,
+          fontSize: '20px',
+          isParagraph: true,
+        });
+        await era.printAndWait('雞雞', {
+          align: 'center',
+        });
+        era.printMultiColumns([
+          {
+            config: {
+              align: 'center',
+              color: el_warning_color,
+              fontSize: '20px',
+              isParagraph: true,
+              offset: 3,
+              width: 9,
+            },
+            content: '架构',
+            type: 'text',
+          },
+          {
+            config: {
+              align: 'center',
+              color: el_warning_color,
+              fontSize: '20px',
+              isParagraph: true,
+              width: 9,
+            },
+            content: '引擎',
+            type: 'text',
+          },
+        ]);
+        await era.waitAnyKey();
+        era.printMultiColumns([
+          {
+            config: { align: 'center', offset: 3, width: 9 },
+            content: '无名路人',
+            type: 'text',
+          },
+          {
+            config: { align: 'center', width: 9 },
+            content: '黑奴队长',
+            type: 'text',
+          },
+        ]);
+        await era.waitAnyKey();
+        await era.printAndWait('开发', {
+          align: 'center',
+          color: el_warning_color,
+          fontSize: '20px',
+          isParagraph: true,
+        });
+        await era.printAndWait(
+          [
+            '无名路人',
+            { isDivider: true },
+            '色色',
+            { isDivider: true },
+            '黑奴队长',
+          ],
+          { align: 'center' },
+        );
+        await era.printAndWait('美术', {
+          align: 'center',
+          color: el_warning_color,
+          fontSize: '20px',
+          isParagraph: true,
+        });
+        await era.printAndWait(
+          [
+            'kxmodel',
+            { isDivider: true },
+            '植物牙线',
+            { isDivider: true },
+            'フィンランド',
+            { isDivider: true },
+            '提交bug',
+          ],
+          {
+            align: 'center',
+          },
+        );
+        await era.printAndWait('口上', {
+          align: 'center',
+          color: el_warning_color,
+          fontSize: '20px',
+          isParagraph: true,
+        });
+
+        buffer = [];
+        for (const a of [
+          [
+            '招募、日常、爱慕、育成地文',
+            ['雞雞', { isDivider: true }, '黑奴队长'],
+          ],
+          [
+            '调教地文',
+            [
+              'O口口口口口',
+              { isDivider: true },
+              '天马闪光蹄',
+              { isBr: true },
+              '黑衣剑士-星爆气流斩准备就绪',
+              { isDivider: true },
+              '雞雞',
+              { isDivider: true },
+              '鬼鼠',
+            ],
+          ],
+          ['特别周', 'wwm'],
+          ['东海帝王', '天马闪光蹄'],
+          ['丸善斯基、醒目飞鹰', '黑奴一号'],
+          ['黄金船', '雞雞'],
+          ['鲁铎象征', '露娜俘虏'],
+          ['爱丽数码', '片手虾好评发售中！'],
+          ['摩耶重炮', '黑奴二号'],
+          ['曼城茶座', 'Necroz'],
+          ['米浴、第一红宝石、金星公园', '梦露'],
+          ['爱丽速子', '鬼鼠'],
+          ['荣进闪耀', '爱放箭的袁本初'],
+          ['春乌拉拉', '99'],
+          ['优秀素质', '红红火火恍惚'],
+          [
+            '里见光钻',
+            [
+              '某知名手游公司编剧',
+              { isDivider: true },
+              '黑奴二号',
+              { isDivider: true },
+              '黑奴队长',
+            ],
+          ],
+          [
+            '北部玄驹',
+            [
+              '小黑',
+              { isDivider: true },
+              '黑奴一号',
+              { isDivider: true },
+              '黑奴队长',
+            ],
+          ],
+          ['奇锐骏', '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
+          ['周日宁静', '黑衣剑士-星爆气流斩准备就绪'],
+        ]) {
+          buffer.push([
+            { color: el_warning_color, content: a[0], fontSize: '18px' },
+            { isBr: true },
+            ...(a[1] instanceof Array ? a[1] : [a[1]]),
+          ]);
+          if (buffer.length === 2) {
+            era.printMultiColumns([
+              {
+                config: {
+                  align: 'center',
+                  offset: 3,
+                  width: 9,
+                },
+                content: buffer[0],
+                type: 'text',
+              },
+              {
+                config: { align: 'center', width: 9 },
+                content: buffer[1],
+                type: 'text',
+              },
+              { content: '\n', type: 'text' },
+            ]);
+            await era.waitAnyKey();
+            buffer = [];
+          }
+        }
+        buffer.length &&
+          (await era.printAndWait(buffer[0], {
+            align: 'center',
+          }));
+        await era.printAndWait('口上翻译', {
+          align: 'center',
+          color: el_warning_color,
+          fontSize: '20px',
+          isParagraph: true,
+        });
+        await era.printAndWait(
+          [
+            '黑奴队长',
+            { isDivider: true },
+            '黑奴一号',
+            { isDivider: true },
+            '黑奴二号',
+          ],
+          {
+            align: 'center',
+          },
+        );
+        await era.printAndWait('测试反馈', {
+          align: 'center',
+          color: el_warning_color,
+          fontSize: '20px',
+          isParagraph: true,
+        });
+        await era.printAndWait(
+          [
+            'Advocator',
+            { isDivider: true },
+            '清音林檎',
+            { isDivider: true },
+            '提交bug',
+            { isDivider: true },
+            '科比·布莱恩特',
+          ],
+          {
+            align: 'center',
+          },
+        );
+        await era.printAndWait('社区管理', {
+          align: 'center',
+          color: el_warning_color,
+          fontSize: '20px',
+          isParagraph: true,
+        });
+        await era.printAndWait(['Advocator', { isDivider: true }, '雞雞'], {
+          align: 'center',
+        });
+        await era.printAndWait('特别鸣谢（笑）', {
+          align: 'center',
+          color: el_warning_color,
+          fontSize: '24px',
+          fontWeight: 'bold',
+          isParagraph: true,
+        });
+        await era.printAndWait('午马牧师妹·普瑞提达比', {
+          align: 'center',
+          fontSize: '20px',
+        });
     }
   }
 };

@@ -377,6 +377,9 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
             {
               accelerator: 305,
               config: {
+                buttonType: event_marks.get(event_hooks.back_school)
+                  ? 'danger'
+                  : 'warning',
                 disabled:
                   !sys_check_awake(0) ||
                   sys_check_act_disabled(

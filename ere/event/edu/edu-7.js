@@ -270,8 +270,8 @@ handlers[event_hooks.school_atrium] = async (
       );
 
       era.set(
-        'cflag:49:性欲',
-        Math.max(era.get('cflag:49:性欲'), lust_border.want_sex),
+        'base:49:性欲',
+        Math.max(era.get('base:49:性欲'), lust_border.absent_mind),
       );
       begin_and_init_ero(0, 7, 49);
       await print_ero_page(7);
@@ -586,8 +586,8 @@ handlers[event_hooks.school_rooftop] = async (
       '我说，光是想像就已经让我下面都濡湿了……快来跟我决胜负吧♡♡♡',
     );
     era.set(
-      'cflag:49:性欲',
-      Math.max(era.get('cflag:49:性欲'), lust_border.want_sex),
+      'base:49:性欲',
+      Math.max(era.get('base:49:性欲'), lust_border.absent_mind),
     );
     begin_and_init_ero(0, 7, 49);
     await print_ero_page(49);

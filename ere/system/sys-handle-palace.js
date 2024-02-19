@@ -167,8 +167,8 @@ function sys_handle_palace(chara_id) {
     titles.push({ n: '纯净之魂', c: sex_colors[1] });
     pop_g1_count >= 2 && titles.push({ n: '完美偶像', c: sex_colors[0] });
   }
-  sys_add_titles(chara_id, ...titles);
   era.printMultiColumns(buffer);
+  sys_add_titles(chara_id, ...titles);
   era.set(`cflag:${chara_id}:干劲`, 0);
   sys_like_chara(chara_id, 0, -(miss_count + aim_punish_count) * 100);
   era.println();

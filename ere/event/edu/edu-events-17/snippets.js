@@ -31,9 +31,16 @@ function transform(event_marks) {
   flip_params('status:17:心术', 'status:9017:心术');
   flip_params('status:17:神经衰弱', 'status:9017:神经衰弱');
   flip_params('love:17', 'love:9017');
-  flip_params('relation:17:0', 'relation:9017:0');
   flip_params('callname:17:-1', 'callname:9017:-1');
   flip_params('callname:17:-2', 'callname:9017:-2');
+  /** @type {Record<string,number>} */
+  const relation_entries = era.get('relation:17');
+  Object.keys(relation_entries).forEach((chara_id) => {
+    flip_params(`callname:17:${chara_id}`, `callname:9017:${chara_id}`);
+    flip_params(`relation:17:${chara_id}`, `relation:9017:${chara_id}`);
+    flip_params(`callname:${chara_id}:17`, `callname:${chara_id}:9017`);
+    flip_params(`relation:${chara_id}:17`, `relation:${chara_id}:9017`);
+  });
 
   new Array(8)
     .fill(0)

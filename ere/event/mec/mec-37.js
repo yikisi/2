@@ -4,7 +4,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
 
-/***/
 const handlers = {};
 
 handlers[check_stages.mec_callname_customize] = () => {

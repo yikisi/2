@@ -10,15 +10,14 @@ const {
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_money } = require('#/system/sys-calc-flag');
 
-const quick_into_sex = require('#/event/snippets/quick-into-sex');
-
 const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { attr_enum } = require('#/data/train-const');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /**
  * @param {number} chara_id
@@ -170,8 +169,8 @@ handlers[event_hooks.office_game] = async (chara_id) => {
 handlers[event_hooks.good_night] = async (chara_id, hook) => {
   if (hook.arg !== undefined) {
     if (hook.arg) {
-      await quick_into_sex(chara_id, hook.arg === 2);
       era.set('flag:床伴', chara_id);
+      hook.arg === 2 && (new LifeEventMarks(chara_id).marital_rape = 1);
     } else {
       sys_change_lust(chara_id, lust_from_palam);
       era.println();

@@ -112,7 +112,7 @@ handlers[check_stages.rape_in_sleeping] = (chara_id) => {
 
 handlers[check_stages.want_make_love] = (chara_id) => {
   if (!check_pregnant_unprotect(chara_id) || !check_pregnant_unprotect(0)) {
-    return false;
+    return 0;
   }
   const love = era.get(`love:${chara_id}`);
   let ratio = 0;

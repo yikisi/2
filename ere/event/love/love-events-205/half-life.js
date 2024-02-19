@@ -148,13 +148,13 @@ module.exports = async (vp, me) => {
           accelerator: 0,
           content: '是',
           config: { width: 12, align: 'center' },
-          type: 'text',
+          type: 'button',
         },
         {
           accelerator: 100,
           content: '生中出！',
           config: { width: 12, align: 'center' },
-          type: 'text',
+          type: 'button',
         },
       ]);
       if ((await era.input()) === 0) {

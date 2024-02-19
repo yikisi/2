@@ -2,6 +2,8 @@ const era = require('#/era-electron');
 
 const script_dict = require('#/event/script-dict.json');
 
+const { first_child_id } = require('#/data/other-const');
+
 /**
  * @param {string} script_category
  * @param {number} chara_id
@@ -9,9 +11,7 @@ const script_dict = require('#/event/script-dict.json');
  */
 function get_aim_function(script_category, chara_id, extra_flag) {
   const script_name =
-    chara_id >= era.get('flag:新生儿初始ID')
-      ? era.get(`callname:${chara_id}:-2`)
-      : chara_id;
+    chara_id >= first_child_id ? era.get(`callname:${chara_id}:-2`) : chara_id;
   if (typeof script_name === 'string') {
     (extra_flag || (extra_flag = {})).chara_id = chara_id;
   }

@@ -48,7 +48,7 @@ async function sys_call_rec_event(chara_id, stage, extra_flag, event_object) {
       let temp;
       if ((temp = sys_get_star_premium_draw()).chara === chara_id) {
         temp.chara = 0;
-        temp.time++;
+        temp.cost += 40;
       }
       if (!aim_func || !aim_func.override) {
         await era.printAndWait([

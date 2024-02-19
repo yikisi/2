@@ -36,7 +36,7 @@ async function out_page() {
 
   await era.clear();
   print_page_header();
-  print_chara_info(chara_id, chara_info_type.out);
+  print_chara_info(chara_id, chara_info_type.out, 301);
   era.drawLine();
   if (!(await sys_get_random_event(event_hooks.out_start)(chara_id))) {
     const event_marks = new EventMarks(chara_id);

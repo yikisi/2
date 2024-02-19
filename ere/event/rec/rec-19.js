@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { add_event, cb_enum } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -7,7 +8,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const EventMarks = require('#/data/event/event-marks');
-const { add_event, cb_enum } = require('#/event/queue');
 const EventObject = require('#/data/event/event-object');
 
 /**

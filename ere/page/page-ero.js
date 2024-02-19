@@ -135,6 +135,10 @@ function get_image(chara_id) {
     m_hit =
       era.get(`talent:${chara_id}:喜欢痛苦`) ||
       era.get(`talent:${chara_id}:变态`);
+  img_list.push({
+    borderRadius: 20,
+    names: `位置_${location_name[era.get('flag:当前位置')]}`,
+  });
   if (chara_has_ero_image[chara_id]) {
     const img_name = era.get(`cstr:${chara_id}:头像`);
     img_list.push(`${img_name}_裸`);
@@ -470,10 +474,10 @@ async function page_ero(lover) {
         .map((_, i) => era.get(`flag:${950 + i}`)),
       left_columns = [],
       lost_mind = era.get('tcvar:0:失神'),
-      love_level = get_love_info(curr_lover)[0],
+      love = get_love_info(curr_lover),
       marks = get_ero_marks(curr_lover),
       rape = era.get('tflag:强奸'),
-      relation_level = get_relation_info(curr_lover)[0];
+      relation = get_relation_info(curr_lover);
     left_columns.push(
       {
         config: { width: 8 },
@@ -524,13 +528,18 @@ async function page_ero(lover) {
       {
         config: { align: 'right', width: 12 },
         content: [
-          '❤️',
+          '🤝 ',
           {
-            color: relation_colors[relation_level],
-            content: relation_level,
+            color: relation_colors[relation[0]],
+            content: relation[0],
+            title: `好感：${relation.join(' ')}`,
           },
-          ' 💗 ',
-          { color: love_colors[love_level], content: love_level },
+          ' · ❤️ ',
+          {
+            color: love_colors[love[0]],
+            content: love[0],
+            title: `爱慕：${love.join(' ')}`,
+          },
           ' ',
           ...marks,
         ],
@@ -622,12 +631,12 @@ async function page_ero(lover) {
         columns: curr_supporter
           ? [
               {
-                config: { width: 18 },
+                config: { offset: 1, width: 18 },
                 names: get_image(curr_lover),
                 type: 'image.whole',
               },
               {
-                config: { width: 6 },
+                config: { width: 5 },
                 names: `${get_chr(
                   era.get(`cstr:${curr_supporter}:头像`),
                 )}\tdefault`,
@@ -637,7 +646,8 @@ async function page_ero(lover) {
           : [
               {
                 config: {
-                  width: !master && characters_in_train.length > 2 ? 24 : 19,
+                  offset: 1,
+                  width: !master && characters_in_train.length > 2 ? 23 : 19,
                 },
                 names: get_image(curr_lover),
                 type: 'image.whole',

@@ -649,7 +649,7 @@ handlers.lust = async (vp, me) => {
     vp.get_colored_name(),
     ' 本能地翻起白眼，等 ',
     me.get_colored_name(),
-    ' 肉棒拔出，几滴精液还落到了地摊上。',
+    ' 肉棒拔出，几滴精液还落到了地毯上。',
   ]);
   await era.printAndWait([vp.get_colored_name(), ' 捂着嘴，快速爬起来。']);
   await era.printAndWait('几点精液已经从嘴角溢出，玷污了她白色的丝质手套。');

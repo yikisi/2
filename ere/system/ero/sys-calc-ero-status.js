@@ -154,7 +154,8 @@ module.exports = {
       lust >= lust_border.itch
     ) {
       return 0;
-    } else if (
+    }
+    if (
       Math.random() <
       (lust + era.get(`tcvar:${chara_id}:发情`) * 1000) / lust_border.itch
     ) {

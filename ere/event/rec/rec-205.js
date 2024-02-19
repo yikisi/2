@@ -137,9 +137,7 @@ module.exports = {
       await era.printAndWait('拿着的电话。');
       era.printButton('「你好。」', 1);
       await era.input();
-      await chairman.say_and_wait(
-        '哦，这种时候真是太抱歉了，我有点事想拜托你。',
-      );
+      await chairman.say_and_wait('歉 意！有点事想拜托你。');
       await era.printAndWait(
         `${sys_get_callname(
           0,
@@ -152,12 +150,12 @@ module.exports = {
       era.printButton('「怎么了？」', 1);
       await era.input();
       await chairman.say_and_wait(
-        `实际上，那边的${vp.get_uma_sex_title()}里有个孩子虽然出道赛表现很好，但谁都没搭上话。实力很强，在比赛中好像也是第一名，所以为什么没被物色发掘，真是不可思议。`,
+        `告 知！实际上，那边的${vp.get_uma_sex_title()}里有个孩子虽然出道赛表现很好，但谁都没搭上话。实力很强，在比赛中好像也是第一名，所以为什么没被物色发掘，真是不可思议。`,
       );
       era.printButton('「因为被理事长内定了吧。」', 1);
       await era.input();
       await chairman.say_and_wait(
-        `别开这种玩笑！这个……总之你有实力，我想能不能在你那里收留${vp.sex}。`,
+        `冗 谈！这个……总之你有实力，我想能不能在你那里收留${vp.sex}。`,
       );
       await era.printAndWait('这个装嫩的家伙耳朵洞是通了好让空气变通畅吗。');
       await era.printAndWait(
@@ -178,7 +176,7 @@ module.exports = {
       era.printButton('「得看实力。」', 1);
       await era.input();
       await chairman.say_and_wait(
-        `那就不用提了。特别是脑袋聪明，很擅长比赛的展开。因为${vp.sex}冷静的表现不像新人，教官都很快没有能教${vp.sex}的东西了。`,
+        `赞 许！特别是脑袋聪明，很擅长比赛的展开。因为${vp.sex}冷静的表现不像新人，教官都很快没有能教${vp.sex}的东西了。`,
       );
       await era.printAndWait(
         `${
@@ -187,13 +185,13 @@ module.exports = {
       );
       era.printButton('「性格有问题。」', 1);
       await era.input();
-      await chairman.say_and_wait('没有！也很有自信。');
+      await chairman.say_and_wait('没 有！也很有自信。');
       era.printButton('「脚部不安。」', 1);
       await era.input();
-      await chairman.say_and_wait('一切都没有问题');
+      await chairman.say_and_wait('健 康！一切都没有问题');
       era.printButton('「那为什么没有被物色发掘呢？」', 1);
       await era.input();
-      await chairman.say_and_wait('我也想知道啊！');
+      await chairman.say_and_wait('无 奈！我也想知道啊！');
       await era.printAndWait('从电话那头传来叹息声，看来真的很有自信。');
       await era.printAndWait(
         `被这么一说，${me.name} 很在意是什么样的${vp.get_uma_sex_title()}。`,
@@ -206,7 +204,7 @@ module.exports = {
       era.printButton('「什么样的家伙？」', 1);
       await era.input();
       await chairman.say_and_wait(
-        `嗯，是栗毛的${vp.get_uma_sex_title()}。只是发色比较明亮，玫瑰金之类的感觉。`,
+        `回 忆！嗯，是栗毛的${vp.get_uma_sex_title()}。只是发色比较明亮，玫瑰金之类的感觉。`,
       );
       await era.printAndWait(
         `${
@@ -216,12 +214,12 @@ module.exports = {
       await era.printAndWait('栗色，是明亮的发色。');
       era.printButton('「……其他的呢？」', 1);
       await era.input();
-      await chairman.say_and_wait('发型很有特点哦！后面有两个小小的结。');
+      await chairman.say_and_wait('特 点！头发后面有两个小小的结。');
       await era.printAndWait(`${vp.sex}的两结头发被风吹得摇动。`);
       era.printButton('「……还有呢。」', 1);
       await era.input();
       await chairman.say_and_wait(
-        '啊，我忘了说耳饰了。左边是白色的帽子和红色的丝带，这个比较有特色，所以很容易辨认吧。',
+        '补 充！耳饰的话，左边是白色的帽子和红色的丝带，这个比较有特色，所以很容易辨认吧。',
       );
       await era.printAndWait(
         '白色的帽子和红色的丝带也在摇曳，能清楚地看到画着深蓝色的线。',
@@ -233,11 +231,11 @@ module.exports = {
       );
       await era.printAndWait(`海蓝宝石的眼睛纹丝不动地朝向 ${me.name} 这边。`);
       await chairman.say_and_wait(
-        `怎么样？那边的学校很大吧，现在进行出道赛的${vp.get_uma_sex_title()}也多，可能很难找到。`,
+        `如 何？那边的学校很大吧，现在进行出道赛的${vp.get_uma_sex_title()}也多，可能很难找到。`,
       );
       era.printButton('「……不，我觉得很快就能找到。」', 1);
       await era.input();
-      await chairman.say_and_wait('是吗？能找到就好，再见。');
+      await chairman.say_and_wait('好 极！能找到就好，再见。');
       await era.printAndWait(`然后 ${me.name} 和无机质的蜂鸣音一起挂断电话。`);
       await era.printAndWait(
         `慢慢地收好手机后，双手交叉，隔着石阶的人行道重新面对，面对面地坐在对面的${vp.sex}。`,
@@ -476,6 +474,7 @@ module.exports = {
         `${me.name} 一直用眼睛追着那个小小的身影，直到${vp.sex}转过弯道。`,
       );
       add_event(event_hooks.week_start, new EventObject(205, cb_enum.recruit));
+      era.set('cflag:205:随机招募', 0);
       era.set('flag:物色对象', 205);
       return true;
     } else if (stage === event_hooks.week_start) {

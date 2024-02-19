@@ -40,17 +40,17 @@ class CharaTitles {
   }
 
   /**
-   * @param {boolean} [has_title]
+   * @param {boolean} [has_desc]
    * @returns {{color:string,[title]:string,content:string}|string}
    */
-  get_colored_curr_title(has_title) {
+  get_colored_curr_title(has_desc) {
     const curr = this.get_curr_title();
     return curr
       ? {
           color: curr.c,
           content: `[${curr.n}]`,
           title:
-            has_title && title_desc[curr.n]
+            has_desc && title_desc[curr.n]
               ? `[${curr.n}]：${title_desc[curr.n]}`
               : '',
         }

@@ -303,7 +303,7 @@ handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
     sys_like_chara(
       chara_id,
       0,
-      extra_flag.relation_change === undefined
+      extra_flag.relation_change === 0
         ? 0
         : extra_flag.relation_change || get_random_value(0, 25),
       true,

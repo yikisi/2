@@ -772,6 +772,13 @@ async function race_page(race) {
         })
         .reduce((p, c) => p + c),
     );
+  if (fame_reward > 0) {
+    sys_like_chara(302, 0, fame_reward / 5) && (await era.waitAnyKey());
+  }
+  if (best_rank <= 5) {
+    sys_like_chara(301, 0, (6 - best_rank) * (5 - info.race_class)) &&
+      (await era.waitAnyKey());
+  }
   if (total_prize) {
     await era.printAndWait([
       '收到了比赛赏金分成 ',

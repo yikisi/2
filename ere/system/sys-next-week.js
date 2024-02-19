@@ -273,6 +273,9 @@ async function sys_next_week() {
       } else {
         await sys_rape_in_sleeping(act.chara_id, act.supporter);
       }
+      if (era.get('flag:床伴')) {
+        break;
+      }
     }
   }
   in_team_list.forEach(
@@ -507,7 +510,7 @@ async function sys_next_week() {
     era.set(`status:${chara_id}:马跳S`, 0);
     era.set(`status:${chara_id}:沉睡`, 0);
     era.set(`status:${chara_id}:短效避孕药`, 0);
-    era.set(`status:${chara_id}:避孕套溶解剂`, 0);
+    era.set(`status:${chara_id}:反避孕套`, 0);
     if (era.get(`status:${chara_id}:长效避孕药`)) {
       era.add(`status:${chara_id}:长效避孕药`, -1);
     }
@@ -685,7 +688,6 @@ async function sys_next_week() {
         30 === timer && era.add(`cflag:${chara_id}:腰围`, 15);
       } else {
         sys_change_pressure(chara_id, get_random_value(200, 400));
-        // H事件：出生
         // 37周以后概率生，最晚42周
         // 现实是40周，这里为了游戏性折叠了
         pregnant_stage = era.set(
@@ -932,7 +934,6 @@ async function sys_next_week() {
   }
 
   in_team_list.shift();
-  // 惩罚结算
   if (race_punish) {
     const buffer = [];
     out_race_list.forEach((e, i) => {

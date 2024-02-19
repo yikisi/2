@@ -350,7 +350,7 @@ function init_ero(...ids) {
   init_juels(...ids);
   reset_parts(...ids);
   init_items(...ids);
-  const is_sex = era.getCharactersInTrain().indexOf(0) !== -1;
+  const is_sex = era.getCharactersInTrain().length > 1;
   const is_raping_in_sleep = is_sex && !sys_check_awake(0);
   ids.forEach((chara_id) => {
     is_sex && era.add(`exp:${chara_id}:性爱次数`, 1);

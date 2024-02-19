@@ -6,16 +6,15 @@ const { get_image } = require('#/system/sys-calc-image');
 const filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const check_team_limit = require('#/page/components/check-team-limit');
 const print_page_header = require('#/page/components/page-header');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry } = require('#/utils/list-utils');
 
 const { el_danger_color } = require('#/data/color-const');
-const { trainer_team_limit } = require('#/data/const.json');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_trainer_title } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { vehicle_verbs, vehicle_names } = require('#/data/move-const');
 
@@ -42,16 +41,7 @@ async function print_rec_page() {
     '抵达了训练场……',
   ]);
   flag_leave = await sys_get_random_event(event_hooks.recruit_start)();
-  const cur_round = era.get('flag:当前回合数');
-  const flag_limit =
-    team_list.reduce((a, e) => {
-      return (
-        a +
-        (e &&
-          era.get(`cflag:${e}:成长阶段`) >= 2 &&
-          cur_round - era.get(`cflag:${e}:育成回合计时`) < 3 * 48)
-      );
-    }, 0) >= trainer_team_limit[get_trainer_title().substring(0, 2)];
+  const flag_limit = check_team_limit();
   flag_recruit = !flag_leave;
 
   while (flag_recruit) {
