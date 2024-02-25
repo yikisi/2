@@ -67,6 +67,7 @@ const {
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum, breast_size } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
 
 /**
@@ -563,11 +564,9 @@ async function sys_calc_orgasm(shown, ...ids) {
                     1 << pregnant_stage_enum.embryo,
                   );
                   era.set(`cflag:${other_id}:妊娠回合计时`, 0);
-                  era.set(`cflag:${other_id}:孩子父亲`, chara_id);
-                  era.set(
-                    `cflag:${other_id}:意外怀孕`,
-                    sys_check_awake(chara_id) - sys_check_awake(other_id),
-                  );
+                  new LifeEventMarks(other_id).sperm = chara_id;
+                  new LifeEventMarks(other_id).unexpected_pregnant =
+                    sys_check_awake(chara_id) - sys_check_awake(other_id);
                   era.set(`status:${other_id}:排卵期`, 0);
                   await call_ero_script(
                     other_id || chara_id,

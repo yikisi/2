@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { sort_list } = require('#/utils/list-utils');
 
+const CharaTitles = require('#/data/chara-titles');
 const {
   adaptability_colors,
   attr_change_colors,
@@ -12,7 +13,6 @@ const { race_infos, race_enum } = require('#/data/race/race-const');
 const { adaptability_names } = require('#/data/train-const');
 const sys_call_check = require('#/system/script/sys-call-check');
 const check_stages = require('#/data/event/check-stages');
-
 const title_desc = require('#/data/desc/title-desc.json');
 
 const page_name = '出走成绩';
@@ -101,7 +101,7 @@ module.exports = {
         config: { content: '专属称号', position: 'left' },
         type: 'divider',
       });
-      const titles = era.get(`cstr:${chara.id}:称号`),
+      const titles = new CharaTitles(chara.id).get(),
         personal_titles = sys_call_check(
           chara.id,
           check_stages.personal_titles,

@@ -6,31 +6,32 @@ const select_action_in_shopping_street = require('#/event/daily/snippets/select-
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 
 const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
 
-const chara_colors = require('#/data/chara-colors')[7];
-const chara_talk = new CharaTalk(7);
+const chara_colors = require('#/data/chara-colors').chara_colors[7];
 
-/** @type {Record<string,function(stage_id:HookArg,extra_flag:*):Promise<boolean>>} */
+/** @type {Record<string,function(HookArg,*):Promise<*>>} */
 const handlers = {};
 
-handlers[event_hooks.select] = function () {
-  chara_talk.say(
+handlers[event_hooks.select] = () => {
+  get_chara_talk(7).say(
     Math.random() < 0.5 ? '噢！你找本金船大人有事吗？' : '跟本金船大人走吧！',
   );
 };
 
-handlers[event_hooks.good_morning] = function () {
+handlers[event_hooks.good_morning] = () => {
+  const gold_ship = get_chara_talk(7);
   if (era.get('base:7:体力') < 0.45 * era.get('maxbase:7:体力')) {
-    chara_talk.say(
+    gold_ship.say(
       Math.random() < 0.5
         ? '好累啊……累得就像蝉生已经到达第二周的蝉子一样……'
         : '我不行啦～求你啦……今天就放个假吧。',
     );
   } else {
-    chara_talk.say(
+    gold_ship.say(
       get_random_entry([
         [
           {
@@ -67,10 +68,11 @@ handlers[event_hooks.good_morning] = function () {
   }
 };
 
-handlers[event_hooks.talk] = async function () {
+handlers[event_hooks.talk] = () => {
+  const gold_ship = get_chara_talk(7);
   let talk_arr;
   if (era.get('base:7:体力') < 0.45 * era.get('maxbase:7:体力')) {
-    await chara_talk.say_and_wait(
+    return gold_ship.say_and_wait(
       Math.random() < 0.5
         ? '好累啊……累得就像蝉生已经到达第二周的蝉子一样……'
         : '我不行啦～求你啦……今天就放个假吧。',
@@ -124,12 +126,12 @@ handlers[event_hooks.talk] = async function () {
           { content: '呜哇……好困……你完事了就叫我起来吧……' },
         ];
     }
-    await chara_talk.say_and_wait([get_random_entry(talk_arr)]);
+    return gold_ship.say_and_wait([get_random_entry(talk_arr)]);
   }
 };
 
-handlers[event_hooks.office_gift] = async function () {
-  await chara_talk.say_and_wait(
+handlers[event_hooks.office_gift] = async () =>
+  get_chara_talk(7).say_and_wait(
     get_random_entry([
       '官人你也真是坏心眼哦～嗬嗬嗬～',
       [
@@ -143,10 +145,9 @@ handlers[event_hooks.office_gift] = async function () {
       ],
     ]),
   );
-};
 
-handlers[event_hooks.office_cook] = async function () {
-  await chara_talk.say_and_wait(
+handlers[event_hooks.office_cook] = () =>
+  get_chara_talk(7).say_and_wait(
     get_random_entry([
       [
         { content: '嗯？阿训要请我吃饭吗？' },
@@ -164,19 +165,17 @@ handlers[event_hooks.office_cook] = async function () {
       ],
     ]),
   );
-};
 
-handlers[event_hooks.office_study] = async function () {
-  await chara_talk.say_and_wait(
+handlers[event_hooks.office_study] = () =>
+  get_chara_talk(7).say_and_wait(
     get_random_entry([
       '你知道吗？有一种打工的内容就是往面团上打洞然后做成甜甜圈。那玩意可厉害了……在虚无感这方面……',
       '你知道吗？三文鱼虽然看起来是红色的，但其实是白身鱼哦……在生物学的定义上。',
     ]),
   );
-};
 
-handlers[event_hooks.office_rest] = async function () {
-  await chara_talk.say_and_wait(
+handlers[event_hooks.office_rest] = () =>
+  get_chara_talk(7).say_and_wait(
     get_random_entry([
       '阿船我已经心累了——抱我——',
       [
@@ -190,10 +189,9 @@ handlers[event_hooks.office_rest] = async function () {
       ],
     ]),
   );
-};
 
-handlers[event_hooks.office_prepare] = async function () {
-  await chara_talk.say_and_wait(
+handlers[event_hooks.office_prepare] = () =>
+  get_chara_talk(7).say_and_wait(
     get_random_entry([
       [
         {
@@ -209,10 +207,9 @@ handlers[event_hooks.office_prepare] = async function () {
       ],
     ]),
   );
-};
 
-handlers[event_hooks.office_game] = async function () {
-  await chara_talk.say_and_wait(
+handlers[event_hooks.office_game] = () =>
+  get_chara_talk(7).say_and_wait(
     get_random_entry([
       [
         '阿训～今天要玩什么？《赛马娘大亨》？《URA2K》？还是说……',
@@ -224,14 +221,14 @@ handlers[event_hooks.office_game] = async function () {
       ],
     ]),
   );
-};
 
-handlers[event_hooks.school_atrium] = async function () {
-  const temp = await select_action_in_atrium();
+handlers[event_hooks.school_atrium] = async () => {
+  const gold_ship = get_chara_talk(7),
+    temp = await select_action_in_atrium();
   let talk_arr;
   switch (temp) {
     case 0:
-      await era.printAndWait(`与 ${chara_talk.name} 一同去了枯树洞……`);
+      await era.printAndWait(`与 ${gold_ship.name} 一同去了枯树洞……`);
       talk_arr = [
         `${
           era.get('cflag:7:性别') === 1 ? '马郎' : '马娘'
@@ -246,7 +243,7 @@ handlers[event_hooks.school_atrium] = async function () {
       ];
       break;
     case 100:
-      await era.printAndWait(`与 ${chara_talk.name} 一同去约会了……`);
+      await era.printAndWait(`与 ${gold_ship.name} 一同去约会了……`);
       talk_arr = [
         '你说回忆吗？……真怀念我们一起在海底度过的七天假期啊～',
         [
@@ -260,12 +257,13 @@ handlers[event_hooks.school_atrium] = async function () {
         ],
       ];
   }
-  await chara_talk.say_and_wait(get_random_entry(talk_arr));
+  await gold_ship.say_and_wait(get_random_entry(talk_arr));
 };
 
-handlers[event_hooks.school_rooftop] = async function () {
-  await era.printAndWait(`与 ${chara_talk.name} 一起吃了便当……`);
-  await chara_talk.say_and_wait(
+handlers[event_hooks.school_rooftop] = async () => {
+  const gold_ship = get_chara_talk(7);
+  await era.printAndWait(`与 ${gold_ship.name} 一起吃了便当……`);
+  await gold_ship.say_and_wait(
     get_random_entry([
       '这个土豆泥好吃吧？是用粉末泡出来的哦。',
       [
@@ -281,11 +279,12 @@ handlers[event_hooks.school_rooftop] = async function () {
   );
 };
 
-handlers[event_hooks.out_river] = async function (stage_id) {
+handlers[event_hooks.out_river] = async (hook) => {
+  const gold_ship = get_chara_talk(7);
   let talk_arr;
-  stage_id.arg = !!(await select_action_around_river());
-  if (stage_id.arg) {
-    await era.printAndWait(`与 ${chara_talk.name} 一同去散步了……`);
+  hook.arg = !!(await select_action_around_river());
+  if (hook.arg) {
+    await era.printAndWait(`与 ${gold_ship.name} 一同去散步了……`);
     talk_arr = [
       {
         color: chara_colors[1],
@@ -299,7 +298,7 @@ handlers[event_hooks.out_river] = async function (stage_id) {
       },
     ];
   } else {
-    await era.printAndWait(`与 ${chara_talk.name} 一同去钓鱼了……`);
+    await era.printAndWait(`与 ${gold_ship.name} 一同去钓鱼了……`);
     talk_arr = [
       {
         color: chara_colors[1],
@@ -313,23 +312,24 @@ handlers[event_hooks.out_river] = async function (stage_id) {
       },
     ];
   }
-  await chara_talk.say_and_wait([get_random_entry(talk_arr)]);
+  await gold_ship.say_and_wait([get_random_entry(talk_arr)]);
 };
 
-handlers[event_hooks.out_shopping] = async function (stage_id) {
-  const temp = await select_action_in_shopping_street();
+handlers[event_hooks.out_shopping] = async (hook) => {
+  const gold_ship = get_chara_talk(7),
+    temp = await select_action_in_shopping_street();
   let talk_arr;
-  stage_id.arg = temp <= 1;
+  hook.arg = temp <= 1;
   switch (temp) {
     case 0:
-      await era.printAndWait(`与 ${chara_talk.name} 一同去了街机厅……`);
+      await era.printAndWait(`与 ${gold_ship.name} 一同去了街机厅……`);
       talk_arr = [
         '噢啦！看我一爪子把这些家伙全部抓……掉光了？！',
         '阿训！我没子弹了，快掩护我！呜哦！',
       ];
       break;
     case 1:
-      await era.printAndWait(`与 ${chara_talk.name} 一同去抽奖了……`);
+      await era.printAndWait(`与 ${gold_ship.name} 一同去抽奖了……`);
       talk_arr = [
         [
           {
@@ -341,7 +341,7 @@ handlers[event_hooks.out_shopping] = async function (stage_id) {
       ];
       break;
     case 2:
-      await era.printAndWait(`与 ${chara_talk.name} 一同去了卡啦OK……`);
+      await era.printAndWait(`与 ${gold_ship.name} 一同去了卡啦OK……`);
       talk_arr = [
         [
           {
@@ -356,7 +356,7 @@ handlers[event_hooks.out_shopping] = async function (stage_id) {
       ];
       break;
     case 3:
-      await era.printAndWait(`与 ${chara_talk.name} 一同去看电影了……`);
+      await era.printAndWait(`与 ${gold_ship.name} 一同去看电影了……`);
       talk_arr = [
         '哦！这不是重炮爸爸演出的电影吗？阿训要一起看吗？',
         [
@@ -370,44 +370,44 @@ handlers[event_hooks.out_shopping] = async function (stage_id) {
         ],
       ];
   }
-  await chara_talk.say_and_wait(get_random_entry(talk_arr));
+  await gold_ship.say_and_wait(get_random_entry(talk_arr));
 };
 
-handlers[event_hooks.out_church] = async function (stage_id) {
-  const sex = era.get('cflag:7:性别') === 1 ? '他' : '她';
-  await chara_talk.say_and_wait([
+handlers[event_hooks.out_church] = async (hook) => {
+  const gold_ship = get_chara_talk(7);
+  await gold_ship.say_and_wait([
     { color: chara_colors[1], content: '哈——唏唷唏唷！' },
   ]);
   await era.printAndWait(
-    `只见 ${chara_talk.name} 在人家神社的大门口开始如从劲风下的草根一样摇摆，嘴中念念有词。`,
+    `只见 ${gold_ship.name} 在人家神社的大门口开始如从劲风下的草根一样摇摆，嘴中念念有词。`,
   );
-  await chara_talk.say_and_wait([
+  await gold_ship.say_and_wait([
     { color: chara_colors[1], content: '放马娘过来！放马娘过来！' },
   ]);
   era.printButton('「你在干嘛呢？」', 1);
   await era.input();
-  await chara_talk.say_and_wait([
+  await gold_ship.say_and_wait([
     { color: chara_colors[1], content: '看了还不懂吗？我在跳大神啦。' },
   ]);
   await era.printAndWait(
-    `${sex}一脸得意洋洋的表情让你觉得有点烦躁，但${sex}并没有在意`,
+    `${gold_ship.sex}一脸得意洋洋的表情让你觉得有点烦躁，但${gold_ship.sex}并没有在意`,
   );
-  await chara_talk.say_and_wait([
+  await gold_ship.say_and_wait([
     {
       color: chara_colors[1],
       content: '古往今来，在神的面前舞蹈以取悦神明是常识吧！',
     },
   ]);
-  await chara_talk.say_and_wait([
+  await gold_ship.say_and_wait([
     {
       color: chara_colors[1],
       content: '我这个神的宠儿黄金船来蹦个迪，那请神上身也湿湿碎嘞！',
     },
   ]);
-  await era.printAndWait(`此时，${chara_talk.name} 浑身僵住，双目圆瞪！`);
-  stage_id.arg = Math.random() < 0.5;
-  if (stage_id.arg) {
-    await chara_talk.say_and_wait([
+  await era.printAndWait(`此时，${gold_ship.name} 浑身僵住，双目圆瞪！`);
+  hook.arg = Math.random() < 0.5;
+  if (hook.arg) {
+    await gold_ship.say_and_wait([
       {
         color: chara_colors[1],
         content:
@@ -417,28 +417,33 @@ handlers[event_hooks.out_church] = async function (stage_id) {
     await era.printAndWait(
       `右脸抽搐着的 ${CharaTalk.me.name} 很想吐槽为什么神社会有耶稣，也很想吐槽耶稣的指示活像是临终关怀。`,
     );
-    await era.printAndWait(`但${sex}看起来挺开心的，随${sex}去吧。`);
+    await era.printAndWait(
+      `但${gold_ship.sex}看起来挺开心的，随${gold_ship.sex}去吧。`,
+    );
   } else {
-    await chara_talk.say_and_wait([
+    await gold_ship.say_and_wait([
       {
         color: chara_colors[1],
         content: '佛祖哦！祢为何离弃我？！竟要我『好好听训练员的话』……',
       },
     ]);
     await era.printAndWait(
-      `看到 ${chara_talk.name} 失落的姿态，你左脸上的神经也不住抽搐。`,
+      `看到 ${gold_ship.name} 失落的姿态，你左脸上的神经也不住抽搐。`,
     );
-    await era.printAndWait(`但只要${sex}能乖乖听话，那也没什么不好的。`);
+    await era.printAndWait(
+      `但只要${gold_ship.sex}能乖乖听话，那也没什么不好的。`,
+    );
     await era.printAndWait('……不行，还是有点烦躁。');
   }
 };
 
-handlers[event_hooks.out_station] = async function (hook) {
+handlers[event_hooks.out_station] = async (hook) => {
+  const gold_ship = get_chara_talk(7);
   hook.arg = await select_action_in_station(7);
   let talk_arr;
   switch (hook.arg) {
     case 0:
-      await era.printAndWait(`与 ${chara_talk.name} 一同去吃饭了……`);
+      await era.printAndWait(`与 ${gold_ship.name} 一同去吃饭了……`);
       talk_arr = [
         [
           {
@@ -461,7 +466,7 @@ handlers[event_hooks.out_station] = async function (hook) {
       ];
       break;
     case 1:
-      await era.printAndWait(`与 ${chara_talk.name} 一同去约会了……`);
+      await era.printAndWait(`与 ${gold_ship.name} 一同去约会了……`);
       talk_arr = [
         '我说，你一百年后有空吗？有空的话咱们一起上太空。',
         [
@@ -474,7 +479,7 @@ handlers[event_hooks.out_station] = async function (hook) {
       ];
       break;
     case 2:
-      await era.printAndWait(`与 ${chara_talk.name} 一同去逛商场了……`);
+      await era.printAndWait(`与 ${gold_ship.name} 一同去逛商场了……`);
       talk_arr = [
         [
           {
@@ -488,12 +493,13 @@ handlers[event_hooks.out_station] = async function (hook) {
         '阿训，哪怕是我也不会做出在麦当劳点原味鸡这种行为吧？',
       ];
   }
-  await chara_talk.say_and_wait(get_random_entry(talk_arr));
+  await gold_ship.say_and_wait(get_random_entry(talk_arr));
 };
 
-handlers[event_hooks.load_talk] = async () => {
+handlers[event_hooks.load_talk] = () => {
+  const gold_ship = get_chara_talk(7);
   if (Math.random() < 0.5) {
-    await chara_talk.say_and_wait([
+    return gold_ship.say_and_wait([
       { content: '你要使用『那个』吗？记得不要滥用哦，' },
       {
         content: '毕竟玩弄时空的人最后都会遭到时空连续性的报应呢。',
@@ -501,7 +507,7 @@ handlers[event_hooks.load_talk] = async () => {
       },
     ]);
   } else {
-    await chara_talk.say_and_wait([
+    return gold_ship.say_and_wait([
       { content: '我知道『那个』确实很方便啦，但有时候' },
       {
         content: '顺其自然会更好玩吧，不是吗？',

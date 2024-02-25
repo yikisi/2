@@ -19,6 +19,7 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 const goto_sex = require('#/page/components/goto-sex');
 const select_target = require('#/page/components/select-target');
 const { generate_race_button } = require('#/page/homepage/snippets');
+const page_chairman_office = require('#/page/page-chairman-office');
 const print_exp_page = require('#/page/page-exp');
 const print_inherit_shop_page = require('#/page/page-inherit-shop');
 const print_juel_shop_page = require('#/page/page-juel-shop');
@@ -243,7 +244,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
             },
             era.get('flag:惩戒力度') <= 1 &&
             chara_id &&
-            !sys_get_billings()[0].creaditor &&
+            !sys_get_billings()[0].creditor &&
             growth_stage >= 2
               ? {
                   accelerator: 209,
@@ -373,40 +374,25 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
               content: '前往小卖部',
               type: 'button',
             },
-            era.get('flag:当前月') === 3
-              ? {
-                  accelerator: 305,
-                  config: {
-                    disabled: true,
-                    // !sys_check_train_enabled(chara_id) ||
-                    // !sys_check_awake(chara_id) ||
-                    // !sys_check_awake(0) ||
-                    // not_in_same_loc,
-                    width: 6,
-                  },
-                  content: `${chara_id ? '' : '独自'}前往女神像 (继承)`,
-                  type: 'button',
-                }
-              : undefined,
-            chara_id && era.get(`cflag:${chara_id}:节日事件标记`)
-              ? {
-                  accelerator: 306,
-                  config: {
-                    buttonType: 'danger',
-                    disabled:
-                      !sys_check_awake(chara_id) ||
-                      !sys_check_awake(0) ||
-                      chara_base.time < 50 ||
-                      player_base.time < celebration_cost ||
-                      not_in_same_loc,
-                    width: 6,
-                  },
-                  content: `一起庆祝 ${celebration}`,
-                  type: 'button',
-                }
-              : undefined,
             {
-              accelerator: 309,
+              accelerator: 305,
+              config: {
+                buttonType: event_marks.get(event_hooks.back_school)
+                  ? 'danger'
+                  : 'warning',
+                disabled:
+                  !sys_check_awake(0) ||
+                  sys_check_act_disabled(
+                    sys_get_move_cost(location_enum.chairman),
+                    player_base,
+                  ),
+                width: 6,
+              },
+              content: '前往理事长室',
+              type: 'button',
+            },
+            {
+              accelerator: 307,
               // 幼年期只能呆在训练室
               config: {
                 buttonType:
@@ -433,6 +419,38 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
               content: `${chara_id ? '一起' : ''}外出`,
               type: 'button',
             },
+            era.get('flag:当前月') === 3
+              ? {
+                  accelerator: 308,
+                  config: {
+                    disabled: true,
+                    // !sys_check_train_enabled(chara_id) ||
+                    // !sys_check_awake(chara_id) ||
+                    // !sys_check_awake(0) ||
+                    // not_in_same_loc,
+                    width: 6,
+                  },
+                  content: `${chara_id ? '' : '独自'}前往女神像 (继承)`,
+                  type: 'button',
+                }
+              : undefined,
+            chara_id && era.get(`cflag:${chara_id}:节日事件标记`)
+              ? {
+                  accelerator: 309,
+                  config: {
+                    buttonType: 'danger',
+                    disabled:
+                      !sys_check_awake(chara_id) ||
+                      !sys_check_awake(0) ||
+                      chara_base.time < 50 ||
+                      player_base.time < celebration_cost ||
+                      not_in_same_loc,
+                    width: 6,
+                  },
+                  content: `一起庆祝 ${celebration}`,
+                  type: 'button',
+                }
+              : undefined,
           ].filter((e) => e)
         : [],
     },
@@ -637,20 +655,24 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       era.set('flag:当前位置', location_enum.office);
       break;
     case 305:
-      await print_inherit_shop_page();
+      sys_handle_action(sys_get_move_cost(location_enum.chairman), chara_id);
+      await page_chairman_office();
       break;
-    case 306:
-      sys_change_attr_and_print(0, '精力', -celebration_cost);
-      sys_change_attr_and_print(chara_id, '精力', -50);
-      era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.celebration, {});
-      break;
-    case 309:
+    case 307:
       sys_handle_action(
         sys_get_move_cost(location_enum.gate, chara_id),
         chara_id,
       );
       await print_out_page();
+      break;
+    case 308:
+      await print_inherit_shop_page();
+      break;
+    case 309:
+      sys_change_attr_and_print(0, '精力', -celebration_cost);
+      sys_change_attr_and_print(chara_id, '精力', -50);
+      era.drawLine();
+      await sys_call_daily_event(chara_id, event_hooks.celebration, {});
       break;
     case 401:
       await print_exp_page();

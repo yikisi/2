@@ -82,9 +82,11 @@ module.exports = async () => {
           }
         } else if (
           (era.get(`global:saves:${ret - 20}`) &&
+            era.get(`global:saves:${ret - 20}`).startsWith('(FILE LOST)') &&
             !era.set(`global:saves:${ret - 20}`, '')) ||
           era.rmData(ret - 20)
         ) {
+          era.saveGlobal();
           msg_notification = `成功删除 ${ret - 20} 号栏位的存档`;
         }
         break;

@@ -17,6 +17,7 @@ function get_attr_and_print_in_event(
   pt_change,
   base_change,
 ) {
+  era.println();
   let buffer = (attr_change || new Array(5))
     .map((e, i) => sys_change_attr_and_print(chara_id, i, e))
     .filter((e) => e.length);

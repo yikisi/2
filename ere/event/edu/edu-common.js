@@ -8,12 +8,14 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum, location_name } = require('#/data/locations');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_rewards } = require('#/data/race/race-const');
 const { fumble_result, attr_enum } = require('#/data/train-const');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 /** @type {Record<string,function(chara_id:number,hook:HookArg,extra_flag:*,event_object:EventObject):Promise<*>>} */
 const handlers = {};
@@ -165,26 +167,31 @@ handlers[event_hooks.week_start] = async (chara_id) => {
     await era.printAndWait(seg);
   }
   era.println();
-  const title = era.get(`cstr:${chara_id}:称号`).filter((e) => e.s)[0];
+  const title = new CharaTitles(chara_id).get_colored_curr_title(),
+    fame_reward =
+      (count.g1 * race_rewards[class_enum.G1][1].fame) / 2 +
+      (count.g2 * race_rewards[class_enum.G2][1].fame) / 2 +
+      (count.g3 * race_rewards[class_enum.G3][5].fame) / 2;
   if (check >= 6) {
     await era.printAndWait([
       `随着以${chara.sex}为蓝本的铜像揭幕，`,
-      title ? { color: title.c, content: `[${title.n}] ` } : '',
+      ...(title ? [title, ' '] : []),
       chara.get_colored_name(),
       ` 的传奇故事将会永远留在殿堂之中……`,
     ]);
+    era.println();
+    sys_like_chara(302, 0, fame_reward / 5 + 20) && (await era.waitAnyKey());
+    sys_like_chara(301, 0, 100) && (await era.waitAnyKey());
   } else {
     await era.printAndWait([
-      title ? { color: title.c, content: `[${title.n}] ` } : '',
+      ...(title ? [title, ' '] : []),
       chara.get_colored_name(),
       ` 的传奇故事将会永远被世人所传颂……`,
     ]);
+    era.println();
+    sys_like_chara(302, 0, fame_reward / 5) && (await era.waitAnyKey());
   }
-  sys_change_fame(
-    (count.g1 * race_rewards[class_enum.G1][1].fame) / 2 +
-      (count.g2 * race_rewards[class_enum.G2][1].fame) / 2 +
-      (count.g3 * race_rewards[class_enum.G3][5].fame) / 2,
-  );
+  sys_change_fame(fame_reward);
   const love = era.get(`love:${chara_id}`);
   if (love >= 50 || era.get(`relation:${chara_id}:0`) > 0) {
     era.drawLine();

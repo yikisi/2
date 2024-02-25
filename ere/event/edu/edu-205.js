@@ -11,7 +11,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { race_enum } = require('#/data/race/race-const');
@@ -305,10 +305,10 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
       `虽然有符合我的体力分配和脚力的情况————是啊，我想最大的原因是站在了合适我的位置上。我不是很有耐心的类型，所以和必须等到最后一条直线的决胜很不投缘。`,
     );
     await era.printAndWait(`${montjeu.name} 坦然地凝视着前方。`);
-    era.printButton(`「在赛场上心理压力是相当大的。」`, 1);
+    era.printButton(`说明`, 1);
     await era.input();
     await me.say_and_wait(
-      `${vp.name} 多少也有点心理上的强度，但很难说是有耐心的人。正因为如此，${vp.sex}一直在采取先行对策。`,
+      `在赛场上心理压力是相当大的。${vp.name} 多少也有点心理上的强度，但很难说是有耐心的人。正因为如此，${vp.sex}一直在采取先行对策。`,
     );
     await montjeu.say_and_wait(`……一直，原来如此。`);
     await era.printAndWait(`${montjeu.name} 好像察觉到了什么。`);
@@ -677,7 +677,7 @@ handlers[event_hooks.out_start] = async (hook, __, event_object) => {
     await era.printAndWait(`再一次，${me.name} 不得不问。`);
     await era.printAndWait(`为什么自己是 ${vp.name} 的训练员呢？`);
     await era.printAndWait(`${me.name} 不清楚该怎么走下去。`);
-    new EduEventMarks(205).sub('tea');
+    new TreveEduMarks().tea = 0;
     new EventMarks(0).sub(event_hooks.out_start);
     return true;
   }

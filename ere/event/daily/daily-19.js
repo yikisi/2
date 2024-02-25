@@ -568,10 +568,7 @@ module.exports = {
    * @returns {Promise<boolean>}
    */
   async run(stage_id, extra_flag, event_object) {
-    if (event_object) {
-      throw new Error('unsupported hook!');
-    }
-    if (!handlers[stage_id.hook]) {
+    if (event_object || !handlers[stage_id.hook]) {
       throw new Error('unsupported hook!');
     }
     return !!(await handlers[stage_id.hook](stage_id, extra_flag));

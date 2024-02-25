@@ -736,7 +736,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ` 用${
           hook.hook === ero_hooks.stimulate_glans_by_virgin ? '小穴' : '屁穴'
-        }套弄着`,
+        }套弄着 `,
         defender.get_colored_name(),
         ' 的肉棒……】',
       ]));

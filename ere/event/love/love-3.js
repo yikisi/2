@@ -5,6 +5,7 @@ const {
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
+const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -182,6 +183,7 @@ async function week_start_74(teio, me) {
       } 赶紧清了清嗓子，开始宣读今天的训练相关内容。`,
     );
     era.set('cflag:3:爱慕暂拒', 74);
+    await punish_rejecting_love(3);
   }
 }
 
@@ -380,6 +382,7 @@ async function week_end_89(teio, me) {
   }
   if (era.get('love:3') !== 90) {
     era.set('cflag:3:爱慕暂拒', 89);
+    await punish_rejecting_love(3);
   }
 }
 
@@ -555,6 +558,7 @@ async function week_start_99(teio, me) {
     await sys_love_uma_in_event(3);
   } else {
     era.set('cflag:3:爱慕暂拒', 99);
+    await punish_rejecting_love(3);
   }
 }
 

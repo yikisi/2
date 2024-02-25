@@ -84,6 +84,8 @@ async function sys_rape_in_sleeping(chara_id, supporter) {
   if (supporter) {
     era.set(`status:${supporter}:熬夜`, 1);
     sys_like_chara(supporter, 0, 25, false);
+  } else if (era.get(`talent:${chara_id}:病娇`) === 2) {
+    era.set('flag:床伴', chara_id);
   }
 }
 

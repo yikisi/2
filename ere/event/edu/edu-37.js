@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 const {
   sys_change_attr_and_print,
   sys_change_motivation,
+  sys_get_billings,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
@@ -450,7 +451,7 @@ handlers[event_hooks.week_start] = async () => {
     await chara57_talk.say_and_wait(
       '嘛，话虽如此，不过详细的情况我也已经听说了。',
     );
-    chara57_talk.say_and_wait(
+    await chara57_talk.say_and_wait(
       `总之，就是想让我跟即将出走德比的${chara_talk.get_uma_sex_title()}併走吗？`,
     );
     era.printButton('「是的。」', 1);
@@ -483,7 +484,7 @@ handlers[event_hooks.week_start] = async () => {
       `时间来到与千明代表约定好的日子，${your_name}和荣进闪耀一起前往特雷森学院的操场处。`,
     );
     await chara57_talk.say_and_wait('那么准备好的话就可以开始咯。');
-    await await chara_talk.say_and_wait('好的，请多多指教，千明代表同学。');
+    await chara_talk.say_and_wait('好的，请多多指教，千明代表同学。');
     await era.printAndWait('可以看出千明代表早已等候多时。');
     await era.printAndWait(
       `见此情况，${your_name}鼓励地拍了拍荣进闪耀的肩膀。`,
@@ -938,14 +939,14 @@ handlers[event_hooks.week_start] = async () => {
     await era.printAndWait(
       `记者：「富士奇石${chara_talk.get_adult_sex_title()}，请问在这个时间点表明要出战接下来的G1级重赏是出于什么意图呢？」`,
     );
-    await await chara5_talk.say_and_wait(
+    await chara5_talk.say_and_wait(
       '嗯……具体的意图很难明说，是为了成为‘高墙’吧。',
     );
     await era.printAndWait('记者：「高墙？」');
-    await await chara5_talk.say_and_wait(
+    await chara5_talk.say_and_wait(
       '为了能成为后辈面前的高墙，所以我们才会前来参赛。',
     );
-    await await chara5_talk.say_and_wait(
+    await chara5_talk.say_and_wait(
       `因此，来大胆挑战吧。我在这里，等待着${your_name}哦。`,
     );
     await era.printAndWait('“哔。');
@@ -1157,29 +1158,25 @@ handlers[event_hooks.week_start] = async () => {
       '此时特雷森学院的操场内，主持人激情四射的话语成功调动起了场地的氛围，让拥挤的人群陷入喧闹。',
     );
     await era.printAndWait('紧接着——');
-    await await chara7_talk.say_and_wait(
-      '最终的赢家当然是本大爷啦！阿船命运的——',
-    );
+    await chara7_talk.say_and_wait('最终的赢家当然是本大爷啦！阿船命运的——');
     await era.printAndWait(
       '以迅捷的速度先发制人的黄金船随手从前排的观众中粗暴地拉出一位。',
     );
-    await await chara7_talk.say_and_wait(`大•米•袋！就决定是你啦！`);
+    await chara7_talk.say_and_wait(`大•米•袋！就决定是你啦！`);
     await era.printAndWait(
       '黄金船的粉丝：「呜呜啊啊——居然是扛米抱？？！！好高好快好吓人！」',
     );
-    await await chara49_talk.say_and_wait('嗯……');
+    await chara49_talk.say_and_wait('嗯……');
     await era.printAndWait('一旁的中山庆典见此也不甘示弱。');
-    await await chara49_talk.say_and_wait(`喂，那边的你。`);
+    await chara49_talk.say_and_wait(`喂，那边的你。`);
     await era.printAndWait(
       `只见${chara_talk.sex}在左顾右盼之后，选择一位站在人群中间的粉丝。`,
     );
-    await await chara49_talk.say_and_wait(
-      '一脸时来运转的表情，过来陪我跑一下吧。',
-    );
+    await chara49_talk.say_and_wait('一脸时来运转的表情，过来陪我跑一下吧。');
     await era.printAndWait(
       '中山庆典的粉丝：「诶诶，哇……居然单手就把我抬起来了……好厉害！」',
     );
-    await await chara_talk.say_and_wait('唔……');
+    await chara_talk.say_and_wait('唔……');
     await era.printAndWait(
       `与${chara_talk.sex}们相比，荣进闪耀就显得仔细许多。`,
     );
@@ -1872,7 +1869,7 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
 handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
     const chara49_talk = get_chara_talk(49);
-    await print_event_name('追加训练', chara_talk.color);
+    await print_event_name('追加训练', chara_talk);
     era.println();
     await era.printAndWait('荣进闪耀以出色的表现完成了这一次的训练目标。');
     await era.printAndWait(
@@ -2081,7 +2078,7 @@ handlers[event_hooks.out_shopping] = async (hook, extra_flag, event_object) => {
     edu_event_marks = new EduEventMarks(37);
   if (edu_event_marks.get('black_treasure') === 1) {
     edu_event_marks.add('black_treasure');
-    await print_event_name('漆黑珍宝', chara_talk.color);
+    await print_event_name('漆黑珍宝', chara_talk);
 
     await era.printAndWait(
       `独自在商场准备购买生活用品时，${your_name}突然在附近看到了满脸闷闷不乐的荣进闪耀。`,
@@ -2157,7 +2154,7 @@ handlers[event_hooks.out_shopping] = async (hook, extra_flag, event_object) => {
       await era.printAndWait(`${chara_talk.sex}郑重道。`);
       await chara_talk.say_and_wait('我保证。');
       sys_change_money(-50);
-      era.set('flag:账单', [{ creaditor: 0, repay: 25, timer: 2 }]);
+      sys_get_billings().push({ creditor: 0, repay: 25, timer: 2 });
     }
   } else {
     return false;

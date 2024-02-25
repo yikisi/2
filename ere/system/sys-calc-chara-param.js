@@ -97,7 +97,7 @@ function sys_get_debuff(chara_id) {
 /**
  * @param {number} location
  * @param {number} [chara_id]
- * @returns {{stamina: *, time: *}}
+ * @returns {{stamina:*,time:*}}
  */
 function sys_get_move_cost(location, chara_id) {
   const move_cost = location_move_cost[location];

@@ -96,7 +96,9 @@ async function fail(chara, me) {
   ]);
   sys_change_fame(-100);
   era.set('flag:变态行为', 1);
-  era.set('flag:当前互动角色', 0);
+  if (era.get('flag:当前互动角色') === chara.id) {
+    era.set('flag:当前互动角色', 0);
+  }
 }
 
 /**

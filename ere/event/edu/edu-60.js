@@ -716,56 +716,56 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
     add_event(hook.hook, event_object);
     return;
   }
-  const chara_talk = get_chara_talk(60),
+  const nice_nature = get_chara_talk(60),
     edu_event_marks = new NNEduMarks(),
     me = get_chara_talk(0);
   if (edu_event_marks.see_fish !== 1) {
     return false;
   }
   edu_event_marks.see_fish++;
-  await print_event_name('去看鱼吧', chara_talk);
+  await print_event_name('去看鱼吧', nice_nature);
   await era.printAndWait(`在 ${me.name} 跟优秀素质一同回程的路上──`);
-  await chara_talk.say_and_wait('我说，反正还有时间……那个………………要去看鱼吗？');
-  await chara_talk.say_and_wait(`是卖鱼的阿姨啦，她叫我们“一起去看看”。`);
+  await nice_nature.say_and_wait('我说，反正还有时间……那个………………要去看鱼吗？');
+  await nice_nature.say_and_wait(`是卖鱼的阿姨啦，她叫我们“一起去看看”。`);
   era.printButton('「当然可以啊」', 1);
   await era.input();
-  await chara_talk.say_and_wait('……很好，那我们走吧。');
+  await nice_nature.say_and_wait('……很好，那我们走吧。');
   era.drawLine();
   await era.printAndWait(
-    `${me.name} 本来以为是鱼贩那有卖${chara_talk.sex}想要的鱼，结果跟着${chara_talk.sex}来到目的地后……`,
+    `${me.name} 本来以为是鱼贩那有卖${nice_nature.sex}想要的鱼，结果跟着${nice_nature.sex}来到目的地后……`,
   );
-  await chara_talk.say_and_wait(
+  await nice_nature.say_and_wait(
     '哦哦～在游耶在游耶～～一整群看起来好好吃的鱼～～',
   );
   era.printButton('「没想到是来水族馆……！！」', 1);
   await era.input();
-  await chara_talk.say_and_wait('……啊哈。');
-  await chara_talk.say_and_wait(
+  await nice_nature.say_and_wait('……啊哈。');
+  await nice_nature.say_and_wait(
     '啊──好啦好啦！我知道啦。应该有更好的邀请方法吧～你是不是这样想？',
   );
-  await chara_talk.say_and_wait(
+  await nice_nature.say_and_wait(
     `那个嘛，${era.get('callname:60:60')} 可没办法可爱地邀请人──`,
   );
-  await chara_talk.say_and_wait(
+  await nice_nature.say_and_wait(
     '不过啊，难得阿姨送了门票，叫我们两人好好放松……',
   );
-  await chara_talk.say_and_wait('我绝对不是存心要骗你的。我说真的。');
+  await nice_nature.say_and_wait('我绝对不是存心要骗你的。我说真的。');
   era.printButton('「谢谢你邀请我来」', 1);
   await era.input();
-  await chara_talk.say_and_wait('哦……哦哦……这就是大人的从容吗？真有一套……');
-  await chara_talk.say_and_wait('好吧，嗯。既然你不在意就好。');
-  await chara_talk.say_and_wait(
+  await nice_nature.say_and_wait('哦……哦哦……这就是大人的从容吗？真有一套……');
+  await nice_nature.say_and_wait('好吧，嗯。既然你不在意就好。');
+  await nice_nature.say_and_wait(
     '所以说，虽然也算不上赔罪啦……但我们去看训练员想看的东西吧！',
   );
-  await chara_talk.say_and_wait(
+  await nice_nature.say_and_wait(
     '我查了一下，发现有很多有趣的展示呢。真不愧是约……出门玩的热门地点呢。',
   );
-  await chara_talk.say_and_wait(
+  await nice_nature.say_and_wait(
     '有水母展、魟鱼……鲷鱼……每种看起来都相当好吃呢。',
   );
-  await chara_talk.say_and_wait('啊，走标准行程的话可以去看海豚秀之类的？');
-  await chara_talk.say_and_wait('……不对，跟我去看那么可爱的表演也不太对吧。');
-  await chara_talk.say_and_wait(
+  await nice_nature.say_and_wait('啊，走标准行程的话可以去看海豚秀之类的？');
+  await nice_nature.say_and_wait('……不对，跟我去看那么可爱的表演也不太对吧。');
+  await nice_nature.say_and_wait(
     `好吧，就交给 ${era.get('callname:60:0')} 决定了！你想看什么？`,
   );
   era.println();
@@ -773,61 +773,68 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
   era.printButton('「……极度恐怖．可怕鱼展览！！」', 2);
   const ret = await era.input();
   if (ret === 1) {
-    await chara_talk.say_and_wait('……我说啊。你有在听我说话吗？');
+    await nice_nature.say_and_wait('……我说啊。你有在听我说话吗？');
     era.printButton('「有哦」', 1);
     await era.input();
-    await chara_talk.say_and_wait('嗯，我知道。但我不是那个意思哦？');
-    await chara_talk.say_and_wait('不对，好吧……毕竟我也说了啊～说我会配合你。');
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait('嗯，我知道。但我不是那个意思哦？');
+    await nice_nature.say_and_wait(
+      '不对，好吧……毕竟我也说了啊～说我会配合你。',
+    );
+    await nice_nature.say_and_wait(
       '知道啦知道啦。既然你觉得看了可以放松的话，嗯。',
     );
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait(
       '我是不会做出“呀啊～”那种可爱反应的，这点就请多包容啦──',
     );
     era.drawLine();
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait(
       '哦哦，好有活力的海豚呢～……咦？噗哇！？等一下，水！有水──',
     );
-    await chara_talk.say_and_wait('嘎呀啊啊啊──！！？');
-    await chara_talk.say_and_wait('可恶……那道水花太犯规了吧。');
-    await chara_talk.say_and_wait('原来海豚秀是这么惊悚刺激的娱乐吗……');
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait('嘎呀啊啊啊──！！？');
+    await nice_nature.say_and_wait('可恶……那道水花太犯规了吧。');
+    await nice_nature.say_and_wait('原来海豚秀是这么惊悚刺激的娱乐吗……');
+    await nice_nature.say_and_wait(
       '真是的……何止是“呀啊～”，害我根本从丹田喊出来了。',
     );
     era.printButton('「看得真开心呢」', 1);
     await era.input();
-    await chara_talk.say_and_wait('呵呵……嗯，是啊。看来这种玩法比较适合我呢。');
+    await nice_nature.say_and_wait(
+      '呵呵……嗯，是啊。看来这种玩法比较适合我呢。',
+    );
     await era.printAndWait(
       `${me.name}跟优秀素质在水族馆一起度过快乐时光，好好地放松了一番。`,
     );
   } else {
-    await chara_talk.say_and_wait('咦～听起来很有趣嘛！');
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait('咦～听起来很有趣嘛！');
+    await nice_nature.say_and_wait(
       '而且竟然说是“极度恐怖”呢。到底有多恐怖？让我们见识一下实力吧～',
     );
     await era.printAndWait(`就这样，${me.name}跟优秀素质一起到了展示区……`);
-    await chara_talk.say_and_wait('可！');
+    await nice_nature.say_and_wait('可！');
     era.printButton('「……可？」', 1);
     await era.input();
-    await chara_talk.say_and_wait('可、爱、到、不、行！！');
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait('可、爱、到、不、行！！');
+    await nice_nature.say_and_wait(
       '呜哇啊啊～～～！！这什么！圆滚滚的双眼！是叫“扁面蛸”啊～',
     );
-    await chara_talk.say_and_wait('呀啊～～～～');
-    await chara_talk.say_and_wait('──啊！！');
+    await nice_nature.say_and_wait('呀啊～～～～');
+    await nice_nature.say_and_wait('──啊！！');
     era.printButton('「看你这么开心，真是太好了」', 1);
     await era.input();
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait(
       '太……太犯规了吧！说什么极度恐怖，结果都是这么可爱的生物！',
     );
-    await chara_talk.say_and_wait('可恶…………好可爱。');
+    await nice_nature.say_and_wait('可恶…………好可爱。');
     era.printButton('「那边的鱼也很不赖……」', 1);
     await era.input();
-    await chara_talk.say_and_wait('呜哇，真的耶！丑到很可爱～～！');
+    await nice_nature.say_and_wait('呜哇，真的耶！丑到很可爱～～！');
     await era.printAndWait(
       `${me.name}跟优秀素质在水族馆一起度过快乐时光，好好地放松了一番。`,
     );
   }
+  era.println();
+  get_attr_and_print_in_event(60, [0, 0, 0, 10, 10], 20) &&
+    (await era.waitAnyKey());
   return true;
 };
 

@@ -6,9 +6,9 @@ const check_before_rec = require('#/event/rec/snippets/check-before-rec');
 const CharaTalk = require('#/utils/chara-talk');
 
 const event_hooks = require('#/data/event/event-hooks');
-const recruit_flags = require('#/data/event/recruit-flags');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
  * 鲁铎象征 - 招募
@@ -23,7 +23,7 @@ module.exports = {
         return false;
       }
       era.set('callname:17:-1', era.set('callname:17:-2', '露娜'));
-      const chara_17 = new CharaTalk(17);
+      const luna = new CharaTalk(17);
       await era.printAndWait(
         `${CharaTalk.me.name} 挠了挠头，看着浴室里的积水好一会，随后摊了摊手。`,
       );
@@ -60,7 +60,7 @@ module.exports = {
         '？？？「不知道是谁，有机会成为那位皇帝的训练员呢？」',
       );
       await era.printAndWait(
-        `？？？「不过话说回来，${chara_17.sex}真的需要训练员吗？」`,
+        `？？？「不过话说回来，${luna.sex}真的需要训练员吗？」`,
       );
       await era.printAndWait(
         '？？？「那可是象征的最高杰作，出道前便受万人瞩目的明星。哈，真是不得了的大人物！」',
@@ -121,7 +121,7 @@ module.exports = {
       await era.printAndWait(`${CharaTalk.me.name} 冲了进去，推开了虚掩的门。`);
       era.println();
       await era.printAndWait(
-        `一位赛马娘蜷缩着身子，倒在地上。${chara_17.sex}捂着头，似乎是被剧烈的疼痛袭击了。`,
+        `一位赛马娘蜷缩着身子，倒在地上。${luna.sex}捂着头，似乎是被剧烈的疼痛袭击了。`,
       );
       await era.printAndWait(
         `${CharaTalk.me.name} 刚想发问，但脚却像钉子一样钉在地上。`,
@@ -131,8 +131,8 @@ module.exports = {
       );
       await era.printAndWait(
         `在伟大的名号和盛名之下，${
-          chara_17.sex
-        }还只是个正值花样年华的${chara_17.get_teen_sex_title()}。`,
+          luna.sex
+        }还只是个正值花样年华的${luna.get_teen_sex_title()}。`,
       );
       await era.printAndWait(`同时，${CharaTalk.me.name} 剧烈地动摇了。`);
       await era.printAndWait('谁都无法想信那个举世无双的「皇帝」——');
@@ -151,49 +151,49 @@ module.exports = {
       await era.printAndWait('——那位绝不服输，神气地带着你上山下海的孩子。');
       await era.printAndWait('——那位霸道却又可爱，声称永远不会忘记你的孩子。');
       await era.printAndWait(
-        `${CharaTalk.me.name} 的灵魂里刻着${chara_17.sex}的名字。`,
+        `${CharaTalk.me.name} 的灵魂里刻着${luna.sex}的名字。`,
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 绝不会忘记 ${chara_17.sex} 的名字。`,
+        `${CharaTalk.me.name} 绝不会忘记 ${luna.sex} 的名字。`,
       );
       era.printButton('「露娜！」', 1);
       await era.input();
 
       await era.printAndWait(
-        `虚弱的${chara_17.get_teen_sex_title()}抬起头看着你。`,
+        `虚弱的${luna.get_teen_sex_title()}抬起头看着你。`,
       );
-      await chara_17.say_and_wait(`……${CharaTalk.me.actual_name}……？`);
+      await luna.say_and_wait(`……${CharaTalk.me.actual_name}……？`);
       await era.printAndWait(
-        `说罢，${chara_17.sex}似乎终于支撑不住了，摇摇晃晃地倒在了地上。`,
+        `说罢，${luna.sex}似乎终于支撑不住了，摇摇晃晃地倒在了地上。`,
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 用自己都惊讶的速度向她奔去，抱住了${chara_17.sex}。`,
+        `${CharaTalk.me.name} 用自己都惊讶的速度向她奔去，抱住了${luna.sex}。`,
       );
-      await chara_17.say_and_wait('真的是你……');
-      await era.printAndWait(`言罢，${chara_17.sex}昏昏沉沉地睡去了。`);
+      await luna.say_and_wait('真的是你……');
+      await era.printAndWait(`言罢，${luna.sex}昏昏沉沉地睡去了。`);
 
       era.drawLine();
       await era.printAndWait(
-        `鲁铎象征——在被这么称呼前，${chara_17.get_teen_sex_title()}原来的名字是露娜。`,
+        `鲁铎象征——在被这么称呼前，${luna.get_teen_sex_title()}原来的名字是露娜。`,
       );
       await era.printAndWait(
-        `${chara_17.sex}喜欢奔跑、喜欢甜食、喜欢懒懒散散度日。`,
+        `${luna.sex}喜欢奔跑、喜欢甜食、喜欢懒懒散散度日。`,
       );
       await era.printAndWait(
-        `在被家族有所期待之前，${chara_17.sex}不过是象征家令人头痛又宠爱的小少爷。`,
+        `在被家族有所期待之前，${luna.sex}不过是象征家令人头痛又宠爱的小少爷。`,
       );
       await era.printAndWait(
         '但随着年龄渐长，露娜那绝对的实力，令人窒息的锋锐，让象征家喜出望外。',
       );
       await era.printAndWait(
-        `${chara_17.sex}是这样强大。强大到足够满足所有的欲望。`,
+        `${luna.sex}是这样强大。强大到足够满足所有的欲望。`,
       );
       await era.printAndWait('露娜记得，从某天开始，自己的生活就变了。');
       await era.printAndWait(
-        `${chara_17.sex}不再是露娜了，从此往后，${chara_17.sex}是鲁铎象征。`,
+        `${luna.sex}不再是露娜了，从此往后，${luna.sex}是鲁铎象征。`,
       );
       await era.printAndWait('可一个人，要怎么凭空变成另一个人呢？');
-      await era.printAndWait(`露娜日夜苦恼，直到在某日，${chara_17.sex}——`);
+      await era.printAndWait(`露娜日夜苦恼，直到在某日，${luna.sex}——`);
       era.printButton('「露娜……露娜……！」', 1);
       await era.input();
 
@@ -201,7 +201,7 @@ module.exports = {
         `似乎是终于听到了 ${CharaTalk.me.name} 的呼唤，露娜悠悠醒转。`,
       );
       await era.printAndWait(
-        `${chara_17.sex}苦涩的笑着，自己还是坏掉了？怎么会听见 ${
+        `${luna.sex}苦涩的笑着，自己还是坏掉了？怎么会听见 ${
           CharaTalk.me.actual_name
         }${CharaTalk.me.sex === '她' ? '小姐' : '先生'} 的声音。`,
       );
@@ -209,7 +209,7 @@ module.exports = {
         `${CharaTalk.me.sex}是在特雷森，可自从那时起，自己已经下定决心，不再牵连${CharaTalk.me.sex}。`,
       );
       await era.printAndWait(
-        `但随后，${chara_17.sex}敏锐地意识到，自己并非身处梦境。`,
+        `但随后，${luna.sex}敏锐地意识到，自己并非身处梦境。`,
       );
       era.drawLine();
       era.printButton('「露娜。真的是你吗？」', 1);
@@ -218,18 +218,18 @@ module.exports = {
       await era.printAndWait(
         `看着怀中的露娜，${CharaTalk.me.name} 不由得发问。`,
       );
-      await chara_17.say_and_wait('你终于来到我身边了。');
+      await luna.say_and_wait('你终于来到我身边了。');
       await era.printAndWait(
-        `露娜认命似的，露出了苦涩的微笑。随后，${chara_17.sex}喜极而泣。`,
+        `露娜认命似的，露出了苦涩的微笑。随后，${luna.sex}喜极而泣。`,
       );
-      await chara_17.say_and_wait(
+      await luna.say_and_wait(
         '如果你再早来一些，我都不会……你走吧，不要将今天的事情透露出去。皇帝不能软弱。',
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 没有听完露娜说的话，${chara_17.sex}将你驱逐出了这个地方。`,
+        `${CharaTalk.me.name} 没有听完露娜说的话，${luna.sex}将你驱逐出了这个地方。`,
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 分明清楚，${chara_17.sex}也认出了你。`,
+        `${CharaTalk.me.name} 分明清楚，${luna.sex}也认出了你。`,
       );
       new EventMarks(0).add(event_hooks.recruit_start);
       add_event(

@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -8,7 +9,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const { medicine_enum, medicine_names } = require('#/data/ero/item-const');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const handlers = {};
 
@@ -125,6 +125,7 @@ handlers[ero_hooks.ero_end] = async () => {
   if (era.get('tcvar:9:TS大和T')) {
     const daiwa = get_chara_talk(9),
       me = get_chara_talk(0);
+    era.drawLine();
     await print_event_name('「身体不适」的训练员……与最喜欢的大和', daiwa);
     await era.printAndWait([
       '当 ',

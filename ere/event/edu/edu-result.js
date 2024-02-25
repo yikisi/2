@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
 const {
   sys_change_motivation,
   sys_change_pressure,
@@ -14,6 +15,8 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
+const CharaTitles = require('#/data/chara-titles');
+const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { fumble_result, attr_enum } = require('#/data/train-const');
 
@@ -65,39 +68,48 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
     relation_change = args.like,
     stamina = 0;
   if (extra_flag.train !== attr_enum.intelligence) {
+    era.println();
     const chara_name = era.get(`callname:${chara_id}:-2`);
-    let change_buff = 0;
-    if (hook.arg === -1) {
-      if (Math.random() < args.ratio.fail_again_talent) {
-        change_buff = -1;
-      }
-      attr_change[extra_flag.train] = args.attr_down_again;
-      gacha(
-        Object.values(attr_enum).filter((e) => e !== extra_flag.train),
-        args.attr_down_times_again - 1,
-      ).forEach((e) => (attr_change[e] = args.attr_down_again));
-      sys_change_motivation(chara_id, args.motivate_down);
-      relation_change = args.like_fail_again;
-      pressure_change += 500;
-    } else if (hook.arg === 0) {
-      if (Math.random() < args.ratio.accept_talent) {
-        change_buff = -1;
-      }
-      attr_change[extra_flag.train] = args.attr_down;
-      gacha(
-        Object.values(attr_enum).filter((e) => e !== extra_flag.train),
-        args.attr_down_times - 1,
-      ).forEach((e) => (attr_change[e] = args.attr_down));
-      sys_change_motivation(chara_id, args.motivate_down);
-      relation_change = args.like;
-      pressure_change /= 2;
-    } else {
-      change_buff = extra_flag.fumble + 1;
-      relation_change = args.like_success;
-      if (extra_flag.fumble) {
-        stamina = 100;
-      }
-      pressure_change = 0;
+    let change_buff = 0,
+      hurt = 1 + extra_flag.fumble;
+    switch (hook.arg) {
+      case 1:
+        change_buff = extra_flag.fumble + 1;
+        relation_change = args.like_success;
+        if (extra_flag.fumble) {
+          stamina = 100;
+        }
+        pressure_change = 0;
+        hurt = 0;
+        break;
+      case -1:
+        if (Math.random() < args.ratio.fail_again_talent) {
+          change_buff = -1;
+        }
+        attr_change[extra_flag.train] = args.attr_down_again;
+        gacha(
+          Object.values(attr_enum).filter((e) => e !== extra_flag.train),
+          args.attr_down_times_again - 1,
+        ).forEach((e) => (attr_change[e] = args.attr_down_again));
+        sys_change_motivation(chara_id, args.motivate_down);
+        relation_change = args.like_fail_again;
+        pressure_change += 500;
+        hurt *= 2;
+        break;
+      default:
+        if (Math.random() < args.ratio.accept_talent) {
+          change_buff = -1;
+        }
+        attr_change[extra_flag.train] = args.attr_down;
+        gacha(
+          Object.values(attr_enum).filter((e) => e !== extra_flag.train),
+          args.attr_down_times - 1,
+        ).forEach((e) => (attr_change[e] = args.attr_down));
+        sys_change_motivation(chara_id, args.motivate_down);
+        relation_change = args.like;
+        pressure_change /= 2;
+        hurt -= 1;
+        break;
     }
     if (era.get(`status:${chara_id}:练习X手`) !== change_buff) {
       era.set(`status:${chara_id}:练习X手`, change_buff);
@@ -107,6 +119,7 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
         }……`,
       );
     }
+    sys_hurt_uma(chara_id, hurt);
   } else if (extra_flag.fumble) {
     attr_change[attr_enum.intelligence] = -10;
   }
@@ -166,6 +179,16 @@ function learn_language(chara_id, lan_name) {
       `status:${chara_id}:语言不通`,
       Math.max(debuff - 1, Number(level < 5)),
     );
+  if (
+    era.get(`abl:${chara_id}:粤语`) === 5 &&
+    era.get(`abl:${chara_id}:英语`) === 5 &&
+    era.get(`abl:${chara_id}:法语`) === 5
+  ) {
+    new CharaTitles(chara_id).push({
+      n: 'Hello world!',
+      c: buff_colors[1],
+    });
+  }
 }
 
 /**
@@ -280,7 +303,7 @@ handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
     sys_like_chara(
       chara_id,
       0,
-      extra_flag.relation_change === undefined
+      extra_flag.relation_change === 0
         ? 0
         : extra_flag.relation_change || get_random_value(0, 25),
       true,

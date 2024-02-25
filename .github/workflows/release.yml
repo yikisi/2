@@ -10,32 +10,38 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      GAME_DIR: 'erauma-${{ github.ref_name }}'
+      GAME_ZIP: 'era-uma-preview-${{ github.ref_name }}.7z'
+      GAME_RES_ZIP: 'era-uma-preview-res-${{ github.ref_name }}.7z'
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
       - name: Make game main directory
         run: |
-          mkdir ./erauma${{ github.ref_name }}
-          cp -r ./ere ./erauma{{ github.ref_name }}
-          cp -r ./csv ./erauma{{ github.ref_name }}
+          mkdir ./$GAME_DIR
+          cp -r ./ere ./$GAME_DIR
+          cp -r ./csv ./$GAME_DIR
+          ls -la ./$GAME_DIR
       - name: Zip game main
         uses: thedoctor0/zip-release@0.7.5
         with:
           type: '7z'
-          filename: 'era-uma-preview-${{ github.ref_name }}.7z'
-          directory: ./erauma{{ github.ref_name }}
+          filename: ${{ env.GAME_ZIP }}
+          path: ./${{ env.GAME_DIR }}
           custom: -pera
       - name: Make game res directory
         run: |
-          mv ./erauma${{ github.ref_name }} ./unused
-          mkdir ./erauma${{ github.ref_name }}
-          cp -r ./res ./erauma{{ github.ref_name }}
+          rm -rf ./$GAME_DIR
+          mkdir ./$GAME_DIR
+          cp -r ./res ./$GAME_DIR
+          ls -la ./$GAME_DIR
       - name: Zip game
         uses: thedoctor0/zip-release@0.7.5
         with:
           type: '7z'
-          filename: 'era-uma-preview-res-${{ github.ref_name }}.7z'
-          directory: ./erauma{{ github.ref_name }}
+          filename: ${{ env.GAME_RES_ZIP }}
+          path: ./${{ env.GAME_DIR }}
           custom: -pera
       - name: Check files
         run: ls ./
@@ -47,17 +53,8 @@ jobs:
           body: built by Github Actions
           draft: false
           prerelease: false
-          files: './engine/dist_electron/era-uma-preview-${{ github.ref_name }}.7z'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: EraUma ${{ github.ref_name }}
-          body: built by Github Actions
-          draft: false
-          prerelease: false
-          files: './engine/dist_electron/era-uma-preview-res-${{ github.ref_name }}.7z'
+          files: |
+            ${{ env.GAME_ZIP }}
+            ${{ env.GAME_RES_ZIP }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

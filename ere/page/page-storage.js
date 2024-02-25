@@ -26,7 +26,7 @@ function get_item_list() {
     .map((e) => {
       return { has: era.get(`item:${e}`), id: e };
     })
-    .filter((e) => e.has)
+    .filter((e) => e.has > 0)
     .forEach((item, i) => {
       buffer.push(
         {

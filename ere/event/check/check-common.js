@@ -5,6 +5,7 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
+const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const { add_event, cb_enum } = require('#/event/queue');
@@ -111,7 +112,7 @@ handlers[check_stages.rape_in_sleeping] = (chara_id) => {
 
 handlers[check_stages.want_make_love] = (chara_id) => {
   if (!check_pregnant_unprotect(chara_id) || !check_pregnant_unprotect(0)) {
-    return false;
+    return 0;
   }
   const love = era.get(`love:${chara_id}`);
   let ratio = 0;
@@ -136,11 +137,11 @@ handlers[check_stages.want_make_love] = (chara_id) => {
     ratio = 0;
   }
   era.logger.debug(`角色 ${chara_id} 求爱：${(ratio * 100).toFixed(2)}%`);
-  const random_val = Math.random();
+  const dice = Math.random();
   if (ratio >= 1 || Math.random() < ratio) {
     return (
       1 + (era.get(`talent:${chara_id}:反抗意愿`) >= 0) &&
-      (random_val < 0.05 ||
+      (dice < 0.05 ||
         era.get('flag:惩戒力度') >= 2 ||
         era.get(`base:${chara_id}:性欲`) >= lust_border.want_sex ||
         era.get(`base:${chara_id}:压力`) >= pressure_border.apprehension ||
@@ -220,14 +221,18 @@ handlers[check_stages.personal_action] = () => ({});
 handlers[check_stages.personal_titles] = (chara_id) =>
   [era.get(`staticcstr:${chara_id}:称号`)].filter((e) => e);
 
+const aim_races = {};
+aim_races[race_enum.begin_race] = 2;
+
 handlers[check_stages.next_week] = (chara_id) => {
-  if (
-    chara_id &&
-    era.get(`cflag:${chara_id}:种族`) &&
-    era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) ===
-      143 + 9
-  ) {
-    add_event(event_hooks.week_start, new EventObject(chara_id, cb_enum.edu));
+  if (chara_id && era.get(`cflag:${chara_id}:种族`)) {
+    const edu_weeks =
+      era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`);
+    if (edu_weeks < 3 * 48) {
+      check_and_register_aim_race(chara_id, aim_races, edu_weeks);
+    } else if (edu_weeks === 143 + 9) {
+      add_event(event_hooks.week_start, new EventObject(chara_id, cb_enum.edu));
+    }
   }
 };
 

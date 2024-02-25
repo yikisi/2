@@ -88,7 +88,7 @@ module.exports = async (hook, _, event_object) => {
           get_chara_talk(68).get_colored_name(),
           '，趁发情期再来车站，或许会有意想不到的事件发生哦！',
         ]);
-        await era.clear(1);
+        era.clear(1);
       }
       add_event(hook, event_object);
       return false;
@@ -209,7 +209,7 @@ module.exports = async (hook, _, event_object) => {
           get_chara_talk(68).get_colored_name(),
           ' 再来商店街，或许会有意想不到的事件发生哦！',
         ]);
-        await era.clear(1);
+        era.clear(1);
       }
       add_event(hook, event_object);
       return false;

@@ -229,36 +229,55 @@ module.exports = {
           },
           ...family_info_list,
           ...(chara.id
-            ? [
-                { type: 'text', content: [{ isBr: true }] },
-                {
-                  accelerator: 100,
-                  config: { width: 12 },
-                  content: `修改对 ${era.get('callname:0:-2')} 的称呼`,
-                  type: 'button',
-                },
-                {
-                  accelerator: 101,
-                  config: { width: 12 },
-                  content: `重置对 ${era.get('callname:0:-2')} 的称呼`,
-                  type: 'button',
-                },
-                {
-                  accelerator: 102,
-                  config: { width: 12 },
-                  content: `修改对该角色的称呼 (${sys_get_callname(
-                    0,
-                    chara.id,
-                  )})`,
-                  type: 'button',
-                },
-                {
-                  accelerator: 103,
-                  config: { width: 12 },
-                  content: `重置对该角色的称呼`,
-                  type: 'button',
-                },
-              ]
+            ? era.get(`love:${chara.id}`) >= 75
+              ? [
+                  { type: 'text', content: [{ isBr: true }] },
+                  {
+                    accelerator: 100,
+                    config: { width: 12 },
+                    content: `修改对 ${era.get('callname:0:-2')} 的称呼`,
+                    type: 'button',
+                  },
+                  {
+                    accelerator: 101,
+                    config: { width: 12 },
+                    content: `重置对 ${era.get('callname:0:-2')} 的称呼`,
+                    type: 'button',
+                  },
+                  {
+                    accelerator: 102,
+                    config: { width: 12 },
+                    content: `修改对该角色的称呼 (${sys_get_callname(
+                      0,
+                      chara.id,
+                    )})`,
+                    type: 'button',
+                  },
+                  {
+                    accelerator: 103,
+                    config: { width: 12 },
+                    content: `重置对该角色的称呼`,
+                    type: 'button',
+                  },
+                ]
+              : [
+                  { type: 'text', content: [{ isBr: true }] },
+                  {
+                    accelerator: 102,
+                    config: { width: 12 },
+                    content: `修改对该角色的称呼 (${sys_get_callname(
+                      0,
+                      chara.id,
+                    )})`,
+                    type: 'button',
+                  },
+                  {
+                    accelerator: 103,
+                    config: { width: 12 },
+                    content: `重置对该角色的称呼`,
+                    type: 'button',
+                  },
+                ]
             : []),
         ];
       },

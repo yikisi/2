@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -163,6 +164,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
 handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0);
+  await print_fail_info_in_train(68, extra_flag.train, extra_flag.fumble);
   if (extra_flag.train !== attr_enum.intelligence) {
     extra_flag['args'] = extra_flag.fumble
       ? fumble_result.fumble

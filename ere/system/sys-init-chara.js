@@ -2,13 +2,13 @@
 
 const sys_change_hair = require('#/system/chara/sys-change-hair');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
+const get_aim_function = require('#/system/script/get-aim-function');
 const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_fix_chara_base } = require('#/system/sys-calc-base-cflag');
 
-const script_dict = require('#/event/script-dict.json');
-
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const { pleasure_list, part_names } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
@@ -23,7 +23,7 @@ const { attr_names } = require('#/data/train-const');
  * 重置角色状态
  * 只重置属性和技能点数，不重置性能力和性经历
  *
- * @param chara_id
+ * @param {number} chara_id
  */
 function reset_chara(chara_id) {
   Object.values(attr_names).forEach((v) => {
@@ -45,6 +45,14 @@ function reset_chara(chara_id) {
     era.set(`base:${chara_id}:精力`, max_time);
   }
 
+  try {
+    get_aim_function('init', chara_id, {}).func(true);
+  } catch (e) {
+    if (e.message && !e.message.startsWith('unsupported')) {
+      console.log(e.stack);
+    }
+  }
+
   era.set(`cflag:${chara_id}:育成用变量`, {});
   era.set(`cflag:${chara_id}:育成成绩`, {});
 }
@@ -56,12 +64,16 @@ module.exports = {
       if (src_chara_id) {
         era.set(`cflag:${chara_id}:模版角色`, src_chara_id);
         era.set(`cflag:${chara_id}:种族`, 1);
+        era.set(`maxbase:${chara_id}:速度`, 1200);
+        era.set(`maxbase:${chara_id}:耐力`, 1200);
+        era.set(`maxbase:${chara_id}:力量`, 1200);
       } else {
         era.set(`cflag:${chara_id}:模版角色`, -1);
       }
       const sex = era.get('flag:角色性别');
       era.set(`cflag:${chara_id}:性别`, sex);
       era.set(`cflag:${chara_id}:育成回合计时`, -201);
+      let temp;
       switch (sex) {
         case 0:
           era.set(`cflag:${chara_id}:阴茎尺寸`, 0);
@@ -71,6 +83,10 @@ module.exports = {
           era.set(`cflag:${chara_id}:下胸围`, 200);
           era.set(`cflag:${chara_id}:阴茎尺寸`, get_random_value(1, 4));
           era.set(`cflag:${chara_id}:阴道尺寸`, 0);
+          temp = era.get(`cflag:${chara_id}:身高`);
+          era.set(`cflag:${chara_id}:胸围`, Math.floor(temp * 0.48));
+          era.set(`cflag:${chara_id}:腰围`, Math.floor(temp * 0.47));
+          era.set(`cflag:${chara_id}:臀围`, Math.floor(temp * 0.51));
           break;
         case 10:
           era.set(`cflag:${chara_id}:阴茎尺寸`, get_random_value(1, 4));
@@ -84,7 +100,6 @@ module.exports = {
       era.set(`base:${chara_id}:压力`, 0);
       era.set(`base:${chara_id}:体重偏差`, 0);
       era.set(`base:${chara_id}:药物残留`, 0);
-      era.set(`cflag:${chara_id}:孩子父亲`, -1);
 
       const auto_talent = chara_id ? era.get('flag:自带特性') : 0;
       switch (auto_talent) {
@@ -127,28 +142,24 @@ module.exports = {
         get_talent_bust_size(get_breast_cup(chara_id, true)),
       );
 
-      era.set(`cstr:${chara_id}:称号`, []);
       era.set(`cstr:${chara_id}:决胜服`, -1);
       if (
         era.get(`abl:${chara_id}:粤语`) === 5 &&
         era.get(`abl:${chara_id}:英语`) === 5 &&
         era.get(`abl:${chara_id}:法语`) === 5
       ) {
-        era
-          .get(`cstr:${chara_id}:称号`)
-          .push({ n: 'Hello world!', c: buff_colors[1] });
+        new CharaTitles(chara_id).push({
+          n: 'Hello world!',
+          c: buff_colors[1],
+        });
       }
 
       try {
-        const script_name =
-          chara_id >= era.get('flag:新生儿初始ID')
-            ? era.get(`callname:${chara_id}:-2`)
-            : chara_id;
-        require(`#/event/init/init-${
-          script_dict[script_name] || script_name
-        }`)();
-      } catch (_) {
-        // eslint-disable-next-line no-empty
+        get_aim_function('init', chara_id, {}).func();
+      } catch (e) {
+        if (e.message && !e.message.startsWith('unsupported')) {
+          console.log(e.stack);
+        }
       }
       sys_call_mec(chara_id, check_stages.mec_callname_customize);
       if (
@@ -157,13 +168,16 @@ module.exports = {
       ) {
         era.set(`callname:${chara_id}:${chara_id}`, '我');
       }
-      era.set(`relation:${chara_id}:0`, era.get('flag:马娘初始好感'));
-      era.set(`love:${chara_id}`, era.get('flag:马娘初始爱慕'));
+      if (era.get(`relation:${chara_id}:0`) === undefined) {
+        era.set(`relation:${chara_id}:0`, era.get('flag:马娘初始好感'));
+      } else {
+        era.add(`relation:${chara_id}:0`, era.get('flag:马娘初始好感') - 75);
+      }
+      era.add(`love:${chara_id}`, era.get('flag:马娘初始爱慕'));
       reset_chara(chara_id);
       era.set(`base:${chara_id}:体力`, era.get(`maxbase:${chara_id}:体力`));
       era.set(`base:${chara_id}:精力`, era.get(`maxbase:${chara_id}:精力`));
 
-      let temp;
       switch (era.get('flag:彩蛋机制')) {
         case 179:
           temp = era.get(`cflag:${chara_id}:身高`);
@@ -227,10 +241,6 @@ module.exports = {
     era.add(
       `relation:${chara_id}:0`,
       relation + 300 * sys_personal_achievement.get(chara_id),
-    );
-    era.set(
-      `love:${chara_id}`,
-      era.get(`love:${chara_id}`) || era.get('flag:马娘初始爱慕'),
     );
   },
   reset_chara,

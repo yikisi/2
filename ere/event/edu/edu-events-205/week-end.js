@@ -7,10 +7,12 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
@@ -22,6 +24,7 @@ module.exports = async (_, __, event_object) => {
   const me = get_chara_talk(0),
     montjeu = get_chara_talk(204),
     vp = get_chara_talk(205);
+  let temp;
   switch (event_object?.arg) {
     case 47 + 33:
       await print_event_name('奔向远方', vp);
@@ -197,10 +200,10 @@ module.exports = async (_, __, event_object) => {
       await montjeu.say_and_wait('……我明白了。');
       await era.printAndWait(`${me.name} 这样做，是要面对自己。`);
       await era.printAndWait(`那就像是解剖每个人都无可奈何的那份不成熟一样。`);
-      era.printButton(`「我在最前列看到了几年前你的凯旋门赏，」`, 1);
+      era.printButton(`回忆痛苦的过去`, 1);
       await era.input();
       await me.say_and_wait(
-        `你和怪鸟来到这里，在竭尽全力的战斗之时，怪鸟被超越的样子的时候，我被无能为力的无力感袭击了。`,
+        `我在最前列看到了几年前你的凯旋门赏，你和怪鸟来到这里，在竭尽全力的战斗之时，怪鸟被超越的样子的时候，我被无能为力的无力感袭击了。`,
       );
       await era.printAndWait(
         `直截了当地说，${montjeu.sex}对日本的很多训练员来说是一种创伤。`,
@@ -401,5 +404,527 @@ module.exports = async (_, __, event_object) => {
       era.println();
       sys_love_uma(205, 5) && (await era.waitAnyKey());
       era.set('cflag:205:招募状态', recruit_flags.yes);
+      break;
+    case 95 + 42:
+      temp = [0, 0];
+      await print_event_name('永远属于你', vp);
+      await era.printAndWait(
+        `那是一个假日的早晨，突然内线电话响了，${me.name} 走向门口。`,
+      );
+      await vp.say_and_wait(`Salut！训练员，我来了！`);
+      era.print(`${me.name} 决定：`);
+      era.printButton(`关上门`, 1);
+      era.printButton(`……看错了吗？（好感-10，爱慕+1）`, 2);
+      if ((await era.input()) === 2) {
+        temp = [-10, 1];
+      }
+      await vp.say_and_wait(`喂喂，是我啊！`);
+      era.printButton(`是来诈骗的吗？`, 1);
+      era.printButton(`「请回吧，我没有钱！」（好感-10，爱慕+1）`, 2);
+      if ((await era.input()) === 2) {
+        temp[0] -= 10;
+        temp[1]++;
+      }
+      await era.printAndWait(
+        `${
+          me.name
+        } 想要关门，很遗憾人类不可能用腕力战胜${vp.get_uma_sex_title()}。`,
+      );
+      await era.printAndWait(`门被撬开了。`);
+      await era.printAndWait(
+        `${vp.get_child_sex_title()}一不小心在门口摔了个屁股蹲儿。`,
+      );
+      await era.printAndWait(
+        `法国的公主、天才${vp.get_teen_sex_title()}，不过在 ${
+          me.name
+        } 眼前整理头发的样子让人忍俊不禁。`,
+      );
+      await era.printAndWait(
+        `虽然服装依旧是短裤配T恤，但是个子比相遇时大了不少。`,
+      );
+      await era.printAndWait(
+        `欧美人特有的皮肤似乎晶莹剔透，脸上留着些许稚气。`,
+      );
+      await era.printAndWait(
+        `${me.name}们 在凯旋门赏上取得了胜利。从那以后，在电视和杂志上频繁登场，与品牌公司合作，一跃成为了红极一时的人。`,
+      );
+      await vp.say_and_wait(`我在哪里由我决定，训练员。`);
+      await era.printAndWait(
+        `视线和视线互相碰撞。关于主张，${vp.sex}有一定的道理。${vp.name} 脸上露出了自豪的表情。`,
+      );
+      await era.printAndWait(
+        `${vp.name} 是世界最强的${vp.get_uma_sex_title()}，${
+          me.name
+        } 不会忘记那时的情景。`,
+      );
+      await era.printAndWait(`身穿蓝色调的胜负服冲过终点线的瞬间。`);
+      await era.printAndWait(
+        `那是一种兼具与中学生相称的坦率和正直，有着与年龄相称的不服输，充满活力的${vp.get_uma_sex_title()}的感觉。`,
+      );
+      await era.printAndWait(
+        `那时的孩子长大了。个子变高，渐渐成了苗条的模特体型。`,
+      );
+      await era.printAndWait(
+        `头发连发梢都打理的井井有条，简直像人偶一样齐整。`,
+      );
+      await era.printAndWait(`货真价实的美人。`);
+      await vp.say_and_wait(`${sys_get_callname(205, 0)}。`);
+      await vp.say_and_wait(`我不想回去。`);
+      await vp.say_and_wait(`但只要你不愿意，我立刻就走。`);
+      await era.printAndWait(
+        `${vp.sex}的眼睛映出了 ${me.name} 糟糕的脸，不过本来就是刚起床。`,
+      );
+      era.print(`${me.name} 的答复是……`);
+      era.printButton(`「……该干嘛干嘛去。」`, 1);
+      era.printButton(`「出去走走吧。」（好感+15）`, 2, {
+        disabled: era.get('love:205') < 50,
+      });
+      if ((await era.input()) === 1) {
+        await vp.say_and_wait(`……明白了。`);
+        await era.printAndWait(`这可能是标准答案，但或许不是最佳答案。`);
+        await era.printAndWait(
+          `${vp.name} 直截了当地应答，回到了自己走过来的路上。`,
+        );
+        await era.printAndWait(
+          `按照 ${me.name} 说的回去，${vp.sex}的背影渐行渐远。`,
+        );
+        await era.printAndWait(
+          `那个样子明明是 ${me.name} 想要的，但不知为什么却没能看下去。`,
+        );
+        await era.printAndWait(`为什么？不，理由很明显。`);
+        await era.printAndWait(`——穿透身心的虚脱感慢慢地灼烧着内心。`);
+        await era.printAndWait(`不用伸出手吗？不知从哪里传来了那样的话。`);
+        await era.printAndWait(
+          `想要伸出手，连那个 ${me.name} 都犹豫了。结果 ${me.name} 什么都没做。`,
+        );
+        await era.printAndWait(`然后 ${me.name} 像想要转移思绪一样回到家里。`);
+        era.println();
+        sys_like_chara(205, 0, temp[0] - 600, true, temp[1]) &&
+          (await era.waitAnyKey());
+      } else {
+        era.drawLine();
+        await era.printAndWait(`${vp.name} 依旧穿着短裤和黑色T恤，戴着墨镜。`);
+        await era.printAndWait(
+          `也许是因为不想被粉丝发现，特征性的栗毛被整理得太整齐，反倒吸引了周围的目光。`,
+        );
+        await era.printAndWait(
+          `据说，${vp.get_uma_sex_title()}的美貌大部分由毛色决定。`,
+        );
+        await era.printAndWait(
+          `当然，长相等也要考虑，但总的来说，毛发的比重更重。`,
+        );
+        await era.printAndWait(
+          `${
+            vp.name
+          } 的头发和尾巴，和这一带的${vp.get_uma_sex_title()}完全不同。`,
+        );
+        await era.printAndWait(`变装，没有意义啊……`);
+        await era.printAndWait(`${vp.name} 从车窗眺望外面的景色。`);
+        await era.printAndWait(
+          `摇摇晃晃地坐了一会儿，因换乘而下车，为了不在拥挤的人群中走散，${me.name} 牵着 ${vp.name} 的手带路。`,
+        );
+        await era.printAndWait(
+          `突然回头一看，在人群中混迹的${vp.sex}，脸上浮现出像在泥中盛开的花朵一样美丽的笑容。`,
+        );
+        await era.printAndWait(`因为是休息日，所以行人很多。带家人的也很多。`);
+        await era.printAndWait(
+          `被妈妈牵着手的孩子东张西望地环视着周围。${vp.name} 对那个孩子有点目不转睛。`,
+        );
+        await era.printAndWait(
+          `${vp.sex}用湿润的眼睛，认真地说出了好似恳求的话语。`,
+        );
+        await vp.say_and_wait(`再多一点，再多一点就好了。`);
+        await era.printAndWait(
+          `结果，${me.name}们 要去的地方只有赛马场，来看了大井赛马场的比赛。`,
+        );
+        await vp.say_and_wait(`果然是比赛啊！`);
+        era.printButton(`「……」`, 1);
+        await era.input();
+        await era.printAndWait(`${vp.name} 有兴致地看着比赛。`);
+        await era.printAndWait(`很有趣，现在进行的是G3。`);
+        era.printButton(`「有点意外。」`, 1);
+        await era.input();
+        await vp.say_and_wait(`什么？`);
+        era.printButton(
+          `「凯旋门${vp.get_uma_sex_title()}对G3比赛感兴趣。」`,
+          1,
+        );
+        await era.input();
+        await vp.say_and_wait(`……也许是这样啊。`);
+        await vp.say_and_wait(
+          `如果你也是训练员的话应该知道，在${vp.sex}们看来，这也像凯旋门一样。`,
+        );
+        era.printButton(`「那不是说得太过分了吗？」`, 1);
+        await era.input();
+        await vp.say_and_wait(`……`);
+        await era.printAndWait(`${vp.name} 的话，不知什么时候分量增加了。`);
+        await era.printAndWait(`几年前的 ${me.name} 没有资格说${vp.sex}。`);
+        await vp.say_and_wait(
+          `对${vp.sex}们来说是大舞台，为此而调整，来到这里。赌上自己的灵魂。所以——`,
+        );
+        await me.say_and_wait('冲线了。', true);
+        era.printButton(`「……是吗？」`, 1);
+        await era.input();
+        await era.printAndWait(
+          `对 ${me.name} 来说，这是一场没有任何区别的G3比赛。`,
+        );
+        await era.printAndWait(
+          `做了普通的准备，普通的努力，有一点闪光的地方。那样的比赛。`,
+        );
+        await era.printAndWait(
+          `也许是因为 ${me.name} 站在训练员的立场上看了很多比赛，所以看漏了重要的东西。`,
+        );
+        await vp.say_and_wait(`……哈哈。`);
+        await era.printAndWait(`干笑盈盈。`);
+        await vp.say_and_wait(`……`);
+        await vp.say_and_wait(`……`);
+        await era.printAndWait(
+          `赛马场很冷清。比赛已经结束了。但是，${me.name} 一点也起不来，弯着像灌了铅一样沉重的膝盖，坐在比赛场的观众席上。`,
+        );
+        await era.printAndWait(`风很冷。`);
+        era.drawLine();
+        await era.printAndWait(
+          `到了深夜，${me.name} 和 ${vp.name} 走在东京的街道上。`,
+        );
+        await vp.say_and_wait(`……我想参加日本杯。`);
+        await vp.say_and_wait(`……`);
+        new TreveEduMarks().japa_cup = 4;
+        await era.printAndWait(
+          `${vp.name} 接下来似乎要讲一个重要的故事，这点 ${me.name} 心知肚明。`,
+        );
+        await vp.say_and_wait(`我忘不了你了，训练员。`);
+        await vp.say_and_wait(
+          `国家、人种什么的，我不知道。但如果是训练员你的话，我觉得会很开心。`,
+        );
+        await era.printAndWait(`这是 ${me.name} 的罪状。`);
+        await era.printAndWait(`感到胸口隐隐作痛，${me.name} 假装没事。`);
+        await vp.say_and_wait(`我爱你。`);
+        await vp.say_and_wait(`我一直爱你。`);
+        await era.printAndWait(`话语很流畅。`);
+        await era.printAndWait(
+          `一定是反复练习了好几次。为了 ${me.name} 特地练习。`,
+        );
+        await era.printAndWait(`头脑一片空白。心悸，呼吸好像变粗了？`);
+        await era.printAndWait(
+          `每次被${vp.sex}展露心意的时候，${me.name} 的心也会被暴露出来。`,
+        );
+        await era.printAndWait(
+          `就像抽丝剥茧一样，${vp.name} 的话就像一张一张地扯掉面纱，让 ${me.name} 的心也赤裸。`,
+        );
+        await era.printAndWait(`而 ${me.name} 感到了无可奈何的遗憾。`);
+        await era.printAndWait(`${vp.name} 反复说了很多话。`);
+        await vp.say_and_wait(
+          `……呐，${
+            me.actual_name
+          }。如果我们不是训练员和${vp.get_uma_sex_title()}的话，我们能相遇吗？`,
+        );
+        era.printButton(`「……不会。」`, 1);
+        await era.input();
+        await vp.say_and_wait(`也是啊。`);
+        await vp.say_and_wait(`……`);
+        await era.printAndWait(
+          `从 ${me.name}们 站的这个地方抬头，天上只有几颗一等星闪闪发光。`,
+        );
+        await era.printAndWait(`这是从市中心看到的廉价星空。`);
+        await era.printAndWait(
+          `出生在这低沉的星空下，恐怕也会在这里死去的 ${me.name} 和抱着满分星空般未来的${vp.sex}。`,
+        );
+        await era.printAndWait(`不平衡什么的很明显。`);
+        await era.printAndWait(
+          `${me.name} 告诉了眼看就要哭出来的 ${vp.name}。`,
+        );
+        await era.printAndWait(`夜风吹来，快日落了。`);
+        await era.printAndWait(`${vp.name} 的眼睛和相遇的时候比没有什么变化。`);
+        await era.printAndWait(
+          `和至今为止回想过好几次的记忆中的${vp.sex}一样。`,
+        );
+        await era.printAndWait(
+          `但是，也有改变的事情。${vp.sex}萌生了对比赛以外的兴趣。`,
+        );
+        await era.printAndWait(`时间会改变一切。`);
+        await era.printAndWait(
+          `${me.name} 和${vp.sex}不一样，只会拖${vp.sex}的后腿。`,
+        );
+        await era.printAndWait(
+          `${me.name} 不想拖${vp.get_uma_sex_title()}的后腿。`,
+        );
+        await era.printAndWait(`所以——`);
+        era.printButton(`「分手了。」`, 1);
+        await era.input();
+        await vp.say_and_wait(`嗯……！`);
+        await me.say_and_wait(
+          `不要再出现在我面前。如果不是工作的话，也不要来日本。消失吧。`,
+        );
+        await vp.say_and_wait(`为什么，为什么这么说！`);
+        await me.say_and_wait(`……`);
+        await vp.say_and_wait(`记忆中的训练员很温柔，我一直在想——`);
+        await me.say_and_wait(`那就错了。`);
+        await vp.say_and_wait(`嗯……！`);
+        await me.say_and_wait(
+          `……马上就要到晚上了，睡了就要到早上了。这样的话就是明天了，再见——`,
+        );
+        await vp.say_and_wait(`等一下！`);
+        await me.say_and_wait(`……`);
+        await vp.say_and_wait(`至少，至少心情…至少训练员的心情——`);
+        era.printButton(`「不知道。」`, 1);
+        await era.input();
+        await vp.say_and_wait(`啊……！`);
+        await era.printAndWait(`${me.name} 说出了适合最低等人生的话。`);
+        await vp.say_and_wait(`骗子！`);
+        await me.say_and_wait(`……`);
+        await era.printAndWait(
+          `${me.name} 听到了 ${vp.name} 从背后离去的脚步声。`,
+        );
+        await era.printAndWait(`${me.name} 晃晃悠悠地来到了东京赛马场。`);
+        await era.printAndWait(
+          `赛马场很冷，${me.name} 感到周围的喧嚣在复苏，是行驶在道路上的车的声音和树叶摇曳的声音。`,
+        );
+        await era.printAndWait(`十一月了，日本杯临近。`);
+        await era.printAndWait(
+          `${me.name} 暂时站在那里，在秋天的赛马场一个人站着。`,
+        );
+        await era.printAndWait(`${me.name} 的旁边没有别人。`);
+        await era.printAndWait(`这样就好了，所以——`);
+        era.printButton(`「忘了吧……」`, 1);
+        await era.input();
+        await era.printAndWait(`——过了几分钟呢。`);
+        await era.printAndWait(`天已经黑了，夜幕降临到东京赛马场。`);
+        await era.printAndWait(`听广播好像马上就要到关门的时间了。`);
+        await era.printAndWait(`心里似乎有一个洞。`);
+        await era.printAndWait(
+          `当 ${me.name} 将要离开时……出入口站着 ${vp.name}。`,
+        );
+        era.printButton(`「为什么你会在这里……」`, 1);
+        await era.input();
+        await era.printAndWait(
+          `${vp.name} 用惊人的脚力向 ${me.name} 冲刺。${vp.sex}的头像枪一样扎进 ${me.name} 的腹部，肺彷佛被压碎了。`,
+        );
+        await era.printAndWait(`痛、相当痛。`);
+        await era.printAndWait(`刺骨的痛感刺激着神经。`);
+        await era.printAndWait(
+          `${vp.name} 抱在 ${me.name} 的肚子上，${vp.sex}——`,
+        );
+        await era.printAndWait(`哭了。`);
+        await era.printAndWait(
+          `那蓝宝石般美丽的眼睛扭曲着，像要裂开一样皱眉。`,
+        );
+        await vp.say_and_wait(
+          `训练员笨蛋！Stupide idiot.Pourquoi dis-tu des choses aussi horribles！（大笨蛋！为什么这么过分！）`,
+        );
+        era.printButton(`「等一下！我不知道你在说什么！——」`, 1);
+        await era.input();
+        await era.printAndWait(`${vp.name} 就这样在 ${me.name} 的臂弯里哭。`);
+        await era.printAndWait(
+          `擅自扑上来，受到伤害的是 ${me.name}，${vp.sex}却在哭。`,
+        );
+        await era.printAndWait(`当然了，是 ${me.name} 伤了${vp.sex}的心。`);
+        await era.printAndWait(
+          `准备清场的工作人员来了。惊讶地盯着 ${me.name}们 看了一眼。`,
+        );
+        await era.printAndWait(`大概是被当成疯丫头和坏男人，情侣吵架吧。`);
+        await era.printAndWait(`那个人马上转移视线，回到了自己的工作中。`);
+        await era.printAndWait(
+          `灯饰点缀着赛马场，在那样的地方 ${me.name}们 蹲在地上。`,
+        );
+        await vp.say_and_wait(
+          `你以为我是抱着怎样的想法站在这里的！要来接我的话就赶紧来！`,
+        );
+        era.printButton(`「诶！？不是你埋伏我——」`, 1);
+        await era.input();
+        await vp.say_and_wait(`吵死了，吵死了！我不想听你狡辩，你这个笨蛋！`);
+        era.printButton(`「诶欸欸？」`, 1);
+        await era.input();
+        await era.printAndWait(
+          `${
+            me.name
+          } 感觉真的快要被${vp.get_uma_sex_title()}特有的怪力抱碎了，于是在 ${
+            vp.name
+          } 的背上轻拍。`,
+        );
+        await era.printAndWait(
+          `明明说了“abandonne放弃”，${vp.name} 却一点也不想离开。痛哭的${vp.sex}，反倒增强了力量。`,
+        );
+        await era.printAndWait(`也许这就是自作自受吧…………但是肋骨真的要断了。`);
+        await vp.say_and_wait(`怎么样？`);
+        era.printButton(`「？」`, 1);
+        await era.input();
+        await vp.say_and_wait(`你爱我吗！？不爱我吗！？`);
+        era.printButton(`「不是这样说的问题——」`, 1);
+        await era.input();
+        await vp.say_and_wait(`就是这样的问题！`);
+        era.printButton(`「如果不爱你，我就不会这么困扰了。」`, 1);
+        era.printButton(`「因为喜欢你，所以才困扰啊！」`, 2);
+        await era.input();
+        await era.printAndWait(`${vp.name} 就像一条得水的游鱼。`);
+        await vp.say_and_wait(
+          `那就快点举行婚礼吧！订婚，还要买戒指……‘师傅’一定也会祝福我们的！`,
+        );
+        await vp.say_and_wait(
+          `在法国做的话是教会吧？在日本也可以，穿着雪白的衣服在寺庙前对爱发誓！`,
+        );
+        era.printButton(`「不是寺庙人家叫神社。」`, 1);
+        await era.input();
+        await era.printAndWait(
+          `${me.name} 为了阻止自嗨的 ${vp.name} 而抓住了${vp.sex}的肩膀。`,
+        );
+        await vp.say_and_wait(`好大胆…`);
+        await vp.say_and_wait(`在外面什么的……但如果是你的话——`);
+        era.printButton(`「别说奇怪的话了！我并没有说什么结婚的事！」`, 1);
+        await era.input();
+        await vp.say_and_wait(`也就是先成为情侣的意思吧，我很感动！`);
+        await vp.say_and_wait(
+          `周围的人也一定会理解并接受的！否则，孩子真的会很痛苦！`,
+        );
+        era.printButton(`「我又不是欧洲人。」`, 1);
+        await era.input();
+        await vp.say_and_wait(`人种那么重要！？`);
+        era.printButton(`「很重要吧！？」`, 1);
+        await era.input();
+        await vp.say_and_wait(
+          `我不是看了你的人种和容貌才爱上你的，而是爱上了你的心！`,
+        );
+        await vp.say_and_wait(
+          `亚洲人？所以呢，怎么了？我会对吵吵嚷嚷的人大声喊‘吵死了’！谁都不会妨碍我们！`,
+        );
+        await vp.say_and_wait(`不要随便决定我的价值！`);
+        await vp.say_and_wait(
+          `我的价值是由我决定的，将来都是！请不要自恋！即使和你结婚，我也不会改变什么！如果有人说烦人的话，我就把他头拧下来！`,
+        );
+        era.printButton(`「这有点……」`, 1);
+        era.printButton(`「不至于……」`, 2);
+        await era.input();
+        await era.printAndWait(
+          `于是，虽然哭肿了的脸，尽管如此 ${vp.name} 也高贵地站了起来。`,
+        );
+        await era.printAndWait(
+          `即使脱了妆，${vp.sex}还是很美。像是用神圣照亮夜晚的月亮。`,
+        );
+        await vp.say_and_wait(
+          `我是天才${vp.get_uma_sex_title()}！大部分的事情都可以说是fermez-la！`,
+        );
+        era.printButton(`「我不想让你烦心。」（好感+10，爱慕+1）`, 1);
+        era.printButton(`「你要明白……」`, 2);
+        if ((await era.input()) === 1) {
+          temp[0] += 10;
+          temp[1]++;
+        }
+        await vp.say_and_wait(
+          `不明白，完全不明白！如果你喜欢我的话，就让我开心吧！我说了要和你在一起！我说只有你才能让我幸福！`,
+        );
+        era.printButton(`「『能让我幸福的只有你』……这才是求婚吧！」`, 1);
+        await era.input();
+        await vp.say_and_wait(`之前不是！现在的才是求婚！`);
+        era.printButton(`「莫名其妙！」`, 1);
+        await era.input();
+        await vp.say_and_wait(`我喜欢你到莫名其妙的程度！`);
+        await era.printAndWait(
+          `彼此的吼声在东京夜晚的一角回响。彼此都气喘吁吁，但没有移开视线。`,
+        );
+        await vp.say_and_wait(
+          `我一直在心中的某个地方追着你！我试过不去想你，但还是做不到！和训练员聊天的日子，那些记忆就像是被录下了一样循环播放着！`,
+        );
+        era.print(`${me.name} 也是……`);
+        era.printButton(`「一直想着你。」`, 1);
+        era.printButton(`「一直忘不了……」`, 2);
+        await era.input();
+        await vp.say_and_wait(`那么！`);
+        await era.printAndWait(
+          `${vp.name} 从膝盖上靠近 ${me.name}，抓住 ${me.name} 的胸口。`,
+        );
+        await era.printAndWait(`被美女吓到的话会害怕，这好像是真的。`);
+        await era.printAndWait(
+          `${vp.sex}的法裔端正容貌逼近到了近距离。${vp.name} 对 ${me.name} 开口。${vp.sex}的怒吼在大井赛马场前响起。`,
+        );
+        await vp.say_and_wait(`你这个笨蛋。`);
+        era.printButton(`「我不是笨蛋」`, 1);
+        await era.input();
+        await vp.say_and_wait(
+          `不，笨蛋！就算弱小也没关系……如果没出息的话就携手支持就好了。你没有放弃责任，我更不能放弃。`,
+        );
+        await vp.say_and_wait(
+          `训练员和${vp.get_uma_sex_title()}的关系是对等的。我们会全力奔跑，训练员则会引导。就像是缺一不可的夫妇一样。`,
+        );
+        await vp.say_and_wait(`所以……咕、嘶，我们才会互相吸引，不是吗？`);
+        await era.printAndWait(
+          `${me.name} 把比自己小十岁的${vp.get_child_sex_title()}子弄哭了。`,
+        );
+        await era.printAndWait(
+          `夜晚有点冷。因为白天很热，所以 ${me.name}们 穿得很少。`,
+        );
+        await era.printAndWait(
+          `尽管如此，两个人聚在一起，像虫子一样用体温温暖彼此的话，就不会冷了。`,
+        );
+        await era.printAndWait(
+          `${vp.name} 依然露出忧心忡忡的表情，${me.name} 抚摸着${vp.sex}的脑袋。`,
+        );
+        era.printButton(`「有点冷？」`, 1);
+        await era.input();
+        await vp.say_and_wait(`……嗯。`);
+        era.printButton(`「先去你住过的酒店吧。这样下去会感冒的。」`, 1);
+        await era.input();
+        await vp.say_and_wait(`好的。`);
+        await era.printAndWait(`${vp.sex}按照 ${me.name} 说的一起走了。`);
+        await era.printAndWait(`灯饰的光辉照耀着 ${me.name}们 的背影。`);
+        era.drawLine();
+        era.printButton(`「${vp.name}，这是怎么回事……！？」`, 1);
+        await era.input();
+        await vp.say_and_wait(
+          `带${vp.get_child_sex_title()}子进房间，不觉得只有一件事要做吗？`,
+        );
+        await era.printAndWait(
+          `勉强遮住皮肤的布被解开，${vp.name} 那双海蓝的眼睛发出奇怪的光。`,
+        );
+        await vp.say_and_wait(
+          `rb:Bonne soirée（祝你有个美好的夜晚），rb:ma cheri（我心爱的人）。`,
+        );
+        await quick_into_sex(205);
+        await era.printAndWait(
+          `本来只是打算在房间里冷静一下，等着的时候，出现了穿着浴巾的 ${vp.name}。`,
+        );
+        await era.printAndWait(`未成年淫行上演。`);
+        await era.printAndWait(
+          `总之，完全失去了法律这一后盾的 ${me.name} 不可能阻止世界最强的${vp.sex}，就这样完全上垒了。`,
+        );
+        await era.printAndWait(`${me.name} 和担当在夜晚玩得很开心。`);
+        await vp.say_and_wait(`早上好，亲爱的`);
+        await vp.say_and_wait(`……`);
+        await era.printAndWait(
+          `旁边是一个裸体的 ${vp.name}，${me.name} 对这种状况感到安心。`,
+        );
+        era.printButton(`「……早上好，我的公主。」`, 1);
+        await era.input();
+        await vp.say_and_wait(`咦，你承认了吗？`);
+        await vp.say_and_wait(`……这样啊，果然从一开始就这样做就好了。`);
+        era.printButton(`「不要说可怕的话。」`, 1);
+        await era.input();
+        await era.printAndWait(
+          `从窗户射入的朝阳照射下的 ${vp.name} 像画上的圣母一样美丽。`,
+        );
+        await era.printAndWait(
+          `被纯白的面纱包着，一边趴着一边看着 ${me.name} 的${vp.sex}，只隐藏着突出的部分，让背鲁莽地露出。`,
+        );
+        await era.printAndWait(
+          `${me.name} 冲动地抚摸着像艺术品一样的 ${vp.name} 的脑袋。${vp.sex}那流丽的发丝穿过手指。`,
+        );
+        await vp.say_and_wait(`……♪`);
+        await vp.say_and_wait(`……`);
+        await era.printAndWait(`看着${vp.sex}微笑的脸，${me.name} 下定决心。`);
+        await vp.say_and_wait(
+          `我最喜欢你了。到现在为止，我一直在想你。我梦想着这样说话。`,
+        );
+        era.printButton(`「我也是，${vp.name}」`, 1);
+        await era.input();
+        await era.printAndWait(`微笑着的${vp.sex}，果然很漂亮。`);
+        await vp.say_and_wait(`我爱你，训练员。`);
+        era.printButton(`「啊，我爱你，只属于我的 ${vp.name}。」`, 1);
+        await era.input();
+        await era.printAndWait(
+          `${vp.sex}那可爱地握着 ${me.name} 的手的样子，在任何人看来都是圣女。`,
+        );
+        await era.printAndWait(`${me.name} 眼前的爱马美颜生彩，笑靥生辉。`);
+        era.println();
+        sys_like_chara(205, 0, temp[0] + 15, true, temp[1]) &&
+          (await era.waitAnyKey());
+      }
   }
 };

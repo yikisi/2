@@ -1,4 +1,4 @@
-const chara_colors = require('../../ere/data/chara-colors');
+const { chara_colors } = require('../../ere/data/chara-colors');
 
 let dict = {},
   flag = true;

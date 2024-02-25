@@ -14,7 +14,7 @@ const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const color_17 = require('#/data/chara-colors')[17];
+const color_17 = require('#/data/chara-colors').chara_colors[17];
 
 function get_luna_or_emperor() {
   return new CharaTalk(17).set_color(color_17[new LunaEduMarks().emperor]);

@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_aim_race = require('#/event/snippets/check-aim-race');
@@ -13,15 +14,14 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
 const { attr_change_colors } = require('#/data/color-const');
+const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205');
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { location_enum } = require('#/data/locations');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
-const { location_enum } = require('#/data/locations');
-const EventMarks = require('#/data/event/event-marks');
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 const handlers = {};
 
@@ -34,9 +34,15 @@ aim_races[get_aim_race_index(race_enum.prix_lat, 1)] = 3;
 aim_races[get_aim_race_index(race_enum.prix_lat, 2)] = 2;
 
 /** @param {{edu_weeks:number,race:number}} extra_flag */
-handlers[check_stages.aim_race] = (extra_flag) =>
-  aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
-  aim_races[extra_flag.race];
+handlers[check_stages.aim_race] = (extra_flag) => {
+  if (extra_flag.race === race_enum.japa_cup) {
+    return new TreveEduMarks().japa_cup;
+  }
+  return (
+    aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
+    aim_races[extra_flag.race]
+  );
+};
 
 handlers[check_stages.next_week] = () => {
   if (era.get('cflag:205:招募状态')) {
@@ -61,7 +67,7 @@ handlers[check_stages.next_week] = () => {
           ) {
             add_event(
               event_hooks.week_start,
-              new EventObject(205, cb_enum.edu).set_arg(47 + 24),
+              new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
             );
           }
           break;
@@ -69,11 +75,11 @@ handlers[check_stages.next_week] = () => {
           if (sys_reg_race(205).curr.race === race_enum.prix_lat) {
             add_event(
               event_hooks.week_start,
-              new EventObject(205, cb_enum.edu).set_arg(47 + 33),
+              new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
             );
             add_event(
               event_hooks.week_end,
-              new EventObject(205, cb_enum.edu).set_arg(47 + 33),
+              new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
             );
           }
           break;
@@ -81,7 +87,7 @@ handlers[check_stages.next_week] = () => {
           if (era.get('cflag:205:位置') === location_enum.paris) {
             add_event(
               event_hooks.foreign_travel,
-              new EventObject(205, cb_enum.edu, true).set_arg(47 + 35),
+              new EventObject(205, cb_enum.edu, true).set_arg(edu_weeks),
             );
           }
           break;
@@ -96,16 +102,16 @@ handlers[check_stages.next_week] = () => {
           ) {
             add_event(
               event_hooks.week_start,
-              new EventObject(205, cb_enum.edu).set_arg(95 + 25),
+              new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
             );
             add_event(
               event_hooks.out_start,
-              new EventObject(205, cb_enum.edu, true).set_arg(95 + 25),
+              new EventObject(205, cb_enum.edu, true).set_arg(edu_weeks),
             );
           }
           break;
         case 95 + 26:
-          if (new EduEventMarks(205).get('tea')) {
+          if (new TreveEduMarks().tea) {
             new EventMarks(0).sub(event_hooks.out_start);
           }
           era.set('cflag:205:招募状态', recruit_flags.yes);
@@ -124,7 +130,7 @@ handlers[check_stages.next_week] = () => {
           ) {
             add_event(
               event_hooks.week_end,
-              new EventObject(205, cb_enum.edu).set_arg(95 + 28),
+              new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
             );
           }
           break;
@@ -139,7 +145,7 @@ handlers[check_stages.next_week] = () => {
           ) {
             add_event(
               event_hooks.week_start,
-              new EventObject(205, cb_enum.edu).set_arg(95 + 29),
+              new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
             );
           }
           break;
@@ -147,11 +153,11 @@ handlers[check_stages.next_week] = () => {
           if (era.get('cflag:205:招募状态') !== recruit_flags.yes) {
             add_event(
               event_hooks.week_end,
-              new EventObject(205, cb_enum.edu).set_arg(95 + 33),
+              new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
             );
           }
           break;
-        case 95 + 41:
+        case 95 + 42:
           if (
             check_aim_race(
               era.get('cflag:205:育成成绩'),
@@ -167,16 +173,16 @@ handlers[check_stages.next_week] = () => {
             )
           ) {
             add_event(
-              event_hooks.week_start,
-              new EventObject(205, cb_enum.edu).set_arg(95 + 41),
+              event_hooks.week_end,
+              new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
             );
           }
       }
-      check_and_register_aim_race(205, aim_races);
+      check_and_register_aim_race(205, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 9) {
       add_event(
         event_hooks.week_start,
-        new EventObject(205, cb_enum.edu).set_arg(143 + 9),
+        new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
       );
     }
   } else if (

@@ -30,10 +30,10 @@ aim_races[get_aim_race_index(race_enum.koku_kin, 1)] = 2;
 aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 2;
 aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 2;
 
-aim_races[get_aim_race_index(race_enum.takz_kin, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.chun_hai, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 2;
+aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.chun_hai, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
 
 /** @param {{edu_weeks:number,race:number}} extra_flag */
 handlers[check_stages.aim_race] = (extra_flag) =>

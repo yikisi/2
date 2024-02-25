@@ -5,6 +5,7 @@ const {
   sys_get_callname,
 } = require('#/system/sys-calc-chara-others');
 
+const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -330,6 +331,7 @@ async function love_74_back_school(chara_talk) {
       '不过，这样的话，我也不能再悠哉悠哉下去了，再不行动的话……',
     );
     era.set('cflag:60:爱慕暂拒', 74);
+    await punish_rejecting_love(60);
   }
 }
 async function love_89(chara_talk) {

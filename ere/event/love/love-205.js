@@ -61,7 +61,7 @@ handlers[49] = async (vp, me) => {
     `「我，是这么简单的法兰西${vp.get_child_sex_title()}啊……」（升级关系）`,
     1,
   );
-  era.printButton('「别胡思乱想了，再不睡要被师傅说的。」（暂停升级）', 1);
+  era.printButton('「别胡思乱想了，再不睡要被师傅说的。」（暂停升级）', 2);
   const ret = await era.input();
   if (ret === 1) {
     era.println();
@@ -649,7 +649,7 @@ handlers.lust = async (vp, me) => {
     vp.get_colored_name(),
     ' 本能地翻起白眼，等 ',
     me.get_colored_name(),
-    ' 肉棒拔出，几滴精液还落到了地摊上。',
+    ' 肉棒拔出，几滴精液还落到了地毯上。',
   ]);
   await era.printAndWait([vp.get_colored_name(), ' 捂着嘴，快速爬起来。']);
   await era.printAndWait('几点精液已经从嘴角溢出，玷污了她白色的丝质手套。');

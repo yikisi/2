@@ -6,6 +6,7 @@ const { get_image } = require('#/system/sys-calc-image');
 
 const { join_list } = require('#/utils/list-utils');
 
+const CharaTitles = require('#/data/chara-titles');
 const { attr_colors, hair_colors, skin_colors } = require('#/data/const.json');
 const {
   get_skin,
@@ -156,10 +157,10 @@ module.exports = {
       .map((e) => `${e}_半身`)
       .join('\t');
 
-    /** @type {{n:string,c:string,s:boolean}[]} */
-    const titles = era.get(`cstr:${chara.id}:称号`);
-    const title_info_list = [],
-      cur_title = titles.filter((e) => e.s)[0];
+    const titles = new CharaTitles(chara.id),
+      title_list = titles.get(),
+      title_info_list = [],
+      cur_title = titles.get_curr_title();
     title_info_list.push(
       {
         accelerator: 30,
@@ -178,7 +179,7 @@ module.exports = {
         type: 'text',
       },
     );
-    titles.forEach((e, i) => {
+    title_list.forEach((e, i) => {
       title_info_list.push(
         {
           accelerator: i + 31,
@@ -353,12 +354,12 @@ module.exports = {
         } else {
           const selected = command - 31;
           if (selected === -1) {
-            titles.forEach((e) => (e.s = false));
-          } else if (titles[selected].s) {
-            titles[selected].s = false;
+            title_list.forEach((e) => (e.s = false));
+          } else if (title_list[selected].s) {
+            title_list[selected].s = false;
           } else {
-            titles.forEach((e) => (e.s = false));
-            titles[selected].s = true;
+            title_list.forEach((e) => (e.s = false));
+            title_list[selected].s = true;
           }
         }
       },

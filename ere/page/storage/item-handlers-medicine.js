@@ -27,6 +27,7 @@ module.exports = (handlers) => {
         sys_change_weight(0, get_random_value(20, 40, true));
         era.add('item:情人节巧克力', -1);
       }
+      return true;
     } else {
       await era.printAndWait([me.get_colored_name(), ' 已经很饱了……']);
     }

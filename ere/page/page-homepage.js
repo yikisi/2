@@ -1,7 +1,13 @@
 ﻿const era = require('#/era-electron');
 
+const {
+  begin_and_init_ero,
+  end_ero_and_show_result,
+} = require('#/system/ero/sys-prepare-ero');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
+const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const { sys_change_status_by_base } = require('#/system/sys-calc-chara-others');
+const sys_filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 const { init_chara } = require('#/system/sys-init-chara');
 const sys_next_week = require('#/system/sys-next-week');
@@ -13,20 +19,20 @@ const check_game_over = require('#/page/components/game-over');
 const print_page_header = require('#/page/components/page-header');
 const print_ero_page = require('#/page/page-ero');
 
+const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const event_hooks = require('#/data/event/event-hooks');
-const { location_enum } = require('#/data/locations');
-const {
-  begin_and_init_ero,
-  end_ero_and_show_result,
-} = require('#/system/ero/sys-prepare-ero');
-const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const { buff_colors } = require('#/data/color-const');
+const event_hooks = require('#/data/event/event-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const recruit_flags = require('#/data/event/recruit-flags');
+const { location_enum } = require('#/data/locations');
+const notes = require('#/data/notes.json');
 
-let random_event;
+let random_event,
+  notes_index = 0;
 
 async function next_week() {
   era.drawLine();
@@ -71,9 +77,15 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   }
   stop_machine_gun(event_hooks.week_end);
   if ((temp = era.get('flag:床伴'))) {
+    const life_marks = new LifeEventMarks(temp);
     begin_and_init_ero(0, temp);
+    if (life_marks.marital_rape) {
+      era.set('tflag:强奸', temp);
+      era.set('tflag:主导权', temp);
+    }
     await print_ero_page(temp);
     await end_ero_and_show_result(true);
+    life_marks.marital_rape = 0;
   }
   if (continue_flag) {
     await next_week();
@@ -133,6 +145,7 @@ module.exports = async () => {
       stop_machine_gun(event_hooks.week_start);
       const force_be = era.get('flag:强制BE');
       if (force_be) {
+        await era.clear();
         era.drawLine();
         await sys_call_edu_event(force_be, event_hooks.crazy_fan_end);
         era.print('GAME OVER', {
@@ -175,18 +188,34 @@ module.exports = async () => {
       print_curr_chara(chara_id);
     }
 
+    era.drawLine();
+    let hook = -1;
     if (flags.week_start) {
       flags.week_start = false;
       if (chara_id) {
-        era.drawLine();
-        await sys_call_daily_event(chara_id, event_hooks.good_morning);
+        hook = event_hooks.good_morning;
       }
     } else if (flags.after_select) {
       flags.after_select = false;
       if (chara_id) {
-        era.drawLine();
-        await sys_call_daily_event(chara_id, event_hooks.select);
+        hook = event_hooks.select;
       }
+    }
+    if (hook > 0) {
+      await sys_call_daily_event(chara_id, hook);
+    } else {
+      const note_list = [...notes.common];
+      sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach((e) => {
+        if (
+          era.get('flag:当前回合数') - era.get(`cflag:${e}:育成回合计时`) <
+            3 * 48 &&
+          notes[e]
+        ) {
+          note_list.push(...notes[e]);
+        }
+      });
+      const note = note_list[notes_index++ % note_list.length];
+      CharaTalk.say_by_passer_by(note.title, note.content);
     }
 
     await handlers[cur_location](chara_id, save_and_next_week, flags);

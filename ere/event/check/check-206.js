@@ -13,6 +13,12 @@ handlers[check_stages.prison] = handlers[check_stages.rape_in_sleeping] =
     throw new Error();
   };
 
+handlers[check_stages.next_week] = () => {
+  if (era.get('cflag:206:随机招募') < 0 && era.get('flag:当前声望') >= 1000) {
+    era.set('cflag:206:随机招募', 1);
+  }
+};
+
 /**
  * @param {number} stage_id
  * @param extra_flag

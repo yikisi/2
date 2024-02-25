@@ -7,12 +7,11 @@ const { gacha } = require('#/utils/list-utils');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_enum } = require('#/data/train-const');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-
-const chara_colors = require('#/data/chara-colors')[7];
 
 /**
  * @param {HookArg} hook

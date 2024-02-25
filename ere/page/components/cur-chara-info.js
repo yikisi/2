@@ -1,10 +1,13 @@
 const era = require('#/era-electron');
 
+const { get_image } = require('#/system/sys-calc-image');
+
 const race_indicator = require('#/page/components/race-indicator');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
+const CharaTitles = require('#/data/chara-titles');
 const { motivation_colors } = require('#/data/color-const');
 const {
   attr_background_colors,
@@ -18,22 +21,83 @@ const {
   get_status,
   get_train_time,
 } = require('#/data/info-generator');
-const title_desc = require('#/data/desc/title-desc.json');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
-const { get_image } = require('#/system/sys-calc-image');
 
-function cur_chara_component(chara_id, type) {
+/**
+ * @param {number} chara_id
+ * @param {number} [type]
+ * @param {number} [location_npc]
+ */
+function cur_chara_component(chara_id, type, location_npc) {
+  let temp;
   if (!chara_id) {
-    if (type !== chara_info_type.out && type !== chara_info_type.school) {
-      era.drawLine();
-      era.print('未选择互动角色', { align: 'center' });
+    if (location_npc) {
+      const relation = get_relation_info(location_npc),
+        love = get_love_info(location_npc),
+        title = new CharaTitles(location_npc).get_colored_curr_title();
+      era.printInColRows(
+        [{ type: 'divider' }],
+        {
+          columns: [
+            {
+              config: { width: 23 },
+              names: `${era.get(`cstr:${location_npc}:头像`)}_半身`,
+              type: 'image.whole',
+            },
+          ],
+          config: { width: 4 },
+        },
+        {
+          columns: [
+            {
+              content: [
+                title ? [title, ' '] : [],
+                get_chara_talk(301).get_colored_name(),
+              ],
+              type: 'text',
+            },
+            {
+              config: { width: 2 },
+              content: '好感',
+              type: 'text',
+            },
+            {
+              config: { color: relation_colors[relation[0]], width: 22 },
+              content: relation.join(' '),
+              type: 'text',
+            },
+            { config: { width: 2 }, content: '爱慕', type: 'text' },
+            {
+              config: {
+                color: love_colors[love[0]],
+                width: 22,
+              },
+              content: love.join(' '),
+              type: 'text',
+            },
+          ],
+          config: { width: 16 },
+        },
+      );
+    } else if (
+      type !== chara_info_type.out &&
+      type !== chara_info_type.school
+    ) {
+      era.printMultiColumns([
+        { type: 'divider' },
+        {
+          content: '未选择互动角色',
+          type: 'text',
+          config: { align: 'center' },
+        },
+      ]);
     }
   } else {
     era.drawLine();
     const relation = get_relation_info(chara_id),
       love = get_love_info(chara_id),
       growth = era.get(`cflag:${chara_id}:成长阶段`),
-      title = era.get(`cstr:${chara_id}:称号`).filter((e) => e.s)[0],
+      title = new CharaTitles(chara_id).get_colored_curr_title(true),
       in_train =
         growth >= 2 &&
         era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) <
@@ -43,16 +107,7 @@ function cur_chara_component(chara_id, type) {
     /** @type {*[]} */
     const name_columns = ['当前角色：'];
     if (title) {
-      name_columns.push(
-        {
-          color: title.c,
-          content: `[${title.n}]`,
-          title: title_desc[title.n]
-            ? `[${title.n}]：${title_desc[title.n]}`
-            : undefined,
-        },
-        { content: ' ' },
-      );
+      name_columns.push(title, ' ');
     }
     name_columns.push(get_chara_talk(chara_id).get_colored_name());
     if (out_of_train) {
@@ -72,9 +127,30 @@ function cur_chara_component(chara_id, type) {
       name_columns.push(' 待入学');
     }
     name_columns.push(...race_indicator(chara_id));
+    location_npc &&
+      (temp = new CharaTitles(location_npc).get_colored_curr_title());
     era.setVerticalAlign('middle');
     era.printInColRows(
-      [{ content: name_columns, type: 'text' }],
+      {
+        columns: [{ content: name_columns, type: 'text' }],
+        config: { width: 18 },
+      },
+      {
+        columns: location_npc
+          ? [
+              {
+                config: { align: 'center' },
+                content: [
+                  ...(temp ? [temp, ' '] : []),
+                  get_chara_talk(location_npc).get_colored_name(),
+                ],
+                type: 'text',
+              },
+            ]
+          : [],
+        config: { width: 5 },
+      },
+      [],
       {
         columns: [
           {
@@ -99,7 +175,7 @@ function cur_chara_component(chara_id, type) {
             config: {
               color: attr_background_colors['体力'],
               height: 22,
-              width: 9,
+              width: 12,
             },
             inContent: `${era.get(`base:${chara_id}:体力`)}/${era.get(
               `maxbase:${chara_id}:体力`,
@@ -109,7 +185,7 @@ function cur_chara_component(chara_id, type) {
               era.get(`maxbase:${chara_id}:体力`),
             type: 'progress',
           },
-          { config: { width: 13 }, content: '', type: 'text' },
+          { content: '', type: 'text' },
           {
             config: { width: 2 },
             content: '精力',
@@ -119,7 +195,7 @@ function cur_chara_component(chara_id, type) {
             config: {
               color: attr_background_colors['精力'],
               height: 22,
-              width: 9,
+              width: 12,
             },
             inContent: `${era.get(`base:${chara_id}:精力`)}/${era.get(
               `maxbase:${chara_id}:精力`,
@@ -129,19 +205,19 @@ function cur_chara_component(chara_id, type) {
               era.get(`maxbase:${chara_id}:精力`),
             type: 'progress',
           },
-          { config: { width: 13 }, content: '', type: 'text' },
+          { content: '', type: 'text' },
           {
             config: { width: 2 },
             content: '气性',
             type: 'text',
           },
           {
-            config: { width: 2 },
+            config: { width: 4 },
             content: chara_desc[era.get(`cflag:${chara_id}:气性`) + 3],
             type: 'text',
           },
           {
-            config: { offset: 2, width: 2 },
+            config: { width: 2 },
             content: '状态',
             type: 'text',
           },
@@ -171,8 +247,52 @@ function cur_chara_component(chara_id, type) {
           },
         ],
         config: {
-          width: 16,
+          width: 15,
         },
+      },
+      {
+        columns: location_npc
+          ? [
+              {
+                config: { width: 23 },
+                names: `${era.get(`cstr:${location_npc}:头像`)}_半身`,
+                type: 'image.whole',
+              },
+            ]
+          : [],
+        config: { offset: 1, width: 3 },
+      },
+      {
+        columns: location_npc
+          ? [
+              {
+                content: [
+                  '🤝',
+                  {
+                    color:
+                      relation_colors[
+                        (temp = get_relation_info(location_npc))[0]
+                      ],
+                    content: temp[0],
+                    title: `好感：${temp.join(' ')}`,
+                  },
+                ],
+                type: 'text',
+              },
+              {
+                content: [
+                  ' ❤️',
+                  {
+                    color: love_colors[(temp = get_love_info(location_npc))[0]],
+                    content: temp[0],
+                    title: `爱慕：${temp.join(' ')}`,
+                  },
+                ],
+                type: 'text',
+              },
+            ]
+          : [],
+        config: { width: 2 },
       },
     );
     era.setVerticalAlign('top');

@@ -6,10 +6,7 @@ const {
   sys_change_pressure,
   sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
-const {
-  sys_change_fame,
-  sys_push_crazy_fan,
-} = require('#/system/sys-calc-flag');
+const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
@@ -261,8 +258,8 @@ handlers[check_stages.palace_check] = () => {
       check_aim_race(races, race_enum.arim_kin, 2, 1)
     ) {
       new TeioEduMarks().good_end++;
-    } else if (era.get('flag:游戏结束')) {
-      sys_push_crazy_fan(3);
+    } else {
+      era.set('flag:强制BE', 3);
     }
   }
   common_palace_check(3);

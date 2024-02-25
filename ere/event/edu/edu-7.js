@@ -21,12 +21,11 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const color_7 = require('#/data/chara-colors').chara_colors[7];
 const { lust_border } = require('#/data/ero/orgasm-const');
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
-
-const color_7 = require('#/data/chara-colors')[7];
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise<*>>} */
 const handlers = {};
@@ -271,8 +270,8 @@ handlers[event_hooks.school_atrium] = async (
       );
 
       era.set(
-        'cflag:49:性欲',
-        Math.max(era.get('cflag:49:性欲'), lust_border.want_sex),
+        'base:49:性欲',
+        Math.max(era.get('base:49:性欲'), lust_border.absent_mind),
       );
       begin_and_init_ero(0, 7, 49);
       await print_ero_page(7);
@@ -587,8 +586,8 @@ handlers[event_hooks.school_rooftop] = async (
       '我说，光是想像就已经让我下面都濡湿了……快来跟我决胜负吧♡♡♡',
     );
     era.set(
-      'cflag:49:性欲',
-      Math.max(era.get('cflag:49:性欲'), lust_border.want_sex),
+      'base:49:性欲',
+      Math.max(era.get('base:49:性欲'), lust_border.absent_mind),
     );
     begin_and_init_ero(0, 7, 49);
     await print_ero_page(49);

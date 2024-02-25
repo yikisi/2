@@ -10,6 +10,7 @@ const print_page_header = require('#/page/components/page-header');
 const race_indicator = require('#/page/components/race-indicator');
 
 const chara_info_type = require('#/data/chara-info-type');
+const CharaTitles = require('#/data/chara-titles');
 const {
   adaptability_colors,
   motivation_colors,
@@ -21,7 +22,6 @@ const {
   growth_colors,
   relation_colors,
 } = require('#/data/const.json');
-const title_desc = require('#/data/desc/title-desc.json');
 const {
   human_growth_stage,
   growth_stage,
@@ -305,8 +305,8 @@ async function select_target(type) {
       const cur_list = list_team.slice((cur_page - 1) * 10, cur_page * 10);
       cur_list.forEach((chara_id) => {
         const chara = get_chara_talk(chara_id),
-          titles = era.get(`cstr:${chara_id}:称号`),
-          title = titles.filter((e) => e.s)[0],
+          titles = new CharaTitles(chara_id),
+          title = titles.get_colored_curr_title(true),
           event_counts =
             type === undefined ? new EventMarks(chara_id).count() : 0;
         buffer.push({
@@ -323,21 +323,14 @@ async function select_target(type) {
         });
         if (title) {
           buffer.push({
-            config: { align: 'center', color: title.c, width: 4 },
-            content: [
-              {
-                content: `[${title.n}]`,
-                title: title_desc[title.n]
-                  ? `[${title.n}]：${title_desc[title.n]}`
-                  : undefined,
-              },
-            ],
+            config: { align: 'center', width: 4 },
+            content: [title],
             type: 'text',
           });
-        } else if (titles.length) {
+        } else if (titles.count()) {
           buffer.push({
             config: { align: 'center', width: 4 },
-            content: `（${titles.length}）`,
+            content: `（${titles.count()}）`,
             type: 'text',
           });
         } else {

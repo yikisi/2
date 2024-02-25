@@ -11,7 +11,7 @@ const {
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { get_random_entry, distinct_list } = require('#/utils/list-utils');
+const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { palam_colors, attr_change_colors } = require('#/data/color-const');
@@ -279,27 +279,6 @@ function print_change(chara_id, old_val, new_val, to_be_shown) {
 }
 
 module.exports = {
-  /**
-   * @param {number} chara_id
-   * @param {{c:string,n:string}} title_obj
-   */
-  sys_add_title(chara_id, ...title_obj) {
-    const titles = era.get(`cstr:${chara_id}:称号`),
-      origin_length = titles.length;
-    titles.push(...title_obj);
-    const print_flag =
-      era.set(
-        `cstr:${chara_id}:称号`,
-        distinct_list(titles, (e) => e.n),
-      ).length !== origin_length;
-    if (print_flag) {
-      era.print([
-        get_chara_talk(chara_id).get_colored_name(),
-        ' 获得了新称号！',
-      ]);
-      return true;
-    }
-  },
   sys_change_status_by_base(chara_id) {
     !era.get(`base:${chara_id}:体力`) && era.set(`status:${chara_id}:沉睡`, 1);
   },

@@ -20,6 +20,15 @@ const { race_enum } = require('#/data/race/race-const');
 
 const handlers = {};
 
+const race2fans_reward = [];
+race2fans_reward[race_enum.begin_race] = 1000;
+race2fans_reward[race_enum.naka_kim] = 4100;
+race2fans_reward[race_enum.kyot_kim] = 4100;
+race2fans_reward[race_enum.kyot_kim] = 3500;
+race2fans_reward[race_enum.arim_kin] = 30000;
+race2fans_reward[race_enum.toky_dai] = 30000;
+race2fans_reward[race_enum.hans_cup] = 6700;
+
 handlers[check_stages.love_event] = function () {
   era.get('love:52') === 49 &&
     add_event(event_hooks.week_end, new EventObject(52, cb_enum.love));

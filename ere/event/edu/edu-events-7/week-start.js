@@ -11,11 +11,10 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 
+const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
-
-const chara_colors = require('#/data/chara-colors')[7];
 
 /**
  * @param {HookArg} hook

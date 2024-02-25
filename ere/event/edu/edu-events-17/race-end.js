@@ -17,7 +17,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 
-const color_17 = require('#/data/chara-colors')[17];
+const color_17 = require('#/data/chara-colors').chara_colors[17];
 const { buff_colors } = require('#/data/color-const');
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const { attr_enum } = require('#/data/train-const');

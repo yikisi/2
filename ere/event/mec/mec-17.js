@@ -1,10 +1,9 @@
 const era = require('#/era-electron');
 
+const color_17 = require('#/data/chara-colors').chara_colors[17];
 const { buff_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
-
-const color_17 = require('#/data/chara-colors')[17];
 
 const handlers = {};
 
