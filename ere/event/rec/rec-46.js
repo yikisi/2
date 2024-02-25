@@ -4,7 +4,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
@@ -463,9 +463,9 @@ module.exports = {
         await era.printAndWait(`接下来的话，请多指教了！`);
         await era.printAndWait(`成功招募${chara_talk.name}了！`);
         new EventMarks(0).sub(event_hooks.school_rooftop);
-        new EduEventMarks(46).add('after_recruit');
+        new FalconEduMarks().after_recruit++;
         era.set('cflag:46:招募状态', recruit_flags.yes);
-        new EduEventMarks(46).add('beginning');
+        new FalconEduMarks().beginning++;
         add_event(event_hooks.week_end, new EventObject(46, cb_enum.edu));
         era.set('flag:物色对象', 0);
         return true;

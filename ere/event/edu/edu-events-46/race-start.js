@@ -68,13 +68,13 @@ module.exports = async (hook, extra_flag) => {
       `因为飞鹰子的缘故，现在的比赛要比之前的观众还多了哦。`,
     );
     await chara_talk.say_and_wait(`比起德比的话？`);
-    await me.say_and_wait(`......不，还是差的有点远了。`);
+    await me.say_and_wait(`……不，还是差的有点远了。`);
     await chara_talk.say_and_wait(`这样吗。`);
     await me.say_and_wait(`如果是飞鹰子的话，说不定真的可以带动泥地比赛！`);
     era.printButton(`而且，大家都期待着飞鹰子登场！`, 1);
     await era.input();
     await chara_talk.say_and_wait(
-      `......没错！为了在观众席上欢呼着的粉丝们，飞鹰子就这样一口气冲到终点！`,
+      `……没错！为了在观众席上欢呼着的粉丝们，飞鹰子就这样一口气冲到终点！`,
     );
     await era.printAndWait(
       `打开准备室的大门后，飞鹰子对着${me.actual_name}露出了笑容。`,
@@ -87,11 +87,8 @@ module.exports = async (hook, extra_flag) => {
     await print_event_name(`焦躁开端`, chara_talk);
     await era.printAndWait(`JBC经典赛，往年来说观众数不会超过两万`);
     await era.printAndWait(`然而`);
-    await era.printAndWait(
-      `飞鹰子「训练员${me.get_adult_sex_title()}，我们必须在比赛开始之前将这打传单发完！」`,
-      {
-        color: chara_talk,
-      },
+    await chara_talk.say_and_wait(
+      `训练员${me.get_adult_sex_title()}，我们必须在比赛开始之前将这打传单发完！`,
     );
     await era.printAndWait(`在飞鹰子的努力之下，来往的粉丝显得络绎不绝？！`);
     await me.say_and_wait(`如果是飞鹰子的话，说不定真的可以？`);
@@ -100,14 +97,12 @@ module.exports = async (hook, extra_flag) => {
     );
     await era.printAndWait(`路人A「欸？这附近还有比赛？」`);
     await era.printAndWait(
-      `路人B「泥地比赛？没啥兴......${chara_talk.name}会参加？」`,
+      `路人B「泥地比赛？没啥兴……${chara_talk.name}会参加？」`,
     );
     await era.printAndWait(`路人C「说起来也没什么事，不如去看看吧？」`);
     await era.printAndWait(`不知不觉间，传单已经全部发完了。`);
     await me.say_and_wait(`飞鹰子的名气看起来要比想象中还要大呢。`);
-    await era.printAndWait(`飞鹰子「差不多该去参加比赛了！」`, {
-      color: chara_talk,
-    });
+    await chara_talk.say_and_wait(`差不多该去参加比赛了！`);
     await era.printAndWait(
       `为了准备比赛而提前换好决胜服的${chara_talk.name}匆匆前往赛场。`,
     );
@@ -168,7 +163,7 @@ module.exports = async (hook, extra_flag) => {
         chara_talk.name
       }的${chara_talk.get_uma_sex_title()}。`,
     );
-    await chara_talk.say_and_wait(`......飞鹰子`, true);
+    await chara_talk.say_and_wait(`……飞鹰子`, true);
     await chara_talk.say_and_wait(
       `飞鹰子一定会把那份想要成为偶像最初的感受传达到你身上的！`,
     );
@@ -185,7 +180,7 @@ module.exports = async (hook, extra_flag) => {
       `与其说是泥地选择了${chara_talk.name}，不如说是${chara_talk.name}成就了泥地。`,
     );
     await era.printAndWait(`休息室里`);
-    await chara_talk.say_and_wait(`......飞鹰子还是有点紧张呢`);
+    await chara_talk.say_and_wait(`……飞鹰子还是有点紧张呢`);
     await era.printAndWait(
       `与以往不同，${chara_talk.name}面对即将开始的比赛出现了迷茫。`,
     );
@@ -241,7 +236,7 @@ module.exports = async (hook, extra_flag) => {
     await me.say_and_wait(`强打着精神出来的吗？`);
     await era.printAndWait(`微微颤动的双手，面对无形之间的压力，飞鹰子的话。`);
     await chara_talk.say_and_wait(`接下来的比赛，飞鹰子也会加油的！`);
-    await me.say_and_wait(`祝你武运昌隆......如果不舒服的话来找我。`);
+    await me.say_and_wait(`祝你武运昌隆……如果不舒服的话来找我。`);
     await era.printAndWait(
       `稍微停顿之后，${chara_talk.name}打开了准备室的门。`,
     );
@@ -250,39 +245,25 @@ module.exports = async (hook, extra_flag) => {
     );
   } else if (extra_flag.race === race_enum.toky_dai && edu_weeks > 95) {
     await print_event_name(`东京大赏典·final`, chara_talk);
-    await era.printAndWait(`这一天的到来，比想象之中还要快。`, {
-      color: chara_talk,
-    });
-    await era.printAndWait(`辛苦的汗水，努力的价值，都将在这一刻显露出来。`, {
-      color: chara_talk,
-    });
-    await era.printAndWait(
+    await chara_talk.print_and_wait(`这一天的到来，比想象之中还要快。`);
+    await chara_talk.print_and_wait(
+      `辛苦的汗水，努力的价值，都将在这一刻显露出来。`,
+    );
+    await chara_talk.print_and_wait(
       `为了追逐作为顶级偶像的目标，为了那些支持着我的粉丝们，一直努力到现在。`,
-      {
-        color: chara_talk,
-      },
     );
-    await era.printAndWait(`明明是这样的，但我一直无法说服自己。`, {
-      color: chara_talk,
-    });
-    await era.printAndWait(
+    await chara_talk.print_and_wait(`明明是这样的，但我一直无法说服自己。`);
+    await chara_talk.print_and_wait(
       `内心深处一直传来的声音一直在询问我，这样做是对的吗？`,
-      {
-        color: chara_talk,
-      },
     );
-    await era.printAndWait(`胸口好疼，像是被揪住了心脏一样。`, {
-      color: chara_talk,
-    });
-    await era.printAndWait(`我不知道答案。`, {
-      color: chara_talk,
-    });
-    await era.printAndWait(`但我隐隐有种感觉，最后的答案，将在此展现。`, {
-      color: chara_talk,
-    });
+    await chara_talk.print_and_wait(`胸口好疼，像是被揪住了心脏一样。`);
+    await chara_talk.print_and_wait(`我不知道答案。`);
+    await chara_talk.print_and_wait(
+      `但我隐隐有种感觉，最后的答案，将在此展现。`,
+    );
     era.printButton(`差不多该出发了，飞鹰子。`, 1);
     await era.input();
-    await chara_talk.say_and_wait(`......出发吧，为了追寻那份答案。`);
+    await chara_talk.say_and_wait(`……出发吧，为了追寻那份答案。`);
     await era.printAndWait(`${chara_talk.name}走向了赛场之中。`);
   }
 };

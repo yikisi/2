@@ -573,11 +573,11 @@ module.exports = async function (hook, _, event_object) {
       true,
     );
     await me.say_and_wait(`虽然没有人在这里不过还是太羞耻了`, true);
-    await me.say_and_wait(`......`);
-    await me.say_and_wait(
-      `我要成为配得上${chara_talk.name}的${
+    await me.say_and_wait(`……`);
+    await era.printAndWait(
+      `「我要成为配得上${chara_talk.name}的${
         me.sex_code - 1 ? '女人' : '男人'
-      }！！！`,
+      }！！！」`,
       {
         align: 'center',
         color: me.color,
@@ -649,24 +649,20 @@ module.exports = async function (hook, _, event_object) {
       `${
         era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
       }没有注意到天空中自由自在的风吗`,
-      1,
     );
     await chara_talk.say_and_wait(
       `如果能化为天空中吹拂的风,我也许能在后辈们苦恼的时候`,
-      1,
     );
     await chara_talk.say_and_wait(
-      `就差一点就能成功的时候,在叹息的时候给予${
+      `就差一点就能成功的时候，在叹息的时候给予${
         chara_talk.sex_code - 1 ? '她' : '他'
       }们鼓励了`,
-      1,
     );
-    await era.printAndWait(`${chara_talk.name}现在已经做的很好了`);
-    await era.printAndWait(`现在就尽情享受新年的快乐吧`);
-    await chara_talk.say_and_wait(`说的也是呢,这样子下去真不像我了呢`, 1);
+    await me.say_and_wait(`${chara_talk.name}现在已经做的很好了`);
+    await me.say_and_wait(`现在就尽情享受新年的快乐吧`);
+    await chara_talk.say_and_wait(`说的也是呢，这样子下去真不像我了呢`);
     await chara_talk.say_and_wait(
       `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}有什么计划吗？`,
-      1,
     );
     era.printButton('「今天的话就在草地上练习吧」', 1);
     era.printButton('「一起出去逛街然后把不愉快都一扫而空吧」', 2);

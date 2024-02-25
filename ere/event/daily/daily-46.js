@@ -9,7 +9,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
 const event_hooks = require('#/data/event/event-hooks');
 const chara_talk = get_chara_talk(46);
 
@@ -20,14 +20,14 @@ handlers[event_hooks.select] = function () {
   let temp;
   const love = era.get('love:46'),
     buffer = [];
-  if ((temp = new EduEventMarks(46)).get('after_recruit')) {
+  if ((temp = new FalconEduMarks()).after_recruit) {
     chara_talk.say(`梦想着能成为顶级马娘偶像的醒目飞鹰`);
     chara_talk.say('如果可以的话希望能叫我飞鹰子⭐');
     chara_talk.say(
       `虽然飞鹰子不擅长做计划之类的事情，不过现在有训练员先生帮我制定目标真是太好了`,
     );
     chara_talk.say(`那么，再一次，《永远的马娘偶像》醒目飞鹰参上♪`);
-    temp.sub('after_recruit');
+    temp.after_recruit--;
   } else {
     if (era.get('base:46:体力') < era.get('maxbase:46:体力') / 3) {
       buffer.push([

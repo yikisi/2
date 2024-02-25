@@ -31,6 +31,8 @@ class FalconEduMarks extends EduEventMarks {
   target_finish;
   // 赛事胜利检查 - 胜利次数
   race_count;
+  // 招募标记
+  after_recruit;
 
   constructor() {
     super(46);

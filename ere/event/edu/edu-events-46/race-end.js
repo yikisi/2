@@ -430,27 +430,18 @@ module.exports = async (hook, extra_flag) => {
     extra_flag.rank === 1
   ) {
     await print_event_name(
-      '东京大赏典后・顶级偶像——${chara_talk.name}',
+      ['东京大赏典后・顶级偶像——', chara_talk.get_colored_name()],
       chara_talk,
     );
-    await era.printAndWait(`偶像是什么？`, {
-      color: chara_talk,
-    });
-    await era.printAndWait(`是在舞台之中挥洒着汗水，追逐着闪耀的刹那？`, {
-      color: chara_talk,
-    });
-    await era.printAndWait(
-      `还是背负着粉丝们的期待，拼尽全力朝着闪耀的方向前行？`,
-      {
-        color: chara_talk,
-      },
+    await chara_talk.print_and_wait(`偶像是什么？`);
+    await chara_talk.print_and_wait(
+      `是在舞台之中挥洒着汗水，追逐着闪耀的刹那？`,
     );
-    await era.printAndWait(`冲线的瞬间，我得到的答案是`, {
-      color: chara_talk,
-    });
-    await era.printAndWait(`从内心之中静默燃烧的火焰`, {
-      color: chara_talk,
-    });
+    await chara_talk.print_and_wait(
+      `还是背负着粉丝们的期待，拼尽全力朝着闪耀的方向前行？`,
+    );
+    await chara_talk.print_and_wait(`冲线的瞬间，我得到的答案是`);
+    await chara_talk.print_and_wait(`从内心之中静默燃烧的火焰`);
     era.drawLine();
     await era.printAndWait(
       `取得了胜利的${chara_talk.name}，在舞台之上露出的美丽笑容。`,

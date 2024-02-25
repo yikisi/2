@@ -4,10 +4,10 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
-const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
-const check_aim_race = require('#/event/snippets/check-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
+const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { cb_enum, add_event } = require('#/event/queue');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 

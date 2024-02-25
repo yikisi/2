@@ -182,7 +182,7 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
         );
         await era.input();
         era.println();
-        hook.args = -1;
+        hook.arg = -1;
       } else {
         await era.printAndWait(
           `${me.name}在${chara_talk.name}的引导下开着小塔七拐八拐来到了一家看上去有年代感的CD店。`,
@@ -206,7 +206,7 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
         await era.printAndWait(
           `不知是否是音乐的作用，${chara_talk.name}的伤口也恢复得更快了.`,
         );
-        hook.args = 0;
+        hook.arg = 0;
       }
     }
   } else {

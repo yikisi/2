@@ -2,11 +2,11 @@ const era = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
-const { cb_enum, add_event } = require('#/event/queue');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
-const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
+const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
+const { cb_enum, add_event } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -18,6 +18,7 @@ const EventObject = require('#/data/event/event-object');
 const { race_enum } = require('#/data/race/race-const');
 
 const handlers = {};
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 3;
 //2=10，3=11，最高位的1代表存在赛后事件，最低位的1代表存在赛前事件
@@ -38,16 +39,12 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[extra_flag.race];
 
 handlers[check_stages.love_event] = () => {
-  const love = era.get('love:4'),
-    event_obj = new EventObject(4, cb_enum.love);
-  if (love === 49) {
-    add_event(event_hooks.week_end, event_obj);
-  } else if (love === 74) {
-    add_event(event_hooks.week_end, event_obj);
-  } else if (love === 89) {
-    add_event(event_hooks.week_end, event_obj);
-  } else if (love === 100) {
-    add_event(event_hooks.week_end, event_obj);
+  switch (era.get('love:4')) {
+    case 49:
+    case 74:
+    case 89:
+    case 100:
+      add_event(event_hooks.week_end, new EventObject(4, cb_enum.love));
   }
 };
 

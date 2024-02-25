@@ -124,9 +124,13 @@ module.exports = async function (hook, __, event_object) {
     await kita.say_and_wait(`可以用别的方式，奖励么？`);
     era.drawLine({ content: '夜' });
     await kita.say_and_wait(`训练员……在学园里这样的…不会被人看到的对吧…♡`);
-    await era.printAndWait(
-      `在夜晚特雷森学园的走廊里，${me.name} 和全裸的被不用考虑进行着今天的约会，`,
-    );
+    await era.printAndWait([
+      '在夜晚特雷森学园的走廊里，',
+      me.get_colored_name(),
+      ' 和全裸的 ',
+      kita.get_colored_name(),
+      ' 进行着今天的约会，',
+    ]);
     await era.printAndWait(
       `满是骚味的狗项圈紧紧地套在赛${kita.get_uma_sex_title()}雪白的颈上，而连接着项圈的狗链则被 ${
         me.name
