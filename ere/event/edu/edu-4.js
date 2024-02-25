@@ -611,7 +611,7 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
   } else if (event_marks.find_love === 1) {
     event_marks.find_love++;
     await print_event_name(
-      '与${chara_talk.name}于黄昏之时在海边观看日落',
+      `与${chara_talk.name}于黄昏之时在海边观看日落`,
       chara_talk,
     );
     await era.printAndWait(`某天，训练结束后.`);
@@ -1021,6 +1021,7 @@ handlers[event_hooks.out_church] = async () => {
       era.println();
       get_attr_and_print_in_event(4, [0, 0, 0, 0, 0], 20) &&
         (await era.waitAnyKey());
+      era.set('cflag:4:节日事件标记', 0);
     }
   }
 };
@@ -1204,9 +1205,11 @@ handlers[event_hooks.school_rooftop] = async (
 };
 
 handlers[event_hooks.crazy_fan_end] = async function () {
-  const chara_talk = get_chara_talk(4),
+  const event_marks = new MaEduMarks(),
+    chara_talk = get_chara_talk(4),
     me = get_chara_talk(0);
-  if (new MaEduMarks().crazy_fan) {
+  if (event_marks.crazy_fan === 1) {
+    event_marks.crazy_fan++;
     //节拍1 行动：丸善斯基提示到站了 反应：接过了玩家手中的行李箱 价值负荷正或负？亲密/孤独(-)
     await era.printAndWait(`机场`);
     await chara_talk.say_and_wait(`送到这里就可以了。`);
@@ -1319,6 +1322,8 @@ handlers[event_hooks.crazy_fan_end] = async function () {
     await chara_talk.say_and_wait(`那么，再一次。`);
     await era.printAndWait(`无需言语，享受着稍纵即逝的幸福。`);
     await era.printAndWait(`————直至二人分离`);
+  } else {
+    throw new Error();
   }
 };
 

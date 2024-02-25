@@ -19,6 +19,7 @@ class MaEduMarks extends EduEventMarks {
   find_love;
   //离别(粉丝袭击)
   crazy_fan;
+
   //GOOD END 温柔的世界
   gentle_wind;
   //NORMAL END 梦的远方

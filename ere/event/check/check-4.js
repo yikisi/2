@@ -16,6 +16,7 @@ const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { race_enum } = require('#/data/race/race-const');
+const { sys_push_crazy_fan } = require('#/system/sys-calc-flag');
 
 const handlers = {};
 
@@ -43,8 +44,9 @@ handlers[check_stages.love_event] = () => {
     case 49:
     case 74:
     case 89:
-    case 100:
+    case 99:
       add_event(event_hooks.week_end, new EventObject(4, cb_enum.love));
+      break;
   }
 };
 
@@ -94,7 +96,7 @@ handlers[check_stages.next_week] = () => {
         event_obj,
       );
     switch (edu_weeks) {
-      case 6: //来自姐姐的礼物
+      case 5: //来自姐姐的礼物
         add_event(event_hooks.week_start, event_obj_special);
         break;
       case 24: //一见如故 (已完成)
@@ -103,7 +105,13 @@ handlers[check_stages.next_week] = () => {
       case 34: //意外的见面 (已完成)
         add_event(event_hooks.week_start, event_obj_special);
         break;
+      case 39: //万圣节 (已完成)
+        add_event(event_hooks.week_end, event_obj_special);
+        break;
       case 41: //训练员与担当马娘 (已完成)
+        add_event(event_hooks.week_start, event_obj_special);
+        break;
+      case 47: //圣诞节 (已完成)
         add_event(event_hooks.week_start, event_obj_special);
         break;
       // 经典年1月第一周 新年 (已完成)
@@ -126,6 +134,10 @@ handlers[check_stages.next_week] = () => {
       case 47 + 29:
         add_event(event_hooks.week_start, event_obj_special);
         break;
+      // 8月第二周 庙会
+      case 47 + 30:
+        add_event(event_hooks.week_start, event_obj_special);
+        break;
       //8月第三周 水火不容 (已完成)
       case 47 + 31:
         add_event(event_hooks.week_start, event_obj_special);
@@ -143,6 +155,10 @@ handlers[check_stages.next_week] = () => {
         add_event(event_hooks.week_end, event_obj_special);
         break;
       //10月第四周 映光之森 (已完成)
+      case 47 + 39:
+        add_event(event_hooks.week_end, event_obj_special);
+        break;
+      //11月第四周 万圣节 (已完成)
       case 47 + 40:
         add_event(event_hooks.week_end, event_obj_special);
         break;
@@ -174,13 +190,13 @@ handlers[check_stages.next_week] = () => {
       case 95 + 32:
         add_event(event_hooks.week_end, event_obj_special);
         break;
+      //10月第四周 不给糖就捣蛋！ (已完成)
+      case 95 + 40:
+        add_event(event_hooks.week_end, event_obj_special);
+        break;
       //10月第三周 温柔的风 (已完成)
       case 95 + 43:
         add_event(event_hooks.week_end, event_obj_special);
-        break;
-      //10月第四周 不给糖就捣蛋！ (已完成)
-      case 95 + 44:
-        add_event(event_hooks.week_start, event_obj_special);
         break;
       // 12月第四周 圣诞节(已完成)
       case 95 + 48:
@@ -238,8 +254,11 @@ handlers[check_stages.palace_check] = () => {
     check_aim_race(races, race_enum.tenn_sho, 3, 1)
   ) {
     new MaEduMarks().gentle_wind++;
-  } else {
+  } else if (check_aim_race(races, race_enum.sank_hai, 3, 1)) {
     new MaEduMarks().girls_dream++;
+  } else {
+    new MaEduMarks().crazy_fan++;
+    sys_push_crazy_fan(4);
   }
   common_palace_check(4);
   return handlers[check_stages.aim_check]();
@@ -264,7 +283,7 @@ handlers[check_stages.title_check] = (extra_flag) => {
       c: get_chara_talk(4).color,
       n: 'Super Car',
     });
-    extra_flag.aim_check && sys_personal_achievement.set(8, 1);
+    extra_flag.aim_check && sys_personal_achievement.set(4, 1);
   }
 };
 
