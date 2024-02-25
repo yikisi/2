@@ -5,13 +5,14 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 
+const check_aim_race = require('#/event/snippets/check-aim-race');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_enum } = require('#/data/train-const');
-const { race_enum, race_infos } = require('#/data/race/race-const');
+const { race_enum } = require('#/data/race/race-const');
 
 /**
  * @param {HookArg} hook
@@ -405,10 +406,9 @@ module.exports = async (hook, extra_flag) => {
         `不只 ${flash.name}，连 ${jordan.name} 都参与其中……在背后牵线的人物到底是何许人也？`,
       );
 
-      const check =
-        era.get('cflag:7:育成成绩')[47 + race_infos[race_enum.takz_kin].date];
-
-      if (check && check.race === race_enum.takz_kin && check.rank === 1) {
+      if (
+        check_aim_race(era.get('cflag:7:育成成绩'), race_enum.takz_kin, 1, 1)
+      ) {
         await era.printAndWait(
           `就在 ${me.name}们 想离开的时候，一旁的观众向 ${gold_ship.name} 挥手叫嚷。`,
         );

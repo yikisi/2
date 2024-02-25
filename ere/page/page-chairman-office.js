@@ -12,6 +12,7 @@ const goto_sex = require('#/page/components/goto-sex');
 const print_page_header = require('#/page/components/page-header');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
@@ -94,7 +95,7 @@ async function page_chairman_office() {
         { type: 'divider' },
         {
           accelerator: 0,
-          config: { disabled: era.get('base:0:精力') < 200 },
+          config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
           content: '「闲 谈！无聊了来找你玩！」',
           type: 'button',
         },
@@ -119,6 +120,36 @@ async function page_chairman_office() {
     switch (ret) {
       case 0:
         sys_change_attr_and_print(0, '精力', -200);
+        switch (relation[0]) {
+          case '失望':
+            await chairman.say_and_wait(
+              '冷 漠！有来找我的空闲不如先把自己的工作做好！',
+            );
+            break;
+          case '怀疑':
+            await chairman.say_and_wait('不 悦！不太想见到你！');
+            break;
+          case '冷淡':
+            await chairman.say_and_wait('奇 怪！训练员有什么事要来找我一谈？');
+            break;
+          case '融洽':
+            await chairman.say_and_wait('寒 暄！今天还顺利吗？');
+            break;
+          case '热忱':
+            await chairman.say_and_wait('赞 许！你也会跻身传奇之列！');
+            break;
+          case '喜爱':
+            await chairman.say_and_wait('欢 迎！有麻烦就来找我吧！');
+            break;
+          case '亲密':
+            await chairman.say_and_wait('喜 悦！有空就来聊聊！');
+            break;
+          case '不渝':
+            await chairman.say_and_wait('如果是你……幻 听！你什么都没听到！');
+        }
+        era.println();
+        sys_like_chara(302, 0, get_random_value(20, 30)) &&
+          (await era.waitAnyKey());
         nothing = false;
         break;
       case 1:

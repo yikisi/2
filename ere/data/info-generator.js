@@ -857,7 +857,8 @@ module.exports = {
     if (era.get(`cflag:${chara_id}:成长阶段`) < 2) {
       return ['……'];
     }
-    const show_all_body = !chara_id || era.get('status:0:透视镜片'),
+    const show_all_body =
+        !chara_id || era.get('status:0:马语者') || era.get('status:0:透视镜片'),
       breast_talent = get_talent_bust_size(
         get_breast_cup(chara_id, show_all_body),
       ),
@@ -869,6 +870,7 @@ module.exports = {
       chara_id &&
       era.get(`exp:${chara_id}:性爱次数`) ===
         era.get(`exp:${chara_id}:睡奸次数`) &&
+      era.get('status:0:马语者') === 0 &&
       era.get('status:0:马跳次数镜片') === 0
     ) {
       return [

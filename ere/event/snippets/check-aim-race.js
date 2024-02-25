@@ -3,7 +3,7 @@ const { year_index } = require('#/event/check/snippets/edu-year-const');
 const { race_infos } = require('#/data/race/race-const');
 
 /**
- * @param {Record<string,{race:number,rank:number}>} races
+ * @param {Record<string,{race:number,rank:number}|RaceResult>} races
  * @param {number} aim_race
  * @param {number} [year]
  * @param {number} [req_rank]

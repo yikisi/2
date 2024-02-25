@@ -190,6 +190,9 @@ handlers[check_stages.next_week] = () => {
     era.get('flag:当前声望') >= 1000
   ) {
     era.set('cflag:205:随机招募', 1);
+    era.print(
+      '据说有一名优秀的法国幼驹已经准备来到中央交流，也许可以在训练场遇到……',
+    );
   }
 };
 

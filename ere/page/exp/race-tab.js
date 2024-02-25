@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const sys_call_check = require('#/system/script/sys-call-check');
+
 const { sort_list } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
@@ -8,12 +10,12 @@ const {
   attr_change_colors,
   money_color,
 } = require('#/data/color-const');
+const title_desc = require('#/data/desc/title-desc.json');
+const check_stages = require('#/data/event/check-stages');
+const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
 const { adaptability_names } = require('#/data/train-const');
-const sys_call_check = require('#/system/script/sys-call-check');
-const check_stages = require('#/data/event/check-stages');
-const title_desc = require('#/data/desc/title-desc.json');
 
 const page_name = '出走成绩';
 
@@ -25,21 +27,14 @@ module.exports = {
   generate(chara) {
     const race_info_list = [];
     if (era.get(`cflag:${chara.id}:种族`)) {
-      /** @type {Record<string,{pop:number,race:number,rank:number,year:number}>} */
-      const races = era.get(`cflag:${chara.id}:育成成绩`);
-      const race_len = Object.keys(races).length,
+      const races = new RaceHistory(chara.id).get_entries();
+      const race_len = races.length,
         race_list = sort_list(
-          Object.entries(races).filter(
-            (e) => e[1].race !== race_enum.begin_race,
-          ),
-          /** @param {[string,{pop:number,race:number,rank:number,year:number}]} e */
-          (e) => {
-            const race_class =
-              class_enum.Spe - race_infos[e[1].race].race_class;
-            const time = Number(e[0]);
-            const rank = e[1].rank;
-            return (race_class << 13) + (rank << 8) + time;
-          },
+          races.filter((e) => e.race !== race_enum.begin_race),
+          (e) =>
+            ((class_enum.Spe - race_infos[e.race].race_class) << 13) +
+            (e.rank << 8) +
+            e.weeks,
           false,
         );
       race_info_list.push({
@@ -54,7 +49,7 @@ module.exports = {
           type: 'text',
           content: [
             `${race_len} 战 ${
-              Object.values(races).filter((e) => e.rank === 1).length
+              races.filter((e) => e.rank === 1).length
             } 胜，总赏金 `,
             {
               color: money_color,
@@ -71,26 +66,23 @@ module.exports = {
       } else {
         race_info_list.push({ type: 'text', content: '未出走' });
       }
-      race_list.forEach(
-        /** @param {[string,{pop:number,race:number,rank:number,st:number,year:number}]} e */
-        (e) => {
-          race_info_list.push({
-            content: [
-              `${e[1].year} 年 `,
-              race_infos[e[1].race].get_colored_name_with_class(),
-              ` · 第 ${e[1].pop} 人气 · ${adaptability_names[6 + e[1].st]} · `,
-              {
-                content: `${e[1].rank} 着`,
-                color:
-                  e[1].rank <= 5
-                    ? adaptability_colors.at(-1 - e[1].rank)
-                    : adaptability_colors[0],
-              },
-            ],
-            type: 'text',
-          });
-        },
-      );
+      race_list.forEach((e) => {
+        race_info_list.push({
+          content: [
+            `${e.year} 年 `,
+            race_infos[e.race].get_colored_name_with_class(),
+            ` · 第 ${e.pop} 人气 · ${adaptability_names[6 + e.st]} · `,
+            {
+              content: `${e.rank} 着`,
+              color:
+                e.rank <= 5
+                  ? adaptability_colors.at(-1 - e.rank)
+                  : adaptability_colors[0],
+            },
+          ],
+          type: 'text',
+        });
+      });
       if (race_info_list.length === 1) {
         race_info_list.push({
           content: '还没有可称道的战绩……',

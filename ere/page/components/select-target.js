@@ -38,6 +38,7 @@ const {
   get_status,
   get_rank_level,
 } = require('#/data/info-generator');
+const RaceHistory = require('#/data/race/model/race-history');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
 
 /**
@@ -50,7 +51,7 @@ function get_suffix(chara_id, type) {
     const chara_score = get_chara_score(chara_id),
       motivation = era.get(`cflag:${chara_id}:干劲`);
     let chara_level = get_rank_level(chara_score);
-    const races = Object.values(era.get(`cflag:${chara_id}:育成成绩`));
+    const races = new RaceHistory(chara_id).get_values();
     ret.push(
       {
         config: {
@@ -73,9 +74,12 @@ function get_suffix(chara_id, type) {
       },
       {
         config: { align: 'center', width: 3 },
-        content: races.length
-          ? `${races.length} 战 ${races.filter((e) => e.rank === 1).length} 胜`
-          : '未出走',
+        content:
+          races.length > 0
+            ? `${races.length} 战 ${
+                races.filter((e) => e.rank === 1).length
+              } 胜`
+            : '未出走',
         type: 'text',
       },
       {

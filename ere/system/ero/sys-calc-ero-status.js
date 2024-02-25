@@ -104,6 +104,7 @@ module.exports = {
   change_ero_master(new_master) {
     era.set('tflag:主导权', new_master);
     era.set('tflag:前回行动', -1);
+    era.set('tflag:对手行动', -1);
     era.set('tflag:当前助手', 0);
     era.set(`tcvar:${new_master}:高潮满足`, 0);
   },

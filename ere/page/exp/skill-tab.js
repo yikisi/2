@@ -45,9 +45,7 @@ module.exports = {
             content: out_of_train
               ? out_of_train_type[out_of_train - 1]
               : [
-                  train_time.length > 1
-                    ? get_train_time(chara.id) + ' ｜ '
-                    : '',
+                  train_time.length > 1 ? train_time + ' ｜ ' : '',
                   '拥有 ',
                   {
                     content: era.get(`exp:${chara.id}:技能点数`),

@@ -63,6 +63,7 @@ async function sys_auto_react(shown) {
   era.logger.debug(
     `reacting done! ${(new Date().getTime() - current).toLocaleString()}ms`,
   );
+  era.set('tflag:对手行动', action);
   await sys_call_ero_event(lover, action, {
     attacker: lover,
     defender: 0,

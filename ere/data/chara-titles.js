@@ -5,6 +5,7 @@ const { distinct_list } = require('#/utils/list-utils');
 const title_desc = require('#/data/desc/title-desc.json');
 
 class CharaTitles {
+  /** @param {number} chara_id */
   constructor(chara_id) {
     this.chara_id = chara_id;
     this.obj = era.get(`cstr:${chara_id}:称号`);

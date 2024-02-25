@@ -24,13 +24,11 @@ const handlers = {};
 const aim_races = {};
 aim_races[race_enum.begin_race] = 3;
 //2=10，3=11，最高位的1代表存在赛后事件，最低位的1代表存在赛前事件
-aim_races[get_aim_race_index(race_enum.nhk_cup, 1)] = 3;
 aim_races[get_aim_race_index(race_enum.hyac_sta, 1)] = 3;
 aim_races[get_aim_race_index(race_enum.nhk_cup, 1)] = 3;
 aim_races[get_aim_race_index(race_enum.japa_dir, 1)] = 3;
 aim_races[get_aim_race_index(race_enum.mile_cha, 1)] = 3;
 aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = -4;
 
 /** @param {{edu_weeks:number,race:number}} extra_flag */
 handlers[check_stages.aim_race] = (extra_flag) =>

@@ -3,10 +3,14 @@
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
+  init_ero,
 } = require('#/system/ero/sys-prepare-ero');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
-const { sys_change_status_by_base } = require('#/system/sys-calc-chara-others');
+const {
+  sys_change_status_by_base,
+  sys_like_chara,
+} = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 const { init_chara } = require('#/system/sys-init-chara');
@@ -30,6 +34,9 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const notes = require('#/data/notes.json');
+const sys_call_check = require('#/system/script/sys-call-check');
+const check_stages = require('#/data/event/check-stages');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 let random_event,
   notes_index = 0;
@@ -77,11 +84,100 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   }
   stop_machine_gun(event_hooks.week_end);
   if ((temp = era.get('flag:床伴'))) {
+    era.set(`cflag:${temp}:自主训练`, 0);
     const life_marks = new LifeEventMarks(temp);
     begin_and_init_ero(0, temp);
     if (life_marks.marital_rape) {
       era.set('tflag:强奸', temp);
       era.set('tflag:主导权', temp);
+    }
+    const sex_3p = get_random_entry(
+      sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
+        .filter((e) => e && e !== temp && sys_check_awake(e))
+        .map((e) => {
+          return {
+            id: e,
+            check: sys_call_check(e, check_stages.want_make_love),
+          };
+        })
+        .filter(
+          (e) =>
+            era.get(`relation:${temp}:${e.id}`) > 375 &&
+            era.get(`relation:${e.id}:${temp}`) > 75,
+        ),
+    );
+    if (sex_3p) {
+      era.drawLine();
+      const chara = get_chara_talk(sex_3p.id);
+      era.print([chara.get_colored_name(), ' 面色绯红地想要加入……接受吗？']);
+      era.printButton('「你来的正是时候」', 1);
+      era.printButton('还是别了……', 2);
+      let wait_flag = false;
+      if ((await era.input()) === 1) {
+        await era.printAndWait([
+          chara.get_colored_name(),
+          ' 扑入 ',
+          get_chara_talk(0).get_colored_name(),
+          ' 怀中……',
+        ]);
+        init_ero(sex_3p.id);
+        era.println();
+        wait_flag =
+          sys_like_chara(sex_3p.id, 0, get_random_value(50, 150)) || wait_flag;
+        wait_flag =
+          sys_like_chara(sex_3p.id, temp, get_random_value(50, 150)) ||
+          wait_flag;
+        wait_flag =
+          sys_like_chara(
+            temp,
+            0,
+            -get_random_value(25, 75 + 25 * era.get(`talent:${temp}:病娇`)),
+          ) || wait_flag;
+        era.set(`cflag:${sex_3p.id}:自主训练`, 0);
+      } else if (sex_3p.check === 2) {
+        await era.printAndWait([
+          chara.get_colored_name(),
+          ' 征得 ',
+          get_chara_talk(temp).get_colored_name(),
+          ' 的同意后，华丽地无视了 ',
+          get_chara_talk(0).get_colored_name(),
+          ' 的抗议……',
+        ]);
+        init_ero(sex_3p.id);
+        era.println();
+        wait_flag =
+          sys_like_chara(
+            temp,
+            sex_3p.id,
+            -get_random_value(0, 25 * era.get(`talent:${temp}:病娇`)),
+          ) || wait_flag;
+        wait_flag =
+          sys_like_chara(
+            temp,
+            0,
+            -get_random_value(50, 100 + 25 * era.get(`talent:${temp}:病娇`)),
+          ) || wait_flag;
+        era.set(`cflag:${sex_3p.id}:自主训练`, 0);
+      } else {
+        await era.printAndWait([chara.get_colored_name(), ' 掩面而去……']);
+        era.println();
+        wait_flag =
+          sys_like_chara(
+            sex_3p.id,
+            0,
+            -get_random_value(
+              25,
+              50 + 25 * era.get(`talent:${sex_3p.id}:病娇`),
+            ),
+          ) || wait_flag;
+        wait_flag =
+          sys_like_chara(
+            temp,
+            0,
+            get_random_value(50, 100 + 25 * era.get(`talent:${temp}:病娇`)),
+          ) || wait_flag;
+      }
+      wait_flag && (await era.waitAnyKey());
     }
     await print_ero_page(temp);
     await end_ero_and_show_result(true);

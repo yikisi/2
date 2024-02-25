@@ -235,8 +235,6 @@ async function page_custom() {
   era.set('cflag:0:父方角色', -1);
   era.set('cflag:0:母方角色', -1);
   era.set('cflag:0:妊娠阶段', 1 << pregnant_stage_enum.no);
-  era.set('cflag:0:育成用变量', {});
-  era.set('cflag:0:育成成绩', {});
 
   era.set('talent:0:童贞', 1);
   era.set('talent:0:处女', 1);

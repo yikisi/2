@@ -633,6 +633,10 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
     case 304:
       era.set('flag:当前位置', location_enum.school_shop);
       await print_shop_page([
+        700,
+        701,
+        702,
+        703,
         ...new Array(7).fill(0).map((_, i) => {
           return {
             id: 750 + i,

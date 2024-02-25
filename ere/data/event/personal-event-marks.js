@@ -2,12 +2,9 @@ const era = require('#/era-electron');
 
 /** 用于专属事件标记的工具类 */
 class PersonalEventMarks {
-  chara_id;
-  obj;
-
   static register_marks(obj) {
     Object.keys(obj)
-      .slice(2)
+      .filter((e) => e !== 'obj')
       .forEach((m) => {
         Object.defineProperty(obj, m, {
           get() {
@@ -25,7 +22,6 @@ class PersonalEventMarks {
    * @param {string} param_name
    */
   constructor(chara_id, param_name) {
-    this.chara_id = chara_id;
     this.obj =
       era.get(`cflag:${chara_id}:${param_name}`) ||
       era.set(`cflag:${chara_id}:${param_name}`, {});

@@ -437,13 +437,13 @@ async function sys_auto_rape(shown) {
             !era.get(`status:${master}:长效避孕药`) &&
             !era.get(`status:${master}:短效避孕药`)
           ) {
+            era.set('tflag:前回行动', ero_hooks.use_medicine);
+            era.set('tflag:前回助手', cur_supporter);
             await sys_call_ero_event(master, ero_hooks.use_medicine, {
               item: medicine_enum.anti_p_s,
               user: master,
               shown,
             });
-            era.set('tflag:前回行动', ero_hooks.use_medicine);
-            era.set('tflag:前回助手', cur_supporter);
             return;
           }
           break;
@@ -453,11 +453,11 @@ async function sys_auto_rape(shown) {
         case 3: // 经期x恋人x性保守
         case 8: // 非经期x炮友x普通
           if (!era.get('tcvar:0:避孕套')) {
+            era.set('tflag:前回行动', ero_hooks.other_condom);
+            era.set('tflag:前回助手', cur_supporter);
             await sys_call_ero_event(master, ero_hooks.other_condom, {
               shown,
             });
-            era.set('tflag:前回行动', ero_hooks.other_condom);
-            era.set('tflag:前回助手', cur_supporter);
             return;
           }
           break;
@@ -466,11 +466,11 @@ async function sys_auto_rape(shown) {
             era.get(`status:${master}:排卵期`) &&
             !era.get('tcvar:0:避孕套')
           ) {
+            era.set('tflag:前回行动', ero_hooks.other_condom);
+            era.set('tflag:前回助手', cur_supporter);
             await sys_call_ero_event(master, ero_hooks.other_condom, {
               shown,
             });
-            era.set('tflag:前回行动', ero_hooks.other_condom);
-            era.set('tflag:前回助手', cur_supporter);
             return;
           }
           break;
@@ -480,13 +480,13 @@ async function sys_auto_rape(shown) {
             !era.get(`status:${master}:长效避孕药`) &&
             !era.get(`status:${master}:短效避孕药`)
           ) {
+            era.set('tflag:前回行动', ero_hooks.use_medicine);
+            era.set('tflag:前回助手', cur_supporter);
             await sys_call_ero_event(master, ero_hooks.use_medicine, {
               item: medicine_enum.anti_p_s,
               user: master,
               shown,
             });
-            era.set('tflag:前回行动', ero_hooks.use_medicine);
-            era.set('tflag:前回助手', cur_supporter);
             return;
           }
           break;
@@ -512,14 +512,16 @@ async function sys_auto_rape(shown) {
         (love >= 75 && love < 90 && !era.get('status:0:经期'))) &&
       !era.get(`tcvar:${master}:避孕套`)
     ) {
+      era.set('tflag:前回行动', ero_hooks.condom);
+      era.set('tflag:前回助手', cur_supporter);
       await sys_call_ero_event(master, ero_hooks.condom, {
         shown,
       });
-      era.set('tflag:前回行动', ero_hooks.condom);
-      era.set('tflag:前回助手', cur_supporter);
       return;
     }
   }
+  era.set('tflag:前回行动', action);
+  era.set('tflag:前回助手', cur_supporter);
   if (action === ero_hooks.use_item) {
     const random_item = use_item_by_character();
     await sys_call_ero_event(master, ero_hooks.use_item, {
@@ -543,8 +545,6 @@ async function sys_auto_rape(shown) {
     });
   }
   shown && era.println();
-  era.set('tflag:前回行动', action);
-  era.set('tflag:前回助手', cur_supporter);
 }
 
 module.exports = sys_auto_rape;

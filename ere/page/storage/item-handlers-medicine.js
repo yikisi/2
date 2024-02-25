@@ -4,6 +4,7 @@ const {
   sys_change_attr_and_print,
   sys_change_lust,
   sys_change_weight,
+  sys_change_motivation,
 } = require('#/system/sys-calc-base-cflag');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
@@ -11,6 +12,8 @@ const select_target_in_storage = require('#/page/storage/select-target');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
+
+const { attr_enum } = require('#/data/train-const');
 
 /** @param {Record<string,function>} handlers */
 module.exports = (handlers) => {
@@ -30,6 +33,109 @@ module.exports = (handlers) => {
       return true;
     } else {
       await era.printAndWait([me.get_colored_name(), ' 已经很饱了……']);
+    }
+  };
+
+  handlers[700] = async () => {
+    const aim = await select_target_in_storage(
+      700,
+      (chara_id) =>
+        era.get(`maxbase:${chara_id}:体力`) >
+          era.get(`base:${chara_id}:体力`) * 2 &&
+        era.get(`maxbase:${chara_id}:体力`) >= 500,
+    );
+    if (aim !== undefined) {
+      const aim_chara = get_chara_talk(aim),
+        val = era.get(`maxbase:${aim}:体力`) / 2;
+      era.add(`maxbase:${aim}:体力`, -get_random_value(100, 200));
+      await era.printAndWait([
+        aim_chara.get_colored_name(),
+        ' 的 ',
+        ...sys_change_attr_and_print(aim, '体力', val),
+      ]);
+      sys_change_motivation(aim, era.get(`cflag:${aim}:干劲`) - 1) &&
+        (await era.waitAnyKey());
+      era.add('item:蔬菜汁', -1);
+      return true;
+    }
+  };
+
+  handlers[701] = async () => {
+    const aim = await select_target_in_storage(
+      701,
+      (chara_id) =>
+        era.get(`maxbase:${chara_id}:体力`) >
+          era.get(`base:${chara_id}:体力`) &&
+        era.get(`base:${chara_id}:耐力`) > 10,
+    );
+    if (aim !== undefined) {
+      const aim_chara = get_chara_talk(aim);
+      await era.printAndWait([
+        aim_chara.get_colored_name(),
+        ' 的 ',
+        ...sys_change_attr_and_print(
+          aim,
+          attr_enum.endurance,
+          -get_random_value(10, Math.min(20, era.get(`base:${aim}:耐力`) - 1)),
+        ),
+        '，',
+        ...sys_change_attr_and_print(aim, '体力', 2000),
+      ]);
+      era.add(`base:${aim}:药物残留`, 10);
+      era.add('item:强化青汁', -1);
+      return true;
+    }
+  };
+
+  handlers[702] = async () => {
+    const aim = await select_target_in_storage(
+      702,
+      (chara_id) =>
+        era.get(`maxbase:${chara_id}:精力`) >
+          era.get(`base:${chara_id}:精力`) * 2 &&
+        era.get(`maxbase:${chara_id}:精力`) >= 500,
+    );
+    if (aim !== undefined) {
+      const aim_chara = get_chara_talk(aim),
+        val = era.get(`maxbase:${aim}:精力`) / 2;
+      era.add(`maxbase:${aim}:精力`, -get_random_value(100, 200));
+      await era.printAndWait([
+        aim_chara.get_colored_name(),
+        ' 的 ',
+        ...sys_change_attr_and_print(aim, '精力', val),
+      ]);
+      sys_change_motivation(aim, era.get(`cflag:${aim}:干劲`) - 1) &&
+        (await era.waitAnyKey());
+      era.add(`base:${aim}:药物残留`, 5);
+      era.add('item:浓缩咖啡', -1);
+      return true;
+    }
+  };
+
+  handlers[703] = async () => {
+    const aim = await select_target_in_storage(
+      703,
+      (chara_id) =>
+        era.get(`maxbase:${chara_id}:精力`) >
+          era.get(`base:${chara_id}:精力`) &&
+        era.get(`base:${chara_id}:智力`) > 10,
+    );
+    if (aim !== undefined) {
+      const aim_chara = get_chara_talk(aim);
+      await era.printAndWait([
+        aim_chara.get_colored_name(),
+        ' 的 ',
+        ...sys_change_attr_and_print(
+          aim,
+          attr_enum.intelligence,
+          -get_random_value(10, Math.min(20, era.get(`base:${aim}:智力`) - 1)),
+        ),
+        '，',
+        ...sys_change_attr_and_print(aim, '精力', 2000),
+      ]);
+      era.add(`base:${aim}:药物残留`, 10);
+      era.add('item:提神剂', -1);
+      return true;
     }
   };
 
@@ -109,6 +215,7 @@ module.exports = (handlers) => {
         ' 的好感开始消散……',
       ]);
       era.set(`status:${ret}:讨厌药`, 1);
+      era.add(`base:${ret}:药物残留`, 40);
       era.add('item:讨厌药', -1);
       return true;
     }
@@ -136,6 +243,7 @@ module.exports = (handlers) => {
         limit: era.get('flag:当前回合数') + 4,
       });
       era.set(`love:${ret}`, 40);
+      era.add(`base:${ret}:药物残留`, 40);
       era.add('item:抑制药', -1);
       return true;
     }

@@ -45,6 +45,7 @@ const {
   get_trainer_level,
   get_rank_level,
 } = require('#/data/info-generator');
+const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const {
   race_enum,
@@ -604,13 +605,16 @@ async function race_page(race) {
     const edu_weeks =
       era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`);
     if (race_rank[chara_id] === 1 || race !== race_enum.begin_race) {
-      era.get(`cflag:${chara_id}:育成成绩`)[edu_weeks] = {
-        pop: pop_dict[chara_id],
-        race,
-        rank: race_rank[chara_id],
-        st: strategy_dict[chara_id],
-        year: cur_year,
-      };
+      new RaceHistory(chara_id).add_result(
+        edu_weeks,
+        new RaceHistory.RaceResult(
+          pop_dict[chara_id],
+          race,
+          race_rank[chara_id],
+          strategy_dict[chara_id],
+          cur_year,
+        ),
+      );
     }
     sys_change_tired(chara_id, 3);
     sys_call_check(chara_id, check_stages.after_race, {

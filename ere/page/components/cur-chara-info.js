@@ -121,7 +121,8 @@ function cur_chara_component(chara_id, type, location_npc) {
           color: motivation_colors[motivation + 2],
           content: motivation_names[motivation + 2],
         },
-        ` ${get_train_time(chara_id)}`,
+        ' ',
+        get_train_time(chara_id).substring(0, 3),
       );
     } else if (!out_of_train && growth >= 2) {
       name_columns.push(' 待入学');

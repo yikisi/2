@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_push_crazy_fan } = require('#/system/sys-calc-flag');
 
+const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
 
@@ -10,12 +11,10 @@ function common_palace_check(chara_id) {
   if (era.get(`relation:${chara_id}:0`) <= 0) {
     sys_push_crazy_fan(chara_id);
   } else {
-    /** @type {Record<string,{race:number,rank:number}>} */
-    const races = era.get(`cflag:${chara_id}:育成成绩`);
     let g1_count = 0,
       g2_count = 0,
       other_count = 0;
-    Object.values(races).forEach((e) => {
+    new RaceHistory(chara_id).get_values().forEach((e) => {
       const info = race_infos[e.race];
       if (info.race_class === RaceInfo.class_enum.G1) {
         g1_count += e.rank <= 5;

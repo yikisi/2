@@ -38,7 +38,7 @@ module.exports = async (location) => {
     await call_daily_script(chara_id, hook);
     era.drawLine();
     await era.printAndWait('返回训练室了……');
-    await sys_get_random_event(event_hooks.back_school)(location);
+    await sys_get_random_event(event_hooks.back_school)();
   }
   era.set('flag:当前位置', location_enum.office);
 };

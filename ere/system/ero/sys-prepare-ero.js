@@ -374,6 +374,7 @@ function begin_and_init_ero(...ids) {
   era.beginTrain();
   era.set('tflag:回合', 1);
   era.set('tflag:前回行动', -1);
+  era.set('tflag:对手行动', -1);
   era.set('tflag:强奸', -1);
   init_ero(...ids);
 }

@@ -4,8 +4,9 @@ const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const { sys_check_race_ready } = require('#/system/sys-calc-chara-param');
 
 const { location_enum } = require('#/data/locations');
-const { race_enum, race_infos } = require('#/data/race/race-const');
+const RaceHistory = require('#/data/race/model/race-history');
 const { track_enum } = require('#/data/race/model/race-info');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
  * @param {number} chara_id
@@ -22,7 +23,7 @@ function check_and_register_aim_race(chara_id, aim_races, _edu_weeks) {
   }
   const temp_key = `${edu_weeks}_`;
   let registered_race;
-  if (Object.keys(era.get(`cflag:${chara_id}:育成成绩`)).length) {
+  if (new RaceHistory(chara_id).check_begin()) {
     for (const e of Object.entries(aim_races)) {
       if (e[0].startsWith(temp_key)) {
         const race = Number(e[0].substring(temp_key.length)),
@@ -31,7 +32,7 @@ function check_and_register_aim_race(chara_id, aim_races, _edu_weeks) {
           sys_check_race_ready(chara_id, true) &&
           e[1] > 0 &&
           race_infos[race].track < track_enum.longchamp &&
-          (era.get(`cflag:${chara_id}:位置`) === location_enum.office ||
+          (era.get(`cflag:${chara_id}:位置`) === 0 ||
             era.get(`cflag:${chara_id}:位置`) === location_enum.beach)
         ) {
           registered_race.curr = registered_race.last = {

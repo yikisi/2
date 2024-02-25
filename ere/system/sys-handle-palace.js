@@ -15,6 +15,7 @@ const {
 } = require('#/data/color-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
 const check_stages = require('#/data/event/check-stages');
+const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -87,8 +88,7 @@ function sys_handle_palace(chara_id) {
     aim_check: !aim_punish_count,
     titles,
   });
-  /** @type {Record<string,{pop:number,race:number,rank:number}>} */
-  const races = era.get(`cflag:${chara_id}:育成成绩`);
+  const races = new RaceHistory(chara_id).get_entries();
   let invincible_1 = true,
     invincible_2 = true,
     cup_1 = 0,
@@ -96,11 +96,9 @@ function sys_handle_palace(chara_id) {
     cup_3 = 0,
     g1_count = 0,
     pop_g1_count = 0;
-  Object.entries(races).forEach((e) => {
-    const edu_weeks = Number(e[0]),
-      { race, rank } = e[1];
-    if (rank === 1) {
-      switch (race) {
+  races.forEach((e) => {
+    if (e.rank === 1) {
+      switch (e.race) {
         case race_enum.sats_sho:
           cup_1++;
           break;
@@ -120,7 +118,7 @@ function sys_handle_palace(chara_id) {
           cup_3 += 2;
           break;
         default:
-          if (race_infos[race].race_class === class_enum.G1) {
+          if (race_infos[e.race].race_class === class_enum.G1) {
             g1_count++;
             if (e[1].pop === 1) {
               pop_g1_count++;
@@ -128,10 +126,10 @@ function sys_handle_palace(chara_id) {
           }
       }
     } else {
-      if (edu_weeks < edu_weeks_kiku_sho) {
+      if (e.weeks < edu_weeks_kiku_sho) {
         invincible_1 = false;
       }
-      if (edu_weeks < edu_weeks_shuk_sho) {
+      if (e.weeks < edu_weeks_shuk_sho) {
         invincible_2 = false;
       }
     }
@@ -156,7 +154,7 @@ function sys_handle_palace(chara_id) {
       titles.push({ n: '无败变则三冠', c: buff_colors[1] });
     }
   }
-  if (Object.keys(races).length >= 30) {
+  if (races.length >= 30) {
     titles.push({ n: '铁马娘子', c: buff_colors[1] });
     g1_count && titles.push({ n: '黄金旅程', c: buff_colors[1] });
   }

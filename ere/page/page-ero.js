@@ -620,7 +620,15 @@ async function page_ero(lover) {
         era.get(`mark:${curr_lover}:欢愉`) < 3,
       current = new Date().getTime(),
       filtered_ero_actions = sys_filter_ero_act(0, curr_lover, filters),
-      last_action = era.get('tflag:前回行动');
+      { last_action, lover_action } = master
+        ? {
+            last_action: era.get('tflag:对手行动'),
+            lover_action: era.get('tflag:前回行动'),
+          }
+        : {
+            last_action: era.get('tflag:前回行动'),
+            lover_action: era.get('tflag:对手行动'),
+          };
     era.printInColRows(
       [{ type: 'divider' }],
       {
@@ -647,7 +655,7 @@ async function page_ero(lover) {
               {
                 config: {
                   offset: 1,
-                  width: !master && characters_in_train.length > 2 ? 23 : 19,
+                  width: !master && characters_in_train.length > 2 ? 22 : 19,
                 },
                 names: get_image(curr_lover),
                 type: 'image.whole',
@@ -675,33 +683,47 @@ async function page_ero(lover) {
           type: 'button',
         };
       }),
-      last_action >= 0
-        ? [
-            {
-              config: { width: 6 },
-              content: `前回行动：${ero_action_names[last_action]}`,
-              type: 'text',
-            },
-            filtered_ero_actions.indexOf(last_action) !== -1 && !master
-              ? {
-                  accelerator: last_action,
-                  config: {
-                    disabled:
-                      lost_mind > 0 ||
-                      (base_check &&
-                        check_ero_enabled(
-                          curr_lover,
-                          curr_supporter,
-                          last_action,
-                        ) < 0),
-                    width: 4,
-                  },
-                  content: `再次 ${ero_action_names[last_action]}`,
-                  type: 'button',
-                }
-              : undefined,
-          ].filter((e) => e)
-        : [],
+      [
+        {
+          config: { width: 6 },
+          content:
+            last_action >= 0
+              ? [
+                  get_chara_talk(0).get_colored_name(),
+                  ' 的行动：',
+                  ero_action_names[last_action],
+                ]
+              : '',
+          type: 'text',
+        },
+        filtered_ero_actions.indexOf(last_action) !== -1 && !master
+          ? {
+              accelerator: last_action,
+              config: {
+                disabled:
+                  lost_mind > 0 ||
+                  (base_check &&
+                    check_ero_enabled(curr_lover, curr_supporter, last_action) <
+                      0),
+                width: 6,
+              },
+              content: `再次 ${ero_action_names[last_action]}`,
+              type: 'button',
+            }
+          : undefined,
+        {
+          config: { width: 6 },
+          content:
+            lover_action >= 0
+              ? [
+                  get_chara_talk(curr_lover).get_colored_name(),
+                  ' 的行动：',
+                  ero_action_names[lover_action],
+                ]
+              : '',
+          type: 'text',
+        },
+      ].filter((e) => e),
       [{ type: 'divider' }],
       ['设置', '身体接触', '脏污检查', '个人情报', '目标情报'].map((e, i) => {
         return {

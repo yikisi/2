@@ -1,6 +1,5 @@
-const era = require('#/era-electron');
-
 const { money_color, buff_colors } = require('#/data/color-const');
+const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
 
@@ -9,8 +8,7 @@ const { race_infos, race_enum } = require('#/data/race/race-const');
  * @returns {{count:{g1:number,g2:number,g3:number},check:number,buffer:*[]}}
  */
 function get_palace_info(chara) {
-  const /** @type {Record<string,{race:number,rank:number}>} */
-    races = era.get(`cflag:${chara.id}:育成成绩`),
+  const races = new RaceHistory(chara.id).get_entries(),
     main_races = [],
     ret_buffer = [];
   let total_prize = 0,
@@ -19,31 +17,31 @@ function get_palace_info(chara) {
     g1_count = 0,
     g2_count = 0,
     g3_count = 0;
-  Object.entries(races)
+  races
     .sort(
       (a, b) =>
-        race_infos[a[1].race].race_class - race_infos[b[1].race].race_class ||
-        Number(b[0]) - Number(a[0]),
+        race_infos[a.race].race_class - race_infos[b.race].race_class ||
+        b.weeks - a.weeks,
     )
     .forEach((e) => {
-      const info = race_infos[e[1].race];
-      if (e[1].rank === 1) {
+      const info = race_infos[e.race];
+      if (e.rank === 1) {
         champions++;
-        e[1].race !== race_enum.begin_race && main_races.push(e[1].race);
+        e.race !== race_enum.begin_race && main_races.push(e.race);
         check += info.race_class === RaceInfo.class_enum.G1;
       }
-      if (e[1].rank <= 5) {
-        g1_count += (info.race_class === RaceInfo.class_enum.G1) / e[1].rank;
-        g2_count += (info.race_class === RaceInfo.class_enum.G2) / e[1].rank;
-        g3_count += (info.race_class === RaceInfo.class_enum.G3) / e[1].rank;
-        total_prize += info.prize * RaceInfo.prize_ratios[e[1].rank - 1];
+      if (e.rank <= 5) {
+        g1_count += (info.race_class === RaceInfo.class_enum.G1) / e.rank;
+        g2_count += (info.race_class === RaceInfo.class_enum.G2) / e.rank;
+        g3_count += (info.race_class === RaceInfo.class_enum.G3) / e.rank;
+        total_prize += info.prize * RaceInfo.prize_ratios[e.rank - 1];
       }
     });
   ret_buffer.push([
     chara.get_colored_name(),
     '，生涯 ',
     {
-      content: Object.keys(races).length.toLocaleString(),
+      content: races.length.toLocaleString(),
       color: buff_colors[1],
       fontWeight: 'bold',
     },

@@ -10,7 +10,7 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 const req_desc = ['1着', '2着以内', '3着以内', '4着以内', '入着', '出走'];
 
 /**
- * @param {Record<string,{race:number,rank:number}>} races
+ * @param {Record<string,{race:number,rank:number}|RaceResult>} races
  * @param {number} aim_race
  * @param {number} [year]
  * @param {number} [req_rank]

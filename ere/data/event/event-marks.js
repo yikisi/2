@@ -7,9 +7,6 @@ const event_hooks = require('#/data/event/event-hooks');
  * 比如外出有特殊事件的话，在主界面的外出按键会显示为红色
  */
 class EventMarks {
-  chara_id;
-  obj;
-
   /** @param {number} chara_id */
   constructor(chara_id) {
     this.chara_id = chara_id || 0;

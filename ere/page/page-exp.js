@@ -125,8 +125,12 @@ handlers.push(require('#/page/exp/exp-tab-8'));
 function get_flags(chara_id) {
   const no_fog =
       era.get(`exp:${chara_id}:性爱次数`) > era.get(`exp:${chara_id}:睡奸次数`),
-    show_all_body = !chara_id || era.get('status:0:透视镜片') > 0,
-    show_all_exp = era.get('status:0:马跳次数镜片') > 0;
+    show_all_body =
+      !chara_id ||
+      era.get('status:0:马语者') ||
+      era.get('status:0:透视镜片') > 0,
+    show_all_exp =
+      era.get('status:0:马语者') || era.get('status:0:马跳次数镜片') > 0;
   return {
     in_growth: era.get(`cflag:${chara_id}:成长阶段`) < 2,
     mark_level: show_all_body ? 3 : era.get(`mark:${chara_id}:淫纹`),

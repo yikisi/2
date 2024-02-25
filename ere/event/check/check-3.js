@@ -304,6 +304,8 @@ handlers[check_stages.title_check] = (extra_flag) => {
       c,
       n: '帝王',
     });
+  event_marks.perfect_check = 0;
+  event_marks.normal_check = 0;
 };
 
 /**

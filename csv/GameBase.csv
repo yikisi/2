@@ -24,6 +24,6 @@
 バージョン,0500
 
 ; 游戏当前支持的最低版本，低于此版本的存档会拒绝读取 [GAMEBASE_ALLOWVERSION]
-バージョン違い認める,0001
+バージョン違い認める,0500
 
 发布页,https://gitgud.io/SLeader/erauma/-/releases

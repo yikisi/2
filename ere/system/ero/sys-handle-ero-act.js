@@ -223,6 +223,7 @@ async function sys_handle_ero_act(command, filters, _shown) {
         era.set('tflag:前回助手', supporter);
         await sys_auto_react(shown);
       } else {
+        era.set('tflag:对手行动', command);
         await sys_auto_rape(shown);
       }
       era.set('tflag:前回对手', cur_lover);

@@ -15,6 +15,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_adaptability_rank } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { expedition_weeks } = require('#/data/move-const');
+const RaceHistory = require('#/data/race/model/race-history');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
 const { adaptability_names } = require('#/data/train-const');
@@ -50,7 +51,7 @@ function generate_race_dict(
   registered_race,
 ) {
   const dict = {};
-  if (chara_id && !Object.keys(era.get(`cflag:${chara_id}:育成成绩`)).length) {
+  if (chara_id && !new RaceHistory(chara_id).check_begin()) {
     if (registered_race.race === race_enum.begin_race) {
       dict[registered_race.week] = [race_enum.begin_race];
     } else if (cur_round + 1 < year_begin + 20) {
