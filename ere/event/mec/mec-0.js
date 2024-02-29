@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const { buff_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
 
-const punish_desc = ['赛马', '泄欲用母马'];
+const punish_desc = ['比赛用母马', '泄欲用母马'];
 
 /** @param {number} stage_id */
 module.exports = (stage_id) => {

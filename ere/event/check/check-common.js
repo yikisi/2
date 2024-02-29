@@ -193,7 +193,7 @@ handlers[check_stages.aim_check] = (chara_id) => {
 /** @param {number} chara_id */
 handlers[check_stages.palace_check] = (chara_id) => {
   common_palace_check(chara_id);
-  return [];
+  return handlers[check_stages.aim_check](chara_id);
 };
 
 /**

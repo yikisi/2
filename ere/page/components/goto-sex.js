@@ -137,7 +137,7 @@ async function goto_sex(chara_id, sex_loc) {
     if (!ret) {
       era.set('flag:当前位置', sex_loc);
       begin_and_init_ero(0, chara_id);
-      await print_ero_page();
+      await print_ero_page(chara_id);
       await end_ero_and_show_result(true);
     }
   } else {

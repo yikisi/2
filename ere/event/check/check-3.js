@@ -22,6 +22,7 @@ const check_stages = require('#/data/event/check-stages');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -134,10 +135,10 @@ handlers[check_stages.next_week] = () => {
       case 95 + 19: // 交涉
         if (
           !event_marks.give_up &&
-          Object.entries(races).filter((e) => {
-            const weeks = Number(e[0]);
-            return weeks >= 48 && weeks < 96 && e[1].rank === 1;
-          }).length >= 3
+          new RaceHistory(3)
+            .get_entries()
+            .filter((e) => e.weeks >= 48 && e.weeks < 96 && e.rank === 1)
+            .length >= 3
         ) {
           add_event(event_hooks.week_start, event_obj_special);
         }
@@ -148,12 +149,14 @@ handlers[check_stages.next_week] = () => {
         break;
       case 95 + 25: // 春之帝王
         if (
-          Object.entries(races).filter(
-            (e) =>
-              Number(e[0]) > race_infos[race_enum.tenn_spr].date + 95 &&
-              race_infos[e[1].race].race_class === RaceInfo.class_enum.G1 &&
-              e[1].rank === 1,
-          ).length
+          new RaceHistory(3)
+            .get_entries()
+            .filter(
+              (e) =>
+                e.weeks > race_infos[race_enum.tenn_spr].date + 95 &&
+                race_infos[e.race].race_class === RaceInfo.class_enum.G1 &&
+                e.rank === 1,
+            ).length
         ) {
           event_marks.spring_teio++;
           add_event(event_hooks.school_atrium, event_obj_special);

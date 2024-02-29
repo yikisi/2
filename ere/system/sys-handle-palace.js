@@ -120,7 +120,7 @@ function sys_handle_palace(chara_id) {
         default:
           if (race_infos[e.race].race_class === class_enum.G1) {
             g1_count++;
-            if (e[1].pop === 1) {
+            if (e.pop === 1) {
               pop_g1_count++;
             }
           }

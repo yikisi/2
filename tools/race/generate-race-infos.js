@@ -4,7 +4,11 @@ let csv = readFileSync('./races.csv', 'utf-8');
 csv = csv
   .replace(/^\ufeff/, '')
   .split('\n')
-  .map((e) => e.split(','))
+  .map((e) => {
+    const csv_list = e.split(',');
+    csv_list[6] = csv_list[6].toLowerCase();
+    return csv_list;
+  })
   .filter((e) => e[0]);
 
 csv.shift();
@@ -24,7 +28,14 @@ csv.forEach((e) => {
 output +=
   '};\nObject.keys(race_enum).forEach((e, i) => (race_enum[e] = i));\n\n/** @type {RaceInfo[]} */\nconst race_infos = [];\n';
 
+const dict = {};
+
 csv.forEach((e) => {
+  if (dict[e[6]]) {
+    console.log(`duplicate file name! ${e[6]}`);
+  } else {
+    dict[e[6]] = 1;
+  }
   output += `race_infos[race_enum.${
     e[1]
   }] = require('#/data/race/${e[8].toLowerCase()}/race-${e[6]}');\n`;

@@ -81,9 +81,10 @@ module.exports = async (item_list) => {
         {
           type: 'text',
           config: { width: 1 },
-          content: name.startsWith('避孕套')
-            ? era.get('item:避孕套')
-            : era.get(`item:${id}`),
+          content:
+            name === '避孕套（5只装）'
+              ? era.get('item:避孕套')
+              : era.get(`item:${id}`),
         },
         {
           accelerator: id + 1000,
@@ -325,8 +326,8 @@ module.exports = async (item_list) => {
             ),
             1,
           );
-          era.add('item:避孕套', 5 * era.get('item:避孕套(5只装)'));
-          era.set('item:避孕套(5只装)', 0);
+          era.add('item:避孕套', 5 * era.get('item:避孕套（5只装）'));
+          era.set('item:避孕套（5只装）', 0);
       }
     }
   }

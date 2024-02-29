@@ -196,7 +196,8 @@ async function check_new_activities(cur_round, in_team_list) {
         ]);
       }
       const me_in_race =
-        era.get('cflag:0:种族') && sys_reg_race(0).curr.race === race;
+        era.get('cflag:0:种族') &&
+        race_infos[sys_reg_race(0).curr.race].track === race_infos[race].track;
       let temp =
         era.get('flag:当前位置') === location_enum.basement ||
         era.get('cflag:0:妊娠回合计时') >= 33 ||
