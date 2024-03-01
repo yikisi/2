@@ -154,8 +154,12 @@ async function page_chairman_office() {
         break;
       case 1:
         nothing = false;
-        if (await goto_sex(302, location_enum.chairman)) {
-          await chairman.say_and_wait('羞 涩！那晚上在你家见面！');
+        switch (await goto_sex(302, location_enum.chairman)) {
+          case true:
+            await chairman.say_and_wait('羞 涩！那晚上在你家见面！');
+            break;
+          case 2:
+            flag_page = false;
         }
         break;
       case 2:

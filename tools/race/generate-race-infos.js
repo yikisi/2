@@ -26,7 +26,7 @@ csv.forEach((e) => {
 });
 
 output +=
-  '};\nObject.keys(race_enum).forEach((e, i) => (race_enum[e] = i));\n\n/** @type {RaceInfo[]} */\nconst race_infos = [];\n';
+  '};\nObject.keys(race_enum).forEach((e, i) => (race_enum[e] = i));\n\nconst current = new Date().getTime();\n\n/** @type {RaceInfo[]} */\nconst race_infos = [];\n';
 
 const dict = {};
 
@@ -48,7 +48,7 @@ output +=
   '  e.lanes = lane_params[param_id];\n' +
   '  e.slopes = slope_params[param_id];\n' +
   '  e.phases = phase_params[e.span];\n' +
-  "});\n\nrace_infos[race_enum.begin_race] = require('#/data/race/race-begin-race')\n\nmodule.exports = {\nrace_enum,\nrace_infos,\nrace_rewards: require('#/data/race/race-rewards')};";
+  "});\n\nrace_infos[race_enum.begin_race] = require('#/data/race/race-begin-race')\n\nconsole.log('[race-const.js] race info init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nmodule.exports = {\nrace_enum,\nrace_infos,\nrace_rewards: require('#/data/race/race-rewards')};";
 
 writeFileSync('../../ere/data/race/race-const.js', output);
 

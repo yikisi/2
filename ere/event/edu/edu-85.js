@@ -18,6 +18,7 @@ const {
 const ruby = get_chara_talk(85);
 const { attr_enum } = require('#/data/train-const');
 
+/** @type {Record<string,function(HookArg,*,EventObject):Promise<*>>} */
 const handlers = {};
 
 handlers[
@@ -34,11 +35,10 @@ handlers[
   event_hooks.crazy_fan_end
 ] = require('#/event/edu/edu-events-85/crazy-fan-end');
 
-handlers[event_hooks.out_shopping] = async (_, __, event_object) => {
+handlers[event_hooks.out_shopping] = async (hook, __, event_object) => {
   const relation = era.get('relation:85:0');
-  const cur_chara_id = era.get('flag:当前互动角色');
-  if (cur_chara_id && cur_chara_id !== 85) {
-    add_event(event_hooks.out_shopping, event_object);
+  if (era.get('flag:当前互动角色') !== 85) {
+    add_event(hook.hook, event_object);
     return;
   }
   const edu_event_marks = new EduEventMarks(85);
@@ -74,7 +74,11 @@ handlers[event_hooks.out_shopping] = async (_, __, event_object) => {
   }
 };
 
-handlers[event_hooks.out_start] = async function () {
+handlers[event_hooks.out_start] = async (hook, _, event_object) => {
+  if (era.get('flag:当前互动角色') !== 85) {
+    add_event(hook.hook, event_object);
+    return;
+  }
   const event_marks = new EduEventMarks(85);
   if (event_marks.get('hot_spring_event') === 1) {
     event_marks.add('hot_spring_event');
@@ -141,10 +145,9 @@ handlers[event_hooks.out_start] = async function () {
   return true;
 };
 
-handlers[event_hooks.out_station] = async (_, __, event_object) => {
-  const cur_chara_id = era.get('flag:当前互动角色');
-  if (cur_chara_id && cur_chara_id !== 85) {
-    add_event(event_hooks.out_station, event_object);
+handlers[event_hooks.out_station] = async (hook, __, event_object) => {
+  if (era.get('flag:当前互动角色') !== 85) {
+    add_event(hook.hook, event_object);
     return;
   }
   const edu_event_marks = new EduEventMarks(85);
@@ -171,10 +174,9 @@ handlers[event_hooks.out_station] = async (_, __, event_object) => {
     );
   }
 };
-handlers[event_hooks.office_study] = async (_, __, event_object) => {
-  const cur_chara_id = era.get('flag:当前互动角色');
-  if (cur_chara_id && cur_chara_id !== 85) {
-    add_event(event_hooks.office_study, event_object);
+handlers[event_hooks.office_study] = async (hook, __, event_object) => {
+  if (era.get('flag:当前互动角色') !== 85) {
+    add_event(hook.hook, event_object);
     return;
   }
   const edu_event_marks = new EduEventMarks(85);
@@ -274,7 +276,11 @@ handlers[event_hooks.week_end] = async () => {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.out_church] = async () => {
+handlers[event_hooks.out_church] = async (hook, __, event_object) => {
+  if (era.get('flag:当前互动角色') !== 85) {
+    add_event(hook.hook, event_object);
+    return;
+  }
   const me = get_chara_talk(0),
     edu_weeks = era.get('flag:当前回合数') - era.get('cflag:85:育成回合计时');
   if (edu_weeks === 47 + 1) {

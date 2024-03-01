@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const {
   check_pregnant_unprotect,
+  check_want_to_escape,
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
@@ -78,11 +79,12 @@ handlers[check_stages.rape_in_sleeping] = (chara_id) => {
     relation = era.get(`relation:${chara_id}:0`) || 0;
   let delta = love * raping_limit - relation;
   if (
-    punish_level <= 1 &&
-    (era.get('flag:当前位置') === location_enum.basement ||
-      !raping_limit ||
-      love < 50 ||
-      delta < 0)
+    (punish_level <= 1 &&
+      (era.get('flag:当前位置') === location_enum.basement ||
+        !raping_limit ||
+        love < 50 ||
+        delta < 0)) ||
+    check_want_to_escape(chara_id)
   ) {
     return false;
   }
@@ -111,7 +113,11 @@ handlers[check_stages.rape_in_sleeping] = (chara_id) => {
 };
 
 handlers[check_stages.want_make_love] = (chara_id) => {
-  if (!check_pregnant_unprotect(chara_id) || !check_pregnant_unprotect(0)) {
+  if (
+    !check_pregnant_unprotect(chara_id) ||
+    !check_pregnant_unprotect(0) ||
+    check_want_to_escape(chara_id)
+  ) {
     return 0;
   }
   const love = era.get(`love:${chara_id}`);

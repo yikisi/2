@@ -305,6 +305,8 @@ const race_enum = {
 };
 Object.keys(race_enum).forEach((e, i) => (race_enum[e] = i));
 
+const current = new Date().getTime();
+
 /** @type {RaceInfo[]} */
 const race_infos = [];
 race_infos[race_enum.naka_kim] = require('#/data/race/g3/race-naka-kim');
@@ -464,6 +466,12 @@ race_infos.forEach((e) => {
 });
 
 race_infos[race_enum.begin_race] = require('#/data/race/race-begin-race');
+
+console.log(
+  '[race-const.js] race info init done!',
+  (new Date().getTime() - current).toLocaleString(),
+  'ms',
+);
 
 module.exports = {
   race_enum,

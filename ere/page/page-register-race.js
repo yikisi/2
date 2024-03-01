@@ -13,13 +13,32 @@ const { el_danger_color, adaptability_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_adaptability_rank } = require('#/data/info-generator');
-const { location_enum } = require('#/data/locations');
 const { expedition_weeks } = require('#/data/move-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
+const { foreign_race_list } = require('#/data/race/race-location');
 const { adaptability_names } = require('#/data/train-const');
 
+/**
+ * @param {number} chara_id
+ * @param {number} year_begin
+ * @param {number} cur_round
+ * @param {{race:number,week:number}} registered_race
+ * @returns {boolean}
+ */
+function check_in_foreign(chara_id, year_begin, cur_round, registered_race) {
+  return (
+    foreign_race_list.find((e) => e === registered_race.race) !== undefined &&
+    race_infos[registered_race.race].date + year_begin - cur_round <=
+      expedition_weeks
+  );
+}
+
+/**
+ * @param {number} chara_id
+ * @returns {Record<string,{color:string,content:string,fontWeight:string}>}
+ */
 function generate_adaptability_dict(chara_id) {
   const dict = {};
   adaptability_names.forEach((e, i) => {
@@ -93,7 +112,8 @@ async function reg_race_page() {
     team_list = sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
       (chara_id) =>
         era.get(`cflag:${chara_id}:种族`) &&
-        cur_round - era.get(`cflag:${chara_id}:育成回合计时`) + 1 < 3 * 48 &&
+        (!chara_id ||
+          cur_round - era.get(`cflag:${chara_id}:育成回合计时`) + 1 < 3 * 48) &&
         sys_reg_race(chara_id).curr.week !== cur_round + 1,
     ),
     year_begin = Math.floor(cur_round / 48) * 48;
@@ -112,10 +132,12 @@ async function reg_race_page() {
     flag_race_reg = true,
     flag_filter_race = true,
     flag_hide_adaptability = true,
-    in_foreign =
-      era.get(`cflag:${chara_id}:位置`) > 0 &&
-      era.get(`cflag:${chara_id}:位置`) !== location_enum.beach &&
-      registered_race.race > 0;
+    in_foreign = check_in_foreign(
+      chara_id,
+      year_begin,
+      cur_round,
+      registered_race,
+    );
 
   while (flag_race_reg) {
     await era.clear();
@@ -311,10 +333,12 @@ async function reg_race_page() {
       );
       adaptability_dict = generate_adaptability_dict(chara_id);
       edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
-      in_foreign =
-        era.get(`cflag:${chara_id}:位置`) > 0 &&
-        era.get(`cflag:${chara_id}:位置`) !== location_enum.beach &&
-        registered_race.race > 0;
+      in_foreign = check_in_foreign(
+        chara_id,
+        year_begin,
+        cur_round,
+        registered_race,
+      );
     } else {
       if (registered_race.race === ret) {
         registered_race.race = registered_race.week = -1;

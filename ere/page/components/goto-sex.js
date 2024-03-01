@@ -20,6 +20,8 @@ const print_ero_page = require('#/page/page-ero');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { location_enum } = require('#/data/locations');
+
 async function select_medicine() {
   const item_list = ['超马跳Z', '马跳S']
     .map((e) => {
@@ -98,6 +100,12 @@ async function fail(chara, me) {
   era.set('flag:变态行为', 1);
   if (era.get('flag:当前互动角色') === chara.id) {
     era.set('flag:当前互动角色', 0);
+  }
+  if (
+    era.get('flag:当前位置') === location_enum.chairman ||
+    era.get('flag:当前位置') === location_enum.gate
+  ) {
+    return 2;
   }
 }
 
@@ -360,8 +368,7 @@ async function goto_sex(chara_id, sex_loc) {
               chara.get_colored_name(),
               '……',
             ]);
-            await fail(chara, me);
-            return;
+            return await fail(chara, me);
           }
         } else {
           ret = await select_medicine();
@@ -397,8 +404,7 @@ async function goto_sex(chara_id, sex_loc) {
               chara.get_colored_name(),
               ' 机敏地发现了异样……',
             ]);
-            await fail(chara, me);
-            return;
+            return await fail(chara, me);
           }
         }
       }

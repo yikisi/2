@@ -150,7 +150,7 @@ handlers[check_stages.aim_check] = () => {
   buffer.push(check_aim_and_get_entry(races, race_enum.hoch_rev, 1, 5));
   buffer.push(check_aim_and_get_entry(races, race_enum.oka_sho, 1, 5));
   buffer.push(check_aim_and_get_entry(races, race_enum.yush_him, 1, 18));
-  buffer.push(check_aim_and_get_entry(races, race_enum.kyo_sta, 2, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.rose_sta, 1, 3));
   buffer.push(check_aim_and_get_entry(races, race_enum.takm_kin, 2, 3));
   buffer.push(check_aim_and_get_entry(races, race_enum.yasu_kin, 2, 3));
   buffer.push(check_aim_and_get_entry(races, race_enum.sprt_sta, 2, 1));

@@ -199,7 +199,9 @@ module.exports = {
   },
   check_want_to_escape(chara_id) {
     return (
-      (!era.get('tflag:强奸') && get_sex_acceptable(chara_id) < 0) ||
+      (era.getCharactersInTrain().length > 0 &&
+        !era.get('tflag:强奸') &&
+        get_sex_acceptable(chara_id) < 0) ||
       Math.max(
         era.get(`mark:${chara_id}:苦痛`),
         era.get(`mark:${chara_id}:羞耻`),

@@ -39,8 +39,9 @@ function sys_check_train_enabled(chara_id) {
   return (
     (tmp || era.get(`cflag:${tmp}:种族`)) &&
     !era.get(`status:${tmp}:伤病`) &&
-    era.get('flag:当前回合数') - era.get(`cflag:${tmp}:育成回合计时`) <
-      3 * 48 &&
+    (era.get('flag:当前回合数') - era.get(`cflag:${tmp}:育成回合计时`) <
+      3 * 48 ||
+      !chara_id) &&
     (!era.get(`status:${chara_id}:摸鱼`) ||
       era.get('cflag:0:位置') === era.get(`cflag:${chara_id}:位置`)) &&
     era.get(`base:${chara_id}:压力`) < pressure_border.depression &&

@@ -25,24 +25,11 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { expedition_weeks } = require('#/data/move-const');
 const { class_enum, track_enum } = require('#/data/race/model/race-info');
-const { race_infos, race_enum } = require('#/data/race/race-const');
-
-const foreign_race_list = Object.values(race_enum).filter(
-  (e) => race_infos[e].track >= track_enum.longchamp,
-);
-const track2location = {};
-track2location[track_enum.longchamp] =
-  track2location[track_enum.chantilly] =
-  track2location[track_enum.st_cloud] =
-    { lan: '法', loc: location_enum.paris };
-track2location[track_enum.bashang] = {
-  lan: '粤',
-  loc: location_enum.guangzhou,
-};
-track2location[track_enum.shatin] = {
-  lan: '粤',
-  loc: location_enum.hongkong,
-};
+const { race_infos } = require('#/data/race/race-const');
+const {
+  foreign_race_list,
+  track2location,
+} = require('#/data/race/race-location');
 
 /**
  * @param {number} chara_id
@@ -113,7 +100,7 @@ async function check_new_activities(cur_round, in_team_list) {
   ) {
     era.print([get_chara_talk(0).get_colored_name(), ' 即将破产！']);
   }
-  in_team_list.forEach((chara_id) => {
+  [0, ...in_team_list].forEach((chara_id) => {
     const registered_race = sys_reg_race(chara_id).curr;
     if (registered_race.week === cur_round) {
       era.print([

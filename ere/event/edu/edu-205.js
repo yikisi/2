@@ -14,6 +14,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
+const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise>} */
@@ -131,7 +132,7 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
     edu_weeks < 96 &&
     extra_flag.rank === 1
   ) {
-    await print_event_name('最强。', vp);
+    await print_event_name('最强', vp);
     await era.printAndWait(
       `至今为止从未有过的充满自信的话，可 ${me.name} 怎么听都觉得空虚。`,
     );
@@ -222,7 +223,7 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
     extra_flag.race === race_enum.prix_lat &&
     edu_weeks >= 96 &&
     extra_flag.rank === 1 &&
-    check_aim_race(era.get('cflag:205:育成成绩'), race_enum.prix_lat, 1, 1)
+    check_aim_race(new RaceHistory(205).get(), race_enum.prix_lat, 1, 1)
   ) {
     await print_event_name('迈向巅峰再制胜', vp);
     const montjeu = get_chara_talk(204);

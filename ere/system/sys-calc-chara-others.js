@@ -81,7 +81,8 @@ function like_chara(target, aim, val, to_be_shown, extra_love) {
     // 玩家对所有马娘好感默认最大
     return false;
   }
-  const relation = era.get(`relation:${target}:${aim}`) || 75;
+  let relation = era.get(`relation:${target}:${aim}`);
+  relation = relation === undefined ? 75 : relation;
   let _val = val;
   let love_flag = 0;
   if (!aim) {
