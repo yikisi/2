@@ -458,7 +458,11 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`而那忧虑，也只是在思考怎样才能胜利，仅此而已。`);
     extra_flag.attr_change.fill(3);
     extra_flag.pt_change = 15;
-  } else if (extra_flag.race === race_enum.takz_kin && extra_flag.rank === 1) {
+  } else if (
+    extra_flag.race === race_enum.takz_kin &&
+    extra_flag.rank === 1 &&
+    edu_weeks > 96
+  ) {
     await print_event_name('交到手中的接力棒', kita);
     await era.printAndWait(
       `${kita.name} 同大鸣大放的决一死战，最终以 ${kita.name} 的胜利落下了帷幕。`,

@@ -387,7 +387,9 @@ async function game_over() {
         } else {
           for (const e of [
             `${CharaTalk.me.name} 或许是你过于懈怠，又或许是负责马娘的天赋不足，胜利与你们始终遥遥无期。`,
-            `${CharaTalk.me.name}们 不管如何努力都无济于事，最终校方勒令 ${CharaTalk.me.name} 与负责马娘解除契约，进行移籍。`,
+            `${CharaTalk.me.get_couple_title()} 不管如何努力都无济于事，最终校方勒令 ${
+              CharaTalk.me.name
+            } 与负责马娘解除契约，进行移籍。`,
             `因社会评价过低而被解雇的 ${CharaTalk.me.name}，迎来了结局……`,
           ]) {
             await era.printAndWait(e, {

@@ -381,7 +381,9 @@ module.exports = async (_, extra_flag) => {
         `${CharaTalk.me.name} 已经不在乎了自己的喉咙会否撕裂了。`,
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 只知道，${chara_talk.name} 正向 ${CharaTalk.me.name}们 的梦想迎头迈进。`,
+        `${CharaTalk.me.name} 只知道，${
+          chara_talk.name
+        } 正向 ${CharaTalk.me.get_couple_title()} 的梦想迎头迈进。`,
       );
       await era.printAndWait('很近了！很近了！');
       await era.printAndWait(

@@ -422,7 +422,7 @@ module.exports = async (hook, _, event_object) => {
       era.printButton('「嗯，我现在就过去」', 1);
       await era.input();
       await era.printAndWait(
-        `后来，${me.name}们 四个人就这样一起度过了开心的挑选衣服时间。`,
+        `后来，${me.get_couple_title()} 四个人就这样一起度过了开心的挑选衣服时间。`,
       );
       era.println();
       wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);

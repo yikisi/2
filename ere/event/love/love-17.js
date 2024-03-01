@@ -185,7 +185,9 @@ handlers[89] = async () => {
     `露娜有些恍惚。${chara_talk.sex}紧紧攥着自己胸口的衣物，${chara_talk.sex}发觉自己对训练员的情感好似有些转变。`,
   );
   await chara_talk.print_and_wait(
-    `${CharaTalk.me.name} 已经沉沉地睡去了。这里只有 ${CharaTalk.me.name}们，只有 ${CharaTalk.me.name}们……`,
+    `${
+      CharaTalk.me.name
+    } 已经沉沉地睡去了。这里只有 ${CharaTalk.me.get_couple_title()}，只有 ${CharaTalk.me.get_couple_title()}……`,
   );
   await chara_talk.print_and_wait(
     '露娜摒住了呼吸，往后微微一躺，半掩着的门就发出咔擦一声，紧紧关上。',

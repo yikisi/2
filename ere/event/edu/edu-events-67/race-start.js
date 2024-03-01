@@ -272,7 +272,7 @@ module.exports = async (_, extra_flag) => {
       );
       await first_g1_event(daiya);
       await era.printAndWait(
-        `${me.name}们 对于在“皋月赏”获胜更加充满了干劲。很期待她能顺利赢得第一个G1胜利。`,
+        `${me.get_couple_title()} 对于在“皋月赏”获胜更加充满了干劲。很期待她能顺利赢得第一个G1胜利。`,
       );
       await era.printAndWait(
         '──然而，就像是老天爷要泼我们冷水一般，电视上的天气预报显示出令人担忧的资讯。',

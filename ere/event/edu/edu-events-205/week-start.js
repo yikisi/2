@@ -289,7 +289,7 @@ module.exports = async (_, __, event_object) => {
         await era.printAndWait(`${vp.name} 像唱歌一样回话。`);
         era.drawLine();
         await era.printAndWait(
-          `自凯旋门赏以来，${me.name}们 一直以海外比赛为主。`,
+          `自凯旋门赏以来，${me.get_couple_title()} 一直以海外比赛为主。`,
         );
         await era.printAndWait(
           `准确地说，因为表现出了比平时更好的实力，结果决定以海外的比赛为主战场进行比赛。`,

@@ -190,7 +190,11 @@ module.exports = async function (hook, __, event_object) {
     await print_event_name(`与 ${kita.name} 的酒吧生活`, kita);
     await era.printAndWait(`和 ${me.name} 的担当约好了，要在某处酒吧里见面。`);
     await era.printAndWait(
-      `在同 ${kita.name} 共度了三年的时光后，${me.name}们 终于迎来了终局，或许这个月就会是和${kita.sex}共度的时光了吧。`,
+      `在同 ${
+        kita.name
+      } 共度了三年的时光后，${me.get_couple_title()} 终于迎来了终局，或许这个月就会是和${
+        kita.sex
+      }共度的时光了吧。`,
     );
     await era.printAndWait(
       `带着这样忧伤的想法，${me.name} 推开地下酒吧挂着黑猫门牌的门走入其中。`,

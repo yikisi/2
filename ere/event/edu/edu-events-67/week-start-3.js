@@ -111,7 +111,7 @@ module.exports = (handlers) => {
       '。',
     ]);
     await era.printAndWait([
-      `现在开始的话，就能有足够的时间仔细准备。${me.name}们 就一边思考着更以后的目标，一边为明年的 `,
+      `现在开始的话，就能有足够的时间仔细准备。${me.get_couple_title()} 就一边思考着更以后的目标，一边为明年的 `,
       race_infos[race_enum.sats_sho].get_colored_name(),
       ' 做好准备吧。',
     ]);

@@ -216,6 +216,7 @@ module.exports = async () => {
     week_start: false,
   };
   while (flags.homepage) {
+    era.logger.info(get_chara_talk(0).get_couple_title());
     await era.clear();
     let flag_skip_this_week = false;
     let cur_location = era.get('flag:当前位置');

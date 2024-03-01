@@ -46,10 +46,14 @@ handlers[check_stages.mec_motivation] = () => 0;
 
 handlers[check_stages.mec_pressure_buff] = () => 0;
 
+/**
+ * @param {number} chara_id
+ * @returns {string[]}
+ */
 handlers[check_stages.mec_race_cloth] = (chara_id) => {
   const base = era.get(`cstr:${chara_id}:头像`);
   let temp;
-  if ((temp = era.get(`cstr:${chara_id}`)) === -1) {
+  if ((temp = era.get(`cstr:${chara_id}:决胜服`)) === -1) {
     return [`${base}_运`, base, 'default'];
   }
   return [`${base}${temp}`, base, `${base}_运`, 'default'];

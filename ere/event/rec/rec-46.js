@@ -375,7 +375,7 @@ module.exports = {
         era.printButton(`${chara_talk.name}同学？`, 1);
         await era.input();
         await era.printAndWait(
-          `只剩下了${me.name}们两个人站在天台上沉默对视着。`,
+          `只剩下了${me.get_couple_title()}两个人站在天台上沉默对视着。`,
         );
         await chara_talk.say_and_wait(
           `训练员${me.get_adult_sex_title()}，可以成为我的专属训练员吗？`,

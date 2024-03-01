@@ -292,7 +292,9 @@ module.exports = async (hook, extra_flag) => {
       await flash.say_and_wait('这就是那位大人为你准备的线索。');
       era.println();
       await era.printAndWait(
-        `${flash.name} 从口袋里掏出还有余温的信件，交给 ${gold_ship.name} 后便离开了，留下${me.name}们独处。`,
+        `${flash.name} 从口袋里掏出还有余温的信件，交给 ${
+          gold_ship.name
+        } 后便离开了，留下${me.get_couple_title()}独处。`,
       );
       era.println();
       await gold_ship.say_and_wait('我来看看啊！');
@@ -356,7 +358,9 @@ module.exports = async (hook, extra_flag) => {
       await gold_ship.say_and_wait('但上面只有一个字啊，『Shu』。');
       era.println();
       await era.printAndWait(
-        `之前 ${flash.name} 给 ${me.name}们 的信上写着要收集前往伊甸园的四条线索，这个Shu字应该就是第一条了。`,
+        `之前 ${
+          flash.name
+        } 给 ${me.get_couple_title()} 的信上写着要收集前往伊甸园的四条线索，这个Shu字应该就是第一条了。`,
       );
       era.println();
       await gold_ship.say_and_wait(
@@ -410,13 +414,17 @@ module.exports = async (hook, extra_flag) => {
         check_aim_race(era.get('cflag:7:育成成绩'), race_enum.takz_kin, 1, 1)
       ) {
         await era.printAndWait(
-          `就在 ${me.name}们 想离开的时候，一旁的观众向 ${gold_ship.name} 挥手叫嚷。`,
+          `就在 ${me.get_couple_title()} 想离开的时候，一旁的观众向 ${
+            gold_ship.name
+          } 挥手叫嚷。`,
         );
         era.println();
         await era.printAndWait('观众A「黄金船太厉害了！」');
         await era.printAndWait('观众B「恭喜二连霸！」');
         era.println();
-        await era.printAndWait(`出于礼貌，${me.name}们 也向观众回敬。`);
+        await era.printAndWait(
+          `出于礼貌，${me.get_couple_title()} 也向观众回敬。`,
+        );
         era.println();
         await gold_ship.say_and_wait('谢谢你们嘞！');
         era.println();

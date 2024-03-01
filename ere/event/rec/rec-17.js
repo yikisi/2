@@ -293,7 +293,7 @@ module.exports = {
         `${CharaTalk.me.name} 也明白，自己永远不会拒绝露娜的请求。`,
       );
       await era.printAndWait(
-        `无论前方，等待着 ${CharaTalk.me.name}们 的是什么样的地狱。`,
+        `无论前方，等待着 ${CharaTalk.me.get_couple_title()} 的是什么样的地狱。`,
       );
 
       era.drawLine();

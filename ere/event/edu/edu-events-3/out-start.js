@@ -147,10 +147,12 @@ module.exports = async (hook, _, event_object) => {
       `${me.name} 也穿上一件不起眼的衣服，把衣领竖起来随意遮了遮脸，再加一顶鸭舌帽，ok。`,
     );
     await era.printAndWait(
-      `${me.name}们 就像两个蹩脚的特工一样遮掩住了自己的身份，走上街头。`,
+      `${me.get_couple_title()} 就像两个蹩脚的特工一样遮掩住了自己的身份，走上街头。`,
     );
     await era.printAndWait(
-      `——完成三冠后，${teio.name} 的知名度越来越高了，当然，${me.name} 的知名度也随之水涨船高。现在如果不加以遮掩的话，${me.name}们 往往出现在人流量大的地方就会被粉丝们团团包围，什么都干不成了。`,
+      `——完成三冠后，${teio.name} 的知名度越来越高了，当然，${
+        me.name
+      } 的知名度也随之水涨船高。现在如果不加以遮掩的话，${me.get_couple_title()} 往往出现在人流量大的地方就会被粉丝们团团包围，什么都干不成了。`,
     );
     await era.printAndWait(
       '所以，像这种前置工作，是必须的。但准备往往不能应付所有场面，比如——',
@@ -209,9 +211,7 @@ module.exports = async (hook, _, event_object) => {
     era.println();
 
     await era.printAndWait(
-      `众人的呼声一浪高过一浪，不少人闻讯而来向 ${me.name}们 这边靠近。${
-        me.name
-      }们 顿时觉得有些手脚无措。不过 ${
+      `众人的呼声一浪高过一浪，不少人闻讯而来向 ${me.get_couple_title()} 这边靠近。${me.get_couple_title()} 顿时觉得有些手脚无措。不过 ${
         me.name
       } 看了一眼帝王，${teio.get_teen_sex_title()}的脸红彤彤的，但也没有明确表示出反感——看来名声总是能让人，或${teio.get_uma_sex_title()}高兴的吧。`,
     );

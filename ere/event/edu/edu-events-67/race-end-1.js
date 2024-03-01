@@ -56,7 +56,9 @@ module.exports = (handlers) => {
     await daiya.say_and_wait(
       '……我要用这双脚继续奔跑、跑赢比赛，再继续赢下去。一定要完成里见家的宿愿！',
     );
-    await era.printAndWait(`${me.name}们 跟着散场的人潮，从赛场慢慢走向车站。`);
+    await era.printAndWait(
+      `${me.get_couple_title()} 跟着散场的人潮，从赛场慢慢走向车站。`,
+    );
     await say_by_passer_by_and_wait(
       '观众C',
       `那个叫里见光钻的赛${daiya.get_uma_sex_title()}，${
@@ -714,7 +716,7 @@ module.exports = (handlers) => {
       era.printButton('「呃……光钻！？」', 1);
       await era.input();
       await era.printAndWait(
-        `下一场比赛，不，甚至连资深级的参赛方针，${me.name}们 都还没有讨论过。`,
+        `下一场比赛，不，甚至连资深级的参赛方针，${me.get_couple_title()} 都还没有讨论过。`,
       );
       await era.printAndWait(
         `然而，里见光钻在看了 ${me.name} 一眼之后，又朝着观众席再重复了一次。`,

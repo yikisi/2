@@ -635,7 +635,9 @@ module.exports = async (hook, extra_flag) => {
             '？？？「皇帝的征途，已经结束了啊。」',
           );
           await era.printAndWait(
-            `露娜过去忧愁的目光带着迷茫，明明 ${CharaTalk.me.name}们 的愿望已经达成，${chara_talk.sex}却不知为何如此怅然若失。`,
+            `露娜过去忧愁的目光带着迷茫，明明 ${CharaTalk.me.get_couple_title()} 的愿望已经达成，${
+              chara_talk.sex
+            }却不知为何如此怅然若失。`,
           );
           await luna_talk.say_and_wait('那我的故事，是不是也要结束了？');
         } else {
@@ -748,7 +750,7 @@ module.exports = async (hook, extra_flag) => {
       `${CharaTalk.me.name} 无助地蹲在地上……${CharaTalk.me.name} 知道，自己辜负了露娜的期望。`,
     );
     await era.printAndWait(`${CharaTalk.me.name} 没能帮到${chara_talk.sex}。`);
-    await era.printAndWait(`${CharaTalk.me.name}们输了。`);
+    await era.printAndWait(`${CharaTalk.me.get_couple_title()}输了。`);
     if (ret === 2) {
       await handle_debuff(event_marks, luna);
     }

@@ -175,11 +175,11 @@ module.exports = async () => {
     });
 
     await era.printAndWait(
-      `距离 ${me.name}们 相知相识，相伴，再到如今，过去多久了呢？或许已经有了三五年吧，不过 ${me.name}们 两个似乎也没谁关心这些事情。`,
+      `距离 ${me.get_couple_title()} 相知相识，相伴，再到如今，过去多久了呢？或许已经有了三五年吧，不过 ${me.get_couple_title()} 两个似乎也没谁关心这些事情。`,
     );
     era.println();
     await era.printAndWait(
-      `毕竟，对于 ${me.name}们 而言，有关特雷森，有关比赛，过去所有一切都已经结束了。`,
+      `毕竟，对于 ${me.get_couple_title()} 而言，有关特雷森，有关比赛，过去所有一切都已经结束了。`,
     );
     era.println();
     await era.printAndWait(
@@ -187,7 +187,11 @@ module.exports = async () => {
     );
     era.println();
     await era.printAndWait(
-      `在${teio.sex}腿伤之后，${me.name}们 尽管做出了一些努力，但仍然未能挽救回${teio.sex}的马娘生涯，就这样在复出后连续失利中草草退役了。`,
+      `在${
+        teio.sex
+      }腿伤之后，${me.get_couple_title()} 尽管做出了一些努力，但仍然未能挽救回${
+        teio.sex
+      }的马娘生涯，就这样在复出后连续失利中草草退役了。`,
     );
     await era.printAndWait('没有鲜花和掌声，用最低调的方式退出了整个系统。');
     await era.printAndWait(
@@ -210,7 +214,9 @@ module.exports = async () => {
     await teio.say_and_wait('唔——');
     era.println();
     await era.printAndWait(
-      `突然间，一阵声响从屋里其他房间传来。${me.name}们 对视一眼，然后${teio.sex}便消失于门外。不到一分钟的时间，又重新回到 ${me.name} 的面前。`,
+      `突然间，一阵声响从屋里其他房间传来。${me.get_couple_title()} 对视一眼，然后${
+        teio.sex
+      }便消失于门外。不到一分钟的时间，又重新回到 ${me.name} 的面前。`,
     );
     era.println();
     await teio.say_and_wait('贮藏间的天花板好像漏水了，塌了一块下来。');

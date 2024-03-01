@@ -233,7 +233,7 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
     await era.printAndWait(`虽然穿着平时的大衣来了，但是有点热。`);
     await era.printAndWait(`在观众席的最前排握栅栏也是第二次。`);
     await era.printAndWait(
-      `虽然感觉时间一眨眼就过去了，但是在再一次站在这里之前发生的事情，对 ${me.name}们 来说都是必要的。`,
+      `虽然感觉时间一眨眼就过去了，但是在再一次站在这里之前发生的事情，对 ${me.get_couple_title()} 来说都是必要的。`,
     );
     await era.printAndWait(`那些事情的分量是前所未有的。`);
     await era.printAndWait(
@@ -244,7 +244,9 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
     await era.printAndWait(
       `${me.name} 觉得终于可以向 ${montjeu.name} 展示当时的答案了。`,
     );
-    await era.printAndWait(`${me.name}们 一起盯着进入大门的 ${vp.name}。`);
+    await era.printAndWait(
+      `${me.get_couple_title()} 一起盯着进入大门的 ${vp.name}。`,
+    );
     await montjeu.say_and_wait(`战术呢？`);
     era.printButton(`「没有新奇的东西。」`, 1);
     await era.input();
@@ -402,7 +404,7 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
       }用尽最后的力气，在剩下不到100米的最后一瞬间超过了领头的${vp.get_uma_sex_title()}，甚至感觉时间停止了。`,
     );
     await era.printAndWait(
-      `${me.name} 觉得 ${me.name}们  至今为止的一切都成熟了。`,
+      `${me.name} 觉得 ${me.get_couple_title()}  至今为止的一切都成熟了。`,
     );
     await era.printAndWait(
       `越过计分板的最后的脚步声，比什么都大，响彻这个舞台。`,
@@ -484,7 +486,9 @@ handlers[event_hooks.foreign_travel] = async (_, __, event_object) => {
     );
     await era.printAndWait(`突然，${vp.name} 完全畏缩了。`);
     await era.printAndWait(
-      `${me.name} 抬头看的时候，听到了向 ${me.name}们  打招呼的声音。`,
+      `${
+        me.name
+      } 抬头看的时候，听到了向 ${me.get_couple_title()}  打招呼的声音。`,
     );
     await montjeu.say_and_wait('你过来了啊，不过我的话主要在他身上。');
     await era.printAndWait(
@@ -494,9 +498,7 @@ handlers[event_hooks.foreign_travel] = async (_, __, event_object) => {
       `但是最初理解到的那个反射的记忆，是多次听到的${vp.sex}的胜者演唱会的声音。`,
     );
     await era.printAndWait(
-      `回头一看，苗条的高个子${vp.get_uma_sex_title()}挽着胳膊，注视着 ${
-        me.name
-      }们。`,
+      `回头一看，苗条的高个子${vp.get_uma_sex_title()}挽着胳膊，注视着 ${me.get_couple_title()}。`,
     );
     await era.printAndWait(`——传说。`);
     await vp.say_and_wait(`师傅！`);

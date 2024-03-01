@@ -400,7 +400,9 @@ module.exports = async (_, __, event_object) => {
       await era.printAndWait(`${vp.name} 对 ${me.name} 的动作眯缝着眼睛。`);
       await vp.say_and_wait(`D\`accord！`);
       await era.printAndWait(`最后留下的一滴眼泪，在晚霞的光中反射着光彩。`);
-      await era.printAndWait(`此时此地，${me.name}们 之间终于仅有一个愿望。`);
+      await era.printAndWait(
+        `此时此地，${me.get_couple_title()} 之间终于仅有一个愿望。`,
+      );
       era.println();
       sys_love_uma(205, 5) && (await era.waitAnyKey());
       era.set('cflag:205:招募状态', recruit_flags.yes);
@@ -446,7 +448,7 @@ module.exports = async (_, __, event_object) => {
         `欧美人特有的皮肤似乎晶莹剔透，脸上留着些许稚气。`,
       );
       await era.printAndWait(
-        `${me.name}们 在凯旋门赏上取得了胜利。从那以后，在电视和杂志上频繁登场，与品牌公司合作，一跃成为了红极一时的人。`,
+        `${me.get_couple_title()} 在凯旋门赏上取得了胜利。从那以后，在电视和杂志上频繁登场，与品牌公司合作，一跃成为了红极一时的人。`,
       );
       await vp.say_and_wait(`我在哪里由我决定，训练员。`);
       await era.printAndWait(
@@ -535,7 +537,7 @@ module.exports = async (_, __, event_object) => {
         );
         await vp.say_and_wait(`再多一点，再多一点就好了。`);
         await era.printAndWait(
-          `结果，${me.name}们 要去的地方只有赛马场，来看了大井赛马场的比赛。`,
+          `结果，${me.get_couple_title()} 要去的地方只有赛马场，来看了大井赛马场的比赛。`,
         );
         await vp.say_and_wait(`果然是比赛啊！`);
         era.printButton(`「……」`, 1);
@@ -623,7 +625,7 @@ module.exports = async (_, __, event_object) => {
         await vp.say_and_wait(`也是啊。`);
         await vp.say_and_wait(`……`);
         await era.printAndWait(
-          `从 ${me.name}们 站的这个地方抬头，天上只有几颗一等星闪闪发光。`,
+          `从 ${me.get_couple_title()} 站的这个地方抬头，天上只有几颗一等星闪闪发光。`,
         );
         await era.printAndWait(`这是从市中心看到的廉价星空。`);
         await era.printAndWait(
@@ -719,12 +721,12 @@ module.exports = async (_, __, event_object) => {
         );
         await era.printAndWait(`当然了，是 ${me.name} 伤了${vp.sex}的心。`);
         await era.printAndWait(
-          `准备清场的工作人员来了。惊讶地盯着 ${me.name}们 看了一眼。`,
+          `准备清场的工作人员来了。惊讶地盯着 ${me.get_couple_title()} 看了一眼。`,
         );
         await era.printAndWait(`大概是被当成疯丫头和坏男人，情侣吵架吧。`);
         await era.printAndWait(`那个人马上转移视线，回到了自己的工作中。`);
         await era.printAndWait(
-          `灯饰点缀着赛马场，在那样的地方 ${me.name}们 蹲在地上。`,
+          `灯饰点缀着赛马场，在那样的地方 ${me.get_couple_title()} 蹲在地上。`,
         );
         await vp.say_and_wait(
           `你以为我是抱着怎样的想法站在这里的！要来接我的话就赶紧来！`,
@@ -849,7 +851,7 @@ module.exports = async (_, __, event_object) => {
           `${me.name} 把比自己小十岁的${vp.get_child_sex_title()}子弄哭了。`,
         );
         await era.printAndWait(
-          `夜晚有点冷。因为白天很热，所以 ${me.name}们 穿得很少。`,
+          `夜晚有点冷。因为白天很热，所以 ${me.get_couple_title()} 穿得很少。`,
         );
         await era.printAndWait(
           `尽管如此，两个人聚在一起，像虫子一样用体温温暖彼此的话，就不会冷了。`,
@@ -864,7 +866,9 @@ module.exports = async (_, __, event_object) => {
         await era.input();
         await vp.say_and_wait(`好的。`);
         await era.printAndWait(`${vp.sex}按照 ${me.name} 说的一起走了。`);
-        await era.printAndWait(`灯饰的光辉照耀着 ${me.name}们 的背影。`);
+        await era.printAndWait(
+          `灯饰的光辉照耀着 ${me.get_couple_title()} 的背影。`,
+        );
         era.drawLine();
         era.printButton(`「${vp.name}，这是怎么回事……！？」`, 1);
         await era.input();

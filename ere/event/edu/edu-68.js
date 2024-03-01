@@ -425,9 +425,7 @@ handlers[event_hooks.out_church] = async (_, __, event_object) => {
     `聆听着两人安静而单调的脚步声，${me.name} 和 ${kita.name} 踏过八十八节略显圆滑的台阶。`,
   );
   await era.printAndWait(
-    `而在追着迫不及待跑上的${kita.get_teen_sex_title()}走过最后几节台阶后，出现在 ${
-      me.name
-    }们 面前的是满是欢声笑语的热闹景象。`,
+    `而在追着迫不及待跑上的${kita.get_teen_sex_title()}走过最后几节台阶后，出现在 ${me.get_couple_title()} 面前的是满是欢声笑语的热闹景象。`,
   );
   await kita.say_and_wait('呜哈哈～就算是东京的神社也和老家的神社差不多啊～');
   await era.printAndWait(

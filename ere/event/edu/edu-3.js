@@ -140,10 +140,10 @@ handlers[event_hooks.race_start] = async (_, extra_flag) => {
         );
       } else {
         await era.printAndWait(
-          `${me.name}们 二人默契地伸出惯用手，松握成拳，相碰。`,
+          `${me.get_couple_title()} 二人默契地伸出惯用手，松握成拳，相碰。`,
         );
         await era.printAndWait(
-          `小小躯体中蕴藏的力量，以及如太阳般的温暖从触碰的表面传来。${me.name}们 看着对方，不禁都笑出了声。`,
+          `小小躯体中蕴藏的力量，以及如太阳般的温暖从触碰的表面传来。${me.get_couple_title()} 看着对方，不禁都笑出了声。`,
         );
         era.println();
 

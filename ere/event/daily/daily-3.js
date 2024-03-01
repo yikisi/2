@@ -196,7 +196,9 @@ handlers[event_hooks.out_church] = async () => {
     case 3:
       await era.printAndWait('（凶）');
       await era.printAndWait(
-        `${me.name} 犹豫了一下，没有出声，帝王察觉到了什么，有些尴尬地站在原地，然后 ${me.name}们 两个决定将此事抛诸脑后。`,
+        `${
+          me.name
+        } 犹豫了一下，没有出声，帝王察觉到了什么，有些尴尬地站在原地，然后 ${me.get_couple_title()} 两个决定将此事抛诸脑后。`,
       );
       break;
   }
@@ -232,10 +234,12 @@ handlers[event_hooks.out_shopping] = async (hook) => {
   switch (temp) {
     case 0:
       await era.printAndWait(
-        `${me.name} 和 ${teio.name} 一起来到了街机厅痛快玩了一段时间，临走前，${me.name}们 决定去娃娃机“浪费”掉多余的币。`,
+        `${me.name} 和 ${
+          teio.name
+        } 一起来到了街机厅痛快玩了一段时间，临走前，${me.get_couple_title()} 决定去娃娃机“浪费”掉多余的币。`,
       );
       await era.printAndWait(
-        `不过话虽这么说，${me.name}们 两个还是比较紧张地操纵着摇杆，再三思考后摁下按钮……`,
+        `不过话虽这么说，${me.get_couple_title()} 两个还是比较紧张地操纵着摇杆，再三思考后摁下按钮……`,
       );
       break;
     case 1:
@@ -262,7 +266,11 @@ handlers[event_hooks.out_shopping] = async (hook) => {
         );
       } else {
         await era.printAndWait(
-          `不知不觉走到了一家KTV里，在${teio.sex}的强烈要求下 ${me.name}们 进去享受了一段时光——不过主要都是${teio.sex}在唱就对了。`,
+          `不知不觉走到了一家KTV里，在${
+            teio.sex
+          }的强烈要求下 ${me.get_couple_title()} 进去享受了一段时光——不过主要都是${
+            teio.sex
+          }在唱就对了。`,
         );
       }
       break;
@@ -302,9 +310,7 @@ handlers[event_hooks.out_station] = async (hook) => {
       talk_arr.push(
         `${me.name} 和往常一样，带着 ${
           teio.name
-        } ${teio.get_adult_sex_title()}来到了……家庭餐厅。这里的气氛很适合 ${
-          me.name
-        }们 呢。`,
+        } ${teio.get_adult_sex_title()}来到了……家庭餐厅。这里的气氛很适合 ${me.get_couple_title()} 呢。`,
         `${me.name} 问了问帝王的意见，小家伙想了好几个地方，又没能真正决定目标，最后还是拜托 ${me.name} 来选……${me.name} 便随便挑了一家口味不错的带${teio.sex}去了。`,
       );
       await era.printAndWait(get_random_entry(talk_arr));
@@ -380,7 +386,7 @@ handlers[event_hooks.office_cook] = async () => {
     '」',
   ]);
   await era.printAndWait(
-    `笑着对视了一下，${me.name}们 便埋头开始享用亲手做出的美味。`,
+    `笑着对视了一下，${me.get_couple_title()} 便埋头开始享用亲手做出的美味。`,
   );
 };
 
@@ -401,9 +407,9 @@ handlers[event_hooks.office_rest] = async () => {
     await me.say_and_wait(`起来吧，帝王${teio.get_adult_sex_title()}。`);
     await teio.say_and_wait(`嗯——嗯～`);
     await era.printAndWait(
-      `${teio.get_teen_sex_title()}的身躯扑倒在 ${me.name} 的身上，${
+      `${teio.get_teen_sex_title()}的身躯扑倒在 ${
         me.name
-      }们 两个陷进了沙发里。`,
+      } 的身上，${me.get_couple_title()} 两个陷进了沙发里。`,
     );
     await era.printAndWait(
       `吐息产生的气流搔痒着 ${me.name} 的脖颈，${

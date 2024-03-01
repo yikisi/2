@@ -19,7 +19,9 @@ module.exports = (handlers) => {
     await era.input();
     await daiya.say_and_wait('呵呵呵，到了你就知道了♪');
     await era.printAndWait(
-      `情人节。里见光钻不知为何，突然拉着 ${me.name} 出门。${me.name}们 抵达的地方是……`,
+      `情人节。里见光钻不知为何，突然拉着 ${
+        me.name
+      } 出门。${me.get_couple_title()} 抵达的地方是……`,
     );
     await era.printAndWait(
       '没什么特别的，我们来到的是栗东宿舍前。宿舍的大门前摆着一台看起来很陌生的大机器。',
@@ -146,7 +148,7 @@ module.exports = (handlers) => {
     );
     await daiya.say_and_wait('感觉很有趣呢！就这么办吧！');
     await era.printAndWait(
-      `${me.name}们 为了让巧克力变得更好吃，开始挑战各种尝试。`,
+      `${me.get_couple_title()} 为了让巧克力变得更好吃，开始挑战各种尝试。`,
     );
     await era.printAndWait('结果，里见光钻亲手做的巧克力跟火龙果是最搭的。');
     await daiya.say_and_wait(
@@ -579,7 +581,9 @@ module.exports = (handlers) => {
     await era.input();
     await daiya.say_and_wait('是……我知道了。辛苦了。');
     await era.printAndWait(
-      `里见光钻应该是明白了 ${me.name}们 怕${daiya.sex}受伤的心情。于是${daiya.sex}乖乖地答应了。`,
+      `里见光钻应该是明白了 ${me.get_couple_title()} 怕${
+        daiya.sex
+      }受伤的心情。于是${daiya.sex}乖乖地答应了。`,
     );
     await kita.say_and_wait('欸，反正现在时间还早。我们去逛一逛再回去吧！');
     await daiya.say_and_wait('小北……对不起，我──');
@@ -755,7 +759,7 @@ module.exports = (handlers) => {
       '……涡轮，你就死心吧。你的表情真的太好猜了……',
     );
     await era.printAndWait(
-      `于是 ${me.name}们 就这样一起度过了愉快的时光……圣诞节派对就此落幕了。`,
+      `于是 ${me.get_couple_title()} 就这样一起度过了愉快的时光……圣诞节派对就此落幕了。`,
     );
     era.drawLine();
     await era.printAndWait(

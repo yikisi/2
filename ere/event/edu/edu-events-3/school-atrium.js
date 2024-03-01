@@ -225,7 +225,7 @@ module.exports = async function (hook, __, event_object) {
     era.printButton('「当然」', 1);
     await era.input();
 
-    await era.printAndWait(`${me.name}们 一同，向目标位置走去——`);
+    await era.printAndWait(`${me.get_couple_title()} 一同，向目标位置走去——`);
     wait_flag = sys_like_chara(3, 0, 10, true, 1) || wait_flag;
     wait_flag =
       get_attr_and_print_in_event(

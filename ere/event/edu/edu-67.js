@@ -356,7 +356,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
     await era.input();
     await daiya.say_and_wait('那就这么决定了！约好了喔！');
     await era.printAndWait(
-      `${me.name}们 约好要在资深级这一年留下满意的成绩。完成之后再一起使用这张旅游券。`,
+      `${me.get_couple_title()} 约好要在资深级这一年留下满意的成绩。完成之后再一起使用这张旅游券。`,
     );
     era.println();
     wait_flag = sys_change_motivation(67, 2) || wait_flag;

@@ -464,7 +464,7 @@ handlers[event_hooks.out_church] = async (_, __, event_object) => {
   );
   await chara_talk.say_and_wait('感觉你似乎，在想什么失礼的事情。');
   await era.printAndWait(
-    `解决了阶段性的任务后，${CharaTalk.me.name}们 终于有时间去参拜。路上，露娜不知怎的突然嘟囔。`,
+    `解决了阶段性的任务后，${CharaTalk.me.get_couple_title()} 终于有时间去参拜。路上，露娜不知怎的突然嘟囔。`,
   );
   await era.printAndWait(
     `${CharaTalk.me.name} 连忙否认。露娜不置可否，${chara_talk.sex}看着神社的钟鼓，闭上了双眼。`,

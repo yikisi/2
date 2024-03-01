@@ -15,7 +15,6 @@ class CharaTalk {
   color;
   /**
    * 角色的人称代词
-   *
    * @type {string}
    */
   sex;
@@ -119,6 +118,9 @@ class CharaTalk {
 
   /** 孩童角色的称呼 */
   get_child_sex_title = () => (this.sex_code - 1 ? '女孩' : '男孩');
+
+  // 以角色为首的复数形式人称代词
+  get_couple_title = () => (this.name === '你' ? '你们' : `${this.sex}们`);
 
   /** 角色生理性别的称呼 */
   get_phy_sex_title = () => (this.sex_code - 1 ? '女性' : '男性');

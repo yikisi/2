@@ -157,7 +157,9 @@ module.exports = {
     await daiya.say_and_wait('原来如此……谢谢你。');
     await daiya.say_and_wait('……我会再自己好好想一想的……');
     await era.printAndWait(
-      `里见光钻又再次陷入沉思。为了不打扰${daiya.sex}的思绪，${me.name}们 就这样静静地走向车站。`,
+      `里见光钻又再次陷入沉思。为了不打扰${
+        daiya.sex
+      }的思绪，${me.get_couple_title()} 就这样静静地走向车站。`,
     );
   },
   async japa_cup_common(daiya, me, kita, teio) {

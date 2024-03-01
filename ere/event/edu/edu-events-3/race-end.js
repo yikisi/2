@@ -503,7 +503,7 @@ module.exports = async (_, extra_flag) => {
       await era.printAndWait(
         `${me.name} 从专用观赛席上站起身来，眼神紧紧盯住那道模糊的红影——${me.name} 的担当正在拼劲自己的所有，榨干全身上下每根肌肉纤维做功，来完成这次比赛。`,
       );
-      await era.printAndWait(`实现 ${me.name}们 的梦想。`);
+      await era.printAndWait(`实现 ${me.get_couple_title()} 的梦想。`);
       era.println();
 
       await era.printAndWait(
@@ -816,7 +816,9 @@ module.exports = async (_, extra_flag) => {
     await print_event_name('竞赛获胜', teio);
     await era.printAndWait(`${me.name} 兴奋地走下看台，迎接凯旋归来的帝王。`);
     await era.printAndWait(
-      `${teio.sex}也同样兴高采烈，满脸红光地向 ${me.name} 冲了过来，与 ${me.name} 击掌庆贺。${me.name}们 一起好好享受了一番胜利的滋味。`,
+      `${teio.sex}也同样兴高采烈，满脸红光地向 ${me.name} 冲了过来，与 ${
+        me.name
+      } 击掌庆贺。${me.get_couple_title()} 一起好好享受了一番胜利的滋味。`,
     );
   } else if (extra_flag.rank <= 5) {
     //通用比赛入着
@@ -833,7 +835,9 @@ module.exports = async (_, extra_flag) => {
         `${me.name} 看着在披头散发，落寞缓步的自家担当，不由得感觉心在滴血。`,
       );
       await era.printAndWait('可恶，只差一步……要不是因为腿疾……');
-      await era.printAndWait(`就连解说在台上也为 ${me.name}们 感到可惜。`);
+      await era.printAndWait(
+        `就连解说在台上也为 ${me.get_couple_title()} 感到可惜。`,
+      );
       await era.printAndWait(
         `${me.name} 沉默地迎向帝王，用自己的身子支撑起了${teio.sex}。`,
       );
@@ -841,7 +845,9 @@ module.exports = async (_, extra_flag) => {
         `${teio.sex}轻轻抖动了一下，又强行站稳。是伤痛，还是不想在 ${me.name} 面前露出软弱一面？`,
       );
       await era.printAndWait(
-        `${me.name} 不知道，也不想管，就这样，${me.name}们 两个互相搀扶着，一齐离场……`,
+        `${
+          me.name
+        } 不知道，也不想管，就这样，${me.get_couple_title()} 两个互相搀扶着，一齐离场……`,
       );
     } else {
       await era.printAndWait(`${me.name} 眉头紧锁，怎么会这样？`);
