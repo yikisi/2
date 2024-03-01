@@ -13,7 +13,7 @@ const sys_auto_rape = require('#/system/ero/sub/sys-auto-rape');
 const sys_auto_react = require('#/system/ero/sub/sys-auto-react');
 const {
   get_penis_size,
-  get_sex_acceptable,
+  check_want_to_escape,
 } = require('#/system/ero/sys-calc-ero-status');
 const { update_juels, add_juel } = require('#/system/ero/sys-calc-juel');
 const check_orgasm = require('#/system/ero/sys-calc-orgasm');
@@ -293,13 +293,7 @@ async function sys_handle_ero_act(command, filters, _shown) {
   }
   const master = era.get('tflag:主导权');
   if (master) {
-    if (
-      (!era.get('tflag:强奸') && get_sex_acceptable(master) < 0) ||
-      Math.max(era.get(`mark:${master}:苦痛`), era.get(`mark:${master}:羞耻`)) -
-        era.get(`mark:${master}:欢愉`) >=
-        1 ||
-      era.get(`mark:${master}:反抗`) >= 2
-    ) {
+    if (check_want_to_escape(master)) {
       shown &&
         (await era.printAndWait([
           get_chara_talk(master).get_colored_name(),

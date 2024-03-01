@@ -5,7 +5,7 @@
 /**
  * @param {string} table
  * @param {string|number} key
- * @param {*} value
+ * @param value
  * @returns {number[]}
  */
 function sys_filter_chara(table, key, value) {

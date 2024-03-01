@@ -15,6 +15,7 @@ const { location_enum } = require('#/data/locations');
 const {
   sys_check_act_disabled,
   sys_get_move_cost,
+  sys_check_awake,
 } = require('#/system/sys-calc-chara-param');
 const { sys_handle_action } = require('#/system/sys-calc-base-cflag');
 const { vehicle_verbs, vehicle_names } = require('#/data/move-const');
@@ -36,7 +37,7 @@ async function out_page() {
 
   await era.clear();
   print_page_header();
-  print_chara_info(chara_id, chara_info_type.out, 301);
+  print_chara_info(chara_id, chara_info_type.out, sys_check_awake(301) && 301);
   era.drawLine();
   if (!(await sys_get_random_event(event_hooks.out_start)(chara_id))) {
     const event_marks = new EventMarks(chara_id);

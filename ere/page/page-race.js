@@ -78,13 +78,13 @@ function generate_adaptability_info(chara_id, info) {
   return {
     ground: Math.max(
       era.get(`cflag:${chara_id}:${adaptability_names[info.ground]}适性`) -
-        (era.get(`status:${chara_id}:客场作战`) || 0),
+        era.get(`status:${chara_id}:客场作战`),
       0,
     ),
     distance: Math.max(
       era.get(
         `cflag:${chara_id}:${adaptability_names[info.distance + 2]}适性`,
-      ) - (era.get(`status:${chara_id}:客场作战`) || 0),
+      ) - era.get(`status:${chara_id}:客场作战`),
       0,
     ),
   };

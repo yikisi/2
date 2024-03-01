@@ -131,6 +131,7 @@ function cur_chara_component(chara_id, type, location_npc) {
     location_npc &&
       (temp = new CharaTitles(location_npc).get_colored_curr_title());
     era.setVerticalAlign('middle');
+    const image_switch = era.get('flag:显示半身像');
     era.printInColRows(
       {
         columns: [{ content: name_columns, type: 'text' }],
@@ -156,7 +157,9 @@ function cur_chara_component(chara_id, type, location_npc) {
         columns: [
           {
             config: { width: 21 },
-            names: get_image(chara_id).join('\t'),
+            names: get_image(chara_id)
+              .map((e) => `${e}${image_switch ? '_半身' : ''}`)
+              .join('\t'),
             type: 'image.whole',
           },
         ],
@@ -166,7 +169,14 @@ function cur_chara_component(chara_id, type, location_npc) {
       },
       {
         columns: [
-          { content: '\n', type: 'text' },
+          type !== chara_info_type.out && type !== chara_info_type.school
+            ? {
+                accelerator: 990,
+                config: { showAcc: false },
+                content: `显示${image_switch ? '头像' : '半身像'}`,
+                type: 'button',
+              }
+            : { content: '\n', type: 'text' },
           {
             config: { width: 2 },
             content: '体力',

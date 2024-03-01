@@ -100,6 +100,23 @@ function get_penis_size(chara_id) {
   return ret;
 }
 
+/**
+ * @param {number} chara_id
+ * @returns {number}
+ */
+function get_sex_acceptable(chara_id) {
+  return (
+    sys_call_mec(chara_id, check_stages.mec_sex_acceptable, {}) +
+    get_action_base_check(chara_id) +
+    Math.max(era.get(`base:${chara_id}:性欲`) - 5000, 0) / 200 +
+    10 * Math.max(era.get(`flag:惩戒力度`) - 1, 0) +
+    15 * era.get(`talent:${chara_id}:工口意愿`) -
+    10 * era.get(`talent:${chara_id}:贞洁看法`) -
+    50 -
+    100 * !check_pregnant_unprotect(chara_id)
+  );
+}
+
 module.exports = {
   change_ero_master(new_master) {
     era.set('tflag:主导权', new_master);
@@ -178,6 +195,18 @@ module.exports = {
       check_pregnant_unprotect(chara_id, virgin_size) &&
       (era.get(`cflag:${chara_id}:种族`) > 0 ||
         !era.get(`status:${chara_id}:经期`))
+    );
+  },
+  check_want_to_escape(chara_id) {
+    return (
+      (!era.get('tflag:强奸') && get_sex_acceptable(chara_id) < 0) ||
+      Math.max(
+        era.get(`mark:${chara_id}:苦痛`),
+        era.get(`mark:${chara_id}:羞耻`),
+      ) -
+        era.get(`mark:${chara_id}:欢愉`) >=
+        1 ||
+      era.get(`mark:${chara_id}:反抗`) >= 2
     );
   },
   get_action_base_check,
@@ -324,22 +353,7 @@ module.exports = {
     }
     return ratio;
   },
-  /**
-   * @param {number} chara_id
-   * @returns {number}
-   */
-  get_sex_acceptable(chara_id) {
-    return (
-      sys_call_mec(chara_id, check_stages.mec_sex_acceptable, {}) +
-      get_action_base_check(chara_id) +
-      Math.max(era.get(`base:${chara_id}:性欲`) - 5000, 0) / 200 +
-      10 * Math.max(era.get(`flag:惩戒力度`) - 1, 0) +
-      15 * era.get(`talent:${chara_id}:工口意愿`) -
-      10 * era.get(`talent:${chara_id}:贞洁看法`) -
-      50 -
-      100 * !check_pregnant_unprotect(chara_id)
-    );
-  },
+  get_sex_acceptable,
   /**
    * 结算顺序：先次要部位，再有快感联动的次要部位，再有分泌物部位，最后主要部位
    * 口腔身体施虐受虐是次要部位

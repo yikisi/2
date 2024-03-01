@@ -308,6 +308,9 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
     case 901:
       await print_load_page();
       break;
+    case 990:
+      era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
+      break;
     case 999:
       flags.week_start = true;
   }

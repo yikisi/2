@@ -74,6 +74,8 @@ module.exports = async () => {
           }
           if (await era.loadData(ret)) {
             flag_load_game = false;
+            // TODO 移除 ||容错
+            era.set('flag:显示半身像', era.get('flag:显示半身像') || 0);
             event_queue.init();
             CharaTalk.me = new CharaTalk(0);
             return true;

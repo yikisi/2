@@ -23,6 +23,7 @@ const {
   get_love_mark,
   get_love_border,
 } = require('#/data/info-generator');
+const LimitLoveStatus = require('#/data/love-limit-status');
 
 /**
  * @param {number} chara_id
@@ -182,7 +183,7 @@ function love_uma(chara_id, val, to_be_shown) {
       era.get('flag:后代爱慕限制') ||
       era.get(`cflag:${chara_id}:父方角色`) < 0) &&
     !era.get(`status:${chara_id}:讨厌药`) &&
-    !era.get(`status:${chara_id}:抑制药`)
+    new LimitLoveStatus(chara_id).is_empty()
   ) {
     let _val = Math.floor(
       (val *

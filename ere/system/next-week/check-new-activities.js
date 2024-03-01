@@ -144,10 +144,9 @@ async function check_new_activities(cur_round, in_team_list) {
       // 远征开始
       let foreign_list = in_team_list
         .filter((e) => {
-          const chara_race = sys_reg_race(e).curr.race;
           return (
-            chara_race >= 0 &&
-            race_infos[chara_race].track === race_infos[race].track
+            race_infos[sys_reg_race(e).curr.race]?.track ===
+            race_infos[race].track
           );
         })
         .map((e) => {
@@ -197,7 +196,7 @@ async function check_new_activities(cur_round, in_team_list) {
       }
       const me_in_race =
         era.get('cflag:0:种族') &&
-        race_infos[sys_reg_race(0).curr.race].track === race_infos[race].track;
+        race_infos[sys_reg_race(0).curr.race]?.track === race_infos[race].track;
       let temp =
         era.get('flag:当前位置') === location_enum.basement ||
         era.get('cflag:0:妊娠回合计时') >= 33 ||

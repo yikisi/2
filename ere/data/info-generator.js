@@ -14,7 +14,7 @@ const {
 } = require('#/system/sys-calc-chara-param');
 
 const attr_score_table = require('#/data/attr-score-table.json');
-const { buff_colors } = require('#/data/color-const');
+const { buff_colors, sex_colors } = require('#/data/color-const');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
 const { lust_border } = require('#/data/ero/orgasm-const');
@@ -34,6 +34,7 @@ const {
   attr_names,
   pressure_border,
 } = require('#/data/train-const');
+const LoveLimitStatus = require('#/data/love-limit-status');
 
 const level_and_desc = {
   love: {
@@ -740,6 +741,12 @@ module.exports = {
       status_list.push({ color: buff_colors[2], content: '情动' });
     } else if (lust >= lust_border.itch) {
       status_list.push({ color: buff_colors[2], content: '不安' });
+    }
+    if (era.get(`status:${chara_id}:讨厌药`)) {
+      status_list.push({ color: sex_colors[0], content: '讨厌药' });
+    }
+    if (!new LoveLimitStatus(chara_id).is_empty()) {
+      status_list.push({ color: sex_colors[0], content: '抑制药' });
     }
     if (
       era.get(`status:${chara_id}:爱意克制`) &&

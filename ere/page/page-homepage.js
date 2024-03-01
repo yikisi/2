@@ -93,7 +93,13 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
     }
     const sex_3p = get_random_entry(
       sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
-        .filter((e) => e && e !== temp && sys_check_awake(e))
+        .filter(
+          (e) =>
+            e &&
+            e !== temp &&
+            sys_check_awake(e) &&
+            era.get(`cflag:${e}:成长阶段`) >= 2,
+        )
         .map((e) => {
           return {
             id: e,
@@ -102,6 +108,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
         })
         .filter(
           (e) =>
+            e.check > 0 &&
             era.get(`relation:${temp}:${e.id}`) > 375 &&
             era.get(`relation:${e.id}:${temp}`) > 75,
         ),

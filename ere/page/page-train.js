@@ -8,7 +8,7 @@ const { train_uma, get_train_bonus } = require('#/system/sys-train-uma');
 
 const print_curr_chara_info = require('#/page/components/cur-chara-info');
 const print_page_header = require('#/page/components/page-header');
-const select_taget_chara = require('#/page/components/select-target');
+const select_target_chara = require('#/page/components/select-target');
 
 const chara_info_type = require('#/data/chara-info-type');
 const { adaptability_colors } = require('#/data/color-const');
@@ -271,8 +271,11 @@ module.exports = async () => {
       case 100:
         era.set(
           'flag:当前互动角色',
-          await select_taget_chara(chara_info_type.train),
+          await select_target_chara(chara_info_type.train),
         );
+        break;
+      case 990:
+        era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
         break;
       case 999:
         flag_train = false;

@@ -16,6 +16,10 @@ const get_color = require('#/utils/gradient-color');
 const { mark_colors } = require('#/data/const.json');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
+const {
+  begin_and_init_ero,
+  end_ero_and_train,
+} = require('#/system/ero/sys-prepare-ero');
 
 /**
  * @param {number} chara_id
@@ -195,22 +199,22 @@ module.exports = async (
       total_delta.hate_clear = (total_delta.hate_clear || 0) + 1;
       era.add(`mark:${chara_id}:反抗`, -1);
       era.add(`juel:${chara_id}:${palam_name}`, -price_dict[ret]);
+      begin_and_init_ero(chara_id);
       if (
         (ret === 1 || ret === 2) &&
         pain_level < 3 &&
         Math.random() < 1 - 0.15 * (3 - hate_level) - 0.2 * (pain_level - 1)
       ) {
-        era.set(`mark:${chara_id}:苦痛`, `${pain_level + 1}`);
+        era.set(`nowex:${chara_id}:苦痛获取`, 1);
       } else if (
         ret === 3 &&
         shame_level < 3 &&
         Math.random() < 1 - 0.15 * (3 - hate_level) - 0.2 * (shame_level - 1)
       ) {
-        era.set(`mark:${chara_id}:羞耻`, `${shame_level + 1}`);
+        era.set(`nowex:${chara_id}:羞耻获取`, 1);
       }
-      if (await update_marks(true, chara_id)) {
-        await era.waitAnyKey();
-      }
+      (await update_marks(true, chara_id)) && (await era.waitAnyKey());
+      end_ero_and_train();
     }
   } else if (ret <= 5) {
     const mark_name = era.get(`markname:${ret - 1}`);

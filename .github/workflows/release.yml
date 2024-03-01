@@ -5,15 +5,20 @@ on:
     tags:
       - "v*"
 
+env:
+  GAME_DIR: 'erauma-${{ github.ref_name }}'
+  GAME_ALL_DIR: 'erauma-with-engine-${{ github.ref_name }}'
+  GAME_ZIP: 'era-uma-preview-${{ github.ref_name }}.7z'
+  GAME_RES_ZIP: 'era-uma-preview-res-${{ github.ref_name }}.7z'
+  GAME_ALL_ZIP: 'era-uma-preview-with-engine-win64-${{ github.ref_name }}.7z'
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
-  build-on-windows:
+  release-main:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    env:
-      GAME_DIR: 'erauma-${{ github.ref_name }}'
-      GAME_ZIP: 'era-uma-preview-${{ github.ref_name }}.7z'
-      GAME_RES_ZIP: 'era-uma-preview-res-${{ github.ref_name }}.7z'
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
@@ -30,6 +35,24 @@ jobs:
           filename: ${{ env.GAME_ZIP }}
           path: ./${{ env.GAME_DIR }}
           custom: -pera
+      - name: Check files
+        run: ls ./
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: EraUma ${{ github.ref_name }}
+          body: built by Github Actions
+          draft: false
+          prerelease: false
+          files: ${{ env.GAME_ZIP }}
+  release-res:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
       - name: Make game res directory
         run: |
           rm -rf ./$GAME_DIR
@@ -53,8 +76,60 @@ jobs:
           body: built by Github Actions
           draft: false
           prerelease: false
-          files: |
-            ${{ env.GAME_ZIP }}
-            ${{ env.GAME_RES_ZIP }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          files: ${{ env.GAME_RES_ZIP }}
+  release-on-windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: engine/package-lock.json
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./engine
+      - name: Change config
+        run: cp vue-deploy.config.js vue.config.js
+        working-directory: ./engine
+      - name: Build
+        run: npm run electron:build
+        working-directory: ./engine
+      - name: Make game directory
+        run: |
+          mv ./engine/dist_electron/win-unpacked ./engine/dist_electron/$env:GAME_ALL_DIR
+          mkdir ./engine/dist_electron/$env:GAME_ALL_DIR/game
+          cp -r ./ere ./engine/dist_electron/$env:GAME_ALL_DIR/game
+          cp -r ./csv ./engine/dist_electron/$env:GAME_ALL_DIR/game
+          cp -r ./res ./engine/dist_electron/$env:GAME_ALL_DIR/game
+      - name: Zip game and engine
+        uses: thedoctor0/zip-release@0.7.5
+        with:
+          type: '7z'
+          filename: ${{ env.GAME_ALL_ZIP }}
+          directory: ./engine/dist_electron
+          path: ./${{ env.GAME_ALL_DIR }}
+          custom: -pera
+      - name: Move files
+        run: mv ./engine/dist_electron/$env:GAME_ALL_ZIP ./
+      - name: Check files
+        run: ls
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: EraUma ${{ github.ref_name }}
+          body: built by Github Actions
+          draft: false
+          prerelease: false
+          files: ${{ env.GAME_ALL_ZIP }}

@@ -283,6 +283,9 @@ async function page_chairman_office() {
         }
         flag_page = false;
     }
+    if (!era.get('base:302:体力')) {
+      era.set('status:302:沉睡', 1);
+    }
     flag_page &&= sys_check_awake(0);
     if (flag_page) {
       await era.clear();

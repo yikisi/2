@@ -13,6 +13,7 @@ const select_target_in_storage = require('#/page/storage/select-target');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const LimitLoveStatus = require('#/data/love-limit-status');
 const { attr_enum } = require('#/data/train-const');
 
 /** @param {Record<string,function>} handlers */
@@ -214,7 +215,7 @@ module.exports = (handlers) => {
         get_chara_talk(0).get_colored_name(),
         ' 的好感开始消散……',
       ]);
-      era.set(`status:${ret}:讨厌药`, 1);
+      era.set(`status:${ret}:讨厌药`, 4);
       era.add(`base:${ret}:药物残留`, 40);
       era.add('item:讨厌药', -1);
       return true;
@@ -222,12 +223,15 @@ module.exports = (handlers) => {
   };
 
   handlers[854] = async () => {
-    const ret = await select_target_in_storage(
+    const aim = await select_target_in_storage(
       854,
-      (e) => e && era.get(`love:${e}`) > 40 && !era.get(`status:${e}:抑制药`),
+      (chara_id) =>
+        chara_id &&
+        era.get(`love:${chara_id}`) > 40 &&
+        new LimitLoveStatus(chara_id).is_empty(),
     );
-    if (ret !== undefined) {
-      const chara = get_chara_talk(ret);
+    if (aim !== undefined) {
+      const chara = get_chara_talk(aim);
       await era.printAndWait([
         '给 ',
         chara.get_colored_name(),
@@ -238,24 +242,26 @@ module.exports = (handlers) => {
         get_chara_talk(0).get_colored_name(),
         ' 的恋心被抑制了……',
       ]);
-      era.set(`status:${ret}:抑制药`, {
-        cache: era.get(`love:${ret}`),
-        limit: era.get('flag:当前回合数') + 4,
-      });
-      era.set(`love:${ret}`, 40);
-      era.add(`base:${ret}:药物残留`, 40);
+      new LimitLoveStatus(aim).set(
+        era.get(`love:${aim}`),
+        era.get('flag:当前回合数') + 4,
+      );
+      era.set(`love:${aim}`, 40);
+      era.add(`base:${aim}:药物残留`, 40);
       era.add('item:抑制药', -1);
       return true;
     }
   };
 
   handlers[860] = async () => {
-    const ret = await select_target_in_storage(
+    const aim = await select_target_in_storage(
       860,
-      (e) => era.get(`base:${e}:体力`) !== era.get(`maxbase:${e}:体力`),
+      (chara_id) =>
+        era.get(`base:${chara_id}:体力`) !==
+        era.get(`maxbase:${chara_id}:体力`),
     );
-    if (ret !== undefined) {
-      const chara = get_chara_talk(ret);
+    if (aim !== undefined) {
+      const chara = get_chara_talk(aim);
       await era.printAndWait([
         chara.id ? '给 ' : '',
         chara.get_colored_name(),
@@ -263,9 +269,9 @@ module.exports = (handlers) => {
         { isBr: true },
         chara.get_colored_name(),
         ' 的 ',
-        ...sys_change_attr_and_print(ret, '体力', 400),
+        ...sys_change_attr_and_print(aim, '体力', 400),
       ]);
-      sys_change_lust(ret, 800);
+      sys_change_lust(aim, 800);
       era.add('item:马奶', -1);
       return true;
     }

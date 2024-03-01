@@ -6,6 +6,7 @@ const {
   check_satisfied,
   get_penis_size,
   get_sex_acceptable,
+  check_want_to_escape,
 } = require('#/system/ero/sys-calc-ero-status');
 const { get_characters_in_train } = require('#/system/ero/sys-prepare-ero');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -129,11 +130,7 @@ async function sys_auto_rape(shown) {
       return;
     }
   }
-  if (
-    era.get(`mark:${master}:苦痛`) >= 2 ||
-    era.get(`mark:${master}:羞耻`) >= 2 ||
-    era.get(`mark:${master}:反抗`) >= 2
-  ) {
+  if (check_want_to_escape(master)) {
     await sys_call_ero_event(master, ero_hooks.relax, {
       attacker: master,
       defender: 0,

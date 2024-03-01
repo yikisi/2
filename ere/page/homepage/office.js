@@ -653,7 +653,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         823,
         824,
         ...new Array(11).fill(0).map((_, i) => i + 830),
-        ...new Array(3).fill(0).map((_, i) => i + 850),
+        ...new Array(5).fill(0).map((_, i) => i + 850),
         ...new Array(4).fill(0).map((_, i) => i + 870),
       ]);
       era.set('flag:当前位置', location_enum.office);
@@ -698,6 +698,9 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       break;
     case 901:
       await print_load_page();
+      break;
+    case 990:
+      era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
       break;
     case 999:
       flags.week_start = true;

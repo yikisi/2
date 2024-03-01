@@ -54,19 +54,18 @@ const {
   get_breast_cup,
   get_talent_bust_size,
 } = require('#/data/info-generator');
+const LoveLimitStatus = require('#/data/love-limit-status');
 const RaceHistory = require('#/data/race/model/race-history');
 const { pressure_border } = require('#/data/train-const');
 
 async function sys_next_week() {
-  const in_team_list = filter_chara(
-      'cflag',
-      '招募状态',
-      recruit_flags.yes,
-    ).filter((e) => e),
+  const in_team_list = filter_chara('cflag', '招募状态', recruit_flags.yes),
     health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes,
     me = get_chara_talk(0),
     punish_level = era.get('flag:惩戒力度'),
+    team_dict = {},
     your_race = era.get('cflag:0:种族');
+  in_team_list.shift();
   let temp;
   era.set('status:0:沉睡', 1);
   era.set('status:0:熬夜', 0);
@@ -156,9 +155,10 @@ async function sys_next_week() {
       }
     }
   }
-  in_team_list.forEach(
-    (chara_id) => sys_check_awake(chara_id) && auto_update_ero_skills(chara_id),
-  );
+  in_team_list.forEach((chara_id) => {
+    team_dict[chara_id] = 1;
+    sys_check_awake(chara_id) && auto_update_ero_skills(chara_id);
+  });
 
   // 新回合开始
   let cur_year = era.get('flag:当前年'),
@@ -225,10 +225,10 @@ async function sys_next_week() {
   sys_change_fame(era.get('flag:回合声望惩罚'));
 
   // 新回合开始
-  in_team_list.unshift(0);
-  const out_race_list = [];
+  const all_characters = era.getAddedCharacters(),
+    out_race_list = [];
   let race_punish = 0;
-  for (const chara_id of in_team_list) {
+  for (const chara_id of all_characters) {
     sys_fix_chara_base(chara_id);
     let stay_up = era.get(`status:${chara_id}:熬夜`);
     if (era.get(`base:${chara_id}:性欲`) >= lust_border.absent_mind) {
@@ -244,67 +244,9 @@ async function sys_next_week() {
       `base:${chara_id}:精力`,
       Math.floor(era.get(`maxbase:${chara_id}:精力`) * (1 - 0.25 * stay_up)),
     );
-    stay_up > 0 && sys_change_pressure(chara_id, 100 + 200 * stay_up);
 
-    let motivation_change = 0;
-    if (chara_id) {
-      let status_hate = era.get(`status:${chara_id}:讨厌药`);
-      if (status_hate) {
-        status_hate = era.add(`status:${chara_id}:讨厌药`, -1);
-      }
-      /** @type {{limit:number,cache:number}|undefined} */
-      let status_limit = era.get(`status:${chara_id}:抑制药`);
-      if (
-        status_limit &&
-        cur_round > status_limit.limit &&
-        Math.random() > Math.pow(2, status_limit.limit - cur_round) + 0.5
-      ) {
-        era.set(`love:${chara_id}`, status_limit.cache);
-        const limit_delta = status_limit.limit - cur_round;
-        status_limit = era.set(`status:${chara_id}:抑制药`, 0);
-        sys_love_uma(chara_id, limit_delta * 2 + 8);
-      }
-      if (era.get(`cflag:${chara_id}:成长阶段`) >= 2) {
-        if (
-          (temp = era.get('flag:回合好感惩罚')) ||
-          era.get(`status:${chara_id}:讨厌药`)
-        ) {
-          sys_like_chara(
-            chara_id,
-            0,
-            temp - (era.get(`status:${chara_id}:讨厌药`) > 0) * 50,
-            false,
-          );
-        }
-        if ((temp = era.get('flag:回合爱慕惩罚'))) {
-          sys_love_uma(
-            chara_id,
-            (1 - (era.get(`status:${chara_id}:讨厌药`) > 0)) *
-              (1 - !!era.get(`status:${chara_id}:抑制药`)) *
-              temp,
-            false,
-          );
-        }
-      }
-      // 殿堂计算
-      if (chara_id) {
-        if (cur_round - era.get(`cflag:${chara_id}:育成回合计时`) === 3 * 48) {
-          sys_handle_palace(chara_id);
-          await era.waitAnyKey();
-        } else if (
-          cur_round - era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 &&
-          (era.get(`status:${chara_id}:摸鱼`) ||
-            (stay_up && Math.random() < 0.2))
-        ) {
-          // 没进殿堂，摸鱼和熬夜才会正常造成干劲下降
-          motivation_change -= 1;
-        }
-      }
-    }
-    sys_change_motivation(chara_id, motivation_change);
-
-    const chara = get_chara_talk(chara_id);
-    const weight_delta = era.get(`base:${chara_id}:体重偏差`);
+    const chara = get_chara_talk(chara_id),
+      weight_delta = era.get(`base:${chara_id}:体重偏差`);
     if (!era.get(`status:${chara_id}:发胖`) && weight_delta >= 4000) {
       era.set(`status:${chara_id}:发胖`, 1);
       era.print([
@@ -323,8 +265,8 @@ async function sys_next_week() {
       }
     }
 
-    const health_talent = era.get(`talent:${chara_id}:身体素质`);
-    const race = era.get(`cflag:${chara_id}:种族`);
+    const health_talent = era.get(`talent:${chara_id}:身体素质`),
+      race = era.get(`cflag:${chara_id}:种族`);
     let drug_delta = era.add(
       `base:${chara_id}:药物残留`,
       ((15 * era.get(`status:${chara_id}:马跳Z`) +
@@ -389,15 +331,12 @@ async function sys_next_week() {
     era.set(`status:${chara_id}:沉睡`, 0);
     era.set(`status:${chara_id}:短效避孕药`, 0);
     era.set(`status:${chara_id}:反避孕套`, 0);
-    if (era.get(`status:${chara_id}:长效避孕药`)) {
+    era.get(`status:${chara_id}:长效避孕药`) &&
       era.add(`status:${chara_id}:长效避孕药`, -1);
-    }
-    if (era.get(`status:${chara_id}:疲惫`)) {
+    era.get(`status:${chara_id}:疲惫`) &&
       era.add(`status:${chara_id}:疲惫`, -1);
-    }
-    if (era.get(`status:${chara_id}:伤病`)) {
+    era.get(`status:${chara_id}:伤病`) &&
       era.add(`status:${chara_id}:伤病`, -1);
-    }
     era.set(`status:${chara_id}:健康茶`, 0);
     // 药物泌乳只维持一回合
     if (era.get(`talent:${chara_id}:泌乳`) === 2) {
@@ -429,6 +368,75 @@ async function sys_next_week() {
     }
     registered_race.last.race = registered_race.curr.race;
     registered_race.last.week = registered_race.curr.week;
+
+    if (team_dict[chara_id]) {
+      stay_up > 0 && sys_change_pressure(chara_id, 100 + 200 * stay_up);
+      out_race_list.at(-1) === chara_id &&
+        sys_change_pressure(chara_id, get_random_value(1000, 2000));
+      let motivation_change = 0,
+        status_hate = era.get(`status:${chara_id}:讨厌药`);
+      status_hate && (status_hate = era.add(`status:${chara_id}:讨厌药`, -1));
+      const status_limit = new LoveLimitStatus(chara_id);
+      if (
+        !status_limit.is_empty() &&
+        cur_round > status_limit.limit &&
+        Math.random() > Math.pow(2, status_limit.limit - cur_round) + 0.5
+      ) {
+        era.set(`love:${chara_id}`, status_limit.cache);
+        const limit_delta = cur_round - status_limit.limit;
+        status_limit.clear();
+        await era.printAndWait([
+          '下给 ',
+          chara.get_colored_name(),
+          ` 的抑制药失效了……${chara.sex}对 `,
+          me.get_colored_name(),
+          ' 的恋心汹涌而来',
+        ]);
+        sys_love_uma(chara_id, limit_delta * 2 + 8, true) &&
+          (await era.waitAnyKey());
+        sys_change_lust(
+          chara_id,
+          limit_delta * 100 + get_random_value(800, 1800),
+        );
+      }
+      if (era.get(`cflag:${chara_id}:成长阶段`) >= 2) {
+        if (
+          (temp = era.get('flag:回合好感惩罚')) ||
+          era.get(`status:${chara_id}:讨厌药`)
+        ) {
+          sys_like_chara(
+            chara_id,
+            0,
+            temp - (era.get(`status:${chara_id}:讨厌药`) > 0) * 50,
+            false,
+          );
+        }
+        if ((temp = era.get('flag:回合爱慕惩罚'))) {
+          sys_love_uma(
+            chara_id,
+            (1 - (era.get(`status:${chara_id}:讨厌药`) > 0)) *
+              (1 - !new LoveLimitStatus(chara_id).is_empty()) *
+              temp,
+            false,
+          );
+        }
+      }
+      // 殿堂计算
+      if (chara_id) {
+        if (cur_round - era.get(`cflag:${chara_id}:育成回合计时`) === 3 * 48) {
+          sys_handle_palace(chara_id);
+          await era.waitAnyKey();
+        } else if (
+          cur_round - era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 &&
+          (era.get(`status:${chara_id}:摸鱼`) ||
+            (stay_up && Math.random() < 0.2))
+        ) {
+          // 没进殿堂，摸鱼和熬夜才会正常造成干劲下降
+          motivation_change -= 1;
+        }
+      }
+      sys_change_motivation(chara_id, motivation_change);
+    }
   }
 
   let hentai_punish = 0,
@@ -442,7 +450,7 @@ async function sys_next_week() {
       const relation_punish =
         (removed_specials[chara_id] || 0) +
         (era.get(`love:${chara_id}`) >= 50) *
-          (era.get(`cflag:${chara_id}:节日事件标记`) || 0);
+          era.get(`cflag:${chara_id}:节日事件标记`);
       if (relation_punish) {
         era.print([
           '因为 ',
@@ -458,7 +466,7 @@ async function sys_next_week() {
       }
     }
   }
-  for (const chara_id of era.getAddedCharacters()) {
+  for (const chara_id of all_characters) {
     if (chara_id === 9017) {
       continue;
     }
@@ -811,7 +819,6 @@ async function sys_next_week() {
     sys_call_check(chara_id, check_stages.next_week);
   }
 
-  in_team_list.shift();
   if (race_punish) {
     const buffer = [];
     out_race_list.forEach((e, i) => {
