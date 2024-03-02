@@ -81,17 +81,17 @@ async function use_ero_medicine(chara) {
       { a: medicine_enum.milk_u, e: milk_u, n: milk_u },
       {
         a: medicine_enum.uma_z,
-        e: uma_z && !ero_status,
+        e: !ero_status,
         n: uma_z,
       },
       {
         a: medicine_enum.fron_k,
-        e: fron_k && !fron_status,
+        e: !fron_status,
         n: fron_k,
       },
       {
         a: medicine_enum.fron_p,
-        e: fron_p && !fron_status,
+        e: !fron_status,
         n: fron_p,
       },
       {
@@ -104,24 +104,23 @@ async function use_ero_medicine(chara) {
         a: medicine_enum.drug_p,
         e:
           aim_chara.sex_code - 1 &&
-          drug_p &&
           !p_status &&
           !era.get(`status:${aim_id}:排卵期`),
         n: drug_p,
       },
       {
         a: medicine_enum.anti_p_s,
-        e: aim_chara.sex_code - 1 && anti_p_s && !p_status,
+        e: aim_chara.sex_code - 1 && !p_status,
         n: anti_p_s,
       },
       {
         a: medicine_enum.anti_p_l,
-        e: aim_chara.sex_code - 1 && anti_p_l && !p_status,
+        e: aim_chara.sex_code - 1 && !p_status,
         n: anti_p_l,
       },
-    ].filter((e) => e.e);
-  if (!item_list.length) {
-    era.print(
+    ].filter((e) => e.n > 0);
+  if (!item_list.filter((e) => e.e).length) {
+    await era.printAndWait(
       aim_id
         ? ['没有可以喂给 ', aim_chara.get_colored_name(), ' 的药物……']
         : '没有可以服用的药物……',
@@ -139,7 +138,7 @@ async function use_ero_medicine(chara) {
       ...item_list.map((e) => {
         return {
           accelerator: e.a,
-          config: { width: 4, align: 'center' },
+          config: { align: 'center', disabled: !e.e, width: 4 },
           content: `${medicine_names[e.a]} (${e.n})`,
           type: 'button',
         };

@@ -43,28 +43,29 @@ async function use_lubricating_fluid(chara) {
     buffer = [
       {
         p: part_enum.breast,
-        e: !check_lubrication(aim_id, part_enum.breast),
       },
       {
         p: part_enum.penis,
-        e:
-          get_penis_size(aim_id) && !check_lubrication(aim_id, part_enum.penis),
+        c: get_penis_size(aim_id) > 0,
       },
       {
         p: part_enum.virgin,
-        e:
-          era.get(`cflag:${aim_id}:性别`) - 1 &&
-          !check_lubrication(aim_id, part_enum.virgin),
+        c: era.get(`cflag:${aim_id}:性别`) !== 1,
       },
       {
         p: part_enum.anal,
-        e: !check_lubrication(aim_id, part_enum.anal),
       },
-    ].filter((e) => e.e);
-  if (!buffer.length) {
+    ]
+      .filter((e) => e.c !== false)
+      .map((e) => {
+        e.e = !check_lubrication(aim_id, e.p);
+        return e;
+      });
+  if (!buffer.filter((e) => e.e).length) {
     era.print('没有需要润滑的部位……');
     return undefined;
   }
+  console.log(buffer);
   era.printMultiColumns(
     [
       {
@@ -74,7 +75,7 @@ async function use_lubricating_fluid(chara) {
       ...buffer.map((e) => {
         return {
           accelerator: e.p,
-          config: { width: 4, align: 'center' },
+          config: { align: 'center', disabled: !e.e, width: 4 },
           content: part_names[e.p],
           type: 'button',
         };

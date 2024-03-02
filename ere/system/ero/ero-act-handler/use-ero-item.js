@@ -25,58 +25,45 @@ async function use_ero_item(chara) {
   const item_list = [
     {
       a: item_enum.gag,
-      e: era.get('item:口球') && era.get(`tequip:${cur_lover}:口腔`) === -1,
-      n: '口球',
+      e: () => era.get(`tequip:${cur_lover}:口腔`) === -1,
     },
-    { a: item_enum.clamps, e: era.get('item:夹子'), n: '夹子' },
+    { a: item_enum.clamps },
     {
       a: item_enum.electric_stunner,
-      e: era.get('item:电击器'),
-      n: '电击器',
+      e: () => era.get('item:电击器'),
     },
     {
       a: item_enum.milk_pump,
-      e:
-        era.get('item:榨乳器') &&
+      e: () =>
         era.get(`tequip:${cur_lover}:胸部`) === -1 &&
         (era.get(`talent:${cur_lover}:乳头类型`) !== 2 ||
           era.get(`tcvar:${cur_lover}:乳突`)),
-      n: '榨乳器',
     },
-    { a: item_enum.love_eggs, e: era.get('item:跳蛋'), n: '跳蛋' },
-    { a: item_enum.dildo, e: era.get('item:伪器'), n: '伪器' },
+    { a: item_enum.love_eggs },
+    { a: item_enum.dildo },
     {
       a: item_enum.artificial_virgin,
-      e:
-        penis_size &&
-        era.get('item:飞机杯') &&
-        era.get(`tequip:${cur_lover}:阴茎`) === -1,
-      n: '飞机杯',
+      e: () => penis_size && era.get(`tequip:${cur_lover}:阴茎`) === -1,
     },
     {
       a: item_enum.butt_plug,
-      e: era.get('item:肛塞') && era.get(`tequip:${cur_lover}:肛门`) === -1,
-      n: '肛塞',
+      e: () => era.get(`tequip:${cur_lover}:肛门`) === -1,
     },
     {
       a: item_enum.anal_beads,
-      e: era.get('item:拉珠') && era.get(`tequip:${cur_lover}:肛门`) === -1,
-      n: '拉珠',
+      e: () => era.get(`tequip:${cur_lover}:肛门`) === -1,
     },
     {
       a: item_enum.blindfold,
-      e: era.get('item:眼罩') && era.get(`tequip:${cur_lover}:眼罩`) === -1,
-      n: '眼罩',
+      e: () => era.get(`tequip:${cur_lover}:眼罩`) === -1,
     },
     {
       a: item_enum.collar,
-      e: era.get('item:项圈') && era.get(`tequip:${cur_lover}:项圈`) === -1,
-      n: '项圈',
+      e: () => era.get(`tequip:${cur_lover}:项圈`) === -1,
     },
     {
       a: item_enum.mirror,
-      e:
-        era.get('item:全身镜') &&
+      e: () =>
         !era.get('tflag:全身镜') &&
         (cur_location === location_enum.restroom ||
           cur_location === location_enum.basement ||
@@ -84,9 +71,18 @@ async function use_ero_item(chara) {
           cur_location === location_enum.hotel ||
           cur_location === location_enum.love_hotel ||
           cur_location === location_enum.summer_home),
-      n: '全身镜',
     },
-  ].filter((e) => e.e);
+  ]
+    .map((e) => {
+      e.n = item_names[e.a];
+      e.c = era.get(`item:${e.n}`);
+      return e;
+    })
+    .filter((e) => e.c > 0)
+    .map((e) => {
+      e.e = e.e ? e.e() : true;
+      return e;
+    });
   if (!item_list.length) {
     era.print('暂时没有可用的性玩具……');
     return undefined;
@@ -97,8 +93,8 @@ async function use_ero_item(chara) {
       columns: item_list.map((e, i) => {
         return {
           accelerator: i,
-          config: { align: 'center', width: 4 },
-          content: `${item_names[e.a]} (${era.get(`item:${e.n}`)})`,
+          config: { align: 'center', disabled: !e.e, width: 4 },
+          content: `${item_names[e.a]} (${e.c})`,
           type: 'button',
         };
       }),

@@ -25,7 +25,8 @@ const cup_index = header.findIndex((e) => e === '角色Flag|下胸围'),
   attr_start_index = header.findIndex((e) => e === '角色Flag|初始速度'),
   buff_start_index = header.findIndex((e) => e === '角色Flag|速度加成'),
   adapt_start_index = header.findIndex((e) => e === '角色Flag|草地适性'),
-  title_index = header.findIndex((e) => e === '角色Str|称号');
+  title_index = header.findIndex((e) => e === '角色Str|称号'),
+  race_index = header.findIndex((e) => e === '角色Flag|种族');
 
 function random_int(min, max) {
   return min + Math.floor((max + 1 - min) * Math.random());
@@ -128,6 +129,10 @@ lines
           let col_value = chara_line[i];
           if (i === name_index) {
             col_value = `${col_value}\n基础属性,性欲,10001\n基础属性,压力,10000\n基础属性,体重偏差,10000\n基础属性,药物残留,1000\n角色Flag,父方角色,-1\n角色Flag,母方角色,-1\n基础属性,体力,1000\n基础属性,精力,1000\n基础属性,根性,1200\n基础属性,智力,1200`;
+          } else if (i === race_index) {
+            col_value = `${col_value}\n${['速度', '耐力', '力量']
+              .map((e) => `基础属性,${e},${col_value === '1' ? 1200 : 400}`)
+              .join('\n')}`;
           } else if (i === cup_index) {
             col_value = breast_down;
           } else if (i >= adapt_start_index && i <= adapt_start_index + 9) {

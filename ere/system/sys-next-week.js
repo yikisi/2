@@ -274,7 +274,7 @@ async function sys_next_week() {
         80 * era.get(`status:${chara_id}:超马跳Z`) +
         25 * era.get(`status:${chara_id}:弗隆K`) +
         30 * era.get(`status:${chara_id}:弗隆P`) +
-        65 * (era.get(`status:${chara_id}:长效避孕药`) > 0) +
+        16 * (era.get(`status:${chara_id}:长效避孕药`) > 0) +
         15 * (era.get(`status:${chara_id}:短效避孕药`) > 0) +
         10 * (era.get(`talent:${chara_id}:泌乳`) === 2)) *
         (10 - 2 * health_buff)) /

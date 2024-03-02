@@ -53,15 +53,15 @@ module.exports = (handlers) => {
    */
   handlers[ero_hooks.use_medicine] = (attacker, __, ___, extra_flag) => {
     !attacker && era.add(`item:${medicine_names[extra_flag.item]}`, -1);
-    let temp_ratio;
+    let temp;
     switch (extra_flag.item) {
       case medicine_enum.uma_z:
-        temp_ratio = 0.25;
+        temp = 0.25;
         era.set(`status:${extra_flag.user}:马跳Z`, 1);
         break;
       case medicine_enum.fron_k:
       case medicine_enum.fron_p:
-        temp_ratio = 0.3;
+        temp = 0.3;
         clean_part(new EroParticipant(extra_flag.user, part_enum.clitoris));
         era.set(
           `palam:${extra_flag.user}:阴茎快感`,
@@ -74,28 +74,26 @@ module.exports = (handlers) => {
         );
         break;
       case medicine_enum.anti_p_s:
+        era.set(`status:${extra_flag.user}:短效避孕药`, 1);
+        break;
       case medicine_enum.anti_p_l:
-        era.set(
-          `status:${extra_flag.user}:${medicine_names[extra_flag.item]}`,
-          1,
-        );
+        era.set(`status:${extra_flag.user}:长效避孕药`, 4);
         break;
       case medicine_enum.drug_m:
         era.set(`talent:${extra_flag.user}:泌乳`, 2);
-        {
-          const palam_b = era.get(`palam:${extra_flag.user}:胸部快感`),
-            min =
-              era.get(`tcvar:${extra_flag.user}:胸部快感上限`) *
-              palam_border.breast;
-          if (min > palam_b) {
-            add_palam(
-              extra_flag.user,
-              part_enum.breast,
-              (min - palam_b + 1) *
-                (1 + 0.2 * era.get(`talent:${extra_flag.user}:乳房尺寸`)),
-            );
-          }
+        temp =
+          era.get(`tcvar:${extra_flag.user}:胸部快感上限`) *
+            palam_border.breast -
+          era.get(`palam:${extra_flag.user}:胸部快感`);
+        if (temp > 0) {
+          add_palam(
+            extra_flag.user,
+            part_enum.breast,
+            (temp + 1) *
+              (1 + 0.2 * era.get(`talent:${extra_flag.user}:乳房尺寸`)),
+          );
         }
+        temp = 0;
         break;
       case medicine_enum.drug_p:
         era.set(`status:${extra_flag.user}:排卵期`, 1);
@@ -110,8 +108,8 @@ module.exports = (handlers) => {
         sys_change_lust(extra_flag.user, 800);
         set_stain(extra_flag.user, part_enum.mouth, stain_enum.milk);
     }
-    if (temp_ratio) {
-      update_temp_base(extra_flag.user, temp_ratio);
+    if (temp) {
+      update_temp_base(extra_flag.user, temp);
     }
     update_ero_status(extra_flag.user);
     add_meek_or_hate(extra_flag.user, extra_flag.check, (c) => c / 10);

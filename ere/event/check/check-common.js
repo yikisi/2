@@ -92,8 +92,7 @@ handlers[check_stages.rape_in_sleeping] = (chara_id) => {
     delta = 0;
   }
   let ratio =
-    // 睡奸限制最大倍率6倍，6*100-0=600，好感在0以下必然睡奸
-    Math.log(delta + 1) / log_600m2 +
+    Math.pow(2, Math.min(delta / 6 - 100, 0)) * 0.3 +
     Math.pow(2, era.get(`base:${chara_id}:性欲`) / 2000 - 5) +
     0.1 * era.get(`mark:${chara_id}:欢愉`) +
     0.05 * era.get(`talent:${chara_id}:工口意愿`) -
@@ -101,15 +100,11 @@ handlers[check_stages.rape_in_sleeping] = (chara_id) => {
   if (punish_level >= 2) {
     ratio += 0.3;
   }
-  if (
-    era.get(`mark:${chara_id}:苦痛`) >= 2 ||
-    era.get(`mark:${chara_id}:羞耻`) >= 2 ||
-    era.get(`mark:${chara_id}:反抗`) >= 2
-  ) {
-    ratio = 0;
-  }
-  era.logger.debug(`角色 ${chara_id} 睡奸：${(ratio * 100).toFixed(2)}%`);
-  return ratio >= 1 || Math.random() < ratio;
+  const dice = Math.random();
+  era.logger.debug(
+    `角色 ${chara_id} 睡奸：${(ratio * 100).toFixed(2)}%；掷骰：${dice}`,
+  );
+  return ratio >= 1 || dice < ratio;
 };
 
 handlers[check_stages.want_make_love] = (chara_id) => {
@@ -124,34 +119,26 @@ handlers[check_stages.want_make_love] = (chara_id) => {
   let ratio = 0;
   if (love >= 50) {
     ratio =
-      Math.pow(
-        2,
-        Math.min(love - era.get(`relation:${chara_id}:0`) / 6 - 100, 0),
-      ) *
-        0.2 +
+      Math.log(6 * love - era.get(`relation:${chara_id}:0`) + 1) / log_600m2 +
       Math.pow(2, era.get(`base:${chara_id}:性欲`) / 1250 - 8) * 0.75 +
       0.1 * era.get(`mark:${chara_id}:欢愉`) +
       0.05 * era.get(`talent:${chara_id}:工口意愿`) -
       0.5 * get_action_debuff(chara_id);
     ratio *= (3 - era.get(`mark:${chara_id}:反抗`)) / 3;
   }
-  if (
-    era.get(`mark:${chara_id}:苦痛`) >= 2 ||
-    era.get(`mark:${chara_id}:羞耻`) >= 2 ||
-    era.get(`mark:${chara_id}:反抗`) >= 2
-  ) {
-    ratio = 0;
-  }
-  era.logger.debug(`角色 ${chara_id} 求爱：${(ratio * 100).toFixed(2)}%`);
   const dice = Math.random();
-  if (ratio >= 1 || Math.random() < ratio) {
+  era.logger.debug(
+    `角色 ${chara_id} 求爱：${(ratio * 100).toFixed(2)}%；掷骰：${dice}`,
+  );
+  if (ratio >= 1 || dice < ratio) {
     return (
-      1 + (era.get(`talent:${chara_id}:反抗意愿`) >= 0) &&
-      (dice < 0.05 ||
-        era.get('flag:惩戒力度') >= 2 ||
-        era.get(`base:${chara_id}:性欲`) >= lust_border.want_sex ||
-        era.get(`base:${chara_id}:压力`) >= pressure_border.apprehension ||
-        era.get(`talent:${chara_id}:病娇`) === 2)
+      1 +
+      (era.get(`talent:${chara_id}:反抗意愿`) >= 0 &&
+        (dice < 0.05 ||
+          era.get('flag:惩戒力度') >= 2 ||
+          era.get(`base:${chara_id}:性欲`) >= lust_border.want_sex ||
+          era.get(`base:${chara_id}:压力`) >= pressure_border.apprehension ||
+          era.get(`talent:${chara_id}:病娇`) === 2))
     );
   }
   return 0;
