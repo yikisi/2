@@ -4,8 +4,11 @@ const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
   begin_and_init_ero,
   end_ero_and_train,
+  end_ero_and_show_result,
 } = require('#/system/ero/sys-prepare-ero');
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
+
+const print_ero_page = require('#/page/page-ero');
 
 const { add_event, cb_enum } = require('#/event/queue');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
@@ -50,7 +53,7 @@ module.exports = async (hook, _, event_object) => {
       await era.printAndWait(
         `${kita.name} 努力揉搓着敏感的地方，满是味道的浓郁性汁狠狠地喷在了被子里。`,
       );
-      if (kita.sex_code - 1) {
+      if (kita.sex_code !== 1) {
         const love_obj = new EventObject(68, cb_enum.love);
         add_event(event_hooks.out_shopping, love_obj);
         add_event(event_hooks.out_station, love_obj);
@@ -86,9 +89,9 @@ module.exports = async (hook, _, event_object) => {
         await get_chara_talk(0).say_as_unknown_and_wait([
           '多欺负几次 ',
           get_chara_talk(68).get_colored_name(),
-          '，趁发情期再来车站，或许会有意想不到的事件发生哦！',
+          '，趁她发情期的时候来车站，或许会有意想不到的事件发生哦！',
         ]);
-        era.clear(1);
+        await era.clear(1);
       }
       add_event(hook, event_object);
       return false;
@@ -193,7 +196,8 @@ module.exports = async (hook, _, event_object) => {
       new EroParticipant(68, part_enum.body),
       false,
     );
-    end_ero_and_train(false);
+    await print_ero_page(68);
+    await end_ero_and_show_result(true);
     era.println();
     await add_juel_out_of_train(68, '顺从', 100);
     await era.waitAnyKey();
@@ -209,7 +213,7 @@ module.exports = async (hook, _, event_object) => {
           get_chara_talk(68).get_colored_name(),
           ' 再来商店街，或许会有意想不到的事件发生哦！',
         ]);
-        era.clear(1);
+        await era.clear(1);
       }
       add_event(hook, event_object);
       return false;

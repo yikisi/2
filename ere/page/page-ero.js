@@ -705,6 +705,7 @@ async function page_ero(lover) {
                   (base_check &&
                     check_ero_enabled(curr_lover, curr_supporter, last_action) <
                       0),
+                disableWarning: true,
                 width: 6,
               },
               content: `再次 ${ero_action_names[last_action]}`,

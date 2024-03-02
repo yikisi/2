@@ -549,7 +549,7 @@ async function sys_next_week() {
         );
       } else if (timer < 13) {
         // 1-12周孕早期
-        sys_change_pressure(chara_id, get_random_value(400, 600));
+        sys_change_pressure(chara_id, get_random_value(200, 300));
       } else if (timer < 28) {
         // 13-29周安定期，可以做爱了
         pregnant_stage = era.set(
@@ -573,7 +573,7 @@ async function sys_next_week() {
         // 15周腰围+15cm，到此+30cm
         30 === timer && era.add(`cflag:${chara_id}:腰围`, 15);
       } else {
-        sys_change_pressure(chara_id, get_random_value(200, 400));
+        sys_change_pressure(chara_id, get_random_value(100, 200));
         // 37周以后概率生，最晚42周
         // 现实是40周，这里为了游戏性折叠了
         pregnant_stage = era.set(

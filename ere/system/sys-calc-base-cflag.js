@@ -41,10 +41,14 @@ function sys_change_pressure(chara_id, _val) {
       `base:${chara_id}:压力`,
       _val > 0
         ? Math.ceil(
-            _val *
+            (_val *
               (1 +
                 0.2 * era.get(`talent:${chara_id}:羞耻忍耐`) +
-                sys_call_mec(chara_id, check_stages.mec_pressure_buff)),
+                sys_call_mec(chara_id, check_stages.mec_pressure_buff))) /
+              (1 +
+                (era.get('flag:当前回合数') -
+                  era.get(`cflag:${chara_id}:育成回合计时`) >=
+                  3 * 48)),
           )
         : _val,
     )
