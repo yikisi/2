@@ -16,6 +16,7 @@ const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const date_indicator = require('#/page/components/date-indicator');
+const print_race_track_chart = require('#/page/components/race-track-chart');
 const select_contestants = require('#/page/components/select-contestants');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -225,10 +226,10 @@ async function race_page(race) {
       adaptability_list = adaptability_names
         .slice(0, 6)
         .map((e) => era.get(`cflag:${chara_id}:${e}适性`)),
-      max_ground = Math.max(...adaptability_list.slice(0, 1)),
+      max_ground = Math.max(...adaptability_list.slice(0, 2)),
       max_span = Math.max(...adaptability_list.slice(2)),
       tmp = [];
-    adaptability_list.slice(0, 1).forEach(
+    adaptability_list.slice(0, 2).forEach(
       (eg, ig) =>
         eg === max_ground &&
         adaptability_list.slice(2).forEach((es, is) => {
@@ -435,9 +436,19 @@ async function race_page(race) {
           {
             accelerator: 1000,
             config: {
+              width: 12,
               align: 'center',
             },
             content: '出走！',
+            type: 'button',
+          },
+          {
+            accelerator: 1020,
+            config: {
+              width: 12,
+              align: 'center',
+            },
+            content: '赛场数据',
             type: 'button',
           },
         ],
@@ -446,7 +457,10 @@ async function race_page(race) {
     );
     era.setVerticalAlign('top');
     const ret = await era.input();
-    if (ret >= 1010) {
+    if (ret === 1020) {
+      print_race_track_chart(info);
+      await era.waitAnyKey();
+    } else if (ret >= 1010) {
       strategy = strategy_dict[cur_chara_id] = era.set(
         `cflag:${cur_chara_id}:跑法`,
         ret - 1010,

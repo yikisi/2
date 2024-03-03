@@ -183,6 +183,14 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   printInColRows(...columnObjects) {},
   /**
+   * print a line chart by chart.js
+   * <br/> see: chart.js, chartjs-plugin-annotation, vue-chartjs
+   * <br/> note: options.scales.x.ticks.callback and options.scales.y.ticks.callback cannot be serialized, uses options.scales.x.ticks.step and options.scales.y.ticks.step to replace them
+   * @param {*} config
+   */
+  // eslint-disable-next-line no-unused-vars
+  printLineChart(config) {},
+  /**
    * print multiple columns into a row, excluding inputs
    * @param {{type:'button'|'divider'|'image'|'image.whole'|'progress'|'text',[config]:{}}[]} columnObjects the array of settings of columns, like print, printButton, printImage and printProgress
    * @param {{[gutter]:number,[horizontalAlign]:'start'|'center'|'end'|'space-between'|'space-around'|'space-evenly',[offset]:number,[verticalAlign]:'top'|'middle'|'bottom',[width]:number}} [config] config of the row

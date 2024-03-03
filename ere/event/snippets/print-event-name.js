@@ -22,7 +22,9 @@ async function print_event_name(name, chara, color, _offset) {
       columns: [
         {
           config: { width: 20 },
-          names: get_image(chara.id).join('\t'),
+          names: get_image(chara.id)
+            .map((e) => `${e}${era.get('flag:显示半身像') ? '_半身' : ''}`)
+            .join('\t'),
           type: 'image.whole',
         },
       ],
