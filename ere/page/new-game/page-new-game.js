@@ -25,9 +25,6 @@ module.exports = async () => {
 
   era.resetData();
 
-  if (await print_set_page()) {
-    return false;
-  }
   let player_gender = era.get('flag:角色性别') || 3;
 
   while (flag_new_game) {
@@ -120,6 +117,10 @@ module.exports = async () => {
         case 1:
           era.set('callname:0:-1', player_name);
           era.set('cflag:0:性别', player_gender);
+
+          if (await print_set_page()) {
+            return false;
+          }
 
           if (await page_custom()) {
             return false;

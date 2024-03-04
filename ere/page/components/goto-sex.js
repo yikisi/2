@@ -382,8 +382,9 @@ async function goto_sex(chara_id, sex_loc) {
           );
           era.add(`item:${ret}`, -1);
           if (
+            !era.get('flag:雷普抵抗') ||
             sys_get_intelligence_ratio_in_fight(0, chara_id) >
-            (dice = Math.random())
+              (dice = Math.random())
           ) {
             await era.printAndWait([
               me.get_colored_name(),

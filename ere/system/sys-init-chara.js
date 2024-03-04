@@ -103,6 +103,18 @@ module.exports = {
 
       const auto_talent = chara_id ? era.get('flag:自带特性') : 0;
       switch (auto_talent) {
+        case -4:
+          era.set(`talent:${chara_id}:淫口`, -4);
+          era.set(`talent:${chara_id}:淫乳`, -4);
+          era.set(`talent:${chara_id}:淫身`, -4);
+          era.set(`talent:${chara_id}:淫核`, -4);
+          era.set(`talent:${chara_id}:淫壶`, -4);
+          era.set(`talent:${chara_id}:淫臀`, -4);
+          era.set(`talent:${chara_id}:早泄`, -4);
+          era.set(`talent:${chara_id}:抖S`, 0);
+          era.set(`talent:${chara_id}:喜欢责骂`, 0);
+          era.set(`talent:${chara_id}:喜欢痛苦`, 0);
+          break;
         case -1:
           era.set(`talent:${chara_id}:淫口`, 0);
           era.set(`talent:${chara_id}:淫乳`, 0);
@@ -126,9 +138,6 @@ module.exports = {
           era.set(`talent:${chara_id}:抖S`, 1);
           era.set(`talent:${chara_id}:喜欢责骂`, 1);
           era.set(`talent:${chara_id}:喜欢痛苦`, 1);
-          break;
-        default:
-          break;
       }
 
       if (chara_id && era.get('flag:自带钝感')) {

@@ -245,7 +245,7 @@ function get_relation_mark(relation, chara_id) {
 
 function get_trainer_level() {
   const honour = era.get('flag:当前声望');
-  if (honour < 0) {
+  if (honour <= 0) {
     return -1;
   }
   let level = 0;

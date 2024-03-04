@@ -45,7 +45,7 @@ handlers[check_stages.love_event] = (chara_id) =>
 
 handlers[check_stages.prison] = (chara_id) => {
   const love = era.get(`love:${chara_id}`),
-    prison_limit = era.get('flag:地下室限制'),
+    prison_limit = era.get('flag:极端行为限制'),
     punish_level = era.get('flag:惩戒力度'),
     relation = era.get(`relation:${chara_id}:0`);
   let delta = love * prison_limit - relation;
@@ -74,7 +74,7 @@ handlers[check_stages.prison] = (chara_id) => {
 
 handlers[check_stages.rape_in_sleeping] = (chara_id) => {
   const love = era.get(`love:${chara_id}`),
-    raping_limit = era.get('flag:睡奸限制'),
+    raping_limit = era.get('flag:极端行为限制') * 2,
     punish_level = era.get('flag:惩戒力度'),
     relation = era.get(`relation:${chara_id}:0`) || 0;
   let delta = love * raping_limit - relation;

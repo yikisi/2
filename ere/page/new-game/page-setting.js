@@ -1,745 +1,768 @@
 const era = require('#/era-electron');
 
-const difficulty_desc = [
-  '三女神平等保佑着所有马娘 · 特雷森的马娘远超同侪 · 马娘憧憬着纯粹的爱',
-  '三女神的目光并未投注这里 · 特雷森只是著名学园之一 · 马娘面临着现实的压力',
-  '三女神关照着马娘，除了你的队伍 · 比赛中总有强敌出现 · 马娘将尝试各种方式排遣压力 · 特雷森对训练员严苛而残忍',
-  '三女神关照着马娘，除了你和你的队伍 · 比赛中总有强敌出现 · 马娘讨厌你 · 特雷森对训练员严苛而残忍',
-  '三女神格外关照你的队伍 · 特雷森的马娘远超同侪 · 马娘将不择手段地占有你 · 马娘的孩子们也会',
-  '和鹅摸啦难度同 · 但是所有成员都是FUTA · 包括你 · 特雷森对训练员严苛而残忍',
-  '三女神格外关照你的队伍 · 特雷森的马娘远超同侪 · 马娘可以以任意状态完赛（即使身上插满玩具）\n马娘一直在发情 · 马娘不能抵抗你的雷普，也无法伤害你',
-  '和鹅摸啦难度同 · 但是所有成员都是男性 · 包括你（暂定） · 特雷森对训练员严苛而残忍',
-];
+const difficulties = [
+  {
+    n: '地上神国',
+    d: [
+      '三女神平等保佑着所有马娘',
+      { isDivider: true },
+      '特雷森的马娘远超同侪',
+      { isDivider: true },
+      '马娘憧憬着纯粹的爱',
+    ],
+  },
+  {
+    n: '尘世间',
+    d: [
+      '三女神的目光并未投注这里',
+      { isDivider: true },
+      '特雷森只是著名学园之一',
+      { isDivider: true },
+      '马娘面临着现实的压力',
+    ],
+  },
+  {
+    n: '特雷普',
+    d: [
+      '三女神关照着马娘，除了你的队伍',
+      { isDivider: true },
+      '比赛中总有强敌出现',
+      { isDivider: true },
+      '马娘将尝试各种方式排遣压力',
+      { isDivider: true },
+      '特雷森对训练员严苛而残忍',
+    ],
+  },
+  {
+    n: '世界之敌',
+    d: [
+      '三女神关照着马娘，除了你和你的队伍',
+      { isDivider: true },
+      '比赛中总有强敌出现',
+      { isDivider: true },
+      '马娘讨厌你',
+      { isDivider: true },
+      '特雷森对训练员严苛而残忍',
+    ],
+  },
+  {
+    n: '鹅摸啦',
+    d: [
+      '三女神格外关照你的队伍',
+      { isDivider: true },
+      '特雷森的马娘远超同侪',
+      { isDivider: true },
+      '马娘将不择手段地占有你',
+      { isDivider: true },
+      '马娘的孩子们也会',
+    ],
+  },
+  {
+    n: 'Uma3rb',
+    d: [
+      '三女神格外关照你的队伍',
+      { isDivider: true },
+      '特雷森的马娘远超同侪',
+      { isDivider: true },
+      // '马娘可以以任意状态完赛（即使身上插满玩具）',
+      // { isDivider: true },
+      '马娘一直在发情',
+      { isDivider: true },
+      '马娘不能抵抗你的雷普，也无法伤害你',
+    ],
+  },
+  {
+    n: '嗦多马',
+    d: [
+      '和鹅摸啦难度同',
+      { isDivider: true },
+      '但是所有成员都是FUTA',
+      { isDivider: true },
+      '包括你',
+      { isDivider: true },
+      '特雷森对训练员严苛而残忍',
+    ],
+  },
+  {
+    n: '幻想♂︎乡',
+    d: [
+      '和鹅摸啦难度同',
+      { isDivider: true },
+      '但是所有成员都是男性',
+      { isDivider: true },
+      '包括你（暂定）',
+      { isDivider: true },
+      '特雷森对训练员严苛而残忍',
+    ],
+  },
+].map((e) => {
+  e.d = e.d.map((es) => {
+    if (!es.isDivider) {
+      return {
+        content: es,
+        display: 'inline-block',
+      };
+    }
+    return es;
+  });
+  return e;
+});
 
-module.exports = async () => {
-  let flag_setting = true;
-  let theme = 10;
-  era.set('flag:马娘初始好感', 75);
-  era.set('flag:回合声望惩罚', -1);
-  era.set('flag:爱慕限制', 1);
-  era.set('flag:道具影响', -25);
-  era.set('flag:雷普抵抗', 1);
+/** @param {number} theme */
+function set_from_theme(theme) {
+  switch (theme) {
+    case 0:
+      era.set('flag:训练难度', 25);
+      era.set('flag:训练加成', 25);
+      era.set('flag:比赛难度', -25);
+      era.set('flag:可能伤病', 0);
+      era.set('flag:马娘初始好感', 150);
+      era.set('flag:马娘初始爱慕', 0);
+      era.set('flag:好感上升加成', 0);
+      era.set('flag:爱慕上升加成', 0);
+      era.set('flag:极端行为限制', 0);
+      era.set('flag:回合声望惩罚', 0);
+      era.set('flag:回合好感惩罚', 10);
+      era.set('flag:回合爱慕惩罚', 0);
+      era.set('flag:游戏结束', 0);
+      era.set('flag:后代爱慕限制', 0);
+      era.set('flag:角色性别', 0);
+      era.set('flag:自带特性', 0);
+      era.set('flag:道具价格', -50);
+      era.set('flag:宝珠消耗量', -50);
+      era.set('flag:因子消耗量', -50);
+      era.set('flag:雷普抵抗', 1);
+      era.set('flag:道具影响', -25);
+      era.set('flag:声望不足替换', 0);
+      era.set('flag:压力获取', 0);
+      era.set('flag:不忠惩罚', 1);
+      era.set('flag:读档对话', 0);
+      break;
+    case 1:
+      era.set('flag:训练难度', 0);
+      era.set('flag:训练加成', 0);
+      era.set('flag:比赛难度', 0);
+      era.set('flag:可能伤病', 1);
+      era.set('flag:马娘初始好感', 75);
+      era.set('flag:马娘初始爱慕', 0);
+      era.set('flag:好感上升加成', 0);
+      era.set('flag:爱慕上升加成', 0);
+      era.set('flag:极端行为限制', 0);
+      era.set('flag:回合声望惩罚', -1);
+      era.set('flag:回合好感惩罚', 0);
+      era.set('flag:回合爱慕惩罚', 0);
+      era.set('flag:游戏结束', 0);
+      era.set('flag:后代爱慕限制', 0);
+      era.set('flag:角色性别', 0);
+      era.set('flag:自带特性', 0);
+      era.set('flag:道具价格', 0);
+      era.set('flag:宝珠消耗量', 0);
+      era.set('flag:因子消耗量', 0);
+      era.set('flag:雷普抵抗', 1);
+      era.set('flag:道具影响', -25);
+      era.set('flag:声望不足替换', 0);
+      era.set('flag:压力获取', 1);
+      era.set('flag:不忠惩罚', 1);
+      era.set('flag:读档对话', 0);
+      break;
+    case 2:
+      era.set('flag:训练难度', -25);
+      era.set('flag:训练加成', -25);
+      era.set('flag:比赛难度', 25);
+      era.set('flag:可能伤病', 1);
+      era.set('flag:马娘初始好感', 75);
+      era.set('flag:马娘初始爱慕', 25);
+      era.set('flag:好感上升加成', 0);
+      era.set('flag:爱慕上升加成', 50);
+      era.set('flag:极端行为限制', 3);
+      era.set('flag:回合声望惩罚', -1);
+      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合爱慕惩罚', 0);
+      era.set('flag:游戏结束', 1);
+      era.set('flag:后代爱慕限制', 0);
+      era.set('flag:角色性别', 0);
+      era.set('flag:自带特性', 0);
+      era.set('flag:道具价格', 100);
+      era.set('flag:宝珠消耗量', 100);
+      era.set('flag:因子消耗量', 100);
+      era.set('flag:雷普抵抗', 1);
+      era.set('flag:道具影响', -25);
+      era.set('flag:声望不足替换', 1);
+      era.set('flag:压力获取', 1);
+      era.set('flag:不忠惩罚', 0);
+      era.set('flag:读档对话', 1);
+      break;
+    case 3:
+      era.set('flag:训练难度', -25);
+      era.set('flag:训练加成', -25);
+      era.set('flag:比赛难度', 25);
+      era.set('flag:可能伤病', 1);
+      era.set('flag:马娘初始好感', -100);
+      era.set('flag:马娘初始爱慕', 0);
+      era.set('flag:好感上升加成', -50);
+      era.set('flag:爱慕上升加成', 0);
+      era.set('flag:极端行为限制', 1);
+      era.set('flag:回合声望惩罚', -1);
+      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合爱慕惩罚', 0);
+      era.set('flag:游戏结束', 3);
+      era.set('flag:后代爱慕限制', 0);
+      era.set('flag:角色性别', 0);
+      era.set('flag:自带特性', -4);
+      era.set('flag:道具价格', 100);
+      era.set('flag:宝珠消耗量', 100);
+      era.set('flag:因子消耗量', 100);
+      era.set('flag:雷普抵抗', 1);
+      era.set('flag:道具影响', -25);
+      era.set('flag:声望不足替换', 1);
+      era.set('flag:压力获取', 1);
+      era.set('flag:不忠惩罚', 0);
+      era.set('flag:读档对话', 1);
+      break;
+    case 4:
+      era.set('flag:训练难度', 25);
+      era.set('flag:训练加成', 25);
+      era.set('flag:比赛难度', -25);
+      era.set('flag:可能伤病', 0);
+      era.set('flag:马娘初始好感', 225);
+      era.set('flag:马娘初始爱慕', 50);
+      era.set('flag:好感上升加成', -50);
+      era.set('flag:爱慕上升加成', 50);
+      era.set('flag:极端行为限制', 3);
+      era.set('flag:回合声望惩罚', -1);
+      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合爱慕惩罚', 1);
+      era.set('flag:游戏结束', 0);
+      era.set('flag:后代爱慕限制', 1);
+      era.set('flag:角色性别', 0);
+      era.set('flag:自带特性', 0);
+      era.set('flag:道具价格', 0);
+      era.set('flag:宝珠消耗量', 0);
+      era.set('flag:因子消耗量', 0);
+      era.set('flag:雷普抵抗', 1);
+      era.set('flag:道具影响', -25);
+      era.set('flag:声望不足替换', 0);
+      era.set('flag:压力获取', 0);
+      era.set('flag:不忠惩罚', 1);
+      era.set('flag:读档对话', 1);
+      break;
+    case 5:
+      era.set('flag:训练难度', 25);
+      era.set('flag:训练加成', 25);
+      era.set('flag:比赛难度', -25);
+      era.set('flag:可能伤病', 0);
+      era.set('flag:马娘初始好感', 150);
+      era.set('flag:马娘初始爱慕', 0);
+      era.set('flag:好感上升加成', 0);
+      era.set('flag:爱慕上升加成', 0);
+      era.set('flag:极端行为限制', 0);
+      era.set('flag:回合声望惩罚', 0);
+      era.set('flag:回合好感惩罚', 10);
+      era.set('flag:回合爱慕惩罚', 0);
+      era.set('flag:游戏结束', 0);
+      era.set('flag:后代爱慕限制', 0);
+      era.set('flag:角色性别', 0);
+      era.set('flag:自带特性', 1);
+      era.set('flag:道具价格', 0);
+      era.set('flag:宝珠消耗量', -50);
+      era.set('flag:因子消耗量', 0);
+      era.set('flag:雷普抵抗', 0);
+      era.set('flag:道具影响', 0);
+      era.set('flag:声望不足替换', 0);
+      era.set('flag:压力获取', 0);
+      era.set('flag:不忠惩罚', 0);
+      era.set('flag:读档对话', 0);
+      break;
+    case 6:
+      era.set('flag:训练难度', 25);
+      era.set('flag:训练加成', 25);
+      era.set('flag:比赛难度', -25);
+      era.set('flag:可能伤病', 0);
+      era.set('flag:马娘初始好感', 225);
+      era.set('flag:马娘初始爱慕', 50);
+      era.set('flag:好感上升加成', -50);
+      era.set('flag:爱慕上升加成', 50);
+      era.set('flag:极端行为限制', 2);
+      era.set('flag:回合声望惩罚', -1);
+      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合爱慕惩罚', 1);
+      era.set('flag:游戏结束', 0);
+      era.set('flag:后代爱慕限制', 1);
+      era.set('flag:角色性别', 10);
+      era.set('flag:自带特性', 0);
+      era.set('flag:道具价格', 0);
+      era.set('flag:宝珠消耗量', 0);
+      era.set('flag:因子消耗量', 0);
+      era.set('flag:雷普抵抗', 1);
+      era.set('flag:道具影响', -25);
+      era.set('flag:声望不足替换', 1);
+      era.set('flag:压力获取', 0);
+      era.set('flag:不忠惩罚', 1);
+      era.set('flag:读档对话', 1);
+      break;
+    case 7:
+      era.set('flag:训练难度', 25);
+      era.set('flag:训练加成', 25);
+      era.set('flag:比赛难度', -25);
+      era.set('flag:可能伤病', 0);
+      era.set('flag:马娘初始好感', 225);
+      era.set('flag:马娘初始爱慕', 50);
+      era.set('flag:好感上升加成', -50);
+      era.set('flag:爱慕上升加成', 50);
+      era.set('flag:极端行为限制', 2);
+      era.set('flag:回合声望惩罚', -1);
+      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合爱慕惩罚', 1);
+      era.set('flag:游戏结束', 0);
+      era.set('flag:后代爱慕限制', 1);
+      era.set('flag:角色性别', 1);
+      era.set('flag:自带特性', 0);
+      era.set('flag:道具价格', 0);
+      era.set('flag:宝珠消耗量', 0);
+      era.set('flag:因子消耗量', 0);
+      era.set('flag:雷普抵抗', 1);
+      era.set('flag:道具影响', -25);
+      era.set('flag:声望不足替换', 1);
+      era.set('flag:压力获取', 0);
+      era.set('flag:不忠惩罚', 1);
+      era.set('flag:读档对话', 1);
+      break;
+    default:
+      theme = 10;
+      break;
+  }
+}
 
+async function page_settings() {
+  let flag_default = true,
+    flag_setting = false;
+  let theme;
+  set_from_theme((theme = 1));
+
+  while (flag_default) {
+    await era.clear();
+    const buffer = [];
+    buffer.push({ config: { content: '游戏模式' }, type: 'divider' });
+    difficulties.slice(0, 6).forEach((e, i) => {
+      buffer.push(
+        {
+          accelerator: i,
+          config: { width: 3 },
+          content: e.n,
+          type: 'button',
+        },
+        {
+          config: { width: 21 },
+          content: e.d,
+          type: 'text',
+        },
+      );
+    });
+    buffer.push(
+      {
+        accelerator: 10,
+        config: { align: 'center', width: 12 },
+        content: '逐项调整',
+        type: 'button',
+      },
+      {
+        accelerator: 99,
+        config: { align: 'center', width: 12 },
+        content: '返回标题',
+        type: 'button',
+      },
+    );
+    era.printMultiColumns(buffer);
+    const ret = await era.input();
+    switch (ret) {
+      case 10:
+        flag_default = false;
+        flag_setting = true;
+        break;
+      case 99:
+        return true;
+      default:
+        set_from_theme(ret);
+        return false;
+    }
+  }
+
+  let selected_setting = undefined;
   while (flag_setting) {
     await era.clear();
-    const enable_hurt = era.get('flag:可能伤病');
-    const love_buff = era.get('flag:爱慕上升加成');
-    const love_event = era.get('flag:爱慕限制');
-    const love_punish = era.get('flag:回合爱慕惩罚');
-    const child_love = era.get('flag:后代爱慕限制');
-    const part_sensitive = era.get('flag:自带钝感');
-    const rape = era.get('flag:雷普抵抗');
-    const item_influence = era.get('flag:道具影响');
 
-    era.drawLine({ content: '预设' });
-    era.printMultiColumns(
-      [
-        '地上神国',
-        '尘世间',
-        '特雷普',
-        '世界之敌',
-        '鹅摸啦',
-        '嗦多马',
-        'Uma3rb',
-        'G K D',
-      ].map((e, i) => {
+    era.printMultiColumns([
+      { config: { content: '预设' }, type: 'divider' },
+      ...difficulties.map((e, i) => {
         return {
           accelerator: i,
           config: {
             buttonType: theme === i ? 'warning' : 'info',
             width: 3,
           },
-          content: e,
+          content: e.n,
           type: 'button',
         };
       }),
-    );
-    if (difficulty_desc[theme]) {
-      era.print(difficulty_desc[theme], { align: 'center' });
+    ]);
+    if (difficulties[theme]) {
+      era.print(difficulties[theme].d, { align: 'center' });
     }
 
-    era.drawLine({
-      content: `游戏难度设置选项`,
-    });
     const options = [
-      [
-        '训练难度',
-        era.get('flag:训练难度'),
-        [
-          [25, '低'],
-          [0, '正常'],
-          [-25, '高'],
+      {
+        key: '训练难度',
+        options: [
+          { l: '低', v: 25 },
+          { l: '中', v: 0 },
+          { l: '高', v: -25 },
         ],
-      ],
-      [
-        '训练效果',
-        era.get('flag:训练加成'),
-        [
-          [25, '好'],
-          [0, '正常'],
-          [-25, '差'],
+      },
+      {
+        key: '训练加成',
+        label: '训练效果',
+        options: [
+          { l: '好', v: 25 },
+          { l: '正常', v: 0 },
+          { l: '差', v: -25 },
         ],
-      ],
-      [
-        '比赛难度',
-        era.get('flag:比赛难度'),
-        [
-          [-25, '低'],
-          [0, '正常'],
-          [25, '高'],
+      },
+      {
+        key: '比赛难度',
+        options: [
+          { l: '低', v: -25 },
+          { l: '正常', v: 0 },
+          { l: '高', v: 25 },
         ],
-      ],
-      [
-        '马娘可能受伤',
-        enable_hurt,
-        [
-          [0, '否'],
-          [1, '是'],
+      },
+      {
+        key: '可能伤病',
+        label: '马娘可能受伤',
+        options: [
+          { l: '否', v: 0 },
+          { l: '是', v: 1 },
         ],
-      ],
-      [
-        '马娘初见好感',
-        era.get('flag:马娘初始好感'),
-        [
-          [225, '热忱'],
-          [150, '融洽'],
-          [75, '冷淡'],
-          [0, '怀疑'],
-          [-100, '失望'],
+      },
+      {
+        key: '压力获取',
+        label: '马娘承受压力',
+        options: [
+          { l: '否', v: 0 },
+          { l: '是', v: 1 },
         ],
-      ],
-      [
-        '马娘初见爱慕',
-        era.get('flag:马娘初始爱慕'),
-        [
-          [0, '平常'],
-          [25, '暧昧'],
-          [50, '爱欲'],
+      },
+      {
+        key: '道具价格',
+        label: '商店的经营者',
+        options: [
+          { l: '乐善好施', v: -50 },
+          { l: '循规蹈矩', v: 0 },
+          { l: '奸诈狡猾', v: 100 },
         ],
-      ],
-      [
-        '好感提升难度',
-        era.get('flag:好感上升加成'),
-        [
-          [50, '容易'],
-          [0, '一般'],
-          [-50, '困难'],
+      },
+      {
+        key: '宝珠消耗量',
+        label: '调教技能的因子消耗',
+        options: [
+          { l: '低', v: -50 },
+          { l: '一般', v: 0 },
+          { l: '高', v: 100 },
         ],
-      ],
-      [
-        '爱慕提升难度',
-        love_buff,
-        [
-          [0, '一般'],
-          [50, '容易'],
+      },
+      {
+        key: '因子消耗量',
+        label: '比赛能力的因子消耗',
+        options: [
+          { l: '低', v: -50 },
+          { l: '一般', v: 0 },
+          { l: '高', v: 100 },
         ],
-      ],
-      [
-        '爱慕需要事件',
-        love_event,
-        [
-          [1, '是'],
-          [0, '否'],
+      },
+      {
+        label: '游戏结局条件',
+        key: '游戏结束',
+        options: [
+          { l: '不散筵席', v: 0 },
+          { l: '粉丝袭击', v: 1 },
+          { l: '金钱奴隶', v: 2 },
+          { l: '情爱囹圄', v: 3 },
         ],
-      ],
-      [
-        '马娘的极端行为',
-        era.get('flag:地下室限制'),
-        [
-          [0, '不会进行'],
-          [1, '有可能'],
-          [2, '尽量抑制'],
-          [3, '积极采取'],
+        tip: (v) =>
+          [
+            '你的训练员生涯将一直持续，直到声望归零',
+            '马娘的生涯成绩将决定你的生死……即使是她对你有一点点的厌恶也会导致育成结束成为你人生的结束',
+            '你对马娘的债务也会决定你的命运，请负起成年人的责任，好好管理自己的资产',
+            '无望之爱会结出什么样的果实？现在你也有机会在爱意构筑的囚牢中结束自己的人生',
+          ][v],
+      },
+      {
+        key: '回合声望惩罚',
+        label: '声望的变化',
+        options: [
+          { l: '与日俱增', v: 1 },
+          { l: '不增不减', v: 0 },
+          { l: '逐渐衰减', v: -1 },
         ],
-      ],
-      [
-        '声望的变化',
-        era.get('flag:回合声望惩罚'),
-        [
-          [1, '与日俱增'],
-          [0, '不增不减'],
-          [-1, '逐渐衰减'],
+        tip: (v) =>
+          [
+            '你的声望会缓慢增长',
+            '你的声望如无其他因素不会变化',
+            '你的声望会逐渐衰减',
+          ][v],
+      },
+      {
+        key: '声望不足替换',
+        label: '身败名裂时',
+        options: [
+          { l: '黯然退场', v: 0 },
+          { l: '黑暗交易', v: 1 },
         ],
-      ],
-      [
-        '好感的变化',
-        era.get('flag:回合好感惩罚'),
-        [
-          [10, '愈久愈和'],
-          [0, '君子之交'],
-          [-25, '相看相厌'],
+        tip: (v) =>
+          [
+            '声望归零了，一切都结束了……游戏系统，将我们带回标题',
+            '想在声望归零后继续下去？即使以你的一切作为代价？',
+          ][v],
+      },
+      {
+        key: '角色性别',
+        options: [
+          { l: '自然赋予', v: 0 },
+          { l: '全员扶她', v: 10 },
+          { l: '全员男性', v: 1 },
         ],
-      ],
-      [
-        '爱慕的变化',
-        love_punish,
-        [
-          [0, '不敢肖想'],
-          [1, '逐渐吸引'],
+      },
+      {
+        key: '马娘初始好感',
+        label: '马娘初见好感',
+        options: [
+          { l: '热忱', v: 225 },
+          { l: '融洽', v: 150 },
+          { l: '冷淡', v: 75 },
+          { l: '怀疑', v: 0 },
+          { l: '失望', v: -100 },
         ],
-      ],
-      [
-        '不伦之恋',
-        child_love,
-        [
-          [0, '不允许'],
-          [1, '允许'],
+      },
+      {
+        key: '好感上升加成',
+        label: '好感提升难度',
+        options: [
+          { l: '容易', v: 50 },
+          { l: '一般', v: 0 },
+          { l: '困难', v: -50 },
         ],
-      ],
-      [
-        '游戏结局条件',
-        era.get('flag:游戏结束'),
-        [
-          [0, '不散筵席'],
-          [1, '粉丝袭击'],
-          [2, '金钱奴隶'],
-          [3, '情爱囹圄'],
+      },
+      {
+        key: '回合好感惩罚',
+        label: '好感的变化',
+        options: [
+          { l: '愈久愈和', v: 10 },
+          { l: '君子之交', v: 0 },
+          { l: '相看相厌', v: -25 },
         ],
-      ],
-      [
-        '角色性别',
-        era.get('flag:角色性别'),
-        [
-          [0, '自然'],
-          [10, '全员扶她'],
-          [1, '全员男性'],
+        tip: (v) =>
+          [
+            '马娘们对你的好感与日俱增',
+            '马娘们对你的好感不会受时间影响',
+            '马娘们会逐渐对你产生厌恶',
+          ][v],
+      },
+      {
+        key: '马娘初始爱慕',
+        label: '马娘初见爱慕',
+        options: [
+          { l: '平常', v: 0 },
+          { l: '暧昧', v: 25 },
+          { l: '爱欲', v: 50 },
         ],
-      ],
-      [
-        '对性刺激的感觉',
-        part_sensitive,
-        [
-          [0, '正常'],
-          [1, '不敏感'],
+      },
+      {
+        key: '爱慕上升加成',
+        label: '爱慕提升难度',
+        options: [
+          { l: '一般', v: 0 },
+          { l: '容易', v: 50 },
         ],
-      ],
-      [
-        '天生特性',
-        era.get('flag:自带特性'),
-        [
-          [1, '淫娃荡妇'],
-          [0, '听天由命'],
-          [-1, '冰清玉洁'],
+      },
+      {
+        key: '回合爱慕惩罚',
+        label: '爱慕的变化',
+        options: [
+          { l: '不敢肖想', v: 0 },
+          { l: '逐渐吸引', v: 1 },
         ],
-      ],
-      [
-        '商店的经营者',
-        era.get('flag:道具价格'),
-        [
-          [-50, '乐善好施'],
-          [0, '循规蹈矩'],
-          [100, '奸诈狡猾'],
+        tip: (v) =>
+          [
+            '只有主动的行为才能让马娘爱上你',
+            '马娘们会逐渐被你吸引，直到依存……即使你什么都不做',
+          ][v],
+      },
+      {
+        label: '对出轨的看法',
+        key: '不忠惩罚',
+        options: [
+          { l: '心胸开阔', v: 0 },
+          { l: '不可原谅', v: 1 },
         ],
-      ],
-      [
-        '调教技能的因子消耗',
-        era.get('flag:宝珠消耗量'),
-        [
-          [-50, '低'],
-          [0, '一般'],
-          [100, '高'],
+        tip: (v) => ['马娘只在乎和你在一起的点点滴滴', '小心独占力……'][v],
+      },
+      {
+        key: '极端行为限制',
+        label: '马娘的极端行为',
+        options: [
+          { l: '不会进行', v: 0 },
+          { l: '有可能', v: 1 },
+          { l: '尽量抑制', v: 2 },
+          { l: '积极采取', v: 3 },
         ],
-      ],
-      [
-        '比赛能力的因子消耗',
-        era.get('flag:因子消耗量'),
-        [
-          [-50, '低'],
-          [0, '一般'],
-          [100, '高'],
+        tip: (v) =>
+          [
+            '马娘不会对你做什么，很安全',
+            '马娘在求而不得的时候有很低的可能夜袭或者绑架你',
+            '马娘会尽量抑制夜袭和绑架的欲望……但是很勉强',
+            '在你看不见的地方，马娘正一边扭曲地笑着一边准备着什么……',
+          ][v],
+      },
+      {
+        label: '天生特性',
+        key: '自带特性',
+        options: [
+          { l: '淫娃荡妇', v: 1 },
+          { l: '听天由命', v: 0 },
+          { l: '冰清玉洁', v: -1 },
+          { l: '与性无缘', v: -4 },
         ],
-      ],
-      [
-        '角色的雷普抵抗',
-        rape,
-        [
-          [0, '一推就倒'],
-          [1, '激烈反抗'],
+        tip: (v) =>
+          [
+            '以我所见，皆为母马',
+            '每个人都独一无二',
+            '马娘的身体完美无暇，找不到丝毫弱点',
+            '极难让她们感到快感',
+          ][v],
+      },
+      {
+        key: '雷普抵抗',
+        label: '角色的强奸抵抗',
+        options: [
+          { l: '一推就倒', v: 0 },
+          { l: '激烈反抗', v: 1 },
         ],
-      ],
-      [
-        '带玩具上场比赛',
-        item_influence,
-        [
-          [0, '流水冲锋'],
-          [-25, '寸步难行'],
+      },
+      {
+        key: '后代爱慕限制',
+        label: '不伦之恋',
+        options: [
+          { l: '不允许', v: 0 },
+          { l: '允许', v: 1 },
         ],
-      ],
+        tip: (v) =>
+          [
+            '孩子们对你只有孺慕之情……除非你主动打破',
+            '孩子们对你只有孺慕之情……吗？',
+          ][v],
+      },
+      // {
+      //   label: '带玩具上场比赛',
+      //   key: '道具影响',
+      //   options: [
+      //     { l: '流水冲锋', v: 0 },
+      //     { l: '寸步难行', v: -25 },
+      //   ],
+      //   tip: (v) =>
+      //     [
+      //       '某观众「我还是第一次见有人能一边性高潮一边还能跑那么快的」',
+      //       '某观众「翻着白眼跑得歪歪斜斜，跑道都湿了——这可是有马纪念，能不能尊重点！」',
+      //     ][v],
+      // },
     ];
     const buffer = [];
-    options.forEach((a, i) =>
+    buffer.push({
+      config: {
+        content: `游戏选项`,
+      },
+      type: 'divider',
+    });
+    let val_index;
+    options.forEach((e, i) => {
+      const val = era.get(`flag:${e.key}`);
+      val_index = e.options.findIndex((o) => o.v === val);
       buffer.push(
         {
           type: 'text',
-          content: a[0],
+          content: e.label || e.key,
           config: { width: 4 },
         },
-        ...a[2].map((o, j) => {
+        ...e.options.map((o, j) => {
           return {
             accelerator: 100 + i * 10 + j,
             config: {
-              buttonType: a[1] === o[0] ? 'warning' : 'info',
+              buttonType: val === o.v ? 'warning' : 'info',
               width: 4,
             },
-            content: o[1],
+            content: o.l,
             type: 'button',
           };
         }),
-        ...(i === options.length - 1
-          ? [
-              {
-                accelerator: 998,
-                config: { align: 'right', offset: 4, width: 4 },
-                content: '进入游戏',
-                type: 'button',
-              },
-              {
-                accelerator: 999,
-                config: { align: 'right', width: 4 },
-                content: '返回标题',
-                type: 'button',
-              },
-            ]
-          : [
-              {
-                config: { width: 24 - 4 * (a[2].length + 1) },
-                content: '',
-                type: 'text',
-              },
-            ]),
-      ),
+      );
+      if (i < options.length - 1) {
+        buffer.push({
+          config: { width: 20, offset: 4 },
+          content:
+            e.tip && (selected_setting === undefined || i === selected_setting)
+              ? e.tip(val_index)
+              : '',
+          type: 'text',
+        });
+      }
+    });
+    buffer.push(
+      {
+        accelerator: 998,
+        config: { align: 'right', offset: 4, width: 4 },
+        content: '进入游戏',
+        type: 'button',
+      },
+      {
+        accelerator: 999,
+        config: { align: 'right', width: 4 },
+        content: '返回标题',
+        type: 'button',
+      },
     );
+    if (
+      selected_setting === undefined ||
+      selected_setting === options.length - 1
+    ) {
+      buffer.push({
+        config: { width: 20, offset: 4 },
+        content: options.at(-1)['tip'] ? options.at(-1)['tip'](val_index) : '',
+        type: 'text',
+      });
+    }
     era.printMultiColumns(buffer);
 
     const ret = await era.input();
     switch (ret) {
-      case 100:
-        era.set('flag:训练难度', 25);
-        break;
-      case 101:
-        era.set('flag:训练难度', 0);
-        break;
-      case 102:
-        era.set('flag:训练难度', -25);
-        break;
-      case 110:
-        era.set('flag:训练加成', 25);
-        break;
-      case 111:
-        era.set('flag:训练加成', 0);
-        break;
-      case 112:
-        era.set('flag:训练加成', -25);
-        break;
-      case 120:
-        era.set('flag:比赛难度', -25);
-        break;
-      case 121:
-        era.set('flag:比赛难度', 0);
-        break;
-      case 122:
-        era.set('flag:比赛难度', 25);
-        break;
-      case 130:
-      case 131:
-        era.set('flag:可能伤病', ret - 130);
-        break;
-      case 140:
-        era.set('flag:马娘初始好感', 225);
-        break;
-      case 141:
-        era.set('flag:马娘初始好感', 150);
-        break;
-      case 142:
-        era.set('flag:马娘初始好感', 75);
-        break;
-      case 143:
-        era.set('flag:马娘初始好感', 0);
-        break;
-      case 144:
-        era.set('flag:马娘初始好感', -100);
-        break;
-      case 150:
-        era.set('flag:马娘初始爱慕', 0);
-        break;
-      case 151:
-        era.set('flag:马娘初始爱慕', 25);
-        break;
-      case 152:
-        era.set('flag:马娘初始爱慕', 50);
-        break;
-      case 160:
-        era.set('flag:好感上升加成', 50);
-        break;
-      case 161:
-        era.set('flag:好感上升加成', 0);
-        break;
-      case 162:
-        era.set('flag:好感上升加成', -50);
-        break;
-      case 170:
-      case 171:
-        era.set('flag:爱慕上升加成', 50 * (ret - 170));
-        break;
-      case 180:
-      case 181:
-        era.set('flag:爱慕限制', 181 - ret);
-        break;
-      case 190:
-        era.set('flag:睡奸限制', 0);
-        era.set('flag:地下室限制', 0);
-        break;
-      case 191:
-        era.set('flag:睡奸限制', 4);
-        era.set('flag:地下室限制', 1);
-        break;
-      case 192:
-        era.set('flag:睡奸限制', 5);
-        era.set('flag:地下室限制', 2);
-        break;
-      case 193:
-        era.set('flag:睡奸限制', 6);
-        era.set('flag:地下室限制', 3);
-        break;
-      case 200:
-        era.set('flag:回合声望惩罚', 1);
-        break;
-      case 201:
-        era.set('flag:回合声望惩罚', 0);
-        break;
-      case 202:
-        era.set('flag:回合声望惩罚', -1);
-        break;
-      case 210:
-        era.set('flag:回合好感惩罚', 10);
-        break;
-      case 211:
-        era.set('flag:回合好感惩罚', 0);
-        break;
-      case 212:
-        era.set('flag:回合好感惩罚', -25);
-        break;
-      case 220:
-      case 221:
-        era.set('flag:回合爱慕惩罚', ret - 220);
-        break;
-      case 230:
-      case 231:
-        era.set('flag:后代爱慕限制', ret - 230);
-        break;
-      case 240:
-      case 241:
-      case 242:
-      case 243:
-        era.set('flag:游戏结束', ret - 240);
-        break;
-      case 250:
-        era.set('flag:角色性别', 0);
-        break;
-      case 251:
-        era.set('flag:角色性别', 10);
-        break;
-      case 252:
-        era.set('flag:角色性别', 1);
-        break;
-      case 260:
-      case 261:
-        era.set('flag:自带钝感', ret - 260);
-        break;
-      case 270:
-      case 271:
-      case 272:
-        era.set('flag:自带特性', 271 - ret);
-        break;
-      case 280:
-        era.set('flag:道具价格', -50);
-        break;
-      case 281:
-        era.set('flag:道具价格', 0);
-        break;
-      case 282:
-        era.set('flag:道具价格', 100);
-        break;
-      case 290:
-        era.set('flag:宝珠消耗量', -50);
-        break;
-      case 291:
-        era.set('flag:宝珠消耗量', 0);
-        break;
-      case 292:
-        era.set('flag:宝珠消耗量', 100);
-        break;
-      case 300:
-        era.set('flag:因子消耗量', -50);
-        break;
-      case 301:
-        era.set('flag:因子消耗量', 0);
-        break;
-      case 302:
-        era.set('flag:因子消耗量', 100);
-        break;
-      case 310:
-      case 311:
-        era.set('flag:雷普抵抗', ret - 310);
-        break;
-      case 320:
-      case 321:
-        era.set('flag:道具影响', -25 * (ret - 320));
-        break;
       case 998:
         flag_setting = false;
         break;
       case 999:
         return true;
       default:
+        if (ret >= 100) {
+          const selected_index = ret % 10;
+          selected_setting = (ret - 100 - selected_index) / 10;
+          era.set(
+            `flag:${options[selected_setting].key}`,
+            options[selected_setting].options[selected_index].v,
+          );
+        } else {
+          selected_setting = undefined;
+        }
         break;
     }
-    theme = ret;
-    switch (theme) {
-      case 0:
-        era.set('flag:训练难度', 25);
-        era.set('flag:训练加成', 25);
-        era.set('flag:比赛难度', -25);
-        era.set('flag:可能伤病', 0);
-        era.set('flag:马娘初始好感', 150);
-        era.set('flag:马娘初始爱慕', 0);
-        era.set('flag:好感上升加成', 0);
-        era.set('flag:爱慕上升加成', 0);
-        era.set('flag:爱慕限制', 1);
-        era.set('flag:睡奸限制', 0);
-        era.set('flag:地下室限制', 0);
-        era.set('flag:回合声望惩罚', 0);
-        era.set('flag:回合好感惩罚', 10);
-        era.set('flag:回合爱慕惩罚', 0);
-        era.set('flag:游戏结束', 0);
-        era.set('flag:后代爱慕限制', 0);
-        era.set('flag:角色性别', 0);
-        era.set('flag:自带钝感', 0);
-        era.set('flag:自带特性', 0);
-        era.set('flag:道具价格', -50);
-        era.set('flag:宝珠消耗量', -50);
-        era.set('flag:因子消耗量', -50);
-        era.set('flag:雷普抵抗', 1);
-        era.set('flag:道具影响', -25);
-        era.set('flag:声望不足替换', 0);
-        era.set('flag:压力获取', 0);
-        era.set('flag:不忠惩罚', 1);
-        era.set('flag:读档对话', 0);
-        break;
-      case 1:
-        era.set('flag:训练难度', 0);
-        era.set('flag:训练加成', 0);
-        era.set('flag:比赛难度', 0);
-        era.set('flag:可能伤病', 1);
-        era.set('flag:马娘初始好感', 75);
-        era.set('flag:马娘初始爱慕', 0);
-        era.set('flag:好感上升加成', 0);
-        era.set('flag:爱慕上升加成', 0);
-        era.set('flag:爱慕限制', 1);
-        era.set('flag:睡奸限制', 0);
-        era.set('flag:地下室限制', 0);
-        era.set('flag:回合声望惩罚', -1);
-        era.set('flag:回合好感惩罚', 0);
-        era.set('flag:回合爱慕惩罚', 0);
-        era.set('flag:游戏结束', 0);
-        era.set('flag:后代爱慕限制', 0);
-        era.set('flag:角色性别', 0);
-        era.set('flag:自带钝感', 0);
-        era.set('flag:自带特性', 0);
-        era.set('flag:道具价格', 0);
-        era.set('flag:宝珠消耗量', 0);
-        era.set('flag:因子消耗量', 0);
-        era.set('flag:雷普抵抗', 1);
-        era.set('flag:道具影响', -25);
-        era.set('flag:声望不足替换', 0);
-        era.set('flag:压力获取', 1);
-        era.set('flag:不忠惩罚', 1);
-        era.set('flag:读档对话', 0);
-        break;
-      case 2:
-        era.set('flag:训练难度', -25);
-        era.set('flag:训练加成', -25);
-        era.set('flag:比赛难度', 25);
-        era.set('flag:可能伤病', 1);
-        era.set('flag:马娘初始好感', 75);
-        era.set('flag:马娘初始爱慕', 0);
-        era.set('flag:好感上升加成', 0);
-        era.set('flag:爱慕上升加成', 50);
-        era.set('flag:爱慕限制', 0);
-        era.set('flag:睡奸限制', 6);
-        era.set('flag:地下室限制', 3);
-        era.set('flag:回合声望惩罚', -1);
-        era.set('flag:回合好感惩罚', -25);
-        era.set('flag:回合爱慕惩罚', 0);
-        era.set('flag:游戏结束', 1);
-        era.set('flag:后代爱慕限制', 0);
-        era.set('flag:角色性别', 0);
-        era.set('flag:自带钝感', 0);
-        era.set('flag:自带特性', 0);
-        era.set('flag:道具价格', 100);
-        era.set('flag:宝珠消耗量', 100);
-        era.set('flag:因子消耗量', 100);
-        era.set('flag:雷普抵抗', 1);
-        era.set('flag:道具影响', -25);
-        era.set('flag:声望不足替换', 1);
-        era.set('flag:压力获取', 1);
-        era.set('flag:不忠惩罚', 0);
-        era.set('flag:读档对话', 1);
-        break;
-      case 3:
-        era.set('flag:训练难度', -25);
-        era.set('flag:训练加成', -25);
-        era.set('flag:比赛难度', 25);
-        era.set('flag:可能伤病', 1);
-        era.set('flag:马娘初始好感', -100);
-        era.set('flag:马娘初始爱慕', 0);
-        era.set('flag:好感上升加成', -50);
-        era.set('flag:爱慕上升加成', 0);
-        era.set('flag:爱慕限制', 1);
-        era.set('flag:睡奸限制', 4);
-        era.set('flag:地下室限制', 1);
-        era.set('flag:回合声望惩罚', -1);
-        era.set('flag:回合好感惩罚', -25);
-        era.set('flag:回合爱慕惩罚', 0);
-        era.set('flag:游戏结束', 3);
-        era.set('flag:后代爱慕限制', 0);
-        era.set('flag:角色性别', 0);
-        era.set('flag:自带钝感', 1);
-        era.set('flag:自带特性', 0);
-        era.set('flag:道具价格', 100);
-        era.set('flag:宝珠消耗量', 100);
-        era.set('flag:因子消耗量', 100);
-        era.set('flag:雷普抵抗', 1);
-        era.set('flag:道具影响', -25);
-        era.set('flag:声望不足替换', 1);
-        era.set('flag:压力获取', 1);
-        era.set('flag:不忠惩罚', 0);
-        era.set('flag:读档对话', 1);
-        break;
-      case 4:
-        era.set('flag:训练难度', 25);
-        era.set('flag:训练加成', 25);
-        era.set('flag:比赛难度', -25);
-        era.set('flag:可能伤病', 0);
-        era.set('flag:马娘初始好感', 225);
-        era.set('flag:马娘初始爱慕', 50);
-        era.set('flag:好感上升加成', -50);
-        era.set('flag:爱慕上升加成', 50);
-        era.set('flag:爱慕限制', 0);
-        era.set('flag:睡奸限制', 4);
-        era.set('flag:地下室限制', 2);
-        era.set('flag:回合声望惩罚', -1);
-        era.set('flag:回合好感惩罚', -25);
-        era.set('flag:回合爱慕惩罚', 1);
-        era.set('flag:游戏结束', 0);
-        era.set('flag:后代爱慕限制', 1);
-        era.set('flag:角色性别', 0);
-        era.set('flag:自带钝感', 0);
-        era.set('flag:自带特性', 0);
-        era.set('flag:道具价格', 0);
-        era.set('flag:宝珠消耗量', 0);
-        era.set('flag:因子消耗量', 0);
-        era.set('flag:雷普抵抗', 1);
-        era.set('flag:道具影响', -25);
-        era.set('flag:声望不足替换', 0);
-        era.set('flag:压力获取', 0);
-        era.set('flag:不忠惩罚', 1);
-        era.set('flag:读档对话', 1);
-        break;
-      case 5:
-        era.set('flag:训练难度', 25);
-        era.set('flag:训练加成', 25);
-        era.set('flag:比赛难度', -25);
-        era.set('flag:可能伤病', 0);
-        era.set('flag:马娘初始好感', 225);
-        era.set('flag:马娘初始爱慕', 50);
-        era.set('flag:好感上升加成', -50);
-        era.set('flag:爱慕上升加成', 50);
-        era.set('flag:爱慕限制', 0);
-        era.set('flag:睡奸限制', 4);
-        era.set('flag:地下室限制', 2);
-        era.set('flag:回合声望惩罚', -1);
-        era.set('flag:回合好感惩罚', -25);
-        era.set('flag:回合爱慕惩罚', 1);
-        era.set('flag:游戏结束', 0);
-        era.set('flag:后代爱慕限制', 1);
-        era.set('flag:角色性别', 10);
-        era.set('flag:自带钝感', 0);
-        era.set('flag:自带特性', 0);
-        era.set('flag:道具价格', 0);
-        era.set('flag:宝珠消耗量', 0);
-        era.set('flag:因子消耗量', 0);
-        era.set('flag:雷普抵抗', 1);
-        era.set('flag:道具影响', -25);
-        era.set('flag:声望不足替换', 1);
-        era.set('flag:压力获取', 0);
-        era.set('flag:不忠惩罚', 1);
-        era.set('flag:读档对话', 1);
-        break;
-      case 6:
-        era.set('flag:训练难度', 25);
-        era.set('flag:训练加成', 25);
-        era.set('flag:比赛难度', -25);
-        era.set('flag:可能伤病', 0);
-        era.set('flag:马娘初始好感', 150);
-        era.set('flag:马娘初始爱慕', 0);
-        era.set('flag:好感上升加成', 0);
-        era.set('flag:爱慕上升加成', 0);
-        era.set('flag:爱慕限制', 1);
-        era.set('flag:睡奸限制', 0);
-        era.set('flag:地下室限制', 0);
-        era.set('flag:回合声望惩罚', 0);
-        era.set('flag:回合好感惩罚', 10);
-        era.set('flag:回合爱慕惩罚', 0);
-        era.set('flag:游戏结束', 0);
-        era.set('flag:后代爱慕限制', 0);
-        era.set('flag:角色性别', 0);
-        era.set('flag:自带钝感', 0);
-        era.set('flag:自带特性', 1);
-        era.set('flag:道具价格', 0);
-        era.set('flag:宝珠消耗量', -50);
-        era.set('flag:因子消耗量', 0);
-        era.set('flag:雷普抵抗', 0);
-        era.set('flag:道具影响', 0);
-        era.set('flag:声望不足替换', 0);
-        era.set('flag:压力获取', 0);
-        era.set('flag:不忠惩罚', 0);
-        era.set('flag:读档对话', 0);
-        break;
-      case 7:
-        era.set('flag:训练难度', 25);
-        era.set('flag:训练加成', 25);
-        era.set('flag:比赛难度', -25);
-        era.set('flag:可能伤病', 0);
-        era.set('flag:马娘初始好感', 225);
-        era.set('flag:马娘初始爱慕', 50);
-        era.set('flag:好感上升加成', -50);
-        era.set('flag:爱慕上升加成', 50);
-        era.set('flag:爱慕限制', 0);
-        era.set('flag:睡奸限制', 6);
-        era.set('flag:地下室限制', 2);
-        era.set('flag:回合声望惩罚', -1);
-        era.set('flag:回合好感惩罚', -25);
-        era.set('flag:回合爱慕惩罚', 1);
-        era.set('flag:游戏结束', 0);
-        era.set('flag:后代爱慕限制', 1);
-        era.set('flag:角色性别', 1);
-        era.set('flag:自带钝感', 0);
-        era.set('flag:自带特性', 0);
-        era.set('flag:道具价格', 0);
-        era.set('flag:宝珠消耗量', 0);
-        era.set('flag:因子消耗量', 0);
-        era.set('flag:雷普抵抗', 1);
-        era.set('flag:道具影响', -25);
-        era.set('flag:声望不足替换', 1);
-        era.set('flag:压力获取', 0);
-        era.set('flag:不忠惩罚', 1);
-        era.set('flag:读档对话', 1);
-        break;
-      default:
-        theme = 10;
-        break;
-    }
+    set_from_theme((theme = ret));
   }
   return false;
-};
+}
+
+module.exports = page_settings;
