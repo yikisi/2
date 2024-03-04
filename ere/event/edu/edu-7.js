@@ -10,7 +10,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const {
   begin_and_init_ero,
-  end_ero_and_train,
+  end_ero_and_show_result,
 } = require('#/system/ero/sys-prepare-ero');
 
 const print_ero_page = require('#/page/page-ero');
@@ -270,12 +270,16 @@ handlers[event_hooks.school_atrium] = async (
       );
 
       era.set(
+        'base:7:性欲',
+        Math.max(era.get('base:7:性欲'), lust_border.itch),
+      );
+      era.set(
         'base:49:性欲',
-        Math.max(era.get('base:49:性欲'), lust_border.absent_mind),
+        Math.max(era.get('base:49:性欲'), lust_border.itch),
       );
       begin_and_init_ero(0, 7, 49);
       await print_ero_page(7);
-      end_ero_and_train();
+      await end_ero_and_show_result(true);
     }
 
     get_attr_and_print_in_event(7, [0, 0, 0, 5, 0], 0) &&
@@ -568,13 +572,13 @@ handlers[event_hooks.school_rooftop] = async (
 
   await festa.say_and_wait('当然是……');
   era.println();
-  era.printButton('「限定猜拳……！」', 1);
-  era.printButton('「皇帝牌……！」', 2);
+  era.printButton(`${festa.name}「限定猜拳……！」`, 1);
+  era.printButton(`${festa.name}「皇帝牌……！」`, 2);
   if (
     era.get('cflag:49:招募状态') === recruit_flags.yes &&
     era.get('love:49') >= 50
   ) {
-    era.printButton('「……性爱♡」', 3);
+    era.printButton(`${festa.name}「……性爱♡」`, 3);
   }
   let ret = await era.input();
   if (ret === 3) {
@@ -591,7 +595,7 @@ handlers[event_hooks.school_rooftop] = async (
     );
     begin_and_init_ero(0, 7, 49);
     await print_ero_page(49);
-    end_ero_and_train();
+    await end_ero_and_show_result(true);
   } else {
     await era.printAndWait(
       ret === 1

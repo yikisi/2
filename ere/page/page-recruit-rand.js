@@ -31,7 +31,9 @@ async function print_rec_page() {
     5,
   );
   today_list.push(sys_get_star_premium_draw().chara);
-  today_list = today_list.filter((e, i, l) => e && l.indexOf(e) === i);
+  today_list = today_list
+    .filter((e, i, l) => e && l.indexOf(e) === i)
+    .sort((a, b) => a - b);
   await era.clear();
   print_page_header();
   era.drawLine();

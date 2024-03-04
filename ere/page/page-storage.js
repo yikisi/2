@@ -70,7 +70,13 @@ module.exports = async () => {
       flag_storage = false;
     } else {
       const name = era.get(`itemname:${ret}`).toUpperCase();
-      era.print(`${shop_desc[name] || name}\n\n`);
+      era.print(name);
+      const desc = shop_desc[shop_desc[name]] || shop_desc[name];
+      if (desc) {
+        era.print(`\n${desc}\n`);
+      } else {
+        era.println();
+      }
       if (handlers[ret]) {
         (await handlers[ret]()) && (buffer = get_item_list());
       } else {

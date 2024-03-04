@@ -286,9 +286,13 @@ module.exports = async (item_list) => {
       switch (sub_code) {
         case 0:
           name = era.get(`itemname:${selected_item}`).toUpperCase();
-          await era.printAndWait(
-            shop_desc[shop_desc[name]] || shop_desc[name] || name,
-          );
+          era.print(name);
+          name = shop_desc[shop_desc[name]] || shop_desc[name];
+          if (name) {
+            await era.printAndWait(`\n${name}`);
+          } else {
+            await era.waitAnyKey();
+          }
           break;
         case 1:
           to_buy[selected_item] = Math.max(to_buy[selected_item] - 10, 1);

@@ -14,7 +14,8 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const LimitLoveStatus = require('#/data/love-limit-status');
-const { attr_enum } = require('#/data/train-const');
+const { attr_enum, pressure_border } = require('#/data/train-const');
+const { lust_border } = require('#/data/ero/orgasm-const');
 
 /** @param {Record<string,function>} handlers */
 module.exports = (handlers) => {
@@ -136,6 +137,61 @@ module.exports = (handlers) => {
       ]);
       era.add(`base:${aim}:药物残留`, 10);
       era.add('item:提神剂', -1);
+      return true;
+    }
+  };
+
+  handlers[705] = async () => {
+    const aim = await select_target_in_storage(
+      705,
+      (chara_id) => era.get(`base:${chara_id}:压力`) >= pressure_border.unhappy,
+    );
+    if (undefined !== aim) {
+      const aim_chara = get_chara_talk(aim);
+      await era.printAndWait([aim_chara.get_colored_name(), ' 的压力降低了……']);
+      sys_change_motivation(
+        aim,
+        Math.max(era.get(`cflag:${aim}:干劲`) - 1, -2),
+      ) && (await era.waitAnyKey());
+      era.add(`base:${aim}:压力`, -2500);
+      era.add(`base:${aim}:药物残留`, 40);
+      era.add('item:705', -1);
+      return true;
+    }
+  };
+
+  handlers[706] = async () => {
+    const aim = await select_target_in_storage(
+      706,
+      (chara_id) => era.get(`base:${chara_id}:性欲`) >= lust_border.itch,
+    );
+    if (undefined !== aim) {
+      const aim_chara = get_chara_talk(aim);
+      await era.printAndWait([aim_chara.get_colored_name(), ' 的性欲降低了……']);
+      sys_change_motivation(
+        aim,
+        Math.max(era.get(`cflag:${aim}:干劲`) - 1, -2),
+      ) && (await era.waitAnyKey());
+      era.add(`base:${aim}:性欲`, -1500);
+      era.add(`base:${aim}:药物残留`, 40);
+      era.add('item:706', -1);
+      return true;
+    }
+  };
+
+  handlers[707] = async () => {
+    const aim = await select_target_in_storage(
+      707,
+      (chara_id) =>
+        era.get(`base:${chara_id}:压力`) >= pressure_border.unhappy ||
+        era.get(`base:${chara_id}:性欲`) >= lust_border.itch,
+    );
+    if (aim !== undefined) {
+      const aim_chara = get_chara_talk(aim);
+      await era.printAndWait([aim_chara.get_colored_name(), ' 变得更冷静了……']);
+      era.add(`base:${aim}:压力`, -1200);
+      era.add(`base:${aim}:性欲`, -800);
+      era.add('item:707', -1);
       return true;
     }
   };

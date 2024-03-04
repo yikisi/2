@@ -341,7 +341,7 @@ module.exports = async () => {
               '、',
               {
                 color: get_chara_color(205),
-                content: '金星公园',
+                content: '卓芙',
               },
             ],
             '梦露',

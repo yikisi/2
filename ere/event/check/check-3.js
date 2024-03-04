@@ -26,6 +26,7 @@ const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+/** @type {Record<string,function(Record<string,*>)>} */
 const handlers = {};
 
 const aim_races = {};

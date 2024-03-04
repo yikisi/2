@@ -637,6 +637,9 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         701,
         702,
         703,
+        705,
+        706,
+        707,
         ...new Array(7).fill(0).map((_, i) => {
           return {
             id: 750 + i,

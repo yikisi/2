@@ -874,9 +874,18 @@ async function sys_next_week() {
           in_team_list.filter(
             (e) =>
               era.get('cflag:0:位置') === era.get(`cflag:${e}:位置`) &&
+              era.get('flag:当前回合数') - era.get(`cflag:${e}:育成回合计时`) <
+                3 * 48,
+          ),
+        ) ||
+        get_random_entry(
+          in_team_list.filter(
+            (e) =>
+              era.get('cflag:0:位置') === era.get(`cflag:${e}:位置`) &&
               era.get(`cflag:${e}:成长阶段`) >= 1,
           ),
-        ),
+        ) ||
+        0,
     );
   }
   era.set('flag:床伴', 0);
