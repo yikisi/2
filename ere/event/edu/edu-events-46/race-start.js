@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_falcon } = require('#/utils/chara-talk-factory');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { race_enum } = require('#/data/race/race-const');
 const CharaTalk = require('#/utils/chara-talk');
@@ -12,7 +12,7 @@ const CharaTalk = require('#/utils/chara-talk');
  */
 module.exports = async (hook, extra_flag) => {
   const falcon = new CharaTalk(46),
-    me = get_falcon(0),
+    me = get_chara_talk(0),
     edu_weeks = era.get('cflag:46:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name(`准备阶段！`, falcon);

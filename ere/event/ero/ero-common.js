@@ -748,7 +748,7 @@ handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {{[attacker]:number,[defender]:number,shown:boolean}} extra_flag
+ * @param {{[attacker]:number,[defender]:number,[shown]:boolean}} extra_flag
  * @returns {Promise<*>}
  */
 module.exports = async (chara_id, hook, extra_flag) => {

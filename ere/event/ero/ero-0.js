@@ -331,41 +331,39 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
         );
       }
       await era.waitAnyKey();
+    } else if (unexpected_pregnant === unexpected_pregnant_enum.mother_sleep) {
+      await era.printAndWait([
+        mother.get_colored_name(),
+        ' 对自己如何怀孕完全没有印象，一想到谁都有可能是犯人就让 ',
+        mother.get_colored_name(),
+        ' 为之胆寒……',
+      ]);
     } else {
-      if (unexpected_pregnant === unexpected_pregnant_enum.mother_sleep) {
+      await era.printAndWait([
+        '在短暂的慌乱后，',
+        mother.get_colored_name(),
+        ' 还是决定向 ',
+        father.get_colored_name(),
+        ' 报告消息',
+      ]);
+      if (unexpected_pregnant === unexpected_pregnant_enum.father_sleep) {
         await era.printAndWait([
-          mother.get_colored_name(),
-          ' 对自己如何怀孕完全没有印象，一想到谁都有可能是犯人就让 ',
-          mother.get_colored_name(),
-          ' 为之胆寒……',
+          father.get_colored_name(),
+          ' 再三询问确认，还是得到了孩子是自己骨肉的回答。',
+        ]);
+        await era.printAndWait([
+          '但 ',
+          father.get_colored_name(),
+          ' 对此毫无印象……',
         ]);
       } else {
         await era.printAndWait([
-          '在短暂的慌乱后，',
-          mother.get_colored_name(),
-          ' 还是决定向 ',
+          ' 在同样的惊慌后，平静下来的 ',
           father.get_colored_name(),
-          ' 报告消息',
+          ' 向 ',
+          mother.get_colored_name(),
+          ' 承诺一定会负起父亲的责任……',
         ]);
-        if (unexpected_pregnant === unexpected_pregnant_enum.father_sleep) {
-          await era.printAndWait([
-            father.get_colored_name(),
-            ' 再三询问确认，还是得到了孩子是自己骨肉的回答。',
-          ]);
-          await era.printAndWait([
-            '但 ',
-            father.get_colored_name(),
-            ' 对此毫无印象……',
-          ]);
-        } else {
-          await era.printAndWait([
-            ' 在同样的惊慌后，平静下来的 ',
-            father.get_colored_name(),
-            ' 向 ',
-            mother.get_colored_name(),
-            ' 承诺一定会负起父亲的责任……',
-          ]);
-        }
       }
     }
   }

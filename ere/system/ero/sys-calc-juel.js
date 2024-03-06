@@ -209,7 +209,7 @@ module.exports = {
           } else if (
             pleasure_params >= 1250 &&
             total_ex >= 2 &&
-            !pleasure_mark
+            pleasure_mark < 1
           ) {
             era.set(`nowex:${chara_id}:欢愉获取`, 1);
           }
@@ -217,7 +217,7 @@ module.exports = {
         if (
           ((got_meek_juels >= 20000 || meek_juels >= 3000) && meek_mark < 3) ||
           ((got_meek_juels >= 15000 || meek_juels >= 2250) && meek_mark < 2) ||
-          ((got_meek_juels >= 10000 || meek_juels >= 1500) && !meek_mark)
+          ((got_meek_juels >= 10000 || meek_juels >= 1500) && meek_mark < 1)
         ) {
           era.set(`nowex:${chara_id}:同心获取`, 1);
         }
@@ -230,7 +230,7 @@ module.exports = {
           era.set(`nowex:${chara_id}:苦痛获取`, 2 - pain_mark);
         } else if (
           (got_pain_juels >= 7500 || pain_params >= 1250) &&
-          !pain_mark
+          pain_mark < 1
         ) {
           era.set(`nowex:${chara_id}:苦痛获取`, 1);
         }
@@ -246,7 +246,7 @@ module.exports = {
           era.set(`nowex:${chara_id}:羞耻获取`, 2 - shame_mark);
         } else if (
           (got_shame_juels >= 5000 || shame_params >= 1250) &&
-          !shame_mark
+          shame_mark < 1
         ) {
           era.set(`nowex:${chara_id}:羞耻获取`, 1);
         }
@@ -259,7 +259,7 @@ module.exports = {
           era.set(`nowex:${chara_id}:反抗获取`, 2 - hate_mark);
         } else if (
           (got_hate_juels >= 5000 || hate_juels >= 1600) &&
-          !hate_mark
+          hate_mark < 1
         ) {
           era.set(`nowex:${chara_id}:反抗获取`, 1);
         }

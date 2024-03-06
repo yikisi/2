@@ -46,7 +46,6 @@ handlers[check_stages.love_event] = (chara_id) =>
 handlers[check_stages.prison] = (chara_id) => {
   const love = era.get(`love:${chara_id}`),
     prison_limit = era.get('flag:极端行为限制'),
-    punish_level = era.get('flag:惩戒力度'),
     relation = era.get(`relation:${chara_id}:0`);
   let delta = love * prison_limit - relation;
   if (
@@ -63,10 +62,12 @@ handlers[check_stages.prison] = (chara_id) => {
       // 地下室限制最大倍率3倍，3*100-0=300，好感在0以下必然地下室
       (delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)) -
       0.25 * get_action_debuff(chara_id));
-  if (punish_level === 2) {
-    ratio /= 10;
-  } else {
-    ratio /= 20;
+  switch (era.get('flag:惩戒力度')) {
+    case 2:
+      ratio /= 10;
+      break;
+    case 3:
+      ratio /= 20;
   }
   era.logger.debug(`角色 ${chara_id} 地下室：${(ratio * 100).toFixed(2)}%`);
   return ratio >= 1 || Math.random() < ratio;

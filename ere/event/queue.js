@@ -35,22 +35,26 @@ function filter_event_object(condition) {
 
 module.exports = {
   /**
-   * @param {number} stage_id
+   * @param {number} stage
    * @param {EventObject} event_object
    */
-  add_event(stage_id, event_object) {
-    if (!event_object) {
+  add_event(stage, event_object) {
+    if (
+      !event_object ||
+      event_object.chara_id === undefined ||
+      event_object.type === undefined
+    ) {
       era.logger.error('null EventObject!');
       return;
     }
     if (!queue) {
       this.init();
     }
-    if (!queue[stage_id]) {
-      queue[stage_id] = [];
+    if (!queue[stage]) {
+      queue[stage] = [];
     }
-    (temp_queue[stage_id] || queue[stage_id]).push(event_object);
-    new EventMarks(event_object.chara_id).add(stage_id);
+    (temp_queue[stage] || queue[stage]).push(event_object);
+    new EventMarks(event_object.chara_id).add(stage);
   },
   cb_enum,
   /**

@@ -16,7 +16,7 @@ cb_dict[cb_enum.love] = require('#/system/script/sys-call-love-script');
  */
 function sys_get_random_event(stage, random) {
   const event_object = get_random_event_object(stage, random);
-  if (event_object) {
+  if (event_object && cb_dict[event_object.type]) {
     return async (extra_flag) =>
       await cb_dict[event_object.type](
         event_object.chara_id,
