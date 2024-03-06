@@ -196,6 +196,22 @@ module.exports = (handlers) => {
     }
   };
 
+  handlers[708] = async () => {
+    const aim = await select_target_in_storage(
+      708,
+      (chara_id) =>
+        chara_id > 0 && era.get(`base:${chara_id}:性欲`) < lust_border.max,
+    );
+    if (aim !== undefined) {
+      const aim_chara = get_chara_talk(aim);
+      await era.printAndWait([aim_chara.get_colored_name(), ' 变得有点兴奋……']);
+      era.add(`base:${aim}:压力`, -500);
+      era.add(`base:${aim}:性欲`, 2000);
+      era.add('item:708', -1);
+      return true;
+    }
+  };
+
   handlers[850] = async () => {
     const ret = await select_target_in_storage(850, (e) =>
       era.get(`status:${e}:发胖`),

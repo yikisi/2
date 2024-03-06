@@ -357,6 +357,21 @@ function init_ero(...ids) {
     is_raping_in_sleep && era.add(`exp:${chara_id}:睡奸次数`, 1);
     era.set(`tcvar:${chara_id}:性欲缓存`, era.get(`base:${chara_id}:性欲`));
     era.set(`tcvar:${chara_id}:压力缓存`, era.get(`base:${chara_id}:压力`));
+    let temp;
+    era.set(
+      `tcvar:${chara_id}:体力缓存`,
+      Math.max(
+        Math.min((temp = era.get(`base:${chara_id}:体力`)) / 2, temp - 100),
+        1,
+      ),
+    );
+    era.set(
+      `tcvar:${chara_id}:精力缓存`,
+      Math.max(
+        Math.min((temp = era.get(`base:${chara_id}:精力`)) / 2, temp - 100),
+        1,
+      ),
+    );
     if (era.get(`status:${chara_id}:超马跳Z`)) {
       update_temp_base(chara_id, 0.4);
     }
@@ -489,6 +504,20 @@ function end_ero(skip_juels, log_juels, ids) {
     }
     era.get(`tcvar:${chara_id}:精力不济`) &&
       era.set(`base:${chara_id}:精力`, 0);
+    era.set(
+      `base:${chara_id}:体力`,
+      Math.min(
+        era.get(`base:${chara_id}:体力`),
+        era.get(`tcvar:${chara_id}:体力缓存`),
+      ),
+    );
+    era.set(
+      `base:${chara_id}:精力`,
+      Math.min(
+        era.get(`base:${chara_id}:精力`),
+        era.get(`tcvar:${chara_id}:精力缓存`),
+      ),
+    );
     if (chara_id && is_slave) {
       sys_change_fame(
         Math.max(

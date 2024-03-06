@@ -16,7 +16,7 @@ const { part_names4item, part_names } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /**
- * @author O口口口口口
+ * @author 黑奴队长
  * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
  */
 module.exports = (handlers) => {

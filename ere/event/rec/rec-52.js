@@ -547,6 +547,7 @@ module.exports = {
     era.println();
 
     era.set('cflag:52:招募状态', recruit_flags.yes);
+    era.set('callname:52:0', '训练员');
     era.set('flag:当前互动角色', 52);
     await era.printAndWait([
       '成为 ',

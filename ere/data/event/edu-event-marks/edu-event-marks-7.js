@@ -11,10 +11,8 @@ class GoldShipEduMarks extends EduEventMarks {
   shoubu;
   // 关键词
   keywords;
-  // 称号检查 - 六次G1胜利（包括皋月赏、菊花赏和宝冢纪念）
-  title_check;
   // 称号检查 - 两次凯旋门参战
-  title_check2;
+  title_check;
 
   constructor() {
     super(7);

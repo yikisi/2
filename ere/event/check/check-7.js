@@ -16,8 +16,7 @@ const check_stages = require('#/data/event/check-stages');
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
-const { class_enum } = require('#/data/race/model/race-info');
-const { race_enum, race_infos } = require('#/data/race/race-const');
+const { race_enum } = require('#/data/race/race-const');
 
 const handlers = {};
 
@@ -125,15 +124,8 @@ handlers[check_stages.aim_check] = function () {
 
 /** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
 handlers[check_stages.after_race] = (extra_flag) => {
-  const event_marks = new GoldShipEduMarks();
-  if (
-    extra_flag.rank === 1 &&
-    race_infos[extra_flag.race].race_class === class_enum.G1
-  ) {
-    event_marks.title_check++;
-  }
   if (extra_flag.race === race_enum.prix_lat) {
-    event_marks.title_check2++;
+    new GoldShipEduMarks().title_check++;
   }
 };
 
@@ -152,11 +144,12 @@ handlers[check_stages.title_check] = (extra_flag) => {
   const c = get_chara_talk(7).color,
     event_marks = new GoldShipEduMarks();
   if (
-    event_marks.title_check >= 6 &&
     check_aim_race(races, race_enum.sats_sho, 1, 1) &&
     check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
-    (check_aim_race(races, race_enum.takz_kin, 1, 1) ||
-      check_aim_race(races, race_enum.takz_kin, 2, 1))
+    check_aim_race(races, race_enum.tenn_spr, 2, 1) &&
+    check_aim_race(races, race_enum.takz_kin, 2, 1) &&
+    check_aim_race(races, race_enum.tenn_sho, 2, 1) &&
+    check_aim_race(races, race_enum.arim_kin, 2, 1)
   ) {
     extra_flag.titles.push({
       c,
@@ -164,7 +157,7 @@ handlers[check_stages.title_check] = (extra_flag) => {
     });
     extra_flag.aim_check && sys_personal_achievement.set(7, 1);
   }
-  if (event_marks.title_check2 === 2) {
+  if (event_marks.title_check === 2) {
     extra_flag.titles.push({
       c,
       n: '粉丝服务',

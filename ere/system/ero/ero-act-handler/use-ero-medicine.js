@@ -65,23 +65,18 @@ async function use_ero_medicine(chara) {
       era.get(`status:${aim_id}:弗隆K`) ||
       era.get(`status:${aim_id}:弗隆P`) ||
       era.get(`tequip:${aim_id}:外阴`) !== -1,
-    ero_status =
-      era.get(`status:${aim_id}:马跳Z`) ||
-      era.get(`status:${aim_id}:马跳S`) ||
-      era.get(`status:${aim_id}:超马跳Z`) ||
-      fron_status,
     p_status =
       era.get(`cflag:${aim_id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no ||
       era.get(`status:${aim_id}:短效避孕药`) ||
       era.get(`status:${aim_id}:长效避孕药`) ||
       era.get(`status:${aim_id}:促排卵药`) ||
       era.get(`status:${aim_id}:经期`),
+    sex_check = aim_chara.sex_code !== 1,
     item_list = [
-      { a: medicine_enum.milk_h, e: milk_h, n: milk_h },
-      { a: medicine_enum.milk_u, e: milk_u, n: milk_u },
+      { a: medicine_enum.milk_h, n: milk_h },
+      { a: medicine_enum.milk_u, n: milk_u },
       {
         a: medicine_enum.uma_z,
-        e: !ero_status,
         n: uma_z,
       },
       {
@@ -96,29 +91,30 @@ async function use_ero_medicine(chara) {
       },
       {
         a: medicine_enum.drug_m,
-        e:
-          aim_chara.sex_code - 1 && drug_m && !era.get(`talent:${aim_id}:泌乳`),
+        e: sex_check && !era.get(`talent:${aim_id}:泌乳`),
         n: drug_m,
       },
       {
         a: medicine_enum.drug_p,
-        e:
-          aim_chara.sex_code - 1 &&
-          !p_status &&
-          !era.get(`status:${aim_id}:排卵期`),
+        e: sex_check && !p_status && !era.get(`status:${aim_id}:排卵期`),
         n: drug_p,
       },
       {
         a: medicine_enum.anti_p_s,
-        e: aim_chara.sex_code - 1 && !p_status,
+        e: sex_check && !p_status,
         n: anti_p_s,
       },
       {
         a: medicine_enum.anti_p_l,
-        e: aim_chara.sex_code - 1 && !p_status,
+        e: sex_check && !p_status,
         n: anti_p_l,
       },
-    ].filter((e) => e.n > 0);
+    ]
+      .filter((e) => e.n > 0)
+      .map((e) => {
+        e.e ||= e.e === undefined;
+        return e;
+      });
   if (!item_list.filter((e) => e.e).length) {
     await era.printAndWait(
       aim_id

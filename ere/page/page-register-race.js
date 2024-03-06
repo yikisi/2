@@ -17,7 +17,10 @@ const { expedition_weeks } = require('#/data/move-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_enum } = require('#/data/race/race-const');
-const { foreign_race_list } = require('#/data/race/race-location');
+const {
+  foreign_race_list,
+  track2location,
+} = require('#/data/race/race-location');
 const { adaptability_names } = require('#/data/train-const');
 
 /**
@@ -203,7 +206,9 @@ async function reg_race_page() {
                 },
                 content:
                   race_infos[e].get_colored_name_with_class().content +
-                  (is_foreign ? ' (海)' : '') +
+                  (is_foreign
+                    ? ` (${track2location[race_infos[e].track].con})`
+                    : '') +
                   ((is_aim_race & 0x3) > 0 ? ' *' : ''),
                 type: 'button',
               },
@@ -257,7 +262,7 @@ async function reg_race_page() {
                 { isBr: true },
                 '** 参加带有星号(*)后缀的比赛可能会有特殊的事情发生……',
                 { isBr: true },
-                '*** 带有(海)后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
+                '*** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
               ],
               type: 'text',
             },

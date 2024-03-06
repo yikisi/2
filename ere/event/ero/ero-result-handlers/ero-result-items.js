@@ -17,6 +17,8 @@ const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 
 const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 
+const { get_random_value } = require('#/utils/value-utils');
+
 const EroParticipant = require('#/data/ero/ero-participant');
 const {
   item_enum,
@@ -56,8 +58,20 @@ module.exports = (handlers) => {
     let temp;
     switch (extra_flag.item) {
       case medicine_enum.uma_z:
-        temp = 0.25;
-        era.set(`status:${extra_flag.user}:马跳Z`, 1);
+        if (!era.get(`tcvar:${extra_flag.user}:发情`)) {
+          temp = 0.25;
+          era.set(`status:${extra_flag.user}:马跳Z`, 1);
+        } else {
+          era.add(`base:${extra_flag.user}:药物残留`, 15);
+        }
+        era.add(
+          `nowex:${extra_flag.user}:体力消耗`,
+          -get_random_value(200, 400),
+        );
+        era.add(
+          `nowex:${extra_flag.user}:精力消耗`,
+          -get_random_value(300, 500),
+        );
         break;
       case medicine_enum.fron_k:
       case medicine_enum.fron_p:
@@ -100,11 +114,13 @@ module.exports = (handlers) => {
         break;
       case medicine_enum.milk_h:
         era.add(`nowex:${extra_flag.user}:体力消耗`, -150);
+        era.add(`nowex:${extra_flag.user}:精力消耗`, -100);
         sys_change_lust(extra_flag.user, 300);
         set_stain(extra_flag.user, part_enum.mouth, stain_enum.milk);
         break;
       case medicine_enum.milk_u:
         era.add(`nowex:${extra_flag.user}:体力消耗`, -400);
+        era.add(`nowex:${extra_flag.user}:精力消耗`, -200);
         sys_change_lust(extra_flag.user, 800);
         set_stain(extra_flag.user, part_enum.mouth, stain_enum.milk);
     }

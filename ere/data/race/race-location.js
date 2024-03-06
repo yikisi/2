@@ -2,16 +2,19 @@ const { location_enum } = require('#/data/locations');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+/** @type {Record<string,{con:string,lan:string,loc:number}>} */
 const track2location = {};
 track2location[track_enum.longchamp] =
   track2location[track_enum.chantilly] =
   track2location[track_enum.st_cloud] =
-    { lan: '法', loc: location_enum.paris };
+    { con: '法', lan: '法', loc: location_enum.paris };
 track2location[track_enum.bashang] = {
+  con: '中',
   lan: '粤',
   loc: location_enum.guangzhou,
 };
 track2location[track_enum.shatin] = {
+  con: '中',
   lan: '粤',
   loc: location_enum.hongkong,
 };
