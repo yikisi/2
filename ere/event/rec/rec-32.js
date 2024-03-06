@@ -5,6 +5,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 /**
  * 爱丽速子的招募事件，id=32
@@ -138,6 +139,8 @@ module.exports = {
 
         new EventMarks(0).sub(event_hooks.recruit_start);
         era.set('cflag:32:招募状态', recruit_flags.yes);
+        new EduEventMarks(32).add('beginning');
+        add_event(event_hooks.week_end, new EventObject(32, cb_enum.edu));
         era.set('flag:物色对象', 0);
         era.set('callname:32:0', '豚鼠君');
         return true;
