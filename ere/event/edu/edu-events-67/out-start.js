@@ -21,7 +21,7 @@ module.exports = async (hook, _, event_object) => {
   }
   const daiya = get_chara_talk(67),
     edu_marks = new DaiyaEduMarks(),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:67:育成回合计时'),
+    edu_weeks = era.get('cflag:67:育成回合计时'),
     me = get_chara_talk(0);
   let wait_flag = false;
   if (edu_marks.win_g1 === 1) {

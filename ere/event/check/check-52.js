@@ -16,8 +16,10 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_breast_cup } = require('#/data/info-generator');
-const { race_enum, race_infos } = require('#/data/race/race-const');
 const RaceInfo = require('#/data/race/model/race-info');
+const { race_enum, race_infos } = require('#/data/race/race-const');
+const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
+const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 
 /** @type {Record<string,function(Record<string,*>)>} */
 const handlers = {};
@@ -62,18 +64,6 @@ race2fans_reward[race_enum.hk_spr] = 20000;
 race2fans_reward[race_enum.hk_mil] = 25000;
 race2fans_reward[race_enum.hk_cup] = 30000;
 race2fans_reward[race_enum.hk_vas] = 25000;
-
-console.log(
-  Object.keys(race2fans_reward)
-    .map((e) => race_infos[e])
-    .filter((e) => !e || e.race_class !== RaceInfo.class_enum.G1)
-    .map((e) => e.name_zh),
-  race_infos
-    .filter(
-      (e, i) => e.race_class === RaceInfo.class_enum.G1 && !race2fans_reward[i],
-    )
-    .map((e) => e.name_zh),
-);
 
 /**
  * @param {number} fans
@@ -121,6 +111,20 @@ handlers[check_stages.after_race] = (extra_flag) => {
   }
 };
 
+const aim_races = {};
+aim_races[race_enum.begin_race] = 2;
+aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = -4;
+aim_races[get_aim_race_index(race_enum.negi_sta, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.febr_sta, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.elm_sta, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.jbc_spr, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
+
+/** @param {{edu_weeks:number,race:number}} extra_flag */
+handlers[check_stages.aim_race] = (extra_flag) =>
+  aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
+  aim_races[extra_flag.race];
+
 handlers[check_stages.love_event] = function () {
   era.get('love:52') === 49 &&
     add_event(event_hooks.week_end, new EventObject(52, cb_enum.love));
@@ -128,15 +132,10 @@ handlers[check_stages.love_event] = function () {
 
 handlers[check_stages.next_week] = () => {
   const cup_size = get_breast_cup(60);
-  if (cup_size >= 'E') {
+  if (!era.get('talent:60:泌乳') && cup_size >= 'E') {
     era.set('talent:60:泌乳', 3);
   }
-  const edu_marks = new UraraEduMarks();
-  const event_obj = new EventObject(52, cb_enum.edu);
-  if (!edu_marks.loop && era.get('cflag:52:招募状态') === recruit_flags.yes) {
-    edu_marks.loop++;
-    add_event(event_hooks.week_start, event_obj);
-  }
+  check_and_register_aim_race(52, aim_races);
 };
 
 handlers[check_stages.aim_check] = () => {

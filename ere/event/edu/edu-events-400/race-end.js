@@ -21,7 +21,7 @@ const { attr_enum } = require('#/data/train-const');
  */
 module.exports = async (hook, extra_flag) => {
   const coffee = get_chara_talk(25),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:400:育成回合计时'),
+    edu_weeks = era.get('cflag:400:育成回合计时'),
     event_marks = new SSEduMarks(),
     ss = get_chara_talk(400);
   extra_flag.attr_change = new Array(5).fill(0);

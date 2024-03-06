@@ -32,8 +32,7 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[extra_flag.race];
 
 handlers[check_stages.next_week] = () => {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:13:育成回合计时');
+  const edu_weeks = era.get('cflag:13:育成回合计时');
   if (edu_weeks < 3 * 48) {
     check_and_register_aim_race(13, aim_races, edu_weeks);
   } else if (edu_weeks === 143 + 9) {

@@ -25,7 +25,7 @@ handlers[event_hooks.week_end] = async () => {
     luna = new CharaTalk(event_marks.emperor ? 9017 : 17).set_color(
       color_17[0],
     ),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:17:育成回合计时');
+    edu_weeks = era.get('cflag:17:育成回合计时');
   if (event_marks.wax_and_wane === 1) {
     event_marks.wax_and_wane++;
     await print_event_name('阴晴圆缺', luna);
@@ -293,10 +293,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
     ' 的训练顺利结束了！',
   ]);
   // 经典年五月第一周
-  if (
-    era.get('flag:当前回合数') - era.get('cflag:17:育成回合计时') === 47 + 17 &&
-    !event_marks.dissonance
-  ) {
+  if (era.get('cflag:17:育成回合计时') === 47 + 17 && !event_marks.dissonance) {
     event_marks.dissonance++;
     era.println();
     await print_event_name('不协调音', chara_talk);

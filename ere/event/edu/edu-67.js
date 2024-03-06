@@ -103,7 +103,7 @@ require('#/event/edu/edu-events-67/week-start-3')(week_start_handlers);
 handlers[event_hooks.week_start] = async (hook, _, event_object) => {
   const daiya = get_chara_talk(67),
     edu_marks = new DaiyaEduMarks(),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:67:育成回合计时'),
+    edu_weeks = era.get('cflag:67:育成回合计时'),
     me = get_chara_talk(0),
     flags = { wait: false };
   if (week_start_handlers[edu_weeks]) {
@@ -280,7 +280,7 @@ handlers[
 handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
   if (
     era.get('flag:当前互动角色') !== 67 ||
-    era.get('flag:当前回合数') - era.get('cflag:67:育成回合计时') !== 95 + 2
+    era.get('cflag:67:育成回合计时') !== 95 + 2
   ) {
     add_event(hook.hook, event_object);
     return false;
@@ -777,7 +777,7 @@ require('#/event/edu/edu-events-67/race-end-2')(race_end_handlers);
 handlers[event_hooks.race_end] = async (_, extra_flag) => {
   const daiya = get_chara_talk(67),
     edu_marks = new DaiyaEduMarks(),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:67:育成回合计时'),
+    edu_weeks = era.get('cflag:67:育成回合计时'),
     me = get_chara_talk(0);
   if (
     race_end_handlers[extra_flag.race] &&

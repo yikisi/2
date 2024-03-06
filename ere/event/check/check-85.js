@@ -44,8 +44,7 @@ handlers[check_stages.love_event] = () =>
 
 handlers[check_stages.next_week] = () => {
   const rec_status = era.get('cflag:85:招募状态');
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:85:育成回合计时');
+  const edu_weeks = era.get('cflag:85:育成回合计时');
   if (
     rec_status.round &&
     rec_status.flag === 5 &&

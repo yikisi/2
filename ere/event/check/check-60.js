@@ -52,7 +52,7 @@ handlers[check_stages.after_race] = (extra_flag) => {
 
 handlers[check_stages.next_week] = () => {
   const event_obj = new EventObject(60, cb_enum.edu),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:60:育成回合计时');
+    edu_weeks = era.get('cflag:60:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const event_marks = new NNEduMarks();
     const event_obj_special = new EventObject(60, cb_enum.edu, true);

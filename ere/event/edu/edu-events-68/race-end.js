@@ -17,7 +17,7 @@ const { attr_enum } = require('#/data/train-const');
 module.exports = async (hook, extra_flag) => {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:68:育成回合计时');
+    edu_weeks = era.get('cflag:68:育成回合计时');
   extra_flag.attr_change = new Array(5).fill(0);
   if (extra_flag.race === race_enum.begin_race && extra_flag.rank === 1) {
     extra_flag.pt_change = 30;

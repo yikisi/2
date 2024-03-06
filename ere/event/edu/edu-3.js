@@ -70,7 +70,7 @@ handlers[event_hooks.out_start] = require('#/event/edu/edu-events-3/out-start');
 handlers[event_hooks.race_start] = async (_, extra_flag) => {
   const teio = get_chara_talk(3),
     relation = era.get(`relation:3:0`),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时'),
+    edu_weeks = era.get('cflag:3:育成回合计时'),
     me = get_chara_talk(0);
   if (extra_flag.race === race_enum.arim_kin && edu_weeks >= 96) {
     if (era.get('status:3:腿伤')) {
@@ -371,7 +371,7 @@ handlers[event_hooks.office_rest] = async (hook, _, event_object) => {
   }
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时');
+    edu_weeks = era.get('cflag:3:育成回合计时');
   let wait_flag = false;
   if (edu_weeks === 47 + 25) {
     await print_event_name('定时刷新的小兽', teio);
@@ -620,7 +620,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
 handlers[event_hooks.back_school] = async () => {
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时');
+    edu_weeks = era.get('cflag:3:育成回合计时');
   if (edu_weeks === race_infos[race_enum.tenn_spr].date + 95) {
     await print_event_name('折翼', teio);
     await era.printAndWait(

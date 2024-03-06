@@ -42,8 +42,7 @@ handlers[check_stages.aim_race] = (extra_flag) =>
 
 handlers[check_stages.next_week] = () => {
   era.set('callname:25:0', `训练员${get_chara_talk(0).get_adult_sex_title()}`);
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:25:育成回合计时');
+  const edu_weeks = era.get('cflag:25:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const edu_event_marks = new EduEventMarks(25);
     const event_obj = new EventObject(25, cb_enum.edu);

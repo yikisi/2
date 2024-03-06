@@ -359,7 +359,7 @@ async function sys_next_week() {
       registered_race.last.week > 0 &&
       registered_race.last.week < cur_round &&
       !new RaceHistory(chara_id).get_result(
-        cur_round - era.get(`cflag:${chara_id}:育成回合计时`) - 1,
+        era.get(`cflag:${chara_id}:育成回合计时`) - 1,
       )
     ) {
       out_race_list.push(chara_id);
@@ -369,6 +369,9 @@ async function sys_next_week() {
     registered_race.last.race = registered_race.curr.race;
     registered_race.last.week = registered_race.curr.week;
 
+    if (!isNaN(Number(era.get(`cflag:${chara_id}:育成回合计时`)))) {
+      era.add(`cflag:${chara_id}:育成回合计时`, 1);
+    }
     if (team_dict[chara_id]) {
       stay_up > 0 && sys_change_pressure(chara_id, 100 + 200 * stay_up);
       out_race_list.at(-1) === chara_id &&
@@ -423,11 +426,11 @@ async function sys_next_week() {
       }
       // 殿堂计算
       if (chara_id) {
-        if (cur_round - era.get(`cflag:${chara_id}:育成回合计时`) === 3 * 48) {
+        if (era.get(`cflag:${chara_id}:育成回合计时`) === 3 * 48) {
           sys_handle_palace(chara_id);
           await era.waitAnyKey();
         } else if (
-          cur_round - era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 &&
+          era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 &&
           (era.get(`status:${chara_id}:摸鱼`) ||
             (stay_up && Math.random() < 0.2))
         ) {
@@ -506,9 +509,9 @@ async function sys_next_week() {
       growth_stage >= 2 &&
       cur_month === 1 &&
       cur_week === 1 &&
-      era.get(`cflag:${chara_id}:育成回合计时`) === -200
+      era.get(`cflag:${chara_id}:育成回合计时`) === 'x'
     ) {
-      era.set(`cflag:${chara_id}:育成回合计时`, cur_round);
+      era.set(`cflag:${chara_id}:育成回合计时`, 0);
       await sys_call_daily_event(chara_id, event_hooks.growth, { stage: 2 });
     }
 
@@ -532,11 +535,7 @@ async function sys_next_week() {
       if (!o_timer) {
         sys_change_pressure(
           chara_id,
-          500 *
-            (1 +
-              (era.get('flag:当前回合数') -
-                era.get(`cflag:${chara_id}:育成回合计时`) <
-                3 * 48)),
+          500 * (1 + (era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)),
         );
         const father_id = new LifeEventMarks(chara_id).sperm;
         await call_ero_script(
@@ -615,7 +614,7 @@ async function sys_next_week() {
             if (
               era.get(`cflag:${chara_id}:招募状态`) === recruit_flags.yes &&
               growth_stage >= 2 &&
-              cur_round - era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48
+              era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48
             ) {
               hentai_punish += 100;
               hentai_marks[1] = true;
@@ -874,8 +873,7 @@ async function sys_next_week() {
           in_team_list.filter(
             (e) =>
               era.get('cflag:0:位置') === era.get(`cflag:${e}:位置`) &&
-              era.get('flag:当前回合数') - era.get(`cflag:${e}:育成回合计时`) <
-                3 * 48,
+              era.get(`cflag:${e}:育成回合计时`) < 3 * 48,
           ),
         ) ||
         get_random_entry(

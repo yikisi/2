@@ -19,7 +19,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 module.exports = async () => {
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时'),
+    edu_weeks = era.get('cflag:3:育成回合计时'),
     event_marks = new TeioEduMarks();
   let wait_flag = false;
   if (edu_weeks === 47 + 1) {

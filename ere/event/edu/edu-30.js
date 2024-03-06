@@ -33,7 +33,7 @@ handlers[event_hooks.school_atrium] = async (_, __, event_object) => {
   }
   const chara26_talk = get_chara_talk(26),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:30:育成回合计时');
+    edu_weeks = era.get('cflag:30:育成回合计时');
   if (edu_weeks === 47 + 46) {
     await print_event_name('劲敌的不幸', chara_talk);
     await era.printAndWait(
@@ -205,7 +205,7 @@ handlers[event_hooks.out_church] = async (_, __, event_object) => {
     return;
   }
   const me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:30:育成回合计时');
+    edu_weeks = era.get('cflag:30:育成回合计时');
   if (edu_weeks === 95 + 1) {
     await print_event_name('新年参拜', chara_talk);
     await era.printAndWait(
@@ -317,7 +317,7 @@ handlers[event_hooks.out_shopping] = async (_, __, event_object) => {
   }
   const chara301_talk = get_chara_talk(301),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:30:育成回合计时');
+    edu_weeks = era.get('cflag:30:育成回合计时');
   if (edu_weeks === 95 + 21) {
     await print_event_name('万有一失', chara_talk);
     await era.printAndWait(`把参加宝塚纪念定为目标后……`);

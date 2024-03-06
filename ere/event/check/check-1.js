@@ -45,8 +45,7 @@ handlers[check_stages.aim_check] = function () {
 };
 
 handlers[check_stages.next_week] = function () {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:1:育成回合计时');
+  const edu_weeks = era.get('cflag:1:育成回合计时');
   if (edu_weeks < 3 * 48 + 4) {
     check_and_add_event(
       edu_event_marks,

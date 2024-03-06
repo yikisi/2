@@ -67,7 +67,7 @@ handlers[check_stages.love_event] = () => {
 
 handlers[check_stages.next_week] = () => {
   const edu_object = new EventObject(17, cb_enum.edu),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:17:育成回合计时');
+    edu_weeks = era.get('cflag:17:育成回合计时');
   if (edu_weeks < 3 * 48) {
     add_event(event_hooks.week_start, edu_object);
     if (
@@ -143,8 +143,7 @@ handlers[check_stages.personal_titles] = () => ['皇帝'];
 
 handlers[check_stages.personal_action] = function () {
   if (
-    era.get('flag:当前回合数') - era.get('cflag:17:育成回合计时') <
-      48 * 3 - 1 &&
+    era.get('cflag:17:育成回合计时') < 48 * 3 - 1 &&
     era.get('cflag:17:位置') === era.get('cflag:0:位置')
   ) {
     return {

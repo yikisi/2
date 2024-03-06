@@ -25,7 +25,7 @@ const handlers = {};
 
 handlers[event_hooks.week_start] = async () => {
   const chara_talk = get_chara_talk(37),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:37:育成回合计时');
+    edu_weeks = era.get('cflag:37:育成回合计时');
   if (edu_weeks === 47 + 1) {
     await print_event_name('新年的抱负', chara_talk);
     await chara_talk.say_and_wait(
@@ -1383,7 +1383,7 @@ handlers[event_hooks.week_start] = async () => {
 
 handlers[event_hooks.week_end] = async () => {
   const chara_talk = get_chara_talk(37),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:37:育成回合计时');
+    edu_weeks = era.get('cflag:37:育成回合计时');
   if (
     edu_weeks === 47 + 32 &&
     era.get('cflag:37:位置') === era.get('cflag:0:位置')
@@ -1751,7 +1751,7 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
     return;
   }
   const chara_talk = get_chara_talk(37),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:37:育成回合计时');
+    edu_weeks = era.get('cflag:37:育成回合计时');
   if (edu_weeks === 95 + 6) {
     await print_event_name('遇见之花 ', chara_talk);
     await era.printAndWait(
@@ -2164,7 +2164,7 @@ handlers[event_hooks.out_shopping] = async (hook, extra_flag, event_object) => {
 
 handlers[event_hooks.race_start] = async (hook, extra_flag) => {
   const chara_talk = get_chara_talk(37),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:37:育成回合计时');
+    edu_weeks = era.get('cflag:37:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name('万事之始•一', chara_talk);
     await era.printAndWait('终于到了荣进闪耀出道的时候。');
@@ -2707,7 +2707,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
 
 handlers[event_hooks.race_end] = async (hook, extra_flag) => {
   const chara_talk = get_chara_talk(37),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:37:育成回合计时');
+    edu_weeks = era.get('cflag:37:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name('万事之始•二', chara_talk);
     await chara_talk.say_and_wait(`我回来了，${callname}。`);

@@ -74,9 +74,7 @@ async function check_new_activities(cur_round, in_team_list) {
       era.set(
         `cflag:${chara_id}:节日事件标记`,
         !era.get(`cflag:${chara_id}:种族`) ||
-          era.get('flag:当前回合数') -
-            era.get(`cflag:${chara_id}:育成回合计时`) >
-            47 ||
+          era.get(`cflag:${chara_id}:育成回合计时`) > 47 ||
           era.get(`love:${chara_id}`) >= 60,
       ),
     );
@@ -288,7 +286,7 @@ async function check_new_activities(cur_round, in_team_list) {
   } else if (event_weeks === 29 - 1) {
     // 夏合宿
     const beach_group = in_team_list.filter((chara_id) => {
-      const edu_weeks = cur_round - era.get(`cflag:${chara_id}:育成回合计时`);
+      const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
       const flag =
         era.get(`cflag:${chara_id}:成长阶段`) >= 2 &&
         !era.get(`status:${chara_id}:伤病`) &&

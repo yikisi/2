@@ -949,7 +949,7 @@ ${me.name}下意识地紧紧抱住了${chara_talk.sex_code - 1 ? '她' : '他'},
 
 handlers[event_hooks.out_church] = async () => {
   const me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:4:育成回合计时');
+    edu_weeks = era.get('cflag:4:育成回合计时');
   const chara_talk = get_chara_talk(4);
   if (edu_weeks === 95 + 1) {
     await print_event_name('新年参拜', chara_talk);
@@ -1040,8 +1040,7 @@ handlers[event_hooks.school_rooftop] = async (
     return;
   }
   const chara_talk = get_chara_talk(4);
-  const edu_weeks =
-      era.get('flag:当前回合数') - era.get('cflag:4:育成回合计时'),
+  const edu_weeks = era.get('cflag:4:育成回合计时'),
     me = get_chara_talk(0),
     event_marks = new MaEduMarks();
   if (event_marks.beautiful_winner === 1) {

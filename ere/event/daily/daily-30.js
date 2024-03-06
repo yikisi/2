@@ -59,10 +59,7 @@ handlers[event_hooks.talk] = async function () {
       '呼……好像，有点累…的感觉…',
       `${self_name} 没关系的！没有、感觉到累……`,
     ];
-  } else if (
-    era.get('flag:当前回合数') - era.get('cflag:30:育成回合计时') <
-    3 * 48
-  ) {
+  } else if (era.get('cflag:30:育成回合计时') < 3 * 48) {
     switch (motivation) {
       case -2: //干劲极差
         talk_arr = [

@@ -52,7 +52,7 @@ handlers[check_stages.love_event] = () =>
 handlers[check_stages.next_week] = () => {
   const event_marks = new GoldShipEduMarks(7),
     event_obj = new EventObject(7, cb_enum.edu),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:7:育成回合计时');
+    edu_weeks = era.get('cflag:7:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const event_obj_special = new EventObject(7, cb_enum.edu, true);
     check_and_add_event(

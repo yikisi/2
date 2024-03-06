@@ -72,7 +72,7 @@ module.exports = {
       }
       const sex = era.get('flag:角色性别');
       era.set(`cflag:${chara_id}:性别`, sex);
-      era.set(`cflag:${chara_id}:育成回合计时`, -201);
+      era.set(`cflag:${chara_id}:育成回合计时`, 4800);
       let temp;
       switch (sex) {
         case 0:
@@ -237,7 +237,7 @@ module.exports = {
     era.get(`cflag:${chara_id}:种族`) &&
       era.set(
         `cflag:${chara_id}:育成回合计时`,
-        Math.floor((era.get('flag:当前回合数') - 1) / 48) * 48 + 1,
+        (era.get('flag:当前回合数') - 1) % 48,
       );
     era.set(`cflag:${chara_id}:自主训练`, 1);
     era.set(`cflag:${chara_id}:腋毛`, 0);

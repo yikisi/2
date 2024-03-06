@@ -21,7 +21,7 @@ module.exports = async function (hook, _, event_object) {
     chara_talk = get_chara_talk(4),
     event_marks = new MaEduMarks(),
     chara301_talk = get_chara_talk(301),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:4:育成回合计时');
+    edu_weeks = era.get('cflag:4:育成回合计时');
   let wait_flag = false;
   if (edu_weeks === 5) {
     await print_event_name(

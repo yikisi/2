@@ -38,7 +38,7 @@ function fill_common_rewards(extra_flag) {
 module.exports = async (_, extra_flag) => {
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时');
+    edu_weeks = era.get('cflag:3:育成回合计时');
 
   if (
     extra_flag.race === race_enum.begin_race &&

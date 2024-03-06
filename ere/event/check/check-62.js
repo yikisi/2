@@ -43,8 +43,7 @@ handlers[check_stages.next_week] = () => {
   if (event_marks.abandon_japa_cup) {
     aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 0;
   }
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:62:育成回合计时');
+  const edu_weeks = era.get('cflag:62:育成回合计时');
   if (edu_weeks < 3 * 48) {
     check_and_register_aim_race(62, aim_races, edu_weeks);
   } else if (edu_weeks === 143 + 9) {

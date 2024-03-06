@@ -22,8 +22,7 @@ const { attr_enum } = require('#/data/train-const');
  * @param {EventObject} event_object
  */
 module.exports = async (hook, _, event_object) => {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:7:育成回合计时');
+  const edu_weeks = era.get('cflag:7:育成回合计时');
   const gold_ship = get_chara_talk(7),
     me = get_chara_talk(0);
   if (edu_weeks === 47 + 1) {

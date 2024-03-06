@@ -12,7 +12,7 @@ const { location_enum } = require('#/data/locations');
 module.exports = async function () {
   const me = get_chara_talk(0),
     chara61_talk = get_chara_talk(61),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:19:育成回合计时');
+    edu_weeks = era.get('cflag:19:育成回合计时');
   if (edu_weeks === 47 + 32) {
     if (era.get('flag:当前位置') !== location_enum.beach) {
       await print_event_name(`夏合宿结束`, chara_talk);

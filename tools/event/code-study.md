@@ -149,7 +149,7 @@ handlers[event_hooks.out_shopping] = async (hook, extra_flag, event_object) => {
 ```javascript
     handlers[event_hooks.week_start] = async () => {
         const chara_talk = get_chara_talk(60),
-            edu_weeks = era.get('flag:当前回合数') - era.get('cflag:60:育成回合计时');
+            edu_weeks = era.get('cflag:60:育成回合计时');
         if (edu_weeks === 47 + 1 || edu_weeks === 95 + 1) {
             await print_event_name('新年', chara_talk.color);
             /**后面略*/

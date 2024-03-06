@@ -806,7 +806,7 @@ handlers[event_hooks.out_church] = async (_, __, event_object) => {
   const chara32_talk = get_chara_talk(32),
     chara46_talk = get_chara_talk(46),
     chara36_talk = get_chara_talk(36),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:19:育成回合计时');
+    edu_weeks = era.get('cflag:19:育成回合计时');
   if (edu_weeks === 95 + 1) {
     await print_event_name('新年参拜', chara_talk);
     await chara_talk.say_and_wait(

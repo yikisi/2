@@ -25,7 +25,7 @@ module.exports = async (_, extra_flag) => {
     luna_talk = new CharaTalk(luna).set_color(color_17[0]),
     emperor_talk = new CharaTalk(emperor).set_color(color_17[1]),
     chara_talk = get_chara_talk(17),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:17:育成回合计时');
+    edu_weeks = era.get('cflag:17:育成回合计时');
   if (
     (emperor === 17) &
       (race_infos[extra_flag.race].race_class === class_enum.G1) &&

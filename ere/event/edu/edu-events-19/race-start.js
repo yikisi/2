@@ -17,7 +17,7 @@ module.exports = async (hook, extra_flag) => {
     chara58_talk = get_chara_talk(58),
     chara61_talk = get_chara_talk(61),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:19:育成回合计时');
+    edu_weeks = era.get('cflag:19:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name('出道战开始！', chara_talk);
     await chara_talk.say_and_wait(

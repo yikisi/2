@@ -506,7 +506,7 @@ handlers[event_hooks.out_station] = async (hook, extra_flag, event_object) => {
   await era.printAndWait(`穿着特雷森制服的丸善斯基带着充裕的笑容看着你们。`);
   if (
     era.get('cflag:4:招募状态') === recruit_flags.yes &&
-    era.get('flag:当前回合数') - era.get('cflag:4:育成回合计时') >= 47
+    era.get('cflag:4:育成回合计时') >= 47
   ) {
     await chara4_talk.say_and_wait(`到处找不到训练员君，原来在这里啊？`);
     await era.printAndWait(`你当然记得这位外表亲和的姐姐大人`);
@@ -548,7 +548,7 @@ handlers[event_hooks.out_station] = async (hook, extra_flag, event_object) => {
   await era.printAndWait(`看着收获了粉丝的飞鹰子，你也觉得很开心。`);
   if (
     era.get('cflag:4:招募状态') === recruit_flags.yes &&
-    era.get('flag:当前回合数') - era.get('cflag:4:育成回合计时') >= 96
+    era.get('cflag:4:育成回合计时') >= 96
   ) {
     await chara4_talk.say_and_wait(`飞鹰子，可以拜托你一件事吗？`);
     await era.printAndWait(

@@ -33,7 +33,7 @@ handlers[event_hooks.out_church] = async (_, __, event_object) => {
     return;
   }
   const chara_talk = get_chara_talk(400),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:400:育成回合计时');
+    edu_weeks = era.get('cflag:400:育成回合计时');
   if (edu_weeks === 47 + 1) {
     await print_event_name('新年的抱负', chara_talk);
     await era.printAndWait(

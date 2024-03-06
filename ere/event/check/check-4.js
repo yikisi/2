@@ -51,8 +51,7 @@ handlers[check_stages.love_event] = () => {
 };
 
 handlers[check_stages.next_week] = () => {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:4:育成回合计时');
+  const edu_weeks = era.get('cflag:4:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const event_marks = new MaEduMarks(4);
     const event_obj = new EventObject(4, cb_enum.edu);

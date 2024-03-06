@@ -81,10 +81,7 @@ handlers[event_hooks.talk] = async function () {
         }趴在我身上的状态。`,
       );
     }
-  } else if (
-    era.get('flag:当前回合数') - era.get('cflag:85:育成回合计时') <
-    3 * 48
-  ) {
+  } else if (era.get('cflag:85:育成回合计时') < 3 * 48) {
     switch (motivation) {
       case 2:
         talk_arr = [

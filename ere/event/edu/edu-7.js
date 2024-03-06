@@ -110,7 +110,7 @@ handlers[event_hooks.school_atrium] = async (
   const gold_ship = get_chara_talk(7),
     me = get_chara_talk(0),
     event_marks = new GoldShipEduMarks(),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:7:育成回合计时');
+    edu_weeks = era.get('cflag:7:育成回合计时');
   if (edu_weeks === 47 + 3) {
     await print_event_name(
       [{ color: color_7[1], content: '母亲比神还要强编' }],

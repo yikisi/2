@@ -17,7 +17,7 @@ const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print
 
 module.exports = async function () {
   const me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:85:育成回合计时');
+    edu_weeks = era.get('cflag:85:育成回合计时');
   if (edu_weeks === 39) {
     await print_event_name('华丽的最高杰作', ruby);
     await era.printAndWait(

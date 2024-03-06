@@ -46,8 +46,7 @@ handlers[check_stages.aim_race] = (extra_flag) => {
 
 handlers[check_stages.next_week] = () => {
   if (era.get('cflag:205:招募状态')) {
-    const edu_weeks =
-      era.get('flag:当前回合数') - era.get('cflag:205:育成回合计时');
+    const edu_weeks = era.get('cflag:205:育成回合计时');
     if (edu_weeks < 3 * 48) {
       switch (edu_weeks) {
         case 47 + 24:

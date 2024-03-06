@@ -58,8 +58,7 @@ handlers[check_stages.love_event] = () => {
  * @param {{race:number,rank:number,relation_change:number}} extra_flag
  */
 handlers[check_stages.next_week] = (extra_flag) => {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:46:育成回合计时');
+  const edu_weeks = era.get('cflag:46:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const love = era.get('love:46');
     const event_marks = new FalconEduMarks(46);

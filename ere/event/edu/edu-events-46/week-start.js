@@ -14,7 +14,7 @@ module.exports = async function (event_object) {
   const me = get_chara_talk(0),
     falcon = get_chara_talk(46),
     event_marks = new FalconEduMarks(),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:46:育成回合计时');
+    edu_weeks = era.get('cflag:46:育成回合计时');
   let wait_flag = false;
   if (event_marks.start === 1) {
     event_marks.start++;

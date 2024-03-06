@@ -45,10 +45,7 @@ function sys_change_pressure(chara_id, _val) {
               (1 +
                 0.2 * era.get(`talent:${chara_id}:羞耻忍耐`) +
                 sys_call_mec(chara_id, check_stages.mec_pressure_buff))) /
-              (1 +
-                (era.get('flag:当前回合数') -
-                  era.get(`cflag:${chara_id}:育成回合计时`) >=
-                  3 * 48)),
+              (1 + (era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48)),
           )
         : _val,
     )
@@ -117,10 +114,7 @@ module.exports = {
           }
         }
       }
-    } else if (
-      era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) >=
-      3 * 48
-    ) {
+    } else if (era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48) {
       return [];
     } else if (
       attr_id_or_name === attr_enum.speed &&
@@ -166,11 +160,7 @@ module.exports = {
    * @returns {boolean}
    */
   sys_change_motivation(chara_id, val) {
-    if (
-      !chara_id ||
-      era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) >=
-        3 * 48
-    ) {
+    if (!chara_id || era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48) {
       return false;
     }
     if (val > 0 && era.get(`status:${chara_id}:头风`)) {

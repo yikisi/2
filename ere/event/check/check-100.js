@@ -39,8 +39,7 @@ handlers[check_stages.aim_race] = (extra_flag) =>
 handlers[check_stages.next_week] = () => {
   era.set('callname:100:0', `小${get_chara_talk(0).actual_name}`);
   era.set('callname:0:0', `我`);
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:100:育成回合计时');
+  const edu_weeks = era.get('cflag:100:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const event_obj_special = new EventObject(100, cb_enum.edu, true);
 

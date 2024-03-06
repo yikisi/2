@@ -28,8 +28,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   era.print(
     `${chara_talk.name} 的 ${attr_names[extra_flag.train]} 训练顺利成功了……`,
   );
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:24:育成回合计时');
+  const edu_weeks = era.get('cflag:24:育成回合计时');
   if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
     era.println();
     await era.printAndWait('事件：额外的自主训练', {
@@ -449,8 +448,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
 };
 
 handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:24:育成回合计时');
+  const edu_weeks = era.get('cflag:24:育成回合计时');
   if (edu_weeks === 47 + 1) {
     await era.printAndWait('事件：新年的抱负', {
       color: chara_talk.color,
@@ -1286,8 +1284,7 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
 };
 
 handlers[event_hooks.week_end] = async (hook, extra_flag, event_object) => {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:24:育成回合计时');
+  const edu_weeks = era.get('cflag:24:育成回合计时');
   if (edu_weeks === 47 + 32) {
     if (era.get('cflag:24:位置') !== era.get('cflag:0:位置')) {
       add_event(event_hooks.week_end, event_object);
@@ -1901,8 +1898,7 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
     return;
   }
   const edu_event_marks = new EduEventMarks(24);
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:24:育成回合计时');
+  const edu_weeks = era.get('cflag:24:育成回合计时');
   if (edu_event_marks.get('kirakira_kessin') === 1) {
     edu_event_marks.add('kirakira_kessin');
     await era.printAndWait('事件：摩耶重炮的耀眼☆决心！', {
@@ -3274,8 +3270,7 @@ handlers[event_hooks.out_church] = async (hook, extra_flag, event_object) => {
     add_event(event_hooks.out_church, event_object);
     return;
   }
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:24:育成回合计时');
+  const edu_weeks = era.get('cflag:24:育成回合计时');
   if (edu_weeks === 95 + 1) {
     await era.printAndWait('事件：新年参拜', {
       color: chara_talk.color,
@@ -3401,8 +3396,7 @@ handlers[event_hooks.out_church] = async (hook, extra_flag, event_object) => {
 };
 
 handlers[event_hooks.race_start] = async (hook, extra_flag) => {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:24:育成回合计时');
+  const edu_weeks = era.get('cflag:24:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     //todo 比赛结果钩子
     await era.printAndWait('事件：迎向出道战', {
@@ -3745,8 +3739,7 @@ handlers[event_hooks.race_end] =
    * @param {{race:number,rank:number}} extra_flag
    */
   async (hook, extra_flag) => {
-    const edu_weeks =
-      era.get('flag:当前回合数') - era.get('cflag:24:育成回合计时');
+    const edu_weeks = era.get('cflag:24:育成回合计时');
     if (
       extra_flag.race === race_enum.begin_race &&
       edu_weeks < 48 &&

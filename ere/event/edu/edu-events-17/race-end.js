@@ -39,7 +39,7 @@ module.exports = async (hook, extra_flag) => {
     luna_talk = new CharaTalk(luna).set_color(color_17[0]),
     emperor_talk = new CharaTalk(emperor).set_color(color_17[1]),
     chara_talk = luna === 17 ? luna_talk : emperor_talk,
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:17:育成回合计时');
+    edu_weeks = era.get('cflag:17:育成回合计时');
   if (extra_flag.rank === 1) {
     hook.override = true;
     let wait_flag = false;

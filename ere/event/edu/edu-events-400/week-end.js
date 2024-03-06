@@ -20,7 +20,7 @@ const { location_enum } = require('#/data/locations');
  */
 module.exports = async function (hook, __, event_object) {
   const chara_talk = get_chara_talk(400),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:400:育成回合计时');
+    edu_weeks = era.get('cflag:400:育成回合计时');
   let wait_flag = false;
   if (new SSEduMarks().beginning === 1) {
     add_event(event_hooks.week_start, event_object);

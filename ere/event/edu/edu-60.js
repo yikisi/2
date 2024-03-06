@@ -28,7 +28,7 @@ const handlers = {};
  */
 handlers[event_hooks.week_start] = async (hook, _, event_object) => {
   const chara_talk = get_chara_talk(60),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:60:育成回合计时');
+    edu_weeks = era.get('cflag:60:育成回合计时');
   if (edu_weeks === 47 + 1 || edu_weeks === 95 + 1) {
     await print_event_name('新年', chara_talk);
     await chara_talk.say_and_wait(
@@ -209,7 +209,7 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
  */
 handlers[event_hooks.week_end] = async (hook, _, event_object) => {
   const chara_talk = get_chara_talk(60),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:60:育成回合计时');
+    edu_weeks = era.get('cflag:60:育成回合计时');
   if (edu_weeks === 47 + 32 || edu_weeks === 95 + 32) {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
@@ -258,7 +258,7 @@ handlers[event_hooks.out_start] = async (hook, _, event_object) => {
     return;
   }
   const chara_talk = get_chara_talk(60),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:60:育成回合计时'),
+    edu_weeks = era.get('cflag:60:育成回合计时'),
     me = get_chara_talk(0);
   if (edu_weeks === 95 + 10) {
     const mcqueen_talk = get_chara_talk(13);

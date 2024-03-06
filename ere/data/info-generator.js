@@ -815,8 +815,7 @@ module.exports = {
     if (!chara_id) {
       return '-';
     }
-    const time =
-      era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`);
+    const time = era.get(`cflag:${chara_id}:育成回合计时`);
     return `${['新秀', '经典', '资深'][Math.floor(time / 48)]}年 ${
       (Math.floor(time / 4) % 12) + 1
     } 月 第 ${(time % 4) + 1} 周`;

@@ -10,7 +10,7 @@ const mom = get_chara_talk(4);
 mom.name = '特别周妈妈';
 
 module.exports = async (hook, extra_flag) => {
-  let edu_weeks = era.get('flag:当前回合数') - era.get('cflag:1:育成回合计时');
+  let edu_weeks = era.get('cflag:1:育成回合计时');
   if (edu_weeks === 3 * 48 + 3 && era.get('love:1') >= 75) {
     await print_event_name('两人一起的北海道之旅');
     await spe.say_and_wait('训练员先生，我们找个时间去北海道吧！');

@@ -250,7 +250,7 @@ async function sys_have_baby(mother_id) {
   era.set(`cflag:${child_id}:母方角色`, mother_id);
   era.set(`cflag:${child_id}:出生月份`, cur_month);
   era.set(`cflag:${child_id}:出生日期`, birth_day);
-  era.set(`cflag:${child_id}:育成回合计时`, -200);
+  era.set(`cflag:${child_id}:育成回合计时`, 'x');
   // 和玩家相关的新生儿自动进队
   era.set(`cflag:${child_id}:招募状态`, Number(!(father_id && mother_id)));
   // 无关的会在招募池子里

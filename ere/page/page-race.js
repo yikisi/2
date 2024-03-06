@@ -503,8 +503,7 @@ async function race_page(race) {
     }
     race_rank[e] = tmp;
     aim_race_dict[e] = sys_call_check(e, check_stages.aim_race, {
-      edu_weeks:
-        era.get('flag:当前回合数') - era.get(`cflag:${e}:育成回合计时`),
+      edu_weeks: era.get(`cflag:${e}:育成回合计时`),
       race,
       rank: tmp,
     });
@@ -616,8 +615,7 @@ async function race_page(race) {
     const tmp = sys_reg_race(chara_id);
     tmp.curr.race = tmp.last.race = -1;
     tmp.curr.week = tmp.last.week = -1;
-    const edu_weeks =
-      era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`);
+    const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
     if (race_rank[chara_id] === 1 || race !== race_enum.begin_race) {
       new RaceHistory(chara_id).add_result(
         edu_weeks,

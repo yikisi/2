@@ -9,12 +9,7 @@ const { get_trainer_title } = require('#/data/info-generator');
 function check_team_limit() {
   return (
     filter_chara('cflag', '招募状态', recruit_flags.yes).reduce((a, e) => {
-      return (
-        a +
-        (e &&
-          era.get('flag:当前回合数') - era.get(`cflag:${e}:育成回合计时`) <
-            3 * 48)
-      );
+      return a + (e && era.get(`cflag:${e}:育成回合计时`) < 3 * 48);
     }, 0) >= trainer_team_limit[get_trainer_title().substring(0, 2)]
   );
 }

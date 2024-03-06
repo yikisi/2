@@ -140,7 +140,7 @@ async function sats_sho_event(daiya, me) {
 module.exports = async (_, extra_flag) => {
   const daiya = get_chara_talk(67),
     edu_marks = new DaiyaEduMarks(),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:67:育成回合计时'),
+    edu_weeks = era.get('cflag:67:育成回合计时'),
     me = get_chara_talk(0);
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     const mcqueen = get_chara_talk(13);

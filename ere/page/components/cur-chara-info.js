@@ -99,9 +99,7 @@ function cur_chara_component(chara_id, type, location_npc) {
       growth = era.get(`cflag:${chara_id}:成长阶段`),
       title = new CharaTitles(chara_id).get_colored_curr_title(true),
       in_train =
-        growth >= 2 &&
-        era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) <
-          3 * 48,
+        growth >= 2 && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48,
       motivation = era.get(`cflag:${chara_id}:干劲`),
       out_of_train = era.get(`cflag:${chara_id}:殿堂`);
     /** @type {*[]} */

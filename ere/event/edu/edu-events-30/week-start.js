@@ -20,7 +20,7 @@ module.exports = async function () {
     chara41_talk = get_chara_talk(41), // 樱花进王
     chara302_talk = get_chara_talk(302), // 北方风味
     chara301_talk = get_chara_talk(301), // 丰收时刻
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:30:育成回合计时');
+    edu_weeks = era.get('cflag:30:育成回合计时');
   if (edu_weeks === 22) {
     await print_event_name('湖泊中绽放的花朵', chara_talk);
     await chara_talk.say_and_wait(

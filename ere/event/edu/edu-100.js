@@ -16,8 +16,7 @@ const handlers = {};
 handlers[event_hooks.week_start] = async () => {
   const callname = sys_get_callname(100, 0);
   const me = get_chara_talk(0);
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:100:育成回合计时');
+  const edu_weeks = era.get('cflag:100:育成回合计时');
   if (edu_weeks === 47 + 1) {
     await print_event_name('新年的抱负', chara_talk);
     era.println();
@@ -1614,8 +1613,7 @@ handlers[event_hooks.week_start] = async () => {
 
 handlers[event_hooks.race_start] = async (hook, extra_flag) => {
   const callname = sys_get_callname(100, 0);
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:100:育成回合计时');
+  const edu_weeks = era.get('cflag:100:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name('出道战前·不安', chara_talk);
     await era.printAndWait('六月奇锐骏的出道战。');
@@ -1673,8 +1671,7 @@ handlers[event_hooks.race_end] =
   async (hook, extra_flag) => {
     const callname = sys_get_callname(100, 0);
     const me = get_chara_talk(0);
-    const edu_weeks =
-      era.get('flag:当前回合数') - era.get('cflag:100:育成回合计时');
+    const edu_weeks = era.get('cflag:100:育成回合计时');
     if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
       if (extra_flag.rank === 1) {
         await era.printAndWait('天边的玄鸟环绕在赛场之上，');

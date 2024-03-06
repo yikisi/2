@@ -134,8 +134,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
                   : 'warning',
                 disabled:
                   !chara_id ||
-                  cur_weeks - era.get(`cflag:${chara_id}:育成回合计时`) >=
-                    48 * 3 ||
+                  era.get(`cflag:${chara_id}:育成回合计时`) >= 48 * 3 ||
                   !sys_check_awake(chara_id) ||
                   !sys_check_awake(0) ||
                   player_base.time < 300 ||
@@ -153,8 +152,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
                   : 'warning',
                 disabled:
                   !chara_id ||
-                  cur_weeks - era.get(`cflag:${chara_id}:育成回合计时`) >=
-                    48 * 3 ||
+                  era.get(`cflag:${chara_id}:育成回合计时`) >= 48 * 3 ||
                   !sys_check_awake(chara_id) ||
                   !sys_check_awake(0) ||
                   jpy < 20 ||

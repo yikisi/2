@@ -63,7 +63,7 @@ handlers[check_stages.love_event] = () => {
 handlers[check_stages.next_week] = () => {
   const event_marks = new TeioEduMarks(),
     event_obj = new EventObject(3, cb_enum.edu),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时');
+    edu_weeks = era.get('cflag:3:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const event_obj_special = new EventObject(3, cb_enum.edu, true),
       races = era.get('cflag:3:育成成绩');
@@ -226,7 +226,7 @@ handlers[check_stages.after_race] = (extra_flag) => {
       sys_change_pressure(3, 2000);
     }
   } else if (
-    era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时') >= 96 &&
+    era.get('cflag:3:育成回合计时') >= 96 &&
     extra_flag.race === race_enum.tenn_spr
   ) {
     add_event(event_hooks.back_school, new EventObject(3, cb_enum.edu));

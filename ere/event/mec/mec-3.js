@@ -15,7 +15,7 @@ handlers[check_stages.mec_maxbase_buff] = () => -200 * era.get('status:3:腿伤'
 handlers[check_stages.mec_race_cloth] = () => {
   if (
     !era.get('status:3:腿伤') ||
-    era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时') !==
+    era.get('cflag:3:育成回合计时') !==
       race_infos[race_enum.arim_kin].date + 95 ||
     era.get('flag:当前赛事') !== race_enum.arim_kin
   ) {

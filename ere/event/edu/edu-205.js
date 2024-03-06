@@ -25,8 +25,7 @@ const handlers = {};
  * @param {{race:number,rank:number,relation_change:number,attr_change:number[],pt_change:number,love_change:number}} extra_flag
  */
 handlers[event_hooks.race_start] = async (_, extra_flag) => {
-  const edu_weeks =
-      era.get('flag:当前回合数') - era.get('cflag:205:育成回合计时'),
+  const edu_weeks = era.get('cflag:205:育成回合计时'),
     me = get_chara_talk(0),
     vp = get_chara_talk(205);
   let temp;
@@ -122,8 +121,7 @@ handlers[event_hooks.race_start] = async (_, extra_flag) => {
  * @param {{race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number}} extra_flag
  */
 handlers[event_hooks.race_end] = async (_, extra_flag) => {
-  const edu_weeks =
-      era.get('flag:当前回合数') - era.get('cflag:205:育成回合计时'),
+  const edu_weeks = era.get('cflag:205:育成回合计时'),
     me = get_chara_talk(0),
     montjeu = get_chara_talk(204),
     vp = get_chara_talk(205);

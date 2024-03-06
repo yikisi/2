@@ -309,11 +309,7 @@ module.exports = async () => {
     } else {
       const note_list = [...notes.common];
       sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach((e) => {
-        if (
-          era.get('flag:当前回合数') - era.get(`cflag:${e}:育成回合计时`) <
-            3 * 48 &&
-          notes[e]
-        ) {
+        if (era.get(`cflag:${e}:育成回合计时`) < 3 * 48 && notes[e]) {
           note_list.push(...notes[e]);
         }
       });

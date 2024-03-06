@@ -27,7 +27,7 @@ const { get_filtered_talents } = require('#/data/info-generator');
 module.exports = async function () {
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时'),
+    edu_weeks = era.get('cflag:3:育成回合计时'),
     event_marks = new TeioEduMarks();
   if (edu_weeks === 95 + 17) {
     await print_event_name('依靠', teio);

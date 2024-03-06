@@ -25,7 +25,7 @@ module.exports = async () => {
 
   era.resetData();
 
-  let player_gender = era.get('flag:角色性别') || 3;
+  let player_gender = 3;
 
   while (flag_new_game) {
     await era.clear();
@@ -125,6 +125,9 @@ module.exports = async () => {
           if (await page_custom()) {
             return false;
           }
+          if (era.get('flag:角色性别')) {
+            era.set('cflag:0:性别', era.get('flag:角色性别'));
+          }
 
           // 0号角色初始化
           Object.values(attr_names).forEach((v) =>
@@ -138,6 +141,7 @@ module.exports = async () => {
           era.set('flag:当前周', 0);
           era.set('flag:当前位置', location_enum.office);
           era.set('flag:极端粉丝', []);
+          era.set('cflag:育成回合计时', 4800);
 
           // 游戏设置
 

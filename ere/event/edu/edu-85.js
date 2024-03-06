@@ -213,8 +213,7 @@ handlers[event_hooks.office_study] = async (hook, __, event_object) => {
 };
 
 handlers[event_hooks.week_end] = async () => {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:85:育成回合计时');
+  const edu_weeks = era.get('cflag:85:育成回合计时');
   let wait_flag = false;
   if (edu_weeks === 47 + 32) {
     if (era.get('flag:当前位置') !== location_enum.beach) {
@@ -282,7 +281,7 @@ handlers[event_hooks.out_church] = async (hook, __, event_object) => {
     return;
   }
   const me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:85:育成回合计时');
+    edu_weeks = era.get('cflag:85:育成回合计时');
   if (edu_weeks === 47 + 1) {
     await print_event_name('新年参拜', ruby);
     await ruby.say_and_wait(`祝您新年快乐。`);

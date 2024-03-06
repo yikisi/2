@@ -28,7 +28,7 @@ const handlers = {};
 
 handlers[event_hooks.week_start] = async () => {
   const chara_talk = get_chara_talk(25),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:25:育成回合计时');
+    edu_weeks = era.get('cflag:25:育成回合计时');
   if (edu_weeks === 47 + 1) {
     await print_event_name('新年的抱负', chara_talk);
     await era.printAndWait('伴随着新年的到来，曼城茶座也晋升到了经典级。');
@@ -816,7 +816,7 @@ handlers[event_hooks.week_start] = async () => {
 
 handlers[event_hooks.week_end] = async () => {
   const chara_talk = get_chara_talk(25),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:25:育成回合计时');
+    edu_weeks = era.get('cflag:25:育成回合计时');
   if (
     edu_weeks === 47 + 32 &&
     era.get('cflag:25:位置') === era.get('cflag:0:位置')
@@ -909,7 +909,7 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
     return;
   }
   const chara_talk = get_chara_talk(25),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:25:育成回合计时'),
+    edu_weeks = era.get('cflag:25:育成回合计时'),
     me = get_chara_talk(0);
   if (edu_weeks === 95 + 10) {
     const mcqueen_talk = get_chara_talk(13);
@@ -1021,7 +1021,7 @@ handlers[event_hooks.out_church] = async (hook, extra_flag, event_object) => {
     return;
   }
   const chara_talk = get_chara_talk(25),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:25:育成回合计时');
+    edu_weeks = era.get('cflag:25:育成回合计时');
   if (edu_weeks === 95 + 1) {
     await print_event_name('新年的抱负', chara_talk);
 
@@ -1164,8 +1164,7 @@ handlers[event_hooks.train] = async (hook, extra_flag, event_object) => {
     return;
   }
   //todo 训练事件会多次触发
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:25:育成回合计时');
+  const edu_weeks = era.get('cflag:25:育成回合计时');
   if (edu_weeks === 1) {
     const tachyon_talk = get_chara_talk(32);
     await print_event_name('漆黑的猎犬', chara_talk);
@@ -1847,7 +1846,7 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
 
 handlers[event_hooks.race_start] = async (hook, extra_flag) => {
   const chara_talk = get_chara_talk(25),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:25:育成回合计时');
+    edu_weeks = era.get('cflag:25:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name('迎向出道战', chara_talk);
     await chara_talk.say_and_wait('不在……哪里都不在……到底去哪了……');
@@ -2164,7 +2163,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
 
 handlers[event_hooks.race_end] = async (hook, extra_flag) => {
   const chara_talk = get_chara_talk(25),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:25:育成回合计时'),
+    edu_weeks = era.get('cflag:25:育成回合计时'),
     me = get_chara_talk(0);
   if (
     extra_flag.race === race_enum.begin_race &&

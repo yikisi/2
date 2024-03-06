@@ -104,9 +104,7 @@ function get_suffix(chara_id, type) {
       ],
       sex = era.get(`cflag:${chara_id}:性别`),
       palace = era.get(`cflag:${chara_id}:殿堂`),
-      in_train =
-        era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) <
-        3 * 48;
+      in_train = era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48;
     ret.push(
       {
         config: { align: 'center', width: 2 },
@@ -191,7 +189,7 @@ async function select_target(type) {
       list_team.filter((chara_id) => sys_check_train_enabled(chara_id)),
       (chara_id) => {
         return (
-          ((cur_round - era.get(`cflag:${chara_id}:育成回合计时`)) << 15) +
+          (era.get(`cflag:${chara_id}:育成回合计时`) << 15) +
           get_chara_score(chara_id, true)
         );
       },

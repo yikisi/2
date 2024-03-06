@@ -118,11 +118,7 @@ function randomly_interact(in_team_list) {
         `status:${chara_id}:熬夜`,
         Math.random() < 0.05 + 0.025 * era.get(`talent:${chara_id}:时间观念`),
       );
-      if (
-        chara_id &&
-        era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) <
-          3 * 48
-      ) {
+      if (chara_id && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48) {
         era.set(
           `status:${chara_id}:摸鱼`,
           Math.random() < 0.02 + 0.01 * era.get(`talent:${chara_id}:偷懒克制`),

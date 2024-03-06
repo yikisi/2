@@ -23,7 +23,7 @@ module.exports = async function (hook, __, event_object) {
     chara301_talk = get_chara_talk(301),
     me = get_chara_talk(0),
     event_marks = new MaEduMarks(),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:4:育成回合计时');
+    edu_weeks = era.get('cflag:4:育成回合计时');
   let wait_flag = false;
   if (event_marks.beginning === 1) {
     event_marks.beginning++;

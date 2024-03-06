@@ -14,7 +14,7 @@ module.exports = async (hook, extra_flag) => {
   const chara_talk = new CharaTalk(46),
     chara4_talk = get_chara_talk(4),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:46:育成回合计时');
+    edu_weeks = era.get('cflag:46:育成回合计时');
   if (
     extra_flag.race === race_enum.begin_race &&
     edu_weeks < 48 &&

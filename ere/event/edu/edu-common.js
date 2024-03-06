@@ -124,8 +124,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
 };
 
 handlers[event_hooks.week_start] = async (chara_id) => {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`);
+  const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
   if (edu_weeks !== 143 + 9 || era.get(`cflag:${chara_id}:可再次育成`)) {
     return false;
   }

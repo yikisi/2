@@ -36,8 +36,7 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[extra_flag.race];
 
 handlers[check_stages.next_week] = () => {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:24:育成回合计时');
+  const edu_weeks = era.get('cflag:24:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const event_marks = new MayaEduMarks();
     const event_obj = new EventObject(24, cb_enum.edu);

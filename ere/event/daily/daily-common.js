@@ -100,9 +100,7 @@ handlers[event_hooks.select] = (chara_id) => {
       ];
       if (
         era.get(`cflag:${chara_id}:成长阶段`) === 2 &&
-        era.get('flag:当前回合数') -
-          era.get(`cflag:${chara_id}:育成回合计时`) >=
-          144
+        era.get(`cflag:${chara_id}:育成回合计时`) >= 144
       ) {
         talk_arr.push([
           chara.get_colored_name(),
@@ -237,8 +235,7 @@ handlers[event_hooks.talk] = async (chara_id) => {
     );
   } else if (
     era.get(`cflag:${chara_id}:成长阶段`) === 2 &&
-    era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) >=
-      144
+    era.get(`cflag:${chara_id}:育成回合计时`) >= 144
   ) {
     father_id = era.get(`cflag:${chara_id}:父方角色`);
     const temp = [];
@@ -296,10 +293,7 @@ handlers[event_hooks.talk] = async (chara_id) => {
           '，希望得到休息的许可。',
         ],
       ];
-    } else if (
-      era.get('flag:当前回合数') - era.get(`cflag:${chara_id}:育成回合计时`) <
-      3 * 48
-    ) {
+    } else if (era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48) {
       talk_arr = [
         [
           chara.get_colored_name(),

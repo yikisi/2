@@ -32,7 +32,7 @@ async function sex_with_nice_nature(extra_flag) {
  */
 module.exports = async (hook, extra_flag) => {
   const chara_talk = get_chara_talk(60),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:60:育成回合计时'),
+    edu_weeks = era.get('cflag:60:育成回合计时'),
     me = get_chara_talk(0);
   if (
     extra_flag.race === race_enum.begin_race &&

@@ -39,7 +39,7 @@ module.exports = async (hook, _, event_object) => {
       : { luna: 17, emperor: 9017 },
     luna_talk = new CharaTalk(luna).set_color(color_17[0]),
     emperor_talk = new CharaTalk(emperor).set_color(color_17[1]),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:17:育成回合计时');
+    edu_weeks = era.get('cflag:17:育成回合计时');
   if (edu_weeks >= 144) {
     if (edu_weeks === 144 && !event_marks.good_end) {
       normal_end(

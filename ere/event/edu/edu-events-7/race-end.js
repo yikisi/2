@@ -21,7 +21,7 @@ const { race_enum } = require('#/data/race/race-const');
 module.exports = async (hook, extra_flag) => {
   const gold_ship = get_chara_talk(7),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:7:育成回合计时');
+    edu_weeks = era.get('cflag:7:育成回合计时');
   if (extra_flag.rank === 1) {
     if (
       extra_flag.race === race_enum.begin_race &&

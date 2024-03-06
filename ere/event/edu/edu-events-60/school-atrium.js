@@ -17,7 +17,7 @@ module.exports = async (hook, extra_flag, event_object) => {
     return;
   }
   const chara_talk = get_chara_talk(60),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:60:育成回合计时'),
+    edu_weeks = era.get('cflag:60:育成回合计时'),
     me = get_chara_talk(0);
   if (edu_weeks === 47 + 33) {
     await print_event_name('下定决心努力前行！', chara_talk);

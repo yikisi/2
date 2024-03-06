@@ -37,10 +37,7 @@ module.exports = async () => {
           me.name
         } 咬了一口巧克力，轻轻拍了拍${kita.get_teen_sex_title()}的小脑袋。`,
       );
-      if (
-        era.get('flag:当前回合数') - era.get('cflag:68:育成回合计时') ===
-        47 + 6
-      ) {
+      if (era.get('cflag:68:育成回合计时') === 47 + 6) {
         new KitaEduMarks().classical_valentine++;
       }
       break;

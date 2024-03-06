@@ -16,7 +16,7 @@ const SSEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-400');
  */
 module.exports = async (hook) => {
   const event_marks = new SSEduMarks(),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:400:育成回合计时'),
+    edu_weeks = era.get('cflag:400:育成回合计时'),
     love = era.get('love:400'),
     chara_talk = get_chara_talk(400),
     me = get_chara_talk(0);

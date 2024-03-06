@@ -14,7 +14,7 @@ const chara_talk = new CharaTalk(4);
 module.exports = async (hook, extra_flag) => {
   const chara17_talk = get_chara_talk(17),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:4:育成回合计时');
+    edu_weeks = era.get('cflag:4:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name('出道战前・一切的起点', chara_talk);
     era.drawLine({ content: '比赛开始前，地下通道内' });

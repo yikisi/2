@@ -16,7 +16,7 @@ const your_name = era.get('callname:0:-2');
 module.exports = async function () {
   const chara52_talk = get_chara_talk(52),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:30:育成回合计时'),
+    edu_weeks = era.get('cflag:30:育成回合计时'),
     event_marks = new RiceEduMarks();
   if (event_marks.beginning === 1) {
     event_marks.beginning++;

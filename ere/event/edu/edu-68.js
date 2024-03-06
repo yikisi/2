@@ -314,7 +314,7 @@ handlers[event_hooks.school_atrium] = async (hook, __, event_object) => {
   }
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:68:育成回合计时');
+    edu_weeks = era.get('cflag:68:育成回合计时');
   if (edu_weeks === 42) {
     await print_event_name('悠闲的午后时光', kita);
     await era.printAndWait(
@@ -361,7 +361,7 @@ handlers[event_hooks.out_shopping] = async (_, __, event_object) => {
   }
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:68:育成回合计时');
+    edu_weeks = era.get('cflag:68:育成回合计时');
   if (edu_weeks === 95 + 14) {
     await print_event_name('粉丝感谢祭！', kita);
     await era.printAndWait(
@@ -469,7 +469,7 @@ handlers[event_hooks.out_start] = async function (_, __, event_object) {
   }
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:68:育成回合计时'),
+    edu_weeks = era.get('cflag:68:育成回合计时'),
     event_marks = new KitaEduMarks();
   if (edu_weeks === 95 + 1) {
     await print_event_name('新年拜访', kita);

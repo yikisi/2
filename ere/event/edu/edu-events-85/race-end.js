@@ -19,7 +19,7 @@ const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print
  */
 module.exports = async (hook, extra_flag) => {
   const me = get_chara_talk(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:85:育成回合计时');
+    edu_weeks = era.get('cflag:85:育成回合计时');
   if (
     extra_flag.race === race_enum.begin_race &&
     edu_weeks < 48 &&

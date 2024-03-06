@@ -24,7 +24,7 @@ module.exports = async (hook, extra_flag) => {
     chara47_talk = get_chara_talk(47), // 荒漠英雄
     chara26_talk = get_chara_talk(26), // 美浦波旁
     chara52_talk = get_chara_talk(52), // 春乌拉拉
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:30:育成回合计时');
+    edu_weeks = era.get('cflag:30:育成回合计时');
   if (
     extra_flag.race === race_enum.begin_race &&
     edu_weeks < 48 &&

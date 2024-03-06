@@ -13,7 +13,7 @@ const CharaTalk = require('#/utils/chara-talk');
 module.exports = async (hook, extra_flag) => {
   const falcon = new CharaTalk(46),
     me = get_falcon(0),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:46:育成回合计时');
+    edu_weeks = era.get('cflag:46:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name(`准备阶段！`, falcon);
     await era.printAndWait(

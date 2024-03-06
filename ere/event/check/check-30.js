@@ -41,8 +41,7 @@ handlers[check_stages.love_event] = () =>
   add_event(event_hooks.week_end, new EventObject(30, cb_enum.love));
 
 handlers[check_stages.next_week] = () => {
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:30:育成回合计时');
+  const edu_weeks = era.get('cflag:30:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const event_marks = new RiceEduMarks(),
       event_obj = new EventObject(30, cb_enum.edu),

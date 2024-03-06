@@ -42,8 +42,7 @@ handlers[check_stages.next_week] = () => {
     aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 0;
     aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 4;
   }
-  const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:71:育成回合计时');
+  const edu_weeks = era.get('cflag:71:育成回合计时');
   if (edu_weeks < 3 * 48) {
     check_and_register_aim_race(71, aim_races, edu_weeks);
   } else if (edu_weeks === 143 + 9) {

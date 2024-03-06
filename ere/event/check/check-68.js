@@ -54,7 +54,7 @@ handlers[check_stages.love_event] = () =>
 
 handlers[check_stages.next_week] = () => {
   const event_obj = new EventObject(68, cb_enum.edu),
-    edu_weeks = era.get('flag:当前回合数') - era.get('cflag:68:育成回合计时');
+    edu_weeks = era.get('cflag:68:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const event_marks = new KitaEduMarks();
     const event_obj_special = new EventObject(68, cb_enum.edu, true);
@@ -97,7 +97,7 @@ handlers[check_stages.next_week] = () => {
       case 47 + 11: // 稳健的支持与皋月阴云
         if (
           era.get('cflag:3:招募状态') === recruit_flags.yes &&
-          era.get('flag:当前回合数') - era.get('cflag:3:育成回合计时') >= 96
+          era.get('cflag:3:育成回合计时') >= 96
         ) {
           add_event(event_hooks.week_start, event_obj_special);
         }

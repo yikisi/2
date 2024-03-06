@@ -343,7 +343,7 @@ async function page_settings() {
     await era.clear();
     const buffer = [];
     buffer.push({ config: { content: '游戏模式' }, type: 'divider' });
-    difficulties.slice(0, 6).forEach((e, i) => {
+    difficulties.slice(0, 4).forEach((e, i) => {
       buffer.push(
         {
           accelerator: i,
