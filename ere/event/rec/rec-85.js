@@ -28,7 +28,6 @@ handlers[event_hooks.recruit] = async function () {
   era.print('新人训练员A「已经开始了哦！」');
   era.printButton('「现在就过去！」', 1);
   await era.input();
-  era.println();
 
   await era.printAndWait(
     '新人训练员同僚：「前辈说最好仔细看看的马娘……你看，就是那孩子。」',
@@ -74,7 +73,6 @@ handlers[event_hooks.recruit] = async function () {
   era.printButton('「是啊。」', 1);
   era.printButton('「不对，从大外侧的话……」', 2);
   await era.input();
-  era.println();
 
   era.print('新人训练员A「诶？骗人的吧！」');
   await era.printAndWait(
@@ -98,7 +96,6 @@ handlers[event_hooks.recruit] = async function () {
   );
   era.printButton('（那岂不是个头也不会怎么长了？）', 1);
   await era.input();
-  era.println();
 
   await era.printAndWait(
     `到底会有什么样的训练员陪伴她呢？此刻，${ruby.name} 周遭已经聚集了许多迫不及待想要招募她的训练员。`,
@@ -189,7 +186,6 @@ handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
       era.print('【接受防身术的训练，并学会整套的招式。】看来言而非虚。');
       era.printButton('（等等等等，要我做出刚才那个？？）', 1);
       await era.input();
-      era.println();
 
       await era.printAndWait(
         '你的疑问冒出的同时，已经有数名参与者失去了信心。',
@@ -220,7 +216,6 @@ handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
         era.print('那么要找谁呢？');
         era.printButton('回忆起大学期末考前的时光，答案已经显而易见了！', 1);
         await era.input();
-        era.println();
         await me.say_and_wait('——就决定是你了，白丝臭脸大小姐。', true);
         era.get('cflag:85:招募状态').special++;
       }
@@ -296,7 +291,6 @@ handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
       era.printButton('我也放弃了。', 1);
       era.printButton('就是有必要，才会要我们做的。', 2);
       ret = await era.input();
-      era.println();
       if (ret === 1) {
         // 招募失败，状态复位
         era.set('cflag:85:随机招募', 1);
@@ -324,7 +318,6 @@ handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
         2,
       );
       ret = await era.input();
-      era.println();
       if (ret === 1) {
         // 招募失败，状态复位
         era.set('cflag:85:随机招募', 1);
@@ -339,7 +332,6 @@ handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
       era.print(`美丽的深红色眼眸直直地凝视着 ${me.name}。`);
       era.printButton('「是！！！」', 1);
       await era.input();
-      era.println();
 
       ruby.say('唔———！');
       await ruby.say_and_wait('呼嗯…………');
@@ -358,12 +350,10 @@ handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
       era.print(`${me.name} 一个人默默地反复练习明天测试要考的社交舞。但是……`);
       era.printButton('（好难！）', 1);
       await era.input();
-      era.println();
 
       era.print('理所当然。怎么想都不是一朝一夕可以学会的东西。');
       era.printButton('（只能学多少算多少了。）', 1);
       await era.input();
-      era.println();
 
       era.print('哒，哒，哒……');
       ruby.say('您还在练习吗？');
@@ -436,13 +426,11 @@ handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
         1,
       );
       await era.input();
-      era.println();
 
       era.print(`无论是独特的氛围还是少女们的体香，都让 ${me.name} 无法习惯。`);
       era.print(`紧张的 ${me.name} 甚至把杯内红茶一口气喝光。`);
       era.printButton('（再续一杯吧！嗯）', 1);
       await era.input();
-      era.println();
 
       await ruby.say_and_wait('盯……');
       era.println();
@@ -451,7 +439,6 @@ handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
       era.print('在这种情况下，要是自己倒的话……');
       era.printButton('（泡茶的技术真好。）', 1);
       await era.input();
-      era.println();
 
       await era.printAndWait(
         `……${me.name} 感觉到这个说法好像不太对。但更能肯定自己主动倒茶是坏了规矩的。`,
@@ -464,7 +451,6 @@ handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
       era.print('管家「大小姐及各位，时间到了。接送的车已经准备好了。」');
       era.printButton('「餐会？」', 1);
       await era.input();
-      era.println();
 
       await ruby.say_and_wait(
         '是的，同时也是下一个测试会场。那么我们就出发吧。',
@@ -517,22 +503,18 @@ handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
       ruby.say('辛苦啦。那么，接下来我还有训练要做的关系，先在此失陪了。');
       era.printButton('「诶？现在开始吗？」', 1);
       await era.input();
-      era.println();
 
       ruby.say('是的。您不用客气，尽管先回去吧。明天的测验是——');
       era.printButton('「有什么我能帮上忙的吗！」', 1);
       await era.input();
-      era.println();
 
       ruby.say('没有特别需要的。');
       era.printButton('「帮忙测个时间什么的！」', 1);
       await era.input();
-      era.println();
 
       ruby.say('……');
       era.printButton('「想测啊，很想啊。」', 1);
       await era.input();
-      era.println();
 
       await ruby.say_and_wait('请自便，尽管测吧。');
 
@@ -554,12 +536,10 @@ handlers[event_hooks.week_end] = async function (extra_flag, event_object) {
   era.print('但是，随着测试进入尾声，意味着这样的帮忙也是最后一次了。');
   era.printButton('「辛苦啦。」', 1);
   await era.input();
-  era.println();
 
   ruby.say('您也是。');
   era.printButton('「训练员选拔测试很快就要结束了呢。」', 1);
   await era.input();
-  era.println();
 
   await ruby.say_and_wait(
     '您说的对。视线又往下飘了，请抬起胸膛，缩起下颚站好。',
@@ -579,7 +559,6 @@ handlers[event_hooks.week_end] = async function (extra_flag, event_object) {
   );
   era.printButton('「至今为止，真的非常感谢！」', 1);
   await era.input();
-  era.println();
 
   await ruby.say_and_wait('呼……');
   era.println();
@@ -611,7 +590,6 @@ handlers[event_hooks.week_start] = async function () {
   );
   era.printButton('「……咦？」', 1);
   await era.input();
-  era.println();
 
   era.print(`${me.name} 一手抓紧那封信，匆匆跑出去训练员室。`);
   await era.printAndWait(
@@ -621,14 +599,12 @@ handlers[event_hooks.week_start] = async function () {
   ruby.say('哈啊……从那个神情来看，您似乎收到信了呢。');
   era.printButton('「这结果……」', 1);
   await era.input();
-  era.println();
 
   era.print(`${ruby.name} 庄重地向你行礼。`);
   ruby.say('从今以后，就请您多多指教了。彼此一起更加努力，好好地精进自己吧。');
   ruby.say('再见');
   era.printButton('「这【及格】是指？」', 1);
   await era.input();
-  era.println();
 
   await era.printAndWait(
     `${me.name} 确定了纸面上写的【及格】并不是搞错了，但是为什么？自己各种测试的结果只能说差强人意，丝毫搬不上台面，除了少数几个……`,

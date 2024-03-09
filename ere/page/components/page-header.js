@@ -1,16 +1,32 @@
 ﻿const era = require('#/era-electron');
 
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
+const sys_filter_chara = require('#/system/sys-filter-chara');
+
 const date_indicator = require('#/page/components/date-indicator');
 const race_indicator = require('#/page/components/race-indicator');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { celebration_color, money_color } = require('#/data/color-const');
+const { attr_background_colors, trainer_colors } = require('#/data/const.json');
+const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_status,
   get_trainer_title,
   get_celebration,
 } = require('#/data/info-generator');
-const { attr_background_colors, trainer_colors } = require('#/data/const.json');
-const { location_name } = require('#/data/locations');
+const { location_name, location_enum } = require('#/data/locations');
+const { race_infos } = require('#/data/race/race-const');
+
+const show_race_loc_dict = {};
+show_race_loc_dict[location_enum.office] =
+  show_race_loc_dict[location_enum.beach] =
+  show_race_loc_dict[location_enum.basement] =
+  show_race_loc_dict[location_enum.paris] =
+  show_race_loc_dict[location_enum.hongkong] =
+  show_race_loc_dict[location_enum.guangzhou] =
+    1;
 
 function page_header() {
   let cur_year = era.get('flag:当前年');
@@ -20,119 +36,174 @@ function page_header() {
     era.print('当前未加载存档', { align: 'center' });
   } else {
     const celebration = get_celebration(),
-      cur_fame = era.get('flag:当前声望'),
       cur_coin = era.get('flag:当前马币'),
+      cur_fame = era.get('flag:当前声望'),
+      cur_rounds = era.get('flag:当前回合数'),
       money_change = era.get('flag:收支'),
+      race_characters = sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
+        .map((e) => {
+          const ret = sys_reg_race(e).curr;
+          ret.id = e;
+          return {
+            id: e,
+            race: ret.race,
+            week: ret.week,
+          };
+        })
+        .filter((e) => e.week === cur_rounds),
       title_level = get_trainer_title(),
       trainer_title_color = trainer_colors[title_level.substring(0, 2)];
-    era.printInColRows([{ type: 'divider' }], {
-      columns: [
-        {
-          config: { width: 16 },
-          content: [
-            ...date_indicator(),
-            {
-              content: celebration ? ` [${celebration}]` : '',
-              color: celebration_color,
-            },
-          ],
-          type: 'text',
-        },
-        {
-          config: { width: 8 },
-          content: [
-            '位于 ',
-            {
-              content: location_name[era.get('flag:当前位置')],
-              fontWeight: 'bold',
-            },
-          ],
-          type: 'text',
-        },
-        {
-          config: { width: 16 },
-          content: [
-            {
-              color: trainer_title_color,
-              content: cur_fame.toLocaleString(),
-              fontWeight: 'bold',
-            },
-            ' 声望 (',
-            {
-              color: trainer_title_color,
-              content: title_level,
-              fontWeight: 'bold',
-            },
-            ')',
-            ...race_indicator(0),
-          ],
-          type: 'text',
-        },
-        {
-          config: { width: 8 },
-          content: [
-            {
-              color: money_color,
-              content: cur_coin.toLocaleString(),
-              fontWeight: 'bold',
-            },
-            {
-              color: money_change > 0 ? 'palegreen' : 'orangered',
-              content: money_change
-                ? ` (${money_change > 0 ? '+' : ''}${money_change})`
-                : '',
-              fontWeight: 'bold',
-              opacity: 0.5,
-            },
-            ' 马币',
-          ],
-          type: 'text',
-        },
-        {
-          config: { width: 2 },
-          content: '体力',
-          type: 'text',
-        },
-        {
-          config: {
-            color: attr_background_colors['体力'],
-            height: 22,
-            width: 9,
+    era.printInColRows(
+      [{ type: 'divider' }],
+      {
+        columns: [
+          {
+            config: { width: 16 },
+            content: [
+              ...date_indicator(),
+              {
+                content: celebration ? ` [${celebration}]` : '',
+                color: celebration_color,
+              },
+            ],
+            type: 'text',
           },
-          inContent: `${era.get(`base:0:体力`)}/${era.get(`maxbase:0:体力`)}`,
-          percentage:
-            (era.get(`base:0:体力`) * 100) / era.get(`maxbase:0:体力`),
-          type: 'progress',
-        },
-        {
-          config: { offset: 1, width: 2 },
-          content: '精力',
-          type: 'text',
-        },
-        {
-          config: {
-            color: attr_background_colors['精力'],
-            height: 22,
-            width: 9,
+          {
+            config: { width: 8 },
+            content: [
+              '位于 ',
+              {
+                content: location_name[era.get('flag:当前位置')],
+                fontWeight: 'bold',
+              },
+            ],
+            type: 'text',
           },
-          inContent: `${era.get(`base:0:精力`)}/${era.get(`maxbase:0:精力`)}`,
-          percentage:
-            (era.get(`base:0:精力`) * 100) / era.get(`maxbase:0:精力`),
-          type: 'progress',
-        },
-        {
-          config: { width: 2 },
-          content: '状态',
-          type: 'text',
-        },
-        {
-          config: { width: 22 },
-          content: get_status(0),
-          type: 'text',
-        },
-      ],
-      config: { width: 16 },
-    });
+          {
+            config: { width: 16 },
+            content: [
+              {
+                color: trainer_title_color,
+                content: cur_fame.toLocaleString(),
+                fontWeight: 'bold',
+              },
+              ' 声望 (',
+              {
+                color: trainer_title_color,
+                content: title_level,
+                fontWeight: 'bold',
+              },
+              ')',
+              ...race_indicator(0),
+            ],
+            type: 'text',
+          },
+          {
+            config: { width: 8 },
+            content: [
+              {
+                color: money_color,
+                content: cur_coin.toLocaleString(),
+                fontWeight: 'bold',
+              },
+              {
+                color: money_change > 0 ? 'palegreen' : 'orangered',
+                content: money_change
+                  ? ` (${money_change > 0 ? '+' : ''}${money_change})`
+                  : '',
+                fontWeight: 'bold',
+                opacity: 0.5,
+              },
+              ' 马币',
+            ],
+            type: 'text',
+          },
+          {
+            config: { width: 2 },
+            content: '体力',
+            type: 'text',
+          },
+          {
+            config: {
+              color: attr_background_colors['体力'],
+              height: 22,
+              width: 9,
+            },
+            inContent: `${era.get(`base:0:体力`)}/${era.get(`maxbase:0:体力`)}`,
+            percentage:
+              (era.get(`base:0:体力`) * 100) / era.get(`maxbase:0:体力`),
+            type: 'progress',
+          },
+          {
+            config: { offset: 1, width: 2 },
+            content: '精力',
+            type: 'text',
+          },
+          {
+            config: {
+              color: attr_background_colors['精力'],
+              height: 22,
+              width: 9,
+            },
+            inContent: `${era.get(`base:0:精力`)}/${era.get(`maxbase:0:精力`)}`,
+            percentage:
+              (era.get(`base:0:精力`) * 100) / era.get(`maxbase:0:精力`),
+            type: 'progress',
+          },
+          {
+            config: { width: 2 },
+            content: '状态',
+            type: 'text',
+          },
+          {
+            config: { width: 22 },
+            content: get_status(0),
+            type: 'text',
+          },
+        ],
+        config: { width: 16 },
+      },
+      {
+        columns:
+          race_characters.length > 0
+            ? [
+                {
+                  config: { align: 'center', fontWeight: 'bold' },
+                  content: '本周赛事',
+                  type: 'text',
+                },
+                ...race_characters.slice(0, 2).map((e) => {
+                  return {
+                    config: { align: 'center' },
+                    content: [
+                      get_chara_talk(e.id).get_colored_name(),
+                      ' ',
+                      race_infos[e.race].get_colored_name(),
+                    ],
+                    type: 'text',
+                  };
+                }),
+                show_race_loc_dict[era.get('flag:当前位置')]
+                  ? {
+                      accelerator: 991,
+                      config: {
+                        align: 'center',
+                        disableWarning: true,
+                        showAcc: false,
+                      },
+                      content: '查看全部',
+                      type: 'button',
+                    }
+                  : {
+                      config: { align: 'center' },
+                      content: race_characters.length > 2 ? '……' : '',
+                      type: 'text',
+                    },
+              ]
+            : [],
+        config: { align: 'center', width: 8 },
+      },
+    );
   }
 }
 

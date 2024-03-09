@@ -9,6 +9,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
  * @param {number[]} attr_change
  * @param {number} pt_change
  * @param {Record<string,number>} [base_change]
+ * @param {boolean} [skip_line_break]
  * @returns {boolean}
  */
 function get_attr_and_print_in_event(
@@ -16,8 +17,9 @@ function get_attr_and_print_in_event(
   attr_change,
   pt_change,
   base_change,
+  skip_line_break,
 ) {
-  era.println();
+  !skip_line_break && era.println();
   let buffer = (attr_change || new Array(5))
     .map((e, i) => sys_change_attr_and_print(chara_id, i, e))
     .filter((e) => e.length);

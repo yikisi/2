@@ -508,7 +508,6 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
     era.printButton('「年菜约会」', 2);
     era.printButton('「新年参拜约会」', 3);
     const ret = await era.input();
-    era.println();
 
     if (ret === 1) {
       await chara_talk.say_and_wait('哇，赞成！！');
@@ -885,7 +884,6 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
     era.printButton('「你已经抓住我的心了」', 1);
     era.printButton('「那你可得好好加油了呢」', 2);
     const ret = await era.input();
-    era.println();
 
     if (ret === 1) {
       await chara_talk.say_and_wait('咦，真的吗？可是……');

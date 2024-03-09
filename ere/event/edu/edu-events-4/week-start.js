@@ -916,7 +916,6 @@ module.exports = async function (hook, _, event_object) {
     era.printButton('「一起出去逛街然后把不愉快都一扫而空吧」', 2);
     era.printButton('「今天就在训练室好好休息吧」', 3);
     const ret = await era.input();
-    era.println();
     if (ret === 1) {
       await chara_talk.say_and_wait('嗯嗯,在草地上飞驰把烦恼全部甩开吧');
       await chara_talk.say_and_wait(

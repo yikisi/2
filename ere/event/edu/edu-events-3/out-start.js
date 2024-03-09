@@ -67,7 +67,6 @@ module.exports = async (hook, _, event_object) => {
       3,
     );
     const ret = await era.input();
-    era.println();
     if (ret === 1) {
       wait_flag =
         get_attr_and_print_in_event(3, [0, 0, 20, 20, 0], 15) || wait_flag;

@@ -443,7 +443,6 @@ handlers[event_hooks.out_church] = async (_, __, event_object) => {
   era.printButton('（希望小北能应对更长的比赛）', 2);
   era.printButton('（希望小北能掌握更多技巧）', 3);
   const ret = await era.input();
-  era.println();
   if (ret === 1) {
     wait_flag =
       get_attr_and_print_in_event(68, [25, 0, 0, 0, 0], 0) || wait_flag;

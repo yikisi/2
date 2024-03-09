@@ -566,7 +566,6 @@ module.exports = async (hook, extra_flag) => {
         );
         era.printButton('「我的爱人，名叫鲁铎象征。」', 1);
         await era.input();
-        era.println();
         good_end(event_marks);
       } else {
         let luna_end = (event_marks.luna_end =

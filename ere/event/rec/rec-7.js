@@ -65,7 +65,6 @@ module.exports = {
 
       era.printButton('（这到底是……）', 1);
       await era.input();
-      era.println();
       await era.printAndWait(
         `选拔赛结束了。${chara_name} 以破纪录的成绩拿下第一名。${your_name} 听到周遭的其他训练员都在议论纷纷，显然已经准备去争夺招募这个好苗子了。`,
       );

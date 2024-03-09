@@ -154,7 +154,6 @@ module.exports = async function (hook, __, event_object) {
 
     era.printButton('「与重获新生的无敌帝王小姐同行，不胜荣幸。」', 1);
     await era.input();
-    era.println();
 
     wait_flag = sys_like_chara(3, 0, 10, true, 1) || wait_flag;
     wait_flag =

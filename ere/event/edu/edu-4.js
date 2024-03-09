@@ -183,7 +183,6 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
           1,
         );
         await era.input();
-        era.println();
         hook.arg = -1;
       } else {
         await era.printAndWait(
@@ -991,7 +990,6 @@ handlers[event_hooks.out_church] = async () => {
     era.printButton(`「大概是各方面都很均衡的训练吧！」`, 2);
     era.printButton(`「应该是磨练自己的长处吧！」`, 3);
     const ret = await era.input();
-    era.println();
     if (ret === 1) {
       await chara_talk.say_and_wait(
         '俗话说“居移气,养移体”，注意身体健康确实很重要呢.',

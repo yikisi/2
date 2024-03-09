@@ -19,9 +19,6 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
-const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date,
-  edu_weeks_shuk_sho = 48 + race_infos[race_enum.shuk_sho].date;
-
 /** @param {number} chara_id */
 function sys_handle_palace(chara_id) {
   era.set(`cflag:${chara_id}:殿堂`, 1);
@@ -89,71 +86,16 @@ function sys_handle_palace(chara_id) {
     titles,
   });
   const races = new RaceHistory(chara_id).get_entries();
-  let invincible_1 = true,
-    invincible_2 = true,
-    cup_1 = 0,
-    cup_2 = 0,
-    cup_3 = 0,
-    g1_count = 0,
+  let g1_count = 0,
     pop_g1_count = 0;
   races.forEach((e) => {
-    if (e.rank === 1) {
-      switch (e.race) {
-        case race_enum.sats_sho:
-          cup_1++;
-          break;
-        case race_enum.oka_sho:
-          cup_1 += 2;
-          break;
-        case race_enum.toky_yus:
-          cup_2++;
-          break;
-        case race_enum.yush_him:
-          cup_2 += 2;
-          break;
-        case race_enum.kiku_sho:
-          cup_3++;
-          break;
-        case race_enum.shuk_sho:
-          cup_3 += 2;
-          break;
-        default:
-          if (race_infos[e.race].race_class === class_enum.G1) {
-            g1_count++;
-            if (e.pop === 1) {
-              pop_g1_count++;
-            }
-          }
-      }
-    } else {
-      if (e.weeks < edu_weeks_kiku_sho) {
-        invincible_1 = false;
-      }
-      if (e.weeks < edu_weeks_shuk_sho) {
-        invincible_2 = false;
+    if (race_infos[e.race].race_class === class_enum.G1) {
+      g1_count++;
+      if (e.pop === 1) {
+        pop_g1_count++;
       }
     }
   });
-  if (cup_1 & 1 && cup_2 & 1 && cup_3 & 1) {
-    titles.push({ n: '三冠', c: buff_colors[1] });
-    invincible_1 && titles.push({ n: '无败三冠', c: buff_colors[1] });
-  }
-  if (cup_1 & 2 && cup_2 & 2 && cup_3 & 2) {
-    titles.push({ n: '三宝冠', c: buff_colors[1] });
-    invincible_2 && titles.push({ n: '无败三宝冠', c: buff_colors[1] });
-  }
-  if (cup_1 === cup_2 && cup_2 === cup_3 && cup_3 === 3) {
-    titles.push({ n: '极限六冠', c: buff_colors[1] });
-    if (invincible_1 && invincible_2) {
-      titles.push({ n: '无败六冠', c: buff_colors[1] });
-    }
-  }
-  if (cup_1 && cup_2 && cup_3 && (cup_1 !== cup_2 || cup_2 !== cup_3)) {
-    titles.push({ n: '变则三冠', c: buff_colors[1] });
-    if ((cup_3 & 1 && invincible_1) || (cup_3 & 2 && invincible_2)) {
-      titles.push({ n: '无败变则三冠', c: buff_colors[1] });
-    }
-  }
   if (races.length >= 30) {
     titles.push({ n: '铁马娘子', c: buff_colors[1] });
     g1_count && titles.push({ n: '黄金旅程', c: buff_colors[1] });

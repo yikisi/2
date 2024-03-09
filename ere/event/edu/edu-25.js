@@ -51,7 +51,6 @@ handlers[event_hooks.week_start] = async () => {
     era.printButton(`「让${chara_talk.sex}好好享受一杯咖啡」`, 2);
     era.printButton('「去外面闲逛吧」', 3);
     const ret = await era.input();
-    era.println();
 
     if (ret === 1) {
       await chara_talk.say_and_wait(

@@ -17,7 +17,7 @@ const { race_rewards } = require('#/data/race/race-const');
 const { fumble_result, attr_enum } = require('#/data/train-const');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
-/** @type {Record<string,function(chara_id:number,hook:HookArg,extra_flag:*,event_object:EventObject):Promise<*>>} */
+/** @type {Record<string,function(number,HookArg,Record<string,*>,EventObject):Promise<*>>} */
 const handlers = {};
 
 /**

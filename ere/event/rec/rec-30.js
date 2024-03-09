@@ -76,7 +76,6 @@ module.exports = {
 
           era.printButton('去告诉她是她多虑了吧', 1);
           await era.input();
-          era.println();
           era.print('正准备朝她搭话的时候');
           era.print(
             `${chara_name}「已经决定要在下次选拔赛出场了。好好地出场，踏踏实实地跑，这样一来……」`,
@@ -208,7 +207,6 @@ module.exports = {
 
           era.printButton('不能就这样放着她不管！', 1);
           await era.input();
-          era.println();
           era.print(`「${chara_name}，来我这里吧！」`);
           era.print(`${chara_name} “唰”地抬起了耳朵。`);
           era.print(`${chara_name}「诶？」`, {
@@ -238,7 +236,6 @@ module.exports = {
 
           era.printButton('「即便如此我也想支持你」', 1);
           await era.input();
-          era.println();
           era.print(`${chara_name}「好厉害……像 ${callname} 一样……」`, {
             color: chara_color,
           });

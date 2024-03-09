@@ -52,7 +52,6 @@ handlers[event_hooks.week_start] = async () => {
       3,
     );
     const ret = await era.input();
-    era.println();
 
     if (ret === 1) {
       await chara_talk.say_and_wait('学习年轻人的文化吗……原来如此呢。');
@@ -496,7 +495,6 @@ handlers[event_hooks.week_start] = async () => {
     era.printButton('「自己的衣服自己洗！」', 2);
     era.printButton('「给奇锐骏揉揉肩吧！」', 3);
     const ret = await era.input();
-    era.println();
 
     if (ret === 1) {
       await era.printAndWait(

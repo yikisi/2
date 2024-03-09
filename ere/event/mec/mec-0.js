@@ -5,9 +5,9 @@ const check_stages = require('#/data/event/check-stages');
 
 const punish_desc = ['比赛用母马', '泄欲用母马'];
 
-/** @param {number} stage_id */
-module.exports = (stage_id) => {
-  if (stage_id === check_stages.mec_status) {
+/** @param {number} mec_type */
+module.exports = (mec_type) => {
+  if (mec_type === check_stages.mec_status) {
     const punish_level = era.get('flag:惩戒力度'),
       ret_list = [];
     if (punish_desc[punish_level - 1] !== undefined) {

@@ -781,7 +781,6 @@ handlers[event_hooks.out_church] = async () => {
   era.println();
   era.printButton('「没什么人呢。」', 1);
   await era.input();
-  era.println();
   await era.printAndWait(`这件看起来相当古旧的神社此时相当冷清。`);
   await era.printAndWait(
     `不仅来人只有 ${me.name} 和 ${kita.name} 两个，就连神社的神官和巫女也看不到影子。`,

@@ -45,8 +45,6 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
       era.printButton('「多子」', 4);
     }
     const ret = await era.input();
-    era.println();
-
     if (ret === 1) {
       await chara_talk.say_and_wait(
         `健康啊……看来 ${era.get(

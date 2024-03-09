@@ -40,7 +40,6 @@ module.exports = {
     );
     era.printButton(`这个时候.......会是谁呢？`, 1);
     await era.input();
-    era.println();
     await era.printAndWait(
       `拨开挡在面前的树枝，你重新回到了林间小道上，看到了那黑色的身影。`,
     );
@@ -107,7 +106,6 @@ module.exports = {
       1,
     );
     await era.input();
-    era.println();
     await era.printAndWait(
       `${chara_talk.name}的心情似乎好了一点，但是当你想要继续和${chara_talk.sex}搭话的时候，却发现${chara_talk.sex}又一言不发的离开了。`,
     );
@@ -136,7 +134,6 @@ module.exports = {
       2,
     );
     await era.input();
-    era.println();
     await era.printAndWait(
       `当你还在思考的时候，${chara_talk.name}似乎快你一步做出了选择，`,
     );

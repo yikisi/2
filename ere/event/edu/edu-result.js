@@ -315,6 +315,7 @@ handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
       extra_flag.attr_change,
       extra_flag.pt_change,
       extra_flag.base_change,
+      true,
     ) || ret_flag;
   ret_flag && (await era.waitAnyKey());
 };

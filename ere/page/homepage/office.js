@@ -307,9 +307,11 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
                     sys_get_move_cost(location_enum.playground),
                     player_base,
                   ),
-                buttonType: new EventMarks(0).get(event_hooks.recruit_start)
-                  ? 'danger'
-                  : 'warning',
+                buttonType:
+                  new EventMarks(0).get(event_hooks.recruit_start) ||
+                  new EventMarks(0).get(event_hooks.recruit)
+                    ? 'danger'
+                    : 'warning',
                 width: 6,
               },
               content: '前往训练场 (招募)',
@@ -690,6 +692,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       era.set('flag:筛除外出活动', !era.get('flag:筛除外出活动'));
       break;
     case 404:
+    case 991:
       await report_race_page();
       break;
     case 405:

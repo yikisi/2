@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_call_check = require('#/system/script/sys-call-check');
+const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const {
@@ -321,6 +322,7 @@ module.exports = {
     print_change(chara_id, new_val - 1, new_val);
     era.set(`cflag:${chara_id}:爱慕暂拒`, 0);
     await CharaTalk.me.say_and_wait('已经不能回头了……', true);
+    sys_call_mec(chara_id, check_stages.mec_callname_customize);
     await punish_unfaithful(chara_id, new_val);
     return true;
   },

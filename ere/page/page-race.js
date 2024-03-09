@@ -71,6 +71,9 @@ const adaptability2race = [
   race_enum.heia_sta,
 ];
 
+const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date,
+  edu_weeks_shuk_sho = 48 + race_infos[race_enum.shuk_sho].date;
+
 /**
  * @param {number} chara_id
  * @param {RaceInfo} info
@@ -752,6 +755,68 @@ async function race_page(race) {
       new_title_dict[e].push({ n: '父亲力量', c: buff_colors[2] });
     }
   });
+  if (
+    (race === race_enum.kiku_sho || race === race_enum.shuk_sho) &&
+    best_rank === 1
+  ) {
+    let invincible_1 = true,
+      invincible_2 = true,
+      cup_1 = 0,
+      cup_2 = 0,
+      cup_3 = 0;
+    new RaceHistory(mvp_id).get_entries().forEach((e) => {
+      if (e.rank === 1) {
+        switch (e.race) {
+          case race_enum.sats_sho:
+            cup_1++;
+            break;
+          case race_enum.oka_sho:
+            cup_1 += 2;
+            break;
+          case race_enum.toky_yus:
+            cup_2++;
+            break;
+          case race_enum.yush_him:
+            cup_2 += 2;
+            break;
+          case race_enum.kiku_sho:
+            cup_3++;
+            break;
+          case race_enum.shuk_sho:
+            cup_3 += 2;
+        }
+      } else {
+        if (e.weeks < edu_weeks_kiku_sho) {
+          invincible_1 = false;
+        }
+        if (e.weeks < edu_weeks_shuk_sho) {
+          invincible_2 = false;
+        }
+      }
+    });
+    if (cup_1 & 1 && cup_2 & 1 && cup_3 & 1) {
+      new_title_dict[mvp_id].push({ n: '三冠', c: buff_colors[1] });
+      invincible_1 &&
+        new_title_dict[mvp_id].push({ n: '无败三冠', c: buff_colors[1] });
+    }
+    if (cup_1 & 2 && cup_2 & 2 && cup_3 & 2) {
+      new_title_dict[mvp_id].push({ n: '三宝冠', c: buff_colors[1] });
+      invincible_2 &&
+        new_title_dict[mvp_id].push({ n: '无败三宝冠', c: buff_colors[1] });
+    }
+    if (cup_1 === cup_2 && cup_2 === cup_3 && cup_3 === 3) {
+      new_title_dict[mvp_id].push({ n: '极限六冠', c: buff_colors[1] });
+      if (invincible_1 && invincible_2) {
+        new_title_dict[mvp_id].push({ n: '无败六冠', c: buff_colors[1] });
+      }
+    }
+    if (cup_1 && cup_2 && cup_3 && (cup_1 !== cup_2 || cup_2 !== cup_3)) {
+      new_title_dict[mvp_id].push({ n: '变则三冠', c: buff_colors[1] });
+      if ((cup_3 & 1 && invincible_1) || (cup_3 & 2 && invincible_2)) {
+        new_title_dict[mvp_id].push({ n: '无败变则三冠', c: buff_colors[1] });
+      }
+    }
+  }
   if (hentai_flag) {
     era.set('flag:变态行为', 1);
   }
@@ -761,17 +826,25 @@ async function race_page(race) {
   ) {
     fame_reward -= 50;
   }
-  if (fame_reward && (fame_reward > 0 || !is_pregnant_slave)) {
+  if (fame_reward !== 0 && (fame_reward > 0 || !is_pregnant_slave)) {
     sys_change_fame(fame_reward);
-    await era.printAndWait([
-      '因为队伍成员的',
-      fame_reward > 0 ? '出色表现' : hentai_flag ? '变态行为' : '比赛失利',
-      '，社会对 ',
-      get_chara_talk(0).get_colored_name(),
-      ' 的评价',
-      fame_reward > 0 ? '上升' : '降低',
-      '了！',
-    ]);
+    if (fame_reward > 0) {
+      await era.printAndWait([
+        '因为队伍成员的',
+        '出色表现',
+        '，社会对 ',
+        get_chara_talk(0).get_colored_name(),
+        ' 的评价上升了！',
+      ]);
+    } else {
+      await era.printAndWait([
+        '因为队伍成员的',
+        hentai_flag ? '变态行为' : '比赛失利',
+        '，社会对 ',
+        get_chara_talk(0).get_colored_name(),
+        ' 的评价降低了！',
+      ]);
+    }
   }
   const prize_ratio = 0.04 * get_trainer_level() + 0.04,
     total_prize = sys_change_money(

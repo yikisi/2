@@ -69,7 +69,6 @@ module.exports = async (hook, _, event_object) => {
 
     era.printButton('「说起来……」', 1);
     await era.input();
-    era.println();
 
     await gold_ship.say_and_wait('嗯？怎么啦？你也要对我表达点什么吗？');
     await era.printAndWait(
@@ -79,7 +78,6 @@ module.exports = async (hook, _, event_object) => {
 
     era.printButton('「今年的经典级比赛，你可要好好拿出成绩哦。」', 1);
     await era.input();
-    era.println();
 
     await gold_ship.say_and_wait(
       '什么嘛？经典？我今年倒是想秀一把激烈无比的吉他solo技术啦，不过逆个潮流拉小提琴好像也可以有哦。',
@@ -91,7 +89,6 @@ module.exports = async (hook, _, event_object) => {
     era.printButton('「现在就来想想吧！」', 2);
     era.printButton('「搞一波巨蛋巡回演唱会吧！」', 3);
     const ret = await era.input();
-    era.println();
 
     if (ret === 1) {
       await gold_ship.say_and_wait('原来如此，是要锻炼耐力来应付长时间演奏！');
@@ -176,7 +173,6 @@ module.exports = async (hook, _, event_object) => {
 
     era.printButton('「起床啦！！！太阳晒屁股了！！！」', 1);
     await era.input();
-    era.println();
 
     await gold_ship.say_and_wait(
       '呜哇～吓死我了！我刚才梦到了自己在大巴上等着去海滩合宿呢！你要怎么赔啊！',
@@ -204,7 +200,6 @@ module.exports = async (hook, _, event_object) => {
 
     era.printButton('「为什么跑这里卖炒面来了啊……！！」', 1);
     await era.input();
-    era.println();
 
     await era.printAndWait(
       `${me.name} 气匆匆地走到摊子前面想要质问这个摸鱼的家伙。`,
@@ -216,7 +211,6 @@ module.exports = async (hook, _, event_object) => {
 
     era.printButton('「我是来叫你去训练的啊。」', 1);
     await era.input();
-    era.println();
 
     await gold_ship.say_and_wait(
       '哎呀～我这不是在给店主大叔代班吗～人家腰酸背疼的，你忍心让大叔在大太阳下烤一天吗？',

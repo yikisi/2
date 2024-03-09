@@ -209,6 +209,13 @@ async function page_chairman_office() {
               temp = [];
               temp_list.forEach((chara_id) => {
                 const color = get_chara_color(chara_id);
+                let flag_script;
+                try {
+                  require(`#/event/rec/rec-${chara_id}`);
+                  flag_script = true;
+                } catch (_) {
+                  flag_script = false;
+                }
                 temp.push({
                   accelerator: chara_id,
                   config: {
@@ -219,10 +226,19 @@ async function page_chairman_office() {
                     align: 'center',
                   },
                   content: `${era.get(`static:${chara_id}:name`)}${
-                    star_premium_draw.chara === chara_id ? ' [已指名]' : ''
-                  }`,
+                    flag_script ? '*' : ''
+                  }${star_premium_draw.chara === chara_id ? ' [已指名]' : ''}`,
                   type: 'button',
                 });
+              });
+              temp.push({
+                content: [
+                  { isBr: true },
+                  '* 带有',
+                  { content: '*', fontWeight: 'bold' },
+                  '号后缀的角色有专属口上',
+                ],
+                type: 'text',
               });
               era.printMultiColumns(temp);
               temp = await era.input();

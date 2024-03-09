@@ -763,7 +763,7 @@ module.exports = {
       e.display = 'inline-block';
       let temp;
       if ((temp = status_desc[e.key || e.content])) {
-        e.title = `[${e.key || e.content}]：${temp}`;
+        e.title = `[${e.content}]：${temp}`;
       }
       e.content = `[${e.content}]`;
       delete e.key;

@@ -261,7 +261,7 @@ async function sys_next_week() {
         era.set(`status:${chara_id}:发胖`, 0);
         era.print([chara.get_colored_name(), ' 的体重恢复了正常……']);
       } else {
-        sys_change_pressure(chara_id, weight_delta - 1000);
+        sys_change_pressure(chara_id, weight_delta / 10 - 100);
       }
     }
 
@@ -304,7 +304,7 @@ async function sys_next_week() {
           ' 痊愈了……',
         ]);
       } else {
-        sys_change_pressure(chara_id, drug_delta * 8);
+        sys_change_pressure(chara_id, drug_delta * 4);
       }
     }
     era.set(`cflag:${chara_id}:子宫内精液`, 0);

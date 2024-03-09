@@ -190,6 +190,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       await print_exp_page();
       break;
     case 402:
+    case 991:
       await report_race_page();
       break;
     case 403:

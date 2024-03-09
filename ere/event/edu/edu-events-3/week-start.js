@@ -66,7 +66,6 @@ module.exports = async () => {
     era.printButton('「嗯，让我们一起努力，迈向胜利！」', 2);
     era.printButton('「唔……按照你的目标，我们似乎得调整一下」', 3);
     const ret = await era.input();
-    era.println();
     switch (ret) {
       case 1:
         wait_flag =

@@ -763,7 +763,11 @@ module.exports = async (chara_id, hook, extra_flag) => {
         : era.get('tflag:主导权')
         ? { attacker: chara_id, defender: 0 }
         : { attacker: 0, defender: chara_id };
-    hook.arg = era.get('tflag:前回行动') !== hook.hook;
+    if (attacker === era.get('tflag:主导权')) {
+      hook.arg = era.get('tflag:前回行动') !== hook.hook;
+    } else if (defender === era.get('tflag:前回对手')) {
+      hook.arg = era.get('tflag:对手行动') !== hook.hook;
+    }
     const aim_handler =
       (sys_check_awake(defender) ? handlers : sleep_handlers)[hook.hook] ||
       handlers[hook.hook];

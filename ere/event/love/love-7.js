@@ -422,7 +422,6 @@ async function golden_ship_attack() {
   era.printButton('「杀死与你生死相依的好兄弟……」', 1);
   era.printButton('「杀死愿意为你牺牲的女朋友……」', 2);
   await era.input();
-  era.println();
 
   await era.printAndWait(
     '……没有鼓声、没有奇异的调皮音乐、没有不知道哪来的罐头笑声。',
@@ -441,7 +440,6 @@ async function golden_ship_attack() {
   era.printButton('「杀死与你生死相依的好兄弟……」', 1);
   era.printButton('「杀死愿意为你牺牲的女朋友……」', 2);
   await era.input();
-  era.println();
 
   await gold_ship.say_and_wait(
     '这一道题目很重要，请您务必认真考虑过后再作答。',

@@ -14,8 +14,13 @@ function select_action_in_station(chara_id) {
           };
         })
         .filter((_, i) => i !== 1 || chara_id)
-        .map((e, _, l) => {
-          e.config = { align: 'center', width: 24 / l.length };
+        .map((e, i, l) => {
+          e.config = {
+            align: 'center',
+            disabled:
+              l.length === 3 && i === 1 && era.get(`love:${chara_id}`) < 50,
+            width: 24 / l.length,
+          };
           return e;
         }),
     },

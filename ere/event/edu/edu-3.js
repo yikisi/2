@@ -597,7 +597,6 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       2,
     );
     const ret = await era.input();
-    era.println();
     if (ret === 1) {
       wait_flag = sys_like_chara(3, 0, 10) || wait_flag;
       wait_flag =
