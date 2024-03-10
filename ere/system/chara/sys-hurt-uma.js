@@ -16,11 +16,17 @@ function sys_hurt_uma(chara_id, num) {
     }
 
     if (a > num) {
-      era.print([get_chara_talk(chara_id), ' 的受伤程度加深了！']);
+      era.print([
+        get_chara_talk(chara_id).get_colored_name(),
+        ' 的受伤程度加深了！',
+      ]);
     } else if (tired > 0) {
-      era.print([get_chara_talk(chara_id), ' 在疲惫之下受了更加严重的伤！']);
+      era.print([
+        get_chara_talk(chara_id).get_colored_name(),
+        ' 在疲惫之下受了更加严重的伤！',
+      ]);
     } else {
-      era.print([get_chara_talk(chara_id), ' 受伤了！']);
+      era.print([get_chara_talk(chara_id).get_colored_name(), ' 受伤了！']);
     }
   }
 }

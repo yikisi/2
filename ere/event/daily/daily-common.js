@@ -122,22 +122,21 @@ handlers[event_hooks.select] = (chara_id) => {
 handlers[event_hooks.good_morning] = (chara_id) => {
   era.print([
     get_chara_talk(chara_id).get_colored_name(),
-    {
-      content: get_random_entry([
-        ' 竖起了大拇指。',
-        ' 正在专心地阅读着什么。',
-        ' 正在与同学们愉快地聊天。',
-        ' 看起来吃撑了，肚子变得圆鼓鼓的。',
-        ' 正在接待处向理事长秘书查询着什么。',
-      ]),
-    },
+    ...get_random_entry([
+      [' 竖起了大拇指。'],
+      [' 正在专心地阅读着什么。'],
+      [' 正在与同学们愉快地聊天。'],
+      [' 看起来吃撑了，肚子变得圆鼓鼓的。'],
+      [' 正在接待处向 ', sys_get_colored_callname(0, 301), ' 查询着什么。'],
+    ]),
   ]);
 };
 
 handlers[event_hooks.good_night] = async (chara_id, hook) => {
   const chara = get_chara_talk(chara_id),
-    me = get_chara_talk(0);
-  if (sys_check_awake(chara_id) && sys_check_awake(0)) {
+    me = get_chara_talk(0),
+    awake = 2 * sys_check_awake(chara_id) + sys_check_awake(0);
+  if (awake === 3) {
     const check = call_check_script(chara_id, check_stages.want_make_love);
     if (check) {
       era.print([
@@ -197,20 +196,20 @@ handlers[event_hooks.good_night] = async (chara_id, hook) => {
         ' 送到学生宿舍门口互道晚安后便各自回去了。',
       ]);
     }
-  } else if (!sys_check_awake(0)) {
-    era.print([
-      get_chara_talk(0).get_colored_name(),
-      ' 睡得人事不知，只在朦胧中似乎听到了 ',
-      chara.get_colored_name(),
-      ' 道别的声音。',
-    ]);
-  } else {
+  } else if (awake === 1) {
     era.print([
       '看着睡得正香的 ',
       chara.get_colored_name(),
       '，',
       get_chara_talk(0).get_colored_name(),
       ' 无论如何也做不出把人叫醒的行为，只好亲自送到学生宿舍，才揉着酸痛的肩膀回到训练员公寓。',
+    ]);
+  } else {
+    era.print([
+      get_chara_talk(0).get_colored_name(),
+      ' 睡得人事不知，只在朦胧中似乎听到了 ',
+      chara.get_colored_name(),
+      ' 道别的声音。',
     ]);
   }
 };

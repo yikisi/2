@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const { get_random_value } = require('#/utils/value-utils');
 
 const EventMarks = require('#/data/event/event-marks');
+const { create_from_object } = require('#/data/event/event-object');
 
 /** @type {Record<string,EventObject[]>} */
 let queue;
@@ -79,6 +80,13 @@ module.exports = {
     queue = era.get('flag:事件队列');
     if (!queue) {
       queue = era.set('flag:事件队列', {});
+    }
+    for (const key of Object.keys(queue)) {
+      if (queue[key].length === 0) {
+        delete queue[key];
+      } else {
+        queue[key] = queue[key].map(create_from_object);
+      }
     }
   },
   /**

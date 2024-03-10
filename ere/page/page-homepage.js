@@ -5,12 +5,14 @@ const {
   end_ero_and_show_result,
   init_ero,
 } = require('#/system/ero/sys-prepare-ero');
+const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
   sys_change_status_by_base,
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 const { init_chara } = require('#/system/sys-init-chara');
@@ -29,14 +31,13 @@ const { gacha, get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const notes = require('#/data/notes.json');
-const sys_call_check = require('#/system/script/sys-call-check');
-const check_stages = require('#/data/event/check-stages');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+const { first_child_id } = require('#/data/other-const');
 
 let random_event,
   notes_index = 0;
@@ -229,10 +230,12 @@ module.exports = async () => {
       if (await check_game_over()) {
         return;
       }
-      if (era.get('flag:当前回合数') % 4 === 1) {
+      if (era.get('flag:当前周') === 1) {
         const added_list = era.getAddedCharacters();
         gacha(
-          era.getAllCharacters().filter((x) => !added_list.includes(x)),
+          era
+            .getAllCharacters()
+            .filter((x) => !added_list.includes(x) && x < first_child_id),
           get_random_value(2, 5),
         ).forEach((chara_id) => init_chara(chara_id));
       }

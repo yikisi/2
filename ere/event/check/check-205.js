@@ -20,6 +20,7 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
+const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -185,8 +186,9 @@ handlers[check_stages.next_week] = () => {
       );
     }
   } else if (
-    era.get('cflag:205:随机招募') < 0 &&
-    era.get('flag:当前声望') >= 1000
+    // TODO 抢先体验
+    (era.get('cflag:205:随机招募') === 0 && era.get('flag:当前回合数') >= 4) ||
+    (era.get('cflag:205:随机招募') < 0 && era.get('flag:当前声望') >= 1000)
   ) {
     era.set('cflag:205:随机招募', 1);
     era.print(
@@ -226,8 +228,7 @@ handlers[check_stages.palace_check] = () => {
 
 /** @param {{aim_check:boolean,titles:{n:string,c:string}[]}} extra_flag */
 handlers[check_stages.title_check] = (extra_flag) => {
-  /** @type {Record<string,{race:number,rank:number,st:number,pop:number}>} */
-  const races = era.get('cflag:205:育成成绩');
+  const races = new RaceHistory(205).get();
   if (
     check_aim_race(races, race_enum.prix_prb, 1, 1, (e) => e.pop === 1) &&
     check_aim_race(races, race_enum.prix_dia, 1, 1, (e) => e.pop === 1) &&

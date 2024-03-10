@@ -3,9 +3,11 @@ const era = require('#/era-electron');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
-const check_aim_race = require('#/event/snippets/check-aim-race');
+const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
+const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -14,12 +16,10 @@ const check_stages = require('#/data/event/check-stages');
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
-const recruit_flags = require('#/data/event/recruit-flags');
 const { get_breast_cup } = require('#/data/info-generator');
+const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
-const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 
 /** @type {Record<string,function(Record<string,*>)>} */
 const handlers = {};
@@ -125,37 +125,31 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
   aim_races[extra_flag.race];
 
-handlers[check_stages.love_event] = function () {
-  era.get('love:52') === 49 &&
-    add_event(event_hooks.week_end, new EventObject(52, cb_enum.love));
-};
-
 handlers[check_stages.next_week] = () => {
   const cup_size = get_breast_cup(60);
   if (!era.get('talent:60:泌乳') && cup_size >= 'E') {
     era.set('talent:60:泌乳', 3);
   }
-  check_and_register_aim_race(52, aim_races);
+  const edu_weeks = era.get('cflag:52:育成回合计时');
+  if (edu_weeks < 3 * 48) {
+    check_and_register_aim_race(52, aim_races);
+  }
 };
 
 handlers[check_stages.aim_check] = () => {
   const buffer = [],
-    /** @type {Record<string,{race:number,rank:number}>} */
-    races = era.get('cflag:52:育成成绩');
+    races = new RaceHistory(52).get();
   buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
   buffer.push(check_aim_and_get_entry(races, race_enum.negi_sta, 2, 5));
   buffer.push(check_aim_and_get_entry(races, race_enum.febr_sta, 2, 5));
   buffer.push(check_aim_and_get_entry(races, race_enum.elm_sta, 2, 5));
   buffer.push(check_aim_and_get_entry(races, race_enum.jbc_spr, 2, 1));
   buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 16));
-  const edu_marks = new UraraEduMarks();
+  const { fans } = new UraraEduMarks();
   buffer.push({
-    check: edu_marks.fans >= 25000,
-    color:
-      edu_marks.fans >= 25000 ? attr_change_colors.up : attr_change_colors.down,
-    content: `粉丝数 ${edu_marks.fans}/25000 ${
-      edu_marks.fans >= 25000 ? '✔' : '✘'
-    }`,
+    check: fans >= 25000,
+    color: fans >= 25000 ? attr_change_colors.up : attr_change_colors.down,
+    content: `粉丝数 ${fans}/25000 ${fans >= 25000 ? '✔' : '✘'}`,
   });
   return buffer;
 };

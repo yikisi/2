@@ -1,8 +1,20 @@
 class EventObject {
+  /** @type {number} */
   chara_id;
+  /** @type {number} */
   type;
+  /** @type {boolean} */
   special;
   arg;
+
+  static create_from_object(_obj) {
+    if (_obj instanceof EventObject) {
+      return _obj;
+    }
+    return new EventObject(_obj.chara_id, _obj.type, _obj.special).set_arg(
+      _obj.arg,
+    );
+  }
 
   /**
    * @param {number} chara_id

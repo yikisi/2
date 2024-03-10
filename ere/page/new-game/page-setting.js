@@ -358,6 +358,10 @@ async function page_settings() {
         },
       );
     });
+    buffer.push({
+      content: '\n* 初次游玩强烈建议从【地上神国】或【尘世间】模式开始游戏！',
+      type: 'text',
+    });
     buffer.push(
       {
         accelerator: 10,
