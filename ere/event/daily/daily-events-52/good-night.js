@@ -1,10 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_call_check = require('#/system/script/sys-call-check');
-const {
-  sys_get_colored_callname,
-  sys_get_callname,
-} = require('#/system/sys-calc-chara-others');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -17,12 +14,12 @@ const { lust_border } = require('#/data/ero/orgasm-const');
 module.exports = async (hook) => {
   const awake = 2 * sys_check_awake(52) + sys_check_awake(0),
     call_me = sys_get_callname(52, 0),
-    callname = sys_get_colored_callname(0, 52),
+    urara = get_chara_talk(52),
+    callname = urara.get_colored_name(),
     love = era.get('love:52'),
     me = get_chara_talk(0),
     relation = era.get('relation:52:0'),
-    self_call = sys_get_callname(52, 52),
-    urara = get_chara_talk(52);
+    self_call = sys_get_callname(52, 52);
   if (awake === 3) {
     if (sys_call_check(52, check_stages.want_make_love) > 0) {
       if (relation > 150) {

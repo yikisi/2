@@ -10,12 +10,12 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 module.exports = () => {
   const call_me = sys_get_callname(52, 0),
-    callname = sys_get_colored_callname(0, 52),
+    urara = get_chara_talk(52),
+    callname = urara.get_colored_name(),
     love = era.get('love:52'),
     me = get_chara_talk(0),
     self_call = sys_get_callname(52, 52),
-    talk_arr = [],
-    urara = get_chara_talk(52);
+    talk_arr = [];
   if (era.get('relation:52:0') > 150) {
     talk_arr.push(
       [

@@ -1,9 +1,6 @@
 const era = require('#/era-electron');
 
-const {
-  sys_get_callname,
-  sys_get_colored_callname,
-} = require('#/system/sys-calc-chara-others');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -13,12 +10,12 @@ const { lust_border } = require('#/data/ero/orgasm-const');
 
 module.exports = () => {
   const call_me = sys_get_callname(52, 0),
-    callname = sys_get_colored_callname(0, 52),
+    urara = get_chara_talk(52),
+    callname = urara.get_colored_name(),
     self_call = sys_get_callname(52, 52),
     love = era.get('love:52'),
     me = get_chara_talk(0),
-    talk_arr = [],
-    urara = get_chara_talk(52);
+    talk_arr = [];
   if (sys_check_awake(52)) {
     if (era.get('base:52:体力') < 0.4 * era.get('maxbase:52:体力')) {
       talk_arr.push([
