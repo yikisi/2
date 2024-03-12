@@ -7,21 +7,20 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
-const spe = get_chara_talk(1);
-const me = get_chara_talk(0);
-
 /**
  * @param {HookArg} hook
  * @param {{race:number,rank:number,relation_change:number}} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
+  const spe = get_chara_talk(1);
+  const me = get_chara_talk(0);
   let edu_weeks = era.get('cflag:1:育成回合计时');
   if (
     extra_flag.race === race_enum.begin_race &&
     edu_weeks < 48 &&
     extra_flag.rank === 1
   ) {
-    await print_event_name('出道战后：向着日本第一！', 1);
+    await print_event_name('出道战后：向着日本第一！', spe);
     await spe.say_and_wait('训练员，训练员！我赢了！');
     await me.say_and_wait('干得漂亮！');
     await spe.say_and_wait(
@@ -36,7 +35,7 @@ module.exports = async (hook, extra_flag) => {
     edu_weeks < 48 &&
     extra_flag.rank === 1
   ) {
-    await print_event_name('日本德比后：“确实呢”', 1);
+    await print_event_name('日本德比后：“确实呢”', spe);
     //todo
   } else if (
     extra_flag.race === race_enum.toky_yus &&
@@ -44,7 +43,7 @@ module.exports = async (hook, extra_flag) => {
     extra_flag.rank > 1 &&
     extra_flag.rank <= 5
   ) {
-    await print_event_name('日本德比后：化今日为动力', 1);
+    await print_event_name('日本德比后：化今日为动力', spe);
     await spe.say_and_wait('……输掉了……');
     await era.printAndWait(
       '在东京2400的赛场上，特别周没有能坚持到最后，与胜利失之交臂。',
@@ -57,7 +56,7 @@ module.exports = async (hook, extra_flag) => {
     edu_weeks < 95 &&
     extra_flag.rank === 1
   ) {
-    await print_event_name('天皇赏（春）后：一定要再次', 1);
+    await print_event_name('天皇赏（春）后：一定要再次', spe);
     //todo
   } else if (
     extra_flag.race === race_enum.tenn_spr &&
@@ -65,14 +64,14 @@ module.exports = async (hook, extra_flag) => {
     extra_flag.rank > 1 &&
     extra_flag.rank <= 3
   ) {
-    await print_event_name('天皇赏（春）后：向那个背影学习', 1);
+    await print_event_name('天皇赏（春）后：向那个背影学习', spe);
     //todo
   } else if (
     extra_flag.race === race_enum.japa_cup &&
     edu_weeks < 95 &&
     extra_flag.rank === 1
   ) {
-    await print_event_name('日本杯后：日本的总大将', 1);
+    await print_event_name('日本杯后：日本的总大将', spe);
     await spe.say_and_wait('哈啊……哈啊……');
     await era.printAndWait(
       '即使已经精疲力竭，但她仍然牢牢的守住了第一的位置，直到冲线。',
@@ -96,7 +95,7 @@ module.exports = async (hook, extra_flag) => {
     edu_weeks < 95 &&
     extra_flag.rank === 1
   ) {
-    await print_event_name('有马纪念后：引以为傲的赛马娘', 1);
+    await print_event_name('有马纪念后：引以为傲的赛马娘', spe);
     await spe.say_and_wait('第一名！训练员，我是冠军！');
     await era.printAndWait(
       '在响彻全场的欢呼声中，特别周向你飞奔而来，紧紧地抱住你。',

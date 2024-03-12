@@ -11,7 +11,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
 
-/** @type {Record<string,function(stage_id:HookArg,extra_flag:*):Promise<boolean>>} */
+/** @type {Record<string,function(HookArg,*):Promise<boolean>>} */
 const handlers = {};
 
 handlers[event_hooks.select] = function () {

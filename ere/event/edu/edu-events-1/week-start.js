@@ -4,15 +4,14 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const spe = get_chara_talk(1);
-const me = get_chara_talk(0);
-const mom = get_chara_talk(4);
-mom.name = '特别周妈妈';
-
 module.exports = async (hook, extra_flag) => {
+  const spe = get_chara_talk(1);
+  const me = get_chara_talk(0);
+  const mom = get_chara_talk(4);
+  mom.name = '特别周妈妈';
   let edu_weeks = era.get('cflag:1:育成回合计时');
   if (edu_weeks === 3 * 48 + 3 && era.get('love:1') >= 75) {
-    await print_event_name('两人一起的北海道之旅');
+    await print_event_name('两人一起的北海道之旅', spe);
     await spe.say_and_wait('训练员先生，我们找个时间去北海道吧！');
     await era.printAndWait(
       '在闪耀之星系列赛上取得了亮眼的表现后的某一天，特别周这么和你说道。',
@@ -35,8 +34,8 @@ module.exports = async (hook, extra_flag) => {
     );
     await era.printAndWait('如果是为了看换乘车次的话这时间也未免太长了。');
     await era.printAndWait('你似乎意识到了什么。');
-    await era.printButton('小特，难道说……', 1);
-    await era.printButton('……坐错电车了吗？', 2);
+    era.printButton('小特，难道说……', 1);
+    era.printButton('……坐错电车了吗？', 2);
     await era.input();
     await spe.say_and_wait('是的……');
     await era.printAndWait('她的声音小的像蚊子叫。');
@@ -84,7 +83,7 @@ module.exports = async (hook, extra_flag) => {
     await mom.say_and_wait(
       '初次见面，小特的训练员……同时也是小特的男朋友，对吧？',
     );
-    await era.printButton('？！', 1);
+    era.printButton('？！', 1);
     await era.input();
     await spe.say_and_wait('诶？！？！？！');
     await era.printAndWait('不仅是我，特别周也一脸不可置信。');
@@ -110,8 +109,8 @@ module.exports = async (hook, extra_flag) => {
     );
     await spe.say_and_wait('喂！');
     await era.printAndWait('抽泣变成了娇嗔。');
-    await era.printButton('承蒙您的厚爱，这是我的职责所在。', 1);
-    await era.printButton('我也很庆幸能够遇上您的女儿这样优秀的马娘。', 2);
+    era.printButton('承蒙您的厚爱，这是我的职责所在。', 1);
+    era.printButton('我也很庆幸能够遇上您的女儿这样优秀的马娘。', 2);
     await era.input();
     await era.printAndWait('特别周妈妈笑着转过了身，带着我们往房间走去。');
     await mom.say_and_wait(
@@ -170,7 +169,7 @@ module.exports = async (hook, extra_flag) => {
     await spe.say_and_wait(
       '有时我会想，虽然我遇到了不少波折，但也收到了更多的爱，我感觉很幸运哦。',
     );
-    await era.printButton('我会一直陪在你身边的。', 1);
+    era.printButton('我会一直陪在你身边的。', 1);
     await spe.say_and_wait('那就约定好了，训练员！');
     await era.printAndWait('特别周是笑着说出这句话的。');
     await era.printAndWait('\n' + '在北海道的悠闲日子很快就结束了。');
@@ -181,19 +180,19 @@ module.exports = async (hook, extra_flag) => {
     await mom.say_and_wait('那就先这些，记得没事多回家来哦。');
     await spe.say_and_wait('嗯，我会的！');
     await mom.say_and_wait('是两个人一起哦。');
-    await era.printButton('没问题', 1);
+    era.printButton('没问题', 1);
     await mom.say_and_wait('特别周妈妈：“那就祝你们一路顺风，再见了！');
   } else if (edu_weeks === 47 + 29) {
-    await print_event_name('夏季合宿开始');
+    await print_event_name('夏季合宿开始', spe);
     //todo
   } else if (edu_weeks === 95 + 29) {
-    await print_event_name('夏季合宿开始（第二次）');
+    await print_event_name('夏季合宿开始（第二次）', spe);
     //todo
   } else if (edu_weeks === 47 + 48 || edu_weeks === 95 + 48) {
-    await print_event_name('圣诞节');
+    await print_event_name('圣诞节', spe);
     //todo
   } else if (edu_weeks === 95 + 6) {
-    await print_event_name('情人节');
+    await print_event_name('情人节', spe);
     //todo
   }
 };

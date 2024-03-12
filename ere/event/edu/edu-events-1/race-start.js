@@ -6,17 +6,16 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { race_enum } = require('#/data/race/race-const');
 
-const spe = get_chara_talk(1);
-const me = get_chara_talk(0);
-
 /**
  * @param {HookArg} hook
  * @param {{race:number,rank:number,relation_change:number}} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
   let edu_weeks = era.get('cflag:1:育成回合计时');
+  const spe = get_chara_talk(1);
+  const me = get_chara_talk(0);
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
-    await print_event_name('冲向出道赛', 1);
+    await print_event_name('冲向出道赛', spe);
     await era.printAndWait(
       '\n' +
         '今天就是特别周的出道赛。你进入赛前准备室想要鼓励鼓励特别周，却看到她在屋里心神不宁地绕来绕去。',
@@ -34,7 +33,7 @@ module.exports = async (hook, extra_flag) => {
       '那么我要准备上场了，训练员要好好看着我迈出成为日本第一马娘的第一步！',
     );
   } else if (extra_flag.race === race_enum.toky_yus && edu_weeks < 48) {
-    await print_event_name('冲向日本德比', 1);
+    await print_event_name('冲向日本德比', spe);
     await me.say_and_wait('小特。');
     await spe.say_and_wait('我，我在！');
     await me.say_and_wait('紧张吗？');
@@ -43,11 +42,11 @@ module.exports = async (hook, extra_flag) => {
     await me.say_and_wait('到出场的时候了，去吧，拿下德比冠军！');
     await spe.say_and_wait('嗯！');
   } else if (extra_flag.race === race_enum.tenn_spr && edu_weeks < 95) {
-    await print_event_name('冲向天皇赏（春）', 1);
+    await print_event_name('冲向天皇赏（春）', spe);
     await spe.say_and_wait('长距离的比赛要开始了……');
     await spe.say_and_wait('好的，我要上了！');
   } else if (extra_flag.race === race_enum.japa_cup && edu_weeks < 95) {
-    await print_event_name('冲向日本杯', 1);
+    await print_event_name('冲向日本杯', spe);
     await spe.say_and_wait('…………');
     await spe.say_and_wait('哪怕是在这里也能听到外面的欢呼声，真的很震撼……');
     await me.say_and_wait('这就是日本杯。');
@@ -69,7 +68,7 @@ module.exports = async (hook, extra_flag) => {
     era.printButton('就是这个感觉，上吧！', 1);
     await spe.say_and_wait('好！');
   } else if (extra_flag.race === race_enum.arim_kin && edu_weeks < 95) {
-    await print_event_name('冲向有马纪念', 1);
+    await print_event_name('冲向有马纪念', spe);
     //todo
   }
 };

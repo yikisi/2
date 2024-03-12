@@ -42,7 +42,7 @@ module.exports = async () => {
       });
       if (comm_desc) {
         buffer.push({
-          accelerator: e + 20,
+          accelerator: e + 100,
           config: { align: 'right', width: 2 },
           content: '删除',
           type: 'button',
@@ -61,7 +61,7 @@ module.exports = async () => {
         flag_load_game = false;
         break;
       default:
-        if (ret < 20) {
+        if (ret < 100) {
           if (era.get('flag:读档对话')) {
             await call_daily_script(
               get_random_entry(
@@ -74,7 +74,6 @@ module.exports = async () => {
           }
           if (await era.loadData(ret)) {
             flag_load_game = false;
-            // TODO 移除 ||容错
             era.set('flag:显示半身像', era.get('flag:显示半身像') || 0);
             event_queue.init();
             CharaTalk.me = new CharaTalk(0);
@@ -83,13 +82,13 @@ module.exports = async () => {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;
           }
         } else if (
-          (era.get(`global:saves:${ret - 20}`) &&
-            era.get(`global:saves:${ret - 20}`).startsWith('(FILE LOST)') &&
-            !era.set(`global:saves:${ret - 20}`, '')) ||
-          era.rmData(ret - 20)
+          (era.get(`global:saves:${ret - 100}`) &&
+            era.get(`global:saves:${ret - 100}`).startsWith('(FILE LOST)') &&
+            !era.set(`global:saves:${ret - 100}`, '')) ||
+          era.rmData(ret - 100)
         ) {
           era.saveGlobal();
-          msg_notification = `成功删除 ${ret - 20} 号栏位的存档`;
+          msg_notification = `成功删除 ${ret - 100} 号栏位的存档`;
         }
         break;
     }

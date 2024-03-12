@@ -16,6 +16,7 @@ const check_stages = require('#/data/event/check-stages');
 const NNEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-60');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -104,7 +105,7 @@ handlers[check_stages.next_week] = () => {
   }
 };
 
-handlers[check_stages.aim_check] = function () {
+handlers[check_stages.aim_check] = () => {
   const buffer = [],
     races = era.get('cflag:60:育成成绩');
   buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
@@ -119,15 +120,14 @@ handlers[check_stages.aim_check] = function () {
   return buffer;
 };
 
-handlers[check_stages.palace_check] = function () {
+handlers[check_stages.palace_check] = () => {
   common_palace_check(60);
   return handlers[check_stages.aim_check]();
 };
 
 /** @param {{aim_check:boolean,titles:{n:string,c:string}[]}} extra_flag */
 handlers[check_stages.title_check] = (extra_flag) => {
-  /** @type {Record<string,{race:number,rank:number}>} */
-  const races = era.get('cflag:60:育成成绩');
+  const races = new RaceHistory(60).get();
   if (
     new NNEduMarks().g1_count >= 4 &&
     check_aim_race(races, race_enum.arim_kin, 2, 1)

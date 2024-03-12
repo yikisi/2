@@ -4,7 +4,7 @@ module.exports = new RaceInfo(
   'Miyako Stakes',
   '京城锦标',
   RaceInfo.class_enum.G3,
-  RaceInfo.track_enum.hanshin,
+  RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.mud,
   1800,
   RaceInfo.distance_enum.mile,
@@ -13,5 +13,5 @@ module.exports = new RaceInfo(
   RaceInfo.limit_enum.post3,
   41,
   1000,
-  10912,
+  10814,
 );

@@ -7,12 +7,9 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const print_event_name = require('#/event/snippets/print-event-name');
-const { attr_names, fumble_result, attr_enum } = require('#/data/train-const');
+const { attr_names, fumble_result } = require('#/data/train-const');
 
 const handlers = {};
-
-const spe = get_chara_talk(1);
-const me = get_chara_talk(0);
 
 const { base_calc } = require('#/system/sys-calc-base-cflag');
 const { relation_calc } = require('#/system/sys_calc_chara_others');
@@ -30,6 +27,7 @@ handlers[event_hooks.race_end] = require('#/event/edu/edu-events-1/race-end');
  * @param {{train:number,stamina_ratio:number}} extra_flag
  */
 handlers[event_hooks.train_success] = async (hook, extra_flag) => {
+  const spe = get_chara_talk(1);
   era.print(`${spe.name} 的 ${attr_names[extra_flag.train]} 训练顺利成功了……`);
   if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
     era.println();
@@ -37,8 +35,8 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
     await era.printAndWait('训练结束后，特别周焦急地找到了你。');
     await spe.say_and_wait('最近，我班里的同学实力都进步得很快。');
     await spe.say_and_wait('我也不能输给她们，所以今天我还想再训练一会！');
-    await era.printButton('我明白了！那就训练到你满意为止', 1);
-    await era.printButton('冷静点，会过度训练的哦', 2);
+    era.printButton('我明白了！那就训练到你满意为止', 1);
+    era.printButton('冷静点，会过度训练的哦', 2);
     const ret = await era.input();
     if (ret === 1) {
       await spe.say_and_wait('谢谢训练员！我会努力训练出成效的！');
@@ -54,6 +52,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
 };
 
 handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
+  const spe = get_chara_talk(1);
   extra_flag['args'] = extra_flag.fumble
     ? fumble_result.fumble
     : fumble_result.fail;
@@ -68,7 +67,7 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
     await spe.say_and_wait('是我大意了，对不起……');
     era.printButton('现在先专注于疗伤吧！', 1);
     era.printButton('今天就好好休息吧，之后再努力就好了！', 2);
-    let ret = era.input();
+    let ret = await era.input();
     if (ret === 1) {
       await spe.say_and_wait('训练员，谢谢你。');
       await spe.say_and_wait('确实，妈妈也说过，这种时候最重要的是不要着急');
@@ -105,10 +104,12 @@ handlers[event_hooks.school_atrium] = async (hook, __, event_object) => {
     add_event(hook.hook, event_object);
     return;
   }
-  const edu_event_marks = new EduEventMarks(1);
+  const edu_event_marks = new EduEventMarks(1),
+    me = get_chara_talk(0),
+    spe = get_chara_talk(1);
   if (edu_event_marks.get('borrow_money') === 1) {
     edu_event_marks.add('borrow_money');
-    await print_event_name('小特在减肥？还是说……');
+    await print_event_name('小特在减肥？还是说……', spe);
     await era.printAndWait('你和特别周来到天台一起享用便当。');
     await era.printAndWait(
       '通常这个时候你和特别周会漫无目的地聊一些最近发生的有趣事情，但聊着聊着，你发现今天的特别周有点奇怪。',
@@ -121,11 +122,8 @@ handlers[event_hooks.school_atrium] = async (hook, __, event_object) => {
     await spe.say_and_wait(
       '呜诶？！啊，啊……那个，我最近在减肥！要控制饮食的说……',
     );
-    await era.printButton('减肥啊？那好吧，不过也要注意营养搭配', 1);
-    await era.printButton(
-      '这个谎言未免也太拙劣了（解锁给特别周借钱的选项）',
-      2,
-    );
+    era.printButton('减肥啊？那好吧，不过也要注意营养搭配', 1);
+    era.printButton('这个谎言未免也太拙劣了（解锁给特别周借钱的选项）', 2);
     const ret = await era.input();
     if (ret === 1) {
       await spe.say_and_wait('嗯……嗯嗯！我知道了，训练员。');
@@ -163,8 +161,8 @@ handlers[event_hooks.school_atrium] = async (hook, __, event_object) => {
       await me.say_and_wait('那现在怎么办呢？你手头一点钱都没有了吗？');
       await spe.say_and_wait('嗯……');
       await me.say_and_wait('既然这样——');
-      await era.printButton('这次就是给你的教训，好好记住吧', 1);
-      await era.printButton('我借你点钱吧（解锁给特别周借钱的选项）', 2);
+      era.printButton('这次就是给你的教训，好好记住吧', 1);
+      era.printButton('我借你点钱吧（解锁给特别周借钱的选项）', 2);
       const ret_borrow = await era.input();
       if (ret_borrow === 1) {
         await era.printAndWait(
@@ -176,17 +174,17 @@ handlers[event_hooks.school_atrium] = async (hook, __, event_object) => {
       } else {
         const cur_coin = era.get('flag:当前马币');
         const money_list = [1500, 5000, 10000, cur_coin];
-        await era.printAndWait('要借多少钱？');
+        era.print('要借多少钱？');
         if (cur_coin >= 1500) {
-          await era.printButton('1500马币', 1);
+          era.printButton('1500马币', 1);
         }
         if (cur_coin >= 5000) {
-          await era.printButton('5000马币', 2);
+          era.printButton('5000马币', 2);
         }
         if (cur_coin >= 10000) {
-          await era.printButton('10000马币', 3);
+          era.printButton('10000马币', 3);
         }
-        await era.printButton('有多少借多少', 4);
+        era.printButton('有多少借多少', 4);
         let amount = (await era.input()) - 1;
         amount = money_list[amount];
         era.add('flag:当前马币', -amount);
