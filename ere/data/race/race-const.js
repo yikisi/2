@@ -302,6 +302,10 @@ const race_enum = {
   toky_dai: 0,
   // 阪神杯
   hans_cup: 0,
+  // 堇锦标
+  viol_sta: 0,
+  // 少年杯
+  juni_cup: 0,
 };
 Object.keys(race_enum).forEach((e, i) => (race_enum[e] = i));
 
@@ -456,6 +460,8 @@ race_infos[race_enum.hope_sta] = require('#/data/race/g1/race-hope-sta');
 race_infos[race_enum.arim_kin] = require('#/data/race/g1/race-arim-kin');
 race_infos[race_enum.toky_dai] = require('#/data/race/g1/race-toky-dai');
 race_infos[race_enum.hans_cup] = require('#/data/race/g2/race-hans-cup');
+race_infos[race_enum.viol_sta] = require('#/data/race/op/race-viol-sta');
+race_infos[race_enum.juni_cup] = require('#/data/race/op/race-juni-cup');
 
 race_infos.forEach((e) => {
   const param_id = e.param_id;
