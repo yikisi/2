@@ -79,66 +79,74 @@ module.exports = async () => {
   while (flagTitle) {
     await era.clear();
     era.setAlign('center');
-    era.printMultiColumns([
-      { type: 'divider' },
+    era.printInColRows(
+      [{ type: 'divider' }],
       {
-        config: { width: 6, offset: 9 },
-        names: 'logo',
-        type: 'image.whole',
-      },
-      {
-        content: ['雞雞', { isDivider: true }, '无名路人'],
-        type: 'text',
-      },
-      { type: 'divider' },
-      {
-        accelerator: 0,
-        content: '开始新游戏',
-        type: 'button',
-      },
-      {
-        accelerator: 1,
-        content: '加载存档',
-        type: 'button',
-      },
-      {
-        accelerator: 2,
-        content: '角色成就',
-        type: 'button',
-      },
-      {
-        accelerator: 3,
-        content: '帮助说明',
-        type: 'button',
-      },
-      {
-        accelerator: 4,
-        content: '制作鸣谢',
-        type: 'button',
-      },
-      { type: 'divider' },
-      { config: { offset: 6, width: 4 }, content: '相关链接：', type: 'text' },
-      {
-        config: { align: 'left', width: 8 },
-        content: [
-          {
-            content: 'EraUma游戏发布页（需要登录gitgud.io）',
-            url: 'https://gitgud.io/SLeader/erauma/-/releases/permalink/latest',
-          },
-          { isBr: true },
-          {
-            content: 'EraElectron引擎发布页',
-            url: 'https://gitgud.io/SLeader/era-electron/-/releases/permalink/latest',
-          },
-          { isBr: true },
-          {
-            content: 'ERA特雷森学园（Discord社区）',
-            url: 'https://discord.gg/CCsqKXJJjd',
-          },
+        columns: [
+          { config: { width: 7 }, names: 'logo', type: 'image.whole' },
+          { config: { width: 17 }, names: 'title', type: 'image.whole' },
         ],
-        type: 'text',
+        config: { offset: 6, verticalAlign: 'middle', width: 12 },
       },
-    ]);
+      [
+        {
+          content: ['雞雞', { isDivider: true }, '无名路人'],
+          type: 'text',
+        },
+        { type: 'divider' },
+        {
+          accelerator: 0,
+          content: '开始新游戏',
+          type: 'button',
+        },
+        {
+          accelerator: 1,
+          content: '加载存档',
+          type: 'button',
+        },
+        {
+          accelerator: 2,
+          content: '角色成就',
+          type: 'button',
+        },
+        {
+          accelerator: 3,
+          content: '帮助说明',
+          type: 'button',
+        },
+        {
+          accelerator: 4,
+          content: '制作鸣谢',
+          type: 'button',
+        },
+        { type: 'divider' },
+        {
+          config: { offset: 6, width: 4 },
+          content: '相关链接：',
+          type: 'text',
+        },
+        {
+          config: { align: 'left', width: 8 },
+          content: [
+            {
+              content: 'EraUma游戏发布页（需要登录gitgud.io）',
+              url: 'https://gitgud.io/SLeader/erauma/-/releases/permalink/latest',
+            },
+            { isBr: true },
+            {
+              content: 'EraElectron引擎发布页',
+              url: 'https://gitgud.io/SLeader/era-electron/-/releases/permalink/latest',
+            },
+            { isBr: true },
+            {
+              content: 'ERA特雷森学园（Discord社区）',
+              url: 'https://discord.gg/CCsqKXJJjd',
+            },
+          ],
+          type: 'text',
+        },
+      ],
+    );
     era.setAlign('left');
 
     let ret = await era.input();
