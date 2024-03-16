@@ -24,6 +24,40 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 /** @type {Record<string,function(Record<string,*>)>} */
 const handlers = {};
 
+handlers[check_stages.aim_check] = () => {
+  const buffer = [],
+    races = new RaceHistory(52).get();
+  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+  buffer.push(check_aim_and_get_entry(races, race_enum.negi_sta, 2, 5));
+  buffer.push(check_aim_and_get_entry(races, race_enum.febr_sta, 2, 5));
+  buffer.push(check_aim_and_get_entry(races, race_enum.elm_sta, 2, 5));
+  buffer.push(check_aim_and_get_entry(races, race_enum.jbc_spr, 2, 1));
+  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 16));
+  const { fans } = new UraraEduMarks();
+  buffer.push({
+    check: fans >= 25000,
+    color: fans >= 25000 ? attr_change_colors.up : attr_change_colors.down,
+    content: `粉丝数 ${fans.toLocaleString()}/25,000 ${
+      fans >= 25000 ? '✔' : '✘'
+    }`,
+  });
+  return buffer;
+};
+
+const aim_races = {};
+aim_races[race_enum.begin_race] = 2;
+aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = -4;
+aim_races[get_aim_race_index(race_enum.negi_sta, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.febr_sta, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.elm_sta, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.jbc_spr, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
+
+/** @param {{edu_weeks:number,race:number}} extra_flag */
+handlers[check_stages.aim_race] = (extra_flag) =>
+  aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
+  aim_races[extra_flag.race];
+
 const race2fans_reward = [];
 race2fans_reward[race_enum.oka_sho] = 10500;
 race2fans_reward[race_enum.sats_sho] = 11000;
@@ -84,46 +118,45 @@ function get_fans_reward(fans, rank) {
 
 /** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
 handlers[check_stages.after_race] = (extra_flag) => {
-  const urara_edu_marks = new UraraEduMarks();
-  switch (race_infos[extra_flag.race]) {
+  let fans;
+  switch (race_infos[extra_flag.race].race_class) {
     case RaceInfo.class_enum.G1:
-      urara_edu_marks.fans += get_fans_reward(
+      fans = get_fans_reward(
         race2fans_reward[extra_flag.race],
         extra_flag.rank,
       );
       break;
     case RaceInfo.class_enum.G2:
-      urara_edu_marks.fans += get_fans_reward(6000, extra_flag.rank);
+      fans = get_fans_reward(6000, extra_flag.rank);
       break;
     case RaceInfo.class_enum.G3:
-      urara_edu_marks.fans += get_fans_reward(4000, extra_flag.rank);
+      fans = get_fans_reward(4000, extra_flag.rank);
       break;
     case RaceInfo.class_enum.OP:
-      urara_edu_marks.fans += get_fans_reward(2500, extra_flag.rank);
+      fans = get_fans_reward(2500, extra_flag.rank);
       break;
     case RaceInfo.class_enum['Pre-OP']:
-      urara_edu_marks.fans += get_fans_reward(1000, extra_flag.rank);
+      fans = get_fans_reward(1000, extra_flag.rank);
       break;
     case RaceInfo.class_enum.Spe:
       if (extra_flag.rank === 1) {
-        urara_edu_marks.fans += 1000;
+        fans = 1000;
       }
   }
+  new UraraEduMarks().fans += fans;
+  if (fans) {
+    era.print([
+      get_chara_talk(52).get_colored_name(),
+      ' 的粉丝数增长了 ',
+      {
+        color: attr_change_colors.up,
+        content: fans.toLocaleString(),
+        fontWeight: 'bold',
+      },
+      '！',
+    ]);
+  }
 };
-
-const aim_races = {};
-aim_races[race_enum.begin_race] = 2;
-aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = -4;
-aim_races[get_aim_race_index(race_enum.negi_sta, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.febr_sta, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.elm_sta, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.jbc_spr, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
-
-/** @param {{edu_weeks:number,race:number}} extra_flag */
-handlers[check_stages.aim_race] = (extra_flag) =>
-  aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
-  aim_races[extra_flag.race];
 
 handlers[check_stages.next_week] = () => {
   const cup_size = get_breast_cup(60);
@@ -133,31 +166,24 @@ handlers[check_stages.next_week] = () => {
   const edu_weeks = era.get('cflag:52:育成回合计时');
   if (edu_weeks < 3 * 48) {
     check_and_register_aim_race(52, aim_races);
+  } else if (edu_weeks === 143 + 9) {
+    add_event(
+      event_hooks.week_start,
+      new EventObject(52, cb_enum.edu).set_arg('palace'),
+    );
   }
-};
-
-handlers[check_stages.aim_check] = () => {
-  const buffer = [],
-    races = new RaceHistory(52).get();
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-  buffer.push(check_aim_and_get_entry(races, race_enum.negi_sta, 2, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.febr_sta, 2, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.elm_sta, 2, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.jbc_spr, 2, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 16));
-  const { fans } = new UraraEduMarks();
-  buffer.push({
-    check: fans >= 25000,
-    color: fans >= 25000 ? attr_change_colors.up : attr_change_colors.down,
-    content: `粉丝数 ${fans}/25000 ${fans >= 25000 ? '✔' : '✘'}`,
-  });
-  return buffer;
 };
 
 handlers[check_stages.palace_check] = () => {
   common_palace_check(52);
   return handlers[check_stages.aim_check]();
 };
+
+handlers[check_stages.personal_titles] = () => [
+  '乌拉拉加油',
+  '中山之樱',
+  '跨越世界',
+];
 
 /** @param {{aim_check:boolean,titles:{n:string,c:string}[]}} extra_flag */
 handlers[check_stages.title_check] = (extra_flag) => {
@@ -184,12 +210,6 @@ handlers[check_stages.title_check] = (extra_flag) => {
     extra_flag.aim_check && sys_personal_achievement.set(52, 1);
   }
 };
-
-handlers[check_stages.personal_titles] = () => [
-  '乌拉拉加油',
-  '中山之樱',
-  '跨越世界',
-];
 
 /**
  * @param {number} stage_id

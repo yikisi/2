@@ -25,9 +25,28 @@ const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
+const CharaTitles = require('#/data/chara-titles');
 
 /** @type {Record<string,function(Record<string,*>)>} */
 const handlers = {};
+
+handlers[check_stages.aim_check] = () => {
+  const buffer = [],
+    races = new RaceHistory(3).get();
+  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+
+  buffer.push(check_aim_and_get_entry(races, race_enum.waka_sta, 1, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));
+  buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));
+  buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
+
+  if (!new TeioEduMarks().give_up) {
+    buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
+  }
+  buffer.push(check_aim_and_get_entry(races, race_enum.japa_cup, 2, 2));
+  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
+  return buffer;
+};
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 2;
@@ -45,6 +64,35 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 3;
 handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
   aim_races[extra_flag.race];
+
+const edu_weeks_toky_yus = race_infos[race_enum.toky_yus].date + 48;
+
+/** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
+handlers[check_stages.after_race] = (extra_flag) => {
+  const event_marks = new TeioEduMarks();
+  if (extra_flag.rank !== 1) {
+    event_marks.perfect_check = 1;
+    if (extra_flag.edu_weeks < edu_weeks_toky_yus) {
+      event_marks.normal_check = 1;
+    }
+  }
+  if (era.get('status:3:腿伤')) {
+    if (extra_flag.rank > 1) {
+      sys_change_fame(-5);
+    }
+    if (extra_flag.rank > 5) {
+      sys_change_fame(-5);
+      sys_change_pressure(3, 2000);
+    }
+  } else if (
+    era.get('cflag:3:育成回合计时') >= 96 &&
+    extra_flag.race === race_enum.tenn_spr
+  ) {
+    add_event(event_hooks.back_school, new EventObject(3, cb_enum.edu));
+  } else if (extra_flag.race === race_enum.toky_yus) {
+    sys_hurt_uma(3, 3);
+  }
+};
 
 handlers[check_stages.love_event] = () => {
   const love = era.get('love:3'),
@@ -65,8 +113,7 @@ handlers[check_stages.next_week] = () => {
     event_obj = new EventObject(3, cb_enum.edu),
     edu_weeks = era.get('cflag:3:育成回合计时');
   if (edu_weeks < 3 * 48) {
-    const event_obj_special = new EventObject(3, cb_enum.edu, true),
-      races = era.get('cflag:3:育成成绩');
+    const event_obj_special = new EventObject(3, cb_enum.edu, true);
     let temp;
     check_and_add_event(
       event_marks,
@@ -182,17 +229,9 @@ handlers[check_stages.next_week] = () => {
       temp.week = -1;
     }
     if (!event_marks.famous_in_famous && edu_weeks >= 96) {
-      let crowns = 0;
-      crowns +=
-        check_aim_race(races, race_enum.oka_sho, 1, 1) ||
-        check_aim_race(races, race_enum.sats_sho, 1, 1);
-      crowns +=
-        check_aim_race(races, race_enum.yush_him, 1, 1) ||
-        check_aim_race(races, race_enum.toky_yus, 1, 1);
-      crowns +=
-        check_aim_race(races, race_enum.shuk_sho, 1, 1) ||
-        check_aim_race(races, race_enum.kiku_sho, 1, 1);
-      if (crowns === 3) {
+      if (
+        new CharaTitles(3).get().filter((e) => e.n.endsWith('三冠')).length > 0
+      ) {
         event_marks.famous_in_famous++;
         add_event(event_hooks.out_start, event_obj);
       } else {
@@ -206,56 +245,8 @@ handlers[check_stages.next_week] = () => {
   }
 };
 
-const edu_weeks_toky_yus = race_infos[race_enum.toky_yus].date + 48;
-
-/** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
-handlers[check_stages.after_race] = (extra_flag) => {
-  const event_marks = new TeioEduMarks();
-  if (extra_flag.rank !== 1) {
-    event_marks.perfect_check = 1;
-    if (extra_flag.edu_weeks < edu_weeks_toky_yus) {
-      event_marks.normal_check = 1;
-    }
-  }
-  if (era.get('status:3:腿伤')) {
-    if (extra_flag.rank > 1) {
-      sys_change_fame(-5);
-    }
-    if (extra_flag.rank > 5) {
-      sys_change_fame(-5);
-      sys_change_pressure(3, 2000);
-    }
-  } else if (
-    era.get('cflag:3:育成回合计时') >= 96 &&
-    extra_flag.race === race_enum.tenn_spr
-  ) {
-    add_event(event_hooks.back_school, new EventObject(3, cb_enum.edu));
-  } else if (extra_flag.race === race_enum.toky_yus) {
-    sys_hurt_uma(3, 3);
-  }
-};
-
-handlers[check_stages.aim_check] = () => {
-  const buffer = [],
-    /** @type {Record<string,{race:number,rank:number}>} */
-    races = era.get('cflag:3:育成成绩');
-  const event_marks = new TeioEduMarks();
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-  buffer.push(check_aim_and_get_entry(races, race_enum.waka_sta, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
-  if (!event_marks.give_up) {
-    buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
-  }
-  buffer.push(check_aim_and_get_entry(races, race_enum.japa_cup, 2, 2));
-  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
-  return buffer;
-};
-
 handlers[check_stages.palace_check] = () => {
-  const /** @type {Record<string,{race:number,rank:number}>} */
-    races = era.get('cflag:3:育成成绩');
+  const races = new RaceHistory(3).get();
   if (era.get('status:3:腿伤')) {
     if (
       check_aim_race(races, race_enum.japa_cup, 2, 1) &&
@@ -274,8 +265,7 @@ handlers[check_stages.personal_titles] = () => ['帝王', '无瑕帝王', '不�
 
 /** @param {{aim_check:boolean,titles:{n:string,c:string}[]}} extra_flag */
 handlers[check_stages.title_check] = (extra_flag) => {
-  /** @type {Record<string,{race:number,rank:number}>} */
-  const races = era.get('cflag:3:育成成绩');
+  const races = new RaceHistory(3).get();
   const event_marks = new TeioEduMarks();
   let normal_title_check =
     check_aim_race(races, race_enum.sats_sho, 1, 1) &&

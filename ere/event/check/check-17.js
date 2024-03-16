@@ -9,18 +9,39 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
+const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const check_stages = require('#/data/event/check-stages');
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const CharaTalk = require('#/utils/chara-talk');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const color_17 = require('#/data/chara-colors').chara_colors[17];
 
 const handlers = {};
+
+handlers[check_stages.aim_check] = function () {
+  const buffer = [],
+    races = new RaceHistory(17).get();
+
+  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+  buffer.push(check_aim_and_get_entry(races, race_enum.saud_cup, 0, 5));
+
+  buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));
+  buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));
+  buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 3));
+
+  buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.japa_cup, 2, 2));
+  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
+
+  return buffer;
+};
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 2;
@@ -61,8 +82,13 @@ handlers[check_stages.aim_race] = (extra_flag) => {
   return ret;
 };
 
-handlers[check_stages.love_event] = () => {
-  add_event(event_hooks.week_end, new EventObject(17, cb_enum.love));
+const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date;
+
+/** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
+handlers[check_stages.after_race] = (extra_flag) => {
+  if (extra_flag.rank !== 1 && extra_flag.edu_weeks < edu_weeks_kiku_sho) {
+    new LunaEduMarks().title_check = 1;
+  }
 };
 
 handlers[check_stages.next_week] = () => {
@@ -72,7 +98,7 @@ handlers[check_stages.next_week] = () => {
     add_event(event_hooks.week_start, edu_object);
     if (
       edu_weeks === 47 + 41 &&
-      check_aim_race(era.get('cflag:17:育成成绩'), race_enum.kiku_sho, 1, 1)
+      check_aim_race(new RaceHistory(17).get(), race_enum.kiku_sho, 1, 1)
     ) {
       add_event(event_hooks.week_end, edu_object);
     } else if (edu_weeks === 95 + 1) {
@@ -86,60 +112,10 @@ handlers[check_stages.next_week] = () => {
   }
 };
 
-handlers[check_stages.aim_check] = function () {
-  const buffer = [],
-    races = era.get('cflag:17:育成成绩');
-
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-  buffer.push(check_aim_and_get_entry(races, race_enum.saud_cup, 0, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.japa_cup, 2, 2));
-  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
-
-  return buffer;
-};
-
-const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date;
-
-/** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
-handlers[check_stages.after_race] = (extra_flag) => {
-  if (extra_flag.rank !== 1 && extra_flag.edu_weeks < edu_weeks_kiku_sho) {
-    new LunaEduMarks().title_check = 1;
-  }
-};
-
 handlers[check_stages.palace_check] = function () {
   common_palace_check(17);
   return handlers[check_stages.aim_check]();
 };
-
-/** @param {{aim_check:boolean,titles:{n:string,c:string}[]}} extra_flag */
-handlers[check_stages.title_check] = (extra_flag) => {
-  /** @type {Record<string,{race:number,rank:number}>} */
-  const races = era.get('cflag:17:育成成绩');
-  const is_invisible =
-    check_aim_race(races, race_enum.sats_sho, 1, 1) &&
-    check_aim_race(races, race_enum.toky_yus, 1, 1) &&
-    check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
-    check_aim_race(races, race_enum.arim_kin, 1, 1) &&
-    check_aim_race(races, race_enum.tenn_spr, 2, 1) &&
-    check_aim_race(races, race_enum.arim_kin, 2, 1) &&
-    (check_aim_race(races, race_enum.japa_cup, 1, 1) ||
-      check_aim_race(races, race_enum.japa_cup, 2, 1));
-  if (is_invisible && !new LunaEduMarks().title_check) {
-    extra_flag.titles.push({
-      c: get_chara_talk(17).color,
-      n: '皇帝',
-    });
-    extra_flag.aim_check && sys_personal_achievement.set(17, 1);
-  }
-};
-
-handlers[check_stages.personal_titles] = () => ['皇帝'];
 
 handlers[check_stages.personal_action] = function () {
   if (
@@ -179,6 +155,29 @@ handlers[check_stages.personal_action] = function () {
     };
   }
   return {};
+};
+
+handlers[check_stages.personal_titles] = () => ['皇帝'];
+
+/** @param {{aim_check:boolean,titles:{n:string,c:string}[]}} extra_flag */
+handlers[check_stages.title_check] = (extra_flag) => {
+  const races = new RaceHistory(17).get(),
+    is_invisible =
+      check_aim_race(races, race_enum.sats_sho, 1, 1) &&
+      check_aim_race(races, race_enum.toky_yus, 1, 1) &&
+      check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
+      check_aim_race(races, race_enum.arim_kin, 1, 1) &&
+      check_aim_race(races, race_enum.tenn_spr, 2, 1) &&
+      check_aim_race(races, race_enum.arim_kin, 2, 1) &&
+      (check_aim_race(races, race_enum.japa_cup, 1, 1) ||
+        check_aim_race(races, race_enum.japa_cup, 2, 1));
+  if (is_invisible && !new LunaEduMarks().title_check) {
+    extra_flag.titles.push({
+      c: get_chara_talk(17).color,
+      n: '皇帝',
+    });
+    extra_flag.aim_check && sys_personal_achievement.set(17, 1);
+  }
 };
 
 /**

@@ -20,6 +20,23 @@ const { race_enum } = require('#/data/race/race-const');
 
 const handlers = {};
 
+handlers[check_stages.aim_check] = () => {
+  const buffer = [],
+    races = era.get('cflag:7:育成成绩');
+  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+  buffer.push(check_aim_and_get_entry(races, race_enum.hope_sta, 0, 5));
+
+  buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));
+  buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 3));
+
+  buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 1));
+  buffer.push(check_aim_and_get_entry(races, race_enum.tenn_sho, 2, 1));
+  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
+  return buffer;
+};
+
 /**
  * 重要比赛的映射表<br>
  * key有两种形式，育成周数_比赛ID，或者比赛ID<br>
@@ -45,8 +62,12 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
   aim_races[extra_flag.race];
 
-handlers[check_stages.love_event] = () =>
-  add_event(event_hooks.week_end, new EventObject(7, cb_enum.love));
+/** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
+handlers[check_stages.after_race] = (extra_flag) => {
+  if (extra_flag.race === race_enum.prix_lat) {
+    new GoldShipEduMarks().title_check++;
+  }
+};
 
 handlers[check_stages.next_week] = () => {
   const event_marks = new GoldShipEduMarks(7),
@@ -107,35 +128,15 @@ handlers[check_stages.next_week] = () => {
   }
 };
 
-handlers[check_stages.aim_check] = function () {
-  const buffer = [],
-    races = era.get('cflag:7:育成成绩');
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-  buffer.push(check_aim_and_get_entry(races, race_enum.hope_sta, 0, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.tenn_sho, 2, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
-  return buffer;
-};
-
-/** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
-handlers[check_stages.after_race] = (extra_flag) => {
-  if (extra_flag.race === race_enum.prix_lat) {
-    new GoldShipEduMarks().title_check++;
-  }
-};
-
-handlers[check_stages.palace_check] = function () {
+handlers[check_stages.palace_check] = () => {
   common_palace_check(7);
   if (new GoldShipEduMarks().keywords === 4) {
     add_event(event_hooks.week_start, new EventObject(7, cb_enum.edu));
   }
   return handlers[check_stages.aim_check]();
 };
+
+handlers[check_stages.personal_titles] = () => ['破天荒', '粉丝服务'];
 
 /** @param {{aim_check:boolean,titles:{c:string,n:string}[]}} extra_flag */
 handlers[check_stages.title_check] = (extra_flag) => {
@@ -164,8 +165,6 @@ handlers[check_stages.title_check] = (extra_flag) => {
     });
   }
 };
-
-handlers[check_stages.personal_titles] = () => ['破天荒', '粉丝服务'];
 
 /**
  * @param {number} stage_id
