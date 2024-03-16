@@ -361,14 +361,20 @@ function init_ero(...ids) {
     era.set(
       `tcvar:${chara_id}:体力缓存`,
       Math.max(
-        Math.min((temp = era.get(`base:${chara_id}:体力`)) / 2, temp - 100),
+        Math.min(
+          Math.floor((temp = era.get(`base:${chara_id}:体力`)) / 2),
+          temp - 100,
+        ),
         1,
       ),
     );
     era.set(
       `tcvar:${chara_id}:精力缓存`,
       Math.max(
-        Math.min((temp = era.get(`base:${chara_id}:精力`)) / 2, temp - 100),
+        Math.min(
+          Math.floor((temp = era.get(`base:${chara_id}:精力`)) / 2),
+          temp - 100,
+        ),
         1,
       ),
     );

@@ -33,6 +33,7 @@ class RaceHistory {
 
   /** @param {number} chara_id */
   constructor(chara_id) {
+    this.id = chara_id;
     this.obj =
       era.get(`cflag:${chara_id}:育成成绩`) ||
       era.set(`cflag:${chara_id}:育成成绩`, {});
@@ -80,6 +81,10 @@ class RaceHistory {
 
   length() {
     return Object.keys(this.obj).length;
+  }
+
+  reset() {
+    this.obj = era.set(`cflag:${this.id}:育成成绩`, {});
   }
 }
 

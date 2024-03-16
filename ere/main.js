@@ -85,6 +85,10 @@ module.exports = async () => {
         columns: [
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
+          {
+            content: `版本号：v${era.get('gamebase').version / 1000}`,
+            type: 'text',
+          },
         ],
         config: { offset: 6, verticalAlign: 'middle', width: 12 },
       },

@@ -17,6 +17,7 @@ const {
   get_breast_cup,
   get_talent_bust_size,
 } = require('#/data/info-generator');
+const RaceHistory = require('#/data/race/model/race-history');
 const { attr_names } = require('#/data/train-const');
 
 /**
@@ -54,7 +55,7 @@ function reset_chara(chara_id) {
   }
 
   era.set(`cflag:${chara_id}:育成用变量`, {});
-  era.set(`cflag:${chara_id}:育成成绩`, {});
+  new RaceHistory(chara_id).reset();
 }
 
 module.exports = {
