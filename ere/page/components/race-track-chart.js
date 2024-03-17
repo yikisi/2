@@ -29,8 +29,8 @@ function print_race_track_chart(info) {
         type: 'box',
         xMax: e.start,
         xMin: e.end,
-        yMax: 2,
-        yMin: -2,
+        yMax: 2.5,
+        yMin: -2.5,
       }),
   );
   annotations.divider1 = {
@@ -44,7 +44,7 @@ function print_race_track_chart(info) {
     content: `序 ⬅ ${info.phases[1]} ⮕ 中`,
     type: 'label',
     xValue: info.phases[1],
-    yValue: -1.7,
+    yValue: -2.3,
   };
   annotations.divider2 = {
     borderColor: 'black',
@@ -57,7 +57,7 @@ function print_race_track_chart(info) {
     content: `中 ⬅ ${info.phases[2]} ⮕ 终`,
     type: 'label',
     xValue: info.phases[2],
-    yValue: -1.7,
+    yValue: -2.3,
   };
   info.lanes.forEach(
     (e, i) =>
@@ -66,7 +66,7 @@ function print_race_track_chart(info) {
         content: `${e.is_last ? '终' : i + 1}${e.is_curve ? '弯' : '直 '}`,
         type: 'label',
         xValue: (e.start + e.end) / 2,
-        yValue: 1.7,
+        yValue: 2.3,
       }),
   );
   era.printLineChart({
@@ -86,12 +86,12 @@ function print_race_track_chart(info) {
         x: {
           suggestedMax: info.span,
           suggestedMin: 0,
-          ticks: { step: 200 },
+          ticks: { callback: ['x', 'return x % 200 ? undefined : x;'] },
         },
         y: {
-          suggestedMax: 2,
-          suggestedMin: -2,
-          ticks: { step: 0.5 },
+          suggestedMax: 2.5,
+          suggestedMin: -2.5,
+          ticks: { callback: ['y', 'return y % 0.5 ? undefined : y;'] },
         },
       },
     },
