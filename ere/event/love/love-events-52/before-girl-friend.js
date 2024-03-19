@@ -4,7 +4,10 @@ const {
   begin_and_init_ero,
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_colored_callname,
+  sys_love_uma_in_event,
+} = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { add_event } = require('#/event/queue');
@@ -35,7 +38,8 @@ module.exports = async (
   chara_self_name,
   event_object,
 ) => {
-  if (new UraraLifeMarks().active_74 === 0) {
+  const life_marks = new UraraLifeMarks();
+  if (life_marks.active_74 === 0) {
     await print_event_name('躁动的爱意', urara);
     await in_urara.say_and_wait([
       '在床上翻了个身，今天的小',
@@ -318,8 +322,150 @@ module.exports = async (
       end_ero_and_train();
       era.set('status:52:熬夜', 1);
       era.set('cflag:52:爱慕暂拒', 74);
+      life_marks.active_74 = 1;
     }
   } else {
     await print_event_name(`致等待已久的${urara.sex}`, urara);
+    await era.printAndWait([
+      '或许是因为那天遇上了很多事情，',
+      me.get_colored_name(),
+      ' 与 ',
+      urara.get_colored_name(),
+      ' 终于有机会独处的时候，天色已逐渐变暗下来。',
+    ]);
+    await era.printAndWait([
+      '记忆中的 ',
+      urara.get_colored_name(),
+      ' 仰头看着夜空，小',
+      urara.get_uma_sex_title(),
+      '安静地数着星星，樱瞳上洒满了点点星光。',
+    ]);
+    await era.printAndWait([
+      '只是今天的小',
+      urara.get_uma_sex_title(),
+      '依旧有些缺乏兴致，耳朵和尾巴也只是若有所思的耷拉着。',
+    ]);
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 当然知道为什么，就算记忆会有偏差，两人一起的时间与经历也绝对不会说谎。',
+    ]);
+    await era.printAndWait([
+      '想要去拉 ',
+      urara.get_colored_name(),
+      ' 的手、想要看到 ',
+      urara.get_colored_name(),
+      ' 的笑容、想要和 ',
+      urara.get_colored_name(),
+      ' 更进一步……',
+    ]);
+    await era.printAndWait([
+      '就算使用理性，想到的也只有',
+      urara.sex,
+      '还在等待着某人的回应，思考已容不下它物。',
+    ]);
+    await era.printAndWait([
+      '担当还是一如既往的样子，所以有问题的只会是用「谨言慎行」当借口的训练员而已。',
+    ]);
+    await era.printAndWait([
+      '事到如今就算是错上加错，卑鄙的大人也已经用光了全部的底牌。',
+    ]);
+    await era.printAndWait([
+      '想好了吗？不过就算还觉得自己没准备好，人生也不会经历两个相同的夜晚啊。',
+    ]);
+
+    await era.printAndWait([
+      '在匆忙的星空下， ',
+      me.get_colored_name(),
+      ' 终于——',
+    ]);
+    era.printButton('主动去牵起乌拉拉的手。', 1);
+    await era.input();
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 轻轻地牵起了身边人的手，而回应的则是在略微迟疑后温暖的回握。',
+    ]);
+    await era.printAndWait([
+      '将目光悄悄地转向一侧，沉默的 ',
+      urara.get_colored_name(),
+      ' 终于冲 ',
+      me.get_colored_name(),
+      ' 笑了起来。',
+    ]);
+    await era.printAndWait([
+      '明明还是小小的',
+      urara.sex,
+      '，不知为何却在这时表现出了不像小孩子的冷静。',
+    ]);
+    await era.printAndWait([
+      '带着什么都懂一点的表情，就像 ',
+      urara.get_colored_name(),
+      ' 主动告白时的那样。',
+    ]);
+    era.println();
+    if (relation > 150) {
+      await urara.say_and_wait(
+        '虽然比想象中的稍微有些晚了，但是乌拉拉依旧这样喜欢着训练员哦！',
+      );
+      await era.printAndWait([
+        '靠在身边回应着 ',
+        me.get_colored_name(),
+        ' 的情感，',
+        urara.get_colored_name(),
+        ' 不知不觉中笑了出来。',
+      ]);
+      await urara.say_and_wait(['请多指教……？嘿嘿～果然不太适合乌拉拉呢！']);
+    } else {
+      await urara.say_and_wait([
+        '在想什么呢？明明已经这个时候了……不过，就是那么回事吧，训练员！',
+      ]);
+      await era.printAndWait([
+        '虽然总有些不满和担忧，但 ',
+        urara.get_colored_name(),
+        ' 还是小声笑了起来。',
+      ]);
+      await urara.say_and_wait('回去的稍微慢一点，应该不会让大家担心吧？');
+    }
+    era.println();
+    if (
+      era
+        .getAddedCharacters()
+        .filter((e) => e > 0 && e !== 52 && era.get(`love:${e}`) >= 75).length >
+      0
+    ) {
+      await urara.say_and_wait(
+        '不过训练员，走夜路真的很黑呢，不要只送别人回家哦？',
+      );
+      await urara.say_and_wait('突然放开的话，也许乌拉拉会走丢也说不定呢……');
+      era.println();
+    }
+    await era.printAndWait([
+      '回去的路上，成为恋人的二人步伐也不知不觉中慢了下来。',
+    ]);
+    await era.printAndWait([
+      '尚处天真时节的小',
+      urara.get_uma_sex_title(),
+      '与已是大人年纪的训练员，不论差距多大还是选择了彼此。',
+    ]);
+    await era.printAndWait([
+      '前方不知要走到什么时候的夜路，或许会让大家担心也说不定。',
+    ]);
+    await era.printAndWait([
+      '不过只要在门禁前安全的回去就好了吧？回忆着那天的归路，',
+      urara.get_teen_sex_title(),
+      '合上了',
+      urara.sex,
+      '画得到处都是的笔记。',
+    ]);
+    era.drawLine();
+    await urara.say_and_wait(
+      '希望未来的乌拉拉与训练员，不管发生什么，也不会在夜中迷路。',
+      true,
+    );
+    await in_urara.say_as_unknown_and_wait([
+      '回忆着那天的点点星光，小小的',
+      urara.get_uma_sex_title(),
+      '如此祈愿着。',
+    ]);
+    await sys_love_uma_in_event(52);
   }
 };

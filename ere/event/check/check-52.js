@@ -20,6 +20,8 @@ const { get_breast_cup } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
+const UraraLifeMarks = require('#/data/event/life-event-marks/life-event-marks-52');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 /** @type {Record<string,function(Record<string,*>)>} */
 const handlers = {};
@@ -158,6 +160,17 @@ handlers[check_stages.after_race] = (extra_flag) => {
   }
 };
 
+handlers[check_stages.love_event] = () => {
+  if (era.get('love:52') === 99) {
+    add_event(
+      event_hooks.week_start,
+      new EventObject(52, cb_enum.love).set_arg(99),
+    );
+  } else {
+    add_event(event_hooks.week_end, new EventObject(52, cb_enum.love));
+  }
+};
+
 handlers[check_stages.next_week] = () => {
   const cup_size = get_breast_cup(60);
   if (!era.get('talent:60:泌乳') && cup_size >= 'E') {
@@ -170,6 +183,42 @@ handlers[check_stages.next_week] = () => {
     add_event(
       event_hooks.week_start,
       new EventObject(52, cb_enum.edu).set_arg('palace'),
+    );
+  }
+  const life_marks = new UraraLifeMarks(),
+    love = era.get('love:52');
+  if (!life_marks.fuck_buddy && love >= 50) {
+    add_event(
+      event_hooks.week_start,
+      new EventObject(52, cb_enum.love).set_arg(50),
+    );
+  }
+  if (!life_marks.girl_friend && love >= 75) {
+    add_event(
+      event_hooks.week_start,
+      new EventObject(52, cb_enum.love).set_arg(75),
+    );
+  }
+  if (
+    !life_marks.infidelity &&
+    ((love >= 90 &&
+      (era.get('cflag:30:招募状态') === recruit_flags.yes &&
+        era.get('love:30')) >= 75) ||
+      (era.get('cflag:61:招募状态') === recruit_flags.yes &&
+        era.get('love:61')) >= 75)
+  ) {
+    add_event(
+      event_hooks.week_start,
+      new EventObject(52, cb_enum.love).set_arg(90),
+    );
+  }
+  if (
+    !life_marks.want_you &&
+    era.get('relation:52:0') < era.get('love:52') * 6
+  ) {
+    add_event(
+      event_hooks.week_start,
+      new EventObject(52, cb_enum.love).set_arg(101),
     );
   }
 };

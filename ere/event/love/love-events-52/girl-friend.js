@@ -104,7 +104,7 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
     ' 都没有半分迷茫。',
   ]);
   era.println();
-  await in_urara.say_as_unknown_and_wait([
+  in_urara.say_as_unknown([
     '面对安静等待着的 ',
     urara.get_colored_name(),
     '，训练员 ',
@@ -218,6 +218,7 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
       );
       await era.printAndWait('是啊，如今已经不会再被责怪了……');
     }
+    era.println();
     if (
       era
         .getAddedCharacters()

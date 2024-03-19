@@ -10,6 +10,7 @@ const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
+const UraraLifeMarks = require('#/data/event/life-event-marks/life-event-marks-52');
 
 /**
  * @author 99
@@ -22,6 +23,7 @@ const { lust_from_palam } = require('#/data/ero/orgasm-const');
  */
 module.exports = async (me, urara, in_urara, relation, callname) => {
   await print_event_name('稚嫩的水声', urara);
+  new UraraLifeMarks().fuck_buddy = 1;
   await in_urara.say_as_unknown_and_wait('虽然不太愿面对……');
   await in_urara.say_as_unknown_and_wait(
     '但在爱欲的浇灌下，青涩的果实总会成熟为妖艳的蛇果。',

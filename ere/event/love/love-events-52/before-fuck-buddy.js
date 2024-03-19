@@ -9,11 +9,8 @@ const {
   sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
 
-const { add_event } = require('#/event/queue');
 const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
-
-const event_hooks = require('#/data/event/event-hooks');
 
 /**
  * @author 99
@@ -24,7 +21,6 @@ const event_hooks = require('#/data/event/event-hooks');
  * @param {number} relation
  * @param {string} callname
  * @param {string} chara_self_name
- * @param {EventObject} event_object
  */
 module.exports = async (
   me,
@@ -33,7 +29,6 @@ module.exports = async (
   relation,
   callname,
   chara_self_name,
-  event_object,
 ) => {
   await print_event_name('觉醒的稚嫩', urara);
   await in_urara.say_as_unknown_and_wait(
@@ -68,8 +63,7 @@ module.exports = async (
     sys_get_colored_callname(52, 61),
     ` 吗？可是这样做一定会惹${urara.sex}生气的，还是 ${chara_self_name} 再努力一下好了……`,
   ]);
-  await urara.print_and_wait('呜呜……身体好热，就算掀掉被子也还是好热……');
-  era.println();
+  urara.print('呜呜……身体好热，就算掀掉被子也还是好热……');
   era.printButton('试一下，试一下就好……（升级关系）', 1);
   era.printButton('唔……但还是好困啊……（暂停升级）', 2);
   if ((await era.input()) === 1) {
@@ -129,7 +123,6 @@ module.exports = async (
     await masturbate(52);
     end_ero_and_train();
     await sys_love_uma_in_event(52);
-    add_event(event_hooks.week_start, event_object.set_arg(50));
   } else {
     await urara.say_and_wait(`下次还要去见${callname}，还是赶快睡吧……`);
     await urara.print_and_wait(
