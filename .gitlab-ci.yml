@@ -5,8 +5,8 @@ pages:
   script:
     - rm -rf public
     - mkdir public
-    - zip -r base.zip ./ere/ ./csv/
-    - mv base.zip public/
+    - 7z a base.7z ./ere ./csv
+    - mv base.7z public/
     - echo "$CI_COMMIT_TAG" > public/RELEASE
   artifacts:
     paths:

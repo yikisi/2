@@ -25,6 +25,7 @@ jobs:
       - name: Make game main directory
         run: |
           mkdir ./$GAME_DIR
+          cp CHANGELOG.md ./$GAME_DIR
           cp -r ./ere ./$GAME_DIR
           cp -r ./csv ./$GAME_DIR
           ls -la ./$GAME_DIR
@@ -55,7 +56,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Make game res directory
         run: |
-          rm -rf ./$GAME_DIR
           mkdir ./$GAME_DIR
           cp -r ./res ./$GAME_DIR
           ls -la ./$GAME_DIR
@@ -109,6 +109,7 @@ jobs:
         run: |
           mv ./engine/dist_electron/win-unpacked ./engine/dist_electron/$env:GAME_ALL_DIR
           mkdir ./engine/dist_electron/$env:GAME_ALL_DIR/game
+          cp CHANGELOG.md ./engine/dist_electron/$env:GAME_ALL_DIR/game
           cp -r ./ere ./engine/dist_electron/$env:GAME_ALL_DIR/game
           cp -r ./csv ./engine/dist_electron/$env:GAME_ALL_DIR/game
           cp -r ./res ./engine/dist_electron/$env:GAME_ALL_DIR/game
