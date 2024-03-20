@@ -40,6 +40,10 @@ handlers[check_stages.mec_foreign_debuff] = (chara_id, extra_flag) => {
   }
 };
 
+handlers[check_stages.mec_love_buff] = () => 0;
+
+handlers[check_stages.mec_love_limit] = () => 0;
+
 handlers[check_stages.mec_maxbase_buff] = () => 0;
 
 handlers[check_stages.mec_motivation] = () => 0;
@@ -60,6 +64,8 @@ handlers[check_stages.mec_race_cloth] = (chara_id) => {
 };
 
 handlers[check_stages.mec_race_buff] = () => 0;
+
+handlers[check_stages.mec_relation_buff] = () => 0;
 
 handlers[check_stages.mec_sex_acceptable] = () => 0;
 

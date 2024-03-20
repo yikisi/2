@@ -95,8 +95,8 @@ function like_chara(target, aim, val, to_be_shown, extra_love) {
             (100 +
               era.get('flag:好感上升加成') -
               25 * sys_check_remote(target) -
-              50 * (era.get(`status:${target}:讨厌药`) > 0) -
-              20 * era.get(`status:${target}:心术`))) /
+              50 * (era.get(`status:${target}:讨厌药`) > 0) +
+              sys_call_mec(17, check_stages.mec_relation_buff))) /
             1000 +
             3 * era.get(`talent:${target}:自信程度`),
           1,
@@ -192,13 +192,13 @@ function love_uma(chara_id, val, to_be_shown) {
         (100 +
           era.get('flag:爱慕上升加成') +
           50 * era.get(`status:${chara_id}:爱意克制`) +
-          20 * era.get(`status:${chara_id}:迷恋`))) /
+          sys_call_mec(chara_id, check_stages.mec_love_buff))) /
         100,
     );
-    const force_limit = era.get(`status:${chara_id}:心术`),
-      border = force_limit ? 41 : get_love_border(chara_id),
+    const force_limit = sys_call_mec(chara_id, check_stages.mec_love_limit),
+      border = force_limit || get_love_border(chara_id),
       love_limit = !era.get('flag:回合爱慕惩罚');
-    if ((love_limit || force_limit) && border >= 40 && love + _val >= border) {
+    if ((love_limit || force_limit) && border > 25 && love + _val >= border) {
       _val = border - 1 - love;
     }
     if (love + _val > 100) {

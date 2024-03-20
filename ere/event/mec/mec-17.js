@@ -7,10 +7,18 @@ const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 
 const handlers = {};
 
+handlers[check_stages.mec_love_buff] = () => 20 * era.get('status:17:迷恋');
+
+handlers[check_stages.mec_love_limit] = () =>
+  era.get('status:17:心术') ? 40 : 0;
+
 handlers[check_stages.mec_race_buff] = () =>
   2 * era.get('status:17:皇帝') -
   5 * era.get('status:17:自毁') -
   8 * era.get('status:17:神经衰弱') * !new LunaEduMarks().emperor;
+
+handlers[check_stages.mec_relation_buff] = () =>
+  -20 * era.get('status:17:心术');
 
 handlers[check_stages.mec_status] = () => {
   const ret_list = [];
