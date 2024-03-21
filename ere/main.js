@@ -305,18 +305,24 @@ module.exports = async () => {
         for (const a of [
           [
             '招募、日常、爱慕、育成地文',
-            ['雞雞', { isDivider: true }, '黑奴队长'],
+            [
+              '雞雞',
+              { isDivider: true },
+              '黑奴队长',
+              { isDivider: true },
+              '天马闪光蹄',
+            ],
           ],
           [
             '调教地文',
             [
               'O口口口口口',
               { isDivider: true },
+              '雞雞',
+              { isDivider: true },
               '天马闪光蹄',
               { isBr: true },
               '黑衣剑士-星爆气流斩准备就绪',
-              { isDivider: true },
-              '雞雞',
               { isDivider: true },
               '鬼鼠',
             ],
