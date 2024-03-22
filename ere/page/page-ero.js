@@ -685,7 +685,7 @@ async function page_ero(lover) {
       }),
       [
         {
-          config: { width: 6 },
+          config: { width: 8 },
           content:
             last_action >= 0
               ? [
@@ -706,14 +706,14 @@ async function page_ero(lover) {
                     check_ero_enabled(curr_lover, curr_supporter, last_action) <
                       0),
                 disableWarning: true,
-                width: 6,
+                width: 8,
               },
               content: `再次 ${ero_action_names[last_action]}`,
               type: 'button',
             }
           : undefined,
         {
-          config: { width: 6 },
+          config: { width: 8 },
           content:
             lover_action >= 0
               ? [

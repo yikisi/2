@@ -866,9 +866,10 @@ async function sys_next_week() {
   }
   await check_new_activities(cur_round, in_team_list);
   if (!era.get('flag:当前互动角色') && in_team_list.length) {
+    temp = era.get('flag:床伴');
     era.set(
       'flag:当前互动角色',
-      era.get('flag:床伴') ||
+      (era.get(`cflag:${temp}:招募状态`) === recruit_flags.yes && temp) ||
         get_random_entry(
           in_team_list.filter(
             (e) =>
