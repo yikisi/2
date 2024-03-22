@@ -293,10 +293,10 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
           await era.printAndWait(
             `\n将被生下来的这孩子，会不会变得像其他${father.get_uma_sex_title()}们一样，将自己当成孕袋`,
           );
+          await era.printAndWait(
+            '……不行，必须要尽起职责，最起码，要好好将这孩子养育成材',
+          );
         }
-        await era.printAndWait(
-          '……不行，必须要尽起职责，最起码，要好好将这孩子养育成材',
-        );
 
         await era.printAndWait('\n由孕袋培养出的孩子，真的有办法正常成人吗？');
         await era.printAndWait(

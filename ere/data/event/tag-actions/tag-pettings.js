@@ -125,8 +125,10 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
   );
 
   ero_action_names[ero_actions.force_cunnilingus] = '强制舐阴';
-  ero_tagged_hooks[ero_actions.force_cunnilingus] =
-    ero_tagged_hooks[ero_actions.ask_cunnilingus];
+  ero_tagged_hooks[ero_actions.force_cunnilingus] = new EroHookTag(
+    [ero_action_tags.awake, ero_action_tags.clitoris, ero_action_tags.pet],
+    [ero_action_tags.awake, ero_action_tags.mouth],
+  );
 
   ero_action_names[ero_actions.suck_virgin] = '舌交';
   ero_tagged_hooks[ero_actions.suck_virgin] = new EroHookTag(
