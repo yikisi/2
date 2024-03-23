@@ -102,8 +102,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
     ['许可！', '会超出计划的……'].forEach((e, i) => {
       era.printButton(`「${e}」`, i + 1);
     });
-    const ret = await era.input();
-    if (ret === 1) {
+    if ((await era.input()) === 1) {
       await era.printAndWait([
         get_chara_talk(0).get_colored_name(),
         ' 默许了 ',

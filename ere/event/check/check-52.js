@@ -16,7 +16,6 @@ const check_stages = require('#/data/event/check-stages');
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
-const { get_breast_cup } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -172,8 +171,7 @@ handlers[check_stages.love_event] = () => {
 };
 
 handlers[check_stages.next_week] = () => {
-  const cup_size = get_breast_cup(60);
-  if (!era.get('talent:60:泌乳') && cup_size >= 'E') {
+  if (!era.get('talent:60:泌乳') && era.get('talent:52:乳房尺寸') > 0) {
     era.set('talent:60:泌乳', 3);
   }
   const edu_weeks = era.get('cflag:52:育成回合计时');
@@ -185,41 +183,43 @@ handlers[check_stages.next_week] = () => {
       new EventObject(52, cb_enum.edu).set_arg('palace'),
     );
   }
-  const life_marks = new UraraLifeMarks(),
-    love = era.get('love:52');
-  if (!life_marks.fuck_buddy && love >= 50) {
-    add_event(
-      event_hooks.week_start,
-      new EventObject(52, cb_enum.love).set_arg(50),
-    );
-  }
-  if (!life_marks.girl_friend && love >= 75) {
-    add_event(
-      event_hooks.week_start,
-      new EventObject(52, cb_enum.love).set_arg(75),
-    );
-  }
-  if (
-    !life_marks.infidelity &&
-    ((love >= 90 &&
-      (era.get('cflag:30:招募状态') === recruit_flags.yes &&
-        era.get('love:30')) >= 75) ||
-      (era.get('cflag:61:招募状态') === recruit_flags.yes &&
-        era.get('love:61')) >= 75)
-  ) {
-    add_event(
-      event_hooks.week_start,
-      new EventObject(52, cb_enum.love).set_arg(90),
-    );
-  }
-  if (
-    !life_marks.want_you &&
-    era.get('relation:52:0') < era.get('love:52') * 6
-  ) {
-    add_event(
-      event_hooks.week_start,
-      new EventObject(52, cb_enum.love).set_arg(101),
-    );
+  if (era.get('cflag:52:招募状态') === recruit_flags.yes) {
+    const life_marks = new UraraLifeMarks(),
+      love = era.get('love:52');
+    if (!life_marks.fuck_buddy && love >= 50) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(52, cb_enum.love).set_arg(50),
+      );
+    }
+    if (!life_marks.girl_friend && love >= 75) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(52, cb_enum.love).set_arg(75),
+      );
+    }
+    if (
+      !life_marks.infidelity &&
+      ((love >= 90 &&
+        (era.get('cflag:30:招募状态') === recruit_flags.yes &&
+          era.get('love:30')) >= 75) ||
+        (era.get('cflag:61:招募状态') === recruit_flags.yes &&
+          era.get('love:61')) >= 75)
+    ) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(52, cb_enum.love).set_arg(90),
+      );
+    }
+    if (
+      !life_marks.want_you &&
+      era.get('relation:52:0') < era.get('love:52') * 6
+    ) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(52, cb_enum.love).set_arg(101),
+      );
+    }
   }
 };
 

@@ -544,7 +544,7 @@ handlers[event_hooks.out_shopping] = async (chara_id, hook) => {
   ]);
 };
 
-handlers[event_hooks.out_church] = async (chara_id, hook) => {
+handlers[event_hooks.out_church] = async (chara_id) => {
   await era.printAndWait([
     get_chara_talk(0).get_colored_name(),
     ' 与 ',

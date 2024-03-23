@@ -48,7 +48,7 @@ function random_cost_in_action(chara_id, stamina, time) {
   }
 }
 
-/** @type {Record<string,function(chara_id:number,stage_id:HookArg):Promise<void>>} */
+/** @type {Record<string,function(number,HookArg,Record<string,*>):Promise<void>>} */
 const handlers = {};
 
 handlers[event_hooks.office_gift] = async (chara_id) => {
@@ -219,7 +219,12 @@ handlers[event_hooks.school_rooftop] = async (chara_id) => {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.out_river] = async (chara_id, hook) => {
+/**
+ * @param {number} chara_id
+ * @param {HookArg} hook
+ * @param {{jpy:number}} extra_flag
+ */
+handlers[event_hooks.out_river] = async (chara_id, hook, extra_flag) => {
   let wait_flag = false;
   if (hook.arg) {
     random_cost_in_action(chara_id, [200, 600], [0, 100]);
@@ -236,7 +241,7 @@ handlers[event_hooks.out_river] = async (chara_id, hook) => {
   } else {
     era.println();
     // 钓鱼
-    const got_jpy = get_random_value(0, 5);
+    const got_jpy = extra_flag?.jpy || get_random_value(0, 5);
     wait_flag ||= got_jpy > 0;
     got_jpy && era.print(`钓到的鱼卖出了 ${got_jpy} 马币……`);
     sys_change_money(got_jpy);

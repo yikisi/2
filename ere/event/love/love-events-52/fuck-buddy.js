@@ -215,4 +215,5 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
   begin_and_init_ero(52);
   await masturbate(52);
   end_ero_and_train();
+  era.set('flag:当前互动角色', 52);
 };

@@ -284,4 +284,5 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
     },
     ' 变得更加娴熟了……',
   ]);
+  era.set('flag:当前互动角色', 52);
 };
