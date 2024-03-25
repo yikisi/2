@@ -153,8 +153,8 @@ module.exports = async (chara_id, hook, extra_flag, event_object) => {
           ]);
           await era.printAndWait([
             '从今以后，',
-            me.get_colored_name(),
-            '们 多了一层关系，一双恋人。',
+            me.get_couple_title(),
+            ' 多了一层关系，一双恋人。',
           ]);
           await sys_love_uma_in_event(chara_id);
         } else {
@@ -162,8 +162,8 @@ module.exports = async (chara_id, hook, extra_flag, event_object) => {
             '纵有万般思绪在心头，但 ',
             me.get_colored_name(),
             ' 始终认为 ',
-            me.get_colored_name(),
-            '们 注定不可能走在一起。',
+            me.get_couple_title(),
+            ' 注定不可能走在一起。',
           ]);
           await era.printAndWait([
             chara.get_colored_name(),
@@ -207,8 +207,8 @@ module.exports = async (chara_id, hook, extra_flag, event_object) => {
           await era.printAndWait([
             me.get_colored_name(),
             ' 伸手接过钻戒。',
-            me.get_colored_name(),
-            '们 在经历过那么多之后也确实是时候结为连理了。',
+            me.get_couple_title(),
+            ' 在经历过那么多之后也确实是时候结为连理了。',
           ]);
           await era.printAndWait([
             chara.get_colored_name(),

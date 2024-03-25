@@ -76,8 +76,8 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (_, extra_flag) => {
     ' 与 ',
     sys_get_colored_callname(0, 301),
     ' 难得地露出了想要杀人的眼神，但她们还是会很负责地协助 ',
-    me.get_colored_name(),
-    '们 应对将要来临的育儿生活——以及尽力按下一切影响声誉的丑闻。',
+    me.get_couple_title(),
+    ' 应对将要来临的育儿生活——以及尽力按下一切影响声誉的丑闻。',
   ]);
   era.println();
   await era.printAndWait('当然，做不做得到又是另一回事。');

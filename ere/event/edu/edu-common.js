@@ -157,8 +157,8 @@ handlers[event_hooks.week_start] = async (chara_id) => {
     era.println();
     await era.printAndWait([
       '但 ',
-      me.get_colored_name(),
-      '们 也仍然为竭尽全力达到的成果感到骄傲，并且相信后来者能站在自己的肩上爬向更高的顶点。',
+      me.get_couple_title(),
+      ' 也仍然为竭尽全力达到的成果感到骄傲，并且相信后来者能站在自己的肩上爬向更高的顶点。',
     ]);
   }
   era.println();
@@ -201,14 +201,14 @@ handlers[event_hooks.week_start] = async (chara_id) => {
       '时光如白驹过隙，与 ',
       chara.get_colored_name(),
       ' 相伴已逾数载，再过一段日子，',
-      me.get_colored_name(),
-      '们 马上就要展开新的篇章',
+      me.get_couple_title(),
+      ' 马上就要展开新的篇章',
     ]);
     era.println();
     if (love >= 75) {
       await era.printAndWait([
-        me.get_colored_name(),
-        '们 在熟悉的训练员室里恩爱地亲热起来。',
+        me.get_couple_title(),
+        ' 在熟悉的训练员室里恩爱地亲热起来。',
       ]);
       await era.printAndWait(
         '两位小情人沉浸在幸福的二人世界，仿佛能把俗世的琐事都抛进虚空之中。',
@@ -217,8 +217,8 @@ handlers[event_hooks.week_start] = async (chara_id) => {
       await era.printAndWait('我是世界之王！ ——杰克·道森', { align: 'center' });
     } else if (love >= 50) {
       await era.printAndWait([
-        me.get_colored_name(),
-        '们 在熟悉的训练员室里热烈地拥吻。',
+        me.get_couple_title(),
+        ' 在熟悉的训练员室里热烈地拥吻。',
       ]);
       await era.printAndWait(
         '情欲的气息充斥整个房间，只有娇声与肉体碰撞的声音不住回荡。',
@@ -227,8 +227,8 @@ handlers[event_hooks.week_start] = async (chara_id) => {
       await era.printAndWait('食色，性也。——孟子', { align: 'center' });
     } else {
       await era.printAndWait([
-        me.get_colored_name(),
-        '们 在熟悉的训练员室里相谈甚欢，又不禁为无可避免的别离伤感。',
+        me.get_couple_title(),
+        ' 在熟悉的训练员室里相谈甚欢，又不禁为无可避免的别离伤感。',
       ]);
       await era.printAndWait(
         '人生难得相逢，正是因为可能失去才会让珍惜眼前人如此重要。',
@@ -418,17 +418,17 @@ handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
           '不管是参赛还是接受采访，',
           me.get_colored_name(),
           ' 和担当的紧张关系有目共睹，质疑这种紧张关系影响了担当发展的声音一直没有停息。校方对 ',
-          me.get_colored_name(),
-          '们 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
+          me.get_couple_title(),
+          ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
         ]
       : [
           '或许是 ',
           me.get_colored_name(),
           ' 过于懈怠，又或许是负责马娘的天赋不足，胜利与 ',
-          me.get_colored_name(),
-          '们 始终遥遥无期。校方对 ',
-          me.get_colored_name(),
-          '们 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
+          me.get_couple_title(),
+          ' 始终遥遥无期。校方对 ',
+          me.get_couple_title(),
+          ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
         ],
     {
       offset: 6,

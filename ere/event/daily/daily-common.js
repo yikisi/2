@@ -492,8 +492,8 @@ handlers[event_hooks.school_atrium] = async (chara_id, hook) => {
           ' 与 ',
           chara.get_colored_name(),
           ' 一起来到中庭约会，',
-          me.get_colored_name(),
-          '们 的组合让周围的学生忍不住议论纷纷。',
+          me.get_couple_title(),
+          ' 的组合让周围的学生忍不住议论纷纷。',
         ],
   );
 };
@@ -551,20 +551,19 @@ handlers[event_hooks.out_church] = async (chara_id, hook) => {
     get_chara_talk(chara_id).get_colored_name(),
     ' 一起来到神社祈福。',
   ]);
-  hook.arg = Math.random() < 0.5;
-  await era.printAndWait(
-    hook.arg
-      ? [
-          '抽到了吉利的签文！此行让 ',
-          get_chara_talk(0).get_colored_name(),
-          '们 感觉很高兴。',
-        ]
-      : [
-          '抽到了不吉的签文！此行让 ',
-          get_chara_talk(0).get_colored_name(),
-          '们 处处提防天降厄运。',
-        ],
-  );
+  if (Math.random() < 0.5) {
+    await era.printAndWait([
+      '抽到了吉利的签文！此行让 ',
+      get_chara_talk(0).get_couple_title(),
+      ' 感觉很高兴。',
+    ]);
+  } else {
+    await era.printAndWait([
+      '抽到了不吉的签文！此行让 ',
+      get_chara_talk(0).get_couple_title(),
+      ' 处处提防天降厄运。',
+    ]);
+  }
 };
 
 handlers[event_hooks.out_station] = async (chara_id, hook) => {
