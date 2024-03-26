@@ -29,7 +29,9 @@ module.exports = {
       config: {
         disabled:
           !era.get(`cflag:${chara_id}:种族`) ||
-          (chara_id && era.get(`cflag:${chara_id}:育成回合计时`) >= 48 * 3),
+          (chara_id &&
+            (Number(era.get(`cflag:${chara_id}:育成回合计时`)) || 200) >=
+              48 * 3),
         width: 6,
       },
       content: '登记出走',

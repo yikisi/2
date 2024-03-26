@@ -12,6 +12,7 @@ const {
   part_names,
 } = require('#/data/ero/part-const');
 const { location_enum } = require('#/data/locations');
+const { vp_status_enum } = require('#/data/ero/status-const');
 
 /**
  * @param {CharaTalk} chara
@@ -188,7 +189,11 @@ async function use_ero_item(chara) {
       part_list = [
         {
           a: part_enum.virgin,
-          d: !virgin_size || era.get(`tequip:${cur_lover}:阴道`) !== -1,
+          d:
+            !virgin_size ||
+            era.get(`tequip:${cur_lover}:阴道`) !== -1 ||
+            era.get(`talent:${cur_lover}:处女`) > vp_status_enum.no ||
+            era.get(`talent:${cur_lover}:处女`) === vp_status_enum.i_think,
           n: '阴道',
         },
         {

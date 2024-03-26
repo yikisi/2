@@ -145,8 +145,8 @@ module.exports = {
       accelerator < 7
         ? talent_button_names_and_check_dict.trained
         : accelerator < 10
-        ? talent_button_names_and_check_dict.sm
-        : talent_button_names_and_check_dict.poisoned;
+          ? talent_button_names_and_check_dict.sm
+          : talent_button_names_and_check_dict.poisoned;
     return [
       {
         accelerator,
@@ -169,7 +169,7 @@ module.exports = {
               ),
             ).filter((e) => e[1] > juel_dict[e[0]]).length > 0 ||
             check_metric < (talent_bnc.metrics[level] || 0) ||
-            (accelerator < 7 && talent_dict.slave_run > 0),
+            (accelerator < 7 && level === 1 && talent_dict.slave_run > 0),
           width: 4,
         },
         content: talent_bnc.up,

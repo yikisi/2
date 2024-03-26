@@ -113,6 +113,7 @@ function sys_get_move_cost(location, chara_id) {
     case location_enum.atrium:
     case location_enum.rooftop:
     case location_enum.gate:
+    case location_enum.chairman:
       if (chara_id) {
         is_walk = true;
         speed = Math.min(speed, era.get(`base:${chara_id}:速度`));
