@@ -225,6 +225,8 @@ const era = {
    * @returns {number} line number of the printed
    */
   println() {},
+  /** DANGER exit the application and close the window */
+  quit() {},
   /**
    * reset all variables except global variables
    * @returns {boolean}
