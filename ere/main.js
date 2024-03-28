@@ -73,7 +73,6 @@ module.exports = async () => {
   ]);
   if ((await era.input()) === 2) {
     era.quit();
-    return;
   }
   let buffer;
 
