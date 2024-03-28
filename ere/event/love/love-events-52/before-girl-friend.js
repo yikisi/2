@@ -41,12 +41,12 @@ module.exports = async (
   const life_marks = new UraraLifeMarks();
   if (life_marks.active_74 === 0) {
     await print_event_name('躁动的爱意', urara);
-    await in_urara.say_and_wait([
+    await in_urara.say_as_unknown_and_wait([
       '在床上翻了个身，今天的小',
       urara.get_uma_sex_title(),
       '似乎真的失眠了……',
     ]);
-    await in_urara.say_and_wait([
+    await in_urara.say_as_unknown_and_wait([
       '怀春的',
       urara.get_teen_sex_title(),
       '，不管外表多么年幼，内在都会如此反复无常……',
@@ -163,7 +163,7 @@ module.exports = async (
       ]);
       await urara.print_and_wait([
         '「',
-        urara.name,
+        urara.actual_name,
         '」从来都不是厉害的',
         urara.get_uma_sex_title(),
         '，',

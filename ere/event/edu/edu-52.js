@@ -5,159 +5,106 @@ const {
   sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
 
+const { add_event } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
-const event_hooks = require('#/data/event/event-hooks');
-const { fumble_result, attr_enum } = require('#/data/train-const');
-
 const chara_colors = require('#/data/chara-colors').chara_colors[52];
+const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
+const event_hooks = require('#/data/event/event-hooks');
+const { attr_enum } = require('#/data/train-const');
 
-/**
- * @type {Record<string,function(HookArg,Record<string,*>,EventObject):Promise<*>>}
- */
+/** @type {Record<string,function(HookArg,Record<string,*>,EventObject):Promise<*>>} */
 const handlers = {};
 
-/**
- * @param {HookArg} _
- * @param {{race:number,rank:number,relation_change:number}} extra_flag
- */
-handlers[event_hooks.race_end] = async (_, extra_flag) => {
-  const callname = sys_get_callname(52, 0),
-    me = get_chara_talk(0),
-    urara = get_chara_talk(52);
-  if (extra_flag.rank === 1) {
-    await print_event_name('比赛胜利', urara);
-    let talk_arr = [
-      `嗯？诶……太棒了！赢了！${callname}！看到了吗？我赢了呦！`,
-      '哇啊……！我拿到一着了！我真的拿到一着了！',
-      '我成功了哦！拿到一着的话，就是说大家的期待都传达到了！',
-      `${callname}！看到了吗？我刚才有嗖——的一声冲过终点哦！`,
-      `果然就像平常的时候一样就好了！这次我也赢了哦${callname}！`,
-      '做到了……我做到了哦！我真的做到了哦！',
-    ];
-    await urara.say_and_wait(get_random_entry(talk_arr));
-    await era.printAndWait([
-      '带着胜利的喜悦，',
-      urara.get_colored_name(),
-      ' 兴奋地冲过来抱住了 ',
-      me.get_colored_name(),
-      '。',
-    ]);
-    era.printButton('「回去后就一起庆祝吧。」', 1);
-    await era.input();
-    await urara.say_and_wait(
-      '嗯！之后把大家都叫来吧！有好多好东西能够分享呢！',
-    );
-    await era.printAndWait([
-      '也想要把心情分享给 ',
-      me.get_colored_name(),
-      ' 般，',
-      urara.get_colored_name(),
-      ' 扬起笑脸，拉住了 ',
-      me.get_colored_name(),
-      ' 的手。',
-    ]);
-    talk_arr = [
-      `Live要开始了哦！${callname} 很期待吗？我也很期待哦！`,
-      '一会一定要看着我哦！我也会努力跳舞的！',
-      '大家看上去都准备好了！我也兴奋起来了哦！',
-    ];
-    if (era.get('love:52') >= 75) {
-      talk_arr.push(
-        `我也会不输给的大家的！绝对、绝对能好好迷住 ${callname} 的！`,
-      );
-    }
-    if (era.get('love:52') === 100) {
-      talk_arr.push(`${callname}！待会在舞台上也要一直看着乌拉拉哦！`);
-    }
-    await urara.say_and_wait(get_random_entry(talk_arr));
-  } else {
-    await print_event_name('比赛失败', urara);
-    const talk_arr = [
-      '大家都很厉害呢！但下次我一定不会输的！',
-      '虽然没能拿到一着，但果然很开心呢！下次再来跑吧！',
-      `嘿嘿～这次没能拿到一着，我会继续努力的，${callname} 也别伤心哦！`,
-    ];
-    switch (extra_flag.rank) {
-      case 2:
-        talk_arr.push(`看到了吗 ${callname}！我竟然是第二名哦──！`);
-        break;
-      case 3:
-        talk_arr.push('我是第三名！很厉害吧！');
-        break;
-      default:
-        talk_arr.push('奔跑真开心啊，但果然稍微有些不甘心呢……');
-    }
-    await urara.say_and_wait(get_random_entry(talk_arr));
-    await era.printAndWait([
-      '将脸埋进 ',
-      me.get_colored_name(),
-      ' 的胸前，',
-      urara.get_colored_name(),
-      ' 的声音有些颤抖。',
-    ]);
+/** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,EventObject):Promise<*>>} */
+const week_start_handlers = {};
 
-    era.printButton('「我明白的，一起回去吧。」', 1);
+[
+  require('#/event/edu/edu-events-52/week-start-1'),
+  require('#/event/edu/edu-events-52/week-start-2'),
+  require('#/event/edu/edu-events-52/week-start-3'),
+  require('#/event/edu/edu-events-52/week-start-4'),
+  require('#/event/edu/edu-events-52/week-start-5'),
+].forEach((f) => f(week_start_handlers));
 
-    await urara.say_and_wait('嗯！要早点打起精神来呢！一起回去吧！');
-    await era.printAndWait([
-      '接过 ',
-      me.get_colored_name(),
-      ' 的纸巾，',
-      urara.get_colored_name(),
-      ' 笑着抹掉了眼角的泪珠。',
-    ]);
+const loop1 = require('#/event/edu/edu-events-52/week-start-loop-1');
+const loop2 = require('#/event/edu/edu-events-52/week-start-loop-2');
+const loop3 = require('#/event/edu/edu-events-52/week-start-loop-3');
+const { race_enum } = require('#/data/race/race-const');
+
+week_start_handlers[95 + 46] = async (
+  urara,
+  me,
+  in_urara,
+  callname,
+  edu_marks,
+  event_object,
+) => {
+  switch (edu_marks.loop) {
+    case 2:
+      await loop1(urara, me, in_urara, callname);
+      await era.saveData(52);
+      add_event(event_hooks.week_end, event_object);
+      break;
+    case 1:
+      await loop2(urara, me, in_urara, callname);
+      await era.saveData(52);
+      add_event(event_hooks.week_end, event_object);
+      break;
+    case 0:
+      await loop3(urara, me, in_urara, callname);
+      edu_marks.sbuff = 1;
+      await era.printAndWait([
+        { isBr: true },
+        urara.get_colored_name(),
+        ' 能从粉丝的支持中获取更强的力量了！',
+      ]);
+    // 失败后回溯到开始的地方
+    // edu_marks.loop = 2;
+    // await era.saveData(52);
+    // add_event(event_hooks.week_end, event_object);
   }
 };
 
-/**
- * @param {HookArg} _
- * @param {{race:number,rank:number,relation_change:number}} extra_flag
- */
-handlers[event_hooks.race_start] = async (_, extra_flag) => {
-  const callname = sys_get_callname(52, 0),
-    me = get_chara_talk(0),
-    urara = get_chara_talk(52);
-  if (extra_flag.race < 0) {
-    await print_event_name('武者震颤', urara);
-    await urara.say_and_wait('哦——！训练员！今天我感觉充满了力量哦！');
-    await era.printAndWait([
-      '站在 ',
-      me.get_colored_name(),
-      ' 的身边，',
-      urara.get_colored_name(),
-      ' 兴奋地看着前方。',
-    ]);
+handlers[event_hooks.week_start] = async (_, __, event_object) => {
+  if (week_start_handlers[event_object.arg]) {
+    return await week_start_handlers[event_object.arg](
+      get_chara_talk(52),
+      get_chara_talk(0),
+      get_chara_talk(52, chara_colors[1]),
+      sys_get_callname(52, 0),
+      new UraraEduMarks(),
+      event_object,
+    );
+  } else if (event_object.arg === 'palace') {
+    throw new Error();
+  }
+};
 
-    era.printButton('「那一会儿要加油上了！」', 1);
-    era.printButton('「嗯，让大家看见你的成长。」', 2);
-    await era.input();
+/** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,EventObject):Promise<*>>} */
+const week_end_handlers = {};
 
-    await urara.say_and_wait('好！大家的期待，绝对会回应的呦！');
-    await era.printAndWait([
-      urara.get_colored_name(),
-      ' 兴奋地向前一跃，随后冲向了赛场。',
-    ]);
-  } else {
-    await print_event_name('赛前鼓励', urara);
-    const talk_arr = [
-      '好！要参赛了──！',
-      '大家都很厉害的样子！那乌拉拉也不能输！',
-      `${callname}！这次也请好好看着我的奔跑吧！`,
-      '只要和平常一样去跑就可以了吧？我明白了！',
-      `别担心哦 ${callname}，只要拼命去跑一定可以做到的！`,
-    ];
-    switch (era.get('cflag:52:干劲')) {
-      case -1:
-        talk_arr.push('虽然能参加很多比赛很开心，但现在身体好重……');
-        break;
-      case -2:
-        talk_arr.push('又要比赛了……我、我会努力的……');
-    }
-    await get_chara_talk(52).say_and_wait(get_random_entry(talk_arr));
+[
+  require('#/event/edu/edu-events-52/week-end-1'),
+  require('#/event/edu/edu-events-52/week-end-2'),
+  require('#/event/edu/edu-events-52/week-end-3'),
+  require('#/event/edu/edu-events-52/week-end-4'),
+  require('#/event/edu/edu-events-52/week-end-5'),
+].forEach((f) => f(week_end_handlers));
+
+handlers[event_hooks.week_end] = async (_, __, event_object) => {
+  if (week_end_handlers[event_object.arg]) {
+    return await week_end_handlers[event_object.arg](
+      get_chara_talk(52),
+      get_chara_talk(0),
+      get_chara_talk(52, chara_colors[1]),
+      sys_get_callname(52, 0),
+      new UraraEduMarks(),
+      event_object,
+    );
   }
 };
 
@@ -172,304 +119,9 @@ handlers[event_hooks.train] = () => {
   return get_chara_talk(52).say_and_wait(get_random_entry(talk_arr));
 };
 
-/**
- * @param {HookArg} hook
- * @param {{args:*,fumble:boolean,train:number}} extra_flag
- */
-handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
-  extra_flag.args = extra_flag.fumble
-    ? fumble_result.fumble
-    : fumble_result.fail;
-  const urara = get_chara_talk(52);
-  switch (extra_flag.train) {
-    case attr_enum.speed:
-      await urara.say_and_wait('诶？为什么这里会……？动不了了……');
-      break;
-    case attr_enum.endurance:
-      await urara.say_and_wait('……哈、哈……头、头好晕啊……');
-      break;
-    case attr_enum.strength:
-      await urara.say_and_wait([
-        '快、快看 ',
-        sys_get_callname(52, 0),
-        ' ，天上好像有小星星在闪呢……',
-      ]);
-      break;
-    case attr_enum.toughness:
-      await urara.say_and_wait([sys_get_callname(52, 0), '……拉我一把～～']);
-      break;
-    case attr_enum.intelligence:
-      await urara.say_and_wait('好困啊……咕呃……');
-  }
-  era.println();
-  if (extra_flag.train !== attr_enum.intelligence) {
-    const me = get_chara_talk(0),
-      callname = sys_get_callname(52, 0);
-    if (extra_flag.fumble) {
-      await print_event_name('严禁逞强！', urara);
-      await era.printAndWait([
-        '因为 ',
-        urara.get_colored_name(),
-        ' 在训练中不小心重重地摔倒了，所以 ',
-        me.get_colored_name(),
-        ' 立即将',
-        urara.sex,
-        '抱起来送到了保健室。',
-      ]);
-      await era.printAndWait([
-        '而在一番紧张的检查后，听到结果并无大碍的 ',
-        me.get_colored_name(),
-        ' 和 ',
-        urara.get_colored_name(),
-        ' 也都松了口气。',
-      ]);
-      await urara.say_and_wait(
-        '呼～幸亏只是普通的轻伤，医生的表情看起来超级恐怖，我还以为是生病要打针呢！',
-      );
-      await urara.say_and_wait(
-        '嘿嘿～而且打针比这痛多了，但只是一些小伤的话就没问题！',
-      );
-
-      await urara.say_and_wait([callname, '，我们回去之后可以继续训练——']);
-      era.printButton('「总之现在先好好休息吧。」', 1);
-      era.printButton('「不许逞强，今天回去歇着！」', 2);
-      const ret = await era.input();
-      await era.printAndWait([
-        '于是看着',
-        urara.sex,
-        '还是有些不自然的走路姿态，',
-        me.get_colored_name(),
-        ' 不等 ',
-        urara.get_colored_name(),
-        ' 说完就马上回绝了',
-        urara.sex,
-        '的请求。',
-      ]);
-      if (ret === 1) {
-        await urara.say_and_wait(
-          '休息？可是乌拉拉明明还很有精神，不可以继续训练了吗？',
-        );
-
-        era.printButton('「因为不管怎么说都还是会担心啊。」', 1);
-        await era.input();
-
-        await urara.say_and_wait(
-          '嗯……这样啊，那我知道了！乌拉拉会好好休息的！',
-        );
-        await urara.say_and_wait([
-          '因为看到 ',
-          callname,
-          ' 这么沮丧，乌拉拉也会很难过啊，所以不要难过哦？',
-        ]);
-        await urara.say_and_wait(
-          '只是好好休息啊……大家都在训练，总觉得乌拉拉被甩下了……',
-        );
-        await urara.say_and_wait(
-          '这么一想总觉得全身都痒痒的，休息搞不好跟打针一样辛苦呢……',
-        );
-        await era.printAndWait([
-          '不过虽然 ',
-          urara.get_colored_name(),
-          ' 看起来很无聊，但在那之后',
-          urara.sex,
-          '的伤势确实开始好转了。',
-        ]);
-        hook.arg = 0;
-      } else {
-        await urara.say_and_wait(['诶？', callname, ' 为、为什么突然生气了？']);
-
-        era.printButton('「……医生说要是伤势恶化，会比打针还痛哦？」', 1);
-        await era.input();
-
-        await urara.say_and_wait(
-          '什么嘛，乌拉拉已经不是小孩子了，就算真有那么疼也没关系啦！',
-        );
-
-        if (Math.random() < extra_flag.args.ratio.fail_again) {
-          await urara.say_and_wait([
-            '而且 ',
-            callname,
-            ' 你看！乌拉拉就算这样也完全没问题——呜啊！',
-          ]);
-          await urara.say_and_wait(['……好、好痛……好痛啊…… ', callname, ' ……']);
-          await era.printAndWait([
-            '说什么来着？拉起开始抹眼泪的小',
-            urara.get_uma_sex_title(),
-            '，',
-            me.get_colored_name(),
-            ' 默默地将',
-            urara.sex,
-            '重新拎回了不远处的保健室。',
-          ]);
-          await era.printAndWait([
-            '不出意外的，',
-            urara.get_colored_name(),
-            ' 因为逞强而乱动导致了伤势恶化，恢复时间也变得更长了。',
-          ]);
-          hook.arg = -1;
-        } else {
-          await urara.say_and_wait([
-            '……嗯？',
-            callname,
-            '？怎么突然不说话了？难、难道真有这么严重……？',
-          ]);
-
-          era.printButton('「不是小孩子的乌拉拉觉得呢？」', 1);
-          await era.input();
-
-          await urara.say_and_wait(
-            '怎么这样！虽然休息很无聊……但比打针还痛……比打针还……',
-          );
-          await urara.say_and_wait([
-            urara.get_colored_name(),
-            ' 会马上痊愈的！所以在能跑之前……',
-            callname,
-            ' 可以一直陪着我吗……？',
-          ]);
-          await era.printAndWait([
-            '于是，虽然 ',
-            urara.get_colored_name(),
-            ' 伤势花了不少时间才痊愈，但',
-            urara.sex,
-            '总算是恢复健康了。',
-          ]);
-          hook.arg = 1;
-        }
-      }
-    } else {
-      await print_event_name('保重身体！', urara);
-
-      await era.printAndWait([
-        '发现了 ',
-        urara.get_colored_name(),
-        ' 在训练途中身体有些异常，',
-        me.get_colored_name(),
-        ' 将',
-        urara.sex,
-        '带到了保健室做检查。',
-      ]);
-      await era.printAndWait(
-        '虽然保健室内暂时没人，但好在只是身体检查的话训练员自己也应付得过来。',
-      );
-      await era.printAndWait([
-        '只是，身体一向很结实的小',
-        urara.get_uma_sex_title(),
-        '似乎对 ',
-        me.get_colored_name(),
-        ' 的担忧还是有些不以为然。',
-      ]);
-      await urara.say_and_wait([
-        '乌拉拉明明没事的，这种小事不算什么啦！',
-        callname,
-        ' 真是爱操心呢。',
-      ]);
-
-      await urara.say_and_wait('不用担心啦，就算按这里我也不会……好疼！');
-      era.printButton('「……这不是还挺疼的吗？」', 1);
-      era.printButton('「要不还是好好静养吧？」', 2);
-      const ret = await era.input();
-
-      await era.printAndWait([
-        '在 ',
-        me.get_colored_name(),
-        ' 试探地按了下腿部疑似肿胀的地方后，突然吃痛的小',
-        urara.get_uma_sex_title(),
-        '眼泪汪汪的停下动作。',
-      ]);
-      await urara.say_and_wait(
-        '啊呜……为、为什么要那么生气啊？我跟你说哦，我真的完全不痛啦……',
-      );
-      await era.printAndWait([
-        '委屈巴巴地瞅着突然变得严厉的 ',
-        me.get_colored_name(),
-        '，',
-        urara.get_colored_name(),
-        ' 还蓄着泪水的眼睛里满是疑惑。',
-      ]);
-      await urara.say_and_wait('你看！我就算这样做也一点事都没有哦……好疼！');
-      await era.printAndWait([
-        '再次抓住因 ',
-        urara.get_colored_name(),
-        ' 的乱踢而撞到的脚趾，',
-        me.get_colored_name(),
-        ' 伸出手指弹了下小',
-        urara.get_uma_sex_title(),
-        '的额头。',
-      ]);
-
-      era.printButton(
-        '「你再乱动我就真的要生气了哦？弄坏了身体可就赢不了了。」',
-        1,
-      );
-      await era.input();
-
-      if (ret === 1) {
-        await era.printAndWait([
-          '在两次疼痛外加 ',
-          me.get_colored_name(),
-          ' 的警告后，小',
-          urara.get_uma_sex_title(),
-          '头顶那对不安分的耳朵终于丧气地垂了下来。',
-        ]);
-        await urara.say_and_wait(
-          '……呜，我知道了……我会注意的！没有会弄伤我的东西啊！有没有会痛痛的……',
-        );
-        await urara.say_and_wait([
-          '啊……',
-          callname,
-          '，脚趾那边好像……从刚刚就有点痛……',
-        ]);
-        await era.printAndWait([
-          me.get_colored_name(),
-          ' 立刻顺着小',
-          urara.get_uma_sex_title(),
-          '的话抬起',
-          urara.sex,
-          '的脚仔细查看，结果发现刚刚被撞到的地方也有点肿……',
-        ]);
-        await era.printAndWait([
-          '连带着 ',
-          urara.get_colored_name(),
-          ' 的新伤势一起上药并包好后，',
-          me.get_colored_name(),
-          ' 便安排',
-          urara.sex,
-          '在这天好好休养了。',
-        ]);
-        hook.arg = 0;
-      } else {
-        await era.printAndWait([
-          '但就算 ',
-          me.get_colored_name(),
-          ' 这样说，小',
-          urara.get_uma_sex_title(),
-          '本就不安分的尾巴却摇摆地更加激烈了。',
-        ]);
-        await urara.say_and_wait(
-          '……我明白了！不管是跑步还是念书的时候，乌拉拉以后都会注意的！',
-        );
-        await urara.say_and_wait(
-          '所以……我们可以继续训练吗？只是做些其他简单的训练应该不会再受伤了吧！',
-        );
-        await urara.say_and_wait([
-          '因为我也是很认真地想得到第一名！所以乌拉拉想让 ',
-          callname,
-          ' 知道我会好好小心！',
-        ]);
-        await era.printAndWait([
-          '好吧，既然',
-          urara.sex,
-          '这么说的话……',
-          me.get_colored_name(),
-          ' 叹了口气，在处理完 ',
-          urara.get_colored_name(),
-          ' 的伤处后又谨慎地重新开始了训练。',
-        ]);
-        hook.arg = (Math.random() > extra_flag.args.ratio.fail_again) * 2 - 1;
-      }
-    }
-  }
-};
+handlers[
+  event_hooks.train_fail
+] = require('#/event/edu/edu-events-52/train-fail');
 
 /**
  * @param {HookArg} hook
@@ -626,6 +278,479 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
     }
   }
 };
+
+/** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},EventObject):Promise<*>>} */
+const office_prepare_handlers = {};
+
+require('#/event/edu/edu-events-52/office-prepare')(office_prepare_handlers);
+
+handlers[event_hooks.office_prepare] = async (hook, _, event_object) => {
+  if (!office_prepare_handlers[event_object.arg]) {
+    return false;
+  }
+  const flags = { wait_flag: false };
+  if (
+    await office_prepare_handlers[event_object.arg](
+      get_chara_talk(52),
+      get_chara_talk(0),
+      sys_get_callname(52, 0),
+      flags,
+      event_object,
+    )
+  ) {
+    return false;
+  }
+  flags.wait_flag && (await era.waitAnyKey());
+  return true;
+};
+
+/** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},EventObject):Promise<*>>} */
+const school_atrium_handlers = {};
+
+require('#/event/edu/edu-events-52/school-atrium')(school_atrium_handlers);
+
+handlers[event_hooks.school_atrium] = async (hook, _, event_object) => {
+  if (!school_atrium_handlers[event_object.arg]) {
+    return false;
+  }
+  const flags = { wait_flag: false };
+  if (
+    await school_atrium_handlers[event_object.arg](
+      get_chara_talk(52),
+      get_chara_talk(0),
+      sys_get_callname(52, 0),
+      flags,
+      event_object,
+    )
+  ) {
+    return false;
+  }
+  flags.wait_flag && (await era.waitAnyKey());
+  return true;
+};
+
+handlers[
+  event_hooks.out_start
+] = require('#/event/edu/edu-events-52/out-start');
+
+handlers[
+  event_hooks.out_church
+] = require('#/event/edu/edu-events-52/out-church');
+
+/** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,{wait_flag:boolean},EventObject):Promise<*>>} */
+const out_shopping_handlers = {};
+
+[
+  require('#/event/edu/edu-events-52/out-shopping-1'),
+  require('#/event/edu/edu-events-52/out-shopping-2'),
+  require('#/event/edu/edu-events-52/out-shopping-3'),
+].forEach((f) => f(out_shopping_handlers));
+
+handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
+  if (era.get('flag:当前互动角色') !== 52) {
+    add_event(hook.hook, event_object);
+    return false;
+  }
+  if (!out_shopping_handlers[event_object.arg]) {
+    return false;
+  }
+  const flags = { wait_flag: false };
+  await out_shopping_handlers[event_object.arg](
+    get_chara_talk(52),
+    get_chara_talk(0),
+    get_chara_talk(52, chara_colors[1]),
+    sys_get_callname(52, 0),
+    new UraraEduMarks(),
+    flags,
+    event_object,
+  );
+  flags.wait_flag && (await era.waitAnyKey());
+  return true;
+};
+
+/** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},{loc:number},EventObject):Promise<*>>} */
+const back_school_handlers = {};
+
+[
+  require('#/event/edu/edu-events-52/back-school-1'),
+  require('#/event/edu/edu-events-52/back-school-2'),
+].forEach((f) => f(back_school_handlers));
+
+handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
+  if (!back_school_handlers[event_object.arg]) {
+    return false;
+  }
+  const flags = { wait_flag: false };
+  if (
+    await back_school_handlers[event_object.arg](
+      get_chara_talk(52),
+      get_chara_talk(0),
+      sys_get_callname(52, 0),
+      flags,
+      extra_flag,
+      event_object,
+    )
+  ) {
+    return false;
+  }
+  flags.wait_flag && (await era.waitAnyKey());
+  return true;
+};
+
+/** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,HookArg):Promise<*>>} */
+const race_start_handlers = {};
+
+[
+  require('#/event/edu/edu-events-52/race-start-1'),
+  require('#/event/edu/edu-events-52/race-start-2'),
+].forEach((f) => f(race_start_handlers));
+
+/**
+ * @param {HookArg} hook
+ * @param {{race:number}} extra_flag
+ */
+handlers[event_hooks.race_start] = async (hook, extra_flag) => {
+  const callname = sys_get_callname(52, 0),
+    me = get_chara_talk(0),
+    urara = get_chara_talk(52);
+  if (race_start_handlers[extra_flag.race]) {
+    return await race_start_handlers[extra_flag.race](
+      urara,
+      me,
+      get_chara_talk(52, chara_colors[1]),
+      callname,
+      new UraraEduMarks(),
+      hook,
+    );
+  } else if (extra_flag.race < 0) {
+    await print_event_name('武者震颤', urara);
+    await urara.say_and_wait([
+      '哦——！',
+      callname,
+      '！今天我感觉充满了力量哦！',
+    ]);
+    await era.printAndWait([
+      '站在 ',
+      me.get_colored_name(),
+      ' 的身边，',
+      urara.get_colored_name(),
+      ' 兴奋地看着前方。',
+    ]);
+
+    era.printButton('「那一会儿要加油上了！」', 1);
+    era.printButton('「嗯，让大家看见你的成长。」', 2);
+    await era.input();
+
+    await urara.say_and_wait('好！大家的期待，绝对会回应的呦！');
+    await era.printAndWait([
+      urara.get_colored_name(),
+      ' 兴奋地向前一跃，随后冲向了赛场。',
+    ]);
+  } else {
+    await print_event_name('赛前鼓励', urara);
+    const talk_arr = [
+      '好！要参赛了──！',
+      '大家都很厉害的样子！那乌拉拉也不能输！',
+      `${callname}！这次也请好好看着我的奔跑吧！`,
+      '只要和平常一样去跑就可以了吧？我明白了！',
+      `别担心哦 ${callname}，只要拼命去跑一定可以做到的！`,
+    ];
+    switch (era.get('cflag:52:干劲')) {
+      case -1:
+        talk_arr.push('虽然能参加很多比赛很开心，但现在身体好重……');
+        break;
+      case -2:
+        talk_arr.push('又要比赛了……我、我会努力的……');
+    }
+    await get_chara_talk(52).say_and_wait(get_random_entry(talk_arr));
+  }
+};
+
+/** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,{race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number},UraraEduMarks):Promise<*>>} */
+const race_end_handlers = {};
+
+[
+  require('#/event/edu/edu-events-52/race-end-1'),
+  require('#/event/edu/edu-events-52/race-end-2'),
+  require('#/event/edu/edu-events-52/race-end-3'),
+].forEach((f) => f(race_end_handlers));
+
+/**
+ * @param {HookArg} _
+ * @param {{race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number}} extra_flag
+ */
+handlers[event_hooks.race_end] = async (_, extra_flag) => {
+  const callname = sys_get_callname(52, 0),
+    me = get_chara_talk(0),
+    urara = get_chara_talk(52),
+    key = `${race_enum.arim_kin}_${era.get('cflag:52:育成回合计时')}`;
+  if (race_end_handlers[extra_flag.race] || race_end_handlers[key]) {
+    return await (race_end_handlers[extra_flag.race] || race_end_handlers[key])(
+      urara,
+      me,
+      get_chara_talk(52, chara_colors[1]),
+      callname,
+      extra_flag,
+      new UraraEduMarks(),
+    );
+  } else if (extra_flag.rank === 1) {
+    await print_event_name('竞赛获胜！', urara);
+    let talk_arr = [
+      `嗯？诶……太棒了！赢了！${callname}！看到了吗？我赢了呦！`,
+      '哇啊……！我拿到一着了！我真的拿到一着了！',
+      '我成功了哦！拿到一着的话，就是说大家的期待都传达到了！',
+      `${callname}！看到了吗？我刚才有嗖——的一声冲过终点哦！`,
+      `果然就像平常的时候一样就好了！这次我也赢了哦 ${callname}！`,
+      '做到了……我做到了哦！我真的做到了哦！',
+    ];
+    await urara.say_and_wait(get_random_entry(talk_arr));
+    era.drawLine();
+    await era.printAndWait([
+      '抹掉脸上的汗水，',
+      urara.get_colored_name(),
+      ' 在比赛结束后立刻一路小跑地冲到了 ',
+      me.get_colored_name(),
+      ' 所等候的围栏前面。',
+    ]);
+    await era.printAndWait([
+      '在众人的欢呼声中扬起蓄满阳光的小脸，小',
+      urara.get_uma_sex_title(),
+      '对送出毛巾和水的 ',
+      me.get_colored_name(),
+      ' 露出了胜利的笑容。',
+    ]);
+    await urara.say_and_wait(
+      '嘿嘿～刚才好像都听到叔叔们在喊万岁的声音了，乌拉拉真的有那么厉害吗？',
+    );
+
+    await urara.say_and_wait([
+      '对了，',
+      callname,
+      '！刚才看到了吗？乌拉拉好像赢了哦！',
+    ]);
+    era.printButton('「没错，乌拉拉做到了，今天是第一名！」', 1);
+    era.printButton('「大家很开心哦？不过接下来还有更要紧的事！」', 2);
+    if ((await era.input()) === 1) {
+      await era.printAndWait([
+        '得到 ',
+        me.get_colored_name(),
+        ' 的肯定，',
+        urara.get_colored_name(),
+        ' 开心地摇起耳朵和尾巴，可爱的笑脸变得更加灿烂了。',
+      ]);
+      await urara.say_and_wait(
+        '果然是这样！那么为了大家的笑容，我下次也一定要拿下一着！',
+      );
+      await urara.say_and_wait([
+        callname,
+        ' 也是哦！因为现在的 ',
+        callname,
+        ' 笑起来的样子也非常好看！',
+      ]);
+      await era.printAndWait(
+        '在胜利之后闪闪发光的樱瞳中，此刻正微笑的映照着所有人的笑容。',
+      );
+    } else {
+      await era.printAndWait([
+        '迅速擦掉脸上的汗水，',
+        urara.get_colored_name(),
+        ' 用力竖起耳朵，脸上的笑容也更加坚定了。',
+      ]);
+      await urara.say_and_wait(
+        '嗯！我也是这么觉得！因为乌拉拉也还跑得不太够哦！',
+      );
+      await urara.say_and_wait([
+        callname,
+        '，接下来要跑什么比赛，可以让乌拉拉期待一下吗？',
+      ]);
+      await era.printAndWait([
+        '在胜利之后闪闪发光的樱瞳中，',
+        me.get_colored_name(),
+        ' 看到其中的火苗比以往更加旺盛。',
+      ]);
+    }
+    era.drawLine();
+    talk_arr = [
+      `Live要开始了哦！${callname} 很期待吗？我也很期待哦！`,
+      '一会一定要看着我哦！我也会努力跳舞的！',
+      '大家看上去都准备好了！我也兴奋起来了哦！',
+    ];
+    if (era.get('love:52') >= 75) {
+      talk_arr.push(
+        `我也会不输给的大家的！绝对、绝对能好好迷住 ${callname} 的！`,
+      );
+    }
+    if (era.get('love:52') === 100) {
+      talk_arr.push(`${callname}！待会在舞台上也要一直看着乌拉拉哦！`);
+    }
+    await urara.say_and_wait(get_random_entry(talk_arr));
+  } else if (extra_flag.rank <= 5) {
+    await print_event_name('竞赛上榜！', urara);
+    const talk_arr = [
+      '大家都很厉害呢！但下次我一定不会输的！',
+      '虽然没能拿到一着，但果然很开心呢！下次再来跑吧！',
+      `嘿嘿～这次没能拿到一着，我会继续努力的，${callname} 也别伤心哦！`,
+    ];
+    switch (extra_flag.rank) {
+      case 2:
+        talk_arr.push(`看到了吗 ${callname}！我竟然是第二名哦──！`);
+        break;
+      case 3:
+        talk_arr.push('我是第三名！很厉害吧！');
+    }
+    await urara.say_and_wait(get_random_entry(talk_arr));
+    await era.printAndWait([
+      '在大家的祝贺声中，',
+      urara.get_colored_name(),
+      ' 依旧面带笑容地快步跑到了 ',
+      me.get_colored_name(),
+      ' 所在的围栏旁边。',
+    ]);
+    await urara.say_and_wait(
+      '嘿嘿～跟大家比赛果然很开心，而且真的能感觉到自己变强了！',
+    );
+    await urara.say_and_wait('虽然现在的乌拉拉距离拿下一着果然还是不够呢……');
+
+    await urara.say_and_wait([callname, ' 觉得怎么样？我这次只差一点了！']);
+    era.printButton('「辛苦了乌拉拉，已经做得很不错了。」', 1);
+    era.printButton('「先休息一下吧，这次感觉怎么样？」', 2);
+    if ((await era.input()) === 1) {
+      await urara.say_and_wait([
+        '谢谢 ',
+        callname,
+        '！但是这次总感觉有点可惜，是差在哪里了？',
+      ]);
+      await urara.say_and_wait(
+        '不过按照现在的节奏努力下去，我下次应该能拿到第一名吧！',
+      );
+    } else {
+      await urara.say_and_wait(
+        '这次跑得很开心！而且能逐渐追上大家了，但是还差一点！',
+      );
+      await urara.say_and_wait([
+        '但是现在就问 ',
+        callname,
+        ' 的意见好像太早了，那回去之后？',
+      ]);
+    }
+    era.printButton('「就是这样，回去之后一起思考下次对策吧。」', 1);
+    await era.input();
+
+    await urara.say_and_wait(
+      '嗯！我知道了！乌拉拉也会更加努力，为了下次的一着！',
+    );
+  } else if (extra_flag.rank <= 10) {
+    await print_event_name('竞赛失败！', urara);
+    await urara.say_and_wait(
+      get_random_entry([
+        '大家都很厉害呢！但下次我一定不会输的！',
+        '虽然没能拿到一着，但果然很开心呢！下次再来跑吧！',
+        `嘿嘿～这次没能拿到一着，我会继续努力的，${callname} 也别伤心哦！`,
+      ]),
+    );
+    await era.printAndWait([
+      '摇摇晃晃地来到 ',
+      me.get_colored_name(),
+      ' 身边，不知是否是疲惫所致，',
+      urara.get_colored_name(),
+      ' 沾满汗水的笑容似乎有些勉强。',
+    ]);
+    await urara.say_and_wait('结果这次又跑输了呢，总觉得有些不好意思了……');
+    await urara.say_and_wait(
+      '就在我觉得『今天的大家都好快～』的时候，下一瞬间就被超越了！',
+    );
+    await urara.say_and_wait(
+      '不过我也听到了哦？对乌拉拉的加油声一直没停下过！',
+    );
+
+    await urara.say_and_wait(
+      '虽然我努力跑到终点了，但是乌拉拉到底有没有回应大家的期待呢……',
+    );
+    era.printButton('「别灰心，这次其实做得还不错。」', 1);
+    era.printButton('「下次就拿出成果来回应他们吧。」', 2);
+    await era.input();
+
+    await era.printAndWait([
+      '在 ',
+      me.get_colored_name(),
+      ' 的帮助下用毛巾抹干脸上的汗水，小',
+      urara.get_uma_sex_title(),
+      '伴随着 ',
+      me.get_colored_name(),
+      ' 的鼓励用力点了点头。',
+    ]);
+    await urara.say_and_wait(
+      '没错！只是一次失败而已，还能继续跑的话就没问题，下次比赛要努力取胜了哦！',
+    );
+    await era.printAndWait([
+      '在下一场奔跑到来前，',
+      me.get_colored_name(),
+      ' 与 ',
+      urara.get_colored_name(),
+      ' 立下了「下次一定要超越大家」的约定。',
+    ]);
+    await urara.say_and_wait(
+      '嘿嘿～大家说习惯失败算不上好事，但至少乌拉拉还可以继续跑下去！',
+    );
+  } else {
+    await print_event_name('下次不会输了！', urara);
+    await urara.say_and_wait('奔跑真开心啊，但果然稍微有些不甘心呢……');
+
+    await era.printAndWait([
+      '失落的贴在 ',
+      me.get_colored_name(),
+      ' 的身边，今天的 ',
+      urara.get_colored_name(),
+      ' 好像因为比赛失利而失去了以往的笑脸。',
+    ]);
+    await urara.say_and_wait('乌拉拉又输了啊……我还以为这次一定没问题的……');
+    await urara.say_and_wait(
+      '虽然比赛很快乐，但拿到第一名的心情果然是不一样的！',
+    );
+    await urara.say_and_wait('心里有些热又有些闷，如果能再去跑一次就好了……');
+
+    urara.say([callname, '，这个时候要怎么才能赢呢？']);
+    era.printButton('「调整好心态，下次把不甘赢回来。」', 1);
+    era.printButton('「别着急，总之回去后就开始训练吧。」', 2);
+    if ((await era.input()) === 1) {
+      await urara.say_and_wait(
+        '嗯！只要把不开心化为斗志就好了，大家都是这么说的！',
+      );
+      await urara.say_and_wait([
+        '在跑赢之前绝对不可以松懈！',
+        callname,
+        ' 也一起来调整坏习惯吧！',
+      ]);
+      await era.printAndWait([
+        '结果在回去后，为了互相督促，',
+        me.get_colored_name(),
+        ' 的零食也被 ',
+        urara.get_colored_name(),
+        ' 削减了。',
+      ]);
+    } else {
+      await urara.say_and_wait(
+        '说的也是，只要现在开始努力，下次一定可以跑赢！',
+      );
+      await urara.say_and_wait([
+        '所以 ',
+        callname,
+        '，现在快点回去吧！快点的话说不定今天就能继续训练哦？',
+      ]);
+      await era.printAndWait([
+        '结果在回去后，',
+        urara.get_colored_name(),
+        ' 真的立刻拉着 ',
+        me.get_colored_name(),
+        ' 进行了追加训练。',
+      ]);
+    }
+  }
+};
+
+handlers[
+  event_hooks.crazy_fan_end
+] = require('#/event/edu/edu-events-52/crazy-fan-end');
 
 /**
  * 春乌拉拉的育成事件

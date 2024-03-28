@@ -1,9 +1,12 @@
 const era = require('#/era-electron');
 
+const sys_call_mec = require('#/system/script/sys-call-mec');
+
 const { add_event, cb_enum } = require('#/event/queue');
 const check_before_rec = require('#/event/rec/snippets/check-before-rec');
 
 const chara_color = require('#/data/chara-colors').chara_colors[30];
+const check_stages = require('#/data/event/check-stages');
 const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
@@ -252,10 +255,10 @@ module.exports = {
           await era.printAndWait(
             '尽管表情还很僵硬，她也努力地挤出了一个笑容。',
           );
+          sys_call_mec(30, check_stages.mec_callname_customize, {});
           era.set('cflag:30:招募状态', recruit_flags.yes);
           era.println();
           await era.printAndWait(`${chara_name} 加入了队伍！`);
-          era.set('callname:30:0', `${callname}大人`);
           new RiceEduMarks().beginning++;
           add_event(event_hooks.week_end, new EventObject(30, cb_enum.edu));
         }

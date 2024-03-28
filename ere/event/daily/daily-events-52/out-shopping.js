@@ -156,7 +156,7 @@ handlers[0] = async (
         '但',
         urara.sex,
         '高估了自己的经验与性爱的耐性，也低估了这小小的',
-        urara.sex_code - 1 ? '母马' : '公马',
+        urara.get_sex_slave_title(),
         '身体实际有多么的淫乱。',
       ]);
       await era.printAndWait(
@@ -527,9 +527,9 @@ handlers[1] = async (urara, me, in_urara, callname, edu_marks) => {
     urara.get_uma_sex_title(),
     '充满期待的注视中，盒子在旋转中不断发出着不同的脆响，随后——',
   ]);
-  let random_range = 4 + !edu_marks.spe_item;
-  switch (get_random_value(0, random_range)) {
+  switch (get_random_value(1 - !edu_marks.ticket, 4 + !edu_marks.spe_item)) {
     case 0:
+      edu_marks.ticket = 1;
       await say_by_passer_by_and_wait(
         '工作人员A',
         '恭喜啊小乌拉拉！抽到特等奖『温泉旅游券』了！！',

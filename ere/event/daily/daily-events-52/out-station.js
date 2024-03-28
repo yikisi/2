@@ -462,6 +462,7 @@ module.exports = async (hook) => {
     case 2:
       if (!edu_marks.try_dress && love >= 25) {
         edu_marks.try_dress = 1;
+        hook.override = true;
         await print_event_name('要试穿舞台装了哦！', urara);
         await era.printAndWait([
           '为了在下次比赛前做好充分的准备，',

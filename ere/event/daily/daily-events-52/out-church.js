@@ -43,7 +43,7 @@ module.exports = async (hook) => {
     '但是今天的阶梯却格外的安静，除了两侧林地的摇动与鸟鸣外，剩下的就只有两人的脚步声了。',
   );
   era.println();
-  if (era.get('relation:52:0') > 150) {
+  if (era.get('relation:52:0') > 150 && edu_marks.loop < 2) {
     await era.printAndWait([
       '只有两人的攀登确实缺少了一丝生气，但好好牵着 ',
       me.get_colored_name(),

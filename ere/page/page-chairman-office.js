@@ -315,7 +315,9 @@ async function page_chairman_office() {
   era.drawLine();
   await era.printAndWait('回去了……');
   era.println();
-  await sys_get_random_event(event_hooks.back_school)();
+  await sys_get_random_event(event_hooks.back_school)({
+    loc: location_enum.chairman,
+  });
 
   era.set('flag:当前位置', location_enum.office);
 }

@@ -1,17 +1,22 @@
 const era = require('#/era-electron');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
-const { chara_colors } = require('#/data/chara-colors');
-const UraraLifeMarks = require('#/data/event/life-event-marks/life-event-marks-52');
-const recruit_flags = require('#/data/event/recruit-flags');
-const CharaTalk = require('#/utils/chara-talk');
+const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_love_uma,
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
-const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
+
+const { add_event, cb_enum } = require('#/event/queue');
+
+const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const { chara_colors } = require('#/data/chara-colors');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
+const UraraLifeMarks = require('#/data/event/life-event-marks/life-event-marks-52');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_enum } = require('#/data/train-const');
 
 /**
@@ -326,15 +331,15 @@ module.exports = {
       `或许是想要去见证，又或是连自己都没能察觉的某种情感，${me_callname}（${me.name}）还是来到了训练场。`,
     );
     era.drawLine();
-    await CharaTalk.say_by_passer_by_and_wait(
+    await say_by_passer_by_and_wait(
       '训练员A',
       '那孩子虽然很有感染力，但果然……',
     );
-    await CharaTalk.say_by_passer_by_and_wait(
+    await say_by_passer_by_and_wait(
       '训练员B',
       `是啊，已经能想到要训练这样的孩子会有多麻烦了，${urara.sex}似乎不适合这里。`,
     );
-    await CharaTalk.say_by_passer_by_and_wait(
+    await say_by_passer_by_and_wait(
       '训练员C',
       '虽然给人的感觉很舒服，但只是如此的话也没有意义啊。',
     );
@@ -555,5 +560,9 @@ module.exports = {
       urara.get_colored_name(),
       ' 的训练员了！',
     ]);
+    add_event(
+      event_hooks.week_end,
+      new EventObject(52, cb_enum.edu).set_arg('after_begin'),
+    );
   },
 };

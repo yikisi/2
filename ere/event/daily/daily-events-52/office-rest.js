@@ -128,7 +128,7 @@ module.exports = async (hook) => {
       ' 当成了安眠的抱枕。',
     ]);
     era.println();
-    if (era.get('relation:52:0') > 150) {
+    if (era.get('relation:52:0') > 150 && edu_marks.loop < 2) {
       await urara.say_and_wait(['诶嘿嘿～是 ', callname, ' 的感觉……']);
       await era.printAndWait([
         '完全是在睡梦之中的反应，',

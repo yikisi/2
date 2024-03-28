@@ -828,8 +828,6 @@ handlers[event_hooks.week_start] = async () => {
     await era.printAndWait(
       `抱住 ${me.name} 亲昵的蹦来蹦去，偷偷露出兴奋表情的 ${kita.name} 笑了起来。`,
     );
-  } else if (punish_level === 2) {
-    await kita.say_and_wait('TODO');
   } else if (punish_level === 3) {
     await kita.say_and_wait(
       `明明小北才是那个有被欺负癖好的孩子，哼哼～但是没想到训练员远比我想被欺负呢。`,

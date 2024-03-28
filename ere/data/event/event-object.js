@@ -27,6 +27,12 @@ class EventObject {
     this.special = special;
   }
 
+  copy() {
+    return new EventObject(this.chara_id, this.type, this.special).set_arg(
+      this.arg,
+    );
+  }
+
   set_arg(arg) {
     this.arg = arg;
     return this;

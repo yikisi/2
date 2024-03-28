@@ -12,9 +12,10 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { chara_colors } = require('#/data/chara-colors');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
 
-/** @type {Record<string,function(HookArg,Record<string,*>)>} */
+/** @type {Record<string,function(HookArg,Record<string,*>,EventObject)>} */
 const handlers = {};
 
 handlers[event_hooks.select] = () => {
@@ -79,7 +80,7 @@ handlers[event_hooks.select] = () => {
           ['即使站都站不稳，', callname, ' 依旧努力地撑起了身体。'],
         ]);
       }
-    } else if (era.get('relation:52:0') > 150) {
+    } else if (era.get('relation:52:0') > 150 && new UraraEduMarks().loop < 2) {
       talk_arr.push(
         [
           '明明是我先出门的，为什么大家却都比我先到了呢？真神奇啊！',
@@ -779,7 +780,7 @@ handlers[event_hooks.load_talk] = async () => {
     talk_arr = [],
     urara = get_chara_talk(52);
   if (pregnant) {
-    if (era.get('relation:52:0') > 150) {
+    if (era.get('relation:52:0') > 150 && new UraraEduMarks().loop < 2) {
       if (love >= 75) {
         talk_arr.push(
           urara.say_and_wait([
@@ -842,7 +843,7 @@ handlers[event_hooks.load_talk] = async () => {
       '……哈，一句安慰您的话都想不出来呢……',
     );
   } else {
-    if (era.get('relation:52:0') > 150) {
+    if (era.get('relation:52:0') > 150 && new UraraEduMarks().loop < 2) {
       if (love >= 75) {
         talk_arr.push(
           urara.say_and_wait([
@@ -901,6 +902,14 @@ handlers[event_hooks.load_talk] = async () => {
     );
   }
 };
+
+handlers[
+  event_hooks.celebration
+] = require('#/event/daily/daily-events-52/celebration');
+
+handlers[
+  event_hooks.week_start
+] = require('#/event/daily/daily-events-52/week-start');
 
 /**
  * 春乌拉拉 - 日常，id=52

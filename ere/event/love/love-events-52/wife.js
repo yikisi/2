@@ -306,7 +306,7 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
         '的笑容似乎有些苦涩。',
       ]);
       era.drawLine();
-      await in_urara.say_and_wait(
+      await in_urara.say_as_unknown_and_wait(
         '说的也是啊，你确实是个过分的人，不过还请稍微打起精神来吧，因为……',
       );
     } else {

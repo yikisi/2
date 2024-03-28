@@ -8,6 +8,8 @@ const {
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
+const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
+
 module.exports = () => {
   const call_me = sys_get_callname(52, 0),
     urara = get_chara_talk(52),
@@ -16,7 +18,7 @@ module.exports = () => {
     me = get_chara_talk(0),
     self_call = sys_get_callname(52, 52),
     talk_arr = [];
-  if (era.get('relation:52:0') > 150) {
+  if (era.get('relation:52:0') > 150 && new UraraEduMarks().loop < 2) {
     talk_arr.push(
       [
         `${call_me}！今天要来做什么呢？`,
@@ -205,7 +207,7 @@ module.exports = () => {
         [
           [
             sys_get_colored_callname(52, 30),
-            '借给我的绘本上说，恋爱是件很美好的事，就像水果一样又酸又甜呢！',
+            ' 借给我的绘本上说，恋爱是件很美好的事，就像水果一样又酸又甜呢！',
             self_call,
             ' 也很多很多想法呦！但是……现在还不能告诉 ',
             call_me,

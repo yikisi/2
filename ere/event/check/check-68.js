@@ -23,8 +23,10 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 const handlers = {};
 
-handlers[check_stages.after_punish] = () => {
-  add_event(event_hooks.week_start, new EventObject(68, cb_enum.daily));
+handlers[check_stages.after_punish] = (extra_flag) => {
+  if (extra_flag.level === 1 || extra_flag.level === 3) {
+    add_event(event_hooks.week_start, new EventObject(68, cb_enum.daily));
+  }
 };
 
 const aim_races = {};

@@ -761,12 +761,14 @@ module.exports = {
     get_item_status(chara_id, status_list);
     return status_list.map((e) => {
       e.display = 'inline-block';
-      let temp;
-      if ((temp = status_desc[e.key || e.content])) {
-        e.title = `[${e.content}]：${temp}`;
+      if (!e.title) {
+        let temp;
+        if ((temp = status_desc[e.key || e.content])) {
+          e.title = `[${e.content}]：${temp}`;
+        }
+        delete e.key;
       }
       e.content = `[${e.content}]`;
-      delete e.key;
       return e;
     });
   },

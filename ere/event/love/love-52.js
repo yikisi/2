@@ -8,8 +8,9 @@ const {
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { chara_colors } = require('#/data/chara-colors');
-const print_event_name = require('#/event/snippets/print-event-name');
+const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const UraraLifeMarks = require('#/data/event/life-event-marks/life-event-marks-52');
+const print_event_name = require('#/event/snippets/print-event-name');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,number,string,string,EventObject):Promise<*>>} */
 const handlers = {};
@@ -112,7 +113,7 @@ module.exports = async (hook, _, event_object) => {
     chara_self_name = sys_get_callname(52, 52),
     in_urara = get_chara_talk(52, chara_colors[52][1]),
     me = get_chara_talk(0),
-    relation = era.get('relation:52:0'),
+    relation = new UraraEduMarks().loop === 2 ? 150 : era.get('relation:52:0'),
     urara = get_chara_talk(52);
   let temp;
   if (

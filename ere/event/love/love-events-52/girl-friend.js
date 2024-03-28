@@ -312,7 +312,7 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
     await era.printAndWait(
       '虽然还不知道那天会不会到来，但也没错，现在维持现状就好，现在还不是时候——',
     );
-    await era.printAndWait('……');
+    era.drawLine();
     await in_urara.say_as_unknown_and_wait(
       '所以在那之前，就算是桥到船头自然直，两人的关系又该怎么处理呢？',
     );

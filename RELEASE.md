@@ -4,7 +4,7 @@ _Incoming_
 EraUma v0.6，适配 [EraElectron v1.2.0 (zero)](https://gitgud.io/umaera/era-electron/-/releases/v1.2.0) 版本
 
 ## Added
-* 翻译实现春乌拉拉的口上（进行中）；
+* 翻译实现春乌拉拉的口上；
 * 翻译实现爱丽速子的口上（进行中）；
 * 优化并润色所有角色的口上脚本（进行中）；
 * 更新节日事件地文；
