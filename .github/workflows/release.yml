@@ -10,7 +10,7 @@ env:
   GAME_ALL_DIR: 'erauma-with-engine-${{ github.ref_name }}'
   GAME_ZIP: 'era-uma-preview-${{ github.ref_name }}.7z'
   GAME_RES_ZIP: 'era-uma-preview-res-${{ github.ref_name }}.7z'
-  GAME_ALL_ZIP: 'era-uma-preview-with-engine-win64-${{ github.ref_name }}.7z'
+  GAME_ALL_ZIP: 'era-uma-preview-with-engine-${{ github.ref_name }}-win-x64.7z'
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
