@@ -55,14 +55,14 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 3;
 
 aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 2;
 aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
 
 /** @param {{edu_weeks:number,race:number,rank:number}} extra_flag */
 handlers[check_stages.aim_race] = (extra_flag) => {
   const ret =
     aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
     aim_races[extra_flag.race];
-  if (!ret && extra_flag.rank !== undefined) {
+  if (!ret && era.get('flag:当前赛事') > 0) {
     const event_marks = new LunaEduMarks();
     if (
       extra_flag.rank <= 5 &&

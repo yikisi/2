@@ -484,19 +484,6 @@ async function race_page(race) {
     }
   }
   await era.clear();
-  era.printMultiColumns([
-    { type: 'divider' },
-    { content: 'TEST 选择成绩', type: 'text' },
-    ...[1, 5, 10, 20].map((e) => {
-      return {
-        accelerator: e,
-        config: { align: 'center', width: 6 },
-        content: `${e}着`,
-        type: 'button',
-      };
-    }),
-  ]);
-  const tmp = await era.input();
   const race_rank = {},
     race_start = {},
     race_end = {};
@@ -504,11 +491,9 @@ async function race_page(race) {
     if (e) {
       race_start[e] = race_end[e] = false;
     }
-    race_rank[e] = tmp;
     aim_race_dict[e] = sys_call_check(e, check_stages.aim_race, {
       edu_weeks: era.get(`cflag:${e}:育成回合计时`),
       race,
-      rank: tmp,
     });
   });
   let start_count = contestants.filter((e) => e > 0).length,
@@ -569,7 +554,6 @@ async function race_page(race) {
       era.drawLine();
       await sys_call_edu_event(ret, event_hooks.race_start, {
         race,
-        rank: race_rank[ret],
       });
       start_count--;
       race_start[ret] = true;
@@ -577,6 +561,28 @@ async function race_page(race) {
       time_cost += 100;
     }
   }
+  // TODO 换成真实的比赛系统
+  era.printMultiColumns([
+    { type: 'divider' },
+    { content: 'TEST 选择成绩', type: 'text' },
+    ...[1, 5, 10, 20].map((e) => {
+      return {
+        accelerator: e,
+        config: { align: 'center', width: 6 },
+        content: `${e}着`,
+        type: 'button',
+      };
+    }),
+  ]);
+  const tmp = await era.input();
+  contestants.forEach((e) => {
+    race_rank[e] = tmp;
+    aim_race_dict[e] = sys_call_check(e, check_stages.aim_race, {
+      edu_weeks: era.get(`cflag:${e}:育成回合计时`),
+      race,
+      rank: tmp,
+    });
+  });
   const cur_year = era.get('flag:当前年');
   era.drawLine();
   contestants.forEach((e) => {

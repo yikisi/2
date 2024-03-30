@@ -402,12 +402,154 @@ module.exports = async (hook, extra_flag) => {
       wait_flag = sys_love_uma(luna, 4);
     } else if (extra_flag.race === race_enum.arim_kin && edu_weeks >= 96) {
       // 资深年有马纪念
-      if (event_marks.good_end) {
+      if (
+        (event_marks.good_end =
+          (extra_flag.rank === 1 && !era.get(`status:${luna}:神经衰弱`)) + 1)
+      ) {
+        await print_event_name('领域尽头', luna_talk);
+      } else {
+        await print_event_name('绝响', emperor_talk);
+      }
+      await chara_talk.print_and_wait('哈……哈……');
+      await chara_talk.print_and_wait('哈…………');
+      await chara_talk.print_and_wait(
+        `${chara_talk.name} 眼前的世界正在剧烈地动摇，${chara_talk.sex}视线内的一切都在模糊。`,
+      );
+      await chara_talk.print_and_wait(
+        `如海潮般袭来的眩晕与疼痛打击着${chara_talk.sex}，领域正在排斥自己——${chara_talk.name} 意识到了。`,
+      );
+      await chara_talk.print_and_wait(`${chara_talk.sex}已不再无所不能。`);
+      await chara_talk.print_and_wait(
+        `每迈出一步，${chara_talk.name} 都能感受到巨大的违和感。`,
+      );
+      await chara_talk.print_and_wait(
+        `落足，再抬起。剧烈的疼痛让${chara_talk.sex}面目狰狞得可怕。`,
+      );
+      await chara_talk.print_and_wait(
+        `往常轻易能破开的风好像铁壁横亘，撞得${chara_talk.sex}伤痕累累。`,
+      );
+      await chara_talk.print_and_wait(
+        `在这场比赛中，${chara_talk.sex}像是风暴中被折断双翼的飞鸟。`,
+      );
+      era.drawLine();
+      await chara_talk.print_and_wait(
+        `眼皮变得沉重，${chara_talk.name}的意识已经恍惚。`,
+      );
+      await chara_talk.print_and_wait(
+        '领域正在崩塌，那缓慢的场景逐渐要动起来了。',
+      );
+      await chara_talk.print_and_wait(
+        '马娘们在奔跑，踢着绿茵地，激起尘土，把飞草带进风中飘舞。',
+      );
+      await chara_talk.print_and_wait(
+        '自己心脏跳得越来越快，却一丁点的力量也用不出。',
+      );
+      await chara_talk.print_and_wait(
+        '身体的零件：那些肌肉、筋脉和内脏，正在被巨大的惯性撕扯着。',
+      );
+      await chara_talk.print_and_wait(
+        '如果不在这个弯道停下来，在领域完全褪去的瞬间——',
+      );
+      await chara_talk.print_and_wait('自己会死。');
+      await chara_talk.say_and_wait(
+        emperor === 17
+          ? '赛道并非天途，终有停滞之时。'
+          : '这就是领域的真相……透支本格化的力量……',
+      );
+      await chara_talk.print_and_wait(
+        '一代又一代的勇者跨入了领域，透支了自己的未来、理想和一切的可能性。',
+      );
+      await chara_talk.print_and_wait(`现在，轮到 ${chara_talk.name} 了。`);
+      await chara_talk.print_and_wait(
+        '在面对生涯，乃至生命的结尾时，自己该做些什么？没人教过自己。',
+      );
+      await era.printAndWait([
+        {
+          content: '露娜',
+          color: luna_talk.color,
+        },
+        '&',
+        { content: '皇帝', color: emperor_talk.color },
+        '「',
+        { content: CharaTalk.me.actual_name, color: emperor_talk.color },
+        { content: '。', color: luna_talk.color },
+        '」',
+      ]);
+      if (event_marks.good_end === 2) {
+        await era.printAndWait([
+          {
+            content: '露娜',
+            color: luna_talk.color,
+          },
+          '&',
+          { content: '皇帝', color: emperor_talk.color },
+          '「',
+          { content: '你', color: emperor_talk.color },
+          { content: '会和我', color: luna_talk.color },
+          { content: '（我）', color: emperor_talk.color },
+          { content: '一起的吧？', color: luna_talk.color },
+          '」',
+        ]);
+        await era.printAndWait(
+          `把胸中的气吐尽，在千千万万的观众的实现下，${chara_talk.name} 加速了！！！`,
+        );
+        await era.printAndWait('没有道路的延续就自己踏破！');
+        await era.printAndWait([
+          {
+            content: '露娜',
+            color: luna_talk.color,
+          },
+          '&',
+          { content: '皇帝', color: emperor_talk.color },
+          '「',
+          { content: '为了', color: emperor_talk.color },
+          { content: '我', color: luna_talk.color },
+          { content: '们', color: emperor_talk.color },
+          { content: '的梦想！！！', color: luna_talk.color },
+          '」',
+        ]);
+        era.printButton('「冲啊！！！！！！！」', 1);
+        await era.input();
+        await CharaTalk.me.print_and_wait('冲啊！！！！！！！');
+        await CharaTalk.me.print_and_wait('冲啊！！！！！！！');
+        await era.printAndWait(
+          `${CharaTalk.me.name} 已经不在乎了自己的喉咙会否撕裂了。`,
+        );
+        await era.printAndWait(
+          `${CharaTalk.me.name} 只知道，${
+            chara_talk.name
+          } 正向 ${CharaTalk.me.get_couple_title()} 的梦想迎头迈进。`,
+        );
+        await era.printAndWait('很近了！很近了！');
+        await era.printAndWait(
+          '在盛大的欢呼声中，最强的赛马娘踏向了未知的远方。',
+        );
+      } else {
+        await era.printAndWait([
+          {
+            content: '露娜',
+            color: luna_talk.color,
+          },
+          '&',
+          { content: '皇帝', color: emperor_talk.color },
+          '「',
+          { content: '我', color: emperor_talk.color },
+          { content: '（我）会把', color: luna_talk.color },
+          { content: '宝贵的经验', color: emperor_talk.color },
+          { content: '告诉你……', color: luna_talk.color },
+          '」',
+        ]);
+        await chara_talk.print_and_wait('——来吧。');
+        await chara_talk.print_and_wait(
+          `如迎接自己的宿命一般，${chara_talk.name} 冲向了自己的末路。`,
+        );
+      }
+      era.drawLine();
+      if (event_marks.good_end === 2) {
         await print_event_name(
           ['伊甸见我', { content: '（我）', color: emperor_talk.color }],
           luna_talk,
         );
-        event_marks.luna_end++;
 
         await luna_talk.print_and_wait('这里是哪里？');
         await luna_talk.print_and_wait('赛马娘好像突然梦醒一样。');
@@ -568,8 +710,8 @@ module.exports = async (hook, extra_flag) => {
         await era.input();
         good_end(event_marks);
       } else {
-        let luna_end = (event_marks.luna_end =
-          !era.get(`status:${luna}:神经衰弱`) && era.get(`love:${luna}`) >= 90);
+        const luna_end =
+          !era.get(`status:${luna}:神经衰弱`) && era.get(`love:${luna}`) >= 90;
         if (luna_end) {
           await print_event_name('亘古轮月', luna_talk);
         } else {

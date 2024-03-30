@@ -19,10 +19,8 @@ class LunaEduMarks extends EduEventMarks {
   wax_and_wane;
   // 一步之遥
   a_stones_throw;
-  // GE标记
+  // 结局标记：1/0-NE，2-GE
   good_end;
-  // NE标记，1-露娜结局，0-皇帝结局
-  luna_end;
   // 成就检查 - 菊花赏前无败
   title_check;
 

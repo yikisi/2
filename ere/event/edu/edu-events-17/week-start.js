@@ -42,6 +42,7 @@ module.exports = async (hook, _, event_object) => {
     edu_weeks = era.get('cflag:17:育成回合计时');
   if (edu_weeks >= 144) {
     if (edu_weeks === 144 && !event_marks.good_end) {
+      // 没跑有马或者没触发赛后事件，直接按NE计算
       normal_end(
         event_marks,
         !era.get(`status:${luna}:神经衰弱`) && era.get(`love:${luna}`) >= 90,
@@ -53,11 +54,11 @@ module.exports = async (hook, _, event_object) => {
       );
       era.println();
       await get_chara_talk(17).say_and_wait(
-        event_marks.get('good_end')
+        event_marks.good_end === 2
           ? '你喜欢什么样的天空？太阳还是月亮？做不出决定也无妨，无论你处在什么样的天空下，终有一日，我们都会相遇。嗯，这次，换我们去找你。'
           : ret
-          ? '既然还能向前迈进，就没有停留于此处的必要！吾的天途永不停止，庆贺吧，弄臣！你将见证皇帝的伟业。作为奖赏，吾许诺你永世跟随和侍奉吾的荣耀……回答呢？'
-          : '皇帝的故事已经终结，而我的使命还没有结束，让我们携手去那里吧，那个所有赛马娘都能幸福的未来。嗯……那个未来应该也包括我，所以……你会让我幸福的，对吧？',
+            ? '既然还能向前迈进，就没有停留于此处的必要！吾的天途永不停止，庆贺吧，弄臣！你将见证皇帝的伟业。作为奖赏，吾许诺你永世跟随和侍奉吾的荣耀……回答呢？'
+            : '皇帝的故事已经终结，而我的使命还没有结束，让我们携手去那里吧，那个所有赛马娘都能幸福的未来。嗯……那个未来应该也包括我，所以……你会让我幸福的，对吧？',
       );
     }
     return;
