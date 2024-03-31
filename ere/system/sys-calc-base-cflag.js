@@ -114,7 +114,10 @@ module.exports = {
           }
         }
       }
-    } else if (era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48) {
+    } else if (
+      chara_id &&
+      era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48
+    ) {
       return [];
     } else if (
       attr_id_or_name === attr_enum.speed &&

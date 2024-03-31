@@ -128,13 +128,14 @@ function get_suffix(chara_id, type) {
       },
       {
         config: { align: 'center', width: 2 },
-        content: race
-          ? palace
-            ? out_of_train_type[palace - 1]
-            : in_train
-            ? get_train_time(chara_id).substring(0, 3)
-            : '待入学'
-          : '-',
+        content:
+          chara_id && race
+            ? palace
+              ? out_of_train_type[palace - 1]
+              : in_train
+                ? get_train_time(chara_id).substring(0, 3)
+                : '待入学'
+            : '-',
         type: 'text',
       },
     );
@@ -181,7 +182,6 @@ function get_suffix(chara_id, type) {
 }
 
 async function select_target(type) {
-  const cur_round = era.get('flag:当前回合数');
   let list_team = filter_chara('cflag', '招募状态', recruit_flags.yes);
 
   if (type === chara_info_type.train) {

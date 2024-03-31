@@ -30,6 +30,7 @@ module.exports = {
     const aim_list = [];
     if (era.get(`cflag:${chara.id}:种族`)) {
       if (
+        !chara.id ||
         era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48 ||
         era.get(`cflag:${chara.id}:殿堂`)
       ) {

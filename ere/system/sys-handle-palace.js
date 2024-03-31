@@ -17,7 +17,7 @@ const { vp_status_enum } = require('#/data/ero/status-const');
 const check_stages = require('#/data/event/check-stages');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
-const { race_enum, race_infos } = require('#/data/race/race-const');
+const { race_infos } = require('#/data/race/race-const');
 
 /** @param {number} chara_id */
 function sys_handle_palace(chara_id) {

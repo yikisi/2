@@ -141,10 +141,9 @@ module.exports = async () => {
           era.set('flag:当前周', 0);
           era.set('flag:当前位置', location_enum.office);
           era.set('flag:极端粉丝', []);
-          era.set('cflag:育成回合计时', 4800);
+          era.set('cflag:0:育成回合计时', 4800);
 
           // 游戏设置
-
           era.set('flag:新生儿ID', first_child_id);
 
           require('#/event/queue').init();
