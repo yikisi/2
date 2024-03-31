@@ -1,13 +1,73 @@
-pages:
-  stage: deploy
+workflow:
   rules:
     - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  GAME_ALL_DIR: 'erauma-with-engine-${CI_COMMIT_TAG}'
+  GAME_ALL_ZIP: 'era-uma-preview-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
+
+build:
+  stage: build
+  tags:
+    - shell
+  script:
+    - cd engine
+    - npm install
+    - npm run win:pack
+    - mv dist_electron/win-unpacked ./$GAME_ALL_DIR
+    - mkdir ./$GAME_ALL_DIR/game
+    - cp ../CHANGELOG.md ./$GAME_ALL_DIR/game/
+    - cp ../RELEASE.md ./$GAME_ALL_DIR/game/
+    - cp -r ../ere ./$GAME_ALL_DIR/game/
+    - cp -r ../csv ./$GAME_ALL_DIR/game/
+    - cp -r ../res ./$GAME_ALL_DIR/game/
+    - 7zz a -pera $GAME_ALL_ZIP ./$GAME_ALL_DIR
+    - cd ..
+    - rm -rf dist
+    - mkdir dist
+    - mv ./engine/$GAME_ALL_ZIP ./dist/
+    - echo "FILE_JOB_ID=$CI_JOB_ID" >> variables.env
+  artifacts:
+    expire_in: never
+    reports:
+      dotenv: variables.env
+    paths:
+      - dist/
+    when: on_success
+
+pages:
+  stage: deploy
+  tags:
+    - shell
   script:
     - rm -rf public
     - mkdir public
-    - 7z a base.7z ./ere ./csv CHANGELOG.md
-    - mv base.7z public/
+    - 7zz a base.7z ./ere ./csv RELEASE.md CHANGELOG.md
+    - mv *.7z public/
     - echo "$CI_COMMIT_TAG" > public/RELEASE
   artifacts:
     paths:
       - public
+
+release:
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  needs:
+    - job: build
+      artifacts: true
+  tags:
+    - docker
+  script:
+    - echo "Releasing..."
+    - echo $ASSET_FILE_URL
+  release:
+    tag_name: $CI_COMMIT_TAG
+    name: 'EraUma $CI_COMMIT_TAG'
+    description: './RELEASE.md'
+    assets:
+      links:
+        - name: '[解压即玩包] $GAME_ALL_ZIP'
+          url: 'https://gitgud.io/SLeader/erauma/-/jobs/${FILE_JOB_ID}/artifacts/raw/dist/${GAME_ALL_ZIP}'
+          link_type: package

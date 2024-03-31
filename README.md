@@ -46,6 +46,12 @@ EraUma发布采取分包制，即游戏本体包+游戏资源包拆分打包方�
 
 如果文件夹不是以上结构，则无法顺利在ere引擎中打开运行
 
+## Notes
+
+[Release Notes](RELEASE.md)
+
+[Changelogs](CHANGELOG.md)
+
 ## Work List
 
 @雞雞
