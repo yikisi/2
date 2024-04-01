@@ -6792,6 +6792,61 @@
     "slopes": []
   },
   {
+    "id": "11104",
+    "lane": [
+      {
+        "end": 201,
+        "length": 201,
+        "name": "1直",
+        "start": 0,
+        "type": "直线"
+      },
+      {
+        "end": 350,
+        "length": 150,
+        "name": "1弯",
+        "start": 300,
+        "type": "弯道"
+      },
+      {
+        "end": 550,
+        "length": 150,
+        "name": "2弯",
+        "start": 500,
+        "type": "弯道"
+      },
+      {
+        "end": 1000,
+        "length": 500,
+        "name": "2直",
+        "start": 600,
+        "type": "直线"
+      },
+      {
+        "end": 1150,
+        "length": 150,
+        "name": "3弯",
+        "start": 1100,
+        "type": "弯道"
+      },
+      {
+        "end": 1314,
+        "length": 164,
+        "name": "终弯",
+        "start": 1250,
+        "type": "弯道"
+      },
+      {
+        "end": 1700,
+        "length": 386,
+        "name": "终直",
+        "start": 1414,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
+  },
+  {
     "id": "11201",
     "lane": [
       {

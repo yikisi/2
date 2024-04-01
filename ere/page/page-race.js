@@ -72,7 +72,8 @@ const adaptability2race = [
 ];
 
 const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date,
-  edu_weeks_shuk_sho = 48 + race_infos[race_enum.shuk_sho].date;
+  edu_weeks_shuk_sho = 48 + race_infos[race_enum.shuk_sho].date,
+  edu_weeks_japa_dir = 48 + race_infos[race_enum.japa_dir].date;
 
 /**
  * @param {number} chara_id
@@ -762,11 +763,12 @@ async function race_page(race) {
     }
   });
   if (
-    (race === race_enum.kiku_sho || race === race_enum.shuk_sho) &&
+    (race === race_enum.kiku_sho || race === race_enum.shuk_sho || race === race_enum.japa_dir) &&
     best_rank === 1
   ) {
     let invincible_1 = true,
       invincible_2 = true,
+      invincible_4 = true,
       cup_1 = 0,
       cup_2 = 0,
       cup_3 = 0;
@@ -779,17 +781,26 @@ async function race_page(race) {
           case race_enum.oka_sho:
             cup_1 += 2;
             break;
+          case race_enum.hane_hai:
+            cup_1 += 4;
+            break;
           case race_enum.toky_yus:
             cup_2++;
             break;
           case race_enum.yush_him:
             cup_2 += 2;
             break;
+          case race_enum.toky_der:
+            cup_2 += 4;
+            break;
           case race_enum.kiku_sho:
             cup_3++;
             break;
           case race_enum.shuk_sho:
             cup_3 += 2;
+            break;
+          case race_enum.japa_dir:
+            cup_3 += 4;  
         }
       } else {
         if (e.weeks < edu_weeks_kiku_sho) {
@@ -797,6 +808,9 @@ async function race_page(race) {
         }
         if (e.weeks < edu_weeks_shuk_sho) {
           invincible_2 = false;
+        }
+        if (e.weeks < edu_weeks_japa_dir) {
+          invincible_4 = false;
         }
       }
     });
@@ -809,6 +823,11 @@ async function race_page(race) {
       new_title_dict[mvp_id].push({ n: '三宝冠', c: buff_colors[1] });
       invincible_2 &&
         new_title_dict[mvp_id].push({ n: '无败三宝冠', c: buff_colors[1] });
+    }
+    if (cup_1 & 4 && cup_2 & 4 && cup_3 & 4) {
+      new_title_dict[mvp_id].push({ n: '泥地三冠', c: buff_colors[1] });
+      invincible_4 &&
+        new_title_dict[mvp_id].push({ n: '无败泥地三冠', c: buff_colors[1] });
     }
     if (cup_1 === cup_2 && cup_2 === cup_3 && cup_3 === 3) {
       new_title_dict[mvp_id].push({ n: '极限六冠', c: buff_colors[1] });
