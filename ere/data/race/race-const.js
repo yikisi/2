@@ -306,6 +306,30 @@ const race_enum = {
   viol_sta: 0,
   // 少年杯
   juni_cup: 0,
+  // 羽田杯
+  hane_hai: 0,
+  // 云取赏
+  kumo_sho: 0,
+  //京浜杯
+  keih_hai: 0,
+  //东京德比
+  toky_der: 0,
+  //东京短途锦标
+  toky_spr: 0,
+  //蓝鸟杯
+  blue_cup: 0,
+  //JBC雌马经典赛
+  jbc_lad: 0,
+  //全日本少年优骏
+  zeni_you: 0,
+  //海洋杯
+  mari_cup: 0,
+  //卧龙锦标
+  huku_sta: 0,
+  //凤雏锦标
+  hous_sta: 0,
+  
+  
 };
 Object.keys(race_enum).forEach((e, i) => (race_enum[e] = i));
 
@@ -462,6 +486,17 @@ race_infos[race_enum.toky_dai] = require('#/data/race/g1/race-toky-dai');
 race_infos[race_enum.hans_cup] = require('#/data/race/g2/race-hans-cup');
 race_infos[race_enum.viol_sta] = require('#/data/race/op/race-viol-sta');
 race_infos[race_enum.juni_cup] = require('#/data/race/op/race-juni-cup');
+race_infos[race_enum.hane_hai] = require('#/data/race/g1/race-hane-hai');
+race_infos[race_enum.kumo_sho] = require('#/data/race/g3/race-kumo-sho');
+race_infos[race_enum.keih_hai] = require('#/data/race/g2/race-keih-hai');
+race_infos[race_enum.toky_der] = require('#/data/race/g1/race-toky-der');
+race_infos[race_enum.toky_spr] = require('#/data/race/g3/race-toky-spr');
+race_infos[race_enum.blue_cup] = require('#/data/race/g3/race-blue-cup');
+race_infos[race_enum.jbc_lad] = require('#/data/race/g1/race-jbc-lad');
+race_infos[race_enum.zeni_you] = require('#/data/race/g1/race-zeni-you');
+race_infos[race_enum.mari_cup] = require('#/data/race/g3/race-mari-cup');
+race_infos[race_enum.huku_sta] = require('#/data/race/op/race-huku-sta');
+race_infos[race_enum.hous_sta] = require('#/data/race/op/race-hous-sta');
 
 race_infos.forEach((e) => {
   const param_id = e.param_id;
