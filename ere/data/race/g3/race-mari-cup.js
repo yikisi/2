@@ -4,7 +4,7 @@ module.exports = new RaceInfo(
   'Marine Cup',
   '海洋杯',
   RaceInfo.class_enum.G3,
-  RaceInfo.track_enum. funabashi,
+  RaceInfo.track_enum.funabashi,
   RaceInfo.ground_enum.mud,
   1600,
   RaceInfo.distance_enum.mile,

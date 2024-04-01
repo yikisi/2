@@ -6,8 +6,12 @@ csv = csv
   .split('\n')
   .map((e) => {
     const csv_list = e.split(',');
-    csv_list[6] = csv_list[6].toLowerCase();
-    return csv_list;
+    if (csv_list.length > 6) {
+      csv_list[6] = csv_list[6].toLowerCase();
+      return csv_list;
+    } else {
+      return [];
+    }
   })
   .filter((e) => e[0]);
 
