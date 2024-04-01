@@ -842,7 +842,7 @@ async function race_page(race) {
         new_title_dict[mvp_id].push({ n: '无败变则三冠', c: buff_colors[1] });
       }
     }
-    if (cup_1 & cup_2 & cup_3 & 0b11) {
+    if ((cup_1 & cup_2 & cup_3 & 0b11) === 0b11) {
       new_title_dict[mvp_id].push({ n: '极限六冠', c: buff_colors[1] });
       if (invincible_1 && invincible_2) {
         new_title_dict[mvp_id].push({ n: '无败六冠', c: buff_colors[1] });

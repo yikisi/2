@@ -1,4 +1,6 @@
+const { execSync } = require('child_process');
 const { readFileSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
 let csv = readFileSync('./races.csv', 'utf-8');
 csv = csv
@@ -145,4 +147,8 @@ csv.forEach((e) => {
     `../../ere/data/race/${e[8].toLowerCase()}/race-${e[6]}.js`,
     output,
   );
+});
+
+execSync('npx eslint --fix ../ere/data/race --config ./.eslintrc.js', {
+  cwd: join(process.cwd(), '../../engine'),
 });

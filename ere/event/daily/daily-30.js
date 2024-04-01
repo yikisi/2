@@ -216,7 +216,7 @@ handlers[event_hooks.out_shopping] = async function (stage_id) {
 handlers[event_hooks.out_station] = async function (hook) {
   const callname = era.get('callname:30:0');
   hook.arg = await select_action_in_station(30);
-  switch (Math.floor(Math.random() * 3)) {
+  switch (hook.arg) {
     case 0:
       switch (get_random_value(0, 1)) {
         case 0:

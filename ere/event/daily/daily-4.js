@@ -560,7 +560,7 @@ handlers[event_hooks.out_shopping] = async function (hook) {
 handlers[event_hooks.out_station] = async function (hook) {
   const me = get_chara_talk(0);
   hook.arg = await select_action_in_station(4);
-  switch (Math.floor(Math.random() * 3)) {
+  switch (hook.arg) {
     case 0:
       switch (get_random_value(0, 1)) {
         case 0:
