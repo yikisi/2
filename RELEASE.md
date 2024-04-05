@@ -1,7 +1,7 @@
-# [EraUma v0.6](https://gitgud.io/SLeader/erauma/-/releases/v0.52)
+# [EraUma v0.6](https://gitgud.io/umaera/erauma/-/releases/v0.52)
 _Incoming_
 
-EraUma v0.6，适配 [EraElectron v1.2.0 (zero)](https://gitgud.io/SLeader/era-electron/-/releases/v1.2.0) 版本
+EraUma v0.6，适配 [EraElectron v1.2.0 (zero)](https://gitgud.io/umaera/era-electron/-/releases/v1.2.0) 版本
 
 ## Added
 * 翻译实现春乌拉拉的口上（进行中）；

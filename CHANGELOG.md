@@ -1,6 +1,6 @@
 # Changelog
 
-## [EraUma v0.52](https://gitgud.io/SLeader/erauma/-/releases/v0.52)
+## [EraUma v0.52](https://gitgud.io/umaera/erauma/-/releases/v0.52)
 _2024/3/1_
 
 v0.51的bug修复版，可以和v0.5的资源包一起使用，兼容v0.5的存档
@@ -26,10 +26,10 @@ v0.5的bug修复版，可以和v0.5的资源包一起使用，兼容v0.5的存�
 * 修复了一个在马娘结束育成时阻止其进入殿堂并卡死游戏的bug
 * 重命名比赛数据文件，使其与race-const.js中require的文件名相匹配，以支持在linux下的正常游玩
 
-## [EraUma v0.5](https://gitgud.io/SLeader/erauma/-/releases/v0.5)
+## [EraUma v0.5](https://gitgud.io/umaera/erauma/-/releases/v0.5)
 _2024/2/29_
 
-EraUma v0.5，适配 [EraElectron v1.1.0 (zero)](https://gitgud.io/SLeader/era-electron/-/releases/v1.1.1) 版本
+EraUma v0.5，适配 [EraElectron v1.1.0 (zero)](https://gitgud.io/umaera/era-electron/-/releases/v1.1.1) 版本
 
 自v0.5版本起将采用era游戏的内置版本号，低于最低支持版本生成的存档将无法打开并伴随警告
 
@@ -57,10 +57,10 @@ EraUma v0.5，适配 [EraElectron v1.1.0 (zero)](https://gitgud.io/SLeader/era-e
 
 因为加了新道具，变量位置变了，所以需要重开档
 
-## [EraUma v0.4.8](https://gitgud.io/SLeader/erauma/-/releases/v0.4.8)
+## [EraUma v0.4.8](https://gitgud.io/umaera/erauma/-/releases/v0.4.8)
 _2024/2/15_
 
-因为某资源网站莫名其妙给安排了个0.4.7版本（莫非是把压缩包后缀名的.7z理解成.7了？），该版本只能叫0.4.8了，适配ere引擎的[v1.0.2-mebius版本](https://gitgud.io/SLeader/era-electron/-/releases/v1.0.2-mebius)
+因为某资源网站莫名其妙给安排了个0.4.7版本（莫非是把压缩包后缀名的.7z理解成.7了？），该版本只能叫0.4.8了，适配ere引擎的[v1.0.2-mebius版本](https://gitgud.io/umaera/era-electron/-/releases/v1.0.2-mebius)
 
 ### Added
 * 新增远征系统以及与之相关的数个状态和技能

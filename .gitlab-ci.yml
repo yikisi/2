@@ -72,5 +72,5 @@ release:
     assets:
       links:
         - name: '[解压即玩包] $GAME_ALL_ZIP'
-          url: 'https://gitgud.io/SLeader/erauma/-/jobs/${FILE_JOB_ID}/artifacts/raw/dist/${GAME_ALL_ZIP}'
+          url: 'https://gitgud.io/umaera/erauma/-/jobs/${FILE_JOB_ID}/artifacts/raw/dist/${GAME_ALL_ZIP}'
           link_type: package

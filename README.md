@@ -24,7 +24,7 @@ EraUma预定每个月末发一次版本，版本号每次递增0.1，至第一�
 
 ## Tutorial
 
-EraUma发布采取分包制，即游戏本体包+游戏资源包拆分打包方式，使用时需要解压到同一个文件夹，才能通过[ERE引擎](https://gitgud.io/SLeader/era-electron/-/releases/permalink/latest)启动
+EraUma发布采取分包制，即游戏本体包+游戏资源包拆分打包方式，使用时需要解压到同一个文件夹，才能通过[ERE引擎](https://gitgud.io/umaera/era-electron/-/releases/permalink/latest)启动
 
 从ERE引擎顶部下拉菜单中【打开游戏文件夹】启动时，请确认打开的文件夹至少有以下结构：
 

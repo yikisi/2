@@ -134,12 +134,12 @@ module.exports = async () => {
           content: [
             {
               content: 'EraUma游戏发布页（需要登录gitgud.io）',
-              url: 'https://gitgud.io/SLeader/erauma/-/releases/permalink/latest',
+              url: 'https://gitgud.io/umaera/erauma/-/releases/permalink/latest',
             },
             { isBr: true },
             {
               content: 'EraElectron引擎发布页',
-              url: 'https://gitgud.io/SLeader/era-electron/-/releases/permalink/latest',
+              url: 'https://gitgud.io/umaera/era-electron/-/releases/permalink/latest',
             },
             { isBr: true },
             {
