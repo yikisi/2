@@ -12,10 +12,23 @@ handlers[check_stages.mec_love_buff] = () => 20 * era.get('status:17:迷恋');
 handlers[check_stages.mec_love_limit] = () =>
   era.get('status:17:心术') ? 40 : 0;
 
-handlers[check_stages.mec_race_buff] = () =>
-  2 * era.get('status:17:皇帝') -
-  5 * era.get('status:17:自毁') -
-  8 * era.get('status:17:神经衰弱') * !new LunaEduMarks().emperor;
+/** @param {PseudoUma} uma */
+handlers[check_stages.mec_race_customize] = (uma) => {
+  const emperor = era.get('status:17:皇帝'),
+    self_destruct = era.get('status:17:自毁'),
+    debuff = era.get('status:17:神经衰弱') * !new LunaEduMarks().emperor;
+  if (emperor) {
+    uma.attr_buffs.forEach((l) => l.push('+2%[皇帝]'));
+  }
+  if (self_destruct) {
+    uma.attr_buffs.forEach((l) => l.push('-5%[自毁]'));
+  }
+  if (debuff) {
+    uma.attr_buffs.forEach((l) =>
+      l.push(`-${8 * debuff}%[神经衰弱(${debuff})]`),
+    );
+  }
+};
 
 handlers[check_stages.mec_relation_buff] = () =>
   -20 * era.get('status:17:心术');

@@ -18,6 +18,52 @@ const {
 
 /**
  * @param {number} chara_id
+ * @param {number} val
+ * @returns {boolean}
+ */
+function sys_change_motivation(chara_id, val) {
+  if (!chara_id || era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48) {
+    return false;
+  }
+  if (val > 0 && era.get(`status:${chara_id}:头风`)) {
+    return false;
+  }
+  const delta_change = era.get(`talent:${chara_id}:情感活动`);
+  let delta = val;
+  if (delta > 1) {
+    delta += delta_change;
+  }
+  if (delta < -1) {
+    delta -= delta_change;
+  }
+  const motivation = era.get(`cflag:${chara_id}:干劲`) || 0,
+    motivation_limit = Math.max(
+      Math.min(
+        2 -
+          Math.floor(era.get(`base:${chara_id}:压力`) / 2500) +
+          sys_call_mec(chara_id, check_stages.mec_motivation),
+        2,
+      ),
+      -2,
+    ),
+    new_val = Math.max(Math.min(motivation + delta, motivation_limit), -2);
+  if (new_val !== motivation) {
+    era.set(`cflag:${chara_id}:干劲`, new_val);
+    era.print([
+      get_chara_talk(chara_id).get_colored_name(),
+      ' 的干劲现在是 ',
+      {
+        content: `${motivation_names[new_val + 2]}`,
+        color: motivation_colors[new_val + 2],
+      },
+    ]);
+    return true;
+  }
+  return false;
+}
+
+/**
+ * @param {number} chara_id
  * @param {number} _val
  */
 function sys_change_lust(chara_id, _val) {
@@ -34,7 +80,10 @@ function sys_change_lust(chara_id, _val) {
  * @param {number} _val
  */
 function sys_change_pressure(chara_id, _val) {
-  return (
+  if (!_val) {
+    return era.get(`base:${chara_id}:压力`);
+  }
+  const ret =
     era.get('flag:压力获取') &&
     chara_id &&
     era.add(
@@ -48,8 +97,9 @@ function sys_change_pressure(chara_id, _val) {
               (1 + (era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48)),
           )
         : _val,
-    )
-  );
+    );
+  sys_change_motivation(chara_id, 0);
+  return ret;
 }
 
 module.exports = {
@@ -157,51 +207,7 @@ module.exports = {
     return ret;
   },
   sys_change_lust,
-  /**
-   * @param {number} chara_id
-   * @param {number} val
-   * @returns {boolean}
-   */
-  sys_change_motivation(chara_id, val) {
-    if (!chara_id || era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48) {
-      return false;
-    }
-    if (val > 0 && era.get(`status:${chara_id}:头风`)) {
-      return false;
-    }
-    const delta_change = era.get(`talent:${chara_id}:情感活动`);
-    let delta = val;
-    if (delta > 1) {
-      delta += delta_change;
-    }
-    if (delta < -1) {
-      delta -= delta_change;
-    }
-    const motivation = era.get(`cflag:${chara_id}:干劲`) || 0,
-      motivation_limit = Math.max(
-        Math.min(
-          2 -
-            Math.floor(era.get(`base:${chara_id}:压力`) / 2500) +
-            sys_call_mec(chara_id, check_stages.mec_motivation),
-          2,
-        ),
-        -2,
-      ),
-      new_val = Math.max(Math.min(motivation + delta, motivation_limit), -2);
-    if (new_val !== motivation) {
-      era.set(`cflag:${chara_id}:干劲`, new_val);
-      era.print([
-        get_chara_talk(chara_id).get_colored_name(),
-        ' 的干劲现在是 ',
-        {
-          content: `${motivation_names[new_val + 2]}`,
-          color: motivation_colors[new_val + 2],
-        },
-      ]);
-      return true;
-    }
-    return false;
-  },
+  sys_change_motivation,
   sys_change_pressure,
   /**
    * @param {number} chara_id

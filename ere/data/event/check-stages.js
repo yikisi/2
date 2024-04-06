@@ -14,7 +14,7 @@ const stages = {
   mec_maxbase_buff: 0,
   mec_motivation: 0,
   mec_pressure_buff: 0,
-  mec_race_buff: 0,
+  mec_race_customize: 0,
   mec_race_cloth: 0,
   mec_relation_buff: 0,
   mec_sex_acceptable: 0,

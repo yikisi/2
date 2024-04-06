@@ -63,7 +63,7 @@ handlers[check_stages.mec_race_cloth] = (chara_id) => {
   return [`${base}${temp}`, base, `${base}_运`, 'default'];
 };
 
-handlers[check_stages.mec_race_buff] = () => 0;
+handlers[check_stages.mec_race_customize] = () => {};
 
 handlers[check_stages.mec_relation_buff] = () => 0;
 

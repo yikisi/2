@@ -40,8 +40,12 @@ handlers[check_stages.mec_callname_customize] = () => {
 
 handlers[check_stages.mec_motivation] = () => -1 * era.get('status:37:虚弱');
 
-handlers[check_stages.mec_race_buff] = () =>
-  0.5 * era.get('status:37:荣耀德比');
+/** @param {PseudoUma} uma */
+handlers[check_stages.mec_race_customize] = (uma) => {
+  if (era.get('status:37:荣耀德比')) {
+    uma.attr_buffs.forEach((l) => l.push('+50%[荣耀德比]'));
+  }
+};
 
 handlers[check_stages.mec_success_rate] = () =>
   5 * (era.get('status:37:必行之事') - era.get('status:37:分心'));

@@ -17,7 +17,11 @@ module.exports = (mec_type) => {
       });
     }
     if (era.get('status:0:马语者')) {
-      ret_list.push({ color: buff_colors[2], content: '马语者' });
+      ret_list.push({
+        color: buff_colors[2],
+        key: '马语者',
+        content: `马语者(${era.get('status:0:马语者')})`,
+      });
     }
     if (era.get('status:0:好感度镜片')) {
       ret_list.push({

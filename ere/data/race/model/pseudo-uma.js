@@ -1,3 +1,5 @@
+const { attr_names } = require('#/data/train-const');
+
 class RaceSkill {
   /**
    * @param {UmaSkill} skill
@@ -18,23 +20,65 @@ class RaceSkill {
 }
 
 class PseudoUma {
+  static RaceSkill = RaceSkill;
+
   // 需要通过construcor提供的值
-  // 角色编号
+  /**
+   * 角色编号
+   * @type {number}
+   */
   index_chara;
-  // 干劲
+  /**
+   * 干劲
+   * @type {number}
+   */
   motivation;
-  // 五属性，用attrEnum作为下标取
+  /**
+   * 五属性，用attrEnum作为下标取
+   * @type {number[]}
+   */
   attrs;
-  // 本次使用的跑法
+  /**
+   * 本次使用的跑法
+   * @type {number}
+   */
   style;
-  // 跑法适性表 决定赛中智力
+  /**
+   * 跑法适性表 决定赛中智力
+   * @type {number[]}
+   */
   adapt_style_list;
-  // 赛程适性表 决定速度和加速度等
+  /**
+   * 赛程适性表 决定速度和加速度等
+   * @type {number[]}
+   */
   adapt_distance_list;
-  // 地面适性表 决定加速度
+  /**
+   * 地面适性表 决定加速度
+   * @type {number[]}
+   */
   adapt_ground_list;
-  // 技能数组
+  /**
+   * 技能数组
+   * @type {RaceSkill[]}
+   */
   list_skill;
+
+  /**
+   * 五围加成
+   * @type {string[][]}
+   */
+  attr_buffs;
+  /**
+   * 场地加成
+   * @type {string[]}
+   */
+  ground_buffs;
+  /**
+   * 距离加成
+   * @type {string[]}
+   */
+  dis_buffs;
 
   // 不需要通过constructor提供的值 在别的地方计算
   // 赛道号
@@ -148,8 +192,11 @@ class PseudoUma {
     this.adapt_distance_list = adapt_distance_list;
     this.adapt_ground_list = adapt_ground_list;
     this.list_skill = skills.map((item) => new RaceSkill(item));
+
+    this.attr_buffs = attr_names.map(() => []);
+    this.ground_buffs = [];
+    this.dis_buffs = [];
   }
 }
 
 module.exports = PseudoUma;
-module.exports.RaceSkill = RaceSkill;

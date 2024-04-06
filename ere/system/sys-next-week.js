@@ -70,7 +70,7 @@ async function sys_next_week() {
   era.set('status:0:沉睡', 1);
   era.set('status:0:熬夜', 0);
   era.set('status:0:摸鱼', 0);
-  era.set('status:0:马语者', 0);
+  era.get('status:0:马语者') && era.add('status:0:马语者', -1);
 
   randomly_interact(in_team_list);
   // 极端事件判定
