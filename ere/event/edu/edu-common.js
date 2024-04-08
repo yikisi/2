@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const get_palace_info = require('#/event/edu/snippets/get-palace-info');
@@ -15,7 +16,6 @@ const { location_enum, location_name } = require('#/data/locations');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_rewards } = require('#/data/race/race-const');
 const { fumble_result, attr_enum } = require('#/data/train-const');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 /** @type {Record<string,function(number,HookArg,Record<string,*>,EventObject):Promise<*>>} */
 const handlers = {};

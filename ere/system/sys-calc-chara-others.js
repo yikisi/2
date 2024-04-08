@@ -96,7 +96,7 @@ function like_chara(target, aim, val, to_be_shown, extra_love) {
               era.get('flag:好感上升加成') -
               25 * sys_check_remote(target) -
               50 * (era.get(`status:${target}:讨厌药`) > 0) +
-              sys_call_mec(17, check_stages.mec_relation_buff))) /
+              sys_call_mec(target, check_stages.mec_relation_buff))) /
             1000 +
             3 * era.get(`talent:${target}:自信程度`),
           1,
