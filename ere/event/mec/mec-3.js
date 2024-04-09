@@ -10,6 +10,14 @@ handlers[check_stages.mec_action_debuff] = handlers[
   check_stages.mec_pressure_buff
 ] = () => 0.1 * era.get('status:3:腿伤');
 
+handlers[check_stages.mec_callname_customize] = () => {
+  if (era.get('relation:3:0') > 375) {
+    era.set('callname:3:0', '训\\练/员');
+  } else {
+    era.set('callname:3:0', '训练员');
+  }
+};
+
 handlers[check_stages.mec_maxbase_buff] = () => -200 * era.get('status:3:腿伤');
 
 handlers[check_stages.mec_race_cloth] = () => {

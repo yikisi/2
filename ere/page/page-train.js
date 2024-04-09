@@ -245,7 +245,7 @@ module.exports = async () => {
     era.printMultiColumns(
       attr_names.map((e, i) => {
         const train_level =
-          beach_level || era.get(`abl:${chara_id}:${e}训练等级`) || 0;
+          beach_level || era.get(`abl:${chara_id}:${e}训练等级`);
         return {
           accelerator: 200 + i,
           config: {

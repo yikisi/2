@@ -5,6 +5,10 @@ const { location_enum } = require('#/data/locations');
 
 const handlers = {};
 
+handlers[check_stages.mec_callname_customize] = () => {
+  era.set('callname:205:0', '训练员');
+};
+
 /** @param {{loc:number}} extra_flag */
 handlers[check_stages.mec_foreign_debuff] = (extra_flag) => {
   if (extra_flag.loc !== location_enum.paris) {

@@ -36,7 +36,7 @@ function sys_change_motivation(chara_id, val) {
   if (delta < -1) {
     delta -= delta_change;
   }
-  const motivation = era.get(`cflag:${chara_id}:干劲`) || 0,
+  const motivation = era.get(`cflag:${chara_id}:干劲`),
     motivation_limit = Math.max(
       Math.min(
         2 -

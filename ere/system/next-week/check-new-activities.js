@@ -243,15 +243,15 @@ async function check_new_activities(cur_round, in_team_list) {
         foreign_list.forEach((chara_id) => {
           era.set(
             `status:${chara_id}:语言不通`,
-            Math.ceil(era.get(`status:${chara_id}:语言不通`) / 2) || 0,
+            Math.ceil(era.get(`status:${chara_id}:语言不通`) / 2),
           );
           era.set(
             `status:${chara_id}:水土不服`,
-            Math.ceil(era.get(`status:${chara_id}:水土不服`) / 2) || 0,
+            Math.ceil(era.get(`status:${chara_id}:水土不服`) / 2),
           );
           era.set(
             `status:${chara_id}:客场作战`,
-            Math.ceil(era.get(`status:${chara_id}:客场作战`) / 2) || 0,
+            Math.ceil(era.get(`status:${chara_id}:客场作战`) / 2),
           );
         });
       }

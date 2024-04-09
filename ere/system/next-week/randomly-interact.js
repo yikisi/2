@@ -68,7 +68,7 @@ function randomly_interact(in_team_list) {
       get_success_base_reward(
         chara_id,
         train_attr,
-        era.get(`abl:${chara_id}:${attr_names[train_attr]}训练等级`) || 1,
+        era.get(`abl:${chara_id}:${attr_names[train_attr]}训练等级`),
         train_cost,
         changes,
         true,
