@@ -282,7 +282,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 205:
       era.drawLine();
-      if (!(await sys_get_random_event(event_hooks.foreign_travel)(chara_id))) {
+      if (!(await sys_get_random_event(event_hooks.foreign_travel)())) {
         era.drawLine();
         await sys_call_edu_event(chara_id, event_hooks.foreign_travel);
       }

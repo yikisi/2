@@ -537,14 +537,14 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       break;
     case 201:
       era.drawLine();
-      if (!(await sys_get_random_event(event_hooks.office_study)(chara_id))) {
+      if (!(await sys_get_random_event(event_hooks.office_study)())) {
         era.drawLine();
         await sys_call_daily_event(chara_id, event_hooks.office_study);
       }
       break;
     case 202:
       era.drawLine();
-      if (!(await sys_get_random_event(event_hooks.office_prepare)(chara_id))) {
+      if (!(await sys_get_random_event(event_hooks.office_prepare)())) {
         era.drawLine();
         await sys_call_daily_event(chara_id, event_hooks.office_prepare);
       }
@@ -565,14 +565,14 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       break;
     case 205:
       era.drawLine();
-      if (!(await sys_get_random_event(event_hooks.office_cook)(chara_id))) {
+      if (!(await sys_get_random_event(event_hooks.office_cook)())) {
         era.drawLine();
         await sys_call_daily_event(chara_id, event_hooks.office_cook);
       }
       break;
     case 206:
       era.drawLine();
-      if (!(await sys_get_random_event(event_hooks.office_rest)(chara_id))) {
+      if (!(await sys_get_random_event(event_hooks.office_rest)())) {
         era.drawLine();
         await sys_call_daily_event(chara_id, event_hooks.office_rest);
       }

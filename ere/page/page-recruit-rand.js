@@ -113,7 +113,7 @@ async function print_rec_page() {
                   disabled:
                     flag_limit || (cur_recruit && cur_recruit !== chara_id),
                 },
-                content: era.get(`callname:${chara_id}:-2`),
+                content: era.get(`callname:${chara_id}:-1`),
                 type: 'button',
               },
             ],

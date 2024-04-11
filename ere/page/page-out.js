@@ -39,7 +39,7 @@ async function out_page() {
   print_page_header();
   print_chara_info(chara_id, chara_info_type.out, sys_check_awake(301) && 301);
   era.drawLine();
-  if (!(await sys_get_random_event(event_hooks.out_start)(chara_id))) {
+  if (!(await sys_get_random_event(event_hooks.out_start)())) {
     const event_marks = new EventMarks(chara_id);
     const positions = [
       {
@@ -166,7 +166,9 @@ async function out_page() {
     era.drawLine();
     await era.printAndWait('回去了……');
     era.println();
-    await sys_get_random_event(event_hooks.back_school)();
+    await sys_get_random_event(event_hooks.back_school)({
+      loc: positions[aim]?.l,
+    });
   }
   era.set('flag:当前位置', location_enum.office);
 }

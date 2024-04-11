@@ -23,7 +23,7 @@ module.exports = async (location) => {
     location === location_enum.atrium
       ? event_hooks.school_atrium
       : event_hooks.school_rooftop;
-  if (!(await sys_get_random_event(hook)(chara_id))) {
+  if (!(await sys_get_random_event(hook)())) {
     era.drawLine();
     const vehicle = !chara_id && era.get('equip:0:单人载具');
     era.print([
@@ -38,7 +38,7 @@ module.exports = async (location) => {
     await call_daily_script(chara_id, hook);
     era.drawLine();
     await era.printAndWait('返回训练室了……');
-    await sys_get_random_event(event_hooks.back_school)();
+    await sys_get_random_event(event_hooks.back_school)({ loc: location });
   }
   era.set('flag:当前位置', location_enum.office);
 };
