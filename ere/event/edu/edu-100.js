@@ -358,8 +358,7 @@ handlers[event_hooks.week_start] = async () => {
     await era.printAndWait('………………');
     await era.printAndWait('与此同时，特雷森外的警局——');
     era.printButton(
-      `「警察同志，请你一定要相信我。我真的就只是担心自己担当的${chara_talk.get_uma_sex_title()}，而在后面偷偷的跟着${
-        chara_talk.sex
+      `「警察同志，请你一定要相信我。我真的就只是担心自己担当的${chara_talk.get_uma_sex_title()}，而在后面偷偷的跟着${chara_talk.sex
       }而已。我真的不是尾行痴汉！」`,
       1,
     );
@@ -401,8 +400,7 @@ handlers[event_hooks.week_start] = async () => {
       `在听说自己是因为“尾随${chara_talk.get_uma_sex_title()}”而进的监狱后，被骏川${chara_talk.get_adult_sex_title()}狠狠的白了一眼。`,
     );
     await era.printAndWait(
-      `回来的路上拼命的向骏川${chara_talk.get_adult_sex_title()}解释自己真的不是尾行痴汉。并出于诚意请${
-        chara_talk.sex
+      `回来的路上拼命的向骏川${chara_talk.get_adult_sex_title()}解释自己真的不是尾行痴汉。并出于诚意请${chara_talk.sex
       }来自己的休息室里吃宵夜。`,
     );
     await era.printAndWait(
@@ -613,8 +611,7 @@ handlers[event_hooks.week_start] = async () => {
     await era.input();
     await chara_talk.say_and_wait('啊哈哈~真暖和呢♥。');
     await era.printAndWait(
-      `早已习惯了各自存在的${sys_get_callname(0, 0)}和${
-        chara_talk.name
+      `早已习惯了各自存在的${sys_get_callname(0, 0)}和${chara_talk.name
       }，相互依偎着，坐在床炉之前。`,
     );
     era.printButton(
@@ -718,8 +715,7 @@ handlers[event_hooks.week_start] = async () => {
       '然而，就在这时，却听嘎登一声，休息室的大门被打开了——',
     );
     await era.printAndWait(
-      `骏川${chara_talk.get_adult_sex_title()}：「${
-        me.actual_name
+      `骏川${chara_talk.get_adult_sex_title()}：「${me.actual_name
       }在吗？这儿有一份你的快件……」`,
     );
     await era.printAndWait(
@@ -916,8 +912,7 @@ handlers[event_hooks.week_start] = async () => {
     era.printButton('「啊哈哈……你喜欢就好呢。」', 1);
     await era.input();
     await era.printAndWait(
-      `天台之上，身穿浴袍的${
-        chara_talk.sex
+      `天台之上，身穿浴袍的${chara_talk.sex
       }与头顶正冒着褐红色液体的${sys_get_callname(0, 0)}，互相表达着谢意。`,
     );
     await era.printAndWait(
@@ -940,8 +935,7 @@ handlers[event_hooks.week_start] = async () => {
       `骏川${chara_talk.get_adult_sex_title()}：「说奇锐骏的训练员捧着花束向奇锐骏求婚，然后强迫奇锐骏穿着浴袍在校内狂奔以表示爱意。」`,
     );
     await era.printAndWait(
-      `骏川${chara_talk.get_adult_sex_title()}：「有这回事吗，${
-        me.actual_name
+      `骏川${chara_talk.get_adult_sex_title()}：「有这回事吗，${me.actual_name
       }」`,
     );
     era.printButton('「………………」', 1);
@@ -1164,8 +1158,7 @@ handlers[event_hooks.week_start] = async () => {
       '（真不愧是八重同学啊……如此熟练得使用着呼吸法，在挥舞出了这么多次拳头后，就连汗都没有流下一滴——）',
     );
     await chara_talk.say_and_wait(
-      `（想要在这种攻势下一直坚持下去非常的艰难——但不管怎么说，我可是拳击手父亲的${
-        chara_talk.sex_code - 1 ? '女儿' : '儿子'
+      `（想要在这种攻势下一直坚持下去非常的艰难——但不管怎么说，我可是拳击手父亲的${chara_talk.sex_code - 1 ? '女儿' : '儿子'
       }！）`,
     );
     await chara_talk.say_and_wait('二…二…三…四！（*挥拳）');
@@ -1608,6 +1601,68 @@ handlers[event_hooks.week_start] = async () => {
       get_attr_and_print_in_event(0, [0, 0, 5, 10, 0], 0);
     }
     await era.waitAnyKey();
+  } else if (Math.random() < 0.2 && era.get('status:52:熬夜') == 1) {
+    era.println();
+    await print_event_name('在奇锐骏的膝枕上', chara_talk);
+    await era.printAndWait('…………');
+    await era.printAndWait('兴许是未能好好休息的缘故，今早总觉得睡眼惺忪。');
+    await era.printAndWait('真糟糕，马上就是训练的时间了；');
+    await era.printAndWait(
+      '作为一名成熟的训练员，可不能让奇锐骏看到懒散的这一面——',
+    );
+    await chara_talk.say_and_wait(`${callname}？`);
+    await era.printAndWait('——！？');
+    await chara_talk.say_and_wait('待喘息之际，已然出现身后。');
+    era.printButton('「奇、奇锐骏！？何时来的？」', 1);
+    await era.waitAnyKey();
+    await chara_talk.say_and_wait(
+      `很早就来了哦？只是${callname}看起来很累，所以一直没打扰哦~`,
+    );
+    await era.printAndWait(
+      `温和的话语下隐藏着无声的气息，身着红色运动服的${chara_talk.get_teen_sex_title}随即坐在白百合花旁的阶梯。`,
+    );
+    await chara_talk.say_and_wait(
+      `离训练开始还有一段时间……来休息一下吧，${callname}`,
+    );
+    await era.printAndWait(
+      '她一面拍着膝上的天府之地，一面招舞着右手诱我堕入幸福之所。',
+    );
+    await era.printAndWait('……一开始，我是拒绝的。');
+    await era.printAndWait('但那里真的很幸福……还散发着薄荷味的清香。');
+    await era.printAndWait('我或许有意得在避开她的视线，');
+    await era.printAndWait('但温暖的手掌已经附上了我的发梢。');
+    await era.printAndWait('随后，轻吟的歌尔在我耳边回荡——');
+    switch (Math.floor(Math.random() * 4)) {
+      case 0:
+        await chara_talk.say_and_wait('风来啦~雨来啦~雷公背着鼓来了~');
+        await chara_talk.say_and_wait('你敲敲~我敲敲~敲得雷公弯了腰~');
+        await chara_talk.say_and_wait('你砸砸~我砸砸~砸得雷公龇了牙~');
+        break;
+      case 1:
+        await chara_talk.say_and_wait('大大大~小小小~');
+        await chara_talk.say_and_wait('一二三四五六七~');
+        await chara_talk.say_and_wait('大大大~小小小~');
+        await chara_talk.say_and_wait('哆唻咪发嗦啦西~');
+        break;
+      case 2:
+        await chara_talk.say_and_wait('想快点告诉你多想天天在一起~');
+        await chara_talk.say_and_wait('研究十万个为什么的问题~');
+        await chara_talk.say_and_wait('快点告诉你明白一些大道理~');
+        await chara_talk.say_and_wait('朋友之间最看重是情谊~');
+        await chara_talk.say_and_wait('我的心放在你那里~');
+        break;
+      case 3:
+        await chara_talk.say_and_wait('月亮~在白莲花般的云朵里~穿行~');
+        await chara_talk.say_and_wait('晚风吹来一阵阵快乐的歌声~');
+        break;
+    }
+    await era.printAndWait('……………………');
+    await era.printAndWait('那并非是多么好听的歌谣，');
+    await era.printAndWait('硬要说的话，可能歌唱者还多少有些不着调。');
+    await era.printAndWait('但是……躺在膝枕之上，听着这样的歌谣，');
+    await era.printAndWait('总会感到由衷的安心——');
+    sys_change_attr_and_print(0, '体力', 30);
+    get_attr_and_print_in_event(100, [0, 0, 0, 10, 0], 0);
   }
 };
 
@@ -1618,8 +1673,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
     await print_event_name('出道战前·不安', chara_talk);
     await era.printAndWait('六月奇锐骏的出道战。');
     await era.printAndWait(
-      `赛场是在札幌附近的一所小型会场，作为参赛方，${sys_get_callname(0, 0)}和${
-        chara_talk.name
+      `赛场是在札幌附近的一所小型会场，作为参赛方，${sys_get_callname(0, 0)}和${chara_talk.name
       }提前一天就抵达了赛场。`,
     );
     await era.printAndWait('………………');
@@ -1810,8 +1864,7 @@ handlers[event_hooks.edu_end] = async () => {
     await era.printAndWait('气温虽然有所回升，但地面仍然湿冷。');
     await era.printAndWait('这是奇锐骏步入殿堂后的第三天。');
     await era.printAndWait(
-      `也是${sys_get_callname(0, 0)}和${
-        chara_talk.name
+      `也是${sys_get_callname(0, 0)}和${chara_talk.name
       }来到北海道度假的第一天。`,
     );
     era.drawLine({ content: '【北海道 民俗旅馆】' });
@@ -2062,8 +2115,7 @@ handlers[event_hooks.edu_end] = async () => {
       '那是苏格拉底的麦穗，震耳欲隆，却又几近高尚者的温柔。',
     );
     await era.printAndWait(
-      `月光之下，星光璀璨，灰色的${chara_talk.get_teen_sex_title()}，许下了${
-        chara_talk.sex
+      `月光之下，星光璀璨，灰色的${chara_talk.get_teen_sex_title()}，许下了${chara_talk.sex
       }的诺言。`,
     );
     await chara_talk.say_and_wait('既然你要去巴黎的话，那么我也会跟过去。');
@@ -2081,8 +2133,7 @@ handlers[event_hooks.edu_end] = async () => {
     await era.printAndWait('气温虽然有所回升，但地面仍然湿冷。');
     await era.printAndWait('这是奇锐骏步入殿堂后的第六天。');
     await era.printAndWait(
-      `也是曾一度相濡以沫的${sys_get_callname(0, 0)}和${
-        chara_talk.name
+      `也是曾一度相濡以沫的${sys_get_callname(0, 0)}和${chara_talk.name
       }，即将分离的第一年。`,
     );
     era.drawLine({ content: '【东京 国际机场】' });
@@ -2162,8 +2213,7 @@ handlers[event_hooks.edu_end] = async () => {
       '北方风味：「无悔！既然这是你做出的决定，那么我们当然会无条件支持你的。」',
     );
     await era.printAndWait(
-      `骏川${chara_talk.get_adult_sex_title()}：「不过……奇锐骏${
-        chara_talk.sex
+      `骏川${chara_talk.get_adult_sex_title()}：「不过……奇锐骏${chara_talk.sex
       }今天为什么没有来送行呢？」`,
     );
     era.printButton(
@@ -2190,8 +2240,7 @@ handlers[event_hooks.edu_end] = async () => {
     );
     await era.input();
     await era.printAndWait(
-      `骏川${chara_talk.get_adult_sex_title()}：「一路顺风，${
-        me.actual_name
+      `骏川${chara_talk.get_adult_sex_title()}：「一路顺风，${me.actual_name
       }。」`,
     );
     await era.printAndWait('北方风味：「宏图！学成后，记得早日归来！」');
@@ -2261,8 +2310,7 @@ handlers[event_hooks.edu_end] = async () => {
       `头戴绿色帽子的${chara_talk.get_phy_sex_title()}：「——不去跟他告别吗？」`,
     );
     await era.printAndWait(
-      `身旁，好心的${chara_talk.get_phy_sex_title()}，直立在${
-        chara_talk.sex
+      `身旁，好心的${chara_talk.get_phy_sex_title()}，直立在${chara_talk.sex
       }的侧方。`,
     );
     await era.printAndWait(
