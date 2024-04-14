@@ -7,6 +7,7 @@ const { sort_list } = require('#/utils/list-utils');
 const check_stages = require('#/data/event/check-stages');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const { adaptability_names, attr_names } = require('#/data/train-const');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /**
  * @param {number} chara_id
@@ -19,7 +20,7 @@ function sys_get_chara_pseudo(chara_id) {
     debuff = era.get(`status:${chara_id}:客场作战`),
     uma = new PseudoUma(
       chara_id,
-      era.get(`callname:${chara_id}:-2`),
+      get_chara_talk(chara_id).get_full_name(),
       era.get(`cflag:${chara_id}:干劲`),
       attr_names.map((attr) => era.get(`base:${chara_id}:${attr}`)),
       era.get(`cflag:${chara_id}:跑法`),
@@ -70,13 +71,19 @@ function sys_get_chara_pseudo(chara_id) {
       (e) => e.buff,
     );
   });
-  uma.dis_buffs = sort_list(
-    uma.dis_buffs,
-    (buff) => Number(buff.substring(0, buff.indexOf('['))),
-    false,
+  uma.adapt_ground_list = uma.adapt_ground_list.map((e) =>
+    Math.min(Math.max(e, 0), 7),
   );
   uma.ground_buffs = sort_list(
     uma.ground_buffs,
+    (buff) => Number(buff.substring(0, buff.indexOf('['))),
+    false,
+  );
+  uma.adapt_distance_list = uma.adapt_distance_list.map((e) =>
+    Math.min(Math.max(e, 0), 7),
+  );
+  uma.dis_buffs = sort_list(
+    uma.dis_buffs,
     (buff) => Number(buff.substring(0, buff.indexOf('['))),
     false,
   );

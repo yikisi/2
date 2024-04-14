@@ -24,13 +24,13 @@ rotation_names[rotation_enum.straight] = '直';
 //年龄限制：两岁/三岁/三岁以上/四岁以上
 const limit_enum = {
   // 001
-  exact2: 1,
+  exact2: 0b001,
   // 010
-  exact3: 2,
+  exact3: 0b010,
   // 110
-  post3: 6,
+  post3: 0b110,
   // 100
-  post4: 4,
+  post4: 0b100,
 };
 
 const mess_enum = { well: 0, semi: 1, heavy: 2, bad: 3 };
@@ -203,6 +203,11 @@ module.exports = class RaceInfo {
    */
   gates;
   /**
+   * 传奇人数
+   * @type {number}
+   */
+  legend_count;
+  /**
    * 育成时间限制（年）
    * @type {number}
    */
@@ -249,6 +254,7 @@ module.exports = class RaceInfo {
    * @param {number} distance
    * @param {number} rotation
    * @param {number} gates
+   * @param {number} legend_count
    * @param {number} limit
    * @param {number} date
    * @param {number} prize
@@ -264,6 +270,7 @@ module.exports = class RaceInfo {
     distance,
     rotation,
     gates,
+    legend_count,
     limit,
     date,
     prize,
@@ -279,6 +286,7 @@ module.exports = class RaceInfo {
     this.distance = distance;
     this.rotation = rotation;
     this.gates = gates;
+    this.legend_count = legend_count;
     this.limit = limit;
     this.date = date;
     this.prize =

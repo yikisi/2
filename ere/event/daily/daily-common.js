@@ -308,11 +308,11 @@ handlers[event_hooks.talk] = async (chara_id) => {
         ],
         [
           chara.get_colored_name(),
-          ' 兴高采烈地在赛道上蹦蹦跳跳的，看起来干劲满满。',
+          ' 愉快地在赛道上进行着热身运动，看起来干劲不错。',
         ],
         [
           chara.get_colored_name(),
-          ' 愉快地在赛道上进行着热身运动，看起来干劲不错。',
+          ' 兴高采烈地在赛道上蹦蹦跳跳的，看起来干劲满满。',
         ],
       ];
       talk_arr = [talk_arr[era.get(`cflag:${chara_id}:干劲`) + 2]];

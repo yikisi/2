@@ -71,14 +71,31 @@ module.exports = async () => {
         ' 甚至一度以为自己在白日做梦。',
       ]);
       await era.printAndWait([
-        '直到 ',
-        me.get_colored_name(),
-        ' 在惊诧中被大家围着报喜，又稀里糊涂看到 ',
+        '直到在惊诧中被大家围着问东问西，又稀里糊涂看到 ',
         urara.get_colored_name(),
         ' 站上Live的C位后，才终于确信一切都是事实。',
       ]);
       await era.printAndWait([
-        '因察觉到 ',
+        '而在那之后，',
+        urara.get_colored_name(),
+        ' 被朋友们保护的很好，但 ',
+        me.get_colored_name(),
+        ' 现在只要独自一人就会各种麻烦事飞个不停。',
+      ]);
+      await era.printAndWait([
+        '不过即使如今「在照顾 ',
+        urara.get_colored_name(),
+        '」已经变得像个逃难借口似的，在那之上的压力可不能给到 ',
+        urara.get_colored_name(),
+        ' 啊。',
+      ]);
+      await era.printAndWait([
+        '大人的麻烦事，好歹由大人自己烦恼吧。关上电脑，',
+        me.get_colored_name(),
+        ' 轻声叹了口气。',
+      ]);
+      await era.printAndWait([
+        '察觉到 ',
         callname,
         ' 的动作而准备起身的小',
         urara.get_uma_sex_title(),
@@ -185,7 +202,7 @@ module.exports = async () => {
 
   if (era.get('love:52') >= 75) {
     await era.printAndWait(
-      '「恋人赠予的耳套与尾饰是爱的证明」虽然古事记上完全没这回事，但在目前的学生间非常流行。',
+      '「恋人赠予的耳套与尾饰是爱的证明」，古事记上完全没记载这回事，但在目前的学生间非常流行。',
     );
     await era.printAndWait([
       '虽然借着圣诞节送并不贵重的小饰品是有些卑鄙，但伴随小',

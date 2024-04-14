@@ -306,7 +306,7 @@ module.exports = (handlers) => {
       urara.get_colored_name(),
       ' 手中装着可能会是不可名状之物的袋子，',
       me.get_colored_name(),
-      ' 最终没敢把里面的盒子打开检查。',
+      ' 最终还是没敢把里面的盒子打开检查。',
     ]);
     await era.printAndWait([
       '不是吃过了还不想信任 ',
@@ -319,9 +319,9 @@ module.exports = (handlers) => {
       ' 恐怕真的是个炼金术士吧……',
     ]);
     await era.printAndWait([
-      '但在最后，',
+      '最终，',
       me.get_colored_name(),
-      ' 还是放弃了无意义的思考——总之 ',
+      ' 放弃了无意义的思考——总之 ',
       urara.get_colored_name(),
       ' 是天才就对了！',
     ]);
@@ -544,24 +544,20 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '当然 ',
       me.get_colored_name(),
-      ' 也明白',
+      ' 现在也明白了',
       urara.sex,
       '平时总垫底的原因：本来就集中力不足，再加上是日常比赛就更用不上力了。',
     ]);
     await era.printAndWait([
-      '倒也没必要苛求，',
+      '没必要苛求，',
       urara.get_uma_sex_title(),
       '的身体是有极限的，日常没必要绷得太紧，对 ',
       urara.get_colored_name(),
-      ' 来说就更是如此了。',
+      ' 来说这点则更重要了。',
     ]);
-    await era.printAndWait([
-      '最初时 ',
-      me.get_colored_name(),
-      ' 偶尔还会觉得这是需要解决的问题，但现在 ',
-      me.get_colored_name(),
-      ' 已经差不多摸清了最适合小担当的成长模式。',
-    ]);
+    await era.printAndWait(
+      '最初时偶尔还会觉得这是需要解决的问题，但现在的话已经差不多摸清最适合小担当的成长模式了。',
+    );
     await era.printAndWait([
       '现在只要能在正赛之前一点点积累胜利的条件，并在正赛时拿出成绩，对于 ',
       urara.get_colored_name(),
@@ -645,9 +641,7 @@ module.exports = (handlers) => {
       urara.get_colored_name(),
       ' 的描述，',
       me.get_colored_name(),
-      ' 很快便回想起了在那个宣传工作的下午与 ',
-      me.get_colored_name(),
-      ' 攀谈的女性。',
+      ' 很快便回想起了在那个宣传工作的下午与自己攀谈的女性。',
     ]);
     await era.printAndWait([
       '不过既然 ',
@@ -806,7 +800,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '听到 ',
       urara.get_colored_name(),
-      ' 不假思索的回答 ',
+      ' 不假思索的回答，',
       me.get_colored_name(),
       ' 有点欣慰，但又立刻发觉哪里不对。「',
       callname,

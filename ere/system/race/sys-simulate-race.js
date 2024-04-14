@@ -11,14 +11,14 @@ const {
   mod_stamina_cost_mess_grass,
   mod_stamina_cost_mess_dirt,
   raceDecel,
-} = require('#/data/race/race-const.json');
+} = require('#/data/race/race-sim-const.js');
 const RaceInfo = require('#/data/race/model/race-info');
 
 /**
  * @param {PseudoUma[]} list_chara
  * @param {RaceInfo} race_info
  */
-module.exports = (list_chara, race_info) => {
+function sys_sim_race(list_chara, race_info) {
   const count_uma = list_chara.length;
   const mod_stamina_cost_mess =
     race_info.ground === RaceInfo.ground_enum.grass
@@ -42,7 +42,7 @@ module.exports = (list_chara, race_info) => {
   //计算出闸技能并赋予初始速度与加速度
   for (let itemUma of list_chara) {
     let start_delay = Math.random() * 0.1;
-    let list_skill_start = itemUma.skills.filter(
+    let list_skill_start = itemUma.list_skill.filter(
       (itemSkill) =>
         itemSkill.skilldata.typeStartConst || itemSkill.skilldata.typeStartMod,
     );
@@ -89,7 +89,7 @@ module.exports = (list_chara, race_info) => {
     }
 
     //每次筛出高速相机列表中位置最靠前的马娘并加入完赛列表
-    while (list_msec_cam) {
+    while (list_msec_cam.length) {
       let cam_rank = list_finished.length + 1;
       let cam_chara = list_msec_cam.reduce(
         (prev, curr) => (prev.race.location > curr.race.location ? prev : curr),
@@ -193,9 +193,9 @@ module.exports = (list_chara, race_info) => {
         }
       }
       //读取赛程阶段 方法略有不同
-      for (let indSeg of race_info.seg_phases) {
+      for (let indSeg of race_info.phases) {
         if (
-          itemUma.race.location >= race_info.seg_phases[indSeg] &&
+          itemUma.race.location >= race_info.phases[indSeg] &&
           itemUma.race.location < race_info.span
         ) {
           itemUma.race.groundCurr.phase = indSeg;
@@ -428,4 +428,6 @@ module.exports = (list_chara, race_info) => {
       record_skill_list.push(record_skill_sec);
     }
   }
-};
+}
+
+module.exports = sys_sim_race;

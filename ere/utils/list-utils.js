@@ -1,8 +1,9 @@
 const { get_random_value } = require('#/utils/value-utils');
 
 /**
- * @param {*[]} list
- * @returns {*}
+ * @template T
+ * @param {T[]} list
+ * @returns {T}
  */
 function get_random_entry(list) {
   if (!list.length) {
@@ -15,10 +16,11 @@ function get_random_entry(list) {
 }
 
 /**
- * @param {*[]} list
- * @param {(any)=>number} order_by
+ * @template T
+ * @param {T[]} list
+ * @param {(T)=>number} order_by
  * @param {boolean} [is_asc]
- * @returns {*[]}
+ * @returns {T[]}
  */
 function sort_list(list, order_by, is_asc) {
   if (typeof order_by !== 'function') {
@@ -37,9 +39,10 @@ function sort_list(list, order_by, is_asc) {
 
 module.exports = {
   /**
-   * @param {*[]} list
+   * @template T
+   * @param {T[]} list
    * @param {number} max
-   * @returns {*[]}
+   * @returns {T[]}
    */
   gacha(list, max) {
     if (max <= 0) {
@@ -66,8 +69,9 @@ module.exports = {
   },
   get_random_entry,
   /**
-   * @param {*[]} list
-   * @param {function(*):string} key_cb
+   * @template T
+   * @param {T[]} list
+   * @param {function(T):string} key_cb
    */
   distinct_list(list, key_cb) {
     /** @type {Record<string,{entry:*,index:number}>} */

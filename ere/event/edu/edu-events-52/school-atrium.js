@@ -205,14 +205,14 @@ module.exports = (handlers) => {
       '但那是你很喜欢的缎带吧？既然很喜欢，就代表很重要！没关系，一定能找到的！',
     );
     await era.printAndWait([
-      '不知道第几次打断了想要打退堂鼓的 ',
+      '不知道第几次打断想要打退堂鼓的 ',
       rice.get_colored_name(),
       '，',
       urara.get_colored_name(),
-      ' 带着可靠的笑容对一旁的好友竖起来大拇指。',
+      ' 带着可靠的笑容对一旁的好友再次竖起了大拇指。',
     ]);
     await urara.say_and_wait([
-      '没问题的，我们一定能找到的！啊对了，',
+      '没问题，我们一定能找到的！啊对了，',
       callname,
       '，我们现在分开找吧——',
     ]);
@@ -228,7 +228,7 @@ module.exports = (handlers) => {
     ]);
 
     era.printButton(
-      '「不，可不能一直都这么说自己啊，今天天气预报本来就说过有雨来着。」',
+      '「不，可不能一直这么说自己啊，今天天气预报本来就说过有雨来着。」',
       1,
     );
     await era.input();
@@ -250,7 +250,7 @@ module.exports = (handlers) => {
       '「没错，再坚持一下，我们有三个人呢。」（体力-100 根性+20）',
       1,
     );
-    era.printButton('「现在已经开始下雨了，总之先去一趟吧。」（耐力+10）', 2);
+    era.printButton('「现在已经开始下雨了，总之先回去一趟吧。」（耐力+10）', 2);
     if ((await era.input()) === 1) {
       await urara.say_and_wait([
         '没错，',
@@ -359,7 +359,7 @@ module.exports = (handlers) => {
         me.get_colored_name(),
         ' 也向小',
         urara.get_uma_sex_title(),
-        '的宿管发去了消息……',
+        '的宿管和室友发去了消息……',
       ]);
       era.println();
       flags.wait_flag = get_attr_and_print_in_event(
@@ -477,7 +477,7 @@ module.exports = (handlers) => {
       ]);
     }
     await era.printAndWait([
-      '而在采访暂停的间隙，',
+      '于是在采访暂停的间隙，',
       me.get_colored_name(),
       ' 作为负责接头的监护人也自然开始和采访组交流起了下一步的打算。',
     ]);
@@ -522,7 +522,7 @@ module.exports = (handlers) => {
     ]);
     await rice.say_and_wait('可、可是……！');
     await era.printAndWait(
-      '看一眼就能明白，一边是日常考虑的太多而焦虑过度，另一边则是一如既往的兴致太旺。',
+      '看一眼就能明白，一边是日常考虑过多而焦虑过度，另一边则是一如既往的兴致太旺。',
     );
 
     era.print([

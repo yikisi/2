@@ -12,7 +12,7 @@ const common_palace_check = require('#/event/check/snippets/common-palace-check'
 const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { log_600m2 } = require('#/utils/value-utils');
+const { log_600m4 } = require('#/utils/value-utils');
 
 const { attr_change_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
@@ -69,8 +69,14 @@ handlers[check_stages.prison] = (chara_id) => {
     case 3:
       ratio /= 20;
   }
-  era.logger.debug(`角色 ${chara_id} 地下室：${(ratio * 100).toFixed(2)}%`);
-  return ratio >= 1 || Math.random() < ratio;
+  const dice = Math.random();
+  era.logger.debug(
+    `角色 ${chara_id} 地下室：${(ratio * 100).toFixed(2)}% 掷骰：${dice} 计算：
+    ${ratio}=${delta > 0}(开关)*(0.05(基础)+${
+      delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)
+    }(好感爱慕)-${0.25 * get_action_debuff(chara_id)}(行动debuff))`,
+  );
+  return ratio >= 1 || dice < ratio;
 };
 
 handlers[check_stages.rape_in_sleeping] = (chara_id) => {
@@ -94,8 +100,8 @@ handlers[check_stages.rape_in_sleeping] = (chara_id) => {
   }
   let ratio =
     Math.pow(2, Math.min(delta / 6 - 100, 0)) * 0.3 +
-    Math.pow(2, era.get(`base:${chara_id}:性欲`) / 2000 - 5) +
-    0.1 * era.get(`mark:${chara_id}:欢愉`) +
+    Math.pow(2, era.get(`base:${chara_id}:性欲`) / 2000 - 5) *
+      (0.7 + 0.1 * era.get(`mark:${chara_id}:欢愉`)) +
     0.05 * era.get(`talent:${chara_id}:工口意愿`) -
     0.5 * get_action_debuff(chara_id);
   if (punish_level >= 2) {
@@ -103,7 +109,15 @@ handlers[check_stages.rape_in_sleeping] = (chara_id) => {
   }
   const dice = Math.random();
   era.logger.debug(
-    `角色 ${chara_id} 睡奸：${(ratio * 100).toFixed(2)}%；掷骰：${dice}`,
+    `角色 ${chara_id} 睡奸：${(ratio * 100).toFixed(2)}%；掷骰：${dice} 计算：
+    ${ratio}=${
+      Math.pow(2, Math.min(delta / 6 - 100, 0)) * 0.3
+    }(好感爱慕)+${Math.pow(
+      2,
+      era.get(`base:${chara_id}:性欲`) / 2000 - 5,
+    )}(性欲)*(0.7+${0.1 * era.get(`mark:${chara_id}:欢愉`)}(欢愉))+${
+      0.05 * era.get(`talent:${chara_id}:工口意愿`)
+    }(好色)-${0.5 * get_action_debuff(chara_id)}(行动debuff)`,
   );
   return ratio >= 1 || dice < ratio;
 };
@@ -120,16 +134,24 @@ handlers[check_stages.want_make_love] = (chara_id) => {
   let ratio = 0;
   if (love >= 50) {
     ratio =
-      Math.log(6 * love - era.get(`relation:${chara_id}:0`) + 1) / log_600m2 +
-      Math.pow(2, era.get(`base:${chara_id}:性欲`) / 1250 - 8) * 0.75 +
-      0.1 * era.get(`mark:${chara_id}:欢愉`) +
+      Math.log(6 * love - era.get(`relation:${chara_id}:0`) + 1) / log_600m4 +
+      Math.pow(2, era.get(`base:${chara_id}:性欲`) / 1250 - 8) *
+        (0.7 + 0.1 * era.get(`mark:${chara_id}:欢愉`)) +
       0.05 * era.get(`talent:${chara_id}:工口意愿`) -
       0.5 * get_action_debuff(chara_id);
     ratio *= (3 - era.get(`mark:${chara_id}:反抗`)) / 3;
   }
   const dice = Math.random();
   era.logger.debug(
-    `角色 ${chara_id} 求爱：${(ratio * 100).toFixed(2)}%；掷骰：${dice}`,
+    `角色 ${chara_id} 求爱：${(ratio * 100).toFixed(2)}%；掷骰：${dice} 计算：
+    ${ratio}=${
+      Math.log(6 * love - era.get(`relation:${chara_id}:0`) + 1) / log_600m4
+    }(好感爱慕)+${Math.pow(
+      2,
+      era.get(`base:${chara_id}:性欲`) / 1250 - 8,
+    )}(性欲)*(0.7+${0.1 * era.get(`mark:${chara_id}:欢愉`)}(欢愉))+${
+      0.05 * era.get(`talent:${chara_id}:工口意愿`)
+    }(好色)-${0.5 * get_action_debuff(chara_id)}(行动debuff)`,
   );
   if (ratio >= 1 || dice < ratio) {
     return (

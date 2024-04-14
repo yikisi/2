@@ -300,7 +300,7 @@ module.exports = {
    */
   async common_talk_with_urara_48(urara, me, in_urara, callname, in_race) {
     await era.printAndWait([
-      !in_race ? '不过，' : '还真是和「那个',
+      in_race ? '还真是和「那个' : '不过，',
       urara.sex,
       '」说的一样，现在就算 ',
       me.get_colored_name(),
@@ -334,7 +334,7 @@ module.exports = {
       '！你的嘴唇上！是在哪里蹭破了吗？',
     ]);
     await era.printAndWait([
-      ...(in_urara ? ['听到 '] : ['听见看向 ', me.get_colored_name(), ' 的 ']),
+      '听见 ',
       urara.get_colored_name(),
       ' 有些慌张的提醒，',
       me.get_colored_name(),

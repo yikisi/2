@@ -33,7 +33,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '正如 ',
       me.get_colored_name(),
-      ' 所料的那般，从门后探出的又是与「上次」相同的粉色马耳套，以及小动物可爱的笑脸。',
+      ' 所料，从门后探出的又是与「上次」相同的粉色马耳套，以及小动物可爱的笑脸。',
     ]);
 
     era.printButton('「这次也来得这么早啊，不要勉强自己哦？」', 1);
@@ -154,9 +154,9 @@ module.exports = (handlers) => {
       }
     }
     await era.printAndWait([
-      '轻盈地钻进住处，将 ',
+      '轻盈地钻进 ',
       me.get_colored_name(),
-      ' 拉到桌前坐好，',
+      ' 的住处，两人在桌前坐好后，',
       urara.get_colored_name(),
       ' 笑着把纸袋中的内容物一股脑的倒在了盘中。',
     ]);

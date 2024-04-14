@@ -81,14 +81,22 @@ class PseudoUma {
   dis_buffs;
 
   // 不需要通过constructor提供的值 在别的地方计算
-  // 赛道号
-  index_race = -1;
+  /**
+   * 赛道号
+   * @type {number}
+   */
+  index_race;
   // 本场生效的适性
   adapts = {
     style: undefined,
     distance: undefined,
     ground: undefined,
   };
+  /**
+   * 人气值
+   * @type {number[]}
+   */
+  pop;
   // 各个需重复使用的计算基底
   base = {
     velocityIdeal: 0,
@@ -196,6 +204,12 @@ class PseudoUma {
     this.attr_buffs = attr_names.map(() => []);
     this.ground_buffs = [];
     this.dis_buffs = [];
+    this.pop = new Array(4);
+  }
+
+  is_legend() {
+    this.legend = true;
+    return this;
   }
 }
 

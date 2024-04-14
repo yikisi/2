@@ -3,7 +3,10 @@ const era = require('#/era-electron');
 const sys_call_mec = require('#/system/script/sys-call-mec');
 
 const check_stages = require('#/data/event/check-stages');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
+const { race_infos } = require('#/data/race/race-const');
+const { class_enum } = require('#/data/race/model/race-info');
 
 module.exports = {
   /**
@@ -11,7 +14,12 @@ module.exports = {
    * @returns {string[]}
    */
   get_image(chara_id) {
-    const base = era.get(`cstr:${chara_id}:头像`),
+    if (!chara_id) {
+      return ['default'];
+    }
+    const base =
+        era.get(`cstr:${chara_id}:头像`) ||
+        era.get(`staticcstr:${chara_id}:头像`),
       holiday = (era.get('flag:当前回合数') - 1) % 48;
     let ret = [];
     switch (era.get('flag:当前位置')) {
@@ -49,6 +57,15 @@ module.exports = {
         ret.push(`${base}_私`, `${base}_${era.get('flag:季节') ? '夏' : '冬'}`);
         break;
       case location_enum.race:
+        if (era.get(`cflag:${chara_id}:招募状态`) !== recruit_flags.yes) {
+          return [
+            race_infos[era.get('flag:当前赛事')].race_class === class_enum.G1
+              ? ''
+              : `${base}_运`,
+            base,
+            'default',
+          ];
+        }
         return sys_call_mec(chara_id, check_stages.mec_race_cloth);
       default:
         if (holiday === 5) {

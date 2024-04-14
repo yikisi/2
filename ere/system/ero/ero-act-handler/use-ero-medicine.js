@@ -1,10 +1,13 @@
 const era = require('#/era-electron');
 
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+
 const CharaTalk = require('#/utils/chara-talk');
 
 const { buff_colors } = require('#/data/color-const');
 const { medicine_enum, medicine_names } = require('#/data/ero/item-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const { lust_border } = require('#/data/ero/orgasm-const');
 
 /**
  * @param {CharaTalk} chara
@@ -12,6 +15,8 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
  */
 async function use_ero_medicine(chara) {
   const uma_z = era.get(`item:${medicine_names[medicine_enum.uma_z]}`),
+    uma_s = era.get(`item:${medicine_names[medicine_enum.uma_s]}`),
+    super_z = era.get(`item:${medicine_names[medicine_enum.super_z]}`),
     anti_p_s = era.get(`item:${medicine_names[medicine_enum.anti_p_s]}`),
     anti_p_l = era.get(`item:${medicine_names[medicine_enum.anti_p_l]}`),
     drug_p = era.get(`item:${medicine_names[medicine_enum.drug_p]}`),
@@ -22,6 +27,8 @@ async function use_ero_medicine(chara) {
     milk_u = era.get(`item:${medicine_names[medicine_enum.milk_u]}`);
   if (
     !uma_z &&
+    !uma_s &&
+    !super_z &&
     !anti_p_s &&
     !anti_p_l &&
     !drug_p &&
@@ -78,6 +85,19 @@ async function use_ero_medicine(chara) {
       {
         a: medicine_enum.uma_z,
         n: uma_z,
+      },
+      {
+        a: medicine_enum.uma_s,
+        n: uma_s,
+        e: aim_id && sys_check_awake(aim_id),
+      },
+      {
+        a: medicine_enum.super_z,
+        n: super_z,
+        e:
+          aim_id &&
+          !era.get(`status:${aim_id}:超马跳Z`) &&
+          era.get(`base:${aim_id}:性欲`) < lust_border.absent_mind,
       },
       {
         a: medicine_enum.fron_k,

@@ -96,7 +96,7 @@ module.exports = async (hook, _, event_object) => {
     '还真敢说呢，但我也绝对不会输！乌拉拉每次猜拳都会赢，而且头也会转得非常快哦！',
   );
   await era.printAndWait([
-    '男孩的母亲正用温柔地目光注视着互动的两人，但一旁的 ',
+    '男孩的母亲正用温柔的目光注视着互动的两人，但一旁的 ',
     me.get_colored_name(),
     ' 却在小男孩的表情中读出了一丝焦虑……',
   ]);

@@ -3,6 +3,10 @@ const era = require('#/era-electron');
 const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_change_tired = require('#/system/chara/sys-change-tired');
 const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
+const sys_check_titles_after_race = require('#/system/race/sys-check-titles-after-race');
+const sys_parse_for_race = require('#/system/race/sys-parse-race-uma');
+const sys_prepare_race = require('#/system/race/sys-prepare-race');
+// const sys_sim_race = require('#/system/race/sys-simulate-race');
 const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
@@ -14,6 +18,7 @@ const {
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
+const { get_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const date_indicator = require('#/page/components/date-indicator');
@@ -23,23 +28,23 @@ const select_contestants = require('#/page/components/select-contestants');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { get_image } = require('#/system/sys-calc-image');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const {
   adaptability_colors,
   motivation_colors,
   money_color,
   el_danger_color,
-  buff_colors,
+  el_success_color,
+  el_warning_color,
 } = require('#/data/color-const');
 const { attr_background_colors, attr_colors } = require('#/data/const.json');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
-const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const {
   get_adaptability_rank,
   get_attr_rank,
@@ -71,9 +76,7 @@ const adaptability2race = [
   race_enum.heia_sta,
 ];
 
-const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date,
-  edu_weeks_shuk_sho = 48 + race_infos[race_enum.shuk_sho].date,
-  edu_weeks_japa_dir = 48 + race_infos[race_enum.japa_dir].date;
+const pop_mark = ['◎', '◯', '▲', '△', '△', '◇'];
 
 /** @param {PseudoUma} chara */
 function generate_attribute_info(chara) {
@@ -113,7 +116,9 @@ function generate_attribute_info(chara) {
           {
             content: value.toString(),
             title: attr_buff_list.length
-              ? `${value.toString()}=${era.get(`base:${chara.index_chara}:${attr_names[index]}`)}(基础)${attr_buff_list.join('')}`
+              ? `${value.toString()}=${era.get(
+                  `base:${chara.index_chara}:${attr_names[index]}`,
+                )}(基础)${attr_buff_list.join('')}`
               : undefined,
           },
         ],
@@ -189,23 +194,17 @@ function page_race_header(_info) {
   );
 }
 
-/**
- * @param {number} race
- */
+/** @param {number} race */
 async function race_page(race) {
   era.set('flag:当前赛事', race);
+  const aim_race_dict = {};
   /** @type {PseudoUma[]} */
-  const contestants = (await select_contestants(race))?.map(
-    sys_get_chara_pseudo,
-  );
-  const aim_race_dict = {},
-    pop_dict = {},
-    new_title_dict = {};
+  const team_list = (await select_contestants(race)).map(sys_get_chara_pseudo);
   let wait_flag = false,
     /** @type {RaceInfo} */
     info;
   if (race === race_enum.begin_race) {
-    const chara = contestants[0],
+    const chara = team_list[0],
       max_ground = Math.max(...chara.adapt_ground_list),
       max_span = Math.max(...chara.adapt_distance_list),
       tmp = [];
@@ -228,6 +227,7 @@ async function race_page(race) {
       adaptability2race.indexOf(race_id) % 4,
       aim_info.rotation,
       aim_info.gates,
+      0,
       race_infos[race_enum.begin_race].limit,
       0,
       race_infos[race_enum.begin_race].prize,
@@ -240,18 +240,9 @@ async function race_page(race) {
   } else {
     info = race_infos[race];
   }
-  contestants.forEach((uma) => {
+  const contestants = sys_parse_for_race(team_list, race, info);
+  team_list.forEach((uma) => {
     const id = uma.index_chara;
-    uma.adapt_ground_list = uma.adapt_ground_list.map((e) =>
-      Math.min(Math.max(e, 0), 7),
-    );
-    uma.adapt_distance_list = uma.adapt_distance_list.map((e) =>
-      Math.min(Math.max(e, 0), 7),
-    );
-    uma.adapts.ground = uma.adapt_ground_list[info.ground];
-    uma.adapts.distance = uma.adapt_distance_list[info.distance];
-    // TODO 人气
-    pop_dict[id] = 1;
     const tired = era.get(`status:${id}:疲惫`);
     if (tired >= 5) {
       era.print([get_chara_talk(id).get_colored_name(), ' 深陷疲惫……']);
@@ -263,12 +254,13 @@ async function race_page(race) {
       uma.motivation = era.get(`cflag:${id}:干劲`);
     }
     if (
+      id > 0 &&
       era.get(`cstr:${id}:决胜服`) === -1 &&
-      race_infos[race].race_class === RaceInfo.class_enum.G1
+      race_infos[race].race_class <= RaceInfo.class_enum.G1 &&
+      team_list.indexOf(uma) !== -1
     ) {
       era.set(`cstr:${id}:决胜服`, '');
     }
-    new_title_dict[id] = [];
   });
   wait_flag && (await era.waitAnyKey());
   await era.clear();
@@ -303,7 +295,8 @@ async function race_page(race) {
     await era.printAndWait(header_line.content, header_line.config);
   }
   let flag_prepare_race = true,
-    cur_chara = contestants[0],
+    cur_chara = team_list[0],
+    uma_index = contestants.indexOf(cur_chara),
     attribute_info = generate_attribute_info(cur_chara),
     strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank);
   while (flag_prepare_race) {
@@ -313,18 +306,34 @@ async function race_page(race) {
       {
         columns: [
           {
+            accelerator:
+              ((uma_index + contestants.length - 1) % contestants.length) + 1,
+            config: { align: 'center' },
+            content: `上一位\n${contestants.at(uma_index - 1).name}`,
+            type: 'button',
+          },
+        ],
+        config: { width: 4 },
+      },
+      {
+        columns: [
+          {
             names: get_image(cur_chara.index_chara)
               .map((_i) => `${_i}_半身`)
               .join('\t'),
             type: 'image.whole',
           },
           {
-            config: { align: 'center', fontSize: '20px' },
-            content: [get_chara_talk(cur_chara.index_chara).get_colored_name()],
+            config: {
+              align: 'center',
+              color: get_chara_color(cur_chara.index_chara),
+              fontSize: '20px',
+            },
+            content: cur_chara.name,
             type: 'text',
           },
         ],
-        config: { offset: 4, width: 8 },
+        config: { width: 8 },
       },
       {
         columns: [
@@ -336,6 +345,14 @@ async function race_page(race) {
                 color: motivation_colors[cur_chara.motivation + 2],
                 content: motivation_names[cur_chara.motivation + 2],
               },
+              { isBr: true },
+              ' 第 ',
+              cur_chara.pop[0],
+              ' 人气 ',
+              cur_chara.pop
+                .slice(1)
+                .map((e) => pop_mark[Math.min(e, 6) - 1])
+                .join(' '),
             ],
             type: 'text',
           },
@@ -352,7 +369,11 @@ async function race_page(race) {
                 fontWeight: 'bold',
                 title:
                   cur_chara.ground_buffs.length > 0
-                    ? `${get_adaptability_rank(cur_chara.adapts.ground)}=${get_adaptability_rank(era.get(`cflag:${cur_chara.index_chara}:${adaptability_names[info.ground]}适性`))}(基础)${cur_chara.ground_buffs.join('')}`
+                    ? `${get_adaptability_rank(cur_chara.adapts.ground)}=${get_adaptability_rank(
+                        era.get(
+                          `cflag:${cur_chara.index_chara}:${adaptability_names[info.ground]}适性`,
+                        ),
+                      )}(基础)${cur_chara.ground_buffs.join('')}`
                     : undefined,
               },
             ],
@@ -368,68 +389,88 @@ async function race_page(race) {
                 fontWeight: 'bold',
                 title:
                   cur_chara.dis_buffs.length > 0
-                    ? `${get_adaptability_rank(cur_chara.adapts.distance)}=${get_adaptability_rank(era.get(`cflag:${cur_chara.index_chara}:${adaptability_names[2 + info.distance]}适性`))}(基础)${cur_chara.dis_buffs.join('')}`
+                    ? `${get_adaptability_rank(cur_chara.adapts.distance)}=${get_adaptability_rank(
+                        era.get(
+                          `cflag:${cur_chara.index_chara}:${adaptability_names[2 + info.distance]}适性`,
+                        ),
+                      )}(基础)${cur_chara.dis_buffs.join('')}`
                     : undefined,
               },
             ],
             type: 'text',
           },
           { config: { content: '出走策略' }, type: 'divider' },
-          {
-            config: { align: 'center', width: 12 },
-            accelerator: 1010,
-            content: `逃 ${strategy_ability[0]}${cur_chara.style === 0 ? ' ✓' : ''}`,
-            type: 'button',
-          },
-          {
-            config: { align: 'center', width: 12 },
-            accelerator: 1011,
-            content: `先 ${strategy_ability[1]}${cur_chara.style === 1 ? ' ✓' : ''}`,
-            type: 'button',
-          },
-          {
-            config: { align: 'center', width: 12 },
-            accelerator: 1012,
-            content: `差 ${strategy_ability[2]}${cur_chara.style === 2 ? ' ✓' : ''}`,
-            type: 'button',
-          },
-          {
-            config: { align: 'center', width: 12 },
-            accelerator: 1013,
-            content: `追 ${strategy_ability[3]}${cur_chara.style === 3 ? ' ✓' : ''}`,
-            type: 'button',
-          },
+          ...new Array(4).fill(0).map((_, i) => {
+            return team_list.indexOf(cur_chara) !== -1
+              ? {
+                  accelerator: 101 + i,
+                  config: { align: 'center', width: 12 },
+                  content: `${adaptability_names[6 + i].substring(0, 1)} ${strategy_ability[i]}${cur_chara.style === i ? ' ✓' : ''}`,
+                  type: 'button',
+                }
+              : {
+                  config: {
+                    align: 'center',
+                    width: 12,
+                    ...(cur_chara.style === i
+                      ? { color: el_warning_color, fontWeight: 'bold' }
+                      : {}),
+                  },
+                  content: `${adaptability_names[6 + i].substring(0, 1)} ${strategy_ability[i]}`,
+                  type: 'text',
+                };
+          }),
         ],
         config: { width: 8 },
       },
       {
         columns: [
-          { type: 'divider' },
-          ...(contestants.length > 1
-            ? [
-                ...contestants.map((uma) => {
-                  const id = uma.index_chara;
-                  return {
-                    accelerator: id,
-                    config: {
-                      align: 'center',
-                      disabled: id === cur_chara.index_chara,
-                      width: 6,
-                    },
-                    content: `${era.get(
-                      `callname:${id}:-1`,
-                    )} ${adaptability_names[6 + cur_chara.style].substring(
-                      0,
-                      1,
-                    )}`,
-                    type: 'button',
-                  };
-                }),
-                { type: 'divider' },
-              ]
-            : []),
           {
-            accelerator: 1000,
+            accelerator: ((uma_index + 1) % contestants.length) + 1,
+            config: { align: 'center' },
+            content: `下一位\n${contestants[(uma_index + 1) % contestants.length].name}`,
+            type: 'button',
+          },
+        ],
+        config: { width: 4 },
+      },
+      {
+        columns: [
+          { type: 'divider' },
+          ...contestants.map((uma, i) => {
+            const id = uma.index_chara;
+            return {
+              accelerator: i + 1,
+              config: {
+                align: 'center',
+                buttonType: uma.legend
+                  ? 'danger'
+                  : team_list.indexOf(uma) !== -1
+                    ? 'success'
+                    : 'warning',
+                disabled: id === cur_chara.index_chara,
+                disableWarning: true,
+                width: 6,
+              },
+              content: `${uma.name} ${adaptability_names[
+                6 + uma.style
+              ].substring(0, 1)}`,
+              type: 'button',
+            };
+          }),
+          {
+            config: { align: 'center' },
+            content: [
+              '* 队伍成员显示为 ',
+              { color: el_success_color, content: '绿名' },
+              '，强敌显示为 ',
+              { color: el_danger_color, content: '红名' },
+            ],
+            type: 'text',
+          },
+          { type: 'divider' },
+          {
+            accelerator: 100,
             config: {
               width: 12,
               align: 'center',
@@ -438,7 +479,7 @@ async function race_page(race) {
             type: 'button',
           },
           {
-            accelerator: 1020,
+            accelerator: 110,
             config: {
               width: 12,
               align: 'center',
@@ -452,21 +493,21 @@ async function race_page(race) {
     );
     era.setVerticalAlign('top');
     const ret = await era.input();
-    if (ret === 1020) {
+    if (ret === 110) {
       print_race_track_chart(info);
       await era.waitAnyKey();
-    } else if (ret >= 1010) {
+    } else if (ret >= 101) {
       cur_chara.style = era.set(
         `cflag:${cur_chara.index_chara}:跑法`,
-        ret - 1010,
+        ret - 101,
       );
-    } else if (ret < 1000) {
-      cur_chara = contestants[ret - 1000];
+    } else if (ret < 30) {
+      cur_chara = contestants[(uma_index = ret - 1)];
       attribute_info = generate_attribute_info(cur_chara);
       strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank);
     }
     await era.clear();
-    if (ret === 1000) {
+    if (ret === 100) {
       flag_prepare_race = false;
     } else {
       era.printMultiColumns([{ type: 'divider' }, ...race_header]);
@@ -476,7 +517,7 @@ async function race_page(race) {
   const race_rank = {},
     race_start = {},
     race_end = {};
-  contestants.forEach((chara) => {
+  team_list.forEach((chara) => {
     const id = chara.index_chara;
     if (id) {
       race_start[id] = race_end[id] = false;
@@ -487,7 +528,7 @@ async function race_page(race) {
     });
     chara.adapts.style = chara.adapt_style_list[chara.style];
   });
-  let start_count = contestants.filter((e) => e.index_chara > 0).length,
+  let start_count = team_list.filter((e) => e.index_chara > 0).length,
     end_count = start_count,
     time_cost = 0;
   while (start_count) {
@@ -497,7 +538,7 @@ async function race_page(race) {
     era.setHorizontalAlign('space-around');
     era.printInColRows(
       [{ type: 'divider' }, { content: '要给谁赛前打气？\n\n', type: 'text' }],
-      ...contestants
+      ...team_list
         .filter((e) => e.index_chara > 0)
         .map((uma) => {
           const id = uma.index_chara;
@@ -553,6 +594,8 @@ async function race_page(race) {
       time_cost += 100;
     }
   }
+  sys_prepare_race(contestants, info);
+  // sys_sim_race(contestants, info);
   // TODO 换成真实的比赛系统
   era.printMultiColumns([
     { type: 'divider' },
@@ -567,7 +610,7 @@ async function race_page(race) {
     }),
   ]);
   let tmp = await era.input();
-  contestants.forEach(({ index_chara: id }) => {
+  team_list.forEach(({ index_chara: id }) => {
     race_rank[id] = tmp;
     aim_race_dict[id] = sys_call_check(id, check_stages.aim_race, {
       edu_weeks: era.get(`cflag:${id}:育成回合计时`),
@@ -577,7 +620,8 @@ async function race_page(race) {
   });
   const cur_year = era.get('flag:当前年');
   era.drawLine();
-  contestants.forEach(({ index_chara: id }) => {
+  team_list.forEach((uma) => {
+    const id = uma.index_chara;
     era.print([
       get_chara_talk(id).get_colored_name(),
       ' 取得了 ',
@@ -620,7 +664,7 @@ async function race_page(race) {
       new RaceHistory(id).add_result(
         edu_weeks,
         new RaceHistory.RaceResult(
-          pop_dict[id],
+          uma.pop[0],
           race,
           race_rank[id],
           cur_chara.style,
@@ -632,7 +676,7 @@ async function race_page(race) {
     sys_call_check(id, check_stages.after_race, {
       aim_race: aim_race_dict[id] > 0,
       edu_weeks,
-      pop: pop_dict[id],
+      pop: uma.pop[0],
       race,
       rank: race_rank[id],
       st: cur_chara.style,
@@ -647,7 +691,7 @@ async function race_page(race) {
     era.setHorizontalAlign('space-around');
     era.printInColRows(
       [{ type: 'divider' }, { content: '要祝贺/安慰谁？\n\n', type: 'text' }],
-      ...contestants
+      ...team_list
         .filter((uma) => uma.index_chara > 0)
         .map((uma) => {
           const id = uma.index_chara;
@@ -728,124 +772,16 @@ async function race_page(race) {
   ) {
     fame_reward *= 2;
   }
-  let hentai_flag = false;
-  const pregnant_check =
-    era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.embryo &&
-    era.get('cflag:0:妊娠回合计时') === 0 &&
-    new LifeEventMarks(0).sperm;
-  contestants.forEach(({ index_chara: id }) => {
-    const pregnant_stage = era.get(`cflag:${id}:妊娠阶段`);
-    if (pregnant_stage >> pregnant_stage_enum.fetal > 0) {
-      hentai_flag = true;
-      fame_reward -= 150;
-    }
-    if (pregnant_stage >> pregnant_stage_enum.embryo > 0) {
-      new_title_dict[id].push({ n: '亲子关系紧张', c: buff_colors[2] });
-    }
-    if (
-      era.get(`cflag:${id}:腹中精液`) &&
-      era.get(`cflag:${id}:子宫内精液`) &&
-      era.get(`cflag:${id}:肠道内精液`)
-    ) {
-      new_title_dict[id].push({ n: '白浊浸染', c: buff_colors[2] });
-    }
-    if (Number(pregnant_check) === id) {
-      new_title_dict[id].push({ n: '父亲力量', c: buff_colors[2] });
-    }
-  });
-  if (
-    (race === race_enum.kiku_sho ||
-      race === race_enum.shuk_sho ||
-      race === race_enum.japa_dir) &&
-    best_rank === 1
-  ) {
-    let invincible_1 = true,
-      invincible_2 = true,
-      invincible_4 = true,
-      cup_1 = 0,
-      cup_2 = 0,
-      cup_3 = 0;
-    new RaceHistory(mvp_id).get_entries().forEach((e) => {
-      if (e.rank === 1) {
-        switch (e.race) {
-          case race_enum.sats_sho:
-            cup_1++;
-            break;
-          case race_enum.oka_sho:
-            cup_1 += 2;
-            break;
-          case race_enum.hane_hai:
-            cup_1 += 4;
-            break;
-          case race_enum.toky_yus:
-            cup_2++;
-            break;
-          case race_enum.yush_him:
-            cup_2 += 2;
-            break;
-          case race_enum.toky_der:
-            cup_2 += 4;
-            break;
-          case race_enum.kiku_sho:
-            cup_3++;
-            break;
-          case race_enum.shuk_sho:
-            cup_3 += 2;
-            break;
-          case race_enum.japa_dir:
-            cup_3 += 4;
-        }
-      } else {
-        if (e.weeks < edu_weeks_kiku_sho) {
-          invincible_1 = false;
-        }
-        if (e.weeks < edu_weeks_shuk_sho) {
-          invincible_2 = false;
-        }
-        if (e.weeks < edu_weeks_japa_dir) {
-          invincible_4 = false;
-        }
-      }
-    });
-    if (cup_1 & cup_2 & cup_3 & 0b1) {
-      new_title_dict[mvp_id].push({ n: '三冠', c: buff_colors[1] });
-      invincible_1 &&
-        new_title_dict[mvp_id].push({ n: '无败三冠', c: buff_colors[1] });
-    }
-    if (cup_1 & cup_2 & cup_3 & 0b10) {
-      new_title_dict[mvp_id].push({ n: '三宝冠', c: buff_colors[1] });
-      invincible_2 &&
-        new_title_dict[mvp_id].push({ n: '无败三宝冠', c: buff_colors[1] });
-    }
-    if (cup_1 & cup_2 & cup_3 & 0b100) {
-      new_title_dict[mvp_id].push({ n: '泥地三冠', c: buff_colors[1] });
-      invincible_4 &&
-        new_title_dict[mvp_id].push({ n: '无败泥地三冠', c: buff_colors[1] });
-    }
-    if (
-      (cup_1 & 0b11) > 0 &&
-      (cup_2 & 0b11) > 0 &&
-      (cup_3 & 0b11) > 0 &&
-      (cup_1 & cup_2 & cup_3 & 0b11) === 0
-    ) {
-      new_title_dict[mvp_id].push({ n: '变则三冠', c: buff_colors[1] });
-      if ((cup_3 & 1 && invincible_1) || (cup_3 & 2 && invincible_2)) {
-        new_title_dict[mvp_id].push({ n: '无败变则三冠', c: buff_colors[1] });
-      }
-    }
-    if ((cup_1 & cup_2 & cup_3 & 0b11) === 0b11) {
-      new_title_dict[mvp_id].push({ n: '极限六冠', c: buff_colors[1] });
-      if (invincible_1 && invincible_2) {
-        new_title_dict[mvp_id].push({ n: '无败六冠', c: buff_colors[1] });
-      }
-    }
-  }
-  if (hentai_flag) {
-    era.set('flag:变态行为', 1);
-  }
+  const { hentai_flag, new_title_dict } = sys_check_titles_after_race(
+    team_list,
+    race,
+    best_rank,
+    mvp_id,
+  );
+  fame_reward -= hentai_flag * 150;
   if (
     era.get('cflag:0:妊娠阶段') >> pregnant_stage_enum.fetal > 0 &&
-    contestants.findIndex((uma) => uma.index_chara === 0) === -1
+    team_list.findIndex((uma) => uma.index_chara === 0) === -1
   ) {
     fame_reward -= 50;
   }
@@ -871,7 +807,7 @@ async function race_page(race) {
   }
   const prize_ratio = 0.04 * get_trainer_level() + 0.04,
     total_prize = sys_change_money(
-      contestants
+      team_list
         .map(({ index_chara: id }) => {
           if (race_rank[id] <= 5) {
             let prize = info.prize * RaceInfo.prize_ratios[race_rank[id] - 1];
@@ -900,7 +836,7 @@ async function race_page(race) {
       ' 马币',
     ]);
   }
-  for (const { index_chara: id } of contestants) {
+  for (const { index_chara: id } of team_list) {
     if (race_rank[id] === 1) {
       sys_change_lust(id, lust_from_palam);
       sys_change_pressure(id, -2000);
@@ -953,7 +889,7 @@ async function race_page(race) {
       );
     }
   }
-  for (const { index_chara: id } of contestants) {
+  for (const { index_chara: id } of team_list) {
     sys_add_titles(id, ...new_title_dict[id]) && (await era.waitAnyKey());
   }
   era.drawLine();

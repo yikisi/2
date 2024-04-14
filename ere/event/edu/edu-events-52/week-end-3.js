@@ -89,10 +89,8 @@ module.exports = (handlers) => {
       urara.get_colored_name(),
       '，脸上的表情也像是在压抑着什么情绪。',
     ]);
-
     era.printButton('「今天的乌拉拉似乎不怎么开心啊，发生了什么？」', 1);
     await era.input();
-
     await era.printAndWait([
       '走到 ',
       urara.get_colored_name(),
@@ -114,13 +112,11 @@ module.exports = (handlers) => {
       callname,
       '，只是在并跑之后，乌拉拉想到了一些事情而已……',
     ]);
-
     era.printButton(
       '「并跑的事？没关系，那个距离确实太长了，如果实在难受的话明天请假也没关系。」',
       1,
     );
     await era.input();
-
     await urara.say_and_wait([
       '不是的！只是在想……',
       callname,
@@ -255,9 +251,7 @@ module.exports = (handlers) => {
       await era.printAndWait([
         '至于 ',
         rice.get_colored_name(),
-        ' 为什么会变成这样，',
-        me.get_colored_name(),
-        ' 大概还是最清楚的那个人……话题偏了，言归正传。',
+        ' 为什么会变成这样，大概某人自己还是最清楚的那个人……话题偏了，言归正传。',
       ]);
     }
     era.println();
@@ -270,9 +264,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       rice.get_colored_name(),
-      ' 从好友的角度给出的意见确实一针见血。不如说 ',
-      me.get_colored_name(),
-      ' 现在甚至要感谢 ',
+      ' 从好友的角度给出的意见确实一针见血。不如说现在甚至要感谢 ',
       rice.get_colored_name(),
       ' 才对。',
     ]);
@@ -520,10 +512,8 @@ module.exports = (handlers) => {
       urara.get_colored_name(),
       ' 小声地确认道。',
     ]);
-
     era.printButton('「那个……乌拉拉，大家知道你来这里吗？」', 1);
     await era.input();
-
     await urara.say_and_wait(
       '不知道哦？要是大家知道的话，肯定不会让我来这里吧。',
     );
@@ -573,14 +563,11 @@ module.exports = (handlers) => {
       urara.get_colored_name(),
       ' 应该不会是那样的孩子吧？',
     ]);
-
     era.printButton(
       '「应该可以吧，而且训练时的回忆也……这个时候还是不提了……」',
       1,
     );
     await era.input();
-
-    era.println();
     if (era.get('relation:52:0') > 150) {
       await urara.say_and_wait([
         '没有哦！训练的回忆也很开心，跟 ',
@@ -638,7 +625,6 @@ module.exports = (handlers) => {
         ' 的侧脸。',
       ]);
     }
-    era.println();
     await era.printAndWait([
       '沉默之中，',
       urara.get_colored_name(),
@@ -993,7 +979,6 @@ module.exports = (handlers) => {
       '……不，才没觉得不错，现在收回发言……果然不行的吧……',
     );
     await in_urara.say_as_unknown_and_wait('……呜……');
-    era.println();
     const attr_change = new Array(5).fill(0);
     gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 5));
     let wait_flag = false;

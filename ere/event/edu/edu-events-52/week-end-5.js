@@ -633,11 +633,9 @@ module.exports = (handlers) => {
       in_urara.get_colored_name(),
       '」心中的那片草场之中。',
     ]);
-    await era.printAndWait([
-      '往日的雾霭已经消散，夜空下万里无云，星空之下一片夜紫色的清朗，而 ',
-      me.get_colored_name(),
-      ' 仿佛正站在世界中央。',
-    ]);
+    await era.printAndWait(
+      '往日的雾霭已经消散，夜空无云，一片夜紫色的清朗中星空璀璨，而星光下的人仿佛站在世界中央。',
+    );
     await era.printAndWait([
       '顺着奔跑声回首望去，明亮的月光下，两名容貌相仿的',
       urara.get_teen_sex_title(),
@@ -812,11 +810,10 @@ module.exports = (handlers) => {
       '樱色的呼吸声正逐渐转向平稳，但另一侧迟迟不愿睡去的褐色却仿佛传来着轻声地呼唤。',
     );
     await era.printAndWait([
-      '再次睁开眼睛，稍显褪色的「',
-      urara.sex,
-      '」，依旧用虽然没有花朵但现在拾回了明亮的目光守望着 ',
       me.get_colored_name(),
-      '……',
+      ' 再次睁开眼睛，稍显褪色的「',
+      urara.sex,
+      '」，正用虽然没有花朵但拾回明亮的目光守望着身边的人……',
     ]);
     era.println();
 

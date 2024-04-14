@@ -748,7 +748,9 @@ module.exports = (handlers) => {
       urara.get_colored_name(),
       ' 不易察觉的不充分笑容、「',
       urara.sex,
-      '」的频繁出现，还是比赛前看到的那个阴沉的女孩。',
+      '」的频繁出现，还是比赛前看到的那个阴沉的',
+      urara.get_child_sex_title(),
+      '。',
     ]);
     await era.printAndWait(
       '现在就连大家私下的讨论，都给人一种惴惴不安的感觉。怎么回事，最近为什么会如此敏感？',

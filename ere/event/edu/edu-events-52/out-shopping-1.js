@@ -208,7 +208,9 @@ module.exports = (handlers) => {
     ]);
     era.drawLine();
     await era.printAndWait([
-      '路人A「那边的女孩，是刚才在比赛中垫底的那位吗？」',
+      '路人A「那边的',
+      urara.get_child_sex_title(),
+      '，是刚才在比赛中垫底的那位吗？」',
     ]);
     await era.printAndWait([
       '路人B「记得是叫春乌拉拉吧？反正只是活动赛而已，随便跑跑也无所谓吧。」',
@@ -234,11 +236,14 @@ module.exports = (handlers) => {
       '路人B「竟然是这样，看来那个训练员是挑了一个好下手的……」',
     );
     await era.printAndWait([
-      '不知不觉中，',
+      '即使心里清楚这些皆为无意义的闲言碎语，',
       me.get_colored_name(),
-      ' 的拳头硬了。自己就算了，可 ',
+      ' 依旧在路人持续的妄议中逐渐变得有些焦躁。',
+    ]);
+    await era.printAndWait([
+      '自己被怎么评价都无所谓，可',
       urara.get_colored_name(),
-      ' 就算很弱，也不是被人这么说闲话的。',
+      '就算很弱，也不应被人这么说闲话。',
     ]);
     await era.printAndWait([
       '但正当 ',
@@ -625,9 +630,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '既然 ',
       urara.get_colored_name(),
-      ' 已经意识到要做什么了，那 ',
-      me.get_colored_name(),
-      ' 觉得应该也没有担心的必要了。',
+      ' 已经意识到要做什么了，那应该也没有担心的必要了。',
     ]);
     await urara.say_and_wait(
       '啊，叔叔好！今天的货物也很新鲜呢！嗯！下次我会继续来帮忙的！',

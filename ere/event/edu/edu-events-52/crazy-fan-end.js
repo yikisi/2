@@ -18,14 +18,14 @@ module.exports = async () => {
     urara = get_chara_talk(52);
 
   await era.printAndWait(
-    '这场结束得过于唐突的旅途意味着什么？或许现在已经没有任何追究的意义。',
+    '这场结束地过于唐突的旅途意味着什么，现在或许已经没有任何追究的意义了。',
   );
   await era.printAndWait([
-    '但 ',
+    '因为 ',
     me.get_colored_name(),
     ' 与 ',
     urara.get_colored_name(),
-    ' 或许都清楚，两人分开的结局或许本不应出现在这里。',
+    ' 都清楚，两人分开的结局或许本不应出现在这里。',
   ]);
   await era.printAndWait([
     '攥紧行李箱的拉杆，',
@@ -44,9 +44,9 @@ module.exports = async () => {
     ' 都知道故事本不应如此。',
   ]);
   await era.printAndWait([
-    '就算转学手续已经办理结束，但这依旧是对大家保密的不辞而别，这场送别也只有 ',
+    '就算转学手续已经办理结束，这依旧是对大家保密的不辞而别，这场送别也只有 ',
     me.get_colored_name(),
-    ' 一人。',
+    ' 一人到场。',
   ]);
   await era.printAndWait([
     '只是即使如此，身边的小',
@@ -58,7 +58,7 @@ module.exports = async () => {
   const race_history = new RaceHistory(52);
   if (race_history.check_begin()) {
     await urara.say_and_wait([
-      '没关系的，就算没办法再奔跑乌拉拉也会有办法？倒是 ',
+      '没关系的，就算没办法再奔跑乌拉拉也会有办法的！倒是 ',
       callname,
       ' 没关系吗？',
     ]);
@@ -70,7 +70,7 @@ module.exports = async () => {
     await era.printAndWait([
       '自从在那场比赛跌倒之后，虽然身体一切正常，但 ',
       urara.get_colored_name(),
-      ' 却失去了',
+      ' 却过早地失去了',
       urara.get_uma_sex_title(),
       '的能力。',
     ]);
@@ -82,21 +82,23 @@ module.exports = async () => {
       '。',
     ]);
     await era.printAndWait([
-      '但针对个人的情绪，终究会随着时间前进消散。面对 ',
+      '但针对个人的情绪，终究会随着时间前进消散。所以面对 ',
       urara.get_colored_name(),
       ' 的担忧，',
       me.get_colored_name(),
-      ' 沉默的摇摇头。',
+      ' 只是沉默地摇摇头。',
     ]);
     await urara.say_and_wait([
-      '如果 ',
+      '……如果 ',
       callname,
-      ' 真是这样想的就好了啊，大家也是，明明我本来也没法参加有马……',
+      ' 真是这样想的，那 ',
+      urara.get_colored_name(),
+      ' 也不需要太担心呢，大家也是，明明我本来也没法参加有马啊……',
     ]);
     await urara.say_and_wait(
       race_history.get_result(47 + 48)?.race === race_enum.arim_kin
         ? '但是如果能再去一次，就好了啊……'
-        : '但是如果能去一次，哪怕一次就好了啊……',
+        : '不过，如果能去一次，哪怕一次也好呢……',
     );
   } else {
     await urara.say_and_wait([
@@ -112,10 +114,10 @@ module.exports = async () => {
       ' 也是一样。',
     ]);
     await era.printAndWait([
-      '但即使如此，为了掩饰伤心，或者说为了不让 ',
+      '即使如此，为了掩饰伤感，也为了不让 ',
       me.get_colored_name(),
-      ' 也伤心，',
-      urara.sex,
+      ' 过于伤心，小',
+      urara.get_uma_sex_title(),
       '还是强迫自己断断续续地说着。',
     ]);
     await urara.say_and_wait([
@@ -143,7 +145,7 @@ module.exports = async () => {
   await era.printAndWait([
     '之后，小',
     urara.get_uma_sex_title(),
-    '忍耐到最后的泪水还是无法抑制的洒了出来。',
+    '忍耐到最后的泪水还是无法抑制地提前洒了出来。',
   ]);
   era.println();
   if (era.get('love:52') >= 50) {
@@ -174,7 +176,7 @@ module.exports = async () => {
       '……',
     ]);
     await urara.say_and_wait([
-      '所有，谢谢你来送我，再见了哦，',
+      '所以，谢谢你来送我，再见了哦，',
       callname,
       '……',
     ]);
@@ -186,12 +188,12 @@ module.exports = async () => {
     ' 压住哭声，不敢回头地跑向了不会多做等待的列车。',
   ]);
   await era.printAndWait([
-    '人群随着列车离开而散去，而 ',
+    '聚集的人群随着列车离开而散去，陌生的人流抛下感情的累赘，将 ',
     me.get_colored_name(),
     ' 则被人流抛下，被独自撇在了空无一人的站台上。',
   ]);
   await era.printAndWait([
-    '随着喧闹的散尽，周围也安静得仿佛整个世界都随着这趟车离 ',
+    '喧闹散尽，周围也安静得仿佛整个世界都随着这趟车离 ',
     me.get_colored_name(),
     ' 而去。',
   ]);
@@ -201,9 +203,9 @@ module.exports = async () => {
     '的离去，恐怕也等同于「再也不见」。',
   ]);
   await era.printAndWait([
-    '自己回去之后要怎么去面对商店街的大家呢？又要怎么去面对 ',
+    '自己回去后要怎么面对商店街的大家？要怎么去面对 ',
     urara.get_colored_name(),
-    ' 的好友们呢？',
+    ' 的好友们？',
   ]);
   await era.printAndWait([
     urara.get_colored_name(),

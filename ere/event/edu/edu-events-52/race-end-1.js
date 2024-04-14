@@ -26,8 +26,7 @@ async function common1(urara, me, callname) {
 
   await urara.say_and_wait('商店街的大家，都来了哦！');
   await era.printAndWait([
-    me.get_colored_name(),
-    ' 顺着 ',
+    '顺着 ',
     urara.get_colored_name(),
     ' 注视的方向看去，只见那些平时与小',
     urara.get_uma_sex_title(),
@@ -47,7 +46,7 @@ async function common2(urara, me, callname) {
     ' 仿佛被吓到了般愣在原地。',
   ]);
   await era.printAndWait(
-    '不，或许就是被吓到了也说不定。仔细想想，以前的时候自己有过被这样的经验吗？',
+    '不，或许就是被吓到了也说不定。仔细想想，以前的时候有过被这样期待的经历吗？',
   );
   await era.printAndWait([
     '而马上就看出了 ',
@@ -668,7 +667,7 @@ module.exports = (handlers) => {
     }
     await common_talk_with_in_urara_end(urara, me, in_urara, callname, true);
     await era.printAndWait([
-      '而一个踉跄站到阴影之外，不小冲出了道口的 ',
+      '而一个踉跄站到阴影之外，不小心冲出了道口的 ',
       me.get_colored_name(),
       '，看到了正如另一个 ',
       in_urara.get_colored_name(),

@@ -247,7 +247,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '将其他杂物重新塞回抽屉，',
       me.get_colored_name(),
-      ' 立刻起身迎向了比以往都要努力的小',
+      ' 起身迎向了比以往都要努力的小',
       urara.get_uma_sex_title(),
       '。',
     ]);

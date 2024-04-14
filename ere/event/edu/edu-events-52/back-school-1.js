@@ -366,7 +366,7 @@ module.exports = (handlers) => {
     await era.input();
 
     await era.printAndWait([
-      '不明不白的相遇后接下不明不白的请求，',
+      '不明不白的相遇后是接下不明不白的请求，',
       me.get_colored_name(),
       ' 与这位突然出现的神秘女士一同走向了前往训练场的路。',
     ]);
@@ -379,7 +379,7 @@ module.exports = (handlers) => {
     ]);
     if (era.get('relation:52:0') > 150 && new UraraEduMarks().loop < 2) {
       await era.printAndWait([
-        '在向 ',
+        '而在向 ',
         me.get_colored_name(),
         ' 咨询过许多与',
         urara.get_uma_sex_title(),
@@ -389,7 +389,9 @@ module.exports = (handlers) => {
         '成熟的马娘「看来您也很辛苦啊，毕竟无时无刻都要为担当着是很难做到的。」',
       );
       await era.printAndWait([
-        '成熟的马娘「其实我的女儿也很幸运啊，虽然',
+        '成熟的马娘「其实我的',
+        urara.sex_code - 1 ? '女儿' : '儿子',
+        '也很幸运，虽然',
         urara.sex,
         '并不强大，但也找到了和您一样优秀的训练员。」',
       ]);
@@ -407,10 +409,12 @@ module.exports = (handlers) => {
         '。',
       ]);
       await era.printAndWait(
-        '成熟的马娘「不过，虽然您确实有与中央相符的专业水平，但似乎对担当的心灵缺乏养护啊……」',
+        '成熟的马娘「不过，您的确有与中央相符的专业水平，但似乎对担当的心灵缺乏养护啊……」',
       );
       await era.printAndWait([
-        '成熟的马娘「只是就算我这么想，也已经太迟了吧，因为我的女儿一旦跑起来就不会轻易放弃。」',
+        '成熟的马娘「只是就算这么想也已经太迟了，走上赛场的',
+        urara.get_uma_sex_title(),
+        '一旦跑起来就不会轻易放弃。」',
       ]);
       await era.printAndWait([
         '在同行的终点与 ',
@@ -435,7 +439,7 @@ module.exports = (handlers) => {
     await era.input();
 
     await era.printAndWait(
-      '成熟的马娘「只是，一位普通的来看孩子的家长而已哦？」',
+      '成熟的马娘「只是一位普通的来看孩子的家长而已哦？」',
     );
     await era.printAndWait([
       '没有直接回答 ',
@@ -581,7 +585,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '但即使面对 ',
       urara.get_colored_name(),
-      ' 的撒娇攻势，铜墙铁壁的大和抚子也看上去完全不为所动。',
+      ' 的撒娇攻势，铜墙铁壁的大和抚子看上去也完全不为所动。',
     ]);
     await grass.say_and_wait([
       '但是，',
@@ -756,14 +760,14 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '外出回程的路上，可能因为是玩得太开心了，',
       urara.get_colored_name(),
-      ' 看起来有点累了，于是 ',
+      ' 看起来有点累，于是 ',
       me.get_couple_title(),
       ' 便决定就近休息。',
     ]);
     await era.printAndWait([
       '坐在附近公园的长椅上，先是花了点时间计划之后要玩什么，随后 ',
       me.get_colored_name(),
-      ' 便去了自动贩卖机买饮料。',
+      ' 便去附近的自动贩卖机弄了两罐饮料。',
     ]);
     await era.printAndWait([
       '可当 ',

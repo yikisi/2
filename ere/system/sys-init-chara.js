@@ -163,6 +163,7 @@ module.exports = {
           c: buff_colors[1],
         });
       }
+      reset_chara(chara_id);
 
       try {
         get_aim_function('init', chara_id, {}).func();
@@ -184,7 +185,6 @@ module.exports = {
         era.add(`relation:${chara_id}:0`, era.get('flag:马娘初始好感') - 75);
       }
       era.add(`love:${chara_id}`, era.get('flag:马娘初始爱慕'));
-      reset_chara(chara_id);
       era.set(`base:${chara_id}:体力`, era.get(`maxbase:${chara_id}:体力`));
       era.set(`base:${chara_id}:精力`, era.get(`maxbase:${chara_id}:精力`));
 

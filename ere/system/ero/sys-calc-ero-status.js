@@ -112,7 +112,8 @@ function get_sex_acceptable(chara_id) {
     10 * Math.max(era.get(`flag:惩戒力度`) - 1, 0) +
     15 * era.get(`talent:${chara_id}:工口意愿`) -
     10 * era.get(`talent:${chara_id}:贞洁看法`) -
-    50 -
+    50 +
+    100 * era.get(`status:${chara_id}:超马跳Z`) -
     100 * !check_pregnant_unprotect(chara_id)
   );
 }
@@ -199,16 +200,17 @@ module.exports = {
   },
   check_want_to_escape(chara_id) {
     return (
-      (era.getCharactersInTrain().length > 0 &&
+      !era.get(`status:${chara_id}:超马跳Z`) &&
+      ((era.getCharactersInTrain().length > 0 &&
         !era.get('tflag:强奸') &&
         get_sex_acceptable(chara_id) < 0) ||
-      Math.max(
-        era.get(`mark:${chara_id}:苦痛`),
-        era.get(`mark:${chara_id}:羞耻`),
-      ) -
-        era.get(`mark:${chara_id}:欢愉`) >=
-        1 ||
-      era.get(`mark:${chara_id}:反抗`) >= 2
+        Math.max(
+          era.get(`mark:${chara_id}:苦痛`),
+          era.get(`mark:${chara_id}:羞耻`),
+        ) -
+          era.get(`mark:${chara_id}:欢愉`) >=
+          1 ||
+        era.get(`mark:${chara_id}:反抗`) >= 2)
     );
   },
   get_action_base_check,

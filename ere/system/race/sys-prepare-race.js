@@ -19,26 +19,18 @@ const { attr_enum } = require('#/data/train-const');
  * @param {PseudoUma[]} list_chara
  * @param {RaceInfo} race_info
  */
-module.exports = (list_chara, race_info) => {
+function sys_prepare_race(list_chara, race_info) {
   // Shuffle一下角色列表
   list_chara = sort_list(list_chara, Math.random);
 
-  let ind_uma = 0;
-
   for (const itemUma of list_chara) {
     // 分配赛道 及初始名次以避免意外
-    itemUma.index_race = ind_uma++;
     itemUma.rank = {
       curr: itemUma.index_race,
       last: itemUma.index_race,
     };
 
-    // 调取本场比赛所需的适性
-    itemUma.adapts = {
-      style: itemUma.adapt_style_list[itemUma.style],
-      distance: itemUma.adapt_distance_list[race_info.distance],
-      ground: itemUma.adapt_ground_list[race_info.ground],
-    };
+    itemUma.adapts.style = itemUma.adapt_style_list[itemUma.style];
 
     // 先从临时技能表中筛除所有不相关技能
     itemUma.list_skill = itemUma.list_skill.filter(
@@ -220,4 +212,6 @@ module.exports = (list_chara, race_info) => {
     itemUma.probs.planRush =
       0.15 + 0.0005 * itemUma.attrs[attr_enum.intelligence];
   }
-};
+}
+
+module.exports = sys_prepare_race;

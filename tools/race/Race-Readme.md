@@ -2,7 +2,7 @@
 ---
 ## 第一步：解析马娘
 
-#/data/system/racing/sys-race-parse.js
+#/data/system/racing/sys-parse-race-uma.js
 > @param {Number[]} team_chara 玩家队伍在比赛中出场的马的id
 > @param {RaceInfo} race_info 比赛信息object
 
@@ -16,7 +16,7 @@
 ---
 ## 第二步：赛前运算
 
-#/data/system/racing/sys-race-prepare.js
+#/data/system/racing/sys-prepare-race.js
 > @param {PseudoUma[]} list_chara 马娘Object数组
 > @param {RaceInfo} race_info 比赛信息Object
 
@@ -28,7 +28,7 @@
 ## 第三步：模拟比赛
 
 #data/system/racing/sys-race-debug.js
-#data/system/racing/sys-race-simulation.js
+#data/system/racing/sys-simulate-race.js
 
 > @param {PseudoUma[]} list_chara 马娘Object数组
 > @param {RaceInfo} race_info 比赛信息Object

@@ -237,7 +237,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '收到了担当意料之外的冲击性回复，',
       me.get_colored_name(),
-      ' 在产生了一丝奇妙的欣喜的同时，也恨不得给自己一拳。',
+      ' 在产生了一丝奇妙的欣喜的同时，也稍微被自己的发言恶心到了。',
     ]);
     await era.printAndWait([
       '今天的 ',

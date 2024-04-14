@@ -16,9 +16,11 @@ function get_aim_function(script_category, chara_id, extra_flag) {
     (extra_flag || (extra_flag = {})).chara_id = chara_id;
   }
   try {
-    const func = require(`#/event/${script_category}/${script_category}-${
-      script_dict[script_name] || script_name
-    }`);
+    const func = require(
+      `#/event/${script_category}/${script_category}-${
+        script_dict[script_name] || script_name
+      }`,
+    );
     return { func, _extra: extra_flag || {} };
   } catch (_) {
     throw new Error('unsupported!');

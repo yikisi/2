@@ -353,9 +353,7 @@ module.exports = (handlers) => {
       urara.sex,
       '说的那样，现在的 ',
       urara.get_colored_name(),
-      ' 或许还欠缺一些对未来的准备，但这也是 ',
-      me.get_colored_name(),
-      ' 存在的理由啊。',
+      ' 或许还欠缺一些对未来的准备，但这不正是自己存在的理由吗？',
     ]);
     await era.printAndWait([
       '攥了攥被风吹得有些僵硬的手指，',

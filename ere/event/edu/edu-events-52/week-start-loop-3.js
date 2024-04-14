@@ -79,9 +79,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   await era.input();
 
   await era.printAndWait([
-    '虽然 ',
-    me.get_colored_name(),
-    ' 真不知道 ',
+    '虽然的确完全不清楚 ',
     urara.get_colored_name(),
     ' 是怎么问的，反正不管是',
     urara.get_uma_sex_title(),
@@ -153,7 +151,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   await era.printAndWait([
     '叹了口气，',
     me.get_colored_name(),
-    ' 也试探地蹲在了沉默地坐回了灰白二色的草地上的小',
+    ' 试探地蹲在了沉默地坐回了灰白二色的草地上的小',
     urara.get_uma_sex_title(),
     '旁边。',
   ]);

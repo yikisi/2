@@ -139,9 +139,7 @@ module.exports = (handlers) => {
       ' 的「有趣」就可以，但这样又该纳入哪些内容呢……',
     ]);
     await era.printAndWait([
-      '看来还是想象力不足。为了想出对策，',
-      me.get_colored_name(),
-      ' 认为当务之急自己必须更加了解 ',
+      '看来还是想象力不足。为了想出对策，当务之急自己必须更加了解 ',
       urara.get_colored_name(),
       ' 才行。',
     ]);
@@ -228,7 +226,7 @@ module.exports = (handlers) => {
       ' 的回答后先是一愣，随后突然向街上跑去——',
     ]);
     await era.printAndWait([
-      '而后仅仅不到五分钟，商店街的街坊邻居们就在 ',
+      '前后仅仅不到五分钟，商店街的街坊邻居们就在 ',
       me.get_colored_name(),
       ' 与 ',
       urara.get_colored_name(),
@@ -309,11 +307,9 @@ module.exports = (handlers) => {
       ' 的优势在哪里了。',
     ]);
     await era.printAndWait([
-      '在那之后，商店街的店家们都分别送了伴手礼给 ',
-      me.get_colored_name(),
-      '，说是「因为 ',
+      '在那之后，商店街的店家们一边说着「因为 ',
       urara.get_colored_name(),
-      ' 受你照顾了」。',
+      ' 受你照顾了」，一边分别送上了伴手礼。',
     ]);
     await me.say_and_wait('只是，这些赠品是不是太多了……？', true);
     await era.printAndWait([
@@ -332,9 +328,7 @@ module.exports = (handlers) => {
     ]);
     await urara.say_and_wait([callname, '，收到好多哦！我来帮忙拿吧！']);
     await era.printAndWait([
-      '在发现了 ',
-      me.get_colored_name(),
-      ' 的为难后，',
+      '而在发现别人的为难后，',
       urara.get_colored_name(),
       ' 便说着要帮忙，一边快速地把包围着 ',
       me.get_colored_name(),
@@ -417,17 +411,15 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '至于每天训练结束后身体都要透支了……',
       me.get_colored_name(),
-      ' 觉得这除了有人还是缺乏锻炼之外没有任何问题。',
+      ' 觉得这除了某人还是缺乏锻炼之外没有任何问题。',
     ]);
-    await era.printAndWait([
-      '才怪。以后都照这样练，要是运气好没进医院，恐怕 ',
-      me.get_colored_name(),
-      ' 都能自己去跑比赛了。',
-    ]);
+    await era.printAndWait(
+      '才怪。以后都照这样练，要是运气好没进医院，恐怕某人都能自己去跑比赛了。',
+    );
     await era.printAndWait([
       '不过又该如何提升 ',
       urara.get_colored_name(),
-      ' 的竞争意识，大概，这又是另一个长期课题了。',
+      ' 的竞争意识，这大概又是另一个长期课题了。',
     ]);
     era.drawLine();
     await in_urara.say_as_unknown_and_wait(

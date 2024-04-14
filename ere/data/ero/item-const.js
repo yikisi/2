@@ -61,6 +61,10 @@ item_actions[item_enum.artificial_virgin] = '套上';
 const medicine_enum = {
   // 马跳Z
   uma_z: 0,
+  // 马跳S
+  uma_s: 0,
+  // 超马跳Z
+  super_z: 0,
   // 弗隆K
   fron_k: 0,
   // 弗隆P
@@ -82,6 +86,8 @@ Object.keys(medicine_enum).forEach((e, i) => (medicine_enum[e] = i));
 
 const medicine_names = [];
 medicine_names[medicine_enum.uma_z] = '马跳Z';
+medicine_names[medicine_enum.uma_s] = '马跳S';
+medicine_names[medicine_enum.super_z] = '超马跳Z';
 medicine_names[medicine_enum.fron_k] = '弗隆K';
 medicine_names[medicine_enum.fron_p] = '弗隆P';
 medicine_names[medicine_enum.drug_m] = '母乳药剂';

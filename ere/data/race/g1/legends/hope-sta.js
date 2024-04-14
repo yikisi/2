@@ -1,0 +1,38 @@
+module.exports = [
+  {
+    adapt_distance: [1, 3, 6, 6],
+    adapt_ground: [6, 0],
+    adapt_style: [0, 1, 5, 6],
+    attrs: [400, 400, 400, 400, 400],
+    id: 50,
+    name: '成田大进',
+    skills: [],
+  },
+  {
+    adapt_distance: [1, 4, 6, 6],
+    adapt_ground: [6, 0],
+    adapt_style: [0, 3, 6, 6],
+    attrs: [400, 400, 400, 400, 400],
+    id: 74,
+    name: '目白光明',
+    skills: [],
+  },
+  {
+    adapt_distance: [1, 4, 6, 4],
+    adapt_ground: [6, 0],
+    adapt_style: [0, 0, 5, 6],
+    attrs: [400, 400, 400, 400, 400],
+    id: 33,
+    name: '爱慕织姬',
+    skills: [],
+  },
+  {
+    adapt_distance: [0, 3, 6, 5],
+    adapt_ground: [6, 0],
+    adapt_style: [2, 6, 5, 1],
+    attrs: [400, 400, 400, 400, 400],
+    id: 32,
+    name: '爱丽速子',
+    skills: [],
+  },
+];

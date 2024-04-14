@@ -49,10 +49,10 @@ module.exports = (handlers) => {
       me.get_colored_name(),
       ' 便跟随 ',
       urara.get_colored_name(),
-      ' 来到了附近那栋新开的综合商场前，乘上外侧的观景电梯，一路上到了楼顶。',
+      ' 来到了附近那栋新开的综合商场前，乘上外侧的观景电梯，一路上到楼顶。',
     ]);
     await era.printAndWait(
-      '随着电梯门的打开，在罩着玻璃顶棚的天台上，一座小小的游乐园便出现在两人眼前。',
+      '铁门随着清脆的电铃音缓缓打开，在罩着玻璃顶棚的天台上，一座小小的游乐园逐渐出现在两人眼前。',
     );
     await era.printAndWait(
       '或许是还在通勤日的缘故，这座小游乐园现在空无一人，只有电子售票机和设施中的彩灯寂寞的闪烁着。',
@@ -69,7 +69,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '一起走进游园场地，',
       urara.get_colored_name(),
-      ' 凝视着场地中央那架小小的旋转茶杯，小声地开口了。',
+      ' 凝视着场地中央那架迷你款的旋转茶杯，小声地开口了。',
     ]);
     await urara.say_and_wait(
       '在周末的时候，商店街的孩子们都会来这里玩，因为离得很近，票价也比大游乐园便宜。',
@@ -268,7 +268,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '远望着那个比自己的呐喊声更早到达视野尽头的小身影，',
       me.get_colored_name(),
-      ' 无奈的摇了摇头。',
+      ' 无奈地摇了摇头。',
     ]);
     await era.printAndWait([
       '如果 ',
@@ -287,7 +287,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '……只是对 ',
       me.get_colored_name(),
-      ' 的舌头来说，这些东西似乎依旧甜过头了。',
+      ' 的舌头来说，就算不止尝过一次，这些东西依旧甜过头了。',
     ]);
     flags.wait_flag = get_attr_and_print_in_event(52, attr_change, 0);
   };

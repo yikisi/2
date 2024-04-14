@@ -135,11 +135,9 @@ module.exports = (handlers) => {
         me.get_colored_name(),
         ' 给自己站着都费劲的身体又换了个姿势。',
       ]);
-      await era.printAndWait([
-        '其实 ',
-        me.get_colored_name(),
-        ' 直到现在浑身都还酸得要死，不过既然努力真的没有白费，那苦一点也算值得了。',
-      ]);
+      await era.printAndWait(
+        '虽然身体直到现在都还酸得要死，不过既然努力真的没有白费，那苦一点也算值得了。',
+      );
       await era.printAndWait([
         '调整好呼吸，整理好自己的体操服与号码布，',
         urara.get_colored_name(),
@@ -238,12 +236,10 @@ module.exports = (handlers) => {
           ' 不用担心！',
         ]);
         await era.printAndWait([
-          '听到 ',
+          '回应着 ',
           me.get_colored_name(),
-          ' 的话，',
+          ' 的话语，',
           urara.get_colored_name(),
-          ' 对 ',
-          me.get_colored_name(),
           ' 露出了令人安心的笑容。',
         ]);
         await urara.say_and_wait([

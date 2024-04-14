@@ -414,24 +414,7 @@ async function goto_sex(chara_id, sex_loc) {
       }
       await print_ero_page(chara_id);
       if (check < 0) {
-        if (era.get('tflag:强奸') === 0) {
-          if (
-            era.get(`mark:${chara_id}:苦痛`) < 3 &&
-            !era.get(`ex:${chara_id}:苦痛获取`)
-          ) {
-            era.set(`nowex:${chara_id}:苦痛获取`, 1);
-          }
-          if (
-            era.get(`mark:${chara_id}:反抗`) < 3 &&
-            !era.get(`ex:${chara_id}:反抗获取`)
-          ) {
-            era.set(`nowex:${chara_id}:反抗获取`, 1);
-          }
-          await update_marks(true, chara_id);
-          if (dice < 0.95) {
-            sys_hurt_uma(chara_id, 1 + (dice < 0.05));
-          }
-        } else if (era.get(`status:${chara_id}:超马跳Z`)) {
+        if (era.get(`status:${chara_id}:超马跳Z`)) {
           await era.printAndWait([
             '虽然一时情动，但当 ',
             chara.get_colored_name(),
@@ -454,9 +437,26 @@ async function goto_sex(chara_id, sex_loc) {
           if (dice < 0.95) {
             era.add(`status:${chara_id}:疲惫`, 3 + (dice < 0.05));
           }
-        } else {
+        } else if (era.get(`status:${chara_id}:马跳S`)) {
           if (dice < 0.95) {
             era.add(`status:${chara_id}:疲惫`, 2 + (dice < 0.05));
+          }
+        } else if (era.get('tflag:强奸') === 0) {
+          if (
+            era.get(`mark:${chara_id}:苦痛`) < 3 &&
+            !era.get(`ex:${chara_id}:苦痛获取`)
+          ) {
+            era.set(`nowex:${chara_id}:苦痛获取`, 1);
+          }
+          if (
+            era.get(`mark:${chara_id}:反抗`) < 3 &&
+            !era.get(`ex:${chara_id}:反抗获取`)
+          ) {
+            era.set(`nowex:${chara_id}:反抗获取`, 1);
+          }
+          await update_marks(true, chara_id);
+          if (dice < 0.95) {
+            sys_hurt_uma(chara_id, 1 + (dice < 0.05));
           }
         }
       }

@@ -73,6 +73,13 @@ module.exports = (handlers) => {
           -get_random_value(300, 500),
         );
         break;
+      case medicine_enum.uma_s:
+        era.set(`status:${extra_flag.user}:马跳S`, 1);
+        break;
+      case medicine_enum.super_z:
+        temp = 0.4;
+        era.set(`status:${extra_flag.user}:超马跳Z`, 1);
+        break;
       case medicine_enum.fron_k:
       case medicine_enum.fron_p:
         temp = 0.3;

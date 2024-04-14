@@ -578,7 +578,7 @@ module.exports = (handlers) => {
       urara.get_colored_name(),
       ' 又在挥手中引得支持',
       urara.sex,
-      '的大家的一片欢呼。',
+      '的大家一片欢呼。',
     ]);
     await era.printAndWait([
       '每当 ',

@@ -172,19 +172,16 @@ module.exports = (handlers) => {
 
     await era.printAndWait([
       urara.get_colored_name(),
-      ' 并非光说不练的女孩，',
+      ' 并非光说不练的',
+      urara.get_child_sex_title(),
+      '，',
       urara.sex,
       '所做出的一切都是真诚之举。',
     ]);
     await era.printAndWait([
-      me.get_colored_name(),
-      ' 理解',
+      '没有才能可以理解，对奔跑的渴望显而易见，但现在却很难看到',
       urara.sex,
-      '没有才能，也清楚',
-      urara.sex,
-      '渴望奔跑，但现在却很难看到',
-      urara.sex,
-      '的「渴望胜利」。',
+      '对「胜利」的追求。',
     ]);
     await era.printAndWait([
       '一般来说，尽管不推崇将一着作为',
@@ -205,16 +202,15 @@ module.exports = (handlers) => {
       urara.get_colored_name(),
       ' 对自身有多了解，但抱着试试看的态度，',
       me.get_colored_name(),
-      ' 还是直接问了。',
+      ' 还是直接抛出了问题。',
     ]);
+    era.printButton('「乌拉拉，你不喜欢第一名吗？」', 1);
     await era.printAndWait([
-      '只是没有直接回答 ',
+      '没有直接回答大人的问题，小',
+      urara.get_uma_sex_title(),
+      '反而向 ',
       me.get_colored_name(),
-      ' 的问题，',
-      urara.get_colored_name(),
-      ' 反而向 ',
-      me.get_colored_name(),
-      ' 抛出了另一个问题。',
+      ' 抛回了另一个问题。',
     ]);
     await urara.say_and_wait([callname, '，你现在开心吗？']);
     await era.printAndWait([
@@ -256,9 +252,6 @@ module.exports = (handlers) => {
       '很清楚自己想要什么。',
     ]);
     await era.printAndWait([
-      '现在的 ',
-      me.get_colored_name(),
-      ' 明白了，',
       urara.get_colored_name(),
       ' 对于一着的执念并不在竞技胜利本身。',
     ]);
@@ -278,11 +271,9 @@ module.exports = (handlers) => {
       urara.sex,
       '并非只为了像大多数那样「证明自己」或「顺势而为」，而是想为场外的大家赋予更多情感。',
     ]);
-    await era.printAndWait([
-      '比如说快乐、比如希望，比如与苦恼的 ',
-      me.get_colored_name(),
-      ' 的第一次相遇时的鼓动。',
-    ]);
+    await era.printAndWait(
+      '比如说快乐、比如希望，比如与苦恼的陌生人的第一次相遇时的鼓动。',
+    );
     await era.printAndWait(
       '但只有对外的情绪倾向是很「危险」的，甚至训练员帮助担当获胜的职责所在都得先放到一边：',
     );
@@ -320,7 +311,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '看到 ',
-      me.get_colored_name(),
+      callname,
       ' 认真地竖起了大拇指，',
       urara.get_colored_name(),
       ' 也真诚地笑着回应道。',

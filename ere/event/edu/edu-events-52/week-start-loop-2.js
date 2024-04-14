@@ -341,7 +341,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     urara.sex,
     '」，',
     me.get_colored_name(),
-    ' 无奈地被迫与眼前这只全身毛都炸起来的粉色小猫拉开距离。',
+    ' 无奈被迫与眼前这只全身毛都炸起来的粉色小猫拉开距离。',
   ]);
 
   era.printButton(

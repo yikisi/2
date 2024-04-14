@@ -1,10 +1,4 @@
 ﻿{
-  "className": [
-    "g1",
-    "g2",
-    "g3",
-    "op"
-  ],
   "raceStyleFlag": {
     "大逃": 0,
     "领头": 1,

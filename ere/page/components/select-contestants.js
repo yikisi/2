@@ -9,6 +9,7 @@ const { race_infos, race_enum } = require('#/data/race/race-const');
 
 /**
  * @param {number} race
+ * @returns {Promise<number[]>}
  */
 async function select_contestants(race) {
   if (race === race_enum.begin_race) {
