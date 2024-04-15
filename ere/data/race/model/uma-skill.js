@@ -9,7 +9,7 @@ class UmaSkill {
    * @param {number} typeRotation
    * @param {number} typeDistance
    * @param {number} typeGround
-   * @param {string} typeStyle
+   * @param {number} typeStyle
    * @param {number} typeCurve
    * @param {number} typePhase
    * @param {number} typeFinal

@@ -1,4 +1,11 @@
-﻿const era = require('#/era-electron');
+﻿const { sort_list } = require('#/utils/list-utils');
+
+const RaceInfo = require('#/data/race/model/race-info');
+const {
+  mod_stamina_cost_mess_grass,
+  mod_stamina_cost_mess_dirt,
+  raceDecel,
+} = require('#/data/race/race-const.json');
 
 //起跑速度=3 加速度=24
 const startVelocity = 3;
@@ -7,16 +14,10 @@ const startAcceleration = 24;
 //上坡时基础加速度为三分之二
 const raceAcceModUphill = 2 / 3;
 
-const {
-  mod_stamina_cost_mess_grass,
-  mod_stamina_cost_mess_dirt,
-  raceDecel,
-} = require('#/data/race/race-sim-const.js');
-const RaceInfo = require('#/data/race/model/race-info');
-
 /**
  * @param {PseudoUma[]} list_chara
  * @param {RaceInfo} race_info
+ * @returns {{loc:number[][]}}
  */
 function sys_sim_race(list_chara, race_info) {
   const count_uma = list_chara.length;
@@ -27,15 +28,11 @@ function sys_sim_race(list_chara, race_info) {
 
   let flag_race = true;
 
-  let list_finished = [];
-  let list_msec_cam = [];
-
   //记录每秒位置与技能发动状态 用于播放战报
   let record_location_list = [];
   let record_skill_list = [];
 
-  let record_location_sec = new Array(count_uma).fill(0);
-  record_location_list.push(record_location_sec);
+  record_location_list.push(new Array(count_uma).fill(0));
 
   let record_skill_sec = new Array(count_uma).fill([]);
 
@@ -52,7 +49,7 @@ function sys_sim_race(list_chara, race_info) {
         Math.random() < itemUma.probs.skill
       ) {
         start_delay = itemSkill.skilldata.startDelayConst;
-        record_skill_sec[itemUma.index_race - 1].push(itemSkill.skilldata);
+        record_skill_sec[itemUma.index_race].push(itemSkill.skilldata);
       }
     }
     for (let itemSkill of list_skill_start) {
@@ -61,7 +58,7 @@ function sys_sim_race(list_chara, race_info) {
         Math.random < itemUma.probs.skill
       ) {
         start_delay *= itemSkill.skilldata.startDelayMod;
-        record_skill_sec[itemUma.index_race - 1].push(itemSkill.skilldata);
+        record_skill_sec[itemUma.index_race].push(itemSkill.skilldata);
       }
     }
     itemUma.race.velocityReal = startVelocity * (1 - start_delay);
@@ -71,136 +68,100 @@ function sys_sim_race(list_chara, race_info) {
 
   //起跑第一秒的技能报告
   record_skill_list.push(record_skill_sec);
+  let list_finished = [],
+    list_msec_cam = [],
+    list_in_race = [...list_chara];
 
   while (flag_race) {
     //准备记录当前秒的战报
-    record_location_sec.fill(0);
-    record_skill_sec.fill([]);
+    const record_location_sec = new Array(count_uma);
+    record_skill_sec = new Array(count_uma).fill([]);
 
     //每秒先进行冲线判定 将高速相机列表置空
     list_msec_cam = [];
 
-    //将所有未完成比赛且在此刻冲线的马娘录入高速相机列表
-    for (let itemUma of list_chara) {
-      if (!itemUma.flagFinish && itemUma.race.location > race_info.span) {
-        itemUma.flagFinish = true;
-        list_msec_cam.push(itemUma);
+    list_in_race = list_in_race.filter((e) => {
+      e.flagFinish = !e.flagFinish && e.race.location >= race_info.span;
+      if (e.flagFinish) {
+        list_msec_cam.push(e);
       }
-    }
+      return !e.flagFinish;
+    });
 
-    //每次筛出高速相机列表中位置最靠前的马娘并加入完赛列表
-    while (list_msec_cam.length) {
-      let cam_rank = list_finished.length + 1;
-      let cam_chara = list_msec_cam.reduce(
-        (prev, curr) => (prev.race.location > curr.race.location ? prev : curr),
-        null,
-      );
-      cam_chara.rank.race = cam_rank;
-      list_finished.push(cam_chara);
-      //同时再移出比赛列表以减少循环嵌套
-      list_msec_cam.splice(list_msec_cam.indexOf(cam_chara), 1);
-      list_chara.splice(list_chara.indexOf(cam_chara), 1);
-    }
+    list_finished.push(...sort_list(list_msec_cam, (e) => e.race.location));
+    list_finished.forEach(
+      (e) =>
+        (record_location_sec[e.index_race] =
+          race_info.span + 1000 * (race_info.gates - e.rank.curr + 1)),
+    );
 
-    //完赛马娘的当前位置记录
-    for (let itemUma of list_finished) {
-      record_location_sec[itemUma.index_race - 1] = race_info.span;
-    }
-
-    //再无待计算马娘则比赛结束
-    if (!list_chara) {
+    // 再无待计算马娘则比赛结束
+    if (!list_in_race.length) {
       flag_race = false;
-      record_location_list.push(record_location_sec);
       continue;
     }
 
     //计算其余所有未完赛马娘的位置与速度
-    for (let itemUma of list_chara) {
+    list_in_race.forEach((uma) => {
       //先结算上一tick的速度至移动距离 以及上一tick的加速度至速度
-      itemUma.race.location += itemUma.race.velocityReal;
-      itemUma.race.velocityReal += itemUma.race.acceleration;
-      itemUma.race.staminaCost =
+      uma.race.location += uma.race.velocityReal;
+      uma.race.velocityReal += uma.race.acceleration;
+      uma.race.staminaCost =
         (20 / 144) *
-        Math.pow(
-          itemUma.race.velocityReal - itemUma.base.velocityIdeal + 12,
-          2,
-        ) *
+        Math.pow(uma.race.velocityReal - uma.base.velocityIdeal + 12, 2) *
         mod_stamina_cost_mess;
-
-      record_location_sec[itemUma.index_race - 1] = itemUma.race.location;
-    }
+    });
 
     //更新战报总位置表
     record_location_list.push(record_location_sec);
 
     //按位置sort一下以计算排名 顺便生成未完赛的短位置表继续计算
-    let list_location = [];
-    list_chara.sort((a, b) => b.race.location - a.race.location);
-    let tmpRank = list_finished.length;
-    for (let itemUma of list_chara) {
-      itemUma.rank.last = itemUma.rank.curr;
-      itemUma.rank.curr = tmpRank++;
-      list_location.push(itemUma.race.location);
-    }
+    let list_location = (list_in_race = sort_list(
+      list_in_race,
+      (e) => e.race.location,
+    )).map((e, i) => {
+      e.rank.last = e.rank.curr;
+      e.rank.curr = i + list_finished.length;
+      return e.race.location;
+    });
 
     //通过位置表计算一下相对距离 之后红技光环应该也会用位置表读范围
-    for (let indUma in list_chara) {
-      list_chara[indUma].diff.ahead =
-        indUma === 0
-          ? -1
-          : list_chara[indUma - 1].race.location -
-            list_chara[indUma].race.location;
-      list_chara[indUma].diff.behind =
-        indUma === list_location.length
-          ? -1
-          : list_chara[indUma].race.location -
-            list_chara[indUma + 1].race.location;
-      //速度大于前一名马娘时获得准备超车状态
-      list_chara[indUma].flag.overtake =
-        !indUma &&
-        list_chara[indUma].race.velocityReal >
-          list_chara[indUma - 1].race.velocityReal;
-    }
+    list_in_race.forEach((uma, i, l) => {
+      uma.diff.ahead =
+        i === 0 ? -1 : l[i - 1].race.location - uma.race.location;
+      uma.diff.behind =
+        i === l.length - 1 ? -1 : uma.race.location - l[i + 1].race.location;
+      // 速度大于前一名马娘时获得准备超车状态
+      uma.flag.overtake =
+        i > 0 && uma.race.velocityReal > l[i - 1].race.velocityReal;
+
+      record_location_sec[uma.index_race] = uma.race.location;
+    });
 
     //模拟技能触发
-    for (let itemUma of list_chara) {
-      //读取本时刻脚下赛道状态
+    for (const itemUma of list_in_race) {
+      // 读取本时刻脚下赛道状态
+      const cur_lane = race_info.lanes.find(
+        (e) =>
+          itemUma.race.location >= e.start && itemUma.race.location < e.end,
+      );
       itemUma.race.groundCurr = {
-        slope: 0,
-        isCurve: false,
-        isLast: false,
+        slope:
+          race_info.slopes.find(
+            (e) =>
+              itemUma.race.location >= e.start && itemUma.race.location < e.end,
+          )?.slope || 0,
+        isCurve: cur_lane?.is_curve || false,
+        isLast: cur_lane?.is_last || false,
         phase: 0,
       };
-      //读取坡度
-      for (let itemSeg of race_info.seg_slopes) {
-        if (
-          itemUma.race.location >= itemSeg.start &&
-          itemUma.race.location < itemSeg.end
-        ) {
-          itemUma.race.groundCurr.slope = itemSeg.slope;
-          break;
-        }
-      }
-      //读取弯道
-      for (let itemSeg of race_info.seg_curves) {
-        if (
-          itemUma.race.location >= itemSeg.start &&
-          itemUma.race.location < itemSeg.end
-        ) {
-          itemUma.race.groundCurr.isCurve = itemSeg.is_curve;
-          itemUma.race.groundCurr.isLast = itemSeg.is_last;
-          break;
-        }
-      }
       //读取赛程阶段 方法略有不同
-      for (let indSeg of race_info.phases) {
-        if (
-          itemUma.race.location >= race_info.phases[indSeg] &&
-          itemUma.race.location < race_info.span
-        ) {
-          itemUma.race.groundCurr.phase = indSeg;
-        }
+      while (
+        itemUma.race.location >= race_info.phases[itemUma.race.groundCurr.phase]
+      ) {
+        itemUma.race.groundCurr.phase++;
       }
+      itemUma.race.groundCurr.phase--;
 
       //重置目标速度和加速度为赛段基础值
       itemUma.race.velocityIdeal = itemUma.base.velocityIdeal *=
@@ -251,7 +212,7 @@ function sys_sim_race(list_chara, race_info) {
               (20 / 144) *
               Math.pow(planVelocity - itemUma.base.velocityIdeal + 12, 2) *
               mod_stamina_cost_mess *
-              itemUma.staminaCostModFinal;
+              itemUma.factorFinal.sCostMult;
             // 计算最合理的冲刺距离 以求刚好在终点用光耐力
             // ……理论上耐力够了就直接冲了不过这里
             let rushDistance =
@@ -266,7 +227,7 @@ function sys_sim_race(list_chara, race_info) {
             let rushLocation = race_info.span - 60 - timeRush * planVelocity;
             let timeNorm = Math.ceil(
               (rushLocation - itemUma.race.location) /
-                itemUma.raceVelocityIdeal,
+                itemUma.race.velocityIdeal,
             );
             //记录计划冲刺速度 所用时间 及开始位置
             let itemPlan = {
@@ -298,7 +259,7 @@ function sys_sim_race(list_chara, race_info) {
       }
 
       //若在冲刺状态则目标速度为冲刺速度
-      if (itemUma.flag.finalRushRush) {
+      if (itemUma.flag.finalRush) {
         itemUma.race.velocityIdeal = itemUma.race.velocityPlanRush;
       }
 
@@ -369,31 +330,31 @@ function sys_sim_race(list_chara, race_info) {
             itemUma.flag.allowPlan = true;
           }
 
-          record_skill_sec[itemUma.index_race - 1].push(itemSkill.skilldata);
+          record_skill_sec[itemUma.index_race].push(itemSkill.skilldata);
         }
       }
     }
 
     //计算红技时换成以index遍历
-    for (let indUma in list_chara) {
-      for (let itemSkill of list_chara[indUma].list_skill) {
+    for (let indUma in list_in_race) {
+      for (let itemSkill of list_in_race[indUma].list_skill) {
         if (itemSkill.skilldata.typeDebuff && itemSkill.triggerFlag) {
           itemSkill.triggerTimeCount++;
-          for (let targUma in list_chara) {
+          for (let targUma in list_in_race) {
             if (
               targUma !== indUma &&
               targUma >= indUma - itemSkill.skilldata.rangeLeft &&
               targUma <= indUma + itemSkill.skilldata.rangeRight
             ) {
-              list_chara[targUma].race.velocityReal -=
+              list_in_race[targUma].race.velocityReal -=
                 itemSkill.skilldata.debuffVelocityReal;
-              list_chara[targUma].race.velocityIdeal -=
+              list_in_race[targUma].race.velocityIdeal -=
                 itemSkill.skilldata.debuffVelocityIdeal;
-              list_chara[targUma].race.acceleration -=
+              list_in_race[targUma].race.acceleration -=
                 itemSkill.skilldata.debuffAcceleration;
-              list_chara[targUma].race.stamina -=
+              list_in_race[targUma].race.stamina -=
                 itemSkill.skilldata.debuffStamina *
-                list_chara[targUma].base.stamina;
+                list_in_race[targUma].base.stamina;
             }
           }
         }
@@ -401,33 +362,35 @@ function sys_sim_race(list_chara, race_info) {
     }
 
     //结算
-    for (let itemUma of list_chara) {
+    for (let itemUma of list_in_race) {
       //超速则不加速反而进行减速
       if (itemUma.race.velocityReal > itemUma.race.velocityIdeal) {
-        itemUma.race.acceleration = raceDecel[itemUma.race.groundCurr.span];
+        itemUma.race.acceleration = raceDecel[itemUma.race.groundCurr.phase];
       }
       //目标速度不会低于最低速度
-      itemUma.race.velocityIdeal =
-        itemUma.race.velocityIdeal < itemUma.base.velocityMin
-          ? itemUma.base.velocityMin
-          : itemUma.race.velocityIdeal;
+      itemUma.race.velocityIdeal = Math.max(
+        itemUma.race.velocityIdeal,
+        itemUma.base.velocityMin,
+      );
       //扣耐不会成负数 回耐也不会超过初始上限
-      itemUma.race.stamina -= itemUma.race.staminaCost;
-      itemUma.race.stamina =
-        itemUma.race.stamina < 0 ? 0 : itemUma.race.stamina;
-      itemUma.race.stamina =
-        itemUma.race.stamina > itemUma.base.stamina
-          ? itemUma.base.stamina
-          : itemUma.race.stamina;
+      itemUma.race.stamina = Math.min(
+        Math.max(itemUma.race.stamina - itemUma.race.staminaCost, 0),
+        itemUma.base.stamina,
+      );
       //空耐则目标速度掉为最低速度
       if (itemUma.race.stamina <= 0) {
         itemUma.race.velocityIdeal = itemUma.base.velocityMin;
         itemUma.race.acceleration = raceDecel[4];
       }
-      //更新战报技能发动表
-      record_skill_list.push(record_skill_sec);
     }
+    //更新战报技能发动表
+    record_skill_list.push(record_skill_sec);
   }
+  list_finished.forEach((e, i) => {
+    e.rank.last = e.rank.curr;
+    e.rank.curr = i + 1;
+  });
+  return { loc: record_location_list };
 }
 
 module.exports = sys_sim_race;

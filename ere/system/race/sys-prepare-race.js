@@ -1,17 +1,14 @@
-﻿// const era = require('#/era-electron');
-const { sort_list } = require('#/utils/list-utils');
+﻿const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const {
-  mod_attr_stamina_style,
-  mod_attr_intelligence_adapt_style,
-
-  mod_velocity_style,
-  mod_velocity_final_adapt_distance,
-
-  mod_acceleration_style,
-  mod_acceleration_adapt_ground,
   mod_acceleration_adapt_distance,
+  mod_acceleration_adapt_ground,
+  mod_acceleration_style,
+  mod_attr_intelligence_adapt_style,
+  mod_attr_stamina_style,
+  mod_velocity_final_adapt_distance,
+  mod_velocity_style,
 } = require('#/data/race/race-const.json');
 const { attr_enum } = require('#/data/train-const');
 
@@ -21,19 +18,17 @@ const { attr_enum } = require('#/data/train-const');
  */
 function sys_prepare_race(list_chara, race_info) {
   // Shuffle一下角色列表
-  list_chara = sort_list(list_chara, Math.random);
-
-  for (const itemUma of list_chara) {
+  for (const uma of list_chara) {
     // 分配赛道 及初始名次以避免意外
-    itemUma.rank = {
-      curr: itemUma.index_race,
-      last: itemUma.index_race,
+    uma.rank = {
+      curr: uma.index_race,
+      last: uma.index_race,
     };
 
-    itemUma.adapts.style = itemUma.adapt_style_list[itemUma.style];
+    uma.adapts.style = uma.adapt_style_list[uma.style];
 
     // 先从临时技能表中筛除所有不相关技能
-    itemUma.list_skill = itemUma.list_skill.filter(
+    uma.list_skill = uma.list_skill.filter(
       (itemSkill) =>
         !(
           // 跟比赛无关的技能
@@ -50,7 +45,7 @@ function sys_prepare_race(list_chara, race_info) {
               itemSkill.skilldata.typeGround !== race_info.ground) ||
             // 有跑法限制且不符
             (itemSkill.skilldata.typeStyle !== undefined &&
-              itemSkill.skilldata.typeStyle !== itemUma.style) ||
+              itemSkill.skilldata.typeStyle !== uma.style) ||
             // 有赛马场限制且不符
             (itemSkill.skilldata.typeTrack !== undefined &&
               itemSkill.skilldata.typeTrack !== race_info.track) ||
@@ -67,55 +62,44 @@ function sys_prepare_race(list_chara, race_info) {
         ),
     );
 
-    //计算心情对面板的增幅
-    let mod_attr_motivation = 1 + itemUma.motivation * 0.02;
+    // 计算心情对面板的增幅
     Object.values(attr_enum).forEach((v) => {
-      itemUma.attrs[v] *= mod_attr_motivation;
+      uma.attrs[v] *= 1 + uma.motivation * 0.02;
     });
 
     //不良马场对速度属性的减幅
     if (race_info.mess === RaceInfo.mess_enum.bad) {
-      itemUma.attrs[attr_enum.speed] -= 50;
+      uma.attrs[attr_enum.speed] -= 50;
     }
 
     //赛道状况对力量属性的减幅
     if (race_info.ground === RaceInfo.ground_enum.grass) {
       //草地良则不减 其余-50
-      itemUma.attrs[attr_enum.strength] =
-        race_info.mess === RaceInfo.mess_enum.well
-          ? itemUma.attrs[attr_enum.strength]
-          : itemUma.attrs[attr_enum.strength] - 50;
+      uma.attrs[attr_enum.strength] -=
+        50 * (race_info.mess === RaceInfo.mess_enum.well);
     } else {
       //泥地稍重则-50 其余-100
-      itemUma.attrs[attr_enum.strength] =
-        race_info.mess === RaceInfo.mess_enum.semi
-          ? itemUma.attrs[attr_enum.strength] - 50
-          : itemUma.attrs[attr_enum.strength] - 100;
+      uma.attrs[attr_enum.strength] -=
+        100 - 50 * (race_info.mess === RaceInfo.mess_enum.semi);
     }
 
     //跑法适应性为智力提供乘算系数
-    itemUma.attrs[attr_enum.intelligence] *=
-      mod_attr_intelligence_adapt_style[itemUma.adapts.style];
+    uma.attrs[attr_enum.intelligence] *=
+      mod_attr_intelligence_adapt_style[uma.adapts.style];
 
     //计算比赛偏重属性对速度属性的增幅
-    let mod_attr_speed_race_bonus = 1;
-    if (race_info.bonus1 !== undefined) {
-      mod_attr_speed_race_bonus +=
-        0.025 * Math.floor(itemUma.attrs[race_info.bonus1] / 300);
-    }
-    if (race_info.bonus2 !== undefined) {
-      mod_attr_speed_race_bonus +=
-        0.025 * Math.floor(itemUma.attrs[race_info.bonus2] / 300);
-    }
-    itemUma.attrs[attr_enum.speed] *= mod_attr_speed_race_bonus;
+    uma.attrs[attr_enum.speed] *= race_info.attr_bonus.reduce(
+      (p, c) => p + 0.025 * Math.floor(uma.attrs[c] / 300),
+      1,
+    );
 
     //计算整个比赛生效的被动属性加成技能
     //筛除结算完毕的常时被动 只留触发技能给比赛模拟
-    itemUma.list_skill = itemUma.list_skill.filter((itemSkill) => {
+    uma.list_skill = uma.list_skill.filter((itemSkill) => {
       if (!itemSkill.skilldata.typeTrigger) {
         //被动技能直接结算
         Object.values(attr_enum).forEach(
-          (v) => (itemUma.attrs[v] += itemSkill.skilldata.attrBonus[v]),
+          (v) => (uma.attrs[v] += itemSkill.skilldata.attrBonus[v]),
         );
       } else {
         //触发类技能则计算一下持续时间
@@ -127,90 +111,79 @@ function sys_prepare_race(list_chara, race_info) {
       return itemSkill.skilldata.typeTrigger;
     });
 
-    //防止出0
-    Object.values(attr_enum).forEach((v) => {
-      if (itemUma.attrs[v] <= 0) {
-        itemUma.attrs[v] = 1;
-      }
-    });
+    uma.attrs = uma.attrs.map((e) => Math.max(e, 1));
 
     //调取当前跑法在赛中各阶段的目标速度及加速度倍率
     // TODO PseudoUma.style变成enum
-    itemUma.factorPhase.vStyle = mod_velocity_style[itemUma.style];
-    itemUma.factorPhase.aStyle = mod_acceleration_style[itemUma.style];
+    uma.factorPhase.vStyle = mod_velocity_style[uma.style];
+    uma.factorPhase.aStyle = mod_acceleration_style[uma.style];
 
     //由赛道长度决定普通状态下的目标速度
-    itemUma.base.velocityIdeal = 22 - 0.001 * race_info.span;
+    uma.base.velocityIdeal = 22 - 0.001 * race_info.span;
 
     //由复合因素决定终盘阶段的目标速度增加量
-    itemUma.factorFinal.vIdealAdd =
-      Math.sqrt(500 * itemUma.attrs[attr_enum.speed]) *
-      mod_velocity_final_adapt_distance[itemUma.adapts.distance] *
+    uma.factorFinal.vIdealAdd =
+      Math.sqrt(500 * uma.attrs[attr_enum.speed]) *
+      mod_velocity_final_adapt_distance[uma.adapts.distance] *
       0.002;
 
     //由智力决定目标速度随机浮动值
-    itemUma.factorPhase.vRand = [];
-    let mod_velocity_random_upper =
-      (itemUma.attrs[attr_enum.intelligence] / 550000) *
-      (Math.log(itemUma.attrs[attr_enum.intelligence] * 0.1) / Math.log(10));
-    let mod_velocity_random_lower = mod_velocity_random_upper - 0.0065;
-    for (let ind = 0; ind < 3; ind++) {
-      itemUma.factorPhase.vRand.push(
+    const mod_velocity_random_upper =
+      (uma.attrs[attr_enum.intelligence] / 550000) *
+      (Math.log(uma.attrs[attr_enum.intelligence] * 0.1) / Math.log(10));
+    uma.factorPhase.vRand = uma.factorPhase.vRand.map(
+      () =>
         1 +
-          itemUma.base.velocityIdeal *
-            (Math.random() *
-              (mod_velocity_random_upper - mod_velocity_random_lower) +
-              mod_velocity_random_lower),
-      );
-    }
+        uma.base.velocityIdeal *
+          get_random_value(
+            mod_velocity_random_upper - 0.0065,
+            mod_velocity_random_upper,
+          ),
+    );
 
     //由速度及根性属性决定冲刺状态下的最大目标速度
-    itemUma.base.velocityMaxRush =
-      1.05 *
-        itemUma.base.velocityIdeal *
-        (itemUma.factorPhase.vStyle[2] + 0.01) +
-      2.05 * itemUma.factorFinal.vIdealAdd +
-      Math.pow(450 * itemUma.attrs[attr_enum.toughness], 0.597) * 0.0001;
+    uma.base.velocityMaxRush =
+      1.05 * uma.base.velocityIdeal * (uma.factorPhase.vStyle[2] + 0.01) +
+      2.05 * uma.factorFinal.vIdealAdd +
+      Math.pow(450 * uma.attrs[attr_enum.toughness], 0.597) * 0.0001;
 
     //由根性决定最低速度
-    itemUma.base.velocityMin =
-      itemUma.base.velocityIdeal * 0.85 +
-      Math.sqrt(200 * itemUma.attrs[attr_enum.toughness]) * 0.001;
+    uma.base.velocityMin =
+      uma.base.velocityIdeal * 0.85 +
+      Math.sqrt(200 * uma.attrs[attr_enum.toughness]) * 0.001;
 
     //由力量决定基础加速度
-    itemUma.base.acceleration =
+    uma.base.acceleration =
       0.006 *
-      Math.sqrt(500 * itemUma.attrs[attr_enum.strength]) *
-      mod_acceleration_adapt_ground[itemUma.adapts.ground] *
-      mod_acceleration_adapt_distance[itemUma.adapts.distance];
+      Math.sqrt(500 * uma.attrs[attr_enum.strength]) *
+      mod_acceleration_adapt_ground[uma.adapts.ground] *
+      mod_acceleration_adapt_distance[uma.adapts.distance];
 
     //由耐力属性以及400隐藏基础耐力决定耐力条 顺便填满
-    itemUma.base.stamina =
+    uma.base.stamina =
       0.8 *
-        (itemUma.attrs[attr_enum.endurance] + 400) *
-        mod_attr_stamina_style[itemUma.style] +
+        (uma.attrs[attr_enum.endurance] + 400) *
+        mod_attr_stamina_style[uma.style] +
       race_info.span;
-    itemUma.race.stamina = itemUma.base.stamina;
+    uma.race.stamina = uma.base.stamina;
 
     //由根性属性决定终盘后耐力消耗系数
-    itemUma.factorFinal.sCostMult =
-      1 + 200 / Math.sqrt(600 * itemUma.attrs[attr_enum.toughness]);
+    uma.factorFinal.sCostMult =
+      1 + 200 / Math.sqrt(600 * uma.attrs[attr_enum.toughness]);
 
     //由智力决定技能触发率 最低20%
-    itemUma.probs.skill = 1 - 90 / itemUma.attrs[attr_enum.intelligence];
-    itemUma.probs.skill = itemUma.probs.skill < 0.2 ? 0.2 : itemUma.probs.skill;
+    uma.probs.skill = 1 - 90 / uma.attrs[attr_enum.intelligence];
+    uma.probs.skill = uma.probs.skill < 0.2 ? 0.2 : uma.probs.skill;
 
     //由力量决定受上坡减速的影响程度 最大100%
-    itemUma.factorSlope.up = 200 / itemUma.attrs[attr_enum.strength];
-    itemUma.factorSlope.up =
-      itemUma.factorSlope.up > 1 ? 1 : itemUma.factorSlope.up;
+    uma.factorSlope.up = 200 / uma.attrs[attr_enum.strength];
+    uma.factorSlope.up = uma.factorSlope.up > 1 ? 1 : uma.factorSlope.up;
 
     //由智力决定受下坡加速的影响概率
-    itemUma.factorSlope.down = 0.0004 * itemUma.attrs[attr_enum.intelligence];
+    uma.factorSlope.down = 0.0004 * uma.attrs[attr_enum.intelligence];
 
     //由智力决定最终冲刺计划的选择概率
-    itemUma.probs.planRush =
-      0.15 + 0.0005 * itemUma.attrs[attr_enum.intelligence];
+    uma.probs.planRush = 0.15 + 0.0005 * uma.attrs[attr_enum.intelligence];
   }
 }
 

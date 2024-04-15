@@ -125,15 +125,12 @@ function sys_parse_for_race(team_chara, race, info) {
   // 此时不再保证干劲非负
   gacha(
     legends_default.filter(
-      (e) => ret.findIndex((uma) => uma.index_chara === e.id) === -1,
-      // &&
-      // e.adapt_ground[phantom_age][info.ground] >= 6 &&
-      // e.adapt_distance[phantom_age][info.distance] >= 6
+      (e) =>
+        ret.findIndex((uma) => uma.index_chara === e.id) === -1 &&
+        e.adapt_ground[phantom_age][info.ground] >= 6 &&
+        e.adapt_distance[phantom_age][info.distance] >= 6,
     ),
-    Math.min(
-      info.legend_count - ret.length + team_chara.length,
-      info.gates - ret.length,
-    ),
+    Math.min(2 - ret.length + team_chara.length, info.gates - ret.length),
   ).forEach((uma) => {
     ret.push(
       new PseudoUma(

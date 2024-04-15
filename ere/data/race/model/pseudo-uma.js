@@ -1,6 +1,8 @@
 const { attr_names } = require('#/data/train-const');
 
 class RaceSkill {
+  /** @type {number} */
+  duration;
   /**
    * @param {UmaSkill} skill
    */
