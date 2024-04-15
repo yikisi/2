@@ -7,8 +7,8 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { ero_hooks } = require('#/data/event/ero-hooks');
 const { medicine_enum, medicine_names } = require('#/data/ero/item-const');
+const { ero_hooks } = require('#/data/event/ero-hooks');
 
 const handlers = {};
 

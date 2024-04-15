@@ -1,42 +1,75 @@
+const era = require('#/era-electron');
+
 const { add_event, cb_enum } = require('#/event/queue');
 
+const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
+const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
+const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
+
+const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
-const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
-const era = require('#/era-electron');
-const check_aim_race = require('#/event/snippets/check-aim-race');
-const SuEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
-const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
-const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 
+/** @type {Record<string,function(Record<string,*>)>} */
 const handlers = {};
-const aim_races = {};
-aim_races[race_enum.begin_race] = 3;
-//2=10，3=11，最高位的1代表存在赛后事件，最低位的1代表存在赛前事件
-//planA:
-aim_races[get_aim_race_index(race_enum.hope_sta, 0)] = 3;
-aim_races[get_aim_race_index(race_enum.hoch_sho, 1)] = 3;
-aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = 3;
-aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 3;
-aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 3;
 
-aim_races[get_aim_race_index(race_enum.sank_hai, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 3;
+handlers[check_stages.aim_check] = () => {
+  const buffer = [],
+    races = new RaceHistory(32).get();
+  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+  buffer.push(check_aim_and_get_entry(races, race_enum.hope_sta, 0, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 1));
+  if (new TachyonEduMarks().plan_b) {
+    buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 1));
+    buffer.push(check_aim_and_get_entry(races, race_enum.prix_lat, 2, 1));
+  } else {
+    buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.sank_hai, 2, 2));
+    buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
+  }
+  return buffer;
+};
 
-/* todo planB
-aim_races[get_aim_race_index(race_enum.asah_sta, 0)] = 3;
-aim_races[get_aim_race_index(race_enum.hope_sta, 0)] = 3;
-aim_races[get_aim_race_index(race_enum.hoch_sho, 1)] = 3;
-aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = 3;
-aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 3;
+const aim_races = [{}, {}];
 
-aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.prix_lat, 2)] = 3;
-*/
+// planA:
+aim_races[0][race_enum.begin_race] = 3;
+aim_races[0][get_aim_race_index(race_enum.hope_sta, 0)] = 3;
+aim_races[0][get_aim_race_index(race_enum.hoch_sho, 1)] = 3;
+aim_races[0][get_aim_race_index(race_enum.sats_sho, 1)] = 3;
+aim_races[0][get_aim_race_index(race_enum.toky_yus, 1)] = 3;
+
+aim_races[0][get_aim_race_index(race_enum.kiku_sho, 1)] = 3;
+aim_races[0][get_aim_race_index(race_enum.sank_hai, 2)] = 3;
+aim_races[0][get_aim_race_index(race_enum.takz_kin, 2)] = 3;
+aim_races[0][get_aim_race_index(race_enum.arim_kin, 2)] = 3;
+
+aim_races[1][race_enum.begin_race] = 3;
+aim_races[1][get_aim_race_index(race_enum.hope_sta, 0)] = 3;
+aim_races[1][get_aim_race_index(race_enum.hoch_sho, 1)] = 3;
+aim_races[1][get_aim_race_index(race_enum.sats_sho, 1)] = 3;
+aim_races[1][get_aim_race_index(race_enum.toky_yus, 1)] = 3;
+
+aim_races[1][get_aim_race_index(race_enum.tenn_spr, 2)] = 3;
+aim_races[1][get_aim_race_index(race_enum.takz_kin, 2)] = 3;
+aim_races[1][get_aim_race_index(race_enum.prix_lat, 2)] = 3;
+
+/** @param {{edu_weeks:number,race:number}} extra_flag */
+handlers[check_stages.aim_race] = (extra_flag) => {
+  const { plan_b } = new TachyonEduMarks();
+  return (
+    aim_races[plan_b][`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
+    aim_races[plan_b][extra_flag.race]
+  );
+};
+
 handlers[check_stages.after_punish] = () => {
   add_event(event_hooks.week_start, new EventObject(32, cb_enum.daily));
 };
@@ -45,7 +78,7 @@ handlers[check_stages.next_week] = () => {
   const edu_weeks =
     era.get('flag:当前回合数') - era.get('cflag:32:育成回合计时');
   if (edu_weeks < 3 * 48) {
-    const event_marks = new SuEduMarks();
+    const event_marks = new TachyonEduMarks();
     const event_obj = new EventObject(32, cb_enum.edu);
     const event_obj_special = new EventObject(32, cb_enum.edu, true);
     const love = era.get('love:32');
@@ -198,33 +231,6 @@ handlers[check_stages.next_week] = () => {
   }
 };
 
-handlers[check_stages.aim_check] = () => {
-  const buffer = [],
-    /** @type {Record<string,{race:number,rank:number}>} */
-    races = era.get('cflag:32:育成成绩');
-  // Plan A
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-  buffer.push(check_aim_and_get_entry(races, race_enum.hope_sta, 0, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.sank_hai, 2, 2));
-  buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
-  /*
-  // Plan B
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-  buffer.push(check_aim_and_get_entry(races, race_enum.hope_sta, 0, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.prix_lat, 2, 1));
-*/
-  return buffer;
-};
 /**
  * @param {number} stage_id
  * @param extra_flag

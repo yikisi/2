@@ -8,7 +8,7 @@ const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const SuEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
+const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 const { buff_colors } = require('#/data/color-const');
@@ -23,7 +23,7 @@ module.exports = async function (hook, _, event_object) {
     love = era.get('love:32'),
     relation = era.get('relation:32:0'),
     tachyon = get_chara_talk(32),
-    event_marks = new SuEduMarks(),
+    event_marks = new TachyonEduMarks(),
     edu_weeks = era.get('cflag:32:育成回合计时');
   if (event_marks.beginning === 1) {
     await print_event_name(`实验的开始`, tachyon);
@@ -480,7 +480,7 @@ module.exports = async function (hook, _, event_object) {
         await era.printAndWait(
           `但这一切，都不会影响到你与${tachyon.sex}的同行`,
         );
-        event_marks.PlanB++;
+        event_marks.plan_b++;
         // todo 声望-20 状态：${tachyon.get_uma_sex_title()}的极限消除 选择PlanB后，${tachyon.name}训练及比赛选项不可选择
       }
     }
@@ -697,7 +697,7 @@ module.exports = async function (hook, _, event_object) {
       return false;
     }
     await print_event_name(`夏季集训结束·换位实验`, tachyon);
-    if (event_marks.PlanB === 0) {
+    if (event_marks.plan_b === 0) {
       await era.printAndWait(`于是，愉快的夏日集训时间也过去了`);
       await era.printAndWait(`你们准备跟着学园的巴士回到学校`);
       era.println();
@@ -760,7 +760,7 @@ module.exports = async function (hook, _, event_object) {
           `呵呵，这是当然，那些孩子要超越我还早的很呢！`,
         );
       }
-    } else if (event_marks.PlanB === 1) {
+    } else if (event_marks.plan_b === 1) {
       await print_event_name(`法国(？)`, tachyon);
       await tachyon.say_and_wait(`这里……就是法国吗`);
       era.println();
@@ -869,7 +869,7 @@ module.exports = async function (hook, _, event_object) {
       // 爱慕值+10
     }
   } else if (edu_weeks === 144) {
-    if (event_marks.PlanB === 0) {
+    if (event_marks.plan_b === 0) {
       await print_event_name(`极限的彼方`, tachyon);
       era.println();
       await era.printAndWait(`与${tachyon.name}的三年结束了`);
@@ -1152,7 +1152,7 @@ module.exports = async function (hook, _, event_object) {
       await era.printAndWait(
         `疯狂的科学家，与狂信的豚鼠，迎来了最适合两人的结局`,
       );
-    } else if (event_marks.PlanB === 1 && event_marks.hot_spring_event === 1) {
+    } else if (event_marks.plan_b === 1 && event_marks.hot_spring_event === 1) {
       await print_event_name(`PlanB的未来`, tachyon);
       await era.printAndWait(`与${tachyon.name}的三年结束了`);
       era.println();

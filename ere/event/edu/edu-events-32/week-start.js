@@ -9,7 +9,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
-const SuEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
+const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const EventObject = require('#/data/event/event-object');
 const { get_random_value } = require('#/utils/value-utils');
@@ -26,7 +26,7 @@ module.exports = async function (hook, _, event_object) {
     tachyon = get_chara_talk(32),
     coffee = get_chara_talk(25),
     chara33_talk = get_chara_talk(33),
-    event_marks = new SuEduMarks(),
+    event_marks = new TachyonEduMarks(),
     edu_weeks = era.get('cflag:32:育成回合计时');
   chara33_talk.name = '???';
   let wait_flag = false;
@@ -1618,7 +1618,7 @@ module.exports = async function (hook, _, event_object) {
         `趁着记者们揉着双眼的时候，你带着速子快步进入了合宿的宿舍`,
       );
     }
-  } else if (edu_weeks === 47 + 31 && event_marks.PlanB === 0) {
+  } else if (edu_weeks === 47 + 31 && event_marks.plan_b === 0) {
     await print_event_name('夏日的数据采集', tachyon);
     await tachyon.say_and_wait(`哈啊……哈啊……哈啊……`);
     era.println();
@@ -1767,7 +1767,7 @@ module.exports = async function (hook, _, event_object) {
         `最终，你被速子追了又放四次，总共灌了十六管的药水`,
       );
     }
-  } else if (edu_weeks === 47 + 31 && event_marks.PlanB === 1) {
+  } else if (edu_weeks === 47 + 31 && event_marks.plan_b === 1) {
     await print_event_name(`月光`, tachyon);
     await say_by_passer_by(
       `${tachyon.get_uma_sex_title()}A`,
@@ -2098,7 +2098,7 @@ module.exports = async function (hook, _, event_object) {
           `怎么感觉除了安慰奖的面纸和特奖的温泉旅行券其他都是专门为${tachyon.get_uma_sex_title()}而设计的呢？`,
         );
         era.println();
-        if (relation < 225 && event_marks.PlanB === 1) {
+        if (relation < 225 && event_marks.plan_b === 1) {
           await tachyon.say_and_wait(
             `胡萝卜啊……这么说来，他们的奖品基本都是挺实用的呢`,
           );
@@ -2108,7 +2108,7 @@ module.exports = async function (hook, _, event_object) {
           );
           era.println();
           await tachyon.say_and_wait(`不错，挺甜的`);
-        } else if (relation < 225 && event_marks.PlanB === 0) {
+        } else if (relation < 225 && event_marks.plan_b === 0) {
           await tachyon.say_and_wait(`哦？豚鼠君，你现在的表情挺不错的`);
           era.println();
           await era.printAndWait(`欸？表情？`);
@@ -2588,7 +2588,7 @@ module.exports = async function (hook, _, event_object) {
           await me.say_and_wait(`以及那个吻的滋味`, true);
           await era.printAndWait(`那个吻的味道是甜蜜的滋味，比速子的红茶还甜`);
           {
-            const event_marks = new SuEduMarks();
+            const event_marks = new TachyonEduMarks();
             if (!event_marks.hot_spring) {
               event_marks.hot_spring++;
             }
@@ -3092,7 +3092,7 @@ module.exports = async function (hook, _, event_object) {
       await era.printAndWait(`你和速子吵吵闹闹的情人节结束了`);
     }
   } else if (edu_weeks === 95 + 13) {
-    if (event_marks.PlanB === 1) {
+    if (event_marks.plan_b === 1) {
       await print_event_name(`闪烁的光子`, tachyon);
       await era.printAndWait(`夜间的训练场`);
       await era.printAndWait(`理应无人，理应不该有人的这个时间点……`);
@@ -3295,7 +3295,7 @@ module.exports = async function (hook, _, event_object) {
     }
   } else if (edu_weeks === 95 + 14) {
     await print_event_name(`粉丝感谢祭`, tachyon);
-    if (event_marks.PlanB === 0) {
+    if (event_marks.plan_b === 0) {
       await tachyon.say_and_wait(`因此，根据我的实验结果……大阪杯时粉丝……`);
       await tachyon.say_and_wait(
         `以及某人，具有的热情制造出了力量，使我超越了原来的速度，果然，感情是带有一定程度力量的吧`,
@@ -3614,7 +3614,7 @@ module.exports = async function (hook, _, event_object) {
     }
     await print_event_name(`夏日集训开始·实验的短暂歇息`, tachyon);
     await tachyon.say_and_wait(`夏日集训，然后……`);
-    if (event_marks.PlanB === 0) {
+    if (event_marks.plan_b === 0) {
       era.println();
       await tachyon.say_and_wait(`然后再下一步……就是年底的有马纪念了`);
       await tachyon.say_and_wait(
@@ -3730,7 +3730,7 @@ module.exports = async function (hook, _, event_object) {
       await era.printAndWait(`速子扭了扭身子，更加凸显了胸前的硕大`);
     }
   } else if (edu_weeks === 95 + 31) {
-    if (event_marks.PlanB === 0) {
+    if (event_marks.plan_b === 0) {
       era.println();
       await era.printAndWait(`阳光，沙滩`);
       await era.printAndWait(
@@ -4108,7 +4108,7 @@ module.exports = async function (hook, _, event_object) {
       // 爱慕值+5
     }
   } else if (edu_weeks === 95 + 35) {
-    if (event_marks.PlanB === 0) {
+    if (event_marks.plan_b === 0) {
       await print_event_name(`变量·旁观者设置`, tachyon);
       await tachyon.say_and_wait(
         `不过仔细想想……这大概是我第一次在观众席看比赛吧`,
@@ -4317,7 +4317,7 @@ module.exports = async function (hook, _, event_object) {
       await era.printAndWait(`那么便抛开一切，专注于眼前的胜利吧`);
       //todo 全属性+5
     }
-  } else if (edu_weeks === 95 + 39 && event_marks.PlanB === 0) {
+  } else if (edu_weeks === 95 + 39 && event_marks.plan_b === 0) {
     await print_event_name(`最终变量的寻求`, tachyon);
     await era.printAndWait(`随着时间进入秋季，年尾最重要的比赛也映入大众眼帘`);
     era.println();
@@ -4400,7 +4400,7 @@ module.exports = async function (hook, _, event_object) {
       await me.say_and_wait(`…………这不是什么也没回避到吗`, true);
     }
   } else if (edu_weeks === 95 + 40) {
-    if (event_marks.PlanB === 1) {
+    if (event_marks.plan_b === 1) {
       await print_event_name(`超越极限……？`, tachyon);
       await era.printAndWait(
         `自从${tachyon.name}退役以来，实验室里总是能听见${tachyon.sex}欢快的声音`,
@@ -4480,7 +4480,7 @@ module.exports = async function (hook, _, event_object) {
   } // todo 条件：曼城茶座日本杯参赛后
   else if (edu_weeks === 95 + 41) {
     await print_event_name(`超越极限`, tachyon);
-    if (event_marks.PlanB === 1) {
+    if (event_marks.plan_b === 1) {
       await say_by_passer_by(
         `解说`,
         `曼城茶座！打破了日本杯的纪录……不！打破了世界纪录！世界2400m的纪录，在几个月前才由${tachyon.name}击破的纪录，被漆黑的幻影再次超越！`,
@@ -4523,7 +4523,7 @@ module.exports = async function (hook, _, event_object) {
       );
     }
   } else if (edu_weeks === 95 + 43) {
-    if (event_marks.PlanB === 0) {
+    if (event_marks.plan_b === 0) {
       await print_event_name(`完全燃起的胜负心`, tachyon);
       era.println();
       await tachyon.say_and_wait(`呼……呼……`);
@@ -4999,7 +4999,7 @@ module.exports = async function (hook, _, event_object) {
     }
   } else if (edu_weeks === 95 + 45) {
     await print_event_name(`被超越的极限`, tachyon);
-    if (event_marks.PlanB === 1) {
+    if (event_marks.plan_b === 1) {
       await era.printAndWait(`梦中的${tachyon.name}，又回到了那一天`);
       era.println();
       await era.printAndWait(
@@ -5089,7 +5089,7 @@ module.exports = async function (hook, _, event_object) {
       //todo 状态：不可缺少之人：如果爱慕值在75以下则强制提升至75，≥75则不受影响
     }
   } else if (edu_weeks === 95 + 48) {
-    if (event_marks.PlanB === 0) {
+    if (event_marks.plan_b === 0) {
       await print_event_name(`临夜的圣诞老人`, tachyon);
       era.println();
       await era.printAndWait(`寒冬的夜里`);

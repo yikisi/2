@@ -6,7 +6,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const SuEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
+const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_names, fumble_result } = require('#/data/train-const');
 const { get_random_value } = require('#/utils/value-utils');
@@ -172,7 +172,9 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
           await tachyon.say_and_wait(`好痛……豚鼠君`);
           await tachyon.say_and_wait(`不，脚应该没事……`);
           await tachyon.say_and_wait(`但是，某人的下半身有没有事就不知道了`);
-          await tachyon.say_and_wait(`为什么在看到我脱袜子时，忽然弯下腰了呢❤`);
+          await tachyon.say_and_wait(
+            `为什么在看到我脱袜子时，忽然弯下腰了呢❤`,
+          );
           await tachyon.say_and_wait(`要是有伤就不好了……让我看看吧❤`);
           break;
       }
@@ -232,7 +234,7 @@ handlers[event_hooks.out_start] = async (hook, event_object) => {
   }
   const love = era.get('love:32'),
     tachyon = get_chara_talk(32),
-    event_marks = new SuEduMarks();
+    event_marks = new TachyonEduMarks();
   if (event_marks.different_opinion === 1) {
     event_marks.different_opinion++;
     await print_event_name(`拆台`, tachyon);
@@ -318,7 +320,7 @@ handlers[event_hooks.out_start] = async (hook, event_object) => {
     await era.printAndWait(`豚鼠君不禁感到了疑惑`);
   } else if (event_marks.hot_spring_event === 1) {
     event_marks.hot_spring_event++;
-    if (event_marks.PlanB === 0) {
+    if (event_marks.plan_b === 0) {
       await print_event_name(`薛定鄂的超光速粒子`, tachyon);
       await tachyon.say_and_wait(`对了，这么说起来，还有这个东西啊……`);
       await tachyon.say_and_wait(
@@ -840,7 +842,7 @@ handlers[event_hooks.out_start] = async (hook, event_object) => {
   }
 };
 handlers[event_hooks.out_church] = async () => {
-  const event_marks = new SuEduMarks(),
+  const event_marks = new TachyonEduMarks(),
     love = era.get('love:32'),
     relation = era.get('relation:32:0'),
     me = get_chara_talk(0),
@@ -1065,7 +1067,7 @@ handlers[event_hooks.out_church] = async () => {
         await era.printAndWait(`在不明所以中，你们就这么下了山回去了`);
         break;
     }
-  } else if (edu_weeks === 95 + 1 && event_marks.PlanB === 0) {
+  } else if (edu_weeks === 95 + 1 && event_marks.plan_b === 0) {
     await print_event_name('三期目标和最终完成度确认', tachyon);
     // todo PlanA
     await era.printAndWait(`今年，就是与${tachyon.name}的古典年了`);
@@ -1502,7 +1504,7 @@ handlers[event_hooks.out_church] = async () => {
     await era.printAndWait(`百利而无一害的决定，只要除去最大的难题`);
     await era.printAndWait(`那么，究竟该如何研究『感情』呢？加油吧，豚鼠！`);
   } else {
-    if (!(edu_weeks === 95 + 1 && event_marks.PlanB === 1)) {
+    if (!(edu_weeks === 95 + 1 && event_marks.plan_b === 1)) {
       return;
     }
     await print_event_name(`下定决心的新年`, tachyon);
@@ -1780,7 +1782,7 @@ handlers[event_hooks.out_church] = async () => {
 };
 handlers[event_hooks.office_study] = async () => {
   const tachyon = get_chara_talk(32),
-    event_marks = new SuEduMarks();
+    event_marks = new TachyonEduMarks();
   if (event_marks.explore_reward === 1) {
     event_marks.explore_reward++;
     await print_event_name(`实验的报酬`, tachyon);
@@ -1940,7 +1942,9 @@ handlers[event_hooks.office_study] = async () => {
     await era.printAndWait(`忽然，你拍了拍速子的头`);
     await era.printAndWait(`听话的${tachyon.sex}马上察觉到了意思`);
     era.println();
-    await tachyon.say_and_wait(`进来……请射进来……在我的嘴穴里……全部……喝下去❤❤`);
+    await tachyon.say_and_wait(
+      `进来……请射进来……在我的嘴穴里……全部……喝下去❤❤`,
+    );
     era.println();
     await era.printAndWait(`${tachyon.sex}马上更贴近的含吮着你的肉棒`);
     await era.printAndWait(`终于，白浆在口中爆发`);

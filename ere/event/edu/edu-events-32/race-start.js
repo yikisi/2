@@ -6,14 +6,14 @@ const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { race_enum } = require('#/data/race/race-const');
-const SuEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
+const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 
 /**
  * @param {HookArg} hook
  * @param {{race:number,rank:number,relation_change:number}} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
-  const event_marks = new SuEduMarks(),
+  const event_marks = new TachyonEduMarks(),
     relation = era.get('relation:32:0'),
     love = era.get('love:32'),
     tachyon = get_chara_talk(32),
@@ -335,7 +335,7 @@ module.exports = async (hook, extra_flag) => {
     );
   } else if (
     extra_flag.race === race_enum.kiku_sho &&
-    event_marks.PlanB === 0 &&
+    event_marks.plan_b === 0 &&
     edu_weeks < 95
   ) {
     if (relation < 225) {
@@ -480,7 +480,7 @@ module.exports = async (hook, extra_flag) => {
     }
   } else if (
     extra_flag.race === race_enum.kiku_sho &&
-    event_marks.PlanB === 1 &&
+    event_marks.plan_b === 1 &&
     edu_weeks < 95
   ) {
     //todo 有${tachyon.get_uma_sex_title()}参赛则触发该剧情
@@ -552,7 +552,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`你离开了实验室，前去准备今日的菊花赏`);
   } else if (
     extra_flag.race === race_enum.arim_kin &&
-    event_marks.PlanB === 1 &&
+    event_marks.plan_b === 1 &&
     edu_weeks >= 95
   ) {
     await print_event_name(`黯淡的光辉`, tachyon);
@@ -789,7 +789,7 @@ module.exports = async (hook, extra_flag) => {
   } else if (
     extra_flag.race === race_enum.takz_kin &&
     edu_weeks > 95 &&
-    event_marks.PlanB === 0
+    event_marks.plan_b === 0
   ) {
     await print_event_name(`宝冢纪念前·万众其心A`, tachyon);
     await era.printAndWait(`在你们抵达阪神赛场的时候，全场已经人声鼎沸`);
@@ -832,7 +832,7 @@ module.exports = async (hook, extra_flag) => {
   } else if (
     extra_flag.race === race_enum.takz_kin &&
     edu_weeks > 95 &&
-    event_marks.PlanB === 1
+    event_marks.plan_b === 1
   ) {
     await print_event_name(`宝冢纪念前·万众其心B`, tachyon);
     await era.printAndWait(`热血沸腾`);
@@ -852,7 +852,7 @@ module.exports = async (hook, extra_flag) => {
   } else if (
     extra_flag.race === race_enum.prix_lat &&
     edu_weeks > 95 &&
-    event_marks.PlanB === 1
+    event_marks.plan_b === 1
   ) {
     era.println();
     await era.printAndWait(`在凯旋门赏的前一天`);
@@ -951,7 +951,7 @@ module.exports = async (hook, extra_flag) => {
     // 耐力+5
   } else if (
     extra_flag.race === race_enum.arim_kin &&
-    event_marks.PlanB === 0 &&
+    event_marks.plan_b === 0 &&
     edu_weeks > 95
   ) {
     await print_event_name(`有马纪念前·变量添加完毕`, tachyon);
@@ -998,7 +998,7 @@ module.exports = async (hook, extra_flag) => {
     );
   } else if (
     extra_flag.race === race_enum.arim_kin &&
-    event_marks.PlanB === 1 &&
+    event_marks.plan_b === 1 &&
     edu_weeks > 95
   ) {
     await print_event_name(`迎向${tachyon.name}的最终解`, tachyon);

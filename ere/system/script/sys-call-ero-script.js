@@ -15,17 +15,19 @@ const HookArg = require('#/data/event/hook-arg');
 async function sys_call_ero_event(id_or_alias, hook, extra_flag) {
   let override, ret;
   const hook_arg = new HookArg(hook);
-  try {
-    const { func, _extra } = get_aim_function('ero', id_or_alias, extra_flag);
-    extra_flag = _extra;
-    ret = await func(hook_arg, extra_flag);
-    override = func.override || hook_arg.override;
-  } catch (e) {
-    if (e.message && !e.message.startsWith('unsupported')) {
-      era.logger.error(e.message, e.stack);
+  if (extra_flag?.shown !== false) {
+    try {
+      const { func, _extra } = get_aim_function('ero', id_or_alias, extra_flag);
+      extra_flag = _extra;
+      ret = await func(hook_arg, extra_flag);
+      override = func.override || hook_arg.override;
+    } catch (e) {
+      if (e.message && !e.message.startsWith('unsupported')) {
+        era.logger.error(e.message, e.stack);
+      }
+      ret = await ero_common(id_or_alias, hook_arg, extra_flag || {});
+      override = hook_arg.override;
     }
-    ret = await ero_common(id_or_alias, hook_arg, extra_flag || {});
-    override = hook_arg.override;
   }
   if (!override && typeof id_or_alias === 'number') {
     ret = (await ero_result(id_or_alias, hook_arg, extra_flag || {})) || ret;

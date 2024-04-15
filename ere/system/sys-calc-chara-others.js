@@ -321,7 +321,12 @@ module.exports = {
     print_change(chara_id, new_val - 1, new_val);
     era.set(`cflag:${chara_id}:爱慕暂拒`, 0);
     await get_chara_talk(0).say_and_wait('已经不能回头了……', true);
-    sys_call_mec(chara_id, check_stages.mec_callname_customize);
+    if (
+      typeof era.get(`callname:${chara_id}:0`) === 'string' &&
+      era.get(`callname:${chara_id}:0`).startsWith('训练员')
+    ) {
+      sys_call_mec(chara_id, check_stages.mec_callname_customize);
+    }
     new_val >= 75 && (await punish_unfaithful(chara_id, new_val));
     return true;
   },

@@ -11,7 +11,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { add_event, cb_enum } = require('#/event/queue');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
-const SuEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
+const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):Promise<*>>} */
 const handlers = {};
@@ -397,7 +397,7 @@ handlers[25] = async (tachyon, me) => {
 };
 
 handlers[49] = async (tachyon, me) => {
-  const event_marks = new SuEduMarks(),
+  const event_marks = new TachyonEduMarks(),
     coffee = get_chara_talk(32);
   era.println();
   await tachyon.say_and_wait(`豚鼠君`);
@@ -637,7 +637,7 @@ handlers[49] = async (tachyon, me) => {
 };
 
 handlers.witch = async (tachyon, me) => {
-  const event_marks = new SuEduMarks();
+  const event_marks = new TachyonEduMarks();
   await print_event_name(`女巫的自白`, tachyon);
   era.println();
   await tachyon.say_and_wait(`豚鼠君，在喝今天的药之前，我要和你说个故事`);
@@ -1623,7 +1623,7 @@ handlers.again = async (tachyon, me) => {
 };
 
 handlers[74] = async (tachyon, me) => {
-  const event_marks = new SuEduMarks(),
+  const event_marks = new TachyonEduMarks(),
     coffee = get_chara_talk(32);
   era.println();
   await tachyon.say_and_wait(`豚鼠君～～`);

@@ -5,10 +5,10 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { buff_colors } = require('#/data/color-const');
 const print_event_name = require('#/event/snippets/print-event-name');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
-const SuEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
+const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 
 module.exports = async function () {
-  const event_marks = new SuEduMarks(),
+  const event_marks = new TachyonEduMarks(),
     me = get_chara_talk(0),
     love = era.get('love:32'),
     tachyon = get_chara_talk(32);
@@ -316,7 +316,7 @@ module.exports = async function () {
     await me.say_and_wait(`没什么，是我多心了吧`);
     era.println();
     await era.printAndWait(`你走出了实验室的门，这次没有丝毫犹豫`);
-  } else if (love > 75 && event_marks.PlanB === 0) {
+  } else if (love > 75 && event_marks.plan_b === 0) {
     await print_event_name(`停滞的钟摆`, tachyon);
     await tachyon.say_and_wait(`醒醒`);
     await tachyon.say_and_wait(`醒醒`);
@@ -750,7 +750,7 @@ module.exports = async function () {
     await era.printAndWait(
       `于是，将过去束缚，也被束缚在过去的科学家，开始了新一轮的实验`,
     );
-  } else if (love > 75 && event_marks.PlanB === 1) {
+  } else if (love > 75 && event_marks.plan_b === 1) {
     await tachyon.say_and_wait(`醒醒`);
     await tachyon.say_and_wait(`醒醒`);
     await tachyon.say_and_wait(`求求你……醒过来吧`);

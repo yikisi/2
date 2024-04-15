@@ -1,15 +1,15 @@
 const era = require('#/era-electron');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
+const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
-const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
-const { say_by_passer_by } = require('#/utils/chara-talk');
+const print_event_name = require('#/event/snippets/print-event-name');
 
+const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
-const print_event_name = require('#/event/snippets/print-event-name');
 
 const event_hooks = require('#/data/event/event-hooks');
 
@@ -19,14 +19,6 @@ const handlers = {};
 handlers[
   event_hooks.week_start
 ] = require('#/event/daily/daily-events-32/punishment');
-
-handlers[event_hooks.week_end] = require('#/event/daily/daily-events-32/level');
-/**
- * 速子的日常事件，id=32
- *
- * @author 名贵易碎电子盆栽孕袋女士
- * @author 黑奴队长（修订） 黑奴一号
- */
 
 handlers[event_hooks.train] = async function () {
   const love = era.get('love:32'),
@@ -2138,7 +2130,9 @@ handlers[event_hooks.school_atrium] = async function (hook) {
           `她责怪的看了你一眼，然后对着枯树洞开始喊出『不甘』。`,
         );
         await tachyon.say_and_wait(`每次乳头被豚鼠君捏一下就会高潮好不甘心❤`);
-        await tachyon.say_and_wait(`小穴杂鱼到豚鼠君随便摸一下就出水好不甘心❤`);
+        await tachyon.say_and_wait(
+          `小穴杂鱼到豚鼠君随便摸一下就出水好不甘心❤`,
+        );
         await tachyon.say_and_wait(
           `只要闻到豚鼠君的味道脑袋里就会变成只剩做爱的痴女好不甘心❤`,
         );
@@ -2879,9 +2873,11 @@ handlers[event_hooks.office_game] = async function () {
   const tachyon = get_chara_talk(32);
   switch (get_random_value(0, 1)) {
     case 0:
-      await tachyon.say_and_wait(
-        `啧……这个机体也太慢了，完全跟不上马娘的输出速度嘛！`,
-      );
+      await tachyon.say_and_wait([
+        '啧……这个机体也太慢了，完全跟不上',
+        tachyon.get_uma_sex_title(),
+        '的输出速度嘛！',
+      ]);
       break;
     case 1:
       await tachyon.say_and_wait(`格斗游戏？输了要听对方的话？`);
@@ -2895,6 +2891,12 @@ handlers[event_hooks.office_game] = async function () {
   }
 };
 
+/**
+ * 速子的日常事件，id=32
+ *
+ * @author 名贵易碎电子盆栽孕袋女士
+ * @author 黑奴一号 黑奴队长（修订）
+ */
 module.exports = {
   /**
    * @param {HookArg} hook
@@ -3279,7 +3281,7 @@ era.println();
 await tachyon.say_and_wait(`算了，你自己看今天有什么货吧`);
 era.println();
 await era.printAndWait(`速子拉开了她的白大褂……`);
-//todo   已招募速子 速子好感度<-100
+//todo   已招募速子 速子好感度 < -100
 era.println();
 await tachyon.say_and_wait(`……啧`);
 era.println();

@@ -752,9 +752,6 @@ handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
  * @returns {Promise<*>}
  */
 module.exports = async (chara_id, hook, extra_flag) => {
-  if (extra_flag.shown === false) {
-    return;
-  }
   if (ero_action_names[hook.hook]) {
     const { attacker, defender } =
       (ero_tagged_hooks[hook.hook] || default_tags).condition !==
