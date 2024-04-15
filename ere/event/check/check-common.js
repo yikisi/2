@@ -134,7 +134,8 @@ handlers[check_stages.want_make_love] = (chara_id) => {
   let ratio = 0;
   if (love >= 50) {
     ratio =
-      Math.log(6 * love - era.get(`relation:${chara_id}:0`) + 1) / log_600m4 +
+      Math.log(Math.max(6 * love - era.get(`relation:${chara_id}:0`), 1)) /
+        log_600m4 +
       Math.pow(2, era.get(`base:${chara_id}:性欲`) / 1250 - 8) *
         (0.7 + 0.1 * era.get(`mark:${chara_id}:欢愉`)) +
       0.05 * era.get(`talent:${chara_id}:工口意愿`) -
@@ -145,7 +146,8 @@ handlers[check_stages.want_make_love] = (chara_id) => {
   era.logger.debug(
     `角色 ${chara_id} 求爱：${(ratio * 100).toFixed(2)}%；掷骰：${dice} 计算：
     ${ratio}=${
-      Math.log(6 * love - era.get(`relation:${chara_id}:0`) + 1) / log_600m4
+      Math.log(Math.max(6 * love - era.get(`relation:${chara_id}:0`), 1)) /
+      log_600m4
     }(好感爱慕)+${Math.pow(
       2,
       era.get(`base:${chara_id}:性欲`) / 1250 - 8,

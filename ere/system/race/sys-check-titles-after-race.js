@@ -40,7 +40,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
     ) {
       new_title_dict[id].push({ n: '白浊浸染', c: buff_colors[2] });
     }
-    if (Number(pregnant_check) === id) {
+    if (id > 0 && Number(pregnant_check) === id) {
       new_title_dict[id].push({ n: '父亲力量', c: buff_colors[2] });
     }
   });

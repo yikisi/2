@@ -14,7 +14,7 @@ module.exports = {
    * @returns {string[]}
    */
   get_image(chara_id) {
-    if (!chara_id) {
+    if (chara_id === undefined) {
       return ['default'];
     }
     const base =
