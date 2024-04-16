@@ -95,10 +95,15 @@ class PseudoUma {
     ground: undefined,
   };
   /**
-   * 人气值
+   * 人气
    * @type {number[]}
    */
   pop;
+  /**
+   * 计算用的人气值
+   * @type {number[]}
+   */
+  tempPop;
   // 各个需重复使用的计算基底
   base = {
     velocityIdeal: 0,

@@ -22,6 +22,7 @@ const { get_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const date_indicator = require('#/page/components/date-indicator');
+const page_race_result = require('#/page/components/page-race-result');
 const print_race_track_chart = require('#/page/components/race-track-chart');
 const select_contestants = require('#/page/components/select-contestants');
 
@@ -65,7 +66,6 @@ const {
   attr_names,
   motivation_names,
 } = require('#/data/train-const');
-const page_race_result = require('#/page/components/page-race-result');
 
 const adaptability2race = [
   race_enum.aoi_sta,
@@ -78,7 +78,7 @@ const adaptability2race = [
   race_enum.heia_sta,
 ];
 
-const pop_mark = ['◎', '◯', '▲', '△', '△', '◇'];
+const pop_mark = ['➖', '◎', '◯', '▲', '△', '△'];
 
 /** @param {PseudoUma} chara */
 function generate_attribute_info(chara) {
@@ -358,7 +358,7 @@ async function race_page(race) {
               ' 人气 ',
               cur_chara.pop
                 .slice(1)
-                .map((e) => pop_mark[Math.min(e, 6) - 1])
+                .map((e) => pop_mark[e])
                 .join(' '),
             ],
             type: 'text',
@@ -625,8 +625,8 @@ async function race_page(race) {
   // team_list.forEach((uma) => (uma.rank.curr = tmp));
 
   // TODO 模拟比赛 和debug用的输入名次只能留一个
-  const { loc: record_loc } = sys_sim_race(contestants, info);
-  await page_race_result(contestants, record_loc, info);
+  const records = sys_sim_race(contestants, info);
+  await page_race_result(contestants, records, info);
   team_list.forEach((uma) => {
     aim_race_dict[uma.index_chara] = sys_call_check(
       uma.index_chara,

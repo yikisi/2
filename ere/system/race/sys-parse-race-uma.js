@@ -130,7 +130,10 @@ function sys_parse_for_race(team_chara, race, info) {
         e.adapt_ground[phantom_age][info.ground] >= 6 &&
         e.adapt_distance[phantom_age][info.distance] >= 6,
     ),
-    Math.min(2 - ret.length + team_chara.length, info.gates - ret.length),
+    Math.min(
+      info.legend_count - ret.length + team_chara.length,
+      info.gates - ret.length,
+    ),
   ).forEach((uma) => {
     ret.push(
       new PseudoUma(
@@ -148,30 +151,43 @@ function sys_parse_for_race(team_chara, race, info) {
   });
   //最后填路人幻影
   gacha([], info.gates - ret.length);
+  const from_setting = era.get('flag:比赛难度');
+  if (from_setting) {
+    ret
+      .slice(team_chara.length)
+      .forEach(
+        (uma) =>
+          (uma.attrs = uma.attrs.map((e) =>
+            Math.ceil((e * (100 + from_setting)) / 100),
+          )),
+      );
+  }
 
   ret = sort_list(ret, Math.random);
   const average_intelligence =
       ret.reduce((p, c) => p + c.attrs[attr_enum.intelligence], 0) / ret.length,
     average_toughness =
       ret.reduce((p, c) => p + c.attrs[attr_enum.toughness], 0) / ret.length,
-    err_intelligence = Math.sqrt(
-      ret.reduce(
-        (p, c) =>
-          p +
-          (c.attrs[attr_enum.intelligence] - average_intelligence) *
-            (c.attrs[attr_enum.intelligence] - average_intelligence),
-        0,
-      ) / ret.length,
-    ),
-    err_toughness = Math.sqrt(
-      ret.reduce(
-        (p, c) =>
-          p +
-          (c.attrs[attr_enum.toughness] - average_toughness) *
-            (c.attrs[attr_enum.toughness] - average_toughness),
-        0,
-      ) / ret.length,
-    );
+    err_intelligence =
+      Math.sqrt(
+        ret.reduce(
+          (p, c) =>
+            p +
+            (c.attrs[attr_enum.intelligence] - average_intelligence) *
+              (c.attrs[attr_enum.intelligence] - average_intelligence),
+          0,
+        ) / ret.length,
+      ) + 0.0000000001,
+    err_toughness =
+      Math.sqrt(
+        ret.reduce(
+          (p, c) =>
+            p +
+            (c.attrs[attr_enum.toughness] - average_toughness) *
+              (c.attrs[attr_enum.toughness] - average_toughness),
+          0,
+        ) / ret.length,
+      ) + 0.0000000001;
   ret.forEach((uma, i) => {
     uma.index_race = i;
     uma.adapts.ground = uma.adapt_ground_list[info.ground];
@@ -180,38 +196,31 @@ function sys_parse_for_race(team_chara, race, info) {
       cof_ground = mod_acceleration_adapt_ground[uma.adapts.ground],
       cof_motivation = 1 + 0.02 * uma.motivation,
       delta_intelligence =
-        ((uma.attrs[attr_enum.intelligence] - average_intelligence) /
-          err_intelligence) *
-          10 +
+        ((uma.attrs[attr_enum.intelligence] - average_intelligence) * 10) /
+          err_intelligence +
         50,
       delta_toughness =
-        ((uma.attrs[attr_enum.toughness] - average_toughness) / err_toughness) *
-          10 +
+        ((uma.attrs[attr_enum.toughness] - average_toughness) * 10) /
+          err_toughness +
         50;
-    uma.pop[1] =
+    uma.tempPop = [
       uma.attrs[attr_enum.speed] *
-      cof_dis *
-      cof_motivation *
-      0.5 *
-      delta_toughness;
-    uma.pop[2] =
+        cof_dis *
+        cof_motivation *
+        Math.sqrt(delta_toughness),
       uma.attrs[attr_enum.endurance] *
-      cof_motivation *
-      0.8 *
-      delta_toughness *
-      0.6 *
-      delta_intelligence;
-    uma.pop[3] =
+        cof_motivation *
+        Math.pow(delta_toughness, 0.8) *
+        Math.pow(delta_intelligence, 0.6),
       uma.attrs[attr_enum.strength] *
-      cof_dis *
-      cof_ground *
-      cof_motivation *
-      0.5 *
-      delta_intelligence;
+        cof_ground *
+        cof_motivation *
+        Math.sqrt(delta_intelligence),
+    ];
   });
   const average_pop = new Array(3)
       .fill(0)
-      .map((_, i) => ret.reduce((p, c) => p + c.pop[i + 1], 0) / ret.length),
+      .map((_, i) => ret.reduce((p, c) => p + c.tempPop[i], 0) / ret.length),
     err_pop = new Array(3)
       .fill(0)
       .map((_, i) =>
@@ -219,22 +228,45 @@ function sys_parse_for_race(team_chara, race, info) {
           ret.reduce(
             (p, c) =>
               p +
-              (c.pop[i + 1] - average_pop[i]) * (c.pop[i + 1] - average_pop[i]),
+              (c.tempPop[i] - average_pop[i]) * (c.tempPop[i] - average_pop[i]),
             0,
-          ) / ret.length,
+          ) /
+            ret.length +
+            0.0000000001,
         ),
       );
   ret.forEach((uma) => {
     new Array(3).fill(0).forEach((_, i) => {
-      uma.pop[i + 1] =
-        ((uma.pop[i + 1] - average_pop[i]) / err_pop[i]) * 10 + 50;
+      uma.tempPop[i] =
+        ((uma.tempPop[i] - average_pop[i]) * 10) / err_pop[i] + 50;
     });
-    uma.pop[0] = uma.pop.slice(1).reduce((p, c) => p + get_final_pop(c), 0);
+    uma.pop[0] = 0;
   });
-  new Array(4).fill(0).forEach((_, i) => {
-    sort_list(ret, (uma) => uma.pop[i], false).forEach((uma, rank) => {
-      uma.pop[i] = rank + 1;
+  new Array(3).fill(0).forEach((_, i) => {
+    sort_list(ret, (uma) => uma.tempPop[i]).forEach((uma, rank) => {
+      uma.pop[i + 1] = rank < 5 ? rank + 1 : 0;
+      if (rank < 5) {
+        uma.tempPop[i] =
+          uma.tempPop[i] < 54
+            ? Math.min(uma.tempPop[i] + 4, 54)
+            : uma.tempPop[i];
+      }
+      if (uma.tempPop[i] > 70) {
+        uma.tempPop[i] =
+          55 + (uma.tempPop[i] - 55) / 1000 + (uma.tempPop[i] - 55) * 1.5;
+      } else if (uma.tempPop[i] > 55) {
+        uma.tempPop[i] = 55 + (uma.tempPop[i] - 55) / 1000;
+      }
+      if (uma.tempPop[i] > 19.53) {
+        uma.pop[0] +=
+          (uma.tempPop[i] - 15) * (Math.log(uma.tempPop[i] - 15) - 1.938) +
+          1.938;
+      }
     });
+  });
+  sort_list(ret, (uma) => uma.pop[0]).forEach((uma, rank) => {
+    uma.pop[0] = rank + 1;
+    delete uma.tempPop;
   });
   return ret;
 }

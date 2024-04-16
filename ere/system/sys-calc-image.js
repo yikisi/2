@@ -58,11 +58,11 @@ module.exports = {
         if (era.get(`cflag:${chara_id}:招募状态`) !== recruit_flags.yes) {
           return [
             race_infos[era.get('flag:当前赛事')].race_class === class_enum.G1
-              ? ''
+              ? undefined
               : `${base}_运`,
             base,
             'default',
-          ];
+          ].filter((e) => e);
         }
         return get_custom_mec(chara_id).get_race_cloth();
       default:

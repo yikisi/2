@@ -1,11 +1,12 @@
 const era = require('#/era-electron');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sort_list } = require('#/utils/list-utils');
 
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const { adaptability_names, attr_names } = require('#/data/train-const');
-const { get_custom_mec } = require('#/event/mec/mec-factory');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /**
  * @param {number} chara_id
@@ -47,6 +48,20 @@ function sys_get_chara_pseudo(chara_id) {
     uma.attr_buffs
       .slice(3)
       .forEach((l) => l.push(`-${5 * temp}%[语言不通(${temp})]`));
+  }
+  const stamina_ratio =
+      era.get(`base:${chara_id}:体力`) / era.get(`maxbase:${chara_id}:体力`),
+    time_ratio =
+      era.get(`base:${chara_id}:精力`) / era.get(`maxbase:${chara_id}:精力`);
+  if (stamina_ratio < 0.3) {
+    uma.attr_buffs.slice(0, 3).forEach((l) => l.push('-50%[体力底下]'));
+  } else if (stamina_ratio < 0.5) {
+    uma.attr_buffs.slice(0, 3).forEach((l) => l.push('-20%[体力不足]'));
+  }
+  if (time_ratio < 0.3) {
+    uma.attr_buffs.slice(3).forEach((l) => l.push('-50%[精力底下]'));
+  } else if (time_ratio < 0.5) {
+    uma.attr_buffs.slice(3).forEach((l) => l.push('-20%[精力不足]'));
   }
   get_custom_mec(uma.index_chara).set_pseudo_uma(uma);
   uma.attr_buffs = uma.attr_buffs.map((l, i) => {

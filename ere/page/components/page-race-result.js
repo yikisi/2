@@ -1,123 +1,320 @@
 const era = require('#/era-electron');
 
-const { get_chara_color } = require('#/data/chara-colors');
-const { sort_list } = require('#/utils/list-utils');
-const { buff_colors } = require('#/data/color-const');
+const { sort_list, median } = require('#/utils/list-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
+const { buff_colors } = require('#/data/color-const');
+const { track_names } = require('#/data/race/model/race-info');
+
+const fron_cols = 5;
 const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'];
 
 /**
+ * @param {number} delta
+ * @returns {string}
+ */
+function get_delta_desc(delta) {
+  if (delta < 0.2) {
+    return '鼻差';
+  } else if (delta < 0.4) {
+    return '头差';
+  } else if (delta < 0.6) {
+    return '颈差';
+  } else {
+    let temp;
+    switch (Math.round((delta * 4) / 2.4)) {
+      case 1:
+        return '颈差';
+      case 2:
+        return '1/2 马身';
+      case 3:
+        return '3/4 马身';
+      case 4:
+        return '1 马身';
+      case 5:
+        return '5/4 马身';
+      case 6:
+        return '3/2 马身';
+      case 7:
+        return '7/4 马身';
+      default:
+        temp = Math.round(delta / 2.4);
+        if (temp > 10) {
+          return '大差';
+        }
+        return `${temp} 马身`;
+    }
+  }
+}
+
+/**
  * @param {PseudoUma[]} contestants
- * @param {number[][]} loc
+ * @param {{acc:number[][],loc:number[][],skill:[][],speed:number[][]}} records
  * @param {RaceInfo} info
  */
-async function page_race_result(contestants, loc, info) {
+async function page_race_result(contestants, records, info) {
   era.printMultiColumns([
     { type: 'divider' },
     {
       accelerator: 0,
-      config: { width: 12, align: 'center' },
+      config: { width: 6, align: 'center' },
       content: '查看结果',
       type: 'button',
     },
     {
-      accelerator: 100,
-      config: { width: 12, align: 'center' },
-      content: '观看比赛',
+      accelerator: 1,
+      config: { width: 6, align: 'center' },
+      content: '一倍速观看',
+      type: 'button',
+    },
+    {
+      accelerator: 2,
+      config: { width: 6, align: 'center' },
+      content: '二倍速观看',
+      type: 'button',
+    },
+    {
+      accelerator: 3,
+      config: { width: 6, align: 'center' },
+      content: '四倍速观看',
       type: 'button',
     },
   ]);
   let flag_result = true;
-  async function show_result() {
-    let i = 0,
-      record;
-    while (flag_result) {
-      record = loc[i];
-      const buffer = contestants.map((e) => {
+
+  /**
+   * @param {number} interval
+   */
+  async function show_result(interval) {
+    era.setAlign('center');
+    const contestant_timer = contestants.map(() => {
+        return new Array(Math.floor(info.span / 200)).fill('');
+      }),
+      contestant_timer_index = contestants.map(() => 0),
+      header = new Array(Math.floor(info.span / 200) - 1)
+        .fill(0)
+        .map((_, i) => (info.span % 200) + (i + 1) * 200),
+      total_time = contestants.map(() => '');
+
+    const record_timer = [0, 0];
+    function get_timer_record() {
+      return `${record_timer[0] ? `${record_timer[0]}'` : ''}${record_timer[0] ? `${record_timer[1].toString().padStart(2, '0')}` : record_timer[1]}"`;
+    }
+
+    let timer = 0;
+    while (flag_result && timer < records.loc.length) {
+      contestants.forEach((uma) => {
+        if (records.loc[timer][uma.index_race] >= info.span) {
+          if (!total_time[uma.index_race]) {
+            total_time[uma.index_race] = get_timer_record();
+          }
+        } else {
+          if (
+            contestant_timer_index[uma.index_race] < header.length &&
+            records.loc[timer][uma.index_race] >=
+              header[contestant_timer_index[uma.index_race]]
+          ) {
+            contestant_timer[uma.index_race][
+              contestant_timer_index[uma.index_race]
+            ] = get_timer_record();
+            contestant_timer_index[uma.index_race]++;
+          }
+        }
+      });
+      const timer_start = Math.max(
+          Math.min(
+            median(contestant_timer_index) - 1,
+            header.length - fron_cols,
+          ),
+          0,
+        ),
+        timer_end = timer_start + fron_cols;
+      const buffer = contestants.map((uma) => {
+        const color = get_chara_color(uma.index_chara);
         return {
-          key: record[e.index_race],
           columns: [
             {
-              config: {
-                color: get_chara_color(e.index_chara),
-                fontWeight: 'bold',
-                width: 4,
-              },
-              content: e.name,
+              config: { width: 1 },
+              content: (uma.index_race + 1).toString(),
               type: 'text',
             },
             {
               config: {
-                width: 20,
+                width: 3,
+                color,
+                fontWeight: 'bold',
               },
-              content:
-                record[e.index_race] >= info.span
-                  ? `${e.rank.curr} 着 ${e.diff.behind > 0 ? `· ${(e.diff.behind / 2.4).toFixed(0)} 马身` : ''}`
-                  : `${record[e.index_race].toLocaleString()}m (${((record[e.index_race] / info.span) * 100).toFixed(2)}%)`,
+              content: uma.name,
               type: 'text',
             },
+            ...contestant_timer[uma.index_race]
+              .slice(timer_start, timer_end)
+              .map((e) => {
+                return { config: { width: 2 }, content: e, type: 'text' };
+              }),
+            {
+              config: { width: 2 },
+              content:
+                records.loc[timer][uma.index_race] >= info.span
+                  ? total_time[uma.index_race]
+                  : `${Math.floor(records.speed[timer][uma.index_race]).toLocaleString()}m/s`,
+              type: 'text',
+            },
+            records.loc[timer][uma.index_race] >= info.span
+              ? {
+                  config: { width: 24 - 6 - 2 * fron_cols },
+                  content: `${uma.rank.curr} 着${uma.rank.curr <= 4 && uma.rank.curr < contestants.length ? ` · ${get_delta_desc(uma.diff.behind)}` : ''}`,
+                  type: 'text',
+                }
+              : {
+                  config: {
+                    color,
+                    fontColor: 'black',
+                    height: 22,
+                    width: 24 - 6 - 2 * fron_cols,
+                  },
+                  inContent: `${Math.round(records.loc[timer][uma.index_race]).toLocaleString()}m (${Math.floor(
+                    (records.loc[timer][uma.index_race] * 100) / info.span,
+                  ).toFixed(2)}%)`,
+                  percentage:
+                    (records.loc[timer][uma.index_race] * 100) / info.span,
+                  type: 'progress',
+                },
           ],
+          key: records.loc[timer][uma.index_race],
         };
       });
-      era.printInColRows(
-        [{ type: 'divider' }],
+      (timer ? era.replaceInColRows : era.printInColRows)(
+        [
+          { type: 'divider' },
+          { config: { width: 1 }, content: '号码', type: 'text' },
+          { config: { width: 3 }, content: '名字', type: 'text' },
+          ...header.slice(timer_start, timer_end).map((e) => {
+            return {
+              config: { width: 2 },
+              content: e.toLocaleString(),
+              type: 'text',
+            };
+          }),
+          { config: { width: 2 }, content: '速度', type: 'text' },
+          {
+            config: { width: 24 - 6 - 2 * fron_cols },
+            content: '进度',
+            type: 'text',
+          },
+        ],
         ...sort_list(buffer, (e) => e.key),
+        [
+          {
+            accelerator: 0,
+            config: { disableWarning: true },
+            content: '快进到结果',
+            type: 'button',
+          },
+        ],
       );
-      if (++i < loc.length) {
-        era.printButton('快进到结果', 0);
-        await era.delay(250);
-        if (flag_result) {
-          await era.clear(2);
-        }
-      } else {
-        era.printButton('离开赛场', 0);
-        flag_result = false;
+      await era.delay(interval);
+      timer++;
+      if (++record_timer[1] === 60) {
+        record_timer[0]++;
+        record_timer[1] = 0;
       }
     }
-  }
-  if (await era.input()) {
     await era.clear();
-    show_result().then();
-    await era.input();
-    flag_result = false;
-  }
-  sort_list(contestants, (e) => e.rank.curr, true)
-    .slice(0, 5)
-    .forEach((uma, i, l) => {
-      era.printMultiColumns([
-        {
-          config: { align: 'center', width: 1 },
-          content: ranks[i],
-          type: 'text',
-        },
-        {
-          config: {
-            align: 'center',
-            color: buff_colors[1],
-            fontWeight: 'bold',
-            width: 1,
-          },
-          content: (uma.index_race + 1).toString(),
-          type: 'text',
-        },
-      ]);
-      const diff = Math.round(uma.diff.behind / 2.4);
-      if (i < l.length - 1) {
-        era.print(
-          [
-            '> ',
-            {
-              color: buff_colors[1],
-              content: diff >= 10 ? '大差' : `${diff} 马身`,
-              fontWeight: 'bold',
-            },
-          ],
+    era.setAlign('left');
+    era.printInColRows(
+      {
+        columns: [
+          { type: 'divider' },
           {
-            offset: 3,
+            config: { align: 'center' },
+            content: [
+              track_names[info.track],
+              '竞马场 ',
+              info.get_colored_name_with_class(),
+              { isBr: true },
+              { isBr: true },
+            ],
+            type: 'text',
           },
-        );
-      }
-    });
+        ],
+        config: { width: 6, offset: 9 },
+      },
+      ...sort_list(contestants, (e) => e.rank.curr, true)
+        .slice(0, 5)
+        .map((uma, i, l) => {
+          return {
+            columns: [
+              {
+                config: { align: 'center', width: 4 },
+                content: ranks[i],
+                type: 'text',
+              },
+              {
+                config: {
+                  align: 'center',
+                  width: 4,
+                },
+                content: [
+                  '[',
+                  {
+                    color: buff_colors[1],
+                    content: (uma.index_race + 1).toString(),
+                    fontWeight: 'bold',
+                  },
+                  ']',
+                ],
+                type: 'text',
+              },
+              {
+                config: {
+                  offset: 9,
+                  width: 12,
+                },
+                content:
+                  i < l.length - 1
+                    ? [
+                        '> [',
+                        {
+                          color: buff_colors[1],
+                          content: get_delta_desc(uma.diff.behind),
+                          fontWeight: 'bold',
+                        },
+                        ']',
+                      ]
+                    : [],
+                type: 'text',
+              },
+            ],
+            config: { width: 6, offset: 10 },
+          };
+        }),
+      {
+        columns: [{ type: 'divider' }],
+        config: { width: 6, offset: 9 },
+      },
+    );
+    await era.waitAnyKey();
+  }
+  let interval = 0;
+  switch (await era.input()) {
+    case 0:
+      flag_result = false;
+      break;
+    case 1:
+      interval = 1000;
+      break;
+    case 2:
+      interval = 500;
+      break;
+    case 3:
+      interval = 250;
+  }
+  if (interval) {
+    await era.clear();
+    era.input().then(() => (flag_result = false));
+  }
+  await show_result(interval);
 }
 
 module.exports = page_race_result;
