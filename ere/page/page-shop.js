@@ -23,7 +23,8 @@ module.exports = async (item_list) => {
     `itemprice:${off}`,
     Math.max(Math.ceil(price_cache * ((off_index & 0x80) > 0 ? 0.5 : 0.7)), 1),
   );
-  let flag_shop = true;
+  let flag_shop = true,
+    bought = 0;
   const to_buy = {},
     price = {},
     limit = {},
@@ -323,6 +324,7 @@ module.exports = async (item_list) => {
               .get(`itemname:${selected_item}`)
               .toUpperCase()} `,
           );
+          bought += to_buy[selected_item];
           to_buy[selected_item] = Math.max(
             Math.min(
               Math.floor(cur_coin / price[selected_item]),
@@ -336,4 +338,5 @@ module.exports = async (item_list) => {
     }
   }
   era.set(`itemprice:${off}`, price_cache);
+  return bought;
 };

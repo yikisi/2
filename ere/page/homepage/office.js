@@ -42,6 +42,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { location_enum } = require('#/data/locations');
 const { get_celebration } = require('#/data/info-generator');
+const { shop_start, shop_end } = require('#/event/shop/tachyon-shop');
 
 /**
  * @param {number} chara_id
@@ -632,34 +633,38 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       break;
     case 304:
       era.set('flag:当前位置', location_enum.school_shop);
-      await print_shop_page([
-        700,
-        701,
-        702,
-        703,
-        705,
-        706,
-        707,
-        708,
-        ...new Array(7).fill(0).map((_, i) => {
-          return {
-            id: 750 + i,
-            limit: true,
-          };
-        }),
-        800,
-        { id: 801, limit: true },
-        802,
-        803,
-        804,
-        ...new Array(11).fill(0).map((_, i) => i + 810),
-        { id: 821, limit: true },
-        823,
-        { id: 824, limit: true },
-        ...new Array(11).fill(0).map((_, i) => i + 830),
-        ...new Array(5).fill(0).map((_, i) => i + 850),
-        ...new Array(4).fill(0).map((_, i) => i + 870),
-      ]);
+      era.drawLine();
+      await shop_start();
+      await shop_end(
+        await print_shop_page([
+          700,
+          701,
+          702,
+          703,
+          705,
+          706,
+          707,
+          708,
+          ...new Array(7).fill(0).map((_, i) => {
+            return {
+              id: 750 + i,
+              limit: true,
+            };
+          }),
+          800,
+          { id: 801, limit: true },
+          802,
+          803,
+          804,
+          ...new Array(11).fill(0).map((_, i) => i + 810),
+          { id: 821, limit: true },
+          823,
+          { id: 824, limit: true },
+          ...new Array(11).fill(0).map((_, i) => i + 830),
+          ...new Array(5).fill(0).map((_, i) => i + 850),
+          ...new Array(4).fill(0).map((_, i) => i + 870),
+        ]),
+      );
       era.set('flag:当前位置', location_enum.office);
       break;
     case 305:
