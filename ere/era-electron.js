@@ -119,21 +119,24 @@ const era = {
      * to log something into program logs as debug level
      * @param {any} msg
      */
-    // eslint-disable-next-line no-unused-vars
-    debug(msg) {},
+    debug(msg) {
+      return era.logger.debug(msg);
+    },
     /**
      * to log something into program logs as error level
      * @param {any} msg
      * @param {any} [stack]
      */
-    // eslint-disable-next-line no-unused-vars
-    error(msg, stack) {},
+    error(msg, stack) {
+      return era.logger.error(msg, stack);
+    },
     /**
      * to log something into program logs
      * @param {any} msg
      */
-    // eslint-disable-next-line no-unused-vars
-    info(msg) {},
+    info(msg) {
+      return era.logger.info(msg);
+    },
   },
   /**
    * print some text
@@ -227,6 +230,21 @@ const era = {
   println() {},
   /** DANGER exit the application and close the window */
   quit() {},
+  /**
+   * DANGER replace the line just printed with a new in-col-row line
+   * @param {...{columns: [{type: 'button'|'divider'|'image'|'image.whole'|'progress'|'text', [config]: {}}], [config]: {}}|[{type: 'button'|'divider'|'image'|'image.whole'|'progress'|'text', [config]: {}}]} columnObjects
+   * @returns {number} line number of the printed
+   */
+  // eslint-disable-next-line no-unused-vars
+  replaceInColRows(...columnObjects) {},
+  /**
+   * DANGER replace the line just printed with a new text line
+   * @param {string|({[color]:string,content:string,[fontWeight]:string,[fontSize]:string,[url]:string}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
+   * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line
+   * @returns {number} line number of the printed
+   */
+  // eslint-disable-next-line no-unused-vars
+  replaceText(content, config) {},
   /**
    * reset all variables except global variables
    * @returns {boolean}
@@ -341,5 +359,16 @@ const era = {
    */
   async waitAnyKey() {},
 };
+
+Object.keys(era).forEach((key) => {
+  if (era[key] instanceof Function && key !== 'delay') {
+    era[key] = (...args) => {
+      // eslint-disable-next-line no-undef
+      if (arguments.callee !== era[key]) {
+        return era[key](...args);
+      }
+    };
+  }
+});
 
 module.exports = era;

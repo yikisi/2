@@ -761,8 +761,8 @@ module.exports = async (chara_id, hook, extra_flag) => {
       condition_type.active
         ? extra_flag
         : era.get('tflag:主导权')
-        ? { attacker: chara_id, defender: 0 }
-        : { attacker: 0, defender: chara_id };
+          ? { attacker: chara_id, defender: 0 }
+          : { attacker: 0, defender: chara_id };
     hook.arg = true;
     if (attacker === era.get('tflag:主导权')) {
       hook.arg = era.get('tflag:前回行动') !== hook.hook;
