@@ -11,7 +11,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
-
+const { get_trainer_title } = require('#/data/info-generator');
 /**
  * @param {HookArg} hook
  * @param __
@@ -27,64 +27,84 @@ module.exports = async function (hook, __, event_object) {
   let wait_flag = false;
   if (event_marks.beginning === 1) {
     event_marks.beginning++;
-    await print_event_name(`${chara_talk.name}的初次登场`, chara_talk);
-    await era.printAndWait(`训练场`);
-    await me.say_and_wait(`${chara_talk.name}希望和我在训练场见面吗？`);
-    era.drawLine({ content: '训练室' });
-    await era.printAndWait(
-      `打开训练室的门,扫了一圈之后目光定格在了办公桌上的信封。`,
+    await print_event_name(`序章·${chara_talk.name}登场`, chara_talk);
+    await era.printAndWait(`草场上`);
+    await chara_talk.say_and_wait(`训练员君，接下来一起去哪里逛逛吧？`);
+    await era.printAndWait(`挨着你坐下的马娘向你搭话。`);
+    era.printButton(`抱歉，接下来我还要回到训练室整理数据。`, 1);
+    await era.input();
+    await era.printAndWait(`黄昏将两人的影子拉的长长的。`);
+    await chara_talk.say_and_wait(
+      `看到训练员君这么努力，姐姐我也想再跑一圈了呢♪`,
     );
-    await me.say_and_wait(`难道是写给我的情书吗？`, true);
     await era.printAndWait(
-      `走进之后拿起信封扫了眼右下角,不出意外看到了自己的名字。`,
+      `紧挨着（玩家名）坐下的马娘补充完了最后一点水分后站了起来，被残阳照射下的波浪长发像燃烧着的火焰一样。`,
     );
-    await me.say_and_wait(
-      `听说${chara_talk.name}意外喜欢复古的潮流,所以的话`,
-      true,
+    await me.say_and_wait(`不要跑过头了。`);
+    await chara_talk.say_and_wait(`知道了♪`);
+    await era.printAndWait(
+      `在草场上再次飞驰的丸善斯基，像是追逐的太阳的夸父一样，向着太阳奔去。`,
+    );
+    era.drawLine();
+    await era.printAndWait(
+      `随着吱呀一声打开的训练室大门，在黑暗中摸索着打开了电灯开关的（玩家名）正准备摊开夹着的公文包时。`,
+    );
+    await me.say_and_wait(`总不可能是情书之类的东西吧？`, true);
+    await era.printAndWait(`目光却定格在了办公桌的信封上。`);
+    await era.printAndWait(`To （玩家名）`);
+    await era.printAndWait(`           丸善斯基`);
+    await era.printAndWait(`将文件夹归档放回原位置后，（玩家名）拾起了信封。`);
+    await era.printAndWait(
+      `如果无视特意印上去的唇印以外，怎么看都是普普通通的信封。`,
+    );
+    await me.say_and_wait(`真是遗憾。`, true);
+    await era.printAndWait(
+      `将信纸从信封中取出，然后摊开在办公桌上，印入脑海的娟秀字体像是丸善斯基正对着自己说话一样。`,
     );
     await chara_talk.say_and_wait(
       `${
         era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      },可以来训练场一趟吗？`,
+      },7点半左右，可以来天台一趟吗？`,
     );
-    await me.say_and_wait(`以书信代替短信进行交流,意外的很有新意啊`, true);
+    await me.say_and_wait(`丸善斯基意外的很可爱呢。`, true);
     await me.say_and_wait(
-      `毕竟是接下来三年朝夕相处的同伴,所以慎重一点也没错吧......诶，还有唇印吗?`,
+      `毕竟是接下来三年朝夕相处的同伴,见面的时候得多了解一点对方才行。`,
       true,
     );
-    await me.say_and_wait(
-      `既然是作为训练员与担当${chara_talk.get_uma_sex_title()}的初次见面,这个珍贵的回忆就作为收藏好好收起来吧`,
-    );
+    era.printButton(`而且`, 1);
+    await era.input();
+    await me.say_and_wait(`被怪物心血来潮看上的幸运儿吗？`);
     await era.printAndWait(
-      `你将信封小心翼翼的收在了抽屉后。强行按捺住因激动而微微颤抖的自己`,
+      `猛地将这个阴暗的想法抛掷脑后，强迫自己重新将注意力移至对话中。`,
     );
-    await me.say_and_wait(
-      `给我冷静下来，这是${chara_talk.name}对你的第一个考验`,
-    );
-    await me.say_and_wait(
-      `连这个都处理不了你怎么成为引导${chara_talk.sex}的值得信赖的训练员?`,
-    );
+    await me.say_and_wait(`不过，该从什么地方展开话题呢？`);
     await era.printAndWait(
-      `低声呵斥不成熟的自己,你重新整理了一遍作为训练员的制服。`,
+      `作为担当训练员与负责马娘首次深入交流,某种意义上也是对训练员的一种考验。`,
     );
-    await me.say_and_wait(`我想要得到${chara_talk.sex}`, true);
+    await me.say_and_wait(`不过，稍微晚一点吗？`);
+    await era.printAndWait(`瞄了眼手机，锁屏界面上显示的时间为6:05`);
+    await me.say_and_wait(`时间还早的话，先整理一下今天的数据吧。`);
+    await era.printAndWait(`将信封收进抽屉后，（玩家名）再次打开了文件夹。`);
+    era.drawLine();
+    await era.printAndWait(`差不多到该出发的时间了。`);
     await era.printAndWait(
-      `你猛的甩了甩头,想要将这个灰色的欲望扫到记忆的角落之中`,
+      `从训练室到位于教学楼的天台大概需要10分钟，考虑到礼貌方面的要素，提前10分钟左右差不多吧。`,
     );
-    await me.say_and_wait(`那么去和${chara_talk.name}吧。`);
+    await era.printAndWait(`而此时锁屏界面上显示的时间为7点整。`);
+    await me.say_and_wait(`该出发了。`);
     era.drawLine();
     await era.printAndWait(
-      `沉闷的草场被充满生机的春风所吹拂,作为热情的火焰化身——${chara_talk.name}正快乐的奔跑在草地上。`,
+      `夜晚的吹拂比起白天显得更加温柔，以至于空气之中还存在着一丝丝的甜味。`,
     );
-    await me.say_and_wait(
-      `真是美丽的身影啊,果然作为${chara_talk.get_uma_sex_title()}的魅力就是自由自在的奔跑。`,
-      true,
+    await me.say_and_wait(`吹着这么舒服的风，看来明天也会是一个好天气。`);
+    await chara_talk.say_and_wait(`是啊，希望每天都会向今天这样是个好天气。`);
+    await me.say_and_wait(`是啊。嗯？`);
+    await era.printAndWait(
+      `正打算附和之时才意识到后背传来的熟悉声音正是丸善斯基。`,
     );
-    await me.say_and_wait(`我能跟上风的节奏吗......不,你在想什么呢`, true);
-    await era.printAndWait(`苦笑着摇了摇头再次抬头看向火焰时`);
     await me.say_and_wait(`那个是!`);
     await era.printAndWait(
-      `昏暗的想法瞬间被那道狂风所吹散,你的视线被那道身影所占据。`,
+      `昏暗的想法瞬间被狂风所吹散,你的视线被那道身影所吸引。`,
     );
     await era.printAndWait(`比起之前所吹拂的春风,你感受到了另一种东西——`);
     await me.say_and_wait(`如果我没看错的话，那道身影蕴藏着火焰`, true);
@@ -94,18 +114,17 @@ module.exports = async function (hook, __, event_object) {
       }已经拥有能与经典级${chara_talk.get_uma_sex_title()}一较高下的水准了`,
       true,
     );
-    await era.printAndWait(`不知为何感到了莫名的害怕。`);
+    await era.printAndWait(`不愧是被称为超级跑车的怪物吗。`);
+    await era.printAndWait(`......不知为何感到了害怕。`);
     await me.say_and_wait(`我该怎么与这团火焰共舞呢？`, true);
     await era.printAndWait(
-      `担当${chara_talk.get_uma_sex_title()}越是优秀,对训练员的能力要求就越严苛。`,
+      `比起向其他人证明自己的能力，你从火焰之中感受到了新的可能性。`,
     );
-    await era.printAndWait(`不过,想要守护那道身影的决意却没有改变。`);
     await me.say_and_wait(`我该怎么做才能让${chara_talk.name}注视着我呢?`);
     await chara_talk.say_and_wait(`先从了解彼此开始吧？`);
     await era.printAndWait(`身边传来了温柔的声音。`);
-    await me.say_and_wait(
-      `嗯，没错，先和${chara_talk.sex}彼此了解......呜哇，${chara_talk.name}什么时候来的?!`,
-    );
+    await me.say_and_wait(`（玩家名），请多指教。`);
+
     await era.printAndWait(
       `像是被窥视到了内心的想法一样，你下意识的向声音来源望去`,
     );
