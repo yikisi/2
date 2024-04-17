@@ -39,7 +39,7 @@ function get_delta_desc(delta) {
         return '7/4 马身';
       default:
         temp = Math.round(delta / 2.4);
-        if (temp > 10) {
+        if (temp >= 10) {
           return '大差';
         }
         return `${temp} 马身`;
@@ -157,7 +157,7 @@ async function page_race_result(contestants, records, info) {
               content:
                 records.loc[timer][uma.index_race] >= info.span
                   ? total_time[uma.index_race]
-                  : `${Math.floor(records.speed[timer][uma.index_race]).toLocaleString()}m/s`,
+                  : `${records.speed[timer][uma.index_race].toFixed(1)}m/s`,
               type: 'text',
             },
             records.loc[timer][uma.index_race] >= info.span

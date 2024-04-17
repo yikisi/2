@@ -158,9 +158,11 @@ function sys_sim_race(list_chara, race_info) {
       itemUma.race.groundCurr.phase--;
 
       //重置目标速度和加速度为赛段基础值
-      itemUma.race.velocityIdeal = itemUma.base.velocityIdeal *=
+      itemUma.race.velocityIdeal =
+        itemUma.base.velocityIdeal *
         itemUma.factorPhase.vStyle[itemUma.race.groundCurr.phase];
-      itemUma.race.acceleration = itemUma.base.acceleration *=
+      itemUma.race.acceleration =
+        itemUma.base.acceleration *
         itemUma.factorPhase.aStyle[itemUma.race.groundCurr.phase];
 
       //终盘时则再附加部分变动
