@@ -825,4 +825,5 @@ module.exports = async (urara, me, in_urara, callname) => {
     '。',
   ]);
   await urara.say_and_wait(['接下来要来做什么呢？', callname, '！']);
+  era.rmData(52);
 };
