@@ -61,7 +61,11 @@ handlers[event_hooks.week_end] = async () => {
     era.get('cflag:37:位置') === era.get('cflag:0:位置')
   ) {
     await print_event_name('交心之谈 · 二', flash);
-    await flash.say_and_wait('只是……');
+    await flash.say_and_wait([
+      '（',
+      flash.get_colored_name(),
+      '我会在合宿结束那天给您答复，这段期间内，就按照原定的计划执行吧。）',
+    ]);
     await era.printAndWait(
       '特雷森的合宿活动持续时间很短，从开始到结束，也只有一个月的间隔。',
     );
@@ -375,8 +379,8 @@ handlers[event_hooks.week_end] = async () => {
     era.printButton('「让我再考虑一段时间吧。」', 1);
     await era.input();
     await era.printAndWait(`最终，${your_name} 如此说道。`);
-    await flash.say_and_wait('………');
     era.drawLine();
+    await flash.say_and_wait('………');
     era.printButton('「闪耀？」', 1);
     await era.input();
     await era.printAndWait(
