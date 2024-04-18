@@ -4,14 +4,12 @@ const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { add_event, cb_enum } = require('#/event/queue');
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
-const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):Promise<*>>} */
 const handlers = {};

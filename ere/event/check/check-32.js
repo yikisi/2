@@ -2,14 +2,15 @@ const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
 
-const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
+const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 
-const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const check_stages = require('#/data/event/check-stages');
+const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -70,13 +71,48 @@ handlers[check_stages.aim_race] = (extra_flag) => {
   );
 };
 
-handlers[check_stages.after_punish] = () => {
-  add_event(event_hooks.week_start, new EventObject(32, cb_enum.daily));
+handlers[check_stages.after_punish] = ({ level }) => {
+  add_event(
+    event_hooks.week_start,
+    new EventObject(32, cb_enum.daily).set_arg(`p${level}`),
+  );
 };
 
 handlers[check_stages.next_week] = () => {
   const edu_weeks =
-    era.get('flag:当前回合数') - era.get('cflag:32:育成回合计时');
+      era.get('flag:当前回合数') - era.get('cflag:32:育成回合计时'),
+    daily_event_object = new EventObject(32, cb_enum.daily),
+    life_marks = new TachyonLifeMarks(),
+    relation = era.get('relation:32:0');
+  let temp;
+  if (
+    era.get('mark:32:反抗') === 3 &&
+    !life_marks.hate &&
+    Math.random() < 0.2
+  ) {
+    life_marks.hate = 1;
+    add_event(event_hooks.week_start, daily_event_object.set_arg('hate'));
+  }
+  life_marks.talk = 0;
+  // 做饭检查
+  if (life_marks.cook) {
+    if (relation <= 225) {
+      (temp = era.get('flag:当前回合数') - life_marks.l_cook) > 1 &&
+        temp <= 4 &&
+        add_event(
+          event_hooks.week_start,
+          daily_event_object
+            .copy()
+            .set_arg(`cook${Number(life_marks.cook >= 5)}${temp - 1}`),
+        );
+    } else if (life_marks.cook >= 10) {
+      (temp = era.get('flag:当前回合数') - life_marks.l_cook) > 1 &&
+        add_event(
+          event_hooks.week_start,
+          daily_event_object.copy().set_arg(`cook2${temp - 1}`),
+        );
+    }
+  }
   if (edu_weeks < 3 * 48) {
     const event_marks = new TachyonEduMarks();
     const event_obj = new EventObject(32, cb_enum.edu);
@@ -108,13 +144,6 @@ handlers[check_stages.next_week] = () => {
         event_obj,
       );
       if (love > 75) {
-        check_and_add_event(
-          event_marks,
-          edu_weeks,
-          'different_opinion',
-          event_hooks.out_start,
-          event_obj,
-        );
         check_and_add_event(
           event_marks,
           edu_weeks,

@@ -4,18 +4,17 @@ const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const {
   begin_and_init_ero,
+  set_palam_to_max,
   end_ero_and_train,
   init_ero,
-  set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
 const {
-  sys_get_callname,
   sys_get_colored_callname,
+  sys_get_callname,
 } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
@@ -23,13 +22,9 @@ const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { yes } = require('#/data/event/recruit-flags');
 
-module.exports = async () => {
-  const love = era.get('love:32'),
-    me = get_chara_talk(0),
-    punish_level = era.get('flag:惩戒力度'),
-    tachyon = get_chara_talk(32);
-  let temp;
-  if (punish_level === 1) {
+/** @param {Record<string,function(CharaTalk,CharaTalk,string,number,number)>} handlers */
+module.exports = (handlers) => {
+  handlers.p1 = async (tachyon, me, _, love) => {
     await print_event_name('实验记录：马娘转化', tachyon);
     if (love < 75) {
       await tachyon.say_and_wait('哦呀，豚鼠……不，豚鼠小姐来了呢');
@@ -69,7 +64,9 @@ module.exports = async () => {
       );
       await tachyon.say_and_wait('呵呵，我会好好疼爱你的');
     }
-  } else if (punish_level === 2) {
+  };
+
+  handlers.p2 = async (tachyon, me, _, love) => {
     await print_event_name('实验记录：性奴改造', tachyon);
 
     await era.printAndWait('咕啾 咕啾 啾啵 啾噜');
@@ -478,7 +475,9 @@ module.exports = async () => {
       );
     }
     end_ero_and_train();
-  } else if (punish_level === 3) {
+  };
+
+  handlers.p3 = async (tachyon, me, _, love) => {
     await print_event_name('实验记录：孕袋及多马娘体液研究', tachyon);
 
     begin_and_init_ero(0, 32);
@@ -682,7 +681,7 @@ module.exports = async () => {
       era.println();
     }
 
-    temp = era
+    const temp = era
       .getAddedCharacters()
       .filter(
         (e) =>
@@ -903,8 +902,7 @@ module.exports = async () => {
       era.printButton('用嘴', 1);
       era.printButton('用扫具', 2);
 
-      temp = await era.input();
-      if (temp === 1) {
+      if ((await era.input()) === 1) {
         await era.printAndWait(
           '反正，都已经回不去了，那不如干脆一点，放弃理智享受一切吧',
         );
@@ -989,5 +987,5 @@ module.exports = async () => {
       }
     }
     end_ero_and_train();
-  }
+  };
 };

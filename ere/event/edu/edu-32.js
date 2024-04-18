@@ -1,7 +1,6 @@
 const era = require('#/era-electron');
 
 const { add_event } = require('#/event/queue');
-const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -9,11 +8,8 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_names, fumble_result } = require('#/data/train-const');
-const { get_random_value } = require('#/utils/value-utils');
-const { buff_colors } = require('#/data/color-const');
-const { get_relation_info } = require('#/data/info-generator');
 const { say_by_passer_by } = require('#/utils/chara-talk');
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const { get_random_value } = require('#/utils/value-utils');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise<*>>}*/
 const handlers = {};
@@ -30,6 +26,837 @@ handlers[event_hooks.race_end] = require('#/event/edu/edu-events-32/race-end');
 handlers[
   event_hooks.crazy_fan_end
 ] = require('#/event/edu/edu-events-32/crazy-fan-end');
+
+handlers[event_hooks.train] = async function () {
+  const love = era.get('love:32'),
+    motivation = era.get('cflag:32:干劲'),
+    relation = era.get('relation:32:0');
+  const tachyon = get_chara_talk(32);
+  if (love < 75) {
+    if (relation < 75) {
+      //todo 干劲不调、绝不调
+      if (era.get('base:32:体力') < era.get('maxbase:32:体力') * 0.45) {
+        await print_event_name(`燃烧不完全`, tachyon);
+        era.println();
+        await tachyon.say_and_wait(`今天的目标……是……`);
+        era.println();
+        await era.printAndWait(`你忧心的看着爱丽速子的模样`);
+        await era.printAndWait(
+          `今天的她依然在尝试着为了突破极限而进行的实验，也可以称之为，训练`,
+        );
+        await era.printAndWait(
+          `倘若她的体力充足，只是状态不好，那你必然会狠下心来将其推向实验吧，因为有时严厉的举止也是必要的`,
+        );
+        await era.printAndWait(
+          `倘若她的体力不足，但状态出奇良好，那你在思考过后也会尝试让她继续进行锻炼吧，`,
+        );
+        await era.printAndWait(
+          `毕竟就如前辈训练员们说过的，贴近马娘的心灵才是身为训练员最重要的工作`,
+        );
+        await era.printAndWait(`但是……`);
+        era.println();
+        await era.printAndWait(
+          `对于体力明显不支，状态也心不在焉的她，你真的能够狠下心来吗？`,
+        );
+        era.printButton(`……继续吧`, 1);
+        era.printButton(`……休息吧`, 2);
+        const ret1 = await era.input();
+        if (ret1 === 1) {
+          await era.printAndWait(
+            `为了爱丽速子的目标及梦想……以及，自己的一点点私心`,
+          );
+          await era.printAndWait(`你看着速子现在的模样`);
+          await era.printAndWait(
+            `从被汗水浸湿的运动服透出的雪白肌肤，与奔跑时沾在衣服上的泥点，`,
+          );
+          await era.printAndWait(
+            `形成了显著的对比，紧紧贴合的运动服更凸显了她的姣好身材`,
+          );
+          await era.printAndWait(
+            `圆润的胸部及臀部，加上因疲惫而发出的喘息和泛红的脸颊，明明只是训练，却不住使人产生遐想`,
+          );
+          await era.printAndWait(
+            `要是能够将那不停弹跳的圆球当成自己的东西在手里尽情揉捏的话`,
+          );
+          await era.printAndWait(
+            `要是能用唇舌堵住那张平常总对自己爱搭不理的小嘴，使其只能发出娇嫩喘息的话`,
+          );
+          await era.printAndWait(
+            `这样的想法，以一名训练员，以一名成熟的大人来说，绝对是不应允许的行为吧`,
+          );
+          await era.printAndWait(
+            `但是，以身为男性的立场而言，内心的欲望却不允许你提出反对`,
+          );
+          await era.printAndWait(
+            `虽然犹豫，虽然不舍，但你还是装作没发现她的不适，让她继续训练`,
+          );
+          await era.printAndWait(
+            `……不知是不是发现了你内心的龌龊，又或者只是对训练的继续感到不满，爱丽速子没说什么，却瞪了你一眼`,
+          );
+          //todo 爱丽速子 的 好感度 -10
+        }
+        await era.printAndWait(`身为训练员，不合理的过度训练也是应该避免的`);
+        await era.printAndWait(`你在爱丽速子跑完一圈后，马上喊了停`);
+        era.println();
+        await tachyon.say_and_wait(
+          `……结束？实验才刚开始不是吗，还有很多今天要完成的对比实……实验……啊……`,
+        );
+        await era.printAndWait(
+          `她的强硬话语只说了一半便坚持不下去，忍不住发出了低吟`,
+        );
+        await era.printAndWait(
+          `谁能想得到呢，只是轻轻按压了下小腿内侧，往来如此强硬的小嘴竟然会发出如此诱人的声音`,
+        );
+        await era.printAndWait(
+          `当然，你的按压并没有神奇到能让人立即发春，这一切的主因还是在速子自己`,
+        );
+        await era.printAndWait(
+          `你扶着已经瘫软的速子，轻轻按压她已经有些发肿的小腿`,
+        );
+        era.println();
+        await tachyon.say_and_wait(`……嗯……呀……这样……不行……住手……啊嗯……`);
+        era.println();
+        await era.printAndWait(`她的小嘴不住发出令人沉醉的娇吟`);
+        await era.printAndWait(
+          `雪白的肌肤已经有些红肿，每次按压着不同的地方，她都会发出令人遐想的声音，`,
+        );
+        await era.printAndWait(
+          `彷佛你在做的这些并非是健全的按摩，而是某些更邪恶，下流的行为`,
+        );
+        await era.printAndWait(
+          `在神圣的赛场上做这样的事情，当然不免会引起他人的关注，`,
+        );
+        await era.printAndWait(
+          `不知不觉间，一些还在锻炼的小马娘们也被速子的娇吟吸引过来`,
+        );
+        era.println();
+        await tachyon.say_and_wait(`等…豚鼠…咿…不可以……有人……啊啊～～♡`);
+        era.println();
+        await era.printAndWait(`你置若罔闻的按压着`);
+        await era.printAndWait(
+          `速子的腿，比你想象中的还要娇嫩纤细，轻轻握在手里的感觉使你有了一种掌握了她的生杀大权的错觉`,
+        );
+        await era.printAndWait(
+          `要是能在床上，看着她不甘却还是忍不住发出呻吟的模样，抓着她的双腿将其分开，那带来的征服感想必是胜过世间一切的吧`,
+        );
+        era.println();
+        await tachyon.say_and_wait(`……！那边不可以！`);
+        era.println();
+        await era.printAndWait(`不知不觉间，有些起劲的你向上摸到了大腿`);
+        await era.printAndWait(`速子用力将双腿抽回时的力道唤醒了你的理智，`);
+        await era.printAndWait(
+          `提醒你眼前的少女，实际上是力量大过于成年男性三倍的马娘`,
+        );
+        await era.printAndWait(`你连忙向她道歉`);
+        era.println();
+        await tachyon.say_and_wait(
+          `……我，我知道了……今天，就先到这里吧……我，我需要休息一下……`,
+        );
+        await era.printAndWait(
+          `速子语速飞快的说完这些后便起身要回到实验室，但随即便被失力感导致瘫软在你怀中`,
+        );
+        await era.printAndWait(
+          `此时你们二人看上去的模样哪里像是正常训练中的训练员及马娘，`,
+        );
+        await era.printAndWait(
+          `倒不如说是扑在男友怀中的撒娇女友，及温柔的将她拥在怀中的男伴`,
+        );
+        await era.printAndWait(
+          `被他人所惧的疯狂科学家，此时却小鸟依人的靠在你怀里`,
+        );
+        await era.printAndWait(`对此你忍不住产生了一种自豪及骄傲感`);
+        era.println();
+        await tachyon.say_and_wait(`……带我回实验室，现在，马上`);
+        era.println();
+        await era.printAndWait(`但随即，科学家的瞪视却使你变回了听话的豚鼠`);
+        await era.printAndWait(
+          `于是，你们两人在周围马娘们的半是佩服半是羡慕的目光中，缓缓走回了实验室`,
+        );
+        //todo 本轮禁止训练 爱丽速子的状态 上升
+      } else if (era.get('base:32:体力') > era.get('maxbase:32:体力') * 0.8) {
+        if (motivation >= 0) {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(`那么，开始实验吧。`);
+              break;
+            case 1:
+              await tachyon.say_and_wait(
+                `快点，去准备纪录实验数据，不要分心了。`,
+              );
+              break;
+            case 2:
+              await tachyon.say_and_wait(`哼……`);
+              await era.printAndWait(
+                `速子没有说话，但你看得出她身上满溢的干劲。`,
+              );
+              break;
+          }
+        } else {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(
+                `你在慢什么，还不快去准备纪录实验数据，敢出什么差错我剥了你的皮。`,
+              );
+              break;
+            case 1:
+              await tachyon.say_and_wait(
+                `方向发生错误了吗……为什么……明明体力充沛，却完全没有能够超越极限的自信……。`,
+              );
+              break;
+            case 2:
+              await tachyon.say_and_wait(`……最近你提出的实验，越来越无趣了啊`);
+              await era.printAndWait(`速子用危险的眼神看着你。`);
+              break;
+          }
+        }
+      } else if (era.get('base:32:体力') < era.get('maxbase:32:体力') * 0.45) {
+        if (motivation >= 0) {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(`……开始实验吧。`);
+              await tachyon.say_and_wait(
+                `累？没这回事，我有预感，这一次，这一次一定能够突破瓶颈……`,
+              );
+              break;
+            case 1:
+              await tachyon.say_and_wait(`必须更快……咕……身体无法……动弹……。`);
+              break;
+            case 2:
+              await tachyon.say_and_wait(
+                `开什么玩笑……突破极限的首要条件就是抵达极限。`,
+              );
+              await tachyon.say_and_wait(
+                `还要更快，要是连极限都无法抵达……那还谈什么超越极限……！`,
+              );
+              break;
+          }
+        } else {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(`今天的目标……是……`);
+              break;
+            case 1:
+              await tachyon.say_and_wait(
+                `方向发生错误了吗……为什么……明明体力充沛，却完全没有能够超越极限的自信……。`,
+              );
+              break;
+            case 2:
+              await tachyon.say_and_wait(`……最近你提出的实验，越来越无趣了啊`);
+              await era.printAndWait(`速子用危险的眼神看着你。`);
+              break;
+          }
+        }
+      }
+    } else if (relation < 225 && relation > 75) {
+      if (era.get('base:32:体力') > era.get('maxbase:32:体力') * 0.8) {
+        if (motivation >= 0) {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(`豚鼠君！开始我们的研究吧！`);
+              break;
+            case 1:
+              await tachyon.say_and_wait(
+                `状态绝佳！今天绝对能跑出堪比普朗克时间的纪录出来！`,
+              );
+              break;
+            case 2:
+              await tachyon.say_and_wait(
+                `直到超越光速！直到抵达可能性的彼方！`,
+              );
+              break;
+          }
+        } else {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(`……无趣啊`);
+              await era.printAndWait(`爱丽速子喃喃自语道。`);
+              break;
+            case 1:
+              await tachyon.say_and_wait(
+                `豚鼠君……我认为实验的灵感是很重要的，成功虽说是99%的努力加上1%的灵感，`,
+              );
+              await tachyon.say_and_wait(
+                `但没有1%的灵感无论努力了99%还是99.99%都是一样毫无用处，你明白我的意思吗？`,
+              );
+              await tachyon.say_and_wait(
+                `不，我不是为了翘掉训练才这么说的，这只是在陈述一件事实，`,
+              );
+              await tachyon.say_and_wait(
+                `但既然你提到了这个话题，那我们也可以顺带代入进去来看，所以今天的训练……`,
+              );
+              await era.printAndWait(`你摇了摇头`);
+              await tachyon.say_and_wait(`切`);
+              await era.printAndWait(`爱丽速子啧了一声`);
+              break;
+            case 2:
+              await tachyon.say_and_wait(
+                `训练？今天的实验都还没做完不是吗？唉……罢了，等我做完实验之后就去`,
+              );
+              await era.printAndWait(
+                `最后，在速子来训练前你等了足足三个小时，直到太阳下山她才出现在训练场上`,
+              );
+              break;
+          }
+        }
+      } else if (era.get('base:32:体力') < era.get('maxbase:32:体力') * 0.45) {
+        if (motivation >= 0) {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(
+                `哈啊哈啊……体力？没问题，今天一定能够突破……哈啊，哈啊……`,
+              );
+              break;
+            case 1:
+              await tachyon.say_and_wait(
+                `直到极限……在体力的极限才能见到真正的突破！`,
+              );
+              break;
+            case 2:
+              await tachyon.say_and_wait(
+                `理性在告诉我自己需要休息了，但感性却怎么也不想停下来……真是幸福的烦恼啊，哈哈哈！`,
+              );
+              break;
+          }
+        }
+      }
+    } else if (relation < 525 && relation > 225) {
+      if (era.get('base:32:体力') > era.get('maxbase:32:体力') * 0.8) {
+        if (motivation >= 0) {
+          switch (get_random_value(0, 1)) {
+            case 0:
+              await tachyon.say_and_wait(
+                `快快快！时间不等人的！今天的实验数据起码可以水五篇论文！接下来两个月的研究经费都可以不用愁了！`,
+              );
+              break;
+            case 1:
+              await tachyon.say_and_wait(
+                `训练？没问题，但是有个条件，豚鼠君，今天你也来一起并跑吧？`,
+              );
+              await tachyon.say_and_wait(
+                `没问题没问题，现在你的身体素质如果短时间爆发已经能够跑出不输给马娘的速度了……`,
+              );
+              await tachyon.say_and_wait(
+                `没问题没问题，嗯，短时间的话，大概……五秒内？`,
+              );
+              break;
+          }
+        } else {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(
+                `训练？又是跑操场啊……我说，豚鼠君，能不能来点更有趣的训练啊？`,
+              );
+              await tachyon.say_and_wait(
+                `比如……药剂俄罗斯轮盘赛？先各喝五管随机效果的药然后开始比赛？`,
+              );
+              await tachyon.say_and_wait(
+                `先找到能够配合的马娘？茶座君……欸，不行吗？`,
+              );
+              break;
+            case 1:
+              await tachyon.say_and_wait(
+                `我说啊豚鼠君，我们冷静分析，这样每天锻炼的效率真的会比研究高吗？`,
+              );
+              await tachyon.say_and_wait(
+                `什么？我的特殊事件触发一次也就+5，哪来的自信跟锻炼比的？`,
+              );
+              await tachyon.say_and_wait(
+                `不是，等等，豚鼠君你在说什么……我怎么听不懂……`,
+              );
+              break;
+            case 2:
+              await tachyon.say_and_wait(
+                `欸……训练好麻烦，要跑你自己上去跑不就好了`,
+              );
+              await tachyon.say_and_wait(
+                `乖孩子什么的……我说豚鼠君，你不会是把我当成小孩子了吧？`,
+              );
+              await tachyon.say_and_wait(
+                `不过嘛……偶尔去跑一下也不是什么坏事，大概。`,
+              );
+              break;
+          }
+        }
+      } else if (era.get('base:32:体力') < era.get('maxbase:32:体力') * 0.45) {
+        switch (get_random_value(0, 2)) {
+          case 0:
+            await tachyon.say_and_wait(
+              `豚鼠君……我看见光了……再努力，再努力一定能追上……就在前面……`,
+            );
+            break;
+          case 1:
+            await tachyon.say_and_wait(`豚鼠君…给我……药……快点……我快撑不住了…`);
+            await tachyon.say_and_wait(
+              `啊，没错没错，就是这个就是这个，没有这个我怎么活啊……`,
+            );
+            await tachyon.say_and_wait(
+              `嗯？说话方式很奇怪？不就是普通的营养剂而已吗？有什么奇怪的？像嗑多了？只有脑袋里都塞了那种东西的人才会想歪啦`,
+            );
+            break;
+          case 2:
+            await tachyon.say_and_wait(`……呼`);
+            await tachyon.say_and_wait(`双腿？没问题`);
+            await tachyon.say_and_wait(
+              `再说，就算出了问题也无妨吧，毕竟就算双腿再也无法奔跑，你也会跟着我的吧？`,
+            );
+            await tachyon.say_and_wait(
+              `虽然是实话，但还是不想看到受伤？哎呀呀，那该怎么办呢～～`,
+            );
+            break;
+        }
+      }
+    }
+  } else if (love > 90) {
+    if (relation > 75) {
+      if (era.get('base:32:体力') > era.get('maxbase:32:体力') * 0.8) {
+        if (motivation >= 0) {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(
+                `走吧走吧，豚鼠君～～快点开始我们今天的实验吧`,
+              );
+              await tachyon.say_and_wait(`……还是说，要我喊你，亲爱的❤`);
+              break;
+            case 1:
+              await tachyon.say_and_wait(`豚鼠君～～今天的训练可不能马虎哦`);
+              await tachyon.say_and_wait(
+                `为什么？真是……连最基础的生物常识都不懂吗`,
+              );
+              await tachyon.say_and_wait(
+                `母体的锻炼不足，可是会影响到后代的健康的❤`,
+              );
+              await tachyon.say_and_wait(
+                `为了备孕，可千万不能手下留情哦，孩子他爸❤`,
+              );
+              break;
+            case 2:
+              await tachyon.say_and_wait(
+                `状态很好？呵呵，只要和豚鼠君在一起，无论哪一天我的状态都是一样好哦`,
+              );
+              await tachyon.say_and_wait(`……当然，其他方面的状态也是❤`);
+              break;
+          }
+        }
+      }
+    }
+  } else if (love > 75) {
+    if (relation > 75) {
+      if (era.get('base:32:体力') > era.get('maxbase:32:体力') * 0.8) {
+        if (motivation >= 0) {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(`豚鼠君……我在思考一件事`);
+              await tachyon.say_and_wait(
+                `最近训练的时候，只要一想到豚鼠君你在看着我，就觉得特别有动力`,
+              );
+              await tachyon.say_and_wait(
+                `嗯……爱情的影响吗，是个不错的研究课题，下次来试试不同爱情表现的变量下会导致的训练结果差别吧`,
+              );
+              break;
+            case 1:
+              await tachyon.say_and_wait(
+                `豚鼠君，今天我这么难得的有干劲想训练，对这样的爱马，你不觉得应该有些什么奖励才对呢`,
+              );
+              await tachyon.say_and_wait(
+                `……训练结束？我说，我可等不了那么久啊`,
+              );
+              await tachyon.say_and_wait(`唔……咕啾……啾噜……啾啵……啾……啾咕`);
+              await tachyon.say_and_wait(
+                `呼……姑且算你及格了，剩下的，训练结束之后再继续吧❤`,
+              );
+              break;
+            case 2:
+              await tachyon.say_and_wait(
+                `有种说法，训练员就是将马娘『驯服』的存在，因此驯服的驯才是马字旁，也因此驯和训的读音如此相近`,
+              );
+              await tachyon.say_and_wait(
+                `如果是这样的话，那么把这样的我给驯服了的训练员君，今天希望我做些什么呢❤`,
+              );
+              break;
+          }
+        } else {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(
+                `欸欸～～居然要强迫状态不好的爱人利用身体来取悦自己吗？`,
+              );
+              await tachyon.say_and_wait(
+                `……豚鼠君，真没想到你居然是这种人呢……哭哭……`,
+              );
+              await tachyon.say_and_wait(
+                `啧啧，只是玩笑而已，何必认真呢……不过要是你想玩过分一点的玩法，我也不介意哦❤`,
+              );
+              break;
+            case 1:
+              await tachyon.say_and_wait(
+                `训练？不如好好做实验……今天的实验都没做完呢，急什么`,
+              );
+              await tachyon.say_and_wait(
+                `嗯？不客气了？呵呵，有什么办法就用上来吧，我拭目以待`,
+              );
+              await tachyon.say_and_wait(
+                `等……公主抱什么的……这也太让人害羞了……`,
+              );
+              break;
+            case 2:
+              await tachyon.say_and_wait(`训练？嗯……喝了今天的药再说吧`);
+              await tachyon.say_and_wait(
+                `全身发热？意识模糊？没事没事，这是正常现象`,
+              );
+              await tachyon.say_and_wait(`嗯哼……时间应该差不多了，`);
+              await tachyon.say_and_wait(
+                `那么，今天的药是引动雌性激素雄性激素皮质醇生长激素加压素达到平均以上水平的药物，或者通俗一点来讲的话，就是媚药哦❤`,
+              );
+              await tachyon.say_and_wait(`训练什么的，等结束之后再说吧❤`);
+              // todo 无钢之意志
+              await era.printAndWait(
+                `在速子的诱惑下，你将她扑倒在实验室里的小床里……`,
+              );
+              // todo 上床，本次事件跳过
+
+              // todo 存在钢之意志
+              era.printButton(`别闹了，快点去训练`, 1);
+              await era.input();
+              await era.printAndWait(`你靠着学习到的钢之意志撑住了诱惑`);
+              await tachyon.say_and_wait(`这也可以的吗！？`);
+              await era.printAndWait(
+                `你不顾吐槽的速子，把她硬抱到了训练场上。`,
+              );
+              break;
+          }
+        }
+      } else if (era.get('base:32:体力') < era.get('maxbase:32:体力') * 0.45) {
+        if (motivation >= 0) {
+          switch (get_random_value(0, 2)) {
+            case 0:
+              await tachyon.say_and_wait(
+                `呼……偶尔认真的流流汗也不错啊，休息？现在状态这么好，休息也太可惜了。`,
+              );
+              await tachyon.say_and_wait(
+                `等，豚鼠君，你在做什么……不要闻啊……现在很臭的……`,
+              );
+              await tachyon.say_and_wait(
+                `我，我知道了……我回去休息，所以别闻了……`,
+              );
+              await tachyon.say_and_wait(
+                `什么叫可以继续啊！？豚鼠君，你……真的是变态啊`,
+              );
+              await tachyon.say_and_wait(
+                `真是，不过会因此而感到兴奋的我，绝对也是变态无误了❤`,
+              );
+              break;
+            case 1:
+              await tachyon.say_and_wait(`体力不支，需要休息？`);
+              await tachyon.say_and_wait(
+                `……那还不是因为某人前几天……我的腰到现在都还在痛……`,
+              );
+              await tachyon.say_and_wait(
+                `喂！……真是，腰还在痛只是比喻啦……大惊小怪的……就那么担心我吗❤`,
+              );
+              break;
+            case 2:
+              await tachyon.say_and_wait(`哈啊……哈啊……`);
+              await tachyon.say_and_wait(
+                `没什么，耐力用尽什么的，还早得很呢！`,
+              );
+              await tachyon.say_and_wait(
+                `不过……要是真的受不了了，就麻烦你帮我补充『精』力了，豚鼠君❤`,
+              );
+              break;
+          }
+        }
+        /*
+        //todo 每个回合20%机率触发5选一
+        await tachyon.say_and_wait(`哦呀，豚鼠君，来得正好，这是今天的药`);
+        era.println();
+        await era.printAndWait(
+          `爱丽速子递了瓶发出(深/浅)(红/橙/黄/绿/蓝/靛/紫/灰/银/金)/七彩 的药水给你`,
+        );
+        era.println();
+        await era.printAndWait(`你二话不说喝下药水`);
+        switch (get_random_value(0, 4)) {
+          case 0:
+            await era.printAndWait(`你喝下药水后忽然感觉喉咙很痒`);
+            await era.printAndWait(`忍不住想咳嗽，没想到一咳出来的却是火星`);
+            era.println();
+            await tachyon.say_and_wait(`哦呀哦呀，看来龙息药水的效果很好啊`);
+            era.println();
+            await era.printAndWait(
+              `速子一脸高兴的记录着实验数据，却没预料到接下的后果，咳出的火星落到了她身旁的实验纪录上`,
+            );
+            era.println();
+            await tachyon.say_and_wait(
+              `怎么…………有股烧焦味……………我的实验数据！！？？`,
+            );
+            era.println();
+            await era.printAndWait(
+              `她连忙开始挽救那些还没烧着的实验纪录，你想上前帮忙，但喉咙实在痒的不行`,
+            );
+            era.println();
+            await tachyon.say_and_wait(`咳咳！！`);
+            era.println();
+            await era.printAndWait(
+              `在药效消失前，速子只是不停的跑来跑去抢救着资料`,
+            );
+            //todo 速子的速度 增加 5 速子的心情，下降1级
+            break;
+          case 1:
+            era.println();
+            await era.printAndWait(
+              `你喝下药水后感觉眼睛看出去的世界忽然变得清楚了许多，`,
+            );
+            await era.printAndWait(
+              `但你不禁开始怀疑那是不是迷幻药一类的东西，因为你的眼前开始看见了一些奇怪的东西`,
+            );
+            era.println();
+            await tachyon.say_and_wait(
+              `哦？看来有什么效果的样子？这是我根据茶座君说的看见另一个世界的感觉制造出来的灵视药剂`,
+            );
+            era.println();
+            await era.printAndWait(
+              `她到底做了什么出来！这已经跨越正常化学领域了吧！？`,
+            );
+            era.println();
+            await tachyon.say_and_wait(
+              `顺便，要是你现在能看见的话，帮我看看我身上吧`,
+            );
+            era.println();
+            await era.printAndWait(`你听见这句话，下意识看向了速子`);
+            await era.printAndWait(`随即，你的意识瞬间停止了运作`);
+            era.println();
+            await tachyon.say_and_wait(
+              `昨天缠着茶座君的时候好像不小心把她惹毛了，从昨天回来之后就觉得身体好沉重……`,
+            );
+            era.println();
+            await era.printAndWait(
+              `你看见，有某个黑影用双手压在了爱丽速子的肩上`,
+            );
+            await era.printAndWait(
+              `黑影似乎察觉到了你的视线，伸出手指在可能是脸的部分比了一个嘘的手势`,
+            );
+            await era.printAndWait(`接下来，你感觉自己什么也说不出口了`);
+            era.println();
+            await tachyon.say_and_wait(
+              `………奇怪，真的没什么吗，为什么感觉身体这么重`,
+            );
+            era.println();
+            await era.printAndWait(
+              `速子没注意到你的不对，喃喃自语说完后走出了房间`,
+            );
+            await era.printAndWait(
+              `此时你才总算能够大口呼吸，那个黑影，到底是什么………`,
+            );
+            era.println();
+            await era.printAndWait(
+              `顺带一提，隔天速子就恢复正常了，看来或许只是茶座的稍加惩戒而已吧`,
+            );
+            //todo 速子的耐力 增加了5
+            break;
+          case 2:
+            await era.printAndWait(`你喝下药后忽然感觉身体无比僵硬`);
+            await era.printAndWait(
+              `你惊恐的发现现在的自己全身上下除了嘴和脑袋其他所有地方都无法动弹了`,
+            );
+            era.println();
+            await tachyon.say_and_wait(
+              `哎呀………原本是想做能够增强身体抗打击力的药剂，结果变成类似石化的效果了吗………`,
+            );
+            era.println();
+            await era.printAndWait(`你没有功夫理会速子的实验后感想`);
+            await era.printAndWait(`妳的心情十分着急`);
+            await era.printAndWait(`拼命想移动身体却动弹不得`);
+            await era.printAndWait(
+              `接下来还有一场关于训练场时间分配的会议，要是今天没法出席之后一个月训练场都没得使用了`,
+            );
+            await era.printAndWait(`你将事情的严重性告诉了速子`);
+            await era.printAndWait(`她也感到大事不妙`);
+            era.println();
+            await tachyon.say_and_wait(
+              `要是没法上训练场怎么确认我药剂的效果！？`,
+            );
+            era.println();
+            await era.printAndWait(
+              `总之，姑且不论原因为何，现在的当要之急是把你送到会议室去`,
+            );
+            await era.printAndWait(`速子努力将你抬起，要送到会议室去`);
+            await era.printAndWait(
+              `不知为何喝下了药剂后你的身子变得特别沉重，就连速子用马娘的力气想将你托起都耗费了好大一番功夫`,
+            );
+            await era.printAndWait(
+              `最后好不容易，总算将你抬到会议室，并且为了被人发现不对，速子在旁全程陪同参加会议`,
+            );
+            era.println();
+            await era.printAndWait(
+              `在那天之后，不知为何学园里开始流传起速子和你的绯闻`,
+            );
+            await say_by_passer_by(`路人马娘A`, `据说是用公主抱抱去参加会议的`);
+            await say_by_passer_by(
+              `路人训练员A`,
+              `会议上也全程陪同，帮忙端茶递水，完全就是贤内助的模样`,
+            );
+            await say_by_passer_by(
+              `路人马娘B`,
+              `没想到那个爱丽速子也恋爱了啊…………`,
+            );
+            era.println();
+            await era.printAndWait(`……………为什么会产生这样的绯闻呢`);
+            await era.printAndWait(
+              `以及，为什么听到这样的绯闻后，速子的脸仿佛有点红的样子`,
+            );
+            //todo 速子的力量 增加了5
+            // 速子的心情 提升了1级
+            break;
+          case 3:
+            await era.printAndWait(
+              `药水在你喝下之前便爆出了粉色的浓雾，将你和速子包裹在雾中`,
+            );
+            era.println();
+            await tachyon.say_and_wait(`咳咳！怎么回事！？`);
+            era.println();
+            await era.printAndWait(
+              `你摇头表示自己不知道，说到底连药的效果是什么都不知道的你怎么可能会知道这是怎么回事`,
+            );
+            era.println();
+            await tachyon.say_and_wait(
+              `明明只是普通的精力药而已……算了，先把窗户跟门打开让雾气散掉`,
+            );
+            era.println();
+            await era.printAndWait(`速子连忙到窗前想要开窗散气，然而`);
+            era.println();
+            await tachyon.say_and_wait(`咕，身体提不起劲……！`);
+            era.println();
+            await era.printAndWait(
+              `这段期间，你一直端坐在椅子上，哪都没去，这并非是因为你内心的余裕，`,
+            );
+            await era.printAndWait(
+              `而是因为你下半身的兄弟已经高高立起/下面已经泛滥成灾`,
+            );
+            await era.printAndWait(
+              `你想起了速子说的精力药，一般而言的精力药指的……都是针对那方面的药吧`,
+            );
+            await era.printAndWait(
+              `为什么速子会做那样的药，你的内心感到疑惑，但现在不是思考这些的时候了，因为……`,
+            );
+            era.println();
+            await tachyon.say_and_wait(`豚鼠君……我的身体……好热……`);
+            era.println();
+            await era.printAndWait(
+              `爱丽速子用变成爱心状的双眼看着你，眼中流露出一丝恐慌，以及更多的情欲`,
+            );
+            await era.printAndWait(`看见她的模样，你……`);
+            // todo 若速子未有过性经验或者好感<225、爱慕<75
+            era.println();
+            await era.printAndWait(`不行，她是你的负责马娘，你不能做这种事`);
+            await era.printAndWait(
+              `你冷静的拒绝了她，幸好，速子看上去也维持着一定的冷静`,
+            );
+            era.println();
+            await tachyon.say_and_wait(
+              `没事的……这个药的药效最多也就一个小时……只要撑过一个小时就……`,
+            );
+            await era.printAndWait(
+              `你们没有再多说什么，你和瘫软着身子坐在地上的她默默的等待时间过去`,
+            );
+            era.println();
+            await era.printAndWait(
+              `你拼命的忍耐着，但目光还是忍不住移向了速子的方向`,
+            );
+            era.println();
+            await era.printAndWait(
+              `速子的全身大汗淋漓——想来你也应是如此——由于白大褂遮掩的关系，衣服并未透出什么不该吐露的东西`,
+            );
+            era.println();
+            await era.printAndWait(
+              `然而，终究百密一疏，原本大上一号的白大褂，却在汗水的湿润下呈现出了十分贴合速子身材的曲线，`,
+            );
+            await era.printAndWait(
+              `从圆润的股丰及丰内深邃的沟槽，到胸前不算太大却十分坚挺的山峰，都清晰的描绘在你的眼中`,
+            );
+            era.println();
+            await tachyon.say_and_wait(`豚鼠君……`);
+            era.println();
+            await era.printAndWait(
+              `速子似乎注意到你的视线了，有些责怪的喊了一声，`,
+            );
+            await era.printAndWait(
+              `但在情欲的感染下这一声豚鼠君都带上了娇媚的色彩，你连忙道歉了一声后收回视线`,
+            );
+            era.println();
+            await era.printAndWait(`忍耐，忍耐，忍耐`);
+            await era.printAndWait(
+              `总算，药效逐渐消退，速子艰难的站起身来，抛了句今天就到这里后仓皇的离开了训练员室……`,
+            );
+            await era.printAndWait(
+              `你晃了晃头，希望将今天发生的这些摇出脑袋，但速子那姣好的身材依然留存于你的脑海中，无法忘怀……`,
+            );
+            era.println();
+            await era.printAndWait(
+              `顺带一提，事后你问了速子，得知了那种精力药是供应给校内某秘密商店的，`,
+            );
+            await era.printAndWait(
+              `据说这才是她研究资金的主要来源，要是在校园里多逛逛的话说不定能找到……？`,
+            );
+            // todo 速子的根性+10 训练员的根性+10(?)
+            // 速子的爱慕值+5
+            break;
+          case 4:
+            await era.printAndWait(
+              `你喝下药剂后，全身忽然发出了光芒，你感到有些惊恐，却发现速子依然一幅兴奋的样子`,
+            );
+            era.println();
+            await tachyon.say_and_wait(`快，把衣服脱了`);
+            era.println();
+            await era.printAndWait(`这个家伙在说什么！？`);
+            await era.printAndWait(
+              `是变态吗！？是特雷森最近流行的女骚扰犯吗！？`,
+            );
+            await era.printAndWait(
+              `你连忙抓紧了自己的衣服，但人类终究还是敌不过马娘的力量，在长达三秒的挣扎后，你的衣服在拉扯间被撕了开来`,
+            );
+            era.println();
+            await era.printAndWait(
+              `无力抵抗的你闭上了双眼，无法反抗那就只能享受了，来吧，别怜惜我是朵娇花！`,
+            );
+            era.println();
+            await tachyon.say_and_wait(`…………原来如此，原来如此`);
+            era.println();
+            await era.printAndWait(
+              `等待了许久都没有等到你所期待发生的那种事，你瞧瞧睁开了眼睛，`,
+            );
+            await era.printAndWait(
+              `却看到速子正盯着你的身体念念有词，一边在记录本上写着什么`,
+            );
+            era.println();
+            await era.printAndWait(
+              `你将视线移回自己身上，发现自己的身体确实正发着光，但发光的部位都有着一定的规律性，看上去就好像…………`,
+            );
+            era.println();
+            await tachyon.say_and_wait(
+              `原来人类的身体具体是这样运作的……但是……和马娘之间的区别…………`,
+            );
+            era.println();
+            await era.printAndWait(
+              `你听见速子喃喃自语的声音后察觉，这依然是为了探讨马娘的奥秘而展开的实验`,
+            );
+            await era.printAndWait(`你不禁为自己肤浅的想法感到有些不好意思`);
+            era.println();
+            await tachyon.say_and_wait(
+              `好，今天就先观察到这吧，我先回去做实验了，豚鼠君你记得把衣服穿上！`,
+            );
+            era.println();
+            await era.printAndWait(
+              `速子纪录完后飞快的离开了训练员室，留下你一个人在训练员室里`,
+            );
+            await era.printAndWait(
+              `你看着地上已经不能称作是衣服的那堆碎片，心想着到底是该趁着夜色漆黑跑回家，还是麻烦同事帮你拿件衣服过来`,
+            );
+            //todo 速子的智力 增加了5
+            break;
+        }*/
+      }
+    }
+  }
+};
 
 /**
  * @param {HookArg} hook

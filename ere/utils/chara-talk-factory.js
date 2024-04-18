@@ -23,4 +23,5 @@ module.exports = {
     }
     return new CharaTalk(chara_id, color);
   },
+  say_by_passer_by: CharaTalk.say_by_passer_by,
 };

@@ -1,11 +1,28 @@
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 class TachyonEduMarks extends EduEventMarks {
+  // 日常部分
+  // 闲聊 - 喊着玩
+  talk;
+  // 什么药·红茶？
+  black_tea;
+  // 什么饮料
+  drink;
+  // 中庭 - 枯树洞 - 黑影
+  evil;
+  // 天台 - PlanA
+  roof_a;
+  // 天台 - PlanB
+  roof_b;
+  // 河边 - -智+速
+  river;
+  // 车站 - 约会 - 拆台
+  station;
+
+  // 育成部分
   // 实验的开始（第一天）
   beginning;
-  //拆台
-  different_opinion;
-  // Plan B(重要)
+  // Plan B
   plan_b;
   //神明捕捉行动
   deities_possible;

@@ -1,13 +1,15 @@
 const era = require('#/era-electron');
+
 const { add_event, cb_enum } = require('#/event/queue');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
-const recruit_flags = require('#/data/event/recruit-flags');
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
  * 爱丽速子的招募事件，id=32
