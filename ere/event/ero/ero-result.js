@@ -250,8 +250,8 @@ module.exports = async (chara_id, hook, extra_flag) => {
           condition_type.active || extra_flag.attacker !== undefined
           ? extra_flag
           : era.get('tflag:主导权')
-          ? { attacker: chara_id, defender: 0 }
-          : { attacker: 0, defender: chara_id };
+            ? { attacker: chara_id, defender: 0 }
+            : { attacker: 0, defender: chara_id };
       return await handlers[hook.hook](attacker, defender, hook, extra_flag);
     } else {
       return await handlers[hook.hook](chara_id, hook, extra_flag);

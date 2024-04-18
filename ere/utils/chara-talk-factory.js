@@ -3,9 +3,9 @@ const CharaTalk = require('#/utils/chara-talk');
 const chara_talk_dict = { 17: true, 9017: true };
 Object.keys(chara_talk_dict).forEach(
   (e) =>
-    (chara_talk_dict[
-      e
-    ] = require(`#/utils/chara-talk-extended/chara-talk-${e}`)),
+    (chara_talk_dict[e] = require(
+      `#/utils/chara-talk-extended/chara-talk-${e}`,
+    )),
 );
 
 module.exports = {

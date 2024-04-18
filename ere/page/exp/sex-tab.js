@@ -73,8 +73,8 @@ module.exports = {
               era.get(`status:${chara.id}:发胖`)
                 ? '幸、幸福胖哦……'
                 : weight_delta >= 2000
-                ? '微增'
-                : '控制得当',
+                  ? '微增'
+                  : '控制得当',
               chara.sex_code === 1
                 ? ''
                 : ` ｜ 三围：B${get_bust_size(
@@ -282,8 +282,8 @@ module.exports = {
                             ? attr_change_colors.down
                             : attr_change_colors.up
                           : buff > 0
-                          ? attr_change_colors.up
-                          : attr_change_colors.down,
+                            ? attr_change_colors.up
+                            : attr_change_colors.down,
                       content: `${buff > 0 ? '+' : ''}${Math.floor(
                         100 * buff,
                       ).toString()}%`,
