@@ -18,6 +18,18 @@ const { race_enum } = require('#/data/race/race-const');
 
 const handlers = {};
 
+handlers[check_stages.aim_check] = function () {
+  const buffer = [],
+    races = era.get('cflag:107:育成成绩');
+  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+  buffer.push(check_aim_and_get_entry(races, race_enum.asah_cup, 1, 1));
+  buffer.push(check_aim_and_get_entry(races, race_enum.kink_sho, 2, 1));
+  buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 1));
+  buffer.push(check_aim_and_get_entry(races, race_enum.japa_cup, 2, 1));
+  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
+  return buffer;
+};
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 aim_races[get_aim_race_index(race_enum.asah_cup, 1)] = 4;
@@ -40,22 +52,12 @@ handlers[check_stages.next_week] = () => {
   }
 };
 
-handlers[check_stages.aim_check] = function () {
-  const buffer = [],
-    races = era.get('cflag:107:育成成绩');
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-  buffer.push(check_aim_and_get_entry(races, race_enum.asah_cup, 1, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.kink_sho, 2, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.japa_cup, 2, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
-  return buffer;
-};
-
 handlers[check_stages.palace_check] = function () {
   common_palace_check(107);
   return handlers[check_stages.aim_check]();
 };
+
+handlers[check_stages.personal_titles] = () => ['追梦舞伎'];
 
 /** @param {{aim_check:boolean,titles:{n:string,c:string}[]}} extra_flag */
 handlers[check_stages.title_check] = (extra_flag) => {
@@ -72,8 +74,6 @@ handlers[check_stages.title_check] = (extra_flag) => {
     extra_flag.aim_check && sys_personal_achievement.set(107, 1);
   }
 };
-
-handlers[check_stages.personal_titles] = () => ['追梦舞伎'];
 
 /**
  * @param {number} stage_id
