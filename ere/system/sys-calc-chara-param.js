@@ -10,15 +10,15 @@ const { log_600m2 } = require('#/utils/value-utils');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const check_stages = require('#/data/event/check-stages');
 const { location_enum } = require('#/data/locations');
-const {
-  attr_enum,
-  fail_sta_border,
-  attr_names,
-  pressure_border,
-} = require('#/data/train-const');
-const { vehicle_influences, location_move_cost } = require('#/data/move-const');
+const { location_move_cost, vehicle_influences } = require('#/data/move-const');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
+const {
+  attr_enum,
+  attr_names,
+  fail_sta_border,
+  pressure_border,
+} = require('#/data/train-const');
 
 /**
  * @param {number} chara_id
@@ -145,7 +145,7 @@ function sys_get_move_cost(location, chara_id) {
       break;
   }
   if (is_walk) {
-    ratio.time = 1 - Math.log(speed / 2 + 1) / log_600m2;
+    ratio.time = 1 - Math.min(Math.log(speed / 2 + 1) / log_600m2, 0.6);
   }
   ret.stamina = Math.ceil(ret.stamina * ratio.stamina);
   ret.time = Math.ceil(ret.time * ratio.time);
