@@ -7,7 +7,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
   },
-  plugins: ['require-sort'],
+  plugins: ['require-sort', 'sort-requires-by-path'],
   root: true,
   rules: {
     'prettier/prettier': [
@@ -20,5 +20,6 @@ module.exports = {
       },
     ],
     'require-sort/require-sort': ['error', { ignoreDeclarationSort: true }],
+    'sort-requires-by-path/sort-requires-by-path': 2,
   },
 };
