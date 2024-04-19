@@ -6,6 +6,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
   },
+  plugins: ['require-sort'],
   root: true,
   rules: {
     'prettier/prettier': [
@@ -17,5 +18,6 @@ module.exports = {
         trailingComma: 'all',
       },
     ],
+    'require-sort/require-sort': ['error', { ignoreDeclarationSort: true }],
   },
 };
