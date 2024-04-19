@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { buff_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 const handlers = {};
 

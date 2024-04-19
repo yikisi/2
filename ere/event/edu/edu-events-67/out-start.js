@@ -165,7 +165,7 @@ module.exports = async (hook, _, event_object) => {
     era.printButton('「公司！？」', 1);
     await era.input();
     await era.printAndWait(
-      `意外的词汇令 ${me.name} 不禁感到惊讶，${me.name} 继续听目白赖恩说明详细状况。据说是前往里见家的某间公司了。`,
+      `意外的词汇令 ${me.name} 不禁感到惊讶，${me.name} 继续听目白莱恩说明详细状况。据说是前往里见家的某间公司了。`,
     );
     await ryan.say_and_wait(
       '因为她说傍晚的时候会回来，但还没回来所以有点担心……',
@@ -179,7 +179,7 @@ module.exports = async (hook, _, event_object) => {
     era.printButton('「你说你还在公司？」', 1);
     await era.input();
     await era.printAndWait(
-      `了解她的状况后，${me.name} 告诉${daiya.sex}目白赖恩等人正在担心${daiya.sex}的事情。`,
+      `了解她的状况后，${me.name} 告诉${daiya.sex}目白莱恩等人正在担心${daiya.sex}的事情。`,
     );
     await daiya.say_and_wait(
       '“哎呀，居然害她们担心了。不过我现在已经没事了。事情都已经处理得差不多了。”',
@@ -237,7 +237,7 @@ module.exports = async (hook, _, event_object) => {
         '啊哈哈，真的就像善信所说的一样耶！你的这个部分真的很像麦昆。',
       );
       await daiya.say_and_wait(
-        '哎呀，真的吗！？赖恩，我想听更多关于你刚刚说的这件事情的事！',
+        '哎呀，真的吗！？莱恩，我想听更多关于你刚刚说的这件事情的事！',
       );
       await daiya.say_and_wait('是呀，我就是这么打算的。');
       await daiya.say_and_wait(

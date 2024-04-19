@@ -1,13 +1,13 @@
 const era = require('#/era-electron');
 
 const {
-  sys_reg_race,
   sys_change_attr_and_print,
   sys_change_motivation,
+  sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const {
-  sys_love_uma,
   sys_like_chara,
+  sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -897,123 +897,7 @@ handlers[event_hooks.week_end] = async () => {
     await era.waitAnyKey();
   }
 };
-/*
-handlers[
-  event_hooks.school_atrium
-] = require('#/event/edu/edu-events-25/school-atrium');
 
-handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
-  if (era.get('flag:当前互动角色') !== 25) {
-    add_event(event_hooks.out_start, event_object);
-    return;
-  }
-  const chara_talk = get_chara_talk(25),
-    edu_weeks = era.get('cflag:25:育成回合计时'),
-    me = get_chara_talk(0);
-  if (edu_weeks === 95 + 10) {
-    const mcqueen_talk = get_chara_talk(13);
-    const ryan_talk = get_chara_talk(27);
-    await print_event_name('内恰 in 目白', chara_talk);
-
-    await era.printAndWait('今天优秀素质不会出现。因为──');
-    await era.printAndWait(
-      '“有马纪念”后，优秀素质向目白麦昆与目白赖恩请教了实力如此坚强的原因。',
-    );
-    await era.printAndWait(
-      `今天${chara_talk.sex}受到两位邀请，去学习坚强的原因了。──或许可以说是去目白家留学一天吧。`,
-    );
-    await era.printAndWait(
-      `优秀素质个性很认真。${chara_talk.sex}一定会带着收获回来吧。${me.name} 这么相信着，决定默默等${chara_talk.sex}回来──`,
-    );
-    era.drawLine();
-    await mcqueen_talk.say_and_wait(
-      '──刚刚那杯大吉岭茶果然连香味都不一样。滋味相当丰富。',
-    );
-    await ryan_talk.say_and_wait(
-      '据说从头到尾都是手工制茶呢！专家的技术果然值得信任。',
-    );
-    await chara_talk.say_and_wait('……请问──这是什么状况？为什么在喝茶？');
-    await chara_talk.say_and_wait('我还以为我们会去训练赛道……');
-    await mcqueen_talk.say_and_wait(
-      '喝完后当然会去。不过品尝红茶也是例行公事的一部分。',
-    );
-    await chara_talk.say_and_wait('例行公事……？');
-    await mcqueen_talk.say_and_wait('今天我们想让内恰同学看看我们平常的样子。');
-    await ryan_talk.say_and_wait(
-      '就是这样！不过时间也差不多了，我们去训练吧！',
-    );
-    await chara_talk.say_and_wait('啊，好、好的……！');
-    era.drawLine();
-    await mcqueen_talk.say_and_wait('呼……呼……呼……');
-    await ryan_talk.say_and_wait('欢迎回来，麦昆！接下来要做什么？');
-    await mcqueen_talk.say_and_wait('……当然是再跑一圈了。');
-    await mcqueen_talk.say_and_wait(
-      '跟刚刚比起来，第十圈的速度有点变慢了……对吧？',
-    );
-    await ryan_talk.say_and_wait('啊哈哈！好啊，就跑到你满意为止吧！');
-    await mcqueen_talk.say_and_wait('是，我出发了！');
-    await chara_talk.say_and_wait('呼……呼……呼啊……！');
-    await ryan_talk.say_and_wait('哦，内恰，欢迎回来！麦昆正好刚起跑呢！');
-    await chara_talk.say_and_wait(
-      `我看到了……${mcqueen_talk.sex}还要继续跑吗……！？`,
-    );
-    await ryan_talk.say_and_wait(
-      `与其说还要，应该说是还不满足？毕竟${mcqueen_talk.sex}说“想提升速度”嘛`,
-    );
-    await chara_talk.say_and_wait(
-      `${mcqueen_talk.sex}的持久力明明都那么优秀了，竟然还想更加精进吗……`,
-    );
-    await ryan_talk.say_and_wait(
-      `……我想麦昆${mcqueen_talk.sex}啊，无论再怎么强，都不会满足于目前的自己。`,
-    );
-    await ryan_talk.say_and_wait(
-      `那孩子的目标就是如此高远。所以${mcqueen_talk.sex}才会一直努力不懈。`,
-    );
-    await ryan_talk.say_and_wait('一直看着那样的身影，会觉得自己也该加油呢。');
-    await chara_talk.say_and_wait('……唔～～～～我也再去跑……！');
-    await ryan_talk.say_and_wait('啊哈哈哈！真是不服输！路上小心哦──！');
-    era.drawLine();
-    await chara_talk.say_and_wait('──今天非常感谢两位！');
-    await ryan_talk.say_and_wait('哎呀──结果害你这一整天都在陪我们训练了呢。');
-    await chara_talk.say_and_wait('不，这样正好！');
-    await chara_talk.say_and_wait('……我终于明白了。我过去真的都只想着自己呢──');
-    await chara_talk.say_and_wait(
-      '你们两位都好好地看着对方。互相认可对方的强劲，互相竞争。',
-    );
-    await chara_talk.say_and_wait('但是我……却只会妄想获得别人的那份坚强。');
-    await chara_talk.say_and_wait(
-      '我老是只看着自己不足的地方……从没想过自己有哪些才能。',
-    );
-    await mcqueen_talk.say_and_wait('……所以？');
-    await chara_talk.say_and_wait(
-      '我打算更认真地正视这些事。正视其他人……也正视自己。',
-    );
-    await ryan_talk.say_and_wait('嗯，很好！这一定会成为内恰变强的助力！');
-    await chara_talk.say_and_wait('那个……最后可以再请教一件事吗？');
-    await chara_talk.say_and_wait('为什么两位愿意帮我的忙呢？');
-    await mcqueen_talk.say_and_wait('……因为我们有贵族义务啊。');
-    await ryan_talk.say_and_wait('噗哈！你在掩饰害羞吗？');
-    await ryan_talk.say_and_wait(
-      '真正的原因呢，是想跟坚强的你对决，好让自己变得更强！',
-    );
-    await ryan_talk.say_and_wait('──因为我们也打算参加下一次的“宝冢纪念”嘛！');
-    await chara_talk.say_and_wait('……唔！');
-    await mcqueen_talk.say_and_wait(
-      '呵呵，表情很棒呢。那么下次就在阪神再见啦。',
-    );
-    await chara_talk.say_and_wait('嗯……！');
-    era.drawLine();
-    await era.printAndWait(
-      `隔天 ${me.name} 见到优秀素质时，${chara_talk.sex}脸上的表情看起来神清气爽。`,
-    );
-    await chara_talk.say_and_wait('我……想赢过那两人。──在“宝冢纪念”上！');
-    era.println();
-    get_attr_and_print_in_event(25, [0, 5, 0, 5, 0], 0);
-    await era.waitAnyKey();
-    return true;
-  }
-};
-*/
 handlers[event_hooks.out_church] = async (hook, extra_flag, event_object) => {
   if (era.get('flag:当前互动角色') !== 25) {
     add_event(event_hooks.out_start, event_object);
