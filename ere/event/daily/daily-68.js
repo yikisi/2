@@ -700,7 +700,8 @@ handlers[event_hooks.out_river] = async (hook) => {
 };
 
 handlers[event_hooks.good_night] = async (hook) => {
-  const me = get_chara_talk(0),
+  const check = sys_call_check(68, check_stages.want_make_love),
+    me = get_chara_talk(0),
     kita = get_chara_talk(68);
   era.print(`繁忙的一天结束，${me.name} 将 ${kita.name} 送到学生宿舍门口……`);
   if (
@@ -714,6 +715,9 @@ handlers[event_hooks.good_night] = async (hook) => {
     era.printButton('接收暗示', 1);
     era.printButton('装傻', 2);
     hook.arg = (await era.input()) === 1;
+    if (check === 2) {
+      hook.arg = 2;
+    }
   } else if (era.get('love:68') >= 50) {
     kita.say(`诶嘿嘿，训练员${me.get_adult_sex_title()}明天见哦！`);
     era.print(

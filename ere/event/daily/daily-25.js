@@ -1,26 +1,21 @@
 const era = require('#/era-electron');
 
 const call_check_script = require('#/system/script/sys-call-check');
-const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
-const {
-  sys_like_chara,
-  sys_get_callname,
-} = require('#/system/sys-calc-chara-others');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
-const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
+
 const callname = sys_get_callname(25, 0);
 
 /** @type {Record<string,function(stage_id:HookArg,extra_flag:*):Promise<boolean>>} */
@@ -60,38 +55,36 @@ handlers[event_hooks.good_morning] = function () {
   get_chara_talk(25).say(get_random_entry(talk_arr));
 };
 
-handlers[event_hooks.good_night] = async function () {
+handlers[event_hooks.good_night] = async function (hook) {
   const chara = get_chara_talk(25),
     me = get_chara_talk(0);
-  if (era.get(`status:25:沉睡`)) {
+  if (sys_check_awake(25)) {
     era.print(
       `突然感觉衣摆被谁拉了拉，往身后看去，茶座在不远处休息用的椅子上睡着了。不好打扰${chara.sex}的休息，你用外套盖在${chara.sex}身上将${chara.sex}公主抱起来，送回了学生宿舍。`,
     );
-  } else if (era.get(`status:0:沉睡`)) {
+  } else if (sys_check_awake(0)) {
     chara.say(
       `${callname}？……啊，睡着了，太过操劳了吗……晚安，${callname}，愿你做一个无貘的好梦。`,
     );
   } else {
-    if (
-      sys_check_awake(0) &&
-      sys_check_awake(25) &&
-      call_check_script(25, check_stages.want_make_love)
-    ) {
+    const check = call_check_script(25, check_stages.want_make_love);
+    if (check) {
       era.print(
         `今天的事项结束了，你准备像往常一样送茶座回${chara.sex}的宿舍。正当你动身时，衣袖却被茶座拉住了。`,
       );
       era.print(' 回头看去，恰好与茶座湿漉漉的眼睛四目相对。');
       chara.say(`${callname}，我已经申请好外宿了，所以……`);
       era.print(` ${chara.sex}并没有把话讲完，但意思已经很明确了，你决定——`);
-      era.printButton('答应', 1);
-      era.printButton('拒绝', 2);
-      let ret = await era.input();
-      if (ret === 1) {
+      if (check !== 2) {
+        era.printButton('答应', 1);
+        era.printButton('拒绝', 2);
+      }
+      if (check === 2 || (await era.input()) === 1) {
         era.print(
           ` 轻轻地将茶座搂入怀中，从扑腾在脸上的耳朵中${me.name}感受到了茶座内心的欣喜。`,
         );
         chara.say(`${callname}……今晚，请多指教……`);
-        await quick_into_sex(25);
+        hook.arg = 1;
       } else {
         era.print(' ——抱歉。');
         era.print(` 从${me.name}脸上，茶座看到了这般神色。`);
@@ -99,10 +92,7 @@ handlers[event_hooks.good_night] = async function () {
         era.print(
           ` 茶座脸上的些许失望并没有逃过你的眼睛，但还是下次在补偿${chara.sex}吧……`,
         );
-        sys_change_lust(25, lust_from_palam);
-        if (sys_like_chara(25, 0, -100)) {
-          await era.waitAnyKey();
-        }
+        hook.arg = 0;
       }
     } else {
       era.print(

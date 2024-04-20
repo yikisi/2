@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  sys_love_uma_in_event,
   sys_like_chara,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
@@ -14,10 +14,10 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { buff_colors } = require('#/data/color-const');
 const talent_desc = require('#/data/desc/talent-desc.json');
 const {
-  touch_list,
+  get_skill_list,
   part_enum,
   part_names,
-  get_skill_list,
+  touch_list,
 } = require('#/data/ero/part-const');
 const { trained_talent_names } = require('#/data/ero/status-const');
 const { get_filtered_talents } = require('#/data/info-generator');
@@ -276,9 +276,14 @@ async function week_end_89(teio, me) {
           ' 了！',
         ]);
       }
-      get_skill_list(era.get('cflag:3:性别')).forEach((e) =>
-        era.set(`abl:3:${e}`, Math.min(era.get(`abl:3:${e}`) + 1, 5)),
-      );
+      touch_list
+        .filter((e) => e !== part_enum.sadism)
+        .forEach((e) =>
+          era.set(
+            `abl:3:${part_names[e]}掌握`,
+            Math.min(era.get(`abl:3:${part_names[e]}掌握`) + 1, 5),
+          ),
+        );
       sys_like_chara(3, 0, 20);
       await sys_love_uma_in_event(3);
     } else {
@@ -358,14 +363,9 @@ async function week_end_89(teio, me) {
           ' 了！',
         ]);
       }
-      touch_list
-        .filter((e) => e !== part_enum.sadism)
-        .forEach((e) =>
-          era.set(
-            `abl:3:${part_names[e]}掌握`,
-            Math.min(era.get(`abl:3:${part_names[e]}掌握`) + 1, 5),
-          ),
-        );
+      get_skill_list(teio.sex_code).forEach((e) =>
+        era.set(`abl:3:${e}`, Math.min(era.get(`abl:3:${e}`) + 1, 5)),
+      );
       sys_like_chara(3, 0, 20);
       await sys_love_uma_in_event(3);
     } else {

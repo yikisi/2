@@ -719,14 +719,11 @@ handlers[event_hooks.office_game] = async function () {
 };
 
 handlers[event_hooks.good_night] = async function (hook) {
-  const me = get_chara_talk(0),
+  const check = sys_call_check(400, check_stages.want_make_love),
+    me = get_chara_talk(0),
     chara_talk = get_chara_talk(400);
   era.print(`忙碌结束之后，${me.name} 将 ${chara_talk.name} 来到了宿舍门口。`);
-  if (
-    sys_check_awake(0) &&
-    sys_check_awake(400) &&
-    sys_call_check(400, check_stages.want_make_love)
-  ) {
+  if (sys_check_awake(0) && sys_check_awake(400) && check) {
     chara_talk.say(`要一起进来吗？`);
     era.print(
       `${chara_talk.name}双腿摩擦着，你能够感觉到${chara_talk.sex}的呼吸正在逐渐加快，`,
@@ -737,8 +734,11 @@ handlers[event_hooks.good_night] = async function (hook) {
     era.printButton('接受', 1);
     era.printButton('装傻', 2);
     hook.arg = (await era.input()) === 1;
+    if (check === 2) {
+      hook.arg = 2;
+    }
   } else {
-    chara_talk.say(`这样就可以了哦，真的非常感谢您.......`);
+    chara_talk.say('这样就可以了哦，真的非常感谢您……');
     era.print(
       `${chara_talk.name}微微低头，开心的笑着，回到了${chara_talk.sex}的宿舍之中。`,
     );

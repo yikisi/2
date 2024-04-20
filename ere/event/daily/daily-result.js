@@ -2,10 +2,10 @@ const era = require('#/era-electron');
 
 const {
   sys_change_attr_and_print,
-  sys_change_motivation,
   sys_change_lust,
-  sys_change_weight,
+  sys_change_motivation,
   sys_change_pressure,
+  sys_change_weight,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_money } = require('#/system/sys-calc-flag');

@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const call_check_script = require('#/system/script/sys-call-check');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
@@ -441,10 +442,11 @@ handlers[event_hooks.office_game] = async () => {
 };
 
 handlers[event_hooks.good_night] = async (hook) => {
-  const teio = get_chara_talk(3),
-    me = get_chara_talk(0);
+  const check = call_check_script(3, check_stages.want_make_love),
+    me = get_chara_talk(0),
+    teio = get_chara_talk(3);
   era.print(`繁忙的一天结束，${me.name} 把 ${teio.name} 送到学生宿舍门口。`);
-  if (call_check_script(3, check_stages.want_make_love)) {
+  if (check) {
     era.print(
       '正要像往常一样分别时，不知为何，两边都停止了动作，现场陷入了短暂的沉默……',
     );
@@ -459,7 +461,7 @@ handlers[event_hooks.good_night] = async (hook) => {
     era.print(
       `沉默之后又是同时发声，气氛好像又尴尬了。不过倒是有点滑稽，${teio.get_uma_sex_title()}的眉眼露出了几分笑意，也让${
         teio.sex
-      }更大胆了，先 ${me.name} 一步开口到`,
+      }更大胆了，先 ${me.name} 一步开口道`,
     );
     teio.say('那个，我做好了外宿申请，所以今天……');
     era.print(
@@ -475,7 +477,54 @@ handlers[event_hooks.good_night] = async (hook) => {
         };
       }),
     );
-    hook.arg = !(await era.input());
+    if (await era.input()) {
+      if (check === 2) {
+        if (era.get('status:3:腿伤')) {
+          await teio.say_and_wait('唔……这样啊。');
+          await era.printAndWait([
+            me.get_colored_name(),
+            ' 看着犹自挺胸看着自己，眼神却黯淡下去的',
+            teio.sex,
+            '，不禁于心不忍，伸起一只手抚向',
+            teio.sex,
+            '的头。',
+          ]);
+          await era.printAndWait([
+            '但突然之间，',
+            teio.sex,
+            '抬手，五根细笋般的手指稳稳扣住了 ',
+            me.get_colored_name(),
+            ' 的掌心，',
+            me.get_colored_name(),
+            ' 想发力抽回，却毫无反应——',
+          ]);
+          await teio.say_and_wait([sys_get_colored_callname(3, 0), '……']);
+          await era.printAndWait([teio.sex, '越发靠近你了。']);
+          await teio.say_and_wait('我……无论在哪些地方，都不想，也不会放手啊。');
+        } else {
+          await teio.say_and_wait(
+            '是——这样——吗？那我们就走吧！东西和地方已经准备好了！',
+          );
+          await era.printAndWait([
+            me.get_colored_name(),
+            ' 还没来的及发布或强调任何事情，就被发挥体能优势的',
+            teio.get_uma_sex_title(),
+            '带着如一阵风般强行移动了……或许 ',
+            me.get_colored_name(),
+            ' 的意见在此时此地并不重要，',
+            teio.get_colored_name(),
+            '只是单纯地通知一下 ',
+            me.get_colored_name(),
+            ' 接下来会发生什么。',
+          ]);
+        }
+        hook.arg = 2;
+      } else {
+        hook.arg = 0;
+      }
+    } else {
+      hook.arg = 1;
+    }
   } else {
     teio.say('明天再见了！训练员！');
     era.print(
@@ -547,7 +596,7 @@ handlers[event_hooks.celebration] = async () => {
       );
       await teio.say_and_wait(`训——练——员——`);
       await era.printAndWait(
-        `${teio.get_teen_sex_title()}换上了一身将稚气全部化为可爱，又隐约带着诱惑的浴衣，在 ${
+        `${teio.get_teen_sex_title()}换上了一身将稚气全部化为可爱，又隐约带着性感与诱惑的浴衣，在 ${
           me.name
         } 面前转了个圈。`,
       );

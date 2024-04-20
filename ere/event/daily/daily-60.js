@@ -3,8 +3,8 @@ const era = require('#/era-electron');
 const call_check_script = require('#/system/script/sys-call-check');
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
-  sys_like_chara,
   sys_get_callname,
+  sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
@@ -63,12 +63,9 @@ handlers[event_hooks.good_morning] = function () {
 
 handlers[event_hooks.good_night] = async function (hook) {
   const chara = get_chara_talk(60),
+    check = call_check_script(60, check_stages.want_make_love),
     me = get_chara_talk(0);
-  if (
-    sys_check_awake(0) &&
-    sys_check_awake(60) &&
-    call_check_script(60, check_stages.want_make_love)
-  ) {
+  if (sys_check_awake(0) && sys_check_awake(60) && check) {
     era.print(`繁忙的一天结束，${me.name} 把 ${chara.name} 送到学生宿舍门口。`);
     era.print(
       `${me.name} 刚打算如往常一样挥手告别，却突然被优秀素质拽住了袖脚。`,
@@ -90,10 +87,11 @@ handlers[event_hooks.good_night] = async function (hook) {
         me.name
       } 也已是心知肚明。`,
     );
-    era.printButton('答应', 1);
-    era.printButton('拒绝', 2);
-    let ret = await era.input();
-    if (ret === 1) {
+    if (check !== 2) {
+      era.printButton('答应', 1);
+      era.printButton('拒绝', 2);
+    }
+    if (check === 2 || (await era.input()) === 1) {
       chara.say('真、真的吗！');
       era.print(
         `优秀素质原本羞涩的脸上瞬间涌起了激动与喜悦，不等 ${me.name} 再次肯定，不由分说的便抱住了 ${me.name} 的手臂，并附在耳边轻声低语：`,
