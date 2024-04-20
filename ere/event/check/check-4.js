@@ -6,7 +6,7 @@ const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-ge
 const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
-const { cb_enum, add_event } = require('#/event/queue');
+const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -101,6 +101,9 @@ handlers[check_stages.next_week] = () => {
       case 24: //一见如故 (已完成)
         add_event(event_hooks.week_start, event_obj_special);
         break;
+      case 30: //三女神的孩子们
+        add_event(event_hooks.week_start, event_obj_special);
+        break;
       case 34: //意外的见面 (已完成)
         add_event(event_hooks.week_start, event_obj_special);
         break;
@@ -149,11 +152,15 @@ handlers[check_stages.next_week] = () => {
       case 47 + 34:
         add_event(event_hooks.week_end, event_obj_special);
         break;
+      //9月第四周 一体两面
+      case 47 + 36:
+        add_event(event_hooks.week_end, event_obj_special);
+        break;
       //10月第一周 思绪 (已完成)
       case 47 + 37:
         add_event(event_hooks.week_end, event_obj_special);
         break;
-      //10月第四周 映光之森 (已完成)
+      //10月第四周 祈祷 (已完成)
       case 47 + 39:
         add_event(event_hooks.week_end, event_obj_special);
         break;
@@ -201,6 +208,7 @@ handlers[check_stages.next_week] = () => {
       case 95 + 48:
         add_event(event_hooks.week_start, event_obj_special);
         break;
+      // 3月第四周 姐姐的烦恼
       case 47 + 12:
         if (
           edu_weeks === 47 + 12 &&
@@ -210,6 +218,7 @@ handlers[check_stages.next_week] = () => {
           add_event(event_hooks.week_end, event_obj_special);
         }
         break;
+      // 6月第三周 少女的忧郁（上）
       case 47 + 25:
         if (
           check_aim_race(era.get('cflag:4:育成成绩'), race_enum.toky_yus, 1, 1)
@@ -218,6 +227,7 @@ handlers[check_stages.next_week] = () => {
           add_event(event_hooks.week_end, event_obj_special);
         }
         break;
+      // 6月第四周 少女的忧郁（下）
       case 47 + 26:
         if (
           check_aim_race(era.get('cflag:4:育成成绩'), race_enum.toky_yus, 1, 1)
