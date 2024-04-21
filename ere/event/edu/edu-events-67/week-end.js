@@ -3,8 +3,8 @@ const era = require('#/era-electron');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const {
-  takz_kin_common,
   japa_cup_common,
+  takz_kin_common,
 } = require('#/event/edu/edu-events-67/snippets');
 const { add_event } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
@@ -81,7 +81,7 @@ module.exports = async (hook, _, event_object) => {
     await daiya.say_and_wait([
       '可以依照计划顺利参加 ',
       race_infos[race_enum.takz_kin].get_colored_name(),
-      ' ，小北真的是很坚韧呢。',
+      '，小北真的是很坚韧呢。',
     ]);
     await era.printAndWait([
       '其实这次 ',

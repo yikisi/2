@@ -108,7 +108,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `说到这里，${your_name} 伸出手，将那枚代表相遇的勋章递到${flash.sex}的眼前。`,
     );
-    await flash.say_and_wait(`${callname} ……`);
+    await flash.say_and_wait(`${callname}……`);
     await era.printAndWait(
       `荣进闪耀低下头，看了眼这枚勋章，又抬起头，看了眼 ${your_name}。`,
     );

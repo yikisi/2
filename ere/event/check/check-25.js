@@ -4,11 +4,11 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
-const check_aim_race = require('#/event/snippets/check-aim-race');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
-const { cb_enum, add_event } = require('#/event/queue');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
+const { add_event, cb_enum } = require('#/event/queue');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -16,9 +16,25 @@ const check_stages = require('#/data/event/check-stages');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
 const handlers = {};
+
+handlers[check_stages.aim_check] = () => {
+  const buffer = [],
+    races = new RaceHistory(25).get();
+  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+  buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 5));
+  buffer.push(check_aim_and_get_entry(races, race_enum.stli_kin, 1, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.japa_cup, 2, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
+  return buffer;
+};
 
 const aim_races = {};
 
@@ -41,12 +57,11 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[extra_flag.race];
 
 handlers[check_stages.next_week] = () => {
-  era.set('callname:25:0', `训练员${get_chara_talk(0).get_adult_sex_title()}`);
   const edu_weeks = era.get('cflag:25:育成回合计时');
   if (edu_weeks < 3 * 48) {
-    const edu_event_marks = new EduEventMarks(25);
-    const event_obj = new EventObject(25, cb_enum.edu);
-    const event_obj_special = new EventObject(25, cb_enum.edu, true);
+    const edu_event_marks = new EduEventMarks(25),
+      event_obj = new EventObject(25, cb_enum.edu),
+      event_obj_special = new EventObject(25, cb_enum.edu, true);
     if (edu_weeks > 25) {
       check_and_add_event(
         edu_event_marks,
@@ -56,7 +71,6 @@ handlers[check_stages.next_week] = () => {
         event_obj,
       );
     }
-
     switch (edu_weeks) {
       case 1:
         add_event(event_hooks.train, event_obj_special);
@@ -107,36 +121,22 @@ handlers[check_stages.next_week] = () => {
   }
 };
 
-handlers[check_stages.aim_check] = function () {
-  const buffer = [],
-    races = era.get('cflag:25:育成成绩');
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-  buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.stli_kin, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.japa_cup, 2, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
-  return buffer;
-};
-
 handlers[check_stages.palace_check] = function () {
   common_palace_check(25);
   return handlers[check_stages.aim_check]();
 };
 
+handlers[check_stages.personal_titles] = () => ['漆黑幻影'];
+
 /** @param {{aim_check:boolean,titles:{n:string,c:string}[]}} extra_flag */
 handlers[check_stages.title_check] = (extra_flag) => {
-  /** @type {Record<string,{race:number,rank:number,st:number}>} */
-  const races = era.get('cflag:25:育成成绩');
+  const races = new RaceHistory(25).get();
   if (
     check_aim_race(races, race_enum.kiku_sho, 1, 1, (e) => e.st === 2) &&
     check_aim_race(races, race_enum.arim_kin, 1, 1, (e) => e.st === 2) &&
     check_aim_race(races, race_enum.tenn_spr, 2, 1, (e) => e.st === 2) &&
     check_aim_race(races, race_enum.arim_kin, 2, 1, (e) => e.st === 2) &&
-    era.get('base:68:耐力') >= 1200
+    era.get('base:25:耐力') >= 1200
   ) {
     extra_flag.titles.push({
       c: get_chara_talk(25).color,
@@ -145,8 +145,6 @@ handlers[check_stages.title_check] = (extra_flag) => {
     extra_flag.aim_check && sys_personal_achievement.set(25, 1);
   }
 };
-
-handlers[check_stages.personal_titles] = () => ['漆黑幻影'];
 
 /**
  * @param {number} stage_id

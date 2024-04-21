@@ -1,15 +1,15 @@
 const era = require('#/era-electron');
 
+const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
-const quick_into_sex = require('#/event/snippets/quick-into-sex');
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { race_enum } = require('#/data/race/race-const');
-const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
+const { race_enum } = require('#/data/race/race-const');
 
 /** @param {{relation_change:number}} extra_flag */
 async function sex_with_nice_nature(extra_flag) {
@@ -367,9 +367,9 @@ module.exports = async (hook, extra_flag) => {
   } else if (extra_flag.race === race_enum.kiku_sho && extra_flag.rank <= 5) {
     await print_event_name('菊花赏结束·自己的比赛', chara_talk);
 
-    await era.printAndWait('观众: 优秀素质，辛苦了──！你跑得很精彩哦──！');
+    await era.printAndWait('观众「优秀素质，辛苦了──！你跑得很精彩哦──！」');
     await era.printAndWait(
-      '竞赛结束后，从观众席传来的讨论声，证明优秀素质跑出了“属于自己的比赛”。而且──',
+      '竞赛结束后，从观众席传来的讨论声，证明优秀素质跑出了「属于自己的比赛」。而且──',
     );
     await chara_talk.say_and_wait(
       '训练员，我……我赢了……我的确跑出了属于自己的比赛……对吧？',

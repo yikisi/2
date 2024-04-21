@@ -422,7 +422,7 @@ module.exports = async (_, extra_flag) => {
     );
     era.println();
 
-    await era.printAndWait(`粉丝A「${teio.name} ……？${teio.sex}真的去了？」`);
+    await era.printAndWait(`粉丝A「${teio.name}……？${teio.sex}真的去了？」`);
     await era.printAndWait(`粉丝B「${teio.sex}是……」`);
     await era.printAndWait(`——${me.name} 能写出这样的故事吗？`);
     era.drawLine();
@@ -464,7 +464,7 @@ module.exports = async (_, extra_flag) => {
       `奔跑着的${teio.get_uma_sex_title()}聚集又散开，一个狭窄，不易被发掘的只有半马位大小的缝隙暴露出来——`,
     );
     era.println();
-    await era.printAndWait(`解说「欸，那是—— ${teio.name}？！」`);
+    await era.printAndWait(`解说「欸，那是——${teio.name}？！」`);
     era.println();
     await era.printAndWait(
       '小腿肌肉骤然放松，然后缩紧再放！大幅度抬起脚，不管扬起的灰尘与飞溅的泥土，发力！',

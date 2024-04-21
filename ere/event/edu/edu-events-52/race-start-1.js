@@ -547,7 +547,7 @@ module.exports = (handlers) => {
         urara.sex,
         '绝对不是 ',
         urara.get_colored_name(),
-        ' ；',
+        '；',
       ]);
       await era.printAndWait([
         urara.get_colored_name(),

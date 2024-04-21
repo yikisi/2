@@ -4,13 +4,13 @@ const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const {
   begin_and_init_ero,
-  set_palam_to_max,
   end_ero_and_train,
   init_ero,
+  set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
 const {
-  sys_get_colored_callname,
   sys_get_callname,
+  sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -716,7 +716,7 @@ module.exports = (handlers) => {
         `速子拍着 ${me.name} 的屁股，上面用稚嫩的笔迹写着『${sys_get_callname(
           child,
           0,
-        )}是我专用的便器』，也不知道这孩子是不是真的理解了话中的意思……听见速子念出这句话，想到孩子若是在理解了这句话的意思的情况下写下来的…… ${
+        )}是我专用的便器』，也不知道这孩子是不是真的理解了话中的意思……听见速子念出这句话，想到孩子若是在理解了这句话的意思的情况下写下来的……${
           me.name
         } 又忍不住陷入了高潮`,
       );
@@ -937,7 +937,7 @@ module.exports = (handlers) => {
           `那么，又是哪位${tachyon.get_uma_sex_title()}大人需要自己的服侍了呢`,
         );
         await era.printAndWait(
-          `不知不觉间， ${me.name} 主动撅起了屁股，等待下名贵客的使用`,
+          `不知不觉间，${me.name} 主动撅起了屁股，等待下名贵客的使用`,
         );
       } else {
         await era.printAndWait(

@@ -173,7 +173,7 @@ module.exports = async (hook, extra_flag) => {
     await flash.say_and_wait('大家……');
     era.printButton('「恭喜你，闪耀。」', 1);
     await era.input();
-    await flash.say_and_wait(`${callname} ……嗯！我赢下日本德比了！`);
+    await flash.say_and_wait(`${callname}……嗯！我赢下日本德比了！`);
     era.printButton('「一件非常了不起的成就。」', 1);
     await era.input();
     await flash.say_and_wait(

@@ -55,7 +55,7 @@ handlers[event_hooks.good_morning] = function () {
   get_chara_talk(25).say(get_random_entry(talk_arr));
 };
 
-handlers[event_hooks.good_night] = async function (hook) {
+handlers[event_hooks.good_night] = async (hook) => {
   const chara = get_chara_talk(25),
     me = get_chara_talk(0);
   if (sys_check_awake(25)) {
@@ -86,8 +86,8 @@ handlers[event_hooks.good_night] = async function (hook) {
         chara.say(`${callname}……今晚，请多指教……`);
         hook.arg = 1;
       } else {
-        era.print(' ——抱歉。');
-        era.print(` 从${me.name}脸上，茶座看到了这般神色。`);
+        era.print('——抱歉。');
+        era.print(`从${me.name}脸上，茶座看到了这般神色。`);
         chara.say(`${callname}，今天太累了吧……今晚，请好好休息……`);
         era.print(
           ` 茶座脸上的些许失望并没有逃过你的眼睛，但还是下次在补偿${chara.sex}吧……`,
@@ -262,7 +262,7 @@ handlers[event_hooks.out_river] = async function (stage_id) {
       await era.printAndWait(
         ` 微微扭头，可以看到茶座白皙的手，${chara_talk.sex}低着头，看不出表情。`,
       );
-      await era.printAndWait(' ……就这样走下去吧。');
+      await era.printAndWait('……就这样走下去吧。');
     }
   } else {
     await era.printAndWait('与茶座一起去河边钓鱼……');
@@ -271,9 +271,7 @@ handlers[event_hooks.out_river] = async function (stage_id) {
       await era.printAndWait(
         ' 茶座似乎很喜欢这种平静的消磨时间方式，尽管手中并没有拿着鱼竿，但仍愉快地坐在身边陪伴。',
       );
-      await era.printAndWait(
-        ` ……不过总感觉${chara_talk.sex}时不时都会看过来。`,
-      );
+      await era.printAndWait(`……不过总感觉${chara_talk.sex}时不时都会看过来。`);
     } else {
       await chara_talk.say_and_wait(`${callname}，这条河里充满了“他们”呢……`);
       await era.printAndWait(' 啊？是开玩笑吧？');
@@ -353,7 +351,7 @@ handlers[event_hooks.out_church] = async function (stage_id) {
     }
   } else {
     if (era.get('love:25') < 50) {
-      await era.printAndWait(' ……是大凶。');
+      await era.printAndWait('……是大凶。');
       await era.printAndWait(
         ` 茶座显得有些失落，你上前安慰了一下${chara_talk.sex}。`,
       );
@@ -362,7 +360,7 @@ handlers[event_hooks.out_church] = async function (stage_id) {
       );
       await era.printAndWait(' 神社的秘密就等下一次再说吧。');
     } else {
-      await era.printAndWait(' ……是大凶。');
+      await era.printAndWait('……是大凶。');
       await era.printAndWait(
         ` 茶座显得有些失落，但还没等${me.name}上前安慰，眼前就出现了一股奇妙的画面。`,
       );
@@ -409,7 +407,7 @@ handlers[event_hooks.out_shopping] = async function () {
         await era.printAndWait(
           ` ${me.name}的人物突然停在了屏幕中央，很快就被反应过来的茶座啪啪几下打死了。`,
         );
-        await era.printAndWait(' ……又是朋友？');
+        await era.printAndWait('……又是朋友？');
         await era.printAndWait(
           ` 侧身看了看对面的茶座，${chara_talk.sex}似乎并没有发现发生了什么，正在为自己的胜利而露出微笑。`,
         );

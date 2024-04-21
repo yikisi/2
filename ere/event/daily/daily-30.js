@@ -135,7 +135,7 @@ handlers[event_hooks.out_river] = async function (hook) {
         );
         break;
       case 1:
-        await chara_talk.say_and_wait(`${callname} ，现在是禁渔期哦？`);
+        await chara_talk.say_and_wait(`${callname}，现在是禁渔期哦？`);
         await chara_talk.say_and_wait(
           `欸…一人一杆一线一钩？改善生态环境？欸欸欸？`,
         );
@@ -170,7 +170,7 @@ handlers[event_hooks.out_shopping] = async function (stage_id) {
           break;
         case 1:
           await chara_talk.say_and_wait(
-            `${callname} ，这台机器可能有故障哦。因为，这么慢的弹幕，${callname} 怎么可能躲不过去啊？`,
+            `${callname}，这台机器可能有故障哦。因为，这么慢的弹幕，${callname} 怎么可能躲不过去啊？`,
           );
           break;
       }
@@ -207,7 +207,7 @@ handlers[event_hooks.out_shopping] = async function (stage_id) {
       switch (get_random_value(0, 1)) {
         case 0:
           await chara_talk.say_and_wait(
-            `${callname} 。为什么爱一个人，却会不喜欢对方呢？`,
+            `${callname}。为什么爱一个人，却会不喜欢对方呢？`,
           );
           break;
         case 1:
@@ -246,7 +246,7 @@ handlers[event_hooks.out_station] = async function (hook) {
           );
           break;
         case 1:
-          await chara_talk.say_and_wait(`${callname} ，喜欢那种类型的雌性啊…`);
+          await chara_talk.say_and_wait(`${callname}，喜欢那种类型的雌性啊…`);
           break;
       }
       break;
@@ -289,20 +289,21 @@ handlers[event_hooks.office_study] = async function () {
   switch (Math.floor(Math.random() * 2)) {
     case 0:
       await chara_talk.say_and_wait(
-        `这是${chara_talk.name}精挑细选的绘本，还请${callname} 垂阅。`,
+        `这是${chara_talk.name}精挑细选的绘本，还请 ${callname} 垂阅。`,
       );
       break;
     case 1:
-      await chara_talk.say_and_wait(`${callname} ，和比赛有关的事情都好擅长…`);
+      await chara_talk.say_and_wait(`${callname}，和比赛有关的事情都好擅长…`);
       break;
   }
 };
+
 handlers[event_hooks.office_rest] = async function () {
   const callname = era.get('callname:30:0');
   switch (Math.floor(Math.random() * 2)) {
     case 0:
       await chara_talk.say_and_wait(
-        `${callname} ，那个……膝枕……哇啊啊，是${chara_talk.name}想给${callname} 做啦…`,
+        `${callname}，那个……膝枕……哇啊啊，是 ${chara_talk.name} 想给 ${callname} 做啦…`,
       );
       break;
     case 1:
@@ -322,7 +323,7 @@ handlers[event_hooks.office_game] = async function () {
       break;
     case 1:
       await chara_talk.say_and_wait(
-        `${callname} ，明明一副好学生的样子，游戏水平也好厉害！`,
+        `${callname}，明明一副好学生的样子，游戏水平也好厉害！`,
       );
       break;
   }
@@ -341,7 +342,7 @@ handlers[event_hooks.school_atrium] = async function (hook) {
           break;
         case 1:
           await chara_talk.say_and_wait(
-            `三女神 ，${chara_talk.name}，打算开始相信自己了。`,
+            `三女神，${chara_talk.name}，打算开始相信自己了。`,
           );
           break;
       }

@@ -144,7 +144,7 @@ handlers[event_hooks.office_cook] = async (hook) => {
     );
   } else {
     buffer.push(async () => {
-      await tachyon.say_and_wait(['加油哦 ', callname, ' ～～']);
+      await tachyon.say_and_wait(['加油哦 ', callname, '～～']);
       await tachyon.say_and_wait(
         '嗯？一起做饭的意思不就是你做我负责指指点点吗？',
       );
@@ -690,7 +690,7 @@ handlers[event_hooks.out_river] = async (hook) => {
           me.get_colored_name(),
           ' 张开手',
         ]);
-        await tachyon.say_and_wait([callname, ' ～～背背～～']);
+        await tachyon.say_and_wait([callname, '～～背背～～']);
         await era.printAndWait([
           me.get_colored_name(),
           ' 背起了尽情玩了一天的超光速',

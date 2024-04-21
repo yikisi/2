@@ -15,7 +15,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const { location_enum, location_name } = require('#/data/locations');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_rewards } = require('#/data/race/race-const');
-const { fumble_result, attr_enum } = require('#/data/train-const');
+const { attr_enum, fumble_result } = require('#/data/train-const');
 
 /** @type {Record<string,function(number,HookArg,Record<string,*>,EventObject):Promise<*>>} */
 const handlers = {};
@@ -213,7 +213,7 @@ handlers[event_hooks.week_start] = async (chara_id) => {
         '两位小情人沉浸在幸福的二人世界，仿佛能把俗世的琐事都抛进虚空之中。',
       );
       era.println();
-      await era.printAndWait('我是世界之王！ ——杰克·道森', { align: 'center' });
+      await era.printAndWait('我是世界之王！——杰克·道森', { align: 'center' });
     } else if (love >= 50) {
       await era.printAndWait([
         me.get_couple_title(),

@@ -19,7 +19,7 @@ module.exports = {
         trailingComma: 'all',
       },
     ],
-    'require-sort/require-sort': ['error', { ignoreDeclarationSort: true }],
-    'sort-requires-by-path/sort-requires-by-path': 2,
+    'require-sort/require-sort': ['warn', { ignoreDeclarationSort: true }],
+    'sort-requires-by-path/sort-requires-by-path': 'warn',
   },
 };

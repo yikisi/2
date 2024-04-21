@@ -22,7 +22,7 @@ const status_desc = require('#/data/desc/status-desc.json');
 const FlashEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-37');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
-const { fumble_result, attr_enum } = require('#/data/train-const');
+const { attr_enum, fumble_result } = require('#/data/train-const');
 
 /** @type {Record<string,function(HookArg,Record<string,*>,EventObject):Promise<*>>} */
 const handlers = {};
@@ -30,8 +30,10 @@ const handlers = {};
 /** @type {Record<string,function(CharaTalk,string,string,{wait:boolean},function):Promise<*>>} */
 const week_start_handlers = {};
 
-require('#/event/edu/edu-events-37/week-start-handlers-1')(week_start_handlers);
-require('#/event/edu/edu-events-37/week-start-handlers-2')(week_start_handlers);
+[
+  require('#/event/edu/edu-events-37/week-start-1'),
+  require('#/event/edu/edu-events-37/week-start-2'),
+].forEach((f) => f(week_start_handlers));
 
 handlers[event_hooks.week_start] = async (hook, _, event_object) => {
   const edu_weeks = era.get('cflag:37:育成回合计时'),

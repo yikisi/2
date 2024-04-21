@@ -398,7 +398,7 @@ module.exports = async function (hook, _, event_object) {
         `三两口薯条吞咽进肚子里，${kita.name} 好奇的问道。`,
       );
       await era.printAndWait(
-        `……不好，说错了话了…… ${
+        `……不好，说错了话了……${
           me.name
         } 略带犹豫地紧紧盯着${kita.get_uma_sex_title()}的嘴巴，那纤细而晶莹的红润双唇。`,
       );

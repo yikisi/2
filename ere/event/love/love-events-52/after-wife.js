@@ -6,8 +6,8 @@ const {
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
 const {
-  sys_get_colored_callname,
   sys_get_callname,
+  sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -56,7 +56,7 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
     '用本格化的力量抓住了衣领。',
   ]);
   await era.printAndWait([
-    '随后， ',
+    '随后，',
     me.get_colored_name(),
     ' 感受到了唇齿相叠的温柔，也感受到担当细小柔软的舌尖不可思议的撬开了 ',
     me.get_colored_name(),
@@ -255,7 +255,7 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
   ]);
   await urara.say_and_wait(
     [
-      '这句话的意思，不要来问乌拉拉哦？ ',
+      '这句话的意思，不要来问乌拉拉哦？',
       callname,
       ' 的话，自己肯定能找答案吧？',
     ],

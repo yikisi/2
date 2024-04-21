@@ -3,5 +3,6 @@ const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks
 module.exports = (is_reset) => {
   if (!is_reset) {
     new TachyonLifeMarks().first = 2;
+    require('#/system/sys-init-chara').init_chara(25);
   }
 };

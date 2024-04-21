@@ -3,8 +3,8 @@ const era = require('#/era-electron');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
-  sys_love_uma,
   sys_like_chara,
+  sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -320,7 +320,7 @@ module.exports = {
       `随着突然被注意到的时间，与乌拉拉的对话似乎就这样马马虎虎的中断了。`,
     );
     await era.printAndWait(
-      `这可不是感觉说得算的啊！ ${me.name} 本想这样说，但心里冒出的一点点想要去看${urara.sex}的奔跑的想法又使 ${me.name} 没能张开口。`,
+      `这可不是感觉说得算的啊！${me.name} 本想这样说，但心里冒出的一点点想要去看${urara.sex}的奔跑的想法又使 ${me.name} 没能张开口。`,
     );
     await era.printAndWait(
       `下次的确应该去看看也说不定？目送着乌拉拉蹦蹦跳跳地离开医务室，${me.name} 再次闭上了眼。`,

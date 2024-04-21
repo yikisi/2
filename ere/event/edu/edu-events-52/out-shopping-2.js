@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  sys_like_chara,
   sys_get_colored_callname,
+  sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -734,7 +734,7 @@ module.exports = (handlers) => {
     );
     await urara.say_and_wait([
       callname,
-      ' 、 ',
+      '、',
       callname,
       '！大家说想跟我拍照！我们要数到三一起拍，相机就交给你了——！',
     ]);

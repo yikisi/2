@@ -5,16 +5,17 @@ const {
   sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 
-const event_hooks = require('#/data/event/event-hooks');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
-const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
-const sys_filter_chara = require('#/system/sys-filter-chara');
+
+const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
+const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean|void>>} */
@@ -303,7 +304,7 @@ handlers[event_hooks.basement_end] = async () => {
     `稚嫩可爱的${vp.sex}，用清澈的像大海一样的眼睛，抬眼凝视着 ${me.name}。`,
   );
   await era.printAndWait('被风吹摇晃的头发散发出淡淡的洗发水的味道。');
-  await era.printAndWait(`${vp.name} “嗨！”地向 ${me.name} 挥手。`);
+  await era.printAndWait(`${vp.name}「嗨！」地向 ${me.name} 挥手。`);
   await vp.say_and_wait('真是奇遇啊。');
   await era.printAndWait(`这么说着，${vp.name} 不知为何眼睛闪闪发光。`);
   await vp.say_and_wait('我带你观光吧！');
@@ -507,7 +508,7 @@ handlers[event_hooks.basement_end] = async () => {
     `水声在口中回响。为了细细品味，${vp.name} 一直用嘴唇追求着 ${me.name}。`,
   );
   await era.printAndWait(`然后等呼吸逐渐困难的时候，${vp.sex}终于离开了。`);
-  await vp.say_and_wait(`啊，啊，${vp.name} ……已经——`);
+  await vp.say_and_wait(`啊，啊，${vp.name}……已经——`);
   await era.printAndWait(
     `思考停止，在想说出口的瞬间，${vp.name} 又把嘴唇重叠起来挡住了 ${me.name} 的话。`,
   );

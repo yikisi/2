@@ -43,6 +43,9 @@ class TachyonEduMarks extends EduEventMarks {
   //BE 魔女之药
   witch;
 
+  // 成就检查 - 无败希望锦标、弥生赏、皋月赏
+  title_check;
+
   constructor() {
     super(32);
     EduEventMarks.register_marks(this);

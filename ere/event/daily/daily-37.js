@@ -138,7 +138,7 @@ handlers[event_hooks.talk] = async () => {
     );
   if (era.get('flag:当前月') >= 3 && era.get('flag:当前月') <= 5)
     talk_arr.push(
-      '『Der Frühling ist die Zeit der Pläne， der Vorsätze.』春天对我而言，是很重要的季节，因为要在这段时间里仔细思考和制定今年之内的计划呢。',
+      '『Der Frühling ist die Zeit der Pläne, der Vorsätze.』春天对我而言，是很重要的季节，因为要在这段时间里仔细思考和制定今年之内的计划呢。',
       '春天啊……又到了万物复苏的季节呢。您知道吗？其实我一直对于能够在这个时间点准时绽开的植物抱有特别的情感，因为要做到这一点，就意味着它们必须忍受冬天的冷酷……真是件非常不易的事情，无论经历怎样的打击都能在最后准确地达成自己的使命，实在是令人敬佩。',
     );
   if (era.get('flag:当前月') >= 6 && era.get('flag:当前月') <= 8)
@@ -237,7 +237,7 @@ handlers[event_hooks.office_rest] = async function () {
     `辛苦了，${sys_get_callname(37, 0)}。${
       Math.random() < 0.5
         ? '利用好短暂的休息时间可以让您以充沛的精力处理接下来的事务。'
-        : '如果感到劳累的话，还请好好休息一下，因为 『All work and no play makes Jack a dull boy』，不是吗？'
+        : '如果感到劳累的话，还请好好休息一下，因为『All work and no play makes Jack a dull boy』，不是吗？'
     }`,
   );
 };
@@ -466,7 +466,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
       switch (get_random_value(0, 4)) {
         case 0:
           await flash.say_and_wait('特等奖？');
-          await era.printAndWait('震人心弦的旋律从喇叭里传出。 ');
+          await era.printAndWait('震人心弦的旋律从喇叭里传出。');
           await era.printAndWait(
             '与此同时，显示屏上的鲜艳大字让荣进闪耀愣了几秒。',
           );
@@ -483,7 +483,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
           break;
         case 1:
           await flash.say_and_wait('一等奖？');
-          await era.printAndWait('动听悦耳的旋律从喇叭里传出。 ');
+          await era.printAndWait('动听悦耳的旋律从喇叭里传出。');
           await era.printAndWait(
             '与此同时，显示屏上的鲜艳大字让荣进闪耀愣了几秒。',
           );
@@ -500,7 +500,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
           break;
         case 2:
           await flash.say_and_wait('二等奖？');
-          await era.printAndWait('波澜起伏的旋律从喇叭中传出。 ');
+          await era.printAndWait('波澜起伏的旋律从喇叭中传出。');
           await era.printAndWait(
             '与此同时，显示屏上的鲜艳大字让荣进闪耀犹豫了一瞬。',
           );
@@ -533,7 +533,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
           break;
         case 4:
           await flash.say_and_wait('再接再厉？');
-          await era.printAndWait('低沉的旋律从喇叭中传出。 ');
+          await era.printAndWait('低沉的旋律从喇叭中传出。');
           await era.printAndWait(
             '与此同时，显示屏上的鲜艳大字让荣进闪耀沉默了几秒。',
           );

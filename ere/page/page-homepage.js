@@ -273,6 +273,7 @@ module.exports = async () => {
             align: 'center',
           },
         );
+        return;
       }
     }
     if (flag_skip_this_week) {

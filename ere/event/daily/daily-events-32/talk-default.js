@@ -52,7 +52,7 @@ function tachyon_default_talk(buffer, tachyon, me, callname, edu_marks) {
       ]);
     },
     async () => {
-      await tachyon.say_and_wait([callname, ' ～～今天的衣服也拜托了']);
+      await tachyon.say_and_wait([callname, '～～今天的衣服也拜托了']);
       await tachyon.say_and_wait('哈？自己洗？你以为我的时间是大风吹来的吗？');
       await tachyon.say_and_wait('再说，这不也是对你的福利吗～～');
       await tachyon.say_and_wait('这可是我穿过的贴身衣物啊～～');
@@ -181,7 +181,7 @@ function tachyon_default_talk(buffer, tachyon, me, callname, edu_marks) {
   !edu_marks.drink &&
     buffer.push(async () => {
       edu_marks.drink = 1;
-      await tachyon.say_and_wait([callname, ' ～～要喝什么饮料吗？']);
+      await tachyon.say_and_wait([callname, '～～要喝什么饮料吗？']);
       era.println();
       await era.printAndWait([
         tachyon.get_colored_name(),

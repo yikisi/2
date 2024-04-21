@@ -5,13 +5,13 @@ const {
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
 const {
-  sys_love_uma_in_event,
-  sys_get_colored_callname,
   sys_get_callname,
+  sys_get_colored_callname,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
-const masturbate = require('#/event/snippets/masturbate');
 const { add_event } = require('#/event/queue');
+const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const event_hooks = require('#/data/event/event-hooks');
@@ -353,7 +353,7 @@ module.exports = async (
     await era.printAndWait([
       '或许是两人习以为常的默契，又或是小',
       urara.get_uma_sex_title(),
-      '期待已久的感应， ',
+      '期待已久的感应，',
       urara.get_colored_name(),
       ' 瞪大眼睛，樱瞳从惊讶到惊喜。',
     ]);
@@ -396,7 +396,7 @@ module.exports = async (
       await era.printAndWait([
         '面对 ',
         urara.get_colored_name(),
-        ' 真挚的笑容， ',
+        ' 真挚的笑容，',
         me.get_colored_name(),
         ' 当然也给予了最明确的答案——',
       ]);

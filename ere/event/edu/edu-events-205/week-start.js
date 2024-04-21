@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  sys_like_chara,
   sys_get_callname,
+  sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
@@ -14,7 +14,7 @@ const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205'
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const HookArg = require('#/data/event/hook-arg');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
  * @param _
@@ -224,7 +224,7 @@ module.exports = async (_, __, event_object) => {
         `而且，如果战略也被知晓的话，出现互相勾结不让${vp.sex}向前的集团也不奇怪。`,
       );
       await era.printAndWait(
-        `最重要的是，${vp.sex}的做法很容易预料—— ${vp.name} 的跑动很像 ${montjeu.name}。`,
+        `最重要的是，${vp.sex}的做法很容易预料——${vp.name} 的跑动很像 ${montjeu.name}。`,
       );
       await era.printAndWait(
         `那个时候，训练员们致力于制定应对 ${montjeu.name} 的战略，在 ${vp.name} 身上就这样通用了。`,
@@ -311,7 +311,7 @@ module.exports = async (_, __, event_object) => {
         );
         await era.printAndWait(`加入了厚厚的火腿和大量奶酪的热三明治。`);
         await era.printAndWait(
-          `告诉 ${vp.name} “我开动了”以后，大口大口地吃了起来。`,
+          `告诉 ${vp.name}「我开动了」以后，大口大口地吃了起来。`,
         );
         await era.printAndWait(
           `浓厚的奶酪酱汁加上火腿的风味，就和高档餐厅里吃的味道一样。`,

@@ -557,7 +557,7 @@ module.exports = async (hook, extra_flag) => {
       true,
     );
     await kita.print_and_wait(
-      `四下摇晃着脑袋寻找着训练员${me.get_adult_sex_title()}的踪迹， ${
+      `四下摇晃着脑袋寻找着训练员${me.get_adult_sex_title()}的踪迹，${
         kita.name
       } 注意到不远处，${me.name} 正跨越栏杆向这边飞奔而来。`,
     );

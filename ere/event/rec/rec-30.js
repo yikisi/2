@@ -96,7 +96,7 @@ module.exports = {
             '看到她干劲十足地准备开始训练，不忍心打搅她，最后还是没能打上招呼。',
           );
           await era.printAndWait(
-            `${chara_name} ……真期待在下次选拔赛上看到她真正的实力。`,
+            `${chara_name}……真期待在下次选拔赛上看到她真正的实力。`,
           );
           new EventMarks(0)
             .sub(event_hooks.out_station)
@@ -211,7 +211,7 @@ module.exports = {
           era.printButton('不能就这样放着她不管！', 1);
           await era.input();
           era.print(`「${chara_name}，来我这里吧！」`);
-          era.print(`${chara_name} “唰”地抬起了耳朵。`);
+          era.print(`${chara_name}「唰」地抬起了耳朵。`);
           era.print(`${chara_name}「诶？」`, {
             color: chara_color,
           });

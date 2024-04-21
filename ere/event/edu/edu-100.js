@@ -876,13 +876,13 @@ handlers[event_hooks.week_start] = async () => {
       `浴袍?……这个花束，是我推荐给${me.actual_name}当给奇锐骏的情人节礼物……原来如此。看来传说中的拳术师，很快就要隐退了啊——`,
     );
     await era.printAndWait('………………');
-    era.drawLine({ content: '【~特雷森学院·楼道~】    ' });
+    era.drawLine({ content: '特雷森学院·楼道' });
     await chara_talk.say_and_wait('小数码，小数码，不得了啦啊！~');
     await chara19_talk.say_and_wait(
       '唉唉唉！？穿着浴袍在楼道里乱跑的奇锐骏！？虽然这个也很尊！但这一幕难道说是！？',
     );
     await era.printAndWait('………………');
-    era.drawLine({ content: '【~特雷森学院·天台~】    ' });
+    era.drawLine({ content: '特雷森学院·天台' });
     await era.printAndWait('拖着残缺的身躯，终于在天台上追上了浴袍的倩影。');
     await chara_talk.say_and_wait(
       `${callname[0]}……${callname}，我…我…该怎么做啊？我有点不知如何是好了。`,
@@ -932,7 +932,7 @@ handlers[event_hooks.week_start] = async () => {
     await era.printAndWait('………………');
     await era.printAndWait('…………');
     await era.printAndWait('……');
-    era.drawLine({ content: '【~特雷森学院·地下审讯室~】    ' });
+    era.drawLine({ content: '特雷森学院·地下审讯室' });
     await era.printAndWait(
       `骏川${chara_talk.get_adult_sex_title()}：「最近收到群众举报。」`,
     );

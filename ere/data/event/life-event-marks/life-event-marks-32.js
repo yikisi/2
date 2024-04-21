@@ -7,10 +7,14 @@ class TachyonLifeMarks extends LifeEventMarks {
   cook;
   // 上次做饭时间
   l_cook;
-  // 反抗3
-  hate;
   // 闲聊次数
   talk;
+  // 反抗3
+  hate;
+  // 暧昧
+  ambiguous;
+  // 情人节事件标记 - 表白用
+  choco;
 
   constructor() {
     super(32);

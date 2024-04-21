@@ -4,21 +4,21 @@ const change_cost = require('#/system/ero/sub-calc-ero/change-ero-cost');
 const get_random_delta = require('#/system/ero/sub-calc-ero/get-random-delta');
 const get_sm_buff = require('#/system/ero/sub-calc-ero/get-sm-buff');
 const handle_lost_virginity = require('#/system/ero/sub-calc-ero/handle-lost-virginity');
-const { use_item } = require('#/system/ero/sys-calc-ero-item');
 const {
   update_attacking_mouth_exp,
   update_blow_job_exp,
   update_hand_job_exp,
   update_sm_exp,
 } = require('#/system/ero/sys-calc-ero-exp');
-const { add_juel } = require('#/system/ero/sys-calc-juel');
-const { calc_pleasure } = require('#/system/ero/sys-calc-palam');
+const { use_item } = require('#/system/ero/sys-calc-ero-item');
 const { change_part, clean_part } = require('#/system/ero/sys-calc-ero-part');
-const { set_stain, merge_stain } = require('#/system/ero/sys-calc-stain');
 const {
   get_bust_size,
   get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
+const { add_juel } = require('#/system/ero/sys-calc-juel');
+const { calc_pleasure } = require('#/system/ero/sys-calc-palam');
+const { merge_stain, set_stain } = require('#/system/ero/sys-calc-stain');
 const {
   sys_get_colored_full_callname,
 } = require('#/system/sys-calc-chara-others');
@@ -38,7 +38,7 @@ const {
   part_touch,
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
-const { vp_status_enum, penis_desc } = require('#/data/ero/status-const');
+const { penis_desc, vp_status_enum } = require('#/data/ero/status-const');
 
 /**
  * @param {EroParticipant} attacker
@@ -448,7 +448,7 @@ function sys_do_sex(attacker, defender, item) {
           if (!era.get(`cstr:${defender.id}:初次足交经历`)) {
             if (is_defender_awake) {
               era.set(`cstr:${defender.id}:初次足交经历`, [
-                `在 ${date} ，第一次将 `,
+                `在 ${date}，第一次将 `,
                 sys_get_colored_full_callname(defender.id, attacker.id),
                 ' 的肉棒踩在了脚下',
               ]);

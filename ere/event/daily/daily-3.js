@@ -565,7 +565,7 @@ handlers[event_hooks.celebration] = async () => {
       await era.printAndWait(
         `${teio.sex}把手到前面，一个不算很精致但能看出用心包装的小盒子展现在 ${me.name} 的眼前。`,
       );
-      era.print(`${me.name} ——`);
+      era.print([me.get_colored_name(), '——']);
       era.printButton('接受礼物', 1);
       era.get('love:3') >= 75 && era.printButton(`连${teio.sex}一起吃掉`, 2);
       ret = await era.input();

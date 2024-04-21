@@ -4,7 +4,6 @@ const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
@@ -169,10 +168,14 @@ module.exports = {
 
         new EventMarks(0).sub(event_hooks.recruit_start);
         era.set('cflag:32:招募状态', recruit_flags.yes);
-        new EduEventMarks(32).add('beginning');
-        add_event(event_hooks.week_end, new EventObject(32, cb_enum.edu));
+        if (era.get('cflag:25:招募状态') !== recruit_flags.yes) {
+          era.set('callname:25:0', `豚鼠${me.get_adult_sex_title()}`);
+        }
+        add_event(
+          event_hooks.week_end,
+          new EventObject(32, cb_enum.edu).set_arg('beginning'),
+        );
         era.set('flag:物色对象', 0);
-        era.set('callname:32:0', '豚鼠君');
         return true;
     }
     return false;

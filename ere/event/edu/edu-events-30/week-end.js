@@ -1,19 +1,20 @@
 const era = require('#/era-electron');
 
-const CharaTalk = require('#/utils/chara-talk');
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const print_event_name = require('#/event/snippets/print-event-name');
 
-const chara_talk = new CharaTalk(30);
+const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { gacha } = require('#/utils/list-utils');
 
 const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
-const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const print_event_name = require('#/event/snippets/print-event-name');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { gacha } = require('#/utils/list-utils');
+
 const your_name = era.get('callname:0:-2');
 const { say_by_passer_by } = require('#/utils/chara-talk');
 
+const chara_talk = new CharaTalk(30);
 module.exports = async function () {
   const chara52_talk = get_chara_talk(52),
     me = get_chara_talk(0),
@@ -26,7 +27,7 @@ module.exports = async function () {
     await chara_talk.say_and_wait(`离训练的时间还有一点点…`);
     await chara_talk.say_and_wait(`…稍微跑一下吧。`);
     await chara_talk.say_and_wait(
-      `哎嘿嘿…… ${chara_talk.name}选手，在欢呼声中，走进了赛场——`,
+      `哎嘿嘿……${chara_talk.name}选手，在欢呼声中，走进了赛场——`,
     );
     await say_by_passer_by(`赛${chara_talk.get_uma_sex_title()}A`, `哇！！！`);
     await chara_talk.say_and_wait(`哎！？`);
@@ -56,7 +57,7 @@ module.exports = async function () {
     );
     await chara_talk.say_and_wait(`……好厉害。赛场边上也挤满了来旁观的人……`);
     await chara_talk.say_and_wait(
-      `…………现在， ${chara_talk.name}去那里跑的话也只会碍事……的吧。`,
+      `…………现在，${chara_talk.name}去那里跑的话也只会碍事……的吧。`,
     );
     await era.printAndWait(
       `${your_name}和 ${chara_talk.name}一起向闪耀系列发起的挑战开始了！`,
@@ -69,7 +70,7 @@ module.exports = async function () {
       );
       await chara_talk.say_and_wait(`哈啊…哈啊…抱歉，我来晚了。`);
       await chara52_talk.say_and_wait(
-        `快点快点， ${chara_talk.name}酱！巴士和大家都在等着哦！`,
+        `快点快点，${chara_talk.name}酱！巴士和大家都在等着哦！`,
       );
       await chara_talk.say_and_wait(`呜…呜！马上就来！`);
       await chara_talk.say_and_wait(`太好了，赶上了。`);

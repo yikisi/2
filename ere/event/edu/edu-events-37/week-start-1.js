@@ -109,7 +109,7 @@ module.exports = (handlers) => {
         `见荣进闪耀的脸色有些低落，${your_name} 连忙拿起礼盒中附带的餐具，将圆球挖出一大个缺口。`,
       );
       await flash.say_and_wait('！');
-      await flash.say_and_wait(`${callname} ……呵呵～～`);
+      await flash.say_and_wait(`${callname}……呵呵～～`);
       await era.printAndWait(
         `见 ${your_name} 一口接着一口大快朵颐的模样，荣进闪耀的表情重新开始浮现出喜色。`,
       );

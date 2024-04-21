@@ -1,11 +1,13 @@
 const era = require('#/era-electron');
 
+const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
 
 const CharaTalk = require('#/utils/chara-talk');
 
+const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
@@ -371,10 +373,10 @@ module.exports = {
           await era.printAndWait(
             `看来接下来要与${chara_talk.sex}度过一段奇妙的时光了。`,
           );
-          await era.printAndWait('提示：招募曼城茶座成功了！');
           event_marks.sub(event_hooks.office_rest);
           era.set('cflag:25:招募状态', recruit_flags.yes);
           era.set('flag:物色对象', 0);
+          sys_call_mec(25, check_stages.mec_callname_customize);
         } else {
           event_marks.sub(event_hooks.office_rest);
           era.set('flag:物色对象', 0);

@@ -367,7 +367,7 @@ module.exports = async () => {
     );
     era.println();
     await era.printAndWait(
-      `听到${teio.sex}的名字，${me.name} 虽早有准备却仍不禁心下一沉，终于还是来了吗—— ${me.name} 心想。`,
+      `听到${teio.sex}的名字，${me.name} 虽早有准备却仍不禁心下一沉，终于还是来了吗——${me.name} 心想。`,
     );
     era.println();
     await era.printAndWait(
