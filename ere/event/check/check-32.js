@@ -1,27 +1,38 @@
 const era = require('#/era-electron');
 
+const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
+
 const { add_event, cb_enum } = require('#/event/queue');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
-const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
+const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const CharaTitles = require('#/data/chara-titles');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const check_stages = require('#/data/event/check-stages');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const check_aim_race = require('#/event/snippets/check-aim-race');
-const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /** @type {Record<string,function(Record<string,*>)>} */
 const handlers = {};
+
+function get_coffee_aim_entry(coffee, entry) {
+  return {
+    check: entry.check,
+    color: entry.color,
+    content: [coffee, ' ', entry.content],
+  };
+}
 
 handlers[check_stages.aim_check] = () => {
   const buffer = [],
@@ -32,9 +43,53 @@ handlers[check_stages.aim_check] = () => {
   buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 3));
   buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 1));
   if (new TachyonEduMarks().plan_b) {
+    const coffee = get_chara_talk(25).get_colored_name(),
+      coffee_races = new RaceHistory(25).get();
+    buffer.push(
+      get_coffee_aim_entry(
+        coffee,
+        check_aim_and_get_entry(coffee_races, race_enum.stli_kin, 1, 3),
+      ),
+    );
+    buffer.push(
+      get_coffee_aim_entry(
+        coffee,
+        check_aim_and_get_entry(coffee_races, race_enum.kiku_sho, 1, 3),
+      ),
+    );
+    buffer.push(
+      get_coffee_aim_entry(
+        coffee,
+        check_aim_and_get_entry(coffee_races, race_enum.arim_kin, 1, 3),
+      ),
+    );
+    buffer.push(
+      get_coffee_aim_entry(
+        coffee,
+        check_aim_and_get_entry(coffee_races, race_enum.tenn_spr, 2, 3),
+      ),
+    );
     buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
+    buffer.push(
+      get_coffee_aim_entry(
+        coffee,
+        check_aim_and_get_entry(coffee_races, race_enum.takz_kin, 2, 3),
+      ),
+    );
     buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.prix_lat, 2, 1));
+    buffer.push(
+      get_coffee_aim_entry(
+        coffee,
+        check_aim_and_get_entry(coffee_races, race_enum.japa_cup, 2, 3),
+      ),
+    );
+    buffer.push(
+      get_coffee_aim_entry(
+        coffee,
+        check_aim_and_get_entry(coffee_races, race_enum.arim_kin, 2, 1),
+      ),
+    );
   } else {
     buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.sank_hai, 2, 2));
@@ -44,7 +99,9 @@ handlers[check_stages.aim_check] = () => {
   return buffer;
 };
 
-const aim_races = [{}, {}];
+/** @type {Record<string,number>[]} */
+const aim_races = [];
+aim_races.push({}, {});
 
 // planA:
 aim_races[0][race_enum.begin_race] = 3;
@@ -64,9 +121,9 @@ aim_races[1][get_aim_race_index(race_enum.hoch_sho, 1)] = 3;
 aim_races[1][get_aim_race_index(race_enum.sats_sho, 1)] = 3;
 aim_races[1][get_aim_race_index(race_enum.toky_yus, 1)] = 3;
 
-aim_races[1][get_aim_race_index(race_enum.tenn_spr, 2)] = 3;
+aim_races[1][get_aim_race_index(race_enum.tenn_spr, 2)] = 2;
 aim_races[1][get_aim_race_index(race_enum.takz_kin, 2)] = 3;
-aim_races[1][get_aim_race_index(race_enum.prix_lat, 2)] = 3;
+aim_races[1][get_aim_race_index(race_enum.prix_lat, 2)] = 2;
 
 /** @param {{edu_weeks:number,race:number}} extra_flag */
 handlers[check_stages.aim_race] = (extra_flag) => {
@@ -85,12 +142,27 @@ handlers[check_stages.after_punish] = ({ level }) => {
 };
 
 /**
+ * @param {PseudoUma[]} contestants
  * @param {number} edu_weeks
  * @param {number} rank
  */
-handlers[check_stages.after_race] = ({ edu_weeks, rank }) => {
+handlers[check_stages.after_race] = ({ contestants, edu_weeks, rank }) => {
   if (edu_weeks <= 47 + race_infos[race_enum.sats_sho].date && rank !== 1) {
     new TachyonEduMarks().title_check = 1;
+  }
+  const race_history = new RaceHistory(32).get();
+  if (
+    check_aim_race(race_history, race_enum.sats_sho, 1, 1) &&
+    check_aim_race(race_history, race_enum.toky_yus, 1, 1) &&
+    check_aim_race(race_history, race_enum.kiku_sho, 1, 1)
+  ) {
+    add_event(
+      event_hooks.week_end,
+      new EventObject(32, cb_enum.edu).set_arg('triple_crown'),
+    );
+  }
+  if (contestants.find((e) => e.index_chara === 25)?.rank?.curr < rank) {
+    new TachyonEduMarks().beat_c = 1;
   }
 };
 
@@ -105,6 +177,7 @@ handlers[check_stages.love_event] = () => {
 };
 
 handlers[check_stages.next_week] = () => {
+  const edu_marks = new TachyonEduMarks();
   if (era.get('cflag:32:招募状态') === recruit_flags.yes) {
     const daily_event_object = new EventObject(32, cb_enum.daily),
       life_marks = new TachyonLifeMarks(),
@@ -154,159 +227,182 @@ handlers[check_stages.next_week] = () => {
   }
   const edu_weeks = era.get('cflag:32:育成回合计时');
   if (edu_weeks < 3 * 48) {
-    const event_marks = new TachyonEduMarks();
+    edu_marks.train_stop = 0;
+    edu_marks.train_fail = Math.min(edu_marks.train_fail, 2);
     const event_obj = new EventObject(32, cb_enum.edu);
-    const event_obj_special = new EventObject(32, cb_enum.edu, true);
-    const love = era.get('love:32');
-    if (era.get('cflag:32:育成次数') === 1) {
-      check_and_add_event(
-        event_marks,
-        edu_weeks,
-        'restart',
-        event_hooks.week_start,
-        event_obj,
-      );
-    } else if (era.get('cflag:32:育成次数') > 1) {
-      check_and_add_event(
-        event_marks,
-        edu_weeks,
-        'reforger',
-        event_hooks.week_start,
-        event_obj,
-      );
-    }
-    if (edu_weeks >= 20) {
-      check_and_add_event(
-        event_marks,
-        edu_weeks,
-        'deities_possible',
-        event_hooks.out_church,
-        event_obj,
-      );
-      if (love > 75) {
-        check_and_add_event(
-          event_marks,
-          edu_weeks,
-          'explore_reward',
-          event_hooks.office_study,
-          event_obj,
-        );
-        if (event_marks.explore_reward === 2) {
-          check_and_add_event(
-            event_marks,
-            edu_weeks,
-            'explore_reward1',
-            event_hooks.office_study,
-            event_obj,
-          );
-          if (event_marks.explore_reward1 === 2) {
-            check_and_add_event(
-              event_marks,
-              edu_weeks,
-              'explore_reward2',
-              event_hooks.office_study,
-              event_obj,
-            );
-          }
-        }
-      }
-      if (event_marks.hot_spring && edu_weeks > 95 + 24) {
-        check_and_add_event(
-          event_marks,
-          edu_weeks,
-          'hot_spring_event',
-          event_hooks.out_start,
-          event_obj,
-        );
-      }
+    const event_obj_special = new EventObject(32, cb_enum.edu, true).set_arg(
+      edu_weeks,
+    );
+    if (Math.random() < 0.2) {
+      add_event(event_hooks.week_start, event_obj.copy().set_arg('try_drug'));
     }
     switch (edu_weeks) {
-      case 16: //实验课题的订定
+      case 15: // 实验课题拟定
+      case 36: // 年度研究计划制定
+      case 47 + 1: // 中期检查
+      case 47 + 5: // 中期报告提交
+      case 47 + 25: // A or B
+      case 47 + 29: // 媒体应对办法
+      case 47 + 31: // 夏日的数据采集 or 月光
+      case 95 + 1: // 第二次年度审核报告 or 下定决心的新年
+      case 95 + 6: // 情人节
+      case 95 + 14: // 粉丝感谢祭
+      case 95 + 31: // 他人的可能性 or 再度闪耀的光子
+      case 95 + 39: // 最终因素的寻求 or 超越极限……？
         add_event(event_hooks.week_start, event_obj_special);
         break;
-      case 40: //项目成熟度评估
-        add_event(event_hooks.week_start, event_obj_special);
-        break; //二期目标确立
-      case 47 + 1:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 47 + 8: //研究计画与进度回报
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 47 + 23: //最速？最强？
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 47 + 25: // A or B (重要分歧点)
-        add_event(event_hooks.week_start, event_obj_special);
-        add_event(event_hooks.week_end, event_obj_special);
-        break;
-      case 47 + 29:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 47 + 31:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 47 + 41:
-        if (new CharaTitles(32).get().findIndex((e) => e.c === '三冠')) {
+      case 95 + 35:
+        if (edu_marks.plan_b) {
+          // 法国（？）
+          add_event(event_hooks.week_start, event_obj_special);
+        } else {
+          // 因素·旁观者设置
           add_event(event_hooks.week_end, event_obj_special);
         }
         break;
-      case 47 + 42:
-        add_event(event_hooks.week_start, event_obj_special);
+      case 47 + 15:
+        if (sys_reg_race(32).curr.race === race_enum.sats_sho) {
+          edu_marks.uma_limit = 1;
+        }
         break;
-      case 95 + 1:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 3:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 6:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 14:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 13:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 18:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 29:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 31:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 32:
+      case 47 + 23: // 最速？最强？
         add_event(event_hooks.week_end, event_obj_special);
         break;
-      case 95 + 35:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 39:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 41:
+      case 47 + 40: // 不同的可能性
         if (
-          new RaceHistory(25).get_result(95 + 40)?.race === race_enum.japa_cup
+          edu_marks.plan_b &&
+          era
+            .getAddedCharacters()
+            .findIndex(
+              (e) =>
+                era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
+                sys_reg_race(e).curr.race === race_enum.kiku_sho,
+            ) !== -1
         ) {
           add_event(event_hooks.week_start, event_obj_special);
         }
         break;
-      case 95 + 43:
+      case 47 + 41: // 第二次年度考核
+        if (edu_marks.plan_b === 0) {
+          add_event(event_hooks.week_start, event_obj_special);
+        }
+        break;
+      case 47 + 47: // 黯淡的光辉
+      case 95 + 15: // 闪烁的光子
+        if (edu_marks.plan_b) {
+          add_event(event_hooks.week_end, event_obj_special);
+        }
+        break;
+      case 95 + 3: // 抽奖与代偿剂效应
+        add_event(event_hooks.out_shopping, event_obj_special);
+        break;
+      case 95 + 5:
+        if (edu_marks.plan_b) {
+          sys_reg_race(32).curr = {
+            race: race_enum.tenn_spr,
+            week: era.get('flag:当前回合数') + 11,
+          };
+        }
+        break;
+      case 95 + 13:
+        sys_reg_race(32).curr = {
+          race: race_enum.takz_kin,
+          week: era.get('flag:当前回合数') + 11,
+        };
+        break;
+      case 95 + 18: // 重新绽放的光子
+        if (edu_marks.tenn_spr) {
+          add_event(event_hooks.week_end, event_obj_special);
+        }
+        break;
+      case 95 + 29: // 短暂歇息
+        if (edu_marks.plan_b) {
+          sys_reg_race(32).curr = {
+            race: race_enum.prix_lat,
+            week: era.get('flag:当前回合数') + 8,
+          };
+        }
         add_event(event_hooks.week_start, event_obj_special);
         break;
-      case 95 + 45:
-        add_event(event_hooks.week_start, event_obj_special);
+      case 95 + 32: // 换位实验
+      case 95 + 43: // 完全燃起的胜负心
+        if (!edu_marks.plan_b) {
+          add_event(event_hooks.week_end, event_obj_special);
+        }
         break;
+      case 95 + 36: // 决心
+        if (
+          edu_marks.plan_b &&
+          era.get('cflag:25:位置') !== location_enum.paris
+        ) {
+          add_event(event_hooks.week_end, event_obj_special);
+        }
+        break;
+      case 95 + 37: // 极限的标准
+        if (
+          edu_marks.plan_b &&
+          era.get('cflag:25:位置') !== location_enum.paris
+        ) {
+          add_event(event_hooks.week_end, event_obj_special);
+        }
+        break;
+      case 95 + 38:
+        if (edu_marks.plan_b) {
+          edu_marks.glass_leg = 1;
+        }
+        break;
+      case 95 + 40: // 完全燃起的胜负心
+        if (
+          edu_marks.plan_b &&
+          check_aim_race(new RaceHistory(25).get(), race_enum.japa_cup, 2, 1)
+        ) {
+          add_event(event_hooks.week_end, event_obj_special);
+        }
+        break;
+      case 95 + 47: // 被超越的极限
+        if (
+          edu_marks.plan_b &&
+          check_aim_race(new RaceHistory(25).get(), race_enum.japa_cup, 2, 3)
+        ) {
+          add_event(event_hooks.week_start, event_obj_special);
+        }
+        break;
+      case 95 + 48: // 临夜的圣诞老人 or 圣夜的诺言
+        if (
+          !edu_marks.plan_b ||
+          (check_aim_race(
+            new RaceHistory(25).get(),
+            race_enum.japa_cup,
+            2,
+            3,
+          ) &&
+            sys_reg_race(25).curr.race === race_enum.arim_kin &&
+            check_aim_race(new RaceHistory(32).get(), race_enum.prix_lat, 2))
+        ) {
+          add_event(event_hooks.week_start, event_obj_special);
+        }
     }
+    check_and_register_aim_race(32, aim_races[edu_marks.plan_b]);
+  } else if (edu_weeks === 143 + 9) {
+    // 极限的彼方 or PlanB的未来
+    add_event(
+      event_hooks.week_start,
+      new EventObject(32, cb_enum.edu).set_arg('palace'),
+    );
   }
 };
 
-handlers[check_stages.palace_check] = function () {
+handlers[check_stages.palace_check] = () => {
   common_palace_check(32);
-  return handlers[check_stages.aim_check]();
+  const aim_check = handlers[check_stages.aim_check]();
+  if (aim_check.findIndex((e) => e.check !== 1) === -1) {
+    // 薛定鄂的超光速粒子 or 其他的可能性
+    add_event(
+      event_hooks.out_start,
+      new EventObject(32, cb_enum.edu, true).set_arg('hot_spring'),
+    );
+  }
+  return aim_check;
 };
 
 handlers[check_stages.personal_titles] = () => [

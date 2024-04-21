@@ -1,7 +1,7 @@
-const { money_color, buff_colors } = require('#/data/color-const');
+const { buff_colors, money_color } = require('#/data/color-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
  * @param {CharaTalk} chara

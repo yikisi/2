@@ -21,6 +21,8 @@ const location_enum = {
   home: 0,
   // 香港
   hongkong: 0,
+  // 温泉
+  hot_spring: 0,
   // 旅馆
   hotel: 0,
   // 情人旅馆
@@ -78,6 +80,7 @@ location_name[location_enum.school_shop] = '神秘的小卖部';
 location_name[location_enum.race] = '赛场';
 location_name[location_enum.hongkong] = '香港';
 location_name[location_enum.guangzhou] = '广州';
+location_name[location_enum.hot_spring] = '温泉';
 
 module.exports = {
   location_enum,

@@ -1,10 +1,10 @@
 const era = require('#/era-electron');
 
 const {
-  check_lubrication,
   check_erect,
-  get_penis_size,
+  check_lubrication,
   get_bust_size,
+  get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_call_mec = require('#/system/script/sys-call-mec');
 const {
@@ -23,18 +23,18 @@ const { slavery_titles } = require('#/data/ero/sex-mark-const');
 const {
   penis_state,
   pregnant_stage_enum,
-  virgin_state,
   skin_desc,
   trained_talent_names,
+  virgin_state,
 } = require('#/data/ero/status-const');
 const check_stages = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
+const LoveLimitStatus = require('#/data/love-limit-status');
 const {
-  train_buff_info,
   attr_names,
   pressure_border,
+  train_buff_info,
 } = require('#/data/train-const');
-const LoveLimitStatus = require('#/data/love-limit-status');
 
 const level_and_desc = {
   love: {
@@ -590,12 +590,21 @@ module.exports = {
    */
   get_status(chara_id) {
     const status_list = [];
-    era.get(`equip:${chara_id}:淫纹奴役`) &&
-      status_list.push({
+    const sex_equip = era.get(`equip:${chara_id}:淫纹奴役`);
+    if (era.get(`mark:${chara_id}:淫纹`) === 3) {
+      const obj = {
         color: buff_colors[2],
-        content: slavery_titles[era.get(`equip:${chara_id}:淫纹奴役`)],
-      });
-    status_list.push(...sys_call_mec(chara_id, check_stages.mec_status));
+        content: slavery_titles[sex_equip],
+      };
+      if (!chara_id) {
+        obj.title = sex_equip
+          ? '[繁殖用母马] 现役孕袋，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱、生下孩子时获得声望，子代参赛声望奖励+100%'
+          : '[泄欲用母马] 现役性奴，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱时获得声望';
+      }
+      status_list.push(obj);
+    }
+    era.get(`equip:${chara_id}:淫纹奴役`) &&
+      status_list.push(...sys_call_mec(chara_id, check_stages.mec_status));
     era.get(`status:${chara_id}:生日`) &&
       status_list.push({
         color: buff_colors[1],

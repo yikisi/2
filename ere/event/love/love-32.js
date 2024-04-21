@@ -7,8 +7,8 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const girl_friend_accept = require('#/event/love/love-events-32/girl-friend-accept');
+const girl_friend_betray = require('#/event/love/love-events-32/girl-friend-betray');
 const girl_friend_reject = require('#/event/love/love-events-32/girl-friend-reject');
-const { register_handlers } = require('#/event/love/love-events-32/snippets');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -19,7 +19,7 @@ const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks
 /** @type {Record<string,function(CharaTalk,CharaTalk,string):Promise<*>>} */
 const handlers = {};
 
-register_handlers(handlers);
+require('#/event/love/love-events-32/registry')(handlers);
 
 handlers[74] = async (tachyon, me, callname) => {
   await print_event_name('女巫的自白', tachyon);
@@ -301,9 +301,9 @@ handlers[74] = async (tachyon, me, callname) => {
   );
   era.println();
   era.print(['因此，', me.get_colored_name(), ' 选择…………']);
-  era.printButton('不喝', 1);
-  era.printButton('喝', 2);
-  era.printButton('让速子将药喝下去', 3);
+  era.printButton('不喝（升级关系）', 1);
+  era.printButton('喝（暂不升级）', 2);
+  era.printButton('让速子将药喝下去【！】', 3);
   era.print(
     [
       '【警告，若选择此选项，与 ',
@@ -324,7 +324,7 @@ handlers[74] = async (tachyon, me, callname) => {
       await girl_friend_reject(tachyon, me, callname, new TachyonLifeMarks());
       break;
     case 3:
-      era.set('flag:强制BE', 32);
+      await girl_friend_betray(tachyon, me, callname, new TachyonLifeMarks());
   }
 };
 
@@ -703,7 +703,7 @@ handlers[89] = async (tachyon, me, callname) => {
 /**
  * 速子的爱慕事件，id=32
  *
- * @author 名贵易碎电子盆栽孕袋女士
+ * @author 幽白書
  * @author 黑奴一号 黑奴队长（修订）
  *
  * @param _

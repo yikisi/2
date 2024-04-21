@@ -1,10 +1,11 @@
 ﻿const era = require('#/era-electron');
 
 const {
+  sys_check_train_enabled,
   sys_get_debuff,
   sys_get_succ_rate,
 } = require('#/system/sys-calc-chara-param');
-const { train_uma, get_train_bonus } = require('#/system/sys-train-uma');
+const { get_train_bonus, train_uma } = require('#/system/sys-train-uma');
 
 const print_curr_chara_info = require('#/page/components/cur-chara-info');
 const print_page_header = require('#/page/components/page-header');
@@ -14,18 +15,18 @@ const chara_info_type = require('#/data/chara-info-type');
 const { adaptability_colors } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
 const {
+  get_adaptability_rank,
   get_attr_rank,
   get_chara_score,
-  get_trainer_train_buff,
-  get_adaptability_rank,
   get_rank_level,
+  get_trainer_train_buff,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const {
+  adaptability_names,
+  attr_enum,
   attr_names,
   time_cost,
-  attr_enum,
-  adaptability_names,
 } = require('#/data/train-const');
 
 module.exports = async () => {
@@ -242,6 +243,7 @@ module.exports = async () => {
     const beach_level =
       (era.get(`cflag:${chara_id}:位置`) === location_enum.beach) * 5;
 
+    const train_enabled = sys_check_train_enabled(chara_id);
     era.printMultiColumns(
       attr_names.map((e, i) => {
         const train_level =
@@ -254,7 +256,8 @@ module.exports = async () => {
               !race ||
               player_time < player_cost ||
               chara_time < uma_cost ||
-              chara_stamina === 0,
+              chara_stamina === 0 ||
+              !train_enabled,
           },
           content: `${e}训练 Lv.${train_level}\n成功率：${
             train_level ? sys_get_succ_rate(chara_id, i, extra_buff) : 0

@@ -107,7 +107,7 @@ module.exports = async function () {
       `电视`,
       `美浦波旁，绝对不能错过。因为${
         chara_talk.sex
-      }可是未来三冠赛${chara_talk.get_uma_sex_title()}候补！」`,
+      }可是未来三冠赛${chara_talk.get_uma_sex_title()}候补！`,
     );
     await chara_talk.say_and_wait(
       `……${your_name}新年好，${me.sex_code - 1 ? '姐姐' : '哥哥'}大人。`,

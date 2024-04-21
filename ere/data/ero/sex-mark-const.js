@@ -8,6 +8,7 @@ const slavery_enum = {
 Object.keys(slavery_enum).forEach((e, i) => (slavery_enum[e] = i + 1));
 
 const slavery_titles = {};
+slavery_titles[0] = '泄欲用母马';
 slavery_titles[slavery_enum.milk] = '榨乳用母马';
 slavery_titles[slavery_enum.pregnant] = '繁殖用母马';
 slavery_titles[slavery_enum.worker] = '献金用母马';

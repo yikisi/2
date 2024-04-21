@@ -6,17 +6,17 @@ const {
   remove_all_items,
 } = require('#/system/ero/sys-calc-ero-item');
 const {
-  reset_parts,
   clean_all_parts,
+  reset_parts,
 } = require('#/system/ero/sys-calc-ero-part');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
-const { init_juels, clean_juels } = require('#/system/ero/sys-calc-juel');
+const { clean_juels, init_juels } = require('#/system/ero/sys-calc-juel');
 const { clean_palams, init_palams } = require('#/system/ero/sys-calc-palam');
 const { set_stain } = require('#/system/ero/sys-calc-stain');
 const {
+  sys_change_attr_and_print,
   sys_change_lust,
   sys_change_pressure,
-  sys_change_attr_and_print,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
@@ -27,22 +27,22 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { palam_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
+const { item_enum } = require('#/data/ero/item-const');
 const {
   base_limit,
   erect_border,
-  lust_palam_border,
-  palam2juel,
   lust_border,
   lust_from_palam,
+  lust_palam_border,
+  palam2juel,
 } = require('#/data/ero/orgasm-const');
 const {
   part_enum,
-  pleasure_list,
-  part_talents,
   part_names,
+  part_talents,
+  pleasure_list,
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
-const { item_enum } = require('#/data/ero/item-const');
 const { attr_enum } = require('#/data/train-const');
 
 let juel_names;
@@ -740,7 +740,7 @@ function get_juel_result(chara_id) {
   return buffer.concat(buffer2);
 }
 
-/** @param {boolean} shown */
+/** @param {boolean} [shown] */
 async function end_ero_and_show_result(shown) {
   clean_juels();
   clean_palams();

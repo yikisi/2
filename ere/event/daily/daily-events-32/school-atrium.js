@@ -4,7 +4,7 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const {
   get_chara_talk,
-  say_by_passer_by,
+  say_by_passer_by_and_wait,
 } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
@@ -98,30 +98,33 @@ module.exports = async (hook) => {
           tachyon.sex,
           '们内心弱小处的黑影。',
         ]);
-        await say_by_passer_by(
+        await say_by_passer_by_and_wait(
           `${tachyon.get_uma_sex_title()}A`,
           '呜啊啊啊！我好弱啊……为什么，怎么都赢不了……！',
         );
         await tachyon.say_as_unknown_and_wait('你想……获得力量吗？');
-        await say_by_passer_by(`${tachyon.get_uma_sex_title()}A`, '……力量？');
+        await say_by_passer_by_and_wait(
+          `${tachyon.get_uma_sex_title()}A`,
+          '……力量？',
+        );
         await tachyon.say_as_unknown_and_wait(
           '能够变得比谁都强，胜过所有人的力量……',
         );
-        await say_by_passer_by(
+        await say_by_passer_by_and_wait(
           `${tachyon.get_uma_sex_title()}A`,
           '……真，真的可以吗？代价是什么？',
         );
         await tachyon.say_as_unknown_and_wait(
           '呵呵呵……想知道的话，就到旧理科实验室来吧……',
         );
-        await say_by_passer_by(
+        await say_by_passer_by_and_wait(
           `${tachyon.get_uma_sex_title()}B`,
           '为什么……就是无法提起勇气告白……那个木头……为什么都做到这种程度了还不明白……！',
         );
         await tachyon.say_as_unknown_and_wait(
           '想要诚实表达自己的心意吗？想要即便不说出口也能让他明白自己的心思吗？',
         );
-        await say_by_passer_by(
+        await say_by_passer_by_and_wait(
           `${tachyon.get_uma_sex_title()}B`,
           '你，你是……！',
         );

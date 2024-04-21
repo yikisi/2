@@ -16,32 +16,40 @@ class TachyonEduMarks extends EduEventMarks {
   roof_b;
   // 河边 - -智+速
   river;
+  // 神社 - 神明捕捉行动
+  church;
   // 车站 - 约会 - 拆台
   station;
 
   // 育成部分
+  // 暂停训练
+  train_stop;
+  // 助纣为虐
+  help_tyr;
+  // 失败次数
+  train_fail;
   // 实验的开始（第一天）
   beginning;
   // Plan B
   plan_b;
-  //神明捕捉行动
-  deities_possible;
-  // 实验的报酬
-  explore_reward;
-  // 实验的报酬(后背位)
-  explore_reward1;
-  // 实验的报酬(后背位肛交)
-  explore_reward2;
-  // 温泉旅行券
-  hot_spring;
+  // 临时训练锁
+  glass_leg;
+  // 聊聊天春
+  tenn_spr;
+  // 战胜茶座
+  beat_c;
+  // 赛后sex
+  race_sex;
+  // 圣诞节
+  chris;
+
+  // 马娘的极限
+  uma_limit;
+  // 训练加成
+  limited;
+
   // 温泉旅行
-  hot_spring_event;
-  //重新开始育成
-  restart;
-  //重新开始育成
-  reforger;
-  //BE 魔女之药
-  witch;
+  hot_spring;
 
   // 成就检查 - 无败希望锦标、弥生赏、皋月赏
   title_check;

@@ -474,7 +474,7 @@ module.exports = async (tachyon, me, callname) => {
   await era.printAndWait(
     '当然，不是因为对方的无理要求，要说的话平常的要求比这更无理多了，而是……',
   );
-  era.printButton('说好的无法再研究了呢？', 1);
+  era.printButton('「说好的无法再研究了呢？」', 1);
   await era.input();
   await era.printAndWait([
     me.get_colored_name(),
@@ -497,7 +497,7 @@ module.exports = async (tachyon, me, callname) => {
     '就连现在，心里都在想着你高兴的模样、生气的模样、害羞的模样、紧张的模样……',
   );
   await tachyon.say_and_wait('把我变成这样，你可必须负起责任才行啊');
-  era.printButton('对……对不起？', 1);
+  era.printButton('「对……对不起？」', 1);
   await era.input();
   await era.printAndWait('这，这算自己的错吗？');
   await era.printAndWait('话说被这样直球倾诉爱意，果然还是很羞耻啊……');

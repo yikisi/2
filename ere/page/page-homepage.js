@@ -275,6 +275,9 @@ module.exports = async () => {
         );
         return;
       }
+      if (await check_game_over(true)) {
+        return;
+      }
     }
     if (flag_skip_this_week) {
       era.drawLine();

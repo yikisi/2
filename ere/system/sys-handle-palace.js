@@ -9,8 +9,8 @@ const { remove_edu_events } = require('#/event/queue');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const {
-  buff_colors,
   attr_change_colors,
+  buff_colors,
   sex_colors,
 } = require('#/data/color-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
@@ -111,6 +111,7 @@ function sys_handle_palace(chara_id) {
   sys_add_titles(chara_id, ...titles);
   era.set(`cflag:${chara_id}:干劲`, 0);
   sys_like_chara(chara_id, 0, -(miss_count + aim_punish_count) * 100);
+  sys_like_chara(302, 0, -aim_punish_count * 20);
   era.println();
 }
 

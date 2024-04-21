@@ -122,6 +122,46 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
   }
 };
 
+/**
+ * @param {number} chara_id
+ * @param {HookArg} hook
+ * @param {{args:*,fumble:boolean,train:number}} extra_flag
+ */
+handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
+  await print_fail_info_in_train(chara_id, extra_flag.train, extra_flag.fumble);
+  const chara_talk = get_chara_talk(chara_id);
+  era.println();
+  extra_flag.args = extra_flag.fumble
+    ? fumble_result.fumble
+    : fumble_result.fail;
+  if (extra_flag.train !== attr_enum.intelligence) {
+    await print_event_name(
+      extra_flag.fumble ? '在保健室……' : '在训练室……',
+      chara_talk,
+    );
+
+    await era.printAndWait([chara_talk.get_colored_name(), ' 训练失败了……']);
+    era.println();
+    era.print('该怎么办呢？');
+    era.println();
+
+    if (extra_flag.fumble) {
+      era.printButton('「要好好休息！」', 1);
+      era.printButton('「用毅力克服！」', 2);
+    } else {
+      era.printButton('「先在这休养一阵子吧。」', 1);
+      era.printButton('「来检讨一下吧！」', 2);
+    }
+    if ((await era.input()) === 1) {
+      hook.arg = 0;
+    } else if (Math.random() < extra_flag['args'].ratio.fail_again) {
+      hook.arg = -1;
+    } else {
+      hook.arg = 1;
+    }
+  }
+};
+
 handlers[event_hooks.week_start] = async (chara_id) => {
   const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
   if (edu_weeks !== 143 + 9 || era.get(`cflag:${chara_id}:可再次育成`)) {
@@ -239,47 +279,6 @@ handlers[event_hooks.week_start] = async (chara_id) => {
     }
   }
   era.set(`cflag:${chara_id}:可再次育成`, 1);
-};
-
-/**
- * @param {number} chara_id
- * @param {HookArg} hook
- * @param {{args:*,fumble:boolean,train:number}} extra_flag
- */
-handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
-  extra_flag.args = extra_flag.fumble
-    ? fumble_result.fumble
-    : fumble_result.fail;
-  await print_fail_info_in_train(chara_id, extra_flag.train, extra_flag.fumble);
-  const chara_talk = get_chara_talk(chara_id);
-  era.println();
-  if (extra_flag.train !== attr_enum.intelligence) {
-    await print_event_name(
-      extra_flag.fumble ? '在保健室……' : '在训练室……',
-      chara_talk,
-    );
-
-    await era.printAndWait([chara_talk.get_colored_name(), ' 训练失败了……']);
-    era.println();
-    era.print('该怎么办呢？');
-    era.println();
-
-    if (extra_flag.fumble) {
-      era.printButton('「要好好休息！」', 1);
-      era.printButton('「用毅力克服！」', 2);
-    } else {
-      era.printButton('「先在这休养一阵子吧。」', 1);
-      era.printButton('「来检讨一下吧！」', 2);
-    }
-    const ret = await era.input();
-    if (ret === 1) {
-      hook.arg = 0;
-    } else if (Math.random() < extra_flag['args'].ratio.fail_again) {
-      hook.arg = -1;
-    } else {
-      hook.arg = 1;
-    }
-  }
 };
 
 /**

@@ -418,10 +418,14 @@ module.exports = (handlers) => {
     era.println();
 
     await era.printAndWait('说完后，速子穿好裤子便离开了实验室');
-    love < 75 &&
-      (await era.printAndWait(
-        `留下躺在地板上，肚子如气球一般涨起，嘴角还在不停流淌着白汁的 ${me.name} 在室内无助的喘着气`,
-      ));
+
+    await era.printAndWait(
+      `留下躺在地板上，肚子如气球一般涨起，${
+        love < 75
+          ? `嘴角还在不停流淌着白汁的 ${me.name} 在室内无助的喘着气`
+          : `还在不停向外喷出白汁的 ${me.name} 无力的清扫地面`
+      }`,
+    );
     await era.printAndWait(
       `奖励还是惩罚……${love < 75 ? `${me.name} 望向角落的扫具柜` : ''}`,
     );

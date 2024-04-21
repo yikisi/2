@@ -65,6 +65,8 @@ handlers[check_stages.mec_race_cloth] = (chara_id) => {
 
 handlers[check_stages.mec_race_customize] = () => {};
 
+handlers[check_stages.mec_race_register_enabled] = () => true;
+
 handlers[check_stages.mec_relation_buff] = () => 0;
 
 handlers[check_stages.mec_sex_acceptable] = () => 0;
@@ -74,6 +76,8 @@ handlers[check_stages.mec_status] = () => [];
 handlers[check_stages.mec_success_rate] = () => 0;
 
 handlers[check_stages.mec_talents] = () => [];
+
+handlers[check_stages.mec_train_enabled] = () => true;
 
 handlers[check_stages.mec_train_buff] = () => 0;
 

@@ -13,6 +13,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
+const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -55,6 +56,30 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
 handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
   aim_races[extra_flag.race];
+
+/**
+ * @param {number} race
+ * @param {number} rank
+ */
+handlers[check_stages.after_race] = ({ race, rank }) => {
+  if (new TachyonEduMarks().plan_b === 1) {
+    if (race === race_enum.kiku_sho) {
+      add_event(
+        event_hooks.week_end,
+        new EventObject(32, cb_enum.edu).set_arg('limited_tachyon'),
+      );
+    } else if (
+      race === race_enum.arim_kin &&
+      era.get('cflag:25:育成回合计时') === 95 + 48 &&
+      rank === 1
+    ) {
+      add_event(
+        event_hooks.week_end,
+        new EventObject(32, cb_enum.edu).set_arg('ending'),
+      );
+    }
+  }
+};
 
 handlers[check_stages.next_week] = () => {
   const edu_weeks = era.get('cflag:25:育成回合计时');

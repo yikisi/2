@@ -15,6 +15,8 @@ class TachyonLifeMarks extends LifeEventMarks {
   ambiguous;
   // 情人节事件标记 - 表白用
   choco;
+  // 实验的奖励
+  reward;
 
   constructor() {
     super(32);

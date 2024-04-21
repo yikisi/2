@@ -4,7 +4,7 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const {
   get_chara_talk,
-  say_by_passer_by,
+  say_by_passer_by_and_wait,
 } = require('#/utils/chara-talk-factory');
 
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
@@ -263,14 +263,14 @@ module.exports = (handlers) => {
       '这种气氛到了午休时间增长到了极限，在午餐时间的食堂爆发到了极限',
     );
     era.println();
-    await say_by_passer_by('路人训练员A', [
+    await say_by_passer_by_and_wait('路人训练员A', [
       '所有',
       tachyon.get_uma_sex_title(),
       '都开始暴走了！',
       tachyon.sex,
       '们不知道为什么忽然开始缠着自己的训练员要便当！',
     ]);
-    await say_by_passer_by('路人训练员A', [
+    await say_by_passer_by_and_wait('路人训练员A', [
       '不是亲手做的就不行！天杀的，',
       tachyon.sex,
       '们到底是怎么分辨出便当是不是训练员做的！',

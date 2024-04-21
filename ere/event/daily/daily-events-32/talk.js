@@ -17,6 +17,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 module.exports = async () => {
   const buffer = [],
@@ -27,7 +28,18 @@ module.exports = async () => {
     me = get_chara_talk(0),
     tachyon = get_chara_talk(32),
     relation = era.get('relation:32:0');
-  if (relation < 75) {
+  if (edu_marks.tenn_spr) {
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 想与 ',
+      tachyon.get_colored_name(),
+      ' 聊 ',
+      race_infos[race_enum.tenn_spr].get_colored_name(),
+      ' 时的事，但',
+      tachyon.sex,
+      '马上就跑不见了',
+    ]);
+  } else if (relation < 75) {
     if (life_marks.talk >= 10) {
       await tachyon.say_and_wait([
         '……',
@@ -648,8 +660,8 @@ module.exports = async () => {
           await tachyon.say_and_wait(
             '除了原来的药以外，再多加这种药剂……之后我会好好改良到你都无法挑剔的口味出来的',
           );
-          era.printButton('难道说……', 1);
-          era.printButton('……难道说……', 2);
+          era.printButton('「难道说……」', 1);
+          era.printButton('「……难道说……」', 2);
           const ret = await era.input();
           await era.printAndWait('红茶的味道');
           await era.printAndWait('对口味的考察及改良');
@@ -731,7 +743,7 @@ module.exports = async () => {
               '没有错……无论如何，只有这件事是绝对必须，一定要趁着现在说出口的',
             );
             era.printButton(
-              '只有我，才是你永远，唯一的（实）豚（验）鼠（品）',
+              '「只有我，才是你永远，唯一的（实）豚（验）鼠（品）」',
               1,
             );
             await era.input();

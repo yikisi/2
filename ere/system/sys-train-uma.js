@@ -17,8 +17,8 @@ const { location_enum } = require('#/data/locations');
 const {
   attr_enum,
   attr_names,
-  time_cost,
   fumble_border,
+  time_cost,
 } = require('#/data/train-const');
 
 /**
@@ -137,7 +137,9 @@ module.exports = {
       success_rate = sys_get_succ_rate(chara_id, attr, extra_buff);
     const flag_success = Math.random() * 100 < success_rate;
 
-    await call_edu_script(chara_id, event_hooks.train, { attr });
+    if (await call_edu_script(chara_id, event_hooks.train, { attr })) {
+      return;
+    }
     era.println();
 
     if (flag_success) {

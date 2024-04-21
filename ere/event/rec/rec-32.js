@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
+const check_before_rec = require('#/event/rec/snippets/check-before-rec');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -13,9 +14,10 @@ const recruit_flags = require('#/data/event/recruit-flags');
 /**
  * 爱丽速子的招募事件，id=32
  *
- * @author 名贵易碎电子盆栽孕袋女士
+ * @author 幽白書
  */
 module.exports = {
+  override: true,
   /**
    * @param {number} stage_id
    * @returns {Promise<boolean>}
@@ -26,6 +28,9 @@ module.exports = {
 
     switch (stage_id) {
       case event_hooks.recruit:
+        if (await check_before_rec(32)) {
+          return false;
+        }
         era.print(
           `${me.name} 在今天的选拔赛看到了难忘的一幕，一位有着绝代跑姿的${tachyon.get_uma_sex_title()}`,
         );
@@ -168,9 +173,7 @@ module.exports = {
 
         new EventMarks(0).sub(event_hooks.recruit_start);
         era.set('cflag:32:招募状态', recruit_flags.yes);
-        if (era.get('cflag:25:招募状态') !== recruit_flags.yes) {
-          era.set('callname:25:0', `豚鼠${me.get_adult_sex_title()}`);
-        }
+        era.set('callname:32:0', '训练员君');
         add_event(
           event_hooks.week_end,
           new EventObject(32, cb_enum.edu).set_arg('beginning'),

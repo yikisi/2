@@ -675,6 +675,7 @@ async function race_page(race) {
     sys_change_tired(id, 3);
     sys_call_check(id, check_stages.after_race, {
       aim_race: aim_race_dict[id] > 0,
+      contestants,
       edu_weeks,
       pop: uma.pop[0],
       race,
@@ -739,6 +740,7 @@ async function race_page(race) {
     } else {
       era.drawLine();
       await sys_call_edu_event(ret, event_hooks.race_end, {
+        contestants,
         race,
         rank: race_rank[ret],
       });

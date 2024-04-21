@@ -9,7 +9,8 @@ class PersonalEventMarks {
   constructor(chara_id, param_name) {
     this.obj =
       era.get(`cflag:${chara_id}:${param_name}`) ||
-      era.set(`cflag:${chara_id}:${param_name}`, {});
+      era.set(`cflag:${chara_id}:${param_name}`, {}) ||
+      {};
   }
 
   static register_marks(obj) {

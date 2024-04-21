@@ -324,7 +324,7 @@ module.exports = async () => {
               { isBr: true },
               '黑衣剑士-星爆气流斩准备就绪',
               { isDivider: true },
-              '鬼鼠',
+              '幽白書',
             ],
           ],
           [[{ color: get_chara_color(1), content: '特别周' }], 'wwm'],
@@ -364,7 +364,7 @@ module.exports = async () => {
             ],
             '梦露',
           ],
-          [[{ color: get_chara_color(32), content: '爱丽速子' }], '鬼鼠'],
+          [[{ color: get_chara_color(32), content: '爱丽速子' }], '幽白書'],
           [
             [{ color: get_chara_color(37), content: '荣进闪耀' }],
             '爱放箭的袁本初',

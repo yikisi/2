@@ -78,7 +78,7 @@ function tachyon_default_talk(buffer, tachyon, me, callname, edu_marks) {
       era.println();
       await tachyon.say_and_wait([callname, '，怎么了吗？']);
       era.println();
-      await era.printAndWait('没什么');
+      await me.say_and_wait('没什么');
       await era.printAndWait([
         '在 ',
         me.get_colored_name(),
@@ -145,17 +145,29 @@ function tachyon_default_talk(buffer, tachyon, me, callname, edu_marks) {
         await me.say_and_wait('难道不是母性吗？');
       }
       era.println();
-      await tachyon.say_and_wait([
-        '不是……这种感觉很难说明，等你变成',
-        tachyon.get_uma_sex_title(),
-        '大概就能懂了吧',
-      ]);
-      era.println();
-      await me.say_and_wait([
-        '不要说的好像我总有一天会变成',
-        tachyon.get_uma_sex_title(),
-        '一样啊！？',
-      ]);
+      if (era.get('cflag:0:种族')) {
+        await tachyon.say_and_wait([
+          '明明已经成为',
+          me.get_uma_sex_title(),
+          '了还不懂吗？',
+          callname,
+          ' 真是迟钝呢',
+        ]);
+        era.println();
+        await me.say_and_wait('……听不懂你在说什么');
+      } else {
+        await tachyon.say_and_wait([
+          '不是……这种感觉很难说明，等你变成',
+          tachyon.get_uma_sex_title(),
+          '大概就能懂了吧',
+        ]);
+        era.println();
+        await me.say_and_wait([
+          '不要说的好像我总有一天会变成',
+          tachyon.get_uma_sex_title(),
+          '一样啊！？',
+        ]);
+      }
     },
     async () => {
       await tachyon.say_and_wait('sky君真是个好孩子啊……');

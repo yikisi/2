@@ -838,7 +838,7 @@ handlers[
 /**
  * 速子的日常事件，id=32
  *
- * @author 名贵易碎电子盆栽孕袋女士
+ * @author 幽白書
  * @author 黑奴一号 黑奴队长（修订）
  */
 module.exports = {

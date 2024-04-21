@@ -14,6 +14,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const chara_colors = require('#/data/chara-colors').chara_colors[52];
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
+const { race_enum } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
 /** @type {Record<string,function(HookArg,Record<string,*>,EventObject):Promise<*>>} */
@@ -33,7 +34,6 @@ const week_start_handlers = {};
 const loop1 = require('#/event/edu/edu-events-52/week-start-loop-1');
 const loop2 = require('#/event/edu/edu-events-52/week-start-loop-2');
 const loop3 = require('#/event/edu/edu-events-52/week-start-loop-3');
-const { race_enum } = require('#/data/race/race-const');
 
 week_start_handlers[95 + 46] = async (
   urara,

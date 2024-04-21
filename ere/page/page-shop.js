@@ -4,18 +4,18 @@ const era = require('#/era-electron');
 
 const date_indicator = require('#/page/components/date-indicator');
 
-const { money_color, attr_change_colors } = require('#/data/color-const');
+const { attr_change_colors, money_color } = require('#/data/color-const');
+const shop_desc = require('#/data/desc/shop-desc.json');
 const { location_name } = require('#/data/locations');
-const shop_desc = require('#/data/shop-desc.json');
 
-/**
- * @param {({id:number,[limit]:boolean}|number)[]} item_list
- */
+/** @param {({id:number,[limit]:boolean}|number)[]} item_list */
 module.exports = async (item_list) => {
   const hash = crypto.createHash('md5');
   hash.update(era.get('callname:0:-1') + era.get('flag:当前回合数'));
   const item_keys = era.get('itemkeys'),
-    off_index = Number(`0x${hash.digest('hex').substring(0, 2)}`),
+    off_index = Number(
+      `0x${hash.digest('hex').substring(0, Math.max(Number(item_keys.length).toString(16).length, 1))}`,
+    ),
     off = item_keys[off_index % item_keys.length],
     price_cache = era.get(`itemprice:${off}`),
     in_list = item_list.filter((e) => e === off || e.id === off).length > 0;

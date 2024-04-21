@@ -6,7 +6,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const {
   get_chara_talk,
-  say_by_passer_by,
+  say_by_passer_by_and_wait,
 } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
@@ -135,7 +135,7 @@ module.exports = async () => {
   await era.printAndWait('不，能够理解，但做不到的事就是做不到');
   await era.printAndWait('就像已经清醒的人是无法回到梦境的一样');
   era.println();
-  await say_by_passer_by(
+  await say_by_passer_by_and_wait(
     '站街少女',
     '先生，看您一个人好像很寂寞的样子……有没有兴趣，一起度过春宵一刻呢♡',
   );
