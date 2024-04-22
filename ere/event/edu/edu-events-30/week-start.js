@@ -1,16 +1,20 @@
 const era = require('#/era-electron');
 
-const CharaTalk = require('#/utils/chara-talk');
+const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 
-const chara_talk = new CharaTalk(30);
-
-const { location_enum } = require('#/data/locations');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const {
+  get_chara_talk,
+  say_by_passer_by,
+} = require('#/utils/chara-talk-factory');
+
+const chara_talk = get_chara_talk(30);
+
+const { location_enum } = require('#/data/locations');
+
 const your_name = era.get('callname:0:-2');
-const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
-const { say_by_passer_by } = require('#/utils/chara-talk');
 
 module.exports = async function () {
   const me = get_chara_talk(0),
@@ -324,7 +328,7 @@ module.exports = async function () {
     await chara_talk.say_and_wait(`是吗！那么……`);
     await era.printAndWait(`说完这话的 ${chara_talk.name}跑了出去。`);
     era.drawLine({ content: '过了一会儿' });
-    await era.printAndWait(`咚！！`, { fontSize: '30px' });
+    await era.printAndWait(`咚！！`, { fontSize: '1.875rem' });
     await era.printAndWait(
       `……桌子上如山般堆放着 ${chara_talk.name}带来的巧克力。`,
     );

@@ -306,7 +306,7 @@ module.exports = async (hook) => {
             {
               align: 'center',
               color: chara_talk.color,
-              fontSize: '22px',
+              fontSize: '1.375rem',
             },
           );
           await me.say_and_wait(`有多喜欢！`);
@@ -315,7 +315,7 @@ module.exports = async (hook) => {
             {
               align: 'center',
               color: chara_talk.color,
-              fontSize: '30px',
+              fontSize: '1.875rem',
             },
           );
           await era.printAndWait(

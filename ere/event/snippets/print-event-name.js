@@ -35,14 +35,14 @@ async function print_event_name(name, chara, color, _offset) {
         {
           config: {
             color: color || chara.color,
-            fontSize: '28px',
+            fontSize: '1.75rem',
             fontWeight: 'bold',
           },
           content: name,
           type: 'text',
         },
         {
-          config: { color: color || chara.color, fontSize: '12px' },
+          config: { color: color || chara.color, fontSize: '0.75rem' },
           content: chara.name,
           type: 'text',
         },

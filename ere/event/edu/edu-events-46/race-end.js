@@ -183,7 +183,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`负责人「已经打电话叫救护车了。」`);
     await era.printAndWait(`负责人「总之先赶快抬到医务室里。」`);
     await era.printAndWait(`飞鹰子「训练员${me.get_adult_sex_title()}?」`, {
-      fontSize: '10px',
+      fontSize: '0.5rem',
     });
     await era.printAndWait(
       `轻轻将飞鹰子背了起来，顺着负责人的指示向着医务室跑去。`,
@@ -191,7 +191,7 @@ module.exports = async (hook, extra_flag) => {
     era.printButton(`如果你有什么事的话，我也`, 1);
     await era.input();
     await era.printAndWait(`飞鹰子「是训练员${me.get_adult_sex_title()}吗?」`, {
-      fontSize: '12px',
+      fontSize: '0.75rem',
     });
     await era.printAndWait(`似乎飞鹰子在说着什么一样。`);
     await era.printAndWait(

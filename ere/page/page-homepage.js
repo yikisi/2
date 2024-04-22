@@ -44,12 +44,12 @@ let random_event,
 
 async function next_week() {
   era.drawLine();
-  era.print('时间开始流动……', { align: 'center', fontSize: '24px' });
+  era.print('时间开始流动……', { align: 'center', fontSize: '1.5rem' });
   await sys_next_week();
   era.drawLine();
   await era.printAndWait('新的一周开始了……', {
     align: 'center',
-    fontSize: '24px',
+    fontSize: '1.5rem',
   });
 }
 
@@ -257,7 +257,7 @@ module.exports = async () => {
         era.print('GAME OVER', {
           align: 'center',
           color: buff_colors[3],
-          fontSize: '48px',
+          fontSize: '3rem',
           fontWeight: 'bold',
           isParagraph: true,
         });

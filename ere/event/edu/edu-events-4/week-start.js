@@ -829,7 +829,7 @@ module.exports = async function (hook, _, event_object) {
       {
         align: 'center',
         color: me.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
         fontWeight: 'bold',
       },
     );

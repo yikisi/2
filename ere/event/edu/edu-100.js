@@ -1,13 +1,15 @@
 const era = require('#/era-electron');
 
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
-const { race_enum } = require('#/data/race/race-const');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const print_event_name = require('#/event/snippets/print-event-name');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-const print_event_name = require('../snippets/print-event-name');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const get_attr_and_print_in_event = require('../snippets/get-attr-and-print-in-event');
+const { race_enum } = require('#/data/race/race-const');
 
 const chara_talk = get_chara_talk(100);
 
@@ -1256,7 +1258,7 @@ handlers[event_hooks.week_start] = async () => {
       await era.printAndWait('既然“犯了一次错误就将败下阵来”，那么——');
       era.drawLine({
         content: '【只·要·一·次·错·都·不·犯·不·就·好·了·吗？】',
-        fontSize: '50px',
+        fontSize: '3rem',
       });
       await era.printAndWait(
         '暴雨梨花般的柔拳，永不停歇的柔拳，坚毅勇绝的柔拳——',

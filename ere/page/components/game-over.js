@@ -195,7 +195,7 @@ async function game_over() {
             era.drawLine();
             await era.printAndWait('性 奴 宣 言', {
               align: 'center',
-              fontSize: '24px',
+              fontSize: '1.5rem',
               fontWeight: 'bold',
               isParagraph: true,
             });
@@ -419,7 +419,7 @@ async function game_over() {
     era.print('GAME OVER', {
       align: 'center',
       color: buff_colors[3],
-      fontSize: '48px',
+      fontSize: '3rem',
       fontWeight: 'bold',
       isParagraph: true,
     });

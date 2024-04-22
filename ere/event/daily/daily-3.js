@@ -39,7 +39,7 @@ handlers[event_hooks.load_talk] = async () => {
           fontWeight: 'bold',
         },
       ],
-      { fontSize: '24px' },
+      { fontSize: '1.5rem' },
     );
     await era.printAndWait(
       [
@@ -50,7 +50,7 @@ handlers[event_hooks.load_talk] = async () => {
           fontWeight: 'bold',
         },
       ],
-      { fontSize: '48px' },
+      { fontSize: '3rem' },
     );
   }
 };

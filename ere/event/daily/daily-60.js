@@ -548,7 +548,7 @@ handlers[event_hooks.load_talk] = async () => {
           content: `「${sys_get_callname(60, 0)}————！！」`,
         },
       ],
-      { fontSize: '48px' },
+      { fontSize: '3rem' },
     );
   } else {
     await nice_nature.say_and_wait(

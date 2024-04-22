@@ -1,9 +1,9 @@
 const era = require('#/era-electron');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
+const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
-const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -11,6 +11,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
 const event_hooks = require('#/data/event/event-hooks');
+
 const chara_talk = get_chara_talk(46);
 
 /** @type {Record<string,function(stage_id:HookArg,extra_flag:*):Promise<boolean>>} */
@@ -527,7 +528,7 @@ handlers[event_hooks.out_church] = async function () {
       await era.printAndWait(`飞鹰子不知何时突然充满了活力。`);
       await era.printAndWait(
         `醒目飞鹰「...明明飞鹰子这么喜欢你，训练员先生可真是木头呢。」。`,
-        { color: chara_talk.color, fontSize: '12px' },
+        { color: chara_talk.color, fontSize: '0.75rem' },
       );
       await chara_talk.say_and_wait(`什么都没有哦⭐`);
       await era.printAndWait(`带着微妙的感觉两人离开了神社。`);
@@ -691,7 +692,7 @@ handlers[event_hooks.out_station] = async function (hook) {
           await era.printAndWait(`两人坐在长椅上一起吃着冰淇淋。`);
           await era.printAndWait(`醒目飞鹰「稍微有点近呢」`, {
             color: chara_talk.color,
-            fontSize: '12px',
+            fontSize: '0.75rem',
           });
           await chara_talk.say_and_wait(`什么都没有哦⭐`);
           break;

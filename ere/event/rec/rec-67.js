@@ -108,7 +108,7 @@ async function common_comments(me, daiya, other) {
   era.println();
   await era.printAndWait('于是你和里见光钻的三年开始了！', {
     color: daiya.color,
-    fontSize: '24px',
+    fontSize: '1.5rem',
   });
 }
 
@@ -331,14 +331,14 @@ module.exports = {
             columns: [
               {
                 config: {
-                  fontSize: '28px',
+                  fontSize: '1.75rem',
                   fontWeight: 'bold',
                 },
                 content: '？？？',
                 type: 'text',
               },
               {
-                config: { color: daiya.color, fontSize: '12px' },
+                config: { color: daiya.color, fontSize: '0.75rem' },
                 content: '？？？',
                 type: 'text',
               },

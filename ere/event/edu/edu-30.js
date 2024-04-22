@@ -3,18 +3,18 @@ const era = require('#/era-electron');
 const CharaTalk = require('#/utils/chara-talk');
 
 const event_hooks = require('#/data/event/event-hooks');
+const { attr_names, fumble_result } = require('#/data/train-const');
 const { add_event } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { attr_names, fumble_result } = require('#/data/train-const');
 
-const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
+const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
   sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
-const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
 const chara_talk = new CharaTalk(30);
 const handlers = {};
 
@@ -180,7 +180,7 @@ handlers[event_hooks.train_fail] =
     if (extra_flag.fumble) {
       await era.printAndWait('严禁逞强！', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       era.println();
       await chara_talk.say_and_wait(`唔唔……`);
@@ -407,7 +407,7 @@ handlers[event_hooks.out_shopping] = async (_, __, event_object) => {
     );
     await era.printAndWait(`千钧一发之际，你只来得及抱住${chara_talk.name}。`);
     await me.say_and_wait(`没事吧？`);
-    await era.printAndWait(`咚！`, { fontSize: '40px' });
+    await era.printAndWait(`咚！`, { fontSize: '2.5rem' });
     await chara_talk.say_and_wait(
       `哥、${me.sex_code - 1 ? '姐姐' : '哥哥'}大人！？`,
     );
@@ -470,7 +470,7 @@ handlers[event_hooks.out_shopping] = async (_, __, event_object) => {
     await chara_talk.say_and_wait(`……`);
     await era.printAndWait(`难道是，${chara_talk.name}的…缘故？`, {
       color: chara_talk.color,
-      fontSize: '12px',
+      fontSize: '0.75rem',
     });
     await era.printAndWait(`那个微小的声音，不知为何却回响得特别巨大——`);
     get_attr_and_print_in_event(30, [0, 0, 0, 5, 0], 0);

@@ -10,11 +10,11 @@ const sys_prepare_race = require('#/system/race/sys-prepare-race');
 const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
-  sys_reg_race,
   sys_change_attr_and_print,
-  sys_change_motivation,
   sys_change_lust,
+  sys_change_motivation,
   sys_change_pressure,
+  sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
@@ -34,11 +34,11 @@ const { get_random_value } = require('#/utils/value-utils');
 const { get_chara_color } = require('#/data/chara-colors');
 const {
   adaptability_colors,
-  motivation_colors,
-  money_color,
   el_danger_color,
   el_success_color,
   el_warning_color,
+  money_color,
+  motivation_colors,
 } = require('#/data/color-const');
 const { attr_background_colors, attr_colors } = require('#/data/const.json');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
@@ -48,9 +48,9 @@ const event_hooks = require('#/data/event/event-hooks');
 const {
   get_adaptability_rank,
   get_attr_rank,
+  get_rank_level,
   get_status,
   get_trainer_level,
-  get_rank_level,
 } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
@@ -60,9 +60,9 @@ const {
   race_rewards,
 } = require('#/data/race/race-const');
 const {
-  motivation_names,
-  attr_names,
   adaptability_names,
+  attr_names,
+  motivation_names,
 } = require('#/data/train-const');
 
 const adaptability2race = [
@@ -148,7 +148,7 @@ function page_race_header(_info) {
         {
           config: {
             align: 'center',
-            fontSize: '24px',
+            fontSize: '1.5rem',
             width: 8,
           },
           content: [_info.get_colored_name_with_class()],
@@ -285,7 +285,7 @@ async function race_page(race) {
     {
       config: {
         align: 'center',
-        fontSize: '24px',
+        fontSize: '1.5rem',
       },
       content: [info.get_colored_name_with_class()],
       type: 'text',
@@ -327,7 +327,7 @@ async function race_page(race) {
             config: {
               align: 'center',
               color: get_chara_color(cur_chara.index_chara),
-              fontSize: '20px',
+              fontSize: '1.25rem',
             },
             content: cur_chara.name,
             type: 'text',

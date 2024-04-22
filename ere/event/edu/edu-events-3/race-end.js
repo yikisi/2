@@ -732,24 +732,24 @@ module.exports = async (_, extra_flag) => {
       await era.printAndWait(`观众「${teio.name}！」`, {
         align: 'center',
         color: get_gradient_color(undefined, teio.color, 1 / 3),
-        fontSize: '18px',
+        fontSize: '1.125rem',
       });
       await era.printAndWait(`观众「${teio.name}！！」`, {
         align: 'center',
         color: get_gradient_color(undefined, teio.color, 2 / 3),
-        fontSize: '20px',
+        fontSize: '1.25rem',
       });
       await era.printAndWait(`观众「${teio.name}！！！」`, {
         align: 'center',
         color: teio.color,
-        fontSize: '22px',
+        fontSize: '1.375rem',
       });
       era.println();
 
       await era.printAndWait(`解说「${teio.name}——奇迹复活！」`, {
         align: 'center',
         color: teio.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
         fontWeight: 'bold',
       });
     } else {

@@ -325,6 +325,36 @@ module.exports = (handlers) => {
     }
   };
 
+  handlers[855] = async () => {
+    const ret = await select_target_in_storage(850, (e) =>
+      era.get(`status:${e}:发胖`),
+    );
+    if (ret !== undefined) {
+      await era.printAndWait([
+        get_chara_talk(ret).get_colored_name(),
+        ' 暂时不发胖了……',
+      ]);
+      era.set(`status:${ret}:发胖`, 0);
+      era.add('item:量子减肥药', -1);
+      return true;
+    }
+  };
+
+  handlers[856] = async () => {
+    const ret = await select_target_in_storage(851, (e) =>
+      era.get(`status:${e}:头风`),
+    );
+    if (ret !== undefined) {
+      await era.printAndWait([
+        get_chara_talk(ret).get_colored_name(),
+        ' 暂时不偏头痛了……',
+      ]);
+      era.set(`status:${ret}:头风`, 0);
+      era.add('item:布洛芬', -1);
+      return true;
+    }
+  };
+
   handlers[860] = async () => {
     const aim = await select_target_in_storage(
       860,
