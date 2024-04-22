@@ -2,8 +2,8 @@
 
 const RaceInfo = require('#/data/race/model/race-info');
 const {
-  mod_stamina_cost_mess_grass,
   mod_stamina_cost_mess_dirt,
+  mod_stamina_cost_mess_grass,
   raceDecel,
 } = require('#/data/race/race-const.json');
 
@@ -333,31 +333,27 @@ function sys_sim_race(list_chara, race_info) {
       }
     }
 
-    //计算红技时换成以index遍历
-    for (let indUma in list_in_race) {
-      for (let itemSkill of list_in_race[indUma].list_skill) {
-        if (itemSkill.skilldata.typeDebuff && itemSkill.triggerFlag) {
-          itemSkill.triggerTimeCount++;
-          for (let targUma in list_in_race) {
+    // 计算红技时换成以index遍历
+    list_in_race.forEach((uma, indUma) =>
+      uma.list_skill.forEach((skill) => {
+        if (skill.skilldata.typeDebuff && skill.triggerFlag) {
+          skill.triggerTimeCount++;
+          list_in_race.forEach((target, indTar) => {
             if (
-              targUma !== indUma &&
-              targUma >= indUma - itemSkill.skilldata.rangeLeft &&
-              targUma <= indUma + itemSkill.skilldata.rangeRight
+              indTar !== indUma &&
+              indTar >= indUma - skill.skilldata.rangeLeft &&
+              indTar <= indUma + skill.skilldata.rangeRight
             ) {
-              list_in_race[targUma].race.velocityReal -=
-                itemSkill.skilldata.debuffVelocityReal;
-              list_in_race[targUma].race.velocityIdeal -=
-                itemSkill.skilldata.debuffVelocityIdeal;
-              list_in_race[targUma].race.acceleration -=
-                itemSkill.skilldata.debuffAcceleration;
-              list_in_race[targUma].race.stamina -=
-                itemSkill.skilldata.debuffStamina *
-                list_in_race[targUma].base.stamina;
+              target.race.velocityReal -= skill.skilldata.debuffVelocityReal;
+              target.race.velocityIdeal -= skill.skilldata.debuffVelocityIdeal;
+              target.race.acceleration -= skill.skilldata.debuffAcceleration;
+              target.race.stamina -=
+                skill.skilldata.debuffStamina * target.base.stamina;
             }
-          }
+          });
         }
-      }
-    }
+      }),
+    );
 
     //结算
     for (let itemUma of list_in_race) {
