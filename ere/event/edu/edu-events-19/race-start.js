@@ -74,7 +74,8 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `数码的双手化作爪子在空中舞动，瞳孔里饱含着「美味」的含义……`,
     );
-    await me.say_and_wait(`数码你可不要扑上去了哦。`);
+    era.printButton(`数码你可不要扑上去了哦。`, 1);
+    await era.input();
     await chara_talk.say_and_wait(`不，本来之前也没有扑过吧。`);
     await chara_talk.say_and_wait(`说到这里，训练员，总感觉好奇怪啊。`);
     await chara_talk.say_and_wait(
@@ -131,12 +132,14 @@ module.exports = async (hook, extra_flag) => {
   } else if (extra_flag.race === race_enum.japa_dir) {
     await print_event_name('泥地德比开始！', chara_talk);
     await chara_talk.say_and_wait(
-      `（我还没注意到，${chara_talk.get_uma_sex_title()}酱们的尊能源的根源，那一定是无比珍贵之物……）`,
+      `我还没注意到，${chara_talk.get_uma_sex_title()}酱们的尊能源的根源，那一定是无比珍贵之物……`,
+      true,
     );
     await chara_talk.say_and_wait(
-      `（大井……夜晚……泥地……在这少来的异乡赛道，在这特殊的赛场，也许，就存在着我想要找到的秘密……）`,
+      `大井……夜晚……泥地……在这少来的异乡赛道，在这特殊的赛场，也许，就存在着我想要找到的秘密……`,
+      true,
     );
-    await era.drawLine();
+    era.drawLine();
     await chara_talk.say_and_wait(
       `『日本泥地达比』，总感觉这场比赛的氛围很独特呢。`,
     );

@@ -28,6 +28,7 @@ module.exports = async function (hook, _, event_object) {
       `来自${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}的礼物`,
       chara_talk,
     );
+    // 丸善斯基邀请玩家开车兜风，
     await era.printAndWait(`训练室`);
     await era.printAndWait(`咚咚咚`);
     await chara_talk.say_and_wait(

@@ -11,7 +11,8 @@ class AgEduMarks extends EduEventMarks {
   yuusha;
   // 勇者的战斗
   yuusha_fight;
-
+  //闪现，应援活动
+  shine_girl;
   constructor() {
     super(19);
     EduEventMarks.register_marks(this);

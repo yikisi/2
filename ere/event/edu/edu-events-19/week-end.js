@@ -68,10 +68,9 @@ module.exports = async function () {
       );
       await chara_talk.say_and_wait(`请务必！`);
       await chara_talk.say_and_wait(
-        `在夏天的末尾，数码和憧憬的${chara_talk.get_uma_sex_title()}建立了联系。`,
+        `太过于光荣连尾巴都弹跳起来了！数码居然要和那个女神一起！`,
       );
-
-      await me.say_and_wait(`很兴奋是吧！那就正是在状态上啊！`);
+      await era.printAndWait(`在夏天的末尾，数码和憧憬的马娘建立了联系。`);
     }
   }
   if (edu_weeks === 95 + 32) {

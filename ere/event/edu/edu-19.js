@@ -34,6 +34,91 @@ handlers[event_hooks.out_start] = async (event_object) => {
     add_event(event_hooks.out_start, event_object);
     return;
   }
+  const event_marks = new AgEduMarks(),
+    chara_talk = get_chara_talk(19);
+  if (event_marks.shine_girl === 1) {
+    await print_event_name('闪现，应援活动！', chara_talk);
+    await chara_talk.say_and_wait(`呜呼呼，诶嘿嘿！`);
+    await era.printAndWait(
+      `在训练室的数码眯着眼，应该是在想象着${chara_talk.get_uma_sex_title()}，发出来了可能会让人拿出手机报警的笑声，看起来十分高兴。`,
+    );
+    await me.say_and_wait(`怎么了？这么高兴？`);
+    await chara_talk.say_and_wait(`我在想接下来的应援活动怎么做啦！`);
+    await era.printAndWait(
+      `然后数码大肆地说了一堆推论，大体上就是应援可以为数码带去力量，所以应援也算锻炼。`,
+    );
+    await era.printAndWait(`嗯？好像还挺有道理？`);
+    await me.say_and_wait(`既然这么说的话，那我也一起去吧。`);
+    await era.printAndWait(`你决定也一起过去，也可以顺便了解一下数码。`);
+    await chara_talk.say_and_wait(
+      `诶？试试可以啦……不过，这是很发烧友向的哦？会很累的哦？`,
+    );
+    era.drawLine();
+    await era.printAndWait(`她说的对。`);
+    await chara_talk.say_and_wait(`来阪神赛马场真是太好了！！精彩的出道战！`);
+    await chara_talk.say_and_wait(
+      `第一名的${chara_talk.get_uma_sex_title()}酱，可是继承累去年隐退的姐姐的意志出道的呢！这种传承感，太燃啦哇！`,
+    );
+    await era.printAndWait(`对于你来说，`);
+    await chara_talk.say_and_wait(
+      `互不相让的两人，中山赛马场的直线可是很短的哦！哇！`,
+    );
+    await chara_talk.say_and_wait(
+      `呜呜……太精彩了，超越了适性和理论，源自内心的竞争，太棒了……`,
+    );
+    await era.printAndWait(`想要在一天之内，`);
+    await chara_talk.say_and_wait(
+      `大井赛马场的泥地赛道，相比起多为英里的其他赛道，是更容易看到精彩的差追的赛道……`,
+    );
+    await chara_talk.say_and_wait(
+      `无视这个理论决定选择逃跑法的她，虽然结果输了，但是开心地笑了`,
+    );
+    await era.printAndWait(`把日本的赛马场几乎逛个遍，`);
+    await chara_talk.say_and_wait(
+      `这次出场的那个芦毛${chara_talk.get_uma_sex_title()}，前几次成绩一直都不算好，但是她还斗志昂扬地站在那里啊！`,
+    );
+    await era.printAndWait(`还是有一点点……困难的。`);
+    await chara_talk.say_and_wait(
+      `感受到了吗？！${chara_talk.get_uma_sex_title()}酱们的炙热！耀眼！震撼的连击！`,
+    );
+    await era.printAndWait(`感受到了，很浓，很劲啊！`);
+    await era.printAndWait(
+      `跟着挥舞的双手，手臂不知何时失去知觉，鼓掌的双手，掌心也肿了起来，为赶线奔跑的双腿，也经历了一次磨难。`,
+    );
+    await era.printAndWait(
+      `再看旁边数码，精气神十足，呼吸都不带喘的，她……是不是天生就是干这个的？`,
+    );
+    await chara_talk.say_and_wait(
+      `诶？训练员是比较累了吗？嗯呐，是我没注意分寸了，果然还是太过困难了吗……`,
+    );
+    await era.printAndWait(
+      `比赛结束后，观众也早已散去，找个位置坐着也是可以的。`,
+    );
+    await chara_talk.say_and_wait(
+      `果然呐，${chara_talk.get_uma_sex_title()}酱们的那股精气神，就是想看到她们朝气满满的样子啊。`,
+    );
+    await era.printAndWait(
+      `看着只剩下被${chara_talk.get_uma_sex_title()}摧残过后的马场，数码吐出了早就表露于面的心中之言。`,
+    );
+    await era.printAndWait(
+      `能把整个赛场都炒热气氛，连天都可以掀翻，这就是${chara_talk.get_uma_sex_title()}。`,
+    );
+    await era.printAndWait(
+      `双手挂满了各种应援场贩，数码这一天可谓是收获满满。`,
+    );
+    await chara_talk.say_and_wait(
+      `真的特别开心，没想到训练员居然能跟上我的步伐！你已经可以算进核心的粉丝了！不愧是同志啊！`,
+    );
+    await era.printAndWait(`看着无比高兴的数码，你这一天的疲惫也随之而去。`);
+    await era.printAndWait(`只希望明天起来不会腰酸背痛。`);
+  }
+};
+
+handlers[event_hooks.out_start] = async (event_object) => {
+  if (era.get('flag:当前互动角色') !== 19) {
+    add_event(event_hooks.out_start, event_object);
+    return;
+  }
   const chara3_talk = get_chara_talk(3),
     chara15_talk = get_chara_talk(15),
     chara58_talk = get_chara_talk(58),
@@ -41,8 +126,8 @@ handlers[event_hooks.out_start] = async (event_object) => {
     chara64_talk = get_chara_talk(64),
     chara65_talk = get_chara_talk(65),
     event_marks = new AgEduMarks();
-  chara3_talk.name = '看起来比较孩子气的马娘';
-  chara15_talk.name = '看起来毫不在意的马娘';
+  chara3_talk.name = '看起来比较孩子气的马娘}';
+  chara15_talk.name = '看起来毫不在意的马娘}';
   chara58_talk.name = '看起来很冒失的马娘';
   chara59_talk.name = '看起来相对成熟的马娘';
   chara64_talk.name = '某个栗毛马娘';
@@ -489,7 +574,10 @@ handlers[event_hooks.out_river] = async (_, __, event_object) => {
   if (event_marks.catch_fish === 1) {
     event_marks.catch_fish++;
     await print_event_name('钓上大鱼了，不过鱼看起来不太友善', chara_talk);
-    era.println();
+    // 1
+    await era.printAndWait(
+      `去河边钓鱼是不少${chara_talk.get_uma_sex_title()}在空闲时间的选择，`,
+    );
     await era.printAndWait(
       `但你的担当${chara_talk.get_uma_sex_title()}${
         chara_talk.name
@@ -523,6 +611,7 @@ handlers[event_hooks.out_river] = async (_, __, event_object) => {
         chara_talk.sex
       }分毫……`,
     );
+    //1 - 2A
     if (era.get('cflag:20:招募状态') === 1) {
       await chara20_talk.say_and_wait(
         `哦呀哦呀，没想到训练员今天有闲情跟数码碳出来钓鱼啊，哟吼吼，居然不是我一起哟……哭哭`,
@@ -539,38 +628,58 @@ handlers[event_hooks.out_river] = async (_, __, event_object) => {
         '你不动声色地移到sky旁边，暗中猛掐了一下sky的后背，挺柔。',
       );
       await chara20_talk.say_and_wait(`诶！我只是开个玩笑啦，开个玩笑～`);
+    } else {
       await chara20_talk.say_and_wait(
-        `那么，数码碳，要不要来我亲手教一下你啊，诶嘿！`,
+        `哦呀哦呀，是数码碳啊，居然不是在岸边看着其他${chara_talk.get_uma_sex_title()}钓鱼吗？`,
       );
-      await chara_talk.say_and_wait(`噫！`);
+      await chara20_talk.say_and_wait(`还有……数码碳的训练员，出名的家伙哟～`);
       await era.printAndWait(
-        '没几秒，sky就迅速抓住了想要逃跑的数码，数码就像吃了石化术，被定住了身体。',
+        '从背后传来一个懒洋洋的声音，这个声音，你有点熟悉。',
       );
-      await chara20_talk.say_and_wait(`咕嘿！`);
+      await chara_talk.say_and_wait(`sky？！`);
       await era.printAndWait(
-        `嘴角上扬一段弧度，sky本来可以说是娇小的双手首先握住了更为小巧的数码的左手。`,
+        '惊得把数码拿在手里的鱼竿都掉了，砸出的水花都溅到了身上。',
       );
-      await chara_talk.say_and_wait(`啊吧啊吧……`);
-      await chara20_talk.say_and_wait(`来吧来吧，坐到凳子上嘛～`);
-      await era.printAndWait(
-        `一把把数码拽到了凳子边，把手搭到${chara_talk.sex}的肩膀上……`,
+      await chara20_talk.say_and_wait(
+        `哦？居然把鱼竿都弄掉了，sky我可是要生气了哦！`,
       );
-      await era.printAndWait(
-        `然后数码就像被施展了软化术一般，像一条毛毯一般，瘫坐在了凳子上。`,
+      await chara_talk.say_and_wait(
+        `不不不，这是我的不好，我的不好！我不应该来到这边和${chara_talk.get_uma_sex_title()}酱一起钓鱼的……`,
       );
-      await chara20_talk.say_and_wait(`来，抓住这个鱼竿，把鱼漂移动到那边去……`);
-      await chara_talk.say_and_wait(`啊吧啊吧……`);
-      await era.printAndWait(`看起来，数码的灵魂已经早就变成灰随风飘散了。`);
-      era.drawLine({ content: '一段时间后' });
-      await chara_talk.say_and_wait(`……！`);
-      await chara_talk.say_and_wait(`呜诶……不行了，真不行了……`);
-      await era.printAndWait(
-        `脱力躺在泥土上的数码，看起来${chara_talk.sex}今天是真不行了。`,
-      );
-      await chara20_talk.say_and_wait(`啊哈，真是个有趣的人`);
-      await era.printAndWait(
-        `与数码正成对比，sky则是精神焕发，这难道是什么新型吸精术吗。`,
-      );
+    }
+    await chara20_talk.say_and_wait(
+      `那么，数码碳，要不要来我亲手教一下你啊，诶嘿！`,
+    );
+    await chara_talk.say_and_wait(`噫！`);
+    await era.printAndWait(
+      '没几秒，sky就迅速抓住了想要逃跑的数码，数码就像吃了石化术，被定住了身体。',
+    );
+    await chara20_talk.say_and_wait(`咕嘿！`);
+    await era.printAndWait(
+      `嘴角上扬一段弧度，sky本来可以说是娇小的双手首先握住了更为小巧的数码的左手。`,
+    );
+    await chara_talk.say_and_wait(`啊吧啊吧……`);
+    await chara20_talk.say_and_wait(`来吧来吧，坐到凳子上嘛～`);
+    await era.printAndWait(
+      `一把把数码拽到了凳子边，把手搭到${chara_talk.sex}的肩膀上……`,
+    );
+    await era.printAndWait(
+      `然后数码就像被施展了软化术一般，像一条毛毯一般，瘫坐在了凳子上。`,
+    );
+    await chara20_talk.say_and_wait(`来，抓住这个鱼竿，把鱼漂移动到那边去……`);
+    await chara_talk.say_and_wait(`啊吧啊吧……`);
+    await era.printAndWait(`看起来，数码的灵魂已经早就变成灰随风飘散了。`);
+    era.drawLine({ content: '一段时间后' });
+    await chara_talk.say_and_wait(`……！`);
+    await chara_talk.say_and_wait(`呜诶……不行了，真不行了……`);
+    await era.printAndWait(
+      `脱力躺在泥土上的数码，看起来${chara_talk.sex}今天是真不行了。`,
+    );
+    await chara20_talk.say_and_wait(`啊哈，真是个有趣的人`);
+    await era.printAndWait(
+      `与数码正成对比，sky则是精神焕发，这难道是什么新型吸精术吗。`,
+    );
+    if (era.get('cflag:20:招募状态') === 1) {
       era.println();
       await chara20_talk.say_and_wait(`训练员哟！`);
       await era.printAndWait(
@@ -583,8 +692,8 @@ handlers[event_hooks.out_river] = async (_, __, event_object) => {
       await chara20_talk.say_and_wait(
         `哦呀哦呀，训练员居然还会吃醋的吗？该吃醋的是我吧？`,
       );
-      era.printButton(`对sky妥协`, 1);
-      era.printButton(`该说正事了`, 2);
+      era.printButton(`对sky妥协`, 1); //提升青云天空的好感度
+      era.printButton(`该说正事了`, 2); //提升爱丽数码的好感度
       const ret = await era.input();
       if (ret === 1) {
         await me.say_and_wait(`好好好，既然如此，那么下次我就和你来钓鱼。`);
@@ -655,56 +764,9 @@ handlers[event_hooks.out_river] = async (_, __, event_object) => {
         await chara20_talk.say_and_wait(`果然还是我的训练员啊！`);
         await me.say_and_wait(`嗯。`);
       }
+      era.add('relation:20:0', (ret === 1) * 5);
+      era.add('relation:19:0', (ret === 2) * 5);
     } else {
-      await chara20_talk.say_and_wait(
-        `哦呀哦呀，是数码碳啊，居然不是在岸边看着其他${chara_talk.get_uma_sex_title()}钓鱼吗？`,
-      );
-      await chara20_talk.say_and_wait(`还有……数码碳的训练员，出名的家伙哟～`);
-      await era.printAndWait(
-        '从背后传来一个懒洋洋的声音，这个声音，你有点熟悉。',
-      );
-      await chara_talk.say_and_wait(`sky？！`);
-      await era.printAndWait(
-        '惊得把数码拿在手里的鱼竿都掉了，砸出的水花都溅到了身上。',
-      );
-      await chara20_talk.say_and_wait(
-        `哦？居然把鱼竿都弄掉了，sky我可是要生气了哦！`,
-      );
-      await chara_talk.say_and_wait(
-        `不不不，这是我的不好，我的不好！我不应该来到这边和${chara_talk.get_uma_sex_title()}酱一起钓鱼的……`,
-      );
-      await chara20_talk.say_and_wait(
-        `那么，数码碳，要不要来我亲手教一下你啊，诶嘿！`,
-      );
-      await chara_talk.say_and_wait(`噫！`);
-      await era.printAndWait(
-        '没几秒，sky就迅速抓住了想要逃跑的数码，数码就像吃了石化术，被定住了身体。',
-      );
-      await chara20_talk.say_and_wait(`咕嘿！`);
-      await era.printAndWait(
-        `嘴角上扬一段弧度，sky本来可以说是娇小的双手首先握住了更为小巧的数码的左手。`,
-      );
-      await chara_talk.say_and_wait(`啊吧啊吧……`);
-      await chara20_talk.say_and_wait(`来吧来吧，坐到凳子上嘛～`);
-      await era.printAndWait(
-        `一把把数码拽到了凳子边，把手搭到${chara_talk.sex}的肩膀上……`,
-      );
-      await era.printAndWait(
-        `然后数码就像被施展了软化术一般，像一条毛毯一般，瘫坐在了凳子上。`,
-      );
-      await chara20_talk.say_and_wait(`来，抓住这个鱼竿，把鱼漂移动到那边去……`);
-      await chara_talk.say_and_wait(`啊吧啊吧……`);
-      await era.printAndWait(`看起来，数码的灵魂已经早就变成灰随风飘散了。`);
-      era.drawLine({ content: '一段时间后' });
-      await chara_talk.say_and_wait(`……！`);
-      await chara_talk.say_and_wait(`呜诶……不行了，真不行了……`);
-      await era.printAndWait(
-        `脱力躺在泥土上的数码，看起来${chara_talk.sex}今天是真不行了。`,
-      );
-      await chara20_talk.say_and_wait(`啊哈，真是个有趣的人`);
-      await era.printAndWait(
-        `与数码正成对比，sky则是精神焕发，这难道是什么新型吸精术吗。`,
-      );
       era.println();
       await chara20_talk.say_and_wait(`${chara_talk.name}的训练员——`);
       await era.printAndWait(`sky将头转向你。`);
@@ -766,8 +828,8 @@ handlers[event_hooks.out_river] = async (_, __, event_object) => {
         await era.printAndWait(
           `洒下太多热量的太阳已经由白转红，留下了你和数码在河边泥滩边。`,
         );
-        await me.say_and_wait(`(带着数码回去吧……)`);
-        await me.say_and_wait(`(怎么带呢……)`);
+        await me.say_and_wait(`带着数码回去吧……`, true);
+        await me.say_and_wait(`怎么带呢……`, true);
       } else {
         await me.say_and_wait(`青云天空，虽然我还想和你再聊一下，但是……`);
         await me.say_and_wait(
@@ -784,15 +846,16 @@ handlers[event_hooks.out_river] = async (_, __, event_object) => {
           `为${chara_talk.sex}找到比赛的理由吧……`,
         );
         await era.printAndWait(`你闭上眼，只能说声谢谢。`);
-        era.drawLine({ content: '一段时间后' });
         await era.printAndWait(
-          `数码异常的娇小，但你把${chara_talk.sex}背起来后才发现，${chara_talk.sex}的体重更显小了。`,
+          `\n数码异常的娇小，但你把${chara_talk.sex}背起来后才发现，${chara_talk.sex}的体重更显小了。`,
         );
         await era.printAndWait(
           `柔软的身体，鼻息……原来会有吗？呼在你脖子上，让你有点痒痒的。`,
         );
         await era.printAndWait(`回到之后数码狠狠地向你道歉了。`);
       }
+      era.add('relation:19:0', (ret === 1) * 5);
+      era.add('love:19', ret === 2);
     }
   }
   return true;
@@ -902,6 +965,7 @@ handlers[event_hooks.out_church] = async (_, __, event_object) => {
     await chara_talk.say_and_wait(
       `大家作为劲敌，这么一想，还挺贪心的……我可以从大家那里获得什么呢？`,
     );
+    await era.printAndWait(`\n你决定：`);
     era.printButton(`养分`, 1);
     era.printButton(`友情力量`, 2);
     era.printButton(`多样性`, 3);

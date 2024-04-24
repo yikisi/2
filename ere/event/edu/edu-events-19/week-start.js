@@ -4,6 +4,7 @@ const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -34,6 +35,10 @@ module.exports = async function () {
     await era.printAndWait(`抢到好位置的数码向你招手，你尽量挤了进去。`);
     await chara_talk.say_and_wait(`快要开始了哦！是圣王哦！`);
     await era.printAndWait(`然后……`);
+    await say_by_passer_by(
+      `解说`,
+      `接着之后的是圣王光环！从外道赶上，圣王光环是第二名！`,
+    );
     await era.printAndWait(
       `解说「接着之后的是圣王光环！从外道赶上，圣王光环是第二名！」`,
     );
@@ -62,8 +67,7 @@ module.exports = async function () {
     await era.printAndWait(
       `正因为期待着圣王的努力能得到回报，数码才会来看现场比赛，在圣王终于苦尽甘来的时候，${chara_talk.sex}哭得比在场的每个人都响。`,
     );
-    era.println();
-    await era.printAndWait(`在回去的路上——`);
+    await era.printAndWait(`\n在回去的路上——`);
     await era.printAndWait(
       `学校旁边的小河边，发现了一个低头奔跑在河边泥地的${chara_talk.get_uma_sex_title()}。`,
     );
@@ -133,8 +137,7 @@ module.exports = async function () {
     await era.printAndWait(
       `不对，这已经都涉及到最近的研究了吧，你记得这个内容还是前不久刊登在《训练员月刊》里面的研究……`,
     );
-    era.drawLine();
-    await era.printAndWait(`在后面回到训练室时……`);
+    await era.printAndWait(`\n在后面回到训练室时……`);
     await chara_talk.say_and_wait(
       `哇哇哇哇！搞砸了啊！是现实中，在眼睛里成像的怒涛桑……一不小心就……`,
     );
@@ -183,7 +186,7 @@ module.exports = async function () {
       `数码似乎是对上次${chara_talk.sex}与怒涛的谈话仍有郁结……`,
     );
     await chara_talk.say_and_wait(
-      `所以说！今年，我要再次回归起点！再次成为粉丝！以其为原则！`,
+      `\n所以说！今年，我要再次回归起点！再次成为粉丝！以其为原则！`,
     );
     await era.printAndWait(
       `不过目前来看，也还没有办法，数码想要认识到的话，还得……`,
@@ -191,6 +194,7 @@ module.exports = async function () {
     await chara_talk.say_and_wait(
       `训练员！你可以给我一些建议吗！应该如何应援？`,
     );
+    await era.printAndWait(`\n你的选择是：`);
     era.printButton(`侍奉${chara_talk.get_uma_sex_title()}酱`, 1);
     era.printButton(`读书`, 2);
     era.printButton(`从模仿中学习`, 3);
@@ -222,13 +226,7 @@ module.exports = async function () {
       await era.printAndWait(
         `就这样，数码今天回到了宿舍看书，等再次看到数码带着满脸沉浸的表情，你知道${chara_talk.sex}休息得很不错。`,
       );
-      await era.printAndWait(
-        [
-          { content: `${chara_talk.name} 的 ` },
-          ...sys_change_attr_and_print(19, '体力', 200),
-        ],
-        { isList: true },
-      );
+      sys_change_attr_and_print(19, '体力', 200);
     } else {
       await me.say_and_wait(
         `模仿一下其他${chara_talk.get_uma_sex_title()}，从中学得技能如何？`,
@@ -259,7 +257,8 @@ module.exports = async function () {
     );
     await chara_talk.say_and_wait(`怎么，要全身插满应援棒去应援吗？！`);
     await chara_talk.say_and_wait(`呜哇哇哇！我不是故意要冒犯的！`);
-    await me.say_and_wait(`不不，这样会被保安请出去的吧。`);
+    era.printButton(`不不，这样会被保安请出去的吧。`, 1);
+    await era.input();
     await era.printAndWait('就这样来到了阪神赛场，好歌剧和名将怒涛的激斗啊…');
     await era.printAndWait(
       '好歌剧的实力你比较清楚，但名将怒涛居然也能到这种地步……',
@@ -267,10 +266,10 @@ module.exports = async function () {
     await era.printAndWait(
       `最后甚至还是并列冲线，好歌剧仅仅略胜名将怒涛一筹。`,
     );
-    await chara_talk.say_and_wait(
+    await era.printAndWait(
       `是什么原因，仅仅的本格化也暂且带不来这心境的转化……`,
     );
-    await chara_talk.say_and_wait(`是数码让${chara_talk.sex}变成这样的吗……`);
+    await era.printAndWait(`是数码让${chara_talk.sex}变成这样的吗……`);
     await era.printAndWait(
       `该说数码真是厉害吗……瞄了一眼数码，诶，${chara_talk.sex}果然还是着迷地摇头晃脑。`,
     );
@@ -322,7 +321,7 @@ module.exports = async function () {
     if (era.get('flag:当前位置') === location_enum.beach) {
       await print_event_name('夏季合宿', chara_talk);
       await chara_talk.say_and_wait(
-        `哇……果然还是被胜利冲晕了头脑，我居然，我居然想要成为这神圣的存在……`,
+        `库哇……果然还是被胜利冲晕了头脑，我居然，我居然想要成为这神圣的存在……`,
       );
       await era.printAndWait(
         `该说是三分钟热度还是什么的吗……数码又有点开始打退堂鼓了，不不不，应该只是说说而已吧……`,
@@ -362,417 +361,428 @@ module.exports = async function () {
       await chara_talk.say_and_wait(
         `我本来是准备想要在最近的漫展上销售圣王的同人志，向大家宣传圣王的好的……`,
       );
+      await say_by_passer_by(
+        `？？？`,
+        `圣王的同人志吗，这种事情本人都没听说过啊。`,
+      );
+      await chara_talk.say_and_wait(
+        `啊，这种让本人知道可是禁忌哦，当然不能让圣王……咻哇！圣王桑？！`,
+      );
+      await era.printAndWait(`主人公从同人志里跑出来了。`);
+      await chara_talk.say_and_wait(`刚刚都是开玩笑的！都是我无聊的妄想罢了！`);
+      await chara61_talk.say_and_wait(
+        `不过，谢谢了，也多亏了你，啊哈哈哈哈！King的魅力也是一流啊！`,
+      );
+      await chara61_talk.say_and_wait(
+        `事实上，我想问的是，数码，你是要出赛今年的『英里冠军杯』吧？`,
+      );
+      await chara_talk.say_and_wait(
+        `诶？是的！因为被您在去年的比赛所感动，所以我也想要尽可能接近您……但是……为什么圣王桑你……`,
+      );
+      await chara61_talk.say_and_wait(`因为我也会出赛。`);
       await era.printAndWait(
-        `？？？「圣王的同人志吗，这种事情本人都没听说过啊。」`,
-        {
-          color: chara61_talk.color,
-          fontSize: '24px',
-        },
+        `圣王光环在英里冠军杯也会出场，并且还会和数码同台竞技。`,
+      );
+      await chara_talk.say_and_wait(`！`);
+      await era.printAndWait(`数码的脸上突然蒙上了一层阴影。`);
+      await era.printAndWait(
+        `数码明白，在长时间的职业生涯里，圣王光环已经从巅峰期逐渐下滑到了低谷。`,
+      );
+      await chara_talk.say_and_wait(
+        `那个，圣王桑……虽然我说这话有点厚颜无耻……我，会为你应援的。`,
+      );
+      await chara_talk.say_and_wait(
+        `那个……就算是对手，想推的心情也是一样强烈的……`,
+      );
+      await era.printAndWait(
+        `面对此种情况，数码心情复杂，跟偶像同台竞技，本来就是梦寐以求的，但是，如果面对的偶像早已开始衰退呢？`,
+      );
+      await me.say_and_wait(`数码！`);
+      await chara_talk.say_and_wait(`！`);
+      await era.printAndWait(`数码略有无辜地看向了你。`);
+      await me.say_and_wait(
+        `数码，你应该明白的才对，在赛场上的${chara_talk.get_uma_sex_title()}——`,
+      );
+      await chara61_talk.say_and_wait(
+        `训练员，很抱歉打断你，数码，我有一个提案。`,
+      );
+      await chara61_talk.say_and_wait(
+        `数码，在这个合宿结束的时候，我们一起来一场比赛吧。`,
+      );
+      await chara_talk.say_and_wait(`哈？！唔噢？跟偶像一起什么的，做不到的……`);
+      await me.say_and_wait(`圣王……十分感谢你。`);
+      await chara61_talk.say_and_wait(
+        `没问题，作为一流的${chara_talk.get_uma_sex_title()}自然要回馈一流的粉丝——啊哈哈哈哈！`,
+      );
+      await era.printAndWait(
+        `圣王光环看出了数码的困惑，${chara_talk.sex}邀请数码一起跑步。`,
+      );
+      await era.printAndWait(
+        `于是，在接下来仅剩的夏合宿中，数码将要在最后和圣王一同进行一场模拟比赛。`,
+      );
+    } else if (edu_weeks === 47 + 37) {
+      await print_event_name('一流的条件', chara_talk);
+      await era.printAndWait(
+        `在数码向着英里冠军杯前进的同时，圣王光环也在同时做出努力。`,
+      );
+      await era.printAndWait(
+        `速度锦标赛，短距离G1比赛，理论上应该是圣王的优势……`,
+      );
+      await era.printAndWait(`——第七名`);
+      await era.printAndWait(`连入着都没有。`);
+      await era.printAndWait(`赛后不久，数码就来到圣王面前。`);
+      await chara61_talk.say_and_wait(
+        `你来看了呢，数码桑，不要管我——本来是想这样说的，但既然是你，就给你和我待在一起的权利吧。`,
+      );
+      await chara_talk.say_and_wait(
+        `那个……虽然最终没能到达，但圣王桑的美妙，再次让我钦佩不已。`,
+      );
+      await chara_talk.say_and_wait(`锐利的眼神，散发的品格，华丽的过弯！`);
+      await chara61_talk.say_and_wait(`……仅此而已吗？`);
+      await chara_talk.say_and_wait(`诶？`);
+      await chara61_talk.say_and_wait(`觉得我是一流的理由，仅此而已吗？`);
+      await era.printAndWait(`数码接着再说了很多，但是……`);
+      await chara61_talk.say_and_wait(
+        `……为了成为一流，有一件比什么都重要的东西……`,
+      );
+      await era.printAndWait(`赛后的赛场，人都差不多走光了。`);
+      await era.printAndWait(`圣王，走到了赛道的起跑线，做出了起跑姿势。`);
+      await chara61_talk.say_and_wait(`机会难得，接下来要和我一起跑吗？`);
+      era.drawLine();
+      await era.printAndWait(`毕竟是刚刚才比赛后，能显然看出圣王的乏力。`);
+      await chara61_talk.say_and_wait(`哈……哈……咳……呵呵呵……真是，难看啊。`);
+      await chara61_talk.say_and_wait(
+        `数码，现在的我怎么样，无论是锐利的眼神，品格还是华丽，全都没有了。`,
+      );
+      await chara61_talk.say_and_wait(`没有留下任何一流证据的我，还是一流吗？`);
+      await chara_talk.say_and_wait(`这……那是……`);
+      await chara61_talk.say_and_wait(`不过，即使是这样的我——`);
+      await era.printAndWait(
+        `在比赛中看到的锐利的眼神，再一次出现在了现在的圣王身上。`,
+      );
+      await chara61_talk.say_and_wait(`再比一场的话，会怎么样？`);
+      await chara61_talk.say_and_wait(`如果不行，明天再比一场，会怎么样？`);
+      await chara61_talk.say_and_wait(
+        `就算明天失败了，后天再来一次，又会怎样？`,
+      );
+      await chara61_talk.say_and_wait(
+        `数码！你看看，现在的我，真的什么都不剩了？`,
+      );
+      await chara_talk.say_and_wait(`！`);
+      await chara_talk.say_and_wait(
+        `还有留下来的！就像开拓的罗盘，万年的寒冰，不会改变！`,
+      );
+      await chara61_talk.say_and_wait(
+        `——不屈的执念。就算被打垮也不会屈服的心。`,
+      );
+      await chara61_talk.say_and_wait(`只有这一份，谁都无法从我这里拿走。`);
+      await chara61_talk.say_and_wait(
+        `这正是，我这个King，身为永远的一流的原因哟！`,
+      );
+      await era.printAndWait(
+        `即便实力衰退，但是，圣王光环那“一流”的精神，不屈的意志，从来没有衰减。`,
+      );
+      await chara_talk.say_and_wait(`哦哦哦……圣王……！`);
+      await era.printAndWait(`即便遍体鳞伤，圣王的姿态还是如此美丽。`);
+      await chara61_talk.say_and_wait(
+        `我向你做出约定，我在『英里冠军杯』会回到之前的状态！`,
+      );
+      await chara61_talk.say_and_wait(
+        `如果要同情我，不使出全力的话，也太过于失礼了。`,
+      );
+      await chara_talk.say_and_wait(`是，我明白了。一流的碎片……我收下了。`);
+      await chara_talk.say_and_wait(`不过，在这个时候，请允许我说一句话……`);
+      await chara_talk.say_and_wait(`您果然是……女神……`);
+    } else if (edu_weeks === 95 + 6) {
+      await print_event_name('情人节', chara_talk);
+      await era.printAndWait(
+        `一大早到达训练室的数码，其所带的是——一叠巧克力。`,
+      );
+      await era.printAndWait(`为什么要用叠作为量词？！`);
+      await chara_talk.say_and_wait(
+        `这是我的心血之作！我将我所能想到的各位${chara_talk.get_uma_sex_title()}的特征，都融入了这份巧克力！`,
+      );
+      await era.printAndWait(
+        `看着这一盒盒巧克力叠成的高塔，难道，里面的每颗巧克力，都是不同的吗？！`,
+      );
+      await chara_talk.say_and_wait(`那么，来祭祀吧！`);
+      await era.printAndWait(`什么，哪里来的神龛？！`);
+      await era.printAndWait(
+        `数码把巧克力全摆在神龛前，先是念念有词，接着还带着一些奇怪的搓手动作。`,
+      );
+      await chara_talk.say_and_wait(`好了，可以了！三女神应该收到了我的请求。`);
+      await era.printAndWait(`既然是拜的三女神，为什么不去庭院呢？！`);
+      await chara_talk.say_and_wait(`训练员，接下来就一起吃吧，可不能浪费哦。`);
+      era.printButton(`居然是能吃的吗？！`, 1);
+      await era.input();
+      await chara_talk.say_and_wait(
+        `当然啦，只要有这份心意就可以了，而且浪费食物也是一种亵渎啊！`,
+      );
+      await chara_talk.say_and_wait(`接下来就一边吃着一边谈吧！`);
+      await chara_talk.say_and_wait(
+        `呜呜呜，我真是幸运啊，居然能遇到能一起讨论${chara_talk.get_uma_sex_title()}的同志……`,
+      );
+      await chara_talk.say_and_wait(
+        `来来来，训练员，聊一下最近最推的${chara_talk.get_uma_sex_title()}……是谁呀？`,
+      );
+      await era.printAndWait(`那还用问？`);
+      era.printButton(`好，给你巧克力。`, 1);
+      await era.input();
+      await era.printAndWait(`从冰箱里，拿出巧克力……`);
+      await chara_talk.say_and_wait(`哦哦哦，是我啊。`);
+      await chara_talk.say_and_wait(`噫诶诶诶诶？不是，居然是巧克力？`);
+      await chara_talk.say_and_wait(
+        `这，这是何等的博爱？！居然，有人会想要推如此小众的${chara_talk.get_uma_sex_title()}？`,
+      );
+      await me.say_and_wait(
+        `说什么呢，我可是你的训练员……还有，你居然觉得你很小众……吗？马推的粉丝数，不低的来吧？`,
+      );
+      await era.printAndWait(`被这么一说的数码，却突然变得支支吾吾了起来。`);
+      await chara_talk.say_and_wait(
+        `那是……事实上我的马推，在出道前，粉丝就不少来着，因为之前一直都有在做……同人志……`,
+      );
+      await era.printAndWait(
+        `诶？好像的确是听说过，数码在出道前就在某些方面挺出名来着……`,
+      );
+      await chara_talk.say_and_wait(
+        `不过！训练员的这种精神，这，才是宅中之鉴！如果是和你的话，哪怕十年，还是多久，感觉都可以一起过情人节！`,
+      );
+      await era.printAndWait(`和数码边说边聊，度过了一个吵闹的情人节。`);
+    } else if (edu_weeks === 95 + 14) {
+      await print_event_name('粉丝感谢祭', chara_talk);
+      await chara_talk.say_and_wait(
+        `数码，属于${chara_talk.name}的节日，终于来了！哇哇哇，看看这周围的景色，简直就是粉丝的天堂……`,
+      );
+      await era.printAndWait(
+        `粉丝感谢祭呢……顾名思义，就是作为具有偶像属性的赛${chara_talk.get_uma_sex_title()}回馈应援粉丝的活动。`,
+      );
+      await era.printAndWait(`说是这么说，事实上感觉也有点像校园祭。`);
+      await era.printAndWait(`不过，数码，今年所担当的角色，可不仅是粉丝啊！`);
+      await me.say_and_wait(`事实上，数码，你在今天，可是被应援的一方哦！`);
+      await chara_talk.say_and_wait(`库呀！`);
+      await chara_talk.say_and_wait(`不不不，就我这种人……`);
+      await era.printAndWait(
+        `摆出一脸“不可能”表情的数码，要说是以前的话那的确如此……`,
+      );
+      await me.say_and_wait(
+        `在那么多场比赛中取得出色成绩的你，倒也要有点自觉了吧，虽然你说你的马推粉丝有之前的因素……但是新粉丝，可不少啊。`,
+      );
+      await era.printAndWait(
+        `像是被戳到痛点的数码双手投降，看来应该有所准备了。`,
+      );
+      await era.printAndWait(`接着便是来到了签名会的数码。`);
+      await era.printAndWait(
+        `一开始数码还有点不适应，不过之后的${chara_talk.sex}……`,
+      );
+      await chara_talk.say_and_wait(`好好，有在色纸上好好地签上名字了哦！`);
+      await era.printAndWait(`甚至都做到了让每一个粉丝都笑着排队？！`);
+      await chara_talk.say_and_wait(
+        `因为之前一直都是作为推的那一方的人嘛……所以当然能猜出来粉丝们的心情。`,
+      );
+      await chara_talk.say_and_wait(
+        `还有，训练员，待会能让我优化一下这个会场吗，只要拿到许可的话，就能让你看看数码的主办方之魂哦！`,
+      );
+      await era.printAndWait(
+        `向工作人员拿到许可后，数码立刻在各个会场都扫荡了一遍，还把各种各样的活动都优化得很好？！`,
+      );
+      await era.printAndWait(
+        `之后因为传到了鲁道夫的耳里，由${
+          chara_talk.sex
+        }亲自带领很多${chara_talk.get_uma_sex_title()}过来感谢时……`,
+      );
+      await chara_talk.say_and_wait(`怎么回事，我成为被推的一天了？！`);
+      await era.printAndWait(`激动晕倒的数码终于结束了今天的奋斗。`);
+    } else if (edu_weeks === 95 + 17) {
+      await print_event_name('第三年nhk', chara_talk);
+      await era.printAndWait(
+        `与数码一同来观看去年${chara_talk.name}奋斗过的nhk英里杯。`,
+      );
+      await era.printAndWait(
+        `最近来数码也关注起了后辈，其中最引起${chara_talk.sex}注意的——`,
+      );
+      await era.printAndWait(
+        `也是今年nhk英里杯取得胜利的是，最近很火的新人——黑船。`,
+      );
+      await chara_talk.say_and_wait(
+        `唔噢噢噢，大幅的步伐，修长的玉腿！我，我已经！`,
+      );
+      await chara_talk.say_and_wait(
+        `黑船，${chara_talk.sex}，${chara_talk.sex}跑过在我奔跑过的草地啊！`,
+      );
+      await chara_talk.say_and_wait(`感觉，内心中的感觉要迸发出来了！`);
+      await era.printAndWait(`接着数码立刻跑到了栅栏边……`);
+      await chara_talk.say_and_wait(
+        `黑船桑！加油啊！无论之后会遇到什么，前辈们都会帮助你的！`,
+      );
+      await era.printAndWait(`数码，从去年的nhk英里赛以来经历了很多，`);
+      await era.printAndWait(
+        `过去一年，再次看到有新世代出现，这蹄迹的延续，想必让数码感慨万千吧。`,
+      );
+      await era.printAndWait(`回到这里的数码，开始再次介绍起来了黑船……`);
+      await era.printAndWait(
+        `\n因为在对多种场地的适应性上，黑船都与数码很像，这也让数码带有一种亲切感。`,
+      );
+      await era.printAndWait(
+        `数码已经从单纯地仰慕偶像的人，变到可以成为前辈关怀后辈的人了。`,
+      );
+    } else if (event_marks.yuusha_fight === 4 && edu_weeks === 95 + 46) {
+      event_marks.yuusha_fight++;
+      await print_event_name('勇者挑战', chara_talk);
+      await era.printAndWait(
+        `终于，数码赶在夏合宿前参加了诸多大型比赛，想必也终于积累了足够的经验。`,
+      );
+      await era.printAndWait(
+        `跟着数码回忆了一下之前的比赛，又是许多的相遇啊。`,
+      );
+      await chara_talk.say_and_wait(
+        `好！这下是时候了！虎牢关之战！该向歌剧和怒涛发出挑战书了！`,
+      );
+      await chara_talk.say_and_wait(`嗯……稍等，该选哪项比赛比较好？`);
+      await era.printAndWait(
+        `这么说确实，歌剧和怒涛赛场适性的话，泥地适性都比较差，距离适性的话，则是英里适性比较差。`,
+      );
+      await era.printAndWait(`而数码在长距离适性也不佳……`);
+      await me.say_and_wait(
+        `要真是说要挑战的话，果然还是黄金的草地中距离比赛啊。`,
+      );
+      await era.printAndWait(`不过，这……`);
+      await chara_talk.say_and_wait(
+        `的确……我也不想将${chara_talk.sex}们拉到我身边的泥塘……果然还得是堂堂正正地比一场。`,
+      );
+      await era.printAndWait(
+        `和现在已经不仅仅是自称霸王的好歌剧还有紧随其后的名将怒涛，在黄金距离竞赛……`,
+      );
+      await me.say_and_wait(`天皇赏秋，这是最合适的比赛了。`);
+      await era.printAndWait(`数码会在这场比赛上吃不到一点优势的。`);
+      await chara_talk.say_and_wait(
+        `对！就是这个！东京2000米草地赛道，没有比这更合适的了！`,
+      );
+      await me.say_and_wait(`真的可以吗？`);
+      await chara_talk.say_and_wait(`吼诶？什么意思？`);
+      await me.say_and_wait(`会相当吃力的哦？`);
+      await era.printAndWait(`即使是数码，面对这种情况，也有点哑口无言。`);
+      await chara_talk.say_and_wait(
+        `……啊，天性如此啊，就好像玩游戏不愿意开最低难度，不愿意穿赠送的dlc强力装备差不多……`,
+      );
+      await chara_talk.say_and_wait(`还有，我，想要看到最棒的奔跑！`);
+      await chara_talk.say_and_wait(`所以，你一定能奉陪我吧！`);
+      await me.say_and_wait(`当然！`);
+      await era.printAndWait(`数码本是如此啊。`);
+    } else if (edu_weeks === 95 + 29) {
+      if (era.get('flag:当前位置') === location_enum.beach) {
+        await print_event_name('夏季合宿开始', chara_talk);
+        await chara_talk.say_and_wait(
+          `唔咕咕，今年，就今年这一次……没时间了啊！得停下来了！`,
+        );
+        await era.printAndWait(
+          `夏合宿一开始就看到了抱头痛鸣的数码，该怎么说呢，看得多数码的你也逐渐明白，数码${chara_talk.sex}也有制作同人志的兴趣。`,
+        );
+        await era.printAndWait(
+          `${chara_talk.sex}会将${chara_talk.sex}制作的同人志放到漫展上向别人传教，真是相当地热爱呢。`,
+        );
+        await era.printAndWait(`而且，最近的一次大型漫展，就在夏合宿期间。`);
+        await chara_talk.say_and_wait(
+          `天皇赏秋！这个夏天，就不出圣王新刊了，要为比赛倾尽全力！`,
+        );
+        await era.printAndWait(
+          `看起来数码也相当地看重这次与好歌剧还有名将怒涛的对决，那么这次夏合宿，也一定不会让人担心了。`,
+        );
+        await chara61_talk.say_and_wait(`啊啦，那我就暂时看不到了呢`);
+        await chara_talk.say_and_wait(`咻诶！圣王桑！`);
+        await chara61_talk.say_and_wait(
+          `比起那个，数码，你今年要参加天皇赏秋吧。`,
+        );
+        await chara_talk.say_and_wait(
+          `是，是的……毕竟已经被圣王桑锻炼过了，无论是身体还是意志……终于，到了可以和歌剧怒涛决战的时候了！`,
+        );
+        await chara61_talk.say_and_wait(
+          `那么，天皇赏秋，就是三个——不，四个人的对决了呢。`,
+        );
+        await chara_talk.say_and_wait(
+          `诶？还有其他，被评为有实力的${chara_talk.get_uma_sex_title()}酱吗？`,
+        );
+        await chara61_talk.say_and_wait(`今年的nhk英里赛，你应该去看了吧？`);
+        await chara_talk.say_and_wait(
+          `那当然，因为我可是${chara_talk.name}！啊哈哈哈……难道说……`,
+        );
+        await era.printAndWait(`事实上，你前几天也听到有传言了，那就是……`);
+        await chara61_talk.say_and_wait(
+          `黑船，${chara_talk.sex}要参加今年的天皇赏秋。`,
+        );
+        await era.printAndWait(
+          `黑船……就是拿下今年NHK的那位${chara_talk.get_uma_sex_title()}，具有着可怕的脚步。`,
+        );
+        await era.printAndWait(`${chara_talk.sex}也要参加这场比赛啊。`);
+      }
+    } else if (edu_weeks === 95 + 48) {
+      const chara17_talk = get_chara_talk(17);
+      await print_event_name('圣诞节', chara_talk);
+      await era.printAndWait(
+        `特雷森对于圣诞节的自由活动通常都是比较支持的，毕竟这对于${chara_talk.get_uma_sex_title()}来说也是一个特殊日子。`,
+      );
+      await era.printAndWait(
+        `在校外之余，为了给一些特立独行的${chara_talk.get_uma_sex_title()}一些光照，学校内部也举办了大型活动。`,
+      );
+      await era.printAndWait(
+        `和数码穿梭在各个活动现场蹭吃蹭喝，一起游玩各种游戏，还有就是和数码一起激烈讨论。`,
+      );
+      await era.printAndWait(`突然，鲁道夫以及一行人出现在了你的面前。`);
+      await chara_talk.say_and_wait(`呜哇哇，是太吵闹了吗？`);
+      await chara17_talk.say_and_wait(`不用太过担心，倒不如说是奖励。`);
+      await era.printAndWait(
+        `接着，${chara_talk.sex}从背后拿出一个大型礼盒，递给了数码……`,
+      );
+      await chara_talk.say_and_wait(`这是……`);
+      await era.printAndWait(`数码打开了礼盒，然后里面装的是——`);
+      await era.printAndWait(
+        `一叠色纸……里面密密麻麻地写满了各种各样的……名字？`,
+      );
+      await chara_talk.say_and_wait(`不，这个，这个是……！签名啊！`);
+      await era.printAndWait(
+        `签名！定睛一看，这里面，包含了很多熟悉的${chara_talk.get_uma_sex_title()}的亲笔签名？！`,
+      );
+      await chara_talk.say_and_wait(
+        `啊啊啊啊……这就算是单买，都要多少马币呢……我的存款，还有多少来着……`,
+      );
+      await chara17_talk.say_and_wait(
+        `这是这段时间以来，接受过数码帮助或者鼓舞的各位${chara_talk.get_uma_sex_title()}的谢意，而且，作为学生会长，我也非常感谢你对学校的宣传……`,
+      );
+      await chara17_talk.say_and_wait(
+        `而且，数码你的爱好……也有点独特，所以我募集了所有喜欢数码你的${chara_talk.get_uma_sex_title()}，为你准备了这份礼物。`,
+      );
+      await era.printAndWait(`收到这份大礼，数码${chara_talk.sex}……`);
+      await chara_talk.say_and_wait(`啊哇啊哇……难道这就是……推人着恒被推吗……`);
+      await say_by_passer_by(`众人`, `节日快乐！${chara_talk.name}`);
+      await chara_talk.say_and_wait(`训练员！训练员！这……`);
+      await era.printAndWait(`立刻尊晕地靠在了你身上。`);
+      await era.printAndWait(
+        `意外地互换了位置的数码，在今天也享受到了被推的快乐。`,
+      );
+    } else if (event_marks.yuusha === 1) {
+      event_marks.yuusha++;
+      await print_event_name('世界的旅人', chara_talk);
+      await era.printAndWait(
+        `是全收集类玩家吗，数码在这场游戏肯定能得到技能吧！`,
+      );
+      await era.printAndWait(`数码仍在继续挑战，为之后去海外远征而努力。`);
+      await era.printAndWait(
+        `不仅是为了胜利，也是为了和同志一起，去遇见更多的${chara_talk.get_uma_sex_title()}。`,
+      );
+      await era.printAndWait(`在为了先行考察，并没有太多人知道的航班……`);
+      await era.printAndWait(`准备启程前……`);
+      await era.printAndWait(`诶呀呀，来了不少熟人啊。`);
+      await era.printAndWait(`圣王、歌剧、怒涛、速子……还有黑船？`);
+      await era.printAndWait(
+        `本来就是暂时离开，适应一下海外环境，倒不如说是旅游？`,
+      );
+      await era.printAndWait(`结果还来了这么多人告别吗？`);
+      await era.printAndWait(`数码，真的了不起啊。`);
+      await chara_talk.say_and_wait(
+        `不过，我等不了了！异域的邂逅，我要和同志一起，想要和世界各地的${chara_talk.get_uma_sex_title()}们相遇啊！`,
+      );
+      await era.printAndWait(
+        `世界的旅人，${chara_talk.name}，现在仍在奔跑中。`,
       );
     }
-    await chara_talk.say_and_wait(
-      `啊，这种让本人知道可是禁忌哦，当然不能让圣王……咻哇！圣王桑？！`,
-    );
-    await era.printAndWait(`主人公从同人志里跑出来了。`);
-    await chara_talk.say_and_wait(`刚刚都是开玩笑的！都是我无聊的妄想罢了！`);
-    await chara61_talk.say_and_wait(
-      `不过，谢谢了，也多亏了你，啊哈哈哈哈！King的魅力也是一流啊！`,
-    );
-    await chara61_talk.say_and_wait(
-      `事实上，我想问的是，数码，你是要出赛今年的『英里冠军杯』吧？`,
-    );
-    await chara_talk.say_and_wait(
-      `诶？是的！因为被您在去年的比赛所感动，所以我也想要尽可能接近您……但是……为什么圣王桑你……`,
-    );
-    await chara61_talk.say_and_wait(`因为我也会出赛。`);
-    await era.printAndWait(
-      `圣王光环在英里冠军杯也会出场，并且还会和数码同台竞技。`,
-    );
-    await chara_talk.say_and_wait(`！`);
-    await era.printAndWait(`数码的脸上突然蒙上了一层阴影。`);
-    await era.printAndWait(
-      `数码明白，在长时间的职业生涯里，圣王光环已经从巅峰期逐渐下滑到了低谷。`,
-    );
-    await chara_talk.say_and_wait(
-      `那个，圣王桑……虽然我说这话有点厚颜无耻……我，会为你应援的。`,
-    );
-    await chara_talk.say_and_wait(
-      `那个……就算是对手，想推的心情也是一样强烈的……`,
-    );
-    await era.printAndWait(
-      `面对此种情况，数码心情复杂，跟偶像同台竞技，本来就是梦寐以求的，但是，如果面对的偶像早已开始衰退呢？`,
-    );
-    await me.say_and_wait(`数码！`);
-    await chara_talk.say_and_wait(`！`);
-    await era.printAndWait(
-      `数码，你应该明白的才对，在赛场上的${chara_talk.get_uma_sex_title()}——`,
-    );
-    await chara61_talk.say_and_wait(
-      `训练员，很抱歉打断你，数码，我有一个提案。`,
-    );
-    await chara61_talk.say_and_wait(
-      `数码，在这个合宿结束的时候，我们一起来一场比赛吧。`,
-    );
-    await chara_talk.say_and_wait(`哈？！唔噢？跟偶像一起什么的，做不到的……`);
-    await me.say_and_wait(`圣王……十分感谢你。`);
-    await chara61_talk.say_and_wait(
-      `没问题，作为一流的${chara_talk.get_uma_sex_title()}自然要回馈一流的粉丝——啊哈哈哈哈！`,
-    );
-    await era.printAndWait(
-      `圣王光环看出了数码的困惑，${chara_talk.sex}邀请数码一起跑步。`,
-    );
-    await era.printAndWait(
-      `于是，在接下来仅剩的夏合宿中，数码将要在最后和圣王一同进行一场模拟比赛。`,
-    );
-  } else if (edu_weeks === 47 + 37) {
-    await print_event_name('一流的条件', chara_talk);
-    await era.printAndWait(
-      `在数码向着英里冠军杯前进的同时，圣王光环也在同时做出努力。`,
-    );
-    await era.printAndWait(
-      `速度锦标赛，短距离G1比赛，理论上应该是圣王的优势……`,
-    );
-    await era.printAndWait(`——第七名`);
-    await era.printAndWait(`连入着都没有。`);
-    await era.printAndWait(`赛后不久，数码就来到圣王面前。`);
-    await chara61_talk.say_and_wait(
-      `你来看了呢，数码桑，不要管我——本来是想这样说的，但既然是你，就给你和我待在一起的权利吧。`,
-    );
-    await chara_talk.say_and_wait(
-      `那个……虽然最终没能到达，但圣王桑的美妙，再次让我钦佩不已。`,
-    );
-    await chara_talk.say_and_wait(`锐利的眼神，散发的品格，华丽的过弯！`);
-    await chara61_talk.say_and_wait(`……仅此而已吗？`);
-    await chara_talk.say_and_wait(`诶？`);
-    await chara61_talk.say_and_wait(`觉得我是一流的理由，仅此而已吗？`);
-    await era.printAndWait(`数码接着再说了很多，但是……`);
-    await chara61_talk.say_and_wait(
-      `……为了成为一流，有一件比什么都重要的东西……`,
-    );
-    await era.printAndWait(`赛后的赛场，人都差不多走光了。`);
-    await era.printAndWait(`圣王，走到了赛道的起跑线，做出了起跑姿势。`);
-    await chara61_talk.say_and_wait(`机会难得，接下来要和我一起跑吗？`);
-    era.drawLine();
-    await era.printAndWait(`毕竟是刚刚才比赛后，能显然看出圣王的乏力。`);
-    await chara61_talk.say_and_wait(`哈……哈……咳……呵呵呵……真是，难看啊。`);
-    await chara61_talk.say_and_wait(
-      `数码，现在的我怎么样，无论是锐利的眼神，品格还是华丽，全都没有了。`,
-    );
-    await chara61_talk.say_and_wait(`没有留下任何一流证据的我，还是一流吗？`);
-    await chara_talk.say_and_wait(`这……那是……`);
-    await chara61_talk.say_and_wait(`不过，即使是这样的我——`);
-    await era.printAndWait(
-      `在比赛中看到的锐利的眼神，再一次出现在了现在的圣王身上。`,
-    );
-    await chara61_talk.say_and_wait(`再比一场的话，会怎么样？`);
-    await chara61_talk.say_and_wait(`如果不行，明天再比一场，会怎么样？`);
-    await chara61_talk.say_and_wait(`就算明天失败了，后天再来一次，又会怎样？`);
-    await chara61_talk.say_and_wait(
-      `数码！你看看，现在的我，真的什么都不剩了？`,
-    );
-    await chara_talk.say_and_wait(`！`);
-    await chara_talk.say_and_wait(
-      `还有留下来的！就像开拓的罗盘，万年的寒冰，不会改变！`,
-    );
-    await chara61_talk.say_and_wait(`——不屈的执念。就算被打垮也不会屈服的心。`);
-    await chara61_talk.say_and_wait(`只有这一份，谁都无法从我这里拿走。`);
-    await chara61_talk.say_and_wait(
-      `这正是，我这个King，身为永远的一流的原因哟！`,
-    );
-    await era.printAndWait(
-      `即便实力衰退，但是，圣王光环那“一流”的精神，不屈的意志，从来没有衰减。`,
-    );
-    await chara_talk.say_and_wait(`哦哦哦……圣王……！`);
-    await era.printAndWait(`即便遍体鳞伤，圣王的姿态还是如此美丽。`);
-    await chara61_talk.say_and_wait(
-      `我向你做出约定，我在『英里冠军杯』会回到之前的状态！`,
-    );
-    await chara61_talk.say_and_wait(
-      `如果要同情我，不使出全力的话，也太过于失礼了。`,
-    );
-    await chara_talk.say_and_wait(`是，我明白了。一流的碎片……我收下了。`);
-    await chara_talk.say_and_wait(`不过，在这个时候，请允许我说一句话……`);
-    await chara_talk.say_and_wait(`您果然是……女神……`);
-  } else if (edu_weeks === 95 + 6) {
-    await print_event_name('情人节', chara_talk);
-    await era.printAndWait(`一大早到达训练室的数码，其所带的是——
-一叠巧克力。`);
-    await era.printAndWait(`为什么要用叠作为量词？！`);
-    await chara_talk.say_and_wait(
-      `这是我的心血之作！我将我所能想到的各位${chara_talk.get_uma_sex_title()}的特征，都融入了这份巧克力！`,
-    );
-    await era.printAndWait(
-      `看着这一盒盒巧克力叠成的高塔，难道，里面的每颗巧克力，都是不同的吗？！`,
-    );
-    await chara_talk.say_and_wait(`那么，来祭祀吧！`);
-    await era.printAndWait(`什么，哪里来的神龛？！`);
-    await era.printAndWait(
-      `数码把巧克力全摆在神龛前，先是念念有词，接着还带着一些奇怪的搓手动作。`,
-    );
-    await chara_talk.say_and_wait(`好了，可以了！三女神应该收到了我的请求。`);
-    await era.printAndWait(`既然是拜的三女神，为什么不去庭院呢？！`);
-    await chara_talk.say_and_wait(`训练员，接下来就一起吃吧，可不能浪费哦。`);
-    await me.say_and_wait(`居然是能吃的吗？！`);
-    await chara_talk.say_and_wait(
-      `当然啦，只要有这份心意就可以了，而且浪费食物也是一种亵渎啊！`,
-    );
-    await chara_talk.say_and_wait(`接下来就一边吃着一边谈吧！`);
-    await chara_talk.say_and_wait(
-      `呜呜呜，我真是幸运啊，居然能遇到能一起讨论${chara_talk.get_uma_sex_title()}的同志……`,
-    );
-    await chara_talk.say_and_wait(
-      `来来来，训练员，聊一下最近最推的${chara_talk.get_uma_sex_title()}……是谁呀？`,
-    );
-    await era.printAndWait(`那还用问？`);
-    await chara_talk.say_and_wait(`好，给你巧克力。`);
-    await era.printAndWait(`从冰箱里，拿出巧克力……`);
-    await chara_talk.say_and_wait(`哦哦哦，是我啊。`);
-    await chara_talk.say_and_wait(`噫诶诶诶诶？不是，居然是巧克力？`);
-    await chara_talk.say_and_wait(
-      `这，这是何等的博爱？！居然，有人会想要推如此小众的${chara_talk.get_uma_sex_title()}？`,
-    );
-    await me.say_and_wait(
-      `说什么呢，我可是你的训练员……还有，你居然觉得你很小众……吗？马推的粉丝数，不低的来吧？`,
-    );
-    await era.printAndWait(`被这么一说的数码，却突然变得支支吾吾了起来。`);
-    await chara_talk.say_and_wait(
-      `那是……事实上我的马推，在出道前，粉丝就不少来着，因为之前一直都有在做……同人志……`,
-    );
-    await era.printAndWait(
-      `诶？好像的确是听说过，数码在出道前就在某些方面挺出名来着……`,
-    );
-    await chara_talk.say_and_wait(
-      `不过！训练员的这种精神，这，才是宅中之鉴！如果是和你的话，哪怕十年，还是多久，感觉都可以一起过情人节！`,
-    );
-    await era.printAndWait(`和数码边说边聊，度过了一个吵闹的情人节。`);
-  } else if (edu_weeks === 95 + 14) {
-    await print_event_name('粉丝感谢祭', chara_talk);
-    await chara_talk.say_and_wait(
-      `数码，属于${chara_talk.name}的节日，终于来了！哇哇哇，看看这周围的景色，简直就是粉丝的天堂……`,
-    );
-    await era.printAndWait(
-      `粉丝感谢祭呢……顾名思义，就是作为具有偶像属性的赛${chara_talk.get_uma_sex_title()}回馈应援粉丝的活动。`,
-    );
-    await era.printAndWait(`说是这么说，事实上感觉也有点像校园祭。`);
-    await era.printAndWait(`不过，数码，今年所担当的角色，可不仅是粉丝啊！`);
-    await me.say_and_wait(`事实上，数码，你在今天，可是被应援的一方哦！`);
-    await chara_talk.say_and_wait(`库呀！`);
-    await chara_talk.say_and_wait(`不不不，就我这种人……`);
-    await era.printAndWait(
-      `摆出一脸“不可能”表情的数码，要说是以前的话那的确如此……`,
-    );
-    await me.say_and_wait(
-      `在那么多场比赛中取得出色成绩的你，倒也要有点自觉了吧，虽然你说你的马推粉丝有之前的因素……但是新粉丝，可不少啊。`,
-    );
-    await era.printAndWait(
-      `像是被戳到痛点的数码双手投降，看来应该有所准备了。`,
-    );
-    await era.printAndWait(`接着便是来到了签名会的数码。`);
-    await era.printAndWait(
-      `一开始数码还有点不适应，不过之后的${chara_talk.sex}……`,
-    );
-    await chara_talk.say_and_wait(`好好，有在色纸上好好地签上名字了哦！`);
-    await era.printAndWait(`甚至都做到了让每一个粉丝都笑着排队？！`);
-    await chara_talk.say_and_wait(
-      `因为之前一直都是作为推的那一方的人嘛……所以当然能猜出来粉丝们的心情。`,
-    );
-    await chara_talk.say_and_wait(
-      `还有，训练员，待会能让我优化一下这个会场吗，只要拿到许可的话，就能让你看看数码的主办方之魂哦！`,
-    );
-    await era.printAndWait(
-      `向工作人员拿到许可后，数码立刻在各个会场都扫荡了一遍，还把各种各样的活动都优化得很好？！`,
-    );
-    await era.printAndWait(
-      `之后因为传到了鲁道夫的耳里，由${
-        chara_talk.sex
-      }亲自带领很多${chara_talk.get_uma_sex_title()}过来感谢时……`,
-    );
-    await chara_talk.say_and_wait(`怎么回事，我成为被推的一天了？！`);
-    await era.printAndWait(`激动晕倒的数码终于结束了今天的奋斗。`);
-  } else if (edu_weeks === 95 + 17) {
-    await print_event_name('nhk（不参赛）', chara_talk);
-    await era.printAndWait(
-      `与数码一同来观看去年${chara_talk.name}奋斗过的nhk英里杯。`,
-    );
-    await era.printAndWait(
-      `最近来数码也关注起了后辈，其中最引起${chara_talk.sex}注意的——`,
-    );
-    await era.printAndWait(
-      `也是今年nhk英里杯取得胜利的是，最近很火的新人——黑船。`,
-    );
-    await chara_talk.say_and_wait(
-      `唔噢噢噢，大幅的步伐，修长的玉腿！我，我已经！`,
-    );
-    await chara_talk.say_and_wait(
-      `黑船，${chara_talk.sex}，${chara_talk.sex}跑过在我奔跑过的草地啊！`,
-    );
-    await chara_talk.say_and_wait(`感觉，内心中的感觉要迸发出来了！`);
-    await era.printAndWait(`接着数码立刻跑到了栅栏边……`);
-    await chara_talk.say_and_wait(
-      `黑船桑！加油啊！无论之后会遇到什么，前辈们都会帮助你的！`,
-    );
-    await era.printAndWait(`数码，从去年的nhk英里赛以来经历了很多，`);
-    await era.printAndWait(
-      `过去一年，再次看到有新世代出现，这蹄迹的延续，想必让数码感慨万千吧。`,
-    );
-    await era.printAndWait(`回到这里的数码，开始再次介绍起来了黑船……`);
-    await era.printAndWait(
-      `因为在对多种场地的适应性上，黑船都与数码很像，这也让数码带有一种亲切感。`,
-    );
-    await era.printAndWait(
-      `数码已经从单纯地仰慕偶像的人，变到可以成为前辈关怀后辈的人了。`,
-    );
-  } else if (event_marks.yuusha_fight === 4 && edu_weeks === 95 + 46) {
-    event_marks.yuusha_fight++;
-    await print_event_name('勇者挑战', chara_talk);
-    await era.printAndWait(
-      `终于，数码赶在夏合宿前参加了诸多大型比赛，想必也终于积累了足够的经验。`,
-    );
-    await era.printAndWait(`跟着数码回忆了一下之前的比赛，又是许多的相遇啊。`);
-    await chara_talk.say_and_wait(
-      `好！这下是时候了！虎牢关之战！该向歌剧和怒涛发出挑战书了！`,
-    );
-    await chara_talk.say_and_wait(`嗯……稍等，该选哪项比赛比较好？`);
-    await era.printAndWait(
-      `这么说确实，歌剧和怒涛赛场适性的话，泥地适性都比较差，距离适性的话，则是英里适性比较差。`,
-    );
-    await era.printAndWait(`而数码在长距离适性也不佳……`);
-    await me.say_and_wait(
-      `要真是说要挑战的话，果然还是黄金的草地中距离比赛啊。`,
-    );
-    await era.printAndWait(`不过，这……`);
-    await chara_talk.say_and_wait(
-      `的确……我也不想将${chara_talk.sex}们拉到我身边的泥塘……果然还得是堂堂正正地比一场。`,
-    );
-    await era.printAndWait(
-      `和现在已经不仅仅是自称霸王的好歌剧还有紧随其后的名将怒涛，在黄金距离竞赛……`,
-    );
-    await me.say_and_wait(`天皇赏秋，这是最合适的比赛了。`);
-    await era.printAndWait(`数码会在这场比赛上吃不到一点优势的。`);
-    await chara_talk.say_and_wait(
-      `对！就是这个！东京2000米草地赛道，没有比这更合适的了！`,
-    );
-    await me.say_and_wait(`我真的可以吗？`);
-    await chara_talk.say_and_wait(`吼诶？什么意思？`);
-    await me.say_and_wait(`会相当吃力的哦？`);
-    await era.printAndWait(`即使是数码，面对这种情况，也有点哑口无言。`);
-    await chara_talk.say_and_wait(
-      `……啊，天性如此啊，就好像玩游戏不愿意开最低难度，不愿意穿赠送的dlc强力装备差不多……`,
-    );
-    await chara_talk.say_and_wait(`还有，我，想要看到最棒的奔跑！`);
-    await chara_talk.say_and_wait(`所以，你一定能奉陪我吧！`);
-    await me.say_and_wait(`当然！`);
-    await era.printAndWait(`数码本是如此啊。`);
-  } else if (edu_weeks === 95 + 29) {
-    if (era.get('flag:当前位置') === location_enum.beach) {
-      await print_event_name('夏季合宿开始', chara_talk);
-      await chara_talk.say_and_wait(
-        `唔咕咕，今年，就今年这一次……没时间了啊！得停下来了！`,
-      );
-      await era.printAndWait(
-        `夏合宿一开始就看到了抱头痛鸣的数码，该怎么说呢，看得多数码的你也逐渐明白，数码${chara_talk.sex}也有制作同人志的兴趣。`,
-      );
-      await era.printAndWait(
-        `${chara_talk.sex}会将${chara_talk.sex}制作的同人志放到漫展上向别人传教，真是相当地热爱呢。`,
-      );
-      await era.printAndWait(`而且，最近的一次大型漫展，就在夏合宿期间。`);
-      await chara_talk.say_and_wait(
-        `天皇赏秋！这个夏天，就不出圣王新刊了，要为比赛倾尽全力！`,
-      );
-      await era.printAndWait(
-        `看起来数码也相当地看重这次与好歌剧还有名将怒涛的对决，那么这次夏合宿，也一定不会让人担心了。`,
-      );
-      await chara61_talk.say_and_wait(`啊啦，那我就暂时看不到了呢`);
-      await chara_talk.say_and_wait(`咻诶！圣王桑！`);
-      await chara61_talk.say_and_wait(
-        `比起那个，数码，你今年要参加天皇赏秋吧。`,
-      );
-      await chara_talk.say_and_wait(
-        `是，是的……毕竟已经被圣王桑锻炼过了，无论是身体还是意志……终于，到了可以和歌剧怒涛决战的时候了！`,
-      );
-      await chara61_talk.say_and_wait(
-        `那么，天皇赏秋，就是三个——不，四个人的对决了呢。`,
-      );
-      await chara_talk.say_and_wait(
-        `诶？还有其他，被评为有实力的${chara_talk.get_uma_sex_title()}酱吗？`,
-      );
-      await chara61_talk.say_and_wait(`今年的nhk英里赛，你应该去看了吧？`);
-      await chara_talk.say_and_wait(
-        `那当然，因为我可是${chara_talk.name}！啊哈哈哈……难道说……`,
-      );
-      await era.printAndWait(`事实上，你前几天也听到有传言了，那就是……`);
-      await chara61_talk.say_and_wait(
-        `黑船，${chara_talk.sex}要参加今年的天皇赏秋。`,
-      );
-      await era.printAndWait(
-        `黑船……就是拿下今年NHK的那位${chara_talk.get_uma_sex_title()}，具有着可怕的脚步。`,
-      );
-      await era.printAndWait(`${chara_talk.sex}也要参加这场比赛啊。`);
-    }
-  } else if (edu_weeks === 95 + 48) {
-    const chara17_talk = get_chara_talk(17);
-    await print_event_name('圣诞节', chara_talk);
-    await era.printAndWait(
-      `特雷森对于圣诞节的自由活动通常都是比较支持的，毕竟这对于${chara_talk.get_uma_sex_title()}来说也是一个特殊日子。`,
-    );
-    await era.printAndWait(
-      `在校外之余，为了给一些特立独行的${chara_talk.get_uma_sex_title()}一些光照，学校内部也举办了大型活动。`,
-    );
-    await era.printAndWait(
-      `和数码穿梭在各个活动现场蹭吃蹭喝，一起游玩各种游戏，还有就是和数码一起激烈讨论。`,
-    );
-    await era.printAndWait(`突然，鲁道夫以及一行人出现在了你的面前。`);
-    await chara_talk.say_and_wait(`呜哇哇，是太吵闹了吗？`);
-    await chara17_talk.say_and_wait(`不用太过担心，倒不如说是奖励。`);
-    await era.printAndWait(
-      `接着，${chara_talk.sex}从背后拿出一个大型礼盒，递给了数码……`,
-    );
-    await chara_talk.say_and_wait(`这是……`);
-    await era.printAndWait(`数码打开了礼盒，然后里面装的是——`);
-    await era.printAndWait(`一叠色纸……里面密密麻麻地写满了各种各样的……名字？`);
-    await chara_talk.say_and_wait(`不，这个，这个是……！签名啊！`);
-    await era.printAndWait(
-      `签名！定睛一看，这里面，包含了很多熟悉的${chara_talk.get_uma_sex_title()}的亲笔签名？！`,
-    );
-    await chara_talk.say_and_wait(
-      `啊啊啊啊……这就算是单买，都要多少马币呢……我的存款，还有多少来着……`,
-    );
-    await chara17_talk.say_and_wait(
-      `这是这段时间以来，接受过数码帮助或者鼓舞的各位${chara_talk.get_uma_sex_title()}的谢意，而且，作为学生会长，我也非常感谢你对学校的宣传……`,
-    );
-    await chara17_talk.say_and_wait(
-      `而且，数码你的爱好……也有点独特，所以我募集了所有喜欢数码你的${chara_talk.get_uma_sex_title()}，为你准备了这份礼物。`,
-    );
-    await era.printAndWait(`收到这份大礼，数码${chara_talk.sex}……`);
-    await chara_talk.say_and_wait(`啊哇啊哇……难道这就是……推人着恒被推吗……`);
-    await era.printAndWait(`众人「节日快乐！${chara_talk.name}」`);
-    await chara_talk.say_and_wait(`训练员！训练员！这……`);
-    await era.printAndWait(`立刻尊晕地靠在了你身上。`);
-    await era.printAndWait(
-      `意外地互换了位置的数码，在今天也享受到了被推的快乐。`,
-    );
-  } else if (event_marks.yuusha === 1) {
-    event_marks.yuusha++;
-    await print_event_name('世界的旅人', chara_talk);
-    await era.printAndWait(
-      `是全收集类玩家吗，数码在这场游戏肯定能得到技能吧！`,
-    );
-    await era.printAndWait(`数码仍在继续挑战，为之后去海外远征而努力。`);
-    await era.printAndWait(
-      `不仅是为了胜利，也是为了和同志一起，去遇见更多的${chara_talk.get_uma_sex_title()}。`,
-    );
-    await era.printAndWait(`在为了先行考察，并没有太多人知道的航班……`);
-    await era.printAndWait(`准备启程前……`);
-    await era.printAndWait(`诶呀呀，来了不少熟人啊。`);
-    await era.printAndWait(`圣王、歌剧、怒涛、速子……还有黑船？`);
-    await era.printAndWait(
-      `本来就是暂时离开，适应一下海外环境，倒不如说是旅游？`,
-    );
-    await era.printAndWait(`结果还来了这么多人告别吗？`);
-    await era.printAndWait(`数码，真的了不起啊。`);
-    await chara_talk.say_and_wait(
-      `不过，我等不了了！异域的邂逅，我要和同志一起，想要和世界各地的${chara_talk.get_uma_sex_title()}们相遇啊！`,
-    );
-    await era.printAndWait(`世界的旅人，${chara_talk.name}，现在仍在奔跑中。`);
   }
 };
