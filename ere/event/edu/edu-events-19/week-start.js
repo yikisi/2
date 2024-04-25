@@ -548,6 +548,7 @@ module.exports = async function () {
         `不过！训练员的这种精神，这，才是宅中之鉴！如果是和你的话，哪怕十年，还是多久，感觉都可以一起过情人节！`,
       );
       await era.printAndWait(`和数码边说边聊，度过了一个吵闹的情人节。`);
+      era.set('cflag:19:节日事件标记', 0);
     } else if (edu_weeks === 95 + 14) {
       await print_event_name('粉丝感谢祭', chara_talk);
       await chara_talk.say_and_wait(
@@ -592,6 +593,7 @@ module.exports = async function () {
       );
       await chara_talk.say_and_wait(`怎么回事，我成为被推的一天了？！`);
       await era.printAndWait(`激动晕倒的数码终于结束了今天的奋斗。`);
+      era.set('cflag:19:节日事件标记', 0);
     } else if (edu_weeks === 95 + 17) {
       await print_event_name('第三年nhk', chara_talk);
       await era.printAndWait(

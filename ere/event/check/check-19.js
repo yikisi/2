@@ -75,15 +75,13 @@ handlers[check_stages.next_week] = () => {
       event_hooks.out_river,
       event_obj,
     );
-    if (era.get(`relation:19:0`) > 76) {
-      check_and_add_event(
-        event_marks,
-        edu_weeks,
-        'shine_girl',
-        event_hooks.office_game,
-        event_obj,
-      );
-    }
+    check_and_add_event(
+      event_marks,
+      edu_weeks,
+      'shine_girl',
+      event_hooks.office_rest,
+      event_obj,
+    );
     if (era.get(`relation:19:0`) > 226) {
       check_and_add_event(
         event_marks,

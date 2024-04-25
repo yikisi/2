@@ -682,9 +682,9 @@ module.exports = async (hook, extra_flag) => {
       await chara_talk.say_and_wait('果、果然，还是要以第一名为目标呢…');
       await chara_talk.say_and_wait('得要更加努力才行！');
     }
-  } else if (extra_flag.rank <= 10) {
+  } else if (extra_flag.rank > 5) {
     await print_event_name('竞赛败北', chara_talk);
-    await chara_talk.say_and_wait('呜呜…${chara_talk.name}输了…');
+    await chara_talk.say_and_wait(`呜呜…${chara_talk.name}输了…`);
     await chara_talk.say_and_wait(
       `对不起，${chara_talk.name}让${
         me.sex_code - 1 ? '姐姐' : '哥哥'
@@ -711,7 +711,7 @@ module.exports = async (hook, extra_flag) => {
         '就算再怎么没用，一直沮丧下去的话，只会一直都这么没用。',
       );
       await chara_talk.say_and_wait(
-        '${chara_talk.name}要找到这次输掉的原因。然后，下一次想要赢！',
+        `${chara_talk.name}要找到这次输掉的原因。然后，下一次想要赢！`,
       );
       await era.printAndWait(
         `后来${your_name}们重新检讨这次比赛落败的因素。。`,

@@ -10,6 +10,7 @@ const { location_enum } = require('#/data/locations');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const your_name = era.get('callname:0:-2');
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
+const { say_by_passer_by } = require('#/utils/chara-talk');
 
 module.exports = async function () {
   const me = get_chara_talk(0),
@@ -27,9 +28,9 @@ module.exports = async function () {
       `哇……！观众…好多……！而且大家的眼神都闪闪发光。`,
     );
     await era.printAndWait(
-      `这天，${CharaTalk.me.actual_name}和 ${chara_talk.name}一起来到【天皇赏（春）】的比赛场地来观摩学习，这是因为……`,
+      `这天，${CharaTalk.me.actual_name}和 ${chara_talk.name}一起来到天皇赏春的比赛场地来观摩学习，这是因为……`,
     );
-    era.drawLine({ content: '1周前，对 ${chara_talk.name}进行训练的中途。' });
+    era.drawLine({ content: `1周前，对 ${chara_talk.name}进行训练的中途。` });
     await era.printAndWait(
       `托着脸颊正用一种近乎让人感到危险的眼神，欣赏着这一切的——。`,
     );
@@ -57,7 +58,7 @@ module.exports = async function () {
     await chara41_talk.say_and_wait(
       ` ${chara_talk.name}同学的耐力实在是太棒了！所以、我有一个提案！`,
     );
-    await chara41_talk.say_and_wait(`一起，去天皇赏（春）观摩学习怎么样？`);
+    await chara41_talk.say_and_wait(`一起，去天皇赏春观摩学习怎么样？`);
     await chara41_talk.say_and_wait(
       `拥有着能够制霸长距离的速度的赛${chara_talk.get_uma_sex_title()}们都在那里！`,
     );
@@ -71,7 +72,7 @@ module.exports = async function () {
       ` ${chara_talk.name}的长距离……的确有着钢铁般的素质。`,
     );
     await era.printAndWait(
-      `【天皇赏（春）】也迟早会成为${chara_talk.sex}目标里舞台的一部分吧。`,
+      `天皇赏春也迟早会成为${chara_talk.sex}目标里舞台的一部分吧。`,
     );
     era.printButton(`去京都参观学习吧。`, 1);
     await era.input();
@@ -89,17 +90,22 @@ module.exports = async function () {
     await era.printAndWait(
       `今年就要开始挑战经典赛了。当${your_name}为了收集情报而正在收看电视节目的时候——`,
     );
-    await era.printAndWait(`电视：哎呀，这次的经典赛，有趣的面孔正在齐聚呢。`);
-    await era.printAndWait(
-      `电视：在短距离上没有敌手的樱花进王， ${chara_talk.name}也在出赛名单上，不过果然——`,
+    await say_by_passer_by(
+      `电视`,
+      `哎呀，这次的经典赛，有趣的面孔正在齐聚呢。`,
     );
-    await era.printAndWait(
-      `电视：美浦波旁，绝对不能错过。因为${
+    await say_by_passer_by(
+      `电视`,
+      `在短距离上没有敌手的樱花进王， ${chara_talk.name}也在出赛名单上，不过果然——`,
+    );
+    await say_by_passer_by(
+      `电视`,
+      `美浦波旁，绝对不能错过。因为${
         chara_talk.sex
       }可是未来三冠赛${chara_talk.get_uma_sex_title()}候补！`,
     );
     await chara_talk.say_and_wait(
-      `……${your_name}好，${me.sex_code - 1 ? '姐姐' : '哥哥'}大人。`,
+      `……${your_name}新年好，${me.sex_code - 1 ? '姐姐' : '哥哥'}大人。`,
     );
     era.printButton(` ${chara_talk.name}！？`, 1);
     await era.input();
@@ -116,7 +122,7 @@ module.exports = async function () {
     era.drawLine({ content: '早上' });
     await chara52_talk.say_and_wait(`因为是新年所以来吃泡芙吧！`);
     await chara52_talk.say_and_wait(`……泡芙好吃吗？`);
-    era.drawLine({ content: '回到现在' });
+    era.drawLine({ content: '现在' });
     era.printButton(`难道不好吃吗？`, 1);
     await era.input();
     await chara_talk.say_and_wait(
@@ -192,6 +198,7 @@ module.exports = async function () {
       get_attr_and_print_in_event(30, [0, 0, 0, 0, 0], 20);
       await era.waitAnyKey();
     }
+    era.set('cflag:30:节日事件标记', 0);
   } else if (edu_weeks === 47 + 29) {
     const chara26_talk = get_chara_talk(26);
     chara26_talk.name = '某赛博格马娘';
@@ -249,13 +256,12 @@ module.exports = async function () {
           me.sex_code - 1 ? '姐姐' : '哥哥'
         }大人……`,
       );
+      await era.printAndWait(`\n你的选择：`);
       era.printButton(`能量满满的精力盖饭！`, 1);
       era.printButton(`用毅力吃完！特大苹果糖！`, 2);
       const ret = await era.input();
       if (ret === 1) {
-        await era.printAndWait(`(咕噜……)`, {
-          color: chara_talk.color,
-        });
+        chara_talk.print(`咕噜……`);
         await chara_talk.say_and_wait(`…呀啊！？啊唔唔唔……`);
         await chara_talk.say_and_wait(
           `${me.sex_code - 1 ? '姐姐' : '哥哥'}大人为什么会知道， ${
@@ -354,6 +360,7 @@ module.exports = async function () {
     await era.printAndWait(
       `之后${your_name}和 ${chara_talk.name}一起度过了甜蜜的情人节。`,
     );
+    era.set('cflag:30:节日事件标记', 0);
   } else if (edu_weeks === 95 + 14) {
     await print_event_name('粉丝感谢祭', chara_talk);
     await era.printAndWait(`练习场上`);
@@ -386,17 +393,18 @@ module.exports = async function () {
     era.drawLine({ content: '入夜' });
     await era.printAndWait(` ${chara_talk.name}独自一人在训练场上自主练习着。`);
     await chara_talk.say_and_wait(`…不再加油的话。`);
+    era.set('cflag:30:节日事件标记', 0);
   } else if (edu_weeks === 95 + 15) {
     await print_event_name('正因无法独自盛开', chara_talk);
     await era.printAndWait(`训练员室内`);
-    await era.printAndWait(`（…咚咚）`);
+    await era.printAndWait(`…咚咚`);
     await era.printAndWait(`传来轻轻的敲门声。`);
     await chara47_talk.say_and_wait(`失礼了……那个，是荒漠英雄的说。`);
     await chara47_talk.say_and_wait(`有看见过 ${chara_talk.name}去哪儿了吗？`);
     await chara47_talk.say_and_wait(
       `其实${chara_talk.sex}现在还没有回宿舍，明明要到点名的时间了…`,
     );
-    await me.say_and_wait(`（——难道）`);
+    await me.say_and_wait(`——难道`, true);
     era.drawLine({ content: '训练场上' });
     await chara_talk.say_and_wait(`哈啊…哈啊……哈啊……！`);
     await me.say_and_wait(` ${chara_talk.name}！`);
@@ -500,13 +508,13 @@ module.exports = async function () {
     await chara26_talk.say_and_wait(`准备好要来吗？ ${chara_talk.name}。`);
     await chara_talk.say_and_wait(`…是的！`);
     await era.printAndWait(
-      `然后${chara_talk.sex}们便开始了奔跑，向着即将到来的【天皇赏（春）】——！`,
+      `然后${chara_talk.sex}们便开始了奔跑，向着即将到来的天皇赏春——！`,
     );
     get_attr_and_print_in_event(30, [0, 0, 0, 10, 0], 0);
     await era.waitAnyKey();
   } else if (edu_weeks === 95 + 23) {
     await print_event_name('不会折断的蔷薇', chara_talk);
-    await era.printAndWait(`【宝塚纪念】的举行几乎是不能了——`);
+    await era.printAndWait(`宝塚纪念的举行几乎是不能了——`);
     await era.printAndWait(`这样的气氛在到处弥漫着。`);
     await chara_talk.say_and_wait(`……`);
     await chara_talk.say_and_wait(
@@ -537,7 +545,7 @@ module.exports = async function () {
     );
     await me.say_and_wait(`这到底是？`);
     await chara_talk.say_and_wait(`…… ${chara_talk.name}，想来拜托理事长。`);
-    await chara_talk.say_and_wait(`……希望【宝塚纪念】可以在京都赛马场举办……`);
+    await chara_talk.say_and_wait(`……希望宝塚纪念可以在京都赛马场举办……`);
     await chara302_talk.say_and_wait(`再三！不止是今天，昨天晚上也来过了。`);
     await chara302_talk.say_and_wait(`各处！都有着要做的事情。`);
     await chara302_talk.say_and_wait(`冷静下来，首先要确保连携——`);
@@ -553,7 +561,7 @@ module.exports = async function () {
     await chara301_talk.say_and_wait(`啊，让您久等了！终于批准下来了！`);
     await chara302_talk.say_and_wait(`手纲！！！期待~`);
     await chara301_talk.say_and_wait(
-      `嗯嗯！这次的【宝塚纪念】，决定要在京都赛马场举办了！`,
+      `嗯嗯！这次的宝塚纪念，决定要在京都赛马场举办了！`,
     );
     await chara_talk.say_and_wait(`……那么！`);
     await chara301_talk.say_and_wait(
@@ -634,16 +642,17 @@ module.exports = async function () {
     sys_change_motivation(30, 1) && (await era.waitAnyKey());
   } else if (edu_weeks === 95 + 48) {
     await print_event_name('记者见面会', chara_talk);
-    await era.printAndWait(`【有马纪念】即将到来的这一天。`);
+    await era.printAndWait(`有马纪念即将到来的这一天。`);
     await era.printAndWait(
       `${your_name}和 ${chara_talk.name}前去参加了联合采访。`,
     );
     await chara_talk.say_and_wait(`诶、诶诶……！？`);
     await chara_talk.say_and_wait(` ${chara_talk.name}在中间吗？`);
-    await era.printAndWait(
-      `工作人员A：「是啊！因为是人气投票第一的${chara_talk.get_uma_sex_title()}。」`,
+    await say_by_passer_by(
+      `工作人员A`,
+      `是啊！因为是人气投票第一的${chara_talk.get_uma_sex_title()}`,
     );
-    await era.printAndWait(`工作人员A：「中间可是主角的位置哦！」`);
+    await say_by_passer_by(`工作人员A`, `中间可是主角的位置哦！`);
     await chara_talk.say_and_wait(`但是……这个，今天—`);
     await chara26_talk.say_and_wait(
       ` ${chara_talk.name}，请迅速且堂堂正正地回应。`,
@@ -730,37 +739,42 @@ module.exports = async function () {
       `——于是隔天，${CharaTalk.me.actual_name}和 ${chara_talk.name}一起来到了阪神赛场。`,
     );
     await chara_talk.say_and_wait(`好多人…明明今天没有比赛的。`);
-    await era.printAndWait(
-      `观众A：「哇啊！ ${chara_talk.name}来了！呀啊啊~好可爱~！」`,
+    await say_by_passer_by(
+      `观众A`,
+      `哇啊！ ${chara_talk.name}来了！呀啊啊~好可爱~！`,
     );
-    await era.printAndWait(
-      `观众B：「辛苦了~ ${chara_talk.name}！今天拜托${your_name}咯~！」`,
+    await say_by_passer_by(
+      `观众B`,
+      `辛苦了~ ${chara_talk.name}！今天拜托${your_name}咯~！`,
     );
     await chara_talk.say_and_wait(`咦……咦？`);
-    await era.printAndWait(`工作人员A：「两位，好久不见。」`);
+    await say_by_passer_by(`工作人员A`, `两位，好久不见。`);
     await chara_talk.say_and_wait(`好久不见。请问…这到底是？`);
-    await era.printAndWait(`工作人员A：「哦，其实原本我们打算只有工作人员。」`);
-    await era.printAndWait(`工作人员A：「简单办个庆祝会，结果……」`);
-    await era.printAndWait(`观众C：「 ${chara_talk.name}~！看这边~！」`);
-    await era.printAndWait(
-      `工作人员A：「如${your_name}们所看到的，很多观众都表示想要见到 ${chara_talk.name}。」`,
+    await say_by_passer_by(`工作人员A`, `哦，其实原本我们打算只有工作人员。`);
+    await say_by_passer_by(`工作人员A`, `简单办个庆祝会，结果……`);
+    await say_by_passer_by(`观众C`, `${chara_talk.name}~！看这边~！`);
+    await say_by_passer_by(
+      `工作人员A`,
+      `如${your_name}们所看到的，很多观众都表示想要见到 ${chara_talk.name}。`,
     );
     era.printButton(`因为大家都最喜欢 ${chara_talk.name}了。`, 1);
     await era.input();
     await chara_talk.say_and_wait(`呜欸欸？最、最喜欢…`);
-    await era.printAndWait(`工作人员A：「啊哈哈，说的没错。」`);
-    await era.printAndWait(
-      `工作人员A：「于是我们改变了原定计划，拜托各界的相关人士协助…」`,
+    await say_by_passer_by(`工作人员A`, `啊哈哈，说的没错。`);
+    await say_by_passer_by(
+      `工作人员A`,
+      `于是我们改变了原定计划，拜托各界的相关人士协助…`,
     );
-    await era.printAndWait(
-      `工作人员A：「颁奖仪式就这样，变成一般观众也可以参加的典礼了。」`,
+    await say_by_passer_by(
+      `工作人员A`,
+      `颁奖仪式就这样，变成一般观众也可以参加的典礼了。`,
     );
     await chara_talk.say_and_wait(`所以这些人，都是为了 ${chara_talk.name}才…`);
-    await era.printAndWait(`工作人员A：「嗯，是的。」`);
-    await era.printAndWait(
-      `工作人员A：「可以拜托${your_name}完成那天无法完成的事吗？」`,
+    await say_by_passer_by(`工作人员A`, `嗯，是的。`);
+    await say_by_passer_by(
+      `工作人员A`,
+      `可以拜托${your_name}完成那天无法完成的事吗？`,
     );
-    await era.printAndWait(`工作人员A：「在等待着${your_name}的所有人面前。」`);
     era.drawLine();
     await chara_talk.say_and_wait(`那个，大家好。`);
     await chara_talk.say_and_wait(
@@ -782,7 +796,7 @@ module.exports = async function () {
       `但是， ${chara_talk.name}现在已经不是一个人了。`,
     );
     await chara_talk.say_and_wait(
-      ` ${chara_talk.name}现在能站在这里，也是因为他的关系`,
+      ` ${chara_talk.name}现在能站在这里，也是因为${CharaTalk.me.actual_name}的关系`,
     );
     await chara_talk.say_and_wait(
       `给了 ${chara_talk.name}光亮，给了 ${chara_talk.name}容身之处…`,

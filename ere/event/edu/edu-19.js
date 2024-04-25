@@ -29,9 +29,14 @@ handlers[
 handlers[event_hooks.week_end] = require('#/event/edu/edu-events-19/week-end');
 handlers[event_hooks.race_end] = require('#/event/edu/edu-events-19/race-end');
 
-handlers[event_hooks.out_start] = async (event_object) => {
+/**
+ * @param {HookArg} hook
+ * @param _
+ * @param {EventObject} event_object
+ */
+handlers[event_hooks.office_rest] = async (hook, _, event_object) => {
   if (era.get('flag:当前互动角色') !== 19) {
-    add_event(event_hooks.out_start, event_object);
+    add_event(hook.hook, event_object);
     return;
   }
   const event_marks = new AgEduMarks(),
@@ -1014,6 +1019,7 @@ handlers[event_hooks.out_church] = async (_, __, event_object) => {
       get_attr_and_print_in_event(19, [0, 0, 0, 0, 0], 30);
     }
   }
+  era.set('cflag:19:节日事件标记', 0);
 };
 
 /**
