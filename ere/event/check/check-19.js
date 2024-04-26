@@ -5,20 +5,20 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
-const check_aim_race = require('#/event/snippets/check-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
-const { cb_enum, add_event } = require('#/event/queue');
+const { add_event, cb_enum } = require('#/event/queue');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { attr_change_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
 const AgEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-19');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_change_colors } = require('#/data/color-const');
 
 const handlers = {};
 const aim_races = {};
@@ -73,6 +73,13 @@ handlers[check_stages.next_week] = () => {
       edu_weeks,
       'catch_fish',
       event_hooks.out_river,
+      event_obj,
+    );
+    check_and_add_event(
+      event_marks,
+      edu_weeks,
+      'shine_girl',
+      event_hooks.office_rest,
       event_obj,
     );
     if (era.get(`relation:19:0`) > 226) {

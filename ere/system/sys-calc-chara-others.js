@@ -3,26 +3,25 @@ const era = require('#/era-electron');
 const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
-const sys_filter_chara = require('#/system/sys-filter-chara');
 const {
-  sys_check_limit_relation_and_love,
   sys_check_hide_relation_and_love,
+  sys_check_limit_relation_and_love,
   sys_check_remote,
 } = require('#/system/sys-calc-chara-param');
+const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { palam_colors, attr_change_colors } = require('#/data/color-const');
+const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { love_colors, relation_colors } = require('#/data/const.json');
 const check_stages = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
-  get_relation_mark,
-  get_love_mark,
   get_love_border,
+  get_love_mark,
+  get_relation_mark,
 } = require('#/data/info-generator');
 const LimitLoveStatus = require('#/data/love-limit-status');
 
@@ -321,9 +320,9 @@ module.exports = {
     era.println();
     print_change(chara_id, new_val - 1, new_val);
     era.set(`cflag:${chara_id}:爱慕暂拒`, 0);
-    await CharaTalk.me.say_and_wait('已经不能回头了……', true);
+    await get_chara_talk(0).say_and_wait('已经不能回头了……', true);
     sys_call_mec(chara_id, check_stages.mec_callname_customize);
-    await punish_unfaithful(chara_id, new_val);
+    new_val >= 75 && (await punish_unfaithful(chara_id, new_val));
     return true;
   },
   sys_punish_unfaithful: punish_unfaithful,

@@ -37,7 +37,7 @@ handlers[event_hooks.school_atrium] = async (_, __, event_object) => {
   if (edu_weeks === 47 + 46) {
     await print_event_name('劲敌的不幸', chara_talk);
     await era.printAndWait(
-      `经过【菊花赏】后，${chara_talk.name}的身边出现了某些变化。`,
+      `经过菊花赏后，${chara_talk.name}的身边出现了某些变化。`,
     );
     await era.printAndWait(
       `赛${chara_talk.sex_code - 1 ? '马娘' : '马郎'}A：「啊、是${
@@ -48,7 +48,7 @@ handlers[event_hooks.school_atrium] = async (_, __, event_object) => {
     await era.printAndWait(
       `赛${
         chara_talk.sex_code - 1 ? '马娘' : '马郎'
-      }B：「不用那么紧张的！呼呼，上次的【菊花赏】真精彩啊！」`,
+      }B：「不用那么紧张的！呼呼，上次的菊花赏真精彩啊！」`,
     );
     await era.printAndWait(
       `赛${
@@ -72,7 +72,7 @@ handlers[event_hooks.school_atrium] = async (_, __, event_object) => {
     await chara_talk.say_and_wait(
       `哪、哪里…是波旁同学实在是太厉害了所以才来跟${chara_talk.name}打招呼而已。`,
     );
-    await chara_talk.say_and_wait(`【菊花赏】上的掌声也是，因为有波旁同学在——`);
+    await chara_talk.say_and_wait(`菊花赏上的掌声也是，因为有波旁同学在——`);
     await me.say_and_wait(`因为你是${chara_talk.sex}的对手嘛。`);
     await chara_talk.say_and_wait(
       `呜呜……啊，连${me.sex_code - 1 ? '姐姐' : '哥哥'}大人都抬举过头了啦……`,
@@ -145,7 +145,7 @@ handlers[event_hooks.school_atrium] = async (_, __, event_object) => {
     await chara_talk.say_and_wait(`让、波旁同学来？`);
     await chara26_talk.say_and_wait(`嗯，我把你当成了竞争对手。`);
     await chara26_talk.say_and_wait(
-      `那是因为我很期待，在【菊花赏】中感受到了成长的可能性。`,
+      `那是因为我很期待，在菊花赏中感受到了成长的可能性。`,
     );
     await chara26_talk.say_and_wait(
       `如果有了你这个竞争对手，我可以预见更大的成长。`,
@@ -561,30 +561,48 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
 handlers[event_hooks.race_start] = async () => {
   const me = get_chara_talk(0);
   await print_event_name('武者的颤抖', chara_talk);
-  await chara_talk.say_and_wait(`唔唔…唔唔……`);
-  await me.say_and_wait(`状况不好吗？`);
-  await chara_talk.say_and_wait(`咦？不、不是的。只是，有点紧张而已…`);
-  await chara_talk.say_and_wait(`不过，已经不要紧了。`);
-  await chara_talk.say_and_wait(
-    `像这样和${me.sex_code - 1 ? '姐姐' : '哥哥'}大人说话，就觉得很安心。`,
-  );
-  await chara_talk.say_and_wait(
-    `${chara_talk.name}会加油的，要好好看着${chara_talk.name}哦，${
-      me.sex_code - 1 ? '姐姐' : '哥哥'
-    }大人！`,
-  );
+  switch (Math.floor(Math.random() * 3)) {
+    case 0:
+      await chara_talk.say_and_wait(`唔唔…唔唔……`);
+      await me.say_and_wait(`状况不好吗？`);
+      await chara_talk.say_and_wait(`咦？不、不是的。只是，有点紧张而已…`);
+      await chara_talk.say_and_wait(`不过，已经不要紧了。`);
+      await chara_talk.say_and_wait(
+        `像这样和${me.sex_code - 1 ? '姐姐' : '哥哥'}大人说话，就觉得很安心。`,
+      );
+      await chara_talk.say_and_wait(
+        `${chara_talk.name}会加油的，要好好看着${chara_talk.name}哦，${
+          me.sex_code - 1 ? '姐姐' : '哥哥'
+        }大人！`,
+      );
+      break;
+    case 1:
+      await chara_talk.say_and_wait(`再来就只要尽力奔跑，没错吧？哥哥大人！`);
+      break;
+    case 2:
+      await chara_talk.say_and_wait(`米浴努力跑完全程的！要加油——喔！`);
+      break;
+    case 3:
+      await chara_talk.say_and_wait(`米浴努力跑完全程的！要加油——喔！`);
+      break;
+    case 4:
+      await chara_talk.say_and_wait(
+        `都还没开始跑，米浴就预感会是一场好比赛。米浴今天，特别地期待！`,
+      );
+      break;
+    case 5:
+      await chara_talk.say_and_wait(`呼，好……！还没到开始时间吗？`);
+      break;
+    case 6:
+      await chara_talk.say_and_wait(
+        `开、开始发抖了……那个，哥哥大人。米浴可以，稍微握一下你的手吗？`,
+      );
+      break;
+    case 7:
+      await chara_talk.say_and_wait(`因为想带给大家幸福……米浴会全力奔跑的！`);
+      break;
+  }
 };
-//TODO 群童佬这个米浴参加比赛随机口上作为事件就一句话太短，姑且先放着了
-//await chara_talk.say_and_wait(`再来就只要尽力奔跑，没错吧？哥哥大人！`);
-//await chara_talk.say_and_wait(`米浴努力跑完全程的！要加油——喔！`);
-//await chara_talk.say_and_wait(
-//  `都还没开始跑，米浴就预感会是一场好比赛。米浴今天，特别地期待！`,
-//);
-//await chara_talk.say_and_wait(`呼，好……！还没到开始时间吗？`);
-//await chara_talk.say_and_wait(
-//  `开、开始发抖了……那个，哥哥大人。米浴可以，稍微握一下你的手吗？`,
-//);
-//await chara_talk.say_and_wait(`因为想带给大家幸福……米浴会全力奔跑的！`);
 
 handlers[event_hooks.school_atrium] = async (
   hook,

@@ -4,14 +4,15 @@ const CharaTalk = require('#/utils/chara-talk');
 
 const chara_talk = new CharaTalk(30);
 
-const print_event_name = require('#/event/snippets/print-event-name');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
 const { location_enum } = require('#/data/locations');
-const { gacha } = require('#/utils/list-utils');
 const { attr_enum } = require('#/data/train-const');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
+const print_event_name = require('#/event/snippets/print-event-name');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { gacha } = require('#/utils/list-utils');
 const your_name = era.get('callname:0:-2');
+const { say_by_passer_by } = require('#/utils/chara-talk');
 
 module.exports = async function () {
   const chara52_talk = get_chara_talk(52),
@@ -27,28 +28,31 @@ module.exports = async function () {
     await chara_talk.say_and_wait(
       `哎嘿嘿…… ${chara_talk.name}选手，在欢呼声中，走进了赛场——`,
     );
-    await era.printAndWait(
-      `赛${chara_talk.get_uma_sex_title()}A：「哇！！！」`,
-    );
+    await say_by_passer_by(`赛${chara_talk.get_uma_sex_title()}A`, `哇！！！`);
     await chara_talk.say_and_wait(`哎！？`);
-    await era.printAndWait(
-      `实力强劲的${chara_talk.get_uma_sex_title()}A：「哈啊……哈啊……！」`,
+    await say_by_passer_by(
+      `实力强劲的赛${chara_talk.get_uma_sex_title()}A`,
+      `哈啊……哈啊……！`,
     );
-    await era.printAndWait(
-      `赛${chara_talk.get_uma_sex_title()}A：「又刷新了记录！」`,
+    await say_by_passer_by(
+      `赛${chara_talk.get_uma_sex_title()}A`,
+      `又刷新了记录！`,
     );
     await era.printAndWait(`这下已经能确定是来年的经典赛主役了呢！`);
-    await era.printAndWait(
-      `赛${chara_talk.get_uma_sex_title()}B：「是啊…跑得真是太棒了。呐，那个，请一定……」`,
+    await say_by_passer_by(
+      `赛${chara_talk.get_uma_sex_title()}B`,
+      `是啊…跑得真是太棒了。呐，那个，请一定……`,
     );
-    await era.printAndWait(
-      `实力强劲的${chara_talk.get_uma_sex_title()}A：「……还有预定的安排等待执行。失礼了。」`,
+    await say_by_passer_by(
+      `赛${chara_talk.get_uma_sex_title()}A`,
+      `……还有预定的安排等待执行。失礼了。`,
     );
     await era.printAndWait(
       `实力强劲的${chara_talk.get_uma_sex_title()}A跑开了。`,
     );
-    await era.printAndWait(
-      `赛${chara_talk.get_uma_sex_title()}们：「啊~~~~等等~~~！」`,
+    await say_by_passer_by(
+      `赛${chara_talk.get_uma_sex_title()}们`,
+      `啊~~~~等等~~~！`,
     );
     await chara_talk.say_and_wait(`……好厉害。赛场边上也挤满了来旁观的人……`);
     await chara_talk.say_and_wait(

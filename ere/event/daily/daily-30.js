@@ -75,14 +75,14 @@ handlers[event_hooks.talk] = async function () {
         break;
       case 0: //干劲普通
         talk_arr = [
-          `${self_name} 会努力不让人失望的。`,
-          '要加油——喔！今天也请麻烦您多多指教了。',
+          `我们要做什么训练呢？`,
+          `${self_name}会努力不让人失望地。`,
         ].map((e) => [e]);
         break;
       case 1: //干劲良好
         talk_arr = [
-          `${callname}，我们开始训练吧？现在的 ${self_name} 感觉可以完成很多项目哦。`,
-          `${self_name}……又要变回没用的孩子了吗…`,
+          `要加油——喔！今天也请麻烦您多多指教了。`,
+          `${self_name}，我们开始训练吧？现在的米浴感觉可以完成很多项目哦。`,
         ].map((e) => [e]);
         break;
       case 2: //干劲极佳
@@ -95,21 +95,28 @@ handlers[event_hooks.talk] = async function () {
             `那个，${self_name} 已经做好热身运动了。`,
             `所以现在开始做什么都没问题哦。`,
           ],
-        ];
+        ].map((e) => [e]);
         break;
     }
   } else {
-    talk_arr = [
-      '每天，虽然只是一点点、但好像离理想中的自己越来越近了……的样子？',
-      `${callname}……那个，跟你说哦……${self_name} 每天都会努力的……你要相信 ${self_name} 一定可以改变的。`,
-      `现在呀……${self_name} 也已经不会，那么讨厌自己了哦。`,
-      `……呃，${callname}……今天也愿意继续照、照顾 ${self_name} 吗……？`,
-      `其……其实 ${self_name} 做了巧克力……${self_name} 做的巧克力你愿意吃吗……？你愿意收下的话，${self_name} 会很高兴的。`,
-      `星星可以实现大家的愿望，让大家都变得幸福，真的好厉害。${self_name}……也要努力才行。`,
-      `自从遇到 ${callname} 之后，每天时间都过得好快……${self_name} 会努力的！`,
-      `${self_name} 穿制服好看吗？`,
-      '一直被盯着看的话……感觉有点害羞。',
-    ].map((e) => [e]);
+    if (era.get('cflag:30:节日事件标记') === 1) {
+      talk_arr = [
+        `好像快要有活动了……不知道是要做什么样的事情呢？`,
+        `好像正在办活动……米浴会努力不制造麻烦的……可以去偷偷看一下嗎……？`,
+      ].map((e) => [e]);
+    } else {
+      talk_arr = [
+        '每天，虽然只是一点点、但好像离理想中的自己越来越近了……的样子？',
+        `${callname}……那个，跟你说哦……${self_name} 每天都会努力的……你要相信 ${self_name} 一定可以改变的。`,
+        `现在呀……${self_name} 也已经不会，那么讨厌自己了哦。`,
+        `……呃，${callname}……今天也愿意继续照、照顾 ${self_name} 吗……？`,
+        `其……其实 ${self_name} 做了巧克力……${self_name} 做的巧克力你愿意吃吗……？你愿意收下的话，${self_name} 会很高兴的。`,
+        `星星可以实现大家的愿望，让大家都变得幸福，真的好厉害。${self_name}……也要努力才行。`,
+        `自从遇到 ${callname} 之后，每天时间都过得好快……${self_name} 会努力的！`,
+        `${self_name} 穿制服好看吗？`,
+        '一直被盯着看的话……感觉有点害羞。',
+      ].map((e) => [e]);
+    }
   }
   for (const e of get_random_entry(talk_arr)) {
     await chara_talk.say_and_wait(e);
@@ -320,33 +327,7 @@ handlers[event_hooks.office_game] = async function () {
       break;
   }
 };
-handlers[event_hooks.office_study] = async function () {
-  const callname = era.get('callname:30:0');
-  switch (Math.floor(Math.random() * 2)) {
-    case 0:
-      await chara_talk.say_and_wait(
-        `这是${chara_talk.name}精挑细选的绘本，还请${callname} 垂阅。`,
-      );
-      break;
-    case 1:
-      await chara_talk.say_and_wait(`${callname} ，和比赛有关的事情都好擅长…`);
-      break;
-  }
-};
 
-handlers[event_hooks.office_study] = async function () {
-  const callname = era.get('callname:30:0');
-  switch (Math.floor(Math.random() * 2)) {
-    case 0:
-      await chara_talk.say_and_wait(
-        `这是${chara_talk.name}精挑细选的绘本，还请${callname} 垂阅。`,
-      );
-      break;
-    case 1:
-      await chara_talk.say_and_wait(`${callname} ，和比赛有关的事情都好擅长…`);
-      break;
-  }
-};
 handlers[event_hooks.school_atrium] = async function (hook) {
   const callname = era.get('callname:30:0');
   hook.arg = await select_action_in_atrium(30);

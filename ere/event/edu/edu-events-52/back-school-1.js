@@ -5,9 +5,9 @@ const {
   sys_change_weight,
 } = require('#/system/sys-calc-base-cflag');
 const {
-  sys_like_chara,
-  sys_get_colored_callname,
   sys_get_callname,
+  sys_get_colored_callname,
+  sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
@@ -20,8 +20,8 @@ const chara_colors = require('#/data/chara-colors').chara_colors[52];
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { attr_enum } = require('#/data/train-const');
 const { location_enum } = require('#/data/locations');
+const { attr_enum } = require('#/data/train-const');
 const { common_out_check } = require('#/event/edu/edu-events-52/snippets');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},{loc:number},EventObject):Promise<*>>} handlers */
@@ -198,7 +198,7 @@ module.exports = (handlers) => {
         '的歌声更能精准地传达感情，想来在台上的时候也能更加引人注目吧。',
       ]);
     }
-    flags.wait_flag = get_attr_and_print_in_event(52, [0, 0, 0, 10, 0], 0);
+    flags.wait_flag = get_attr_and_print_in_event(52, attr_change, 0);
     flags.wait_flag = sys_change_motivation(52, 1) || flags.wait_flag;
   };
 
@@ -915,7 +915,7 @@ module.exports = (handlers) => {
         urara.get_colored_name(),
         ' 都没有醒来。',
       ]);
-      flags.wait_flag = get_attr_and_print_in_event(52, [0, 30, 0, 0, 0], 0);
+      flags.wait_flag = get_attr_and_print_in_event(52, [0, 10, 0, 0, 0], 0);
     }
   };
 };
