@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const { race_enum } = require('#/data/race/race-const');
 const CharaTalk = require('#/utils/chara-talk');
@@ -22,8 +23,9 @@ module.exports = async (hook, extra_flag) => {
     await print_event_name('地下通道 出道战前', ruby);
     await ruby.say_and_wait(`我们去整备室吧。`);
     era.drawLine();
-    await era.printAndWait(
-      `议员A「让我们为第一红宝石华丽的初次比赛，鼓掌！！」`,
+    await say_by_passer_by(
+      `议员A`,
+      `让我们为第一红宝石华丽的初次比赛，鼓掌！！`,
     );
     await era.printAndWait(`（啪啪啪……！）`);
     era.printButton(`（……诶，谁啊这是？）`, 1);
@@ -31,28 +33,30 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `${me.actual_name}在大脑中检索了片刻，突然造访的中年男子的面容，和一位最近突然起势的政治家对上了。`,
     );
-    await era.printAndWait(
-      `议员A「呀，我很荣幸。能见证那个‘华丽一族’的出道。」`,
+    await say_by_passer_by(
+      `议员A`,
+      `呀，我很荣幸。能见证那个‘华丽一族’的出道。`,
     );
     await ruby.say_and_wait(`感谢您的祝贺。`);
     await era.printAndWait(
       `虽然露比从容地应对着议员模样的人，但这是重要的出道战前，${me.actual_name}本想让对方马上离开…`,
     );
-    await era.printAndWait(`议员A「我还带了祝贺的鲜花，你要是喜欢就好了。」`);
+    await say_by_passer_by(`议员A`, `我还带了祝贺的鲜花，你要是喜欢就好了。`);
     await ruby.say_and_wait(`有心了，请慢走。`);
-    await era.printAndWait(`议员A「诶，等——」`);
+    await say_by_passer_by(`议员A`, `诶，等——`);
     await ruby.say_and_wait(`不好意思，时间到了。得到您的声援，我很感动。`);
     await era.printAndWait(`第一红宝石挥手致意时偷看了你一眼。`);
     await ruby.say_and_wait(`下次请事先通知，务必要从正门来。`);
     await ruby.say_and_wait(
       `如果您和我的训练员一样，有足以被我们一族评价的自负。`,
     );
-    await era.printAndWait(`议员A「原来如此。失礼了，对不起打扰了。」`);
+    await say_by_passer_by(`议员A`, `原来如此。失礼了，对不起打扰了。`);
     await era.printAndWait(
       `第一红宝石目送着男人离开，同时将身体转向了${me.actual_name}。`,
     );
-    await era.printAndWait(
-      `记者A：「大小姐、训练员先生，非常抱歉。我有向工作人员传达拒绝那位的访问。」`,
+    await say_by_passer_by(
+      `记者A`,
+      `大小姐、训练员先生，非常抱歉。我有向工作人员传达拒绝那位的访问。`,
     );
     era.printButton(`因为没能拒绝所以也没办法。`, 1);
     era.printButton(`和传闻一样是位有压迫感的人物。`, 2);
@@ -64,7 +68,7 @@ module.exports = async (hook, extra_flag) => {
     await era.input();
     await ruby.say_and_wait(`是的。`);
     await ruby.say_and_wait(`恐怕是想通过我来炫耀和一族的联系。`);
-    await ruby.say_and_wait(`（因为是最近才起势，所以迫切地想要后盾吧。）`);
+    await ruby.say_and_wait(`因为是最近才起势，所以迫切地想要后盾吧。`, true);
     await era.printAndWait(
       `${me.actual_name}把视线投向一旁的慰问品，除了刚才的议员，各方人士都送来了花束。`,
     );
@@ -89,11 +93,11 @@ module.exports = async (hook, extra_flag) => {
       await ruby.say_and_wait(`……`);
       await ruby.say_and_wait(`请自便，拿不下的话就和管家说一声。`);
     } else {
-      await era.printAndWait(`你的贺礼，我已经切实收到了。`);
-      await era.printAndWait(`这副由你培养的身体的初次亮相，还请尽收眼底。`);
+      await ruby.say_and_wait(`你的贺礼，我已经切实收到了。`);
+      await ruby.say_and_wait(`这副由你培养的身体的初次亮相，还请尽收眼底。`);
     }
     await era.printAndWait(`时间到了，我去赛场。`);
-    await me.say_and_wait(`果然这朵花才是最美的啊。`, 1);
+    await me.say_and_wait(`果然这朵花才是最美的啊。`, true);
     await era.printAndWait(
       `${me.actual_name}和第一红宝石在地下通道时，也能感受到会场中热烈的气氛。`,
     );

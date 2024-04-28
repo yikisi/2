@@ -9,6 +9,7 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
+const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
@@ -265,7 +266,7 @@ handlers[event_hooks.out_church] = async function () {
   await ruby.say_and_wait(`那么，我去参拜。`);
   era.drawLine();
   await ruby.say_and_wait(`训练员先生也结束了吗？如果是的话，那么…`);
-  await era.printAndWait(`神主「哎呀，您不是红宝石小姐吗。感谢您的参拜。」`);
+  await say_by_passer_by(`神主`, `哎呀，您不是红宝石小姐吗。感谢您的参拜。`);
   await ruby.say_and_wait(`神主大人。接下来正要去事务性问候。`);
   era.drawLine();
   await ruby.say_and_wait(
@@ -449,12 +450,14 @@ handlers[event_hooks.out_station] = async function (hook) {
           await era.printAndWait(`在这里，你和第一红宝石的存在明显是异质的。`);
           await ruby.say_and_wait(`通过书本能获取的知识是有限的。`);
           await ruby.say_and_wait(`希望通过实地检查来加深知识。`);
-          await ruby.say_and_wait(`路人A「喂，那个难道不是第一红宝石吗？」`);
-          await ruby.say_and_wait(
-            `路人B「真的假的……那个华丽一族为什么在这里？」`,
+          await say_by_passer_by(`路人A`, `喂，那个难道不是第一红宝石吗？`);
+          await say_by_passer_by(
+            `路人B`,
+            `真的假的……那个华丽一族为什么在这里？`,
           );
-          await ruby.say_and_wait(
-            `路人C「旁边的事训练员吧，两个人去那家店的话，难道是这种关系？」`,
+          await say_by_passer_by(
+            `路人C`,
+            `旁边的事训练员吧，两个人去那家店的话，难道是这种关系？`,
           );
           await era.printAndWait(
             `果然很显眼，不用说，你和担当的身份已经暴露了。。`,
@@ -464,11 +467,12 @@ handlers[event_hooks.out_station] = async function (hook) {
           await era.input();
           await era.printAndWait(`就这样，第一红宝石紧紧地抱住了那只手。`);
           await era.printAndWait(`这样的话，待在这里也不会有不协调的感觉了。`);
-          await ruby.say_and_wait(`路人A「果然两个人已经是那种关系了…」`);
-          await ruby.say_and_wait(
-            `路人B「真的吗？那么，难道露比的肚子已经！？」`,
+          await say_by_passer_by(`路人A`, `果然两个人已经是那种关系了…`);
+          await say_by_passer_by(
+            `路人B`,
+            `真的吗？那么，难道露比的肚子已经！？`,
           );
-          await ruby.say_and_wait(`路人C「那不是犯罪吗！」`);
+          await say_by_passer_by(`路人C`, `那不是犯罪吗！`);
           await era.printAndWait(
             `之后，你和第一红宝石在周围各种声音的环绕下，在母婴店逛了一段时间。`,
           );

@@ -10,6 +10,7 @@ const {
   sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
+const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
@@ -46,13 +47,15 @@ module.exports = async (hook, extra_flag) => {
       sys_like_chara(85, 0, -5) && (await era.waitAnyKey());
     }
     era.drawLine();
-    await era.printAndWait(
-      `记者A「虽然有点早，但有人认为三重宝冠正是第一红宝石小姐的本命路线。」`,
+    await say_by_passer_by(
+      `记者A`,
+      `虽然有点早，但有人认为三重宝冠正是第一红宝石小姐的本命路线。`,
     );
-    await era.printAndWait(`记者A「看了今天的比赛，我也感受到了。」`);
-    await era.printAndWait(`记者B「和您母亲一样，甚至在其之上的光辉。」`);
-    await era.printAndWait(
-      `记者C「是啊，在那之后，希望能参加‘宝塚纪念’和‘有马纪念’等比赛。」`,
+    await say_by_passer_by(`记者B`, `看了今天的比赛，我也感受到了。`);
+    await say_by_passer_by(`记者B`, `和您母亲一样，甚至在其之上的光辉。`);
+    await say_by_passer_by(
+      `记者C`,
+      `是啊，在那之后，希望能参加‘宝塚纪念’和‘有马纪念’等比赛。`,
     );
     await era.printAndWait(`兴奋、期待……`);
     await ruby.say_and_wait(`谢谢大家。`);
@@ -69,9 +72,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `不想扫记者们的兴致，${me.actual_name}决定闭口不谈此事。`,
     );
-    era.println();
-    await era.printAndWait(`记者招待会后。`);
-    era.println();
+    await era.printAndWait(`\n记者招待会后。\n`);
     await ruby.say_and_wait(`年内，我想集中训练。`);
     await era.printAndWait(`正如成为第一红宝石的训练员后你所了解到的一样。`);
     await ruby.say_and_wait(`三重宝冠战线是【华丽一族】最看重的事情。`);
@@ -173,6 +174,7 @@ module.exports = async (hook, extra_flag) => {
       await ruby.say_and_wait(`拜托您了。`);
       era.printButton(`那么，我在入口等你。`, 1);
       await era.input();
+      await ruby.say_and_wait(`嗯。`);
     } else {
       sys_love_uma(85, -1);
       sys_like_chara(85, 0, -3) && (await era.waitAnyKey());
@@ -201,13 +203,15 @@ module.exports = async (hook, extra_flag) => {
       `——几天后，${me.actual_name}得到了第一红宝石“脚的周围稍微有些违和感”的报告……`,
     );
     await era.printAndWait(`你马上带第一红宝石去了经常就诊的医生那里。`);
-    await era.printAndWait(`医生「你的右脚，是急性化脓性疾病。」`);
-    await era.printAndWait(`医生「也就是所谓的【蜂窝织炎】。」`);
+    await say_by_passer_by(`医生`, `的右脚，是急性化脓性疾病。`);
+    await say_by_passer_by(`医生`, `也就是所谓的【蜂窝织炎】。`);
+    await say_by_passer_by(`医生`, ``);
     await ruby.say_and_wait(`！`, true);
-    await era.printAndWait(`医生「请放心，情况不严重。」`);
-    await era.printAndWait(`医生「多亏你在违和感阶段，就即使来就诊了。」`);
-    await era.printAndWait(
-      `医生「在你们下次的目标【秋华赏】前，就可以痊愈。」`,
+    await say_by_passer_by(`医生`, `请放心，情况不严重。`);
+    await say_by_passer_by(`医生`, `多亏你在违和感阶段，就即使来就诊了。`);
+    await say_by_passer_by(
+      `医生`,
+      `在你们下次的目标【秋华赏】前，就可以痊愈。`,
     );
     await ruby.say_and_wait(`……`);
     await ruby.say_and_wait(`决定了，年内预定的目标比赛暂时撤回。`);
@@ -222,28 +226,29 @@ module.exports = async (hook, extra_flag) => {
     if (ret1 === 2) {
       sys_like_chara(85, 0, 3) && (await era.waitAnyKey());
     }
-    await era.printAndWait(`医生「但是，真的可以吗？」`);
-    await era.printAndWait(
-      `医生「【秋华赏】和【伊丽莎白女王杯】，是你的梦想吧。」`,
+    await say_by_passer_by(`医生`, `但是，真的可以吗？`);
+    await say_by_passer_by(
+      `医生`,
+      `【秋华赏】和【伊丽莎白女王杯】，是你的梦想吧。`,
     );
     await ruby.say_and_wait(`……梦想。`);
     await ruby.say_and_wait(`谢谢你的好意，但是…`);
     await ruby.say_and_wait(`但是，我已经有了新的使命。`);
-    await era.printAndWait(`管家「还在会谈中，打扰了。」`);
-    await era.printAndWait(`管家「大小姐，马上为您安排会面吗？」`);
+    await say_by_passer_by(`管家`, `还在会谈中，打扰了。`);
+    await say_by_passer_by(`管家`, `大小姐，马上为您安排会面吗？`);
     await ruby.say_and_wait(`嗯，就那么做。`);
     await ruby.say_and_wait(
       `虽然提前了…但是和目标比赛的变更一起，今天发表吧。`,
     );
     era.drawLine({ content: '记者招待会上' });
-    await era.printAndWait(`记者A「训练员先生，这些没错吧。」`);
+    await say_by_passer_by(`记者A`, `训练员先生，这些没错吧。`);
     era.printButton(`是的，没有问题。`, 1);
     await era.input();
     await ruby.say_and_wait(`还有一件事，向大家报告。关于下一场目标比赛。`);
     await ruby.say_and_wait(`春天的【高松宫纪念】，决定参加。`);
     await ruby.say_and_wait(`即日起，我第一红宝石，宣布将参加短距离战线。`);
     await me.say_and_wait(`诶诶诶诶诶？`, true);
-    await era.printAndWait(`短暂的见面会顺利结束了——`);
+    await era.printAndWait(`\n短暂的见面会顺利结束了——`);
     await ruby.say_and_wait(`今天您辛苦了。`);
     era.printButton(`今天是真的很辛苦啊。`, 1);
     era.printButton(`这么辛苦的我会有奖励吗？`, 2);
@@ -283,7 +288,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`第一红宝石轻轻甩了下脑袋。`);
     await ruby.say_and_wait(`大家的声援，非常感谢。我实现了一族的愿望。`);
     await ruby.say_and_wait(`下一次出走，我会把更棒的奔跑献上。`);
-    era.drawLine({ content: '地下通道内' });
+    await era.printAndWait(`\n地下通道内`);
     await ruby.say_and_wait(`以前，你做的事好像都是对的。`);
     await ruby.say_and_wait(`虽然是人类，但你在某方面是很强的生物。`);
     await ruby.say_and_wait(`今后，我可能还会碰壁。`);
@@ -321,8 +326,8 @@ module.exports = async (hook, extra_flag) => {
     await miracle.say_and_wait(`冲刺…比谁都快，比谁都更早地——冲线！`);
     await miracle.say_and_wait(`脚…好痛，蹬不动地…`);
     await miracle.say_and_wait(`不行！为了大家，我一定要把胜利……`);
-    await era.printAndWait(`不会让你去的，我会在你迎来那等待你的绝望之前…`);
-    await era.printAndWait(`开辟未来！`);
+    await ruby.say_and_wait(`不会让你去的，我会在你迎来那等待你的绝望之前…`);
+    await ruby.say_and_wait(`开辟未来！`);
     await miracle.say_and_wait(`诶，露比？`);
     era.drawLine({ content: '比赛前' });
     await ruby.say_and_wait(`即使堵上一切，也要在现在报恩。那也是很好的选择。`);
@@ -339,14 +344,15 @@ module.exports = async (hook, extra_flag) => {
     await miracle.say_and_wait(`！`);
     await miracle.say_and_wait(`怎么跑…`);
     await miracle.say_and_wait(`我也要，为了大家…`);
-    await era.printAndWait(`实况「凯斯奇迹，失速！现在冲在前面的是——」`);
-    await era.printAndWait(`实况「第一红宝石！」`);
-    await era.printAndWait(`实况「第一红宝石，何等绮丽而凄厉的末脚！」`);
+    await say_by_passer_by(`实况`, `凯斯奇迹，失速！现在冲在前面的是——`);
+    await say_by_passer_by(`实况`, `第一红宝石！`);
+    await say_by_passer_by(`实况`, `第一红宝石，何等绮丽而凄厉的末脚！`);
     era.printButton(`去吧，露比。`, 1);
     await era.input();
     await ruby.say_and_wait(`……——`);
-    await era.printAndWait(
-      `实况「胜者是第一红宝石！展现压倒性的速度，华丽一族的，第一红宝石！」`,
+    await say_by_passer_by(
+      `实况`,
+      `胜者是第一红宝石！展现压倒性的速度，华丽一族的，第一红宝石！`,
     );
     era.drawLine({ content: '选手通道内' });
     await miracle.say_and_wait(`……露比。`);
@@ -407,8 +413,9 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`（啪啪啪啪啪……！！）`);
     await era.printAndWait(`所有人都站起来，称赞她。`);
     await ruby.say_and_wait(`大家…`);
+    await era.printAndWait(`（啪啪啪啪啪……！！）`);
     await era.printAndWait(`……`);
-    await era.printAndWait(`荻野贵女「——」`, { color: ruby.color });
+    await say_by_passer_by(`荻野贵女`, `——`);
     await ruby.say_and_wait(`……！母亲大人…`, true);
     await ruby.say_and_wait(`母亲大人也鼓掌……承认了我。`);
     await ruby.say_and_wait(`终于…`);

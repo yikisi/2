@@ -14,8 +14,14 @@ const { location_enum } = require('#/data/locations');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const edu_event_marks = new EduEventMarks(85);
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-
-module.exports = async function () {
+const { say_by_passer_by } = require('#/utils/chara-talk');
+const { add_event } = require('#/event/queue');
+/**
+ * @param {HookArg} hook
+ * @param _
+ * @param {EventObject} event_object
+ */
+module.exports = async function (hook, event_object) {
   const me = get_chara_talk(0),
     edu_weeks = era.get('cflag:85:育成回合计时');
   if (edu_weeks === 39) {
@@ -32,41 +38,36 @@ module.exports = async function () {
       `在没有被告知事态的情况下，你被带到的是某酒店的房间。${me.actual_name}换上了房间里准备好的西装。`,
     );
     await ruby.say_and_wait(`可以准备再华丽一点的领带吗？`);
-    await era.printAndWait(`管家「知道了，大小姐。」`);
+    await say_by_passer_by(`管家`, `知道了，大小姐。`);
     await era.printAndWait(`第一红宝石上下打量了你一番，就闭着眼睛转过脸去。`);
     era.printButton(`露比？`, 1);
     await era.input();
     await ruby.say_and_wait(`失礼，我说晚了。`);
     await ruby.say_and_wait(`母亲大人，听说我的训练员要来老家，特意赶过来了。`);
-    await me.say_and_wait(`哈啊？`);
+    await me.say_and_wait(`哈啊？`, true);
     era.drawLine();
-    await era.printAndWait(
-      `荻野贵女「初次见面，训练员先生。我是第一红宝石的母亲。」`,
-      { color: ruby.color },
+    await era.printAndWait(`在赛马娘界无人不知，留下了一场场华丽之战的马娘…`);
+    await say_by_passer_by(
+      `荻野贵女`,
+      `初次见面，训练员先生。我是第一红宝石的母亲。`,
     );
     await era.printAndWait(
       `眼前的这个${ruby.get_uma_sex_title()}，无论是堪称恐怖的美丽感，还是她的容貌、气场，样子简直就像——`,
     );
     era.printButton(`变大了的第一红宝石`, 1);
     await era.input();
-    await era.printAndWait(
-      `荻野贵女「在机场听说训练员先生要来，突然之间很抱歉。」`,
-      {
-        color: ruby.color,
-      },
+    await say_by_passer_by(
+      `荻野贵女`,
+      `在机场听说训练员先生要来，突然之间很抱歉。`,
     );
     era.printButton(`没有那种事`, 1);
     await era.input();
-    await era.printAndWait(`荻野贵女「这段时间，女儿都承蒙你的关照了。」`, {
-      color: ruby.color,
-    });
+    await say_by_passer_by(`荻野贵女`, `这段时间，女儿都承蒙你的关照了。`);
     era.printButton(`我才是，受了她很多照顾。`, 1);
     await era.input();
     await ruby.say_and_wait(`母亲大人，这之后也有安排吧？我和您一起。`);
-    await era.printAndWait(`荻野贵女「嗯~有吗……」`, {
-      color: ruby.color,
-    });
-    await me.say_and_wait(`！`);
+    await say_by_passer_by(`荻野贵女`, `嗯~有吗……`);
+    await me.say_and_wait(`！`, true);
     await era.printAndWait(
       `你被第一红宝石的母亲凝视着。那是其作为华丽一族的极致，想要看清你这个人的眼神。`,
     );
@@ -74,58 +75,38 @@ module.exports = async function () {
     await era.printAndWait(
       `这时，${me.actual_name}的脑中想起了测试时的那一天。`,
     );
-    era.drawLine();
     await ruby.say_and_wait(
-      `没错。请不要忘记这份身姿。若您有盯上的目标存在，那就必须做出相称的行为举止。`,
+      `\n没错。请不要忘记这份身姿。若您有盯上的目标存在，那就必须做出相称的行为举止。`,
+      true,
     );
-    await ruby.say_and_wait(`唯有如此，有朝一日才能成为自己想成为的模样`);
+    await ruby.say_and_wait(`唯有如此，有朝一日才能成为自己想成为的模样`, true);
     await era.printAndWait(`还有，那一抹微笑。`);
-    era.drawLine();
     await era.printAndWait(
-      `既然是她的训练员，那么和她并肩而立时，当然要挺胸抬头。`,
+      `\n既然是她的训练员，那么和她并肩而立时，当然要挺胸抬头。`,
     );
-    await era.printAndWait(`荻野贵女「——」`, {
-      color: ruby.color,
-    });
-    await era.printAndWait(`荻野贵女「你知道我的跑步吧。」`, {
-      color: ruby.color,
-    });
+    await say_by_passer_by(`荻野贵女`, `————`);
+    await say_by_passer_by(`荻野贵女`, `你知道我的跑步吧。`);
     era.printButton(`点头`, 1);
     await era.input();
-    await era.printAndWait(`荻野贵女「这样啊。」`, {
-      color: ruby.color,
-    });
+    await say_by_passer_by(`荻野贵女`, `这样啊。`);
     await ruby.say_and_wait(`母亲大人，还有事……`);
-    await era.printAndWait(`荻野贵女「不，已经结束了。」`, {
-      color: ruby.color,
-    });
-    await era.printAndWait(`荻野贵女「训练员先生，之后就任凭你判断了。」`, {
-      color: ruby.color,
-    });
-    await era.printAndWait(`荻野贵女「请你不要忘记，她是怎样的孩子。」`, {
-      color: ruby.color,
-    });
-    await ruby.say_and_wait(`——！`);
-    await era.printAndWait(
-      `荻野贵女「万分抱歉，我要去车站了，还有下一个安排。」`,
-      {
-        color: ruby.color,
-      },
+    await say_by_passer_by(`荻野贵女`, `不，已经结束了。`);
+    await say_by_passer_by(`荻野贵女`, `训练员先生，之后就任凭你判断了。`);
+    await say_by_passer_by(`荻野贵女`, `请你不要忘记，她是怎样的孩子。`);
+    await ruby.say_and_wait(`————!`, true);
+    await say_by_passer_by(
+      `荻野贵女`,
+      `万分抱歉，我要去车站了，还有下一个安排。`,
+    );
+    await say_by_passer_by(
+      `荻野贵女`,
+      `我们家的历史，请在那些书里…和露比的口中慢慢了解。`,
+    );
+    await say_by_passer_by(
+      `荻野贵女`,
+      `训练员先生，我们家的小姑娘就烦请你费心了。`,
     );
     await era.printAndWait(
-      `荻野贵女「我们家的历史，请在那些书里…和露比的口中慢慢了解。」`,
-      {
-        color: ruby.color,
-      },
-    );
-    await era.printAndWait(
-      `荻野贵女「训练员先生，我们家的小姑娘就烦请你费心了。」`,
-      {
-        color: ruby.color,
-      },
-    );
-    era.drawLine();
-    await ruby.say_and_wait(
       `送别第一红宝石的母亲，${me.actual_name}看了很多藏书后回到了特雷森学院。`,
     );
     era.printButton(`你的母亲，很厉害呢。`, 1);
@@ -203,6 +184,8 @@ module.exports = async function () {
     era.printButton(`可以给我看看你的脚吗？`, 2);
     const ret1 = await era.input();
     if (ret1 === 1) {
+      await ruby.say_and_wait(`嗯。在自己确信没有问题前，先锻炼身体。`);
+      await ruby.say_and_wait(`要完成的使命已经决定了。`);
       await ruby.say_and_wait(`话有点说得太多了，我去跑道。`);
       await era.printAndWait(`训练顺利结束了。`);
     } else {
@@ -249,19 +232,19 @@ module.exports = async function () {
     );
     await era.printAndWait(`这个阶段还说不准，只能先反复进行耐力训练。`);
     await era.printAndWait(`如果能做出成果，再以此为基础制定新的训练计划。`);
-    await era.printAndWait(`转眼，时间来到了放学后。`);
+    await era.printAndWait(`\n转眼，时间来到了放学后。`);
     await ruby.say_and_wait(
       `2400米，对我来说可能有点严酷。是在我适性外的。`,
       true,
     );
-    await ruby.say_and_wait(`训练员先生应该是这样推测的，我也感觉到了。）`);
+    await ruby.say_and_wait(`训练员先生应该是这样推测的，我也感觉到了。`, true);
     await ruby.say_and_wait(`不甘…`);
     await ruby.say_and_wait(
       `一定要挑战【橡树杯】，取得母亲未能达成的胜利。`,
       true,
     );
     await ruby.say_and_wait(`一族的存在，就是这样一步步积累的。`, true);
-    await era.printAndWait(`管家「大小姐，我来接你了。」`);
+    await say_by_passer_by(`管家`, `大小姐，我来接你了。`);
     await ruby.say_and_wait(`对不起，预定我要变更。`);
     await ruby.say_and_wait(`因为要自主练习，之后的事情就交给你了。`);
     await ruby.say_and_wait(
@@ -272,49 +255,50 @@ module.exports = async function () {
     get_attr_and_print_in_event(85, [0, 5, 0, 0, 0], 0) &&
       (await era.waitAnyKey());
   } else if (edu_weeks === 47 + 29) {
-    if (era.get('flag:当前位置') === location_enum.beach) {
-      await print_event_name('夏季合宿', ruby);
-      await era.printAndWait(`在轻微的慢跑中，第一红宝石跌倒了。`);
-      era.printButton(`没事吧！？`, 1);
+    if (
+      era.get('cflag:0:位置') !== location_enum.beach ||
+      era.get('cflag:68:位置') !== era.get('cflag:0:位置')
+    ) {
+      add_event(hook.hook, event_object);
+      return false;
+    }
+    await print_event_name('夏季合宿', ruby);
+    await era.printAndWait(`在轻微的慢跑中，第一红宝石跌倒了。`);
+    era.printButton(`没事吧！？`, 1);
+    await era.input();
+    await ruby.say_and_wait(`只是被沙子绊倒了，没有问题。`);
+    era.printButton(`受伤了吗？`, 1);
+    await era.input();
+    await ruby.say_and_wait(`没有的事。`);
+    await era.printAndWait(`好像真的没有问题，但是…`);
+    await era.printAndWait(`从夏季集训开始起，第一红宝石每日每日紧逼着自己。`);
+    await era.printAndWait(`只为了在之后的【秋华赏】上拿出成果。`);
+    await era.printAndWait(`难得来了海边，于是你想着……`);
+    era.printButton(`抓凤蝶`, 1);
+    era.printButton(`那么，锻炼耐久吧`, 2);
+    const ret = await era.input();
+    if (ret === 1) {
+      await ruby.say_and_wait(`理解不能。`);
+      era.printButton(`是这里特有的种类哦，华丽的，和你很般配。`, 1);
       await era.input();
-      await ruby.say_and_wait(`只是被沙子绊倒了，没有问题。`);
-      era.printButton(`受伤了吗？`, 1);
-      await era.input();
-      await ruby.say_and_wait(`没有的事。`);
-      await era.printAndWait(`好像真的没有问题，但是…`);
+      await ruby.say_and_wait(`……`);
+      await ruby.say_and_wait(`破茧成蝶，或许我并配不上它。`);
+      await era.printAndWait(`在第一红宝石抓凤蝶期间，小洋伞由你代劳打着。`);
       await era.printAndWait(
-        `从夏季集训开始起，第一红宝石每日每日紧逼着自己。`,
+        `阴影下对着凤蝶露出笑颜的少女，终于有了点这个年纪女孩该有的样子。`,
       );
-      await era.printAndWait(`只为了在之后的【秋华赏】上拿出成果。`);
-      await era.printAndWait(`难得来了海边，于是你想着……`);
-      era.printButton(`抓凤蝶`, 1);
-      era.printButton(`那么，锻炼耐久吧`, 2);
-      const ret = await era.input();
-      if (ret === 1) {
-        await ruby.say_and_wait(`没有的事。`);
-        era.printButton(`是这里特有的种类哦，华丽的，和你很般配。`, 1);
-        await era.input();
-        await ruby.say_and_wait(`……`);
-        await ruby.say_and_wait(`破茧成蝶，或许我并配不上它。`);
-        await era.printAndWait(`在第一红宝石抓凤蝶期间，小洋伞由你代劳打着。`);
-        await era.printAndWait(
-          `阴影下对着凤蝶露出笑颜的少女，终于有了点这个年纪女孩该有的样子。`,
-        );
-        get_attr_and_print_in_event(85, [0, 0, 10, 0, 0], 0) &&
-          (await era.waitAnyKey());
-        sys_like_chara(85, 0, 1) && (await era.waitAnyKey());
-      } else {
-        await ruby.say_and_wait(`是因为橡树杯上，我那不成气候的奔跑吧。`);
-        await era.printAndWait(
-          `果然，第一红宝石对于中距离的适性，远不如短英。`,
-        );
-        await era.printAndWait(`速度即是优势，也是她最大的弱点。`);
-        await era.printAndWait(
-          `你继续以锻炼耐力为中心，让第一红宝石进行了艰苦的练习。`,
-        );
-        get_attr_and_print_in_event(85, [0, 0, 0, 10, 0], 0) &&
-          (await era.waitAnyKey());
-      }
+      get_attr_and_print_in_event(85, [0, 0, 10, 0, 0], 0) &&
+        (await era.waitAnyKey());
+      sys_like_chara(85, 0, 1) && (await era.waitAnyKey());
+    } else {
+      await ruby.say_and_wait(`是因为橡树杯上，我那不成气候的奔跑吧。`);
+      await era.printAndWait(`果然，第一红宝石对于中距离的适性，远不如短英。`);
+      await era.printAndWait(`速度即是优势，也是她最大的弱点。`);
+      await era.printAndWait(
+        `你继续以锻炼耐力为中心，让第一红宝石进行了艰苦的练习。`,
+      );
+      get_attr_and_print_in_event(85, [0, 0, 0, 10, 0], 0) &&
+        (await era.waitAnyKey());
     }
   } else if (edu_weeks === 95 + 29) {
     const miracle = get_chara_talk(93);
@@ -548,7 +532,7 @@ module.exports = async function () {
     await ruby.say_and_wait(`想好要什么礼物了吗？`);
     era.printButton(`想要你。`, 1);
     await era.input();
-    await era.printAndWait(`真挚的回答。`);
+    await ruby.say_and_wait(`真挚的回答。`);
     await era.printAndWait(`第一红宝石停下了手里的动作，有一丝脸红。`);
     await ruby.say_and_wait(`那就要看你的表现了。`);
     await era.printAndWait(
@@ -810,7 +794,7 @@ module.exports = async function () {
   } else if (edu_event_marks.get('rose_master') === 1) {
     edu_event_marks.add('rose_master');
     await print_event_name('华丽的历史伟业', ruby);
-    await era.printAndWait(`第一家宅邸`);
+    await era.printAndWait(`\n第一家宅邸`);
     await era.printAndWait(
       `“华丽一族”，听到这个名字时，人们就会想起某位${ruby.get_uma_sex_title()}……`,
     );

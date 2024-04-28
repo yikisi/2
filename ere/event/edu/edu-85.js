@@ -17,6 +17,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const ruby = get_chara_talk(85);
 const { attr_enum } = require('#/data/train-const');
+const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise<*>>} */
 const handlers = {};
@@ -212,65 +213,80 @@ handlers[event_hooks.office_study] = async (hook, __, event_object) => {
   return true;
 };
 
-handlers[event_hooks.week_end] = async () => {
+/**
+ * @param {HookArg} hook
+ * @param __
+ * @param {EventObject} event_object
+ */
+handlers[event_hooks.week_end] = async (hook, __, event_object) => {
   const edu_weeks = era.get('cflag:85:育成回合计时');
   let wait_flag = false;
   if (edu_weeks === 47 + 32) {
-    if (era.get('flag:当前位置') !== location_enum.beach) {
-      await print_event_name('海边 得到的启示', ruby);
-      await ruby.say_and_wait(
-        `训练员${get_chara_talk(0).get_adult_sex_title()}。`,
-      );
-      await ruby.say_and_wait(`你，在我的速度中，发现了光辉？`);
-      era.printButton(`是啊。`, 1);
-      await era.input();
-      await ruby.say_and_wait(`如果善用这个武器，我也能逼近…`);
-      await ruby.say_and_wait(`如果用这双脚，能展现出最耀眼的光辉的话…`);
-      await ruby.say_and_wait(`和选择的路线无冠，那血脉就流淌在这个身体里。`);
-      await ruby.say_and_wait(`相信只有王道路线能绽放光辉，我也不过如此而已。`);
-      await ruby.say_and_wait(`但是，你可以让我在那条道路外达成使命。`);
-      await ruby.say_and_wait(`以最适合我的方式。`);
-      await ruby.say_and_wait(`这个月辛苦您了。`);
-      await ruby.say_and_wait(`我充分认识到，没有你我是无法前进的。`);
-      await ruby.say_and_wait(`首先必须向家里传达决断。`);
-      await ruby.say_and_wait(`之后，还请继续多多指教。`);
-      const attr_change = new Array(5).fill(0);
-      gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 5));
-      wait_flag = get_attr_and_print_in_event(85, attr_change, 0) || wait_flag;
+    if (
+      era.get('cflag:0:位置') !== location_enum.beach ||
+      era.get('cflag:85:位置') !== era.get('cflag:0:位置')
+    ) {
+      add_event(hook.hook, event_object);
+      return false;
     }
+    await print_event_name('海边 得到的启示', ruby);
+    await ruby.say_and_wait(
+      `训练员${get_chara_talk(0).get_adult_sex_title()}。`,
+    );
+    await ruby.say_and_wait(`你，在我的速度中，发现了光辉？`);
+    era.printButton(`是啊。`, 1);
+    await era.input();
+    await ruby.say_and_wait(`如果善用这个武器，我也能逼近…`);
+    await ruby.say_and_wait(`如果用这双脚，能展现出最耀眼的光辉的话…`);
+    await ruby.say_and_wait(`和选择的路线无冠，那血脉就流淌在这个身体里。`);
+    await ruby.say_and_wait(`相信只有王道路线能绽放光辉，我也不过如此而已。`);
+    await ruby.say_and_wait(`但是，你可以让我在那条道路外达成使命。`);
+    await ruby.say_and_wait(`以最适合我的方式。`);
+    await ruby.say_and_wait(`这个月辛苦您了。`);
+    await ruby.say_and_wait(`我充分认识到，没有你我是无法前进的。`);
+    await ruby.say_and_wait(`首先必须向家里传达决断。`);
+    await ruby.say_and_wait(`之后，还请继续多多指教。`);
+    const attr_change = new Array(5).fill(0);
+    gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 5));
+    wait_flag = get_attr_and_print_in_event(85, attr_change, 0) || wait_flag;
   } else if (edu_weeks === 95 + 32) {
-    if (era.get('flag:当前位置') !== location_enum.beach) {
-      await print_event_name('海边 夏季合宿结束', ruby);
-      await ruby.say_and_wait(`为了使命，应有奉献自身的觉悟。`);
-      era.printButton(`奉献？`, 1);
-      await era.input();
-      await ruby.say_and_wait(`凯斯奇迹同学是对的，我……`);
-      era.printButton(`真的是对的吗？`, 1);
-      await era.input();
-      await ruby.say_and_wait(`诶？`);
-      era.printButton(`${ruby.name}，你觉得凯斯奇迹这样就好了吗？`, 1);
-      await era.input();
-      await ruby.say_and_wait(`！`);
-      await ruby.say_and_wait(`……`);
-      await era.printAndWait(`${ruby.name}陷入了沉思。`);
-      await era.printAndWait(
-        `晚上，先室友一步回到寝室的${ruby.name}正喃喃自语。`,
-      );
-      await ruby.say_and_wait(`我们，很像…`);
-      await ruby.say_and_wait(`血脉、‘奇迹’，赋予了我们使命和有目共睹的才能。`);
-      await ruby.say_and_wait(`但有一定的不同，那是……`);
-      await ruby.say_and_wait(`奇迹同学，你的前路…`);
-      await ruby.say_and_wait(`以那种脚步前进，未来只会…`);
-      await ruby.say_and_wait(`奇迹同学${ruby.sex}自己，觉得这样就好了吗？`);
-      await ruby.say_and_wait(`真的是对的嘛？`, true);
-      await ruby.say_and_wait(`你觉得凯斯奇迹这样就好了吗？`, true);
-      await ruby.say_and_wait(`不可能好。`);
-      await ruby.say_and_wait(`我，不能允许…`);
-      await era.printAndWait(`夏天的集训，在不安中结束了。`);
-      const attr_change = new Array(5).fill(0);
-      gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 5));
-      wait_flag = get_attr_and_print_in_event(85, attr_change, 0) || wait_flag;
+    if (
+      era.get('cflag:0:位置') !== location_enum.beach ||
+      era.get('cflag:85:位置') !== era.get('cflag:0:位置')
+    ) {
+      add_event(hook.hook, event_object);
+      return false;
     }
+    await print_event_name('海边 夏季合宿结束', ruby);
+    await ruby.say_and_wait(`为了使命，应有奉献自身的觉悟。`);
+    era.printButton(`奉献？`, 1);
+    await era.input();
+    await ruby.say_and_wait(`凯斯奇迹同学是对的，我……`);
+    era.printButton(`真的是对的吗？`, 1);
+    await era.input();
+    await ruby.say_and_wait(`诶？`);
+    era.printButton(`${ruby.name}，你觉得凯斯奇迹这样就好了吗？`, 1);
+    await era.input();
+    await ruby.say_and_wait(`！`);
+    await ruby.say_and_wait(`……`);
+    await era.printAndWait(`${ruby.name}陷入了沉思。`);
+    await era.printAndWait(
+      `\n晚上，先室友一步回到寝室的${ruby.name}正喃喃自语。`,
+    );
+    await ruby.say_and_wait(`我们，很像…`);
+    await ruby.say_and_wait(`血脉、‘奇迹’，赋予了我们使命和有目共睹的才能。`);
+    await ruby.say_and_wait(`但有一定的不同，那是……`);
+    await ruby.say_and_wait(`奇迹同学，你的前路…`);
+    await ruby.say_and_wait(`以那种脚步前进，未来只会…`);
+    await ruby.say_and_wait(`奇迹同学${ruby.sex}自己，觉得这样就好了吗？`);
+    await ruby.say_and_wait(`真的是对的嘛？`, true);
+    await ruby.say_and_wait(`你觉得凯斯奇迹这样就好了吗？`, true);
+    await ruby.say_and_wait(`不可能好。`);
+    await ruby.say_and_wait(`我，不能允许…`);
+    await era.printAndWait(`夏天的集训，在不安中结束了。`);
+    const attr_change = new Array(5).fill(0);
+    gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 5));
+    wait_flag = get_attr_and_print_in_event(85, attr_change, 0) || wait_flag;
   }
   wait_flag && (await era.waitAnyKey());
 };
@@ -337,6 +353,8 @@ handlers[event_hooks.out_church] = async (hook, __, event_object) => {
         `如此感慨的你，决定先从纠正握笔的姿势开始，从身后包住了${ruby.name}的小手。`,
       );
       await era.printAndWait(`你和${ruby.name}度过了饱含文化交流的愉悦午后。`);
+      get_attr_and_print_in_event(85, [20, 0, 0, 0, 0], 0) &&
+        (await era.waitAnyKey());
     } else if (ret1 === 2) {
       await ruby.say_and_wait(`……`);
       await ruby.say_and_wait(`晚上，家主会在第一家的宅邸设宴。`);
@@ -344,6 +362,7 @@ handlers[event_hooks.out_church] = async (hook, __, event_object) => {
       await ruby.say_and_wait(`请安心，是华丽一族内部的晚宴。`);
       await ruby.say_and_wait(`去和母亲大人打个招呼吧？`);
       await era.printAndWait(`跟你预想的不同，享受了轻松的宴会时间。`);
+      sys_change_attr_and_print(85, '体力', 200) && (await era.waitAnyKey());
     } else {
       await ruby.say_and_wait(`噗，呵呵。`);
       await ruby.say_and_wait(`只有我们两个人，也要开派对吗？`);
@@ -353,7 +372,10 @@ handlers[event_hooks.out_church] = async (hook, __, event_object) => {
       );
       await ruby.say_and_wait(`就有劳您让我享受一番了？`);
       await era.printAndWait(`你和${ruby.name}度过了愉快的一天。`);
+      get_attr_and_print_in_event(85, [0, 0, 0, 0, 0], 20) &&
+        (await era.waitAnyKey());
     }
+    era.set('cflag:85:节日事件标记', 0);
   } else if (edu_weeks === 95 + 1) {
     await print_event_name('新年参拜', ruby);
     await ruby.say_and_wait(`受到关注，并不会有问题。`);
@@ -413,7 +435,7 @@ handlers[event_hooks.out_church] = async (hook, __, event_object) => {
       await era.printAndWait(`但你确信，是${ruby.name}驾驭了这身华丽的衣装。`);
       await era.printAndWait(`头上别的山茶花很漂亮，但也不如少女自身动人。`);
       await era.printAndWait(`衣服上的是……牵牛花啊。`);
-      await me.say_and_wait(`爱情、和你紧紧相依`, true);
+      await ruby.say_and_wait(`爱情、和你紧紧相依`, true);
       get_attr_and_print_in_event(85, [8, 8, 8, 8, 8], 0) &&
         (await era.waitAnyKey());
     } else {
@@ -426,6 +448,7 @@ handlers[event_hooks.out_church] = async (hook, __, event_object) => {
       get_attr_and_print_in_event(85, [0, 0, 0, 0, 0], 35) &&
         (await era.waitAnyKey());
     }
+    era.set('cflag:85:节日事件标记', 0);
   }
   return true;
 };

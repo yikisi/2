@@ -42,6 +42,7 @@ module.exports = async function () {
     fontWeight: 'bold',
     isParagraph: true,
   });
+  await print_event_name('“露比说不定会换个训练员”', ruby);
   era.drawLine({ content: '在那之后' });
   await era.printAndWait(`某一天，你收到了露比委托管家先生交给你的CD。`);
   era.println();
@@ -154,7 +155,9 @@ module.exports = async function () {
   await ruby.say_and_wait(`哦♥哦♥哦！好厉害♥能顶到最里面♥呜哦哦哦啊！`);
   await era.printAndWait(`她粗俗地那样叫着，未婚夫听了很高兴地问她。`);
   await era.printAndWait(`黄毛「训练员的小鸡鸡和我的巨根，哪个好？」`);
-  await ruby.say_and_wait(`啊！这个！这边这个大大的♥能够到训练员碰不到的地方♥`);
+  await ruby.say_and_wait(
+    `啊！这个！这边这个大大的♥能够到训练员碰不到的地方♥`,
+  );
   await era.printAndWait(`黄毛「哈哈，你真的很喜欢巨根呢！」`);
   await ruby.say_and_wait(
     `喜欢！♥喜欢大块头的！♥和小鸡鸡训练员作为生物的等级不同♥`,
@@ -211,5 +214,4 @@ module.exports = async function () {
   );
   await era.printAndWait(`看到这一幕的未婚夫把露比随手扔到床上。`);
   await ruby.say_and_wait(`……对不起，训练员先生……`);
-  await print_event_name('露比说不定会换个训练员', ruby);
 };

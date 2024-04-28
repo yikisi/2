@@ -164,7 +164,7 @@ module.exports = async (hook, extra_flag) => {
       `只要参赛，那就一定会有胜者，一定会有败者……就算输了也很尊，全部都是胜者什么的，真亏我说得出这种话啊……`,
     );
     era.printButton(
-      `正是登上赛场，所建立的联系，才会让${chara_talk.get_couple_title}如此之尊，这不是你一直以来就知道的吗？`,
+      `正是登上赛场，所建立的联系，才会让你们如此之尊，这不是你一直以来就知道的吗？`,
       1,
     );
     await era.input();
@@ -182,7 +182,7 @@ module.exports = async (hook, extra_flag) => {
     await me.say_and_wait(`当然。`);
     await chara_talk.say_and_wait(`我觉得，不论如何，我都要参加……G1赛事。`);
     await chara_talk.say_and_wait(
-      `感觉，对在场的所有${chara_talk.get_couple_title}，都是犯下了需要在炙热铁板上土下座的失礼`,
+      `感觉，对在场的所有你们，都是犯下了需要在炙热铁板上土下座的失礼`,
     );
     await chara_talk.say_and_wait(
       `既然如此，那就不得不去做了，参赛，战胜G1，然后让其他人觉得，数码很强。`,
@@ -348,7 +348,7 @@ module.exports = async (hook, extra_flag) => {
       `那么，${chara_talk.sex}们为何而可爱？${chara_talk.sex}们的哪里让我觉得伟大、无可救药地吸引着我？`,
     );
     await chara_talk.say_and_wait(
-      `今天终于明白了，我喜欢的是${chara_talk.get_couple_title}『奋不顾身地为自己的梦想而拼搏』的样子啊！`,
+      `今天终于明白了，我喜欢的是你们『奋不顾身地为自己的梦想而拼搏』的样子啊！`,
     );
     await era.printAndWait(
       `咚咚咚地跺着脚，表达出数码${chara_talk.sex}终于明白的喜悦。`,
@@ -464,7 +464,7 @@ module.exports = async (hook, extra_flag) => {
     await print_event_name('秋季天皇赏胜利', chara_talk);
     await era.printAndWait(`咚咚咚咚——`);
     await era.printAndWait(
-      `在低沉的脚步声，${chara_talk.get_couple_title}逐渐逼近观众席，此时，意外地跑在外道的是——`,
+      `在低沉的脚步声，你们逐渐逼近观众席，此时，意外地跑在外道的是——`,
     );
     await say_by_passer_by(
       `解说`,
@@ -608,7 +608,7 @@ module.exports = async (hook, extra_flag) => {
     //通用比赛入着
     await print_event_name('竞赛上榜', chara_talk);
     await chara_talk.say_and_wait(
-      `唔姆唔姆，原来如此，${chara_talk.get_couple_title}的闪耀，还是有点难以接近……`,
+      `唔姆唔姆，原来如此，你们的闪耀，还是有点难以接近……`,
     );
     await era.printAndWait('没能获胜的数码，在赛后也没表现出太大的失落……');
     await chara_talk.say_and_wait(`呜……果然，我还是不该作为粉丝出现在这里的……`);

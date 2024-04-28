@@ -35,24 +35,6 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
   aim_races[extra_flag.race];
 
-handlers[check_stages.love_event] = () => {
-  const love = era.get('love:19'),
-    love_event = new EventObject(19, cb_enum.love);
-  switch (love) {
-    case 49:
-    case 74:
-      add_event(event_hooks.week_start, love_event);
-      break;
-    case 89:
-    case 99:
-      add_event(event_hooks.week_end, love_event);
-      break;
-  }
-  if (era.get('cflag:19:爱慕暂拒') === 1 && love === 74) {
-    add_event(event_hooks.week_end, love_event);
-  }
-};
-
 handlers[check_stages.next_week] = () => {
   const edu_weeks = era.get('cflag:19:育成回合计时');
   if (edu_weeks < 3 * 48) {

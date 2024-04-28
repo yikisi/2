@@ -287,7 +287,7 @@ async function love_99_week_end(chara_talk) {
   await sys_love_uma_in_event(30);
 }
 /**
- * ${chara_talk.name} - 爱慕
+ * 米浴 - 爱慕
  *
  * @author 梦露
  */
