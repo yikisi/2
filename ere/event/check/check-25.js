@@ -3,7 +3,6 @@ const era = require('#/era-electron');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
-const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
@@ -13,8 +12,8 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
+const CoffeeEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-25');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -81,21 +80,37 @@ handlers[check_stages.after_race] = ({ race, rank }) => {
   }
 };
 
+handlers[check_stages.love_event] = () => {
+  const love = era.get('love:25');
+  const event_object = new EventObject(25, cb_enum.love).set_arg(love);
+  switch (love) {
+    case 49:
+    case 89:
+    case 99:
+      add_event(event_hooks.week_end, event_object);
+      break;
+    case 74:
+      if (new CoffeeEduMarks().our_taste) {
+        add_event(event_hooks.week_end, event_object);
+      }
+  }
+};
+
 handlers[check_stages.next_week] = () => {
-  const edu_weeks = era.get('cflag:25:育成回合计时');
+  const edu_marks = new CoffeeEduMarks(),
+    edu_weeks = era.get('cflag:25:育成回合计时');
+  if (
+    era.get('love:25') === 74 &&
+    edu_marks.our_taste === 1 &&
+    !era.get('flag:回合爱慕惩罚')
+  ) {
+    add_event(
+      event_hooks.week_end,
+      new EventObject(25, cb_enum.love).set_arg(74),
+    );
+  }
   if (edu_weeks < 3 * 48) {
-    const edu_event_marks = new EduEventMarks(25),
-      event_obj = new EventObject(25, cb_enum.edu),
-      event_obj_special = new EventObject(25, cb_enum.edu, true);
-    if (edu_weeks > 25) {
-      check_and_add_event(
-        edu_event_marks,
-        edu_weeks,
-        'our_flavor',
-        event_hooks.back_school,
-        event_obj,
-      );
-    }
+    const event_obj_special = new EventObject(25, cb_enum.edu, true);
     switch (edu_weeks) {
       case 1:
         add_event(event_hooks.train, event_obj_special);

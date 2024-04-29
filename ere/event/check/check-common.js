@@ -6,8 +6,8 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
-const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
+const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const { add_event, cb_enum } = require('#/event/queue');
 
@@ -22,7 +22,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { location_enum } = require('#/data/locations');
 const { class_enum } = require('#/data/race/model/race-info');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 const { pressure_border } = require('#/data/train-const');
 
 /** @param {number} chara_id */
@@ -39,10 +39,62 @@ function get_action_debuff(chara_id) {
 /** @type {Record<string,function(chara_id:number,extra_flag:*):*>} */
 const handlers = {};
 
+/** @param {number} chara_id */
+handlers[check_stages.aim_check] = (chara_id) => {
+  const buffer = [];
+  /** @type {Record<string,{race:number,rank:number}>} */
+  const races = era.get(`cflag:${chara_id}:育成成绩`);
+  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+  let g1_count = 0,
+    g2_count = 0,
+    other_count = 0;
+  Object.values(races).forEach((e) => {
+    const info = race_infos[e.race];
+    if (info.race_class === class_enum.G1) {
+      g1_count += e.rank <= 5;
+    } else if (info.race_class === class_enum.G2) {
+      g2_count += e.rank <= 3;
+    } else if (e.race !== race_enum.begin_race) {
+      other_count += e.rank === 1;
+    }
+  });
+  buffer.push({
+    check: Number(g1_count > 0),
+    color: g1_count > 0 ? attr_change_colors.up : attr_change_colors.down,
+    content: `一场G1比赛 入着 ${g1_count}/1 ${g1_count > 0 ? '✔' : '✘'}`,
+  });
+  buffer.push({
+    check: Math.min(g2_count, 3) - 2,
+    color: g2_count >= 3 ? attr_change_colors.up : attr_change_colors.down,
+    content: `三场G2比赛 前三名 ${g2_count}/3 ${g2_count >= 3 ? '✔' : '✘'}`,
+  });
+  buffer.push({
+    check: Math.min(other_count, 5) - 4,
+    color: other_count >= 5 ? attr_change_colors.up : attr_change_colors.down,
+    content: `五场G3、OP、PreOP比赛 1着 ${other_count}/5 ${
+      other_count >= 5 ? '✔' : '✘'
+    }`,
+  });
+  return buffer;
+};
+
 handlers[check_stages.love_event] = (chara_id) =>
   chara_id &&
   add_event(event_hooks.week_end, new EventObject(chara_id, cb_enum.love));
 
+const aim_races = {};
+aim_races[race_enum.begin_race] = 2;
+
+handlers[check_stages.next_week] = (chara_id) => {
+  if (chara_id && era.get(`cflag:${chara_id}:种族`)) {
+    const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
+    if (edu_weeks < 3 * 48) {
+      check_and_register_aim_race(chara_id, aim_races, edu_weeks);
+    } else if (edu_weeks === 143 + 9) {
+      add_event(event_hooks.week_start, new EventObject(chara_id, cb_enum.edu));
+    }
+  }
+};
 handlers[check_stages.prison] = (chara_id) => {
   const love = era.get(`love:${chara_id}`),
     prison_limit = era.get('flag:极端行为限制'),
@@ -170,49 +222,15 @@ handlers[check_stages.want_make_love] = (chara_id) => {
 };
 
 /** @param {number} chara_id */
-handlers[check_stages.aim_check] = (chara_id) => {
-  const buffer = [];
-  /** @type {Record<string,{race:number,rank:number}>} */
-  const races = era.get(`cflag:${chara_id}:育成成绩`);
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-  let g1_count = 0,
-    g2_count = 0,
-    other_count = 0;
-  Object.values(races).forEach((e) => {
-    const info = race_infos[e.race];
-    if (info.race_class === class_enum.G1) {
-      g1_count += e.rank <= 5;
-    } else if (info.race_class === class_enum.G2) {
-      g2_count += e.rank <= 3;
-    } else if (e.race !== race_enum.begin_race) {
-      other_count += e.rank === 1;
-    }
-  });
-  buffer.push({
-    check: Number(g1_count > 0),
-    color: g1_count > 0 ? attr_change_colors.up : attr_change_colors.down,
-    content: `一场G1比赛 入着 ${g1_count}/1 ${g1_count > 0 ? '✔' : '✘'}`,
-  });
-  buffer.push({
-    check: Math.min(g2_count, 3) - 2,
-    color: g2_count >= 3 ? attr_change_colors.up : attr_change_colors.down,
-    content: `三场G2比赛 前三名 ${g2_count}/3 ${g2_count >= 3 ? '✔' : '✘'}`,
-  });
-  buffer.push({
-    check: Math.min(other_count, 5) - 4,
-    color: other_count >= 5 ? attr_change_colors.up : attr_change_colors.down,
-    content: `五场G3、OP、PreOP比赛 1着 ${other_count}/5 ${
-      other_count >= 5 ? '✔' : '✘'
-    }`,
-  });
-  return buffer;
-};
-
-/** @param {number} chara_id */
 handlers[check_stages.palace_check] = (chara_id) => {
   common_palace_check(chara_id);
   return handlers[check_stages.aim_check](chara_id);
 };
+
+handlers[check_stages.personal_action] = () => ({});
+
+handlers[check_stages.personal_titles] = (chara_id) =>
+  [era.get(`staticcstr:${chara_id}:称号`)].filter((e) => e);
 
 /**
  * @param {number} chara_id
@@ -231,25 +249,6 @@ handlers[check_stages.title_check] = (chara_id, extra_flag) => {
       n: era.get(`staticcstr:${chara_id}:称号`),
     });
     extra_flag.aim_check && sys_personal_achievement.set(chara_id, 1);
-  }
-};
-
-handlers[check_stages.personal_action] = () => ({});
-
-handlers[check_stages.personal_titles] = (chara_id) =>
-  [era.get(`staticcstr:${chara_id}:称号`)].filter((e) => e);
-
-const aim_races = {};
-aim_races[race_enum.begin_race] = 2;
-
-handlers[check_stages.next_week] = (chara_id) => {
-  if (chara_id && era.get(`cflag:${chara_id}:种族`)) {
-    const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
-    if (edu_weeks < 3 * 48) {
-      check_and_register_aim_race(chara_id, aim_races, edu_weeks);
-    } else if (edu_weeks === 143 + 9) {
-      add_event(event_hooks.week_start, new EventObject(chara_id, cb_enum.edu));
-    }
   }
 };
 

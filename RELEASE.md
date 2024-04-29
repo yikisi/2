@@ -1,11 +1,12 @@
-# [EraUma v0.6](https://gitgud.io/umaera/erauma/-/releases/v0.52)
-_Incoming_
+# [EraUma v0.59](https://gitgud.io/umaera/erauma/-/releases/v0.52)
 
-EraUma v0.6，适配 [EraElectron v1.2.0 (zero)](https://gitgud.io/umaera/era-electron/-/releases/v1.2.0) 版本
+_2024/5/4_
+
+EraUma v0.59，适配 [EraElectron v1.2.0 (zero)](https://gitgud.io/umaera/era-electron/-/releases/v1.2.0) 版本
 
 ## Added
 * 翻译实现春乌拉拉的口上；
-* 翻译实现爱丽速子的口上（进行中）；
+* 翻译实现爱丽速子的口上；
 * 优化并润色所有角色的口上脚本（进行中）；
 * 更新节日事件地文；
 * 重构了游戏设置界面，大幅优化了游戏选项的显示效果和可扩展性；
