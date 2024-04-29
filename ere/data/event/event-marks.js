@@ -14,6 +14,7 @@ class EventMarks {
     if (!this.obj) {
       this.obj = era.set(`cflag:${this.chara_id}:特殊事件标识`, {});
     }
+    Object.entries(this.obj).map((e) => !e[1] && delete this.obj[e[0]]);
   }
 
   count() {
@@ -39,6 +40,9 @@ class EventMarks {
   /** @param {number|string} hook */
   sub(hook) {
     this.obj[hook] = Math.max(this.get(hook) - 1, 0);
+    if (!this.obj[hook]) {
+      delete this.obj[hook];
+    }
     return this;
   }
 }
