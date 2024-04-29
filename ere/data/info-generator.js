@@ -735,7 +735,13 @@ module.exports = {
     if (
       era.get(`cflag:${chara_id}:性别`) - 1 &&
       era.get(`cflag:${chara_id}:成长阶段`) >= 2 &&
-      era.get(`talent:${chara_id}:泌乳`)
+      era.get(`talent:${chara_id}:泌乳`) &&
+      (!chara_id ||
+        era.getCharactersInTrain().length > 0 ||
+        era.get('status:0:马语者') ||
+        era.get('status:0:透视镜片') ||
+        era.get(`exp:${chara_id}:性爱次数`) >
+          era.get(`exp:${chara_id}:睡奸次数`))
     ) {
       status_list.push({ color: buff_colors[2], content: '泌乳' });
     }
