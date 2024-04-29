@@ -4,10 +4,10 @@ const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
-const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const CharaTalk = require('#/utils/chara-talk');
@@ -105,9 +105,7 @@ async function game_over(again) {
             era
               .getAddedCharacters()
               .filter((e) => e)
-              .forEach((e) =>
-                sys_call_mec(e, check_stages.mec_callname_customize),
-              );
+              .forEach((e) => get_custom_mec(e).set_callname());
 
             era.drawLine();
             await era.printAndWait(
@@ -353,7 +351,7 @@ async function game_over(again) {
         }
         sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
           (e) => {
-            sys_call_mec(e, check_stages.mec_callname_customize);
+            get_custom_mec(e).set_callname();
             sys_call_check(e, check_stages.after_punish, {
               level: punish_level,
             });

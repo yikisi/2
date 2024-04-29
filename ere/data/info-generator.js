@@ -6,12 +6,13 @@ const {
   get_bust_size,
   get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
-const sys_call_mec = require('#/system/script/sys-call-mec');
 const {
   sys_check_hide_relation_and_love,
   sys_check_limit_relation_and_love,
   sys_check_remote,
 } = require('#/system/sys-calc-chara-param');
+
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const attr_score_table = require('#/data/attr-score-table.json');
 const { buff_colors, sex_colors } = require('#/data/color-const');
@@ -27,7 +28,6 @@ const {
   trained_talent_names,
   virgin_state,
 } = require('#/data/ero/status-const');
-const check_stages = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const LoveLimitStatus = require('#/data/love-limit-status');
 const {
@@ -603,8 +603,7 @@ module.exports = {
       }
       status_list.push(obj);
     }
-    era.get(`equip:${chara_id}:淫纹奴役`) &&
-      status_list.push(...sys_call_mec(chara_id, check_stages.mec_status));
+    status_list.push(...get_custom_mec(chara_id).get_status());
     era.get(`status:${chara_id}:生日`) &&
       status_list.push({
         color: buff_colors[1],
@@ -789,7 +788,7 @@ module.exports = {
   },
   get_talent: (chara_id) =>
     [
-      ...sys_call_mec(chara_id, check_stages.mec_talents),
+      ...get_custom_mec(chara_id).get_talents(),
       ...new Array(2)
         .fill(0)
         .map((_, i) => {

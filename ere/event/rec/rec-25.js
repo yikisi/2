@@ -1,13 +1,12 @@
 const era = require('#/era-electron');
 
-const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
@@ -637,7 +636,7 @@ module.exports = {
           1,
         );
         await era.input();
-        sys_call_mec(25, check_stages.mec_callname_customize);
+        get_custom_mec(25).set_callname();
         await coffee.say_and_wait([
           '……好的！那么请多关照，',
           sys_get_colored_callname(25, 0),

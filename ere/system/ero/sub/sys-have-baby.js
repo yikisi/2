@@ -3,13 +3,13 @@ const era = require('#/era-electron');
 const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_call_check = require('#/system/script/sys-call-check');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
-const sys_call_mec = require('#/system/script/sys-call-mec');
 const {
   sys_like_chara,
   sys_punish_unfaithful,
 } = require('#/system/sys-calc-chara-others');
 const { init_chara } = require('#/system/sys-init-chara');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -304,7 +304,7 @@ async function sys_have_baby(mother_id) {
     { child_id },
   );
 
-  sys_call_mec(child_id, check_stages.mec_callname_customize);
+  get_custom_mec(child_id).set_callname();
   const child = get_chara_talk(child_id),
     child_sex = child.sex_code === 1 ? '长子' : '长女';
   if (!era.get(`cstr:${father_id}:长子女经历`)) {

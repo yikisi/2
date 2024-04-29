@@ -1,11 +1,11 @@
 const era = require('#/era-electron');
 
-const { buff_colors } = require('#/data/color-const');
-const check_stages = require('#/data/event/check-stages');
+const CustomizedMec = require('#/event/mec/mec-common');
 
-/** @param {number} mec_type */
-module.exports = (mec_type) => {
-  if (mec_type === check_stages.mec_status) {
+const { buff_colors } = require('#/data/color-const');
+
+module.exports = class extends CustomizedMec {
+  get_status() {
     const ret_list = [];
     if (era.get('flag:惩戒力度') === 1) {
       ret_list.push({
@@ -37,7 +37,5 @@ module.exports = (mec_type) => {
       });
     }
     return ret_list;
-  } else {
-    throw new Error('unsupported stage!');
   }
 };

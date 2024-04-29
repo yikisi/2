@@ -1,19 +1,19 @@
 const era = require('#/era-electron');
 
-const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_get_debuff } = require('#/system/sys-calc-chara-param');
+
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { motivation_colors, attr_change_colors } = require('#/data/color-const');
+const { attr_change_colors, motivation_colors } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
-const check_stages = require('#/data/event/check-stages');
 const { location_enum } = require('#/data/locations');
 const {
-  motivation_names,
-  attr_names,
   attr_enum,
+  attr_names,
+  motivation_names,
 } = require('#/data/train-const');
 
 /**
@@ -41,7 +41,7 @@ function sys_change_motivation(chara_id, val) {
       Math.min(
         2 -
           Math.floor(era.get(`base:${chara_id}:压力`) / 2500) +
-          sys_call_mec(chara_id, check_stages.mec_motivation),
+          get_custom_mec(chara_id).get_motivation_limit(),
         2,
       ),
       -2,
@@ -93,7 +93,7 @@ function sys_change_pressure(chara_id, _val) {
             (_val *
               (1 +
                 0.2 * era.get(`talent:${chara_id}:羞耻忍耐`) +
-                sys_call_mec(chara_id, check_stages.mec_pressure_buff))) /
+                get_custom_mec(chara_id).get_pressure_buff())) /
               (1 + (era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48)),
           )
         : _val,
@@ -225,7 +225,7 @@ module.exports = {
     if (src_chara_id === -1) {
       src_chara_id = chara_id;
     }
-    const maxbase_buff = sys_call_mec(chara_id, check_stages.mec_maxbase_buff);
+    const maxbase_buff = get_custom_mec(chara_id).get_maxbase_buff();
     era.set(
       `maxbase:${chara_id}:体力`,
       Math.floor(

@@ -1,27 +1,18 @@
 const era = require('#/era-electron');
 
-const check_stages = require('#/data/event/check-stages');
+const CustomizedMec = require('#/event/mec/mec-common');
+
 const { race_enum } = require('#/data/race/race-const');
 
-const handlers = {};
-
-handlers[check_stages.mec_callname_customize] = () =>
-  era.set('callname:7:0', '阿训');
-
-handlers[check_stages.mec_race_cloth] = () => {
-  if (era.get('flag:当前赛事') !== race_enum.prix_lat) {
-    throw new Error();
+module.exports = class extends CustomizedMec {
+  set_callname() {
+    era.set('callname:7:0', '阿训');
   }
-  return ['阿船2'];
-};
 
-/**
- * @param {number} stage_id
- * @param extra_flag
- */
-module.exports = (stage_id, extra_flag) => {
-  if (!handlers[stage_id]) {
-    throw new Error('unsupported stage!');
+  get_race_cloth() {
+    if (era.get('flag:当前赛事') !== race_enum.prix_lat) {
+      return super.get_race_cloth();
+    }
+    return ['阿船2'];
   }
-  return handlers[stage_id](extra_flag);
 };

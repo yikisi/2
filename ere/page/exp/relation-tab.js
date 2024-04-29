@@ -1,17 +1,17 @@
 const era = require('#/era-electron');
 
-const sys_call_mec = require('#/system/script/sys-call-mec');
 const {
-  sys_get_colored_callname,
   sys_get_callname,
+  sys_get_colored_callname,
   sys_get_colored_full_callname,
 } = require('#/system/sys-calc-chara-others');
+
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { join_list } = require('#/utils/list-utils');
 
 const { relation_colors } = require('#/data/const.json');
-const check_stages = require('#/data/event/check-stages');
 const { get_relation_mark } = require('#/data/info-generator');
 
 const chinese_numbers = [
@@ -172,7 +172,7 @@ module.exports = {
             ]);
             break;
           case 101:
-            sys_call_mec(chara.id, check_stages.mec_callname_customize);
+            get_custom_mec(chara.id).set_callname();
             await era.printAndWait([
               chara.get_colored_name(),
               ' 开始称呼 ',

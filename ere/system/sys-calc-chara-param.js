@@ -9,7 +9,6 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { log_600m2 } = require('#/utils/value-utils');
 
 const { lust_border } = require('#/data/ero/orgasm-const');
-const check_stages = require('#/data/event/check-stages');
 const { location_enum } = require('#/data/locations');
 const { location_move_cost, vehicle_influences } = require('#/data/move-const');
 const { track_enum } = require('#/data/race/model/race-info');
@@ -91,7 +90,7 @@ function sys_get_debuff(chara_id) {
   }
   ret +=
     0.1 * era.get(`status:${chara_id}:领域`) +
-    sys_call_mec(chara_id, check_stages.mec_action_debuff);
+    get_custom_mec(chara_id).get_action_debuff();
   return ret;
 }
 
@@ -263,7 +262,7 @@ module.exports = {
       era.get(`base:${target}:压力`) / 500 -
       10 * era.get(`status:${target}:疲惫`) -
       10 * era.get(`status:${target}:水土不服`) +
-      sys_call_mec(target, check_stages.mec_success_rate);
+      get_custom_mec(target).get_success_rate_buff();
 
     success_rate *= (100 + era.get('flag:训练难度')) / 100;
 

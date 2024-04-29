@@ -1,12 +1,10 @@
 const era = require('#/era-electron');
 
-const sys_call_mec = require('#/system/script/sys-call-mec');
-
-const check_stages = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
-const { race_infos } = require('#/data/race/race-const');
 const { class_enum } = require('#/data/race/model/race-info');
+const { race_infos } = require('#/data/race/race-const');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 module.exports = {
   /**
@@ -66,7 +64,7 @@ module.exports = {
             'default',
           ];
         }
-        return sys_call_mec(chara_id, check_stages.mec_race_cloth);
+        return get_custom_mec(chara_id).get_race_cloth();
       default:
         if (holiday === 5) {
           ret = [`${base}_婚`];

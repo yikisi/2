@@ -3,16 +3,16 @@
 const sys_change_hair = require('#/system/chara/sys-change-hair');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 const get_aim_function = require('#/system/script/get-aim-function');
-const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_fix_chara_base } = require('#/system/sys-calc-base-cflag');
+
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_random_value } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
-const { pleasure_list, part_names } = require('#/data/ero/part-const');
+const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const check_stages = require('#/data/event/check-stages');
 const {
   get_breast_cup,
   get_talent_bust_size,
@@ -172,7 +172,7 @@ module.exports = {
           console.log(e.stack);
         }
       }
-      sys_call_mec(chara_id, check_stages.mec_callname_customize);
+      get_custom_mec(chara_id).set_callname();
       if (
         era.get(`callname:${chara_id}:${chara_id}`) ===
         era.get(`callname:${chara_id}:-2`)

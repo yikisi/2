@@ -1,12 +1,11 @@
 const era = require('#/era-electron');
 
-const sys_call_mec = require('#/system/script/sys-call-mec');
 const {
   sys_check_awake,
   sys_check_race_ready,
 } = require('#/system/sys-calc-chara-param');
 
-const check_stages = require('#/data/event/check-stages');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 module.exports = {
   /**
@@ -31,7 +30,7 @@ module.exports = {
       accelerator: 102,
       config: {
         disabled:
-          !sys_call_mec(chara_id, check_stages.mec_race_register_enabled) ||
+          !get_custom_mec(chara_id).is_race_register_enabled() ||
           !era.get(`cflag:${chara_id}:种族`) ||
           (chara_id &&
             (Number(era.get(`cflag:${chara_id}:育成回合计时`)) || 200) >=

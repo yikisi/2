@@ -1,9 +1,7 @@
 const era = require('#/era-electron');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { get_action_base_check } = require('#/system/ero/sys-calc-ero-status');
-const sys_call_mec = require('#/system/script/sys-call-mec');
-
-const check_stages = require('#/data/event/check-stages');
 
 const current = new Date().getTime();
 
@@ -39,10 +37,7 @@ function sys_check_ero_allowed(chara_id, supporter, action) {
       Math.max(era.get(`base:${chara_id}:性欲`) - 5000, 0) / 200 -
       7.5 * Math.max(era.get('flag:惩戒力度') - 1, 0);
   }
-  ret +=
-    sys_call_mec(chara_id, check_stages.mec_ero_check, {
-      action,
-    }) || 0;
+  ret += get_custom_mec(chara_id).get_ero_check(action) || 0;
   return ret;
 }
 

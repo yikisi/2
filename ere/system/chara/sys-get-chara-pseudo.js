@@ -1,12 +1,10 @@
 const era = require('#/era-electron');
 
-const sys_call_mec = require('#/system/script/sys-call-mec');
-
 const { sort_list } = require('#/utils/list-utils');
 
-const check_stages = require('#/data/event/check-stages');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const { adaptability_names, attr_names } = require('#/data/train-const');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /**
@@ -50,7 +48,7 @@ function sys_get_chara_pseudo(chara_id) {
       .slice(3)
       .forEach((l) => l.push(`-${5 * temp}%[语言不通(${temp})]`));
   }
-  sys_call_mec(uma.index_chara, check_stages.mec_race_customize, uma);
+  get_custom_mec(uma.index_chara).set_pseudo_uma(uma);
   uma.attr_buffs = uma.attr_buffs.map((l, i) => {
     const buffs = l.map((e) => {
       const ret = { buff: e },

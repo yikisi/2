@@ -1,14 +1,13 @@
 const era = require('#/era-electron');
 
+const sys_change_tired = require('#/system/chara/sys-change-tired');
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
-const sys_call_mec = require('#/system/script/sys-call-mec');
-const sys_change_tired = require('#/system/chara/sys-change-tired');
 const {
-  sys_reg_race,
   sys_change_attr_and_print,
   sys_change_pressure,
+  sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
@@ -19,7 +18,6 @@ const {
   adaptability_colors,
   celebration_color,
 } = require('#/data/color-const');
-const { mec_foreign_debuff } = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
@@ -30,6 +28,7 @@ const {
   foreign_race_list,
   track2location,
 } = require('#/data/race/race-location');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 /**
  * @param {number} chara_id
@@ -50,10 +49,7 @@ function handle_foreign_debuff(chara_id, language, loc, before_race) {
       0,
     ),
   );
-  sys_call_mec(chara_id, mec_foreign_debuff, {
-    before_race,
-    loc,
-  });
+  get_custom_mec(chara_id).set_foreign_debuff(before_race, loc);
 }
 
 /**
