@@ -2,35 +2,24 @@ const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
+const palace = require('#/event/snippets/palace');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
-const event_hooks = require('#/data/event/event-hooks');
-const HookArg = require('#/data/event/hook-arg');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},number,number,TachyonEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
   handlers.palace = async () => {
     const edu_marks = new TachyonEduMarks(),
-      temp = [era.get('love:32'), era.get('relation:32:0')];
+      me = get_chara_talk(0),
+      tachyon = get_chara_talk(32);
+    await palace(tachyon, me);
     if (era.get('item:用途不明的眼镜')) {
-      era.set('love:32', 0);
-      era.set('relation:32:0', 0);
-    }
-    await require('#/event/edu/edu-common')(
-      32,
-      new HookArg(event_hooks.week_start),
-    );
-    if (era.get('item:用途不明的眼镜')) {
-      era.set('love:32', temp[0]);
-      era.set('relation:32:0', temp[1]);
       const callname = sys_get_callname(32, 0),
-        coffee = get_chara_talk(25),
-        me = get_chara_talk(0),
-        tachyon = get_chara_talk(32);
+        coffee = get_chara_talk(25);
       if (!edu_marks.plan_b) {
         await print_event_name('极限的彼方', tachyon);
         await era.printAndWait([

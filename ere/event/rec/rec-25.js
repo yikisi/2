@@ -684,6 +684,10 @@ module.exports = {
         era.set('cflag:25:招募状态', recruit_flags.yes);
         era.set('flag:物色对象', 0);
         event_marks.sub(event_hooks.week_end);
+        add_event(
+          event_hooks.week_start,
+          new EventObject(25, cb_enum.edu).set_arg('beginning'),
+        );
     }
   },
 };

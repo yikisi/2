@@ -665,7 +665,7 @@ module.exports = (handlers) => {
       await era.printAndWait('如光一般，瞬间消逝的跑法');
       era.println();
       await era.printAndWait([
-        '第二天，',
+        '之后，',
         tachyon.get_colored_name(),
         ' 宣布，半永久暂停闪耀系列赛的参与',
       ]);

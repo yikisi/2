@@ -17,7 +17,8 @@ const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
-const { race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 
 const handlers = {};
 
@@ -38,30 +39,40 @@ handlers[check_stages.aim_check] = () => {
 
 const aim_races = {};
 
-aim_races[race_enum.begin_race] = 2;
+aim_races[race_enum.begin_race] = 3;
 
-aim_races[get_aim_race_index(race_enum.hoch_sho, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.stli_kin, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 2;
+aim_races[get_aim_race_index(race_enum.hoch_sho, 1)] = 3;
+aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 3;
+aim_races[get_aim_race_index(race_enum.stli_kin, 1)] = 3;
+aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 3;
+aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 3;
 
-aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 3;
 
-/** @param {{edu_weeks:number,race:number}} extra_flag */
-handlers[check_stages.aim_race] = (extra_flag) =>
-  aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
-  aim_races[extra_flag.race];
+/**
+ * @param {number} edu_weeks
+ * @param {number} race
+ * @returns {number}
+ */
+handlers[check_stages.aim_race] = ({ edu_weeks, race }) => {
+  if (new CoffeeEduMarks().toky_yus && race === race_enum.toky_yus) {
+    return 0;
+  }
+  return aim_races[`${edu_weeks}_${race}`] || aim_races[race];
+};
 
 /**
  * @param {number} race
  * @param {number} rank
  */
 handlers[check_stages.after_race] = ({ race, rank }) => {
-  if (new TachyonEduMarks().plan_b === 1) {
+  if (
+    new TachyonEduMarks().plan_b === 1 &&
+    era.get('cflag:32:育成回合计时') < 3 * 48
+  ) {
     if (race === race_enum.kiku_sho) {
       add_event(
         event_hooks.week_end,
@@ -110,54 +121,57 @@ handlers[check_stages.next_week] = () => {
     );
   }
   if (edu_weeks < 3 * 48) {
-    const event_obj_special = new EventObject(25, cb_enum.edu, true);
+    const event_obj_special = new EventObject(25, cb_enum.edu, true).set_arg(
+      edu_weeks,
+    );
     switch (edu_weeks) {
-      case 1:
-        add_event(event_hooks.train, event_obj_special);
-        break;
-      case 28:
-        add_event(event_hooks.train, event_obj_special);
-        break;
-      case 47 + 1:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 47 + 4:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 47 + 17:
-        add_event(event_hooks.train, event_obj_special);
-        break;
-      case 47 + 29:
+      case 28: // 灵障
+      case 47 + 1: // 新年的抱负
+      case 47 + 4: // 转变
+      case 47 + 17: // 放弃与否
+      case 47 + 29: // 夏合宿（经典年）开始
+      case 95 + 18: // 别离
+      case 95 + 29: // 夏合宿（资深年）开始
         add_event(event_hooks.week_start, event_obj_special);
         break;
       case 47 + 30:
-        add_event(event_hooks.week_start, event_obj_special);
+        if (
+          era.get('cflag:32:育成回合计时') < 3 * 48 &&
+          new TachyonEduMarks().plan_b
+        ) {
+          add_event(event_hooks.week_start, event_obj_special);
+        }
         break;
-      case 47 + 31:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 47 + 32:
+      case 47 + 31: // 朋友
+      case 47 + 32: // 夏季合宿（经典年）结束
+      case 95 + 32: // 夏季合宿（资深年）结束
         add_event(event_hooks.week_end, event_obj_special);
         break;
-      case 47 + 48:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 1:
+      case 95 + 1: // 新年的抱负
         add_event(event_hooks.out_church, event_obj_special);
-        break;
-      case 95 + 14:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 32:
-        add_event(event_hooks.week_end, event_obj_special);
-        break;
-      case 95 + 18:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
     }
     check_and_register_aim_race(25, aim_races, edu_weeks);
+    let temp;
+    if (
+      edu_weeks === 47 + race_infos[race_enum.toky_yus].date &&
+      (temp = sys_reg_race(25)).curr.race === race_enum.toky_yus &&
+      edu_marks.toky_yus
+    ) {
+      temp.curr = temp.last = {
+        race: -1,
+        week: -1,
+      };
+    }
+  } else if (edu_weeks === 143 + 1) {
+    add_event(
+      event_hooks.week_start,
+      new EventObject(25, cb_enum.edu).set_arg(143 + 1),
+    );
   } else if (edu_weeks === 143 + 9) {
-    add_event(event_hooks.week_start, new EventObject(25, cb_enum.edu));
+    add_event(
+      event_hooks.week_start,
+      new EventObject(25, cb_enum.edu).set_arg('palace'),
+    );
   }
 };
 

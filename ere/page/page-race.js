@@ -45,6 +45,7 @@ const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
+const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_adaptability_rank,
   get_attr_rank,
@@ -326,7 +327,11 @@ async function race_page(race) {
           {
             config: {
               align: 'center',
-              color: get_chara_color(cur_chara.index_chara),
+              color:
+                era.get(`cflag:${cur_chara.index_chara}:招募状态`) ===
+                recruit_flags.yes
+                  ? get_chara_color(cur_chara.index_chara)
+                  : get_chara_talk(cur_chara.index_chara).color,
               fontSize: '1.25rem',
             },
             content: cur_chara.name,

@@ -6,6 +6,7 @@ const {
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
+const palace = require('#/event/snippets/palace');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -13,7 +14,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
-const HookArg = require('#/data/event/hook-arg');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
@@ -237,16 +237,8 @@ module.exports = async (_, __, event_object) => {
       );
       break;
     case 143 + 9:
-      temp = [era.get('love:205'), era.get('relation:205:0')];
-      era.set('love:205', 0);
-      era.set('relation:205:0', 0);
-      await require('#/event/edu/edu-common')(
-        205,
-        new HookArg(event_hooks.week_start),
-      );
-      era.set('love:205', temp[0]);
-      era.set('relation:205:0', temp[1]);
-      if (temp[0] >= 50) {
+      await palace(vp, me);
+      if (era.get('love:205') >= 50) {
         era.drawLine();
         await print_event_name(`${vp.sex}即是成真的美梦`, vp);
         await era.printAndWait(`${me.name} 听到了什么声音。`);

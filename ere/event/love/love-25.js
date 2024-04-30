@@ -20,6 +20,7 @@ const {
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
+const CoffeeEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-25');
 const event_hooks = require('#/data/event/event-hooks');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,EventObject):Promise<boolean>>} */
@@ -52,7 +53,9 @@ handlers[49] = async (coffee, me) => {
       ' 达到了高潮。',
     ]);
   }
+  begin_and_init_ero(25);
   await masturbate(25);
+  end_ero_and_train();
   await sys_love_uma_in_event(25);
 };
 
@@ -81,6 +84,8 @@ handlers[74] = async (coffee, me, callname, event_object) => {
     me.get_colored_actual_name(),
     ' 的关系有点超乎寻常。',
   ]);
+  const edu_marks = new CoffeeEduMarks();
+  edu_marks.our_taste += edu_marks.our_taste === 1;
   era.println();
   era.printButton(`「好想见到你，${callname}……」（升级关系）`, 1);
   era.printButton('「只是错觉罢了……」（暂停升级）', 2);

@@ -17,7 +17,7 @@ const { buff_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 
-/** @type {Record<string,function(stage_id:HookArg,extra_flag:*):Promise<boolean>>} */
+/** @type {Record<string,function(HookArg,*):Promise<boolean|void>>} */
 const handlers = {};
 
 handlers[event_hooks.select] = () => {
@@ -60,7 +60,7 @@ handlers[event_hooks.good_morning] = () => {
 };
 
 handlers[event_hooks.good_night] = async (hook) => {
-  const awake = 2 & (sys_check_awake(25) + sys_check_awake(0)),
+  const awake = 2 * sys_check_awake(25) + sys_check_awake(0),
     callname = sys_get_callname(25, 0),
     coffee = get_chara_talk(25),
     me = get_chara_talk(0);
@@ -832,6 +832,10 @@ handlers[event_hooks.basement_end] = async () => {
     coffee,
   );
 };
+
+handlers[
+  event_hooks.celebration
+] = require('#/event/daily/daily-events-25/celebration');
 
 /**
  * 曼城茶座的日常事件，id=25

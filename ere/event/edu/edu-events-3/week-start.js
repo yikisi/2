@@ -5,6 +5,8 @@ const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 
 const { add_event, cb_enum } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const palace = require('#/event/snippets/palace');
+const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -13,7 +15,6 @@ const { buff_colors } = require('#/data/color-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
-const HookArg = require('#/data/event/hook-arg');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = async () => {
@@ -449,10 +450,8 @@ module.exports = async () => {
       sys_change_money(300);
     }
   } else if (edu_weeks === 143 + 9 && !era.get('cflag:3:可再次育成')) {
-    await require('#/event/edu/edu-common')(
-      3,
-      new HookArg(event_hooks.week_start),
-    );
+    await palace(teio, me);
+    await palace_relation(teio, me);
     era.println();
     await teio.say_and_wait(
       event_marks.give_up

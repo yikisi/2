@@ -1,13 +1,13 @@
 const era = require('#/era-electron');
 
 const {
-  sys_love_uma,
   sys_like_chara,
+  sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
 const {
-  handle_debuff,
   good_end,
+  handle_debuff,
   normal_end,
 } = require('#/event/edu/edu-events-17/snippets');
 const check_aim_race = require('#/event/snippets/check-aim-race');
@@ -20,8 +20,8 @@ const { get_random_entry } = require('#/utils/list-utils');
 const color_17 = require('#/data/chara-colors').chara_colors[17];
 const { buff_colors } = require('#/data/color-const');
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
-const { attr_enum } = require('#/data/train-const');
 const { race_enum } = require('#/data/race/race-const');
+const { attr_enum } = require('#/data/train-const');
 
 /**
  * @param {HookArg} hook
@@ -404,7 +404,7 @@ module.exports = async (hook, extra_flag) => {
       // 资深年有马纪念
       if (
         (event_marks.good_end =
-          (extra_flag.rank === 1 && !era.get(`status:${luna}:神经衰弱`)) + 1)
+          (extra_flag.rank === 1 && !era.get(`status:17:神经衰弱`)) + 1) === 2
       ) {
         await print_event_name('领域尽头', luna_talk);
       } else {

@@ -1,21 +1,16 @@
 const era = require('#/era-electron');
 
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
-const { sys_change_fame } = require('#/system/sys-calc-flag');
-
-const get_palace_info = require('#/event/edu/snippets/get-palace-info');
 const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
+const palace = require('#/event/snippets/palace');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum, location_name } = require('#/data/locations');
-const { class_enum } = require('#/data/race/model/race-info');
-const { race_rewards } = require('#/data/race/race-const');
 const { attr_enum, fumble_result } = require('#/data/train-const');
+const palace_relation = require('#/event/snippets/palace-relation');
 
 /** @type {Record<string,function(number,HookArg,Record<string,*>,EventObject):Promise<*>>} */
 const handlers = {};
@@ -169,116 +164,8 @@ handlers[event_hooks.week_start] = async (chara_id) => {
   }
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
-  const { check, count, buffer } = get_palace_info(chara);
-  if (check >= 6) {
-    await print_event_name('登上殿堂宝座', chara);
-
-    await era.printAndWait(
-      `每年一月，URA赛${chara.get_uma_sex_title()}殿堂就会开始针对退役马娘进行票选。`,
-    );
-    era.println();
-    await era.printAndWait(
-      `而到了三月，生涯功成名就，且在严格票选中脱颖而出的赛${chara.get_uma_sex_title()}将会登上殿堂，并获得《显彰赛${chara.get_uma_sex_title()}》此一至高无上的荣誉。`,
-    );
-    era.println();
-    await era.printAndWait([
-      '而 ',
-      me.get_colored_name(),
-      ' 的爱马 ',
-      chara.get_colored_name(),
-      '——',
-    ]);
-    era.add(`cflag:${chara_id}:殿堂`, 1);
-  } else {
-    await print_event_name('殿堂宝座之下', chara);
-
-    await era.printAndWait('很遗憾未能入选殿堂。');
-    era.println();
-    await era.printAndWait([
-      '但 ',
-      me.get_couple_title(),
-      ' 也仍然为竭尽全力达到的成果感到骄傲，并且相信后来者能站在自己的肩上爬向更高的顶点。',
-    ]);
-  }
-  era.println();
-  for (const seg of buffer) {
-    await era.printAndWait(seg);
-  }
-  era.println();
-  const title = new CharaTitles(chara_id).get_colored_curr_title(),
-    fame_reward =
-      (count.g1 * race_rewards[class_enum.G1][1].fame) / 2 +
-      (count.g2 * race_rewards[class_enum.G2][1].fame) / 2 +
-      (count.g3 * race_rewards[class_enum.G3][5].fame) / 2;
-  if (check >= 6) {
-    await era.printAndWait([
-      `随着以${chara.sex}为蓝本的铜像揭幕，`,
-      ...(title ? [title, ' '] : []),
-      chara.get_colored_name(),
-      ` 的传奇故事将会永远留在殿堂之中……`,
-    ]);
-    era.println();
-    sys_like_chara(302, 0, fame_reward / 5 + 20) && (await era.waitAnyKey());
-    sys_like_chara(301, 0, 100) && (await era.waitAnyKey());
-  } else {
-    await era.printAndWait([
-      ...(title ? [title, ' '] : []),
-      chara.get_colored_name(),
-      ` 的传奇故事将会永远被世人所传颂……`,
-    ]);
-    era.println();
-    sys_like_chara(302, 0, fame_reward / 5) && (await era.waitAnyKey());
-  }
-  sys_change_fame(fame_reward);
-  const love = era.get(`love:${chara_id}`);
-  if (love >= 50 || era.get(`relation:${chara_id}:0`) > 0) {
-    era.drawLine();
-    era.set('flag:当前位置', location_enum.gate);
-    await print_event_name('之后，面向未来', chara);
-    era.set('flag:当前位置', location_enum.office);
-    await era.printAndWait([
-      '时光如白驹过隙，与 ',
-      chara.get_colored_name(),
-      ' 相伴已逾数载，再过一段日子，',
-      me.get_couple_title(),
-      ' 马上就要展开新的篇章',
-    ]);
-    era.println();
-    if (love >= 75) {
-      await era.printAndWait([
-        me.get_couple_title(),
-        ' 在熟悉的训练员室里恩爱地亲热起来。',
-      ]);
-      await era.printAndWait(
-        '两位小情人沉浸在幸福的二人世界，仿佛能把俗世的琐事都抛进虚空之中。',
-      );
-      era.println();
-      await era.printAndWait('我是世界之王！——杰克·道森', { align: 'center' });
-    } else if (love >= 50) {
-      await era.printAndWait([
-        me.get_couple_title(),
-        ' 在熟悉的训练员室里热烈地拥吻。',
-      ]);
-      await era.printAndWait(
-        '情欲的气息充斥整个房间，只有娇声与肉体碰撞的声音不住回荡。',
-      );
-      era.println();
-      await era.printAndWait('食色，性也。——孟子', { align: 'center' });
-    } else {
-      await era.printAndWait([
-        me.get_couple_title(),
-        ' 在熟悉的训练员室里相谈甚欢，又不禁为无可避免的别离伤感。',
-      ]);
-      await era.printAndWait(
-        '人生难得相逢，正是因为可能失去才会让珍惜眼前人如此重要。',
-      );
-      era.println();
-      await era.printAndWait('一期一会之心，唯见茶之相中。——千利休', {
-        align: 'center',
-      });
-    }
-  }
-  era.set(`cflag:${chara_id}:可再次育成`, 1);
+  await palace(chara, me);
+  await palace_relation(chara, me);
 };
 
 /**

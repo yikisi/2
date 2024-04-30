@@ -31,11 +31,11 @@ module.exports = {
       accelerator: 102,
       config: {
         disabled:
-          !sys_call_mec(chara_id, check_stages.mec_race_register_enabled) &&
-          (!era.get(`cflag:${chara_id}:种族`) ||
-            (chara_id &&
-              (Number(era.get(`cflag:${chara_id}:育成回合计时`)) || 200) >=
-                48 * 3)),
+          !sys_call_mec(chara_id, check_stages.mec_race_register_enabled) ||
+          !era.get(`cflag:${chara_id}:种族`) ||
+          (chara_id &&
+            (Number(era.get(`cflag:${chara_id}:育成回合计时`)) || 200) >=
+              48 * 3),
         width: 6,
       },
       content: '登记出走',

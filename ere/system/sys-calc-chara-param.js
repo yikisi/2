@@ -3,7 +3,8 @@ const era = require('#/era-electron');
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
-const sys_call_mec = require('#/system/script/sys-call-mec');
+
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { log_600m2 } = require('#/utils/value-utils');
 
@@ -44,7 +45,7 @@ function sys_check_train_enabled(chara_id) {
       era.get('cflag:0:位置') === era.get(`cflag:${tmp}:位置`)) &&
     era.get(`base:${tmp}:压力`) < pressure_border.depression &&
     era.get(`base:${tmp}:性欲`) < lust_border.want_sex &&
-    sys_call_mec(tmp, check_stages.mec_train_enabled)
+    get_custom_mec(chara_id).is_train_enabled()
   );
 }
 
