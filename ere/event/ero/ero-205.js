@@ -28,7 +28,7 @@ handlers[ero_hooks.ero_start] = async () => {
   ) {
     life_marks.slavery = 1;
     await era.printAndWait(
-      `像 ${vp.name} 这样，你能够对${vp.sex}的整个人生产生重大影响，让${vp.sex}后半生反复想起你、牵挂你、这就有了一种“强奸”了 ${vp.name} 整个人生的满足感，爽快得无以复加。`,
+      `像 ${vp.name} 这样，你能够对${vp.sex}的整个人生产生重大影响，让${vp.sex}后半生反复想起你、牵挂你、这就有了一种「强奸」了 ${vp.name} 整个人生的满足感，爽快得无以复加。`,
     );
     await era.printAndWait(
       '心灵上的满足是足够过瘾，但要追求肉体上的满足，就必须透过实际的接触。',

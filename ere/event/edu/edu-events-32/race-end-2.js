@@ -442,7 +442,6 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait(['有机会找', tachyon.sex, '聊聊吧']);
     extra_flag.motivation_change = -1;
-    edu_marks.tenn_spr = 1;
   };
 
   handlers[race_enum.takz_kin] = async (
@@ -487,7 +486,6 @@ module.exports = (handlers) => {
       await tachyon.print_and_wait(['跑在前方的 ', tachyon.get_colored_name()]);
       await tachyon.print_and_wait('对着紧紧撕咬在后的猎犬发出挑衅');
       era.drawLine();
-      era.println();
       await coffee.say_and_wait('……无聊');
       await coffee.say_and_wait('你觉得做这种事能让任何人开心吗？');
       await coffee.say_and_wait(
@@ -564,7 +562,6 @@ module.exports = (handlers) => {
       await era.input();
       await tachyon.say_and_wait('……嗯，我上了');
       era.drawLine();
-      era.println();
       await tachyon.say_and_wait([
         '如此这般，于是下场比赛，我的预定计划是，世界最高峰，凯旋门杯。以上有任何记者有问题吗？',
       ]);

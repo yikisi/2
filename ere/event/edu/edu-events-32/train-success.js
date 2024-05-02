@@ -223,7 +223,7 @@ module.exports = async (hook, { stamina_ratio }) => {
   }
   await get_random_entry(buffer)();
   era.println();
-  if (!era.get('status:32:摸鱼') && Math.random() < stamina_ratio) {
+  if (!era.get('status:32:摸鱼') && Math.random() < stamina_ratio * 0.2) {
     await era.waitAnyKey();
     if (relation > 225) {
       await print_event_name('追逐战', tachyon);
@@ -370,7 +370,7 @@ module.exports = async (hook, { stamina_ratio }) => {
       era.print([me.get_colored_name(), ' 决定']);
       era.printButton('放任', 1);
       era.printButton('阻止', 2);
-      if (await era.input()) {
+      if ((await era.input()) === 1) {
         await era.printAndWait('如果只是纯粹的加练自己或许能够阻止');
         await era.printAndWait('但缺乏实验数据……');
         era.println();

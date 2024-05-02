@@ -287,7 +287,7 @@ module.exports = (handlers) => {
             attacker.get_colored_name(),
             ' 面前的 ',
             sys_get_colored_callname(attacker.id, defender.id),
-            ' 以一种混杂了“变态啊”和“真拿你没辙”的语气说完，便叹了口气，轻甩了一下头，柔顺的秀发带着一股好闻的香气，撩上 ',
+            ' 以一种混杂了「变态啊」和「真拿你没辙」的语气说完，便叹了口气，轻甩了一下头，柔顺的秀发带着一股好闻的香气，撩上 ',
             attacker.get_colored_name(),
             ' 已经矗立在外的肉根，然后一停。',
           ]);

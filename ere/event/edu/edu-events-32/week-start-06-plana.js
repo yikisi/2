@@ -109,12 +109,12 @@ module.exports = async (tachyon, me, callname, relation, love) => {
         ]);
         await era.printAndWait('今天为了参拜走了一整天，被酿窖入味的黑丝');
         era.println();
-        await tachyon.say_and_wait('想要……被这样的双足踩吗?');
+        await tachyon.say_and_wait('想要……被这样的双足踩吗？');
         await tachyon.say_and_wait(
-          '想被压在脸上，让肺部被我足底的肮脏空气灌满吗?',
+          '想被压在脸上，让肺部被我足底的肮脏空气灌满吗？',
         );
         await tachyon.say_and_wait(
-          '想要被踩着肉棒，直到整根肉棒都被我的足臭和你的先走汁弄得哪怕十米内都能闻到上面的气味吗?',
+          '想要被踩着肉棒，直到整根肉棒都被我的足臭和你的先走汁弄得哪怕十米内都能闻到上面的气味吗？',
         );
         era.println();
         await era.printAndWait([

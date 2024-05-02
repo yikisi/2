@@ -106,7 +106,7 @@ handlers[event_hooks.good_night] = async (hook) => {
           coffee.get_colored_name(),
           ' 内心的欣喜。',
         ]);
-        coffee.say([callname, '……今晚，请多指教……']);
+        await coffee.say_and_wait([callname, '……今晚，请多指教……']);
         hook.arg = 1;
       } else {
         era.print('——抱歉。');

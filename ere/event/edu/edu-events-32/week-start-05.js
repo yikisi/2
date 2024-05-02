@@ -423,7 +423,7 @@ module.exports = (handlers) => {
             '快啊，快啊，仔细想想这个时候训练员培训学校是怎么教的',
           );
           await me.say_and_wait(
-            ['寻找障碍物来干扰', tachyon.get_uma_sex_title(), '的动作!'],
+            ['寻找障碍物来干扰', tachyon.get_uma_sex_title(), '的动作！'],
             true,
           );
           await era.printAndWait(

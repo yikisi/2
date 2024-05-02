@@ -628,7 +628,6 @@ module.exports = (handlers) => {
         ' 也跟着笑了起来',
       ]);
       era.drawLine();
-      era.println();
       await tachyon.say_and_wait('zzz……唔嗯……咻……');
       era.println();
       await era.printAndWait('真是……胡闹完之后就自顾自的睡着了');
@@ -666,7 +665,7 @@ module.exports = (handlers) => {
     new TachyonLifeMarks().choco = 1;
   };
 
-  handlers[95 + 6] = async (
+  handlers[95 + 14] = async (
     tachyon,
     me,
     callname,

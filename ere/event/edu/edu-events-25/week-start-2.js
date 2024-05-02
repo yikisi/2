@@ -29,7 +29,7 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
  * @param {function():boolean} check_tachyon_plan_b
  */
 module.exports = (handlers, check_tachyon_plan_b) => {
-  handlers[95 + 18] = async (coffee, me, callname, flags) => {
+  handlers[95 + 19] = async (coffee, me, callname, flags) => {
     await print_event_name('别离', coffee);
     await era.printAndWait([
       '在与 ',
@@ -202,19 +202,15 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         '——那么我来替你参加如何？',
       ]);
       await coffee.say_and_wait('……你说，什么？');
-      era.printButton('「你是认真的吗，速子？」', 1);
-      await era.input();
       await era.printAndWait([
         tachyon.get_colored_name(),
         ' 的发言把 ',
         me.get_colored_name(),
-        ' 跟怀中的 ',
+        ' 怀中的 ',
         coffee.get_colored_name(),
-        ' 都震惊到了，',
-        me.get_couple_title(),
-        ' 可从来没听',
+        ' 震惊到了，',
         coffee.sex,
-        '说过这件事。',
+        ' 可从来没听说过这件事。',
       ]);
       await tachyon.say_and_wait([
         '科学家可从来不会做无谓的事情，参加 ',
@@ -499,7 +495,9 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       era.get('love:25') >= 75
     ) {
       era.drawLine();
+      era.set('flag:当前位置', location_enum.gate);
       await print_event_name('乐园', coffee);
+      era.set('flag:当前位置', location_enum.office);
       await coffee.print_and_wait([
         '如同万花筒一般、散发着绚烂光芒的天空与大地，如同梦幻一般、洋溢着金色光泽的巨大齿轮……',
       ]);

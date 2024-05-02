@@ -444,7 +444,6 @@ module.exports = async (tachyon, me, callname) => {
     me.get_colored_name(),
     ' 看着明明前一天还说自己已经再也无法进行研究的某名',
     tachyon.get_uma_sex_title(),
-    '，',
   ]);
   await era.printAndWait(
     '手上拿着比平时看起来还更不妙的荧光药剂一蹦一跳的进了训练员室',

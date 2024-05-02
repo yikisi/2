@@ -11,13 +11,13 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
-const { get_trainer_title } = require('#/data/info-generator');
+
 /**
  * @param {HookArg} hook
- * @param __
+ * @param _
  * @param {EventObject} event_object
  */
-module.exports = async function (hook, __, event_object) {
+module.exports = async function (hook, _, event_object) {
   const chara_talk = get_chara_talk(4),
     chara17_talk = get_chara_talk(17),
     chara301_talk = get_chara_talk(301),

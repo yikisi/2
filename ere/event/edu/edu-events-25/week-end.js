@@ -289,7 +289,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       await era.printAndWait([
         me.get_colored_name(),
         ' 与 ',
-        coffee.get_colored_name(),
+        tachyon.get_colored_name(),
         ' 共享了在合宿中了解到的情报，以及有关朋友的事。',
       ]);
       await tachyon.say_and_wait([

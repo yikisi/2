@@ -3,7 +3,6 @@ const era = require('#/era-electron');
 const {
   sys_get_colored_callname,
   sys_like_chara,
-  sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 

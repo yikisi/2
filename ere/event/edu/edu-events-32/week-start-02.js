@@ -866,7 +866,6 @@ module.exports = (handlers) => {
       await me.say_and_wait(
         '当然，要是，真的，如果万一的话，也想看看速子输掉比赛趴在地上不甘心的痛苦的样子！',
       );
-      await era.input();
       await tachyon.say_and_wait('！');
       era.println();
       era.printButton('（哎呀，激将生效了？）', 1);

@@ -617,6 +617,12 @@ module.exports = {
         fontWeight: 'bold',
         key: '领域',
       });
+    era.get(`status:${chara_id}:健康茶`) &&
+      status_list.push({
+        color: buff_colors[1],
+        content: '健康茶',
+        fontWeight: 'bold',
+      });
     if (sys_check_remote(chara_id)) {
       status_list.push({
         color: buff_colors[0],

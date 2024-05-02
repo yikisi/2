@@ -5,12 +5,15 @@ const {
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
-const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const { add_event } = require('#/event/queue');
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const CharaTalk = require('#/utils/chara-talk');
-const { get_chara_talk,say_by_passer_by } = require('#/utils/chara-talk-factory');
+const {
+  get_chara_talk,
+  say_by_passer_by,
+} = require('#/utils/chara-talk-factory');
 
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { location_enum } = require('#/data/locations');

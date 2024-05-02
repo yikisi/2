@@ -79,8 +79,17 @@ handlers[check_stages.after_race] = ({ race, rank }) => {
         new EventObject(32, cb_enum.edu).set_arg('limited_tachyon'),
       );
     } else if (
+      race === race_enum.japa_cup &&
+      era.get('cflag:25:育成回合计时') >= 96 &&
+      rank === 1
+    ) {
+      add_event(
+        event_hooks.week_end,
+        new EventObject(32, cb_enum.edu).set_arg('japa_cup'),
+      );
+    } else if (
       race === race_enum.arim_kin &&
-      era.get('cflag:25:育成回合计时') === 95 + 48 &&
+      era.get('cflag:25:育成回合计时') >= 96 &&
       rank === 1
     ) {
       add_event(
@@ -127,10 +136,10 @@ handlers[check_stages.next_week] = () => {
     switch (edu_weeks) {
       case 28: // 灵障
       case 47 + 1: // 新年的抱负
-      case 47 + 4: // 转变
+      case 47 + 6: // 转变
       case 47 + 17: // 放弃与否
       case 47 + 29: // 夏合宿（经典年）开始
-      case 95 + 18: // 别离
+      case 95 + 19: // 别离
       case 95 + 29: // 夏合宿（资深年）开始
         add_event(event_hooks.week_start, event_obj_special);
         break;

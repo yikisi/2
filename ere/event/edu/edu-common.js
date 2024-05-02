@@ -8,7 +8,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
-const { location_enum, location_name } = require('#/data/locations');
+const { location_name } = require('#/data/locations');
 const { attr_enum, fumble_result } = require('#/data/train-const');
 const palace_relation = require('#/event/snippets/palace-relation');
 

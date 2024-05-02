@@ -394,7 +394,7 @@ module.exports = (handlers) => {
             '的垫脚石，我可不能原地踏步啊，不然，充其量也就是鹅卵石而已了',
           ]);
           era.println();
-          await me.say_and_wait([
+          await era.printAndWait([
             '虽然 ',
             tachyon.get_colored_name(),
             ' 口口声声说着为了 ',

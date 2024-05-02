@@ -1,13 +1,16 @@
 const era = require('#/era-electron');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
-const print_event_name = require('#/event/snippets/print-event-name');
-const event_hooks = require('#/data/event/event-hooks');
 const { add_event } = require('#/event/queue');
+const print_event_name = require('#/event/snippets/print-event-name');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const event_hooks = require('#/data/event/event-hooks');
+
 const chara32_talk = get_chara_talk(32);
+
 async function love_49_week_end(digital) {
   const me = get_chara_talk(0);
   await print_event_name('经典湿身，不过是你', digital);

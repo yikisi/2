@@ -151,7 +151,8 @@ module.exports = {
     );
     await era.printAndWait('不是殷勤，不是示好、当然也不是日常的粉丝公关——');
     await era.printAndWait(
-      `而是恰到好处、不近不远的距离。${chara_talk.sex
+      `而是恰到好处、不近不远的距离。${
+        chara_talk.sex
       }伸出了载着玻璃皿的手，将萝卜干捧在了${sys_get_callname(0, 0)}的面前。`,
     );
     await era.printAndWait(

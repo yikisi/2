@@ -341,7 +341,8 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '理所当然的，',
       tachyon.get_colored_name(),
-      ' 赢下了弥生赏',
+      ' 赢下了 ',
+      race_infos[race_enum.hoch_sho].get_colored_name(),
     ]);
     era.printButton('「好厉害的比赛！」', 1);
     await era.input();
@@ -389,7 +390,11 @@ module.exports = (handlers) => {
       ' 赛前说的测试……',
     ]);
     era.println();
-    await tachyon.say_and_wait(['……没什么问题，起码，皋月赏不会有问题']);
+    await tachyon.say_and_wait([
+      '……没什么问题，起码，',
+      race_infos[race_enum.sats_sho].get_colored_name(),
+      ' 不会有问题',
+    ]);
     era.println();
     await era.printAndWait('起码……吗？');
     await era.printAndWait([
@@ -405,9 +410,15 @@ module.exports = (handlers) => {
       me.get_colored_name(),
       ' 和 ',
       tachyon.get_colored_name(),
-      ' 的弥生赏结束了',
+      ' 的 ',
+      race_infos[race_enum.hoch_sho].get_colored_name(),
+      ' 结束了',
     ]);
-    await era.printAndWait(['下个目标皋月赏就近在眼前了！']);
+    await era.printAndWait([
+      '下个目标 ',
+      race_infos[race_enum.sats_sho].get_colored_name(),
+      ' 就近在眼前了！',
+    ]);
     extra_flag.attr_change = [0, 0, 0, 0, 5];
   };
 
@@ -419,7 +430,9 @@ module.exports = (handlers) => {
     await tachyon.say_and_wait([callname, '，你看见了吗？']);
     era.println();
     await era.printAndWait([
-      '跑完皋月赏的 ',
+      '跑完 ',
+      race_infos[race_enum.sats_sho].get_colored_name(),
+      ' 的 ',
       tachyon.get_colored_name(),
       '，获得了至今为止最为热烈的欢呼声',
     ]);
@@ -523,7 +536,9 @@ module.exports = (handlers) => {
     await tachyon.say_and_wait(['那么，就来试试看吧，', callname, '……']);
     await tachyon.say_and_wait('不过首先，先确认好下一场的比赛吧……');
     await tachyon.say_and_wait([
-      '目前可以确认，日本德比我能出赛，以此来做准备吧，',
+      '目前可以确认，',
+      race_infos[race_enum.toky_yus].get_colored_name(),
+      ' 我能出赛，以此来做准备吧，',
       callname,
     ]);
     era.println();
@@ -543,7 +558,11 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([me.get_colored_name(), ' 如此乐观的想着']);
     era.println();
-    await era.printAndWait(['下一场比赛，就决定是日本德比了！']);
+    await era.printAndWait([
+      '下一场比赛，就决定是 ',
+      race_infos[race_enum.toky_yus].get_colored_name(),
+      ' 了！',
+    ]);
     extra_flag.attr_change = [0, 0, 5, 0, 0];
   };
 
@@ -610,7 +629,7 @@ module.exports = (handlers) => {
 
   handlers[race_enum.kiku_sho] = async (tachyon, me, callname, extra_flag) => {
     if (extra_flag.rank === 1) {
-      await print_event_name('菊花赏后·会赢的', tachyon);
+      await print_event_name('会赢的', tachyon);
       const race_history = new RaceHistory(32);
       if (
         check_aim_race(race_history.get(), race_enum.sats_sho, 1, 1) &&

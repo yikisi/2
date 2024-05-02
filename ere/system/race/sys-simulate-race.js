@@ -12,7 +12,7 @@ const {
   mod_stamina_cost_mess_dirt,
   mod_stamina_cost_mess_grass,
   raceDecel,
-} = require('#/data/race/race-sim-const.js');
+} = require('#/data/race/race-const.json');
 
 /**
  * @param {PseudoUma[]} list_chara

@@ -578,7 +578,7 @@ handlers[event_hooks.celebration] = async () => {
         );
       } else {
         await era.printAndWait(
-          ` ${me.name} 从${teio.sex}的手上接过礼盒，却没有急于吃掉，而是慢慢地用另一只手解开包装，同时保持握着${teio.sex}的手，`,
+          ` ${me.name} 从${teio.sex}的手上接过礼盒，却没有急于吃掉，而是慢慢地用另一只手解开包装，同时保持握着${teio.sex}的手`,
         );
         await era.printAndWait(
           `等到${teio.sex}脸红到耳根的时候，${me.name} 突然把${teio.sex}一把揽入怀中，含着巧克力吻向${teio.sex}的唇。`,

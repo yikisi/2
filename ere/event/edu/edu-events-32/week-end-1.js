@@ -12,7 +12,7 @@ const {
 } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
-const { race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},TachyonEduMarks,number,number,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
@@ -162,16 +162,10 @@ module.exports = (handlers) => {
     era.println();
     await era.printAndWait([tachyon.sex, '自信满满的说道']);
     era.println();
-    await tachyon.say_and_wait(['以后，就叫你 ', callname, ' 吧！']);
+    await tachyon.say_and_wait(['以后，就叫你 豚鼠君 吧！']);
     era.printButton('「豚，豚鼠？」', 1);
     await era.input();
-    await tachyon.say_and_wait([
-      '呵呵，不是挺合适的吗？',
-      callname,
-      '……',
-      callname,
-      '……',
-    ]);
+    await tachyon.say_and_wait('呵呵，不是挺合适的吗？豚鼠君……豚鼠君……');
     era.println();
     await era.printAndWait([
       me.get_colored_name(),
@@ -557,13 +551,17 @@ module.exports = (handlers) => {
     await tachyon.print_and_wait('如果……没有那个人在的话');
     await tachyon.print_and_wait([
       tachyon.get_colored_name(),
-      ' 在皋月赏后说不定就完全燃尽了',
+      ' 在 ',
+      race_infos[race_enum.sats_sho].get_colored_name(),
+      ' 后说不定就完全燃尽了',
     ]);
     era.println();
     await tachyon.print_and_wait('如果……没有那个人在的话');
     await tachyon.print_and_wait([
       tachyon.get_colored_name(),
-      ' 在德比后说不定就察觉到自己的极限而主动退让了',
+      ' 在 ',
+      race_infos[race_enum.toky_yus].get_colored_name(),
+      ' 后说不定就察觉到自己的极限而主动退让了',
     ]);
     era.println();
     await tachyon.print_and_wait('如果……没有那个人在的话');
@@ -738,7 +736,7 @@ module.exports = (handlers) => {
       me.get_colored_name(),
       ' 的意料还要糟糕的请求',
     ]);
-    era.println();
+    era.drawLine();
     await era.printAndWait('夜晚下的训练场，空荡的跑道');
     await era.printAndWait([
       '整个赛场上只有 ',
@@ -750,10 +748,8 @@ module.exports = (handlers) => {
       '这也是难免的，已经将近三个月没有接受训练的',
       tachyon.sex,
       '，',
-    ]);
-    await era.printAndWait(
       '即便是天才，也无法跨越时间，肌肉的退化、感觉的退化等等，对运动员而言都是致命的伤痕',
-    );
+    ]);
     await era.printAndWait([
       '如果是现在的 ',
       tachyon.get_colored_name(),

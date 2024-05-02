@@ -144,22 +144,33 @@ handlers[check_stages.after_punish] = ({ level }) => {
 /**
  * @param {PseudoUma[]} contestants
  * @param {number} edu_weeks
+ * @param {number} race
  * @param {number} rank
  */
-handlers[check_stages.after_race] = ({ contestants, edu_weeks, rank }) => {
+handlers[check_stages.after_race] = ({
+  contestants,
+  edu_weeks,
+  race,
+  rank,
+}) => {
+  const edu_marks = new TachyonEduMarks();
   if (edu_weeks <= 47 + race_infos[race_enum.sats_sho].date && rank !== 1) {
-    new TachyonEduMarks().title_check = 1;
+    edu_marks.title_check = 1;
   }
   const race_history = new RaceHistory(32).get();
   if (
     check_aim_race(race_history, race_enum.sats_sho, 1, 1) &&
     check_aim_race(race_history, race_enum.toky_yus, 1, 1) &&
-    check_aim_race(race_history, race_enum.kiku_sho, 1, 1)
+    race === race_enum.kiku_sho &&
+    rank === 1
   ) {
     add_event(
       event_hooks.week_end,
       new EventObject(32, cb_enum.edu).set_arg('triple_crown'),
     );
+  }
+  if (edu_marks.plan_b && race === race_enum.tenn_spr) {
+    edu_marks.tenn_spr = 1;
   }
   if (contestants.find((e) => e.index_chara === 25)?.rank?.curr < rank) {
     new TachyonEduMarks().beat_c = 1;
@@ -193,7 +204,11 @@ handlers[check_stages.next_week] = () => {
     }
     life_marks.talk = 0;
     // 做饭检查
-    if (life_marks.cook) {
+    if (
+      life_marks.cook &&
+      era.get('cflag:32:位置') === location_enum.office &&
+      era.get('cflag:0:位置') === era.get('cflag:32:位置')
+    ) {
       if (relation <= 225) {
         (temp = era.get('flag:当前回合数') - life_marks.l_cook) > 1 &&
           temp <= 4 &&
@@ -233,7 +248,11 @@ handlers[check_stages.next_week] = () => {
     const event_obj_special = new EventObject(32, cb_enum.edu, true).set_arg(
       edu_weeks,
     );
-    if (Math.random() < 0.2) {
+    if (
+      Math.random() < 0.2 &&
+      era.get('cflag:32:位置') === location_enum.office &&
+      era.get('cflag:0:位置') === era.get('cflag:32:位置')
+    ) {
       add_event(event_hooks.week_start, event_obj.copy().set_arg('try_drug'));
     }
     switch (edu_weeks) {
@@ -242,7 +261,6 @@ handlers[check_stages.next_week] = () => {
       case 47 + 1: // 中期检查
       case 47 + 5: // 中期报告提交
       case 47 + 25: // A or B
-      case 47 + 29: // 媒体应对办法
       case 47 + 31: // 夏日的数据采集 or 月光
       case 95 + 1: // 第二次年度审核报告 or 下定决心的新年
       case 95 + 6: // 情人节
@@ -283,7 +301,8 @@ handlers[check_stages.next_week] = () => {
         }
         break;
       case 47 + 41: // 第二次年度考核
-        if (edu_marks.plan_b === 0) {
+      case 47 + 29: // 媒体应对办法
+        if (!edu_marks.plan_b) {
           add_event(event_hooks.week_start, event_obj_special);
         }
         break;
@@ -303,12 +322,6 @@ handlers[check_stages.next_week] = () => {
             week: era.get('flag:当前回合数') + 11,
           };
         }
-        break;
-      case 95 + 13:
-        sys_reg_race(32).curr = {
-          race: race_enum.takz_kin,
-          week: era.get('flag:当前回合数') + 11,
-        };
         break;
       case 95 + 18: // 重新绽放的光子
         if (edu_marks.tenn_spr) {
@@ -343,7 +356,7 @@ handlers[check_stages.next_week] = () => {
           edu_marks.plan_b &&
           era.get('cflag:25:位置') !== location_enum.paris
         ) {
-          add_event(event_hooks.week_end, event_obj_special);
+          add_event(event_hooks.week_start, event_obj_special);
         }
         break;
       case 95 + 38:
@@ -399,9 +412,10 @@ handlers[check_stages.palace_check] = () => {
     // 薛定鄂的超光速粒子 or 其他的可能性
     add_event(
       event_hooks.out_start,
-      new EventObject(32, cb_enum.edu, true).set_arg('hot_spring'),
+      new EventObject(32, cb_enum.edu).set_arg('hot_spring'),
     );
   }
+  new TachyonEduMarks().limited = 0;
   return aim_check;
 };
 

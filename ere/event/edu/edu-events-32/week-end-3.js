@@ -15,74 +15,6 @@ const RaceHistory = require('#/data/race/model/race-history');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},TachyonEduMarks,number,number,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
-  handlers[95 + 40] = async (tachyon, me, callname) => {
-    await print_event_name('超越极限', tachyon);
-    const coffee = get_chara_talk(25),
-      t_call_c = sys_get_colored_callname(32, 25);
-    await say_by_passer_by_and_wait('解说', [
-      coffee.get_colored_name(),
-      '！打破了日本杯的纪录……不！打破了世界纪录！世界2400m的纪录，在几个月前才由 ',
-      tachyon.get_colored_name(),
-      ' 击破的纪录，被漆黑的幻影再次超越！',
-    ]);
-    era.println();
-    await tachyon.print_and_wait('真的超越了');
-    await tachyon.print_and_wait(['在 ', t_call_c, ' 跑过终点线的瞬间']);
-    await tachyon.print_and_wait('自己与其他人同样兴奋');
-    era.println();
-    await tachyon.print_and_wait('这也是理所当然的');
-    await tachyon.print_and_wait([
-      '虽然有些自卖自夸，但',
-      tachyon.sex,
-      '可是自己看中最有可能超越极限的',
-      tachyon.get_uma_sex_title(),
-    ]);
-    await tachyon.print_and_wait('只是最接近与能够超越，还是有着极大的区别');
-    await tachyon.print_and_wait(['但是……', tachyon.sex, '真的做到了！']);
-    await tachyon.print_and_wait(
-      '虽然看上去不知为何……跑的有种不明的违和感，但那也无所谓',
-    );
-    await tachyon.print_and_wait([
-      tachyon.get_colored_name(),
-      ' 是极限的',
-      tachyon.get_uma_sex_title(),
-      '，而 ',
-      coffee.get_colored_name(),
-      ' ',
-      tachyon.sex,
-      '现在，超越了极限',
-    ]);
-    era.println();
-    await tachyon.say_and_wait([
-      callname,
-      '！',
-      callname,
-      '！',
-      t_call_c,
-      ' ',
-      tachyon.sex,
-      '……',
-    ]);
-    era.println();
-    await tachyon.print_and_wait('想要兴奋的与身边的人分享喜悦');
-    await tachyon.print_and_wait('万般的艰辛研究，现在终于得到了结果');
-    await tachyon.print_and_wait('然而');
-    era.println();
-    await tachyon.say_and_wait(['……', callname, '？']);
-    era.println();
-    await tachyon.print_and_wait('没有应答');
-    await tachyon.print_and_wait([
-      '身边的',
-      me.sex,
-      '，看台上的观众，所有人的焦点',
-    ]);
-    await tachyon.print_and_wait(['全都聚焦在中央的', tachyon.sex, '身上']);
-    await tachyon.print_and_wait([
-      tachyon.get_colored_name(),
-      ' 的呼唤，被震耳欲聋的欢呼及喝采盖过',
-    ]);
-  };
-
   handlers[95 + 43] = async (
     tachyon,
     me,
@@ -752,5 +684,73 @@ module.exports = (handlers) => {
     era.println();
     await era.printAndWait(['年关将至，接下来，就是有马纪念了']);
     flags.wait_flag = get_attr_and_print_in_event(32, [0, 0, 0, 5], 10);
+  };
+
+  handlers.japa_cup = async (tachyon, me, callname) => {
+    await print_event_name('超越极限', tachyon);
+    const coffee = get_chara_talk(25),
+      t_call_c = sys_get_colored_callname(32, 25);
+    await say_by_passer_by_and_wait('解说', [
+      coffee.get_colored_name(),
+      '！打破了日本杯的纪录……不！打破了世界纪录！世界2400m的纪录，在几个月前才由 ',
+      tachyon.get_colored_name(),
+      ' 击破的纪录，被漆黑的幻影再次超越！',
+    ]);
+    era.println();
+    await tachyon.print_and_wait('真的超越了');
+    await tachyon.print_and_wait(['在 ', t_call_c, ' 跑过终点线的瞬间']);
+    await tachyon.print_and_wait('自己与其他人同样兴奋');
+    era.println();
+    await tachyon.print_and_wait('这也是理所当然的');
+    await tachyon.print_and_wait([
+      '虽然有些自卖自夸，但',
+      tachyon.sex,
+      '可是自己看中最有可能超越极限的',
+      tachyon.get_uma_sex_title(),
+    ]);
+    await tachyon.print_and_wait('只是最接近与能够超越，还是有着极大的区别');
+    await tachyon.print_and_wait(['但是……', tachyon.sex, '真的做到了！']);
+    await tachyon.print_and_wait(
+      '虽然看上去不知为何……跑的有种不明的违和感，但那也无所谓',
+    );
+    await tachyon.print_and_wait([
+      tachyon.get_colored_name(),
+      ' 是极限的',
+      tachyon.get_uma_sex_title(),
+      '，而 ',
+      coffee.get_colored_name(),
+      ' ',
+      tachyon.sex,
+      '现在，超越了极限',
+    ]);
+    era.println();
+    await tachyon.say_and_wait([
+      callname,
+      '！',
+      callname,
+      '！',
+      t_call_c,
+      ' ',
+      tachyon.sex,
+      '……',
+    ]);
+    era.println();
+    await tachyon.print_and_wait('想要兴奋的与身边的人分享喜悦');
+    await tachyon.print_and_wait('万般的艰辛研究，现在终于得到了结果');
+    await tachyon.print_and_wait('然而');
+    era.println();
+    await tachyon.say_and_wait(['……', callname, '？']);
+    era.println();
+    await tachyon.print_and_wait('没有应答');
+    await tachyon.print_and_wait([
+      '身边的',
+      me.sex,
+      '，看台上的观众，所有人的焦点',
+    ]);
+    await tachyon.print_and_wait(['全都聚焦在中央的', tachyon.sex, '身上']);
+    await tachyon.print_and_wait([
+      tachyon.get_colored_name(),
+      ' 的呼唤，被震耳欲聋的欢呼及喝采盖过',
+    ]);
   };
 };

@@ -661,9 +661,6 @@ async function race_page(race) {
       // TODO 伏兵+1 随机负面技能
     }
     era.println();
-    const tmp = sys_reg_race(id);
-    tmp.curr.race = tmp.last.race = -1;
-    tmp.curr.week = tmp.last.week = -1;
     const edu_weeks = era.get(`cflag:${id}:育成回合计时`);
     if (race_rank[id] === 1 || race !== race_enum.begin_race) {
       new RaceHistory(id).add_result(
@@ -844,6 +841,9 @@ async function race_page(race) {
     ]);
   }
   for (const { index_chara: id } of team_list) {
+    const tmp = sys_reg_race(id);
+    tmp.curr.race = tmp.last.race = -1;
+    tmp.curr.week = tmp.last.week = -1;
     if (race_rank[id] === 1) {
       sys_change_lust(id, lust_from_palam);
       sys_change_pressure(id, -2000);

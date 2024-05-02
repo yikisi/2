@@ -252,10 +252,7 @@ module.exports = (handlers) => {
       await tachyon.say_and_wait('………！？');
       era.println();
       await tachyon.print_and_wait(
-        '在这个念头浮上心间的瞬间，心脏彷佛被添加了强心剂一般，',
-      );
-      await tachyon.print_and_wait(
-        '开始不断跳动，由于过度的血液供应，脸颊也变得发烫',
+        '在这个念头浮上心间的瞬间，心脏彷佛被添加了强心剂一般，开始不断跳动，由于过度的血液供应，脸颊也变得发烫',
       );
       await tachyon.print_and_wait('这……这不好像在说……自己………');
       era.println();

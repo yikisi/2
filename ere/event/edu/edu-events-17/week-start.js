@@ -114,10 +114,7 @@ module.exports = async (hook, _, event_object) => {
       `那时的 ${CharaTalk.me.name}，不过是个自大的混蛋。自称四处怀才不遇，实际上，不过是学生的夸夸其谈。`,
     );
     await era.printAndWait(
-      `遇到露娜时，${CharaTalk.me.name} 把脑海里藏着的那些从未见过天日的战略、见闻和幻想，`,
-    );
-    await era.printAndWait(
-      `以及 ${CharaTalk.me.name} 从露娜身上看出${luna_talk.sex}日后一定会成为大人物这些事，一股脑地说了出来。`,
+      `遇到露娜时，${CharaTalk.me.name} 把脑海里藏着的那些从未见过天日的战略、见闻和幻想，以及 ${CharaTalk.me.name} 从露娜身上看出${luna_talk.sex}日后一定会成为大人物这些事，一股脑地说了出来。`,
     );
     await era.printAndWait(
       `${CharaTalk.me.name} 不知道那时的自己有多么失态，但露娜，在那时露出了释然的笑容。`,

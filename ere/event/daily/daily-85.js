@@ -6,10 +6,12 @@ const select_action_in_shopping_street = require('#/event/daily/snippets/select-
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 
 const CharaTalk = require('#/utils/chara-talk');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const {
+  get_chara_talk,
+  say_by_passer_by,
+} = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
-const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');

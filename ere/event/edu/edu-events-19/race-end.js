@@ -2,11 +2,12 @@ const era = require('#/era-electron');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { say_by_passer_by } = require('#/utils/chara-talk');
+const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { race_enum } = require('#/data/race/race-const');
-const CharaTalk = require('#/utils/chara-talk');
+
 const chara_talk = new CharaTalk(19);
 
 /**

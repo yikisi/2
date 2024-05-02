@@ -499,7 +499,7 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[47 + 4] = async (coffee, me, callname, flags) => {
+  handlers[47 + 6] = async (coffee, me, callname, flags) => {
     await print_event_name('转变', coffee);
     await era.printAndWait([
       coffee.get_colored_name(),

@@ -39,6 +39,7 @@ module.exports = async () => {
       tachyon.sex,
       '马上就跑不见了',
     ]);
+    return;
   } else if (relation < 75) {
     if (life_marks.talk >= 10) {
       await tachyon.say_and_wait([

@@ -55,10 +55,19 @@ handlers[check_stages.love_event] = () =>
   add_event(event_hooks.week_end, new EventObject(68, cb_enum.love));
 
 handlers[check_stages.next_week] = () => {
-  const event_obj = new EventObject(68, cb_enum.edu),
+  const event_marks = new KitaEduMarks(),
+    event_obj = new EventObject(68, cb_enum.edu),
     edu_weeks = era.get('cflag:68:育成回合计时');
+  if (event_marks.hot_spring && edu_weeks > 95 + 24) {
+    check_and_add_event(
+      event_marks,
+      edu_weeks,
+      'hot_spring_event',
+      event_hooks.out_start,
+      event_obj,
+    );
+  }
   if (edu_weeks < 3 * 48) {
-    const event_marks = new KitaEduMarks();
     const event_obj_special = new EventObject(68, cb_enum.edu, true);
     check_and_add_event(
       event_marks,
@@ -67,15 +76,6 @@ handlers[check_stages.next_week] = () => {
       event_hooks.back_school,
       event_obj,
     );
-    if (event_marks.hot_spring && edu_weeks > 95 + 24) {
-      check_and_add_event(
-        event_marks,
-        edu_weeks,
-        'hot_spring_event',
-        event_hooks.out_start,
-        event_obj,
-      );
-    }
     switch (edu_weeks) {
       case 38: // 优秀素质登场
       case 47 + 7: // 家人是很重要的
