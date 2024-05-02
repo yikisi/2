@@ -33,7 +33,10 @@ module.exports = async (_, extra_flag) => {
     !event_marks.fall_into_hell
   ) {
     event_marks.fall_into_hell++;
-    await print_event_name('堕入深渊', emperor_talk);
+    await print_event_name(
+      [{ color: emperor_talk.color, content: '堕入深渊' }],
+      chara_talk,
+    );
 
     let choose_emperor;
     await era.printAndWait(
@@ -172,7 +175,7 @@ module.exports = async (_, extra_flag) => {
     await era.printAndWait(`${CharaTalk.me.name} 失去了意识。`);
   } else if (extra_flag.race === race_enum.arim_kin && edu_weeks < 96) {
     // 经典年有马纪念
-    await print_event_name('无可匹敌', emperor_talk);
+    await print_event_name('无可匹敌', chara_talk);
 
     await era.printAndWait(
       '与日本杯不同，每年的有马纪念——最后的大奖赛，也是长久以来最受人们瞩目的比赛，不是报名决定参赛的。',
@@ -205,7 +208,10 @@ module.exports = async (_, extra_flag) => {
     );
   } else if (extra_flag.race === race_enum.japa_cup && edu_weeks >= 96) {
     // 资深年日本杯
-    await print_event_name('油尽灯枯', emperor_talk);
+    await print_event_name(
+      [{ color: emperor_talk.color, content: '油尽灯枯' }],
+      chara_talk,
+    );
 
     await era.printAndWait(
       `赛马娘有着天生的胜负欲，${chara_talk.sex}们无论何时都想着疾驰到更远的地方。`,
