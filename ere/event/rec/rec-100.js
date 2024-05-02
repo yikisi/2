@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { yes } = require('#/data/event/recruit-flags');
 
 /**
@@ -42,46 +45,46 @@ module.exports = {
       );
     }
     if (era.get('cflag:62:招募状态') === 1) {
-      await get_chara_talk(60).say_and_wait(
+      await get_chara_talk(62).say_and_wait(
         '没事的啦，训练员桑~总有预感，下次会很顺利的啦~',
       );
     }
     if (era.get('cflag:13:招募状态') === 1) {
-      await get_chara_talk(60).say_and_wait(
+      await get_chara_talk(13).say_and_wait(
         '嘛……总之，要一起来喝下午茶吗，训练员桑？',
       );
     }
     if (era.get('cflag:7:招募状态') === 1) {
-      await get_chara_talk(60).say_and_wait('哦，aibo~拉面一狗贼？');
+      await get_chara_talk(7).say_and_wait('哦，aibo~拉面一狗贼？');
     }
     if (era.get('cflag:71:招募状态') === 1) {
-      await get_chara_talk(60).say_and_wait(
+      await get_chara_talk(71).say_and_wait(
         '没事的，训练员桑！只要凭借目白家的财力的话——',
       );
     }
     if (era.get('cflag:61:招募状态') === 1) {
-      await get_chara_talk(60).say_and_wait(
+      await get_chara_talk(61).say_and_wait(
         '哦——吼吼！不用在意凡人的眼光。你的才能，由我帝王光辉所认可了哦！',
       );
     }
     if (era.get('cflag:6:招募状态') === 1) {
-      await get_chara_talk(60).say_and_wait('……训练员桑，肚子饿了。');
+      await get_chara_talk(6).say_and_wait('……训练员桑，肚子饿了。');
     }
     if (era.get('cflag:21:招募状态') === 1) {
-      await get_chara_talk(60).say_and_wait(
+      await get_chara_talk(21).say_and_wait(
         '诺，训练员桑。这是大阪烧哇，我给你和小栗仔都做了一份，吃了这个就打起精神来吧。',
       );
     }
     if (era.get('cflag:11:招募状态') === 1) {
-      await get_chara_talk(60).say_and_wait('呼呼~真是可爱呢，训练员桑~');
+      await get_chara_talk(11).say_and_wait('呼呼~真是可爱呢，训练员桑~');
     }
     if (era.get('cflag:32:招募状态') === 1) {
-      await get_chara_talk(60).say_and_wait(
+      await get_chara_talk(32).say_and_wait(
         '放心吧，豚鼠君！变得受欢迎的药很快就能研究出来了！',
       );
     }
     if (era.get('cflag:25:招募状态') === 1) {
-      await get_chara_talk(60).say_and_wait(
+      await get_chara_talk(25).say_and_wait(
         '……再继续下去的话，训练员……你会被杀掉的哦？',
       );
     }
@@ -148,8 +151,7 @@ module.exports = {
     );
     await era.printAndWait('不是殷勤，不是示好、当然也不是日常的粉丝公关——');
     await era.printAndWait(
-      `而是恰到好处、不近不远的距离。${
-        chara_talk.sex
+      `而是恰到好处、不近不远的距离。${chara_talk.sex
       }伸出了载着玻璃皿的手，将萝卜干捧在了${sys_get_callname(0, 0)}的面前。`,
     );
     await era.printAndWait(

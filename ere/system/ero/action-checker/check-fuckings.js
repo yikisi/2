@@ -10,8 +10,8 @@ const { talent2acceptable } = require('#/data/ero/battle-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const {
-  vp_status_enum,
   pregnant_stage_enum,
+  vp_status_enum,
 } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 

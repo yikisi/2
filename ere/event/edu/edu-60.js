@@ -2,22 +2,22 @@ const era = require('#/era-electron');
 
 const {
   sys_change_attr_and_print,
-  sys_change_motivation,
   sys_change_lust,
+  sys_change_motivation,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const quick_into_sex = require('#/event/snippets/quick-into-sex');
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { location_enum } = require('#/data/locations');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const NNEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-60');
 const event_hooks = require('#/data/event/event-hooks');
+const { location_enum } = require('#/data/locations');
 
 const handlers = {};
 
@@ -265,7 +265,7 @@ handlers[event_hooks.out_start] = async (hook, _, event_object) => {
 
     await era.printAndWait('今天优秀素质不会出现。因为──');
     await era.printAndWait(
-      '“有马纪念”后，优秀素质向目白麦昆与目白赖恩请教了实力如此坚强的原因。',
+      '“有马纪念”后，优秀素质向目白麦昆与目白莱恩请教了实力如此坚强的原因。',
     );
     await era.printAndWait(
       `今天${chara_talk.sex}受到两位邀请，去学习坚强的原因了。──或许可以说是去目白家留学一天吧。`,

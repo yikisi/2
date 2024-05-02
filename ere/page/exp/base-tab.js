@@ -9,21 +9,21 @@ const { join_list } = require('#/utils/list-utils');
 const CharaTitles = require('#/data/chara-titles');
 const { attr_colors, hair_colors, skin_colors } = require('#/data/const.json');
 const {
-  get_skin,
+  chara_desc,
+  human_sex_title,
+  sex_title,
+} = require('#/data/ero/status-const');
+const { growth_info } = require('#/data/exp-const');
+const {
   get_breast_cup,
+  get_skin,
   get_talent,
   get_xp,
 } = require('#/data/info-generator');
 const {
-  chara_desc,
-  sex_title,
-  human_sex_title,
-} = require('#/data/ero/status-const');
-const { growth_info } = require('#/data/exp-const');
-const {
+  back_hairs,
   chara_has_ero_image,
   front_hairs,
-  back_hairs,
   top_hairs,
 } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');

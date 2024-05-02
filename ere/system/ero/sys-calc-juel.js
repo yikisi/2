@@ -4,14 +4,14 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { palam_colors } = require('#/data/color-const');
 const { base_juel_reward } = require('#/data/ero/juel-const');
 const { palam2juel } = require('#/data/ero/orgasm-const');
 const {
-  pleasure_list,
-  part_names,
   part_enum,
+  part_names,
+  pleasure_list,
 } = require('#/data/ero/part-const');
-const { palam_colors } = require('#/data/color-const');
 
 let tmp = {};
 

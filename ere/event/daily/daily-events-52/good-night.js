@@ -5,10 +5,10 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
-const check_stages = require('#/data/event/check-stages');
 const { get_random_entry } = require('#/utils/list-utils');
+
 const { lust_border } = require('#/data/ero/orgasm-const');
+const check_stages = require('#/data/event/check-stages');
 
 /** @param {HookArg} hook */
 module.exports = async (hook) => {

@@ -12,19 +12,19 @@ const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 const {
-  sys_change_motivation,
-  sys_fix_chara_base,
   sys_change_lust,
+  sys_change_motivation,
+  sys_change_pressure,
+  sys_fix_chara_base,
   sys_get_billings,
   sys_reg_race,
-  sys_change_pressure,
 } = require('#/system/sys-calc-base-cflag');
 const {
   sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
-const { sys_change_money, sys_change_fame } = require('#/system/sys-calc-flag');
+const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const filter_chara = require('#/system/sys-filter-chara');
 const sys_handle_palace = require('#/system/sys-handle-palace');
 
@@ -50,9 +50,9 @@ const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
-  get_trainer_title,
   get_breast_cup,
   get_talent_bust_size,
+  get_trainer_title,
 } = require('#/data/info-generator');
 const LoveLimitStatus = require('#/data/love-limit-status');
 const RaceHistory = require('#/data/race/model/race-history');

@@ -1,12 +1,13 @@
 const era = require('#/era-electron');
 
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
+const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
 const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const { ero_hooks } = require('#/data/event/ero-hooks');
 const { get_random_entry } = require('#/utils/list-utils');
-const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
+
+const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @param {boolean} shown */
 async function sys_auto_react(shown) {

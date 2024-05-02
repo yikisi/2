@@ -277,7 +277,7 @@ module.exports = {
       await era.printAndWait('「救我」', {
         align: 'center',
         color: chara_17.color,
-        fontSize: '48px',
+        fontSize: '3rem',
         fontWeight: 'bold',
       });
       await era.printAndWait(

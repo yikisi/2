@@ -1,7 +1,8 @@
-const era = require('#/era-electron');
+const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 
 module.exports = (is_reset) => {
   if (!is_reset) {
-    era.set('callname:32:0', '豚鼠君');
+    new TachyonLifeMarks().first = 2;
+    require('#/system/sys-init-chara').init_chara(25);
   }
 };

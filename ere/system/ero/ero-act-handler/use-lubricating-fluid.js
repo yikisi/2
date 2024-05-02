@@ -1,12 +1,14 @@
 const era = require('#/era-electron');
 
-const CharaTalk = require('#/utils/chara-talk');
-const { part_enum, part_names } = require('#/data/ero/part-const');
 const {
   check_lubrication,
   get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
+
+const CharaTalk = require('#/utils/chara-talk');
+
 const { buff_colors } = require('#/data/color-const');
+const { part_enum, part_names } = require('#/data/ero/part-const');
 
 /**
  * @param {CharaTalk} chara

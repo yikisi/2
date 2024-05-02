@@ -16,10 +16,10 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const {
-  part_enum,
   get_skill_list,
-  touch_list,
+  part_enum,
   part_names,
+  touch_list,
 } = require('#/data/ero/part-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const { get_filtered_talents } = require('#/data/info-generator');

@@ -735,11 +735,11 @@ handlers[event_hooks.office_game] = async () => {
   if (love >= 75) {
     talk_arr.push(async () => {
       await urara.say_and_wait([
-        '打游戏要集中注意力哦……嘿！哈哈～ ',
+        '打游戏要集中注意力哦……嘿！哈哈～',
         callname,
         '、',
         callname,
-        ' ～好痒！乌拉拉知道错了～',
+        '～好痒！乌拉拉知道错了～',
       ]);
       await era.printAndWait([
         '面对一直用挠痒痒等盘外招进行骚扰的 ',

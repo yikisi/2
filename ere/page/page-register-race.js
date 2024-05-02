@@ -9,19 +9,19 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { el_danger_color, adaptability_colors } = require('#/data/color-const');
-const check_stages = require('#/data/event/check-stages');
+const { adaptability_colors, el_danger_color } = require('#/data/color-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_adaptability_rank } = require('#/data/info-generator');
 const { expedition_weeks } = require('#/data/move-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { track_enum } = require('#/data/race/model/race-info');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 const {
   foreign_race_list,
   track2location,
 } = require('#/data/race/race-location');
 const { adaptability_names } = require('#/data/train-const');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 /**
  * @param {number} chara_id
@@ -107,6 +107,7 @@ async function reg_race_page() {
     begin_round = cur_round - (cur_round % 4),
     team_list = sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
       (chara_id) =>
+        get_custom_mec(chara_id).is_race_register_enabled() &&
         era.get(`cflag:${chara_id}:种族`) &&
         (!chara_id || era.get(`cflag:${chara_id}:育成回合计时`) + 1 < 3 * 48) &&
         sys_reg_race(chara_id).curr.week !== cur_round + 1,

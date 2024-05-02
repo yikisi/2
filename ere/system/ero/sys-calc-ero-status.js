@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const sys_call_mec = require('#/system/script/sys-call-mec');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const {
   height2anal_size,
@@ -14,7 +14,6 @@ const {
 const { part_enum, part_names } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const check_stages = require('#/data/event/check-stages');
 
 /**
  * @param {number} chara_id
@@ -106,7 +105,7 @@ function get_penis_size(chara_id) {
  */
 function get_sex_acceptable(chara_id) {
   return (
-    sys_call_mec(chara_id, check_stages.mec_sex_acceptable, {}) +
+    get_custom_mec(chara_id).get_sex_acceptable() +
     get_action_base_check(chara_id) +
     Math.max(era.get(`base:${chara_id}:性欲`) - 5000, 0) / 200 +
     10 * Math.max(era.get(`flag:惩戒力度`) - 1, 0) +

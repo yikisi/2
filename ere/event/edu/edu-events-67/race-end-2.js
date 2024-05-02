@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  takz_kin_common,
   japa_cup_common,
+  takz_kin_common,
 } = require('#/event/edu/edu-events-67/snippets');
 const print_event_name = require('#/event/snippets/print-event-name');
 

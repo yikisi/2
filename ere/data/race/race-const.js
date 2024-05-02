@@ -1,8 +1,8 @@
-const { id2bonus, bonus_params } = require('#/data/race/race-attr-bonus');
+const { bonus_params, id2bonus } = require('#/data/race/race-attr-bonus');
 const {
   lane_params,
-  slope_params,
   phase_params,
+  slope_params,
 } = require('#/data/race/race-params');
 
 const race_enum = {

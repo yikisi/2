@@ -4,7 +4,7 @@ const { sys_push_crazy_fan } = require('#/system/sys-calc-flag');
 
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @param {number} chara_id */
 function common_palace_check(chara_id) {

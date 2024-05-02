@@ -18,7 +18,7 @@ build:
   script:
     - cd engine
     - npm install
-    - npm run win:pack
+    - NODE_OPTIONS=--openssl-legacy-provider npm run win:pack
     - mv dist_electron/win-unpacked ./$GAME_ALL_DIR
     - mkdir ./$GAME_ALL_DIR/game
     - cp ../CHANGELOG.md ./$GAME_ALL_DIR/game/

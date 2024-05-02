@@ -108,7 +108,7 @@ async function common_comments(me, daiya, other) {
   era.println();
   await era.printAndWait('于是你和里见光钻的三年开始了！', {
     color: daiya.color,
-    fontSize: '24px',
+    fontSize: '1.5rem',
   });
 }
 
@@ -331,14 +331,14 @@ module.exports = {
             columns: [
               {
                 config: {
-                  fontSize: '28px',
+                  fontSize: '1.75rem',
                   fontWeight: 'bold',
                 },
                 content: '？？？',
                 type: 'text',
               },
               {
-                config: { color: daiya.color, fontSize: '12px' },
+                config: { color: daiya.color, fontSize: '0.75rem' },
                 content: '？？？',
                 type: 'text',
               },
@@ -349,7 +349,7 @@ module.exports = {
         era.setVerticalAlign('top');
         era.println();
         await era.printAndWait(`${me.name} 仿佛听到了什么声音…………`);
-        await daiya.say_and_wait('训练员，你 是 绝 对 逃 不 掉 的 哦 ？');
+        await daiya.say_and_wait('训练员，你 是 绝 对 逃 不 掉 的 哦？');
         add_event(event_hooks.out_start, event_object);
         return false;
       }
@@ -470,7 +470,7 @@ module.exports = {
         await era.printAndWait(
           `不过，在 ${me.name} 转身离开的时候，仿佛听到了什么声音…………`,
         );
-        await daiya.say_and_wait('训练员，你 是 绝 对 逃 不 掉 的 哦 ？');
+        await daiya.say_and_wait('训练员，你 是 绝 对 逃 不 掉 的 哦？');
         add_event(event_hooks.out_start, event_object);
       }
       return true;

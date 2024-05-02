@@ -1,9 +1,11 @@
 const era = require('#/era-electron');
 
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const common_pregnant_report_in_love = require('#/event/ero/snippets/common-pregnant-report-in-love');
+const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -15,10 +17,8 @@ const {
   unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
-const sys_filter_chara = require('#/system/sys-filter-chara');
-const recruit_flags = require('#/data/event/recruit-flags');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 /** @type {Record<string,function(HookArg,*):Promise<*>>} */
 const handlers = {};
@@ -632,7 +632,7 @@ handlers[ero_hooks.have_baby] = async (hook, extra_flag) => {
           ]);
           await era.printAndWait('家庭生活……真是个好理由');
           await era.printAndWait(
-            '这样的话，就算在自己给孩子喂奶的同时将肉棒塞入自己口中，也可以以“补充营养”的名分一言带过吧',
+            '这样的话，就算在自己给孩子喂奶的同时将肉棒塞入自己口中，也可以以『补充营养』的名分一言带过吧',
           );
           await era.printAndWait([
             '作为丈夫的 ',
@@ -687,7 +687,7 @@ handlers[ero_hooks.shop_end] = () => {};
 
 /**
  * @author 雞雞
- * @author 鬼鼠
+ * @author 幽白書
  * @author 黑奴队长
  *
  * @param {HookArg} hook

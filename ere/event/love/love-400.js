@@ -6,8 +6,8 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const event_hooks = require('#/data/event/event-hooks');
 const SSEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-400');
+const event_hooks = require('#/data/event/event-hooks');
 
 /**
  * 周日宁静 - 爱慕

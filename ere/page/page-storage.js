@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const shop_desc = require('#/data/shop-desc.json');
+const shop_desc = require('#/data/desc/shop-desc.json');
 
 const handlers = {};
 

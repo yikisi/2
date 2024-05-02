@@ -8,11 +8,13 @@ const {
   init_ero,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+} = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
@@ -20,13 +22,9 @@ const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { yes } = require('#/data/event/recruit-flags');
 
-module.exports = async () => {
-  const love = era.get('love:32'),
-    me = get_chara_talk(0),
-    punish_level = era.get('flag:惩戒力度'),
-    tachyon = get_chara_talk(32);
-  let temp;
-  if (punish_level === 1) {
+/** @param {Record<string,function(CharaTalk,CharaTalk,string,number,number)>} handlers */
+module.exports = (handlers) => {
+  handlers.p1 = async (tachyon, me, _, love) => {
     await print_event_name('实验记录：马娘转化', tachyon);
     if (love < 75) {
       await tachyon.say_and_wait('哦呀，豚鼠……不，豚鼠小姐来了呢');
@@ -66,7 +64,9 @@ module.exports = async () => {
       );
       await tachyon.say_and_wait('呵呵，我会好好疼爱你的');
     }
-  } else if (punish_level === 2) {
+  };
+
+  handlers.p2 = async (tachyon, me, _, love) => {
     await print_event_name('实验记录：性奴改造', tachyon);
 
     await era.printAndWait('咕啾 咕啾 啾啵 啾噜');
@@ -136,12 +136,16 @@ module.exports = async () => {
     }
     era.println();
 
-    await era.printAndWait(
-      `忽然，正专心致志为马娘主人服务的 ${me.name}，全身忽然颤抖了起来`,
-    );
-    await era.printAndWait(
-      `在 ${me.name} 身下，那哪怕勃起到极限也没有马娘主人一边睪丸大的“阴蒂”，喷出了今天第四发，稀薄如水的液体`,
-    );
+    await era.printAndWait([
+      `忽然，正专心致志为`,
+      tachyon.get_uma_sex_title(),
+      `主人服务的 ${me.name}，全身忽然颤抖了起来`,
+    ]);
+    await era.printAndWait([
+      `在 ${me.name} 身下，那哪怕勃起到极限也没有`,
+      tachyon.get_uma_sex_title(),
+      `主人一边睪丸大的“阴蒂”，喷出了今天第四发，稀薄如水的液体`,
+    ]);
     era.add('exp:0:阴茎高潮次数', 3);
     era.add('exp:0:射精量', 12);
     await era.printAndWait('这也惹得眼前的主人有些不悦');
@@ -153,9 +157,11 @@ module.exports = async () => {
       );
       era.println();
 
-      await era.printAndWait(
-        `${me.name} 连忙回过神来继续为自己的负责马娘兼主人服务`,
-      );
+      await era.printAndWait([
+        `${me.name} 连忙回过神来继续为自己的负责`,
+        tachyon.get_uma_sex_title(),
+        `兼主人服务`,
+      ]);
       await era.printAndWait(
         `但一向没有耐心的${tachyon.sex}已经受够了 ${me.name} 那拙劣的服务`,
       );
@@ -243,12 +249,16 @@ module.exports = async () => {
       await era.printAndWait(
         `庞大的量将 ${me.name} 的口鼻喉舌全数填满，眼看就要向外流出……`,
       );
-      await era.printAndWait(
-        `${me.name} 慌忙将口中已经填满的腥臭浆液吞下，但 ${me.name} 的努力，终究无法将马娘大人的恩赐全数含入`,
-      );
-      await era.printAndWait(
-        `最终……${me.name} 只能无助的用手接住了马娘大人宝贵的子种汁`,
-      );
+      await era.printAndWait([
+        `${me.name} 慌忙将口中已经填满的腥臭浆液吞下，但 ${me.name} 的努力，终究无法将`,
+        tachyon.get_uma_sex_title(),
+        `大人的恩赐全数含入`,
+      ]);
+      await era.printAndWait([
+        `最终……${me.name} 只能无助的用手接住了`,
+        tachyon.get_uma_sex_title(),
+        `大人宝贵的子种汁`,
+      ]);
       era.println();
 
       await era.printAndWait('可即便如此，口中不断发射的粗壮炮管依然没有停下');
@@ -264,9 +274,11 @@ module.exports = async () => {
       await era.printAndWait(
         `${me.name} 不由得想喊出声，但张开的喉咙马上又被更多的白浆灌入`,
       );
-      await era.printAndWait(
-        `${me.name} 抬起头，看见的是自己的负责马娘兼主人的腿`,
-      );
+      await era.printAndWait([
+        `${me.name} 抬起头，看见的是自己的负责`,
+        tachyon.get_uma_sex_title(),
+        `兼主人的腿`,
+      ]);
       await era.printAndWait('那自己无比呵护爱惜，比自己的腿都还要重视的美足');
       await era.printAndWait(`如今正毫不留情的踩在 ${me.name} 的肚子上`);
       era.println();
@@ -406,10 +418,14 @@ module.exports = async () => {
     era.println();
 
     await era.printAndWait('说完后，速子穿好裤子便离开了实验室');
-    love < 75 &&
-      (await era.printAndWait(
-        `留下躺在地板上，肚子如气球一般涨起，嘴角还在不停流淌着白汁的 ${me.name} 在室内无助的喘着气`,
-      ));
+
+    await era.printAndWait(
+      `留下躺在地板上，肚子如气球一般涨起，${
+        love < 75
+          ? `嘴角还在不停流淌着白汁的 ${me.name} 在室内无助的喘着气`
+          : `还在不停向外喷出白汁的 ${me.name} 无力的清扫地面`
+      }`,
+    );
     await era.printAndWait(
       `奖励还是惩罚……${love < 75 ? `${me.name} 望向角落的扫具柜` : ''}`,
     );
@@ -463,7 +479,9 @@ module.exports = async () => {
       );
     }
     end_ero_and_train();
-  } else if (punish_level === 3) {
+  };
+
+  handlers.p3 = async (tachyon, me, _, love) => {
     await print_event_name('实验记录：孕袋及多马娘体液研究', tachyon);
 
     begin_and_init_ero(0, 32);
@@ -480,9 +498,11 @@ module.exports = async () => {
     );
     era.println();
 
-    await tachyon.say_and_wait(
-      '啧啧……真是，毫不留情啊，我是不是小瞧一般马娘的性欲了',
-    );
+    await tachyon.say_and_wait([
+      '啧啧……真是，毫不留情啊，我是不是小瞧一般',
+      tachyon.get_uma_sex_title(),
+      '的性欲了',
+    ]);
     era.println();
 
     await era.printAndWait(
@@ -523,9 +543,11 @@ module.exports = async () => {
     );
     era.println();
 
-    await era.printAndWait(
-      `速子高兴的看着自己及时在喷泉爆发瞬间掏出的烧杯，里面全是刚刚收集的马娘体液，然而这样一个烧杯，装的量也不足 ${me.name} 穴内排出的三分之一，更多喷洒在地上，成为了扫除人员的麻烦`,
-    );
+    await era.printAndWait([
+      `速子高兴的看着自己及时在喷泉爆发瞬间掏出的烧杯，里面全是刚刚收集的`,
+      tachyon.get_uma_sex_title(),
+      `体液，然而这样一个烧杯，装的量也不足 ${me.name} 穴内排出的三分之一，更多喷洒在地上，成为了扫除人员的麻烦`,
+    ]);
     await era.printAndWait('不过，谁造成的谁清理，这也是理所当然的吧');
     era.println();
 
@@ -550,9 +572,10 @@ module.exports = async () => {
         new EroParticipant(0, part_enum.breast),
         false,
       );
-      await tachyon.say_and_wait(
-        '茶座君真是闷骚……原本我还以为她会拒绝这种游戏的，结果……',
-      );
+      await tachyon.say_and_wait([
+        sys_get_colored_callname(32, 25),
+        ` 真是闷骚……原本我还以为${tachyon.sex}会拒绝这种游戏的，结果……`,
+      ]);
       era.println();
       await era.printAndWait(
         `速子顺着 ${me.name} 被猎犬留下痕迹的脖子，一路摸到肩膀，随后……手向下移动，摸到了满是齿痕的乳房，其中乳头上的齿痕尤为明显`,
@@ -572,7 +595,10 @@ module.exports = async () => {
         new EroParticipant(0, part_enum.mouth),
         false,
       );
-      await tachyon.say_and_wait('宝穴君也是……明明一开始还那么害羞……');
+      await tachyon.say_and_wait([
+        sys_get_colored_callname(32, 94),
+        ' 也是……明明一开始还那么害羞……',
+      ]);
       era.println();
 
       await era.printAndWait(
@@ -580,9 +606,10 @@ module.exports = async () => {
       );
       era.println();
 
-      await tachyon.say_and_wait(
-        '宝穴君的声音，哪怕我在实验室里也听的一清二楚啊',
-      );
+      await tachyon.say_and_wait([
+        sys_get_colored_callname(32, 94),
+        ' 的声音，哪怕我在实验室里也听的一清二楚啊',
+      ]);
       era.println();
     }
 
@@ -601,17 +628,19 @@ module.exports = async () => {
         new EroParticipant(0, part_enum.virgin),
         false,
       );
-      await tachyon.say_and_wait(
-        '大和君……呵呵，不愧是我看好的孩子，哪怕这方面也都是第一名的',
-      );
+      await tachyon.say_and_wait([
+        sys_get_colored_callname(32, 9),
+        '……呵呵，不愧是我看好的孩子，哪怕这方面也都是第一名的',
+      ]);
       era.println();
 
       await era.printAndWait(
         '虽然还没验证过，但刚刚装的那一烧杯，里面应该七成左右都是大和一个人射的吧',
       );
-      await era.printAndWait(
-        `哪怕在做爱上也要当第一的坚持，让${tachyon.sex}成为了这三天中骑在 ${me.name} 身上最久的一名马娘`,
-      );
+      await era.printAndWait([
+        `哪怕在做爱上也要当第一的坚持，让${tachyon.sex}成为了这三天中骑在 ${me.name} 身上最久的一名`,
+        tachyon.get_uma_sex_title(),
+      ]);
       era.println();
     }
 
@@ -622,9 +651,11 @@ module.exports = async () => {
         new EroParticipant(0, part_enum.masochism),
         false,
       );
-      await tachyon.say_and_wait(
-        '还有，富士君也接受我的提议让我实验了，啧啧，没想到我们家豚鼠君的面子这么大，连宿舍长都无法逃过魔掌啊',
-      );
+      await tachyon.say_and_wait([
+        '还有，',
+        sys_get_colored_callname(32, 5),
+        ' 也接受我的提议让我实验了，啧啧，没想到我们家豚鼠君的面子这么大，连宿舍长都无法逃过魔掌啊',
+      ]);
       era.println();
 
       await era.printAndWait(
@@ -642,9 +673,10 @@ module.exports = async () => {
         new EroParticipant(0, part_enum.anal),
         false,
       );
-      await tachyon.say_and_wait(
-        '啧啧，明明每天都说什么逻辑逻辑，做起爱来不还是把理智都忘光了吗……神宫君',
-      );
+      await tachyon.say_and_wait([
+        '啧啧，明明每天都说什么逻辑逻辑，做起爱来不还是把理智都忘光了吗……',
+        sys_get_colored_callname(32, 36),
+      ]);
       era.println();
 
       await era.printAndWait(
@@ -653,7 +685,7 @@ module.exports = async () => {
       era.println();
     }
 
-    temp = era
+    const temp = era
       .getAddedCharacters()
       .filter(
         (e) =>
@@ -688,7 +720,7 @@ module.exports = async () => {
         `速子拍着 ${me.name} 的屁股，上面用稚嫩的笔迹写着『${sys_get_callname(
           child,
           0,
-        )}是我专用的便器』，也不知道这孩子是不是真的理解了话中的意思……听见速子念出这句话，想到孩子若是在理解了这句话的意思的情况下写下来的…… ${
+        )}是我专用的便器』，也不知道这孩子是不是真的理解了话中的意思……听见速子念出这句话，想到孩子若是在理解了这句话的意思的情况下写下来的……${
           me.name
         } 又忍不住陷入了高潮`,
       );
@@ -703,15 +735,12 @@ module.exports = async () => {
 
       await era.printAndWait('速子又重重踩了一脚，带着嘲讽及不屑的语气说');
       era.println();
-
       await tachyon.say_and_wait(
         '感到庆幸吧，马娘的身体足够结实，所以就算这样踩也只能对你造成伤害，对肚子里的孩子是一点事也不会有……但你大概也不会在乎这种事吧，有肉棒就好的妓女',
       );
       era.println();
-
       await era.printAndWait(`${me.name} 想反驳，但从下体喷出的潮水却不容反驳`);
       era.println();
-
       await quick_make_love(
         new EroParticipant(32, part_enum.foot),
         new EroParticipant(0, part_enum.body),
@@ -723,40 +752,38 @@ module.exports = async () => {
         false,
       );
     }
-
     await tachyon.say_and_wait(
       '这边这些，则都是『曾经』爱慕过你的那些孩子留下的呢',
     );
     era.println();
-
-    await era.printAndWait(
-      `速子拂过 ${me.name} 身上写着的『母狗』、『便器10元一次』、『马娘大人的精便器』、『性爱德比18着』`,
-    );
-    await era.printAndWait(
-      '每一行都是看见自己憧憬的训练员变成淫荡的母马孕袋后由爱生恨，由恨生欲的马娘们所留',
-    );
+    await era.printAndWait([
+      `速子拂过 ${me.name} 身上写着的『母狗』、『便器10元一次』、『`,
+      tachyon.get_uma_sex_title(),
+      `大人的精便器』、『性爱德比18着』`,
+    ]);
+    await era.printAndWait([
+      '每一行都是看见自己憧憬的训练员变成淫荡的母马孕袋后由爱生恨，由恨生欲的',
+      tachyon.get_uma_sex_title(),
+      '们所留',
+    ]);
     era.println();
-
     await tachyon.say_and_wait('但你应该很爽吧，嗯？');
     era.println();
-
     await era.printAndWait('速子的脸上浮现了满是嗜虐的笑容');
     era.println();
-
-    await tachyon.say_and_wait(
-      '看你爽的这德性，被写上字的时候，是不是还要求她们一字一句念出来给你听啊？嗯？骚货，贱狗，为了精液能跪在地上舔鞋子的母猪？',
-    );
+    await tachyon.say_and_wait([
+      '看你爽的这德性，被写上字的时候，是不是还要求',
+      tachyon.sex,
+      '们一字一句念出来给你听啊？嗯？骚货，贱狗，为了精液能跪在地上舔鞋子的母猪？',
+    ]);
     era.println();
-
     await era.printAndWait(`每说一句，${me.name} 的下面就不由得涌出一阵潮水`);
     await era.printAndWait(`让 ${me.name} 想做出的反抗都变成虚伪的欲迎还拒`);
     era.println();
-
     !get_penis_size(32) && era.set('status:32:弗隆P', 1);
     if (love >= 75) {
       await tachyon.say_and_wait('开玩笑的');
       era.println();
-
       await era.printAndWait(
         `忽然，速子扶住 ${me.name} 的脸，轻柔的将堵住 ${me.name} 嘴巴的口球摘下`,
       );
@@ -764,7 +791,6 @@ module.exports = async () => {
         `摘下瞬间，由于前面受到的打击，加上 ${me.name} 腹中还没排干净的那些精液，导致 ${me.name} 不由自主的朝着速子，将肚子里的精液、爱液、胃酸吐的一乾二净`,
       );
       era.println();
-
       await era.printAndWait(
         `看见眼前速子的白大褂被自己弄脏，${me.name} 脸色苍白，不只是因为前面遭受的玩弄，更是因为自己的不敬之举`,
       );
@@ -772,17 +798,14 @@ module.exports = async () => {
 
       await tachyon.say_and_wait('……没事的，豚鼠君');
       era.println();
-
       await era.printAndWait(
         `速子用没被呕吐物沾到的袖子，轻柔的擦了擦 ${me.name} 的嘴`,
       );
       era.println();
-
       await tachyon.say_and_wait(
         '我不是说过吗？我不会抛弃你的，不管你变成什么样子都一样',
       );
       era.println();
-
       await era.printAndWait(
         `没等 ${me.name} 反应过来，${tachyon.sex}便吻上了 ${me.name} 的唇，不顾这双唇这几天内遭受了多少折磨，被多少人玷污过，刚刚又呕出了多少东西`,
       );
@@ -791,7 +814,6 @@ module.exports = async () => {
         `不知不觉，${me.name} 感觉，自己仿佛回到了从前的日子一样`,
       );
       era.println();
-
       await quick_make_love(
         new EroParticipant(32, part_enum.mouth),
         new EroParticipant(0, part_enum.mouth),
@@ -884,8 +906,7 @@ module.exports = async () => {
       era.printButton('用嘴', 1);
       era.printButton('用扫具', 2);
 
-      temp = await era.input();
-      if (temp === 1) {
+      if ((await era.input()) === 1) {
         await era.printAndWait(
           '反正，都已经回不去了，那不如干脆一点，放弃理智享受一切吧',
         );
@@ -916,9 +937,11 @@ module.exports = async () => {
         await era.printAndWait(
           `马娘灵敏的耳朵让 ${me.name} 听见了，有人在走廊上朝着这边走来的声音`,
         );
-        await era.printAndWait('那么，又是哪位马娘大人需要自己的服侍了呢');
         await era.printAndWait(
-          `不知不觉间， ${me.name} 主动撅起了屁股，等待下名贵客的使用`,
+          `那么，又是哪位${tachyon.get_uma_sex_title()}大人需要自己的服侍了呢`,
+        );
+        await era.printAndWait(
+          `不知不觉间，${me.name} 主动撅起了屁股，等待下名贵客的使用`,
         );
       } else {
         await era.printAndWait(
@@ -968,5 +991,5 @@ module.exports = async () => {
       }
     }
     end_ero_and_train();
-  }
+  };
 };

@@ -13,11 +13,12 @@ const check_and_add_event = require('#/event/check/snippets/check-and-add-event'
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
-const { cb_enum, add_event } = require('#/event/queue');
+const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const CharaTitles = require('#/data/chara-titles');
 const check_stages = require('#/data/event/check-stages');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
@@ -25,7 +26,6 @@ const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const CharaTitles = require('#/data/chara-titles');
 
 /** @type {Record<string,function(Record<string,*>)>} */
 const handlers = {};
@@ -65,14 +65,12 @@ handlers[check_stages.aim_race] = (extra_flag) =>
   aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
   aim_races[extra_flag.race];
 
-const edu_weeks_toky_yus = race_infos[race_enum.toky_yus].date + 48;
-
 /** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
 handlers[check_stages.after_race] = (extra_flag) => {
   const event_marks = new TeioEduMarks();
   if (extra_flag.rank !== 1) {
     event_marks.perfect_check = 1;
-    if (extra_flag.edu_weeks < edu_weeks_toky_yus) {
+    if (extra_flag.edu_weeks < race_infos[race_enum.toky_yus].date + 48) {
       event_marks.normal_check = 1;
     }
   }
@@ -221,12 +219,14 @@ handlers[check_stages.next_week] = () => {
     check_and_register_aim_race(3, aim_races, edu_weeks);
     // 选择放弃，春天皇赏强制避战
     if (
-      edu_weeks >= 96 &&
-      (temp = sys_reg_race(3).curr).race === race_enum.tenn_spr &&
+      edu_weeks === 96 + race_infos[race_enum.tenn_spr].date &&
+      (temp = sys_reg_race(3)).curr.race === race_enum.tenn_spr &&
       event_marks.give_up === 1
     ) {
-      temp.race = -1;
-      temp.week = -1;
+      temp.curr = temp.last = {
+        race: -1,
+        week: -1,
+      };
     }
     if (!event_marks.famous_in_famous && edu_weeks >= 96) {
       if (

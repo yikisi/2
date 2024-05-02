@@ -8,10 +8,10 @@ const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { add_palam } = require('#/system/ero/sys-calc-palam');
 const { cache_penis_stain, set_stain } = require('#/system/ero/sys-calc-stain');
 const {
-  update_ero_status,
-  update_temp_base,
   get_characters_in_train,
+  update_ero_status,
   update_juel_buff,
+  update_temp_base,
 } = require('#/system/ero/sys-prepare-ero');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 

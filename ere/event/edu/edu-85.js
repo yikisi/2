@@ -1,12 +1,12 @@
 const era = require('#/era-electron');
 
 const { add_event } = require('#/event/queue');
-const quick_into_sex = require('#/event/snippets/quick-into-sex');
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
-const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');

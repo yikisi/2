@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  sys_love_uma_in_event,
   sys_get_callname,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
@@ -85,7 +85,7 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
       '是否被定义为「大人」。',
     ]);
   } else {
-    await urara.say_and_wait([callname, ' ，有什么在意的事吗？']);
+    await urara.say_and_wait([callname, '，有什么在意的事吗？']);
     await era.printAndWait([
       '收回目光 ',
       urara.get_colored_name(),
@@ -330,7 +330,7 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
     await era.printAndWait([
       '没能看向最喜欢的 ',
       callname,
-      '，甚至用阴影藏起了变红的樱瞳， ',
+      '，甚至用阴影藏起了变红的樱瞳，',
       urara.get_colored_name(),
       ' 的笑容因声音的颤抖而变得悲伤。',
     ]);
@@ -352,7 +352,7 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
 
     await urara.say_and_wait('……诶？');
     await era.printAndWait([
-      '有些出乎意料地， ',
+      '有些出乎意料地，',
       urara.get_colored_name(),
       ' 颤抖的声音停下了，红红的眼睛里透着些许疑惑。',
     ]);

@@ -2,25 +2,24 @@ const era = require('#/era-electron');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const {
-  transform,
   handle_debuff,
   normal_end,
+  transform,
 } = require('#/event/edu/edu-events-17/snippets');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const palace = require('#/event/snippets/palace');
+const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const CharaTalk = require('#/utils/chara-talk');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const color_17 = require('#/data/chara-colors').chara_colors[17];
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
-const event_hooks = require('#/data/event/event-hooks');
-const HookArg = require('#/data/event/hook-arg');
 const { location_enum } = require('#/data/locations');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
-const { race_infos, race_enum } = require('#/data/race/race-const');
 
 /**
  * @param {HookArg} hook
@@ -48,12 +47,11 @@ module.exports = async (hook, _, event_object) => {
         !era.get(`status:${luna}:神经衰弱`) && era.get(`love:${luna}`) >= 90,
       );
     } else if (edu_weeks === 143 + 9 && !era.get('cflag:17:可再次育成')) {
-      await require('#/event/edu/edu-common')(
-        17,
-        new HookArg(event_hooks.week_start),
-      );
+      const chara = luna === 17 ? luna_talk : emperor_talk;
+      await palace(chara, CharaTalk.me);
+      await palace_relation(chara, CharaTalk.me);
       era.println();
-      await get_chara_talk(17).say_and_wait(
+      await chara.say_and_wait(
         event_marks.good_end === 2
           ? '你喜欢什么样的天空？太阳还是月亮？做不出决定也无妨，无论你处在什么样的天空下，终有一日，我们都会相遇。嗯，这次，换我们去找你。'
           : ret

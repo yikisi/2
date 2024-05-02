@@ -5,11 +5,11 @@ const { get_bust_size } = require('#/system/ero/sys-calc-ero-status');
 const CharaTalk = require('#/utils/chara-talk');
 const get_gradient_color = require('#/utils/gradient-color');
 
-const { palam_colors, attr_change_colors } = require('#/data/color-const');
+const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
 const { palam2juel } = require('#/data/ero/orgasm-const');
-const { growth_info, unknown_info, no_info } = require('#/data/exp-const');
-const { get_talent, get_xp, get_breast_cup } = require('#/data/info-generator');
+const { growth_info, no_info, unknown_info } = require('#/data/exp-const');
+const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
 
 const page_name = '性爱情况';
 
@@ -73,8 +73,8 @@ module.exports = {
               era.get(`status:${chara.id}:发胖`)
                 ? '幸、幸福胖哦……'
                 : weight_delta >= 2000
-                ? '微增'
-                : '控制得当',
+                  ? '微增'
+                  : '控制得当',
               chara.sex_code === 1
                 ? ''
                 : ` ｜ 三围：B${get_bust_size(
@@ -282,8 +282,8 @@ module.exports = {
                             ? attr_change_colors.down
                             : attr_change_colors.up
                           : buff > 0
-                          ? attr_change_colors.up
-                          : attr_change_colors.down,
+                            ? attr_change_colors.up
+                            : attr_change_colors.down,
                       content: `${buff > 0 ? '+' : ''}${Math.floor(
                         100 * buff,
                       ).toString()}%`,

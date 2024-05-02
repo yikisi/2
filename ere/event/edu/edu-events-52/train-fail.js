@@ -6,7 +6,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { fumble_result, attr_enum } = require('#/data/train-const');
+const { attr_enum, fumble_result } = require('#/data/train-const');
 
 /**
  * @param {HookArg} hook

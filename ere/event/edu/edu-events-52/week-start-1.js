@@ -149,7 +149,7 @@ module.exports = (handlers) => {
       ' 若有所思地前往了商店街的下一家店。',
     ]);
     await urara.say_and_wait([
-      '啊、 ',
+      '啊、',
       callname,
       '！欢迎光临哦！这里有超好吃的苹果哦！要不要买一些啊？',
     ]);

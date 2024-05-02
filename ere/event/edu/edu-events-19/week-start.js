@@ -185,6 +185,7 @@ module.exports = async function () {
     await era.printAndWait(
       `数码似乎是对上次${chara_talk.sex}与怒涛的谈话仍有郁结……`,
     );
+    era.println();
     await chara_talk.say_and_wait(
       `\n所以说！今年，我要再次回归起点！再次成为粉丝！以其为原则！`,
     );
@@ -361,8 +362,7 @@ module.exports = async function () {
       await chara_talk.say_and_wait(
         `我本来是准备想要在最近的漫展上销售圣王的同人志，向大家宣传圣王的好的……`,
       );
-      await say_by_passer_by(
-        `？？？`,
+      await chara61_talk.say_as_unknown_and_wait(
         `圣王的同人志吗，这种事情本人都没听说过啊。`,
       );
       await chara_talk.say_and_wait(

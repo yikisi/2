@@ -1,10 +1,11 @@
 const era = require('#/era-electron');
 
 const {
+  check_lubrication,
   get_expansion,
   get_penis_size,
-  check_lubrication,
 } = require('#/system/ero/sys-calc-ero-status');
+const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { check_stain, set_stain } = require('#/system/ero/sys-calc-stain');
 
 const {
@@ -12,10 +13,9 @@ const {
   lubrication_coefficient,
   wound_percentage,
 } = require('#/data/ero/battle-const');
+const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
-const { add_juel } = require('#/system/ero/sys-calc-juel');
-const { base_emotion_juel } = require('#/data/ero/juel-const');
 
 /**
  * @param {number} penis_owner

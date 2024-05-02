@@ -20,11 +20,11 @@ csv = csv
 csv.shift();
 
 let output =
-  "const { id2bonus, bonus_params } = require('#/data/race/race-attr-bonus');\n" +
+  "const { bonus_params, id2bonus } = require('#/data/race/race-attr-bonus');\n" +
   'const {\n' +
   '  lane_params,\n' +
-  '  slope_params,\n' +
   '  phase_params,\n' +
+  '  slope_params,\n' +
   "} = require('#/data/race/race-params');\n\nconst race_enum = {\n// 出道战\nbegin_race: 0,\n";
 
 csv.forEach((e) => {
@@ -151,6 +151,6 @@ csv.forEach((e) => {
   );
 });
 
-execSync('npx eslint --fix ../ere/data/race --config ./.eslintrc.js', {
-  cwd: join(process.cwd(), '../../engine'),
+execSync('npx eslint --fix ./ere/data/race', {
+  cwd: join(process.cwd(), '../..'),
 });

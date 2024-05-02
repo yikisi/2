@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -13,6 +14,153 @@ const { location_enum } = require('#/data/locations');
 
 /** @param {Record<string,function(CharaTalk,string,string,{wait:boolean},function):Promise<*>>} handlers */
 module.exports = (handlers) => {
+  handlers[47 + 29] = async (flash, your_name, callname, flags, cb) => {
+    if (
+      (era.get('cflag:37:位置') && era.get('cflag:0:位置')) !==
+      location_enum.beach
+    ) {
+      cb();
+      return;
+    }
+    await print_event_name('交心之谈 · 一', flash);
+    await era.printAndWait(
+      '所谓合宿，是指特雷森学院为主导，以提高实力为目的，地点位于海边的夏季专属活动。',
+    );
+    await flash.say_and_wait(
+      '这就是日本的大海啊，和德国那边，果然有不小的区别呢。',
+    );
+    await era.printAndWait(
+      '月初，从学院的专用公交上下车，望着面前满眼的蔚蓝，荣进闪耀赞叹道。',
+    );
+    era.printButton('「想去玩吗？」', 1);
+    await era.input();
+    await flash.say_and_wait('诶，不用了。');
+    await era.printAndWait(
+      `不过下一秒，在听到 ${your_name} 的提议后，${flash.sex}摇了摇头。`,
+    );
+    await flash.say_and_wait(
+      '虽然是很令人心动的选择，但目前还是要以训练为第一优先级。',
+    );
+    await era.printAndWait('说着，荣进闪耀低下头，看向自己的双腿。');
+    await flash.say_and_wait(
+      '菊花赏的开赛已经迫在眉睫，为了获胜，必须要抓紧每一个机会才行。',
+    );
+    await era.printAndWait(
+      `经过前面一段时间的修养，${flash.sex}的病情相较于最开始，已经有了大大缓解。`,
+    );
+    await era.printAndWait('托此的福，荣进闪耀的心情也开朗了不少。');
+    await era.printAndWait(
+      `认为已经规划好的计划终于不会被打乱的${flash.sex}又准备以菊花赏为目的。`,
+    );
+    era.printButton('「关于这个。」', 1);
+    await era.input();
+    await era.printAndWait(
+      `而见到${flash.sex}这份热情的模样，${your_name} 想，也该到时候了。`,
+    );
+    era.printButton('「我有话想对你说。」', 1);
+    await era.input();
+    era.drawLine();
+    await era.printAndWait(
+      `其实站在训练员的视角来讲，荣进闪耀现在的状态，对 ${your_name} 而言有些尴尬。`,
+    );
+    await era.printAndWait(
+      `明面上，${flash.sex}的康复，是不争的事实，${your_name} 当然也乐意看到${flash.sex}肆意驰骋于赛场的模样。`,
+    );
+    await flash.say_and_wait('是关于菊花赏的事情吗？');
+    era.printButton('「嗯。」', 1);
+    await era.input();
+    await era.printAndWait(
+      `但是，用谨慎的方式去思考，在肌肉内根深蒂固的疲惫不是那么容易就可以消除的。${your_name} 无法保证备战比赛，不断高强度训练的过程中，病痛不会复发。`,
+    );
+    await flash.say_and_wait(
+      '……您在那天承诺过，如果能够在菊花赏之前康复的话，便同意让我出赛。',
+    );
+    era.printButton('「是的。」', 1);
+    await era.input();
+    await era.printAndWait(
+      `换句话说，以 ${your_name} 的视角来看，不再去考虑菊花赏，而是将目标比赛定为更之后的日本杯或者有马纪念，并借此利用多出来的空档期来彻底解决身体的隐患才是最好的。`,
+    );
+    await flash.say_and_wait('既然这样的话，那现在正是积累优势的时候。');
+    await era.printAndWait(
+      `合宿旅馆内，似乎是意料到 ${your_name} 接下来会说些什么，荣进闪耀的态度很是坚决。`,
+    );
+    era.printButton('「你误会我的意思了，我并不是来劝阻你的。」', 1);
+    await era.input();
+    await flash.say_and_wait('诶。');
+    await era.printAndWait(`不过这回，${flash.sex}猜错了。`);
+    era.printButton(
+      '「虽然得承认，菊花赏的参加与否，对我而言是两难的抉择。」',
+      1,
+    );
+    await era.input();
+    await era.printAndWait(
+      `接下来的时间，${your_name} 跟${flash.sex}陈述了自己的苦衷。坦白了那份介于感性与理性之间，既希望${flash.sex}能达成自己的梦想，又不愿意看到${flash.sex}在这过程中受伤的矛盾心理。`,
+    );
+    await flash.say_and_wait('………');
+    await era.printAndWait(
+      `毫无疑问，荣进闪耀是个聪慧的孩子，${flash.sex}当然能理解 ${your_name} 的处境，就像 ${your_name} 能理解${flash.sex}的一样。`,
+    );
+    era.printButton(
+      '「在得知你的身体情况之后，我一直在犹豫不决。但也许，这种踌躇才是最大的错误。」',
+      1,
+    );
+    await era.input();
+    await era.printAndWait(
+      `说到这里，${your_name} 伸出手，将那枚代表相遇的勋章递到${flash.sex}的眼前。`,
+    );
+    await flash.say_and_wait(`${callname}……`);
+    await era.printAndWait(
+      `荣进闪耀低下头，看了眼这枚勋章，又抬起头，看了眼 ${your_name}。`,
+    );
+    await flash.say_and_wait('………');
+    await era.printAndWait(`${flash.sex}张了张嘴，显得欲言又止。`);
+    era.printButton(
+      '「我想，如果自己无法做出决定的话，那么干脆就交给你来做。」',
+      1,
+    );
+    await era.input();
+    await era.printAndWait(
+      `${your_name} 则拍了拍${flash.sex}的肩膀，脸上浮现出一丝微笑。`,
+    );
+    await era.printAndWait(
+      `如果关于赛${flash.get_uma_sex_title()}的问题，以训练员的视角无法给出答案的话，那么不妨就交由当事人自己来处理。`,
+    );
+    await era.printAndWait('无需顾虑，信任是互相的，一心同体即是如此。');
+    await era.printAndWait('也无需迟疑，这并非是一种逃避，因为——');
+    era.printButton('「无论你做出何种选择，我都会与你一起承担到底。」', 1);
+    await era.input();
+    await flash.say_and_wait('！');
+    await era.printAndWait(
+      `昏黄的房间内，来自异国的${flash.get_teen_sex_title()}因为 ${your_name} 的话而陷入短暂的僵直。`,
+    );
+    await era.printAndWait(
+      `周旁的时间仿若停滞，除了那抹转瞬即逝的绯红，${your_name} 没有看到${flash.sex}脸上的表情产生任何波动。`,
+    );
+    await era.printAndWait(
+      `不过在此期间，${flash.sex}的那双清澈透明的湛蓝色瞳孔一直沉默地注视着 ${your_name}，眼神中似有浮光流动。`,
+    );
+    await flash.say_and_wait('……我……');
+    await era.printAndWait('直至十几秒之后，荣进闪耀才再次开口。');
+    await flash.say_and_wait(
+      '……也许您说的对，让我自己来决定这条道路是对双方都有利的选择。',
+    );
+    await era.printAndWait(
+      `不过与之前的坚决相比，此时${flash.sex}语气中所蕴涵的态度，却是有些游移不定。`,
+    );
+    await flash.say_and_wait('所以，请再给我一些时间，我需要去认真思考一番。');
+    await era.printAndWait(
+      `说完，${flash.sex}朝 ${your_name} 深深，深深地鞠躬。`,
+    );
+    await flash.say_and_wait(
+      '我会在合宿结束那天给您答复，这段期间内，就按照原定的计划执行吧。',
+    );
+    await era.printAndWait(
+      `待起身之后，${your_name} 发现，${flash.sex}向 ${your_name} 露出了带着甜蜜的微笑。`,
+    );
+    era.println();
+    flags.wait ||= sys_like_chara(37, 0, 30);
+  };
+
   handlers[95 + 1] = async (flash, your_name, callname, flags) => {
     const fuji = get_chara_talk(5);
     await print_event_name('初诣', flash);

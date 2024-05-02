@@ -1,12 +1,10 @@
 const era = require('#/era-electron');
 
-const sys_call_mec = require('#/system/script/sys-call-mec');
-
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_before_rec = require('#/event/rec/snippets/check-before-rec');
 
 const chara_color = require('#/data/chara-colors').chara_colors[30];
-const check_stages = require('#/data/event/check-stages');
 const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
@@ -96,7 +94,7 @@ module.exports = {
             '看到她干劲十足地准备开始训练，不忍心打搅她，最后还是没能打上招呼。',
           );
           await era.printAndWait(
-            `${chara_name} ……真期待在下次选拔赛上看到她真正的实力。`,
+            `${chara_name}……真期待在下次选拔赛上看到她真正的实力。`,
           );
           new EventMarks(0)
             .sub(event_hooks.out_station)
@@ -211,7 +209,7 @@ module.exports = {
           era.printButton('不能就这样放着她不管！', 1);
           await era.input();
           era.print(`「${chara_name}，来我这里吧！」`);
-          era.print(`${chara_name} “唰”地抬起了耳朵。`);
+          era.print(`${chara_name}「唰」地抬起了耳朵。`);
           era.print(`${chara_name}「诶？」`, {
             color: chara_color,
           });
@@ -255,7 +253,7 @@ module.exports = {
           await era.printAndWait(
             '尽管表情还很僵硬，她也努力地挤出了一个笑容。',
           );
-          sys_call_mec(30, check_stages.mec_callname_customize, {});
+          get_custom_mec(30).set_callname();
           era.set('cflag:30:招募状态', recruit_flags.yes);
           era.println();
           await era.printAndWait(`${chara_name} 加入了队伍！`);

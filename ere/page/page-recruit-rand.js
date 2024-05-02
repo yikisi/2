@@ -16,7 +16,7 @@ const { el_danger_color } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
-const { vehicle_verbs, vehicle_names } = require('#/data/move-const');
+const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
 async function print_rec_page() {
   era.set('flag:当前位置', location_enum.playground);

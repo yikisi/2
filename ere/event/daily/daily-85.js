@@ -11,8 +11,8 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 const { say_by_passer_by } = require('#/utils/chara-talk');
 
-const event_hooks = require('#/data/event/event-hooks');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const event_hooks = require('#/data/event/event-hooks');
 
 const ruby = new CharaTalk(85);
 

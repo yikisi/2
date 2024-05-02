@@ -185,7 +185,7 @@ module.exports = async (me, urara, in_urara, relation) => {
   await urara.print_and_wait([
     '主动牵起',
     urara.get_teen_sex_title(),
-    '的手，直视着那对湿润的樱瞳， ',
+    '的手，直视着那对湿润的樱瞳，',
     me.get_colored_name(),
     ' 也不假思索的对乌拉拉给予了「大人的承诺」。',
   ]);

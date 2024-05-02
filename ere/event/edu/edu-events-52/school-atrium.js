@@ -1,9 +1,9 @@
 const era = require('#/era-electron');
 
 const {
+  sys_get_callname,
   sys_get_colored_callname,
   sys_like_chara,
-  sys_get_callname,
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');

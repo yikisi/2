@@ -1,16 +1,16 @@
 const era = require('#/era-electron');
 
 const {
-  sys_love_uma_in_event,
   sys_get_callname,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const event_hooks = require('#/data/event/event-hooks');
 const FlashEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-37');
+const event_hooks = require('#/data/event/event-hooks');
 const FlashLifeMarks = require('#/data/event/life-event-marks/life-event-marks-37');
 
 /** @param {CharaTalk} flash */
@@ -204,7 +204,7 @@ async function love_74_week_end(flash) {
     '但另一方面，当我真的意识到将要与您分别这一个事实的时候。我却又突然产生了犹豫，或者说……',
   );
   await era.printAndWait(
-    `荣进闪耀将手搭在胸口，面露温柔微笑地看着 ${your_name} 。`,
+    `荣进闪耀将手搭在胸口，面露温柔微笑地看着 ${your_name}。`,
   );
   await flash.say_and_wait('不舍之情。');
   era.printButton('「不舍……吗……」', 1);
@@ -236,7 +236,7 @@ async function love_74_week_end(flash) {
   await era.printAndWait(
     `${your_name} 深吸一口气，强行将因为${flash.sex}的表白而产生剧烈波动的内心安抚下来。`,
   );
-  await era.printAndWait(`片刻之后， ${your_name} 才轻声道。`);
+  await era.printAndWait(`片刻之后，${your_name} 才轻声道。`);
   await flash.say_and_wait('是的。');
   await era.printAndWait(`${flash.sex}点头，坦然承认这一点。`);
   await flash.say_and_wait(
@@ -355,7 +355,7 @@ async function love_74_week_end(flash) {
     era.printButton('「闪耀……」', 1);
     await era.input();
     await era.printAndWait(
-      `见此， ${your_name} 伸出手，想要去安抚${flash.sex}。`,
+      `见此，${your_name} 伸出手，想要去安抚${flash.sex}。`,
     );
     await flash.say_and_wait('………');
     await era.printAndWait(
@@ -379,8 +379,8 @@ async function love_74_week_end(flash) {
       `似乎是在这短暂的平静中调整好了心态，荣进闪耀回头看向 ${your_name}，脸上再次浮现往日的平和。`,
     );
     era.printButton('「我也很开心能认识你。」', 1);
-    await era.printAndWait(`见此， ${your_name} 点头回应。`);
-    await era.printAndWait('“滴。”');
+    await era.printAndWait(`见此，${your_name} 点头回应。`);
+    await era.printAndWait('「滴。」');
     await era.printAndWait(
       `紧接着，座舱落地的提示音传入 ${your_name} 的耳中，下一秒，锁死的大门自动开启。`,
     );

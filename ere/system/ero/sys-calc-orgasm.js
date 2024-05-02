@@ -3,42 +3,42 @@ const era = require('#/era-electron');
 const check_nipple_clamps = require('#/system/ero/sub-calc-ero-orgasm/check-nipple-clamps');
 const update_orgasms = require('#/system/ero/sub-calc-ero-orgasm/update-orgasms');
 const {
-  update_milk_exp,
-  update_face_exp,
   update_breast_exp,
+  update_face_exp,
+  update_milk_exp,
 } = require('#/system/ero/sys-calc-ero-exp');
-const {
-  check_lubrication,
-  orgasm_check_list,
-  get_pregnant_ratio,
-  check_erect,
-  get_bust_size,
-} = require('#/system/ero/sys-calc-ero-status');
 const {
   change_part,
   clean_part,
   clean_part_without_item,
 } = require('#/system/ero/sys-calc-ero-part');
 const {
+  check_erect,
+  check_lubrication,
+  get_bust_size,
+  get_pregnant_ratio,
+  orgasm_check_list,
+} = require('#/system/ero/sys-calc-ero-status');
+const {
   add_juel,
   update_juels_from_talent,
 } = require('#/system/ero/sys-calc-juel');
 const {
   update_palam,
-  update_palam_from_talent,
   update_palam_from_main_orgasm,
+  update_palam_from_talent,
 } = require('#/system/ero/sys-calc-palam');
 const {
-  set_stain,
   merge_stain,
   rollback_penis_stain,
+  set_stain,
 } = require('#/system/ero/sys-calc-stain');
+const call_ero_script = require('#/system/script/sys-call-ero-script');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_colored_full_callname,
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
-const call_ero_script = require('#/system/script/sys-call-ero-script');
 
 const { get_random_value, log_max_wp } = require('#/utils/value-utils');
 
@@ -46,26 +46,26 @@ const { attack_juel_reward } = require('#/data/ero/battle-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { item_enum } = require('#/data/ero/item-const');
 const {
-  orgasm_cost,
   base_orgasm_juel_reward,
-  secretion_coefficient,
   damage_buff,
   damage_from_stop,
+  juel_reward,
+  lust_from_palam,
+  orgasm_cost,
   palam_border,
   palam_from_orgasm,
   secretion_amount,
-  juel_reward,
+  secretion_coefficient,
   wp_coefficient,
-  lust_from_palam,
 } = require('#/data/ero/orgasm-const');
 const {
-  pleasure_list,
   part_enum,
   part_names,
   part_talents,
+  pleasure_list,
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
-const { pregnant_stage_enum, breast_size } = require('#/data/ero/status-const');
+const { breast_size, pregnant_stage_enum } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
@@ -85,8 +85,8 @@ async function sys_calc_orgasm(shown, ...ids) {
       limited_count = 0,
       orgasm_part_count = 0,
       minus_lust = 0;
-    for (const i in orgasm_check_list) {
-      const part = orgasm_check_list[Number(i)];
+    for (let i = 0; i < orgasm_check_list.length; ++i) {
+      const part = orgasm_check_list[i];
       const part_name = part_names[part];
       const { curr, max, old } = update_palam(chara_id, part, shown);
       let amount = 0,
@@ -264,7 +264,7 @@ async function sys_calc_orgasm(shown, ...ids) {
           era.add(`exp:${chara_id}:${part_name}高潮次数`, times);
           orgasm_count += times;
           limited_count += part === part_enum.penis ? 1 : times;
-          if (Number(i) < orgasm_check_list.length - 2) {
+          if (i < orgasm_check_list.length - 2) {
             update_palam_from_main_orgasm(chara_id, times);
           } else {
             // 主要部位高潮额外获得20%的因子奖励

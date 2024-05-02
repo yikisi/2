@@ -22,7 +22,10 @@ function get_aim_function(script_category, chara_id, extra_flag) {
       }`,
     );
     return { func, _extra: extra_flag || {} };
-  } catch (_) {
+  } catch (e) {
+    if (e.message && !e.message.startsWith('Cannot find module')) {
+      era.logger.error(e.message, e.stack);
+    }
     throw new Error('unsupported!');
   }
 }

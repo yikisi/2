@@ -8,11 +8,11 @@ const { buff_colors } = require('#/data/color-const');
 const { item_enum, item_names } = require('#/data/ero/item-const');
 const {
   part_enum,
-  part_names4item,
   part_names,
+  part_names4item,
 } = require('#/data/ero/part-const');
-const { location_enum } = require('#/data/locations');
 const { vp_status_enum } = require('#/data/ero/status-const');
+const { location_enum } = require('#/data/locations');
 
 /**
  * @param {CharaTalk} chara

@@ -13,7 +13,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const DaiyaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-67');
 const event_hooks = require('#/data/event/event-hooks');
-const { attr_names, fumble_result, attr_enum } = require('#/data/train-const');
+const { attr_enum, attr_names, fumble_result } = require('#/data/train-const');
 
 const handlers = {};
 

@@ -14,7 +14,7 @@ const title_desc = require('#/data/desc/title-desc.json');
 const check_stages = require('#/data/event/check-stages');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 const { adaptability_names } = require('#/data/train-const');
 
 const page_name = '出走成绩';

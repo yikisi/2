@@ -2,8 +2,8 @@ const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
-  sys_love_uma,
   sys_like_chara,
+  sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
@@ -16,8 +16,8 @@ const { get_random_value } = require('#/utils/value-utils');
 const { buff_colors } = require('#/data/color-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 const { attr_enum, fumble_result } = require('#/data/train-const');
-const { race_infos, race_enum } = require('#/data/race/race-const');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise>} */
 const handlers = {};

@@ -7,8 +7,8 @@ const {
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
 const {
-  sys_love_uma_in_event,
   sys_get_callname,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');

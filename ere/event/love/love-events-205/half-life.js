@@ -2,22 +2,22 @@ const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
+  check_pregnant_unprotect,
+} = require('#/system/ero/sys-calc-ero-status');
+const {
   begin_and_init_ero,
   end_ero_and_train,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
 const {
-  sys_love_uma_in_event,
   sys_get_callname,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
-const {
-  check_pregnant_unprotect,
-} = require('#/system/ero/sys-calc-ero-status');
 
 /**
  * @param {CharaTalk} vp
@@ -62,7 +62,7 @@ module.exports = async (vp, me) => {
     ]);
     await era.printAndWait([
       vp.get_colored_name(),
-      ' 因为突然的刺激而发出声音， ',
+      ' 因为突然的刺激而发出声音，',
       me.get_colored_name(),
       ' 同时扯住了两个乳头。',
     ]);
@@ -79,7 +79,7 @@ module.exports = async (vp, me) => {
     await era.printAndWait([
       '缝隙一被 ',
       me.get_colored_name(),
-      ' 滑过， ',
+      ' 滑过，',
       vp.get_colored_name(),
       ' 的身体就发抖了。',
     ]);
@@ -123,13 +123,13 @@ module.exports = async (vp, me) => {
       ' 头脑模糊到什么也无法思考。',
     ]);
     await era.printAndWait([
-      '然后，回过神来， ',
+      '然后，回过神来，',
       vp.get_colored_name(),
       ' 自己张开了大腿。',
     ]);
     await era.printAndWait([me.get_colored_name(), ' 满意地把内裤脱下。']);
     await era.printAndWait([
-      '也许是期待之后的事情吧， ',
+      '也许是期待之后的事情吧，',
       vp.get_colored_name(),
       ' 的子宫一直躁动着。',
     ]);
@@ -184,7 +184,7 @@ module.exports = async (vp, me) => {
     ]);
     await vp.say_and_wait('啊！啊！好激烈……');
     await era.printAndWait([
-      '每次打到腰上都会响起啪的一声，阴道壁被擦过， ',
+      '每次打到腰上都会响起啪的一声，阴道壁被擦过，',
       vp.get_colored_name(),
       ' 只能在快感中喘息。',
     ]);
@@ -214,7 +214,7 @@ module.exports = async (vp, me) => {
       ' 的子宫一直被龟头亲吻着灌入精液。',
     ]);
     await era.printAndWait([
-      '不久全部射出来后， ',
+      '不久全部射出来后，',
       me.get_colored_name(),
       ' 拔出肉棒。与此同时，白浊逆流而出。',
     ]);
@@ -391,12 +391,12 @@ module.exports = async (vp, me) => {
       ' 捂住嘴的小手，抓过来反剪到了身后。',
     ]);
     await era.printAndWait([
-      '在小手离开嘴巴的一瞬间， ',
+      '在小手离开嘴巴的一瞬间，',
       vp.get_colored_name(),
       ' 吐出舌头喘着热气的小嘴暴露无遗。',
     ]);
     await era.printAndWait([
-      '或许是害怕自己控制不住会发出声音， ',
+      '或许是害怕自己控制不住会发出声音，',
       vp.get_colored_name(),
       ' 急忙咬住下唇。',
     ]);

@@ -5,7 +5,7 @@ const { sys_check_race_ready } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const recruit_flags = require('#/data/event/recruit-flags');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
  * @param {number} race
@@ -77,7 +77,13 @@ async function select_contestants(race) {
       }
     }
     ret = Object.entries(dict)
-      .filter((e) => e[1])
+      .filter((e) => {
+        if (e[1]) {
+          return true;
+        } else {
+          sys_reg_race(e[0]).curr = { race: -1, week: -1 };
+        }
+      })
       .map((e) => Number(e[0]));
   }
   return ret;

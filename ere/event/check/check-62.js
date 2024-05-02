@@ -11,13 +11,13 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { attr_change_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
 const TanhuizaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-62');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_change_colors } = require('#/data/color-const');
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;

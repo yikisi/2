@@ -1,11 +1,12 @@
 const era = require('#/era-electron');
 
 const {
-  sys_like_chara,
   sys_get_callname,
+  sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
+const palace = require('#/event/snippets/palace');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -13,8 +14,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
-const HookArg = require('#/data/event/hook-arg');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
  * @param _
@@ -224,7 +224,7 @@ module.exports = async (_, __, event_object) => {
         `而且，如果战略也被知晓的话，出现互相勾结不让${vp.sex}向前的集团也不奇怪。`,
       );
       await era.printAndWait(
-        `最重要的是，${vp.sex}的做法很容易预料—— ${vp.name} 的跑动很像 ${montjeu.name}。`,
+        `最重要的是，${vp.sex}的做法很容易预料——${vp.name} 的跑动很像 ${montjeu.name}。`,
       );
       await era.printAndWait(
         `那个时候，训练员们致力于制定应对 ${montjeu.name} 的战略，在 ${vp.name} 身上就这样通用了。`,
@@ -237,16 +237,8 @@ module.exports = async (_, __, event_object) => {
       );
       break;
     case 143 + 9:
-      temp = [era.get('love:205'), era.get('relation:205:0')];
-      era.set('love:205', 0);
-      era.set('relation:205:0', 0);
-      await require('#/event/edu/edu-common')(
-        205,
-        new HookArg(event_hooks.week_start),
-      );
-      era.set('love:205', temp[0]);
-      era.set('relation:205:0', temp[1]);
-      if (temp[0] >= 50) {
+      await palace(vp, me);
+      if (era.get('love:205') >= 50) {
         era.drawLine();
         await print_event_name(`${vp.sex}即是成真的美梦`, vp);
         await era.printAndWait(`${me.name} 听到了什么声音。`);
@@ -311,7 +303,7 @@ module.exports = async (_, __, event_object) => {
         );
         await era.printAndWait(`加入了厚厚的火腿和大量奶酪的热三明治。`);
         await era.printAndWait(
-          `告诉 ${vp.name} “我开动了”以后，大口大口地吃了起来。`,
+          `告诉 ${vp.name}「我开动了」以后，大口大口地吃了起来。`,
         );
         await era.printAndWait(
           `浓厚的奶酪酱汁加上火腿的风味，就和高档餐厅里吃的味道一样。`,

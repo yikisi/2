@@ -1,19 +1,16 @@
 const era = require('#/era-electron');
 
+const CustomizedMec = require('#/event/mec/mec-common');
+
 const { buff_colors } = require('#/data/color-const');
-const check_stages = require('#/data/event/check-stages');
 
-const punish_desc = ['比赛用母马', '泄欲用母马'];
-
-/** @param {number} mec_type */
-module.exports = (mec_type) => {
-  if (mec_type === check_stages.mec_status) {
-    const punish_level = era.get('flag:惩戒力度'),
-      ret_list = [];
-    if (punish_desc[punish_level - 1] !== undefined) {
+module.exports = class extends CustomizedMec {
+  get_status() {
+    const ret_list = [];
+    if (era.get('flag:惩戒力度') === 1) {
       ret_list.push({
-        color: buff_colors[!!(punish_level - 1) + 1],
-        content: punish_desc[punish_level - 1],
+        color: buff_colors[1],
+        content: '比赛用母马',
       });
     }
     if (era.get('status:0:马语者')) {
@@ -40,7 +37,5 @@ module.exports = (mec_type) => {
       });
     }
     return ret_list;
-  } else {
-    throw new Error('unsupported stage!');
   }
 };

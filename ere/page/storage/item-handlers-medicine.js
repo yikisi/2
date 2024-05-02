@@ -3,8 +3,8 @@ const era = require('#/era-electron');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
-  sys_change_weight,
   sys_change_motivation,
+  sys_change_weight,
 } = require('#/system/sys-calc-base-cflag');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
@@ -13,9 +13,9 @@ const select_target_in_storage = require('#/page/storage/select-target');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { lust_border } = require('#/data/ero/orgasm-const');
 const LimitLoveStatus = require('#/data/love-limit-status');
 const { attr_enum, pressure_border } = require('#/data/train-const');
-const { lust_border } = require('#/data/ero/orgasm-const');
 
 /** @param {Record<string,function>} handlers */
 module.exports = (handlers) => {
@@ -321,6 +321,36 @@ module.exports = (handlers) => {
       era.set(`love:${aim}`, 40);
       era.add(`base:${aim}:药物残留`, 40);
       era.add('item:抑制药', -1);
+      return true;
+    }
+  };
+
+  handlers[855] = async () => {
+    const ret = await select_target_in_storage(850, (e) =>
+      era.get(`status:${e}:发胖`),
+    );
+    if (ret !== undefined) {
+      await era.printAndWait([
+        get_chara_talk(ret).get_colored_name(),
+        ' 暂时不发胖了……',
+      ]);
+      era.set(`status:${ret}:发胖`, 0);
+      era.add('item:量子减肥药', -1);
+      return true;
+    }
+  };
+
+  handlers[856] = async () => {
+    const ret = await select_target_in_storage(851, (e) =>
+      era.get(`status:${e}:头风`),
+    );
+    if (ret !== undefined) {
+      await era.printAndWait([
+        get_chara_talk(ret).get_colored_name(),
+        ' 暂时不偏头痛了……',
+      ]);
+      era.set(`status:${ret}:头风`, 0);
+      era.add('item:布洛芬', -1);
       return true;
     }
   };

@@ -3,10 +3,10 @@ const era = require('#/era-electron');
 const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const {
+  sys_change_attr_and_print,
   sys_get_billings,
   sys_handle_action,
   sys_reg_race,
-  sys_change_attr_and_print,
 } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_act_disabled,
@@ -26,22 +26,24 @@ const print_juel_shop_page = require('#/page/page-juel-shop');
 const print_load_page = require('#/page/page-load-game');
 const print_out_page = require('#/page/page-out');
 const race_page = require('#/page/page-race');
+const print_recruit_page = require('#/page/page-recruit-rand');
 const reg_race_page = require('#/page/page-register-race');
 const report_race_page = require('#/page/page-report-race');
-const print_recruit_page = require('#/page/page-recruit-rand');
 const print_save_page = require('#/page/page-save-game');
 const print_school_page = require('#/page/page-school');
 const print_shop_page = require('#/page/page-shop');
 const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
 
+const { shop_end, shop_start } = require('#/event/shop/tachyon-shop');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
-const { location_enum } = require('#/data/locations');
 const { get_celebration } = require('#/data/info-generator');
+const { location_enum } = require('#/data/locations');
 
 /**
  * @param {number} chara_id
@@ -632,34 +634,38 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       break;
     case 304:
       era.set('flag:当前位置', location_enum.school_shop);
-      await print_shop_page([
-        700,
-        701,
-        702,
-        703,
-        705,
-        706,
-        707,
-        708,
-        ...new Array(7).fill(0).map((_, i) => {
-          return {
-            id: 750 + i,
-            limit: true,
-          };
-        }),
-        800,
-        { id: 801, limit: true },
-        802,
-        803,
-        804,
-        ...new Array(11).fill(0).map((_, i) => i + 810),
-        { id: 821, limit: true },
-        823,
-        { id: 824, limit: true },
-        ...new Array(11).fill(0).map((_, i) => i + 830),
-        ...new Array(5).fill(0).map((_, i) => i + 850),
-        ...new Array(4).fill(0).map((_, i) => i + 870),
-      ]);
+      era.drawLine();
+      await shop_start();
+      await shop_end(
+        await print_shop_page([
+          700,
+          701,
+          702,
+          703,
+          705,
+          706,
+          707,
+          708,
+          ...new Array(7).fill(0).map((_, i) => {
+            return {
+              id: 750 + i,
+              limit: true,
+            };
+          }),
+          800,
+          { id: 801, limit: true },
+          802,
+          803,
+          804,
+          ...new Array(11).fill(0).map((_, i) => i + 810),
+          { id: 821, limit: true },
+          823,
+          { id: 824, limit: true },
+          ...new Array(11).fill(0).map((_, i) => i + 830),
+          ...new Array(5).fill(0).map((_, i) => i + 850),
+          ...new Array(4).fill(0).map((_, i) => i + 870),
+        ]),
+      );
       era.set('flag:当前位置', location_enum.office);
       break;
     case 305:

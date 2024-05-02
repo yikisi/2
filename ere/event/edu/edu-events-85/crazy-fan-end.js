@@ -1,9 +1,10 @@
 const era = require('#/era-electron');
 
+const print_event_name = require('#/event/snippets/print-event-name');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const print_event_name = require('#/event/snippets/print-event-name');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 module.exports = async function () {
@@ -17,7 +18,7 @@ module.exports = async function () {
     {
       align: 'center',
       color: buff_colors[3],
-      fontSize: '32px',
+      fontSize: '2rem',
       fontWeight: 'bold',
       isParagraph: true,
     },
@@ -38,7 +39,7 @@ module.exports = async function () {
   await era.printAndWait('（你已经被警告过了）', {
     align: 'center',
     color: buff_colors[3],
-    fontSize: '32px',
+    fontSize: '2rem',
     fontWeight: 'bold',
     isParagraph: true,
   });

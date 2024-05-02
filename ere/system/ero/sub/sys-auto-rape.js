@@ -4,21 +4,21 @@ const use_item_by_character = require('#/system/ero/ero-act-handler/use-item-by-
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
 const {
   check_satisfied,
+  check_want_to_escape,
   get_penis_size,
   get_sex_acceptable,
-  check_want_to_escape,
 } = require('#/system/ero/sys-calc-ero-status');
 const { get_characters_in_train } = require('#/system/ero/sys-prepare-ero');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const { medicine_enum, tequip_parts } = require('#/data/ero/item-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
   ero_hook_tags,
   ero_hooks,

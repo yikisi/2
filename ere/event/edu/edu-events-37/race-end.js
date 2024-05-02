@@ -173,7 +173,7 @@ module.exports = async (hook, extra_flag) => {
     await flash.say_and_wait('大家……');
     era.printButton('「恭喜你，闪耀。」', 1);
     await era.input();
-    await flash.say_and_wait(`${callname} ……嗯！我赢下日本德比了！`);
+    await flash.say_and_wait(`${callname}……嗯！我赢下日本德比了！`);
     era.printButton('「一件非常了不起的成就。」', 1);
     await era.input();
     await flash.say_and_wait(
@@ -560,17 +560,19 @@ module.exports = async (hook, extra_flag) => {
     era.printButton('「………」', 1);
     await era.input();
     await era.printAndWait(`荣进闪耀这份坚定的态度令 ${your_name} 陷入沉默。`);
-    await flash.print_and_wait(
-      '我想通过不断取得荣誉的行为，进而让我的父母……以我为荣。',
-    );
+    await flash.print_and_wait([
+      '（',
+      flash.get_colored_name(),
+      '「我想通过不断取得荣誉的行为，进而让我的父母……以我为荣。」）',
+    ]);
     await era.printAndWait(
       `${your_name} 又一次想起了一切的开始，那场选拔赛中，${flash.sex}对 ${your_name} 说的话。`,
     );
     await era.printAndWait(
       `起初，${your_name} 答应成为${flash.sex}的担当训练员，还是单纯因为受到${flash.sex}的主动委托。`,
     );
-    await me.print_and_wait('会觉得很开心吧。');
-    await me.print_and_wait('因为能继续看到你奔跑的身姿。');
+    await me.print_and_wait('（「会觉得很开心吧。」）');
+    await me.print_and_wait('（「因为能继续看到你奔跑的身姿。」）');
     await era.printAndWait(
       `但慢慢的，在这个相处的过程中，${your_name} 又逐渐被${flash.sex}的特质所吸引。`,
     );

@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
@@ -7,10 +8,9 @@ const {
   begin_and_init_ero,
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
-const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
-  sys_love_uma_in_event,
   sys_get_callname,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');

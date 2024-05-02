@@ -2,9 +2,9 @@ const era = require('#/era-electron');
 
 const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
 const {
+  sys_change_attr_and_print,
   sys_change_motivation,
   sys_change_pressure,
-  sys_change_attr_and_print,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_money } = require('#/system/sys-calc-flag');
@@ -18,7 +18,7 @@ const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
-const { fumble_result, attr_enum } = require('#/data/train-const');
+const { attr_enum, fumble_result } = require('#/data/train-const');
 
 /** @param {number} chara_id */
 function handle_rest_cost(chara_id) {

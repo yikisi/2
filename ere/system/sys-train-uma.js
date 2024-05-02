@@ -1,7 +1,6 @@
 ﻿const era = require('#/era-electron');
 
 const call_edu_script = require('#/system/script/sys-call-edu-script');
-const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_get_succ_rate } = require('#/system/sys-calc-chara-param');
@@ -10,16 +9,16 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const { get_trainer_train_buff } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const {
   attr_enum,
   attr_names,
-  time_cost,
   fumble_border,
+  time_cost,
 } = require('#/data/train-const');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 /**
  * @param {number} chara_id
@@ -36,7 +35,7 @@ function get_train_bonus(chara_id, attr_name, between_weeks) {
         : era.get(`cflag:${chara_id}:干劲`)) +
     (era.get(`cflag:${chara_id}:气性`) === -3) -
     0.004 * era.get(`base:${chara_id}:压力`) +
-    sys_call_mec(chara_id, check_stages.mec_train_buff);
+    get_custom_mec(chara_id).get_train_buff();
   if (!between_weeks) {
     train_buff +=
       10 * era.get(`talent:${chara_id}:训练`) +
@@ -137,7 +136,9 @@ module.exports = {
       success_rate = sys_get_succ_rate(chara_id, attr, extra_buff);
     const flag_success = Math.random() * 100 < success_rate;
 
-    await call_edu_script(chara_id, event_hooks.train, { attr });
+    if (await call_edu_script(chara_id, event_hooks.train, { attr })) {
+      return;
+    }
     era.println();
 
     if (flag_success) {

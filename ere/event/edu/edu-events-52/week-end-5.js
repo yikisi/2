@@ -14,7 +14,7 @@ const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52')
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 const { attr_names } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,EventObject):Promise<*>>} handlers */
@@ -249,7 +249,7 @@ module.exports = (handlers) => {
       await urara.print_and_wait([
         '不再需要努力被人认可，也不会再被人责怪，只要沉浸在 ',
         callname,
-        ' 、沉浸在大家的爱里就好……',
+        '、沉浸在大家的爱里就好……',
       ]);
     } else {
       await urara.print_and_wait([

@@ -2,9 +2,9 @@ const era = require('#/era-electron');
 
 const { count_part_stain_in_range } = require('#/system/ero/sys-calc-stain');
 
-const { ero_hooks } = require('#/data/event/ero-hooks');
 const { part_enum } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
+const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @param {Record<string,function(number,number):number>} handlers */
 module.exports = (handlers) => {

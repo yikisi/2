@@ -4,16 +4,16 @@ const {
   sys_change_attr_and_print,
   sys_change_motivation,
 } = require('#/system/sys-calc-base-cflag');
-const { race_enum } = require('#/data/race/race-const');
 
 const { add_event } = require('#/event/queue');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { location_enum } = require('#/data/locations');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
+const { location_enum } = require('#/data/locations');
+const { race_enum } = require('#/data/race/race-const');
 const { attr_enum, attr_names, fumble_result } = require('#/data/train-const');
 
 const chara_talk = new CharaTalk(24);
@@ -33,7 +33,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
     era.println();
     await era.printAndWait('事件：额外的自主训练', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     const chara_3 = new CharaTalk(3);
@@ -89,7 +89,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   } else if (edu_weeks === 16) {
     await era.printAndWait('事件：我想闪闪发亮！', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait(
@@ -199,7 +199,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   } else if (edu_weeks === 28) {
     await era.printAndWait('事件：来约会吧', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait(
@@ -297,7 +297,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   } else if (edu_weeks === 95 + 4) {
     await era.printAndWait('事件：青春的闪耀', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     const chara3_talk = new CharaTalk(3);
@@ -452,7 +452,7 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
   if (edu_weeks === 47 + 1) {
     await era.printAndWait('事件：新年的抱负', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait(
@@ -568,7 +568,7 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
   } else if (edu_weeks === 47 + 3) {
     await era.printAndWait('事件：锁定目标', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     const chara3_talk = new CharaTalk(3);
     const chara16_talk = new CharaTalk(16);
@@ -733,7 +733,7 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
     }
     await era.printAndWait('事件：夏季合宿', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait(
@@ -758,7 +758,7 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
     }
     await era.printAndWait('事件：代码：燃烧！', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait(
@@ -931,7 +931,7 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
   } else if (edu_weeks === 95 + 6) {
     await era.printAndWait('事件：情人节', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     const chara29_talk = new CharaTalk(29);
     era.println();
@@ -998,7 +998,7 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
   } else if (edu_weeks === 95 + 14) {
     await era.printAndWait('事件：粉丝感谢祭', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait(
@@ -1094,7 +1094,7 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
   } else if (edu_weeks === 95 + 20) {
     await era.printAndWait('事件：迈向夕阳', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     const chara16_talk = new CharaTalk(16);
@@ -1190,7 +1190,7 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
   } else if (edu_weeks === 95 + 29) {
     await era.printAndWait('事件：夏季合宿', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     await era.printAndWait('从今天起，“夏季集训”又要开始了！');
     await chara_talk.say_and_wait('训练员，欢迎回来♪来到和人家的度假会场～☆');
@@ -1204,7 +1204,7 @@ handlers[event_hooks.week_start] = async (hook, extra_flag, event_object) => {
   } else if (edu_weeks === 95 + 48) {
     await era.printAndWait('事件：圣诞节', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait(
@@ -1290,7 +1290,7 @@ handlers[event_hooks.week_end] = async (hook, extra_flag, event_object) => {
     }
     await era.printAndWait('事件：夏季集训（第二年）结束', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait('夏季集训转眼间就结束了。');
@@ -1314,7 +1314,7 @@ handlers[event_hooks.week_end] = async (hook, extra_flag, event_object) => {
     }
     await era.printAndWait('事件：夏季集训（第三年）结束', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await chara_talk.say_and_wait('呼……“夏季集训”终于在今天结束了……');
@@ -1361,7 +1361,7 @@ handlers[event_hooks.train_fail] =
     if (extra_flag.fumble) {
       await era.printAndWait('事件：严禁逞强！', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       era.println();
       await chara_talk.say_and_wait('嘿嘿，搞砸了～');
@@ -1419,7 +1419,7 @@ handlers[event_hooks.train_fail] =
     } else {
       await era.printAndWait('事件：保重身体！', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       era.println();
       await era.printAndWait(
@@ -1501,7 +1501,7 @@ handlers[event_hooks.school_atrium] = async (
     edu_event_marks.add('adventure_game');
     await era.printAndWait('事件：摩耶重炮的紧张刺激☆试胆游戏！', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     const chara3_talk = new CharaTalk(3);
@@ -1625,7 +1625,7 @@ handlers[event_hooks.school_atrium] = async (
     edu_event_marks.add('star_wish');
     await era.printAndWait('事件：向星星许愿', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     const chara55_talk = new CharaTalk(55);
     era.println();
@@ -1754,7 +1754,7 @@ handlers[event_hooks.school_atrium] = async (
     edu_event_marks.add('sweet_present');
     await era.printAndWait('事件：送给你甜蜜的心意♪', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     const chara51_talk = new CharaTalk(51);
     const chara28_talk = new CharaTalk(28);
@@ -1901,7 +1901,7 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
     edu_event_marks.add('kirakira_kessin');
     await era.printAndWait('事件：摩耶重炮的耀眼☆决心！', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait(
@@ -2120,7 +2120,7 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
   } else if (edu_weeks === 95 + 2) {
     await era.printAndWait('事件：抽奖试手气！', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait('某天傍晚，我们经过商店街的时候──');
@@ -2422,7 +2422,7 @@ handlers[event_hooks.recruit_start] = async (
     edu_event_marks.add('race_lesson');
     await era.printAndWait('事件：Maya的比赛讲座☆', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     const chara_52talk = new CharaTalk(52);
@@ -2539,7 +2539,7 @@ handlers[event_hooks.office_study] = async (hook, extra_flag, event_object) => {
     edu_event_marks.add('model_secret');
     await era.printAndWait('事件：成熟模特儿的秘诀！', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     const chara_40talk = new CharaTalk(40);
@@ -2647,7 +2647,7 @@ handlers[event_hooks.office_study] = async (hook, extra_flag, event_object) => {
     edu_event_marks.add('maya_reading');
     await era.printAndWait('事件：念书就交给摩耶重炮☆', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait('已经到了开会的时间，摩耶重炮却还没有来……');
@@ -2783,7 +2783,7 @@ handlers[event_hooks.office_study] = async (hook, extra_flag, event_object) => {
     edu_event_marks.add('maya_takeoff');
     await era.printAndWait('事件：摩耶重炮．起飞☆', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait('摩耶重炮的决胜服终于送来了。');
@@ -2891,7 +2891,7 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
     edu_event_marks.add('dokidoki_live');
     await era.printAndWait('事件：摩耶重炮的心跳不已☆直播！', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     const chara55_talk = new CharaTalk(55);
@@ -3004,7 +3004,7 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
     edu_event_marks.add('excited_live');
     await era.printAndWait('事件：摩耶重炮的兴高采烈☆直播！', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     await era.printAndWait('和摩耶重炮出门后，在一起回去的路上──');
@@ -3133,7 +3133,7 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
     edu_event_marks.add('taisecu_hito');
     await era.printAndWait('事件：摩耶重炮的重要之人！', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     era.println();
     const chara5_talk = new CharaTalk(5);
@@ -3272,7 +3272,7 @@ handlers[event_hooks.out_church] = async (hook, extra_flag, event_object) => {
   if (edu_weeks === 95 + 1) {
     await era.printAndWait('事件：新年参拜', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     await era.printAndWait('命运的第三年。摩耶重炮今年将挑战古马级。');
     era.printButton('「古马级」', 1);
@@ -3399,7 +3399,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
     //todo 比赛结果钩子
     await era.printAndWait('事件：迎向出道战', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     await era.printAndWait('终于来到摩耶重炮的出道战当天了！');
     await chara_talk.say_and_wait('你看你看！训练员！我今天不是穿运动服！');
@@ -3416,7 +3416,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
     //todo 比赛结果钩子
     await era.printAndWait('事件：迎向菊花赏', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     await chara_talk.say_and_wait('早安，训练员！准备好欣赏完美的飞行了吗？');
     await chara_talk.say_and_wait(
@@ -3433,7 +3433,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
     //todo 比赛结果钩子
     await era.printAndWait('事件：迎向有马纪念', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     const chara16_talk = new CharaTalk(16);
     await chara_talk.say_and_wait('来了，终于来了，“有马纪念”～！！');
@@ -3479,7 +3479,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
     //todo 比赛结果钩子
     await era.printAndWait('事件：迎向阪神大赏典', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     const chara16_talk = new CharaTalk(16);
     await era.printAndWait('然后到了“阪神大赏典”当天。');
@@ -3514,7 +3514,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
     //todo 比赛结果钩子
     await era.printAndWait('事件：迎向天皇赏（春）', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     const chara16_talk = new CharaTalk(16);
     const chara3_talk = new CharaTalk(3);
@@ -3574,7 +3574,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
     //todo 比赛结果钩子
     await era.printAndWait('事件：迎向宝冢纪念', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     const chara16_talk = new CharaTalk(16);
     await era.printAndWait('到了“宝冢纪念”当天。而这次──');
@@ -3632,7 +3632,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
     //todo 比赛结果钩子
     await era.printAndWait('事件：迎向天皇赏（秋）', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     const chara3_talk = new CharaTalk(3);
     await era.printAndWait(
@@ -3676,7 +3676,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
     //todo 比赛结果钩子
     await era.printAndWait('事件：迎向有马纪念', {
       color: chara_talk.color,
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     const chara16_talk = new CharaTalk(16);
     await chara_talk.say_and_wait('“有马纪念”，我又来了。');
@@ -3746,7 +3746,7 @@ handlers[event_hooks.race_end] =
       //todo 比赛结果钩子
       await era.printAndWait('事件：出道战结束后．希望延长飞行！', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       await era.printAndWait('虽然摩耶重炮的出道战就这样顺利地结束了──');
       await chara_talk.say_and_wait('唔唔……嗯……？');
@@ -3775,7 +3775,7 @@ handlers[event_hooks.race_end] =
       //todo 比赛结果钩子
       await era.printAndWait('事件：菊花赏结束后．目前还没打算着陆', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       await chara_talk.say_and_wait(
         '雷达收到信号！锁定目标！距离目标还剩3、2、1……！',
@@ -3852,7 +3852,7 @@ handlers[event_hooks.race_end] =
       if (extra_flag.rank === 1) {
         await era.printAndWait('事件：有马纪念结束后·装满燃料', {
           color: chara_talk.color,
-          fontSize: '24px',
+          fontSize: '1.5rem',
         });
         await era.printAndWait(
           '实况「──精彩！太精彩了！给今年“有马纪念”的王者献上掌声！！」',
@@ -3943,7 +3943,7 @@ handlers[event_hooks.race_end] =
       } else {
         await era.printAndWait('事件：有马纪念结束后．补充燃料', {
           color: chara_talk.color,
-          fontSize: '24px',
+          fontSize: '1.5rem',
         });
         await era.printAndWait(
           '实况「──精彩！太精彩了！给今年“有马纪念”的王者献上掌声！！」',
@@ -4046,7 +4046,7 @@ handlers[event_hooks.race_end] =
       if (extra_flag.rank === 1) {
         await era.printAndWait('事件：阪神大赏典结束后．驾驶杆还握在手中', {
           color: chara_talk.color,
-          fontSize: '24px',
+          fontSize: '1.5rem',
         });
         await chara_talk.say_and_wait('哈啊……哈啊……！');
         await era.printAndWait('（哇啊啊啊啊啊啊啊────！！）');
@@ -4108,7 +4108,7 @@ handlers[event_hooks.race_end] =
       } else {
         await era.printAndWait('事件：阪神大赏典结束后．立刻上升', {
           color: chara_talk.color,
-          fontSize: '24px',
+          fontSize: '1.5rem',
         });
         await chara_talk.say_and_wait('哈啊……哈啊……！');
         await chara_talk.say_and_wait('唔……明明就只差一点了说……！！');
@@ -4180,7 +4180,7 @@ handlers[event_hooks.race_end] =
       if (extra_flag.rank === 1) {
         await era.printAndWait('天皇赏（春）结束后．紧急情况', {
           color: chara_talk.color,
-          fontSize: '24px',
+          fontSize: '1.5rem',
         });
         await chara_talk.say_and_wait('哈啊……哈啊……！……好！');
         await chara_talk.say_and_wait('这下就能……让白仁……！');
@@ -4256,7 +4256,7 @@ handlers[event_hooks.race_end] =
       } else {
         await era.printAndWait('事件：天皇赏（春）结束后．紧急代码', {
           color: chara_talk.color,
-          fontSize: '24px',
+          fontSize: '1.5rem',
         });
         await chara_talk.say_and_wait('哈啊……哈啊……！……唔！');
         await chara_talk.say_and_wait('白仁……果然……好快啊……！！');
@@ -4338,7 +4338,7 @@ handlers[event_hooks.race_end] =
     ) {
       await era.printAndWait('事件：宝冢纪念结束后．前往驾驶舱', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       const chara16_talk = new CharaTalk(16);
       await era.printAndWait('（哇啊啊啊啊啊────！！）');
@@ -4369,7 +4369,7 @@ handlers[event_hooks.race_end] =
       //todo 比赛结果钩子
       await era.printAndWait('事件：天皇赏（秋）结束后．通往天空的跑道', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       const chara16_talk = new CharaTalk(16);
       const chara3_talk = new CharaTalk(3);
@@ -4431,7 +4431,7 @@ handlers[event_hooks.race_end] =
       //todo 比赛结果钩子
       await era.printAndWait('事件：有马纪念结束后．最后进场', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       const chara16_talk = new CharaTalk(16);
       await era.printAndWait('观众们「重、炮！重、炮！重、炮！重、炮！」');
@@ -4546,7 +4546,7 @@ handlers[event_hooks.race_end] =
     } else if (extra_flag.rank === 1) {
       await era.printAndWait('事件：竞赛获胜！', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       await chara_talk.say_and_wait('Victory☆胜利的摩耶重炮光荣凯旋！');
       era.printButton('「恭喜！」', 1);
@@ -4583,7 +4583,7 @@ handlers[event_hooks.race_end] =
     } else if (extra_flag.rank <= 5) {
       await era.printAndWait('事件：竞赛上榜', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       //todo 比赛等级判定
       await chara_talk.say_and_wait(
@@ -4624,7 +4624,7 @@ handlers[event_hooks.race_end] =
     } else if (extra_flag.rank <= 10) {
       await era.printAndWait('事件：竞赛败北', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       await chara_talk.say_and_wait('啊～输掉了～还以为会赢的说。');
       era.printButton('「因为其他人也很厉害」', 1);
@@ -4658,7 +4658,7 @@ handlers[event_hooks.race_end] =
     } else if (extra_flag.rank > 10) {
       await era.printAndWait('事件：下次不会输了！', {
         color: chara_talk.color,
-        fontSize: '24px',
+        fontSize: '1.5rem',
       });
       await chara_talk.say_and_wait('又输了……怎么办，训练员……人、人家……');
       era.printButton('「摩耶重炮……」', 1);

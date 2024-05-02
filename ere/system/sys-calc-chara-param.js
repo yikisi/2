@@ -3,22 +3,22 @@ const era = require('#/era-electron');
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
-const sys_call_mec = require('#/system/script/sys-call-mec');
+
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { log_600m2 } = require('#/utils/value-utils');
 
 const { lust_border } = require('#/data/ero/orgasm-const');
-const check_stages = require('#/data/event/check-stages');
 const { location_enum } = require('#/data/locations');
-const {
-  attr_enum,
-  fail_sta_border,
-  attr_names,
-  pressure_border,
-} = require('#/data/train-const');
-const { vehicle_influences, location_move_cost } = require('#/data/move-const');
+const { location_move_cost, vehicle_influences } = require('#/data/move-const');
 const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
+const {
+  attr_enum,
+  attr_names,
+  fail_sta_border,
+  pressure_border,
+} = require('#/data/train-const');
 
 /**
  * @param {number} chara_id
@@ -40,10 +40,11 @@ function sys_check_train_enabled(chara_id) {
     (tmp || era.get(`cflag:${tmp}:种族`)) &&
     !era.get(`status:${tmp}:伤病`) &&
     (era.get(`cflag:${tmp}:育成回合计时`) < 3 * 48 || !chara_id) &&
-    (!era.get(`status:${chara_id}:摸鱼`) ||
-      era.get('cflag:0:位置') === era.get(`cflag:${chara_id}:位置`)) &&
-    era.get(`base:${chara_id}:压力`) < pressure_border.depression &&
-    era.get(`base:${chara_id}:性欲`) < lust_border.want_sex
+    (!era.get(`status:${tmp}:摸鱼`) ||
+      era.get('cflag:0:位置') === era.get(`cflag:${tmp}:位置`)) &&
+    era.get(`base:${tmp}:压力`) < pressure_border.depression &&
+    era.get(`base:${tmp}:性欲`) < lust_border.want_sex &&
+    get_custom_mec(chara_id).is_train_enabled()
   );
 }
 
@@ -89,7 +90,7 @@ function sys_get_debuff(chara_id) {
   }
   ret +=
     0.1 * era.get(`status:${chara_id}:领域`) +
-    sys_call_mec(chara_id, check_stages.mec_action_debuff);
+    get_custom_mec(chara_id).get_action_debuff();
   return ret;
 }
 
@@ -145,7 +146,7 @@ function sys_get_move_cost(location, chara_id) {
       break;
   }
   if (is_walk) {
-    ratio.time = 1 - Math.log(speed / 2 + 1) / log_600m2;
+    ratio.time = 1 - Math.min(Math.log(speed / 2 + 1) / log_600m2, 0.6);
   }
   ret.stamina = Math.ceil(ret.stamina * ratio.stamina);
   ret.time = Math.ceil(ret.time * ratio.time);
@@ -261,7 +262,7 @@ module.exports = {
       era.get(`base:${target}:压力`) / 500 -
       10 * era.get(`status:${target}:疲惫`) -
       10 * era.get(`status:${target}:水土不服`) +
-      sys_call_mec(target, check_stages.mec_success_rate);
+      get_custom_mec(target).get_success_rate_buff();
 
     success_rate *= (100 + era.get('flag:训练难度')) / 100;
 

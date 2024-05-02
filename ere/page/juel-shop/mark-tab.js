@@ -1,25 +1,25 @@
 const era = require('#/era-electron');
 
-const { get_mark_price } = require('#/system/ero/sys-get-juel-price');
 const update_marks = require('#/system/ero/calc-sex/update-marks');
+const { get_mark_price } = require('#/system/ero/sys-get-juel-price');
+const {
+  begin_and_init_ero,
+  end_ero_and_train,
+} = require('#/system/ero/sys-prepare-ero');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
+const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const {
+  default_handler,
   get_mark_cols,
   print_footer,
   print_price_and_confirm,
-  default_handler,
 } = require('#/page/juel-shop/snippets');
 
 const get_color = require('#/utils/gradient-color');
 
 const { mark_colors } = require('#/data/const.json');
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const { sys_change_fame } = require('#/system/sys-calc-flag');
-const {
-  begin_and_init_ero,
-  end_ero_and_train,
-} = require('#/system/ero/sys-prepare-ero');
 
 /**
  * @param {number} chara_id

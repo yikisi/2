@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+
 const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -7,11 +9,10 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { buff_colors } = require('#/data/color-const');
 const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
-const { attr_names, fumble_result, attr_enum } = require('#/data/train-const');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
-const { buff_colors } = require('#/data/color-const');
+const { attr_enum, attr_names, fumble_result } = require('#/data/train-const');
 
 const handlers = {};
 
@@ -515,7 +516,7 @@ handlers[event_hooks.out_start] = async function (_, __, event_object) {
       `突然闯进训练员室的小北，这么大声向 ${me.name} 询问道。`,
     );
     await era.printAndWait(
-      `怎么突然开始说这个了？ ${
+      `怎么突然开始说这个了？${
         me.name
       } 略带诧异地看着面前的${kita.get_teen_sex_title()}。`,
     );

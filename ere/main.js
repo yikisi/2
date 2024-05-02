@@ -21,7 +21,7 @@ module.exports = async () => {
     {
       config: {
         align: 'center',
-        fontSize: '24px',
+        fontSize: '1.5rem',
         fontWeight: 'bold',
         isParagraph: true,
       },
@@ -222,13 +222,13 @@ module.exports = async () => {
         era.setAlign('center');
         await era.printAndWait('鸣谢', {
           color: el_warning_color,
-          fontSize: '24px',
+          fontSize: '1.5rem',
           fontWeight: 'bold',
           isParagraph: true,
         });
         await era.printAndWait('主催', {
           color: el_warning_color,
-          fontSize: '20px',
+          fontSize: '1.25rem',
           isParagraph: true,
         });
         await era.printAndWait('雞雞');
@@ -236,7 +236,7 @@ module.exports = async () => {
           {
             config: {
               color: el_warning_color,
-              fontSize: '20px',
+              fontSize: '1.25rem',
               isParagraph: true,
               offset: 3,
               width: 9,
@@ -247,7 +247,7 @@ module.exports = async () => {
           {
             config: {
               color: el_warning_color,
-              fontSize: '20px',
+              fontSize: '1.25rem',
               isParagraph: true,
               width: 9,
             },
@@ -271,7 +271,7 @@ module.exports = async () => {
         await era.waitAnyKey();
         await era.printAndWait('开发', {
           color: el_warning_color,
-          fontSize: '20px',
+          fontSize: '1.25rem',
           isParagraph: true,
         });
         await era.printAndWait([
@@ -283,7 +283,7 @@ module.exports = async () => {
         ]);
         await era.printAndWait('美术', {
           color: el_warning_color,
-          fontSize: '20px',
+          fontSize: '1.25rem',
           isParagraph: true,
         });
         await era.printAndWait([
@@ -297,7 +297,7 @@ module.exports = async () => {
         ]);
         await era.printAndWait('口上', {
           color: el_warning_color,
-          fontSize: '20px',
+          fontSize: '1.25rem',
           isParagraph: true,
         });
 
@@ -324,7 +324,7 @@ module.exports = async () => {
               { isBr: true },
               '黑衣剑士-星爆气流斩准备就绪',
               { isDivider: true },
-              '鬼鼠',
+              '幽白書',
             ],
           ],
           [[{ color: get_chara_color(1), content: '特别周' }], 'wwm'],
@@ -364,7 +364,7 @@ module.exports = async () => {
             ],
             '梦露',
           ],
-          [[{ color: get_chara_color(32), content: '爱丽速子' }], '鬼鼠'],
+          [[{ color: get_chara_color(32), content: '爱丽速子' }], '幽白書'],
           [
             [{ color: get_chara_color(37), content: '荣进闪耀' }],
             '爱放箭的袁本初',
@@ -407,10 +407,16 @@ module.exports = async () => {
           buffer.push([
             ...(a[0] instanceof Array
               ? a[0].map((e) => {
-                  e.fontSize = '18px';
+                  e.fontSize = '1.125rem';
                   return e;
                 })
-              : [{ color: el_warning_color, content: a[0], fontSize: '18px' }]),
+              : [
+                  {
+                    color: el_warning_color,
+                    content: a[0],
+                    fontSize: '1.125rem',
+                  },
+                ]),
             { isBr: true },
             ...(a[1] instanceof Array ? a[1] : [a[1]]),
           ]);
@@ -438,7 +444,7 @@ module.exports = async () => {
         buffer.length && (await era.printAndWait(buffer[0]));
         await era.printAndWait('口上翻译', {
           color: el_warning_color,
-          fontSize: '20px',
+          fontSize: '1.25rem',
           isParagraph: true,
         });
         await era.printAndWait([
@@ -450,7 +456,7 @@ module.exports = async () => {
         ]);
         await era.printAndWait('测试反馈', {
           color: el_warning_color,
-          fontSize: '20px',
+          fontSize: '1.25rem',
           isParagraph: true,
         });
         await era.printAndWait([
@@ -464,18 +470,18 @@ module.exports = async () => {
         ]);
         await era.printAndWait('社区管理', {
           color: el_warning_color,
-          fontSize: '20px',
+          fontSize: '1.25rem',
           isParagraph: true,
         });
         await era.printAndWait(['Advocator', { isDivider: true }, '雞雞']);
         await era.printAndWait('特别鸣谢（笑）', {
           color: el_warning_color,
-          fontSize: '24px',
+          fontSize: '1.5rem',
           fontWeight: 'bold',
           isParagraph: true,
         });
         await era.printAndWait('午马牧师妹·普瑞提达比', {
-          fontSize: '20px',
+          fontSize: '1.25rem',
         });
         era.setAlign('left');
     }

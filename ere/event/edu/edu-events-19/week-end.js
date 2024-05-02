@@ -1,13 +1,13 @@
 const era = require('#/era-electron');
 
+const print_event_name = require('#/event/snippets/print-event-name');
+
 const CharaTalk = require('#/utils/chara-talk');
-
-const chara_talk = new CharaTalk(19);
-
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const print_event_name = require('#/event/snippets/print-event-name');
 const { location_enum } = require('#/data/locations');
+
+const chara_talk = new CharaTalk(19);
 
 module.exports = async function () {
   const me = get_chara_talk(0),

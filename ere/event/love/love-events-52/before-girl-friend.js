@@ -374,7 +374,7 @@ module.exports = async (
     ]);
 
     await era.printAndWait([
-      '在匆忙的星空下， ',
+      '在匆忙的星空下，',
       me.get_colored_name(),
       ' 终于——',
     ]);

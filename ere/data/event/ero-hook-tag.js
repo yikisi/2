@@ -9,9 +9,9 @@ const { item_enum } = require('#/data/ero/item-const');
 const { lust_palam_border } = require('#/data/ero/orgasm-const');
 const {
   part_enum,
-  part_touch,
-  part_talents,
   part_names,
+  part_talents,
+  part_touch,
 } = require('#/data/ero/part-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
 

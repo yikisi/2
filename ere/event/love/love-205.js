@@ -7,8 +7,8 @@ const {
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
 const {
-  sys_love_uma_in_event,
   sys_get_callname,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -18,10 +18,10 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
+const { vp_status_enum } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { get_breast_cup } = require('#/data/info-generator');
-const { vp_status_enum } = require('#/data/ero/status-const');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):Promise<*>>} */
 const handlers = {};
@@ -315,7 +315,7 @@ handlers.lust = async (vp, me) => {
     ]);
     await era.printAndWait([
       me.get_colored_name(),
-      ' 轻轻一碰， ',
+      ' 轻轻一碰，',
       vp.get_colored_name(),
       ' 就觉得爽劲冲到了后脑勺。',
     ]);
@@ -544,7 +544,7 @@ handlers.lust = async (vp, me) => {
   await era.input();
   await vp.say_and_wait('才没有！');
   await era.printAndWait([
-    '话刚说完， ',
+    '话刚说完，',
     me.get_colored_name(),
     ' 就把肉棒直顶她的鼻子。',
   ]);
@@ -566,7 +566,7 @@ handlers.lust = async (vp, me) => {
     ' 就这样跪在地上，鼻子被肉棒顶住，还要唱校歌。',
   ]);
   await era.printAndWait([
-    '好不容易唱完后， ',
+    '好不容易唱完后，',
     me.get_colored_name(),
     ' 的雄臭味，已经完全进入了她的鼻腔。',
   ]);
@@ -574,7 +574,7 @@ handlers.lust = async (vp, me) => {
     me.get_colored_name(),
     ' 俯身看着 ',
     vp.get_colored_name(),
-    ' 。',
+    '。',
   ]);
   await era.printAndWait('双颊白皙，吹弹可破。');
   await era.printAndWait('眼睛是宝蓝色的，眼角还化了妆，在夜色下嫣然动人。');
@@ -593,7 +593,7 @@ handlers.lust = async (vp, me) => {
     ' 的马眼。',
   ]);
   await era.printAndWait([
-    '一番舔舐后， ',
+    '一番舔舐后，',
     vp.get_colored_name(),
     ' 发现 ',
     me.get_colored_name(),
@@ -608,7 +608,7 @@ handlers.lust = async (vp, me) => {
   await era.printAndWait([
     '按捺不住的 ',
     me.get_colored_name(),
-    ' ，双手抱着 ',
+    '，双手抱着 ',
     vp.get_colored_name(),
     ' 的头，对着她的嘴抽插起来。',
   ]);
@@ -619,7 +619,7 @@ handlers.lust = async (vp, me) => {
     true,
   );
   await era.printAndWait([
-    '每一次用力挺入， ',
+    '每一次用力挺入，',
     me.get_colored_name(),
     ' 都把龟头顶到她口腔的最深处。',
   ]);

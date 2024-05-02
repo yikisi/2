@@ -4,7 +4,7 @@ const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { item_enum } = require('#/data/ero/item-const');
-const { part_touch, part_enum } = require('#/data/ero/part-const');
+const { part_enum, part_touch } = require('#/data/ero/part-const');
 
 /**
  * @param {number} chara_id

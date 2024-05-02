@@ -1,29 +1,18 @@
 const era = require('#/era-electron');
 
-const check_stages = require('#/data/event/check-stages');
+const CustomizedMec = require('#/event/mec/mec-common');
+
 const { location_enum } = require('#/data/locations');
 
-const handlers = {};
-
-handlers[check_stages.mec_callname_customize] = () => {
-  era.set('callname:205:0', '训练员');
-};
-
-/** @param {{loc:number}} extra_flag */
-handlers[check_stages.mec_foreign_debuff] = (extra_flag) => {
-  if (extra_flag.loc !== location_enum.paris) {
-    throw new Error();
+module.exports = class extends CustomizedMec {
+  set_callname() {
+    era.set('callname:205:0', '训练员');
   }
-  era.set('status:205:水土不服', 2 - era.get('talent:205:身体素质'));
-};
 
-/**
- * @param {number} stage_id
- * @param extra_flag
- */
-module.exports = (stage_id, extra_flag) => {
-  if (!handlers[stage_id]) {
-    throw new Error('unsupported stage!');
+  set_foreign_debuff(before_race, loc) {
+    if (loc !== location_enum.paris) {
+      return super.set_foreign_debuff(before_race, loc);
+    }
+    era.set('status:205:水土不服', 2 - era.get('talent:205:身体素质'));
   }
-  return handlers[stage_id](extra_flag);
 };

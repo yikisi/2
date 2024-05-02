@@ -3,8 +3,8 @@ const era = require('#/era-electron');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 const { add_event } = require('#/event/queue');
-const print_event_name = require('#/event/snippets/print-event-name');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const print_event_name = require('#/event/snippets/print-event-name');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -119,9 +119,14 @@ handlers[event_hooks.office_rest] = async (hook, _, event_object) => {
   }
 };
 
-handlers[event_hooks.out_start] = async (event_object) => {
+/**
+ * @param {HookArg} hook
+ * @param _
+ * @param {EventObject} event_object
+ */
+handlers[event_hooks.out_start] = async (hook, _, event_object) => {
   if (era.get('flag:当前互动角色') !== 19) {
-    add_event(event_hooks.out_start, event_object);
+    add_event(hook.hook, event_object);
     return;
   }
   const chara3_talk = get_chara_talk(3),

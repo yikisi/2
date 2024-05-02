@@ -4,10 +4,10 @@ const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
-const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const CharaTalk = require('#/utils/chara-talk');
@@ -21,7 +21,8 @@ const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
-async function game_over() {
+/** @param {boolean} [again] */
+async function game_over(again) {
   const game_over = era.get('flag:游戏结束');
   let end_talk = false,
     saying_arr,
@@ -75,7 +76,8 @@ async function game_over() {
     let punish_level = era.get('flag:惩戒力度');
     if (
       punish_level < 3 &&
-      (era.get('flag:当前声望') < 0 || era.get('flag:彩蛋机制') === 179)
+      !again &&
+      (era.get('flag:当前声望') <= 0 || era.get('flag:彩蛋机制') === 179)
     ) {
       if (era.get('flag:声望不足替换')) {
         punish_level = era.add('flag:惩戒力度', 1);
@@ -103,9 +105,7 @@ async function game_over() {
             era
               .getAddedCharacters()
               .filter((e) => e)
-              .forEach((e) =>
-                sys_call_mec(e, check_stages.mec_callname_customize),
-              );
+              .forEach((e) => get_custom_mec(e).set_callname());
 
             era.drawLine();
             await era.printAndWait(
@@ -195,7 +195,7 @@ async function game_over() {
             era.drawLine();
             await era.printAndWait('性 奴 宣 言', {
               align: 'center',
-              fontSize: '24px',
+              fontSize: '1.5rem',
               fontWeight: 'bold',
               isParagraph: true,
             });
@@ -264,7 +264,7 @@ async function game_over() {
               `${CharaTalk.me.name} 的身体已经被调整到敏感度绝佳的状态，请继续精进自己的性能力，取悦主人们，以获取声望吧！`,
             );
             await era.printAndWait('声望再次低于零，会遭受更严厉的惩罚！');
-            sys_add_titles(0, { c: buff_colors[2], n: '万人骑' });
+            sys_add_titles(0, { c: buff_colors[2], n: '万马骑' });
             break;
           case 3:
             era.set('equip:0:淫纹奴役', slavery_enum.pregnant);
@@ -347,11 +347,11 @@ async function game_over() {
             await era.printAndWait(
               `假如足够幸运的话，也许 ${CharaTalk.me.name} 还能凭子而贵！`,
             );
-            sys_add_titles(0, { c: buff_colors[2], n: '孕179' });
+            sys_add_titles(0, { c: buff_colors[2], n: '孕道' });
         }
         sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
           (e) => {
-            sys_call_mec(e, check_stages.mec_callname_customize);
+            get_custom_mec(e).set_callname();
             sys_call_check(e, check_stages.after_punish, {
               level: punish_level,
             });
@@ -419,7 +419,7 @@ async function game_over() {
     era.print('GAME OVER', {
       align: 'center',
       color: buff_colors[3],
-      fontSize: '48px',
+      fontSize: '3rem',
       fontWeight: 'bold',
       isParagraph: true,
     });

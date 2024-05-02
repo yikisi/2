@@ -1,20 +1,20 @@
 const era = require('#/era-electron');
 
 const {
-  sys_get_colored_callname,
   sys_get_callname,
+  sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
 
 const {
-  ask_action,
-  after_refusing_by_defender,
   after_refusing_by_attacker,
+  after_refusing_by_defender,
+  ask_action,
 } = require('#/event/ero/common-lines/snippets');
 
 const { get_random_value } = require('#/utils/value-utils');
 
-const { ero_hooks } = require('#/data/event/ero-hooks');
 const { part_enum } = require('#/data/ero/part-const');
+const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /**
  * @author 黑衣剑士-星爆气流斩准备就绪
@@ -32,10 +32,11 @@ module.exports = (handlers) => {
         ' 辱骂自己……】',
       ]);
       if (await ask_action(attacker.id)) {
-        await (get_random_value(0, 1)
-          ? after_refusing_by_attacker
-          : after_refusing_by_defender)(attacker, defender, hook);
-        return;
+        await (
+          get_random_value(0, 1)
+            ? after_refusing_by_attacker
+            : after_refusing_by_defender
+        )(attacker, defender, hook);
       }
     } else {
       await era.printAndWait([
@@ -58,10 +59,11 @@ module.exports = (handlers) => {
         ' 拍打自己的臀部……】',
       ]);
       if (await ask_action(attacker.id)) {
-        await (get_random_value(0, 1)
-          ? after_refusing_by_attacker
-          : after_refusing_by_defender)(attacker, defender, hook);
-        return;
+        await (
+          get_random_value(0, 1)
+            ? after_refusing_by_attacker
+            : after_refusing_by_defender
+        )(attacker, defender, hook);
       }
     } else {
       await era.printAndWait([
@@ -84,10 +86,11 @@ module.exports = (handlers) => {
         ' 拍打自己的胸部……】',
       ]);
       if (await ask_action(attacker.id)) {
-        await (get_random_value(0, 1)
-          ? after_refusing_by_attacker
-          : after_refusing_by_defender)(attacker, defender, hook);
-        return;
+        await (
+          get_random_value(0, 1)
+            ? after_refusing_by_attacker
+            : after_refusing_by_defender
+        )(attacker, defender, hook);
       }
     } else {
       await era.printAndWait([
@@ -175,10 +178,11 @@ module.exports = (handlers) => {
         ' 扇自己的耳光……】',
       ]);
       if (await ask_action(attacker.id)) {
-        await (get_random_value(0, 1)
-          ? after_refusing_by_attacker
-          : after_refusing_by_defender)(attacker, defender, hook);
-        return;
+        await (
+          get_random_value(0, 1)
+            ? after_refusing_by_attacker
+            : after_refusing_by_defender
+        )(attacker, defender, hook);
       }
     } else {
       await era.printAndWait([
@@ -212,10 +216,11 @@ module.exports = (handlers) => {
           part_enum.foot,
         )
       ) {
-        await (get_random_value(0, 1)
-          ? after_refusing_by_attacker
-          : after_refusing_by_defender)(attacker, defender, hook);
-        return;
+        await (
+          get_random_value(0, 1)
+            ? after_refusing_by_attacker
+            : after_refusing_by_defender
+        )(attacker, defender, hook);
       }
     } else {
       await era.printAndWait([

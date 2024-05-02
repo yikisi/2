@@ -2,14 +2,14 @@ const era = require('#/era-electron');
 
 const sys_call_check = require('#/system/script/sys-call-check');
 
+const { adaptability_colors } = require('#/data/color-const');
 const check_stages = require('#/data/event/check-stages');
 const { no_info } = require('#/data/exp-const');
-const { adaptability_names, out_of_train_type } = require('#/data/train-const');
-const { adaptability_colors } = require('#/data/color-const');
 const {
   get_adaptability_rank,
   get_train_time,
 } = require('#/data/info-generator');
+const { adaptability_names, out_of_train_type } = require('#/data/train-const');
 
 const page_name = '育成情况';
 

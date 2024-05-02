@@ -1053,7 +1053,7 @@ module.exports = async function (hook, __, event_object) {
     );
     await era.printAndWait('「才不会！」', {
       align: 'center',
-      fontSize: '24px',
+      fontSize: '1.5rem',
     });
     await me.say_and_wait(
       `${chara_talk.name}是比谁都温柔的注视大家的大${
@@ -1135,7 +1135,7 @@ module.exports = async function (hook, __, event_object) {
     era.drawLine();
     await era.printAndWait(
       `狂妄到自认为可以救人者，会亲手伤害自己打算拯救的对象。`,
-      { align: 'center', fontSize: '22px' },
+      { align: 'center', fontSize: '1.375rem' },
     );
     chara_talk.print(`我的世界曾经充满了色彩。`);
     chara_talk.print(

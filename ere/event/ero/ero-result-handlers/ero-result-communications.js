@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
   clean_part,
@@ -9,18 +8,19 @@ const {
 const { change_ero_master } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 const {
-  clean_stain,
   clean_part_stain,
+  clean_stain,
   rollback_penis_stain,
 } = require('#/system/ero/sys-calc-stain');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { part_enum, part_touch } = require('#/data/ero/part-const');
-const { ero_hooks } = require('#/data/event/ero-hooks');
 const { stain_enum } = require('#/data/ero/stain-const');
+const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @param {Record<string,function(number,number,HookArg,{check:number})>} handlers */
 module.exports = (handlers) => {

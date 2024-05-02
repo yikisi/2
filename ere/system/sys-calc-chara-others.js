@@ -1,30 +1,29 @@
 const era = require('#/era-electron');
 
 const sys_call_check = require('#/system/script/sys-call-check');
-const sys_call_mec = require('#/system/script/sys-call-mec');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
-const sys_filter_chara = require('#/system/sys-filter-chara');
 const {
-  sys_check_limit_relation_and_love,
   sys_check_hide_relation_and_love,
+  sys_check_limit_relation_and_love,
   sys_check_remote,
 } = require('#/system/sys-calc-chara-param');
+const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { palam_colors, attr_change_colors } = require('#/data/color-const');
+const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { love_colors, relation_colors } = require('#/data/const.json');
 const check_stages = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
-  get_relation_mark,
-  get_love_mark,
   get_love_border,
+  get_love_mark,
+  get_relation_mark,
 } = require('#/data/info-generator');
 const LimitLoveStatus = require('#/data/love-limit-status');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 /**
  * @param {number} chara_id
@@ -96,7 +95,7 @@ function like_chara(target, aim, val, to_be_shown, extra_love) {
               era.get('flag:好感上升加成') -
               25 * sys_check_remote(target) -
               50 * (era.get(`status:${target}:讨厌药`) > 0) +
-              sys_call_mec(target, check_stages.mec_relation_buff))) /
+              get_custom_mec(target).get_relation_buff())) /
             1000 +
             3 * era.get(`talent:${target}:自信程度`),
           1,
@@ -192,10 +191,10 @@ function love_uma(chara_id, val, to_be_shown) {
         (100 +
           era.get('flag:爱慕上升加成') +
           50 * era.get(`status:${chara_id}:爱意克制`) +
-          sys_call_mec(chara_id, check_stages.mec_love_buff))) /
+          get_custom_mec(chara_id).get_love_buff())) /
         100,
     );
-    const force_limit = sys_call_mec(chara_id, check_stages.mec_love_limit),
+    const force_limit = get_custom_mec(chara_id).get_love_limit(),
       border = force_limit || get_love_border(chara_id),
       love_limit = !era.get('flag:回合爱慕惩罚');
     if ((love_limit || force_limit) && border > 25 && love + _val >= border) {
@@ -321,9 +320,14 @@ module.exports = {
     era.println();
     print_change(chara_id, new_val - 1, new_val);
     era.set(`cflag:${chara_id}:爱慕暂拒`, 0);
-    await CharaTalk.me.say_and_wait('已经不能回头了……', true);
-    sys_call_mec(chara_id, check_stages.mec_callname_customize);
-    await punish_unfaithful(chara_id, new_val);
+    await get_chara_talk(0).say_and_wait('已经不能回头了……', true);
+    if (
+      typeof era.get(`callname:${chara_id}:0`) === 'string' &&
+      era.get(`callname:${chara_id}:0`).startsWith('训练员')
+    ) {
+      get_custom_mec(chara_id).set_callname();
+    }
+    new_val >= 75 && (await punish_unfaithful(chara_id, new_val));
     return true;
   },
   sys_punish_unfaithful: punish_unfaithful,

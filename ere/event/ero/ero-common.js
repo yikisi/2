@@ -1,10 +1,10 @@
 const era = require('#/era-electron');
 
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const {
-  orgasm_check_list,
   get_penis_size,
+  orgasm_check_list,
 } = require('#/system/ero/sys-calc-ero-status');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const common_pregnant_report_in_love = require('#/event/ero/snippets/common-pregnant-report-in-love');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -14,15 +14,15 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { buff_colors } = require('#/data/color-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
 const {
-  penis_desc,
-  unexpected_pregnant_enum,
-  pregnant_stage_enum,
   breast_size,
+  penis_desc,
+  pregnant_stage_enum,
+  unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
-  ero_hooks,
   ero_action_names,
+  ero_hooks,
   ero_tagged_hooks,
 } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -752,9 +752,6 @@ handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
  * @returns {Promise<*>}
  */
 module.exports = async (chara_id, hook, extra_flag) => {
-  if (extra_flag.shown === false) {
-    return;
-  }
   if (ero_action_names[hook.hook]) {
     const { attacker, defender } =
       (ero_tagged_hooks[hook.hook] || default_tags).condition !==

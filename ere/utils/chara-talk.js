@@ -223,6 +223,42 @@ class CharaTalk {
     this.color = color;
     return this;
   }
+
+  /**
+   * 输出一句该角色在回忆中的台词
+   *
+   * @param {string|({content:string,[color]:string}|string)[]} _content
+   * @param {boolean} [is_unknown]
+   */
+  used_to_say(_content, is_unknown) {
+    const content = [];
+    content.push('（');
+    if (this.id) {
+      content.push({
+        content: is_unknown ? '？？？' : this.name,
+        fontWeight: 'bold',
+      });
+    }
+    content.push('「');
+    if (_content instanceof Array) {
+      content.push(..._content);
+    } else {
+      content.push(_content);
+    }
+    content.push('」）');
+    era.print(content, { color: this.color });
+  }
+
+  /**
+   * 输出一句该角色在回忆中的台词，在输出后会等待玩家按任意键的版本
+   *
+   * @param {string|({content:string,[color]:string}|string)[]} content
+   * @param {boolean} [is_unknown]
+   */
+  async used_to_say_and_wait(content, is_unknown) {
+    this.used_to_say(content, is_unknown);
+    await era.waitAnyKey();
+  }
 }
 
 module.exports = CharaTalk;

@@ -314,7 +314,7 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
   end_ero_and_train();
 
   if (ret === 1) {
-    await urara.say_and_wait(['——谢谢 ', callname, ' ！']);
+    await urara.say_and_wait(['——谢谢 ', callname, '！']);
     await era.printAndWait([
       '在 ',
       me.get_colored_name(),

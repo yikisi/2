@@ -117,7 +117,8 @@ module.exports = async (hook, _, event_object) => {
       ' 先是愣了一下，随后急忙用正装的宽袖遮住了自己变得羞红的脸颊。',
     ]);
     await urara.say_and_wait([
-      '训、 ',
+      callname.substring(0, 1),
+      '、',
       callname,
       ' 不要再说乌拉拉听不懂的话了……虽然很开心！但乌拉拉也不是小孩子了……',
     ]);

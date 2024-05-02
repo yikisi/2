@@ -14,6 +14,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const check_stages = require('#/data/event/check-stages');
 const DaiwaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-9');
 const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -47,7 +48,7 @@ handlers[check_stages.next_week] = () => {
 
 handlers[check_stages.aim_check] = function () {
   const buffer = [],
-    races = new RaceHistory(9);
+    races = new RaceHistory(9).get();
   buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
   buffer.push(check_aim_and_get_entry(races, race_enum.tuli_sho, 1, 5));
   buffer.push(check_aim_and_get_entry(races, race_enum.oka_sho, 1, 5));
@@ -79,7 +80,7 @@ handlers[check_stages.personal_titles] = () => ['Miss.Perfect'];
 
 /** @param {{aim_check:boolean,titles:{c:string,n:string}[]}} extra_flag */
 handlers[check_stages.title_check] = (extra_flag) => {
-  const races = new RaceHistory(9);
+  const races = new RaceHistory(9).get();
   const check =
       check_aim_race(races, race_enum.oka_sho, 1, 1) &&
       check_aim_race(races, race_enum.shuk_sho, 1, 1) &&

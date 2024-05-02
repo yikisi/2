@@ -4,8 +4,8 @@ const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const { add_event } = require('#/event/queue');
@@ -44,6 +44,7 @@ async function love_49_week_end(chara_talk) {
   }
   return true;
 }
+
 async function love_49(chara_talk) {
   const me = get_chara_talk(0);
   await print_event_name('告白', chara_talk);
@@ -172,6 +173,7 @@ async function love_74_week_end(chara_talk) {
   await sys_love_uma_in_event(30);
   return true;
 }
+
 async function love_89_week_end(chara_talk) {
   const me = get_chara_talk(0);
   await print_event_name(`佳偶`, chara_talk);
@@ -253,6 +255,7 @@ async function love_89_week_end(chara_talk) {
   await sys_love_uma_in_event(30);
   return true;
 }
+
 async function love_99_week_end(chara_talk) {
   const me = get_chara_talk(0);
   await print_event_name('依存', chara_talk);
@@ -286,6 +289,7 @@ async function love_99_week_end(chara_talk) {
   await chara_talk.say_and_wait(`最喜欢你了！`);
   await sys_love_uma_in_event(30);
 }
+
 /**
  * 米浴 - 爱慕
  *
