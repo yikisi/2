@@ -7,9 +7,9 @@ const {
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
 const {
-  sys_like_chara,
-  sys_get_colored_callname,
   sys_get_callname,
+  sys_get_colored_callname,
+  sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
@@ -19,10 +19,10 @@ const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { chara_colors } = require('#/data/chara-colors');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
-const { chara_colors } = require('#/data/chara-colors');
 
 /** @param {HookArg} hook */
 module.exports = async (hook) => {

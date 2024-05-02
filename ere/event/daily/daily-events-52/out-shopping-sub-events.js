@@ -3,8 +3,8 @@ const era = require('#/era-electron');
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
   begin_and_init_ero,
-  set_palam_to_max,
   end_ero_and_train,
+  set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 

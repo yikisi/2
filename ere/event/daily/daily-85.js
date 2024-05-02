@@ -10,8 +10,8 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const event_hooks = require('#/data/event/event-hooks');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const event_hooks = require('#/data/event/event-hooks');
 
 const ruby = new CharaTalk(85);
 

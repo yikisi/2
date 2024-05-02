@@ -1,19 +1,21 @@
 const era = require('#/era-electron');
 
-const CharaTalk = require('#/utils/chara-talk');
-
-const ruby = new CharaTalk(85);
-
 const {
   sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
-const print_event_name = require('#/event/snippets/print-event-name');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { location_enum } = require('#/data/locations');
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
-const edu_event_marks = new EduEventMarks(85);
+
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+
+const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const { location_enum } = require('#/data/locations');
+const print_event_name = require('#/event/snippets/print-event-name');
+const edu_event_marks = new EduEventMarks(85);
+
+const ruby = new CharaTalk(85);
 
 module.exports = async function () {
   const me = get_chara_talk(0),

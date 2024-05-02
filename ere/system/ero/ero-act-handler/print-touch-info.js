@@ -6,11 +6,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { buff_colors } = require('#/data/color-const');
 const { part_abbr, part_alias } = require('#/data/ero/ero-alias.json');
 const {
+  get_item_action,
   item_enum,
   item_names,
-  get_item_action,
 } = require('#/data/ero/item-const');
-const { touch_list, part_touch, part_enum } = require('#/data/ero/part-const');
+const { part_enum, part_touch, touch_list } = require('#/data/ero/part-const');
 
 /**
  * @param {number} chara_id

@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { update_juels_from_talent } = require('#/system/ero/sys-calc-juel');
 const { update_palam_from_talent } = require('#/system/ero/sys-calc-palam');
-const { set_stain, merge_stain } = require('#/system/ero/sys-calc-stain');
+const { merge_stain, set_stain } = require('#/system/ero/sys-calc-stain');
 const {
   sys_get_colored_full_callname,
 } = require('#/system/sys-calc-chara-others');

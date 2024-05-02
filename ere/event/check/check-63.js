@@ -14,8 +14,8 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
-const { race_enum, race_infos } = require('#/data/race/race-const');
 const { class_enum } = require('#/data/race/model/race-info');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 const handlers = {};
 

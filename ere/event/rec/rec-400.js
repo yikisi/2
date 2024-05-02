@@ -4,11 +4,11 @@ const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_trainer_title } = require('#/data/info-generator');
 const SSEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-400');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { get_trainer_title } = require('#/data/info-generator');
 
 /**
  * 周日宁静的招募事件，id=400

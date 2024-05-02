@@ -8,7 +8,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { location_enum } = require('#/data/locations');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,{wait:boolean}):Promise<void>>} handlers */
 module.exports = (handlers) => {

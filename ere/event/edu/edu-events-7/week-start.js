@@ -5,8 +5,8 @@ const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const quick_into_sex = require('#/event/snippets/quick-into-sex');
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');

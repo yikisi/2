@@ -6,8 +6,8 @@ const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-ge
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
-const check_aim_race = require('#/event/snippets/check-aim-race');
 const { add_event, cb_enum } = require('#/event/queue');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 

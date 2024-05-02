@@ -1,8 +1,13 @@
 const era = require('#/era-electron');
 
+const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
-  sys_love_uma_in_event,
+  begin_and_init_ero,
+  end_ero_and_train,
+} = require('#/system/ero/sys-prepare-ero');
+const {
   sys_get_callname,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
@@ -10,14 +15,9 @@ const { add_event } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const event_hooks = require('#/data/event/event-hooks');
-const {
-  begin_and_init_ero,
-  end_ero_and_train,
-} = require('#/system/ero/sys-prepare-ero');
-const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
+const event_hooks = require('#/data/event/event-hooks');
 
 /** @param {CharaTalk} chara_talk */
 async function love_49_week_start(chara_talk) {

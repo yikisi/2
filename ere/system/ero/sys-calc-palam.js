@@ -1,25 +1,25 @@
 const era = require('#/era-electron');
 
 const {
-  orgasm_check_list,
   get_penis_size,
+  orgasm_check_list,
 } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 
+const { palam_colors } = require('#/data/color-const');
 const {
-  palam_from_semen_on_part,
   lust_border,
   palam_from_orgasm,
+  palam_from_semen_on_part,
 } = require('#/data/ero/orgasm-const');
 const {
   part_enum,
   part_names,
   pleasure_list,
 } = require('#/data/ero/part-const');
-const { palam_colors } = require('#/data/color-const');
 
 let tmp = {};
 

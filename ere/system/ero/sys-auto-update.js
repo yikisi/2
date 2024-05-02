@@ -4,11 +4,10 @@ const { get_skill_price } = require('#/system/ero/sys-get-juel-price');
 
 const { get_random_entry } = require('#/utils/list-utils');
 
-const { pleasure_list, part_names } = require('#/data/ero/part-const');
-
 const skill_names = require('#/data/ero/shop-desc.json').skill_desc.map((e) =>
   e.substring(0, 4),
 );
+const { part_names, pleasure_list } = require('#/data/ero/part-const');
 
 /** @param {number} chara_id */
 module.exports = (chara_id) => {

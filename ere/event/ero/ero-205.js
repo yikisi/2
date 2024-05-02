@@ -5,10 +5,10 @@ const { set_palam_to_max } = require('#/system/ero/sys-prepare-ero');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const EroParticipant = require('#/data/ero/ero-participant');
+const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const TreveLifeMarks = require('#/data/event/life-event-marks/life-event-marks-205');
-const { part_enum } = require('#/data/ero/part-const');
-const EroParticipant = require('#/data/ero/ero-participant');
 
 /** @type {Record<string,function(HookArg,*):Promise<*>>} */
 const handlers = {};

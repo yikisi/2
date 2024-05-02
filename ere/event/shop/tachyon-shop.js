@@ -1,4 +1,4 @@
-const { get, printAndWait, printButton, input } = require('#/era-electron');
+const { get, input, printAndWait, printButton } = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 

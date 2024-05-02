@@ -2,9 +2,9 @@ const era = require('#/era-electron');
 
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
+  check_lubrication,
   get_nipple_buff,
   get_penis_size,
-  check_lubrication,
 } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 

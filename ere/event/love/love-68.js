@@ -3,8 +3,8 @@ const era = require('#/era-electron');
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
   begin_and_init_ero,
-  end_ero_and_train,
   end_ero_and_show_result,
+  end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 

@@ -1,6 +1,6 @@
 const {
-  year_index,
   year_desc,
+  year_index,
 } = require('#/event/check/snippets/edu-year-const');
 
 const { attr_change_colors } = require('#/data/color-const');

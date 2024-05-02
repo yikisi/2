@@ -1,6 +1,12 @@
 const era = require('#/era-electron');
 
 const call_daily_event = require('#/system/script/sys-call-daily-script');
+const { sys_handle_action } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_check_act_disabled,
+  sys_check_awake,
+  sys_get_move_cost,
+} = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const print_chara_info = require('#/page/components/cur-chara-info');
@@ -12,13 +18,7 @@ const chara_info_type = require('#/data/chara-info-type');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { location_enum } = require('#/data/locations');
-const {
-  sys_check_act_disabled,
-  sys_get_move_cost,
-  sys_check_awake,
-} = require('#/system/sys-calc-chara-param');
-const { sys_handle_action } = require('#/system/sys-calc-base-cflag');
-const { vehicle_verbs, vehicle_names } = require('#/data/move-const');
+const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
 async function out_page() {
   era.set('flag:当前位置', location_enum.gate);

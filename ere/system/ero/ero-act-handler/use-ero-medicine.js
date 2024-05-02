@@ -6,8 +6,8 @@ const CharaTalk = require('#/utils/chara-talk');
 
 const { buff_colors } = require('#/data/color-const');
 const { medicine_enum, medicine_names } = require('#/data/ero/item-const');
-const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 
 /**
  * @param {CharaTalk} chara

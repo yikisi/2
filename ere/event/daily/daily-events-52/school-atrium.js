@@ -1,9 +1,9 @@
 const era = require('#/era-electron');
 
 const {
-  sys_like_chara,
-  sys_get_colored_callname,
   sys_get_callname,
+  sys_get_colored_callname,
+  sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
@@ -13,8 +13,8 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const { chara_colors } = require('#/data/chara-colors');
+const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 
 /** @param {HookArg} hook */
 module.exports = async (hook) => {

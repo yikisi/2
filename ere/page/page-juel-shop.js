@@ -6,28 +6,28 @@ const {
 } = require('#/system/ero/sys-get-juel-price');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 
+const print_mark_tab = require('#/page/juel-shop/mark-tab');
 const {
-  print_price_and_confirm,
-  pay_juels,
-  print_confirm_and_return,
+  default_handler,
   get_skill_buttons,
   get_talent_buttons,
-  default_handler,
+  pay_juels,
+  print_confirm_and_return,
   print_footer,
+  print_price_and_confirm,
 } = require('#/page/juel-shop/snippets');
-const print_mark_tab = require('#/page/juel-shop/mark-tab');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const {
-  buff_colors,
   attr_change_colors,
+  buff_colors,
   palam_colors,
 } = require('#/data/color-const');
-const { talent_button_names_and_check_dict } = require('#/data/ero/juel-const');
 const { part_abbr } = require('#/data/ero/ero-alias.json');
-const { pleasure_list, part_names } = require('#/data/ero/part-const');
+const { talent_button_names_and_check_dict } = require('#/data/ero/juel-const');
+const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { skill_desc, talent_desc } = require('#/data/ero/shop-desc.json');
 const { trained_talent_names } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');

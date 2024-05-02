@@ -1,7 +1,7 @@
 ﻿const era = require('#/era-electron');
 
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_call_check = require('#/system/script/sys-call-check');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
@@ -13,8 +13,8 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const check_stages = require('#/data/event/check-stages');
+const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean|void>>} */

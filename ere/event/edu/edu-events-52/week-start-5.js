@@ -7,7 +7,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const CharaTalk = require('#/utils/chara-talk');
 
 const RaceHistory = require('#/data/race/model/race-history');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,EventObject):Promise<*>>} handlers */
 module.exports = (handlers) => {

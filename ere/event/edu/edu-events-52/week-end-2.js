@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  sys_change_weight,
   sys_change_attr_and_print,
+  sys_change_weight,
 } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_colored_callname,

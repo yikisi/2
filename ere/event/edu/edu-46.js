@@ -6,11 +6,11 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_names, fumble_result } = require('#/data/train-const');
-const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise<*>>}*/
 const handlers = {};

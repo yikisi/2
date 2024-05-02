@@ -2,8 +2,8 @@ const era = require('#/era-electron');
 
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const {
-  sys_reg_race,
   sys_change_attr_and_print,
+  sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_awake,

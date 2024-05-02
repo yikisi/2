@@ -5,8 +5,8 @@ const {
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
 const {
-  sys_love_uma_in_event,
   sys_get_colored_callname,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
 const masturbate = require('#/event/snippets/masturbate');

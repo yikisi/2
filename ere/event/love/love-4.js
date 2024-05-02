@@ -1,16 +1,16 @@
 const era = require('#/era-electron');
 
-const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 const {
   begin_and_init_ero,
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
+const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
-const { cb_enum, add_event } = require('#/event/queue');
+const { add_event, cb_enum } = require('#/event/queue');
 
 /**
  * 丸善斯基 - 爱慕

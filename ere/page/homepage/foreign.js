@@ -3,17 +3,17 @@ const era = require('#/era-electron');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
-  sys_reg_race,
   sys_change_attr_and_print,
+  sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const {
-  sys_check_train_enabled,
   sys_check_awake,
+  sys_check_train_enabled,
 } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
-const select_target = require('#/page/components/select-target');
 const goto_sex = require('#/page/components/goto-sex');
+const select_target = require('#/page/components/select-target');
 const { generate_race_button } = require('#/page/homepage/snippets');
 const print_exp_page = require('#/page/page-exp');
 const print_load_page = require('#/page/page-load-game');

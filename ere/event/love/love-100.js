@@ -1,22 +1,22 @@
 const era = require('#/era-electron');
 
 const {
-  sys_love_uma_in_event,
+  sys_change_attr_and_print,
+  sys_change_motivation,
+} = require('#/system/sys-calc-base-cflag');
+const {
   sys_get_callname,
   sys_like_chara,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
-const {
-  sys_change_motivation,
-  sys_change_attr_and_print,
-} = require('#/system/sys-calc-base-cflag');
-const get_attr_and_print_in_event = require('../snippets/get-attr-and-print-in-event');
-const quick_into_sex = require('../snippets/quick-into-sex');
 
 async function love_49_week_end(chara_talk) {
   await era.printAndWait('…………');

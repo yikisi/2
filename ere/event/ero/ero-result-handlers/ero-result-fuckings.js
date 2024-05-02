@@ -7,9 +7,9 @@ const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
 
 const EroParticipant = require('#/data/ero/ero-participant');
+const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { attr_enum } = require('#/data/train-const');
 
 /** @param {Record<string,function(number,number,HookArg,{check:number})>} handlers */

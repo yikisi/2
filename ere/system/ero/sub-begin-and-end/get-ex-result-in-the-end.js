@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { palam_colors, buff_colors } = require('#/data/color-const');
+const { buff_colors, palam_colors } = require('#/data/color-const');
 const { lust_palam_border } = require('#/data/ero/orgasm-const');
 
 /**

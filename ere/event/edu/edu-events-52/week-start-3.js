@@ -11,7 +11,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,EventObject):Promise<*>>} handlers */
 module.exports = (handlers) => {

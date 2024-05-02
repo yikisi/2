@@ -13,30 +13,30 @@ const chara_info_type = require('#/data/chara-info-type');
 const CharaTitles = require('#/data/chara-titles');
 const {
   adaptability_colors,
-  motivation_colors,
   el_danger_color,
+  motivation_colors,
 } = require('#/data/color-const');
 const {
   attr_background_colors,
-  love_colors,
   growth_colors,
+  love_colors,
   relation_colors,
 } = require('#/data/const.json');
 const {
-  human_growth_stage,
   growth_stage,
-  sex_title,
+  human_growth_stage,
   human_sex_title,
+  sex_title,
 } = require('#/data/ero/status-const');
 const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_chara_score,
-  get_relation_info,
-  get_train_time,
   get_love_info,
-  get_status,
   get_rank_level,
+  get_relation_info,
+  get_status,
+  get_train_time,
 } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');

@@ -11,8 +11,8 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { attr_enum } = require('#/data/train-const');
 const { race_enum } = require('#/data/race/race-const');
+const { attr_enum } = require('#/data/train-const');
 
 /**
  * @param {HookArg} hook

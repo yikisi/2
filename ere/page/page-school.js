@@ -3,14 +3,15 @@ const era = require('#/era-electron');
 const call_daily_script = require('#/system/script/sys-call-daily-script');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
-const print_page_header = require('#/page/components/page-header');
 const print_curr_chara = require('#/page/components/cur-chara-info');
+const print_page_header = require('#/page/components/page-header');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
-const { location_enum, location_name } = require('#/data/locations');
 const event_hooks = require('#/data/event/event-hooks');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { vehicle_verbs, vehicle_names } = require('#/data/move-const');
+const { location_enum, location_name } = require('#/data/locations');
+const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
 module.exports = async (location) => {
   await era.clear();
