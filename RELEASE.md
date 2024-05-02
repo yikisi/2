@@ -56,4 +56,5 @@ EraUma v0.59，适配 [EraElectron v1.2.0 (zero)](https://gitgud.io/umaera/era-e
 * 修复了调教地文默认为重复动作的bug；
 
 因为育成回合计时变量计算逻辑的重写，需要重新开档
+
 因为暂时移除了所有未润色口上，请在更新时删除旧游戏文件夹（ere和csv）以防旧游戏文件形成干扰

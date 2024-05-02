@@ -25,6 +25,106 @@ const { attr_names } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},TachyonEduMarks,number,number,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
+  handlers[47 + 47] = async (tachyon, me, callname) => {
+    const coffee = get_chara_talk(25),
+      t_call_c = sys_get_colored_callname(32, 25);
+    await print_event_name('黯淡的光辉', tachyon);
+    era.println();
+    await tachyon.say_and_wait(['话说，明天就是有马纪念了啊，', callname]);
+    era.println();
+    await era.printAndWait([
+      '在月下训练的 ',
+      tachyon.get_colored_name(),
+      ' 无意间向 ',
+      me.get_colored_name(),
+      ' 提起',
+    ]);
+    await era.printAndWait([
+      '自从菊花赏结束以来，',
+      me.get_couple_title(),
+      ' 便一直维持着这样在晚上进行训练及指导的关系',
+    ]);
+    await era.printAndWait([
+      '原本尴尬的对话，在两个月的接触沟通后也已经渐渐回到了以往的熟悉',
+    ]);
+    await era.printAndWait(
+      '虽然这样讲有些过分，但要说对现在的状态，自己是什么样的感受的话',
+    );
+    await era.printAndWait('那大概是享受吧');
+    await era.printAndWait([
+      '白天为了 ',
+      coffee.get_colored_name(),
+      ' 而努力，夜晚则帮助 ',
+      tachyon.get_colored_name(),
+      ' 恢复',
+    ]);
+    await era.printAndWait([
+      '虽然工作量比以前增加了，但与菊花赏前的 ',
+      me.get_colored_name(),
+      ' 相比，心情上的负担可以说每一天都在减轻',
+    ]);
+    await era.printAndWait([
+      '…………也因此，',
+      me.get_colored_name(),
+      ' 几乎忘了时间',
+    ]);
+    era.println();
+    if (sys_reg_race(25).curr.race === race_enum.arim_kin) {
+      await tachyon.say_and_wait([
+        '明天，就是 ',
+        t_call_c,
+        ' 今年的最后一场比赛了',
+      ]);
+    } else {
+      await tachyon.say_and_wait('明天，就是今年赛季的结束了');
+    }
+    era.println();
+    await era.printAndWait(['在有马纪念之后']);
+    await era.printAndWait([
+      '就是 ',
+      me.get_colored_name(),
+      ' 一直不敢去面对的，来年了',
+    ]);
+    era.println();
+    await tachyon.say_and_wait([
+      '明年……',
+      t_call_c,
+      ' 打算出走的比赛……我会尽全力一个不漏跟上的',
+    ]);
+    era.println();
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 看着',
+      tachyon.sex,
+      '的眼眸，里面是为了 ',
+      coffee.get_colored_name(),
+      ' 燃烧的觉悟和热情',
+    ]);
+    era.println();
+    await tachyon.say_and_wait('……所以，明年也请，多多指教了');
+    era.println();
+    await era.printAndWait('没有光芒');
+    await era.printAndWait([
+      '一直以来将 ',
+      me.get_colored_name(),
+      ' 双眼灼烧的，',
+      tachyon.get_colored_name(),
+      ' 眼中的光芒，已经黯淡的几乎看不出来了',
+    ]);
+    era.printButton('「明年也请……多多指教」', 1);
+    await era.input();
+    await era.printAndWait([
+      tachyon.get_colored_name(),
+      ' 将在有马纪念后马上召开记者会',
+    ]);
+    await era.printAndWait('宣布回归赛场的消息，也许会造成社会的轩然大波吧');
+    await era.printAndWait([
+      '但这些后续与现在的 ',
+      me.get_couple_title(),
+      ' 两人没有半点关系',
+    ]);
+  };
+
   handlers[95 + 15] = async (tachyon, me, callname, flags) => {
     const coffee = get_chara_talk(25),
       t_call_c = sys_get_colored_callname(32, 25);
@@ -752,282 +852,5 @@ module.exports = (handlers) => {
     } else {
       await tachyon.say_and_wait('被你这种人期待……真是令人讨厌啊');
     }
-  };
-
-  handlers[95 + 35] = async (tachyon, me, callname, flags) => {
-    await print_event_name('因素·旁观者设置', tachyon);
-    await tachyon.say_and_wait(
-      '不过仔细想想……这大概是我第一次在观众席看比赛吧',
-    );
-    era.println();
-    await era.printAndWait(['今天是神户新闻杯']);
-    await era.printAndWait([
-      '是 ',
-      tachyon.get_colored_name(),
-      ' 受后辈之邀来观赛的日子',
-    ]);
-    era.printButton('「毕竟主要都是自己上场跑呢」', 1);
-    era.printButton('「毕竟主要都是看比赛录像呢」', 2);
-    await era.input();
-    await era.printAndWait([
-      '对 ',
-      tachyon.get_colored_name(),
-      ' 而言，除了自己的比赛外，应该就没有需要到赛场的情况了',
-    ]);
-    await era.printAndWait(
-      '比赛数据分析什么的，比起在观众席上看，看比赛结束后的录象能得到的数据还更多一些',
-    );
-    await era.printAndWait(
-      '因此今天确实是第一次，或者说第一次以观众的身份而非研究角度来观看比赛',
-    );
-    era.println();
-    await tachyon.say_and_wait('……实际在现场的感觉……果然很吵啊');
-    era.println();
-    await say_by_passer_by_and_wait('粉丝A', '加油！');
-    await say_by_passer_by_and_wait('粉丝B', '一定要赢啊！');
-    await say_by_passer_by_and_wait('粉丝C', [
-      '神户新闻杯虽然说是菊花赏的先行赛，但实际上2400米和阪神赛场举办这两点对菊花赏而言都不算是对菊花赏检验的效果……',
-    ]);
-    await say_by_passer_by_and_wait('粉丝C', [
-      '……因此其实很难说在神户新闻杯胜出的',
-      tachyon.get_uma_sex_title(),
-      '就一定能赢下菊花赏',
-    ]);
-    await say_by_passer_by_and_wait('粉丝D', '怎么忽然说这个');
-    era.println();
-    await tachyon.say_and_wait('这就是平常我比赛前观众席上的场景吗？');
-    era.printButton('「差不多吧，甚至更热闹一点」', 1);
-    await era.input();
-    await tachyon.say_and_wait(
-      '……也是，毕竟是G1。嘛，虽然能理解他们的心情，不过这个时候加油也是没用的吧',
-    );
-    era.printButton('「有没有用……不是这样算的」', 1);
-    era.printButton('「看下去就知道了」', 2);
-    await era.input();
-    await tachyon.say_and_wait('看下去什么的……哦？开始入闸了');
-    era.drawLine();
-    await tachyon.print_and_wait('那孩子进入闸门了');
-    await tachyon.print_and_wait([
-      '但说实话，这场比赛对 ',
-      tachyon.get_colored_name(),
-      ' 而言，其实需要关注的点不多',
-    ]);
-    await tachyon.print_and_wait('具有可能性的那孩子，必然是重中之重');
-    await tachyon.print_and_wait(
-      '……但除此之外，这场比赛不过是经典级限定的G2赛事',
-    );
-    era.println();
-    await tachyon.say_and_wait('可以说，没有输掉的可能性吧');
-    era.println();
-    await tachyon.print_and_wait('赛前人气也是理所当然的第一人气');
-    await tachyon.print_and_wait('天时地利人和，不可能输');
-    await tachyon.print_and_wait('赛前分析胜率高达97.46%');
-    era.println();
-    await tachyon.print_and_wait('然而……');
-    era.println();
-    await say_by_passer_by_and_wait('观众A', '不要输！');
-    await say_by_passer_by_and_wait('观众B', [
-      '加油！还有机会！从外侧超',
-      tachyon.sex,
-      '啊！',
-    ]);
-    await say_by_passer_by_and_wait('观众C', '不要放弃！一定可以追上！');
-    era.println();
-    await tachyon.print_and_wait([
-      '为什么还在为后面的',
-      tachyon.get_uma_sex_title(),
-      '加油',
-    ]);
-    await tachyon.print_and_wait('明显，已经追不上了不是吗');
-    await tachyon.print_and_wait('……不明白');
-    await tachyon.print_and_wait([
-      '不，能够理解，虽然徒劳但还是想要为自己支持的',
-      tachyon.get_uma_sex_title(),
-      '发出喊声，这种事情自己还是能够理解的',
-    ]);
-    await tachyon.print_and_wait(
-      '虽然说是疯狂科学家，但自己也不是什么不懂人性的机器人',
-    );
-    await tachyon.print_and_wait('但，为什么自己……');
-    era.println();
-    await say_by_passer_by_and_wait('解说', [
-      '追上来了！现在后面的',
-      tachyon.get_uma_sex_title(),
-      '追上来了！',
-    ]);
-    era.println();
-    await tachyon.say_and_wait('！');
-    await tachyon.say_and_wait('……加油');
-    await tachyon.say_and_wait('加油！不要输啊！');
-
-    era.printButton('「！」', 1);
-    await era.input();
-    await say_by_passer_by_and_wait(
-      '解说',
-      '冲—————线！第一名的是一号一闸—————',
-    );
-    era.drawLine();
-    await era.printAndWait([
-      tachyon.get_colored_name(),
-      ' 的应援声，被淹没在全场的喝采及加油声',
-    ]);
-    await era.printAndWait([
-      '全场能够听见的恐怕只有在',
-      tachyon.sex,
-      '身边的 ',
-      me.get_colored_name(),
-      '，以及……',
-    ]);
-    era.println();
-    await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
-      '前辈！我听见你的加油声了！谢谢前辈的应援……那个时候，感觉全身忽然涌起了力量！',
-    );
-    era.println();
-    await tachyon.say_and_wait('……呵呵，跑的很不错，未来还要继续努力下去');
-    await say_by_passer_by_and_wait(tachyon.get_uma_sex_title() + 'A', '是！');
-    era.println();
-    await era.printAndWait([
-      '神户新闻杯结束，',
-      me.get_colored_name(),
-      ' 和 ',
-      tachyon.get_colored_name(),
-      ' 离开了赛场',
-    ]);
-    era.println();
-    await tachyon.say_and_wait(
-      '……虽然理论上已经确定，但实际以场外人……或者，以当事人的身份来看，还是第一次',
-    );
-    await tachyon.say_and_wait(
-      '无论是其他孩子，还是那孩子，最后都……真的超越极限了',
-    );
-    era.println();
-    await era.printAndWait([
-      '今天的比赛上，好几名',
-      tachyon.get_uma_sex_title(),
-      '都是',
-    ]);
-    await era.printAndWait('超越了极限');
-    await era.printAndWait([
-      '超越了在赛前测出的，',
-      tachyon.sex,
-      '们的理论最大速度',
-    ]);
-    era.println();
-    await tachyon.say_and_wait([
-      '……',
-      callname,
-      '，你还记得之前粉丝感谢祭时的事吗？',
-    ]);
-
-    era.printButton('「速子是想着获得回报而为那孩子应援的吗？」', 1);
-    await era.input();
-    await era.printAndWait([me.get_colored_name(), ' 没有回答，只是反问了句']);
-    era.println();
-    await tachyon.say_and_wait('……呵呵');
-    await tachyon.say_and_wait('不是因为想被人听见，想产生互动的行为……');
-    await tachyon.say_and_wait(
-      '而是纯粹，将自己的心情、情绪发泄出来而高喊出声',
-    );
-    await tachyon.say_and_wait('换句话说，就是『感动』');
-    await tachyon.say_and_wait([
-      '观众被',
-      tachyon.get_uma_sex_title(),
-      '感动而发出欢呼，',
-      tachyon.get_uma_sex_title(),
-      '也被观众感动而超越自己的极限……',
-    ]);
-    await tachyon.say_and_wait(
-      '明明是好像左脚踩右脚，甚至永动机一样的不合理的概念，却实际的发生了',
-    );
-    await tachyon.say_and_wait(
-      '真的，果然这些都是在实验室里完全体验不到的啊，哈哈哈哈！',
-    );
-
-    era.printButton('「这样，算是『喜欢』上比赛了吗」', 1);
-    await era.input();
-    await tachyon.say_and_wait('……嗯，我也不知道');
-    era.println();
-    await era.printAndWait('……也是');
-    await era.printAndWait('毕竟说到底依然不是自己登上赛场去跑的');
-    await era.printAndWait('要说喜欢与不喜欢，或许还是难以说明吧');
-    await era.printAndWait([
-      '但无论如何，随着神户新闻杯的结束，有马纪念也已经快要进入眼前了',
-    ]);
-    await era.printAndWait('研究的尽头（Deadline），就在眼前了');
-    flags.wait_flag = get_attr_and_print_in_event(32, undefined, 10);
-  };
-
-  handlers[95 + 36] = async (tachyon, me, callname, flags) => {
-    await print_event_name('决心', tachyon);
-    era.println();
-    await tachyon.say_and_wait('哈啊……哈啊……');
-    era.println();
-    await tachyon.print_and_wait([
-      tachyon.get_colored_name(),
-      ' 在法国的训练场上奔跑着',
-    ]);
-    await tachyon.print_and_wait(['这几天是', callname, '回日本的日子']);
-    era.println();
-    await tachyon.say_and_wait(['接着就是，世界的最高峰，凯旋门赏……']);
-    era.println();
-    await tachyon.print_and_wait(['现在', me.sex, '应该还在疑惑吧']);
-    await tachyon.print_and_wait(['到底为什么要选择凯旋门赏']);
-    await tachyon.print_and_wait([
-      '抵达极限的彼方，这是 ',
-      tachyon.get_colored_name(),
-      ' 的梦想',
-    ]);
-    await tachyon.print_and_wait([
-      tachyon.sex,
-      '也一直以为，自己能够为了这个目标赌上一切，只要能够抵达，无论那个人是不是自己都无所谓',
-    ]);
-    await tachyon.print_and_wait([
-      '……但是，',
-      tachyon.sex,
-      '其实并没有自己想的那么无所谓',
-    ]);
-    era.println();
-    await tachyon.print_and_wait([
-      '本质上，',
-      tachyon.sex,
-      '还是想要奔跑的',
-      tachyon.get_uma_sex_title(),
-    ]);
-    await tachyon.print_and_wait([
-      '但是，',
-      tachyon.sex,
-      '也不想放弃超越极限的梦想',
-    ]);
-    await tachyon.print_and_wait(
-      '那么，该怎么办呢，该怎么做才有两全其美的办法',
-    );
-    await tachyon.print_and_wait([
-      '很简单，只要，',
-      tachyon.get_colored_name(),
-      ' 成为「极限」就好',
-    ]);
-    era.println();
-    await tachyon.print_and_wait([
-      '所以才选择 ',
-      race_infos[race_enum.prix_lat].get_colored_name(),
-    ]);
-    await tachyon.print_and_wait('选择世界的最高峰，最能代表极限的赛事');
-    await tachyon.print_and_wait([
-      '在这个舞台上，以自身来定义，',
-      tachyon.get_uma_sex_title(),
-      '的极限',
-    ]);
-    era.println();
-    await tachyon.say_and_wait('……呵呵');
-    era.println();
-    await tachyon.print_and_wait('在想到超越众人，化身极限的时候');
-    await tachyon.print_and_wait('身体忍不住的发热');
-    era.println();
-    await tachyon.say_and_wait('果然，还是渴望奔跑的啊……我');
-    era.println();
-    await tachyon.print_and_wait('决心已经燃起');
-    await tachyon.print_and_wait('那么便抛开一切，专注于眼前的胜利吧');
-    flags.wait_flag = get_attr_and_print_in_event(32, new Array(5).fill(5), 0);
   };
 };
