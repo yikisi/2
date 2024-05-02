@@ -1,9 +1,10 @@
 const era = require('#/era-electron');
 
-const { ero_hooks } = require('#/data/event/ero-hooks');
 const { count_part_stain_in_range } = require('#/system/ero/sys-calc-stain');
+
 const { part_enum } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
+const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /**
  * @param {number} chara_id

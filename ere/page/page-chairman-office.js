@@ -19,9 +19,9 @@ const CharaTitles = require('#/data/chara-titles');
 const { love_colors, relation_colors } = require('#/data/const.json');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_relation_info, get_love_info } = require('#/data/info-generator');
+const { get_love_info, get_relation_info } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { vehicle_verbs, vehicle_names } = require('#/data/move-const');
+const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
 async function page_chairman_office() {
   let flag_page = true,

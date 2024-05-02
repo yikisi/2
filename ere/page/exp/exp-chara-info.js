@@ -6,7 +6,7 @@ const {
   love_colors,
   relation_colors,
 } = require('#/data/const.json');
-const { get_relation_info, get_love_info } = require('#/data/info-generator');
+const { get_love_info, get_relation_info } = require('#/data/info-generator');
 
 /** @param {CharaTalk} chara */
 function exp_chara_info(chara) {

@@ -1,7 +1,7 @@
 const era = require('#/era-electron');
 
 const { part_enum } = require('#/data/ero/part-const');
-const { ero_actions, ero_action_tags } = require('#/data/event/ero-actions');
+const { ero_action_tags, ero_actions } = require('#/data/event/ero-actions');
 const EroHookTag = require('#/data/event/ero-hook-tag');
 
 /**

@@ -1,10 +1,10 @@
 const era = require('#/era-electron');
 
-const {
-  get_penis_size,
-  check_satisfied,
-} = require('#/system/ero/sys-calc-ero-status');
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
+const {
+  check_satisfied,
+  get_penis_size,
+} = require('#/system/ero/sys-calc-ero-status');
 const check_ero_enabled = require('#/system/ero/sys-check-ero-action');
 const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
 const { get_characters_in_train } = require('#/system/ero/sys-prepare-ero');
@@ -27,15 +27,15 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const {
   buff_colors,
-  skill_colors,
   palam_colors,
+  skill_colors,
 } = require('#/data/color-const');
 const {
   attr_background_colors,
+  hair_colors,
   love_colors,
   mark_colors,
   relation_colors,
-  hair_colors,
 } = require('#/data/const.json');
 const { mark_abbr, part_abbr } = require('#/data/ero/ero-alias.json');
 const { lust_border, lust_from_palam } = require('#/data/ero/orgasm-const');
@@ -48,11 +48,11 @@ const {
 } = require('#/data/event/ero-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
-  get_relation_info,
-  get_love_info,
   get_ero_status,
+  get_love_info,
+  get_relation_info,
 } = require('#/data/info-generator');
-const { location_name, location_enum } = require('#/data/locations');
+const { location_enum, location_name } = require('#/data/locations');
 const { chara_has_ero_image } = require('#/data/other-const');
 
 function get_chr(img_name) {

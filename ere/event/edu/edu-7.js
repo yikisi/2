@@ -1,6 +1,10 @@
 const era = require('#/era-electron');
 
 const {
+  begin_and_init_ero,
+  end_ero_and_show_result,
+} = require('#/system/ero/sys-prepare-ero');
+const {
   sys_change_motivation,
   sys_change_pressure,
 } = require('#/system/sys-calc-base-cflag');
@@ -8,10 +12,6 @@ const {
   sys_get_callname,
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
-const {
-  begin_and_init_ero,
-  end_ero_and_show_result,
-} = require('#/system/ero/sys-prepare-ero');
 
 const print_ero_page = require('#/page/page-ero');
 

@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  sys_like_chara,
   sys_get_callname,
+  sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 

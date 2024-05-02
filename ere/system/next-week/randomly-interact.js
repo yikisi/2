@@ -5,8 +5,8 @@ const {
   sys_change_pressure,
 } = require('#/system/sys-calc-base-cflag');
 const {
-  sys_get_debuff,
   sys_check_train_enabled,
+  sys_get_debuff,
 } = require('#/system/sys-calc-chara-param');
 const { get_success_base_reward } = require('#/system/sys-train-uma');
 
@@ -14,10 +14,10 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const {
-  fail_sta_border,
-  time_cost,
   attr_enum,
   attr_names,
+  fail_sta_border,
+  time_cost,
 } = require('#/data/train-const');
 
 /** @param {number[]} in_team_list */

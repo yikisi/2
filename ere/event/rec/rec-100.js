@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { yes } = require('#/data/event/recruit-flags');
 
 /**

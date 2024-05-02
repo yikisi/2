@@ -1,14 +1,14 @@
 const era = require('#/era-electron');
 
+const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const {
   sys_like_chara,
   sys_punish_unfaithful,
 } = require('#/system/sys-calc-chara-others');
-const { add_juel } = require('#/system/ero/sys-calc-juel');
 
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
+const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_random_name = require('#/utils/naming');
@@ -18,8 +18,8 @@ const { part_names } = require('#/data/ero/part-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
-  ero_hooks,
   ero_action_names,
+  ero_hooks,
   ero_tagged_hooks,
 } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');

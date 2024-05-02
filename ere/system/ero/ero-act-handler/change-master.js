@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  check_satisfied,
   change_ero_master,
+  check_satisfied,
 } = require('#/system/ero/sys-calc-ero-status');
 const { get_characters_in_train } = require('#/system/ero/sys-prepare-ero');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');

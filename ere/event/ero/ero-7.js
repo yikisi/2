@@ -1,8 +1,10 @@
 const era = require('#/era-electron');
 
-const { ero_hooks } = require('#/data/event/ero-hooks');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @type {Record<string,function(chara_id:number,hook:HookArg,extra_flag:*):Promise<*>>} */
 const handlers = {};

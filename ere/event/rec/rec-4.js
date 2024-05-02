@@ -4,11 +4,11 @@ const { add_event, cb_enum } = require('#/event/queue');
 
 const CharaTalk = require('#/utils/chara-talk');
 
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 /**
  * 丸善斯基的招募事件，id=4

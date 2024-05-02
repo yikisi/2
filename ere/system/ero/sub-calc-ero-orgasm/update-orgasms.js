@@ -14,14 +14,14 @@ const { log_max_wp } = require('#/utils/value-utils');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const {
-  wp_coefficient,
   max_absent_mind_time,
   time_resume_ratio,
+  wp_coefficient,
 } = require('#/data/ero/orgasm-const');
 const {
   part_enum,
-  pleasure_list,
   part_names,
+  pleasure_list,
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');

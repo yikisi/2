@@ -2,8 +2,8 @@ const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
-  sys_love_uma,
   sys_like_chara,
+  sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
@@ -11,9 +11,10 @@ const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { gacha } = require('#/utils/list-utils');
+
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const { attr_enum } = require('#/data/train-const');
-const { gacha } = require('#/utils/list-utils');
 
 /**
  * @param {HookArg} hook

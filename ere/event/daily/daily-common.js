@@ -1,12 +1,12 @@
 const era = require('#/era-electron');
 
 const call_check_script = require('#/system/script/sys-call-check');
+const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
-const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const { sys_change_money } = require('#/system/sys-calc-flag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 

@@ -2,8 +2,8 @@ const era = require('#/era-electron');
 
 const update_marks = require('#/system/ero/calc-sex/update-marks');
 const change_master = require('#/system/ero/ero-act-handler/change-master');
-const print_touch_info = require('#/system/ero/ero-act-handler/print-touch-info');
 const print_stain_info = require('#/system/ero/ero-act-handler/print-stain-info');
+const print_touch_info = require('#/system/ero/ero-act-handler/print-touch-info');
 const take_off_ero_item = require('#/system/ero/ero-act-handler/take-off-ero-item');
 const use_ero_item = require('#/system/ero/ero-act-handler/use-ero-item');
 const use_ero_medicine = require('#/system/ero/ero-act-handler/use-ero-medicine');
@@ -12,17 +12,17 @@ const use_lubricating_fluid = require('#/system/ero/ero-act-handler/use-lubricat
 const sys_auto_rape = require('#/system/ero/sub/sys-auto-rape');
 const sys_auto_react = require('#/system/ero/sub/sys-auto-react');
 const {
-  get_penis_size,
   check_want_to_escape,
+  get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
-const { update_juels, add_juel } = require('#/system/ero/sys-calc-juel');
+const { add_juel, update_juels } = require('#/system/ero/sys-calc-juel');
 const check_orgasm = require('#/system/ero/sys-calc-orgasm');
 const { add_palam } = require('#/system/ero/sys-calc-palam');
 const { set_stain } = require('#/system/ero/sys-calc-stain');
 const sys_check_ero_enabled = require('#/system/ero/sys-check-ero-action');
 const {
-  update_juel_buff,
   get_characters_in_train,
+  update_juel_buff,
 } = require('#/system/ero/sys-prepare-ero');
 const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
 
@@ -32,21 +32,21 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const print_exp_page = require('#/page/page-exp');
 
+const { tequip_parts } = require('#/data/ero/item-const');
+const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { lust_palam_border } = require('#/data/ero/orgasm-const');
 const {
   part_enum,
+  part_gifts,
   part_names,
   part_touch,
   pleasure_list,
-  part_gifts,
 } = require('#/data/ero/part-const');
+const { stain_enum } = require('#/data/ero/stain-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
-const { tequip_parts } = require('#/data/ero/item-const');
-const { base_emotion_juel } = require('#/data/ero/juel-const');
-const { stain_enum } = require('#/data/ero/stain-const');
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 let shown = true;
 

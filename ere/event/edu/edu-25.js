@@ -295,11 +295,7 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
     me = get_chara_talk(0);
   edu_marks.our_taste = 1;
   await print_event_name('只属于我们的口味', coffee);
-  await era.printAndWait([
-    '在 ',
-    coffee.get_colored_name(),
-    ' 一起外出后，回到特雷森的校门时——',
-  ]);
+  await era.printAndWait(['在和 ', coffee.get_colored_name(), ' 一起回去时——']);
   await coffee.say_and_wait(['……', callname, '。']);
   await coffee.say_and_wait('如果你愿意的话，等一下……要不要喝杯咖啡呢……');
   await coffee.say_and_wait(['我有些……想让 ', callname, ' 你尝尝看的豆子……']);

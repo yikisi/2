@@ -6,8 +6,8 @@ const {
   sys_change_motivation,
 } = require('#/system/sys-calc-base-cflag');
 const {
-  sys_like_chara,
   sys_get_callname,
+  sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');

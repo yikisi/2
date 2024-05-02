@@ -1,7 +1,9 @@
 const era = require('#/era-electron');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 
 module.exports = async () => {

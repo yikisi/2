@@ -3,15 +3,15 @@ const { sort_list } = require('#/utils/list-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const {
-  mod_attr_stamina_style,
-  mod_attr_intelligence_adapt_style,
-
-  mod_velocity_style,
-  mod_velocity_final_adapt_distance,
+  mod_acceleration_adapt_distance,
+  mod_acceleration_adapt_ground,
 
   mod_acceleration_style,
-  mod_acceleration_adapt_ground,
-  mod_acceleration_adapt_distance,
+  mod_attr_intelligence_adapt_style,
+
+  mod_attr_stamina_style,
+  mod_velocity_final_adapt_distance,
+  mod_velocity_style,
 } = require('#/data/race/race-const.json');
 const { attr_enum } = require('#/data/train-const');
 

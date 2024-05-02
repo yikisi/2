@@ -6,13 +6,13 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
 const {
-  item_names,
+  get_item_action,
   item_enum,
+  item_names,
   medicine_enum,
   medicine_names,
-  get_item_action,
 } = require('#/data/ero/item-const');
-const { part_names4item, part_names } = require('#/data/ero/part-const');
+const { part_names, part_names4item } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /**

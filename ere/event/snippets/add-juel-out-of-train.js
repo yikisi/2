@@ -1,7 +1,7 @@
-const { update_juels, add_juel } = require('#/system/ero/sys-calc-juel');
+const { add_juel, update_juels } = require('#/system/ero/sys-calc-juel');
 const {
-  end_ero_and_train,
   begin_and_init_ero,
+  end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
 
 const { palam2juel } = require('#/data/ero/orgasm-const');

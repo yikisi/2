@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const { merge_stain } = require('#/system/ero/sys-calc-stain');
 
 const EroBodyPart = require('#/data/ero/body-part');
-const { part_touch, touch_list, part_enum } = require('#/data/ero/part-const');
+const { part_enum, part_touch, touch_list } = require('#/data/ero/part-const');
 
 /**
  * @param {number} chara_id

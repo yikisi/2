@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  get_penis_size,
   check_lubrication,
+  get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
 const { count_part_stain_in_range } = require('#/system/ero/sys-calc-stain');
 

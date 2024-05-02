@@ -488,8 +488,8 @@ handlers[event_hooks.school_atrium] = async (
       );
       await era.printAndWait(`
     虽然心中是这么吐槽但${me.name}还是沉默着和${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }一起探索着流行(二十年前)的CD店`);
+      chara_talk.sex_code - 1 ? '她' : '他'
+    }一起探索着流行(二十年前)的CD店`);
       await era.printAndWait(`
     一段时间后，${me.name}和${chara_talk.name}确认了这条街道所有的店铺.`);
       await chara_talk.say_and_wait(
@@ -507,8 +507,8 @@ handlers[event_hooks.school_atrium] = async (
       );
       await era.printAndWait(`
     第二天，${chara_talk.name}兴奋地告诉${me.name}后辈们接受了${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }的新潮流.`);
+      chara_talk.sex_code - 1 ? '她' : '他'
+    }的新潮流.`);
       get_attr_and_print_in_event(4, [10, 0, 0, 0, 0], 0) &&
         (await era.waitAnyKey());
     } else {
@@ -522,8 +522,8 @@ handlers[event_hooks.school_atrium] = async (
       await chara_talk.say_and_wait(`好！我会尽情享受和后辈们的出游的！`);
       await era.printAndWait(`
     后来，${me.name}询问${chara_talk.name}关于上次出游的事情，${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }似乎和后辈们交流了不少有关潮流的情报。`);
+      chara_talk.sex_code - 1 ? '她' : '他'
+    }似乎和后辈们交流了不少有关潮流的情报。`);
       await era.printAndWait(`
     这就是具有独特品味充满魅力的${chara_talk.name}.`);
       get_attr_and_print_in_event(4, [0, 0, 20, 0, 0], 0) &&
@@ -661,14 +661,14 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
     era.printButton('「(店主是特意的这么放的吗)」', 1);
     await chara_talk.say_and_wait(`
   ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，我来喂${
-      me.name
-    }吧？`);
+    me.name
+  }吧？`);
     await era.printAndWait(`
   斜射在${chara_talk.name}后背的光线遮住了${
-      chara_talk.sex_code - 1 ? '她' : '他'
-    }的表情，耳朵的不停抖动似乎正预示着${
-      chara_talk.sex_code - 1 ? '她' : '他'
-    }内心的不平静.`);
+    chara_talk.sex_code - 1 ? '她' : '他'
+  }的表情，耳朵的不停抖动似乎正预示着${
+    chara_talk.sex_code - 1 ? '她' : '他'
+  }内心的不平静.`);
     await era.printAndWait(`
   ${chara_talk.name}正等着${me.name}的答复.`);
     era.printButton('「(无言地张开嘴)」', 1);
@@ -693,8 +693,8 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
       await era.input();
       await era.printAndWait(`
   ${me.name}努力平复心中的激动,从圣代里挖出一大勺，颤颤惊惊的放进了${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }的樱桃般的小嘴里.`);
+    chara_talk.sex_code - 1 ? '她' : '他'
+  }的樱桃般的小嘴里.`);
       await era.printAndWait(`
   ${
     chara_talk.sex_code - 1 ? '她' : '他'
@@ -707,8 +707,8 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
  嘴角微微凹下的${chara_talk.sex_code - 1 ? '她' : '他'}，隐隐间带着一丝笑意.`);
       await era.printAndWait(`
  之后${me.name}和${chara_talk.sex_code - 1 ? '她' : '他'}默默无言,${
-        me.name
-      }一勺我一勺地喂对方吃下了自己勺中的圣代.`);
+   me.name
+ }一勺我一勺地喂对方吃下了自己勺中的圣代.`);
       await era.printAndWait(`
  黄昏带来的淡淡忧伤感似乎也被${
    chara_talk.sex_code - 1 ? '她' : '他'
@@ -749,8 +749,8 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
   于是${me.name}头也不回地离开了这里，走向了${chara_talk.name}所在的门口.`);
       await chara_talk.say_and_wait(`
   ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'},怎么这么久啊，我带${
-        me.name
-      }出去吧,毕竟这里没有熟悉的人引导是很容易迷路的呦！`);
+    me.name
+  }出去吧,毕竟这里没有熟悉的人引导是很容易迷路的呦！`);
       await era.printAndWait(`
 在七拐八拐后从商业街熙熙攘攘的人流之中窜出属实让${me.name}大感意外.没花多久坐上小塔后,${me.name}开始与${chara_talk.name}闲聊起来了.`);
       await chara_talk.say_and_wait(`
@@ -1063,8 +1063,8 @@ handlers[event_hooks.school_rooftop] = async (
     );
     await era.printAndWait(`
  ${me.name}看向${chara_talk.name}，${
-      chara_talk.sex_code - 1 ? '她' : '他'
-    }似乎有想法了.`);
+   chara_talk.sex_code - 1 ? '她' : '他'
+ }似乎有想法了.`);
     await chara_talk.say_and_wait(`
  那么，来教${me.name}必胜法吧♪？`);
     await chara_talk.say_and_wait(`
@@ -1082,10 +1082,10 @@ handlers[event_hooks.school_rooftop] = async (
   OK！那就采取A计划吧！`);
       await chara_talk.say_and_wait(`
   米浴${me.name}不是很擅长忍耐吗？那么${me.name}走过去让对面注意到${
-        me.name
-      }的存在，然后${me.name}与${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }保持一个相对稳定的距离，等到对方体力耗尽的时候就不得不停下来了.`);
+    me.name
+  }的存在，然后${me.name}与${
+    chara_talk.sex_code - 1 ? '她' : '他'
+  }保持一个相对稳定的距离，等到对方体力耗尽的时候就不得不停下来了.`);
       await chara_30.say_and_wait('这，这种事情.....米浴能办到吗？');
       await chara_talk.say_and_wait(`
   绝对能办到！小米浴做事认真又努力，意志力又很强，而且是我自豪地后辈哦！`);

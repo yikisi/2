@@ -1,9 +1,9 @@
 const era = require('#/era-electron');
 
 const {
+  sys_get_callname,
   sys_get_colored_callname,
   sys_like_chara,
-  sys_get_callname,
 } = require('#/system/sys-calc-chara-others');
 
 const {
@@ -17,7 +17,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const RaceHistory = require('#/data/race/model/race-history');
-const { race_infos, race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
  * @param {CharaTalk} urara

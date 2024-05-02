@@ -7,8 +7,8 @@ const {
 const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
 const {
   begin_and_init_ero,
-  init_ero,
   end_ero_and_show_result,
+  init_ero,
 } = require('#/system/ero/sys-prepare-ero');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 

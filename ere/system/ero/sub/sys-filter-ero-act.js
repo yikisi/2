@@ -1,22 +1,22 @@
 const era = require('#/era-electron');
 
 const {
+  check_erect,
   check_lubrication,
   check_virgin_enabled,
-  check_erect,
   get_penis_size,
   get_sex_acceptable,
 } = require('#/system/ero/sys-calc-ero-status');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { part_enum } = require('#/data/ero/part-const');
-const {
-  ero_hook_tags,
-  ero_tagged_hooks,
-  ero_actions,
-  ero_hooks,
-} = require('#/data/event/ero-hooks');
 const EroHookTag = require('#/data/event/ero-hook-tag');
+const {
+  ero_actions,
+  ero_hook_tags,
+  ero_hooks,
+  ero_tagged_hooks,
+} = require('#/data/event/ero-hooks');
 const { get_breast_cup } = require('#/data/info-generator');
 
 /**

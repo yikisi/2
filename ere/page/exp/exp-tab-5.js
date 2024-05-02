@@ -12,9 +12,9 @@ const { join_list } = require('#/utils/list-utils');
 
 const { sex_colors } = require('#/data/color-const');
 const {
-  penis_desc,
   hair_desc,
   penis_colors,
+  penis_desc,
 } = require('#/data/ero/status-const');
 const { growth_info, unknown_info } = require('#/data/exp-const');
 

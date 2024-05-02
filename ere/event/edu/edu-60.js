@@ -9,15 +9,15 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const quick_into_sex = require('#/event/snippets/quick-into-sex');
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { location_enum } = require('#/data/locations');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const NNEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-60');
 const event_hooks = require('#/data/event/event-hooks');
+const { location_enum } = require('#/data/locations');
 
 const handlers = {};
 

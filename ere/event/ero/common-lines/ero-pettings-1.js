@@ -3,8 +3,8 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const {
-  ask_action,
   after_refusing_by_defender,
+  ask_action,
 } = require('#/event/ero/common-lines/snippets');
 
 const { part_enum } = require('#/data/ero/part-const');

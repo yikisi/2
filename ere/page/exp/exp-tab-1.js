@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  remove_end_line_breaks,
   push_link_break,
+  remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
 const { join_list } = require('#/utils/list-utils');

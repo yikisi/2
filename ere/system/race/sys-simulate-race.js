@@ -7,12 +7,12 @@ const startAcceleration = 24;
 //上坡时基础加速度为三分之二
 const raceAcceModUphill = 2 / 3;
 
+const RaceInfo = require('#/data/race/model/race-info');
 const {
-  mod_stamina_cost_mess_grass,
   mod_stamina_cost_mess_dirt,
+  mod_stamina_cost_mess_grass,
   raceDecel,
 } = require('#/data/race/race-sim-const.js');
-const RaceInfo = require('#/data/race/model/race-info');
 
 /**
  * @param {PseudoUma[]} list_chara

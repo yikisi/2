@@ -1,9 +1,9 @@
 const era = require('#/era-electron');
 
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
-const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 const { get_action_base_check } = require('#/system/ero/sys-calc-ero-status');
+const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { count_part_stain_in_range } = require('#/system/ero/sys-calc-stain');
 
 const add_attr_exp = require('#/event/ero/snippets/add-attr-exp');

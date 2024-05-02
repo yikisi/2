@@ -4,16 +4,16 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
-const check_aim_race = require('#/event/snippets/check-aim-race');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
-const { cb_enum, add_event } = require('#/event/queue');
+const { add_event, cb_enum } = require('#/event/queue');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const check_stages = require('#/data/event/check-stages');
 const { attr_change_colors } = require('#/data/color-const');
+const check_stages = require('#/data/event/check-stages');
 const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');

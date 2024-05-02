@@ -3,29 +3,29 @@ const era = require('#/era-electron');
 const sys_change_hair = require('#/system/chara/sys-change-hair');
 
 const CharaTalk = require('#/utils/chara-talk');
-const { get_random_entry, gacha, join_list } = require('#/utils/list-utils');
+const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { sex_colors, buff_colors } = require('#/data/color-const');
+const CharaTitles = require('#/data/chara-titles');
+const { buff_colors, sex_colors } = require('#/data/color-const');
 const { hair_colors, skin_colors } = require('#/data/const.json');
 const {
-  skin_desc,
-  penis_colors,
   chara_desc,
-  pregnant_stage_enum,
   human_sex_title,
+  penis_colors,
   penis_desc,
+  pregnant_stage_enum,
+  skin_desc,
 } = require('#/data/ero/status-const');
 const { yes } = require('#/data/event/recruit-flags');
 const {
+  get_breast_cup,
   get_filtered_talents,
   get_talent,
   get_xp,
-  get_breast_cup,
 } = require('#/data/info-generator');
-const { top_hairs, front_hairs, back_hairs } = require('#/data/other-const');
+const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');
-const CharaTitles = require('#/data/chara-titles');
 
 const body_hair_type = ['天生光滑', '普通类型', '生长快而硬'];
 const chara_full_desc = [

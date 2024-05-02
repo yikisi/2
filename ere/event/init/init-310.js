@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { get_random_value } = require('#/utils/value-utils');
 
-const { attr_names, adaptability_names } = require('#/data/train-const');
+const { adaptability_names, attr_names } = require('#/data/train-const');
 
 /**
  * 光辉致意的初始化，角色编号310
