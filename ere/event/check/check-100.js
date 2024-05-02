@@ -14,9 +14,27 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
+/** @type {Record<string,function(Record<string,any>)>} */
 const handlers = {};
+
+handlers[check_stages.aim_check] = () => {
+  const buffer = [],
+    races = new RaceHistory(100).get();
+  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+  buffer.push(check_aim_and_get_entry(races, race_enum.japa_dir, 1, 5));
+  buffer.push(check_aim_and_get_entry(races, race_enum.siri_sta, 1, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.toky_dai, 1, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.kawa_kin, 2, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.kash_kin, 2, 1));
+  buffer.push(check_aim_and_get_entry(races, race_enum.teio_sho, 2, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.jbc_cls, 2, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.cham_cup, 2, 3));
+  buffer.push(check_aim_and_get_entry(races, race_enum.toky_dai, 2, 1));
+  return buffer;
+};
 
 const aim_races = {};
 
@@ -31,18 +49,17 @@ aim_races[get_aim_race_index(race_enum.jbc_cls, 2)] = 2;
 aim_races[get_aim_race_index(race_enum.cham_cup, 2)] = 2;
 aim_races[get_aim_race_index(race_enum.toky_dai, 2)] = 2;
 
-/** @param {{edu_weeks:number,race:number}} extra_flag */
-handlers[check_stages.aim_race] = (extra_flag) =>
-  aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
-  aim_races[extra_flag.race];
+/**
+ * @param {number} edu_weeks
+ * @param {number} race
+ */
+handlers[check_stages.aim_race] = ({ edu_weeks, race }) =>
+  aim_races[`${edu_weeks}_${race}`] || aim_races[race];
 
 handlers[check_stages.next_week] = () => {
-  era.set('callname:100:0', `小${get_chara_talk(0).actual_name}`);
-  era.set('callname:0:0', `我`);
   const edu_weeks = era.get('cflag:100:育成回合计时');
   if (edu_weeks < 3 * 48) {
     const event_obj_special = new EventObject(100, cb_enum.edu, true);
-
     switch (edu_weeks) {
       case 47 + 1:
         add_event(event_hooks.week_start, event_obj_special);
@@ -66,31 +83,16 @@ handlers[check_stages.next_week] = () => {
   }
 };
 
-handlers[check_stages.aim_check] = function () {
-  const buffer = [],
-    races = era.get('cflag:100:育成成绩');
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-  buffer.push(check_aim_and_get_entry(races, race_enum.japa_dir, 1, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.siri_sta, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.toky_dai, 1, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.kawa_kin, 2, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.kash_kin, 2, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.teio_sho, 2, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.jbc_cls, 2, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.cham_cup, 2, 3));
-  buffer.push(check_aim_and_get_entry(races, race_enum.toky_dai, 2, 1));
-  return buffer;
-};
-
 handlers[check_stages.palace_check] = function () {
   common_palace_check(100);
   return handlers[check_stages.aim_check]();
 };
 
+handlers[check_stages.personal_titles] = () => ['坚韧不拔的熏银'];
+
 /** @param {{aim_check:boolean,titles:{n:string,c:string}[]}} extra_flag */
 handlers[check_stages.title_check] = (extra_flag) => {
-  /** @type {Record<string,{race:number,rank:number}>} */
-  const races = era.get('cflag:100:育成成绩');
+  const races = new RaceHistory(100).get();
   if (
     check_aim_race(races, race_enum.toky_dai, 1, 1) &&
     check_aim_race(races, race_enum.kash_kin, 2, 1) &&
@@ -105,8 +107,6 @@ handlers[check_stages.title_check] = (extra_flag) => {
     extra_flag.aim_check && sys_personal_achievement.set(100, 1);
   }
 };
-
-handlers[check_stages.personal_titles] = () => ['坚韧不拔的熏银'];
 
 /**
  * @param {number} stage_id

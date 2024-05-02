@@ -507,13 +507,12 @@ handlers[event_hooks.school_rooftop] = (chara_id) =>
   ]);
 
 handlers[event_hooks.out_river] = async (chara_id, hook) => {
-  const temp = await select_action_around_river();
-  hook.arg = !!temp;
+  hook.arg = !!(await select_action_around_river());
   await era.printAndWait([
     get_chara_talk(0).get_colored_name(),
     ' 与 ',
     get_chara_talk(chara_id).get_colored_name(),
-    !temp
+    !hook.arg
       ? ' 一起来到河边钓鱼，希望能钓到大丰收。'
       : ' 一起来到河边散步，今天也是好心情呢。',
   ]);

@@ -240,13 +240,13 @@ async function love_74(chara_talk) {
     );
     await me.say_and_wait(
       `——是啊，鼓起勇气吧，${me.actual_name}，鼓起勇气吧。`,
-      1,
+      true,
     );
     await era.printAndWait('就像奇锐骏那样——努力、勇敢，坚韧不拔。');
     await era.printAndWait('心在左边砰砰的跳，滴答滴答，指尖在悄悄的靠近。');
     await me.say_and_wait(
       `——是啊，面向${chara_talk.sex}吧，${me.actual_name}，面向${chara_talk.sex}吧。`,
-      1,
+      true,
     );
     await era.printAndWait('滴答声中，奇锐骏抬着头。');
     await era.printAndWait(
@@ -254,7 +254,7 @@ async function love_74(chara_talk) {
     );
     await me.say_and_wait(
       `——告诉${chara_talk.sex}吧，告诉${chara_talk.sex}吧。`,
-      1,
+      true,
     );
     await era.printAndWait(
       `是啊，告诉${chara_talk.sex}吧，${me.actual_name}。`,
@@ -265,7 +265,7 @@ async function love_74(chara_talk) {
     );
     await me.say_and_wait(
       `——告诉${chara_talk.sex}吧，告诉${chara_talk.sex}吧。`,
-      1,
+      true,
     );
     era.printButton('「我、我……我喜——」', 1);
     await era.input();
@@ -292,7 +292,7 @@ async function love_74(chara_talk) {
     );
     era.printButton('「我、我……」', 1);
     await era.input();
-    await chara_talk.say_and_wait(`不要急，小${me.actual_name}。慢慢说吧~`);
+    await chara_talk.say_and_wait(`不要急，小${me.actual_name}。慢慢说吧～`);
     era.printButton('「我也——我也喜欢你，奇锐骏！」', 1);
     await era.input();
     await era.printAndWait('————————');
@@ -354,7 +354,7 @@ async function love_89_1(chara_talk) {
   await era.printAndWait(
     `人来人往的中庭，想要在这里忍受其他${chara_talk.get_uma_sex_title()}的视线进行约会，恐怕需要很强大的毅力……`,
   );
-  await chara_talk.say_and_wait('啊……要在这里约会吗？我不介意的哦~');
+  await chara_talk.say_and_wait('啊……要在这里约会吗？我不介意的哦～');
   await era.printAndWait(
     `奇锐骏似乎并不在乎周围${chara_talk.get_uma_sex_title()}的目光……但没有勇气真正踏出那一步的其实是自己。`,
   );
@@ -372,13 +372,13 @@ async function love_89_1(chara_talk) {
   await era.printAndWait('…………');
   await era.printAndWait('空间转发者：「啊，快看快看，有人在中庭接吻耶。」');
   await era.printAndWait(
-    '小红马用户：「呜哇，尊嘟假嘟！？快拍下来，发个博先~」',
+    '小红马用户：「呜哇，尊嘟假嘟！？快拍下来，发个博先～」',
   );
   await era.printAndWait(
     `某关西${chara_talk.get_uma_sex_title()}：「好肉麻的两公婆，还是我校的${chara_talk.get_uma_sex_title()}，这样衰了。」`,
   );
   await era.printAndWait('…………');
-  await chara_talk.say_and_wait(`唔~~~哈……${callname[0]}，${callname}——`);
+  await chara_talk.say_and_wait(`唔～～～哈……${callname[0]}，${callname}——`);
   await era.printAndWait('怀中的奇锐骏，脸颊羞红，眼神迷离得看着自己。');
   await era.printAndWait('不似拒绝，却也不像同意，倒似欲拒还迎……');
   await era.printAndWait(
@@ -400,7 +400,7 @@ async function love_89_2(chara_talk) {
   await era.printAndWait(
     `人来人往的中庭，想要在这里忍受其他${chara_talk.get_uma_sex_title()}的视线进行约会，恐怕需要很强大的毅力……`,
   );
-  await chara_talk.say_and_wait('啊……要在这里约会吗？我不介意的哦~');
+  await chara_talk.say_and_wait('啊……要在这里约会吗？我不介意的哦～');
   await era.printAndWait(
     `奇锐骏似乎并不在乎周围${chara_talk.get_uma_sex_title()}的目光……但没有勇气真正踏出那一步的其实是自己。`,
   );
@@ -426,7 +426,7 @@ async function love_89_2(chara_talk) {
   await era.printAndWait('…………');
   await era.printAndWait('空间转发者：「啊，快看快看，有人在中庭接吻耶。」');
   await era.printAndWait(
-    '小红马用户：「呜哇，尊嘟假嘟！？快拍下来，发个博先~」',
+    '小红马用户：「呜哇，尊嘟假嘟！？快拍下来，发个博先～」',
   );
   await era.printAndWait(
     `某关西${chara_talk.get_uma_sex_title()}：「好肉麻的两公婆，还是我校的${chara_talk.get_uma_sex_title()}，这样衰了。」`,
@@ -451,7 +451,9 @@ async function love_89_2(chara_talk) {
   await era.printAndWait('身体总能涌现出一种，好似使不完的力量。');
   era.println();
   era.set(`talent:0:钢之意志`, 1);
-  if (era.set(`talent:100:钢之意志`) === 0) era.set(`talent:100:钢之意志`, 1);
+  if (era.get(`talent:100:钢之意志`) === 0) {
+    era.set(`talent:100:钢之意志`, 1);
+  }
   await sys_love_uma_in_event(100);
   return false;
 }
@@ -460,7 +462,7 @@ async function love_89_3(chara_talk) {
   await era.printAndWait(
     `人来人往的中庭，想要在这里忍受其他${chara_talk.get_uma_sex_title()}的视线进行约会，恐怕需要很强大的毅力……`,
   );
-  await chara_talk.say_and_wait('啊……要在这里约会吗？我不介意的哦~');
+  await chara_talk.say_and_wait('啊……要在这里约会吗？我不介意的哦～');
   await era.printAndWait(
     `奇锐骏似乎并不在乎周围${chara_talk.get_uma_sex_title()}的目光……但没有勇气真正踏出那一步的其实是自己。`,
   );
@@ -613,7 +615,7 @@ async function love_99(chara_talk) {
   );
   await era.printAndWait(`摇曳的双耳，滑弄于${sys_get_callname(0, 0)}的嘴边。`);
   await era.printAndWait('粉红的尤物蠕动着、渴望着对深灰色的吞咽——');
-  quick_into_sex(100);
+  await quick_into_sex(100);
   await era.printAndWait(
     '炽热的液体交换后，不顾仍在喷涌的秘泉，奇锐骏便穿上了包裹其下的白布。',
   );
