@@ -127,7 +127,7 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
     }
     await print_event_name('夏季合宿', chara_talk);
     await era.printAndWait(
-      '从今天开始“夏季集训”──为了提升实力的强化训练即将展开。',
+      '从今天开始「夏季集训」──为了提升实力的强化训练即将展开。',
     );
     await chara_talk.say_and_wait('好热……');
     await chara_talk.say_and_wait(
@@ -136,7 +136,7 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
     await chara_talk.say_and_wait(
       '害我瞬间就开始担心自己能不能平安撑到最后了。',
     );
-    era.printButton('「还得参加“小仓纪念”，非加油不可啊」', 1);
+    era.printButton('「还得参加「小仓纪念」，非加油不可啊」', 1);
     await era.input();
     await chara_talk.say_and_wait(
       '不是啦，问题就在这啊。竟然要在集训中途去比赛，行程也太丰富了。',
@@ -181,7 +181,7 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
       '又到了集训的季节。优秀素质不同于去年，展现了积极的态度。',
     );
     await era.printAndWait(
-      '为了迎接“天皇赏（秋）”……以及之后即将挑战的“有马纪念”──',
+      '为了迎接「天皇赏（秋）」……以及之后即将挑战的「有马纪念」──',
     );
     await chara_talk.say_and_wait('天皇赏秋么……');
     await era.printAndWait(`${chara_talk.sex}开始了正视自己的热血夏天！`);
@@ -265,7 +265,7 @@ handlers[event_hooks.out_start] = async (hook, _, event_object) => {
 
     await era.printAndWait('今天优秀素质不会出现。因为──');
     await era.printAndWait(
-      '“有马纪念”后，优秀素质向目白麦昆与目白莱恩请教了实力如此坚强的原因。',
+      '「有马纪念」后，优秀素质向目白麦昆与目白莱恩请教了实力如此坚强的原因。',
     );
     await era.printAndWait(
       `今天${chara_talk.sex}受到两位邀请，去学习坚强的原因了。──或许可以说是去目白家留学一天吧。`,
@@ -306,7 +306,7 @@ handlers[event_hooks.out_start] = async (hook, _, event_object) => {
       `我看到了……${mcqueen_talk.sex}还要继续跑吗……！？`,
     );
     await ryan_talk.say_and_wait(
-      `与其说还要，应该说是还不满足？毕竟${mcqueen_talk.sex}说“想提升速度”嘛`,
+      `与其说还要，应该说是还不满足？毕竟${mcqueen_talk.sex}说『想提升速度』嘛`,
     );
     await chara_talk.say_and_wait(
       `${mcqueen_talk.sex}的持久力明明都那么优秀了，竟然还想更加精进吗……`,
@@ -344,7 +344,9 @@ handlers[event_hooks.out_start] = async (hook, _, event_object) => {
     await ryan_talk.say_and_wait(
       '真正的原因呢，是想跟坚强的你对决，好让自己变得更强！',
     );
-    await ryan_talk.say_and_wait('──因为我们也打算参加下一次的“宝冢纪念”嘛！');
+    await ryan_talk.say_and_wait(
+      '──因为我们也打算参加下一次的『宝冢纪念』嘛！',
+    );
     await chara_talk.say_and_wait('……唔！');
     await mcqueen_talk.say_and_wait(
       '呵呵，表情很棒呢。那么下次就在阪神再见啦。',
@@ -354,7 +356,7 @@ handlers[event_hooks.out_start] = async (hook, _, event_object) => {
     await era.printAndWait(
       `隔天 ${me.name} 见到优秀素质时，${chara_talk.sex}脸上的表情看起来神清气爽。`,
     );
-    await chara_talk.say_and_wait('我……想赢过那两人。──在“宝冢纪念”上！');
+    await chara_talk.say_and_wait('我……想赢过那两人。──在『宝冢纪念』上！');
     era.println();
     get_attr_and_print_in_event(60, [0, 5, 0, 5, 0], 0);
     await era.waitAnyKey();
@@ -424,7 +426,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       );
       era.printButton('「量这么多，没问题吗？」', 1);
       await era.input();
-      await nature.say_and_wait('反正老板娘也跟我说“尽情招待他吧”了嘛。');
+      await nature.say_and_wait('反正老板娘也跟我说『尽情招待他吧』了嘛。');
       await nature.say_and_wait('来吧来吧，趁热快点吃吧。');
       await era.printAndWait(
         `端上来的炒饭外观跟味道都很有模有样，好吃到让 ${me.name} 的筷子……不，是让 ${me.name} 的汤匙停不下来。`,
@@ -466,7 +468,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       await era.input();
       await nature.say_and_wait('哼、哼～是吗？训练员果然品味特殊呢。');
       await nature.say_and_wait(
-        '……不过，你不是说“好听”倒是让我安心了。“喜欢”这个词真是方便呢。',
+        '……不过，你不是说『好听』倒是让我安心了。『喜欢』这个词真是方便呢。',
       );
       await nature.say_and_wait(
         '因为这样就不会被拿去跟谁比较，害谁失望，自己也不会对不符合期待的自己失望了。',
@@ -724,7 +726,7 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
   await print_event_name('去看鱼吧', nice_nature);
   await era.printAndWait(`在 ${me.name} 跟优秀素质一同回程的路上──`);
   await nice_nature.say_and_wait('我说，反正还有时间……那个………………要去看鱼吗？');
-  await nice_nature.say_and_wait(`是卖鱼的阿姨啦，她叫我们“一起去看看”。`);
+  await nice_nature.say_and_wait(`是卖鱼的阿姨啦，她叫我们『一起去看看』。`);
   era.printButton('「当然可以啊」', 1);
   await era.input();
   await nice_nature.say_and_wait('……很好，那我们走吧。');
@@ -782,7 +784,7 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
       '知道啦知道啦。既然你觉得看了可以放松的话，嗯。',
     );
     await nice_nature.say_and_wait(
-      '我是不会做出“呀啊～”那种可爱反应的，这点就请多包容啦──',
+      '我是不会做出『呀啊～』那种可爱反应的，这点就请多包容啦──',
     );
     era.drawLine();
     await nice_nature.say_and_wait(
@@ -792,7 +794,7 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
     await nice_nature.say_and_wait('可恶……那道水花太犯规了吧。');
     await nice_nature.say_and_wait('原来海豚秀是这么惊悚刺激的娱乐吗……');
     await nice_nature.say_and_wait(
-      '真是的……何止是“呀啊～”，害我根本从丹田喊出来了。',
+      '真是的……何止是『呀啊～』，害我根本从丹田喊出来了。',
     );
     era.printButton('「看得真开心呢」', 1);
     await era.input();
@@ -805,7 +807,7 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
   } else {
     await nice_nature.say_and_wait('咦～听起来很有趣嘛！');
     await nice_nature.say_and_wait(
-      '而且竟然说是“极度恐怖”呢。到底有多恐怖？让我们见识一下实力吧～',
+      '而且竟然说是『极度恐怖』呢。到底有多恐怖？让我们见识一下实力吧～',
     );
     await era.printAndWait(`就这样，${me.name}跟优秀素质一起到了展示区……`);
     await nice_nature.say_and_wait('可！');
@@ -813,7 +815,7 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
     await era.input();
     await nice_nature.say_and_wait('可、爱、到、不、行！！');
     await nice_nature.say_and_wait(
-      '呜哇啊啊～～～！！这什么！圆滚滚的双眼！是叫“扁面蛸”啊～',
+      '呜哇啊啊～～～！！这什么！圆滚滚的双眼！是叫『扁面蛸』啊～',
     );
     await nice_nature.say_and_wait('呀啊～～～～');
     await nice_nature.say_and_wait('──啊！！');

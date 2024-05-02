@@ -611,7 +611,7 @@ module.exports = (handlers) => {
       await era.printAndWait([
         '不然的话……不就说明，自己放弃了，背叛了自己的负责',
         tachyon.get_uma_sex_title(),
-        '，自己的光（tachyon）了吗',
+        '，自己的光（Tachyon）了吗',
       ]);
       era.println();
       await tachyon.say_and_wait(['对了，', callname, '，明天记得要来试药哦']);

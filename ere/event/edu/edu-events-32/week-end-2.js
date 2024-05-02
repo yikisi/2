@@ -720,7 +720,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '这就是，',
       tachyon.get_colored_name(),
-      ' 的训练员『以及』',
+      ' 的训练员「以及」',
       coffee.get_colored_name(),
       ' 的训练员做出的回答',
     ]);

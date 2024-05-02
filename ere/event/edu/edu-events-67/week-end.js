@@ -40,7 +40,7 @@ module.exports = async (hook, _, event_object) => {
     await era.input();
     await daiya.say_and_wait('……我正在想今后的事情。');
     await daiya.say_and_wait(
-      '距离“菊花赏”还有大概两个月的时间……这段时间内我能成长多少呢？',
+      '距离『菊花赏』还有大概两个月的时间……这段时间内我能成长多少呢？',
     );
     await daiya.say_and_wait(
       '我觉得自己的实力还没有到可以完全不被魔咒影响的程度。',
@@ -48,7 +48,7 @@ module.exports = async (hook, _, event_object) => {
     era.printButton('「还有两个月的时间」', 1);
     await era.input();
     await era.printAndWait(
-      '夏季集训主要是以基础训练为中心。针对“菊花赏”该做的正式调整是接下来才要做的事情。',
+      '夏季集训主要是以基础训练为中心。针对「菊花赏』该做的正式调整是接下来才要做的事情。',
     );
     await daiya.say_and_wait(
       '……说得也是。我也明白训练不会立刻见效，但还是忍不住会觉得着急。',
@@ -57,10 +57,10 @@ module.exports = async (hook, _, event_object) => {
       '我不应该这么容易受到影响才对！我不会输给魔咒的！绝对！一定会破除魔咒给你看！',
     );
     await daiya.say_and_wait(
-      '嗯！我心态调整好了！为了“菊花赏”，我会更加努力的！',
+      '嗯！我心态调整好了！为了『菊花赏』，我会更加努力的！',
     );
     await era.printAndWait(
-      `要在“菊花赏”取胜的决心已经大到甚至会让${daiya.sex}焦虑的程度了吧。`,
+      `要在「菊花赏」取胜的决心已经大到甚至会让${daiya.sex}焦虑的程度了吧。`,
     );
     await era.printAndWait(
       '然而──似乎是有点用力过头了的感觉。希望这样不会导致坏的结果……',
@@ -108,7 +108,7 @@ module.exports = async (hook, _, event_object) => {
       '观众A「喂，北部这是怎么了啊……今天的状态很不好吗……？」',
     );
     await era.printAndWait(
-      '观众B「不知道为什么“宝冢纪念”会输耶。明明就没有什么会输的理由啊……」',
+      '观众B「不知道为什么『宝冢纪念』会输耶。明明就没有什么会输的理由啊……」',
     );
     await era.printAndWait(
       `观众C「这才不是北部真正的实力！！${kita.sex}下次一定会赢的！没错吧？北部！」`,
@@ -144,7 +144,7 @@ module.exports = async (hook, _, event_object) => {
     era.printButton('「是啊……」', 1);
     await era.input();
     await era.printAndWait(
-      '为了之后和目白麦昆的“天皇赏（秋）”，以及考量到今后可能往国外发展，开始进行增强跑步力道的训练。',
+      '为了之后和目白麦昆的「天皇赏（秋）』，以及考量到今后可能往国外发展，开始进行增强跑步力道的训练。',
     );
     await era.printAndWait(
       '然而，却发生了预料之外的状况。里见光钻的跑法开始变得混乱不堪。',
@@ -190,13 +190,15 @@ module.exports = async (hook, _, event_object) => {
     await kita.say_and_wait('我不会被击溃的！我……会跑赢帝王的！！');
     await daiya.say_and_wait('太好了！小北没有在气势上输掉呢！');
     await era.printAndWait('观众A「北部，加油喔！！要超越你的憧憬啊！」');
-    await era.printAndWait('观众B「超越“帝王”吧！我们的北部一定能做到的！！」');
     await era.printAndWait(
-      `观众C「让${daiya.sex}们见识“帝王”的威严吧！东海帝王！！」`,
+      '观众B「超越『帝王』吧！我们的北部一定能做到的！！」',
+    );
+    await era.printAndWait(
+      `观众C「让${daiya.sex}们见识『帝王』的威严吧！东海帝王！！」`,
     );
     await daiya.say_and_wait('……两边的声援声势也算是旗鼓相当吧……');
     await era.printAndWait(
-      `${daiya.sex}们本就是拥有大量热情粉丝的两人。这次的“日本杯”也比往年更加热闹。`,
+      `${daiya.sex}们本就是拥有大量热情粉丝的两人。这次的「日本杯』也比往年更加热闹。`,
     );
     await daiya.say_and_wait('小北……加油──！');
     await era.printAndWait(
@@ -215,7 +217,7 @@ module.exports = async (hook, _, event_object) => {
     );
     await era.printAndWait('东海帝王和北部玄驹之间，展开了非常激烈的攻防战。');
     await daiya.say_and_wait(
-      `小北和帝王，${kita.sex}们明明都是参加过“日本杯”拥有经历优势的……`,
+      `小北和帝王，${kita.sex}们明明都是参加过『日本杯』拥有经历优势的……`,
     );
     await daiya.say_and_wait(
       '却没有局限于专注自己的跑法，反而是积极展开攻势……！',
@@ -236,7 +238,7 @@ module.exports = async (hook, _, event_object) => {
       '我无时无刻都不会忘记挑战的心。为的是要更上一层楼！',
     );
     await teio.say_and_wait(
-      '所以“有马纪念”我也一样会以挑战者的身份，挑战小钻跟小北的！',
+      '所以『有马纪念』我也一样会以挑战者的身份，挑战小钻跟小北的！',
     );
     await japa_cup_common(daiya, me, kita, teio);
     era.println();
@@ -260,19 +262,19 @@ module.exports = async (hook, _, event_object) => {
       '。',
     ]);
     await era.printAndWait(
-      '里见光钻全数赢得了胜利，顺利达成了“秋季资深三冠”！',
+      '里见光钻全数赢得了胜利，顺利达成了「秋季资深三冠』！',
     );
     await daiya.say_and_wait('──寄出。这样就全都回信完了吧。');
     era.printButton('「感觉会是一场盛大的活动呢」', 1);
     await era.input();
     await era.printAndWait(
-      '据说里见集团的相关设施准备要举办里见光钻的“秋季资深三冠纪念活动”。',
+      '据说里见集团的相关设施准备要举办里见光钻的「秋季资深三冠纪念活动』。',
     );
     await daiya.say_and_wait(
-      '是的。我的“秋季资深三冠”纪念活动──我刚才就是在回信告诉大家我也会尽全力协助举办。',
+      '是的。我的『秋季资深三冠』纪念活动──我刚才就是在回信告诉大家我也会尽全力协助举办。',
     );
     await daiya.say_and_wait(
-      '应该今天就会在咖啡厅推出“秋季资深三冠圣代”了吧。所以我打算先过去打声招呼。',
+      '应该今天就会在咖啡厅推出『秋季资深三冠圣代』了吧。所以我打算先过去打声招呼。',
     );
     await daiya.say_and_wait('如果训练员刚好有空的话，要不要一起去呢？');
     era.printButton('「我跟你一起去吧！」', 1);
@@ -283,20 +285,20 @@ module.exports = async (hook, _, event_object) => {
     await mcqueen.say_and_wait('嗯，我想说要帮你庆祝一下……你正在忙吗？');
     await daiya.say_and_wait('其实我们正在去里见集团咖啡厅的路上……');
     await daiya.say_and_wait(
-      '啊！如果不嫌弃的话，麦昆要不要也一起去吃“秋季资深三冠圣代”呢？',
+      '啊！如果不嫌弃的话，麦昆要不要也一起去吃『秋季资深三冠圣代』呢？',
     );
     await mcqueen.say_and_wait('圣代！？');
     await daiya.say_and_wait(
-      '没错，因为要推出纪念我达成“秋季资深三冠”的限定圣代，所以我打算去打个招呼顺便试吃。',
+      '没错，因为要推出纪念我达成『秋季资深三冠』的限定圣代，所以我打算去打个招呼顺便试吃。',
     );
     await mcqueen.say_and_wait(
       '限定的……！这、这样啊。既然这么难得，那我就跟你们一起去吧。',
     );
     await mcqueen.say_and_wait(
-      '我再次郑重地……祝贺两位，恭喜你们达成“秋季资深三冠”。',
+      '我再次郑重地……祝贺两位，恭喜你们达成『秋季资深三冠』。',
     );
     await mcqueen.say_and_wait(
-      '这是击败了我和帝王，还有北部所赢得的“秋季资深三冠”。',
+      '这是击败了我和帝王，还有北部所赢得的『秋季资深三冠』。',
     );
     await mcqueen.say_and_wait(
       `不单只是光钻个人的成就，也算是里见家在赛${daiya.get_uma_sex_title()}界所留下的辉煌成绩。`,

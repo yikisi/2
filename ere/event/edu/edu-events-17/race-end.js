@@ -147,7 +147,7 @@ module.exports = async (hook, extra_flag) => {
         `但是，作为 ${chara_talk.name} 的训练员，${CharaTalk.me.name} 只清楚一件事情。`,
       );
       era.printButton('「赢的会是你。」', 1);
-      era.printButton('「到那时，“皇帝”的实力将会更得到证明。」', 2);
+      era.printButton('「到那时，『皇帝』的实力将会更得到证明。」', 2);
       const ret = await era.input();
       await era.printAndWait(
         `似乎很惊讶 ${CharaTalk.me.name} 会这样说，${chara_talk.name} 微微一笑。`,

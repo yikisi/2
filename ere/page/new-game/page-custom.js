@@ -555,7 +555,7 @@ async function page_custom() {
         era.printMultiColumns([
           { type: 'divider' },
           {
-            content: '您希望您的“作案工具”有何种规模？\nPS：不是越大越好！',
+            content: '您希望您的「作案工具」有何种规模？\nPS：不是越大越好！',
             type: 'text',
           },
           { accelerator: 1, content: '所有人都能容纳的那种！', type: 'button' },

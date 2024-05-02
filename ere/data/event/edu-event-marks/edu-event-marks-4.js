@@ -5,7 +5,7 @@ class MaEduMarks extends EduEventMarks {
   beginning;
   // 街头的潮流推手
   current_trend;
-  // 丸善斯基，畅谈“喜欢”
+  // 丸善斯基，畅谈「喜欢」
   favourite_things;
   // 开超跑兜风
   feel_speed;

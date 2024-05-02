@@ -66,7 +66,7 @@ module.exports = async (hook, extra_flag) => {
       `从优秀素质出道前，${me.name} 就认为${chara_talk.sex}适合跑中距离。${chara_talk.sex}的尾段加速很精湛，该坚持时也能坚持住。`,
     );
     await era.printAndWait('为了确保今后的经典赛战线，该选择的第一场战役是──');
-    era.printButton('「要不要去跑“若驹锦标”？」', 1);
+    era.printButton('「要不要去跑『若驹锦标』？」', 1);
     await era.input();
     await chara_talk.say_and_wait('哦，原来如此啊。在公开赛见识一下实力是吗？');
     await chara_talk.say_and_wait('没什么不好的吧？就这么办吧。');
@@ -87,14 +87,14 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       `我知道啦。我只是在想，如果不会碰上${chara_talk.sex}就好了～那么，今后也请你多多照顾咯～`,
     );
-    await era.printAndWait('于是，下次的目标就决定是“若驹锦标”了！');
+    await era.printAndWait('于是，下次的目标就决定是「若驹锦标』了！');
     era.println();
     extra_flag.relation_change = 50;
   } else if (extra_flag.race === race_enum.waka_sta) {
     // 经典年若驹S
     const teio_talk = get_chara_talk(3);
     if (extra_flag.rank === 1) {
-      await print_event_name('若驹S结束·从“偶然”开始', chara_talk);
+      await print_event_name('从「偶然」开始', chara_talk);
 
       await chara_talk.say_and_wait('跑赢了……我……跑赢帝王了？');
       await chara_talk.say_and_wait(
@@ -138,7 +138,7 @@ module.exports = async (hook, extra_flag) => {
         `跑赢却消沉得像是输了一样，是因为${chara_talk.sex}还不能完全相信自己的实力。也就是自信心不足。既然如此，现在需要的是──`,
       );
     } else {
-      await print_event_name('若驹S结束·即使输了，夏天仍会到来', chara_talk);
+      await print_event_name('即使输了，夏天仍会到来', chara_talk);
 
       await chara_talk.say_and_wait('呼……呼……呼……');
       await chara_talk.say_and_wait(
@@ -168,7 +168,7 @@ module.exports = async (hook, extra_flag) => {
         '哈哈──好了啦，不用这样安慰我。而且你看，我有好好达成你的要求了吧？',
       );
       await chara_talk.say_and_wait(
-        '“一如往常”地留下结果。嗯，我有做好我的工作了。',
+        '『一如往常』地留下结果。嗯，我有做好我的工作了。',
       );
       await chara_talk.say_and_wait(
         '……所以啊，竟然还想向上挑战，简直就是多此一举啊。要是没去想什么挑战，就真的一切都跟往常一样了。',
@@ -193,7 +193,7 @@ module.exports = async (hook, extra_flag) => {
       `现在让${chara_talk.sex}站上经典赛战线比赛会是场危险的赌博。可能会害${chara_talk.sex}失去目前仅剩的一点自信。那还不如挑战地方竞赛，稳健地留下成绩，这样最后应该能引导${chara_talk.sex}的成长才对。`,
     );
     await chara_talk.say_and_wait(
-      '也就是说……目标不是“皋月赏”，也不是“日本德比”……？……因为我实力还不足。',
+      '也就是说……目标不是『皋月赏』，也不是『日本德比』……？……因为我实力还不足。',
     );
     era.printButton('「现在就别焦急，先确认自己真的变强了吧」', 1);
     await era.input();
@@ -208,7 +208,7 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       '嗯，OKOK！各地巡回演出应该也很适合我。然后呢？该不会真的要让我一直到处各地巡回吧？你决定好到底要跑哪一场比赛了吗？',
     );
-    era.printButton('「“小仓纪念”怎么样？」', 1);
+    era.printButton('「『小仓纪念』怎么样？」', 1);
     await era.input();
     await era.printAndWait(
       '在小仓举办的重赏比赛。要帮助优秀素质提升自信，这是最适合不过的竞赛了。',
@@ -221,7 +221,7 @@ module.exports = async (hook, extra_flag) => {
       me.get_colored_name(),
       ' 和 ',
       chara_talk.get_colored_name(),
-      ' 决定下次的目标就是“小仓纪念”！',
+      ' 决定下次的目标就是「小仓纪念」！',
     ]);
     era.println();
     extra_flag.relation_change = 50;
@@ -262,20 +262,22 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait('明明知道答案还是要问，对，我很卑鄙。但是……');
     await chara_talk.say_and_wait('因为要是没人来推我一把，我就无法前进啊。');
     await chara_talk.say_and_wait(
-      `……帝王正在经典之道上冲刺，这样看来，下次${chara_talk.sex}一定──会以“菊花赏”为目标。`,
+      `……帝王正在经典之道上冲刺，这样看来，下次${chara_talk.sex}一定──会以『菊花赏』为目标。`,
     );
     await chara_talk.say_and_wait(
-      '所以我下次也……想在“菊花赏”上……奔驰。你觉得……怎么样……？',
+      '所以我下次也……想在『菊花赏』上……奔驰。你觉得……怎么样……？',
     );
     era.printButton('「距离会增长不少，没问题吧？」', 1);
     await era.input();
     await era.printAndWait(
-      `菊花赏”是3000米的竞赛。跟这次参加的小仓纪念比起来，距离多了1000米。对优秀素质来说或许会是场艰难的战役。但既然${chara_talk.sex}已经下定决心……！`,
+      `菊花赏』是3000米的竞赛。跟这次参加的小仓纪念比起来，距离多了1000米。对优秀素质来说或许会是场艰难的战役。但既然${chara_talk.sex}已经下定决心……！`,
     );
     await chara_talk.say_and_wait(
       '当然了，想必问题会很大。因为我大概不擅长跑那么长的距离。',
     );
-    await chara_talk.say_and_wait('不过……我这次不想退缩。──去参加“菊花赏”吧！');
+    await chara_talk.say_and_wait(
+      '不过……我这次不想退缩。──去参加『菊花赏』吧！',
+    );
     era.printButton('「好！」', 1);
     await era.input();
     await chara_talk.say_and_wait('唉～～～决定了。真的决定了。');
@@ -284,7 +286,7 @@ module.exports = async (hook, extra_flag) => {
     );
     await chara_talk.say_and_wait('不过……嗯。这样也不错……吧？');
     await era.printAndWait(
-      `……虽然${chara_talk.sex}似乎稍微找回一点自信了，但为了迎战“菊花赏”，${me.name} 应该还能为${chara_talk.sex}做点什么。${me.name} 思考这些事时，想起来的是──`,
+      `……虽然${chara_talk.sex}似乎稍微找回一点自信了，但为了迎战「菊花赏』，${me.name} 应该还能为${chara_talk.sex}做点什么。${me.name} 思考这些事时，想起来的是──`,
     );
     await chara_talk.print_and_wait(
       '【不管我跑出什么成绩，大家都会为我开心。】',
@@ -378,14 +380,14 @@ module.exports = async (hook, extra_flag) => {
     await era.input();
     await chara_talk.say_and_wait('太好了……嘿嘿。');
     await chara_talk.say_and_wait(
-      '在“菊花赏”能交出这种成果，已经无可挑剔了！我真的很努力了！',
+      '在『菊花赏』能交出这种成果，已经无可挑剔了！我真的很努力了！',
     );
     await chara_talk.say_and_wait('你今天也有为我准备……歪歪扭扭的奖杯吗？');
-    era.printButton('「当然，这是“你努力了奖”！」', 1);
+    era.printButton('「当然，这是『你努力了奖』！」', 1);
     await era.input();
     await chara_talk.say_and_wait('啊……训练员亲手做的奖杯！');
     await era.printAndWait(
-      `“小仓纪念”时，为了让优秀素质建立自信，${me.name} 做了折纸奖杯送${chara_talk.sex}。因为之前${chara_talk.sex}很期待，所以 ${me.name} 这次又做了……`,
+      `「小仓纪念』时，为了让优秀素质建立自信，${me.name} 做了折纸奖杯送${chara_talk.sex}。因为之前${chara_talk.sex}很期待，所以 ${me.name} 这次又做了……`,
     );
     await chara_talk.say_and_wait('……你真的做了啊？嘿嘿，还是做得歪歪扭扭的。');
     await chara_talk.say_and_wait('很好很好。等一下来举办颁奖典礼吧。');
@@ -399,7 +401,7 @@ module.exports = async (hook, extra_flag) => {
     await era.input();
     await chara_talk.say_and_wait('嗯……也对呢。');
     await chara_talk.say_and_wait(
-      `毕竟${chara_talk.sex}是帝王啊。一定很快就能复活，然后还会说什么“我可是无敌的哦！”`,
+      `毕竟${chara_talk.sex}是帝王啊。一定很快就能复活，然后还会说什么『我可是无敌的哦！』`,
     );
     await chara_talk.say_and_wait('……在那之前我可要再变强点才行呢。');
     era.printButton('「还有一场大对决在等着呢」', 1);
@@ -407,27 +409,27 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       '什么？冬天都快到了，最近还有大对决？……啊！你该不会是指……',
     );
-    era.printButton('「你不挑战“有马纪念”吗？」', 1);
+    era.printButton('「你不挑战『有马纪念』吗？」', 1);
     await era.input();
     await era.printAndWait(
-      `优秀素质拥有坚定的忠实粉丝，也在“菊花赏”确实发挥出实力，现在的${
+      `优秀素质拥有坚定的忠实粉丝，也在『菊花赏』确实发挥出实力，现在的${
         chara_talk.sex
-      }一定能够挑战“有马纪念”！不仅如此，“有马纪念”的参赛者都是今年倍受瞩目的各位赛${chara_talk.get_uma_sex_title()}。跟${
+      }一定能够挑战『有马纪念』！不仅如此，『有马纪念』的参赛者都是今年倍受瞩目的各位赛${chara_talk.get_uma_sex_title()}。跟${
         chara_talk.sex
       }们一起比赛一定能带来更多成长。`,
     );
-    await chara_talk.say_and_wait('“有马纪念”吗……');
+    await chara_talk.say_and_wait('『有马纪念』吗……');
     await chara_talk.say_and_wait(
       '想要回报大家平时的支持，这是最适合的舞台……对吧？',
     );
     await chara_talk.say_and_wait(
       '……或许我根本办不到。搞不好就算参赛也完全无法发挥，但是……',
     );
-    await chara_talk.say_and_wait('──我想参加“有马纪念”！');
+    await chara_talk.say_and_wait('──我想参加『有马纪念』！');
     era.printButton('「那就去挑战吧！」', 1);
     await era.input();
     await era.printAndWait(
-      `于是，${me.name} 和优秀素质决定经典级最后一场挑战就是“有马纪念”了！`,
+      `于是，${me.name} 和优秀素质决定经典级最后一场挑战就是『有马纪念』了！`,
     );
     if (era.get('love:60') >= 75) {
       era.printButton('「还有……这个也是贺礼」', 1);
@@ -472,7 +474,7 @@ module.exports = async (hook, extra_flag) => {
   ) {
     await print_event_name('有马纪念结束·远望', chara_talk);
 
-    await chara_talk.say_and_wait('跑、跑赢了……！我在“有马纪念”赢了……');
+    await chara_talk.say_and_wait('跑、跑赢了……！我在『有马纪念』赢了……');
     era.printButton('「恭喜你！」', 1);
     await era.input();
     await chara_talk.say_and_wait('训练员！我跟你说，我……！');
@@ -482,30 +484,30 @@ module.exports = async (hook, extra_flag) => {
       '明明平常都只能听见自己的心跳声、呼吸声、还有风吹声而已。',
     );
     await chara_talk.say_and_wait(
-      '但今天……我清楚地听到加油声了。我听到了“内恰，加油啊”的呼声！',
+      '但今天……我清楚地听到加油声了。我听到了『内恰，加油啊』的呼声！',
     );
     await chara_talk.say_and_wait(
       '因为这样，体力快用完的时候我才能撑住。我真的……跑得很开心！',
     );
     await era.printAndWait(
-      `优秀素质与支持者之间有着深刻的情感。看来对${chara_talk.sex}来说，今天的“有马纪念”是一场特别的比赛。`,
+      `优秀素质与支持者之间有着深刻的情感。看来对${chara_talk.sex}来说，今天的『有马纪念』是一场特别的比赛。`,
     );
     await chara_talk.say_and_wait('我还想继续跑。明年……也想站上这个舞台！');
     await chara_talk.say_and_wait('……呃，我这笨蛋！太心急了吧！');
     await chara_talk.say_and_wait('但是我真的跑得很开心啊……（扭捏）');
     await era.printAndWait(
-      '确实，现在就把目标订为明年的“有马纪念”，似乎还有点太早了。如果想在这之间安排一场能保持目前动力的竞赛……',
+      '确实，现在就把目标订为明年的『有马纪念』，似乎还有点太早了。如果想在这之间安排一场能保持目前动力的竞赛……',
     );
-    era.printButton('「还有“宝冢纪念”啊！」', 1);
+    era.printButton('「还有『宝冢纪念』啊！」', 1);
     await era.input();
     await chara_talk.say_and_wait(
-      '“宝冢纪念”……是以粉丝投票选出参赛者的竞赛对吧？跟“有马纪念”一样……',
+      '『宝冢纪念』……是以粉丝投票选出参赛者的竞赛对吧？跟『有马纪念』一样……',
     );
     await chara_talk.say_and_wait(
-      '但我好像在这种比赛中能表现得更好呢。嗯，我想参加……“宝冢纪念”！',
+      '但我好像在这种比赛中能表现得更好呢。嗯，我想参加……『宝冢纪念』！',
     );
     await era.printAndWait(
-      `虽然如此，距离这场竞赛还稍微有点时间。于是${me.name}和优秀素质决定这期间要参加各种比赛，为了挑战“宝冢纪念”而不断成长。`,
+      `虽然如此，距离这场竞赛还稍微有点时间。于是${me.name}和优秀素质决定这期间要参加各种比赛，为了挑战『宝冢纪念』而不断成长。`,
     );
     await chara_talk.say_and_wait(
       '我们两个是不是都太心急了？竟然在这里决定起接下来的比赛──',
@@ -530,7 +532,7 @@ module.exports = async (hook, extra_flag) => {
       '该趁现在……尽情开心才行。因为并不是一切就到此结束了。',
     );
     await era.printAndWait(
-      `优秀素质小声地说着这些话，望向一起跑完“有马纪念”的赛${chara_talk.get_uma_sex_title()}们……`,
+      `优秀素质小声地说着这些话，望向一起跑完『有马纪念』的赛${chara_talk.get_uma_sex_title()}们……`,
     );
     await chara_talk.say_and_wait('你今天也有为我准备……歪歪扭扭的奖杯吗？');
     era.printButton('「当然！」', 1);
@@ -549,7 +551,7 @@ module.exports = async (hook, extra_flag) => {
       '不能再这样下去了。现在不能光喊着要赢过帝王。',
     );
     await era.printAndWait(
-      `看来借着参加各世代选手互相竞争的“有马纪念”，让${chara_talk.sex}的视野更加宽广了。……这是成长的证明！`,
+      `看来借着参加各世代选手互相竞争的『有马纪念』，让${chara_talk.sex}的视野更加宽广了。……这是成长的证明！`,
     );
     await chara_talk.say_and_wait('我得更加了解自己周遭的选手才行……！');
     await sex_with_nice_nature(extra_flag);
@@ -571,7 +573,7 @@ module.exports = async (hook, extra_flag) => {
     await era.input();
     await chara_talk.say_and_wait('嗯，是啊。');
     await chara_talk.say_and_wait(
-      '像“反正像我这种人”，或是“我办不到的啦”之类的……',
+      '像『反正像我这种人』，或是『我办不到的啦』之类的……',
     );
     await chara_talk.say_and_wait(
       '这些想法今天完全没有浮现。我只是在心里不断喊着一定要追上……',
@@ -607,17 +609,17 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `接下来的那场比赛，一定能让现在的${chara_talk.sex}激发出更多自信与光芒……！`,
     );
-    era.printButton('「再下来要挑战“天皇赏（秋）”吗？」', 1);
+    era.printButton('「再下来要挑战『天皇赏（秋）』吗？」', 1);
     await era.input();
-    await chara_talk.say_and_wait('“天皇赏（秋）”……！');
-    await chara_talk.say_and_wait('要我参加……富有历史与传统的“天皇赏”？');
+    await chara_talk.say_and_wait('『天皇赏（秋）』……！');
+    await chara_talk.say_and_wait('要我参加……富有历史与传统的『天皇赏』？');
     await chara_talk.say_and_wait('……不行不行。我怎么退缩了呢？');
     await chara_talk.say_and_wait(
       '这种时候……不能怀疑自己有没有资格。一定要参加！要激励自己才行！',
     );
     await chara_talk.say_and_wait('走吧。直闯秋天的大舞台……！');
     await era.printAndWait(
-      `──就这样，${me.name}和优秀素质决定挑战争夺中距离最强选手的“天皇赏（秋）”了！`,
+      `──就这样，${me.name}和优秀素质决定挑战争夺中距离最强选手的『天皇赏（秋）』了！`,
     );
     await sex_with_nice_nature(extra_flag);
   } else if (
@@ -640,7 +642,7 @@ module.exports = async (hook, extra_flag) => {
       `${era.get('callname:60:0')}，我有事拜托你。`,
     );
     await chara_talk.say_and_wait(
-      '参加资深级最后的“有马纪念”之前，我还想再跑一场比赛。',
+      '参加资深级最后的『有马纪念』之前，我还想再跑一场比赛。',
     );
     era.printButton('「为什么？」', 1);
     await era.input();
@@ -648,10 +650,10 @@ module.exports = async (hook, extra_flag) => {
       '……我想要更多自信。我想带着要得第一的觉悟参赛并取胜。',
     );
     await era.printAndWait(
-      '要是以前的优秀素质，应该会因自信不足而想要寻求“认同”吧。',
+      '要是以前的优秀素质，应该会因自信不足而想要寻求『认同』吧。',
     );
     await era.printAndWait(
-      `但是现在的 ${chara_talk.sex} 是“为了得胜”而想变得更强。`,
+      `但是现在的 ${chara_talk.sex} 是『为了得胜』而想变得更强。`,
     );
     era.printButton('「这样会变成连续参赛，没问题吗？」', 1);
     await era.input();
@@ -666,15 +668,15 @@ module.exports = async (hook, extra_flag) => {
       `我把负责胡思乱想的这份工作交接给${era.get('callname:60:0')}！`,
     );
     await era.printAndWait(
-      `观察${chara_talk.sex}至今的倾向，再考虑到距离“有马纪念”还有多少时间，现在该选择的竞赛是──`,
+      `观察${chara_talk.sex}至今的倾向，再考虑到距离『有马纪念』还有多少时间，现在该选择的竞赛是──`,
     );
-    era.printButton('「参加“中日新闻杯”怎么样？」', 1);
+    era.printButton('「参加『中日新闻杯』怎么样？」', 1);
     await era.input();
     await era.printAndWait(
       '虽然这场赛事等级较低，但优秀素质能在此留下成果。可以稳操胜券地拿下第一名！',
     );
     await chara_talk.say_and_wait(
-      '不错呢，“中日新闻杯”……我会在那拿下第一名的。',
+      '不错呢，『中日新闻杯』……我会在那拿下第一名的。',
     );
     await chara_talk.say_and_wait(
       `我要跑赢，然后挺起胸膛挑战${chara_talk.sex}……！`,
@@ -703,7 +705,7 @@ module.exports = async (hook, extra_flag) => {
       '嗯！我已经不会再逃跑，也不会背叛大家的期待了。',
     );
     await chara_talk.say_and_wait('我一定……要赢。');
-    await chara_talk.say_and_wait('──要在“有马纪念”当上闪闪发光的主角！');
+    await chara_talk.say_and_wait('──要在『有马纪念』当上闪闪发光的主角！');
     era.println();
     extra_flag.relation_change = 50;
   } else if (
@@ -754,11 +756,11 @@ module.exports = async (hook, extra_flag) => {
       '赛后接受胜利者访谈时。现在的优秀素质被大量闪光灯照耀着。',
     );
     await era.printAndWait(
-      '记者A「──这次的“有马纪念”，对手都很难缠呢。请问你觉得自己能赢得这场比赛的原因是？」',
+      '记者A「──这次的『有马纪念』，对手都很难缠呢。请问你觉得自己能赢得这场比赛的原因是？」',
     );
     await chara_talk.say_and_wait('这个嘛……我也觉得大家真的都很强。');
     await chara_talk.say_and_wait(
-      `但我也是“很强的”赛${chara_talk.get_uma_sex_title()}。我觉得应该是因为我发挥出了所有实力吧。`,
+      `但我也是『很强的』赛${chara_talk.get_uma_sex_title()}。我觉得应该是因为我发挥出了所有实力吧。`,
     );
     await chara_talk.say_and_wait('嗯，是因为我很努力……我可以明确地这么说！');
     await era.printAndWait('记者A「那么，优秀素质，最后请对粉丝说句话！」');
@@ -794,7 +796,7 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       (await era.input()) === 1
         ? '嗯，我很强吗……我是不知道啦。但是……好吧，偶尔也接受看看训练员的吹捧好了。'
-        : `什么～～那不就简直像在大声宣言“因为我很强”吗？要是之后又跑输，那可就丢脸了。`,
+        : `什么～～那不就简直像在大声宣言『因为我很强』吗？要是之后又跑输，那可就丢脸了。`,
     );
   } else {
     throw new Error('unsupported');

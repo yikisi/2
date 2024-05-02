@@ -147,7 +147,7 @@ handlers[event_hooks.school_atrium] = async (
     era.println();
 
     await era.printAndWait(
-      `经典三冠首战的皋月赏就快到了，还是不要想布丁吧……但 ${gold_ship.name} 还是自顾自地一溜烟冲出去寻找那个所谓的『伊甸园』了。`,
+      `经典三冠首战的皋月赏就快到了，还是不要想布丁吧……但 ${gold_ship.name} 还是自顾自地一溜烟冲出去寻找那个所谓的「伊甸园」了。`,
     );
     era.println();
 
@@ -462,11 +462,11 @@ handlers[event_hooks.school_atrium] = async (
     era.println();
 
     if (ret === 1) {
-      // TODO 技能 『天赋异禀（切れ者）』
+      // TODO 技能「天赋异禀（切れ者）」
       get_attr_and_print_in_event(7, [0, 10, 0, 0, 10], 0) &&
         (await era.waitAnyKey());
     } else {
-      // TODO 技能『天赋异禀（切れ者）』
+      // TODO 技能「天赋异禀（切れ者）」
       get_attr_and_print_in_event(7, [20, 0, 0, 0, 0], 0) &&
         (await era.waitAnyKey());
     }
@@ -639,7 +639,7 @@ handlers[event_hooks.school_rooftop] = async (
 
         get_attr_and_print_in_event(7, undefined, 60) &&
           (await era.waitAnyKey());
-        // TODO 获得技能『非根干距离〇』
+        // TODO 获得技能「非根干距离〇」
       } else {
         await era.printAndWait(
           `${gold_ship.name} 使出了浑身解数，但还是没赢过 ${festa.name}……`,

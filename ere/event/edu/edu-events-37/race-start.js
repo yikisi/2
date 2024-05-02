@@ -242,7 +242,7 @@ module.exports = async (_, extra_flag) => {
       '经典三冠的第二场比赛——日本德比，终于在今天拉开序幕。',
     );
     await flash.say_and_wait('那么，我出……');
-    await era.printAndWait('“嘟嘟。”');
+    await era.printAndWait('「嘟嘟。」');
     await flash.say_and_wait('诶。');
     await era.printAndWait(
       '选手休息室内，已经做好比赛前最后的准备工作，正打算前往赛场的荣进闪耀突然被手机提示音吸引了注意力。',

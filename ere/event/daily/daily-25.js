@@ -247,7 +247,7 @@ handlers[event_hooks.office_rest] = async () => {
   const callname = sys_get_callname(25, 0);
   await get_chara_talk(25).say_and_wait(
     Math.random() < 0.5
-      ? `${callname} 知道咖啡树的花语吗？那就是‘一起休息吧’，据说是从休息的时候会喝咖啡这种地方来的……`
+      ? `${callname} 知道咖啡树的花语吗？那就是『一起休息吧』，据说是从休息的时候会喝咖啡这种地方来的……`
       : `${callname}，你有感受过别人的心跳声吗？心脏弹奏出的声音，据说有诱人入眠的功效……那么，${callname}，现在请让我把耳朵贴在胸前吧……`,
   );
 };

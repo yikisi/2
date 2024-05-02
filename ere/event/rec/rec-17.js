@@ -257,7 +257,7 @@ module.exports = {
         `${chara_17.sex}显然非常兴奋，直接将信递到了 ${CharaTalk.me.name} 的手里。`,
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 讪讪笑着，接过了这“烫手山芋”。`,
+        `${CharaTalk.me.name} 讪讪笑着，接过了这『烫手山芋』。`,
       );
       await era.printAndWait(
         `任务完成，干事就风一样地跑开了。${CharaTalk.me.name} 打了个哈哈早退。`,

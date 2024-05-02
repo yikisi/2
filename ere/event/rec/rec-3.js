@@ -84,7 +84,7 @@ module.exports = {
     );
     await era.printAndWait('小女孩「帝王大人！能不能再跳一次呢？」');
     await era.printAndWait(
-      `显然，她是想看那位马娘翻身下树的潇洒模样。${me.name} 笑了笑，准备后退让下地方，或者今天能看到一个帅气的“super hero landing”也说不定。`,
+      `显然，她是想看那位马娘翻身下树的潇洒模样。${me.name} 笑了笑，准备后退让下地方，或者今天能看到一个帅气的『super hero landing』也说不定。`,
     );
     await era.printAndWait(
       `但奇怪的是，树上的${teio_talk.get_uma_sex_title()}却并没有呼应自己的小粉丝`,
@@ -198,7 +198,7 @@ module.exports = {
     );
     era.println();
     await era.printAndWait(
-      `${teio_talk.sex}如此理所当然般宣告了自己的存在，赢取了胜利。${me.name} 看着屏幕上大大的“一着”，不由得微笑起来，起身向下走去。`,
+      `${teio_talk.sex}如此理所当然般宣告了自己的存在，赢取了胜利。${me.name} 看着屏幕上大大的『一着』，不由得微笑起来，起身向下走去。`,
     );
     era.println();
     await teio_talk.say_and_wait('唔……');

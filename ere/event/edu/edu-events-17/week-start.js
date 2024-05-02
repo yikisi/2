@@ -136,7 +136,7 @@ module.exports = async (hook, _, event_object) => {
     await print_event_name('新年的抱负', luna_talk);
 
     await era.printAndWait(
-      '在和露娜成为“共犯”后，不知不觉，就迎来了新的一年。',
+      '在和露娜成为「共犯」后，不知不觉，就迎来了新的一年。',
     );
     await era.printAndWait(
       `无时无刻的战战兢兢与恐惧，让 ${CharaTalk.me.name} 夜夜难眠。`,
@@ -271,7 +271,7 @@ module.exports = async (hook, _, event_object) => {
     await luna_talk.say_and_wait('为了他人而努力，始终是一件美好的愿望。');
     await luna_talk.say_and_wait('虽说如此，我们还是得为了菊花赏而努力。');
     await luna_talk.say_and_wait(
-      '但你的目光已经说明白了——‘训练下去对身体有害’，是吧？',
+      '但你的目光已经说明白了——『训练下去对身体有害』，是吧？',
     );
     await luna_talk.say_and_wait(
       '但德比之后，我越发坚定地认为，完成我们的理想需要非一般的努力。',

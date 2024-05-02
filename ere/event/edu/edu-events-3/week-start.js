@@ -119,7 +119,7 @@ module.exports = async () => {
     era.println();
 
     await me.say_and_wait(
-      `帝王，你的腿脚构造就算是在${teio.get_uma_sex_title()}中，也算是与众不同的，这种结构带给你独有的跑法，但这种“帝王舞步”实际上是透支自己的身体。`,
+      `帝王，你的腿脚构造就算是在${teio.get_uma_sex_title()}中，也算是与众不同的，这种结构带给你独有的跑法，但这种『帝王舞步』实际上是透支自己的身体。`,
     );
     await me.say_and_wait(
       '上次比赛的失速，上上次比赛后的伤，只不过是前兆。对你来说最重要的双腿……有可能彻底毁掉',
@@ -159,7 +159,7 @@ module.exports = async () => {
     await era.printAndWait(
       `${teio.get_teen_sex_title()}倔强的眼神与你对视，你能看到${
         teio.sex
-      }瞳孔中自己的倒影。${teio.sex}最亲密的人，如今却“背叛”了${teio.sex}……${
+      }瞳孔中自己的倒影。${teio.sex}最亲密的人，如今却「背叛」了${teio.sex}……${
         me.name
       } 看着自己的镜像，不是滋味。`,
     );

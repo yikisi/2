@@ -646,7 +646,7 @@ handlers[event_hooks.back_school] = async () => {
     );
     era.println();
     await era.printAndWait(
-      `${me.name} 看着主治医生拿出一根金属小杖，再度在屏幕显示的照片上指点起来。之前不愿接受而自主屏蔽的回忆与现在的影像重叠，${me.name} 完全知道他都说了些什么。“髌骨脱位”“习惯性骨折”“裂纹”“小腿”……不错，所有地方 ${me.name} 都知道，所有情况 ${me.name} 都清楚。`,
+      `${me.name} 看着主治医生拿出一根金属小杖，再度在屏幕显示的照片上指点起来。之前不愿接受而自主屏蔽的回忆与现在的影像重叠，${me.name} 完全知道他都说了些什么。「髌骨脱位」「习惯性骨折」「裂纹」「小腿」……不错，所有地方 ${me.name} 都知道，所有情况 ${me.name} 都清楚。`,
     );
     era.println();
     await era.printAndWait(

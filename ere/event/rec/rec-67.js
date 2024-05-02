@@ -25,7 +25,7 @@ async function common_comments(me, daiya, other) {
     '啊，我在模拟赛的时候……确实感受到迷惘没错。那种从来不曾感受过的被锁定的焦虑，让我有种无法自由发挥的感觉。',
   );
   await daiya.say_and_wait(
-    '但我从小就都有跟一起训练的人交待过，“并跑练习的时候一定不能对我放水”。',
+    '但我从小就都有跟一起训练的人交待过，『并跑练习的时候一定不能对我放水』。',
   );
   await me.say_and_wait('即便如此，大家还是对你有顾忌吧');
   await daiya.say_and_wait(
@@ -134,15 +134,15 @@ module.exports = {
         return false;
       }
       await era.printAndWait(
-        `中坚训练员A「终于……“${daiya.sex}”终于要参加模拟赛了。我看这下才刚过年，肯定就要造成不小的骚动啰！」`,
+        `中坚训练员A「终于……『${daiya.sex}』终于要参加模拟赛了。我看这下才刚过年，肯定就要造成不小的骚动啰！」`,
       );
       await era.printAndWait(
         '──新年假期过后。在体育馆举办的训练员会议当中，同事们都在议论纷纷。',
       );
       await era.printAndWait(
-        `没错，明天就是“那位${
+        `没错，明天就是『那位${
           daiya.sex_code - 1 ? '千金' : '少爷'
-        }”终于要参加模拟赛的日子。究竟谁会成为${daiya.sex}的训练员……？`,
+        }』终于要参加模拟赛的日子。究竟谁会成为${daiya.sex}的训练员……？`,
       );
       await daiya.say_and_wait(
         '今天就请各位多多指教了。然后……小北，也请多多指教。谢谢你特地过来♪',
@@ -427,7 +427,7 @@ module.exports = {
           '里见集团的确是相当知名且规模庞大的企业，但也绝不是难以亲近的对象。会特地举办训练员征选──',
         );
         await mcqueen.say_and_wait(
-          '也是因为他们“格外慎重”的关系。里见，我说得没错吧？',
+          '也是因为他们『格外慎重』的关系。里见，我说得没错吧？',
         );
         await daiya.say_and_wait(
           '……是的，你说得没错。寻找合适的训练员，也等于是寻找一个能寄托我的梦想和里见家宿愿的人。',
@@ -436,11 +436,11 @@ module.exports = {
           `里见家──虽然还只是新兴企业，但对赛${daiya.get_uma_sex_title()}竞赛文化抱持着深厚的情感，也希望能为将来的发展尽一份贡献。`,
         );
         await daiya.say_and_wait(
-          '协助营运、慈善事业等等，我们在各方面都投注了努力，但我们的资历不比目白家，还未能做到“某个最重要的贡献”。',
+          '协助营运、慈善事业等等，我们在各方面都投注了努力，但我们的资历不比目白家，还未能做到『某个最重要的贡献』。',
         );
         await me.say_and_wait('最重要的贡献？');
         await daiya.say_and_wait(
-          `是，也就是──“从我们家族里大量培育出能够赢得G1竞赛的知名赛${daiya.get_uma_sex_title()}。`,
+          `是，也就是──『从我们家族里大量培育出能够赢得G1竞赛的知名赛${daiya.get_uma_sex_title()}。`,
         );
         await mcqueen.say_and_wait(
           `这是赛${daiya.get_uma_sex_title()}业界独有的文化。若能培育出大量知名赛${daiya.get_uma_sex_title()}那将会成为任何事都难以取代，最重要的贡献呢。`,

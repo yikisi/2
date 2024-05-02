@@ -32,7 +32,7 @@ handlers[event_hooks.week_end] = async () => {
 
     await luna.print_and_wait('小的时候，家里人并不对我抱有期望。');
     await luna.print_and_wait(
-      '我被允许四处疯玩，也被允许不参加训练，似乎对我，大家都抱有“怎么都好”的态度。',
+      '我被允许四处疯玩，也被允许不参加训练，似乎对我，大家都抱有「怎么都好」的态度。',
     );
     await luna.print_and_wait('象征家就是这样的地方，人们只关心实力。');
     await luna.print_and_wait('于是，强大的姐姐们在赛道上飞驰。');
@@ -55,7 +55,7 @@ handlers[event_hooks.week_end] = async () => {
     await luna.print_and_wait(
       '只有在极致的奔跑下，我才会变得平静……才会变得像我自己。',
     );
-    await luna.print_and_wait('“露娜。”');
+    await luna.print_and_wait('「露娜。」');
     await luna.print_and_wait(
       '妈妈给我起了一个好听的名字，也是一个温柔的名字。',
     );
@@ -65,7 +65,7 @@ handlers[event_hooks.week_end] = async () => {
     );
     await luna.print_and_wait('这时，我才意识到，为什么家人们不会管教我。');
     await luna.print_and_wait(
-      '因为，代代流传的“象征”之血，会指引我走上一条既定的道路。',
+      '因为，代代流传的「象征」之血，会指引我走上一条既定的道路。',
     );
     await luna.print_and_wait('胜利。胜利。');
     await luna.print_and_wait('只要能胜利，哪怕我变得不再是自己也是被允许的。');
@@ -172,7 +172,7 @@ handlers[event_hooks.week_end] = async () => {
       `露娜还年轻，${luna.sex}一定还有机会……不一定非要这一次。`,
     );
     await era.printAndWait(
-      `${CharaTalk.me.name} 尝试说服自己。但 ${CharaTalk.me.name} 明白，全日本对露娜——对鲁铎象征的期待，不允许${luna.sex}“临阵脱逃”。`,
+      `${CharaTalk.me.name} 尝试说服自己。但 ${CharaTalk.me.name} 明白，全日本对露娜——对鲁铎象征的期待，不允许${luna.sex}「临阵脱逃」。`,
     );
     await era.printAndWait('露娜也一定不愿意就此放弃。');
     await era.printAndWait(
