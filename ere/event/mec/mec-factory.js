@@ -27,9 +27,14 @@ cons_dict[80] = require('#/event/mec/mec-80');
 cons_dict[204] = require('#/event/mec/mec-204');
 cons_dict[205] = require('#/event/mec/mec-205');
 cons_dict[206] = require('#/event/mec/mec-206');
+cons_dict[303] = require('#/event/mec/mec-303');
+cons_dict[304] = require('#/event/mec/mec-304');
+cons_dict[305] = require('#/event/mec/mec-305');
+cons_dict[306] = require('#/event/mec/mec-306');
 cons_dict[340] = require('#/event/mec/mec-340');
 cons_dict[341] = require('#/event/mec/mec-341');
 cons_dict[342] = require('#/event/mec/mec-342');
+cons_dict[343] = require('#/event/mec/mec-343');
 cons_dict['av-sister'] = require('#/event/mec/mec-av-sister');
 
 console.log(

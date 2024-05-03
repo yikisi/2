@@ -336,7 +336,14 @@ async function sys_next_week() {
     era.get(`status:${chara_id}:疲惫`) &&
       era.add(`status:${chara_id}:疲惫`, -1);
     era.get(`status:${chara_id}:伤病`) &&
-      era.add(`status:${chara_id}:伤病`, -1);
+      era.set(
+        `status:${chara_id}:伤病`,
+        Math.max(
+          era.get(`status:${chara_id}:伤病`) -
+            (1 + (era.get('cflag:305:招募状态') === recruit_flags.yes)),
+          0,
+        ),
+      );
     era.set(`status:${chara_id}:健康茶`, 0);
     // 药物泌乳只维持一回合
     if (era.get(`talent:${chara_id}:泌乳`) === 2) {

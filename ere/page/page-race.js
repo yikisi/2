@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_change_tired = require('#/system/chara/sys-change-tired');
 const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
+const get_status = require('#/system/chara/sys-get-status');
 const sys_check_titles_after_race = require('#/system/race/sys-check-titles-after-race');
 const sys_parse_for_race = require('#/system/race/sys-parse-race-uma');
 const sys_prepare_race = require('#/system/race/sys-prepare-race');
@@ -50,7 +51,6 @@ const {
   get_adaptability_rank,
   get_attr_rank,
   get_rank_level,
-  get_status,
   get_trainer_level,
 } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');

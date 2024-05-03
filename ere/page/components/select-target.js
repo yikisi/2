@@ -1,5 +1,6 @@
 ﻿const era = require('#/era-electron');
 
+const get_status = require('#/system/chara/sys-get-status');
 const { sys_check_train_enabled } = require('#/system/sys-calc-chara-param');
 const filter_chara = require('#/system/sys-filter-chara');
 
@@ -35,7 +36,6 @@ const {
   get_love_info,
   get_rank_level,
   get_relation_info,
-  get_status,
   get_train_time,
 } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');

@@ -66,7 +66,7 @@ class CustomizedMec {
     return 0;
   }
 
-  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string}|string)[]} */
+  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]} */
   get_status() {
     return [];
   }
@@ -75,7 +75,7 @@ class CustomizedMec {
     return 0;
   }
 
-  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string}|string)[]} */
+  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]} */
   get_talents() {
     return [];
   }
