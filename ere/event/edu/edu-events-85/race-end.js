@@ -330,7 +330,7 @@ module.exports = async (hook, extra_flag) => {
     await ruby.say_and_wait(`开辟未来！`);
     await miracle.say_and_wait(`诶，露比？`);
     era.drawLine({ content: '比赛前' });
-    await ruby.say_and_wait(`即使堵上一切，也要在现在报恩。那也是很好的选择。`);
+    await ruby.say_and_wait(`即使赌上一切，也要在现在报恩。那也是很好的选择。`);
     await ruby.say_and_wait(`但是，对你来说这样真的是最好的吗？`);
     await ruby.say_and_wait(`你献上一切后，那些人就能得到回报吗？`);
     await miracle.say_and_wait(`都现在这个时候了…`);

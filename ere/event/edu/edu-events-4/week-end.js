@@ -1082,6 +1082,65 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(
       `你抚摸着${chara_talk.name}的长发，感受到了${chara_talk.sex}的心跳。`,
     );
+  } else if (edu_weeks === 47 + 38) {
+    await print_event_name(`无风`, chara_talk);
+    chara_talk.print(`一切都应该结束了。`);
+    chara_talk.print(`明明已经没有必要继续撑下去了。`);
+    chara_talk.print(`为什么，满手污秽的自己还存活在这世界之上？`);
+    chara_talk.print(
+      `明明就连成为受马娘欢迎的知心大姐姐这一点都已经无法触及的风了？`,
+    );
+    chara_talk.print(`振作起来？为什么，梦想已经破灭的瞬间甚至都快笑出来了。`);
+    chara_talk.print(`看着像是行尸走肉一样连挣扎的意愿都依然消逝。`);
+    await era.printAndWait(`站在镜子面前的丸善斯基疑惑着看着披头散发的自己。`);
+    await chara_talk.say_and_wait(`已经不用这么辛苦了。`);
+    chara_talk.print(
+      `接下来该怎么办？就算装作若无其事的样子继续扮演着知心大姐姐的形象也迟早会有第二个、第三个后辈站在自己的面前。`,
+    );
+    chara_talk.print(`这颗伤痕累累的心，到底还能再撑几次呢？`);
+    await chara_talk.say_and_wait(`......`);
+    chara_talk.print(
+      `已经结束了，丸善斯基，就这样离开这块伤心的地方，哪里都好，不如去巴黎吧，至少可以去看看`,
+    );
+    await chara_talk.say_and_wait(`不`);
+    chara_talk.print(`明明过家家已经结束了，为什么还要这么`);
+    await chara_talk.say_and_wait(`不对，我还有不愿意背叛的人。`);
+    chara_talk.print(`那个训练员吗？怎么样都好了，离开之前跟他打个招呼`);
+    await chara_talk.say_and_wait(
+      `除了这个，幼稚一样的天真，那份希翼的目光，不想背叛，不想就这么结束。`,
+    );
+    chara_talk.print(`丸善斯基，已经结束了，这片土地还有什么值得留恋的`);
+    await chara_talk.say_and_wait(
+      `就算是这样，我还有想要继续前进的方向，还有很多很多没有搞懂的东西。`,
+    );
+    chara_talk.print(`紧紧抱住了自己的丸善斯基向着镜子中的自己倾诉着这一切。`);
+    await chara_talk.say_and_wait(
+      `正是那份幼稚到反而觉得可笑的样子，才是在我心中不断鼓动着的温暖的东西阿。`,
+    );
+    await chara_talk.say_and_wait(
+      `所以，才想要伸出手，才想要紧紧地抱住这团温暖的火焰。`,
+    );
+    await chara_talk.say_and_wait(`是啊，原来如此，说不定我就是为了这个才`);
+    await chara_talk.say_and_wait(
+      `如果这就是我的美学的话，为了追逐着这份美的感受，所以才要在草场之上不断的奔跑才对。`,
+    );
+    chara_talk.print(`真是的，走了这么远的弯路呢。`);
+    chara_talk.print(`得赶快回到训练员的身边才行呢。`);
+    await chara_talk.say_and_wait(`必须让训练员看到脱胎换骨的自己才可以呢♪`);
+    chara_talk.print(`这样真的好吗？`);
+    await chara_talk.say_and_wait(`我不想背叛自己的内心，所以说，已经足够了。`);
+    chara_talk.print(`即使已经污秽不堪？`);
+    await chara_talk.say_and_wait(
+      `也要挣扎着，用尽最后的力气再试一次，这一次，只为了心中吹拂的风。`,
+    );
+    chara_talk.print(`这就是你的美学吗？`);
+    await era.printAndWait(
+      `叹息的丸善斯基就此消逝，新生的自我重新搅动了周围的空气。`,
+    );
+    await era.printAndWait(
+      `像轻柔的风一样，想要快点赶到那个人的身边的急不可耐的心在砰砰跳动着。`,
+    );
+    await era.printAndWait(`那一天，温柔的风就此诞生了。`);
   } else if (edu_weeks === 47 + 39) {
     await print_event_name(`祈祷`, chara_talk);
     era.drawLine({ content: '`特雷森学院·夜间草地' });

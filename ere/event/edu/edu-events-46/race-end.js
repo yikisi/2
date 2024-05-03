@@ -211,7 +211,7 @@ module.exports = async (hook, extra_flag) => {
     extra_flag.rank === 1
   ) {
     await print_event_name(
-      '东京大赏后・名为${chara_talk.name}的泥地偶像',
+      `东京大赏后・名为${chara_talk.name}的泥地偶像`,
       chara_talk,
     );
     await era.printAndWait(`${chara_talk.name}赢得了今年的冠军。`);

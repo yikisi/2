@@ -160,6 +160,10 @@ handlers[check_stages.next_week] = () => {
       case 47 + 37:
         add_event(event_hooks.week_end, event_obj_special);
         break;
+      //10月第一周 无风 (已完成)
+      case 47 + 38:
+        add_event(event_hooks.week_end, event_obj_special);
+        break;
       //10月第四周 祈祷 (已完成)
       case 47 + 39:
         add_event(event_hooks.week_end, event_obj_special);
