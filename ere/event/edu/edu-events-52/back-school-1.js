@@ -10,6 +10,7 @@ const {
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
+const { common_out_check } = require('#/event/edu/edu-events-52/snippets');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -22,7 +23,6 @@ const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
-const { common_out_check } = require('#/event/edu/edu-events-52/snippets');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},{loc:number},EventObject):Promise<*>>} handlers */
 module.exports = (handlers) => {
@@ -171,7 +171,7 @@ module.exports = (handlers) => {
     era.printButton('「嗯，大家一定会很开心的。」（速度+10）', 1);
     era.printButton('「把歌词记熟的话或许会更好。」（智力+10）', 2);
     const attr_change = new Array(5).fill(0);
-    if (await era.input()) {
+    if ((await era.input()) === 1) {
       attr_change[attr_enum.speed] = 10;
       await urara.say_and_wait(
         '果然会吧！乌拉拉也觉得一定会的！所以正式上场时，我一定会更努力表演的！',

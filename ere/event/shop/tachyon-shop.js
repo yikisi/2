@@ -4,6 +4,7 @@ const {
   print,
   printAndWait,
   printButton,
+  waitAnyKey,
 } = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -80,6 +81,7 @@ module.exports = {
         );
       }
     }
+    await waitAnyKey();
     life_marks.first = 0;
   },
   async shop_start() {
@@ -143,12 +145,6 @@ module.exports = {
           ]);
         }
         tachyon.say('总之，来看看今天的货吧');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
       } else if (get('relation:32:0') > 75 && get('love:32') >= 50) {
         if (first) {
           tachyon.say([callname, '？你在这里做什么？']);
@@ -199,12 +195,6 @@ module.exports = {
           }
         }
         tachyon.say('总之，来看看今天的货吧');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
       } else if (first) {
         await tachyon.say_and_wait(['哦呀，这不是 ', callname, ' 吗？']);
         await printAndWait([
@@ -238,7 +228,7 @@ module.exports = {
         ]);
         printButton('开口回答', 1);
         printButton('摇头拒绝', 2);
-        if (await input()) {
+        if ((await input()) === 1) {
           switch (await input()) {
             case '爱丽速子':
             case '速子':
@@ -406,12 +396,6 @@ module.exports = {
           await printAndWait([tachyon.get_colored_name(), ' 露出了扫兴的表情']);
         }
         await tachyon.say_and_wait('总之，来看看今天的货吧');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
       } else if (get('relation:32:0') <= -100) {
         tachyon.say('……啧');
         print([
@@ -445,12 +429,6 @@ module.exports = {
         );
         print([tachyon.sex, '毫不在意的说了些危险的话']);
         tachyon.say('自己看，把钱留下之后就快滚');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
       } else if (get('relation:32:0') <= 0) {
         tachyon.say('……来了啊，这次又是来祸害谁的？');
         print([
@@ -469,12 +447,6 @@ module.exports = {
           '啧……说真的，把药卖给你这种人真的没问题吗，类似的事情我已经想了不下数十次了啊',
         );
         tachyon.say('算了，你自己看今天有什么货吧');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
       } else {
         tachyon.say(['哦呀，这不是 ', callname, ' 吗？']);
         await common_talk(tachyon, me);
@@ -489,13 +461,13 @@ module.exports = {
         ]);
         print([me.get_colored_name(), ' 老老实实的掏出了钱包来']);
         tachyon.say('这才乖嘛，那么来看看今天的货吧');
-        print([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
       }
+      await printAndWait([
+        tachyon.get_colored_name(),
+        ' 拉开了',
+        tachyon.sex,
+        '的白大褂……',
+      ]);
     } else if (first === 2) {
       await tachyon.say_as_unknown_and_wait(
         '哦呀，是新的肥羊……不，豚鼠……我的意思是，客人啊',
@@ -547,7 +519,7 @@ module.exports = {
           '哦呀，是新的肥羊……不，豚鼠……我的意思是，客人啊',
         );
       } else {
-        tachyon.say_as_unknown(
+        await tachyon.say_as_unknown_and_wait(
           '哦呀，又是你啊，客人君，训练员原来是如此乱性的行业吗？啧啧',
         );
       }

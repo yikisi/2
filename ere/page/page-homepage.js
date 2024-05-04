@@ -12,7 +12,10 @@ const {
   sys_change_status_by_base,
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+const {
+  sys_check_awake,
+  sys_check_remote,
+} = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 const { init_chara } = require('#/system/sys-init-chara');
@@ -25,8 +28,10 @@ const check_game_over = require('#/page/components/game-over');
 const print_page_header = require('#/page/components/page-header');
 const print_ero_page = require('#/page/page-ero');
 
-const CharaTalk = require('#/utils/chara-talk');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const {
+  get_chara_talk,
+  say_by_passer_by,
+} = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -70,9 +75,9 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   era.drawLine();
   era.set('flag:当前互动角色', 0);
   era.set('flag:当前位置', rest_loc);
-  chara_id &&
-    !era.get('flag:床伴') &&
-    (await sys_call_daily_event(chara_id, event_hooks.good_night));
+  if (chara_id && !sys_check_remote(chara_id) && !era.get('flag:床伴')) {
+    await sys_call_daily_event(chara_id, event_hooks.good_night);
+  }
   let continue_flag = true,
     temp;
   start_machine_gun(event_hooks.week_end);
@@ -321,7 +326,7 @@ module.exports = async () => {
         }
       });
       const note = note_list[notes_index++ % note_list.length];
-      CharaTalk.say_by_passer_by(note.title, note.content);
+      say_by_passer_by(note.title, note.content);
     }
 
     await handlers[cur_location](chara_id, save_and_next_week, flags);

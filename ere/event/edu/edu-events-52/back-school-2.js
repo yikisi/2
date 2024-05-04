@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { common_out_check } = require('#/event/edu/edu-events-52/snippets');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -7,7 +8,6 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
-const { common_out_check } = require('#/event/edu/edu-events-52/snippets');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},{loc:number},EventObject):Promise<*>>} handlers */
 module.exports = (handlers) => {

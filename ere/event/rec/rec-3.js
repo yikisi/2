@@ -127,9 +127,9 @@ module.exports = {
       `${me.name} 应声点头。${teio_talk.sex}开心地笑了，挺了挺身……`,
     );
     era.println();
-    era.printButton('马上跑到树下伸出双手接应', 1);
+    era.printButton('马上跑到树下伸出双手接应（爱慕+1）', 1);
     era.printButton(
-      `拾起刚刚被自己挡在内侧的，${teio_talk.get_uma_sex_title()}蹬下的凉鞋，放在树下`,
+      `拾起刚刚被自己挡在内侧的，${teio_talk.get_uma_sex_title()}蹬下的凉鞋，放在树下（好感+5）`,
       2,
     );
     const ret = await era.input();
