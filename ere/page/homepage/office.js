@@ -203,7 +203,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
                   player_base.stamina < 100,
                 width: 6,
               },
-              content: `${chara_id ? '一起' : ''}做饭`,
+              content: `${chara_id ? '一起' : ''}加餐`,
               type: 'button',
             },
             {
