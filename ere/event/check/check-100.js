@@ -12,6 +12,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const check_stages = require('#/data/event/check-stages');
+const AcuteEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-100');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -39,15 +40,15 @@ handlers[check_stages.aim_check] = () => {
 const aim_races = {};
 
 aim_races[race_enum.begin_race] = 3;
-aim_races[get_aim_race_index(race_enum.japa_dir, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.siri_sta, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.toky_dai, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.kawa_kin, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.kash_kin, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.teio_sho, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.jbc_cls, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.cham_cup, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.toky_dai, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.japa_dir, 1)] = 4;
+aim_races[get_aim_race_index(race_enum.siri_sta, 1)] = 4;
+aim_races[get_aim_race_index(race_enum.toky_dai, 1)] = 4;
+aim_races[get_aim_race_index(race_enum.kawa_kin, 2)] = 4;
+aim_races[get_aim_race_index(race_enum.kash_kin, 2)] = 4;
+aim_races[get_aim_race_index(race_enum.teio_sho, 2)] = 4;
+aim_races[get_aim_race_index(race_enum.jbc_cls, 2)] = 4;
+aim_races[get_aim_race_index(race_enum.cham_cup, 2)] = 4;
+aim_races[get_aim_race_index(race_enum.toky_dai, 2)] = 4;
 
 /**
  * @param {number} edu_weeks
@@ -56,30 +57,39 @@ aim_races[get_aim_race_index(race_enum.toky_dai, 2)] = 2;
 handlers[check_stages.aim_race] = ({ edu_weeks, race }) =>
   aim_races[`${edu_weeks}_${race}`] || aim_races[race];
 
+/** @param {AfterRaceParams} extra_flag */
+handlers[check_stages.after_race] = (extra_flag) => {
+  if (extra_flag.aim_race) {
+    new AcuteEduMarks().ending += 2 * (extra_flag.rank === 1) - 1;
+  }
+};
+
 handlers[check_stages.next_week] = () => {
   const edu_weeks = era.get('cflag:100:育成回合计时');
+  if (Math.random() < 0.2 * (era.get('status:0:熬夜') + 1)) {
+    add_event(
+      event_hooks.week_start,
+      new EventObject(100, cb_enum.edu, true).set_arg('leg'),
+    );
+  }
   if (edu_weeks < 3 * 48) {
-    const event_obj_special = new EventObject(100, cb_enum.edu, true);
     switch (edu_weeks) {
-      case 47 + 1:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 47 + 6:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 1:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 6:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
-      case 95 + 14:
-        add_event(event_hooks.week_start, event_obj_special);
-        break;
+      case 47 + 1: // 新年的抱负
+      case 47 + 6: // 世纪初最强拳人节
+      case 95 + 1: // 新春的贺礼
+      case 95 + 6: // 拳人节·特大号追加超量叠放无敌燃烧版
+      case 95 + 14: // 粉丝感谢会
+        add_event(
+          event_hooks.week_start,
+          new EventObject(100, cb_enum.edu, true).set_arg(edu_weeks),
+        );
     }
     check_and_register_aim_race(100, aim_races, edu_weeks);
   } else if (edu_weeks === 143 + 9) {
-    add_event(event_hooks.week_start, new EventObject(100, cb_enum.edu));
+    add_event(
+      event_hooks.week_start,
+      new EventObject(100, cb_enum.edu).set_arg('palace'),
+    );
   }
 };
 

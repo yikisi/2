@@ -6,6 +6,8 @@ class AcuteEduMarks extends EduEventMarks {
   kiss;
   // 商店街 - 街机厅 - 打拳机
   boxing;
+  // 结局点数
+  ending;
 
   constructor() {
     super(100);

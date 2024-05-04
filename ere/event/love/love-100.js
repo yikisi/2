@@ -788,7 +788,6 @@ handlers.half_life = async (acute, me, callname, event_object) => {
     '、微笑地蹲下身子。',
   ]);
   await era.printAndWait('伸出赤舌，侍奉那凶恶的主兽。');
-  await era.printAndWait('………………');
   era.println();
   get_attr_and_print_in_event(100, undefined, 66, true);
   await add_juel_out_of_train(100, '同心', 200);
