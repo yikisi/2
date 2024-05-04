@@ -293,62 +293,9 @@ handlers[event_hooks.office_game] = async () => {
   }
 };
 
-handlers[event_hooks.school_atrium] = async (hook) => {
-  const acute = get_chara_talk(100);
-  hook.arg = !(await select_action_in_atrium());
-  if (hook.arg) {
-    await era.printAndWait([
-      '中庭后面的枯树洞，常有',
-      acute.get_uma_sex_title(),
-      '在比赛前，对着树洞呐喊自己的愿望来释放自身压力。',
-    ]);
-    await era.printAndWait([
-      '但平日里看似总是悠闲的的 ',
-      acute.get_colored_name(),
-      '，似乎更喜欢坐在树洞里。',
-    ]);
-    await acute.say_and_wait('嗯……这里可真安静呢～');
-    await era.printAndWait([
-      acute.get_colored_name(),
-      ' 依旧温和得说着，脸上的表情似乎产生了些许的变化……',
-    ]);
-  } else {
-    await acute.say_and_wait([
-      '人来人往的中庭，想要在这里忍受其他',
-      acute.get_uma_sex_title(),
-      '的视线进行约会，恐怕需要很强大的毅力……',
-    ]);
-    await acute.say_and_wait('啊……要在这里约会吗？我不介意的哦～');
-    await acute.say_and_wait([
-      acute.get_colored_name(),
-      ' 似乎并不在乎周围',
-      acute.get_uma_sex_title(),
-      '的目光……',
-    ]);
-    if (era.get('love:100') >= 75) {
-      await era.printAndWait('人来人往的中庭，相爱的二人，在角落中互相拥抱——');
-      await era.printAndWait('………………');
-      await era.printAndWait([
-        '与 ',
-        acute.get_colored_name(),
-        ' 一同度过了极好的中午。',
-      ]);
-    } else {
-      await era.printAndWait('但没有勇气真正踏出那一步的其实是自己。');
-      await era.printAndWait([
-        '——感受到了来自 ',
-        acute.get_colored_name(),
-        ' 期待的目光。',
-      ]);
-      await acute.say_and_wait('后面的内容，等「爱」更多了，再来探索吧。');
-      await era.printAndWait([acute.get_colored_name(), ' 苦笑']);
-      await era.printAndWait('………………');
-      await era.printAndWait(
-        '顺带一提——想要在人来人往的中庭跨出这一步，还需要如钢一般的意志——',
-      );
-    }
-  }
-};
+handlers[
+  event_hooks.school_atrium
+] = require('#/event/daily/daily-events-100/school-atrium');
 
 handlers[event_hooks.school_rooftop] = async () => {
   const acute = get_chara_talk(100),
@@ -550,7 +497,7 @@ handlers[event_hooks.out_station] = async (hook) => {
           acute.get_colored_name(),
           ' 一同在车站前品尝了热气腾腾的油豆腐……',
         ]);
-        await acute.say_and_wait('呼、呼……啊呜～嗯呜～……嗯呜呜♥～');
+        await acute.say_and_wait('呼、呼……啊呜～嗯呜～……嗯呜呜❤️～');
         await era.printAndWait('一面吹着油豆腐的热气，一面小口小口的咀嚼。');
         await era.printAndWait([
           '蒸腾的热气从 ',
@@ -724,7 +671,7 @@ handlers[event_hooks.out_station] = async (hook) => {
           await acute.say_and_wait('…………');
           await acute.say_and_wait('！');
           await acute.say_and_wait('————');
-          await acute.say_and_wait('♥～');
+          await acute.say_and_wait('❤️～');
           era.println();
           begin_and_init_ero(0, 100);
           await quick_make_love(
@@ -759,7 +706,7 @@ handlers[event_hooks.out_station] = async (hook) => {
           await era.printAndWait(
             '一旦未能让对方感到满足，那么喂食者便可能成为猛兽的饵食——',
           );
-          await acute.say_and_wait('♥——————');
+          await acute.say_and_wait('❤️——————');
           await era.printAndWait('深邃的眼眸中，散射出了桃红的色泽。');
           await era.printAndWait([
             '这是名为',

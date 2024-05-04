@@ -175,11 +175,7 @@ module.exports = async (hook) => {
             ' 晚上的时候用得上呢～',
           ]);
           await me.say_and_wait('………………');
-          await era.printAndWait([
-            '不不不！',
-            me.get_colored_name(),
-            ' 是不会用的好吗！？',
-          ]);
+          await era.printAndWait('不不不！不会用的好吗！？');
           break;
         case 1:
           await era.printAndWait('获得了商店街的奖品【普通的纸巾】！');

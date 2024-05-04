@@ -543,16 +543,16 @@ handlers[event_hooks.week_start] = async () => {
         )}那罪恶的双手向奇锐骏的身上探出——`,
       );
       await era.printAndWait('——轻轻一捏。');
-      await acute.say_and_wait('啊？♥');
+      await acute.say_and_wait('啊？❤️');
       await era.printAndWait('小手轻轻的揉捏，奇锐骏的尾巴几乎转瞬间绷直。');
       await era.printAndWait('……原来如此，这里是奇锐骏的敏感带吗？');
-      await acute.say_and_wait(`那，那个♥……${callname}……你这是？`);
+      await acute.say_and_wait(`那，那个❤️……${callname}……你这是？`);
       era.printButton(
         '「不要动，奇锐骏。你都忙这么久了，我帮你按摩放松一下吧。」',
         1,
       );
       await era.input();
-      await acute.say_and_wait('但、但是那里……啊♥～');
+      await acute.say_and_wait('但、但是那里……啊❤️～');
       await era.printAndWait('稍稍一捏，求饶般的娇媚便从奇锐骏的口中叫出。');
       await era.printAndWait(
         '每每一用力，奇锐骏便会不由自主的嚷出这一个字的短语。',
@@ -596,9 +596,9 @@ handlers[event_hooks.week_start] = async () => {
       )}与奇锐骏轻车熟路的来到了自己的休息室。`,
     );
     await era.printAndWait('打开电源，坐在一起，各自将下身探入床炉之中——');
-    era.printButton('「呜啊～～～♥」', 1);
+    era.printButton('「呜啊～～～❤️」', 1);
     await era.input();
-    await acute.say_and_wait('啊哈哈～真暖和呢♥。');
+    await acute.say_and_wait('啊哈哈～真暖和呢❤️。');
     await era.printAndWait(
       `早已习惯了各自存在的${sys_get_callname(0, 0)}和${
         acute.name
@@ -1968,7 +1968,7 @@ handlers[event_hooks.edu_end] = async () => {
     await era.printAndWait('前哨的任务早已完成，接下来的内容，才是正戏。');
     era.printButton('「呐，奇锐骏～。」', 1);
     await era.input();
-    await acute.say_and_wait('嗯♥……');
+    await acute.say_and_wait('嗯❤️……');
     era.printButton('「现在是吃饭的时间，对吧？」', 1);
     await era.input();
     await acute.say_and_wait('……嗯？');
@@ -1983,7 +1983,7 @@ handlers[event_hooks.edu_end] = async () => {
     await acute.say_and_wait('咕！？');
     await acute.say_and_wait('唔、姆、噜……');
     await acute.say_and_wait('…………');
-    await acute.say_and_wait('……♥');
+    await acute.say_and_wait('……❤️');
     await era.printAndWait('——————');
     await era.printAndWait('——不得不说，');
     await era.printAndWait('这真是一场极好的宴会。');
