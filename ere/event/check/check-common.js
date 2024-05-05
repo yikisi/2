@@ -96,7 +96,10 @@ handlers[check_stages.next_week] = (chara_id) => {
     if (edu_weeks < 3 * 48) {
       check_and_register_aim_race(chara_id, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 9) {
-      add_event(event_hooks.week_start, new EventObject(chara_id, cb_enum.edu));
+      add_event(
+        event_hooks.week_start,
+        new EventObject(chara_id, cb_enum.edu).set_arg('palace'),
+      );
     }
   }
 };
