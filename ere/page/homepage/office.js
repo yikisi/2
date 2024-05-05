@@ -662,7 +662,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
           823,
           { id: 824, limit: true },
           ...new Array(11).fill(0).map((_, i) => i + 830),
-          ...new Array(5).fill(0).map((_, i) => i + 850),
+          ...new Array(7).fill(0).map((_, i) => i + 850),
           ...new Array(4).fill(0).map((_, i) => i + 870),
         ]),
       );
