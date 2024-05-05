@@ -31,13 +31,15 @@ module.exports = {
       await era.printAndWait(
         `具有天赋的${digital.get_uma_sex_title()}为了邂逅出色的训练员，自然要展现自己的实力，选拔赛自然是绝佳的选择。`,
       );
-      await era.printAndWait(
-        `作为训练员的 ${
-          me.name
-        }，自然也在关注正在飞驰的${digital.get_uma_sex_title()}，但偶然间，${
-          me.name
-        } 眼睛余光注意到了远处隐藏于看台阴影下的粉色身影。`,
-      );
+      await era.printAndWait([
+        '作为训练员的 ',
+        me.get_colored_name(),
+        '，自然也在关注正在飞驰的',
+        digital.get_uma_sex_title(),
+        '，但偶然间，',
+        me.get_colored_name(),
+        ' 眼睛余光注意到了远处隐藏于看台阴影下的粉色身影。',
+      ]);
       era.println();
       await me.say_and_wait(`嗯……${digital.get_uma_sex_title()}？`);
 
@@ -250,7 +252,7 @@ module.exports = {
       await era.printAndWait(`必可以活用于这次！`);
       await me.say_and_wait(`不做选择的觉悟！`);
       await era.printAndWait(
-        `是的，不做选择本身就是一种选择，但${digital.sex}所说的“不做选择”，可是要付出双倍的努力啊！`,
+        `是的，不做选择本身就是一种选择，但${digital.sex}所说的「不做选择」，可是要付出双倍的努力啊！`,
       );
       await digital.say_and_wait('诶？');
       await me.say_and_wait(
