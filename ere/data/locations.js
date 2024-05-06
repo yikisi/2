@@ -29,6 +29,8 @@ const location_enum = {
   love_hotel: 0,
   // 目白城
   mejiro: 0,
+  // 纽约
+  new_york: 0,
   // 训练室
   office: 0,
   // 巴黎
@@ -80,6 +82,7 @@ location_name[location_enum.school_shop] = '神秘的小卖部';
 location_name[location_enum.race] = '赛场';
 location_name[location_enum.hongkong] = '香港';
 location_name[location_enum.guangzhou] = '广州';
+location_name[location_enum.new_york] = '纽约';
 location_name[location_enum.hot_spring] = '温泉';
 
 module.exports = {

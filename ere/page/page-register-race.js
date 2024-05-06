@@ -40,6 +40,14 @@ function check_in_foreign(chara_id, year_begin, cur_round, registered_race) {
   );
 }
 
+function check_register_disabled(chara_id, in_foreign) {
+  return (
+    era.get(`status:${chara_id}:伤病`) ||
+    !check_pregnant_unprotect(chara_id) ||
+    in_foreign
+  );
+}
+
 /**
  * @param {number} chara_id
  * @returns {Record<string,{color:string,content:string,fontWeight:string}>}
@@ -135,7 +143,8 @@ async function reg_race_page() {
       year_begin,
       cur_round,
       registered_race,
-    );
+    ),
+    base_disabled_check = check_register_disabled(chara_id, in_foreign);
 
   while (flag_race_reg) {
     await era.clear();
@@ -200,9 +209,7 @@ async function reg_race_page() {
                   align: 'center',
                   buttonType: is_aim_race ? 'danger' : 'warning',
                   disabled:
-                    era.get(`status:${chara_id}:伤病`) ||
-                    !check_pregnant_unprotect(chara_id) ||
-                    in_foreign ||
+                    base_disabled_check ||
                     (is_foreign &&
                       race_infos[e].date + year_begin - cur_round <=
                         expedition_weeks),
@@ -338,6 +345,7 @@ async function reg_race_page() {
         cur_round,
         registered_race,
       );
+      base_disabled_check = check_register_disabled(chara_id, in_foreign);
     } else {
       if (registered_race.race === ret) {
         registered_race.race = registered_race.week = -1;

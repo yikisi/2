@@ -15,6 +15,7 @@ const check_stages = require('#/data/event/check-stages');
 const AcuteEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-100');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -66,7 +67,10 @@ handlers[check_stages.after_race] = (extra_flag) => {
 
 handlers[check_stages.next_week] = () => {
   const edu_weeks = era.get('cflag:100:育成回合计时');
-  if (Math.random() < 0.2 * (era.get('status:0:熬夜') + 1)) {
+  if (
+    era.get('cflag:100:招募状态') === recruit_flags.yes &&
+    Math.random() < 0.2 * (era.get('status:0:熬夜') + 1)
+  ) {
     add_event(
       event_hooks.week_start,
       new EventObject(100, cb_enum.edu, true).set_arg('leg'),

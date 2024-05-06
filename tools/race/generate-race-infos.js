@@ -84,6 +84,9 @@ track_dict['坝上'] = 'bashang';
 track_dict['沙田'] = 'shatin';
 track_dict['尚蒂伊'] = 'chantilly';
 track_dict['圣克劳德'] = 'st_cloud';
+track_dict['丘吉尔园'] = 'kentucky';
+track_dict['宾利高'] = 'baltimore';
+track_dict['贝蒙园'] = 'new_york';
 
 const rotation_dict = {};
 rotation_dict['右'] = 'right';

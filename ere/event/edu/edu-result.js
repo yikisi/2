@@ -32,7 +32,10 @@ function handle_rest_cost(chara_id) {
     Math.max(debuff - 1 - (Math.random() < debuff / 5), 0),
   );
   debuff = era.get(`status:${chara_id}:疲惫`);
-  era.set(`status:${chara_id}:疲惫`, Math.max(debuff - 1, 1));
+  era.set(
+    `status:${chara_id}:疲惫`,
+    Math.max(debuff - 1, Number(era.get(`status:${chara_id}:疲惫`) > 0)),
+  );
 }
 
 /** @param {number} chara_id */

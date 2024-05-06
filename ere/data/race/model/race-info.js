@@ -74,6 +74,12 @@ const track_enum = {
   bashang: 86000,
   // 沙田（香港）
   shatin: 85200,
+  // 丘吉尔园
+  kentucky: 55500,
+  // 宾利高
+  baltimore: 55501,
+  // 贝蒙园
+  new_york: 55501,
 };
 Object.keys(track_enum).forEach((e, i) => (track_enum[e] = i));
 
@@ -97,6 +103,9 @@ track_names[track_enum.st_cloud] = '圣克劳德';
 track_names[track_enum.chantilly] = '尚蒂伊';
 track_names[track_enum.bashang] = '从化';
 track_names[track_enum.shatin] = '沙田';
+track_names[track_enum.kentucky] = '丘吉尔园';
+track_names[track_enum.baltimore] = '宾利高';
+track_names[track_enum.new_york] = '贝蒙园';
 
 /**
  * G1比赛赏金 现实对游戏赏金折算 1w日元:1马币

@@ -212,6 +212,7 @@ handlers[location_enum.beach] = require('#/page/homepage/beach');
 handlers[location_enum.guangzhou] =
   handlers[location_enum.hongkong] =
   handlers[location_enum.paris] =
+  handlers[location_enum.new_york] =
     require('#/page/homepage/foreign');
 handlers[location_enum.office] = require('#/page/homepage/office');
 

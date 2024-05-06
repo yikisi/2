@@ -15,7 +15,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
     [
       ero_action_tags.awake,
       ero_action_tags.mouth,
-      ero_action_tags.sadism,
+      ero_action_tags.imp,
       EroHookTag.speak_check,
     ],
     [ero_action_tags.awake],
@@ -31,7 +31,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.hit_anal] = '打屁股';
   ero_tagged_hooks[ero_actions.hit_anal] = new EroHookTag(
-    [ero_action_tags.sadism],
+    [ero_action_tags.imp],
     [ero_action_tags.body],
   );
 
@@ -66,8 +66,10 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
   );
 
   ero_action_names[ero_actions.hit_face] = '打耳光';
-  ero_tagged_hooks[ero_actions.hit_face] =
-    ero_tagged_hooks[ero_actions.hit_anal];
+  ero_tagged_hooks[ero_actions.hit_face] = new EroHookTag(
+    [ero_action_tags.super_sadism],
+    [ero_action_tags.body],
+  );
 
   ero_action_names[ero_actions.hit_face_by_penis] = '阴茎耳光';
   ero_tagged_hooks[ero_actions.hit_face_by_penis] = new EroHookTag(
@@ -109,7 +111,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
   // 性虐派生系
   ero_action_names[ero_actions.hit_anal_hard] = '用力打屁股';
   ero_tagged_hooks[ero_actions.hit_anal_hard] = new EroHookTag(
-    [ero_action_tags.sadism],
+    [ero_action_tags.super_sadism],
     [
       (chara_id) => {
         const last_action = era.get('tflag:前回行动');
@@ -125,7 +127,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.hit_breast_hard] = '用力打奶光';
   ero_tagged_hooks[ero_actions.hit_breast_hard] = new EroHookTag(
-    [ero_action_tags.sadism],
+    [ero_action_tags.super_sadism],
     [
       ero_action_tags.breast,
       (chara_id) => {
@@ -142,7 +144,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.hit_face_hard] = '用力打耳光';
   ero_tagged_hooks[ero_actions.hit_face_hard] = new EroHookTag(
-    [ero_action_tags.sadism],
+    [ero_action_tags.super_sadism],
     [
       (chara_id) => {
         const last_action = era.get('tflag:前回行动');
