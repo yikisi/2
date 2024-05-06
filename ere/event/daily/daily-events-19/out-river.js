@@ -143,7 +143,7 @@ module.exports = async (hook) => {
           digital.get_colored_name(),
           ' 拿在手里的鱼竿都掉了，砸出的水花都溅到了身上。',
         ]);
-        await sky.say_and_wait('哦？居然把鱼竿都弄掉了，sky我可是要生气了哦！');
+        await sky.say_and_wait('哦？居然把鱼竿都弄掉了，Sky我可是要生气了哦！');
         await digital.say_and_wait([
           '不不不，这是我的不好，我的不好！我不应该来到这边和',
           digital.get_uma_sex_title(),
@@ -213,7 +213,7 @@ module.exports = async (hook) => {
         ' 则是精神焕发，这难道是什么新型吸精术吗。',
       ]);
       era.println();
-      let funcb;
+      let wait_flag;
       if (sky_recruit_check) {
         await sky.say_and_wait([sys_get_callname(20, 0), ' 哟！']);
         await era.printAndWait([
@@ -240,7 +240,7 @@ module.exports = async (hook) => {
           sys_get_callname(20, 0),
           ' 居然还会吃醋的吗？该吃醋的是我吧？',
         ]);
-        era.printButton('对sky妥协（青云天空好感度+40）', 1);
+        era.printButton('妥协（青云天空好感度+40）', 1);
         era.printButton('该说正事了（爱丽数码好感度+40）', 2);
         if ((await era.input()) === 1) {
           await me.say_and_wait('好好好，既然如此，那么下次我就和你来钓鱼。');
@@ -318,7 +318,8 @@ module.exports = async (hook) => {
             digital.sex,
             '买个礼物吧，这钓竿还是算了为好……',
           ]);
-          funcb = () => sys_like_chara(20, 0, 40);
+          era.println();
+          wait_flag = sys_like_chara(20, 0, 40);
         } else {
           await me.say_and_wait('说正事吧，我了解你');
           await era.printAndWait([
@@ -373,7 +374,8 @@ module.exports = async (hook) => {
           ]);
           await sky.say_and_wait('果然还是我的训练员啊！');
           await me.say_and_wait('嗯。');
-          funcb = () => sys_like_chara(19, 0, 40);
+          era.println();
+          wait_flag = sys_like_chara(19, 0, 40);
         }
       } else {
         await sky.say_and_wait([
@@ -425,11 +427,9 @@ module.exports = async (hook) => {
           );
           await era.printAndWait('把话题转移，一贯的计谋。');
           await me.say_and_wait('……');
-          await sky.say_and_wait([
-            '真想听我认真说？',
-            sky.get_colored_name(),
-            ' 我或许会出乎你意料的想法纯粹呢？',
-          ]);
+          await sky.say_and_wait(
+            '真想听我认真说？Sky我或许会出乎你意料的想法纯粹呢？',
+          );
           await era.printAndWait([
             '看了一眼旁边的 ',
             digital.get_colored_name(),
@@ -489,7 +489,7 @@ module.exports = async (hook) => {
             digital.sex,
             '觉得也没必要说下去了。',
           ]);
-          await sky.say_and_wait('那我不打扰你们了？sky我还得钓个鱼呢。');
+          await sky.say_and_wait('那我不打扰你们了？Sky我还得钓个鱼呢。');
           await era.printAndWait([
             '洒下太多热量的太阳已经由白转红，留下了 ',
             me.get_colored_name(),
@@ -499,7 +499,8 @@ module.exports = async (hook) => {
           ]);
           await era.printAndWait('带着数码回去吧……');
           await me.say_and_wait('怎么带呢……', true);
-          funcb = () => sys_like_chara(19, 0, 40);
+          era.println();
+          wait_flag = sys_like_chara(19, 0, 40);
         } else {
           await me.say_and_wait('青云天空，虽然我还想和你再聊一下，但是……');
           await me.say_and_wait([
@@ -553,11 +554,14 @@ module.exports = async (hook) => {
             me.get_colored_name(),
             ' 道歉了。',
           ]);
-          funcb = () => sys_love_uma(19, 5);
+          era.println();
+          wait_flag = sys_love_uma(19, 5);
         }
       }
-      era.println();
-      funcb() && (await era.waitAnyKey());
+      wait_flag = sys_like_chara(19, 20, 100) || wait_flag;
+      wait_flag = sys_like_chara(20, 19, 100) || wait_flag;
+      wait_flag && (await era.waitAnyKey());
+      hook.override = true;
       return true;
     } else {
       switch (get_random_value(0, 2)) {

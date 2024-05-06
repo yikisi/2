@@ -301,6 +301,7 @@ module.exports = {
       era.set('cflag:19:招募状态', recruit_flags.yes);
       era.set('flag:物色对象', 0);
       new EventMarks(0).sub(event_hooks.recruit_start);
+      era.set('callname:0:19', '数码');
       return true;
     }
   },

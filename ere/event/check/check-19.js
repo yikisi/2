@@ -17,6 +17,8 @@ const check_stages = require('#/data/event/check-stages');
 const AgEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-19');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const AgLifeMarks = require('#/data/event/life-event-marks/life-event-marks-19');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -97,6 +99,30 @@ handlers[check_stages.after_race] = (extra_flag) => {
 
 handlers[check_stages.next_week] = () => {
   const edu_weeks = era.get('cflag:19:育成回合计时');
+  if (era.get('cflag:19:招募状态') === recruit_flags.yes) {
+    const life_marks = new AgLifeMarks(),
+      love = era.get('love:19'),
+      relation = era.get('relation:19:0');
+    if (!life_marks.shine && (relation > 75 || love >= 10)) {
+      life_marks.shine = 1;
+      add_event(
+        event_hooks.week_start,
+        new EventObject(19, cb_enum.love).set_arg('shine'),
+      );
+    } else if (!life_marks.univ && (relation > 225 || love >= 25)) {
+      life_marks.univ = 1;
+      add_event(
+        event_hooks.week_start,
+        new EventObject(19, cb_enum.love).set_arg('univ'),
+      );
+    } else if (!life_marks.oshi && (relation > 375 || love >= 40)) {
+      life_marks.oshi = 1;
+      add_event(
+        event_hooks.week_start,
+        new EventObject(19, cb_enum.love).set_arg('oshi'),
+      );
+    }
+  }
   if (edu_weeks < 3 * 48) {
     const event_marks = new AgEduMarks();
     const event_obj = new EventObject(19, cb_enum.edu);
@@ -117,24 +143,6 @@ handlers[check_stages.next_week] = () => {
       event_hooks.office_rest,
       event_obj,
     );
-    if (era.get(`relation:19:0`) > 226) {
-      check_and_add_event(
-        event_marks,
-        edu_weeks,
-        'understand_universe',
-        event_hooks.out_start,
-        event_obj,
-      );
-    }
-    if (era.get(`relation:19:0`) > 376) {
-      check_and_add_event(
-        event_marks,
-        edu_weeks,
-        'oshi',
-        event_hooks.out_start,
-        event_obj,
-      );
-    }
     switch (edu_weeks) {
       case 43:
         add_event(event_hooks.week_start, event_obj_special);
