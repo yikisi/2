@@ -14,7 +14,7 @@ const {
 
 const { race_enum } = require('#/data/race/race-const');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,string,{contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number},TachyonEduMarks,number,number):Promise<boolean|void>>} handlers */
+/** @param {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams,TachyonEduMarks,number,number):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
   handlers[race_enum.sank_hai] = async (tachyon, me, callname, extra_flag) => {
     await print_event_name('未知因素', tachyon);
