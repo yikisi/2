@@ -25,7 +25,6 @@ async function love_49_week_end(chara_talk) {
   await era.printAndWait(
     `可一想到会让${me.sex_code - 1 ? '姐姐' : '哥哥'}大人伤心，${chara_talk.name}都努力忍耐下来了。`,
   );
-  await era.printAndWait(`正准备回去时，你看到了一个站在走廊下的粉色身影。`);
   era.printButton(
     `当然了，因为${me.sex_code - 1 ? '姐姐' : '哥哥'}大人的心情才是最重要的。`,
     1,

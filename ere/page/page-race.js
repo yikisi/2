@@ -46,8 +46,8 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const AfterRaceParams = require('#/data/event/after-race-params');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
-const RaceEndParams = require('#/data/event/race-end-params');
-const RaceStartParams = require('#/data/event/race-start-params');
+const RaceEndParams = require('#/data/event/extra-flag/race-end-params');
+const RaceStartParams = require('#/data/event/extra-flag/race-start-params');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_adaptability_rank,
