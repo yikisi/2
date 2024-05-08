@@ -128,7 +128,7 @@ handlers[event_hooks.race_start] = async (_, { race }) => {
   }
 };
 
-/** @type {Record<string,function(CharaTalk,CharaTalk,string,{contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number},TachyonEduMarks,number,number):Promise<boolean|void>>} */
+/** @type {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams,TachyonEduMarks,number,number):Promise<boolean|void>>} */
 const race_end_handlers = {};
 
 [
@@ -139,7 +139,7 @@ const race_end_handlers = {};
 
 /**
  * @param {HookArg} _
- * @param {{contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 handlers[event_hooks.race_end] = async (_, extra_flag) => {
   const callname = sys_get_callname(32, 0),
