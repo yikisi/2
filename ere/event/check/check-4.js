@@ -95,10 +95,10 @@ handlers[check_stages.next_week] = () => {
         event_obj,
       );
     switch (edu_weeks) {
-      case 5: //来自姐姐的礼物(情人节)
+      case 5: //来自姐姐的礼物(情人节修改完毕)
         add_event(event_hooks.week_start, event_obj_special);
         break;
-      case 24: //一见如故 (已完成)
+      case 24: //一见如故 (已完成)//todo 皇帝，友人，玩家
         add_event(event_hooks.week_start, event_obj_special);
         break;
       case 30: //三女神的孩子们

@@ -17,27 +17,27 @@ module.exports = async (hook, extra_flag) => {
     edu_weeks = era.get('cflag:4:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name('出道战前・一切的起点', chara_talk);
-    era.drawLine({ content: '比赛开始前，地下通道内' });
-    await me.say_and_wait(
-      `${
-        chara_talk.name
-      }加油,一定要让后辈${chara_talk.get_uma_sex_title()}们看到你帅气的背影哦`,
-    );
+    await era.printAndWait(`地下通道内`);
     await chara_talk.say_and_wait(
-      `这不是当然的事情嘛,现在的我已经做好享受这场跑步的快乐了。`,
+      `虽然还是有些紧张，不过现在的话倒是完全放松下来了。`,
     );
+    era.printButton(`就这样让后辈们看到丸善斯基帅气的一面吧！`, 1);
+    await era.input();
     await chara_talk.say_and_wait(
-      `一想到能让后辈们看到我帅气的背影,就已经止不住的兴奋起来了！`,
-    );
-    await chara_talk.say_and_wait(
-      `啊，差不多到我出场的时候了，${
+      `嗯嗯,${
         era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }待会见！`,
+      }也要好好看着丸善斯基帅气的样子哦。`,
+    );
+    await chara_talk.say_and_wait(
+      `而且，不仅有在背后一直支持着我的后辈们，还能感受到疾驰过程中的突破极限的风！`,
+    );
+    await chara_talk.say_and_wait(`说到这里，身体也开始兴奋起来了呢！`);
+    await chara_talk.say_and_wait(
+      `差不多到我出场的时候了，那么，训练员君，待会见！`,
     );
     era.printButton(`祝你武运昌隆`, 1);
     await era.input();
-    await era.printAndWait(`${chara_talk.name}走向了赛场`);
-    await me.say_and_wait(`接下来去找座位吧`, true);
+    await era.printAndWait(`点了点头后，${chara_talk.name}走向了赛场`);
   } else if (extra_flag.race === race_enum.asah_sta && edu_weeks < 95) {
     await print_event_name('朝日杯前・马力全开', chara_talk);
     await era.printAndWait(
