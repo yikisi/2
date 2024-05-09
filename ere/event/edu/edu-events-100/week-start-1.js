@@ -114,7 +114,7 @@ module.exports = (handlers) => {
         );
         await acute.say_and_wait('努力的寻找话题……话题——');
         await acute.say_and_wait(
-          '啊，想到了。新年节庆炖菜的制作方法——用这个当做话题的话，一定能把千分变得融洽的……哎嘿嘿。',
+          '啊，想到了。新年节庆炖菜的制作方法——用这个当做话题的话，一定能把气氛变得融洽的……哎嘿嘿。',
         );
         await era.printAndWait([acute.get_colored_name(), ' 温和得笑着。']);
         await era.printAndWait(
@@ -510,7 +510,7 @@ module.exports = (handlers) => {
     await tokino.say_and_wait('………………');
     era.printButton('「………………」', 1);
     await era.input();
-    era.printButton('「我说我是被动的你相信吗？」', 1);
+    era.printButton('「我说我是被动的你信吗？」', 1);
     await era.input();
     era.drawLine();
     await era.printAndWait('后来，被打了个全麻倒立插在了庭院里。');

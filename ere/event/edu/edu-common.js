@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
 const palace = require('#/event/snippets/palace');
+const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -10,7 +11,6 @@ const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_name } = require('#/data/locations');
 const { attr_enum, fumble_result } = require('#/data/train-const');
-const palace_relation = require('#/event/snippets/palace-relation');
 
 /** @type {Record<string,function(number,HookArg,Record<string,*>,EventObject):Promise<*>>} */
 const handlers = {};

@@ -223,7 +223,7 @@ module.exports = {
         get_custom_mec(30).set_callname();
         new EventMarks(0).sub(event_hooks.school_atrium);
         add_event(
-          event_hooks.week_end,
+          event_hooks.week_start,
           new EventObject(30, cb_enum.edu).set_arg('beginning'),
         );
         return true;

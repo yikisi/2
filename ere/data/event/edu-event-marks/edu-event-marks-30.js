@@ -1,14 +1,19 @@
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 class RiceEduMarks extends EduEventMarks {
+  // 熬夜
+  stay;
   // 赛后热恋事件
-  girl_friend;
+  love;
+
+  // 育成 - 随机事件
   // 名指导
-  famous_educate;
+  teach;
   // 舞蹈训练
-  dance_study;
+  dance;
   // 粉丝来信
-  fans_letter;
+  letter;
+
   // 称号检查 - 重赏23战以上
   g3_count;
 
