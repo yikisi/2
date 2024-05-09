@@ -2,8 +2,11 @@ const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
+  sys_get_callname,
+  sys_get_colored_callname,
   sys_like_chara,
   sys_love_uma,
+  sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
@@ -782,13 +785,11 @@ handlers[event_hooks.week_start] = async () => {
   }
 };
 
-handlers[event_hooks.week_end] = async () => {
+handlers[event_hooks.week_end] = async (_, __, event_object) => {
   const chara52_talk = get_chara_talk(52),
     me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:30:育成回合计时'),
-    event_marks = new RiceEduMarks();
-  if (event_marks.beginning === 1) {
-    event_marks.beginning++;
+    edu_weeks = era.get('cflag:30:育成回合计时');
+  if (event_object.arg === 'beginning') {
     await print_event_name(`育成开始`, rice);
     era.drawLine({ content: '训练场' });
     await rice.say_and_wait(`离训练的时间还有一点点…`);
@@ -900,11 +901,13 @@ handlers[event_hooks.week_end] = async () => {
 
 handlers[event_hooks.race_end] = async (hook, extra_flag) => {
   const me = get_chara_talk(0),
-    chara13_talk = get_chara_talk(13), // 目白麦昆
-    chara47_talk = get_chara_talk(47), // 荒漠英雄
-    chara26_talk = get_chara_talk(26), // 美浦波旁
-    chara52_talk = get_chara_talk(52), // 春乌拉拉
-    edu_weeks = era.get('cflag:30:育成回合计时');
+    mcqueen = get_chara_talk(13),
+    zob_zoy = get_chara_talk(47),
+    bourbon = get_chara_talk(26),
+    urara = get_chara_talk(52),
+    edu_weeks = era.get('cflag:30:育成回合计时'),
+    callname = sys_get_callname(30, 0),
+    self_name = sys_get_callname(30, 30);
   if (
     extra_flag.race === race_enum.begin_race &&
     edu_weeks < 48 &&
@@ -1016,22 +1019,22 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
     await rice.say_and_wait(`${rice.name}，要更努力一点才行！`);
     era.drawLine({ content: '此时在地下通道的另一处' });
     await era.printAndWait(`记者A：「波旁选手！波旁选手！！」`);
-    await chara26_talk.say_and_wait(`……有什么事吗？`);
+    await bourbon.say_and_wait(`……有什么事吗？`);
     await era.printAndWait(
       `记者A：「不愧是【栗毛的超特急】！这次的比赛也展示出那个称号的一角呢！」`,
     );
     await era.printAndWait(
       `记者A：「大家都在期待着呢！波旁选手达成三冠的那个辉煌瞬间！」`,
     );
-    await chara26_talk.say_and_wait(`应援，十分感谢。那就告辞了。`);
+    await bourbon.say_and_wait(`应援，十分感谢。那就告辞了。`);
     await era.printAndWait(`记者A：「啊，等等，等一下！至少再多一句！」`);
     await era.printAndWait(`记者A：「请允许我再问一个问题！」`);
     await era.printAndWait(
       `记者A：「就是说……这次的比赛里。波旁的劲敌会是哪一位呢？」`,
     );
-    await chara26_talk.say_and_wait(`劲敌？`);
-    await chara26_talk.say_and_wait(`判断并不需要那样的存在。`);
-    await chara26_talk.say_and_wait(
+    await bourbon.say_and_wait(`劲敌？`);
+    await bourbon.say_and_wait(`判断并不需要那样的存在。`);
+    await bourbon.say_and_wait(
       `要达成第一，对手肯定会在那里的。没有当成是劲敌的必要。`,
     );
     await rice.say_and_wait(`……好厉害。`);
@@ -1065,13 +1068,13 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
     await era.printAndWait(
       `……${me.name}稍微让${rice.sex}靠着肩膀，让${rice.name}好好休息。这么想着开始迈步的时候…`,
     );
-    await chara26_talk.say_and_wait(`——${rice.sex}的发言，无法理解。`);
-    await chara26_talk.say_and_wait(`如果是这次的比赛内容的话。`);
-    await chara26_talk.say_and_wait(`${rice.sex}应该说「战胜了波旁」才对。`);
-    await chara26_talk.say_and_wait(`对于这孩子来说，这个更重要吧。`);
+    await bourbon.say_and_wait(`——${rice.sex}的发言，无法理解。`);
+    await bourbon.say_and_wait(`如果是这次的比赛内容的话。`);
+    await bourbon.say_and_wait(`${rice.sex}应该说「战胜了波旁」才对。`);
+    await bourbon.say_and_wait(`对于这孩子来说，这个更重要吧。`);
     era.printButton(`${rice.name}也要加油啊。`, 1);
     await era.input();
-    await chara26_talk.say_and_wait(`应援，十分感谢。那就告辞了。`);
+    await bourbon.say_and_wait(`应援，十分感谢。那就告辞了。`);
     await rice.say_and_wait(`……理解不能。`);
     era.drawLine();
     await rice.say_and_wait(
@@ -1139,20 +1142,20 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
     await rice.say_and_wait(
       `${rice.name}、做到了……！${rice.name}也能够做到呢……！`,
     );
-    await chara26_talk.say_and_wait(`…${rice.name}同学。`);
+    await bourbon.say_and_wait(`…${rice.name}同学。`);
     await rice.say_and_wait(`哇啊啊！波旁同学！？`);
     await rice.say_and_wait(`啊、啊啊。这个、这次的比赛…`);
-    await chara26_talk.say_and_wait(`——嗯、「追上了」呢。`);
+    await bourbon.say_and_wait(`——嗯、「追上了」呢。`);
     await rice.say_and_wait(`……唔。`);
-    await chara26_talk.say_and_wait(`其实，我无法理解。`);
-    await chara26_talk.say_and_wait(`每次都在说「追上」的${rice.name}同学。`);
-    await chara26_talk.say_and_wait(`比赛中存在的要么是胜利，要么是失败。`);
-    await chara26_talk.say_and_wait(`不存在「追上」这种概念。但是——`);
-    await chara26_talk.say_and_wait(
+    await bourbon.say_and_wait(`其实，我无法理解。`);
+    await bourbon.say_and_wait(`每次都在说「追上」的${rice.name}同学。`);
+    await bourbon.say_and_wait(`比赛中存在的要么是胜利，要么是失败。`);
+    await bourbon.say_and_wait(`不存在「追上」这种概念。但是——`);
+    await bourbon.say_and_wait(
       `现在，我感到很不甘心。没有拿下这次的【菊花赏】之类的，没能赢之类的。`,
     );
-    await chara26_talk.say_and_wait(`……被${me.name}给追上了呢。`);
-    await chara26_talk.say_and_wait(`${rice.name}同学，听见了吗？`);
+    await bourbon.say_and_wait(`……被${me.name}给追上了呢。`);
+    await bourbon.say_and_wait(`${rice.name}同学，听见了吗？`);
     await rice.say_and_wait(`……嗯。`);
     await era.printAndWait(`观众A：「真是精彩的比赛啊！${rice.name}！」`);
     await era.printAndWait(
@@ -1161,15 +1164,15 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
     await rice.say_and_wait(`……不会吧……`);
     await rice.say_and_wait(`在为${rice.name}鼓掌、吗？`);
     await rice.say_and_wait(`但是，${rice.name}只是…`);
-    await chara26_talk.say_and_wait(`不对。观众们是认可的。`);
-    await chara26_talk.say_and_wait(
+    await bourbon.say_and_wait(`不对。观众们是认可的。`);
+    await bourbon.say_and_wait(
       `${rice.name}是今年的经典赛中名副其实的胜利者。`,
     );
-    await chara26_talk.say_and_wait(`我也认同他们的观点。`);
-    await chara26_talk.say_and_wait(`下一次，我一定不会再输给${me.name}。`);
-    await chara26_talk.say_and_wait(`——作为「对手」。`);
+    await bourbon.say_and_wait(`我也认同他们的观点。`);
+    await bourbon.say_and_wait(`下一次，我一定不会再输给${me.name}。`);
+    await bourbon.say_and_wait(`——作为「对手」。`);
     await rice.say_and_wait(`……对，手。`);
-    await chara26_talk.say_and_wait(
+    await bourbon.say_and_wait(
       `${rice.name}同学，${me.name}要接下我对${me.name}的挑战吗？`,
     );
     await rice.say_and_wait(`……！${rice.name}……！`);
@@ -1207,19 +1210,19 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
     await rice.say_and_wait(`${rice.name}的奔跑，有好好地在成长吗？`);
     await me.say_and_wait(`嗯，跑得很棒哦！`);
     await rice.say_and_wait(`嗯！那下次也……`);
-    await chara47_talk.say_and_wait(`……辛、辛苦了！`);
+    await zob_zoy.say_and_wait(`……辛、辛苦了！`);
     await rice.say_and_wait(`！`);
-    await chara47_talk.say_and_wait(
+    await zob_zoy.say_and_wait(
       `今、今天只有……我一个人，到这里给${rice.name}应援来了。`,
     );
     await rice.say_and_wait(`啊！谢谢！那个、今天……`);
-    await chara47_talk.say_and_wait(`跑得太棒了！`);
-    await chara47_talk.say_and_wait(
+    await zob_zoy.say_and_wait(`跑得太棒了！`);
+    await zob_zoy.say_and_wait(
       `朝着一个目标不断迈进……那个姿态就像是引导民众的女主角一样！`,
     );
-    await chara47_talk.say_and_wait(`总有一天会被后世写上书本来讲述的吧……！`);
+    await zob_zoy.say_and_wait(`总有一天会被后世写上书本来讲述的吧……！`);
     await rice.say_and_wait(`呜啊啊啊……夸得太过分了啊……`);
-    await chara47_talk.say_and_wait(`啊，对不起……不知不觉就……`);
+    await zob_zoy.say_and_wait(`啊，对不起……不知不觉就……`);
     await rice.say_and_wait(`没有哦，抱歉。但是，谢谢${me.name}。`);
     await rice.say_and_wait(`虽然有点不好意思……${rice.name}，很高兴哦。`);
     const change_list = new Array(5).fill(0);
@@ -1235,34 +1238,30 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
     await rice.say_and_wait(`哈……啊、哈啊……！！`);
     await me.say_and_wait(`很努力了呢！`);
     await rice.say_and_wait(`嗯！做到了哦！${rice.name}——`);
-    await chara52_talk.say_and_wait(`${rice.name}——酱！好——厉害！！`);
+    await urara.say_and_wait(`${rice.name}——酱！好——厉害！！`);
     await rice.say_and_wait(`乌拉拉酱！？`);
-    await chara52_talk.say_and_wait(`欸嘿嘿~来咯~`);
-    await chara47_talk.say_and_wait(`不对！快回来！这里才是哦！`);
-    await chara47_talk.say_and_wait(`虽然作为冠军的关系者过来了……`);
-    await chara26_talk.say_and_wait(
+    await urara.say_and_wait(`欸嘿嘿~来咯~`);
+    await zob_zoy.say_and_wait(`不对！快回来！这里才是哦！`);
+    await zob_zoy.say_and_wait(`虽然作为冠军的关系者过来了……`);
+    await bourbon.say_and_wait(
       `那我也没关系的吧？我们就是${rice.name}的相关人员。`,
     );
-    await chara26_talk.say_and_wait(
-      `跑得很棒，${rice.name}。首先恭喜${me.name}。`,
-    );
-    await chara26_talk.say_and_wait(
+    await bourbon.say_and_wait(`跑得很棒，${rice.name}。首先恭喜${me.name}。`);
+    await bourbon.say_and_wait(
       `比赛中的${me.name}，和荒漠英雄起的二名称号「执念之鬼」很相称呢。`,
     );
     await rice.say_and_wait(`……执念之鬼？`);
-    await chara47_talk.say_and_wait(`哇、哇！波旁同学！！`);
-    await chara47_talk.say_and_wait(`这个称号要保密才行的啊，我不是说过了吗！`);
+    await zob_zoy.say_and_wait(`哇、哇！波旁同学！！`);
+    await zob_zoy.say_and_wait(`这个称号要保密才行的啊，我不是说过了吗！`);
     await rice.say_and_wait(`…呼呼。`);
     await rice.say_and_wait(
       `欸嘿嘿……${rice.name}，好好地回应了大家呢，在比赛里。`,
     );
     await me.say_and_wait(`让大家都露出了笑容呢。`);
     await rice.say_and_wait(`嗯！`);
-    await chara52_talk.say_and_wait(`啊哈哈哈，${rice.name}酱也笑眯眯的！`);
-    await chara52_talk.say_and_wait(`下一次的比赛也要有笑容哦！`);
-    await chara52_talk.say_and_wait(
-      `我们也会用力地挥手，来给${rice.name}酱应援的！`,
-    );
+    await urara.say_and_wait(`啊哈哈哈，${rice.name}酱也笑眯眯的！`);
+    await urara.say_and_wait(`下一次的比赛也要有笑容哦！`);
+    await urara.say_and_wait(`我们也会用力地挥手，来给${rice.name}酱应援的！`);
     await rice.say_and_wait(`……是啊，乌拉拉酱。`);
     await rice.say_and_wait(`我也会向着大家……挥手的哦。`);
     await rice.say_and_wait(`大大的……让大家都能看到！`);
@@ -1270,19 +1269,17 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
     await rice.say_and_wait(`……话是这么说，果然，还是会紧张的啊…`);
     await rice.say_and_wait(`在【天皇赏（春）】的胜者舞台上是中心什么的…`);
     await me.say_and_wait(`挺起胸膛。`);
-    await chara13_talk.say_and_wait(
+    await mcqueen.say_and_wait(
       `说的没错。${rice.name}可是战胜了我啊，所以要更自信一点。`,
     );
     await rice.say_and_wait(`啊、麦昆同学！！`);
-    await chara13_talk.say_and_wait(`的确这个舞台很特别。`);
-    await chara13_talk.say_and_wait(`所以站在这个舞台上的我们就得专业才是。`);
-    await chara13_talk.say_and_wait(
-      `不该向那些期待现场演出的人们表达感激之情吗？`,
-    );
+    await mcqueen.say_and_wait(`的确这个舞台很特别。`);
+    await mcqueen.say_and_wait(`所以站在这个舞台上的我们就得专业才是。`);
+    await mcqueen.say_and_wait(`不该向那些期待现场演出的人们表达感激之情吗？`);
     await rice.say_and_wait(`没错。`);
-    await chara13_talk.say_and_wait(`所以，不要害怕舞台。`);
-    await chara13_talk.say_and_wait(`回应那些期待和想法，在舞台上闪耀。`);
-    await chara13_talk.say_and_wait(`这是在赛场上奔跑的我们的义务啊。`);
+    await mcqueen.say_and_wait(`所以，不要害怕舞台。`);
+    await mcqueen.say_and_wait(`回应那些期待和想法，在舞台上闪耀。`);
+    await mcqueen.say_and_wait(`这是在赛场上奔跑的我们的义务啊。`);
     await era.printAndWait(`之后目白麦昆优雅而高贵地走向舞台。`);
     await me.say_and_wait(`学到了很多呢。`);
     await rice.say_and_wait(`嗯，果然是位很棒的人呢。`);
@@ -1441,37 +1438,154 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
     //TODO 隐藏事件（要求京都场地比赛3胜及以上）
     // 心中萌发的名为「你」的故事(无文本)效果：速度+10，耐力+10，根性+10；【京都赛马场】lv+2，【良马场】lv+2
   } else if (extra_flag.rank === 1) {
-    await print_event_name('竞赛获胜', rice);
-    await rice.say_and_wait(
-      `太棒、太棒了，${me.sex_code - 1 ? '姐姐' : '哥哥'}大人。${
-        rice.name
-      }赢了呢…`,
-    );
-    await me.say_and_wait(`再抬头挺胸一点吧。`);
-    await rice.say_and_wait(`抬头挺胸？那个……`);
-    await rice.say_and_wait(`而且，还拿到了第一！真的要满含感激地收下！`);
-    await rice.say_and_wait(`哼、哼哼！像这样吗？${rice.name}有抬头挺胸了吗？`);
-    era.printButton(`我对${me.name}感到骄傲哦。`, 1);
-    era.printButton(`下次也要赢哦。`, 2);
-    const ret = await era.input();
-    if (ret === 1) {
-      await rice.say_and_wait(`对${rice.name}感到骄傲？总、总觉得有点难为情…`);
-      await rice.say_and_wait(
-        `不过，能够让${me.sex_code - 1 ? '姐姐' : '哥哥'}大人觉得骄傲，${
-          rice.name
-        }也觉得很高兴…`,
+    const edu_marks = new RiceEduMarks();
+    if (!edu_marks.girl_friend && era.get('love:30') >= 75) {
+      edu_marks.girl_friend = 1;
+      await print_event_name('热恋', rice);
+      await era.printAndWait([
+        rice.get_colored_name(),
+        ' 结束了C位的LIVE后， ',
+        me.get_colored_name(),
+        ' 和她的心情都十分愉悦。',
+      ]);
+      await era.printAndWait([
+        '但是，现在的 ',
+        rice.get_colored_name(),
+        ' ，正带着妖艳的目光，迈出可爱又急促的小步伐向 ',
+        me.get_colored_name(),
+        ' 奔来。',
+      ]);
+      await me.say_and_wait('嗯…');
+      await era.printAndWait([
+        '身着胜负服的 ',
+        rice.get_colored_name(),
+        ' 兴奋地双手抱住 ',
+        me.get_colored_name(),
+        ' 两侧的腹部。',
+      ]);
+      await era.printAndWait([
+        '她带着不可思议的表情抬头仰望 ',
+        me.get_colored_name(),
+        '，眼中的艳丽满溢而出。',
+      ]);
+      await rice.say_and_wait([callname, '，', self_name, ' 做了什么坏事吗？']);
+      await rice.say_and_wait(['为什么……不抱着 ', self_name, ' 呢？']);
+      await era.printAndWait([
+        '敌不过 ',
+        rice.get_colored_name(),
+        ' 湿润起来的眼神，',
+        me.get_colored_name(),
+        ' 紧紧抱住了少女娇小的身躯。',
+      ]);
+      await era.printAndWait([
+        '时间流逝，觉得差不多该换衣服解散的 ',
+        me.get_colored_name(),
+        '，抓住了 ',
+        rice.get_colored_name(),
+        ' 的肩膀。',
+      ]);
+      await era.printAndWait([
+        rice.get_colored_name(),
+        ' 恋恋不舍地摩挲了下 ',
+        me.get_colored_name(),
+        ' 的手指，说了声回头见便走向更衣室。',
+      ]);
+      await era.printAndWait([
+        '以前无论做什么都小心翼翼，战战兢兢的 ',
+        rice.get_colored_name(),
+        ' ，现在却像小恶魔一样和 ',
+        me.get_colored_name(),
+        ' 亲昵。',
+      ]);
+      await era.printAndWait([
+        'LIVE之后的一次训练后， ',
+        rice.get_colored_name(),
+        ' 穿着体操服向 ',
+        me.get_colored_name(),
+        ' 走来。',
+      ]);
+      await era.printAndWait([
+        rice.get_colored_name(),
+        ' 把体操服号码牌的部分压在 ',
+        me.get_colored_name(),
+        ' 身上，享受着 ',
+        me.get_colored_name(),
+        ' 的气味。',
+      ]);
+      await era.printAndWait(
+        '心想有女儿的父亲大概是这种心情吧？更用力地回抱住她。',
       );
-      await rice.say_and_wait(`虽然很高兴，又觉得难为情…`);
-      await rice.say_and_wait(`唔唔，${rice.name}有点，搞不清楚了~`);
+      await me.say_and_wait([
+        '很痒哦，',
+        sys_get_colored_callname(0, 30),
+        '。',
+      ]);
+      await rice.say_and_wait('诶？');
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 催促 ',
+        rice.get_colored_name(),
+        ' 去换衣服。',
+      ]);
+      await era.printAndWait([
+        '目送她步履蹒跚的身影， ',
+        me.get_colored_name(),
+        ' 深切认识到 ',
+        me.get_colored_name(),
+        ' 们之间的关系产生了某种变化。',
+      ]);
+      await era.printAndWait([
+        '最近， ',
+        rice.get_colored_name(),
+        ' 对 ',
+        me.get_colored_name(),
+        ' 的亲昵之举逐渐过激。',
+      ]);
+      await era.printAndWait([
+        '搂抱、亲吻、拉着 ',
+        me.get_colored_name(),
+        ' 的手不小心摸了摸胸部，这些甚至不会让 ',
+        me.get_colored_name(),
+        ' 觉得有问题了。',
+      ]);
+      await sys_love_uma_in_event(30);
     } else {
+      await print_event_name('竞赛获胜', rice);
       await rice.say_and_wait(
-        `嗯、嗯！下次的比赛也要赢，这样才能让大家感到高兴。`,
+        `太棒、太棒了，${me.sex_code - 1 ? '姐姐' : '哥哥'}大人。${
+          rice.name
+        }赢了呢…`,
       );
+      await me.say_and_wait(`再抬头挺胸一点吧。`);
+      await rice.say_and_wait(`抬头挺胸？那个……`);
+      await rice.say_and_wait(`而且，还拿到了第一！真的要满含感激地收下！`);
       await rice.say_and_wait(
-        `所以，${
-          me.sex_code - 1 ? '姐姐' : '哥哥'
-        }大人。再麻烦${me.name}多指教${rice.name}训练了！`,
+        `哼、哼哼！像这样吗？${rice.name}有抬头挺胸了吗？`,
       );
+      era.printButton(`我对${me.name}感到骄傲哦。`, 1);
+      era.printButton(`下次也要赢哦。`, 2);
+      const ret = await era.input();
+      if (ret === 1) {
+        await rice.say_and_wait(
+          `对${rice.name}感到骄傲？总、总觉得有点难为情…`,
+        );
+        await rice.say_and_wait(
+          `不过，能够让${me.sex_code - 1 ? '姐姐' : '哥哥'}大人觉得骄傲，${
+            rice.name
+          }也觉得很高兴…`,
+        );
+        await rice.say_and_wait(`虽然很高兴，又觉得难为情…`);
+        await rice.say_and_wait(`唔唔，${rice.name}有点，搞不清楚了~`);
+      } else {
+        await rice.say_and_wait(
+          `嗯、嗯！下次的比赛也要赢，这样才能让大家感到高兴。`,
+        );
+        await rice.say_and_wait(
+          `所以，${
+            me.sex_code - 1 ? '姐姐' : '哥哥'
+          }大人。再麻烦${me.name}多指教${rice.name}训练了！`,
+        );
+      }
     }
   } else if (extra_flag.rank <= 5) {
     //通用比赛入着
@@ -1498,7 +1612,7 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
       await rice.say_and_wait('果、果然，还是要以第一名为目标呢…');
       await rice.say_and_wait('得要更加努力才行！');
     }
-  } else if (extra_flag.rank > 5) {
+  } else {
     await print_event_name('竞赛败北', rice);
     await rice.say_and_wait(`呜呜…${rice.name}输了…`);
     await rice.say_and_wait(
@@ -1528,8 +1642,6 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
       await era.printAndWait(`后来${me.name}们重新检讨这次比赛落败的因素。。`);
       await era.printAndWait(`${rice.name}不可思议地情绪高涨。`);
     }
-  } else {
-    throw new Error();
   }
 };
 

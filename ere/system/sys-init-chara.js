@@ -173,12 +173,7 @@ module.exports = {
         }
       }
       get_custom_mec(chara_id).set_callname();
-      if (
-        era.get(`callname:${chara_id}:${chara_id}`) ===
-        era.get(`callname:${chara_id}:-2`)
-      ) {
-        era.set(`callname:${chara_id}:${chara_id}`, '我');
-      }
+      get_custom_mec(chara_id).set_my_name();
       if (era.get(`relation:${chara_id}:0`) === undefined) {
         era.set(`relation:${chara_id}:0`, era.get('flag:马娘初始好感'));
       } else {

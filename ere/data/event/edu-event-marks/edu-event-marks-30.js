@@ -1,8 +1,8 @@
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 class RiceEduMarks extends EduEventMarks {
-  //米浴初次登场
-  beginning;
+  // 赛后热恋事件
+  girl_friend;
   // 名指导
   famous_educate;
   // 舞蹈训练

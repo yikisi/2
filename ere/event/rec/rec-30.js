@@ -219,8 +219,8 @@ module.exports = {
           '也努力地挤出了一个笑容。',
         ]);
         era.set('flag:物色对象', 0);
-        get_custom_mec(30).set_callname();
         era.set('cflag:30:招募状态', recruit_flags.yes);
+        get_custom_mec(30).set_callname();
         new EventMarks(0).sub(event_hooks.school_atrium);
         add_event(
           event_hooks.week_end,
