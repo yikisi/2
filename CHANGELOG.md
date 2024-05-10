@@ -1,5 +1,20 @@
 # Changelog
 
+## [EraUma v0.591](https://gitgud.io/umaera/erauma/-/releases/v0.59)
+
+_2024/5/4_
+
+EraUma v0.591，EraUma v0.59的bug修复版，兼容v0.59版本的存档
+
+### Changed
+
+* 调整速子的商店口上，减少需要玩家按任意键的口上输出
+
+### Fixed
+
+* 修复了东海帝王和爱慕彦星专属机制脚本中的bug
+* 减少了爱丽速子商店口上中需要玩家按任意键继续的部分，以使商店交互更流畅
+
 ## [EraUma v0.59](https://gitgud.io/umaera/erauma/-/releases/v0.59)
 
 _2024/5/4_
