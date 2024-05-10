@@ -17,11 +17,10 @@ module.exports = class extends CustomizedMec {
   }
 
   set_callname() {
-    if (get('cflag:32:招募状态') === recruit_flags.yes) {
-      set('callname:32:0', '豚鼠君');
-    } else {
-      super.set_callname();
+    if (get('cflag:32:招募状态') !== recruit_flags.yes) {
+      return super.set_callname();
     }
+    set('callname:32:0', '豚鼠君');
   }
 
   get_status() {

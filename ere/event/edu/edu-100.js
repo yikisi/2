@@ -135,7 +135,7 @@ handlers[event_hooks.race_start] = async (hook, extra_flag) => {
   await era.printAndWait('不安。');
   await era.printAndWait('极度的不安。');
   await era.printAndWait(
-    '如果要用比喻的话，那大概就是如同登月的阿波罗17号返回地球舱室中发现地面上凭空出现了一根螺丝钉程度的不安。',
+    '如果要用比喻的话，那大概就是如同登月的阿波罗17号返回地球舱室中发现地面上凭空出现了一根螺丝程度的不安。',
   );
   await era.printAndWait(
     '夜里难以入睡，即便只是靠在床上，也能时不时听到自己躁动不安的心跳。',

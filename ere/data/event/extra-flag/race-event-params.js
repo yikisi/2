@@ -1,4 +1,6 @@
-class RaceEventParams {
+const ExtraFlagsParams = require('#/data/event/extra-flag/common');
+
+class RaceEventParams extends ExtraFlagsParams {
   /** @type {number[]} */
   attr_change;
   /** @type {number} */

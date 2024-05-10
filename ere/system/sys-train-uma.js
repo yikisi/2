@@ -16,6 +16,7 @@ const DarleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 const ByerleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-342');
 const recruit_flags = require('#/data/event/recruit-flags');
+const TrainFailParams = require('#/data/event/extra-flag/train-fail-params');
 const { get_trainer_train_buff } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const {
@@ -221,11 +222,15 @@ module.exports = {
         case attr_enum.intelligence:
           train_cost.stamina = -train_cost.stamina / 10;
       }
-      const ret = await call_edu_script(chara_id, event_hooks.train_fail, {
-        fumble: Math.random() < 1 - stamina_ratio / fumble_border,
-        stamina_ratio,
-        train: attr,
-      });
+      const ret = await call_edu_script(
+        chara_id,
+        event_hooks.train_fail,
+        new TrainFailParams(
+          Math.random() < 1 - stamina_ratio / fumble_border,
+          stamina_ratio,
+          attr,
+        ),
+      );
       changes.attr_change = ret.attr_change;
       relation_change += ret.relation_change;
       if (ret.stamina) {

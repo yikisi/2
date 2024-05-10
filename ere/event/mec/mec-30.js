@@ -16,4 +16,6 @@ module.exports = class extends CustomizedMec {
       get_chara_talk(0).sex_code - 1 ? '姐姐大人' : '哥哥大人',
     );
   }
+
+  set_my_name() {}
 };

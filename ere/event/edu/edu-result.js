@@ -131,7 +131,7 @@ function print_attr_change(chara_id, to_print) {
   return to_print.length > 0;
 }
 
-/** @type {Record<string,function(number,HookArg,Record<string,any>):Promise<*>>} */
+/** @type {Record<string,function(number,HookArg,*):Promise<*>>} */
 const handlers = {};
 
 handlers[event_hooks.foreign_rest] = async (chara_id) => {
@@ -237,7 +237,7 @@ handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {{args:*,fumble:boolean,train:number}} extra_flag
+ * @param {TrainFailParams} extra_flag
  */
 handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
   const args = extra_flag.args || fumble_result.fail;
