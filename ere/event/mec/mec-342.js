@@ -1,4 +1,4 @@
-const { get, set } = require('#/era-electron');
+const { set } = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
@@ -6,6 +6,10 @@ const { buff_colors } = require('#/data/color-const');
 const ByerleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-342');
 
 module.exports = class extends CustomizedMec {
+  is_anger_for_unfaithful() {
+    return false;
+  }
+
   get_talents() {
     const title_check = new ByerleyLifeMarks().buff;
     return [

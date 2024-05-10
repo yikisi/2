@@ -7,6 +7,10 @@ class CustomizedMec {
     this.chara_id = chara_id;
   }
 
+  is_anger_for_unfaithful() {
+    return true;
+  }
+
   is_race_register_enabled() {
     return true;
   }

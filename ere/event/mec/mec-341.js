@@ -4,6 +4,10 @@ const { buff_colors } = require('#/data/color-const');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 
 module.exports = class extends CustomizedMec {
+  is_anger_for_unfaithful() {
+    return false;
+  }
+
   get_talents() {
     const title_check = new GodolphinLifeMarks().buff;
     return [
