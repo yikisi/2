@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+} = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
 
@@ -45,11 +48,13 @@ module.exports = {
       await era.printAndWait(
         `不久后将会挑选一批优秀的法国幼驹前来中央交流，${me.name} 被选为责任人负责双方的接洽工作。`,
       );
-      await era.printAndWait(
-        `理事长的青梅竹马——${sys_get_callname(0, 343)} 会全程给予 ${
-          me.name
-        } 协助。`,
-      );
+      await era.printAndWait([
+        '理事长的青梅竹马——',
+        sys_get_colored_callname(0, 343),
+        ' 会全程给予 ',
+        me.get_colored_name(),
+        ' 协助。',
+      ]);
 
       await era.printAndWait('要动身前往巴黎吗？');
       era.printButton('是', 1);

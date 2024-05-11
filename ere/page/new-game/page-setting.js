@@ -137,6 +137,7 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 0);
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 0);
+      era.set('flag:性技自主学习', 0);
       break;
     case 1:
       era.set('flag:训练难度', 0);
@@ -164,6 +165,7 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 1);
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 0);
+      era.set('flag:性技自主学习', 1);
       break;
     case 2:
       era.set('flag:训练难度', -25);
@@ -191,6 +193,7 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 1);
       era.set('flag:不忠惩罚', 0);
       era.set('flag:读档对话', 1);
+      era.set('flag:性技自主学习', 1);
       break;
     case 3:
       era.set('flag:训练难度', -25);
@@ -218,6 +221,7 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 1);
       era.set('flag:不忠惩罚', 0);
       era.set('flag:读档对话', 1);
+      era.set('flag:性技自主学习', 1);
       break;
     case 4:
       era.set('flag:训练难度', 25);
@@ -245,6 +249,7 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 0);
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 1);
+      era.set('flag:性技自主学习', 1);
       break;
     case 5:
       era.set('flag:训练难度', 25);
@@ -272,6 +277,7 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 0);
       era.set('flag:不忠惩罚', 0);
       era.set('flag:读档对话', 0);
+      era.set('flag:性技自主学习', 0);
       break;
     case 6:
       era.set('flag:训练难度', 25);
@@ -299,6 +305,7 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 0);
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 1);
+      era.set('flag:性技自主学习', 1);
       break;
     case 7:
       era.set('flag:训练难度', 25);
@@ -326,10 +333,7 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 0);
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 1);
-      break;
-    default:
-      theme = 10;
-      break;
+      era.set('flag:性技自主学习', 1);
   }
 }
 
@@ -642,6 +646,14 @@ async function page_settings() {
             '马娘的身体完美无暇，找不到丝毫弱点',
             '极难让她们感到快感',
           ][v],
+      },
+      {
+        key: '性技自主学习',
+        label: '角色对性技的学习',
+        options: [
+          { l: '兴趣缺缺', v: 0 },
+          { l: '主动摸索', v: 1 },
+        ],
       },
       {
         key: '雷普抵抗',

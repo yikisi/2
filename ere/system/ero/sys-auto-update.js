@@ -10,7 +10,7 @@ const skill_names = require('#/data/ero/shop-desc.json').skill_desc.map((e) =>
 const { part_names, pleasure_list } = require('#/data/ero/part-const');
 
 /** @param {number} chara_id */
-module.exports = (chara_id) => {
+function sys_auto_update(chara_id) {
   if (!chara_id) {
     return;
   }
@@ -206,4 +206,6 @@ module.exports = (chara_id) => {
       }
     }
   } while (skill_list.length > 0);
-};
+}
+
+module.exports = sys_auto_update;

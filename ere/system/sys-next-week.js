@@ -157,7 +157,9 @@ async function sys_next_week() {
   }
   in_team_list.forEach((chara_id) => {
     team_dict[chara_id] = 1;
-    sys_check_awake(chara_id) && auto_update_ero_skills(chara_id);
+    if (era.get('flag:性技自主学习') && sys_check_awake(chara_id)) {
+      auto_update_ero_skills(chara_id);
+    }
   });
 
   // 新回合开始
