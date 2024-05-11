@@ -26,22 +26,6 @@ function random_style(adapts) {
 }
 
 /**
- * @param {number} pop
- * @returns {number}
- */
-function get_final_pop(pop) {
-  if (pop <= 20) {
-    return 0;
-  } else if (pop < 55) {
-    return ((pop - 20) * 72) / (55 - 20);
-  } else if (pop < 70) {
-    return 72;
-  } else {
-    return ((pop - 70) * (148 - 117)) / (80 - 70);
-  }
-}
-
-/**
  * @param {PseudoUma[]} team_chara
  * @param {number} race
  * @param {RaceInfo} info

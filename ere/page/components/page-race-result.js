@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { sort_list, median } = require('#/utils/list-utils');
+const { median, sort_list } = require('#/utils/list-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
