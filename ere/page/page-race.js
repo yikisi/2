@@ -33,8 +33,10 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const CharaTitles = require('#/data/chara-titles');
 const {
   adaptability_colors,
+  buff_colors,
   el_danger_color,
   el_success_color,
   el_warning_color,
@@ -792,6 +794,27 @@ async function race_page(race) {
     mvp_id,
   );
   fame_reward -= hentai_flag * 150;
+  let race_title_reward = 0;
+  for (const { index_chara: id } of team_list) {
+    const titles = new CharaTitles(id),
+      cur_count = titles.count();
+    sys_add_titles(id, ...new_title_dict[id]) && (await era.waitAnyKey());
+    if (titles.count() > cur_count) {
+      titles
+        .get()
+        .slice(cur_count)
+        .forEach((e) => {
+          if (e.c === buff_colors[1]) {
+            if (e.n.endsWith('变则三冠') || e.n.endsWith('六冠')) {
+              race_title_reward++;
+            } else if (e.n.endsWith('三宝冠') || e.n.endsWith('三冠')) {
+              race_title_reward += 2;
+            }
+          }
+        });
+    }
+  }
+  fame_reward += race_title_reward * 40;
   if (
     era.get('cflag:0:妊娠阶段') >> pregnant_stage_enum.fetal > 0 &&
     team_list.findIndex((uma) => uma.index_chara === 0) === -1
@@ -818,6 +841,17 @@ async function race_page(race) {
       ]);
     }
   }
+  if (fame_reward > 0) {
+    sys_like_chara(302, 0, fame_reward / 5 + race_title_reward * 12) &&
+      (await era.waitAnyKey());
+  }
+  if (best_rank <= 5) {
+    sys_like_chara(
+      301,
+      0,
+      (6 - best_rank) * (5 - info.race_class) + race_title_reward * 25,
+    ) && (await era.waitAnyKey());
+  }
   const prize_ratio = 0.04 * get_trainer_level() + 0.04,
     total_prize = sys_change_money(
       team_list
@@ -832,13 +866,6 @@ async function race_page(race) {
         })
         .reduce((p, c) => p + c),
     );
-  if (fame_reward > 0) {
-    sys_like_chara(302, 0, fame_reward / 5) && (await era.waitAnyKey());
-  }
-  if (best_rank <= 5) {
-    sys_like_chara(301, 0, (6 - best_rank) * (5 - info.race_class)) &&
-      (await era.waitAnyKey());
-  }
   if (total_prize) {
     await era.printAndWait([
       '收到了比赛赏金分成 ',
@@ -904,9 +931,6 @@ async function race_page(race) {
           !era.get(`cflag:${e}:随机招募`) && era.add(`cflag:${e}:随机招募`, -1),
       );
     }
-  }
-  for (const { index_chara: id } of team_list) {
-    sys_add_titles(id, ...new_title_dict[id]) && (await era.waitAnyKey());
   }
   era.drawLine();
   await era.printAndWait('回去了……');

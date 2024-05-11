@@ -148,7 +148,7 @@ async function page_chairman_office() {
             await chairman.say_and_wait('如果是你……幻 听！你什么都没听到！');
         }
         era.println();
-        sys_like_chara(302, 0, get_random_value(20, 30)) &&
+        sys_like_chara(302, 0, get_random_value(5, 20)) &&
           (await era.waitAnyKey());
         nothing = false;
         break;

@@ -130,6 +130,10 @@ race2fans_reward[race_enum.teio_sho] = 7000;
 race2fans_reward[race_enum.hope_sta] = 7000;
 race2fans_reward[race_enum.hans_fil] = 6500;
 race2fans_reward[race_enum.asah_sta] = 7000;
+race2fans_reward[race_enum.toky_der] = 7000;
+race2fans_reward[race_enum.hane_hai] = 7000;
+race2fans_reward[race_enum.jbc_lad] = 6100;
+race2fans_reward[race_enum.zeni_you] = 6200;
 
 race2fans_reward[race_enum.prix_dia] = 28000;
 race2fans_reward[race_enum.prix_lat] = 32000;
@@ -138,6 +142,17 @@ race2fans_reward[race_enum.hk_spr] = 20000;
 race2fans_reward[race_enum.hk_mil] = 25000;
 race2fans_reward[race_enum.hk_cup] = 30000;
 race2fans_reward[race_enum.hk_vas] = 25000;
+race2fans_reward[race_enum.kent_der] = 31000;
+race2fans_reward[race_enum.prea_sta] = 31000;
+race2fans_reward[race_enum.belm_sta] = 31000;
+
+Object.values(race_enum)
+  .filter(
+    (e) =>
+      race_infos[e].race_class === RaceInfo.class_enum.G1 &&
+      !race2fans_reward[e],
+  )
+  .map((e) => console.log(`[check-52.js] miss! ${race_infos[e].name_zh}`));
 
 /**
  * @param {number} reward
@@ -185,7 +200,7 @@ handlers[check_stages.after_race] = (extra_flag) => {
   }
   const edu_marks = new UraraEduMarks();
   reward *= (100 + edu_marks.fan_buff) / 100;
-  edu_marks.fans += reward;
+  edu_marks.fans += reward || 7000;
   if (reward) {
     era.print([
       get_chara_talk(52).get_colored_name(),

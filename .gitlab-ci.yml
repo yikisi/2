@@ -15,6 +15,7 @@ build:
     NODE_OPTIONS: "--openssl-legacy-provider"
   script:
     - cd engine
+    - git lfs fetch
     - npm install
     - npm run win:pack
     - mv dist_electron/win-unpacked ./$GAME_ALL_DIR

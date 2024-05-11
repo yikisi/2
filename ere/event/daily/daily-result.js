@@ -12,11 +12,13 @@ const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_enum } = require('#/data/train-const');
 
 /**
@@ -48,7 +50,7 @@ function random_cost_in_action(chara_id, stamina, time) {
   }
 }
 
-/** @type {Record<string,function(number,HookArg,Record<string,*>):Promise<void>>} */
+/** @type {Record<string,function(number,HookArg,Record<string,any>):Promise<void>>} */
 const handlers = {};
 
 handlers[event_hooks.office_gift] = async (chara_id) => {
@@ -300,7 +302,17 @@ handlers[event_hooks.out_church] = async (chara_id) => {
     era.set('status:0:练习X手', 0);
     era.print(`${CharaTalk.me.name} 的训练似乎更加顺利了……`);
   }
-  if (condition_chara || condition_me) {
+  const temp = get_random_entry(
+    new Array(3)
+      .fill(0)
+      .map((_, i) => 340 + i)
+      .filter((e) => era.get(`cflag:${e}:招募状态`) !== recruit_flags.yes),
+  );
+  if (
+    (temp && sys_like_chara(temp, 0, get_random_value(5, 20))) ||
+    condition_chara ||
+    condition_me
+  ) {
     await era.waitAnyKey();
   }
 };
@@ -360,7 +372,7 @@ handlers[event_hooks.celebration] = async (chara_id) => {
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {*} extra_flag
+ * @param {Record<string,any>} extra_flag
  */
 module.exports = async (chara_id, hook, extra_flag) => {
   if (handlers[hook.hook]) {
