@@ -16,7 +16,7 @@ const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,string,{contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number},TachyonEduMarks,number,number):Promise<boolean|void>>} handlers */
+/** @param {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams,TachyonEduMarks,number,number):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
   handlers[race_enum.arim_kin] = async (
     tachyon,
@@ -206,9 +206,9 @@ module.exports = (handlers) => {
         await say_by_passer_by_and_wait('解说', [
           '『最强的',
           tachyon.get_uma_sex_title(),
-          '，与最快的',
+          '』，与『最快的',
           tachyon.get_uma_sex_title(),
-          '，要在这里绝出胜负！』',
+          '』，要在这里决出胜负！',
         ]);
       }
       await tachyon.print_and_wait('啊啊');

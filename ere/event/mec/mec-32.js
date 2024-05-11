@@ -1,9 +1,10 @@
-const { set } = require('#/era-electron');
+const { get, set } = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
 const { buff_colors } = require('#/data/color-const');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedMec {
   is_race_register_enabled() {
@@ -16,6 +17,9 @@ module.exports = class extends CustomizedMec {
   }
 
   set_callname() {
+    if (get('cflag:32:招募状态') !== recruit_flags.yes) {
+      return super.set_callname();
+    }
     set('callname:32:0', '豚鼠君');
   }
 

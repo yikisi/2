@@ -77,7 +77,7 @@ module.exports = async function (hook, _, event_object) {
       `在号令枪令人耳鸣的巨大声响中，黑色的赛${kita.get_uma_sex_title()}迈开步伐向前奔驰而去。`,
     );
     await era.printAndWait(
-      `深色跑鞋在草地上踏出一道浅浅的脚印，${kita.name} 压低身子大步冲锋在前，`,
+      `深色跑鞋在草地上踏出一道浅浅的脚印，${kita.name} 压低身子大步冲锋在前`,
     );
     await era.printAndWait(
       `若这是赛道上的一条行列的话，那么${kita.sex}必然在先行靠前的位置上。`,

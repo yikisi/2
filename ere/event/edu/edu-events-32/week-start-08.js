@@ -246,7 +246,7 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[95 + 29] = async (
+  handlers[95 + 31] = async (
     tachyon,
     me,
     callname,
@@ -263,7 +263,7 @@ module.exports = (handlers) => {
       add_event(event_hooks.week_start, event_object);
       return false;
     }
-    if (edu_marks.plan_b !== 0) {
+    if (edu_marks.plan_b) {
       const coffee = get_chara_talk(25);
       await print_event_name('再度闪耀的光子', tachyon);
       await era.printAndWait([
@@ -306,7 +306,6 @@ module.exports = (handlers) => {
       era.printButton('「可以先跑一趟让我看看吗？」', 2);
       await era.input();
       era.drawLine();
-      era.println();
       await era.printAndWait('比起去年的这个时候');
       await era.printAndWait([
         '恢复训练的 ',

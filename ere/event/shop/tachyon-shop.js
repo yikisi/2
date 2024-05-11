@@ -1,4 +1,11 @@
-const { get, input, printAndWait, printButton } = require('#/era-electron');
+const {
+  get,
+  input,
+  print,
+  printAndWait,
+  printButton,
+  waitAnyKey,
+} = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
@@ -12,18 +19,18 @@ const recruit_flags = require('#/data/event/recruit-flags');
  * @param {CharaTalk} me
  */
 async function common_talk(tachyon, me) {
-  await printAndWait([
+  print([
     '在闲逛着的 ',
     me.get_colored_name(),
     ' 看见了一名身穿白大褂，神秘兮兮的栗毛',
     tachyon.get_uma_sex_title(),
     '，',
   ]);
-  await printAndWait([
+  print([
     tachyon.sex,
     '那如百叶窗一般的深红色眼眸孕育着疯狂及神秘，那看上去有些偏大的白大褂被里面挂满的东西塞的紧绷。',
   ]);
-  await printAndWait([
+  print([
     '表现可疑的',
     tachyon.sex,
     '，是 ',
@@ -46,34 +53,35 @@ module.exports = {
       get('love:32') > 75
     ) {
       if (bought < 3) {
-        await tachyon.say_and_wait(
+        tachyon.say(
           '欸……这么少够用吗？什么？质疑你的能力？不，我不是那个意思……要好好惩罚我吗？呵呵，那我就好好期待着晚上了♡',
         );
       } else if (bought > 10) {
-        await tachyon.say_and_wait(
+        tachyon.say(
           '！？居然买这么多……会不会撑不住呢……呵呵，真是令人期待，而且做完之后可以最直接感受到药物的使用后变化……',
         );
-        await tachyon.say_and_wait('今天晚上让我好好享受一番吧……');
+        tachyon.say('今天晚上让我好好享受一番吧……');
       }
     } else {
       const say_cb =
         life_marks.first === 2
-          ? (content) => tachyon.say_as_unknown_and_wait(content)
-          : (content) => tachyon.say_and_wait(content);
+          ? (content) => tachyon.say_as_unknown(content)
+          : (content) => tachyon.say(content);
       if (bought < 3) {
-        await say_cb('哦呀，买的这么少够用吗？');
-        await say_cb(
+        say_cb('哦呀，买的这么少够用吗？');
+        say_cb(
           '不，只是好奇而已，毕竟这种东西也有个体差异的嘛，如果可以还是希望有更多实验数……没什么',
         );
       } else if (bought > 10) {
-        await say_cb(
+        say_cb(
           '哦呀，居然买这么多吗？不，只是好奇而已，毕竟这种东西还是有个体差异的吗？……',
         );
-        await say_cb(
+        say_cb(
           '顺带一提，个人来讲期待下次光临的时候能附上使用评价哦，如果能以规范的实验报告格式提交就更好了',
         );
       }
     }
+    await waitAnyKey();
     life_marks.first = 0;
   },
   async shop_start() {
@@ -83,22 +91,22 @@ module.exports = {
       { first } = new TachyonLifeMarks();
     if (get('cflag:32:招募状态') === recruit_flags.yes) {
       if (get('relation:32:0') > 75 && get('love:32') >= 75 && first) {
-        await tachyon.say_and_wait([
+        tachyon.say([
           '哦呀，',
           callname,
           '……居然会来到这里，真是……有那么急性吗……',
         ]);
-        await printAndWait([
+        print([
           '在闲逛着的 ',
           me.get_colored_name(),
           ' 看见了一名身穿白大褂，满脸娇羞的栗毛',
           tachyon.get_uma_sex_title(),
         ]);
-        await printAndWait([
+        print([
           tachyon.sex,
           '那如百叶窗一般的深红色眼眸孕育着疯狂及神秘，那看上去有些偏大的白大褂被里面挂满的东西塞的紧绷。',
         ]);
-        await printAndWait([
+        print([
           '表现可疑的',
           tachyon.sex,
           '，是 ',
@@ -109,49 +117,41 @@ module.exports = {
           tachyon.get_colored_name(),
         ]);
         if (get('exp:32:性爱次数') > get('exp:32:睡奸次数')) {
-          await tachyon.say_and_wait(
+          tachyon.say(
             '……难道说，是我做的过头了导致需要药吗……不，不过……这种事也没办法的吧，毕竟需要实验彼此的相性……',
           );
-          await tachyon.say_and_wait(
+          tachyon.say(
             '还有就是，那个……很舒服，所以……一次多买点吧，回去方便用♡',
           );
         } else if (get('exp:0:性爱次数') > get('exp:0:睡奸次数')) {
-          await tachyon.say_and_wait(
+          tachyon.say(
             '我，我说，你不会是要跟谁去做吧？……不，不是，不会吧，这些是为了……为了……为了和我一起做买的？',
           );
-          await tachyon.say_and_wait(
-            '真的吗？不会骗我吧？……我知道了，晚上我会期待着的♡',
-          );
+          tachyon.say('真的吗？不会骗我吧？……我知道了，晚上我会期待着的♡');
         } else {
-          await tachyon.say_and_wait([
+          tachyon.say([
             callname,
             '……嗯，我明白了，毕竟都开始交往了，这种觉悟我也已经做好了……',
           ]);
           if (me.sex_code === 1) {
-            await tachyon.say_and_wait(
+            tachyon.say(
               '毕竟，听说男性人类的性欲是非常强的……说实话你能忍耐到现在才来我已经觉得很讶异了……',
             );
           }
-          await tachyon.say_and_wait([
+          tachyon.say([
             '提前确认一下，虽然我不觉得你会做出那样的事，但……这些药，是为了和我做而买的，对吧？……',
             callname,
             '？',
           ]);
         }
-        await tachyon.say_and_wait('总之，来看看今天的货吧');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
+        tachyon.say('总之，来看看今天的货吧');
       } else if (get('relation:32:0') > 75 && get('love:32') >= 50) {
         if (first) {
-          await tachyon.say_and_wait([callname, '？你在这里做什么？']);
+          tachyon.say([callname, '？你在这里做什么？']);
         } else if (!get('exp:32:性爱次数')) {
-          await tachyon.say_and_wait('……又来了吗？这次又是跟哪个家伙……');
+          tachyon.say('……又来了吗？这次又是跟哪个家伙……');
         } else {
-          await tachyon.say_and_wait([
+          tachyon.say([
             '都那样了还嫌不够吗……真是性豪啊，',
             callname,
             '，我都想研究看看你的内在了',
@@ -159,53 +159,42 @@ module.exports = {
         }
         await common_talk(tachyon, me);
         if (first) {
-          await tachyon.say_and_wait([
+          tachyon.say([
             callname,
             '……你知道这里是卖什么的吧……换句话说……你，你有那样的对象了？',
           ]);
-          await printAndWait([
-            tachyon.get_colored_name(),
-            ' 不知为何一脸紧张的问道',
-          ]);
+          print([tachyon.get_colored_name(), ' 不知为何一脸紧张的问道']);
           printButton('当然有了', 1);
           printButton('没有', 2);
           if ((await input()) === 1) {
-            await tachyon.say_and_wait([
+            tachyon.say([
               '哦？对方是谁？居然会有人看上你这种全身发光的可疑人物？人类还是',
               tachyon.get_uma_sex_title(),
               '？',
             ]);
-            await tachyon.say_and_wait(
+            tachyon.say(
               '不，这只是对生物多样性的探讨及考察，提交自己喜欢的人的信息这也是你身为豚鼠最基础应做的情报共享……',
             );
-            await tachyon.say_and_wait('也罢，反正总能找到机会问出来的');
+            tachyon.say('也罢，反正总能找到机会问出来的');
           } else {
-            await tachyon.say_and_wait(
+            tachyon.say(
               '……呵呵，不出我所料，像你这样全身发光的可疑人物，倒不如说要是有谁会喜欢上那我才要进行观察研究才是。',
             );
-            await tachyon.say_and_wait([
+            tachyon.say([
               '不过这么一来，你要这些药的理由就很令人匪夷所思了。我说，',
               callname,
               ' 啊，你不会做出那种犯罪行为的吧',
             ]);
-            await tachyon.say_and_wait(
-              '话说回来，感觉也有点久没收到药物反应的回馈了……',
-            );
-            await tachyon.say_and_wait(
+            tachyon.say('话说回来，感觉也有点久没收到药物反应的回馈了……');
+            tachyon.say(
               '也罢，随便你用吧，为了研究，一切的代价都是可以尝试的……哪怕是我自己也一样',
             );
-            await tachyon.say_and_wait(
+            tachyon.say(
               '我在暗示什么？呵呵，谁知道呢，就是不知道某位木头君是否能察觉我话中的意思了',
             );
           }
         }
-        await tachyon.say_and_wait('总之，来看看今天的货吧');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
+        tachyon.say('总之，来看看今天的货吧');
       } else if (first) {
         await tachyon.say_and_wait(['哦呀，这不是 ', callname, ' 吗？']);
         await printAndWait([
@@ -239,7 +228,7 @@ module.exports = {
         ]);
         printButton('开口回答', 1);
         printButton('摇头拒绝', 2);
-        if (await input()) {
+        if ((await input()) === 1) {
           switch (await input()) {
             case '爱丽速子':
             case '速子':
@@ -407,15 +396,9 @@ module.exports = {
           await printAndWait([tachyon.get_colored_name(), ' 露出了扫兴的表情']);
         }
         await tachyon.say_and_wait('总之，来看看今天的货吧');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
       } else if (get('relation:32:0') <= -100) {
-        await tachyon.say_and_wait('……啧');
-        await printAndWait([
+        tachyon.say('……啧');
+        print([
           '在闲逛着的 ',
           me.get_colored_name(),
           ' 看见了一名身穿白大褂，神秘兮兮的栗毛',
@@ -424,12 +407,12 @@ module.exports = {
           tachyon.sex,
           '那如百叶窗一般的深红色眼眸孕育着疯狂及神秘，',
         ]);
-        await printAndWait([
+        print([
           '但在看到 ',
           me.get_colored_name(),
           ' 的瞬间转为了仇视的神情，那看上去有些偏大的白大褂被里面挂满的东西塞的紧绷。',
         ]);
-        await printAndWait([
+        print([
           '戴着仇恨眼神望着 ',
           me.get_colored_name(),
           ' 的',
@@ -441,62 +424,50 @@ module.exports = {
           ' ',
           tachyon.get_colored_name(),
         ]);
-        await tachyon.say_and_wait(
+        tachyon.say(
           '如果不是因为没有更好用的实验动物了，真想在这些药里随便弄点能让人生不如死的东西啊',
         );
-        await printAndWait([tachyon.sex, '毫不在意的说了些危险的话']);
-        await tachyon.say_and_wait('自己看，把钱留下之后就快滚');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
+        print([tachyon.sex, '毫不在意的说了些危险的话']);
+        tachyon.say('自己看，把钱留下之后就快滚');
       } else if (get('relation:32:0') <= 0) {
-        await tachyon.say_and_wait('……来了啊，这次又是来祸害谁的？');
-        await printAndWait([
+        tachyon.say('……来了啊，这次又是来祸害谁的？');
+        print([
           '在闲逛着的 ',
           me.get_colored_name(),
           ' 看见了一名身穿白大褂，满脸娇羞的栗毛',
           tachyon.get_uma_sex_title(),
         ]);
-        await printAndWait([
+        print([
           tachyon.sex,
           '那如百叶窗一般的深红色眼眸孕育着疯狂及神秘，但在看向 ',
           me.get_colored_name(),
           ' 的瞬间变为了看见脏东西的眼神，那看上去有些偏大的白大褂被里面挂满的东西塞的紧绷。',
         ]);
-        await tachyon.say_and_wait(
+        tachyon.say(
           '啧……说真的，把药卖给你这种人真的没问题吗，类似的事情我已经想了不下数十次了啊',
         );
-        await tachyon.say_and_wait('算了，你自己看今天有什么货吧');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
+        tachyon.say('算了，你自己看今天有什么货吧');
       } else {
-        await tachyon.say_and_wait(['哦呀，这不是 ', callname, ' 吗？']);
+        tachyon.say(['哦呀，这不是 ', callname, ' 吗？']);
         await common_talk(tachyon, me);
-        await tachyon.say_and_wait(
+        tachyon.say(
           '也不是第一次的雏鸟了，都知道是干什么的吧？要什么药尽管说，喝完隔天记得准时把实验结果交上来',
         );
         printButton('「都不装直接说是实验了……」', 1);
         printButton('「既然是实验药物那不该跟我收钱的吧」', 2);
         await input();
-        await tachyon.say_and_wait([
+        tachyon.say([
           '嗯哼～～要是你不介意你买的药里面混入点会让生殖器发光、全身肌肤变透明、射出来的精子具有高腐蚀性等功能的实验用药的话，我也可以不收你钱没关系',
         ]);
-        await printAndWait([me.get_colored_name(), ' 老老实实的掏出了钱包来']);
-        await tachyon.say_and_wait('这才乖嘛，那么来看看今天的货吧');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 拉开了',
-          tachyon.sex,
-          '的白大褂……',
-        ]);
+        print([me.get_colored_name(), ' 老老实实的掏出了钱包来']);
+        tachyon.say('这才乖嘛，那么来看看今天的货吧');
       }
+      await printAndWait([
+        tachyon.get_colored_name(),
+        ' 拉开了',
+        tachyon.sex,
+        '的白大褂……',
+      ]);
     } else if (first === 2) {
       await tachyon.say_as_unknown_and_wait(
         '哦呀，是新的肥羊……不，豚鼠……我的意思是，客人啊',
@@ -548,22 +519,22 @@ module.exports = {
           '哦呀，是新的肥羊……不，豚鼠……我的意思是，客人啊',
         );
       } else {
-        await tachyon.say_and_wait(
+        await tachyon.say_as_unknown_and_wait(
           '哦呀，又是你啊，客人君，训练员原来是如此乱性的行业吗？啧啧',
         );
       }
-      await printAndWait([
+      print([
         '在闲逛着的 ',
         me.get_colored_name(),
         ' 看见了一名身穿白大褂，神秘兮兮的栗毛',
         tachyon.get_uma_sex_title(),
         '，',
       ]);
-      await printAndWait([
+      print([
         tachyon.sex,
         '那如百叶窗一般的深红色眼眸孕育着疯狂及神秘，那看上去有些偏大的白大褂被里面挂满的东西塞的紧绷。',
       ]);
-      await printAndWait([
+      print([
         '这样的',
         tachyon.sex,
         '，是学园中著名的问题儿童，',
@@ -609,7 +580,7 @@ module.exports = {
             ]);
         }
       }
-      await tachyon.say_and_wait('总之，先来看看今天都有什么货吧。');
+      tachyon.say('总之，先来看看今天都有什么货吧。');
       await printAndWait([
         tachyon.get_colored_name(),
         ' 拉开了',

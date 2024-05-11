@@ -5,7 +5,7 @@ class MaEduMarks extends EduEventMarks {
   beginning;
   // 街头的潮流推手
   current_trend;
-  // 丸善斯基，畅谈“喜欢”
+  // 丸善斯基，畅谈「喜欢」
   favourite_things;
   // 开超跑兜风
   feel_speed;
@@ -19,7 +19,16 @@ class MaEduMarks extends EduEventMarks {
   find_love;
   //离别(粉丝袭击)
   crazy_fan;
-
+  //金
+  golden;
+  //木
+  wood;
+  //水
+  water;
+  //火
+  fire;
+  //土
+  soil;
   //GOOD END 温柔的世界
   gentle_wind;
   //NORMAL END 梦的远方

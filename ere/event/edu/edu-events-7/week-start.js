@@ -524,15 +524,15 @@ module.exports = async (hook, _, event_object) => {
     await taste.say_and_wait('说明！所谓的『伊甸计划』就是……！');
     era.println();
     await era.printAndWait(
-      `原来，『伊甸计划』是为了让热情奔放但时常把心思放到其他地方的 ${gold_ship.name} 能专心地挑战闪耀系列赛而制定的计划。`,
+      `原来，「伊甸计划」是为了让热情奔放但时常把心思放到其他地方的 ${gold_ship.name} 能专心地挑战闪耀系列赛而制定的计划。`,
     );
     era.println();
     await era.printAndWait(
-      '通过『伊甸计划』，以各种线索和秘传之书来挑起黄金船的好奇心，从而达到计划目标。',
+      '通过「伊甸计划」，以各种线索和秘传之书来挑起黄金船的好奇心，从而达到计划目标。',
     );
     era.println();
     await era.printAndWait(
-      `对 ${taste.name} 而言，所谓的『伊甸园』就是赛马娘生涯中最重要的闪耀系列赛。`,
+      `对 ${taste.name} 而言，所谓的「伊甸园」就是赛马娘生涯中最重要的闪耀系列赛。`,
     );
     era.println();
     await taste.say_and_wait('就是这样！');

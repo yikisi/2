@@ -17,7 +17,7 @@ module.exports = (handlers) => {
       `出道战结束后，${me.name} 和里见光钻针对下一个目标进行讨论。`,
     );
     await era.printAndWait(
-      `“要成为能赢得G1的知名赛${daiya.get_uma_sex_title()}”，考量到${
+      `「要成为能赢得G1的知名赛${daiya.get_uma_sex_title()}」考量到${
         daiya.sex
       }的这个目标，选择新马级的G1竞赛应该是比较适合的──`,
     );
@@ -30,13 +30,13 @@ module.exports = (handlers) => {
       '在G1取胜当然也是我的目标，但那不过是一个过程而已。',
     );
     await daiya.say_and_wait(
-      `里见家所期望的“知名赛${daiya.get_uma_sex_title()}”，那是足以支撑赛${daiya.get_uma_sex_title()}界发展的赛${daiya.get_uma_sex_title()}。`,
+      `里见家所期望的『知名赛${daiya.get_uma_sex_title()}』，那是足以支撑赛${daiya.get_uma_sex_title()}界发展的赛${daiya.get_uma_sex_title()}。`,
     );
     await daiya.say_and_wait(
       `你也知道，里见家为了在赛${daiya.get_uma_sex_title()}界有所贡献，长年专心致力于协助营运和各种慈善活动。`,
     );
     await daiya.say_and_wait(
-      `培育大量“能够赢得G1竞赛的知名赛${daiya.get_uma_sex_title()}”，这点也是能够支撑赛${daiya.get_uma_sex_title()}界的贡献之一。`,
+      `培育大量『能够赢得G1竞赛的知名赛${daiya.get_uma_sex_title()}』，这点也是能够支撑赛${daiya.get_uma_sex_title()}界的贡献之一。`,
     );
     await daiya.say_and_wait(
       `我的目标是成为一个从内部支持赛${daiya.get_uma_sex_title()}界，以及赛${daiya.get_uma_sex_title()}竞赛文化的存在。`,
@@ -49,10 +49,10 @@ module.exports = (handlers) => {
       race_infos[race_enum.sats_sho].get_colored_name(),
       '。',
     ]);
-    era.printButton('「下一个目标是“皋月赏”？」', 1);
+    era.printButton('「下一个目标是『皋月赏』？」', 1);
     await era.input();
     await era.printAndWait(
-      '如果要调整到万全的状态，的确就不该以新马级的竞赛为优先考量，把目标定为“皋月赏”更为合适。',
+      '如果要调整到万全的状态，的确就不该以新马级的竞赛为优先考量，把目标定为「皋月赏」更为合适。',
     );
     await daiya.say_and_wait('是的。你觉得怎么样呢？');
     era.printButton('「我知道了」', 1);
@@ -75,7 +75,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait(
       `里见家过去的赛${daiya.get_uma_sex_title()}当中，没有一位是曾经在G1竞赛中赢得胜利过的。`,
     );
-    await daiya.say_and_wait('久而久之，就被称作是“里见家的魔咒”了。');
+    await daiya.say_and_wait('久而久之，就被称作是『里见家的魔咒』了。');
     await daiya.say_and_wait(
       `再加上，曾经很长一段时间都只生男生，家族一直没有新的赛${daiya.get_uma_sex_title()}诞生……`,
     );
@@ -100,7 +100,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('我要赢得经典三冠，来证明这件事情！');
     era.printButton('「知道了，那我们就以经典三冠为目标吧」', 1);
     await era.input();
-    await daiya.say_and_wait('谢谢你！那我们的第一战就是“皋月赏”了呢。');
+    await daiya.say_and_wait('谢谢你！那我们的第一战就是『皋月赏』了呢。');
     await era.printAndWait([
       '决定要挑战经典三冠的话，就必须做好准备面对比 ',
       race_infos[race_enum.sats_sho].get_colored_name(),
@@ -124,7 +124,7 @@ module.exports = (handlers) => {
       '虽然没办法到现场去看，但我看了比赛影片喔！我真的是看得超～～～级激动的！',
     );
     await kita.say_and_wait(
-      '我是跟大家一起用宿舍的大电视看的！我还忍不住对着电视喊“小钻加油──！”了呢。',
+      '我是跟大家一起用宿舍的大电视看的！我还忍不住对着电视喊『小钻加油──！』了呢。',
     );
     await kita.say_and_wait('因为喊得太大声，还被大家骂了一顿。');
     await kita.say_and_wait('但小钻的那场比赛真的精彩到我手汗直流喔！');
@@ -175,7 +175,7 @@ module.exports = (handlers) => {
       '是的，小时候就约好的。我们约好了要一直一起跑步。',
     );
     await daiya.say_and_wait(
-      '小北是我遇过的同年龄的人当中，第一个比我“强大”的人。',
+      '小北是我遇过的同年龄的人当中，第一个比我『强大』的人。',
     );
     await daiya.say_and_wait(
       '我们后来就变成了好朋友……小北她带着没有接触过外面世界的我去了好多好多的地方。',
@@ -203,7 +203,7 @@ module.exports = (handlers) => {
       '但小北是绝对不会放弃的个性。她接下来的比赛才是关键呢！',
     );
     await daiya.say_and_wait(
-      '所以我也要加紧脚步才行。一定要在“皋月赏”赢得胜利！',
+      '所以我也要加紧脚步才行。一定要在『皋月赏』赢得胜利！',
     );
     await era.printAndWait(
       `想要战胜的目标──北部玄驹的存在促使里见光钻更加进步──听完这些话后，${me.name} 更加深深相信是这样。`,

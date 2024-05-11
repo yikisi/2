@@ -66,7 +66,7 @@ class CustomizedMec {
     return 0;
   }
 
-  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string}|string)[]} */
+  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]} */
   get_status() {
     return [];
   }
@@ -75,7 +75,7 @@ class CustomizedMec {
     return 0;
   }
 
-  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string}|string)[]} */
+  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]} */
   get_talents() {
     return [];
   }
@@ -111,6 +111,15 @@ class CustomizedMec {
         `status:${this.chara_id}:客场作战`,
         4 + era.get(`talent:${this.chara_id}:自信程度`),
       );
+    }
+  }
+
+  set_my_name() {
+    if (
+      era.get(`callname:${this.chara_id}:${this.chara_id}`) ===
+      era.get(`callname:${this.chara_id}:-2`)
+    ) {
+      era.set(`callname:${this.chara_id}:${this.chara_id}`, '我');
     }
   }
 

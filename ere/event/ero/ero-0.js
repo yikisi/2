@@ -519,7 +519,7 @@ handlers[ero_hooks.have_baby] = async (hook, extra_flag) => {
 
           await era.printAndWait('\n忘却了孩子对周围行为的学习能力');
           await era.printAndWait(
-            `也忘却了孕袋所要服务的对象是无关身份的『全体${father.get_uma_sex_title()}』`,
+            `也忘却了孕袋所要服务的对象是无关身份的「全体${father.get_uma_sex_title()}」`,
           );
           await era.printAndWait(
             '没发现一旁的护士已经忍不住想要接受孕袋的口穴侍奉',
@@ -632,7 +632,7 @@ handlers[ero_hooks.have_baby] = async (hook, extra_flag) => {
           ]);
           await era.printAndWait('家庭生活……真是个好理由');
           await era.printAndWait(
-            '这样的话，就算在自己给孩子喂奶的同时将肉棒塞入自己口中，也可以以『补充营养』的名分一言带过吧',
+            '这样的话，就算在自己给孩子喂奶的同时将肉棒塞入自己口中，也可以以「补充营养」的名分一言带过吧',
           );
           await era.printAndWait([
             '作为丈夫的 ',

@@ -144,7 +144,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       `在 ${me.name} 身下，那哪怕勃起到极限也没有`,
       tachyon.get_uma_sex_title(),
-      `主人一边睪丸大的“阴蒂”，喷出了今天第四发，稀薄如水的液体`,
+      `主人一边睪丸大的「阴蒂」，喷出了今天第四发，稀薄如水的液体`,
     ]);
     era.add('exp:0:阴茎高潮次数', 3);
     era.add('exp:0:射精量', 12);
@@ -179,7 +179,7 @@ module.exports = (handlers) => {
       era.println();
 
       await era.printAndWait(
-        `故意转回性奴『君』的称呼，使 ${me.name} 忍不住因这倒错的关系而更发兴奋，下面的“阴蒂”更是从刚才开始就像坏掉的水龙头一般不断流出清澈如水的液体`,
+        `故意转回性奴「君」的称呼，使 ${me.name} 忍不住因这倒错的关系而更发兴奋，下面的「阴蒂」更是从刚才开始就像坏掉的水龙头一般不断流出清澈如水的液体`,
       );
       era.println();
 

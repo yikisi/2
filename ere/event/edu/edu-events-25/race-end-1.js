@@ -20,7 +20,7 @@ const EventObject = require('#/data/event/event-object');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
- * @param {Record<string,function(CharaTalk,CharaTalk,string,{base_change:Record<string,number>,contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number},TachyonEduMarks,number,number):Promise<boolean|void>>} handlers
+ * @param {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams):Promise<boolean|void>>} handlers
  * @param {function():boolean} check_tachyon_plan_b
  */
 module.exports = (handlers, check_tachyon_plan_b) => {
@@ -373,6 +373,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     await coffee.say_and_wait('呼、哈……');
     era.printButton('「接下来就好好休息吧。」', 1);
     era.printButton('「训练强度也要适当降低。」', 2);
+    await era.input();
     await coffee.say_and_wait('好的……');
     await era.printAndWait([
       coffee.get_colored_name(),

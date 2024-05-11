@@ -660,7 +660,7 @@ handlers[event_hooks.out_river] = async (hook) => {
           tachyon.get_colored_name(),
           ' 轻松赢下了与 ',
           get_chara_talk(25).get_colored_name(),
-          ' ',
+          '、',
           get_chara_talk(94).get_colored_name(),
           ' 等人的模拟赛，但代价……',
         ]);

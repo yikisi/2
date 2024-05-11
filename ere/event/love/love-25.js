@@ -123,6 +123,7 @@ handlers[74] = async (coffee, me, callname, event_object) => {
         coffee.get_colored_name(),
         ' 大概会在进入资深级后再考虑这份感情吧……）',
       ]);
+      era.set('cflag:25:爱慕暂拒', 74);
     } else {
       await coffee.print_and_wait('花开了……');
       add_event(event_hooks.back_school, event_object.set_arg('girl_friend'));

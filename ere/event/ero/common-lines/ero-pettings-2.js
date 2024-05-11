@@ -508,7 +508,7 @@ module.exports = (handlers) => {
         '被柔软包裹着的肉棒也是，挺立成了能轻易叫小穴发颤的形状。',
       );
       await attacker.print_and_wait(
-        '不知想到了什么，心咚咚地跳着。但是这也只是所谓的“盲人摸象”吧……',
+        '不知想到了什么，心咚咚地跳着。但是这也只是所谓的「盲人摸象」吧……',
       );
       await attacker.print_and_wait([
         '于是 ',
@@ -783,7 +783,7 @@ module.exports = (handlers) => {
       await attacker.print_and_wait('完全不会。');
       await attacker.print_and_wait('舒服地眯起眼，张口衔住那嫣红的乳粒一吮。');
       if (is_milking) {
-        await attacker.print_and_wait('“噗咻咻咻咻咻——”');
+        await attacker.print_and_wait('「噗咻咻咻咻咻——」');
         await attacker.print_and_wait([
           `虽然看不见，但脑袋里已全是，那第一次流出乳汁时，从 `,
           sys_get_colored_callname(attacker.id, defender.id),

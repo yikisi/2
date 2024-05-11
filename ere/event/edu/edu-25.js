@@ -3,7 +3,6 @@ const era = require('#/era-electron');
 const {
   sys_get_colored_callname,
   sys_like_chara,
-  sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
@@ -460,7 +459,7 @@ handlers[event_hooks.race_start] = async (_, { race }) => {
   }
 };
 
-/** @type {Record<string,function(CharaTalk,CharaTalk,string,{base_change:Record<string,number>,contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number},TachyonEduMarks,number,number):Promise<boolean|void>>} */
+/** @type {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams):Promise<boolean|void>>} */
 const race_end_handlers = {};
 
 [
@@ -470,7 +469,7 @@ const race_end_handlers = {};
 
 /**
  * @param {HookArg} _
- * @param {{base_change:Record<string,number>,contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 handlers[event_hooks.race_end] = async (_, extra_flag) => {
   const callname = sys_get_callname(25, 0),

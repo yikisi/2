@@ -7,6 +7,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const palace = require('#/event/snippets/palace');
+const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -14,6 +15,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
+const { location_enum } = require('#/data/locations');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
@@ -240,7 +242,9 @@ module.exports = async (_, __, event_object) => {
       await palace(vp, me);
       if (era.get('love:205') >= 50) {
         era.drawLine();
+        era.set('flag:当前位置', location_enum.gate);
         await print_event_name(`${vp.sex}即是成真的美梦`, vp);
+        era.set('flag:当前位置', location_enum.office);
         await era.printAndWait(`${me.name} 听到了什么声音。`);
         await era.printAndWait(
           `从黑暗中睁开眼睛，眼前是陌生（完全不）的天花板。`,
@@ -449,11 +453,13 @@ module.exports = async (_, __, event_object) => {
           `那是${vp.sex}本来就有的天真烂漫的，能让周围也变得快乐的笑容。`,
         );
         await era.printAndWait(
-          `${vp.sex}脸上重新展露笑颜后，像发出“啪”的一声眨了眨眼。`,
+          `${vp.sex}脸上重新展露笑颜后，像发出『啪』的一声眨了眨眼。`,
         );
         await vp.say_and_wait(`——我的甜心。`);
         era.println();
         wait_flag = temp === 2 && sys_love_uma(205, 1);
+      } else {
+        await palace_relation(vp, me);
       }
   }
   wait_flag && (await era.waitAnyKey());

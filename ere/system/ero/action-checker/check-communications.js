@@ -30,6 +30,5 @@ module.exports = (handlers) => {
       ) -
     75;
 
-  handlers[ero_hooks.gargle] = handlers[ero_hooks.wipe_body] = (chara_id) =>
-    10 * era.get(`talent:${chara_id}:贞洁看法`) - 50;
+  handlers[ero_hooks.gargle] = handlers[ero_hooks.wipe_body] = () => 0;
 };

@@ -155,7 +155,7 @@ handlers[event_hooks.school_atrium] = async () => {
     await vp.say_and_wait(
       get_random_entry([
         '熟练得可怕……这才是你的老本行吗难道！',
-        '和现在比，以前的生活只能说是“等死”呢。',
+        '和现在比，以前的生活只能说是『等死』呢。',
       ]),
     );
   } else {
@@ -330,7 +330,7 @@ handlers[event_hooks.basement_end] = async () => {
     `对于 ${vp.name} 的提问，${me.name} 下意识地摇了摇头。`,
   );
   await era.printAndWait(
-    `${vp.sex}马上微笑着说“那就好！”拉起 ${me.name} 的手，跑了起来。`,
+    `${vp.sex}马上微笑着说『那就好！』拉起 ${me.name} 的手，跑了起来。`,
   );
   await era.printAndWait(
     `${me.name} 的脑海里一直萦绕着 ${vp.name} 想藏起来的照片。虽然只是一瞬间，但没错。`,

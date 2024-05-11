@@ -389,7 +389,6 @@ module.exports = async () => {
         '拿着探测器在神社内戳来戳去，也不知道这样到底有没有效',
       ]);
       era.drawLine();
-      era.println();
       await tachyon.say_and_wait('…………果然，什么也没有啊');
       era.println();
       await era.printAndWait([tachyon.get_colored_name(), ' 一脸失望的说道']);

@@ -30,6 +30,7 @@ const { part_enum } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
+const { location_enum } = require('#/data/locations');
 
 /** @type {Record<string,function>} */
 const handlers = {};
@@ -48,7 +49,8 @@ handlers[ero_hooks.ero_start] = async () => {
     check_pregnant_unprotect(0) &&
     check_pregnant_unprotect(32) &&
     get('love:32') >= 75 &&
-    life_marks.reward < 3
+    life_marks.reward < 3 &&
+    get('cflag:32:位置') === location_enum.office
   ) {
     life_marks.reward++;
     await print_event_name('实验的报酬', tachyon);
@@ -69,14 +71,12 @@ handlers[ero_hooks.ero_start] = async () => {
         println();
         await tachyon.say_and_wait(['辛苦了，', callname, '……']);
         await tachyon.say_and_wait('放心吧，之后会好好给你奖励的');
-        println();
-        await printAndWait('奖励……？');
+        await printAndWait('\n奖励……？');
         await printAndWait([
           '虽然不知道具体是什么，但奖励这个词还是激励了疲累的 ',
           me.get_colored_name(),
         ]);
-        println();
-        await printAndWait('在收拾完实验器材后');
+        await printAndWait('\n在收拾完实验器材后');
         println();
         await tachyon.say_and_wait('那么……作为奖励，就让我来帮你处理一下吧');
         await tachyon.say_and_wait('几天下来，积累的东西❤');
@@ -381,7 +381,7 @@ handlers[ero_hooks.ero_start] = async () => {
       case 2:
         set_stain(0, part_enum.penis, stain_enum.semen);
         set_stain(32, part_enum.virgin, stain_enum.secretion);
-        if (get_expansion(get_penis_size(0), 32, part_enum.virgin) <= 1) {
+        if (get_expansion(get_penis_size(0), 32, part_enum.virgin) > 1) {
           life_marks.reward--;
           return;
         }
@@ -571,7 +571,7 @@ handlers[ero_hooks.ero_start] = async () => {
       case 3:
         set_stain(0, part_enum.penis, stain_enum.semen);
         set_stain(32, part_enum.anal, stain_enum.anal);
-        if (get_expansion(get_penis_size(0), 32, part_enum.anal) <= 1) {
+        if (get_expansion(get_penis_size(0), 32, part_enum.anal) > 1) {
           life_marks.reward--;
           return;
         }
@@ -826,7 +826,7 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
           );
           await tachyon.say_and_wait('结束之后就恢复正常了……对……所以……', true);
           await tachyon.say_and_wait('请再……给我更多命令吧……♡');
-          set('callname:32:0', [callname, '主人大人']);
+          set('callname:32:0', [callname.content, '主人大人']);
       }
       break;
     case '苦痛':

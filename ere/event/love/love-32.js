@@ -116,10 +116,10 @@ handlers[74] = async (tachyon, me, callname) => {
   era.println();
   await tachyon.say_and_wait('她遇见了一个人');
   await tachyon.say_and_wait(
-    '那个人不是王子，只是名潜水员而已，他不是落入海里需要援救的王子，',
+    '那个人不是王子，只是名潜水员而已，他不是落入海里需要援救的王子',
   );
   await tachyon.say_and_wait(
-    '而是在出海时偶然看见了到海面上收集数据的公主，而一不小心被塞壬迷住，',
+    '而是在出海时偶然看见了到海面上收集数据的公主，而一不小心被塞壬迷住',
   );
   await tachyon.say_and_wait(
     '投入海中，自愿帮助实验的普通人类，让我们姑且称他为——豚鼠君吧',

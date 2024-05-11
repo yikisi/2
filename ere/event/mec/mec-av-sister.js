@@ -13,7 +13,7 @@ module.exports = class extends CustomizedMec {
     } else if (!era.get(`cflag:${this.chara_id}:母方角色`)) {
       era.set(`callname:${this.chara_id}:0`, '姐姐');
     } else {
-      throw new Error();
+      return super.set_callname();
     }
   }
 };

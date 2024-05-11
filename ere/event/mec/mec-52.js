@@ -32,6 +32,8 @@ module.exports = class extends CustomizedMec {
     era.set('callname:52:0', '训练员');
   }
 
+  set_my_name() {}
+
   set_pseudo_uma(uma) {
     const { dad, fans, gad, sbuff } = new UraraEduMarks(),
       attr_buff = Math.min(Math.floor(fans / 500), 200 * (1 + sbuff));

@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
+const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
@@ -21,7 +22,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
 
 /** @type {Record<string,function(Record<string,*>)>} */
 const handlers = {};
@@ -140,15 +140,15 @@ race2fans_reward[race_enum.hk_cup] = 30000;
 race2fans_reward[race_enum.hk_vas] = 25000;
 
 /**
- * @param {number} fans
+ * @param {number} reward
  * @param {number} rank
  * @returns {number}
  */
-function get_fans_reward(fans, rank) {
+function get_fans_reward(reward, rank) {
   if (rank === 1) {
-    return fans;
+    return reward;
   } else if (rank <= 5) {
-    return (fans * (6 - rank)) / 10;
+    return (reward * (6 - rank)) / 10;
   } else if (rank <= 10) {
     return 500;
   } else {
@@ -158,41 +158,41 @@ function get_fans_reward(fans, rank) {
 
 /** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
 handlers[check_stages.after_race] = (extra_flag) => {
-  let fans;
+  let reward = 0;
   switch (race_infos[extra_flag.race].race_class) {
     case RaceInfo.class_enum.G1:
-      fans = get_fans_reward(
+      reward = get_fans_reward(
         race2fans_reward[extra_flag.race],
         extra_flag.rank,
       );
       break;
     case RaceInfo.class_enum.G2:
-      fans = get_fans_reward(6000, extra_flag.rank);
+      reward = get_fans_reward(6000, extra_flag.rank);
       break;
     case RaceInfo.class_enum.G3:
-      fans = get_fans_reward(4000, extra_flag.rank);
+      reward = get_fans_reward(4000, extra_flag.rank);
       break;
     case RaceInfo.class_enum.OP:
-      fans = get_fans_reward(2500, extra_flag.rank);
+      reward = get_fans_reward(2500, extra_flag.rank);
       break;
     case RaceInfo.class_enum['Pre-OP']:
-      fans = get_fans_reward(1000, extra_flag.rank);
+      reward = get_fans_reward(1000, extra_flag.rank);
       break;
     case RaceInfo.class_enum.Spe:
       if (extra_flag.rank === 1) {
-        fans = 1000;
+        reward = 1000;
       }
   }
   const edu_marks = new UraraEduMarks();
-  fans *= (100 + edu_marks.fan_buff) / 100;
-  edu_marks.fans += fans;
-  if (fans) {
+  reward *= (100 + edu_marks.fan_buff) / 100;
+  edu_marks.fans += reward;
+  if (reward) {
     era.print([
       get_chara_talk(52).get_colored_name(),
       ' 的粉丝数增长了 ',
       {
         color: attr_change_colors.up,
-        content: fans.toLocaleString(),
+        content: reward.toLocaleString(),
         fontWeight: 'bold',
       },
       '！',

@@ -16,6 +16,7 @@ cons_dict[4] = require('#/event/mec/mec-4');
 cons_dict[6] = require('#/event/mec/mec-6');
 cons_dict[7] = require('#/event/mec/mec-7');
 cons_dict[17] = require('#/event/mec/mec-17');
+cons_dict[19] = require('#/event/mec/mec-19');
 cons_dict[21] = require('#/event/mec/mec-21');
 cons_dict[24] = require('#/event/mec/mec-24');
 cons_dict[30] = require('#/event/mec/mec-30');
@@ -24,12 +25,18 @@ cons_dict[37] = require('#/event/mec/mec-37');
 cons_dict[52] = require('#/event/mec/mec-52');
 cons_dict[67] = require('#/event/mec/mec-67');
 cons_dict[80] = require('#/event/mec/mec-80');
+cons_dict[100] = require('#/event/mec/mec-100');
 cons_dict[204] = require('#/event/mec/mec-204');
 cons_dict[205] = require('#/event/mec/mec-205');
 cons_dict[206] = require('#/event/mec/mec-206');
+cons_dict[303] = require('#/event/mec/mec-303');
+cons_dict[304] = require('#/event/mec/mec-304');
+cons_dict[305] = require('#/event/mec/mec-305');
+cons_dict[306] = require('#/event/mec/mec-306');
 cons_dict[340] = require('#/event/mec/mec-340');
 cons_dict[341] = require('#/event/mec/mec-341');
 cons_dict[342] = require('#/event/mec/mec-342');
+cons_dict[343] = require('#/event/mec/mec-343');
 cons_dict['av-sister'] = require('#/event/mec/mec-av-sister');
 
 console.log(

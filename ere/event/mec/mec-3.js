@@ -21,7 +21,7 @@ module.exports = class extends CustomizedMec {
         race_infos[race_enum.arim_kin].date + 95 ||
       era.get('flag:当前赛事') !== race_enum.arim_kin
     ) {
-      throw new Error();
+      return super.get_race_cloth();
     }
     return ['帝王2'];
   }

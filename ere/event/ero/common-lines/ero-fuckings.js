@@ -764,7 +764,7 @@ module.exports = (handlers) => {
       }
       await attacker.print_and_wait('哈……不止是高声喊牡蛎，而是深吸气的话……');
       await attacker.print_and_wait([
-        '“啾”的一声缩紧了，虽然一秒钟都没能坚持到身体就痉挛着瘫软下去，但那一瞬间，',
+        '「啾」的一声缩紧了，虽然一秒钟都没能坚持到身体就痉挛着瘫软下去，但那一瞬间，',
         attacker.get_colored_name(),
         ` 的${
           hook.hook === ero_hooks.stimulate_glans_by_virgin ? '小穴' : '屁穴'
@@ -820,8 +820,8 @@ module.exports = (handlers) => {
       await attacker.print_and_wait(
         '想要子宫的里面，被厉害地肉棒给，厉害地，粗暴地，用力地……',
       );
-      await attacker.print_and_wait('“啾——”的一下顶到最里面❤️');
-      await attacker.print_and_wait('让身体“咻”地蜷起来——');
+      await attacker.print_and_wait('「啾——的一下顶到最里面❤️');
+      await attacker.print_and_wait('让身体「咻」地蜷起来——');
       await attacker.print_and_wait('变成世界上最舒服的小穴——');
       await attacker.print_and_wait(
         '所以拜托了……在那之后，不管想怎么做都可以❤️',

@@ -30,6 +30,7 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
 const location2language = {};
+location2language[location_enum.new_york] = '英';
 location2language[location_enum.paris] = '法';
 location2language[location_enum.hongkong] = location2language[
   location_enum.guangzhou

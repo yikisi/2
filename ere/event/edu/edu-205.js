@@ -30,7 +30,7 @@ handlers[event_hooks.race_start] = async (_, extra_flag) => {
     vp = get_chara_talk(205);
   let temp;
   if (extra_flag.race === race_enum.prix_lat && edu_weeks < 96) {
-    await print_event_name('就连“暴君”都能粉碎的……', vp);
+    await print_event_name('就连「暴君」都能粉碎的……', vp);
     await era.printAndWait(
       `${me.name} 清楚地记得接受 ${vp.name} 定下的胜负服样式时候的事情。`,
     );
@@ -76,7 +76,7 @@ handlers[event_hooks.race_start] = async (_, extra_flag) => {
     );
     era.printButton(`「等结束了再说。」`, 1);
     await era.input();
-    await era.printAndWait(`笑着说“是啊”的 ${vp.name} 没有任何窘迫的神色。`);
+    await era.printAndWait(`笑着说「是啊」的 ${vp.name} 没有任何窘迫的神色。`);
     await era.printAndWait(
       `在这个凯旋门赏的舞台前，${me.name} 才理解了${vp.sex}的特异才能。`,
     );

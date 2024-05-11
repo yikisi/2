@@ -883,7 +883,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       era.printButton('「只是将你未来的零花钱提前透支而已。」', 1);
       await era.input();
       await era.printAndWait(
-        `见此，${your_name} 向荣进闪耀重申『借』和『请』的区别。`,
+        `见此，${your_name} 向荣进闪耀重申「借」和「请」的区别。`,
       );
       await era.printAndWait(
         `${your_name} 相信比起单纯的受到他人馈赠，这种更为公平的形式${flash.sex}会较容易接受。`,

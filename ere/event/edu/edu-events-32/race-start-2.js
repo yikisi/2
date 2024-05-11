@@ -271,8 +271,11 @@ module.exports = (handlers) => {
       tachyon.get_colored_name(),
       ' 的胸前',
     ]);
-    era.printButton(`「…………${callname}？能麻烦你说清楚硬件是什么意思吗？」`, 1);
-    await era.input();
+    await tachyon.say_and_wait([
+      '…………',
+      callname,
+      '？能麻烦你说清楚硬件是什么意思吗？',
+    ]);
     era.printButton('……不，什么也没有', 1);
     await era.input();
     await era.printAndWait('在打闹中，比赛开始的时间也到了');

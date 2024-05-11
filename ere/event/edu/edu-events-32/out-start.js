@@ -498,9 +498,8 @@ module.exports = async (hook, _, event_object) => {
         me.get_colored_name(),
         ' 看着',
         tachyon.sex,
-        '满足的摸着稍微有些变大的肚子的模样，以及顺着大腿流出，',
+        '满足的摸着稍微有些变大的肚子的模样，以及顺着大腿流出，不知是温泉水还是其他什么东西的透明液体',
       ]);
-      await era.printAndWait('不知是温泉水还是其他什么东西的透明液体');
       await era.printAndWait(
         '还有从一字型变成了双唇模样，唇间还留着刚偷吃完的白浆的穴口',
       );

@@ -1,5 +1,6 @@
 ﻿const era = require('#/era-electron');
 
+const get_status = require('#/system/chara/sys-get-status');
 const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
@@ -11,11 +12,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { celebration_color, money_color } = require('#/data/color-const');
 const { attr_background_colors, trainer_colors } = require('#/data/const.json');
 const recruit_flags = require('#/data/event/recruit-flags');
-const {
-  get_celebration,
-  get_status,
-  get_trainer_title,
-} = require('#/data/info-generator');
+const { get_celebration, get_trainer_title } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { race_infos } = require('#/data/race/race-const');
 

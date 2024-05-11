@@ -267,7 +267,7 @@ module.exports = async (_, __, event_object) => {
       await era.printAndWait(
         `与审判罪人的神一样的眼睛不同，那里混入了某种程度的同情。`,
       );
-      await era.printAndWait(`那是对今后也要不断被“痛苦”欺凌的人的怜悯吗。`);
+      await era.printAndWait(`那是对今后也要不断被『痛苦』欺凌的人的怜悯吗。`);
       await montjeu.say_and_wait('我的职责到此为止。');
       era.printButton(`「……对不起。」`, 1);
       await era.input();
@@ -371,7 +371,7 @@ module.exports = async (_, __, event_object) => {
         `从凯旋门赏这个拥有世界最高峰之称的比赛诞生之日开始。`,
       );
       await era.printAndWait(
-        `从接触到带着“我们”没有的可能性出生的“${vp.sex}们”的那天开始。`,
+        `从接触到带着『我们』没有的可能性出生的『${vp.sex}们』的那天开始。`,
       );
       await era.printAndWait(`作为一个人，${me.name} 是愿意的。`);
       era.printButton(`「${vp.name}，把我的灵魂烧焦吧。」（爱慕+5）`, 1);
@@ -744,7 +744,7 @@ module.exports = async (_, __, event_object) => {
           } 的背上轻拍。`,
         );
         await era.printAndWait(
-          `明明说了“abandonne放弃”，${vp.name} 却一点也不想离开。痛哭的${vp.sex}，反倒增强了力量。`,
+          `明明说了『abandonne放弃』，${vp.name} 却一点也不想离开。痛哭的${vp.sex}，反倒增强了力量。`,
         );
         await era.printAndWait(`也许这就是自作自受吧…………但是肋骨真的要断了。`);
         await vp.say_and_wait(`怎么样？`);
@@ -759,7 +759,7 @@ module.exports = async (_, __, event_object) => {
         await era.input();
         await era.printAndWait(`${vp.name} 就像一条得水的游鱼。`);
         await vp.say_and_wait(
-          `那就快点举行婚礼吧！订婚，还要买戒指……‘师傅’一定也会祝福我们的！`,
+          `那就快点举行婚礼吧！订婚，还要买戒指……『师傅』一定也会祝福我们的！`,
         );
         await vp.say_and_wait(
           `在法国做的话是教会吧？在日本也可以，穿着雪白的衣服在寺庙前对爱发誓！`,
@@ -786,7 +786,7 @@ module.exports = async (_, __, event_object) => {
           `我不是看了你的人种和容貌才爱上你的，而是爱上了你的心！`,
         );
         await vp.say_and_wait(
-          `亚洲人？所以呢，怎么了？我会对吵吵嚷嚷的人大声喊‘吵死了’！谁都不会妨碍我们！`,
+          `亚洲人？所以呢，怎么了？我会对吵吵嚷嚷的人大声喊『吵死了』！谁都不会妨碍我们！`,
         );
         await vp.say_and_wait(`不要随便决定我的价值！`);
         await vp.say_and_wait(

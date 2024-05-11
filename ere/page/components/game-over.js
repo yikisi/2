@@ -76,24 +76,32 @@ async function game_over(again) {
     let punish_level = era.get('flag:惩戒力度');
     if (
       punish_level < 3 &&
-      !again &&
-      (era.get('flag:当前声望') <= 0 || era.get('flag:彩蛋机制') === 179)
+      (era.get('flag:当前声望') <= 0 ||
+        (era.get('flag:彩蛋机制') === 179 && !again))
     ) {
       if (era.get('flag:声望不足替换')) {
         punish_level = era.add('flag:惩戒力度', 1);
         let jpy = era.get('flag:当前马币');
         switch (punish_level) {
           case 1:
-            era.set('cflag:0:性别', 10);
             era.set('cflag:0:阴茎尺寸', 1);
             era.set('cflag:0:阴道尺寸', 1);
-            era.set('cflag:0:胸围', Math.floor(era.get('cflag:0:身高') * 0.51));
-            era.set('cflag:0:腰围', Math.floor(era.get('cflag:0:身高') * 0.34));
-            era.set(
-              'cflag:0:臀围',
-              Math.floor(era.get('cflag:0:身高') * 0.542),
-            );
-            era.set('cflag:0:下胸围', era.get('cflag:0:胸围') - 15);
+            if (era.get('cflag:0:性别') === 1) {
+              era.set(
+                'cflag:0:胸围',
+                Math.floor(era.get('cflag:0:身高') * 0.51),
+              );
+              era.set(
+                'cflag:0:腰围',
+                Math.floor(era.get('cflag:0:身高') * 0.34),
+              );
+              era.set(
+                'cflag:0:臀围',
+                Math.floor(era.get('cflag:0:身高') * 0.542),
+              );
+              era.set('cflag:0:下胸围', era.get('cflag:0:胸围') - 15);
+            }
+            era.set('cflag:0:性别', 10);
             era.set('cflag:0:种族', 1);
             era.set('maxbase:0:速度', 1200);
             era.set('maxbase:0:耐力', 1200);
@@ -359,7 +367,6 @@ async function game_over(again) {
         );
       } else {
         era.drawLine();
-
         if (era.get('flag:变态行为')) {
           for (const e of [
             `${CharaTalk.me.name} 忽视了成年人的社会责任，唆使负责马娘进行变态行为的事情败露，哪怕是特雷森也无法为 ${CharaTalk.me.name} 掩盖过去。`,

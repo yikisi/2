@@ -252,7 +252,7 @@ module.exports = async (hook, extra_flag) => {
       era.println();
 
       await era.printAndWait(
-        `虽然还是没能知道『那位大人』到底是谁——但至少阿船对比赛的原动力又回来了！谢谢你，${era.get(
+        `虽然还是没能知道『那位大人」到底是谁——但至少阿船对比赛的原动力又回来了！谢谢你，${era.get(
           'callname:0:37',
         )}！`,
       );

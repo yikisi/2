@@ -18,7 +18,7 @@ module.exports = (handlers) => {
     const dictus = get_chara_talk(63);
     const palmer = get_chara_talk(64);
     await era.printAndWait(
-      `今天 ${me.name} 和里见光钻一起，来观战北部玄驹即将出赛的“菊花赏”。`,
+      `今天 ${me.name} 和里见光钻一起，来观战北部玄驹即将出赛的「菊花赏』。`,
     );
     await daiya.say_and_wait('啊，小北她们出来了！');
     await daiya.say_and_wait('咦……？小北好像没什么精神的样子……？');
@@ -37,7 +37,7 @@ module.exports = (handlers) => {
       ' 的那个人……',
     ]);
     await nice_nature.say_and_wait(
-      `没错，${nice_nature.sex}今天没有参赛。毕竟北部可是为了在“菊花赏”赢过她而特别努力至今的呢。`,
+      `没错，${nice_nature.sex}今天没有参赛。毕竟北部可是为了在『菊花赏』赢过她而特别努力至今的呢。`,
     );
     await nice_nature.say_and_wait(
       '这样一定会觉得很提不起劲……而且你看，会场中还弥漫着一股主角缺席的氛围。',
@@ -53,7 +53,7 @@ module.exports = (handlers) => {
       `${daiya.sex}一定会展现出让大家觉得她才是今天主角的表现！`,
     );
     await era.printAndWait(
-      '实况「这是场祭典！淀的祭典！北部的祭典开始了！称霸“菊花赏”的是北部玄驹──！」',
+      '实况「这是场祭典！淀的祭典！北部的祭典开始了！称霸『菊花赏』的是北部玄驹──！」',
     );
     await daiya.say_and_wait('好厉害……！真不愧是小北！！');
     await nice_nature.say_and_wait('……天啊，原来北部也是拥有主角光环的人啊……');
@@ -66,7 +66,7 @@ module.exports = (handlers) => {
     await nice_nature.say_and_wait(
       '…………不是吧？哇～这边这位也是耀眼得不得了啊～',
     );
-    await era.printAndWait('然后，观战完“菊花赏”后的隔天──');
+    await era.printAndWait('然后，观战完『菊花赏』后的隔天──');
     era.printButton('「今天的训练项目到此结束！」', 1);
     await era.input();
     await daiya.say_and_wait(
@@ -82,7 +82,7 @@ module.exports = (handlers) => {
       `于是 ${me.name} 向${daiya.sex}说明，在身体成长完全前承受太大负担是可能受伤的。`,
     );
     await daiya.say_and_wait(
-      '啊……这么说也是。抱歉……可能是因为看了小北在“菊花赏”的表现，就觉得自己也应该要更加努力了……',
+      '啊……这么说也是。抱歉……可能是因为看了小北在『菊花赏』的表现，就觉得自己也应该要更加努力了……',
     );
     await era.printAndWait(
       `看来${daiya.sex}似乎是受到了昨天比赛的刺激。现在充满了干劲。`,
@@ -98,7 +98,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('开始吧，第一个魔咒是什么呢！？');
     era.drawLine();
     await era.printAndWait(
-      `学园魔咒其一“在顶楼玩翁仔标，赢了的人会在下楼时滑倒”。在 ${me.name} 赶紧拿出翁仔标的同时──`,
+      `学园魔咒其一『在顶楼玩翁仔标，赢了的人会在下楼时滑倒』。在 ${me.name} 赶紧拿出翁仔标的同时──`,
     );
     await palmer.print_and_wait('？？？「咦？这不是里见和训练员嘛！」');
     await palmer.say_and_wait(
@@ -116,7 +116,7 @@ module.exports = (handlers) => {
       '嗯，是啊。说到学园的魔咒，虽然不多，但我也知道大概十个左右的魔咒。',
     );
     await dictus.say_and_wait(
-      '现在这里的魔咒是“在顶楼玩翁仔标，赢了的人会在下楼时滑倒”对吧。',
+      '现在这里的魔咒是『在顶楼玩翁仔标，赢了的人会在下楼时滑倒』对吧。',
     );
     await dictus.say_and_wait(
       '只要里见玩赢了翁仔标，又在下楼的时候没有滑倒的话，就应该算是破除魔咒了。',
@@ -132,7 +132,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('嘿嘿！第一个魔咒被我破除了！');
     era.drawLine();
     await dictus.say_and_wait(
-      '贩卖部的魔咒“买到最后一瓶果汁的人会倒楣一整天”。',
+      '贩卖部的魔咒『买到最后一瓶果汁的人会倒楣一整天』。',
     );
     await daiya.say_and_wait('啊，这刚好是最后一瓶呢。');
     await dictus.say_and_wait('要判断运气好坏……就让我跟里见一起抽签看结果吧。');
@@ -202,7 +202,7 @@ module.exports = (handlers) => {
       '……每次都是像这样，到了要跟神明许愿的时候都不知道该求什么，每年都会烦恼很久……',
     );
     await era.printAndWait(
-      `于是 ${me.name} 向${daiya.sex}提议，向神明宣示“今年的抱负”。`,
+      `于是 ${me.name} 向${daiya.sex}提议，向神明宣示『今年的抱负』。`,
     );
     await daiya.say_and_wait(
       '这是个好提议呢！既然都跟神明宣示了，就绝对没有不做到的道理了！',
@@ -233,10 +233,10 @@ module.exports = (handlers) => {
     );
     await kita.say_and_wait('嗯……！');
     await kita.say_and_wait(
-      '“春季资深三冠”……！我一定要好好表现，让更多的人为我加油！然后带给大家笑容！',
+      '『春季资深三冠』……！我一定要好好表现，让更多的人为我加油！然后带给大家笑容！',
     );
     await daiya.say_and_wait(
-      `我会跑赢“经典三冠”！身为里见家的赛${daiya.get_uma_sex_title()}，我发誓会带给大家非常耀眼的表现！`,
+      `我会跑赢『经典三冠』！身为里见家的赛${daiya.get_uma_sex_title()}，我发誓会带给大家非常耀眼的表现！`,
     );
     await era.printAndWait(
       `虽然${daiya.sex}们的目标赛事不同，但彼此眼神中的光芒却是一样的──`,
@@ -250,9 +250,11 @@ module.exports = (handlers) => {
     await daiya.say_and_wait(
       '哎呀，我可是也要不负钻石之名，跑出让大家都为之倾倒的表现呢。',
     );
-    await kita.say_and_wait('唔……！我会比你先在“春季资深三冠”迷倒大家好不好！');
+    await kita.say_and_wait(
+      '唔……！我会比你先在『春季资深三冠』迷倒大家好不好！',
+    );
     await daiya.say_and_wait(
-      '唔……等到我的“经典三冠”的时候，大家的注意力就会转到我身上了！',
+      '唔……等到我的『经典三冠』的时候，大家的注意力就会转到我身上了！',
     );
     await era.printAndWait([
       daiya.get_colored_name(),
@@ -279,7 +281,7 @@ module.exports = (handlers) => {
     const ret = await era.input();
     if (ret === 1) {
       await kita.say_and_wait(
-        `说的是“新春赛${daiya.get_uma_sex_title()}长距离接力赛”吧！现在这个时间的话……就快要经过这附近了！`,
+        `说的是『新春赛${daiya.get_uma_sex_title()}长距离接力赛』吧！现在这个时间的话……就快要经过这附近了！`,
       );
       await daiya.say_and_wait('比看谁更会加油是吧！那就交给训练员当裁判了！');
       era.printButton('「好！」', 1);
@@ -364,7 +366,7 @@ module.exports = (handlers) => {
         ) || flags.wait;
     } else {
       await daiya.say_and_wait(
-        '放风“蒸”！听起来好像很好吃呢！所以是要比谁吃的多吗？',
+        '放风『蒸』！听起来好像很好吃呢！所以是要比谁吃的多吗？',
       );
       await kita.say_and_wait('啊──小钻。不是用蒸的，是要把风筝放到天上飞啦。');
       await daiya.say_and_wait(
@@ -413,7 +415,7 @@ module.exports = (handlers) => {
     }
     const kita = get_chara_talk(68);
     await print_event_name('夏季集训（经典年）开始！', daiya);
-    await era.printAndWait('今天开始，就是期待已久的“夏季集训”了！');
+    await era.printAndWait('今天开始，就是期待已久的『夏季集训』了！');
     await daiya.say_and_wait(
       '我会在这个夏季集训里，练就不被魔咒左右的强大实力！',
     );
@@ -421,7 +423,7 @@ module.exports = (handlers) => {
       '为了练就强大的实力，我们计划在夏季集训着重做基础训练。先把体能的基础给打好是很重要的。',
     );
     await era.printAndWait(
-      '锻炼出足以跑完“菊花赏”3000米的持久力也是这次的课题。',
+      '锻炼出足以跑完『菊花赏』3000米的持久力也是这次的课题。',
     );
     await kita.say_as_unknown_and_wait('小钻──！');
     await kita.say_and_wait('欸欸，我们快点去房间了啦！');
@@ -432,10 +434,10 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('喔──！');
     await kita.say_and_wait('啊哈哈，小钻自己还不是也很兴奋嘛！');
     await daiya.say_and_wait(
-      '呵呵，我当然也是充满干劲的呀。因为“菊花赏”我一定要赢。',
+      '呵呵，我当然也是充满干劲的呀。因为『菊花赏』我一定要赢。',
     );
     await daiya.say_and_wait(
-      '我要在小北跑赢过的“菊花赏”拿下胜利……破除里见家的魔咒……成为有资格当小北劲敌的自己！',
+      '我要在小北跑赢过的『菊花赏』拿下胜利……破除里见家的魔咒……成为有资格当小北劲敌的自己！',
     );
     await kita.say_and_wait('小钻……！没错！为了将来我们能跑同一场比赛。');
     await era.printAndWait([
@@ -523,7 +525,7 @@ module.exports = (handlers) => {
     await turbo.say_and_wait('可以大家一起做的训练！我让里见你也一起加入吧！');
     await dictus.say_and_wait('涡轮，你不要这么急。还是由我来说明一下。');
     await era.printAndWait(
-      `正当觉得一头雾水的时候，那些里见光钻提起过的“为${daiya.sex}办新生欢迎会的前辈们”一个接一个出现。`,
+      `正当觉得一头雾水的时候，那些里见光钻提起过的『为${daiya.sex}办新生欢迎会的前辈们』一个接一个出现。`,
     );
     await era.printAndWait(
       '不只是生野狄杜斯，今天还有双涡轮、待兼诗歌剧，和大拓太阳神也在。',
@@ -593,7 +595,7 @@ module.exports = (handlers) => {
         '嗯，感觉不错喔～要小心不要掉到自己挖出来的沙坑里喔！',
       );
       await dictus.say_and_wait('诗歌剧，你自己也要小心不要掉下去喔。');
-      await tannhauser.say_and_wait('啊！对耶～！……我会“小熏”的……');
+      await tannhauser.say_and_wait('啊！对耶～！……我会『小熏』的……');
       await tannhauser.say_and_wait(
         '那么──接下来是要做地基吧。要在沙子里面加很～多的水，再踩踏定型。',
       );
@@ -689,16 +691,16 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('喝啊啊啊啊啊啊──！');
     await daiya.say_and_wait('呼、呼……还不够，光这样是赢不了的……');
     await daiya.say_and_wait(
-      '要在“菊花赏”赢得胜利，就一定要变强到无论遇到什么突发状况都不受影响的程度……！',
+      '要在『菊花赏』赢得胜利，就一定要变强到无论遇到什么突发状况都不受影响的程度……！',
     );
     await era.printAndWait(
-      `里见光钻为了“菊花赏”连续好多天都努力地投入训练。每一天都能感受到${daiya.sex}的成长。`,
+      `里见光钻为了『菊花赏』连续好多天都努力地投入训练。每一天都能感受到${daiya.sex}的成长。`,
     );
     await era.printAndWait(
       '身体状况调整得很好，但里见光钻的精神状态似乎陷入了非常紧绷的状况。',
     );
     await era.printAndWait(
-      `尤其是${daiya.sex}现在经常把“要练就克制魔咒的实力”这句话挂在嘴边。`,
+      `尤其是${daiya.sex}现在经常把『要练就克制魔咒的实力』这句话挂在嘴边。`,
     );
     await daiya.say_and_wait('呼、呼……呼！');
     await daiya.say_and_wait(
@@ -710,7 +712,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       '会这么执着于魔咒，或许是因为背负着里见家的期望吧。既然如此──',
     );
-    await era.printAndWait(`去找“${daiya.sex}”帮忙看看好了。`);
+    await era.printAndWait(`去找『${daiya.sex}』帮忙看看好了。`);
     await mcqueen.say_and_wait('今天请多指教了，里见。');
     await daiya.say_and_wait('麦、麦……麦昆！？麦昆愿意陪我一起做训练吗！？');
     era.printButton('「可以从她身上学到很多东西吧。」', 1);
@@ -751,10 +753,10 @@ module.exports = (handlers) => {
     await mcqueen.say_and_wait('……里见，你买了真大一杯啊……');
     await daiya.say_and_wait('嘿嘿嘿，其实这个摊贩有个很有名的魔咒喔。');
     await daiya.say_and_wait(
-      '据说只要在比赛前喝一杯“LL杯的蜂蜜柠檬·蜂蜜偏软·特浓·特多”就会输掉比赛的魔咒！',
+      '据说只要在比赛前喝一杯『LL杯的蜂蜜柠檬·蜂蜜偏软·特浓·特多』就会输掉比赛的魔咒！',
     );
     await daiya.say_and_wait(
-      '所以我才想故意在“菊花赏”之前喝一杯，挑战破除这个魔咒！',
+      '所以我才想故意在『菊花赏』之前喝一杯，挑战破除这个魔咒！',
     );
     await mcqueen.say_and_wait('破除魔咒……？');
     await daiya.say_and_wait([
@@ -873,7 +875,7 @@ module.exports = (handlers) => {
       '需要完成的课题还有一大堆呢！已经没有多余的时间去在意魔咒的事情了！',
     );
     await daiya.say_and_wait(
-      '我一定要完成里见光钻的跑法！然后，一定要在“菊花赏”赢得胜利！',
+      '我一定要完成里见光钻的跑法！然后，一定要在『菊花赏』赢得胜利！',
     );
     await era.printAndWait(
       '里见光钻用非常爽朗的表情，坚定且自信地立誓要取得胜利。',

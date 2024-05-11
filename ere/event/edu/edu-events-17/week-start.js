@@ -114,10 +114,7 @@ module.exports = async (hook, _, event_object) => {
       `那时的 ${CharaTalk.me.name}，不过是个自大的混蛋。自称四处怀才不遇，实际上，不过是学生的夸夸其谈。`,
     );
     await era.printAndWait(
-      `遇到露娜时，${CharaTalk.me.name} 把脑海里藏着的那些从未见过天日的战略、见闻和幻想，`,
-    );
-    await era.printAndWait(
-      `以及 ${CharaTalk.me.name} 从露娜身上看出${luna_talk.sex}日后一定会成为大人物这些事，一股脑地说了出来。`,
+      `遇到露娜时，${CharaTalk.me.name} 把脑海里藏着的那些从未见过天日的战略、见闻和幻想，以及 ${CharaTalk.me.name} 从露娜身上看出${luna_talk.sex}日后一定会成为大人物这些事，一股脑地说了出来。`,
     );
     await era.printAndWait(
       `${CharaTalk.me.name} 不知道那时的自己有多么失态，但露娜，在那时露出了释然的笑容。`,
@@ -139,7 +136,7 @@ module.exports = async (hook, _, event_object) => {
     await print_event_name('新年的抱负', luna_talk);
 
     await era.printAndWait(
-      '在和露娜成为“共犯”后，不知不觉，就迎来了新的一年。',
+      '在和露娜成为「共犯」后，不知不觉，就迎来了新的一年。',
     );
     await era.printAndWait(
       `无时无刻的战战兢兢与恐惧，让 ${CharaTalk.me.name} 夜夜难眠。`,
@@ -274,7 +271,7 @@ module.exports = async (hook, _, event_object) => {
     await luna_talk.say_and_wait('为了他人而努力，始终是一件美好的愿望。');
     await luna_talk.say_and_wait('虽说如此，我们还是得为了菊花赏而努力。');
     await luna_talk.say_and_wait(
-      '但你的目光已经说明白了——‘训练下去对身体有害’，是吧？',
+      '但你的目光已经说明白了——『训练下去对身体有害』，是吧？',
     );
     await luna_talk.say_and_wait(
       '但德比之后，我越发坚定地认为，完成我们的理想需要非一般的努力。',

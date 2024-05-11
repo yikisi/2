@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const CustomizedMec = require('#/event/mec/mec-common');
 
 const { buff_colors } = require('#/data/color-const');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedMec {
   get_status() {
@@ -34,6 +35,12 @@ module.exports = class extends CustomizedMec {
       ret_list.push({
         color: buff_colors[2],
         content: '透视眼镜',
+      });
+    }
+    if (era.get('cflag:303:招募状态') === recruit_flags.yes) {
+      ret_list.push({
+        color: buff_colors[1],
+        content: '彻底取材',
       });
     }
     return ret_list;

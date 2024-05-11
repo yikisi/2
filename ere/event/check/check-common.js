@@ -21,6 +21,7 @@ const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { location_enum } = require('#/data/locations');
+const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { pressure_border } = require('#/data/train-const');
@@ -39,16 +40,22 @@ function get_action_debuff(chara_id) {
 /** @type {Record<string,function(chara_id:number,extra_flag:*):*>} */
 const handlers = {};
 
+/**
+ * @param _
+ * @param {number} race
+ */
+handlers[check_stages.aim_race] = (_, { race }) =>
+  4 * (race === race_enum.begin_race);
+
 /** @param {number} chara_id */
 handlers[check_stages.aim_check] = (chara_id) => {
   const buffer = [];
-  /** @type {Record<string,{race:number,rank:number}>} */
-  const races = era.get(`cflag:${chara_id}:育成成绩`);
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+  const races = new RaceHistory(chara_id);
+  buffer.push(check_aim_and_get_entry(races.get(), race_enum.begin_race));
   let g1_count = 0,
     g2_count = 0,
     other_count = 0;
-  Object.values(races).forEach((e) => {
+  races.get_values().forEach((e) => {
     const info = race_infos[e.race];
     if (info.race_class === class_enum.G1) {
       g1_count += e.rank <= 5;
@@ -80,10 +87,15 @@ handlers[check_stages.aim_check] = (chara_id) => {
 
 handlers[check_stages.love_event] = (chara_id) =>
   chara_id &&
-  add_event(event_hooks.week_end, new EventObject(chara_id, cb_enum.love));
+  add_event(
+    event_hooks.week_end,
+    new EventObject(chara_id, cb_enum.love).set_arg(
+      era.get(`love:${chara_id}`),
+    ),
+  );
 
 const aim_races = {};
-aim_races[race_enum.begin_race] = 2;
+aim_races[race_enum.begin_race] = 4;
 
 handlers[check_stages.next_week] = (chara_id) => {
   if (chara_id && era.get(`cflag:${chara_id}:种族`)) {
@@ -91,11 +103,18 @@ handlers[check_stages.next_week] = (chara_id) => {
     if (edu_weeks < 3 * 48) {
       check_and_register_aim_race(chara_id, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 9) {
-      add_event(event_hooks.week_start, new EventObject(chara_id, cb_enum.edu));
+      add_event(
+        event_hooks.week_start,
+        new EventObject(chara_id, cb_enum.edu).set_arg('palace'),
+      );
     }
   }
 };
+
 handlers[check_stages.prison] = (chara_id) => {
+  if (era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置')) {
+    return false;
+  }
   const love = era.get(`love:${chara_id}`),
     prison_limit = era.get('flag:极端行为限制'),
     relation = era.get(`relation:${chara_id}:0`);
@@ -138,6 +157,7 @@ handlers[check_stages.rape_in_sleeping] = (chara_id) => {
     relation = era.get(`relation:${chara_id}:0`) || 0;
   let delta = love * raping_limit - relation;
   if (
+    era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置') ||
     (punish_level <= 1 &&
       (era.get('flag:当前位置') === location_enum.basement ||
         !raping_limit ||
@@ -176,6 +196,7 @@ handlers[check_stages.rape_in_sleeping] = (chara_id) => {
 
 handlers[check_stages.want_make_love] = (chara_id) => {
   if (
+    era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置') ||
     !check_pregnant_unprotect(chara_id) ||
     !check_pregnant_unprotect(0) ||
     check_want_to_escape(chara_id)
@@ -237,12 +258,12 @@ handlers[check_stages.personal_titles] = (chara_id) =>
  * @param {{aim_check:boolean,titles:{c:string,n:string}[]}} extra_flag
  */
 handlers[check_stages.title_check] = (chara_id, extra_flag) => {
-  const /** @type {Record<string,{race:number,rank:number}>} */
-    races = era.get(`cflag:${chara_id}:育成成绩`);
   if (
-    Object.values(races).filter(
-      (e) => e.rank === 1 && race_infos[e.race].race_class === class_enum.G1,
-    ).length >= 6
+    new RaceHistory(chara_id)
+      .get_values()
+      .filter(
+        (e) => e.rank === 1 && race_infos[e.race].race_class === class_enum.G1,
+      ).length >= 6
   ) {
     extra_flag.titles.push({
       c: get_chara_talk(chara_id).color,

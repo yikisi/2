@@ -166,7 +166,7 @@ module.exports = async (item_list) => {
     });
     buffer.push({
       type: 'text',
-      content: '\n* 点击道具查看说明\n** 带“限”字样的商品只能拥有一件',
+      content: '\n* 点击道具查看说明\n** 带「限」字样的商品只能拥有一件',
     });
     if (in_list) {
       buffer.push({

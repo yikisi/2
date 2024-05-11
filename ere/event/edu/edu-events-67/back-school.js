@@ -33,7 +33,7 @@ module.exports = async (hook, _, event_object) => {
     await era.printAndWait(`${me.name} 和里见光钻一起外出的回程路上──`);
     await daiya.say_and_wait('哎呀？哎呀哎呀哎呀！？');
     await daiya.say_and_wait(
-      '训练员，我发现不得了的东西了！那边竟然有一条“小路”呢！',
+      '训练员，我发现不得了的东西了！那边竟然有一条『小路』呢！',
     );
     await daiya.say_and_wait(
       '哇啊～之前都没有注意到耶！那条路……不知道会通到哪里去呢！',
@@ -155,7 +155,7 @@ module.exports = async (hook, _, event_object) => {
     );
     await daiya.say_and_wait('你们好。你们两位在做什么啊？');
     await gold_ship.say_and_wait(
-      '喔，是里见啊！我们刚才买了大量的“惊人生物巧克力”啦！',
+      '喔，是里见啊！我们刚才买了大量的『惊人生物巧克力』啦！',
     );
     await gold_ship.say_and_wait(
       '但我们一直没有抽到最稀有的那张菊石骑士……就只好一直在这边吃巧克力。',
@@ -192,7 +192,7 @@ module.exports = async (hook, _, event_object) => {
       await condor_pasa.print_and_wait('？？？「请先等一下！」');
       await daiya.say_and_wait('？');
       await condor_pasa.say_and_wait(
-        '这个“惊人生物巧克力”，我本来也打算要买的！！',
+        '这个『惊人生物巧克力』，我本来也打算要买的！！',
       );
       await condor_pasa.say_and_wait(
         '结果全都卖完了……是黄金船跟中山前辈搞的鬼吧！？',

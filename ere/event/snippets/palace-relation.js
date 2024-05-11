@@ -4,6 +4,10 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { location_enum } = require('#/data/locations');
 
+/**
+ * @param {CharaTalk} chara
+ * @param {CharaTalk} me
+ */
 async function palace_relation(chara, me) {
   const love = era.get(`love:${chara.id}`);
   if (love >= 50 || era.get(`relation:${chara.id}:0`) > 0) {

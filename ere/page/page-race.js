@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_change_tired = require('#/system/chara/sys-change-tired');
 const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
+const get_status = require('#/system/chara/sys-get-status');
 const sys_check_titles_after_race = require('#/system/race/sys-check-titles-after-race');
 const sys_parse_for_race = require('#/system/race/sys-parse-race-uma');
 const sys_prepare_race = require('#/system/race/sys-prepare-race');
@@ -44,14 +45,16 @@ const {
 const { attr_background_colors, attr_colors } = require('#/data/const.json');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const AfterRaceParams = require('#/data/event/after-race-params');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
+const RaceEndParams = require('#/data/event/extra-flag/race-end-params');
+const RaceStartParams = require('#/data/event/extra-flag/race-start-params');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_adaptability_rank,
   get_attr_rank,
   get_rank_level,
-  get_status,
   get_trainer_level,
 } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -598,9 +601,11 @@ async function race_page(race) {
       start_count = 0;
     } else {
       era.drawLine();
-      await sys_call_edu_event(ret, event_hooks.race_start, {
-        race,
-      });
+      await sys_call_edu_event(
+        ret,
+        event_hooks.race_start,
+        new RaceStartParams(race),
+      );
       start_count--;
       race_start[ret] = true;
       sys_change_attr_and_print(0, '精力', -time_cost);
@@ -676,9 +681,6 @@ async function race_page(race) {
       // TODO 伏兵+1 随机负面技能
     }
     era.println();
-    const tmp = sys_reg_race(id);
-    tmp.curr.race = tmp.last.race = -1;
-    tmp.curr.week = tmp.last.week = -1;
     const edu_weeks = era.get(`cflag:${id}:育成回合计时`);
     if (uma.rank.curr === 1 || race !== race_enum.begin_race) {
       new RaceHistory(id).add_result(
@@ -687,21 +689,25 @@ async function race_page(race) {
           uma.pop[0],
           race,
           uma.rank.curr,
-          cur_chara.style,
+          uma.style,
           cur_year,
         ),
       );
     }
     sys_change_tired(id, 3);
-    sys_call_check(id, check_stages.after_race, {
-      aim_race: aim_race_dict[id] > 0,
-      contestants,
-      edu_weeks,
-      pop: uma.pop[0],
-      race,
-      rank: uma.rank.curr,
-      st: cur_chara.style,
-    });
+    sys_call_check(
+      id,
+      check_stages.after_race,
+      new AfterRaceParams(
+        aim_race_dict[id] > 0,
+        contestants,
+        edu_weeks,
+        uma.pop[0],
+        race,
+        uma.rank.curr,
+        uma.style,
+      ),
+    );
   });
   await era.waitAnyKey();
   time_cost = 0;
@@ -759,11 +765,15 @@ async function race_page(race) {
       end_count = 0;
     } else {
       era.drawLine();
-      await sys_call_edu_event(ret, event_hooks.race_end, {
-        contestants,
-        race,
-        rank: team_list.find((e) => e.index_chara === ret).rank.curr,
-      });
+      await sys_call_edu_event(
+        ret,
+        event_hooks.race_end,
+        new RaceEndParams(
+          contestants,
+          race,
+          team_list.find((e) => e.index_chara === ret).rank.curr,
+        ),
+      );
       end_count--;
       race_end[ret] = true;
       sys_change_attr_and_print(0, '精力', -time_cost);
@@ -858,6 +868,9 @@ async function race_page(race) {
   }
   for (const uma of team_list) {
     const id = uma.index_chara;
+    const tmp = sys_reg_race(id);
+    tmp.curr.race = tmp.last.race = -1;
+    tmp.curr.week = tmp.last.week = -1;
     if (uma.rank.curr === 1) {
       sys_change_lust(id, lust_from_palam);
       sys_change_pressure(id, -2000);

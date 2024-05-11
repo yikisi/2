@@ -182,7 +182,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `荣进闪耀的脸上露出灿烂的笑容，看得出来，此刻的${flash.sex}完全沉浸于胜利所带来的喜悦中。`,
     );
-    await era.printAndWait('“嘟嘟。”');
+    await era.printAndWait('「嘟嘟。」');
     await era.printAndWait(
       `然后非常巧妙的，手机提示音也在这个时候传入${flash.sex}的耳中。`,
     );

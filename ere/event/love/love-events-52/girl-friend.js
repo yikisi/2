@@ -22,7 +22,7 @@ module.exports = async (me, urara, in_urara, relation, callname) => {
     '坐在自己的办公桌前处理着文件，你回想着今天与乌拉拉在一起时的意外遭遇。',
   );
   await in_urara.say_as_unknown_and_wait(
-    '但说是意外也并非恰当，因为在那之前的你也从未见过如此“有备而来”的乌拉拉。',
+    '但说是意外也并非恰当，因为在那之前的你也从未见过如此『有备而来』的乌拉拉。',
   );
   era.drawLine();
   await urara.say_and_wait([

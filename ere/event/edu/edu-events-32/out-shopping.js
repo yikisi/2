@@ -526,7 +526,7 @@ module.exports = async (hook, _, event_object) => {
       era.printButton('「感觉……还不如二等奖啊」', 2);
       await era.input();
       await tachyon.say_and_wait(
-        '哦？……嗯，某种意义上来讲确实如此，无论是由大厨制作的，总归来说，也就是胡萝卜与肉而已，',
+        '哦？……嗯，某种意义上来讲确实如此，无论是由大厨制作的，总归来说，也就是胡萝卜与肉而已',
       );
       await tachyon.say_and_wait(
         '原料层面上来看，价值确实不如二等奖的胡萝卜数量',

@@ -453,7 +453,7 @@ handlers.lust = async (vp, me) => {
   ]);
   await era.printAndWait([
     me.get_colored_name(),
-    ' 埋下头，隔着十几厘米，就能闻到马娘“发春期”的气息。',
+    ' 埋下头，隔着十几厘米，就能闻到马娘『发春期』的气息。',
   ]);
   await era.printAndWait('淡淡的，有点腥臭，有点少女的芳香。');
   await era.printAndWait('两瓣大阴唇之间的缝隙里，是更加水嫩的小阴唇。');

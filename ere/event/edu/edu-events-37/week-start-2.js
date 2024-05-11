@@ -196,7 +196,7 @@ module.exports = (handlers) => {
     await fuji.say_and_wait(
       `因此，来大胆挑战吧。我在这里，等待着 ${your_name} 哦。`,
     );
-    await era.printAndWait('“哔。”');
+    await era.printAndWait('「哔。」');
     await era.printAndWait(
       '屏幕中的画面在富士奇石对摄像头伸手示意的这一刻定格。',
     );
@@ -230,7 +230,7 @@ module.exports = (handlers) => {
     await era.input();
     await flash.say_and_wait('嗯！');
     await era.printAndWait(`下一秒，${flash.sex}充满自信地回应道。`);
-    await era.printAndWait('“叮叮叮——”');
+    await era.printAndWait('「叮叮叮——」');
     await flash.say_and_wait('？');
     await era.printAndWait(
       `然后也就是在这时，代表联络的响铃突然自${flash.sex}的手机中响起。`,

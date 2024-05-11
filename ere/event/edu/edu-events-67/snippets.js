@@ -29,17 +29,17 @@ module.exports = {
     );
     await kita.say_and_wait('……我明明已经很努力了……');
     await kita.say_and_wait(
-      '……“宝冢纪念”……呜呜……得到粉丝票选第一名……我真的好开心……！',
+      '……『宝冢纪念』……呜呜……得到粉丝票选第一名……我真的好开心……！',
     );
     await kita.say_and_wait(
       '想说一定不能辜负大家的期望……所以我真的真的非常努力了！！',
     );
     await kita.say_and_wait('为什么会是这样！？');
     await daiya.say_and_wait(
-      '我想……会不会是因为身体其实还很疲劳？我之前也因为“天皇赏（春）”留下了疲劳。',
+      '我想……会不会是因为身体其实还很疲劳？我之前也因为『天皇赏（春）』留下了疲劳。',
     );
     await era.printAndWait(
-      `经过“天皇赏（春）”的激战，北部玄驹的身体也累积了疲劳。${kita.sex}本人却没有发现。`,
+      `经过「天皇赏（春）』的激战，北部玄驹的身体也累积了疲劳。${kita.sex}本人却没有发现。`,
     );
     await era.printAndWait(
       `${kita.sex}因为不想辜负大家的期望，所以没有感觉到疲劳，但疲劳却也没有消失，反而是在${kita.sex}身体里慢慢累积。`,
@@ -91,12 +91,12 @@ module.exports = {
       '观众们说如果小北跑赢的话，就如同自己的事情一般开心喔。',
     );
     await daiya.say_and_wait(
-      '“因为北部很努力，所以我也能继续努力。”……小北跟我不一样，是像这样得到大家支持的。',
+      '『因为北部很努力，所以我也能继续努力。』……小北跟我不一样，是像这样得到大家支持的。',
     );
     await daiya.say_and_wait('有时候，我也会有点羡慕这样的小北呢。');
     await kita.say_and_wait('啊……');
     await era.printAndWait(
-      '观众A「也就是“春季资深三冠”了吧！一定要拿下啊，北部！！」',
+      '观众A「也就是『春季资深三冠』了吧！一定要拿下啊，北部！！」',
     );
     await era.printAndWait('观众A「北部──！一定要为去年雪耻啊！！」');
     await daiya.say_and_wait(
@@ -108,7 +108,7 @@ module.exports = {
     await daiya.say_and_wait('所以，没事的。');
     await kita.say_and_wait('小钻……');
     await daiya.say_and_wait(
-      '虽然今天可能真的让大家失望了，但粉丝们一定还对小北充满“期待”的。',
+      '虽然今天可能真的让大家失望了，但粉丝们一定还对小北充满『期待』的。',
     );
     await kita.say_and_wait('……期待……');
     await daiya.say_and_wait('我也很期待喔。');
@@ -128,7 +128,7 @@ module.exports = {
       '我刚刚一直在想，如果大家是因为能从小北身上看到自己而支持她，那支持我的人又是因为什么呢？',
     );
     await daiya.say_and_wait(
-      `身为“知名赛${daiya.get_uma_sex_title()}”的贡献……小北${
+      `身为『知名赛${daiya.get_uma_sex_title()}』的贡献……小北${
         kita.sex
       }已经做到带给大家笑容的这个贡献了。`,
     );
@@ -143,9 +143,9 @@ module.exports = {
       `大家在里见光钻身上所追求的事情。${daiya.sex}的表现能带给粉丝什么梦想。`,
     );
     await era.printAndWait(
-      `每一位“知名赛${daiya.get_uma_sex_title()}”都各自能带给大家不一样的梦想。`,
+      `每一位「知名赛${daiya.get_uma_sex_title()}」都各自能带给大家不一样的梦想。`,
     );
-    era.printButton('「我从你身上能感受到“可能性”」', 1);
+    era.printButton('「我从你身上能感受到『可能性』」', 1);
     await era.input();
     await daiya.say_and_wait('可能性……');
     await era.printAndWait(
@@ -169,7 +169,7 @@ module.exports = {
     await daiya.say_and_wait(
       `无时无刻不忘挑战的心……这就是帝王${
         teio.sex
-      }身为“知名赛${daiya.get_uma_sex_title()}”的做法……`,
+      }身为『知名赛${daiya.get_uma_sex_title()}』的做法……`,
     );
     await daiya.say_and_wait(
       '麦昆是接受挑战的身份，帝王则是挑战者的身份。',
@@ -196,7 +196,7 @@ module.exports = {
       '是的。一直以来我都在挑战各种事情，像是阻挠里见家的魔咒，还有挑战小北。',
     );
     await daiya.say_and_wait(
-      `所以，我想我身为一个“知名赛${daiya.get_uma_sex_title()}”，继续挑战各种事物，是不是就是最适合我的做法呢。`,
+      `所以，我想我身为一个『知名赛${daiya.get_uma_sex_title()}』，继续挑战各种事物，是不是就是最适合我的做法呢。`,
     );
     await daiya.say_and_wait(
       '就像我挑战麦昆和帝王，在里见家的历史上开启一个新的篇章一样。',
@@ -223,10 +223,10 @@ module.exports = {
     await era.input();
     await daiya.say_and_wait('是的！');
     await daiya.say_and_wait(
-      `身为“知名赛${daiya.get_uma_sex_title()}”的里见光钻所该有的模样……我已经确定自己的目标了。`,
+      `身为『知名赛${daiya.get_uma_sex_title()}』的里见光钻所该有的模样……我已经确定自己的目标了。`,
     );
     await daiya.say_and_wait(
-      `我要在“有马纪念”获胜，正式加入“知名赛${daiya.get_uma_sex_title()}”的行列！`,
+      `我要在『有马纪念』获胜，正式加入『知名赛${daiya.get_uma_sex_title()}』的行列！`,
     );
   },
 };

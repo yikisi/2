@@ -471,62 +471,62 @@ module.exports = (handlers) => {
         } else {
           await coffee.say_and_wait('……麻烦你们别在这里打情骂俏');
         }
-        era.drawLine();
-        await tachyon.say_and_wait(['……对了，', c_call_m, '，差不多……']);
-        era.println();
-        await era.printAndWait([
-          '吵吵闹闹过后，也到 ',
-          coffee.get_colored_name(),
-          ' 训练的时间了',
-        ]);
-        await era.printAndWait([
-          me.get_colored_name(),
-          ' 点了点头，准备和 ',
-          coffee.get_colored_name(),
-          ' 一起到训练场上',
-        ]);
-        era.println();
-        await tachyon.say_and_wait([
-          '哦？又去训练吗？最近 ',
-          t_call_c,
-          ' 怎么感觉特别勤奋的样子',
-        ]);
-        await coffee.say_and_wait([
-          '……我训练一直都很认真，请不要把我和 ',
-          c_call_t,
-          ' 混为一谈',
-        ]);
-        await coffee.say_and_wait('再说，年底快到了……一定要成功超越朋友');
-        await coffee.say_and_wait('除此之外……');
-        await coffee.say_and_wait('还有某人的挑战……');
-        era.println();
-        await era.printAndWait([
-          coffee.get_colored_name(),
-          ' 直直盯着 ',
-          tachyon.get_colored_name(),
-        ]);
-        await era.printAndWait([
-          me.get_colored_name(),
-          ' 想起了 ',
-          race_infos[race_enum.prix_lat].get_colored_name(),
-          ' 时 ',
-          tachyon.get_colored_name(),
-          ' 说过的话',
-        ]);
-        await coffee.say_and_wait(['我一定，会超越 ', c_call_t, ' 的']);
-        await tachyon.say_and_wait('……哼哼，能做到，就尽管试试看吧');
-        await tachyon.say_and_wait(['来超越极限吧！', t_call_c, '！']);
-        era.println();
-        await era.printAndWait([
-          tachyon.get_colored_name(),
-          ' 的眼中依旧闪烁着狂热的光芒',
-        ]);
-        await era.printAndWait([
-          '只是……不知是不是 ',
-          me.get_colored_name(),
-          ' 的错觉，那光芒似乎有些动摇的模样',
-        ]);
       }
+      era.drawLine();
+      await coffee.say_and_wait(['……对了，', c_call_m, '，差不多……']);
+      era.println();
+      await era.printAndWait([
+        '吵吵闹闹过后，也到 ',
+        coffee.get_colored_name(),
+        ' 训练的时间了',
+      ]);
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 点了点头，准备和 ',
+        coffee.get_colored_name(),
+        ' 一起到训练场上',
+      ]);
+      era.println();
+      await tachyon.say_and_wait([
+        '哦？又去训练吗？最近 ',
+        t_call_c,
+        ' 怎么感觉特别勤奋的样子',
+      ]);
+      await coffee.say_and_wait([
+        '……我训练一直都很认真，请不要把我和 ',
+        c_call_t,
+        ' 混为一谈',
+      ]);
+      await coffee.say_and_wait('再说，年底快到了……一定要成功超越朋友');
+      await coffee.say_and_wait('除此之外……');
+      await coffee.say_and_wait('还有某人的挑战……');
+      era.println();
+      await era.printAndWait([
+        coffee.get_colored_name(),
+        ' 直直盯着 ',
+        tachyon.get_colored_name(),
+      ]);
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 想起了 ',
+        race_infos[race_enum.prix_lat].get_colored_name(),
+        ' 时 ',
+        tachyon.get_colored_name(),
+        ' 说过的话',
+      ]);
+      await coffee.say_and_wait(['我一定，会超越 ', c_call_t, ' 的']);
+      await tachyon.say_and_wait('……哼哼，能做到，就尽管试试看吧');
+      await tachyon.say_and_wait(['来超越极限吧！', t_call_c, '！']);
+      era.println();
+      await era.printAndWait([
+        tachyon.get_colored_name(),
+        ' 的眼中依旧闪烁着狂热的光芒',
+      ]);
+      await era.printAndWait([
+        '只是……不知是不是 ',
+        me.get_colored_name(),
+        ' 的错觉，那光芒似乎有些动摇的模样',
+      ]);
     } else {
       await print_event_name('最终因素的寻求', tachyon);
       await era.printAndWait(

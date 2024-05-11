@@ -589,6 +589,7 @@ module.exports = (handlers) => {
           '……即便目光指向的对象，已经不是 ',
           tachyon.get_colored_name(),
         ]);
+        era.println();
         flags.wait_flag = sys_like_chara(32, 0, -20, true, 10);
       } else {
         await tachyon.say_and_wait('……啊，下雪了');

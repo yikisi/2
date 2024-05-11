@@ -34,7 +34,7 @@ handlers[event_hooks.crazy_fan_end] = async () => {
       `以往活泼的${kita.get_teen_sex_title()}此时面色苍白，眼袋肉眼可见的红肿起来，似乎是哭过的样子。`,
     );
     await era.printAndWait(
-      `因为比赛失败的原因，愤怒的粉丝为此冲击了校园，希望把 ${me.name} 这个“罪魁祸首”处刑掉。`,
+      `因为比赛失败的原因，愤怒的粉丝为此冲击了校园，希望把 ${me.name} 这个「罪魁祸首」处刑掉。`,
     );
     await era.printAndWait(
       '虽然最后这件事莫名平静了下来，但是小北已经不能够继续在特雷森学园训练了。',

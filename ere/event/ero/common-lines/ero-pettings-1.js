@@ -341,7 +341,7 @@ module.exports = (handlers) => {
         '的手指暧昧地凑近过来，用叫身体恰到好处能警惕起来的粗糙质感，沿着那小巧的穴口绕着圈。',
       ]);
       await attacker.print_and_wait([
-        '而这“恰到好处”的警惕……便体现在 ',
+        '而这「恰到好处」的警惕……便体现在 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 不自觉向着手指讨好撅起的屁股……',
         era.get(`cflag:${defender.id}:种族`) ? '与那晕头转向的马尾巴了……' : '',
@@ -429,7 +429,7 @@ module.exports = (handlers) => {
           '明明训练后为了确认状态，偶尔也会有上手抚摸的亲热动作吧……',
         );
         await attacker.print_and_wait(
-          '但是很神奇的，现在脑袋里完全没法将这双腿与“比赛”联系在一起',
+          '但是很神奇的，现在脑袋里完全没法将这双腿与「比赛」联系在一起',
         );
       }
       await attacker.print_and_wait('现在的自己满脑袋想的都是……');

@@ -77,9 +77,9 @@ module.exports = (handlers) => {
       ) -
     75;
 
-  handlers[ero_hooks.use_lubricating_fluid] = () => -50;
+  handlers[ero_hooks.use_lubricating_fluid] = () => 0;
 
-  handlers[ero_hooks.use_medicine] = () => -60;
+  handlers[ero_hooks.use_medicine] = () => 0;
 
   handlers[ero_hooks.use_item] = () => -75;
 

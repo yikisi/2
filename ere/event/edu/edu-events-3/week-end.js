@@ -263,7 +263,7 @@ module.exports = async function () {
       await era.printAndWait(`${me.name} 内心深处发出了满足的咆哮声。`);
       await era.printAndWait(`不过是一匹${teio.get_sex_slave_title()}而已。`);
       await era.printAndWait(
-        `此念一出，${me.name} 原本就所剩无几的“师长风度”更是不知所踪。`,
+        `此念一出，${me.name} 原本就所剩无几的「师长风度」更是不知所踪。`,
       );
       await era.printAndWait(
         `嘴唇随着一定节奏吸吮着，啜饮着肉与肉的窄缝之间涌出的液体。阵阵淫靡之音响起。浑身脱力，被 ${

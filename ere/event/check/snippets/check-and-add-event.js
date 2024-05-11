@@ -12,7 +12,7 @@ const { log_edu_weeks } = require('#/utils/value-utils');
 function check_and_add_event(edu_marks, weeks, param_name, hook, event_obj) {
   if (
     !edu_marks.get(param_name) &&
-    Math.random() < Math.log(weeks) / log_edu_weeks
+    (weeks >= 3 * 48 || Math.random() < Math.log(weeks) / log_edu_weeks)
   ) {
     edu_marks.add(param_name);
     add_event(hook, event_obj.copy().set_arg(param_name));

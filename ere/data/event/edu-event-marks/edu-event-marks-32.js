@@ -48,9 +48,6 @@ class TachyonEduMarks extends EduEventMarks {
   // 训练加成
   limited;
 
-  // 温泉旅行
-  hot_spring;
-
   // 成就检查 - 无败希望锦标、弥生赏、皋月赏
   title_check;
 

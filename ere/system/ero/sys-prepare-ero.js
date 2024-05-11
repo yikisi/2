@@ -543,17 +543,17 @@ function end_ero(skip_juels, log_juels, ids) {
     sys_change_attr_and_print(
       chara_id,
       attr_enum.speed,
-      era.get(`nowex:${chara_id}:速度获取`) / 10,
+      era.get(`ex:${chara_id}:速度获取`) / get_random_value(16, 24),
     );
     sys_change_attr_and_print(
       chara_id,
       attr_enum.strength,
-      era.get(`nowex:${chara_id}:力量获取`) / 10,
+      era.get(`ex:${chara_id}:力量获取`) / get_random_value(16, 24),
     );
     sys_change_attr_and_print(
       chara_id,
       attr_enum.toughness,
-      era.get(`nowex:${chara_id}:根性获取`) / 10,
+      era.get(`ex:${chara_id}:根性获取`) / get_random_value(4, 6),
     );
   });
   if (!log_juels) {

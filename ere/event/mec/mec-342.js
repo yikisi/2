@@ -1,6 +1,27 @@
+const { get, set } = require('#/era-electron');
+
 const CustomizedMec = require('#/event/mec/mec-common');
 
+const { buff_colors } = require('#/data/color-const');
+const ByerleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-342');
+
 module.exports = class extends CustomizedMec {
+  get_talents() {
+    const title_check = new ByerleyLifeMarks().buff;
+    return [
+      {
+        color: buff_colors[1],
+        content: '[信]',
+        fontWeight: title_check ? 'bold' : '',
+        title: `[信]：队伍成员耐力与根性训练效果+${title_check ? 100 : 50}%`,
+      },
+    ];
+  }
+
+  set_callname() {
+    set('callname:342:0', '训练员');
+  }
+
   // eslint-disable-next-line no-unused-vars
   set_foreign_debuff(before_race, loc) {}
 };

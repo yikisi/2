@@ -517,7 +517,6 @@ module.exports = (handlers) => {
       ' 说过关于便当的事，连忙拿出原本留给自己的便当',
     ]);
     era.drawLine();
-    era.println();
     await tachyon.say_and_wait([callname, '？你在干嘛呢？']);
     await era.printAndWait([
       '清醒过来的 ',

@@ -2,15 +2,15 @@ const era = require('#/era-electron');
 
 const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
 const palace = require('#/event/snippets/palace');
+const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
-const { location_enum, location_name } = require('#/data/locations');
+const { location_name } = require('#/data/locations');
 const { attr_enum, fumble_result } = require('#/data/train-const');
-const palace_relation = require('#/event/snippets/palace-relation');
 
 /** @type {Record<string,function(number,HookArg,Record<string,*>,EventObject):Promise<*>>} */
 const handlers = {};
@@ -265,28 +265,24 @@ handlers[event_hooks.race_start] = async (chara_id) => {
 /**
  * @param {number} chara_id
  * @param _
- * @param {{race:number,rank:number,attr_change:number[],pt_change:number,skill_change:number[],motivation_change:number,relation_change:number,love_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 handlers[event_hooks.race_end] = async (chara_id, _, extra_flag) => {
   const chara_talk = get_chara_talk(chara_id);
   if (extra_flag.rank === 1) {
     await print_event_name('竞赛获胜', chara_talk);
-
     era.printButton('「太棒了！」', 1);
     era.printButton('「往更高的目标迈进吧！」', 2);
   } else if (extra_flag.rank <= 5) {
     await print_event_name('竞赛上榜', chara_talk);
-
     era.printButton('「今天的表现也很好！」', 1);
     era.printButton('「绝对不能输给她们！」', 2);
   } else if (extra_flag.rank <= 10) {
     await print_event_name('竞赛败北', chara_talk);
-
     era.printButton('「下次表现一定更好！」', 1);
     era.printButton('「沮丧也不是办法！」', 2);
   } else {
     await print_event_name('下次不会输了！', chara_talk);
-
     era.printButton('「总有一天绝对会赢！」', 1);
     era.printButton('「你愿意就这样丢脸下去？」', 2);
   }

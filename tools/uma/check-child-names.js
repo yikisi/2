@@ -1,4 +1,5 @@
 const { readFileSync } = require('fs');
+
 const name_data = require('../../ere/data/child-names.json');
 
 const lines = readFileSync('./uma-data.csv', 'utf-8')

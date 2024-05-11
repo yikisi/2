@@ -69,11 +69,11 @@ module.exports = (handlers) => {
       '没有回答，只是拍了拍桌上的报纸，那是今天的运动新闻，没记错的话……',
     ]);
     await era.printAndWait([
-      '今天最大的新闻应该是『',
+      '今天最大的新闻应该是「',
       get_chara_talk(94).get_colored_name(),
       ' 和 黑船 确定参赛 ',
       race_infos[race_enum.hope_sta].get_colored_name(),
-      '』',
+      '」',
     ]);
     era.println();
     await era.printAndWait([
@@ -738,7 +738,7 @@ module.exports = (handlers) => {
   };
 
   handlers[47 + 5] = async (tachyon, me, callname, flags, relation) => {
-    await print_event_name('年度审核报告', tachyon);
+    await print_event_name('中期报告提交', tachyon);
     await era.printAndWait(
       '虽然新年已经过去，但二月的特雷森学园仍然被笼罩于寒冬之中',
     );
