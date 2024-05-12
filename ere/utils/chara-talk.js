@@ -105,6 +105,14 @@ class CharaTalk {
     };
   }
 
+  get_colored_sex() {
+    return {
+      color: this.color,
+      content: this.sex,
+      fontWeight: 'bold',
+    };
+  }
+
   get_full_name = () =>
     this.actual_name === this.name
       ? this.name

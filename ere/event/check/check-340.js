@@ -1,17 +1,6 @@
-const era = require('#/era-electron');
-
-const check_stages = require('#/data/event/check-stages');
-const recruit_flags = require('#/data/event/recruit-flags');
-
 const handlers = {};
 
-handlers[check_stages.prison] = handlers[check_stages.rape_in_sleeping] =
-  () => {
-    if (era.get('cflag:340:招募状态') !== recruit_flags.yes) {
-      return false;
-    }
-    throw new Error();
-  };
+require('#/event/check/snippets/check-god-common-registerer')(handlers, 340);
 
 /**
  * @param {number} stage_id

@@ -131,6 +131,11 @@ class CustomizedMec {
     }
   }
 
+  /** @returns {number} */
+  set_my_sex() {
+    return era.set(`cflag:${this.chara_id}:性别`, era.get('flag:角色性别'));
+  }
+
   /** @param {PseudoUma} uma */
   // eslint-disable-next-line no-unused-vars
   set_pseudo_uma(uma) {}

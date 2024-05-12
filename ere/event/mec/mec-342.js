@@ -18,6 +18,13 @@ module.exports = class extends CustomizedMec {
     return false;
   }
 
+  get_ero_check(action) {
+    if (new ByerleyLifeMarks().love === 2) {
+      return 40;
+    }
+    return super.get_ero_check(action);
+  }
+
   get_talents() {
     const title_check = new ByerleyLifeMarks().buff;
     return [
@@ -36,4 +43,8 @@ module.exports = class extends CustomizedMec {
 
   // eslint-disable-next-line no-unused-vars
   set_foreign_debuff(before_race, loc) {}
+
+  set_my_sex() {
+    return 0;
+  }
 };

@@ -516,11 +516,10 @@ async function sys_next_week() {
     }
     if (
       growth_stage >= 2 &&
-      cur_month === 1 &&
-      cur_week === 1 &&
+      cur_month < 4 &&
       era.get(`cflag:${chara_id}:育成回合计时`) === 'x'
     ) {
-      era.set(`cflag:${chara_id}:育成回合计时`, 0);
+      era.set(`cflag:${chara_id}:育成回合计时`, (cur_round - 1) % 48);
       await sys_call_daily_event(chara_id, event_hooks.growth, { stage: 2 });
     }
 
@@ -611,7 +610,8 @@ async function sys_next_week() {
           era.set(`cflag:${chara_id}:妊娠回合计时`, 4);
           // 一年即48周内会泌乳
           // 本回合会马上进行判定，所以+1
-          era.set(`cflag:${chara_id}:泌乳回合计时`, 48 + 1);
+          era.get(`talent:${chara_id}:泌乳`) === 1 &&
+            era.set(`cflag:${chara_id}:泌乳回合计时`, 48 + 1);
           await have_baby(chara_id);
           if (chara_id) {
             if (

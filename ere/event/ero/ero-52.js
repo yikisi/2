@@ -7,7 +7,7 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 /** @type {Record<string, function(hook:HookArg,extra_flag:*):Promise<*>>} */
 const handlers = {};
 
-handlers[ero_hooks.zero_stamina] = async function () {
+handlers[ero_hooks.zero_stamina] = async () => {
   const me = get_chara_talk(0),
     urara = get_chara_talk(52);
   if (Math.random() < 0.5) {

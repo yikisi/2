@@ -9,13 +9,20 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const print_curr_chara = require('#/page/components/cur-chara-info');
 const print_page_header = require('#/page/components/page-header');
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
+const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { money_color } = require('#/data/color-const');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { attr_names } = require('#/data/train-const');
-const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
+const button_contents = ['请求帮助', '探寻微笑', '痴迷注视'];
 
 module.exports = async () => {
   let flag_god = true,
@@ -24,7 +31,8 @@ module.exports = async () => {
     aim = get_chara_talk(cur_id),
     me = cur_id ? get_chara_talk(0) : aim,
     god_id = sys_get_random_uma_god(),
-    god = god_id ? get_chara_talk(god_id) : undefined;
+    god = god_id ? get_chara_talk(god_id) : undefined,
+    life_marks = god_id ? new LifeEventMarks(god_id) : undefined;
   while (flag_god) {
     await era.clear();
     print_page_header();
@@ -77,8 +85,10 @@ module.exports = async () => {
             type: 'button',
           },
           {
-            content: '追寻女神像的目光',
-            config: { disabled: era.get(`love:${god_id}`) < 50 },
+            content: button_contents[god_id - 340],
+            config: {
+              disabled: life_marks.get('love') !== 1,
+            },
             type: 'button',
           },
         ].map((e, i) => {
@@ -280,6 +290,36 @@ module.exports = async () => {
           } else {
             await era.printAndWait('三女神像不动……');
           }
+          break;
+        case 7:
+          switch (god_id) {
+            case 340:
+              await me.say_and_wait('啊，请帮帮我吧女神大人——');
+              await era.printAndWait([
+                '忍不住向',
+                era.get('flag:角色性别') - 1 ? '马娘' : '马郎',
+                '一样在三女神雕像下祈祷了——虽然只是就这么放着不管也没关系的撒娇似的许愿。',
+              ]);
+              await era.printAndWait([
+                '……是错觉吗？那理应平直地向前看着，朝着远方的女神大人的目光，弯成了好看的弧度向 ',
+                me.get_colored_name(),
+                ' 降下了。',
+              ]);
+              await era.printAndWait('而且被笑了。');
+              break;
+            case 341:
+            case 342:
+              await era.printAndWait('痴迷注视着……');
+              await era.printAndWait([
+                { color: god.color, content: '女神像' },
+                ' 不动……',
+              ]);
+          }
+          life_marks.add('love');
+          add_event(
+            event_hooks.week_end,
+            new EventObject(god_id, cb_enum.love).set_arg(50),
+          );
           break;
         case 99:
           flag_god = false;

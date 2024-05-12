@@ -15,7 +15,15 @@ module.exports = class extends CustomizedMec {
   }
 
   is_anger_for_unfaithful() {
+    console.log(1);
     return false;
+  }
+
+  get_ero_check(action) {
+    if (new DarleyLifeMarks().love === 2) {
+      return 40;
+    }
+    return super.get_ero_check(action);
   }
 
   get_talents() {
@@ -36,4 +44,8 @@ module.exports = class extends CustomizedMec {
 
   // eslint-disable-next-line no-unused-vars
   set_foreign_debuff(before_race, loc) {}
+
+  set_my_sex() {
+    return 0;
+  }
 };

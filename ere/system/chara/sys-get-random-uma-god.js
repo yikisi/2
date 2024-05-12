@@ -9,7 +9,7 @@ function sys_get_random_uma_god() {
     new Array(3)
       .fill(0)
       .map((_, i) => 340 + i)
-      .filter((e) => era.get(`cflag:${e}:招募状态`) !== recruit_flags.yes),
+      .filter((e) => era.get(`cflag:${e}:招募状态`) === recruit_flags.no),
   );
 }
 
