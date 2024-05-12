@@ -7,6 +7,10 @@ class CustomizedMec {
     this.chara_id = chara_id;
   }
 
+  init_love() {
+    era.set(`love:${this.chara_id}`, era.get('flag:马娘初始爱慕'));
+  }
+
   is_anger_for_unfaithful() {
     return true;
   }

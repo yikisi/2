@@ -174,12 +174,12 @@ module.exports = {
       }
       get_custom_mec(chara_id).set_callname();
       get_custom_mec(chara_id).set_my_name();
+      get_custom_mec(chara_id).init_love();
       if (era.get(`relation:${chara_id}:0`) === undefined) {
         era.set(`relation:${chara_id}:0`, era.get('flag:马娘初始好感'));
       } else {
         era.add(`relation:${chara_id}:0`, era.get('flag:马娘初始好感') - 75);
       }
-      era.add(`love:${chara_id}`, era.get('flag:马娘初始爱慕'));
       era.set(`base:${chara_id}:体力`, era.get(`maxbase:${chara_id}:体力`));
       era.set(`base:${chara_id}:精力`, era.get(`maxbase:${chara_id}:精力`));
 

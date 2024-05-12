@@ -48,22 +48,13 @@ handlers[check_stages.aim_race] = (extra_flag) => {
 handlers[check_stages.next_week] = () => {
   if (era.get('cflag:205:招募状态')) {
     const edu_weeks = era.get('cflag:205:育成回合计时');
+    const race_history = new RaceHistory(205).get();
     if (edu_weeks < 3 * 48) {
       switch (edu_weeks) {
         case 47 + 24:
           if (
-            check_aim_race(
-              era.get('cflag:205:育成成绩'),
-              race_enum.prix_prb,
-              1,
-              1,
-            ) &&
-            check_aim_race(
-              era.get('cflag:205:育成成绩'),
-              race_enum.prix_prb,
-              1,
-              1,
-            )
+            check_aim_race(race_history, race_enum.prix_prb, 1, 1) &&
+            check_aim_race(race_history, race_enum.prix_prb, 1, 1)
           ) {
             add_event(
               event_hooks.week_start,
@@ -92,14 +83,7 @@ handlers[check_stages.next_week] = () => {
           }
           break;
         case 95 + 25:
-          if (
-            check_aim_race(
-              era.get('cflag:205:育成成绩'),
-              race_enum.prix_lat,
-              1,
-              1,
-            )
-          ) {
+          if (check_aim_race(race_history, race_enum.prix_lat, 1, 1)) {
             add_event(
               event_hooks.week_start,
               new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
@@ -120,14 +104,7 @@ handlers[check_stages.next_week] = () => {
           }
           break;
         case 95 + 28:
-          if (
-            check_aim_race(
-              era.get('cflag:205:育成成绩'),
-              race_enum.prix_lat,
-              1,
-              1,
-            )
-          ) {
+          if (check_aim_race(race_history, race_enum.prix_lat, 1, 1)) {
             add_event(
               event_hooks.week_end,
               new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
@@ -135,14 +112,7 @@ handlers[check_stages.next_week] = () => {
           }
           break;
         case 95 + 29:
-          if (
-            check_aim_race(
-              era.get('cflag:205:育成成绩'),
-              race_enum.prix_lat,
-              1,
-              1,
-            )
-          ) {
+          if (check_aim_race(race_history, race_enum.prix_lat, 1, 1)) {
             add_event(
               event_hooks.week_start,
               new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
@@ -159,18 +129,8 @@ handlers[check_stages.next_week] = () => {
           break;
         case 95 + 42:
           if (
-            check_aim_race(
-              era.get('cflag:205:育成成绩'),
-              race_enum.prix_lat,
-              1,
-              1,
-            ) &&
-            check_aim_race(
-              era.get('cflag:205:育成成绩'),
-              race_enum.prix_lat,
-              2,
-              1,
-            )
+            check_aim_race(race_history, race_enum.prix_lat, 1, 1) &&
+            check_aim_race(race_history, race_enum.prix_lat, 2, 1)
           ) {
             add_event(
               event_hooks.week_end,
@@ -199,20 +159,21 @@ handlers[check_stages.next_week] = () => {
 
 handlers[check_stages.aim_check] = () => {
   const buffer = [],
-    /** @type {Record<string,{race:number,rank:number,st:number,pop:number}>} */
-    races = era.get('cflag:205:育成成绩');
-  buffer.push(check_aim_and_get_entry(races, race_enum.prix_prb, 1, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.prix_dia, 1, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.prix_lat, 1, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.prix_lat, 2, 1));
-  let g1_count = Object.values(races).filter(
-    (e) =>
-      race_infos[e.race].race_class === class_enum.G1 &&
-      e.race !== race_enum.prix_lat &&
-      e.race !== race_enum.prix_dia &&
-      e.race !== race_enum.prix_prb &&
-      e.rank === 1,
-  ).length;
+    races = new RaceHistory(205);
+  buffer.push(check_aim_and_get_entry(races.get(), race_enum.prix_prb, 1, 1));
+  buffer.push(check_aim_and_get_entry(races.get(), race_enum.prix_dia, 1, 1));
+  buffer.push(check_aim_and_get_entry(races.get(), race_enum.prix_lat, 1, 1));
+  buffer.push(check_aim_and_get_entry(races.get(), race_enum.prix_lat, 2, 1));
+  let g1_count = races
+    .get_values()
+    .filter(
+      (e) =>
+        race_infos[e.race].race_class === class_enum.G1 &&
+        e.race !== race_enum.prix_lat &&
+        e.race !== race_enum.prix_dia &&
+        e.race !== race_enum.prix_prb &&
+        e.rank === 1,
+    ).length;
   buffer.push({
     check: Math.min(g1_count, 5) - 4,
     color: g1_count >= 5 ? attr_change_colors.up : attr_change_colors.down,

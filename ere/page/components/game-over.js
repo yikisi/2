@@ -103,9 +103,18 @@ async function game_over(again) {
             }
             era.set('cflag:0:性别', 10);
             era.set('cflag:0:种族', 1);
-            era.set('maxbase:0:速度', 1200);
-            era.set('maxbase:0:耐力', 1200);
-            era.set('maxbase:0:力量', 1200);
+            era.set(
+              'maxbase:0:速度',
+              Math.min(2000, era.get('maxbase:0:速度') + 800),
+            );
+            era.set(
+              'maxbase:0:耐力',
+              Math.min(2000, era.get('maxbase:0:耐力') + 800),
+            );
+            era.set(
+              'maxbase:0:力量',
+              Math.min(2000, era.get('maxbase:0:力量') + 800),
+            );
             era.set('cflag:0:育成回合计时', 0);
             era.set('flag:当前声望', era.get('global:初始声望增加量') + 100);
             CharaTalk.me = new CharaTalk(0);

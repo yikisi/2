@@ -21,7 +21,7 @@ const select_target = require('#/page/components/select-target');
 const { generate_race_button } = require('#/page/homepage/snippets');
 const page_chairman_office = require('#/page/page-chairman-office');
 const print_exp_page = require('#/page/page-exp');
-const print_inherit_shop_page = require('#/page/page-inherit-shop');
+const print_god_shop = require('#/page/page-god-shop');
 const print_juel_shop_page = require('#/page/page-juel-shop');
 const print_load_page = require('#/page/page-load-game');
 const print_out_page = require('#/page/page-out');
@@ -421,21 +421,19 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
               content: `${chara_id ? '一起' : ''}外出`,
               type: 'button',
             },
-            era.get('flag:当前月') === 3
-              ? {
-                  accelerator: 308,
-                  config: {
-                    disabled: true,
-                    // !sys_check_train_enabled(chara_id) ||
-                    // !sys_check_awake(chara_id) ||
-                    // !sys_check_awake(0) ||
-                    // not_in_same_loc,
-                    width: 6,
-                  },
-                  content: `${chara_id ? '' : '独自'}前往女神像 (继承)`,
-                  type: 'button',
-                }
-              : undefined,
+            {
+              accelerator: 308,
+              config: {
+                disabled:
+                  (chara_id && !sys_check_train_enabled(chara_id)) ||
+                  !sys_check_awake(chara_id) ||
+                  !sys_check_awake(0) ||
+                  not_in_same_loc,
+                width: 6,
+              },
+              content: `${chara_id ? '' : '独自'}前往三女神像`,
+              type: 'button',
+            },
             chara_id && era.get(`cflag:${chara_id}:节日事件标记`)
               ? {
                   accelerator: 309,
@@ -680,7 +678,9 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       await print_out_page();
       break;
     case 308:
-      await print_inherit_shop_page();
+      era.set('flag:当前位置', location_enum.god);
+      await print_god_shop();
+      era.set('flag:当前位置', location_enum.office);
       break;
     case 309:
       sys_change_attr_and_print(0, '精力', -celebration_cost);

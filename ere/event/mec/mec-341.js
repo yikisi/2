@@ -1,9 +1,19 @@
+const { set } = require('#/era-electron');
+
+const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
+
 const CustomizedMec = require('#/event/mec/mec-common');
 
 const { buff_colors } = require('#/data/color-const');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 
 module.exports = class extends CustomizedMec {
+  init_love() {
+    if (sys_personal_achievement.get(341)) {
+      set('love:341', 50);
+    }
+  }
+
   is_anger_for_unfaithful() {
     return false;
   }

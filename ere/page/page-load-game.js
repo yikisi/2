@@ -36,14 +36,14 @@ module.exports = async () => {
       const enabled = comm_desc && !comm_desc.startsWith('(FILE LOST)');
       buffer.push({
         accelerator: e,
-        config: { disabled: !enabled, width: 22 },
+        config: { disabled: !enabled, width: 20 },
         content: comm_desc || '空存档栏位',
         type: 'button',
       });
       if (comm_desc) {
         buffer.push({
           accelerator: e + 100,
-          config: { align: 'right', width: 2 },
+          config: { align: 'right', width: 4 },
           content: '删除',
           type: 'button',
         });

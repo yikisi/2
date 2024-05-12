@@ -12,11 +12,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
+const TrainFailParams = require('#/data/event/extra-flag/train-fail-params');
 const DarleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-340');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 const ByerleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-342');
 const recruit_flags = require('#/data/event/recruit-flags');
-const TrainFailParams = require('#/data/event/extra-flag/train-fail-params');
 const { get_trainer_train_buff } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const {
@@ -65,7 +65,7 @@ function get_train_bonus(chara_id, attr, between_weeks) {
       10 * era.get(`talent:${chara_id}:训练`) +
       get_trainer_train_buff(chara_id);
   }
-  return train_buff;
+  return Math.max(train_buff, -100);
 }
 
 /**

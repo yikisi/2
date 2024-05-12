@@ -7,6 +7,7 @@ const {
   transform,
 } = require('#/event/edu/edu-events-17/snippets');
 const { add_event } = require('#/event/queue');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const palace = require('#/event/snippets/palace');
 const palace_relation = require('#/event/snippets/palace-relation');
@@ -18,6 +19,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const color_17 = require('#/data/chara-colors').chara_colors[17];
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const { location_enum } = require('#/data/locations');
+const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
@@ -575,44 +577,26 @@ module.exports = async (hook, _, event_object) => {
     await emperor_talk.say_and_wait(get_random_entry(talk_list));
   }
   let race_punish = false;
-  const temp = era.get('cflag:17:育成成绩');
+  const race_history = new RaceHistory(17).get();
 
   switch (edu_weeks) {
     case race_infos[race_enum.sats_sho].date + 48: // 五月第一周 皋月赏惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.sats_sho ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.sats_sho, 1, 1);
       break;
     case race_infos[race_enum.toky_yus].date + 48: // 六月第一周 日本德比惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.toky_yus ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.toky_yus, 1, 1);
       break;
     case race_infos[race_enum.kiku_sho].date + 48: // 冬月第一周 菊花赏惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.kiku_sho ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.kiku_sho, 1, 1);
       break;
     case race_infos[race_enum.arim_kin].date + 48: // 新年第一周 有马纪念惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.arim_kin ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.arim_kin, 1, 1);
       break;
     case race_infos[race_enum.tenn_spr].date + 96: // 五月第一周 天皇赏春惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.tenn_spr ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.tenn_spr, 2, 1);
       break;
     case race_infos[race_enum.japa_cup].date + 96: // 冬月第四周 日本杯惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.japa_cup ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.japa_cup, 2, 1);
   }
   if (race_punish) {
     sys_like_chara(emperor, 0, -50);

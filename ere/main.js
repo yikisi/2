@@ -94,7 +94,13 @@ module.exports = async () => {
       },
       [
         {
-          content: ['雞雞', { isDivider: true }, '无名路人'],
+          content: [
+            '雞雞',
+            { isDivider: true },
+            '无名路人',
+            { isDivider: true },
+            '黑奴队长',
+          ],
           type: 'text',
         },
         { type: 'divider' },

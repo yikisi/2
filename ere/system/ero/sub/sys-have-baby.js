@@ -340,7 +340,7 @@ async function sys_have_baby(mother_id) {
   }
   new Array(3)
     .fill(0)
-    .map((_, i) => i + 340)
+    .map((_, i) => 340 + i)
     .filter((e) => e !== father_id && e !== mother_id)
     .reduce(
       (p, c) => sys_like_chara(c, 0, 50 * (1 + !mother_id)) || p,

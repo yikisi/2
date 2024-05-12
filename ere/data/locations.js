@@ -15,6 +15,8 @@ const location_enum = {
   church: 0,
   // 大门
   gate: 0,
+  // 三女神像
+  god: 0,
   // 广州
   guangzhou: 0,
   // 家
@@ -84,6 +86,7 @@ location_name[location_enum.hongkong] = '香港';
 location_name[location_enum.guangzhou] = '广州';
 location_name[location_enum.new_york] = '纽约';
 location_name[location_enum.hot_spring] = '温泉';
+location_name[location_enum.god] = '三女神像';
 
 module.exports = {
   location_enum,
