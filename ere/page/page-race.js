@@ -8,7 +8,6 @@ const sys_check_titles_after_race = require('#/system/race/sys-check-titles-afte
 const sys_parse_for_race = require('#/system/race/sys-parse-race-uma');
 const sys_prepare_race = require('#/system/race/sys-prepare-race');
 // const sys_sim_race = require('#/system/race/sys-simulate-race');
-const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
   sys_change_attr_and_print,
@@ -26,6 +25,7 @@ const date_indicator = require('#/page/components/date-indicator');
 const print_race_track_chart = require('#/page/components/race-track-chart');
 const select_contestants = require('#/page/components/select-contestants');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -47,7 +47,6 @@ const { attr_background_colors, attr_colors } = require('#/data/const.json');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const AfterRaceParams = require('#/data/event/after-race-params');
-const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const RaceEndParams = require('#/data/event/extra-flag/race-end-params');
 const RaceStartParams = require('#/data/event/extra-flag/race-start-params');
@@ -532,10 +531,10 @@ async function race_page(race) {
     if (id) {
       race_start[id] = race_end[id] = false;
     }
-    aim_race_dict[id] = sys_call_check(id, check_stages.aim_race, {
-      edu_weeks: era.get(`cflag:${id}:育成回合计时`),
+    aim_race_dict[id] = get_custom_check(id).is_aim_race(
       race,
-    });
+      era.get(`cflag:${id}:育成回合计时`),
+    );
     chara.adapts.style = chara.adapt_style_list[chara.style];
   });
   let start_count = team_list.filter((e) => e.index_chara > 0).length,
@@ -624,11 +623,11 @@ async function race_page(race) {
   let tmp = await era.input();
   team_list.forEach(({ index_chara: id }) => {
     race_rank[id] = tmp;
-    aim_race_dict[id] = sys_call_check(id, check_stages.aim_race, {
-      edu_weeks: era.get(`cflag:${id}:育成回合计时`),
+    aim_race_dict[id] = get_custom_check(id).is_aim_race(
       race,
-      rank: tmp,
-    });
+      era.get(`cflag:${id}:育成回合计时`),
+      tmp,
+    );
   });
   const cur_year = era.get('flag:当前年');
   era.drawLine();
@@ -682,9 +681,7 @@ async function race_page(race) {
       );
     }
     sys_change_tired(id, 3);
-    sys_call_check(
-      id,
-      check_stages.after_race,
+    get_custom_check(id).check_after_race(
       new AfterRaceParams(
         aim_race_dict[id] > 0,
         contestants,

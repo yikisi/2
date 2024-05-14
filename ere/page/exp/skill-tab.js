@@ -1,9 +1,8 @@
 const era = require('#/era-electron');
 
-const sys_call_check = require('#/system/script/sys-call-check');
+const { get_custom_check } = require('#/event/check/check-factory');
 
 const { adaptability_colors } = require('#/data/color-const');
-const check_stages = require('#/data/event/check-stages');
 const { no_info } = require('#/data/exp-const');
 const {
   get_adaptability_rank,
@@ -100,7 +99,7 @@ module.exports = {
           },
         );
         if (chara.id) {
-          const aims = sys_call_check(chara.id, check_stages.aim_check),
+          const aims = get_custom_check(chara.id).get_edu_aims(),
             aim_count = aims.filter((e) => e.check === 1).length;
           aim_list.push(
             {

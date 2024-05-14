@@ -53,7 +53,7 @@ class CharaTitles {
           title:
             has_desc && title_desc[curr.n]
               ? `[${curr.n}]：${title_desc[curr.n]}`
-              : '',
+              : undefined,
         }
       : '';
   }

@@ -4,11 +4,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 class CustomizedMec {
   constructor(chara_id) {
-    this.chara_id = chara_id;
+    this.id = chara_id;
   }
 
   init_love() {
-    era.set(`love:${this.chara_id}`, era.get('flag:马娘初始爱慕'));
+    era.set(`love:${this.id}`, era.get('flag:马娘初始爱慕'));
   }
 
   is_anger_for_unfaithful() {
@@ -58,9 +58,9 @@ class CustomizedMec {
 
   /** @returns {string[]} */
   get_race_cloth() {
-    const base = era.get(`cstr:${this.chara_id}:头像`);
+    const base = era.get(`cstr:${this.id}:头像`);
     let temp;
-    if ((temp = era.get(`cstr:${this.chara_id}:决胜服`)) === -1) {
+    if ((temp = era.get(`cstr:${this.id}:决胜服`)) === -1) {
       return [`${base}_运`, base, 'default'];
     }
     return [`${base}${temp}`, base, `${base}_运`, 'default'];
@@ -94,14 +94,14 @@ class CustomizedMec {
 
   set_callname() {
     let callname;
-    if (!era.get(`cflag:${this.chara_id}:父方角色`)) {
+    if (!era.get(`cflag:${this.id}:父方角色`)) {
       callname = '爸爸';
-    } else if (!era.get(`cflag:${this.chara_id}:母方角色`)) {
+    } else if (!era.get(`cflag:${this.id}:母方角色`)) {
       callname = '妈妈';
     } else {
       callname = '训练员' + get_chara_talk(0).get_adult_sex_title();
     }
-    era.set(`callname:${this.chara_id}:0`, callname);
+    era.set(`callname:${this.id}:0`, callname);
   }
 
   /**
@@ -111,29 +111,29 @@ class CustomizedMec {
   // eslint-disable-next-line no-unused-vars
   set_foreign_debuff(before_race, loc) {
     era.set(
-      `status:${this.chara_id}:水土不服`,
-      4 - era.get(`talent:${this.chara_id}:身体素质`),
+      `status:${this.id}:水土不服`,
+      4 - era.get(`talent:${this.id}:身体素质`),
     );
     if (before_race) {
       era.set(
-        `status:${this.chara_id}:客场作战`,
-        4 + era.get(`talent:${this.chara_id}:自信程度`),
+        `status:${this.id}:客场作战`,
+        4 + era.get(`talent:${this.id}:自信程度`),
       );
     }
   }
 
   set_my_name() {
     if (
-      era.get(`callname:${this.chara_id}:${this.chara_id}`) ===
-      era.get(`callname:${this.chara_id}:-2`)
+      era.get(`callname:${this.id}:${this.id}`) ===
+      era.get(`callname:${this.id}:-2`)
     ) {
-      era.set(`callname:${this.chara_id}:${this.chara_id}`, '我');
+      era.set(`callname:${this.id}:${this.id}`, '我');
     }
   }
 
   /** @returns {number} */
   set_my_sex() {
-    return era.set(`cflag:${this.chara_id}:性别`, era.get('flag:角色性别'));
+    return era.set(`cflag:${this.id}:性别`, era.get('flag:角色性别'));
   }
 
   /** @param {PseudoUma} uma */

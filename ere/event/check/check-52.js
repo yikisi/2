@@ -2,18 +2,18 @@ const era = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
+const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
-const common_palace_check = require('#/event/check/snippets/common-palace-check');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { attr_change_colors } = require('#/data/color-const');
-const check_stages = require('#/data/event/check-stages');
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -22,81 +22,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-
-/** @type {Record<string,function(Record<string,*>)>} */
-const handlers = {};
-
-handlers[check_stages.after_punish] = (extra_flag) => {
-  if (extra_flag.level === 1) {
-    add_event(
-      event_hooks.week_start,
-      new EventObject(52, cb_enum.daily).set_arg({ punish: extra_flag.level }),
-    );
-  }
-};
-
-handlers[check_stages.aim_check] = () => {
-  const buffer = [],
-    edu_weeks = era.get('cflag:52:育成回合计时'),
-    races = new RaceHistory(52).get();
-  let { fans, fans1, fans2, fans3 } = new UraraEduMarks();
-  if (edu_weeks < 47 + 27) {
-    fans1 = fans;
-  }
-  if (edu_weeks < 47 + 43) {
-    fans2 = fans;
-  }
-  if (edu_weeks < 96) {
-    fans3 = fans;
-  }
-  buffer.push({
-    check: 1,
-    color: attr_change_colors.up,
-    content: `粉丝数 ${fans.toLocaleString()}`,
-  });
-  buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-  buffer.push({
-    check: Number(fans1 >= 5000),
-    color: fans1 >= 5000 ? attr_change_colors.up : attr_change_colors.down,
-    content: `经典年7月第3周前 粉丝数 ${fans1.toLocaleString()}/5,000 ${
-      fans1 >= 5000 ? '✔' : '✘'
-    }`,
-  });
-  buffer.push({
-    check: Number(fans2 >= 9000),
-    color: fans2 >= 9000 ? attr_change_colors.up : attr_change_colors.down,
-    content: `经典年11月第3周前 粉丝数 ${fans2.toLocaleString()}/9,000 ${
-      fans2 >= 9000 ? '✔' : '✘'
-    }`,
-  });
-  buffer.push({
-    check: Number(fans3 >= 12000),
-    color: fans3 >= 12000 ? attr_change_colors.up : attr_change_colors.down,
-    content: `资深年1月第1周前 粉丝数 ${fans3.toLocaleString()}/12,000 ${
-      fans3 >= 12000 ? '✔' : '✘'
-    }`,
-  });
-  buffer.push(check_aim_and_get_entry(races, race_enum.negi_sta, 2, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.febr_sta, 2, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.elm_sta, 2, 5));
-  buffer.push(check_aim_and_get_entry(races, race_enum.jbc_spr, 2, 1));
-  buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 16));
-  return buffer;
-};
-
-const aim_races = {};
-aim_races[race_enum.begin_race] = 3;
-aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = -1;
-aim_races[get_aim_race_index(race_enum.negi_sta, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.febr_sta, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.elm_sta, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.jbc_spr, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 1;
-
-/** @param {{edu_weeks:number,race:number}} extra_flag */
-handlers[check_stages.aim_race] = (extra_flag) =>
-  aim_races[`${extra_flag.edu_weeks}_${extra_flag.race}`] ||
-  aim_races[extra_flag.race];
 
 const race2fans_reward = [];
 race2fans_reward[race_enum.oka_sho] = 10500;
@@ -171,330 +96,390 @@ function get_fans_reward(reward, rank) {
   }
 }
 
-/** @param {{aim_race:boolean,edu_weeks:number,race:number,rank:number}} extra_flag */
-handlers[check_stages.after_race] = (extra_flag) => {
-  let reward = 0;
-  switch (race_infos[extra_flag.race].race_class) {
-    case RaceInfo.class_enum.G1:
-      reward = get_fans_reward(
-        race2fans_reward[extra_flag.race],
-        extra_flag.rank,
+const aim_races = {};
+aim_races[race_enum.begin_race] = 3;
+aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = -1;
+aim_races[get_aim_race_index(race_enum.negi_sta, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.febr_sta, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.elm_sta, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.jbc_spr, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 1;
+
+module.exports = class extends CustomizedCheck {
+  check_after_punish(level) {
+    if (level === 1) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(52, cb_enum.daily).set_arg({
+          punish: level,
+        }),
       );
-      break;
-    case RaceInfo.class_enum.G2:
-      reward = get_fans_reward(6000, extra_flag.rank);
-      break;
-    case RaceInfo.class_enum.G3:
-      reward = get_fans_reward(4000, extra_flag.rank);
-      break;
-    case RaceInfo.class_enum.OP:
-      reward = get_fans_reward(2500, extra_flag.rank);
-      break;
-    case RaceInfo.class_enum['Pre-OP']:
-      reward = get_fans_reward(1000, extra_flag.rank);
-      break;
-    case RaceInfo.class_enum.Spe:
-      if (extra_flag.rank === 1) {
-        reward = 1000;
+    }
+  }
+
+  check_after_race(extra_flag) {
+    let reward = 0;
+    switch (race_infos[extra_flag.race].race_class) {
+      case RaceInfo.class_enum.G1:
+        reward = get_fans_reward(
+          race2fans_reward[extra_flag.race],
+          extra_flag.rank,
+        );
+        break;
+      case RaceInfo.class_enum.G2:
+        reward = get_fans_reward(6000, extra_flag.rank);
+        break;
+      case RaceInfo.class_enum.G3:
+        reward = get_fans_reward(4000, extra_flag.rank);
+        break;
+      case RaceInfo.class_enum.OP:
+        reward = get_fans_reward(2500, extra_flag.rank);
+        break;
+      case RaceInfo.class_enum['Pre-OP']:
+        reward = get_fans_reward(1000, extra_flag.rank);
+        break;
+      case RaceInfo.class_enum.Spe:
+        if (extra_flag.rank === 1) {
+          reward = 1000;
+        }
+    }
+    const edu_marks = new UraraEduMarks();
+    reward *= (100 + edu_marks.fan_buff) / 100;
+    edu_marks.fans += reward || 7000;
+    if (reward) {
+      era.print([
+        get_chara_talk(52).get_colored_name(),
+        ' 的粉丝数增长了 ',
+        {
+          color: attr_change_colors.up,
+          content: reward.toLocaleString(),
+          fontWeight: 'bold',
+        },
+        '！',
+      ]);
+    }
+  }
+
+  check_and_get_titles(aim_check) {
+    const c = get_chara_color(52),
+      titles = [];
+    const races = new RaceHistory(52).get();
+    if (new UraraEduMarks().fans >= 550000) {
+      titles.push({
+        c,
+        n: '乌拉拉加油',
+      });
+    }
+    if (check_aim_race(races, race_enum.arim_kin, 2, 1)) {
+      titles.push({
+        c,
+        n: '中山之樱',
+      });
+      if (check_aim_race(races, race_enum.arim_kin, 1, 1)) {
+        titles.push({
+          c,
+          n: '跨越世界',
+        });
       }
+      aim_check && sys_personal_achievement.set(52, 1);
+    }
+    return titles;
   }
-  const edu_marks = new UraraEduMarks();
-  reward *= (100 + edu_marks.fan_buff) / 100;
-  edu_marks.fans += reward || 7000;
-  if (reward) {
-    era.print([
-      get_chara_talk(52).get_colored_name(),
-      ' 的粉丝数增长了 ',
-      {
-        color: attr_change_colors.up,
-        content: reward.toLocaleString(),
-        fontWeight: 'bold',
-      },
-      '！',
-    ]);
-  }
-};
 
-handlers[check_stages.love_event] = () => {
-  if (era.get('love:52') === 99) {
-    add_event(
-      event_hooks.week_start,
-      new EventObject(52, cb_enum.love).set_arg(99),
-    );
-  } else {
-    add_event(event_hooks.week_end, new EventObject(52, cb_enum.love));
+  check_love_events() {
+    if (era.get('love:52') === 99) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(52, cb_enum.love).set_arg(99),
+      );
+    } else {
+      add_event(event_hooks.week_end, new EventObject(52, cb_enum.love));
+    }
   }
-};
 
-handlers[check_stages.next_week] = () => {
-  if (!era.get('talent:52:泌乳') && era.get('talent:52:乳房尺寸') > 0) {
-    era.set('talent:52:泌乳', 3);
-  }
-  const edu_marks = new UraraEduMarks(),
-    edu_weeks = era.get('cflag:52:育成回合计时');
-  if (edu_weeks < 3 * 48) {
-    const event_obj = new EventObject(52, cb_enum.edu);
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'teach',
-      event_hooks.back_school,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'dance',
-      event_hooks.back_school,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'fans_letr',
-      event_hooks.office_prepare,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'all_like',
-      event_hooks.out_start,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'food',
-      event_hooks.out_shopping,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'stair',
-      event_hooks.back_school,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'mother',
-      event_hooks.back_school,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'vs',
-      event_hooks.school_atrium,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'lost_found',
-      event_hooks.school_atrium,
-      event_obj,
-    );
-    if (era.get('cstr:52:决胜服') !== -1) {
+  check_next_week() {
+    if (!era.get('talent:52:泌乳') && era.get('talent:52:乳房尺寸') > 0) {
+      era.set('talent:52:泌乳', 3);
+    }
+    const edu_marks = new UraraEduMarks(),
+      edu_weeks = era.get('cflag:52:育成回合计时');
+    if (edu_weeks < 3 * 48) {
+      const event_obj = new EventObject(52, cb_enum.edu);
       check_and_add_event(
         edu_marks,
         edu_weeks,
-        'race_clothe',
+        'teach',
+        event_hooks.back_school,
+        event_obj,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'dance',
+        event_hooks.back_school,
+        event_obj,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'fans_letr',
         event_hooks.office_prepare,
         event_obj,
       );
-    }
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'interview',
-      event_hooks.school_atrium,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'challenge',
-      event_hooks.back_school,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'farthest',
-      event_hooks.back_school,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'park',
-      event_hooks.back_school,
-      event_obj,
-    );
-    check_and_add_event(
-      edu_marks,
-      edu_weeks,
-      'forget',
-      event_hooks.back_school,
-      event_obj,
-    );
-    const event_object_special = new EventObject(52, cb_enum.edu, true).set_arg(
-      edu_weeks,
-    );
-    switch (edu_weeks) {
-      case 34: // 9月第三周 大家最喜欢的笑容？
-      case 47 + 12: // 经典年3月4周 商店街的偶像！
-      case 95 + 14: // 资深年4月2周 粉丝感谢祭！
-      case 95 + 15: // 资深年4月3周 后援会•暴走！
-        add_event(event_hooks.out_shopping, event_object_special);
-        break;
-      case 47: // 12月第四周 圣诞节后 意外的年末相谈！
-      case 47 + 32: // 经典年8月4周 夏合宿（经典年）结束
-      case 47 + 48: // 经典年12月4周 「她」的话语、「她」的名字
-      case 95 + 19: // 资深年5月3周 「深夜的聊天室记录」
-      case 95 + 32: // 资深年8月4周 夏合宿（资深年）结束
-      case 95 + 47: // 资深年12月3周 「她们」的礼物
-        add_event(event_hooks.week_end, event_object_special);
-        break;
-      case 47 + 1: // 经典年1月1周 新年的抱负
-      case 47 + 6: // 经典年2月2周 突袭的心意！
-      case 95 + 6: // 资深年2月2周 心意突袭！II！
-      case 95 + 29: // 资深年8月1周 夏合宿（资深年）开始
-      case 95 + 46: // 资深年12月2周 三周循环
-        add_event(event_hooks.week_start, event_object_special);
-        break;
-      case 47 + 27: // 经典年7月3周 应援会！？
-        edu_marks.fans1 = edu_marks.fans;
-        if (edu_marks.fans1 >= 5000) {
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'all_like',
+        event_hooks.out_start,
+        event_obj,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'food',
+        event_hooks.out_shopping,
+        event_obj,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'stair',
+        event_hooks.back_school,
+        event_obj,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'mother',
+        event_hooks.back_school,
+        event_obj,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'vs',
+        event_hooks.school_atrium,
+        event_obj,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'lost_found',
+        event_hooks.school_atrium,
+        event_obj,
+      );
+      if (era.get('cstr:52:决胜服') !== -1) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'race_clothe',
+          event_hooks.office_prepare,
+          event_obj,
+        );
+      }
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'interview',
+        event_hooks.school_atrium,
+        event_obj,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'challenge',
+        event_hooks.back_school,
+        event_obj,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'farthest',
+        event_hooks.back_school,
+        event_obj,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'park',
+        event_hooks.back_school,
+        event_obj,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'forget',
+        event_hooks.back_school,
+        event_obj,
+      );
+      const event_object_special = new EventObject(
+        52,
+        cb_enum.edu,
+        true,
+      ).set_arg(edu_weeks);
+      switch (edu_weeks) {
+        case 34: // 9月第三周 大家最喜欢的笑容？
+        case 47 + 12: // 经典年3月4周 商店街的偶像！
+        case 95 + 14: // 资深年4月2周 粉丝感谢祭！
+        case 95 + 15: // 资深年4月3周 后援会•暴走！
           add_event(event_hooks.out_shopping, event_object_special);
-        }
-        break;
-      case 47 + 29: // 经典年8月1周 夏合宿（经典年）开始/夏合宿（经典年）途中
-        add_event(event_hooks.week_start, event_object_special);
-        add_event(event_hooks.week_end, event_object_special.copy());
-        break;
-      case 47 + 43: // 经典年11月3周 「改变」&「选择」
-        edu_marks.fans2 = edu_marks.fans;
-        if (edu_marks.fans2 >= 9000) {
+          break;
+        case 47: // 12月第四周 圣诞节后 意外的年末相谈！
+        case 47 + 32: // 经典年8月4周 夏合宿（经典年）结束
+        case 47 + 48: // 经典年12月4周 「她」的话语、「她」的名字
+        case 95 + 19: // 资深年5月3周 「深夜的聊天室记录」
+        case 95 + 32: // 资深年8月4周 夏合宿（资深年）结束
+        case 95 + 47: // 资深年12月3周 「她们」的礼物
+          add_event(event_hooks.week_end, event_object_special);
+          break;
+        case 47 + 1: // 经典年1月1周 新年的抱负
+        case 47 + 6: // 经典年2月2周 突袭的心意！
+        case 95 + 6: // 资深年2月2周 心意突袭！II！
+        case 95 + 29: // 资深年8月1周 夏合宿（资深年）开始
+        case 95 + 46: // 资深年12月2周 三周循环
           add_event(event_hooks.week_start, event_object_special);
-        }
-        break;
-      case 95 + 1: // 资深年1月1周 新年参拜
-        edu_marks.fans3 = edu_marks.fans;
-        add_event(event_hooks.out_church, event_object_special);
-        break;
-      case 95 + 42:
-        edu_marks.loop = 2;
-    }
-    check_and_register_aim_race(52, aim_races);
-  } else if (edu_weeks === 143 + 1) {
-    if (new RaceHistory(52).get_result(95 + 48)?.race === race_enum.arim_kin) {
+          break;
+        case 47 + 27: // 经典年7月3周 应援会！？
+          edu_marks.fans1 = edu_marks.fans;
+          if (edu_marks.fans1 >= 5000) {
+            add_event(event_hooks.out_shopping, event_object_special);
+          }
+          break;
+        case 47 + 29: // 经典年8月1周 夏合宿（经典年）开始/夏合宿（经典年）途中
+          add_event(event_hooks.week_start, event_object_special);
+          add_event(event_hooks.week_end, event_object_special.copy());
+          break;
+        case 47 + 43: // 经典年11月3周 「改变」&「选择」
+          edu_marks.fans2 = edu_marks.fans;
+          if (edu_marks.fans2 >= 9000) {
+            add_event(event_hooks.week_start, event_object_special);
+          }
+          break;
+        case 95 + 1: // 资深年1月1周 新年参拜
+          edu_marks.fans3 = edu_marks.fans;
+          add_event(event_hooks.out_church, event_object_special);
+          break;
+        case 95 + 42:
+          edu_marks.loop = 2;
+      }
+      check_and_register_aim_race(52, aim_races);
+    } else if (edu_weeks === 143 + 1) {
+      if (
+        new RaceHistory(52).get_result(95 + 48)?.race === race_enum.arim_kin
+      ) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(52, cb_enum.edu).set_arg(143 + 1),
+        );
+      }
+    } else if (edu_weeks === 143 + 9) {
       add_event(
         event_hooks.week_start,
-        new EventObject(52, cb_enum.edu).set_arg(143 + 1),
+        new EventObject(52, cb_enum.edu).set_arg('palace'),
       );
+    } else if (edu_marks.ticket === 1) {
+      edu_marks.ticket++;
+      if (era.get('cflag:52:性别') - 1) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(52, cb_enum.edu).set_arg('ticket'),
+        );
+      }
     }
-  } else if (edu_weeks === 143 + 9) {
-    add_event(
-      event_hooks.week_start,
-      new EventObject(52, cb_enum.edu).set_arg('palace'),
-    );
-  } else if (edu_marks.ticket === 1) {
-    edu_marks.ticket++;
-    if (era.get('cflag:52:性别') - 1) {
-      add_event(
-        event_hooks.week_start,
-        new EventObject(52, cb_enum.edu).set_arg('ticket'),
-      );
+    if (era.get('cflag:52:招募状态') === recruit_flags.yes) {
+      const life_marks = new UraraLifeMarks(),
+        love = era.get('love:52');
+      if (!life_marks.fuck_buddy && love >= 50) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(52, cb_enum.love).set_arg(50),
+        );
+      }
+      if (!life_marks.girl_friend && love >= 75) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(52, cb_enum.love).set_arg(75),
+        );
+      }
+      if (
+        !life_marks.infidelity &&
+        ((love >= 90 &&
+          (era.get('cflag:30:招募状态') === recruit_flags.yes &&
+            era.get('love:30')) >= 75) ||
+          (era.get('cflag:61:招募状态') === recruit_flags.yes &&
+            era.get('love:61')) >= 75)
+      ) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(52, cb_enum.love).set_arg(90),
+        );
+      }
+      if (
+        !life_marks.want_you &&
+        era.get('relation:52:0') < era.get('love:52') * 6
+      ) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(52, cb_enum.love).set_arg(101),
+        );
+      }
     }
   }
-  if (era.get('cflag:52:招募状态') === recruit_flags.yes) {
-    const life_marks = new UraraLifeMarks(),
-      love = era.get('love:52');
-    if (!life_marks.fuck_buddy && love >= 50) {
-      add_event(
-        event_hooks.week_start,
-        new EventObject(52, cb_enum.love).set_arg(50),
-      );
-    }
-    if (!life_marks.girl_friend && love >= 75) {
-      add_event(
-        event_hooks.week_start,
-        new EventObject(52, cb_enum.love).set_arg(75),
-      );
-    }
-    if (
-      !life_marks.infidelity &&
-      ((love >= 90 &&
-        (era.get('cflag:30:招募状态') === recruit_flags.yes &&
-          era.get('love:30')) >= 75) ||
-        (era.get('cflag:61:招募状态') === recruit_flags.yes &&
-          era.get('love:61')) >= 75)
-    ) {
-      add_event(
-        event_hooks.week_start,
-        new EventObject(52, cb_enum.love).set_arg(90),
-      );
-    }
-    if (
-      !life_marks.want_you &&
-      era.get('relation:52:0') < era.get('love:52') * 6
-    ) {
-      add_event(
-        event_hooks.week_start,
-        new EventObject(52, cb_enum.love).set_arg(101),
-      );
-    }
+
+  get_aim_races() {
+    return aim_races;
   }
-};
 
-handlers[check_stages.palace_check] = () => {
-  common_palace_check(52);
-  return handlers[check_stages.aim_check]();
-};
-
-handlers[check_stages.personal_titles] = () => [
-  '乌拉拉加油',
-  '中山之樱',
-  '跨越世界',
-];
-
-/** @param {{aim_check:boolean,titles:{n:string,c:string}[]}} extra_flag */
-handlers[check_stages.title_check] = (extra_flag) => {
-  const c = get_chara_talk(52).color;
-  /** @type {Record<string,{race:number,rank:number}>} */
-  const races = era.get('cflag:52:育成成绩');
-  if (new UraraEduMarks().fans >= 550000) {
-    extra_flag.titles.push({
-      c,
-      n: '乌拉拉加油',
+  get_edu_aims() {
+    const buffer = [],
+      edu_weeks = era.get('cflag:52:育成回合计时'),
+      races = new RaceHistory(52).get();
+    let { fans, fans1, fans2, fans3 } = new UraraEduMarks();
+    if (edu_weeks < 47 + 27) {
+      fans1 = fans;
+    }
+    if (edu_weeks < 47 + 43) {
+      fans2 = fans;
+    }
+    if (edu_weeks < 96) {
+      fans3 = fans;
+    }
+    buffer.push({
+      check: 1,
+      color: attr_change_colors.up,
+      content: `粉丝数 ${fans.toLocaleString()}`,
     });
-  }
-  if (check_aim_race(races, race_enum.arim_kin, 2, 1)) {
-    extra_flag.titles.push({
-      c,
-      n: '中山之樱',
+    buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+    buffer.push({
+      check: Number(fans1 >= 5000),
+      color: fans1 >= 5000 ? attr_change_colors.up : attr_change_colors.down,
+      content: `经典年7月第3周前 粉丝数 ${fans1.toLocaleString()}/5,000 ${
+        fans1 >= 5000 ? '✔' : '✘'
+      }`,
     });
-    if (check_aim_race(races, race_enum.arim_kin, 1, 1)) {
-      extra_flag.titles.push({
-        c,
-        n: '跨越世界',
-      });
-    }
-    extra_flag.aim_check && sys_personal_achievement.set(52, 1);
+    buffer.push({
+      check: Number(fans2 >= 9000),
+      color: fans2 >= 9000 ? attr_change_colors.up : attr_change_colors.down,
+      content: `经典年11月第3周前 粉丝数 ${fans2.toLocaleString()}/9,000 ${
+        fans2 >= 9000 ? '✔' : '✘'
+      }`,
+    });
+    buffer.push({
+      check: Number(fans3 >= 12000),
+      color: fans3 >= 12000 ? attr_change_colors.up : attr_change_colors.down,
+      content: `资深年1月第1周前 粉丝数 ${fans3.toLocaleString()}/12,000 ${
+        fans3 >= 12000 ? '✔' : '✘'
+      }`,
+    });
+    buffer.push(check_aim_and_get_entry(races, race_enum.negi_sta, 2, 5));
+    buffer.push(check_aim_and_get_entry(races, race_enum.febr_sta, 2, 5));
+    buffer.push(check_aim_and_get_entry(races, race_enum.elm_sta, 2, 5));
+    buffer.push(check_aim_and_get_entry(races, race_enum.jbc_spr, 2, 1));
+    buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 16));
+    return buffer;
   }
-};
 
-/**
- * @param {number} stage_id
- * @param extra_flag
- */
-module.exports = (stage_id, extra_flag) => {
-  if (!handlers[stage_id]) {
-    throw new Error('unsupported stage!');
+  get_personal_titles() {
+    return ['乌拉拉加油', '中山之樱', '跨越世界'];
   }
-  return handlers[stage_id](extra_flag);
 };
