@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const call_check_script = require('#/system/script/sys-call-check');
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
@@ -8,6 +7,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
@@ -18,7 +18,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean>>} */
@@ -63,7 +62,7 @@ handlers[event_hooks.good_morning] = function () {
 
 handlers[event_hooks.good_night] = async function (hook) {
   const chara = get_chara_talk(60),
-    check = call_check_script(60, check_stages.want_make_love),
+    check = get_custom_check(60).is_want_make_love(),
     me = get_chara_talk(0);
   if (sys_check_awake(0) && sys_check_awake(60) && check) {
     era.print(`繁忙的一天结束，${me.name} 把 ${chara.name} 送到学生宿舍门口。`);

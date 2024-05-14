@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { race_enum } = require('#/data/race/race-const');
@@ -39,115 +40,141 @@ module.exports = async (hook, extra_flag) => {
     await era.input();
     await era.printAndWait(`点了点头后，${chara_talk.name}走向了赛场`);
   } else if (extra_flag.race === race_enum.asah_sta && edu_weeks < 95) {
-    await print_event_name('朝日杯前・马力全开', chara_talk);
-    await era.printAndWait(
-      `按照预定计划,你和${chara_talk.name}开始挑战G1级别的赛事——朝日杯`,
-    );
-    era.drawLine({ content: '比赛开始前，准备室内' });
-    await era.printAndWait(
-      `换上决胜服跃跃欲试的${chara_talk.name}和一脸紧张的你形成了鲜明的对比。`,
-    );
-    await me.say_and_wait(`深呼吸，放轻松放轻松`, true);
-    await me.say_and_wait(`现在就是检测平时训练成果的时候了`, true);
-    await era.printAndWait(
-      `也许是参加G1级赛事的缘故,${chara_talk.name}显得比平时还要兴奋`,
-    );
-    await chara_talk.say_and_wait(
-      `能够与更强的${chara_talk.get_uma_sex_title()}们一决高下,心情难免有些激动呢⭐`,
-    );
-    await chara_talk.say_and_wait(
-      `${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }一定要目不转睛的盯着我看哦?`,
-    );
-    era.printButton(`嗯,希望努力的丸善能让我也感受到风的吹拂`, 1);
+    await print_event_name('朝日杯前・五挡加速', chara_talk);
+    await era.printAndWait(`准备室内`);
+    await chara_talk.say_and_wait(`哼哼哼~`);
+    await era.printAndWait(`丸善斯基心情不错的在准备室里检查着决胜服。`);
+    await me.say_and_wait(`丸善斯基，准备的怎么样了？`);
+    await chara_talk.say_and_wait(`哎呀，是训练员君啊。`);
+    await chara_talk.say_and_wait(`正如你所见，现在是马力全开的状态。`);
+    era.printButton(`接下来也要好好享受比赛哦！`, 1);
     await era.input();
-    await chara_talk.say_and_wait(
-      `今天的状态意外的很好呢,总有种可以看到新世界的感觉呢。`,
+    await me.say_and_wait(
+      `毕竟，我一直都想看到朝着未来奔跑的丸善斯基帅气的样子。`,
     );
+    await chara_talk.say_and_wait(`嗯，训练员君就好好看着吧。`);
+    await chara_talk.say_and_wait(`在赛场上奔跑的丸善斯基的模样。`);
     await chara_talk.say_and_wait(`那么，我出发了。`);
+    era.printButton(`丸善斯基加油！`, 1);
+    await era.input();
     await era.printAndWait(`做好准备的${chara_talk.name}走向了赛场。`);
     await me.say_and_wait(
       `接下来在观众席上为${chara_talk.sex_code - 1 ? '她' : '他'}加油吧`,
       true,
     );
   } else if (extra_flag.race === race_enum.sprg_sta && edu_weeks < 95) {
-    await print_event_name(
-      `春季锦标前・热情似火的${chara_talk.name}`,
-      chara_talk,
+    await print_event_name(`春季锦标前・火焰兰`, chara_talk);
+    await era.printAndWait(`准备室`);
+    await era.printAndWait(
+      `春季锦标，作为皋月赏的前哨战，许多马娘全力以赴的场所。`,
     );
+    await era.printAndWait(`然而此时。`);
+    await say_by_passer_by(
+      `工作人员`,
+      `已经确认过三遍了，包括丸善斯基在内，一共只有五名赛马娘。`,
+    );
+    await me.say_and_wait(`啊......谢谢。`);
+    await era.printAndWait(
+      `对于丸善斯基来说，在赛场上能享受到了快乐程度是与赛事等级以及参赛的马娘成正比。`,
+    );
+    await era.printAndWait(
+      `换句话说，赛事等级越高，能参战的马娘人数以及质量也随之变高，丸善斯基也就愈加享受。`,
+    );
+    await era.printAndWait(`如果仅仅是这点还好。`);
+    await say_by_passer_by(
+      `马娘A`,
+      `啊，我知道的，这场比赛一定是丸善斯基的胜利。`,
+    );
+    await say_by_passer_by(
+      `马娘B`,
+      `还有考虑的必要吗？如果不是丸善斯基获胜，我根本想不到其他人怎么战胜她。`,
+    );
+    await say_by_passer_by(
+      `参赛的赛马娘A`,
+      `已经无所谓了，反正接下来一定是丸善斯基的胜利，我还是节省体力准备之后的赛事吧。`,
+    );
+    await say_by_passer_by(`参赛的赛马娘A`, `说到底，没有人能战胜那种怪物。`);
     await chara_talk.say_and_wait(
       `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'},我已经准备好了`,
     );
-    await era.printAndWait(
-      `对于赛${chara_talk.get_uma_sex_title()}来说,经典年这一年非常重要`,
-    );
-    await era.printAndWait(
-      `一般有两条道路选择,追求无败的经典三冠与重视优雅与气质的皇冠路线`,
-    );
-    await era.printAndWait(`在与${chara_talk.name}商量之后`);
+    await era.printAndWait(`不合时宜的声音打断了你的回忆。`);
+    await me.say_and_wait(`嗯，这次也要好好享受比赛哦。`);
     await chara_talk.say_and_wait(
-      `如果选择经典三冠路线的话说不定能享受到更多的快乐。`,
+      `是啊，不过听说这次参加比赛的人数只满足了最低要求呢。`,
     );
+    await chara_talk.say_and_wait(`如果参加比赛的大家更积极一点就好了。`);
     await era.printAndWait(
-      `在尊重自己爱马的想法之后，${me.name}决定选择以春季锦标优胜作为参加皋月赏的前哨战`,
+      `看上去丸善斯基的心情似乎不太好，耳朵也随之低垂了下来。`,
     );
-    era.printButton(`${chara_talk.name}这次也要好好享受比赛哦`, 1);
-    await era.input();
-    await chara_talk.say_and_wait(
-      `真期待这次一起奔跑的${chara_talk.get_uma_sex_title()}们呢`,
+    era.printButton(
+      `丸善斯基，将我们之前的训练成果好好展示给在场的观众们看吧`,
+      1,
     );
+    era.printButton(`如果能看到丸善斯基的奔跑，我相信她们一定会改变主意的`, 2);
+    const ret1 = await era.input();
+    if (ret1 === 1) {
+      await chara_talk.say_and_wait(
+        `嗯，训练员君就在观众席上好好看着我的表现吧！`,
+      );
+      await chara_talk.say_and_wait(`好好将这份火红的身影记在心底！`);
+    } else {
+      await chara_talk.say_and_wait(`......`);
+      await me.say_and_wait(
+        `通过丸善斯基的背影，让那些有些泄气的大家们重新散发希望吧`,
+      );
+      await me.say_and_wait(`就像我们平时训练的那样。`);
+      await chara_talk.say_and_wait(`没错！`);
+      await era.printAndWait(`丸善斯基垂下的耳朵又笔直地竖了起来。`);
+    }
+    await era.printAndWait(
+      `虽然还想继续说下去，但工作人员们调试麦克风的声音传到了准备室之中。`,
+    );
+    await chara_talk.say_and_wait(`差不多该到我出场的时候了，训练员君等会见！`);
     await me.say_and_wait(`为什么感到了一阵不安呢`, true);
     await era.printAndWait(
       `${me.name}将这份不安深深的埋进了心底,看着爱马走向了赛场`,
     );
   } else if (extra_flag.race === race_enum.radi_shi && edu_weeks < 95) {
-    await print_event_name(
-      `皐月賞前・重新振作起来的${chara_talk.name}`,
-      chara_talk,
+    await print_event_name(`皐月賞前・`, chara_talk);
+    await era.printAndWait(`比赛开始前·发布会上`);
+    await say_by_passer_by(`记者A`, `非常荣幸能采访到丸善斯基小姐。`);
+    await say_by_passer_by(`记者A`, `请问您这次的目标也是取得皋月赏的胜利吗？`);
+    await chara_talk.say_and_wait(`是的，这是和负责的训练员商量之后的结果。`);
+    await say_by_passer_by(
+      `记者B`,
+      `不好意思打扰一下，听说上次春季锦标报名的赛马娘数只满足了最低参与条件的5人。`,
     );
-    era.drawLine({ content: '比赛开始前，记者会上' });
-    await era.printAndWait(
-      `记者A「${chara_talk.name}小姐,听说上次比赛的时候只有5人参赛是吗？」`,
-    );
-    await chara_talk.say_and_wait(`没错是这样的。`);
-    await era.printAndWait(`记者B「看来这次比赛的话也是势在必得呢」`);
-    await era.printAndWait(
-      `记者C「不愧是被称为超级跑车的${chara_talk.get_uma_sex_title()}呢」`,
-    );
-    await era.printAndWait(`记者A「比赛结束后也请给我们采访的机会」`);
-    await era.printAndWait(
-      `记者A「不仅是我们，作为观众的大家也觉得${chara_talk.name}的胜率是最高的。」`,
-    );
-    await era.printAndWait(
-      `记者B「毕竟比起其他参赛者的话，${chara_talk.name}这次也能将${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }们远远的甩到后面吧」`,
-    );
-    await chara_talk.say_and_wait(`......`);
-    await era.printAndWait(`记者C「那么我们就拭目以待了呦」`);
-    await era.printAndWait(`哈哈哈哈哈哈哈哈哈`);
-    await me.say_and_wait(
-      `${chara_talk.name}接下来要为比赛做好充足准备，大家如果有什么问题的话可以像我这个训练员提出问题。`,
-    );
-    era.drawLine({ content: '发布会结束后' });
-    await me.say_and_wait(`${chara_talk.name}好好享受这场难得的经典赛事吧`);
-    await chara_talk.say_and_wait(`如果训练员这么想的话，我会加油的`);
-    await me.say_and_wait(`${chara_talk.name}似乎有些驻足不前了`, true);
-    await me.say_and_wait(
-      `比起荣誉的话，${chara_talk.name}如果能好好享受的话，我也大饱眼福哦`,
+    await say_by_passer_by(
+      `记者B`,
+      `是否可以认为赛马娘们认为自己赢不了丸善斯基所以纷纷避战了呢？`,
     );
     await chara_talk.say_and_wait(
-      `呵呵，那${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }就等着瞧吧。`,
+      `关于春季锦标相关问题请咨询负责训练员，这里不做表态。`,
     );
-    await chara_talk.say_and_wait(`啊，差不多该出发了呢`);
-    await me.say_and_wait(`祝你一切顺利`, true);
-    await chara_talk.say_and_wait(`嗯`);
+    await say_by_passer_by(
+      `记者C`,
+      `到我了，请问被称为超级跑车的您之后以无败三冠为目标参加德比吗？`,
+    );
+    await chara_talk.say_and_wait(`这是目前暂时定下的目标。`);
+    await say_by_passer_by(`记者C`, `我明白了，非常感谢。`);
+    await chara_talk.say_and_wait(`太客气了。`);
+    era.drawLine({ content: '发布会结束后' });
+    await era.printAndWait(`准备室\n`);
+    await me.say_and_wait(`丸善斯基准备好了吗，接下来轮到你出场了。`);
+    await chara_talk.say_and_wait(`已经准备好了哦。`);
+    await me.say_and_wait(`就和往常一样，按照你的想法自由的奔跑吧。`);
+    await chara_talk.say_and_wait(
+      `哼哼，这次${
+        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
+      }一定会被我的奔跑所俘获的。`,
+    );
+    await chara_talk.say_and_wait(`真是期待着那一刻的到来呢——`);
+    await chara_talk.say_and_wait(`啊，差不多该出发了。那么待会见！`);
+    await me.say_and_wait(`一切顺利。`, true);
+    await chara_talk.say_and_wait(`嗯。`);
     await era.printAndWait(`${chara_talk.name}走向了赛场。`);
     await me.say_and_wait(
-      `......${chara_talk.name}，我会一直见证你的脚步`,
+      `......${chara_talk.name}，我会一直注视着你的。`,
       true,
     );
   } else if (extra_flag.race === race_enum.toky_yus && edu_weeks < 95) {

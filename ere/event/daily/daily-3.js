@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
-const call_check_script = require('#/system/script/sys-call-check');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
@@ -15,7 +15,6 @@ const get_gradient_color = require('#/utils/gradient-color');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
@@ -442,7 +441,7 @@ handlers[event_hooks.office_game] = async () => {
 };
 
 handlers[event_hooks.good_night] = async (hook) => {
-  const check = call_check_script(3, check_stages.want_make_love),
+  const check = get_custom_check(3).is_want_make_love(),
     me = get_chara_talk(0),
     teio = get_chara_talk(3);
   era.print(`繁忙的一天结束，${me.name} 把 ${teio.name} 送到学生宿舍门口。`);

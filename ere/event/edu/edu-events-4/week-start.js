@@ -4,6 +4,7 @@ const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 const { say_by_passer_by } = require('#/utils/chara-talk');
+const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -19,11 +20,85 @@ const { location_enum } = require('#/data/locations');
 module.exports = async function (hook, _, event_object) {
   const me = get_chara_talk(0),
     chara_talk = get_chara_talk(4),
+    chara19_talk = get_chara_talk(19),
     event_marks = new MaEduMarks(),
     chara301_talk = get_chara_talk(301),
     edu_weeks = era.get('cflag:4:育成回合计时');
   let wait_flag = false;
-  if (edu_weeks === 5) {
+  if (event_marks.memory === 1) {
+    await print_event_name(`早上好，丸善斯基`, chara_talk);
+    chara_talk.print(`被直射的阳光照在脸上，不情愿地醒来了。`);
+    chara_talk.print(`是昨天晚上玩过头了吗？`);
+    await chara_talk.say_and_wait(`呜——`);
+    await era.printAndWait(`丸善斯基从床上睁开了眼睛。`);
+    await chara_talk.say_and_wait(`呼啊——`);
+    await chara_talk.say_and_wait(
+      `不愿意从床上做起来，就这样伸出一只手摸索着闹钟。`,
+    );
+    chara_talk.print(
+      `意外的是，平时不小心睡过头被训练员君用直直的眼神瞪着一样的可怕闹钟，现在却像理事长在学院里种的胡萝卜一样安静。`,
+    );
+    chara_talk.print(`......不对，怎么想的话都有点奇怪吧？`);
+    chara_talk.print(`果然是昨天用力过猛，不小心弄坏了吗？`);
+    chara_talk.print(`还是说——`);
+    await chara_talk.say_and_wait(`今天是休息日吗？`, true);
+    chara_talk.print(`在得到这个好消息后，心满意足的就这么睡过去了——不对！`);
+    chara_talk.print(`要是是闹钟坏了呢？今天是星期...星期几来着？`);
+    chara_talk.print(`要是迟到的话，被训练员君发现的话......`);
+    await chara_talk.say_and_wait(`这么想的话果然睡不着了啊！`, true);
+    chara_talk.print(
+      `就这么坐了起来，因为困倦还未完全消除的身体传来了阵阵的麻痹感。`,
+    );
+    await chara_talk.say_and_wait(`哈——啊。`);
+    chara_talk.print(`身体自动做出了反应。`);
+    await era.printAndWait(
+      `丸善斯基披着乱糟糟的头发摸索着不知丢在何处的拖鞋，视野模糊着走下了床。`,
+    );
+    era.drawLine();
+    chara_talk.print(
+      `半梦半醒的自己总算被冰凉的水流从三女神的伊甸园里活生生拽了出来。`,
+    );
+    chara_talk.print(
+      `简单的用电吹风吹了一下头发后，用毛巾包裹住尚在滴水的头发走出了卫生间。`,
+    );
+    chara_talk.print(`咕咚咕咚，哈啊~`);
+    chara_talk.print(`将一整瓶咖啡牛奶一饮而尽后，心情也变得雀跃起来了♪`);
+    await chara_talk.say_and_wait(`接下来做些什么呢？`);
+    chara_talk.print(`休息日的今天，后辈们应该也去放松了。`);
+    chara_talk.print(`休息日的特雷森，稍微有些冷清呢。`);
+    await chara_talk.say_and_wait(`训练员君——`);
+    chara_talk.print(`胸中悄然涌出一份感觉。`);
+    chara_talk.print(`陌生又莫名熟悉的甜蜜感袭上了心头。`);
+    chara_talk.print(
+      `就算训练员君从这个世界上消失的话，我恐怕也不会忘记这份怮动吧。`,
+    );
+    await chara_talk.say_and_wait(`这样的话，今天就去训练室吧。`);
+    await era.printAndWait(`如果是自卑又比谁都要好胜训练员君的话。`);
+    await era.printAndWait(
+      `此刻的现在，恐怕正在训练室，一边苦恼着接下来的比赛，一边喝着浓浓的苦咖啡吧。`,
+    );
+    await chara_talk.say_and_wait(
+      `这样的话，不去把他从这份令人难受的苦恼之中拽出来可不行呢。`,
+    );
+    await era.printAndWait(`丸善斯基来到了训练室门口。`);
+    await era.printAndWait(
+      `带着最近新了解的“突然推开门吓人一跳”的潮流，推开门大声地宣布着自己的到来。`,
+    );
+    await era.printAndWait(
+      `看着训练员君带着慌乱的表情手忙脚乱的寻找着被刚才的惊吓不小心飞到沙发下的遥控器。`,
+    );
+    await era.printAndWait(
+      `丸善斯基想起了小包中那张与训练员君一起在卡拉OK拍下的合照，喝过头的训练员君带着的可爱酒窝，在床上不知道翻来覆去看了多少遍。`,
+    );
+    await era.printAndWait(`也许是晴天的关系吧。`);
+    await era.printAndWait(
+      `丸善斯基看上去就像刚喝饱水分的亮晶晶的胡萝卜一样。`,
+    );
+    await era.printAndWait(
+      `明天的她也会一如既往的，带着这份独特的感觉鼓励着大家吧。`,
+    );
+    await era.printAndWait(`带着这份对未来的憧憬，丸善斯基迎来了新的一天。`);
+  } else if (edu_weeks === 5) {
     await print_event_name(
       `来自${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}的礼物`,
       chara_talk,
@@ -137,41 +212,74 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(`被留在原地的丸善斯基一个人在自言自语。`);
   } else if (edu_weeks === 24) {
     await print_event_name('一见如故', chara_talk);
-    await me.say_and_wait(`今天的训练就到这里了,辛苦了。`);
-    await chara_talk.say_and_wait(`呼~真是得救了呢`);
-    await me.say_and_wait(
-      `虽然还没有破出道战时的记录,不过现在也能稳定在这个时间段里了`,
-    );
-    await chara_talk.say_and_wait(`呵呵~这么努力的训练总算有回报了^_^`);
+    await me.say_and_wait(`今天的训练就到这里为止了,辛苦了。`);
     await chara_talk.say_and_wait(
-      `那么,接下来${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }可以陪我到校门口吗?`,
+      `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}也是，辛苦了。`,
     );
-    era.printButton(`当然`, 1);
+    await era.printAndWait(
+      `丸善斯基接过从${me.actual_name}手中的毛巾，将额头之上的汗水略微擦拭便交换给了你。`,
+    );
+    await me.say_and_wait(
+      `按照这样的节奏继续前进的话，之后的朝日杯也有优胜的希望了。`,
+    );
+    await chara_talk.say_and_wait(
+      `我也有点期待之后的比赛呢，不知道在G1级的比赛中又会有什么样的盛况出现呢。`,
+    );
+    await me.say_and_wait(
+      `不过最重要的一点果然还是，${chara_talk.name}觉得奔跑快乐吗？`,
+    );
+    await era.printAndWait(
+      `将毛巾重新拧干之后，从旁边的背包之中取出备用的毛巾，仔细的擦拭着${chara_talk.get_uma_sex_title()}奔跑时凌乱的长发。`,
+    );
+    await chara_talk.say_and_wait(
+      `如果不拿发卡固定住散乱的头发的话在奔跑的时候打到眼睛也是很痛的事情呢。`,
+    );
+    await chara_talk.say_and_wait(
+      `果然还是换个发型转换一下心情比较好吧，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}觉得呢？`,
+    );
+    await me.say_and_wait(`我也这么觉得。`);
+    await me.say_and_wait(
+      `如果把头发扎起来作成长马尾牢牢固定住的话，也不会影响到奔跑吧。`,
+    );
+    await me.say_and_wait(
+      `而且这样的话，能让大家看到丸善斯基不同的一面，也是不错的选择呢。`,
+    );
+    await chara_talk.say_and_wait(
+      `嗯——到底应该怎么样才好呢？虽然${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}的建议也不错，不过`,
+    );
+    await chara_talk.say_and_wait(`啊，好痛。`);
+    await me.say_and_wait(`抱歉，这部分的头发缠在一起了。`);
+    await chara_talk.say_and_wait(`长发果然还是有些困扰呢。`);
+    await chara_talk.say_and_wait(
+      `那么，为了转换心情的话，今天也和小塔一起去享受海风吧♪`,
+    );
+    await chara_talk.say_and_wait(`训练员君，可以送我到门口吗？`);
+    era.printButton(`乐意为你效劳`, 1);
     await era.input();
     era.drawLine();
     await chara_talk.say_and_wait(
-      `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}明天再见咯~`,
+      `那么${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，明天再见~`,
     );
     await era.printAndWait(
-      `伴随着引擎的发动声响起,${chara_talk.name}的背影越来越远。`,
+      `伴随着引擎的发动声响起,${chara_talk.name}的背影消失在了视野的角落之中。`,
     );
     await era.printAndWait(
-      `在目送${chara_talk.name}离开后,${me.name}收到了之前在出道战遇到的新手训练员的发的消息`,
+      `正准备回到训练室的${me.actual_name}感受到了手机的震动。`,
     );
-    await me.say_and_wait(`接下来该去赴约了`, true);
+    await me.say_and_wait(`这个时候发消息的话，也只有这位了吧。`, true);
+    await me.say_and_wait(`接下来该去赴约了`);
     await era.printAndWait(`看了一眼他发送的地址,${me.name}快步走向了商店街`);
     era.drawLine({ content: '居酒屋内' });
     await say_by_passer_by(`浄风幸`, `干杯！`);
     era.printButton(`干杯!`, 1);
     await era.input();
-    await say_by_passer_by(`浄风幸`, `果然下班之后来这里喝一杯真好啊！`);
-    era.printButton(
-      `${me.name}现在找到负责的${chara_talk.get_uma_sex_title()}了吗?`,
-      1,
+    await say_by_passer_by(
+      `浄风幸`,
+      `果然还是喝酒才能把那种烦心事统统甩开啊！`,
     );
+    era.printButton(`说起来的话，你的担当呢？`, 1);
     await era.input();
+    await say_by_passer_by(`浄风幸`, `......`);
     await say_by_passer_by(`浄风幸`, `喂,干嘛说这么扫兴的话啊！`);
     await say_by_passer_by(
       `浄风幸`,
@@ -250,7 +358,7 @@ module.exports = async function (hook, _, event_object) {
       `这特雷森学院真是吓人,我还是赶快辞职算了。`,
     );
     await era.printAndWait(
-      `听着浄风幸绘声绘色的讲述,${me.name}也多少有点相信了`,
+      `听着浄风幸绘声绘色的讲述,${me.name}深感这酒比想象之中还要美味。`,
     );
     era.printButton(`理事长和手纲小姐不知道这件事情吗?`, 1);
     await era.input();
@@ -259,15 +367,68 @@ module.exports = async function (hook, _, event_object) {
       `浄风幸`,
       `以前在训练员学校的时候不是还有学校的八大不可思议传说吗？`,
     );
-    await me.say_and_wait(`大概是喝多了吧`, true);
     await say_by_passer_by(`浄风幸`, `服务员再来一杯。`);
+    era.drawLine({ content: '酒过三巡之后' });
+    await say_by_passer_by(
+      `浄风幸`,
+      `说起来，那位皇帝一直都在关注着丸善斯基的样子。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `不过也难怪，发生了那件事之后，两人之间发生摩擦才是正常的事情吧。`,
+    );
+    era.printButton(`唔，什么事情？`, 1);
+    await era.input();
+    await say_by_passer_by(
+      `浄风幸`,
+      `诶？${chara_talk.name}没有告诉你吗？她与皇帝之间因为信念不同的缘故发生的摩擦。`,
+    );
+    await me.say_and_wait(`可以给我讲讲看吗？`);
+    await say_by_passer_by(
+      `浄风幸`,
+      `这不是在训练员学校就该知道的常识吗？日本赛马界一直以来的愿望都是夺得凯旋门的桂冠。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `虽然前辈训练员和马娘们一直都朝着这方面努力，但是`,
+    );
+    await era.printAndWait(`说着又是一瓶下肚。`);
+    await say_by_passer_by(`浄风幸`, `直到皇帝出现之前，全都失败了。`);
+    await me.say_and_wait(`说起皇帝的话，只能是鲁铎家的那位吧。`);
+    await say_by_passer_by(
+      `浄风幸`,
+      `不如说在那么多场胜利的映衬下，即使不怎么关心赛马的人多少也会听说过吧。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `原本计划作为日本赛马娘的代表前往巴黎参加凯旋门赏，却在关键时刻因为腿部受伤严重被迫放弃。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `虽然也是出于对皇帝身体的考虑，但紧紧盯着皇帝的粉丝们可不好交代啊。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `作为风暴中心的本人来说，又是怎么想的呢？`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `听说当时在学生会办公室爆发了一次激烈的争吵，不过具体恐怕只有在场的两人才知道了。`,
+    );
+    await me.say_and_wait(`也许${chara_talk.name}也有自己的考虑吧。`);
+    await say_by_passer_by(`浄风幸`, `或许吧。服务员`);
     await era.printAndWait(
       `他正准备招手的时候不小心碰到了路过${chara_talk.get_uma_sex_title()}的手臂`,
     );
     await say_by_passer_by(`浄风幸`, `不好意思。`);
     await say_by_passer_by(`${chara_talk.get_uma_sex_title()}`, `不好意思。`);
     await era.printAndWait(
-      `两人同时低头道歉,仔细一看的话似乎还穿着特雷森学院的制服`,
+      `两人同时低头道歉,仔细一看的话${chara_talk.get_uma_sex_title()}似乎还穿着特雷森学院的制服`,
+    );
+    await say_by_passer_by(`${chara_talk.get_uma_sex_title()}`, `你是？`);
+    await me.say_and_wait(`之前遇到的那个人！`);
+    await era.printAndWait(
+      `之前在${chara_talk.name}出道战上见过面的${chara_talk.get_uma_sex_title()}`,
     );
     await me.say_and_wait(
       `这么说坐在那里的几名${chara_talk.get_uma_sex_title()}也都是特雷森学院的学生吗`,
@@ -275,12 +436,12 @@ module.exports = async function (hook, _, event_object) {
     );
     await say_by_passer_by(
       `${chara_talk.get_uma_sex_title()}`,
-      `那么失礼了,请让我过去。`,
+      `失礼了,同伴们还在等着我。`,
     );
     await era.printAndWait(`这本应该吐槽一句的浄风幸却一副略有所思的样子`);
     await say_by_passer_by(
       `浄风幸`,
-      `看${
+      `${
         chara_talk.sex_code - 1 ? '她' : '他'
       }的腿似乎很擅长跑中距离和长距离。`,
     );
@@ -291,86 +452,285 @@ module.exports = async function (hook, _, event_object) {
       `浄风幸`,
       `正好我也烦恼着合适的人选，,说不定运气正好对方也在苦恼训练员呢！`,
     );
-    era.drawLine({ content: '酒过三巡后' });
     await say_by_passer_by(
       `浄风幸`,
-      `......听说桐生院家的大小姐去年也来当训练员了`,
+      `说起来桐生院家的大小姐去年也来当训练员了`,
     );
     await say_by_passer_by(`浄风幸`, `说不定明年会看到一颗新星冉冉升起`);
     await say_by_passer_by(`浄风幸`, `时间也差不多了,我去结账。`);
     await say_by_passer_by(`浄风幸`, `下次再一起喝酒吧。`);
-    await me.say_and_wait(
-      `说不定他会和那位${chara_talk.get_uma_sex_title()}相性很好`,
-      true,
-    );
+    await me.say_and_wait(`下一次我来请客`);
+    await me.say_and_wait(`......丸善斯基`, true);
     wait_flag =
       get_attr_and_print_in_event(4, [0, 0, 0, 0, 10], 0) || wait_flag;
-  } else if (edu_weeks === 34) {
-    await print_event_name('意外的见面', chara_talk);
+  } else if (edu_weeks === 30) {
+    chara19_talk.name = '皇帝';
+    await print_event_name('三女神的孩子们', chara_talk);
+    await era.printAndWait(`中庭 三女神像前`);
     await era.printAndWait(
-      `8月下旬的某一天,${me.name}正在办公室整理这个月${chara_talk.name}跑步的数据，突然听见了敲门声。`,
+      `远离终日吵吵闹闹的草场与教学楼，此处是马娘们心灵寄托的圣地。`,
     );
-    await say_by_passer_by(`${chara_talk.get_uma_sex_title()}`, `咚咚咚`);
+    await era.printAndWait(
+      `此处供奉着三女神的神像，其名分别为达利阿拉伯，高多芬阿拉伯以及拜耶尔阿拉伯。`,
+    );
+    await era.printAndWait(`清澈的水流顺着女神们托着的水瓶汇入池中。`);
+    await era.printAndWait(`而此处，又迎来了新的客人。`);
+    await chara19_talk.say_and_wait(`......`);
+    await era.printAndWait(`皇帝凝视着三女神像。`);
+    await chara19_talk.say_and_wait(`还没来吗？`, true);
+    await era.printAndWait(
+      `虽然以私人的名义邀请了最近看好的马娘前来，不过对方态度却依然暧昧。`,
+    );
+    await era.printAndWait(
+      `是出于对皇帝的威压而恐惧吗，也罢，这样懦弱的马娘不值得托付背后。`,
+    );
+    await era.printAndWait(`在我等所创造的伊甸园里自由的活下去吧。`);
+    await chara19_talk.say_and_wait(`那么，也差不多该回去了`);
     await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `请问是丸善${
-        era.get('cflag:4:性别') - 1 ? '学姐' : '学长'
-      }的训练员${me.get_adult_sex_title()}吗？`,
+      `浄风幸`,
+      `没想到忙碌的皇帝殿下居然会来到这里散心。`,
     );
+    await say_by_passer_by(
+      `浄风幸`,
+      `作为一般小市民来说真是幸运到几乎要折寿的程度了啊。`,
+    );
+    await chara19_talk.say_and_wait(`......你也是在等待着某人吗？`);
+    await say_by_passer_by(
+      `浄风幸`,
+      `既然来到了这里，那么您也应该知道我等待着的是谁了吧。`,
+    );
+    await chara19_talk.say_and_wait(`既然如此的话......`);
+    await era.printAndWait(`皇帝的话语被朝着中庭前来的脚步声所打断。`);
+    era.drawLine();
+    era.printButton(`呃，我是不是来错地方了。`, 1);
+    await era.input();
+    await me.say_and_wait(`难道他们认识吗？`, true);
+    await era.printAndWait(
+      `虽然只是一时的心血来潮，但却意外误入了秘密谈话的场合。`,
+    );
+    await era.printAndWait(
+      `不知如何继续话题而闭上了嘴，耳朵传来的只有从女神像所托举的瓶中之水顺流而下与水池碰撞飞溅之声。`,
+    );
+    await say_by_passer_by(`浄风幸`, `......不，只是意外撞到了一起。`);
+    await era.printAndWait(
+      `友人打破了这份令人难受的沉默氛围，皇帝则收回了目光重新看向了女神像。`,
+    );
+    await me.say_and_wait(`矢口否认的他现在更有嫌疑了啊。`, true);
+    era.printButton(`这里还是找机会离开吧`, 1);
+    await era.input();
+    await me.say_and_wait(`所以。`);
+    await say_by_passer_by(`浄风幸`, `说起来像这样正视着看女神像还是第一次。`);
+    await say_by_passer_by(
+      `浄风幸`,
+      `虽然小时候被父母带着到神社参拜的时候有幸见过神明大人。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `虽然已经不记得参拜时到底经历了什么，不过只有那个温柔的声音一直记在了心里。`,
+    );
+    await me.say_and_wait(`所以那份声音一直指引着你吗？`);
+    await say_by_passer_by(
+      `浄风幸`,
+      `是，那份怀念的，温柔的声音，一直鼓舞着我。`,
+    );
+    await era.printAndWait(
+      `很久以前，自己还是孩子的时候，独自一人来到神社时，好像也经历过这样的事情。`,
+    );
+    await era.printAndWait(
+      `凝视着三女神的雕像，忽略掉周围的声音，让自己沉浸在回忆之中。`,
+    );
+    await era.printAndWait(
+      `与朋友玩捉迷藏，为了躲开抓捕者，特意躲在了偏僻的角落里。`,
+    );
+    await era.printAndWait(`然后在等待的过程之中，不小心就这样睡着了。`);
+    await era.printAndWait(`于是就这样遇到了三女神大人。`);
+    await era.printAndWait(
+      `美丽的红色长发让人想起燃烧的火焰，温柔的她尝试安抚惊慌失措的${me.actual_name}`,
+    );
+    await era.printAndWait(
+      `虽然已经不记得当时安慰的话语了，但那份温柔的感触像是写在了永不褪色的相簿之中的文字一样，被${me.actual_name}铭记着。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `我对您毅然踏上这条注定充满荆棘的道路致敬。`,
+    );
+    await say_by_passer_by(`浄风幸`, `抱歉，我不认可您的做法。`);
+    await chara19_talk.say_and_wait(
+      `吾不需要认可，也无需赞同，所谓王者既是身先士卒。`,
+    );
+    await era.printAndWait(
+      `嘈杂的声音打断了你的思绪，双腿传来的酥麻感拖着你的意识回到了现实之中。`,
+    );
+    await me.say_and_wait(`哈~啊。`);
+    await era.printAndWait(
+      `忍不住打了一个呵欠，回味着这份温暖的余韵，将视线从女神像移向了中庭的另一边。`,
+    );
+    await era.printAndWait(`似乎是刻意远离了${me.actual_name}谈论着什么。`);
+    await me.say_and_wait(`正好谁也不在，就这样悄悄。`, true);
+    await chara_talk.say_and_wait(`${
+      era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
+    }？后辈们送了一些胡萝卜过来，今天的话。
+    `);
+    await era.printAndWait(`丸善斯基堵住了离开中庭最近的道路，而且。`);
+    await chara19_talk.say_and_wait(`丸善斯基，别来无恙。`);
+    await chara_talk.say_and_wait(`露娜今天看上去也很精神的样子呢。`);
+    await chara_talk.say_and_wait(`后辈们送了我一点胡萝卜，露娜也来尝尝看吧。`);
+    await chara19_talk.say_and_wait(`不用了。`);
+    await chara_talk.say_and_wait(`是吗？真是可惜呢。`);
+    await chara19_talk.say_and_wait(`之后可以拜托你送一点过来吗？`);
+    await chara_talk.say_and_wait(`当然可以！`);
+    await chara_talk.say_and_wait(
+      `为了马娘们的幸福拼命努力着的露娜，我觉得很厉害哦。`,
+    );
+    await chara_talk.say_and_wait(
+      `作为挑战者一路努力过来，在赛场上留下了皇帝的威名。`,
+    );
+    await chara_talk.say_and_wait(
+      `像这样不断将没有马娘能做到的预言打破，作为人生来说也是一种幸福吧。`,
+    );
+    await chara19_talk.say_and_wait(`那么丸善斯基觉得幸福吗？`);
+    await chara_talk.say_and_wait(
+      `如果说幸福的话，像这样在赛场上为可爱的后辈们留下追逐的希望，不也是很幸福的事情吗？`,
+    );
+    await chara_talk.say_and_wait(
+      `在草场之上自由的奔跑，听着后辈们的苦恼并提供建议，我觉得是不粗的选择哦？`,
+    );
+    await chara19_talk.say_and_wait(
+      `马娘们的期待可是比想象之中还要沉重的东西呢。`,
+    );
+    await chara19_talk.say_and_wait(
+      `若是中途便将粉色的泡泡戳破的话还好，如果一直做着粉红色的梦的话。`,
+    );
+    await chara19_talk.say_and_wait(`总有一天，会遇到自己无法处理的事情。`);
+    await chara19_talk.say_and_wait(
+      `到那时的话，丸善斯基，我期待着你采取什么方式，怎么跨越这道障碍。`,
+    );
+    await era.printAndWait(`像是意识到了什么，丸善斯基罕见的沉默了。`);
+    await chara19_talk.say_and_wait(
+      `虽然还想多聊几句，不过办公室还有积攒的工作尚未结束，失礼了。`,
+    );
+    await era.printAndWait(`说罢，皇帝离开了中庭。`);
+    await chara_talk.say_and_wait(`......尽管如此，我也知道的。`);
+    await chara_talk.say_and_wait(
+      `......抱歉，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，我想起一点事情。`,
+    );
+    await era.printAndWait(`丸善斯基露出了忧郁的表情离开了中庭。`);
+    await me.say_and_wait(`于是谁也不在了吗？`);
+    await say_by_passer_by(
+      `马娘`,
+      `实在非常抱歉不小心看错时间来迟了，还请皇帝陛下？`,
+    );
+    await era.printAndWait(
+      `像是反驳${me.actual_name}的样子，少女气喘吁吁的来到了中庭。`,
+    );
+    await me.say_and_wait(`抱歉，皇帝已经离开了。`);
+    await say_by_passer_by(`马娘`, `诶？`);
+    await say_by_passer_by(`马娘`, `......果然是这样吗。`);
+    await say_by_passer_by(
+      `马娘`,
+      `不管怎样，总之，丸善斯基的训练员${me.get_adult_sex_title()}，非常感谢。`,
+    );
+    await say_by_passer_by(`马娘`, `也许那个奇怪的训练员说过的话是对的。`);
+    await era.printAndWait(`气喘吁吁的马娘垂头丧气的离开了中庭。`);
+    await me.say_and_wait(`丸善斯基，似乎有什么心事的样子，找机会聊天吧。`);
+    await era.printAndWait(`${me.actual_name}离开了中庭。`);
+    await era.printAndWait(`于是旅人们怀着不同的心思为了不同的目的前进。`);
+    await era.printAndWait(`三女神默默包容了一切。`);
+  } else if (edu_weeks === 34) {
+    await print_event_name('礼物', chara_talk);
+    await era.printAndWait(`某天,当${me.name}正在办公室整理文件的时候。`);
+    await era.printAndWait(`咚咚咚`);
     era.printButton(`请进`, 1);
     await era.input();
+    await say_by_passer_by_and_wait(`马娘`, `打扰了。`);
     await era.printAndWait(
-      `随着大门被轻轻推开之后，似曾相识的${chara_talk.get_uma_sex_title()}走了进来，${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }先是四处打量了一下训练室的布置最后将视线定格在了${me.name}的脸上。`,
+      `随着门把手的扭转，看上去像是高中部的马娘走了进来。`,
     );
+    await say_by_passer_by_and_wait(`马娘`, `下午好，训练员先生。`);
+    era.printButton(`下午好`, 1);
+    await era.input();
     await say_by_passer_by(
       `${chara_talk.get_uma_sex_title()}`,
-      `打扰了,不知您能否让丸善${
-        era.get('cflag:4:性别') - 1 ? '学姐' : '学长'
-      }收下这个`,
+      `虽然之前在中庭匆匆见面，不过像这样正式见面还是第一次。`,
+    );
+    //佩斯舞台 丸善斯基口上自设路人马娘
+    await say_by_passer_by(
+      `${chara_talk.get_uma_sex_title()}`,
+      `我叫佩斯舞台(本口上自设原创马娘)，是特雷森学院随处可见的普通马娘之中的一员`,
+    );
+    await say_by_passer_by(
+      `佩斯舞台`,
+      `希望能像丸善前辈一样在赛场上一路胜利。`,
+    );
+    await say_by_passer_by_and_wait(`佩斯舞台`, `平时的话直接叫我舞台就可以了`);
+    era.printButton(`请多指教，佩斯舞台`, 1);
+    await era.input();
+    await era.printAndWait(`两人的手握在了一起。\n`);
+    era.printButton(
+      `这边有咖啡......不，还是算了。红茶和椰子汁喜欢喝哪种？`,
+      1,
+    );
+    await era.input();
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `非常感谢，不过我只是为了送礼物过来的。`,
     );
     await era.printAndWait(
       `${chara_talk.sex_code - 1 ? '她' : '他'}从口袋中掏出了一个小盒子`,
     );
-    await me.say_and_wait(
-      `是${chara_talk.name}一直关注着的后辈${chara_talk.get_uma_sex_title()}吧`,
-      true,
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `像我们这样的普通马娘，能够被训练员看重，在职业生涯中能够G3胜利已经是非常厉害的事情了。`,
     );
-    await me.say_and_wait(`辛苦了，我会亲手交给${chara_talk.name}的。`);
-    await era.printAndWait(
-      `${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }因紧张而一直抖动的耳朵立刻竖了起来,像是松了口气的样子。顿了一会儿,又止不住好奇的向${
-        me.name
-      }问道`,
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `大家都只是朝着入着为目标拼命努力。`,
     );
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `恕我失礼，请问训练员${me.get_adult_sex_title()}，${
-        me.name
-      }不好奇为什么我们不直接送给${chara_talk.name}吗？`,
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `尽管如此，能够入着的马娘也是屈指可数，大部分赛马娘都只是在出道战胜利后，就这样一场未胜结束了三年的生涯。`,
     );
-    era.printButton(
-      `如果换做是我身处${me.get_couple_title()}的位置,也不会希望有人问着问那吧`,
-      1,
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `有的甚至在毕业时，也没遇到能签订专属契约的训练员`,
     );
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `丸善前辈不关心这些，只是一直鼓励着我们的前进。`,
+    );
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `在我们遇到问题的时候，在旁边指点着我们。`,
+    );
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `所以，我们一直都很感激丸善前辈。`,
+    );
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `所以说，我和朋友们一起制作了这份礼物，想要送给丸善前辈。`,
+    );
+    era.printButton(`我觉得丸善斯基一定会很高兴的，谢谢你们`, 1);
     await era.input();
-    await me.say_and_wait(
-      `更何况${me.get_couple_title()}是${chara_talk.name}信赖的后辈们,作为${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }的训练员,我也对${me.get_couple_title()}充满信任。`,
+    await me.say_and_wait(`从舞台的手上将带有蝴蝶结装饰的小盒子收了下来。`);
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `谢谢你，训练员${me.get_adult_sex_title()}。`,
     );
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `受教了,那么打扰了`,
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `在之后的选拔赛中，一定要让所有人都大吃一惊才行！`,
+    );
+    await say_by_passer_by_and_wait(
+      `佩斯舞台`,
+      `再见了，丸善斯基的训练员先生！`,
     );
     await era.printAndWait(
-      `鞠躬之后${
+      `鞠躬之后,${
         chara_talk.sex_code - 1 ? '她' : '他'
       }快步走向了门口探头探脑的同伴身旁`,
     );
-    await me.say_and_wait(`真是个奇妙的人`, true);
+    await me.say_and_wait(`希望她接下来能够遇到合适的训练员`, true);
     await era.printAndWait(`轻轻关上大门后,${me.name}打开了小盒子。`);
     await era.printAndWait(`里面放着的是由水晶制作的手链。`);
     await me.say_and_wait(
@@ -381,203 +741,6 @@ module.exports = async function (hook, _, event_object) {
     );
     wait_flag =
       get_attr_and_print_in_event(4, [10, 0, 0, 0, 0], 0) || wait_flag;
-  } else if (edu_weeks === 41) {
-    await print_event_name(
-      `训练员与担当${chara_talk.get_uma_sex_title()}`,
-      chara_talk,
-    );
-    await chara_talk.say_and_wait(
-      `${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      },训练结束后一起出去兜风吧?`,
-    );
-    await era.printAndWait(
-      `随着时间的经过,${me.name}与${chara_talk.name}之间的磨合也愈发紧密。`,
-    );
-    await era.printAndWait(
-      `在${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }尽力完成日常训练的同时,作为奖励也为了避免${
-        chara_talk.name
-      }精神过于紧绷,在休息日的那晚${me.get_couple_title()}会一起享受风的吹拂。`,
-    );
-    await chara_talk.say_and_wait(`呼啊,果然像这样聆听风的声音最令人高兴呢`);
-    era.printButton(`${chara_talk.name}可以开的稍微慢一点吗?`, 1);
-    await era.input();
-    await era.printAndWait(
-      `比起第一次坐在副驾驶上字面意义上被吓晕过去,现在的${me.name}已经慢慢适应了`,
-    );
-    await me.say_and_wait(`果然什么事情经历久了多少都会有抗性了吗`, true);
-    await era.printAndWait(
-      `那么,差不多到海边了,今天就这样......没想到这里也能遇到${chara_talk.get_uma_sex_title()}呢。`,
-    );
-    await era.printAndWait(
-      `${me.name}从${chara_talk.name}的副驾驶位上下来,看向远处的模糊人影,似乎是有人在那边聊着什么。`,
-    );
-    await chara_talk.say_and_wait(
-      `青春真美好呢~${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }不也这么想吗?`,
-    );
-    await era.printAndWait(
-      `平日的${chara_talk.name}一直都是一副知心大${
-        era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
-      }的模样,此刻却显露出了作为${chara_talk.get_teen_sex_title}的一面。`,
-    );
-    await chara_talk.say_and_wait(
-      `经历了艰难险阻之后的互相扶持的人与${chara_talk.get_uma_sex_title()}在月亮的见证下幸福的kiss`,
-    );
-    await chara_talk.say_and_wait(
-      `${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我也很期待这种事情呢`,
-    );
-    await era.printAndWait(`${chara_talk.name}露出了寂寞的表情`);
-    await me.say_and_wait(`他们好像发现我们了`);
-    await era.printAndWait(
-      `再次转头时,${chara_talk.name}又变回了之前的外向大${
-        era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
-      }`,
-    );
-    await era.printAndWait(
-      `${chara_talk.get_uma_sex_title()}「是丸善${
-        era.get('cflag:4:性别') - 1 ? '学姐' : '学长'
-      }吧!」`,
-      {
-        color: chara_talk.color,
-      },
-    );
-    await era.printAndWait(
-      `注意到了我们到来的${chara_talk.get_uma_sex_title()}向着${
-        chara_talk.name
-      }的方向慢慢走了过来`,
-    );
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `我是上次来找丸善${
-        era.get('cflag:4:性别') - 1 ? '学姐' : '学长'
-      }的（${chara_talk.get_uma_sex_title()}名）,虽然很遗憾没能直接与${
-        era.get('cflag:4:性别') - 1 ? '学姐' : '学长'
-      }见面`,
-    );
-    await me.say_and_wait(
-      `原来是上次的${chara_talk.get_uma_sex_title()}`,
-      true,
-    );
-    await era.printAndWait(
-      `${chara_talk.sex_code - 1 ? '她' : '他'}们亲手制作的水晶手绳现在正系在${
-        chara_talk.name
-      }的右手上`,
-    );
-    await era.printAndWait(
-      `${chara_talk.get_uma_sex_title()}似乎也注意到了这点,本就兴奋的心情变得更加雀跃了。`,
-    );
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `真是太好了呢。看来丸善${
-        era.get('cflag:4:性别') - 1 ? '学姐' : '学长'
-      }很喜欢我们制作的作品!`,
-    );
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `我也做好了成为一名赛${chara_talk.get_uma_sex_title()}参加比赛的准备,希望之后也能在赛场上碰到丸善${
-        era.get('cflag:4:性别') - 1 ? '学姐' : '学长'
-      }!`,
-    );
-    await me.say_and_wait(`他们似乎单方面将我们视为了劲敌呢`, true);
-    await chara_talk.say_and_wait(
-      `哎呀,没想到后辈们已经决定超越我的背影了呢?看来与${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }签订契约还真是正确的选择`,
-    );
-    await chara_talk.say_and_wait(
-      `那么${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我就拭目以待了呦`,
-    );
-    await chara_talk.say_and_wait(
-      `那么接下来就是${chara_talk.get_uma_sex_title()}之间的悄悄话时间了?`,
-    );
-    await me.say_and_wait(`哈哈哈这片大海真美丽啊,不近点看看真是可惜了。`);
-    await era.printAndWait(`这种时候还是自觉一点吧。`);
-    await era.printAndWait(
-      `波浪伴随着潮湿的海风吹向岸上的沙滩，沙滩包容了海水的冲击却跟不上海风的步伐`,
-    );
-    await era.printAndWait(`只能看着海风孤独的向未知的旅途前进。`);
-    await say_by_passer_by(`浄风幸`, `好久不见了,${me.actual_name}`);
-    await era.printAndWait(`那个男人向${me.name}招手,波浪打湿了他的裤脚。`);
-    era.printButton(
-      `我这边也是,希望能在今年的赛场之上见到${me.get_couple_title()}的身影`,
-      1,
-    );
-    await era.input();
-    await say_by_passer_by(
-      `浄风幸`,
-      `那可真是多谢了,不过出道战可能要往后推一段时间了`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `虽然我的担当平时也一直跟着团队训练员一起训练,不过两人之间还是需要一段时间来磨合。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `而且以这种半吊子的水平仓促出道的话,不管是对${chara_talk.get_uma_sex_title()}还是我来说都不是什么好主意。`,
-    );
-    await say_by_passer_by(`浄风幸`, `不过我们会在观众席上加油的。`);
-    await era.printAndWait(`他顿了一下,然后看向了空中的月亮`);
-    await say_by_passer_by(
-      `浄风幸`,
-      `能在月亮的引导下成功和担当签约,说不定我也是被三女神眷顾的人啊。`,
-    );
-    await say_by_passer_by(`浄风幸`, `三女神大人，谢谢你！`);
-    await me.say_and_wait(
-      `我与${chara_talk.name}的邂逅也是三女神的指引吧`,
-      true,
-    );
-    await era.printAndWait(
-      `波浪拍打着沙滩,然后被沉默的沙砾分解成了无数洁白的泡沫`,
-    );
-    await era.printAndWait(
-      `浪花虽然注定逝去,但在从波浪分解成泡沫的一瞬间,它也曾闪耀过。`,
-    );
-    await era.printAndWait(
-      `对于选择出道的${chara_talk.get_uma_sex_title()}们来说也是这样,${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }们将人生最宝贵的三年寄托在了训练员身上。`,
-    );
-    await era.printAndWait(
-      `相比于训练员的长达数十年的职业生涯,短短的三年不过像泡沫一样短暂。`,
-    );
-    await era.printAndWait(
-      `所以这就意味着可以将生涯中初次遇到的${chara_talk.get_uma_sex_title()}作为练手的对象吗?`,
-    );
-    await era.printAndWait(
-      `不,作为训练员来说,我们的能力注定不足,很可能会让将赌注压在我们身上的${chara_talk.get_uma_sex_title()}们失望。`,
-    );
-    await era.printAndWait(`即使如此,我们还是要选择签订契约。`);
-    await era.printAndWait(`因为${chara_talk.get_uma_sex_title()}们需要它。`);
-    await era.printAndWait(`正因为如此,对训练员来说最重要的就是一颗虔诚的心`);
-    await era.printAndWait(
-      `"纵使有身败名裂的可能,作为训练员也要和担当一起闪耀。"用这颗虔诚的心,来救赎自己训练过程中的一切丑陋与不足之处。`,
-    );
-    await chara_talk.say_and_wait(`那边的训练员们,差不多是回寝的时间了`);
-    await era.printAndWait(`${chara_talk.name}向${me.get_couple_title()}招手`);
-    await say_by_passer_by(`浄风幸`, `非常感谢!`);
-    await me.say_and_wait(`不知道他们做好面对疾风的准备了吗，真可怜。`, true);
-    await era.printAndWait(
-      `等到那对搭档系好安全带后，带着幸灾乐祸的想法的${me.actual_name}面带微笑看着他们。`,
-    );
-    await chara_talk.say_and_wait(`那么出发咯`);
-    await say_by_passer_by(`浄风幸`, `非常感谢!`);
-    await say_by_passer_by(`浄风幸`, `呜啊啊啊!`);
-    await say_by_passer_by(`${chara_talk.get_uma_sex_title()}`, `呀啊啊啊啊！`);
-    await era.printAndWait(`后排已经变成了阿鼻地狱般的惨状`);
-    await chara_talk.say_and_wait(`大家看到了风吗?`);
-    await me.say_and_wait(`呜啊啊啊啊啊`);
-    await era.printAndWait(
-      `忘了自己也在车上的${me.actual_name}得到了应有的惩罚。`,
-    );
-    await era.printAndWait(
-      `因为过于享受的${chara_talk.name}不小心突破了自己的极限,下车后三个人互相搀扶着走进了学院`,
-    );
-    wait_flag =
-      get_attr_and_print_in_event(4, [10, 0, 10, 0, 0], 0) || wait_flag;
   } else if (edu_weeks === 47) {
     await print_event_name('圣诞节', chara_talk);
     await chara_talk.say_and_wait(`Merry Christmas！`);
@@ -774,25 +937,43 @@ module.exports = async function (hook, _, event_object) {
     era.set('cflag:4:节日事件标记', 0);
   } else if (edu_weeks === 47 + 1) {
     await print_event_name('新年的思绪', chara_talk);
-    await era.printAndWait(`训练室内`);
-    await me.say_and_wait(`最后一份文件也整理好了`, true);
-    await me.say_and_wait(`总算可以稍微休息一会了`, true);
+    await era.printAndWait(`时间过得飞快，转眼之间又到了新的一年。`);
     await era.printAndWait(
-      `从负责${chara_talk.name}的育成开始就一直紧绷着的神经总算可以稍微放松一下了`,
+      `与丸善斯基一起经历的酸甜苦辣，如今都化为了美好的回忆。`,
     );
-    await me.say_and_wait(`要是一直这么辛苦下去我迟早要累死`, true);
+    await era.printAndWait(
+      `虽说今天是法定的节假日，不过在训练员宿舍就这么懒散的度过也过于烦闷了。`,
+    );
+    await era.printAndWait(
+      `想着‘随便逛逛吧’，脚步迈向的方向却不知不觉又回到了特雷森。`,
+    );
+    await me.say_and_wait(`既然来都来了，不如去训练室看看吧`);
+    await era.printAndWait(`打定主意后，${me.actual_name}走向了训练室。`);
+    era.drawLine({ content: '训练室' });
+    await era.printAndWait(
+      `如果是平时的训练室，总有种‘又要上班啊’的烦躁感挥之不去。`,
+    );
+    await era.printAndWait(
+      `但如果是休息日带着‘随便看看吧’的心态重新回到了训练室时。`,
+    );
+    await era.printAndWait(
+      `与丸善斯基讨论接下来的训练方针，一起品尝着美味的蛋糕，挤在沙发上全神贯注地看着重赏大赛的录像带。`,
+    );
+    await era.printAndWait(`一切的一切，都像是发生在昨天的事情一样。`);
+    await me.say_and_wait(`时间过得可真快啊。`);
+    await era.printAndWait(`望着以往的训练室，却有种格格不入的错觉。`);
+    await me.say_and_wait(`太累了吗？`);
     await me.say_and_wait(`好！接下来去天台上吹下风清醒一下吧`, true);
     await me.say_and_wait(
       `......不知道${chara_talk.name}现在在哪里,也许和朋友们一起在哪里聚会吧`,
       true,
     );
+    await era.printAndWait(`轻轻关上训练室的大门，为了转换心情走向了天台。`);
     era.drawLine({ content: '天台' });
     await era.printAndWait(
       `很多${chara_talk.get_uma_sex_title()}决定在新年时和同伴或者自己的训练员一起度过,而且利用假期这段时间将去年的烦恼一甩而空`,
     );
-    await era.printAndWait(
-      `与往日热情似火的学院相比,此刻的学院文静的像是大和抚子一样`,
-    );
+    await era.printAndWait(`往日吵吵闹闹的学院现在露出了宁静的一面。`);
     await era.printAndWait(`从天台向下俯瞰,整个特雷森学院都在视线之下`);
     await me.say_and_wait(
       `这个时候大喊一声我是要成为驯服三冠王${chara_talk.get_uma_sex_title()}的男人才符合气氛吧`,
@@ -811,23 +992,43 @@ module.exports = async function (hook, _, event_object) {
         fontWeight: 'bold',
       },
     );
-    await era.printAndWait(`震耳欲聋的响声连自己都被吓了一跳`);
-    await me.say_and_wait(`这是我发出的声音？`);
-    await me.say_and_wait(`还是快离开吧`);
-    await chara_talk.say_and_wait(
-      `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}？`,
+    await era.printAndWait(
+      `将训练员的身份啊，大人的矜持啊通通抛在了脑后，凭着气势喊出了连自己都被吓了一跳的声音。`,
     );
-    await era.printAndWait(`野生的${chara_talk.name}出现了`);
-    await me.say_and_wait(`为什么，${chara_talk.name}真的出现了？`, true);
+    await era.printAndWait(
+      `打破了禁忌带来的兴奋感让${me.actual_name}满脸通红。`,
+    );
+    await me.say_and_wait(`真是畅快啊。`);
+    await me.say_and_wait(`趁着现在还没人注意到天台，还是快离开吧。\n`);
+    await chara_talk.say_and_wait(
+      `哎呀？${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}？`,
+    );
+    await era.printAndWait(`野生的${chara_talk.name}出现了！`);
+    await me.say_and_wait(`咦咦咦？${chara_talk.name}怎么会在这里？`, true);
     await me.say_and_wait(`哈哈,人生完蛋了`, true);
-    await me.say_and_wait(`在家的父母恕孩儿不孝不能赡养天年了`, true);
+    await me.say_and_wait(`找个没人的荒岛就这样度过余生吧。`, true);
+    era.printButton(`抱歉，你认错人了。`, 1);
+    await era.input();
+    era.printButton(`现在的我只是一个路过的普通训练员罢了。`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(
+      `......啊啦，这位普通的训练员${me.get_adult_sex_title()}。`,
+    );
+    await chara_talk.say_and_wait(
+      `刚才喊的可真有气势，我在楼梯上都听到了那充满热情的声音。`,
+    );
+    await chara_talk.say_and_wait(`青春真是美好呢。`);
+    await chara_talk.say_and_wait(
+      `不过，这种话语果然还是要当着当事人的面好好说出来才可以吧？`,
+    );
+    await chara_talk.say_and_wait(
+      `如果是我家的训练员的话，说不定会带着满腔的感情好好阐述出来吧。`,
+    );
     await era.printAndWait(
       `因为强烈的羞耻感而感到浑身发热的${me.actual_name}膝下一软，几乎要摔倒。`,
     );
-    await era.printAndWait(
-      `然而，除了芬芳馥郁的香水味之外，预计的嘲笑怜悯却并未发生。`,
-    );
-    await me.say_and_wait(`......在想什么呢？`, true);
+    await me.say_and_wait(`非常抱歉。`, true);
+
     await era.printAndWait(`${chara_talk.name}只是静静的仰望着天空。`);
     era.printButton(
       `......不去找小特${chara_talk.sex_code - 1 ? '她' : '他'}们一起去玩吗?`,
@@ -953,315 +1154,199 @@ module.exports = async function (hook, _, event_object) {
     era.set('cflag:4:节日事件标记', 0);
   } else if (edu_weeks === 47 + 5) {
     await print_event_name('春冬之交', chara_talk);
-    await me.say_and_wait(`直到中盘为止还没有问题`, true);
-    await era.printAndWait(`${me.get_couple_title()}在草地上进行着日常训练`);
-    await me.say_and_wait(`在第三个弯道上冲刺！`);
+    await era.printAndWait(`训练场`);
+    await era.printAndWait(`赛马娘在这里挥洒着汗水，朝着希望的未来前进。`);
+    await era.printAndWait(
+      `经历了朝日杯的洗礼后，你们将目光放在了皋月赏的前哨战——春季锦标上。`,
+    );
     await chara_talk.say_and_wait(
-      `好！${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我要加速了!`,
+      `按照预定计划，转过第三个弯道后，现在是冲刺的时候了！`,
+    );
+    await chara_talk.say_and_wait(`就这么一口气将油门踩到底!`);
+    await era.printAndWait(
+      `对于采取逃马策略的赛马娘,相比于其他跑法的马娘来说，将大部分的注意力都放在了序盘与中盘之上。`,
     );
     await era.printAndWait(
-      `对于逃马而言,最重要的是序盘抢占第一的位置,在中盘尽可能与马群拉开距离,最后在终盘保持一开始的速度`,
+      `大概是考虑到将序盘与中盘确立起来的优势牢牢固定下来，就这样取得优势。`,
     );
     await era.printAndWait(
-      `而在现实比赛之中,多名逃${chara_talk.get_uma_sex_title()}之间互相争夺第一的位置往往会使比赛趋于快节奏`,
+      `比赛中，多名采取相同策略的逃马，往往会在序盘与中盘之间发生殊死的较量。`,
     );
     await era.printAndWait(
-      `部分适应不了快节奏的${chara_talk.get_uma_sex_title()}为了保持与逃马群的相对距离而被迫加快速度从而导致体力快速消耗无法在终盘达到应有的速度而落败`,
+      `就这样将比赛带到了快节奏模式，打乱采取穿插与追比策略马娘的节奏吧。`,
     );
     await era.printAndWait(
-      `然而这种跑法却对竞争意识有着较高的要求,强行选择逃跑法很容易成为选择先行跑法${chara_talk.get_uma_sex_title()}的垫脚石`,
+      `然而，就上面尚未提到的先马，则会因为逃马之间的战斗无力在终盘保持原有的速度，就这么将温存的体力一口气爆发出来，取得优势。`,
     );
-    await era.printAndWait(
-      `一般来说逃马在第三个弯道开始最多保持原本的速度,但${chara_talk.name}却能突破这份束缚甚至做到加速`,
-    );
+    await era.printAndWait(`螳螂捕蝉黄雀在后吗？`);
+    await era.printAndWait(`但是，丸善斯基不是因为选择了逃马策略，而是因为`);
     await me.say_and_wait(
       `不愧是被称为怪物一样的${chara_talk.get_uma_sex_title()}`,
       true,
     );
     await era.printAndWait(
-      `根据不同${chara_talk.get_uma_sex_title()}的特性制定不同的作战计划也是对训练员能力的一种考验。`,
+      `因为享受奔跑，而不知不觉之间获得了常人难以企及的速度。`,
     );
-    era.printButton(`辛苦了,稍微站一会再喝水吧`, 1);
+    era.printButton(`辛苦了,稍微休息一下吧。`, 1);
     await era.input();
-    await me.say_and_wait(`比上次快了0.1秒,春季锦标应该可以轻松度过了`);
-    await chara_talk.say_and_wait(`不知道吹拂在中山竞马场的风又会是什么感觉呢`);
-    await me.say_and_wait(`一定会是非常美好的回忆`);
-    await chara_talk.say_and_wait(`嗯嗯,接下来做一组拉伸运动吧`);
-    await me.say_and_wait(`不多休息一会吗？`);
+    await chara_talk.say_and_wait(`哈...哈啊......呼~`);
+    await era.printAndWait(`周围的草地像是台风过境一样被弄得乱七八糟的。`);
+    await chara_talk.say_and_wait(`非常感谢♪`);
+    await era.printAndWait(
+      `接过了你递过来的毛巾之后，丸善斯基擦拭着额头上的汗水，从湿透的长发传来的香草味钻进了${me.actual_name}的鼻腔之中。`,
+    );
+    await era.printAndWait(
+      `说不定，像这样在奔跑后露出由衷的满足感才是丸善斯基真正的模样。`,
+    );
+    era.printButton(`好怀念的香味啊。`, 1);
+    await era.input();
+    await era.printAndWait(
+      `一边帮助丸善斯基将湿透的头发用毛巾擦干，一边寻找着话题。`,
+    );
+    await chara_talk.say_and_wait(`训练员君对香味很感兴趣吗？`);
+    await me.say_and_wait(`嗯，很好闻的体香味。`);
     await chara_talk.say_and_wait(
-      `一想到后辈们会在赛场上给我加油,我就干劲十足呢`,
+      `呵呵~虽然和体香味很像，不过这其实是香水的味道。`,
     );
-    await chara_talk.say_and_wait(`好,那么继续`);
-    await say_by_passer_by(
-      `浄风幸`,
-      `训练的不错啊,那可以和我家的孩子比试一下吗？`,
+    await chara_talk.say_and_wait(`虽然是为了心情变换才选择了这款。`);
+    await chara_talk.say_and_wait(`不过从训练员君的反应看来。`);
+    await chara_talk.say_and_wait(`似乎很受欢迎的样子。`);
+    await chara_talk.say_and_wait(`嗯，看上去姐姐我也一直站在潮流的第一线呢。`);
+    await era.printAndWait(`她的心情似乎变得更好了。`);
+    await me.say_and_wait(
+      `唔，虽然我对潮流的东西也了解不多，不过丸善斯基一直都是相当迷人的角色呢。`,
     );
-    await era.printAndWait(
-      `除了单独训练之外,共同训练也是一种效果显著的提升方式,在与其他${chara_talk.get_uma_sex_title()}的竞争之中可以快速发现短板从而共同提高`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `我家的孩子一直都想和憧憬的前辈比试一场。`,
-    );
-    await era.printAndWait(`既然都这么说了,没理由不接受吧？`);
-    era.printButton(`${chara_talk.name},可以吗？`, 1);
-    await era.input();
-    await chara_talk.say_and_wait(`既然是后辈的请求,没有理由不接受吧?`);
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `非常感谢,我会努力追上丸善${
-        era.get('cflag:4:性别') - 1 ? '学姐' : '学长'
-      }背影的！`,
-    );
+    await chara_talk.say_and_wait(`就算训练员君这么说，也不会有什么奖励的哦？`);
+    era.printButton(`真的不需要`, 1);
+    era.printButton(`已经收到了非常美好的回忆了`, 2);
+    const ret1 = await era.input();
+    if (ret1 === 1) {
+      await chara_talk.say_and_wait(`诶——`);
+      await chara_talk.say_and_wait(
+        `训练员君用这种语气说的话，稍微有点可爱呢~`,
+      );
+      await era.printAndWait(`丸善斯基轻轻抚摸着你的脑袋。`);
+      await chara_talk.say_and_wait(`哼哼哼~果然还是这样的训练员君最可爱了♪`);
+    } else {
+      await chara_talk.say_and_wait(`欸——`);
+      await era.printAndWait(`丸善斯基带着不可思议的表情看着你。`);
+      await chara_talk.say_and_wait(
+        `训练员......训练员君说这种话可真是太狡猾了。`,
+      );
+      await chara_talk.say_and_wait(
+        `......训练员君是不是对其他孩子也是这副说辞？`,
+      );
+      await era.printAndWait(
+        `像是遇到了什么头疼的事情，丸善斯基直直的盯着你看。`,
+      );
+      await chara_talk.say_and_wait(
+        `如果训练员君变成这样放荡的人，姐姐我也是会伤心的哦？`,
+      );
+      await me.say_and_wait(`非常抱歉，绝对没有下次了。`);
+      await chara_talk.say_and_wait(
+        `哈啊，不管怎么样，一定不要对其他的孩子这么说哦，这次的对象是我还好。不，即使是我的话也不要。`,
+      );
+    }
+    await me.say_and_wait(`说起来，丸善斯基。`);
+    await me.say_and_wait(`虽然有些突兀，不过有个问题困扰了我很久。`);
+    await chara_talk.say_and_wait(`哎呀，训练员君也有向姐姐我请教的时刻吗？`);
+    await chara_talk.say_and_wait(`放心吧，我会好好把我知道的部分都告诉你的。`);
+    await era.printAndWait(`你将擦过汗水的毛巾挤干水分后叠起来放回了包中。`);
+    await me.say_and_wait(`丸善斯基一直都很受后辈们的欢迎呢，所以我在想。`);
+    await me.say_and_wait(`也许，我说的是也许，丸善斯基，你`);
+    await me.say_and_wait(`丸善斯基的愿望是什么呢？`);
     await chara_talk.say_and_wait(
-      `比起这个更希望${me.name}也能享受到风带来的快乐哦`,
-    );
-    await era.printAndWait(`两人站在起跑线之后`);
-    await me.say_and_wait(`各就位,预备`);
-    era.printButton(`跑！`, 1);
-    await era.input();
-    await era.printAndWait(
-      `伴随着发令枪的响起,${chara_talk.get_uma_sex_title()}们如同离弦之箭一样向前方冲了出去`,
-    );
-    await me.say_and_wait(`${me.name}家的孩子采用的是先行跑法吧？`);
-    await say_by_passer_by(
-      `浄风幸`,
-      `没错,在试过各类跑法后,还是先行跑法与${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }比较契合`,
-    );
-    await me.say_and_wait(`唔,王道跑法啊`);
-    await era.printAndWait(
-      `因采用先行跑法的${chara_talk.get_uma_sex_title()}在各类比赛中的胜率较高所以也被视为王道跑法`,
-    );
-    await era.printAndWait(
-      `其特点是序盘温存体力然后在中盘开始发力,比起逃马来说在终盘具有更高的加速度`,
-    );
-    await era.printAndWait(
-      `比起${
-        chara_talk.name
-      }在一开始就保持着极快的节奏,那名${chara_talk.get_uma_sex_title()}一直与${
-        chara_talk.name
-      }保持着一定的距离`,
-    );
-    await me.say_and_wait(`${chara_talk.name}差不多要开始发力了`);
-    await chara_talk.say_and_wait(`那么来尝试超过我的背影吧`);
-    await era.printAndWait(`跑过第三个弯道后,${chara_talk.name}开始加速了`);
-    await say_by_passer_by(`浄风幸`, `不愧是超级跑车吗?这惊人的加速度。`);
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `唔,不会输给前辈的！`,
-    );
-    await era.printAndWait(
-      `紧随其后的${chara_talk.get_uma_sex_title()}同样开始冲刺了`,
-    );
-    await chara_talk.say_and_wait(`哈啊啊啊啊啊`);
-    await say_by_passer_by(`${chara_talk.get_uma_sex_title()}`, `唔啊啊啊啊！`);
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `果然我还是离前辈差的远吗,真不甘心。`,
-    );
-    await era.printAndWait(`比试以${chara_talk.name}的压倒式胜利而结束`);
-    await say_by_passer_by(`浄风幸`, `真是看到了一场不错的比赛啊`);
-    await say_by_passer_by(`浄风幸`, `看来我们还要加紧训练了`);
-    era.printButton(`${chara_talk.name}辛苦了`, 1);
-    await era.input();
-    await era.printAndWait(
-      `${me.name}将毛巾和水递给${chara_talk.sex_code - 1 ? '她' : '他'}`,
-    );
-    await chara_talk.say_and_wait(`感觉怎么样？`);
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `能与前辈一起奔跑,非常高兴！`,
-    );
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `下一次我一定会超过前辈的！`,
-    );
-    await me.say_and_wait(`比起懊恼更倾向于积极的一面啊`, true);
-    await me.say_and_wait(`${me.name}遇到了不错的搭档呢。`);
-    await say_by_passer_by(`浄风幸`, `对吧！我家的担当也不赖吧。`);
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `训练员,请加大训练量吧！`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `训练量不是越大越好,${chara_talk.get_uma_sex_title()}的腿很脆弱,如果在出道战前受伤的话,那${
-        me.name
-      }怎么办？`,
-    );
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `只要能超过丸善前辈,区区受伤而已`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `够了,不知道自己的任性会造成多大的后果,我知道你很想超过${chara_talk.name}。`,
-    );
-    await say_by_passer_by(`浄风幸`, `但是你也不能闭着眼睛在钢丝上一路狂奔。`);
-    await say_by_passer_by(
-      `浄风幸`,
-      `不知道有多少${chara_talk.get_uma_sex_title()}因为训练方法的失误不得不取消参赛甚至退役。`,
-    );
-    await me.say_and_wait(`两人之间的氛围不太对劲,不采取行动的话`, true);
-    await me.say_and_wait(
-      `让我来跟${chara_talk.sex_code - 1 ? '她' : '他'}说吧`,
-    );
-    await era.printAndWait(
-      `${me.name}尽可能小心的靠近（${chara_talk.get_uma_sex_title()}）`,
-    );
-    await me.say_and_wait(
-      `（${chara_talk.get_uma_sex_title()}）,${me.name}想超过${
-        chara_talk.name
-      }吗？`,
-    );
-    await era.printAndWait(
-      `${chara_talk.get_uma_sex_title()}面带不悦的看着${me.name}`,
-    );
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `请说吧，丸善前辈的训练员`,
-    );
-    await me.say_and_wait(`这里开始必须要小心了`, true);
-    await me.say_and_wait(
-      `回忆一下,在与${chara_talk.name}追逐的过程中${me.name}感受到了什么`,
-    );
-    await era.printAndWait(
-      `${chara_talk.get_uma_sex_title()}陷入了深思,之后缓缓开口道`,
-    );
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `风,狂风呼啸,让人喘不过气来的压力`,
-    );
-    await me.say_and_wait(`面对这种强敌,平时训练员教给${me.name}的是什么？`);
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `沉着冷静,寻找机会一口气超越过去`,
-    );
-    await era.printAndWait(
-      `像是意识到了什么,${chara_talk.get_uma_sex_title()}向训练员道歉`,
-    );
-    await say_by_passer_by(
-      `${chara_talk.get_uma_sex_title()}`,
-      `抱歉,是我太焦躁了,训练是水滴石穿的过程,一蹴而就是错误的行为`,
-    );
-    await say_by_passer_by(`浄风幸`, `我这边也有不对,接下来的训练一起加油吧`);
-    await era.printAndWait(`两人的手重新握在了一起`);
-    await me.say_and_wait(`能够想通真是太好了`, true);
-    await era.printAndWait(
-      `${me.name}终于松了口气,${chara_talk.name}悄悄向${me.name}竖起了大拇指。`,
-    );
-    await era.printAndWait(`浄风幸「之后有机会还希望你们能多多指教了。」`);
-    era.printButton(`不如说非常欢迎`, 1);
-    await era.input();
-    await chara_talk.say_and_wait(
-      `这场危机${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }就这么轻易化解了呢,${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }真厉害！`,
-    );
-    await era.printAndWait(
-      `等到二人组离开之后,${chara_talk.name}伸出手摸了摸${me.name}的头`,
+      `嗯——就像花园里的园丁一样，在布满杂草的土壤之上埋下种子。`,
     );
     await chara_talk.say_and_wait(
-      `啊,抱歉,不小心把${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }当成弟弟来看待了。`,
+      `浇水、松土、然后施肥，不论外界的变化如何，就这么期待着。`,
     );
-    await me.say_and_wait(
-      `这么轻松能解决还是因为${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }自己想明白了,我只起到了引导的作用。`,
+    await chara_talk.say_and_wait(
+      `虽然有时会遇到狂风骤雨、在松土时也会遇到意外难缠的杂草，但是，看着依靠自己顽强毅力破土而出的花朵们。`,
     );
-    await chara_talk.say_and_wait(`接下来我们也要加油了。`);
-    await me.say_and_wait(`${chara_talk.name}似乎比之前要开朗一点了`, true);
-    await me.say_and_wait(`嗯。`);
-    await era.printAndWait(`${chara_talk.name}的脚步更加灵动了。`);
+    await chara_talk.say_and_wait(
+      `看着美丽的花朵终于绽放的一瞬间，在百感交集之下留下的喜悦泪水，我想，这才是我存在的意义。`,
+    );
+    await me.say_and_wait(`所以，丸善斯基一直都在默默努力着啊。`);
+    await chara_talk.say_and_wait(
+      `当然，像这样带着稚嫩的后辈们慢慢前进，等待她们开花结果的时刻到来。`,
+    );
+    await chara_talk.say_and_wait(`一切的辛苦都将会得到应分的回报。`);
+    await era.printAndWait(`没有激动的情感，丸善斯基平静地说出了自己的梦想。`);
+    await me.say_and_wait(`......真美啊，丸善斯基。`);
+    await me.say_and_wait(`非常感谢，接下来也请多多指教了。`);
+    await chara_talk.say_and_wait(`我这边也是，请多多指教了。`);
+    await era.printAndWait(
+      `虽然冬日的寒冷尚未撤去，但丸善斯基的笑容却令你感到了温暖。`,
+    );
     wait_flag =
       get_attr_and_print_in_event(4, [10, 0, 0, 0, 0], 20) || wait_flag;
   } else if (edu_weeks === 47 + 6) {
     await print_event_name('情人节', chara_talk);
-    await era.printAndWait(`情人节终于到了`);
+    await era.printAndWait(`今天是情人节啊。`);
     await era.printAndWait(`明明空气中散布着巧克力的香味`);
-    await era.printAndWait(
-      `但是喜欢我的${chara_talk.get_uma_sex_title()}却没有出来`,
-    );
-    await era.printAndWait(`啊啊,我的春天什么时候才到啊`);
+    await era.printAndWait(`但是一个巧克力都没收到啊。`);
+    await era.printAndWait(`呜呼，没人气也该有个限度啊。`);
     await era.printAndWait(`因为受不了学院里甜的发腻的气氛所以干脆出来散步`);
     await say_by_passer_by(`浄风幸`, `呦,这不是${me.actual_name}吗？`);
-    await say_by_passer_by(
-      `浄风幸`,
-      `上周才见过面的家伙怎么不去陪自家的孩子了？`,
+    await me.say_and_wait(`真巧啊，在这个地方也能碰到你。`);
+    await me.say_and_wait(`你也是一个人吗？`);
+    await era.printAndWait(
+      `看着样子也知道，如果有可爱的马娘早就跑的不见踪影了。`,
     );
-    await me.say_and_wait(`你为什么也一个人出来了呢？`);
     await say_by_passer_by(
       `浄风幸`,
-      `哈哈,${
+      `啊哈哈,${
         chara_talk.sex_code - 1 ? '她' : '他'
       }跟我说有惊喜要准备给我所以一大早就跑去看巧克力了`,
     );
-    await me.say_and_wait(
-      `看巧克力为什么不拉着${me.name}一起去却在这和我见面了？`,
-    );
-    await me.say_and_wait(`实话是什么？`);
-    await say_by_passer_by(`浄风幸`, `......看来还是瞒不过你啊`);
+    await me.say_and_wait(`所以？`);
+    await say_by_passer_by(`浄风幸`, `......咕唔。`);
     await say_by_passer_by(
       `浄风幸`,
-      `我在训练室等了好久也没看到${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }过来,所以也跑出来呼吸新鲜空气了`,
+      `我在训练室等了好久也没看到人影,所以也跑出来呼吸新鲜空气了`,
     );
     await say_by_passer_by(`浄风幸`, `唔,真是的,连个义理巧克力都没收到。`);
     await say_by_passer_by(`浄风幸`, `明明去年还在团队的时候收到了巧克力的`);
-    await say_by_passer_by(`浄风幸`, `算了不说这个了，今天有什么打算吗？`);
-    await era.printAndWait(`打算吗？我也没想好。`);
-    await chara_talk.say_and_wait(`像温柔的风一样`, true);
-    await era.printAndWait(
-      `像风一样自由吗？不知何时想起了${chara_talk.name}的模样。`,
-    );
-    await me.say_and_wait(
-      `像${me.name}我这样的风一样自由的人当然是走遍天涯海角了`,
-    );
+    await say_by_passer_by(`浄风幸`, `嘛，你今天的打算是什么？`);
+    await era.printAndWait(`嗯。我也没想好。`);
+    await era.printAndWait(`脑海之中突然浮现出了${chara_talk.name}的身影。`);
+    await me.say_and_wait(`像风一样自由的人当然是走遍天涯海角了`);
     await say_by_passer_by(
       `浄风幸`,
       `说什么样风一样,不就是漫无目的的四处乱走吗`,
     );
-    await say_by_passer_by(`浄风幸`, `虽然我很想拒绝，不过加我一个。`);
-
-    await era.printAndWait(
-      `于是两个人勾肩搭背像失散多年的兄弟/兄妹一样到处流浪`,
+    await say_by_passer_by(
+      `浄风幸`,
+      `不过，也许像这样四处闲逛说不定会遇到什么有趣的事情。`,
     );
+    await say_by_passer_by(`浄风幸`, `那么，现在就出发吧。`);
+    await era.printAndWait(`于是两个漫无目的的人开始了四处闲逛。`);
     era.drawLine({ content: '情人旅馆前' });
     await say_by_passer_by(`浄风幸`, `那个好像是我们的前辈吧？`);
-    await me.say_and_wait(`${me.name}这么说好像真的是啊`);
+    await me.say_and_wait(`说起来好像真的是他啊`);
+    await era.printAndWait(`估计是看到了救星一样，前辈向你们眨了眨眼睛。`);
     await say_by_passer_by(`浄风幸`, `是不是在向我们求救啊？`);
     await era.printAndWait(
-      `${
-        me.name
-      }看了看依偎在他旁边的${chara_talk.get_uma_sex_title()}情意绵绵的样子`,
+      `看了看依偎在他旁边的${chara_talk.get_uma_sex_title()}一副吃定的样子，仔细想了想。`,
     );
-    await me.say_and_wait(`......人家${me.name}情我愿的，多是一件美事啊`);
+    await me.say_and_wait(`......没想到这位马娘和训练员的关系真好啊。`);
     await say_by_passer_by(
       `浄风幸`,
       `是啊是啊，今天的空气都充斥着恋爱的酸臭味呢。`,
     );
     await era.printAndWait(
-      `后面传来撕心裂肺的惨叫声，就当无事发生走过的两人有说有笑的离开了。`,
+      `无视了之后传来的骚动，就当无事发生走过的两人有说有笑的离开了。`,
     );
     era.drawLine({ content: '巧克力店前' });
     await era.printAndWait(
-      `兜兜转转之后${me.get_couple_title()}在巧克力店门口停了下来。`,
+      `虽然心照不宣的避开了情侣最多的地方，但兜兜转转之后你们还是在巧克力店门口停了下来。`,
     );
-    await say_by_passer_by(`浄风幸`, `那个是曾作为代理理事长的樫本训练员吗？`);
+    await say_by_passer_by(`浄风幸`, `那边的是作为代理理事长的樫本训练员吗？`);
     await era.printAndWait(
       `樫本理子在两名${chara_talk.get_uma_sex_title()}一前一后的簇拥下挑选着巧克力。`,
     );
-    await say_by_passer_by(
-      `浄风幸`,
-      `怎么${chara_talk.sex_code - 1 ? '她' : '他'}今天有空来选巧克力了？`,
-    );
+    await say_by_passer_by(`浄风幸`, `怎么她今天有空来选巧克力了？`);
     await say_by_passer_by(`浄风幸`, `要进去打个招呼吗？`);
     era.printButton(
       `还是不要打扰${chara_talk.sex_code - 1 ? '她' : '他'}们吧。`,
@@ -1269,26 +1354,27 @@ module.exports = async function (hook, _, event_object) {
     );
     await era.input();
     await era.printAndWait(
-      `尚在争论的时候，樫本理子已经挑选好了巧克力准备离开了`,
+      `虽然还在思考的时候，樫本理子已经挑选好了巧克力准备离开了`,
     );
     await era.printAndWait(
-      `似乎准备沿着相反的方向继续前进，所以${
+      `似乎是准备沿着相反的方向离开，所以${
         chara_talk.sex_code - 1 ? '她' : '他'
-      }匆匆和你们打了个招呼就离开了`,
+      }似乎没看到你们就匆匆离开了`,
     );
     era.drawLine({ content: '过了一段时间后' });
     await era.printAndWait(
       `在逛了这么久后还在有些劳累,所以找了一个位置准备休息。`,
     );
-    await era.printAndWait(
-      `浄风幸「呼，真是累死了，要是有${chara_talk.get_uma_sex_title()}来找我就好了」`,
+    await say_by_passer_by(
+      `浄风幸`,
+      `呼——总算可以坐下来稍微休息一下了，上次走这么远还是找舞台的时候。`,
     );
     await era.printAndWait(`${me.actual_name}接过他递过来的饮料小抿了一口。`);
     await me.say_and_wait(
-      `真是得救了,接下来的话.....那边是${chara_talk.get_uma_sex_title()}吗？`,
+      `真是得救了,接下来.....那边是你的担当${chara_talk.get_uma_sex_title()}吗？`,
     );
     await era.printAndWait(
-      `看到一位${chara_talk.get_uma_sex_title()}走出了街对面的店铺`,
+      `你看到似乎很眼熟的一位${chara_talk.get_uma_sex_title()}走出了街对面的店铺`,
     );
     await me.say_and_wait(`是你家的孩子吧`);
     await say_by_passer_by(
@@ -1296,24 +1382,30 @@ module.exports = async function (hook, _, event_object) {
       `嗯......还真是，抱歉失陪了，我要去找我家的孩子了。`,
     );
     await era.printAndWait(`净风幸站了起来朝着街对面走去。`);
+    await era.printAndWait(`在街道的座位上，你又稍微休息了一刻钟。`);
     await me.say_and_wait(`接下来又只剩我一个人了吗`, true);
-    await me.say_and_wait(`说到底朋友也不过就是同行一段路的孤独旅客罢了。`);
+    await me.say_and_wait(`嘛，像这样一个人呆着真是放松啊。`);
     await me.say_and_wait(`接下来是继续前行还是直接返回特雷森呢。`);
-    await me.say_and_wait(`做决定真是件困难的事情`);
-    await me.say_and_wait(`总之......${chara_talk.name}？`);
+    await me.say_and_wait(`自己做决定可真是件困难的事情`);
+    await me.say_and_wait(`总之......那边的马娘是？`);
     await era.printAndWait(`看着${chara_talk.name}提着一大袋东西正准备上车`);
     await me.say_and_wait(`${chara_talk.name}！`);
+    await era.printAndWait(`错觉吗？刚刚马耳似乎在动的样子。`);
     await era.printAndWait(`虽然尽力向对面跑去，但还是迟了一步。`);
-    await me.say_and_wait(`总之先回到特雷森吧`);
+    await me.say_and_wait(`说不定是因为太过敏感被认为是幻听了吧。`);
+    await era.printAndWait(
+      `因为风啊，数目抖动、呼唤着发音类似人名而导致了幻听。`,
+    );
+    await era.printAndWait(`总之还是先回趟训练室吧。`);
     era.drawLine({ content: '训练室门口' });
     await era.printAndWait(`${me.name}垂头丧气的回到了训练室`);
+    await era.printAndWait(`然而却被从哪里放出的礼炮把${me.name}吓了一跳`);
     await chara_talk.say_and_wait(
       `surprise！${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}`,
     );
-    await era.printAndWait(`不知从哪里放出的礼炮把${me.name}吓了一跳`);
-    era.printButton('「呜哇」', 1);
+    era.printButton('呜啊', 1);
     await era.input();
-    await era.printAndWait(`${chara_talk.name}似乎在这里等了${me.name}很久了`);
+    await era.printAndWait(`${chara_talk.name}似乎在这里等你很久了`);
     await chara_talk.say_and_wait(
       `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'},感觉怎么样？`,
     );
@@ -1328,71 +1420,203 @@ module.exports = async function (hook, _, event_object) {
     );
     await era.printAndWait(`${chara_talk.name}从身后拿出了包装精美的巧克力`);
     await chara_talk.say_and_wait(
-      `这份手工巧克力只送给${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }一个人哦`,
+      `因为是第一次尝试做巧克力的缘故，如果不好吃的话一定要说出来哦？，`,
     );
-    era.printButton(`「谢谢${me.name}！${chara_talk.name}」`, 1);
+    era.printButton(`谢谢你！丸善斯基。`, 1);
     await era.input();
+    await me.say_and_wait(`这是我度过的最棒的情人节了。`);
+    await chara_talk.say_and_wait(
+      `训练员君喜欢的话当然是最好了，能看到训练员君露出幸福的笑容，总觉得心里也有种不一样的怮动呢。`,
+    );
     await era.printAndWait(
-      `之后${me.name}和${chara_talk.name}一起度过了不一般的情人节。`,
+      `之后你和${chara_talk.name}一起度过了一个甜蜜的情人节。`,
     );
     wait_flag =
       get_attr_and_print_in_event(4, [0, 0, 20, 0, 0], 0) || wait_flag;
     era.set('cflag:4:节日事件标记', 0);
-  } else if (edu_weeks === 47 + 19) {
-    await print_event_name('未来的憧憬', chara_talk);
-    await era.printAndWait(`${chara_talk.name}下周准备挑战德比。`);
-    await era.printAndWait(`以其压倒性的实力，胜利应该不是问题。`);
-    await me.say_and_wait(`但真正的问题在于——`, true);
-    await chara_talk.say_and_wait(
-      `呵呵~${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }，现在还在准备比赛的事情吗？`,
-    );
-    await era.printAndWait(`${chara_talk.name}熟练的打开了训练室。`);
+  } else if (edu_weeks === 47 + 7) {
+    await print_event_name('偶像', chara_talk);
+    await era.printAndWait(`训练室`);
+    await era.printAndWait(`距离春季锦标还有两个星期。`);
     await era.printAndWait(
-      `经过一年多的训练与相处，${me.name}与${chara_talk.name}变成了比较亲密的关系了。`,
+      `处理完最后一份文件后，${me.actual_name}放下了手中的笔，长长的呼出了一口气。`,
     );
-    era.printButton(`${chara_talk.name}今天也很新潮呢。`, 1);
-    await era.input();
-    await chara_talk.say_and_wait(`我就当作是在夸奖我哦？`);
-    era.printButton(`所以今天也是因为帮助后辈们所以忙到了现在吗？`, 1);
-    await era.input();
-    await chara_talk.say_and_wait(
-      `如果训练员处在我的立场上的话也会和我做出一样行动的吧？`,
+    await me.say_and_wait(`终于处理完了。`);
+    await me.say_and_wait(`但是。`);
+    await era.printAndWait(`一直以来都有的一个疑问。`);
+    await era.printAndWait(`被死死压制住，不，干脆是不愿意去回忆。`);
+    await me.say_and_wait(`丸善斯基。`);
+    await era.printAndWait(`园丁。`);
+    await me.say_and_wait(`一直习惯于以强者的姿态面临问题。`);
+    await era.printAndWait(
+      `希望能以教育者的姿态，通过自己的经验尽可能帮助那些可爱的小马娘。`,
     );
-    await me.say_and_wait(`虽说如此，不过如果因为助人为乐而疏忽训练的话`);
-    era.printButton(`在之后的德比中后辈们说不定会伤心的哭出来呢。`, 1);
-    await era.input();
-    await chara_talk.say_and_wait(
-      `讨厌啦，${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }，现在也在拿我开玩笑⭐`,
+    await me.say_and_wait(`但是，作为园丁的道路，不是那么理想的世界。`);
+    await say_by_passer_by(`马娘`, `打扰了。`);
+    await era.printAndWait(`一位瘦小的马娘走了进来。`);
+    await say_by_passer_by(`马娘`, `那个，请问丸善前辈在这里吗？`);
+    await me.say_and_wait(
+      `丸善斯基有事暂时离开了，你先在这里坐着稍微休息一下吧。`,
     );
-    await chara_talk.say_and_wait(
-      `如果说有${chara_talk.get_uma_sex_title()}能够超越我的背影的话，说不定我更满足呦♪`,
+    await say_by_passer_by(`马娘`, `这样吗......啊，非常感谢！`);
+    await era.printAndWait(`你将一罐胡萝卜汁放在了沙发桌上。`);
+    await era.printAndWait(
+      `你打开了之前看到一半的，丸善斯基参加朝日杯的录像。`,
     );
-    await chara_talk.say_and_wait(
-      `比起这个，${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }也不要太过疲惫了。`,
+    await say_by_passer_by(`马娘`, `诶，这个是丸善前辈的！`);
+    await me.say_and_wait(`你也喜欢看录像吗？`);
+    await say_by_passer_by(
+      `马娘`,
+      `嗯！丸善前辈冲线部分的特写，我反复看了五六遍呢！`,
+    );
+    await say_by_passer_by(
+      `马娘`,
+      `不如说，通过模仿丸善前辈的摆动方式，说不定我也能顺利在G3上获胜！`,
+    );
+    await me.say_and_wait(`......原来是这样吗？`);
+    await say_by_passer_by(
+      `马娘`,
+      `诶...嗯。因为本格化的时间比较早，所以初中的时候就作为赛马娘参赛了。`,
+    );
+    await say_by_passer_by(
+      `马娘`,
+      `不过，虽然三年过去了，但除了出道战胜利以外，最好的成绩也只有G3的五着。`,
+    );
+    await era.printAndWait(`马娘捧着手中的胡萝卜汁，凝视着里面的橘黄色液体。`);
+    await say_by_passer_by(
+      `马娘`,
+      `虽然也为此付出了大量的努力，不过几乎没有什么成长。`,
+    );
+    await say_by_passer_by(
+      `马娘`,
+      `只是重复着，重复着同样的行动，就这样浑浑噩噩的度过。`,
+    );
+    await say_by_passer_by(`马娘`, `我也想过，说不定是我的方法出现了问题。`);
+    await say_by_passer_by(
+      `马娘`,
+      `不过，仅仅只是在脑海里稍微想了一下就这么搁置了。`,
+    );
+    await say_by_passer_by(
+      `马娘`,
+      `也许，我并不适合作为赛马娘，是时候去找其他方向的出路了。`,
+    );
+    await era.printAndWait(`说完，马娘沉默注视着你和丸善斯基取得的奖杯。`);
+    await me.say_and_wait(`......`);
+    await era.printAndWait(`赛马娘界不是那个付出就能得到回报的温柔的世界。`);
+    await era.printAndWait(`尽管如此。`);
+    await me.say_and_wait(`付出终会有回报的一天。`);
+    await era.printAndWait(`心乱如麻，恐怕这个马娘也是这么想的吧。`);
+    await say_by_passer_by(`马娘`, `.....谢谢。`);
+    await say_by_passer_by(
+      `马娘`,
+      `啊，抱歉，呆的太久了，既然丸善前辈还没过来的话，那我先告辞了。`,
+    );
+    await era.printAndWait(`将喝完的罐头扔进垃圾桶后，马娘向你道别。`);
+    await me.say_and_wait(`祝你武运昌隆。`);
+    await say_by_passer_by(`马娘`, `嗯，再见。`);
+    await era.printAndWait(`带着苦涩笑容的马娘轻轻关上了训练室的门。`);
+  } else if (edu_weeks === 47 + 17) {
+    // 玩家病倒，丸善斯基照顾，夏季合宿阶段丸善斯基生病，玩家照顾，核心语句应该包括对人生的意义看法，为后文丸善斯基的觉醒做铺垫
+    await print_event_name('憧憬', chara_talk);
+    await era.printAndWait(`训练室\n`);
+    await era.printAndWait(
+      `厚厚的黑眼圈伴随着挥之不去的咖啡，你将手中的文件看了一遍又一遍。`,
+    );
+    await me.say_and_wait(`以现在的姿态去挑战德比的话`);
+    //todo 耐力小于300
+    await me.say_and_wait(`不行，属性太低了，这周必须加强耐力训练`);
+    //todo 耐力大于300
+    await me.say_and_wait(`接下来提高力量与根性吧，啊嚏！`);
+    await era.printAndWait(
+      `集中的注意力被喷嚏所打断，你抽了张放在右手边的餐巾纸，然后扔进了满满的垃圾桶中。`,
+    );
+    await me.say_and_wait(`等处理完这份文件。`, true);
+    await era.printAndWait(
+      `身体好冷，像是全身埋进了冰块之中，视野也变得模糊了起来。`,
     );
     await era.printAndWait(
-      `${chara_talk.sex_code - 1 ? '她' : '他'}将一份咖啡放到了${
-        me.name
-      }的桌子上。`,
+      `原以为自己年轻力壮稍微熬了一个星期的夜没关系，却没想到身体先撑不住垮掉了。`,
+    );
+    await me.say_and_wait(`这该死的身体，感冒药，感冒药在哪里？`);
+    await era.printAndWait(
+      `打开抽屉，抽出写着退烧药的纸盒子，却发现里面的药早就吃光了。`,
+    );
+    await me.say_and_wait(`......这样吗？至少趁脑子还能运转的时候。`);
+    await era.printAndWait(
+      `已经没有什么比这更加糟糕的情况了，心情却变得轻松了起来。`,
+    );
+    await era.printAndWait(
+      `从饮水机倒了一杯温水后，一饮而尽的你重新坐回了座位。`,
+    );
+    await me.say_and_wait(`得加快速度了。`);
+    await era.printAndWait(
+      `牙齿因感受到寒冷而不自觉的上下打架，发出了一连串的”哒哒哒“声，喉咙也变得吞咽困难。`,
+    );
+    await era.printAndWait(
+      `只是为了满足”快点完成这份工作“，”还不能在这里倒下“的这份心情，你咬牙坚持着。`,
+    );
+    await me.say_and_wait(`结束了！`);
+    await era.printAndWait(
+      `敲下最后一个字母后，因为完成带来的满足而放松的精神终于坚持不住。视野开始天旋地转了，大概，自己已经到极限了吧。`,
+    );
+    await era.printAndWait(`于是你，满足的倒下了。`);
+    await chara_talk.say_and_wait(`训练员君？`);
+    await era.printAndWait(`在意识消失之前，你听到了丸善斯基的声音。`);
+    era.drawLine();
+    await era.printAndWait(`就好好看着我吧，作为在赛马娘生涯上的前辈。`);
+    await era.printAndWait(`请好好注视着我吧，就这样被我永远的甩在后面。`);
+    await era.printAndWait(`请好好祝福着我吧，现在，轮到你为我喝彩了。`);
+    await me.say_and_wait(`这样啊。`);
+    await era.printAndWait(
+      `大概是某个不知名的马娘心底的声音不小心漏了出来吧。`,
+    );
+    await chara_talk.say_and_wait(`训练员君？`);
+    await era.printAndWait(`似乎有人在呼唤着你。`);
+    await chara_talk.say_and_wait(`训练员君`);
+    await era.printAndWait(`该醒了。`);
+    await era.printAndWait(`于是你睁开了眼睛。`);
+    await chara_talk.say_and_wait(`训练员君你终于醒了。`);
+    await me.say_and_wait(`这里是？`);
+    await era.printAndWait(`环绕四周，似乎是你生活的地方。`);
+    await chara_talk.say_and_wait(`稍微等一下。`);
+    await era.printAndWait(`丸善斯基走进了厨房，然后端出了一碗粥。`);
+    await chara_talk.say_and_wait(
+      `已经煮好一段时间了，如果还是有点烫的话，要和我说哦。`,
+    );
+    await era.printAndWait(
+      `温暖的流体送进了你的口中，昏昏沉沉的大脑只能凭借本能认定这是对自己有利的东西。`,
+    );
+    await me.say_and_wait(`不用了，我自己来。`);
+    await era.printAndWait(
+      `刚想要就这么坐起来，却被更加强而有力的双手制止住了。`,
     );
     await chara_talk.say_and_wait(
-      `虽然辛苦的汗水构成了胜利的阶梯，但过度劳累的话效率也会降低。`,
+      `现在不是逞强的时候，病人应该乖乖躺在床上然后好好休息。`,
     );
-    await chara_talk.say_and_wait(`虽然这么说的话会有点奇怪，不过——`);
-    await era.printAndWait(`${chara_talk.name}温柔的抚摸着${me.name}的头。`);
-    await chara_talk.say_and_wait(
-      `——今天也辛苦${me.name}了，我最亲爱的${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }♪`,
+    await me.say_and_wait(`丸善斯基...`);
+    await era.printAndWait(
+      `终于耗尽了最后一丝力气，不得不躺在床上。努力将送入口中的食物吞咽下去。`,
     );
+    await era.printAndWait(
+      `那双温暖的双手，以及那副认真的模样，不知不觉间，似乎与母亲的面貌慢慢重合在了一起。`,
+    );
+    await me.say_and_wait(`......妈妈。`);
+    await era.printAndWait(`怀念的气息让你闭上了眼睛，陷入了沉沉的睡眠之中。`);
+    await era.printAndWait(`因为恐惧而不断奔波的身体，终于得到了安心。`);
+    era.drawLine();
+    await me.say_and_wait(`......什么时候？`);
+    await era.printAndWait(
+      `睁开眼睛，正打算爬起来的时候，看见了在椅子上休息的少女趴在床上睡着了。`,
+    );
+    await era.printAndWait(
+      `尽力以不会产生颤抖的动作掀开窗帘一角，一丝光芒照在了你的脸上，天亮了。`,
+    );
+    await chara_talk.say_and_wait(`唔。`);
+    await era.printAndWait(
+      `所幸，直立起身体的微微颤动仅仅只是让她无意识的换了一个姿势，均匀的呼吸声没有被打断。`,
+    );
+    await me.say_and_wait(`就这样一直等到她醒来吧。`, true);
+    await era.printAndWait(`这么想着，你闭上了眼等待着天亮的时候。`);
     wait_flag =
       get_attr_and_print_in_event(4, [0, 0, 0, 0, 10], 0) || wait_flag;
   } else if (edu_weeks === 47 + 29) {
@@ -1404,48 +1628,41 @@ module.exports = async function (hook, _, event_object) {
       return false;
     }
     await print_event_name('夏季合宿', chara_talk);
-    await chara_talk.say_and_wait(
-      `${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }，我们比其他人都快了一步到沙滩了哦`,
-    );
+    await era.printAndWait(`沙滩`);
+
+    await era.printAndWait(`虽说是理事长的私人沙滩。`);
+    await era.printAndWait(`空气却带着一股感到清凉感。`);
+    await era.printAndWait(`也许是因为靠近大海的缘故吧，`);
+    await era.printAndWait(`海风带着远远的一进一退的波浪声传来了潮湿的气息。`);
     await era.printAndWait(
-      `为了在炎炎夏日中让特雷森的赛${chara_talk.get_uma_sex_title()}们高效的训练，理事长破天荒的决定让赛事中的${chara_talk.get_uma_sex_title()}们使用${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }的私人沙滩`,
+      `从小塔之上下来，丸善斯基带着满足的感觉微眯着双眼享受着度假的气息——`,
     );
-    await me.say_and_wait(`为什么不跟着学院的大巴一起过来啊。`);
-    await chara_talk.say_and_wait(
-      `能和${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }两人一起约会的机会可不能错过⭐`,
-    );
+    await me.say_and_wait(`话说，为什么不去乘校车啊。`);
     await era.printAndWait(
-      `自德比发生的事情之后，${chara_talk.name}便陷入了深深的自我怀疑`,
-    );
-    await era.printAndWait(
-      `作为专属训练员的${me.name}虽然痛苦但也明白这条道路只能${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }自己得出结论`,
-    );
-    await era.printAndWait(
-      `所以${me.name}开始慢慢引导${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }走出心伤，等待着合适的契机彻底解决问题。`,
+      `在丸善斯基强烈要求之下，你们在小塔的帮助下来到了理事长的私人沙滩。`,
     );
     await chara_talk.say_and_wait(
-      `比起这个${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }感受到了海风的吹拂吗？`,
-    );
-    await era.printAndWait(`${chara_talk.name}眯起了眼睛像是回忆到了什么一样`);
-    await me.say_and_wait(
-      `比起之前一直蜷缩在训练室的沙发上要好上许多倍了`,
-      true,
+      `因为是第一次夏季特训的缘故，稍微想让小塔也感受一下，结果...在中途的时候不小心就按照比赛时候的...感觉了，抱歉呢。`,
     );
     await me.say_and_wait(
-      `必须找到合适的契机让${chara_talk.sex_code - 1 ? '她' : '他'}自己想明白`,
-      true,
+      `哈啊——丸善斯基，你也知道夏季合宿是快速提高能力的捷径吧？`,
+    );
+    await me.say_and_wait(`稍微~比平常要更加认真一点吧。`);
+    await chara_talk.say_and_wait(
+      `唔，抱歉。既然训练员君都这么说了，那么姐姐我不认真一点也不行呢⭐`,
+    );
+    era.printButton(`这不是当然的吗？`, 1);
+    await era.input();
+    await era.printAndWait(`嘛，虽然你也没资格说就是了。`);
+    await me.say_and_wait(`这样的话，接下来就好好享受青春吧。`);
+    await era.printAndWait(`有些人按照身体感觉来走才是更加正确的道路。`);
+    await era.printAndWait(`所以最好还是不要干涉吧。`);
+    await chara_talk.say_and_wait(
+      `像这样感受着海风带来的吹拂，心情也变得更加开朗了呢。`,
+    );
+    await me.say_and_wait(`比之前一直在训练室的沙发上要好上许多倍了`, true);
+    await chara_talk.say_and_wait(
+      `像这样感受着海风带来的吹拂，心情也变得更加开朗了呢。`,
     );
     await era.printAndWait(
       `看着在沙滩上邀请${me.name}一起享受的${chara_talk.name}，${me.name}下定了决心。`,
@@ -1454,169 +1671,409 @@ module.exports = async function (hook, _, event_object) {
       get_attr_and_print_in_event(4, [10, 0, 0, 0, 0], 0) || wait_flag;
   } else if (edu_weeks === 47 + 30) {
     await print_event_name('庙会', chara_talk);
-    await era.printAndWait(`夏季合宿进行到了第二周，效果比想象之中更差。`);
+    await me.say_and_wait(`真是热闹啊。`);
     await era.printAndWait(
-      `${chara_talk.name}似乎对于训练存在一定状态的抵触心理，时常陷入走神的状态中。`,
+      `与丸善斯基约定好了一起来参加据说非常盛大的庙会，但你在入口处等了很久也没看见她的身影。`,
     );
     await era.printAndWait(
-      `虽然知道不能就这样下去，但因为找不到说服自己继续前进的办法。`,
+      `“是人流太大迷路了吧”正当你放空大脑看着人群不断汇入灯笼装饰着的庙会，眯着眼着打了一个哈欠时。`,
     );
+    await me.say_and_wait(`真是热闹啊。`);
     await era.printAndWait(
-      `${me.actual_name}站在了十字路口之中，同样徘徊着犹豫。`,
+      `跟预想之中只是寥寥几个摊位的情况完全不同，从四面八方汇聚的游客与摊位从街道的这头一直蔓延到了街道的另一头。`,
+    );
+    await say_by_passer_by(`摊主`, `在这里发呆的少年，不来尝尝新鲜的水果吗？`);
+    await me.say_and_wait(`诶？`);
+    await era.printAndWait(`被流动的人群推赶着，不知不觉站在了水果摊面前。`);
+    await say_by_passer_by(`摊主`, `看这样子是第一次来参加庙会的吧？`);
+    await era.printAndWait(
+      `似乎是因为收益不错心情也变好的缘故，大叔开始涛涛不绝的说了下去。`,
     );
     await say_by_passer_by(
-      `浄风幸`,
-      `附近的小镇似乎在举行的祭典，一起去放松一下吧。`,
+      `摊主`,
+      `想想看也是，毕竟这里可是被评为旅游时必逛的庙会之一。`,
     );
-    await me.say_and_wait(`抱歉，现在没有这个心情。`);
     await say_by_passer_by(
-      `浄风幸`,
-      `不，是我唐突了，你看上去也一副苦瓜脸的样子，多笑一笑。`,
+      `摊主`,
+      `毕竟整个小镇因为靠近这片美丽的沙滩可是吸引了不少的游客前来度假呢。`,
     );
-    await era.printAndWait(`后背传来了一阵疼痛。`);
-    await me.say_and_wait(`真是的，有必要用这么大的力气吗。`);
+    await say_by_passer_by(
+      `摊主`,
+      `虽然以前这里不过只是一个交通不便的平平无奇的乡村罢了，不过自从这边的沙滩出名之后，前来参观的游客也变得多了起来。`,
+    );
+    await say_by_passer_by(
+      `摊主`,
+      `后来伴随着铁路的开通，人们都哗的一下往这边跑了，最后变成了现在的小镇。`,
+    );
+    await me.say_and_wait(`那个？请问`);
+    await say_by_passer_by(
+      `摊主`,
+      `哦。看我这记性，说起来你是因为迷路才站在这里的吧？`,
+    );
+    await say_by_passer_by(
+      `摊主`,
+      `也是，因为这个庙会有四个一摸一样的入口嘛，虽然我不懂什么艺术之类的东西，不过每年都能看到与其他人约定在入口处集合而找不到人的乐子。`,
+    );
     await era.printAndWait(
-      `揉着酸痛的后背，${me.actual_name}下意识抱怨了起来。`,
+      `似乎正讲到兴头之上，看上去因为是小镇的本地居民而自豪的大叔带着洪亮的嗓门介绍着。`,
     );
     await say_by_passer_by(
-      `浄风幸`,
-      `那还真是抱歉了，我这个人天生力气就大,谁叫三女神大人赋予俺这么大的力气。`,
+      `摊主`,
+      `顺带一提，如果想走完整个庙会的话，从这里出发一路直走能看到这边的特色演出。`,
     );
-    await me.say_and_wait(`快去陪你担当一起出发吧。`);
-    await say_by_passer_by(`浄风幸`, `哈哈哈哈。`);
-    await era.printAndWait(`那个男人就这样离开了。`);
-    await me.say_and_wait(`真是难懂的人。`);
-    await me.say_and_wait(`不过祭典吗？`);
-    await me.say_and_wait(`要邀请${chara_talk.name}一起吗？`, true);
-    era.printButton(`就这么办吧`, 1);
-    era.printButton(`......不，还是算了吧`, 2);
+    await say_by_passer_by(
+      `摊主`,
+      `今晚说不定能在观看庆典的人群那里大赚一笔呢，哈哈哈。`,
+    );
+    await era.printAndWait(`说完最后一句话后，唾沫横飞的大叔终于停下了对话。`);
+    await say_by_passer_by(`手机`, `嗡嗡嗡`);
+    await era.printAndWait(
+      `口袋中的手机发出了震动的声音。在人们大多为了演出而出发的现在，现在会打电话的不言而喻了。`,
+    );
+    await chara_talk.say_and_wait(`训练员君你在哪里？`);
+    await era.printAndWait(
+      `口袋中的手机发出了震动的声音。在人们大多为了演出而出发的现在，现在会打电话的不言而喻了。`,
+    );
+    await chara_talk.say_and_wait(
+      `明明是精心准备了一番，看着手机上拍下的照片赶到入口处的时候，却怎么也没看到训练员君的样子。`,
+    );
+    await chara_talk.say_and_wait(
+      `虽然自认不会错过训练员君的身影，不过左看右看都找不到训练员君的身影，姐姐我还是有点伤心呢><。`,
+    );
+    await era.printAndWait(`是搞错了入口吧，不，说不定大概我也搞错了？`);
+    era.printButton(`不好意思打扰了。`, 1);
+    await era.input();
+    await say_by_passer_by(`摊主`, `嗯？是想问怎么分辨入口吧？`);
+    await say_by_passer_by(`摊主`, `也是，毕竟每年都有人问这个问题。`);
+    await say_by_passer_by(
+      `摊主`,
+      `平时的时候很容易分辨的地方，人一多起来看什么就都是一样的了。`,
+    );
+    await say_by_passer_by(
+      `摊主`,
+      `你叫那位朋友从入口处走到第五个摊位，那边有专门负责引导的志愿者。`,
+    );
+    await era.printAndWait(`大叔一边说着一边自然拿出了一份地图指给了你看。`);
+    await say_by_passer_by(
+      `摊主`,
+      `如果要赶演出的话，走这条路，现在赶过去还来得及。`,
+    );
+    await era.printAndWait(`虽然因为过于热情而有点奇怪但是很好心的大叔。`);
+    await era.printAndWait(
+      `向他道谢之后，你将原话告诉了丸善斯基便匆忙赶了过去。`,
+    );
+    era.drawLine();
+    await era.printAndWait(`快来吧，快来吧，不远处就是盛大的舞台。`);
+    await era.printAndWait(`忘却这份烦恼吧，在这份热情的舞动之中翩翩起舞吧。`);
+    await era.printAndWait(
+      `融化在这份盛大的庆典之中吧，就这样和我一起祈祷她永不落幕吧。`,
+    );
+    await era.printAndWait(
+      `带着泪水与汗水交织而成的喜悦，带着迷茫与痛苦最终释然吧。`,
+    );
+    await era.printAndWait(
+      `就像沙滩之上亮晶晶的沙子一样，你们的喜悦与解脱最终将被历史所铭记。\n`,
+    );
+    await me.say_and_wait(`总算到目的地了。`);
+    await era.printAndWait(
+      `前来观看表演的人群络绎不绝，人们或站或坐，举着饮料或者相机观看着舞台之上的精彩表演。`,
+    );
+    await era.printAndWait(
+      `人们呼出的气息仿佛织成了一张薄薄的网，小孩子们尖叫着在人群之中兴奋的跑来跑去。`,
+    );
+    await me.say_and_wait(`人可真多啊。`);
+    await era.printAndWait(
+      `尽管已经相当注意自己的脚下，但还是好几次被疯跑着的孩童差点撞得失去平衡。`,
+    );
+    await me.say_and_wait(`好热，不过当务之急还是要先找到丸善斯基——`);
+    await era.printAndWait(
+      `虽然想将自己的定位发给她，但在这么多的人群中，就连手机的信号也变得断断续续的。`,
+    );
+    await chara_talk.say_and_wait(`训练员君！`);
+    await era.printAndWait(
+      `夜幕低垂，舞台的灯光逐一亮起，在场的游客将自身的注意力集中于舞台之上——`,
+    );
+    await era.printAndWait(
+      `除了看着丸善斯基的你与注视到你的目光挥着手小跑过来的丸善斯基。`,
+    );
+    era.printButton(`能看到丸善斯基真是太好了`, 1);
+    await era.input();
+    await era.printAndWait(
+      `像是心中的一块大石终于落到了地上，你长长的呼出了一口气。`,
+    );
+    await chara_talk.say_and_wait(`总算找到你了，姐姐我也是松了一口气呢。`);
+    await me.say_and_wait(`抱歉，虽然我也想尽快和丸善斯基汇合，不过——`);
+    await chara_talk.say_and_wait(
+      `嗯~比起道歉的话，接下来训练员君和我一起看表演才是最能用行动作为补偿吧。`,
+    );
+    await me.say_and_wait(
+      `......直到舞台结束为止，我都不会离开丸善斯基身边的。`,
+    );
+    await me.say_and_wait(`所以，请让我和你一起创造这份美好的回忆吧。拜托了！`);
+    await chara_talk.say_and_wait(`哎呀，这是什么新型告白方式吗？`);
+    await chara_talk.say_and_wait(`姐姐我也是稍~微有点心动了呢。`);
+    await chara_talk.say_and_wait(`既然这样的话，训练员君就不要离开我了哦？`);
+    await era.printAndWait(
+      `受邀参加演出的马娘穿着流光溢彩的服饰轻盈的跃上了舞台，灯光一下子全部集中在了她的身上，此刻的她仿佛变成了这份沙滩之中最为耀眼的存在。`,
+    );
+    await me.say_and_wait(`丸善斯基？`);
+    await era.printAndWait(
+      `她的动作流畅而美丽，让人不禁想起了不远处仍在汹涌奔流着的海浪，随着节奏而悄然出现的民族风伴奏将这位身着深蓝色的服饰的马娘烘托成了于海洋深处悄然来到陆地之上翩翩起舞的精灵。`,
+    );
+    await me.say_and_wait(`丸善斯基！`);
+    await chara_talk.say_and_wait(`嗯？训练员君怎么了？`);
+    await era.printAndWait(
+      `被稍稍提高了声音的你而吓到了的少女看着询问的目光看着你。`,
+    );
+    await era.printAndWait(`你的决定是`);
+    era.printButton(`丸善斯基，请告诉我你的痛苦与悲伤吧。`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(`......`);
+    await era.printAndWait(
+      `舞台之上的少女拼尽自己的全力，洒下的汗水汇聚成了一阵又一阵的浪潮起伏。`,
+    );
+    await era.printAndWait(
+      `观众们带着期待的目光，聚精会神的看着在舞台之上闪耀的那个偶像。`,
+    );
+    await era.printAndWait(`而从始至终，丸善斯基都保持着那份令人不安的沉默。`);
+    await me.say_and_wait(`恐怕现在就是关键时刻了。`, true);
+    await me.say_and_wait(`无论如何都要保持着耐心。`, true);
+    await era.printAndWait(
+      `台上的少女，每一次旋转，每一个跳跃，都牢牢的将观众们的内心紧紧抓住。`,
+    );
+    await era.printAndWait(`观众们屏息等待着那个时刻的到来。`);
+    await chara_talk.say_and_wait(`果然，还是瞒不过训练员君吗？`);
+    await era.printAndWait(
+      `突然，像是平地一声雷响起，观众们爆发出了热烈的掌声与欢呼声。`,
+    );
+    await era.printAndWait(
+      `将带着的微笑面具摘下，丸善斯基露出了悲伤与成功解脱的释然表情看着你。`,
+    );
+    await era.printAndWait(
+      `就连这份疼痛都已经消失，带着这份几乎要瘫在地上的麻木感，少女品尝到了不知道是汗水还是泪水的咸味。`,
+    );
+    await chara_talk.say_and_wait(
+      `...接下来，换个地方说吧？${me.actual_name}？`,
+    );
+    await era.printAndWait(
+      `被散发出的迷人诱香的果实所吸引的无数游客们汇入了这份盛况之中，今夜，才刚刚进入高潮。`,
+    );
+    era.drawLine();
+    await era.printAndWait(
+      `逆着期待欢愉与忘却的人流，你们像是散步一样来到了附近的一处神社。`,
+    );
+    await era.printAndWait(
+      `欢乐已达高潮，游客们的目光纷纷聚焦在了小镇中心的舞台上，`,
+    );
+    await era.printAndWait(`要是说偏僻的话，亦是存在比此处更为偏僻的地方，`);
+    await era.printAndWait(
+      `然而，此处既不因过于幽静而显得恐惧，也不因过于喧嚣而使人感到不安。`,
+    );
+    await chara_talk.say_and_wait(`三女神大人，请听我诉说。`);
+    await era.printAndWait(
+      `与投入赛钱箱中的马币之间碰撞的清脆声音同时发生的来自丸善斯基的祈祷。`,
+    );
+    era.printButton(`投入马币`, 1);
+    await era.input();
+    await era.printAndWait(`你效仿着丸善斯基的动作，闭上眼睛向着三女神祈祷。`);
+    era.printButton(`三女神大人，请指引痛苦之人吧`, 1);
+    era.printButton(`三女神大人，请指引迷茫之人吧`, 2);
+    await era.input();
+    await era.printAndWait(`许下了愿望之后，你看向了一旁的少女。`);
+    await era.printAndWait(
+      `她死死的注视着赛钱箱——不，她看向了那未知的，遥远的地方。`,
+    );
+    await me.say_and_wait(`丸善斯基在哭泣吗？`, true);
+    await say_by_passer_by(`巫女`, `实在抱歉，今天的姻缘符已经送完了。`);
+    await era.printAndWait(
+      `少顷，揉着双眼打着哈欠的巫女才从观看表演的人群中姗姗来迟。`,
+    );
+    await say_by_passer_by(
+      `巫女`,
+      `......如果可以的话，请两位客人收下这个吧。`,
+    );
+    await era.printAndWait(
+      `似乎意识到了什么，巫女从长袖中缝合的小口袋里拿出了护身符。`,
+    );
+    await me.say_and_wait(`非常感谢。`);
+    await say_by_passer_by(`巫女`, `感谢的话语，献给美丽的女神。`);
+    await say_by_passer_by(`巫女`, `祝福的话语，献给仁慈的女神。`);
+    await say_by_passer_by(`巫女`, `解脱的话语，献给慈爱的女神。`);
+    await me.say_and_wait(`解脱吗？`, true);
+    await chara_talk.say_and_wait(`祝福吗......三女神大人，谢谢你。`, true);
+    await say_by_passer_by(`巫女`, `三女神们，请带给这个世界美好与希望吧。`);
+    await say_by_passer_by(`巫女`, `可爱的人们，愿三女神与你们同在。`);
+    await era.printAndWait(`巫女一边说着祝福的话语一边将护身符递给了你们。`);
+    await era.printAndWait(
+      `与迅速从巫女手中接过护符并回礼的你不同，丸善斯基接过护符之后，放进了随身携带的小包之中。`,
+    );
+    await era.printAndWait(`随后——`);
+    await chara_talk.say_and_wait(`还是瞒不过训练员君呢。`);
+    await era.printAndWait(
+      `似乎察觉到了气氛的改变，巫女伸出右手指向了一条僻静的小道，随后离开了此处。`,
+    );
+    await era.printAndWait(
+      `木屐与地面碰撞发出哒哒的清脆声音慢慢变得越来越小，渐渐，这里只剩下了远处传来的鼓声与观众欢呼喝彩之声。`,
+    );
+    await me.say_and_wait(
+      `这里只剩下我们两个人了，接下来的话语除了三女神大人，谁也不会听见。`,
+    );
+    await era.printAndWait(
+      `你看向了丸善斯基的脸庞，而后者因为终于从困扰之中解脱出来而身体微微颤抖。`,
+    );
+    await chara_talk.say_and_wait(
+      `从哪里说起来比较好呢。实际上，那个晚上我也在场。`,
+    );
+    await me.say_and_wait(`什么？！`);
+    await era.printAndWait(
+      `你的背后涌起了一股寒意，双腿发抖，甚至想要就这么转身逃跑，但是仅存的理性还是告诉了自己，人是不可能跑得过马娘的。`,
+    );
+    await era.printAndWait(`更何况，是作为马娘中的佼佼者，丸善斯基。`);
+    await chara_talk.say_and_wait(
+      `正如你所想的那样，那天的训练员君神色有些古怪，而且视线总是无意识地看向手表。`,
+    );
+    await chara_talk.say_and_wait(`这个时候，令人讨厌的直觉就这么发动了。`);
+    await era.printAndWait(
+      `丸善斯基带起了那副你从未见过的假面，就这么面无表情地诉说着。`,
+    );
+    await chara_talk.say_and_wait(
+      `晚饭后，虽然说回到公寓了，但事实上只是将小塔临时停在了附近的停车场，然后借助脚力回到了特雷森。`,
+    );
+    await era.printAndWait(
+      `背叛者，畜生，罪人，脑海之中不禁浮现出了与丸善斯基定下的约定。`,
+    );
+    await me.say_and_wait(`我有什么脸面去见她？`, true);
+    await era.printAndWait(
+      `一想到这个，大脑就一片空白，嘴唇下意识的咬紧，胃里翻江倒海般的——一股恶心感传了出来。`,
+    );
+    await chara_talk.say_and_wait(
+      `虽然训练员君反侦察意识很强呢，不过再怎么说，警惕起来的马娘可是连最微小的声音都不会放过的。`,
+    );
+    await chara_talk.say_and_wait(
+      `在远远处看到了训练员君神色慌张的走进了教学楼后，在一楼耐心等到说话声响起便可迅速定位。`,
+    );
+    await me.say_and_wait(`......`);
+    await era.printAndWait(`你张了张嘴，什么也说不出来。`);
+    await era.printAndWait(
+      `度日如年的感觉，想要就此逃跑，却被灌了铅一样的双腿牢牢钉死在了原地。`,
+    );
+    await chara_talk.say_and_wait(
+      `明明，如果训练员君没同意和我一起去庙会的话，我打算就这样装傻到一切结束呢。`,
+    );
+    await era.printAndWait(
+      `虽然说出的话带着一股轻快感，但一丝笑容都没有出现的丸善斯基紧紧地盯着你。`,
+    );
+    await chara_talk.say_and_wait(
+      `不过，既然训练员君已经下定决心的话，我也应该回以应有的尊重。`,
+    );
+    await chara_talk.say_and_wait(`那么，训练员君，现在轮到你了。`);
+    await era.printAndWait(
+      `人类远古时期流传下来的恐惧让你的大脑全速运转，你的决定是。`,
+    );
+    //  这里可以设计一个好感度，如果爱慕度未达到49，则只存在选项2
+    era.printButton(`抱歉，我拒绝。`, 1);
+    era.printButton(`非常抱歉，我是个罪人`, 2);
     const ret1 = await era.input();
     if (ret1 === 1) {
-      await era.printAndWait(
-        `虽然打定了主意，不过该怎么进入学生宿舍还是一件玄奥的事情。`,
-      );
-      await me.say_and_wait(`去问问其他${chara_talk.get_uma_sex_title()}吧`);
-      await say_by_passer_by(
-        `路人${chara_talk.get_uma_sex_title()}`,
-        `哎？丸善前辈在不在里面？抱歉，不太清楚。`,
-      );
-      await me.say_and_wait(`不，怎么说这样还是太过羞耻了`, true);
-      await me.say_and_wait(`还是站在门口等等看算了`, true);
-      await era.printAndWait(
-        `特雷森学院的${chara_talk.get_uma_sex_title()}们成群结对的前去参加祭典了，据说之后还有烟火晚会可以看。`,
-      );
-      await era.printAndWait(
-        `不时路过身边的${chara_talk.get_uma_sex_title()}传来了阵阵欢声笑语。`,
-      );
-      await era.printAndWait(
-        `被以奇怪目光打量着的${me.actual_name}索性放空大脑就这么站在原地。`,
-      );
-      await chara301_talk.say_and_wait(
-        `${me.actual_name}先生，你为什么会在这里站着？`,
-      );
-      await era.printAndWait(`很快，手纲小姐出现在了你的面前。`);
-      await me.say_and_wait(`......`);
-      await era.printAndWait(
-        `想找${chara_talk.name}，但不知为何就是说不出口。`,
-      );
-      await era.printAndWait(`连自己也开始怀疑这样做是不是对的。`);
-      await me.say_and_wait(`......我打算。`);
-      await chara_talk.say_and_wait(`训练员君？`);
-      await era.printAndWait(`与${chara_talk.name}四目相对。`);
+      await chara_talk.say_and_wait(`......`);
+      await era.printAndWait(`你毫不犹豫的迎上了丸善斯基的双眼。`);
       await chara_talk.say_and_wait(
-        `抱歉，准备花的时间太久了，现在才准备好，那么一起出发吧♪`,
+        `${me.actual_name}，你最好给我一个满意的答复。`,
       );
-      await chara301_talk.say_and_wait(`原来是这样吗？那还真是抱歉了。`);
-      await chara301_talk.say_and_wait(
-        `${me.actual_name}先生下次还请好好说清来这里的意图，不然被认为是可疑人士的话，即使是我也不会手下留情的。`,
+      await era.printAndWait(
+        `丸善斯基的马耳慢慢向后背去，语气之中也变得急躁起来。`,
+      );
+      await me.say_and_wait(`踏错一步可能就是万丈深渊了。`);
+      await era.printAndWait(
+        `强行安下跳得越来越厉害的心脏，冷静得仿佛不是自己一样。`,
+      );
+      await era.printAndWait(
+        `虽然连自己也不太清楚，为什么自己下意识的拒绝了。`,
+      );
+      await era.printAndWait(
+        `但是，你知道，这个时候绝对不能妥协，你不是为了来陪丸善斯基过家家，你必须展现出那份意志。`,
+      );
+      await era.printAndWait(
+        `回到正题，丸善斯基在意的地方是什么？令她痛苦的除了背叛誓言还有什么？`,
+      );
+      await me.say_and_wait(`我是来把你从偶像的神座上拽下来的，丸善斯基。`);
+      await era.printAndWait(
+        `丸善斯基有意无意释放了一点自己的领域，你体会到了在赛场上的马娘们所感受到了恐惧。`,
+      );
+      await me.say_and_wait(
+        `偶像是什么？被人崇拜，被人寄托了命运，虽然说着为了让其他人看着自己的背影前进，但实际上，你是如此的傲慢。`,
+      );
+      await me.say_and_wait(`你真的承受得了那份被无数人寄托了希望的千斤顶吗？`);
+      await me.say_and_wait(`尽管是我，我也知道，世界上没有完美无缺的人。`);
+      await me.say_and_wait(`只要是人，就一定会犯错，一定会做出错误。`);
+      await me.say_and_wait(
+        `错误是不可避免的，悲伤、痛苦之后，才更加懂得珍惜。`,
+      );
+      await me.say_and_wait(`但是你`);
+      await me.say_and_wait(`虽然也是作为知心大姐姐帮助困扰的马娘们。`);
+      await me.say_and_wait(
+        `但是没有做好善后工作，完全没有意识到马娘们把你当成了逃避一切问题用的避风港。`,
+      );
+      await me.say_and_wait(
+        `就这样，被马娘擅自寄托了希望，又就这样擅自被认为背叛了的马娘憎恨。`,
+      );
+      await me.say_and_wait(
+        `虽然那些马娘们口口声声说把你的背影作为偶像看待，在实际行动里却把你当成神一样崇拜。`,
+      );
+      await me.say_and_wait(
+        `虽然你不是有意这么做，也从未有这种想法，但是，悲剧就是这么诞生了。`,
+      );
+      await me.say_and_wait(
+        `所以，请从这个神座上下来吧，我不是为了自己而请求，而是因为看到了通向地狱的单程车而拉住你。`,
+      );
+      await era.printAndWait(
+        `完全不顾丸善斯基的想法，就这样一口气将自己内心挤压下来的想法说了出来。\n`,
       );
       await chara_talk.say_and_wait(
-        `手纲酱不用这么严肃啦！训练员君可是好孩子呢！下次的话我会好好说清楚的。`,
+        `那你的解决方法又在哪里？世界上从来不缺发现问题的人，缺的从来都是能更进一步解决问题的人。`,
       );
-      await chara301_talk.say_and_wait(
-        `${chara_talk.name}，还请你不要向上次那样无缘无故一个人消失了。`,
+      await chara_talk.say_and_wait(`而且，说到底都是你的一面之辞吧？`);
+      await chara_talk.say_and_wait(`谁知道这不是你因为恐惧而胡扯出来的东西？`);
+      era.printButton(
+        `就像我为了冒被丸善斯基讨厌的风险一样，你也应该知道自己为什么，是为了何人而冒的风险吧！`,
+        1,
       );
-      await chara301_talk.say_and_wait(
-        `因为上次消失事件的后续影响，光是这个月就抓到了18个想要潜入特雷森的可疑人士。`,
-      );
-      await chara_talk.say_and_wait(`对不起啦，下次去酒吧我来请客。`);
-      await chara301_talk.say_and_wait(
-        `真是的，理事长还找我有事，那我先走了。`,
-      );
-      await era.printAndWait(`向这边鞠躬了之后，手纲小姐就这么离开了。`);
-      await chara_talk.say_and_wait(`那么，训练员君和我一起出发吧。`);
-      await me.say_and_wait(`哎？`);
-      await chara_talk.say_and_wait(`哎呀，不是说好要一起去祭典的吗？`);
-      await era.printAndWait(
-        `摆出了纯洁无辜表情的${chara_talk.name}睁着大眼睛向你问道。`,
-      );
-      await me.say_and_wait(`我知道了。`);
-      await chara_talk.say_and_wait(`这样才对嘛，那么出发吧！`);
-      await era.printAndWait(
-        `在一众${chara_talk.get_uma_sex_title()}的目瞪口呆之下，两人就这样牵着手离开了宿舍门口。`,
-      );
-      era.drawLine();
-      await me.say_and_wait(`人比想象之中还多啊。`);
-      await chara_talk.say_and_wait(`有趣的地方也不少呢！`);
-      await era.printAndWait(
-        `为了吸引前来的游客，在租借的摊位面前画上了显眼的招牌，卖力吆喝着的店主们通红的双脸吸引了许多游客的注意。`,
-      );
-      await era.printAndWait(
-        `像沙丁鱼罐头一样紧紧挤在一起的人群，稍不注意就会走丢。`,
-      );
-      await me.say_and_wait(`${chara_talk.name}，这里的人很多，不要走散了。`);
-      await chara_talk.say_and_wait(`好的♪`);
-      await era.printAndWait(
-        `比平时还要高涨的心情，像是欢呼一样汇入了人群之中。`,
-      );
-      era.drawLine();
-      await say_by_passer_by(`金鱼摊的摊主`, `时间到！停！`);
-      await chara_talk.say_and_wait(`训练员君，我捞到了五条金鱼哦♪`);
-      era.printButton(`为什么这个网一下子就破了啊`, 1);
       await era.input();
-      await era.printAndWait(
-        `看着稍一用力就破了的纸网，${me.actual_name}陷入了沉思之中。`,
+      await era.printAndWait(`正打算继续说下去的丸善斯基，被你的话语所打断。`);
+      await me.say_and_wait(
+        `我虽然没有这种被后辈们寄托了大量希望与期待的经历，但我也知道，丸善斯基是出于爱而帮助的她们。`,
       );
-      era.drawLine();
-      await say_by_passer_by(`棉花糖店主`, `棉花糖要吗？5马币一个！`);
-      await me.say_and_wait(`两份棉花糖，谢谢！`);
-      await me.say_and_wait(`真想把头埋进棉花糖里啊。`, true);
-      await era.printAndWait(
-        `看着跟自己头一样大的棉花糖，${me.actual_name}有种想将头深埋进去的冲动。`,
+      await me.say_and_wait(
+        `就是这个宁可粉身碎骨、万劫不复也要帮助她们的这个名叫爱的东西！`,
       );
-      await chara_talk.say_and_wait(`给我的吗？谢谢你咯⭐训·练·员·君。`);
-      await era.printAndWait(`不知为何${chara_talk.name}将训练员君咬得很重。`);
-      await era.printAndWait(
-        `就这样两人放慢了脚步，欣赏着游客们与店主之间交互。`,
+      await me.say_and_wait(
+        `所以，我不会阻止丸善斯基践行自己的道路，但不论如何，作为你的训练员，我都要把你从神座上拽下来（只有竭力避免将荣耀归于自身才能妥善处理这份氢氟酸）！`,
       );
-      await era.printAndWait(`不知不觉间已经到了深夜。`);
-      await chara_talk.say_and_wait(`那边的烟花真漂亮呢！`);
       await era.printAndWait(
-        `目光顺着${chara_talk.name}的右手所指的方向，两人的目光紧紧盯着天空中绽放的花朵。`,
+        `这是你第一次直面领域，但心中有种难以形容的温暖与激情让你凝视着她的双眼。`,
       );
-      await me.say_and_wait(`真漂亮啊。`);
-      await chara_talk.say_and_wait(`是啊，真漂亮呢。`);
-      await me.say_and_wait(`明年的话也希望能再次看到这么美的景色。`);
-      await era.printAndWait(`不知不觉间两人的手紧紧握在了一起。`);
-      await chara_talk.say_and_wait(`明年的话也请多多指教了，训练员君♪`);
-      era.printButton(`我这边也是，请多多指教了。`, 1);
-      await era.input();
+      await era.printAndWait(`然后，你看着她的气势慢慢的消散，越来越小。`);
       await era.printAndWait(
-        `平静的大海掀起了轻轻的波澜，潮水周而复始的冲击着岸上的沙滩。`,
+        `最后，就像是犯了错的小朋友一样，耷拉着耳朵，乖乖听着你的说教。`,
       );
+      await era.printAndWait(`于是，你与丸善斯基度过了一个难忘的庙会。`);
     } else {
-      await me.say_and_wait(`不，说不定会起到反效果。`, true);
+      await chara_talk.say_and_wait(`......`);
       await era.printAndWait(
-        `${chara_talk.name}的迷茫，现在的${me.actual_name}根本不知道该如何下手。`,
+        `像是度过了一年一样漫长，你被丸善斯基用审视犯人的目光紧紧盯着看。最后，她收回了目光。`,
       );
-      await me.say_and_wait(`还是集中精力在训练方向上的修订吧。`);
-      await me.say_and_wait(`虽然痛苦，不过这才是最好的解决办法了吧。`, true);
+      await chara_talk.say_and_wait(`那么，接下来的日子，也请多多指教了♪`);
+      await era.printAndWait(`像是什么也没发生一样，她带着笑容向你伸出了手。`);
+      await me.say_and_wait(`请多多指教`);
+      await era.printAndWait(`尽管她依然是那副柔和的语气，但你知道——`);
       await era.printAndWait(
-        `抛开脑海之中传来的阴暗念头，${me.actual_name}决定接下来的时间集中在工作之上。`,
+        `有什么暖洋洋的东西，向着黑暗之中，连同自己的灵魂一起\n`,
       );
+      await era.printAndWait(`然后，终于 结束了。`);
+      await era.printAndWait(`留下的只有寂静。`);
     }
     era.set('cflag:4:节日事件标记', 0);
-  } else if (edu_weeks === 47 + 32) {
+  } else if (edu_weeks === 47 + 31) {
     if (era.get('flag:当前位置') !== location_enum.beach) {
       if (era.get('cflag:4:位置') !== era.get('cflag:0:位置')) {
         add_event(event_hooks.week_start, event_object);
@@ -1624,34 +2081,116 @@ module.exports = async function (hook, _, event_object) {
       return;
     }
     await print_event_name('土水生岚', chara_talk);
-    await say_by_passer_by(`浄风幸`, `${me.actual_name}，有空吗？`);
+    await era.printAndWait(`某天，友人找到了你。`);
+    await say_by_passer_by(`浄风幸`, `今天晚上有空吗？`);
+    await me.say_and_wait(`又是打算炫耀和担当之间的亲密关系啊。`, true);
+    await me.say_and_wait(`难道又和担当闹别扭了吗？`);
     await say_by_passer_by(
       `浄风幸`,
-      `晚上来一趟沙滩吧，我有话想和${me.actual_name}说。`,
-    );
-    await era.printAndWait(
-      `在双方精疲力竭的躺在沙滩上后，你向他坦白了有关${chara_talk.name}一蹶不振的起因与结果。`,
-    );
-    await era.printAndWait(`看着沉默的大海，他像是回忆起了什么一样。`);
-    await era.printAndWait(
-      `那天直到最后两人都未说过一句话，现在的他却突然给${me.name}发来了消息。`,
-    );
-    await me.say_and_wait(`无论如何都要去一趟`, true);
-    await era.printAndWait(
-      `带着半分好奇一分期待八九分的不安${me.name}前往了约定的地点。`,
-    );
-    await era.printAndWait(
-      `浪潮打湿了他的裤脚，那个男人盯着大海与天空的地平线默默无语。`,
-    );
-    await say_by_passer_by(`浄风幸`, `${me.actual_name}终于来了啊？`);
-    await era.printAndWait(
-      `像是突然才注意到${me.name}靠近了的样子，他恢复了一如既往的笑容。`,
+      `呜啊，饶了我吧，那个孩子每天都是一副兴致勃勃的样子，再这样下去恐怕会出什么事情。`,
     );
     await say_by_passer_by(
       `浄风幸`,
-      `......想知道我从团队训练员到成为现在孩子的担当训练员发生的故事吗？`,
+      `咳咳——扯远了。叫你出来也不是什么大事，只是有点好奇。`,
     );
-    await era.printAndWait(`点了点头表示同意`);
+    await say_by_passer_by(`浄风幸`, `你和丸善斯基之间发展的怎么样了？`);
+    await era.printAndWait(`你告诉了他你们之间发生的故事。`);
+    //todo TE结局路线
+    await say_by_passer_by(`浄风幸`, `这样子看起来不是超好的吗！`);
+    await say_by_passer_by(`浄风幸`, `可恶，我都有点羡慕了！`);
+    await era.printAndWait(`打算向你炫耀的他反而吃了一波狗粮。`);
+    //todo GE结局路线
+    await say_by_passer_by(`浄风幸`, `什么啊，你也是来向我炫耀的吗！`);
+    await say_by_passer_by(`浄风幸`, `可恶，我都有点羡慕了！`);
+    await era.printAndWait(`小学生吗？做出了一副咬牙切齿的样子。`);
+    //todo 其他结局路线
+    await say_by_passer_by(`浄风幸`, `看起来还要加油的样子。`);
+    await say_by_passer_by(
+      `浄风幸`,
+      `不过没关系，虽然丸善斯基看起来很难接触的样子，不过只要坦率一点大部分场合都能解决的！`,
+    );
+    await say_by_passer_by(`浄风幸`, `嗯。大多数场合。`);
+    await era.printAndWait(`看上去略有所思的样子。`);
+    await say_by_passer_by(`浄风幸`, `这样的话，我就放心了。`);
+    await era.printAndWait(`友人像是终于放下了执念一样，露出了释然的表情。`);
+    await era.printAndWait(`然后`);
+    await say_by_passer_by(`浄风幸`, `说起来不久之前有一名赛马娘退役了。`);
+    await me.say_and_wait(`？`);
+    await say_by_passer_by(
+      `浄风幸`,
+      `说起来之前还在团队当助理训练员的时候，与她曾是马娘与训练员之间的关系。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `不过也没有那么多的故事啦，我们之间也只是名义上的担当关系罢了。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `虽然只是名义上的训练员与马娘，抱歉，是赛马娘之间的关系。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `当时的我，训练手法与情感处理都是压倒性的经验不足。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `不过还是凭借一腔热情进行着训练，她也很努力的配合着不成熟的我进行训练。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `日夜训练，参加比赛，然后总结教训再次挑战。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `就这样，比起团队中的其他马娘更加关注那个马娘的样子。磕磕碰碰的度过了最初的一年。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `拜此所赐，说不定我们也能向皇帝那样，就带着不切实际的希望期待着。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `不过后来因为理念不同吵了一架，想让对方向我道歉，说起来两人都是这样想的吧。我赌气般的投身于新担当的训练计划了。就这样微小的摩擦不断积累着，等意识到的时候却已经无法返回了。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `真是可笑，明知道自己不是鸟为什么要去追逐蓝天。`,
+    );
+    await say_by_passer_by(
+      `浄风幸`,
+      `啊。抱歉，光是让你听我抱怨了。今天想吃什么的话我来请客！`,
+    );
+    era.printButton(`那就恭敬不如从命了。`, 1);
+    era.printButton(`难得来次海滩，晚点再出发吧。`, 2);
+    const ret1 = await era.input();
+    if (ret1 === 1) {
+      await say_by_passer_by(`浄风幸`, `那是那是！`);
+      await era.printAndWait(
+        `带着对未来的期待，两人向着目标方向有说有笑的前进了。`,
+      );
+    } else {
+      await say_by_passer_by(
+        `浄风幸`,
+        `诶？难道这片海滩之上还有什么值得你留恋的——`,
+      );
+      await era.printAndWait(`像是突然想起了什么，友人沉默了一会。`);
+      await say_by_passer_by(
+        `浄风幸`,
+        `......说起来，为什么丸善斯基没有过来。`,
+      );
+      await say_by_passer_by(`浄风幸`, `难道说你们之间？`);
+      era.printButton(`丸善斯基去采购今晚派对的物资了`, 1);
+      await era.input();
+      await say_by_passer_by(`浄风幸`, `这样啊...嗯。`);
+      await era.printAndWait(`像是为了将什么抛到脑后，两人快步离开了海滩。`);
+    }
+    era.drawLine({ content: '酒过三巡之后' });
+    await say_by_passer_by(
+      `浄风幸`,
+      `......说起来，心里一直有个故事想要和人分享，不过就这么说出来的话，多少还是有些羞耻。`,
+    );
+    era.printButton(`有意思，说出来听听。`, 1);
+    await era.input();
     await say_by_passer_by(`浄风幸`, `就我个人来说吧，我也没有突出的本事`);
     await say_by_passer_by(
       `浄风幸`,
@@ -1665,19 +2204,43 @@ module.exports = async function (hook, _, event_object) {
       `浄风幸`,
       `看着自己做出的成就还有收获到${chara_talk.get_uma_sex_title()}们的感谢，其实我觉得自己这样过得也不错嘛`,
     );
-    await era.printAndWait(`他将视线从地平线移向了繁星点点的天空。`);
+    await era.printAndWait(`话还没说完，又是一罐啤酒下肚。`);
     await say_by_passer_by(
       `浄风幸`,
-      `虽然现实世界是个垃圾游戏，但我也能起到自己的作用。`,
+      `呼啊，真爽，果然还是要喝点酒才是人生真谛。`,
     );
     await say_by_passer_by(
       `浄风幸`,
-      `突然有一天我觉得不能在这样浑浑噩噩下去了，所以我向前辈提出想要找到自己的道路`,
+      `虽然现实就是个垃圾游戏，不过也有能让人得到安慰的部分嘛。`,
+    );
+    await say_by_passer_by(`浄风幸`, `唔。刚刚说到哪里了？`);
+    era.printButton(`团队时期作为助理训练员的时光。`, 1);
+    await era.input();
+    await say_by_passer_by(`浄风幸`, `对啊，就是这个！然后呢——`);
+    await say_by_passer_by(
+      `浄风幸`,
+      `突然有一天我觉得不能在这样浑浑噩噩下去了，所以我向前辈提出想要找到自己的道路。`,
     );
     await say_by_passer_by(`浄风幸`, `前辈当时是这么说的。`);
     await say_by_passer_by(
       `资深训练员`,
       `既然你打算去寻找自己的道路的话，我给你一个忠告。`,
+    );
+    await say_by_passer_by(
+      `资深训练员`,
+      `不论你是否自知，你终会找到自己的道路，以及自己的理想。`,
+    );
+    await say_by_passer_by(
+      `资深训练员`,
+      `然后，不是小说里写得那样，从此前途一片大好，只要朝着理想努力就行了。`,
+    );
+    await say_by_passer_by(
+      `资深训练员`,
+      `理想需要支撑它前进的能力，需要志同道合的同伴。`,
+    );
+    await say_by_passer_by(
+      `资深训练员`,
+      `为此，你需要解决路上的问题，需要安慰受到创伤的同伴，需要不断忍受漫漫长夜，需要信仰以及最重要的——原谅与宽恕。`,
     );
     await say_by_passer_by(
       `资深训练员`,
@@ -1687,155 +2250,69 @@ module.exports = async function (hook, _, event_object) {
       `资深训练员`,
       `支撑你无限努力的，是不断的原谅和宽恕。`,
     );
-    await say_by_passer_by(
-      `资深训练员`,
-      `现在听不懂不要紧，等你遇到了的话希望你还记得我说过的话。`,
-    );
-    await say_by_passer_by(`资深训练员`, `那么，现在去追逐自己的理想吧。`);
-    await era.printAndWait(`迷茫在内心中不断扩散开来。`);
+    await say_by_passer_by(`浄风幸`, `嘛，大概第二天就忘了吧。`);
+    await say_by_passer_by(`浄风幸`, `非常感谢，我一定会铭记在心！`);
     await say_by_passer_by(
       `浄风幸`,
-      `所以我离开了团队，打算到训练场碰碰运气。`,
+      `从团队之中独立出来，作为曾失去马娘的训练员，再次邂逅了新的马娘。`,
     );
     await say_by_passer_by(
       `浄风幸`,
-      `参与选拔的孩子们都很努力的奔跑着，但我依然觉得缺了什么。`,
+      `直到之前的马娘退役之后，我才愕然的发现。`,
     );
+    await say_by_passer_by(`浄风幸`, `我不小心记到了现在。`);
+    await say_by_passer_by(`浄风幸`, `为什么呢？我也在寻找这个答案。`);
+    await say_by_passer_by(`浄风幸`, `就算这样的话，明明。`);
+    await say_by_passer_by(`浄风幸`, `明明，明明就差一点了。`);
     await say_by_passer_by(
       `浄风幸`,
-      `在看了三组${chara_talk.get_uma_sex_title()}的选拔之后，正当我准备离开之时，一阵轻柔的风吹拂过我的脸庞`,
+      `如果我当时能向她道歉的话，说不定，说不定。`,
     );
+    era.drawLine();
+    await say_by_passer_by(`马娘`, `......原来如此，训练员先生。`);
+    await say_by_passer_by(`浄风幸`, `你心里不是一清二楚吗？`, true);
+    await say_by_passer_by(`浄风幸`, `鄙人净风幸。`);
+    await say_by_passer_by(`马娘`, `非常高兴能认识您，净风幸先生。`);
+    await say_by_passer_by(`浄风幸`, `我也是。`);
     await say_by_passer_by(
       `浄风幸`,
-      `现在想想也许是三女神在指引我一样，我决定再次坐下看完最后一组。`,
+      `......如果我没有将训练员学校教授的东西全部遗忘的话，恐怕那不是因为受到巨大的惊吓，而是她的双腿已经快坚持不住了。`,
+      true,
     );
-    era.printButton(`之后就看到了${chara_talk.name}吗？`, 1);
-    await era.input();
-    await say_by_passer_by(
-      `浄风幸`,
-      `不，一直坐到最后一组结束${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }也没有出现。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `当时的我怀疑自己是个傻子，又安慰自己起码多见识了一下各种${chara_talk.get_uma_sex_title()}之间的不同。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `按照之前的习惯整理完笔记之后准备离开时，却与${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }擦身经过了。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `也许是直觉还是什么神秘的东西，我觉得这名${chara_talk.get_uma_sex_title()}不同寻常。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `在向身旁路过的${chara_talk.get_uma_sex_title()}打听之后，才知道${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }叫${chara_talk.name}，预备在明天早上参加选拔。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `在本子上默默记下了这个信息之后，第二天我又来到了训练场。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `之后我看到了${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }奔跑时的背影，说来奇怪，我感受到了纯粹，其他${chara_talk.get_uma_sex_title()}都是为了向预计的训练员展示自己的实力而咬牙拼搏。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `${chara_talk.sex_code - 1 ? '她' : '他'}却是纯粹的享受这份快乐。`,
-    );
-    await say_by_passer_by(`浄风幸`, `我被那道纯粹的身影深深的折服了。`);
-    await say_by_passer_by(
-      `浄风幸`,
-      `也许${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }能带我看到希望的地平线是什么样子的。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `可当我下定决心准备交流一方时，${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }时，周围的训练员早以起身将${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }团团围住。`,
-    );
-    await say_by_passer_by(`浄风幸`, `我根本无法挤进人群之中。`);
-    await say_by_passer_by(
-      `浄风幸`,
-      `之后的发生的事你也知道了，然后我遇到了现在的担当。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `之前只是处于协助的立场上还没有什么切身感受，可现在自己站在他的位置上时，才觉得深深的无力。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `之前作为团队训练员积累的经验在负责现在的担当时不够细致，之前在团队时不会遇到的事情也接踵而至，所以我经常手忙脚乱地收拾现场。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `当我在某天傍晚打算趁周围无人时向枯树洞发泄情绪时，意外看到了${chara_talk.name}。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }看上去很悲伤的样子，像是遇到了什么使${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }理想破碎的事情一样。`,
-    );
-    await say_by_passer_by(
-      `浄风幸`,
-      `虽然很想上去询问发生了什么，但${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }在我思考之时已经消失在了教学楼里。`,
-    );
-    await say_by_passer_by(`浄风幸`, `那种痛苦的情感，让我无法释怀。`);
-    await say_by_passer_by(
-      `浄风幸`,
-      `也许只有作为${chara_talk.sex_code - 1 ? '她' : '他'}专属训练员的${
-        me.name
-      }才能引导${chara_talk.sex_code - 1 ? '她' : '他'}走出丛林吧。`,
-    );
-    era.printButton(`能和${chara_talk.name}再次对决吗？`, 1);
-    await era.input();
-    await say_by_passer_by(`浄风幸`, `......为什么？`);
-    await era.printAndWait(`沉湎于回忆中的男人现在正打量着${me.name}`);
-    await me.say_and_wait(
-      `${chara_talk.name}因为理想世界永远无法摆脱现实世界的束缚而痛苦着`,
-    );
-    await me.say_and_wait(
-      `我希望能让${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }意识到:尽管理想世界无法摆脱现实世界的束缚，但坚信是自己方法不对，为了实现自己理想而采取的技术过于简陋。`,
-    );
-    await me.say_and_wait(
-      `一定，一定在某处存在着自己理想和现实世界能够相互兼容的方法。`,
-    );
-    await me.say_and_wait(`所以，请${me.name}助我一臂之力。`);
-    await era.printAndWait(`${me.name}向他低下了头。`);
+    era.drawLine();
+    await say_by_passer_by(`浄风幸`, `我们会......一起站在G1的领奖台上。`);
     await era.printAndWait(
-      `许久未得到回应，保持不动姿势的二人像是海岸突然矗立的两块礁石一样。`,
+      `到了傍晚，劳累了一天的客人们在品尝到了美味的啤酒后露出了由衷的笑容。`,
+    );
+    await say_by_passer_by(`浄风幸`, `如果可以重来的话。`, true);
+    await say_by_passer_by(`浄风幸`, `我绝对要向你道歉。`, true);
+    await say_by_passer_by(
+      `浄风幸`,
+      `对不起，如果能重来的话，我绝对不会因为你劝我不要抽烟而说出那么重的话。`,
+      true,
     );
     await say_by_passer_by(
       `浄风幸`,
-      `我会和我家的孩子说明的，${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }也会同意的，那么，比赛的地点是`,
+      `......如果这样能稍微从自我惩罚中解脱一点的话。`,
+    );
+    await say_by_passer_by(`浄风幸`, `尽管已经无可挽回，是无可奈何的事情了。`);
+    await say_by_passer_by(
+      `浄风幸`,
+      `所以才要原谅自己吗？不，我已经无法原谅自己了。`,
+      true,
+    );
+    await say_by_passer_by_and_wait(
+      `浄风幸`,
+      `三女神们，至少也要让那个孩子......对不起`,
+      true,
+    );
+    await say_by_passer_by_and_wait(`浄风幸`, `......`, true);
+    await era.printAndWait(
+      `月亮出来了，向着月亮许愿（忏悔）的男人终于借着酒精进入了梦乡。`,
     );
     await era.printAndWait(
-      `海浪将不甘与悔恨带回深海之中，留下的却是希望与期待。`,
+      `而你把醉鬼扔到训练员宿舍后打开窗户，不知为何，觉得今晚的月亮意外的柔和。`,
     );
-    await me.say_and_wait(`回到那片希望之风吹拂过的地方。`, true);
-    await era.printAndWait(`此刻海风化为了岚`);
-    await me.say_and_wait(`就在学院的草场上吧。`);
   } else if (edu_weeks === 47 + 48) {
     await print_event_name('圣诞节', chara_talk);
     await chara_talk.say_and_wait(`哼哼哼♪`);
