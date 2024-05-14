@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const call_check_script = require('#/system/script/sys-call-check');
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
@@ -10,6 +9,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_money } = require('#/system/sys-calc-flag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
@@ -21,7 +21,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 const { buff_colors, money_color } = require('#/data/color-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
-const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -137,7 +136,7 @@ handlers[event_hooks.good_night] = async (chara_id, hook) => {
     me = get_chara_talk(0),
     awake = 2 * sys_check_awake(chara_id) + sys_check_awake(0);
   if (awake === 3) {
-    const check = call_check_script(chara_id, check_stages.want_make_love);
+    const check = get_custom_check(chara_id).is_want_make_love();
     if (check) {
       era.print([
         '繁忙的一天结束，',

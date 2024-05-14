@@ -1,14 +1,14 @@
 const era = require('#/era-electron');
 
-const sys_call_check = require('#/system/script/sys-call-check');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+
+const { get_custom_check } = require('#/event/check/check-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { lust_border } = require('#/data/ero/orgasm-const');
-const check_stages = require('#/data/event/check-stages');
 
 /** @param {HookArg} hook */
 module.exports = async (hook) => {
@@ -21,7 +21,7 @@ module.exports = async (hook) => {
     relation = era.get('relation:52:0'),
     self_call = sys_get_callname(52, 52);
   if (awake === 3) {
-    if (sys_call_check(52, check_stages.want_make_love) > 0) {
+    if (get_custom_check(52).is_want_make_love() > 0) {
       if (relation > 150) {
         if (love === 100) {
           urara.say(

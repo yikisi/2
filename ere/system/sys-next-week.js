@@ -8,7 +8,6 @@ const {
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
 const check_new_activities = require('#/system/next-week/check-new-activities');
 const randomly_interact = require('#/system/next-week/randomly-interact');
-const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 const {
@@ -28,6 +27,7 @@ const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const filter_chara = require('#/system/sys-filter-chara');
 const sys_handle_palace = require('#/system/sys-handle-palace');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const { remove_special_events } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -44,7 +44,6 @@ const {
 const { part_enum, part_talents } = require('#/data/ero/part-const');
 const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const check_stages = require('#/data/event/check-stages');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -97,10 +96,10 @@ async function sys_next_week() {
     prepared_list.forEach((chara_id) => {
       if (
         era.get('flag:地下室之主') === chara_id ||
-        sys_call_check(chara_id, check_stages.prison)
+        get_custom_check(chara_id).is_prison()
       ) {
         act_list.push({ chara_id, prison: true });
-      } else if (sys_call_check(chara_id, check_stages.rape_in_sleeping)) {
+      } else if (get_custom_check(chara_id).is_rape_in_sleeping()) {
         act_list.push({ chara_id, prison: false });
       }
     });
@@ -108,14 +107,13 @@ async function sys_next_week() {
     if (
       !act_list.length &&
       punish_level >= 2 &&
-      sys_call_check(
+      get_custom_check(
         (tmp = get_random_entry(
           filter_chara('cflag', '招募状态', recruit_flags.no).filter(
             (e) => era.get(`cflag:${e}:成长阶段`) >= 2,
           ),
         )),
-        check_stages.rape_in_sleeping,
-      )
+      ).is_rape_in_sleeping()
     ) {
       act_list.push({
         chara_id: tmp,
@@ -815,7 +813,7 @@ async function sys_next_week() {
           40,
       );
     }
-    sys_call_check(chara_id, check_stages.next_week);
+    get_custom_check(chara_id).check_next_week();
   }
 
   if (race_punish) {

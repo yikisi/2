@@ -1,12 +1,12 @@
 const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
-const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
 
@@ -16,7 +16,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { buff_colors } = require('#/data/color-const');
 const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
@@ -352,9 +351,7 @@ async function game_over(again) {
         sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
           (e) => {
             get_custom_mec(e).set_callname();
-            sys_call_check(e, check_stages.after_punish, {
-              level: punish_level,
-            });
+            get_custom_check(e).check_after_punish(punish_level);
           },
         );
       } else {

@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const sys_call_check = require('#/system/script/sys-call-check');
+const { get_custom_check } = require('#/event/check/check-factory');
 
 const { sort_list } = require('#/utils/list-utils');
 
@@ -11,7 +11,6 @@ const {
   money_color,
 } = require('#/data/color-const');
 const title_desc = require('#/data/desc/title-desc.json');
-const check_stages = require('#/data/event/check-stages');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -94,10 +93,7 @@ module.exports = {
         type: 'divider',
       });
       const titles = new CharaTitles(chara.id).get(),
-        personal_titles = sys_call_check(
-          chara.id,
-          check_stages.personal_titles,
-        );
+        personal_titles = get_custom_check(chara.id).get_personal_titles();
       if (personal_titles.length) {
         personal_titles.map((e) => {
           const check = titles.filter((t) => t.n === e).length > 0;

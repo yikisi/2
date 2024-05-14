@@ -1,9 +1,9 @@
 const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
-const sys_call_check = require('#/system/script/sys-call-check');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const { remove_edu_events } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -14,7 +14,6 @@ const {
   sex_colors,
 } = require('#/data/color-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
-const check_stages = require('#/data/event/check-stages');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
@@ -29,7 +28,7 @@ function sys_handle_palace(chara_id) {
   const buffer = [
     { content: [chara.get_colored_name(), ' 的育成结束了……'], type: 'text' },
   ];
-  const aim_check = sys_call_check(chara_id, check_stages.palace_check);
+  const aim_check = get_custom_check(chara_id).check_palace_and_get_aims();
   let aim_punish_count = 0,
     aim_count = 0;
   if (aim_check.length) {
@@ -79,12 +78,8 @@ function sys_handle_palace(chara_id) {
       type: 'text',
     });
   }
-  /** @type {{c:string,n:string}[]} */
-  const titles = [];
-  sys_call_check(chara_id, check_stages.title_check, {
-    aim_check: !aim_punish_count,
-    titles,
-  });
+  const titles =
+    get_custom_check(chara_id).check_and_get_titles(!aim_punish_count);
   const races = new RaceHistory(chara_id).get_entries();
   let g1_count = 0,
     pop_g1_count = 0;

@@ -1,7 +1,6 @@
 const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
-const sys_call_check = require('#/system/script/sys-call-check');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 const {
   sys_like_chara,
@@ -9,6 +8,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { init_chara } = require('#/system/sys-init-chara');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
@@ -17,7 +17,6 @@ const { gacha } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const check_stages = require('#/data/event/check-stages');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_filtered_talents } = require('#/data/info-generator');
@@ -290,7 +289,7 @@ async function sys_have_baby(mother_id) {
       (await era.waitAnyKey());
   }
 
-  sys_call_check(child_id, check_stages.birth);
+  get_custom_check(child_id).check_birth();
   era.print([
     get_chara_talk(mother_id).get_colored_name(),
     ' 生下了一个依稀有着 ',

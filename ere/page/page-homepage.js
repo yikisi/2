@@ -5,7 +5,6 @@ const {
   end_ero_and_show_result,
   init_ero,
 } = require('#/system/ero/sys-prepare-ero');
-const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
@@ -18,20 +17,22 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 const { init_chara } = require('#/system/sys-init-chara');
 const sys_next_week = require('#/system/sys-next-week');
 
-const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
-
 const print_curr_chara = require('#/page/components/cur-chara-info');
 const check_game_over = require('#/page/components/game-over');
 const print_page_header = require('#/page/components/page-header');
 const print_ero_page = require('#/page/page-ero');
 
-const CharaTalk = require('#/utils/chara-talk');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_custom_check } = require('#/event/check/check-factory');
+const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
+
+const {
+  get_chara_talk,
+  say_by_passer_by,
+} = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -104,7 +105,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
         .map((e) => {
           return {
             id: e,
-            check: sys_call_check(e, check_stages.want_make_love),
+            check: get_custom_check(e).is_want_make_love(),
           };
         })
         .filter(
@@ -321,7 +322,7 @@ module.exports = async () => {
         }
       });
       const note = note_list[notes_index++ % note_list.length];
-      CharaTalk.say_by_passer_by(note.title, note.content);
+      say_by_passer_by(note.title, note.content);
     }
 
     await handlers[cur_location](chara_id, save_and_next_week, flags);
