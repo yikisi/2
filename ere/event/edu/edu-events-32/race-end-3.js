@@ -16,7 +16,7 @@ const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,string,{contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number},TachyonEduMarks,number,number):Promise<boolean|void>>} handlers */
+/** @param {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams,TachyonEduMarks,number,number):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
   handlers[race_enum.arim_kin] = async (
     tachyon,

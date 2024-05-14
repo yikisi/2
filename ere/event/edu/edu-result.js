@@ -128,7 +128,7 @@ function print_attr_change(chara_id, to_print) {
   return to_print.length > 0;
 }
 
-/** @type {Record<string,function(chara_id:number,hook:HookArg,extra_flag:*):Promise<*>>} */
+/** @type {Record<string,function(number,HookArg,*):Promise<*>>} */
 const handlers = {};
 
 handlers[event_hooks.foreign_rest] = async (chara_id) => {
@@ -198,7 +198,7 @@ handlers[event_hooks.foreign_travel] = async (chara_id) => {
 /**
  * @param {number} chara_id
  * @param {HookArg} _
- * @param {{attr_change:number[],pt_change:number,skill_change:number[],motivation_change:number,relation_change:number,love_change:number,base_change:Record<string,number>}} extra_flag
+ * @param {RaceEventParams} extra_flag
  */
 handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
   chara_id,
@@ -234,7 +234,7 @@ handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {{args:*,fumble:boolean,train:number}} extra_flag
+ * @param {TrainFailParams} extra_flag
  */
 handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
   const args = extra_flag.args || fumble_result.fail;
@@ -302,22 +302,22 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
   return { attr_change, relation_change, stamina };
 };
 
-handlers[event_hooks.train_success] = async (chara_id, hook) => {
+handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
   sys_change_pressure(chara_id, -get_random_value(50, 100));
   if (hook.arg === true) {
     sys_change_pressure(chara_id, -50);
     return {
-      attr: 5,
-      relation_change: 5,
-      stamina: -50,
+      attr: 5 + (extra_flag.attr || 0),
+      relation_change: 5 + (extra_flag.relation_change || 0),
+      stamina: -50 + (extra_flag.stamina || 0),
     };
   } else if (hook.arg === false) {
     sys_change_pressure(chara_id, 50);
     return {
-      stamina: 50,
+      stamina: 50 + (extra_flag.stamina || 0),
     };
   }
-  return {};
+  return extra_flag;
 };
 
 /**

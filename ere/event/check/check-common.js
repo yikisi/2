@@ -80,7 +80,12 @@ handlers[check_stages.aim_check] = (chara_id) => {
 
 handlers[check_stages.love_event] = (chara_id) =>
   chara_id &&
-  add_event(event_hooks.week_end, new EventObject(chara_id, cb_enum.love));
+  add_event(
+    event_hooks.week_end,
+    new EventObject(chara_id, cb_enum.love).set_arg(
+      era.get(`love:${chara_id}`),
+    ),
+  );
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 2;

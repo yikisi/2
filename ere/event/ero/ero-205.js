@@ -22,7 +22,7 @@ handlers[ero_hooks.ero_start] = async () => {
     era.get('love:205') < 50 &&
     era.get('mark:205:欢愉') >= 2 &&
     era.get('mark:205:同心') >= 2 &&
-    era.get('status:205:发情') &&
+    era.get('tcvar:205:发情') &&
     era.get('tflag:强奸') <= 0 &&
     vp.sex_code === 0
   ) {

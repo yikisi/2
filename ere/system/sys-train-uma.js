@@ -5,11 +5,13 @@ const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_get_succ_rate } = require('#/system/sys-calc-chara-param');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
+const TrainFailParams = require('#/data/event/extra-flag/train-fail-params');
 const { get_trainer_train_buff } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const {
@@ -18,7 +20,6 @@ const {
   fumble_border,
   time_cost,
 } = require('#/data/train-const');
-const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 /**
  * @param {number} chara_id
@@ -193,11 +194,15 @@ module.exports = {
         case attr_enum.intelligence:
           train_cost.stamina = -train_cost.stamina / 10;
       }
-      const ret = await call_edu_script(chara_id, event_hooks.train_fail, {
-        fumble: Math.random() < 1 - stamina_ratio / fumble_border,
-        stamina_ratio,
-        train: attr,
-      });
+      const ret = await call_edu_script(
+        chara_id,
+        event_hooks.train_fail,
+        new TrainFailParams(
+          Math.random() < 1 - stamina_ratio / fumble_border,
+          stamina_ratio,
+          attr,
+        ),
+      );
       changes.attr_change = ret.attr_change;
       relation_change += ret.relation_change;
       if (ret.stamina) {

@@ -43,8 +43,11 @@ const {
 const { attr_background_colors, attr_colors } = require('#/data/const.json');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const AfterRaceParams = require('#/data/event/after-race-params');
 const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
+const RaceEndParams = require('#/data/event/extra-flag/race-end-params');
+const RaceStartParams = require('#/data/event/extra-flag/race-start-params');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_adaptability_rank,
@@ -590,9 +593,11 @@ async function race_page(race) {
       start_count = 0;
     } else {
       era.drawLine();
-      await sys_call_edu_event(ret, event_hooks.race_start, {
-        race,
-      });
+      await sys_call_edu_event(
+        ret,
+        event_hooks.race_start,
+        new RaceStartParams(race),
+      );
       start_count--;
       race_start[ret] = true;
       sys_change_attr_and_print(0, '精力', -time_cost);
@@ -669,21 +674,25 @@ async function race_page(race) {
           uma.pop[0],
           race,
           race_rank[id],
-          cur_chara.style,
+          uma.style,
           cur_year,
         ),
       );
     }
     sys_change_tired(id, 3);
-    sys_call_check(id, check_stages.after_race, {
-      aim_race: aim_race_dict[id] > 0,
-      contestants,
-      edu_weeks,
-      pop: uma.pop[0],
-      race,
-      rank: race_rank[id],
-      st: cur_chara.style,
-    });
+    sys_call_check(
+      id,
+      check_stages.after_race,
+      new AfterRaceParams(
+        aim_race_dict[id] > 0,
+        contestants,
+        edu_weeks,
+        uma.pop[0],
+        race,
+        race_rank[id],
+        uma.style,
+      ),
+    );
   });
   await era.waitAnyKey();
   time_cost = 0;
@@ -741,11 +750,11 @@ async function race_page(race) {
       end_count = 0;
     } else {
       era.drawLine();
-      await sys_call_edu_event(ret, event_hooks.race_end, {
-        contestants,
-        race,
-        rank: race_rank[ret],
-      });
+      await sys_call_edu_event(
+        ret,
+        event_hooks.race_end,
+        new RaceEndParams(contestants, race, race_rank[ret]),
+      );
       end_count--;
       race_end[ret] = true;
       sys_change_attr_and_print(0, '精力', -time_cost);

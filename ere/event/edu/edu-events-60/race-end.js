@@ -94,7 +94,7 @@ module.exports = async (hook, extra_flag) => {
     // 经典年若驹S
     const teio_talk = get_chara_talk(3);
     if (extra_flag.rank === 1) {
-      await print_event_name('若驹S结束·从“偶然”开始', chara_talk);
+      await print_event_name('从“偶然”开始', chara_talk);
 
       await chara_talk.say_and_wait('跑赢了……我……跑赢帝王了？');
       await chara_talk.say_and_wait(
@@ -138,7 +138,7 @@ module.exports = async (hook, extra_flag) => {
         `跑赢却消沉得像是输了一样，是因为${chara_talk.sex}还不能完全相信自己的实力。也就是自信心不足。既然如此，现在需要的是──`,
       );
     } else {
-      await print_event_name('若驹S结束·即使输了，夏天仍会到来', chara_talk);
+      await print_event_name('即使输了，夏天仍会到来', chara_talk);
 
       await chara_talk.say_and_wait('呼……呼……呼……');
       await chara_talk.say_and_wait(
@@ -231,7 +231,7 @@ module.exports = async (hook, extra_flag) => {
     extra_flag.rank <= 5
   ) {
     // 经典年小仓纪念
-    await print_event_name('小仓纪念结束·即使是镀金', chara_talk);
+    await print_event_name('即使是镀金', chara_talk);
 
     await chara_talk.say_and_wait(
       `嘿嘿……我做到了喔，${era.get('callname:60:0')}。我确实留下成果了！`,
@@ -365,7 +365,7 @@ module.exports = async (hook, extra_flag) => {
     era.println();
     extra_flag.relation_change = 50;
   } else if (extra_flag.race === race_enum.kiku_sho && extra_flag.rank <= 5) {
-    await print_event_name('菊花赏结束·自己的比赛', chara_talk);
+    await print_event_name('自己的比赛', chara_talk);
 
     await era.printAndWait('观众「优秀素质，辛苦了──！你跑得很精彩哦──！」');
     await era.printAndWait(
@@ -470,7 +470,7 @@ module.exports = async (hook, extra_flag) => {
     edu_weeks < 96 &&
     extra_flag.rank === 1
   ) {
-    await print_event_name('有马纪念结束·远望', chara_talk);
+    await print_event_name('远望', chara_talk);
 
     await chara_talk.say_and_wait('跑、跑赢了……！我在“有马纪念”赢了……');
     era.printButton('「恭喜你！」', 1);
@@ -559,7 +559,7 @@ module.exports = async (hook, extra_flag) => {
     extra_flag.rank === 1
   ) {
     // 资深年宝冢纪念
-    await print_event_name('宝冢纪念后·触及的指尖', chara_talk);
+    await print_event_name('触及的指尖', chara_talk);
 
     const mcqueen_talk = get_chara_talk(13);
     const ryan_talk = get_chara_talk(27);
@@ -625,7 +625,7 @@ module.exports = async (hook, extra_flag) => {
     edu_weeks >= 96 &&
     extra_flag.rank <= 5
   ) {
-    await print_event_name('天皇赏（秋）结束后·响彻黄昏天空', chara_talk);
+    await print_event_name('响彻黄昏天空', chara_talk);
 
     await chara_talk.say_and_wait('跑完了……');
     await chara_talk.say_and_wait('我在高水准的比赛认真地战斗……拿出了成果。');
@@ -685,7 +685,7 @@ module.exports = async (hook, extra_flag) => {
     edu_weeks >= 96 &&
     extra_flag.rank === 1
   ) {
-    await print_event_name('中日新闻杯后·朝着最后的大舞台', chara_talk);
+    await print_event_name('朝着最后的大舞台', chara_talk);
 
     await chara_talk.say_and_wait('拿到了！');
     await chara_talk.say_and_wait('第一名。我全力以赴得到的……第一名！');
@@ -711,7 +711,7 @@ module.exports = async (hook, extra_flag) => {
     edu_weeks >= 96 &&
     extra_flag.rank === 1
   ) {
-    await print_event_name('有马纪念后·有马的胜者是……', chara_talk);
+    await print_event_name('有马的胜者是……', chara_talk);
 
     const teio_talk = get_chara_talk(3);
     await chara_talk.say_and_wait('啊……');

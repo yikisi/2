@@ -114,6 +114,15 @@ class CustomizedMec {
     }
   }
 
+  set_my_name() {
+    if (
+      era.get(`callname:${this.chara_id}:${this.chara_id}`) ===
+      era.get(`callname:${this.chara_id}:-2`)
+    ) {
+      era.set(`callname:${this.chara_id}:${this.chara_id}`, '我');
+    }
+  }
+
   /** @param {PseudoUma} uma */
   // eslint-disable-next-line no-unused-vars
   set_pseudo_uma(uma) {}
