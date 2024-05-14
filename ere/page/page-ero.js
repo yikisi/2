@@ -54,6 +54,7 @@ const {
 } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { chara_has_ero_image } = require('#/data/other-const');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 function get_chr(img_name) {
   if (!img_name) {
@@ -786,7 +787,8 @@ async function page_ero(lover) {
         era.get(`love:${e}`) >= 75 &&
         sys_check_awake(e) &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
-        !era.get(`talent:${e}:绿帽癖`),
+        !era.get(`talent:${e}:绿帽癖`) &&
+        get_custom_mec(e).is_anger_for_unfaithful(),
     );
     const me = get_chara_talk(0);
     for (const chara_id of temp_chara_list) {

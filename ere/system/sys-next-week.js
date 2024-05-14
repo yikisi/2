@@ -8,7 +8,6 @@ const {
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
 const check_new_activities = require('#/system/next-week/check-new-activities');
 const randomly_interact = require('#/system/next-week/randomly-interact');
-const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 const {
@@ -28,6 +27,7 @@ const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const filter_chara = require('#/system/sys-filter-chara');
 const sys_handle_palace = require('#/system/sys-handle-palace');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const { remove_special_events } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -44,7 +44,6 @@ const {
 const { part_enum, part_talents } = require('#/data/ero/part-const');
 const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const check_stages = require('#/data/event/check-stages');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -97,10 +96,10 @@ async function sys_next_week() {
     prepared_list.forEach((chara_id) => {
       if (
         era.get('flag:地下室之主') === chara_id ||
-        sys_call_check(chara_id, check_stages.prison)
+        get_custom_check(chara_id).is_prison()
       ) {
         act_list.push({ chara_id, prison: true });
-      } else if (sys_call_check(chara_id, check_stages.rape_in_sleeping)) {
+      } else if (get_custom_check(chara_id).is_rape_in_sleeping()) {
         act_list.push({ chara_id, prison: false });
       }
     });
@@ -108,14 +107,13 @@ async function sys_next_week() {
     if (
       !act_list.length &&
       punish_level >= 2 &&
-      sys_call_check(
+      get_custom_check(
         (tmp = get_random_entry(
           filter_chara('cflag', '招募状态', recruit_flags.no).filter(
             (e) => era.get(`cflag:${e}:成长阶段`) >= 2,
           ),
         )),
-        check_stages.rape_in_sleeping,
-      )
+      ).is_rape_in_sleeping()
     ) {
       act_list.push({
         chara_id: tmp,
@@ -157,7 +155,9 @@ async function sys_next_week() {
   }
   in_team_list.forEach((chara_id) => {
     team_dict[chara_id] = 1;
-    sys_check_awake(chara_id) && auto_update_ero_skills(chara_id);
+    if (era.get('flag:性技自主学习') && sys_check_awake(chara_id)) {
+      auto_update_ero_skills(chara_id);
+    }
   });
 
   // 新回合开始
@@ -514,11 +514,10 @@ async function sys_next_week() {
     }
     if (
       growth_stage >= 2 &&
-      cur_month === 1 &&
-      cur_week === 1 &&
+      cur_month < 4 &&
       era.get(`cflag:${chara_id}:育成回合计时`) === 'x'
     ) {
-      era.set(`cflag:${chara_id}:育成回合计时`, 0);
+      era.set(`cflag:${chara_id}:育成回合计时`, (cur_round - 1) % 48);
       await sys_call_daily_event(chara_id, event_hooks.growth, { stage: 2 });
     }
 
@@ -527,6 +526,7 @@ async function sys_next_week() {
       is_always_special = is_pregnant_slave;
 
     let pregnant_stage = era.get(`cflag:${chara_id}:妊娠阶段`);
+    const life_marks = new LifeEventMarks(chara_id);
     if (pregnant_stage >> pregnant_stage_enum.embryo) {
       sys_change_lust(chara_id, lust_border.itch / 40);
       const timer = era.add(
@@ -562,8 +562,7 @@ async function sys_next_week() {
           `cflag:${chara_id}:妊娠阶段`,
           1 << pregnant_stage_enum.fetal,
         );
-        // 20周腰围+15cm，到此+15cm
-        20 === timer && era.add(`cflag:${chara_id}:腰围`, 15);
+        20 === timer && (life_marks.waist_buff = 15);
       } else if (timer < 36) {
         // 28-35周孕晚期，开始泌乳
         sys_change_pressure(chara_id, get_random_value(50, 150));
@@ -571,13 +570,11 @@ async function sys_next_week() {
           `cflag:${chara_id}:妊娠阶段`,
           1 << pregnant_stage_enum.late,
         );
-        // 孕育泌乳+5cm胸围，孕晚期+3，临产期+2
         if (!era.get(`talent:${chara_id}:泌乳`)) {
           era.set(`talent:${chara_id}:泌乳`, 1);
-          era.add(`cflag:${chara_id}:胸围`, 3);
+          life_marks.breast_buff = 3;
         }
-        // 15周腰围+15cm，到此+30cm
-        30 === timer && era.add(`cflag:${chara_id}:腰围`, 15);
+        30 === timer && (life_marks.waist_buff = 30);
       } else {
         sys_change_pressure(chara_id, get_random_value(100, 200));
         // 37周以后概率生，最晚42周
@@ -587,15 +584,12 @@ async function sys_next_week() {
           1 << pregnant_stage_enum.pre_birth,
         );
         if (timer === 36) {
-          // 孕育泌乳在临产期+2cm胸围
-          // 通过哺乳期怀孕的办法可以反复叠加该奖励
           if (era.get(`talent:${chara_id}:泌乳`) === 1) {
-            era.add(`cflag:${chara_id}:胸围`, 2);
+            life_marks.breast_buff = 5;
           }
           // 头胎在临产期+1cm臀围
           !pregnant_times && era.add(`cflag:${chara_id}:臀围`, 1);
-          // 临产期腰围+10cm，到此+40cm
-          era.add(`cflag:${chara_id}:腰围`, 10);
+          life_marks.waist_buff = 40;
         }
         // 孩子只能在中央特雷森出生
         // 不然会涉及好几个回合的产妇无法移动问题！
@@ -606,8 +600,7 @@ async function sys_next_week() {
           // 出生
           // 头两胎在生产后+2cm
           pregnant_times < 2 && era.add(`cflag:${chara_id}:臀围`, 2);
-          // 出生后腰围-32cm，到此+8cm
-          era.add(`cflag:${chara_id}:腰围`, -32);
+          life_marks.waist_buff = 8;
           pregnant_stage = era.set(
             `cflag:${chara_id}:妊娠阶段`,
             1 << pregnant_stage_enum.resume,
@@ -615,7 +608,8 @@ async function sys_next_week() {
           era.set(`cflag:${chara_id}:妊娠回合计时`, 4);
           // 一年即48周内会泌乳
           // 本回合会马上进行判定，所以+1
-          era.set(`cflag:${chara_id}:泌乳回合计时`, 48 + 1);
+          era.get(`talent:${chara_id}:泌乳`) === 1 &&
+            era.set(`cflag:${chara_id}:泌乳回合计时`, 48 + 1);
           await have_baby(chara_id);
           if (chara_id) {
             if (
@@ -640,11 +634,8 @@ async function sys_next_week() {
       }
     } else if (pregnant_stage === 1 << pregnant_stage_enum.resume) {
       sys_change_lust(chara_id, lust_border.itch / 20);
-      // 恢复期计算
       const timer = era.add(`cflag:${chara_id}:妊娠回合计时`, -1);
-      // 恢复期结束，腰围逐渐恢复正常
-      // 4回合恢复期，每回合-2cm，总共-8cm
-      era.add(`cflag:${chara_id}:腰围`, -2);
+      life_marks.waist_buff -= 2;
       if (timer === 0) {
         pregnant_stage = era.set(
           `cflag:${chara_id}:妊娠阶段`,
@@ -733,13 +724,11 @@ async function sys_next_week() {
             18 === milk_timer ||
             13 === milk_timer
           ) {
-            era.add(`cflag:${chara_id}:胸围`, -1);
+            life_marks.breast_buff--;
           }
-          // 40周后概率停奶，泌乳时间越长概率越高
-          // 孕育泌乳在孕育结束后减少胸围
+          // 40周后概率停奶，泌乳时间越长概率越高；孕育泌乳在孕育结束后消除胸围奖励
           if (milk_timer < 8 && Math.random() < Math.pow(2, -milk_timer)) {
-            // 胸围加成消失
-            era.add(`cflag:${chara_id}:胸围`, -1);
+            life_marks.breast_buff = 0;
             era.set(`cflag:${chara_id}:泌乳回合计时`, 0);
             era.set(`talent:${chara_id}:泌乳`, 0);
           }
@@ -822,15 +811,15 @@ async function sys_next_week() {
           40,
       );
     }
-    sys_call_check(chara_id, check_stages.next_week);
+    get_custom_check(chara_id).check_next_week();
   }
 
   if (race_punish) {
     const buffer = [];
-    out_race_list.forEach((e, i) => {
-      i && buffer.push('，');
-      buffer.push(get_chara_talk(e).get_colored_name());
+    out_race_list.forEach((e) => {
+      buffer.push(get_chara_talk(e).get_colored_name(), '，');
     });
+    buffer.length && buffer.splice(buffer.length - 1, 1);
     era.print([
       '因为 ',
       ...buffer,

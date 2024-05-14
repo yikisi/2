@@ -1,25 +1,21 @@
 const era = require('#/era-electron');
 
-const check_stages = require('#/data/event/check-stages');
+const CustomizedCheck = require('#/event/check/check-common');
+
 const recruit_flags = require('#/data/event/recruit-flags');
 
-const handlers = {};
-
-handlers[check_stages.prison] = handlers[check_stages.rape_in_sleeping] =
-  () => {
-    if (era.get('cflag:303:招募状态') !== recruit_flags.yes) {
+module.exports = class extends CustomizedCheck {
+  is_prison() {
+    if (era.get('cflag:343:招募状态') !== recruit_flags.yes) {
       return false;
     }
-    throw new Error();
-  };
-
-/**
- * @param {number} stage_id
- * @param extra_flag
- */
-module.exports = (stage_id, extra_flag) => {
-  if (!handlers[stage_id]) {
-    throw new Error('unsupported stage!');
+    return super.is_prison();
   }
-  return handlers[stage_id](extra_flag);
+
+  is_rape_in_sleeping() {
+    if (era.get('cflag:343:招募状态') !== recruit_flags.yes) {
+      return false;
+    }
+    return super.is_rape_in_sleeping();
+  }
 };

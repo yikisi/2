@@ -141,7 +141,8 @@ function sys_do_sex(attacker, defender, item) {
       // B罩杯以下有减成
       // 淫乳+5cm胸围，等效目标部位掌握+1
       attack_extra_bonus =
-        ((get_bust_size(attacker.id) - era.get(`cflag:${attacker.id}:下胸围`)) /
+        ((get_bust_size(attacker.id, true) -
+          era.get(`cflag:${attacker.id}:下胸围`)) /
           2.5 -
           6) /
         10;

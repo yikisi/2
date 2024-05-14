@@ -3,16 +3,15 @@ const era = require('#/era-electron');
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
-const sys_call_check = require('#/system/script/sys-call-check');
 const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { adaptability_colors, el_danger_color } = require('#/data/color-const');
-const check_stages = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_adaptability_rank } = require('#/data/info-generator');
 const { expedition_weeks } = require('#/data/move-const');
@@ -189,10 +188,10 @@ async function reg_race_page() {
             ),
             ag = adaptability_dict[ground],
             ad = adaptability_dict[distance],
-            is_aim_race = sys_call_check(chara_id, check_stages.aim_race, {
-              edu_weeks: edu_weeks + round - cur_round,
-              race: e,
-            }),
+            is_aim_race = get_custom_check(chara_id).is_aim_race(
+              e,
+              edu_weeks + round - cur_round,
+            ),
             is_foreign = race_infos[e].track >= track_enum.longchamp;
           if (
             e === race_enum.begin_race ||

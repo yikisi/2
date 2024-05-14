@@ -1,7 +1,11 @@
 const era = require('#/era-electron');
 
 const sys_change_hair = require('#/system/chara/sys-change-hair');
-const { get_bust_size } = require('#/system/ero/sys-calc-ero-status');
+const {
+  get_bust_size,
+  get_hip_size,
+  get_waist_size,
+} = require('#/system/ero/sys-calc-ero-status');
 const { get_image } = require('#/system/sys-calc-image');
 
 const { join_list } = require('#/utils/list-utils');
@@ -58,8 +62,7 @@ module.exports = {
       hair_color = era.get(`cstr:${chara.id}:发色`),
       growth = era.get(`cflag:${chara.id}:成长阶段`),
       race = era.get(`cflag:${chara.id}:种族`),
-      skin = get_skin(chara.id),
-      weight_delta = era.get(`base:${chara.id}:体重偏差`);
+      skin = get_skin(chara.id);
     let hair = era.get(`cstr:${chara.id}:呆毛`);
     hair = join_list(
       [
@@ -125,10 +128,10 @@ module.exports = {
       if (era.get(`status:${chara.id}:发胖`)) {
         right_intro_list.push('幸、幸福胖哦……');
       } else {
-        right_intro_list.push(weight_delta >= 2000 ? '微增' : '控制得当');
+        right_intro_list.push(
+          era.get(`base:${chara.id}:体重偏差`) >= 2000 ? '微增' : '控制得当',
+        );
       }
-      const w_delta = Math.floor(weight_delta / 1000),
-        h_delta = Math.floor(weight_delta / 2000);
       if (chara.sex_code - 1) {
         if (flags.show_body) {
           right_intro_list.push(
@@ -138,14 +141,9 @@ module.exports = {
             ' (',
             get_breast_cup(chara.id, flags.show_all_body).toString(),
             ' Cup) · W',
-            (era.get(`cflag:${chara.id}:腰围`) + w_delta).toString(),
+            get_waist_size(chara.id).toString(),
             ' · H',
-            (
-              era.get(`cflag:${chara.id}:臀围`) +
-              5 * (era.get(`talent:${chara.id}:淫臀`) === 2) +
-              2 * era.get(`status:${chara.id}:发情`) +
-              h_delta
-            ).toString(),
+            get_hip_size(chara.id).toString(),
           );
         } else {
           right_intro_list.push({ isBr: true }, '没有更多数据了……');

@@ -1,15 +1,14 @@
 const era = require('#/era-electron');
 
-const sys_call_check = require('#/system/script/sys-call-check');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const check_stages = require('#/data/event/check-stages');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const event_hooks = require('#/data/event/event-hooks');
+const { get_custom_check } = require('#/event/check/check-factory');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise<*>>}*/
 const handlers = {};
@@ -167,7 +166,7 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
       era.get('love:32') >= 75 &&
       tachyon.sex_code - 1 &&
       me.sex_code > 0 &&
-      sys_call_check(32, check_stages.want_make_love) &&
+      get_custom_check(32).is_want_make_love() &&
       !edu_marks.race_sex
     ) {
       edu_marks.race_sex++;

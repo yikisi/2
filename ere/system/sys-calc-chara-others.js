@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const sys_call_check = require('#/system/script/sys-call-check');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_hide_relation_and_love,
@@ -9,13 +8,15 @@ const {
 } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { get_custom_check } = require('#/event/check/check-factory');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { love_colors, relation_colors } = require('#/data/const.json');
-const check_stages = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_love_border,
@@ -23,7 +24,6 @@ const {
   get_relation_mark,
 } = require('#/data/info-generator');
 const LimitLoveStatus = require('#/data/love-limit-status');
-const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 /**
  * @param {number} chara_id
@@ -42,7 +42,8 @@ async function punish_unfaithful(chara_id, new_love) {
           e !== chara_id &&
           era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
           era.get(`love:${e}`) >= 75 &&
-          !era.get(`talent:${e}:绿帽癖`),
+          !era.get(`talent:${e}:绿帽癖`) &&
+          get_custom_mec(e).is_anger_for_unfaithful(),
       );
     for (const c_id of temp_chara_list) {
       era.print([
@@ -225,7 +226,7 @@ function love_uma(chara_id, val, to_be_shown) {
             get_chara_talk(chara_id).get_colored_name(),
             ' 的关系似乎可以更进一步了……',
           ]);
-        sys_call_check(chara_id, check_stages.love_event);
+        get_custom_check(chara_id).check_love_events();
       }
       return true;
     }

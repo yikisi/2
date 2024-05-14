@@ -1,10 +1,12 @@
 const era = require('#/era-electron');
 
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
+const { sys_check_race_ready } = require('#/system/sys-calc-chara-param');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
@@ -14,6 +16,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
  * @param _
@@ -337,9 +340,8 @@ module.exports = async (_, __, event_object) => {
       era.printButton(`「还记得你选我的时候说的话吗？」`, 1);
       await era.input();
       await vp.say_and_wait(`……我好像说过很多话。`);
-      era.printButton(
-        `「你说『如果负责能连霸凯旋门赏的${vp.get_uma_sex_title()}的话，作为社会人的评价也会提高吧。』」`,
-        1,
+      await me.say_and_wait(
+        `你说『如果负责能连霸凯旋门赏的${vp.get_uma_sex_title()}的话，作为社会人的评价也会提高吧。』`,
       );
       await era.input();
       await vp.say_and_wait(
@@ -406,6 +408,12 @@ module.exports = async (_, __, event_object) => {
       era.println();
       sys_love_uma(205, 5) && (await era.waitAnyKey());
       era.set('cflag:205:招募状态', recruit_flags.yes);
+      if (sys_check_race_ready(205)) {
+        sys_reg_race(205).curr = {
+          race: race_enum.prix_lat,
+          week: 95 + race_infos[race_enum.prix_lat].date,
+        };
+      }
       break;
     case 95 + 42:
       temp = [0, 0];

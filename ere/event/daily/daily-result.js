@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_get_random_uma_god = require('#/system/chara/sys-get-random-uma-god');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
@@ -48,7 +49,7 @@ function random_cost_in_action(chara_id, stamina, time) {
   }
 }
 
-/** @type {Record<string,function(number,HookArg,Record<string,*>):Promise<void>>} */
+/** @type {Record<string,function(number,HookArg,Record<string,any>):Promise<void>>} */
 const handlers = {};
 
 handlers[event_hooks.office_gift] = async (chara_id) => {
@@ -300,7 +301,11 @@ handlers[event_hooks.out_church] = async (chara_id) => {
     era.set('status:0:练习X手', 0);
     era.print(`${CharaTalk.me.name} 的训练似乎更加顺利了……`);
   }
-  if (condition_chara || condition_me) {
+  if (
+    sys_like_chara(sys_get_random_uma_god(), 0, get_random_value(5, 20)) ||
+    condition_chara ||
+    condition_me
+  ) {
     await era.waitAnyKey();
   }
 };
@@ -360,7 +365,7 @@ handlers[event_hooks.celebration] = async (chara_id) => {
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {*} extra_flag
+ * @param {Record<string,any>} extra_flag
  */
 module.exports = async (chara_id, hook, extra_flag) => {
   if (handlers[hook.hook]) {

@@ -20,6 +20,7 @@ const { part_enum, part_names } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
+  ero_action_names,
   ero_hook_tags,
   ero_hooks,
   ero_tagged_hooks,
@@ -35,8 +36,9 @@ function get_random_act(master, act_list, last_action, ...filters) {
   const change_action = era.get(`tcvar:${master}:变招`);
   let ret;
   filters.push(undefined);
+  let filtered_list;
   for (const f of filters) {
-    const filtered_list = f ? act_list.filter(f) : act_list;
+    filtered_list = f ? act_list.filter(f) : act_list;
     if (
       filtered_list.indexOf(last_action) !== -1 &&
       change_action < 1 &&
@@ -50,6 +52,7 @@ function get_random_act(master, act_list, last_action, ...filters) {
       break;
     }
   }
+  era.logger.debug(filtered_list.map((e) => ero_action_names[e]));
   return ret;
 }
 
@@ -307,7 +310,7 @@ async function sys_auto_rape(shown) {
     if (era.get('talent:0:淫口') > 0) {
       week_list[ero_hook_tags.mouth] = week_list[ero_hook_tags.tongue] = true;
     }
-    if (era.get('talent:0:淫乳') > 0) {
+    if (era.get('talent:0:淫乳') > 0 || era.get('talent:0:泌乳')) {
       week_list[ero_hook_tags.breast] =
         week_list[ero_hook_tags.nipple] =
         week_list[ero_hook_tags.touched_nipple] =
@@ -424,12 +427,12 @@ async function sys_auto_rape(shown) {
         relation = 2;
       }
       relation =
-        ((ero + 1) << 3) +
-        (relation << 1) +
+        ((ero + 1) << 3) + // 0b00000 0b01000 0b10000
+        (relation << 1) + // 0b00000 0b00010 0b00100
         (era.get(`status:${master}:经期`) ||
-          era.get(`cflag:${master}:妊娠阶段`) !== 1 << pregnant_stage_enum.no);
+          era.get(`cflag:${master}:妊娠阶段`) !== 1 << pregnant_stage_enum.no); // 0b00000 0b00001
       switch (relation) {
-        case 10: // 非经期x恋人x普通
+        case 0b01010: // 非经期x恋人x普通
           if (
             !era.get(`status:${master}:长效避孕药`) &&
             !era.get(`status:${master}:短效避孕药`)
@@ -444,11 +447,11 @@ async function sys_auto_rape(shown) {
             return;
           }
           break;
-        case 0: // 非经期x炮友x性保守
-        case 1: // 经期x炮友x性保守
-        case 2: // 非经期x恋人x性保守
-        case 3: // 经期x恋人x性保守
-        case 8: // 非经期x炮友x普通
+        case 0b00000: // 非经期x炮友x性保守
+        case 0b00001: // 经期x炮友x性保守
+        case 0b00010: // 非经期x恋人x性保守
+        case 0b00011: // 经期x恋人x性保守
+        case 0b01000: // 非经期x炮友x普通
           if (!era.get('tcvar:0:避孕套')) {
             await sys_call_ero_event(master, ero_hooks.other_condom, {
               shown,
@@ -458,7 +461,7 @@ async function sys_auto_rape(shown) {
             return;
           }
           break;
-        case 16: // 非经期x炮友x好色
+        case 0b10000: // 非经期x炮友x好色
           if (
             era.get(`status:${master}:排卵期`) &&
             !era.get('tcvar:0:避孕套')
@@ -471,7 +474,7 @@ async function sys_auto_rape(shown) {
             return;
           }
           break;
-        case 18: // 非经期x恋人x好色
+        case 0b10010: // 非经期x恋人x好色
           if (
             era.get(`status:${master}:排卵期`) &&
             !era.get(`status:${master}:长效避孕药`) &&
@@ -487,16 +490,16 @@ async function sys_auto_rape(shown) {
             return;
           }
           break;
-        case 4: // 非经期x未婚x性保守
-        case 5: // 经期x未婚x性保守
-        case 9: // 经期x炮友x普通
-        case 11: // 经期x恋人x普通
-        case 12: // 非经期x未婚x普通
-        case 13: // 经期x未婚x普通
-        case 17: // 经期x炮友x好色
-        case 19: // 经期x恋人x好色
-        case 20: // 非经期x未婚x好色
-        case 21: // 经期x未婚x好色
+        case 0b00100: // 非经期x未婚x性保守
+        case 0b00101: // 经期x未婚x性保守
+        case 0b01001: // 经期x炮友x普通
+        case 0b01011: // 经期x恋人x普通
+        case 0b01100: // 非经期x未婚x普通
+        case 0b01101: // 经期x未婚x普通
+        case 0b10001: // 经期x炮友x好色
+        case 0b10011: // 经期x恋人x好色
+        case 0b10100: // 非经期x未婚x好色
+        case 0b10101: // 经期x未婚x好色
       }
     } else if (
       ero_tagged_hooks[action].attacker_tags.indexOf(ero_hook_tags.insert) !==

@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const sys_call_check = require('#/system/script/sys-call-check');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const {
   sys_change_attr_and_print,
@@ -21,7 +20,7 @@ const select_target = require('#/page/components/select-target');
 const { generate_race_button } = require('#/page/homepage/snippets');
 const page_chairman_office = require('#/page/page-chairman-office');
 const print_exp_page = require('#/page/page-exp');
-const print_inherit_shop_page = require('#/page/page-inherit-shop');
+const print_god_shop = require('#/page/page-god-shop');
 const print_juel_shop_page = require('#/page/page-juel-shop');
 const print_load_page = require('#/page/page-load-game');
 const print_out_page = require('#/page/page-out');
@@ -35,11 +34,11 @@ const print_shop_page = require('#/page/page-shop');
 const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const { shop_end, shop_start } = require('#/event/shop/tachyon-shop');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { get_celebration } = require('#/data/info-generator');
@@ -62,7 +61,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置'),
     office_activity_filter = era.get('flag:筛除训练室活动'),
     out_activity_filter = era.get('flag:筛除外出活动'),
-    personal_action = sys_call_check(chara_id, check_stages.personal_action),
+    personal_action = get_custom_check(chara_id).get_personal_action(),
     registered_race = sys_reg_race(chara_id).curr,
     player_base = {
       stamina: era.get('base:0:体力'),
@@ -421,21 +420,19 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
               content: `${chara_id ? '一起' : ''}外出`,
               type: 'button',
             },
-            era.get('flag:当前月') === 3
-              ? {
-                  accelerator: 308,
-                  config: {
-                    disabled: true,
-                    // !sys_check_train_enabled(chara_id) ||
-                    // !sys_check_awake(chara_id) ||
-                    // !sys_check_awake(0) ||
-                    // not_in_same_loc,
-                    width: 6,
-                  },
-                  content: `${chara_id ? '' : '独自'}前往女神像 (继承)`,
-                  type: 'button',
-                }
-              : undefined,
+            {
+              accelerator: 308,
+              config: {
+                disabled:
+                  (chara_id && !sys_check_train_enabled(chara_id)) ||
+                  !sys_check_awake(chara_id) ||
+                  !sys_check_awake(0) ||
+                  not_in_same_loc,
+                width: 6,
+              },
+              content: `${chara_id ? '' : '独自'}前往三女神像`,
+              type: 'button',
+            },
             chara_id && era.get(`cflag:${chara_id}:节日事件标记`)
               ? {
                   accelerator: 309,
@@ -597,7 +594,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       break;
     case 211:
       era.drawLine();
-      sys_call_check(chara_id, check_stages.love_event);
+      get_custom_check(chara_id).check_love_events();
       await era.printAndWait([
         get_chara_talk(chara_id).get_colored_name(),
         { content: ' 似乎决定重新审视你们之间的关系……' },
@@ -680,7 +677,9 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       await print_out_page();
       break;
     case 308:
-      await print_inherit_shop_page();
+      era.set('flag:当前位置', location_enum.god);
+      await print_god_shop();
+      era.set('flag:当前位置', location_enum.office);
       break;
     case 309:
       sys_change_attr_and_print(0, '精力', -celebration_cost);

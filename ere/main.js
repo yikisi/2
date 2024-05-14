@@ -94,7 +94,13 @@ module.exports = async () => {
       },
       [
         {
-          content: ['雞雞', { isDivider: true }, '无名路人'],
+          content: [
+            '雞雞',
+            { isDivider: true },
+            '无名路人',
+            { isDivider: true },
+            '黑奴队长',
+          ],
           type: 'text',
         },
         { type: 'divider' },
@@ -401,6 +407,10 @@ module.exports = async () => {
           [
             [{ color: get_chara_color(400), content: '周日宁静' }],
             '黑衣剑士-星爆气流斩准备就绪',
+          ],
+          [
+            [{ color: get_chara_color(340), content: '达利阿拉伯' }],
+            'O口口口口口',
           ],
           ['特殊角色（临时）', '黑奴队长'],
         ]) {

@@ -26,7 +26,7 @@ class CharaTitles {
       (this.obj = era.set(
         `cstr:${this.chara_id}:称号`,
         distinct_list(this.obj, (e) => e.n),
-      )).length !== origin_length
+      )).length > origin_length
     );
   }
 
@@ -53,7 +53,7 @@ class CharaTitles {
           title:
             has_desc && title_desc[curr.n]
               ? `[${curr.n}]：${title_desc[curr.n]}`
-              : '',
+              : undefined,
         }
       : '';
   }
