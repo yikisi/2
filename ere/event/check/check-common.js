@@ -141,7 +141,7 @@ class CustomizedCheck {
       }
     });
     buffer.push({
-      check: Number(g1_count > 0),
+      check: Math.min(g1_count, 1),
       color: g1_count > 0 ? attr_change_colors.up : attr_change_colors.down,
       content: `一场G1比赛 入着 ${g1_count}/1 ${g1_count > 0 ? '✔' : '✘'}`,
     });

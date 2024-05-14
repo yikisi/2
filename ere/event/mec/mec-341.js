@@ -1,4 +1,4 @@
-const { set } = require('#/era-electron');
+const { get, set } = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
@@ -20,7 +20,7 @@ module.exports = class extends CustomizedMec {
 
   get_ero_check(action) {
     if (new GodolphinLifeMarks().love === 2) {
-      return 40;
+      return Math.min(40, 90 - get('love:341'));
     }
     return super.get_ero_check(action);
   }

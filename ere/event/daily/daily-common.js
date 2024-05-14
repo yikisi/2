@@ -119,15 +119,22 @@ handlers[event_hooks.select] = (chara_id) => {
 };
 
 handlers[event_hooks.good_morning] = (chara_id) => {
+  const buffer = [
+    [' 竖起了大拇指。'],
+    [' 正在专心地阅读着什么。'],
+    [' 正在与同学们愉快地聊天。'],
+    [' 看起来吃撑了，肚子变得圆鼓鼓的。'],
+  ];
+  if (!(era.get('cflag:301:育成回合计时') <= 143 + 10)) {
+    buffer.push([
+      ' 正在接待处向 ',
+      sys_get_colored_callname(0, 301),
+      ' 查询着什么。',
+    ]);
+  }
   era.print([
     get_chara_talk(chara_id).get_colored_name(),
-    ...get_random_entry([
-      [' 竖起了大拇指。'],
-      [' 正在专心地阅读着什么。'],
-      [' 正在与同学们愉快地聊天。'],
-      [' 看起来吃撑了，肚子变得圆鼓鼓的。'],
-      [' 正在接待处向 ', sys_get_colored_callname(0, 301), ' 查询着什么。'],
-    ]),
+    ...get_random_entry(buffer),
   ]);
 };
 

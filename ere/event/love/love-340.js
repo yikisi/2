@@ -10,7 +10,7 @@ const {
   sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
-const god_love_common = require('#/event/love/snippets/god-love-common');
+const god_love_common = require('#/event/love/snippets/love-god-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');

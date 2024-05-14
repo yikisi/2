@@ -28,6 +28,7 @@ const filter_chara = require('#/system/sys-filter-chara');
 const sys_handle_palace = require('#/system/sys-handle-palace');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { remove_special_events } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -58,12 +59,12 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { pressure_border } = require('#/data/train-const');
 
 async function sys_next_week() {
-  const in_team_list = filter_chara('cflag', '招募状态', recruit_flags.yes),
-    health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes,
+  const health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes,
     me = get_chara_talk(0),
     punish_level = era.get('flag:惩戒力度'),
     team_dict = {},
     your_race = era.get('cflag:0:种族');
+  let in_team_list = filter_chara('cflag', '招募状态', recruit_flags.yes);
   in_team_list.shift();
   let temp;
   era.set('status:0:沉睡', 1);
@@ -861,6 +862,9 @@ async function sys_next_week() {
     }
   }
   await check_new_activities(cur_round, in_team_list);
+  in_team_list = in_team_list.filter((e) =>
+    get_custom_mec(e).is_able_to_be_selected(),
+  );
   if (!era.get('flag:当前互动角色') && in_team_list.length) {
     temp = era.get('flag:床伴');
     era.set(
