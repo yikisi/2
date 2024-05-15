@@ -200,16 +200,15 @@ module.exports = class extends CustomizedCheck {
   }
 
   is_prison() {
-    if (era.get('cflag:205:招募状态') === recruit_flags.yes) {
-      throw new Error();
-    }
-    return super.is_prison();
+    return (
+      era.get('cflag:205:招募状态') === recruit_flags.yes && super.is_prison()
+    );
   }
 
   is_rape_in_sleeping() {
-    if (era.get('cflag:205:招募状态') === recruit_flags.yes) {
-      throw new Error();
-    }
-    return super.is_rape_in_sleeping();
+    return (
+      era.get('cflag:205:招募状态') === recruit_flags.yes &&
+      super.is_rape_in_sleeping()
+    );
   }
 };

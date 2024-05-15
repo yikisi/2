@@ -21,6 +21,7 @@ cons_dict[16] = require('#/event/check/check-16');
 cons_dict[17] = require('#/event/check/check-17');
 cons_dict[18] = require('#/event/check/check-18');
 cons_dict[19] = require('#/event/check/check-19');
+cons_dict[24] = require('#/event/check/check-24');
 cons_dict[25] = require('#/event/check/check-25');
 cons_dict[26] = require('#/event/check/check-26');
 cons_dict[27] = require('#/event/check/check-27');

@@ -1,14 +1,7 @@
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 class MayaEduMarks extends EduEventMarks {
-  // 逃马G1胜利次数
-  st_check0;
-  // 先马G1胜利次数
-  st_check1;
-  // 差马G1胜利次数
-  st_check2;
-  // 追马G1胜利次数
-  st_check3;
+  st_check;
 
   constructor() {
     super(24);
