@@ -132,7 +132,7 @@ async function love_god_common(
       temp = new LifeEventMarks(0);
       temp.waist_buff = 8;
       set('cflag:0:妊娠阶段', 1 << pregnant_stage_enum.resume);
-      set('cflag:0:妊娠回合计时', 4);
+      set('cflag:0:妊娠回合计时', 4 + 1);
       add('talent:0:泌乳', !get('talent:0:泌乳'));
       if (get('talent:0:泌乳') === 1) {
         set('cflag:0:泌乳回合计时', 48 + 1);

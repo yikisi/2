@@ -111,7 +111,7 @@ module.exports = async () => {
       //均已输入
       era.printMultiColumns([
         {
-          accelerator: 0,
+          accelerator: 1,
           config: { width: 6 },
           content: '提交聘书',
           type: 'button',
@@ -137,7 +137,7 @@ module.exports = async () => {
       ]);
 
       switch (await era.input()) {
-        case 0:
+        case 1:
           era.set('callname:0:-1', player_name);
           era.set('cflag:0:性别', player_gender);
 
@@ -147,9 +147,6 @@ module.exports = async () => {
 
           if (await page_custom()) {
             return false;
-          }
-          if (era.get('flag:角色性别')) {
-            era.set('cflag:0:性别', era.get('flag:角色性别'));
           }
 
           // 0号角色初始化

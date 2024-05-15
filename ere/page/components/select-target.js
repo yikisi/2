@@ -198,9 +198,8 @@ async function select_target(type) {
       false,
     );
   } else if (type !== chara_info_type.info) {
-    // 一般不用显示自己
     list_team = sort_list(
-      list_team.filter((e) => e && get_custom_mec(e).is_able_to_be_selected),
+      list_team.filter((e) => e && get_custom_mec(e).is_able_to_be_selected()),
       (chara_id) => {
         return (
           (era.get(`cflag:${chara_id}:成长阶段`) << 17) +

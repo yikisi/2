@@ -213,7 +213,8 @@ function get_relation_mark(relation, chara_id) {
   if (sys_check_hide_relation_and_love(chara_id)) {
     return '？';
   }
-  const val = relation;
+  const val =
+    relation !== undefined ? relation : era.get(`relation:${chara_id}:0`);
   let level = 0;
   while (val > level_and_desc.relation.border[level]) {
     level++;

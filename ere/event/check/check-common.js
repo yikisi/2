@@ -30,6 +30,8 @@ const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 
 class CustomizedCheck {
+  static like_chara;
+
   constructor(chara_id) {
     this.id = chara_id;
   }
@@ -160,7 +162,7 @@ class CustomizedCheck {
     return buffer;
   }
 
-  /** @returns {{name:string,handle:function():void}|{}} */
+  /** @returns {{name:string,handle:function():Promise}|{}} */
   get_personal_action() {
     return {};
   }

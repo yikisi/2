@@ -361,26 +361,26 @@ async function sys_next_week() {
       }
     }
 
-    // 避战惩罚
-    const registered_race = sys_reg_race(chara_id);
-    if (
-      registered_race.last.week > 0 &&
-      registered_race.last.week < cur_round &&
-      !new RaceHistory(chara_id).get_result(
-        era.get(`cflag:${chara_id}:育成回合计时`) - 1,
-      )
-    ) {
-      out_race_list.push(chara_id);
-      race_punish += 100;
-      registered_race.curr = { race: -1, week: -1 };
-    }
-    registered_race.last.race = registered_race.curr.race;
-    registered_race.last.week = registered_race.curr.week;
-
     if (!isNaN(Number(era.get(`cflag:${chara_id}:育成回合计时`)))) {
       era.add(`cflag:${chara_id}:育成回合计时`, 1);
     }
     if (team_dict[chara_id]) {
+      // 避战惩罚
+      const registered_race = sys_reg_race(chara_id);
+      if (
+        registered_race.last.week > 0 &&
+        registered_race.last.week < cur_round &&
+        !new RaceHistory(chara_id).get_result(
+          era.get(`cflag:${chara_id}:育成回合计时`) - 1,
+        )
+      ) {
+        out_race_list.push(chara_id);
+        race_punish += 100;
+        registered_race.curr = { race: -1, week: -1 };
+      }
+      registered_race.last.race = registered_race.curr.race;
+      registered_race.last.week = registered_race.curr.week;
+
       stay_up > 0 && sys_change_pressure(chara_id, 100 + 200 * stay_up);
       out_race_list.at(-1) === chara_id &&
         sys_change_pressure(chara_id, get_random_value(1000, 2000));

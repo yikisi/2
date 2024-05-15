@@ -6,7 +6,10 @@ const { buff_colors } = require('#/data/color-const');
 
 module.exports = class extends CustomizedMec {
   is_able_to_be_selected() {
-    return get(`cflag:${this.id}:育成回合计时`) < 3 * 48;
+    return (
+      get(`cflag:${this.id}:位置`) ||
+      get(`cflag:${this.id}:育成回合计时`) < 3 * 48
+    );
   }
 
   get_talents() {

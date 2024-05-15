@@ -21,7 +21,6 @@ const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
 async function out_page() {
-  era.set('flag:当前位置', location_enum.gate);
   let chara_id = era.get('flag:当前互动角色'),
     vehicle;
   const player_base = {
@@ -170,7 +169,6 @@ async function out_page() {
       loc: positions[aim]?.l,
     });
   }
-  era.set('flag:当前位置', location_enum.office);
 }
 
 module.exports = out_page;

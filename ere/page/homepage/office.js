@@ -49,7 +49,7 @@ const { location_enum } = require('#/data/locations');
  * @param {function(number,number,number):Promise} save_and_next_week
  * @param {{after_select:boolean,homepage:boolean,week_start:boolean}} flags
  */
-module.exports = async function (chara_id, save_and_next_week, flags) {
+module.exports = async (chara_id, save_and_next_week, flags) => {
   const celebration = get_celebration(),
     celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1),
     cur_weeks = era.get('flag:当前回合数'),
@@ -589,7 +589,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       break;
     case 210:
       era.drawLine();
-      personal_action.handle();
+      await personal_action.handle();
       await era.waitAnyKey();
       break;
     case 211:
@@ -674,7 +674,9 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         sys_get_move_cost(location_enum.gate, chara_id),
         chara_id,
       );
+      era.set('flag:当前位置', location_enum.gate);
       await print_out_page();
+      era.set('flag:当前位置', location_enum.office);
       break;
     case 308:
       era.set('flag:当前位置', location_enum.god);

@@ -10,11 +10,11 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 module.exports = {
   /**
    * @param {number} chara_id
-   * @param {number} race_weeks
+   * @param {number} race_week
    * @param {number} cur_weeks
    */
-  generate_race_button(chara_id, race_weeks, cur_weeks) {
-    if (race_weeks === cur_weeks) {
+  generate_race_button(chara_id, race_week, cur_weeks) {
+    if (race_week === cur_weeks) {
       return {
         accelerator: 102,
         config: {
