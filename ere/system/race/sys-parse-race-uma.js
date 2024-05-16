@@ -135,6 +135,17 @@ function sys_parse_for_race(team_chara, race, info) {
   });
   //最后填路人幻影
   gacha([], info.gates - ret.length);
+  const date = era.get('flag:当前回合数'),
+    ratio = 1 - ((date - 1) % 48) / 48;
+
+  ret
+    .slice(team_chara.length)
+    .forEach(
+      (uma) =>
+        (uma.attrs = uma.attrs.map(
+          (e) => e - 400 * ratio + get_random_value(-50, 50),
+        )),
+    );
   const from_setting = era.get('flag:比赛难度');
   if (from_setting) {
     ret

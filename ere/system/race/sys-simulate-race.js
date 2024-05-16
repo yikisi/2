@@ -100,7 +100,10 @@ function sys_sim_race(list_chara, race_info) {
     list_in_race.forEach((uma) => {
       //先结算上一tick的速度至移动距离 以及上一tick的加速度至速度
       uma.race.location += uma.race.velocityReal;
-      uma.race.velocityReal += uma.race.acceleration;
+      uma.race.velocityReal = Math.max(
+        uma.race.velocityReal + uma.race.acceleration,
+        uma.base.velocityMin,
+      );
       uma.race.staminaCost =
         (20 / 144) *
         Math.pow(uma.race.velocityReal - uma.base.velocityIdeal + 12, 2) *
