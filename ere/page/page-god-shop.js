@@ -6,6 +6,7 @@ const {
   sys_change_motivation,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const print_curr_chara = require('#/page/components/cur-chara-info');
 const print_page_header = require('#/page/components/page-header');
@@ -20,12 +21,14 @@ const { money_color } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const { location_enum } = require('#/data/locations');
 const { attr_names } = require('#/data/train-const');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const button_contents = ['请求帮助', '探寻微笑', '痴迷注视'];
 
 module.exports = async () => {
+  era.set('flag:当前位置', location_enum.god);
   let flag_god = true,
     relation = 0,
     god_id = sys_get_random_uma_god(),
@@ -363,4 +366,10 @@ module.exports = async () => {
   if (relation && sys_like_chara(god_id, 0, relation)) {
     await era.waitAnyKey();
   }
+  era.set('flag:当前位置', location_enum.office);
+  await era.printAndWait('回去了……');
+  era.println();
+  await sys_get_random_event(event_hooks.back_school)({
+    loc: location_enum.god,
+  });
 };

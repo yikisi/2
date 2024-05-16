@@ -472,7 +472,7 @@ handlers[
 handlers[event_hooks.week_end] = require('#/event/edu/edu-events-205/week-end');
 
 handlers[event_hooks.foreign_travel] = async (_, __, event_object) => {
-  if (event_object?.arg === 47 + 35) {
+  if (event_object?.arg === 47 + 36) {
     const me = get_chara_talk(0),
       montjeu = get_chara_talk(204),
       vp = get_chara_talk(205);

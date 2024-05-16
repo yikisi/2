@@ -12,8 +12,6 @@ const {
   sys_get_move_cost,
 } = require('#/system/sys-calc-chara-param');
 
-const print_out_page = require('#/page/page-out');
-
 const { get_random_value } = require('#/utils/value-utils');
 
 const { love_colors, relation_colors } = require('#/data/const.json');
@@ -26,7 +24,7 @@ const { location_enum } = require('#/data/locations');
  * @param {{color:string,content:string,[title]:string}|string|undefined} title
  * @param {{name:string,handle:function():Promise}} talk_cb
  * @param {{name:string,handle:function():Promise}} sex_cb
- * @param {{name:string,[handle]:function():Promise,[loc]:number}} out_cb
+ * @param {{name:string,[handle]:function():Promise,[loc]:number,[print_out_page]:function():Promise}} out_cb
  * @param {{name:string,handle:function():Promise}} cele_cb
  * @param {{name:string,handle:function():Promise}} func_cb
  * @param {{name:string,handle:function():Promise}} back_cb
@@ -170,17 +168,17 @@ async function npc_common(
       await sex_cb.handle();
       break;
     case 3:
-      sys_handle_action(
-        sys_get_move_cost(location_enum.gate, chara.id),
-        chara.id,
-      );
       temp = era.get('flag:当前互动角色');
       era.set('flag:当前互动角色', chara.id);
       if (out_cb.handle) {
         await out_cb.handle();
       } else {
+        sys_handle_action(
+          sys_get_move_cost(location_enum.gate, chara.id),
+          chara.id,
+        );
         era.set('flag:当前位置', location_enum.gate);
-        await print_out_page();
+        await out_cb.print_out_page();
         era.set('flag:当前位置', out_cb.loc);
       }
       era.set('flag:当前互动角色', temp);

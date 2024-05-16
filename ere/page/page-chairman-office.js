@@ -1,8 +1,12 @@
 const era = require('#/era-electron');
 
 const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
+const { sys_handle_action } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+const {
+  sys_check_awake,
+  sys_get_move_cost,
+} = require('#/system/sys-calc-chara-param');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
@@ -31,15 +35,16 @@ async function page_chairman_office() {
   era.drawLine();
   const chara_id = 302;
   const chara = get_chara_talk(chara_id),
-    vehicle = era.get('equip:0:单人载具');
+    vehicle = era.get('equip:0:单人载具'),
+    title = new CharaTitles(chara_id).get_colored_curr_title();
   era.print([
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了理事长办公室……',
   ]);
   while (flag_page) {
-    flag_page = await npc_common(
+    flag_page &&= await npc_common(
       chara,
-      new CharaTitles(chara_id).get_colored_curr_title(),
+      title,
       {
         name: '「闲 谈！无聊了来找你玩！」',
         async handle() {
@@ -89,11 +94,16 @@ async function page_chairman_office() {
       {
         async handle() {
           nothing = false;
+          sys_handle_action(
+            sys_get_move_cost(location_enum.gate, chara.id),
+            chara.id,
+          );
           era.set('flag:当前位置', location_enum.gate);
           await print_out_page();
           era.set('flag:当前位置', location_enum.chairman);
         },
         name: '「约 会！一起出去走走吧！」',
+        print_out_page,
       },
       {
         name: `「庆 贺！${get_celebration()} 快乐！」`,
@@ -259,7 +269,6 @@ async function page_chairman_office() {
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.chairman,
   });
-
   era.set('flag:当前位置', location_enum.office);
 }
 

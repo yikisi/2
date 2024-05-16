@@ -13,6 +13,8 @@ const location_enum = {
   chairman: 0,
   // 神社
   church: 0,
+  // 保健室
+  clinic: 0,
   // 大门
   gate: 0,
   // 三女神像
@@ -55,6 +57,10 @@ const location_enum = {
   station: 0,
   // 夏合宿宿舍
   summer_home: 0,
+  // 训练员办公室
+  trainer: 0,
+  // 访客接待室
+  visitor: 0,
 };
 Object.keys(location_enum).forEach((k, i) => (location_enum[k] = i));
 
@@ -87,6 +93,9 @@ location_name[location_enum.guangzhou] = '广州';
 location_name[location_enum.new_york] = '纽约';
 location_name[location_enum.hot_spring] = '温泉';
 location_name[location_enum.god] = '三女神像';
+location_name[location_enum.trainer] = '训练员办公室';
+location_name[location_enum.visitor] = '访客接待室';
+location_name[location_enum.clinic] = '保健室';
 
 module.exports = {
   location_enum,

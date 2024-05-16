@@ -259,9 +259,26 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   type: 'button',
                 }
               : undefined,
-            personal_action.name
+            chara_id && era.get(`cflag:${chara_id}:节日事件标记`)
               ? {
                   accelerator: 210,
+                  config: {
+                    buttonType: 'danger',
+                    disabled:
+                      !sys_check_awake(chara_id) ||
+                      !sys_check_awake(0) ||
+                      chara_base.time < 50 ||
+                      player_base.time < celebration_cost ||
+                      not_in_same_loc,
+                    width: 6,
+                  },
+                  content: `一起庆祝 ${celebration}`,
+                  type: 'button',
+                }
+              : undefined,
+            personal_action.name
+              ? {
+                  accelerator: 211,
                   config: { width: 6 },
                   content: personal_action.name,
                   type: 'button',
@@ -269,7 +286,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
               : undefined,
             is_love_rejected && is_love_rejected === era.get(`love:${chara_id}`)
               ? {
-                  accelerator: 211,
+                  accelerator: 212,
                   config: { disabled: not_in_same_loc, width: 6 },
                   content: '重新触发爱慕事件',
                   type: 'button',
@@ -279,7 +296,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             !era.get('flag:地下室之主') &&
             era.get('flag:惩戒力度') >= 2
               ? {
-                  accelerator: 212,
+                  accelerator: 213,
                   config: {
                     disabled:
                       !chara_id ||
@@ -301,6 +318,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 301,
               config: {
+                buttonType:
+                  new EventMarks(0).get(event_hooks.recruit_start) ||
+                  new EventMarks(0).get(event_hooks.recruit)
+                    ? 'danger'
+                    : 'warning',
                 disabled:
                   era.get('flag:当前月') >= 4 ||
                   !sys_check_awake(0) ||
@@ -308,11 +330,6 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                     sys_get_move_cost(location_enum.playground),
                     player_base,
                   ),
-                buttonType:
-                  new EventMarks(0).get(event_hooks.recruit_start) ||
-                  new EventMarks(0).get(event_hooks.recruit)
-                    ? 'danger'
-                    : 'warning',
                 width: 6,
               },
               content: '前往训练场 (招募)',
@@ -320,7 +337,62 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             },
             {
               accelerator: 302,
-              // 幼年期只能呆在训练室
+              config: {
+                buttonType: event_marks.get(event_hooks.back_school)
+                  ? 'danger'
+                  : 'warning',
+                disabled:
+                  !sys_check_awake(0) ||
+                  sys_check_act_disabled(
+                    sys_get_move_cost(location_enum.trainer),
+                    player_base,
+                  ),
+                width: 6,
+              },
+              content: '前往训练员办公室',
+              type: 'button',
+            },
+            {
+              accelerator: 303,
+              config: {
+                buttonType: event_marks.get(event_hooks.back_school)
+                  ? 'danger'
+                  : 'warning',
+                disabled:
+                  !sys_check_awake(0) ||
+                  sys_check_act_disabled(
+                    sys_get_move_cost(location_enum.clinic),
+                    player_base,
+                  ),
+                width: 6,
+              },
+              content: '前往保健室',
+              type: 'button',
+            },
+            {
+              accelerator: 304,
+              config: {
+                buttonType: new EventMarks(0).get(event_hooks.back_school)
+                  ? 'danger'
+                  : 'warning',
+                disabled:
+                  growth_stage < 1 ||
+                  (chara_id && !sys_check_train_enabled(chara_id)) ||
+                  !sys_check_awake(chara_id) ||
+                  !sys_check_awake(0) ||
+                  sys_check_act_disabled(
+                    sys_get_move_cost(location_enum.god),
+                    player_base,
+                    chara_base,
+                  ) ||
+                  not_in_same_loc,
+                width: 6,
+              },
+              content: `${chara_id ? '一起' : ''}前往三女神像`,
+              type: 'button',
+            },
+            {
+              accelerator: 305,
               config: {
                 buttonType:
                   event_marks.get(event_hooks.school_atrium) ||
@@ -339,12 +411,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   not_in_same_loc,
                 width: 6,
               },
-              content: '前往中庭',
+              content: `${chara_id ? '一起' : ''}前往中庭`,
               type: 'button',
             },
             {
-              accelerator: 303,
-              // 幼年期只能呆在训练室
+              accelerator: 306,
               config: {
                 buttonType:
                   event_marks.get(event_hooks.school_rooftop) ||
@@ -363,20 +434,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   not_in_same_loc,
                 width: 6,
               },
-              content: '前往天台',
+              content: `${chara_id ? '一起' : ''}前往天台`,
               type: 'button',
             },
             {
-              accelerator: 304,
-              config: {
-                disabled: !sys_check_awake(0),
-                width: 6,
-              },
-              content: '前往小卖部',
-              type: 'button',
-            },
-            {
-              accelerator: 305,
+              accelerator: 307,
               config: {
                 buttonType: event_marks.get(event_hooks.back_school)
                   ? 'danger'
@@ -389,11 +451,37 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   ),
                 width: 6,
               },
-              content: '前往理事长室',
+              content: '前往理事长办公室',
               type: 'button',
             },
             {
-              accelerator: 307,
+              accelerator: 308,
+              config: {
+                buttonType: event_marks.get(event_hooks.back_school)
+                  ? 'danger'
+                  : 'warning',
+                disabled:
+                  !sys_check_awake(0) ||
+                  sys_check_act_disabled(
+                    sys_get_move_cost(location_enum.visitor),
+                    player_base,
+                  ),
+                width: 6,
+              },
+              content: '前往访客接待室',
+              type: 'button',
+            },
+            {
+              accelerator: 309,
+              config: {
+                disabled: !sys_check_awake(0),
+                width: 6,
+              },
+              content: '前往小卖部',
+              type: 'button',
+            },
+            {
+              accelerator: 310,
               // 幼年期只能呆在训练室
               config: {
                 buttonType:
@@ -420,36 +508,6 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
               content: `${chara_id ? '一起' : ''}外出`,
               type: 'button',
             },
-            {
-              accelerator: 308,
-              config: {
-                disabled:
-                  (chara_id && !sys_check_train_enabled(chara_id)) ||
-                  !sys_check_awake(chara_id) ||
-                  !sys_check_awake(0) ||
-                  not_in_same_loc,
-                width: 6,
-              },
-              content: `${chara_id ? '' : '独自'}前往三女神像`,
-              type: 'button',
-            },
-            chara_id && era.get(`cflag:${chara_id}:节日事件标记`)
-              ? {
-                  accelerator: 309,
-                  config: {
-                    buttonType: 'danger',
-                    disabled:
-                      !sys_check_awake(chara_id) ||
-                      !sys_check_awake(0) ||
-                      chara_base.time < 50 ||
-                      player_base.time < celebration_cost ||
-                      not_in_same_loc,
-                    width: 6,
-                  },
-                  content: `一起庆祝 ${celebration}`,
-                  type: 'button',
-                }
-              : undefined,
           ].filter((e) => e)
         : [],
     },
@@ -508,9 +566,8 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
     },
   );
 
-  const ret = await era.input();
-
-  switch (ret) {
+  let temp = await era.input();
+  switch (temp) {
     case 100:
       flags.after_select =
         era.set('flag:当前互动角色', await select_target()) !== chara_id;
@@ -588,11 +645,17 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       await sys_call_daily_event(chara_id, event_hooks.borrow_money);
       break;
     case 210:
+      sys_change_attr_and_print(0, '精力', -celebration_cost);
+      sys_change_attr_and_print(chara_id, '精力', -50);
+      era.drawLine();
+      await sys_call_daily_event(chara_id, event_hooks.celebration, {});
+      break;
+    case 211:
       era.drawLine();
       await personal_action.handle();
       await era.waitAnyKey();
       break;
-    case 211:
+    case 212:
       era.drawLine();
       get_custom_check(chara_id).check_love_events();
       await era.printAndWait([
@@ -600,7 +663,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         { content: ' 似乎决定重新审视你们之间的关系……' },
       ]);
       break;
-    case 212:
+    case 213:
       era.drawLine();
       era.set('flag:地下室之主', chara_id);
       await era.printAndWait([
@@ -616,46 +679,52 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       await print_recruit_page();
       break;
     case 302:
+      sys_handle_action(sys_get_move_cost(location_enum.trainer));
+      break;
+    case 303:
+      sys_handle_action(sys_get_move_cost(location_enum.clinic));
+      break;
+    case 304:
+      sys_handle_action(
+        sys_get_move_cost(location_enum.god, chara_id),
+        chara_id,
+      );
+      await print_god_shop();
+      break;
+    case 305:
       sys_handle_action(
         sys_get_move_cost(location_enum.atrium, chara_id),
         chara_id,
       );
       await print_school_page(location_enum.atrium);
       break;
-    case 303:
+    case 306:
       sys_handle_action(
         sys_get_move_cost(location_enum.rooftop, chara_id),
         chara_id,
       );
       await print_school_page(location_enum.rooftop);
       break;
-    case 304:
+    case 307:
+      sys_handle_action(sys_get_move_cost(location_enum.chairman));
+      await page_chairman_office();
+      break;
+    case 308:
+      sys_handle_action(sys_get_move_cost(location_enum.visitor));
+      break;
+    case 309:
       era.set('flag:当前位置', location_enum.school_shop);
       era.drawLine();
+      temp = era.get('flag:当前互动角色');
+      era.set('flag:当前互动角色', 0);
       await shop_start();
       await shop_end(
         await print_shop_page([
-          700,
-          701,
-          702,
-          703,
-          705,
-          706,
-          707,
-          708,
-          ...new Array(7).fill(0).map((_, i) => {
-            return {
-              id: 750 + i,
-              limit: true,
-            };
-          }),
+          ...new Array(4).fill(0).map((_, i) => 700 + i),
+          ...new Array(4).fill(0).map((_, i) => 705 + i),
           800,
           { id: 801, limit: true },
-          802,
-          803,
-          804,
-          ...new Array(11).fill(0).map((_, i) => i + 810),
-          { id: 821, limit: true },
+          ...new Array(3).fill(0).map((_, i) => 802 + i),
           823,
           { id: 824, limit: true },
           ...new Array(11).fill(0).map((_, i) => i + 830),
@@ -663,13 +732,10 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
           ...new Array(4).fill(0).map((_, i) => i + 870),
         ]),
       );
+      era.set('flag:当前互动角色', temp);
       era.set('flag:当前位置', location_enum.office);
       break;
-    case 305:
-      sys_handle_action(sys_get_move_cost(location_enum.chairman), chara_id);
-      await page_chairman_office();
-      break;
-    case 307:
+    case 310:
       sys_handle_action(
         sys_get_move_cost(location_enum.gate, chara_id),
         chara_id,
@@ -677,17 +743,6 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       era.set('flag:当前位置', location_enum.gate);
       await print_out_page();
       era.set('flag:当前位置', location_enum.office);
-      break;
-    case 308:
-      era.set('flag:当前位置', location_enum.god);
-      await print_god_shop();
-      era.set('flag:当前位置', location_enum.office);
-      break;
-    case 309:
-      sys_change_attr_and_print(0, '精力', -celebration_cost);
-      sys_change_attr_and_print(chara_id, '精力', -50);
-      era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.celebration, {});
       break;
     case 401:
       await print_exp_page();

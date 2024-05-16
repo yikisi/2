@@ -54,48 +54,35 @@ module.exports = class extends CustomizedCheck {
       const edu_weeks = era.get('cflag:205:育成回合计时');
       const race_history = new RaceHistory(205).get();
       if (edu_weeks < 3 * 48) {
+        const event_object_special = new EventObject(
+          this.id,
+          cb_enum.edu,
+          true,
+        ).set_arg(edu_weeks);
         switch (edu_weeks) {
           case 47 + 24:
             if (
               check_aim_race(race_history, race_enum.prix_prb, 1, 1) &&
-              check_aim_race(race_history, race_enum.prix_prb, 1, 1)
+              check_aim_race(race_history, race_enum.prix_dia, 1, 1)
             ) {
-              add_event(
-                event_hooks.week_start,
-                new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
-              );
+              add_event(event_hooks.week_start, event_object_special);
             }
             break;
           case 47 + 33:
             if (sys_reg_race(205).curr.race === race_enum.prix_lat) {
-              add_event(
-                event_hooks.week_start,
-                new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
-              );
-              add_event(
-                event_hooks.week_end,
-                new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
-              );
+              add_event(event_hooks.week_start, event_object_special);
+              add_event(event_hooks.week_end, event_object_special);
             }
             break;
-          case 47 + 35:
+          case 47 + 36:
             if (era.get('cflag:205:位置') === location_enum.paris) {
-              add_event(
-                event_hooks.foreign_travel,
-                new EventObject(205, cb_enum.edu, true).set_arg(edu_weeks),
-              );
+              add_event(event_hooks.foreign_travel, event_object_special);
             }
             break;
           case 95 + 25:
             if (check_aim_race(race_history, race_enum.prix_lat, 1, 1)) {
-              add_event(
-                event_hooks.week_start,
-                new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
-              );
-              add_event(
-                event_hooks.out_start,
-                new EventObject(205, cb_enum.edu, true).set_arg(edu_weeks),
-              );
+              add_event(event_hooks.week_start, event_object_special);
+              add_event(event_hooks.out_start, event_object_special);
             }
             break;
           case 95 + 26:
@@ -109,26 +96,17 @@ module.exports = class extends CustomizedCheck {
             break;
           case 95 + 28:
             if (check_aim_race(race_history, race_enum.prix_lat, 1, 1)) {
-              add_event(
-                event_hooks.week_end,
-                new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
-              );
+              add_event(event_hooks.week_end, event_object_special);
             }
             break;
           case 95 + 29:
             if (check_aim_race(race_history, race_enum.prix_lat, 1, 1)) {
-              add_event(
-                event_hooks.week_start,
-                new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
-              );
+              add_event(event_hooks.week_start, event_object_special);
             }
             break;
           case 95 + 33:
             if (era.get('cflag:205:招募状态') !== recruit_flags.yes) {
-              add_event(
-                event_hooks.week_end,
-                new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
-              );
+              add_event(event_hooks.week_end, event_object_special);
             }
             break;
           case 95 + 42:
@@ -136,10 +114,7 @@ module.exports = class extends CustomizedCheck {
               check_aim_race(race_history, race_enum.prix_lat, 1, 1) &&
               check_aim_race(race_history, race_enum.prix_lat, 2, 1)
             ) {
-              add_event(
-                event_hooks.week_end,
-                new EventObject(205, cb_enum.edu).set_arg(edu_weeks),
-              );
+              add_event(event_hooks.week_end, event_object_special);
             }
         }
         check_and_register_aim_race(205, aim_races, edu_weeks);
@@ -200,16 +175,15 @@ module.exports = class extends CustomizedCheck {
   }
 
   is_prison() {
-    if (era.get('cflag:205:招募状态') === recruit_flags.yes) {
-      throw new Error();
-    }
-    return super.is_prison();
+    return (
+      era.get('cflag:205:招募状态') === recruit_flags.yes && super.is_prison()
+    );
   }
 
   is_rape_in_sleeping() {
-    if (era.get('cflag:205:招募状态') === recruit_flags.yes) {
-      throw new Error();
-    }
-    return super.is_rape_in_sleeping();
+    return (
+      era.get('cflag:205:招募状态') === recruit_flags.yes &&
+      super.is_rape_in_sleeping()
+    );
   }
 };
