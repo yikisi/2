@@ -57,11 +57,11 @@ function sys_sim_race(list_chara, race_info) {
       startVelocity * (1 - start_delay);
 
     record_acc_list[0][uma.index_race] = uma.race.acceleration =
-      0.85 * uma.base.velocityIdeal - uma.race.velocityReal;
+      startAcceleration;
   });
 
   const list_finished = [];
-  let list_in_race = [...list_chara];
+  let list_in_race = list_chara;
 
   while (flag_race) {
     //准备记录当前秒的战报
@@ -99,15 +99,17 @@ function sys_sim_race(list_chara, race_info) {
     //计算其余所有未完赛马娘的位置与速度
     list_in_race.forEach((uma) => {
       //先结算上一tick的速度至移动距离 以及上一tick的加速度至速度
-      uma.race.location += uma.race.velocityReal;
+      const temp = uma.race.velocityReal;
       uma.race.velocityReal = Math.max(
-        uma.race.velocityReal + uma.race.acceleration,
+        uma.race.velocityReal + uma.race.acceleration / 15,
         uma.base.velocityMin,
       );
+      uma.race.location += (uma.race.velocityReal + temp) / 30;
       uma.race.staminaCost =
-        (20 / 144) *
-        Math.pow(uma.race.velocityReal - uma.base.velocityIdeal + 12, 2) *
-        mod_stamina_cost_mess;
+        ((20 / 144) *
+          Math.pow(uma.race.velocityReal - uma.base.velocityIdeal + 12, 2) *
+          mod_stamina_cost_mess) /
+        15;
 
       record_location_list.at(-1)[uma.index_race] = uma.race.location;
       record_acc_list.at(-1)[uma.index_race] = uma.race.acceleration;
@@ -267,9 +269,8 @@ function sys_sim_race(list_chara, race_info) {
         itemUma.flag.downhill = false;
         itemUma.race.velocityIdeal -=
           itemUma.race.groundCurr.slope * itemUma.factorSlope.up;
-      }
-      //下坡模式判定
-      if (itemUma.race.groundCurr.slope < 0) {
+      } else {
+        //下坡模式判定
         if (itemUma.flag.downhill && Math.random() < 0.2) {
           itemUma.flag.downhill = false;
         }
@@ -360,15 +361,15 @@ function sys_sim_race(list_chara, race_info) {
 
     //结算
     for (let itemUma of list_in_race) {
+      //目标速度不会低于最低速度
+      itemUma.race.velocityIdeal = Math.max(
+        Math.min(itemUma.race.velocityIdeal, 30),
+        itemUma.base.velocityMin,
+      );
       //超速则不加速反而进行减速
       if (itemUma.race.velocityReal > itemUma.race.velocityIdeal) {
         itemUma.race.acceleration = raceDecel[itemUma.race.groundCurr.phase];
       }
-      //目标速度不会低于最低速度
-      itemUma.race.velocityIdeal = Math.max(
-        itemUma.race.velocityIdeal,
-        itemUma.base.velocityMin,
-      );
       //扣耐不会成负数 回耐也不会超过初始上限
       itemUma.race.stamina = Math.min(
         Math.max(itemUma.race.stamina - itemUma.race.staminaCost, 0),

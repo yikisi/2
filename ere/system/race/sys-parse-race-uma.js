@@ -138,6 +138,7 @@ function sys_parse_for_race(team_chara, race, info) {
   const date = era.get('flag:当前回合数'),
     ratio = 1 - ((date - 1) % 48) / 48;
 
+  // 先随机化处理，等数据库完善后再改成真的
   ret
     .slice(team_chara.length)
     .forEach(

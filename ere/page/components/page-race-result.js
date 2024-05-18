@@ -98,7 +98,13 @@ async function page_race_result(contestants, records, info) {
 
     const record_timer = [0, 0];
     function get_timer_record() {
-      return `${record_timer[0] ? `${record_timer[0]}'` : ''}${record_timer[0] ? `${record_timer[1].toString().padStart(2, '0')}` : record_timer[1]}"`;
+      return `${record_timer[0] ? `${record_timer[0]}'` : ''}${
+        record_timer[0]
+          ? `${Math.round(record_timer[1] / 15)
+              .toString()
+              .padStart(2, '0')}`
+          : Math.round(record_timer[1] / 15)
+      }"`;
     }
 
     let timer = 0;
@@ -173,8 +179,9 @@ async function page_race_result(contestants, records, info) {
                     height: 22,
                     width: 24 - 6 - 2 * fron_cols,
                   },
-                  inContent: `${Math.round(records.loc[timer][uma.index_race]).toLocaleString()}m (${Math.floor(
-                    (records.loc[timer][uma.index_race] * 100) / info.span,
+                  inContent: `${Math.round(records.loc[timer][uma.index_race]).toLocaleString()}m (${(
+                    (records.loc[timer][uma.index_race] * 100) /
+                    info.span
                   ).toFixed(2)}%)`,
                   percentage:
                     (records.loc[timer][uma.index_race] * 100) / info.span,
@@ -215,7 +222,7 @@ async function page_race_result(contestants, records, info) {
       );
       await era.delay(interval);
       timer++;
-      if (++record_timer[1] === 60) {
+      if (++record_timer[1] === 60 * 15) {
         record_timer[0]++;
         record_timer[1] = 0;
       }
@@ -302,13 +309,13 @@ async function page_race_result(contestants, records, info) {
       flag_result = false;
       break;
     case 1:
-      interval = 1000;
+      interval = 1000 / 15;
       break;
     case 2:
-      interval = 500;
+      interval = 500 / 15;
       break;
     case 3:
-      interval = 250;
+      interval = 250 / 15;
   }
   if (interval) {
     await era.clear();

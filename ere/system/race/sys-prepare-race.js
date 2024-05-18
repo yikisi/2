@@ -176,8 +176,7 @@ function sys_prepare_race(list_chara, race_info) {
     uma.probs.skill = uma.probs.skill < 0.2 ? 0.2 : uma.probs.skill;
 
     //由力量决定受上坡减速的影响程度 最大100%
-    uma.factorSlope.up = 200 / uma.attrs[attr_enum.strength];
-    uma.factorSlope.up = uma.factorSlope.up > 1 ? 1 : uma.factorSlope.up;
+    uma.factorSlope.up = Math.min(200 / uma.attrs[attr_enum.strength], 1);
 
     //由智力决定受下坡加速的影响概率
     uma.factorSlope.down = 0.0004 * uma.attrs[attr_enum.intelligence];
