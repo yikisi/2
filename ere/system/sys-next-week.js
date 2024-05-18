@@ -573,6 +573,7 @@ async function sys_next_week() {
         );
         if (!era.get(`talent:${chara_id}:泌乳`)) {
           era.set(`talent:${chara_id}:泌乳`, 1);
+          era.add(`cflag:${chara_id}:胸围`, 1);
           life_marks.breast_buff = 3;
         }
         30 === timer && (life_marks.waist_buff = 30);
