@@ -105,27 +105,27 @@ module.exports = async () => {
         },
         { type: 'divider' },
         {
-          accelerator: 0,
+          accelerator: 1,
           content: '开始新游戏',
           type: 'button',
         },
         {
-          accelerator: 1,
+          accelerator: 2,
           content: '加载存档',
           type: 'button',
         },
         {
-          accelerator: 2,
+          accelerator: 3,
           content: '角色成就',
           type: 'button',
         },
         {
-          accelerator: 3,
+          accelerator: 4,
           content: '帮助说明',
           type: 'button',
         },
         {
-          accelerator: 4,
+          accelerator: 5,
           content: '制作鸣谢',
           type: 'button',
         },
@@ -161,17 +161,17 @@ module.exports = async () => {
 
     let ret = await era.input();
     switch (ret) {
-      case 0:
+      case 1:
         if (await new_game()) {
           await homepage();
         }
         break;
-      case 1:
+      case 2:
         if (await load_game()) {
           await homepage();
         }
         break;
-      case 2:
+      case 3:
         era.printMultiColumns([
           { config: { content: '角色成就获取情况' }, type: 'divider' },
           ...era
@@ -205,7 +205,7 @@ module.exports = async () => {
         ]);
         await era.waitAnyKey();
         break;
-      case 3:
+      case 4:
         era.drawLine();
         for (const note of notes.common
           .filter(() => true)
@@ -223,7 +223,7 @@ module.exports = async () => {
           await era.waitAnyKey();
         }
         break;
-      case 4:
+      case 5:
         era.drawLine();
         era.setAlign('center');
         await era.printAndWait('鸣谢', {

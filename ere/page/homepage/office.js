@@ -33,6 +33,7 @@ const print_school_page = require('#/page/page-school');
 const print_shop_page = require('#/page/page-shop');
 const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
+const page_trainer_office = require('#/page/page-trainer-office');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const { shop_end, shop_start } = require('#/event/shop/tachyon-shop');
@@ -680,6 +681,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 302:
       sys_handle_action(sys_get_move_cost(location_enum.trainer));
+      await page_trainer_office();
       break;
     case 303:
       sys_handle_action(sys_get_move_cost(location_enum.clinic));

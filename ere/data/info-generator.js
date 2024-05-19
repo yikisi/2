@@ -566,7 +566,7 @@ module.exports = {
   get_talent: (chara_id) =>
     [
       ...get_custom_mec(chara_id).get_talents(),
-      ...(era.get(`cflag:${chara_id}:父方角色`) ||
+      ...(era.get(`cflag:${chara_id}:父方角色`) === 308 ||
       era.get(`cflag:${chara_id}:母方角色`) === 308
         ? [
             {
