@@ -76,7 +76,7 @@ handlers[event_hooks.train] = async (chara_id, _, extra_flag) => {
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {{train:number,stamina_ratio:number}} extra_flag
+ * @param {TrainSuccessParams} extra_flag
  */
 handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
   const chara_talk = get_chara_talk(chara_id);

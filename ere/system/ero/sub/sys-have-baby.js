@@ -296,6 +296,16 @@ async function sys_have_baby(mother_id) {
     get_chara_talk(father_id).get_colored_name(),
     ' 外貌的健康的孩子！',
   ]);
+  era.set(
+    `maxbase:${mother_id}:体力`,
+    Math.max(era.get(`maxbase:${mother_id}:体力`) - 400, 200),
+  );
+  era.add(`base:${mother_id}:体力`, 1);
+  era.set(
+    `maxbase:${mother_id}:精力`,
+    Math.max(era.get(`maxbase:${mother_id}:精力`) - 400, 200),
+  );
+  era.add(`base:${mother_id}:精力`, 1);
   await call_ero_script(
     // 如果是玩家生孩子，调用角色的口上
     mother_id || father_id,

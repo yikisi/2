@@ -106,7 +106,12 @@ function page_header() {
               {
                 color: money_change > 0 ? 'palegreen' : 'orangered',
                 content: money_change
-                  ? ` (${money_change > 0 ? '+' : ''}${money_change})`
+                  ? ` (${money_change > 0 ? '+' : ''}${(money_change
+                      ? Math.floor(
+                          money_change * (1 + era.get('global:金钱加成') / 100),
+                        )
+                      : money_change
+                    ).toLocaleString()})`
                   : '',
                 fontWeight: 'bold',
                 opacity: 0.5,

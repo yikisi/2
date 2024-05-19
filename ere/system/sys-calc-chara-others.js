@@ -8,6 +8,7 @@ const {
 } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const CustomizedCheck = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
@@ -280,6 +281,8 @@ function print_change(chara_id, old_val, new_val, to_be_shown) {
     return true;
   }
 }
+
+CustomizedCheck.like_chara = like_chara;
 
 module.exports = {
   sys_change_status_by_base(chara_id) {

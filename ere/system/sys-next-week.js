@@ -28,6 +28,7 @@ const filter_chara = require('#/system/sys-filter-chara');
 const sys_handle_palace = require('#/system/sys-handle-palace');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { remove_special_events } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -58,12 +59,12 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { pressure_border } = require('#/data/train-const');
 
 async function sys_next_week() {
-  const in_team_list = filter_chara('cflag', '招募状态', recruit_flags.yes),
-    health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes,
+  const health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes,
     me = get_chara_talk(0),
     punish_level = era.get('flag:惩戒力度'),
     team_dict = {},
     your_race = era.get('cflag:0:种族');
+  let in_team_list = filter_chara('cflag', '招募状态', recruit_flags.yes);
   in_team_list.shift();
   let temp;
   era.set('status:0:沉睡', 1);
@@ -360,26 +361,26 @@ async function sys_next_week() {
       }
     }
 
-    // 避战惩罚
-    const registered_race = sys_reg_race(chara_id);
-    if (
-      registered_race.last.week > 0 &&
-      registered_race.last.week < cur_round &&
-      !new RaceHistory(chara_id).get_result(
-        era.get(`cflag:${chara_id}:育成回合计时`) - 1,
-      )
-    ) {
-      out_race_list.push(chara_id);
-      race_punish += 100;
-      registered_race.curr = { race: -1, week: -1 };
-    }
-    registered_race.last.race = registered_race.curr.race;
-    registered_race.last.week = registered_race.curr.week;
-
     if (!isNaN(Number(era.get(`cflag:${chara_id}:育成回合计时`)))) {
       era.add(`cflag:${chara_id}:育成回合计时`, 1);
     }
     if (team_dict[chara_id]) {
+      // 避战惩罚
+      const registered_race = sys_reg_race(chara_id);
+      if (
+        registered_race.last.week > 0 &&
+        registered_race.last.week < cur_round &&
+        !new RaceHistory(chara_id).get_result(
+          era.get(`cflag:${chara_id}:育成回合计时`) - 1,
+        )
+      ) {
+        out_race_list.push(chara_id);
+        race_punish += 100;
+        registered_race.curr = { race: -1, week: -1 };
+      }
+      registered_race.last.race = registered_race.curr.race;
+      registered_race.last.week = registered_race.curr.week;
+
       stay_up > 0 && sys_change_pressure(chara_id, 100 + 200 * stay_up);
       out_race_list.at(-1) === chara_id &&
         sys_change_pressure(chara_id, get_random_value(1000, 2000));
@@ -572,6 +573,7 @@ async function sys_next_week() {
         );
         if (!era.get(`talent:${chara_id}:泌乳`)) {
           era.set(`talent:${chara_id}:泌乳`, 1);
+          era.add(`cflag:${chara_id}:胸围`, 1);
           life_marks.breast_buff = 3;
         }
         30 === timer && (life_marks.waist_buff = 30);
@@ -861,6 +863,9 @@ async function sys_next_week() {
     }
   }
   await check_new_activities(cur_round, in_team_list);
+  in_team_list = in_team_list.filter((e) =>
+    get_custom_mec(e).is_able_to_be_selected(),
+  );
   if (!era.get('flag:当前互动角色') && in_team_list.length) {
     temp = era.get('flag:床伴');
     era.set(

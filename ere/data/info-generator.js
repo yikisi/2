@@ -213,7 +213,8 @@ function get_relation_mark(relation, chara_id) {
   if (sys_check_hide_relation_and_love(chara_id)) {
     return '？';
   }
-  const val = relation;
+  const val =
+    relation !== undefined ? relation : era.get(`relation:${chara_id}:0`);
   let level = 0;
   while (val > level_and_desc.relation.border[level]) {
     level++;
@@ -565,6 +566,16 @@ module.exports = {
   get_talent: (chara_id) =>
     [
       ...get_custom_mec(chara_id).get_talents(),
+      ...(era.get(`cflag:${chara_id}:父方角色`) ||
+      era.get(`cflag:${chara_id}:母方角色`) === 308
+        ? [
+            {
+              color: buff_colors[1],
+              content: '[梦之继承者]',
+              key: '梦之继承者',
+            },
+          ]
+        : []),
       ...new Array(2)
         .fill(0)
         .map((_, i) => {

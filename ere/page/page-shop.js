@@ -2,6 +2,8 @@ const crypto = require('crypto');
 
 const era = require('#/era-electron');
 
+const { sys_change_money } = require('#/system/sys-calc-flag');
+
 const date_indicator = require('#/page/components/date-indicator');
 
 const { attr_change_colors, money_color } = require('#/data/color-const');
@@ -314,10 +316,7 @@ module.exports = async (item_list) => {
           );
           break;
         case 6:
-          cur_coin = era.add(
-            'flag:当前马币',
-            -price[selected_item] * to_buy[selected_item],
-          );
+          sys_change_money(-price[selected_item] * to_buy[selected_item]);
           era.add(`item:${selected_item}`, to_buy[selected_item]);
           await era.printAndWait(
             `购买了 ${to_buy[selected_item]} 个 ${era

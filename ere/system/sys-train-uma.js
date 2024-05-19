@@ -13,6 +13,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
 const TrainFailParams = require('#/data/event/extra-flag/train-fail-params');
+const TrainSuccessParams = require('#/data/event/extra-flag/train-success-params');
 const DarleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-340');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 const ByerleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-342');
@@ -183,10 +184,15 @@ module.exports = {
         era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置'),
       );
 
-      const ret = await call_edu_script(chara_id, event_hooks.train_success, {
-        stamina_ratio: stamina_ratio * !era.get(`status:${chara_id}:摸鱼`),
-        train: attr,
-      });
+      /** @type {TrainSuccessParams} */
+      const ret = await call_edu_script(
+        chara_id,
+        event_hooks.train_success,
+        new TrainSuccessParams(
+          stamina_ratio * !era.get(`status:${chara_id}:摸鱼`),
+          attr,
+        ),
+      );
       ret.attr && (changes.attr_change[attr] += ret.attr);
       ret.stamina && (train_cost.stamina += ret.stamina);
       ret.relation_change && (relation_change += ret.relation_change);

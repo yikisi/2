@@ -11,6 +11,14 @@ class CustomizedMec {
     era.set(`love:${this.id}`, era.get('flag:马娘初始爱慕'));
   }
 
+  is_able_to_be_selected() {
+    return true;
+  }
+
+  is_able_to_show_growth() {
+    return era.get(`cflag:${this.id}:种族`) > 0;
+  }
+
   is_anger_for_unfaithful() {
     return true;
   }

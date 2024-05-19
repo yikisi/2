@@ -30,6 +30,8 @@ const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 
 class CustomizedCheck {
+  static like_chara;
+
   constructor(chara_id) {
     this.id = chara_id;
   }
@@ -141,7 +143,7 @@ class CustomizedCheck {
       }
     });
     buffer.push({
-      check: Number(g1_count > 0),
+      check: Math.min(g1_count, 1),
       color: g1_count > 0 ? attr_change_colors.up : attr_change_colors.down,
       content: `一场G1比赛 入着 ${g1_count}/1 ${g1_count > 0 ? '✔' : '✘'}`,
     });
@@ -160,7 +162,7 @@ class CustomizedCheck {
     return buffer;
   }
 
-  /** @returns {{name:string,handle:function():void}|{}} */
+  /** @returns {{name:string,handle:function():Promise}|{}} */
   get_personal_action() {
     return {};
   }

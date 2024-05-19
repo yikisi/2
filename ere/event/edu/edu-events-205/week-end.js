@@ -343,7 +343,6 @@ module.exports = async (_, __, event_object) => {
       await me.say_and_wait(
         `你说『如果负责能连霸凯旋门赏的${vp.get_uma_sex_title()}的话，作为社会人的评价也会提高吧。』`,
       );
-      await era.input();
       await vp.say_and_wait(
         `那个……太不好意思了，如果可以的话，我希望你当没发生过，${me.actual_name}。`,
       );

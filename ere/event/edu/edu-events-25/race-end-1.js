@@ -191,7 +191,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       coffee.get_colored_name(),
       ' 维持现状继续准备挑战经典三冠路线是最好的选择，但……',
     ]);
-    if (sys_reg_race(32).curr === race_enum.hoch_sho) {
+    if (sys_reg_race(32).curr.race === race_enum.hoch_sho) {
       const t_call_c = sys_get_colored_callname(32, 25),
         tachyon = get_chara_talk(32);
       await tachyon.say_and_wait([

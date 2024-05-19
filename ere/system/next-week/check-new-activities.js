@@ -107,16 +107,16 @@ async function check_new_activities(cur_round, in_team_list) {
     }
   });
   const event_weeks = (cur_round - 1) % 48,
-    curr_race_list = [];
+    curr_race_list = {};
   foreign_race_list.forEach((r) => {
-    const { date } = race_infos[r];
+    const { date, track } = race_infos[r];
     if (event_weeks === date - expedition_weeks) {
-      curr_race_list.push([r, true]);
+      curr_race_list[`${track}_1`] = [r, true];
     } else if (event_weeks === date) {
-      curr_race_list.push([r, false]);
+      curr_race_list[`${track}_0`] = [r, false];
     }
   });
-  for (const entry of curr_race_list) {
+  for (const entry of Object.values(curr_race_list)) {
     const race = entry[0],
       info = race_infos[race],
       location = track2location[info.track],

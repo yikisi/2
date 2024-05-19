@@ -6,6 +6,7 @@ const {
   sys_change_motivation,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const print_curr_chara = require('#/page/components/cur-chara-info');
 const print_page_header = require('#/page/components/page-header');
@@ -20,18 +21,21 @@ const { money_color } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const { location_enum } = require('#/data/locations');
 const { attr_names } = require('#/data/train-const');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const button_contents = ['请求帮助', '探寻微笑', '痴迷注视'];
 
 module.exports = async () => {
+  era.set('flag:当前位置', location_enum.god);
   let flag_god = true,
-    relation = 0;
+    relation = 0,
+    god_id = sys_get_random_uma_god(),
+    god = god_id ? get_chara_talk(god_id) : undefined;
   const cur_id = era.get('flag:当前互动角色'),
     aim = get_chara_talk(cur_id),
     me = cur_id ? get_chara_talk(0) : aim,
-    god_id = sys_get_random_uma_god(),
-    god = god_id ? get_chara_talk(god_id) : undefined,
     life_marks = god_id ? new LifeEventMarks(god_id) : undefined;
   while (flag_god) {
     await era.clear();
@@ -72,7 +76,7 @@ module.exports = async () => {
                     50,
                 ).length < 3 ||
                 attr_names.findIndex(
-                  (e) => era.get(`maxbase:0:${e}`) < 2000,
+                  (e) => era.get(`maxbase:${cur_id}:${e}`) < 2000,
                 ) === -1,
             },
             content: `祈祷${cur_id ? ` ${aim.name} ` : ''}突破极限（50-500 声望）`,
@@ -84,21 +88,25 @@ module.exports = async () => {
             cost: 200,
             type: 'button',
           },
-          {
-            content: button_contents[god_id - 340],
-            config: {
-              disabled: life_marks.get('love') !== 1,
-            },
-            type: 'button',
-          },
-        ].map((e, i) => {
-          e.accelerator = i + 1;
-          e.config ||= {};
-          e.config.width = 8;
-          e.config.disabled ||= era.get('flag:当前声望') <= e.cost;
-          delete e.cost;
-          return e;
-        }),
+          life_marks.get('love') === 1
+            ? {
+                content: button_contents[god_id - 340],
+                config: {
+                  buttonType: 'danger',
+                },
+                type: 'button',
+              }
+            : {},
+        ]
+          .filter((e) => e)
+          .map((e, i) => {
+            e.accelerator = i + 1;
+            e.config ||= {};
+            e.config.width = 8;
+            e.config.disabled ||= era.get('flag:当前声望') <= e.cost;
+            delete e.cost;
+            return e;
+          }),
         { accelerator: 99, content: '离开', type: 'button' },
       ]);
       let temp;
@@ -140,7 +148,7 @@ module.exports = async () => {
               { content: '750马币', type: 'button' },
               { content: '1000马币', type: 'button' },
             ].map((e, i) => {
-              e.accelerator = i;
+              e.accelerator = i + 1;
               e.config = {
                 disabled: era.get('flag:当前声望') <= 50 * (i + 1),
                 width: 6,
@@ -151,17 +159,17 @@ module.exports = async () => {
           ]);
           temp = await era.input();
           switch (temp) {
-            case 0:
             case 1:
             case 2:
             case 3:
+            case 4:
               await era.printAndWait([
                 '三女神像好像突然变得刺眼了一下，',
                 me.get_colored_name(),
                 ' 随后收到了特雷森方面的通知，补发了 ',
                 {
                   color: money_color,
-                  content: (250 * (temp + 1)).toLocaleString(),
+                  content: (250 * temp).toLocaleString(),
                 },
                 ' 马币的额外补贴',
               ]);
@@ -170,9 +178,9 @@ module.exports = async () => {
                 me.get_colored_name(),
                 ' 感觉那条消息隐隐带着鄙视的情绪……',
               ]);
-              era.add('flag:当前声望', -50 * (temp + 1));
-              era.add('flag:当前马币', 250 * (temp + 1));
-              relation += 25 * (temp + 1);
+              era.add('flag:当前声望', -50 * temp);
+              era.add('flag:当前马币', 250 * temp);
+              relation += 25 * temp;
               break;
             default:
               await era.printAndWait('三女神像不动……');
@@ -285,6 +293,7 @@ module.exports = async () => {
             era.set(`status:${cur_id}:伤病`, 0);
             era.set(`status:${cur_id}:疲惫`, 0);
             sys_change_motivation(cur_id, 4) && (await era.waitAnyKey());
+            era.set(`status:${cur_id}:练习X手`, 1);
             era.add('flag:当前声望', -800);
             relation += 400;
           } else {
@@ -327,9 +336,40 @@ module.exports = async () => {
     } else {
       flag_god = false;
       await era.printAndWait('三女神像静静矗立着……');
+      god_id = get_random_entry(
+        new Array(3)
+          .fill(0)
+          .map((_, i) => 340 + i)
+          .filter(
+            (e) =>
+              sys_check_awake(e) &&
+              era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置'),
+          ),
+      );
+      if (god_id) {
+        god = get_chara_talk(god_id);
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 突然听到背后有人打招呼……',
+        ]);
+        await era.printAndWait([
+          '回过头才发现 ',
+          god.get_colored_name(),
+          ' 不知何时已站到了 ',
+          me.get_colored_name(),
+          ' 身后……',
+        ]);
+        era.set('flag:当前互动角色', god_id);
+      }
     }
   }
   if (relation && sys_like_chara(god_id, 0, relation)) {
     await era.waitAnyKey();
   }
+  era.set('flag:当前位置', location_enum.office);
+  await era.printAndWait('回去了……');
+  era.println();
+  await sys_get_random_event(event_hooks.back_school)({
+    loc: location_enum.god,
+  });
 };

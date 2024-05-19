@@ -10,7 +10,7 @@ const {
   sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
-const god_love_common = require('#/event/love/snippets/god-love-common');
+const god_love_common = require('#/event/love/snippets/love-god-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -43,7 +43,7 @@ handlers[49] = async (god, me) => {
 };
 
 handlers[50] = async (god, me, callname) => {
-  await print_event_name('与你共同的梦', god);
+  await print_event_name('「目光」与狩猎', god);
   await printAndWait('轻巧矫健地攀上了床。');
   await printAndWait(['双手下撑将 ', me.get_colored_name(), ' 固定在了身下。']);
   await printAndWait('像是打量着该从哪里开始下手似的投来翠色的目光。');

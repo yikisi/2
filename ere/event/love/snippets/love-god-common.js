@@ -26,7 +26,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
  * @param {function():Promise} after_fuck_cb
  * @param {function():Promise} reject_cb
  */
-async function god_love_common(
+async function love_god_common(
   selected,
   god,
   me,
@@ -50,6 +50,7 @@ async function god_love_common(
       }
       set(`status:${god.id}:危险期`, 1);
       set(`status:${god.id}:经期`, 0);
+      set(`status:${god.id}:反避孕套`, 1);
       begin_and_init_ero(0, god.id);
       set('tcvar:0:发情', 1);
       set(`tcvar:${god.id}:发情`, 1);
@@ -131,7 +132,7 @@ async function god_love_common(
       temp = new LifeEventMarks(0);
       temp.waist_buff = 8;
       set('cflag:0:妊娠阶段', 1 << pregnant_stage_enum.resume);
-      set('cflag:0:妊娠回合计时', 4);
+      set('cflag:0:妊娠回合计时', 4 + 1);
       add('talent:0:泌乳', !get('talent:0:泌乳'));
       if (get('talent:0:泌乳') === 1) {
         set('cflag:0:泌乳回合计时', 48 + 1);
@@ -153,4 +154,4 @@ async function god_love_common(
   }
 }
 
-module.exports = god_love_common;
+module.exports = love_god_common;
