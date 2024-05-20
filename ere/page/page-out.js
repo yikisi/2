@@ -183,7 +183,6 @@ async function out_page() {
             temp.chara,
             temp.title,
             {
-              name: '聊天',
               async handle() {
                 await era.printAndWait([
                   get_chara_talk(0).get_colored_name(),
@@ -192,9 +191,9 @@ async function out_page() {
                   ' 聊了会天……',
                 ]);
               },
+              name: '聊天',
             },
             {
-              name: '求爱',
               async handle() {
                 switch (await goto_sex(301, location_enum.restroom)) {
                   case true:
@@ -203,6 +202,7 @@ async function out_page() {
                     temp.flag = false;
                 }
               },
+              name: '求爱',
             },
             {
               async handle() {
@@ -264,14 +264,9 @@ async function out_page() {
             },
             {
               name: '庆贺',
-              handle() {},
             },
+            {},
             {
-              name: '没啥',
-              handle() {},
-            },
-            {
-              name: '再会',
               handle() {
                 return era.printAndWait([
                   '和 ',
@@ -281,6 +276,7 @@ async function out_page() {
                   ' 离开了……',
                 ]);
               },
+              name: '再会',
             },
           );
           if (temp.flag) {

@@ -25,9 +25,9 @@ const { location_enum } = require('#/data/locations');
  * @param {{name:string,handle:function():Promise}} talk_cb
  * @param {{name:string,handle:function():Promise}} sex_cb
  * @param {{name:string,[handle]:function():Promise,[loc]:number,[print_out_page]:function():Promise}} out_cb
- * @param {{name:string,handle:function():Promise}} cele_cb
- * @param {{name:string,handle:function():Promise}} func_cb
- * @param {{name:string,handle:function():Promise}} back_cb
+ * @param {{name:string,[handle]:function():Promise}} cele_cb
+ * @param {{[name]:string,[handle]:function():Promise}} func_cb
+ * @param {{name:string,[handle]:function():Promise}} back_cb
  * @returns {Promise<boolean|void>}
  */
 async function npc_common(
@@ -141,12 +141,14 @@ async function npc_common(
             type: 'button',
           }
         : undefined,
-      {
-        accelerator: 5,
-        config: { disabled: !is_awake },
-        content: func_cb.name,
-        type: 'button',
-      },
+      func_cb.handle
+        ? {
+            accelerator: 5,
+            config: { disabled: !is_awake },
+            content: func_cb.name,
+            type: 'button',
+          }
+        : undefined,
       {
         accelerator: 99,
         content: back_cb.name,
@@ -196,7 +198,9 @@ async function npc_common(
       await func_cb.handle();
       break;
     case 99:
-      await back_cb.handle();
+      if (back_cb.handle) {
+        await back_cb.handle();
+      }
       return false;
   }
   if (!era.get(`base:${chara.id}:体力`)) {

@@ -398,6 +398,8 @@ async function check_new_activities(cur_round, in_team_list) {
       era.set('cflag:0:位置', 0);
     }
   }
+  // 出差的理事长
+  era.set('flag:理事长', 302);
 }
 
 module.exports = check_new_activities;
