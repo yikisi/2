@@ -17,7 +17,7 @@ module.exports = class extends CustomizedCheck {
     ) {
       add_event(
         event_hooks.week_start,
-        new EventObject(this.id, cb_enum.daily).set_arg('fail'),
+        new EventObject(this.id, cb_enum.edu).set_arg('fail'),
       );
     }
     super.check_next_week();

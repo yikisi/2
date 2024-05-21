@@ -2,12 +2,16 @@ const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
-const recruit_flags = require('#/data/event/recruit-flags');
+const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 
 module.exports = class extends CustomizedMec {
   get_train_buff() {
-    if (era.get('cflag:304:招募状态') !== recruit_flags.yes) {
-      return -20;
+    const { debuff } = new MeekEduMarks();
+    if (debuff) {
+      return Math.floor(
+        -debuff *
+          Math.max(Math.min((era.get('relation:201:0') - 75) / 600, 1), 0.5),
+      );
     }
     return 0;
   }

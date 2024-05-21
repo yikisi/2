@@ -21,14 +21,14 @@ const { attr_enum } = require('#/data/train-const');
  * @param {*} __
  * @param {EventObject} event_object
  */
-module.exports = async function (hook, __, event_object) {
+module.exports = async (hook, __, event_object) => {
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:3:育成回合计时'),
     love = era.get('love:3'),
+    event_arg = event_object?.arg,
     event_marks = new TeioEduMarks();
   let wait_flag = false;
-  if (edu_weeks === 95 + 20 && era.get('status:3:腿伤')) {
+  if (event_arg === 95 + 20 && era.get('status:3:腿伤')) {
     await print_event_name('回归', teio);
     await teio.say_and_wait('哈啊……');
     era.println();
@@ -166,12 +166,11 @@ module.exports = async function (hook, __, event_object) {
       ) || wait_flag;
     wait_flag && (await era.waitAnyKey());
     return false;
-  } else if (edu_weeks === 95 + 25 && event_marks.spring_teio === 1) {
+  } else if (event_arg === 95 + 25 && event_marks.spring_teio === 1) {
     if (era.get('flag:当前互动角色') !== 3) {
       add_event(hook.hook, event_object);
       return false;
     }
-    event_marks.spring_teio++;
     await print_event_name('春之帝王', teio);
     await me.say_and_wait('真好啊……');
     era.println();
@@ -234,7 +233,7 @@ module.exports = async function (hook, __, event_object) {
         0,
         JSON.parse('{"体力":350}'),
       ) || wait_flag;
-  } else if (edu_weeks === 47 + 5) {
+  } else if (event_arg === 47 + 5) {
     await print_event_name('所以，衣服是怎样啦！', teio);
     await era.printAndWait(
       '又是一个晴朗无云的日子——特雷森这边的天气可真好啊。',
@@ -323,8 +322,7 @@ module.exports = async function (hook, __, event_object) {
       wait_flag =
         get_attr_and_print_in_event(3, [0, 0, 20, 0, 0], 0) || wait_flag;
     }
-  } else if (event_marks.the_days_together === 1) {
-    event_marks.the_days_together++;
+  } else if (event_arg === 'the_days_together') {
     await print_event_name('与你一同前行的日子', teio);
 
     await era.printAndWait(

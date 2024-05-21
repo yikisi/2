@@ -11,6 +11,7 @@ const {
   setHorizontalAlign,
 } = require('#/era-electron');
 
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { get_image } = require('#/system/sys-calc-image');
 const sys_filter_chara = require('#/system/sys-filter-chara');
@@ -29,7 +30,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{handle:function:Promise,name:string}>} */
 const handlers = {};
