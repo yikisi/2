@@ -386,7 +386,7 @@ handlers[event_hooks.week_end] = async () => {
     era.printButton('「闪耀？」', 1);
     await era.input();
     await era.printAndWait(
-      `回到特雷森学院的车上，${your_name} 发现荣进闪耀的视线一直在盯着某个地方看。`,
+      `回到特雷森学园的车上，${your_name} 发现荣进闪耀的视线一直在盯着某个地方看。`,
     );
     await flash.say_and_wait('没什么，我只是在注视合宿场地。');
     era.printButton('「合宿场地？」', 1);
@@ -498,7 +498,7 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
     await flash.say_and_wait(
       '其实，自从我来到日本之后，每年的情人节目睹这种人们因为送礼而产生争执的画面，都会觉得有些不可思议呢。',
     );
-    await era.printAndWait('回到特雷森学院的路上，荣进闪耀突然发出一声感叹。');
+    await era.printAndWait('回到特雷森学园的路上，荣进闪耀突然发出一声感叹。');
     era.printButton('「德国那边没有这样的习俗吗？」', 1);
     await era.input();
     await era.printAndWait(`见此，${your_name} 有些疑惑。`);
@@ -544,7 +544,7 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
       '如同受到某种启发一般，荣进闪耀若有所思地点了点头。',
     );
     await flash.say_and_wait(
-      `啊，看到学院的校门口。那么，由于接下来我还有事情需要去处理，所以先在此告别了，${callname}。`,
+      `啊，看到学园的校门口。那么，由于接下来我还有事情需要去处理，所以先在此告别了，${callname}。`,
     );
     era.printButton('「路上小心。」', 1);
     await era.input();

@@ -101,7 +101,7 @@ handlers[74] = async () => {
     '一年一度的开学典礼。在寻常的学校，一般是由德高望重的校长来进行开幕的演讲。',
   );
   await chara_talk.print_and_wait(
-    '但在特雷森学院，执行这一任务的人有，且仅有一位。',
+    '但在特雷森学园，执行这一任务的人有，且仅有一位。',
   );
   await chara_talk.print_and_wait(
     '露娜——学生会长，迈过向她鞠躬的人群，走到了演讲台上。',
@@ -175,7 +175,7 @@ handlers[89] = async () => {
   await chara_talk.say_and_wait('只有你呀……');
   await chara_talk.print_and_wait('是也和我一样，工作到现在吗？');
   await chara_talk.print_and_wait(
-    '露娜嘴角微微勾起。自己时为了学院，而训练员这样努力……或许只为了自己。',
+    '露娜嘴角微微勾起。自己时为了学园，而训练员这样努力……或许只为了自己。',
   );
   await chara_talk.print_and_wait(
     `不知怎的，露娜心跳地很快。${chara_talk.sex}的脸微微发烫。`,

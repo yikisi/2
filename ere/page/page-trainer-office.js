@@ -11,6 +11,7 @@ const {
   setHorizontalAlign,
 } = require('#/era-electron');
 
+const sys_call_recruit = require('#/system/script/sys-call-recruit');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { get_image } = require('#/system/sys-calc-image');
@@ -22,23 +23,122 @@ const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
 
+const { cb_enum } = require('#/event/queue');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const CharaTitles = require('#/data/chara-titles');
+const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{handle:function:Promise,name:string}>} */
 const handlers = {};
 
 handlers[304] = (chara, me) => {
-  return {
-    name: chara.actual_name,
-    async handle() {},
-  };
+  if (get('cflag:304:招募状态') === recruit_flags.yes) {
+    return {};
+  } else if (get('cflag:304:招募状态') === 0) {
+    return {
+      name: '谈起训练员的工作',
+      handle: () => {
+        set('cflag:304:招募状态', -2);
+        return printAndWait([
+          chara.get_colored_name(),
+          ' 告诉 ',
+          me.get_colored_name(),
+          '，',
+          chara.sex,
+          '有一名负责',
+          chara.get_uma_sex_title(),
+          ' ',
+          get_chara_talk(201).get_colored_name(),
+          '，天赋很不错，马上要开始育成。',
+        ]).then(() =>
+          printAndWait([
+            '如果 ',
+            me.get_colored_name(),
+            ' 愿意的话，可以先辅助',
+            chara.sex,
+            '训练一段时间，也许可以增长一些经验。',
+          ]),
+        );
+      },
+    };
+  } else if (get('cflag:304:招募状态') === -2) {
+    return {
+      name: get('cflag:201:育成次数') === 0 ? '接受任务' : '再次尝试',
+      handle:
+        get('flag:当前月') <= 3
+          ? () => {
+              set('cflag:304:招募状态', -3);
+              return sys_call_recruit(201, cb_enum.recruit);
+            }
+          : () =>
+              printAndWait([
+                chara.get_colored_name(),
+                ' 表示今年的育成报名已经截止，如果愿意的话 ',
+                me.get_colored_name(),
+                ' 可以明年再来。',
+              ]),
+    };
+  } else if (get('cflag:201:育成回合计时') < 3 * 48) {
+    return {
+      name: '谈起 快乐米可 的训练',
+      disabled: get('base:0:精力') < 200 || get('base:304:精力') < 200,
+      async handle() {
+        const edu_marks = new MeekEduMarks();
+        if (edu_marks.debuff) {
+          await printAndWait([
+            me.get_colored_name(),
+            ' 与 ',
+            chara.get_colored_name(),
+            ' 讨论了一会，增进了对 ',
+            get_chara_talk(201).get_colored_name(),
+            ' 的理解。',
+          ]);
+          edu_marks.debuff = Math.max(
+            edu_marks.debuff -
+              1 -
+              (Math.random() < get('relation:304:0') / 600) -
+              (Math.random() < get('love:304') / 100),
+            0,
+          );
+          sys_change_attr_and_print(0, '精力', -200);
+          sys_change_attr_and_print(304, '精力', -200);
+        } else {
+          await printAndWait([
+            chara.get_colored_name(),
+            ' 表示已经没有什么新情报可以和 ',
+            me.get_colored_name(),
+            ' 分享了。',
+          ]);
+        }
+      },
+    };
+  } else {
+    return {
+      name: '谈起 快乐米可 的现状',
+      handle: () =>
+        printAndWait([chara.get_colored_name(), ' 表示没什么特别。']).then(() =>
+          printAndWait([
+            '但',
+            chara.sex,
+            '同时也表示，如果 ',
+            me.get_colored_name(),
+            ' 找到了让',
+            chara.get_uma_sex_title(),
+            '获得第二次机会的方法，请一定要帮 ',
+            get_chara_talk(201).get_colored_name(),
+            ' 挽回遗憾',
+          ]),
+        ),
+    };
+  }
 };
 
 handlers[306] = (chara, me) => {

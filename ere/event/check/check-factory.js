@@ -54,9 +54,12 @@ cons_dict[104] = require('#/event/check/check-104');
 cons_dict[107] = require('#/event/check/check-107');
 cons_dict[108] = require('#/event/check/check-108');
 cons_dict[109] = require('#/event/check/check-109');
+cons_dict[201] = require('#/event/check/check-201');
 cons_dict[204] = require('#/event/check/check-204');
 cons_dict[205] = require('#/event/check/check-205');
 cons_dict[206] = require('#/event/check/check-206');
+cons_dict[304] = require('#/event/check/check-304');
+cons_dict[306] = require('#/event/check/check-306');
 cons_dict[340] = require('#/event/check/check-340');
 cons_dict[341] = require('#/event/check/check-341');
 cons_dict[342] = require('#/event/check/check-342');
@@ -79,9 +82,9 @@ module.exports = {
       return obj_dict[chara_id];
     }
     const script_name =
-      chara_id >= first_child_id ? get(`callname:${chara_id}:-2`) : chara_id;
-    return (obj_dict[chara_id] = new (cons_dict[
-      script_dict[script_name] || script_name
-    ] || common_cons)(chara_id));
+        chara_id >= first_child_id ? get(`callname:${chara_id}:-2`) : chara_id,
+      class_cons =
+        cons_dict[script_dict[script_name] || script_name] || common_cons;
+    return (obj_dict[chara_id] = new class_cons(chara_id));
   },
 };

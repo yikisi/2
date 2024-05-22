@@ -84,6 +84,12 @@ class CustomizedCheck {
     if (this.id && era.get(`cflag:${this.id}:种族`)) {
       const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
       if (edu_weeks < 3 * 48) {
+        if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
+          add_event(
+            event_hooks.week_start,
+            new EventObject(this.id, cb_enum.edu, true).set_arg(edu_weeks),
+          );
+        }
         check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
       } else if (edu_weeks === 143 + 9) {
         add_event(

@@ -26,7 +26,7 @@ const { location_enum } = require('#/data/locations');
  * @param {{name:string,handle:function():Promise}} sex_cb
  * @param {{name:string,[handle]:function():Promise,[loc]:number,[print_out_page]:function():Promise}} out_cb
  * @param {{name:string,[handle]:function():Promise}} cele_cb
- * @param {{[name]:string,[handle]:function():Promise}} func_cb
+ * @param {{[name]:string,[handle]:function():Promise,[disabled]:boolean}} func_cb
  * @param {{name:string,[handle]:function():Promise}} back_cb
  * @returns {Promise<boolean|void>}
  */
@@ -144,7 +144,7 @@ async function npc_common(
       func_cb.handle
         ? {
             accelerator: 5,
-            config: { disabled: !is_awake },
+            config: { disabled: !is_awake || func_cb.disabled },
             content: func_cb.name,
             type: 'button',
           }

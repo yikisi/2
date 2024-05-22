@@ -25,6 +25,12 @@ module.exports = class extends CustomizedCheck {
   check_next_week() {
     const edu_weeks = get(`cflag:${this.id}:育成回合计时`);
     if (edu_weeks < 3 * 48) {
+      if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(this.id, cb_enum.edu, true).set_arg(edu_weeks),
+        );
+      }
       check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
     } else if (
       edu_weeks === 143 + 9 &&
@@ -42,11 +48,12 @@ module.exports = class extends CustomizedCheck {
       if (
         get('love:201') >= 75 ||
         get('cflag:201:妊娠阶段') !== 1 << pregnant_stage_enum.no ||
-        get('exp:201:生产次数') + get('exp:201:孩子数量') > 0
+        get('exp:201:生产次数') + get('exp:201:孩子数量') > 0 ||
+        get('love:304') >= 75
       ) {
         set('cflag:304:招募状态', -1);
       } else {
-        set('cflag:201:招募状态', 0);
+        set('cflag:201:招募状态', recruit_flags.no);
       }
     }
     return super.check_palace_and_get_aims();

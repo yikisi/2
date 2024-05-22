@@ -139,7 +139,7 @@ async function out_page() {
       {
         content: vehicle
           ? [
-              `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}到达了学院大门……`,
+              `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}到达了学园大门……`,
               { isBr: true },
               { isBr: true },
             ]

@@ -339,11 +339,7 @@ async function sys_next_week() {
     era.get(`status:${chara_id}:伤病`) &&
       era.set(
         `status:${chara_id}:伤病`,
-        Math.max(
-          era.get(`status:${chara_id}:伤病`) -
-            (1 + (era.get('cflag:305:招募状态') === recruit_flags.yes)),
-          0,
-        ),
+        Math.max(era.get(`status:${chara_id}:伤病`) - (1 + health_buff), 0),
       );
     era.set(`status:${chara_id}:健康茶`, 0);
     // 药物泌乳只维持一回合
@@ -863,9 +859,12 @@ async function sys_next_week() {
     }
   }
   await check_new_activities(cur_round, in_team_list);
-  in_team_list = in_team_list.filter((e) =>
-    get_custom_mec(e).is_able_to_be_selected(),
+  in_team_list = in_team_list.filter(
+    (e) =>
+      era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
+      get_custom_mec(e).is_able_to_be_selected(),
   );
+
   if (!era.get('flag:当前互动角色') && in_team_list.length) {
     temp = era.get('flag:床伴');
     era.set(
@@ -888,6 +887,7 @@ async function sys_next_week() {
         0,
     );
   }
+
   era.set('flag:床伴', 0);
 }
 

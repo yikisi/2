@@ -821,7 +821,7 @@ module.exports = {
       await era.printAndWait(
         `回忆突然涌入脑海，${me.name} 记起来，这是之前 ${
           me.name
-        } 因为有事外出而在学院附近的地铁站候车时，遇到一位迷路的${flash.get_uma_sex_title()}，在帮助了${
+        } 因为有事外出而在学园附近的地铁站候车时，遇到一位迷路的${flash.get_uma_sex_title()}，在帮助了${
           flash.sex
         }之后，得到的作为感谢的礼物。`,
       );

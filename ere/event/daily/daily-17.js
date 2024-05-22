@@ -300,7 +300,7 @@ handlers[event_hooks.out_river] = async function (hook) {
     if (!hook.arg) {
       talk_list.push(
         '动心忍性，增益其所不能。钓鱼，是一门相当的学问呢。',
-        '就算钓上了鱼，也只能拍照纪念哦，这是学院的财产。',
+        '就算钓上了鱼，也只能拍照纪念哦，这是学园的财产。',
       );
     } else {
       talk_list.push(

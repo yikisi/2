@@ -13,13 +13,13 @@ const { race_infos } = require('#/data/race/race-const');
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
     if (
-      get('cflag:305:招募状态') !== recruit_flags.yes &&
+      get('cflag:306:招募状态') !== recruit_flags.yes &&
       extra_flag.rank === 1 &&
       race_infos[extra_flag.race].race_class <= class_enum.G2
     ) {
       const temp = set(
-        'cflag:305:招募状态',
-        get('cflag:305:招募状态') || [0, 0],
+        'cflag:306:招募状态',
+        get('cflag:306:招募状态') || [0, 0],
       );
       temp[1]++;
     }
@@ -38,12 +38,5 @@ module.exports = class extends CustomizedCheck {
         new EventObject(this.id, cb_enum.edu).set_arg('palace'),
       );
     }
-  }
-
-  check_palace_and_get_aims() {
-    if (get('cflag:305:招募状态') !== recruit_flags.yes) {
-      set(`cflag:${this.id}:招募状态`, 0);
-    }
-    return super.check_palace_and_get_aims();
   }
 };

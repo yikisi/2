@@ -386,7 +386,7 @@ module.exports = (handlers) => {
         await chairman.say_and_wait([
           '同 意！',
           sys_get_colored_callname(302, 0),
-          '，早就是我们特雷森学院的家人了。',
+          '，早就是我们特雷森学园的家人了。',
         ]);
 
         await era.printAndWait([

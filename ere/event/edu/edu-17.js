@@ -216,7 +216,7 @@ handlers[event_hooks.week_end] = async () => {
     era.printButton('「抱歉……」', 2);
     await era.input();
     await era.printAndWait(
-      `${CharaTalk.me.name} 失魂落魄地离开了学生会。${CharaTalk.me.name} 清楚，学院离不开露娜。`,
+      `${CharaTalk.me.name} 失魂落魄地离开了学生会。${CharaTalk.me.name} 清楚，学园离不开露娜。`,
     );
     await era.printAndWait('露娜也清楚，日本不能在这个时候失去鲁铎象征。');
 

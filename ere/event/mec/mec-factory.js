@@ -61,11 +61,11 @@ module.exports = {
       return obj_dict[chara_id];
     }
     const script_name =
-      chara_id >= first_child_id
-        ? era.get(`callname:${chara_id}:-2`)
-        : chara_id;
-    return (obj_dict[chara_id] = new (cons_dict[
-      script_dict[script_name] || script_name
-    ] || common_cons)(chara_id));
+        chara_id >= first_child_id
+          ? era.get(`callname:${chara_id}:-2`)
+          : chara_id,
+      class_const =
+        cons_dict[script_dict[script_name] || script_name] || common_cons;
+    return (obj_dict[chara_id] = new class_const(chara_id));
   },
 };

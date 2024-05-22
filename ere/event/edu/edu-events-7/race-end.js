@@ -2,11 +2,11 @@ const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { gacha } = require('#/utils/list-utils');
-
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const print_event_name = require('#/event/snippets/print-event-name');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { gacha } = require('#/utils/list-utils');
 
 const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');

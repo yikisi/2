@@ -308,7 +308,7 @@ handlers[74] = async (tachyon, me, callname) => {
     [
       '【警告，若选择此选项，与 ',
       tachyon.get_colored_name(),
-      ' 的关系将无法挽回！特雷森学院不会原谅抛弃担当的行为！】',
+      ' 的关系将无法挽回！特雷森学园不会原谅抛弃担当的行为！】',
     ],
     {
       color: buff_colors[3],

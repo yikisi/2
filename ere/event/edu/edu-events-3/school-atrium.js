@@ -44,7 +44,7 @@ module.exports = async (hook, __, event_object) => {
     era.println();
 
     await teio.print_and_wait(
-      '从某种意义上说，这便是学院的垃圾桶，只不过，盛放的都是学院里人们的情绪和话语。',
+      '从某种意义上说，这便是学园的垃圾桶，只不过，盛放的都是学园里人们的情绪和话语。',
     );
     era.println();
 

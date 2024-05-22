@@ -32,7 +32,7 @@ module.exports = {
     );
     await era.printAndWait(`${me.name} 一边感叹着，一边前进着。`);
     await era.printAndWait(
-      `作为特雷森学园里为数众多的新人训练员之一，为仍然没有担当的赛${kita.get_uma_sex_title()}们进行照顾，几乎是学院里代代相承的传统。`,
+      `作为特雷森学园里为数众多的新人训练员之一，为仍然没有担当的赛${kita.get_uma_sex_title()}们进行照顾，几乎是学园里代代相承的传统。`,
     );
     await era.printAndWait(
       '但实际上做起来，就是压迫新人训练员劳动力的苦力活。',

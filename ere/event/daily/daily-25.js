@@ -793,7 +793,7 @@ handlers[event_hooks.basement_end] = async () => {
   const coffee = get_chara_talk(25);
   await era.printAndWait([
     coffee.get_colored_name(),
-    ' 的训练员已经失踪好几天了。警方搜遍了学院的每一个角落，却依然没有发现任何线索。',
+    ' 的训练员已经失踪好几天了。警方搜遍了学园的每一个角落，却依然没有发现任何线索。',
   ]);
   await era.printAndWait([
     '作为其担当',

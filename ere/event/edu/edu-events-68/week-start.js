@@ -294,7 +294,7 @@ module.exports = async function (hook, _, event_object) {
     }
     await print_event_name('夏季合宿', kita);
     await era.printAndWait(
-      `对于年轻的小赛${kita.get_uma_sex_title()}们来说，中央学院每年八月的夏季合宿，是${
+      `对于年轻的小赛${kita.get_uma_sex_title()}们来说，中央学园每年八月的夏季合宿，是${
         kita.sex
       }们仅次于几次假期最为期待的日子。`,
     );

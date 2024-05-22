@@ -22,10 +22,10 @@ const { attr_enum } = require('#/data/train-const');
  * @param {EventObject} event_object
  */
 module.exports = async (hook, _, event_object) => {
-  const edu_weeks = era.get('cflag:7:育成回合计时');
-  const gold_ship = get_chara_talk(7),
+  const event_arg = event_object?.arg,
+    gold_ship = get_chara_talk(7),
     me = get_chara_talk(0);
-  if (edu_weeks === 47 + 1) {
+  if (event_arg === 47 + 1) {
     await print_event_name(
       [{ color: chara_colors[1], content: '新年的抱负' }],
       gold_ship,
@@ -140,7 +140,7 @@ module.exports = async (hook, _, event_object) => {
       get_attr_and_print_in_event(7, undefined, 20) && (await era.waitAnyKey());
     }
     era.set('cflag:7:节日事件标记', 0);
-  } else if (edu_weeks === 47 + 29) {
+  } else if (event_arg === 47 + 29) {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:7:位置') !== era.get('cflag:0:位置')
@@ -232,7 +232,7 @@ module.exports = async (hook, _, event_object) => {
     const change_list = new Array(5).fill(3);
     gacha(Object.values(attr_enum), 3).forEach((e) => (change_list[e] = 8));
     get_attr_and_print_in_event(7, change_list, 45) && (await era.waitAnyKey());
-  } else if (edu_weeks === 47 + 41) {
+  } else if (event_arg === 47 + 41) {
     const opera = get_chara_talk(15);
     await print_event_name(
       [{ color: chara_colors[1], content: '目标巴黎时装周编' }],
@@ -288,7 +288,7 @@ module.exports = async (hook, _, event_object) => {
 
     get_attr_and_print_in_event(7, [0, 5, 0, 0, 0], 0) &&
       (await era.waitAnyKey());
-  } else if (edu_weeks === 95 + 3) {
+  } else if (event_arg === 95 + 3) {
     const winning_ticket = get_chara_talk(35);
     await print_event_name(
       [{ color: chara_colors[1], content: '目标社会人编' }],
@@ -342,7 +342,14 @@ module.exports = async (hook, _, event_object) => {
 
     get_attr_and_print_in_event(7, [0, 0, 0, 5, 0], 0) &&
       (await era.waitAnyKey());
-  } else if (edu_weeks === 95 + 29) {
+  } else if (event_arg === 95 + 29) {
+    if (
+      era.get('cflag:0:位置') !== location_enum.beach ||
+      era.get('cflag:7:位置') !== era.get('cflag:0:位置')
+    ) {
+      add_event(hook.hook, event_object);
+      return false;
+    }
     await print_event_name(
       [{ color: chara_colors[1], content: '夏季合宿' }],
       gold_ship,
@@ -444,7 +451,7 @@ module.exports = async (hook, _, event_object) => {
     era.println();
     sys_change_money(-5, 7);
     sys_like_chara(7, 0, 10, true, 5) && (await era.waitAnyKey());
-  } else if (edu_weeks === 144 && new GoldShipEduMarks().keywords === 4) {
+  } else if (event_arg === 'eden') {
     new GoldShipEduMarks().keywords++;
     const your_callname = era.get('callname:7:0');
     const taste = get_chara_talk(302);
@@ -625,6 +632,6 @@ module.exports = async (hook, _, event_object) => {
     }
     sys_like_chara(7, 0, 200) && (await era.waitAnyKey());
   } else {
-    throw new Error('unsupported');
+    throw new Error();
   }
 };

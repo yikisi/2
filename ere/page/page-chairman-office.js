@@ -131,7 +131,7 @@ async function page_chairman_office() {
                   await chara.say_and_wait('疑 惑！现在并不是招募担当的时候！');
                 } else {
                   chara.say(
-                    '告 知！对于还没有入队但是很有天赋的孩子，学院方面会允许已经做出成绩的训练员直接去指名教导对方，但是需要有能够服众的声望！',
+                    '告 知！对于还没有入队但是很有天赋的孩子，学园方面会允许已经做出成绩的训练员直接去指名教导对方，但是需要有能够服众的声望！',
                   );
                   chara.say(
                     '注 意！即使这样指名了，也还请好好和对方从头相处吧！',
@@ -223,7 +223,7 @@ async function page_chairman_office() {
                       await chara.say_and_wait('疑 惑！查无此人！');
                     } else {
                       chara.say([
-                        '抉 择！要让学院帮你接触 ',
+                        '抉 择！要让学园帮你接触 ',
                         {
                           content: era.get(`static:${temp}:name`),
                           color: get_chara_color(temp),

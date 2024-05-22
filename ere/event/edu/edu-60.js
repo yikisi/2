@@ -219,7 +219,7 @@ handlers[event_hooks.week_end] = async (hook, _, event_object) => {
     await print_event_name('夏季集训结束', chara_talk);
 
     await era.printAndWait(
-      '今天是夏日合宿的最后一天。作为留念，学院组织了一场盛大的烟火表演',
+      '今天是夏日合宿的最后一天。作为留念，学园组织了一场盛大的烟火表演',
     );
     await era.printAndWait(
       '和优秀素质一起，肩并肩站在海滩上，看着一朵朵烟花在海面上绽放',

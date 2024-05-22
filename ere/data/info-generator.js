@@ -38,7 +38,7 @@ const level_and_desc = {
   honour: {
     border: [500, 1000, 2000, 5000],
     mark: ['新手', '老练', '中坚', '精英', '传奇'],
-    buff: [0, 1, 2, 3, 5, 7, 10],
+    buff: [0, 1, 2, 3, 5, 10, 15],
   },
   attr_score: [
     'G',

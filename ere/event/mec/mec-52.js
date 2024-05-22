@@ -15,6 +15,7 @@ module.exports = class extends CustomizedMec {
       ret_list.push({
         color: get_chara_color(52),
         content: `回响(${gad + dad})`,
+        fontWeight: 'bold',
         title:
           `[回响(${gad + dad})]：？？？「若能相互理解，现实也能予以共鸣。」参赛时：` +
           [
