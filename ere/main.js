@@ -333,7 +333,7 @@ module.exports = async () => {
               '幽白書',
             ],
           ],
-          [[{ color: get_chara_color(1), content: '特别周' }], 'wwm'],
+          ['特殊角色（临时）', '黑奴队长'],
           [[{ color: get_chara_color(3), content: '东海帝王' }], '天马闪光蹄'],
           [
             [
@@ -405,14 +405,22 @@ module.exports = async () => {
             '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生',
           ],
           [
-            [{ color: get_chara_color(400), content: '周日宁静' }],
+            [
+              { color: get_chara_color(400), content: '周日宁静' },
+              '、',
+              { color: get_chara_color(342), content: '拜耶尔土耳其' },
+            ],
             '黑衣剑士-星爆气流斩准备就绪',
           ],
+          [[{ color: get_chara_color(303), content: '乙名史悦子' }], '幽白書'],
           [
             [{ color: get_chara_color(340), content: '达利阿拉伯' }],
             'O口口口口口',
           ],
-          ['特殊角色（临时）', '黑奴队长'],
+          [
+            [{ color: get_chara_color(341), content: '高多芬柏布' }],
+            'フィンランド',
+          ],
         ]) {
           buffer.push([
             ...(a[0] instanceof Array
@@ -430,28 +438,30 @@ module.exports = async () => {
             { isBr: true },
             ...(a[1] instanceof Array ? a[1] : [a[1]]),
           ]);
-          if (buffer.length === 2) {
+          if (buffer.length === 3) {
             era.printMultiColumns([
-              {
-                config: {
-                  offset: 3,
-                  width: 9,
-                },
-                content: buffer[0],
+              ...buffer.map((e) => ({
+                config: { width: 8 },
+                content: e,
                 type: 'text',
-              },
-              {
-                config: { width: 9 },
-                content: buffer[1],
-                type: 'text',
-              },
+              })),
               { content: '\n', type: 'text' },
             ]);
             await era.waitAnyKey();
             buffer = [];
           }
         }
-        buffer.length && (await era.printAndWait(buffer[0]));
+        if (buffer.length) {
+          era.printMultiColumns(
+            buffer.map((e) => ({
+              config: { width: 8 },
+              content: e,
+              type: 'text',
+            })),
+            { horizontalAlign: 'center' },
+          );
+          await era.waitAnyKey();
+        }
         await era.printAndWait('口上翻译', {
           color: el_warning_color,
           fontSize: '1.25rem',

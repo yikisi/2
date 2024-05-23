@@ -27,12 +27,22 @@ const { attr_names } = require('#/data/train-const');
  * @param {number} chara_id
  */
 function reset_chara(chara_id) {
-  Object.values(attr_names).forEach((v) => {
-    era.set(`base:${chara_id}:${v}`, era.get(`cflag:${chara_id}:初始${v}`));
-    era.set(`abl:${chara_id}:${v}训练等级`, 1);
-    era.set(`exp:${chara_id}:${v}训练经验`, 0);
-  });
-  era.set(`exp:${chara_id}:技能点数`, 0);
+  if (era.get(`cflag:${chara_id}:种族`)) {
+    Object.values(attr_names).forEach((v) =>
+      era.set(`base:${chara_id}:${v}`, era.get(`cflag:${chara_id}:初始${v}`)),
+    );
+    Object.values(attr_names).forEach((v) => {
+      era.set(`abl:${chara_id}:${v}训练等级`, 1);
+      era.set(`exp:${chara_id}:${v}训练经验`, 0);
+    });
+    era.set(`exp:${chara_id}:技能点数`, 0);
+    era.set(`cflag:${chara_id}:育成用变量`, {});
+    new RaceHistory(chara_id).reset();
+  } else {
+    Object.values(attr_names).forEach((v) =>
+      era.set(`base:${chara_id}:${v}`, get_random_value(25, 75)),
+    );
+  }
 
   sys_fix_chara_base(chara_id);
   const stamina = era.get(`base:${chara_id}:体力`),
@@ -53,9 +63,6 @@ function reset_chara(chara_id) {
       console.log(e.stack);
     }
   }
-
-  era.set(`cflag:${chara_id}:育成用变量`, {});
-  new RaceHistory(chara_id).reset();
 }
 
 module.exports = {

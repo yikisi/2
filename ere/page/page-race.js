@@ -22,8 +22,9 @@ const { get_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const date_indicator = require('#/page/components/date-indicator');
-const print_race_track_chart = require('#/page/components/race-track-chart');
-const select_contestants = require('#/page/components/select-contestants');
+const check_race_events = require('#/page/race/check-race-events');
+const print_race_track_chart = require('#/page/race/race-track-chart');
+const select_contestants = require('#/page/race/select-contestants');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -621,13 +622,11 @@ async function race_page(race) {
     }),
   ]);
   let tmp = await era.input();
-  team_list.forEach(({ index_chara: id }) => {
-    race_rank[id] = tmp;
-    aim_race_dict[id] = get_custom_check(id).is_aim_race(
-      race,
-      era.get(`cflag:${id}:育成回合计时`),
-      tmp,
-    );
+  team_list.forEach((uma) => {
+    uma.rank.last = race_rank[uma.index_chara] = tmp;
+    aim_race_dict[uma.index_chara] = get_custom_check(
+      uma.index_chara,
+    ).is_aim_race(race, era.get(`cflag:${uma.index_chara}:育成回合计时`), tmp);
   });
   const cur_year = era.get('flag:当前年');
   era.drawLine();
@@ -760,6 +759,7 @@ async function race_page(race) {
       time_cost += 100;
     }
   }
+  await check_race_events(info, team_list);
   era.drawLine();
   const best_rank = Math.min(...Object.values(race_rank)),
     mvp_id = Number(
