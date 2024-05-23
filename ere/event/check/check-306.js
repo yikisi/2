@@ -10,8 +10,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedCheck {
   check_next_week() {
-    const temp = set('cflag:306:招募状态', get('cflag:306:招募状态') || [0, 0]);
-    if (temp !== recruit_flags.yes) {
+    const temp = get('cflag:306:招募状态');
+    if (temp instanceof Array) {
       if (temp.findIndex((e) => e < 3) === -1) {
         add_event(
           event_hooks.week_start,
@@ -26,7 +26,8 @@ module.exports = class extends CustomizedCheck {
               get(`cflag:${c}:妊娠阶段`) !== 1 << pregnant_stage_enum.no ||
               get(`exp:${c}:生产次数`) + get(`exp:${c}:孩子数量`) > 0,
             false,
-          )
+          ) ||
+          get('love:306') >= 75
         ) {
           add_event(
             event_hooks.week_start,
@@ -35,7 +36,7 @@ module.exports = class extends CustomizedCheck {
         } else {
           add_event(
             event_hooks.week_start,
-            new EventObject(this.id, cb_enum.daily).set_arg('fail'),
+            new EventObject(this.id, cb_enum.edu).set_arg('fail'),
           );
           set(
             'cflag:202:招募状态',

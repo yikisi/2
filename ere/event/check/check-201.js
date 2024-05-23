@@ -18,7 +18,7 @@ module.exports = class extends CustomizedCheck {
       extra_flag.rank === 1 &&
       race_infos[extra_flag.race].race_class === class_enum.G1
     ) {
-      set('cflag:304:招募状态', -1);
+      set('cflag:304:招募状态', -3);
     }
   }
 
@@ -51,7 +51,7 @@ module.exports = class extends CustomizedCheck {
         get('exp:201:生产次数') + get('exp:201:孩子数量') > 0 ||
         get('love:304') >= 75
       ) {
-        set('cflag:304:招募状态', -1);
+        set('cflag:304:招募状态', -3);
       } else {
         set('cflag:201:招募状态', recruit_flags.no);
       }

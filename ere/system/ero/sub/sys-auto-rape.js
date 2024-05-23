@@ -33,7 +33,9 @@ const {
  * @param {function(number):boolean} filters
  */
 function get_random_act(master, act_list, last_action, ...filters) {
-  const change_action = era.get(`tcvar:${master}:变招`);
+  const change_action = (last_action = ero_hooks.relax
+    ? 1
+    : era.get(`tcvar:${master}:变招`));
   let ret;
   filters.push(undefined);
   let filtered_list;

@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
 const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
 const { sys_handle_action } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
@@ -10,7 +11,6 @@ const {
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
-const check_team_limit = require('#/page/components/check-team-limit');
 const goto_sex = require('#/page/components/goto-sex');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
@@ -123,7 +123,7 @@ async function page_chairman_office() {
               name: '「抗 议！训练场找不到我想训的学生！」',
               async handle() {
                 nothing = false;
-                if (check_team_limit()) {
+                if (sys_check_team_limit() >= 0) {
                   await chara.say_and_wait(
                     '不 解！你的队伍已经有足够的成员了！',
                   );

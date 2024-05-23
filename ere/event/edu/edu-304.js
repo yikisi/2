@@ -6,6 +6,11 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+/**
+ * 桐生院葵 - 育成
+ *
+ * @author 黑奴队长（临时）
+ */
 module.exports = async (hook, extra_flag, event_object) => {
   if (event_object?.arg !== 'fail') {
     throw new Error();

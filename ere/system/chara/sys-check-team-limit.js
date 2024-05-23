@@ -11,7 +11,7 @@ function check_team_limit() {
   return (
     filter_chara('cflag', '招募状态', recruit_flags.yes).reduce((a, e) => {
       return a + (e && get(`cflag:${e}:育成回合计时`) < 3 * 48);
-    }, 0) >=
+    }, 0) -
     trainer_team_limit[
       Math.min(get_trainer_level() + (get('relation:302:0') > 375) + 1, 5)
     ]

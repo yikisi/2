@@ -36,7 +36,7 @@ module.exports = class extends CustomizedMec {
             color: buff_colors[0],
             content: '陌生',
             fontWeight: 'bold',
-            title: `[陌生]：彼此还很不熟悉……训练效果${val}%；改善关系或与原训练员谈论此事可改善该状态`,
+            title: `[陌生]：彼此还很不熟悉……训练效果${val}%；改善关系或与担当训练员谈论此事可改善该状态`,
           },
         ];
       }

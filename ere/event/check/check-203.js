@@ -1,4 +1,4 @@
-const { get, set } = require('#/era-electron');
+const { get } = require('#/era-electron');
 
 const CustomizedCheck = require('#/event/check/check-common');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
@@ -15,13 +15,9 @@ module.exports = class extends CustomizedCheck {
     if (
       get('cflag:306:招募状态') !== recruit_flags.yes &&
       extra_flag.rank === 1 &&
-      race_infos[extra_flag.race].race_class <= class_enum.G2
+      race_infos[extra_flag.race].race_class <= class_enum.G3
     ) {
-      const temp = set(
-        'cflag:306:招募状态',
-        get('cflag:306:招募状态') || [0, 0],
-      );
-      temp[1]++;
+      get('cflag:306:招募状态')[1]++;
     }
   }
 
