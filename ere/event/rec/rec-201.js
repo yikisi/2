@@ -10,7 +10,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
  *
  * @author 黑奴队长（临时）
  */
-
 module.exports = {
   async run() {
     if (get('cflag:201:育成次数') === 0) {

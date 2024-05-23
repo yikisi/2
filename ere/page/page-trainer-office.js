@@ -42,7 +42,7 @@ const handlers = {};
 handlers[304] = (chara, me) => {
   if (get('cflag:304:招募状态') === recruit_flags.yes) {
     return {};
-  } else if (get('cflag:304:招募状态') === 0) {
+  } else if (get('cflag:304:招募状态') === recruit_flags.no) {
     return {
       name: '谈起训练员的工作',
       handle: () => {
@@ -142,10 +142,16 @@ handlers[304] = (chara, me) => {
 };
 
 handlers[306] = (chara, me) => {
-  return {
-    name: chara.actual_name,
-    async handle() {},
-  };
+  if (get('cflag:306:招募状态') === recruit_flags.yes) {
+    return {};
+  } else if (get('cflag:304:招募状态') === recruit_flags.no) {
+    return {
+      name: '请教训练员的工作',
+      async handle() {},
+    };
+  } else if (get('cflag:304:招募状态') === -2) {
+  } else if (get('cflag:201:育成回合计时') < 3 * 48) {
+  }
 };
 
 async function page_trainer_office() {

@@ -3,6 +3,9 @@ const era = require('#/era-electron');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 class CustomizedMec {
+  /** @type {number} */
+  id;
+
   constructor(chara_id) {
     this.id = chara_id;
   }
