@@ -4,7 +4,6 @@ const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -265,8 +264,10 @@ module.exports = {
         `${me.name} 看着正午的阳光和 ${kita.name} 带着歉意的表情，因为同这样一个孩子签订了契约而感到安心。`,
       );
       era.set('cflag:68:招募状态', recruit_flags.yes);
-      new KitaEduMarks().beginning++;
-      add_event(event_hooks.week_end, new EventObject(68, cb_enum.edu));
+      add_event(
+        event_hooks.week_end,
+        new EventObject(68, cb_enum.edu).set_arg('beginning'),
+      );
     } else {
       await era.printAndWait(`${me.name} 驱散心中的悸动，转身离开了训练场。`);
     }

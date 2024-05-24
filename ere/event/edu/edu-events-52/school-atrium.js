@@ -13,6 +13,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_enum } = require('#/data/train-const');
 
@@ -26,6 +27,7 @@ module.exports = (handlers) => {
       add_event(event_hooks.school_atrium, event_object);
       return true;
     }
+    new EventMarks(0).sub(event_hooks.school_atrium);
     await print_event_name('掰手腕对决', urara);
     const sky = get_chara_talk(20),
       spe = get_chara_talk(1);

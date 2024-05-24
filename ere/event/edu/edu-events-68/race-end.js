@@ -12,7 +12,7 @@ const { attr_enum } = require('#/data/train-const');
 
 /**
  * @param {HookArg} hook
- * @param {{race:number,rank:number,motivation_change:number,relation_change:number,attr_change:number[],pt_change:number,base_change:Record<string,number>}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
   const kita = get_chara_talk(68),

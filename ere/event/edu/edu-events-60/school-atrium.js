@@ -11,15 +11,20 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const event_hooks = require('#/data/event/event-hooks');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+/**
+ * @param {HookArg} hook
+ * @param extra_flag
+ * @param {EventObject} event_object
+ */
 module.exports = async (hook, extra_flag, event_object) => {
   if (era.get('flag:当前互动角色') !== 60) {
     add_event(event_hooks.school_atrium, event_object);
     return;
   }
   const chara_talk = get_chara_talk(60),
-    edu_weeks = era.get('cflag:60:育成回合计时'),
+    event_arg = event_object?.arg,
     me = get_chara_talk(0);
-  if (edu_weeks === 47 + 33) {
+  if (event_arg === 47 + 33) {
     await print_event_name('下定决心努力前行！', chara_talk);
 
     await era.printAndWait(
@@ -102,7 +107,7 @@ module.exports = async (hook, extra_flag, event_object) => {
     get_attr_and_print_in_event(60, [20, 20, 0, 0, 0], 0);
     await era.waitAnyKey();
     // TODO 末脚+2
-  } else if (edu_weeks === 47 + 42) {
+  } else if (event_arg === 47 + 42) {
     await print_event_name('王座的背后', chara_talk);
 
     const teio_talk = get_chara_talk(3);
@@ -231,7 +236,7 @@ module.exports = async (hook, extra_flag, event_object) => {
     era.println();
     get_attr_and_print_in_event(60, [0, 0, 0, 0, 5], 0);
     await era.waitAnyKey();
-  } else if (edu_weeks === 95 + 42) {
+  } else if (event_arg === 95 + 42) {
     await print_event_name('闪闪发光', chara_talk);
 
     await era.printAndWait(

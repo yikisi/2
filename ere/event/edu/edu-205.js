@@ -22,7 +22,7 @@ const handlers = {};
 
 /**
  * @param _
- * @param {{race:number,rank:number,relation_change:number,attr_change:number[],pt_change:number,love_change:number}} extra_flag
+ * @param {RaceStartParams} extra_flag
  */
 handlers[event_hooks.race_start] = async (_, extra_flag) => {
   const edu_weeks = era.get('cflag:205:育成回合计时'),
@@ -118,7 +118,7 @@ handlers[event_hooks.race_start] = async (_, extra_flag) => {
 
 /**
  * @param {HookArg} _
- * @param {{race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 handlers[event_hooks.race_end] = async (_, extra_flag) => {
   const edu_weeks = era.get('cflag:205:育成回合计时'),

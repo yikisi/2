@@ -28,7 +28,7 @@ async function sex_with_nice_nature(extra_flag) {
 
 /**
  * @param {HookArg} hook
- * @param {{race:number,rank:number,relation_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
   const chara_talk = get_chara_talk(60),
