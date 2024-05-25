@@ -6,6 +6,7 @@ const {
   printButton,
   println,
   set,
+  waitAnyKey,
 } = require('#/era-electron');
 
 const {
@@ -26,6 +27,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { class_enum } = require('#/data/race/model/race-info');
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 /**
  * 特殊赛后事件口上
@@ -42,7 +44,7 @@ async function check_race_events(info, team_contestants) {
    */
   if (
     info.race_class <= class_enum.G3 &&
-    Math.min(...team_contestants.map((e) => e.rank.last)) === 1 &&
+    Math.min(...team_contestants.map((e) => e.rank.curr)) === 1 &&
     team_contestants.findIndex((e) => e.index_chara === 0) === -1 &&
     get('cflag:0:妊娠阶段') >> pregnant_stage_enum.fetal > 0 &&
     get('cflag:303:招募状态') === recruit_flags.yes &&
@@ -54,7 +56,7 @@ async function check_race_events(info, team_contestants) {
       const etsuko = get_chara_talk(303),
         me = get_chara_talk(0),
         champion = get_chara_talk(
-          team_contestants.find((e) => e.rank.last === 1).index_chara,
+          team_contestants.find((e) => e.rank.curr === 1).index_chara,
         );
       if (get_penis_size(303) === 0) {
         set(`status:303:弗隆${Math.random() < 0.5 ? 'K' : 'P'}`, 1);
@@ -389,6 +391,9 @@ async function check_race_events(info, team_contestants) {
         '的想法一般，也微微抬起了头',
       ]);
       await end_ero_and_train();
+      println();
+      sys_like_chara(champion.id, 0, 50) && (await waitAnyKey());
+      sys_like_chara(303, 0, 200) && (await waitAnyKey());
     };
   }
   if (handler) {

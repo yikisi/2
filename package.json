@@ -13,7 +13,7 @@
   },
   "name": "erauma",
   "scripts": {
-    "lint": "eslint ere --ext .js",
+    "lint": "eslint ere",
     "prepare": "husky"
   }
 }
