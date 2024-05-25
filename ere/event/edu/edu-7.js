@@ -23,7 +23,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const color_7 = require('#/data/chara-colors').chara_colors[7];
 const { lust_border } = require('#/data/ero/orgasm-const');
-const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
@@ -109,9 +108,8 @@ handlers[event_hooks.school_atrium] = async (
   }
   const gold_ship = get_chara_talk(7),
     me = get_chara_talk(0),
-    event_marks = new GoldShipEduMarks(),
-    edu_weeks = era.get('cflag:7:育成回合计时');
-  if (edu_weeks === 47 + 3) {
+    event_arg = event_object?.arg;
+  if (event_arg === 47 + 3) {
     await print_event_name(
       [{ color: color_7[1], content: '母亲比神还要强编' }],
       gold_ship,
@@ -187,7 +185,7 @@ handlers[event_hooks.school_atrium] = async (
 
     get_attr_and_print_in_event(7, new Array(5).fill(3), 45) &&
       (await era.waitAnyKey());
-  } else if (edu_weeks === 95 + 41) {
+  } else if (event_arg === 95 + 41) {
     const festa = get_chara_talk(49);
     await print_event_name(
       [{ color: color_7[1], content: '认真对决编' }],
@@ -284,8 +282,7 @@ handlers[event_hooks.school_atrium] = async (
 
     get_attr_and_print_in_event(7, [0, 0, 0, 5, 0], 0) &&
       (await era.waitAnyKey());
-  } else if (event_marks.heroine_red === 1) {
-    event_marks.heroine_red++;
+  } else if (event_arg === 'heroine_red') {
     await print_event_name(
       [{ color: color_7[1], content: '主角的红色！' }],
       gold_ship,
@@ -343,8 +340,7 @@ handlers[event_hooks.school_atrium] = async (
       get_attr_and_print_in_event(7, [0, 0, 0, 20, 0], 0) &&
         (await era.waitAnyKey());
     }
-  } else if (event_marks.sudden_look_back === 1) {
-    event_marks.sudden_look_back++;
+  } else if (event_arg === 'sudden_look_back') {
     await print_event_name(
       [{ color: color_7[1], content: '阿船的突然追忆过去篇！' }],
       gold_ship,
@@ -479,6 +475,9 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
     add_event(hook.hook, event_object);
     return;
   }
+  if (event_object?.arg !== 'golden_ship_date') {
+    return;
+  }
   const gold_ship = get_chara_talk(7),
     me = get_chara_talk(0);
   await print_event_name(
@@ -539,6 +538,9 @@ handlers[event_hooks.school_rooftop] = async (
 ) => {
   if (era.get('flag:当前互动角色') !== 7) {
     add_event(hook.hook, event_object);
+    return;
+  }
+  if (event_object?.arg !== 'shoubu') {
     return;
   }
   const gold_ship = get_chara_talk(7),
@@ -661,6 +663,9 @@ handlers[event_hooks.race_end] = require('#/event/edu/edu-events-7/race-end');
 handlers[event_hooks.out_church] = async (hook, __, event_object) => {
   if (era.get('flag:当前互动角色') !== 7) {
     add_event(hook.hook, event_object);
+    return;
+  }
+  if (event_object.arg !== 95 + 1) {
     return;
   }
   const gold_ship = get_chara_talk(7),

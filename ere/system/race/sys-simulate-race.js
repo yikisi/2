@@ -1,4 +1,4 @@
-﻿const { sort_list } = require('#/utils/list-utils');
+const { sort_list } = require('#/utils/list-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const {

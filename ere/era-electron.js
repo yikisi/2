@@ -28,6 +28,13 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   beginTrain(...charaId) {},
   /**
+   * check if a or some images are loaded
+   * @param name the name of the image
+   * @returns {boolean|boolean[]}
+   */
+  // eslint-disable-next-line no-unused-vars
+  checkImage(...name) {},
+  /**
    * clear printed lines
    * @param {number} [lineCount] how many lines to be cleared, leave undefined to clear all
    * @returns {Promise<number>} new line count
@@ -353,6 +360,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
+  version: { sdk: '1.2.3', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
@@ -363,10 +371,12 @@ const era = {
 Object.keys(era).forEach((key) => {
   if (era[key] instanceof Function && key !== 'delay') {
     era[key] = (...args) => {
-      // eslint-disable-next-line no-undef
-      if (arguments.callee !== era[key]) {
-        return era[key](...args);
+      if (!era[key]._s) {
+        era.logger.error(
+          `unsupported api! please check the version of the engine! current version: sdk=${era.version.sdk}, engine=${era.version.engine}`,
+        );
       }
+      return era[key](...args);
     };
   }
 });

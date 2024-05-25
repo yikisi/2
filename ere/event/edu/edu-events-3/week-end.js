@@ -24,12 +24,17 @@ const {
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const { get_filtered_talents } = require('#/data/info-generator');
 
-module.exports = async function () {
+/**
+ * @param _
+ * @param __
+ * @param {EventObject} event_object
+ */
+module.exports = async (_, __, event_object) => {
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:3:育成回合计时'),
+    event_arg = event_object?.arg,
     event_marks = new TeioEduMarks();
-  if (edu_weeks === 95 + 17) {
+  if (event_arg === 95 + 17) {
     await print_event_name('依靠', teio);
     await era.printAndWait('雨夜，静寂无声。');
     await era.printAndWait(
@@ -464,7 +469,7 @@ module.exports = async function () {
         );
       sys_like_chara(3, 0, 12, true, 1) && (await era.waitAnyKey());
     }
-  } else if (edu_weeks === 143 + 5 && event_marks.good_end === 1) {
+  } else if (event_arg === 143 + 5 && event_marks.good_end === 1) {
     event_marks.good_end++;
     await print_event_name('柳暗花明', teio);
     await era.printAndWait(

@@ -19,11 +19,10 @@ const { location_enum } = require('#/data/locations');
 module.exports = async function (hook, _, event_object) {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:68:育成回合计时'),
+    event_arg = event_object?.arg,
     event_marks = new KitaEduMarks();
   let wait_flag = false;
-  if (event_marks.beginning === 1) {
-    event_marks.beginning++;
+  if (event_arg === 'beginning') {
     await print_event_name(
       `不过是平平无常的${kita.get_teen_sex_title()}`,
       kita,
@@ -109,7 +108,7 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [5, 0, 5, 0, 0], 0) || wait_flag;
-  } else if (edu_weeks === 38) {
+  } else if (event_arg === 38) {
     const nature = get_chara_talk(60);
     await print_event_name('优秀素质 登场', kita);
     await era.printAndWait('十月后半的某一天上午。');
@@ -159,8 +158,7 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [0, 0, 0, 10, 0], 0) || wait_flag;
-  } else if (edu_weeks === 47 + 10 && event_marks.classical_valentine === 1) {
-    event_marks.classical_valentine++;
+  } else if (event_arg === 47 + 10) {
     await print_event_name('没有恶意的小小恶作剧 ', kita);
     await era.printAndWait(
       `白色情人节，${me.name} 一大早便在草场跑道上等着${kita.name}。`,
@@ -207,7 +205,7 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(`那就不需要太在意了呢～`);
     era.println();
     wait_flag = sys_like_chara(68, 0, 5, true, 1) || wait_flag;
-  } else if (edu_weeks === 47 + 7) {
+  } else if (event_arg === 47 + 7) {
     await print_event_name('家人是很重要的', kita);
     await era.printAndWait(
       `某一天上午，${me.name} 同 ${kita.name} 一起待在训练员室里。`,
@@ -241,7 +239,7 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [0, 0, 5, 0, 0], 0) || wait_flag;
-  } else if (edu_weeks === 47 + 11) {
+  } else if (event_arg === 47 + 11) {
     await print_event_name('稳健的支持与皋月阴云', kita);
     const teio = get_chara_talk(3);
     await kita.say_and_wait(
@@ -284,7 +282,7 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [3, 3, 3, 3, 3], 20) || wait_flag;
-  } else if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
+  } else if (event_arg === 47 + 29 || event_arg === 95 + 29) {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:68:位置') !== era.get('cflag:0:位置')
@@ -294,7 +292,7 @@ module.exports = async function (hook, _, event_object) {
     }
     await print_event_name('夏季合宿', kita);
     await era.printAndWait(
-      `对于年轻的小赛${kita.get_uma_sex_title()}们来说，中央学院每年八月的夏季合宿，是${
+      `对于年轻的小赛${kita.get_uma_sex_title()}们来说，中央学园每年八月的夏季合宿，是${
         kita.sex
       }们仅次于几次假期最为期待的日子。`,
     );
@@ -325,7 +323,7 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [0, 0, 10, 10, 0], 0) || wait_flag;
-  } else if (edu_weeks === 47 + 48) {
+  } else if (event_arg === 47 + 48) {
     await print_event_name('圣诞夜的晚餐', kita);
     await era.printAndWait(
       `圣诞节的特雷森，就如同过去的十几年那样一如既往的吵闹。`,
@@ -448,7 +446,7 @@ module.exports = async function (hook, _, event_object) {
       wait_flag = sys_like_chara(68, 0, 10, true, 2) || wait_flag;
     }
     era.set('flag:68:节日事件标记', 0);
-  } else if (edu_weeks === 95 + 1) {
+  } else if (event_arg === 95 + 1) {
     await print_event_name('小北的熟人？', kita);
     await era.printAndWait('一年的时光转瞬即逝，很快就到了新年伊始。');
     await era.printAndWait(
@@ -516,7 +514,7 @@ module.exports = async function (hook, _, event_object) {
     wait_flag =
       get_attr_and_print_in_event(68, [10, 10, 10, 10, 10], 0) || wait_flag;
     era.set('flag:68:节日事件标记', 0);
-  } else if (edu_weeks === 95 + 6) {
+  } else if (event_arg === 95 + 6) {
     await print_event_name('略微有些破碎的甜酒味', kita);
     await era.printAndWait(
       `在资深年的情人节这天，和 ${kita.name} 相约在训练员室里见面。`,

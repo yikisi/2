@@ -21,6 +21,8 @@ const {
 } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 const { get_random_value } = require('#/utils/value-utils');
@@ -54,7 +56,6 @@ const {
 } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { chara_has_ero_image } = require('#/data/other-const');
-const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 function get_chr(img_name) {
   if (!img_name) {

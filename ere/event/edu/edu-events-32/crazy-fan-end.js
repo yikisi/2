@@ -760,7 +760,7 @@ module.exports = async () => {
   era.println();
   await tachyon.say_and_wait('————那么，该开始下一次实验了');
   era.drawLine();
-  await tachyon.print_and_wait('特雷森学院的地下室');
+  await tachyon.print_and_wait('特雷森学园的地下室');
   era.println();
   await tachyon.say_and_wait('上次来这里……是什么时候了');
   era.println();

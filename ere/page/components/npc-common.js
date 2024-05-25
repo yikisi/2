@@ -12,12 +12,20 @@ const {
   sys_get_move_cost,
 } = require('#/system/sys-calc-chara-param');
 
+const { get_custom_check } = require('#/event/check/check-factory');
+
 const { get_random_value } = require('#/utils/value-utils');
 
-const { love_colors, relation_colors } = require('#/data/const.json');
+const {
+  attr_background_colors,
+  love_colors,
+  relation_colors,
+} = require('#/data/const.json');
 const event_hooks = require('#/data/event/event-hooks');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { get_love_info, get_relation_info } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const get_status = require('#/system/chara/sys-get-status');
 
 /**
  * @param {CharaTalk} chara
@@ -25,9 +33,9 @@ const { location_enum } = require('#/data/locations');
  * @param {{name:string,handle:function():Promise}} talk_cb
  * @param {{name:string,handle:function():Promise}} sex_cb
  * @param {{name:string,[handle]:function():Promise,[loc]:number,[print_out_page]:function():Promise}} out_cb
- * @param {{name:string,handle:function():Promise}} cele_cb
- * @param {{name:string,handle:function():Promise}} func_cb
- * @param {{name:string,handle:function():Promise}} back_cb
+ * @param {{name:string,[handle]:function():Promise}} cele_cb
+ * @param {{[name]:string,[handle]:function():Promise,[disabled]:boolean}} func_cb
+ * @param {{name:string,[handle]:function():Promise}} back_cb
  * @returns {Promise<boolean|void>}
  */
 async function npc_common(
@@ -54,7 +62,8 @@ async function npc_common(
     chara_base = {
       stamina: era.get(`base:${chara.id}:体力`),
       time: era.get(`base:${chara.id}:精力`),
-    };
+    },
+    is_recruit = era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes;
   era.setVerticalAlign('middle');
   era.printInColRows(
     [
@@ -80,13 +89,70 @@ async function npc_common(
     {
       columns: [
         { content: '\n', type: 'text' },
+        ...(is_recruit
+          ? [
+              {
+                config: { width: 2 },
+                content: '体力',
+                type: 'text',
+              },
+              {
+                config: {
+                  color: attr_background_colors['体力'],
+                  height: 22,
+                  width: 12,
+                },
+                inContent: `${era.get(`base:${chara.id}:体力`)}/${era.get(
+                  `maxbase:${chara.id}:体力`,
+                )}`,
+                percentage:
+                  (era.get(`base:${chara.id}:体力`) * 100) /
+                  era.get(`maxbase:${chara.id}:体力`),
+                type: 'progress',
+              },
+              { content: '', type: 'text' },
+              {
+                config: { width: 2 },
+                content: '精力',
+                type: 'text',
+              },
+              {
+                config: {
+                  color: attr_background_colors['精力'],
+                  height: 22,
+                  width: 12,
+                },
+                inContent: `${era.get(`base:${chara.id}:精力`)}/${era.get(
+                  `maxbase:${chara.id}:精力`,
+                )}`,
+                percentage:
+                  (era.get(`base:${chara.id}:精力`) * 100) /
+                  era.get(`maxbase:${chara.id}:精力`),
+                type: 'progress',
+              },
+              { content: '', type: 'text' },
+              {
+                config: { width: 2 },
+                content: '状态',
+                type: 'text',
+              },
+              {
+                config: { width: 22 },
+                content: get_status(chara.id),
+                type: 'text',
+              },
+            ]
+          : []),
         {
           config: { width: 2 },
           content: '好感',
           type: 'text',
         },
         {
-          config: { color: relation_colors[relation[0]], width: 22 },
+          config: {
+            color: relation_colors[relation[0]],
+            width: is_recruit ? 4 : 22,
+          },
           content: relation.join(' '),
           type: 'text',
         },
@@ -94,7 +160,7 @@ async function npc_common(
         {
           config: {
             color: love_colors[love[0]],
-            width: 22,
+            width: is_recruit ? 4 : 22,
           },
           content: love.join(' '),
           type: 'text',
@@ -141,12 +207,22 @@ async function npc_common(
             type: 'button',
           }
         : undefined,
-      {
-        accelerator: 5,
-        config: { disabled: !is_awake },
-        content: func_cb.name,
-        type: 'button',
-      },
+      func_cb.handle
+        ? {
+            accelerator: 5,
+            config: { disabled: !is_awake || func_cb.disabled },
+            content: func_cb.name,
+            type: 'button',
+          }
+        : undefined,
+      era.get(`cflag:${chara.id}:爱慕暂拒`) &&
+      era.get(`cflag:${chara.id}:爱慕暂拒`) === era.get(`love:${chara.id}`)
+        ? {
+            accelerator: 6,
+            content: '重新触发爱慕事件',
+            type: 'button',
+          }
+        : undefined,
       {
         accelerator: 99,
         content: back_cb.name,
@@ -155,8 +231,9 @@ async function npc_common(
     ].filter((e) => e),
   );
   era.setVerticalAlign('top');
-  let temp;
-  switch (await era.input()) {
+  let temp = await era.input();
+  era.drawLine();
+  switch (temp) {
     case 1:
       sys_change_attr_and_print(0, '精力', -200);
       await talk_cb.handle();
@@ -195,8 +272,17 @@ async function npc_common(
     case 5:
       await func_cb.handle();
       break;
+    case 6:
+      get_custom_check(chara.id).check_love_events();
+      await era.printAndWait([
+        chara.get_colored_name(),
+        { content: ' 似乎决定重新审视你们之间的关系……' },
+      ]);
+      break;
     case 99:
-      await back_cb.handle();
+      if (back_cb.handle) {
+        await back_cb.handle();
+      }
       return false;
   }
   if (!era.get(`base:${chara.id}:体力`)) {

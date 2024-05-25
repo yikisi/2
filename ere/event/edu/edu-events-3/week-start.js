@@ -17,13 +17,18 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = async () => {
+/**
+ * @param _
+ * @param __
+ * @param {EventObject} event_object
+ */
+module.exports = async (_, __, event_object) => {
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:3:育成回合计时'),
+    event_arg = event_object?.arg,
     event_marks = new TeioEduMarks();
   let wait_flag = false;
-  if (edu_weeks === 47 + 1) {
+  if (event_arg === 47 + 1) {
     await print_event_name('新年的抱负', teio);
     await teio.say_and_wait('训练员训练员～今天是我们这个组合，第一次跨年哦！');
     era.println();
@@ -81,7 +86,7 @@ module.exports = async () => {
           get_attr_and_print_in_event(3, new Array(5).fill(0), 20) || wait_flag;
     }
     era.set('cflag:3:节日事件标记', 0);
-  } else if (edu_weeks === 47 + 12) {
+  } else if (event_arg === 47 + 12) {
     await print_event_name('记者招待会', teio);
     await era.printAndWait(
       `被灯光和话筒所围绕，镜头前的每个人都用混杂着好奇和饥渴的眼神注视着 ${me.get_couple_title()}。${
@@ -105,7 +110,7 @@ module.exports = async () => {
     wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
     wait_flag =
       get_attr_and_print_in_event(3, [15, 0, 0, 10, 0], 0) || wait_flag;
-  } else if (edu_weeks === 95 + 5) {
+  } else if (event_arg === 95 + 5) {
     await print_event_name('放弃', teio);
     await me.say_and_wait('帝王，我们必须严肃地谈谈这个问题');
     era.println();
@@ -218,7 +223,7 @@ module.exports = async () => {
         JSON.parse('{"体力":-150,"精力":-50}'),
       );
     }
-  } else if (edu_weeks === 95 + 14) {
+  } else if (event_arg === 95 + 14) {
     await print_event_name('粉丝感谢祭', teio);
     if (event_marks.give_up) {
       await era.printAndWait(
@@ -246,7 +251,7 @@ module.exports = async () => {
         `帝王今日表现得越是出色，${me.name} 脑海中的警铃声便越大……`,
       );
     }
-  } else if (edu_weeks === 95 + 17) {
+  } else if (event_arg === 95 + 17) {
     await print_event_name('新闻发布会', teio);
     await era.printAndWait(
       ` ${me.name} 整理了一下领带，最后对着镜子打量了下自己。`,
@@ -334,7 +339,7 @@ module.exports = async () => {
         `等到${teio.sex}重新复出的那天……你们会看到，${teio.sex}还是帝王。`,
       );
     }
-  } else if (edu_weeks === 95 + 19) {
+  } else if (event_arg === 95 + 19) {
     await print_event_name('交涉', teio);
     await me.say_and_wait('这次又是什么……');
     await era.printAndWait(
@@ -449,7 +454,7 @@ module.exports = async () => {
       sys_change_fame(10);
       sys_change_money(300);
     }
-  } else if (edu_weeks === 143 + 9 && !era.get('cflag:3:可再次育成')) {
+  } else if (event_arg === 143 + 9 && !era.get('cflag:3:可再次育成')) {
     await palace(teio, me);
     await palace_relation(teio, me);
     era.println();

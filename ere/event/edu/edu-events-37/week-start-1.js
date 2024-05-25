@@ -404,7 +404,7 @@ module.exports = (handlers) => {
     era.printButton('「是的，我希望你能和荣进闪耀进行模拟比赛。」', 1);
     await era.input();
     await era.printAndWait(
-      `特雷森学院学生会办公室内，『皇帝』${luna.name} 面露平和之色地看着 ${your_name}。`,
+      `特雷森学园学生会办公室内，『皇帝』${luna.name} 面露平和之色地看着 ${your_name}。`,
     );
     await luna.say_and_wait(
       `真是意外的请求啊。想要和我一起赛跑的${flash.get_uma_sex_title()}有很多，但需要我去赛跑的训练员可真是罕见呢。`,
@@ -514,7 +514,7 @@ module.exports = (handlers) => {
     await flash.say_and_wait('而且……我也很期待呢，与更强者的对决。');
     era.drawLine({ content: '约定日' });
     await era.printAndWait(
-      `${your_name} 和荣进闪耀一起前往特雷森学院的操场处。`,
+      `${your_name} 和荣进闪耀一起前往特雷森学园的操场处。`,
     );
     await mr_cb.say_and_wait('那么准备好的话就可以开始咯。');
     await flash.say_and_wait('好的，请多多指教，千明代表同学。');

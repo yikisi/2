@@ -228,7 +228,7 @@ module.exports = async (hook, _, event_object) => {
     await era.printAndWait(
       '甚至到了晚上，露娜还在帮助两个寮舍的舍长，安排任务。',
     );
-    await luna_talk.say_and_wait('学院的问题，都是我的问题，无需在意。');
+    await luna_talk.say_and_wait('学园的问题，都是我的问题，无需在意。');
     await era.printAndWait(
       `随后，${luna_talk.sex}以身作则，早早的就回到寝室休息。`,
     );
@@ -243,7 +243,7 @@ module.exports = async (hook, _, event_object) => {
     era.printButton('「因为你太吸引我的目光了。」', 2);
     await era.input();
     await luna_talk.say_and_wait(
-      '真是能说会道，但为了学院环境的清朗，请不要用于我之外的孩子身上',
+      '真是能说会道，但为了学园环境的清朗，请不要用于我之外的孩子身上',
     );
     await luna_talk.say_and_wait('对了');
     await luna_talk.say_and_wait('你一直这样！');
@@ -344,10 +344,10 @@ module.exports = async (hook, _, event_object) => {
       '是一位到现在才回来的孩子，她马上就要参加出道赛。',
     );
     await luna_talk.say_and_wait(
-      '接近一月底才回到学院，恐怕你也会疑惑吧？大多数赛马娘会选择在秋季或冬季出道。',
+      '接近一月底才回到学园，恐怕你也会疑惑吧？大多数赛马娘会选择在秋季或冬季出道。',
     );
     await luna_talk.say_and_wait(
-      '但在那之前，我们就会来到学院，和同龄人们一起学习，也一起竞争。',
+      '但在那之前，我们就会来到学园，和同龄人们一起学习，也一起竞争。',
     );
     await luna_talk.say_and_wait(
       '这是快乐的，但也不能保证这个过程没有心碎和疲惫。',

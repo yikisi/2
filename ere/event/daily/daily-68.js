@@ -857,7 +857,7 @@ handlers[event_hooks.slave_end] = async function () {
     `但同时，那也是 ${me.name} 最大的债主那无比愉快的，令 ${me.name} 倍感压力的笑容。`,
   );
   await kita.say_and_wait(
-    `唔嘿嘿～再过几个月大概就可以恢复正常生活，回到特雷森学院了。`,
+    `唔嘿嘿～再过几个月大概就可以恢复正常生活，回到特雷森学园了。`,
   );
   await kita.say_and_wait(
     `只是借债了这么点钱真是太好了呢，还在小北我稍微能处理的范畴内。`,

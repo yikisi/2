@@ -31,7 +31,7 @@ module.exports = async () => {
       if (comm_desc && !comm_desc.startsWith('(FILE LOST)')) {
         buffer.push({
           accelerator: ind + 100,
-          config: { width: 4 },
+          config: { align: 'right', width: 4 },
           content: '改名',
           type: 'button',
         });

@@ -26,9 +26,10 @@ cons_dict[52] = require('#/event/mec/mec-52');
 cons_dict[67] = require('#/event/mec/mec-67');
 cons_dict[80] = require('#/event/mec/mec-80');
 cons_dict[100] = require('#/event/mec/mec-100');
-cons_dict[201] = require('#/event/mec/mec-201');
-cons_dict[202] = require('#/event/mec/mec-202');
-cons_dict[203] = require('#/event/mec/mec-203');
+cons_dict[201] =
+  cons_dict[202] =
+  cons_dict[203] =
+    require('#/event/mec/mec-npc-uma-common');
 cons_dict[204] = require('#/event/mec/mec-204');
 cons_dict[205] = require('#/event/mec/mec-205');
 cons_dict[206] = require('#/event/mec/mec-206');
@@ -61,11 +62,11 @@ module.exports = {
       return obj_dict[chara_id];
     }
     const script_name =
-      chara_id >= first_child_id
-        ? era.get(`callname:${chara_id}:-2`)
-        : chara_id;
-    return (obj_dict[chara_id] = new (cons_dict[
-      script_dict[script_name] || script_name
-    ] || common_cons)(chara_id));
+        chara_id >= first_child_id
+          ? era.get(`callname:${chara_id}:-2`)
+          : chara_id,
+      class_const =
+        cons_dict[script_dict[script_name] || script_name] || common_cons;
+    return (obj_dict[chara_id] = new class_const(chara_id));
   },
 };

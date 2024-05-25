@@ -27,13 +27,13 @@ const { attr_enum } = require('#/data/train-const');
  * @param __
  * @param {EventObject} event_object
  */
-module.exports = async function (hook, __, event_object) {
+module.exports = async (hook, __, event_object) => {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:68:育成回合计时'),
+    event_arg = event_object?.arg,
     event_marks = new KitaEduMarks();
   let wait_flag = false;
-  if (event_marks.beginning === 1) {
+  if (event_arg === 'beginning') {
     add_event(event_hooks.week_start, event_object);
     await print_event_name(`${kita.name} 登场`, kita);
     await era.printAndWait(
@@ -83,7 +83,7 @@ module.exports = async function (hook, __, event_object) {
     await era.printAndWait(`而 ${kita.name} 的故事，也由此开始了。`);
     era.println();
     wait_flag = get_attr_and_print_in_event(68, undefined, 120) || wait_flag;
-  } else if (edu_weeks === 47 + 32 || edu_weeks === 95 + 32) {
+  } else if (event_arg === 47 + 32 || event_arg === 95 + 32) {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:68:位置') !== era.get('cflag:0:位置')
@@ -111,7 +111,7 @@ module.exports = async function (hook, __, event_object) {
     const attr_change = new Array(5).fill(0);
     gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 5));
     wait_flag = get_attr_and_print_in_event(68, attr_change, 0) || wait_flag;
-  } else if (edu_weeks === 95 + 10) {
+  } else if (event_arg === 95 + 10) {
     event_marks.senior_valentine++;
     await print_event_name('奖励', kita);
     await era.printAndWait(
@@ -186,7 +186,7 @@ module.exports = async function (hook, __, event_object) {
       [100, 100, 50],
     );
     wait_flag = true;
-  } else if (edu_weeks === 95 + 48) {
+  } else if (event_arg === 95 + 48) {
     await print_event_name(`与 ${kita.name} 的酒吧生活`, kita);
     await era.printAndWait(`和 ${me.name} 的担当约好了，要在某处酒吧里见面。`);
     await era.printAndWait(
@@ -243,7 +243,7 @@ module.exports = async function (hook, __, event_object) {
     await era.printAndWait(`作为最后的几天，也不错呢。`);
     era.println();
     wait_flag = sys_like_chara(68, 0, 50) || wait_flag;
-  } else if (edu_weeks === 144) {
+  } else if (event_arg === 144) {
     const love = era.get('love:68'),
       relation = era.get('relation:68:0');
     if (love === 100 && relation > 375) {

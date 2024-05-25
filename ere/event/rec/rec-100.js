@@ -41,7 +41,7 @@ module.exports = {
       );
       await me.say_and_wait('而只是想说——我实在是一个羞耻的人。', true);
       await me.say_and_wait(
-        '在这所人才辈出的特雷森学院中，我是那仅存的「没有才能」的训练员。',
+        '在这所人才辈出的特雷森学园中，我是那仅存的「没有才能」的训练员。',
         true,
       );
       await me.say_and_wait(
@@ -151,7 +151,7 @@ module.exports = {
         ' 曾经的热情也因那向天际的一指而失去了。',
       ]);
       await era.printAndWait(
-        `自以为能成为优秀的训练员，而来到特雷森学院的${sys_get_callname(0, 0)}。`,
+        `自以为能成为优秀的训练员，而来到特雷森学园的${sys_get_callname(0, 0)}。`,
       );
       await era.printAndWait('终于，连那份支撑自己的感情，也消失了吗？');
       await era.printAndWait('去天台抽根烟吧……');
@@ -182,7 +182,7 @@ module.exports = {
         '。',
       ]);
       await era.printAndWait([
-        '那是在特雷森学院的天台上，落日的余晖之中。',
+        '那是在特雷森学园的天台上，落日的余晖之中。',
         me.get_colored_name(),
         ' 循声暗自回过头，一位始终温和微笑的',
         acute.get_uma_sex_title(),

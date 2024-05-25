@@ -256,7 +256,7 @@ module.exports = async (hook, extra_flag) => {
       await chara_talk.say_and_wait('伊甸……');
       era.drawLine();
       await chara_talk.print_and_wait(
-        `在 ${CharaTalk.me.name} 和 ${chara_talk.name} 分别后，${chara_talk.sex}独自来到了学院中庭。`,
+        `在 ${CharaTalk.me.name} 和 ${chara_talk.name} 分别后，${chara_talk.sex}独自来到了学园中庭。`,
       );
       await chara_talk.print_and_wait(
         '看着三女神的雕像，回味着踏入领域的光景，站在世代最顶点的赛马娘握紧了拳。',

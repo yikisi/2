@@ -22,6 +22,7 @@ const { get_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const date_indicator = require('#/page/components/date-indicator');
+const check_race_events = require('#/page/race/check-race-events');
 const page_race_result = require('#/page/race/page-race-result');
 const print_race_track_chart = require('#/page/race/race-track-chart');
 const select_contestants = require('#/page/race/select-contestants');
@@ -614,23 +615,6 @@ async function race_page(race) {
     }
   }
   sys_prepare_race(contestants, info);
-  // // 输入名次 Debug用
-  // era.printMultiColumns([
-  //   { type: 'divider' },
-  //   { content: 'TEST 选择成绩', type: 'text' },
-  //   ...[1, 5, 10, 20].map((e) => {
-  //     return {
-  //       accelerator: e,
-  //       config: { align: 'center', width: 6 },
-  //       content: `${e}着`,
-  //       type: 'button',
-  //     };
-  //   }),
-  // ]);
-  // const tmp = await era.input();
-  // team_list.forEach((uma) => (uma.rank.curr = tmp));
-
-  // TODO 模拟比赛 和debug用的输入名次只能留一个
   const records = sys_sim_race(contestants, info);
   await page_race_result(contestants, records, info);
   team_list.forEach((uma) => {
@@ -777,9 +761,10 @@ async function race_page(race) {
       time_cost += 100;
     }
   }
+  await check_race_events(info, team_list);
   era.drawLine();
   const best_rank = Math.min(...team_list.map((e) => e.rank.curr)),
-    mvp_id = team_list.filter((e) => e.rank.curr === best_rank)[0].index_chara,
+    mvp_id = team_list.find((e) => e.rank.curr === best_rank).index_chara,
     is_pregnant_slave = era.get('flag:惩戒力度') === 3;
   let fame_reward;
   if (best_rank === 1) {

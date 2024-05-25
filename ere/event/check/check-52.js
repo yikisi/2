@@ -16,6 +16,7 @@ const { get_chara_color } = require('#/data/chara-colors');
 const { attr_change_colors } = require('#/data/color-const');
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const UraraLifeMarks = require('#/data/event/life-event-marks/life-event-marks-52');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -211,6 +212,7 @@ module.exports = class extends CustomizedCheck {
         'teach',
         event_hooks.back_school,
         event_obj,
+        () => new EventMarks(52).add(event_hooks.out_shopping),
       );
       check_and_add_event(
         edu_marks,
@@ -218,6 +220,7 @@ module.exports = class extends CustomizedCheck {
         'dance',
         event_hooks.back_school,
         event_obj,
+        () => new EventMarks(0).add(event_hooks.back_school),
       );
       check_and_add_event(
         edu_marks,
@@ -232,6 +235,7 @@ module.exports = class extends CustomizedCheck {
         'all_like',
         event_hooks.out_start,
         event_obj,
+        () => new EventMarks(0).add(event_hooks.out_start),
       );
       check_and_add_event(
         edu_marks,
@@ -246,6 +250,7 @@ module.exports = class extends CustomizedCheck {
         'stair',
         event_hooks.back_school,
         event_obj,
+        () => new EventMarks(0).add(event_hooks.school_chairman),
       );
       check_and_add_event(
         edu_marks,
@@ -253,6 +258,7 @@ module.exports = class extends CustomizedCheck {
         'mother',
         event_hooks.back_school,
         event_obj,
+        () => new EventMarks(0).add(event_hooks.school_chairman),
       );
       check_and_add_event(
         edu_marks,
@@ -260,6 +266,7 @@ module.exports = class extends CustomizedCheck {
         'vs',
         event_hooks.school_atrium,
         event_obj,
+        () => new EventMarks(0).add(event_hooks.school_atrium),
       );
       check_and_add_event(
         edu_marks,
@@ -290,6 +297,7 @@ module.exports = class extends CustomizedCheck {
         'challenge',
         event_hooks.back_school,
         event_obj,
+        () => new EventMarks(0).add(event_hooks.back_school),
       );
       check_and_add_event(
         edu_marks,
@@ -304,6 +312,7 @@ module.exports = class extends CustomizedCheck {
         'park',
         event_hooks.back_school,
         event_obj,
+        () => new EventMarks(52).add(event_hooks.out_shopping),
       );
       check_and_add_event(
         edu_marks,

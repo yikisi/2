@@ -77,7 +77,9 @@ module.exports = class extends CustomizedCheck {
       event_obj = new EventObject(7, cb_enum.edu),
       edu_weeks = era.get('cflag:7:育成回合计时');
     if (edu_weeks < 3 * 48) {
-      const event_obj_special = new EventObject(7, cb_enum.edu, true);
+      const event_obj_special = new EventObject(7, cb_enum.edu, true).set_arg(
+        edu_weeks,
+      );
       check_and_add_event(
         event_marks,
         edu_weeks,
@@ -122,9 +124,7 @@ module.exports = class extends CustomizedCheck {
         // 资深年1月第一周
         case 95 + 1:
           add_event(event_hooks.out_church, event_obj_special);
-          break;
       }
-
       check_and_register_aim_race(7, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 9) {
       add_event(event_hooks.week_start, event_obj);
@@ -133,7 +133,10 @@ module.exports = class extends CustomizedCheck {
 
   check_palace_and_get_aims() {
     if (new GoldShipEduMarks().keywords === 4) {
-      add_event(event_hooks.week_start, new EventObject(7, cb_enum.edu));
+      add_event(
+        event_hooks.week_start,
+        new EventObject(7, cb_enum.edu).set_arg('eden'),
+      );
     }
     return super.check_palace_and_get_aims();
   }

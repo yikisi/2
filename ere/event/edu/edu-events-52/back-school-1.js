@@ -20,6 +20,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const chara_colors = require('#/data/chara-colors').chara_colors[52];
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
@@ -41,6 +42,7 @@ module.exports = (handlers) => {
       add_event(event_hooks.back_school, event_object);
       return true;
     }
+    new EventMarks(52).sub(event_hooks.out_shopping);
     await print_event_name('名指导', urara);
     await era.printAndWait([
       '在从商店街采购结束的回程路上，身边帮 ',
@@ -104,6 +106,7 @@ module.exports = (handlers) => {
       add_event(event_hooks.back_school, event_object);
       return true;
     }
+    new EventMarks(0).sub(event_hooks.back_school);
     await print_event_name('舞蹈练习', urara);
     await era.printAndWait([
       me.get_colored_name(),
@@ -220,6 +223,7 @@ module.exports = (handlers) => {
       add_event(event_hooks.back_school, event_object);
       return true;
     }
+    new EventMarks(0).sub(event_hooks.school_chairman);
     await print_event_name('阶梯训练与学生传言', urara);
     await era.printAndWait([
       '在从理事长办公室回去的路上，',
@@ -316,6 +320,7 @@ module.exports = (handlers) => {
       add_event(event_hooks.back_school, event_object);
       return true;
     }
+    new EventMarks(0).sub(event_hooks.school_chairman);
     const in_urara = get_chara_talk(52, chara_colors[1]);
     await print_event_name('「那个人」的偶遇', urara);
     await in_urara.say_as_unknown_and_wait([
@@ -519,6 +524,7 @@ module.exports = (handlers) => {
       add_event(event_hooks.back_school, event_object);
       return true;
     }
+    new EventMarks(0).sub(event_hooks.back_school);
     await print_event_name('「传奇」的挑战', urara);
     const grass = get_chara_talk(11);
     await era.printAndWait([

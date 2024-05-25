@@ -167,7 +167,7 @@ module.exports = {
       }
     } else if (
       chara_id &&
-      era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48
+      !(era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)
     ) {
       return [];
     } else if (
