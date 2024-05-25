@@ -27,7 +27,6 @@
 ---
 ## 第三步：模拟比赛
 
-#data/system/racing/sys-race-debug.js
 #data/system/racing/sys-simulate-race.js
 
 > @param {PseudoUma[]} list_chara 马娘Object数组

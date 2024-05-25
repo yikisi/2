@@ -47,6 +47,7 @@ function sys_parse_for_race(team_chara, race, info) {
 
   //留个特殊指令呼叫隐藏对手的地方
   if (sp_command) {
+    //
   }
 
   //接着填过往冠军幻影

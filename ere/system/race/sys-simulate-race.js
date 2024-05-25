@@ -12,7 +12,7 @@ const startVelocity = 3;
 const startAcceleration = 24;
 
 //上坡时基础加速度为三分之二
-const raceAcceModUphill = 2 / 3;
+// const raceAcceModUphill = 2 / 3;
 
 /**
  * @param {PseudoUma[]} list_chara
@@ -117,14 +117,13 @@ function sys_sim_race(list_chara, race_info) {
     });
 
     //按位置sort一下以计算排名 顺便生成未完赛的短位置表继续计算
-    let list_location = (list_in_race = sort_list(
-      list_in_race,
-      (e) => e.race.location,
-    )).map((e, i) => {
-      e.rank.last = e.rank.curr;
-      e.rank.curr = i + list_finished.length;
-      return e.race.location;
-    });
+    (list_in_race = sort_list(list_in_race, (e) => e.race.location)).map(
+      (e, i) => {
+        e.rank.last = e.rank.curr;
+        e.rank.curr = i + list_finished.length;
+        return e.race.location;
+      },
+    );
 
     //通过位置表计算一下相对距离 之后红技光环应该也会用位置表读范围
     list_in_race.forEach((uma, i, l) => {

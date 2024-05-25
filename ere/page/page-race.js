@@ -22,9 +22,9 @@ const { get_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const date_indicator = require('#/page/components/date-indicator');
-const page_race_result = require('#/page/components/page-race-result');
-const print_race_track_chart = require('#/page/components/race-track-chart');
-const select_contestants = require('#/page/components/select-contestants');
+const page_race_result = require('#/page/race/page-race-result');
+const print_race_track_chart = require('#/page/race/race-track-chart');
+const select_contestants = require('#/page/race/select-contestants');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');

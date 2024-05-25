@@ -10,7 +10,6 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
-const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
