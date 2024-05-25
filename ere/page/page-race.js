@@ -266,7 +266,7 @@ async function race_page(race) {
       race_infos[race].race_class <= RaceInfo.class_enum.G1 &&
       team_list.indexOf(uma) !== -1
     ) {
-      era.set(`cstr:${id}:决胜服`, '');
+      era.set(`cstr:${id}:决胜服`, 0);
     }
   });
   wait_flag && (await era.waitAnyKey());

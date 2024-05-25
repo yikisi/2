@@ -74,7 +74,7 @@ class CustomizedMec {
     let temp;
     if ((temp = era.get(`cstr:${this.id}:决胜服`)) === -1) {
       return [`${base}_运`, base, 'default'];
-    } else if (!temp) {
+    } else if (temp === 0) {
       const holiday = (era.get('flag:当前回合数') - 1) % 48;
       switch (holiday) {
         case 0:

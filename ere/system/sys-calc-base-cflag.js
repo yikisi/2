@@ -227,7 +227,7 @@ module.exports = {
       src_chara_id = chara_id;
     }
     const maxbase_buff =
-      get_custom_mec(chara_id).get_maxbase_buff() +
+      get_custom_mec(chara_id).get_maxbase_buff() -
       (era.get(`cflag:${chara_id}:妊娠阶段`) ===
         1 << pregnant_stage_enum.resume &&
         (era.get(`cflag:${chara_id}:妊娠回合计时`) - 1) * 100);

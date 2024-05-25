@@ -28,6 +28,7 @@ const {
   back_hairs,
   chara_has_ero_image,
   front_hairs,
+  race_clothe_list,
   top_hairs,
 } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');
@@ -198,6 +199,7 @@ module.exports = {
       );
     });
 
+    const action_buffer = [];
     if (
       !chara_has_ero_image[chara.id] &&
       (!chara.id ||
@@ -205,14 +207,34 @@ module.exports = {
         !era.get(`cflag:${chara.id}:父方角色`) ||
         !era.get(`cflag:${chara.id}:母方角色`))
     ) {
+      action_buffer.push({
+        accelerator: 100,
+        config: { width: 4 },
+        content: '梳头',
+        type: 'button',
+      });
+    }
+    const image_prefix = era.get(`cstr:${chara.id}:头像`);
+    let image_list;
+    if (
+      era.get(`cflag:${chara.id}:种族`) &&
+      chara.id &&
+      (image_list = race_clothe_list.filter((e) =>
+        era.checkImage(`${image_prefix}${e.s}`),
+      )).length > 1 &&
+      era.get(`cstr:${chara.id}:决胜服`) !== -1
+    ) {
+      action_buffer.push({
+        accelerator: 101,
+        config: { width: 8 },
+        content: '决胜服',
+        type: 'button',
+      });
+    }
+    if (action_buffer.length > 0) {
       title_info_list.push(
         { content: [{ isBr: true }], type: 'text' },
-        {
-          accelerator: 100,
-          config: { width: 12 },
-          content: '梳头',
-          type: 'button',
-        },
+        ...action_buffer,
       );
     }
 
@@ -226,6 +248,7 @@ module.exports = {
           while (flag_hair) {
             era.printInColRows(
               [
+                { type: 'divider' },
                 {
                   content: ['请选择 ', chara.get_colored_name(), ' 的新发型'],
                   type: 'text',
@@ -349,7 +372,7 @@ module.exports = {
             await era.clear();
             era.setToBottom();
           }
-        } else {
+        } else if (command !== 101) {
           const selected = command - 31;
           if (selected === -1) {
             title_list.forEach((e) => (e.s = false));
@@ -358,6 +381,78 @@ module.exports = {
           } else {
             title_list.forEach((e) => (e.s = false));
             title_list[selected].s = true;
+          }
+        } else {
+          const suffix = era.get(`cstr:${chara.id}:决胜服`);
+          era.setHorizontalAlign('space-evenly');
+          era.printInColRows(
+            [
+              { type: 'divider' },
+              {
+                content: [
+                  '现在 ',
+                  chara.get_colored_name(),
+                  ' 在参赛时',
+                  suffix === 0
+                    ? '按照节庆决定决胜服，在结束育成后的殿堂周将身着决胜服'
+                    : `穿着 ${image_list.find((e) => e.s === suffix).n}`,
+                  '。',
+                  { isBr: true },
+                  '要更换吗？',
+                ],
+                type: 'text',
+              },
+            ],
+            ...image_list.map((e, i) => ({
+              columns: [
+                { names: `${image_prefix}${e.s}_半身`, type: 'image.whole' },
+                {
+                  accelerator: i + 1,
+                  config: {
+                    align: 'center',
+                    disabled: suffix === e.s,
+                  },
+                  content: e.n,
+                  type: 'button',
+                },
+              ],
+              config: { width: 6 },
+            })),
+            [
+              {
+                accelerator: 98,
+                config: {
+                  align: 'center',
+                  disabled: suffix === 0,
+                  width: 12,
+                },
+                content: '即时选择',
+                type: 'button',
+              },
+              {
+                accelerator: 99,
+                config: { align: 'center', width: 12 },
+                content: '保持不变',
+                type: 'button',
+              },
+            ],
+          );
+          era.setHorizontalAlign('start');
+          const ret = await era.input();
+          if (ret === 98) {
+            await era.printAndWait([
+              '现在 ',
+              chara.get_colored_name(),
+              ' 在参赛时会按照场合和节庆决定决胜服，在结束育成后的殿堂周将身着决胜服。',
+            ]);
+            era.set(`cstr:${chara.id}:决胜服`, 0);
+          } else if (ret !== 99) {
+            await era.printAndWait([
+              '现在 ',
+              chara.get_colored_name(),
+              ` 在参赛时和结束育成后的殿堂周将身着 ${image_list[ret - 1].n}。`,
+            ]);
+            era.set(`cstr:${chara.id}:决胜服`, image_list[ret - 1].s);
           }
         }
       },
