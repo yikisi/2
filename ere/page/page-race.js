@@ -37,7 +37,6 @@ const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const {
   adaptability_colors,
-  buff_colors,
   el_danger_color,
   el_success_color,
   el_warning_color,
@@ -814,12 +813,13 @@ async function race_page(race) {
         .get()
         .slice(cur_count)
         .forEach((e) => {
-          if (e.c === buff_colors[1]) {
-            if (e.n.endsWith('变则三冠') || e.n.endsWith('六冠')) {
-              race_title_reward++;
-            } else if (e.n.endsWith('三宝冠') || e.n.endsWith('三冠')) {
+          switch (e.c) {
+            case adaptability_colors.at(-1):
+            case adaptability_colors.at(-2):
               race_title_reward += 2;
-            }
+              break;
+            case adaptability_colors.at(-3):
+              race_title_reward++;
           }
         });
     }
