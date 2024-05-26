@@ -48,8 +48,23 @@ function get_delta_desc(delta) {
 }
 
 /**
+ * @param {number} minutes
+ * @param {number} seconds
+ * @returns {string}
+ */
+function get_timer_record(minutes, seconds) {
+  return `${minutes ? `${minutes}'` : ''}${
+    minutes
+      ? `${Math.round(seconds / 15)
+          .toString()
+          .padStart(2, '0')}`
+      : (seconds / 15).toFixed(1)
+  }"`;
+}
+
+/**
  * @param {PseudoUma[]} contestants
- * @param {{acc:number[][],loc:number[][],skill:[][],speed:number[][]}} records
+ * @param {{acc:number[][],loc:number[][],skill:[][],speed:number[][],stamina:number[][]}} records
  * @param {RaceInfo} info
  */
 async function page_race_result(contestants, records, info) {
@@ -97,22 +112,13 @@ async function page_race_result(contestants, records, info) {
       total_time = contestants.map(() => '');
 
     const record_timer = [0, 0];
-    function get_timer_record() {
-      return `${record_timer[0] ? `${record_timer[0]}'` : ''}${
-        record_timer[0]
-          ? `${Math.round(record_timer[1] / 15)
-              .toString()
-              .padStart(2, '0')}`
-          : Math.round(record_timer[1] / 15)
-      }"`;
-    }
 
     let timer = 0;
     while (flag_result && timer < records.loc.length) {
       contestants.forEach((uma) => {
         if (records.loc[timer][uma.index_race] >= info.span) {
           if (!total_time[uma.index_race]) {
-            total_time[uma.index_race] = get_timer_record();
+            total_time[uma.index_race] = get_timer_record(...record_timer);
           }
         } else {
           if (
@@ -122,7 +128,7 @@ async function page_race_result(contestants, records, info) {
           ) {
             contestant_timer[uma.index_race][
               contestant_timer_index[uma.index_race]
-            ] = get_timer_record();
+            ] = get_timer_record(...record_timer);
             contestant_timer_index[uma.index_race]++;
           }
         }
@@ -194,6 +200,10 @@ async function page_race_result(contestants, records, info) {
       (timer ? era.replaceInColRows : era.printInColRows)(
         [
           { type: 'divider' },
+          {
+            content: ['计时器：', get_timer_record(...record_timer)],
+            type: 'text',
+          },
           { config: { width: 1 }, content: '号码', type: 'text' },
           { config: { width: 3 }, content: '名字', type: 'text' },
           ...header.slice(timer_start, timer_end).map((e) => {
@@ -322,6 +332,83 @@ async function page_race_result(contestants, records, info) {
     era.input().then(() => (flag_result = false));
   }
   await show_result(interval);
+  const labels = new Array(Math.ceil((records.loc.length + 1) / 15))
+      .fill(0)
+      .map((_, i) => get_timer_record(Math.floor(i / 60), i * 15)),
+    options = {
+      fill: false,
+      interaction: { intersect: false },
+      radius: 0,
+      responsive: true,
+    };
+  era.print('位置图');
+  era.printLineChart({
+    data: {
+      datasets: contestants.map((e) => ({
+        borderColor: get_chara_color(e.index_chara),
+        data: records.loc
+          .map((r) => Math.min(r[e.index_race], info.span).toFixed(1))
+          .filter((_, i) => i % 15 === 0),
+        label: e.name,
+        stepped: false,
+      })),
+      labels,
+    },
+    options,
+  });
+  era.printButton('继续', 1);
+  await era.input();
+  era.print('速度图');
+  era.printLineChart({
+    data: {
+      datasets: contestants.map((e) => ({
+        borderColor: get_chara_color(e.index_chara),
+        data: records.speed
+          .map((r) => Math.min(r[e.index_race], info.span).toFixed(1))
+          .filter((_, i) => i % 15 === 0),
+        label: e.name,
+        stepped: false,
+      })),
+      labels,
+    },
+    options,
+  });
+  era.printButton('继续', 1);
+  await era.input();
+  era.print('加速度图');
+  era.printLineChart({
+    data: {
+      datasets: contestants.map((e) => ({
+        borderColor: get_chara_color(e.index_chara),
+        data: records.acc
+          .map((r) => Math.min(r[e.index_race], info.span).toFixed(1))
+          .filter((_, i) => i % 15 === 0),
+        label: e.name,
+        stepped: false,
+      })),
+      labels,
+    },
+    options,
+  });
+  era.printButton('继续', 1);
+  await era.input();
+  era.print('体力图');
+  era.printLineChart({
+    data: {
+      datasets: contestants.map((e) => ({
+        borderColor: get_chara_color(e.index_chara),
+        data: records.stamina
+          .map((r) => Math.min(r[e.index_race], info.span).toFixed(1))
+          .filter((_, i) => i % 15 === 0),
+        label: e.name,
+        stepped: false,
+      })),
+      labels,
+    },
+    options,
+  });
+  era.printButton('继续', 1);
+  await era.input();
 }
 
 module.exports = page_race_result;

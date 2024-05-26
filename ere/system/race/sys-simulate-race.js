@@ -1,4 +1,4 @@
-const { sort_list } = require('#/utils/list-utils');
+﻿const { sort_list } = require('#/utils/list-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const {
@@ -32,10 +32,12 @@ function sys_sim_race(list_chara, race_info) {
     record_acc_list = [new Array(count_uma).fill(0)],
     record_speed_list = [new Array(count_uma).fill(0)],
     // 起跑第一秒的技能报告
-    record_skill_list = [new Array(count_uma).fill(undefined).map(() => [])];
+    record_skill_list = [new Array(count_uma).fill(undefined).map(() => [])],
+    record_stamina_list = [new Array(count_uma)];
 
   //计算出闸技能并赋予初始速度与加速度
   list_chara.forEach((uma) => {
+    record_stamina_list[0][uma.index_race] = uma.race.stamina;
     let start_delay = Math.random() * 0.1;
     let list_skill_start = uma.list_skill.filter(
       (itemSkill) =>
@@ -69,6 +71,7 @@ function sys_sim_race(list_chara, race_info) {
     record_location_list.push(new Array(count_uma));
     record_skill_list.push(new Array(count_uma).fill(undefined).map(() => []));
     record_speed_list.push(new Array(count_uma));
+    record_stamina_list.push(new Array(count_uma));
 
     //每秒先进行冲线判定 将高速相机列表置空
     const list_msec_cam = [];
@@ -88,6 +91,7 @@ function sys_sim_race(list_chara, race_info) {
       record_acc_list.at(-1)[e.index_race] = record_speed_list.at(-1)[
         e.index_race
       ] = 0;
+      record_stamina_list.at(-1)[e.index_race] = e.race.stamina;
     });
 
     // 再无待计算马娘则比赛结束
@@ -114,16 +118,11 @@ function sys_sim_race(list_chara, race_info) {
       record_location_list.at(-1)[uma.index_race] = uma.race.location;
       record_acc_list.at(-1)[uma.index_race] = uma.race.acceleration;
       record_speed_list.at(-1)[uma.index_race] = uma.race.velocityReal;
+      record_stamina_list.at(-1)[uma.index_race] = uma.race.stamina;
     });
 
     //按位置sort一下以计算排名 顺便生成未完赛的短位置表继续计算
-    (list_in_race = sort_list(list_in_race, (e) => e.race.location)).map(
-      (e, i) => {
-        e.rank.last = e.rank.curr;
-        e.rank.curr = i + list_finished.length;
-        return e.race.location;
-      },
-    );
+    list_in_race = sort_list(list_in_race, (e) => e.race.location);
 
     //通过位置表计算一下相对距离 之后红技光环应该也会用位置表读范围
     list_in_race.forEach((uma, i, l) => {
@@ -375,7 +374,7 @@ function sys_sim_race(list_chara, race_info) {
         itemUma.base.stamina,
       );
       //空耐则目标速度掉为最低速度
-      if (itemUma.race.stamina <= 0) {
+      if (itemUma.race.stamina === 0) {
         itemUma.race.velocityIdeal = itemUma.base.velocityMin;
         itemUma.race.acceleration = raceDecel[4];
       }
@@ -390,6 +389,7 @@ function sys_sim_race(list_chara, race_info) {
     loc: record_location_list,
     skill: record_skill_list,
     speed: record_speed_list,
+    stamina: record_stamina_list,
   };
 }
 

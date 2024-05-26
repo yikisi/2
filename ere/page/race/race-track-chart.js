@@ -72,7 +72,6 @@ function print_race_track_chart(info) {
   );
   era.printLineChart({
     data: {
-      labels: new Array(info.span + 1).fill(0).map((_, i) => i),
       datasets: [
         {
           borderColor: '#cc34ff',
@@ -81,6 +80,7 @@ function print_race_track_chart(info) {
           stepped: true,
         },
       ],
+      labels: new Array(info.span + 1).fill(0).map((_, i) => i),
     },
     options: {
       interaction: { intersect: false },
