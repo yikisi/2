@@ -412,7 +412,10 @@ module.exports = async () => {
             ],
             '黑衣剑士-星爆气流斩准备就绪',
           ],
-          [[{ color: get_chara_color(303), content: '乙名史悦子' }], '幽白書'],
+          [
+            [{ color: get_chara_color(303), content: '乙名史悦子' }],
+            ['雞雞', { isDivider: true }, '幽白書'],
+          ],
           [
             [{ color: get_chara_color(340), content: '达利阿拉伯' }],
             'O口口口口口',

@@ -9,11 +9,14 @@ const {
   waitAnyKey,
 } = require('#/era-electron');
 
+const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
+const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const {
   begin_and_init_ero,
   end_ero_and_train,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
@@ -24,10 +27,7 @@ const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const EtsukoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-303');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { class_enum } = require('#/data/race/model/race-info');
-const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
-const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const { class_enum, track_names } = require('#/data/race/model/race-info');
 
 /**
  * 特殊赛后事件口上
@@ -37,12 +37,48 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
  */
 async function check_race_events(info, team_contestants) {
   let handler = undefined;
-  /**
-   * 乙名史悦子 - 孕袋
-   *
-   * @author 幽白書
-   */
-  if (
+  if (get('cflag:303:招募状态') === recruit_flags.no) {
+    set('cflag:303:招募状态', -1);
+    handler = async () => {
+      const etsuko = get_chara_talk(303),
+        me = get_chara_talk(0);
+      await print_event_name('开始采访', etsuko);
+      await printAndWait([
+        '在离开',
+        track_names[info.track],
+        '竞马场时，',
+        me.get_colored_name(),
+        '与一位记者打扮的',
+        etsuko.get_phy_sex_title(),
+        '不期而遇。',
+      ]);
+      if (get('flag:初见URA颁奖')) {
+        await printAndWait([
+          me.get_colored_name(),
+          ' 认出',
+          etsuko.sex,
+          ' 正是每年负责URA颁奖的 ',
+          etsuko.get_colored_name(),
+          '。',
+        ]);
+      }
+      await printAndWait([
+        etsuko.sex,
+        '向 ',
+        me.get_colored_name(),
+        ' 作了自我介绍，是名为 ',
+        etsuko.get_colored_actual_name(),
+        ' 的记者。',
+      ]);
+      await printAndWait([
+        '简单打招呼后，',
+        etsuko.sex,
+        '表示很期待 ',
+        me.get_colored_name(),
+        ' 的队伍后续的表现。',
+      ]);
+    };
+  } else if (
     info.race_class <= class_enum.G3 &&
     Math.min(...team_contestants.map((e) => e.rank.curr)) === 1 &&
     team_contestants.findIndex((e) => e.index_chara === 0) === -1 &&
@@ -52,6 +88,13 @@ async function check_race_events(info, team_contestants) {
     !new EtsukoLifeMarks().rape
   ) {
     new EtsukoLifeMarks().rape = 1;
+    /**
+     * 乙名史悦子 - 孕袋
+     *
+     * @author 幽白書
+     *
+     * @type {function:Promise}
+     */
     handler = async () => {
       const etsuko = get_chara_talk(303),
         me = get_chara_talk(0),
@@ -65,7 +108,7 @@ async function check_race_events(info, team_contestants) {
         set(`status:${champion.id}:弗隆${Math.random() < 0.5 ? 'K' : 'P'}`, 1);
       }
       begin_and_init_ero(0, champion.id, 303);
-      await print_event_name('开始采访', etsuko);
+      await print_event_name('开始「采访」', etsuko);
       await etsuko.say_and_wait('那么，下面让我们开始采访');
       await me.say_and_wait('咕啾……咕啾……');
       println();

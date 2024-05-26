@@ -173,7 +173,7 @@ module.exports = {
         type: 'button',
       },
       {
-        config: { width: 4 },
+        config: { width: 6 },
         content: '（无）',
         type: 'text',
       },
@@ -192,7 +192,7 @@ module.exports = {
           type: 'button',
         },
         {
-          config: { color: e.c, width: 4 },
+          config: { color: e.c, width: 6 },
           content: e.n,
           type: 'text',
         },

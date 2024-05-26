@@ -862,6 +862,13 @@ async function race_page(race) {
       (6 - best_rank) * (5 - info.race_class) + race_title_reward * 25,
     ) && (await era.waitAnyKey());
   }
+  if (info.race_class <= RaceInfo.class_enum.G3 && best_rank <= 5) {
+    sys_like_chara(
+      303,
+      0,
+      (6 - best_rank) * (3 - info.race_class) + race_title_reward * 30,
+    ) && (await era.waitAnyKey());
+  }
   const prize_ratio = 0.04 * get_trainer_level() + 0.04,
     total_prize = sys_change_money(
       team_list
