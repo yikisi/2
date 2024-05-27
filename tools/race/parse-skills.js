@@ -1,24 +1,93 @@
-const data = require('./SkillParams.json');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
-const skills = [];
-
-data.forEach((skill) =>
-  skills.push({
-    buff: {
-      type: skill[11].split('、'),
-      value: skill[12].split('、').map(Number),
-      time: Number(skill[13]),
+async function task() {
+  const ret = await prisma.skill_data.findMany({
+    select: {
+      id: true,
+      rarity: true,
+      group_id: true,
+      group_rate: true,
+      filter_switch: true,
+      grade_value: true,
+      skill_category: true,
+      tag_id: true,
+      unique_skill_id_1: true,
+      unique_skill_id_2: true,
+      exp_type: true,
+      potential_per_default: true,
+      activate_lot: true,
+      priority: true,
+      precondition_1: true,
+      condition_1: true,
+      float_ability_time_1: true,
+      ability_time_usage_1: true,
+      float_cooldown_time_1: true,
+      ability_type_1_1: true,
+      ability_value_usage_1_1: true,
+      additional_activate_type_1_1: true,
+      ability_value_level_usage_1_1: true,
+      float_ability_value_1_1: true,
+      target_type_1_1: true,
+      target_value_1_1: true,
+      ability_type_1_2: true,
+      ability_value_usage_1_2: true,
+      additional_activate_type_1_2: true,
+      ability_value_level_usage_1_2: true,
+      float_ability_value_1_2: true,
+      target_type_1_2: true,
+      target_value_1_2: true,
+      ability_type_1_3: true,
+      ability_value_usage_1_3: true,
+      additional_activate_type_1_3: true,
+      ability_value_level_usage_1_3: true,
+      float_ability_value_1_3: true,
+      target_type_1_3: true,
+      target_value_1_3: true,
+      precondition_2: true,
+      condition_2: true,
+      float_ability_time_2: true,
+      ability_time_usage_2: true,
+      float_cooldown_time_2: true,
+      ability_type_2_1: true,
+      ability_value_usage_2_1: true,
+      additional_activate_type_2_1: true,
+      ability_value_level_usage_2_1: true,
+      float_ability_value_2_1: true,
+      target_type_2_1: true,
+      target_value_2_1: true,
+      ability_type_2_2: true,
+      ability_value_usage_2_2: true,
+      additional_activate_type_2_2: true,
+      ability_value_level_usage_2_2: true,
+      float_ability_value_2_2: true,
+      target_type_2_2: true,
+      target_value_2_2: true,
+      ability_type_2_3: true,
+      ability_value_usage_2_3: true,
+      additional_activate_type_2_3: true,
+      ability_value_level_usage_2_3: true,
+      float_ability_value_2_3: true,
+      target_type_2_3: true,
+      target_value_2_3: true,
+      popularity_add_param_1: true,
+      popularity_add_value_1: true,
+      popularity_add_param_2: true,
+      popularity_add_value_2: true,
+      disp_order: true,
+      icon_id: true,
+      plate_type: true,
+      disable_singlemode: true,
+      disable_count_condition: true,
+      is_general_skill: true,
     },
-    color: skill[7],
-    condition: skill[10],
-    filter: skill[6],
-    id: Number(skill[17]),
-    name_jp: skill[1],
-    name_zh: skill[4],
-    pt: Number(skill[19]),
-    score: Number(skill[18]),
-    type: skill[5],
-  }),
-);
+  });
+  console.log(ret[0]);
+  console.log(ret.length);
+  const text_data = await prisma.text_data.findMany({
+    where: { category: { in: [47, 48] }, index: ret[0].id },
+  });
+  console.log(text_data.map((e) => e.text));
+}
 
-console.log(skills[0]);
+task().then();
