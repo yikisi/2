@@ -15,14 +15,14 @@ module.exports = {
       }
       delta = Math.min(
         delta *
-          (1 - (era.get('cflag:303:招募状态') === recruit_flags.yes) * 0.2),
+          (1 - (era.get('cflag:303:招募状态') === recruit_flags.yes) * 0.1),
         -1,
       );
     } else {
       delta = Math.max(
         delta *
           (1 +
-            (era.get('cflag:303:招募状态') === recruit_flags.yes) * 0.2 +
+            (era.get('cflag:303:招募状态') === recruit_flags.yes) * 0.1 +
             era.get('global:声望加成') / 100),
         1,
       );

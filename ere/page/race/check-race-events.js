@@ -37,8 +37,7 @@ const { class_enum, track_names } = require('#/data/race/model/race-info');
  */
 async function check_race_events(info, team_contestants) {
   let handler = undefined;
-  if (get('cflag:303:招募状态') === recruit_flags.no) {
-    set('cflag:303:招募状态', -1);
+  if (get('flag:初见URA颁奖') < 2) {
     handler = async () => {
       const etsuko = get_chara_talk(303),
         me = get_chara_talk(0);
@@ -62,6 +61,7 @@ async function check_race_events(info, team_contestants) {
           '。',
         ]);
       }
+      set('flag:初见URA颁奖', 2);
       await printAndWait([
         etsuko.sex,
         '向 ',

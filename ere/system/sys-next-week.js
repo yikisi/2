@@ -655,8 +655,6 @@ async function sys_next_week() {
 
     let special_month = era.get(`status:${chara_id}:发情`),
       special_body = era.get(`status:${chara_id}:排卵期`);
-    // 只有马娘需要计算发情期
-    // 好吧，给马郎留个口子
     if (growth_stage === 4 && race && !is_always_special) {
       // 发情期为出生月的下一个月
       const _special_month = (birth_month % 12) + 1;

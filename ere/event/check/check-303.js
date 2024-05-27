@@ -18,6 +18,9 @@ module.exports = class extends CustomizedCheck {
         new EventObject(303, cb_enum.edu).set_arg('reward'),
       );
     }
+    if (get('cflag:303:招募状态') === -1 && get('love:303') >= 25) {
+      add_event(event_hooks.week_start, new EventObject(303, cb_enum.recruit));
+    }
     super.check_next_week();
   }
 };

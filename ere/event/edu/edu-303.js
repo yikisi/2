@@ -180,7 +180,9 @@ module.exports = async (hook, extra_flag, event_object) => {
   if (event_object?.arg !== 'reward') {
     throw new Error();
   }
-  set('flag:初见URA颁奖', 1);
+  if (!get('flag:初见URA颁奖')) {
+    set('flag:初见URA颁奖', 1);
+  }
   const loc = get('flag:当前位置');
   set('flag:当前位置', location_enum.race);
   const etsuko = get_chara_talk(303),

@@ -17,7 +17,7 @@ module.exports = class extends CustomizedMec {
       {
         color: buff_colors[1],
         content: '[彻底取材]',
-        title: '[彻底取材]：声望获取+20%，声望下降-20%',
+        title: '[彻底取材]：声望获取+10%，声望下降-10%',
       },
     ];
   }
