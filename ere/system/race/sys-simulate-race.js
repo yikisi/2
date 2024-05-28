@@ -46,13 +46,16 @@ function sys_sim_race(list_chara, race_info) {
     list_skill_start.forEach((skill) => {
       if (skill.skilldata.typeStartConst && Math.random() < uma.probs.skill) {
         start_delay = skill.skilldata.startDelayConst;
-        record_skill_list[0][uma.index_race].push(skill.skilldata);
+        record_skill_list[0][uma.index_race].push(skill.data.id);
+        skill.is_triggered = true;
+        skill.cooldown = 0;
+        skill.count = 0;
       }
     });
     list_skill_start.forEach((skill) => {
       if (skill.skilldata.typeStartMod && Math.random() < uma.probs.skill) {
         start_delay *= skill.skilldata.startDelayMod;
-        record_skill_list[0][uma.index_race].push(skill.skilldata);
+        record_skill_list[0][uma.index_race].push(skill.data.id);
       }
     });
     record_speed_list[0][uma.index_race] = uma.race.velocityReal =
@@ -66,14 +69,14 @@ function sys_sim_race(list_chara, race_info) {
   let list_in_race = list_chara;
 
   while (flag_race) {
-    //准备记录当前秒的战报
+    // 准备记录当前秒的战报
     record_acc_list.push(new Array(count_uma));
     record_location_list.push(new Array(count_uma));
     record_skill_list.push(new Array(count_uma).fill(undefined).map(() => []));
     record_speed_list.push(new Array(count_uma));
     record_stamina_list.push(new Array(count_uma));
 
-    //每秒先进行冲线判定 将高速相机列表置空
+    // 每秒先进行冲线判定 将高速相机列表置空
     const list_msec_cam = [];
 
     list_in_race = list_in_race.filter((e) => {
@@ -100,7 +103,7 @@ function sys_sim_race(list_chara, race_info) {
       continue;
     }
 
-    //计算其余所有未完赛马娘的位置与速度
+    // 计算其余所有未完赛马娘的位置与速度
     list_in_race.forEach((uma) => {
       //先结算上一tick的速度至移动距离 以及上一tick的加速度至速度
       const temp = uma.race.velocityReal;
@@ -121,7 +124,7 @@ function sys_sim_race(list_chara, race_info) {
       record_stamina_list.at(-1)[uma.index_race] = uma.race.stamina;
     });
 
-    //按位置sort一下以计算排名 顺便生成未完赛的短位置表继续计算
+    // 按位置sort一下以计算排名 顺便生成未完赛的短位置表继续计算
     list_in_race = sort_list(list_in_race, (e) => e.race.location);
 
     //通过位置表计算一下相对距离 之后红技光环应该也会用位置表读范围
@@ -315,24 +318,22 @@ function sys_sim_race(list_chara, race_info) {
         }
       }
       //计算黄绿蓝技能效果
-      for (let itemSkill of itemUma.list_skill) {
-        if (itemSkill.skilldata.typeBuff && itemSkill.triggerFlag) {
-          itemUma.race.velocityReal += itemSkill.skilldata.bonusVelocityReal;
-          itemUma.race.velocityIdeal += itemSkill.skilldata.bonusVelocityIdeal;
-          itemUma.race.acceleration += itemSkill.skilldata.bonusAcceleration;
+      itemUma.list_skill.forEach((skill) => {
+        if (skill.skilldata.typeBuff && skill.triggerFlag) {
+          itemUma.race.velocityReal += skill.skilldata.bonusVelocityReal;
+          itemUma.race.velocityIdeal += skill.skilldata.bonusVelocityIdeal;
+          itemUma.race.acceleration += skill.skilldata.bonusAcceleration;
           itemUma.race.stamina +=
-            itemSkill.skilldata.bonusStamina * itemUma.base.stamina;
-          itemSkill.triggerTimeCount++;
+            skill.skilldata.bonusStamina * itemUma.base.stamina;
+          skill.triggerTimeCount++;
 
-          if (itemSkill.skilldata.bonusStamina) {
+          if (skill.skilldata.bonusStamina) {
             itemUma.flag.allowPlan = true;
           }
 
-          record_skill_list
-            .at(-1)
-            [itemUma.index_race].push(itemSkill.skilldata);
+          record_skill_list.at(-1)[itemUma.index_race].push(skill.data.id);
         }
-      }
+      });
     }
 
     // 计算红技时换成以index遍历

@@ -1,23 +1,18 @@
 const { attr_names } = require('#/data/train-const');
 
 class RaceSkill {
-  /** @type {number} */
-  duration;
-  /**
-   * @param {UmaSkill} skill
-   */
+  /** @type {UmaSkill} */
+  data;
+  // 发动标记
+  is_triggered = false;
+  // 冷却
+  cooldown = 0;
+  // 触发次数
+  count = 0;
+
+  /** @param {UmaSkill} skill */
   constructor(skill) {
-    this.skilldata = skill;
-    // 发动标记
-    this.triggerFlag = false;
-    // 本次触发计时器
-    this.triggerTimeCount = 0;
-    // 单次触发持续时间
-    this.triggerTimeMax = 0;
-    // 触发次数
-    this.triggerCount = 0;
-    //最大触发次数
-    this.triggerMax = 0;
+    this.data = skill;
   }
 }
 

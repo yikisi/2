@@ -1,94 +1,296 @@
+const rarity_enum = {
+  // 普通技能
+  normal: 1,
+  // 金技能
+  gold: 2,
+  // 低星初始固有
+  spe_n_2: 3,
+  // 低星升星固有
+  spe_n_3: 4,
+  // 高星固有
+  spe_r: 5,
+  // 进化技能
+  evol: 6,
+};
+
+const ability_type_enum = {
+  // 速度
+  Speed: 1,
+  // 耐力
+  Stamina: 2,
+  // 力量
+  Power: 3,
+  // 根性
+  Guts: 4,
+  // 智力
+  Wiz: 5,
+  // 大逃
+  RunningStyleExOonige: 6,
+  // 体力下降
+  HpDecRate: 7,
+  // 视野
+  VisibleDistance: 8,
+  // 体力恢复
+  HpRate: 9,
+  // 出闸
+  StartDash: 10,
+  ForceOvertakeIn: 11,
+  ForceOvertakeOut: 12,
+  // 延长焦躁
+  TemptationEndTime: 13,
+  // 当前速度
+  CurrentSpeed: 21,
+  // 自然衰减加速
+  CurrentSpeedWithNaturalDeceleration: 22,
+  // 目标速度
+  TargetSpeed: 27,
+  // 变道速度
+  LaneMoveSpeed: 28,
+  // 焦躁概率
+  TemptationPer: 29,
+  PushPer: 30,
+  // 加速度
+  Accel: 31,
+  // 目标道路
+  TargetLane: 35,
+  ActivateRandomNormalAndRareSkill: 36,
+  // 随机触发技能
+  ActivateRandomRareSkill: 37,
+  // 育成继承活动使用
+  ChallengeMatchBonusXXX: 50,
+};
+
+const ability_type_usage_enum = {
+  // 直接使用
+  Direct: 1,
+  // 每个技能提升1%，最大20%
+  MultiplySkillNum: 2,
+  // 队友属性和，受心情影响，1200、1800、2600、3600，每超过一档提升12.5%
+  MultiplyTeamTotalSpeed: 3,
+  MultiplyTeamTotalStamina: 4,
+  MultiplyTeamTotalPower: 5,
+  MultiplyTeamTotalGuts: 6,
+  MultiplyTeamTotalWiz: 7,
+  MultiplyRandom1: 8,
+  MultiplyRandom2: 9,
+  // 胜场决定倍率：6、14、18、25，分别为0.8、0.9、1.0、1.1、1.2
+  MultiplySingleModeWinCount: 10,
+  // 粉丝数决定倍率：20k、50k、100k、160k，分别为0.8、0.9、1.0、1.1、1.2
+  MultiplyFanCount: 12,
+  MultiplyMaximumRawStatus: 13,
+  // 发动绿技能数量决定倍率：3、5、6，分别+1，最高3
+  MultiplyActivateSpecificTagSkillCount: 14,
+  MultiplyActivateHealSkillCount: 15,
+  MultiplyFinalCornerEndOrder: 16,
+  MultiplyInvTeamMemberCount: 17,
+  MultiplyBaseWiz: 18,
+  // 和头马的距离影响（CB固有中长距离）：CB固有的说法是大于8马身+0.1m/s,可以先作为参考
+  AddDistanceDiffTop: 19,
+  // 中盘竞争时间计算倍率，2、4、6倍率分别+1，最高4
+  MultiplyBlockedSideMaxContinueTimePhaseMiddleRun1: 20,
+  MultiplyBlockedSideMaxContinueTimePhaseMiddleRun2: 21,
+};
+
+const target_type_enum = {
+  // 自身
+  Self: 1,
+  All: 2,
+  AllOtherSelf: 3,
+  // 视野范围内
+  Visible: 4,
+  RandomOtherSelf: 5,
+  Order: 6,
+  OrderInfront: 7,
+  OrderBehind: 8,
+  // 前方所有
+  SelfInfront: 9,
+  // 后方所有
+  SelfBehind: 10,
+  TeamMember: 11,
+  Near: 12,
+  SelfAndBlockFront: 13,
+  BlockSide: 14,
+  NearInfront: 15,
+  NearBehind: 16,
+  RunningStyle: 17,
+  // 跑法目标
+  RunningStyleOtherSelf: 18,
+  // 前方焦躁
+  SelfInfrontTemptation: 19,
+  // 后方焦躁
+  SelfBehindTemptation: 20,
+  // 跑法焦躁
+  RunningStyleTemptationOtherSelf: 21,
+  // 对应角色存在
+  CharaId: 22,
+  // 体力恢复的角色
+  ActivateHealSkill: 23,
+};
+
 class UmaSkill {
+  static rarity_enum = rarity_enum;
+  static ability_type_enum = ability_type_enum;
+  static ability_type_usage_enum = ability_type_usage_enum;
+  static target_type_enum = target_type_enum;
+
+  /** @type {number} */
+  id;
+  /** @type {string} */
+  name;
+  /** @type {string} */
+  desc;
+  /**
+   * 稀有度
+   * @type {number}
+   */
+  rarity;
+  /**
+   * 技能评分
+   * @type {number}
+   */
+  grade_value;
+  /**
+   * 前置条件
+   * @type {(function(distance_type:number,ground_type:number,running_style:number,phase:number,phase_random:number,
+   * phase_laterhalf_random:number,phase_firsthalf_random:number,order_rate:number,order:number,corner:number,
+   * is_final_corner:number,bashin_diff_behind:number,bashin_diff_infront:number,distance_diff_top:number,
+   * change_order_onetime:number,change_order_up_end_after:number,is_overtake:number,distance_rate:number,
+   * remain_distance:number,blocked_side_continuetime:number,compete_fight_count:number,temptation_count:number,
+   * is_lastspurt:number,activate_count_middle:number,near_count:number,is_surrounded:number,
+   * is_last_straight_onetime:number,down_slope_random:number,up_slope_random:number,hp_per:number,
+   * infront_near_lane_time:number,behind_near_lane_time:number,accumulatetime:number,lane_type:number,season:number,
+   * rotation:number,track_id:number,post_number:number,corner_random:number,straight_random:number,
+   * ground_condition:number,is_basis_distance:number,weather:number,random_lot:number):boolean)[]}
+   */
+  preconditions;
+  /**
+   * 触发条件
+   * @type {(function(distance_type:number,ground_type:number,running_style:number,phase:number,phase_random:number,
+   * phase_laterhalf_random:number,phase_firsthalf_random:number,order_rate:number,order:number,corner:number,
+   * is_final_corner:number,bashin_diff_behind:number,bashin_diff_infront:number,distance_diff_top:number,
+   * change_order_onetime:number,change_order_up_end_after:number,is_overtake:number,distance_rate:number,
+   * remain_distance:number,blocked_side_continuetime:number,compete_fight_count:number,temptation_count:number,
+   * is_lastspurt:number,activate_count_middle:number,near_count:number,is_surrounded:number,
+   * is_last_straight_onetime:number,down_slope_random:number,up_slope_random:number,hp_per:number,
+   * infront_near_lane_time:number,behind_near_lane_time:number,accumulatetime:number,lane_type:number,season:number,
+   * rotation:number,track_id:number,post_number:number,corner_random:number,straight_random:number,
+   * ground_condition:number,is_basis_distance:number,weather:number,random_lot:number):boolean)[]}
+   */
+  conditions;
+  /**
+   * 技能时间
+   * @type {number[]}
+   */
+  ability_times;
+  /**
+   * 冷却时间
+   * @type {number[]}
+   */
+  cooldown_times;
+  /**
+   * 作用类型
+   * @type {number[][]}
+   */
+  ability_types;
+  /**
+   * 数值换算方式
+   * @type {number[][]}
+   */
+  ability_value_usages;
+  /**
+   * 效果数值
+   * @type {number[][]}
+   */
+  ability_values;
+  /**
+   * 目标类型
+   * @type {number[][]}
+   */
+  target_types;
+  /**
+   * 目标数值
+   * @type {number[][]}
+   */
+  target_values;
+  /**
+   * 人气计算加成属性
+   * @type {number[]}
+   */
+  pop_types;
+  /**
+   * 人气计算加成值
+   * @type {number[]}
+   */
+  pop_values;
+  /**
+   * 随机发动
+   * @type {number}
+   */
+  is_random;
+
   /**
    * @param {number} id
-   * @param {number} score
-   * @param {number} typeRace
-   * @param {number} typeTrigger
-   * @param {number} typeBuff
-   * @param {number} typeDebuff
-   * @param {number} typeRotation
-   * @param {number} typeDistance
-   * @param {number} typeGround
-   * @param {number} typeStyle
-   * @param {number} typeCurve
-   * @param {number} typePhase
-   * @param {number} typeFinal
-   * @param {number} typeRush
-   * @param {number} typeTrack
-   * @param {number} triggerLeft
-   * @param {number} triggerRight
-   * @param {number} typeSpan400
-   * @param {number} typeMess
-   * @param {number[]} attrBonus
-   * @param {{velocityReal:number,velocityIdeal:number,acceleration:number,stamina:number}} baseBuff
-   * @param {{velocityReal:number,velocityIdeal:number,acceleration:number,stamina:number}} baseDebuff
+   * @param {string} name
+   * @param {string} desc
+   * @param {number} rarity
+   * @param {number} grade_value
+   * @param {function[]} preconditions
+   * @param {function[]} conditions
+   * @param {number[]} ability_times
+   * @param {number[]} cooldown_times
+   * @param {number[][]} ability_types
+   * @param {number[][]} ability_value_usages
+   * @param {number[][]} ability_values
+   * @param {number[][]} target_types
+   * @param {number[][]} target_values
+   * @param {number[]} pop_types
+   * @param {number[]} pop_values
+   * @param {number} is_random
    */
   constructor(
     id,
-    score,
-    typeRace,
-    typeTrigger,
-    typeBuff,
-    typeDebuff,
-    typeRotation,
-    typeDistance,
-    typeGround,
-    typeStyle,
-    typeCurve,
-    typePhase,
-    typeFinal,
-    typeRush,
-    typeTrack,
-    typeSpan400,
-    typeMess,
-    triggerLeft,
-    triggerRight,
-    attrBonus,
-    baseBuff,
-    baseDebuff,
+    name,
+    desc,
+    rarity,
+    grade_value,
+    preconditions,
+    conditions,
+    ability_times,
+    cooldown_times,
+    ability_types,
+    ability_value_usages,
+    ability_values,
+    target_types,
+    target_values,
+    pop_types,
+    pop_values,
+    is_random,
   ) {
-    // 技能id
     this.id = id;
-    // 用于评分计算的分数
-    this.score = score;
-    // 比赛相关的技能
-    this.typeRace = typeRace;
-    // 是否需触发
-    this.typeTrigger = typeTrigger;
-    this.typeBuff = typeBuff;
-    this.typeDebuff = typeDebuff;
-    // 顺逆时针判定
-    this.typeRotation = typeRotation;
-    // 赛道长度限制判定
-    this.typeDistance = typeDistance;
-    // 草地泥地判定
-    this.typeGround = typeGround;
-    // 跑法限制判定
-    this.typeStyle = typeStyle;
-    // 直道弯道判定
-    this.typeCurve = typeCurve;
-    // 战术阶段判定
-    this.typePhase = typePhase;
-    // 最终直弯判定
-    this.typeFinal = typeFinal;
-    // 最终冲刺判定
-    this.typeRush = typeRush;
-    // 赛马场，用RaceInfo.trackEnum
-    this.typeTrack = typeTrack;
-    // 根干距离
-    this.typeSpan400 = typeSpan400;
-    // 对应场地状态（良、重等），用RaceInfo.messEnum
-    this.typeMess = typeMess;
-    // 触发左限赛程0%
-    this.triggerLeft = triggerLeft;
-    // 触发右限赛程100%
-    this.triggerRight = triggerRight;
-    // 属性bonus，用attrEnum作为下标取
-    this.attrBonus = attrBonus;
-    // 目标速度、真实速度、加速度和耐力的
-    this.baseBuff = baseBuff;
-    this.baseDebuff = baseDebuff;
+    this.name = name;
+    this.desc = desc;
+    this.rarity = rarity;
+    this.grade_value = grade_value;
+    this.preconditions = preconditions;
+    this.conditions = conditions;
+    this.ability_times = ability_times;
+    this.cooldown_times = cooldown_times;
+    this.ability_types = ability_types;
+    this.ability_value_usages = ability_value_usages;
+    this.ability_values = ability_values;
+    this.target_types = target_types;
+    this.target_values = target_values;
+    this.pop_types = pop_types;
+    this.pop_values = pop_values;
+    this.is_random = is_random;
   }
 }
+
+console.log(
+  UmaSkill.rarity_enum,
+  UmaSkill.ability_type_enum,
+  UmaSkill.ability_type_usage_enum,
+  UmaSkill.target_type_enum,
+);
 
 module.exports = UmaSkill;

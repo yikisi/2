@@ -201,19 +201,35 @@ function sys_parse_for_race(team_chara, race, info) {
           err_toughness +
         50;
     uma.tempPop = [
-      uma.attrs[attr_enum.speed] *
-        cof_dis *
-        cof_motivation *
-        Math.sqrt(delta_toughness),
-      uma.attrs[attr_enum.endurance] *
-        cof_motivation *
-        Math.pow(delta_toughness, 0.8) *
-        Math.pow(delta_intelligence, 0.6),
-      uma.attrs[attr_enum.strength] *
-        cof_ground *
-        cof_motivation *
-        Math.sqrt(delta_intelligence),
+      uma.attrs[attr_enum.speed],
+      uma.attrs[attr_enum.endurance],
+      uma.attrs[attr_enum.strength],
     ];
+    uma.list_skill
+      // TODO .filter((skill) => true)
+      .forEach((skill) => {
+        for (let i = 0; i < skill.data.pop_types; ++i) {
+          if (skill.data.pop_types[i]) {
+            if (skill.data.is_random) {
+              uma.tempPop[skill.data.pop_types[i] - 1] +=
+                uma.attrs[attr_enum.intelligence] < 90
+                  ? 0
+                  : skill.data.pop_values[i] *
+                    (1 - 90 / uma.attrs[attr_enum.intelligence]);
+            } else {
+              uma.tempPop[skill.data.pop_types[i] - 1] +=
+                skill.data.pop_values[i];
+            }
+          }
+        }
+      });
+    uma.tempPop[0] *= cof_dis * cof_motivation * Math.sqrt(delta_toughness);
+    uma.tempPop[1] *=
+      cof_motivation *
+      Math.pow(delta_toughness, 0.8) *
+      Math.pow(delta_intelligence, 0.6);
+    uma.tempPop[2] *=
+      cof_dis * cof_ground * cof_motivation * Math.sqrt(delta_intelligence);
   });
   const average_pop = new Array(3)
       .fill(0)
