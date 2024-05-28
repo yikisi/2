@@ -69,7 +69,10 @@ module.exports = {
         if (holiday === 5) {
           ret = [`${base}_婚`];
         } else if (holiday === 8 && era.get(`cflag:${chara_id}:殿堂`)) {
-          return [`${base}${era.get(`cstr:${chara_id}:决胜服`)}`, 'default'];
+          return [
+            `${base}${era.get(`cstr:${chara_id}:决胜服`) || ''}`,
+            'default',
+          ];
         } else if (holiday === 13) {
           ret = [`${base}_仆`, `${base}_应援`, `${base}_礼`, `${base}_游`];
         } else if (holiday === 47) {

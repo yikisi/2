@@ -300,12 +300,12 @@ async function sys_have_baby(mother_id) {
     `maxbase:${mother_id}:体力`,
     Math.max(era.get(`maxbase:${mother_id}:体力`) - 400, 200),
   );
-  era.add(`base:${mother_id}:体力`, 1);
+  era.add(`base:${mother_id}:体力`, 0);
   era.set(
     `maxbase:${mother_id}:精力`,
     Math.max(era.get(`maxbase:${mother_id}:精力`) - 400, 200),
   );
-  era.add(`base:${mother_id}:精力`, 1);
+  era.add(`base:${mother_id}:精力`, 0);
   await call_ero_script(
     // 如果是玩家生孩子，调用角色的口上
     mother_id || father_id,
@@ -329,7 +329,7 @@ async function sys_have_baby(mother_id) {
       child.get_colored_name(),
     ]);
   }
-  if (era.get(`cstr:${child_id}:毛色`)) {
+  if (!era.get(`cstr:${child_id}:毛色`)) {
     era.set(`cstr:${child_id}:毛色`, era.get(`cstr:${mother_id}:毛色`));
   }
   const child_life_marks = new LifeEventMarks(child_id);

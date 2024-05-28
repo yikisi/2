@@ -151,6 +151,14 @@ async function check_new_activities(cur_round, in_team_list) {
         .filter((e) => e.pregnant < 33 && !e.hurt)
         .map((e) => e.id);
       era.print([race_colored_name, ' 即将举办，参赛选手们要踏上远征之路了……']);
+      if (
+        (era.get('cflag:343:招募状态') !== recruit_flags.yes ||
+          (era.get('cflag:343:妊娠阶段') & 0b100001) > 0) &&
+        location.loc === location_enum.paris &&
+        !era.get('cflag:343:位置')
+      ) {
+        era.set('cflag:343:位置', location.loc);
+      }
       if (foreign_list.length) {
         era.printMultiColumns([
           {
@@ -209,6 +217,13 @@ async function check_new_activities(cur_round, in_team_list) {
           sys_change_pressure(chara_id, -1000),
         );
         foreign_list.push(0);
+        if (
+          foreign_list.indexOf(343) === -1 &&
+          era.get('cflag:343:招募状态') === recruit_flags.yes &&
+          era.get('cflag:343:妊娠回合计时') < 33
+        ) {
+          foreign_list.push(343);
+        }
       } else if (me_in_race) {
         punish_list.push(0);
       }
@@ -276,6 +291,9 @@ async function check_new_activities(cur_round, in_team_list) {
         era.set('status:0:客场作战', 0);
         sys_change_tired(0, 1);
         era.set('cflag:0:位置', 0);
+      }
+      if (era.get('cflag:343:位置') === location.loc) {
+        era.set('cflag:343:位置', 0);
       }
     }
   }
@@ -399,7 +417,22 @@ async function check_new_activities(cur_round, in_team_list) {
     }
   }
   // 出差的理事长
-  era.set('flag:理事长', 302);
+  if (
+    era.get('flag:当前月') > 3 &&
+    !(era.get('cflag:302:育成回合计时') < 3 * 48) &&
+    (Math.random() < 0.2 || (era.get('cflag:302:妊娠阶段') & 0b100001) > 0)
+  ) {
+    if (
+      !(era.get('cflag:306:育成回合计时') < 3 * 48) &&
+      (era.get('cflag:306:妊娠阶段') & 0b100001) === 0
+    ) {
+      era.set('flag:理事长', 306);
+    } else {
+      era.set('flag:理事长', 0);
+    }
+  } else {
+    era.set('flag:理事长', 302);
+  }
 }
 
 module.exports = check_new_activities;

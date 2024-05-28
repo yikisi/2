@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
+const sys_get_grand_lives = require('#/system/flag/sys-get-grand-lives');
 const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
@@ -143,7 +144,8 @@ async function reg_race_page() {
       cur_round,
       registered_race,
     ),
-    base_disabled_check = check_register_disabled(chara_id, in_foreign);
+    base_disabled_check = check_register_disabled(chara_id, in_foreign),
+    grand_lives = sys_get_grand_lives();
 
   while (flag_race_reg) {
     await era.clear();
@@ -192,7 +194,8 @@ async function reg_race_page() {
               e,
               edu_weeks + round - cur_round,
             ),
-            is_foreign = race_infos[e].track >= track_enum.longchamp;
+            is_foreign = race_infos[e].track >= track_enum.longchamp,
+            is_grand_live = grand_lives[Number(round - year_begin >= 48)][e];
           if (
             e === race_enum.begin_race ||
             registered_race.race === e ||
@@ -218,6 +221,7 @@ async function reg_race_page() {
                   (is_foreign
                     ? ` (${track2location[race_infos[e].track].con})`
                     : '') +
+                  (is_grand_live ? ' 🎤' : '') +
                   ((is_aim_race & 0x3) > 0 ? ' *' : ''),
                 type: 'button',
               },
@@ -271,7 +275,15 @@ async function reg_race_page() {
                 { isBr: true },
                 '** 参加带有星号(*)后缀的比赛可能会有特殊的事情发生……',
                 { isBr: true },
-                '*** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
+                ...(cur_round > 39
+                  ? [
+                      '*** 带有🎤后缀的比赛会开设大舞台，参加能够获得更多的声望……',
+                      { isBr: true },
+                      '**** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
+                    ]
+                  : [
+                      '*** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
+                    ]),
               ],
               type: 'text',
             },

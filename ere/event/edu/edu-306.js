@@ -1,4 +1,10 @@
-const { get, printAndWait, println, waitAnyKey } = require('#/era-electron');
+const {
+  get,
+  printAndWait,
+  println,
+  set,
+  waitAnyKey,
+} = require('#/era-electron');
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
@@ -119,6 +125,7 @@ const handlers = {
     ]);
     println();
     sys_like_chara(306, 0, -25) && (await waitAnyKey());
+    set('flag:初见办公室', 1);
   },
 };
 

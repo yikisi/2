@@ -810,7 +810,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
     add_event(hook.hook, event_object);
     await era.printAndWait([
       flash.get_colored_name(),
-      '好像对这里很关注的样子……下次独自出行偶遇的时候问问吧',
+      ' 好像对这里很关注的样子……下次独自出行偶遇的时候问问吧',
     ]);
     await era.clear(1);
     return;

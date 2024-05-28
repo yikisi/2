@@ -14,7 +14,7 @@
   },
   "name": "erauma",
   "scripts": {
-    "lint": "eslint ere",
+    "lint": "eslint ere --fix",
     "prepare": "husky"
   },
   "dependencies": {

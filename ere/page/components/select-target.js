@@ -199,7 +199,12 @@ async function select_target(type) {
     );
   } else if (type !== chara_info_type.info) {
     list_team = sort_list(
-      list_team.filter((e) => e && get_custom_mec(e).is_able_to_be_selected()),
+      list_team.filter(
+        (e) =>
+          e &&
+          (get_custom_mec(e).is_able_to_be_selected() ||
+            (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) > 0),
+      ),
       (chara_id) => {
         return (
           (era.get(`cflag:${chara_id}:成长阶段`) << 17) +

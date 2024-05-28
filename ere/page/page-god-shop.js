@@ -102,7 +102,7 @@ module.exports = async () => {
           .map((e, i) => {
             e.accelerator = i + 1;
             e.config ||= {};
-            e.config.width = 8;
+            e.config.width = 12;
             e.config.disabled ||= era.get('flag:当前声望') <= e.cost;
             delete e.cost;
             return e;

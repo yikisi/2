@@ -34,6 +34,7 @@ const print_shop_page = require('#/page/page-shop');
 const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
 const page_trainer_office = require('#/page/page-trainer-office');
+const page_visitors = require('#/page/page-visitors');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const { shop_end, shop_start } = require('#/event/shop/tachyon-shop');
@@ -713,6 +714,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 308:
       sys_handle_action(sys_get_move_cost(location_enum.visitor));
+      await page_visitors();
       break;
     case 309:
       era.set('flag:当前位置', location_enum.school_shop);

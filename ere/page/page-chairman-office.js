@@ -39,14 +39,15 @@ async function page_chairman_office() {
     '抵达了理事长办公室……',
   ]);
   const chara_id = era.get('flag:理事长');
-  if (chara_id) {
+  if (chara_id && sys_check_awake(chara_id)) {
     const celebration = get_celebration(),
       chara = get_chara_talk(era.get('flag:理事长')),
       title = new CharaTitles(chara.id).get_colored_curr_title();
+    let temp_flag;
     while (flag_page) {
       switch (chara.id) {
         case 302:
-          flag_page &&= await npc_common(
+          temp_flag = await npc_common(
             chara,
             title,
             {
@@ -111,7 +112,6 @@ async function page_chairman_office() {
                 era.set('flag:当前位置', location_enum.chairman);
               },
               name: '「约 会！一起出去走走吧！」',
-              print_out_page,
             },
             {
               name: `「庆 贺！${celebration} 快乐！」`,
@@ -276,8 +276,23 @@ async function page_chairman_office() {
           );
           break;
         case 306:
+          temp_flag = await npc_common(
+            chara,
+            title,
+            { name: '聊天' },
+            {
+              name: '求爱',
+              fail_cb() {
+                flag_page = false;
+              },
+            },
+            { loc: location_enum.chairman, name: '约会', print_out_page },
+            { name: `庆祝 ${celebration}` },
+            {},
+            { name: '再见' },
+          );
       }
-      if (flag_page) {
+      if ((flag_page &&= temp_flag)) {
         await era.clear();
         print_page_header();
       }

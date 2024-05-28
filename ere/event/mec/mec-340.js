@@ -15,7 +15,6 @@ module.exports = class extends CustomizedMec {
   }
 
   is_anger_for_unfaithful() {
-    console.log(1);
     return false;
   }
 

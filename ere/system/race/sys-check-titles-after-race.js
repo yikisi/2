@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { buff_colors } = require('#/data/color-const');
+const { adaptability_colors, buff_colors } = require('#/data/color-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -86,16 +86,25 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
             }
           });
           if (cup_1 & cup_2 & cup_3 & 0b1) {
-            new_title_dict[mvp_id].push({ n: '三冠', c: buff_colors[1] });
+            new_title_dict[mvp_id].push({
+              n: '三冠',
+              c: adaptability_colors.at(-3),
+            });
             invincible_1 &&
-              new_title_dict[mvp_id].push({ n: '无败三冠', c: buff_colors[1] });
+              new_title_dict[mvp_id].push({
+                n: '无败三冠',
+                c: adaptability_colors.at(-2),
+              });
           }
           if (cup_1 & cup_2 & cup_3 & 0b10) {
-            new_title_dict[mvp_id].push({ n: '三宝冠', c: buff_colors[1] });
+            new_title_dict[mvp_id].push({
+              n: '三宝冠',
+              c: adaptability_colors.at(-3),
+            });
             invincible_2 &&
               new_title_dict[mvp_id].push({
                 n: '无败三宝冠',
-                c: buff_colors[1],
+                c: adaptability_colors.at(-2),
               });
           }
           if (
@@ -104,18 +113,27 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
             cup_3 > 0 &&
             (cup_1 & cup_2 & cup_3) === 0
           ) {
-            new_title_dict[mvp_id].push({ n: '变则三冠', c: buff_colors[1] });
+            new_title_dict[mvp_id].push({
+              n: '变则三冠',
+              c: adaptability_colors.at(-3),
+            });
             if ((cup_3 & 1 && invincible_1) || (cup_3 & 2 && invincible_2)) {
               new_title_dict[mvp_id].push({
                 n: '无败变则三冠',
-                c: buff_colors[1],
+                c: adaptability_colors.at(-2),
               });
             }
           }
           if ((cup_1 & cup_2 & cup_3) === 0b11) {
-            new_title_dict[mvp_id].push({ n: '极限六冠', c: buff_colors[1] });
+            new_title_dict[mvp_id].push({
+              n: '极限六冠',
+              c: adaptability_colors.at(-2),
+            });
             if (invincible_1 && invincible_2) {
-              new_title_dict[mvp_id].push({ n: '无败六冠', c: buff_colors[1] });
+              new_title_dict[mvp_id].push({
+                n: '无败六冠',
+                c: adaptability_colors.at(-1),
+              });
             }
           }
         }
@@ -140,11 +158,14 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
             }
           });
           if (cup === 2) {
-            new_title_dict[mvp_id].push({ n: '泥地三冠', c: buff_colors[1] });
+            new_title_dict[mvp_id].push({
+              n: '泥地三冠',
+              c: adaptability_colors.at(-3),
+            });
             invincible_4 &&
               new_title_dict[mvp_id].push({
                 n: '无败泥地三冠',
-                c: buff_colors[1],
+                c: adaptability_colors.at(-2),
               });
           }
         }
@@ -168,11 +189,14 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
           }
         });
         if (cup === 2) {
-          new_title_dict[mvp_id].push({ n: '美三冠', c: buff_colors[1] });
+          new_title_dict[mvp_id].push({
+            n: '美国梦',
+            c: adaptability_colors.at(-3),
+          });
           invincible &&
             new_title_dict[mvp_id].push({
-              n: '无败美三冠',
-              c: buff_colors[1],
+              n: '无暇美国梦',
+              c: adaptability_colors.at(-2),
             });
         }
       }

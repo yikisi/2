@@ -1,10 +1,22 @@
-const { get } = require('#/era-electron');
+const { get, set } = require('#/era-electron');
+
+const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
 const { buff_colors } = require('#/data/color-const');
 
 module.exports = class extends CustomizedMec {
+  init_love() {
+    set(
+      'love:343',
+      Math.min(
+        get('flag:马娘初始爱慕') + sys_personal_achievement.get(343) * 30,
+        30,
+      ),
+    );
+  }
+
   is_able_to_be_selected() {
     return (
       get(`cflag:${this.id}:位置`) ||

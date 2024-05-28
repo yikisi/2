@@ -1,19 +1,15 @@
 const era = require('#/era-electron');
 
-const {
-  check_pregnant_unprotect,
-} = require('#/system/ero/sys-calc-ero-status');
+const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
 const call_daily_event = require('#/system/script/sys-call-daily-script');
 const { sys_handle_action } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_act_disabled,
-  sys_check_awake,
   sys_get_move_cost,
 } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const print_chara_info = require('#/page/components/cur-chara-info');
-const goto_sex = require('#/page/components/goto-sex');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 
@@ -126,8 +122,7 @@ async function out_page() {
   const tokino_check =
     chara_id !== 301 &&
     !(era.get('cflag:301:育成回合计时') < 3 * 48) &&
-    sys_check_awake(301) &&
-    check_pregnant_unprotect(301);
+    sys_check_npc_working(301);
   print_chara_info(chara_id, chara_info_type.out, tokino_check && 301);
   era.drawLine();
   if (!(await sys_get_random_event(event_hooks.out_start)())) {
@@ -179,7 +174,7 @@ async function out_page() {
           title: new CharaTitles(301).get_colored_curr_title(),
         };
         while (temp.flag) {
-          temp.flag &&= await npc_common(
+          const temp_flag = await npc_common(
             temp.chara,
             temp.title,
             {
@@ -194,14 +189,10 @@ async function out_page() {
               name: '聊天',
             },
             {
-              async handle() {
-                switch (await goto_sex(301, location_enum.restroom)) {
-                  case true:
-                    break;
-                  case 2:
-                    temp.flag = false;
-                }
+              fail_cb() {
+                temp.flag = false;
               },
+              loc: location_enum.restroom,
               name: '求爱',
             },
             {
@@ -279,7 +270,7 @@ async function out_page() {
               name: '再会',
             },
           );
-          if (temp.flag) {
+          if ((temp.flag &&= temp_flag)) {
             await era.clear();
             print_page_header();
           }

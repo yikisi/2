@@ -39,9 +39,13 @@ function reset_chara(chara_id) {
     era.set(`cflag:${chara_id}:育成用变量`, {});
     new RaceHistory(chara_id).reset();
   } else {
-    Object.values(attr_names).forEach((v) =>
-      era.set(`base:${chara_id}:${v}`, get_random_value(25, 75)),
-    );
+    Object.values(attr_names).forEach((v) => {
+      era.set(
+        `base:${chara_id}:${v}`,
+        era.set(`cflag:${chara_id}:${v}`, get_random_value(25, 75)),
+      );
+      era.set(`cflag:${chara_id}:${v}加成`, 0);
+    });
   }
 
   sys_fix_chara_base(chara_id);
