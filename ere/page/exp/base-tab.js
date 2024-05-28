@@ -164,12 +164,12 @@ module.exports = {
       {
         accelerator: 30,
         config: {
-          buttonType: cur_title ? 'warning' : 'info',
+          buttonType: cur_title ? 'info' : 'warning',
           disabled: !cur_title,
           showAcc: false,
           width: 1,
         },
-        content: cur_title ? 'E' : 'X',
+        content: 'E',
         type: 'button',
       },
       {
@@ -183,12 +183,12 @@ module.exports = {
         {
           accelerator: i + 31,
           config: {
-            buttonType: e.s ? 'info' : 'warning',
-            disabled: e.s && i === 0,
+            buttonType: e.s ? 'warning' : 'info',
+            disabled: e.s,
             showAcc: false,
             width: 1,
           },
-          content: e.s ? 'X' : 'E',
+          content: 'E',
           type: 'button',
         },
         {
@@ -394,7 +394,7 @@ module.exports = {
                   chara.get_colored_name(),
                   ' 在参赛时',
                   suffix === 0
-                    ? '按照节庆决定决胜服，在结束育成后的殿堂周将身着决胜服'
+                    ? '按照节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着默认决胜服'
                     : `穿着 ${image_list.find((e) => e.s === suffix).n}`,
                   '。',
                   { isBr: true },
@@ -443,14 +443,14 @@ module.exports = {
             await era.printAndWait([
               '现在 ',
               chara.get_colored_name(),
-              ' 在参赛时会按照场合和节庆决定决胜服，在结束育成后的殿堂周将身着决胜服。',
+              ' 在参赛时会按照场合和节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服。',
             ]);
             era.set(`cstr:${chara.id}:决胜服`, 0);
           } else if (ret !== 99) {
             await era.printAndWait([
               '现在 ',
               chara.get_colored_name(),
-              ` 在参赛时和结束育成后的殿堂周将身着 ${image_list[ret - 1].n}。`,
+              ` 在参赛时、URA颁奖典礼与结束育成后的殿堂周将身着 ${image_list[ret - 1].n}。`,
             ]);
             era.set(`cstr:${chara.id}:决胜服`, image_list[ret - 1].s);
           }

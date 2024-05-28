@@ -187,22 +187,33 @@ module.exports = async (hook, extra_flag, event_object) => {
   set('flag:当前位置', location_enum.race);
   const etsuko = get_chara_talk(303),
     me = get_chara_talk(0),
-    report =
-      get('cflag:303:育成回合计时') < 3 * 48 || !check_pregnant_unprotect(303)
-        ? (args) => say_by_passer_by('主持人', args)
-        : (args) => etsuko.say_and_wait(args),
+    etsuko_check =
+      get('cflag:303:育成回合计时') < 3 * 48 || !check_pregnant_unprotect(303),
+    report = etsuko_check
+      ? (args) => say_by_passer_by('主持人', args)
+      : (args) => etsuko.say_and_wait(args),
     year = get('flag:当前年') - 1;
   let fame_reward = 0;
   await print_event_name('URA颁奖典礼', etsuko);
   await report([
     '各位赛',
     etsuko.get_uma_sex_title(),
-    '粉丝们热切期待的年度盛事，URA颁奖典礼就要开始了！为了向拼尽全力以最高的竞技水平带来精彩表演的各位赛',
+    '粉丝们，晚上好！各位热切期盼的年度盛事，URA颁奖典礼就要开始了！',
+  ]);
+  await report([
+    '与往常一样，大会方设立了多个奖项，向拼尽全力以最高的竞技水平带来精彩表演的各位赛',
     etsuko.get_uma_sex_title(),
     '，以及在背后默默支持',
     etsuko.get_uma_sex_title(),
-    '们的各位训练员们献上敬意，大会方设立了多个奖项以兹奖励！',
+    '们的各位训练员们献上敬意！',
   ]);
+  if (etsuko_check) {
+    await report([
+      '今年也由我 ',
+      etsuko.get_colored_actual_name(),
+      ' 来主持典礼，请大家多多指教了！',
+    ]);
+  }
   println();
   await report([
     '在正式开始颁奖前，让我们来重温一下',

@@ -25,16 +25,19 @@ const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_love_info, get_relation_info } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { printAndWait } = require('#/era-electron');
+const goto_sex = require('#/page/components/goto-sex');
 const get_status = require('#/system/chara/sys-get-status');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /**
  * @param {CharaTalk} chara
  * @param {{color:string,content:string,[title]:string}|string|undefined} title
- * @param {{name:string,handle:function():Promise}} talk_cb
- * @param {{name:string,handle:function():Promise}} sex_cb
- * @param {{name:string,[handle]:function():Promise,[loc]:number,[print_out_page]:function():Promise}} out_cb
+ * @param {{name:string,[handle]:function():Promise}} talk_cb
+ * @param {{name:string,handle:function():Promise}|{name:string,[loc]:number,fail_cb:function()}} sex_cb
+ * @param {{name:string,handle:function():Promise}|{name:string,loc:number,print_out_page:function():Promise}} out_cb
  * @param {{name:string,[handle]:function():Promise}} cele_cb
- * @param {{[name]:string,[handle]:function():Promise,[disabled]:boolean}} func_cb
+ * @param {{name:string,handle:function():Promise,[disabled]:boolean}|{}} func_cb
  * @param {{name:string,[handle]:function():Promise}} back_cb
  * @returns {Promise<boolean|void>}
  */
@@ -236,13 +239,32 @@ async function npc_common(
   switch (temp) {
     case 1:
       sys_change_attr_and_print(0, '精力', -200);
-      await talk_cb.handle();
+      talk_cb.handle && (await talk_cb.handle());
       era.println();
       sys_like_chara(chara.id, 0, get_random_value(5, 20)) &&
         (await era.waitAnyKey());
       break;
     case 2:
-      await sex_cb.handle();
+      if (sex_cb.handle) {
+        await sex_cb.handle();
+      } else {
+        temp = era.get('flag:当前位置');
+        switch (
+          await goto_sex(chara.id, sex_cb.loc || era.get('flag:当前位置'))
+        ) {
+          case true:
+            await printAndWait([
+              chara.get_colored_name(),
+              ' 与 ',
+              get_chara_talk(0).get_colored_name(),
+              ' 约定晚上在家见面……',
+            ]);
+            break;
+          case 2:
+            sex_cb.fail_cb();
+        }
+        era.set('flag:当前位置', temp);
+      }
       break;
     case 3:
       temp = era.get('flag:当前互动角色');

@@ -6,12 +6,13 @@ const {
   waitAnyKey,
 } = require('#/era-electron');
 
+const sys_get_grand_lives = require('#/system/flag/sys-get-grand-lives');
+
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry, sort_list } = require('#/utils/list-utils');
 
-const GrandLive = require('#/data/race/model/grand-live');
 const { class_enum, track_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -46,9 +47,9 @@ module.exports = async (hook, extra_flag, event_object) => {
         hello.get_uma_sex_title(),
         '们增加一个展现自己光辉的机会。',
       ]);
-      await printAndWait([
-        '现在大舞台运动已获得阶段胜利，URA批准在部分G3以下的五场赛事中开设大舞台，每年轮换。',
-      ]);
+      await printAndWait(
+        '现在大舞台运动已获得阶段胜利，URA批准在G3以下的五场赛事中开设大舞台，每年轮换。',
+      );
       await printAndWait([
         '介绍结束后，',
         hello.get_colored_name(),
@@ -111,7 +112,7 @@ module.exports = async (hook, extra_flag, event_object) => {
       }
       break;
     default:
-      await print_event_name('大舞台之梦', hello);
+      await print_event_name('大舞台', hello);
       await printAndWait('又到了大舞台赛事公布的时刻。');
   }
   println();
@@ -119,10 +120,13 @@ module.exports = async (hook, extra_flag, event_object) => {
   const g3_dict = {},
     g2_dict = {},
     g1_dict = {},
-    race_list = [];
+    race_list = [],
+    grand_lives = sys_get_grand_lives();
   Object.values(race_enum)
     .slice(1)
-    .filter((e) => race_infos[e].track < track_enum.longchamp)
+    .filter(
+      (e) => race_infos[e].track < track_enum.longchamp && !grand_lives[0][e],
+    )
     .forEach((e) => {
       const info = race_infos[e];
       switch (info.race_class) {
@@ -187,6 +191,6 @@ module.exports = async (hook, extra_flag, event_object) => {
   );
   const final_dict = {};
   race_list.forEach((e) => (final_dict[e] = true));
-  new GrandLive().obj.push(final_dict);
+  grand_lives.push(final_dict);
   await waitAnyKey();
 };

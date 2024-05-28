@@ -6,6 +6,7 @@ const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
+const sys_get_grand_lives = require('#/system/flag/sys-get-grand-lives');
 const check_new_activities = require('#/system/next-week/check-new-activities');
 const randomly_interact = require('#/system/next-week/randomly-interact');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
@@ -219,6 +220,7 @@ async function sys_next_week() {
   if (cur_month === 13) {
     cur_month = 1;
     cur_year++;
+    sys_get_grand_lives().shift();
   }
   era.set('flag:当前年', cur_year);
   era.set('flag:当前月', cur_month);
@@ -860,7 +862,8 @@ async function sys_next_week() {
   in_team_list = in_team_list.filter(
     (e) =>
       era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
-      get_custom_mec(e).is_able_to_be_selected(),
+      (get_custom_mec(e).is_able_to_be_selected() ||
+        (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) > 0),
   );
 
   if (!era.get('flag:当前互动角色') && in_team_list.length) {
@@ -868,6 +871,14 @@ async function sys_next_week() {
     era.set(
       'flag:当前互动角色',
       (era.get(`cflag:${temp}:招募状态`) === recruit_flags.yes && temp) ||
+        get_random_entry(
+          in_team_list.filter(
+            (e) =>
+              era.get('cflag:0:位置') === era.get(`cflag:${e}:位置`) &&
+              era.get(`cflag:${e}:育成回合计时`) < 3 * 48 &&
+              (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) === 0,
+          ),
+        ) ||
         get_random_entry(
           in_team_list.filter(
             (e) =>

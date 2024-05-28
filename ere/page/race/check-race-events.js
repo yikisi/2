@@ -26,8 +26,10 @@ const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const EtsukoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-303');
+const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { class_enum, track_names } = require('#/data/race/model/race-info');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
  * 特殊赛后事件口上
@@ -36,7 +38,15 @@ const { class_enum, track_names } = require('#/data/race/model/race-info');
  * @param {PseudoUma[]} team_contestants
  */
 async function check_race_events(info, team_contestants) {
+  const may_life_marks = new MayLifeMarks();
   let handler = undefined;
+  if (
+    info === race_infos[race_enum.prix_lat] &&
+    team_contestants.findIndex((e) => e.rank === 1) !== -1 &&
+    !may_life_marks.who_am_i
+  ) {
+    may_life_marks.who_am_i = 1;
+  }
   if (get('flag:初见URA颁奖') < 2) {
     handler = async () => {
       const etsuko = get_chara_talk(303),

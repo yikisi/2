@@ -12,6 +12,7 @@ const {
   setHorizontalAlign,
 } = require('#/era-electron');
 
+const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
 const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
 const sys_call_recruit = require('#/system/script/sys-call-recruit');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
@@ -21,7 +22,6 @@ const { get_image } = require('#/system/sys-calc-image');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
-const goto_sex = require('#/page/components/goto-sex');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
@@ -354,10 +354,14 @@ async function page_trainer_office() {
     '……',
   ]);
   let trainer_list = [];
-  if (!(get('cflag:304:育成回合计时') < 3 * 48)) {
+  if (!(get('cflag:304:育成回合计时') < 3 * 48) && sys_check_npc_working(304)) {
     trainer_list.push(304);
   }
-  if (!(get('cflag:306:育成回合计时') < 3 * 48) && get('flag:理事长') !== 306) {
+  if (
+    !(get('cflag:306:育成回合计时') < 3 * 48) &&
+    get('flag:理事长') !== 306 &&
+    sys_check_npc_working(306)
+  ) {
     trainer_list.push(306);
   }
   if (trainer_list.length > 0) {
@@ -429,7 +433,7 @@ async function page_trainer_office() {
           title = new CharaTitles(chara_id).get_curr_title();
         flag_trainer = true;
         while (flag_trainer) {
-          flag_trainer &&= await npc_common(
+          const temp_flag = await npc_common(
             chara,
             title,
             {
@@ -437,23 +441,14 @@ async function page_trainer_office() {
               name: '聊天',
             },
             {
-              async handle() {
-                switch (await goto_sex(chara.id, location_enum.chairman)) {
-                  case true:
-                    await printAndWait([
-                      chara.get_colored_name(),
-                      ' 与 ',
-                      me.get_colored_name(),
-                      ' 约定晚上在家见面……',
-                    ]);
-                    break;
-                  case 2:
-                    flag_trainer = flag_page = false;
-                }
-              },
+              loc: location_enum.restroom,
               name: '求爱',
+              fail_cb() {
+                flag_trainer = flag_page = false;
+              },
             },
             {
+              loc: location_enum.trainer,
               name: '约会',
               print_out_page,
             },
@@ -465,13 +460,13 @@ async function page_trainer_office() {
               name: '再见',
             },
           );
-          if (flag_trainer) {
+          if ((flag_trainer &&= temp_flag)) {
             await clear();
             print_page_header();
           }
         }
         trainer_list = trainer_list.filter(sys_check_awake);
-        flag_page = trainer_list.length > 0;
+        flag_page &= trainer_list.length > 0;
       } else {
         flag_page = false;
       }

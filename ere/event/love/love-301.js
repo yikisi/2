@@ -10,7 +10,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 /**
  * 骏川缰绳 - 爱慕
  *
- * @author 黑奴队长
+ * @author 黑奴队长（临时）
  *
  * @param _
  * @param __

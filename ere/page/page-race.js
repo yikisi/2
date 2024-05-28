@@ -8,6 +8,7 @@ const sys_check_titles_after_race = require('#/system/race/sys-check-titles-afte
 const sys_parse_for_race = require('#/system/race/sys-parse-race-uma');
 const sys_prepare_race = require('#/system/race/sys-prepare-race');
 // const sys_sim_race = require('#/system/race/sys-simulate-race');
+const sys_get_grand_lives = require('#/system/flag/sys-get-grand-lives');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
   sys_change_attr_and_print,
@@ -134,8 +135,11 @@ function generate_attribute_info(chara) {
   return ret;
 }
 
-/** @param {RaceInfo} _info */
-function page_race_header(_info) {
+/**
+ * @param {RaceInfo} _info
+ * @param {number} is_grand_live
+ */
+function page_race_header(_info, is_grand_live) {
   era.printInColRows(
     {
       columns: [
@@ -156,7 +160,10 @@ function page_race_header(_info) {
             fontSize: '1.5rem',
             width: 8,
           },
-          content: [_info.get_colored_name_with_class()],
+          content: [
+            _info.get_colored_name_with_class(),
+            is_grand_live ? ' 🎤' : '',
+          ],
           type: 'text',
         },
         {
@@ -203,8 +210,8 @@ function page_race_header(_info) {
 async function race_page(race) {
   era.set('flag:当前赛事', race);
   const aim_race_dict = {};
-  /** @type {PseudoUma[]} */
-  const team_list = (await select_contestants(race)).map(sys_get_chara_pseudo);
+  const team_list = (await select_contestants(race)).map(sys_get_chara_pseudo),
+    is_grand_live = sys_get_grand_lives()[0][race];
   let wait_flag = false,
     /** @type {RaceInfo} */
     info;
@@ -293,7 +300,7 @@ async function race_page(race) {
         align: 'center',
         fontSize: '1.5rem',
       },
-      content: [info.get_colored_name_with_class()],
+      content: [info.get_colored_name_with_class(), is_grand_live ? ' 🎤' : ''],
       type: 'text',
     },
   ];
@@ -549,7 +556,7 @@ async function race_page(race) {
     time_cost = 0;
   while (start_count) {
     await era.clear();
-    page_race_header(info);
+    page_race_header(info, is_grand_live);
     const player_time = era.get('base:0:精力');
     era.setHorizontalAlign('space-around');
     era.printInColRows(
@@ -706,7 +713,7 @@ async function race_page(race) {
   time_cost = 0;
   while (end_count) {
     await era.clear();
-    page_race_header(info);
+    page_race_header(info, is_grand_live);
     const player_time = era.get('base:0:精力');
     era.setHorizontalAlign('space-around');
     era.printInColRows(
@@ -788,6 +795,17 @@ async function race_page(race) {
   } else {
     fame_reward = race_rewards[info.race_class][20].fame;
   }
+  if (is_grand_live) {
+    if (
+      mvp_id === 308 ||
+      (era.get(`cflag:${mvp_id}:父方角色`) ||
+        era.get(`cflag:${mvp_id}:母方角色`)) === 308
+    ) {
+      fame_reward = Math.max(fame_reward, 10) * 3;
+    } else if (fame_reward > 0) {
+      fame_reward *= 2;
+    }
+  }
   if (
     !mvp_id ||
     (is_pregnant_slave &&
@@ -804,10 +822,11 @@ async function race_page(race) {
   );
   fame_reward -= hentai_flag * 150;
   let race_title_reward = 0;
+  wait_flag = false;
   for (const { index_chara: id } of team_list) {
     const titles = new CharaTitles(id),
       cur_count = titles.count();
-    sys_add_titles(id, ...new_title_dict[id]) && (await era.waitAnyKey());
+    wait_flag = sys_add_titles(id, ...new_title_dict[id]) || wait_flag;
     if (titles.count() > cur_count) {
       titles
         .get()
@@ -852,31 +871,40 @@ async function race_page(race) {
     }
   }
   if (fame_reward > 0) {
-    sys_like_chara(302, 0, fame_reward / 5 + race_title_reward * 12) &&
-      (await era.waitAnyKey());
+    wait_flag =
+      sys_like_chara(302, 0, fame_reward / 5 + race_title_reward * 12) ||
+      wait_flag;
   }
   if (best_rank <= 5) {
-    sys_like_chara(
-      301,
-      0,
-      (6 - best_rank) * (5 - info.race_class) + race_title_reward * 25,
-    ) && (await era.waitAnyKey());
-    if (info.race_class <= RaceInfo.class_enum.G3) {
+    wait_flag =
       sys_like_chara(
-        303,
+        301,
         0,
-        (6 - best_rank) * (3 - info.race_class) + race_title_reward * 30,
-      ) && (await era.waitAnyKey());
+        (6 - best_rank) * (5 - info.race_class) + race_title_reward * 25,
+      ) || wait_flag;
+    if (info.race_class <= RaceInfo.class_enum.G3) {
+      wait_flag =
+        sys_like_chara(
+          303,
+          0,
+          (6 - best_rank) * (3 - info.race_class) + race_title_reward * 30,
+        ) || wait_flag;
     }
     if (info.track >= RaceInfo.track_enum.longchamp) {
-      sys_like_chara(
-        343,
-        0,
-        (6 - best_rank) * (4 - info.race_class) +
-          fame_reward / 5 +
-          race_title_reward * 30,
-      );
+      wait_flag =
+        sys_like_chara(
+          343,
+          0,
+          (race === race_enum.prix_lat ? 20 * (6 - best_rank) : 0) +
+            fame_reward / 5 +
+            race_title_reward * 5,
+        ) || wait_flag;
     }
+  }
+  if (is_grand_live) {
+    wait_flag =
+      sys_like_chara(308, 0, 20 + (best_rank <= 5 ? fame_reward / 5 : 0)) ||
+      wait_flag;
   }
   const prize_ratio = 0.04 * get_trainer_level() + 0.04,
     total_prize = sys_change_money(
@@ -945,9 +973,10 @@ async function race_page(race) {
         }失望……`,
       ]);
       sys_like_chara(id, 0, -relation_punish);
-      await era.waitAnyKey();
+      wait_flag = true;
     }
   }
+  wait_flag && (await era.waitAnyKey());
   if (best_rank === 1) {
     if (race === race_enum.prix_lat) {
       era.get('cflag:204:随机招募') <= 0 && era.add('cflag:204:随机招募', -1);
