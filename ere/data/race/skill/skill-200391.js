@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   '上り坂で少し\n疲れてしまいがちになる',
   20039,
   1,
+  4,
   -262,
   [() => true, () => true],
   [(args) => args.up_slope_random === 1, () => true],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [9, 0, 0],
     [0, 0, 0],

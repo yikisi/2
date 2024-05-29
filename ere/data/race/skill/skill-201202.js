@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '追い抜く気持ちが湧き\nわずかに疲れにくくなる＜長距離＞',
   20120,
   1,
+  4,
   217,
   [() => true, () => true],
   [
@@ -16,7 +17,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [9, 0, 0],
     [0, 0, 0],

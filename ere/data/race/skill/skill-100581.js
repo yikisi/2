@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'レース終盤に追い抜くと\nあきらめない心を発揮して前を目指す',
   10058,
   5,
+  5,
   340,
   [() => true, () => true],
   [(args) => args.phase >= 2 && args.change_order_onetime < 0, () => true],
   [5, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 31, 0],
     [0, 0, 0],

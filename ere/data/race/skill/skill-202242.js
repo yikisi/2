@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '小回りのコースが少し得意になる',
   20224,
   1,
+  0,
   129,
   [() => true, () => true],
   [

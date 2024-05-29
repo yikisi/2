@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'レース序盤にコース取りが\nうまくなる',
   20045,
   1,
+  1,
   129,
   [() => true, () => true],
   [(args) => args.phase_random === 0, () => true],
   [3, 0],
-  [500, 500],
+  [500, 0],
   [
     [28, 0, 0],
     [0, 0, 0],

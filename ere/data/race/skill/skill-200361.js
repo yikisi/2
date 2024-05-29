@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   '直線で速度が上がる',
   20036,
   2,
+  4,
   508,
   [() => true, () => true],
   [(args) => args.straight_random === 1, () => true],
   [3, 0],
-  [30, 30],
+  [30, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

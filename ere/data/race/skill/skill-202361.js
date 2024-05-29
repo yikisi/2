@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'レース後半に息を入れたウマ娘を\n萎縮させる＜ダート＞',
   20236,
   2,
+  4,
   508,
   [() => true, () => true],
   [
@@ -16,7 +17,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [3, 0],
-  [500, 500],
+  [500, 0],
   [
     [21, 0, 0],
     [0, 0, 0],

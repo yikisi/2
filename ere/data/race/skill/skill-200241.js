@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '雪の日のレースが得意になる',
   20024,
   1,
+  0,
   174,
   [() => true, () => true],
   [(args) => args.weather === 4, () => true],

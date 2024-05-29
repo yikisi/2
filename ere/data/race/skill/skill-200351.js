@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '無駄のないコーナリングで\n持久力が回復する',
   20035,
   2,
+  4,
   508,
   [() => true, () => true],
   [
@@ -17,7 +18,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [9, 0, 0],
     [0, 0, 0],

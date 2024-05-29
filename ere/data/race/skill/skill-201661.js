@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'すぐ後ろにウマ娘が長くいると\n速度がわずかに上がる',
   20166,
   1,
+  4,
   217,
   [() => true, () => true],
   [
@@ -13,7 +14,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [3, 0],
-  [30, 30],
+  [30, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

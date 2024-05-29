@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'シンパシーの心を持つウマ娘が多い\nレースだと少し能力が上がる',
   20163,
   1,
+  0,
   129,
   [() => true, () => true],
   [(args) => args.same_skill_horse_count >= 5, () => true],

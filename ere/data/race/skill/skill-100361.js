@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '最終コーナー以降に中団の内ラチ側にい\nると勝利への道筋を見出して最終直線で\n速度が上がりコース取りがうまくなる',
   10036,
   5,
+  5,
   340,
   [
     (args) =>
@@ -17,7 +18,7 @@ module.exports = new UmaSkill(
   ],
   [(args) => args.is_last_straight === 1, () => true],
   [5, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 28, 0],
     [0, 0, 0],

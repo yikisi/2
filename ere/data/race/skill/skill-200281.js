@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '自分と同じ作戦のウマ娘が多いと\n能力を発揮しやすい',
   20028,
   1,
+  0,
   174,
   [() => true, () => true],
   [(args) => args.running_style_count_same_rate >= 40, () => true],

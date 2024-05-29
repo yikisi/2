@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'レース終盤に先団で詰め寄られると\n最終コーナー以降に闘志を燃やして\n速度を上げ続ける',
   11017,
   5,
+  5,
   340,
   [
     (args) =>
@@ -16,7 +17,7 @@ module.exports = new UmaSkill(
   ],
   [(args) => args.is_finalcorner === 1, () => true],
   [6, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

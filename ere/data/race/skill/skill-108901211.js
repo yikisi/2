@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'ラストスパートの最中に\n速度がすごく上がる',
   10890121,
   6,
+  3,
   633,
   [() => true, () => true],
   [
@@ -13,7 +14,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [2.4, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

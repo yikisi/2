@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '終盤のコーナーで後方から詰め寄ると\n最終直線で速度が上がる\n終盤のコーナーで追い抜いた回数に\n応じて効果が増える',
   11034,
   5,
+  5,
   340,
   [
     (args) =>
@@ -17,7 +18,7 @@ module.exports = new UmaSkill(
   ],
   [(args) => args.is_last_straight_onetime === 1, () => true],
   [5, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

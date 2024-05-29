@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '「稍重」「重」「不良」のバ場状態が\n少し苦手になる',
   20016,
   1,
+  0,
   -129,
   [() => true, () => true],
   [

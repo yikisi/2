@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '直線で速度が上がる\n＜作戦・追込＞',
   20145,
   2,
+  4,
   508,
   [() => true, () => true],
   [
@@ -13,7 +14,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [3, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

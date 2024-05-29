@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '終盤最終コーナーでスキルを発動すると\n声援を胸に速度を少し上げる\n中山レース場ならすごく上げる',
   12001,
   5,
+  5,
   340,
   [(args) => args.track_id === 10005, () => true],
   [

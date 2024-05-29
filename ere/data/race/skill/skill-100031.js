@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'レース終盤に前と差が詰まると\n最終直線で華麗な脚取りを披露し\n速度がすごく上がる',
   10003,
   5,
+  5,
   340,
   [
     (args) =>
@@ -17,7 +18,7 @@ module.exports = new UmaSkill(
   ],
   [(args) => args.is_last_straight === 1, () => true],
   [5, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

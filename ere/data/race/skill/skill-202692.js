@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'スタート時に加速力がわずかに上がる\n＜中距離＞',
   20269,
   1,
+  1,
   217,
   [() => true, () => true],
   [(args) => args.distance_type === 3 && args.phase === 0, () => true],
   [1.5, 0],
-  [500, 500],
+  [500, 0],
   [
     [31, 0, 0],
     [0, 0, 0],

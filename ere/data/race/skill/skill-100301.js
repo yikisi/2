@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'レース終盤に追い抜いて\n先団につけると最終直線で\n強い意志を持って速度が上がる',
   10030,
   5,
+  5,
   340,
   [
     (args) =>
@@ -14,7 +15,7 @@ module.exports = new UmaSkill(
   ],
   [(args) => args.is_last_straight === 1, () => true],
   [5, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

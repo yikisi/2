@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '枠番が1～3のレースが少し苦手になる',
   20025,
   1,
+  0,
   -129,
   [() => true, () => true],
   [(args) => args.post_number <= 3, () => true],

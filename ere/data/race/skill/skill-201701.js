@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '終盤の最終直線で好位置にいると\n速度が上がる＜中距離＞',
   20170,
   2,
+  3,
   508,
   [() => true, () => true],
   [
@@ -18,7 +19,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [3, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '最終コーナー突入時まで冷静に後方で\n控えていると残り300m地点でスピード\nアップの魔法をかけて速度を上げ続ける',
   10044,
   5,
+  5,
   340,
   [
     (args) =>
@@ -16,7 +17,7 @@ module.exports = new UmaSkill(
   ],
   [(args) => args.remain_distance <= 300, () => true],
   [6, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

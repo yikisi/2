@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'レース終盤に後方にいると最終直線で\n力を解放し前に出る、東京レース場の\n中距離レースならものすごく前に出る',
   10084,
   5,
+  5,
   340,
   [
     (args) => args.phase >= 2 && args.order_rate >= 50,

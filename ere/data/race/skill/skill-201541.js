@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '良い位置につきやすくなる\n＜作戦・差し＞',
   20154,
   1,
+  0,
   217,
   [() => true, () => true],
   [(args) => args.running_style === 3, () => true],

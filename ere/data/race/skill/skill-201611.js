@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'レース中盤にスキルを多く発動すると\n速度がわずかに上がる',
   20161,
   1,
+  2,
   217,
   [() => true, () => true],
   [(args) => args.activate_count_middle >= 3, () => true],
   [3, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

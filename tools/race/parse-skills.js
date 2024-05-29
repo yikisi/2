@@ -133,7 +133,7 @@ async function chara_skill() {
   console.log('角色卡技能', Object.keys(skill_dict).length);
   let buffer = 'const chara_skill_dict={},skills_dict = {};\n\n';
   for (const chara_id in dict) {
-    buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
+    buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].sort().join(',')}];`;
   }
   (await prisma.skill_set.findMany()).forEach((e) => {
     for (const k in e) {
@@ -185,11 +185,12 @@ async function chara_skill() {
     sbuffer += `"${skill_text[id][48]}",`;
     sbuffer += `${e.group_id},`;
     sbuffer += `${e.rarity},`;
+    sbuffer += `${e.skill_category},`;
     sbuffer += `${e.grade_value},`;
     sbuffer += `[${parse_condition(e.precondition_1)},${parse_condition(e.precondition_2)}],`;
     sbuffer += `[${parse_condition(e.condition_1)},${parse_condition(e.condition_2)}],`;
     sbuffer += `[${e.float_ability_time_1 / 10000},${e.float_ability_time_2 / 10000}],`;
-    sbuffer += `[${e.float_cooldown_time_1 / 10000},${e.float_cooldown_time_1 / 10000}],`;
+    sbuffer += `[${e.float_cooldown_time_1 / 10000},${e.float_cooldown_time_2 / 10000}],`;
     sbuffer += `[[${e.ability_type_1_1},${e.ability_type_1_2},${e.ability_type_1_3}],[${e.ability_type_2_1},${e.ability_type_2_2},${e.ability_type_2_3}]],`;
     sbuffer += `[[${e.ability_value_usage_1_1},${e.ability_value_usage_1_2},${e.ability_value_usage_1_3}],[${e.ability_value_usage_2_1},${e.ability_value_usage_2_2},${e.ability_value_usage_2_3}]],`;
     sbuffer += `[[${e.float_ability_value_1_1},${e.float_ability_value_1_2},${e.float_ability_value_1_3}],[${e.float_ability_value_2_1},${e.float_ability_value_2_2},${e.float_ability_value_2_3}]],`;

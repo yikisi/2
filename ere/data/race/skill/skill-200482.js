@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'レース中盤に囲まれると\n持久力がわずかに回復する',
   20048,
   1,
+  2,
   217,
   [() => true, () => true],
   [(args) => args.phase === 1 && args.is_surrounded === 1, () => true],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [9, 0, 0],
     [0, 0, 0],

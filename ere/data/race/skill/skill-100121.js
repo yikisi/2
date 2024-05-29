@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '最終コーナー以降に後ろの方から\n外を回って追い抜いていると\n最終直線で速度を上げる',
   10012,
   5,
+  5,
   340,
   [
     (args) =>
@@ -17,7 +18,7 @@ module.exports = new UmaSkill(
   ],
   [(args) => args.is_last_straight === 1, () => true],
   [5, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

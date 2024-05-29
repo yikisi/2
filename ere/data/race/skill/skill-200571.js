@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'レース中盤で前の方にいると\n疲れにくくなる\n＜作戦・先行＞',
   20057,
   2,
+  2,
   508,
   [() => true, () => true],
   [
@@ -16,7 +17,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [9, 0, 0],
     [0, 0, 0],

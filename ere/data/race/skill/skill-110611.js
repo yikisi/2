@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'レース前半、掛からず最後方付近に\n控え続けていると、最終直線で\n気合を爆発させて加速力が上がる',
   11061,
   5,
+  5,
   340,
   [
     (args) =>
@@ -16,7 +17,7 @@ module.exports = new UmaSkill(
   ],
   [(args) => args.is_last_straight === 1, () => true],
   [4, 0],
-  [500, 500],
+  [500, 0],
   [
     [31, 0, 0],
     [0, 0, 0],

@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '4番人気以下のレースで\n能力を少し発揮しやすい',
   20030,
   1,
+  0,
   129,
   [() => true, () => true],
   [(args) => args.popularity >= 4, () => true],

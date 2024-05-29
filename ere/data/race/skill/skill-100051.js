@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '終盤に前の方で少し抜け出ていると\n残り300ｍを切ってから輝きを増し\n速度がすごく上がる',
   10005,
   5,
+  5,
   340,
   [
     (args) =>
@@ -16,7 +17,7 @@ module.exports = new UmaSkill(
   ],
   [(args) => args.remain_distance <= 300, () => true],
   [5, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

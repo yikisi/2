@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '最終コーナーで内ラチ側にいると\n速度が上がる＜長距離＞',
   20075,
   2,
+  3,
   508,
   [() => true, () => true],
   [
@@ -17,7 +18,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [3, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

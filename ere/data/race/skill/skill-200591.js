@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'レース中盤に中団以降で\n速度が上がる＜作戦・差し＞',
   20059,
   2,
+  2,
   508,
   [() => true, () => true],
   [
@@ -16,7 +17,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [2.4, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

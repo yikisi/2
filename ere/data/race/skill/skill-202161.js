@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '賢さが上がり、少し掛かりづらくなる',
   20216,
   1,
+  0,
   217,
   [() => true, () => true],
   [(args) => args.always === 1, () => true],

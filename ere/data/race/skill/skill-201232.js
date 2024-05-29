@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'レース終盤で前方のウマ娘の\n視野が少し狭くなる＜長距離＞',
   20123,
   1,
+  3,
   129,
   [() => true, () => true],
   [(args) => args.distance_type === 4 && args.phase_random === 2, () => true],
   [3, 0],
-  [500, 500],
+  [500, 0],
   [
     [8, 0, 0],
     [0, 0, 0],

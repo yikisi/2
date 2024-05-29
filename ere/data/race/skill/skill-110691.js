@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'レース中盤に競り合っていた場合\n残り650m地点で好位置にいると\n夢を叶えるため加速力を上げ続ける',
   11069,
   5,
+  5,
   340,
   [
     (args) => args.phase === 1 && args.blocked_side_continuetime >= 2,
@@ -20,7 +21,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [5, 0],
-  [500, 500],
+  [500, 0],
   [
     [31, 0, 0],
     [0, 0, 0],

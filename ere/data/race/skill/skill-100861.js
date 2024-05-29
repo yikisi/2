@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '残り1000ｍ地点で前の方にいると\n速度が上がる',
   10086,
   5,
+  5,
   340,
   [() => true, () => true],
   [
@@ -17,7 +18,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [5, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '左右に移動するとき持久力を回復する\n＜中距離＞',
   20114,
   2,
+  4,
   508,
   [() => true, () => true],
   [
@@ -19,7 +20,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [9, 0, 0],
     [0, 0, 0],

@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'レース序盤の始めの方に加速力が上がる\n獲得したスキルの数に応じて\n効果が高まる',
   21027,
   2,
+  1,
   633,
   [() => true, () => true],
   [(args) => args.phase_firsthalf_random === 0, () => true],
   [1.5, 0],
-  [500, 500],
+  [500, 0],
   [
     [31, 0, 0],
     [0, 0, 0],

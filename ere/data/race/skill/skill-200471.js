@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'レース中盤に追い抜かれると\n持久力が回復する',
   20047,
   2,
+  2,
   508,
   [() => true, () => true],
   [(args) => args.phase === 1 && args.change_order_onetime > 0, () => true],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [9, 0, 0],
     [0, 0, 0],

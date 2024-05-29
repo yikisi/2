@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '非根幹距離（400mの倍数以外）が\n得意になる',
   20014,
   1,
+  0,
   174,
   [() => true, () => true],
   [(args) => args.is_basis_distance === 0, () => true],

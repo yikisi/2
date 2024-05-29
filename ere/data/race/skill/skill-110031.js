@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '最終コーナー以降に前の方で\n追いすがっていると最終直線を走行中\n不屈の闘志で速度がすごく上がる',
   11003,
   5,
+  5,
   340,
   [
     (args) =>
@@ -18,7 +19,7 @@ module.exports = new UmaSkill(
   ],
   [(args) => args.is_last_straight === 1, () => true],
   [5, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

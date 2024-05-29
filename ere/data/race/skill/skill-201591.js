@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   '近くにウマ娘がたくさんいると\n速度がわずかに上がる',
   20159,
   1,
+  4,
   217,
   [() => true, () => true],
   [(args) => args.near_count >= 3 && args.accumulatetime >= 5, () => true],
   [3, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

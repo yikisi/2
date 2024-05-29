@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '最終コーナー以降に中団で外から\n追い抜くと怪物的な力で速度を上げる\n中盤競り合っていた場合はすごく上げる',
   10016,
   5,
+  5,
   340,
   [
     (args) => args.phase === 1 && args.blocked_side_continuetime >= 2,

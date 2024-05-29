@@ -7,6 +7,7 @@ module.exports = new UmaSkill(
   30009,
   1,
   0,
+  0,
   [() => true, () => true],
   [(args) => args.is_exist_chara_id === 1002, () => true],
   [-0.0001, 0],

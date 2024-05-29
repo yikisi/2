@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'レース中盤に追い抜くと\n速度が上がる',
   20046,
   2,
+  2,
   508,
   [() => true, () => true],
   [(args) => args.phase === 1 && args.change_order_onetime < 0, () => true],
   [1.8, 0],
-  [30, 30],
+  [30, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

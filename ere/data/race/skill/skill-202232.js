@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'ナイターのレースが少し得意になる',
   20223,
   1,
+  0,
   129,
   [() => true, () => true],
   [(args) => args.time === 4, () => true],

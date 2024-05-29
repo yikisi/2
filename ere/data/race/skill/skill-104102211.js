@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '直線でしばらくの間前に出る＜短距離＞',
   10410221,
   6,
+  4,
   633,
   [() => true, () => true],
   [
@@ -13,7 +14,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [4, 0],
-  [500, 500],
+  [500, 0],
   [
     [22, 0, 0],
     [0, 0, 0],

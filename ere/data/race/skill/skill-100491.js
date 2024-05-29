@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '最終コーナー以降に追い抜こうと\nしていた場合、残り400ｍを切ってから\n好位置にいると速度が上がる\n人気が低い場合はすごく上がる',
   10049,
   5,
+  5,
   340,
   [
     (args) => args.is_finalcorner === 1 && args.is_overtake === 1,

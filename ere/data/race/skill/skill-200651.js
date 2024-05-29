@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'レース終盤に加速力が上がる\n＜短距離＞',
   20065,
   2,
+  3,
   508,
   [() => true, () => true],
   [(args) => args.distance_type === 1 && args.phase_random === 2, () => true],
   [3, 0],
-  [500, 500],
+  [500, 0],
   [
     [31, 0, 0],
     [0, 0, 0],

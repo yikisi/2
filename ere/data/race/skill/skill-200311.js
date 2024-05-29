@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'GⅠなどの大舞台のレースが\n少し苦手になる',
   20031,
   1,
+  0,
   -129,
   [() => true, () => true],
   [(args) => args.grade === 100, () => true],

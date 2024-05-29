@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '中京レース場が得意になる',
   20007,
   1,
+  0,
   174,
   [() => true, () => true],
   [(args) => args.track_id === 10007, () => true],

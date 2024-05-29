@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'レース中盤に持久力をすごく回復する\n＜長距離＞',
   10230121,
   6,
+  2,
   633,
   [() => true, () => true],
   [(args) => args.distance_type === 4 && args.phase_random === 1, () => true],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [9, 0, 0],
     [0, 0, 0],

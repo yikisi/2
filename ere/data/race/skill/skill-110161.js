@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '終盤の最終コーナー後半に先団にいると\n速度が上がる、長距離レースかつ中盤に\n競り合っていた場合はものすごく上がる',
   11016,
   5,
+  5,
   340,
   [
     (args) => args.phase === 1 && args.blocked_side_continuetime >= 2,

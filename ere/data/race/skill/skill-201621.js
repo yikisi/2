@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   'レース終盤にスキルを多く発動すると\n持久力がわずかに回復する',
   20162,
   1,
+  3,
   217,
   [() => true, () => true],
   [(args) => args.activate_count_end_after >= 3, () => true],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [9, 0, 0],
     [0, 0, 0],

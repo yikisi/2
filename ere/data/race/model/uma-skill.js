@@ -1,4 +1,5 @@
-const { adaptability_colors } = require('#/data/color-const');
+const { skill_colors } = require('#/data/color-const');
+
 const rarity_enum = {
   // 普通技能
   normal: 1,
@@ -12,6 +13,19 @@ const rarity_enum = {
   spe_r: 5,
   // 进化技能
   evol: 6,
+};
+
+const category_enum = {
+  // 绿 - 被动
+  green: 0,
+  // 出闸技能
+  start: 1,
+  // 蓝 - 体力恢复
+  blue: 2,
+  yellow: 3,
+  yellow2: 4,
+  // 彩技能
+  spe: 5,
 };
 
 const ability_type_enum = {
@@ -129,6 +143,7 @@ const target_type_enum = {
 };
 
 class UmaSkill {
+  static category_enum = category_enum;
   static rarity_enum = rarity_enum;
   static ability_type_enum = ability_type_enum;
   static ability_type_usage_enum = ability_type_usage_enum;
@@ -150,6 +165,11 @@ class UmaSkill {
    * @type {number}
    */
   rarity;
+  /**
+   * 类别
+   * @type {number}
+   */
+  category;
   /**
    * 技能评分
    * @type {number}
@@ -222,6 +242,7 @@ class UmaSkill {
    * @param {string} desc
    * @param {number} group_id
    * @param {number} rarity
+   * @param {number} category
    * @param {number} grade_value
    * @param {function[]} preconditions
    * @param {function[]} conditions
@@ -242,6 +263,7 @@ class UmaSkill {
     desc,
     group_id,
     rarity,
+    category,
     grade_value,
     preconditions,
     conditions,
@@ -260,6 +282,7 @@ class UmaSkill {
     this.name = name;
     this.desc = desc;
     this.group_id = group_id;
+    this.category = category;
     this.rarity = rarity;
     this.grade_value = grade_value;
     this.preconditions = preconditions;
@@ -278,12 +301,7 @@ class UmaSkill {
 
   get_colored_name() {
     return {
-      color:
-        this.rarity > 2
-          ? adaptability_colors.at(-1)
-          : this.rarity === 1
-            ? adaptability_colors.at(-2)
-            : '',
+      color: skill_colors[this.category],
       content: `[${this.name}]`,
       display: 'inline-block',
       fontWeight: 'bold',

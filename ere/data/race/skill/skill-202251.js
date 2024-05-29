@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '交流重賞のレースが得意になる',
   20225,
   1,
+  0,
   174,
   [() => true, () => true],
   [(args) => args.is_dirtgrade === 1, () => true],

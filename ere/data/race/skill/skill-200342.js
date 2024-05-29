@@ -6,11 +6,12 @@ module.exports = new UmaSkill(
   '華麗なコーナーワークで\n加速力がわずかに上がる',
   20034,
   1,
+  4,
   217,
   [() => true, () => true],
   [(args) => args.all_corner_random === 1, () => true],
   [3, 0],
-  [30, 30],
+  [30, 0],
   [
     [31, 0, 0],
     [0, 0, 0],

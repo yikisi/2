@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   'ラストスパートで前方にいると\n速度が上がる＜ダート＞',
   20228,
   2,
+  3,
   508,
   [() => true, () => true],
   [
@@ -17,7 +18,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [3, 0],
-  [500, 500],
+  [500, 0],
   [
     [27, 0, 0],
     [0, 0, 0],

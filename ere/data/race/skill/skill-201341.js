@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '下り坂で加速力が少し上がる\n＜作戦・先行＞',
   20134,
   2,
+  4,
   334,
   [() => true, () => true],
   [
@@ -13,7 +14,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [3, 0],
-  [500, 500],
+  [500, 0],
   [
     [31, 0, 0],
     [0, 0, 0],

@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '残り距離が777mの時に\nわずかに元気が出る',
   20157,
   1,
+  4,
   217,
   [() => true, () => true],
   [
@@ -13,7 +14,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [9, 0, 0],
     [0, 0, 0],

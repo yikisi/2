@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '1番人気になる事が少し苦手になる',
   20032,
   1,
+  0,
   -129,
   [() => true, () => true],
   [(args) => args.popularity === 1, () => true],

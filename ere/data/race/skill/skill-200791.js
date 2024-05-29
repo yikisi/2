@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '作戦が逃げのウマ娘が掛かると\n落ち着くまで時間がかかる',
   20079,
   1,
+  4,
   174,
   [() => true, () => true],
   [
@@ -15,7 +16,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [13, 0, 0],
     [0, 0, 0],

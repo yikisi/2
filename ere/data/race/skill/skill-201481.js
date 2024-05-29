@@ -6,6 +6,7 @@ module.exports = new UmaSkill(
   '下り坂で疲れにくくなる\n＜作戦・追込＞',
   20148,
   2,
+  4,
   508,
   [() => true, () => true],
   [
@@ -14,7 +15,7 @@ module.exports = new UmaSkill(
     () => true,
   ],
   [0, 0],
-  [500, 500],
+  [500, 0],
   [
     [9, 0, 0],
     [0, 0, 0],
