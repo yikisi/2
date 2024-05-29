@@ -23,7 +23,7 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,string,{wait_flag:boolean},EventObject):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
-  handlers.beginning = async (rice, me, callname, self_name, flags) => {
+  handlers.beginning = async (rice, me, callname, self_name) => {
     await print_event_name('育成开始', rice);
     await rice.print_and_wait('训练场');
     await rice.say_and_wait('离训练的时间还有一点点……');
@@ -65,7 +65,6 @@ module.exports = (handlers) => {
       rice.get_colored_name(),
       ' 一起向闪耀系列发起的挑战开始了！',
     ]);
-    flags.wait_flag = get_attr_and_print_in_event(30, undefined, 120);
   };
 
   handlers[47 + 1] = async (rice, me, callname, self_name, flags) => {

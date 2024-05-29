@@ -209,7 +209,7 @@ class PseudoUma {
     this.pop = new Array(4);
   }
 
-  is_legend() {
+  set_legend() {
     this.legend = true;
     return this;
   }

@@ -1,3 +1,4 @@
+const { adaptability_colors } = require('#/data/color-const');
 const rarity_enum = {
   // 普通技能
   normal: 1,
@@ -140,6 +141,11 @@ class UmaSkill {
   /** @type {string} */
   desc;
   /**
+   * 技能分组（同组技能最高者生效）
+   * @type {number}
+   */
+  group_id;
+  /**
    * 稀有度
    * @type {number}
    */
@@ -151,30 +157,12 @@ class UmaSkill {
   grade_value;
   /**
    * 前置条件
-   * @type {(function(distance_type:number,ground_type:number,running_style:number,phase:number,phase_random:number,
-   * phase_laterhalf_random:number,phase_firsthalf_random:number,order_rate:number,order:number,corner:number,
-   * is_final_corner:number,bashin_diff_behind:number,bashin_diff_infront:number,distance_diff_top:number,
-   * change_order_onetime:number,change_order_up_end_after:number,is_overtake:number,distance_rate:number,
-   * remain_distance:number,blocked_side_continuetime:number,compete_fight_count:number,temptation_count:number,
-   * is_lastspurt:number,activate_count_middle:number,near_count:number,is_surrounded:number,
-   * is_last_straight_onetime:number,down_slope_random:number,up_slope_random:number,hp_per:number,
-   * infront_near_lane_time:number,behind_near_lane_time:number,accumulatetime:number,lane_type:number,season:number,
-   * rotation:number,track_id:number,post_number:number,corner_random:number,straight_random:number,
-   * ground_condition:number,is_basis_distance:number,weather:number,random_lot:number):boolean)[]}
+   * @type {(function(PreConditionParams):boolean)[]}
    */
   preconditions;
   /**
    * 触发条件
-   * @type {(function(distance_type:number,ground_type:number,running_style:number,phase:number,phase_random:number,
-   * phase_laterhalf_random:number,phase_firsthalf_random:number,order_rate:number,order:number,corner:number,
-   * is_final_corner:number,bashin_diff_behind:number,bashin_diff_infront:number,distance_diff_top:number,
-   * change_order_onetime:number,change_order_up_end_after:number,is_overtake:number,distance_rate:number,
-   * remain_distance:number,blocked_side_continuetime:number,compete_fight_count:number,temptation_count:number,
-   * is_lastspurt:number,activate_count_middle:number,near_count:number,is_surrounded:number,
-   * is_last_straight_onetime:number,down_slope_random:number,up_slope_random:number,hp_per:number,
-   * infront_near_lane_time:number,behind_near_lane_time:number,accumulatetime:number,lane_type:number,season:number,
-   * rotation:number,track_id:number,post_number:number,corner_random:number,straight_random:number,
-   * ground_condition:number,is_basis_distance:number,weather:number,random_lot:number):boolean)[]}
+   * @type {(function(ConditionParams):boolean)[]}
    */
   conditions;
   /**
@@ -232,6 +220,7 @@ class UmaSkill {
    * @param {number} id
    * @param {string} name
    * @param {string} desc
+   * @param {number} group_id
    * @param {number} rarity
    * @param {number} grade_value
    * @param {function[]} preconditions
@@ -251,6 +240,7 @@ class UmaSkill {
     id,
     name,
     desc,
+    group_id,
     rarity,
     grade_value,
     preconditions,
@@ -269,6 +259,7 @@ class UmaSkill {
     this.id = id;
     this.name = name;
     this.desc = desc;
+    this.group_id = group_id;
     this.rarity = rarity;
     this.grade_value = grade_value;
     this.preconditions = preconditions;
@@ -284,13 +275,21 @@ class UmaSkill {
     this.pop_values = pop_values;
     this.is_random = is_random;
   }
-}
 
-console.log(
-  UmaSkill.rarity_enum,
-  UmaSkill.ability_type_enum,
-  UmaSkill.ability_type_usage_enum,
-  UmaSkill.target_type_enum,
-);
+  get_colored_name() {
+    return {
+      color:
+        this.rarity > 2
+          ? adaptability_colors.at(-1)
+          : this.rarity === 1
+            ? adaptability_colors.at(-2)
+            : '',
+      content: `[${this.name}]`,
+      display: 'inline-block',
+      fontWeight: 'bold',
+      title: `[${this.name}] ${this.desc}`,
+    };
+  }
+}
 
 module.exports = UmaSkill;

@@ -1,0 +1,44 @@
+const UmaSkill = require('#/data/race/model/uma-skill');
+
+module.exports = new UmaSkill(
+  201021,
+  '逃亡禁止令',
+  'レース序盤に後ろの方にいると\n前方のウマ娘を焦らせ\n動きを少し鈍くする＜短距離＞',
+  20102,
+  2,
+  508,
+  [() => true, () => true],
+  [
+    (args) =>
+      args.distance_type === 1 &&
+      args.phase_random === 0 &&
+      args.order_rate > 50 &&
+      args.accumulatetime >= 5,
+    () => true,
+  ],
+  [1.2, 0],
+  [500, 500],
+  [
+    [9, 31, 0],
+    [0, 0, 0],
+  ],
+  [
+    [1, 1, 1],
+    [1, 1, 1],
+  ],
+  [
+    [-300, -2000, 0],
+    [0, 0, 0],
+  ],
+  [
+    [9, 9, 0],
+    [0, 0, 0],
+  ],
+  [
+    [18, 18, 0],
+    [0, 0, 0],
+  ],
+  [2, 5],
+  [30, 30],
+  1,
+);

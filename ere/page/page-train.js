@@ -22,6 +22,7 @@ const {
   get_trainer_train_buff,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { skills_dict } = require('#/data/race/skill/skill-const');
 const {
   adaptability_names,
   attr_enum,
@@ -218,7 +219,9 @@ module.exports = async () => {
             },
             {
               config: { offset: 1, width: 23 },
-              content: [],
+              content: era
+                .get(`skill:${chara_id}:习得技能`)
+                .map((e) => skills_dict[e].get_colored_name()),
               type: 'text',
             },
           ],

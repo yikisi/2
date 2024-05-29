@@ -10,6 +10,7 @@ const { race_enum } = require('#/data/race/race-const');
 const {
   mod_acceleration_adapt_ground,
 } = require('#/data/race/race-const.json');
+const { skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
 
 /**
@@ -84,8 +85,8 @@ function sys_parse_for_race(team_chara, race, info) {
           uma.adapt_style,
           uma.adapt_distance,
           uma.adapt_ground,
-          [],
-        ).is_legend(),
+          uma.skills.map((e) => skills_dict[e]),
+        ).set_legend(),
       );
     } else {
       //对应json中不存在该幻影数据则从default读取
@@ -100,8 +101,8 @@ function sys_parse_for_race(team_chara, race, info) {
           uma.adapt_style[phantom_age],
           uma.adapt_distance[phantom_age],
           uma.adapt_ground[phantom_age],
-          uma.skills[phantom_age],
-        ).is_legend(),
+          uma.skills[phantom_age].map((e) => skills_dict[e]),
+        ).set_legend(),
       );
     }
   });
@@ -130,8 +131,8 @@ function sys_parse_for_race(team_chara, race, info) {
         uma.adapt_style[phantom_age],
         uma.adapt_distance[phantom_age],
         uma.adapt_ground[phantom_age],
-        uma.skills[phantom_age],
-      ).is_legend(),
+        uma.skills[phantom_age].map((e) => skills_dict[e]),
+      ).set_legend(),
     );
   });
   //最后填路人幻影
@@ -154,11 +155,17 @@ function sys_parse_for_race(team_chara, race, info) {
       .slice(team_chara.length)
       .forEach(
         (uma) =>
-          (uma.attrs = uma.attrs.map((e) =>
-            Math.ceil((e * (100 + from_setting)) / 100),
-          )),
+          (uma.attrs = uma.attrs.map((e) => (e * (100 + from_setting)) / 100)),
       );
   }
+  ret.forEach((uma) => (uma.attrs = uma.attrs.map(Math.ceil)));
+
+  ret.forEach((uma) => {
+    uma.list_skill = sort_list(uma.list_skill, (e) => e.data.id).filter(
+      (v, i, a) =>
+        i === a.findIndex((x) => x.data.group_id === v.data.group_id),
+    );
+  });
 
   ret = sort_list(ret, Math.random);
   const average_intelligence =

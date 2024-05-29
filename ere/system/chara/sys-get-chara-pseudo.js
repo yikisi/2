@@ -5,6 +5,7 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { sort_list } = require('#/utils/list-utils');
 
 const PseudoUma = require('#/data/race/model/pseudo-uma');
+const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names, attr_names } = require('#/data/train-const');
 
 /**
@@ -25,7 +26,7 @@ function sys_get_chara_pseudo(chara_id) {
       adapt_list.slice(6, 10),
       adapt_list.slice(2, 6).map((adapt) => adapt - debuff),
       adapt_list.slice(0, 2).map((adapt) => adapt - debuff),
-      [],
+      era.get(`skill:${chara_id}:习得技能`).map((e) => skills_dict[e]),
     );
   if (debuff) {
     uma.ground_buffs.push(`-${debuff}[客场作战(${debuff})]`);
