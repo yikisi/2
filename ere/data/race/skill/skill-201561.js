@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '枠番が7の時に\n良いことが起きる場合がある',
   20156,
   2,
-  0,
+  8,
   334,
   [() => true, () => true],
   [(args) => args.random_lot === 50 && args.post_number === 7, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [600000, 600000, 600000],
+    [60, 60, 60],
     [0, 0, 0],
   ],
   [

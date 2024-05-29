@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '最終コーナー以降に追い抜いていた場合\n最終直線で中団にいると速度が上がる\n人気が低い場合は奮起して上げ続ける',
   11060,
   5,
-  5,
+  18,
   340,
   [
     (args) => args.is_finalcorner === 1 && args.change_order_onetime < 0,
@@ -35,8 +35,8 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [3500, 0, 0],
-    [3500, 0, 0],
+    [0.35, 0, 0],
+    [0.35, 0, 0],
   ],
   [
     [1, 0, 0],

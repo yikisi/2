@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース前半中団以降に控え続けていると\nレース終盤かつ最終コーナー以降に\n少し前に出る、長距離レースなら\n効果が増える',
   11025,
   5,
-  5,
+  18,
   340,
   [
     (args) => args.distance_rate >= 50 && args.order_rate_out40_continue === 1,
@@ -28,8 +28,8 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [3500, 0, 0],
-    [2500, 0, 0],
+    [0.35, 0, 0],
+    [0.25, 0, 0],
   ],
   [
     [1, 0, 0],

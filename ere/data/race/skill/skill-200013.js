@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '右回りコースが少し苦手になる',
   20001,
   1,
-  0,
+  4,
   -129,
   [() => true, () => true],
   [(args) => args.rotation === 1, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [-400000, 0, 0],
+    [-40, 0, 0],
     [0, 0, 0],
   ],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '真剣勝負、いざ参ります！',
   30014,
   5,
-  5,
+  18,
   340,
   [() => true, () => true],
   [
@@ -24,7 +24,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [3500, 0, 0],
+    [0.35, 0, 0],
     [0, 0, 0],
   ],
   [

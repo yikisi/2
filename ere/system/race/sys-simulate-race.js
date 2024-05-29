@@ -2,6 +2,10 @@
 
 const RaceInfo = require('#/data/race/model/race-info');
 const {
+  ability_type_enum,
+  target_type_enum,
+} = require('#/data/race/model/uma-skill');
+const {
   mod_stamina_cost_mess_dirt,
   mod_stamina_cost_mess_grass,
   raceDecel,
@@ -139,87 +143,83 @@ function sys_sim_race(list_chara, race_info) {
     });
 
     //模拟技能触发
-    for (const itemUma of list_in_race) {
+    list_in_race.forEach((uma) => {
       // 读取本时刻脚下赛道状态
       const cur_lane = race_info.lanes.find(
-        (e) =>
-          itemUma.race.location >= e.start && itemUma.race.location < e.end,
+        (e) => uma.race.location >= e.start && uma.race.location < e.end,
       );
-      itemUma.race.groundCurr = {
+      uma.race.groundCurr = {
         slope:
           race_info.slopes.find(
-            (e) =>
-              itemUma.race.location >= e.start && itemUma.race.location < e.end,
+            (e) => uma.race.location >= e.start && uma.race.location < e.end,
           )?.slope || 0,
         isCurve: cur_lane?.is_curve || false,
         isLast: cur_lane?.is_last || false,
         phase: 0,
       };
       //读取赛程阶段 方法略有不同
-      while (
-        itemUma.race.location >= race_info.phases[itemUma.race.groundCurr.phase]
-      ) {
-        itemUma.race.groundCurr.phase++;
+      while (uma.race.location >= race_info.phases[uma.race.groundCurr.phase]) {
+        uma.race.groundCurr.phase++;
       }
-      itemUma.race.groundCurr.phase--;
+      uma.race.groundCurr.phase--;
 
       //重置目标速度和加速度为赛段基础值
-      itemUma.race.velocityIdeal =
-        itemUma.base.velocityIdeal *
-        itemUma.factorPhase.vStyle[itemUma.race.groundCurr.phase];
-      itemUma.race.acceleration =
-        itemUma.base.acceleration *
-        itemUma.factorPhase.aStyle[itemUma.race.groundCurr.phase];
+      uma.race.velocityIdeal =
+        uma.base.velocityIdeal *
+        uma.factorPhase.vStyle[uma.race.groundCurr.phase];
+      uma.race.acceleration =
+        uma.base.acceleration *
+        uma.factorPhase.aStyle[uma.race.groundCurr.phase];
 
       //终盘时则再附加部分变动
-      if (itemUma.race.groundCurr.phase === 2) {
-        itemUma.race.velocityIdeal += itemUma.factorFinal.vIdealAdd;
-        itemUma.race.staminaCost *= itemUma.factorFinal.sCostMult;
+      if (uma.race.groundCurr.phase === 2) {
+        uma.race.velocityIdeal += uma.factorFinal.vIdealAdd;
+        uma.race.staminaCost *= uma.factorFinal.sCostMult;
       }
 
       //每个赛段的随机浮动
-      itemUma.race.velocityIdeal *=
-        itemUma.factorPhase.vRand[itemUma.race.groundCurr.phase];
+      uma.race.velocityIdeal *=
+        uma.factorPhase.vRand[uma.race.groundCurr.phase];
 
       //为自己计算最终冲刺方案
-      if (itemUma.flag.allowPlan && itemUma.race.groundCurr.phase === 2) {
+      if (uma.flag.allowPlan && uma.race.groundCurr.phase === 2) {
         //计算使用的终点位置在真正终点前60M
-        let distLeft = race_info.span - 60 - itemUma.race.location;
-        let planVelocity = itemUma.base.velocityMaxRush;
+        let distLeft = race_info.span - 60 - uma.race.location;
+        let planVelocity = uma.base.velocityMaxRush;
         let planStaminaCost =
           (20 / 144) *
-          Math.pow(planVelocity - itemUma.base.velocityIdeal + 12, 2) *
+          Math.pow(planVelocity - uma.base.velocityIdeal + 12, 2) *
           mod_stamina_cost_mess *
-          itemUma.factorFinal.sCostMult;
+          uma.factorFinal.sCostMult;
         //体力足够以最大冲刺速度跑完则直接冲
-        if (planStaminaCost * distLeft < itemUma.race.stamina * planVelocity) {
-          itemUma.race.velocityPlanRush = planVelocity;
-          itemUma.flag.finalRush = true;
+        if (planStaminaCost * distLeft < uma.race.stamina * planVelocity) {
+          uma.race.velocityPlanRush = planVelocity;
+          uma.flag.finalRush = true;
         } else {
           //否则以每次降0.1冲刺速度为一版计划计算总耗时
           //先预测自己在终盘非冲刺下的情况
           let endSectVelocity =
-            itemUma.base.velocityIdeal * itemUma.factorPhase.vStyle[2] +
-            itemUma.factorFinal.vIdealAdd;
+            uma.base.velocityIdeal * uma.factorPhase.vStyle[2] +
+            uma.factorFinal.vIdealAdd;
           let endSectStaminaCost =
             (20 / 144) *
-            Math.pow(endSectVelocity - itemUma.base.velocityIdeal + 12, 2) *
+            Math.pow(endSectVelocity - uma.base.velocityIdeal + 12, 2) *
             mod_stamina_cost_mess *
-            itemUma.factorFinal.sCostMult;
+            uma.factorFinal.sCostMult;
           // 提出冲刺计划
           let listPlan = [];
           while (planVelocity > endSectVelocity) {
             // 预测冲刺计划的耐力消耗
             planStaminaCost =
               (20 / 144) *
-              Math.pow(planVelocity - itemUma.base.velocityIdeal + 12, 2) *
+              Math.pow(planVelocity - uma.base.velocityIdeal + 12, 2) *
               mod_stamina_cost_mess *
-              itemUma.factorFinal.sCostMult;
+              uma.factorFinal.sCostMult;
             // 计算最合理的冲刺距离 以求刚好在终点用光耐力
             // ……理论上耐力够了就直接冲了不过这里
             let rushDistance =
               (planVelocity *
-                (itemUma.race.stamina * endSectVelocity -
+                (uma.race.stamina * endSectVelocity -
                   distLeft * endSectStaminaCost)) /
               (planStaminaCost * endSectStaminaCost -
                 endSectVelocity * planVelocity);
@@ -228,8 +228,7 @@ function sys_sim_race(list_chara, race_info) {
             let timeRush = Math.ceil(rushDistance / planStaminaCost);
             let rushLocation = race_info.span - 60 - timeRush * planVelocity;
             let timeNorm = Math.ceil(
-              (rushLocation - itemUma.race.location) /
-                itemUma.race.velocityIdeal,
+              (rushLocation - uma.race.location) / uma.race.velocityIdeal,
             );
             //记录计划冲刺速度 所用时间 及开始位置
             let itemPlan = {
@@ -242,121 +241,121 @@ function sys_sim_race(list_chara, race_info) {
           }
           listPlan.sort((a, b) => a.time - b.time);
           for (let itemPlan of listPlan) {
-            if (Math.random() < itemUma.probs.planRush) {
-              itemUma.race.velocityPlanRush = itemPlan.velocity;
-              itemUma.race.locationPlanRush = itemPlan.location;
+            if (Math.random() < uma.probs.planRush) {
+              uma.race.velocityPlanRush = itemPlan.velocity;
+              uma.race.locationPlanRush = itemPlan.location;
               break;
             }
           }
         }
-        itemUma.flagAllowPlan = false;
+        uma.flagAllowPlan = false;
       }
 
       //判定进入冲刺状态
-      if (
-        !itemUma.flag.finalRush &&
-        itemUma.race.location >= itemUma.planRushLocation
-      ) {
-        itemUma.flag.finalRush = true;
+      if (!uma.flag.finalRush && uma.race.location >= uma.planRushLocation) {
+        uma.flag.finalRush = true;
       }
 
       //若在冲刺状态则目标速度为冲刺速度
-      if (itemUma.flag.finalRush) {
-        itemUma.race.velocityIdeal = itemUma.race.velocityPlanRush;
+      if (uma.flag.finalRush) {
+        uma.race.velocityIdeal = uma.race.velocityPlanRush;
       }
 
       //上坡减速
-      if (itemUma.race.groundCurr.slope >= 0) {
-        itemUma.flag.downhill = false;
-        itemUma.race.velocityIdeal -=
-          itemUma.race.groundCurr.slope * itemUma.factorSlope.up;
+      if (uma.race.groundCurr.slope >= 0) {
+        uma.flag.downhill = false;
+        uma.race.velocityIdeal -=
+          uma.race.groundCurr.slope * uma.factorSlope.up;
       } else {
         //下坡模式判定
-        if (itemUma.flag.downhill && Math.random() < 0.2) {
-          itemUma.flag.downhill = false;
+        if (uma.flag.downhill && Math.random() < 0.2) {
+          uma.flag.downhill = false;
         }
-        if (
-          !itemUma.flag.downhill &&
-          Math.random() < itemUma.factorSlope.down
-        ) {
-          itemUma.flag.downhill = true;
+        if (!uma.flag.downhill && Math.random() < uma.factorSlope.down) {
+          uma.flag.downhill = true;
         }
       }
       //下坡加速
-      if (itemUma.flag.downhill) {
-        itemUma.race.velocityIdeal += 0.3 - itemUma.race.groundCurr.slope * 10;
-        itemUma.race.staminaCost *= 0.4;
+      if (uma.flag.downhill) {
+        uma.race.velocityIdeal += 0.3 - uma.race.groundCurr.slope * 10;
+        uma.race.staminaCost *= 0.4;
       }
 
       //判定技能生效状态
-      for (let itemSkill of itemUma.list_skill) {
-        //未在触发状态的技能满足条件则触发
-        if (
-          /*
-
-          TODO: 补加所有判定条件
-
-          */
-          !itemSkill.triggerFlag &&
-          itemSkill.triggerCount < itemSkill.triggerMax &&
-          itemUma.race.location >
-            itemSkill.skilldata.triggerLeft * race_info.span &&
-          itemUma.race.location <
-            itemSkill.skilldata.triggerRight * race_info.span &&
-          Math.random() < itemUma.probs.skill
-        ) {
-          itemSkill.triggerFlag = true;
-          itemSkill.triggerTimeCount = 0;
-          itemSkill.triggerCount++;
-        }
-        //已在触发状态的技能持续时间过去则结束
-        if (
-          itemSkill.triggerFlag &&
-          itemSkill.triggerTimeCount >= itemSkill.triggerTimeMax
-        ) {
-          itemSkill.triggerFlag = false;
-        }
-      }
-      //计算黄绿蓝技能效果
-      itemUma.list_skill.forEach((skill) => {
-        if (skill.skilldata.typeBuff && skill.triggerFlag) {
-          itemUma.race.velocityReal += skill.skilldata.bonusVelocityReal;
-          itemUma.race.velocityIdeal += skill.skilldata.bonusVelocityIdeal;
-          itemUma.race.acceleration += skill.skilldata.bonusAcceleration;
-          itemUma.race.stamina +=
-            skill.skilldata.bonusStamina * itemUma.base.stamina;
-          skill.triggerTimeCount++;
-
-          if (skill.skilldata.bonusStamina) {
-            itemUma.flag.allowPlan = true;
+      uma.list_skill.forEach((skill) => {
+        for (let i = 0; i < 2; ++i) {
+          if (skill.ability_time[i] > 0) {
+            skill.ability_time[i]--;
+            if (skill.ability_time[i] <= 0) {
+              // 效果结束
+              // TODO 非自然衰减即时速度马上把速度减下来
+            }
           }
-
-          record_skill_list.at(-1)[itemUma.index_race].push(skill.data.id);
+          if (
+            skill.cooldown[i] <= 0 &&
+            skill.data.ability_times[i] >= 0 &&
+            skill.data.target_types[i] === target_type_enum.Direct &&
+            skill.data.conditions[i](uma.race.conditionParams)
+          ) {
+            skill.count[i]++;
+            skill.cooldown[i] = skill.data.cooldown_times[i] * 15;
+            skill.ability_time[i] = skill.data.ability_times[i] * 15;
+            skill.data.ability_types[i].forEach((e) => {
+              switch (e) {
+                case ability_type_enum.Speed:
+                case ability_type_enum.Stamina:
+                case ability_type_enum.Power:
+                case ability_type_enum.Guts:
+                case ability_type_enum.Wiz:
+                case ability_type_enum.RunningStyleExOonige:
+                  break;
+                // case ability_type_enum.VisibleDistance:
+                case ability_type_enum.HpRate:
+                case ability_type_enum.StartDash:
+                case ability_type_enum.TemptationEndTime:
+                case ability_type_enum.CurrentSpeed:
+                case ability_type_enum.CurrentSpeedWithNaturalDeceleration:
+                case ability_type_enum.TargetSpeed:
+                  break;
+                // case ability_type_enum.LaneMoveSpeed:
+                case ability_type_enum.TemptationPer:
+                case ability_type_enum.Accel:
+                  break;
+                // case ability_type_enum.TargetLane:
+                case ability_type_enum.ActivateRandomRareSkill:
+                  uma.list_skill
+                    .filter((s) => s !== skill)
+                    .forEach(
+                      (s) =>
+                        (s.cooldown = s.cooldown.map(
+                          (e, j) => e - s.data.cooldown_times[j],
+                        )),
+                    );
+              }
+            });
+            skill.data.target_types[i].forEach((e) => {
+              switch (e) {
+                case target_type_enum.Self:
+                case target_type_enum.Visible:
+                case target_type_enum.OrderInfront:
+                case target_type_enum.SelfInfront:
+                case target_type_enum.SelfBehind:
+                case target_type_enum.RunningStyleOtherSelf:
+                case target_type_enum.SelfInfrontTemptation:
+                case target_type_enum.SelfBehindTemptation:
+                case target_type_enum.RunningStyleTemptationOtherSelf:
+                  break;
+                // case target_type_enum.CharaId:
+                case target_type_enum.ActivateHealSkill:
+              }
+            });
+            record_skill_list.at(-1)[uma.index_race].push(skill.data.id);
+          } else {
+            skill.cooldown[i]--;
+          }
         }
       });
-    }
-
-    // 计算红技时换成以index遍历
-    list_in_race.forEach((uma, indUma) =>
-      uma.list_skill.forEach((skill) => {
-        if (skill.skilldata.typeDebuff && skill.triggerFlag) {
-          skill.triggerTimeCount++;
-          list_in_race.forEach((target, indTar) => {
-            if (
-              indTar !== indUma &&
-              indTar >= indUma - skill.skilldata.rangeLeft &&
-              indTar <= indUma + skill.skilldata.rangeRight
-            ) {
-              target.race.velocityReal -= skill.skilldata.debuffVelocityReal;
-              target.race.velocityIdeal -= skill.skilldata.debuffVelocityIdeal;
-              target.race.acceleration -= skill.skilldata.debuffAcceleration;
-              target.race.stamina -=
-                skill.skilldata.debuffStamina * target.base.stamina;
-            }
-          });
-        }
-      }),
-    );
+    });
 
     //结算
     for (let itemUma of list_in_race) {

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース後半に呼吸を整え前へ踏み込む\n育成で重ねた勝利の数だけ効果が高まる',
   21006,
   2,
-  4,
+  10,
   633,
   [() => true, () => true],
   [(args) => args.distance_rate_after_random === 50, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [2500, 3000, 350],
+    [0.25, 0.3, 0.035],
     [0, 0, 0],
   ],
   [

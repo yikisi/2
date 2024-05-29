@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'スタートが苦手になり\n出遅れる時間が少し増える',
   20043,
   1,
-  1,
+  4,
   -174,
   [() => true, () => true],
   [(args) => args.always === 1, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [15000, 0, 0],
+    [1.5, 0, 0],
     [0, 0, 0],
   ],
   [

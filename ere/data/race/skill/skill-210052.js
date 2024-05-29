@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース序盤にアオハル魂が燃えしばらく\nレース中のチームメンバーの賢さ合計が\n高いほどわずかに先を見据えて走る',
   21005,
   1,
-  1,
+  2,
   263,
   [() => true, () => true],
   [(args) => args.phase_random === 0, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [150, 50000, 0],
+    [0.015, 5, 0],
     [0, 0, 0],
   ],
   [

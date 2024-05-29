@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース中盤が迫ったとき\n速度が上がる',
   20280,
   2,
-  1,
+  10,
   508,
   [() => true, () => true],
   [(args) => args.phase_laterhalf_random === 0, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [3500, 0, 0],
+    [0.35, 0, 0],
     [0, 0, 0],
   ],
   [

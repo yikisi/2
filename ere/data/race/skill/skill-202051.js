@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '通常の逃げの作戦よりさらに大きく\n後続を引き離して、そのまま最後まで\n逃げ切ろうとする＜作戦・逃げ＞',
   20205,
   2,
-  0,
+  8,
   370,
   [() => true, () => true],
   [(args) => args.running_style === 1, () => true],

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース中盤に速度が上がる\n＜作戦・先行＞',
   20237,
   2,
-  2,
+  10,
   508,
   [() => true, () => true],
   [(args) => args.phase_random === 1 && args.running_style === 2, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [3500, 0, 0],
+    [0.35, 0, 0],
     [0, 0, 0],
   ],
   [

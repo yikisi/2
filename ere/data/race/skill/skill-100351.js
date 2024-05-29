@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '最終コーナー以降に競り合っていると\n最終直線で前方にいる時\n強い気持ちが湧き速度が上がる',
   10035,
   4,
-  5,
+  18,
   340,
   [
     (args) => args.is_finalcorner === 1 && args.blocked_side_continuetime >= 2,
@@ -24,7 +24,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [3500, 0, 0],
+    [0.35, 0, 0],
     [0, 0, 0],
   ],
   [

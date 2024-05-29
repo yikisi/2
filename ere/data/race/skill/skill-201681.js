@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース終盤にコース取りが上手くなり\n加速力が少し上がる＜ダート＞',
   20168,
   2,
-  3,
+  10,
   394,
   [() => true, () => true],
   [(args) => args.ground_type === 2 && args.phase_random === 2, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [350, 3000, 0],
+    [0.035, 0.3, 0],
     [0, 0, 0],
   ],
   [

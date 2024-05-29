@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース後半に先団にいると残りの\n持久力に応じたロングスパートをかけて\n速度をわずかに上げ続ける',
   12013,
   5,
-  5,
+  18,
   340,
   [() => true, () => true],
   [(args) => args.distance_rate >= 50 && args.order_rate <= 40, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [1500, 0, 0],
+    [0.15, 0, 0],
     [0, 0, 0],
   ],
   [

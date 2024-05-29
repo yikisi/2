@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース終盤にアオハル魂が燃え\nレース中のチームメンバーの根性合計が\n高いほど脚に力強さが宿る',
   21004,
   2,
-  3,
+  10,
   633,
   [() => true, () => true],
   [(args) => args.phase_random === 2, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [2500, 3000, 0],
+    [0.25, 0.3, 0],
     [0, 0, 0],
   ],
   [

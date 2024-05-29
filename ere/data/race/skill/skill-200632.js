@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース終盤に後方にいると\nラストスパートの最中に\n速度をわずかに上げる＜作戦・追込＞',
   20063,
   1,
-  3,
+  2,
   217,
   [(args) => args.phase === 2 && args.distance_diff_rate >= 50, () => true],
   [
@@ -27,7 +27,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [1500, 0, 0],
+    [0.15, 0, 0],
     [0, 0, 0],
   ],
   [

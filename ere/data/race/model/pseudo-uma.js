@@ -1,14 +1,15 @@
+const PreConditionParams = require('#/data/race/model/pre-condition-params');
 const { attr_names } = require('#/data/train-const');
 
 class RaceSkill {
   /** @type {UmaSkill} */
   data;
-  // 发动标记
-  is_triggered = false;
+  // 发动时间
+  ability_time = [0, 0];
   // 冷却
-  cooldown = 0;
+  cooldown = [0, 0];
   // 触发次数
-  count = 0;
+  count = [0, 0];
 
   /** @param {UmaSkill} skill */
   constructor(skill) {
@@ -109,15 +110,17 @@ class PseudoUma {
   };
   // 比赛时信息
   race = {
-    phase: 0,
-    location: 0,
-    velocityIdeal: 0,
-    velocityReal: 0,
-    velocityPlanRush: 0,
-    locationPlanRush: 0,
     acceleration: 0,
+    conditionParams: new PreConditionParams(),
+    location: 0,
+    locationPlanRush: 0,
+    phase: 0,
+    preConditionParams: new PreConditionParams(),
     stamina: 0,
     staminaCost: 0,
+    velocityIdeal: 0,
+    velocityPlanRush: 0,
+    velocityReal: 0,
   };
   // 实时排名和上一tick排名
   rank = {

@@ -4,6 +4,70 @@ const { writeFileSync } = require('node:fs');
 const { join } = require('path');
 const prisma = new PrismaClient();
 
+const icon2skill_color = {
+  10011: 0b00000,
+  10012: 0b01000,
+  10014: 0b00100,
+  10016: 0b10000,
+  10021: 0b00000,
+  10022: 0b01000,
+  10024: 0b00100,
+  10031: 0b00000,
+  10032: 0b01000,
+  10034: 0b00100,
+  10041: 0b00000,
+  10051: 0b00000,
+  10054: 0b00100,
+  10061: 0b00000,
+  10062: 0b01000,
+  20011: 0b00010,
+  20012: 0b01010,
+  20013: 0b10010,
+  20014: 0b00100,
+  20016: 0b11010,
+  20021: 0b00001,
+  20022: 0b01001,
+  20023: 0b10001,
+  20024: 0b00100,
+  20026: 0b11001,
+  20041: 0b00010,
+  20042: 0b01010,
+  20043: 0b10010,
+  20046: 0b11010,
+  20051: 0b00010,
+  20052: 0b01010,
+  20061: 0b00010,
+  20062: 0b01010,
+  20064: 0b00100,
+  20091: 0b00010,
+  20092: 0b01010,
+  20101: 0b00010,
+  20102: 0b01010,
+  20111: 0b00001,
+  20112: 0b01001,
+  20121: 0b00010,
+  20122: 0b01010,
+  20131: 0b00010,
+  20132: 0b01010,
+  20141: 0b00010,
+  20142: 0b01010,
+  20151: 0b00010,
+  20152: 0b01010,
+  20192: 0b01010,
+  20202: 0b01010,
+  20226: 0b11010,
+  30011: 0b00011,
+  30012: 0b01011,
+  30021: 0b00011,
+  30041: 0b00011,
+  30051: 0b00011,
+  30052: 0b01011,
+  30071: 0b00011,
+  30072: 0b01011,
+  40012: 0b01000,
+  2010010: 0b01010,
+};
+
 function find_many_skills(where) {
   return prisma.skill_data.findMany({
     where,
@@ -178,6 +242,9 @@ async function chara_skill() {
   skill_data.forEach((e) => {
     const id = e.id;
     buffer += `skills_dict[${id}]=require('#/data/race/skill/skill-${id}');`;
+    if (icon2skill_color[e.icon_id] === undefined) {
+      console.log(e);
+    }
     let sbuffer =
       "const UmaSkill = require('#/data/race/model/uma-skill');\n\nmodule.exports = new UmaSkill(";
     sbuffer += `${id},`;
@@ -185,7 +252,7 @@ async function chara_skill() {
     sbuffer += `"${skill_text[id][48]}",`;
     sbuffer += `${e.group_id},`;
     sbuffer += `${e.rarity},`;
-    sbuffer += `${e.skill_category},`;
+    sbuffer += `${icon2skill_color[e.icon_id]},`;
     sbuffer += `${e.grade_value},`;
     sbuffer += `[${parse_condition(e.precondition_1)},${parse_condition(e.precondition_2)}],`;
     sbuffer += `[${parse_condition(e.condition_1)},${parse_condition(e.condition_2)}],`;
@@ -193,7 +260,7 @@ async function chara_skill() {
     sbuffer += `[${e.float_cooldown_time_1 / 10000},${e.float_cooldown_time_2 / 10000}],`;
     sbuffer += `[[${e.ability_type_1_1},${e.ability_type_1_2},${e.ability_type_1_3}],[${e.ability_type_2_1},${e.ability_type_2_2},${e.ability_type_2_3}]],`;
     sbuffer += `[[${e.ability_value_usage_1_1},${e.ability_value_usage_1_2},${e.ability_value_usage_1_3}],[${e.ability_value_usage_2_1},${e.ability_value_usage_2_2},${e.ability_value_usage_2_3}]],`;
-    sbuffer += `[[${e.float_ability_value_1_1},${e.float_ability_value_1_2},${e.float_ability_value_1_3}],[${e.float_ability_value_2_1},${e.float_ability_value_2_2},${e.float_ability_value_2_3}]],`;
+    sbuffer += `[[${e.float_ability_value_1_1 / 10000},${e.float_ability_value_1_2 / 10000},${e.float_ability_value_1_3 / 10000}],[${e.float_ability_value_2_1 / 10000},${e.float_ability_value_2_2 / 10000},${e.float_ability_value_2_3 / 10000}]],`;
     sbuffer += `[[${e.target_type_1_1},${e.target_type_1_2},${e.target_type_1_3}],[${e.target_type_2_1},${e.target_type_2_2},${e.target_type_2_3}]],`;
     sbuffer += `[[${e.target_value_1_1},${e.target_value_1_2},${e.target_value_1_3}],[${e.target_value_2_1},${e.target_value_2_2},${e.target_value_2_3}]],`;
     sbuffer += `[${e.popularity_add_param_1},${e.popularity_add_param_2}],`;

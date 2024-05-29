@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '右回りコースが得意になり\nスピードとパワーが上昇する',
   20001,
   2,
-  0,
+  8,
   461,
   [() => true, () => true],
   [(args) => args.rotation === 1, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [600000, 600000, 0],
+    [60, 60, 0],
     [0, 0, 0],
   ],
   [

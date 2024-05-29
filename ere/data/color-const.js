@@ -23,12 +23,4 @@ module.exports = {
     progress: ['#b05a76', '#cf00cf'],
   },
   sex_colors: ['#fff0f5', '#ffb6c1', '#cd5555'],
-  skill_colors: [
-    '#a7fe9e',
-    '#ffe361',
-    '#98ccfa',
-    '#ff9e9d',
-    '#eeb93f',
-    '#f8c7ff',
-  ],
 };

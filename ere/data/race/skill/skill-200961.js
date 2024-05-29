@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '直線で速度が少し上がる＜短距離＞',
   20096,
   1,
-  4,
+  2,
   262,
   [() => true, () => true],
   [
@@ -24,7 +24,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [2500, 0, 0],
+    [0.25, 0, 0],
     [0, 0, 0],
   ],
   [

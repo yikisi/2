@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース後半に速度が少し上がるが\nすごく疲れてしまうことがある',
   20203,
   1,
-  4,
+  2,
   129,
   [() => true, () => true],
   [(args) => args.distance_rate_after_random === 50, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [2500, -10000, 0],
+    [0.25, -1, 0],
     [0, 0, 0],
   ],
   [

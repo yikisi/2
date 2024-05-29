@@ -58,8 +58,8 @@ module.exports = async () => {
       const chara_score = get_chara_score(chara_id);
       let chara_level = get_rank_level(chara_score);
       columns.push(
-        { config: { content: '基础能力', width: 23 }, type: 'divider' },
-        { config: { width: 2 }, content: '评价', type: 'text' },
+        { config: { content: '基础能力' }, type: 'divider' },
+        { config: { width: 3 }, content: '评价', type: 'text' },
         {
           config: {
             color: adaptability_colors[chara_level],
@@ -77,7 +77,7 @@ module.exports = async () => {
         }
         columns.push(
           {
-            config: { width: 2 },
+            config: { width: 3 },
             content: k,
             type: 'text',
           },
@@ -102,21 +102,22 @@ module.exports = async () => {
       era.printInColRows(
         {
           columns,
-          config: { width: 12 },
+          config: { width: 9 },
         },
+        { columns: [], config: { width: 1 } },
         {
           columns: [
             {
-              config: { content: '比赛能力', offset: 1, width: 23 },
+              config: { content: '比赛能力' },
               type: 'divider',
             },
             {
-              config: { offset: 1, width: 4 },
+              config: { width: 4 },
               content: '场地适性',
               type: 'text',
             },
             {
-              config: { width: 7 },
+              config: { width: 8 },
               content: [
                 '草',
                 {
@@ -134,12 +135,12 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { offset: 1, width: 4 },
+              config: { width: 4 },
               content: '距离适性',
               type: 'text',
             },
             {
-              config: { width: 7 },
+              config: { width: 8 },
               content: [
                 '短',
                 {
@@ -169,12 +170,22 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { offset: 1, width: 4 },
+              config: { width: 4 },
+              content: '技能点数',
+              type: 'text',
+            },
+            {
+              config: { width: 8 },
+              content: era.get(`exp:${chara_id}:技能点数`),
+              type: 'text',
+            },
+            {
+              config: { width: 4 },
               content: '跑法适性',
               type: 'text',
             },
             {
-              config: { width: 7 },
+              config: { width: 8 },
               content: [
                 { content: '逃' },
                 {
@@ -204,28 +215,16 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { offset: 1, width: 4 },
-              content: '技能点数',
-              type: 'text',
-            },
-            {
-              config: { width: 7 },
-              content: era.get(`exp:${chara_id}:技能点数`),
-              type: 'text',
-            },
-            {
-              config: { content: '习得技能', offset: 1, width: 23 },
+              config: { content: '习得技能' },
               type: 'divider',
             },
-            {
-              config: { offset: 1, width: 23 },
-              content: era
-                .get(`skill:${chara_id}:习得技能`)
-                .map((e) => skills_dict[e].get_colored_name()),
+            ...era.get(`skill:${chara_id}:习得技能`).map((e) => ({
+              config: { display: 'inline-block', width: 8 },
+              content: skills_dict[e].get_colored_name(),
               type: 'text',
-            },
+            })),
           ],
-          config: { width: 12 },
+          config: { width: 14 },
         },
       );
     }

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース中盤のコーナーで\nしばらくの間速度が少し上がる',
   20272,
   2,
-  2,
+  10,
   508,
   [() => true, () => true],
   [(args) => args.phase_corner_random === 1, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [2500, 0, 0],
+    [0.25, 0, 0],
     [0, 0, 0],
   ],
   [

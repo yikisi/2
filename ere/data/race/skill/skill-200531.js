@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'スタート時に加速力が上がる\n＜作戦・逃げ＞',
   20053,
   2,
-  1,
+  10,
   334,
   [() => true, () => true],
   [(args) => args.running_style === 1 && args.phase === 0, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [4000, 0, 0],
+    [0.4, 0, 0],
     [0, 0, 0],
   ],
   [

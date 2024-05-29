@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '下り坂で速度がわずかに上がる',
   20217,
   1,
-  4,
+  2,
   217,
   [() => true, () => true],
   [(args) => args.down_slope_random === 1, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [1500, 0, 0],
+    [0.15, 0, 0],
     [0, 0, 0],
   ],
   [

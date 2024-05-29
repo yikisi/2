@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース序盤に観察力が高まり\n視野を広く持てる＜中距離＞',
   20112,
   2,
-  1,
+  10,
   334,
   [() => true, () => true],
   [(args) => args.distance_type === 3 && args.phase_random === 0, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [150000, 0, 0],
+    [15, 0, 0],
     [0, 0, 0],
   ],
   [

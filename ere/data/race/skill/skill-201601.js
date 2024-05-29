@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース序盤にスキルを多く発動すると\n加速力がわずかに上がる',
   20160,
   1,
-  1,
+  2,
   217,
   [() => true, () => true],
   [(args) => args.activate_count_start >= 3, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [2000, 0, 0],
+    [0.2, 0, 0],
     [0, 0, 0],
   ],
   [

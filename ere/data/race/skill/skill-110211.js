@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース中盤にスキルを2つ発動すると\n速度を少し上げ続ける、効果中スキルを\n発動すると2回まで効果が増える',
   11021,
   5,
-  5,
+  18,
   340,
   [() => true, () => true],
   [(args) => args.activate_count_middle >= 2, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [2500, 250, 0],
+    [0.25, 0.025, 0],
     [0, 0, 0],
   ],
   [

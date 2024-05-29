@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース前半で控え、最終コーナー後半に\n前の方だと長時間加速力をちょっと上げ\n続ける、2番手なら効果が上がる',
   10078,
   5,
-  5,
+  18,
   340,
   [
     (args) => args.distance_rate >= 50 && args.order_rate_out20_continue === 1,
@@ -31,8 +31,8 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [2000, 0, 0],
-    [1000, 0, 0],
+    [0.2, 0, 0],
+    [0.1, 0, 0],
   ],
   [
     [1, 0, 0],

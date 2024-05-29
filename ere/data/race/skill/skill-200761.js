@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '力尽きそうになったとき\n持久力を回復し速度が上がる\n＜長距離＞',
   20076,
   2,
-  4,
+  9,
   508,
   [() => true, () => true],
   [(args) => args.distance_type === 4 && args.hp_per <= 30, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [550, 3500, 0],
+    [0.055, 0.35, 0],
     [0, 0, 0],
   ],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース終盤にアオハル魂が燃え\nレース中のチームメンバーのパワー\n合計が高いほど加速力がわずかに上がる',
   21003,
   1,
-  3,
+  2,
   263,
   [() => true, () => true],
   [(args) => args.phase_random === 2, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [2000, 0, 0],
+    [0.2, 0, 0],
     [0, 0, 0],
   ],
   [

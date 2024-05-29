@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'ラストスパートの最中に\n速度がすごく上がる',
   140001,
   5,
-  5,
+  18,
   340,
   [() => true, () => true],
   [(args) => args.is_lastspurt === 1 && args.phase === 3, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [4500, 0, 0],
+    [0.45, 0, 0],
     [0, 0, 0],
   ],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '終盤が迫ったときどこかで速度を少し\n上げ、さらに能力を引き出すスキルの\n発動数に応じて速度と加速力を上げる',
   10098,
   5,
-  5,
+  18,
   340,
   [() => true, () => true],
   [(args) => args.phase_laterhalf_random === 1, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [2500, 500, 500],
+    [0.25, 0.05, 0.05],
     [0, 0, 0],
   ],
   [

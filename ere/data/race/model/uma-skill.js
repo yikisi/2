@@ -1,4 +1,12 @@
-const { skill_colors } = require('#/data/color-const');
+const skill_name_colors = [
+  '#a7fe9e',
+  '#98ccfa',
+  '#ffe361',
+  '#ff9e9d',
+  '#ce7cff',
+];
+
+const skill_border_colors = ['#c6c5c5', '#eeb93f', '#f8c7ff', '#ee82ee'];
 
 const rarity_enum = {
   // 普通技能
@@ -13,19 +21,6 @@ const rarity_enum = {
   spe_r: 5,
   // 进化技能
   evol: 6,
-};
-
-const category_enum = {
-  // 绿 - 被动
-  green: 0,
-  // 出闸技能
-  start: 1,
-  // 蓝 - 体力恢复
-  blue: 2,
-  yellow: 3,
-  yellow2: 4,
-  // 彩技能
-  spe: 5,
 };
 
 const ability_type_enum = {
@@ -68,8 +63,8 @@ const ability_type_enum = {
   Accel: 31,
   // 目标道路
   TargetLane: 35,
-  ActivateRandomNormalAndRareSkill: 36,
   // 随机触发技能
+  ActivateRandomNormalAndRareSkill: 36,
   ActivateRandomRareSkill: 37,
   // 育成继承活动使用
   ChallengeMatchBonusXXX: 50,
@@ -115,6 +110,7 @@ const target_type_enum = {
   Visible: 4,
   RandomOtherSelf: 5,
   Order: 6,
+  // 头马开始目标数（小于）
   OrderInfront: 7,
   OrderBehind: 8,
   // 前方所有
@@ -134,7 +130,7 @@ const target_type_enum = {
   SelfInfrontTemptation: 19,
   // 后方焦躁
   SelfBehindTemptation: 20,
-  // 跑法焦躁
+  // 逃马焦躁
   RunningStyleTemptationOtherSelf: 21,
   // 对应角色存在
   CharaId: 22,
@@ -143,7 +139,6 @@ const target_type_enum = {
 };
 
 class UmaSkill {
-  static category_enum = category_enum;
   static rarity_enum = rarity_enum;
   static ability_type_enum = ability_type_enum;
   static ability_type_usage_enum = ability_type_usage_enum;
@@ -300,13 +295,18 @@ class UmaSkill {
   }
 
   get_colored_name() {
-    return {
-      color: skill_colors[this.category],
-      content: `[${this.name}]`,
-      display: 'inline-block',
-      fontWeight: 'bold',
-      title: `[${this.name}] ${this.desc}`,
-    };
+    const name_color = skill_name_colors[this.category & 0b111],
+      border_color = skill_border_colors[this.category >> 3];
+    return [
+      { content: '【', color: border_color },
+      {
+        color: name_color,
+        content: this.name,
+        fontWeight: 'bold',
+        title: `[${this.name}] ${this.desc}`,
+      },
+      { content: '】', color: border_color },
+    ];
   }
 }
 

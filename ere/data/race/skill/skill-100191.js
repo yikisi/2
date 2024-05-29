@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース終盤に2回追い抜くと間近で拝む\nウマ娘ちゃんのあまりの尊さに思わず\n速度を上げてコース取りがうまくなる',
   10019,
   5,
-  5,
+  18,
   340,
   [() => true, () => true],
   [(args) => args.change_order_up_end_after >= 2, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [3500, 350, 0],
+    [0.35, 0.035, 0],
     [0, 0, 0],
   ],
   [

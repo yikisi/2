@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '「良」のバ場状態が得意になり\nパワーとスピードが上昇する',
   20015,
   2,
-  0,
+  8,
   461,
   [() => true, () => true],
   [(args) => args.ground_condition === 1, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [600000, 600000, 0],
+    [60, 60, 0],
     [0, 0, 0],
   ],
   [

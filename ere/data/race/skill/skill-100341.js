@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース前半中団以降に控え続けており\n追い比べをしていると\n江戸っ子の底力を見せつけて\n速度をすごく上げる',
   10034,
   5,
-  5,
+  18,
   340,
   [
     (args) => args.distance_rate >= 50 && args.order_rate_out40_continue === 1,
@@ -24,7 +24,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [4500, 0, 0],
+    [0.45, 0, 0],
     [0, 0, 0],
   ],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース中盤に3回追い抜いた場合\n終盤目前の下り坂で後方にいると\n少しの間速度が上がり\nさらに加速力がちょっと上がる',
   11012,
   5,
-  5,
+  18,
   340,
   [(args) => args.change_order_up_middle >= 3, () => true],
   [
@@ -28,7 +28,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [3500, 1000, 0],
+    [0.35, 0.1, 0],
     [0, 0, 0],
   ],
   [

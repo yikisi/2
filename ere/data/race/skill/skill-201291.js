@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   'レース終盤に持久力を少し使って\n加速力を上げる＜作戦・逃げ＞',
   20129,
   2,
-  3,
+  10,
   508,
   [() => true, () => true],
   [(args) => args.running_style === 1 && args.phase_random === 2, () => true],
@@ -21,7 +21,7 @@ module.exports = new UmaSkill(
     [1, 1, 1],
   ],
   [
-    [4000, -200, 0],
+    [0.4, -0.02, 0],
     [0, 0, 0],
   ],
   [

@@ -81,7 +81,7 @@ module.exports = {
           },
           ...era.get(`skill:${chara.id}:习得技能`).map((e) => ({
             config: { width: 6 },
-            content: [skills_dict[e].get_colored_name()],
+            content: skills_dict[e].get_colored_name(),
             type: 'text',
           })),
           ...skill_names
