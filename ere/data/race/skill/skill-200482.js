@@ -9,7 +9,7 @@ module.exports = new UmaSkill(
   1,
   217,
   [() => true, () => true],
-  [(args) => args.phase === 1 && args.is_surrounded === 1, () => true],
+  [(args) => args.phase === 1 && args.is_surrounded === 1, () => false],
   [0, 0],
   [500, 0],
   [

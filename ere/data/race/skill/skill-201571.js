@@ -11,7 +11,7 @@ module.exports = new UmaSkill(
   [() => true, () => true],
   [
     (args) => args.remain_distance <= 778 && args.remain_distance >= 776,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

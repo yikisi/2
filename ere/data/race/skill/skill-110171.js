@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.overtake_target_time >= 2,
     () => true,
   ],
-  [(args) => args.is_finalcorner === 1, () => true],
+  [(args) => args.is_finalcorner === 1, () => false],
   [6, 0],
   [500, 0],
   [

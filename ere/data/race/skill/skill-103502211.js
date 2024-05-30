@@ -16,7 +16,7 @@ module.exports = new UmaSkill(
       args.phase >= 2 &&
       args.order_rate >= 20 &&
       args.order_rate <= 60,
-    () => true,
+    () => false,
   ],
   [4, 0],
   [500, 0],

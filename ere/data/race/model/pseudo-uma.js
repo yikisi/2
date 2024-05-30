@@ -1,3 +1,4 @@
+const ConditionParams = require('#/data/race/model/condition-params');
 const PreConditionParams = require('#/data/race/model/pre-condition-params');
 const { attr_names } = require('#/data/train-const');
 
@@ -10,6 +11,8 @@ class RaceSkill {
   cooldown = [0, 0];
   // 触发次数
   count = [0, 0];
+  // 前置条件
+  precondition = [false, false];
 
   /** @param {UmaSkill} skill */
   constructor(skill) {
@@ -111,9 +114,10 @@ class PseudoUma {
   // 比赛时信息
   race = {
     acceleration: 0,
-    conditionParams: new PreConditionParams(),
+    conditionParams: new ConditionParams(),
+    greenSkills: 0,
     location: 0,
-    locationPlanRush: 0,
+    locationPlanRush: undefined,
     phase: 0,
     preConditionParams: new PreConditionParams(),
     stamina: 0,
@@ -134,21 +138,28 @@ class PseudoUma {
   };
   // 各种状态
   flag = {
-    // 超车
-    overtake: false,
-    // 完赛
-    finished: false,
-    // 下坡
-    downhill: false,
+    // 允许焦躁
+    allowTemptation: false,
     // 允许计算冲刺计划
     allowPlan: false,
+    // 下坡
+    downhill: false,
     // 最终冲刺
     finalRush: false,
+    // 完赛
+    finished: false,
+    // 触发恢复技能
+    heal: false,
+    // 超车
+    overtake: false,
+    // 焦躁
+    temptation: false,
   };
   // 各种概率
   probs = {
-    skill: 0,
     planRush: 0,
+    skill: 0,
+    temptation: 0,
   };
   // 阶段决定的系数
   factorPhase = {
@@ -177,6 +188,7 @@ class PseudoUma {
   /**
    * @param {number} index_chara 角色编号
    * @param {string} name 名字
+   * @param {string} color 颜色
    * @param {number} motivation 干劲
    * @param {number[]} attrs 五维
    * @param {number} style 本次使用的跑法
@@ -188,6 +200,7 @@ class PseudoUma {
   constructor(
     index_chara,
     name,
+    color,
     motivation,
     attrs,
     style,
@@ -198,6 +211,7 @@ class PseudoUma {
   ) {
     this.index_chara = index_chara;
     this.name = name;
+    this.color = color;
     this.motivation = motivation;
     this.attrs = attrs;
     this.style = style;
@@ -205,7 +219,6 @@ class PseudoUma {
     this.adapt_distance_list = adapt_distance_list;
     this.adapt_ground_list = adapt_ground_list;
     this.list_skill = skills.map((item) => new RaceSkill(item));
-
     this.attr_buffs = attr_names.map(() => []);
     this.ground_buffs = [];
     this.dis_buffs = [];

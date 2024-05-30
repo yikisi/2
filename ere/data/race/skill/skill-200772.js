@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.phase === 1 &&
       args.order_rate <= 50 &&
       args.temptation_opponent_count_behind >= 1,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

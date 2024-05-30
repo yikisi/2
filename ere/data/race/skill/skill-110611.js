@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.temptation_count === 0,
     () => true,
   ],
-  [(args) => args.is_last_straight === 1, () => true],
+  [(args) => args.is_last_straight === 1, () => false],
   [4, 0],
   [500, 0],
   [

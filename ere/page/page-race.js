@@ -30,6 +30,7 @@ const select_contestants = require('#/page/race/select-contestants');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry, sort_list } = require('#/utils/list-utils');
@@ -291,7 +292,10 @@ async function race_page(race) {
         info.ground
       ].substring(0, 1)} ${info.span}m (${adaptability_names[
         info.distance + 2
-      ].substring(0, 1)}) ${RaceInfo.rotation_names[info.rotation]} · 晴 ${
+      ].substring(
+        0,
+        1,
+      )}) ${RaceInfo.rotation_names[info.rotation]} · ${RaceInfo.weather_names[info.weather]} ${
         info.gates
       }人`,
       type: 'text',
@@ -449,7 +453,7 @@ async function race_page(race) {
         columns: [
           {
             accelerator: ((uma_index + 1) % contestants.length) + 1,
-            config: { align: 'center' },
+            config: { align: 'center', disableWarning: true },
             content: `下一位\n${contestants[(uma_index + 1) % contestants.length].name}`,
             type: 'button',
           },
@@ -614,6 +618,12 @@ async function race_page(race) {
         event_hooks.race_start,
         new RaceStartParams(race),
       );
+      team_list.find((e) => e.index_chara === ret).motivation = era.get(
+        `cflag:${ret}:干劲`,
+      );
+      team_list.find(
+        (e) => e.index_chara === ret,
+      ).race.conditionParams.motivation = era.get(`cflag:${ret}:干劲`) + 3;
       start_count--;
       race_start[ret] = true;
       sys_change_attr_and_print(0, '精力', -time_cost);
@@ -667,7 +677,8 @@ async function race_page(race) {
       );
     } else {
       get_attr_and_print_in_event(id, undefined, 10);
-      // TODO 伏兵+1 随机负面技能
+      get_skills_and_print_in_event(id, [200302]) &&
+        get_skills_and_print_in_event(id, [200301]);
     }
     era.println();
     const edu_weeks = era.get(`cflag:${id}:育成回合计时`);

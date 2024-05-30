@@ -9,7 +9,7 @@ module.exports = new UmaSkill(
   18,
   340,
   [() => true, () => true],
-  [(args) => args.is_lastspurt === 1 && args.phase === 3, () => true],
+  [(args) => args.is_lastspurt === 1 && args.phase === 3, () => false],
   [5, 0],
   [500, 0],
   [

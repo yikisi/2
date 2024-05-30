@@ -11,7 +11,7 @@ module.exports = new UmaSkill(
   [() => true, () => true],
   [
     (args) => args.phase >= 2 && args.order >= 3 && args.blocked_front === 1,
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

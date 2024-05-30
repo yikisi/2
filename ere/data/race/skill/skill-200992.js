@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.phase_laterhalf_random === 1 &&
       args.order >= 2 &&
       args.order_rate <= 50,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [500, 0],

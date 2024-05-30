@@ -310,7 +310,7 @@ module.exports = (handlers) => {
     await print_event_name('前进、前进……', urara);
     extra_flag.attr_change = new Array(5).fill(3);
     extra_flag.pt_change = 45;
-    // TODO 准备进攻+1
+    extra_flag.skill_change = [201002];
     if (extra_flag.rank === 1) {
       await urara.print_and_wait(
         '刚刚从身边过去的，应该是终点板没错吧……乌拉拉，赢了吗？',

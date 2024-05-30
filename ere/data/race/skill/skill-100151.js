@@ -17,7 +17,7 @@ module.exports = new UmaSkill(
       (args.is_finalcorner === 1 &&
         args.bashin_diff_infront <= 1 &&
         args.order <= 4),
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.change_order_onetime < 0,
     () => true,
   ],
-  [(args) => args.remain_distance <= 150 && args.order_rate <= 50, () => true],
+  [(args) => args.remain_distance <= 150 && args.order_rate <= 50, () => false],
   [4, 0],
   [500, 0],
   [

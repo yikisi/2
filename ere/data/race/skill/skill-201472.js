@@ -13,7 +13,7 @@ module.exports = new UmaSkill(
     (args) =>
       (args.running_style === 4 && args.is_move_lane === 1) ||
       (args.running_style === 4 && args.is_move_lane === 2),
-    () => true,
+    () => false,
   ],
   [3, 0],
   [500, 0],

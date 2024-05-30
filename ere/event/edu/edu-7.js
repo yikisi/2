@@ -17,6 +17,7 @@ const print_ero_page = require('#/page/page-ero');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -458,12 +459,10 @@ handlers[event_hooks.school_atrium] = async (
     era.println();
 
     if (ret === 1) {
-      // TODO 技能「天赋异禀（切れ者）」
-      get_attr_and_print_in_event(7, [0, 10, 0, 0, 10], 0) &&
+      get_attr_and_print_in_event(7, [0, 10, 0, 0, 10], 50) &&
         (await era.waitAnyKey());
     } else {
-      // TODO 技能「天赋异禀（切れ者）」
-      get_attr_and_print_in_event(7, [20, 0, 0, 0, 0], 0) &&
+      get_attr_and_print_in_event(7, [20, 0, 0, 0, 0], 50) &&
         (await era.waitAnyKey());
     }
   }
@@ -639,9 +638,9 @@ handlers[event_hooks.school_rooftop] = async (
         await era.printAndWait('但午休还是在不知不觉间过去了！');
         era.println();
 
+        get_skills_and_print_in_event(7, [200142]) && (await era.waitAnyKey());
         get_attr_and_print_in_event(7, undefined, 60) &&
           (await era.waitAnyKey());
-        // TODO 获得技能「非根干距离〇」
       } else {
         await era.printAndWait(
           `${gold_ship.name} 使出了浑身解数，但还是没赢过 ${festa.name}……`,

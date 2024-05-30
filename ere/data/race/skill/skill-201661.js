@@ -11,7 +11,7 @@ module.exports = new UmaSkill(
   [() => true, () => true],
   [
     (args) => args.behind_near_lane_time >= 3 && args.accumulatetime >= 10,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [30, 0],

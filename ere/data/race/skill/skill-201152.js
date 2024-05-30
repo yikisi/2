@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.distance_type === 3 &&
       args.phase_random === 2 &&
       args.order_rate > 50,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [500, 0],

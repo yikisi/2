@@ -12,7 +12,7 @@ module.exports = new UmaSkill(
     (args) => args.distance_rate >= 50 && args.order_rate_out40_continue === 1,
     () => true,
   ],
-  [(args) => args.compete_fight_count > 0, () => true],
+  [(args) => args.compete_fight_count > 0, () => false],
   [5, 0],
   [500, 0],
   [

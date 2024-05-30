@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.order >= 2 &&
       args.order_rate <= 40 &&
       args.blocked_side_continuetime >= 2,
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

@@ -498,11 +498,10 @@ module.exports = (handlers) => {
       '只是对您与乌拉拉，甚至是也对那个人和我来说，在进入特雷森时，骰子便早已掷下了。',
     );
     era.println();
-    // TODO 技能「切者」
     flags.wait_flag = get_attr_and_print_in_event(
       52,
       new Array(5).fill(5),
-      30,
+      100,
       undefined,
       true,
     );

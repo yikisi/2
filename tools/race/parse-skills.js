@@ -165,11 +165,21 @@ function fill_dict(condition, dict, s) {
   }
 }
 
-function parse_condition(condition) {
+/**
+ * @param {string} condition
+ * @param {boolean} [is_pre]
+ * @returns {string}
+ */
+function parse_condition(condition, is_pre) {
   if (condition && condition !== '0') {
-    return `(args)=>(args.${condition.replace(/&/g, '&&args.').replace(/@/g, ')||(args.').replace(/==/g, '===').replace(/!=/g, '!==')})`;
+    return `(args)=>(args.${condition
+      .replace(/&/g, '&&args.')
+      .replace(/@/g, ')||(args.')
+      .replace(/random_lot==/g, 'random_lot<=')
+      .replace(/==/g, '===')
+      .replace(/!=/g, '!==')})`;
   } else {
-    return '()=>true';
+    return `()=>${is_pre === true}`;
   }
 }
 
@@ -195,7 +205,8 @@ async function chara_skill() {
   const skill_dict = {};
   Object.values(dict).forEach((e) => e.forEach((s) => (skill_dict[s] = 1)));
   console.log('角色卡技能', Object.keys(skill_dict).length);
-  let buffer = 'const chara_skill_dict={},skills_dict = {};\n\n';
+  let buffer = 'const chara_skill_dict={},skills_dict = {};\n\n',
+    buffer_common_skills = 'const common_skills = [';
   for (const chara_id in dict) {
     buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].sort().join(',')}];`;
   }
@@ -211,7 +222,10 @@ async function chara_skill() {
     await prisma.text_data.findMany({
       where: { text: { in: require('./common-skills') }, category: 47 },
     })
-  ).forEach((e) => (skill_dict[e.index] = 1));
+  ).forEach((e) => {
+    buffer_common_skills += `${e.index},`;
+    skill_dict[e.index] = 1;
+  });
   console.log('+通用技能', Object.keys(skill_dict).length);
   const skill_data = await find_many_skills({
     id: { in: Object.keys(skill_dict).map(Number) },
@@ -254,7 +268,7 @@ async function chara_skill() {
     sbuffer += `${e.rarity},`;
     sbuffer += `${icon2skill_color[e.icon_id]},`;
     sbuffer += `${e.grade_value},`;
-    sbuffer += `[${parse_condition(e.precondition_1)},${parse_condition(e.precondition_2)}],`;
+    sbuffer += `[${parse_condition(e.precondition_1, true)},${parse_condition(e.precondition_2, true)}],`;
     sbuffer += `[${parse_condition(e.condition_1)},${parse_condition(e.condition_2)}],`;
     sbuffer += `[${e.float_ability_time_1 / 10000},${e.float_ability_time_2 / 10000}],`;
     sbuffer += `[${e.float_cooldown_time_1 / 10000},${e.float_cooldown_time_2 / 10000}],`;
@@ -274,7 +288,7 @@ async function chara_skill() {
   });
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
-    `${buffer}\n\nmodule.exports = {chara_skill_dict,skills_dict};`,
+    `${buffer}\n\n${buffer_common_skills}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict};`,
   );
   buffer = 'class PreConditionParams { ';
   Object.keys(pre_dict)

@@ -17,7 +17,7 @@ module.exports = new UmaSkill(
       args.overtake_target_no_order_up_time >= 2,
     () => true,
   ],
-  [(args) => args.is_last_straight === 1, () => true],
+  [(args) => args.is_last_straight === 1, () => false],
   [5, 0],
   [500, 0],
   [

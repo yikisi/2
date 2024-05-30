@@ -17,7 +17,7 @@ module.exports = new UmaSkill(
       args.is_finalcorner === 1 &&
       args.corner !== 0 &&
       args.order_rate >= 40,
-    () => true,
+    () => false,
   ],
   [0.9, 0],
   [500, 0],

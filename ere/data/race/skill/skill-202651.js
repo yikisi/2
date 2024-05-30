@@ -17,7 +17,7 @@ module.exports = new UmaSkill(
       (args.base_speed >= 1000 &&
         args.base_power >= 1000 &&
         args.distance_type === 3),
-    () => true,
+    () => false,
   ],
   [-0.0001, 0],
   [0, 0],

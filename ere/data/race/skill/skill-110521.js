@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.is_finalcorner === 1 &&
       args.corner !== 0 &&
       args.distance_diff_top >= 7,
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

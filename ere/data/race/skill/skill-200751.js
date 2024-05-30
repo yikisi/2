@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.is_finalcorner === 1 &&
       args.corner !== 0 &&
       args.lane_type === 0,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [500, 0],

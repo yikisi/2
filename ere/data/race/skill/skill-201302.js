@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.phase_random === 0 &&
       args.order >= 2 &&
       args.accumulatetime >= 5,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [500, 0],

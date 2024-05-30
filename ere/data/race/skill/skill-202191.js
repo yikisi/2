@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.running_style === 2 &&
       args.distance_type === 4 &&
       args.phase_firsthalf_random === 1,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

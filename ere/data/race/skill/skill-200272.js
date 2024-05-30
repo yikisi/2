@@ -9,7 +9,7 @@ module.exports = new UmaSkill(
   0,
   129,
   [() => true, () => true],
-  [(args) => args.running_style_count_same <= 1, () => true],
+  [(args) => args.running_style_count_same <= 1, () => false],
   [-0.0001, 0],
   [0, 0],
   [

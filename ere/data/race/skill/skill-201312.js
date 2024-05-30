@@ -11,7 +11,7 @@ module.exports = new UmaSkill(
   [() => true, () => true],
   [
     (args) => args.running_style === 2 && args.straight_random === 1,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [500, 0],

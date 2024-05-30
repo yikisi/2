@@ -11,7 +11,7 @@ module.exports = new UmaSkill(
   [() => true, () => true],
   [
     (args) => args.last_straight_random === 1 && args.distance_diff_rate >= 75,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [30, 0],

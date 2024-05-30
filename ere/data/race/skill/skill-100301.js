@@ -13,7 +13,7 @@ module.exports = new UmaSkill(
       args.phase >= 2 && args.order <= 4 && args.change_order_onetime < 0,
     () => true,
   ],
-  [(args) => args.is_last_straight === 1, () => true],
+  [(args) => args.is_last_straight === 1, () => false],
   [5, 0],
   [500, 0],
   [

@@ -17,7 +17,7 @@ module.exports = new UmaSkill(
       (args.distance_type === 3 &&
         args.phase === 1 &&
         args.change_order_onetime < 0),
-    () => true,
+    () => false,
   ],
   [1.8, 0],
   [30, 0],

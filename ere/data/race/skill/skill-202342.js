@@ -13,7 +13,7 @@ module.exports = new UmaSkill(
     (args) =>
       (args.ground_type === 2 && args.ground_condition === 3) ||
       (args.ground_type === 2 && args.ground_condition === 4),
-    () => true,
+    () => false,
   ],
   [-0.0001, 0],
   [0, 0],

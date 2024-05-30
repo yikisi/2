@@ -1,4 +1,4 @@
-﻿/** @type {{id:number,name:string,attrs:number[][],adapt_style:number[][],adapt_distance:number[][],adapt_ground:number[][],skills:[][]}[]} */
+﻿/** @type {{id:number,name:string,attrs:number[][],adapt_style:number[][],adapt_distance:number[][],adapt_ground:number[][],skills:number[][]}[]} */
 module.exports = [
   {
     id: 1,

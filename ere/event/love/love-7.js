@@ -7,6 +7,7 @@ const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-lo
 const { add_event, cb_enum } = require('#/event/queue');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -494,7 +495,7 @@ async function golden_ship_attack() {
     ],
     0,
   );
-  // TODO 获得【独占力】技能
+  get_skills_and_print_in_event(7, [201151]);
   sys_change_motivation(7, ret[4] === 3 ? 3 : -3);
   if (ret[3] === 1) {
     era.set('talent:7:喜欢责骂', 1);

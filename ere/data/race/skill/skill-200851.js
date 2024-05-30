@@ -12,7 +12,7 @@ module.exports = new UmaSkill(
   [
     (args) =>
       args.running_style_count_nige_otherself >= 1 && args.phase_random === 2,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [500, 0],

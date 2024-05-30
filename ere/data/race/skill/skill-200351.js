@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.corner_random === 2 ||
       args.corner_random === 3 ||
       args.corner_random === 4,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

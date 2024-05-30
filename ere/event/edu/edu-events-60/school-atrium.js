@@ -6,6 +6,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const event_hooks = require('#/data/event/event-hooks');
@@ -104,9 +105,9 @@ module.exports = async (hook, extra_flag, event_object) => {
     await era.input();
     await chara_talk.say_and_wait('啊哈哈哈哈！');
     era.println();
+    get_skills_and_print_in_event(60, [200512]);
     get_attr_and_print_in_event(60, [20, 20, 0, 0, 0], 0);
     await era.waitAnyKey();
-    // TODO 末脚+2
   } else if (event_arg === 47 + 42) {
     await print_event_name('王座的背后', chara_talk);
 

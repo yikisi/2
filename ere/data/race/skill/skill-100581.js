@@ -9,7 +9,7 @@ module.exports = new UmaSkill(
   18,
   340,
   [() => true, () => true],
-  [(args) => args.phase >= 2 && args.change_order_onetime < 0, () => true],
+  [(args) => args.phase >= 2 && args.change_order_onetime < 0, () => false],
   [5, 0],
   [500, 0],
   [

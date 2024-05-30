@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.ground_type === 2 &&
       args.phase === 1 &&
       args.blocked_side_continuetime >= 2,
-    () => true,
+    () => false,
   ],
   [2.4, 0],
   [500, 0],

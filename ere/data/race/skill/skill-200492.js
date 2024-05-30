@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.infront_near_lane_time >= 1 &&
       args.is_lastspurt === 1 &&
       args.hp_per >= 1,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [30, 0],

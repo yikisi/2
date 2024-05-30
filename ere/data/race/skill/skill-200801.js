@@ -13,7 +13,7 @@ module.exports = new UmaSkill(
     (args) =>
       args.running_style_temptation_opponent_count_senko >= 1 &&
       args.is_temptation === 0,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

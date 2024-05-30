@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.running_style === 2 &&
       args.phase_random === 1 &&
       args.order_rate > 40,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [500, 0],

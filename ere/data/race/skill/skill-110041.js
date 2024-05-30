@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.distance_rate >= 50 &&
       args.activate_count_heal >= 1 &&
       args.order <= 3,
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

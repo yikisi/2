@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.is_last_straight === 1 &&
       args.change_order_onetime < 0 &&
       args.order >= 3,
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

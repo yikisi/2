@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.running_style === 4 &&
       args.infront_near_lane_time >= 1 &&
       args.accumulatetime >= 10,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

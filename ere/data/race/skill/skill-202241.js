@@ -17,7 +17,7 @@ module.exports = new UmaSkill(
       args.track_id === 10010 ||
       args.track_id === 10103 ||
       args.track_id === 10104,
-    () => true,
+    () => false,
   ],
   [-0.0001, 0],
   [0, 0],

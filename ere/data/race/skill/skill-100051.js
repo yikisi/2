@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.behind_near_lane_time_set1 >= 1,
     () => true,
   ],
-  [(args) => args.remain_distance <= 300, () => true],
+  [(args) => args.remain_distance <= 300, () => false],
   [5, 0],
   [500, 0],
   [

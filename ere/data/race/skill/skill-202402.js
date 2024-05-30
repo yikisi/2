@@ -19,7 +19,7 @@ module.exports = new UmaSkill(
         args.phase >= 2 &&
         args.order_rate >= 50 &&
         args.is_overtake === 1),
-    () => true,
+    () => false,
   ],
   [2, 0],
   [500, 0],

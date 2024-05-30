@@ -18,7 +18,7 @@ module.exports = new UmaSkill(
       args.remain_distance >= 649 &&
       args.order_rate <= 40 &&
       args.order_rate >= 30,
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

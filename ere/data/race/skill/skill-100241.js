@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.is_finalcorner === 1 &&
       args.blocked_side_continuetime >= 2 &&
       args.order <= 3,
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

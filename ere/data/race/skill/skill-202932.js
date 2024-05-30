@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.running_style === 4 &&
       args.distance_rate >= 50 &&
       args.is_overtake === 1,
-    () => true,
+    () => false,
   ],
   [2.4, 0],
   [500, 0],

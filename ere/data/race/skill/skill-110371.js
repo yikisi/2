@@ -13,7 +13,7 @@ module.exports = new UmaSkill(
     (args) =>
       args.change_order_up_finalcorner_after >= 2 &&
       args.is_last_straight === 1,
-    () => true,
+    () => false,
   ],
   [6, 0],
   [500, 0],

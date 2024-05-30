@@ -9,7 +9,7 @@ module.exports = new UmaSkill(
   2,
   129,
   [() => true, () => true],
-  [(args) => args.phase_random === 2, () => true],
+  [(args) => args.phase_random === 2, () => false],
   [3, 0],
   [500, 0],
   [

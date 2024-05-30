@@ -16,7 +16,7 @@ module.exports = new UmaSkill(
       args.distance_diff_top <= 5 &&
       args.distance_rate >= 60 &&
       args.phase === 1,
-    () => true,
+    () => false,
   ],
   [4, 0],
   [500, 0],

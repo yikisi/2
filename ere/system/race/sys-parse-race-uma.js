@@ -3,6 +3,7 @@
 const { gacha, get_random_entry, sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const legends_default = require('#/data/race/legends-default.js');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceInfo = require('#/data/race/model/race-info');
@@ -79,6 +80,7 @@ function sys_parse_for_race(team_chara, race, info) {
         new PseudoUma(
           uma.id,
           uma.name,
+          get_chara_color(uma.id),
           get_random_value(0, 2),
           uma.attrs,
           random_style(uma.adapt_style),
@@ -95,6 +97,7 @@ function sys_parse_for_race(team_chara, race, info) {
         new PseudoUma(
           uma.id,
           uma.name,
+          get_chara_color(uma.id),
           get_random_value(0, 2),
           uma.attrs[phantom_age],
           random_style(uma.adapt_style[phantom_age]),
@@ -125,6 +128,7 @@ function sys_parse_for_race(team_chara, race, info) {
       new PseudoUma(
         uma.id,
         uma.name,
+        get_chara_color(uma.id),
         get_random_value(-2, 2),
         uma.attrs[phantom_age],
         random_style(uma.adapt_style[phantom_age]),
@@ -158,13 +162,77 @@ function sys_parse_for_race(team_chara, race, info) {
           (uma.attrs = uma.attrs.map((e) => (e * (100 + from_setting)) / 100)),
       );
   }
-  ret.forEach((uma) => (uma.attrs = uma.attrs.map(Math.ceil)));
+
+  let season;
+  switch (era.get('flag:当前月')) {
+    case 3:
+    case 4:
+    case 5:
+      season = 1;
+      break;
+    case 6:
+    case 7:
+    case 8:
+      season = 2;
+      break;
+    case 9:
+    case 10:
+    case 11:
+      season = 3;
+      break;
+    case 12:
+    case 1:
+    case 2:
+      season = 4;
+      break;
+  }
+  const running_style_counts = [0, 0, 0, 0];
+  ret.forEach((uma) => running_style_counts[uma.style]++);
 
   ret.forEach((uma) => {
-    uma.list_skill = sort_list(uma.list_skill, (e) => e.data.id).filter(
+    uma.attrs = uma.attrs.map(Math.ceil);
+    uma.list_skill = sort_list(uma.list_skill, (e) => e.data.id, true).filter(
       (v, i, a) =>
         i === a.findIndex((x) => x.data.group_id === v.data.group_id),
     );
+    const motivation_coefficient = 1 + uma.motivation * 0.02;
+    uma.race.preConditionParams.ground_type =
+      uma.race.conditionParams.ground_type = info.ground + 1;
+    uma.race.preConditionParams.track_id = uma.race.conditionParams.track_id =
+      info.track;
+    uma.race.conditionParams.always = 1;
+    uma.race.conditionParams.base_speed =
+      uma.attrs[attr_enum.speed] * motivation_coefficient;
+    uma.race.conditionParams.base_stamina =
+      uma.attrs[attr_enum.endurance] * motivation_coefficient;
+    uma.race.conditionParams.base_power =
+      uma.attrs[attr_enum.strength] * motivation_coefficient;
+    uma.race.conditionParams.base_wiz =
+      uma.attrs[attr_enum.intelligence] * motivation_coefficient;
+    uma.race.conditionParams.grade =
+      (info.race_class === RaceInfo.class_enum.G1) * 100;
+    uma.race.conditionParams.ground_condition = info.mess + 1;
+    uma.race.conditionParams.is_basis_distance = info.span400;
+    uma.race.conditionParams.is_exist_chara_id = 1000 + uma.index_chara;
+    uma.race.conditionParams.motivation = uma.motivation + 3;
+    uma.race.conditionParams.rotation = info.rotation + 1;
+    uma.race.conditionParams.running_style = uma.style;
+    uma.race.conditionParams.running_style_count_nige_otherself =
+      running_style_counts[0] - (uma.style === 0);
+    uma.race.conditionParams.running_style_count_senko_otherself =
+      running_style_counts[1] - (uma.style === 1);
+    uma.race.conditionParams.running_style_count_sashi_otherself =
+      running_style_counts[2] - (uma.style === 2);
+    uma.race.conditionParams.running_style_count_oikomi_otherself =
+      running_style_counts[3] - (uma.style === 3);
+    uma.race.conditionParams.running_style_count_same =
+      running_style_counts[uma.style];
+    uma.race.conditionParams.running_style_count_same_rate =
+      (uma.race.conditionParams.running_style_count_same * 100) / ret.length;
+    uma.race.conditionParams.season = season;
+    uma.race.conditionParams.time = 4 * (Math.random() < 0.5);
+    uma.race.conditionParams.weather = info.weather + 1;
+    uma.race.conditionParams.random_lot = get_random_value(0, 99);
   });
 
   ret = sort_list(ret, Math.random);
@@ -194,6 +262,7 @@ function sys_parse_for_race(team_chara, race, info) {
       ) + 0.0000000001;
   ret.forEach((uma, i) => {
     uma.index_race = i;
+    uma.race.conditionParams.post_number = i + 1;
     uma.adapts.ground = uma.adapt_ground_list[info.ground];
     uma.adapts.distance = uma.adapt_distance_list[info.distance];
     const cof_dis = mod_acceleration_adapt_ground[uma.adapts.distance],
@@ -213,9 +282,19 @@ function sys_parse_for_race(team_chara, race, info) {
       uma.attrs[attr_enum.strength],
     ];
     uma.list_skill
-      // TODO .filter((skill) => true)
+      .filter(
+        (skill) =>
+          (skill.data.ability_times[0] >= 0 &&
+            skill.data.ability_times[1] >= 0) ||
+          (skill.data.ability_times[0] <= 0 &&
+            skill.data.preconditions[0](uma.race.preConditionParams) &&
+            skill.data.conditions[0](uma.race.conditionParams)) ||
+          (skill.data.ability_times[1] <= 0 &&
+            skill.data.preconditions[1](uma.race.preConditionParams) &&
+            skill.data.conditions[1](uma.race.conditionParams)),
+      )
       .forEach((skill) => {
-        for (let i = 0; i < skill.data.pop_types; ++i) {
+        for (let i = 0; i < skill.data.pop_types.length; ++i) {
           if (skill.data.pop_types[i]) {
             if (skill.data.is_random) {
               uma.tempPop[skill.data.pop_types[i] - 1] +=
@@ -284,8 +363,12 @@ function sys_parse_for_race(team_chara, race, info) {
       }
     });
   });
-  sort_list(ret, (uma) => uma.pop[0]).forEach((uma, rank) => {
+  sort_list(ret, (uma) => uma.pop[0]).forEach((uma, rank, list) => {
     uma.pop[0] = rank + 1;
+    uma.race.conditionParams.popularity = rank + 1;
+    uma.race.conditionParams.running_style_equal_popularity_one = Number(
+      uma.style === list[0].style,
+    );
     delete uma.tempPop;
   });
   return ret;

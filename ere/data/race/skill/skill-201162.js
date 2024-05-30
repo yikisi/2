@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.distance_type === 3 &&
       args.phase === 1 &&
       args.blocked_front_continuetime >= 1,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.ground_type === 2 &&
       args.distance_rate >= 50 &&
       args.is_other_character_activate_advantage_skill === 9,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [500, 0],

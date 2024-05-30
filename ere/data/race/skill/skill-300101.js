@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.is_exist_chara_id === 1002 &&
       args.remain_distance_viewer_id >= 800 &&
       args.remain_distance_viewer_id <= 850,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

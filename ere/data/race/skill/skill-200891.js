@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.running_style_count_sashi_otherself >= 1 &&
       args.phase_random === 0 &&
       args.accumulatetime >= 5,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

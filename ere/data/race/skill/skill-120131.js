@@ -9,7 +9,7 @@ module.exports = new UmaSkill(
   18,
   340,
   [() => true, () => true],
-  [(args) => args.distance_rate >= 50 && args.order_rate <= 40, () => true],
+  [(args) => args.distance_rate >= 50 && args.order_rate <= 40, () => false],
   [5, 0],
   [500, 0],
   [

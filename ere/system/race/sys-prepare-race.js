@@ -1,6 +1,7 @@
 ﻿const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
+const { ability_type_enum } = require('#/data/race/model/uma-skill');
 const {
   mod_acceleration_adapt_distance,
   mod_acceleration_adapt_ground,
@@ -17,8 +18,27 @@ const { attr_enum } = require('#/data/train-const');
  * @param {RaceInfo} race_info
  */
 function sys_prepare_race(list_chara, race_info) {
-  // Shuffle一下角色列表
+  const pop_1 = list_chara.find((e) => e.pop[0] === 1);
+  const running_style_counts = [0, 0, 0, 0];
+  list_chara.forEach((uma) => running_style_counts[uma.style]++);
   for (const uma of list_chara) {
+    uma.race.conditionParams.running_style = uma.style;
+    uma.race.conditionParams.running_style_count_nige_otherself =
+      running_style_counts[0] - (uma.style === 0);
+    uma.race.conditionParams.running_style_count_senko_otherself =
+      running_style_counts[1] - (uma.style === 1);
+    uma.race.conditionParams.running_style_count_sashi_otherself =
+      running_style_counts[2] - (uma.style === 2);
+    uma.race.conditionParams.running_style_count_oikomi_otherself =
+      running_style_counts[3] - (uma.style === 3);
+    uma.race.conditionParams.running_style_count_same =
+      running_style_counts[uma.style];
+    uma.race.conditionParams.running_style_count_same_rate =
+      (uma.race.conditionParams.running_style_count_same * 100) /
+      list_chara.length;
+    uma.race.conditionParams.running_style_equal_popularity_one = Number(
+      uma.style === pop_1.style,
+    );
     // 分配赛道 及初始名次以避免意外
     uma.rank = {
       curr: uma.index_race,
@@ -27,45 +47,22 @@ function sys_prepare_race(list_chara, race_info) {
 
     uma.adapts.style = uma.adapt_style_list[uma.style];
 
-    // 先从临时技能表中筛除所有不相关技能
-    uma.list_skill = uma.list_skill.filter(
-      (itemSkill) =>
-        !(
-          // 跟比赛无关的技能
-          (
-            !itemSkill.skilldata.typeRace ||
-            // 有方向限制且不符
-            (itemSkill.skilldata.typeRotation !== undefined &&
-              itemSkill.skilldata.typeRotation !== race_info.rotation) ||
-            // 有赛程限制且不符
-            (itemSkill.skilldata.typeDistance !== undefined &&
-              itemSkill.skilldata.typeDistance !== race_info.distance) ||
-            // 有地面限制且不符
-            (itemSkill.skilldata.typeGround !== undefined &&
-              itemSkill.skilldata.typeGround !== race_info.ground) ||
-            // 有跑法限制且不符
-            (itemSkill.skilldata.typeStyle !== undefined &&
-              itemSkill.skilldata.typeStyle !== uma.style) ||
-            // 有赛马场限制且不符
-            (itemSkill.skilldata.typeTrack !== undefined &&
-              itemSkill.skilldata.typeTrack !== race_info.track) ||
-            // 有根干距离限制且不符
-            (itemSkill.skilldata.typeSpan400 !== undefined &&
-              itemSkill.skilldata.typeSpan400 !== race_info.span400) ||
-            // 有良马场限制且不符
-            (itemSkill.skilldata.typeMess === false &&
-              race_info.mess !== RaceInfo.mess_enum.well) ||
-            // 有不良马场限制且不符
-            (itemSkill.skilldata.typeMess === true &&
-              race_info.mess === RaceInfo.mess_enum.well)
-          )
-        ),
-    );
-
     // 计算心情对面板的增幅
     Object.values(attr_enum).forEach((v) => {
       uma.attrs[v] *= 1 + uma.motivation * 0.02;
     });
+
+    // 由基础智力决定技能触发率 最低20%
+    uma.probs.skill = Math.max(1 - 90 / uma.attrs[attr_enum.intelligence], 0.2);
+
+    //计算比赛偏重属性对速度属性的增幅
+    uma.attrs[attr_enum.speed] *=
+      1 +
+      race_info.attr_bonus.reduce(
+        (p, c) => p + Math.min(0.05 * Math.ceil(uma.attrs[c] / 300), 0.2),
+        0,
+      ) /
+        race_info.attr_bonus.length;
 
     //不良马场对速度属性的减幅
     if (race_info.mess === RaceInfo.mess_enum.bad) {
@@ -87,39 +84,71 @@ function sys_prepare_race(list_chara, race_info) {
     uma.attrs[attr_enum.intelligence] *=
       mod_attr_intelligence_adapt_style[uma.adapts.style];
 
-    //计算比赛偏重属性对速度属性的增幅
-    uma.attrs[attr_enum.speed] *= race_info.attr_bonus.reduce(
-      (p, c) => p + 0.025 * Math.floor(uma.attrs[c] / 300),
-      1,
-    );
-
-    //计算整个比赛生效的被动属性加成技能
-    //筛除结算完毕的常时被动 只留触发技能给比赛模拟
-    uma.list_skill = uma.list_skill.filter((itemSkill) => {
-      if (!itemSkill.skilldata.typeTrigger) {
-        //被动技能直接结算
-        Object.values(attr_enum).forEach(
-          (v) => (uma.attrs[v] += itemSkill.skilldata.attrBonus[v]),
-        );
-      } else {
-        //触发类技能则计算一下持续时间
-        //无持续时间的回复类就只给一次（=一秒）
-        itemSkill.triggerTimeMax = (itemSkill.duration * race_info.span) / 1000;
-        itemSkill.triggerTimeMax =
-          itemSkill.triggerTimeMax > 1 ? itemSkill.triggerTimeMax : 1;
+    let temptation_prob = 0;
+    // 计算整个比赛生效的被动属性加成技能
+    // 筛除结算完毕的常时被动 只留触发技能给比赛模拟
+    uma.list_skill = uma.list_skill.filter((skill) => {
+      if (skill.data.ability_times[0] >= 0) {
+        // TODO 测试用，所有主动技能进比赛，测完后记得去掉这条
+        // return skill.data.is_random === 0 || Math.random() < uma.probs.skill;
+        return true;
       }
-      return itemSkill.skilldata.typeTrigger;
+      for (let i = 0; i < skill.data.ability_times.length; ++i) {
+        if (
+          skill.data.preconditions[i](uma.race.preConditionParams) &&
+          skill.data.conditions[i](uma.race.conditionParams)
+        ) {
+          for (let j = 0; j < skill.data.ability_types.length; ++j) {
+            switch (skill.data.ability_types[j]) {
+              case ability_type_enum.Speed:
+                uma.attrs[attr_enum.speed] += skill.data.ability_values[i][j];
+                break;
+              case ability_type_enum.Stamina:
+                uma.attrs[attr_enum.endurance] +=
+                  skill.data.ability_values[i][j];
+                break;
+              case ability_type_enum.Power:
+                uma.attrs[attr_enum.strength] +=
+                  skill.data.ability_values[i][j];
+                break;
+              case ability_type_enum.Guts:
+                uma.attrs[attr_enum.toughness] +=
+                  skill.data.ability_values[i][j];
+                break;
+              case ability_type_enum.Wiz:
+                uma.attrs[attr_enum.intelligence] +=
+                  skill.data.ability_values[i][j];
+                break;
+              case ability_type_enum.RunningStyleExOonige:
+                uma.race.conditionParams.is_used_skill_id = 202051;
+                break;
+              case ability_type_enum.TemptationPer:
+                temptation_prob += skill.data.ability_values[i][j];
+              // case ability_type_enum.VisibleDistance:
+            }
+          }
+          break;
+        }
+      }
     });
 
+    // 焦躁计算
+    temptation_prob += Math.pow(
+      (6.5 * Math.log(10)) /
+        Math.log(0.1 * uma.attrs[attr_enum.intelligence] + 1),
+      2,
+    );
+    if (100 * Math.random() < temptation_prob) {
+      uma.flag.allowTemptation = true;
+    }
     uma.attrs = uma.attrs.map((e) => Math.max(e, 1));
 
     //调取当前跑法在赛中各阶段的目标速度及加速度倍率
-    // TODO PseudoUma.style变成enum
     uma.factorPhase.vStyle = mod_velocity_style[uma.style];
     uma.factorPhase.aStyle = mod_acceleration_style[uma.style];
 
     //由赛道长度决定普通状态下的目标速度
-    uma.base.velocityIdeal = 22 - 0.001 * race_info.span;
+    uma.base.velocityIdeal = 22 - race_info.span / 1000;
 
     //由复合因素决定终盘阶段的目标速度增加量
     uma.factorFinal.vIdealAdd =
@@ -160,20 +189,15 @@ function sys_prepare_race(list_chara, race_info) {
       mod_acceleration_adapt_distance[uma.adapts.distance];
 
     //由耐力属性以及400隐藏基础耐力决定耐力条 顺便填满
-    uma.base.stamina =
+    uma.race.stamina = uma.base.stamina =
       0.8 *
         (uma.attrs[attr_enum.endurance] + 400) *
         mod_attr_stamina_style[uma.style] +
       race_info.span;
-    uma.race.stamina = uma.base.stamina;
 
     //由根性属性决定终盘后耐力消耗系数
     uma.factorFinal.sCostMult =
       1 + 200 / Math.sqrt(600 * uma.attrs[attr_enum.toughness]);
-
-    //由智力决定技能触发率 最低20%
-    uma.probs.skill = 1 - 90 / uma.attrs[attr_enum.intelligence];
-    uma.probs.skill = uma.probs.skill < 0.2 ? 0.2 : uma.probs.skill;
 
     //由力量决定受上坡减速的影响程度 最大100%
     uma.factorSlope.up = Math.min(200 / uma.attrs[attr_enum.strength], 1);

@@ -12,7 +12,7 @@ module.exports = new UmaSkill(
     (args) => args.is_finalcorner === 1 && args.blocked_side_continuetime >= 2,
     () => true,
   ],
-  [(args) => args.is_last_straight === 1 && args.order <= 5, () => true],
+  [(args) => args.is_last_straight === 1 && args.order <= 5, () => false],
   [5, 0],
   [500, 0],
   [

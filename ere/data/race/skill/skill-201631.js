@@ -9,7 +9,7 @@ module.exports = new UmaSkill(
   0,
   129,
   [() => true, () => true],
-  [(args) => args.same_skill_horse_count >= 5, () => true],
+  [(args) => args.same_skill_horse_count >= 5, () => false],
   [-0.0001, 0],
   [0, 0],
   [

@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.order_rate >= 40 &&
       args.order_rate <= 75 &&
       args.is_overtake === 1,
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

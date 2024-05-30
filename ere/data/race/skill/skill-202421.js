@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.running_style === 3 &&
       args.is_lastspurt === 1 &&
       args.order_rate >= 40,
-    () => true,
+    () => false,
   ],
   [1.5, 0],
   [500, 0],

@@ -9,7 +9,7 @@ module.exports = new UmaSkill(
   10,
   508,
   [() => true, () => true],
-  [(args) => args.near_count >= 3 && args.accumulatetime >= 5, () => true],
+  [(args) => args.near_count >= 3 && args.accumulatetime >= 5, () => false],
   [3, 0],
   [500, 0],
   [

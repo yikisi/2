@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.phase === 1 &&
       args.bashin_diff_behind >= 3 &&
       args.order === 1,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [500, 0],

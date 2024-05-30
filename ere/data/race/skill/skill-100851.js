@@ -16,7 +16,7 @@ module.exports = new UmaSkill(
       args.order_rate >= 60 &&
       args.order_rate <= 90 &&
       args.temptation_count === 0,
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

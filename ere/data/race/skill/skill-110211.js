@@ -9,7 +9,7 @@ module.exports = new UmaSkill(
   18,
   340,
   [() => true, () => true],
-  [(args) => args.activate_count_middle >= 2, () => true],
+  [(args) => args.activate_count_middle >= 2, () => false],
   [6, 0],
   [500, 0],
   [

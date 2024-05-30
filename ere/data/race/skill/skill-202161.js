@@ -9,7 +9,7 @@ module.exports = new UmaSkill(
   0,
   217,
   [() => true, () => true],
-  [(args) => args.always === 1, () => true],
+  [(args) => args.always === 1, () => false],
   [-0.0001, 0],
   [0, 0],
   [

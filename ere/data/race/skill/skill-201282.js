@@ -12,7 +12,7 @@ module.exports = new UmaSkill(
   [
     (args) =>
       args.running_style === 1 && args.slope === 1 && args.accumulatetime >= 10,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

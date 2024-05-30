@@ -16,7 +16,7 @@ module.exports = new UmaSkill(
       args.is_overtake === 1,
     () => true,
   ],
-  [(args) => args.is_last_straight === 1, () => true],
+  [(args) => args.is_last_straight === 1, () => false],
   [5, 0],
   [500, 0],
   [

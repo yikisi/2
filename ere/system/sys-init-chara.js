@@ -9,6 +9,8 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaAvailableSkills = require('#/data/chara-available-skills');
+const CharaSkills = require('#/data/chara-skills');
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const { part_names, pleasure_list } = require('#/data/ero/part-const');
@@ -48,12 +50,14 @@ function reset_chara(chara_id) {
     });
     era.set(`exp:${chara_id}:技能点数`, 120);
     era.set(`cflag:${chara_id}:育成用变量`, {});
-    const dict_key =
-      chara_id >= first_child_id
-        ? era.get(`cflag:${chara_id}:模版角色`)
-        : chara_id;
-    era.set(`skill:${chara_id}:习得技能`, chara_skill_dict[dict_key] || []);
-    era.set(`skill:${chara_id}:可习得技能`, []);
+    const skill_set =
+      chara_skill_dict[
+        chara_id >= first_child_id
+          ? era.get(`cflag:${chara_id}:模版角色`)
+          : chara_id
+      ] || [];
+    new CharaSkills(chara_id).add(...skill_set.slice(0, 3));
+    new CharaAvailableSkills(chara_id).add(...skill_set.slice(3));
     new RaceHistory(chara_id).reset();
   } else {
     Object.values(attr_names).forEach((v) => {

@@ -12,7 +12,7 @@ module.exports = new UmaSkill(
   [
     (args) =>
       args.running_style_count_oikomi_otherself >= 1 && args.phase_random === 1,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

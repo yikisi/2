@@ -11,7 +11,7 @@ module.exports = new UmaSkill(
   [() => true, () => true],
   [
     (args) => args.distance_rate >= 50 && args.order_rate_in20_continue === 1,
-    () => true,
+    () => false,
   ],
   [6, 0],
   [500, 0],

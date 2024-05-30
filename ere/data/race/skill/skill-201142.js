@@ -17,7 +17,7 @@ module.exports = new UmaSkill(
       (args.distance_type === 3 &&
         args.is_move_lane === 2 &&
         args.accumulatetime >= 10),
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

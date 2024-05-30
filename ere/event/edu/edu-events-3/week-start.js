@@ -11,6 +11,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const CharaSkills = require('#/data/chara-skills');
 const { buff_colors } = require('#/data/color-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
@@ -201,7 +202,7 @@ module.exports = async (_, __, event_object) => {
         }身后拖出一道长长的影子。`,
       );
       era.println();
-      // TODO 技能【帝王舞步】消失
+      new CharaSkills(3).remove(100031);
       wait_flag =
         get_attr_and_print_in_event(3, new Array(5).fill(5), 20) || wait_flag;
       event_marks.give_up++;

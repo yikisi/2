@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
       args.is_last_straight === 1 &&
       args.order === 1 &&
       args.bashin_diff_behind <= 1,
-    () => true,
+    () => false,
   ],
   [2.4, 0],
   [500, 0],

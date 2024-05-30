@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.ground_type === 2 &&
       args.accumulatetime >= 5 &&
       args.infront_near_lane_time >= 3,
-    () => true,
+    () => false,
   ],
   [3, 0],
   [500, 0],

@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.running_style === 3 &&
       args.is_overtake === 1 &&
       args.accumulatetime >= 5,
-    () => true,
+    () => false,
   ],
   [4, 0],
   [500, 0],

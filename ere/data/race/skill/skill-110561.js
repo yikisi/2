@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.distance_rate >= 50 &&
       args.order_rate >= 40 &&
       args.overtake_target_time >= 2,
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

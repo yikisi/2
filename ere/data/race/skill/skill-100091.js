@@ -15,7 +15,7 @@ module.exports = new UmaSkill(
         args.order === 1 &&
         args.bashin_diff_behind <= 1) ||
       (args.distance_rate >= 50 && args.order === 2 && args.is_overtake === 1),
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],

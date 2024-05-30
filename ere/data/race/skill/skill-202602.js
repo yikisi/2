@@ -11,7 +11,7 @@ module.exports = new UmaSkill(
   [() => true, () => true],
   [
     (args) => args.distance_type === 3 && args.activate_count_all >= 13,
-    () => true,
+    () => false,
   ],
   [2.4, 0],
   [500, 0],

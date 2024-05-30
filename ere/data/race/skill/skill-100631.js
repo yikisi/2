@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.is_lastspurt === 1 &&
       args.phase === 3 &&
       args.temptation_count === 0,
-    () => true,
+    () => false,
   ],
   [6, 0],
   [500, 0],

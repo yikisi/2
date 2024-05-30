@@ -17,7 +17,7 @@ module.exports = new UmaSkill(
       (args.distance_type === 3 &&
         args.is_lastspurt === 1 &&
         args.phase_firsthalf_random === 3),
-    () => true,
+    () => false,
   ],
   [2.4, 0],
   [500, 0],

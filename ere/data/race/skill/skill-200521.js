@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.accumulatetime >= 2 &&
       args.order === 1 &&
       args.bashin_diff_behind >= 1,
-    () => true,
+    () => false,
   ],
   [0, 0],
   [500, 0],

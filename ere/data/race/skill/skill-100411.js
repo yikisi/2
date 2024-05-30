@@ -14,7 +14,7 @@ module.exports = new UmaSkill(
       args.distance_rate >= 50 &&
       args.order <= 3 &&
       args.blocked_side_continuetime >= 2,
-    () => true,
+    () => false,
   ],
   [5, 0],
   [500, 0],
