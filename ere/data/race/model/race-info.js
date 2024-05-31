@@ -135,16 +135,20 @@ class RaceSlope {
 }
 
 class RaceLane {
+  /** @type {number} */
+  corner;
   /**
    * @param {number} start
    * @param {number} end
-   * @param {number} corner
+   * @param {number} index
+   * @param {boolean} is_curve
    * @param {boolean} isLast
    */
-  constructor(start, end, corner, isLast) {
+  constructor(start, end, index, is_curve, isLast) {
     this.start = start;
     this.end = end;
-    this.corner = corner;
+    this.index = index;
+    this.is_curve = is_curve;
     this.is_last = isLast;
   }
 }
@@ -162,6 +166,7 @@ module.exports = class RaceInfo {
   static weather_enum = weather_enum;
   static weather_names = weather_names;
   static mess_enum = mess_enum;
+  static mess_names = ['良', '稍重', '重', '不良'];
   static limit_enum = limit_enum;
   static prize_ratios = [1, 0.5, 0.3, 0.2, 0.1];
   static relation_rewards = [50, 100, 200, 400];
@@ -198,7 +203,7 @@ module.exports = class RaceInfo {
   span;
   /**
    * 距离是否是400的倍数
-   * @type {boolean}
+   * @type {number}
    */
   span400;
   /**
@@ -256,9 +261,9 @@ module.exports = class RaceInfo {
    */
   phases;
   // 场地状态
-  mess = mess_enum.well;
+  mess;
   // 天气
-  weather = weather_enum.sunny;
+  weather;
 
   /**
    * @param {string} name_en
@@ -298,7 +303,7 @@ module.exports = class RaceInfo {
     this.track = track;
     this.ground = ground;
     this.span = span;
-    this.span400 = !(span % 400);
+    this.span400 = Number(!(span % 400));
     this.distance = distance;
     this.rotation = rotation;
     this.gates = gates;

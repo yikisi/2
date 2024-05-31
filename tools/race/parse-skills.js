@@ -251,14 +251,11 @@ async function chara_skill() {
   const pre_dict = {},
     c_dict = {};
 
-  buffer += '\n\n';
+  buffer += '\n\nconst current = new Date().getTime();\n\n';
 
   skill_data.forEach((e) => {
     const id = e.id;
     buffer += `skills_dict[${id}]=require('#/data/race/skill/skill-${id}');`;
-    if (icon2skill_color[e.icon_id] === undefined) {
-      console.log(e);
-    }
     let sbuffer =
       "const UmaSkill = require('#/data/race/model/uma-skill');\n\nmodule.exports = new UmaSkill(";
     sbuffer += `${id},`;
@@ -280,6 +277,7 @@ async function chara_skill() {
     sbuffer += `[${e.popularity_add_param_1},${e.popularity_add_param_2}],`;
     sbuffer += `[${e.popularity_add_value_1},${e.popularity_add_value_2}],`;
     sbuffer += `${e.activate_lot},`;
+    sbuffer += `${e.condition_2 !== '' && e.condition_2.indexOf('is_activate_other_skill_detail') !== -1}`;
     writeFileSync(`../../ere/data/race/skill/skill-${id}.js`, `${sbuffer});`);
     fill_dict(e.precondition_1, pre_dict, e);
     fill_dict(e.precondition_2, pre_dict, e);
@@ -288,7 +286,7 @@ async function chara_skill() {
   });
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
-    `${buffer}\n\n${buffer_common_skills}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict};`,
+    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\n${buffer_common_skills}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict};`,
   );
   buffer = 'class PreConditionParams { ';
   Object.keys(pre_dict)

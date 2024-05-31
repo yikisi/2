@@ -23,6 +23,7 @@
   },
   "name": "erauma",
   "scripts": {
+    "db:pull": "prisma db pull",
     "lint": "lint-staged",
     "prepare": "husky"
   }

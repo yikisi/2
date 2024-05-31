@@ -1,4 +1,5 @@
-﻿const { get_random_value } = require('#/utils/value-utils');
+﻿const { get_random_entry } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const { ability_type_enum } = require('#/data/race/model/uma-skill');
@@ -18,10 +19,82 @@ const { attr_enum } = require('#/data/train-const');
  * @param {RaceInfo} race_info
  */
 function sys_prepare_race(list_chara, race_info) {
-  const pop_1 = list_chara.find((e) => e.pop[0] === 1);
-  const running_style_counts = [0, 0, 0, 0];
+  const pop_1 = list_chara.find((e) => e.pop[0] === 1),
+    running_style_counts = [0, 0, 0, 0],
+    skill_counts = {};
   list_chara.forEach((uma) => running_style_counts[uma.style]++);
+  [201631, 201641].forEach((e) => {
+    if (
+      list_chara.findIndex(
+        (uma) => uma.list_skill.findIndex((s) => s.data.id === e) !== -1,
+      ) !== -1
+    ) {
+      if (skill_counts[e]) {
+        skill_counts[e]++;
+      } else {
+        skill_counts[e] = 1;
+      }
+    }
+  });
+
+  // 给弯道分配用于计算的corner
+  let flag_final = true,
+    final_corner = undefined,
+    final_straight = undefined;
+  for (let i = race_info.lanes.length - 1; i >= 0; --i) {
+    const lane = race_info.lanes[i];
+    if (lane.is_curve) {
+      if (lane.is_last) {
+        final_corner = lane;
+      }
+      if (flag_final) {
+        lane.corner = lane.index;
+        if (lane.index === 1) {
+          flag_final = false;
+        }
+      } else {
+        lane.corner = -1;
+      }
+    } else {
+      if (lane.is_last) {
+        final_straight = lane;
+      }
+      lane.corner = 0;
+    }
+  }
+
   for (const uma of list_chara) {
+    uma.race.conditionParams.activate_count_all = 0;
+    uma.race.conditionParams.activate_count_end_after = 0;
+    uma.race.conditionParams.activate_count_heal = 0;
+    uma.race.conditionParams.activate_count_middle = 0;
+    uma.race.conditionParams.activate_count_start = 0;
+    uma.race.conditionParams.behind_near_lane_time = 0;
+    uma.race.preConditionParams.behind_near_lane_time_set1 = 0;
+    uma.race.conditionParams.blocked_front_continuetime = 0;
+    uma.race.preConditionParams.blocked_side_continuetime =
+      uma.race.conditionParams.blocked_side_continuetime = 0;
+    uma.race.conditionParams.change_order_up_end_after = 0;
+    uma.race.conditionParams.change_order_up_finalcorner_after = 0;
+    uma.race.preConditionParams.change_order_up_middle = 0;
+    uma.race.conditionParams.infront_near_lane_time = 0;
+    uma.race.conditionParams.is_lastspurt = 0;
+    uma.race.conditionParams.is_other_character_activate_advantage_skill = 0;
+    uma.race.conditionParams.is_temptation = 0;
+    uma.race.conditionParams.is_used_skill_id = 0;
+    uma.race.conditionParams.lastspurt = 0;
+    uma.race.preConditionParams.order_rate_in20_continue =
+      uma.race.conditionParams.order_rate_in20_continue = 1;
+    uma.race.conditionParams.order_rate_in50_continue = 1;
+    uma.race.conditionParams.order_rate_in80_continue = 1;
+    uma.race.preConditionParams.order_rate_out20_continue = 1;
+    uma.race.preConditionParams.order_rate_out40_continue =
+      uma.race.conditionParams.order_rate_out40_continue = 1;
+    uma.race.preConditionParams.order_rate_out50_continue = 1;
+    uma.race.preConditionParams.order_rate_out70_continue = 1;
+    uma.race.preConditionParams.overtake_target_no_order_up_time = 0;
+    uma.race.preConditionParams.overtake_target_time =
+      uma.race.conditionParams.overtake_target_time = 0;
     uma.race.conditionParams.running_style = uma.style;
     uma.race.conditionParams.running_style_count_nige_otherself =
       running_style_counts[0] - (uma.style === 0);
@@ -39,15 +112,48 @@ function sys_prepare_race(list_chara, race_info) {
     uma.race.conditionParams.running_style_equal_popularity_one = Number(
       uma.style === pop_1.style,
     );
+    uma.race.preConditionParams.temptation_count =
+      uma.race.conditionParams.temptation_count = 0;
     // 分配赛道 及初始名次以避免意外
     uma.rank = {
       curr: uma.index_race,
       last: uma.index_race,
     };
 
+    // 计算随机位置
+    let temp;
+    temp = get_random_entry(
+      race_info.slopes.filter((e) => e.slope < 0 && temp.end - temp.start > 10),
+    );
+    if (temp) {
+      uma.random.down_slope = get_random_value(temp.start, temp.end - 10);
+    }
+    if (final_corner) {
+      uma.random.is_finalcorner = get_random_value(
+        final_corner.start,
+        race_info.span - 10,
+      );
+    }
+    if (final_straight) {
+      uma.random.last_straight = get_random_value(
+        final_straight.start,
+        final_straight.end - 10,
+      );
+    }
+    temp = get_random_entry(race_info.lanes.find((e) => !e.is_curve));
+    if (temp) {
+      uma.random.straight = get_random_value(temp.start, temp.end - 10);
+    }
+    temp = get_random_entry(
+      race_info.slopes.filter((e) => e.slope > 0 && temp.end - temp.start > 10),
+    );
+    if (temp) {
+      uma.random.up_slope = get_random_value(temp.start, temp.end - 10);
+    }
+
     uma.adapts.style = uma.adapt_style_list[uma.style];
 
-    // 计算心情对面板的增幅
+    // 计算基础属性值（属性值加干劲修正）
     Object.values(attr_enum).forEach((v) => {
       uma.attrs[v] *= 1 + uma.motivation * 0.02;
     });
@@ -56,13 +162,15 @@ function sys_prepare_race(list_chara, race_info) {
     uma.probs.skill = Math.max(1 - 90 / uma.attrs[attr_enum.intelligence], 0.2);
 
     //计算比赛偏重属性对速度属性的增幅
-    uma.attrs[attr_enum.speed] *=
-      1 +
-      race_info.attr_bonus.reduce(
-        (p, c) => p + Math.min(0.05 * Math.ceil(uma.attrs[c] / 300), 0.2),
-        0,
-      ) /
-        race_info.attr_bonus.length;
+    if (race_info.attr_bonus.length > 0) {
+      uma.attrs[attr_enum.speed] *=
+        1 +
+        race_info.attr_bonus.reduce(
+          (p, c) => p + Math.min(0.05 * Math.ceil(uma.attrs[c] / 300), 0.2),
+          0,
+        ) /
+          race_info.attr_bonus.length;
+    }
 
     //不良马场对速度属性的减幅
     if (race_info.mess === RaceInfo.mess_enum.bad) {
@@ -93,6 +201,8 @@ function sys_prepare_race(list_chara, race_info) {
         // return skill.data.is_random === 0 || Math.random() < uma.probs.skill;
         return true;
       }
+      uma.race.conditionParams.same_skill_horse_count =
+        skill_counts[skill.data.id] || 0;
       for (let i = 0; i < skill.data.ability_times.length; ++i) {
         if (
           skill.data.preconditions[i](uma.race.preConditionParams) &&
@@ -139,7 +249,9 @@ function sys_prepare_race(list_chara, race_info) {
       2,
     );
     if (100 * Math.random() < temptation_prob) {
-      uma.flag.allowTemptation = true;
+      uma.base.temptationSpan = get_random_value(2, 9) * (race_info.span / 24);
+    } else {
+      uma.base.temptationSpan = 50000;
     }
     uma.attrs = uma.attrs.map((e) => Math.max(e, 1));
 
@@ -148,7 +260,7 @@ function sys_prepare_race(list_chara, race_info) {
     uma.factorPhase.aStyle = mod_acceleration_style[uma.style];
 
     //由赛道长度决定普通状态下的目标速度
-    uma.base.velocityIdeal = 22 - race_info.span / 1000;
+    uma.base.velocityIdeal = 20 - (race_info.span - 2000) / 1000;
 
     //由复合因素决定终盘阶段的目标速度增加量
     uma.factorFinal.vIdealAdd =
@@ -167,21 +279,25 @@ function sys_prepare_race(list_chara, race_info) {
           get_random_value(
             mod_velocity_random_upper - 0.0065,
             mod_velocity_random_upper,
+            true,
           ),
     );
 
-    //由速度及根性属性决定冲刺状态下的最大目标速度
+    // 由速度及根性属性决定冲刺状态下的最大目标速度
     uma.base.velocityMaxRush =
-      1.05 * uma.base.velocityIdeal * (uma.factorPhase.vStyle[2] + 0.01) +
-      2.05 * uma.factorFinal.vIdealAdd +
+      (uma.base.velocityIdeal * uma.factorPhase.vStyle[2] +
+        uma.factorFinal.vIdealAdd +
+        0.01 * uma.base.velocityIdeal) *
+        1.05 +
+      uma.factorFinal.vIdealAdd * 0.002 +
       Math.pow(450 * uma.attrs[attr_enum.toughness], 0.597) * 0.0001;
 
-    //由根性决定最低速度
+    // 由根性决定最低速度
     uma.base.velocityMin =
       uma.base.velocityIdeal * 0.85 +
       Math.sqrt(200 * uma.attrs[attr_enum.toughness]) * 0.001;
 
-    //由力量决定基础加速度
+    // 由力量决定基础加速度
     uma.base.acceleration =
       0.006 *
       Math.sqrt(500 * uma.attrs[attr_enum.strength]) *
@@ -198,6 +314,12 @@ function sys_prepare_race(list_chara, race_info) {
     //由根性属性决定终盘后耐力消耗系数
     uma.factorFinal.sCostMult =
       1 + 200 / Math.sqrt(600 * uma.attrs[attr_enum.toughness]);
+
+    // 根性决定追比的目标速度和加速度加成
+    uma.factorFinal.vCompeteFightBuff =
+      Math.pow(200 * uma.attrs[attr_enum.toughness], 0.708) * 0.0001;
+    uma.factorFinal.accCompeteFightBuff =
+      Math.pow(160 * uma.attrs[attr_enum.toughness], 0.59) * 0.0001;
 
     //由力量决定受上坡减速的影响程度 最大100%
     uma.factorSlope.up = Math.min(200 / uma.attrs[attr_enum.strength], 1);

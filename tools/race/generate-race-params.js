@@ -12,32 +12,47 @@ let output =
 
 data.forEach((e) => {
   console.log(`${e.id} ${e.lane.length} ${e.slopes.length}`);
-  /** @type {{corner:number,end:number,is_last:boolean,start:number}[]} */
+  /** @type {{is_curve:boolean,end:number,is_last:boolean,start:number,[index]:number}[]} */
   const obj_lanes = [];
   // lane
-  let curve = 0;
   for (let i = 0; i < e.lane.length; ++i) {
     const lane = e.lane[i];
     const is_last = lane.name.startsWith('终');
-    /** @type {number} */
-    const corner = lane.type.startsWith('弯') ? ++curve : 0;
+    const corner = lane.type.startsWith('弯');
 
     if (!i && lane.start !== 0) {
       obj_lanes.push({
-        corner: 0,
+        is_curve: false,
         end: lane.start,
         is_last: false,
         start: 0,
       });
     } else if (i && lane.start !== e.lane[i - 1].end) {
       obj_lanes.push({
-        corner: 0,
+        is_curve: false,
         end: lane.start,
         is_last: false,
         start: e.lane[i - 1].end,
       });
     }
-    obj_lanes.push({ corner, end: lane.end, is_last, start: lane.start });
+    obj_lanes.push({
+      is_curve: corner,
+      end: lane.end,
+      is_last,
+      start: lane.start,
+    });
+  }
+  let corner = 0,
+    straight = 0;
+  for (let i = obj_lanes.length - 1; i >= 0; --i) {
+    const curr = obj_lanes[i];
+    if (curr.is_curve) {
+      curr.index = (corner = (corner + 3) % 4) + 1;
+    } else if (curr.is_last) {
+      curr.index = 3;
+    } else {
+      curr.index = (straight = (straight + 1) % 2) + 1;
+    }
   }
 
   const obj_slopes = e.slopes.map((slope) => {
@@ -48,7 +63,10 @@ data.forEach((e) => {
     };
   });
   lane_output += `${e.id}: [${obj_lanes
-    .map((e) => `new RaceLane(${e.start}, ${e.end}, ${e.corner}, ${e.is_last})`)
+    .map(
+      (e) =>
+        `new RaceLane(${e.start}, ${e.end}, ${e.index}, ${e.is_curve}, ${e.is_last})`,
+    )
     .join(',\n')}],\n`;
   slope_output += `${e.id}: [${obj_slopes
     .map((e) => `new RaceSlope(${e.start}, ${e.end}, ${e.slope})`)

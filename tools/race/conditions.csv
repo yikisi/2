@@ -3,7 +3,7 @@ bashin_diff_behind,与后面马的马身差距,accumulatetime,比赛进行时间
 bashin_diff_infront,与前面马的马身差距,activate_count_all,触发技能数
 behind_near_lane_time_set1,后方赛马娘紧贴时间,activate_count_end_after,终盘主动技能发动数量
 blocked_side_continuetime,被马阻挡的时间,activate_count_heal,体力恢复技能发动数量
-change_order_onetime,是否有改变顺位(<0向前，>0向后),activate_count_middle,终盘主动技能发动数量
+change_order_onetime,是否有改变顺位(<0向前，>0向后),activate_count_middle,中盘主动技能发动数量
 change_order_up_middle,中盘超越人数,activate_count_start,序盘主动技能发动数量
 corner,弯道次序（直线为0）,all_corner_random,所有弯道时根据智力发动概率
 distance_diff_rate,队伍位置比例,always,总是发动
@@ -50,7 +50,7 @@ track_id,赛马场地点限定,distance_rate_after_random,比赛行进比例大�
 ,,is_last_straight_onetime,进入最终直线时
 ,,is_lastspurt,最终冲刺
 ,,is_move_lane,赛道移动方向（1左2右）
-,,is_other_character_activate_advantage_skill,其他马娘发动加速技能
+,,is_other_character_activate_advantage_skill,其他马娘发动技能类型
 ,,is_overtake,是否有超车目标
 ,,is_surrounded,被包围
 ,,is_temptation,焦躁状态

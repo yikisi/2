@@ -5,6 +5,7 @@ const { median, sort_list } = require('#/utils/list-utils');
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
 const { track_names } = require('#/data/race/model/race-info');
+const { skills_dict } = require('#/data/race/skill/skill-const');
 
 const fron_cols = 5;
 const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'];
@@ -113,7 +114,8 @@ async function page_race_result(contestants, records, info) {
 
     const record_timer = [0, 0];
 
-    let timer = 0;
+    let skill_buffer = [],
+      timer = 0;
     while (flag_result && timer < records.loc.length) {
       contestants.forEach((uma) => {
         if (records.loc[timer][uma.index_race] >= info.span) {
@@ -141,9 +143,9 @@ async function page_race_result(contestants, records, info) {
           0,
         ),
         timer_end = timer_start + fron_cols;
-      const buffer = contestants.map((uma) => {
-        const color = get_chara_color(uma.index_chara);
-        return {
+      const buffer = [];
+      contestants.forEach((uma) => {
+        buffer.push({
           columns: [
             {
               config: { width: 1 },
@@ -153,7 +155,7 @@ async function page_race_result(contestants, records, info) {
             {
               config: {
                 width: 3,
-                color,
+                color: uma.color,
                 fontWeight: 'bold',
               },
               content: uma.name,
@@ -180,7 +182,7 @@ async function page_race_result(contestants, records, info) {
                 }
               : {
                   config: {
-                    color,
+                    color: uma.color,
                     fontColor: 'black',
                     height: 22,
                     width: 24 - 6 - 2 * fron_cols,
@@ -195,8 +197,25 @@ async function page_race_result(contestants, records, info) {
                 },
           ],
           key: records.loc[timer][uma.index_race],
-        };
+        });
+        records.skill[timer][uma.index_race].forEach((s_id) => {
+          skill_buffer.push({
+            config: { align: 'right', isParagraph: true },
+            content: [
+              { content: uma.name, color: uma.color, fontWeight: 'bold' },
+              ' ',
+              ...skills_dict[s_id].get_colored_name(),
+            ],
+            timer: 5 * 15,
+            type: 'text',
+          });
+        });
       });
+      skill_buffer = skill_buffer.filter((e) => e.timer--);
+      if (skill_buffer.length > 3) {
+        skill_buffer.splice(0, skill_buffer.length - 3);
+      }
+
       (timer ? era.replaceInColRows : era.printInColRows)(
         [
           { type: 'divider' },
@@ -221,6 +240,7 @@ async function page_race_result(contestants, records, info) {
           },
         ],
         ...sort_list(buffer, (e) => e.key),
+        skill_buffer,
         [
           {
             accelerator: 0,
@@ -364,7 +384,7 @@ async function page_race_result(contestants, records, info) {
       datasets: contestants.map((e) => ({
         borderColor: get_chara_color(e.index_chara),
         data: records.speed
-          .map((r) => Math.min(r[e.index_race], info.span).toFixed(1))
+          .map((r) => r[e.index_race].toFixed(1))
           .filter((_, i) => i % 15 === 0),
         label: e.name,
         stepped: false,
@@ -381,7 +401,7 @@ async function page_race_result(contestants, records, info) {
       datasets: contestants.map((e) => ({
         borderColor: get_chara_color(e.index_chara),
         data: records.acc
-          .map((r) => Math.min(r[e.index_race], info.span).toFixed(1))
+          .map((r) => r[e.index_race].toFixed(1))
           .filter((_, i) => i % 15 === 0),
         label: e.name,
         stepped: false,
@@ -398,7 +418,7 @@ async function page_race_result(contestants, records, info) {
       datasets: contestants.map((e) => ({
         borderColor: get_chara_color(e.index_chara),
         data: records.stamina
-          .map((r) => Math.min(r[e.index_race], info.span).toFixed(1))
+          .map((r) => r[e.index_race].toFixed(1))
           .filter((_, i) => i % 15 === 0),
         label: e.name,
         stepped: false,

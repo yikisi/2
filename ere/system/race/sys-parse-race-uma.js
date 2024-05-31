@@ -139,7 +139,7 @@ function sys_parse_for_race(team_chara, race, info) {
       ).set_legend(),
     );
   });
-  //最后填路人幻影
+  // 最后填路人幻影
   gacha([], info.gates - ret.length);
   const date = era.get('flag:当前回合数'),
     ratio = 1 - ((date - 1) % 48) / 48;
@@ -188,6 +188,13 @@ function sys_parse_for_race(team_chara, race, info) {
   }
   const running_style_counts = [0, 0, 0, 0];
   ret.forEach((uma) => running_style_counts[uma.style]++);
+  const is_dirt_grade = Number(
+    info.ground === RaceInfo.ground_enum.dirt &&
+      (info.track === RaceInfo.track_enum.ohi ||
+        info.track === RaceInfo.track_enum.kawasaki ||
+        info.track === RaceInfo.track_enum.funabashi ||
+        info.track === RaceInfo.track_enum.morioka),
+  );
 
   ret.forEach((uma) => {
     uma.attrs = uma.attrs.map(Math.ceil);
@@ -196,10 +203,7 @@ function sys_parse_for_race(team_chara, race, info) {
         i === a.findIndex((x) => x.data.group_id === v.data.group_id),
     );
     const motivation_coefficient = 1 + uma.motivation * 0.02;
-    uma.race.preConditionParams.ground_type =
-      uma.race.conditionParams.ground_type = info.ground + 1;
-    uma.race.preConditionParams.track_id = uma.race.conditionParams.track_id =
-      info.track;
+
     uma.race.conditionParams.always = 1;
     uma.race.conditionParams.base_speed =
       uma.attrs[attr_enum.speed] * motivation_coefficient;
@@ -209,12 +213,26 @@ function sys_parse_for_race(team_chara, race, info) {
       uma.attrs[attr_enum.strength] * motivation_coefficient;
     uma.race.conditionParams.base_wiz =
       uma.attrs[attr_enum.intelligence] * motivation_coefficient;
+    uma.race.conditionParams.course_distance = info.span;
+    uma.race.conditionParams.distance_type = info.distance + 1;
     uma.race.conditionParams.grade =
       (info.race_class === RaceInfo.class_enum.G1) * 100;
     uma.race.conditionParams.ground_condition = info.mess + 1;
+    uma.race.preConditionParams.ground_type =
+      uma.race.conditionParams.ground_type = info.ground + 1;
     uma.race.conditionParams.is_basis_distance = info.span400;
+    // 横向距离砍掉了：固定外道超人
+    uma.race.preConditionParams.is_behind_in =
+      uma.race.conditionParams.is_behind_in = 1;
+    uma.race.conditionParams.is_dirtgrade = is_dirt_grade;
     uma.race.conditionParams.is_exist_chara_id = 1000 + uma.index_chara;
+    // 横向距离砍掉了：移动方向随机
+    uma.race.conditionParams.is_move_lane = get_random_value(0, 2);
+    // 横向距离砍掉了：固定内道
+    uma.race.preConditionParams.lane_type =
+      uma.race.conditionParams.lane_type = 0;
     uma.race.conditionParams.motivation = uma.motivation + 3;
+    uma.race.conditionParams.random_lot = get_random_value(0, 99);
     uma.race.conditionParams.rotation = info.rotation + 1;
     uma.race.conditionParams.running_style = uma.style;
     uma.race.conditionParams.running_style_count_nige_otherself =
@@ -229,10 +247,14 @@ function sys_parse_for_race(team_chara, race, info) {
       running_style_counts[uma.style];
     uma.race.conditionParams.running_style_count_same_rate =
       (uma.race.conditionParams.running_style_count_same * 100) / ret.length;
+    // 看台砍掉了：随机对面或者同侧
+    uma.race.conditionParams.straight_front_type = (Math.random() < 0.5) + 1;
     uma.race.conditionParams.season = season;
+    // 比赛时间：随机白天或晚上
     uma.race.conditionParams.time = 4 * (Math.random() < 0.5);
+    uma.race.preConditionParams.track_id = uma.race.conditionParams.track_id =
+      info.track;
     uma.race.conditionParams.weather = info.weather + 1;
-    uma.race.conditionParams.random_lot = get_random_value(0, 99);
   });
 
   ret = sort_list(ret, Math.random);

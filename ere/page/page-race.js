@@ -24,6 +24,7 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const date_indicator = require('#/page/components/date-indicator');
 const check_race_events = require('#/page/race/check-race-events');
+const fill_race_weather_and_mess = require('#/page/race/fill-race-weather-and-mess');
 const page_race_result = require('#/page/race/page-race-result');
 const print_race_track_chart = require('#/page/race/race-track-chart');
 const select_contestants = require('#/page/race/select-contestants');
@@ -33,7 +34,7 @@ const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { get_random_entry, sort_list } = require('#/utils/list-utils');
+const { sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -72,17 +73,6 @@ const {
   attr_names,
   motivation_names,
 } = require('#/data/train-const');
-
-const adaptability2race = [
-  race_enum.aoi_sta,
-  race_enum.shin_kin,
-  race_enum.toky_sta,
-  race_enum.kyot_sta,
-  race_enum.negi_sta,
-  race_enum.unic_sta,
-  race_enum.miya_sta,
-  race_enum.heia_sta,
-];
 
 const pop_mark = ['➖', '◎', '◯', '▲', '△', '△'];
 
@@ -214,47 +204,8 @@ async function race_page(race) {
   const aim_race_dict = {};
   const team_list = (await select_contestants(race)).map(sys_get_chara_pseudo),
     is_grand_live = sys_get_grand_lives()[0][race];
-  let wait_flag = false,
-    /** @type {RaceInfo} */
-    info;
-  if (race === race_enum.begin_race) {
-    const chara = team_list[0],
-      max_ground = Math.max(...chara.adapt_ground_list),
-      max_span = Math.max(...chara.adapt_distance_list),
-      tmp = [];
-    chara.adapt_ground_list.forEach(
-      (eg, ig) =>
-        eg === max_ground &&
-        chara.adapt_distance_list.forEach((es, is) => {
-          es === max_span && tmp.push(adaptability2race[(ig << 2) + is]);
-        }),
-    );
-    const race_id = get_random_entry(tmp),
-      aim_info = race_infos[race_id];
-    info = new RaceInfo(
-      race_infos[race_enum.begin_race].name_en,
-      race_infos[race_enum.begin_race].name_zh,
-      race_infos[race_enum.begin_race].race_class,
-      aim_info.track,
-      aim_info.ground,
-      aim_info.span,
-      adaptability2race.indexOf(race_id) % 4,
-      aim_info.rotation,
-      aim_info.gates,
-      0,
-      race_infos[race_enum.begin_race].limit,
-      0,
-      race_infos[race_enum.begin_race].prize,
-      aim_info.param_id,
-    );
-    info.attr_bonus = aim_info.attr_bonus;
-    info.lanes = aim_info.lanes;
-    info.slopes = aim_info.slopes;
-    info.phases = aim_info.phases;
-  } else {
-    info = race_infos[race];
-  }
-  info.mess = get_random_entry(Object.values(RaceInfo.mess_enum));
+  let wait_flag = false;
+  const info = fill_race_weather_and_mess(race, team_list[0]);
   const contestants = sys_parse_for_race(team_list, race, info);
   team_list.forEach((uma) => {
     const id = uma.index_chara;
@@ -296,8 +247,8 @@ async function race_page(race) {
         0,
         1,
       )}) ${RaceInfo.rotation_names[info.rotation]} · ${RaceInfo.weather_names[info.weather]} ${
-        info.gates
-      }人`,
+        RaceInfo.mess_names[info.mess]
+      }`,
       type: 'text',
     },
     {

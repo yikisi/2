@@ -130,7 +130,7 @@ const target_type_enum = {
   SelfInfrontTemptation: 19,
   // 后方焦躁
   SelfBehindTemptation: 20,
-  // 逃马焦躁
+  // 对应跑法的焦躁马娘
   RunningStyleTemptationOtherSelf: 21,
   // 对应角色存在
   CharaId: 22,
@@ -251,6 +251,7 @@ class UmaSkill {
    * @param {number[]} pop_types
    * @param {number[]} pop_values
    * @param {number} is_random
+   * @param {boolean} is_two_phase
    */
   constructor(
     id,
@@ -272,6 +273,7 @@ class UmaSkill {
     pop_types,
     pop_values,
     is_random,
+    is_two_phase,
   ) {
     this.id = id;
     this.name = name;
@@ -292,6 +294,7 @@ class UmaSkill {
     this.pop_types = pop_types;
     this.pop_values = pop_values;
     this.is_random = is_random;
+    this.is_two_phase = is_two_phase;
   }
 
   get_colored_name() {

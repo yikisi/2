@@ -64,7 +64,7 @@ function print_race_track_chart(info) {
       (annotations[`lLabel${i + 1}`] = {
         color: 'white',
         // backgroundColor: 'rgb(255,255,255,0.9)',
-        content: `${e.is_last ? '终' : i + 1}${e.cornor ? '弯' : '直 '}`,
+        content: `${e.is_last ? '终' : e.index}${e.is_curve ? '弯' : '直 '}`,
         type: 'label',
         xValue: (e.start + e.end) / 2,
         yValue: 2.75,

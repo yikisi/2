@@ -13,6 +13,16 @@ class RaceSkill {
   count = [0, 0];
   // 前置条件
   precondition = [false, false];
+  /**
+   * 目标
+   * @type {PseudoUma[][][]}
+   */
+  aims = [[], []];
+  /**
+   * 技能数值
+   * @type {[][]}
+   */
+  values = [[], []];
 
   /** @param {UmaSkill} skill */
   constructor(skill) {
@@ -105,11 +115,14 @@ class PseudoUma {
   tempPop;
   // 各个需重复使用的计算基底
   base = {
+    acceleration: 0,
+    accelerationBuff: 0,
+    stamina: 0,
     velocityIdeal: 0,
+    velocityIdealBuff: 0,
     velocityMaxRush: 0,
     velocityMin: 0,
-    acceleration: 0,
-    stamina: 0,
+    temptationSpan: 0,
   };
   // 比赛时信息
   race = {
@@ -118,13 +131,35 @@ class PseudoUma {
     greenSkills: 0,
     location: 0,
     locationPlanRush: undefined,
+    overtakeAim: undefined,
+    competeFightAim: undefined,
+    competeFightTimer: 0,
     phase: 0,
     preConditionParams: new PreConditionParams(),
+    slope: 0,
     stamina: 0,
     staminaCost: 0,
+    // 焦躁计时
+    temptation: 0,
     velocityIdeal: 0,
     velocityPlanRush: 0,
     velocityReal: 0,
+  };
+  // 随机发动的技能的位置指标
+  random = {
+    all_corner: 50000,
+    corner: 50000,
+    distance_rate_after: 50000,
+    down_slope: 50000,
+    is_finalcorner: 50000,
+    last_straight: 50000,
+    phase: 50000,
+    phase_corner: 50000,
+    phase_firsthalf: 50000,
+    phase_firstlasthalf: 50000,
+    phase_firstquarter: 50000,
+    straight: 50000,
+    up_slope: 50000,
   };
   // 实时排名和上一tick排名
   rank = {
@@ -138,22 +173,16 @@ class PseudoUma {
   };
   // 各种状态
   flag = {
-    // 允许焦躁
-    allowTemptation: false,
     // 允许计算冲刺计划
-    allowPlan: false,
+    allowPlan: true,
     // 下坡
     downhill: false,
     // 最终冲刺
     finalRush: false,
     // 完赛
     finished: false,
-    // 触发恢复技能
-    heal: false,
-    // 超车
-    overtake: false,
-    // 焦躁
-    temptation: false,
+    // 被选为超车目标
+    to_be_overtaken: false,
   };
   // 各种概率
   probs = {
@@ -172,10 +201,14 @@ class PseudoUma {
   };
   // 终盘时的系数
   factorFinal = {
-    // 速度增加
-    vIdealAdd: 0,
+    // 追比加速度增加
+    accCompeteFightBuff: 0,
     // 耐力消耗系数
     sCostMult: 0,
+    // 追比目标速度增加
+    vCompeteFightBuff: 0,
+    // 速度增加
+    vIdealAdd: 0,
   };
   // 坡道时的系数
   factorSlope = {

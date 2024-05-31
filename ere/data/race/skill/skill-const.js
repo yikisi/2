@@ -293,6 +293,8 @@ chara_skill_dict[109] = [
   110091, 200582, 201312, 201901, 201902, 202501, 202502, 202802,
 ];
 
+const current = new Date().getTime();
+
 skills_dict[10071] = require('#/data/race/skill/skill-10071');
 skills_dict[10081] = require('#/data/race/skill/skill-10081');
 skills_dict[10091] = require('#/data/race/skill/skill-10091');
@@ -449,6 +451,7 @@ skills_dict[110381] = require('#/data/race/skill/skill-110381');
 skills_dict[110391] = require('#/data/race/skill/skill-110391');
 skills_dict[110401] = require('#/data/race/skill/skill-110401');
 skills_dict[110411] = require('#/data/race/skill/skill-110411');
+skills_dict[110441] = require('#/data/race/skill/skill-110441');
 skills_dict[110451] = require('#/data/race/skill/skill-110451');
 skills_dict[110461] = require('#/data/race/skill/skill-110461');
 skills_dict[110481] = require('#/data/race/skill/skill-110481');
@@ -480,6 +483,7 @@ skills_dict[120321] = require('#/data/race/skill/skill-120321');
 skills_dict[120351] = require('#/data/race/skill/skill-120351');
 skills_dict[120451] = require('#/data/race/skill/skill-120451');
 skills_dict[120601] = require('#/data/race/skill/skill-120601');
+skills_dict[120611] = require('#/data/race/skill/skill-120611');
 skills_dict[120671] = require('#/data/race/skill/skill-120671');
 skills_dict[120681] = require('#/data/race/skill/skill-120681');
 skills_dict[200011] = require('#/data/race/skill/skill-200011');
@@ -1020,6 +1024,12 @@ skills_dict[108801111] = require('#/data/race/skill/skill-108801111');
 skills_dict[108801211] = require('#/data/race/skill/skill-108801211');
 skills_dict[108901211] = require('#/data/race/skill/skill-108901211');
 
+console.log(
+  '[skill-const.js] skill list init done!',
+  (new Date().getTime() - current).toLocaleString(),
+  'ms',
+);
+
 const common_skills = [
   200011, 200012, 200014, 200021, 200022, 200031, 200032, 200041, 200042,
   200051, 200052, 200061, 200062, 200071, 200072, 200081, 200082, 200091,
@@ -1066,22 +1076,5 @@ const common_skills = [
   210012, 210021, 210022, 210031, 210032, 210041, 210042, 210061, 210062,
   210071, 210072,
 ];
-
-const dict = {};
-Object.values(skills_dict).forEach((s) => {
-  for (let i = 0; i < 2; ++i) {
-    for (let j = 0; j < 2; ++j) {
-      if (s.ability_types[i][j] !== 0) {
-        const v = s.ability_value_usages[i][j];
-        if (dict[v]) {
-          dict[v]++;
-        } else {
-          dict[v] = 1;
-        }
-      }
-    }
-  }
-});
-console.log(dict);
 
 module.exports = { chara_skill_dict, common_skills, skills_dict };
