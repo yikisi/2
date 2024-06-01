@@ -2,7 +2,7 @@
 
 _2024/6/1_
 
-EraUma v0.6，适配 [EraElectron v1.2.2 (zero)](https://gitgud.io/umaera/era-electron/-/releases/permalink/latest) 版本
+EraUma v0.6，适配 [EraElectron v1.2.3 (zero)](https://gitgud.io/umaera/era-electron/-/releases/v1.2.3) 版本
 
 ## Added
 
