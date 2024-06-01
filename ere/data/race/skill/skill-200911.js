@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200911,
-  '差しためらい',
-  'レース終盤に作戦・差しのウマ娘を\nためらわせて速度をわずかに下げる',
+  '居中彷徨',
+  '比赛终盘令战术是居中的赛马娘彷徨，使其速度略微下降',
   20091,
   1,
   3,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200552,
-  '押し切り準備',
-  '最終コーナーで先頭だと\n加速力がわずかに上がる＜作戦・逃げ＞',
+  '一逃到底',
+  '最终弯道略微容易保持领先＜作战・领放＞',
   20055,
   1,
   2,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202431,
-  '快進撃',
-  '終盤が迫ったとき先頭にいるか\n先頭から4バ身以内だと速度と加速力が\n少し上がる＜先行・中距離＞',
+  '乘胜追击',
+  '临近终盘时处于领头或距离领头4马身以内，则速度和加速度少量提升＜先行・中距离＞',
   20243,
   2,
   10,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202402,
-  '一足飛び',
-  'レース終盤に後方で追い抜こうとすると\n加速力がわずかに上がる\n＜短距離/マイル＞',
+  '越级',
+  '比赛终盘在后方准备超越时，稍微提升加速度＜短距离/英里＞',
   20240,
   1,
   2,

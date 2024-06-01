@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200601,
-  '乗り換え上手',
-  'レース終盤始めの方に中団以降にいると\n加速力が上がる＜作戦・差し＞',
+  '善于换乘',
+  '比赛终盘开始时位于中团以后时，加速度提升＜作战・居中＞',
   20060,
   2,
   10,

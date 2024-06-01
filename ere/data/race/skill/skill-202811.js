@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202811,
-  '画竜点睛',
-  'レース終盤始めの方で\n余力十分なら前に出る\n＜逃げ・長距離＞',
+  '画龙点睛',
+  '在比赛终盘初段若余力十足，则向前突进＜领放・长距离＞',
   20281,
   2,
   10,

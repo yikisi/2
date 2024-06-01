@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200591,
   '迅速果断',
-  'レース中盤に中団以降で\n速度が上がる＜作戦・差し＞',
+  '比赛中盘位于中团以后时，速度提升＜作战・居中＞',
   20059,
   2,
   10,

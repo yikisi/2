@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   10411,
-  '学級委員長+速さ＝バクシン',
-  'レース後半に前の方で競り合うとバク\nシン力（？）を発揮、速度が少し上がる',
+  '班长+速度=爆进',
+  '比赛后半段处于前列进行名次争夺时，发挥爆进之力，速度加快',
   1041,
   3,
   18,

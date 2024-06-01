@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201611,
-  '尻尾上がり',
-  'レース中盤にスキルを多く発動すると\n速度がわずかに上がる',
+  '翘尾巴',
+  '在比赛中盘发动多个技能时，速度略微提高',
   20161,
   1,
   2,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201691,
-  '潜伏態勢',
-  'レース中盤が迫ったとき\n中団以降にいると持久力を回復する\n＜作戦・差し＞',
+  '潜伏姿态',
+  '比赛临近中盘时，若位于中团以后的位置，恢复持久力＜作战・居中＞',
   20169,
   2,
   9,

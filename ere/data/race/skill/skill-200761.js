@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200761,
-  '火事場のバ鹿力',
-  '力尽きそうになったとき\n持久力を回復し速度が上がる\n＜長距離＞',
+  '火场怪力',
+  '在即将耗尽体力时，恢复元气，并且提升速度＜长距离＞',
   20076,
   2,
   9,

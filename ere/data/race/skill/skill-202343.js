@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202343,
-  '泥遊び○',
-  'バ場状態が重か不良のレースが\n得意になりスピードが少し上がる\n＜ダート＞',
+  '玩泥巴○',
+  '变得擅长赛场状态为重或不良的比赛，速度稍微上升＜沙土＞',
   20234,
   1,
   0,

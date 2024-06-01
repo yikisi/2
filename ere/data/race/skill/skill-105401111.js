@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   105401111,
-  '急行！ヒーロー参上！',
-  'レース中盤で中団以降にいると\n速度がすごく上がる\n＜作戦・差し＞',
+  '急行！英雄参上！',
+  '比赛中盘时位于队伍中后方往后，则速度大幅加快＜作战・居中＞',
   10540111,
   6,
   26,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200641,
-  '迫る影',
-  'ラストスパートの直線で\n加速力が上がる＜作戦・追込＞',
+  '迫近的阴影',
+  '在最后冲刺阶段的直线上加速度提升＜作战・追赶＞',
   20064,
   2,
   10,

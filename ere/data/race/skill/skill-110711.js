@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110711,
-  'Danser le présent',
-  '終盤の最終直線で好位置にいるとき\n後ろのウマ娘と近いと\n持久力を使って速度を上げ\nさらにわずかに前に出る',
+  '翩翩起舞惜当下',
+  '在比赛终盘的最终直线处于好位置且身后的马娘接近时，消耗少量体力速度上升，并稍微向前突进',
   11071,
   5,
   18,

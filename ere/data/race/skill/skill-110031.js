@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110031,
-  '絶対は、ボクだ',
-  '最終コーナー以降に前の方で\n追いすがっていると最終直線を走行中\n不屈の闘志で速度がすごく上がる',
+  '非我莫属',
+  '最终弯道之后位于前列穷追不舍时，会在最终直线展现不屈的斗志，大幅提升速度',
   11003,
   5,
   18,

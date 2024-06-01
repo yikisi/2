@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202672,
-  '心弾んで',
-  'レース終盤始めの方で前方にいると\n加速力がわずかに上がる＜マイル＞',
+  '雀跃',
+  '在刚进入比赛终盘时，若位于前方则稍微提升加速度＜英里＞',
   20267,
   1,
   2,

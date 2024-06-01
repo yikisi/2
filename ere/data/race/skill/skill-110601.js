@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110601,
   'Go☆Go☆for it!',
-  '最終コーナー以降に追い抜いていた場合\n最終直線で中団にいると速度が上がる\n人気が低い場合は奮起して上げ続ける',
+  '最终弯道之后超过对手并在最终直线处于中间集团时加快速度若人气处于后列则能振奋起来持续提高速度',
   11060,
   5,
   18,

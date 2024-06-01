@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100031,
-  '究極テイオーステップ',
-  'レース終盤に前と差が詰まると\n最終直線で華麗な脚取りを披露し\n速度がすごく上がる',
+  '究极帝王舞步',
+  '在比赛终盘缩小与对手的差距时，就会在最终直线展现出华丽的步伐，大幅提升速度',
   10003,
   5,
   18,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   10071,
-  '波乱注意砲！',
-  'レース中間付近で後方にいると\nロングスパートをかけて\n速度をわずかに上げ続ける',
+  '小心波澜炮！',
+  '从比赛中段进行长距离冲刺，速度略微加快',
   1007,
   3,
   18,

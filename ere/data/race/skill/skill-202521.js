@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202521,
-  '天衣無縫',
-  '最終コーナー前の第3コーナーで\n後ろの方にいると前に出る\n＜中距離/長距離＞',
+  '天衣无缝',
+  '在最终弯道前的第三弯道上位于后方时，向前突进＜中距离/长距离＞',
   20252,
   2,
   10,

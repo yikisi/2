@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201471,
-  '視界良好！異常なし！',
-  '左右に移動すると状況を把握して\n視野が少し広くなる＜作戦・追込＞',
+  '视野良好！没有异常！',
+  '左右移动的时候能更好的把握状况，视野更加开阔＜作战・追赶＞',
   20147,
   2,
   10,

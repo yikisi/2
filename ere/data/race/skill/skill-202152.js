@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202152,
-  'フルスロットル',
-  'レース中盤に持久力を少し使って\n速度を少し上げる＜作戦・差し＞',
+  '油门全开',
+  '在比赛中盘小幅消耗耐力小幅提升速度＜作战・居中＞',
   20215,
   1,
   2,

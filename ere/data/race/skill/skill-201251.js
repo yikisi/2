@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201251,
-  '逃げコーナー◎',
-  'コーナーで速度が少し上がる\n＜作戦・逃げ＞',
+  '领放弯道◎',
+  '在弯道上的速度少量加快＜作战・领放＞',
   20125,
   1,
   2,

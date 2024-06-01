@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100421,
   "『I'm possible』",
-  '残り200ｍ地点で先頭ではないとき\n先頭から4バ身以内だと速度が上がる\n2バ身以内にいる場合はすごく上がる',
+  '比赛剩余200m处自身不在领头位置，距离领头4马身以内时速度提升，距离2马身以内时速度极大提升',
   10042,
   5,
   18,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200682,
-  '積極策',
-  'レース中盤が迫ったとき前方にいると\n速度がわずかに上がる＜マイル＞',
+  '积极对策',
+  '比赛临近中盘时若身处前方，稍微更容易拉开差距＜英里＞',
   20068,
   1,
   2,

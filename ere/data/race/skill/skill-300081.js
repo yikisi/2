@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   300081,
-  'ほんにゃか快走祈願！',
-  '気持ちよく走れるおまじないをして\nサイレンススズカの能力を\n少し発揮しやすくさせる',
+  '哼喵咔快跑祈愿！',
+  '向无声铃鹿施下能够畅快奔跑的魔咒让她更好的发挥自己的能力',
   30008,
   1,
   0,

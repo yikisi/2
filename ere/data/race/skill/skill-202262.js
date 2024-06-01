@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202262,
-  '明るい兆し',
-  'レース終盤が迫ったとき前方にいると\n速度がわずかに上がる＜ダート＞',
+  '光明的征兆',
+  '比赛接近终盘时，处于前方的话会稍微提升速度＜沙土＞',
   20226,
   1,
   2,

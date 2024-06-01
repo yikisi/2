@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202692,
-  '一番乗り',
-  'スタート時に加速力がわずかに上がる\n＜中距離＞',
+  '打头阵',
+  '出闸时加速度稍微提升＜中距离＞',
   20269,
   1,
   2,

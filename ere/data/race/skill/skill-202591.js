@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202591,
-  '一気呵成',
-  'レース終盤始めの方で\n余力十分なら前に出る\n＜差し・長距離＞',
+  '一气呵成',
+  '比赛终盘初段余力十足的话，向前突进＜居中・长距离＞',
   20259,
   2,
   10,

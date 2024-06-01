@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200391,
-  '坂苦手',
-  '上り坂で少し\n疲れてしまいがちになる',
+  '不擅长坡道',
+  '上坡时容易疲劳',
   20039,
   1,
   4,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200692,
-  '展開窺い',
-  'レース中盤が迫ったとき後ろの方だと\nわずかに疲れにくくなり\n前の速度をちょっと下げる＜マイル＞',
+  '窥视展开',
+  '临近比赛中盘并位于后方时，略微不容易疲劳并使前方马娘速度稍微下降＜英里＞',
   20069,
   1,
   1,

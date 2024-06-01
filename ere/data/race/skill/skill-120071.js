@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   120071,
   'Vive la GOLD',
-  '中距離か長距離レースで最終コーナー\n以降に後方から追い抜こうとすると\n速度が上がる、スタート時に\n出遅れているとすごく上がる',
+  '中距离或长距离比赛的最终弯道往后，在后方准备超越对手时速度提升，如果出闸时起跑慢了，变为速度大幅提升',
   12007,
   5,
   18,

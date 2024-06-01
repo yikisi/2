@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202582,
-  '脇目も振らず',
-  'レース中盤に持久力を\nわずかに回復しさらに速度が\nちょっと上がる＜長距離＞',
+  '目不斜视',
+  '在比赛中盘少量回复体力，并略微提升速度＜长距离＞',
   20258,
   1,
   1,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201281,
-  'じゃじゃウマ娘',
-  '上り坂で疲れにくくなる\n＜作戦・逃げ＞',
+  '悍马娘',
+  '在上坡时不容易疲劳＜作战・领放＞',
   20128,
   2,
   9,

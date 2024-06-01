@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100481,
   'YEAH☆VIVID TIME!',
-  '最終直線を走行中に前の方で\n追い抜こうとするか詰め寄られると\nテンションを上げて速度を上げる',
+  '最终直线上身处前方，完成超越或是即将被超越时，速度会随兴致一起提升。',
   10048,
   5,
   18,

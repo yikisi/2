@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201511,
-  '熱いまなざし',
-  'レース終盤に目を付けたウマ娘の\n緊張感が増す＜作戦・追込＞',
+  '炙热视线',
+  '比赛的最终区域使自己紧盯的马娘紧张感上升＜作战・追赶＞',
   20151,
   2,
   11,

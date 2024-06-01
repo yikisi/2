@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202532,
-  'しとやかな足取り',
-  'レース中盤に速度がわずかに上がる\n＜マイル/中距離＞',
+  '端淑步伐',
+  '在比赛中盘时，速度稍微提升＜英里/中距离＞',
   20253,
   1,
   2,

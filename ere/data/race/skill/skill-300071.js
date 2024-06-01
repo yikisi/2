@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   300071,
-  '未知への走りを見せてくれ',
-  '次のステージを見せてくれる\n期待を伝えてサイレンススズカの\n能力を少し発揮しやすくさせる',
+  '呈现未知的比赛',
+  '向无声铃鹿传达看到全新舞台的期望，让她更好的发挥自己的能力',
   30007,
   1,
   0,

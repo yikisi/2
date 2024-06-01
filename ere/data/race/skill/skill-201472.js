@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201472,
-  'お見通し',
-  '左右に移動すると状況を把握して\n視野がわずかに広くなる＜作戦・追込＞',
+  '看穿',
+  '左右移动的时候能更好的把握状况，视野略微开阔＜作战・追赶＞',
   20147,
   1,
   2,

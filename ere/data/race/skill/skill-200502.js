@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200502,
-  '臨機応変',
-  'レース終盤にコース取りが\n少しうまくなる',
+  '临机应变',
+  '比赛终盘略微容易取得好路线',
   20050,
   1,
   2,

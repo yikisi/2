@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201561,
-  'スーパーラッキーセブン',
-  '枠番が7の時に\n良いことが起きる場合がある',
+  '豪运7号',
+  '枠号为7时会有好事发生',
   20156,
   2,
   8,

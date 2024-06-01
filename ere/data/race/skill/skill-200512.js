@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200512,
   '末脚',
-  'ラストスパートの最中に\n速度がわずかに上がる',
+  '在最后冲刺阶段的关键时刻，速度稍微提升',
   20051,
   1,
   2,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200351,
-  '円弧のマエストロ',
-  '無駄のないコーナリングで\n持久力が回復する',
+  '圆弧大师',
+  '完美过弯，持久力回复',
   20035,
   2,
   9,

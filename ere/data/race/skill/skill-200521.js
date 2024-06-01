@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200521,
-  '空回り',
-  '先頭で大きくリードし過ぎると\n少し疲れてしまいがちになる',
+  '空转',
+  '领跑过头的话，容易疲劳',
   20052,
   1,
   4,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210062,
-  '綺羅星',
-  'レース後半に\nちょっと呼吸を整え前へ踏み込む\n育成で重ねた勝利の数だけ効果が高まる',
+  '绮罗星',
+  '赛程后半调整呼吸并稍微向前迈进。育成中积累的胜利次数越多，速度、加速度、耐力回复量越高',
   21006,
   1,
   2,

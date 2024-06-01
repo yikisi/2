@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200741,
-  'クールダウン',
-  'レース中盤に息を入れて疲れにくくなる\n＜長距離＞',
+  '冷却',
+  '在比赛中盘时重整呼吸，不容易变得疲劳＜长距离＞',
   20074,
   2,
   9,

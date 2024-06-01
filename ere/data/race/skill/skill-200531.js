@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200531,
-  '先手必勝',
-  'スタート時に加速力が上がる\n＜作戦・逃げ＞',
+  '先手必胜',
+  '比赛初期更容易获得领先＜作战・领放＞',
   20053,
   2,
   10,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   120671,
-  'ポンテ・デ・ディアマン',
-  '終盤が迫ったときどこかで中団にいると\n速度が少し上がる、中距離レースなら\n効果が増える',
+  '钻石桥',
+  '临近终盘的某处位于队伍中间时速度少量提升，若是中距离比赛则提升技能效果',
   12067,
   5,
   18,

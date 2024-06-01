@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110481,
-  'GALmem.ふぉーえば♪',
-  'レース中間付近で中団にいると\n速度を少し上げ続ける\n絶好調なら効果が増える',
+  '我们辣妹，永远的姐妹♪',
+  '在比赛中段前后位于队伍中间时速度少量持续上升，如果心情绝好调则效果提升',
   11048,
   5,
   18,

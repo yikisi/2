@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202801,
-  '機先の勝負',
-  'レース中盤が迫ったとき\n速度が上がる',
+  '先发制人',
+  '临近比赛中盘时，速度提升',
   20280,
   2,
   10,

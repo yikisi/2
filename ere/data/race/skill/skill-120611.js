@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   120611,
-  '理想へのwinding road',
-  '残り600mを切って中団で外から\n追い抜いていると、ラストスパートの\n最中に速度を上げ続ける',
+  '通往理想的曲折道路',
+  '剩下600m时若在中间集团内从外线追赶，则于最后冲刺阶段当中持续加速',
   12061,
   5,
   18,

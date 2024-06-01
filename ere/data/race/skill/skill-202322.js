@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202322,
-  '急浮上',
-  'レース終盤に中団以降にいると\n加速力がわずかに上がる＜ダート＞',
+  '急剧上升',
+  '比赛终盘位于后方时，加速度稍微提升＜沙土＞',
   20232,
   1,
   2,

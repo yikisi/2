@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   105001111,
-  '鬼気森然',
-  'レース中盤に最後方付近にいると\n持久力を回復し速度がわずかに上がる\n＜作戦・追込＞',
+  '鬼气森然',
+  '比赛终盘时若身处接近最后方的位置，则回复持久力，并稍微提升速度＜作战・追赶＞',
   10500111,
   6,
   25,

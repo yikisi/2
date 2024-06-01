@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200281,
-  '対抗意識◎',
-  '自分と同じ作戦のウマ娘が多いと\n能力を発揮しやすい',
+  '对抗意识◎',
+  '很多马娘与自身同一战术时能力容易发挥',
   20028,
   1,
   0,

@@ -83,33 +83,29 @@ function sys_prepare_race(list_chara, race_info) {
     uma.race.conditionParams.activate_count_middle = 0;
     uma.race.conditionParams.activate_count_start = 0;
     uma.race.conditionParams.behind_near_lane_time = 0;
-    uma.race.preConditionParams.behind_near_lane_time_set1 = 0;
+    uma.race.conditionParams.behind_near_lane_time_set1 = 0;
     uma.race.conditionParams.blocked_front_continuetime = 0;
-    uma.race.preConditionParams.blocked_side_continuetime =
-      uma.race.conditionParams.blocked_side_continuetime = 0;
+    uma.race.conditionParams.blocked_side_continuetime = 0;
     uma.race.conditionParams.change_order_up_end_after = 0;
     uma.race.conditionParams.change_order_up_finalcorner_after = 0;
-    uma.race.preConditionParams.change_order_up_middle = 0;
+    uma.race.conditionParams.change_order_up_middle = 0;
     uma.race.conditionParams.infront_near_lane_time = 0;
     uma.race.conditionParams.is_lastspurt = 0;
     uma.race.conditionParams.is_other_character_activate_advantage_skill = 0;
     uma.race.conditionParams.is_temptation = 0;
     uma.race.conditionParams.is_used_skill_id = 0;
     uma.race.conditionParams.lastspurt = 0;
-    uma.race.preConditionParams.order_rate_in20_continue =
-      uma.race.conditionParams.order_rate_in20_continue = 1;
+    uma.race.conditionParams.order_rate_in20_continue = 1;
     uma.race.conditionParams.order_rate_in50_continue = 1;
     uma.race.conditionParams.order_rate_in80_continue = 1;
-    uma.race.preConditionParams.order_rate_out20_continue = 1;
-    uma.race.preConditionParams.order_rate_out40_continue =
-      uma.race.conditionParams.order_rate_out40_continue = 1;
-    uma.race.preConditionParams.order_rate_out50_continue = 1;
-    uma.race.preConditionParams.order_rate_out70_continue = 1;
-    uma.race.preConditionParams.overtake_target_no_order_up_time = 0;
-    uma.race.preConditionParams.overtake_target_time =
-      uma.race.conditionParams.overtake_target_time = 0;
-    uma.race.preConditionParams.phase = uma.race.conditionParams.phase = 0;
-    uma.race.conditionParams.running_style = uma.style;
+    uma.race.conditionParams.order_rate_out20_continue = 1;
+    uma.race.conditionParams.order_rate_out40_continue = 1;
+    uma.race.conditionParams.order_rate_out50_continue = 1;
+    uma.race.conditionParams.order_rate_out70_continue = 1;
+    uma.race.conditionParams.overtake_target_no_order_up_time = 0;
+    uma.race.conditionParams.overtake_target_time = 0;
+    uma.race.conditionParams.phase = 0;
+    uma.race.conditionParams.running_style = uma.style + 1;
     uma.race.conditionParams.running_style_count_nige_otherself =
       running_style_counts[0] - (uma.style === 0);
     uma.race.conditionParams.running_style_count_senko_otherself =
@@ -126,8 +122,7 @@ function sys_prepare_race(list_chara, race_info) {
     uma.race.conditionParams.running_style_equal_popularity_one = Number(
       uma.style === pop_1.style,
     );
-    uma.race.preConditionParams.temptation_count =
-      uma.race.conditionParams.temptation_count = 0;
+    uma.race.conditionParams.temptation_count = 0;
     // 分配赛道 及初始名次以避免意外
     uma.rank = {
       curr: uma.index_race,
@@ -229,6 +224,8 @@ function sys_prepare_race(list_chara, race_info) {
       uma.attrs[v] *= 1 + uma.motivation * 0.02;
     });
 
+    uma.base.accBuffFromWiz = (uma.attrs[attr_enum.intelligence] * 0.01) / 300;
+
     // 由基础智力决定技能触发率 最低20%
     uma.probs.skill = Math.max(1 - 90 / uma.attrs[attr_enum.intelligence], 0.2);
 
@@ -276,7 +273,7 @@ function sys_prepare_race(list_chara, race_info) {
         skill_counts[skill.data.id] || 0;
       for (let i = 0; i < skill.data.ability_times.length; ++i) {
         if (
-          skill.data.preconditions[i](uma.race.preConditionParams) &&
+          skill.data.preconditions[i](uma.race.conditionParams) &&
           skill.data.conditions[i](uma.race.conditionParams)
         ) {
           for (let j = 0; j < skill.data.ability_types.length; ++j) {
@@ -308,6 +305,7 @@ function sys_prepare_race(list_chara, race_info) {
               // case ability_type_enum.VisibleDistance:
             }
           }
+          uma.base.greenCount++;
           break;
         }
       }

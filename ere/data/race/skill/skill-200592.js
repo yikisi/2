@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200592,
-  '位置取り押し上げ',
-  'レース中盤に中団以降で\n速度がわずかに上がる\n＜作戦・差し＞',
+  '向前取位',
+  '比赛中盘位于中团以后时，速度稍微提升＜作战・居中＞',
   20059,
   1,
   2,

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110501,
   'Hephaistos',
-  'レース終盤の最終コーナー後半で\n高みを目指して中団から速度を上げる',
+  '在比赛终盘的最终弯道后半，向着顶点进发，从中间集团开始提高速度',
   11050,
   5,
   18,

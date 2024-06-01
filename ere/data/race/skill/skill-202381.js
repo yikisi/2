@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202381,
-  'ブレイクスルー',
-  'レース中盤に後方にいると速度が上がり\nコース取りがうまくなる＜作戦・追込＞',
+  '突破',
+  '比赛中盘位于后方时，速度提升，并选择更好的路线＜作战・追赶＞',
   20238,
   2,
   10,

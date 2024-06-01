@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200581,
-  'スピードスター',
-  '最終コーナーで前方にいると\n速度が上がる＜作戦・先行＞',
+  '速度之星',
+  '在最终弯道上容易突围＜作战・先行＞',
   20058,
   2,
   10,

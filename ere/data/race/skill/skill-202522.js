@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202522,
-  '型破り',
-  '最終コーナー前の第3コーナーで\n後ろの方にいるとわずかに前に出る\n＜中距離/長距離＞',
+  '打破常理',
+  '在最终弯道前的第三弯道上位于后方时，稍微向前突进＜中距离/长距离＞',
   20252,
   1,
   2,

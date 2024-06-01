@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200662,
-  '様子見',
-  'レース中盤に後ろの方だと\nわずかに疲れにくくなり\n加速力がちょっと上がる＜短距離＞',
+  '观望',
+  '比赛中盘在后方时稍微不容易疲劳并提高一点加速度＜短距离＞',
   20066,
   1,
   1,

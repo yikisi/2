@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110301,
   'Drain for rose',
-  'レース中盤で好位置だと\n前方のウマ娘から持久力を吸い取り\n自分の速度を少し上げる',
+  '在比赛中盘身处好位置时，会吸取前方赛马娘的持久力，并且小幅提升速度',
   11030,
   5,
   17,

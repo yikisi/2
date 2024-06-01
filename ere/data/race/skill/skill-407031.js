@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   407031,
-  'ベストを尽くして！',
-  'ラストスパートの最中に\n速度がすごく上がる＜マイル/中距離＞',
+  '竭尽全力！',
+  '在最终冲刺的关键时刻，速度大幅提升＜英里/中距离＞',
   40703,
   6,
   26,

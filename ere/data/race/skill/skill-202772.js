@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202772,
-  '狙いを定めて',
-  'レース終盤始めの方早めに\n前の方にいると加速力がわずかに上がる\n＜先行・長距離＞',
+  '瞄准目标',
+  '在终盘初段位于前方时，更早时间内稍微提升加速度＜先行・长距离＞',
   20277,
   1,
   2,

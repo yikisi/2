@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200602,
-  '差し切り体勢',
-  'レース終盤始めの方に中団以降にいると\n加速力がわずかに上がる\n＜作戦・差し＞',
+  '超越姿态',
+  '比赛终盘开始时位于中团以后时，加速度稍微提升＜作战・居中＞',
   20060,
   1,
   2,

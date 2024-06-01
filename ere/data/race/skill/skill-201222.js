@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201222,
-  'スタミナイーター',
-  'レース中盤で後ろの方にいると\n前方の持久力をちょっと奪う＜長距離＞',
+  '耐力猎手',
+  '比赛中盘位于后方时，就会稍微剥夺前方马娘的耐力＜长距离＞',
   20122,
   1,
   3,

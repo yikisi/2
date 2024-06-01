@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100431,
-  'Ding Dong Boo',
-  '追い比べをしたとき、速度を少し上げる\nダートレースでは嚙みつかんばかりの\n気迫でさらに加速力を上げる',
+  '噔！咚！！砰！！！',
+  '名次争夺时，速度稍稍上升。若是身处沙土比赛，则会以要噬咬前方选手般的气势进一步提升加速度',
   10043,
   5,
   18,

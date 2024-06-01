@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201211,
-  '怒涛の追い上げ',
-  'レース終盤で追い抜くと\n速度が上がり加速力がちょっと上がる\n＜長距離＞',
+  '怒涛般的追击',
+  '在比赛终盘完成超越时，速度提升，并且加速力微幅提升＜长距离＞',
   20121,
   2,
   10,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200762,
-  '別腹タンク',
-  '力尽きそうになったとき\n持久力をわずかに回復する\n＜長距離＞',
+  '第二体力槽',
+  '在体力快要耗尽时略微恢复元气＜长距离＞',
   20076,
   1,
   1,

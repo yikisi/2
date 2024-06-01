@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201253,
-  '陣風円刃',
-  'コーナーで速度が上がる＜作戦・逃げ＞',
+  '暴风圆刃',
+  '在弯道上的速度加快＜作战・领放＞',
   20125,
   2,
   10,

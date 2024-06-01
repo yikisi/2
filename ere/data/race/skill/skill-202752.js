@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202752,
-  'ひたむき前進',
-  'レース終盤が迫ったとき中団以降だと\n速度がわずかに上がる＜短距離＞',
+  '一心向前',
+  '临近终盘的时候若位于中后方，稍微提升速度＜短距离＞',
   20275,
   1,
   2,

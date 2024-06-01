@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110381,
   'One True Color',
-  '残り350mを切って\n前の方で後ろのウマ娘との距離が近いと\n譲らぬ思いで抜け出しやすくなる',
+  '比赛剩余350m处于前方，与后方马娘距离接近时以绝不退让的意志更容易突围',
   11038,
   5,
   18,

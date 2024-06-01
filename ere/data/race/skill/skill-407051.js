@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   407051,
-  '破竹の筋肉',
-  '最終コーナーで中団以降にいると\n速度がすごく上がる＜マイル＞',
+  '破竹之肌肉',
+  '最终弯道处若自身位于中后方，则速度大幅提升＜英里＞',
   40705,
   6,
   26,

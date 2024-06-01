@@ -219,23 +219,20 @@ function sys_parse_for_race(team_chara, race, info) {
     uma.race.conditionParams.grade =
       (info.race_class === RaceInfo.class_enum.G1) * 100;
     uma.race.conditionParams.ground_condition = info.mess + 1;
-    uma.race.preConditionParams.ground_type =
-      uma.race.conditionParams.ground_type = info.ground + 1;
+    uma.race.conditionParams.ground_type = info.ground + 1;
     uma.race.conditionParams.is_basis_distance = info.span400;
     // 横向距离砍掉了：固定外道超人
-    uma.race.preConditionParams.is_behind_in =
-      uma.race.conditionParams.is_behind_in = 1;
+    uma.race.conditionParams.is_behind_in = 1;
     uma.race.conditionParams.is_dirtgrade = is_dirt_grade;
     uma.race.conditionParams.is_exist_chara_id = 1000 + uma.index_chara;
     // 横向距离砍掉了：移动方向随机
     uma.race.conditionParams.is_move_lane = get_random_value(0, 2);
     // 横向距离砍掉了：固定内道
-    uma.race.preConditionParams.lane_type =
-      uma.race.conditionParams.lane_type = 0;
+    uma.race.conditionParams.lane_type = 0;
     uma.race.conditionParams.motivation = uma.motivation + 3;
     uma.race.conditionParams.random_lot = get_random_value(0, 99);
     uma.race.conditionParams.rotation = info.rotation + 1;
-    uma.race.conditionParams.running_style = uma.style;
+    uma.race.conditionParams.running_style = uma.style + 1;
     uma.race.conditionParams.running_style_count_nige_otherself =
       running_style_counts[0] - (uma.style === 0);
     uma.race.conditionParams.running_style_count_senko_otherself =
@@ -253,8 +250,7 @@ function sys_parse_for_race(team_chara, race, info) {
     uma.race.conditionParams.season = season;
     // 比赛时间：随机白天或晚上
     uma.race.conditionParams.time = 4 * (Math.random() < 0.5);
-    uma.race.preConditionParams.track_id = uma.race.conditionParams.track_id =
-      info.track;
+    uma.race.conditionParams.track_id = info.track;
     uma.race.conditionParams.weather = info.weather + 1;
   });
 
@@ -310,10 +306,10 @@ function sys_parse_for_race(team_chara, race, info) {
           (skill.data.ability_times[0] >= 0 &&
             skill.data.ability_times[1] >= 0) ||
           (skill.data.ability_times[0] <= 0 &&
-            skill.data.preconditions[0](uma.race.preConditionParams) &&
+            skill.data.preconditions[0](uma.race.conditionParams) &&
             skill.data.conditions[0](uma.race.conditionParams)) ||
           (skill.data.ability_times[1] <= 0 &&
-            skill.data.preconditions[1](uma.race.preConditionParams) &&
+            skill.data.preconditions[1](uma.race.conditionParams) &&
             skill.data.conditions[1](uma.race.conditionParams)),
       )
       .forEach((skill) => {

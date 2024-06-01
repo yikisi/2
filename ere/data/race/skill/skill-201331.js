@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201331,
   '技巧派',
-  '左右に移動するとき加速力が少し上がる\n＜作戦・先行＞',
+  '路线选取变得稍微流畅＜作战・先行＞',
   20133,
   2,
   10,

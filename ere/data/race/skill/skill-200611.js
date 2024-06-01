@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200611,
-  '昇り龍',
-  '最終コーナーで外から追い抜くと\n速度が上がる＜作戦・差し＞',
+  '升龙',
+  '在最终弯道从外道赶超时，速度加快＜作战・居中＞',
   20061,
   2,
   10,

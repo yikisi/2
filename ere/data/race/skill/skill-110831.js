@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110831,
-  'Immortal Work',
-  'レース中間地点で中団にいると最終直線\nで速度が上がる、中山レース場の\n中距離レースならものすごく上がる',
+  '不死不灭者',
+  '比赛进行到一半位于队伍中间时，在最终直线处提升速度，如果是中山竞马场的中距离比赛，则变为极大提升速度',
   11083,
   5,
   18,

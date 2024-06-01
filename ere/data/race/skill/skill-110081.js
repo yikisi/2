@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110081,
   'Into High Gear!',
-  'レース中盤以降の下り坂で中団だと坂を\n下った後少しの間速度を上げる\n東京レース場ならさらにギアを上げる',
+  '比赛进入中盘之后在下坡时位于中间集团，则下完坡后在短时间内速度提升，如果位于东京竞马场则再次推高档位',
   11008,
   5,
   18,

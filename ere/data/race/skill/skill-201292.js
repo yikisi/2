@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201292,
-  '二の矢',
-  'レース終盤に持久力を少し使って\n加速力をわずかに上げる＜作戦・逃げ＞',
+  '第二支箭',
+  '在比赛终盘小幅消耗持久力，稍微提升加速度＜作战・领放＞',
   20129,
   1,
   2,

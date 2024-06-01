@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200283,
-  '引っ込み思案',
-  '自分と同じ作戦のウマ娘が多いと\n能力を少し発揮しにくい',
+  '畏缩不前',
+  '很多马娘与自身同一战术时能力难以发挥',
   20028,
   1,
   4,

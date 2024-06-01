@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100171,
-  '汝、皇帝の神威を見よ',
-  'レース終盤に3回追い抜くと\n最終直線で速度がすごく上がる',
+  '汝等，瞻仰皇帝之神威吧',
+  '在比赛终盘赶超3次后，最终直线上会大幅加速',
   10017,
   5,
   18,

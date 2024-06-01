@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200931,
-  '追込焦り',
-  'レース中盤に作戦・追込のウマ娘を\n焦らせてわずかに疲れやすくする',
+  '追赶焦躁',
+  '比赛中盘令战术是追赶的赛马娘焦躁，使其略微容易疲劳',
   20093,
   1,
   3,

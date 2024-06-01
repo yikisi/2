@@ -12,6 +12,7 @@ const print_page_header = require('#/page/components/page-header');
 const select_target_chara = require('#/page/components/select-target');
 
 const chara_info_type = require('#/data/chara-info-type');
+const CharaSkills = require('#/data/chara-skills');
 const { adaptability_colors } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
 const {
@@ -59,14 +60,28 @@ module.exports = async () => {
       let chara_level = get_rank_level(chara_score);
       columns.push(
         { config: { content: '基础能力' }, type: 'divider' },
-        { config: { width: 3 }, content: '评价', type: 'text' },
+        { config: { width: 4 }, content: '评价', type: 'text' },
         {
           config: {
             color: adaptability_colors[chara_level],
-            width: 21,
+            width: 4,
             fontWeight: 'bold',
           },
           content: chara_score,
+          type: 'text',
+        },
+        {
+          config: { align: 'right', width: 12 },
+          content: '技能点数',
+          type: 'text',
+        },
+        {
+          config: {
+            align: 'right',
+            width: 4,
+            fontWeight: 'bold',
+          },
+          content: era.get(`exp:${chara_id}:技能点数`),
           type: 'text',
         },
       );
@@ -77,7 +92,7 @@ module.exports = async () => {
         }
         columns.push(
           {
-            config: { width: 3 },
+            config: { width: 4 },
             content: k,
             type: 'text',
           },
@@ -85,7 +100,7 @@ module.exports = async () => {
             config: {
               color: attr_colors[k],
               height: 22,
-              width: 21,
+              width: 20,
             },
             inContent: `${era.get(`base:${chara_id}:${k}`)}/${era.get(
               `maxbase:${chara_id}:${k}`,
@@ -102,7 +117,7 @@ module.exports = async () => {
       era.printInColRows(
         {
           columns,
-          config: { width: 9 },
+          config: { width: 6 },
         },
         { columns: [], config: { width: 1 } },
         {
@@ -112,12 +127,12 @@ module.exports = async () => {
               type: 'divider',
             },
             {
-              config: { width: 4 },
+              config: { width: 3 },
               content: '场地适性',
               type: 'text',
             },
             {
-              config: { width: 8 },
+              config: { width: 5 },
               content: [
                 '草',
                 {
@@ -135,12 +150,12 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { width: 4 },
+              config: { width: 3 },
               content: '距离适性',
               type: 'text',
             },
             {
-              config: { width: 8 },
+              config: { width: 5 },
               content: [
                 '短',
                 {
@@ -170,22 +185,12 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { width: 4 },
-              content: '技能点数',
-              type: 'text',
-            },
-            {
-              config: { width: 8 },
-              content: era.get(`exp:${chara_id}:技能点数`),
-              type: 'text',
-            },
-            {
-              config: { width: 4 },
+              config: { width: 3 },
               content: '跑法适性',
               type: 'text',
             },
             {
-              config: { width: 8 },
+              config: { width: 5 },
               content: [
                 { content: '逃' },
                 {
@@ -218,13 +223,13 @@ module.exports = async () => {
               config: { content: '习得技能' },
               type: 'divider',
             },
-            ...era.get(`skill:${chara_id}:习得技能`).map((e) => ({
+            ...new CharaSkills(chara_id).get().map((e) => ({
               config: { display: 'inline-block', width: 8 },
               content: skills_dict[e].get_colored_name(),
               type: 'text',
             })),
           ],
-          config: { width: 14 },
+          config: { width: 17 },
         },
       );
     }

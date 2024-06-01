@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202001,
-  '砂の玄人',
-  'レース中盤に後方にいると\n持久力が回復し速度が上がる＜ダート＞',
+  '沙尘专家',
+  '比赛中盘若位于后方将回复持久力，提升速度＜沙土＞',
   20200,
   2,
   9,

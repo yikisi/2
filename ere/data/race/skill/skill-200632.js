@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200632,
-  '仕掛け抜群',
-  'レース終盤に後方にいると\nラストスパートの最中に\n速度をわずかに上げる＜作戦・追込＞',
+  '机能拔群',
+  '在比赛终盘位于后方时，最后冲刺阶段的中段，速度稍微提升＜作战・追赶＞',
   20063,
   1,
   2,

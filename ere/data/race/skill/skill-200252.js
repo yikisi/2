@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200252,
-  '内枠得意○',
-  '枠番が1～3のレースが少し得意になる',
+  '擅长内枠○',
+  '稍微擅长1~3号枠号的比赛',
   20025,
   1,
   0,

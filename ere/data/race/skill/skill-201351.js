@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201351,
-  '食いしん坊',
-  'レース中盤に持久力が回復する\n＜作戦・先行＞',
+  '大胃王',
+  '比赛中盘回复持久力＜作战・先行＞',
   20135,
   2,
   9,

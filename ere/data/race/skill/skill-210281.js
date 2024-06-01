@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210281,
-  '大地の叡智',
-  'レース終盤の中ほどで速度が上がる\n獲得したスキルの数に応じて\n効果が高まる',
+  '大地的睿智',
+  '在比赛终盘中段时，速度提升习得的技能越多则效果越强',
   21028,
   2,
   10,

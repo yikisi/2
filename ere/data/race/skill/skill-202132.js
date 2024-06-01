@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202132,
-  '気迫を込めて',
-  'レース中盤に前の方にいると\n後ろの速度をほんのわずかに下げ\n自分の速度をわずかに上げる＜中距離＞',
+  '气吞牛斗',
+  '比赛中盘位于前方时，略微降低后方马娘的速度，自身速度稍微提升＜中距离＞',
   20213,
   1,
   2,

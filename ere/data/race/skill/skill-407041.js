@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   407041,
-  '無二の情熱',
-  'レース終盤が迫ったとき\n中団以前にいると速度がすごく上がる\n＜マイル＞',
+  '独一无二的热情',
+  '临近终盘时若自身位于队伍中间往前，则速度大幅提升＜英里＞',
   40704,
   6,
   26,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201082,
-  'スピードイーター',
-  'レース中盤に前の方にいると\n後ろの速度をわずかに奪う＜マイル＞',
+  '速度猎手',
+  '比赛中盘在前方时，略微夺取后方马娘的速度＜英里＞',
   20108,
   1,
   3,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202952,
-  'パイオニア',
-  'レース中盤が迫ったとき前方にいると\n速度がわずかに上がる＜ダート＞',
+  '先锋',
+  '临近中盘若位于前方，则稍微提升速度＜沙土＞',
   20295,
   1,
   2,

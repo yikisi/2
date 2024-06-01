@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110241,
-  'フラワリー☆マニューバ',
-  '最終コーナー以降に\n前の方で抜くと速度が\n後ろの方で抜くと加速力が上がる',
+  'Flowery☆Maneuver',
+  '在最终弯道前，在前方完成超越时提升速度，在后方完成超越时则提升加速度',
   11024,
   5,
   18,

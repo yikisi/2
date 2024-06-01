@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202651,
-  '雲蒸竜変',
-  'スピードとパワーが十分に強いと\nスピードとパワーが上がる\n＜マイル/中距離＞',
+  '云蒸龙变',
+  '速度和力量都十分强劲时，提升速度和力量＜英里/中距离＞',
   20265,
   2,
   8,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201371,
-  '幻惑のかく乱',
-  'レース終盤に前の方にいると後方の\n視野が少し狭くなる＜作戦・先行＞',
+  '迷惑的干扰',
+  '比赛终盘位于前列时，使后面马娘的视野稍微变窄＜作战・先行＞',
   20137,
   2,
   11,

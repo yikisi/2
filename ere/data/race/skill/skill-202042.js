@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202042,
-  '軽い足取り',
-  'レース終盤が迫ったとき前方にいると\n速度がわずかに上がる＜短距離＞',
+  '轻盈步伐',
+  '临近终盘若位于前方的话略微提高速度＜短距离＞',
   20204,
   1,
   2,

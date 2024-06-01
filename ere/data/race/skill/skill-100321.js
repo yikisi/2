@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100321,
   'U=ma2',
-  'レース後半のコーナーで\n好位置に控えていると持久力を回復し\nさらに少しの間速度を少し上げる',
+  '在比赛后半且靠近弯道时，持久力恢复，且短时间内稍微提高速度',
   10032,
   4,
   17,

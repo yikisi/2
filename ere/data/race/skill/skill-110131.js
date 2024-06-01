@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110131,
-  '最強の名を懸けて',
-  'レース終盤かつ最終コーナー以降に\n前の方で詰め寄られると\n速度を上げ続ける',
+  '赌上最强之名',
+  '比赛终盘最终弯道处于前方时被超越时，速度持续上升',
   11013,
   5,
   18,

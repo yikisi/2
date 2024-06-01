@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100181,
-  'ブレイズ・オブ・プライド',
-  '最終コーナーで中団以降から追い抜くと\n女帝たる走りで速度が上がる',
+  '荣耀之刃',
+  '在最终弯道从中后方赶超时，犹如女帝般的奔跑会使速度加快',
   10018,
   4,
   18,

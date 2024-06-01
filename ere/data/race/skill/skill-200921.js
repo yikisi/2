@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200921,
-  '追込けん制',
-  'レース序盤に作戦・追込のウマ娘を\nけん制してわずかに疲れやすくする',
+  '追赶牵制',
+  '比赛初盘对战术是追赶的赛马娘进行牵制，使其略微容易疲劳',
   20092,
   1,
   3,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202622,
-  '進出開始',
-  'レース終盤が迫ったとき\n中団以降にいると速度がわずかに上がる\n＜作戦・差し＞',
+  '开始出击',
+  '临近比赛终盘时位于中后方，则稍微提升速度＜作战・居中＞',
   20262,
   1,
   2,

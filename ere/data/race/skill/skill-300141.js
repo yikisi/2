@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   300141,
-  '不撓不屈',
-  '真剣勝負、いざ参ります！',
+  '不屈不挠',
+  '一决胜负，恕请赐教！',
   30014,
   5,
   18,

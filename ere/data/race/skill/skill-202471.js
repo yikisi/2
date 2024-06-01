@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202471,
   '猛追',
-  'レース後半に追い抜こうとすると\n速度が上がる＜先行/差し＞',
+  '比赛后半段进行追赶时，速度提升＜先行/居中＞',
   20247,
   2,
   10,

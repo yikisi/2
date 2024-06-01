@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201012,
-  '後方釘付',
-  'レース序盤に前の方にいると\n後方のウマ娘が少し萎縮する＜短距離＞',
+  '钉死后方',
+  '比赛序盘处于前方时令后方的赛马娘稍微萎缩＜短距离＞',
   20101,
   1,
   3,

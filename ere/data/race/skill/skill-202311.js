@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202311,
-  '目指せセンター！',
-  'レース終盤に前方にいると\n加速力が上がる＜ダート＞',
+  '目标是C位！',
+  '比赛终盘位于前方时，加速度提升＜沙土＞',
   20231,
   2,
   10,

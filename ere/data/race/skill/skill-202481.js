@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202481,
   '怪物',
-  'レース終盤目前に先頭か先頭から4バ身\n以内につけると、レース終盤に\n加速力が上がる＜先行・長距離＞',
+  '临近终盘位于领头或是距离领头4马身以内时，在终盘提升加速度＜先行・长距离＞',
   20248,
   2,
   10,

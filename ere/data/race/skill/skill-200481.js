@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200481,
-  'どこ吹く風',
-  'レース中盤に囲まれると\n持久力が回復する',
+  '耳边风',
+  '比赛中盘被包围时，持久力回复',
   20048,
   2,
   9,

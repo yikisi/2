@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   105101211,
-  '大輪の決意',
-  '下り坂で加速力が上がる\n＜作戦・先行＞',
+  '绽放的决心',
+  '身处下坡时，加速力提升＜作战・先行＞',
   10510121,
   6,
   26,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   108001211,
-  '『未知』を求めて',
-  'レース中盤が迫ったとき前方にいると\n速度がすごく上がる＜ダート＞',
+  '追寻『未知』',
+  '临近中盘若位于前方，则大幅提升速度＜沙土＞',
   10800121,
   6,
   26,

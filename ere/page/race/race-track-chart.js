@@ -22,7 +22,7 @@ function print_race_track_chart(info) {
   info.lanes.forEach(
     (e, i) =>
       (annotations[`box${i + 1}`] = {
-        backgroundColor: e.cornor ? 'rgb(51,55,66,0.5)' : 'rgb(70,70,53,0.5)',
+        backgroundColor: e.is_curve ? 'rgb(51,55,66,0.5)' : 'rgb(70,70,53,0.5)',
         borderColor: 'black',
         type: 'box',
         xMax: e.start,
@@ -34,29 +34,29 @@ function print_race_track_chart(info) {
   annotations.divider1 = {
     borderColor: 'black',
     type: 'line',
-    xMax: info.phases[1],
-    xMin: info.phases[1],
+    xMax: info.phases[0],
+    xMin: info.phases[0],
   };
   annotations.dLabel1 = {
     backgroundColor: 'black',
     color: 'white',
-    content: `序 ⬅ ${info.phases[1]} ⮕ 中`,
+    content: `序 ⬅ ${info.phases[0]} ⮕ 中`,
     type: 'label',
-    xValue: info.phases[1],
+    xValue: info.phases[0],
     yValue: -2.75,
   };
   annotations.divider2 = {
     borderColor: 'black',
     type: 'line',
-    xMax: info.phases[2],
-    xMin: info.phases[2],
+    xMax: info.phases[1],
+    xMin: info.phases[1],
   };
   annotations.dLabel2 = {
     backgroundColor: 'black',
     color: 'white',
-    content: `中 ⬅ ${info.phases[2]} ⮕ 终`,
+    content: `中 ⬅ ${info.phases[1]} ⮕ 终`,
     type: 'label',
-    xValue: info.phases[2],
+    xValue: info.phases[1],
     yValue: -2.75,
   };
   info.lanes.forEach(

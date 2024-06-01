@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   102301111,
-  '想定通り、余裕十分',
-  'レース中盤が迫ったとき前の方にいると\n持久力をすごく回復する＜作戦・先行＞',
+  '正如预料，绰绰有余',
+  '临近比赛中盘时若身处前方，则大幅回复持久力＜作战・先行＞',
   10230111,
   6,
   25,

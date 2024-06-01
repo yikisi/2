@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201491,
-  '冷静沈着',
-  '前のウマ娘のすぐ後ろに付けると\n落ち着いて持久力を回復する\n＜作戦・追込＞',
+  '沉着冷静',
+  '紧跟前方赛马娘时，使自己冷静下来恢复持久力＜作战・追赶＞',
   20149,
   2,
   9,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200462,
-  'ペースアップ',
-  'レース中盤に追い抜くと\n速度がわずかに上がる',
+  '加快步伐',
+  '比赛中盘超过别人时，速度略微加快',
   20046,
   1,
   2,

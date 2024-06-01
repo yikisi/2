@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201122,
-  'ホークアイ',
-  'レース序盤に観察力が高まり\n視野を少し広く持てる＜中距離＞',
+  '鹰眼',
+  '比赛初盘观察力提高，视野稍微开阔＜中距离＞',
   20112,
   1,
   2,

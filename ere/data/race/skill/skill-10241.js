@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   10241,
-  '勝利のキッス☆',
-  '最終コーナー以降に前の方で競り合うと\nわずかに抜け出しやすくなる',
+  '胜利之吻☆',
+  '最终弯道之后处于前列进行名次争夺时，在直线上略微容易突围',
   1024,
   3,
   18,

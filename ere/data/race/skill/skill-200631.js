@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200631,
-  '疾風怒濤',
-  'レース終盤に後方にいると\nラストスパートの最中に\n速度を上げる＜作戦・追込＞',
+  '疾风怒涛',
+  '在比赛终盘位于后方时，最后冲刺阶段的中段，速度提升＜作战・追赶＞',
   20063,
   2,
   10,

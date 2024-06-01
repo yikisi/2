@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202272,
-  '盛り返し',
-  'レース中盤に後ろの方にいると\n速度がわずかに上がる＜ダート＞',
+  '重整旗鼓',
+  '比赛中盘位于后方时，稍微提升速度＜沙土＞',
   20227,
   1,
   2,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210271,
-  '大海の叡智',
-  'レース序盤の始めの方に加速力が上がる\n獲得したスキルの数に応じて\n効果が高まる',
+  '大海的睿智',
+  '在比赛序盘开始时，加速度提升习得的技能越多则效果越强',
   21027,
   2,
   10,

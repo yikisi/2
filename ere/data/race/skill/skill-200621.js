@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200621,
-  '眠れる獅子',
-  'レース中盤に最後方付近にいると\n疲れにくくなる＜作戦・追込＞',
+  '沉睡的狮子',
+  '在比赛中盘积攒脚力，不容易疲劳＜作战・追赶＞',
   20062,
   2,
   9,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202661,
-  '昂る鼓動',
-  'レース終盤始めの方に中団にいると\n前に出る＜中距離/長距離＞',
+  '斗志昂扬',
+  '比赛终盘初段位于队伍中间时，向前突进＜中距离/长距离＞',
   20266,
   2,
   10,

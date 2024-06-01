@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   106801111,
-  '祭りだワッショイ！',
-  'スタート時に加速力がすごく上がる\n＜作戦・逃げ＞',
+  '庆典开始Wasshoi！',
+  '比赛开始时，加速度大幅提升＜作战・领放＞',
   10680111,
   6,
   26,

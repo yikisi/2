@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202021,
-  '強攻策',
-  'レース中盤に後方にいると\nしばらくの間速度が少し上がる\n＜作戦・追込＞',
+  '强攻策',
+  '比赛中盘处于后方时一段时间内速度会少量加快＜作战・追赶＞',
   20202,
   2,
   10,

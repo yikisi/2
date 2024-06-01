@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202742,
   '品行方正',
-  '最終コーナー前の第3コーナーで\n前の方にいるとわずかに前に出る\n＜マイル/中距離＞',
+  '位于最终弯道前的第三弯道时，若在队伍前方则稍微向前突进＜英里/中距离＞',
   20274,
   1,
   2,

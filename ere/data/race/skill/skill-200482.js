@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200482,
-  'ウマ込み冷静',
-  'レース中盤に囲まれると\n持久力がわずかに回復する',
+  '混战冷静',
+  '比赛中盘被包围时，持久力略微回复',
   20048,
   1,
   1,

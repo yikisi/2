@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200491,
-  'ノンストップガール',
-  'ラストスパートで前が塞がれた時\n加速力が上がり\nコース取りが少しうまくなる',
+  '永不停歇的少女',
+  '最后冲刺阶段前方拥挤时，会更擅长回避',
   20049,
   2,
   10,

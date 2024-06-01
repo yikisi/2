@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201463,
-  '月影円刃',
-  'コーナーで速度が上がる\n＜作戦・追込＞',
+  '月影圆刃',
+  '在弯道的速度上升＜作战・追赶＞',
   20146,
   2,
   10,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202421,
-  '無我夢中',
-  'ラストスパートで中団以降にいると\n持久力を少し使って加速力が上がる\n＜差し・長距離＞',
+  '忘我之境',
+  '若经过最后冲刺却仍处于队伍中部靠后则会稍微消耗持久力提高加速度＜居中・长距离＞',
   20242,
   2,
   10,

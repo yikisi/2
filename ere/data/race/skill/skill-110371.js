@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110371,
-  'Guten Appetit♪',
-  '最終コーナー以降に2回追い抜くと\n抱いた誇りを力に変えて\n最終直線で速度を上げ続ける',
+  '祝您胃口好♪',
+  '最终弯道之后完成2次超越的话将把荣耀化作力量在最终直线持续提高速度',
   11037,
   5,
   18,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202621,
-  '突撃魂',
-  'レース終盤が迫ったとき\n中団以降にいると速度が上がる\n＜作戦・差し＞',
+  '陷阵之志',
+  '临近比赛终盘时位于中后方，则提升速度＜作战・居中＞',
   20262,
   2,
   10,

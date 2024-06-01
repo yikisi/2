@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110461,
   'α-star*',
-  'レース中間付近で先頭付近だと速度が\n少しずつ上がる、ダートレースでは\nさらに持久力が少し回復する',
+  '比赛中段位于领头附近时，速度逐渐少量提升，在沙土比赛中额外回复少量持久力',
   11046,
   5,
   18,

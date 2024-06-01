@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200091,
-  '函館レース場◎',
-  '函館レース場が得意になる',
+  '函馆竞马场◎',
+  '擅长函馆竞马场的比赛',
   20009,
   1,
   0,

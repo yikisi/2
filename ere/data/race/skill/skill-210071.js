@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210071,
-  'キミと勝ちたい',
-  'レース後半に前の方だと速度が上がり\nさらに加速力がわずかに上がる\nファンが多いほど効果が高まる',
+  '想要与你一决胜负',
+  '赛程后半若位于前方则速度提高，加速度稍微提高，粉丝越多，效果越好',
   21007,
   2,
   10,

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110401,
   'GET DOWN',
-  '最終コーナー走行中に中団で競り合うと\n抜け出しやすくなる',
+  '在最后弯道若是位于中间梯队并进行名次争夺则比较容易超越并摆脱纠缠',
   11040,
   5,
   18,

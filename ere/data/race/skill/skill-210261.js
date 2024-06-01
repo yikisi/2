@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210261,
-  '太陽の叡智',
-  'レース中盤に競り合うと速度が上がる\n獲得したスキルの数に応じて\n効果が高まる',
+  '太阳的睿智',
+  '在比赛中盘进行名次争夺时，速度提升习得的技能越多则效果越强',
   21026,
   2,
   10,

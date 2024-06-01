@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201341,
-  '決意の直滑降',
-  '下り坂で加速力が少し上がる\n＜作戦・先行＞',
+  '决意直滑降',
+  '下坡变得稍微擅长＜作战・先行＞',
   20134,
   2,
   10,

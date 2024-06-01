@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201051,
-  'ギアチェンジ',
-  'レース中盤に前の方にいると\n速度が上がる＜マイル＞',
+  '换挡',
+  '比赛中盘位于前列时，就很容易超过＜英里＞',
   20105,
   2,
   10,

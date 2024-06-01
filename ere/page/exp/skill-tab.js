@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 
+const CharaSkills = require('#/data/chara-skills');
 const { adaptability_colors } = require('#/data/color-const');
 const { no_info } = require('#/data/exp-const');
 const {
@@ -79,7 +80,7 @@ module.exports = {
             config: { content: '习得技能', position: 'left' },
             type: 'divider',
           },
-          ...era.get(`skill:${chara.id}:习得技能`).map((e) => ({
+          ...new CharaSkills(chara.id).get().map((e) => ({
             config: { width: 6 },
             content: skills_dict[e].get_colored_name(),
             type: 'text',

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110851,
-  '蒼炎',
-  'レース中間付近で中団にいると\n速度が少し上がる\nマイルレースなら効果と時間が増える',
+  '苍炎',
+  '比赛进行一半左右若位于中间位置，则速度少量提升，如果是英里比赛，则进一步增加效果和持续时间',
   11085,
   5,
   18,

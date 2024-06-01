@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210072,
-  '夢の途中',
-  'レース後半に前の方だと速度がわずかに\n上がり、加速力がほんのわずかに上がる\nファンが多いほど効果が高まる',
+  '梦想的途中',
+  '赛程后半若位于前方则速度稍微提高，加速度略微提高，粉丝越多，效果越好',
   21007,
   1,
   2,

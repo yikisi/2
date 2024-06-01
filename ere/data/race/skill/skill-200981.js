@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200981,
-  '圧倒的リード',
-  'レース中盤に大きく差をつけ先頭だと\n速度が上がる＜短距離＞',
+  '压倒性领先',
+  '比赛中盘大幅度领跑时，容易保持领先＜短距离＞',
   20098,
   2,
   10,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100121,
-  'タイマン！デッドヒート！',
-  '最終コーナー以降に後ろの方から\n外を回って追い抜いていると\n最終直線で速度を上げる',
+  '单挑！白热化！',
+  '最终弯道之后从后方绕到外道赶超时，在最终直线上加快速度',
   10012,
   5,
   18,

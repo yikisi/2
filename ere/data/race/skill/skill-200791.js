@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200791,
-  '逃げ駆け引き',
-  '作戦が逃げのウマ娘が掛かると\n落ち着くまで時間がかかる',
+  '对领放策略',
+  '战术是领放的赛马娘陷入焦躁状态时恢复冷静需要耗费时间',
   20079,
   1,
   3,

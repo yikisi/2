@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   10561,
-  '来てください来てください！',
-  'レース終盤に3番手以降で\n前方が詰まると\nお告げの力で少し道を切り開く',
+  '快点来啊快点来啊！',
+  '在比赛终盘前方受阻时，能够借助预言之力开辟道路',
   1056,
   3,
   18,

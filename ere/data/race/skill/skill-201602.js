@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201602,
-  '盤石の構え',
-  'レース序盤にスキルを多く発動すると\n加速力が上がる',
+  '坚如磐石',
+  '在比赛初期发动多个技能时，加速度提高',
   20160,
   2,
   10,

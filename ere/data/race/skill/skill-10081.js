@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   10081,
-  'アクセルX',
-  '残り200mを切って前の方にいると\n競り合いに強くなり速度が少し上がる',
+  '加速X',
+  '在最后200米处于前列进行名次争夺时，竞争力变强，速度也会加快',
   1008,
   3,
   18,

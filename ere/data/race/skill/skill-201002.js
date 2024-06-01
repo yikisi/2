@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201002,
-  '仕掛け準備',
-  'レース中盤にしばらくの間\nコース取りが少し上手くなり\n加速力がわずかに上がる＜短距離＞',
+  '着手准备',
+  '在比赛中盘，稍微准备好向终点进发＜短距离＞',
   20100,
   1,
   2,

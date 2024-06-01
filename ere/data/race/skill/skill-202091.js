@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202091,
-  '気炎万丈',
-  'レース中盤に中団で競り合うと\n持久力が少し回復し\nさらに速度が上がる＜中距離＞',
+  '气势汹汹',
+  '比赛中盘，在中间集团竞争时，小幅恢复持久力，并提升速度＜中距离＞',
   20209,
   2,
   10,

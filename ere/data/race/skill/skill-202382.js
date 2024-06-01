@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202382,
-  '打開策',
-  'レース中盤に後方にいると\n速度がわずかに上がり、コース取りが\nわずかにうまくなる＜作戦・追込＞',
+  '破局之策',
+  '比赛中盘位于后方时，速度稍微提升，并选择稍好的路线＜作战・追赶＞',
   20238,
   1,
   2,

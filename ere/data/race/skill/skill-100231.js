@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100231,
   '∴win Q.E.D.',
-  '終盤の最終コーナー以降で前の方だと\n速度が上がる、冷静さを保っていたなら\n勝利の方程式を導きすごく上がる',
+  '在终盘的最终弯道前身处前方时，速度提升。若是比赛中全程保持冷静，胜利的方程式会使速度变为大幅提升',
   10023,
   5,
   18,

@@ -605,7 +605,7 @@ async function race_page(race) {
     ]);
     let rewards;
     let attr_change = new Array(5).fill(0);
-    if (uma.rank.curr) {
+    if (uma.rank.curr === 1) {
       rewards = race_rewards[info.race_class][1];
       if (race === race_enum.begin_race) {
         attr_change = new Array(5).fill(3);

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200174,
-  '春一番',
-  '春のレースが得意になり\nスピードとパワーが上昇する',
+  '春风起',
+  '擅长春季的比赛，速度和力量上升',
   20017,
   2,
   8,

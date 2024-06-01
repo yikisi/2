@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201401,
   '努力家',
-  '追い抜こうとするときしばらくの間\n加速力が少し上がる＜作戦・差し＞',
+  '准备进行超越时，少量提升加速力＜作战・居中＞',
   20140,
   2,
   10,

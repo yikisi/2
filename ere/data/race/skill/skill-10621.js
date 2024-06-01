@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   10621,
-  'レディー、どんっ！',
-  'レース中間付近で中団にいるとき\n気合を入れ直して持久力を少し回復し\nさらに速度をわずかに上げる',
+  '预备、咚！',
+  '比赛中期左右处于队伍中团时重新振作，稍微回复持久力并且略微提高速度',
   1062,
   3,
   17,

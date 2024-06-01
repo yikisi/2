@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202081,
   '起死回生',
-  'レース終盤始めの方で中団以降にいると\n加速力が上がる＜中距離＞',
+  '比赛进入终盘时若位于中团后方，加速力提升＜中距离＞',
   20208,
   2,
   10,

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110581,
   'Spooky-Scary-Happy',
-  '最終直線に入ったとき前の方だと速度を\n上げ、前2人後ろ2人までの\nウマ娘をちょっと萎縮させる',
+  '进入最终直线时若位于前方，则提升速度，并使前后各2名赛马娘稍微畏惧',
   11058,
   5,
   18,

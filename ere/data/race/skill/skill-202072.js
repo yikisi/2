@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202072,
-  'マイペース',
-  'レース中盤始めの方に中団にいると\n速度をわずかに落として\n持久力を少し回復する＜長距離＞',
+  '我行我素',
+  '刚进入比赛中盘时若位于队伍中间会略微减慢速度稍微回复持久力＜长距离＞',
   20207,
   1,
   1,

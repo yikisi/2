@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202551,
   '神速',
-  'レース後半のどこかで前に出て\n持久力をわずかに回復する',
+  '在比赛后半的随机位置向前突进，并少量回复体力',
   20255,
   2,
   10,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110041,
-  'グッときて♪Chu',
-  'スキルで持久力を回復すると\nレース後半で前のほうにいる時に\nレッツラゴー！と速度を上げる',
+  '直击心脏♪Chu',
+  '赛程后半位于前方时如果通过技能回复了持久力，LET’S GO！速度加快',
   11004,
   5,
   18,

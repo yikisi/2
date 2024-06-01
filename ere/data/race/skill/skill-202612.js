@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202612,
-  '溢れる情熱',
-  'レース中盤が迫ったとき\n中団以降にいると速度がわずかに上がる\n＜作戦・差し＞',
+  '热情洋溢',
+  '临近比赛中盘时位于中后方，则稍微提升速度＜作战・居中＞',
   20261,
   1,
   2,

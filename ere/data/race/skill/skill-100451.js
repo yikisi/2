@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100451,
-  'ピュリティオブハート',
-  'レース中盤で好位置にいる時に\n持久力がすごく回復する',
+  '纯粹之心',
+  '在比赛中盘处于好位置时，持久力回复',
   10045,
   4,
   17,

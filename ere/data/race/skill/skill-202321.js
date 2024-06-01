@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202321,
-  '爆走モード！',
-  'レース終盤に中団以降にいると\n加速力が上がる＜ダート＞',
+  '暴走模式！',
+  '比赛终盘位于后方时，加速度提升＜沙土＞',
   20232,
   2,
   10,

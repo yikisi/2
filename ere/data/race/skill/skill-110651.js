@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110651,
-  'ノッてけ、マッシュアップ！',
-  'レース序盤に前方で競り合ったとき\n速度を上げる、マイルレースなら\n持久力を使って速度をすごく上げる',
+  '跟上我的Mashup！',
+  '比赛序盘位于前方竞争时速度提升，若是英里比赛，则消耗体力使速度大幅提升',
   11065,
   5,
   18,

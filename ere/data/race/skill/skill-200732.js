@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200732,
-  '食い下がり',
-  '最終コーナー以降に詰め寄られると\n速度がわずかに上がり、加速力が\nほんのちょっと上がる＜中距離＞',
+  '誓不罢休',
+  '在最终弯道及往后被紧追不舍时，稍微提高速度并略微提高加速度＜中距离＞',
   20073,
   1,
   2,

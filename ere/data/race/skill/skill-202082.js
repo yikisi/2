@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202082,
-  'ワンチャンス',
-  'レース終盤始めの方で中団以降にいると\n加速力がわずかに上がる＜中距離＞',
+  '机不可失',
+  '比赛进入终盘时若位于中团后方，加速力稍微提升＜中距离＞',
   20208,
   1,
   2,

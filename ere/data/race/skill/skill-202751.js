@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202751,
-  '気骨稜稜',
-  'レース終盤が迫ったとき中団以降だと\n速度が上がる＜短距離＞',
+  '铁骨铮铮',
+  '临近终盘的时候若位于中后方，提升速度＜短距离＞',
   20275,
   2,
   10,

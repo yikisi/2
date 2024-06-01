@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202722,
-  '折れない心',
-  'レース中盤のコーナーで\nしばらくの間速度がちょっと上がる',
+  '坚强的心',
+  '在比赛中盘的弯道，一段时间内略微提升速度',
   20272,
   1,
   2,

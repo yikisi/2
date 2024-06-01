@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110221,
   'Best day ever',
-  '終盤の最終コーナー以降に\n好位置にいると速度が上がる\nゴールまで遠い場合最高の走りで\nさらに加速力がちょっと上がる',
+  '终盘最终弯道往后处于好位置时提升速度。若距离终点尚远，则会展现出绝佳状态额外提升少量加速度',
   11022,
   5,
   18,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200021,
-  '左回り◎',
-  '左回りコースが得意になる',
+  '逆时针◎',
+  '擅长逆时针赛道',
   20002,
   1,
   0,

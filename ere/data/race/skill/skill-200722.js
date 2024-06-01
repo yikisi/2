@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200722,
-  'テンポアップ',
-  'レース中盤に前の方だと\n速度がわずかに上がる＜中距離＞',
+  '加快节奏',
+  '比赛中盘位于前列时，略微容易取得好位置＜中距离＞',
   20072,
   1,
   2,

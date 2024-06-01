@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100401,
   'KEEP IT REAL.',
-  'レース後半に中団から仕掛け始める時に\n持てるパフォーマンスを発揮して\n速度を少し上げ続ける',
+  '比赛后半段处于中间集团并开始发力时，充分发挥实力，速度逐渐少量提高',
   10040,
   5,
   18,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200562,
-  'スタミナキープ',
-  'レース中盤が迫ったとき前の方にいると\nわずかに疲れにくくなる\n＜作戦・先行＞',
+  '保持体力',
+  '临近比赛中盘时稍微不容易疲惫＜作战・先行＞',
   20056,
   1,
   1,

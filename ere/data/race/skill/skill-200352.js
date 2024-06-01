@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200352,
-  'コーナー回復○',
-  '無駄のないコーナリングで\n持久力がわずかに回復する',
+  '弯道回复○',
+  '完美过弯，持久力略微回复',
   20035,
   1,
   1,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100011,
-  'シューティングスター',
-  'レース終盤に前の方で相手を抜くと\n勢いに乗って前に出て\nさらに加速力がちょっと上がる',
+  '流星',
+  '在比赛终盘处于前方并超越对手时，会趁势向前突进，并且微幅提升加速度',
   10001,
   5,
   18,

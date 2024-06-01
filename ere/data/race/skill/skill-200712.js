@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200712,
-  '前途洋々',
-  'レース中盤に前の方にいると\nわずかに疲れにくくなる＜中距離＞',
+  '前途无量',
+  '比赛中盘在前方时，略微不容易疲劳＜中距离＞',
   20071,
   1,
   1,

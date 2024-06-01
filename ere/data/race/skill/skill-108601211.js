@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   108601211,
-  '高嶺の艶笑',
-  'レース中盤にしばらくの間速度が上がる\n＜マイル/中距離＞',
+  '高峰媚笑',
+  '在比赛中盘一段时间内提升速度＜英里/中距离＞',
   10860121,
   6,
   26,

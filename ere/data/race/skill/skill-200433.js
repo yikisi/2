@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200433,
-  'ゲート難',
-  'スタートが苦手になり\n出遅れる時間が少し増える',
+  '出闸困难',
+  '不擅长起跑，晚出发的时间少量增加',
   20043,
   1,
   4,

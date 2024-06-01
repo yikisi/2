@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201442,
-  '鋭い眼光',
-  'レース終盤に他のウマ娘が\nわずかに動揺する＜作戦・差し＞',
+  '锐利目光',
+  '在比赛终盘使其他的马娘略微产生动摇＜作战・居中＞',
   20144,
   1,
   3,

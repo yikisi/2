@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202391,
-  '出力1000％！',
-  'レース中盤始めの方に\n持久力をすごく使って\n速度をすごく上げる＜作戦・逃げ＞',
+  '输出1000%！',
+  '在比赛中盘一开始的地方消耗大量体力，使速度大幅提升＜作战・领放＞',
   20239,
   2,
   10,

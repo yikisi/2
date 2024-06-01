@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200292,
-  '徹底マーク○',
-  '1番人気のウマ娘と作戦が同じだと\n能力を少し発揮しやすい',
+  '彻底标记○',
+  '与人气第一的马娘选择相同战术时能力稍微更容易发挥',
   20029,
   1,
   0,

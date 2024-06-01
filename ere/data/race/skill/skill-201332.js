@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201332,
-  '巧みなステップ',
-  '左右に移動するとき\n加速力がわずかに上がる＜作戦・先行＞',
+  '轻巧舞步',
+  '路线选取变得略微流畅＜作战・先行＞',
   20133,
   1,
   2,

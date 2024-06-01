@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   10091,
-  'レッドエース',
-  'レース後半に前の方で\n1番になる力をわずかに発揮する',
+  '赤色王牌',
+  '在比赛后半段前方位置稍微发挥成为第一的力量',
   1009,
   3,
   18,

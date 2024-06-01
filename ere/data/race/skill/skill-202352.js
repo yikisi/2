@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202352,
-  '土煙',
-  'レース序盤に先頭にいるとき\nすぐ後ろにいるウマ娘の速度が\nわずかに下がる＜ダート＞',
+  '飞尘',
+  '比赛序盘自己保持领先时，使跟在后方的赛马娘速度少量下降＜沙土＞',
   20235,
   1,
   3,

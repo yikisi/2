@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100581,
   'I Never Goof Up!',
-  'レース終盤に追い抜くと\nあきらめない心を発揮して前を目指す',
+  '比赛终盘完成超越时，会以永不放弃之心向前突进',
   10058,
   5,
   18,

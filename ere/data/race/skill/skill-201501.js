@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201501,
-  '天命士',
-  'レース終盤に後ろの方にいると\n視野が広くなる＜作戦・追込＞',
+  '知天命者',
+  '比赛终盘位于后方时，视野更加开阔＜作战・追赶＞',
   20150,
   2,
   10,

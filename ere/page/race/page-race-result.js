@@ -310,13 +310,13 @@ async function page_race_result(contestants, records, info) {
                   width: 4,
                 },
                 content: [
-                  '[',
+                  { color: buff_colors[1], content: '[' },
                   {
-                    color: buff_colors[1],
+                    color: uma.color,
                     content: (uma.index_race + 1).toString(),
                     fontWeight: 'bold',
                   },
-                  ']',
+                  { color: buff_colors[1], content: ']' },
                 ],
                 type: 'text',
               },
@@ -448,7 +448,7 @@ async function page_race_result(contestants, records, info) {
   });
   era.printButton('继续', 1);
   await era.input();
-  era.print('技能图');
+  era.print('使用技能图');
   era.printLineChart({
     data: {
       datasets: contestants.map((e) => {

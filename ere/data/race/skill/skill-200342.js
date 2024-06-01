@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200342,
-  'コーナー加速○',
-  '華麗なコーナーワークで\n加速力がわずかに上がる',
+  '弯道加速○',
+  '华丽地过弯，加速度略微提升 ',
   20034,
   1,
   2,

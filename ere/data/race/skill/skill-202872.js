@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202872,
-  '渾身の足取り',
-  '終盤の最終コーナーで中団以降にいると\n加速力がわずかに上がる\n＜追込・中距離＞',
+  '浑身解数',
+  '在终盘的最终弯道处若位于中后方，稍微提升加速度＜追赶・中距离＞',
   20287,
   1,
   2,

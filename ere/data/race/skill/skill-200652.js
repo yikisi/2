@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200652,
-  'スプリントギア',
-  'レース終盤に加速力がわずかに上がる\n＜短距離＞',
+  '短距齿轮',
+  '比赛终盘时，加速力稍微提升＜短距离＞',
   20065,
   1,
   2,

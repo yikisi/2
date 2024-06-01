@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200551,
   '逃亡者',
-  '最終コーナーで先頭だと\n加速力が上がる＜作戦・逃げ＞',
+  '最终弯道容易保持领先＜作战・领放＞',
   20055,
   2,
   10,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202281,
-  '全速前進！',
-  'ラストスパートで前方にいると\n速度が上がる＜ダート＞',
+  '全速前进！',
+  '最终的直线冲刺位于前方时，提升速度＜沙土＞',
   20228,
   2,
   10,

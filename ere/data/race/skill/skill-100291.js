@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100291,
-  'ゆきあかり、おいかけて',
-  '残り300mを切って先頭もしくは\n前の方で先頭のウマ娘との距離が近いと\n速度を上げる',
+  '雪夜追光',
+  '最后300米处在前方且与最前方的马娘距离很近或是领头时速度提升',
   10029,
   5,
   18,

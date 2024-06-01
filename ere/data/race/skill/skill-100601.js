@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100601,
-  'きっとその先へ…！',
-  'レース終盤に3番手で\n後ろのウマ娘との差が1バ身以内だと\n秘めた闘志に火が付き速度が上がる',
+  '一定就在前方……！',
+  '在比赛终盘处于第三名快要输掉的时候激发潜藏的昂扬斗志，速度加快',
   10060,
   4,
   18,

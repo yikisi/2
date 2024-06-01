@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201262,
-  '危険回避',
-  'レース序盤に前が詰まるか競り合うと\nコース取りが少し上手くなり\nバ場の真ん中に向かって移動する\n＜作戦・逃げ＞',
+  '规避危险',
+  '在比赛序盘，稍微不容易被包围＜作战・领放＞',
   20126,
   1,
   2,

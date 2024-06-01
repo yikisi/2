@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100101,
-  'ヴィクトリーショット！',
-  '最終コーナー後半で好位置にいると\n弾みを付けて加速力を上げ続ける',
+  '胜利射击！',
+  '最终弯道后半处于好位置时会增加动力，持续提升加速度',
   10010,
   5,
   18,

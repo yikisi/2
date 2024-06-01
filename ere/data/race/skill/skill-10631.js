@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   10631,
-  '打ち、鍛えて',
-  'レースを冷静に運ぶことができると\nラストスパートの最中に\n速度をわずかに上げ続ける',
+  '千锤百炼',
+  '如果能冷静地进行比赛，在最终冲刺的关键时刻会持续稍微提升速度',
   1063,
   3,
   18,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202711,
-  '王手',
-  '終盤の最終コーナーで中団以前にいる時\nゴールまで遠いと加速力が上がる\n＜先行/差し＞',
+  '将军',
+  '在终盘的最终弯道位于队伍中间往前时，若距离终点尚远则提升加速度＜先行/居中＞',
   20271,
   2,
   10,

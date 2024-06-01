@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100041,
-  '紅焔ギア/LP1211-M',
-  '最終コーナー以降で前の方にいると\nギアを変えて加速力が上がる',
+  '红焰齿轮/LP1211-M',
+  '最终弯道后处于前列时，就会换挡提升加速度',
   10004,
   5,
   18,

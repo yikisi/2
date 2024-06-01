@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   10141,
-  '熱血☆アミーゴ',
-  '最終直線で余力を持って前にいると\nわずかに優位を保ちやすくなる',
+  '热血☆兄弟',
+  '在最终直线上仍保有余力且处于前列时，更容易保持优势',
   1014,
   3,
   18,

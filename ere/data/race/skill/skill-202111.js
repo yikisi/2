@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202111,
-  '破竹の勢い',
-  '最終コーナーで後ろの方にいると\n速度が上がる＜マイル＞',
+  '势如破竹',
+  '在最终弯道处于后方位置的话则会提高速度＜英里＞',
   20211,
   2,
   10,

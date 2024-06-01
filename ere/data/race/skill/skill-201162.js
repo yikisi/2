@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201162,
-  'ささやき',
-  'レース中盤にすぐ前のウマ娘を\nわずかに戸惑わせる＜中距離＞',
+  '细语',
+  '在比赛中盘让前面的马娘略微困惑＜中距离＞',
   20116,
   1,
   3,

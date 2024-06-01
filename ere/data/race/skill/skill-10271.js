@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   10271,
-  '燃えろ筋肉！',
-  'レース終盤のコーナーで中団にいると\n前の位置につこうとして\n加速力が少し上がる',
+  '燃烧吧我的肌肉！',
+  '在比赛终盘的弯道中想要冲向前列时，提升加速度',
   1027,
   3,
   18,

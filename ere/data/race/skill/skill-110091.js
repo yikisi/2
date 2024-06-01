@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110091,
   "Queen's Lumination",
-  'レース後半の直線で前の方にいると\n速度を少し上げ続ける、さらに先頭で\n後ろのウマ娘と近い場合効果が増える',
+  '在比赛后半段的直线位于前方时速度少量持续上升，位于领头位置并与后方马娘距离较近时，技能效果提升',
   11009,
   5,
   18,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100891,
-  'Celeste Oath',
-  'レース中間付近で前の方にいると速度が\n上がりさらに持久力がわずかに回復する\n2400ｍ以上のレースだと回復量が\n増える',
+  '青冥誓约',
+  '在比赛中段左右若位于前方则速度提升，并回复少量体力，如果比赛距离在2400ｍ及以上，回复量增加',
   10089,
   5,
   18,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202331,
-  '抜群の踏み込み',
-  'パワーが十分に強いとスピードが上がる\nパワーが十二分に仕上がっている場合は\nすごく上がる＜ダート＞',
+  '超群的迈步',
+  '力量十分强劲时速度提升。力量有十二分强劲时，速度极大提升＜沙土＞',
   20233,
   2,
   8,

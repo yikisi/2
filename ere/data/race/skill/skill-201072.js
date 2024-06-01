@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201072,
-  '負けん気',
-  '追い抜こうとすると\n速度がわずかに上がる＜マイル＞',
+  '不服输',
+  '略微容易赶超成功＜英里＞',
   20107,
   1,
   2,

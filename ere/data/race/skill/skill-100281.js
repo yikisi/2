@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100281,
   "I'M☆FULL☆SPEED!!",
-  'レース中間に好位置で追い抜こうと\nすると速度が少し上がる\n短距離レースでは効果が変わり\n少し前に出る',
+  '比赛的中段处于好位置准备超越时，速度少量提升，若是短距离比赛则效果改为小幅向前突进',
   10028,
   5,
   18,

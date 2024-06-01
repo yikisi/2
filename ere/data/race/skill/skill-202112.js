@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202112,
-  '気合十分',
-  '最終コーナーで後ろの方にいると\n速度がわずかに上がる＜マイル＞',
+  '气势十足',
+  '在最终弯道处于后方位置的话则会略微提高速度＜英里＞',
   20211,
   1,
   2,

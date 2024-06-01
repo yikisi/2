@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100501,
   'Nemesis',
-  '最終コーナー以降で中団から\n前へ出る時、切れ味が増し速度が上がる',
+  '最终弯道之后从中间梯队向前突进时，以凌厉的攻势加快速度',
   10050,
   5,
   18,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201541,
-  '差しのコツ◎',
-  '良い位置につきやすくなる\n＜作戦・差し＞',
+  '居中诀窍◎',
+  '容易占据有利位置＜作战・居中＞',
   20154,
   1,
   0,

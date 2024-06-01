@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202092,
-  '闘争心',
-  'レース中盤に中団で競り合うと\n持久力がちょっと回復し\nさらに速度がわずかに上がる＜中距離＞',
+  '斗争心',
+  '比赛中盘，在中间集团竞争时，微幅恢复持久力，并稍微提升速度＜中距离＞',
   20209,
   1,
   2,

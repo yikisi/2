@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   104102211,
-  '驀進！爆進！バクシーン！',
-  '直線でしばらくの間前に出る＜短距離＞',
+  '爆进！爆进！爆进——！',
+  '在直线一段时间内向前突进＜短距离＞',
   10410221,
   6,
   26,

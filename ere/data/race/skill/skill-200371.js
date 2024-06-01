@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200371,
-  '一陣の風',
-  '直線で加速力が上がり\nさらに速度がわずかに上がる',
+  '一阵狂风',
+  '身处直线时，提升加速度，并且稍微提升速度',
   20037,
   2,
   10,

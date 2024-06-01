@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100141,
-  'プランチャ☆ガナドール',
-  '最終直線で余力を持って前にいると\nより優位を保ちやすくなる',
+  '胜利者☆飞扑',
+  '在最终直线上仍保有余力且处于前列时，更容易保持优势',
   10014,
   4,
   18,

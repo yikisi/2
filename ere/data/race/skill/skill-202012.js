@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202012,
-  '影打',
-  'レース終盤が迫ったとき前方にいると\n速度がわずかに上がる＜長距離＞',
+  '热场好戏',
+  '比赛接近终盘时，处于前方的话速度会稍微加快＜长距离＞',
   20201,
   1,
   2,

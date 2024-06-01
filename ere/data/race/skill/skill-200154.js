@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200154,
-  '良バ場の鬼',
-  '「良」のバ場状態が得意になり\nパワーとスピードが上昇する',
+  '良马场之鬼',
+  '变得擅长「良」马场状态力量和速度上升',
   20015,
   2,
   8,

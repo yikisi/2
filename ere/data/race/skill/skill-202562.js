@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202562,
-  'ロックオン',
-  'レース終盤が迫ったとき後方にいると\n速度がわずかに上がる＜長距離＞',
+  '锁定',
+  '临近比赛终盘位于后方时，速度稍微提升＜长距离＞',
   20256,
   1,
   2,

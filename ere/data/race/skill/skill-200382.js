@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200382,
-  '直線回復',
-  'レース中盤の直線で\n持久力がわずかに回復する',
+  '直线回复',
+  '身处比赛中盘的直线时，稍微恢复持久力',
   20038,
   1,
   1,

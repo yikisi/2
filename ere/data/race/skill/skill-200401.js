@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200401,
-  'バ群嫌い',
-  '周りを囲まれると\n持久力が少し減少する',
+  '讨厌马群',
+  '四周被包围的话，持久力少量减少',
   20040,
   1,
   4,

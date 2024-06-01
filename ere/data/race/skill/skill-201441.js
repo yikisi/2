@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201441,
-  '八方にらみ',
-  'レース終盤に他のウマ娘が\n動揺する＜作戦・差し＞',
+  '睥睨八方',
+  '在比赛终盘使其他的马娘产生动摇＜作战・居中＞',
   20144,
   2,
   11,

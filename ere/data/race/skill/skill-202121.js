@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202121,
-  '大胆不敵',
-  'レース後半に中団にいると速度が上がり\nさらに加速力がちょっと上がる\n＜作戦・差し＞',
+  '天地无畏',
+  '比赛后半程处于中间集团的话会提高速度，并且加速度也会稍微提高＜作战・居中＞',
   20212,
   2,
   10,

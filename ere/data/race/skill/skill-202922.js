@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202922,
-  '惜しみなし',
-  'レース中盤に持久力を少し使って\n速度が少し上がる＜作戦・追込＞',
+  '不惜一切',
+  '比赛中盘消耗少量体力，使速度少量提升＜作战・追赶＞',
   20292,
   1,
   2,

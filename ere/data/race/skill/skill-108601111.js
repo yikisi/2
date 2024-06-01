@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   108601111,
-  '純愛',
-  '最終コーナー前の第3コーナーで\n前の方にいるとすごく前に出る\n＜マイル/中距離＞',
+  '纯爱',
+  '位于最终弯道前的第三弯道时，若在队伍前方则迅速向前突进＜英里/中距离＞',
   10860111,
   6,
   26,

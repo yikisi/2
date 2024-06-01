@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202451,
-  'トップギア',
-  '最終直線で2番手以降で\n先頭から4バ身以内にいると\n速度がすごく上がる＜作戦・差し＞',
+  '最高档',
+  '最终直线位于第二名往后，并距离领头4马身以内时，速度极大提升＜作战・居中＞',
   20245,
   2,
   10,

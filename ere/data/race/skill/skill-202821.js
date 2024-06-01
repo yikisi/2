@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202821,
   '万里一空',
-  'ラストスパートの直線で前の方だと\n加速力が上がる＜逃げ・長距離＞',
+  '在最后冲刺阶段的直线若位于前方，则提升加速度＜领放・长距离＞',
   20282,
   2,
   10,

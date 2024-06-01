@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202291,
-  '明鏡止水',
-  'スキルで持久力を回復していると\nレース中盤始めの方に後方で\n速度が上がる＜ダート＞',
+  '明镜止水',
+  '若使用技能回复过体力，且比赛中盘一开始身处后方时速度提升些许＜沙土＞',
   20229,
   2,
   10,

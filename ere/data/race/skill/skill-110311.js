@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110311,
-  'フレッシュ☆パーラー',
-  'レース中盤始めの方に前の方にいると\n速度を少し上げ続け\nおまけに持久力を少し回復する',
+  '清新☆茶室',
+  '比赛中盘开头位于前方时，速度少量持续上升，并少量回复持久力',
   11031,
   5,
   18,

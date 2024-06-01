@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202302,
-  '砂浴び○',
-  '前のウマ娘のすぐ後ろに付けると\n速度がわずかに上がる＜ダート＞',
+  '沙浴○',
+  '紧跟前方的赛马娘时，速度稍微提升＜沙土＞',
   20230,
   1,
   2,

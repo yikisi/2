@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   103502211,
-  'きっと飛べる！',
-  '終盤の最終直線で好位置にいると\nしばらくの間速度が上がる＜中距離＞',
+  '一飞冲天！',
+  '在终盘的最终直线若处于好位置，一段时间内速度提升＜中距离＞',
   10350221,
   6,
   26,

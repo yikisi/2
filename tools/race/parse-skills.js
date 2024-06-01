@@ -208,7 +208,7 @@ async function chara_skill() {
   let buffer = 'const chara_skill_dict={},skills_dict = {};\n\n',
     buffer_common_skills = 'const common_skills = [';
   for (const chara_id in dict) {
-    buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].sort().join(',')}];`;
+    buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
   }
   (await prisma.skill_set.findMany()).forEach((e) => {
     for (const k in e) {
@@ -230,10 +230,9 @@ async function chara_skill() {
   const skill_data = await find_many_skills({
     id: { in: Object.keys(skill_dict).map(Number) },
   });
-  const translate_dict = {};
-  require('./SkillParams.json').forEach((e) => (translate_dict[e[1]] = e[4]));
-  const skill_text = {};
-  (
+  const translate_dict = require('./text_data.json');
+  const enable_translate = true;
+  const skill_text = (
     await prisma.text_data.findMany({
       where: {
         index: {
@@ -242,14 +241,21 @@ async function chara_skill() {
         category: { in: [47, 48] },
       },
     })
-  ).map((e) => {
-    (skill_text[e.index] || (skill_text[e.index] = {}))[e.category] = e.text;
-    if (e.category === 47 && !translate_dict[e.text]) {
-      console.log('翻译缺失！', e.index, e.text);
-    }
-  });
-  const pre_dict = {},
-    c_dict = {};
+  ).reduce((p, c) => {
+    (p[c.index] || (p[c.index] = {}))[c.category] = c.text;
+    return p;
+  }, {});
+  if (enable_translate) {
+    Object.entries(skill_text).forEach((e) => {
+      if (translate_dict[47][e[0]] && translate_dict[48][e[0]]) {
+        e[1][47] = translate_dict[47][e[0]];
+        e[1][48] = translate_dict[48][e[0]];
+      } else {
+        console.log('翻译缺失！', e[0], e[1][47]);
+      }
+    });
+  }
+  const c_dict = {};
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
 
@@ -279,22 +285,14 @@ async function chara_skill() {
     sbuffer += `${e.activate_lot},`;
     sbuffer += `${e.condition_2 !== '' && e.condition_2.indexOf('is_activate_other_skill_detail') !== -1}`;
     writeFileSync(`../../ere/data/race/skill/skill-${id}.js`, `${sbuffer});`);
-    fill_dict(e.precondition_1, pre_dict, e);
-    fill_dict(e.precondition_2, pre_dict, e);
+    fill_dict(e.precondition_1, c_dict, e);
+    fill_dict(e.precondition_2, c_dict, e);
     fill_dict(e.condition_1, c_dict, e);
     fill_dict(e.condition_2, c_dict, e);
   });
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
     `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\n${buffer_common_skills}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict};`,
-  );
-  buffer = 'class PreConditionParams { ';
-  Object.keys(pre_dict)
-    .sort()
-    .forEach((k) => (buffer += `${k};`));
-  writeFileSync(
-    '../../ere/data/race/model/pre-condition-params.js',
-    `${buffer}};\n\nmodule.exports = PreConditionParams;`,
   );
   buffer = 'class ConditionParams { ';
   Object.keys(c_dict)
@@ -304,13 +302,7 @@ async function chara_skill() {
     '../../ere/data/race/model/condition-params.js',
     `${buffer}};\n\nmodule.exports = ConditionParams;`,
   );
-  console.log(
-    '前置条件参数',
-    Object.keys(pre_dict).length,
-    '个；条件参数',
-    Object.keys(c_dict).length,
-    '个',
-  );
+  console.log('条件参数', Object.keys(c_dict).length, '个');
 
   execSync('npx eslint --fix ./ere/data/race/model ./ere/data/race/skill', {
     cwd: join(process.cwd(), '../..'),

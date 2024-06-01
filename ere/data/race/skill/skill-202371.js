@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202371,
-  'アンストッパブル',
-  'レース中盤に速度が上がる\n＜作戦・先行＞',
+  '势不可当',
+  '比赛中盘速度提升＜作战・先行＞',
   20237,
   2,
   10,

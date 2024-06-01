@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201202,
-  'パス上手',
-  '追い抜く気持ちが湧き\nわずかに疲れにくくなる＜長距離＞',
+  '擅长赶超',
+  '想要赶超的愿望在心底涌现，略微不容易疲劳＜长距离＞',
   20120,
   1,
   1,

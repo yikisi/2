@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   300101,
-  '憧れのエール',
-  'レース後半のコーナーで思いっきりの\n応援が届くとサイレンススズカの\n持久力が回復する',
+  '憧憬的应援',
+  '在比赛后段的弯道上，无声铃鹿感受到众人的祈愿，因此恢复耐力。',
   30010,
   2,
   9,

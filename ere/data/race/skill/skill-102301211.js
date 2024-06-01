@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   102301211,
-  '計画的クールダウン',
-  'レース中盤に持久力をすごく回復する\n＜長距離＞',
+  '照计划稍事休憩',
+  '比赛中盘，大幅回复持久力＜长距离＞',
   10230121,
   6,
   25,

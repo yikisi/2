@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201021,
-  '逃亡禁止令',
-  'レース序盤に後ろの方にいると\n前方のウマ娘を焦らせ\n動きを少し鈍くする＜短距離＞',
+  '逃亡禁令',
+  '比赛序盘处于后方的话，使前方的赛马娘焦躁和动作迟缓＜短距离＞',
   20102,
   2,
   11,

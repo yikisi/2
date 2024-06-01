@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110111,
-  'ゲインヒール・スペリアー',
-  '中盤に後ろの方で順位を下げた時に\n優しい光で持久力をすごく回復する',
+  'Gainheal・Superior',
+  '在比赛中盘处于后方且名次下降时，以温柔的治愈之光回复持久力',
   11011,
   5,
   17,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110361,
-  '...found you.',
-  '終盤の最終コーナー後半以降に\n追い抜こうとすると速度が上がる\nレース中盤に中団で\n追い抜かれているとすごく上がる',
+  '……抓到你了。',
+  '终盘的最终弯道后半之后，进行赶超时速度提升，如果比赛中盘在中间位置被人超越过，则变为速度大幅提升',
   11036,
   5,
   18,

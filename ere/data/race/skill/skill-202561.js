@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202561,
-  '一発必中',
-  'レース終盤が迫ったとき後方にいると\n速度が上がる＜長距離＞',
+  '一击必中',
+  '临近比赛终盘位于后方时，速度提升＜长距离＞',
   20256,
   2,
   10,

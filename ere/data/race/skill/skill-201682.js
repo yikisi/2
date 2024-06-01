@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201682,
-  '前列狙い',
-  'レース終盤に\nコース取りが少し上手くなり\n加速力がわずかに上がる＜ダート＞',
+  '前行',
+  '在赛程终盘略微冲刺调整姿态＜沙土＞',
   20168,
   1,
   2,

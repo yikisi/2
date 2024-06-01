@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100241,
-  'ひらめき☆ランディング',
-  '最終コーナー以降に前の方で競り合うと\n抜け出しやすくなる',
+  '闪光☆着陆',
+  '最终弯道之后处于前列进行名次争夺时，在直线上更容易突围',
   10024,
   4,
   18,

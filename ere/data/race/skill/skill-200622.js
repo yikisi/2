@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200622,
-  '後方待機',
-  'レース中盤に最後方付近にいると\nわずかに疲れにくくなる＜作戦・追込＞',
+  '后方待机',
+  '在比赛中盘积攒脚力，略微不容易疲劳＜作战・追赶＞',
   20062,
   1,
   1,

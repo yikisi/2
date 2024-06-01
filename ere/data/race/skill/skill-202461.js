@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202461,
-  '踏ませぬ影',
-  '最終直線で先頭のとき後ろ1バ身以内に\nウマ娘がいると速度がすごく上がる\n＜作戦・逃げ＞',
+  '绝影',
+  '最终直线在领头位置且后方1马身内有马娘时，速度极大提升＜作战・领放＞',
   20246,
   2,
   10,

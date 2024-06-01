@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200541,
-  '脱出術',
-  'レース中盤に前方にいると\n速度が上がる＜作戦・逃げ＞',
+  '逃脱术',
+  '比赛中盘容易获得领先＜作战・领放＞',
   20054,
   2,
   10,

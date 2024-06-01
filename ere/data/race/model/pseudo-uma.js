@@ -115,14 +115,20 @@ class PseudoUma {
   tempPop;
   // 各个需重复使用的计算基底
   base = {
+    accBuffFromWiz: 0,
     acceleration: 0,
     accelerationBuff: 0,
+    change_order_finalcorner: 0,
+    // 发动绿技能个数
+    greenCount: 0,
     stamina: 0,
+    temptationSpan: 0,
     velocityIdeal: 0,
     velocityIdealBuff: 0,
     velocityMaxRush: 0,
     velocityMin: 0,
-    temptationSpan: 0,
+    // 胜场数
+    winCount: 0,
   };
   // 比赛时信息
   race = {
@@ -175,8 +181,6 @@ class PseudoUma {
     downhill: false,
     // 最终冲刺
     finalRush: false,
-    // 完赛
-    finished: false,
     // 被选为超车目标
     to_be_overtaken: false,
   };

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202681,
-  'ブチ☆アゲ↑バイブス',
-  'レース中盤に速度が上がり\nさらに持久力を少し回復する\n＜長距離＞',
+  '气☆氛↑嗨起来',
+  '在比赛中盘少量提升速度，并少量回复体力＜长距离＞',
   20268,
   2,
   10,

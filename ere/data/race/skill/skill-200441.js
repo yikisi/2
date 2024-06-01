@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200441,
-  '鋼の意志',
-  'レース序盤または中盤に前が詰まると\n強い意志を保ち持久力が回復し\nコース取りがうまくなる',
+  '钢铁意志',
+  '在比赛序盘或中盘前方堵塞时，保持坚定的意志恢复持久力，并且路线选择变得更明智',
   20044,
   2,
   9,

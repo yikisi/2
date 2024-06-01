@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100261,
   'G00 1st.F∞;',
-  '出遅れずに最終直線で前の方にいると\n速度が上がる、前方の順位をキープ\nしていた場合はすごく上がる',
+  '没有起步晚的情况下在最终直线身处前方时，速度提升。若是一直保持在靠前位置的话，变为速度大幅提升。',
   10026,
   5,
   18,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202362,
-  '圧迫感',
-  'レース後半に息を入れたウマ娘を\nわずかに萎縮させる＜ダート＞',
+  '压迫感',
+  '比赛后半时，使体力回复的赛马娘稍微畏缩＜沙土＞',
   20236,
   1,
   3,

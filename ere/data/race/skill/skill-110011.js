@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110011,
-  'わやかわ♪マリンダイヴ',
-  '中盤に2回スキルを使い\n中団にいると持久力を回復し\nさらに速度が少し上がる',
+  '激动人心♪海中深潜',
+  '比赛中盘时如果使用了两次技能且位于队伍中间时，回复体力并少量提升速度',
   11001,
   5,
   17,

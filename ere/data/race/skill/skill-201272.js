@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201272,
-  '先頭プライド',
-  'レース序盤または中盤に\n追い抜かれるか競り合ったとき\n速度がわずかに上がる＜作戦・逃げ＞',
+  '领者的自尊心',
+  '在比赛序盘或中盘，稍微擅于超越和竞争＜作战・领放＞',
   20127,
   1,
   2,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201191,
-  '先陣の心得',
-  'レース中盤に差をつけ先頭だと\n速度が上がる＜長距離＞',
+  '先锋的心得',
+  '在比赛中盘拉开差距且位于领头时，容易保持领先的优势＜长距离＞',
   20119,
   2,
   10,

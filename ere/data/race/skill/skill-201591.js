@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201591,
-  'ウマ好み',
-  '近くにウマ娘がたくさんいると\n速度がわずかに上がる',
+  '爱马仕',
+  '附近有多个马娘时，略微加快速度',
   20159,
   1,
   2,

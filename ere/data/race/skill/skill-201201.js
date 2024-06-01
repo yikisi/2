@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201201,
-  'VIP顔パス',
-  '追い抜く気持ちが湧き\n疲れにくくなる＜長距離＞',
+  'VIP颜通行',
+  '想要赶超的愿望在心底涌现，不容易变得疲劳＜长距离＞',
   20120,
   2,
   9,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   103502111,
-  '千万バリキ！！！',
-  '上り坂でしばらくの間速度が上がる\n＜作戦・差し＞',
+  '千万马力！！！',
+  '身处上坡时，一段时间内速度持续提升＜作战・居中＞',
   10350211,
   6,
   26,

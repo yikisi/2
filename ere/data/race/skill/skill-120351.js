@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   120351,
-  'GO! Full-send',
-  'レース中盤に中団で追い抜くと\n第3コーナーで少しの間速度が上がる\n2400ｍのレースで人気が高いと\n上げ続ける',
+  'GO! 全力以赴',
+  '若比赛中盘在队伍中间位置超越过对手，则在第三弯道时短时间内提升速度如果是2400ｍ的比赛且自身高人气，则持续提升速度',
   12035,
   5,
   18,

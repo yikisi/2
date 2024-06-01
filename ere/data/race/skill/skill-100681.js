@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100681,
-  '勝ち鬨ワッショイ！',
-  '前方にいるとき、レース後半の第3\nコーナーで速度を少し上げる、または\n終盤の向正面で力強く前に踏み込む',
+  '胜利呐喊Wasshoi！',
+  '位于前方，比赛后半的第3弯道中速度稍微提高，或者在终盘的看台对面直线赛道上向前强力冲刺',
   10068,
   5,
   18,

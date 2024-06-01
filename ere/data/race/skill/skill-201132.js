@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201132,
-  'イナズマステップ',
-  'レース中盤にしばらくの間\nコース取りが少し上手くなり\n加速力がわずかに上がる＜中距離＞',
+  '闪电步伐',
+  '在比赛中盘，一段时间内稍微不容易被包围＜中距离＞',
   20113,
   1,
   2,

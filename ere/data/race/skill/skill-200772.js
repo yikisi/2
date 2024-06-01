@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200772,
-  '見惚れるトリック',
-  'レース中盤に前の方にいると後ろの\n掛かったウマ娘が疲れる',
+  '令人出神的诡计',
+  '比赛中盘位于前方时，使后方焦躁的马娘变得很疲劳',
   20077,
   2,
   11,

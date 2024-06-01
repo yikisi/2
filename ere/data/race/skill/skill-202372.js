@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202372,
-  '攻めの姿勢',
-  'レース中盤に速度がわずかに上がる\n＜作戦・先行＞',
+  '进攻的姿势',
+  '比赛中盘速度稍微提升＜作战・先行＞',
   20237,
   1,
   2,

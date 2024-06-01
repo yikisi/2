@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202721,
-  'ネバーギブアップ',
-  'レース中盤のコーナーで\nしばらくの間速度が少し上がる',
+  '绝不放弃',
+  '在比赛中盘的弯道，一段时间内少量提升速度',
   20272,
   2,
   10,

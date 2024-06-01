@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201141,
-  '神業ステップ',
-  '左右に移動するとき持久力を回復する\n＜中距離＞',
+  '神赐步伐',
+  '左右移动不容易产生疲劳＜中距离＞',
   20114,
   2,
   9,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202882,
-  'たぎる血潮',
-  '最終直線で2番手以降で\n先頭から4バ身以内にいると\n速度が少し上がる＜作戦・追込＞',
+  '热血沸腾',
+  '最终直线处在第二名开外且与领头距离4马身以内时，速度少量提升＜作战・追赶＞',
   20288,
   1,
   2,

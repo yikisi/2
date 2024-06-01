@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202032,
-  'あやしげな作戦',
-  'レース後半に速度が少し上がるが\nすごく疲れてしまうことがある',
+  '可疑的作战策略',
+  '比赛后半速度略微上升但有时会很累',
   20203,
   1,
   2,

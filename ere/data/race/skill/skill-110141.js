@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110141,
-  'コンドル猛撃波',
-  '最終コーナーで中団から前を狙う時\n魂を燃え滾らせて加速力を上げる',
+  '神鹰猛击波',
+  '在最后弯道由中部梯队开始向前冲击时燃烧斗魂提升加速力',
   11014,
   5,
   18,

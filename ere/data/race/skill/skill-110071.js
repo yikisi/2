@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110071,
   'Adventure of 564',
-  'レース後半どっかで速度をわずかに上げ\nついでに使えそうなレアスキルを2つ\n条件を無視して発動させる',
+  '在比赛后半段的某个地方少量提升速度，并且无视条件发动两个用得上的金技能',
   11007,
   5,
   18,

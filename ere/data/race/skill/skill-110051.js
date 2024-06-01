@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110051,
-  'Ravissant',
-  '最終コーナー以降に先団で追い抜くと\n煌めくような華麗な動きを披露し\n少しの間速度がすごく上がる',
+  '倾国倾城',
+  '最终弯道后，在先头集团突围时，展现闪耀般的华丽动作，短时间速度大幅加快',
   11005,
   5,
   18,

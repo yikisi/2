@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201071,
-  '姉御肌',
-  '追い抜こうとすると速度が上がる\n＜マイル＞',
+  '御姐气质',
+  '更容易赶超成功＜英里＞',
   20107,
   2,
   10,

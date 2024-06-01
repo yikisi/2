@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200271,
-  'おひとり様◎',
-  '自分と同じ作戦のウマ娘がいないと\n能力をすごく発揮しやすい',
+  '独自一人◎',
+  '没有其他马娘选择与自己相同的战术时能力更容易发挥',
   20027,
   1,
   0,

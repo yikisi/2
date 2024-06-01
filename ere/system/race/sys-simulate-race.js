@@ -5,6 +5,7 @@ const { sort_list } = require('#/utils/list-utils');
 const RaceInfo = require('#/data/race/model/race-info');
 const {
   ability_type_enum,
+  ability_type_usage_enum,
   target_type_enum,
 } = require('#/data/race/model/uma-skill');
 const {
@@ -13,7 +14,7 @@ const {
   raceDecel,
 } = require('#/data/race/race-const.json');
 
-//起跑速度=3 加速度=24
+// 起跑速度=3 加速度=24
 const startVelocity = 3;
 const startAcceleration = 24;
 
@@ -67,8 +68,8 @@ function check_phase_random_loc(uma, key, phase) {
  * @param {RaceInfo} race_info
  */
 function sys_sim_race(list_chara, race_info) {
-  const current = new Date().getTime();
-  const count_uma = list_chara.length,
+  const current = new Date().getTime(),
+    count_uma = list_chara.length,
     mod_stamina_cost_mess =
       race_info.ground === RaceInfo.ground_enum.grass
         ? mod_stamina_cost_mess_grass[race_info.mess]
@@ -85,7 +86,7 @@ function sys_sim_race(list_chara, race_info) {
     record_stamina_list = [new Array(count_uma)],
     start_delay = new Array(count_uma).fill(0);
 
-  // 装填preConditionParams与conditionParams，计算出闸技能并赋予初始速度与加速度
+  // 计算出闸技能并赋予初始速度与加速度
   list_chara.forEach((uma) => {
     record_stamina_list[0][uma.index_race] = uma.race.stamina;
 
@@ -160,18 +161,16 @@ function sys_sim_race(list_chara, race_info) {
       record_stamina_list.at(-1)[uma.index_race] = uma.race.stamina;
     });
 
-    // 冲线判定
-    const list_msec_cam = [];
+    list_in_race = sort_list(list_in_race, (e) => e.race.location).filter(
+      (e) => {
+        if (e.race.location >= race_info.span) {
+          list_finished.push(e);
+          return false;
+        }
+        return true;
+      },
+    );
 
-    list_in_race = list_in_race.filter((e) => {
-      e.flagFinish = !e.flagFinish && e.race.location >= race_info.span;
-      if (e.flagFinish) {
-        list_msec_cam.push(e);
-      }
-      return !e.flagFinish;
-    });
-
-    list_finished.push(...sort_list(list_msec_cam, (e) => e.race.location));
     list_finished.forEach((e) => {
       record_location_list.at(-1)[e.index_race] =
         race_info.span + 1000 * (race_info.gates - e.rank.curr + 1);
@@ -181,33 +180,24 @@ function sys_sim_race(list_chara, race_info) {
       record_stamina_list.at(-1)[e.index_race] = e.race.stamina;
     });
 
-    // 再无待计算马娘则比赛结束
     if (!list_in_race.length) {
       flag_race = false;
       continue;
     }
 
-    // 按位置sort一下以计算排名 顺便生成未完赛的短位置表继续计算
-    list_in_race = sort_list(list_in_race, (e) => e.race.location);
-
-    //通过位置表计算一下相对距离 之后红技光环应该也会用位置表读范围
     list_in_race.forEach((uma, i, l) => {
       uma.rank.last = uma.rank.curr;
       uma.rank.curr = list_finished.length + i + 1;
-      uma.race.preConditionParams.bashin_diff_infront =
-        uma.race.conditionParams.bashin_diff_infront =
-          (i === 0 ? 50 : l[i - 1].race.location - uma.race.location) / 2.5;
+      uma.race.conditionParams.bashin_diff_infront =
+        (i === 0 ? 50 : l[i - 1].race.location - uma.race.location) / 2.5;
       uma.race.conditionParams.blocked_front = Number(
         uma.race.conditionParams.bashin_diff_infront < 0.8,
       );
-      uma.race.preConditionParams.bashin_diff_behind =
-        uma.race.conditionParams.bashin_diff_behind =
-          (i === l.length - 1
-            ? 50
-            : uma.race.location - l[i + 1].race.location) / 2.5;
-      uma.race.preConditionParams.change_order_onetime =
-        uma.race.conditionParams.change_order_onetime =
-          uma.rank.curr - uma.rank.last;
+      uma.race.conditionParams.bashin_diff_behind =
+        (i === l.length - 1 ? 50 : uma.race.location - l[i + 1].race.location) /
+        2.5;
+      uma.race.conditionParams.change_order_onetime =
+        uma.rank.curr - uma.rank.last;
 
       if (uma.race.overtakeAim) {
         uma.race.overtakeAim.to_be_overtaken = false;
@@ -229,17 +219,13 @@ function sys_sim_race(list_chara, race_info) {
       uma.race.overtakeAim = l[j];
     });
 
-    const top_location =
-        list_finished.length > 0
-          ? race_info.span
-          : list_in_race[0].race.location,
+    const top_location = list_in_race[0].race.location,
       contestants_length =
         top_location - list_in_race.at(-1).race.location || 1,
       running_style_temptations = [0, 0, 0, 0];
 
     // 模拟技能触发
     list_in_race.forEach((uma, i, l) => {
-      // 读取本时刻脚下赛道状态
       const cur_lane = race_info.lanes.find(
         (e) => uma.race.location >= e.start && uma.race.location < e.end,
       );
@@ -267,63 +253,60 @@ function sys_sim_race(list_chara, race_info) {
         uma.base.temptationSpan = 50000;
         uma.race.temptation = 12 * 15;
         uma.race.conditionParams.is_temptation = 1;
-        uma.race.preConditionParams.temptation_count = ++uma.race
-          .conditionParams.temptation_count;
+        uma.race.conditionParams.temptation_count++;
       }
 
       uma.race.conditionParams.accumulatetime = timer;
       if (uma.rank.curr !== uma.rank.last) {
         uma.race.conditionParams.behind_near_lane_time =
-          uma.race.preConditionParams.behind_near_lane_time_set1 =
+          uma.race.conditionParams.behind_near_lane_time_set1 =
           uma.race.conditionParams.blocked_front_continuetime =
-          uma.race.preConditionParams.blocked_side_continuetime =
           uma.race.conditionParams.blocked_side_continuetime =
           uma.race.conditionParams.infront_near_lane_time =
             0;
       } else {
-        if (uma.race.preConditionParams.bashin_diff_infront <= 1) {
+        if (uma.race.conditionParams.bashin_diff_infront <= 1) {
           uma.race.conditionParams.infront_near_lane_time = add_time(
             uma.race.conditionParams.infront_near_lane_time,
           );
         }
         if (uma.race.conditionParams.blocked_front) {
           uma.race.conditionParams.blocked_front_continuetime =
-            uma.race.preConditionParams.blocked_side_continuetime =
-            uma.race.conditionParams.blocked_side_continuetime =
-              add_time(uma.race.conditionParams.blocked_side_continuetime);
+            uma.race.conditionParams.blocked_side_continuetime = add_time(
+              uma.race.conditionParams.blocked_side_continuetime,
+            );
         }
-        if (uma.race.preConditionParams.bashin_diff_behind <= 1) {
+        if (uma.race.conditionParams.bashin_diff_behind <= 1) {
           uma.race.conditionParams.behind_near_lane_time = add_time(
             uma.race.conditionParams.behind_near_lane_time,
           );
-          uma.race.preConditionParams.behind_near_lane_time_set1 = add_time(
-            uma.race.preConditionParams.behind_near_lane_time_set1,
+          uma.race.conditionParams.behind_near_lane_time_set1 = add_time(
+            uma.race.conditionParams.behind_near_lane_time_set1,
           );
         }
       }
       if (uma.rank.curr < uma.rank.last) {
         if (uma.race.conditionParams.phase === 1) {
-          uma.race.preConditionParams.change_order_up_middle++;
+          uma.race.conditionParams.change_order_up_middle++;
         } else if (uma.race.conditionParams.phase >= 2) {
           uma.race.conditionParams.change_order_up_end_after++;
+          if (cur_lane.is_curve) {
+            uma.base.change_order_finalcorner++;
+          }
         }
         if (has_final_corner && cur_lane.is_last) {
           uma.race.conditionParams.change_order_up_finalcorner_after++;
         }
       }
-      uma.race.preConditionParams.corner = uma.race.conditionParams.corner =
-        cur_lane.corner;
-      uma.race.preConditionParams.distance_diff_rate =
-        uma.race.conditionParams.distance_diff_rate =
-          ((top_location - uma.race.location) * 100) / contestants_length;
-      uma.race.preConditionParams.distance_diff_top =
-        uma.race.conditionParams.distance_diff_top =
-          top_location - uma.race.location;
+      uma.race.conditionParams.corner = cur_lane.corner;
+      uma.race.conditionParams.distance_diff_rate =
+        ((top_location - uma.race.location) * 100) / contestants_length;
+      uma.race.conditionParams.distance_diff_top =
+        top_location - uma.race.location;
       uma.race.conditionParams.distance_diff_top_float =
         uma.race.conditionParams.distance_diff_top * 10;
-      uma.race.preConditionParams.distance_rate =
-        uma.race.conditionParams.distance_rate =
-          (uma.race.location * 100) / race_info.span;
+      uma.race.conditionParams.distance_rate =
+        (uma.race.location * 100) / race_info.span;
       uma.race.conditionParams.hp_per =
         (uma.race.stamina * 100) / uma.base.stamina;
       uma.race.conditionParams.is_activate_any_skill = Number(
@@ -331,10 +314,9 @@ function sys_sim_race(list_chara, race_info) {
           (e) => e.ability_time[0] > 0 || e.ability_time[1] > 0,
         ) !== -1,
       );
-      uma.race.preConditionParams.is_finalcorner =
-        uma.race.conditionParams.is_finalcorner = Number(
-          has_final_corner && cur_lane.is_last,
-        );
+      uma.race.conditionParams.is_finalcorner = Number(
+        has_final_corner && cur_lane.is_last,
+      );
       uma.race.conditionParams.is_finalcorner_laterhalf = Number(
         uma.race.conditionParams.is_finalcorner &&
           (uma.race.location - cur_lane.start) /
@@ -345,15 +327,13 @@ function sys_sim_race(list_chara, race_info) {
       uma.race.conditionParams.is_last_straight = Number(
         !cur_lane.is_curve && cur_lane.is_last,
       );
-      uma.race.preConditionParams.is_last_straight_onetime =
-        uma.race.conditionParams.is_last_straight_onetime = Number(
-          pre_last_straight === 0 &&
-            uma.race.conditionParams.is_last_straight === 1,
-        );
-      uma.race.preConditionParams.is_overtake =
-        uma.race.conditionParams.is_overtake = Number(
-          uma.race.overtakeAim !== undefined,
-        );
+      uma.race.conditionParams.is_last_straight_onetime = Number(
+        pre_last_straight === 0 &&
+          uma.race.conditionParams.is_last_straight === 1,
+      );
+      uma.race.conditionParams.is_overtake = Number(
+        uma.race.overtakeAim !== undefined,
+      );
       uma.race.conditionParams.near_count = 0;
       for (let k = i - 1; k >= 0; --k) {
         if (l[k].race.location - uma.race.location >= 3) {
@@ -370,30 +350,25 @@ function sys_sim_race(list_chara, race_info) {
         }
         uma.race.conditionParams.near_count++;
       }
-      uma.race.preConditionParams.order = uma.race.conditionParams.order =
-        uma.rank.curr;
-      const order_rate =
-        (uma.race.preConditionParams.order_rate =
-        uma.race.conditionParams.order_rate =
-          (uma.rank.curr * 100) / list_chara.length);
+      uma.race.conditionParams.order = uma.rank.curr;
+      const order_rate = (uma.race.conditionParams.order_rate =
+        (uma.rank.curr * 100) / list_chara.length);
       if (uma.race.conditionParams.phase <= 1 && timer > 5) {
         if (order_rate > 20) {
-          uma.race.preConditionParams.order_rate_in20_continue =
-            uma.race.conditionParams.order_rate_in20_continue = 0;
+          uma.race.conditionParams.order_rate_in20_continue = 0;
         } else if (order_rate < 20) {
-          uma.race.preConditionParams.order_rate_out20_continue = 0;
+          uma.race.conditionParams.order_rate_out20_continue = 0;
         }
         if (order_rate < 40) {
-          uma.race.preConditionParams.order_rate_out40_continue =
-            uma.race.conditionParams.order_rate_out40_continue = 0;
+          uma.race.conditionParams.order_rate_out40_continue = 0;
         }
         if (order_rate > 50) {
           uma.race.conditionParams.order_rate_in50_continue = 0;
         } else if (order_rate < 50) {
-          uma.race.preConditionParams.order_rate_out50_continue = 0;
+          uma.race.conditionParams.order_rate_out50_continue = 0;
         }
         if (order_rate < 70) {
-          uma.race.preConditionParams.order_rate_out70_continue = 0;
+          uma.race.conditionParams.order_rate_out70_continue = 0;
         }
         if (order_rate > 80) {
           uma.race.conditionParams.order_rate_in80_continue = 0;
@@ -403,32 +378,29 @@ function sys_sim_race(list_chara, race_info) {
         uma.race.overtakeAim &&
         uma.race.overtakeAim.rank.curr === uma.race.overtakeAim.rank.last
       ) {
-        uma.race.preConditionParams.overtake_target_no_order_up_time = add_time(
-          uma.race.preConditionParams.overtake_target_no_order_up_time,
+        uma.race.conditionParams.overtake_target_no_order_up_time = add_time(
+          uma.race.conditionParams.overtake_target_no_order_up_time,
         );
       } else {
-        uma.race.preConditionParams.overtake_target_no_order_up_time = 0;
+        uma.race.conditionParams.overtake_target_no_order_up_time = 0;
       }
       if (uma.flag.to_be_overtaken) {
-        uma.race.preConditionParams.overtake_target_time =
-          uma.race.conditionParams.overtake_target_time = add_time(
-            uma.race.conditionParams.overtake_target_time,
-          );
+        uma.race.conditionParams.overtake_target_time = add_time(
+          uma.race.conditionParams.overtake_target_time,
+        );
       } else {
-        uma.race.preConditionParams.overtake_target_time =
+        uma.race.conditionParams.overtake_target_time =
           uma.race.conditionParams.overtake_target_time = 0;
       }
-      uma.race.preConditionParams.phase = uma.race.conditionParams.phase;
-      uma.race.preConditionParams.remain_distance =
-        uma.race.conditionParams.remain_distance =
+      uma.race.conditionParams.remain_distance =
         uma.race.conditionParams.remain_distance_viewer_id =
           race_info.span - uma.race.location;
       if (uma.race.slope > 0) {
-        uma.race.preConditionParams.slope = uma.race.conditionParams.slope = 1;
+        uma.race.conditionParams.slope = 1;
       } else if (uma.race.slope < 0) {
-        uma.race.preConditionParams.slope = uma.race.conditionParams.slope = 2;
+        uma.race.conditionParams.slope = 2;
       } else {
-        uma.race.preConditionParams.slope = uma.race.conditionParams.slope = 0;
+        uma.race.conditionParams.slope = 0;
       }
       uma.race.conditionParams.temptation_opponent_count_infront = l.filter(
         (e, j) => j < i && e.race.temptation > 0,
@@ -437,7 +409,6 @@ function sys_sim_race(list_chara, race_info) {
         (e, j) => j > i && e.race.temptation > 0,
       ).length;
       uma.race.conditionParams.visiblehorse = list_in_race.length - 1;
-      // random系参数填充
       uma.race.conditionParams.all_corner_random = 0;
       if (
         uma.race.location >= uma.random.all_corner[uma.random.all_corner_index]
@@ -519,18 +490,16 @@ function sys_sim_race(list_chara, race_info) {
       uma.race.acceleration =
         uma.base.acceleration *
         uma.factorPhase.aStyle[Math.min(uma.race.conditionParams.phase, 2)];
-
       // 终盘时则再附加部分变动
       if (uma.race.conditionParams.phase >= 2) {
         uma.race.velocityIdeal += uma.factorFinal.vIdealAdd;
         uma.race.staminaCost *= uma.factorFinal.sCostMult;
       }
-
       // 每个赛段的随机浮动
       uma.race.velocityIdeal +=
         uma.factorPhase.vRand[Math.min(uma.race.conditionParams.phase, 2)];
 
-      // 为自己计算最终冲刺方案
+      // 冲刺
       if (
         uma.flag.allowPlan &&
         uma.race.conditionParams.phase >= 2 &&
@@ -570,8 +539,7 @@ function sys_sim_race(list_chara, race_info) {
               Math.pow(planVelocity - uma.base.velocityIdeal + 12, 2) *
               mod_stamina_cost_mess *
               uma.factorFinal.sCostMult;
-            // 计算最合理的冲刺距离 以求刚好在终点用光耐力
-            // ……理论上耐力够了就直接冲了不过这里
+            // 计算最合理的冲刺距离 以求刚好在终点用光耐力……理论上耐力够了就直接冲了不过这里
             let rushDistance =
               (planVelocity *
                 (uma.race.stamina * endSectVelocity -
@@ -605,8 +573,6 @@ function sys_sim_race(list_chara, race_info) {
         }
         uma.flagAllowPlan = false;
       }
-
-      // 判定进入冲刺状态
       if (
         !uma.flag.finalRush &&
         uma.race.location >= uma.race.locationPlanRush
@@ -614,8 +580,6 @@ function sys_sim_race(list_chara, race_info) {
         uma.flag.finalRush = true;
         uma.race.conditionParams.is_lastspurt = 1;
       }
-
-      // 若在冲刺状态则目标速度为冲刺速度
       if (uma.flag.finalRush) {
         uma.race.velocityIdeal = uma.race.velocityPlanRush;
       }
@@ -664,12 +628,10 @@ function sys_sim_race(list_chara, race_info) {
         uma.race.conditionParams.compete_fight_count = 0;
       }
 
-      // 上坡减速
       if (uma.race.slope >= 0) {
         uma.flag.downhill = false;
         uma.race.velocityIdeal -= uma.race.slope * uma.factorSlope.up;
       } else {
-        // 下坡模式判定
         if (uma.flag.downhill && Math.random() < 0.2) {
           uma.flag.downhill = false;
         }
@@ -677,13 +639,11 @@ function sys_sim_race(list_chara, race_info) {
           uma.flag.downhill = true;
         }
       }
-      // 下坡加速
       if (uma.flag.downhill) {
         uma.race.velocityIdeal += 0.3 - uma.race.slope * 10;
         uma.race.staminaCost *= 0.4;
       }
 
-      // 判定技能生效状态
       uma.list_skill.forEach((skill) => {
         uma.race.conditionParams.is_activate_other_skill_detail = Number(
           skill.data.is_two_phase && skill.count[0] > 0,
@@ -693,9 +653,8 @@ function sys_sim_race(list_chara, race_info) {
             skill.ability_time[i]--;
             if (skill.ability_time[i] <= 0) {
               skill.ability_time[i] = 0;
-              // 效果结束
               for (let j = 0; j < skill.data.ability_types.length; ++j) {
-                switch (skill.data.ability_types[j]) {
+                switch (skill.data.ability_types[i][j]) {
                   case ability_type_enum.CurrentSpeed:
                     skill.aims[i][j].forEach((e) => {
                       e.base.velocityIdealBuff -= skill.values[i][j];
@@ -734,7 +693,7 @@ function sys_sim_race(list_chara, race_info) {
             }
           }
           skill.precondition[i] ||= skill.data.preconditions[i](
-            uma.race.preConditionParams,
+            uma.race.conditionParams,
           );
           if (
             !skill.ability_time[0] &&
@@ -751,161 +710,229 @@ function sys_sim_race(list_chara, race_info) {
             }
             skill.ability_time[i] = skill.data.ability_times[i] * 15;
             for (let j = 0; j < skill.data.ability_types[i].length; ++j) {
-              if (skill.data.ability_types[i][j] === 0) {
-                continue;
-              }
-              let temp;
-              if (!skill.aims[i][j]) {
-                switch (skill.data.target_types[i][j]) {
-                  case target_type_enum.Self:
-                    skill.aims[i][j] = [uma];
-                    break;
-                  case target_type_enum.Visible:
-                    skill.aims[i][j] = list_in_race.filter((e) => e !== uma);
-                    break;
-                  case target_type_enum.OrderInfront:
-                    temp = list_finished.length;
-                    if (temp < skill.data.target_values[i][j]) {
-                      skill.aims[i][j] = list_in_race.slice(
-                        0,
-                        skill.data.target_values[i][j] - temp,
+              if (skill.data.ability_types[i][j] > 0) {
+                let temp;
+                if (!skill.aims[i][j]) {
+                  switch (skill.data.target_types[i][j]) {
+                    case target_type_enum.Self:
+                      skill.aims[i][j] = [uma];
+                      break;
+                    case target_type_enum.Visible:
+                      skill.aims[i][j] = list_in_race.filter((e) => e !== uma);
+                      break;
+                    case target_type_enum.OrderInfront:
+                      temp = list_finished.length;
+                      if (temp < skill.data.target_values[i][j]) {
+                        skill.aims[i][j] = list_in_race.slice(
+                          0,
+                          skill.data.target_values[i][j] - temp,
+                        );
+                      } else {
+                        skill.aims[i][j] = [];
+                      }
+                      break;
+                    case target_type_enum.SelfInfront:
+                      skill.aims[i][j] = list_in_race.filter(
+                        (e) => e.race.location > uma.race.location,
                       );
-                    } else {
-                      skill.aims[i][j] = [];
+                      break;
+                    case target_type_enum.SelfBehind:
+                      skill.aims[i][j] = list_in_race.filter(
+                        (e) => e.race.location < uma.race.location,
+                      );
+                      break;
+                    case target_type_enum.RunningStyleOtherSelf:
+                      skill.aims[i][j] = list_in_race.filter(
+                        (e) => e.style + 1 === skill.data.target_values[i][j],
+                      );
+                      break;
+                    case target_type_enum.SelfInfrontTemptation:
+                      skill.aims[i][j] = list_in_race.filter(
+                        (e) =>
+                          e.race.location > uma.race.location &&
+                          e.base.temptation > 0,
+                      );
+                      break;
+                    case target_type_enum.SelfBehindTemptation:
+                      skill.aims[i][j] = list_in_race.filter(
+                        (e) =>
+                          e.race.location < uma.race.location &&
+                          e.base.temptation > 0,
+                      );
+                      break;
+                    case target_type_enum.RunningStyleTemptationOtherSelf:
+                      skill.aims[i][j] = list_in_race.filter(
+                        (e) =>
+                          e !== uma &&
+                          uma.style + 1 === skill.data.target_values[i][j] &&
+                          e.base.temptation > 0,
+                      );
+                      break;
+                    case target_type_enum.CharaId:
+                      skill.aims[i][j] = [uma];
+                      break;
+                    case target_type_enum.ActivateHealSkill:
+                      skill.aims[i][j] = list_in_race.filter(
+                        (e) =>
+                          e !== uma &&
+                          e.race.conditionParams.activate_count_heal > 0,
+                      );
+                      break;
+                    default:
+                      logger.debug(
+                        `不支持的目标类型：${skill.data.name} 第${i + 1}段 效果${j + 1} ${skill.data.target_types[i][j]}`,
+                      );
+                  }
+                }
+                switch (skill.data.ability_value_usages[i][j]) {
+                  case ability_type_usage_enum.MultiplySkillNum:
+                    skill.values[i][j] =
+                      skill.data.ability_values[i][j] *
+                      Math.min(
+                        1 + uma.race.conditionParams.activate_count_all * 0.01,
+                        1.2,
+                      );
+                    break;
+                  case ability_type_usage_enum.MultiplyRandom1:
+                    skill.values[i][j] =
+                      skill.data.ability_values[i][j] * Math.random();
+                    break;
+                  case ability_type_usage_enum.MultiplySingleModeWinCount:
+                    if (uma.base.winCount < 6) {
+                      skill.values[i][j] =
+                        skill.data.ability_values[i][j] * 0.8;
+                    } else if (uma.base.winCount < 14) {
+                      skill.values[i][j] =
+                        skill.data.ability_values[i][j] * 0.9;
+                    } else if (uma.base.winCount < 18) {
+                      skill.values[i][j] = skill.data.ability_values[i][j];
+                    } else if (uma.base.winCount < 25) {
+                      skill.values[i][j] =
+                        skill.data.ability_values[i][j] * 1.1;
+                    } else if (uma.base.winCount >= 25) {
+                      skill.values[i][j] =
+                        skill.data.ability_values[i][j] * 1.2;
                     }
                     break;
-                  case target_type_enum.SelfInfront:
-                    skill.aims[i][j] = list_in_race.filter(
-                      (e) => e.race.location > uma.race.location,
+                  case ability_type_usage_enum.MultiplyOvertakeCount:
+                    skill.values[i][j] =
+                      skill.data.ability_values[i][j] +
+                      0.02 * uma.base.change_order_finalcorner;
+                    break;
+                  case ability_type_usage_enum.MultiplyActivateSpecificTagSkillCount:
+                    if (uma.base.greenCount >= 6) {
+                      skill.values[i][j] = skill.data.ability_values[i][j] + 3;
+                    } else if (uma.base.greenCount >= 5) {
+                      skill.values[i][j] = skill.data.ability_values[i][j] + 2;
+                    } else if (uma.base.greenCount >= 3) {
+                      skill.values[i][j] = skill.data.ability_values[i][j] + 1;
+                    } else {
+                      skill.values[i][j] = skill.data.ability_values[i][j];
+                    }
+                    break;
+                  case ability_type_usage_enum.AddDistanceDiffTop:
+                    if (uma.race.conditionParams.distance_diff_top >= 20) {
+                      skill.values[i][j] =
+                        skill.data.ability_values[i][j] + 0.1;
+                    } else {
+                      skill.values[i][j] = skill.data.ability_values[i][j];
+                    }
+                    break;
+                  case ability_type_usage_enum.MultiplyBlockedSideMaxContinueTimePhaseMiddleRun1:
+                    skill.values[i][j] =
+                      skill.data.ability_values[i][j] *
+                      Math.min(
+                        uma.race.conditionParams.activate_count_all * 0.01,
+                        0.15,
+                      );
+                    break;
+                  case ability_type_usage_enum.MultiplyBaseSpeed:
+                    skill.values[i][j] =
+                      skill.data.ability_values[i][j] + uma.base.accBuffFromWiz;
+                    break;
+                  case ability_type_usage_enum.Direct:
+                  case ability_type_usage_enum.MultiplyTeamTotalSpeed:
+                  case ability_type_usage_enum.MultiplyTeamTotalStamina:
+                  case ability_type_usage_enum.MultiplyTeamTotalPower:
+                  case ability_type_usage_enum.MultiplyTeamTotalGuts:
+                  case ability_type_usage_enum.MultiplyTeamTotalWiz:
+                  case ability_type_usage_enum.MultiplyFanCount:
+                  case ability_type_usage_enum.Unknown:
+                    skill.values[i][j] = skill.data.ability_values[i][j];
+                    break;
+                  default:
+                    skill.values[i][j] = skill.data.ability_values[i][j];
+                    logger.debug(
+                      `不支持的增幅类型：${skill.data.name} 第${i + 1}段 效果${j + 1} ${skill.data.ability_types[i][j]}`,
+                    );
+                }
+                switch (skill.data.ability_types[i][j]) {
+                  case ability_type_enum.HpRate:
+                    skill.aims[i][j].forEach((e) => {
+                      if (skill.values[i][j] > 0) {
+                        e.race.conditionParams.activate_count_heal++;
+                        e.flag.allowPlan = true;
+                        list_in_race.forEach(
+                          (other) =>
+                            other !== uma &&
+                            (other.race.conditionParams.is_other_character_activate_advantage_skill =
+                              ability_type_enum.HpRate),
+                        );
+                      }
+                      e.race.stamina += e.base.stamina * skill.values[i][j];
+                    });
+                    break;
+                  case ability_type_enum.TemptationEndTime:
+                    skill.aims[i][j].forEach((e) => {
+                      e.base.temptation = skill.values[i][j] * 15;
+                      e.race.conditionParams.is_temptation = 1;
+                    });
+                    break;
+                  case ability_type_enum.CurrentSpeed:
+                  case ability_type_enum.CurrentSpeedWithNaturalDeceleration:
+                    skill.aims[i][j].forEach((e) => {
+                      e.base.velocityIdealBuff += skill.values[i][j];
+                      e.race.velocityReal += skill.values[i][j];
+                    });
+                    break;
+                  case ability_type_enum.TargetSpeed:
+                    skill.aims[i][j].forEach(
+                      (e) => (e.base.velocityIdealBuff += skill.values[i][j]),
                     );
                     break;
-                  case target_type_enum.SelfBehind:
-                    skill.aims[i][j] = list_in_race.filter(
-                      (e) => e.race.location < uma.race.location,
-                    );
+                  case ability_type_enum.Accel:
+                    skill.aims[i][j].forEach((e) => {
+                      if (skill.values[i][j] > 0) {
+                        list_in_race.forEach(
+                          (other) =>
+                            other !== uma &&
+                            (other.race.conditionParams.is_other_character_activate_advantage_skill =
+                              ability_type_enum.Accel),
+                        );
+                      }
+                      e.base.accelerationBuff += skill.values[i][j];
+                    });
                     break;
-                  case target_type_enum.RunningStyleOtherSelf:
-                    skill.aims[i][j] = list_in_race.filter(
-                      (e) => e.style + 1 === skill.data.target_values[i][j],
-                    );
+                  case ability_type_enum.ActivateRandomRareSkill:
+                    uma.list_skill
+                      .filter((s) => s !== skill)
+                      .forEach((s) => {
+                        for (let i = 0; i < 2; ++i) {
+                          if (s.ability_time[i] <= 0) {
+                            s.cooldown[i] = 0;
+                          }
+                        }
+                      });
                     break;
-                  case target_type_enum.SelfInfrontTemptation:
-                    skill.aims[i][j] = list_in_race.filter(
-                      (e) =>
-                        e.race.location > uma.race.location &&
-                        e.base.temptation > 0,
-                    );
-                    break;
-                  case target_type_enum.SelfBehindTemptation:
-                    skill.aims[i][j] = list_in_race.filter(
-                      (e) =>
-                        e.race.location < uma.race.location &&
-                        e.base.temptation > 0,
-                    );
-                    break;
-                  case target_type_enum.RunningStyleTemptationOtherSelf:
-                    skill.aims[i][j] = list_in_race.filter(
-                      (e) =>
-                        e !== uma &&
-                        uma.style + 1 === skill.data.target_values[i][j] &&
-                        e.base.temptation > 0,
-                    );
-                    break;
-                  case target_type_enum.CharaId:
-                    skill.aims[i][j] = [uma];
-                    break;
-                  case target_type_enum.ActivateHealSkill:
-                    skill.aims[i][j] = list_in_race.filter(
-                      (e) =>
-                        e !== uma &&
-                        e.race.conditionParams.activate_count_heal > 0,
-                    );
+                  case ability_type_enum.VisibleDistance:
+                  case ability_type_enum.LaneMoveSpeed:
+                  case ability_type_enum.TargetLane:
                     break;
                   default:
                     logger.debug(
-                      `不支持的目标类型：${skill.data.name} 第${i + 1}段 效果${j + 1} ${skill.data.target_types[i][j]}`,
+                      `不支持的效果类型：${skill.data.name} 第${i + 1}段 效果${j + 1} ${skill.data.ability_types[i][j]}`,
                     );
                 }
-              }
-              let value_buff = 1;
-              // 看得头疼，暂时不做
-              // switch (skill.data.ability_value_usages[i][j]) {
-              //   case ability_type_usage_enum.MultiplyRandom1:
-              //   case ability_type_usage_enum.Direct:
-              //   case ability_type_usage_enum.MultiplyTeamTotalSpeed:
-              //   case ability_type_usage_enum.MultiplyTeamTotalStamina:
-              //   case ability_type_usage_enum.MultiplyTeamTotalPower:
-              //   case ability_type_usage_enum.MultiplyTeamTotalGuts:
-              //   case ability_type_usage_enum.MultiplyTeamTotalWiz:
-              //   case ability_type_usage_enum.MultiplyFanCount:
-              // }
-              skill.values[i][j] = skill.data.ability_values[i][j] * value_buff;
-              switch (skill.data.ability_types[i][j]) {
-                case ability_type_enum.HpRate:
-                  skill.aims[i][j].forEach((e) => {
-                    if (skill.values[i][j] > 0) {
-                      e.race.conditionParams.activate_count_heal++;
-                      e.flag.allowPlan = true;
-                      list_in_race.forEach(
-                        (other) =>
-                          other !== uma &&
-                          (other.race.conditionParams.is_other_character_activate_advantage_skill =
-                            ability_type_enum.HpRate),
-                      );
-                    }
-                    e.race.stamina += e.base.stamina * skill.values[i][j];
-                  });
-                  break;
-                case ability_type_enum.TemptationEndTime:
-                  skill.aims[i][j].forEach((e) => {
-                    e.base.temptation = skill.values[i][j] * 15;
-                    e.race.conditionParams.is_temptation = 1;
-                  });
-                  break;
-                case ability_type_enum.CurrentSpeed:
-                case ability_type_enum.CurrentSpeedWithNaturalDeceleration:
-                  skill.aims[i][j].forEach((e) => {
-                    e.base.velocityIdealBuff += skill.values[i][j];
-                    e.race.velocityReal += skill.values[i][j];
-                  });
-                  break;
-                case ability_type_enum.TargetSpeed:
-                  skill.aims[i][j].forEach(
-                    (e) => (e.base.velocityIdealBuff += skill.values[i][j]),
-                  );
-                  break;
-                case ability_type_enum.Accel:
-                  skill.aims[i][j].forEach((e) => {
-                    if (skill.values[i][j] > 0) {
-                      list_in_race.forEach(
-                        (other) =>
-                          other !== uma &&
-                          (other.race.conditionParams.is_other_character_activate_advantage_skill =
-                            ability_type_enum.Accel),
-                      );
-                    }
-                    e.base.accelerationBuff += skill.values[i][j];
-                  });
-                  break;
-                case ability_type_enum.ActivateRandomRareSkill:
-                  uma.list_skill
-                    .filter((s) => s !== skill)
-                    .forEach((s) => {
-                      for (let i = 0; i < 2; ++i) {
-                        if (s.ability_time[i] <= 0) {
-                          s.cooldown[i] = 0;
-                        }
-                      }
-                    });
-                  break;
-                case ability_type_enum.VisibleDistance:
-                case ability_type_enum.LaneMoveSpeed:
-                case ability_type_enum.TargetLane:
-                  break;
-                default:
-                  logger.debug(
-                    `不支持的效果类型：${skill.data.name} 第${i + 1}段 效果${j + 1} ${skill.data.ability_types[i][j]}`,
-                  );
               }
             }
             record_skill_list.at(-1)[uma.index_race].push(skill.data.id);
@@ -924,6 +951,7 @@ function sys_sim_race(list_chara, race_info) {
               case 3:
                 uma.race.conditionParams.activate_count_end_after++;
             }
+            break;
           } else {
             skill.cooldown[i]--;
           }
@@ -931,25 +959,20 @@ function sys_sim_race(list_chara, race_info) {
       });
     });
 
-    // 结算
     for (const uma of list_in_race) {
-      //扣耐不会成负数 回耐也不会超过初始上限
       uma.race.stamina = Math.min(
         Math.max(uma.race.stamina - uma.race.staminaCost, 0),
         uma.base.stamina,
       );
       if (uma.race.stamina > 0) {
-        //目标速度不会低于最低速度
         uma.race.velocityIdeal =
           Math.max(Math.min(uma.race.velocityIdeal, 30), uma.base.velocityMin) +
           uma.base.velocityIdealBuff;
-        //超速则不加速反而进行减速
         if (uma.race.velocityReal > uma.race.velocityIdeal) {
           uma.race.acceleration =
             raceDecel[Math.min(uma.race.conditionParams.phase, 2)];
         }
       } else {
-        // 空耐则目标速度掉为最低速度
         uma.race.velocityIdeal =
           uma.base.velocityMin + uma.base.velocityIdealBuff;
         uma.race.acceleration = raceDecel[4];

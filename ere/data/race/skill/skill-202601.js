@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202601,
-  'ルミネセンス',
-  'レース中にスキルを13回発動すると\n前に出る＜中距離＞',
+  '闪光',
+  '比赛中触发了13次技能的话，向前突进＜中距离＞',
   20260,
   2,
   10,

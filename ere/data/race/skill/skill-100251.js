@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100251,
-  'アナタヲ・オイカケテ',
-  'レース後半に中団から\n『お友達』を追って速度を少しずつ上げ\n前方のウマ娘をちょっと萎縮させる',
+  '逐君之形',
+  '赛程后半，从中间梯队追逐『友人』而逐渐提升速度使前方的马娘畏首畏尾',
   10025,
   5,
   18,

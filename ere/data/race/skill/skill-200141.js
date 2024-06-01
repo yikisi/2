@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200141,
-  '非根幹距離◎',
-  '非根幹距離（400mの倍数以外）が\n得意になる',
+  '非根干距离◎',
+  '擅长非根干距离（400m的倍数以外）的比赛',
   20014,
   1,
   0,

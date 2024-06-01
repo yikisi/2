@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100871,
   'Silent letter',
-  '残り400mを切って前の方で\n詰め寄られるとファンの心に残る走りで\n抜け出しやすくなる',
+  '剩余400米，位于前方并被后方马娘紧追时，跑法让粉丝心中留下深刻印象，使自身更容易突围',
   10087,
   5,
   18,

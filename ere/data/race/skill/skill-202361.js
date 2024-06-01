@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202361,
-  '油断大敵',
-  'レース後半に息を入れたウマ娘を\n萎縮させる＜ダート＞',
+  '大意就会败北',
+  '比赛后半时，使体力回复的赛马娘畏缩＜沙土＞',
   20236,
   2,
   11,

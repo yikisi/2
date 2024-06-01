@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202531,
-  '優位形成',
-  'レース中盤に速度が上がる\n＜マイル/中距離＞',
+  '优位形成',
+  '在比赛中盘时，速度提升＜英里/中距离＞',
   20253,
   2,
   10,

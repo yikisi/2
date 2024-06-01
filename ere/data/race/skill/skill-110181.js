@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110181,
-  '薫風、永遠なる瞬間を',
-  'レース中盤で前の方から\n仕掛け始める時に速度が上がる',
+  '和暖微风，瞬间亦永恒',
+  '赛程中盘于前方开始进行发力时提升速度',
   11018,
   5,
   18,

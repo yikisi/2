@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201062,
-  'アクセラレーション',
-  'レース後半に追い抜くと\n加速力がわずかに上がる＜マイル＞',
+  '爆发力',
+  '在比赛后半完成超越时，加速力稍微提升＜英里＞',
   20106,
   1,
   2,

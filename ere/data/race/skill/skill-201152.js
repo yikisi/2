@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201152,
-  '束縛',
-  'レース終盤に後ろの方にいると\n前の速度をわずかに下げる＜中距離＞',
+  '束缚',
+  '在比赛终盘位于后方时，略微降低前方赛马娘的速度＜中距离＞',
   20115,
   1,
   3,

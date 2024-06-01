@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100861,
-  '愛と熔けよただ熔けよ',
-  '残り1000ｍ地点で前の方にいると\n速度が上がる',
+  '消融在爱中吧',
+  '剩余1000m时若位于前方，则提高速度',
   10086,
   5,
   18,

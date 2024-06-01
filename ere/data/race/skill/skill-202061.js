@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202061,
-  '日本一のウマ娘',
-  '期待を背負った強い想いが力に変わり\n最終コーナーで速度が上がる\n＜長距離＞',
+  '日本第一赛马娘',
+  '背负期待的强烈感情转变为力量，最终弯道处提升速度＜长距离＞',
   20206,
   2,
   10,

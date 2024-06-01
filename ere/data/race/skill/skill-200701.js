@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200701,
   '豪脚',
-  'レース終盤に後ろの方だと\n加速力が上がる＜マイル＞',
+  '比赛终盘位于后方时，赶超别人的能力会提升＜英里＞',
   20070,
   2,
   10,

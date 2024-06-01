@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201432,
-  '読解力',
-  'レース中盤に観察力が高まり視野を\nわずかに広く持てる＜作戦・差し＞',
+  '阅读能力',
+  '比赛中盘时，观察力提高，视野变得稍微宽阔＜作战・居中＞',
   20143,
   1,
   2,

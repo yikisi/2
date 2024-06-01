@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200561,
-  '余裕綽々',
-  'レース中盤が迫ったとき前の方にいると\n疲れにくくなる＜作戦・先行＞',
+  '绰绰有余',
+  '临近比赛中盘时不容易疲惫＜作战・先行＞',
   20056,
   2,
   9,

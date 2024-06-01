@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202662,
-  '込み上げる熱',
-  'レース終盤始めの方に中団にいると\nわずかに前に出る＜中距離/長距離＞',
+  '热血涌动',
+  '比赛终盘初段位于队伍中间时，稍微向前突进＜中距离/长距离＞',
   20266,
   1,
   2,

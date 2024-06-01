@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110511,
   'Flowering Dreams',
-  '残り200m地点で2番手～中団\nにいると速度が上がる\n近くにウマ娘が3人以上いると\nさらにわずかに前に出る',
+  '在剩余200m的地点自身位于第二名与中间队伍之间的位置时，速度提升，且附近赛马娘数量达3人以上时再稍微向前突进',
   11051,
   5,
   18,

@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201282,
-  '勢い任せ',
-  '上り坂でわずかに疲れにくくなる\n＜作戦・逃げ＞',
+  '随势而动',
+  '在上坡时略微不容易疲劳＜作战・领放＞',
   20128,
   1,
   1,

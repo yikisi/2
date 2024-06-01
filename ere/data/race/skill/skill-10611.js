@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   10611,
   'Call me KING',
-  'レースを冷静に運ぶことができると\n残り200mで中団にいるとき\n実力発揮、速度が上がる',
+  '能够冷静地进行比赛的规划时，就能够在最后200米发挥实力，大幅加速',
   1061,
   3,
   18,

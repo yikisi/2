@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200721,
-  'キラーチューン',
-  'レース中盤に前の方だと\n速度が上がる＜中距離＞',
+  '杀手旋律',
+  '比赛中盘位于前列时，容易取得好位置＜中距离＞',
   20072,
   2,
   10,

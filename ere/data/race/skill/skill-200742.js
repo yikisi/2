@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200742,
   '深呼吸',
-  'レース中盤に息を入れて\nわずかに疲れにくくなる＜長距離＞',
+  '在比赛中盘时重整呼吸，稍微不容易变得疲劳＜长距离＞',
   20074,
   1,
   1,

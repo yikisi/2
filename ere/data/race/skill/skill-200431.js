@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200431,
-  'コンセントレーション',
-  'スタートが得意になり\n出遅れる時間が少なくなる',
+  '专注',
+  '擅长起跑，晚出发的时间减少',
   20043,
   2,
   10,

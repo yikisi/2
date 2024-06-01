@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201621,
-  'ふり絞り',
-  'レース終盤にスキルを多く発動すると\n持久力がわずかに回復する',
+  '竭尽全力',
+  '在比赛终盘发动多个技能时，耐力略微回复',
   20162,
   1,
   1,

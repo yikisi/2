@@ -14,12 +14,14 @@ class ConditionParams {
   bashin_diff_behind;
   bashin_diff_infront;
   behind_near_lane_time;
+  behind_near_lane_time_set1;
   blocked_front;
   blocked_front_continuetime;
   blocked_side_continuetime;
   change_order_onetime;
   change_order_up_end_after;
   change_order_up_finalcorner_after;
+  change_order_up_middle;
   compete_fight_count;
   corner;
   corner_random;
@@ -65,7 +67,11 @@ class ConditionParams {
   order_rate_in20_continue;
   order_rate_in50_continue;
   order_rate_in80_continue;
+  order_rate_out20_continue;
   order_rate_out40_continue;
+  order_rate_out50_continue;
+  order_rate_out70_continue;
+  overtake_target_no_order_up_time;
   overtake_target_time;
   phase;
   phase_corner_random;

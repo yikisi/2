@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201103,
-  '光芒一閃',
-  '直線で速度が上がる＜中距離＞',
+  '光芒一闪',
+  '在直线加快速度＜中距离＞',
   20110,
   2,
   10,

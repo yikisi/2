@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201502,
   '策士',
-  'レース終盤に後ろの方にいると\n視野がわずかに広くなる＜作戦・追込＞',
+  '比赛终盘位于后方时，视野略微开阔＜作战・追赶＞',
   20150,
   1,
   2,

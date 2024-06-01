@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202172,
-  '下り坂巧者',
-  '下り坂で速度がわずかに上がる',
+  '下坡巧者',
+  '在下坡略微提高速度',
   20217,
   1,
   2,

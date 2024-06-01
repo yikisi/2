@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202571,
-  '未来を拓く奇跡',
-  '更なる奇跡を起こすべく\nレース終盤に加速力が上がる＜短距離＞',
+  '开拓未来的奇迹',
+  '比赛终盘加速力提升以创造更多的奇迹＜短距离＞',
   20257,
   2,
   10,

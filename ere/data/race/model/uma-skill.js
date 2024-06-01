@@ -85,6 +85,8 @@ const ability_type_usage_enum = {
   MultiplyRandom2: 9,
   // 胜场决定倍率：6、14、18、25，分别为0.8、0.9、1.0、1.1、1.2
   MultiplySingleModeWinCount: 10,
+  // 终弯超过人数
+  MultiplyOvertakeCount: 11,
   // 粉丝数决定倍率：20k、50k、100k、160k，分别为0.8、0.9、1.0、1.1、1.2
   MultiplyFanCount: 12,
   MultiplyMaximumRawStatus: 13,
@@ -99,6 +101,9 @@ const ability_type_usage_enum = {
   // 中盘竞争时间计算倍率，2、4、6倍率分别+1，最高4
   MultiplyBlockedSideMaxContinueTimePhaseMiddleRun1: 20,
   MultiplyBlockedSideMaxContinueTimePhaseMiddleRun2: 21,
+  // 根据速度决定倍率
+  MultiplyBaseSpeed: 22,
+  Unknown: 25,
 };
 
 const target_type_enum = {
@@ -172,7 +177,7 @@ class UmaSkill {
   grade_value;
   /**
    * 前置条件
-   * @type {(function(PreConditionParams):boolean)[]}
+   * @type {(function(ConditionParams):boolean)[]}
    */
   preconditions;
   /**

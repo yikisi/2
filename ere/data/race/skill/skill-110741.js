@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110741,
-  'Illuminate you',
-  '中盤に中団にいるとき速度をわずかに\n落として、持久力をすごく回復する\nスタミナが十二分に高いとその後\n終盤に長時間わずかに前に出続ける',
+  '华灯为君绽',
+  '中盘位于队伍中间时稍微放慢速度并回复大量体力，当耐力有十二分充足时，之后在终盘会长时间持续向前突击',
   11074,
   5,
   17,

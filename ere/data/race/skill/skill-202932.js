@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202932,
-  '影踏み',
-  'レース後半に追い抜こうとすると\n速度がわずかに上がる＜作戦・追込＞',
+  '踏影',
+  '比赛后半段进行超越时，速度稍微提升＜作战・追赶＞',
   20293,
   1,
   2,
