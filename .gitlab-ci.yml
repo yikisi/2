@@ -11,11 +11,11 @@ build:
   tags:
     - shell
   variables:
-    GIT_SUBMODULE_STRATEGY: recursive
     NODE_OPTIONS: "--openssl-legacy-provider"
   script:
+    - git submodule update --init
     - cd engine
-    - git lfs fetch
+    - git lfs fetch --all
     - npm install
     - npm run win:pack
     - mv dist_electron/win-unpacked ./$GAME_ALL_DIR

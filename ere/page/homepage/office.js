@@ -360,12 +360,12 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 buttonType: event_marks.get(event_hooks.back_school)
                   ? 'danger'
                   : 'warning',
-                disabled:
-                  !sys_check_awake(0) ||
-                  sys_check_act_disabled(
-                    sys_get_move_cost(location_enum.clinic),
-                    player_base,
-                  ),
+                disabled: true,
+                // !sys_check_awake(0) ||
+                // sys_check_act_disabled(
+                //   sys_get_move_cost(location_enum.clinic),
+                //   player_base,
+                // ),
                 width: 6,
               },
               content: '前往保健室',
