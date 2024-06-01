@@ -3,7 +3,6 @@ const era = require('#/era-electron');
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
-const sys_get_grand_lives = require('#/system/flag/sys-get-grand-lives');
 const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
@@ -13,6 +12,7 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { adaptability_colors, el_danger_color } = require('#/data/color-const');
+const GrandLives = require('#/data/event/grand-lives');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_adaptability_rank } = require('#/data/info-generator');
 const { expedition_weeks } = require('#/data/move-const');
@@ -145,7 +145,7 @@ async function reg_race_page() {
       registered_race,
     ),
     base_disabled_check = check_register_disabled(chara_id, in_foreign),
-    grand_lives = sys_get_grand_lives();
+    grand_lives = new GrandLives();
 
   while (flag_race_reg) {
     await era.clear();
@@ -195,7 +195,10 @@ async function reg_race_page() {
               edu_weeks + round - cur_round,
             ),
             is_foreign = race_infos[e].track >= track_enum.longchamp,
-            is_grand_live = grand_lives[Number(round - year_begin >= 48)][e];
+            is_grand_live = grand_lives.check(
+              e,
+              Number(round - year_begin >= 48),
+            );
           if (
             e === race_enum.begin_race ||
             registered_race.race === e ||

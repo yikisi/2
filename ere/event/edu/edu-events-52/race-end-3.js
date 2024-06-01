@@ -1,9 +1,8 @@
 const era = require('#/era-electron');
 
-const { sys_push_crazy_fan } = require('#/system/sys-calc-flag');
-
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const CrazyFans = require('#/data/event/crazy-fans');
 const { race_enum } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,{race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number},UraraEduMarks):Promise<*>>} handlers */
@@ -409,7 +408,7 @@ module.exports = (handlers) => {
         '我说过了我不会怪您的，但是待到下次正式相谈时，还请做好心理准备。',
       );
     } else {
-      sys_push_crazy_fan(52);
+      new CrazyFans().push(52);
     }
   };
 };
