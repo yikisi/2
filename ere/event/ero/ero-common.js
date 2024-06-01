@@ -7,6 +7,7 @@ const {
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const common_pregnant_report_in_love = require('#/event/ero/snippets/common-pregnant-report-in-love');
+const get_participants_and_first_action = require('#/event/ero/snippets/get-participants-and-first-action');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -19,12 +20,7 @@ const {
   pregnant_stage_enum,
   unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
-const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
-const {
-  ero_action_names,
-  ero_hooks,
-  ero_tagged_hooks,
-} = require('#/data/event/ero-hooks');
+const { ero_action_names, ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
@@ -753,19 +749,11 @@ handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
  */
 module.exports = async (chara_id, hook, extra_flag) => {
   if (ero_action_names[hook.hook]) {
-    const { attacker, defender } =
-      (ero_tagged_hooks[hook.hook] || default_tags).condition !==
-      condition_type.active
-        ? extra_flag
-        : era.get('tflag:主导权')
-          ? { attacker: chara_id, defender: 0 }
-          : { attacker: 0, defender: chara_id };
-    hook.arg = true;
-    if (attacker === era.get('tflag:主导权')) {
-      hook.arg = era.get('tflag:前回行动') !== hook.hook;
-    } else if (attacker === era.get('tflag:前回对手')) {
-      hook.arg = era.get('tflag:对手行动') !== hook.hook;
-    }
+    const { attacker, defender } = get_participants_and_first_action(
+      chara_id,
+      hook,
+      extra_flag,
+    );
     const aim_handler =
       (sys_check_awake(defender) ? handlers : sleep_handlers)[hook.hook] ||
       handlers[hook.hook];
