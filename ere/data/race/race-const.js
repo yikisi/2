@@ -1,9 +1,5 @@
 const { bonus_params, id2bonus } = require('#/data/race/race-attr-bonus');
-const {
-  lane_params,
-  phase_params,
-  slope_params,
-} = require('#/data/race/race-params');
+const { lane_params, slope_params } = require('#/data/race/race-params');
 
 const race_enum = {
   // 出道战
@@ -510,7 +506,11 @@ race_infos.forEach((e) => {
   e.attr_bonus = bonus_params[id2bonus[param_id]];
   e.lanes = lane_params[param_id];
   e.slopes = slope_params[param_id];
-  e.phases = phase_params[e.span];
+  e.phases = [
+    Math.ceil((e.span * 4) / 24),
+    Math.ceil((e.span * 16) / 24),
+    Math.ceil((e.span * 20) / 24),
+  ];
 });
 
 race_infos[race_enum.begin_race] = require('#/data/race/race-begin-race');

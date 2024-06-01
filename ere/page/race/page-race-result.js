@@ -15,6 +15,7 @@ const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'];
  * @returns {string}
  */
 function get_delta_desc(delta) {
+  delta *= 2.5;
   if (delta < 0.2) {
     return '鼻差';
   } else if (delta < 0.4) {
@@ -23,7 +24,7 @@ function get_delta_desc(delta) {
     return '颈差';
   } else {
     let temp;
-    switch (Math.round((delta * 4) / 2.4)) {
+    switch (Math.round((delta * 4) / 2.5)) {
       case 1:
         return '颈差';
       case 2:
@@ -39,7 +40,7 @@ function get_delta_desc(delta) {
       case 7:
         return '7/4 马身';
       default:
-        temp = Math.round(delta / 2.4);
+        temp = Math.round(delta / 2.5);
         if (temp >= 10) {
           return '大差';
         }
@@ -65,7 +66,7 @@ function get_timer_record(minutes, seconds) {
 
 /**
  * @param {PseudoUma[]} contestants
- * @param {{acc:number[][],loc:number[][],skill:[][],speed:number[][],stamina:number[][]}} records
+ * @param {{acc:number[][],loc:number[][],skill:number[][][],speed:number[][],stamina:number[][]}} records
  * @param {RaceInfo} info
  */
 async function page_race_result(contestants, records, info) {
@@ -114,7 +115,8 @@ async function page_race_result(contestants, records, info) {
 
     const record_timer = [0, 0];
 
-    let skill_buffer = [],
+    let report_buffer = [],
+      skill_buffer = [],
       timer = 0;
     while (flag_result && timer < records.loc.length) {
       contestants.forEach((uma) => {
@@ -177,7 +179,7 @@ async function page_race_result(contestants, records, info) {
             records.loc[timer][uma.index_race] >= info.span
               ? {
                   config: { width: 24 - 6 - 2 * fron_cols },
-                  content: `${uma.rank.curr} 着${uma.rank.curr <= 4 && uma.rank.curr < contestants.length ? ` · ${get_delta_desc(uma.diff.behind)}` : ''}`,
+                  content: `${uma.rank.curr} 着${uma.rank.curr <= 4 && uma.rank.curr < contestants.length ? ` · ${get_delta_desc(uma.race.conditionParams.bashin_diff_behind)}` : ''}`,
                   type: 'text',
                 }
               : {
@@ -198,23 +200,37 @@ async function page_race_result(contestants, records, info) {
           ],
           key: records.loc[timer][uma.index_race],
         });
-        records.skill[timer][uma.index_race].forEach((s_id) => {
+        records.skill[timer][uma.index_race].forEach((s_id) =>
           skill_buffer.push({
             config: { align: 'right', isParagraph: true },
             content: [
-              { content: uma.name, color: uma.color, fontWeight: 'bold' },
-              ' ',
               ...skills_dict[s_id].get_colored_name(),
+              ' ',
+              { color: uma.color, content: uma.name, fontWeight: 'bold' },
+            ],
+            timer: 5 * 15,
+            type: 'text',
+          }),
+        );
+        if (!timer && uma.race.conditionParams.is_badstart) {
+          report_buffer.push({
+            config: { isParagraph: true },
+            content: [
+              { color: uma.color, content: uma.name, fontWeight: 'bold' },
+              ' ',
+              { color: buff_colors[3], content: '出迟！' },
             ],
             timer: 5 * 15,
             type: 'text',
           });
-        });
+        }
       });
-      skill_buffer = skill_buffer.filter((e) => e.timer--);
-      if (skill_buffer.length > 3) {
-        skill_buffer.splice(0, skill_buffer.length - 3);
-      }
+      report_buffer = report_buffer
+        .filter((e) => e.timer--)
+        .filter((_, i, l) => i >= l.length - 5);
+      skill_buffer = skill_buffer
+        .filter((e) => e.timer--)
+        .filter((_, i, l) => i >= l.length - 5);
 
       (timer ? era.replaceInColRows : era.printInColRows)(
         [
@@ -240,7 +256,8 @@ async function page_race_result(contestants, records, info) {
           },
         ],
         ...sort_list(buffer, (e) => e.key),
-        skill_buffer,
+        { columns: report_buffer, config: { width: 12 } },
+        { columns: skill_buffer, config: { width: 12 } },
         [
           {
             accelerator: 0,
@@ -314,7 +331,9 @@ async function page_race_result(contestants, records, info) {
                         '> [',
                         {
                           color: buff_colors[1],
-                          content: get_delta_desc(uma.diff.behind),
+                          content: get_delta_desc(
+                            uma.race.conditionParams.bashin_diff_behind,
+                          ),
                           fontWeight: 'bold',
                         },
                         ']',
@@ -354,7 +373,7 @@ async function page_race_result(contestants, records, info) {
   await show_result(interval);
   const labels = new Array(Math.ceil((records.loc.length + 1) / 15))
       .fill(0)
-      .map((_, i) => get_timer_record(Math.floor(i / 60), i * 15)),
+      .map((_, i) => get_timer_record(Math.floor(i / 60), (i * 15) % 900)),
     options = {
       fill: false,
       interaction: { intersect: false },
@@ -426,6 +445,29 @@ async function page_race_result(contestants, records, info) {
       labels,
     },
     options,
+  });
+  era.printButton('继续', 1);
+  await era.input();
+  era.print('技能图');
+  era.printLineChart({
+    data: {
+      datasets: contestants.map((e) => {
+        let skill_count = 0;
+        return {
+          borderColor: get_chara_color(e.index_chara),
+          data: records.skill
+            .map((r) => {
+              skill_count += r[e.index_race].length;
+              return skill_count;
+            })
+            .filter((_, i) => i % 15 === 0),
+          label: e.name,
+          stepped: false,
+        };
+      }),
+      labels,
+    },
+    options: { ...options, scales: { y: { suggestedMin: 0 } } },
   });
   era.printButton('继续', 1);
   await era.input();

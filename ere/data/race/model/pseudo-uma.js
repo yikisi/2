@@ -134,7 +134,6 @@ class PseudoUma {
     overtakeAim: undefined,
     competeFightAim: undefined,
     competeFightTimer: 0,
-    phase: 0,
     preConditionParams: new PreConditionParams(),
     slope: 0,
     stamina: 0,
@@ -147,17 +146,19 @@ class PseudoUma {
   };
   // 随机发动的技能的位置指标
   random = {
-    all_corner: 50000,
-    corner: 50000,
+    all_corner: [],
+    all_corner_index: 0,
+    corner: [],
+    corner_index: 0,
     distance_rate_after: 50000,
     down_slope: 50000,
     is_finalcorner: 50000,
     last_straight: 50000,
-    phase: 50000,
-    phase_corner: 50000,
-    phase_firsthalf: 50000,
-    phase_firstlasthalf: 50000,
-    phase_firstquarter: 50000,
+    phase: [],
+    phase_corner: [],
+    phase_firsthalf: [],
+    phase_firstquarter: [],
+    phase_laterhalf: [],
     straight: 50000,
     up_slope: 50000,
   };
@@ -165,11 +166,6 @@ class PseudoUma {
   rank = {
     curr: 0,
     last: 0,
-  };
-  // 与前后的距离
-  diff = {
-    ahead: 0,
-    behind: 0,
   };
   // 各种状态
   flag = {

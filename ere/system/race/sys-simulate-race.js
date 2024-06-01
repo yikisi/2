@@ -29,16 +29,50 @@ function add_time(timer) {
 }
 
 /**
+ * @param {PseudoUma} uma
+ * @param {string} key
+ * @param {number} param_val
+ */
+function check_random_loc(uma, key, param_val) {
+  const random_key = `${key}_random`;
+  uma.race.conditionParams[random_key] = 0;
+  if (uma.race.location >= uma.random[key]) {
+    if (uma.race.location <= uma.random[key] + 10) {
+      uma.race.conditionParams[random_key] = param_val;
+    } else {
+      uma.random[key] = 50000;
+    }
+  }
+}
+
+/**
+ * @param {PseudoUma} uma
+ * @param {string} key
+ * @param {number} phase
+ */
+function check_phase_random_loc(uma, key, phase) {
+  const random_key = `${key}_random`;
+  uma.race.conditionParams[random_key] = 0;
+  if (uma.race.location >= uma.random[key][phase]) {
+    if (uma.race.location <= uma.random[key][phase] + 10) {
+      uma.race.conditionParams[random_key] = phase;
+    } else {
+      uma.random[key][phase] = 50000;
+    }
+  }
+}
+
+/**
  * @param {PseudoUma[]} list_chara
  * @param {RaceInfo} race_info
  */
 function sys_sim_race(list_chara, race_info) {
+  const current = new Date().getTime();
   const count_uma = list_chara.length,
     mod_stamina_cost_mess =
       race_info.ground === RaceInfo.ground_enum.grass
         ? mod_stamina_cost_mess_grass[race_info.mess]
         : mod_stamina_cost_mess_dirt[race_info.mess],
-    phase_size = race_info.span / 4,
     has_final_corner = race_info.lanes.find((e) => e.is_curve && e.is_last);
   let flag_race = true;
 
@@ -203,7 +237,7 @@ function sys_sim_race(list_chara, race_info) {
         top_location - list_in_race.at(-1).race.location || 1,
       running_style_temptations = [0, 0, 0, 0];
 
-    //模拟技能触发
+    // 模拟技能触发
     list_in_race.forEach((uma, i, l) => {
       // 读取本时刻脚下赛道状态
       const cur_lane = race_info.lanes.find(
@@ -213,7 +247,13 @@ function sys_sim_race(list_chara, race_info) {
         race_info.slopes.find(
           (e) => uma.race.location >= e.start && uma.race.location < e.end,
         )?.slope || 0;
-      let phase = Math.floor(uma.race.location / phase_size);
+
+      while (
+        uma.race.conditionParams.phase < 3 &&
+        uma.race.location >= race_info.phases[uma.race.conditionParams.phase]
+      ) {
+        uma.race.conditionParams.phase++;
+      }
       if (uma.race.temptation > 0) {
         uma.race.temptation--;
         if (uma.race.temptation % (3 * 15) === 0 && Math.random() < 0.55) {
@@ -262,9 +302,9 @@ function sys_sim_race(list_chara, race_info) {
         }
       }
       if (uma.rank.curr < uma.rank.last) {
-        if (phase === 1) {
+        if (uma.race.conditionParams.phase === 1) {
           uma.race.preConditionParams.change_order_up_middle++;
-        } else if (phase >= 2) {
+        } else if (uma.race.conditionParams.phase >= 2) {
           uma.race.conditionParams.change_order_up_end_after++;
         }
         if (has_final_corner && cur_lane.is_last) {
@@ -336,7 +376,7 @@ function sys_sim_race(list_chara, race_info) {
         (uma.race.preConditionParams.order_rate =
         uma.race.conditionParams.order_rate =
           (uma.rank.curr * 100) / list_chara.length);
-      if (phase <= 1 && timer > 15 * 5) {
+      if (uma.race.conditionParams.phase <= 1 && timer > 5) {
         if (order_rate > 20) {
           uma.race.preConditionParams.order_rate_in20_continue =
             uma.race.conditionParams.order_rate_in20_continue = 0;
@@ -378,8 +418,7 @@ function sys_sim_race(list_chara, race_info) {
         uma.race.preConditionParams.overtake_target_time =
           uma.race.conditionParams.overtake_target_time = 0;
       }
-      uma.race.preConditionParams.phase = uma.race.conditionParams.phase =
-        phase;
+      uma.race.preConditionParams.phase = uma.race.conditionParams.phase;
       uma.race.preConditionParams.remain_distance =
         uma.race.conditionParams.remain_distance =
         uma.race.conditionParams.remain_distance_viewer_id =
@@ -398,8 +437,62 @@ function sys_sim_race(list_chara, race_info) {
         (e, j) => j > i && e.race.temptation > 0,
       ).length;
       uma.race.conditionParams.visiblehorse = list_in_race.length - 1;
+      // random系参数填充
+      uma.race.conditionParams.all_corner_random = 0;
+      if (
+        uma.race.location >= uma.random.all_corner[uma.random.all_corner_index]
+      ) {
+        if (
+          uma.race.location <=
+          uma.random.all_corner[uma.random.all_corner_index] + 10
+        ) {
+          uma.race.conditionParams.all_corner_random = 1;
+        } else {
+          uma.random.all_corner_index++;
+        }
+      }
+      uma.race.conditionParams.corner_random = 0;
+      if (
+        uma.race.location >= uma.random.corner[uma.random.corner_index]?.loc
+      ) {
+        if (
+          uma.race.location <=
+          uma.random.corner[uma.random.corner_index].loc + 10
+        ) {
+          uma.race.conditionParams.corner_random =
+            uma.random.corner[uma.random.corner_index].corner;
+        } else {
+          uma.random.corner_index++;
+        }
+      }
+      check_random_loc(uma, 'distance_rate_after', 50);
+      check_random_loc(uma, 'down_slope', 1);
+      check_random_loc(uma, 'is_finalcorner', 1);
+      check_random_loc(uma, 'last_straight', 1);
+      check_phase_random_loc(uma, 'phase', uma.race.conditionParams.phase);
+      check_phase_random_loc(
+        uma,
+        'phase_corner',
+        uma.race.conditionParams.phase,
+      );
+      check_phase_random_loc(
+        uma,
+        'phase_firsthalf',
+        uma.race.conditionParams.phase,
+      );
+      check_phase_random_loc(
+        uma,
+        'phase_firstquarter',
+        uma.race.conditionParams.phase,
+      );
+      check_phase_random_loc(
+        uma,
+        'phase_laterhalf',
+        uma.race.conditionParams.phase,
+      );
+      check_random_loc(uma, 'straight', 1);
+      check_random_loc(uma, 'up_slope', 1);
 
-      uma.race.phase = Math.min(phase, 2);
       if (uma.race.temptation > 0) {
         running_style_temptations[uma.style]++;
       }
@@ -421,23 +514,26 @@ function sys_sim_race(list_chara, race_info) {
 
       // 重置目标速度和加速度为赛段基础值
       uma.race.velocityIdeal =
-        uma.base.velocityIdeal * uma.factorPhase.vStyle[uma.race.phase];
+        uma.base.velocityIdeal *
+        uma.factorPhase.vStyle[Math.min(uma.race.conditionParams.phase, 2)];
       uma.race.acceleration =
-        uma.base.acceleration * uma.factorPhase.aStyle[uma.race.phase];
+        uma.base.acceleration *
+        uma.factorPhase.aStyle[Math.min(uma.race.conditionParams.phase, 2)];
 
       // 终盘时则再附加部分变动
-      if (uma.race.phase === 2) {
+      if (uma.race.conditionParams.phase >= 2) {
         uma.race.velocityIdeal += uma.factorFinal.vIdealAdd;
         uma.race.staminaCost *= uma.factorFinal.sCostMult;
       }
 
       // 每个赛段的随机浮动
-      uma.race.velocityIdeal *= uma.factorPhase.vRand[uma.race.phase];
+      uma.race.velocityIdeal +=
+        uma.factorPhase.vRand[Math.min(uma.race.conditionParams.phase, 2)];
 
       // 为自己计算最终冲刺方案
       if (
         uma.flag.allowPlan &&
-        uma.race.phase === 2 &&
+        uma.race.conditionParams.phase >= 2 &&
         uma.race.location < race_info.span - 60
       ) {
         uma.flag.allowPlan = false;
@@ -449,14 +545,14 @@ function sys_sim_race(list_chara, race_info) {
           Math.pow(planVelocity - uma.base.velocityIdeal + 12, 2) *
           mod_stamina_cost_mess *
           uma.factorFinal.sCostMult;
-        //体力足够以最大冲刺速度跑完则直接冲
+        // 体力足够以最大冲刺速度跑完则直接冲
         if (planStaminaCost * distLeft < uma.race.stamina * planVelocity) {
           uma.race.velocityPlanRush = planVelocity;
           uma.flag.finalRush = true;
           uma.race.conditionParams.lastspurt = 2;
         } else {
-          //否则以每次降0.1冲刺速度为一版计划计算总耗时
-          //先预测自己在终盘非冲刺下的情况
+          // 否则以每次降0.1冲刺速度为一版计划计算总耗时
+          // 先预测自己在终盘非冲刺下的情况
           let endSectVelocity =
             uma.base.velocityIdeal * uma.factorPhase.vStyle[2] +
             uma.factorFinal.vIdealAdd;
@@ -817,7 +913,7 @@ function sys_sim_race(list_chara, race_info) {
               skill.aims[i] = [];
               skill.values[i] = [];
             }
-            switch (uma.race.phase) {
+            switch (uma.race.conditionParams.phase) {
               case 0:
                 uma.race.conditionParams.activate_count_start++;
                 break;
@@ -825,6 +921,7 @@ function sys_sim_race(list_chara, race_info) {
                 uma.race.conditionParams.activate_count_middle++;
                 break;
               case 2:
+              case 3:
                 uma.race.conditionParams.activate_count_end_after++;
             }
           } else {
@@ -834,7 +931,7 @@ function sys_sim_race(list_chara, race_info) {
       });
     });
 
-    //结算
+    // 结算
     for (const uma of list_in_race) {
       //扣耐不会成负数 回耐也不会超过初始上限
       uma.race.stamina = Math.min(
@@ -848,7 +945,8 @@ function sys_sim_race(list_chara, race_info) {
           uma.base.velocityIdealBuff;
         //超速则不加速反而进行减速
         if (uma.race.velocityReal > uma.race.velocityIdeal) {
-          uma.race.acceleration = raceDecel[uma.race.phase];
+          uma.race.acceleration =
+            raceDecel[Math.min(uma.race.conditionParams.phase, 2)];
         }
       } else {
         // 空耐则目标速度掉为最低速度
@@ -863,6 +961,10 @@ function sys_sim_race(list_chara, race_info) {
     e.rank.last = e.rank.curr;
     e.rank.curr = i + 1;
   });
+  const duration = new Date().getTime() - current;
+  logger.debug(
+    `比赛模拟：${duration} ms / ${Math.ceil(timer * 15)} 帧，平均 ${(duration / (timer * 15)).toFixed(4)} ms/帧`,
+  );
   return {
     acc: record_acc_list,
     loc: record_location_list,

@@ -34,6 +34,7 @@ function random_style(adapts) {
  * @returns {PseudoUma[]}
  */
 function sys_parse_for_race(team_chara, race, info) {
+  const current = new Date().getTime();
   const legends = info['legends'] || [],
     phantom_age = Math.floor(
       Math.max(
@@ -393,6 +394,9 @@ function sys_parse_for_race(team_chara, race, info) {
     );
     delete uma.tempPop;
   });
+  era.logger.debug(
+    `解析选手数据并生成人气数据：${new Date().getTime() - current} ms`,
+  );
   return ret;
 }
 

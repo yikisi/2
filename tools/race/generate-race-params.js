@@ -73,34 +73,7 @@ data.forEach((e) => {
     .join(',\n')}],\n`;
 });
 
-const obj_phases = {};
-obj_phases[1000] = { p1: 167, p2: 667 };
-obj_phases[1150] = { p1: 192, p2: 767 };
-obj_phases[1200] = { p1: 200, p2: 800 };
-obj_phases[1300] = { p1: 217, p2: 867 };
-obj_phases[1400] = { p1: 233, p2: 933 };
-obj_phases[1500] = { p1: 250, p2: 1000 };
-obj_phases[1600] = { p1: 267, p2: 1067 };
-obj_phases[1700] = { p1: 283, p2: 1133 };
-obj_phases[1800] = { p1: 300, p2: 1200 };
-obj_phases[1900] = { p1: 317, p2: 1267 };
-obj_phases[2000] = { p1: 333, p2: 1333 };
-obj_phases[2100] = { p1: 350, p2: 1400 };
-obj_phases[2200] = { p1: 367, p2: 1467 };
-obj_phases[2300] = { p1: 383, p2: 1533 };
-obj_phases[2400] = { p1: 400, p2: 1600 };
-obj_phases[2500] = { p1: 417, p2: 1667 };
-obj_phases[2600] = { p1: 433, p2: 1733 };
-obj_phases[3000] = { p1: 500, p2: 2000 };
-obj_phases[3200] = { p1: 533, p2: 2133 };
-obj_phases[3400] = { p1: 567, p2: 2267 };
-obj_phases[3600] = { p1: 600, p2: 2400 };
-
-output += `lane_params: {${lane_output}},\nslope_params: {${slope_output}},\nphase_params: {${Object.entries(
-  obj_phases,
-)
-  .map((e) => `${e[0]}: [0, ${e[1].p1}, ${e[1].p2}]`)
-  .join(',\n')}}};`;
+output += `lane_params: {${lane_output}},\nslope_params: {${slope_output}}};`;
 
 writeFileSync(resolve('../../ere/data/race/race-params.js'), output);
 
