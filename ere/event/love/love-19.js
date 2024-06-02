@@ -862,8 +862,11 @@ handlers[99] = async (digital, me, callname) => {
   await digital.print_and_wait('翻开信纸，里面写着——');
   era.println();
   await era.printAndWait('爸爸妈妈：');
+  era.setAlign('center');
   await era.printAndWait('谢谢你们。');
+  era.setAlign('right');
   await era.printAndWait(['——你们的', child]);
+  era.setAlign('left');
   era.println();
   await digital.say_and_wait('唔哈，什么嘛，果然啊，当然是写着这些的啊！');
   await me.say_and_wait('这不当然嘛！');
