@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 const era = require('#/era-electron');
 
 const have_baby = require('#/system/ero/sub/sys-have-baby');
@@ -6,7 +8,6 @@ const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
-const sys_get_grand_lives = require('#/system/flag/sys-get-grand-lives');
 const check_new_activities = require('#/system/next-week/check-new-activities');
 const randomly_interact = require('#/system/next-week/randomly-interact');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
@@ -48,6 +49,7 @@ const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const event_hooks = require('#/data/event/event-hooks');
+const GrandLives = require('#/data/event/grand-lives');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
@@ -220,7 +222,7 @@ async function sys_next_week() {
   if (cur_month === 13) {
     cur_month = 1;
     cur_year++;
-    sys_get_grand_lives().shift();
+    new GrandLives().shift();
   }
   era.set('flag:当前年', cur_year);
   era.set('flag:当前月', cur_month);
@@ -898,6 +900,14 @@ async function sys_next_week() {
   }
 
   era.set('flag:床伴', 0);
+  const hash = crypto.createHash('md5');
+  hash.update(era.get('callname:0:-1') + era.get('flag:当前回合数'));
+  era.set(
+    'flag:打折商品',
+    Number(
+      `0x${hash.digest('hex').substring(0, Math.max(era.get('itemkeys').length.toString(16).length, 1))}`,
+    ),
+  );
 }
 
 module.exports = sys_next_week;

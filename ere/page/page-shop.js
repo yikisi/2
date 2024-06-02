@@ -1,5 +1,3 @@
-const crypto = require('crypto');
-
 const era = require('#/era-electron');
 
 const { sys_change_money } = require('#/system/sys-calc-flag');
@@ -12,12 +10,8 @@ const { location_name } = require('#/data/locations');
 
 /** @param {({id:number,[limit]:boolean}|number)[]} item_list */
 module.exports = async (item_list) => {
-  const hash = crypto.createHash('md5');
-  hash.update(era.get('callname:0:-1') + era.get('flag:当前回合数'));
   const item_keys = era.get('itemkeys'),
-    off_index = Number(
-      `0x${hash.digest('hex').substring(0, Math.max(Number(item_keys.length).toString(16).length, 1))}`,
-    ),
+    off_index = era.get('flag:打折商品'),
     off = item_keys[off_index % item_keys.length],
     price_cache = era.get(`itemprice:${off}`),
     in_list = item_list.filter((e) => e === off || e.id === off).length > 0;

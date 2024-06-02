@@ -4,10 +4,10 @@ const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_change_tired = require('#/system/chara/sys-change-tired');
 const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
 const get_status = require('#/system/chara/sys-get-status');
-const sys_get_grand_lives = require('#/system/flag/sys-get-grand-lives');
 const sys_check_titles_after_race = require('#/system/race/sys-check-titles-after-race');
 const sys_parse_for_race = require('#/system/race/sys-parse-race-uma');
 const sys_prepare_race = require('#/system/race/sys-prepare-race');
+// const sys_sim_race = require('#/system/race/sys-simulate-race');
 const sys_sim_race = require('#/system/race/sys-simulate-race');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
@@ -54,6 +54,7 @@ const AfterRaceParams = require('#/data/event/after-race-params');
 const event_hooks = require('#/data/event/event-hooks');
 const RaceEndParams = require('#/data/event/extra-flag/race-end-params');
 const RaceStartParams = require('#/data/event/extra-flag/race-start-params');
+const GrandLives = require('#/data/event/grand-lives');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_adaptability_rank,
@@ -203,7 +204,7 @@ async function race_page(race) {
   era.set('flag:当前赛事', race);
   const aim_race_dict = {};
   const team_list = (await select_contestants(race)).map(sys_get_chara_pseudo),
-    is_grand_live = sys_get_grand_lives()[0][race];
+    is_grand_live = new GrandLives().check(race);
   let wait_flag = false;
   const info = fill_race_weather_and_mess(race, team_list[0]);
   const contestants = sys_parse_for_race(team_list, race, info);

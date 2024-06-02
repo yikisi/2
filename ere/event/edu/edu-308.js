@@ -6,13 +6,12 @@ const {
   waitAnyKey,
 } = require('#/era-electron');
 
-const sys_get_grand_lives = require('#/system/flag/sys-get-grand-lives');
-
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry, sort_list } = require('#/utils/list-utils');
 
+const GrandLives = require('#/data/event/grand-lives');
 const { class_enum, track_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -121,11 +120,12 @@ module.exports = async (hook, extra_flag, event_object) => {
     g2_dict = {},
     g1_dict = {},
     race_list = [],
-    grand_lives = sys_get_grand_lives();
+    grand_lives = new GrandLives();
   Object.values(race_enum)
     .slice(1)
     .filter(
-      (e) => race_infos[e].track < track_enum.longchamp && !grand_lives[0][e],
+      (e) =>
+        race_infos[e].track < track_enum.longchamp && !grand_lives.check(e),
     )
     .forEach((e) => {
       const info = race_infos[e];
@@ -190,7 +190,7 @@ module.exports = async (hook, extra_flag, event_object) => {
     }),
   );
   const final_dict = {};
-  race_list.forEach((e) => (final_dict[e] = true));
-  grand_lives.push(final_dict);
+  race_list.forEach((e) => (final_dict[e] = 1));
+  grand_lives.add(race_list);
   await waitAnyKey();
 };

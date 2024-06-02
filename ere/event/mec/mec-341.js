@@ -4,6 +4,8 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { buff_colors } = require('#/data/color-const');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 
@@ -35,6 +37,10 @@ module.exports = class extends CustomizedMec {
         title: `[爱]：队伍成员智力与技能点数训练效果+${title_check ? 100 : 50}%`,
       },
     ];
+  }
+
+  set_callname() {
+    set('callname:341:0', '训练员' + get_chara_talk(0).get_adult_sex_title());
   }
 
   // eslint-disable-next-line no-unused-vars
