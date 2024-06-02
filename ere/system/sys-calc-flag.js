@@ -55,13 +55,4 @@ module.exports = {
     era.add('flag:当前马币', val);
     return val;
   },
-  sys_push_crazy_fan(chara_id) {
-    if (era.get('flag:游戏结束') > 0) {
-      if (chara_id) {
-        era.get('flag:极端粉丝').push(chara_id);
-      } else {
-        console.log(new Error(`error! invalid crazy fan ${chara_id}`).stack);
-      }
-    }
-  },
 };
