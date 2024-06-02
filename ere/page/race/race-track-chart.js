@@ -1,17 +1,28 @@
 const era = require('#/era-electron');
 
 const RaceInfo = require('#/data/race/model/race-info');
+const { attr_names } = require('#/data/train-const');
 
 /** @param {RaceInfo} info */
 function print_race_track_chart(info) {
   era.print(
-    `${RaceInfo.track_names[info.track]}竞马场 ${
-      info.ground ? '泥' : '草'
-    }地 ${info.span.toLocaleString()}米跑道 ${
-      info.rotation ? (info.rotation > 0 ? '顺时针' : '逆时针') : '直线'
-    }`,
+    [
+      RaceInfo.track_names[info.track],
+      '竞马场 ',
+      info.ground ? '泥' : '草',
+      '地 ',
+      info.span.toLocaleString(),
+      '米跑道 ',
+      info.rotation ? (info.rotation > 0 ? '顺时针' : '逆时针') : '直线',
+    ],
     { align: 'center' },
   );
+  if (info.attr_bonus.length > 0) {
+    era.print(
+      ['加成属性：', info.attr_bonus.map((e) => attr_names[e]).join('、')],
+      { align: 'center' },
+    );
+  }
   const data = new Array(info.span + 1).fill(0);
   info.slopes.forEach((e) => {
     for (let i = e.start; i < e.end; ++i) {
