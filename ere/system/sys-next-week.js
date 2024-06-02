@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 const era = require('#/era-electron');
 
 const have_baby = require('#/system/ero/sub/sys-have-baby');
@@ -898,6 +900,14 @@ async function sys_next_week() {
   }
 
   era.set('flag:床伴', 0);
+  const hash = crypto.createHash('md5');
+  hash.update(era.get('callname:0:-1') + era.get('flag:当前回合数'));
+  era.set(
+    'flag:打折商品',
+    Number(
+      `0x${hash.digest('hex').substring(0, Math.max(era.get('itemkeys').length.toString(16).length, 1))}`,
+    ),
+  );
 }
 
 module.exports = sys_next_week;
