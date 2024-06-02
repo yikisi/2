@@ -330,7 +330,10 @@ async function sys_have_baby(mother_id) {
     ]);
   }
   if (!era.get(`cstr:${child_id}:毛色`)) {
-    era.set(`cstr:${child_id}:毛色`, era.get(`cstr:${mother_id}:毛色`));
+    era.set(
+      `cstr:${child_id}:毛色`,
+      era.get(`cstr:${mother_id}:毛色`) || era.get(`cstr:${father_id}:毛色`),
+    );
   }
   const child_life_marks = new LifeEventMarks(child_id);
   child_life_marks.unexpected_child = mother_life_marks.unexpected_pregnant;
