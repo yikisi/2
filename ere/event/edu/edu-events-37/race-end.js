@@ -108,7 +108,7 @@ module.exports = async (hook, extra_flag) => {
     era.drawLine();
     await flash.say_and_wait('日本达比……荣进闪耀……评价……');
     await era.printAndWait(
-      `回到特雷森学院的高铁上，${your_name} 无意之中看见荣进闪耀拿出手机，在搜索栏中输入以上的三段词汇。`,
+      `回到特雷森学园的高铁上，${your_name} 无意之中看见荣进闪耀拿出手机，在搜索栏中输入以上的三段词汇。`,
     );
     era.printButton('「在搜索人们对你的看法吗？」', 1);
     await era.input();
@@ -182,7 +182,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `荣进闪耀的脸上露出灿烂的笑容，看得出来，此刻的${flash.sex}完全沉浸于胜利所带来的喜悦中。`,
     );
-    await era.printAndWait('“嘟嘟。”');
+    await era.printAndWait('「嘟嘟。」');
     await era.printAndWait(
       `然后非常巧妙的，手机提示音也在这个时候传入${flash.sex}的耳中。`,
     );

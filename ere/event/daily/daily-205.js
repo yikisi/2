@@ -155,7 +155,7 @@ handlers[event_hooks.school_atrium] = async () => {
     await vp.say_and_wait(
       get_random_entry([
         '熟练得可怕……这才是你的老本行吗难道！',
-        '和现在比，以前的生活只能说是“等死”呢。',
+        '和现在比，以前的生活只能说是『等死』呢。',
       ]),
     );
   } else {
@@ -193,30 +193,34 @@ handlers[event_hooks.out_river] = async (hook) => {
 };
 
 handlers[event_hooks.out_shopping] = async (hook) => {
-  const temp = await select_action_in_shopping_street();
+  let temp = await select_action_in_shopping_street();
   hook.arg = temp <= 1;
   switch (temp) {
     case 0:
-      await get_chara_talk(205).say_and_wait(
-        get_random_entry([
-          '知道吗？法国的游戏厅除了小情侣，还经常能看到很多小小青梅竹马的。',
-          [
-            `${sys_get_callname(205, 0)}！是`,
-            sys_get_colored_callname(
-              205,
-              get_random_entry(
-                sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-                  (e) => e !== 205 && era.get(`cflag:${e}:种族`),
-                ),
-              ),
-            ),
-            ' 的公仔诶！我可以夹一个吗？',
-          ],
-          `嗯，输了输了……${
-            get_chara_talk(0).actual_name
-          }，我们去那边的【挥拳测力机】再战吧。`,
-        ]),
+      temp = get_random_entry(
+        sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+          (e) => e !== 205 && era.get(`cflag:${e}:种族`),
+        ),
       );
+      temp = temp
+        ? [
+            [
+              sys_get_callname(205, 0),
+              '！是 ',
+              sys_get_colored_callname(205, temp),
+              ' 的公仔诶！我可以夹一个吗？',
+            ],
+          ]
+        : [];
+      temp.push(
+        '知道吗？法国的游戏厅除了小情侣，还经常能看到很多小小青梅竹马的。',
+        [
+          '嗯，输了输了……',
+          get_chara_talk(0).get_colored_actual_name(),
+          '，我们去那边的【挥拳测力机】再战吧。',
+        ],
+      );
+      await get_chara_talk(205).say_and_wait(get_random_entry(temp));
       break;
     case 1:
       await get_chara_talk(205).say_and_wait(
@@ -330,7 +334,7 @@ handlers[event_hooks.basement_end] = async () => {
     `对于 ${vp.name} 的提问，${me.name} 下意识地摇了摇头。`,
   );
   await era.printAndWait(
-    `${vp.sex}马上微笑着说“那就好！”拉起 ${me.name} 的手，跑了起来。`,
+    `${vp.sex}马上微笑着说『那就好！』拉起 ${me.name} 的手，跑了起来。`,
   );
   await era.printAndWait(
     `${me.name} 的脑海里一直萦绕着 ${vp.name} 想藏起来的照片。虽然只是一瞬间，但没错。`,

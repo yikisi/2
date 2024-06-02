@@ -178,7 +178,7 @@ module.exports = async (vp, me) => {
       )} 的手指毫不留情地在阴道内挖掘，绷直的脚指向天空。`,
     );
     await vp.print_and_wait(
-      '一直忍耐的“尿意”到达极限，让濒临决口的快感变强数百倍不止。',
+      '一直忍耐的『尿意』到达极限，让濒临决口的快感变强数百倍不止。',
     );
     await vp.say_and_wait('喔啊啊啊出来了……出来了！不要，不要这样……');
     await me.say_and_wait('那不是尿尿，可以出来的。');
@@ -302,7 +302,9 @@ module.exports = async (vp, me) => {
     await me.say_and_wait('这是你第一次被这样操吧，我尽量快点结束。');
     await vp.say_and_wait('停下吧，脑子会变奇怪的！这种事，我不知道啊…');
     await vp.print_and_wait('就像要把G点顶出来一样，对着最深处活塞。');
-    await vp.print_and_wait('即使半狂乱地哭喊，不留情面的“啪啪”声也不会停下。');
+    await vp.print_and_wait(
+      '即使半狂乱地哭喊，不留情面的『啪啪』声也不会停下。',
+    );
     await vp.print_and_wait(
       '意识不知道飞去了哪里，也不知道高潮了多少次，被强硬地拉回来灌注快乐。',
     );
@@ -393,7 +395,7 @@ module.exports = async (vp, me) => {
     await vp.print_and_wait('从笔筒里抽出一支较粗的圆珠笔，是师傅送我的礼物。');
     await vp.print_and_wait('浅……够不到啊！完全不够。');
     await vp.print_and_wait('沉迷于手淫，吐槽各种各样的事，连椅子都湿透了。');
-    await vp.print_and_wait('但是去不了，我知道，因为我品尝过“真家伙”了。');
+    await vp.print_and_wait('但是去不了，我知道，因为我品尝过『真家伙』了。');
     await vp.print_and_wait('连呼吸都能堵住，剜着喉咙那根巨物从脑海中闪过。');
     era.drawLine();
     await era.printAndWait([

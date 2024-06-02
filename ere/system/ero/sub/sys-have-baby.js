@@ -296,6 +296,16 @@ async function sys_have_baby(mother_id) {
     get_chara_talk(father_id).get_colored_name(),
     ' 外貌的健康的孩子！',
   ]);
+  era.set(
+    `maxbase:${mother_id}:体力`,
+    Math.max(era.get(`maxbase:${mother_id}:体力`) - 400, 200),
+  );
+  era.add(`base:${mother_id}:体力`, 0);
+  era.set(
+    `maxbase:${mother_id}:精力`,
+    Math.max(era.get(`maxbase:${mother_id}:精力`) - 400, 200),
+  );
+  era.add(`base:${mother_id}:精力`, 0);
   await call_ero_script(
     // 如果是玩家生孩子，调用角色的口上
     mother_id || father_id,
@@ -319,7 +329,7 @@ async function sys_have_baby(mother_id) {
       child.get_colored_name(),
     ]);
   }
-  if (era.get(`cstr:${child_id}:毛色`)) {
+  if (!era.get(`cstr:${child_id}:毛色`)) {
     era.set(`cstr:${child_id}:毛色`, era.get(`cstr:${mother_id}:毛色`));
   }
   const child_life_marks = new LifeEventMarks(child_id);
@@ -337,6 +347,14 @@ async function sys_have_baby(mother_id) {
     sys_like_chara(mother_id || father_id, 0, 100);
     await add_juel_out_of_train(mother_id || father_id, '顺从', 300);
   }
+  new Array(3)
+    .fill(0)
+    .map((_, i) => 340 + i)
+    .filter((e) => e !== father_id && e !== mother_id)
+    .reduce(
+      (p, c) => sys_like_chara(c, 0, 50 * (1 + !mother_id)) || p,
+      false,
+    ) && (await era.waitAnyKey());
   await sys_punish_unfaithful(
     mother_id || father_id,
     era.get(`love:${mother_id || father_id}`),

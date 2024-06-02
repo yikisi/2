@@ -185,7 +185,7 @@ module.exports = (handlers) => {
       `光钻的粉丝A「是的！为了想亲眼看到光钻的模样，我之前还和${daiya.sex}一起第一次到现场观看比赛喔！」`,
     );
     await era.printAndWait(
-      '光钻的粉丝B「我们到现场去看了“菊花赏”，连我也喜欢上光钻了！！胜者舞台的表现也好可爱！」',
+      '光钻的粉丝B「我们到现场去看了『菊花赏』，连我也喜欢上光钻了！！胜者舞台的表现也好可爱！」',
     );
     await daiya.say_and_wait(
       '哎呀，那是你第一次去赛场吗！？谢谢你为了我到现场支持！',
@@ -200,14 +200,14 @@ module.exports = (handlers) => {
       '光钻的粉丝B「请问一下，光钻今天也有参加什么活动吗？」',
     );
     await daiya.say_and_wait(
-      '我会参加“无情大翻牌游戏”！到时候会把很大张的卡牌排列在操场上，然后来玩翻牌游戏喔♪',
+      '我会参加『无情大翻牌游戏』！到时候会把很大张的卡牌排列在操场上，然后来玩翻牌游戏喔♪',
     );
-    await era.printAndWait('光钻的粉丝B「……“无情”的意思是……？」');
+    await era.printAndWait('光钻的粉丝B「……『无情』的意思是……？」');
     await daiya.say_and_wait(
       '因为是边跑步边拼翻牌的速度的比赛。不会依照顺序轮流翻牌，而是先抢先赢的玩法。',
     );
     await daiya.say_and_wait(
-      '如果翻到“挑战书牌”的话，就要跟其他选手决胜负，赢家可以拿走输家的牌喔♪',
+      '如果翻到『挑战书牌』的话，就要跟其他选手决胜负，赢家可以拿走输家的牌喔♪',
     );
     await era.printAndWait('光钻的粉丝B「那、那还真是激烈啊……」');
     await era.printAndWait(
@@ -225,12 +225,12 @@ module.exports = (handlers) => {
     );
     await daiya.say_and_wait('我也是不小心就太兴奋了……真不好意思……');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「大会报告。请“无情大翻牌游戏”的参赛选手前往准备区集合。」`,
+      `担任播报的赛${daiya.get_uma_sex_title()}「大会报告。请『无情大翻牌游戏』的参赛选手前往准备区集合。」`,
     );
     await daiya.say_and_wait('啊，要集合了。那我先过去了！');
     era.drawLine();
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「──接下来是考验智谋和体力的“无情大翻牌游戏”！欢迎六位参赛选手入场！」`,
+      `担任播报的赛${daiya.get_uma_sex_title()}「──接下来是考验智谋和体力的『无情大翻牌游戏』！欢迎六位参赛选手入场！」`,
     );
     await condor_pasa.say_and_wait(
       '直觉、计谋、热血！赢家的宝座是神鹰我的啦────！！',
@@ -243,7 +243,7 @@ module.exports = (handlers) => {
     await coffee.say_and_wait('……嗯，对……要翻到一样图案的……');
     await daiya.say_and_wait('？曼城茶座，你在跟谁说话……？');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「六位选手都各自站上了起跑的位置！那么，“无情大翻牌游戏”就要开始了！！」`,
+      `担任播报的赛${daiya.get_uma_sex_title()}「六位选手都各自站上了起跑的位置！那么，『无情大翻牌游戏』就要开始了！！」`,
     );
     await era.printAndWait('砰！！');
     await era.printAndWait(
@@ -309,7 +309,7 @@ module.exports = (handlers) => {
       }因此得到了黄金船所有的分数！」`,
     );
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「比赛时间结束！！“无情大翻牌游戏”的赢家是──曼城茶座！」`,
+      `担任播报的赛${daiya.get_uma_sex_title()}「比赛时间结束！！『无情大翻牌游戏』的赢家是──曼城茶座！」`,
     );
     await era.printAndWait('光钻的粉丝B「光钻真是可惜啊！」');
     await era.printAndWait(
@@ -343,7 +343,7 @@ module.exports = (handlers) => {
       `担任播报的赛${daiya.get_uma_sex_title()}「哎呀──里见光钻完全识破了黄金船的策略！！彻底击败了最后一名刺客──黄金船！」`,
     );
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「比赛时间结束！！“无情大翻牌游戏”的赢家是──里见光钻！」`,
+      `担任播报的赛${daiya.get_uma_sex_title()}「比赛时间结束！！『无情大翻牌游戏』的赢家是──里见光钻！」`,
     );
     await era.printAndWait('光钻的粉丝B「光钻，恭喜你获胜！」');
     await era.printAndWait('光钻的粉丝A「没想到光钻还有这么大胆的一面……！」');
@@ -380,9 +380,9 @@ module.exports = (handlers) => {
       race_infos[race_enum.takz_kin].get_colored_name(),
       ' 跟我说过的。',
     ]);
-    await kita.say_and_wait('你说大家都对我充满“期待”……');
+    await kita.say_and_wait('你说大家都对我充满『期待』……');
     await daiya.say_and_wait('嗯。');
-    await kita.say_and_wait('我自己想了一下，大家对我的“期待”究竟是什么。');
+    await kita.say_and_wait('我自己想了一下，大家对我的『期待』究竟是什么。');
     await kita.say_and_wait('然后……我做出了决定！！');
     await kita.say_and_wait(
       '如果我努力的样子能够激励到大家的话，那我就要让大家看到我努力不懈的样子！',
@@ -439,7 +439,7 @@ module.exports = (handlers) => {
       '既然麦昆她们给了我这么难得的机会，我希望可以在万全的状态下迎战，我想要赢过她们……！',
     );
     await daiya.say_and_wait(
-      `还有就是，我身为一个“知名赛${daiya.get_uma_sex_title()}”，迟早也是要考量进军国外比赛的。`,
+      `还有就是，我身为一个『知名赛${daiya.get_uma_sex_title()}』，迟早也是要考量进军国外比赛的。`,
     );
     await era.printAndWait(
       `这让 ${me.name} 想起新年的派对上，有人曾提起国外远征的事情。`,
@@ -513,7 +513,7 @@ module.exports = (handlers) => {
     );
     await era.input();
     await era.printAndWait(
-      `这对她来说也是很痛苦的决定吧。为了不辜负她的这片心意，${me.name} 一定要让${daiya.sex}以万全的状态迎战“天皇赏（秋）”！`,
+      `这对她来说也是很痛苦的决定吧。为了不辜负她的这片心意，${me.name} 一定要让${daiya.sex}以万全的状态迎战「天皇赏（秋）」！`,
     );
     await daiya.say_and_wait('呼、呼…………怎么会这样……？');
     await daiya.say_and_wait('之前步频明明可以更快的……所以……');

@@ -246,7 +246,7 @@ handlers[event_hooks.office_rest] = async () => {
   const callname = sys_get_callname(25, 0);
   await get_chara_talk(25).say_and_wait(
     Math.random() < 0.5
-      ? `${callname} 知道咖啡树的花语吗？那就是‘一起休息吧’，据说是从休息的时候会喝咖啡这种地方来的……`
+      ? `${callname} 知道咖啡树的花语吗？那就是『一起休息吧』，据说是从休息的时候会喝咖啡这种地方来的……`
       : `${callname}，你有感受过别人的心跳声吗？心脏弹奏出的声音，据说有诱人入眠的功效……那么，${callname}，现在请让我把耳朵贴在胸前吧……`,
   );
 };
@@ -793,7 +793,7 @@ handlers[event_hooks.basement_end] = async () => {
   const coffee = get_chara_talk(25);
   await era.printAndWait([
     coffee.get_colored_name(),
-    ' 的训练员已经失踪好几天了。警方搜遍了学院的每一个角落，却依然没有发现任何线索。',
+    ' 的训练员已经失踪好几天了。警方搜遍了学园的每一个角落，却依然没有发现任何线索。',
   ]);
   await era.printAndWait([
     '作为其担当',

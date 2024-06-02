@@ -71,14 +71,12 @@ handlers[ero_hooks.ero_start] = async () => {
         println();
         await tachyon.say_and_wait(['辛苦了，', callname, '……']);
         await tachyon.say_and_wait('放心吧，之后会好好给你奖励的');
-        println();
-        await printAndWait('奖励……？');
+        await printAndWait('\n奖励……？');
         await printAndWait([
           '虽然不知道具体是什么，但奖励这个词还是激励了疲累的 ',
           me.get_colored_name(),
         ]);
-        println();
-        await printAndWait('在收拾完实验器材后');
+        await printAndWait('\n在收拾完实验器材后');
         println();
         await tachyon.say_and_wait('那么……作为奖励，就让我来帮你处理一下吧');
         await tachyon.say_and_wait('几天下来，积累的东西❤');

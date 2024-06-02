@@ -51,15 +51,20 @@ vehicle_influences[vehicle_enum.sports_car] = { stamina: 0.1, time: 0.1 };
 vehicle_influences[vehicle_enum.portal] = { stamina: 0, time: 0 };
 
 const location_move_cost = {};
-location_move_cost[location_enum.playground] = 100;
-location_move_cost[location_enum.atrium] = 100;
-location_move_cost[location_enum.rooftop] = 100;
-location_move_cost[location_enum.chairman] = 100;
+location_move_cost[location_enum.playground] = 50;
+location_move_cost[location_enum.trainer] = 40;
+location_move_cost[location_enum.clinic] = 40;
+location_move_cost[location_enum.god] = 60;
+location_move_cost[location_enum.atrium] = 60;
+location_move_cost[location_enum.rooftop] = 60;
+location_move_cost[location_enum.chairman] = 80;
+location_move_cost[location_enum.visitor] = 90;
 location_move_cost[location_enum.gate] = 100;
-location_move_cost[location_enum.river] = 100;
-location_move_cost[location_enum.shopping] = 150;
-location_move_cost[location_enum.church] = 200;
-location_move_cost[location_enum.station] = 300;
+location_move_cost[location_enum.river] = 50;
+location_move_cost[location_enum.shopping] = 100;
+location_move_cost[location_enum.church] = 150;
+location_move_cost[location_enum.station] = 200;
+location_move_cost[location_enum.mejiro] = 500;
 
 module.exports = {
   expedition_weeks: 3,

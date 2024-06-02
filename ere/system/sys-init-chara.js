@@ -27,12 +27,26 @@ const { attr_names } = require('#/data/train-const');
  * @param {number} chara_id
  */
 function reset_chara(chara_id) {
-  Object.values(attr_names).forEach((v) => {
-    era.set(`base:${chara_id}:${v}`, era.get(`cflag:${chara_id}:初始${v}`));
-    era.set(`abl:${chara_id}:${v}训练等级`, 1);
-    era.set(`exp:${chara_id}:${v}训练经验`, 0);
-  });
-  era.set(`exp:${chara_id}:技能点数`, 0);
+  if (era.get(`cflag:${chara_id}:种族`)) {
+    Object.values(attr_names).forEach((v) =>
+      era.set(`base:${chara_id}:${v}`, era.get(`cflag:${chara_id}:初始${v}`)),
+    );
+    Object.values(attr_names).forEach((v) => {
+      era.set(`abl:${chara_id}:${v}训练等级`, 1);
+      era.set(`exp:${chara_id}:${v}训练经验`, 0);
+    });
+    era.set(`exp:${chara_id}:技能点数`, 0);
+    era.set(`cflag:${chara_id}:育成用变量`, {});
+    new RaceHistory(chara_id).reset();
+  } else {
+    Object.values(attr_names).forEach((v) => {
+      era.set(
+        `base:${chara_id}:${v}`,
+        era.set(`cflag:${chara_id}:${v}`, get_random_value(25, 75)),
+      );
+      era.set(`cflag:${chara_id}:${v}加成`, 0);
+    });
+  }
 
   sys_fix_chara_base(chara_id);
   const stamina = era.get(`base:${chara_id}:体力`),
@@ -53,9 +67,6 @@ function reset_chara(chara_id) {
       console.log(e.stack);
     }
   }
-
-  era.set(`cflag:${chara_id}:育成用变量`, {});
-  new RaceHistory(chara_id).reset();
 }
 
 module.exports = {
@@ -71,8 +82,8 @@ module.exports = {
       } else {
         era.set(`cflag:${chara_id}:模版角色`, -1);
       }
-      const sex = era.get('flag:角色性别');
-      era.set(`cflag:${chara_id}:性别`, sex);
+      const sex = get_custom_mec(chara_id).set_my_sex();
+      era.set(`cflag:${chara_id}:性别`, era.get('flag:角色性别'));
       era.set(`cflag:${chara_id}:育成回合计时`, 4800);
       let temp;
       switch (sex) {
@@ -174,12 +185,12 @@ module.exports = {
       }
       get_custom_mec(chara_id).set_callname();
       get_custom_mec(chara_id).set_my_name();
+      get_custom_mec(chara_id).init_love();
       if (era.get(`relation:${chara_id}:0`) === undefined) {
         era.set(`relation:${chara_id}:0`, era.get('flag:马娘初始好感'));
       } else {
         era.add(`relation:${chara_id}:0`, era.get('flag:马娘初始好感') - 75);
       }
-      era.add(`love:${chara_id}`, era.get('flag:马娘初始爱慕'));
       era.set(`base:${chara_id}:体力`, era.get(`maxbase:${chara_id}:体力`));
       era.set(`base:${chara_id}:精力`, era.get(`maxbase:${chara_id}:精力`));
 
@@ -230,12 +241,17 @@ module.exports = {
     }
   },
   recruit_chara(chara_id) {
-    era.get(`cflag:${chara_id}:种族`) &&
-      era.set(
-        `cflag:${chara_id}:育成回合计时`,
-        (era.get('flag:当前回合数') - 1) % 48,
-      );
-    era.set(`cflag:${chara_id}:自主训练`, 1);
+    if (era.get(`cflag:${chara_id}:种族`)) {
+      if (era.get('flag:当前月') < 4) {
+        era.set(
+          `cflag:${chara_id}:育成回合计时`,
+          (era.get('flag:当前回合数') - 1) % 48,
+        );
+        era.set(`cflag:${chara_id}:自主训练`, 1);
+      } else {
+        era.set(`cflag:${chara_id}:育成回合计时`, 'x');
+      }
+    }
     era.set(`cflag:${chara_id}:腋毛`, 0);
     const honor = era.get('flag:当前声望');
     // 先结算声望奖励
@@ -243,10 +259,10 @@ module.exports = {
     if (relation > 125) {
       relation = 125;
     }
-    era.add(
-      `relation:${chara_id}:0`,
-      relation + 300 * sys_personal_achievement.get(chara_id),
-    );
+    relation +=
+      era.get(`relation:${chara_id}:0`) +
+      300 * sys_personal_achievement.get(chara_id);
+    era.set(`relation:${chara_id}:0`, Math.min(relation, 600));
   },
   reset_chara,
 };

@@ -291,10 +291,10 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
   await print_event_name('抽奖试手气！', daiya);
   await era.printAndWait(`回程路上，${me.name} 和里见光钻经过商店街时──`);
   await era.printAndWait(
-    '商店街人员「看过来看过来，现正举办新春大抽奖～！特等奖可是“温泉旅游券”！」',
+    '商店街人员「看过来看过来，现正举办新春大抽奖～！特等奖可是『温泉旅游券』！」',
   );
   await era.printAndWait(
-    '商店街人员「一等奖是“特等胡萝卜汉堡排”，二等奖是“一整堆胡萝卜”，三等奖则是“一根胡萝卜”！」',
+    '商店街人员「一等奖是『特等胡萝卜汉堡排』，二等奖是『一整堆胡萝卜』，三等奖则是『一根胡萝卜』！」',
   );
   await era.printAndWait(
     '商店街人员「来喔来喔，是好玩的抽奖活动喔！任何人都可以来抽喔～！」',
@@ -323,9 +323,9 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
   const gacha = get_random_value(0, 9);
   if (gacha === 0) {
     await era.printAndWait(
-      '商店街人员「天啊！恭喜────！！抽到特等奖“温泉旅游券”了～～～～！！」',
+      '商店街人员「天啊！恭喜────！！抽到特等奖『温泉旅游券』了～～～～！！」',
     );
-    await era.printAndWait('获得了“温泉旅游券”。');
+    await era.printAndWait('获得了「温泉旅游券」。');
     await daiya.say_and_wait(
       '成……成功了～～！！特等奖！是特等奖喔，训练员！！',
     );
@@ -368,9 +368,9 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
     );
   } else if (gacha === 9) {
     await era.printAndWait(
-      '商店街人员「很可惜，没抽中！参加奖是“卫生纸”喔～」',
+      '商店街人员「很可惜，没抽中！参加奖是『卫生纸』喔～」',
     );
-    await era.printAndWait('获得了“卫生纸”。');
+    await era.printAndWait('获得了「卫生纸」。');
     await daiya.say_and_wait('…………没抽中吗…………？');
     await daiya.say_and_wait('…………一次。');
     await daiya.say_and_wait('我要再抽一次！');
@@ -405,9 +405,9 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
     );
   } else if (gacha === 1) {
     await era.printAndWait(
-      '商店街人员「恭喜抽到一等奖～！奖品是“特等胡萝卜汉堡排”！」',
+      '商店街人员「恭喜抽到一等奖～！奖品是『特等胡萝卜汉堡排』！」',
     );
-    await era.printAndWait('获得了“特等胡萝卜汉堡排”。');
+    await era.printAndWait('获得了「特等胡萝卜汉堡排」。');
     await daiya.say_and_wait('哎呀，胡萝卜汉堡排……！');
     await daiya.say_and_wait(
       '这个豪迈的造型还真是不错。在我家吃胡萝卜的时候都会是切好的，所以我一直很期待能体验到这样的外食经验呢♪',
@@ -448,8 +448,10 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       JSON.parse('{"体力":300}'),
     );
   } else if (gacha < 5) {
-    await era.printAndWait('商店街人员「二等奖～！！奖品是“一整堆胡萝卜”！」');
-    await era.printAndWait('获得了“一整堆胡萝卜”。');
+    await era.printAndWait(
+      '商店街人员「二等奖～！！奖品是『一整堆胡萝卜』！」',
+    );
+    await era.printAndWait('获得了「一整堆胡萝卜」。');
     await daiya.say_and_wait('哇啊～得到了好多的胡萝卜呀♪');
     await daiya.say_and_wait('训练员，你带回去吧。毕竟抽奖券是训练员的嘛。');
     era.printButton('「这么多我哪吃得完！」', 1);
@@ -479,7 +481,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       `因为这道料理新潮到让 ${me.name} 觉得不放心，所以 ${me.name} 提出要帮忙一起做。`,
     );
     await era.printAndWait(
-      `隔天──里见光钻向 ${me.name} 报告，栗东宿舍的大家非常喜欢“胡萝卜鲷鱼烧”的事情。`,
+      `隔天──里见光钻向 ${me.name} 报告，栗东宿舍的大家非常喜欢「胡萝卜鲷鱼烧」的事情。`,
     );
     era.println();
     wait_flag = sys_change_motivation(67, 1);
@@ -491,8 +493,8 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
         JSON.parse('{"体力":200}'),
       ) || wait_flag;
   } else {
-    await era.printAndWait('商店街人员「三等奖～！奖品是“一根胡萝卜”！」');
-    await era.printAndWait('获得了“一根胡萝卜”。');
+    await era.printAndWait('商店街人员「三等奖～！奖品是『一根胡萝卜』！」');
+    await era.printAndWait('获得了「一根胡萝卜」。');
     await daiya.say_and_wait('一根……真的很抱歉，训练员。枉费你宝贵的抽奖券……');
     await daiya.say_and_wait('应该是我的气势不够……');
     era.printButton('「那就吃这根胡萝卜补充精神吧！」', 1);
@@ -650,7 +652,7 @@ handlers[event_hooks.office_cook] = async (hook, extra_flag, event_object) => {
   edu_marks.banned_coffee++;
   await print_event_name('禁忌特调', daiya);
   await era.printAndWait(
-    '“想要学会怎么煮出好喝的咖啡”。曼城茶座答应了要帮里见光钻实现这个心愿。',
+    '「想要学会怎么煮出好喝的咖啡」。曼城茶座答应了要帮里见光钻实现这个心愿。',
   );
   await daiya.say_and_wait('今天要麻烦多多指教了！');
   era.printButton('「麻烦你了！」', 1);
@@ -708,7 +710,7 @@ handlers[event_hooks.office_cook] = async (hook, extra_flag, event_object) => {
   );
   await daiya.say_and_wait('咖啡……！');
   await coffee.say_and_wait(
-    '我想，这么做一定能诞生出很有趣的咖啡。……“朋友”……也是这么认为的。',
+    '我想，这么做一定能诞生出很有趣的咖啡。……『朋友』……也是这么认为的。',
   );
   await daiya.say_and_wait('嘿嘿嘿，对吧！我自己也想像不到会是怎样的咖啡呢。');
   await daiya.say_and_wait(

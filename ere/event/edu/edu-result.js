@@ -32,7 +32,10 @@ function handle_rest_cost(chara_id) {
     Math.max(debuff - 1 - (Math.random() < debuff / 5), 0),
   );
   debuff = era.get(`status:${chara_id}:疲惫`);
-  era.set(`status:${chara_id}:疲惫`, Math.max(debuff - 1, 1));
+  era.set(
+    `status:${chara_id}:疲惫`,
+    Math.max(debuff - 1, Number(era.get(`status:${chara_id}:疲惫`) > 0)),
+  );
 }
 
 /** @param {number} chara_id */
@@ -302,20 +305,25 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
   return { attr_change, relation_change, stamina };
 };
 
+/**
+ * @param {number} chara_id
+ * @param {HookArg} hook
+ * @param {TrainSuccessParams} extra_flag
+ */
 handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
   sys_change_pressure(chara_id, -get_random_value(50, 100));
+  extra_flag.attr ||= 0;
+  extra_flag.relation_change ||= 0;
+  extra_flag.stamina ||= 0;
+  extra_flag.pt_change ||= 0;
   if (hook.arg === true) {
     sys_change_pressure(chara_id, -50);
-    return {
-      attr: 5 + (extra_flag.attr || 0),
-      relation_change: 5 + (extra_flag.relation_change || 0),
-      stamina: -50 + (extra_flag.stamina || 0),
-    };
+    extra_flag.attr += 5;
+    extra_flag.relation_change += 5;
+    extra_flag.stamina -= 50;
   } else if (hook.arg === false) {
     sys_change_pressure(chara_id, 50);
-    return {
-      stamina: 50 + (extra_flag.stamina || 0),
-    };
+    extra_flag.stamina += 50;
   }
   return extra_flag;
 };

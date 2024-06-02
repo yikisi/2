@@ -16,8 +16,11 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
+const { buff_colors } = require('#/data/color-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -58,7 +61,10 @@ module.exports = class extends CustomizedCheck {
       era.get('cflag:3:育成回合计时') >= 96 &&
       extra_flag.race === race_enum.tenn_spr
     ) {
-      add_event(event_hooks.back_school, new EventObject(3, cb_enum.edu));
+      add_event(
+        event_hooks.back_school,
+        new EventObject(3, cb_enum.edu, true).set_arg('broken'),
+      );
     } else if (extra_flag.race === race_enum.toky_yus) {
       sys_hurt_uma(3, 3);
     }
@@ -83,7 +89,9 @@ module.exports = class extends CustomizedCheck {
       event_obj = new EventObject(3, cb_enum.edu),
       edu_weeks = era.get('cflag:3:育成回合计时');
     if (edu_weeks < 3 * 48) {
-      const event_obj_special = new EventObject(3, cb_enum.edu, true);
+      const event_obj_special = new EventObject(3, cb_enum.edu, true).set_arg(
+        edu_weeks,
+      );
       let temp;
       check_and_add_event(
         event_marks,
@@ -180,18 +188,40 @@ module.exports = class extends CustomizedCheck {
             add_event(event_hooks.school_atrium, event_obj_special);
           }
           break;
+        case 95 + race_infos[race_enum.tenn_spr].date + 1:
+          if (
+            !event_marks.give_up &&
+            new RaceHistory(3).get_result(
+              95 + race_infos[race_enum.tenn_spr].date,
+            )?.race === race_enum.tenn_spr &&
+            !era.get('status:3:腿伤')
+          ) {
+            era.set('talent:3:自信程度', 1);
+            era.set('talent:3:淫乱', 1);
+            era.set('talent:3:身体素质', 0);
+            era.set('status:3:腿伤', 1);
+            era.print([
+              get_chara_talk(3).get_colored_name(),
+              ' 罹患了 ',
+              {
+                color: buff_colors[3],
+                content: '[腿伤]',
+              },
+              '……',
+            ]);
+          }
+          break;
         case 47 + 5: // 所以，衣服是怎样啦！
           add_event(event_hooks.school_atrium, event_obj_special);
           break;
         case 47 + 25: // 定时刷新的小兽
           add_event(event_hooks.office_rest, event_obj_special);
-          break;
       }
 
       check_and_register_aim_race(3, aim_races, edu_weeks);
       // 选择放弃，春天皇赏强制避战
       if (
-        edu_weeks === 96 + race_infos[race_enum.tenn_spr].date &&
+        edu_weeks === 95 + race_infos[race_enum.tenn_spr].date &&
         (temp = sys_reg_race(3)).curr.race === race_enum.tenn_spr &&
         event_marks.give_up === 1
       ) {

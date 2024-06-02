@@ -94,7 +94,7 @@ module.exports = async (vp, me) => {
       new EroParticipant(0, part_enum.penis),
       false,
     );
-    await vp.print_and_wait('闭上嘴发出“滋溜滋溜”的声音。');
+    await vp.print_and_wait('闭上嘴发出「滋溜滋溜」的声音。');
     await vp.print_and_wait('勃起的那个马上贯穿我喉咙的深处。');
     await me.say_and_wait(
       `${sys_get_callname(0, 205)} 的脚也很臭，该说咸还是酸呢。`,
@@ -187,7 +187,7 @@ module.exports = async (vp, me) => {
       `紧紧的收缩阴道的话，${sys_get_callname(205, 0)} 也会露出苦闷的表情。`,
     );
     await vp.print_and_wait(`很可爱，我想一直这么勒紧${me.sex}。`);
-    await vp.print_and_wait('听到“噗”的声音，肉棒要拔出去了……');
+    await vp.print_and_wait('听到「噗」的声音，肉棒要拔出去了……');
     await vp.print_and_wait('不行，不行！再多爱我一点，不插入是不行的…');
     await me.say_and_wait(
       `这是什么啊，你真是最顶级的名器啊 ${sys_get_callname(0, 205)}！`,
@@ -228,7 +228,7 @@ module.exports = async (vp, me) => {
       false,
     );
     await vp.print_and_wait('虽然快无法呼吸了，但是嘴不会放开。');
-    await vp.print_and_wait('发出“啾噜、啾噜”的声音。');
+    await vp.print_and_wait('发出「啾噜、啾噜」的声音。');
     await me.say_and_wait(`可恶，要射出来了，${sys_get_callname(0, 205)}！`);
     await vp.print_and_wait(`我把脚缠在${me.sex}腰上紧紧地抱住。`);
     await vp.print_and_wait('不要逃跑，全部注入子宫。');

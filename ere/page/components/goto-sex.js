@@ -101,11 +101,13 @@ async function fail(chara, me) {
   if (era.get('flag:当前互动角色') === chara.id) {
     era.set('flag:当前互动角色', 0);
   }
-  if (
-    era.get('flag:当前位置') === location_enum.chairman ||
-    era.get('flag:当前位置') === location_enum.gate
-  ) {
-    return 2;
+  switch (era.get('flag:当前位置')) {
+    case location_enum.chairman:
+    case location_enum.gate:
+    case location_enum.trainer:
+    case location_enum.visitor:
+    case location_enum.clinic:
+      return 2;
   }
 }
 

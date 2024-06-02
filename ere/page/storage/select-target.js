@@ -1,10 +1,10 @@
 const era = require('#/era-electron');
 
+const get_status = require('#/system/chara/sys-get-status');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { attr_background_colors } = require('#/data/const.json');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_status } = require('#/data/info-generator');
 
 /**
  * @param {number} item

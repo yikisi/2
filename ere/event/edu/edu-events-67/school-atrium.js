@@ -111,13 +111,13 @@ module.exports = async (hook, _, event_object) => {
     );
     await sweepy.print_and_wait('？？？「找到了──────！！！！」');
     await sweepy.say_and_wait(
-      '里见！从今天开始，我就任命你为“魔法少女·光钻”！',
+      '里见！从今天开始，我就任命你为『魔法少女·光钻』！',
     );
-    await daiya.say_and_wait('咦？“魔法少女·光钻”……吗？');
-    await kita.say_and_wait('“魔法少女☆Sweepy5”。魔法少女·玄驹登场！嘿嘿♪');
+    await daiya.say_and_wait('咦？『魔法少女·光钻』……吗？');
+    await kita.say_and_wait('『魔法少女☆Sweepy5』。魔法少女·玄驹登场！嘿嘿♪');
     await daiya.say_and_wait('哇啊，连小北也在说这个！？');
     await kita.say_and_wait(
-      '嘿嘿♪其实是一个由变革创立的团体，叫做“魔法少女☆Sweepy5”啦。',
+      '嘿嘿♪其实是一个由变革创立的团体，叫做『魔法少女☆Sweepy5』啦。',
     );
     await kita.say_and_wait('我也是在不久前刚被任命为魔法少女·玄驹的！');
     await kita.say_and_wait(
@@ -181,7 +181,7 @@ module.exports = async (hook, _, event_object) => {
         '哇啊，真的看起来亮晶晶的耶……！里见，你很厉害嘛♪',
       );
       await sweepy.say_and_wait(
-        '魔法少女·光钻！我正式允许你入团！现在开始你就是“魔法少女☆Sweepy5”的团员了♪知道了吗？',
+        '魔法少女·光钻！我正式允许你入团！现在开始你就是『魔法少女☆Sweepy5』的团员了♪知道了吗？',
       );
       await daiya.say_and_wait('是！魔法少女·光钻，今后会更加耀眼的！');
       await era.printAndWait(
@@ -217,7 +217,7 @@ module.exports = async (hook, _, event_object) => {
       );
       await me.say_and_wait('辣椒素……！？', true);
       await sweepy.say_and_wait(
-        '你、你很有一套嘛……！魔法少女·光钻！现在开始你就正式是“魔法少女☆Sweepy5”的团员了♪',
+        '你、你很有一套嘛……！魔法少女·光钻！现在开始你就正式是『魔法少女☆Sweepy5』的团员了♪',
       );
       await era.printAndWait(
         `东商变革等人离开后，${me.name} 走向里见光钻。……${me.name} 很在意${daiya.sex}刚才喝下辣椒素的事情。`,
@@ -307,7 +307,7 @@ module.exports = async (hook, _, event_object) => {
       await gold_ship.say_and_wait('好主意！提出具体的内容就会更有说服力！');
       await daiya.say_and_wait('呵呵呵，感觉越来越有趣了呢♪');
       await daiya.say_and_wait(
-        '“把特雷森学园的游泳池变成鄂霍次克海计划”开始执行！',
+        '『把特雷森学园的游泳池变成鄂霍次克海计划』开始执行！',
       );
       await era.printAndWait(
         '后来，虽然计划没能实现，对里见光钻来说却是一次不错的经验！',
@@ -408,9 +408,11 @@ module.exports = async (hook, _, event_object) => {
       );
       await daiya.say_and_wait('我也要像麦昆一样，慎重认真地选甜点。');
       await daiya.say_and_wait('嗯～我想想喔……哎呀？');
-      await daiya.say_and_wait('现在正在举办……“珍奇甜点展”呢！那我就选那个吧♪');
+      await daiya.say_and_wait(
+        '现在正在举办……『珍奇甜点展』呢！那我就选那个吧♪',
+      );
       await mcqueen.say_and_wait(
-        '“墨鱼起司蛋糕”、“布丁寿司”……这是什么菜单啊！？',
+        '『墨鱼起司蛋糕』、『布丁寿司』……这是什么菜单啊！？',
       );
       await mcqueen.say_and_wait('那个，里见……你刚才不是说要慎重认真地选吗？');
       await daiya.say_and_wait(
@@ -419,9 +421,9 @@ module.exports = async (hook, _, event_object) => {
       await mcqueen.say_and_wait(
         '……！真是了不起的探究心……！你这是和甜点的正面对决吧？',
       );
-      await mcqueen.say_and_wait('……我也要挑战！挑战“珍奇甜点展”！');
+      await mcqueen.say_and_wait('……我也要挑战！挑战『珍奇甜点展』！');
       await daiya.say_and_wait('麦昆……！我们一起开拓甜点的新境界吧。');
-      await daiya.say_and_wait('那么……要不要选那个“蕈菇蒙布朗”呢？');
+      await daiya.say_and_wait('那么……要不要选那个『蕈菇蒙布朗』呢？');
       await mcqueen.say_and_wait('……呃，里见。我可以再慢慢想想看吗？');
       await era.printAndWait(
         '两人一起经过苦思后做出选择，一起品尝了美味的甜点！',

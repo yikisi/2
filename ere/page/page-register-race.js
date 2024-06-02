@@ -12,6 +12,7 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { adaptability_colors, el_danger_color } = require('#/data/color-const');
+const GrandLives = require('#/data/event/grand-lives');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_adaptability_rank } = require('#/data/info-generator');
 const { expedition_weeks } = require('#/data/move-const');
@@ -36,6 +37,14 @@ function check_in_foreign(chara_id, year_begin, cur_round, registered_race) {
     foreign_race_list.find((e) => e === registered_race.race) !== undefined &&
     race_infos[registered_race.race].date + year_begin - cur_round <=
       expedition_weeks
+  );
+}
+
+function check_register_disabled(chara_id, in_foreign) {
+  return (
+    era.get(`status:${chara_id}:伤病`) ||
+    !check_pregnant_unprotect(chara_id) ||
+    in_foreign
   );
 }
 
@@ -134,7 +143,9 @@ async function reg_race_page() {
       year_begin,
       cur_round,
       registered_race,
-    );
+    ),
+    base_disabled_check = check_register_disabled(chara_id, in_foreign),
+    grand_lives = new GrandLives();
 
   while (flag_race_reg) {
     await era.clear();
@@ -183,7 +194,11 @@ async function reg_race_page() {
               e,
               edu_weeks + round - cur_round,
             ),
-            is_foreign = race_infos[e].track >= track_enum.longchamp;
+            is_foreign = race_infos[e].track >= track_enum.longchamp,
+            is_grand_live = grand_lives.check(
+              e,
+              Number(round - year_begin >= 48),
+            );
           if (
             e === race_enum.begin_race ||
             registered_race.race === e ||
@@ -199,9 +214,7 @@ async function reg_race_page() {
                   align: 'center',
                   buttonType: is_aim_race ? 'danger' : 'warning',
                   disabled:
-                    era.get(`status:${chara_id}:伤病`) ||
-                    !check_pregnant_unprotect(chara_id) ||
-                    in_foreign ||
+                    base_disabled_check ||
                     (is_foreign &&
                       race_infos[e].date + year_begin - cur_round <=
                         expedition_weeks),
@@ -211,6 +224,7 @@ async function reg_race_page() {
                   (is_foreign
                     ? ` (${track2location[race_infos[e].track].con})`
                     : '') +
+                  (is_grand_live ? ' 🎤' : '') +
                   ((is_aim_race & 0x3) > 0 ? ' *' : ''),
                 type: 'button',
               },
@@ -264,7 +278,15 @@ async function reg_race_page() {
                 { isBr: true },
                 '** 参加带有星号(*)后缀的比赛可能会有特殊的事情发生……',
                 { isBr: true },
-                '*** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
+                ...(cur_round > 39
+                  ? [
+                      '*** 带有🎤后缀的比赛会开设大舞台，参加能够获得更多的声望……',
+                      { isBr: true },
+                      '**** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
+                    ]
+                  : [
+                      '*** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
+                    ]),
               ],
               type: 'text',
             },
@@ -337,6 +359,7 @@ async function reg_race_page() {
         cur_round,
         registered_race,
       );
+      base_disabled_check = check_register_disabled(chara_id, in_foreign);
     } else {
       if (registered_race.race === ret) {
         registered_race.race = registered_race.week = -1;

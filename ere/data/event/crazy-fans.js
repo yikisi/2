@@ -1,0 +1,20 @@
+const { get, set } = require('#/era-electron');
+const { get_random_entry } = require('#/utils/list-utils');
+
+class CrazyFans {
+  constructor() {
+    this.obj = get('flag:极端粉丝') || set('flag:极端粉丝', []);
+  }
+
+  push(chara_id) {
+    this.obj.push(chara_id);
+  }
+
+  get() {
+    const val = get_random_entry(this.obj.filter((e) => e));
+    this.obj = set('flag:极端粉丝', []);
+    return val;
+  }
+}
+
+module.exports = CrazyFans;

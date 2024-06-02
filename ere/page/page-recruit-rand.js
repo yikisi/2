@@ -1,12 +1,12 @@
 ﻿const era = require('#/era-electron');
 
+const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
 const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
 const call_recruit_event = require('#/system/script/sys-call-recruit');
 const { get_image } = require('#/system/sys-calc-image');
 const filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
-const check_team_limit = require('#/page/components/check-team-limit');
 const print_page_header = require('#/page/components/page-header');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -43,7 +43,7 @@ async function print_rec_page() {
     '抵达了训练场……',
   ]);
   flag_leave = await sys_get_random_event(event_hooks.recruit_start)();
-  const flag_limit = check_team_limit();
+  const flag_limit = sys_check_team_limit() >= 0;
   flag_recruit = !flag_leave;
 
   while (flag_recruit) {

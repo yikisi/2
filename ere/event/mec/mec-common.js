@@ -3,12 +3,23 @@ const era = require('#/era-electron');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 class CustomizedMec {
+  /** @type {number} */
+  id;
+
   constructor(chara_id) {
     this.id = chara_id;
   }
 
   init_love() {
     era.set(`love:${this.id}`, era.get('flag:马娘初始爱慕'));
+  }
+
+  is_able_to_be_selected() {
+    return true;
+  }
+
+  is_able_to_show_growth() {
+    return era.get(`cflag:${this.id}:种族`) > 0;
   }
 
   is_anger_for_unfaithful() {
@@ -58,12 +69,42 @@ class CustomizedMec {
 
   /** @returns {string[]} */
   get_race_cloth() {
-    const base = era.get(`cstr:${this.id}:头像`);
+    const base = era.get(`cstr:${this.id}:头像`),
+      ret = [];
     let temp;
     if ((temp = era.get(`cstr:${this.id}:决胜服`)) === -1) {
       return [`${base}_运`, base, 'default'];
+    } else if (temp === 0) {
+      const holiday = (era.get('flag:当前回合数') - 1) % 48;
+      switch (holiday) {
+        case 0:
+          ret.push(`${base}_春`);
+          break;
+        case 5:
+          ret.push(`${base}_婚`);
+          break;
+        case 13:
+          ret.push(`${base}_仆`, `${base}_应援`, `${base}_礼`, `${base}_游`);
+          break;
+        case 28:
+        case 30:
+        case 31:
+          ret.push(`${base}_泳`, `${base}_夏`);
+          break;
+        case 29:
+          ret.push(`${base}_江户`);
+          break;
+        case 39:
+          ret.push(`${base}_万圣`);
+          break;
+        case 47:
+          ret.push(`${base}_圣诞`);
+      }
+    } else {
+      ret.push(`${base}${temp}`);
     }
-    return [`${base}${temp}`, base, `${base}_运`, 'default'];
+    ret.push(base, `${base}_运`, 'default');
+    return ret;
   }
 
   get_relation_buff() {
@@ -74,7 +115,7 @@ class CustomizedMec {
     return 0;
   }
 
-  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string}|string)[]} */
+  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]} */
   get_status() {
     return [];
   }
@@ -83,7 +124,7 @@ class CustomizedMec {
     return 0;
   }
 
-  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string}|string)[]} */
+  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]} */
   get_talents() {
     return [];
   }

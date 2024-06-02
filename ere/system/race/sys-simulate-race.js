@@ -1,11 +1,11 @@
-﻿const era = require('#/era-electron');
+﻿// const era = require('#/era-electron');
 
 //起跑速度=3 加速度=24
 const startVelocity = 3;
-const startAcceleration = 24;
+// const startAcceleration = 24;
 
 //上坡时基础加速度为三分之二
-const raceAcceModUphill = 2 / 3;
+// const raceAcceModUphill = 2 / 3;
 
 const RaceInfo = require('#/data/race/model/race-info');
 const {

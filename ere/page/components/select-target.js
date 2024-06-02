@@ -1,7 +1,10 @@
 ﻿const era = require('#/era-electron');
 
+const get_status = require('#/system/chara/sys-get-status');
 const { sys_check_train_enabled } = require('#/system/sys-calc-chara-param');
 const filter_chara = require('#/system/sys-filter-chara');
+
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sort_list } = require('#/utils/list-utils');
@@ -35,7 +38,6 @@ const {
   get_love_info,
   get_rank_level,
   get_relation_info,
-  get_status,
   get_train_time,
 } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -196,9 +198,13 @@ async function select_target(type) {
       false,
     );
   } else if (type !== chara_info_type.info) {
-    // 一般不用显示自己
     list_team = sort_list(
-      list_team.filter((e) => e),
+      list_team.filter(
+        (e) =>
+          e &&
+          (get_custom_mec(e).is_able_to_be_selected() ||
+            (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) > 0),
+      ),
       (chara_id) => {
         return (
           (era.get(`cflag:${chara_id}:成长阶段`) << 17) +

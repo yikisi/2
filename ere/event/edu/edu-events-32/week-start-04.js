@@ -41,7 +41,7 @@ module.exports = (handlers) => {
       '绝对，绝对会去看的！',
     );
     era.println();
-    await era.printAndWait('如今学院中最处于话题中心的，那便是月桂杯了');
+    await era.printAndWait('如今学园中最处于话题中心的，那便是月桂杯了');
     await era.printAndWait('由学生会长组织，以对标URA总决赛为主的比赛，月桂杯');
     await era.printAndWait(
       '甚至无论年级无论本格化开始或者结束，只要有意愿的皆能参加',
@@ -611,7 +611,7 @@ module.exports = (handlers) => {
       await era.printAndWait([
         '不然的话……不就说明，自己放弃了，背叛了自己的负责',
         tachyon.get_uma_sex_title(),
-        '，自己的光（tachyon）了吗',
+        '，自己的光（Tachyon）了吗',
       ]);
       era.println();
       await tachyon.say_and_wait(['对了，', callname, '，明天记得要来试药哦']);

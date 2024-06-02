@@ -147,7 +147,7 @@ module.exports = async (hook, extra_flag) => {
         `但是，作为 ${chara_talk.name} 的训练员，${CharaTalk.me.name} 只清楚一件事情。`,
       );
       era.printButton('「赢的会是你。」', 1);
-      era.printButton('「到那时，“皇帝”的实力将会更得到证明。」', 2);
+      era.printButton('「到那时，『皇帝』的实力将会更得到证明。」', 2);
       const ret = await era.input();
       await era.printAndWait(
         `似乎很惊讶 ${CharaTalk.me.name} 会这样说，${chara_talk.name} 微微一笑。`,
@@ -256,7 +256,7 @@ module.exports = async (hook, extra_flag) => {
       await chara_talk.say_and_wait('伊甸……');
       era.drawLine();
       await chara_talk.print_and_wait(
-        `在 ${CharaTalk.me.name} 和 ${chara_talk.name} 分别后，${chara_talk.sex}独自来到了学院中庭。`,
+        `在 ${CharaTalk.me.name} 和 ${chara_talk.name} 分别后，${chara_talk.sex}独自来到了学园中庭。`,
       );
       await chara_talk.print_and_wait(
         '看着三女神的雕像，回味着踏入领域的光景，站在世代最顶点的赛马娘握紧了拳。',

@@ -21,7 +21,6 @@ cons_dict[16] = require('#/event/check/check-16');
 cons_dict[17] = require('#/event/check/check-17');
 cons_dict[18] = require('#/event/check/check-18');
 cons_dict[19] = require('#/event/check/check-19');
-cons_dict[24] = require('#/event/check/check-24');
 cons_dict[25] = require('#/event/check/check-25');
 cons_dict[26] = require('#/event/check/check-26');
 cons_dict[27] = require('#/event/check/check-27');
@@ -37,12 +36,14 @@ cons_dict[52] = require('#/event/check/check-52');
 cons_dict[60] = require('#/event/check/check-60');
 cons_dict[62] = require('#/event/check/check-62');
 cons_dict[63] = require('#/event/check/check-63');
+cons_dict[66] = require('#/event/check/check-66');
 cons_dict[67] = require('#/event/check/check-67');
 cons_dict[68] = require('#/event/check/check-68');
 cons_dict[71] = require('#/event/check/check-71');
 cons_dict[76] = require('#/event/check/check-76');
 cons_dict[77] = require('#/event/check/check-77');
 cons_dict[80] = require('#/event/check/check-80');
+cons_dict[82] = require('#/event/check/check-82');
 cons_dict[83] = require('#/event/check/check-83');
 cons_dict[86] = require('#/event/check/check-86');
 cons_dict[87] = require('#/event/check/check-87');
@@ -55,9 +56,16 @@ cons_dict[104] = require('#/event/check/check-104');
 cons_dict[107] = require('#/event/check/check-107');
 cons_dict[108] = require('#/event/check/check-108');
 cons_dict[109] = require('#/event/check/check-109');
+cons_dict[201] = require('#/event/check/check-201');
+cons_dict[202] = require('#/event/check/check-202');
+cons_dict[203] = require('#/event/check/check-203');
 cons_dict[204] = require('#/event/check/check-204');
 cons_dict[205] = require('#/event/check/check-205');
 cons_dict[206] = require('#/event/check/check-206');
+cons_dict[304] = require('#/event/check/check-304');
+cons_dict[303] = require('#/event/check/check-303');
+cons_dict[306] = require('#/event/check/check-306');
+cons_dict[308] = require('#/event/check/check-308');
 cons_dict[340] = require('#/event/check/check-340');
 cons_dict[341] = require('#/event/check/check-341');
 cons_dict[342] = require('#/event/check/check-342');
@@ -80,9 +88,9 @@ module.exports = {
       return obj_dict[chara_id];
     }
     const script_name =
-      chara_id >= first_child_id ? get(`callname:${chara_id}:-2`) : chara_id;
-    return (obj_dict[chara_id] = new (cons_dict[
-      script_dict[script_name] || script_name
-    ] || common_cons)(chara_id));
+        chara_id >= first_child_id ? get(`callname:${chara_id}:-2`) : chara_id,
+      class_cons =
+        cons_dict[script_dict[script_name] || script_name] || common_cons;
+    return (obj_dict[chara_id] = new class_cons(chara_id));
   },
 };

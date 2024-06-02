@@ -857,7 +857,7 @@ handlers[event_hooks.slave_end] = async function () {
     `但同时，那也是 ${me.name} 最大的债主那无比愉快的，令 ${me.name} 倍感压力的笑容。`,
   );
   await kita.say_and_wait(
-    `唔嘿嘿～再过几个月大概就可以恢复正常生活，回到特雷森学院了。`,
+    `唔嘿嘿～再过几个月大概就可以恢复正常生活，回到特雷森学园了。`,
   );
   await kita.say_and_wait(
     `只是借债了这么点钱真是太好了呢，还在小北我稍微能处理的范畴内。`,
@@ -866,7 +866,7 @@ handlers[event_hooks.slave_end] = async function () {
     `但是以后要借债的话，只要找小北我借债就好了哦，毕竟其他的借债都很不正经啊。`,
   );
   await era.printAndWait(
-    `微笑着慢慢握住 ${me.name} 的手，“不求回报的”${kita.name}露出的表情，绝不是 ${me.name} 不付出任何代价就能迎来的Happy ending。`,
+    `微笑着慢慢握住 ${me.name} 的手，『不求回报的』${kita.name}露出的表情，绝不是 ${me.name} 不付出任何代价就能迎来的Happy ending。`,
   );
 };
 

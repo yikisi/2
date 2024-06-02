@@ -8,6 +8,7 @@ const {
 } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const CustomizedCheck = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
@@ -42,7 +43,8 @@ async function punish_unfaithful(chara_id, new_love) {
           e !== chara_id &&
           era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
           era.get(`love:${e}`) >= 75 &&
-          !era.get(`talent:${e}:绿帽癖`),
+          !era.get(`talent:${e}:绿帽癖`) &&
+          get_custom_mec(e).is_anger_for_unfaithful(),
       );
     for (const c_id of temp_chara_list) {
       era.print([
@@ -279,6 +281,8 @@ function print_change(chara_id, old_val, new_val, to_be_shown) {
     return true;
   }
 }
+
+CustomizedCheck.like_chara = like_chara;
 
 module.exports = {
   sys_change_status_by_base(chara_id) {

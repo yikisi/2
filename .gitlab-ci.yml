@@ -1,24 +1,23 @@
 workflow:
   rules:
-    - if: $CI_COMMIT_TAG && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG
 
 variables:
-  GIT_SUBMODULE_STRATEGY: recursive
   GAME_ALL_DIR: 'erauma-with-engine-${CI_COMMIT_TAG}'
   GAME_ALL_ZIP: 'era-uma-preview-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
-
-cache:
-  paths:
-    - engine/node_modules/
 
 build:
   stage: build
   tags:
     - shell
+  variables:
+    NODE_OPTIONS: "--openssl-legacy-provider"
   script:
+    - git submodule update --init
     - cd engine
+    - git lfs fetch --all
     - npm install
-    - NODE_OPTIONS=--openssl-legacy-provider npm run win:pack
+    - npm run win:pack
     - mv dist_electron/win-unpacked ./$GAME_ALL_DIR
     - mkdir ./$GAME_ALL_DIR/game
     - cp ../CHANGELOG.md ./$GAME_ALL_DIR/game/

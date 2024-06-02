@@ -7,6 +7,7 @@ const {
   transform,
 } = require('#/event/edu/edu-events-17/snippets');
 const { add_event } = require('#/event/queue');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const palace = require('#/event/snippets/palace');
 const palace_relation = require('#/event/snippets/palace-relation');
@@ -18,6 +19,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const color_17 = require('#/data/chara-colors').chara_colors[17];
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const { location_enum } = require('#/data/locations');
+const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
@@ -136,7 +138,7 @@ module.exports = async (hook, _, event_object) => {
     await print_event_name('新年的抱负', luna_talk);
 
     await era.printAndWait(
-      '在和露娜成为“共犯”后，不知不觉，就迎来了新的一年。',
+      '在和露娜成为「共犯」后，不知不觉，就迎来了新的一年。',
     );
     await era.printAndWait(
       `无时无刻的战战兢兢与恐惧，让 ${CharaTalk.me.name} 夜夜难眠。`,
@@ -226,7 +228,7 @@ module.exports = async (hook, _, event_object) => {
     await era.printAndWait(
       '甚至到了晚上，露娜还在帮助两个寮舍的舍长，安排任务。',
     );
-    await luna_talk.say_and_wait('学院的问题，都是我的问题，无需在意。');
+    await luna_talk.say_and_wait('学园的问题，都是我的问题，无需在意。');
     await era.printAndWait(
       `随后，${luna_talk.sex}以身作则，早早的就回到寝室休息。`,
     );
@@ -241,7 +243,7 @@ module.exports = async (hook, _, event_object) => {
     era.printButton('「因为你太吸引我的目光了。」', 2);
     await era.input();
     await luna_talk.say_and_wait(
-      '真是能说会道，但为了学院环境的清朗，请不要用于我之外的孩子身上',
+      '真是能说会道，但为了学园环境的清朗，请不要用于我之外的孩子身上',
     );
     await luna_talk.say_and_wait('对了');
     await luna_talk.say_and_wait('你一直这样！');
@@ -271,7 +273,7 @@ module.exports = async (hook, _, event_object) => {
     await luna_talk.say_and_wait('为了他人而努力，始终是一件美好的愿望。');
     await luna_talk.say_and_wait('虽说如此，我们还是得为了菊花赏而努力。');
     await luna_talk.say_and_wait(
-      '但你的目光已经说明白了——‘训练下去对身体有害’，是吧？',
+      '但你的目光已经说明白了——『训练下去对身体有害』，是吧？',
     );
     await luna_talk.say_and_wait(
       '但德比之后，我越发坚定地认为，完成我们的理想需要非一般的努力。',
@@ -342,10 +344,10 @@ module.exports = async (hook, _, event_object) => {
       '是一位到现在才回来的孩子，她马上就要参加出道赛。',
     );
     await luna_talk.say_and_wait(
-      '接近一月底才回到学院，恐怕你也会疑惑吧？大多数赛马娘会选择在秋季或冬季出道。',
+      '接近一月底才回到学园，恐怕你也会疑惑吧？大多数赛马娘会选择在秋季或冬季出道。',
     );
     await luna_talk.say_and_wait(
-      '但在那之前，我们就会来到学院，和同龄人们一起学习，也一起竞争。',
+      '但在那之前，我们就会来到学园，和同龄人们一起学习，也一起竞争。',
     );
     await luna_talk.say_and_wait(
       '这是快乐的，但也不能保证这个过程没有心碎和疲惫。',
@@ -575,44 +577,26 @@ module.exports = async (hook, _, event_object) => {
     await emperor_talk.say_and_wait(get_random_entry(talk_list));
   }
   let race_punish = false;
-  const temp = era.get('cflag:17:育成成绩');
+  const race_history = new RaceHistory(17).get();
 
   switch (edu_weeks) {
     case race_infos[race_enum.sats_sho].date + 48: // 五月第一周 皋月赏惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.sats_sho ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.sats_sho, 1, 1);
       break;
     case race_infos[race_enum.toky_yus].date + 48: // 六月第一周 日本德比惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.toky_yus ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.toky_yus, 1, 1);
       break;
     case race_infos[race_enum.kiku_sho].date + 48: // 冬月第一周 菊花赏惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.kiku_sho ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.kiku_sho, 1, 1);
       break;
     case race_infos[race_enum.arim_kin].date + 48: // 新年第一周 有马纪念惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.arim_kin ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.arim_kin, 1, 1);
       break;
     case race_infos[race_enum.tenn_spr].date + 96: // 五月第一周 天皇赏春惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.tenn_spr ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.tenn_spr, 2, 1);
       break;
     case race_infos[race_enum.japa_cup].date + 96: // 冬月第四周 日本杯惩罚
-      race_punish =
-        !(race_punish = temp[edu_weeks - 1]) ||
-        race_punish.race !== race_enum.japa_cup ||
-        race_punish.rank !== 1;
+      race_punish = !check_aim_race(race_history, race_enum.japa_cup, 2, 1);
   }
   if (race_punish) {
     sys_like_chara(emperor, 0, -50);

@@ -6,6 +6,8 @@ const {
   sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
+const print_event_name = require('#/event/snippets/print-event-name');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -13,6 +15,10 @@ const recruit_flags = require('#/data/event/recruit-flags');
 /** @param {Record<string,function(CharaTalk,CharaTalk,string):Promise<*>>} handlers */
 module.exports = (handlers) => {
   handlers[25] = async (tachyon, me, callname) => {
+    await print_event_name(
+      `「爱丽速子」？「${tachyon.get_uma_sex_title()}A」？`,
+      tachyon,
+    );
     const c_call_m = sys_get_callname(25, 0),
       c_call_t = sys_get_colored_callname(25, 32),
       coffee = get_chara_talk(25),
@@ -195,142 +201,140 @@ module.exports = (handlers) => {
         ? `以后也让 ${c_call_m} 帮我做怎么样？`
         : `有机会再请${me.sex}帮我做吧`,
     ]);
-    if (love_25 >= 50) {
-      era.drawLine();
-      await tachyon.say_and_wait('…………');
-      await tachyon.print_and_wait([
-        coffee.get_colored_name(),
-        ' 离开了，只留下 ',
-        tachyon.get_colored_name(),
-        ' 一人在实验室中',
-      ]);
-      await tachyon.print_and_wait([
-        '脑袋灵活的',
-        tachyon.sex,
-        '早就知道，这些话不过是 ',
-        coffee.get_colored_name(),
-        ' 想煽动',
-        tachyon.sex,
-        '而故意说出的',
-      ]);
-      await tachyon.print_and_wait([
-        '甚至',
-        tachyon.sex,
-        '也猜得到 ',
-        coffee.get_colored_name(),
-        ' 这么做的原因',
-      ]);
-      era.println();
-      await tachyon.say_and_wait('秀恩爱……？');
-      era.println();
-      await tachyon.print_and_wait([
-        '按 ',
-        coffee.get_colored_name(),
-        ' 所说，自己和 ',
-        callname,
-        ' 在',
-        tachyon.sex,
-        '眼中就是这样的吧',
-      ]);
-      await tachyon.print_and_wait('可是，这样很奇怪吧');
+    era.drawLine();
+    await tachyon.say_and_wait('…………');
+    await tachyon.print_and_wait([
+      coffee.get_colored_name(),
+      ' 离开了，只留下 ',
+      tachyon.get_colored_name(),
+      ' 一人在实验室中',
+    ]);
+    await tachyon.print_and_wait([
+      '脑袋灵活的',
+      tachyon.sex,
+      '早就知道，这些话不过是 ',
+      coffee.get_colored_name(),
+      ' 想煽动',
+      tachyon.sex,
+      '而故意说出的',
+    ]);
+    await tachyon.print_and_wait([
+      '甚至',
+      tachyon.sex,
+      '也猜得到 ',
+      coffee.get_colored_name(),
+      ' 这么做的原因',
+    ]);
+    era.println();
+    await tachyon.say_and_wait('秀恩爱……？');
+    era.println();
+    await tachyon.print_and_wait([
+      '按 ',
+      coffee.get_colored_name(),
+      ' 所说，自己和 ',
+      callname,
+      ' 在',
+      tachyon.sex,
+      '眼中就是这样的吧',
+    ]);
+    await tachyon.print_and_wait('可是，这样很奇怪吧');
+    await tachyon.print_and_wait(
+      '秀恩爱，指的是情侣，或者有恋慕关系的两人，不顾他人眼光的表现两人的恩爱',
+    );
+    await tachyon.print_and_wait([
+      '可是，自己和 ',
+      callname,
+      ' 又不是那种关系',
+    ]);
+    await tachyon.print_and_wait('情侣，或者是恋慕关系……');
+    await tachyon.print_and_wait([
+      '周围人眼中的自己和 ',
+      callname,
+      ' 原来是这样的吗？',
+    ]);
+    await tachyon.print_and_wait([callname, ' 和我……恋爱……']);
+    era.println();
+    await tachyon.say_and_wait('………！？');
+    era.println();
+    await tachyon.print_and_wait(
+      '在这个念头浮上心间的瞬间，心脏彷佛被添加了强心剂一般，开始不断跳动，由于过度的血液供应，脸颊也变得发烫',
+    );
+    await tachyon.print_and_wait('这……这不好像在说……自己………');
+    era.println();
+    await tachyon.say_and_wait([
+      '怎怎怎怎么可能……不过是实验动物……对啊！说到底',
+      me.sex,
+      '不过就是区区豚鼠而已！',
+    ]);
+    await tachyon.say_and_wait([
+      '为什么我要在乎',
+      me.sex,
+      '喜欢的是我这个人还是我的跑法、可能性啊！',
+    ]);
+    era.println();
+    await tachyon.print_and_wait(
+      '没错，既然是豚鼠，那只要拥有相同的目标就好了',
+    );
+    await tachyon.print_and_wait([
+      '没有必要加入那些多余的感情，感情这种东西在实验中也只会误事',
+    ]);
+    await tachyon.print_and_wait([
+      '两人的关系就是研究者和豚鼠，训练员和',
+      tachyon.get_uma_sex_title(),
+    ]);
+    tachyon.print('其余的关系都是不需要的');
+    era.printButton('真的是这样吗？', 1);
+    era.printButton('没错，就是这样', 2);
+    if ((await era.input()) === 1) {
+      await tachyon.print_and_wait('是啊，明明是这样的');
+      await tachyon.print_and_wait('那为什么');
       await tachyon.print_and_wait(
-        '秀恩爱，指的是情侣，或者有恋慕关系的两人，不顾他人眼光的表现两人的恩爱',
+        '对于被当成情侣的事，心中的雀跃和情绪高涨却怎么也压抑不住',
       );
       await tachyon.print_and_wait([
-        '可是，自己和 ',
-        callname,
-        ' 又不是那种关系',
-      ]);
-      await tachyon.print_and_wait('情侣，或者是恋慕关系……');
-      await tachyon.print_and_wait([
-        '周围人眼中的自己和 ',
-        callname,
-        ' 原来是这样的吗？',
-      ]);
-      await tachyon.print_and_wait([callname, ' 和我……恋爱……']);
-      era.println();
-      await tachyon.say_and_wait('………！？');
-      era.println();
-      await tachyon.print_and_wait(
-        '在这个念头浮上心间的瞬间，心脏彷佛被添加了强心剂一般，开始不断跳动，由于过度的血液供应，脸颊也变得发烫',
-      );
-      await tachyon.print_and_wait('这……这不好像在说……自己………');
-      era.println();
-      await tachyon.say_and_wait([
-        '怎怎怎怎么可能……不过是实验动物……对啊！说到底',
+        '对于',
         me.sex,
-        '不过就是区区豚鼠而已！',
+        '给 ',
+        coffee.get_colored_name(),
+        ' 做了便当的事，心中的嫉妒和愤怒却怎么也平息不下',
       ]);
-      await tachyon.say_and_wait([
-        '为什么我要在乎',
-        me.sex,
-        '喜欢的是我这个人还是我的跑法、可能性啊！',
+      await tachyon.print_and_wait([
+        '…………对于 ',
+        coffee.get_colored_name(),
+        ' 所说的，对方并没有看见自己的事，心中的恐慌和畏惧却怎么也放不下来',
       ]);
+      era.println();
+      await tachyon.say_and_wait('…………我到底是怎么了');
+      await tachyon.say_and_wait('这不就好像……好像');
+      era.println();
+      await tachyon.print_and_wait(['好像，我喜欢 ', callname, ' 一般吗']);
       era.println();
       await tachyon.print_and_wait(
-        '没错，既然是豚鼠，那只要拥有相同的目标就好了',
+        '连当事人都不明白的感情，在混杂着灼热的吐息中，飘上了天花板，消失在孤独的实验室中',
       );
-      await tachyon.print_and_wait([
-        '没有必要加入那些多余的感情，感情这种东西在实验中也只会误事',
-      ]);
-      await tachyon.print_and_wait([
-        '两人的关系就是研究者和豚鼠，训练员和',
-        tachyon.get_uma_sex_title(),
-      ]);
-      tachyon.print('其余的关系都是不需要的');
-      era.printButton('真的是这样吗？', 1);
-      era.printButton('没错，就是这样', 2);
-      if ((await era.input()) === 1) {
-        await tachyon.print_and_wait('是啊，明明是这样的');
-        await tachyon.print_and_wait('那为什么');
-        await tachyon.print_and_wait(
-          '对于被当成情侣的事，心中的雀跃和情绪高涨却怎么也压抑不住',
-        );
-        await tachyon.print_and_wait([
-          '对于',
-          me.sex,
-          '给 ',
-          coffee.get_colored_name(),
-          ' 做了便当的事，心中的嫉妒和愤怒却怎么也平息不下',
-        ]);
-        await tachyon.print_and_wait([
-          '…………对于 ',
-          coffee.get_colored_name(),
-          ' 所说的，对方并没有看见自己的事，心中的恐慌和畏惧却怎么也放不下来',
-        ]);
-        era.println();
-        await tachyon.say_and_wait('…………我到底是怎么了');
-        await tachyon.say_and_wait('这不就好像……好像');
-        era.println();
-        await tachyon.print_and_wait(['好像，我喜欢 ', callname, ' 一般吗']);
-        era.println();
-        await tachyon.print_and_wait(
-          '连当事人都不明白的感情，在混杂着灼热的吐息中，飘上了天花板，消失在孤独的实验室中',
-        );
-      } else {
-        await tachyon.print_and_wait('没错');
-        await tachyon.print_and_wait('就是这样');
-        await tachyon.print_and_wait('两人只要当纯粹的豚鼠和研究者就好');
-        await tachyon.print_and_wait('只要继续过着这样的生活就好');
-        await tachyon.print_and_wait(
-          '任性的天才科学家，以及任劳任怨的助手兼实验品',
-        );
-        await tachyon.print_and_wait('两人的关系只要继续维持着这样就好');
-        await tachyon.print_and_wait('维持到……什么时候呢');
-        await tachyon.print_and_wait(
-          '一年？两年？到自己毕业？到进入大学？到出社会以前？',
-        );
-        await tachyon.print_and_wait('这样的关系，有办法维持到那个时候吗？');
-        era.println();
-        await tachyon.say_and_wait('唉……');
-        era.println();
-        await tachyon.print_and_wait(
-          '但无论如何，自己已经做出了选择，所以现在，这样就好',
-        );
-      }
+    } else {
+      await tachyon.print_and_wait('没错');
+      await tachyon.print_and_wait('就是这样');
+      await tachyon.print_and_wait('两人只要当纯粹的豚鼠和研究者就好');
+      await tachyon.print_and_wait('只要继续过着这样的生活就好');
+      await tachyon.print_and_wait(
+        '任性的天才科学家，以及任劳任怨的助手兼实验品',
+      );
+      await tachyon.print_and_wait('两人的关系只要继续维持着这样就好');
+      await tachyon.print_and_wait('维持到……什么时候呢');
+      await tachyon.print_and_wait(
+        '一年？两年？到自己毕业？到进入大学？到出社会以前？',
+      );
+      await tachyon.print_and_wait('这样的关系，有办法维持到那个时候吗？');
       era.println();
-      await tachyon.say_and_wait(['快点回来吧，', callname, '……']);
+      await tachyon.say_and_wait('唉……');
+      era.println();
+      await tachyon.print_and_wait(
+        '但无论如何，自己已经做出了选择，所以现在，这样就好',
+      );
     }
+    era.println();
+    await tachyon.say_and_wait(['快点回来吧，', callname, '……']);
   };
 
   handlers[49] = async (tachyon, me, callname) => {

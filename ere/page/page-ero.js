@@ -21,6 +21,8 @@ const {
 } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 const { get_random_value } = require('#/utils/value-utils');
@@ -786,7 +788,8 @@ async function page_ero(lover) {
         era.get(`love:${e}`) >= 75 &&
         sys_check_awake(e) &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
-        !era.get(`talent:${e}:绿帽癖`),
+        !era.get(`talent:${e}:绿帽癖`) &&
+        get_custom_mec(e).is_anger_for_unfaithful(),
     );
     const me = get_chara_talk(0);
     for (const chara_id of temp_chara_list) {

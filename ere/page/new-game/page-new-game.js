@@ -21,7 +21,6 @@ const { attr_names } = require('#/data/train-const');
 module.exports = async () => {
   let flag_new_game = true;
   let player_name = '';
-  let flag_select_gender = false;
 
   era.resetData();
 
@@ -60,60 +59,84 @@ module.exports = async () => {
         await era.printAndWait('太长了，请重新签名！');
         player_name = '';
       }
-    } else if (!flag_select_gender) {
-      // 不在输入性别子循环
-      if (player_gender === 3) {
-        // 未输入性别
-        era.printMultiColumns([
-          {
-            content: '选择性别',
-            type: 'button',
-            accelerator: 0,
-            config: { width: 6 },
-          },
-          {
-            content: '重新签名',
-            type: 'button',
-            accelerator: 10,
-            config: { width: 6 },
-          },
-          {
-            content: '返回上一级',
-            type: 'button',
-            accelerator: 99,
-            config: { width: 12, align: 'right' },
-          },
-        ]);
-      } else {
-        //均已输入
-        era.printMultiColumns([
-          {
-            content: '提交聘书',
-            type: 'button',
-            accelerator: 1,
-            config: { width: 6 },
-          },
-          {
-            content: '重新签名',
-            type: 'button',
-            accelerator: 10,
-            config: { width: 6 },
-          },
-          {
-            content: '返回上一级',
-            type: 'button',
-            accelerator: 99,
-            config: { width: 12, align: 'right' },
-          },
-        ]);
-      }
-
-      let ret = await era.input();
-
+    } else if (player_gender === 3) {
+      // 再输入性别子循环
+      era.printMultiColumns([
+        { type: 'text', content: '（请输入性别）' },
+        {
+          accelerator: 0,
+          config: { width: 4 },
+          content: '女性',
+          type: 'button',
+        },
+        {
+          accelerator: 1,
+          config: { width: 4 },
+          content: '男性',
+          type: 'button',
+        },
+        {
+          accelerator: 10,
+          config: { width: 4 },
+          content: '扶她',
+          type: 'button',
+        },
+        {
+          accelerator: 98,
+          config: { width: 4 },
+          content: '重新签名',
+          type: 'button',
+        },
+        {
+          accelerator: 99,
+          config: { align: 'right', width: 8 },
+          content: '返回上一级',
+          type: 'button',
+        },
+      ]);
+      const ret = await era.input();
       switch (ret) {
         case 0:
-          flag_select_gender = true; //进入输入性别子循环
+        case 1:
+        case 10:
+          player_gender = ret;
           break;
+        case 98:
+          player_name = '';
+          break;
+        case 99:
+          flag_new_game = false;
+      }
+    } else {
+      //均已输入
+      era.printMultiColumns([
+        {
+          accelerator: 1,
+          config: { width: 6 },
+          content: '提交聘书',
+          type: 'button',
+        },
+        {
+          accelerator: 97,
+          config: { width: 6 },
+          content: '重新签名',
+          type: 'button',
+        },
+        {
+          accelerator: 98,
+          config: { width: 6 },
+          content: '重新选择性别',
+          type: 'button',
+        },
+        {
+          accelerator: 99,
+          config: { align: 'right', width: 6 },
+          content: '返回上一级',
+          type: 'button',
+        },
+      ]);
+
+      switch (await era.input()) {
         case 1:
           era.set('callname:0:-1', player_name);
           era.set('cflag:0:性别', player_gender);
@@ -124,9 +147,6 @@ module.exports = async () => {
 
           if (await page_custom()) {
             return false;
-          }
-          if (era.get('flag:角色性别')) {
-            era.set('cflag:0:性别', era.get('flag:角色性别'));
           }
 
           // 0号角色初始化
@@ -140,7 +160,6 @@ module.exports = async () => {
           era.set('flag:当前月', 1);
           era.set('flag:当前周', 0);
           era.set('flag:当前位置', location_enum.office);
-          era.set('flag:极端粉丝', []);
           era.set('cflag:0:育成回合计时', 4800);
 
           // 游戏设置
@@ -169,39 +188,15 @@ module.exports = async () => {
 
           await sys_next_week();
           return true;
-        case 10:
+        case 97:
           player_name = '';
-          player_gender = era.get('flag:角色性别') || 3;
+          break;
+        case 98:
+          player_gender = 3;
           break;
         case 99:
           flag_new_game = false;
       }
-    } else {
-      // 再输入性别子循环
-      era.printMultiColumns([
-        {
-          content: '女性',
-          type: 'button',
-          accelerator: 0,
-          config: { width: 6 },
-        },
-        {
-          content: '男性',
-          type: 'button',
-          accelerator: 1,
-          config: { width: 6 },
-        },
-        {
-          content: '扶她',
-          type: 'button',
-          accelerator: 10,
-          config: { width: 6 },
-        },
-      ]);
-
-      let ret = await era.input();
-      player_gender = Number(ret);
-      flag_select_gender = false;
     }
   }
   return false;

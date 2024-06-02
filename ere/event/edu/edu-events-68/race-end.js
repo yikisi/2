@@ -12,7 +12,7 @@ const { attr_enum } = require('#/data/train-const');
 
 /**
  * @param {HookArg} hook
- * @param {{race:number,rank:number,motivation_change:number,relation_change:number,attr_change:number[],pt_change:number,base_change:Record<string,number>}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
   const kita = get_chara_talk(68),
@@ -293,7 +293,7 @@ module.exports = async (hook, extra_flag) => {
         `而后，满身汗水的 ${kita.name} 就这么呆呆的望着 ${me.name}，那因为激烈运动而微微泛起红晕的可爱脸蛋上露出了模糊不清的表情。`,
       );
       await kita.say_and_wait(
-        `诶嘿嘿，总感觉还是没什么实感呢，虽然还是一如既往地以‘祭典’风格奔跑的……`,
+        `诶嘿嘿，总感觉还是没什么实感呢，虽然还是一如既往地以『祭典』风格奔跑的……`,
       );
       await kita.say_and_wait(
         `但是，果然啊……没有训练员${me.get_adult_sex_title()}的帮助，尽凭我自己是达不到这个程度的吧。`,
@@ -414,7 +414,7 @@ module.exports = async (hook, extra_flag) => {
       `在音乐奏响起的一刹那间，${me.name} 的耳边传来了女人的声音。`,
     );
     await era.printAndWait(
-      `${me.name} 回过头，出现在 ${me.name} 面前的是特雷森学生会的副会长，有着“女帝”别名的${pero.name}。`,
+      `${me.name} 回过头，出现在 ${me.name} 面前的是特雷森学生会的副会长，有着『女帝』别名的${pero.name}。`,
     );
     await pero.say_and_wait(
       `我知道您很想欣赏 ${kita.name} 同学的胜利live，所以我稍微说两句话就走，可以么？`,

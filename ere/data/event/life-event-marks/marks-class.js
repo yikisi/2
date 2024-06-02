@@ -9,6 +9,10 @@ class LifeEventMarks extends PersonalEventMarks {
   unexpected_pregnant;
   // 拖回家强奸
   marital_rape;
+  // 临时胸围
+  breast_buff;
+  // 临时腰围
+  waist_buff;
 
   /** @param {number} chara_id */
   constructor(chara_id) {

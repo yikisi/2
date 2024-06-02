@@ -328,6 +328,12 @@ const race_enum = {
   hous_sta: 0,
   // 海洋杯
   mari_cup: 0,
+  // 肯塔基德比
+  kent_der: 0,
+  // 普瑞克尼斯锦标赛
+  prea_sta: 0,
+  // 贝蒙锦标
+  belm_sta: 0,
 };
 Object.keys(race_enum).forEach((e, i) => (race_enum[e] = i));
 
@@ -495,6 +501,9 @@ race_infos[race_enum.zeni_you] = require('#/data/race/g1/race-zeni-you');
 race_infos[race_enum.huku_sta] = require('#/data/race/op/race-huku-sta');
 race_infos[race_enum.hous_sta] = require('#/data/race/op/race-hous-sta');
 race_infos[race_enum.mari_cup] = require('#/data/race/g3/race-mari-cup');
+race_infos[race_enum.kent_der] = require('#/data/race/g1/race-kent-der');
+race_infos[race_enum.prea_sta] = require('#/data/race/g1/race-prea-sta');
+race_infos[race_enum.belm_sta] = require('#/data/race/g1/race-belm-sta');
 
 race_infos.forEach((e) => {
   const param_id = e.param_id;

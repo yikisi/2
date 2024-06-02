@@ -1,6 +1,6 @@
-const crypto = require('crypto');
-
 const era = require('#/era-electron');
+
+const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const date_indicator = require('#/page/components/date-indicator');
 
@@ -10,12 +10,8 @@ const { location_name } = require('#/data/locations');
 
 /** @param {({id:number,[limit]:boolean}|number)[]} item_list */
 module.exports = async (item_list) => {
-  const hash = crypto.createHash('md5');
-  hash.update(era.get('callname:0:-1') + era.get('flag:当前回合数'));
   const item_keys = era.get('itemkeys'),
-    off_index = Number(
-      `0x${hash.digest('hex').substring(0, Math.max(Number(item_keys.length).toString(16).length, 1))}`,
-    ),
+    off_index = era.get('flag:打折商品'),
     off = item_keys[off_index % item_keys.length],
     price_cache = era.get(`itemprice:${off}`),
     in_list = item_list.filter((e) => e === off || e.id === off).length > 0;
@@ -166,7 +162,7 @@ module.exports = async (item_list) => {
     });
     buffer.push({
       type: 'text',
-      content: '\n* 点击道具查看说明\n** 带“限”字样的商品只能拥有一件',
+      content: '\n* 点击道具查看说明\n** 带「限」字样的商品只能拥有一件',
     });
     if (in_list) {
       buffer.push({
@@ -314,10 +310,7 @@ module.exports = async (item_list) => {
           );
           break;
         case 6:
-          cur_coin = era.add(
-            'flag:当前马币',
-            -price[selected_item] * to_buy[selected_item],
-          );
+          sys_change_money(-price[selected_item] * to_buy[selected_item]);
           era.add(`item:${selected_item}`, to_buy[selected_item]);
           await era.printAndWait(
             `购买了 ${to_buy[selected_item]} 个 ${era

@@ -78,7 +78,7 @@ module.exports = async (chara_id) => {
             me.get_colored_name(),
             ' 和 ',
             chara.get_colored_name(),
-            ' 一齐向特雷森学院的大礼堂走去参加活动。',
+            ' 一齐向特雷森学园的大礼堂走去参加活动。',
           ]);
           await era.printAndWait([
             me.get_colored_name(),
@@ -111,7 +111,7 @@ module.exports = async (chara_id) => {
         }
       } else {
         await era.printAndWait([
-          '每到这个时候，特雷森学院都会举行活动，其中之一就是邀请数位殿堂',
+          '每到这个时候，特雷森学园都会举行活动，其中之一就是邀请数位殿堂',
           chara.get_uma_sex_title(),
           '前来进行连续几天的演讲，向其他',
           chara.get_uma_sex_title(),

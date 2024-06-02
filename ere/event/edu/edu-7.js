@@ -23,7 +23,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const color_7 = require('#/data/chara-colors').chara_colors[7];
 const { lust_border } = require('#/data/ero/orgasm-const');
-const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
@@ -109,9 +108,8 @@ handlers[event_hooks.school_atrium] = async (
   }
   const gold_ship = get_chara_talk(7),
     me = get_chara_talk(0),
-    event_marks = new GoldShipEduMarks(),
-    edu_weeks = era.get('cflag:7:育成回合计时');
-  if (edu_weeks === 47 + 3) {
+    event_arg = event_object?.arg;
+  if (event_arg === 47 + 3) {
     await print_event_name(
       [{ color: color_7[1], content: '母亲比神还要强编' }],
       gold_ship,
@@ -147,7 +145,7 @@ handlers[event_hooks.school_atrium] = async (
     era.println();
 
     await era.printAndWait(
-      `经典三冠首战的皋月赏就快到了，还是不要想布丁吧……但 ${gold_ship.name} 还是自顾自地一溜烟冲出去寻找那个所谓的『伊甸园』了。`,
+      `经典三冠首战的皋月赏就快到了，还是不要想布丁吧……但 ${gold_ship.name} 还是自顾自地一溜烟冲出去寻找那个所谓的「伊甸园」了。`,
     );
     era.println();
 
@@ -187,7 +185,7 @@ handlers[event_hooks.school_atrium] = async (
 
     get_attr_and_print_in_event(7, new Array(5).fill(3), 45) &&
       (await era.waitAnyKey());
-  } else if (edu_weeks === 95 + 41) {
+  } else if (event_arg === 95 + 41) {
     const festa = get_chara_talk(49);
     await print_event_name(
       [{ color: color_7[1], content: '认真对决编' }],
@@ -284,8 +282,7 @@ handlers[event_hooks.school_atrium] = async (
 
     get_attr_and_print_in_event(7, [0, 0, 0, 5, 0], 0) &&
       (await era.waitAnyKey());
-  } else if (event_marks.heroine_red === 1) {
-    event_marks.heroine_red++;
+  } else if (event_arg === 'heroine_red') {
     await print_event_name(
       [{ color: color_7[1], content: '主角的红色！' }],
       gold_ship,
@@ -343,8 +340,7 @@ handlers[event_hooks.school_atrium] = async (
       get_attr_and_print_in_event(7, [0, 0, 0, 20, 0], 0) &&
         (await era.waitAnyKey());
     }
-  } else if (event_marks.sudden_look_back === 1) {
-    event_marks.sudden_look_back++;
+  } else if (event_arg === 'sudden_look_back') {
     await print_event_name(
       [{ color: color_7[1], content: '阿船的突然追忆过去篇！' }],
       gold_ship,
@@ -462,11 +458,11 @@ handlers[event_hooks.school_atrium] = async (
     era.println();
 
     if (ret === 1) {
-      // TODO 技能 『天赋异禀（切れ者）』
+      // TODO 技能「天赋异禀（切れ者）」
       get_attr_and_print_in_event(7, [0, 10, 0, 0, 10], 0) &&
         (await era.waitAnyKey());
     } else {
-      // TODO 技能『天赋异禀（切れ者）』
+      // TODO 技能「天赋异禀（切れ者）」
       get_attr_and_print_in_event(7, [20, 0, 0, 0, 0], 0) &&
         (await era.waitAnyKey());
     }
@@ -477,6 +473,9 @@ handlers[event_hooks.school_atrium] = async (
 handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
   if (era.get('flag:当前互动角色') !== 7) {
     add_event(hook.hook, event_object);
+    return;
+  }
+  if (event_object?.arg !== 'golden_ship_date') {
     return;
   }
   const gold_ship = get_chara_talk(7),
@@ -539,6 +538,9 @@ handlers[event_hooks.school_rooftop] = async (
 ) => {
   if (era.get('flag:当前互动角色') !== 7) {
     add_event(hook.hook, event_object);
+    return;
+  }
+  if (event_object?.arg !== 'shoubu') {
     return;
   }
   const gold_ship = get_chara_talk(7),
@@ -639,7 +641,7 @@ handlers[event_hooks.school_rooftop] = async (
 
         get_attr_and_print_in_event(7, undefined, 60) &&
           (await era.waitAnyKey());
-        // TODO 获得技能『非根干距离〇』
+        // TODO 获得技能「非根干距离〇」
       } else {
         await era.printAndWait(
           `${gold_ship.name} 使出了浑身解数，但还是没赢过 ${festa.name}……`,
@@ -661,6 +663,9 @@ handlers[event_hooks.race_end] = require('#/event/edu/edu-events-7/race-end');
 handlers[event_hooks.out_church] = async (hook, __, event_object) => {
   if (era.get('flag:当前互动角色') !== 7) {
     add_event(hook.hook, event_object);
+    return;
+  }
+  if (event_object.arg !== 95 + 1) {
     return;
   }
   const gold_ship = get_chara_talk(7),

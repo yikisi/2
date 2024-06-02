@@ -46,7 +46,7 @@ handlers[event_hooks.good_morning] = () => {
   const callname = sys_get_callname(37, 0);
   const talk_arr = [
     `早上好，${callname}。新的一天，新的旅程，新的希望，一起用积极的态度去面对吧。`,
-    `Guten Tag，${callname}。在此祝您度过一个美好的一天。`,
+    `Guten Tag，${callname}。在此祝您度过美好的一天。`,
     `Guten Morgen，${callname}。又是新的一天，您是否有为今天的计划做好准备呢？`,
     `上午好，${callname}。祝您即使在忙碌之中，也能抽出时间欣赏身边的美好。`,
   ];

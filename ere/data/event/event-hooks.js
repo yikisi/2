@@ -68,6 +68,8 @@ const hooks = {
   recruit_start: 0,
   // 前往中庭
   school_atrium: 0,
+  // 前往理事长办公室
+  school_chairman: 0,
   // 前往天台
   school_rooftop: 0,
   // 选择互动角色

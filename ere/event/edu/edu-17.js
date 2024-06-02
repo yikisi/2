@@ -11,6 +11,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const color_17 = require('#/data/chara-colors').chara_colors[17];
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
 /** @type {Record<string,function(hook:HookArg,extra_flag:*,event_object:EventObject):Promise<*>>} */
@@ -32,7 +33,7 @@ handlers[event_hooks.week_end] = async () => {
 
     await luna.print_and_wait('小的时候，家里人并不对我抱有期望。');
     await luna.print_and_wait(
-      '我被允许四处疯玩，也被允许不参加训练，似乎对我，大家都抱有“怎么都好”的态度。',
+      '我被允许四处疯玩，也被允许不参加训练，似乎对我，大家都抱有「怎么都好」的态度。',
     );
     await luna.print_and_wait('象征家就是这样的地方，人们只关心实力。');
     await luna.print_and_wait('于是，强大的姐姐们在赛道上飞驰。');
@@ -55,7 +56,7 @@ handlers[event_hooks.week_end] = async () => {
     await luna.print_and_wait(
       '只有在极致的奔跑下，我才会变得平静……才会变得像我自己。',
     );
-    await luna.print_and_wait('“露娜。”');
+    await luna.print_and_wait('「露娜。」');
     await luna.print_and_wait(
       '妈妈给我起了一个好听的名字，也是一个温柔的名字。',
     );
@@ -65,7 +66,7 @@ handlers[event_hooks.week_end] = async () => {
     );
     await luna.print_and_wait('这时，我才意识到，为什么家人们不会管教我。');
     await luna.print_and_wait(
-      '因为，代代流传的“象征”之血，会指引我走上一条既定的道路。',
+      '因为，代代流传的「象征」之血，会指引我走上一条既定的道路。',
     );
     await luna.print_and_wait('胜利。胜利。');
     await luna.print_and_wait('只要能胜利，哪怕我变得不再是自己也是被允许的。');
@@ -172,7 +173,7 @@ handlers[event_hooks.week_end] = async () => {
       `露娜还年轻，${luna.sex}一定还有机会……不一定非要这一次。`,
     );
     await era.printAndWait(
-      `${CharaTalk.me.name} 尝试说服自己。但 ${CharaTalk.me.name} 明白，全日本对露娜——对鲁铎象征的期待，不允许${luna.sex}“临阵脱逃”。`,
+      `${CharaTalk.me.name} 尝试说服自己。但 ${CharaTalk.me.name} 明白，全日本对露娜——对鲁铎象征的期待，不允许${luna.sex}「临阵脱逃」。`,
     );
     await era.printAndWait('露娜也一定不愿意就此放弃。');
     await era.printAndWait(
@@ -190,7 +191,7 @@ handlers[event_hooks.week_end] = async () => {
     era.printButton('「不会吧？！」', 1);
     await era.input();
     await era.printAndWait(
-      `${CharaTalk.me.name} 意识到，露娜似乎用行动向你证明了${luna.sex}的决心。`,
+      `${CharaTalk.me.name} 意识到，露娜似乎用行动向 ${CharaTalk.me.name} 证明了${luna.sex}的决心。`,
     );
     era.drawLine();
     await era.printAndWait(
@@ -215,7 +216,7 @@ handlers[event_hooks.week_end] = async () => {
     era.printButton('「抱歉……」', 2);
     await era.input();
     await era.printAndWait(
-      `${CharaTalk.me.name} 失魂落魄地离开了学生会。${CharaTalk.me.name} 清楚，学院离不开露娜。`,
+      `${CharaTalk.me.name} 失魂落魄地离开了学生会。${CharaTalk.me.name} 清楚，学园离不开露娜。`,
     );
     await era.printAndWait('露娜也清楚，日本不能在这个时候失去鲁铎象征。');
 
@@ -296,23 +297,34 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   if (era.get('cflag:17:育成回合计时') === 47 + 17 && !event_marks.dissonance) {
     event_marks.dissonance++;
     era.println();
-    await print_event_name('不协调音', chara_talk);
+    await print_event_name(
+      [{ color: color_17[1], content: '不协调音' }],
+      chara_talk,
+    );
     const luna = is_emperor ? 9017 : 17;
-    await era.printAndWait(
-      '作为目标的日本德比迫在眉睫，训练也进入了最后阶段。',
-    );
-    await era.printAndWait(
-      `在 ${chara_talk.name} 于训练场上疾驰时，围观的赛马娘和训练员们纷纷发出赞叹。`,
-    );
+    await era.printAndWait([
+      '作为目标的 ',
+      race_infos[race_enum.toky_yus].get_colored_name(),
+      ' 迫在眉睫，训练也进入了最后阶段。',
+    ]);
+    await era.printAndWait([
+      '在 ',
+      chara_talk.get_colored_name(),
+      ' 于训练场上疾驰时，围观的赛',
+      chara_talk.get_uma_sex_title(),
+      '和训练员们纷纷发出赞叹。',
+    ]);
     await era.printAndWait(
       `一圈又一圈，${CharaTalk.me.name} 发现 ${chara_talk.name} 状态极好，在奔跑时甚至露出了笑容。`,
     );
     await era.printAndWait(
       `尽管如此，${CharaTalk.me.name} 心里仍有极大的担忧。`,
     );
-    await era.printAndWait(
-      '在皋月赏之后，压在露娜肩上，本就沉重如山的负担，越发不可收拾。',
-    );
+    await era.printAndWait([
+      '在 ',
+      race_infos[race_enum.sats_sho].get_colored_name(),
+      ' 之后，压在露娜肩上，本就沉重如山的负担，越发不可收拾。',
+    ]);
     await era.printAndWait(`或许，${chara_talk.name} 不像表面上那样平静。`);
     era.printButton(
       is_emperor
@@ -322,7 +334,9 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
     );
     await era.input();
     await era.printAndWait(`在一圈结束时，${CharaTalk.me.name} 高声呼喊。`);
-    await era.printAndWait(`听到你的话，${chara_talk.name} 停下了脚步。`);
+    await era.printAndWait(
+      `听到 ${CharaTalk.me.name} 的话，${chara_talk.name} 停下了脚步。`,
+    );
     if (is_emperor) {
       await era.printAndWait(
         `片刻后，气喘吁吁的皇帝向 ${CharaTalk.me.name} 走来。不知为何，原本她畅快的表情变得愤怒。`,
@@ -350,7 +364,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
         `看着 ${CharaTalk.me.name}，皇帝冷哼了一声，径直离开了赛场。`,
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 本能地向她伸出手，但${chara_talk.sex}走得太快了，${CharaTalk.me.name} 没能拦住${chara_talk.sex}。`,
+        `${CharaTalk.me.name} 本能地向${chara_talk.sex}伸出手，但${chara_talk.sex}走得太快了，${CharaTalk.me.name} 没能拦住${chara_talk.sex}。`,
       );
       era.printButton('「抱歉。」', 1);
       era.printButton('「好好休息吧。」', 2);
@@ -360,7 +374,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
       );
     } else {
       await era.printAndWait(
-        `片刻后，气喘吁吁的露娜向你走来。不知为何，原本${chara_talk.sex}畅快的表情变得暗淡。`,
+        `片刻后，气喘吁吁的露娜向 ${CharaTalk.me.name} 走来。不知为何，原本${chara_talk.sex}畅快的表情变得暗淡。`,
       );
       await chara_talk.say_and_wait(
         `${CharaTalk.me.actual_name}，我的状态很好。日本德比很近了，我必须再加强一些！`,
@@ -383,7 +397,15 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
       await era.printAndWait(
         `跨越了皋月赏，即将进军德比。此时此刻，比起训练的状态，${CharaTalk.me.name} 更想知道露娜的想法。`,
       );
-      await era.printAndWait('看着你，露娜思考了一会。她向你露出了微笑。');
+      await era.printAndWait([
+        '看着 ',
+        CharaTalk.me.get_colored_name(),
+        '，露娜思考了一会。',
+        chara_talk.sex,
+        '向 ',
+        CharaTalk.me.get_colored_name(),
+        ' 露出了微笑。',
+      ]);
       await chara_talk.say_and_wait(
         '如果这种程度都做不到的话，我们的理想根本无法实现。',
       );
@@ -394,7 +416,11 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
       era.printButton('「抱歉。」', 1);
       era.printButton('「好好休息吧。」', 2);
       await era.input();
-      await era.printAndWait('接过你递来的毛巾和水，露娜小声地答应了。');
+      await era.printAndWait([
+        '接过 ',
+        CharaTalk.me.get_colored_name(),
+        ' 递来的毛巾和水，露娜小声地答应了。',
+      ]);
     }
     await handle_debuff(event_marks, luna);
     hook.override = true;

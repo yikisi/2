@@ -134,7 +134,7 @@ module.exports = (handlers) => {
     await era.printAndWait([me.get_colored_name(), ' 点了点头作为回应']);
     await era.printAndWait('啊，难道说是担心钱的问题吗？');
     era.printButton(
-      '「毕竟这算出差，机票钱什么的学院会出，这方面不用担心」',
+      '「毕竟这算出差，机票钱什么的学园会出，这方面不用担心」',
       1,
     );
     await era.input();

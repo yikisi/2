@@ -1,7 +1,6 @@
 const era = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
-const { sys_push_crazy_fan } = require('#/system/sys-calc-flag');
 
 const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
@@ -12,6 +11,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const CrazyFans = require('#/data/event/crazy-fans');
 const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -88,7 +88,9 @@ module.exports = class extends CustomizedCheck {
       );
     }
     if (edu_weeks < 3 * 48) {
-      const event_obj_special = new EventObject(68, cb_enum.edu, true);
+      const event_obj_special = new EventObject(68, cb_enum.edu, true).set_arg(
+        edu_weeks,
+      );
       check_and_add_event(
         event_marks,
         edu_weeks,
@@ -159,7 +161,7 @@ module.exports = class extends CustomizedCheck {
       ).length < 4
     ) {
       new KitaEduMarks().crazy_fan++;
-      sys_push_crazy_fan(68);
+      new CrazyFans().push(68);
     } else {
       add_event(event_hooks.week_end, new EventObject(68, cb_enum.edu));
     }

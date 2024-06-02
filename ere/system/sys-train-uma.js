@@ -6,12 +6,18 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_get_succ_rate } = require('#/system/sys-calc-chara-param');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
+
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
 const TrainFailParams = require('#/data/event/extra-flag/train-fail-params');
+const TrainSuccessParams = require('#/data/event/extra-flag/train-success-params');
+const DarleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-340');
+const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
+const ByerleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-342');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_train_buff } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const {
@@ -23,12 +29,12 @@ const {
 
 /**
  * @param {number} chara_id
- * @param {string} attr_name
+ * @param {number} attr
  * @param {boolean} [between_weeks]
  */
-function get_train_bonus(chara_id, attr_name, between_weeks) {
+function get_train_bonus(chara_id, attr, between_weeks) {
   let train_buff =
-    era.get(`cflag:${chara_id}:${attr_name}加成`) +
+    era.get(`cflag:${chara_id}:${attr_names[attr]}加成`) +
     era.get('flag:训练加成') +
     (5 + (era.get(`cflag:${chara_id}:气性`) === 2)) *
       (era.get(`status:${chara_id}:摸鱼`)
@@ -37,12 +43,30 @@ function get_train_bonus(chara_id, attr_name, between_weeks) {
     (era.get(`cflag:${chara_id}:气性`) === -3) -
     0.004 * era.get(`base:${chara_id}:压力`) +
     get_custom_mec(chara_id).get_train_buff();
+  switch (attr) {
+    case attr_enum.speed:
+    case attr_enum.strength:
+      if (era.get('cflag:340:招募状态') === recruit_flags.yes) {
+        train_buff += 50 * (1 + new DarleyLifeMarks().buff);
+      }
+      break;
+    case attr_enum.intelligence:
+      if (era.get('cflag:341:招募状态') === recruit_flags.yes) {
+        train_buff += 50 * (1 + new GodolphinLifeMarks().buff);
+      }
+      break;
+    case attr_enum.endurance:
+    case attr_enum.toughness:
+      if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
+        train_buff += 50 * (1 + new ByerleyLifeMarks().buff);
+      }
+  }
   if (!between_weeks) {
     train_buff +=
       10 * era.get(`talent:${chara_id}:训练`) +
       get_trainer_train_buff(chara_id);
   }
-  return train_buff;
+  return Math.max(train_buff, -100);
 }
 
 /**
@@ -69,7 +93,7 @@ function get_success_base_reward(
       5 +
     get_random_value(0, 5);
 
-  const train_buff = get_train_bonus(chara_id, attr_names[attr], between_weeks);
+  const train_buff = get_train_bonus(chara_id, attr, between_weeks);
   era.logger.debug(
     `角色 ${chara_id} 训练效果：${base_inc} +${train_buff.toFixed(2)}%`,
   );
@@ -109,6 +133,11 @@ function get_success_base_reward(
   }
   if (era.get(`cflag:${chara_id}:气性`) === -1) {
     changes.attr_change = changes.attr_change.map((e) => e + (e > 0));
+  }
+  if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
+    changes.pt_change = Math.floor(
+      changes.pt_change * (1 + 0.5 * (1 + new GodolphinLifeMarks().buff)),
+    );
   }
 }
 
@@ -155,10 +184,15 @@ module.exports = {
         era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置'),
       );
 
-      const ret = await call_edu_script(chara_id, event_hooks.train_success, {
-        stamina_ratio: stamina_ratio * !era.get(`status:${chara_id}:摸鱼`),
-        train: attr,
-      });
+      /** @type {TrainSuccessParams} */
+      const ret = await call_edu_script(
+        chara_id,
+        event_hooks.train_success,
+        new TrainSuccessParams(
+          stamina_ratio * !era.get(`status:${chara_id}:摸鱼`),
+          attr,
+        ),
+      );
       ret.attr && (changes.attr_change[attr] += ret.attr);
       ret.stamina && (train_cost.stamina += ret.stamina);
       ret.relation_change && (relation_change += ret.relation_change);

@@ -92,15 +92,15 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `走进学院，${CharaTalk.me.name} 发现行人相当稀少——或者说，大门紧闭。`,
+        `走进学园，${CharaTalk.me.name} 发现行人相当稀少——或者说，大门紧闭。`,
       );
       await era.printAndWait(
         `${CharaTalk.me.name} 意识到自己来的时间有点早……或许太早了，真应该和浴室搏斗一番。`,
       );
       await era.printAndWait(
-        `但难得有时间，就四处走走吧。${CharaTalk.me.name} 翻过了围墙，跳进了学院里。`,
+        `但难得有时间，就四处走走吧。${CharaTalk.me.name} 翻过了围墙，跳进了学园里。`,
       );
-      await era.printAndWait('学院静悄悄的。');
+      await era.printAndWait('学园静悄悄的。');
       await era.printAndWait(
         `${CharaTalk.me.name} 有些好奇地抬起头四处张望。平日里，恐怕不会有人在此时进入校舍区，而正常时间，特雷森总是热闹非凡。`,
       );
@@ -257,7 +257,7 @@ module.exports = {
         `${chara_17.sex}显然非常兴奋，直接将信递到了 ${CharaTalk.me.name} 的手里。`,
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 讪讪笑着，接过了这“烫手山芋”。`,
+        `${CharaTalk.me.name} 讪讪笑着，接过了这『烫手山芋』。`,
       );
       await era.printAndWait(
         `任务完成，干事就风一样地跑开了。${CharaTalk.me.name} 打了个哈哈早退。`,

@@ -1,7 +1,11 @@
 const era = require('#/era-electron');
 
 const sys_change_hair = require('#/system/chara/sys-change-hair');
-const { get_bust_size } = require('#/system/ero/sys-calc-ero-status');
+const {
+  get_bust_size,
+  get_hip_size,
+  get_waist_size,
+} = require('#/system/ero/sys-calc-ero-status');
 const { get_image } = require('#/system/sys-calc-image');
 
 const { join_list } = require('#/utils/list-utils');
@@ -24,6 +28,7 @@ const {
   back_hairs,
   chara_has_ero_image,
   front_hairs,
+  race_clothe_list,
   top_hairs,
 } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');
@@ -58,8 +63,7 @@ module.exports = {
       hair_color = era.get(`cstr:${chara.id}:发色`),
       growth = era.get(`cflag:${chara.id}:成长阶段`),
       race = era.get(`cflag:${chara.id}:种族`),
-      skin = get_skin(chara.id),
-      weight_delta = era.get(`base:${chara.id}:体重偏差`);
+      skin = get_skin(chara.id);
     let hair = era.get(`cstr:${chara.id}:呆毛`);
     hair = join_list(
       [
@@ -125,10 +129,10 @@ module.exports = {
       if (era.get(`status:${chara.id}:发胖`)) {
         right_intro_list.push('幸、幸福胖哦……');
       } else {
-        right_intro_list.push(weight_delta >= 2000 ? '微增' : '控制得当');
+        right_intro_list.push(
+          era.get(`base:${chara.id}:体重偏差`) >= 2000 ? '微增' : '控制得当',
+        );
       }
-      const w_delta = Math.floor(weight_delta / 1000),
-        h_delta = Math.floor(weight_delta / 2000);
       if (chara.sex_code - 1) {
         if (flags.show_body) {
           right_intro_list.push(
@@ -138,14 +142,9 @@ module.exports = {
             ' (',
             get_breast_cup(chara.id, flags.show_all_body).toString(),
             ' Cup) · W',
-            (era.get(`cflag:${chara.id}:腰围`) + w_delta).toString(),
+            get_waist_size(chara.id).toString(),
             ' · H',
-            (
-              era.get(`cflag:${chara.id}:臀围`) +
-              5 * (era.get(`talent:${chara.id}:淫臀`) === 2) +
-              2 * era.get(`status:${chara.id}:发情`) +
-              h_delta
-            ).toString(),
+            get_hip_size(chara.id).toString(),
           );
         } else {
           right_intro_list.push({ isBr: true }, '没有更多数据了……');
@@ -165,16 +164,16 @@ module.exports = {
       {
         accelerator: 30,
         config: {
-          buttonType: cur_title ? 'warning' : 'info',
+          buttonType: cur_title ? 'info' : 'warning',
           disabled: !cur_title,
           showAcc: false,
-          width: 2,
+          width: 1,
         },
-        content: cur_title ? '佩戴' : '摘下',
+        content: 'E',
         type: 'button',
       },
       {
-        config: { width: 4 },
+        config: { width: 5 },
         content: '（无）',
         type: 'text',
       },
@@ -184,22 +183,23 @@ module.exports = {
         {
           accelerator: i + 31,
           config: {
-            buttonType: e.s ? 'info' : 'warning',
-            disabled: e.s && i === 0,
+            buttonType: e.s ? 'warning' : 'info',
+            disabled: e.s,
             showAcc: false,
-            width: 2,
+            width: 1,
           },
-          content: e.s ? '摘下' : '佩戴',
+          content: 'E',
           type: 'button',
         },
         {
-          config: { color: e.c, width: 4 },
+          config: { color: e.c, width: 5 },
           content: e.n,
           type: 'text',
         },
       );
     });
 
+    const action_buffer = [];
     if (
       !chara_has_ero_image[chara.id] &&
       (!chara.id ||
@@ -207,14 +207,34 @@ module.exports = {
         !era.get(`cflag:${chara.id}:父方角色`) ||
         !era.get(`cflag:${chara.id}:母方角色`))
     ) {
+      action_buffer.push({
+        accelerator: 100,
+        config: { width: 4 },
+        content: '梳头',
+        type: 'button',
+      });
+    }
+    const image_prefix = era.get(`cstr:${chara.id}:头像`);
+    let image_list;
+    if (
+      era.get(`cflag:${chara.id}:种族`) &&
+      chara.id &&
+      (image_list = race_clothe_list.filter((e) =>
+        era.checkImage(`${image_prefix}${e.s}`),
+      )).length > 1 &&
+      era.get(`cstr:${chara.id}:决胜服`) !== -1
+    ) {
+      action_buffer.push({
+        accelerator: 101,
+        config: { width: 8 },
+        content: '决胜服',
+        type: 'button',
+      });
+    }
+    if (action_buffer.length > 0) {
       title_info_list.push(
         { content: [{ isBr: true }], type: 'text' },
-        {
-          accelerator: 100,
-          config: { width: 12 },
-          content: '梳头',
-          type: 'button',
-        },
+        ...action_buffer,
       );
     }
 
@@ -228,6 +248,7 @@ module.exports = {
           while (flag_hair) {
             era.printInColRows(
               [
+                { type: 'divider' },
                 {
                   content: ['请选择 ', chara.get_colored_name(), ' 的新发型'],
                   type: 'text',
@@ -351,7 +372,7 @@ module.exports = {
             await era.clear();
             era.setToBottom();
           }
-        } else {
+        } else if (command !== 101) {
           const selected = command - 31;
           if (selected === -1) {
             title_list.forEach((e) => (e.s = false));
@@ -360,6 +381,78 @@ module.exports = {
           } else {
             title_list.forEach((e) => (e.s = false));
             title_list[selected].s = true;
+          }
+        } else {
+          const suffix = era.get(`cstr:${chara.id}:决胜服`);
+          era.setHorizontalAlign('space-evenly');
+          era.printInColRows(
+            [
+              { type: 'divider' },
+              {
+                content: [
+                  '现在 ',
+                  chara.get_colored_name(),
+                  ' 在参赛时',
+                  suffix === 0
+                    ? '按照节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着默认决胜服'
+                    : `穿着 ${image_list.find((e) => e.s === suffix).n}`,
+                  '。',
+                  { isBr: true },
+                  '要更换吗？',
+                ],
+                type: 'text',
+              },
+            ],
+            ...image_list.map((e, i) => ({
+              columns: [
+                { names: `${image_prefix}${e.s}_半身`, type: 'image.whole' },
+                {
+                  accelerator: i + 1,
+                  config: {
+                    align: 'center',
+                    disabled: suffix === e.s,
+                  },
+                  content: e.n,
+                  type: 'button',
+                },
+              ],
+              config: { width: 6 },
+            })),
+            [
+              {
+                accelerator: 98,
+                config: {
+                  align: 'center',
+                  disabled: suffix === 0,
+                  width: 12,
+                },
+                content: '即时选择',
+                type: 'button',
+              },
+              {
+                accelerator: 99,
+                config: { align: 'center', width: 12 },
+                content: '保持不变',
+                type: 'button',
+              },
+            ],
+          );
+          era.setHorizontalAlign('start');
+          const ret = await era.input();
+          if (ret === 98) {
+            await era.printAndWait([
+              '现在 ',
+              chara.get_colored_name(),
+              ' 在参赛时会按照场合和节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服。',
+            ]);
+            era.set(`cstr:${chara.id}:决胜服`, 0);
+          } else if (ret !== 99) {
+            await era.printAndWait([
+              '现在 ',
+              chara.get_colored_name(),
+              ` 在参赛时、URA颁奖典礼与结束育成后的殿堂周将身着 ${image_list[ret - 1].n}。`,
+            ]);
+            era.set(`cstr:${chara.id}:决胜服`, image_list[ret - 1].s);
           }
         }
       },

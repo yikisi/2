@@ -206,9 +206,9 @@ module.exports = (handlers) => {
         await say_by_passer_by_and_wait('解说', [
           '『最强的',
           tachyon.get_uma_sex_title(),
-          '，与最快的',
+          '』，与『最快的',
           tachyon.get_uma_sex_title(),
-          '，要在这里绝出胜负！』',
+          '』，要在这里决出胜负！',
         ]);
       }
       await tachyon.print_and_wait('啊啊');

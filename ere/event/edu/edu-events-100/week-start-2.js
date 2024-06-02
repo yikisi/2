@@ -324,7 +324,7 @@ module.exports = (handlers) => {
       acute.get_colored_name(),
       ' 的情人节礼物……原来如此。看来传说中的拳术师，很快就要隐退了啊——',
     ]);
-    era.drawLine({ content: '特雷森学院·楼道' });
+    era.drawLine({ content: '特雷森学园·楼道' });
     const a_call_d = sys_get_colored_callname(100, 19);
     await acute.say_and_wait([a_call_d, '，', a_call_d, '，不得了啦啊！～']);
     await digital.say_and_wait([
@@ -346,7 +346,7 @@ module.exports = (handlers) => {
     await acute.say_and_wait(
       '只是啊，在收到这么漂亮的花之后啊，感觉自己的心里也暖和起来了呢……啊，啊，啊啊啊……',
     );
-    era.printButton('「即便如此，也不是穿着浴袍在学院里狂奔的理由啦……」', 1);
+    era.printButton('「即便如此，也不是穿着浴袍在学园里狂奔的理由啦……」', 1);
     await era.input();
     await era.printAndWait('……呼，不过倒也还好。');
     await era.printAndWait([

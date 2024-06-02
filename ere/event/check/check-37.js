@@ -61,17 +61,17 @@ module.exports = class extends CustomizedCheck {
     if (edu_weeks < 3 * 48) {
       const edu_event_marks = new FlashEduMarks();
       const event_obj = new EventObject(37, cb_enum.edu);
-      const event_obj_special = new EventObject(37, cb_enum.edu, true);
+      const event_obj_special = new EventObject(37, cb_enum.edu, true).set_arg(
+        edu_weeks,
+      );
       check_and_add_event(
         edu_event_marks,
         edu_weeks,
         'black_treasure',
         event_hooks.out_shopping,
         event_obj,
+        () => new EventMarks(0).add(event_hooks.out_shopping),
       );
-      if (edu_event_marks.black_treasure === 1) {
-        new EventMarks(0).add(event_hooks.out_shopping);
-      }
 
       switch (edu_weeks) {
         case 47 + 1: // 新年的抱负

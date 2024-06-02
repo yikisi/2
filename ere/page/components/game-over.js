@@ -16,6 +16,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { buff_colors } = require('#/data/color-const');
 const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const CrazyFans = require('#/data/event/crazy-fans');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
@@ -53,15 +54,7 @@ async function game_over(again) {
       '每一个被束缚的奴隶都可以靠着他自己的手脱掉锁链。——莎士比亚',
       '我已不再孤单，如今我生命中的挚爱与我如此靠近。——悲惨世界',
     ];
-  } else if (
-    game_over &&
-    (temp = get_random_entry(
-      era.set(
-        'flag:极端粉丝',
-        era.get('flag:极端粉丝').filter((e) => e),
-      ),
-    ))
-  ) {
+  } else if ((temp = new CrazyFans().get()) && game_over) {
     era.drawLine();
     await sys_call_edu_event(temp, event_hooks.crazy_fan_end);
     saying_arr = [
@@ -75,28 +68,45 @@ async function game_over(again) {
     let punish_level = era.get('flag:惩戒力度');
     if (
       punish_level < 3 &&
-      !again &&
-      (era.get('flag:当前声望') <= 0 || era.get('flag:彩蛋机制') === 179)
+      (era.get('flag:当前声望') <= 0 ||
+        (era.get('flag:彩蛋机制') === 179 && !again))
     ) {
       if (era.get('flag:声望不足替换')) {
         punish_level = era.add('flag:惩戒力度', 1);
         let jpy = era.get('flag:当前马币');
         switch (punish_level) {
           case 1:
-            era.set('cflag:0:性别', 10);
             era.set('cflag:0:阴茎尺寸', 1);
             era.set('cflag:0:阴道尺寸', 1);
-            era.set('cflag:0:胸围', Math.floor(era.get('cflag:0:身高') * 0.51));
-            era.set('cflag:0:腰围', Math.floor(era.get('cflag:0:身高') * 0.34));
-            era.set(
-              'cflag:0:臀围',
-              Math.floor(era.get('cflag:0:身高') * 0.542),
-            );
-            era.set('cflag:0:下胸围', era.get('cflag:0:胸围') - 15);
+            if (era.get('cflag:0:性别') === 1) {
+              era.set(
+                'cflag:0:胸围',
+                Math.floor(era.get('cflag:0:身高') * 0.51),
+              );
+              era.set(
+                'cflag:0:腰围',
+                Math.floor(era.get('cflag:0:身高') * 0.34),
+              );
+              era.set(
+                'cflag:0:臀围',
+                Math.floor(era.get('cflag:0:身高') * 0.542),
+              );
+              era.set('cflag:0:下胸围', era.get('cflag:0:胸围') - 15);
+            }
+            era.set('cflag:0:性别', 10);
             era.set('cflag:0:种族', 1);
-            era.set('maxbase:0:速度', 1200);
-            era.set('maxbase:0:耐力', 1200);
-            era.set('maxbase:0:力量', 1200);
+            era.set(
+              'maxbase:0:速度',
+              Math.min(2000, era.get('maxbase:0:速度') + 800),
+            );
+            era.set(
+              'maxbase:0:耐力',
+              Math.min(2000, era.get('maxbase:0:耐力') + 800),
+            );
+            era.set(
+              'maxbase:0:力量',
+              Math.min(2000, era.get('maxbase:0:力量') + 800),
+            );
             era.set('cflag:0:育成回合计时', 0);
             era.set('flag:当前声望', era.get('global:初始声望增加量') + 100);
             CharaTalk.me = new CharaTalk(0);
@@ -356,7 +366,6 @@ async function game_over(again) {
         );
       } else {
         era.drawLine();
-
         if (era.get('flag:变态行为')) {
           for (const e of [
             `${CharaTalk.me.name} 忽视了成年人的社会责任，唆使负责马娘进行变态行为的事情败露，哪怕是特雷森也无法为 ${CharaTalk.me.name} 掩盖过去。`,
@@ -436,7 +445,6 @@ async function game_over(again) {
     }
     return true;
   }
-  era.set('flag:极端粉丝', []);
   return false;
 }
 

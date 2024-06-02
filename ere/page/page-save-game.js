@@ -24,14 +24,14 @@ module.exports = async () => {
       const comm_desc = era.get(`global:saves:${ind}`);
       buffer.push({
         accelerator: ind,
-        config: { width: 22 },
+        config: { width: 20 },
         content: comm_desc || '空存档栏位',
         type: 'button',
       });
       if (comm_desc && !comm_desc.startsWith('(FILE LOST)')) {
         buffer.push({
           accelerator: ind + 100,
-          config: { width: 2 },
+          config: { align: 'right', width: 4 },
           content: '改名',
           type: 'button',
         });

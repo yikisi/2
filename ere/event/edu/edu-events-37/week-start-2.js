@@ -24,13 +24,13 @@ module.exports = (handlers) => {
     }
     await print_event_name('交心之谈 · 一', flash);
     await era.printAndWait(
-      '所谓合宿，是指特雷森学院为主导，以提高实力为目的，地点位于海边的夏季专属活动。',
+      '所谓合宿，是指特雷森学园为主导，以提高实力为目的，地点位于海边的夏季专属活动。',
     );
     await flash.say_and_wait(
       '这就是日本的大海啊，和德国那边，果然有不小的区别呢。',
     );
     await era.printAndWait(
-      '月初，从学院的专用公交上下车，望着面前满眼的蔚蓝，荣进闪耀赞叹道。',
+      '月初，从学园的专用公交上下车，望着面前满眼的蔚蓝，荣进闪耀赞叹道。',
     );
     era.printButton('「想去玩吗？」', 1);
     await era.input();
@@ -196,7 +196,7 @@ module.exports = (handlers) => {
     await fuji.say_and_wait(
       `因此，来大胆挑战吧。我在这里，等待着 ${your_name} 哦。`,
     );
-    await era.printAndWait('“哔。”');
+    await era.printAndWait('「哔。」');
     await era.printAndWait(
       '屏幕中的画面在富士奇石对摄像头伸手示意的这一刻定格。',
     );
@@ -230,7 +230,7 @@ module.exports = (handlers) => {
     await era.input();
     await flash.say_and_wait('嗯！');
     await era.printAndWait(`下一秒，${flash.sex}充满自信地回应道。`);
-    await era.printAndWait('“叮叮叮——”');
+    await era.printAndWait('「叮叮叮——」');
     await flash.say_and_wait('？');
     await era.printAndWait(
       `然后也就是在这时，代表联络的响铃突然自${flash.sex}的手机中响起。`,
@@ -408,7 +408,7 @@ module.exports = (handlers) => {
       '那么，哪一个组合会获得胜利呢，让我们拭目以待！',
     );
     await era.printAndWait(
-      '此时特雷森学院的操场内，主持人激情四射的话语成功调动起了场地的氛围，让拥挤的人群陷入喧闹。',
+      '此时特雷森学园的操场内，主持人激情四射的话语成功调动起了场地的氛围，让拥挤的人群陷入喧闹。',
     );
     await era.printAndWait('紧接着——');
     await gold_ship.say_and_wait('最终的赢家当然是本大爷啦！阿船命运的——');

@@ -1,13 +1,14 @@
 const era = require('#/era-electron');
 
+const { common_out_check } = require('#/event/edu/edu-events-52/snippets');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
-const { common_out_check } = require('#/event/edu/edu-events-52/snippets');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},{loc:number},EventObject):Promise<*>>} handlers */
 module.exports = (handlers) => {
@@ -32,6 +33,7 @@ module.exports = (handlers) => {
       add_event(event_hooks.back_school, event_object);
       return true;
     }
+    new EventMarks(52).sub(event_hooks.out_shopping);
     await print_event_name('天台上的「游乐园」', urara);
     await urara.say_and_wait([
       callname,

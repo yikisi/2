@@ -9,7 +9,6 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 
-const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const { attr_enum } = require('#/data/train-const');
 
 /**
@@ -22,12 +21,11 @@ module.exports = async (hook, _, event_object) => {
     add_event(hook.hook, event_object);
     return;
   }
-  const event_marks = new TeioEduMarks(),
+  const event_arg = event_object?.arg,
     teio = get_chara_talk(3),
     me = get_chara_talk(0);
   let wait_flag = false;
-  if (event_marks.dance_or_kongfu === 1) {
-    event_marks.dance_or_kongfu++;
+  if (event_arg === 'dance_or_kongfu') {
     await print_event_name('舞蹈……武道？这样能训练帝王舞步吗？', teio);
 
     await era.printAndWait(
@@ -82,8 +80,7 @@ module.exports = async (hook, _, event_object) => {
       wait_flag =
         get_attr_and_print_in_event(3, [15, 20, 0, 0, 30], 30) || wait_flag;
     }
-  } else if (event_marks.lets_go_together === 1) {
-    event_marks.lets_go_together++;
+  } else if (event_arg === 'lets_go_together') {
     await print_event_name('一起走吧！', teio);
 
     await teio.say_and_wait('蜂蜜🎶～');
@@ -129,8 +126,7 @@ module.exports = async (hook, _, event_object) => {
       wait_flag =
         get_attr_and_print_in_event(3, [0, 0, 0, 15, 0], 0) || wait_flag;
     }
-  } else if (event_marks.famous_in_famous === 1) {
-    event_marks.famous_in_famous++;
+  } else if (event_arg === 'famous_in_famous') {
     await print_event_name('名人中的名人', teio);
 
     await me.say_and_wait('准备好了吗');

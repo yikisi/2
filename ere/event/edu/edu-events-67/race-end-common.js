@@ -98,7 +98,7 @@ async function race_end_67_common(daiya, me, edu_weeks, extra_flag) {
       await daiya.say_and_wait('那么……总之现在需要一条可以缠脚的布呢！');
       await daiya.say_and_wait('我现在就去找！');
       await era.printAndWait(
-        '……虽然“两人三脚”不过就只是比喻而已，但似乎让她打起了精神。再继续一起努力吧──',
+        '……虽然『两人三脚』不过就只是比喻而已，但似乎让她打起了精神。再继续一起努力吧──',
       );
     }
   }

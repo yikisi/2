@@ -26,12 +26,24 @@ cons_dict[52] = require('#/event/mec/mec-52');
 cons_dict[67] = require('#/event/mec/mec-67');
 cons_dict[80] = require('#/event/mec/mec-80');
 cons_dict[100] = require('#/event/mec/mec-100');
+cons_dict[201] =
+  cons_dict[202] =
+  cons_dict[203] =
+    require('#/event/mec/mec-npc-uma-common');
 cons_dict[204] = require('#/event/mec/mec-204');
 cons_dict[205] = require('#/event/mec/mec-205');
 cons_dict[206] = require('#/event/mec/mec-206');
+cons_dict[301] = require('#/event/mec/mec-301');
+cons_dict[302] = require('#/event/mec/mec-302');
+cons_dict[303] = require('#/event/mec/mec-303');
+cons_dict[304] = require('#/event/mec/mec-304');
+cons_dict[305] = require('#/event/mec/mec-305');
+cons_dict[306] = require('#/event/mec/mec-306');
+cons_dict[308] = require('#/event/mec/mec-308');
 cons_dict[340] = require('#/event/mec/mec-340');
 cons_dict[341] = require('#/event/mec/mec-341');
 cons_dict[342] = require('#/event/mec/mec-342');
+cons_dict[343] = require('#/event/mec/mec-343');
 cons_dict['av-sister'] = require('#/event/mec/mec-av-sister');
 
 console.log(
@@ -50,11 +62,11 @@ module.exports = {
       return obj_dict[chara_id];
     }
     const script_name =
-      chara_id >= first_child_id
-        ? era.get(`callname:${chara_id}:-2`)
-        : chara_id;
-    return (obj_dict[chara_id] = new (cons_dict[
-      script_dict[script_name] || script_name
-    ] || common_cons)(chara_id));
+        chara_id >= first_child_id
+          ? era.get(`callname:${chara_id}:-2`)
+          : chara_id,
+      class_const =
+        cons_dict[script_dict[script_name] || script_name] || common_cons;
+    return (obj_dict[chara_id] = new class_const(chara_id));
   },
 };

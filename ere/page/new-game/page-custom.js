@@ -283,7 +283,7 @@ async function page_custom() {
       }
       era.set('cflag:0:气性', 0);
       era.set('cstr:0:毛色', uma_hairs[0]);
-      Object.values(attr_names).forEach((v) => era.set(`base:0:${v}`, 20));
+      Object.values(attr_names).forEach((v) => era.add(`base:0:${v}`, 20));
       if (era.get('flag:彩蛋机制') === 179) {
         era.set('callname:0:-2', '豚鼠子');
       } else {
@@ -555,7 +555,7 @@ async function page_custom() {
         era.printMultiColumns([
           { type: 'divider' },
           {
-            content: '您希望您的“作案工具”有何种规模？\nPS：不是越大越好！',
+            content: '您希望您的「作案工具」有何种规模？\nPS：不是越大越好！',
             type: 'text',
           },
           { accelerator: 1, content: '所有人都能容纳的那种！', type: 'button' },

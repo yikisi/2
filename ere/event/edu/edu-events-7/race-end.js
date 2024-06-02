@@ -2,11 +2,11 @@ const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { gacha } = require('#/utils/list-utils');
-
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const print_event_name = require('#/event/snippets/print-event-name');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { gacha } = require('#/utils/list-utils');
 
 const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
@@ -252,7 +252,7 @@ module.exports = async (hook, extra_flag) => {
       era.println();
 
       await era.printAndWait(
-        `虽然还是没能知道『那位大人』到底是谁——但至少阿船对比赛的原动力又回来了！谢谢你，${era.get(
+        `虽然还是没能知道『那位大人」到底是谁——但至少阿船对比赛的原动力又回来了！谢谢你，${era.get(
           'callname:0:37',
         )}！`,
       );

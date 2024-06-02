@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const get_status = require('#/system/chara/sys-get-status');
 const { get_image } = require('#/system/sys-calc-image');
 
 const race_indicator = require('#/page/components/race-indicator');
@@ -18,10 +19,10 @@ const { chara_desc, growth_stage } = require('#/data/ero/status-const');
 const {
   get_love_info,
   get_relation_info,
-  get_status,
   get_train_time,
 } = require('#/data/info-generator');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 /**
  * @param {number} chara_id
@@ -111,7 +112,9 @@ function cur_chara_component(chara_id, type, location_npc) {
     if (out_of_train) {
       name_columns.push(` [${out_of_train_type[out_of_train - 1]}]`);
     }
-    name_columns.push(` (${growth_stage[Math.min(growth, 2)]})`);
+    if (get_custom_mec(chara_id).is_able_to_show_growth()) {
+      name_columns.push(` (${growth_stage[Math.min(growth, 2)]})`);
+    }
     if (in_train) {
       name_columns.push(
         ' 干劲',
@@ -122,7 +125,12 @@ function cur_chara_component(chara_id, type, location_npc) {
         ' ',
         get_train_time(chara_id).substring(0, 3),
       );
-    } else if (!out_of_train && growth >= 2) {
+    } else if (
+      era.get(`cflag:${chara_id}:种族`) &&
+      !out_of_train &&
+      growth >= 2 &&
+      growth !== 4
+    ) {
       name_columns.push(' 待入学');
     }
     name_columns.push(...race_indicator(chara_id));

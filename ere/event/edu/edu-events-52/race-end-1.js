@@ -1,7 +1,5 @@
 const era = require('#/era-electron');
 
-const { sys_push_crazy_fan } = require('#/system/sys-calc-flag');
-
 const {
   common_talk_with_in_urara,
   common_talk_with_in_urara_end,
@@ -9,6 +7,7 @@ const {
 } = require('#/event/edu/edu-events-52/snippets');
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const CrazyFans = require('#/data/event/crazy-fans');
 const { race_enum } = require('#/data/race/race-const');
 
 /**
@@ -617,7 +616,7 @@ module.exports = (handlers) => {
           '您觉得如何呢？那么准备好了吗，与乌拉拉一同的日子？',
         );
       } else {
-        sys_push_crazy_fan(52);
+        new CrazyFans().push(52);
       }
     }
   };

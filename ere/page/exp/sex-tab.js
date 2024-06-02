@@ -1,6 +1,10 @@
 const era = require('#/era-electron');
 
-const { get_bust_size } = require('#/system/ero/sys-calc-ero-status');
+const {
+  get_bust_size,
+  get_hip_size,
+  get_waist_size,
+} = require('#/system/ero/sys-calc-ero-status');
 
 const CharaTalk = require('#/utils/chara-talk');
 const get_gradient_color = require('#/utils/gradient-color');
@@ -56,9 +60,6 @@ module.exports = {
     } else if (!chara.id || flags.show_exp) {
       const in_train = era.get(`ex:${chara.id}:TotalEX`) !== undefined;
       if (in_train) {
-        const weight_delta = era.get(`base:${chara.id}:体重偏差`),
-          w_delta = Math.floor(weight_delta / 1000),
-          h_delta = Math.floor(weight_delta / 2000);
         sex_info_list.push(
           {
             config: { content: '身体尺寸', position: 'left' },
@@ -72,7 +73,7 @@ module.exports = {
               '体重：',
               era.get(`status:${chara.id}:发胖`)
                 ? '幸、幸福胖哦……'
-                : weight_delta >= 2000
+                : era.get(`base:${chara.id}:体重偏差`) >= 2000
                   ? '微增'
                   : '控制得当',
               chara.sex_code === 1
@@ -80,14 +81,9 @@ module.exports = {
                 : ` ｜ 三围：B${get_bust_size(
                     chara.id,
                     true,
-                  )} (${get_breast_cup(chara.id, true)} Cup) · W${
-                    era.get(`cflag:${chara.id}:腰围`) + w_delta
-                  } · H${
-                    era.get(`cflag:${chara.id}:臀围`) +
-                    5 * (era.get(`talent:${chara.id}:淫臀`) === 2) +
-                    2 * era.get(`status:${chara.id}:发情`) +
-                    h_delta
-                  }`,
+                  )} (${get_breast_cup(chara.id, true)} Cup) · W${get_waist_size(
+                    chara.id,
+                  )} · H${get_hip_size(chara.id)}`,
             ],
             type: 'text',
           },

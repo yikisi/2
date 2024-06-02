@@ -76,7 +76,7 @@ handlers[event_hooks.train] = async (chara_id, _, extra_flag) => {
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {{train:number,stamina_ratio:number}} extra_flag
+ * @param {TrainSuccessParams} extra_flag
  */
 handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
   const chara_talk = get_chara_talk(chara_id);
@@ -159,13 +159,27 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
 
 handlers[event_hooks.week_start] = async (chara_id) => {
   const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
-  if (edu_weeks !== 143 + 9 || era.get(`cflag:${chara_id}:可再次育成`)) {
-    return false;
-  }
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
-  await palace(chara, me);
-  await palace_relation(chara, me);
+  switch (edu_weeks) {
+    case 47 + 29:
+    case 95 + 29:
+      await print_event_name('夏季合宿', chara);
+      await era.printAndWait([
+        '说到夏天就是泳装与海滩，当然，',
+        chara.get_colored_name(),
+        ' 与 ',
+        me.get_colored_name(),
+        ' 来到海边休假的同时也没有落下训练。',
+      ]);
+      break;
+    case 143 + 9:
+      if (era.get(`cflag:${chara_id}:可再次育成`)) {
+        return;
+      }
+      await palace(chara, me);
+      await palace_relation(chara, me);
+  }
 };
 
 /**

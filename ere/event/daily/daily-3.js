@@ -236,7 +236,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
       await era.printAndWait(
         `${me.name} 和 ${
           teio.name
-        } 一起来到了街机厅痛快玩了一段时间，临走前，${me.get_couple_title()} 决定去娃娃机“浪费”掉多余的币。`,
+        } 一起来到了街机厅痛快玩了一段时间，临走前，${me.get_couple_title()} 决定去娃娃机『浪费』掉多余的币。`,
       );
       await era.printAndWait(
         `不过话虽这么说，${me.get_couple_title()} 两个还是比较紧张地操纵着摇杆，再三思考后摁下按钮……`,
@@ -285,7 +285,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
         await era.printAndWait('嗯……那就像情侣一样一起去看吧。');
       } else if (Math.random() < 0.5) {
         await era.printAndWait(
-          `在帝王的强烈要求下，${me.name} 选了一部“有挑战性的恐怖刺激电影”。`,
+          `在帝王的强烈要求下，${me.name} 选了一部『有挑战性的恐怖刺激电影』。`,
         );
         await era.printAndWait(
           `果不其然，每到关键镜头，小${teio.get_uma_sex_title()}就受不住了，${
@@ -364,7 +364,7 @@ handlers[event_hooks.school_rooftop] = async () => {
   await era.printAndWait(
     `${
       get_chara_talk(0).name
-    }们 将食盒摊放在……“天花板”上？一起享受起了美好的午饭时间。`,
+    }们 将食盒摊放在……『天花板』上？一起享受起了美好的午饭时间。`,
   );
 };
 

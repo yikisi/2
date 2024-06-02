@@ -63,7 +63,9 @@ module.exports = class extends CustomizedCheck {
       edu_weeks = era.get('cflag:60:育成回合计时');
     if (edu_weeks < 3 * 48) {
       const event_marks = new NNEduMarks();
-      const event_obj_special = new EventObject(60, cb_enum.edu, true);
+      const event_obj_special = new EventObject(60, cb_enum.edu, true).set_arg(
+        edu_weeks,
+      );
       check_and_add_event(
         event_marks,
         edu_weeks,

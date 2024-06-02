@@ -5,7 +5,6 @@ const {
   check_want_to_escape,
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
-const { sys_push_crazy_fan } = require('#/system/sys-calc-flag');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
@@ -17,6 +16,7 @@ const { log_600m4 } = require('#/utils/value-utils');
 const { get_chara_color } = require('#/data/chara-colors');
 const { attr_change_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
+const CrazyFans = require('#/data/event/crazy-fans');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { location_enum } = require('#/data/locations');
@@ -30,6 +30,8 @@ const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 
 class CustomizedCheck {
+  static like_chara;
+
   constructor(chara_id) {
     this.id = chara_id;
   }
@@ -82,6 +84,12 @@ class CustomizedCheck {
     if (this.id && era.get(`cflag:${this.id}:种族`)) {
       const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
       if (edu_weeks < 3 * 48) {
+        if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
+          add_event(
+            event_hooks.week_start,
+            new EventObject(this.id, cb_enum.edu, true).set_arg(edu_weeks),
+          );
+        }
         check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
       } else if (edu_weeks === 143 + 9) {
         add_event(
@@ -95,7 +103,7 @@ class CustomizedCheck {
   /** @returns {{check:number,color:string,content:string}[]} */
   check_palace_and_get_aims() {
     if (era.get(`relation:${this.id}:0`) <= 0) {
-      sys_push_crazy_fan(this.id);
+      new CrazyFans().push(this.id);
     } else {
       let g1_count = 0,
         g2_count = 0,
@@ -111,7 +119,7 @@ class CustomizedCheck {
         }
       });
       if (!g1_count && g2_count < 3 && other_count < 5) {
-        sys_push_crazy_fan(this.id);
+        new CrazyFans().push(this.id);
       }
     }
     return this.get_edu_aims();
@@ -141,7 +149,7 @@ class CustomizedCheck {
       }
     });
     buffer.push({
-      check: Number(g1_count > 0),
+      check: Math.min(g1_count, 1),
       color: g1_count > 0 ? attr_change_colors.up : attr_change_colors.down,
       content: `一场G1比赛 入着 ${g1_count}/1 ${g1_count > 0 ? '✔' : '✘'}`,
     });
@@ -160,7 +168,7 @@ class CustomizedCheck {
     return buffer;
   }
 
-  /** @returns {{name:string,handle:function():void}|{}} */
+  /** @returns {{name:string,handle:function():Promise}|{}} */
   get_personal_action() {
     return {};
   }

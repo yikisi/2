@@ -89,7 +89,7 @@ handlers[74] = async (rice, me, callname, self_name) => {
     me.get_colored_name(),
     ' 就带 ',
     rice.get_colored_name(),
-    ' 来到了这里，是距离学院有些远的街区。',
+    ' 来到了这里，是距离学园有些远的街区。',
   ]);
   await era.printAndWait('一家是大大的书店，一家是精美的杂货屋。');
   await era.printAndWait('这里尚且是闪耀着彩灯，让恋人们欢度圣诞的街道。');

@@ -11,6 +11,8 @@ const {
 } = require('#/system/sys-calc-base-cflag');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -28,7 +30,6 @@ const {
   foreign_race_list,
   track2location,
 } = require('#/data/race/race-location');
-const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 /**
  * @param {number} chara_id
@@ -105,23 +106,29 @@ async function check_new_activities(cur_round, in_team_list) {
       ]);
     }
   });
-  const event_weeks = (cur_round - 1) % 48;
-  let race, is_begin;
-  for (const r of foreign_race_list) {
-    const { date } = race_infos[r];
+  const event_weeks = (cur_round - 1) % 48,
+    curr_race_list = {};
+  foreign_race_list.forEach((r) => {
+    const { date, track } = race_infos[r];
     if (event_weeks === date - expedition_weeks) {
-      race = r;
-      is_begin = true;
+      curr_race_list[`${track}_1`] = [r, true];
     } else if (event_weeks === date) {
-      race = r;
-      is_begin = false;
+      curr_race_list[`${track}_0`] = [r, false];
     }
-    if (race) {
-      break;
-    }
-  }
-  if (race) {
-    if (is_begin) {
+  });
+  for (const entry of Object.values(curr_race_list)) {
+    const race = entry[0],
+      info = race_infos[race],
+      location = track2location[info.track],
+      race_colored_name =
+        info.track === track_enum.shatin
+          ? {
+              color: adaptability_colors.at(-2 - class_enum.G1),
+              content: '香港国际赛事',
+              fontWeight: 'bold',
+            }
+          : info.get_colored_name_with_class();
+    if (entry[1]) {
       // 远征开始
       let foreign_list = in_team_list
         .filter((e) => {
@@ -137,23 +144,21 @@ async function check_new_activities(cur_round, in_team_list) {
             pregnant: era.get(`cflag:${e}:妊娠回合计时`),
           };
         });
-      const info = race_infos[race],
-        location = track2location[info.track],
-        punish_list = foreign_list
-          .filter((e) => e.pregnant >= 33 || e.hurt)
-          .map((e) => e.id),
-        race_colored_name =
-          info.track === track_enum.shatin
-            ? {
-                color: adaptability_colors.at(-2 - class_enum.G1),
-                content: '香港国际赛事',
-                fontWeight: 'bold',
-              }
-            : info.get_colored_name_with_class();
+      const punish_list = foreign_list
+        .filter((e) => e.pregnant >= 33 || e.hurt)
+        .map((e) => e.id);
       foreign_list = foreign_list
         .filter((e) => e.pregnant < 33 && !e.hurt)
         .map((e) => e.id);
       era.print([race_colored_name, ' 即将举办，参赛选手们要踏上远征之路了……']);
+      if (
+        (era.get('cflag:343:招募状态') !== recruit_flags.yes ||
+          (era.get('cflag:343:妊娠阶段') & 0b100001) > 0) &&
+        location.loc === location_enum.paris &&
+        !era.get('cflag:343:位置')
+      ) {
+        era.set('cflag:343:位置', location.loc);
+      }
       if (foreign_list.length) {
         era.printMultiColumns([
           {
@@ -212,6 +217,13 @@ async function check_new_activities(cur_round, in_team_list) {
           sys_change_pressure(chara_id, -1000),
         );
         foreign_list.push(0);
+        if (
+          foreign_list.indexOf(343) === -1 &&
+          era.get('cflag:343:招募状态') === recruit_flags.yes &&
+          era.get('cflag:343:妊娠回合计时') < 33
+        ) {
+          foreign_list.push(343);
+        }
       } else if (me_in_race) {
         punish_list.push(0);
       }
@@ -254,11 +266,13 @@ async function check_new_activities(cur_round, in_team_list) {
     } else {
       // 远征结束
       era.print([
-        era.get('cflag:0:位置') ? '' : '远征海外的人员',
+        ...(era.get('cflag:0:位置') === location.loc
+          ? []
+          : ['远征 ', race_colored_name, ' 的人员']),
         '回到特雷森了……',
       ]);
       in_team_list.forEach((chara_id) => {
-        if (era.get(`cflag:${chara_id}:位置`)) {
+        if (era.get(`cflag:${chara_id}:位置`) === location.loc) {
           sys_change_attr_and_print(chara_id, '体力', -100);
           sys_change_attr_and_print(chara_id, '精力', -600);
           era.set(`status:${chara_id}:语言不通`, 0);
@@ -268,7 +282,7 @@ async function check_new_activities(cur_round, in_team_list) {
           era.set(`cflag:${chara_id}:位置`, 0);
         }
       });
-      if (era.get('cflag:0:位置')) {
+      if (era.get('cflag:0:位置') === location.loc) {
         era.set('flag:当前位置', location_enum.office);
         sys_change_attr_and_print(0, '体力', -100);
         sys_change_attr_and_print(0, '精力', -600);
@@ -278,8 +292,12 @@ async function check_new_activities(cur_round, in_team_list) {
         sys_change_tired(0, 1);
         era.set('cflag:0:位置', 0);
       }
+      if (era.get('cflag:343:位置') === location.loc) {
+        era.set('cflag:343:位置', 0);
+      }
     }
-  } else if (event_weeks === 29 - 1) {
+  }
+  if (event_weeks === 29 - 1) {
     // 夏合宿
     const beach_group = in_team_list.filter((chara_id) => {
       const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
@@ -397,6 +415,23 @@ async function check_new_activities(cur_round, in_team_list) {
       sys_change_attr_and_print(0, '精力', -400);
       era.set('cflag:0:位置', 0);
     }
+  }
+  // 出差的理事长
+  if (
+    era.get('flag:当前月') > 3 &&
+    !(era.get('cflag:302:育成回合计时') < 3 * 48) &&
+    (Math.random() < 0.2 || (era.get('cflag:302:妊娠阶段') & 0b100001) > 0)
+  ) {
+    if (
+      !(era.get('cflag:306:育成回合计时') < 3 * 48) &&
+      (era.get('cflag:306:妊娠阶段') & 0b100001) === 0
+    ) {
+      era.set('flag:理事长', 306);
+    } else {
+      era.set('flag:理事长', 0);
+    }
+  } else {
+    era.set('flag:理事长', 302);
   }
 }
 

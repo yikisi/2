@@ -9,6 +9,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { attr_change_colors, motivation_colors } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { location_enum } = require('#/data/locations');
 const {
   attr_enum,
@@ -166,7 +167,7 @@ module.exports = {
       }
     } else if (
       chara_id &&
-      era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48
+      !(era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)
     ) {
       return [];
     } else if (
@@ -225,21 +226,31 @@ module.exports = {
     if (src_chara_id === -1) {
       src_chara_id = chara_id;
     }
-    const maxbase_buff = get_custom_mec(chara_id).get_maxbase_buff();
+    const maxbase_buff =
+      get_custom_mec(chara_id).get_maxbase_buff() -
+      (era.get(`cflag:${chara_id}:妊娠阶段`) ===
+        1 << pregnant_stage_enum.resume &&
+        (era.get(`cflag:${chara_id}:妊娠回合计时`) - 1) * 100);
     era.set(
       `maxbase:${chara_id}:体力`,
-      Math.floor(
-        era.get(`staticbase:${src_chara_id}:体力`) +
-          era.get(`base:${chara_id}:耐力`) / 2 +
-          maxbase_buff,
+      Math.max(
+        Math.floor(
+          era.get(`staticbase:${src_chara_id}:体力`) +
+            era.get(`base:${chara_id}:耐力`) / 2 +
+            maxbase_buff,
+        ),
+        200,
       ),
     );
     era.set(
       `maxbase:${chara_id}:精力`,
-      Math.floor(
-        era.get(`staticbase:${src_chara_id}:精力`) +
-          era.get(`base:${chara_id}:智力`) / 2 +
-          maxbase_buff,
+      Math.max(
+        Math.floor(
+          era.get(`staticbase:${src_chara_id}:精力`) +
+            era.get(`base:${chara_id}:智力`) / 2 +
+            maxbase_buff,
+        ),
+        200,
       ),
     );
   },
