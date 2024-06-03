@@ -58,8 +58,8 @@ module.exports = {
    */
   generate(chara, flags) {
     const right_intro_list = [];
-
-    const body_hair_color = era.get(`cstr:${chara.id}:毛色`),
+    // TODO 兼容旧存档，记得删掉
+    const body_hair_color = era.get(`cstr:${chara.id}:毛色`) || '栗',
       hair_color = era.get(`cstr:${chara.id}:发色`),
       growth = era.get(`cflag:${chara.id}:成长阶段`),
       race = era.get(`cflag:${chara.id}:种族`),
