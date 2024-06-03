@@ -101,9 +101,18 @@ module.exports = async (hook, extra_flag) => {
         extra_flag.relation_change += 10;
       }
 
-      await era.printAndWait(
-        `${gold_ship.name} 把 ${me.name} 推到选手通道的墙壁，又背靠在 ${me.name} 身上。${gold_ship.sex}放松身体的力气，就像随时都会倒下一样，（玩家名）只好……`,
-      );
+      await era.printAndWait([
+        gold_ship.get_colored_name(),
+        ' 把 ',
+        me.get_colored_name(),
+        ' 推到选手通道的墙壁，又背靠在 ',
+        me.get_colored_name(),
+        ' 身上。',
+        gold_ship.sex,
+        '放松身体的力气，就像随时都会倒下一样，',
+        me.get_colored_name(),
+        ' 只好……',
+      ]);
       era.println();
 
       era.printButton('（环抱黄金船的腰支撑）', 1);

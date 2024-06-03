@@ -1,7 +1,11 @@
 const { get, set } = require('#/era-electron');
+
 const { get_random_entry } = require('#/utils/list-utils');
 
 class CrazyFans {
+  /** @type {number[]} */
+  obj;
+
   constructor() {
     this.obj = get('flag:极端粉丝') || set('flag:极端粉丝', []);
   }

@@ -199,7 +199,7 @@ function love_uma(chara_id, val, to_be_shown) {
     const force_limit = get_custom_mec(chara_id).get_love_limit(),
       border = force_limit || get_love_border(chara_id),
       love_limit = !era.get('flag:回合爱慕惩罚');
-    if ((love_limit || force_limit) && border > 25 && love + _val >= border) {
+    if ((love_limit || force_limit) && love + _val >= border) {
       _val = border - 1 - love;
     }
     if (love + _val > 100) {
