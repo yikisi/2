@@ -4,8 +4,6 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const { buff_colors } = require('#/data/color-const');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 
@@ -40,7 +38,7 @@ module.exports = class extends CustomizedMec {
   }
 
   set_callname() {
-    set('callname:341:0', '训练员' + get_chara_talk(0).get_adult_sex_title());
+    set('callname:341:0', get('callname:0:-1') + '君');
   }
 
   // eslint-disable-next-line no-unused-vars

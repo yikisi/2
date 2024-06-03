@@ -275,7 +275,7 @@ handlers[event_hooks.out_church] = async (hook, _, event_object) => {
         me.get_couple_title(),
         ' 就又回到了普通的街道上。',
       ]);
-      wait_flag = get_attr_and_print_in_event(25, undefined, 25);
+      wait_flag = get_attr_and_print_in_event(25, undefined, 35);
   }
   if (sys_like_chara(25, 0, 25) || wait_flag) {
     await era.waitAnyKey();

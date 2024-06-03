@@ -25,7 +25,7 @@ const { location_enum } = require('#/data/locations');
 const { attr_names } = require('#/data/train-const');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const button_contents = ['请求帮助', '探寻微笑', '痴迷注视'];
+const button_contents = ['请求帮助', '「帮帮我吧女神大人」', '许下愿望'];
 
 module.exports = async () => {
   era.set('flag:当前位置', location_enum.god);
@@ -317,11 +317,40 @@ module.exports = async () => {
               await era.printAndWait('而且被笑了。');
               break;
             case 341:
-            case 342:
-              await era.printAndWait('痴迷注视着……');
+              era.printButton('「神啊，请您垂怜……」', 1);
+              await era.input();
+              await era.printAndWait(
+                '在祈祷的瞬间，或者说愿望自心底冒出的瞬间。',
+              );
+              await era.printAndWait(
+                '周遭的世界便沉寂下来，只剩瓶中之水汩汩作响。',
+              );
               await era.printAndWait([
-                { color: god.color, content: '女神像' },
-                ' 不动……',
+                me.get_colored_name(),
+                ' 闭上双眼，静静感受着包裹着自己的，如某人的怀抱一样温暖的安心感。',
+              ]);
+              break;
+            case 342:
+              era.printButton('请帮帮我吧，女神大人。', 1);
+              await era.input();
+              await era.printAndWait(
+                '微微低头向着三女神的神像祈祷，虽然听起来更像是某种随心而为的撒娇，又或者是明知不可能发生但是却依旧期待着奇迹的自己的调侃。',
+              );
+              await era.printAndWait([
+                '但是，就在低头的时候，仿佛有人轻轻的从背后抱住了 ',
+                me.get_colored_name(),
+                '，坚实而不容抵抗的在 ',
+                me.get_colored_name(),
+                ' 的耳旁吹起了轻柔的微风，仿佛回应 ',
+                me.get_colored_name(),
+                ' 的祈祷。',
+              ]);
+              await era.printAndWait([
+                '周遭万籁俱寂，唯有泥土的芬芳湿润感从手中传达到 ',
+                me.get_colored_name(),
+                ' 的脑海之中，睁开眼睛的时候，手指尖那微微的湿润似乎就在告诉 ',
+                me.get_colored_name(),
+                ' 刚刚的一切绝非幻觉。',
               ]);
           }
           life_marks.add('love');
