@@ -19,7 +19,7 @@ const startVelocity = 3;
 const startAcceleration = 24;
 
 //上坡时基础加速度为三分之二
-// const raceAcceModUphill = 2 / 3;
+const raceAcceModUphill = 2 / 3;
 
 function add_time(timer) {
   const ret = timer + 0.066;
@@ -75,18 +75,14 @@ function sys_sim_race(list_chara, race_info) {
         ? mod_stamina_cost_mess_grass[race_info.mess]
         : mod_stamina_cost_mess_dirt[race_info.mess],
     has_final_corner = race_info.lanes.find((e) => e.is_curve && e.is_last);
-  let flag_race = true;
 
-  // 记录每秒位置与技能发动状态 用于播放战报
   const record_location_list = [new Array(count_uma).fill(0)],
-    record_acc_list = [new Array(count_uma).fill(0)],
-    record_speed_list = [new Array(count_uma).fill(0)],
-    // 起跑第一秒的技能报告
     record_skill_list = [new Array(count_uma).fill(undefined).map(() => [])],
+    record_speed_list = [new Array(count_uma).fill(0)],
     record_stamina_list = [new Array(count_uma)],
     start_delay = new Array(count_uma).fill(0);
 
-  // 计算出闸技能并赋予初始速度与加速度
+  // 出闸
   list_chara.forEach((uma) => {
     record_stamina_list[0][uma.index_race] = uma.race.stamina;
 
@@ -101,40 +97,37 @@ function sys_sim_race(list_chara, race_info) {
       uma.race.conditionParams.activate_count_start++;
     });
     if (start_delay[uma.index_race] < 1 / 15) {
-      record_acc_list[0][uma.index_race] = uma.race.acceleration =
-        startAcceleration;
+      uma.race.acceleration = startAcceleration;
       record_speed_list[0][uma.index_race] = uma.race.velocityReal =
         startVelocity;
     }
     uma.race.conditionParams.is_badstart = Number(
-      start_delay[uma.index_race] >= 0.8,
+      start_delay[uma.index_race] >= 0.08,
     );
   });
 
   const list_finished = [];
-  let list_in_race = list_chara,
+  let flag_race = true,
+    list_in_race = list_chara,
     timer = 0;
 
   while (flag_race) {
     timer = add_time(timer);
-    // 准备记录当前秒的战报
-    record_acc_list.push(new Array(count_uma));
     record_location_list.push(new Array(count_uma));
     record_skill_list.push(new Array(count_uma).fill(undefined).map(() => []));
     record_speed_list.push(new Array(count_uma));
     record_stamina_list.push(new Array(count_uma));
 
-    // 计算其余所有未完赛马娘的位置与速度
+    // 位置和速度结算
     list_in_race.forEach((uma) => {
-      // 先结算上一tick的速度至移动距离 以及上一tick的加速度至速度
-      if (start_delay[uma.index_race]) {
+      if (start_delay[uma.index_race] > 0) {
         if (start_delay[uma.index_race] < 1 / 15) {
           uma.race.location +=
             startVelocity +
             uma.race.acceleration * (1 / 15 - start_delay[uma.index_race]);
           uma.race.staminaCost =
             ((20 / 144) *
-              Math.pow(uma.race.velocityReal - uma.race.location, 2) *
+              Math.pow(uma.race.location - uma.base.velocityIdeal + 12, 2) *
               mod_stamina_cost_mess) /
             15;
           uma.race.location /= 15;
@@ -156,7 +149,6 @@ function sys_sim_race(list_chara, race_info) {
       }
 
       record_location_list.at(-1)[uma.index_race] = uma.race.location;
-      record_acc_list.at(-1)[uma.index_race] = uma.race.acceleration;
       record_speed_list.at(-1)[uma.index_race] = uma.race.velocityReal;
       record_stamina_list.at(-1)[uma.index_race] = uma.race.stamina;
     });
@@ -174,9 +166,7 @@ function sys_sim_race(list_chara, race_info) {
     list_finished.forEach((e) => {
       record_location_list.at(-1)[e.index_race] =
         race_info.span + 1000 * (race_info.gates - e.rank.curr + 1);
-      record_acc_list.at(-1)[e.index_race] = record_speed_list.at(-1)[
-        e.index_race
-      ] = 0;
+      record_speed_list.at(-1)[e.index_race] = 0;
       record_stamina_list.at(-1)[e.index_race] = e.race.stamina;
     });
 
@@ -242,7 +232,10 @@ function sys_sim_race(list_chara, race_info) {
       }
       if (uma.race.temptation > 0) {
         uma.race.temptation--;
-        if (uma.race.temptation % (3 * 15) === 0 && Math.random() < 0.55) {
+        if (
+          (uma.race.temptation % (3 * 15) === 0 && Math.random() < 0.55) ||
+          !uma.race.temptation
+        ) {
           uma.race.temptation = 0;
           uma.race.conditionParams.is_temptation = 0;
         }
@@ -254,6 +247,9 @@ function sys_sim_race(list_chara, race_info) {
         uma.race.temptation = 12 * 15;
         uma.race.conditionParams.is_temptation = 1;
         uma.race.conditionParams.temptation_count++;
+      }
+      if (uma.race.temptation > 0) {
+        uma.race.staminaCost *= 1.6;
       }
 
       uma.race.conditionParams.accumulatetime = timer;
@@ -489,7 +485,8 @@ function sys_sim_race(list_chara, race_info) {
         uma.factorPhase.vStyle[Math.min(uma.race.conditionParams.phase, 2)];
       uma.race.acceleration =
         uma.base.acceleration *
-        uma.factorPhase.aStyle[Math.min(uma.race.conditionParams.phase, 2)];
+        uma.factorPhase.aStyle[Math.min(uma.race.conditionParams.phase, 2)] *
+        (uma.race.slope > 0 ? raceAcceModUphill : 1);
       // 终盘时则再附加部分变动
       if (uma.race.conditionParams.phase >= 2) {
         uma.race.velocityIdeal += uma.factorFinal.vIdealAdd;
@@ -630,17 +627,19 @@ function sys_sim_race(list_chara, race_info) {
 
       if (uma.race.slope >= 0) {
         uma.flag.downhill = false;
+        uma.race.downhill = 0;
         uma.race.velocityIdeal -= uma.race.slope * uma.factorSlope.up;
+      } else if (uma.flag.downhill) {
+        uma.flag.downhill = uma.race.downhill % 15 > 0 || Math.random() > 0.2;
+        if (!uma.flag.downhill) {
+          uma.race.downhill = 0;
+        }
       } else {
-        if (uma.flag.downhill && Math.random() < 0.2) {
-          uma.flag.downhill = false;
-        }
-        if (!uma.flag.downhill && Math.random() < uma.factorSlope.down) {
-          uma.flag.downhill = true;
-        }
+        uma.flag.downhill = Math.random() < uma.factorSlope.down;
       }
       if (uma.flag.downhill) {
-        uma.race.velocityIdeal += 0.3 - uma.race.slope * 10;
+        uma.race.downhill++;
+        uma.race.velocityIdeal += 0.3 - uma.race.slope / 10;
         uma.race.staminaCost *= 0.4;
       }
 
@@ -885,7 +884,9 @@ function sys_sim_race(list_chara, race_info) {
                   case ability_type_enum.TemptationEndTime:
                     skill.aims[i][j].forEach((e) => {
                       e.base.temptation = skill.values[i][j] * 15;
-                      e.race.conditionParams.is_temptation = 1;
+                      e.race.conditionParams.is_temptation = Number(
+                        skill.values[i][j] > 0,
+                      );
                     });
                     break;
                   case ability_type_enum.CurrentSpeed:
@@ -989,7 +990,6 @@ function sys_sim_race(list_chara, race_info) {
     `比赛模拟：${duration} ms / ${Math.ceil(timer * 15)} 帧，平均 ${(duration / (timer * 15)).toFixed(4)} ms/帧`,
   );
   return {
-    acc: record_acc_list,
     loc: record_location_list,
     skill: record_skill_list,
     speed: record_speed_list,

@@ -203,6 +203,7 @@ module.exports = async (_, __, event_object) => {
       );
       era.println();
       new CharaSkills(3).remove(100031);
+      new CharaSkills(3).add(100039);
       wait_flag =
         get_attr_and_print_in_event(3, new Array(5).fill(5), 20) || wait_flag;
       event_marks.give_up++;
@@ -226,6 +227,7 @@ module.exports = async (_, __, event_object) => {
     }
   } else if (event_arg === 95 + 14) {
     await print_event_name('粉丝感谢祭', teio);
+    era.set('cflag:3:节日事件标记', 0);
     if (event_marks.give_up) {
       await era.printAndWait(
         `虽然 ${me.name} 和东海帝王已经宣布了将要避战的消息，不过粉丝们的热情还是一如既往。`,
@@ -259,9 +261,10 @@ module.exports = async (_, __, event_object) => {
     );
     await era.printAndWait('——唔，没什么好说的。');
     await era.printAndWait('也没什么好做的了。');
-    await era.printAndWait(
-      ` ${me.name} 看了眼手表，时间很紧，已经不能在说服自己找借口拖延了。`,
-    );
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 看了眼手表，时间很紧，已经不能在说服自己找借口拖延了。',
+    ]);
     await era.printAndWait('深呼吸，努力放松。');
     await era.printAndWait(` ${me.name} 走出了卫生间，走向了自己的毁灭。`);
     era.println();

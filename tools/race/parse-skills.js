@@ -210,13 +210,20 @@ async function chara_skill() {
   for (const chara_id in dict) {
     buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
   }
+  buffer += '\n\nconst skill_sets = {\n';
   (await prisma.skill_set.findMany()).forEach((e) => {
+    const to_write = [];
     for (const k in e) {
       if (k.startsWith('skill_id') && e[k]) {
+        to_write.push(e[k]);
         skill_dict[e[k]] = 1;
       }
     }
+    if (to_write.length > 0) {
+      buffer += `${e.id}:[${to_write.join(',')}],\n`;
+    }
   });
+  buffer += '};\n\n';
   console.log('+技能组技能', Object.keys(skill_dict).length);
   (
     await prisma.text_data.findMany({
@@ -258,6 +265,7 @@ async function chara_skill() {
   const c_dict = {};
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
+  buffer += 'skills_dict[100039]=require("#/data/race/skill/skill-100039");';
 
   skill_data.forEach((e) => {
     const id = e.id;
@@ -292,7 +300,7 @@ async function chara_skill() {
   });
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
-    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\n${buffer_common_skills}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict};`,
+    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\n${buffer_common_skills}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
   );
   buffer = 'class ConditionParams { ';
   Object.keys(c_dict)

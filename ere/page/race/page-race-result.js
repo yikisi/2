@@ -66,7 +66,7 @@ function get_timer_record(minutes, seconds) {
 
 /**
  * @param {PseudoUma[]} contestants
- * @param {{acc:number[][],loc:number[][],skill:number[][][],speed:number[][],stamina:number[][]}} records
+ * @param {{loc:number[][],skill:number[][][],speed:number[][],stamina:number[][]}} records
  * @param {RaceInfo} info
  */
 async function page_race_result(contestants, records, info) {
@@ -173,7 +173,7 @@ async function page_race_result(contestants, records, info) {
               content:
                 records.loc[timer][uma.index_race] >= info.span
                   ? total_time[uma.index_race]
-                  : `${records.speed[timer][uma.index_race].toFixed(1)}m/s`,
+                  : [records.speed[timer][uma.index_race].toFixed(1), 'm/s'],
               type: 'text',
             },
             records.loc[timer][uma.index_race] >= info.span
@@ -202,8 +202,9 @@ async function page_race_result(contestants, records, info) {
         });
         records.skill[timer][uma.index_race].forEach((s_id) =>
           skill_buffer.push({
-            config: { align: 'right', isParagraph: true },
+            config: { align: 'right' },
             content: [
+              { isBr: true },
               ...skills_dict[s_id].get_colored_name(),
               ' ',
               { color: uma.color, content: uma.name, fontWeight: 'bold' },
@@ -214,8 +215,9 @@ async function page_race_result(contestants, records, info) {
         );
         if (!timer && uma.race.conditionParams.is_badstart) {
           report_buffer.push({
-            config: { isParagraph: true },
+            config: { align: 'left' },
             content: [
+              { isBr: true },
               { color: uma.color, content: uma.name, fontWeight: 'bold' },
               ' ',
               { color: buff_colors[3], content: '出迟！' },
@@ -256,7 +258,7 @@ async function page_race_result(contestants, records, info) {
           },
         ],
         ...sort_list(buffer, (e) => e.key),
-        { columns: report_buffer, config: { width: 12 } },
+        { columns: report_buffer, config: { offset: 1, width: 11 } },
         { columns: skill_buffer, config: { width: 12 } },
         [
           {
@@ -403,23 +405,6 @@ async function page_race_result(contestants, records, info) {
       datasets: contestants.map((e) => ({
         borderColor: get_chara_color(e.index_chara),
         data: records.speed
-          .map((r) => r[e.index_race].toFixed(1))
-          .filter((_, i) => i % 15 === 0),
-        label: e.name,
-        stepped: false,
-      })),
-      labels,
-    },
-    options,
-  });
-  era.printButton('继续', 1);
-  await era.input();
-  era.print('加速度图');
-  era.printLineChart({
-    data: {
-      datasets: contestants.map((e) => ({
-        borderColor: get_chara_color(e.index_chara),
-        data: records.acc
           .map((r) => r[e.index_race].toFixed(1))
           .filter((_, i) => i % 15 === 0),
         label: e.name,

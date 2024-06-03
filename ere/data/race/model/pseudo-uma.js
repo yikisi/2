@@ -133,13 +133,15 @@ class PseudoUma {
   // 比赛时信息
   race = {
     acceleration: 0,
+    competeFightAim: undefined,
+    competeFightTimer: 0,
     conditionParams: new ConditionParams(),
+    // 下坡计时
+    downhill: 0,
     greenSkills: 0,
     location: 0,
     locationPlanRush: undefined,
     overtakeAim: undefined,
-    competeFightAim: undefined,
-    competeFightTimer: 0,
     preConditionParams: new PreConditionParams(),
     slope: 0,
     stamina: 0,
@@ -192,12 +194,12 @@ class PseudoUma {
   };
   // 阶段决定的系数
   factorPhase = {
+    // 每赛段跑法加速度系数
+    aStyle: [1, 1, 1],
     // 每赛段随机浮动
     vRand: [1, 1, 1],
     // 每赛段跑法速度系数
     vStyle: [1, 1, 1],
-    // 每赛段跑法加速度系数
-    aStyle: [1, 1, 1],
   };
   // 终盘时的系数
   factorFinal = {

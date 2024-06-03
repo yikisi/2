@@ -380,7 +380,7 @@ function sys_prepare_race(list_chara, race_info) {
         mod_attr_stamina_style[uma.style] +
       race_info.span;
 
-    //由根性属性决定终盘后耐力消耗系数
+    // 由根性属性决定终盘后耐力消耗系数
     uma.factorFinal.sCostMult =
       1 + 200 / Math.sqrt(600 * uma.attrs[attr_enum.toughness]);
 
@@ -390,13 +390,13 @@ function sys_prepare_race(list_chara, race_info) {
     uma.factorFinal.accCompeteFightBuff =
       Math.pow(160 * uma.attrs[attr_enum.toughness], 0.59) * 0.0001;
 
-    //由力量决定受上坡减速的影响程度 最大100%
-    uma.factorSlope.up = Math.min(200 / uma.attrs[attr_enum.strength], 1);
+    // 由力量决定受上坡减速的影响程度 最大100%
+    uma.factorSlope.up = 200 / uma.attrs[attr_enum.strength];
 
-    //由智力决定受下坡加速的影响概率
-    uma.factorSlope.down = 0.0004 * uma.attrs[attr_enum.intelligence];
+    // 由智力决定受下坡加速的影响概率
+    uma.factorSlope.down = (0.0004 * uma.attrs[attr_enum.intelligence]) / 15;
 
-    //由智力决定最终冲刺计划的选择概率
+    // 由智力决定最终冲刺计划的选择概率
     uma.probs.planRush = 0.15 + 0.0005 * uma.attrs[attr_enum.intelligence];
   }
   logger.debug(`比赛相关变量预计算：${new Date().getTime() - current} ms`);

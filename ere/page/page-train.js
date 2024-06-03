@@ -102,7 +102,7 @@ module.exports = async () => {
               height: 22,
               width: 20,
             },
-            inContent: `${era.get(`base:${chara_id}:${k}`)}/${era.get(
+            inContent: `${Math.floor(era.get(`base:${chara_id}:${k}`))}/${era.get(
               `maxbase:${chara_id}:${k}`,
             )} ${
               buff < 0 ? buff.toFixed(0) : `+${buff.toFixed(0)}`

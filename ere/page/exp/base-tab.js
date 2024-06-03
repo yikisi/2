@@ -511,7 +511,7 @@ module.exports = {
                     e,
                     '：',
                     {
-                      content: num.toLocaleString(),
+                      content: Math.floor(num).toLocaleString(),
                       fontWeight: 'bold',
                     },
                   ],

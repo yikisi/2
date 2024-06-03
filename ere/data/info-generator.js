@@ -124,7 +124,7 @@ function get_attr_score(attr) {
   if (attr > 1200) {
     return attr_score_table[1200];
   }
-  return attr_score_table[attr];
+  return attr_score_table[Math.floor(attr)];
 }
 
 /**
@@ -283,11 +283,11 @@ module.exports = {
     if (is_number) {
       return score;
     }
-    let scoreLevel = 0;
-    while (score >= level_and_desc.chara_score.border[scoreLevel]) {
-      scoreLevel++;
+    let score_level = 0;
+    while (score >= level_and_desc.chara_score.border[score_level]) {
+      score_level++;
     }
-    return level_and_desc.chara_score.mark[scoreLevel];
+    return level_and_desc.chara_score.mark[score_level];
   },
   /**
    * @param {number} chara_id
