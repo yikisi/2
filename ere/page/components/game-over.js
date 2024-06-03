@@ -16,6 +16,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { buff_colors } = require('#/data/color-const');
 const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const CrazyFans = require('#/data/event/crazy-fans');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
@@ -53,15 +54,7 @@ async function game_over(again) {
       '每一个被束缚的奴隶都可以靠着他自己的手脱掉锁链。——莎士比亚',
       '我已不再孤单，如今我生命中的挚爱与我如此靠近。——悲惨世界',
     ];
-  } else if (
-    game_over &&
-    (temp = get_random_entry(
-      era.set(
-        'flag:极端粉丝',
-        era.get('flag:极端粉丝').filter((e) => e),
-      ),
-    ))
-  ) {
+  } else if (game_over && (temp = new CrazyFans().get())) {
     era.drawLine();
     await sys_call_edu_event(temp, event_hooks.crazy_fan_end);
     saying_arr = [
@@ -452,7 +445,6 @@ async function game_over(again) {
     }
     return true;
   }
-  era.set('flag:极端粉丝', []);
   return false;
 }
 
