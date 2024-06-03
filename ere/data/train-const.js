@@ -7,6 +7,7 @@ const attr_enum = {
 };
 Object.keys(attr_enum).forEach((k, i) => (attr_enum[k] = i));
 
+/** @type {string[]} */
 const attr_names = [];
 attr_names[attr_enum.speed] = '速度';
 attr_names[attr_enum.endurance] = '耐力';

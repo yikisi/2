@@ -26,7 +26,7 @@ const {
 } = require('#/data/info-generator');
 const {
   back_hairs,
-  chara_has_ero_image,
+  check_chara_ero_image,
   front_hairs,
   race_clothe_list,
   top_hairs,
@@ -201,7 +201,7 @@ module.exports = {
 
     const action_buffer = [];
     if (
-      !chara_has_ero_image[chara.id] &&
+      !check_chara_ero_image(chara.id) &&
       (!chara.id ||
         era.get(`love:${chara.id}`) >= 75 ||
         !era.get(`cflag:${chara.id}:父方角色`) ||

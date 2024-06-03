@@ -55,7 +55,7 @@ const {
   get_relation_info,
 } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
-const { chara_has_ero_image } = require('#/data/other-const');
+const { check_chara_ero_image } = require('#/data/other-const');
 
 function get_chr(img_name) {
   if (!img_name) {
@@ -141,9 +141,13 @@ function get_image(chara_id) {
     borderRadius: 20,
     names: `位置_${location_name[era.get('flag:当前位置')]}`,
   });
-  if (chara_has_ero_image[chara_id]) {
+  if (check_chara_ero_image(chara_id)) {
     const img_name = era.get(`cstr:${chara_id}:头像`);
-    img_list.push(`${img_name}_裸`);
+    if (era.get(`tcvar:${chara_id}:刚刚高潮`)) {
+      img_list.push(`${img_name}_裸_V\t${img_name}_裸`);
+    } else {
+      img_list.push(`${img_name}_裸`);
+    }
     if (era.get(`cflag:${chara_id}:腋毛`) >= 2) {
       img_list.push(`${img_name}_裸_腋毛`);
     }
@@ -210,6 +214,9 @@ function get_image(chara_id) {
       era.get(`ex:${chara_id}:破处标记`)
     ) {
       img_list.push(`${img_name}_头_泪`);
+    }
+    if (era.get(`ex:${chara_id}:TotalEX`)) {
+      img_list.push(`${img_name}_裸_雾气`);
     }
   } else {
     let body_hair_css_filter = era.get(`cflag:${chara_id}:种族`)

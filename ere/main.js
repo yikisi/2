@@ -11,7 +11,7 @@ const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_color } = require('#/data/chara-colors');
 const { el_warning_color } = require('#/data/color-const');
 const notes = require('#/data/notes.json');
-const { first_child_id } = require('#/data/other-const');
+const { first_child_id, set_chara_ero_image } = require('#/data/other-const');
 
 module.exports = async () => {
   let flagTitle = true;
@@ -74,6 +74,7 @@ module.exports = async () => {
   if ((await era.input()) === 2) {
     era.quit();
   }
+  set_chara_ero_image();
   let buffer;
 
   while (flagTitle) {
