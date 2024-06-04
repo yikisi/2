@@ -5,6 +5,7 @@ const {
   check_want_to_escape,
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
@@ -28,6 +29,17 @@ const { pressure_border } = require('#/data/train-const');
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
+
+function common_no_action_check(chara_id) {
+  return (
+    era.get(`cflag:${chara_id}:成长阶段`) < 2 ||
+    !era.get(`base:${chara_id}:精力`) ||
+    !sys_check_awake(chara_id) ||
+    !check_pregnant_unprotect(chara_id) ||
+    !check_pregnant_unprotect(0) ||
+    era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置')
+  );
+}
 
 class CustomizedCheck {
   static like_chara;
@@ -193,7 +205,7 @@ class CustomizedCheck {
 
   /** @returns {boolean} */
   is_prison() {
-    if (era.get(`cflag:${this.id}:位置`) !== era.get('cflag:0:位置')) {
+    if (common_no_action_check(this.id)) {
       return false;
     }
     const love = era.get(`love:${this.id}`),
@@ -233,13 +245,15 @@ class CustomizedCheck {
 
   /** @returns {boolean} */
   is_rape_in_sleeping() {
+    if (common_no_action_check(this.id)) {
+      return false;
+    }
     const love = era.get(`love:${this.id}`),
       raping_limit = era.get('flag:极端行为限制') * 2,
       punish_level = era.get('flag:惩戒力度'),
       relation = era.get(`relation:${this.id}:0`) || 0;
     let delta = love * raping_limit - relation;
     if (
-      era.get(`cflag:${this.id}:位置`) !== era.get('cflag:0:位置') ||
       (punish_level <= 1 &&
         (era.get('flag:当前位置') === location_enum.basement ||
           !raping_limit ||
@@ -278,12 +292,7 @@ class CustomizedCheck {
 
   /** @returns {0|1|2} */
   is_want_make_love() {
-    if (
-      era.get(`cflag:${this.id}:位置`) !== era.get('cflag:0:位置') ||
-      !check_pregnant_unprotect(this.id) ||
-      !check_pregnant_unprotect(0) ||
-      check_want_to_escape(this.id)
-    ) {
+    if (common_no_action_check(this.id) || check_want_to_escape(this.id)) {
       return 0;
     }
     const love = era.get(`love:${this.id}`);

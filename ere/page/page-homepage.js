@@ -11,10 +11,7 @@ const {
   sys_change_status_by_base,
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
-const {
-  sys_check_awake,
-  sys_check_remote,
-} = require('#/system/sys-calc-chara-param');
+const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 const { init_chara } = require('#/system/sys-init-chara');
@@ -98,22 +95,15 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
     }
     const sex_3p = get_random_entry(
       sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
-        .filter(
-          (e) =>
-            e &&
-            e !== temp &&
-            sys_check_awake(e) &&
-            era.get(`cflag:${e}:成长阶段`) >= 2,
-        )
         .map((e) => {
           return {
             id: e,
-            check: get_custom_check(e).is_want_make_love(),
+            check: e && get_custom_check(e).is_want_make_love(),
           };
         })
         .filter(
           (e) =>
-            e.check > 0 &&
+            e.check &&
             era.get(`relation:${temp}:${e.id}`) > 375 &&
             era.get(`relation:${e.id}:${temp}`) > 75,
         ),

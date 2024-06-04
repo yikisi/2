@@ -78,7 +78,6 @@ async function sys_next_week() {
   randomly_interact(in_team_list);
   // 极端事件判定
   if (check_pregnant_unprotect(0)) {
-    const your_position = era.get('cflag:0:位置');
     /** @type {{chara_id:number,prison:boolean,[supporter]:number}[]} */
     let act_list = [];
     let prepared_list =
@@ -87,16 +86,7 @@ async function sys_next_week() {
       era.get(`base:${temp}:精力`) &&
       !era.get(`status:${temp}:马跳S`)
         ? [temp].filter(check_pregnant_unprotect)
-        : in_team_list.filter(
-            (chara_id) =>
-              chara_id !== temp &&
-              era.get(`cflag:${chara_id}:成长阶段`) >= 2 &&
-              era.get(`base:${chara_id}:体力`) &&
-              era.get(`base:${chara_id}:精力`) &&
-              !era.get(`status:${chara_id}:马跳S`) &&
-              check_pregnant_unprotect(chara_id) &&
-              era.get(`cflag:${chara_id}:位置`) === your_position,
-          );
+        : in_team_list.filter((chara_id) => chara_id !== temp);
     prepared_list.forEach((chara_id) => {
       if (
         era.get('flag:地下室之主') === chara_id ||
