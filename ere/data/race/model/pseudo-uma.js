@@ -121,6 +121,10 @@ class PseudoUma {
     change_order_finalcorner: 0,
     // 发动绿技能个数
     greenCount: 0,
+    loc_mind_nige_diff_speed_up: 0,
+    loc_mind_nige_diff_over_take: 0,
+    loc_mind_other_diff_upper: 0,
+    loc_mind_other_diff_lower: 0,
     stamina: 0,
     temptationSpan: 0,
     velocityIdeal: 0,
@@ -151,6 +155,7 @@ class PseudoUma {
     velocityIdeal: 0,
     velocityPlanRush: 0,
     velocityReal: 0,
+    loc_mind: 0,
   };
   // 随机发动的技能的位置指标
   random = {
@@ -188,6 +193,7 @@ class PseudoUma {
   };
   // 各种概率
   probs = {
+    loc_mind: 0,
     planRush: 0,
     skill: 0,
     temptation: 0,

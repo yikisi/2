@@ -194,7 +194,7 @@ function cur_chara_component(chara_id, type, location_npc) {
               height: 22,
               width: 12,
             },
-            inContent: `${era.get(`base:${chara_id}:体力`)}/${era.get(
+            inContent: `${Math.floor(era.get(`base:${chara_id}:体力`))}/${era.get(
               `maxbase:${chara_id}:体力`,
             )}`,
             percentage:
@@ -214,7 +214,7 @@ function cur_chara_component(chara_id, type, location_npc) {
               height: 22,
               width: 12,
             },
-            inContent: `${era.get(`base:${chara_id}:精力`)}/${era.get(
+            inContent: `${Math.floor(era.get(`base:${chara_id}:精力`))}/${era.get(
               `maxbase:${chara_id}:精力`,
             )}`,
             percentage:

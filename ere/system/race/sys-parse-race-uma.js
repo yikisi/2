@@ -10,8 +10,12 @@ const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
 const {
   mod_acceleration_adapt_ground,
-} = require('#/data/race/race-const.json');
-const { skills_dict } = require('#/data/race/skill/skill-const');
+} = require('#/data/race/race-sim-const.js');
+const {
+  chara_skill_dict,
+  skill_sets,
+  skills_dict,
+} = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
 
 /**
@@ -68,6 +72,7 @@ function sys_parse_for_race(team_chara, race, info) {
   const list_history = legends.filter(
     (e) => team_chara.findIndex((uma) => uma.index_chara === e) === -1,
   );
+  // TODO 随机对手抽取
   //先填史实冠军
   //史实冠军保证干劲非负
   gacha(
@@ -146,14 +151,17 @@ function sys_parse_for_race(team_chara, race, info) {
     ratio = 1 - ((date - 1) % 48) / 48;
 
   // 先随机化处理，等数据库完善后再改成真的
-  ret
-    .slice(team_chara.length)
-    .forEach(
-      (uma) =>
-        (uma.attrs = uma.attrs.map(
-          (e) => e - 400 * ratio + get_random_value(-50, 50),
-        )),
+  ret.slice(team_chara.length).forEach((uma) => {
+    uma.attrs = uma.attrs.map(
+      (e) => e - 400 * ratio + get_random_value(-100, 100),
     );
+    uma.list_skill = (
+      chara_skill_dict[uma.index_chara] ||
+      get_random_entry(Object.values(skill_sets))
+    )
+      .slice(0, 3)
+      .map((e) => new PseudoUma.RaceSkill(skills_dict[e]));
+  });
   const from_setting = era.get('flag:比赛难度');
   if (from_setting) {
     ret
@@ -317,10 +325,10 @@ function sys_parse_for_race(team_chara, race, info) {
           if (skill.data.pop_types[i]) {
             if (skill.data.is_random) {
               uma.tempPop[skill.data.pop_types[i] - 1] +=
-                uma.attrs[attr_enum.intelligence] < 90
-                  ? 0
+                uma.attrs[attr_enum.intelligence] < 56.25
+                  ? 0.2
                   : skill.data.pop_values[i] *
-                    (1 - 90 / uma.attrs[attr_enum.intelligence]);
+                    (1 - 45 / uma.attrs[attr_enum.intelligence]);
             } else {
               uma.tempPop[skill.data.pop_types[i] - 1] +=
                 skill.data.pop_values[i];

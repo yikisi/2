@@ -9,18 +9,20 @@ const {
   target_type_enum,
 } = require('#/data/race/model/uma-skill');
 const {
+  acc_up_hill_mode,
+  loc_mind_multiply_velocity_ideal,
   mod_stamina_cost_mess_dirt,
   mod_stamina_cost_mess_grass,
-  raceDecel,
-} = require('#/data/race/race-const.json');
+  race_de_acc,
+  race_event_enum,
+  start_acc,
+  start_velocity,
+} = require('#/data/race/race-sim-const');
 
-// 起跑速度=3 加速度=24
-const startVelocity = 3;
-const startAcceleration = 24;
-
-//上坡时基础加速度为三分之二
-const raceAcceModUphill = 2 / 3;
-
+/**
+ * @param {number} timer
+ * @returns {number}
+ */
 function add_time(timer) {
   const ret = timer + 0.066;
   if (0.990001 - (ret % 1) < 0.00001) {
@@ -44,6 +46,14 @@ function check_random_loc(uma, key, param_val) {
       uma.random[key] = 50000;
     }
   }
+}
+
+/**
+ * @param {RaceLane} lane
+ * @returns {string}
+ */
+function get_lane_name(lane) {
+  return `${lane.is_last ? '终' : lane.index}${lane.is_curve ? '弯' : '直'}`;
 }
 
 /**
@@ -76,15 +86,23 @@ function sys_sim_race(list_chara, race_info) {
         : mod_stamina_cost_mess_dirt[race_info.mess],
     has_final_corner = race_info.lanes.find((e) => e.is_curve && e.is_last);
 
-  const record_location_list = [new Array(count_uma).fill(0)],
+  const record_events_list = [
+      new Array(count_uma).fill(undefined).map(() => []),
+    ],
+    record_location_list = [new Array(count_uma)],
     record_skill_list = [new Array(count_uma).fill(undefined).map(() => [])],
     record_speed_list = [new Array(count_uma).fill(0)],
     record_stamina_list = [new Array(count_uma)],
     start_delay = new Array(count_uma).fill(0);
 
+  const lane = get_lane_name(race_info.lanes[0]),
+    slope = race_info.slopes[0].start === 0 ? race_info.slopes[0].slope : 0,
+    loc_mind_end = (race_info.span * 10) / 24;
+
   // 出闸
   list_chara.forEach((uma) => {
     record_stamina_list[0][uma.index_race] = uma.race.stamina;
+    record_location_list[0][uma.index_race] = [0, lane, slope];
 
     start_delay[uma.index_race] = Math.random() * 0.1;
     uma.list_skill = uma.list_skill.filter((s) => {
@@ -97,13 +115,16 @@ function sys_sim_race(list_chara, race_info) {
       uma.race.conditionParams.activate_count_start++;
     });
     if (start_delay[uma.index_race] < 1 / 15) {
-      uma.race.acceleration = startAcceleration;
+      uma.race.acceleration = start_acc;
       record_speed_list[0][uma.index_race] = uma.race.velocityReal =
-        startVelocity;
+        start_velocity;
     }
-    uma.race.conditionParams.is_badstart = Number(
-      start_delay[uma.index_race] >= 0.08,
-    );
+    if (start_delay[uma.index_race] >= 0.08) {
+      uma.race.conditionParams.is_badstart = 1;
+      record_events_list[0][uma.index_race].push(race_event_enum.bad_start);
+    } else {
+      uma.race.conditionParams.is_badstart = 0;
+    }
   });
 
   const list_finished = [];
@@ -113,6 +134,7 @@ function sys_sim_race(list_chara, race_info) {
 
   while (flag_race) {
     timer = add_time(timer);
+    record_events_list.push(new Array(count_uma).fill(undefined).map(() => []));
     record_location_list.push(new Array(count_uma));
     record_skill_list.push(new Array(count_uma).fill(undefined).map(() => []));
     record_speed_list.push(new Array(count_uma));
@@ -123,7 +145,7 @@ function sys_sim_race(list_chara, race_info) {
       if (start_delay[uma.index_race] > 0) {
         if (start_delay[uma.index_race] < 1 / 15) {
           uma.race.location +=
-            startVelocity +
+            start_velocity +
             uma.race.acceleration * (1 / 15 - start_delay[uma.index_race]);
           uma.race.staminaCost =
             ((20 / 144) *
@@ -148,66 +170,66 @@ function sys_sim_race(list_chara, race_info) {
           15;
       }
 
-      record_location_list.at(-1)[uma.index_race] = uma.race.location;
       record_speed_list.at(-1)[uma.index_race] = uma.race.velocityReal;
       record_stamina_list.at(-1)[uma.index_race] = uma.race.stamina;
     });
 
-    list_in_race = sort_list(list_in_race, (e) => e.race.location).filter(
-      (e) => {
-        if (e.race.location >= race_info.span) {
-          list_finished.push(e);
+    list_in_race = sort_list(list_in_race, (uma) => uma.race.location).filter(
+      (uma, i, l) => {
+        uma.rank.last = uma.rank.curr;
+        uma.rank.curr = list_finished.length + i + 1;
+        uma.race.conditionParams.bashin_diff_infront =
+          (i === 0 ? 50 : l[i - 1].race.location - uma.race.location) / 2.5;
+        uma.race.conditionParams.blocked_front = Number(
+          uma.race.conditionParams.bashin_diff_infront < 0.8,
+        );
+        uma.race.conditionParams.bashin_diff_behind =
+          (i === l.length - 1
+            ? 50
+            : uma.race.location - l[i + 1].race.location) / 2.5;
+        uma.race.conditionParams.change_order_onetime =
+          uma.rank.curr - uma.rank.last;
+        if (uma.race.overtakeAim) {
+          uma.race.overtakeAim.to_be_overtaken = false;
+        }
+        let j = i - 1;
+        while (j >= 0) {
+          if (
+            l[j].race.velocityIdeal < uma.race.velocityIdeal &&
+            l[j].race.velocityReal < uma.race.velocityReal &&
+            (l[j].race.location - uma.race.location) /
+              (l[j].race.velocityReal < uma.race.velocityReal) <
+              15
+          ) {
+            l[j].flag.to_be_overtaken = true;
+            break;
+          }
+          --j;
+        }
+        uma.race.overtakeAim = l[j];
+        if (uma.race.location >= race_info.span) {
+          list_finished.push(uma);
+          record_events_list
+            .at(-1)
+            [uma.index_race].push(race_event_enum.finish);
           return false;
         }
         return true;
       },
     );
 
-    list_finished.forEach((e) => {
-      record_location_list.at(-1)[e.index_race] =
-        race_info.span + 1000 * (race_info.gates - e.rank.curr + 1);
-      record_speed_list.at(-1)[e.index_race] = 0;
-      record_stamina_list.at(-1)[e.index_race] = e.race.stamina;
+    list_finished.forEach((uma) => {
+      record_location_list.at(-1)[uma.index_race] = [
+        race_info.span + 1000 * (race_info.gates - uma.rank.curr + 1),
+      ];
+      record_speed_list.at(-1)[uma.index_race] = 0;
+      record_stamina_list.at(-1)[uma.index_race] = uma.race.stamina;
     });
 
     if (!list_in_race.length) {
       flag_race = false;
       continue;
     }
-
-    list_in_race.forEach((uma, i, l) => {
-      uma.rank.last = uma.rank.curr;
-      uma.rank.curr = list_finished.length + i + 1;
-      uma.race.conditionParams.bashin_diff_infront =
-        (i === 0 ? 50 : l[i - 1].race.location - uma.race.location) / 2.5;
-      uma.race.conditionParams.blocked_front = Number(
-        uma.race.conditionParams.bashin_diff_infront < 0.8,
-      );
-      uma.race.conditionParams.bashin_diff_behind =
-        (i === l.length - 1 ? 50 : uma.race.location - l[i + 1].race.location) /
-        2.5;
-      uma.race.conditionParams.change_order_onetime =
-        uma.rank.curr - uma.rank.last;
-
-      if (uma.race.overtakeAim) {
-        uma.race.overtakeAim.to_be_overtaken = false;
-      }
-      let j = i - 1;
-      while (j >= 0) {
-        if (
-          l[j].race.velocityIdeal < uma.race.velocityIdeal &&
-          l[j].race.velocityReal < uma.race.velocityReal &&
-          (l[j].race.location - uma.race.location) /
-            (l[j].race.velocityReal < uma.race.velocityReal) <
-            15
-        ) {
-          l[j].flag.to_be_overtaken = true;
-          break;
-        }
-        --j;
-      }
-      uma.race.overtakeAim = l[j];
-    });
 
     const top_location = list_in_race[0].race.location,
       contestants_length =
@@ -223,6 +245,11 @@ function sys_sim_race(list_chara, race_info) {
         race_info.slopes.find(
           (e) => uma.race.location >= e.start && uma.race.location < e.end,
         )?.slope || 0;
+      record_location_list.at(-1)[uma.index_race] = [
+        uma.race.location,
+        get_lane_name(cur_lane),
+        uma.race.slope,
+      ];
 
       while (
         uma.race.conditionParams.phase < 3 &&
@@ -236,6 +263,9 @@ function sys_sim_race(list_chara, race_info) {
           (uma.race.temptation % (3 * 15) === 0 && Math.random() < 0.55) ||
           !uma.race.temptation
         ) {
+          record_events_list
+            .at(-1)
+            [uma.index_race].push(race_event_enum.temp_end);
           uma.race.temptation = 0;
           uma.race.conditionParams.is_temptation = 0;
         }
@@ -243,13 +273,13 @@ function sys_sim_race(list_chara, race_info) {
         uma.base.temptationSpan < race_info.span &&
         uma.race.location >= uma.base.temptationSpan
       ) {
+        record_events_list
+          .at(-1)
+          [uma.index_race].push(race_event_enum.temptation);
         uma.base.temptationSpan = 50000;
         uma.race.temptation = 12 * 15;
         uma.race.conditionParams.is_temptation = 1;
         uma.race.conditionParams.temptation_count++;
-      }
-      if (uma.race.temptation > 0) {
-        uma.race.staminaCost *= 1.6;
       }
 
       uma.race.conditionParams.accumulatetime = timer;
@@ -486,7 +516,7 @@ function sys_sim_race(list_chara, race_info) {
       uma.race.acceleration =
         uma.base.acceleration *
         uma.factorPhase.aStyle[Math.min(uma.race.conditionParams.phase, 2)] *
-        (uma.race.slope > 0 ? raceAcceModUphill : 1);
+        (uma.race.slope > 0 ? acc_up_hill_mode : 1);
       // 终盘时则再附加部分变动
       if (uma.race.conditionParams.phase >= 2) {
         uma.race.velocityIdeal += uma.factorFinal.vIdealAdd;
@@ -514,6 +544,10 @@ function sys_sim_race(list_chara, race_info) {
         // 体力足够以最大冲刺速度跑完则直接冲
         if (planStaminaCost * distLeft < uma.race.stamina * planVelocity) {
           uma.race.velocityPlanRush = planVelocity;
+          !uma.flag.finalRush &&
+            record_events_list
+              .at(-1)
+              [uma.index_race].push(race_event_enum.final_push);
           uma.flag.finalRush = true;
           uma.race.conditionParams.lastspurt = 2;
         } else {
@@ -574,6 +608,9 @@ function sys_sim_race(list_chara, race_info) {
         !uma.flag.finalRush &&
         uma.race.location >= uma.race.locationPlanRush
       ) {
+        record_events_list
+          .at(-1)
+          [uma.index_race].push(race_event_enum.final_push);
         uma.flag.finalRush = true;
         uma.race.conditionParams.is_lastspurt = 1;
       }
@@ -887,6 +924,11 @@ function sys_sim_race(list_chara, race_info) {
                       e.race.conditionParams.is_temptation = Number(
                         skill.values[i][j] > 0,
                       );
+                      record_events_list
+                        .at(-1)
+                        [
+                          e.index_race
+                        ].push(e.race.conditionParams.is_temptation ? race_event_enum.temp_continue : race_event_enum.temp_end);
                     });
                     break;
                   case ability_type_enum.CurrentSpeed:
@@ -960,7 +1002,95 @@ function sys_sim_race(list_chara, race_info) {
       });
     });
 
-    for (const uma of list_in_race) {
+    list_in_race.forEach((uma, i, l) => {
+      // 位置意识
+      let no_loc_mind_flag = true,
+        prob_check =
+          uma.race.loc_mind > 0 || Math.random() < uma.probs.loc_mind;
+      if (uma.race.location < loc_mind_end) {
+        if (uma.style === 0) {
+          if (i === 0) {
+            if (
+              uma.race.conditionParams.bashin_diff_behind <=
+                uma.base.loc_mind_nige_diff_speed_up &&
+              prob_check
+            ) {
+              uma.race.loc_mind !== 1 &&
+                record_events_list
+                  .at(-1)
+                  [uma.index_race].push(race_event_enum.loc_mind_nige_speed_up);
+              no_loc_mind_flag = false;
+              uma.race.loc_mind = 1;
+            }
+          } else if (
+            l.slice(0, i).findIndex((e) => e.style > 0) !== -1 &&
+            prob_check
+          ) {
+            uma.race.loc_mind !== 3 &&
+              record_events_list
+                .at(-1)
+                [uma.index_race].push(race_event_enum.loc_mind_nige_ex);
+            no_loc_mind_flag = false;
+            uma.race.loc_mind = 3;
+          } else {
+            if (
+              uma.race.conditionParams.bashin_diff_infront >=
+                uma.base.loc_mind_nige_diff_over_take &&
+              prob_check
+            ) {
+              uma.race.loc_mind !== 2 &&
+                record_events_list
+                  .at(-1)
+                  [
+                    uma.index_race
+                  ].push(race_event_enum.loc_mind_nige_over_take);
+              no_loc_mind_flag = false;
+              uma.race.loc_mind = 2;
+            }
+          }
+        } else {
+          if (l[0].style > uma.style && prob_check) {
+            uma.race.loc_mind !== 3 &&
+              record_events_list
+                .at(-1)
+                [uma.index_race].push(race_event_enum.loc_mind_other_ex);
+            no_loc_mind_flag = false;
+            uma.race.loc_mind = 3;
+          } else if (
+            uma.race.conditionParams.distance_diff_top >=
+              uma.base.loc_mind_other_diff_upper &&
+            prob_check
+          ) {
+            uma.race.loc_mind !== 1 &&
+              record_events_list
+                .at(-1)
+                [uma.index_race].push(race_event_enum.loc_mind_other_quick);
+            no_loc_mind_flag = false;
+            uma.race.loc_mind = 1;
+          } else if (
+            uma.race.conditionParams.distance_diff_top <=
+              uma.base.loc_mind_other_diff_lower &&
+            prob_check
+          ) {
+            uma.race.loc_mind !== 2 &&
+              record_events_list
+                .at(-1)
+                [uma.index_race].push(race_event_enum.loc_mind_other_relax);
+            no_loc_mind_flag = false;
+            uma.race.loc_mind = 2;
+          }
+        }
+      }
+      if (no_loc_mind_flag) {
+        uma.race.loc_mind = 0;
+      }
+      if (uma.race.temptation > 0) {
+        uma.race.loc_mind = 1;
+        uma.race.staminaCost *= 1.6;
+      }
+      if (uma.race.loc_mind === 2 && uma.style > 0) {
+        uma.race.staminaCost *= 0.6;
+      }
       uma.race.stamina = Math.min(
         Math.max(uma.race.stamina - uma.race.staminaCost, 0),
         uma.base.stamina,
@@ -969,17 +1099,25 @@ function sys_sim_race(list_chara, race_info) {
         uma.race.velocityIdeal =
           Math.max(Math.min(uma.race.velocityIdeal, 30), uma.base.velocityMin) +
           uma.base.velocityIdealBuff;
-        if (uma.race.velocityReal > uma.race.velocityIdeal) {
+        if (uma.race.loc_mind > 0) {
+          uma.race.velocityIdeal *=
+            loc_mind_multiply_velocity_ideal[
+              (uma.style > 0) * 3 + uma.race.loc_mind
+            ];
+        }
+        if (uma.race.loc_mind === 2 && uma.style > 0) {
+          uma.race.acceleration = race_de_acc[3];
+        } else if (uma.race.velocityReal > uma.race.velocityIdeal) {
           uma.race.acceleration =
-            raceDecel[Math.min(uma.race.conditionParams.phase, 2)];
+            race_de_acc[Math.min(uma.race.conditionParams.phase, 2)];
         }
       } else {
         uma.race.velocityIdeal =
           uma.base.velocityMin + uma.base.velocityIdealBuff;
-        uma.race.acceleration = raceDecel[4];
+        uma.race.acceleration = race_de_acc[4];
       }
       uma.race.acceleration += uma.base.accelerationBuff;
-    }
+    });
   }
   list_finished.forEach((e, i) => {
     e.rank.last = e.rank.curr;
@@ -990,6 +1128,7 @@ function sys_sim_race(list_chara, race_info) {
     `比赛模拟：${duration} ms / ${Math.ceil(timer * 15)} 帧，平均 ${(duration / (timer * 15)).toFixed(4)} ms/帧`,
   );
   return {
+    events: record_events_list,
     loc: record_location_list,
     skill: record_skill_list,
     speed: record_speed_list,

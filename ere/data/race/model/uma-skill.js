@@ -6,7 +6,7 @@ const skill_name_colors = [
   '#ce7cff',
 ];
 
-const skill_border_colors = ['#c6c5c5', '#eeb93f', '#f8c7ff', '#ee82ee'];
+const skill_border_colors = ['#c6c5c5', '#eeb93f', '#ffc0cb', '#ee82ee'];
 
 const rarity_enum = {
   // 普通技能
@@ -310,6 +310,7 @@ class UmaSkill {
       {
         color: name_color,
         content: this.name,
+        display: 'inline-block',
         fontWeight: 'bold',
         title: `[${this.name}] ${this.desc}`,
       },

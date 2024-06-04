@@ -5,6 +5,7 @@ const { median, sort_list } = require('#/utils/list-utils');
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
 const { track_names } = require('#/data/race/model/race-info');
+const { race_event_names } = require('#/data/race/race-sim-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 
 const fron_cols = 5;
@@ -66,7 +67,7 @@ function get_timer_record(minutes, seconds) {
 
 /**
  * @param {PseudoUma[]} contestants
- * @param {{loc:number[][],skill:number[][][],speed:number[][],stamina:number[][]}} records
+ * @param {{events:number[][][],loc:[number,string,number][][],skill:number[][][],speed:number[][],stamina:number[][]}} records
  * @param {RaceInfo} info
  */
 async function page_race_result(contestants, records, info) {
@@ -120,15 +121,15 @@ async function page_race_result(contestants, records, info) {
       timer = 0;
     while (flag_result && timer < records.loc.length) {
       contestants.forEach((uma) => {
-        if (records.loc[timer][uma.index_race] >= info.span) {
+        const location = records.loc[timer][uma.index_race][0];
+        if (location >= info.span) {
           if (!total_time[uma.index_race]) {
             total_time[uma.index_race] = get_timer_record(...record_timer);
           }
         } else {
           if (
             contestant_timer_index[uma.index_race] < header.length &&
-            records.loc[timer][uma.index_race] >=
-              header[contestant_timer_index[uma.index_race]]
+            location >= header[contestant_timer_index[uma.index_race]]
           ) {
             contestant_timer[uma.index_race][
               contestant_timer_index[uma.index_race]
@@ -147,6 +148,15 @@ async function page_race_result(contestants, records, info) {
         timer_end = timer_start + fron_cols;
       const buffer = [];
       contestants.forEach((uma) => {
+        const loc = records.loc[timer][uma.index_race],
+          inContent = [
+            `${Math.round(loc[0]).toLocaleString()}m`,
+            loc[1],
+            loc[2] > 0 ? '上坡' : loc[2] < 0 ? '下坡' : undefined,
+            `(${((loc[0] * 100) / info.span).toFixed(2)}%)`,
+          ]
+            .filter((e) => e)
+            .join(' ');
         buffer.push({
           columns: [
             {
@@ -171,12 +181,12 @@ async function page_race_result(contestants, records, info) {
             {
               config: { width: 2 },
               content:
-                records.loc[timer][uma.index_race] >= info.span
+                loc[0] >= info.span
                   ? total_time[uma.index_race]
                   : [records.speed[timer][uma.index_race].toFixed(1), 'm/s'],
               type: 'text',
             },
-            records.loc[timer][uma.index_race] >= info.span
+            loc[0] >= info.span
               ? {
                   config: { width: 24 - 6 - 2 * fron_cols },
                   content: `${uma.rank.curr} 着${uma.rank.curr <= 4 && uma.rank.curr < contestants.length ? ` · ${get_delta_desc(uma.race.conditionParams.bashin_diff_behind)}` : ''}`,
@@ -189,17 +199,28 @@ async function page_race_result(contestants, records, info) {
                     height: 22,
                     width: 24 - 6 - 2 * fron_cols,
                   },
-                  inContent: `${Math.round(records.loc[timer][uma.index_race]).toLocaleString()}m (${(
-                    (records.loc[timer][uma.index_race] * 100) /
-                    info.span
-                  ).toFixed(2)}%)`,
-                  percentage:
-                    (records.loc[timer][uma.index_race] * 100) / info.span,
+                  inContent,
+                  percentage: (loc[0] * 100) / info.span,
                   type: 'progress',
                 },
           ],
-          key: records.loc[timer][uma.index_race],
+          key: loc[0],
         });
+        records.events[timer][uma.index_race].forEach((e_id) =>
+          report_buffer.push({
+            config: { align: 'left' },
+            content: [
+              { isBr: true },
+              get_timer_record(...record_timer),
+              ' ',
+              { color: uma.color, content: uma.name, fontWeight: 'bold' },
+              ' ',
+              { content: race_event_names[e_id] },
+            ],
+            timer: 5 * 15,
+            type: 'text',
+          }),
+        );
         records.skill[timer][uma.index_race].forEach((s_id) =>
           skill_buffer.push({
             config: { align: 'right' },
@@ -208,24 +229,13 @@ async function page_race_result(contestants, records, info) {
               ...skills_dict[s_id].get_colored_name(),
               ' ',
               { color: uma.color, content: uma.name, fontWeight: 'bold' },
+              ' ',
+              get_timer_record(...record_timer),
             ],
             timer: 5 * 15,
             type: 'text',
           }),
         );
-        if (!timer && uma.race.conditionParams.is_badstart) {
-          report_buffer.push({
-            config: { align: 'left' },
-            content: [
-              { isBr: true },
-              { color: uma.color, content: uma.name, fontWeight: 'bold' },
-              ' ',
-              { color: buff_colors[3], content: '出迟！' },
-            ],
-            timer: 5 * 15,
-            type: 'text',
-          });
-        }
       });
       report_buffer = report_buffer
         .filter((e) => e.timer--)
@@ -258,7 +268,7 @@ async function page_race_result(contestants, records, info) {
           },
         ],
         ...sort_list(buffer, (e) => e.key),
-        { columns: report_buffer, config: { offset: 1, width: 11 } },
+        { columns: report_buffer, config: { width: 12 } },
         { columns: skill_buffer, config: { width: 12 } },
         [
           {
@@ -382,13 +392,20 @@ async function page_race_result(contestants, records, info) {
       radius: 0,
       responsive: true,
     };
-  era.print('位置图');
+  era.print('相对位置图');
+  const top_locations = records.loc.map((r) =>
+    Math.max(...r.map((e) => Math.min(e[0], info.span))),
+  );
   era.printLineChart({
     data: {
       datasets: contestants.map((e) => ({
         borderColor: get_chara_color(e.index_chara),
         data: records.loc
-          .map((r) => Math.min(r[e.index_race], info.span).toFixed(1))
+          .map((r, i) =>
+            (
+              Math.min(r[e.index_race][0], info.span) - top_locations[i]
+            ).toFixed(1),
+          )
           .filter((_, i) => i % 15 === 0),
         label: e.name,
         stepped: false,

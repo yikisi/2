@@ -151,7 +151,7 @@ function get_suffix(chara_id, type) {
         width: 3,
         barWidth: 20,
       },
-      inContent: `${era.get(`base:${chara_id}:体力`)}/${era.get(
+      inContent: `${Math.floor(era.get(`base:${chara_id}:体力`))}/${era.get(
         `maxbase:${chara_id}:体力`,
       )}`,
       percentage:
@@ -166,7 +166,7 @@ function get_suffix(chara_id, type) {
         width: 3,
         barWidth: 20,
       },
-      inContent: `${era.get(`base:${chara_id}:精力`)}/${era.get(
+      inContent: `${Math.floor(era.get(`base:${chara_id}:精力`))}/${era.get(
         `maxbase:${chara_id}:精力`,
       )}`,
       percentage:

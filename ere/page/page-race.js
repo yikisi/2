@@ -183,7 +183,7 @@ function page_race_header(_info, is_grand_live) {
             height: 22,
             width: 8,
           },
-          inContent: `${era.get('base:0:精力')}/${era.get('maxbase:0:精力')}`,
+          inContent: `${Math.floor(era.get('base:0:精力'))}/${era.get('maxbase:0:精力')}`,
           percentage:
             (era.get('base:0:精力') * 100) / era.get('maxbase:0:精力'),
           type: 'progress',
@@ -268,7 +268,11 @@ async function race_page(race) {
     cur_chara = team_list[0],
     uma_index = contestants.indexOf(cur_chara),
     attribute_info = generate_attribute_info(cur_chara),
-    strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank);
+    strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank),
+    skill_buffer = [];
+  cur_chara.list_skill.forEach((s) =>
+    skill_buffer.push(...s.data.get_colored_name()),
+  );
   while (flag_prepare_race) {
     era.setVerticalAlign('middle');
     era.printInColRows(
@@ -283,7 +287,7 @@ async function race_page(race) {
             type: 'button',
           },
         ],
-        config: { width: 4 },
+        config: { width: 3 },
       },
       {
         columns: [
@@ -306,11 +310,6 @@ async function race_page(race) {
             content: cur_chara.name,
             type: 'text',
           },
-        ],
-        config: { width: 8 },
-      },
-      {
-        columns: [
           {
             config: { align: 'center' },
             content: [
@@ -320,7 +319,7 @@ async function race_page(race) {
                 content: motivation_names[cur_chara.motivation + 2],
               },
               { isBr: true },
-              ' 第 ',
+              '第 ',
               cur_chara.pop[0],
               ' 人气 ',
               cur_chara.pop
@@ -330,6 +329,11 @@ async function race_page(race) {
             ],
             type: 'text',
           },
+        ],
+        config: { width: 8 },
+      },
+      {
+        columns: [
           { config: { content: '基础能力' }, type: 'divider' },
           ...attribute_info,
           { config: { content: '比赛能力' }, type: 'divider' },
@@ -398,8 +402,14 @@ async function race_page(race) {
                   type: 'text',
                 };
           }),
+          { config: { content: '习得技能' }, type: 'divider' },
+          {
+            config: { align: 'center' },
+            content: skill_buffer,
+            type: 'text',
+          },
         ],
-        config: { width: 8 },
+        config: { width: 10 },
       },
       {
         columns: [
@@ -410,7 +420,7 @@ async function race_page(race) {
             type: 'button',
           },
         ],
-        config: { width: 4 },
+        config: { width: 3 },
       },
       {
         columns: [
@@ -488,6 +498,10 @@ async function race_page(race) {
         attribute_info = generate_attribute_info(cur_chara);
         strategy_ability = cur_chara.adapt_style_list.map(
           get_adaptability_rank,
+        );
+        skill_buffer = [];
+        cur_chara.list_skill.forEach((s) =>
+          skill_buffer.push(...s.data.get_colored_name()),
         );
       }
       await era.clear();

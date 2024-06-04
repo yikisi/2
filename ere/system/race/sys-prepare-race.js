@@ -13,7 +13,7 @@ const {
   mod_attr_stamina_style,
   mod_velocity_final_adapt_distance,
   mod_velocity_style,
-} = require('#/data/race/race-const.json');
+} = require('#/data/race/race-sim-const.js');
 const { attr_enum } = require('#/data/train-const');
 
 /**
@@ -44,7 +44,8 @@ function sys_prepare_race(list_chara, race_info) {
     down_slopes = race_info.slopes.filter((e) => e.slope < 0),
     up_slopes = race_info.slopes.filter((e) => e.slope > 0),
     middle_corners = [],
-    straights = [];
+    straights = [],
+    loc_mind_base_diff = 0.0008 * (race_info.span - 1000) + 1;
   let flag_final = true,
     final_corner = undefined,
     final_straight = undefined;
@@ -220,14 +221,29 @@ function sys_prepare_race(list_chara, race_info) {
     uma.adapts.style = uma.adapt_style_list[uma.style];
 
     // 计算基础属性值（属性值加干劲修正）
-    Object.values(attr_enum).forEach((v) => {
-      uma.attrs[v] *= 1 + uma.motivation * 0.02;
-    });
+    Object.values(attr_enum).forEach(
+      (v) =>
+        (uma.attrs[v] =
+          (uma.attrs[v] > 1200
+            ? 1200 + (uma.attrs[v] - 1200) / 2
+            : uma.attrs[v]) *
+          (1 + uma.motivation * 0.02)),
+    );
 
     uma.base.accBuffFromWiz = (uma.attrs[attr_enum.intelligence] * 0.01) / 300;
 
     // 由基础智力决定技能触发率 最低20%
-    uma.probs.skill = Math.max(1 - 90 / uma.attrs[attr_enum.intelligence], 0.2);
+    uma.probs.skill =
+      uma.attrs[attr_enum.intelligence] < 56.25
+        ? 0.2
+        : Math.max(1 - 45 / uma.attrs[attr_enum.intelligence], 0.2);
+
+    // 位置意识概率，每两秒判定一次，所以要除30帧
+    uma.probs.loc_mind =
+      ((15 + 5 * (uma.style === 0)) *
+        Math.log(uma.attrs[attr_enum.intelligence] / 10)) /
+      Math.log(10) /
+      3000;
 
     //计算比赛偏重属性对速度属性的增幅
     if (race_info.attr_bonus.length > 0) {
@@ -322,7 +338,7 @@ function sys_prepare_race(list_chara, race_info) {
     } else {
       uma.base.temptationSpan = 50000;
     }
-    uma.attrs = uma.attrs.map((e) => Math.max(e, 1));
+    uma.attrs = uma.attrs.map((e) => Math.min(Math.max(e + 400, 1), 2000));
 
     //调取当前跑法在赛中各阶段的目标速度及加速度倍率
     uma.factorPhase.vStyle = mod_velocity_style[uma.style];
@@ -373,11 +389,9 @@ function sys_prepare_race(list_chara, race_info) {
       mod_acceleration_adapt_ground[uma.adapts.ground] *
       mod_acceleration_adapt_distance[uma.adapts.distance];
 
-    //由耐力属性以及400隐藏基础耐力决定耐力条 顺便填满
+    //由耐力属性决定耐力条 顺便填满
     uma.race.stamina = uma.base.stamina =
-      0.8 *
-        (uma.attrs[attr_enum.endurance] + 400) *
-        mod_attr_stamina_style[uma.style] +
+      0.8 * uma.attrs[attr_enum.endurance] * mod_attr_stamina_style[uma.style] +
       race_info.span;
 
     // 由根性属性决定终盘后耐力消耗系数
@@ -398,6 +412,35 @@ function sys_prepare_race(list_chara, race_info) {
 
     // 由智力决定最终冲刺计划的选择概率
     uma.probs.planRush = 0.15 + 0.0005 * uma.attrs[attr_enum.intelligence];
+
+    // 位置意识
+    switch (uma.style) {
+      case 0:
+        if (uma.race.conditionParams.is_used_skill_id === 202051) {
+          uma.base.loc_mind_nige_diff_speed_up = 17.5 / 2.5;
+          uma.base.loc_mind_nige_diff_over_take = 27.5 / 2.5;
+        } else if (
+          uma.race.conditionParams.running_style_count_nige_otherself
+        ) {
+          uma.base.loc_mind_nige_diff_speed_up = 12.5 / 2.5;
+          uma.base.loc_mind_nige_diff_over_take = 10 / 2.5;
+        } else {
+          uma.base.loc_mind_nige_diff_speed_up = 4.5 / 2.5;
+          uma.base.loc_mind_nige_diff_over_take = 10 / 2.5;
+        }
+        break;
+      case 1:
+        uma.base.loc_mind_other_diff_lower = 3;
+        uma.base.loc_mind_other_diff_upper = 5 * loc_mind_base_diff;
+        break;
+      case 2:
+        uma.base.loc_mind_other_diff_lower = 6.5 * loc_mind_base_diff;
+        uma.base.loc_mind_other_diff_upper = 7 * loc_mind_base_diff;
+        break;
+      case 3:
+        uma.base.loc_mind_other_diff_lower = 7.5;
+        uma.base.loc_mind_other_diff_upper = 8 * loc_mind_base_diff;
+    }
   }
   logger.debug(`比赛相关变量预计算：${new Date().getTime() - current} ms`);
 }

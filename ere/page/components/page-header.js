@@ -131,7 +131,7 @@ function page_header() {
               height: 22,
               width: 9,
             },
-            inContent: `${era.get(`base:0:体力`)}/${era.get(`maxbase:0:体力`)}`,
+            inContent: `${Math.floor(era.get(`base:0:体力`))}/${era.get(`maxbase:0:体力`)}`,
             percentage:
               (era.get(`base:0:体力`) * 100) / era.get(`maxbase:0:体力`),
             type: 'progress',
@@ -147,7 +147,7 @@ function page_header() {
               height: 22,
               width: 9,
             },
-            inContent: `${era.get(`base:0:精力`)}/${era.get(`maxbase:0:精力`)}`,
+            inContent: `${Math.floor(era.get(`base:0:精力`))}/${era.get(`maxbase:0:精力`)}`,
             percentage:
               (era.get(`base:0:精力`) * 100) / era.get(`maxbase:0:精力`),
             type: 'progress',
