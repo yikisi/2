@@ -8,7 +8,8 @@ const { track_names } = require('#/data/race/model/race-info');
 const { race_event_names } = require('#/data/race/race-sim-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 
-const fron_cols = 5;
+const fron_cols = 5,
+  progress_width = 24 - 7 - 2 * fron_cols;
 const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'];
 
 /**
@@ -146,14 +147,22 @@ async function page_race_result(contestants, records, info) {
           0,
         ),
         timer_end = timer_start + fron_cols;
-      const buffer = [];
+      const buffer = [],
+        top_loc = Math.min(
+          Math.max(...records.loc[timer].map((e) => e[0])),
+          info.span,
+        ),
+        bottom_loc = Math.min(...records.loc[timer].map((e) => e[0])),
+        contestants_span = top_loc - bottom_loc || 1;
       contestants.forEach((uma) => {
         const loc = records.loc[timer][uma.index_race],
+          diff = loc[0] > info.span ? 0 : top_loc - loc[0],
           inContent = [
-            `${Math.round(loc[0]).toLocaleString()}m`,
+            diff ? `-${diff.toFixed(1)}m` : '头马',
+            `(${Math.round(loc[0]).toLocaleString()}m`,
             loc[1],
             loc[2] > 0 ? '上坡' : loc[2] < 0 ? '下坡' : undefined,
-            `(${((loc[0] * 100) / info.span).toFixed(2)}%)`,
+            ')',
           ]
             .filter((e) => e)
             .join(' ');
@@ -166,7 +175,7 @@ async function page_race_result(contestants, records, info) {
             },
             {
               config: {
-                width: 3,
+                width: 4,
                 color: uma.color,
                 fontWeight: 'bold',
               },
@@ -188,7 +197,7 @@ async function page_race_result(contestants, records, info) {
             },
             loc[0] >= info.span
               ? {
-                  config: { width: 24 - 6 - 2 * fron_cols },
+                  config: { width: progress_width },
                   content: `${uma.rank.curr} 着${uma.rank.curr <= 4 && uma.rank.curr < contestants.length ? ` · ${get_delta_desc(uma.race.conditionParams.bashin_diff_behind)}` : ''}`,
                   type: 'text',
                 }
@@ -197,10 +206,13 @@ async function page_race_result(contestants, records, info) {
                     color: uma.color,
                     fontColor: 'black',
                     height: 22,
-                    width: 24 - 6 - 2 * fron_cols,
+                    width: progress_width,
                   },
                   inContent,
-                  percentage: (loc[0] * 100) / info.span,
+                  percentage:
+                    diff === contestants_span
+                      ? 0
+                      : 100 - (diff * 100) / contestants_span,
                   type: 'progress',
                 },
           ],
@@ -248,11 +260,32 @@ async function page_race_result(contestants, records, info) {
         [
           { type: 'divider' },
           {
+            config: {
+              align: 'right',
+              width: 11,
+            },
             content: ['计时器：', get_timer_record(...record_timer)],
             type: 'text',
           },
+          ...(top_loc === info.span
+            ? [{ config: { width: 12 }, content: '结束！', type: 'text' }]
+            : [
+                {
+                  config: {
+                    barWidth: 16,
+                    height: 22,
+                    offset: 2,
+                    width: 4,
+                  },
+                  inContent: `${Math.round(top_loc)}m (${((100 * top_loc) / info.span).toFixed(2)}%)`,
+                  percentage: (100 * top_loc) / info.span,
+                  outContent: '进度',
+                  type: 'progress',
+                },
+              ]),
+          { content: '', type: 'text' },
           { config: { width: 1 }, content: '号码', type: 'text' },
-          { config: { width: 3 }, content: '名字', type: 'text' },
+          { config: { width: 4 }, content: '名字', type: 'text' },
           ...header.slice(timer_start, timer_end).map((e) => {
             return {
               config: { width: 2 },
@@ -262,8 +295,8 @@ async function page_race_result(contestants, records, info) {
           }),
           { config: { width: 2 }, content: '速度', type: 'text' },
           {
-            config: { width: 24 - 6 - 2 * fron_cols },
-            content: '进度',
+            config: { width: progress_width },
+            content: '相对位置',
             type: 'text',
           },
         ],

@@ -213,10 +213,7 @@ module.exports = (handlers) => {
     extra_flag,
     event_object,
   ) => {
-    if (
-      era.get('flag:当前互动角色') > 0 ||
-      extra_flag.loc !== location_enum.chairman
-    ) {
+    if (extra_flag.loc !== location_enum.chairman) {
       await era.printAndWait(
         '据说学生中有关于阶梯数的怪谈……下次独自前往理事长办公室的时候注意一下吧',
       );
@@ -310,10 +307,7 @@ module.exports = (handlers) => {
     extra_flag,
     event_object,
   ) => {
-    if (
-      era.get('flag:当前互动角色') > 0 ||
-      extra_flag.loc !== location_enum.chairman
-    ) {
+    if (extra_flag.loc !== location_enum.chairman) {
       await era.printAndWait(
         '据说理事长办公室附近最近有陌生人出没……下次独自前往理事长办公室的时候接触一下吧',
       );

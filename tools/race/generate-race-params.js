@@ -43,15 +43,13 @@ data.forEach((e) => {
     });
   }
   let corner = 0,
-    straight = 0;
+    straight = obj_lanes.filter((e) => !e.is_curve).length;
   for (let i = obj_lanes.length - 1; i >= 0; --i) {
     const curr = obj_lanes[i];
     if (curr.is_curve) {
       curr.index = (corner = (corner + 3) % 4) + 1;
-    } else if (curr.is_last) {
-      curr.index = 3;
     } else {
-      curr.index = (straight = (straight + 1) % 2) + 1;
+      curr.index = straight--;
     }
   }
 

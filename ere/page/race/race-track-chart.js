@@ -81,6 +81,21 @@ function print_race_track_chart(info) {
         yValue: 2.75,
       }),
   );
+  const loc_mind = Math.ceil((info.span * 10) / 24);
+  annotations.divider3 = {
+    borderColor: 'black',
+    type: 'line',
+    xMax: loc_mind,
+    xMin: loc_mind,
+  };
+  annotations.dLabel3 = {
+    backgroundColor: 'black',
+    color: 'white',
+    content: '位置意识结束',
+    type: 'label',
+    xValue: loc_mind,
+    yValue: -2.75,
+  };
   era.printLineChart({
     data: {
       datasets: [
