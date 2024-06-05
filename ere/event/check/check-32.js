@@ -257,7 +257,10 @@ module.exports = class extends CustomizedCheck {
           if (edu_marks.plan_b) {
             sys_reg_race(32).curr = {
               race: race_enum.tenn_spr,
-              week: era.get('flag:当前回合数') + 11,
+              week:
+                era.get('flag:当前回合数') +
+                race_infos[race_enum.tenn_spr].date -
+                5,
             };
           }
           break;
@@ -270,7 +273,10 @@ module.exports = class extends CustomizedCheck {
           if (edu_marks.plan_b) {
             sys_reg_race(32).curr = {
               race: race_enum.prix_lat,
-              week: era.get('flag:当前回合数') + 8,
+              week:
+                era.get('flag:当前回合数') +
+                race_infos[race_enum.prix_lat].date -
+                29,
             };
           }
           add_event(event_hooks.week_start, event_obj_special);

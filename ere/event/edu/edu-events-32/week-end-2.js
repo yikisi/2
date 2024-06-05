@@ -748,7 +748,8 @@ module.exports = (handlers) => {
     flags.wait_flag = sys_change_motivation(32, 1) || flags.wait_flag;
     sys_reg_race(32).curr = {
       race: race_enum.takz_kin,
-      week: era.get('flag:当前回合数') + 6,
+      week:
+        era.get('flag:当前回合数') + race_infos[race_enum.takz_kin].date - 18,
     };
   };
 

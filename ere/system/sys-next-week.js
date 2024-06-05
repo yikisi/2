@@ -854,6 +854,7 @@ async function sys_next_week() {
   in_team_list = in_team_list.filter(
     (e) =>
       era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
+      era.get('cflag:0:位置') === era.get(`cflag:${e}:位置`) &&
       (get_custom_mec(e).is_able_to_be_selected() ||
         (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) > 0),
   );
@@ -866,24 +867,17 @@ async function sys_next_week() {
         get_random_entry(
           in_team_list.filter(
             (e) =>
-              era.get('cflag:0:位置') === era.get(`cflag:${e}:位置`) &&
               era.get(`cflag:${e}:育成回合计时`) < 3 * 48 &&
               (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) === 0,
           ),
         ) ||
         get_random_entry(
           in_team_list.filter(
-            (e) =>
-              era.get('cflag:0:位置') === era.get(`cflag:${e}:位置`) &&
-              era.get(`cflag:${e}:育成回合计时`) < 3 * 48,
+            (e) => era.get(`cflag:${e}:育成回合计时`) < 3 * 48,
           ),
         ) ||
         get_random_entry(
-          in_team_list.filter(
-            (e) =>
-              era.get('cflag:0:位置') === era.get(`cflag:${e}:位置`) &&
-              era.get(`cflag:${e}:成长阶段`) >= 1,
-          ),
+          in_team_list.filter((e) => era.get(`cflag:${e}:成长阶段`) >= 1),
         ) ||
         0,
     );
