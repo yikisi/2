@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '憧憬的应援',
   '在比赛后段的弯道上，无声铃鹿感受到众人的祈愿，因此恢复耐力。',
   30010,
-  2,
+  UmaSkill.rarity_enum.gold,
   9,
   0,
   [() => true, () => true],
@@ -19,20 +19,44 @@ module.exports = new UmaSkill(
   [0, 0],
   [500, 0],
   [
-    [9, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.055, 0, 0],
     [0, 0, 0],
   ],
   [
-    [22, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.CharaId,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [1002, 0, 0],

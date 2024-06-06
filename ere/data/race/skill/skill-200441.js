@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '钢铁意志',
   '在比赛序盘或中盘前方堵塞时，保持坚定的意志恢复持久力，并且路线选择变得更明智',
   20044,
-  2,
+  UmaSkill.rarity_enum.gold,
   9,
   508,
   [() => true, () => true],
@@ -19,20 +19,44 @@ module.exports = new UmaSkill(
   [2, 0],
   [500, 0],
   [
-    [9, 28, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.LaneMoveSpeed,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.055, 0.035, 0],
     [0, 0, 0],
   ],
   [
-    [1, 1, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

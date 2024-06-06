@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '鬼气森然',
   '比赛终盘时若身处接近最后方的位置，则回复持久力，并稍微提升速度＜作战・追赶＞',
   10500111,
-  6,
+  UmaSkill.rarity_enum.evol,
   25,
   633,
   [() => true, () => true],
@@ -19,20 +19,44 @@ module.exports = new UmaSkill(
   [3, 0],
   [500, 0],
   [
-    [9, 27, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.055, 0.15, 0],
     [0, 0, 0],
   ],
   [
-    [1, 1, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

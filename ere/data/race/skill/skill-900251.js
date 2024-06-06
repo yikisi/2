@@ -2,10 +2,10 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900251,
-  'アナタヲ・オイカケテ',
-  'レース後半に中団から\n速度をちょっとずつ上げ前方のウマ娘を\nほんのちょっと萎縮させる',
+  '逐君之形',
+  '赛程后半时，由中间梯队稍微提升速度，使前方的马娘稍微萎缩',
   90025,
-  1,
+  UmaSkill.rarity_enum.normal,
   2,
   180,
   [() => true, () => true],
@@ -19,20 +19,44 @@ module.exports = new UmaSkill(
   [3.6, 0],
   [500, 0],
   [
-    [27, 21, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.CurrentSpeed,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.05, -0.025, 0],
     [0, 0, 0],
   ],
   [
-    [1, 9, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.SelfInfront,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 5, 0],
@@ -41,4 +65,5 @@ module.exports = new UmaSkill(
   [1, 0],
   [15, 0],
   1,
+  false,
 );

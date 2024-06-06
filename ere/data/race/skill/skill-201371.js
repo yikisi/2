@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '迷惑的干扰',
   '比赛终盘位于前列时，使后面马娘的视野稍微变窄＜作战・先行＞',
   20137,
-  2,
+  UmaSkill.rarity_enum.gold,
   11,
   334,
   [() => true, () => true],
@@ -19,20 +19,44 @@ module.exports = new UmaSkill(
   [3, 0],
   [500, 0],
   [
-    [8, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.VisibleDistance,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [-5, 0, 0],
     [0, 0, 0],
   ],
   [
-    [10, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.SelfBehind,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [18, 0, 0],

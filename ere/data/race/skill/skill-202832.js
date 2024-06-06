@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '两手准备',
   '比赛中盘发动技能时速度略微提升，之后在比赛终盘发动技能时，略微向前突进＜沙土＞',
   20283,
-  1,
+  UmaSkill.rarity_enum.normal,
   2,
   263,
   [() => true, () => true],
@@ -22,20 +22,44 @@ module.exports = new UmaSkill(
   [2.4, 2.4],
   [500, 500],
   [
-    [27, 0, 0],
-    [22, 0, 0],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.CurrentSpeedWithNaturalDeceleration,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.05, 0, 0],
     [0.05, 0, 0],
   ],
   [
-    [1, 0, 0],
-    [1, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

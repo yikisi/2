@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '越级',
   '比赛终盘在后方准备超越时，稍微提升加速度＜短距离/英里＞',
   20240,
-  1,
+  UmaSkill.rarity_enum.normal,
   2,
   217,
   [() => true, () => true],
@@ -24,20 +24,44 @@ module.exports = new UmaSkill(
   [2, 0],
   [500, 0],
   [
-    [31, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.Accel,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.2, 0, 0],
     [0, 0, 0],
   ],
   [
-    [1, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

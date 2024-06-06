@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '终达群星',
   '在比赛中段左右处在中间集团，速度提升，若是中距离比赛，且至此为止发动过7次技能，则速度会大幅提高',
   10105,
-  5,
+  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],
@@ -26,20 +26,44 @@ module.exports = new UmaSkill(
   [5, 5],
   [500, 500],
   [
-    [27, 0, 0],
-    [27, 0, 0],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.45, 0, 0],
     [0.35, 0, 0],
   ],
   [
-    [1, 0, 0],
-    [1, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

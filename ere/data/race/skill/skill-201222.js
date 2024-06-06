@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '耐力猎手',
   '比赛中盘位于后方时，就会稍微剥夺前方马娘的耐力＜长距离＞',
   20122,
-  1,
+  UmaSkill.rarity_enum.normal,
   3,
   217,
   [() => true, () => true],
@@ -17,20 +17,44 @@ module.exports = new UmaSkill(
   [0, 0],
   [500, 0],
   [
-    [9, 9, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [-0.005, 0.015, 0],
     [0, 0, 0],
   ],
   [
-    [9, 1, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.SelfInfront,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [5, 0, 0],

@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '令人出神的诡计',
   '比赛中盘位于前方时，使后方焦躁的马娘变得很疲劳',
   20077,
-  2,
+  UmaSkill.rarity_enum.gold,
   11,
   508,
   [() => true, () => true],
@@ -19,20 +19,44 @@ module.exports = new UmaSkill(
   [0, 0],
   [500, 0],
   [
-    [9, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [-0.03, 0, 0],
     [0, 0, 0],
   ],
   [
-    [20, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.SelfBehindTemptation,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [10, 0, 0],

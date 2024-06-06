@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '神鹰猛击波',
   '在最后弯道由中部梯队开始向前冲击时燃烧斗魂提升加速力',
   11014,
-  5,
+  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],
@@ -21,20 +21,44 @@ module.exports = new UmaSkill(
   [4, 0],
   [500, 0],
   [
-    [31, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.Accel,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.4, 0, 0],
     [0, 0, 0],
   ],
   [
-    [1, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

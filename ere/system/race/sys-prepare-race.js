@@ -340,9 +340,12 @@ function sys_prepare_race(list_chara, race_info) {
     }
     uma.attrs = uma.attrs.map((e) => Math.min(Math.max(e + 400, 1), 2000));
 
+    // 01234：大逃、逃先差追
+    const style_index =
+      uma.style + (uma.race.conditionParams.is_used_skill_id !== 202051);
     //调取当前跑法在赛中各阶段的目标速度及加速度倍率
-    uma.factorPhase.vStyle = mod_velocity_style[uma.style];
-    uma.factorPhase.aStyle = mod_acceleration_style[uma.style];
+    uma.factorPhase.vStyle = mod_velocity_style[style_index];
+    uma.factorPhase.aStyle = mod_acceleration_style[style_index];
 
     //由赛道长度决定普通状态下的目标速度
     uma.base.velocityIdeal = 20 - (race_info.span - 2000) / 1000;
@@ -389,9 +392,11 @@ function sys_prepare_race(list_chara, race_info) {
       mod_acceleration_adapt_ground[uma.adapts.ground] *
       mod_acceleration_adapt_distance[uma.adapts.distance];
 
-    //由耐力属性决定耐力条 顺便填满
+    // 由耐力属性决定耐力条 顺便填满
     uma.race.stamina = uma.base.stamina =
-      0.8 * uma.attrs[attr_enum.endurance] * mod_attr_stamina_style[uma.style] +
+      0.8 *
+        uma.attrs[attr_enum.endurance] *
+        mod_attr_stamina_style[style_index] +
       race_info.span;
 
     // 由根性属性决定终盘后耐力消耗系数

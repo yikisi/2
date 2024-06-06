@@ -29,6 +29,7 @@ function sys_get_status(chara_id) {
     const obj = {
       color: buff_colors[2],
       content: slavery_titles[sex_equip],
+      fontWeight: 'bold',
     };
     if (!chara_id) {
       obj.title = sex_equip
@@ -48,14 +49,12 @@ function sys_get_status(chara_id) {
     status_list.push({
       color: buff_colors[1],
       content: '领域！',
-      fontWeight: 'bold',
       key: '领域',
     });
   era.get(`status:${chara_id}:健康茶`) &&
     status_list.push({
       color: buff_colors[1],
       content: '健康茶',
-      fontWeight: 'bold',
     });
   if (sys_check_remote(chara_id)) {
     status_list.push({

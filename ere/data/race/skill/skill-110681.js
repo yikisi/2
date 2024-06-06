@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '惊叹的饕餮盛宴！',
   '在终盘的弯道处位于前方，且距离终点尚远时，短时间内向前突进并提升微量加速度',
   11068,
-  5,
+  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],
@@ -20,20 +20,44 @@ module.exports = new UmaSkill(
   [4, 0],
   [500, 0],
   [
-    [22, 31, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.CurrentSpeedWithNaturalDeceleration,
+      UmaSkill.ability_type_enum.Accel,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.35, 0.1, 0],
     [0, 0, 0],
   ],
   [
-    [1, 1, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

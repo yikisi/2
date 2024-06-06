@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '升龙',
   '在最终弯道从外道赶超时，速度加快＜作战・居中＞',
   20061,
-  2,
+  UmaSkill.rarity_enum.gold,
   10,
   508,
   [() => true, () => true],
@@ -21,20 +21,44 @@ module.exports = new UmaSkill(
   [3, 0],
   [500, 0],
   [
-    [27, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.35, 0, 0],
     [0, 0, 0],
   ],
   [
-    [1, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

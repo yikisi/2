@@ -56,8 +56,8 @@ function reset_chara(chara_id) {
           ? era.get(`cflag:${chara_id}:模版角色`)
           : chara_id
       ] || [];
-    new CharaSkills(chara_id).add(...skill_set.slice(0, 3));
-    new CharaAvailableSkills(chara_id).add(...skill_set.slice(3));
+    new CharaSkills(chara_id).add(...skill_set.slice(0, 4));
+    new CharaAvailableSkills(chara_id).add(...skill_set.slice(4));
     new RaceHistory(chara_id).reset();
   } else {
     Object.values(attr_names).forEach((v) => {

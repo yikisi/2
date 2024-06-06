@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   'Shadow Break',
   '在最终弯道之后在外道完成赶超时，以怪物般的力量加快速度。如果还在中盘争夺过名次，变为大幅加快速度',
   10016,
-  5,
+  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [
@@ -29,20 +29,44 @@ module.exports = new UmaSkill(
   [5, 5],
   [500, 500],
   [
-    [27, 0, 0],
-    [27, 0, 0],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.45, 0, 0],
     [0.35, 0, 0],
   ],
   [
-    [1, 0, 0],
-    [1, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

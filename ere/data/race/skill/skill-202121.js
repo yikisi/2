@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '天地无畏',
   '比赛后半程处于中间集团的话会提高速度，并且加速度也会稍微提高＜作战・居中＞',
   20212,
-  2,
+  UmaSkill.rarity_enum.gold,
   10,
   508,
   [() => true, () => true],
@@ -20,20 +20,44 @@ module.exports = new UmaSkill(
   [2.4, 0],
   [500, 0],
   [
-    [27, 31, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.Accel,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.35, 0.1, 0],
     [0, 0, 0],
   ],
   [
-    [1, 1, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

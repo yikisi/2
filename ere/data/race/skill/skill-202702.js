@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '探求心',
   '速度有十二分迅速时稍微提升速度，智力也十二分超群时少量提升速度＜先行・中距离＞',
   20270,
-  1,
+  UmaSkill.rarity_enum.normal,
   0,
   174,
   [() => true, () => true],
@@ -24,20 +24,44 @@ module.exports = new UmaSkill(
   [-0.0001, -0.0001],
   [0, 0],
   [
-    [1, 0, 0],
-    [1, 0, 0],
+    [
+      UmaSkill.ability_type_enum.Speed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.Speed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [40, 0, 0],
     [20, 0, 0],
   ],
   [
-    [1, 0, 0],
-    [1, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

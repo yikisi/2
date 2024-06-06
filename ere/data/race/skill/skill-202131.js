@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '狂乱旋风',
   '比赛中盘位于前方时，稍微降低后方马娘的速度，自身速度提升＜中距离＞',
   20213,
-  2,
+  UmaSkill.rarity_enum.gold,
   10,
   508,
   [() => true, () => true],
@@ -17,20 +17,44 @@ module.exports = new UmaSkill(
   [1.8, 0],
   [500, 0],
   [
-    [27, 21, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.CurrentSpeed,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.35, -0.15, 0],
     [0, 0, 0],
   ],
   [
-    [1, 10, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.SelfBehind,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 5, 0],

@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '来段霹雳舞吗!',
   '比赛终盘的直线身处前方时，会得意洋洋地提升速度。若这恰巧也是看台对面跑道时，还会一并稍微提升加速度',
   11020,
-  5,
+  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],
@@ -20,20 +20,44 @@ module.exports = new UmaSkill(
   [5, 5],
   [500, 500],
   [
-    [27, 31, 0],
-    [27, 0, 0],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.Accel,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.35, 0.2, 0],
     [0.35, 0, 0],
   ],
   [
-    [1, 1, 0],
-    [1, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '投机之心',
   '比赛中极少情况下发挥更强的实力速度、力量、根性少量提升人气较低的情况下更容易触发',
   20244,
-  1,
+  UmaSkill.rarity_enum.normal,
   0,
   217,
   [() => true, () => true],
@@ -16,20 +16,44 @@ module.exports = new UmaSkill(
   [-0.0001, -0.0001],
   [0, 0],
   [
-    [1, 3, 4],
-    [1, 3, 4],
+    [
+      UmaSkill.ability_type_enum.Speed,
+      UmaSkill.ability_type_enum.Power,
+      UmaSkill.ability_type_enum.Guts,
+    ],
+    [
+      UmaSkill.ability_type_enum.Speed,
+      UmaSkill.ability_type_enum.Power,
+      UmaSkill.ability_type_enum.Guts,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [40, 40, 40],
     [40, 40, 40],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+    ],
   ],
   [
     [0, 0, 0],

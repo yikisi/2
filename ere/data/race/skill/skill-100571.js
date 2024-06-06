@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '旅途尽头的抒情诗',
   '比赛即将进入终盘时的某刻位于后方时，速度持续上升。若是在中长距离比赛中，距离领先位置越远则效果越强',
   10057,
-  5,
+  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],
@@ -28,20 +28,44 @@ module.exports = new UmaSkill(
   [6, 6],
   [500, 500],
   [
-    [27, 0, 0],
-    [27, 0, 0],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [19, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.AddDistanceDiffTop,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.25, 0, 0],
     [0.25, 0, 0],
   ],
   [
-    [1, 0, 0],
-    [1, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

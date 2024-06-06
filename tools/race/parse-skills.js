@@ -4,6 +4,26 @@ const { writeFileSync } = require('node:fs');
 const { join } = require('path');
 const prisma = new PrismaClient();
 
+const UmaSkill = require('../../ere/data/race/model/uma-skill');
+
+const rarity_names = {},
+  ability_type_names = {},
+  ability_type_usage_names = {},
+  target_type_names = {};
+
+Object.entries(UmaSkill.rarity_enum).map(
+  ([key, value]) => (rarity_names[value] = key),
+);
+Object.entries(UmaSkill.ability_type_enum).map(
+  ([k, v]) => (ability_type_names[v] = k),
+);
+Object.entries(UmaSkill.ability_usage_enum).map(
+  ([k, v]) => (ability_type_usage_names[v] = k),
+);
+Object.entries(UmaSkill.target_type_enum).map(
+  ([k, v]) => (target_type_names[v] = k),
+);
+
 const icon2skill_color = {
   10011: 0b00000,
   10012: 0b01000,
@@ -183,26 +203,51 @@ function parse_condition(condition, is_pre) {
   }
 }
 
+function get_rarity(v) {
+  if (!rarity_names[v]) {
+    throw new Error(v);
+  }
+  return `UmaSkill.rarity_enum.${rarity_names[v]}`;
+}
+
+function get_ability_type(v) {
+  if (!ability_type_names[v]) {
+    throw new Error(v);
+  }
+  return `UmaSkill.ability_type_enum.${ability_type_names[v]}`;
+}
+
+function get_ability_usage(v) {
+  if (!ability_type_usage_names[v]) {
+    throw new Error(v);
+  }
+  return `UmaSkill.ability_usage_enum.${ability_type_usage_names[v]}`;
+}
+
+function get_target_type(v) {
+  if (!target_type_names[v]) {
+    throw new Error(v);
+  }
+  return `UmaSkill.target_type_enum.${target_type_names[v]}`;
+}
+
 async function chara_skill() {
   const dict = {};
   const l = (await prisma.card_data.findMany())
-    .filter((e) => e.id % 10 === 1 && e.id < 200000)
-    .map((e) => Math.floor(e.id / 100));
+    .map((e) => e.chara_id)
+    .filter((v, i, a) => i === a.indexOf(v));
+  const skill_dict = {};
   for (const chara_id of l) {
     dict[chara_id] = [
-      (
-        await prisma.skill_set.findMany({
-          where: { id: chara_id * 10000 + 105 },
-        })
-      )[0].skill_id1,
+      100000 + (chara_id - 1000) * 10 + 1,
       ...(
         await prisma.available_skill_set.findMany({
           where: { available_skill_set_id: chara_id * 100 + 1 },
         })
       ).map((e) => e.skill_id),
     ];
+    skill_dict[dict[chara_id][0] + 800000] = 1;
   }
-  const skill_dict = {};
   Object.values(dict).forEach((e) => e.forEach((s) => (skill_dict[s] = 1)));
   console.log('角色卡技能', Object.keys(skill_dict).length);
   let buffer = 'const chara_skill_dict={},skills_dict = {};\n\n',
@@ -210,7 +255,7 @@ async function chara_skill() {
   for (const chara_id in dict) {
     buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
   }
-  buffer += '\n\nconst skill_sets = {\n';
+  buffer += '\n\nconst skill_sets = {0:[],\n';
   (await prisma.skill_set.findMany()).forEach((e) => {
     const to_write = [];
     for (const k in e) {
@@ -276,17 +321,17 @@ async function chara_skill() {
     sbuffer += `"${skill_text[id][47]}",`;
     sbuffer += `"${skill_text[id][48]}",`;
     sbuffer += `${e.group_id},`;
-    sbuffer += `${e.rarity},`;
+    sbuffer += `${get_rarity(e.rarity)},`;
     sbuffer += `${icon2skill_color[e.icon_id]},`;
     sbuffer += `${e.grade_value},`;
     sbuffer += `[${parse_condition(e.precondition_1, true)},${parse_condition(e.precondition_2, true)}],`;
     sbuffer += `[${parse_condition(e.condition_1)},${parse_condition(e.condition_2)}],`;
     sbuffer += `[${e.float_ability_time_1 / 10000},${e.float_ability_time_2 / 10000}],`;
     sbuffer += `[${e.float_cooldown_time_1 / 10000},${e.float_cooldown_time_2 / 10000}],`;
-    sbuffer += `[[${e.ability_type_1_1},${e.ability_type_1_2},${e.ability_type_1_3}],[${e.ability_type_2_1},${e.ability_type_2_2},${e.ability_type_2_3}]],`;
-    sbuffer += `[[${e.ability_value_usage_1_1},${e.ability_value_usage_1_2},${e.ability_value_usage_1_3}],[${e.ability_value_usage_2_1},${e.ability_value_usage_2_2},${e.ability_value_usage_2_3}]],`;
+    sbuffer += `[[${get_ability_type(e.ability_type_1_1)},${get_ability_type(e.ability_type_1_2)},${get_ability_type(e.ability_type_1_3)}],[${get_ability_type(e.ability_type_2_1)},${get_ability_type(e.ability_type_2_2)},${get_ability_type(e.ability_type_2_3)}]],`;
+    sbuffer += `[[${get_ability_usage(e.ability_value_usage_1_1)},${get_ability_usage(e.ability_value_usage_1_2)},${get_ability_usage(e.ability_value_usage_1_3)}],[${get_ability_usage(e.ability_value_usage_2_1)},${get_ability_usage(e.ability_value_usage_2_2)},${get_ability_usage(e.ability_value_usage_2_3)}]],`;
     sbuffer += `[[${e.float_ability_value_1_1 / 10000},${e.float_ability_value_1_2 / 10000},${e.float_ability_value_1_3 / 10000}],[${e.float_ability_value_2_1 / 10000},${e.float_ability_value_2_2 / 10000},${e.float_ability_value_2_3 / 10000}]],`;
-    sbuffer += `[[${e.target_type_1_1},${e.target_type_1_2},${e.target_type_1_3}],[${e.target_type_2_1},${e.target_type_2_2},${e.target_type_2_3}]],`;
+    sbuffer += `[[${get_target_type(e.target_type_1_1)},${get_target_type(e.target_type_1_2)},${get_target_type(e.target_type_1_3)}],[${get_target_type(e.target_type_2_1)},${get_target_type(e.target_type_2_2)},${get_target_type(e.target_type_2_3)}]],`;
     sbuffer += `[[${e.target_value_1_1},${e.target_value_1_2},${e.target_value_1_3}],[${e.target_value_2_1},${e.target_value_2_2},${e.target_value_2_3}]],`;
     sbuffer += `[${e.popularity_add_param_1},${e.popularity_add_param_2}],`;
     sbuffer += `[${e.popularity_add_value_1},${e.popularity_add_value_2}],`;

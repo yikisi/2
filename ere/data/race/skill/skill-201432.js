@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '阅读能力',
   '比赛中盘时，观察力提高，视野变得稍微宽阔＜作战・居中＞',
   20143,
-  1,
+  UmaSkill.rarity_enum.normal,
   2,
   85,
   [() => true, () => true],
@@ -13,20 +13,44 @@ module.exports = new UmaSkill(
   [3, 0],
   [500, 0],
   [
-    [8, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.VisibleDistance,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [5, 0, 0],
     [0, 0, 0],
   ],
   [
-    [1, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

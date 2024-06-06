@@ -84,7 +84,7 @@ const era = {
   getCharactersInTrain() {},
   /**
    * wait for use's input, the engine will try to return number
-   * @param {{[disableBefore]: boolean, [rule]: string, [useRule]: boolean}} [config] config of input, like rule
+   * @param {{[disableBefore]: boolean,[hideInput]:boolean,[rule]: string, [useRule]: boolean}} [config] config of input, like rule
    * @returns {Promise<any>} a promise of the user input, please use await
    */
   // eslint-disable-next-line no-unused-vars

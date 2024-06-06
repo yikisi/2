@@ -24,6 +24,7 @@ const rarity_enum = {
 };
 
 const ability_type_enum = {
+  no: 0,
   // 速度
   Speed: 1,
   // 耐力
@@ -70,7 +71,8 @@ const ability_type_enum = {
   ChallengeMatchBonusXXX: 50,
 };
 
-const ability_type_usage_enum = {
+const ability_usage_enum = {
+  no: 0,
   // 直接使用
   Direct: 1,
   // 每个技能提升1%，最大20%
@@ -107,6 +109,7 @@ const ability_type_usage_enum = {
 };
 
 const target_type_enum = {
+  no: 0,
   // 自身
   Self: 1,
   All: 2,
@@ -146,7 +149,7 @@ const target_type_enum = {
 class UmaSkill {
   static rarity_enum = rarity_enum;
   static ability_type_enum = ability_type_enum;
-  static ability_type_usage_enum = ability_type_usage_enum;
+  static ability_usage_enum = ability_usage_enum;
   static target_type_enum = target_type_enum;
 
   /** @type {number} */

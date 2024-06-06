@@ -38,54 +38,63 @@ async function use_glasses(item) {
 module.exports = (handlers) => {
   handlers[800] = async () => {
     const amount = era.get('item:马语者');
-    let to_use = 0,
+    let to_use = 1,
       flag_use = true,
+      flag_print = true,
       timer;
     while (flag_use) {
-      era.print('请选择要使用的马语者点数卡数量');
       era.setAlign('center');
-      era.printMultiColumns([
-        {
-          accelerator: 2,
-          config: { disabled: to_use < 2, width: 2 },
-          content: '-10',
-          type: 'button',
-        },
-        {
-          accelerator: 4,
-          config: { disabled: !to_use, width: 2 },
-          content: '-1',
-          type: 'button',
-        },
-        { config: { width: 2 }, content: to_use, type: 'text' },
-        {
-          accelerator: 6,
-          config: { disabled: to_use === amount, width: 2 },
-          content: '+1',
-          type: 'button',
-        },
-        {
-          accelerator: 8,
-          config: { disabled: to_use === amount, width: 2 },
-          content: '+10',
-          type: 'button',
-        },
-        { content: '', type: 'text' },
-        {
-          accelerator: 5,
-          config: { width: 3 },
-          content: '确定',
-          type: 'button',
-        },
-        {
-          accelerator: 0,
-          config: { width: 3 },
-          content: '取消',
-          type: 'button',
-        },
-      ]);
+      (flag_print ? era.printInColRows : era.replaceInColRows)(
+        [
+          {
+            content: '请选择要使用的马语者点数卡数量',
+            type: 'text',
+            config: { align: 'left' },
+          },
+        ],
+        [
+          {
+            accelerator: 2,
+            config: { disabled: to_use < 2, width: 2 },
+            content: '-10',
+            type: 'button',
+          },
+          {
+            accelerator: 4,
+            config: { disabled: !to_use, width: 2 },
+            content: '-1',
+            type: 'button',
+          },
+          { config: { width: 2 }, content: to_use, type: 'text' },
+          {
+            accelerator: 6,
+            config: { disabled: to_use === amount, width: 2 },
+            content: '+1',
+            type: 'button',
+          },
+          {
+            accelerator: 8,
+            config: { disabled: to_use === amount, width: 2 },
+            content: '+10',
+            type: 'button',
+          },
+          { content: '', type: 'text' },
+          {
+            accelerator: 5,
+            config: { width: 3 },
+            content: '确定',
+            type: 'button',
+          },
+          {
+            accelerator: 0,
+            config: { width: 3 },
+            content: '取消',
+            type: 'button',
+          },
+        ],
+      );
       era.setAlign('left');
-      switch (await era.input()) {
+      switch (await era.input({ hideInput: true })) {
         case 2:
           to_use = Math.max(to_use - 10, 0);
           break;
@@ -104,9 +113,7 @@ module.exports = (handlers) => {
         case 0:
           return;
       }
-      if (flag_use) {
-        era.setToBottom();
-      }
+      flag_print = false;
     }
     if (to_use) {
       const ret = await select_yes_or_no(`要使用 ${to_use} 张马语者点数卡吗？`);

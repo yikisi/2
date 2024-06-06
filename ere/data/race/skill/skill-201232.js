@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '障眼法',
   '在比赛终盘，使前方马娘的视野稍微变得狭窄＜长距离＞',
   20123,
-  1,
+  UmaSkill.rarity_enum.normal,
   3,
   129,
   [() => true, () => true],
@@ -13,20 +13,44 @@ module.exports = new UmaSkill(
   [3, 0],
   [500, 0],
   [
-    [8, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.VisibleDistance,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [-5, 0, 0],
     [0, 0, 0],
   ],
   [
-    [9, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.SelfInfront,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [18, 0, 0],

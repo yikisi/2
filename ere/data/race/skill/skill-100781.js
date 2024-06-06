@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '春风和煦',
   '赛程前半段压低节奏，最终弯道后半段若位于前方则可长时间持续稍微提高加速度若处于第2名则效果增加',
   10078,
-  5,
+  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [
@@ -23,20 +23,44 @@ module.exports = new UmaSkill(
   [8, 8],
   [500, 500],
   [
-    [31, 0, 0],
-    [31, 0, 0],
+    [
+      UmaSkill.ability_type_enum.Accel,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.Accel,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.2, 0, 0],
     [0.1, 0, 0],
   ],
   [
-    [1, 0, 0],
-    [1, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

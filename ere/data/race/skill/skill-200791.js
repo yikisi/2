@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '对领放策略',
   '战术是领放的赛马娘陷入焦躁状态时恢复冷静需要耗费时间',
   20079,
-  1,
+  UmaSkill.rarity_enum.normal,
   3,
   174,
   [() => true, () => true],
@@ -18,20 +18,44 @@ module.exports = new UmaSkill(
   [0, 0],
   [500, 0],
   [
-    [13, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.TemptationEndTime,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [5, 0, 0],
     [0, 0, 0],
   ],
   [
-    [21, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.RunningStyleTemptationOtherSelf,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [1, 0, 0],

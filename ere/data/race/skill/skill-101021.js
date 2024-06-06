@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '活泼乐章・飞驰',
   '比赛前半段在队伍中间且前方或后方长时间有赛马娘紧贴，则稍微回复体力之后在比赛中段附近的直线处短时间内速度大幅提升',
   10102,
-  5,
+  UmaSkill.rarity_enum.spe_r,
   17,
   340,
   [() => true, () => true],
@@ -30,20 +30,44 @@ module.exports = new UmaSkill(
   [0, 4],
   [500, 500],
   [
-    [9, 0, 0],
-    [27, 0, 0],
+    [
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.015, 0, 0],
     [0.45, 0, 0],
   ],
   [
-    [1, 0, 0],
-    [1, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

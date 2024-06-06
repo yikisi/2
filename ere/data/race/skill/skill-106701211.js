@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '顺时针的圆舞曲',
   '非常擅长顺时针的赛道，速度与力量大幅提升',
   10670121,
-  6,
+  UmaSkill.rarity_enum.evol,
   16,
   508,
   [() => true, () => true],
@@ -13,20 +13,44 @@ module.exports = new UmaSkill(
   [-0.0001, 0],
   [0, 0],
   [
-    [1, 3, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.Speed,
+      UmaSkill.ability_type_enum.Power,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [80, 80, 0],
     [0, 0, 0],
   ],
   [
-    [1, 1, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

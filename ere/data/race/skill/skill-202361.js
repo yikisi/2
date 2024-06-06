@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '大意就会败北',
   '比赛后半时，使体力回复的赛马娘畏缩＜沙土＞',
   20236,
-  2,
+  UmaSkill.rarity_enum.gold,
   11,
   508,
   [() => true, () => true],
@@ -19,20 +19,44 @@ module.exports = new UmaSkill(
   [3, 0],
   [500, 0],
   [
-    [21, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.CurrentSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [-0.25, 0, 0],
     [0, 0, 0],
   ],
   [
-    [23, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.ActivateHealSkill,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [1, 0, 0],

@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '燃烧青春・智',
   '在比赛序盘燃烧青春之魂展望赛道，参赛队友的智力属性总和越高，路线的规划越高效',
   21005,
-  2,
+  UmaSkill.rarity_enum.gold,
   10,
   633,
   [() => true, () => true],
@@ -13,20 +13,44 @@ module.exports = new UmaSkill(
   [4, 0],
   [500, 0],
   [
-    [28, 8, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.LaneMoveSpeed,
+      UmaSkill.ability_type_enum.VisibleDistance,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [7, 7, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.MultiplyTeamTotalWiz,
+      UmaSkill.ability_usage_enum.MultiplyTeamTotalWiz,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.035, 15, 0],
     [0, 0, 0],
   ],
   [
-    [1, 1, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

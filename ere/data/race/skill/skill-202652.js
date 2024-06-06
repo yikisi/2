@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '自信者',
   '速度和力量都十分强劲时，稍微提升速度和力量＜英里/中距离＞',
   20265,
-  1,
+  UmaSkill.rarity_enum.normal,
   0,
   217,
   [() => true, () => true],
@@ -22,20 +22,44 @@ module.exports = new UmaSkill(
   [-0.0001, 0],
   [0, 0],
   [
-    [1, 3, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.Speed,
+      UmaSkill.ability_type_enum.Power,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [20, 20, 0],
     [0, 0, 0],
   ],
   [
-    [1, 1, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

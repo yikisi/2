@@ -3,8 +3,11 @@ const era = require('#/era-electron');
 const RaceInfo = require('#/data/race/model/race-info');
 const { attr_names } = require('#/data/train-const');
 
-/** @param {RaceInfo} info */
-function print_race_track_chart(info) {
+/**
+ * @param {RaceInfo} info
+ * @returns {Promise<number>}
+ */
+async function print_race_track_chart(info) {
   era.print(
     [
       RaceInfo.track_names[info.track],
@@ -96,7 +99,7 @@ function print_race_track_chart(info) {
     xValue: loc_mind,
     yValue: -2.75,
   };
-  era.printLineChart({
+  const ret = era.printLineChart({
     data: {
       datasets: [
         {
@@ -130,6 +133,8 @@ function print_race_track_chart(info) {
       },
     },
   });
+  await era.waitAnyKey();
+  return ret;
 }
 
 module.exports = print_race_track_chart;

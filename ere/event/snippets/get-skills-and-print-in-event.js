@@ -16,7 +16,7 @@ function get_skills_and_print_in_event(chara_id, skills) {
     const got = new CharaSkills(chara_id).add(...skills);
     if (got.length > 0) {
       const buffer = [];
-      got.forEach((e) => buffer.push(skills_dict[e].get_colored_name()));
+      got.forEach((e) => buffer.push(...skills_dict[e].get_colored_name()));
       era.print([
         get_chara_talk(chara_id).get_colored_name(),
         ' 习得了 ',

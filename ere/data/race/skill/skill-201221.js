@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '耐力食取',
   '比赛中盘处于后方的话会略微夺走前方的持久力＜长距离＞',
   20122,
-  2,
+  UmaSkill.rarity_enum.gold,
   11,
   461,
   [() => true, () => true],
@@ -17,20 +17,44 @@ module.exports = new UmaSkill(
   [0, 0],
   [500, 0],
   [
-    [9, 9, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [-0.01, 0.035, 0],
     [0, 0, 0],
   ],
   [
-    [9, 1, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.SelfInfront,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [5, 0, 0],

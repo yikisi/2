@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '居中焦躁',
   '比赛中盘令战术是居中的赛马娘焦躁，使其略微容易疲劳',
   20090,
-  1,
+  UmaSkill.rarity_enum.normal,
   3,
   217,
   [() => true, () => true],
@@ -17,20 +17,44 @@ module.exports = new UmaSkill(
   [0, 0],
   [500, 0],
   [
-    [9, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [-0.01, 0, 0],
     [0, 0, 0],
   ],
   [
-    [18, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.RunningStyleOtherSelf,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [3, 0, 0],

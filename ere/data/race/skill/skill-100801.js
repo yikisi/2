@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '情报：已捕获',
   '比赛前半段一直保持前方位置时，若后半段检测到对手发动了加速技能，则向前小幅突进，若比赛是URA沙土比赛则额外增加少量速度',
   10080,
-  5,
+  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [
@@ -24,20 +24,44 @@ module.exports = new UmaSkill(
   [5, 5],
   [500, 500],
   [
-    [22, 27, 0],
-    [22, 0, 0],
+    [
+      UmaSkill.ability_type_enum.CurrentSpeedWithNaturalDeceleration,
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.CurrentSpeedWithNaturalDeceleration,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.25, 0.15, 0],
     [0.25, 0, 0],
   ],
   [
-    [1, 1, 0],
-    [1, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

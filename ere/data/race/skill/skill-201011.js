@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '恼杀术',
   '比赛序盘处于前方时令后方的赛马娘萎缩＜短距离＞',
   20101,
-  2,
+  UmaSkill.rarity_enum.gold,
   11,
   508,
   [() => true, () => true],
@@ -20,20 +20,44 @@ module.exports = new UmaSkill(
   [3, 0],
   [500, 0],
   [
-    [21, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.CurrentSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [-0.25, 0, 0],
     [0, 0, 0],
   ],
   [
-    [10, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.SelfBehind,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [18, 0, 0],

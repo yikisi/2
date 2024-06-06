@@ -302,6 +302,9 @@ module.exports = (handlers) => {
   };
 
   handlers[race_enum.elm_sta] = async (urara, me, in_urara, callname) => {
+    if (era.get('cflag:52:育成回合计时') < 96) {
+      return true;
+    }
     await print_event_name('迎向榆树锦标！', urara);
     await era.printAndWait([
       '隔着人群站在赛场观众席的最后一排，',

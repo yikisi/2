@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '飞尘',
   '比赛序盘自己保持领先时，使跟在后方的赛马娘速度少量下降＜沙土＞',
   20235,
-  1,
+  UmaSkill.rarity_enum.normal,
   3,
   174,
   [() => true, () => true],
@@ -21,20 +21,44 @@ module.exports = new UmaSkill(
   [3, 0],
   [500, 0],
   [
-    [21, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.CurrentSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [-0.15, 0, 0],
     [0, 0, 0],
   ],
   [
-    [10, 0, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.SelfBehind,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [1, 0, 0],

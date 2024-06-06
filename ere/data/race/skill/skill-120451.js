@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '忍术・微笑比心结印',
   '若在比赛中盘的弯道处位于有利位置则回复体力，若是中长距离比赛则额外少量持续提升速度',
   12045,
-  5,
+  UmaSkill.rarity_enum.spe_r,
   17,
   340,
   [() => true, () => true],
@@ -30,20 +30,44 @@ module.exports = new UmaSkill(
   [6, 0],
   [500, 500],
   [
-    [9, 27, 0],
-    [9, 0, 0],
+    [
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [0.055, 0.25, 0],
     [0.055, 0, 0],
   ],
   [
-    [1, 1, 0],
-    [1, 0, 0],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [0, 0, 0],

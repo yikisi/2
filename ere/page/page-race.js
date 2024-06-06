@@ -107,16 +107,16 @@ function generate_attribute_info(chara) {
       },
       {
         config: {
-          width: 8,
           align: 'center',
           color: rank_color,
+          width: 8,
         },
         content: [
           {
             content: value.toString(),
             title: attr_buff_list.length
-              ? `${value.toString()}=${era.get(
-                  `base:${chara.index_chara}:${attr_names[index]}`,
+              ? `${value.toString()}=${Math.floor(
+                  era.get(`base:${chara.index_chara}:${attr_names[index]}`),
                 )}(基础)${attr_buff_list.join('')}`
               : undefined,
           },
@@ -264,19 +264,21 @@ async function race_page(race) {
   for (const header_line of race_header) {
     await era.printAndWait(header_line.content, header_line.config);
   }
+  await era.clear();
+  const skill_buffer = [];
   let flag_prepare_race = true,
     cur_chara = team_list[0],
     uma_index = contestants.indexOf(cur_chara),
     attribute_info = generate_attribute_info(cur_chara),
     strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank),
-    skill_buffer = [];
+    flag_print = true;
   cur_chara.list_skill.forEach((s) =>
     skill_buffer.push(...s.data.get_colored_name()),
   );
   while (flag_prepare_race) {
     era.setVerticalAlign('middle');
-    era.printInColRows(
-      [{ type: 'divider' }],
+    const line_num = (flag_print ? era.printInColRows : era.replaceInColRows)(
+      [{ type: 'divider' }, ...race_header, { type: 'divider' }],
       {
         columns: [
           {
@@ -479,15 +481,15 @@ async function race_page(race) {
         config: { horizontalAlign: 'center' },
       },
     );
+    flag_print = false;
     era.setVerticalAlign('top');
-    const ret = await era.input();
+    const ret = await era.input({ hideInput: true });
     if (ret === 100) {
       await era.clear();
       flag_prepare_race = false;
     } else {
       if (ret === 110) {
-        print_race_track_chart(info);
-        await era.waitAnyKey();
+        await era.clear((await print_race_track_chart(info)) - line_num);
       } else if (ret >= 21) {
         cur_chara.style = era.set(
           `cflag:${cur_chara.index_chara}:跑法`,
@@ -499,13 +501,11 @@ async function race_page(race) {
         strategy_ability = cur_chara.adapt_style_list.map(
           get_adaptability_rank,
         );
-        skill_buffer = [];
+        skill_buffer.splice(0);
         cur_chara.list_skill.forEach((s) =>
           skill_buffer.push(...s.data.get_colored_name()),
         );
       }
-      await era.clear();
-      era.printMultiColumns([{ type: 'divider' }, ...race_header]);
     }
   }
   await era.clear();
@@ -643,7 +643,7 @@ async function race_page(race) {
       );
     } else {
       get_attr_and_print_in_event(id, undefined, 10);
-      get_skills_and_print_in_event(id, [200302]) &&
+      get_skills_and_print_in_event(id, [200302]) ||
         get_skills_and_print_in_event(id, [200301]);
     }
     era.println();

@@ -7,7 +7,7 @@ const { race_enum } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,{race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number},UraraEduMarks):Promise<*>>} handlers */
 module.exports = (handlers) => {
-  handlers[race_enum.elm_sta] = async (
+  handlers[`${race_enum.elm_sta}_${47 + 29}`] = async (
     urara,
     me,
     in_urara,

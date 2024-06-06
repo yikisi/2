@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   '速度猎手',
   '比赛中盘在前方时，略微夺取后方马娘的速度＜英里＞',
   20108,
-  1,
+  UmaSkill.rarity_enum.normal,
   3,
   217,
   [() => true, () => true],
@@ -17,20 +17,44 @@ module.exports = new UmaSkill(
   [3, 0],
   [500, 0],
   [
-    [21, 27, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.ability_type_enum.CurrentSpeed,
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
   ],
   [
-    [1, 1, 1],
-    [1, 1, 1],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
   ],
   [
     [-0.15, 0.15, 0],
     [0, 0, 0],
   ],
   [
-    [10, 1, 0],
-    [0, 0, 0],
+    [
+      UmaSkill.target_type_enum.SelfBehind,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
   ],
   [
     [5, 0, 0],

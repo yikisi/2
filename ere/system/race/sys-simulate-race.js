@@ -5,7 +5,7 @@ const { sort_list } = require('#/utils/list-utils');
 const RaceInfo = require('#/data/race/model/race-info');
 const {
   ability_type_enum,
-  ability_type_usage_enum,
+  ability_usage_enum,
   target_type_enum,
 } = require('#/data/race/model/uma-skill');
 const {
@@ -655,6 +655,11 @@ function sys_sim_race(list_chara, race_info) {
         }
       }
       if (uma.race.competeFightTimer >= 2) {
+        if (uma.race.competeFightTimer === 2) {
+          record_events_list
+            .at(-1)
+            [uma.index_race].push(race_event_enum.compete_fight);
+        }
         uma.race.velocityIdeal += uma.factorFinal.vCompeteFightBuff;
         uma.race.acceleration += uma.factorFinal.accCompeteFightBuff;
         uma.race.conditionParams.compete_fight_count = 1;
@@ -821,7 +826,7 @@ function sys_sim_race(list_chara, race_info) {
                   }
                 }
                 switch (skill.data.ability_value_usages[i][j]) {
-                  case ability_type_usage_enum.MultiplySkillNum:
+                  case ability_usage_enum.MultiplySkillNum:
                     skill.values[i][j] =
                       skill.data.ability_values[i][j] *
                       Math.min(
@@ -829,11 +834,11 @@ function sys_sim_race(list_chara, race_info) {
                         1.2,
                       );
                     break;
-                  case ability_type_usage_enum.MultiplyRandom1:
+                  case ability_usage_enum.MultiplyRandom1:
                     skill.values[i][j] =
                       skill.data.ability_values[i][j] * Math.random();
                     break;
-                  case ability_type_usage_enum.MultiplySingleModeWinCount:
+                  case ability_usage_enum.MultiplySingleModeWinCount:
                     if (uma.base.winCount < 6) {
                       skill.values[i][j] =
                         skill.data.ability_values[i][j] * 0.8;
@@ -850,12 +855,12 @@ function sys_sim_race(list_chara, race_info) {
                         skill.data.ability_values[i][j] * 1.2;
                     }
                     break;
-                  case ability_type_usage_enum.MultiplyOvertakeCount:
+                  case ability_usage_enum.MultiplyOvertakeCount:
                     skill.values[i][j] =
                       skill.data.ability_values[i][j] +
                       0.02 * uma.base.change_order_finalcorner;
                     break;
-                  case ability_type_usage_enum.MultiplyActivateSpecificTagSkillCount:
+                  case ability_usage_enum.MultiplyActivateSpecificTagSkillCount:
                     if (uma.base.greenCount >= 6) {
                       skill.values[i][j] = skill.data.ability_values[i][j] + 3;
                     } else if (uma.base.greenCount >= 5) {
@@ -866,7 +871,7 @@ function sys_sim_race(list_chara, race_info) {
                       skill.values[i][j] = skill.data.ability_values[i][j];
                     }
                     break;
-                  case ability_type_usage_enum.AddDistanceDiffTop:
+                  case ability_usage_enum.AddDistanceDiffTop:
                     if (uma.race.conditionParams.distance_diff_top >= 20) {
                       skill.values[i][j] =
                         skill.data.ability_values[i][j] + 0.1;
@@ -874,7 +879,7 @@ function sys_sim_race(list_chara, race_info) {
                       skill.values[i][j] = skill.data.ability_values[i][j];
                     }
                     break;
-                  case ability_type_usage_enum.MultiplyBlockedSideMaxContinueTimePhaseMiddleRun1:
+                  case ability_usage_enum.MultiplyBlockedSideMaxContinueTimePhaseMiddleRun1:
                     skill.values[i][j] =
                       skill.data.ability_values[i][j] *
                       Math.min(
@@ -882,18 +887,18 @@ function sys_sim_race(list_chara, race_info) {
                         0.15,
                       );
                     break;
-                  case ability_type_usage_enum.MultiplyBaseSpeed:
+                  case ability_usage_enum.MultiplyBaseSpeed:
                     skill.values[i][j] =
                       skill.data.ability_values[i][j] + uma.base.accBuffFromWiz;
                     break;
-                  case ability_type_usage_enum.Direct:
-                  case ability_type_usage_enum.MultiplyTeamTotalSpeed:
-                  case ability_type_usage_enum.MultiplyTeamTotalStamina:
-                  case ability_type_usage_enum.MultiplyTeamTotalPower:
-                  case ability_type_usage_enum.MultiplyTeamTotalGuts:
-                  case ability_type_usage_enum.MultiplyTeamTotalWiz:
-                  case ability_type_usage_enum.MultiplyFanCount:
-                  case ability_type_usage_enum.Unknown:
+                  case ability_usage_enum.Direct:
+                  case ability_usage_enum.MultiplyTeamTotalSpeed:
+                  case ability_usage_enum.MultiplyTeamTotalStamina:
+                  case ability_usage_enum.MultiplyTeamTotalPower:
+                  case ability_usage_enum.MultiplyTeamTotalGuts:
+                  case ability_usage_enum.MultiplyTeamTotalWiz:
+                  case ability_usage_enum.MultiplyFanCount:
+                  case ability_usage_enum.Unknown:
                     skill.values[i][j] = skill.data.ability_values[i][j];
                     break;
                   default:
@@ -1007,7 +1012,7 @@ function sys_sim_race(list_chara, race_info) {
       let no_loc_mind_flag = true,
         prob_check =
           uma.race.loc_mind > 0 || Math.random() < uma.probs.loc_mind;
-      if (uma.race.location < loc_mind_end) {
+      if (uma.race.location < loc_mind_end && !uma.race.temptation) {
         if (uma.style === 0) {
           if (i === 0) {
             if (
@@ -1095,7 +1100,11 @@ function sys_sim_race(list_chara, race_info) {
         Math.max(uma.race.stamina - uma.race.staminaCost, 0),
         uma.base.stamina,
       );
-      if (uma.race.stamina > 0) {
+      if (uma.race.stamina === 0) {
+        uma.race.velocityIdeal =
+          uma.base.velocityMin + uma.base.velocityIdealBuff;
+        uma.race.acceleration = race_de_acc[4];
+      } else {
         uma.race.velocityIdeal =
           Math.max(Math.min(uma.race.velocityIdeal, 30), uma.base.velocityMin) +
           uma.base.velocityIdealBuff;
@@ -1111,10 +1120,6 @@ function sys_sim_race(list_chara, race_info) {
           uma.race.acceleration =
             race_de_acc[Math.min(uma.race.conditionParams.phase, 2)];
         }
-      } else {
-        uma.race.velocityIdeal =
-          uma.base.velocityMin + uma.base.velocityIdealBuff;
-        uma.race.acceleration = race_de_acc[4];
       }
       uma.race.acceleration += uma.base.accelerationBuff;
     });

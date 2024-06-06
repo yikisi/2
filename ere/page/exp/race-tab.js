@@ -32,7 +32,7 @@ module.exports = {
           races.filter((e) => e.race !== race_enum.begin_race),
           (e) =>
             ((class_enum.Spe - race_infos[e.race].race_class) << 13) +
-            (e.rank << 8) +
+            ((20 - e.rank) << 8) +
             e.weeks,
           false,
         );
@@ -74,7 +74,7 @@ module.exports = {
             {
               content: `${e.rank} 着`,
               color:
-                e.rank <= 5
+                e.rank <= class_enum.Spe
                   ? adaptability_colors.at(-1 - e.rank)
                   : adaptability_colors[0],
             },

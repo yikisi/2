@@ -979,6 +979,7 @@ module.exports = (handlers) => {
       '……不，才没觉得不错，现在收回发言……果然不行的吧……',
     );
     await in_urara.say_as_unknown_and_wait('……呜……');
+    era.println();
     const attr_change = new Array(5).fill(0);
     gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 5));
     let wait_flag = false;
