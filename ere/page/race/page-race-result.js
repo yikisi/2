@@ -2,15 +2,15 @@ const era = require('#/era-electron');
 
 const { median, sort_list } = require('#/utils/list-utils');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
 const { track_names } = require('#/data/race/model/race-info');
-const { race_event_names } = require('#/data/race/race-sim-const');
+const { frame_rate, race_event_names } = require('#/data/race/race-sim-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names } = require('#/data/train-const');
 
 const fron_cols = 5,
-  progress_width = 24 - 8 - 2 * fron_cols;
+  progress_width = 24 - 8 - 2 * fron_cols,
+  screen_size = 10;
 const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'];
 
 /**
@@ -100,7 +100,7 @@ function get_skill_record(uma, s_id, timer_record) {
 function get_timer_record(minutes, seconds) {
   return `${minutes ? `${minutes}'` : ''}${
     minutes
-      ? `${Math.round(seconds / 15)
+      ? `${Math.round(seconds / frame_rate)
           .toString()
           .padStart(2, '0')}`
       : (seconds / 15).toFixed(1)
@@ -141,7 +141,8 @@ async function page_race_result(contestants, records, info) {
     },
   ]);
   const report_buffer = [],
-    skill_buffer = [];
+    skill_buffer = [],
+    speed_min = (22 - info.span / 1000) * 0.85;
   let flag_result = true;
 
   /**
@@ -256,7 +257,13 @@ async function page_race_result(contestants, records, info) {
             loc[0] >= info.span
               ? {
                   config: { width: progress_width },
-                  content: `${uma.rank.curr} 着${uma.rank.curr <= 4 && uma.rank.curr < contestants.length ? ` · ${get_delta_desc(uma.race.conditionParams.bashin_diff_behind)}` : ''}`,
+                  content: [
+                    uma.rank.curr.toString(),
+                    ' 着',
+                    uma.rank.curr <= 4 && uma.rank.curr < contestants.length
+                      ? ` · ${get_delta_desc(uma.race.conditionParams.bashin_diff_behind)}`
+                      : '',
+                  ],
                   type: 'text',
                 }
               : {
@@ -285,11 +292,11 @@ async function page_race_result(contestants, records, info) {
       });
       report_buffer
         .filter((e) => e.timer > 0 && e.timer--)
-        .filter((_, i, l) => i < l.length - 5)
+        .filter((_, i, l) => i < l.length - screen_size)
         .forEach((e) => (e.timer = -1));
       skill_buffer
         .filter((e) => e.timer > 0 && e.timer--)
-        .filter((_, i, l) => i < l.length - 5)
+        .filter((_, i, l) => i < l.length - screen_size)
         .forEach((e) => (e.timer = -1));
       (timer ? era.replaceInColRows : era.printInColRows)(
         [
@@ -522,7 +529,7 @@ async function page_race_result(contestants, records, info) {
         era.printLineChart({
           data: {
             datasets: contestants.map((e) => ({
-              borderColor: get_chara_color(e.index_chara),
+              borderColor: e.color,
               data: records.loc
                 .map((r, i) =>
                   (
@@ -553,9 +560,9 @@ async function page_race_result(contestants, records, info) {
         era.printLineChart({
           data: {
             datasets: contestants.map((e) => ({
-              borderColor: get_chara_color(e.index_chara),
+              borderColor: e.color,
               data: records.speed
-                .map((r) => r[e.index_race].toFixed(1))
+                .map((r) => Math.max(speed_min, r[e.index_race]).toFixed(1))
                 .filter((_, i) => i % 15 === 0),
               label: e.name,
               stepped: false,
@@ -580,7 +587,7 @@ async function page_race_result(contestants, records, info) {
         era.printLineChart({
           data: {
             datasets: contestants.map((e) => ({
-              borderColor: get_chara_color(e.index_chara),
+              borderColor: e.color,
               data: records.stamina
                 .map((r) => r[e.index_race].toFixed(1))
                 .filter((_, i) => i % 15 === 0),
@@ -609,7 +616,7 @@ async function page_race_result(contestants, records, info) {
             datasets: contestants.map((e) => {
               let skill_count = 0;
               return {
-                borderColor: get_chara_color(e.index_chara),
+                borderColor: e.color,
                 data: records.skill
                   .map((r) => {
                     skill_count += r[e.index_race].length;

@@ -4,19 +4,27 @@ const { gacha, get_random_entry, sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
-const legends_default = require('#/data/race/legends-default');
+const recruit_flags = require('#/data/event/recruit-flags');
+const named_list = require('#/data/race/contestants/named.json');
+const passer_by_names = require('#/data/race/contestants/passer-by-names.json');
+const passer_by_list = require('#/data/race/contestants/unnamed.json');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
 const {
   mod_acceleration_adapt_ground,
 } = require('#/data/race/race-sim-const.js');
-const {
-  chara_skill_dict,
-  skill_sets,
-  skills_dict,
-} = require('#/data/race/skill/skill-const');
+const { skill_sets, skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
+
+const named_level = [
+    Math.min(...named_list.map((e) => e.level)),
+    Math.max(...named_list.map((e) => e.level)),
+  ],
+  passer_by_level = [
+    Math.min(...passer_by_list.map((e) => e.level)),
+    Math.max(...passer_by_list.map((e) => e.level)),
+  ];
 
 /**
  * @param {number[]} adapts
@@ -40,15 +48,26 @@ function random_style(adapts) {
 function sys_parse_for_race(team_chara, race, info) {
   const current = new Date().getTime();
   const legends = info['legends'] || [],
-    phantom_age = Math.floor(
-      Math.max(
-        ...team_chara.map((e) =>
-          e.index_chara === 0
-            ? 96
-            : era.get(`cflag:${e.index_chara}:育成回合计时`),
-        ),
-      ) / 48,
-    );
+    edu_phase = Math.max(
+      ...team_chara.map((e) =>
+        e.index_chara === 0
+          ? 144
+          : era.get(`cflag:${e.index_chara}:育成回合计时`),
+      ),
+    ),
+    named_difficulty = [
+      named_level[0] +
+        ((named_level[1] - named_level[0]) * (edu_phase - 24)) / (144 - 24) -
+        1,
+      0,
+    ],
+    passer_by_difficulty = [
+      passer_by_level[0] +
+        ((passer_by_level[1] - passer_by_level[0]) * (edu_phase - 24)) /
+          (144 - 24) -
+        1,
+      0,
+    ];
   let ret = [...team_chara],
     sp_command = false;
 
@@ -70,98 +89,158 @@ function sys_parse_for_race(team_chara, race, info) {
     legends_history = [];
   }
   const list_history = legends.filter(
-    (e) => team_chara.findIndex((uma) => uma.index_chara === e) === -1,
+    (e) => era.get(`cflag:${e.id}:招募状态`) !== recruit_flags.yes,
   );
-  // TODO 随机对手抽取
-  //先填史实冠军
-  //史实冠军保证干劲非负
-  gacha(
-    list_history,
-    Math.min(info.legend_count, info.gates - ret.length),
-  ).forEach((id) => {
-    //对应json中存在幻影数据则优先读取
-    let uma = legends_history.find((e) => e.id === id);
-    if (uma) {
-      ret.push(
-        new PseudoUma(
-          uma.id,
-          uma.name,
-          get_chara_color(uma.id),
-          get_random_value(0, 2),
-          uma.attrs,
-          random_style(uma.adapt_style),
-          uma.adapt_style,
-          uma.adapt_distance,
-          uma.adapt_ground,
-          uma.skills.map((e) => skills_dict[e]),
-        ).set_legend(),
-      );
-    } else {
-      //对应json中不存在该幻影数据则从default读取
-      uma = legends_default.find((e) => e.id === id);
-      ret.push(
-        new PseudoUma(
-          uma.id,
-          uma.name,
-          get_chara_color(uma.id),
-          get_random_value(0, 2),
-          uma.attrs[phantom_age],
-          random_style(uma.adapt_style[phantom_age]),
-          uma.adapt_style[phantom_age],
-          uma.adapt_distance[phantom_age],
-          uma.adapt_ground[phantom_age],
-          uma.skills[phantom_age].map((e) => skills_dict[e]),
-        ).set_legend(),
-      );
-    }
-  });
+  const legend_count = get_random_value(0, info.legend_count);
+  //先填史实冠军,史实冠军保证干劲非负
+  gacha(list_history, Math.min(legend_count, info.gates - ret.length)).forEach(
+    (id) => {
+      //对应json中存在幻影数据则优先读取
+      let uma = legends_history.find((e) => e.id === id);
+      if (uma) {
+        ret.push(
+          new PseudoUma(
+            uma.id,
+            uma.name,
+            get_chara_color(uma.id),
+            get_random_value(0, 2),
+            uma.attrs,
+            random_style(uma.adapt_style),
+            uma.adapt_style,
+            uma.adapt_distance,
+            uma.adapt_ground,
+            uma.skills.map((e) => skills_dict[e]),
+          ).set_legend(),
+        );
+      } else {
+        //对应json中不存在该幻影数据则从default读取
+        uma = get_random_entry(
+          named_list.filter(
+            (e) =>
+              e.id === id &&
+              e.adapt_ground[info.ground] >= 5 &&
+              e.adapt_distance[info.distance] >= 5 &&
+              e.level >= named_difficulty - 400 &&
+              e.level <= named_difficulty + 200,
+          ),
+        );
+        ret.push(
+          new PseudoUma(
+            uma.id,
+            era.get(`static:${uma.id}:name`),
+            get_chara_color(uma.id),
+            get_random_value(...uma.motivation),
+            uma.attrs,
+            random_style(uma.adapt_style),
+            uma.adapt_style,
+            uma.adapt_distance,
+            uma.adapt_ground,
+            skill_sets[uma.skills].map((s) => skills_dict[s]),
+          ).set_legend(),
+        );
+      }
+    },
+  );
 
   // 史实冠军不够数那再从default里随机抽人
-  // 此时不再保证干劲非负
+  for (let i = 0; i < named_list.length; ++i) {
+    if (named_list[i].level > named_difficulty[0]) {
+      named_difficulty[1] = named_list[i].level;
+      named_difficulty[0] = named_list[i - 1]?.level || named_difficulty[1];
+      break;
+    }
+  }
   gacha(
-    legends_default.filter(
+    Object.values(
+      named_list
+        .filter(
+          (e) =>
+            e.adapt_ground[info.ground] >= 5 &&
+            e.adapt_distance[info.distance] >= 5 &&
+            e.level >= named_difficulty[0] - 200 &&
+            e.level <= named_difficulty[1] + 400,
+        )
+        .reduce((p, c) => {
+          (p[c.id] || (p[c.id] = [])).push(c);
+          return p;
+        }, {}),
+    ).filter(
       (e) =>
-        ret.findIndex((uma) => uma.index_chara === e.id) === -1 &&
-        e.adapt_ground[phantom_age][info.ground] >= 6 &&
-        e.adapt_distance[phantom_age][info.distance] >= 6,
+        ret.findIndex((uma) => uma.index_chara === e[0].id) === -1 &&
+        era.get(`cflag:${e.id}:招募状态`) !== recruit_flags.yes,
     ),
     Math.min(
-      info.legend_count - ret.length + team_chara.length,
+      legend_count - ret.length + team_chara.length,
       info.gates - ret.length,
     ),
-  ).forEach((uma) => {
+  ).forEach((e) => {
+    const uma = get_random_entry(e);
     ret.push(
       new PseudoUma(
         uma.id,
-        uma.name,
+        era.get(`static:${uma.id}:name`),
         get_chara_color(uma.id),
-        get_random_value(-2, 2),
-        uma.attrs[phantom_age],
-        random_style(uma.adapt_style[phantom_age]),
-        uma.adapt_style[phantom_age],
-        uma.adapt_distance[phantom_age],
-        uma.adapt_ground[phantom_age],
-        uma.skills[phantom_age].map((e) => skills_dict[e]),
+        get_random_value(...uma.motivation),
+        uma.attrs,
+        random_style(uma.adapt_style),
+        uma.adapt_style,
+        uma.adapt_distance,
+        uma.adapt_ground,
+        skill_sets[uma.skills].map((s) => skills_dict[s]),
       ).set_legend(),
     );
   });
-  // 最后填路人幻影
-  gacha([], info.gates - ret.length);
-  const date = era.get('flag:当前回合数'),
-    ratio = 1 - ((date - 1) % 48) / 48;
 
-  // 先随机化处理，等数据库完善后再改成真的
-  ret.slice(team_chara.length).forEach((uma) => {
-    uma.attrs = uma.attrs.map(
-      (e) => e - 400 * ratio + get_random_value(-100, 100),
-    );
-    uma.list_skill = (
-      chara_skill_dict[uma.index_chara] ||
-      get_random_entry(Object.values(skill_sets))
-    )
-      .slice(0, 3)
-      .map((e) => new PseudoUma.RaceSkill(skills_dict[e]));
-  });
+  // 最后填路人幻影
+  const names = sort_list(
+    gacha(passer_by_names, info.gates - ret.length),
+    Math.random,
+  );
+  for (let i = 0; i < passer_by_list.length; ++i) {
+    if (passer_by_list[i].level > passer_by_difficulty[0]) {
+      passer_by_difficulty[1] = passer_by_list[i].level;
+      passer_by_difficulty[0] =
+        passer_by_list[i - 1]?.level || passer_by_difficulty[1];
+      break;
+    }
+  }
+  let back_up_list = passer_by_list.filter(
+    (e) =>
+      e.adapt_ground[info.ground] >= 4 &&
+      e.adapt_distance[info.distance] >= 4 &&
+      e.level >= passer_by_difficulty[0] - 400 &&
+      e.level <= passer_by_difficulty[1] + 200,
+  );
+  if (back_up_list.length < info.gates - ret.length) {
+    back_up_list = [];
+    for (
+      let i = passer_by_list.length - 1;
+      i >= 0 && back_up_list.length < info.gates - ret.length;
+      --i
+    ) {
+      if (passer_by_list[i].level > passer_by_difficulty[1] + 200) {
+        continue;
+      }
+      back_up_list.push(passer_by_list[i]);
+    }
+  }
+  gacha(back_up_list, info.gates - ret.length).forEach((e, i) =>
+    ret.push(
+      new PseudoUma(
+        -1 - i,
+        names[i],
+        get_chara_color(undefined),
+        get_random_value(...e.motivation),
+        e.attrs,
+        random_style(e.adapt_style),
+        e.adapt_style,
+        e.adapt_distance,
+        e.adapt_ground,
+        skill_sets[e.skills].map((s) => skills_dict[s]),
+      ),
+    ),
+  );
+
   const from_setting = era.get('flag:比赛难度');
   if (from_setting) {
     ret
@@ -207,10 +286,6 @@ function sys_parse_for_race(team_chara, race, info) {
 
   ret.forEach((uma) => {
     uma.attrs = uma.attrs.map(Math.ceil);
-    uma.list_skill = sort_list(uma.list_skill, (e) => e.data.id, true).filter(
-      (v, i, a) =>
-        i === a.findIndex((x) => x.data.group_id === v.data.group_id),
-    );
     const motivation_coefficient = 1 + uma.motivation * 0.02;
 
     uma.race.conditionParams.always = 1;
@@ -232,7 +307,6 @@ function sys_parse_for_race(team_chara, race, info) {
     // 横向距离砍掉了：固定外道超人
     uma.race.conditionParams.is_behind_in = 1;
     uma.race.conditionParams.is_dirtgrade = is_dirt_grade;
-    uma.race.conditionParams.is_exist_chara_id = 1000 + uma.index_chara;
     // 横向距离砍掉了：移动方向随机
     uma.race.conditionParams.is_move_lane = get_random_value(0, 2);
     // 横向距离砍掉了：固定内道

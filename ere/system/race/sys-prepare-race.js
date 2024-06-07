@@ -5,6 +5,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const { ability_type_enum } = require('#/data/race/model/uma-skill');
+const { frame_rate } = require('#/data/race/race-sim-const');
 const {
   mod_acceleration_adapt_distance,
   mod_acceleration_adapt_ground,
@@ -97,12 +98,10 @@ function sys_prepare_race(list_chara, race_info) {
     uma.race.conditionParams.is_used_skill_id = 0;
     uma.race.conditionParams.lastspurt = 0;
     uma.race.conditionParams.order_rate_in20_continue = 1;
-    uma.race.conditionParams.order_rate_in50_continue = 1;
     uma.race.conditionParams.order_rate_in80_continue = 1;
     uma.race.conditionParams.order_rate_out20_continue = 1;
     uma.race.conditionParams.order_rate_out40_continue = 1;
     uma.race.conditionParams.order_rate_out50_continue = 1;
-    uma.race.conditionParams.order_rate_out70_continue = 1;
     uma.race.conditionParams.overtake_target_no_order_up_time = 0;
     uma.race.conditionParams.overtake_target_time = 0;
     uma.race.conditionParams.phase = 0;
@@ -243,7 +242,7 @@ function sys_prepare_race(list_chara, race_info) {
       ((15 + 5 * (uma.style === 0)) *
         Math.log(uma.attrs[attr_enum.intelligence] / 10)) /
       Math.log(10) /
-      3000;
+      (2 * frame_rate * 100);
 
     //计算比赛偏重属性对速度属性的增幅
     if (race_info.attr_bonus.length > 0) {
@@ -281,9 +280,7 @@ function sys_prepare_race(list_chara, race_info) {
     // 筛除结算完毕的常时被动 只留触发技能给比赛模拟
     uma.list_skill = uma.list_skill.filter((skill) => {
       if (skill.data.ability_times[0] >= 0) {
-        // TODO 测试用，所有主动技能进比赛，测完后记得去掉这条
-        // return skill.data.is_random === 0 || Math.random() < uma.probs.skill;
-        return true;
+        return skill.data.is_random === 0 || Math.random() < uma.probs.skill;
       }
       uma.race.conditionParams.same_skill_horse_count =
         skill_counts[skill.data.id] || 0;
@@ -413,7 +410,8 @@ function sys_prepare_race(list_chara, race_info) {
     uma.factorSlope.up = 200 / uma.attrs[attr_enum.strength];
 
     // 由智力决定受下坡加速的影响概率
-    uma.factorSlope.down = (0.0004 * uma.attrs[attr_enum.intelligence]) / 15;
+    uma.factorSlope.down =
+      (0.0004 * uma.attrs[attr_enum.intelligence]) / frame_rate;
 
     // 由智力决定最终冲刺计划的选择概率
     uma.probs.planRush = 0.15 + 0.0005 * uma.attrs[attr_enum.intelligence];

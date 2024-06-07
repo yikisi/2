@@ -493,6 +493,9 @@ module.exports = (handlers) => {
     callname,
     edu_marks,
   ) => {
+    if (era.get('cflag:52:育成回合计时') < 96) {
+      return true;
+    }
     await print_event_name('因为不想输！', urara);
     await urara.print_and_wait(
       '只要走出这条幽长的隧道，应该就是有马纪念前的最后几站了。',

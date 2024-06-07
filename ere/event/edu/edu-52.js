@@ -14,7 +14,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 const chara_colors = require('#/data/chara-colors').chara_colors[52];
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
-const { race_enum } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
 /** @type {Record<string,function(HookArg,Record<string,*>,EventObject):Promise<*>>} */
@@ -486,7 +485,7 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
   const callname = sys_get_callname(52, 0),
     me = get_chara_talk(0),
     urara = get_chara_talk(52),
-    key = `${race_enum.arim_kin}_${era.get('cflag:52:育成回合计时')}`;
+    key = `${extra_flag.race}_${era.get('cflag:52:育成回合计时')}`;
   if (race_end_handlers[extra_flag.race] || race_end_handlers[key]) {
     return await (race_end_handlers[extra_flag.race] || race_end_handlers[key])(
       urara,

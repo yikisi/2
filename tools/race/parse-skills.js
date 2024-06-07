@@ -251,12 +251,24 @@ async function chara_skill() {
   Object.values(dict).forEach((e) => e.forEach((s) => (skill_dict[s] = 1)));
   console.log('角色卡技能', Object.keys(skill_dict).length);
   let buffer = 'const chara_skill_dict={},skills_dict = {};\n\n',
-    buffer_common_skills = 'const common_skills = [';
+    buffer_common_skills = [202051];
   for (const chara_id in dict) {
     buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
   }
   buffer += '\n\nconst skill_sets = {0:[],\n';
-  (await prisma.skill_set.findMany()).forEach((e) => {
+  (
+    await prisma.skill_set.findMany({
+      where: {
+        id: {
+          in: [
+            ...(await prisma.daily_race_npc.findMany()),
+            ...(await prisma.legend_race_npc.findMany()),
+            ...(await prisma.single_mode_npc.findMany()),
+          ].map((e) => e.skill_set_id),
+        },
+      },
+    })
+  ).forEach((e) => {
     const to_write = [];
     for (const k in e) {
       if (k.startsWith('skill_id') && e[k]) {
@@ -265,7 +277,7 @@ async function chara_skill() {
       }
     }
     if (to_write.length > 0) {
-      buffer += `${e.id}:[${to_write.join(',')}],\n`;
+      buffer += `${e.id}:[${to_write.sort().join(',')}],\n`;
     }
   });
   buffer += '};\n\n';
@@ -275,9 +287,10 @@ async function chara_skill() {
       where: { text: { in: require('./common-skills') }, category: 47 },
     })
   ).forEach((e) => {
-    buffer_common_skills += `${e.index},`;
+    buffer_common_skills.push(e.index);
     skill_dict[e.index] = 1;
   });
+  skill_dict[202051] = 1;
   console.log('+通用技能', Object.keys(skill_dict).length);
   const skill_data = await find_many_skills({
     id: { in: Object.keys(skill_dict).map(Number) },
@@ -307,7 +320,7 @@ async function chara_skill() {
       }
     });
   }
-  const c_dict = {};
+  const c_dict = { is_used_skill_id: 1 };
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
   buffer += 'skills_dict[100039]=require("#/data/race/skill/skill-100039");';
@@ -345,7 +358,7 @@ async function chara_skill() {
   });
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
-    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\n${buffer_common_skills}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
+    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills.sort().join(',')}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
   );
   buffer = 'class ConditionParams { ';
   Object.keys(c_dict)

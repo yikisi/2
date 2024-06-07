@@ -249,9 +249,9 @@ module.exports = () => {
         ],
         [
           [
-            `『杂鱼～杂鱼～』，这是从`,
+            `『杂鱼～杂鱼～』，这是从 `,
             sys_get_colored_callname(52, 19),
-            `的小本本上学来的，说是能让 ${call_me} 变得开心！诶？不要说了？那 ${self_call} 不说了！不过 ${call_me}……继续看着 ${self_call} 吧？`,
+            ` 的小本本上学来的，说是能让 ${call_me} 变得开心！诶？不要说了？那 ${self_call} 不说了！不过 ${call_me}……继续看着 ${self_call} 吧？`,
           ],
           [
             '观察着 ',

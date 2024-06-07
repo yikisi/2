@@ -1,5 +1,4 @@
 const ConditionParams = require('#/data/race/model/condition-params');
-const PreConditionParams = require('#/data/race/model/pre-condition-params');
 const { attr_names } = require('#/data/train-const');
 
 class RaceSkill {
@@ -146,7 +145,6 @@ class PseudoUma {
     location: 0,
     locationPlanRush: undefined,
     overtakeAim: undefined,
-    preConditionParams: new PreConditionParams(),
     slope: 0,
     stamina: 0,
     staminaCost: 0,

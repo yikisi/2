@@ -39,19 +39,19 @@ function fill_race_weather_and_mess(race, chara) {
     const race_id = get_random_entry(tmp),
       aim_info = race_infos[race_id];
     info = new RaceInfo(
-      race_infos[race_enum.begin_race].name_en,
-      race_infos[race_enum.begin_race].name_zh,
-      race_infos[race_enum.begin_race].race_class,
+      info.name_en,
+      info.name_zh,
+      info.race_class,
       aim_info.track,
       aim_info.ground,
       aim_info.span,
       adaptability2race.indexOf(race_id) % 4,
       aim_info.rotation,
-      aim_info.gates,
+      info.gates,
       0,
-      race_infos[race_enum.begin_race].limit,
+      info.limit,
       0,
-      race_infos[race_enum.begin_race].prize,
+      info.prize,
       aim_info.param_id,
     );
     info.attr_bonus = aim_info.attr_bonus;

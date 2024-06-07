@@ -10,6 +10,7 @@ const {
 } = require('#/data/race/model/uma-skill');
 const {
   acc_up_hill_mode,
+  frame_rate,
   loc_mind_multiply_velocity_ideal,
   mod_stamina_cost_mess_dirt,
   mod_stamina_cost_mess_grass,
@@ -18,6 +19,7 @@ const {
   start_acc,
   start_velocity,
 } = require('#/data/race/race-sim-const');
+const { attr_enum } = require('#/data/train-const');
 
 /**
  * @param {number} timer
@@ -106,7 +108,7 @@ function sys_sim_race(list_chara, race_info) {
 
     start_delay[uma.index_race] = Math.random() * 0.1;
     uma.list_skill = uma.list_skill.filter((s) => {
-      if (s.data.ability_types[0] !== ability_type_enum.StartDash) {
+      if (s.data.ability_types[0][0] !== ability_type_enum.StartDash) {
         return true;
       }
       start_delay[uma.index_race] *= s.data.ability_values[0];
@@ -114,7 +116,7 @@ function sys_sim_race(list_chara, race_info) {
       uma.race.conditionParams.activate_count_all++;
       uma.race.conditionParams.activate_count_start++;
     });
-    if (start_delay[uma.index_race] < 1 / 15) {
+    if (start_delay[uma.index_race] < 1 / frame_rate) {
       uma.race.acceleration = start_acc;
       record_speed_list[0][uma.index_race] = uma.race.velocityReal =
         start_velocity;
@@ -143,23 +145,24 @@ function sys_sim_race(list_chara, race_info) {
     // 位置和速度结算
     list_in_race.forEach((uma) => {
       if (start_delay[uma.index_race] > 0) {
-        if (start_delay[uma.index_race] < 1 / 15) {
+        if (start_delay[uma.index_race] < 1 / frame_rate) {
           uma.race.location +=
             start_velocity +
-            uma.race.acceleration * (1 / 15 - start_delay[uma.index_race]);
+            uma.race.acceleration *
+              (1 / frame_rate - start_delay[uma.index_race]);
           uma.race.staminaCost =
             ((20 / 144) *
               Math.pow(uma.race.location - uma.base.velocityIdeal + 12, 2) *
               mod_stamina_cost_mess) /
-            15;
-          uma.race.location /= 15;
+            frame_rate;
+          uma.race.location /= frame_rate;
         }
         uma.race.velocityReal = uma.base.velocityMin;
         start_delay[uma.index_race] = 0;
       } else {
         const temp = uma.race.velocityReal;
         uma.race.velocityReal = Math.max(
-          uma.race.velocityReal + uma.race.acceleration / 15,
+          uma.race.velocityReal + uma.race.acceleration / frame_rate,
           uma.base.velocityMin,
         );
         uma.race.location += (uma.race.velocityReal + temp) / 30;
@@ -167,7 +170,7 @@ function sys_sim_race(list_chara, race_info) {
           ((20 / 144) *
             Math.pow(uma.race.velocityReal - uma.base.velocityIdeal + 12, 2) *
             mod_stamina_cost_mess) /
-          15;
+          frame_rate;
       }
 
       record_speed_list.at(-1)[uma.index_race] = uma.race.velocityReal;
@@ -183,6 +186,9 @@ function sys_sim_race(list_chara, race_info) {
         uma.race.conditionParams.blocked_front = Number(
           uma.race.conditionParams.bashin_diff_infront < 0.8,
         );
+        if (i === 0 && uma.race.conditionParams.blocked_front) {
+          throw new Error();
+        }
         uma.race.conditionParams.bashin_diff_behind =
           (i === l.length - 1
             ? 50
@@ -218,9 +224,9 @@ function sys_sim_race(list_chara, race_info) {
       },
     );
 
-    list_finished.forEach((uma) => {
+    list_finished.forEach((uma, i) => {
       record_location_list.at(-1)[uma.index_race] = [
-        race_info.span + 1000 * (race_info.gates - uma.rank.curr + 1),
+        race_info.span + 1000 * (race_info.gates - i),
       ];
       record_speed_list.at(-1)[uma.index_race] = 0;
       record_stamina_list.at(-1)[uma.index_race] = uma.race.stamina;
@@ -260,7 +266,8 @@ function sys_sim_race(list_chara, race_info) {
       if (uma.race.temptation > 0) {
         uma.race.temptation--;
         if (
-          (uma.race.temptation % (3 * 15) === 0 && Math.random() < 0.55) ||
+          (uma.race.temptation % (3 * frame_rate) === 0 &&
+            Math.random() < 0.55) ||
           !uma.race.temptation
         ) {
           record_events_list
@@ -277,12 +284,15 @@ function sys_sim_race(list_chara, race_info) {
           .at(-1)
           [uma.index_race].push(race_event_enum.temptation);
         uma.base.temptationSpan = 50000;
-        uma.race.temptation = 12 * 15;
+        uma.race.temptation = 12 * frame_rate;
         uma.race.conditionParams.is_temptation = 1;
         uma.race.conditionParams.temptation_count++;
       }
 
       uma.race.conditionParams.accumulatetime = timer;
+      if (i === 0) {
+        uma.race.conditionParams.blocked_front = 0;
+      }
       if (uma.rank.curr !== uma.rank.last) {
         uma.race.conditionParams.behind_near_lane_time =
           uma.race.conditionParams.behind_near_lane_time_set1 =
@@ -319,9 +329,6 @@ function sys_sim_race(list_chara, race_info) {
           if (cur_lane.is_curve) {
             uma.base.change_order_finalcorner++;
           }
-        }
-        if (has_final_corner && cur_lane.is_last) {
-          uma.race.conditionParams.change_order_up_finalcorner_after++;
         }
       }
       uma.race.conditionParams.corner = cur_lane.corner;
@@ -388,13 +395,8 @@ function sys_sim_race(list_chara, race_info) {
         if (order_rate < 40) {
           uma.race.conditionParams.order_rate_out40_continue = 0;
         }
-        if (order_rate > 50) {
-          uma.race.conditionParams.order_rate_in50_continue = 0;
-        } else if (order_rate < 50) {
+        if (order_rate < 50) {
           uma.race.conditionParams.order_rate_out50_continue = 0;
-        }
-        if (order_rate < 70) {
-          uma.race.conditionParams.order_rate_out70_continue = 0;
         }
         if (order_rate > 80) {
           uma.race.conditionParams.order_rate_in80_continue = 0;
@@ -419,8 +421,7 @@ function sys_sim_race(list_chara, race_info) {
           uma.race.conditionParams.overtake_target_time = 0;
       }
       uma.race.conditionParams.remain_distance =
-        uma.race.conditionParams.remain_distance_viewer_id =
-          race_info.span - uma.race.location;
+        race_info.span - uma.race.location;
       if (uma.race.slope > 0) {
         uma.race.conditionParams.slope = 1;
       } else if (uma.race.slope < 0) {
@@ -672,7 +673,8 @@ function sys_sim_race(list_chara, race_info) {
         uma.race.downhill = 0;
         uma.race.velocityIdeal -= uma.race.slope * uma.factorSlope.up;
       } else if (uma.flag.downhill) {
-        uma.flag.downhill = uma.race.downhill % 15 > 0 || Math.random() > 0.2;
+        uma.flag.downhill =
+          uma.race.downhill % frame_rate > 0 || Math.random() > 0.2;
         if (!uma.flag.downhill) {
           uma.race.downhill = 0;
         }
@@ -745,11 +747,11 @@ function sys_sim_race(list_chara, race_info) {
           ) {
             uma.race.conditionParams.is_activate_any_skill = 1;
             skill.count[i]++;
-            skill.cooldown[i] = skill.data.cooldown_times[i] * 15;
+            skill.cooldown[i] = skill.data.cooldown_times[i] * frame_rate;
             if (!skill.data.is_two_phase) {
               skill.cooldown[1 - i] = skill.cooldown[i];
             }
-            skill.ability_time[i] = skill.data.ability_times[i] * 15;
+            skill.ability_time[i] = skill.data.ability_times[i] * frame_rate;
             for (let j = 0; j < skill.data.ability_types[i].length; ++j) {
               if (skill.data.ability_types[i][j] > 0) {
                 let temp;
@@ -925,7 +927,7 @@ function sys_sim_race(list_chara, race_info) {
                     break;
                   case ability_type_enum.TemptationEndTime:
                     skill.aims[i][j].forEach((e) => {
-                      e.base.temptation = skill.values[i][j] * 15;
+                      e.base.temptation = skill.values[i][j] * frame_rate;
                       e.race.conditionParams.is_temptation = Number(
                         skill.values[i][j] > 0,
                       );
@@ -933,7 +935,7 @@ function sys_sim_race(list_chara, race_info) {
                         .at(-1)
                         [
                           e.index_race
-                        ].push(e.race.conditionParams.is_temptation ? race_event_enum.temp_continue : race_event_enum.temp_end);
+                        ].push(e.race.conditionParams.is_temptation ? (e.race.temptation > 0 ? race_event_enum.temp_continue : race_event_enum.temptation) : race_event_enum.temp_end);
                     });
                     break;
                   case ability_type_enum.CurrentSpeed:
@@ -1096,6 +1098,31 @@ function sys_sim_race(list_chara, race_info) {
       if (uma.race.loc_mind === 2 && uma.style > 0) {
         uma.race.staminaCost *= 0.6;
       }
+      if (
+        uma.race.location > 150 &&
+        uma.race.conditionParams.blocked_front &&
+        Math.random() >=
+          (uma.attrs[attr_enum.strength] *
+            uma.race.stamina *
+            l[i - 1].base.stamina +
+            0.000001) /
+            (l[i - 1].attrs[attr_enum.strength] *
+              l[i - 1].race.stamina *
+              uma.base.stamina +
+              0.000001)
+      ) {
+        uma.race.velocityReal = Math.max(
+          Math.min(
+            l[i - 1].race.velocityReal *
+              (0.988 +
+                (0.012 * uma.race.conditionParams.bashin_diff_infront) / 0.8),
+            uma.race.velocityReal,
+            30,
+          ),
+          uma.base.velocityMin,
+        );
+        uma.race.staminaCost *= 1.1;
+      }
       uma.race.stamina = Math.min(
         Math.max(uma.race.stamina - uma.race.staminaCost, 0),
         uma.base.stamina,
@@ -1105,15 +1132,17 @@ function sys_sim_race(list_chara, race_info) {
           uma.base.velocityMin + uma.base.velocityIdealBuff;
         uma.race.acceleration = race_de_acc[4];
       } else {
-        uma.race.velocityIdeal =
-          Math.max(Math.min(uma.race.velocityIdeal, 30), uma.base.velocityMin) +
-          uma.base.velocityIdealBuff;
+        uma.race.velocityIdeal += uma.base.velocityIdealBuff;
         if (uma.race.loc_mind > 0) {
           uma.race.velocityIdeal *=
             loc_mind_multiply_velocity_ideal[
               (uma.style > 0) * 3 + uma.race.loc_mind
             ];
         }
+        uma.race.velocityIdeal = Math.max(
+          Math.min(uma.race.velocityIdeal, 30),
+          uma.base.velocityMin,
+        );
         if (uma.race.loc_mind === 2 && uma.style > 0) {
           uma.race.acceleration = race_de_acc[3];
         } else if (uma.race.velocityReal > uma.race.velocityIdeal) {
@@ -1130,7 +1159,7 @@ function sys_sim_race(list_chara, race_info) {
   });
   const duration = new Date().getTime() - current;
   logger.debug(
-    `比赛模拟：${duration} ms / ${Math.ceil(timer * 15)} 帧，平均 ${(duration / (timer * 15)).toFixed(4)} ms/帧`,
+    `比赛模拟：${duration} ms / ${Math.ceil(timer * frame_rate)} 帧，平均 ${(duration / (timer * frame_rate)).toFixed(4)} ms/帧`,
   );
   return {
     events: record_events_list,

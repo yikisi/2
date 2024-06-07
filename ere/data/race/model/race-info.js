@@ -17,9 +17,9 @@ const rotation_enum = {
   straight: 0,
 };
 const rotation_names = {};
-rotation_names[rotation_enum.left] = '左';
-rotation_names[rotation_enum.right] = '右';
-rotation_names[rotation_enum.straight] = '直';
+rotation_names[rotation_enum.left] = '逆时针';
+rotation_names[rotation_enum.right] = '顺时针';
+rotation_names[rotation_enum.straight] = '直线';
 
 //年龄限制：两岁/三岁/三岁以上/四岁以上
 const limit_enum = {

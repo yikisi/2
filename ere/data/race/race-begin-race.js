@@ -14,4 +14,5 @@ module.exports = new RaceInfo(
   0,
   600,
   0,
+  0,
 );

@@ -9,8 +9,6 @@ class ConditionParams {
   always;
   base_power;
   base_speed;
-  base_stamina;
-  base_wiz;
   bashin_diff_behind;
   bashin_diff_infront;
   behind_near_lane_time;
@@ -20,7 +18,6 @@ class ConditionParams {
   blocked_side_continuetime;
   change_order_onetime;
   change_order_up_end_after;
-  change_order_up_finalcorner_after;
   change_order_up_middle;
   compete_fight_count;
   corner;
@@ -44,7 +41,6 @@ class ConditionParams {
   is_basis_distance;
   is_behind_in;
   is_dirtgrade;
-  is_exist_chara_id;
   is_finalcorner;
   is_finalcorner_laterhalf;
   is_finalcorner_random;
@@ -60,17 +56,14 @@ class ConditionParams {
   lane_type;
   last_straight_random;
   lastspurt;
-  motivation;
   near_count;
   order;
   order_rate;
   order_rate_in20_continue;
-  order_rate_in50_continue;
   order_rate_in80_continue;
   order_rate_out20_continue;
   order_rate_out40_continue;
   order_rate_out50_continue;
-  order_rate_out70_continue;
   overtake_target_no_order_up_time;
   overtake_target_time;
   phase;
@@ -83,7 +76,6 @@ class ConditionParams {
   post_number;
   random_lot;
   remain_distance;
-  remain_distance_viewer_id;
   rotation;
   running_style;
   running_style_count_nige_otherself;
@@ -96,7 +88,6 @@ class ConditionParams {
   running_style_temptation_opponent_count_nige;
   running_style_temptation_opponent_count_oikomi;
   running_style_temptation_opponent_count_sashi;
-  running_style_temptation_opponent_count_senko;
   same_skill_horse_count;
   season;
   slope;
