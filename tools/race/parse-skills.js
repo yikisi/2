@@ -291,6 +291,8 @@ async function chara_skill() {
     skill_dict[e.index] = 1;
   });
   skill_dict[202051] = 1;
+  skill_dict[200301] = 1;
+  skill_dict[200302] = 1;
   console.log('+通用技能', Object.keys(skill_dict).length);
   const skill_data = await find_many_skills({
     id: { in: Object.keys(skill_dict).map(Number) },
@@ -325,6 +327,11 @@ async function chara_skill() {
   buffer += '\n\nconst current = new Date().getTime();\n\n';
   buffer += 'skills_dict[100039]=require("#/data/race/skill/skill-100039");';
 
+  const pt_dict = {};
+  (await prisma.single_mode_skill_need_point.findMany()).forEach(
+    (e) => (pt_dict[e.id] = e.need_skill_point),
+  );
+
   skill_data.forEach((e) => {
     const id = e.id;
     buffer += `skills_dict[${id}]=require('#/data/race/skill/skill-${id}');`;
@@ -349,7 +356,9 @@ async function chara_skill() {
     sbuffer += `[${e.popularity_add_param_1},${e.popularity_add_param_2}],`;
     sbuffer += `[${e.popularity_add_value_1},${e.popularity_add_value_2}],`;
     sbuffer += `${e.activate_lot},`;
-    sbuffer += `${e.condition_2 !== '' && e.condition_2.indexOf('is_activate_other_skill_detail') !== -1}`;
+    sbuffer += `${pt_dict[id] || 0},`;
+    sbuffer += `${e.condition_2 !== '' && e.condition_2.indexOf('is_activate_other_skill_detail') !== -1},`;
+    sbuffer += `${id.toString().startsWith('9')}`;
     writeFileSync(`../../ere/data/race/skill/skill-${id}.js`, `${sbuffer});`);
     fill_dict(e.precondition_1, c_dict, e);
     fill_dict(e.precondition_2, c_dict, e);

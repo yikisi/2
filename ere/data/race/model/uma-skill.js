@@ -238,6 +238,11 @@ class UmaSkill {
    * @type {number}
    */
   is_random;
+  /**
+   * PT价格
+   * @type {number}
+   */
+  price;
 
   /**
    * @param {number} id
@@ -259,7 +264,9 @@ class UmaSkill {
    * @param {number[]} pop_types
    * @param {number[]} pop_values
    * @param {number} is_random
+   * @param {number} price
    * @param {boolean} is_two_phase
+   * @param {boolean} is_generated
    */
   constructor(
     id,
@@ -281,7 +288,9 @@ class UmaSkill {
     pop_types,
     pop_values,
     is_random,
+    price,
     is_two_phase,
+    is_generated,
   ) {
     this.id = id;
     this.name = name;
@@ -302,7 +311,9 @@ class UmaSkill {
     this.pop_types = pop_types;
     this.pop_values = pop_values;
     this.is_random = is_random;
+    this.price = price;
     this.is_two_phase = is_two_phase;
+    this.is_generated = is_generated;
   }
 
   get_colored_name() {

@@ -3,6 +3,9 @@ const { add, get, set } = require('#/era-electron');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 
 class CharaSkills {
+  /** @type {number[]} */
+  obj;
+
   constructor(chara_id) {
     this.id = chara_id;
     this.obj =
@@ -14,9 +17,10 @@ class CharaSkills {
    * @returns {number[]}
    */
   add(...skill_id) {
+    this.clean();
     const count = this.obj.length;
     this.obj.push(...skill_id);
-    set(
+    this.obj = set(
       `skill:${this.id}:习得技能`,
       this.obj.filter((v, i, a) => i === a.indexOf(v)),
     );
@@ -29,8 +33,16 @@ class CharaSkills {
     return ret;
   }
 
+  clean() {
+    this.obj = set(
+      `skill:${this.id}:习得技能`,
+      this.obj.filter((e) => e),
+    );
+  }
+
   /** @returns {number[]} */
   get() {
+    this.clean();
     return this.obj;
   }
 

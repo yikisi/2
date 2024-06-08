@@ -68,5 +68,7 @@ module.exports = new UmaSkill(
   [3, 0],
   [25, 0],
   1,
+  110,
+  false,
   false,
 );

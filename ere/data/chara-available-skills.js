@@ -1,6 +1,9 @@
 const { get, set } = require('#/era-electron');
 
 class CharaAvailableSkills {
+  /** @type {number[]} */
+  obj;
+
   constructor(chara_id) {
     this.id = chara_id;
     this.obj =
@@ -21,9 +24,19 @@ class CharaAvailableSkills {
     return this.obj;
   }
 
+  remove(...skill_id) {
+    this.obj = set(
+      `skill:${this.id}:可习得技能`,
+      this.obj.filter((e) => e && skill_id.indexOf(e) === -1),
+    );
+  }
+
   /** @returns {number[]} */
   get() {
-    return this.obj;
+    return (this.obj = set(
+      `skill:${this.id}:可习得技能`,
+      this.obj.filter((e) => e),
+    ));
   }
 }
 
