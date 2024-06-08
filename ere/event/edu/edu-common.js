@@ -271,9 +271,9 @@ handlers[event_hooks.foreign_travel] = async (chara_id) => {
 handlers[event_hooks.race_start] = async (chara_id) => {
   const chara_talk = get_chara_talk(chara_id);
   await print_event_name('竞赛之前', chara_talk);
-  era.printButton('「尽全力就好！」', 1);
-  era.printButton('「跑出自己的气势来！」', 2);
-  await era.input();
+  await get_chara_talk(0).say_and_wait(
+    Math.random() < 0.5 ? '尽全力就好！' : '跑出自己的气势来！',
+  );
 };
 
 /**
@@ -285,22 +285,25 @@ handlers[event_hooks.race_end] = async (chara_id, _, extra_flag) => {
   const chara_talk = get_chara_talk(chara_id);
   if (extra_flag.rank === 1) {
     await print_event_name('竞赛获胜', chara_talk);
-    era.printButton('「太棒了！」', 1);
-    era.printButton('「往更高的目标迈进吧！」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '太棒了！' : '往更高的目标迈进吧！',
+    );
   } else if (extra_flag.rank <= 5) {
     await print_event_name('竞赛上榜', chara_talk);
-    era.printButton('「今天的表现也很好！」', 1);
-    era.printButton('「绝对不能输给她们！」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '今天的表现也很好！' : '绝对不能输给她们！',
+    );
   } else if (extra_flag.rank <= 10) {
     await print_event_name('竞赛败北', chara_talk);
-    era.printButton('「下次表现一定更好！」', 1);
-    era.printButton('「沮丧也不是办法！」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '下次表现一定更好！' : '沮丧也不是办法！',
+    );
   } else {
     await print_event_name('下次不会输了！', chara_talk);
-    era.printButton('「总有一天绝对会赢！」', 1);
-    era.printButton('「你愿意就这样丢脸下去？」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '总有一天绝对会赢！' : '你愿意就这样丢脸下去？',
+    );
   }
-  await era.input();
 };
 
 handlers[event_hooks.crazy_fan_end] = async (chara_id) => {

@@ -9,15 +9,20 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaAvailableSkills = require('#/data/chara-available-skills');
+const CharaSkills = require('#/data/chara-skills');
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const { yes } = require('#/data/event/recruit-flags');
 const {
   get_breast_cup,
   get_talent_bust_size,
 } = require('#/data/info-generator');
+const { first_child_id } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
+const { chara_skill_dict } = require('#/data/race/skill/skill-const');
 const { attr_names } = require('#/data/train-const');
 
 /**
@@ -28,6 +33,14 @@ const { attr_names } = require('#/data/train-const');
  */
 function reset_chara(chara_id) {
   if (era.get(`cflag:${chara_id}:种族`)) {
+    if (era.get(`cflag:${chara_id}:招募状态`) === yes) {
+      era.set(
+        `cflag:${chara_id}:育成回合计时`,
+        (era.get('flag:当前回合数') - 1) % 48,
+      );
+      era.set(`cflag:${chara_id}:自主训练`, 1);
+      era.set(`cflag:${chara_id}:腋毛`, 0);
+    }
     Object.values(attr_names).forEach((v) =>
       era.set(`base:${chara_id}:${v}`, era.get(`cflag:${chara_id}:初始${v}`)),
     );
@@ -35,8 +48,16 @@ function reset_chara(chara_id) {
       era.set(`abl:${chara_id}:${v}训练等级`, 1);
       era.set(`exp:${chara_id}:${v}训练经验`, 0);
     });
-    era.set(`exp:${chara_id}:技能点数`, 0);
+    era.set(`exp:${chara_id}:技能点数`, 120);
     era.set(`cflag:${chara_id}:育成用变量`, {});
+    const skill_set =
+      chara_skill_dict[
+        chara_id >= first_child_id
+          ? era.get(`cflag:${chara_id}:模版角色`)
+          : chara_id
+      ] || [];
+    new CharaSkills(chara_id).add(...skill_set.slice(0, 4));
+    new CharaAvailableSkills(chara_id).add(...skill_set.slice(4));
     new RaceHistory(chara_id).reset();
   } else {
     Object.values(attr_names).forEach((v) => {
@@ -46,6 +67,8 @@ function reset_chara(chara_id) {
       );
       era.set(`cflag:${chara_id}:${v}加成`, 0);
     });
+    era.set(`skill:${chara_id}:习得技能`, []);
+    era.set(`skill:${chara_id}:可习得技能`, []);
   }
 
   sys_fix_chara_base(chara_id);
@@ -241,18 +264,7 @@ module.exports = {
     }
   },
   recruit_chara(chara_id) {
-    if (era.get(`cflag:${chara_id}:种族`)) {
-      if (era.get('flag:当前月') < 4) {
-        era.set(
-          `cflag:${chara_id}:育成回合计时`,
-          (era.get('flag:当前回合数') - 1) % 48,
-        );
-        era.set(`cflag:${chara_id}:自主训练`, 1);
-      } else {
-        era.set(`cflag:${chara_id}:育成回合计时`, 'x');
-      }
-    }
-    era.set(`cflag:${chara_id}:腋毛`, 0);
+    reset_chara(chara_id);
     const honor = era.get('flag:当前声望');
     // 先结算声望奖励
     let relation = honor > 500 ? Math.floor((honor - 500) / 12) : 0;

@@ -1,21 +1,31 @@
+const ConditionParams = require('#/data/race/model/condition-params');
 const { attr_names } = require('#/data/train-const');
 
 class RaceSkill {
+  /** @type {UmaSkill} */
+  data;
+  // 发动时间
+  ability_time = [0, 0];
+  // 冷却
+  cooldown = [0, 0];
+  // 触发次数
+  count = [0, 0];
+  // 前置条件
+  precondition = [false, false];
   /**
-   * @param {UmaSkill} skill
+   * 目标
+   * @type {PseudoUma[][][]}
    */
+  aims = [[], []];
+  /**
+   * 技能数值
+   * @type {[][]}
+   */
+  values = [[], []];
+
+  /** @param {UmaSkill} skill */
   constructor(skill) {
-    this.skilldata = skill;
-    // 发动标记
-    this.triggerFlag = false;
-    // 本次触发计时器
-    this.triggerTimeCount = 0;
-    // 单次触发持续时间
-    this.triggerTimeMax = 0;
-    // 触发次数
-    this.triggerCount = 0;
-    //最大触发次数
-    this.triggerMax = 0;
+    this.data = skill;
   }
 }
 
@@ -93,73 +103,118 @@ class PseudoUma {
     ground: undefined,
   };
   /**
-   * 人气值
+   * 人气
    * @type {number[]}
    */
   pop;
+  /**
+   * 计算用的人气值
+   * @type {number[]}
+   */
+  tempPop;
   // 各个需重复使用的计算基底
   base = {
+    accBuffFromWiz: 0,
+    acceleration: 0,
+    accelerationBuff: 0,
+    change_order_finalcorner: 0,
+    // 发动绿技能个数
+    greenCount: 0,
+    loc_mind_nige_diff_speed_up: 0,
+    loc_mind_nige_diff_over_take: 0,
+    loc_mind_other_diff_upper: 0,
+    loc_mind_other_diff_lower: 0,
+    stamina: 0,
+    temptationSpan: 0,
     velocityIdeal: 0,
+    velocityIdealBuff: 0,
     velocityMaxRush: 0,
     velocityMin: 0,
-    acceleration: 0,
-    stamina: 0,
+    // 胜场数
+    winCount: 0,
   };
   // 比赛时信息
   race = {
-    phase: 0,
-    location: 0,
-    velocityIdeal: 0,
-    velocityReal: 0,
-    velocityPlanRush: 0,
-    locationPlanRush: 0,
     acceleration: 0,
+    competeFightAim: undefined,
+    competeFightTimer: 0,
+    conditionParams: new ConditionParams(),
+    // 下坡计时
+    downhill: 0,
+    greenSkills: 0,
+    location: 0,
+    locationPlanRush: undefined,
+    overtakeAim: undefined,
+    slope: 0,
     stamina: 0,
     staminaCost: 0,
+    // 焦躁计时
+    temptation: 0,
+    velocityIdeal: 0,
+    velocityPlanRush: 0,
+    velocityReal: 0,
+    loc_mind: 0,
+  };
+  // 随机发动的技能的位置指标
+  random = {
+    all_corner: [],
+    all_corner_index: 0,
+    corner: [],
+    corner_index: 0,
+    distance_rate_after: 50000,
+    down_slope: 50000,
+    is_finalcorner: 50000,
+    last_straight: 50000,
+    phase: [],
+    phase_corner: [],
+    phase_firsthalf: [],
+    phase_firstquarter: [],
+    phase_laterhalf: [],
+    straight: 50000,
+    up_slope: 50000,
   };
   // 实时排名和上一tick排名
   rank = {
     curr: 0,
     last: 0,
   };
-  // 与前后的距离
-  diff = {
-    ahead: 0,
-    behind: 0,
-  };
   // 各种状态
   flag = {
-    // 超车
-    overtake: false,
-    // 完赛
-    finished: false,
+    // 允许计算冲刺计划
+    allowPlan: true,
     // 下坡
     downhill: false,
-    // 允许计算冲刺计划
-    allowPlan: false,
     // 最终冲刺
     finalRush: false,
+    // 被选为超车目标
+    to_be_overtaken: false,
   };
   // 各种概率
   probs = {
-    skill: 0,
+    loc_mind: 0,
     planRush: 0,
+    skill: 0,
+    temptation: 0,
   };
   // 阶段决定的系数
   factorPhase = {
+    // 每赛段跑法加速度系数
+    aStyle: [1, 1, 1],
     // 每赛段随机浮动
     vRand: [1, 1, 1],
     // 每赛段跑法速度系数
     vStyle: [1, 1, 1],
-    // 每赛段跑法加速度系数
-    aStyle: [1, 1, 1],
   };
   // 终盘时的系数
   factorFinal = {
-    // 速度增加
-    vIdealAdd: 0,
+    // 追比加速度增加
+    accCompeteFightBuff: 0,
     // 耐力消耗系数
     sCostMult: 0,
+    // 追比目标速度增加
+    vCompeteFightBuff: 0,
+    // 速度增加
+    vIdealAdd: 0,
   };
   // 坡道时的系数
   factorSlope = {
@@ -172,6 +227,7 @@ class PseudoUma {
   /**
    * @param {number} index_chara 角色编号
    * @param {string} name 名字
+   * @param {string} color 颜色
    * @param {number} motivation 干劲
    * @param {number[]} attrs 五维
    * @param {number} style 本次使用的跑法
@@ -183,6 +239,7 @@ class PseudoUma {
   constructor(
     index_chara,
     name,
+    color,
     motivation,
     attrs,
     style,
@@ -193,6 +250,7 @@ class PseudoUma {
   ) {
     this.index_chara = index_chara;
     this.name = name;
+    this.color = color;
     this.motivation = motivation;
     this.attrs = attrs;
     this.style = style;
@@ -200,14 +258,13 @@ class PseudoUma {
     this.adapt_distance_list = adapt_distance_list;
     this.adapt_ground_list = adapt_ground_list;
     this.list_skill = skills.map((item) => new RaceSkill(item));
-
     this.attr_buffs = attr_names.map(() => []);
     this.ground_buffs = [];
     this.dis_buffs = [];
     this.pop = new Array(4);
   }
 
-  is_legend() {
+  set_legend() {
     this.legend = true;
     return this;
   }

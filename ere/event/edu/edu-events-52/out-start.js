@@ -157,6 +157,5 @@ module.exports = async (hook, _, event_object) => {
     urara.get_colored_name(),
     '，一起踏上了归路。',
   ]);
-  // TODO 技能「爱娇」
   return true;
 };

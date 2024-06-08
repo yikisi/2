@@ -1,4 +1,7 @@
 {
+  "dependencies": {
+    "@prisma/client": "^5.14.0"
+  },
   "devDependencies": {
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
@@ -7,7 +10,8 @@
     "eslint-plugin-sort-requires-by-path": "^1.0.2",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.5",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "prisma": "^5.14.0"
   },
   "engines": {
     "node": ">=18"
@@ -19,6 +23,7 @@
   },
   "name": "erauma",
   "scripts": {
+    "db:pull": "prisma db pull",
     "lint": "lint-staged",
     "prepare": "husky"
   }

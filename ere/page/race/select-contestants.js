@@ -27,10 +27,10 @@ async function select_contestants(race) {
     let flag_select_contestants = true;
     const dict = {};
     ret.forEach((e) => (dict[e] = true));
-    let contestant_count = contestants.length;
+    let contestant_count = contestants.length,
+      flag_print = true;
     while (flag_select_contestants) {
-      await era.clear();
-      era.printInColRows(
+      (flag_print ? era.printInColRows : era.replaceInColRows)(
         [
           { type: 'divider' },
           {
@@ -68,7 +68,8 @@ async function select_contestants(race) {
           },
         ],
       );
-      const select = await era.input();
+      flag_print = false;
+      const select = await era.input({ hideInput: true });
       if (select === 1000) {
         flag_select_contestants = false;
       } else {

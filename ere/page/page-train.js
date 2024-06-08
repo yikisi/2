@@ -11,7 +11,9 @@ const print_curr_chara_info = require('#/page/components/cur-chara-info');
 const print_page_header = require('#/page/components/page-header');
 const select_target_chara = require('#/page/components/select-target');
 
+const CharaAvailableSkills = require('#/data/chara-available-skills');
 const chara_info_type = require('#/data/chara-info-type');
+const CharaSkills = require('#/data/chara-skills');
 const { adaptability_colors } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
 const {
@@ -22,24 +24,28 @@ const {
   get_trainer_train_buff,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { common_skills, skills_dict } = require('#/data/race/skill/skill-const');
 const {
   adaptability_names,
   attr_enum,
   attr_names,
   time_cost,
 } = require('#/data/train-const');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 module.exports = async () => {
-  let flag_train = true;
+  let flag_train = true,
+    chara_id = era.get('flag:当前互动角色'),
+    skill_control = new CharaSkills(chara_id);
 
   while (flag_train) {
     await era.clear();
 
     print_page_header();
 
-    const chara_id = era.get('flag:当前互动角色'),
-      race = era.get(`cflag:${chara_id}:种族`),
+    const race = era.get(`cflag:${chara_id}:种族`),
       trainer_buff = get_trainer_train_buff(chara_id);
+    let pt = era.get(`exp:${chara_id}:技能点数`);
     if (chara_id || !race) {
       print_curr_chara_info(chara_id, chara_info_type.train);
     }
@@ -57,15 +63,29 @@ module.exports = async () => {
       const chara_score = get_chara_score(chara_id);
       let chara_level = get_rank_level(chara_score);
       columns.push(
-        { config: { content: '基础能力', width: 23 }, type: 'divider' },
-        { config: { width: 2 }, content: '评价', type: 'text' },
+        { config: { content: '基础能力' }, type: 'divider' },
+        { config: { width: 4 }, content: '评价', type: 'text' },
         {
           config: {
             color: adaptability_colors[chara_level],
-            width: 21,
+            width: 4,
             fontWeight: 'bold',
           },
           content: chara_score,
+          type: 'text',
+        },
+        {
+          config: { align: 'right', width: 12 },
+          content: '技能点数',
+          type: 'text',
+        },
+        {
+          config: {
+            align: 'right',
+            width: 4,
+            fontWeight: 'bold',
+          },
+          content: pt.toLocaleString(),
           type: 'text',
         },
       );
@@ -76,7 +96,7 @@ module.exports = async () => {
         }
         columns.push(
           {
-            config: { width: 2 },
+            config: { width: 4 },
             content: k,
             type: 'text',
           },
@@ -84,9 +104,9 @@ module.exports = async () => {
             config: {
               color: attr_colors[k],
               height: 22,
-              width: 21,
+              width: 20,
             },
-            inContent: `${era.get(`base:${chara_id}:${k}`)}/${era.get(
+            inContent: `${Math.floor(era.get(`base:${chara_id}:${k}`))}/${era.get(
               `maxbase:${chara_id}:${k}`,
             )} ${
               buff < 0 ? buff.toFixed(0) : `+${buff.toFixed(0)}`
@@ -101,21 +121,22 @@ module.exports = async () => {
       era.printInColRows(
         {
           columns,
-          config: { width: 12 },
+          config: { width: 6 },
         },
+        { columns: [], config: { width: 1 } },
         {
           columns: [
             {
-              config: { content: '比赛能力', offset: 1, width: 23 },
+              config: { content: '比赛能力' },
               type: 'divider',
             },
             {
-              config: { offset: 1, width: 4 },
+              config: { width: 3 },
               content: '场地适性',
               type: 'text',
             },
             {
-              config: { width: 7 },
+              config: { width: 5 },
               content: [
                 '草',
                 {
@@ -133,12 +154,12 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { offset: 1, width: 4 },
+              config: { width: 3 },
               content: '距离适性',
               type: 'text',
             },
             {
-              config: { width: 7 },
+              config: { width: 5 },
               content: [
                 '短',
                 {
@@ -168,12 +189,12 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { offset: 1, width: 4 },
+              config: { width: 3 },
               content: '跑法适性',
               type: 'text',
             },
             {
-              config: { width: 7 },
+              config: { width: 5 },
               content: [
                 { content: '逃' },
                 {
@@ -203,32 +224,40 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { offset: 1, width: 4 },
-              content: '技能点数',
-              type: 'text',
-            },
-            {
-              config: { width: 7 },
-              content: era.get(`exp:${chara_id}:技能点数`),
-              type: 'text',
-            },
-            {
-              config: { content: '习得技能', offset: 1, width: 23 },
+              config: { content: '习得技能' },
               type: 'divider',
             },
-            {
-              config: { offset: 1, width: 23 },
-              content: [],
+            ...skill_control.get().map((e) => ({
+              config: { display: 'inline-block', width: 8 },
+              content: skills_dict[e].get_colored_name(),
               type: 'text',
-            },
+            })),
           ],
-          config: { width: 12 },
+          config: { width: 17 },
         },
       );
     }
 
     era.drawLine();
-    era.printButton('查看队伍列表', 100);
+    era.printMultiColumns([
+      {
+        accelerator: 100,
+        config: { width: 4 },
+        content: '查看队伍列表',
+        type: 'button',
+      },
+      ...(race &&
+      (!chara_id || era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)
+        ? [
+            {
+              accelerator: 101,
+              config: { width: 4 },
+              content: '学习技能',
+              type: 'button',
+            },
+          ]
+        : []),
+    ]);
 
     const player_time = era.get('base:0:精力'),
       chara_time = era.get(`base:${chara_id}:精力`) || 0,
@@ -269,13 +298,129 @@ module.exports = async () => {
     era.printButton('返回', 999);
 
     const ret = await era.input();
-
+    let flag_skill = true;
     switch (ret) {
       case 100:
-        era.set(
+        chara_id = era.set(
           'flag:当前互动角色',
           await select_target_chara(chara_info_type.train),
         );
+        skill_control = new CharaSkills(chara_id);
+        break;
+      case 101:
+        while (flag_skill) {
+          era.drawLine({
+            content: `为 ${era.get(`callname:${chara_id}:-2`)} 选择技能`,
+          });
+          let available_skills = {},
+            got_skills = {};
+          common_skills.forEach((e) => (available_skills[e] = 1));
+          new CharaAvailableSkills(chara_id)
+            .get()
+            .forEach((e) => (available_skills[e] = 1));
+          available_skills = Object.keys(available_skills)
+            .map(Number)
+            .reduce((p, c) => {
+              (
+                p[skills_dict[c].group_id] || (p[skills_dict[c].group_id] = [])
+              ).push(c);
+              return p;
+            }, {});
+          skill_control
+            .get()
+            .forEach((s) => (got_skills[skills_dict[s].group_id] = s));
+          Object.keys(available_skills).forEach((k) => {
+            available_skills[k] = available_skills[k].sort(
+              (a, b) =>
+                skills_dict[a].rarity * 10 +
+                Math.abs((a % 10) * 2 - 3.5) -
+                skills_dict[b].rarity * 10 -
+                Math.abs((b % 10) * 2 - 3.5),
+            );
+            if (got_skills[k]) {
+              const sort_key =
+                skills_dict[got_skills[k]].rarity * 10 +
+                Math.abs((got_skills[k] % 10) * 2 - 3.5);
+              available_skills[k] = available_skills[k]
+                .filter(
+                  (e) =>
+                    skills_dict[e].rarity * 10 + Math.abs((e % 10) * 2 - 3.5) >=
+                    sort_key,
+                )
+                .slice(0, 2);
+            } else {
+              available_skills[k] = available_skills[k].slice(0, 1);
+            }
+          });
+          got_skills = {};
+          skill_control.get().forEach((e) => (got_skills[e] = 1));
+          const buffer = [];
+          Object.values(available_skills).map((e) =>
+            e.forEach((s) => {
+              const skill = skills_dict[s];
+              buffer.push({
+                columns: [
+                  {
+                    config: { width: 15 },
+                    content: skill.get_colored_name(),
+                    type: 'text',
+                  },
+                  {
+                    config: {
+                      align: 'right',
+                      disabled: got_skills[s] || pt < skill.price,
+                      showAcc: got_skills[s] !== 1,
+                      width: 8,
+                    },
+                    content: got_skills[s] ? '已习得' : `${skill.price} PT`,
+                    type: 'button',
+                  },
+                ],
+                config: { width: 8 },
+                id: s,
+              });
+            }),
+          );
+          era.printInColRows(
+            ...buffer.map((e, i) => {
+              e.columns[1].accelerator = i + 1;
+              return e;
+            }),
+            [
+              {
+                config: { width: 12 },
+                content: ['技能点数：', pt.toString()],
+                type: 'text',
+              },
+              {
+                accelerator: 999,
+                config: { align: 'right', width: 12 },
+                content: '结束',
+                type: 'button',
+              },
+            ],
+          );
+          const ret = await era.input();
+          if (ret === 999) {
+            flag_skill = false;
+          } else {
+            const skill = skills_dict[buffer[ret - 1].id];
+            pt = era.add(`exp:${chara_id}:技能点数`, -skill.price);
+            skill_control.remove(
+              skill_control
+                .get()
+                .find((e) =>
+                  e.toString().startsWith(skill.group_id.toString()),
+                ),
+            );
+            get_skills_and_print_in_event(
+              chara_id,
+              [skill.id],
+              skill_control,
+            ) && (await era.waitAnyKey());
+            await era.clear();
+          }
+        }
         break;
       case 990:
         era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));

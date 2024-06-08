@@ -314,7 +314,7 @@ async function out_page() {
     await era.printAndWait('回去了……');
     era.println();
     await sys_get_random_event(event_hooks.back_school)({
-      loc: positions[aim]?.l,
+      loc: positions[aim - 1]?.l,
     });
   }
 }

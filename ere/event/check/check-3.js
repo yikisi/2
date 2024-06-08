@@ -19,6 +19,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const CharaSkills = require('#/data/chara-skills');
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
@@ -209,6 +210,14 @@ module.exports = class extends CustomizedCheck {
               },
               '……',
             ]);
+          }
+          break;
+        case 95 + 48:
+          if (
+            era.get('status:3:腿伤') &&
+            sys_reg_race(3).curr.race === race_enum.arim_kin
+          ) {
+            new CharaSkills(3).add(110031);
           }
           break;
         case 47 + 5: // 所以，衣服是怎样啦！

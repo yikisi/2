@@ -1,0 +1,74 @@
+const UmaSkill = require('#/data/race/model/uma-skill');
+
+module.exports = new UmaSkill(
+  202871,
+  '君临',
+  '在终盘的最终弯道处若位于中后方，提升加速度＜追赶・中距离＞',
+  20287,
+  UmaSkill.rarity_enum.gold,
+  10,
+  508,
+  [() => true, () => true],
+  [
+    (args) =>
+      args.distance_type === 3 &&
+      args.running_style === 4 &&
+      args.phase >= 2 &&
+      args.is_finalcorner === 1 &&
+      args.corner !== 0 &&
+      args.order_rate >= 40,
+    () => false,
+  ],
+  [0.9, 0],
+  [500, 0],
+  [
+    [
+      UmaSkill.ability_type_enum.Accel,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+  ],
+  [
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+  ],
+  [
+    [0.4, 0, 0],
+    [0, 0, 0],
+  ],
+  [
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+  ],
+  [
+    [0, 0, 0],
+    [0, 0, 0],
+  ],
+  [3, 0],
+  [60, 0],
+  1,
+  180,
+  false,
+  false,
+);

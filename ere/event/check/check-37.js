@@ -45,7 +45,6 @@ module.exports = class extends CustomizedCheck {
         check_aim_race(races, race_enum.japa_cup, 2, 1, (e) => e.st === 2)) &&
       (check_aim_race(races, race_enum.tenn_sho, 1, 1, (e) => e.st === 2) ||
         check_aim_race(races, race_enum.tenn_sho, 2, 1, (e) => e.st === 2))
-      // TODO 技能检查【切者】
     ) {
       titles.push({
         c: get_chara_color(37),

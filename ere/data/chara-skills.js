@@ -1,0 +1,70 @@
+const { add, get, set } = require('#/era-electron');
+
+const { skills_dict } = require('#/data/race/skill/skill-const');
+
+class CharaSkills {
+  /** @type {number[]} */
+  obj;
+
+  constructor(chara_id) {
+    this.id = chara_id;
+    this.obj =
+      get(`skill:${this.id}:习得技能`) || set(`skill:${this.id}:习得技能`, []);
+  }
+
+  /**
+   * @param {number} skill_id
+   * @returns {number[]}
+   */
+  add(...skill_id) {
+    this.clean();
+    const count = this.obj.length;
+    this.obj.push(...skill_id);
+    this.obj = set(
+      `skill:${this.id}:习得技能`,
+      this.obj.filter((v, i, a) => i === a.indexOf(v)),
+    );
+    add(
+      `exp:${this.id}:技能评价分`,
+      this.obj.slice(count).reduce((p, c) => p + skills_dict[c].grade_value, 0),
+    );
+    const ret = this.obj.slice(count);
+    this.obj.sort();
+    return ret;
+  }
+
+  clean() {
+    this.obj = set(
+      `skill:${this.id}:习得技能`,
+      this.obj.filter((e) => e),
+    );
+  }
+
+  /** @returns {number[]} */
+  get() {
+    this.clean();
+    return this.obj;
+  }
+
+  /**
+   * @param {number} skill_id
+   * @returns {number[]}
+   */
+  remove(...skill_id) {
+    const removed = [];
+    this.obj = this.obj.filter((e) => {
+      if (skill_id.indexOf(e) > -1) {
+        removed.push(e);
+        return false;
+      }
+      return true;
+    });
+    add(
+      `exp:${this.id}:技能评价分`,
+      -removed.reduce((p, c) => p + skills_dict[c].grade_value, 0),
+    );
+    return removed;
+  }
+}
+
+module.exports = CharaSkills;

@@ -49,7 +49,7 @@ function exp_chara_info(chara) {
         height: 22,
         width: 9,
       },
-      inContent: `${era.get(`base:${chara.id}:体力`)}/${era.get(
+      inContent: `${Math.floor(era.get(`base:${chara.id}:体力`))}/${era.get(
         `maxbase:${chara.id}:体力`,
       )}`,
       percentage:
@@ -64,7 +64,7 @@ function exp_chara_info(chara) {
         height: 22,
         width: 9,
       },
-      inContent: `${era.get(`base:${chara.id}:精力`)}/${era.get(
+      inContent: `${Math.floor(era.get(`base:${chara.id}:精力`))}/${era.get(
         `maxbase:${chara.id}:精力`,
       )}`,
       percentage:

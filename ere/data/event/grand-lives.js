@@ -34,7 +34,7 @@ class GrandLives {
     this.clean();
     const _year = year || 0;
     if (_year >= this.obj.length) {
-      return undefined;
+      return 0;
     }
     return this.obj[_year][race];
   }

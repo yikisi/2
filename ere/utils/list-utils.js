@@ -41,6 +41,19 @@ module.exports = {
   /**
    * @template T
    * @param {T[]} list
+   * @param {function(T):string} key_cb
+   */
+  distinct_list(list, key_cb) {
+    /** @type {Record<string,{entry:*,index:number}>} */
+    const dict = {};
+    list.forEach((e, i) => (dict[key_cb(e)] = { entry: e, index: i }));
+    return Object.values(dict)
+      .sort((a, b) => a.index - b.index)
+      .map((e) => e.entry);
+  },
+  /**
+   * @template T
+   * @param {T[]} list
    * @param {number} max
    * @returns {T[]}
    */
@@ -69,25 +82,27 @@ module.exports = {
   },
   get_random_entry,
   /**
-   * @template T
-   * @param {T[]} list
-   * @param {function(T):string} key_cb
-   */
-  distinct_list(list, key_cb) {
-    /** @type {Record<string,{entry:*,index:number}>} */
-    const dict = {};
-    list.forEach((e, i) => (dict[key_cb(e)] = { entry: e, index: i }));
-    return Object.values(dict)
-      .sort((a, b) => a.index - b.index)
-      .map((e) => e.entry);
-  },
-  /**
    * @param {*[]} list
    * @param {string} separator
    * @returns {string}
    */
   join_list(list, separator) {
     return list.filter((e) => e).join(separator);
+  },
+  /**
+   * @param {number[]} list
+   * @returns {number}
+   */
+  median(list) {
+    if (list.length === 0) {
+      return undefined;
+    }
+    const sorted = sort_list(list, (e) => e);
+    if (sorted.length % 2) {
+      return sorted[Math.floor(sorted.length / 2)];
+    } else {
+      return (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
+    }
   },
   sort_list,
 };

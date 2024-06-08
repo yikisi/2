@@ -42,43 +42,43 @@ const level_and_desc = {
   },
   attr_score: [
     'G',
-    'G+',
+    'G+', // 100
     'F',
-    'F+',
+    'F+', // 200
     'E',
-    'E+',
+    'E+', // 300
     'D',
-    'D+',
+    'D+', // 400
     'C',
-    'C',
+    'C', // 500
     'C+',
-    'C+',
+    'C+', // 600
     'B',
-    'B',
+    'B', // 700
     'B+',
-    'B+',
+    'B+', // 800
     'A',
-    'A',
+    'A', // 900
     'A+',
-    'A+',
+    'A+', // 1000
     'S',
-    'S',
+    'S', // 1100
     'SS',
+    'SS', // 1200
     'SS',
-    'SS',
+    'UG', // 1300
     'UG',
-    'UG',
+    'UF', // 1400
     'UF',
-    'UF',
+    'UE', // 1500
     'UE',
-    'UE',
+    'UD', // 1600
     'UD',
-    'UD',
+    'UC', // 1700
     'UC',
-    'UC',
+    'UB', // 1800
     'UB',
-    'UB',
-    'UA',
+    'UA', // 1900
     'UA',
   ],
   chara_score: require('#/data/chara-score-table.json'),
@@ -124,7 +124,7 @@ function get_attr_score(attr) {
   if (attr > 1200) {
     return attr_score_table[1200];
   }
-  return attr_score_table[attr];
+  return attr_score_table[Math.floor(attr)];
 }
 
 /**
@@ -283,11 +283,11 @@ module.exports = {
     if (is_number) {
       return score;
     }
-    let scoreLevel = 0;
-    while (score >= level_and_desc.chara_score.border[scoreLevel]) {
-      scoreLevel++;
+    let score_level = 0;
+    while (score >= level_and_desc.chara_score.border[score_level]) {
+      score_level++;
     }
-    return level_and_desc.chara_score.mark[scoreLevel];
+    return level_and_desc.chara_score.mark[score_level];
   },
   /**
    * @param {number} chara_id

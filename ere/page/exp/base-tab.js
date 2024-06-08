@@ -244,9 +244,10 @@ module.exports = {
       async handle(command) {
         if (command === 100) {
           let flag_hair = true,
-            hair_indexes = generate_hair_index(chara.id);
+            hair_indexes = generate_hair_index(chara.id),
+            flag_print = true;
           while (flag_hair) {
-            era.printInColRows(
+            (flag_print ? era.printInColRows : era.replaceInColRows)(
               [
                 { type: 'divider' },
                 {
@@ -327,7 +328,7 @@ module.exports = {
                 },
               ],
             );
-            const ret = await era.input();
+            const ret = await era.input({ hideInput: true });
             switch (ret) {
               case 10:
                 hair_indexes.top =
@@ -368,9 +369,8 @@ module.exports = {
                 era.set(`cstr:${chara.id}:后发`, back_hairs[hair_indexes.back]);
                 flag_hair = false;
             }
+            flag_print = false;
             sys_change_hair(chara.id);
-            await era.clear();
-            era.setToBottom();
           }
         } else if (command !== 101) {
           const selected = command - 31;
@@ -511,7 +511,7 @@ module.exports = {
                     e,
                     '：',
                     {
-                      content: num.toLocaleString(),
+                      content: Math.floor(num).toLocaleString(),
                       fontWeight: 'bold',
                     },
                   ],

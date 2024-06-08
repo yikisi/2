@@ -1,0 +1,77 @@
+const UmaSkill = require('#/data/race/model/uma-skill');
+
+module.exports = new UmaSkill(
+  900761,
+  '花开世界',
+  '如果在比赛半程处于中间梯队，速度会略微提升，若是长距离比赛，速度提升的持续时间将延长，并恢复少量体力',
+  90076,
+  UmaSkill.rarity_enum.normal,
+  2,
+  180,
+  [() => true, () => true],
+  [
+    (args) =>
+      args.distance_type === 4 &&
+      args.distance_rate >= 50 &&
+      args.distance_rate <= 51 &&
+      args.order_rate >= 30 &&
+      args.order_rate <= 80,
+    (args) =>
+      args.distance_rate >= 50 &&
+      args.distance_rate <= 51 &&
+      args.order_rate >= 30 &&
+      args.order_rate <= 80,
+  ],
+  [3.6, 3],
+  [500, 500],
+  [
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+  ],
+  [
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+  ],
+  [
+    [0.05, 0.035, 0],
+    [0.05, 0, 0],
+  ],
+  [
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+  ],
+  [
+    [0, 0, 0],
+    [0, 0, 0],
+  ],
+  [1, 2],
+  [7, 7],
+  1,
+  200,
+  false,
+  true,
+);

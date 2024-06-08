@@ -519,7 +519,7 @@ module.exports = {
           '哦呀，是新的肥羊……不，豚鼠……我的意思是，客人啊',
         );
       } else {
-        await tachyon.say_as_unknown_and_wait(
+        tachyon.say(
           '哦呀，又是你啊，客人君，训练员原来是如此乱性的行业吗？啧啧',
         );
       }

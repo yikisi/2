@@ -1,11 +1,15 @@
 const era = require('#/era-electron');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sort_list } = require('#/utils/list-utils');
 
+const CharaSkills = require('#/data/chara-skills');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
+const RaceHistory = require('#/data/race/model/race-history');
+const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names, attr_names } = require('#/data/train-const');
-const { get_custom_mec } = require('#/event/mec/mec-factory');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /**
  * @param {number} chara_id
@@ -18,15 +22,19 @@ function sys_get_chara_pseudo(chara_id) {
     debuff = era.get(`status:${chara_id}:客场作战`),
     uma = new PseudoUma(
       chara_id,
-      get_chara_talk(chara_id).get_full_name(),
+      era.get(`callname:${chara_id}:-1`),
+      get_chara_talk(chara_id).color,
       era.get(`cflag:${chara_id}:干劲`),
       attr_names.map((attr) => era.get(`base:${chara_id}:${attr}`)),
       era.get(`cflag:${chara_id}:跑法`),
       adapt_list.slice(6, 10),
       adapt_list.slice(2, 6).map((adapt) => adapt - debuff),
       adapt_list.slice(0, 2).map((adapt) => adapt - debuff),
-      [],
+      new CharaSkills(chara_id).get().map((e) => skills_dict[e]),
     );
+  uma.base.winCount = new RaceHistory(chara_id)
+    .get_values()
+    .filter((e) => e.rank === 1).length;
   if (debuff) {
     uma.ground_buffs.push(`-${debuff}[客场作战(${debuff})]`);
     uma.dis_buffs.push(`-${debuff}[客场作战${debuff}]`);
@@ -47,6 +55,20 @@ function sys_get_chara_pseudo(chara_id) {
     uma.attr_buffs
       .slice(3)
       .forEach((l) => l.push(`-${5 * temp}%[语言不通(${temp})]`));
+  }
+  const stamina_ratio =
+      era.get(`base:${chara_id}:体力`) / era.get(`maxbase:${chara_id}:体力`),
+    time_ratio =
+      era.get(`base:${chara_id}:精力`) / era.get(`maxbase:${chara_id}:精力`);
+  if (stamina_ratio < 0.3) {
+    uma.attr_buffs.slice(0, 3).forEach((l) => l.push('-50%[体力底下]'));
+  } else if (stamina_ratio < 0.5) {
+    uma.attr_buffs.slice(0, 3).forEach((l) => l.push('-20%[体力不足]'));
+  }
+  if (time_ratio < 0.3) {
+    uma.attr_buffs.slice(3).forEach((l) => l.push('-50%[精力底下]'));
+  } else if (time_ratio < 0.5) {
+    uma.attr_buffs.slice(3).forEach((l) => l.push('-20%[精力不足]'));
   }
   get_custom_mec(uma.index_chara).set_pseudo_uma(uma);
   uma.attr_buffs = uma.attr_buffs.map((l, i) => {

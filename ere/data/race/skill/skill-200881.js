@@ -1,0 +1,69 @@
+const UmaSkill = require('#/data/race/model/uma-skill');
+
+module.exports = new UmaSkill(
+  200881,
+  '先行彷徨',
+  '比赛终盘令战术是先行的赛马娘彷徨，使其速度略微下降',
+  20088,
+  UmaSkill.rarity_enum.normal,
+  3,
+  217,
+  [() => true, () => true],
+  [
+    (args) =>
+      args.running_style_count_senko_otherself >= 1 && args.phase_random === 2,
+    () => false,
+  ],
+  [3, 0],
+  [500, 0],
+  [
+    [
+      UmaSkill.ability_type_enum.CurrentSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+  ],
+  [
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+  ],
+  [
+    [-0.15, 0, 0],
+    [0, 0, 0],
+  ],
+  [
+    [
+      UmaSkill.target_type_enum.RunningStyleOtherSelf,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+  ],
+  [
+    [2, 0, 0],
+    [0, 0, 0],
+  ],
+  [1, 5],
+  [10, 10],
+  1,
+  130,
+  false,
+  false,
+);

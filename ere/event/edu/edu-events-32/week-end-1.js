@@ -15,7 +15,7 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},TachyonEduMarks,number,number,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
-  handlers.beginning = async (tachyon, me, callname, flags) => {
+  handlers.beginning = async (tachyon, me) => {
     await print_event_name('实验的开始', tachyon);
     await era.printAndWait([
       '这里是府中特雷森学园，今天 ',
@@ -175,7 +175,6 @@ module.exports = (handlers) => {
     if (era.get('cflag:25:招募状态') !== recruit_flags.yes) {
       era.set('callname:25:0', `豚鼠${me.get_adult_sex_title()}`);
     }
-    flags.wait_flag = get_attr_and_print_in_event(32, undefined, 120);
   };
 
   handlers[47 + 23] = async (tachyon, me, callname, flags) => {

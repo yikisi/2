@@ -82,7 +82,6 @@ module.exports = async (hook, __, event_object) => {
     );
     await era.printAndWait(`而 ${kita.name} 的故事，也由此开始了。`);
     era.println();
-    wait_flag = get_attr_and_print_in_event(68, undefined, 120) || wait_flag;
   } else if (event_arg === 47 + 32 || event_arg === 95 + 32) {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||

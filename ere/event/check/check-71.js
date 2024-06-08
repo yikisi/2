@@ -17,6 +17,7 @@ const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 aim_races[get_aim_race_index(race_enum.aoba_sho, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 4;
+aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.sank_hai, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.main_oka, 2)] = 4;

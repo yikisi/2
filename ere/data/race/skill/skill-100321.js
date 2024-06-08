@@ -1,0 +1,72 @@
+const UmaSkill = require('#/data/race/model/uma-skill');
+
+module.exports = new UmaSkill(
+  100321,
+  'U=ma2',
+  '在比赛后半且靠近弯道时，持久力恢复，且短时间内稍微提高速度',
+  10032,
+  UmaSkill.rarity_enum.spe_n_3,
+  17,
+  340,
+  [() => true, () => true],
+  [
+    (args) =>
+      args.distance_rate >= 50 &&
+      args.corner !== 0 &&
+      args.order >= 3 &&
+      args.order_rate <= 40,
+    () => false,
+  ],
+  [4, 0],
+  [500, 0],
+  [
+    [
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+  ],
+  [
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+  ],
+  [
+    [0.055, 0.25, 0],
+    [0, 0, 0],
+  ],
+  [
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+  ],
+  [
+    [0, 0, 0],
+    [0, 0, 0],
+  ],
+  [2, 0],
+  [60, 0],
+  0,
+  0,
+  false,
+  false,
+);

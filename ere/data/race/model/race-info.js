@@ -17,9 +17,9 @@ const rotation_enum = {
   straight: 0,
 };
 const rotation_names = {};
-rotation_names[rotation_enum.left] = '左';
-rotation_names[rotation_enum.right] = '右';
-rotation_names[rotation_enum.straight] = '直';
+rotation_names[rotation_enum.left] = '逆时针';
+rotation_names[rotation_enum.right] = '顺时针';
+rotation_names[rotation_enum.straight] = '直线';
 
 //年龄限制：两岁/三岁/三岁以上/四岁以上
 const limit_enum = {
@@ -32,6 +32,9 @@ const limit_enum = {
   // 100
   post4: 0b100,
 };
+
+const weather_enum = { sunny: 0, cloudy: 1, rain: 2, snow: 3 };
+const weather_names = ['晴', '阴', '雨', '雪'];
 
 const mess_enum = { well: 0, semi: 1, heavy: 2, bad: 3 };
 
@@ -132,16 +135,20 @@ class RaceSlope {
 }
 
 class RaceLane {
+  /** @type {number} */
+  corner;
   /**
    * @param {number} start
    * @param {number} end
-   * @param {boolean} isCurve
+   * @param {number} index
+   * @param {boolean} is_curve
    * @param {boolean} isLast
    */
-  constructor(start, end, isCurve, isLast) {
+  constructor(start, end, index, is_curve, isLast) {
     this.start = start;
     this.end = end;
-    this.is_curve = isCurve;
+    this.index = index;
+    this.is_curve = is_curve;
     this.is_last = isLast;
   }
 }
@@ -156,7 +163,10 @@ module.exports = class RaceInfo {
   static rotation_names = rotation_names;
   static track_enum = track_enum;
   static track_names = track_names;
+  static weather_enum = weather_enum;
+  static weather_names = weather_names;
   static mess_enum = mess_enum;
+  static mess_names = ['良', '稍重', '重', '不良'];
   static limit_enum = limit_enum;
   static prize_ratios = [1, 0.5, 0.3, 0.2, 0.1];
   static relation_rewards = [50, 100, 200, 400];
@@ -193,7 +203,7 @@ module.exports = class RaceInfo {
   span;
   /**
    * 距离是否是400的倍数
-   * @type {boolean}
+   * @type {number}
    */
   span400;
   /**
@@ -251,7 +261,9 @@ module.exports = class RaceInfo {
    */
   phases;
   // 场地状态
-  mess = mess_enum.well;
+  mess;
+  // 天气
+  weather;
 
   /**
    * @param {string} name_en
@@ -291,7 +303,7 @@ module.exports = class RaceInfo {
     this.track = track;
     this.ground = ground;
     this.span = span;
-    this.span400 = !(span % 400);
+    this.span400 = Number(!(span % 400));
     this.distance = distance;
     this.rotation = rotation;
     this.gates = gates;

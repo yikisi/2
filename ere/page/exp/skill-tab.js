@@ -2,12 +2,14 @@ const era = require('#/era-electron');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 
+const CharaSkills = require('#/data/chara-skills');
 const { adaptability_colors } = require('#/data/color-const');
 const { no_info } = require('#/data/exp-const');
 const {
   get_adaptability_rank,
   get_train_time,
 } = require('#/data/info-generator');
+const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names, out_of_train_type } = require('#/data/train-const');
 
 const page_name = '育成情况';
@@ -78,6 +80,11 @@ module.exports = {
             config: { content: '习得技能', position: 'left' },
             type: 'divider',
           },
+          ...new CharaSkills(chara.id).get().map((e) => ({
+            config: { width: 6 },
+            content: skills_dict[e].get_colored_name(),
+            type: 'text',
+          })),
           ...skill_names
             .map((e) => {
               return {
@@ -89,7 +96,7 @@ module.exports = {
             .map((e) => {
               return {
                 config: { width: 4 },
-                content: `${e.n} Lv.${e.l}`,
+                content: `[${e.n}] Lv.${e.l}`,
                 type: 'text',
               };
             }),
@@ -156,13 +163,11 @@ module.exports = {
             };
           })
           .filter((e) => e.l)
-          .map((e) => {
-            return {
-              config: { width: 4 },
-              content: `${e.n} Lv.${e.l}`,
-              type: 'text',
-            };
-          }),
+          .map((e) => ({
+            config: { width: 4 },
+            content: `[${e.n}] Lv.${e.l}`,
+            type: 'text',
+          })),
       );
     }
 

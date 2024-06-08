@@ -24,7 +24,7 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},EventObject)>} handlers */
 module.exports = (handlers) => {
-  handlers.beginning = async (coffee, me, callname, flags) => {
+  handlers.beginning = async (coffee, me, callname) => {
     const tachyon = get_chara_talk(32);
     await print_event_name('漆黑的猎犬', coffee);
     await era.printAndWait([
@@ -202,7 +202,6 @@ module.exports = (handlers) => {
       me.get_couple_title(),
       ' 开始了今天的训练。',
     ]);
-    flags.wait_flag = get_attr_and_print_in_event(25, undefined, 120);
   };
 
   handlers[28] = async (coffee, me, callname, flags) => {

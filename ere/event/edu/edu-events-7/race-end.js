@@ -468,18 +468,15 @@ module.exports = async (hook, extra_flag) => {
           extra_flag.attr_change = new Array(5).fill(3);
           extra_flag.pt_change = 45;
           extra_flag.motivation_change = 1;
-          // TODO 出闸难
-          extra_flag.skill_change = [];
+          extra_flag.skill_change = [200433];
         } else {
           await gold_ship.say_and_wait(
             '啊～哈哈～果然本船我就是那种被称赞了就能好好发挥的孩子～',
           );
           await gold_ship.say_and_wait('以后也要记得多宠宠我哦～');
           extra_flag.attr_change = new Array(5).fill(8);
-          extra_flag.pt_change = 55;
+          extra_flag.pt_change = 75;
           extra_flag.motivation_change = 1;
-          // TODO 爱娇
-          extra_flag.skill_change = [];
         }
       } else {
         extra_flag.attr_change = new Array(5).fill(3);

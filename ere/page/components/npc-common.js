@@ -105,7 +105,7 @@ async function npc_common(
                   height: 22,
                   width: 12,
                 },
-                inContent: `${era.get(`base:${chara.id}:体力`)}/${era.get(
+                inContent: `${Math.floor(era.get(`base:${chara.id}:体力`))}/${era.get(
                   `maxbase:${chara.id}:体力`,
                 )}`,
                 percentage:
@@ -125,7 +125,7 @@ async function npc_common(
                   height: 22,
                   width: 12,
                 },
-                inContent: `${era.get(`base:${chara.id}:精力`)}/${era.get(
+                inContent: `${Math.floor(era.get(`base:${chara.id}:精力`))}/${era.get(
                   `maxbase:${chara.id}:精力`,
                 )}`,
                 percentage:

@@ -170,7 +170,7 @@ function set_from_theme(theme) {
     case 2:
       era.set('flag:训练难度', -25);
       era.set('flag:训练加成', -25);
-      era.set('flag:比赛难度', 25);
+      era.set('flag:比赛难度', 10);
       era.set('flag:可能伤病', 1);
       era.set('flag:马娘初始好感', 75);
       era.set('flag:马娘初始爱慕', 25);
@@ -198,7 +198,7 @@ function set_from_theme(theme) {
     case 3:
       era.set('flag:训练难度', -25);
       era.set('flag:训练加成', -25);
-      era.set('flag:比赛难度', 25);
+      era.set('flag:比赛难度', 10);
       era.set('flag:可能伤病', 1);
       era.set('flag:马娘初始好感', -100);
       era.set('flag:马娘初始爱慕', 0);
@@ -440,7 +440,7 @@ async function page_settings() {
         options: [
           { l: '低', v: -25 },
           { l: '正常', v: 0 },
-          { l: '高', v: 25 },
+          { l: '高', v: 10 },
         ],
       },
       {
