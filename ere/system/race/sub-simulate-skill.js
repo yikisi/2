@@ -682,6 +682,7 @@ function sub_simulate_skill(
                   skill.values[i][j] =
                     skill.data.ability_values[i][j] * Math.random();
                   break;
+                case ability_usage_enum.MultiplyFanCount:
                 case ability_usage_enum.MultiplySingleModeWinCount:
                   if (uma.base.winCount < 6) {
                     skill.values[i][j] = skill.data.ability_values[i][j] * 0.8;
@@ -731,14 +732,31 @@ function sub_simulate_skill(
                     skill.data.ability_values[i][j] + uma.base.accBuffFromWiz;
                   break;
                 case ability_usage_enum.Direct:
+                case ability_usage_enum.Unknown:
+                  skill.values[i][j] = skill.data.ability_values[i][j];
+                  break;
                 case ability_usage_enum.MultiplyTeamTotalSpeed:
                 case ability_usage_enum.MultiplyTeamTotalStamina:
                 case ability_usage_enum.MultiplyTeamTotalPower:
                 case ability_usage_enum.MultiplyTeamTotalGuts:
                 case ability_usage_enum.MultiplyTeamTotalWiz:
-                case ability_usage_enum.MultiplyFanCount:
-                case ability_usage_enum.Unknown:
-                  skill.values[i][j] = skill.data.ability_values[i][j];
+                  temp =
+                    uma.base.total_attrs[
+                      skill.data.ability_value_usages[i][j] -
+                        ability_usage_enum.MultiplyTeamTotalSpeed
+                    ];
+                  if (temp >= 3600) {
+                    temp = 2;
+                  } else if (temp >= 2600) {
+                    temp = 17.5;
+                  } else if (temp >= 1800) {
+                    temp = 15;
+                  } else if (temp >= 1200) {
+                    temp = 12.5;
+                  } else {
+                    temp = 1;
+                  }
+                  skill.values[i][j] = temp * skill.data.ability_values[i][j];
                   break;
                 default:
                   skill.values[i][j] = skill.data.ability_values[i][j];

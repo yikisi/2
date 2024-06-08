@@ -251,7 +251,7 @@ async function chara_skill() {
   Object.values(dict).forEach((e) => e.forEach((s) => (skill_dict[s] = 1)));
   console.log('角色卡技能', Object.keys(skill_dict).length);
   let buffer = 'const chara_skill_dict={},skills_dict = {};\n\n',
-    buffer_common_skills = [202051];
+    buffer_common_skills = [202051, 800011];
   for (const chara_id in dict) {
     buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
   }
@@ -325,7 +325,8 @@ async function chara_skill() {
   const c_dict = { is_used_skill_id: 1 };
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
-  buffer += 'skills_dict[100039]=require("#/data/race/skill/skill-100039");';
+  buffer +=
+    'skills_dict[100039]=require("#/data/race/skill/skill-100039");skills_dict[800011]=require("#/data/race/skill/skill-800011");';
 
   const pt_dict = {};
   (await prisma.single_mode_skill_need_point.findMany()).forEach(

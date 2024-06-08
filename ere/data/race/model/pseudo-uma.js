@@ -126,6 +126,7 @@ class PseudoUma {
     loc_mind_other_diff_lower: 0,
     stamina: 0,
     temptationSpan: 0,
+    total_attrs: new Array(5).fill(0),
     velocityIdeal: 0,
     velocityIdealBuff: 0,
     velocityMaxRush: 0,

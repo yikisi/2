@@ -579,7 +579,7 @@ async function race_page(race) {
       time_cost += 100;
     }
   }
-  sys_prepare_race(contestants, info);
+  sys_prepare_race(contestants, team_list, info);
   const records = sys_sim_race(contestants, info);
   await page_race_result(contestants, records, info);
   team_list.forEach((uma) => {

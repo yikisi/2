@@ -19,9 +19,10 @@ const { attr_enum } = require('#/data/train-const');
 
 /**
  * @param {PseudoUma[]} list_chara
+ * @param {PseudoUma[]} team_list
  * @param {RaceInfo} race_info
  */
-function sys_prepare_race(list_chara, race_info) {
+function sys_prepare_race(list_chara, team_list, race_info) {
   const current = new Date().getTime();
   const pop_1 = list_chara.find((e) => e.pop[0] === 1),
     running_style_counts = [0, 0, 0, 0],
@@ -445,6 +446,19 @@ function sys_prepare_race(list_chara, race_info) {
         uma.base.loc_mind_other_diff_upper = 8 * loc_mind_base_diff;
     }
   }
+  const team_total_attrs = new Array(5).fill(0);
+  team_list.forEach((uma) => {
+    uma.base.total_attrs = team_total_attrs;
+    Object.values(attr_enum).forEach(
+      (v) =>
+        (team_total_attrs[v] +=
+          (uma.attrs[v] > 1200
+            ? 1200 + (uma.attrs[v] - 1200) / 2
+            : uma.attrs[v]) *
+          (1 + uma.motivation * 0.02)),
+    );
+  });
+
   logger.debug(`比赛相关变量预计算：${new Date().getTime() - current} ms`);
 }
 
