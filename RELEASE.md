@@ -1,10 +1,12 @@
-# [EraUma v0.61](https://gitgud.io/umaera/erauma/-/releases/v0.61)
+# [EraUma v0.62](https://gitgud.io/umaera/erauma/-/releases/v0.61)
 
-_2024/6/1_
+_incoming_
 
-EraUma v0.61，适配 [EraElectron v1.2.4 (zero)](https://gitgud.io/umaera/era-electron/-/releases/permalink/latest) 版本
+EraUma v0.62，适配 [EraElectron v1.2.4 (zero)](https://gitgud.io/umaera/era-electron/-/releases/permalink/latest) 版本
 
 ## Added
+
+* 新增比赛与技能系统
 
 ## Changed
 
