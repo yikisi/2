@@ -107,6 +107,13 @@ class CustomizedMec {
     return ret;
   }
 
+  /**
+   * @returns {{id:number,buff:number}[]}
+   */
+  get_race_contestants() {
+    return [];
+  }
+
   get_relation_buff() {
     return 0;
   }

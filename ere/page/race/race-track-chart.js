@@ -10,8 +10,9 @@ const { attr_names } = require('#/data/train-const');
 async function print_race_track_chart(info) {
   era.print(
     [
-      RaceInfo.track_names[info.track],
-      '竞马场 ',
+      ...(info.track
+        ? [RaceInfo.track_names[info.track], '竞马场 ']
+        : ['训练场 ']),
       info.ground ? '泥' : '草',
       '地 ',
       info.span.toLocaleString(),

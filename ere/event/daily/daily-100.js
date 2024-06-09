@@ -26,6 +26,9 @@ const event_hooks = require('#/data/event/event-hooks');
 const handlers = {};
 
 handlers[event_hooks.select] = () => {
+  if (!sys_check_awake(100)) {
+    throw new Error();
+  }
   const acute = get_chara_talk(100);
   if (Math.random() < 0.5) {
     acute.say([

@@ -2,13 +2,22 @@ const era = require('#/era-electron');
 
 const event_hooks = require('#/data/event/event-hooks');
 
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const CharaTalk = require('#/utils/chara-talk');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean>>} */
 const handler_dict = {};
 
-handler_dict[event_hooks.select] = function (hook, extra_flag) {
-  if (era.get(`cflag:${extra_flag.chara_id}:成长阶段`) < 1) {
+/**
+ * @param _
+ * @param {{chara_id:number}} extra_flag
+ */
+handler_dict[event_hooks.select] = function (_, extra_flag) {
+  if (
+    !sys_check_awake(0) ||
+    !sys_check_awake(extra_flag.chara_id) ||
+    era.get(`cflag:${extra_flag.chara_id}:成长阶段`) < 1
+  ) {
     throw new Error('unsupported!');
   }
   const father = era.get(`cflag:${extra_flag.chara_id}:父方角色`),

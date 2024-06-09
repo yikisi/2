@@ -301,13 +301,13 @@ handlers[event_hooks.week_end] = async (_, __, event_object) => {
     era.set('status:37:分心', 0);
     await era.printAndWait([
       flash.get_colored_name(),
-      '不再',
+      ' 不再 ',
       {
         color: buff_colors[0],
         content: '[分心]',
         title: status_desc['闪耀分心'],
       },
-      '了！',
+      ' 了！',
     ]);
   } else if (
     event_arg === 95 + 32 &&

@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
@@ -54,12 +55,16 @@ handlers[event_hooks.load_talk] = async () => {
   }
 };
 
-handlers[event_hooks.select] = () =>
+handlers[event_hooks.select] = () => {
+  if (!sys_check_awake(3)) {
+    throw new Error();
+  }
   get_chara_talk(3).say(
     Math.random() < 0.5
       ? `唔～叫无敌的帝王大人有什么事吗？`
       : `哼哼，我随时都准备好了！`,
   );
+};
 
 handlers[event_hooks.good_morning] = () => {
   const teio_talk = get_chara_talk(3),
@@ -92,6 +97,9 @@ handlers[event_hooks.good_morning] = () => {
 };
 
 handlers[event_hooks.talk] = async () => {
+  if (!sys_check_awake(3)) {
+    throw new Error();
+  }
   const teio_talk = get_chara_talk(3),
     me = get_chara_talk(0);
   if (era.get('base:3:体力') < era.get('maxbase:3:体力') * 0.45) {
@@ -441,6 +449,9 @@ handlers[event_hooks.office_game] = async () => {
 };
 
 handlers[event_hooks.good_night] = async (hook) => {
+  if (!sys_check_awake(0) || !sys_check_awake(3)) {
+    throw new Error();
+  }
   const check = get_custom_check(3).is_want_make_love(),
     me = get_chara_talk(0),
     teio = get_chara_talk(3);

@@ -701,11 +701,14 @@ handlers[event_hooks.out_river] = async (hook) => {
 };
 
 handlers[event_hooks.good_night] = async (hook) => {
+  if (!sys_check_awake(0) || !sys_check_awake(68)) {
+    throw new Error();
+  }
   const check = get_custom_check(68).is_want_make_love(),
     me = get_chara_talk(0),
     kita = get_chara_talk(68);
   era.print(`繁忙的一天结束，${me.name} 将 ${kita.name} 送到学生宿舍门口……`);
-  if (sys_check_awake(0) && sys_check_awake(68) && check) {
+  if (check > 0) {
     era.print(
       `${me.name} 刚想和往常一样告别，但小北却一反常态地不让 ${me.name} 离开`,
     );

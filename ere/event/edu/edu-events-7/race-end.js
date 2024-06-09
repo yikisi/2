@@ -93,8 +93,8 @@ module.exports = async (hook, extra_flag) => {
       extra_flag.relation_change = 0;
       extra_flag.love_change = 0;
 
-      era.printButton('「确实，真香啊……」', 1);
-      era.printButton('「但这还是陆上的比赛啊……」', 2);
+      era.printButton('「确实，真香啊……」（爱慕+5）', 1);
+      era.printButton('「但这还是陆上的比赛啊……」（好感+10）', 2);
       if ((await era.input()) === 1) {
         extra_flag.love_change += 5;
       } else {
@@ -115,8 +115,8 @@ module.exports = async (hook, extra_flag) => {
       ]);
       era.println();
 
-      era.printButton('（环抱黄金船的腰支撑）', 1);
-      era.printButton('（把肩膀借给黄金船支撑）', 2);
+      era.printButton('（环抱黄金船的腰支撑）（爱慕+5）', 1);
+      era.printButton('（把肩膀借给黄金船支撑）（好感+10）', 2);
       if ((await era.input()) === 1) {
         extra_flag.love_change += 5;
       } else {
@@ -456,8 +456,11 @@ module.exports = async (hook, extra_flag) => {
         await gold_ship.say_and_wait('尊嘟假嘟？那我岂不是超厉害的？');
         era.println();
 
-        era.printButton('「确实超厉害的。」', 1);
-        era.printButton('「厉害到可以名留青史！」', 2);
+        era.printButton('「确实超厉害的。」（力量+18、其他属性+3）', 1);
+        era.printButton(
+          '「厉害到可以名留青史！」（全属性+3、习得【出闸难】、技能点数+45 or 全属性+8、技能点数+75）',
+          2,
+        );
         const ret = await era.input();
         if (ret === 1) {
           extra_flag.attr_change = new Array(5).fill(3);

@@ -22,7 +22,7 @@ const handlers = {};
 handlers[event_hooks.select] = () => {
   const callname = sys_get_callname(25, 0),
     coffee = get_chara_talk(25);
-  if (era.get('status:25:沉睡')) {
+  if (!sys_check_awake(25)) {
     era.print([
       '……',
       coffee.get_colored_name(),
@@ -164,7 +164,7 @@ handlers[event_hooks.good_night] = async (hook) => {
 handlers[event_hooks.talk] = async () => {
   const callname = sys_get_callname(25, 0),
     coffee = get_chara_talk(25);
-  if (era.get('status:25:沉睡')) {
+  if (!sys_check_awake(25)) {
     await era.printAndWait([
       '……仔细地观察着睡梦中 ',
       coffee.get_colored_name(),

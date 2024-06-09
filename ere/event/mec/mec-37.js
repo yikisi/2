@@ -2,8 +2,10 @@ const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
-const { buff_colors } = require('#/data/color-const');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const { buff_colors } = require('#/data/color-const');
+const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
   get_status() {
@@ -25,6 +27,21 @@ module.exports = class extends CustomizedMec {
 
   get_motivation_limit() {
     return -1 * era.get('status:37:虚弱');
+  }
+
+  get_race_contestants() {
+    switch (era.get('flag:当前赛事')) {
+      case race_enum.japa_cup:
+        return [1, 47].map((e) => ({ buff: 2, id: e }));
+      case race_enum.arim_kin:
+        if (era.get('cflag:37:育成回合计时') < 96) {
+          return [1, 5, 18, 47].map((e) => ({ buff: 1.5, id: e }));
+        }
+        break;
+      case race_enum.tenn_spr:
+        return [{ buff: 1.5, id: 25 }];
+    }
+    return [];
   }
 
   get_success_rate_buff() {

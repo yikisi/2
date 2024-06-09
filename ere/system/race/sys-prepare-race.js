@@ -250,7 +250,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
       uma.attrs[attr_enum.speed] *=
         1 +
         race_info.attr_bonus.reduce(
-          (p, c) => p + Math.min(0.05 * Math.ceil(uma.attrs[c] / 300), 0.2),
+          (p, c) => p + Math.min(0.05 * Math.floor(uma.attrs[c] / 300), 0.2),
           0,
         ) /
           race_info.attr_bonus.length;

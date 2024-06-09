@@ -330,12 +330,11 @@ module.exports = class extends CustomizedCheck {
     return titles;
   }
 
-  get_personal_titles() {
-    return ['帝王', '无瑕帝王', '不屈帝王'];
+  get_aim_races() {
+    return aim_races;
   }
 
-  // eslint-disable-next-line no-unused-vars
-  is_aim_race(race, edu_weeks, rank) {
-    return aim_races[`${edu_weeks}_${race}`] || aim_races[race];
+  get_personal_titles() {
+    return ['帝王', '无瑕帝王', '不屈帝王'];
   }
 };

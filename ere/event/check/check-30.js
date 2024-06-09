@@ -142,17 +142,6 @@ module.exports = class extends CustomizedCheck {
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  is_aim_race(race, edu_weeks, rank) {
-    if (
-      race === race_enum.tenn_sho &&
-      !check_aim_race(new RaceHistory(30).get(), race_enum.tenn_sho, 1, 1)
-    ) {
-      return -4;
-    }
-    return aim_races[`${edu_weeks}_${race}`] || aim_races[race];
-  }
-
   get_edu_aims() {
     const buffer = [],
       races = new RaceHistory(30).get();
@@ -169,5 +158,16 @@ module.exports = class extends CustomizedCheck {
 
   get_personal_titles() {
     return ['永恒碧蓝'];
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  is_aim_race(race, edu_weeks, rank) {
+    if (
+      race === race_enum.tenn_sho &&
+      !check_aim_race(new RaceHistory(30).get(), race_enum.tenn_sho, 1, 1)
+    ) {
+      return -4;
+    }
+    return aim_races[`${edu_weeks}_${race}`] || aim_races[race];
   }
 };

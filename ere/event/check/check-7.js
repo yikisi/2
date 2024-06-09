@@ -141,6 +141,10 @@ module.exports = class extends CustomizedCheck {
     return super.check_palace_and_get_aims();
   }
 
+  get_aim_races() {
+    return aim_races;
+  }
+
   get_edu_aims() {
     const buffer = [],
       races = new RaceHistory(7).get();

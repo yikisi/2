@@ -503,7 +503,7 @@ race_infos[race_enum.belm_sta] = require('#/data/race/g1/race-belm-sta');
 
 race_infos.forEach((e) => {
   const param_id = e.param_id;
-  e.attr_bonus = bonus_params[id2bonus[param_id]];
+  e.attr_bonus = bonus_params[id2bonus[param_id]] || [];
   e.lanes = lane_params[param_id];
   e.slopes = slope_params[param_id];
   e.phases = [

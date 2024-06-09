@@ -130,7 +130,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       },
       {
         accelerator: 403,
-        config: { width: 6 },
+        config: { disabled: !sys_check_awake(0), width: 6 },
         content: '持有物品',
         type: 'button',
       },

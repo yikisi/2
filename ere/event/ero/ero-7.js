@@ -22,7 +22,7 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (_, extra_flag) => {
   era.drawLine();
   await gold_ship.say_and_wait('……');
   era.println();
-  await gold_ship.say_and_wait([
+  await gold_ship.print_and_wait([
     gold_ship.get_colored_name(),
     ' 大咧咧地坐在马桶上，手上拿着一根棒状物，若有所思。',
   ]);

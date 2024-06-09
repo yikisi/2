@@ -95,7 +95,7 @@ module.exports = {
             .filter((e) => e.l)
             .map((e) => {
               return {
-                config: { width: 4 },
+                config: { width: 6 },
                 content: `[${e.n}] Lv.${e.l}`,
                 type: 'text',
               };

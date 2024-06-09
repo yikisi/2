@@ -85,9 +85,9 @@ module.exports = async (hook, _, event_object) => {
     era.println();
 
     era.print('「说什么呢，我的意思是……」');
-    era.printButton('「努力锻炼长距离能力吧！」', 1);
-    era.printButton('「现在就来想想吧！」', 2);
-    era.printButton('「搞一波巨蛋巡回演唱会吧！」', 3);
+    era.printButton('「努力锻炼长距离能力吧！」（耐力+40）', 1);
+    era.printButton('「现在就来想想吧！」（智力+40）', 2);
+    era.printButton('「搞一波巨蛋巡回演唱会吧！」（技能点数+50）', 3);
     const ret = await era.input();
 
     if (ret === 1) {
@@ -137,7 +137,7 @@ module.exports = async (hook, _, event_object) => {
       );
       await era.printAndWait('所以赛跑呢？');
       era.println();
-      get_attr_and_print_in_event(7, undefined, 20) && (await era.waitAnyKey());
+      get_attr_and_print_in_event(7, undefined, 50) && (await era.waitAnyKey());
     }
     era.set('cflag:7:节日事件标记', 0);
   } else if (event_arg === 47 + 29) {

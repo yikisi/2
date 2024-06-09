@@ -1,8 +1,18 @@
 const era = require('#/era-electron');
 
+const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
+
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const simulation_game_in_event = require('#/event/snippets/simulation-game-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const PseudoUma = require('#/data/race/model/pseudo-uma');
+const { race_enum } = require('#/data/race/race-const');
+const { attr_enum, attr_names } = require('#/data/train-const');
+const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
+const { get_random_entry } = require('#/utils/list-utils');
 
 /**
  * @param {CharaTalk} urara
@@ -564,11 +574,28 @@ module.exports = async (urara, me, in_urara, callname) => {
   await era.input();
 
   await urara.say_and_wait('哦！乌拉拉GO——！');
-  // TODO 特殊比赛
-  // 12月？前半？？？？？？？1着 训练场 草地 长距离 2500m 右 内？？？
-  // 参赛选手总数：2名
-  // 对手：「春乌拉拉」（属性、技能和状态与主控乌拉拉完全一致，但没有隐藏buff加成）
-  // 比赛获胜奖励：G1通用属性升级、不消耗体力、干劲+1
+  const chara = sys_get_chara_pseudo(52);
+  await simulation_game_in_event(
+    chara,
+    [
+      new PseudoUma(
+        0,
+        '「春乌拉拉」',
+        in_urara.color,
+        chara.motivation,
+        attr_names.map((e) => era.get(`base:52:${e}`)),
+        chara.style,
+        [...chara.adapt_style_list],
+        [...chara.adapt_distance_list],
+        [...chara.adapt_ground_list],
+        chara.list_skill.map((e) => e.data),
+      ).set_legend(),
+    ],
+    race_enum.arim_kin,
+  );
+  if (chara.rank.curr !== 1) {
+    return false;
+  }
   await in_urara.print_and_wait(
     '在无限延伸的赛道上，随着飞翔的樱粉色将黯淡对手逐渐甩在身后，胜负已成定局。',
   );
@@ -826,4 +853,14 @@ module.exports = async (urara, me, in_urara, callname) => {
   ]);
   await urara.say_and_wait(['接下来要来做什么呢？', callname, '！']);
   era.rmData(52);
+  era.println();
+  const attr_change = new Array(5).fill(0);
+  attr_change[get_random_entry(Object.values(attr_enum))] = 10;
+  let wait_flag = false;
+  wait_flag =
+    get_attr_and_print_in_event(52, attr_change, 45, undefined, true) ||
+    wait_flag;
+  wait_flag = sys_change_motivation(52, 1) || wait_flag;
+  wait_flag && (await era.waitAnyKey());
+  return true;
 };

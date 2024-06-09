@@ -680,7 +680,7 @@ function sub_simulate_skill(
                   break;
                 case ability_usage_enum.MultiplyRandom1:
                   skill.values[i][j] =
-                    skill.data.ability_values[i][j] * Math.random();
+                    skill.data.ability_values[i][j] * Math.random() * 0.1;
                   break;
                 case ability_usage_enum.MultiplyFanCount:
                 case ability_usage_enum.MultiplySingleModeWinCount:

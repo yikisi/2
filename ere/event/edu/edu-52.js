@@ -54,17 +54,18 @@ week_start_handlers[95 + 46] = async (
       add_event(event_hooks.week_end, event_object);
       break;
     case 0:
-      await loop3(urara, me, in_urara, callname);
-      edu_marks.sbuff = 1;
-      await era.printAndWait([
-        { isBr: true },
-        urara.get_colored_name(),
-        ' 能从粉丝的支持中获取更强的力量了！',
-      ]);
-    // 失败后回溯到开始的地方
-    // edu_marks.loop = 2;
-    // await era.saveData(52);
-    // add_event(event_hooks.week_end, event_object);
+      if (await loop3(urara, me, in_urara, callname)) {
+        edu_marks.sbuff = 1;
+        await era.printAndWait([
+          { isBr: true },
+          urara.get_colored_name(),
+          ' 能从粉丝的支持中获取更强的力量了！',
+        ]);
+      } else {
+        edu_marks.loop = 2;
+        await era.saveData(52);
+        add_event(event_hooks.week_end, event_object);
+      }
   }
 };
 

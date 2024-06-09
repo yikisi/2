@@ -263,8 +263,8 @@ async function love_74_week_end(flash) {
     `${your_name} 知道，无论成与否，${your_name} 都必须要给${flash.sex}一个准确的答复。`,
   );
   await era.printAndWait('一个……必须要经过慎重决定后才能给出的答复。');
-  era.printButton(`「握紧${flash.sex}的手。」`, 1);
-  era.printButton(`「回避${flash.sex}的眼神。」`, 2);
+  era.printButton(`「握紧${flash.sex}的手。」（升级关系）`, 1);
+  era.printButton(`「回避${flash.sex}的眼神。」（暂不升级）`, 2);
   ret = await era.input();
   if (ret === 1) {
     await era.printAndWait(`${your_name} 爱${flash.sex}吗？`);

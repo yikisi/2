@@ -23,7 +23,10 @@ const event_hooks = require('#/data/event/event-hooks');
 /** @type {Record<string,function(HookArg,*):Promise<boolean>>} */
 const handlers = {};
 
-handlers[event_hooks.select] = function () {
+handlers[event_hooks.select] = () => {
+  if (!sys_check_awake(60)) {
+    throw new Error();
+  }
   get_chara_talk(60).say(
     Math.random() < 0.5
       ? `怎么了怎么了？找 ${sys_get_callname(60, 60)} 有什么事吗？`
@@ -61,10 +64,13 @@ handlers[event_hooks.good_morning] = function () {
 };
 
 handlers[event_hooks.good_night] = async function (hook) {
+  if (!sys_check_awake(0) || !sys_check_awake(60)) {
+    throw new Error();
+  }
   const chara = get_chara_talk(60),
     check = get_custom_check(60).is_want_make_love(),
     me = get_chara_talk(0);
-  if (sys_check_awake(0) && sys_check_awake(60) && check) {
+  if (check > 0) {
     era.print(`繁忙的一天结束，${me.name} 把 ${chara.name} 送到学生宿舍门口。`);
     era.print(
       `${me.name} 刚打算如往常一样挥手告别，却突然被优秀素质拽住了袖脚。`,
@@ -135,6 +141,9 @@ handlers[event_hooks.good_night] = async function (hook) {
 };
 
 handlers[event_hooks.talk] = async function () {
+  if (!sys_check_awake(60)) {
+    throw new Error();
+  }
   const chara_self_name = sys_get_callname(60, 60),
     callname = sys_get_callname(60, 0);
   let talk_arr;

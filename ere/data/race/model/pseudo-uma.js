@@ -269,6 +269,10 @@ class PseudoUma {
     this.legend = true;
     return this;
   }
+
+  get_colored_name() {
+    return { color: this.color, content: this.name, fontWeight: 'bold' };
+  }
 }
 
 module.exports = PseudoUma;

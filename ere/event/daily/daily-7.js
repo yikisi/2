@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
@@ -17,6 +19,9 @@ const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const handlers = {};
 
 handlers[event_hooks.select] = () => {
+  if (!sys_check_awake(7)) {
+    throw new Error();
+  }
   get_chara_talk(7).say(
     Math.random() < 0.5 ? '噢！你找本金船大人有事吗？' : '跟本金船大人走吧！',
   );
@@ -69,6 +74,9 @@ handlers[event_hooks.good_morning] = () => {
 };
 
 handlers[event_hooks.talk] = () => {
+  if (!sys_check_awake(7)) {
+    throw new Error();
+  }
   const gold_ship = get_chara_talk(7);
   let talk_arr;
   if (era.get('base:7:体力') < 0.45 * era.get('maxbase:7:体力')) {

@@ -1,11 +1,11 @@
 const { get } = require('#/era-electron');
 
+const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const { mess_enum, weather_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { get_random_entry } = require('#/utils/list-utils');
 
 const adaptability2race = [
   race_enum.aoi_sta,
@@ -21,43 +21,49 @@ const adaptability2race = [
 /**
  * @param {number} race
  * @param {PseudoUma} chara
+ * @param {RaceInfo} [_info]
  * @returns {RaceInfo}
  */
-function fill_race_weather_and_mess(race, chara) {
-  let info = race_infos[race];
-  if (race === race_enum.begin_race) {
-    const max_ground = Math.max(...chara.adapt_ground_list),
-      max_span = Math.max(...chara.adapt_distance_list),
-      tmp = [];
-    chara.adapt_ground_list.forEach(
-      (eg, ig) =>
-        eg === max_ground &&
-        chara.adapt_distance_list.forEach((es, is) => {
-          es === max_span && tmp.push(adaptability2race[(ig << 2) + is]);
-        }),
-    );
-    const race_id = get_random_entry(tmp),
-      aim_info = race_infos[race_id];
-    info = new RaceInfo(
-      info.name_en,
-      info.name_zh,
-      info.race_class,
-      aim_info.track,
-      aim_info.ground,
-      aim_info.span,
-      adaptability2race.indexOf(race_id) % 4,
-      aim_info.rotation,
-      info.gates,
-      0,
-      info.limit,
-      0,
-      info.prize,
-      aim_info.param_id,
-    );
-    info.attr_bonus = aim_info.attr_bonus;
-    info.lanes = aim_info.lanes;
-    info.slopes = aim_info.slopes;
-    info.phases = aim_info.phases;
+function fill_race_weather_and_mess(race, chara, _info) {
+  let info;
+  if (_info) {
+    info = _info;
+  } else {
+    info = race_infos[race];
+    if (race === race_enum.begin_race) {
+      const max_ground = Math.max(...chara.adapt_ground_list),
+        max_span = Math.max(...chara.adapt_distance_list),
+        tmp = [];
+      chara.adapt_ground_list.forEach(
+        (eg, ig) =>
+          eg === max_ground &&
+          chara.adapt_distance_list.forEach((es, is) => {
+            es === max_span && tmp.push(adaptability2race[(ig << 2) + is]);
+          }),
+      );
+      const race_id = get_random_entry(tmp),
+        aim_info = race_infos[race_id];
+      info = new RaceInfo(
+        info.name_en,
+        info.name_zh,
+        info.race_class,
+        aim_info.track,
+        aim_info.ground,
+        aim_info.span,
+        adaptability2race.indexOf(race_id) % 4,
+        aim_info.rotation,
+        info.gates,
+        0,
+        info.limit,
+        0,
+        info.prize,
+        aim_info.param_id,
+      );
+      info.attr_bonus = aim_info.attr_bonus;
+      info.lanes = aim_info.lanes;
+      info.slopes = aim_info.slopes;
+      info.phases = aim_info.phases;
+    }
   }
   const dice = get_random_value(0, 99);
   if (dice < 45) {

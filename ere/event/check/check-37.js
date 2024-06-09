@@ -72,6 +72,7 @@ module.exports = class extends CustomizedCheck {
         () => new EventMarks(0).add(event_hooks.out_shopping),
       );
 
+      let temp;
       switch (edu_weeks) {
         case 47 + 1: // 新年的抱负
         case 47 + 16: // 经验之谈 · 一
@@ -103,6 +104,14 @@ module.exports = class extends CustomizedCheck {
         case 95 + 6: // 遇见之花
           if (era.get(`relation:37:0`) > 225) {
             add_event(event_hooks.out_start, event_obj_special);
+          }
+          break;
+        case 95 + 24:
+          if ((temp = sys_reg_race(37)).curr.race === race_enum.takz_kin) {
+            temp.curr = temp.last = {
+              race: -1,
+              week: -1,
+            };
           }
       }
       check_and_register_aim_race(37, aim_races, edu_weeks);

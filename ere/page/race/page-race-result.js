@@ -10,7 +10,7 @@ const { adaptability_names } = require('#/data/train-const');
 
 const fron_cols = 5,
   progress_width = 24 - 8 - 2 * fron_cols,
-  screen_size = 10;
+  screen_size = 8;
 const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'];
 
 /**
@@ -446,9 +446,13 @@ async function page_race_result(contestants, records, info) {
               {
                 config: { align: 'center' },
                 content: [
-                  track_names[info.track],
-                  '竞马场 ',
-                  info.get_colored_name_with_class(),
+                  ...(info.track
+                    ? [
+                        track_names[info.track],
+                        '竞马场 ',
+                        info.get_colored_name_with_class(),
+                      ]
+                    : ['训练场 模拟赛']),
                   { isBr: true },
                   { isBr: true },
                 ],
@@ -463,7 +467,7 @@ async function page_race_result(contestants, records, info) {
               return {
                 columns: [
                   {
-                    config: { align: 'center', width: 4 },
+                    config: { align: 'center', width: 3 },
                     content: ranks[i],
                     type: 'text',
                   },
@@ -484,14 +488,19 @@ async function page_race_result(contestants, records, info) {
                     type: 'text',
                   },
                   {
+                    config: { offset: 1, width: 16 },
+                    content: ['(', uma.get_colored_name(), ')'],
+                    type: 'text',
+                  },
+                  {
                     config: {
-                      offset: 9,
+                      offset: 8,
                       width: 12,
                     },
                     content:
                       i < l.length - 1
                         ? [
-                            '> [',
+                            '|- [',
                             {
                               color: buff_colors[1],
                               content: get_delta_desc(

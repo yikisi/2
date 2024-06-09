@@ -403,7 +403,7 @@ module.exports = async (hook, extra_flag) => {
       `观众`,
       `荣进闪耀！恭喜 ${your_name}！！！」`,
     );
-    await flash.say_and_wait('呼……Juhu!Geschafft！我做到了！');
+    await flash.say_and_wait('呼……Juhu! Geschafft! 我做到了！');
     await era.printAndWait(
       '闪耀着灿眼光芒的东京竞马场上，以夺目之姿第一个冲过终点线的荣进闪耀向着喧闹的观众席热烈挥手。',
     );

@@ -548,7 +548,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         },
         {
           accelerator: 405,
-          config: { width: 6 },
+          config: { disabled: !sys_check_awake(0), width: 6 },
           content: '持有物品',
           type: 'button',
         },
@@ -730,10 +730,9 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
           { id: 801, limit: true },
           ...new Array(3).fill(0).map((_, i) => 802 + i),
           823,
-          { id: 824, limit: true },
-          ...new Array(11).fill(0).map((_, i) => i + 830),
-          ...new Array(7).fill(0).map((_, i) => i + 850),
-          ...new Array(4).fill(0).map((_, i) => i + 870),
+          ...new Array(11).fill(0).map((_, i) => 830 + i),
+          ...new Array(7).fill(0).map((_, i) => 850 + i),
+          ...new Array(4).fill(0).map((_, i) => 870 + i),
         ]),
       );
       era.set('flag:当前互动角色', temp);
