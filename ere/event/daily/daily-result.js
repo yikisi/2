@@ -304,7 +304,11 @@ handlers[event_hooks.out_church] = async (chara_id) => {
     era.print(`${CharaTalk.me.name} 的训练似乎更加顺利了……`);
   }
   if (
-    sys_like_chara(sys_get_random_uma_god(), 0, get_random_value(5, 20)) ||
+    sys_like_chara(
+      sys_get_random_uma_god(),
+      0,
+      get_random_value(5, 10 + 10 * (chara_id > 0)),
+    ) ||
     condition_chara ||
     condition_me
   ) {
