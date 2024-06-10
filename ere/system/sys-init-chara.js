@@ -48,8 +48,6 @@ function reset_chara(chara_id) {
       era.set(`abl:${chara_id}:${v}训练等级`, 1);
       era.set(`exp:${chara_id}:${v}训练经验`, 0);
     });
-    era.set(`exp:${chara_id}:技能点数`, 120);
-    era.set(`cflag:${chara_id}:育成用变量`, {});
     const skill_set =
       chara_skill_dict[
         chara_id >= first_child_id
@@ -58,6 +56,8 @@ function reset_chara(chara_id) {
       ] || [];
     new CharaSkills(chara_id).add(...skill_set.slice(0, 4));
     new CharaAvailableSkills(chara_id).add(...skill_set.slice(4));
+    era.set(`exp:${chara_id}:技能点数`, 120 + 480 * (skill_set.length === 0));
+    era.set(`cflag:${chara_id}:育成用变量`, {});
     new RaceHistory(chara_id).reset();
   } else {
     Object.values(attr_names).forEach((v) => {

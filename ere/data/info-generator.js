@@ -438,7 +438,7 @@ module.exports = {
     }
     if (
       era.get(`cflag:${chara_id}:妊娠阶段`) >> pregnant_stage_enum.embryo &&
-      (era.get(`cflag:${chara_id}:妊娠回合计时`) ||
+      (era.get(`cflag:${chara_id}:妊娠回合计时`) >= 4 ||
         (chara_id && mark_level >= 2))
     ) {
       status_list.push({

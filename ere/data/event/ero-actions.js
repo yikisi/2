@@ -31,6 +31,8 @@ const ero_action_tags = {
 Object.keys(ero_action_tags).forEach((e, i) => (ero_action_tags[e] = i));
 
 const ero_actions = {
+  // 放弃挣扎
+  go_on: 0,
   // 接吻
   kiss: 0,
   // 法式湿吻

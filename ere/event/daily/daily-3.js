@@ -16,6 +16,7 @@ const get_gradient_color = require('#/utils/gradient-color');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
@@ -23,9 +24,16 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const handlers = {};
 
 handlers[event_hooks.load_talk] = async () => {
+  const teio_life_marks = new LifeEventMarks(3),
+    my_life_marks = new LifeEventMarks(0);
   if (
-    era.get('cflag:3:妊娠回合计时') ||
-    (new LifeEventMarks(0).sperm === 3 && era.get('cflag:0:妊娠回合计时'))
+    (era.get('cflag:3:妊娠阶段') !== 1 << pregnant_stage_enum.no &&
+      !teio_life_marks.report) ||
+    (my_life_marks.sperm === 3 &&
+      era.get('cflag:0:妊娠阶段') !== 1 << pregnant_stage_enum.no &&
+      !my_life_marks.report) ||
+    era.get('exp:3:生产次数') > 0 ||
+    era.get('exp:3:孩子数量') > 0
   ) {
     const teio = get_chara_talk(3);
     await teio.say_and_wait('训练员……要抛弃这个孩子？为什么……');

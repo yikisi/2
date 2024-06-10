@@ -2,11 +2,11 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   800011,
-  '队长，我不想努力了……',
+  '队长，我不想努力了',
   '在比赛终盘时极大幅度提高速度并恢复体力',
   80001,
   UmaSkill.rarity_enum.spe_r,
-  10,
+  0b100010,
   1000,
   [() => true, () => true],
   [(args) => args.phase >= 2, () => false],
@@ -59,7 +59,7 @@ module.exports = new UmaSkill(
   [1, 2],
   [400, 400],
   0,
-  1000,
+  9999,
   false,
   false,
 );

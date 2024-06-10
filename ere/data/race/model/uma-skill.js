@@ -1,3 +1,4 @@
+const { el_warning_color } = require('#/data/color-const');
 const skill_name_colors = [
   '#a7fe9e',
   '#98ccfa',
@@ -6,7 +7,13 @@ const skill_name_colors = [
   '#ce7cff',
 ];
 
-const skill_border_colors = ['#c6c5c5', '#eeb93f', '#ffc0cb', '#ee82ee'];
+const skill_border_colors = [
+  '#c6c5c5',
+  '#eeb93f',
+  '#ffc0cb',
+  '#ee82ee',
+  el_warning_color,
+];
 
 const rarity_enum = {
   // 普通技能

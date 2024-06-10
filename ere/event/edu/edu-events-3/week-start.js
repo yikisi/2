@@ -5,13 +5,13 @@ const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 
 const { add_event, cb_enum } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const palace = require('#/event/snippets/palace');
 const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const CharaSkills = require('#/data/chara-skills');
 const { buff_colors } = require('#/data/color-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
@@ -202,10 +202,9 @@ module.exports = async (_, __, event_object) => {
         }身后拖出一道长长的影子。`,
       );
       era.println();
-      new CharaSkills(3).remove(100031);
-      new CharaSkills(3).add(100039);
       wait_flag =
         get_attr_and_print_in_event(3, new Array(5).fill(5), 20) || wait_flag;
+      wait_flag = get_skills_and_print_in_event(3, [100039]) || wait_flag;
       event_marks.give_up++;
     } else {
       await era.printAndWait(

@@ -317,7 +317,7 @@ module.exports = async () => {
           common_skills.forEach((e) => (available_skills[e] = 1));
           new CharaAvailableSkills(chara_id)
             .get()
-            .forEach((e) => (available_skills[e] = 1));
+            .forEach((e) => (available_skills[e] = 0));
           available_skills = Object.keys(available_skills)
             .map(Number)
             .reduce((p, c) => {
@@ -406,13 +406,6 @@ module.exports = async () => {
           } else {
             const skill = skills_dict[buffer[ret - 1].id];
             pt = era.add(`exp:${chara_id}:技能点数`, -skill.price);
-            skill_control.remove(
-              skill_control
-                .get()
-                .find((e) =>
-                  e.toString().startsWith(skill.group_id.toString()),
-                ),
-            );
             get_skills_and_print_in_event(
               chara_id,
               [skill.id],

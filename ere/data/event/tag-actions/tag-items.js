@@ -56,7 +56,7 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
     [],
   );
 
-  ero_action_names[ero_actions.ask_use_item] = '乞求使用性玩具';
+  ero_action_names[ero_actions.ask_use_item] = '乞求使用玩具';
   ero_tagged_hooks[ero_actions.ask_use_item] = new EroHookTag(
     [ero_action_tags.awake, (chara_id) => !chara_id],
     [ero_action_tags.awake],

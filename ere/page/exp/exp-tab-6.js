@@ -225,10 +225,14 @@ module.exports = {
       pregnant_buffer = '初潮还没有来';
     } else if (era.get(`status:${chara.id}:经期`)) {
       pregnant_buffer = '月经来潮中';
+    } else if (pregnant_stage === 1 << pregnant_stage_enum.resume) {
+      pregnant_buffer = pregnant_stage_names[1 << pregnant_stage_enum.resume];
+      if (flags.mark_level) {
+        pregnant_buffer += ` (${pregnant_timer} 周)`;
+      }
     } else if (
       pregnant_stage === 1 << pregnant_stage_enum.no ||
-      (!pregnant_timer &&
-        ((!chara.id && flags.mark_level !== 3) || flags.mark_level <= 2))
+      (pregnant_timer < 4 && flags.mark_level <= 2)
     ) {
       if (
         chara.id &&
@@ -259,17 +263,13 @@ module.exports = {
         ).toFixed(2)}%)`;
       }
     } else {
-      if (pregnant_stage === 1 << pregnant_stage_enum.resume) {
-        pregnant_buffer = pregnant_stage_names[1 << pregnant_stage_enum.resume];
+      if (flags.mark_level >= 2) {
+        pregnant_buffer = pregnant_stage_names[pregnant_stage];
+      } else if (pregnant_stage >> pregnant_stage_enum.fetal > 0) {
+        pregnant_buffer = '肚子已经大大地挺了起来';
       } else {
-        if (flags.mark_level >= 2) {
-          pregnant_buffer = pregnant_stage_names[pregnant_stage];
-        } else if (pregnant_stage >> pregnant_stage_enum.fetal > 0) {
-          pregnant_buffer = '肚子已经大大地挺了起来';
-        } else {
-          pregnant_buffer =
-            '腹部尚且没有迹象，无意间改变的生活习惯与体检报告却在昭示生命的新生';
-        }
+        pregnant_buffer =
+          '腹部尚且没有迹象，无意间改变的生活习惯与体检报告却在昭示生命的新生';
       }
       if (flags.mark_level) {
         pregnant_buffer += ` (${pregnant_timer} 周)`;

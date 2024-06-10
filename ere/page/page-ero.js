@@ -767,7 +767,15 @@ async function page_ero(lover) {
     ero_flag =
       (await sys_handle_ero_act(ret, filters)) &&
       get_characters_in_train().length > 1;
-    if (ero_flag) {
+    if (era.get('tflag:投降')) {
+      era.set('tflag:投降', 0);
+      while (era.get('tflag:主导权') && ero_flag) {
+        await sys_handle_ero_act(ero_hooks.relax, filters);
+        master = era.get('tflag:主导权');
+        ero_flag &&=
+          !era.get(`tcvar:${master}:脱力`) && !era.get(`tcvar:${master}:逃跑`);
+      }
+    } else {
       master = era.get('tflag:主导权');
       ero_flag &&=
         !era.get(`tcvar:${master}:脱力`) && !era.get(`tcvar:${master}:逃跑`);

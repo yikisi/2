@@ -599,6 +599,9 @@ function sub_simulate_skill(
               let temp;
               if (!skill.aims[i][j]) {
                 switch (skill.data.target_types[i][j]) {
+                  case target_type_enum.no:
+                    skill.aims[i][j] = [];
+                    break;
                   case target_type_enum.Self:
                     skill.aims[i][j] = [uma];
                     break;

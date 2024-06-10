@@ -564,8 +564,10 @@ async function sys_calc_orgasm(shown, ...ids) {
                     1 << pregnant_stage_enum.embryo,
                   );
                   era.set(`cflag:${other_id}:妊娠回合计时`, 0);
-                  new LifeEventMarks(other_id).sperm = chara_id;
-                  new LifeEventMarks(other_id).unexpected_pregnant =
+                  const life_marks = new LifeEventMarks(other_id);
+                  life_marks.report = 1;
+                  life_marks.sperm = chara_id;
+                  life_marks.unexpected_pregnant =
                     sys_check_awake(chara_id) - sys_check_awake(other_id);
                   era.set(`status:${other_id}:排卵期`, 0);
                   await call_ero_script(

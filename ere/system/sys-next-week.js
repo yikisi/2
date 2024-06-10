@@ -32,11 +32,14 @@ const sys_handle_palace = require('#/system/sys-handle-palace');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { remove_special_events } = require('#/event/queue');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry, sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaAvailableSkills = require('#/data/chara-available-skills');
+const CharaSkills = require('#/data/chara-skills');
 const { buff_colors, money_color } = require('#/data/color-const');
 const { trainer_salary } = require('#/data/const.json');
 const {
@@ -424,16 +427,30 @@ async function sys_next_week() {
       }
       // 殿堂计算
       if (chara_id) {
-        if (era.get(`cflag:${chara_id}:育成回合计时`) === 3 * 48) {
+        const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
+        if (edu_weeks === 3 * 48) {
           sys_handle_palace(chara_id);
           await era.waitAnyKey();
-        } else if (
-          era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 &&
-          (era.get(`status:${chara_id}:摸鱼`) ||
-            (stay_up && Math.random() < 0.2))
-        ) {
-          // 没进殿堂，摸鱼和熬夜才会正常造成干劲下降
-          motivation_change -= 1;
+        } else {
+          if (edu_weeks === 48 || edu_weeks === 96) {
+            const skill_control = new CharaSkills(chara_id),
+              available_control = new CharaAvailableSkills(chara_id),
+              to_get = available_control.get().slice(0, 2);
+            if (to_get.length === 0) {
+              era.add(`exp:${chara_id}:技能点数`, 240);
+            } else {
+              available_control.remove(...to_get);
+              get_skills_and_print_in_event(chara_id, to_get, skill_control);
+            }
+          }
+          if (
+            edu_weeks < 3 * 48 &&
+            (era.get(`status:${chara_id}:摸鱼`) ||
+              (stay_up && Math.random() < 0.2))
+          ) {
+            // 没进殿堂，摸鱼和熬夜才会正常造成干劲下降
+            motivation_change -= 1;
+          }
         }
       }
       sys_change_motivation(chara_id, motivation_change);
@@ -521,21 +538,25 @@ async function sys_next_week() {
     if (pregnant_stage >> pregnant_stage_enum.embryo) {
       sys_change_lust(chara_id, lust_border.itch / 40);
       const timer = era.add(
-          `cflag:${chara_id}:妊娠回合计时`,
-          1 + is_pregnant_slave,
-        ),
-        o_timer = timer - 1 - is_pregnant_slave;
+        `cflag:${chara_id}:妊娠回合计时`,
+        1 + is_pregnant_slave,
+      );
       const pregnant_times = era.get(`exp:${chara_id}:生产次数`);
       era.add(
         `base:${chara_id}:体重偏差`,
         get_random_value(50 + timer * 5, 150 + timer * 10),
       );
-      if (!o_timer) {
+      const life_marks = new LifeEventMarks(chara_id);
+      if (
+        life_marks.report &&
+        (era.get(`mark:${chara_id}:淫纹`) === 3 || timer >= 4)
+      ) {
         sys_change_pressure(
           chara_id,
           500 * (1 + (era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)),
         );
-        const father_id = new LifeEventMarks(chara_id).sperm;
+        life_marks.report = 0;
+        const father_id = life_marks.sperm;
         await call_ero_script(
           chara_id || father_id,
           ero_hooks.report_pregnant_between_weeks,

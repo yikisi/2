@@ -18,7 +18,9 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean>>} */
 const handlers = {};
@@ -532,7 +534,10 @@ handlers[event_hooks.celebration] = async () => {
 
 handlers[event_hooks.load_talk] = async () => {
   const nice_nature = get_chara_talk(60);
-  if (era.get('cflag:60:妊娠回合计时')) {
+  if (
+    era.get('cflag:60:妊娠阶段') >> pregnant_stage_enum.embryo &&
+    !new LifeEventMarks(60).report
+  ) {
     await nice_nature.say_and_wait(
       `啊哈，是吗，果然内恰小姐还是……但是等等，不行，${sys_get_callname(
         60,

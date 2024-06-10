@@ -164,7 +164,7 @@ function sys_get_status(chara_id) {
       color: buff_colors[2],
       content: '临产',
     });
-  } else if (era.get(`cflag:${chara_id}:妊娠回合计时`) > 0) {
+  } else if (era.get(`cflag:${chara_id}:妊娠回合计时`) >= 4) {
     status_list.push({
       color: buff_colors[2],
       content: '有孕',

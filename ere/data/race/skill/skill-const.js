@@ -1261,6 +1261,7 @@ const current = new Date().getTime();
 
 skills_dict[100039] = require('#/data/race/skill/skill-100039');
 skills_dict[800011] = require('#/data/race/skill/skill-800011');
+skills_dict[800021] = require('#/data/race/skill/skill-800021');
 skills_dict[100011] = require('#/data/race/skill/skill-100011');
 skills_dict[100021] = require('#/data/race/skill/skill-100021');
 skills_dict[100031] = require('#/data/race/skill/skill-100031');
@@ -1985,7 +1986,7 @@ const common_skills = [
   202431, 202432, 202441, 202442, 202451, 202452, 202461, 202462, 202471,
   202472, 202481, 202482, 202491, 202492, 202501, 202502, 210011, 210012,
   210021, 210022, 210031, 210032, 210041, 210042, 210061, 210062, 210071,
-  210072, 800011,
+  210072, 800011, 800021,
 ];
 
 module.exports = { chara_skill_dict, common_skills, skills_dict, skill_sets };

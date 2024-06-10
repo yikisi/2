@@ -3,6 +3,8 @@ const PersonalEventMarks = require('#/data/event/personal-event-marks');
 class LifeEventMarks extends PersonalEventMarks {
   // 孩子父亲
   sperm;
+  // 怀孕播报
+  report;
   // 意外之子
   unexpected_child;
   // 意外怀孕
