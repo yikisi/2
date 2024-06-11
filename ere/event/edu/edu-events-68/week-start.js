@@ -16,7 +16,7 @@ const { location_enum } = require('#/data/locations');
  * @param _
  * @param {EventObject} event_object
  */
-module.exports = async function (hook, _, event_object) {
+module.exports = async (hook, _, event_object) => {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
     event_arg = event_object?.arg,

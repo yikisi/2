@@ -93,7 +93,9 @@ function fill_race_weather_and_mess(race, chara, _info) {
     case mess_enum.heavy:
     case mess_enum.bad:
       info.weather =
-        get('flag:当前月') % 12 < 3 ? weather_enum.snow : weather_enum.rain;
+        get('flag:当前月') % 12 < 3 && info.track !== RaceInfo.track_enum.shatin
+          ? weather_enum.snow
+          : weather_enum.rain;
   }
   return info;
 }

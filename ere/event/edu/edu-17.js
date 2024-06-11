@@ -14,21 +14,20 @@ const event_hooks = require('#/data/event/event-hooks');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
-/** @type {Record<string,function(hook:HookArg,extra_flag:*,event_object:EventObject):Promise<*>>} */
+/** @type {Record<string,function(HookArg,*,EventObject):Promise<*>>} */
 const handlers = {};
 
 handlers[
   event_hooks.week_start
 ] = require('#/event/edu/edu-events-17/week-start');
 
-handlers[event_hooks.week_end] = async () => {
+handlers[event_hooks.week_end] = async (_, __, event_object) => {
   const event_marks = new LunaEduMarks(),
     luna = new CharaTalk(event_marks.emperor ? 9017 : 17).set_color(
       color_17[0],
     ),
-    edu_weeks = era.get('cflag:17:育成回合计时');
-  if (event_marks.wax_and_wane === 1) {
-    event_marks.wax_and_wane++;
+    event_arg = event_object?.arg;
+  if (event_arg === 'wax_and_wane') {
     await print_event_name('阴晴圆缺', luna);
 
     await luna.print_and_wait('小的时候，家里人并不对我抱有期望。');
@@ -125,7 +124,7 @@ handlers[event_hooks.week_end] = async () => {
     await luna.say_and_wait('好想见你……');
     await luna.say_and_wait('好想见你……');
     await luna.print_and_wait(`${luna.get_teen_sex_title()}一夜无眠。`);
-  } else if (edu_weeks === 47 + 41) {
+  } else if (event_arg === 47 + 41) {
     await print_event_name([{ color: color_17[1], content: '急转直下' }], luna);
     await era.printAndWait(
       `皎洁的明月下，${CharaTalk.me.name} 焦急地在门外的走廊上徘徊。`,
@@ -230,7 +229,7 @@ handlers[event_hooks.week_end] = async () => {
         }}`,
       ),
     );
-  } else if (edu_weeks === 95 + 10) {
+  } else if (event_arg === 95 + 10) {
     // 资深年三月二周
     await print_event_name([{ color: color_17[1], content: '呕心沥血' }], luna);
     await era.printAndWait(

@@ -9,9 +9,10 @@ const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names } = require('#/data/train-const');
 
 const fron_cols = 5,
-  progress_width = 24 - 8 - 2 * fron_cols,
+  progress_width = 24 - 10 - 2 * fron_cols,
+  report_size = 8,
+  ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'],
   screen_size = 8;
-const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'];
 
 /**
  * @param {number} delta
@@ -70,6 +71,19 @@ function get_event_record(uma, event_id, timer_record) {
     timer: 5 * 15,
     type: 'text',
   };
+}
+
+/**
+ * @param {{shown:boolean}[]} buffer
+ * @param {number} shown_count
+ * @returns {{shown:boolean}[]}
+ */
+function get_screen(buffer, shown_count) {
+  if (buffer.length <= screen_size) {
+    return buffer;
+  }
+  let count = screen_size - shown_count;
+  return buffer.filter((e) => e.shown || count-- > 0);
 }
 
 /**
@@ -142,7 +156,8 @@ async function page_race_result(contestants, records, info) {
   ]);
   const report_buffer = [],
     skill_buffer = [],
-    speed_min = (22 - info.span / 1000) * 0.85;
+    speed_min = (22 - info.span / 1000) * 0.85,
+    uma_shown_count = contestants.filter((e) => e.index_chara >= 0).length;
   let flag_result = true;
 
   /**
@@ -208,7 +223,7 @@ async function page_race_result(contestants, records, info) {
       sort_list(
         contestants,
         (e) => records.loc[timer][e.index_race][0],
-      ).forEach((uma) => {
+      ).forEach((uma, i) => {
         const loc = records.loc[timer][uma.index_race],
           diff = loc[0] > info.span ? 0 : top_loc - loc[0],
           inContent = [
@@ -246,42 +261,61 @@ async function page_race_result(contestants, records, info) {
               .map((e) => {
                 return { config: { width: 2 }, content: e, type: 'text' };
               }),
-            {
-              config: { width: 2 },
-              content:
-                loc[0] >= info.span
-                  ? total_time[uma.index_race]
-                  : [records.speed[timer][uma.index_race].toFixed(1), 'm/s'],
-              type: 'text',
-            },
-            loc[0] >= info.span
-              ? {
-                  config: { width: progress_width },
-                  content: [
-                    uma.rank.curr.toString(),
-                    ' 着',
-                    uma.rank.curr <= 4 && uma.rank.curr < contestants.length
-                      ? ` · ${get_delta_desc(uma.race.conditionParams.bashin_diff_behind)}`
-                      : '',
-                  ],
-                  type: 'text',
-                }
-              : {
-                  config: {
-                    color: uma.color,
-                    fontColor: 'black',
-                    height: 22,
-                    width: progress_width,
+
+            ...(loc[0] >= info.span
+              ? [
+                  {
+                    config: { width: 2 },
+                    content: total_time[uma.index_race],
+                    type: 'text',
                   },
-                  inContent,
-                  percentage:
-                    diff === contestants_span
-                      ? 0
-                      : 100 - (diff * 100) / contestants_span,
-                  type: 'progress',
-                },
+                  {
+                    config: { width: 2 },
+                    content: [uma.rank.curr.toString(), ' 着'],
+                    type: 'text',
+                  },
+                  {
+                    config: { width: progress_width },
+                    content:
+                      uma.rank.curr <= 4 && uma.rank.curr < contestants.length
+                        ? get_delta_desc(
+                            uma.race.conditionParams.bashin_diff_behind,
+                          )
+                        : '',
+                    type: 'text',
+                  },
+                ]
+              : [
+                  {
+                    config: { width: 2 },
+                    content: [
+                      records.speed[timer][uma.index_race].toFixed(1),
+                      'm/s',
+                    ],
+                    type: 'text',
+                  },
+                  {
+                    config: { width: 2 },
+                    content: (i + 1).toString(),
+                    type: 'text',
+                  },
+                  {
+                    config: {
+                      color: uma.color,
+                      fontColor: 'black',
+                      height: 22,
+                      width: progress_width,
+                    },
+                    inContent,
+                    percentage:
+                      diff === contestants_span
+                        ? 0
+                        : 100 - (diff * 100) / contestants_span,
+                    type: 'progress',
+                  },
+                ]),
           ],
-          key: loc[0],
+          shown: uma.index_chara >= 0,
         });
         records.events[timer][uma.index_race].forEach((e_id) =>
           report_buffer.push(get_event_record(uma, e_id, timer_record)),
@@ -292,11 +326,11 @@ async function page_race_result(contestants, records, info) {
       });
       report_buffer
         .filter((e) => e.timer > 0 && e.timer--)
-        .filter((_, i, l) => i < l.length - screen_size)
+        .filter((_, i, l) => i < l.length - report_size)
         .forEach((e) => (e.timer = -1));
       skill_buffer
         .filter((e) => e.timer > 0 && e.timer--)
-        .filter((_, i, l) => i < l.length - screen_size)
+        .filter((_, i, l) => i < l.length - report_size)
         .forEach((e) => (e.timer = -1));
       (timer ? era.replaceInColRows : era.printInColRows)(
         [
@@ -341,13 +375,14 @@ async function page_race_result(contestants, records, info) {
             };
           }),
           { config: { width: 2 }, content: '速度', type: 'text' },
+          { config: { width: 2 }, content: '排名', type: 'text' },
           {
             config: { width: progress_width },
             content: '相对位置',
             type: 'text',
           },
         ],
-        ...sort_list(buffer, (e) => e.key),
+        ...get_screen(buffer, uma_shown_count),
         [{ content: [{ isBr: true }], type: 'text' }],
         {
           columns: report_buffer.filter((e) => e.timer > 0),

@@ -245,11 +245,12 @@ module.exports = {
           (era.get('flag:当前周') - era.get(`cflag:${chara.id}:月经周`) + 4) %
           4
         ) {
-          case 1:
-            pregnant_buffer = '新的卵子正在成长中 ';
-            break;
+          case 0:
           case 2:
             pregnant_buffer = '卵子正在等待受精❤️ ';
+            break;
+          case 1:
+            pregnant_buffer = '新的卵子正在成长中 ';
             break;
           case 3:
             pregnant_buffer = '卵子已经失活，等待排出体外 ';

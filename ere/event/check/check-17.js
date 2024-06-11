@@ -66,8 +66,8 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const edu_object = new EventObject(17, cb_enum.edu),
-      edu_weeks = era.get('cflag:17:育成回合计时');
+    const edu_weeks = era.get('cflag:17:育成回合计时'),
+      edu_object = new EventObject(17, cb_enum.edu).set_arg(edu_weeks);
     if (edu_weeks < 3 * 48) {
       add_event(event_hooks.week_start, edu_object);
       if (
@@ -84,7 +84,7 @@ module.exports = class extends CustomizedCheck {
         add_event(event_hooks.week_end, edu_object);
       }
       check_and_register_aim_race(17, aim_races, edu_weeks);
-    } else if (edu_weeks === 143 + 9) {
+    } else if (edu_weeks === 143 + 1 || edu_weeks === 143 + 9) {
       add_event(event_hooks.week_start, edu_object);
     }
   }

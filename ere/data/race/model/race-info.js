@@ -73,7 +73,7 @@ const track_enum = {
   chantilly: 33001,
   // 圣克劳德
   st_cloud: 33002,
-  // 红山军
+  // 红山
   bashang: 86000,
   // 沙田（香港）
   shatin: 85200,
