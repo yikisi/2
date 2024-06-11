@@ -410,7 +410,10 @@ module.exports = async (_, __, event_object) => {
       if (sys_check_race_ready(205)) {
         sys_reg_race(205).curr = {
           race: race_enum.prix_lat,
-          week: 95 + race_infos[race_enum.prix_lat].date,
+          week:
+            era.get('flag:当前回合数') +
+            race_infos[race_enum.prix_lat].date -
+            33,
         };
       }
       break;

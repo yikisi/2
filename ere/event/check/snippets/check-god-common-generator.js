@@ -186,7 +186,7 @@ module.exports = (god_id) => {
                         50,
                     ).length >= 3 &&
                     attr_names.findIndex(
-                      (e) => era.get(`maxbase:0:${e}`) < 2000,
+                      (e) => era.get(`maxbase:${cur_id}:${e}`) < 2000,
                     ) !== -1
                   : era.get(`status:${cur_id}:熬夜`) ||
                     era.get(`status:${cur_id}:发胖`) ||

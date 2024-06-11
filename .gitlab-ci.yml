@@ -15,11 +15,13 @@ build:
   script:
     - git submodule update --init
     - cd engine
-    - git lfs fetch --all
+    - git lfs pull
     - npm install
     - npm run win:pack
-    - mv dist_electron/win-unpacked ./$GAME_ALL_DIR
-    - mkdir ./$GAME_ALL_DIR/game
+    - '[ -d $GAME_ALL_DIR ] && rm -rf ./$GAME_ALL_DIR'
+    - mkdir ./$GAME_ALL_DIR
+    - mv dist_electron/win-unpacked/* $GAME_ALL_DIR/
+    - mkdir $GAME_ALL_DIR/game
     - cp ../CHANGELOG.md ./$GAME_ALL_DIR/game/
     - cp ../RELEASE.md ./$GAME_ALL_DIR/game/
     - cp -r ../ere ./$GAME_ALL_DIR/game/

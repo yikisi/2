@@ -26,7 +26,7 @@ const {
 } = require('#/data/info-generator');
 const {
   back_hairs,
-  chara_has_ero_image,
+  check_chara_ero_image,
   front_hairs,
   race_clothe_list,
   top_hairs,
@@ -58,8 +58,8 @@ module.exports = {
    */
   generate(chara, flags) {
     const right_intro_list = [];
-
-    const body_hair_color = era.get(`cstr:${chara.id}:毛色`),
+    // TODO 兼容旧存档，记得删掉
+    const body_hair_color = era.get(`cstr:${chara.id}:毛色`) || '栗',
       hair_color = era.get(`cstr:${chara.id}:发色`),
       growth = era.get(`cflag:${chara.id}:成长阶段`),
       race = era.get(`cflag:${chara.id}:种族`),
@@ -201,7 +201,7 @@ module.exports = {
 
     const action_buffer = [];
     if (
-      !chara_has_ero_image[chara.id] &&
+      !check_chara_ero_image(chara.id) &&
       (!chara.id ||
         era.get(`love:${chara.id}`) >= 75 ||
         !era.get(`cflag:${chara.id}:父方角色`) ||

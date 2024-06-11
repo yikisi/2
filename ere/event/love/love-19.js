@@ -863,6 +863,7 @@ handlers[99] = async (digital, me, callname) => {
   era.println();
   era.setAlign('center');
   await era.printAndWait('爸爸妈妈：');
+  era.setAlign('center');
   await era.printAndWait('谢谢你们。');
   era.setAlign('right');
   await era.printAndWait(['——你们的', child]);

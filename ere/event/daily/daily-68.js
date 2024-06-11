@@ -19,6 +19,9 @@ const event_hooks = require('#/data/event/event-hooks');
 const handlers = {};
 
 handlers[event_hooks.select] = () => {
+  if (!sys_check_awake(68)) {
+    throw new Error();
+  }
   const love = era.get('love:68'),
     kita = get_chara_talk(68),
     me = get_chara_talk(0),
@@ -728,6 +731,9 @@ handlers[event_hooks.good_night] = async (hook) => {
 };
 
 handlers[event_hooks.talk] = async () => {
+  if (!sys_check_awake(68)) {
+    throw new Error();
+  }
   const me = get_chara_talk(0);
   let talk_arr;
   switch (era.get('cflag:68:干劲')) {
