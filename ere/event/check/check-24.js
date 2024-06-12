@@ -13,6 +13,8 @@ const { get_chara_color } = require('#/data/chara-colors');
 const MayaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-24');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const MayaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-24');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -52,7 +54,19 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const edu_weeks = era.get('cflag:24:育成回合计时');
+    const edu_weeks = era.get('cflag:24:育成回合计时'),
+      life_marks = new MayaLifeMarks();
+    if (
+      era.get('cflag:24:招募状态') === recruit_flags.yes &&
+      era.get('love:24') >= 25 &&
+      !life_marks._24
+    ) {
+      life_marks._24 = 1;
+      add_event(
+        event_hooks.week_end,
+        new EventObject(24, cb_enum.love).set_arg(24),
+      );
+    }
     if (edu_weeks < 3 * 48) {
       const event_marks = new MayaEduMarks();
       const event_obj = new EventObject(24, cb_enum.edu);
