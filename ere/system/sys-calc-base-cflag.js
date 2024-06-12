@@ -275,7 +275,7 @@ module.exports = {
   },
   /** @returns {{curr:{race:number,week:number},last:{race:number,week:number}}} */
   sys_reg_race(chara_id) {
-    return (
+    const ret =
       era.get(`cflag:${chara_id}:出走登记`) ||
       era.set(`cflag:${chara_id}:出走登记`, {
         curr: {
@@ -286,7 +286,9 @@ module.exports = {
           race: -1,
           week: -1,
         },
-      })
-    );
+      });
+    delete ret.curr.id;
+    delete ret.last.id;
+    return ret;
   },
 };

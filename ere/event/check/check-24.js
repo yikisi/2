@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 
 const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
@@ -20,14 +21,14 @@ const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 const aim_races = {};
-aim_races[race_enum.begin_race] = 2;
-aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.hans_dai, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
+aim_races[race_enum.begin_race] = 3;
+aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 3;
+aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 3;
+aim_races[get_aim_race_index(race_enum.hans_dai, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 3;
 
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
@@ -70,7 +71,9 @@ module.exports = class extends CustomizedCheck {
     if (edu_weeks < 3 * 48) {
       const event_marks = new MayaEduMarks();
       const event_obj = new EventObject(24, cb_enum.edu);
-      const event_obj_special = new EventObject(24, cb_enum.edu, true);
+      const event_obj_special = new EventObject(24, cb_enum.edu, true).set_arg(
+        edu_weeks,
+      );
       check_and_add_event(
         event_marks,
         edu_weeks,
@@ -99,7 +102,7 @@ module.exports = class extends CustomizedCheck {
         event_hooks.back_school,
         event_obj,
       );
-      if (event_marks.get('dokidoki_live') === 2) {
+      if (event_marks.dokidoki_live === 2) {
         check_and_add_event(
           event_marks,
           edu_weeks,
@@ -108,7 +111,7 @@ module.exports = class extends CustomizedCheck {
           event_obj,
         );
       }
-      if (event_marks.get('excited_live') === 2) {
+      if (event_marks.excited_live === 2) {
         check_and_add_event(
           event_marks,
           edu_weeks,
@@ -128,7 +131,7 @@ module.exports = class extends CustomizedCheck {
         event_marks,
         edu_weeks,
         'race_lesson',
-        event_hooks.recruit_start,
+        event_hooks.back_school,
         event_obj,
       );
       check_and_add_event(
@@ -145,68 +148,55 @@ module.exports = class extends CustomizedCheck {
         event_hooks.office_study,
         event_obj,
       );
-      check_and_add_event(
-        event_marks,
-        edu_weeks,
-        'maya_takeoff',
-        event_hooks.office_study,
-        event_obj,
-      );
+      if (
+        race_infos[sys_reg_race(24).curr.race]?.race_class === class_enum.G1
+      ) {
+        check_and_add_event(
+          event_marks,
+          edu_weeks,
+          'maya_takeoff',
+          event_hooks.office_study,
+          event_obj,
+        );
+      }
+
+      if (
+        edu_weeks ===
+        new RaceHistory(24)
+          .get_entries()
+          .findLast((e) => e.race === race_enum.begin_race)?.weeks +
+          4
+      ) {
+        add_event(
+          event_hooks.week_start,
+          event_obj_special.copy().set_arg('date'),
+        );
+      }
 
       switch (edu_weeks) {
-        // 经典年1月第一周
-        case 47 + 1:
+        case 16: // 我想闪闪发亮！
+        case 47 + 1: // 新年的抱负
+        case 47 + 3: // 锁定目标
+        case 47 + 29: // 夏季合宿（经典年）
+        case 47 + 30: // 代码：燃烧！
+        case 47 + 31: // 祭典
+        case 95 + 4: // 青春的闪耀
+        case 95 + 6: // 情人节
+        case 95 + 14: // 粉丝感谢祭
+        case 95 + 20: // 迈向夕阳
+        case 95 + 29: // 夏季合宿（资深年）
+        case 95 + 48: // 圣诞节
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        case 47 + 3:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 8月第一周
-        case 47 + 29:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        case 47 + 30:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 8月第三周
-        case 47 + 31:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 8月第四周
-        case 47 + 32:
+        case 47 + 32: // 夏季合宿（经典年）结束
+        case 95 + 32: // 夏季合宿（资深年）结束
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        // 资深年1月第一周
-        case 95 + 1:
+        case 95 + 1: // 新年参拜
           add_event(event_hooks.out_church, event_obj_special);
           break;
-        // 1月第二周
-        case 95 + 2:
+        case 95 + 2: // 抽奖试手气
           add_event(event_hooks.out_start, event_obj_special);
-          break;
-        // 2月第二周
-        case 95 + 6:
-          add_event(event_hooks.week_start, event_obj_special);
-          add_event(event_hooks.out_start, event_obj_special);
-          break;
-        // 8月第一周
-        case 95 + 14:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        case 95 + 20:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        case 95 + 29:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 8月第四周
-        case 95 + 32:
-          add_event(event_hooks.week_end, event_obj_special);
-          break;
-        // 12月第四周
-        case 95 + 48:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
       }
       check_and_register_aim_race(24, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 9) {

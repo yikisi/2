@@ -337,9 +337,7 @@ handlers[event_hooks.out_river] = async (hook) => {
       ' 一起在河堤边散步……',
     ]);
     if (Math.random() < 0.5) {
-      await coffee.say_and_wait(
-        '……ねえ私に気つﾞいて，This is my love song ♪……',
-      );
+      await coffee.say_and_wait('……ねえ私に気つﾞいて，This is my love song♪……');
       await era.printAndWait([
         '听到了身边传来的小声哼唱，',
         coffee.get_colored_name(),

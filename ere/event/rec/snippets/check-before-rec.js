@@ -9,7 +9,9 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 async function check_before_rec(chara_id) {
   const chara = get_chara_talk(chara_id);
   era.print([
-    '训练员与马娘的契约足以影响双方一生，确定要招募 ',
+    '训练员与马',
+    era.get('flag:角色性别') === 1 ? '郎' : '娘',
+    '的契约足以影响双方一生，确定要招募 ',
     chara.get_colored_name(),
     ' 吗？',
   ]);

@@ -718,7 +718,7 @@ module.exports = {
                 '犯人果然是那个人啊！Maya可是一开始就猜到了！',
               );
               await maya.say_and_wait([
-                '怎么样，Maya很聪明吧♪ ',
+                '怎么样，Maya很聪明吧♪',
                 callname,
                 ' 再夸夸我也可以哦？',
               ]);

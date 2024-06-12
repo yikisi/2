@@ -39,7 +39,7 @@ module.exports = async (hook, _, event_object) => {
       break;
     case 49:
       await maya.print_and_wait(
-        `某一天，${maya.name}从不知名的渠道那里得到了神秘的书`,
+        `某一天，${maya.name} 从不知名的渠道那里得到了神秘的书`,
       );
       await maya.say_and_wait(
         `这就是传说中只有大人才能看的书籍吗？只要看了这个，是不是Maya也能成为大人呢？`,
@@ -48,11 +48,11 @@ module.exports = async (hook, _, event_object) => {
       await maya.say_and_wait(`啊哇哇哇哇哇………………`);
       await maya.say_and_wait(`果…………果然，这种事情对Maya来说还是太早了！`);
       await maya.print_and_wait(
-        `尽管看到一半就因为过于刺激而放弃了，但书中的内容仍然给${maya.name}留下了深刻的印象。`,
+        `尽管看到一半就因为过于刺激而放弃了，但书中的内容仍然给 ${maya.name} 留下了深刻的印象。`,
       );
       await maya.say_and_wait(`不过，如果是和 ${callname} 的话…………？`);
-      await maya.say_and_wait(
-        `${maya.name}是一个天才，无论是什么都能很快的学会————或许很快有人就要被迫意识到这一点了。`,
+      await maya.print_and_wait(
+        `${maya.name} 是一个天才，无论是什么都能很快的学会————或许很快有人就要被迫意识到这一点了。`,
       );
       await sys_love_uma_in_event(24);
       break;
@@ -119,6 +119,7 @@ module.exports = async (hook, _, event_object) => {
       await maya.say_and_wait(
         '人家真受欢迎☆要是都没人自愿的话，干脆就公开募集吧～？……（偷瞄）。',
       );
+      era.drawLine();
       await era.printAndWait(
         `但是过了好几天${maya.sex}都迟迟未决定伴行者人选。正当 ${me.name} 想着究竟是怎么回事时……`,
       );
@@ -194,12 +195,13 @@ module.exports = async (hook, _, event_object) => {
         era.printButton('「更不得了的话……！？」', 1);
         await era.input();
         await ag.say_and_wait(
-          `唉……那我就用 ${callname} 的名字提出申请咯。可别因为那个『不得了的话』惹出麻烦啊。`,
+          `唉……那我就用 ${sys_get_callname(18, 0)} 的名字提出申请咯。可别因为那个『不得了的话』惹出麻烦啊。`,
         );
+        await sys_love_uma_in_event(24);
       } else {
         await maya.say_and_wait('……好的！耶嘿嘿，我好开心。');
         await ag.say_and_wait(
-          `那我就用 ${callname} 的名字提出申请咯。唉……活动当天可别惹麻烦哦。`,
+          `那我就用 ${sys_get_callname(18, 0)} 的名字提出申请咯。唉……活动当天可别惹麻烦哦。`,
         );
         await maya.say_and_wait(
           '嗯～～！终于要正式上场了～服装也准备好了！剩下的就是……',

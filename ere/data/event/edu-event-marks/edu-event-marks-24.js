@@ -2,6 +2,8 @@ const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 class MayaEduMarks extends EduEventMarks {
   st_check;
+  dokidoki_live;
+  excited_live;
 
   constructor() {
     super(24);
