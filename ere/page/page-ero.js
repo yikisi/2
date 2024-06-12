@@ -465,12 +465,18 @@ function get_chara_info(chara_id) {
   return ret;
 }
 
-async function page_ero(lover) {
+/**
+ * @param {number} [lover]
+ * @param {boolean} [skip_start_end]
+ */
+async function page_ero(lover, skip_start_end) {
   let curr_lover = lover || era.get('flag:当前互动角色');
   era.set('tflag:当前对手', curr_lover);
   let ero_flag = true;
-  era.drawLine();
-  await sys_call_ero_event(curr_lover, ero_hooks.ero_start);
+  if (!skip_start_end) {
+    era.drawLine();
+    await sys_call_ero_event(curr_lover, ero_hooks.ero_start);
+  }
 
   while (ero_flag) {
     await era.clear();
@@ -782,7 +788,10 @@ async function page_ero(lover) {
     }
   }
   await era.printAndWait('性事结束了……');
-  await sys_call_ero_event(curr_lover, ero_hooks.ero_end);
+  if (!skip_start_end) {
+    era.println();
+    await sys_call_ero_event(curr_lover, ero_hooks.ero_end);
+  }
   era.drawLine();
   for (const chara_id of get_characters_in_train()) {
     if (chara_id && sys_check_awake(chara_id) && !check_satisfied(chara_id)) {

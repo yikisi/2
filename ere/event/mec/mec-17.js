@@ -7,6 +7,10 @@ const { buff_colors } = require('#/data/color-const');
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 
 module.exports = class extends CustomizedMec {
+  init_love() {
+    era.set('love:17', 40 + era.get('flag:马娘初始爱慕'));
+  }
+
   get_love_buff() {
     return 20 * era.get('status:17:迷恋');
   }

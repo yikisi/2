@@ -122,7 +122,7 @@ module.exports = (handlers) => {
         new EroParticipant(0, part_enum.mouth),
         false,
       );
-      await print_ero_page(32);
+      await print_ero_page(32, true);
       await end_ero_and_show_result();
     } else if (love >= 50) {
       await tachyon.say_and_wait(['哦呀，', callname, '，情人节快乐！']);

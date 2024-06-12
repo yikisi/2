@@ -277,7 +277,7 @@ handlers[event_hooks.school_atrium] = async (
         Math.max(era.get('base:49:性欲'), lust_border.itch),
       );
       begin_and_init_ero(0, 7, 49);
-      await print_ero_page(7);
+      await print_ero_page(7, true);
       await end_ero_and_show_result(true);
     }
 
@@ -595,7 +595,7 @@ handlers[event_hooks.school_rooftop] = async (
       Math.max(era.get('base:49:性欲'), lust_border.absent_mind),
     );
     begin_and_init_ero(0, 7, 49);
-    await print_ero_page(49);
+    await print_ero_page(49, true);
     await end_ero_and_show_result(true);
   } else {
     await era.printAndWait(

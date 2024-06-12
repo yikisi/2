@@ -17,7 +17,7 @@ async function quick_into_sex(chara_id, is_rape) {
     era.set('tflag:强奸', chara_id);
     era.set('tflag:主导权', chara_id);
   }
-  await print_ero_page(chara_id);
+  await print_ero_page(chara_id, true);
   await end_ero_and_show_result(true);
 }
 

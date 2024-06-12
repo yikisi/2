@@ -55,7 +55,7 @@ async function love_god_common(
       set('tcvar:0:发情', 1);
       set(`tcvar:${god.id}:发情`, 1);
       update_ero_status(0, god.id);
-      await print_ero_page(god.id);
+      await print_ero_page(god.id, true);
       set_palam_to_max(0, part_enum.penis);
       set_palam_to_max(god.id, part_enum.virgin);
       set('tcvar:0:避孕套', 0);
@@ -98,7 +98,7 @@ async function love_god_common(
       set(`tcvar:${god.id}:发情`, 1);
       update_ero_status(0, god.id);
       update_ero_status(0, god.id);
-      await print_ero_page(god.id);
+      await print_ero_page(god.id, true);
       set_palam_to_max(god.id, part_enum.penis);
       set_palam_to_max(0, part_enum.virgin);
       set(`tcvar:${god.id}:避孕套`, 0);

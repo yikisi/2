@@ -485,7 +485,7 @@ module.exports = async (hook, _, event_object) => {
     era.set('tcvar:32:发情', 1);
     update_ero_status(0, 32);
     era.set('flag:当前位置', location_enum.hot_spring);
-    await print_ero_page(32);
+    await print_ero_page(32, true);
     era.set('flag:当前位置', location_enum.gate);
     await end_ero_and_show_result(true);
     await era.printAndWait([
