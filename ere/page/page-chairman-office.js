@@ -150,7 +150,7 @@ async function page_chairman_office() {
                     ['用名字指名', '用ID指名', '从列表里选', '再想想'].map(
                       (e, i) => {
                         return {
-                          accelerator: i,
+                          accelerator: i + 1,
                           content: e,
                           config: { width: 6, align: 'center' },
                           type: 'button',
@@ -161,18 +161,18 @@ async function page_chairman_office() {
                   const star_premium_draw = sys_get_star_premium_draw();
                   let temp = await era.input();
                   switch (temp) {
-                    case 0:
+                    case 1:
                       era.print('请输入想指名的角色名');
                       temp = await era.input();
                       temp = temp_list.filter(
                         (e) => era.get(`static:${e}:name`) === temp,
                       )[0];
                       break;
-                    case 1:
+                    case 2:
                       era.print('请输入想指名的角色ID');
                       temp = await era.input();
                       break;
-                    case 2:
+                    case 3:
                       temp = [];
                       temp_list.forEach((chara_id) => {
                         const color = get_chara_color(chara_id);
@@ -209,7 +209,7 @@ async function page_chairman_office() {
                       era.printMultiColumns(temp);
                       temp = await era.input();
                       break;
-                    case 3:
+                    case 4:
                       temp = -255;
                   }
                   if (temp !== -255) {
