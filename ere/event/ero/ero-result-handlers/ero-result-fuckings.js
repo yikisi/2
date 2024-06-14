@@ -1,3 +1,5 @@
+const { add, get } = require('#/era-electron');
+
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { add_palam } = require('#/system/ero/sys-calc-palam');
@@ -92,11 +94,28 @@ module.exports = (handlers) => {
     }
     sys_do_sex(
       new EroParticipant(attacker, part_enum.penis, 0.2),
-      new EroParticipant(defender, part_enum.virgin, 0.3),
+      new EroParticipant(defender, part_enum.virgin, 0.8),
     );
+    add(`nowex:${attacker.id}:体力消耗`, get(`tcvar:${defender.id}:体重`) / 4);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(defender, '羞耻', base_emotion_juel / 2);
-    add_attr_exp(attacker, attr_enum.strength, 1.2);
+    add_attr_exp(attacker, attr_enum.strength, 1.5);
+  };
+
+  handlers[ero_hooks.fucked_suspended_congress] = (
+    attacker,
+    defender,
+    hook,
+    extra_flag,
+  ) => {
+    sys_do_sex(
+      new EroParticipant(attacker, part_enum.virgin, 0.2),
+      new EroParticipant(defender, part_enum.penis, 0.8),
+    );
+    add(`nowex:${attacker.id}:体力消耗`, get(`tcvar:${defender.id}:体重`) / 4);
+    add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
+    add_juel(defender, '羞耻', base_emotion_juel / 2);
+    add_attr_exp(attacker, attr_enum.strength, 1.5);
   };
 
   handlers[ero_hooks.hug_suspended_congress] = (
@@ -107,12 +126,13 @@ module.exports = (handlers) => {
   ) => {
     sys_do_sex(
       new EroParticipant(attacker, part_enum.penis, 0.2),
-      new EroParticipant(defender, part_enum.virgin, 0.3),
+      new EroParticipant(defender, part_enum.virgin, 0.8),
     );
+    add(`nowex:${attacker.id}:体力消耗`, get(`tcvar:${defender.id}:体重`) / 4);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(defender, '恐惧', base_emotion_juel / 2);
     add_juel(defender, '羞耻', base_emotion_juel / 2);
-    add_attr_exp(attacker, attr_enum.strength, 1.2);
+    add_attr_exp(attacker, attr_enum.strength, 1.5);
   };
 
   handlers[ero_hooks.ask_cowgirl] = (attacker, defender, hook, extra_flag) => {
@@ -371,11 +391,28 @@ module.exports = (handlers) => {
   ) => {
     sys_do_sex(
       new EroParticipant(attacker, part_enum.penis, 0.2),
-      new EroParticipant(defender, part_enum.anal, 0.3),
+      new EroParticipant(defender, part_enum.anal, 0.8),
     );
+    add(`nowex:${attacker.id}:体力消耗`, get(`tcvar:${defender.id}:体重`) / 4);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(defender, '羞耻', base_emotion_juel / 2);
-    add_attr_exp(attacker, attr_enum.strength, 1.2);
+    add_attr_exp(attacker, attr_enum.strength, 1.5);
+  };
+
+  handlers[ero_hooks.fucked_suspended_congress_anal_sex] = (
+    attacker,
+    defender,
+    hook,
+    extra_flag,
+  ) => {
+    sys_do_sex(
+      new EroParticipant(defender, part_enum.anal, 0.2),
+      new EroParticipant(attacker, part_enum.penis, 0.8),
+    );
+    add(`nowex:${attacker.id}:体力消耗`, get(`tcvar:${defender.id}:体重`) / 4);
+    add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
+    add_juel(defender, '羞耻', base_emotion_juel / 2);
+    add_attr_exp(attacker, attr_enum.strength, 1.5);
   };
 
   handlers[ero_hooks.hug_suspended_congress_anal_sex] = (
@@ -386,12 +423,13 @@ module.exports = (handlers) => {
   ) => {
     sys_do_sex(
       new EroParticipant(attacker, part_enum.penis, 0.2),
-      new EroParticipant(defender, part_enum.anal, 0.3),
+      new EroParticipant(defender, part_enum.anal, 0.8),
     );
+    add(`nowex:${attacker.id}:体力消耗`, get(`tcvar:${defender.id}:体重`) / 4);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(defender, '恐惧', base_emotion_juel / 2);
     add_juel(defender, '羞耻', base_emotion_juel / 2);
-    add_attr_exp(attacker, attr_enum.strength, 1.2);
+    add_attr_exp(attacker, attr_enum.strength, 1.5);
   };
 
   handlers[ero_hooks.ask_fuck_anal] = (attacker, defender, _, extra_flag) => {

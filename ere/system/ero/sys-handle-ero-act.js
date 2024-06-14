@@ -230,9 +230,9 @@ async function sys_handle_ero_act(command, filters, _shown) {
       await next_turn();
     }
   } else if (command === 900) {
-    let option_flag = true;
+    let option_flag = 1;
     while (option_flag) {
-      era.printMultiColumns([
+      (option_flag - 1 ? era.replaceInColRows : era.printInColRows)([
         ...new Array(8).fill(0).map((_, i) => {
           return {
             accelerator: i,
@@ -246,9 +246,10 @@ async function sys_handle_ero_act(command, filters, _shown) {
         }),
         { accelerator: 999, content: '返回', type: 'button' },
       ]);
-      const ret = await era.input();
+      option_flag = 2;
+      const ret = await era.input({ hideInput: true });
       if (ret === 999) {
-        option_flag = false;
+        option_flag = 0;
       } else {
         era.set(`flag:${ret + 950}`, !era.get(`flag:${ret + 950}`));
       }

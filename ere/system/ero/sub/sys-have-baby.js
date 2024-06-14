@@ -339,7 +339,11 @@ async function sys_have_baby(mother_id) {
   child_life_marks.unexpected_child = mother_life_marks.unexpected_pregnant;
   mother_life_marks.unexpected_pregnant = 0;
 
-  if (!father_id && era.get(`love:${mother_id}`) < 90) {
+  if (
+    !father_id &&
+    era.get(`love:${mother_id}`) < 90 &&
+    (mother_id < 340 || mother_id > 342)
+  ) {
     if (era.get(`mark:${mother_id}:同心`) >= 2) {
       sys_like_chara(mother_id, 0, 50);
       await add_juel_out_of_train(mother_id, '顺从', 200);

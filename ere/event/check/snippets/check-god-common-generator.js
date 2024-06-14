@@ -168,6 +168,7 @@ module.exports = (god_id) => {
                   );
                 }
                 era.print([me.get_colored_name(), ' 的 ', ...ret, '！']);
+                era.add('flag:当前声望', -200);
                 relation = 100;
               }
               break;

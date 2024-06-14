@@ -353,6 +353,11 @@ function init_ero(...ids) {
   const is_sex = era.getCharactersInTrain().length > 1;
   const is_raping_in_sleep = is_sex && !sys_check_awake(0);
   ids.forEach((chara_id) => {
+    era.set(
+      `tcvar:${chara_id}:体重`,
+      20 * (era.get(`cflag:${chara_id}:身高`) / 100) ** 2 +
+        (era.get(`base:${chara_id}:体重偏差`) * 10) / 2000,
+    );
     is_sex && era.add(`exp:${chara_id}:性爱次数`, 1);
     is_raping_in_sleep && era.add(`exp:${chara_id}:睡奸次数`, 1);
     era.set(`tcvar:${chara_id}:性欲缓存`, era.get(`base:${chara_id}:性欲`));

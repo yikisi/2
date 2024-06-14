@@ -754,17 +754,22 @@ module.exports = async (chara_id, hook, extra_flag) => {
       hook,
       extra_flag,
     );
-    const aim_handler =
-      (sys_check_awake(defender) ? handlers : sleep_handlers)[hook.hook] ||
-      handlers[hook.hook];
-    if (aim_handler) {
-      await aim_handler(
+    let handler_dict = {};
+    if (!sys_check_awake(defender)) {
+      handler_dict = sleep_handlers;
+    } else if (era.get('tflag:强奸') < 0) {
+      handler_dict = handlers;
+    }
+    const aim_handler = handler_dict[hook.hook];
+    if (
+      !aim_handler ||
+      (await aim_handler(
         get_chara_talk(attacker),
         get_chara_talk(defender),
         hook,
         extra_flag,
-      );
-    } else {
+      ))
+    ) {
       era.print([
         '【',
         get_chara_talk(attacker).get_colored_name(),

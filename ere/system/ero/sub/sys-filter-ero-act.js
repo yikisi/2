@@ -125,7 +125,7 @@ function sys_filter_ero_act(attacker, defender, filters) {
       (!attacker || check_lubrication(chara_id, part_enum.virgin));
   });
   tag_checks[attacker][ero_hook_tags.height_check] =
-    era.get(`cflag:${attacker}:身高`) > era.get(`cflag:${defender}:身高`);
+    era.get(`cflag:${attacker}:身高`) > era.get(`cflag:${defender}:身高`) + 20;
   const supporter = era.get('tflag:当前助手');
   const supporter_tag_checks = {};
   supporter_tag_checks[ero_hook_tags.supporter_awake] =

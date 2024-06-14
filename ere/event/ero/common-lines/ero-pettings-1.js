@@ -418,7 +418,7 @@ module.exports = (handlers) => {
         ' 的大腿……】',
       ]));
     if (hook.arg) {
-      if (!attacker.id) {
+      if (!attacker.id && era.get(`cflag:${defender.id}:种族`)) {
         await attacker.print_and_wait(
           '作为训练员，将面前担当的双腿，用性的意味去观赏与抚摸……',
         );
@@ -440,8 +440,10 @@ module.exports = (handlers) => {
       await attacker.print_and_wait(
         '有着能因为手指的爱抚而发起抖的绝佳敏感度。',
       );
-      await attacker.print_and_wait('真浪费啊……');
-      await attacker.print_and_wait('这样的双腿只是为了比赛而存在什么的……');
+      if (era.get(`cflag:${defender.id}:种族`)) {
+        await attacker.print_and_wait('真浪费啊……');
+        await attacker.print_and_wait('这样的双腿只是为了比赛而存在什么的……');
+      }
     }
   };
 

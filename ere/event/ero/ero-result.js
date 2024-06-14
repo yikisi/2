@@ -102,7 +102,7 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
   let wait_flag;
   if (mother_id) {
     let relation_change = 100;
-    if (love < 90) {
+    if (love < 90 && (mother_id < 340 || mother_id > 342)) {
       switch (unexpected_pregnant) {
         case unexpected_pregnant_enum.father_sleep:
           relation_change = 0;
