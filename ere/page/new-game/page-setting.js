@@ -395,11 +395,12 @@ async function page_settings() {
     }
   }
 
-  let selected_setting = undefined;
+  await era.clear();
+  let selected_setting = undefined,
+    flag_print = true;
   while (flag_setting) {
-    await era.clear();
-
-    era.printMultiColumns([
+    const buffer = [];
+    buffer.push([
       { config: { content: '预设' }, type: 'divider' },
       ...difficulties.map((e, i) => {
         return {
@@ -414,7 +415,11 @@ async function page_settings() {
       }),
     ]);
     if (difficulties[theme]) {
-      era.print(difficulties[theme].d, { align: 'center' });
+      buffer[0].push({
+        config: { align: 'center' },
+        content: difficulties[theme].d,
+        type: 'text',
+      });
     }
 
     const options = [
@@ -690,18 +695,22 @@ async function page_settings() {
       //     ][v],
       // },
     ];
-    const buffer = [];
-    buffer.push({
-      config: {
-        content: `游戏选项`,
-      },
-      type: 'divider',
-    });
+    buffer.push(
+      [
+        {
+          config: {
+            content: `游戏选项`,
+          },
+          type: 'divider',
+        },
+      ],
+      [],
+    );
     let val_index;
     options.forEach((e, i) => {
       const val = era.get(`flag:${e.key}`);
       val_index = e.options.findIndex((o) => o.v === val);
-      buffer.push(
+      buffer.at(-1).push(
         {
           type: 'text',
           content: e.label || e.key,
@@ -720,7 +729,7 @@ async function page_settings() {
         }),
       );
       if (i < options.length - 1) {
-        buffer.push({
+        buffer.at(-1).push({
           config: { width: 20, offset: 4 },
           content:
             e.tip && (selected_setting === undefined || i === selected_setting)
@@ -730,7 +739,7 @@ async function page_settings() {
         });
       }
     });
-    buffer.push(
+    buffer.at(-1).push(
       {
         accelerator: 998,
         config: { align: 'right', offset: 4, width: 4 },
@@ -748,15 +757,20 @@ async function page_settings() {
       selected_setting === undefined ||
       selected_setting === options.length - 1
     ) {
-      buffer.push({
-        config: { width: 20, offset: 4 },
-        content: options.at(-1)['tip'] ? options.at(-1)['tip'](val_index) : '',
-        type: 'text',
-      });
+      buffer.push([
+        {
+          config: { width: 20, offset: 4 },
+          content: options.at(-1)['tip']
+            ? options.at(-1)['tip'](val_index)
+            : '',
+          type: 'text',
+        },
+      ]);
     }
-    era.printMultiColumns(buffer);
+    (flag_print ? era.printInColRows : era.replaceInColRows)(...buffer);
+    flag_print = false;
 
-    const ret = await era.input();
+    const ret = await era.input({ hideInput: true });
     switch (ret) {
       case 998:
         flag_setting = false;
