@@ -56,7 +56,7 @@ function reset_chara(chara_id) {
       ] || [];
     new CharaSkills(chara_id).add(...skill_set.slice(0, 4));
     new CharaAvailableSkills(chara_id).add(...skill_set.slice(4));
-    era.set(`exp:${chara_id}:技能点数`, 120 + 480 * (skill_set.length === 0));
+    era.set(`exp:${chara_id}:技能点数`, 120 + 680 * (skill_set.length === 0));
     era.set(`cflag:${chara_id}:育成用变量`, {});
     new RaceHistory(chara_id).reset();
   } else {

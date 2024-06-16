@@ -437,7 +437,7 @@ async function sys_next_week() {
               available_control = new CharaAvailableSkills(chara_id),
               to_get = available_control.get().slice(0, 2);
             if (to_get.length === 0) {
-              era.add(`exp:${chara_id}:技能点数`, 240);
+              era.add(`exp:${chara_id}:技能点数`, 320);
             } else {
               available_control.remove(...to_get);
               get_skills_and_print_in_event(chara_id, to_get, skill_control);
