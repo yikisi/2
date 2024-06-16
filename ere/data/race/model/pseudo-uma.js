@@ -143,18 +143,20 @@ class PseudoUma {
     // 下坡计时
     downhill: 0,
     greenSkills: 0,
+    loc_mind: 0,
     location: 0,
     locationPlanRush: undefined,
     overtakeAim: undefined,
     slope: 0,
     stamina: 0,
     staminaCost: 0,
+    // 用于阻挡计算的实时力量
+    strength: 0,
     // 焦躁计时
     temptation: 0,
     velocityIdeal: 0,
     velocityPlanRush: 0,
     velocityReal: 0,
-    loc_mind: 0,
   };
   // 随机发动的技能的位置指标
   random = {

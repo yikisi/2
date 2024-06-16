@@ -1,20 +1,20 @@
 const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
-  800021,
-  '辛苦的马生在等我',
-  '在比赛终盘时失去全部体力开始散步，并且想象着凌辱一般的嫌恶眼神快要去了',
-  80002,
+  990011,
+  '队长，我不想努力了',
+  '在比赛终盘时极大幅度提高速度并恢复体力',
+  99001,
   UmaSkill.rarity_enum.spe_r,
-  0b100100,
-  0,
+  0b100010,
+  1000,
   [() => true, () => true],
-  [(args) => args.phase === 2, () => false],
+  [(args) => args.phase >= 2, () => false],
   [60, 0],
-  [500, 500],
+  [500, 0],
   [
     [
-      UmaSkill.ability_type_enum.CurrentSpeed,
+      UmaSkill.ability_type_enum.CurrentSpeedWithNaturalDeceleration,
       UmaSkill.ability_type_enum.HpRate,
       UmaSkill.ability_type_enum.no,
     ],
@@ -37,17 +37,17 @@ module.exports = new UmaSkill(
     ],
   ],
   [
-    [-20, -1, 0],
+    [10, 1, 0],
     [0, 0, 0],
   ],
   [
     [
       UmaSkill.target_type_enum.Self,
-      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.Self,
       UmaSkill.target_type_enum.no,
     ],
     [
-      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
       UmaSkill.target_type_enum.no,
       UmaSkill.target_type_enum.no,
     ],
@@ -56,8 +56,8 @@ module.exports = new UmaSkill(
     [0, 0, 0],
     [0, 0, 0],
   ],
-  [0, 0],
-  [0, 0],
+  [1, 2],
+  [400, 400],
   0,
   9999,
   false,

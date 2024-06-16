@@ -118,6 +118,13 @@ function sys_sim_race(list_chara, race_info) {
             mod_stamina_cost_mess) /
           frame_rate;
       }
+      const stamina_ratio = uma.race.stamina / uma.base.stamina;
+      uma.race.strength = uma.attrs[attr_enum.strength];
+      if (stamina_ratio < 0.2) {
+        uma.race.strength /= 2;
+      } else if (stamina_ratio < 0.5) {
+        uma.race.strength *= 3 / 4;
+      }
 
       record_speed_list.at(-1)[uma.index_race] = uma.race.velocityReal;
       record_stamina_list.at(-1)[uma.index_race] = uma.race.stamina;
@@ -286,17 +293,9 @@ function sys_sim_race(list_chara, race_info) {
         uma.race.staminaCost *= 0.6;
       }
       if (
-        uma.race.location > 150 &&
+        uma.race.phase >= 2 &&
         uma.race.conditionParams.blocked_front &&
-        Math.random() >=
-          (uma.attrs[attr_enum.strength] *
-            uma.race.stamina *
-            l[i - 1].base.stamina +
-            0.000001) /
-            (l[i - 1].attrs[attr_enum.strength] *
-              l[i - 1].race.stamina *
-              uma.base.stamina +
-              0.000001)
+        Math.random() >= uma.race.strength / l[i - 1].race.strength
       ) {
         uma.race.velocityReal = Math.max(
           Math.min(

@@ -44,3 +44,4 @@ EraUma v0.7，适配 [EraElectron v1.2.4 (zero)](https://gitgud.io/umaera/era-el
   * 卓芙
 * 现在在海滩时，【显示半身像】和【显示头像】按钮也可以正常工作了
 * 修复了三女神入队后祈祷变强不会消耗声望的bug
+* 修复了声望低于消耗时仍然可以通过三女神祈祷恢复健康的bug
