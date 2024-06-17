@@ -19,9 +19,11 @@ function check_and_add_event(
   cb,
 ) {
   if (
+    !edu_marks._r_e_check &&
     !edu_marks.get(param_name) &&
     (weeks >= 3 * 48 || Math.random() < Math.log(weeks) / log_edu_weeks)
   ) {
+    edu_marks._r_e_check = 1;
     edu_marks.add(param_name);
     add_event(hook, event_obj.copy().set_arg(param_name));
     cb !== undefined && cb();

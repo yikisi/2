@@ -50,6 +50,7 @@ const {
 const { part_enum, part_talents } = require('#/data/ero/part-const');
 const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const event_hooks = require('#/data/event/event-hooks');
 const GrandLives = require('#/data/event/grand-lives');
@@ -138,6 +139,9 @@ async function sys_next_week() {
       }
       final_act_list.push(act);
       tmp = final_act_list.length - 1;
+    }
+    if (final_act_list.length > 0 && era.get('item:马跳S家庭装')) {
+      era.set('status:0:马跳S', 1);
     }
     for (const act of final_act_list) {
       if (act.prison) {
@@ -823,6 +827,7 @@ async function sys_next_week() {
       );
     }
     get_custom_check(chara_id).check_next_week();
+    new EduEventMarks(chara_id)._r_e_check = 0;
   }
 
   if (race_punish) {

@@ -261,6 +261,8 @@ handlers[event_hooks.out_shopping] = async (chara_id, hook) => {
     await print_shop_page([
       ...new Array(11).fill(0).map((_, i) => 810 + i),
       { id: 821, limit: true },
+      { id: 824, limit: true },
+      { id: 825, limit: true },
     ]);
     random_cost_in_action(0, [0, 100], [0, 100]);
   } else {

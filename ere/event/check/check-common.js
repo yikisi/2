@@ -263,6 +263,10 @@ class CustomizedCheck {
     ) {
       return false;
     }
+    if (era.get('item:透明棉被')) {
+      era.logger.debug(`角色 ${this.id} 睡奸：100%(透明棉被)`);
+      return true;
+    }
     if (delta < 0) {
       delta = 0;
     }
