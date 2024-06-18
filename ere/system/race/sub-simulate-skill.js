@@ -390,7 +390,7 @@ function sub_simulate_skill(
         mod_stamina_cost_mess *
         uma.factorFinal.sCostMult;
       // 体力足够以最大冲刺速度跑完则直接冲
-      if (planStaminaCost * distLeft < uma.race.stamina * planVelocity) {
+      if (planStaminaCost * distLeft <= uma.race.stamina * planVelocity) {
         uma.race.velocityPlanRush = planVelocity;
         !uma.flag.finalRush &&
           record_events_list
@@ -432,7 +432,7 @@ function sub_simulate_skill(
           let timeNorm = Math.ceil(
             (rushLocation - uma.race.location) / uma.race.velocityIdeal,
           );
-          //记录计划冲刺速度 所用时间 及开始位置
+          // 记录计划冲刺速度 所用时间 及开始位置
           let itemPlan = {
             velocity: planVelocity,
             time: timeRush + timeNorm,
@@ -589,11 +589,13 @@ function sub_simulate_skill(
         ) {
           uma.race.conditionParams.is_activate_any_skill = 1;
           skill.count[i]++;
-          skill.cooldown[i] = skill.data.cooldown_times[i] * frame_rate;
+          skill.cooldown[i] =
+            (skill.data.cooldown_times[i] * frame_rate * race_info.span) / 1000;
           if (!skill.data.is_two_phase) {
             skill.cooldown[1 - i] = skill.cooldown[i];
           }
-          skill.ability_time[i] = skill.data.ability_times[i] * frame_rate;
+          skill.ability_time[i] =
+            (skill.data.ability_times[i] * frame_rate * race_info.span) / 1000;
           for (let j = 0; j < skill.data.ability_types[i].length; ++j) {
             if (skill.data.ability_types[i][j] > 0) {
               let temp;

@@ -365,16 +365,25 @@ module.exports = async () => {
                     content: skill.get_colored_name(),
                     type: 'text',
                   },
-                  {
-                    config: {
-                      align: 'right',
-                      disabled: got_skills[s] || pt < skill.price,
-                      showAcc: got_skills[s] !== 1,
-                      width: 8,
-                    },
-                    content: got_skills[s] ? '已习得' : `${skill.price} PT`,
-                    type: 'button',
-                  },
+                  got_skills[s]
+                    ? {
+                        config: {
+                          align: 'right',
+                          width: 8,
+                        },
+                        content: '[已习得]',
+                        type: 'text',
+                      }
+                    : {
+                        config: {
+                          align: 'right',
+                          disabled: got_skills[s] || pt < skill.price,
+                          showAcc: got_skills[s] !== 1,
+                          width: 8,
+                        },
+                        content: `${skill.price} PT`,
+                        type: 'button',
+                      },
                 ],
                 config: { width: 8 },
                 id: s,
