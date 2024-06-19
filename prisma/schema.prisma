@@ -2397,32 +2397,6 @@ model legend_race_npc {
   skill_set_id                Int
 }
 
-model limited_exchange {
-  id                   Int @id @default(autoincrement())
-  item_exchange_top_id Int
-  open_value           Int
-  item_lineup_value    Int
-  odds_id              Int
-  daily_race_odds      Int
-  daily_race_ceiling   Int
-  legend_race_odds     Int
-  legend_race_ceiling  Int
-  single_mode_odds     Int
-  single_mode_ceiling  Int
-  team_stadium_odds    Int
-  team_stadium_ceiling Int
-  start_date           Int
-  end_date             Int
-}
-
-model limited_exchange_reward {
-  id               Int @id @default(autoincrement())
-  group_id         Int
-  odds             Int
-  item_exchange_id Int
-  ribbon_value     Int
-}
-
 model live_data {
   music_id                 Int    @id @default(autoincrement())
   sort                     Int    @unique(map: "sqlite_autoindex_live_data_1")
@@ -2745,6 +2719,7 @@ model mini_bg_chara_motion {
   is_mob                  Int
   main_chara_num          Int
   pos_obj                 String
+  second_pos_obj          String
   position_file           String
   grid_pos_x              Int
   grid_pos_y              Int
@@ -2781,29 +2756,33 @@ model mini_face_type_data {
 }
 
 model mini_motion_set {
-  id                         Int
-  label                      String @id
-  body_motion                String
-  body_motion_type           Int
-  body_motion_play_type      Int
-  body_motion_scene_type     Int
-  scene_sub_folder           String
-  chara_type_target          Int
-  add_layer_index            Int
-  is_mirror                  Int
-  facial_motion              String
-  chara_face_type            String
-  transition_time            Int
-  ear_motion                 String
-  is_enable_randome_ear      Int
-  tail_motion                String
-  tail_motion_type           Int
-  is_enable_randome_tail     Int
-  prop_id                    Int
-  prop_motion                String
-  prop_motion_scene_type     Int
-  prop_attach_node_name_type Int
-  is_prop_require_motion_end Int
+  id                           Int
+  label                        String @id
+  body_motion                  String
+  body_motion_type             Int
+  body_motion_play_type        Int
+  body_motion_scene_type       Int
+  scene_sub_folder             String
+  chara_type_target            Int
+  add_layer_index              Int
+  is_mirror                    Int
+  facial_motion                String
+  chara_face_type              String
+  transition_time              Int
+  ear_motion                   String
+  is_enable_randome_ear        Int
+  tail_motion                  String
+  tail_motion_type             Int
+  is_enable_randome_tail       Int
+  prop_id                      Int
+  prop_motion                  String
+  prop_motion_scene_type       Int
+  prop_attach_node_name_type   Int
+  prop_id_2                    Int
+  prop_motion_2                String
+  prop_motion_scene_type_2     Int
+  prop_attach_node_name_type_2 Int
+  is_prop_require_motion_end   Int
 
   @@index([id], map: "mini_motion_set_0_id")
 }
@@ -3238,6 +3217,8 @@ model race_course_set {
   ground                       Int
   inout                        Int
   turn                         Int
+  run_outside                  Int
+  ex_camera                    Int
   fence_set                    Int
   float_lane_max               Int
   course_set_status_id         Int
@@ -6293,4 +6274,326 @@ model ultimate_race_select_top {
 
   @@index([group_id], map: "ultimate_race_select_top_0_group_id")
   @@ignore
+}
+
+model deck_recommend_exception {
+  support_card_id   Int @id @default(autoincrement())
+  distribution_flag Int
+}
+
+model deck_recommend_lv_correction {
+  condition_type Int @id @default(autoincrement())
+  correction_lv  Int
+}
+
+model deck_recommend_organize {
+  id            Int @id @default(autoincrement())
+  distance_type Int
+  priority      Int
+  command_id_1  Int
+  command_id_2  Int
+  command_id_3  Int
+  command_id_4  Int
+  command_id_5  Int
+  command_id_6  Int
+  start_date    Int
+  end_date      Int
+
+  @@index([distance_type], map: "deck_recommend_organize_0_distance_type")
+}
+
+model mini_mob {
+  id   Int @id @default(autoincrement())
+  type Int
+  body Int
+  hair Int
+  tail Int
+}
+
+model single_mode_cook_coin_rate {
+  id                 Int @id @default(autoincrement())
+  period             Int
+  material_count     Int
+  coin_quantity_rate Int
+
+  @@index([material_count, period], map: "single_mode_cook_coin_rate_0_material_count_1_period")
+}
+
+model single_mode_cook_cooking_cutt {
+  id                  Int    @id @default(autoincrement())
+  cooking_num         Int
+  cooking_motion_id_1 Int
+  cooking_motion_id_2 Int
+  cooking_motion_id_3 Int
+  cooking_motion_id_4 Int
+  success_motion_id   Int
+  camera              String
+
+  @@index([cooking_num], map: "single_mode_cook_cooking_cutt_0_cooking_num")
+}
+
+model single_mode_cook_cooking_rate {
+  id                           Int @id @default(autoincrement())
+  dish_type                    Int
+  cooking_cutt_id              Int
+  cooking_num                  Int
+  success_rate                 Int
+  great_success_rate           Int
+  confirmed_great_success_rate Int
+
+  @@index([dish_type], map: "single_mode_cook_cooking_rate_0_dish_type")
+}
+
+model single_mode_cook_cooking_type {
+  id                             Int    @id @default(autoincrement())
+  cooking_motion_id              Int
+  swap_type                      Int
+  cooking_motion_swap_id         Int
+  cooking_effect_name_1          String
+  cooking_effect_position_1      Int
+  cooking_effect_name_2          String
+  cooking_effect_position_2      Int
+  cooking_effect_swap_name_1     String
+  cooking_effect_swap_position_1 Int
+  cooking_effect_swap_name_2     String
+  cooking_effect_swap_position_2 Int
+
+  @@index([cooking_motion_id, swap_type], map: "single_mode_cook_cooking_type_0_cooking_motion_id_1_swap_type")
+  @@index([cooking_motion_id], map: "single_mode_cook_cooking_type_0_cooking_motion_id")
+}
+
+model single_mode_cook_dish {
+  id                      Int @id @default(autoincrement())
+  dish_set_id             Int
+  dish_group_id           Int
+  priority                Int
+  material_group_id       Int
+  effect_group_id         Int
+  success_effect_group_id Int
+  gain_coin               Int
+  gain_power              Int
+  sort_order              Int
+  dish_type               Int
+}
+
+model single_mode_cook_dish_cutt {
+  id                Int    @id @default(autoincrement())
+  command_group_id  Int
+  material_group_id Int
+  is_success        Int
+  cutt_id           String
+  prop_id           String
+
+  @@index([command_group_id, material_group_id], map: "single_mode_cook_dish_cutt_0_command_group_id_1_material_group_id")
+  @@index([cutt_id], map: "single_mode_cook_dish_cutt_0_cutt_id")
+  @@index([material_group_id], map: "single_mode_cook_dish_cutt_0_material_group_id")
+  @@index([command_group_id], map: "single_mode_cook_dish_cutt_0_command_group_id")
+}
+
+model single_mode_cook_dish_cutt_se {
+  id               Int    @id @default(autoincrement())
+  command_group_id Int
+  chara_type       Int
+  se_cue_name      String
+  se_cuesheet_name String
+
+  @@index([chara_type, command_group_id], map: "single_mode_cook_dish_cutt_se_0_chara_type_1_command_group_id")
+  @@index([chara_type], map: "single_mode_cook_dish_cutt_se_0_chara_type")
+  @@index([command_group_id], map: "single_mode_cook_dish_cutt_se_0_command_group_id")
+}
+
+model single_mode_cook_dish_effect {
+  id              Int @id @default(autoincrement())
+  effect_group_id Int
+  effect_type     Int
+  effect_value_1  Int
+  effect_value_2  Int
+  effect_value_3  Int
+  effect_value_4  Int
+
+  @@index([effect_group_id], map: "single_mode_cook_dish_effect_0_effect_group_id")
+}
+
+model single_mode_cook_dish_icon {
+  dish_group_id Int @id @default(autoincrement())
+  icon_id       Int
+}
+
+model single_mode_cook_dish_material {
+  id                Int @id @default(autoincrement())
+  material_group_id Int
+  material_id       Int
+  material_num      Int
+
+  @@index([material_group_id], map: "single_mode_cook_dish_material_0_material_group_id")
+}
+
+model single_mode_cook_dish_name {
+  id                 Int @id @default(autoincrement())
+  dish_group_id      Int
+  effect_group_id    Int
+  great_success_flag Int
+  chara_id           Int
+
+  @@index([dish_group_id], map: "single_mode_cook_dish_name_0_dish_group_id")
+}
+
+model single_mode_cook_garden {
+  facility_id Int @id @default(autoincrement())
+}
+
+model single_mode_cook_garden_bg {
+  id                       Int @id @default(autoincrement())
+  month                    Int
+  half_type                Int
+  progress                 Int
+  bg_id                    Int
+  sub_bg_id                Int
+  mini_motion_group_id_min Int
+  mini_motion_group_id_max Int
+
+  @@index([bg_id], map: "single_mode_cook_garden_bg_0_bg_id")
+  @@index([month, half_type], map: "single_mode_cook_garden_bg_0_month_1_half_type")
+}
+
+model single_mode_cook_garden_effect {
+  id              Int @id @default(autoincrement())
+  effect_group_id Int
+  effect_type     Int
+  effect_value_1  Int
+  effect_value_2  Int
+  effect_value_3  Int
+  effect_value_4  Int
+
+  @@index([effect_group_id], map: "single_mode_cook_garden_effect_0_effect_group_id")
+}
+
+model single_mode_cook_garden_level {
+  id              Int @id @default(autoincrement())
+  facility_id     Int
+  garden_lv       Int
+  facility_lv     Int
+  effect_group_id Int
+  coin_num        Int
+
+  @@index([facility_id, garden_lv], map: "single_mode_cook_garden_level_0_facility_id_1_garden_lv")
+  @@index([garden_lv], map: "single_mode_cook_garden_level_0_garden_lv")
+  @@index([facility_id], map: "single_mode_cook_garden_level_0_facility_id")
+}
+
+model single_mode_cook_listener {
+  id     Int    @id @default(autoincrement())
+  camera String
+  pos_x  Int
+  pos_y  Int
+  pos_z  Int
+
+  @@index([camera], map: "single_mode_cook_listener_0_camera")
+}
+
+model single_mode_cook_material_rate {
+  id                     Int @id @default(autoincrement())
+  boost_type             Int
+  material_count         Int
+  effect_type            Int
+  material_quantity_rate Int
+
+  @@index([material_count, boost_type], map: "single_mode_cook_material_rate_0_material_count_1_boost_type")
+}
+
+model single_mode_cook_message {
+  id             Int @id @default(autoincrement())
+  view_type      Int
+  condition_flag Int
+
+  @@index([view_type], map: "single_mode_cook_message_0_view_type")
+}
+
+model single_mode_cook_motion_group {
+  id                       Int @id @default(autoincrement())
+  bg_motion_id_1           Int
+  bg_swap_motion_id_1_1    Int
+  bg_swap_motion_speed_1_1 Int
+  bg_swap_motion_blend_1_1 Int
+  bg_swap_motion_id_1_2    Int
+  bg_swap_motion_speed_1_2 Int
+  bg_swap_motion_blend_1_2 Int
+  bg_motion_id_2           Int
+  bg_swap_motion_id_2_1    Int
+  bg_swap_motion_blend_2_1 Int
+  bg_swap_motion_id_2_2    Int
+  bg_swap_motion_blend_2_2 Int
+  bg_motion_id_3           Int
+  bg_swap_motion_id_3_1    Int
+  bg_swap_motion_blend_3_1 Int
+  bg_swap_motion_id_3_2    Int
+  bg_swap_motion_blend_3_2 Int
+}
+
+model single_mode_cook_motion_status {
+  id              Int @id @default(autoincrement())
+  turn_progress   Int
+  garden_progress Int
+  motion_id_1     Int
+  motion_id_2     Int
+
+  @@index([turn_progress, garden_progress], map: "single_mode_cook_motion_status_0_turn_progress_1_garden_progress")
+}
+
+model single_mode_cook_power_data {
+  id                Int @id @default(autoincrement())
+  cook_type         Int
+  turn_num          Int
+  success_num       Int
+  great_success_num Int
+  garden_lv         Int
+}
+
+model single_mode_cook_stand_motion {
+  id                   Int @id @default(autoincrement())
+  chara_id             Int
+  type                 Int
+  condition_type       Int
+  mini_chara_motion_id Int
+
+  @@index([type, condition_type], map: "single_mode_cook_stand_motion_0_type_1_condition_type")
+  @@index([type, chara_id, condition_type], map: "single_mode_cook_stand_motion_0_type_1_chara_id_2_condition_type")
+  @@index([type, chara_id], map: "single_mode_cook_stand_motion_0_type_1_chara_id")
+  @@index([type], map: "single_mode_cook_stand_motion_0_type")
+}
+
+model single_mode_cook_success_effect {
+  id                Int @id @default(autoincrement())
+  effect_group_id   Int
+  condition_type    Int
+  condition_value_1 Int
+  condition_value_2 Int
+  effect_type       Int
+  effect_value_1    Int
+  effect_value_2    Int
+  effect_value_3    Int
+  effect_value_4    Int
+  priority          Int
+  rate              Int
+  odds              Int
+}
+
+model single_mode_cook_success_odds {
+  id           Int @id @default(autoincrement())
+  power_min    Int
+  power_max    Int
+  success_rate Int
+}
+
+model single_mode_cook_success_type {
+  id                        Int    @id @default(autoincrement())
+  success_motion_id         Int
+  success_motion_swap1_id   Int
+  success_motion_swap2_id   Int
+  success_effect_name       String
+  success_effect_position   Int
+  success_effect_swap1_name String
+  success_effect_swap2_name String
+
+  @@index([success_motion_id], map: "single_mode_cook_success_type_0_success_motion_id")
 }
