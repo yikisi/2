@@ -104,11 +104,16 @@ async function sys_calc_orgasm(shown, ...ids) {
         const times = Math.min(Math.floor(curr / max), 6);
         let tmp_cost = {};
         era.set(`palam:${chara_id}:${part_name}快感`, curr % max);
-        const abl = era.get(`abl:${chara_id}:${part_name}耐性`) || 0;
-        if (part === part_enum.sadism || part === part_enum.masochism) {
+        let abl = era.get(`abl:${chara_id}:${part_name}耐性`) || 0;
+        if (part >= part_enum.sadism) {
           // 施虐和受虐属于精神高潮，只能造成普通高潮
           era.set(`nowex:${chara_id}:${part_name}高潮`, times);
           Object.assign(tmp_cost, orgasm_cost.spirit);
+          if (part === part_enum.masochism) {
+            abl +=
+              era.get(`talent:${chara_id}:喜欢责骂`) +
+              era.get(`talent:${chara_id}:喜欢痛苦`);
+          }
         } else {
           if (!sys_check_awake(chara_id)) {
             // 昏睡时计算无自觉高潮

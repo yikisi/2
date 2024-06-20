@@ -85,7 +85,7 @@ module.exports = async () => {
           },
           {
             content: `祈祷${cur_id ? ` ${aim.name} ` : ''}恢复健康（800 声望）`,
-            cost: 200,
+            cost: 800,
             type: 'button',
           },
           life_marks.get('love') === 1

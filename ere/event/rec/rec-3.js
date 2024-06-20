@@ -10,7 +10,6 @@ const { get_trainer_title } = require('#/data/info-generator');
  *
  * @author 天马闪光蹄
  */
-
 module.exports = {
   async run() {
     const teio_talk = get_chara_talk(3),
@@ -217,10 +216,9 @@ module.exports = {
     era.println();
     await era.printAndWait('要怎么办呢？');
     era.println();
-    era.printButton('「大声说出帝王的名字，要求成为担当」', 1);
-    era.printButton('「还是算了吧……」', 2);
-    const ret1 = await era.input();
-    if (ret1 === 1) {
+    era.printButton('大声说出帝王的名字，要求成为担当', 1);
+    era.printButton('还是算了吧……', 2);
+    if ((await era.input()) === 1) {
       await era.printAndWait(
         `${me.name} 听见自己大喊 ${teio_talk.name} 的名字，${
           teio_talk.sex

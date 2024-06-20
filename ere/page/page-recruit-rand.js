@@ -68,7 +68,9 @@ async function print_rec_page() {
         buffer[0].push({
           content: [
             me.get_colored_name(),
-            ' 已经有一定数量的担当，其他马娘不会同意 ',
+            ' 已经有一定数量的担当，其他马',
+            era.get('flag:角色性别') === 1 ? '郎' : '娘',
+            '不会同意 ',
             me.get_colored_name(),
             ' 的招募了……',
             { isBr: true },
@@ -79,7 +81,9 @@ async function print_rec_page() {
       } else {
         buffer[0].push({
           content: [
-            '在训练场内见到了几位马娘，是谁吸引了 ',
+            '在训练场内见到了几位马',
+            era.get('flag:角色性别') === 1 ? '郎' : '娘',
+            '，是谁吸引了 ',
             me.get_colored_name(),
             ' 的注意力呢？',
             { isBr: true },
@@ -134,11 +138,15 @@ async function print_rec_page() {
       );
     } else {
       buffer[0].push({
-        content: '训练场没有引人注目的马娘……',
-        type: 'text',
         config: {
           align: 'center',
         },
+        content: [
+          '训练场没有引人注目的马',
+          era.get('flag:角色性别') === 1 ? '郎' : '娘',
+          '……',
+        ],
+        type: 'text',
       });
     }
     era.setHorizontalAlign('space-around');
