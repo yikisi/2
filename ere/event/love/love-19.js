@@ -861,7 +861,6 @@ handlers[99] = async (digital, me, callname) => {
   await digital.print_and_wait('翻开吧。');
   await digital.print_and_wait('翻开信纸，里面写着——');
   era.println();
-  era.setAlign('center');
   await era.printAndWait('爸爸妈妈：');
   era.setAlign('center');
   await era.printAndWait('谢谢你们。');

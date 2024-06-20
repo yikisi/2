@@ -18,7 +18,8 @@ module.exports = class extends CustomizedMec {
       case race_enum.hans_dai:
       case race_enum.tenn_spr:
         return [{ id: 16, buff: 1.5 }];
+      default:
+        return [6, 40, 46].map((e) => ({ id: e, buff: 1 }));
     }
-    return super.get_race_contestants();
   }
 };

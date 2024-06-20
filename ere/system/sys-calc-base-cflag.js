@@ -289,8 +289,8 @@ module.exports = {
           week: -1,
         },
       });
-    delete ret.curr.id;
-    delete ret.last.id;
+    ret.curr = { race: ret.curr.race, week: ret.curr.week };
+    ret.last = { race: ret.last.race, week: ret.last.week };
     return ret;
   },
 };
