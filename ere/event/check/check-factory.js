@@ -71,6 +71,7 @@ cons_dict[340] = require('#/event/check/check-340');
 cons_dict[341] = require('#/event/check/check-341');
 cons_dict[342] = require('#/event/check/check-342');
 cons_dict[343] = require('#/event/check/check-343');
+cons_dict[400] = require('#/event/check/check-400');
 cons_dict['emperor'] = require('#/event/check/check-emperor');
 
 console.log(

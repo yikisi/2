@@ -74,17 +74,17 @@ handlers[event_hooks.good_morning] = function () {
     ]);
     if (love > 50) {
       buffer.push([
-        ['如果你确定要这样的话......我明白了，我会尽我的全力跟上你的想法的。'],
+        ['如果你确定要这样的话……我明白了，我会尽我的全力跟上你的想法的。'],
         `${chara_talk.name}思考了一下，答应了你的要求。`,
       ]);
     }
   } else {
     buffer.push(
-      [[`今天的天气看起来不错，如果有什么安排的话还是乘早开始吧。`]],
+      [[`今天的天气看起来不错，如果有什么安排的话还是趁早开始吧。`]],
       [[`你是我变强的必要存在，所以没有必要顾虑我的想法。`]],
       [
         [
-          `有点怀念茶座的咖啡了......为什么要这样看着我，${chara_talk.sex}泡的咖啡确实很好喝。`,
+          `有点怀念茶座的咖啡了……为什么要这样看着我，${chara_talk.sex}泡的咖啡确实很好喝。`,
         ],
       ],
       [
@@ -104,9 +104,7 @@ handlers[event_hooks.good_morning] = function () {
         ],
       ],
       [
-        [
-          `是骏川小姐啊......${chara_talk.sex}是一个很强......不，没什么，忘了吧。`,
-        ],
+        [`是骏川小姐啊……${chara_talk.sex}是一个很强……不，没什么，忘了吧。`],
         `${chara_talk.name}摇了摇头，选择将话题转移。`,
       ],
     );
@@ -114,13 +112,13 @@ handlers[event_hooks.good_morning] = function () {
       buffer.push(
         [
           [
-            `为什么呢？我们明明只是训练员与担当的关系......`,
+            `为什么呢？我们明明只是训练员与担当的关系……`,
             `为什么我的视线已然无法离开你了呢。`,
           ],
           `虽然${chara_talk.name}看起来是在小小声的自言自语，但是你还是听到了这句话。`,
         ],
         [
-          ['能帮我按摩一下脚吗？这应该也是作为训练员的职责之一吧.......'],
+          ['能帮我按摩一下脚吗？这应该也是作为训练员的职责之一吧……'],
           `${chara_talk.name}脱下了自己的鞋子，将被袜子包裹的小脚伸了出来，`,
           `虽然嘴上只是说着希望你帮${chara_talk.sex}按摩脚，但是${chara_talk.sex}闭上了眼睛似乎打算任由你做什么都好。`,
         ],
@@ -129,7 +127,7 @@ handlers[event_hooks.good_morning] = function () {
       buffer.push(
         [
           [
-            `如果没有额外的训练计划的话.....`,
+            `如果没有额外的训练计划的话……`,
             '今天就和我一起去吃饭吧，不用担心时间问题，大不了我抱着你跑回来而已。',
           ],
           `${chara_talk.name}比划了一下，${chara_talk.sex}似乎并不像是在开玩笑的样子。`,
@@ -167,14 +165,14 @@ handlers[event_hooks.talk] = async function () {
   switch (era.get('cflag:400:干劲')) {
     case -2:
       talk_arr = [
-        '啊......我现在浑身都很不爽，所以有什么事情就赶快说。',
+        '啊……我现在浑身都很不爽，所以有什么事情就赶快说。',
         `你最好说一点我喜欢听的东西，不然的话我不知道自己能不能忍住动手的欲望。`,
       ];
       break;
     case -1:
       talk_arr = [
-        '唔......你刚刚在说什么？抱歉我有点提不起劲，所以能麻烦你再说一次吗？',
-        '咳咳咳，茶座的咖啡喝太多了......感觉喉咙有点不对劲了。',
+        '唔……你刚刚在说什么？抱歉我有点提不起劲，所以能麻烦你再说一次吗？',
+        '咳咳咳，茶座的咖啡喝太多了……感觉喉咙有点不对劲了。',
       ];
       break;
     case 0:
@@ -203,7 +201,7 @@ handlers[event_hooks.office_gift] = async function () {
   switch (get_random_value(0, 1)) {
     case 0:
       await chara_talk.say_and_wait(
-        `给我的礼物？.......谢谢，不过竟然给我送这样的礼物，难道你是在讨好我吗？`,
+        `给我的礼物？……谢谢，不过竟然给我送这样的礼物，难道你是在讨好我吗？`,
       );
       await era.printAndWait(
         `兴致勃勃的 ${chara_talk.name}，在看到是Ｓ〇ＧＡ游戏机之后立刻垂下了耳朵。`,
@@ -214,7 +212,7 @@ handlers[event_hooks.office_gift] = async function () {
         `礼物啊，我很少从其他人手里面收到这种东西呢，`,
       );
       await chara_talk.say_and_wait(
-        `而且为什么......从你手中接过这个东西，我的心脏居然在激烈挑动呢？`,
+        `而且为什么……从你手中接过这个东西，我的心脏居然在激烈挑动呢？`,
       );
       break;
   }
@@ -223,7 +221,7 @@ handlers[event_hooks.office_gift] = async function () {
 handlers[event_hooks.out_church] = async function () {
   const chara_talk = get_chara_talk(400);
   await era.printAndWait(`今天，${chara_talk.name}与你一起前往神社进行祈福。`);
-  await chara_talk.say_and_wait(`这种事情........真的能起效果吗？`);
+  await chara_talk.say_and_wait(`这种事情……真的能起效果吗？`);
   await era.printAndWait(
     `${chara_talk.name}将信将疑的洗了手完成了参拜，${chara_talk.sex}看向你问出了自己的问题。`,
   );
@@ -234,7 +232,7 @@ handlers[event_hooks.out_church] = async function () {
   era.printButton(`你就当成是心里安慰也可以。`, 1);
   await era.input();
   await chara_talk.say_and_wait(
-    `这样啊........那我可就放心大胆的开始许愿了，毕竟拿了我的香油钱供奉，它们可不能不干事啊！`,
+    `这样啊……那我可就放心大胆的开始许愿了，毕竟拿了我的香油钱供奉，它们可不能不干事啊！`,
   );
   await era.printAndWait(
     `钱币落入纳奉箱的声音与${chara_talk.name}的话语一起响起，${chara_talk.sex}看起来选择了相信你的说法。`,
@@ -247,12 +245,12 @@ handlers[event_hooks.out_church] = async function () {
       `${chara_talk.name}有些惊讶，${chara_talk.sex}摸了摸自己的耳饰。`,
     );
     await chara_talk.say_and_wait(
-      `不过既然连神明回应了我的愿望.......那我可更加没有不训练的理由了啊，咱们等会就回去训练吧！`,
+      `不过既然连神明回应了我的愿望……那我可更加没有不训练的理由了啊，咱们等会就回去训练吧！`,
     );
     await era.printAndWait(`${chara_talk.sex}兴冲冲的拉着你准备回去训练场了。`);
   } else {
     await chara_talk.say_and_wait(
-      `嘁......看起来大家说的很灵验的神灵也不是什么万能的东西啊.....`,
+      `嘁……看起来大家说的很灵验的神灵也不是什么万能的东西啊……`,
     );
     await chara_talk.say_and_wait(
       `训练员君，我觉得我们应该提前回去喽，既然神明不愿意回答我的话，`,
@@ -345,7 +343,7 @@ handlers[event_hooks.out_shopping] = async function (hook) {
       switch (get_random_value(0, 1)) {
         case 0:
           await chara_talk.say_and_wait(
-            `你说这个游戏叫什么？舞力全开？那就试试吧，看起来挺有意思的......`,
+            `你说这个游戏叫什么？舞力全开？那就试试吧，看起来挺有意思的……`,
           );
           await era.printAndWait(
             `最后${chara_talk.name}以分奴的方式刷新了街机的记录。`,
@@ -425,12 +423,12 @@ handlers[event_hooks.out_shopping] = async function (hook) {
             `事实也正是如${chara_talk.sex}所说的那样，${chara_talk.sex}心如止水的看完了一整部其实还算恐怖的电影，出场的时候${chara_talk.sex}挽住了你的手。`,
           );
           await chara_talk.say_and_wait(
-            `这些东西和我在茶座那边见过的比起来那都是太过于浮夸了呢.......嘘，别问，刚刚我说的你都忘掉吧。`,
+            `这些东西和我在茶座那边见过的比起来那都是太过于浮夸了呢……嘘，别问，刚刚我说的你都忘掉吧。`,
           );
           break;
         case 1:
           await chara_talk.say_and_wait(
-            `这个片子是......啊，看起来应该会很有意思，拖雷纳君太懂担当的心思的话，我可不能当做视而不见呢。`,
+            `这个片子是……啊，看起来应该会很有意思，拖雷纳君太懂担当的心思的话，我可不能当做视而不见呢。`,
           );
           await era.printAndWait(
             `${chara_talk.name}接过了电影票，你们一起看了一部很有意思的老科幻电影。`,
@@ -472,7 +470,7 @@ handlers[event_hooks.out_station] = async function (hook) {
             `但是在看到你坚定的表情之后，${chara_talk.sex}有些苦恼的叹了口气。`,
           );
           await chara_talk.say_and_wait(
-            `好吧好吧，虽然但是......和我这样的${chara_talk.get_uma_sex_title()}约会是不会有意思的哦。`,
+            `好吧好吧，虽然但是……和我这样的${chara_talk.get_uma_sex_title()}约会是不会有意思的哦。`,
           );
           await era.printAndWait(
             `${chara_talk.name}虽然一直在推脱，但是你看出了${chara_talk.sex}眼神之中的期待。`,
@@ -483,7 +481,7 @@ handlers[event_hooks.out_station] = async function (hook) {
           );
           await era.input();
           await chara_talk.say_and_wait(
-            `什么....什么啊！！！说这样的话......难道你是什么擅长骗${chara_talk.get_uma_sex_title()}的花心萝卜吗？`,
+            `什么……什么啊！！！说这样的话……难道你是什么擅长骗${chara_talk.get_uma_sex_title()}的花心萝卜吗？`,
           );
           await era.printAndWait(
             `${chara_talk.name}将羞红的脸颊别过去不敢直视你，但是还是牵住了你伸出来的手。`,
@@ -504,7 +502,7 @@ handlers[event_hooks.out_station] = async function (hook) {
             `一边说着，${chara_talk.name}却忍不住的偷偷看向你，似乎是在确定你到底是不是真心想要约${chara_talk.sex}出去玩。`,
           );
           await chara_talk.say_and_wait(
-            `唔......既然是真的吗？我明白了......那我们就出发吧，让我来带路。`,
+            `唔……既然是真的吗？我明白了……那我们就出发吧，让我来带路。`,
           );
           await era.printAndWait(
             `${chara_talk.name}看着你丝毫没有任何变化的表情似乎意识到了你的心意，`,
@@ -545,7 +543,7 @@ handlers[event_hooks.school_atrium] = async function (hook) {
       switch (get_random_value(0, 1)) {
         case 0:
           await chara_talk.say_and_wait(
-            `其实我没什么好喊的.......算了，请帮助我在赛${chara_talk.get_uma_sex_title()}的道路上走的更远吧！！！`,
+            `其实我没什么好喊的……算了，请帮助我在赛${chara_talk.get_uma_sex_title()}的道路上走的更远吧！！！`,
           );
           await era.printAndWait(
             `${chara_talk.sex}对着大大的枯树洞喊到，喊完了之后有些不好意思的看着你。`,
@@ -573,7 +571,7 @@ handlers[event_hooks.school_atrium] = async function (hook) {
           break;
         case 1:
           await chara_talk.say_and_wait(
-            `啊......学校里面啊.......那就去食堂怎么样？你请客。`,
+            `啊……学校里面啊……那就去食堂怎么样？你请客。`,
           );
           await era.printAndWait(
             `虽然是这样说，但是${chara_talk.name}还是替你掏了这一餐的饭钱。`,
@@ -618,7 +616,7 @@ handlers[event_hooks.office_cook] = async function () {
         `学做饭吗？我在家政课上倒是也学过一些东西，`,
       );
       await chara_talk.say_and_wait(
-        `那么....请多多指教了，既然要学，那就要好好学才行，就好像是训练一样。`,
+        `那么……请多多指教了，既然要学，那就要好好学才行，就好像是训练一样。`,
       );
       await era.printAndWait(`${chara_talk.name}一脸的严肃。`);
       break;
@@ -637,7 +635,7 @@ handlers[event_hooks.office_study] = async function () {
   switch (Math.floor(Math.random() * 2)) {
     case 0:
       await chara_talk.say_and_wait(
-        `指导学习什么的.......是需要我来指导拖雷纳的作业吗？`,
+        `指导学习什么的……是需要我来指导拖雷纳的作业吗？`,
       );
       await chara_talk.say_and_wait(
         `开个玩笑啦，拖雷纳君愿意帮我知道学习，我很感激哦。`,
@@ -663,12 +661,12 @@ handlers[event_hooks.office_rest] = async function () {
   switch (Math.floor(Math.random() * 2)) {
     case 0:
       await chara_talk.say_and_wait(
-        `抱歉，要休息的话，可以不拉上窗帘吗？我......有点怕黑。`,
+        `抱歉，要休息的话，可以不拉上窗帘吗？我……有点怕黑。`,
       );
       await era.printAndWait(`${chara_talk.name}有些不好意思。`);
       break;
     case 1:
-      await chara_talk.say_and_wait(`......`);
+      await chara_talk.say_and_wait(`……`);
       await era.printAndWait(
         `${chara_talk.name}入睡之后的表情并不算平缓，仿佛是做了什么噩梦一样，`,
       );
@@ -683,12 +681,12 @@ handlers[event_hooks.office_prepare] = async function () {
   switch (Math.floor(Math.random() * 2)) {
     case 0:
       await chara_talk.say_and_wait(
-        `无需担忧，训练员......就像当初加入你的队伍时说的一样，只需要看着我将胜利带回给你就好了，看着我就好了！`,
+        `无需担忧，训练员……就像当初加入你的队伍时说的一样，只需要看着我将胜利带回给你就好了，看着我就好了！`,
       );
       break;
     case 1:
       await chara_talk.say_and_wait(
-        `要来了啊，我们一直以来的努力就要看到成果了呢......`,
+        `要来了啊，我们一直以来的努力就要看到成果了呢……`,
       );
       await chara_talk.say_and_wait(
         `拖雷纳君，看着我吧，就好像是当初说的那样，选择我的你，会得到应有的荣耀。`,
@@ -709,7 +707,7 @@ handlers[event_hooks.office_game] = async function () {
       break;
     case 1:
       await chara_talk.say_and_wait(
-        `唔，没有玩过的游戏呢......居然是光钻同学的家里面出品的游戏啊，看起来不得不尝试一下了呢。`,
+        `唔，没有玩过的游戏呢……居然是光钻同学的家里面出品的游戏啊，看起来不得不尝试一下了呢。`,
       );
       await era.printAndWait(
         `${chara_talk.name}饶有兴味的看向屏幕里面出现的LOGO，拿起了手柄。`,

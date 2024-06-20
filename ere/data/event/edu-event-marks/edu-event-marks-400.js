@@ -15,6 +15,8 @@ class SSEduMarks extends EduEventMarks {
   broken_love;
   // 称号检查 - G1三着以内
   g1_count;
+  // 胜利的承诺 buff
+  wins;
 
   constructor() {
     super(400);
