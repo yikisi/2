@@ -40,6 +40,11 @@ class CharaSkills {
     );
   }
 
+  clear() {
+    this.obj = set(`skill:${this.id}:习得技能`, []);
+    set(`exp:${this.id}:技能评价分`, 0);
+  }
+
   /** @returns {number[]} */
   get() {
     this.clean();

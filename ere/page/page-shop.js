@@ -41,9 +41,7 @@ module.exports = async (item_list) => {
     cur_coin,
     cur_page = 1,
     max_page,
-    flag_hide_acc = era.get('flag:隐藏快捷键'),
-    flag_print = true;
-  await era.clear();
+    flag_hide_acc = era.get('flag:隐藏快捷键');
   while (flag_shop) {
     cur_coin = era.get('flag:当前马币');
     on_sell_list = item_list
@@ -230,7 +228,8 @@ module.exports = async (item_list) => {
         type: 'button',
       },
     );
-    let line_count = (flag_print ? era.printInColRows : era.replaceInColRows)(
+    await era.clear();
+    era.printInColRows(
       [{ type: 'divider' }],
       {
         columns: [
@@ -267,7 +266,6 @@ module.exports = async (item_list) => {
         config: { horizontalAlign: 'end' },
       },
     );
-    flag_print = false;
     const ret = await era.input();
     era.drawLine();
     if (ret === 996) {
@@ -330,10 +328,6 @@ module.exports = async (item_list) => {
           era.add('item:避孕套', 5 * era.get('item:避孕套（5只装）'));
           era.set('item:避孕套（5只装）', 0);
       }
-    }
-    line_count = era.println() - line_count;
-    if (line_count > 0) {
-      await era.clear(line_count);
     }
   }
   era.set(`itemprice:${off}`, price_cache);

@@ -1,7 +1,7 @@
 const era = require('#/era-electron');
 
 /**
- * @param {string} content
+ * @param {string|array} content
  * @param {string} [yes_button]
  * @param {string} [no_button]
  */

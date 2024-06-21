@@ -179,7 +179,7 @@ async function page_race_result(contestants, records, info) {
 
     function add_timer() {
       ++timer;
-      if (++record_timer[1] === 60 * 15) {
+      if (++record_timer[1] === 60 * frame_rate) {
         ++record_timer[0];
         record_timer[1] = 0;
       }

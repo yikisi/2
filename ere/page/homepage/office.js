@@ -240,7 +240,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 208,
               config: { disabled: chara_id && growth_stage < 1, width: 6 },
-              content: `提升${chara_id ? '对方' : '自身'}色色能力`,
+              content: `提升${chara_id ? '对方' : '自身'}性爱能力`,
               type: 'button',
             },
             era.get('flag:惩戒力度') <= 1 &&

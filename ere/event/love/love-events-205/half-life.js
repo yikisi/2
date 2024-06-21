@@ -14,6 +14,8 @@ const {
   sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const EroParticipant = require('#/data/ero/ero-participant');
@@ -142,22 +144,7 @@ module.exports = async (vp, me) => {
     ]);
     await era.printAndWait('即使害怕，也不会逃跑。');
     if (check_pregnant_unprotect(205) && !era.get(`status:205:经期`)) {
-      era.printMultiColumns([
-        { content: '要避孕吗？', type: 'text' },
-        {
-          accelerator: 0,
-          content: '是',
-          config: { width: 12, align: 'center' },
-          type: 'button',
-        },
-        {
-          accelerator: 100,
-          content: '生中出！',
-          config: { width: 12, align: 'center' },
-          type: 'button',
-        },
-      ]);
-      if ((await era.input()) === 0) {
+      if (await select_yes_or_no('要避孕吗？', '是', '生中出！')) {
         era.set('status:205:短效避孕药', 1);
       }
     }

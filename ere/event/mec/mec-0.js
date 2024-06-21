@@ -37,6 +37,12 @@ module.exports = class extends CustomizedMec {
         content: '透视眼镜',
       });
     }
+    if (era.get('cflag:301:招募状态') === recruit_flags.yes) {
+      ret_list.push({
+        color: buff_colors[1],
+        content: '骏川的协助',
+      });
+    }
     if (era.get('cflag:303:招募状态') === recruit_flags.yes) {
       ret_list.push({
         color: buff_colors[1],

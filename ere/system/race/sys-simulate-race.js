@@ -307,6 +307,7 @@ function sys_sim_race(list_chara, race_info) {
           ),
           uma.base.velocityMin,
         );
+        record_events_list.at(-1)[uma.index_race].push(race_event_enum.blocked);
         uma.race.staminaCost *= 1.1;
       }
       uma.race.stamina = Math.min(

@@ -43,6 +43,11 @@ async function page_chairman_office() {
     const celebration = get_celebration(),
       chara = get_chara_talk(era.get('flag:理事长')),
       title = new CharaTitles(chara.id).get_colored_curr_title();
+    const star_premium_draw = sys_get_star_premium_draw();
+    let cost = star_premium_draw.cost;
+    if (era.get('cflag:302:招募状态') === recruit_flags.yes) {
+      cost = (cost * 3) / 4;
+    }
     let temp_flag;
     while (flag_page) {
       switch (chara.id) {
@@ -120,7 +125,7 @@ async function page_chairman_office() {
               },
             },
             {
-              name: '「抗 议！训练场找不到我想训的学生！」',
+              name: '「抗 议！训练场没有想训的爱马！」',
               async handle() {
                 nothing = false;
                 if (sys_check_team_limit() >= 0) {
@@ -158,7 +163,6 @@ async function page_chairman_office() {
                       },
                     ),
                   );
-                  const star_premium_draw = sys_get_star_premium_draw();
                   let temp = await era.input();
                   switch (temp) {
                     case 1:
@@ -239,7 +243,7 @@ async function page_chairman_office() {
                           get_chara_talk(temp).get_colored_name(),
                           ' 同学最近将经常去训练场，好好把握！',
                         ]);
-                        sys_change_fame(-star_premium_draw.cost);
+                        sys_change_fame(-cost);
                         if (star_premium_draw.chara > 0) {
                           await chara.say_and_wait([
                             '不 快！还请 ',

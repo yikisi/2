@@ -565,7 +565,12 @@ module.exports = (handlers) => {
     await era.printAndWait('接着，沙土2000米开赛了──');
     era.drawLine();
     const chara = sys_get_chara_pseudo(24);
-    await simulation_game_in_event(chara, undefined, race_enum.siri_sta);
+    await simulation_game_in_event(
+      chara,
+      undefined,
+      race_enum.siri_sta,
+      '粉丝感谢祭',
+    );
     if (chara.rank.curr === 1) {
       await maya.say_and_wait([callname, '────！我拿到了第一名哦──☆']);
       era.printButton('「真是厉害！」', 1);
