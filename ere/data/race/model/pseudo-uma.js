@@ -187,8 +187,6 @@ class PseudoUma {
     allowPlan: true,
     // 下坡
     downhill: false,
-    // 最终冲刺
-    finalRush: false,
     // 被选为超车目标
     to_be_overtaken: false,
   };

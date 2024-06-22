@@ -32,7 +32,7 @@ function add_time(timer) {
  */
 function check_phase_random_loc(uma, key, phase) {
   const random_key = `${key}_random`;
-  uma.race.conditionParams[random_key] = 0;
+  uma.race.conditionParams[random_key] = -1;
   if (uma.race.location >= uma.random[key][phase]) {
     if (uma.race.location <= uma.random[key][phase] + 10) {
       uma.race.conditionParams[random_key] = phase;
@@ -392,11 +392,7 @@ function sub_simulate_skill(
       // 体力足够以最大冲刺速度跑完则直接冲
       if (planStaminaCost * distLeft <= uma.race.stamina * planVelocity) {
         uma.race.velocityPlanRush = planVelocity;
-        !uma.flag.finalRush &&
-          record_events_list
-            .at(-1)
-            [uma.index_race].push(race_event_enum.final_push);
-        uma.flag.finalRush = true;
+        uma.race.locationPlanRush = uma.race.location;
         uma.race.conditionParams.lastspurt = 2;
       } else {
         // 否则以每次降0.1冲刺速度为一版计划计算总耗时
@@ -452,14 +448,16 @@ function sub_simulate_skill(
       }
       uma.flagAllowPlan = false;
     }
-    if (!uma.flag.finalRush && uma.race.location >= uma.race.locationPlanRush) {
+    if (
+      !uma.race.conditionParams.is_lastspurt &&
+      uma.race.location >= uma.race.locationPlanRush
+    ) {
       record_events_list
         .at(-1)
         [uma.index_race].push(race_event_enum.final_push);
-      uma.flag.finalRush = true;
       uma.race.conditionParams.is_lastspurt = 1;
     }
-    if (uma.flag.finalRush) {
+    if (uma.race.conditionParams.is_lastspurt) {
       uma.race.velocityIdeal = uma.race.velocityPlanRush;
     }
 

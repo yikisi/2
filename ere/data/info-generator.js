@@ -416,7 +416,10 @@ module.exports = {
         key: '避孕套溶解剂',
       });
     }
-    if (era.get(`status:${chara_id}:短效避孕药`)) {
+    if (
+      era.get(`status:${chara_id}:短效避孕药`) ||
+      era.get(`status:${chara_id}:长效避孕药`)
+    ) {
       status_list.push({ color: buff_colors[0], content: '避孕' });
     }
     const orgasm_denial = era.get(`ex:${chara_id}:寸止`);

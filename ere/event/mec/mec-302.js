@@ -21,7 +21,8 @@ module.exports = class extends CustomizedMec {
       {
         color: buff_colors[1],
         content: '[我系你上司]',
-        title: `[我系你上司]：通过学园指名招募马娘的声望消耗-25%`,
+        title:
+          '[我系你上司]：作为理事长的权利是无限的；通过学园指名招募马娘的声望消耗-25%',
       },
     ];
   }

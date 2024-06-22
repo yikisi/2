@@ -10,6 +10,10 @@ module.exports = {
   plugins: ['require-sort', 'sort-requires-by-path'],
   root: true,
   rules: {
+    'max-lines': [
+      'warn',
+      { max: 1000, skipBlankLines: true, skipComments: true },
+    ],
     'prettier/prettier': [
       'warn',
       {
