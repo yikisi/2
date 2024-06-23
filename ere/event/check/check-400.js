@@ -15,19 +15,20 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const SSEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-400');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const SSLifeMarks = require('#/data/event/life-event-marks/life-event-marks-400');
 const RaceHistory = require('#/data/race/model/race-history');
-const { race_enum } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 const aim_races = {};
-aim_races[race_enum.begin_race] = 2;
-aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 2;
+aim_races[race_enum.begin_race] = 0b10;
+aim_races[get_aim_race_index(race_enum.kent_der, 1)] = 0b10;
+aim_races[get_aim_race_index(race_enum.prea_sta, 1)] = 0b10;
+aim_races[get_aim_race_index(race_enum.belm_sta, 1)] = 0b10;
+aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 0b10;
 
-aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 0b10;
+aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 0b10;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 0b10;
 
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
@@ -57,8 +58,32 @@ module.exports = class extends CustomizedCheck {
     return titles;
   }
 
+  check_love_events() {
+    if (
+      era.get('love:400') === 74 &&
+      era.get('cflag:400:育成回合计时') <=
+        47 + race_infos[race_enum.belm_sta].date
+    ) {
+      era.set('cflag:400:爱慕暂拒', 74);
+    } else {
+      super.check_love_events();
+    }
+  }
+
   check_next_week() {
     const edu_weeks = era.get('cflag:400:育成回合计时');
+    if (
+      !era.get('flag:回合爱慕惩罚') &&
+      era.get('love:400') === 74 &&
+      edu_weeks > 47 + race_infos[race_enum.belm_sta].date &&
+      !new SSLifeMarks().love_74
+    ) {
+      new SSLifeMarks().love_74 = 1;
+      add_event(
+        event_hooks.week_end,
+        new EventObject(400, cb_enum.love).set_arg(74),
+      );
+    }
     if (edu_weeks < 3 * 48) {
       const edu_event_marks = new SSEduMarks(),
         event_obj = new EventObject(400, cb_enum.edu),
@@ -147,9 +172,9 @@ module.exports = class extends CustomizedCheck {
     const buffer = [],
       races = new RaceHistory(400).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-    buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 1));
-    buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 1));
+    buffer.push(check_aim_and_get_entry(races, race_enum.kent_der, 1, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.prea_sta, 1, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.belm_sta, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.tenn_sho, 2, 3));

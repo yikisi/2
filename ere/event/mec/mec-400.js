@@ -4,6 +4,7 @@ const CustomizedMec = require('#/event/mec/mec-common');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const SSEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-400');
+const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedMec {
   get_relation_buff() {
@@ -25,6 +26,13 @@ module.exports = class extends CustomizedMec {
 
   set_callname() {
     era.set('callname:400:0', '拖雷纳君');
+  }
+
+  set_foreign_debuff(before_race, loc) {
+    if (loc !== location_enum.new_york) {
+      return super.set_foreign_debuff(before_race, loc);
+    }
+    era.set('status:400:水土不服', 2 - era.get('talent:400:身体素质'));
   }
 
   set_pseudo_uma(uma) {
