@@ -12,14 +12,13 @@ module.exports = class extends CustomizedMec {
     switch (era.get('flag:当前赛事')) {
       case race_enum.arim_kin:
         return [
-          { id: 12, buff: 1.2 },
-          { id: 16, buff: 1.5 },
+          { id: 12, buff: 1.1 },
+          { id: 16, buff: 1.2 },
         ];
       case race_enum.hans_dai:
       case race_enum.tenn_spr:
-        return [{ id: 16, buff: 1.5 }];
-      default:
-        return [6, 40, 46].map((e) => ({ id: e, buff: 1 }));
+        return [{ id: 16, buff: 1.2 }];
     }
+    return super.get_race_contestants();
   }
 };
