@@ -32,7 +32,7 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 0b10;
 
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
-    if (extra_flag.rank === 1) {
+    if (era.get('cflag:400:育成回合计时') >= 47 && extra_flag.rank === 1) {
       new SSEduMarks().wins++;
     } else {
       new SSEduMarks().wins = 0;
@@ -40,12 +40,13 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
+    new SSEduMarks().wins = 0;
     const races = new RaceHistory(400).get(),
       titles = [];
     if (
-      check_aim_race(races, race_enum.sats_sho, 1, 1) &&
-      check_aim_race(races, race_enum.toky_yus, 1, 1) &&
-      check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
+      check_aim_race(races, race_enum.kent_der, 1, 1) &&
+      check_aim_race(races, race_enum.prea_sta, 1, 1) &&
+      check_aim_race(races, race_enum.belm_sta, 1, 1) &&
       check_aim_race(races, race_enum.arim_kin, 1, 1) &&
       check_aim_race(races, race_enum.arim_kin, 2, 1)
     ) {
@@ -88,13 +89,13 @@ module.exports = class extends CustomizedCheck {
       const edu_event_marks = new SSEduMarks(),
         event_obj = new EventObject(400, cb_enum.edu),
         event_obj_special = new EventObject(400, cb_enum.edu, true).set_arg(
-          edu_event_marks,
+          edu_weeks,
         );
       check_and_add_event(
         edu_event_marks,
         edu_weeks,
         'play_dice',
-        event_hooks.week_start,
+        event_hooks.office_game,
         event_obj,
       );
       check_and_add_event(
@@ -104,56 +105,29 @@ module.exports = class extends CustomizedCheck {
         event_hooks.school_atrium,
         event_obj,
       );
-      if (edu_weeks > 48) {
-        check_and_add_event(
-          edu_event_marks,
-          edu_weeks,
-          'sugar_or_milk',
-          event_hooks.week_start,
-          event_obj,
-        );
-      }
+      check_and_add_event(
+        edu_event_marks,
+        edu_weeks,
+        'sugar_or_milk',
+        event_hooks.office_cook,
+        event_obj,
+      );
       switch (edu_weeks) {
-        case 31: //新马年8月第三周 积雨云
+        case 31: // 积雨云
+        case 39: // 初始·承诺
+        case 47: // 第一步
+        case 47 + 29: // 愉快而炎热的夏日之初
+        case 47 + 48: // 为了圣诞节所做的准备
+        case 95 + 13: // 暴雨将至
+        case 95 + 29: // 又是一年的夏季合宿
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        case 39: //新马年10月第三周 初始·承诺
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        case 47: //新马年12月第四周  第一步
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 经典年1月第一周 新年 (已完成)
-        case 47 + 1:
+        case 47 + 1: // 新年的抱负
+        case 95 + 1: // 与周日宁静一起前往神社
           add_event(event_hooks.out_church, event_obj_special);
           break;
-        // 8月第一周 夏季合宿 (已完成)
-        case 47 + 29:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 12月第四周 圣诞节 (已完成)
-        case 47 + 48:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 资深年1月第一周 新年 (已完成)
-        case 95 + 1:
-          add_event(event_hooks.out_church, event_obj_special);
-          break;
-        // 2月第二周 情人节(已完成)
-        case 95 + 6:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 4月第二周  休息室内 暴雨将至
-        case 95 + 13:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 8月第一周 夏季合宿(已完成)
-        case 95 + 29:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 12月第四周 圣诞节(已完成)
-        case 95 + 47:
-          add_event(event_hooks.week_start, event_obj_special);
+        case 47 + 31: // 深夜的暴风雨
+          add_event(event_hooks.week_end, event_obj_special);
       }
       check_and_register_aim_race(400, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 9) {

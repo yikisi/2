@@ -226,6 +226,9 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 207,
               config: {
+                buttonType: event_marks.get(event_hooks.office_game)
+                  ? 'danger'
+                  : 'warning',
                 disabled:
                   growth_stage < 1 ||
                   !sys_check_awake(chara_id) ||
@@ -637,7 +640,10 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 207:
       era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.office_game);
+      if (!(await sys_get_random_event(event_hooks.office_game)())) {
+        era.drawLine();
+        await sys_call_daily_event(chara_id, event_hooks.office_game);
+      }
       break;
     case 208:
       await print_juel_shop_page();

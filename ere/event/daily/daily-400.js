@@ -100,13 +100,6 @@ handlers[event_hooks.good_night] = async (hook) => {
   const check = get_custom_check(400).is_want_make_love(),
     me = get_chara_talk(0),
     silence = get_chara_talk(400);
-  era.print([
-    '忙碌结束之后，',
-    me.get_colored_name(),
-    ' 将 ',
-    silence.get_colored_name(),
-    ' 来到了宿舍门口。',
-  ]);
   if (check) {
     silence.say(`要一起进来吗？`);
     era.print(
@@ -122,6 +115,13 @@ handlers[event_hooks.good_night] = async (hook) => {
       hook.arg = 2;
     }
   } else {
+    era.print([
+      '忙碌结束之后，',
+      me.get_colored_name(),
+      ' 将 ',
+      silence.get_colored_name(),
+      ' 来到了宿舍门口。',
+    ]);
     silence.say('这样就可以了哦，真的非常感谢您……');
     era.print([
       silence.get_colored_name(),
@@ -924,6 +924,10 @@ handlers[event_hooks.out_station] = async (hook) => {
       }
   }
 };
+
+handlers[
+  event_hooks.celebration
+] = require('#/event/daily/daily-events-400/celebration');
 
 /**
  * 周日宁静的日常事件，id=400

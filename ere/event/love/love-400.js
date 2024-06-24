@@ -51,7 +51,7 @@ module.exports = async (hook, _, event_object) => {
     } else {
       await print_event_name([silence.name, ' 的爱'], silence);
       if (
-        new CharaTitles(400).get().findIndex((e) => e.c === '美国梦') !== -1
+        new CharaTitles(400).get().findIndex((e) => e.n === '美国梦') !== -1
       ) {
         await silence.say_and_wait([
           sys_get_callname(400, 0),
@@ -469,7 +469,9 @@ module.exports = async (hook, _, event_object) => {
       silence.get_colored_name(),
       ' 捏了一把自己的脸颊，清理完床铺之后闭上眼睛。',
     ]);
+    begin_and_init_ero(400);
     await masturbate(400);
+    end_ero_and_train();
     await sys_love_uma_in_event(400);
   } else {
     throw new Error();
