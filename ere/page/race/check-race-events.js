@@ -42,7 +42,7 @@ async function check_race_events(info, team_contestants) {
   let handler = undefined;
   if (
     info === race_infos[race_enum.prix_lat] &&
-    team_contestants.findIndex((e) => e.rank === 1) !== -1 &&
+    team_contestants.findIndex((e) => e.rank.curr === 1) !== -1 &&
     !may_life_marks.who_am_i
   ) {
     may_life_marks.who_am_i = 1;

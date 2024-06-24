@@ -332,7 +332,7 @@ module.exports = async () => {
             common_skills.forEach((e) => (available_skills[e] = 1));
             new CharaAvailableSkills(chara_id)
               .get()
-              .forEach((e) => (available_skills[e] = 0));
+              .forEach((e) => delete available_skills[e]);
             available_skills = Object.keys(available_skills)
               .map(Number)
               .reduce((p, c) => {

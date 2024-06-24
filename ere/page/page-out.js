@@ -19,6 +19,8 @@ const chara_info_type = require('#/data/chara-info-type');
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
+const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
@@ -256,7 +258,20 @@ async function out_page() {
             {
               name: '庆贺',
             },
-            {},
+            era.get('cflag:301:招募状态') === recruit_flags.yes ||
+              new TokinoLifeMarks().who_am_i !== 2
+              ? {}
+              : {
+                  name: '「来帮帮我吧」（招募）',
+                  handle() {
+                    temp.chara.name = era.set('callname:301:-2', '骏川缰绳');
+                    era.set('cflag:301:招募状态', recruit_flags.yes);
+                    return era.printAndWait([
+                      temp.chara.get_colored_name(),
+                      ' 加入了队伍！',
+                    ]);
+                  },
+                },
             {
               handle() {
                 return era.printAndWait([

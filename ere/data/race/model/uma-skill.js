@@ -1,4 +1,3 @@
-const { el_warning_color } = require('#/data/color-const');
 const skill_name_colors = [
   '#a7fe9e',
   '#98ccfa',
@@ -12,7 +11,7 @@ const skill_border_colors = [
   '#eeb93f',
   '#ffc0cb',
   '#ee82ee',
-  el_warning_color,
+  '#e6a23c',
 ];
 
 const rarity_enum = {
@@ -333,7 +332,7 @@ class UmaSkill {
         content: this.name,
         display: 'inline-block',
         fontWeight: 'bold',
-        title: `[${this.name}] ${this.desc}`,
+        title: `[${this.name}]：${this.desc}`,
       },
       { content: '】', color: border_color },
     ];

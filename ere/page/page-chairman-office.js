@@ -21,6 +21,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
+const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-302');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration, get_relation_mark } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
@@ -151,6 +152,12 @@ async function page_chairman_office() {
                         era.get(`cflag:${chara_id}:招募状态`) !==
                           recruit_flags.yes,
                     );
+                  if (
+                    era.get('cflag:302:招募状态') !== recruit_flags.yes &&
+                    new TasteLifeMarks().who_am_i === 2
+                  ) {
+                    temp_list.push(302);
+                  }
                   era.printMultiColumns(
                     ['用名字指名', '用ID指名', '从列表里选', '再想想'].map(
                       (e, i) => {
@@ -216,7 +223,21 @@ async function page_chairman_office() {
                     case 4:
                       temp = -255;
                   }
-                  if (temp !== -255) {
+                  if (temp === 302) {
+                    await chara.say_and_wait('惊 愕！');
+                    await chara.say_and_wait('无 措！怎怎怎怎么办！');
+                    await get_chara_talk(0).say_and_wait(
+                      '将 军！无路可退了，来和我一起吧！',
+                    );
+                    chara.name = era.set('callname:302:-2', '秋川弥生');
+                    await chara.say_and_wait('啊吧啊吧啊吧啊吧……');
+                    era.set('cflag:302:招募状态', recruit_flags.yes);
+                    await era.printAndWait([
+                      '恭 喜！',
+                      chara.get_colored_name(),
+                      ' 加入了队伍！',
+                    ]);
+                  } else if (temp !== -255) {
                     if (temp === star_premium_draw.chara) {
                       await chara.say_and_wait([
                         '提 醒！',

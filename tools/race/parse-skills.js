@@ -248,6 +248,7 @@ async function chara_skill() {
     ];
     skill_dict[dict[chara_id][0] + 800000] = 1;
   }
+  dict[205] = [102051, 202092, 202152, 202662, 202091, 202151, 202661, 201411];
   Object.values(dict).forEach((e) => e.forEach((s) => (skill_dict[s] = 1)));
   console.log('角色卡技能', Object.keys(skill_dict).length);
   let buffer = 'const chara_skill_dict={},skills_dict = {};\n\n',
@@ -326,7 +327,7 @@ async function chara_skill() {
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
   buffer +=
-    'skills_dict[100039]=require("#/data/race/skill/skill-100039");skills_dict[990011]=require("#/data/race/skill/skill-990011");skills_dict[990021]=require("#/data/race/skill/skill-990021");';
+    'skills_dict[100039]=require("#/data/race/skill/skill-100039");skills_dict[900039]=require("#/data/race/skill/skill-900039");skills_dict[102051]=require("#/data/race/skill/skill-102051");skills_dict[902051]=require("#/data/race/skill/skill-902051");skills_dict[990011]=require("#/data/race/skill/skill-990011");skills_dict[990021]=require("#/data/race/skill/skill-990021");';
 
   const pt_dict = {};
   (await prisma.single_mode_skill_need_point.findMany()).forEach(

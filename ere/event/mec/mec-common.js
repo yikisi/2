@@ -108,9 +108,11 @@ class CustomizedMec {
   }
 
   /**
+   * @param {RaceInfo} info
    * @returns {{id:number,buff:number}[]}
    */
-  get_race_contestants() {
+  // eslint-disable-next-line no-unused-vars
+  get_race_contestants(info) {
     return [];
   }
 

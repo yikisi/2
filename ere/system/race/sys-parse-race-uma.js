@@ -81,7 +81,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
 
     team_chara.forEach(({ index_chara: id }) =>
       get_custom_mec(id)
-        .get_race_contestants()
+        .get_race_contestants(info)
         .forEach((c) => {
           if (
             !contestant_dict[c.id] &&

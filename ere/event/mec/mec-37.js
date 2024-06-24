@@ -29,19 +29,19 @@ module.exports = class extends CustomizedMec {
     return -1 * era.get('status:37:虚弱');
   }
 
-  get_race_contestants() {
+  get_race_contestants(info) {
     switch (era.get('flag:当前赛事')) {
       case race_enum.japa_cup:
-        return [1, 47].map((e) => ({ buff: 2, id: e }));
+        return [1, 47].map((e) => ({ buff: 1.2, id: e }));
       case race_enum.arim_kin:
         if (era.get('cflag:37:育成回合计时') < 96) {
-          return [1, 5, 18, 47].map((e) => ({ buff: 1.5, id: e }));
+          return [1, 5, 18, 47].map((e) => ({ buff: 1.1, id: e }));
         }
         break;
       case race_enum.tenn_spr:
-        return [{ buff: 1.5, id: 25 }];
+        return [{ buff: 1.1, id: 25 }];
     }
-    return [];
+    return super.get_race_contestants(info);
   }
 
   get_success_rate_buff() {

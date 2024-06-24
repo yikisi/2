@@ -48,7 +48,7 @@ handlers[308] = () =>
   get('cflag:308:招募状态') === recruit_flags.yes || get('love:308') < 25
     ? {}
     : {
-        name: '一起努力吧！（招募）',
+        name: '「一起努力吧！」（招募）',
         handle() {
           set('callname:308:-2', '光辉致意');
           set('cflag:308:招募状态', recruit_flags.yes);
@@ -61,10 +61,10 @@ handlers[308] = () =>
 
 handlers[343] = () =>
   get('cflag:343:招募状态') === recruit_flags.yes ||
-  new MayLifeMarks().who_am_i !== 2
+  new MayLifeMarks().who_am_i !== 3
     ? {}
     : {
-        name: '一起努力吧！（招募）',
+        name: '「一起努力吧！」（招募）',
         handle() {
           set('callname:343:-2', '佐岳五月');
           set('cflag:343:招募状态', recruit_flags.yes);

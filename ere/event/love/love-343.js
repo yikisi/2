@@ -68,7 +68,6 @@ module.exports = async (_, __, event_object) => {
     '最重要的追梦伙伴。',
   ]);
   if (life_marks.who_am_i !== 2) {
-    life_marks.who_am_i = 2;
     await era.printAndWait([
       '深深吸了口气，',
       may.sex,
@@ -94,4 +93,5 @@ module.exports = async (_, __, event_object) => {
   if (!era.get('flag:回合爱慕惩罚')) {
     await sys_love_uma_in_event(343);
   }
+  life_marks.who_am_i = 3;
 };
