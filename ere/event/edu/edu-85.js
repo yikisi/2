@@ -1,23 +1,26 @@
 const era = require('#/era-electron');
 
+const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_like_chara,
+  sys_love_uma,
+} = require('#/system/sys-calc-chara-others');
+
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const {
+  get_chara_talk,
+  say_by_passer_by,
+} = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
-const {
-  sys_like_chara,
-  sys_love_uma,
-} = require('#/system/sys-calc-chara-others');
-const ruby = get_chara_talk(85);
 const { attr_enum } = require('#/data/train-const');
-const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise<*>>} */
 const handlers = {};
@@ -42,6 +45,7 @@ handlers[event_hooks.out_shopping] = async (hook, __, event_object) => {
     add_event(hook.hook, event_object);
     return;
   }
+  const ruby = get_chara_talk(85);
   const edu_event_marks = new EduEventMarks(85);
   if (edu_event_marks.get('shopping_together') === 1) {
     edu_event_marks.add('shopping_together');
@@ -80,6 +84,7 @@ handlers[event_hooks.out_start] = async (hook, _, event_object) => {
     add_event(hook.hook, event_object);
     return;
   }
+  const ruby = get_chara_talk(85);
   const event_marks = new EduEventMarks(85);
   if (event_marks.get('hot_spring_event') === 1) {
     event_marks.add('hot_spring_event');
@@ -91,7 +96,7 @@ handlers[event_hooks.out_start] = async (hook, _, event_object) => {
     await era.printAndWait(`捡起一看，是温泉旅行券。`);
     await ruby.say_and_wait(`是刚迈入古典级，去商店街参加的那次抽奖抽到的吧。`);
     await era.printAndWait(
-      `那时候，你说“要等自己成为像${ruby.name}一样出色的存在，再一起用这张券。”`,
+      `那时候，你说「要等自己成为像${ruby.name}一样出色的存在，再一起用这张券。」`,
     );
     await ruby.say_and_wait(
       `现在，既然它再次出现在了我们面前，也就是说是时候了。`,
@@ -151,9 +156,9 @@ handlers[event_hooks.out_station] = async (hook, __, event_object) => {
     add_event(hook.hook, event_object);
     return;
   }
-  const edu_event_marks = new EduEventMarks(85);
-  if (edu_event_marks.get('wait_station') === 1) {
-    edu_event_marks.add('wait_station');
+  const ruby = get_chara_talk(85),
+    me = get_chara_talk(0);
+  if (event_object?.arg === 'wait_station') {
     await print_event_name('赴约', ruby);
     await era.printAndWait(`车站前，你朝着私服打扮的少女微笑地打招呼。`);
     await era.printAndWait(
@@ -168,11 +173,67 @@ handlers[event_hooks.out_station] = async (hook, __, event_object) => {
     await ruby.say_and_wait(`很奇怪吗？`);
     era.printButton(`当然很可爱。`, 1);
     era.printButton(`有种清新俏丽的感觉。`, 2);
-    await era.printAndWait(`
-你和${ruby.name}引来了周围一些人的瞩目。`);
+    await era.printAndWait(`你和${ruby.name}引来了周围一些人的瞩目。`);
     await era.printAndWait(
-      `你有点受不了那种“如同看富佬包养未成年少女”的视线，好在${ruby.name}拉着你走进了车厢。`,
+      `你有点受不了那种「如同看富佬包养未成年少女」的视线，好在${ruby.name}拉着你走进了车厢。`,
     );
+  } else if (event_object?.arg === 'station') {
+    await print_event_name('小宝宝本铺', ruby);
+    await me.say_and_wait(`那么，这里是什么地方呢。`);
+    await ruby.say_and_wait(`是的，是小宝宝本铺。`);
+    await era.printAndWait(`周围有肚子略胀的女性，抱着小孩走路的夫妇等。`);
+    await era.printAndWait([
+      '都是比 ',
+      me.get_couple_title(),
+      ' 更适合来这家店的客人。',
+    ]);
+    await era.printAndWait([
+      '在这里，',
+      me.get_colored_name(),
+      ' 和 ',
+      ruby.get_colored_name(),
+      ' 的存在明显是异质的。',
+    ]);
+    await ruby.say_and_wait(`通过书本能获取的知识是有限的。`);
+    await ruby.say_and_wait(`希望通过实地检查来加深知识。`);
+    await say_by_passer_by(`路人A`, [
+      '喂，那个难道不是 ',
+      ruby.get_colored_name(),
+      ' 吗？',
+    ]);
+    await say_by_passer_by(`路人B`, `真的假的……那个华丽一族为什么在这里？`);
+    await say_by_passer_by(
+      `路人C`,
+      `旁边的是训练员吧，两个人去那家店的话，难道是这种关系？`,
+    );
+    await era.printAndWait([
+      '果然很显眼，不用说，',
+      me.get_colored_name(),
+      ' 和担当的身份已经暴露了。',
+    ]);
+    await ruby.say_and_wait(`仅是普通地访问，果然不合时宜，请帮助我。`);
+    era.printButton(`伸出手。`, 1);
+    await era.input();
+    await era.printAndWait([
+      '就这样，',
+      ruby.get_colored_name(),
+      ' 紧紧地抱住了那只手。',
+    ]);
+    await era.printAndWait(`这样的话，待在这里也不会有不协调的感觉了。`);
+    await say_by_passer_by(`路人A`, `果然两个人已经是那种关系了……`);
+    await say_by_passer_by(`路人B`, [
+      '真的吗？那么，难道 ',
+      ruby.get_colored_name(),
+      ' 的肚子已经！？',
+    ]);
+    await say_by_passer_by(`路人C`, `那不是犯罪吗！`);
+    await era.printAndWait([
+      '之后，',
+      me.get_colored_name(),
+      ' 和 ',
+      ruby.get_colored_name(),
+      ' 在周围各种声音的环绕下，在母婴店逛了一段时间。',
+    ]);
   }
 };
 handlers[event_hooks.office_study] = async (hook, __, event_object) => {
@@ -180,6 +241,7 @@ handlers[event_hooks.office_study] = async (hook, __, event_object) => {
     add_event(hook.hook, event_object);
     return;
   }
+  const ruby = get_chara_talk(85);
   const edu_event_marks = new EduEventMarks(85);
   if (edu_event_marks.get('rest_day') === 1) {
     edu_event_marks.add('rest_day');
@@ -198,7 +260,9 @@ handlers[event_hooks.office_study] = async (hook, __, event_object) => {
     await ruby.say_and_wait(`您很在意呢。`);
     await era.printAndWait(`然后，${ruby.name}把书合上，将封面展示给你看。`);
     await era.printAndWait(`《太太俱乐部》`);
-    await era.printAndWait(`上面大张旗鼓地写着：“开始准备生育时的必读刊物！”`);
+    await era.printAndWait(
+      `上面大张旗鼓地写着：「开始准备生育时的必读刊物！」`,
+    );
     await ruby.say_and_wait(
       `除了这本，还有《母亲之友》，《妈咪宝贝》…所有的情报杂志都准备好了。`,
     );
@@ -221,6 +285,7 @@ handlers[event_hooks.office_study] = async (hook, __, event_object) => {
 handlers[event_hooks.week_end] = async (hook, __, event_object) => {
   const edu_weeks = era.get('cflag:85:育成回合计时');
   let wait_flag = false;
+  const ruby = get_chara_talk(85);
   if (edu_weeks === 47 + 32) {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
@@ -298,6 +363,7 @@ handlers[event_hooks.out_church] = async (hook, __, event_object) => {
   }
   const me = get_chara_talk(0),
     edu_weeks = era.get('cflag:85:育成回合计时');
+  const ruby = get_chara_talk(85);
   if (edu_weeks === 47 + 1) {
     await print_event_name('新年参拜', ruby);
     await ruby.say_and_wait(`祝您新年快乐。`);
@@ -465,7 +531,7 @@ handlers[event_hooks.out_church] = async (hook, __, event_object) => {
  */
 module.exports = async (hook, extra_flag, event_object) => {
   if (!handlers[hook.hook]) {
-    throw new Error('unsupported stage!');
+    throw new Error();
   }
   return await handlers[hook.hook](hook, extra_flag, event_object);
 };

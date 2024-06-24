@@ -3,15 +3,12 @@ const era = require('#/era-electron');
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
-const quick_into_sex = require('#/event/snippets/quick-into-sex');
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
-const { get_ruby } = require('#/utils/chara-talk-factory');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
-
-const ruby = get_ruby(85);
 
 /**
  * 第一红宝石 - 爱慕
@@ -45,13 +42,13 @@ async function love_49_week_end(ruby) {
   await era.printAndWait(
     `一阵背德感自心脏蔓延，第一红宝石浑身一颤，伸出舌头。`,
   );
-  await ruby.say_and_wait(`真的、非常大…和本人不一样，炫耀自己是最强的雄性……`);
+  await ruby.say_and_wait(`真的、非常大……和本人不一样，炫耀自己是最强的雄性……`);
   await era.printAndWait(`她用迷离又带有一份哀怨的眼神舔起空气。`);
   await era.printAndWait(`把那击碎了自己坚强的生殖器，用香舌细致地舔着。`);
   await era.printAndWait(
     `因为侍奉你雄伟的肉棒，是第一红宝石此刻最重要的使命。`,
   );
-  await ruby.say_and_wait(`哈啊！不要，里面……嗯，好奇怪…`);
+  await ruby.say_and_wait(`哈啊！不要，里面……嗯，好奇怪……`);
   await era.printAndWait(
     `伴随着快感，湿润的阴道不断溢出汤汁。从阴道口垂下的爱液向屁股流动。`,
   );
@@ -115,7 +112,7 @@ async function love_74_week_end(ruby, event_object, me) {
     `婚姻生活多半和幸福相去甚远，本应自豪的一族的血液此刻颇为讨厌。`,
   );
   await era.printAndWait(
-    `要说没有憧憬过美妙的婚姻，那是骗人的。不帅也可以，温柔、诚实，互相尊敬的男性…`,
+    `要说没有憧憬过美妙的婚姻，那是骗人的。不帅也可以，温柔、诚实，互相尊敬的男性……`,
   );
   await era.printAndWait(`突然，第一红宝石想起了你的脸。`);
   await era.printAndWait(
@@ -137,8 +134,8 @@ async function love_74_week_end(ruby, event_object, me) {
   await ruby.say_and_wait(
     `作为华丽一族的马娘，必须尽可能多地让生命在这个身体里寄养。`,
   );
-  await ruby.say_and_wait(`但是…`);
-  await ruby.say_and_wait(`只要一会儿，一会儿就可以…我希望能属于你…`);
+  await ruby.say_and_wait(`但是……`);
+  await ruby.say_and_wait(`只要一会儿，一会儿就可以……我希望能属于你……`);
   await era.printAndWait(`一直压抑的思念溢出，化作泪水洒落。`);
   await era.printAndWait(`你……`);
   era.printButton(`对不起，这种不负责任的事情，我做不到。`, 1); // BE
@@ -160,12 +157,10 @@ async function love_74_week_end(ruby, event_object, me) {
     era.printButton(`查看`, 2);
     const ret1 = await era.input();
     if (ret1 === 1) {
-      //TODO BE 好感-，爱慕-
-      new EduEventMarks(85).add('burn_heart');
       era.set('flag:强制BE', 85);
     } else {
-      await ruby.say_and_wait(`我们…约好了…一起……`, true);
-      await ruby.say_and_wait(`所以…`, true);
+      await ruby.say_and_wait(`我们……约好了……一起……`, true);
+      await ruby.say_and_wait(`所以……`, true);
       await ruby.say_and_wait(`呜呜……！`, true);
       await ruby.say_and_wait(`我……宝贵的……`, true);
       await ruby.say_and_wait(`啊啊啊……`, true);
@@ -177,10 +172,10 @@ async function love_74_week_end(ruby, event_object, me) {
       await era.printAndWait(`荻野贵女「……啊啦啊啦，是心灵感应吗？」`, {
         color: ruby.color,
       });
-      await era.printAndWait(`荻野贵女「还是…那孩子对你说了些什么？」`, {
+      await era.printAndWait(`荻野贵女「还是……那孩子对你说了些什么？」`, {
         color: ruby.color,
       });
-      await era.printAndWait(`荻野贵女「哈啊…」`, {
+      await era.printAndWait(`荻野贵女「哈啊……」`, {
         color: ruby.color,
       });
       await era.printAndWait(
@@ -228,7 +223,7 @@ async function love_74_week_end(ruby, event_object, me) {
     await era.printAndWait(
       `比身体的所有部位都更让你着迷的大腿，健美显示出力量的曲线。`,
     );
-    await ruby.say_and_wait(`嗯…等等。门……没锁。`);
+    await ruby.say_and_wait(`嗯……等等。门……没锁。`);
     era.printButton(`谁让我的爱马这么可爱，忍不住了，没事。`, 1);
     await era.input();
     await ruby.say_and_wait(`就这么喜欢刺激吗，孩 子 她 爸？`);
@@ -247,7 +242,7 @@ async function love_74_week_end(ruby, event_object, me) {
       `云收雨歇，第一红宝石依偎在你怀里，用她细嫩的手指在你胸口轻轻摩挲、戳点。`,
     );
     await era.printAndWait(`第一红宝石抬起俏脸，眼神中带着玩味暧昧的神色。`);
-    await ruby.say_and_wait(`我可以给你生个孩子的…`);
+    await ruby.say_and_wait(`我可以给你生个孩子的……`);
     await era.printAndWait(
       `你当然不会放跑到手的小马驹，轻轻捏了捏第一红宝石勃起的娇红蓓蕾。`,
     );
@@ -264,7 +259,9 @@ async function love_74_week_end(ruby, event_object, me) {
       1,
     );
     await era.input();
-    await ruby.say_and_wait(`训练员先生…谢谢。听你这么说，我的心变轻松了一些…`);
+    await ruby.say_and_wait(
+      `训练员先生……谢谢。听你这么说，我的心变轻松了一些……`,
+    );
     await era.printAndWait(
       `不几天到了周末，为了和婚约对象见面，第一红宝石去了某家酒店。`,
     );
@@ -343,7 +340,7 @@ async function love_89_week_end(ruby, event_object) {
   await ruby.say_and_wait(`耳朵，借我一下。`);
   await era.printAndWait(`你听从地低下头。`);
   await era.printAndWait(`第一红宝石轻轻地呼吸了一下。`);
-  await ruby.say_and_wait(`我想当妈妈…`);
+  await ruby.say_and_wait(`我想当妈妈……`);
   await era.printAndWait(`第一红宝石看着你的表情，微微一笑。`);
   await ruby.say_and_wait(`我想要，和你的孩子。`);
   await ruby.say_and_wait(`呐，可以吧？`);
@@ -351,15 +348,13 @@ async function love_89_week_end(ruby, event_object) {
   era.printButton(`那么，什么时候好呢？`, 2);
   const ret1 = await era.input();
   if (ret1 === 1) {
-    //TODO 进BE
-    new EduEventMarks(85).add('burn_heart');
     era.set('flag:强制BE', 85);
   } else {
     await ruby.say_and_wait(`诶？`);
     await era.printAndWait(`我们的孩子，我想快点见到。`);
     await ruby.say_and_wait(`诶……诶？`);
     await era.printAndWait(`你牵起第一红宝石的手，呼吸吐在彼此的脸颊上。`);
-    await ruby.say_and_wait(`等！管家还在…再怎么说这种时间不行！`);
+    await ruby.say_and_wait(`等！管家还在……再怎么说这种时间不行！`);
     era.printButton(`那么，哪种程度才行呢？`, 1);
     await era.input();
     await ruby.say_and_wait(`哪种程度都不行！`);
@@ -412,7 +407,7 @@ async function love_99_week_end(ruby, event_object) {
   );
   era.printButton(`张开胳膊。`, 1);
   await era.input();
-  await era.printAndWait(`第一红宝石模仿你的动作展开双臂，然后…`);
+  await era.printAndWait(`第一红宝石模仿你的动作展开双臂，然后……`);
   await era.printAndWait(`像要把你覆盖一样抱过来。`);
   await era.printAndWait(
     `你慌张地接住爱马，随着椅子的摩擦声，少女的味道扑鼻而来。`,
@@ -444,12 +439,12 @@ async function love_99_week_end(ruby, event_object) {
     await era.printAndWait(`你没有理会爱马，径直抓住了她那对柔嫩的美肉。`);
     await era.printAndWait(`毫无怜惜地抓绒第一红宝石的乳房，她也没有介意。`);
     await era.printAndWait(`第一红宝石纵容着你，娇声地痴痴呻吟。`);
-    await ruby.say_and_wait(`嗯…喜欢，OO怎么揉都喜欢…`);
+    await ruby.say_and_wait(`嗯……喜欢，OO怎么揉都喜欢……`);
     await era.printAndWait(`第一红宝石向你看来，美眸中的目色已经染上了迷离。`);
     await era.printAndWait(`你看着第一红宝石的痴态，放轻了力度。`);
     await era.printAndWait(`但依旧痴迷爱马的小乳鸽，又揉又搓。`);
     await era.printAndWait(`第一红宝石吐出香舌，舔了你的嘴角一下。`);
-    await ruby.say_and_wait(`没关系，粗暴点也可以…为什么不伸进去摸？`);
+    await ruby.say_and_wait(`没关系，粗暴点也可以……为什么不伸进去摸？`);
     await era.printAndWait(
       `你回吻一口爱马的樱唇，将她的上衣掀起，实实在在地摸到了爱马的美乳。`,
     );
@@ -471,11 +466,11 @@ async function love_99_week_end(ruby, event_object) {
     );
     await era.printAndWait(`她娇嫩的臀肉把你磨得心猿意马。`);
     await ruby.say_and_wait(`肉穴……还是说，屁眼？`);
-    await ruby.say_and_wait(`都可以的…`);
+    await ruby.say_and_wait(`都可以的……`);
     era.printButton(`我干死你。`, 1);
     await era.input();
     await era.printAndWait(`第一红宝石在你的怀抱里，娇躯扭动得更急了。`);
-    await ruby.say_and_wait(`亲爱的大鸡巴，操死我…`);
+    await ruby.say_and_wait(`亲爱的大鸡巴，操死我……`);
     era.printButton(`露比，我永远爱你。`, 1);
     await era.input();
     await era.printAndWait(`你在爱马耳边呢喃后，她心满意足地痛吻了上来。`);
@@ -488,7 +483,7 @@ async function love_99_week_end(ruby, event_object) {
     await era.printAndWait(`你翻身压住了第一红宝石可爱的娇躯。`);
     await era.printAndWait(`身下的担当媚眼如丝，吐息炽热。`);
     await ruby.say_and_wait(
-      `亲爱的，干我，用你的鸡巴插死我，把我操死。我要你，我永远是你的…`,
+      `亲爱的，干我，用你的鸡巴插死我，把我操死。我要你，我永远是你的……`,
     );
     await era.printAndWait(`深情的告白让你忘记第一红宝石平时端庄的模样。`);
     await era.printAndWait(`你将她的两条美腿掰成了M型，挺着鸡巴。`);
@@ -564,7 +559,7 @@ async function sex_74_1(ruby) {
   await era.printAndWait(
     `当如性交般浓厚的激吻结束时，第一红宝石的余裕已经荡然无存了。`,
   );
-  await ruby.say_and_wait(`好过分…`);
+  await ruby.say_and_wait(`好过分……`);
   era.printButton(`那么，接下来要做什么？`, 1);
   await era.input();
   await ruby.say_and_wait(`听我说话啊。`);
@@ -579,7 +574,7 @@ async function sex_74_1(ruby) {
   await era.input();
   era.printButton(`这样的话，比起马娘，说你是母猪反而更合适。`, 1);
   await era.input();
-  await ruby.say_and_wait(`那是因为你…`);
+  await ruby.say_and_wait(`那是因为你……`);
   era.printButton(`你想说是我的错？`, 1);
   await era.input();
   era.printButton(`被叫成母猪，淫水还滴滴答答地喷个不停。真是贱猪啊。`, 1);
@@ -700,7 +695,7 @@ async function sex_74_2(ruby) {
   );
   await era.printAndWait(`你挺了挺腰，让自己的阴茎拍打第一红宝石的脸颊。`);
   await era.printAndWait(`第一红宝石抓住不老实的肉棒，从顶端开始舔。`);
-  await ruby.say_and_wait(`啊…嗯……`);
+  await ruby.say_and_wait(`啊……嗯……`);
   await era.printAndWait(`毫无顾忌的声音让你把持不住。`);
   await era.printAndWait(
     `你一手抓住眼前垂下的脑袋，一手把着红宝石的耳朵揉搓。`,
@@ -852,7 +847,7 @@ async function sex_89_1(ruby) {
     await ruby.say_and_wait(`我是鸯，他是鸳，我知道的。`);
     await era.printAndWait(`趁老板傻眼的时候，你拉着露比又逛向了别处。`);
   } else {
-    await era.printAndWait(`一番畅谈…`);
+    await era.printAndWait(`一番畅谈……`);
     await era.printAndWait(
       `这位老板倒是个真性情的人，表示会为你们留下首饰后，你们离开了玉石店。`,
     );
@@ -904,12 +899,12 @@ async function sex_89_2(ruby) {
   await era.printAndWait(
     `一只小手寻到你高高翘起的裆部，纤嫩手指娴熟地解下西裤。`,
   );
-  await ruby.say_and_wait(`最近和我独处的时候，是不是越来越容易变大了…`);
+  await ruby.say_and_wait(`最近和我独处的时候，是不是越来越容易变大了……`);
   await era.printAndWait(`露比轻轻蹭了蹭让她又爱又怕的大家伙。`);
   await era.printAndWait(
     `雪白的精致小下巴搁在卵袋上，好让你阴茎的龟头直抵少女雪白的额角。`,
   );
-  await ruby.say_and_wait(`呵呵…和主人不一样，是很霸气的孩子呢。`);
+  await ruby.say_and_wait(`呵呵……和主人不一样，是很霸气的孩子呢。`);
   await era.printAndWait(
     `浓郁的男性精臭一股脑涌入露比的鼻腔，她越来越抵抗不了这股在她看来带着浓稠爱意的气味。`,
   );
@@ -937,7 +932,7 @@ async function sex_89_3(ruby, me) {
   era.printButton(`抱住她爱抚。`, 1);
   era.printButton(`带到客厅调教。`, 2);
   await era.input();
-  await ruby.say_and_wait(`训练员先生，不要…`);
+  await ruby.say_and_wait(`训练员先生，不要……`);
   await era.printAndWait(`你装出生气的样子。`);
   await era.printAndWait(`露比察觉到不对马上改口。`);
   await ruby.say_and_wait(`亲爱的，不要这样，我刚洗漱完。`);
@@ -1005,7 +1000,7 @@ async function sex_99_1(ruby) {
   era.printButton(`扶住爱马的细腰。`, 1);
   era.printButton(`玩弄爱马挺翘的美臀。`, 2);
   await era.input();
-  await ruby.say_and_wait(`啾啾…滋，咕……嗽嗽噝噜……`);
+  await ruby.say_and_wait(`啾啾……滋，咕……嗽嗽噝噜……`);
   await ruby.say_and_wait(`你沉溺在淫乱的舌吻中。`);
   await era.printAndWait(
     `露比被白丝裤袜紧裹的少女阴阜，因为幼穴流出的淫液而染成了深色。`,
@@ -1021,85 +1016,90 @@ async function sex_99_1(ruby) {
 async function sex_99_2(ruby) {
   await print_event_name('保健室', ruby);
   await ruby.say_and_wait(
-    `训练员先生…露比这里不舒服啊…要不要给露比检查一下身体啊…`,
+    `训练员先生……露比这里不舒服啊……要不要给露比检查一下身体啊……`,
   );
   await ruby.say_and_wait(
-    `哈…训练员先生…怎么可以这样…我们还在学校里…会被看到的…啊…不可以啊…丝袜给扯坏了啊…`,
+    `哈……训练员先生……怎么可以这样……我们还在学校里……会被看到的……啊……不可以啊……丝袜给扯坏了啊……`,
   );
-  await ruby.say_and_wait(`不行的…一会儿校医会来检查身体…哈…什么…`);
-  await ruby.say_and_wait(`露比就是病人…唔…停一下…哈…啊…`);
-  await ruby.say_and_wait(`露比不是骚货…才不是…那是正常的身体反应…`);
-  await ruby.say_and_wait(`什么淫水…露比不知道…`);
+  await ruby.say_and_wait(`不行的……一会儿校医会来检查身体……哈……什么……`);
+  await ruby.say_and_wait(`露比就是病人……唔……停一下……哈……啊……`);
+  await ruby.say_and_wait(`露比不是骚货……才不是……那是正常的身体反应……`);
+  await ruby.say_and_wait(`什么淫水……露比不知道……`);
   await ruby.say_and_wait(
-    `放开露比好不好…露比今天…哈…怎么被训练员先生按在诊疗室了…`,
+    `放开露比好不好……露比今天……哈……怎么被训练员先生按在诊疗室了……`,
   );
-  await ruby.say_and_wait(`唔…好大…好烫…好粗…啊…这是什么…不行…太大了…`);
-  await ruby.say_and_wait(`训练员先生…不要脱衣服…呜呜呜…露比错了…`);
-  await ruby.say_and_wait(`不要打露比屁股…哈…停一下…不行的…`);
-  await ruby.say_and_wait(`啊…被打得好奇怪…`);
+  await ruby.say_and_wait(`唔……好大……好烫……好粗……啊……这是什么……不行……太大了……`);
+  await ruby.say_and_wait(`训练员先生……不要脱衣服……呜呜呜……露比错了……`);
+  await ruby.say_and_wait(`不要打露比屁股……哈……停一下……不行的……`);
+  await ruby.say_and_wait(`啊……被打得好奇怪……`);
   await ruby.say_and_wait(
-    `才没有…怎么可能被打得淫水飞溅…那不是…露比只是今天水喝多了而已…`,
-  );
-  await ruby.say_and_wait(
-    `真的…啊啊啊…又打露比的屁股…露比的屁股都红了…不行了…那里好痒…唔…`,
+    `才没有……怎么可能被打得淫水飞溅……那不是……露比只是今天水喝多了而已……`,
   );
   await ruby.say_and_wait(
-    `怎么可以…哈…不可以接吻的…唔…好像身子发虚了…哈…有点想要了…`,
+    `真的……啊啊啊……又打露比的屁股……露比的屁股都红了……不行了……那里好痒……唔……`,
   );
   await ruby.say_and_wait(
-    `不可以…露比不是这样的人…啊…进去了…疼…好疼啊…慢一点…太大了…会被肏坏了…`,
-  );
-  await ruby.say_and_wait(`呜呜呜…被大龟头肏进去就好舒服了…`);
-  await ruby.say_and_wait(
-    `要是把露比肏舒服了…露比是不是就是会变成大肉棒训练员先生的性奴…`,
+    `怎么可以……哈……不可以接吻的……唔……好像身子发虚了……哈……有点想要了……`,
   );
   await ruby.say_and_wait(
-    `哈…什么…不可能的…露比怎么会有那样奇怪的癖好…崇拜大肉棒…不可能的…`,
+    `不可以……露比不是这样的人……啊……进去了……疼……好疼啊……慢一点……太大了……会被肏坏了……`,
   );
-  await ruby.say_and_wait(`哈…好大…好涨啊…慢慢再肏进去…好满足啊…哈…`);
-  await ruby.say_and_wait(`一点点肏进去…这感觉好奇怪啊…好像是身心在被征服…`);
+  await ruby.say_and_wait(`呜呜呜……被大龟头肏进去就好舒服了……`);
   await ruby.say_and_wait(
-    `唔…进去了…又进去了…怎么还可以进去…那里…好像是从没被肏弄过的嫩肉…`,
-  );
-  await ruby.say_and_wait(
-    `哈…好敏感啊…被蹭得要高潮了…怎么会这么奇妙…哈…明明自慰的时候很少到高潮的…`,
+    `要是把露比肏舒服了……露比是不是就是会变成大肉棒训练员先生的性奴……`,
   );
   await ruby.say_and_wait(
-    `啊…果然…只要是大肉棒…露比就会受不了…大肉棒肏进来…露比…不行了啊…`,
+    `哈……什么……不可能的……露比怎么会有那样奇怪的癖好……崇拜大肉棒……不可能的……`,
+  );
+  await ruby.say_and_wait(`哈……好大……好涨啊……慢慢再肏进去……好满足啊……哈……`);
+  await ruby.say_and_wait(`一点点肏进去……这感觉好奇怪啊……好像是身心在被征服……`);
+  await ruby.say_and_wait(
+    `唔……进去了……又进去了……怎么还可以进去……那里……好像是从没被肏弄过的嫩肉……`,
   );
   await ruby.say_and_wait(
-    `训练员先生…露比就被训练员先生的大肉棒…直接肏弄成了母狗…`,
-  );
-  await ruby.say_and_wait(`哈…什么…训练员先生早就知道了…露比一直欲求不满…`);
-  await ruby.say_and_wait(`露比真的不配做比赛选手…`);
-  await ruby.say_and_wait(`哈…什么…训练员先生也是喜欢…喜欢这么骚浪贱的露比…`);
-  await ruby.say_and_wait(`啊…被喜欢的感觉真好啊…不行了啊…训练员先生…`);
-  await ruby.say_and_wait(
-    `唔…露比坏掉了啊…哈…让露比缓一缓…啊…慢一点…肏进去了…`,
-  );
-  await ruby.say_and_wait(`啊…小骚穴好像开始不行了…淫水好多啊…呜呜呜…`);
-  await ruby.say_and_wait(`直接被训练员先生肏到高潮了…啊…好喜欢…`);
-  await ruby.say_and_wait(`被大肉棒…肏到高潮才是真正的高潮…`);
-  await ruby.say_and_wait(`就这样…露比…变成了训练员先生的性奴了啊…`);
-  await ruby.say_and_wait(
-    `哈…专属的性奴…以后作为护士长的露比…会把手下的护士都送给训练员先生肏啊…两个这样的快乐…大肉棒带来的高潮的快乐…哈…又高潮了啊…`,
-  );
-  await ruby.say_and_wait(`只要在训练员先生面前…稍微放纵一下…就会坏掉了…`);
-  await ruby.say_and_wait(`啊…这就是大肉棒的快乐…难以克制…高潮真的太舒服了…`);
-  await ruby.say_and_wait(`做母狗真好啊…做训练员先生的母狗…`);
-  await ruby.say_and_wait(
-    `体验这样的高潮…这样一波波坏掉的快感…真的是太多了啊…`,
+    `哈……好敏感啊……被蹭得要高潮了……怎么会这么奇妙……哈……明明自慰的时候很少到高潮的……`,
   );
   await ruby.say_and_wait(
-    `好想一辈子都被训练员先生的大肉棒肏弄着…一直放在骚货露比的小骚逼里…`,
+    `啊……果然……只要是大肉棒……露比就会受不了……大肉棒肏进来……露比……不行了啊……`,
   );
   await ruby.say_and_wait(
-    `真的是太舒服了…高潮…连续不断的高潮…高潮的快感啊…让人完全沉浸其中…`,
+    `训练员先生……露比就被训练员先生的大肉棒……直接肏弄成了母狗……`,
   );
-  await ruby.say_and_wait(`坏掉了…又坏掉了啊…呜呜呜…露比不行了…`);
-  await ruby.say_and_wait(`脑子一片空白…五颜六色的…`);
-  await ruby.say_and_wait(`啊…骚货露比…母狗露比…好迷恋XX主人啊`);
+  await ruby.say_and_wait(`哈……什么……训练员先生早就知道了……露比一直欲求不满……`);
+  await ruby.say_and_wait(`露比真的不配做比赛选手……`);
+  await ruby.say_and_wait(
+    `哈……什么……训练员先生也是喜欢……喜欢这么骚浪贱的露比……`,
+  );
+  await ruby.say_and_wait(`啊……被喜欢的感觉真好啊……不行了啊……训练员先生……`);
+  await ruby.say_and_wait(
+    `唔……露比坏掉了啊……哈……让露比缓一缓……啊……慢一点……肏进去了……`,
+  );
+  await ruby.say_and_wait(`啊……小骚穴好像开始不行了……淫水好多啊……呜呜呜……`);
+  await ruby.say_and_wait(`直接被训练员先生肏到高潮了……啊……好喜欢……`);
+  await ruby.say_and_wait(`被大肉棒……肏到高潮才是真正的高潮……`);
+  await ruby.say_and_wait(`就这样……露比……变成了训练员先生的性奴了啊……`);
+  await ruby.say_and_wait(
+    `哈……专属的性奴……以后作为护士长的露比……会把手下的护士都送给训练员先生肏啊……两个这样的快乐……大肉棒带来的高潮的快乐……哈……又高潮了啊……`,
+  );
+  await ruby.say_and_wait(`只要在训练员先生面前……稍微放纵一下……就会坏掉了……`);
+  await ruby.say_and_wait(
+    `啊……这就是大肉棒的快乐……难以克制……高潮真的太舒服了……`,
+  );
+  await ruby.say_and_wait(`做母狗真好啊……做训练员先生的母狗……`);
+  await ruby.say_and_wait(
+    `体验这样的高潮……这样一波波坏掉的快感……真的是太多了啊……`,
+  );
+  await ruby.say_and_wait(
+    `好想一辈子都被训练员先生的大肉棒肏弄着……一直放在骚货露比的小骚逼里……`,
+  );
+  await ruby.say_and_wait(
+    `真的是太舒服了……高潮……连续不断的高潮……高潮的快感啊……让人完全沉浸其中……`,
+  );
+  await ruby.say_and_wait(`坏掉了……又坏掉了啊……呜呜呜……露比不行了……`);
+  await ruby.say_and_wait(`脑子一片空白……五颜六色的……`);
+  await ruby.say_and_wait(`啊……骚货露比……母狗露比……好迷恋XX主人啊`);
 }
+
 async function sex_99_3(ruby) {
   await print_event_name('萝莉幼妻', ruby);
   await era.printAndWait(`露比看你很累的样子，好心帮你放了洗澡水。`);
@@ -1133,8 +1133,11 @@ async function sex_99_3(ruby) {
  */
 module.exports = async (hook, _, event_object) => {
   const love = era.get(`love:85`),
-    me = get_ruby(0),
-    ruby = get_ruby(85);
+    me = get_chara_talk(0),
+    ruby = get_chara_talk(85);
+  if (me.sex_code === 0 || ruby.sex_code === 1) {
+    throw new Error();
+  }
   if (hook === event_hooks.week_end) {
     if (love === 49) {
       await love_49_week_end(ruby);
@@ -1206,13 +1209,13 @@ await era.printAndWait(`温暖的胸膛近在眼前产生了幸福满足的心�
 await era.printAndWait(
     `好端端的大人向比自己小得多的女孩子撒娇，这种羞耻，你只能通过嘴唇感受肥大的乳头来缓解。`,
 );
-await ruby.say_and_wait(`像孩子一样，像婴儿一样…吸着乳房变得幸福吧~`);
+await ruby.say_and_wait(`像孩子一样，像婴儿一样……吸着乳房变得幸福吧~`);
 await ruby.say_and_wait(`好了，训练员先生。不要发呆，请多吸点我的奶吧。`);
-await era.printAndWait(`…啾……啾。`);
+await era.printAndWait(`……啾……啾。`);
 await ruby.say_and_wait(
     `做的非常棒，训练员先生。能很好地吸乳房真是太了不起了。`,
 );
-await ruby.say_and_wait(`好孩子，好孩子…`);
+await ruby.say_and_wait(`好孩子，好孩子……`);
 await era.printAndWait(
     `你只是按照露比说的吸了吸胸部，露比就一直抚摸你，表扬你。`,
 );
@@ -1221,13 +1224,13 @@ await era.printAndWait(
 );
 await era.printAndWait(`想被更多地表扬，想被更多地抚摸。`);
 await era.printAndWait(`沉迷于露比的胸膛。`);
-await era.printAndWait(`咕啾，咕啾……啾…`);
+await era.printAndWait(`咕啾，咕啾……啾……`);
 await ruby.say_and_wait(`成为吸着乳房的成年婴儿吧。`);
 await era.printAndWait(`沉浸在幸福感中的你，头脑产生了不协调感。`);
 await me.say_and_wait(`赢不了，我连露比的乳房都赢不了`, true);
 await ruby.say_and_wait(`训练员先生，已经忘记自己的梦想了吗？`);
 await era.printAndWait(`你用吸奶的方式回应。`);
-await ruby.say_and_wait(`呵呵，完全堕落了呢。作为奖励…`);
+await ruby.say_and_wait(`呵呵，完全堕落了呢。作为奖励……`);
 await ruby.say_and_wait(`一边吸着奶，一边尿出来吧。`);
 await ruby.say_and_wait(`啊！训练员先生的小鸡鸡的真的很大呢，欺负了我好几次。`);
 await ruby.say_and_wait(`不能用牙齿咬哦训练员先生。训练员先生是露比的乖宝宝。`);
@@ -1239,7 +1242,7 @@ await ruby.say_and_wait(
 );
 await ruby.say_and_wait(`很棒，训练员先生。就是这个样子。`);
 await ruby.say_and_wait(`身为大人却被小孩玩弄，叫着妈妈变舒服。`);
-await ruby.say_and_wait(`明明有很棒的小鸡鸡，可吸了奶就变成这样，真是…`);
+await ruby.say_and_wait(`明明有很棒的小鸡鸡，可吸了奶就变成这样，真是……`);
 await ruby.say_and_wait(
     `差不多要射了？请等一下，我去准备纸巾。不能把房间弄脏。`,
 );
@@ -1252,7 +1255,7 @@ await ruby.say_and_wait(`咦？明明都说不当妈妈了，为什么还要喊�
 await ruby.say_and_wait(`我不是训练员先生的妈妈，被叫妈妈很恶心，请停止。`);
 await ruby.say_and_wait(`差不多该射了吧，看手感就知道了。`);
 await ruby.say_and_wait(`啊！表情很可爱。`);
-await ruby.say_and_wait(`好孩子，好孩子…最后吸着乳房射吧，biu~biubiu……`);
+await ruby.say_and_wait(`好孩子，好孩子……最后吸着乳房射吧，biu~biubiu……`);
 
 //TODO H（低好感）
 await ruby.say_and_wait(`训练员先生，你的那个……变大了吗？`);
@@ -1262,11 +1265,11 @@ await era.printAndWait(
 await ruby.say_and_wait(`为什么会变大呢？`);
 await ruby.say_and_wait(`训练员先生，喜欢我穿白裤袜的腿是吗？`);
 era.printButton(`嗯。`, 1);
-era.printButton(`因为很好看……又很好摸，所以…`, 2);
+era.printButton(`因为很好看……又很好摸，所以……`, 2);
 await era.printAndWait(
     `突然间，露比伸出那柔柔的小手，牵着你的手往她大腿上搁。`,
 );
-await ruby.say_and_wait(`训练员喜欢，就自己摸好了，我…我不讨厌训练员这样…`);
+await ruby.say_and_wait(`训练员喜欢，就自己摸好了，我……我不讨厌训练员这样……`);
 await era.printAndWait(
     `怎么回事？你的脑筋一片空白，但手上传来的丝滑触感是不可能骗人的。`,
 );
@@ -1367,7 +1370,7 @@ await era.printAndWait(
 await era.printAndWait(
     `你的鸡巴轻易撕裂了中学女生的处女膜，破开那淫虐着你的层层肉环，顶到了守护秘密花园的子宫口。`,
 );
-await ruby.say_and_wait(`终于…和亲爱的…好幸福，呜呼……`);
+await ruby.say_and_wait(`终于……和亲爱的……好幸福，呜呼……`);
 await era.printAndWait(
     `心灵上的满足无法掩过开苞的剧痛，露比稚气尚存的小脸因痛苦扭曲。`,
 );
@@ -1425,7 +1428,7 @@ await era.printAndWait(`身体变得格外火热，意识会间歇性地模糊�
 await era.printAndWait(`彷佛有一团火在体内灼烧，简直要让第一红宝石昏迷过去。`);
 await era.printAndWait(`锻炼有素的四肢逐渐变得无礼，像高潮了一样微微颤抖着。`);
 await era.printAndWait(`从外人来开，颤抖的马耳，绷直的马尾，和绝顶并无区别。`);
-await ruby.say_and_wait(`呜呜呜…不要`);
+await ruby.say_and_wait(`呜呜呜……不要`);
 await era.printAndWait(`体内的炽热感就与被你抱在怀中舌吻时别无二致。`);
 await era.printAndWait(
     `第一红宝石朝镜子看去，双眼中积蓄着水汽，银牙轻咬一脸挣扎的表情格外不像样。`,
@@ -1442,16 +1445,16 @@ await era.printAndWait(
 await era.printAndWait(
     `一种无处释放的压力在第一红宝石娇小的身躯内挤压着，幼嫩的嘴唇突出一口口火热的气息。`,
 );
-await ruby.say_and_wait(`哈啊、哈啊…训练员先生…为什么…`);
+await ruby.say_and_wait(`哈啊、哈啊……训练员先生……为什么……`);
 await ruby.say_and_wait(`训练员先生，帮帮我，我，我只能想着你……`);
-await ruby.say_and_wait(`那种感觉，越来越强烈…为什么…为什么？`);
+await ruby.say_and_wait(`那种感觉，越来越强烈……为什么……为什么？`);
 await era.printAndWait(`第一红宝石小换了一口气，眼神清澈了不少。`);
 await era.printAndWait(
     `但是残留在她身体里的热度与和你的回忆还在让她胡思乱想。`,
 );
 era.println();
 await era.printAndWait(`*叩叩叩*`);
-await ruby.say_and_wait(`训练员先生，我…是我…`);
+await ruby.say_and_wait(`训练员先生，我……是我……`);
 await era.printAndWait(`——声音有一点虚弱和喘息。`);
 await era.printAndWait(`听到爱马的声音不对劲，你毫不犹豫地打开房门。`);
 await era.printAndWait(
@@ -1465,11 +1468,11 @@ await era.printAndWait(
     `你的视线穿过了高档连衣裙上的某些半透明部位，落在了露比的内衣上。`,
 );
 await era.printAndWait(`手掌感受到的热度，让你一时愕然。`);
-await ruby.say_and_wait(`哈啊~哈啊~训练员先生…哈啊…`);
+await ruby.say_and_wait(`哈啊~哈啊~训练员先生……哈啊……`);
 await era.printAndWait(`伏在你怀里的露比缓缓抬起了头，小脸微红。`);
 await era.printAndWait(`你急忙关上门，把露比抱上沙发让她平躺下去。`);
-await ruby.say_and_wait(`训练员先生，我、我感觉好热…`);
-await ruby.say_and_wait(`我想见您，训练员先生…我，我不知道为什么……`);
+await ruby.say_and_wait(`训练员先生，我、我感觉好热……`);
+await ruby.say_and_wait(`我想见您，训练员先生……我，我不知道为什么……`);
 await era.printAndWait(`第一红宝石的声音不似平时般凛然，变得微弱娇软。`);
 await era.printAndWait(`充满水波的双眸死死看着你，尾巴也悄悄缠住了你的大腿。`);
 await era.printAndWait(`她的双腿夹紧左右摩擦着，在沙发上轻轻扭动身体。`);
@@ -1479,7 +1482,7 @@ await era.printAndWait(
 await era.printAndWait(
     `但她是第一红宝石，这活脱脱的发情母狗的样子让你有点茫然。`,
 );
-await ruby.say_and_wait(`训练员先生…脑子，脑子迷迷糊糊的。`);
+await ruby.say_and_wait(`训练员先生……脑子，脑子迷迷糊糊的。`);
 era.printButton(`深呼吸，露比。`, 1);
 await era.input();
 await era.printAndWait(
@@ -1499,7 +1502,7 @@ await era.printAndWait(
 );
 await ruby.say_and_wait(`哈啊~唔~哈啊~~~`);
 await era.printAndWait(`——果然，是淫纹吗。`);
-await ruby.say_and_wait(`训练员先生，我是怎么了？我好热…`);
+await ruby.say_and_wait(`训练员先生，我是怎么了？我好热……`);
 await era.printAndWait(
     `你手掌轻抚、捋顺露比额头上的散发。手指也温柔地揉捏露比可爱的耳朵。`,
 );
@@ -1508,7 +1511,7 @@ await era.printAndWait(
     `对你来说，露比就像纯洁无垢到舍不得品尝的水，而淫纹正式那一滴浓稠的墨。`,
 );
 await era.printAndWait(`看似微小的欲望，能轻易将整杯水变为污浊，弄至沸腾。`);
-await ruby.say_and_wait(`哈啊~哈啊~好舒服，训练员先生的手…`);
+await ruby.say_and_wait(`哈啊~哈啊~好舒服，训练员先生的手……`);
 await era.printAndWait(`苦笑一声，你……`);
 era.printButton(`轻轻将露比迷离的双眼合拢。`, 1);
 era.printButton(`没事的，不要害怕，露比。`, 2);
@@ -1522,11 +1525,11 @@ if (ret6) {
   );
   await era.printAndWait(`第二天一早，你就联系管家把露比送回了宅邸。`);
 } else {
-  await ruby.say_and_wait(`训练员先生的表情，很痛苦？我是不是给您添麻烦了…`);
+  await ruby.say_and_wait(`训练员先生的表情，很痛苦？我是不是给您添麻烦了……`);
   await era.printAndWait(
       `扯住裙角的小手抬起，伸到了你的脸上，扶住你紧绷的侧脸摸扶着。`,
   );
-  await era.printAndWait(`你的表情愈发沉重…`);
+  await era.printAndWait(`你的表情愈发沉重……`);
   era.printButton(`忍耐。`, 1);
   era.printButton(`必须忍住。`, 2);
   era.printButton(`肉体是诚实的。`, 3);

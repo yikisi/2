@@ -4,7 +4,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const RubyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-85');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
@@ -14,7 +14,7 @@ const { get_breast_cup } = require('#/data/info-generator');
 /** @type {Record<string,function(extra_flag:*,event_object:EventObject):Promise<boolean>>} */
 const handlers = {};
 
-handlers[event_hooks.recruit] = async function () {
+handlers[event_hooks.recruit] = async () => {
   const me = get_chara_talk(0),
     ruby = get_chara_talk(85);
   let temp = 0;
@@ -167,7 +167,7 @@ handlers[event_hooks.recruit] = async function () {
   return true;
 };
 
-handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
+handlers[event_hooks.out_start] = async (extra_flag, event_object) => {
   if (era.get('flag:当前互动角色')) {
     add_event(event_hooks.out_start, event_object);
     return false;
@@ -527,7 +527,7 @@ handlers[event_hooks.out_start] = async function (extra_flag, event_object) {
   return true;
 };
 
-handlers[event_hooks.week_end] = async function (extra_flag, event_object) {
+handlers[event_hooks.week_end] = async (extra_flag, event_object) => {
   const me = get_chara_talk(0),
     ruby = get_chara_talk(85);
   era.print(
@@ -649,9 +649,9 @@ handlers[event_hooks.week_start] = async function () {
   );
   era.println();
 
-  await era.printAndWait(`${ruby.name} 轻笑着跑开了。`);
+  await era.printAndWait([ruby.get_colored_name(), ' 轻笑着跑开了。']);
 
-  new EduEventMarks(85).add('after_recruit');
+  new RubyEduMarks().after_recruit = 1;
   era.set('cflag:85:招募状态', yes);
   era.set('flag:物色对象', 0);
 };

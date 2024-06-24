@@ -625,8 +625,8 @@ module.exports = async function (hook, _, event_object) {
     );
     await ruby.say_and_wait(`唔…`);
     await ruby.say_and_wait(`也不是不可以。`);
-    era.printButton(`露比最棒了！`, 1);
-    era.printButton(`我这不是没办法吗，露比实在太可爱了啊。`, 2);
+    era.printButton(`「露比最棒了！」`, 1);
+    era.printButton(`「我这不是没办法吗，露比实在太可爱了啊。」`, 2);
     era.printButton(`把露比抱起来。`, 3);
     const ret3 = await era.input();
     if (ret3 === 1) {
@@ -800,7 +800,7 @@ module.exports = async function (hook, _, event_object) {
   } else if (edu_event_marks.get('rose_master') === 1) {
     edu_event_marks.add('rose_master');
     await print_event_name('华丽的历史伟业', ruby);
-    await era.printAndWait(`\n第一家宅邸`);
+    await era.printAndWait(`第一家宅邸`);
     await era.printAndWait(
       `“华丽一族”，听到这个名字时，人们就会想起某位${ruby.get_uma_sex_title()}……`,
     );

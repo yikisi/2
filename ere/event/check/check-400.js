@@ -10,8 +10,7 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
+const { get_chara_color } = require('#/data/chara-colors');
 const SSEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-400');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -40,7 +39,6 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    new SSEduMarks().wins = 0;
     const races = new RaceHistory(400).get(),
       titles = [];
     if (
@@ -51,7 +49,7 @@ module.exports = class extends CustomizedCheck {
       check_aim_race(races, race_enum.arim_kin, 2, 1)
     ) {
       titles.push({
-        c: get_chara_talk(400).color,
+        c: get_chara_color(400),
         n: this.get_personal_titles()[0],
       });
       aim_check && sys_personal_achievement.set(400, 1);
@@ -136,6 +134,11 @@ module.exports = class extends CustomizedCheck {
         new EventObject(400, cb_enum.edu).set_arg('palace'),
       );
     }
+  }
+
+  check_palace_and_get_aims() {
+    new SSEduMarks().wins = 0;
+    return super.check_palace_and_get_aims();
   }
 
   get_aim_races() {
