@@ -67,7 +67,6 @@ async function use_lubricating_fluid(chara) {
     era.print('没有需要润滑的部位……');
     return undefined;
   }
-  console.log(buffer);
   era.printMultiColumns(
     [
       {

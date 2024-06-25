@@ -12,7 +12,6 @@ class RubyEduMarks extends EduEventMarks {
   sugu;
   shopping_together;
   hot_spring;
-  hot_spring_event;
 
   constructor() {
     super(85);

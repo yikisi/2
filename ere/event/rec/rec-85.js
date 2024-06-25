@@ -234,7 +234,7 @@ handlers[event_hooks.out_start] = async (extra_flag, event_object) => {
       era.print(
         `${me.name} 的视角下，匀称的白丝美腿形成了一条略微倾斜却笔直的优美斜线。`,
       );
-      era.print('正当你完全放松下来时，你闻到了一股“异味”。');
+      era.print('正当你完全放松下来时，你闻到了一股「异味」。');
       era.print('那是一种吸入后就会使脑浆融化，身心松弛的甘美毒药。');
       era.print('新人训练员B「喂，你怎么了？脸色好像有点奇怪。」');
       era.print('新人训练员C「是身体哪里不舒服吗？」');
@@ -300,14 +300,14 @@ handlers[event_hooks.out_start] = async (extra_flag, event_object) => {
       }
 
       ruby.say('明天的社交舞测验，各位要参加吗？');
-      era.print('听到“社交舞”三个字后，身边最后的几位同僚便也陆续离开了。');
+      era.print('听到「社交舞」三个字后，身边最后的几位同僚便也陆续离开了。');
       era.print(
         `${ruby.name} 似乎丝毫不在意你们的谈话内容，平铺直叙地通告后，把视线对向了你，神色中有一点意外。`,
       );
       era.print(
         `在 ${ruby.name} 身上，${me.name} 没有感受到那日在赛场时的热情。`,
       );
-      era.print('本来参加训练员选拔测试，就是抱着“说不定”的期待。');
+      era.print('本来参加训练员选拔测试，就是抱着「说不定」的期待。');
       era.print(
         `遗憾的是现实让 ${me.name} 理解，自己与 ${ruby.name} 之间的鸿沟是多么得遥远、难以跨越。`,
       );
@@ -414,7 +414,7 @@ handlers[event_hooks.out_start] = async (extra_flag, event_object) => {
       era.println();
 
       await era.printAndWait(
-        `——于是隔天，多亏了 ${ruby.name} 的“悉心指导”，${me.name} 成功在测试中拿出了令所有人眼前一亮的成果。`,
+        `——于是隔天，多亏了 ${ruby.name} 的「悉心指导」，${me.name} 成功在测试中拿出了令所有人眼前一亮的成果。`,
       );
       add_event(event_hooks.out_start, event_object);
       break;
@@ -650,6 +650,7 @@ handlers[event_hooks.week_start] = async function () {
   era.println();
 
   await era.printAndWait([ruby.get_colored_name(), ' 轻笑着跑开了。']);
+  era.set('callname:0:85', '露比');
 
   new RubyEduMarks().after_recruit = 1;
   era.set('cflag:85:招募状态', yes);

@@ -360,9 +360,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 303,
               config: {
-                buttonType: event_marks.get(event_hooks.back_school)
-                  ? 'danger'
-                  : 'warning',
+                buttonType:
+                  event_marks.get(event_hooks.school_clinic) ||
+                  event_marks.get(event_hooks.back_school)
+                    ? 'danger'
+                    : 'warning',
                 disabled: true,
                 // !sys_check_awake(0) ||
                 // sys_check_act_disabled(

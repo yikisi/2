@@ -42,7 +42,7 @@ async function print_event_name(name, chara, color, _offset) {
           type: 'text',
         },
         {
-          config: { color: color || chara.color, fontSize: '0.75rem' },
+          config: { color: chara.color || chara.color, fontSize: '0.75rem' },
           content: chara.name,
           type: 'text',
         },

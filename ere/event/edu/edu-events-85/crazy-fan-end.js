@@ -11,7 +11,7 @@ const {
 
 const { buff_colors } = require('#/data/color-const');
 
-module.exports = async function () {
+module.exports = async () => {
   if (!era.get('flag:强制BE')) {
     throw new Error();
   }
@@ -38,6 +38,8 @@ module.exports = async function () {
     }),
   );
   if (await era.input()) {
+    await era.clear();
+    era.drawLine();
     throw new Error();
   }
   await era.printAndWait('（你已经被警告过了）', {
@@ -48,8 +50,6 @@ module.exports = async function () {
     isParagraph: true,
   });
   const m_call_r = sys_get_callname(0, 85);
-  await print_event_name(`「${m_call_r} 说不定会换个训练员」`, ruby);
-  era.drawLine({ content: '在那之后' });
   await era.printAndWait([
     '在那之后的某天，',
     me.get_colored_name(),
@@ -60,60 +60,94 @@ module.exports = async function () {
   era.println();
   await say_by_passer_by_and_wait('黄毛', ['好了，', m_call_r, '，快脱了。']);
   await ruby.say_and_wait('……啊，我知道了。');
-  await era.printAndWait('露比似乎做好了心理准备，把手放在未婚夫的内裤上。');
-  await era.printAndWait(
-    '她呼了一口气，让心平静下来。然后当尽力把内裤一下子拉下来的时候，巨大的男根，气势汹汹地飞出，出现在露比的面前。',
-  );
+  await era.printAndWait([
+    ruby.get_colored_name(),
+    ' 似乎做好了心理准备，把手放在未婚夫的内裤上。',
+  ]);
+  await era.printAndWait([
+    '她呼了一口气，让心平静下来。然后当尽力把内裤一下子拉下来的时候，巨大的男根，气势汹汹地飞出，出现在 ',
+    ruby.get_colored_name(),
+    ' 的面前。',
+  ]);
   await ruby.say_and_wait('哎呀……');
-  await era.printAndWait('露比发出短暂的悲鸣。');
+  await era.printAndWait([' ', ruby.get_colored_name(), ' 发出短暂的悲鸣。']);
   await era.printAndWait('他的巨根有力地耸立着。');
   await era.printAndWait('其姿态无愧是雄性的象征。');
-  await era.printAndWait('巨根像是在看着露比一样，黑光怒放。');
+  await era.printAndWait([
+    '巨根像是在看着 ',
+    ruby.get_colored_name(),
+    ' 一样，黑光怒放。',
+  ]);
   await era.printAndWait('太大了……');
   await era.printAndWait(
     '他的巨根已经勃起，像成熟的香蕉一样又黑又大。它的大小像塑料瓶一样，遍布肥大的血管，像一个生物一样暴起。',
   );
   await ruby.say_and_wait('啊……');
-  await era.printAndWait(
-    '露比因阴茎太大而不禁发出感叹声。她眼睛似乎离不开那根巨根，惊讶地睁大了。她双目震惊地注视着眼前大小令人难以置信的肉棒。',
-  );
-  await ruby.say_and_wait('好厉害……竟然……会这样…');
-  await era.printAndWait(
-    '露比称赞他的的巨根，特别是对长度一见钟情，气喘吁吁。',
-  );
-  await era.printAndWait(
-    '她手握着巨大的根部，露比的手指又长又漂亮，不过，对方规格外的巨根完全和手指不搭，重新确认那个的大小。',
-  );
+  await era.printAndWait([
+    ruby.get_colored_name(),
+    ' 因阴茎太大而不禁发出感叹声。她眼睛似乎离不开那根巨根，惊讶地睁大了。她双目震惊地注视着眼前大小令人难以置信的肉棒。',
+  ]);
+  await ruby.say_and_wait('好厉害……竟然……会这样……');
+  await era.printAndWait([
+    ruby.get_colored_name(),
+    ' 称赞他的的巨根，特别是对长度一见钟情，气喘吁吁。',
+  ]);
+  await era.printAndWait([
+    '她手握着巨大的根部，',
+    ruby.get_colored_name(),
+    ' 的手指又长又漂亮，不过，对方规格外的巨根完全和手指不搭，重新确认那个的大小。',
+  ]);
   await era.printAndWait('黄毛「你觉得和你的训练员比，哪个小鸡鸡比较大？」');
-  await era.printAndWait(
-    '他带着狂傲的笑容问露比，目的你完全明白。但是，让作为未婚妻的她说这句话是有意义的。',
-  );
+  await era.printAndWait([
+    '他带着狂傲的笑容问 ',
+    ruby.get_colored_name(),
+    '，目的你完全明白。但是，让作为未婚妻的她说这句话是有意义的。',
+  ]);
   await ruby.say_and_wait('……！那种事，我是不会说的。');
-  await era.printAndWait(
-    '露比的表情变得模糊，未婚夫把手放在露比的头上，爱抚着。',
-  );
+  await era.printAndWait([
+    ruby.get_colored_name(),
+    ' 的表情变得模糊，未婚夫把手放在 ',
+    ruby.get_colored_name(),
+    ' 的头上，爱抚着。',
+  ]);
   await era.printAndWait('黄毛「快说。」');
-  await era.printAndWait('他带着锐利的表情命令露比，她以放弃的样子嘟囔着。');
+  await era.printAndWait([
+    '他带着锐利的表情命令 ',
+    ruby.get_colored_name(),
+    '，她以放弃的样子嘟囔着。',
+  ]);
   await ruby.say_and_wait('您的……更大。');
   await era.printAndWait('黄毛「比谁的好？好好说出来。」');
   await ruby.say_and_wait('您的好……！比训练员更大更棒……！');
   await era.printAndWait('黄毛「说得真好。」');
-  await era.printAndWait(
-    '和刚才的表情完全不同，他露出柔和的表情抚摸着露比的头。',
-  );
+  await era.printAndWait([
+    '和刚才的表情完全不同，他露出柔和的表情抚摸着 ',
+    ruby.get_colored_name(),
+    ' 的头。',
+  ]);
   await ruby.say_and_wait('对不起……');
-  await era.printAndWait('露比带着抱歉的表情凝视着镜头。');
+  await era.printAndWait([
+    ruby.get_colored_name(),
+    ' 带着抱歉的表情凝视着镜头。',
+  ]);
   await era.printAndWait('看了她的样子，你意识到我曾被爱着。');
-  await era.printAndWait(
-    '和她对视的时候，突然你们之间插入了巨根。眼前挤满了他的肉杆，露比也已经从镜头移开视线，目光完全被眼前的巨物夺走了。',
-  );
-  await era.printAndWait(
-    '他随意地抓住了露比的头发，压在自己的胯间。强行撬开嘴，把巨根拧进她的嘴里，粗暴地拉着头发上下移动。',
-  );
+  await era.printAndWait([
+    '和她对视的时候，突然你们之间插入了巨根。眼前挤满了他的肉杆，',
+    ruby.get_colored_name(),
+    ' 也已经从镜头移开视线，目光完全被眼前的巨物夺走了。',
+  ]);
+  await era.printAndWait([
+    '他随意地抓住了 ',
+    ruby.get_colored_name(),
+    ' 的头发，压在自己的胯间。强行撬开嘴，把巨根拧进她的嘴里，粗暴地拉着头发上下移动。',
+  ]);
   await ruby.say_and_wait('嗯……嗯……嗯……！');
-  await era.printAndWait(
-    '露比痛苦地皱起眉头。每当黑乎乎的巨根从露比的小嘴中出来或进入时，唾液就会从嘴角滴滴答答地掉下来。',
-  );
+  await era.printAndWait([
+    ruby.get_colored_name(),
+    ' 痛苦地皱起眉头。每当黑乎乎的巨根从 ',
+    ruby.get_colored_name(),
+    ' 的小嘴中出来或进入时，唾液就会从嘴角滴滴答答地掉下来。',
+  ]);
   await era.printAndWait(
     '在她小小的口内失去了去处的巨根，终于侵入了喉咙，把她纤细而美丽的喉咙捣得鼓起。',
   );
@@ -126,20 +160,25 @@ module.exports = async function () {
     '未婚夫这样对她说了之后，一口气把她的头压到根部射精。那个精液以惊人的量从她的鼻子和口中漏出。',
   );
   await ruby.say_and_wait('嗯……嗯……');
-  await era.printAndWait('露比咕噜咕噜地喝干精液。');
+  await era.printAndWait([ruby.get_colored_name(), ' 咕噜咕噜地喝干精液。']);
   await ruby.say_and_wait('哈啊……！唔嗯……哈……');
-  await era.printAndWait(
-    '终于从露比的喉咙中拔出的巨根被粘稠的精液和唾液挂着，唾液的线从她丰润的嘴唇上延伸出来。',
-  );
+  await era.printAndWait([
+    '终于从 ',
+    ruby.get_colored_name(),
+    ' 的喉咙中拔出的巨根被粘稠的精液和唾液挂着，唾液的线从她丰润的嘴唇上延伸出来。',
+  ]);
   await era.printAndWait(
     '眼睛的焦点无法对准，好像是缺氧状态，视线模糊。她的嘴角因为一直含到根部而沾满了男性的阴毛，以至侵入到嘴里。',
   );
-  await era.printAndWait(
-    '未婚夫把巨根放在露比的脸上，就这样把溢出来的精子涂在她姣好的面颊上。',
-  );
-  await era.printAndWait(
-    '露比的脸被涂上满满的精液，从嘴里滴下唾液，完全喘不过气来。',
-  );
+  await era.printAndWait([
+    '未婚夫把巨根放在 ',
+    ruby.get_colored_name(),
+    ' 的脸上，就这样把溢出来的精子涂在她姣好的面颊上。',
+  ]);
+  await era.printAndWait([
+    ruby.get_colored_name(),
+    ' 的脸被涂上满满的精液，从嘴里滴下唾液，完全喘不过气来。',
+  ]);
   await era.printAndWait('已经不会有反抗的意思了吧。');
   await ruby.say_and_wait('嗯♥啊♥啊♥啊♥');
   await ruby.say_and_wait('哦♥♥哦♥♥♥♥');
@@ -149,15 +188,21 @@ module.exports = async function () {
   await era.printAndWait(
     '那简直是野兽的声音。对强壮的雄性，对巨根下流的谄媚声。',
   );
-  await me.say_and_wait('露比……？');
-  await era.printAndWait('不可能。露比用这样肮脏的声音没用地喘息。');
+  await me.say_and_wait([m_call_r, '……？'], true);
+  await era.printAndWait([
+    '不可能。',
+    ruby.get_colored_name(),
+    ' 用这样肮脏的声音没用地喘息。',
+  ]);
   await era.printAndWait('一只巨大的黝黑雄性在侵犯一只洁白的雌性。');
   await era.printAndWait(
     '雄性把她从上面压住，用力地摇着腰，雌性一边发出肮脏的喘息声，一边像抱着一样把脚缠在雄性的腰上。',
   );
-  await era.printAndWait(
-    '从露比的秘部出入的漆黑的巨根由于其压倒性的巨大而划出巨大的弧度。',
-  );
+  await era.printAndWait([
+    '从 ',
+    ruby.get_colored_name(),
+    ' 的秘部出入的漆黑的巨根由于其压倒性的巨大而划出巨大的弧度。',
+  ]);
   await era.printAndWait(
     '粗暴地摆腰，把巨根这样塞进女人的身体，那样简直像是强奸。',
   );
@@ -180,29 +225,44 @@ module.exports = async function () {
   );
   await era.printAndWait('黄毛「即使温柔，作为男人也是无价值的垃圾！」');
   await ruby.say_and_wait('不行♥说实话不行♥');
-  await era.printAndWait(
-    '露比一边喘息一边这样叫，听到这句话的他腰越来越快地动起来，开始冲刺。',
-  );
+  await era.printAndWait([
+    ruby.get_colored_name(),
+    ' 一边喘息一边这样叫，听到这句话的他腰越来越快地动起来，开始冲刺。',
+  ]);
   await ruby.say_and_wait('哇哦哦哦♥不行♥不行♥不行♥去了～♥♥♥');
   await era.printAndWait('然后，未婚夫也一边颤抖着身体一边开始射精。');
-  await era.printAndWait(
-    '露比发出“齁齁齁♥”的喘息声，将缠绕着的两脚伸直，在快感中发抖。',
-  );
-  await era.printAndWait(
-    '他一离开她的身体站起来，就会从露比的秘部滑溜溜地拔出巨根。当然没有戴避孕套，精液滴滴答答地滴下来。',
-  );
-  await era.printAndWait(
-    '露比翻起白眼，脚和身体都抽搐着。从她的秘部溢出了失去去处的精液。',
-  );
-  await era.printAndWait('露比接受了中出。');
-  await era.printAndWait(
-    '未婚夫轻轻抱起浑身松散无力的露比，把胳膊搭在她可爱的腿关节上。',
-  );
-  await era.printAndWait('像是冒着黑光的肉棒再度塞进湿透了的露比的秘部。');
+  await era.printAndWait([
+    ruby.get_colored_name(),
+    ' 发出「齁齁齁♥」的喘息声，将缠绕着的两脚伸直，在快感中发抖。',
+  ]);
+  await era.printAndWait([
+    '他一离开她的身体站起来，就会从 ',
+    ruby.get_colored_name(),
+    ' 的秘部滑溜溜地拔出巨根。当然没有戴避孕套，精液滴滴答答地滴下来。',
+  ]);
+  await era.printAndWait([
+    ruby.get_colored_name(),
+    ' 翻起白眼，脚和身体都抽搐着。从她的秘部溢出了失去去处的精液。',
+  ]);
+  await era.printAndWait([ruby.get_colored_name(), ' 接受了中出。']);
+  await era.printAndWait([
+    '未婚夫轻轻抱起浑身松散无力的 ',
+    ruby.get_colored_name(),
+    '，把胳膊搭在她可爱的腿关节上。',
+  ]);
+  await era.printAndWait([
+    '像是冒着黑光的肉棒再度塞进湿透了的 ',
+    ruby.get_colored_name(),
+    ' 的秘部。',
+  ]);
   await ruby.say_and_wait('哇！♥');
-  await era.printAndWait(
-    '因为一口气用力地顶到了里面，露比用肮脏的声音喘息。每次用力活塞的时候，露比饱满的嫩乳就会摇晃。',
-  );
+  await era.printAndWait([
+    '因为一口气用力地顶到了里面，',
+    ruby.get_colored_name(),
+    ' 用肮脏的声音喘息。每次用力活塞的时候，',
+    ruby.get_colored_name(),
+    ' 饱满的嫩乳就会摇晃。',
+  ]);
   await ruby.say_and_wait('不要看♥不要看♥这样的我♥拜托你♥哦哦♥♥♥');
   await era.printAndWait(
     '她叫你不要看。与平时保持的形象相去甚远，不想让人看到这样的自己吧。',
@@ -216,14 +276,24 @@ module.exports = async function () {
     '包茎去死吧♥被人夺走爱马的垃圾去死吧♥去死吧♥去死吧♥去死吧♥',
   );
   await era.printAndWait(
-    '听到这句话的未婚夫更强硬地插入。恐怕对她的耳语是“我会让你更舒服，所以说训练员的坏话”之类的命令吧。',
+    '听到这句话的未婚夫更强硬地插入。恐怕对她的耳语是「我会让你更舒服，所以说训练员的坏话」之类的命令吧。',
   );
   await ruby.say_and_wait('去死♥去死劣等基因♥没有活在世界上的价值♥');
-  await me.say_and_wait('这是露比的真心吗？', true);
+  await me.say_and_wait(['这是 ', m_call_r, ' 的真心吗？'], true);
   await ruby.say_and_wait('喂♥啊～♥');
   await era.printAndWait(
     '把脚伸直，痉挛。唾液从嘴里滴下来，眼睛朝上翻。为了想办法从遍布身体的快感中逃出来，让身体耷拉着。',
   );
-  await era.printAndWait('看到这一幕的未婚夫把露比随手扔到床上。');
-  await ruby.say_and_wait('……对不起，训练员先生……');
+  await era.printAndWait([
+    '看到这一幕的未婚夫把 ',
+    ruby.get_colored_name(),
+    ' 随手扔到床上。',
+  ]);
+  await ruby.say_and_wait(['……对不起，', sys_get_callname(85, 0), '……']);
+  await print_event_name(
+    `「${m_call_r} 说不定会换个训练员」`,
+    ruby,
+    buff_colors[3],
+    6,
+  );
 };

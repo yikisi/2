@@ -27,11 +27,9 @@ module.exports = (
     }
 
     check_and_get_titles(aim_check) {
-      console.log(1);
       const races = new RaceHistory(this.id),
         titles = [];
       if (title_check_cb(races.get(), races.get_values(), aim_check)) {
-        console.log(1);
         titles.push({
           c: get_chara_color(this.id),
           n: this.get_personal_titles()[0],

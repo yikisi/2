@@ -68,6 +68,8 @@ const hooks = {
   recruit_start: 0,
   // 前往中庭
   school_atrium: 0,
+  // 前往保健室
+  school_clinic: 0,
   // 前往理事长办公室
   school_chairman: 0,
   // 前往天台

@@ -541,14 +541,23 @@ handlers[event_hooks.out_station] = async (hook) => {
 };
 
 handlers[event_hooks.basement_end] = async () => {
-  if (!era.get('talent:85:神之足') || era.get('abl:85:足交技巧') !== 5) {
-    throw new Error();
-  }
   const ruby = get_chara_talk(85),
     me = get_chara_talk(0);
+  if (
+    !era.get('talent:85:神之足') ||
+    era.get('abl:85:足交技巧') !== 5 ||
+    ruby.sex_code === 1 ||
+    me.sex_code === 0
+  ) {
+    throw new Error();
+  }
   await me.say_and_wait('红宝石妈妈……红宝石妈妈……');
   era.println();
-  era.print(`对于 ${me.name} 来说，这样的生活还是挺好的也说不定？`);
+  era.print([
+    '对于 ',
+    me.get_colored_name(),
+    ' 来说，这样的生活还是挺好的也说不定？',
+  ]);
   era.print(
     '只是，呼吸仍然是不畅通的，脸上套着的是红宝石昨天换下来的白丝袜子，将那本就涣散的光线，诱惑地更加彻底。',
   );
@@ -629,6 +638,10 @@ handlers[event_hooks.basement_end] = async () => {
   );
 };
 
+handlers[
+  event_hooks.celebration
+] = require('#/event/daily/daily-events-85/ero-celebration');
+
 handlers[event_hooks.load_talk] = async () => {
   const ruby = get_chara_talk(85);
   await ruby.say_and_wait('……这就是，您的意愿吗？');
@@ -654,7 +667,7 @@ module.exports = {
    */
   async run(stage_id, extra_flag, event_object) {
     if (event_object || !handlers[stage_id.hook]) {
-      throw new Error('unsupported hook!');
+      throw new Error();
     }
     return !!(await handlers[stage_id.hook](stage_id, extra_flag));
   },
