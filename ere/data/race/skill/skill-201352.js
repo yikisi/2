@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201352,
   '营养补给',
-  '比赛中盘略微回复持久力＜作战・先行＞',
+  '比赛中盘略微回复持久力＜先马＞',
   20135,
   UmaSkill.rarity_enum.normal,
   1,

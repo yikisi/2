@@ -151,19 +151,30 @@ function sys_sim_race(list_chara, race_info) {
         if (uma.race.overtakeAim) {
           uma.race.overtakeAim.to_be_overtaken = false;
         }
+        uma.race.overtakeAim = undefined;
         let j = i - 1;
-        while (j >= 0) {
-          if (
-            l[j].race.velocityIdeal < uma.race.velocityIdeal &&
-            l[j].race.velocityReal < uma.race.velocityReal &&
-            (l[j].race.location - uma.race.location) /
-              (l[j].race.velocityReal < uma.race.velocityReal) <
-              15
+        if (uma.race.conditionParams.bashin_diff_infront <= 0.8) {
+          uma.race.overtakeAim = l[j];
+        } else {
+          while (
+            j >= 0 &&
+            l[j].race.location - uma.race.location < uma.race.visible_dis
           ) {
-            l[j].flag.to_be_overtaken = true;
-            break;
+            if (
+              l[j].race.velocityIdeal < uma.race.velocityIdeal &&
+              l[j].race.velocityReal < uma.race.velocityReal &&
+              (l[j].race.location - uma.race.location) /
+                (l[j].race.velocityReal < uma.race.velocityReal) <
+                15
+            ) {
+              uma.race.overtakeAim = l[j];
+              break;
+            }
+            --j;
           }
-          --j;
+        }
+        if (uma.race.overtakeAim) {
+          uma.race.overtakeAim.to_be_overtaken = true;
         }
         uma.race.overtakeAim = l[j];
         if (uma.race.location >= race_info.span) {
@@ -292,10 +303,12 @@ function sys_sim_race(list_chara, race_info) {
       if (uma.race.loc_mind === 2 && uma.style > 0) {
         uma.race.staminaCost *= 0.6;
       }
+      // 阻挡
       if (
         uma.race.phase >= 2 &&
         uma.race.conditionParams.blocked_front &&
-        Math.random() >= uma.race.strength / l[i - 1].race.strength
+        Math.random() >=
+          uma.race.strength / l[i - 1].race.strength + uma.race.lane_move_buff
       ) {
         uma.race.velocityReal = Math.max(
           Math.min(
@@ -316,10 +329,10 @@ function sys_sim_race(list_chara, race_info) {
       );
       if (uma.race.stamina === 0) {
         uma.race.velocityIdeal =
-          uma.base.velocityMin + uma.base.velocityIdealBuff;
+          uma.base.velocityMin + uma.race.velocityIdealBuff;
         uma.race.acceleration = race_de_acc[4];
       } else {
-        uma.race.velocityIdeal += uma.base.velocityIdealBuff;
+        uma.race.velocityIdeal += uma.race.velocityIdealBuff;
         if (uma.race.loc_mind > 0) {
           uma.race.velocityIdeal *=
             loc_mind_multiply_velocity_ideal[
@@ -337,7 +350,7 @@ function sys_sim_race(list_chara, race_info) {
             race_de_acc[Math.min(uma.race.conditionParams.phase, 2)];
         }
       }
-      uma.race.acceleration += uma.base.accelerationBuff;
+      uma.race.acceleration += uma.race.accelerationBuff;
     });
   }
   list_finished.forEach((e, i) => {

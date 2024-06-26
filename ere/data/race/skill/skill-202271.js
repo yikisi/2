@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202271,
   '卷土重来',
-  '比赛中盘位于后方时，提升速度＜沙土＞',
+  '比赛中盘位于后方时，提升速度＜泥地＞',
   20227,
   UmaSkill.rarity_enum.gold,
   10,

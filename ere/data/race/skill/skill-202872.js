@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202872,
   '浑身解数',
-  '在终盘的最终弯道处若位于中后方，稍微提升加速度＜追赶・中距离＞',
+  '在终盘的最终弯道处若位于中后方，稍微提升加速度＜追马・中距离＞',
   20287,
   UmaSkill.rarity_enum.normal,
   2,

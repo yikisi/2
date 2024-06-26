@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200272,
   '独自一人○',
-  '没有其他马娘选择与自己相同的战术时能力稍微更容易发挥',
+  '没有其他马娘选择与自己相同的出走策略时能力稍微更容易发挥',
   20027,
   UmaSkill.rarity_enum.normal,
   0,

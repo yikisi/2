@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202151,
   '勇往直前',
-  '在比赛中盘小幅消耗耐力，大幅提升速度＜作战・居中＞',
+  '在比赛中盘小幅消耗耐力，大幅提升速度＜差马＞',
   20215,
   UmaSkill.rarity_enum.gold,
   10,

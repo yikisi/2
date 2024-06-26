@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202642,
   '持之以恒',
-  '在比赛中盘位于队伍中间时，一段时间内速度微量提升＜作战・居中＞',
+  '在比赛中盘位于队伍中间时，一段时间内速度微量提升＜差马＞',
   20264,
   UmaSkill.rarity_enum.normal,
   2,

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   900991,
   '闪耀☆苫小牧',
-  '沙土比赛时在中盘的弯道上竞争过后，在最后冲刺时处于好位置，加速度会微量上升',
+  '泥地比赛时在中盘的弯道上竞争过后，在最后冲刺时处于好位置，加速度会微量上升',
   90099,
   UmaSkill.rarity_enum.normal,
   2,

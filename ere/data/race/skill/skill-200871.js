@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200871,
-  '先行焦躁',
-  '比赛中盘令战术是先行的赛马娘焦躁，使其略微容易疲劳',
+  '先马焦躁',
+  '比赛中盘令出走策略是先马的赛马娘焦躁，使其略微容易疲劳',
   20087,
   UmaSkill.rarity_enum.normal,
   3,

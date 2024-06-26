@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200283,
   '畏缩不前',
-  '很多马娘与自身同一战术时能力难以发挥',
+  '很多马娘与自身同一出走策略时能力难以发挥',
   20028,
   UmaSkill.rarity_enum.normal,
   4,

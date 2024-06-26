@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202411,
   '风云之志',
-  '临近比赛终盘，若位于第2名以后且距离前方马娘2马身以内则速度会短暂稍微提升＜作战・先行＞',
+  '临近比赛终盘，若位于第2名以后且距离前方马娘2马身以内则速度会短暂稍微提升＜先马＞',
   20241,
   UmaSkill.rarity_enum.gold,
   10,

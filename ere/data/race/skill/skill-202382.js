@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202382,
   '破局之策',
-  '比赛中盘位于后方时，速度稍微提升，并选择稍好的路线＜作战・追赶＞',
+  '比赛中盘位于后方时，速度稍微提升，并选择稍好的路线＜追马＞',
   20238,
   UmaSkill.rarity_enum.normal,
   2,

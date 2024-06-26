@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200532,
   '先驱',
-  '比赛初期略微容易获得领先＜作战・领放＞',
+  '比赛初期略微容易获得领先＜逃马＞',
   20053,
   UmaSkill.rarity_enum.normal,
   2,

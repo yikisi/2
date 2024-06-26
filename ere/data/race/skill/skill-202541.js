@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202541,
   '威风堂堂',
-  '在最终弯道位于中间往后位置时，令前后各3名赛马娘的速度稍微下降，并提高自己的速度＜作战・居中＞',
+  '在最终弯道位于中间往后位置时，令前后各3名赛马娘的速度稍微下降，并提高自己的速度＜差马＞',
   20254,
   UmaSkill.rarity_enum.gold,
   10,

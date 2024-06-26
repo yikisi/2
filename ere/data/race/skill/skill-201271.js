@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201271,
   '领跑者',
-  '在比赛序盘或中盘，擅于超越和竞争＜作战・领放＞',
+  '在比赛序盘或中盘，擅于超越和竞争＜逃马＞',
   20127,
   UmaSkill.rarity_enum.gold,
   10,

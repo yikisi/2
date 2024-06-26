@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201491,
   '沉着冷静',
-  '紧跟前方赛马娘时，使自己冷静下来恢复持久力＜作战・追赶＞',
+  '紧跟前方赛马娘时，使自己冷静下来恢复持久力＜追马＞',
   20149,
   UmaSkill.rarity_enum.gold,
   9,

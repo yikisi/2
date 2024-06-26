@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200571,
   '比赛筹划者',
-  '比赛中盘不容易疲劳＜作战・先行＞',
+  '比赛中盘不容易疲劳＜先马＞',
   20057,
   UmaSkill.rarity_enum.gold,
   9,

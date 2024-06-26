@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200591,
   '迅速果断',
-  '比赛中盘位于中团以后时，速度提升＜作战・居中＞',
+  '比赛中盘位于中团以后时，速度提升＜差马＞',
   20059,
   UmaSkill.rarity_enum.gold,
   10,

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200642,
   '直线一气',
-  '在最后冲刺阶段的直线上加速度略微提升＜作战・追赶＞',
+  '在最后冲刺阶段的直线上加速度略微提升＜追马＞',
   20064,
   UmaSkill.rarity_enum.normal,
   2,

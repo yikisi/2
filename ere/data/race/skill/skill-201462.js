@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201462,
-  '追赶弯道○',
-  '在弯道的速度略微上升＜作战・追赶＞',
+  '追马弯道○',
+  '在弯道的速度略微上升＜追马＞',
   20146,
   UmaSkill.rarity_enum.normal,
   2,

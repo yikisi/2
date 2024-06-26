@@ -116,7 +116,6 @@ class PseudoUma {
   base = {
     accBuffFromWiz: 0,
     acceleration: 0,
-    accelerationBuff: 0,
     change_order_finalcorner: 0,
     // 发动绿技能个数
     greenCount: 0,
@@ -128,7 +127,6 @@ class PseudoUma {
     temptationSpan: 0,
     total_attrs: new Array(5).fill(0),
     velocityIdeal: 0,
-    velocityIdealBuff: 0,
     velocityMaxRush: 0,
     velocityMin: 0,
     // 胜场数
@@ -137,12 +135,15 @@ class PseudoUma {
   // 比赛时信息
   race = {
     acceleration: 0,
+    accelerationBuff: 0,
     competeFightAim: undefined,
     competeFightTimer: 0,
     conditionParams: new ConditionParams(),
     // 下坡计时
     downhill: 0,
     greenSkills: 0,
+    // 变道加成 - 提高或降低突围概率
+    lane_move_buff: 0,
     loc_mind: 0,
     location: 0,
     locationPlanRush: undefined,
@@ -155,8 +156,10 @@ class PseudoUma {
     // 焦躁计时
     temptation: 0,
     velocityIdeal: 0,
+    velocityIdealBuff: 0,
     velocityPlanRush: 0,
     velocityReal: 0,
+    visible_dis: 20,
   };
   // 随机发动的技能的位置指标
   random = {

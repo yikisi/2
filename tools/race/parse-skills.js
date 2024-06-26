@@ -248,6 +248,7 @@ async function chara_skill() {
     ];
     skill_dict[dict[chara_id][0] + 800000] = 1;
   }
+  dict[1060] = [100601, 200122, 200492, 202152, 200911, 200491, 201422, 202151];
   dict[205] = [102051, 202092, 202152, 202662, 202091, 202151, 202661, 201411];
   Object.values(dict).forEach((e) => e.forEach((s) => (skill_dict[s] = 1)));
   console.log('角色卡技能', Object.keys(skill_dict).length);
@@ -294,6 +295,8 @@ async function chara_skill() {
   skill_dict[202051] = 1;
   skill_dict[200301] = 1;
   skill_dict[200302] = 1;
+  delete skill_dict[100601];
+  delete skill_dict[900601];
   console.log('+通用技能', Object.keys(skill_dict).length);
   const skill_data = await find_many_skills({
     id: { in: Object.keys(skill_dict).map(Number) },
@@ -327,7 +330,7 @@ async function chara_skill() {
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
   buffer +=
-    'skills_dict[100039]=require("#/data/race/skill/skill-100039");skills_dict[900039]=require("#/data/race/skill/skill-900039");skills_dict[102051]=require("#/data/race/skill/skill-102051");skills_dict[902051]=require("#/data/race/skill/skill-902051");skills_dict[990011]=require("#/data/race/skill/skill-990011");skills_dict[990021]=require("#/data/race/skill/skill-990021");';
+    'skills_dict[100039]=require("#/data/race/skill/skill-100039");skills_dict[900039]=require("#/data/race/skill/skill-900039");skills_dict[102051]=require("#/data/race/skill/skill-102051");skills_dict[902051]=require("#/data/race/skill/skill-902051");skills_dict[100601]=require("#/data/race/skill/skill-100601");skills_dict[900601]=require("#/data/race/skill/skill-900601");skills_dict[990011]=require("#/data/race/skill/skill-990011");skills_dict[990021]=require("#/data/race/skill/skill-990021");';
 
   const pt_dict = {};
   (await prisma.single_mode_skill_need_point.findMany()).forEach(

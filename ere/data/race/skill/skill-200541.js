@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200541,
   '逃脱术',
-  '比赛中盘容易获得领先＜作战・领放＞',
+  '比赛中盘容易获得领先＜逃马＞',
   20054,
   UmaSkill.rarity_enum.gold,
   10,

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201682,
   '前行',
-  '在赛程终盘略微冲刺调整姿态＜沙土＞',
+  '在赛程终盘略微冲刺调整姿态＜泥地＞',
   20168,
   UmaSkill.rarity_enum.normal,
   2,

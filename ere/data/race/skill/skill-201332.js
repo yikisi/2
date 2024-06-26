@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201332,
   '轻巧舞步',
-  '路线选取变得略微流畅＜作战・先行＞',
+  '路线选取变得略微流畅＜先马＞',
   20133,
   UmaSkill.rarity_enum.normal,
   2,

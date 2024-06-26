@@ -256,22 +256,11 @@ async function page_race_result(contestants, records, info) {
               content: adaptability_names[6 + uma.style].charAt(0),
               type: 'text',
             },
-            ...contestant_timer[uma.index_race]
-              .slice(timer_start, timer_end)
-              .map((e) => {
-                return { config: { width: 2 }, content: e, type: 'text' };
-              }),
-
             ...(loc[0] >= info.span
               ? [
                   {
                     config: { width: 2 },
                     content: total_time[uma.index_race],
-                    type: 'text',
-                  },
-                  {
-                    config: { width: 2 },
-                    content: [uma.rank.curr.toString(), ' 着'],
                     type: 'text',
                   },
                   {
@@ -295,11 +284,6 @@ async function page_race_result(contestants, records, info) {
                     type: 'text',
                   },
                   {
-                    config: { width: 2 },
-                    content: (i + 1).toString(),
-                    type: 'text',
-                  },
-                  {
                     config: {
                       color: uma.color,
                       fontColor: 'black',
@@ -314,6 +298,22 @@ async function page_race_result(contestants, records, info) {
                     type: 'progress',
                   },
                 ]),
+            ...contestant_timer[uma.index_race]
+              .slice(timer_start, timer_end)
+              .map((e) => {
+                return { config: { width: 2 }, content: e, type: 'text' };
+              }),
+            loc[0] >= info.span
+              ? {
+                  config: { width: 2 },
+                  content: [uma.rank.curr.toString(), ' 着'],
+                  type: 'text',
+                }
+              : {
+                  config: { width: 2 },
+                  content: (i + 1).toString(),
+                  type: 'text',
+                },
           ],
           shown: uma.index_chara >= 0,
         });
@@ -367,6 +367,12 @@ async function page_race_result(contestants, records, info) {
           { config: { width: 1 }, content: '号码', type: 'text' },
           { config: { width: 4 }, content: '名字', type: 'text' },
           { config: { width: 1 }, content: '跑法', type: 'text' },
+          { config: { width: 2 }, content: '速度', type: 'text' },
+          {
+            config: { width: progress_width },
+            content: '相对位置',
+            type: 'text',
+          },
           ...header.slice(timer_start, timer_end).map((e) => {
             return {
               config: { width: 2 },
@@ -374,13 +380,7 @@ async function page_race_result(contestants, records, info) {
               type: 'text',
             };
           }),
-          { config: { width: 2 }, content: '速度', type: 'text' },
           { config: { width: 2 }, content: '排名', type: 'text' },
-          {
-            config: { width: progress_width },
-            content: '相对位置',
-            type: 'text',
-          },
         ],
         ...get_screen(buffer, uma_shown_count),
         [{ content: [{ isBr: true }], type: 'text' }],

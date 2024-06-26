@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202451,
   '最高档',
-  '最终直线位于第二名往后，并距离领头4马身以内时，速度极大提升＜作战・居中＞',
+  '最终直线位于第二名往后，并距离领头4马身以内时，速度极大提升＜差马＞',
   20245,
   UmaSkill.rarity_enum.gold,
   10,

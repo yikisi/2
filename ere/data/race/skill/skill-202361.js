@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202361,
   '大意就会败北',
-  '比赛后半时，使体力回复的赛马娘畏缩＜沙土＞',
+  '比赛后半时，使体力回复的赛马娘畏缩＜泥地＞',
   20236,
   UmaSkill.rarity_enum.gold,
   11,

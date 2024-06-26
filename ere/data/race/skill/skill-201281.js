@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201281,
   '悍马娘',
-  '在上坡时不容易疲劳＜作战・领放＞',
+  '在上坡时不容易疲劳＜逃马＞',
   20128,
   UmaSkill.rarity_enum.gold,
   9,

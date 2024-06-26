@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202002,
   '习惯沙尘',
-  '比赛中盘若处于后方，略微回复持久力＜沙土＞',
+  '比赛中盘若处于后方，略微回复持久力＜泥地＞',
   20200,
   UmaSkill.rarity_enum.normal,
   1,

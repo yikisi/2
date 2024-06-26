@@ -540,20 +540,29 @@ function sub_simulate_skill(
               switch (skill.data.ability_types[i][j]) {
                 case ability_type_enum.CurrentSpeed:
                   skill.aims[i][j].forEach((e) => {
-                    e.base.velocityIdealBuff -= skill.values[i][j];
+                    e.race.velocityIdealBuff -= skill.values[i][j];
                     e.race.velocityReal -= skill.values[i][j];
                   });
                   break;
                 case ability_type_enum.CurrentSpeedWithNaturalDeceleration:
                 case ability_type_enum.TargetSpeed:
                   skill.aims[i][j].forEach(
-                    (e) => (e.base.velocityIdealBuff -= skill.values[i][j]),
+                    (e) => (e.race.velocityIdealBuff -= skill.values[i][j]),
                   );
                   break;
-                // case ability_type_enum.LaneMoveSpeed:
+                case ability_type_enum.VisibleDistance:
+                  skill.aims[i][j].forEach(
+                    (e) => (e.race.visible_dis -= skill.values[i][j]),
+                  );
+                  break;
+                case ability_type_enum.LaneMoveSpeed:
+                  skill.aims[i][j].forEach(
+                    (e) => (e.race.lane_move_buff += skill.values[i][j]),
+                  );
+                  break;
                 case ability_type_enum.Accel:
                   skill.aims[i][j].forEach((e) => {
-                    e.base.accelerationBuff -= skill.values[i][j];
+                    e.race.accelerationBuff -= skill.values[i][j];
                     e.race.acceleration -= skill.values[i][j];
                   });
                   break;
@@ -606,7 +615,12 @@ function sub_simulate_skill(
                     skill.aims[i][j] = [uma];
                     break;
                   case target_type_enum.Visible:
-                    skill.aims[i][j] = list_in_race.filter((e) => e !== uma);
+                    skill.aims[i][j] = list_in_race.filter(
+                      (e) =>
+                        e !== uma &&
+                        Math.abs(e.race.location - uma.race.location) <
+                          uma.race.visible_dis,
+                    );
                     break;
                   case target_type_enum.OrderInfront:
                     temp = list_finished.length;
@@ -682,8 +696,15 @@ function sub_simulate_skill(
                     );
                   break;
                 case ability_usage_enum.MultiplyRandom1:
-                  skill.values[i][j] =
-                    skill.data.ability_values[i][j] * Math.random() * 0.1;
+                  skill.values[i][j] = Math.random();
+                  if (skill.values[i][j] < 0.1) {
+                    skill.values[i][j] = 0.04;
+                  } else if (skill.values[i][j] < 0.4) {
+                    skill.values[i][j] = 0.02;
+                  } else {
+                    skill.values[i][j] = 0;
+                  }
+                  skill.values[i][j] *= skill.data.ability_values[i][j];
                   break;
                 case ability_usage_enum.MultiplyFanCount:
                 case ability_usage_enum.MultiplySingleModeWinCount:
@@ -799,13 +820,13 @@ function sub_simulate_skill(
                 case ability_type_enum.CurrentSpeed:
                 case ability_type_enum.CurrentSpeedWithNaturalDeceleration:
                   skill.aims[i][j].forEach((e) => {
-                    e.base.velocityIdealBuff += skill.values[i][j];
+                    e.race.velocityIdealBuff += skill.values[i][j];
                     e.race.velocityReal += skill.values[i][j];
                   });
                   break;
                 case ability_type_enum.TargetSpeed:
                   skill.aims[i][j].forEach(
-                    (e) => (e.base.velocityIdealBuff += skill.values[i][j]),
+                    (e) => (e.race.velocityIdealBuff += skill.values[i][j]),
                   );
                   break;
                 case ability_type_enum.Accel:
@@ -818,7 +839,7 @@ function sub_simulate_skill(
                             ability_type_enum.Accel),
                       );
                     }
-                    e.base.accelerationBuff += skill.values[i][j];
+                    e.race.accelerationBuff += skill.values[i][j];
                   });
                   break;
                 case ability_type_enum.ActivateRandomRareSkill:
@@ -833,7 +854,15 @@ function sub_simulate_skill(
                     });
                   break;
                 case ability_type_enum.VisibleDistance:
+                  skill.aims[i][j].forEach(
+                    (e) => (e.race.visible_dis += skill.values[i][j]),
+                  );
+                  break;
                 case ability_type_enum.LaneMoveSpeed:
+                  skill.aims[i][j].forEach(
+                    (e) => (e.race.lane_move_buff += skill.values[i][j]),
+                  );
+                  break;
                 case ability_type_enum.TargetLane:
                   break;
                 default:

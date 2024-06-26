@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202621,
   '陷阵之志',
-  '临近比赛终盘时位于中后方，则提升速度＜作战・居中＞',
+  '临近比赛终盘时位于中后方，则提升速度＜差马＞',
   20262,
   UmaSkill.rarity_enum.gold,
   10,

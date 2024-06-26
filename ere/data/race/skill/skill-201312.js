@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201312,
-  '先行直线○',
-  '在直线的速度略微上升＜作战・先行＞',
+  '先马直线○',
+  '在直线的速度略微上升＜先马＞',
   20131,
   UmaSkill.rarity_enum.normal,
   2,

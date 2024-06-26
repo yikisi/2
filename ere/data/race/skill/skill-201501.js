@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201501,
   '知天命者',
-  '比赛终盘位于后方时，视野更加开阔＜作战・追赶＞',
+  '比赛终盘位于后方时，视野更加开阔＜追马＞',
   20150,
   UmaSkill.rarity_enum.gold,
   10,

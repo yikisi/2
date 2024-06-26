@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202021,
   '强攻策',
-  '比赛中盘处于后方时一段时间内速度会少量加快＜作战・追赶＞',
+  '比赛中盘处于后方时一段时间内速度会少量加快＜追马＞',
   20202,
   UmaSkill.rarity_enum.gold,
   10,

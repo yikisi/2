@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202291,
   '明镜止水',
-  '若使用技能回复过体力，且比赛中盘一开始身处后方时速度提升些许＜沙土＞',
+  '若使用技能回复过体力，且比赛中盘一开始身处后方时速度提升些许＜泥地＞',
   20229,
   UmaSkill.rarity_enum.gold,
   10,

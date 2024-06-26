@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201542,
-  '居中诀窍○',
-  '稍微容易占据有利位置＜作战・居中＞',
+  '差马诀窍○',
+  '稍微容易占据有利位置＜差马＞',
   20154,
   UmaSkill.rarity_enum.normal,
   0,

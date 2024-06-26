@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200831,
-  '领放牵制',
-  '比赛初期对战术是领放的赛马娘进行牵制，使其略微容易疲劳',
+  '逃马牵制',
+  '比赛初期对出走策略是逃马的赛马娘进行牵制，使其略微容易疲劳',
   20083,
   UmaSkill.rarity_enum.normal,
   3,

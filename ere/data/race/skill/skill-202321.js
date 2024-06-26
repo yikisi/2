@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202321,
   '暴走模式！',
-  '比赛终盘位于后方时，加速度提升＜沙土＞',
+  '比赛终盘位于后方时，加速度提升＜泥地＞',
   20232,
   UmaSkill.rarity_enum.gold,
   10,

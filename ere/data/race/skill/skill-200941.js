@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200941,
-  '追赶彷徨',
-  '比赛终盘令战术是追赶的赛马娘彷徨，使其速度略微下降',
+  '追马彷徨',
+  '比赛终盘令出走策略是追马的赛马娘彷徨，使其速度略微下降',
   20094,
   UmaSkill.rarity_enum.normal,
   3,

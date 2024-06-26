@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202371,
   '势不可当',
-  '比赛中盘速度提升＜作战・先行＞',
+  '比赛中盘速度提升＜先马＞',
   20237,
   UmaSkill.rarity_enum.gold,
   10,

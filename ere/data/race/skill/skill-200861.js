@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200861,
-  '先行牵制',
-  '比赛初期对战术是先行的赛马娘进行牵制，使其略微容易变得疲劳',
+  '先马牵制',
+  '比赛初期对出走策略是先马的赛马娘进行牵制，使其略微容易变得疲劳',
   20086,
   UmaSkill.rarity_enum.normal,
   3,

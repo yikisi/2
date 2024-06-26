@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201282,
   '随势而动',
-  '在上坡时略微不容易疲劳＜作战・领放＞',
+  '在上坡时略微不容易疲劳＜逃马＞',
   20128,
   UmaSkill.rarity_enum.normal,
   1,

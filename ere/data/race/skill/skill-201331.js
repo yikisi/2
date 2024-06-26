@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201331,
   '技巧派',
-  '路线选取变得稍微流畅＜作战・先行＞',
+  '路线选取变得稍微流畅＜先马＞',
   20133,
   UmaSkill.rarity_enum.gold,
   10,

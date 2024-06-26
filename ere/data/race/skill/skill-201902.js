@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201902,
   '正面决斗',
-  '比赛终盘开始时若位于前方，稍微提升加速度＜作战・先行＞',
+  '比赛终盘开始时若位于前方，稍微提升加速度＜先马＞',
   20190,
   UmaSkill.rarity_enum.normal,
   2,

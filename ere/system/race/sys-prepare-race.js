@@ -316,7 +316,9 @@ function sys_prepare_race(list_chara, team_list, race_info) {
                 break;
               case ability_type_enum.TemptationPer:
                 temptation_prob += skill.data.ability_values[i][j];
-              // case ability_type_enum.VisibleDistance:
+                break;
+              case ability_type_enum.VisibleDistance:
+                uma.race.visible_dis += skill.data.ability_values[i][j];
             }
           }
           uma.base.greenCount++;

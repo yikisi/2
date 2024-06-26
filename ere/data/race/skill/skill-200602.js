@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200602,
   '超越姿态',
-  '比赛终盘开始时位于中团以后时，加速度稍微提升＜作战・居中＞',
+  '比赛终盘开始时位于中团以后时，加速度稍微提升＜差马＞',
   20060,
   UmaSkill.rarity_enum.normal,
   2,

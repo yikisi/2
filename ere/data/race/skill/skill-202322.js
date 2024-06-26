@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202322,
   '急剧上升',
-  '比赛终盘位于后方时，加速度稍微提升＜沙土＞',
+  '比赛终盘位于后方时，加速度稍微提升＜泥地＞',
   20232,
   UmaSkill.rarity_enum.normal,
   2,

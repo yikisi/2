@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201401,
   '努力家',
-  '准备进行超越时，少量提升加速力＜作战・居中＞',
+  '准备进行超越时，少量提升加速力＜差马＞',
   20140,
   UmaSkill.rarity_enum.gold,
   10,

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201471,
   '视野良好！没有异常！',
-  '左右移动的时候能更好的把握状况，视野更加开阔＜作战・追赶＞',
+  '左右移动的时候能更好的把握状况，视野更加开阔＜追马＞',
   20147,
   UmaSkill.rarity_enum.gold,
   10,

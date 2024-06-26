@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202832,
   '两手准备',
-  '比赛中盘发动技能时速度略微提升，之后在比赛终盘发动技能时，略微向前突进＜沙土＞',
+  '比赛中盘发动技能时速度略微提升，之后在比赛终盘发动技能时，略微向前突进＜泥地＞',
   20283,
   UmaSkill.rarity_enum.normal,
   2,

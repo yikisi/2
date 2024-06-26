@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202711,
   '将军',
-  '在终盘的最终弯道位于队伍中间往前时，若距离终点尚远则提升加速度＜先行/居中＞',
+  '在终盘的最终弯道位于队伍中间往前时，若距离终点尚远则提升加速度＜先马/差马＞',
   20271,
   UmaSkill.rarity_enum.gold,
   10,

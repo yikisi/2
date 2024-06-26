@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201411,
   '百万马力',
-  '上坡速度少量上升＜作战・居中＞',
+  '上坡速度少量上升＜差马＞',
   20141,
   UmaSkill.rarity_enum.gold,
   10,

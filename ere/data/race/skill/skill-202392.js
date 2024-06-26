@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202392,
   '拼命',
-  '在比赛中盘一开始的地方消耗大量体力，使速度少量提升＜作战・领放＞',
+  '在比赛中盘一开始的地方消耗大量体力，使速度少量提升＜逃马＞',
   20239,
   UmaSkill.rarity_enum.normal,
   2,

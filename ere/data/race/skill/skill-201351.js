@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201351,
   '大胃王',
-  '比赛中盘回复持久力＜作战・先行＞',
+  '比赛中盘回复持久力＜先马＞',
   20135,
   UmaSkill.rarity_enum.gold,
   9,

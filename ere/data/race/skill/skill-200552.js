@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200552,
   '一逃到底',
-  '最终弯道略微容易保持领先＜作战・领放＞',
+  '最终弯道略微容易保持领先＜逃马＞',
   20055,
   UmaSkill.rarity_enum.normal,
   2,

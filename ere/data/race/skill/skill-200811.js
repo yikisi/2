@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200811,
-  '对居中策略',
-  '战术是居中的赛马娘陷入焦躁状态时恢复冷静需要耗费时间',
+  '对差马策略',
+  '出走策略是差马的赛马娘陷入焦躁状态时恢复冷静需要耗费时间',
   20081,
   UmaSkill.rarity_enum.normal,
   3,

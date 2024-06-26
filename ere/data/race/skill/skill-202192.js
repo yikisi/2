@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202192,
   '万无一失',
-  '没有起跑晚的话就会在中盘一开始时回复少量体力＜先行・长距离＞',
+  '没有起跑晚的话就会在中盘一开始时回复少量体力＜先马・长距离＞',
   20219,
   UmaSkill.rarity_enum.normal,
   1,

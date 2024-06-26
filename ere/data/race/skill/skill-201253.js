@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201253,
   '暴风圆刃',
-  '在弯道上的速度加快＜作战・领放＞',
+  '在弯道上的速度加快＜逃马＞',
   20125,
   UmaSkill.rarity_enum.gold,
   10,

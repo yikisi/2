@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200551,
   '逃亡者',
-  '最终弯道容易保持领先＜作战・领放＞',
+  '最终弯道容易保持领先＜逃马＞',
   20055,
   UmaSkill.rarity_enum.gold,
   10,

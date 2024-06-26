@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202462,
   '坚韧不拔',
-  '最终直线在领头位置且后方1马身内有马娘时，速度少量提升＜作战・领放＞',
+  '最终直线在领头位置且后方1马身内有马娘时，速度少量提升＜逃马＞',
   20246,
   UmaSkill.rarity_enum.normal,
   2,

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202952,
   '先锋',
-  '临近中盘若位于前方，则稍微提升速度＜沙土＞',
+  '临近中盘若位于前方，则稍微提升速度＜泥地＞',
   20295,
   UmaSkill.rarity_enum.normal,
   2,

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201341,
   '决意直滑降',
-  '下坡变得稍微擅长＜作战・先行＞',
+  '下坡变得稍微擅长＜先马＞',
   20134,
   UmaSkill.rarity_enum.gold,
   10,
