@@ -122,7 +122,7 @@ function sys_get_move_cost(location, chara_id) {
       if (chara_id) {
         is_walk = true;
         speed = Math.min(speed, era.get(`base:${chara_id}:速度`));
-      } else if ((temp = era.get('equip:0:单人载具'))) {
+      } else if ((temp = era.get('flag:单人载具'))) {
         ratio = vehicle_influences[temp];
       } else {
         is_walk = true;
@@ -134,14 +134,14 @@ function sys_get_move_cost(location, chara_id) {
     case location_enum.station:
     case location_enum.mejiro:
       if (chara_id) {
-        if ((temp = era.get('equip:0:多人载具'))) {
+        if ((temp = era.get('flag:多人载具'))) {
           ratio = vehicle_influences[temp];
         } else {
           is_walk = true;
           speed = Math.min(speed, era.get(`base:${chara_id}:速度`));
         }
       } else if (
-        (temp = era.get('equip:0:多人载具') || era.get('equip:0:单人载具'))
+        (temp = era.get('flag:多人载具') || era.get('flag:单人载具'))
       ) {
         ratio = vehicle_influences[temp];
       } else {

@@ -346,7 +346,7 @@ async function page_trainer_office() {
   await clear();
   print_page_header();
   drawLine();
-  const vehicle = get('equip:0:单人载具');
+  const vehicle = get('flag:单人载具');
   print([
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了 ',

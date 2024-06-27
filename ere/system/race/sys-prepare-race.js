@@ -5,7 +5,10 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const { ability_type_enum } = require('#/data/race/model/uma-skill');
-const { frame_rate } = require('#/data/race/race-sim-const');
+const {
+  frame_rate,
+  mod_motivation_coefficients,
+} = require('#/data/race/race-sim-const');
 const {
   mod_acceleration_adapt_distance,
   mod_acceleration_adapt_ground,
@@ -79,6 +82,8 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     }
   }
 
+  const team_total_attrs = new Array(5).fill(0);
+
   for (const uma of list_chara) {
     uma.race.conditionParams.activate_count_all = 0;
     uma.race.conditionParams.activate_count_end_after = 0;
@@ -129,6 +134,8 @@ function sys_prepare_race(list_chara, team_list, race_info) {
       curr: uma.index_race,
       last: uma.index_race,
     };
+
+    uma.race.lane_move_buff += 0.01 * (uma.chara === -2);
 
     // 计算随机位置
     let temp;
@@ -220,23 +227,43 @@ function sys_prepare_race(list_chara, team_list, race_info) {
 
     uma.adapts.style = uma.adapt_style_list[uma.style];
 
+    let motivation_coefficient = (mod_motivation_coefficients[uma.chara] ||
+      mod_motivation_coefficients.default)[uma.motivation + 2];
+    switch (uma.chara) {
+      case 1:
+        motivation_coefficient += 0.01;
+        break;
+      case 2:
+        motivation_coefficient += race_info.has_legend * 0.01;
+        break;
+      case 3:
+        motivation_coefficient +=
+          race_info.has_legend * 0.02 - !race_info.has_legend * 0.01;
+    }
+
     // 计算基础属性值（属性值加干劲修正）
-    Object.values(attr_enum).forEach(
-      (v) =>
-        (uma.attrs[v] =
-          (uma.attrs[v] > 1200
-            ? 1200 + (uma.attrs[v] - 1200) / 2
-            : uma.attrs[v]) *
-          (1 + uma.motivation * 0.02)),
-    );
+    Object.values(attr_enum).forEach((v) => {
+      if (uma.attrs[v] > 1200) {
+        uma.attrs[v] = 1200 + (uma.attrs[v] - 1200) / 2;
+      }
+      uma.attrs[v] *= motivation_coefficient;
+    });
+
+    if (team_list.indexOf(uma) !== -1) {
+      uma.base.total_attrs = team_total_attrs;
+      Object.values(attr_enum).forEach(
+        (v) => (team_total_attrs[v] += uma.attrs[v]),
+      );
+    }
 
     uma.base.accBuffFromWiz = (uma.attrs[attr_enum.intelligence] * 0.01) / 300;
 
     // 由基础智力决定技能触发率 最低20%
     uma.probs.skill =
-      uma.attrs[attr_enum.intelligence] < 56.25
+      (uma.attrs[attr_enum.intelligence] < 56.25
         ? 0.2
-        : Math.max(1 - 45 / uma.attrs[attr_enum.intelligence], 0.2);
+        : Math.max(1 - 45 / uma.attrs[attr_enum.intelligence], 0.2)) +
+      0.01 * (uma.chara === 0);
 
     // 位置意识概率，每两秒判定一次，所以要除30帧
     uma.probs.loc_mind =
@@ -276,7 +303,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     uma.attrs[attr_enum.intelligence] *=
       mod_attr_intelligence_adapt_style[uma.adapts.style];
 
-    let temptation_prob = 0;
+    let temptation_prob = -0.01 * (uma.chara === 0);
     // 计算整个比赛生效的被动属性加成技能
     // 筛除结算完毕的常时被动 只留触发技能给比赛模拟
     uma.list_skill = uma.list_skill.filter((skill) => {
@@ -448,19 +475,6 @@ function sys_prepare_race(list_chara, team_list, race_info) {
         uma.base.loc_mind_other_diff_upper = 8 * loc_mind_base_diff;
     }
   }
-  const team_total_attrs = new Array(5).fill(0);
-  team_list.forEach((uma) => {
-    uma.base.total_attrs = team_total_attrs;
-    Object.values(attr_enum).forEach(
-      (v) =>
-        (team_total_attrs[v] +=
-          (uma.attrs[v] > 1200
-            ? 1200 + (uma.attrs[v] - 1200) / 2
-            : uma.attrs[v]) *
-          (1 + uma.motivation * 0.02)),
-    );
-  });
-
   logger.debug(`比赛相关变量预计算：${new Date().getTime() - current} ms`);
 }
 

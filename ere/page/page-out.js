@@ -130,7 +130,7 @@ async function out_page() {
   if (!(await sys_get_random_event(event_hooks.out_start)())) {
     const event_marks = new EventMarks(chara_id);
     let positions = get_positions(chara_id, player_base, chara_base);
-    vehicle = !chara_id && era.get('equip:0:单人载具');
+    vehicle = !chara_id && era.get('flag:单人载具');
     era.drawLine();
     era.printMultiColumns([
       {
@@ -224,7 +224,7 @@ async function out_page() {
                 ]);
                 const aim = await era.input();
                 if (aim !== 999) {
-                  vehicle = era.get('equip:0:多人载具');
+                  vehicle = era.get('flag:多人载具');
                   era.printMultiColumns([
                     { type: 'divider' },
                     {
@@ -295,8 +295,8 @@ async function out_page() {
         break;
       default:
         vehicle = chara_id
-          ? era.get('equip:0:多人载具')
-          : era.get('equip:0:多人载具') || era.get('equip:0:单人载具');
+          ? era.get('flag:多人载具')
+          : era.get('flag:多人载具') || era.get('flag:单人载具');
         era.printMultiColumns([
           {
             type: 'divider',

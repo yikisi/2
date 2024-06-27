@@ -44,6 +44,11 @@ class PseudoUma {
    */
   motivation;
   /**
+   * 气性
+   * @type {number|undefined}
+   */
+  chara = undefined;
+  /**
    * 五属性，用attrEnum作为下标取
    * @type {number[]}
    */
@@ -198,7 +203,6 @@ class PseudoUma {
     loc_mind: 0,
     planRush: 0,
     skill: 0,
-    temptation: 0,
   };
   // 阶段决定的系数
   factorPhase = {

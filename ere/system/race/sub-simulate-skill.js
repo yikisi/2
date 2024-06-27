@@ -598,6 +598,9 @@ function sub_simulate_skill(
           skill.count[i]++;
           skill.cooldown[i] =
             (skill.data.cooldown_times[i] * frame_rate * race_info.span) / 1000;
+          if (uma.chara === -1) {
+            skill.cooldown[i] = Math.floor(skill.cooldown[i] * 0.99);
+          }
           if (!skill.data.is_two_phase) {
             skill.cooldown[1 - i] = skill.cooldown[i];
           }
@@ -652,14 +655,14 @@ function sub_simulate_skill(
                     skill.aims[i][j] = list_in_race.filter(
                       (e) =>
                         e.race.location > uma.race.location &&
-                        e.base.temptation > 0,
+                        e.race.temptation > 0,
                     );
                     break;
                   case target_type_enum.SelfBehindTemptation:
                     skill.aims[i][j] = list_in_race.filter(
                       (e) =>
                         e.race.location < uma.race.location &&
-                        e.base.temptation > 0,
+                        e.race.temptation > 0,
                     );
                     break;
                   case target_type_enum.RunningStyleTemptationOtherSelf:
@@ -667,7 +670,7 @@ function sub_simulate_skill(
                       (e) =>
                         e !== uma &&
                         uma.style + 1 === skill.data.target_values[i][j] &&
-                        e.base.temptation > 0,
+                        e.race.temptation > 0,
                     );
                     break;
                   case target_type_enum.CharaId:
@@ -806,7 +809,7 @@ function sub_simulate_skill(
                   break;
                 case ability_type_enum.TemptationEndTime:
                   skill.aims[i][j].forEach((e) => {
-                    e.base.temptation = skill.values[i][j] * frame_rate;
+                    e.race.temptation = skill.values[i][j] * frame_rate;
                     e.race.conditionParams.is_temptation = Number(
                       skill.values[i][j] > 0,
                     );

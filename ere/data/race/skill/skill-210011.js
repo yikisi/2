@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   210011,
   '燃烧青春・速',
-  '在比赛中盘燃烧青春之魂加快速度参赛队友的速度属性总和越高越能提升速度',
+  '在比赛中盘燃烧青春之魂加快速度，参赛队友的速度属性总和越高越能提升速度',
   21001,
   UmaSkill.rarity_enum.gold,
   10,

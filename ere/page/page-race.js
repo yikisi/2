@@ -552,15 +552,17 @@ async function race_page(race) {
     const tmp = sys_reg_race(id);
     tmp.curr.race = tmp.last.race = -1;
     tmp.curr.week = tmp.last.week = -1;
+    let pressure_change;
     if (uma.rank.curr === 1) {
       sys_change_lust(id, lust_from_palam);
-      sys_change_pressure(id, -2000);
+      pressure_change = -2000;
     } else if (uma.rank.curr <= 5) {
       sys_change_lust(id, lust_from_palam / 2);
-      sys_change_pressure(id, -200 * (6 - uma.rank.curr));
+      pressure_change = -200 * (6 - uma.rank.curr);
     } else {
-      sys_change_pressure(id, 300 * uma.rank.curr);
+      pressure_change = 300 * uma.rank.curr * (1 + 0.01 * (uma.chara === 1));
     }
+    sys_change_pressure(id, pressure_change);
     if (!id) {
       continue;
     }

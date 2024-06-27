@@ -48,6 +48,10 @@ module.exports = {
   ],
   mod_attr_intelligence_adapt_style: [0.1, 0.2, 0.4, 0.6, 0.75, 0.85, 1, 1.1],
   mod_attr_stamina_style: [0.86, 0.95, 0.89, 1, 0.995],
+  mod_motivation_coefficients: {
+    default: [0.96, 0.98, 1, 1.02, 1.04],
+    2: [0.94, 0.97, 1, 1.03, 1.06],
+  },
   mod_stamina_cost_mess_dirt: [1, 1, 1, 1.01, 1.02],
   mod_stamina_cost_mess_grass: [1, 1, 1, 1.02, 1.02],
   mod_velocity_final_adapt_distance: [0.1, 0.2, 0.4, 0.6, 0.8, 0.9, 1, 1.05],

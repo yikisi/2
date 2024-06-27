@@ -52,7 +52,8 @@ function sys_sim_race(list_chara, race_info) {
     record_stamina_list[0][uma.index_race] = uma.race.stamina;
     record_location_list[0][uma.index_race] = [0, lane, slope];
 
-    start_delay[uma.index_race] = Math.random() * 0.1;
+    start_delay[uma.index_race] =
+      (Math.random() - 0.01 * (uma.chara === -2)) * 0.1;
     uma.list_skill = uma.list_skill.filter((s) => {
       if (s.data.ability_types[0][0] !== ability_type_enum.StartDash) {
         return true;

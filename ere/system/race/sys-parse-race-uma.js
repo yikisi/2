@@ -13,6 +13,7 @@ const passer_by_list = require('#/data/race/contestants/unnamed.json');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
+const { mod_motivation_coefficients } = require('#/data/race/race-sim-const');
 const {
   mod_acceleration_adapt_ground,
 } = require('#/data/race/race-sim-const.js');
@@ -51,6 +52,7 @@ function random_style(adapts) {
 function sys_parse_for_race(team_chara, race, info, contestants) {
   const current = new Date().getTime();
   let ret = [...team_chara];
+  info.has_legend = false;
   if (contestants) {
     ret.push(...contestants);
   } else {
@@ -313,20 +315,25 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     }
   }
 
-  const from_setting = era.get('flag:比赛难度');
-  if (from_setting) {
-    ret
-      .slice(team_chara.length)
-      .forEach(
-        (uma) =>
-          (uma.attrs = uma.attrs.map((e) => (e * (100 + from_setting)) / 100)),
-      );
+  if (ret.findIndex((e) => e.legend) !== -1) {
+    info.has_legend = true;
   }
+  const from_setting = era.get('flag:比赛难度');
+  ret.slice(team_chara.length).forEach((uma) => {
+    uma.index_chara > 0 &&
+      (uma.chara = era.get(`staticcflag:${uma.index_chara}:气性`));
+    from_setting &&
+      (uma.attrs = uma.attrs.map((e) => (e * (100 + from_setting)) / 100));
+  });
 
   let season;
   switch (era.get('flag:当前月')) {
     case 3:
+      season = 1 + 4 * (era.get('flag:当前周') >= 3);
+      break;
     case 4:
+      season = 1 + 4 * (era.get('flag:当前周') <= 2);
+      break;
     case 5:
       season = 1;
       break;
@@ -356,9 +363,28 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
         info.track === RaceInfo.track_enum.morioka),
   );
 
+  // 看台砍掉了：随机对面或者同侧
+  // 比赛时间：随机白天或晚上
+  const straight_front_type = (Math.random() < 0.5) + 1,
+    day_time = 4 * (Math.random() < 0.5);
   ret.forEach((uma) => {
     uma.attrs = uma.attrs.map(Math.ceil);
-    const motivation_coefficient = 1 + uma.motivation * 0.02;
+    let motivation_coefficient = (mod_motivation_coefficients[uma.chara] ||
+      mod_motivation_coefficients.default)[uma.motivation + 2];
+    switch (uma.chara) {
+      case -2:
+        motivation_coefficient -= 0.01 * (info.gates >= 15);
+        break;
+      case 1:
+        motivation_coefficient += 0.01;
+        break;
+      case 2:
+        motivation_coefficient += info.has_legend * 0.01;
+        break;
+      case 3:
+        motivation_coefficient +=
+          info.has_legend * 0.02 - !info.has_legend * 0.01;
+    }
 
     uma.race.conditionParams.always = 1;
     uma.race.conditionParams.base_speed =
@@ -399,11 +425,9 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       running_style_counts[uma.style];
     uma.race.conditionParams.running_style_count_same_rate =
       (uma.race.conditionParams.running_style_count_same * 100) / ret.length;
-    // 看台砍掉了：随机对面或者同侧
-    uma.race.conditionParams.straight_front_type = (Math.random() < 0.5) + 1;
+    uma.race.conditionParams.straight_front_type = straight_front_type;
     uma.race.conditionParams.season = season;
-    // 比赛时间：随机白天或晚上
-    uma.race.conditionParams.time = 4 * (Math.random() < 0.5);
+    uma.race.conditionParams.time = day_time;
     uma.race.conditionParams.track_id = info.track;
     uma.race.conditionParams.weather = info.weather + 1;
   });
@@ -440,7 +464,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     uma.adapts.distance = uma.adapt_distance_list[info.distance];
     const cof_dis = mod_acceleration_adapt_ground[uma.adapts.distance],
       cof_ground = mod_acceleration_adapt_ground[uma.adapts.ground],
-      cof_motivation = 1 + 0.02 * uma.motivation,
+      cof_motivation = (mod_motivation_coefficients[uma.chara] ||
+        mod_motivation_coefficients.default)[uma.motivation + 2],
       delta_intelligence =
         ((uma.attrs[attr_enum.intelligence] - average_intelligence) * 10) /
           err_intelligence +

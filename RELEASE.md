@@ -49,6 +49,7 @@ EraUma v0.7，适配 [EraElectron v1.2.4 (zero)](https://gitgud.io/umaera/era-el
 * 调整了部分未实装角色的适应性
 * 现在三女神不会因为怀孕降低好感，也不会在做爱时主动戴避孕套了
 * 现在角色的育成随机事件每周最多触发一个了
+* 将只对玩家起作用的【单人载具】和【多人载具】变量从Equip.csv移至Flag.csv
 
 ## Fixed
 

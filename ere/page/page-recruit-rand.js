@@ -37,7 +37,7 @@ async function print_rec_page() {
   await era.clear();
   print_page_header();
   era.drawLine();
-  const vehicle = era.get('equip:0:单人载具');
+  const vehicle = era.get('flag:单人载具');
   era.print([
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了训练场……',

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   210042,
   '点燃青春・根',
-  '在比赛终盘燃烧青春之魂略微为脚部注入力量参赛队友的毅力属性总和越高速度与加速度提升越多',
+  '在比赛终盘燃烧青春之魂略微为脚部注入力量，参赛队友的毅力属性总和越高速度与加速度提升越多',
   21004,
   UmaSkill.rarity_enum.normal,
   2,
