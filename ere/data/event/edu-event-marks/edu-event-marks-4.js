@@ -11,6 +11,8 @@ class MaEduMarks extends EduEventMarks {
   feel_speed;
   // 又酷又炫的必胜法！
   beautiful_winner;
+  // 丸善斯基的一天
+  memory;
   // 姐姐的烦恼
   sister_annoyance;
   //少女的忧郁
@@ -29,11 +31,14 @@ class MaEduMarks extends EduEventMarks {
   fire;
   //土
   soil;
+  //be1 木旺土溃
+  Self_contempt;
+  //ne1 平淡的每一天
+  happiness_day;
   //GOOD END 温柔的世界
   gentle_wind;
   //NORMAL END 梦的远方
   girls_dream;
-
   // 迷茫
   mygo;
 

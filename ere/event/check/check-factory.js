@@ -11,6 +11,7 @@ const cons_dict = {},
 const current = new Date().getTime();
 
 cons_dict[3] = require('#/event/check/check-3');
+cons_dict[4] = require('#/event/check/check-4');
 cons_dict[7] = require('#/event/check/check-7');
 cons_dict[8] = require('#/event/check/check-8');
 cons_dict[9] = require('#/event/check/check-9');
@@ -32,6 +33,7 @@ cons_dict[34] = require('#/event/check/check-34');
 cons_dict[37] = require('#/event/check/check-37');
 cons_dict[41] = require('#/event/check/check-41');
 cons_dict[45] = require('#/event/check/check-45');
+cons_dict[46] = require('#/event/check/check-46');
 cons_dict[48] = require('#/event/check/check-48');
 cons_dict[52] = require('#/event/check/check-52');
 cons_dict[60] = require('#/event/check/check-60');

@@ -99,7 +99,7 @@ module.exports = async (hook) => {
       await era.printAndWait(
         `一瞬间做好了决斗准备的${me.actual_name}瞬间处于兴奋状态，瞄准了飞鹰子手中的便当！`,
       );
-      await chara_talk.say_and_wait(`堵上偶像之名！飞鹰子绝不会输！`);
+      await chara_talk.say_and_wait(`赌上偶像之名！飞鹰子绝不会输！`);
       await era.printAndWait(`两人之间的战斗（？）吸引了周围游人的纷纷侧目。`);
       await era.printAndWait(`最终`);
       era.printButton(
