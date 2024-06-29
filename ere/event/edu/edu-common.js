@@ -307,7 +307,6 @@ handlers[event_hooks.race_end] = async (chara_id, _, extra_flag) => {
 };
 
 handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
-  console.log(chara_id);
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
   await era.printAndWait(

@@ -244,15 +244,13 @@ handlers[event_hooks.school_atrium] = async (
     era.println();
 
     era.printButton('「哎唷，那不是旅程同学吗！」', 1);
-    if (
-      era.get('cflag:49:招募状态') === recruit_flags.yes &&
-      era.get('love:49') >= 50
-    ) {
-      era.printButton('爱抚二人腰间敏感的地方。', 2);
-    }
-    const ret = await era.input();
+    era.printButton('爱抚二人腰间敏感的地方。', 2, {
+      disabled:
+        era.get('cflag:49:招募状态') !== recruit_flags.yes ||
+        era.get('love:49') < 50,
+    });
 
-    if (ret === 1) {
+    if ((await era.input()) === 1) {
       await festa.say_and_wait('妈的，被看到了吗？！……你骗我！');
       await gold_ship.say_and_wait('好，是我赢了！！');
       await festa.say_and_wait(
@@ -575,12 +573,11 @@ handlers[event_hooks.school_rooftop] = async (
   era.println();
   era.printButton(`${festa.name}「限定猜拳……！」`, 1);
   era.printButton(`${festa.name}「皇帝牌……！」`, 2);
-  if (
-    era.get('cflag:49:招募状态') === recruit_flags.yes &&
-    era.get('love:49') >= 50
-  ) {
-    era.printButton(`${festa.name}「……性爱♡」`, 3);
-  }
+  era.printButton(`${festa.name}「……性爱♡」`, 3, {
+    disabled:
+      era.get('cflag:49:招募状态') !== recruit_flags.yes ||
+      era.get('love:49') < 50,
+  });
   let ret = await era.input();
   if (ret === 3) {
     await era.printAndWait(
