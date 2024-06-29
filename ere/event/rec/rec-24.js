@@ -28,7 +28,6 @@ module.exports = {
           if (await check_before_rec(24)) {
             return false;
           }
-          era.set('flag:物色对象', 24);
           await era.printAndWait(
             `今天是为了看清并发掘未来有望的实力赛马娘们的选拔比赛的日子，会遇见怎样的赛马娘呢？${CharaTalk.me.name} 一边兴奋着一边来到了比赛现场——`,
           );
@@ -216,6 +215,7 @@ module.exports = {
         } else {
           era.set(`cflag:24:随机招募`, 0); //三阶段把随机招募设为0
           if (era.get(`cflag:24:招募状态`) === -3) {
+            era.set('flag:物色对象', 24);
             await chara.say_and_wait('呀吼——♪最近经常遇到你啊。');
             await chara.say_and_wait(
               '现在啊，我正在看下面赛场上的模拟赛。毕竟Maya又参不了赛——。',

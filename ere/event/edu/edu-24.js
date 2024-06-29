@@ -12,7 +12,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
-const { attr_names, fumble_result } = require('#/data/train-const');
+const { attr_enum, attr_names, fumble_result } = require('#/data/train-const');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise>} */
 const handlers = {};
@@ -115,6 +115,9 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
  * @param {TrainFailParams} extra_flag
  */
 handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
+  if (extra_flag.train === attr_enum.intelligence) {
+    throw new Error();
+  }
   const callname = sys_get_callname(24, 0),
     maya = get_chara_talk(24),
     me = get_chara_talk(0);
@@ -214,42 +217,40 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
         '乖乖休息了……',
       ]);
       era.println();
+    } else if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
+      await maya.say_and_wait(['……难道，是不合 ', callname, ' 的喜好吗？']);
+      await maya.say_and_wait([
+        '那么那么，',
+        callname,
+        '！人家要做什么你才会『心动』～？',
+      ]);
+      era.printButton('「看你健康才最让我开心」', 1);
+      await era.input();
+      await maya.say_and_wait('健康……？只要人家恢复健康，你就会开心了？');
+      await maya.say_and_wait('嘿嘿，嘿嘿嘿……嘿嘿嘿嘿嘿！');
+      await maya.say_and_wait('我知道了！我会好好地休息，恢复健康的～！');
+      await maya.say_and_wait('然后啊然后啊！到时候再一起训练吧☆');
+      await era.printAndWait(
+        '就跟自己宣示的一样，摩耶重炮好好地休息……健康地继续训练！',
+      );
     } else {
-      if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
-        await maya.say_and_wait(['……难道，是不合 ', callname, ' 的喜好吗？']);
-        await maya.say_and_wait([
-          '那么那么，',
-          callname,
-          '！人家要做什么你才会『心动』～？',
-        ]);
-        era.printButton('「看你健康才最让我开心」', 1);
-        await era.input();
-        await maya.say_and_wait('健康……？只要人家恢复健康，你就会开心了？');
-        await maya.say_and_wait('嘿嘿，嘿嘿嘿……嘿嘿嘿嘿嘿！');
-        await maya.say_and_wait('我知道了！我会好好地休息，恢复健康的～！');
-        await maya.say_and_wait('然后啊然后啊！到时候再一起训练吧☆');
-        await era.printAndWait(
-          '就跟自己宣示的一样，摩耶重炮好好地休息……健康地继续训练！',
-        );
-      } else {
-        await maya.say_and_wait('咦！？才不是呢！这是『大人』的撒娇方式～！');
-        await maya.say_and_wait(
-          '怪了，书上明明有写用这招就能『一击穿心☆』的说……',
-        );
-        await maya.say_and_wait(
-          '我懂了！是因为我没有发烧！要是我发烧，一定能像书上那样──',
-        );
-        era.printButton('「乖、乖、休、息！」', 1);
-        await era.input();
-        await maya.say_and_wait('呜呜……好啦～～');
-        await era.printAndWait([
-          '虽然 ',
-          maya.get_colored_name(),
-          ' 一脸不满，最后还是总算让',
-          maya.sex,
-          '乖乖休息了……',
-        ]);
-      }
+      await maya.say_and_wait('咦！？才不是呢！这是『大人』的撒娇方式～！');
+      await maya.say_and_wait(
+        '怪了，书上明明有写用这招就能『一击穿心☆』的说……',
+      );
+      await maya.say_and_wait(
+        '我懂了！是因为我没有发烧！要是我发烧，一定能像书上那样──',
+      );
+      era.printButton('「乖、乖、休、息！」', 1);
+      await era.input();
+      await maya.say_and_wait('呜呜……好啦～～');
+      await era.printAndWait([
+        '虽然 ',
+        maya.get_colored_name(),
+        ' 一脸不满，最后还是总算让',
+        maya.sex,
+        '乖乖休息了……',
+      ]);
     }
   }
 };

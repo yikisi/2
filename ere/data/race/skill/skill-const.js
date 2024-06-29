@@ -1,8 +1,14 @@
 const chara_skill_dict = {},
   skills_dict = {};
 
+chara_skill_dict[204] = [
+  102041, 201702, 200722, 201611, 201701, 200721, 201612, 200491,
+];
 chara_skill_dict[205] = [
   102051, 202092, 202152, 202662, 202091, 202151, 202661, 201411,
+];
+chara_skill_dict[206] = [
+  102061, 203002, 202872, 202022, 203001, 202871, 202021, 200511,
 ];
 chara_skill_dict[1] = [
   100011, 200512, 201352, 200732, 200162, 201351, 200612, 200511,
@@ -1295,8 +1301,12 @@ const current = new Date().getTime();
 
 skills_dict[100039] = require('#/data/race/skill/skill-100039');
 skills_dict[900039] = require('#/data/race/skill/skill-900039');
+skills_dict[102041] = require('#/data/race/skill/skill-102041');
+skills_dict[902041] = require('#/data/race/skill/skill-902041');
 skills_dict[102051] = require('#/data/race/skill/skill-102051');
 skills_dict[902051] = require('#/data/race/skill/skill-902051');
+skills_dict[102061] = require('#/data/race/skill/skill-102061');
+skills_dict[902061] = require('#/data/race/skill/skill-902061');
 skills_dict[100601] = require('#/data/race/skill/skill-100601');
 skills_dict[900601] = require('#/data/race/skill/skill-900601');
 skills_dict[990011] = require('#/data/race/skill/skill-990011');

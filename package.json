@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@prisma/client": "^5.16.0"
+    "@prisma/client": "^5.16.1"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
@@ -11,7 +11,7 @@
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.2",
-    "prisma": "^5.16.0"
+    "prisma": "^5.16.1"
   },
   "engines": {
     "node": ">=18"

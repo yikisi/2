@@ -2,10 +2,14 @@ const { writeFileSync } = require('node:fs');
 
 const { PrismaClient } = require('@prisma/client');
 
+const attr_score_table = require('../../ere/data/attr-score-table.json');
+
 const prisma = new PrismaClient();
 
 async function task() {
-  const contestants = { named: [], unnamed: [] };
+  const contestants = { named: [], unnamed: [] },
+    skill_dict = {},
+    skill_set_dict = {};
   [
     ...(await prisma.daily_race_npc.findMany()),
     ...(await prisma.legend_race_npc.findMany()),
@@ -33,7 +37,7 @@ async function task() {
       ),
       skills: e.skill_set_id,
     };
-    tmp.level = tmp.attrs.reduce((p, c) => p + c);
+    skill_set_dict[tmp.skills] = [];
     if (e.mob_id) {
       contestants.unnamed.push(tmp);
     } else {
@@ -45,6 +49,38 @@ async function task() {
       }
       contestants.named.push(tmp);
     }
+  });
+  (
+    await prisma.skill_set.findMany({
+      where: { id: { in: Object.keys(skill_set_dict).map(Number) } },
+    })
+  ).forEach((e) => {
+    for (const k in e) {
+      if (k.startsWith('skill_id') && e[k]) {
+        skill_set_dict[e.id].push(e[k]);
+        skill_dict[e[k]] = 0;
+      }
+    }
+  });
+  (
+    await prisma.skill_data.findMany({
+      where: { id: { in: Object.keys(skill_dict).map(Number) } },
+      select: { id: true, grade_value: true },
+    })
+  ).forEach((e) => (skill_dict[e.id] = e.grade_value));
+  for (const key in skill_set_dict) {
+    skill_set_dict[key] = skill_set_dict[key].reduce(
+      (p, c) => p + skill_dict[c],
+      0,
+    );
+  }
+  [...contestants.named, ...contestants.unnamed].forEach((e) => {
+    e.level =
+      skill_set_dict[e.skills] +
+      e.attrs.reduce(
+        (p, c) => p + (attr_score_table[c] ?? attr_score_table[1200]),
+        0,
+      );
   });
 
   console.log(

@@ -183,8 +183,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
             named_list.filter(
               (e) =>
                 e.id === id &&
-                e.adapt_ground[info.ground] >= 5 &&
-                e.adapt_distance[info.distance] >= 5 &&
+                e.adapt_ground[info.ground] >= 4 &&
+                e.adapt_distance[info.distance] >= 4 &&
                 e.level >= named_difficulty - 200 &&
                 e.level <= named_difficulty + 400,
             ),
@@ -227,8 +227,10 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
           named_list
             .filter(
               (e) =>
-                e.adapt_ground[info.ground] >= 5 &&
-                e.adapt_distance[info.distance] >= 5 &&
+                !contestant_dict[e.id] &&
+                era.get(`cflag:${e.id}:招募状态`) !== recruit_flags.yes &&
+                e.adapt_ground[info.ground] >= 4 &&
+                e.adapt_distance[info.distance] >= 4 &&
                 e.level >= named_difficulty[0] - 400 &&
                 e.level <= named_difficulty[1] + 200,
             )
@@ -236,10 +238,6 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
               (p[c.id] || (p[c.id] = [])).push(c);
               return p;
             }, {}),
-        ).filter(
-          (e) =>
-            !contestant_dict[e.id] &&
-            era.get(`cflag:${e.id}:招募状态`) !== recruit_flags.yes,
         ),
         Math.min(legend_count, info.gates - ret.length),
       ).forEach((e) => {

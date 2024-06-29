@@ -11,6 +11,7 @@ const {
 } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaSkills = require('#/data/chara-skills');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,string,RaceEndParams)>} handlers */
@@ -433,9 +434,11 @@ module.exports = (handlers) => {
     await ruby.say_and_wait('虽然是人类，但你在某方面是很强的生物。');
     await ruby.say_and_wait('今后，我可能还会碰壁。');
     await ruby.say_and_wait('还请，不要放开我的手。');
-    //TODO【紧追不舍】lv+1
     extra_flag.attr_change = new Array(5).fill(3);
     extra_flag.pt_change = 45;
+    extra_flag.skill_change = [
+      new CharaSkills(85).get().indexOf(200672) === -1 ? 200672 : 200671,
+    ];
   };
 
   handlers[race_enum.yasu_kin] = async (
@@ -473,9 +476,11 @@ module.exports = (handlers) => {
     await ruby.say_and_wait('我认为在那里，我可以触摸到更高的顶峰。');
     await ruby.say_and_wait('优秀的参赛者和对手们，会盯上我们吧。');
     await ruby.say_and_wait('但我感受到了，不能置之不理的义务感。');
-    //TODO 【差行直线】lv+1
     extra_flag.attr_change = new Array(5).fill(3);
     extra_flag.pt_change = 45;
+    extra_flag.skill_change = [
+      new CharaSkills(85).get().indexOf(201382) === -1 ? 201382 : 201381,
+    ];
   };
 
   handlers[race_enum.sprt_sta] = async (
@@ -603,10 +608,13 @@ module.exports = (handlers) => {
       ruby.get_colored_name(),
       ' 露出了会心的微笑。',
     ]);
-    //TODO 【短距离直线】lv+5，【短距离弯道】lv+5；
     extra_flag.attr_change = new Array(5).fill(20);
     extra_flag.base_change = JSON.parse('{"体力":-150}');
     extra_flag.pt_change = 120;
+    extra_flag.skill_change = [
+      new CharaSkills(85).get().indexOf(200962) === -1 ? 200962 : 200961,
+      new CharaSkills(85).get().indexOf(200972) === -1 ? 200972 : 200971,
+    ];
   };
 
   handlers[race_enum.mile_cha] = async (
@@ -650,6 +658,10 @@ module.exports = (handlers) => {
     await era.printAndWait('这天，后来人们如此描述：华丽一族新的象征诞生了。');
     extra_flag.attr_change = new Array(5).fill(3);
     extra_flag.pt_change = 45;
-    // TODO 【短距离弯道】，【英里弯道】【外道超车准备】lv+2
+    extra_flag.skill_change = [
+      new CharaSkills(85).get().indexOf(200612) === -1 ? 200612 : 200611,
+      new CharaSkills(85).get().indexOf(201032) === -1 ? 201032 : 201031,
+      new CharaSkills(85).get().indexOf(201042) === -1 ? 201042 : 201041,
+    ];
   };
 };

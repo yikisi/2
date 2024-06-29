@@ -336,14 +336,6 @@ module.exports = async () => {
           ],
           ['特殊角色（临时）', '黑奴队长'],
           [[{ color: get_chara_color(3), content: '东海帝王' }], '天马闪光蹄'],
-          [
-            [
-              { color: get_chara_color(4), content: '丸善斯基' },
-              '、',
-              { color: get_chara_color(46), content: '醒目飞鹰' },
-            ],
-            '黑奴一号',
-          ],
           [[{ color: get_chara_color(7), content: '黄金船' }], '雞雞'],
           [[{ color: get_chara_color(17), content: '鲁铎象征' }], '露娜俘虏'],
           [

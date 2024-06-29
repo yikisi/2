@@ -5,9 +5,9 @@ module.exports = new UmaSkill(
   'Déesse réincarnée',
   '在临近终点的弯道时，速度微量提升，同时恢复少量体力',
   90205,
-  5,
-  18,
-  340,
+  UmaSkill.rarity_enum.normal,
+  2,
+  180,
   [() => true, () => true],
   [
     (args) =>
@@ -67,5 +67,5 @@ module.exports = new UmaSkill(
   1,
   0,
   false,
-  false,
+  true,
 );
