@@ -44,7 +44,7 @@ async function sys_auto_react(shown) {
         0.1 *
           (era.get(`talent:${lover}:喜欢责骂`) +
             era.get(`talent:${lover}:喜欢痛苦`)) +
-        era.get(`base:${lover}:性欲`) / 20000 +
+        Math.pow(2, era.get(`base:${lover}:性欲`) / 1000 - 10) +
         (era.get(`base:${lover}:压力`) * 3) / 40000;
     era.logger.debug(`角色 ${lover} 反抗：${(resist_ratio * 100).toFixed(2)}%`);
     if (

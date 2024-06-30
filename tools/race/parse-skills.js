@@ -268,7 +268,9 @@ async function chara_skill() {
             ...(await prisma.daily_race_npc.findMany()),
             ...(await prisma.legend_race_npc.findMany()),
             ...(await prisma.single_mode_npc.findMany()),
-          ].map((e) => e.skill_set_id),
+          ]
+            .filter((e) => e.chara_id < 9000)
+            .map((e) => e.skill_set_id),
         },
       },
     })

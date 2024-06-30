@@ -444,7 +444,18 @@ async function page_race_result(contestants, records, info) {
     },
     top_locations = records.loc.map((r) =>
       Math.max(...r.map((e) => Math.min(e[0], info.span))),
-    );
+    ),
+    rows_num = Math.floor(report_buffer.length / 2);
+  let result_reports = [];
+  for (let i = 0; i < rows_num; ++i) {
+    result_reports.push(report_buffer[i], report_buffer[i + rows_num]);
+  }
+  result_reports = result_reports
+    .filter((e) => e)
+    .map((e) => {
+      e.config.width = 12;
+      return e;
+    });
   while (flag_charts > 0) {
     await era.clear();
     era.setAlign('center');
@@ -613,7 +624,7 @@ async function page_race_result(contestants, records, info) {
             })),
             labels,
           },
-          options,
+          options: { ...options, scales: { y: { suggestedMin: speed_min } } },
         });
         break;
       case 4:
@@ -689,8 +700,8 @@ async function page_race_result(contestants, records, info) {
               type: 'text',
             },
           ],
-          { columns: report_buffer, config: { width: 12 } },
-          { columns: skill_buffer, config: { width: 12 } },
+          { columns: result_reports, config: { width: 16 } },
+          { columns: skill_buffer, config: { width: 8 } },
         );
     }
     flag_charts = flag_charts !== 99 && (await era.input());

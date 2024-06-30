@@ -14,6 +14,7 @@ const CharaTitles = require('#/data/chara-titles');
 const { attr_colors, hair_colors, skin_colors } = require('#/data/const.json');
 const {
   chara_desc,
+  chara_full_desc,
   human_sex_title,
   sex_title,
 } = require('#/data/ero/status-const');
@@ -96,8 +97,14 @@ module.exports = {
       ' ',
     );
     if (race) {
+      const characteristic = era.get(`cflag:${chara.id}:气性`);
       right_intro_list.push(
-        !growth ? '幼年' : chara_desc[era.get(`cflag:${chara.id}:气性`) + 3],
+        !growth
+          ? '幼年'
+          : {
+              content: chara_desc[characteristic + 3],
+              title: chara_full_desc[characteristic + 3],
+            },
         ' ',
         sex_title[chara.sex_code],
       );

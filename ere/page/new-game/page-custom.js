@@ -11,6 +11,7 @@ const { buff_colors, sex_colors } = require('#/data/color-const');
 const { hair_colors, skin_colors } = require('#/data/const.json');
 const {
   chara_desc,
+  chara_full_desc,
   human_sex_title,
   penis_colors,
   penis_desc,
@@ -28,15 +29,6 @@ const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');
 
 const body_hair_type = ['天生光滑', '普通类型', '生长快而硬'];
-const chara_full_desc = [
-  '训练和调教的效果稍微上升',
-  '比赛中出迟的可能性稍微下降，被阻拦时突围的概率稍微上升，但参赛人数较多时能力会稍微下降',
-  '比赛中技能的冷却时间稍微下降，训练效果稍微上升',
-  '比赛中焦躁的可能性稍微下降，使用技能的概率稍微上升',
-  '比赛中能力会稍微上升，但是会稍微提高输掉比赛后的压力',
-  '面对强敌时比赛能力会稍微上升，且干劲的影响稍微变大',
-  '面对强敌时比赛能力会上升，但是没有强敌的比赛能力会稍微下降',
-];
 const characteristic_type = [
   '发色',
   '呆毛',

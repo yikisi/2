@@ -1,4 +1,4 @@
-﻿const { logger } = require('#/era-electron');
+﻿const { logger, printInColRows, replaceInColRows } = require('#/era-electron');
 
 const sub_simulate_skill = require('#/system/race/sub-simulate-skill');
 
@@ -33,6 +33,11 @@ function sys_sim_race(list_chara, race_info) {
         ? mod_stamina_cost_mess_grass[race_info.mess]
         : mod_stamina_cost_mess_dirt[race_info.mess],
     has_final_corner = race_info.lanes.find((e) => e.is_curve && e.is_last);
+  let flag_race_phase = 0;
+  printInColRows([
+    { type: 'divider' },
+    { content: '选手检查蹄铁……', type: 'text' },
+  ]);
 
   const record_events_list = [
       new Array(count_uma).fill(undefined).map(() => []),
@@ -215,6 +220,51 @@ function sys_sim_race(list_chara, race_info) {
       record_skill_list,
     );
 
+    if (
+      list_in_race[0].race.conditionParams.distance_diff_rate >=
+      20 * flag_race_phase
+    ) {
+      switch (flag_race_phase++) {
+        case 0:
+          replaceInColRows([
+            { type: 'divider' },
+            {
+              content: '选手检查蹄铁……正在检查跑道……',
+              type: 'text',
+            },
+          ]);
+          break;
+        case 1:
+          replaceInColRows([
+            { type: 'divider' },
+            {
+              content: '选手检查蹄铁……正在检查跑道……正在检查马闸……',
+              type: 'text',
+            },
+          ]);
+          break;
+        case 2:
+          replaceInColRows([
+            { type: 'divider' },
+            {
+              content:
+                '选手检查蹄铁……正在检查跑道……正在检查马闸……正在检查令枪……',
+              type: 'text',
+            },
+          ]);
+          break;
+        case 3:
+          replaceInColRows([
+            { type: 'divider' },
+            {
+              content:
+                '选手检查蹄铁……正在检查跑道……正在检查马闸……正在检查令枪……选手入闸……',
+              type: 'text',
+            },
+          ]);
+      }
+    }
+
     list_in_race.forEach((uma, i, l) => {
       // 位置意识
       let no_loc_mind_flag = true,
@@ -362,6 +412,14 @@ function sys_sim_race(list_chara, race_info) {
   logger.debug(
     `比赛模拟：${duration} ms / ${Math.ceil(timer * frame_rate)} 帧，平均 ${(duration / (timer * frame_rate)).toFixed(4)} ms/帧`,
   );
+  replaceInColRows([
+    { type: 'divider' },
+    {
+      content:
+        '选手检查蹄铁……正在检查跑道……正在检查马闸……正在检查令枪……选手入闸……开赛！',
+      type: 'text',
+    },
+  ]);
   return {
     events: record_events_list,
     loc: record_location_list,

@@ -311,7 +311,7 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by('医生', [
       ruby.get_colored_name(),
-      '的右脚，是急性化脓性疾病。',
+      ' 的右脚，是急性化脓性疾病。',
     ]);
     await say_by_passer_by('医生', '也就是所谓的【蜂窝织炎】。');
     await me.say_and_wait('！', true);
@@ -319,7 +319,7 @@ module.exports = (handlers) => {
     await say_by_passer_by('医生', '多亏你在违和感阶段，就及时来就诊了。');
     await say_by_passer_by('医生', [
       '在你们下次的目标 ',
-      race_infos[race_enum.sats_sho].get_colored_name(),
+      race_infos[race_enum.shuk_sho].get_colored_name(),
       ' 前，就可以痊愈。',
     ]);
     await ruby.say_and_wait('……');

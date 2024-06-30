@@ -15,7 +15,11 @@ const {
   love_colors,
   relation_colors,
 } = require('#/data/const.json');
-const { chara_desc, growth_stage } = require('#/data/ero/status-const');
+const {
+  chara_desc,
+  chara_full_desc,
+  growth_stage,
+} = require('#/data/ero/status-const');
 const {
   get_love_info,
   get_relation_info,
@@ -102,7 +106,9 @@ function cur_chara_component(chara_id, type, location_npc) {
       in_train =
         growth >= 2 && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48,
       motivation = era.get(`cflag:${chara_id}:干劲`),
-      out_of_train = era.get(`cflag:${chara_id}:殿堂`);
+      out_of_train = era.get(`cflag:${chara_id}:殿堂`),
+      race = era.get(`cflag:${chara_id}:种族`),
+      characteristic = era.get(`cflag:${chara_id}:气性`);
     /** @type {*[]} */
     const name_columns = ['当前角色：'];
     if (title) {
@@ -125,12 +131,7 @@ function cur_chara_component(chara_id, type, location_npc) {
         ' ',
         get_train_time(chara_id).substring(0, 3),
       );
-    } else if (
-      era.get(`cflag:${chara_id}:种族`) &&
-      !out_of_train &&
-      growth >= 2 &&
-      growth !== 4
-    ) {
+    } else if (race && !out_of_train && growth >= 2 && growth !== 4) {
       name_columns.push(' 待入学');
     }
     name_columns.push(...race_indicator(chara_id));
@@ -223,23 +224,32 @@ function cur_chara_component(chara_id, type, location_npc) {
             type: 'progress',
           },
           { content: '', type: 'text' },
-          {
-            config: { width: 2 },
-            content: '气性',
-            type: 'text',
-          },
-          {
-            config: { width: 4 },
-            content: chara_desc[era.get(`cflag:${chara_id}:气性`) + 3],
-            type: 'text',
-          },
+          ...(race && growth >= 1
+            ? [
+                {
+                  config: { width: 2 },
+                  content: '气性',
+                  type: 'text',
+                },
+                {
+                  config: { width: 4 },
+                  content: [
+                    {
+                      content: chara_desc[characteristic + 3],
+                      title: chara_full_desc[characteristic + 3],
+                    },
+                  ],
+                  type: 'text',
+                },
+              ]
+            : []),
           {
             config: { width: 2 },
             content: '状态',
             type: 'text',
           },
           {
-            config: { width: 16 },
+            config: { width: 16 + !(race && growth >= 1) * 6 },
             content: get_status(chara_id),
             type: 'text',
           },

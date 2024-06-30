@@ -19,7 +19,7 @@ module.exports = class extends CustomizedMec {
   }
 
   get_relation_buff() {
-    return 3 * new SSEduMarks().wins;
+    return Math.min(new SSEduMarks().wins, 20);
   }
 
   get_status() {
@@ -27,9 +27,9 @@ module.exports = class extends CustomizedMec {
       ret_list = [];
     if (wins) {
       ret_list.push({
-        color: get_chara_color(400),
+        color: get_chara_color(this.id),
         content: `胜利的承诺(${wins})`,
-        title: `[胜利的承诺(${wins})]：参赛时属性+${3 * wins}%，好感获取+${3 * wins}%，效果随连胜次数增强`,
+        title: `[胜利的承诺(${wins})]：参赛时属性+${this.get_relation_buff()}%，好感获取+${3 * wins}%，效果随连胜次数增强`,
       });
     }
     return ret_list;

@@ -14,19 +14,27 @@ const { skills_dict } = require('#/data/race/skill/skill-const');
 function get_skills_and_print_in_event(chara_id, skills, skill_control) {
   let ret_flag = false;
   if (skills instanceof Array) {
-    const _control = skill_control || new CharaSkills(chara_id);
-    _control.remove(
-      ..._control
-        .get()
-        .filter(
-          (e) =>
-            skills.findIndex(
-              (s) =>
-                s !== e && skills_dict[s].group_id === skills_dict[e].group_id,
-            ) !== -1,
-        ),
-    );
-    const got = _control.add(...skills);
+    const _control = skill_control || new CharaSkills(chara_id),
+      to_remove = [],
+      current_skills = _control.get(),
+      new_skills = skills.filter((e) => {
+        const os = current_skills.find(
+          (s) => s !== e && skills_dict[s].group_id === skills_dict[e].group_id,
+        );
+        if (!os) {
+          return true;
+        } else if (
+          (skills_dict[e].category & skills_dict[os].category & 0b111) === 0 ||
+          skills_dict[e].rarity * 10 + Math.abs((e % 10) * 2 - 3.5) >
+            skills_dict[os].rarity * 10 + Math.abs((os % 10) * 2 - 3.5)
+        ) {
+          to_remove.push(os);
+          return true;
+        }
+        return false;
+      });
+    _control.remove(...to_remove);
+    const got = _control.add(...new_skills);
     if (got.length > 0) {
       const buffer = [];
       got.forEach((e) => buffer.push(...skills_dict[e].get_colored_name()));
