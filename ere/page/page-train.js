@@ -36,9 +36,13 @@ const {
 } = require('#/data/train-const');
 
 module.exports = async () => {
+  const train_list = era
+    .getAddedCharacters()
+    .filter((chara_id) => sys_check_train_enabled(chara_id));
   let flag_train = true,
     chara_id = era.get('flag:当前互动角色'),
-    skill_control = new CharaSkills(chara_id);
+    skill_control = new CharaSkills(chara_id),
+    index = train_list.indexOf(chara_id);
 
   while (flag_train) {
     await era.clear();
@@ -248,11 +252,27 @@ module.exports = async () => {
         content: '查看队伍列表',
         type: 'button',
       },
+      ...(train_list.length > 1
+        ? [
+            {
+              accelerator: 101,
+              config: { width: 4, disabled: index === 0 },
+              content: '上一位',
+              type: 'button',
+            },
+            {
+              accelerator: 102,
+              config: { width: 4, disabled: index === train_list.length - 1 },
+              content: '下一位',
+              type: 'button',
+            },
+          ]
+        : []),
       ...(race &&
       (chara_id === 0 || era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)
         ? [
             {
-              accelerator: 101,
+              accelerator: 103,
               config: {
                 disabled:
                   chara_id === 0 && skill_control.get().length >= 9 && pt < 100,
@@ -317,6 +337,11 @@ module.exports = async () => {
         skill_control = new CharaSkills(chara_id);
         break;
       case 101:
+      case 102:
+        chara_id = train_list[ret === 101 ? --index : ++index];
+        skill_control = new CharaSkills(chara_id);
+        break;
+      case 103:
         if (chara_id === 0 && skill_control.get().length >= 9) {
           if (await select_yes_or_no('要使用 100 点技能点数重置技能吗？')) {
             era.add('exp:0:技能点数', -100);

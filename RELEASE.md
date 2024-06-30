@@ -2,7 +2,9 @@
 
 _incoming_
 
-EraUma v0.7，适配 [EraElectron v1.2.4 (zero)](https://gitgud.io/umaera/era-electron/-/releases/permalink/latest) 版本
+EraUma v0.7，适配 [EraElectron v1.3.0 (zero)](https://gitgud.io/umaera/era-electron/-/releases/v1.3.0) 版本
+
+因为变量变化，需要重开档
 
 ## Added
 
@@ -30,8 +32,10 @@ EraUma v0.7，适配 [EraElectron v1.2.4 (zero)](https://gitgud.io/umaera/era-el
 * 新增道具：【透明棉被】【马跳S家庭装】，分别在商店街粉红色的小店和特雷森神秘的小卖部购买，在某些地方提高游戏难度（需要开启极端行为）
 * 润色以下角色口上并合并：
   * 摩耶重炮
-  * 周日宁静：现在周日宁静将以美国三冠为目标
+  * 周日宁静
+    * 现在周日宁静将以美国三冠为目标
   * 第一红宝石
+    * 第一红宝石在保健室触发的事件因为保健室暂未开放而无法触发
 * 新增了以下角色的招募阶段口上
   * 高多芬柏布
   * 拜耶尔土耳其
@@ -55,6 +59,8 @@ EraUma v0.7，适配 [EraElectron v1.2.4 (zero)](https://gitgud.io/umaera/era-el
 * 现在三女神不会因为怀孕降低好感，也不会在做爱时主动戴避孕套了
 * 现在角色的育成随机事件每周最多触发一个了
 * 将只对玩家起作用的【单人载具】和【多人载具】变量从Equip.csv移至Flag.csv
+* 优化了访客接待室的访问按钮，现在访客接待室没有访客时将保持关闭状态
+* 优化了训练界面
 
 ## Fixed
 

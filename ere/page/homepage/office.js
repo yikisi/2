@@ -43,6 +43,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
+const LocCharacters = require('#/data/event/loc-characters');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
@@ -74,7 +75,8 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
           stamina: era.get(`base:${chara_id}:体力`),
           time: era.get(`base:${chara_id}:精力`),
         }
-      : undefined;
+      : undefined,
+    loc_chara = new LocCharacters();
 
   era.printInColRows(
     {
@@ -351,7 +353,8 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   sys_check_act_disabled(
                     sys_get_move_cost(location_enum.trainer),
                     player_base,
-                  ),
+                  ) ||
+                  loc_chara.get(location_enum.trainer).length === 0,
                 width: 6,
               },
               content: '前往训练员办公室',
@@ -455,7 +458,8 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   sys_check_act_disabled(
                     sys_get_move_cost(location_enum.chairman),
                     player_base,
-                  ),
+                  ) ||
+                  loc_chara.get(location_enum.chairman).length === 0,
                 width: 6,
               },
               content: '前往理事长办公室',
@@ -472,7 +476,8 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   sys_check_act_disabled(
                     sys_get_move_cost(location_enum.visitor),
                     player_base,
-                  ),
+                  ) ||
+                  loc_chara.get(location_enum.visitor).length === 0,
                 width: 6,
               },
               content: '前往访客接待室',

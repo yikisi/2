@@ -11,7 +11,6 @@ const {
   setHorizontalAlign,
 } = require('#/era-electron');
 
-const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
 const sys_call_recruit = require('#/system/script/sys-call-recruit');
 const { get_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
@@ -25,6 +24,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
+const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
@@ -89,31 +89,8 @@ async function page_visitors() {
     location_name[location_enum.visitor],
     '……',
   ]);
-  let visitor_list = [];
-  if (
-    !(get('cflag:303:育成回合计时') < 3 * 48) &&
-    get('love:303') >= 25 &&
-    sys_check_npc_working(303)
-  ) {
-    visitor_list.push(303);
-  }
-  if (
-    !(get('cflag:308:育成回合计时') < 3 * 48) &&
-    get('flag:当前回合数') > 40 &&
-    (get('love:308') >= 25 || get('flag:当前回合数') % 48 === 40) &&
-    sys_check_npc_working(308)
-  ) {
-    visitor_list.push(308);
-  }
-  if (
-    !(get('cflag:343:育成回合计时') < 3 * 48) &&
-    !get('cflag:343:位置') &&
-    get('flag:当前回合数') > 12 &&
-    get('love:343') >= 40 &&
-    sys_check_npc_working(343)
-  ) {
-    visitor_list.push(343);
-  }
+  const loc_visitors = new LocCharacters();
+  let visitor_list = loc_visitors.get(location_enum.visitor);
   if (visitor_list.length > 0) {
     const celebration = get_celebration(),
       me = get_chara_talk(0);
@@ -194,6 +171,7 @@ async function page_visitors() {
     drawLine();
     await printAndWait('没有人在的样子……回去了……');
   }
+  loc_visitors.set(location_enum.visitor, visitor_list);
   println();
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.visitor,

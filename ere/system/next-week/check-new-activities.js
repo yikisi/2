@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_change_tired = require('#/system/chara/sys-change-tired');
+const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
@@ -20,6 +21,7 @@ const {
   adaptability_colors,
   celebration_color,
 } = require('#/data/color-const');
+const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
@@ -417,6 +419,7 @@ async function check_new_activities(cur_round, in_team_list) {
     }
   }
   // 出差的理事长
+  let chairman = 0;
   if (
     era.get('flag:当前月') > 3 &&
     !(era.get('cflag:302:育成回合计时') < 3 * 48) &&
@@ -426,13 +429,43 @@ async function check_new_activities(cur_round, in_team_list) {
       !(era.get('cflag:306:育成回合计时') < 3 * 48) &&
       (era.get('cflag:306:妊娠阶段') & 0b100001) === 0
     ) {
-      era.set('flag:理事长', 306);
-    } else {
-      era.set('flag:理事长', 0);
+      chairman = 306;
     }
   } else {
-    era.set('flag:理事长', 302);
+    chairman = 302;
   }
+  const loc_visitors = new LocCharacters();
+  loc_visitors.set(location_enum.chairman, [chairman]);
+  loc_visitors.set(location_enum.trainer, [
+    !(era.get('cflag:304:育成回合计时') < 3 * 48) && sys_check_npc_working(304)
+      ? 304
+      : 0,
+    !(era.get('cflag:306:育成回合计时') < 3 * 48) &&
+    chairman !== 306 &&
+    sys_check_npc_working(306)
+      ? 306
+      : 0,
+  ]);
+  loc_visitors.set(location_enum.visitor, [
+    !(era.get('cflag:303:育成回合计时') < 3 * 48) &&
+    era.get('love:303') >= 25 &&
+    sys_check_npc_working(303)
+      ? 303
+      : 0,
+    !(era.get('cflag:308:育成回合计时') < 3 * 48) &&
+    era.get('flag:当前回合数') > 40 &&
+    (era.get('love:308') >= 25 || era.get('flag:当前回合数') % 48 === 40) &&
+    sys_check_npc_working(308)
+      ? 308
+      : 0,
+    !(era.get('cflag:343:育成回合计时') < 3 * 48) &&
+    !era.get('cflag:343:位置') &&
+    era.get('flag:当前回合数') > 12 &&
+    era.get('love:343') >= 40 &&
+    sys_check_npc_working(343)
+      ? 343
+      : 0,
+  ]);
 }
 
 module.exports = check_new_activities;

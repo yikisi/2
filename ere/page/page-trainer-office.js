@@ -12,7 +12,6 @@ const {
   setHorizontalAlign,
 } = require('#/era-electron');
 
-const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
 const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
 const sys_call_recruit = require('#/system/script/sys-call-recruit');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
@@ -36,6 +35,7 @@ const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201')
 const GlasseEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-202');
 const CoconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-203');
 const event_hooks = require('#/data/event/event-hooks');
+const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
@@ -353,17 +353,8 @@ async function page_trainer_office() {
     location_name[location_enum.trainer],
     '……',
   ]);
-  let trainer_list = [];
-  if (!(get('cflag:304:育成回合计时') < 3 * 48) && sys_check_npc_working(304)) {
-    trainer_list.push(304);
-  }
-  if (
-    !(get('cflag:306:育成回合计时') < 3 * 48) &&
-    get('flag:理事长') !== 306 &&
-    sys_check_npc_working(306)
-  ) {
-    trainer_list.push(306);
-  }
+  const loc_characters = new LocCharacters();
+  let trainer_list = loc_characters.get(location_enum.trainer);
   if (trainer_list.length > 0) {
     const celebration = get_celebration(),
       me = get_chara_talk(0);
@@ -482,6 +473,7 @@ async function page_trainer_office() {
     drawLine();
     await printAndWait('没有人在的样子……回去了……');
   }
+  loc_characters.set(location_enum.trainer, trainer_list);
   println();
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.trainer,
