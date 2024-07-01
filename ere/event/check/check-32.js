@@ -212,7 +212,7 @@ module.exports = class extends CustomizedCheck {
             // 法国（？）
             add_event(event_hooks.week_start, event_obj_special);
           } else {
-            // 因素·旁观者设置
+            // 因素 · 旁观者设置
             add_event(event_hooks.week_end, event_obj_special);
           }
           break;

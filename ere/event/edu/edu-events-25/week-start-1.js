@@ -151,7 +151,7 @@ module.exports = (handlers) => {
         t_call_c,
         '……但我们之间的交集肯定是会越来越深的，毕竟我们是同一个训练员手下的担当',
         coffee.get_uma_sex_title(),
-        '嘛，你说是吧？训·练·员·君？',
+        '嘛，你说是吧？训 · 练 · 员 · 君？',
       ]);
       await coffee.say_and_wait([
         '训练员君……',

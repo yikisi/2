@@ -560,7 +560,7 @@ module.exports = async (hook, _, event_object) => {
     }
   } else if (edu_marks.heartbeat_excite === 1) {
     edu_marks.heartbeat_excite++;
-    await print_event_name('Heartbeat·Excite', daiya);
+    await print_event_name('Heartbeat · Excite', daiya);
     era.println();
     await era.printAndWait('外出时，里见光钻在一张超大海报前停下了脚步。');
     await daiya.say_and_wait(

@@ -89,7 +89,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
             !contestant_dict[c.id] &&
             era.get(`cflag:${c.id}:招募状态`) !== recruit_flags.yes
           ) {
-            const difficulty = passer_by_difficulty[0] * c.buff,
+            const difficulty = named_difficulty[0] * c.buff,
               legends = named_list.filter((e) => e.id === c.id);
             if (legends.length > 0) {
               let i = 0,
@@ -99,7 +99,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
               } else if (legends[j + 1].level <= difficulty) {
                 i = j + 1;
               } else {
-                while (i < j) {
+                while (i < j - 1) {
                   const m = Math.floor((i + j) / 2);
                   if (
                     legends[m]?.level <= difficulty &&
@@ -183,8 +183,6 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
             named_list.filter(
               (e) =>
                 e.id === id &&
-                e.adapt_ground[info.ground] >= 4 &&
-                e.adapt_distance[info.distance] >= 4 &&
                 e.level >= named_difficulty - 200 &&
                 e.level <= named_difficulty + 400,
             ),
@@ -229,8 +227,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
               (e) =>
                 !contestant_dict[e.id] &&
                 era.get(`cflag:${e.id}:招募状态`) !== recruit_flags.yes &&
-                e.adapt_ground[info.ground] >= 4 &&
-                e.adapt_distance[info.distance] >= 4 &&
+                e.adapt_ground[info.ground] >= 5 &&
+                e.adapt_distance[info.distance] >= 5 &&
                 e.level >= named_difficulty[0] - 400 &&
                 e.level <= named_difficulty[1] + 200,
             )

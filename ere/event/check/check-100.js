@@ -73,7 +73,7 @@ module.exports = class extends CustomizedCheck {
         case 47 + 1: // 新年的抱负
         case 47 + 6: // 世纪初最强拳人节
         case 95 + 1: // 新春的贺礼
-        case 95 + 6: // 拳人节·特大号追加超量叠放无敌燃烧版
+        case 95 + 6: // 拳人节 · 特大号追加超量叠放无敌燃烧版
         case 95 + 14: // 粉丝感谢会
           add_event(
             event_hooks.week_start,

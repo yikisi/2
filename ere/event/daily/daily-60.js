@@ -104,7 +104,7 @@ handlers[event_hooks.good_night] = async function (hook) {
         `优秀素质原本羞涩的脸上瞬间涌起了激动与喜悦，不等 ${me.name} 再次肯定，不由分说的便抱住了 ${me.name} 的手臂，并附在耳边轻声低语：`,
       );
       chara.say(
-        `今晚的训练，也请你多多指教咯？训·练·员·${me.get_adult_sex_title()} ❤️`,
+        `今晚的训练，也请你多多指教咯？训 · 练 · 员 · ${me.get_adult_sex_title()} ❤️`,
       );
       era.print(
         `就这样，${

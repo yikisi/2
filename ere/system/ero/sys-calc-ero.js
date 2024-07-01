@@ -310,7 +310,7 @@ function sys_do_sex(attacker, defender, item) {
           if (
             // 无自觉非处女算破处
             attacker_virgin_status === vp_status_enum.dont_know ||
-            // 真·处女算破处
+            // 真 · 处女算破处
             attacker_virgin_status === vp_status_enum.virgin
           ) {
             era.set(`cstr:${attacker.id}:破处经历`, [
@@ -331,7 +331,7 @@ function sys_do_sex(attacker, defender, item) {
             if (
               // 无自觉非童贞算失童贞
               defender_virgin_status === vp_status_enum.dont_know ||
-              // 真·童贞算失童贞
+              // 真 · 童贞算失童贞
               defender_virgin_status === vp_status_enum.virgin
             ) {
               era.set(`cstr:${defender.id}:失去童贞经历`, [
@@ -346,7 +346,7 @@ function sys_do_sex(attacker, defender, item) {
           } else {
             era.add(`exp:${attacker.id}:阴道睡奸`, 1);
             era.add(`exp:${defender.id}:阴茎被睡奸`, 1);
-            // 只有真·童贞才能在睡奸情况下失去童贞
+            // 只有真 · 童贞才能在睡奸情况下失去童贞
             if (defender_virgin_status === vp_status_enum.virgin) {
               era.set(`cstr:${defender.id}:无自觉失去童贞经历`, [
                 `实际上，已在 ${date} 被 `,
@@ -498,7 +498,7 @@ function sys_do_sex(attacker, defender, item) {
           if (
             // 无自觉非童贞算失童贞
             attacker_virgin_status === vp_status_enum.dont_know ||
-            // 真·童贞算失童贞
+            // 真 · 童贞算失童贞
             attacker_virgin_status === vp_status_enum.virgin
           ) {
             era.set(`cstr:${attacker.id}:失去童贞经历`, [
@@ -533,7 +533,7 @@ function sys_do_sex(attacker, defender, item) {
           } else {
             era.add(`exp:${attacker.id}:阴茎睡奸`, 1);
             era.add(`exp:${defender.id}:阴道被睡奸`, 1);
-            // 只有真·处女才能在睡奸情况下破处
+            // 只有真 · 处女才能在睡奸情况下破处
             if (defender_virgin_status === vp_status_enum.virgin) {
               era.set(`cstr:${defender.id}:无自觉破处经历`, [
                 `实际上，已在 ${date} 被 `,

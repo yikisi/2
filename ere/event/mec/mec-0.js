@@ -51,4 +51,8 @@ module.exports = class extends CustomizedMec {
     }
     return ret_list;
   }
+
+  get_action_debuff() {
+    return -0.1 * (era.get('cflag:301:招募状态') === recruit_flags.yes);
+  }
 };

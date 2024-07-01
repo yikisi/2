@@ -5,10 +5,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const { ability_type_enum } = require('#/data/race/model/uma-skill');
-const {
-  frame_rate,
-  mod_motivation_coefficients,
-} = require('#/data/race/race-sim-const');
+const { mod_motivation_coefficients } = require('#/data/race/race-sim-const');
 const {
   mod_acceleration_adapt_distance,
   mod_acceleration_adapt_ground,
@@ -265,12 +262,12 @@ function sys_prepare_race(list_chara, team_list, race_info) {
         : Math.max(1 - 45 / uma.attrs[attr_enum.intelligence], 0.2)) +
       0.01 * (uma.chara === 0);
 
-    // 位置意识概率，每两秒判定一次，所以要除30帧
+    // 位置意识概率
     uma.probs.loc_mind =
       ((15 + 5 * (uma.style === 0)) *
         Math.log(uma.attrs[attr_enum.intelligence] / 10)) /
       Math.log(10) /
-      (2 * frame_rate * 100);
+      100;
 
     //计算比赛偏重属性对速度属性的增幅
     if (race_info.attr_bonus.length > 0) {
@@ -440,8 +437,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     uma.factorSlope.up = 200 / uma.attrs[attr_enum.strength];
 
     // 由智力决定受下坡加速的影响概率
-    uma.factorSlope.down =
-      (0.0004 * uma.attrs[attr_enum.intelligence]) / frame_rate;
+    uma.factorSlope.down = 0.0004 * uma.attrs[attr_enum.intelligence];
 
     // 由智力决定最终冲刺计划的选择概率
     uma.probs.planRush = 0.15 + 0.0005 * uma.attrs[attr_enum.intelligence];
@@ -450,16 +446,13 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     switch (uma.style) {
       case 0:
         if (uma.race.conditionParams.is_used_skill_id === 202051) {
-          uma.base.loc_mind_nige_diff_speed_up = 17.5 / 2.5;
-          uma.base.loc_mind_nige_diff_over_take = 27.5 / 2.5;
-        } else if (
-          uma.race.conditionParams.running_style_count_nige_otherself
-        ) {
-          uma.base.loc_mind_nige_diff_speed_up = 12.5 / 2.5;
-          uma.base.loc_mind_nige_diff_over_take = 10 / 2.5;
+          uma.base.loc_mind_nige_diff_speed_up_nige = 2 * loc_mind_base_diff;
+          uma.base.loc_mind_nige_diff_speed_up_other = 5 * loc_mind_base_diff;
+          uma.base.loc_mind_nige_diff_over_take = 6 * loc_mind_base_diff;
         } else {
-          uma.base.loc_mind_nige_diff_speed_up = 4.5 / 2.5;
-          uma.base.loc_mind_nige_diff_over_take = 10 / 2.5;
+          uma.base.loc_mind_nige_diff_speed_up_nige = loc_mind_base_diff;
+          uma.base.loc_mind_nige_diff_speed_up_other = 4 * loc_mind_base_diff;
+          uma.base.loc_mind_nige_diff_over_take = 5 * loc_mind_base_diff;
         }
         break;
       case 1:
@@ -471,7 +464,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
         uma.base.loc_mind_other_diff_upper = 7 * loc_mind_base_diff;
         break;
       case 3:
-        uma.base.loc_mind_other_diff_lower = 7.5;
+        uma.base.loc_mind_other_diff_lower = 7.5 * loc_mind_base_diff;
         uma.base.loc_mind_other_diff_upper = 8 * loc_mind_base_diff;
     }
   }

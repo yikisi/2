@@ -283,7 +283,7 @@ module.exports = (handlers) => {
       '……到底是谁给了他普通人也能拥有各种武术各种专业名词作为常识的自信啊？',
     );
     await say_by_passer_by_and_wait('黝黑大汉', [
-      '如果只是这·种·程·度的攻击频率，使用呼吸法的 ',
+      '如果只是这 · 种 · 程 · 度的攻击频率，使用呼吸法的 ',
       muteki.get_colored_name(),
       '，就算再打上三天三夜也不会觉得累吧。',
     ]);
@@ -397,7 +397,7 @@ module.exports = (handlers) => {
       );
       await era.printAndWait('但只有这一击，便足够了。');
       await era.printAndWait('想要击败金刚不坏的刚勇——');
-      await era.printAndWait('只需这一击，便·足·够·了。');
+      await era.printAndWait('只需这一击，便 · 足 · 够 · 了。');
       await muteki.say_and_wait('啊！库——');
       await muteki.say_and_wait('呼、呼吸的节奏！？', true);
       await say_by_passer_by_and_wait('裁判', '逼、逼、逼——');
@@ -456,9 +456,12 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait('——但是，那又怎样呢？');
       await era.printAndWait('既然「犯了一次错误就将败下阵来」，那么——');
-      await era.printAndWait('【只·要·一·次·错·都·不·犯·不·就·好·了·吗？】', {
-        fontSize: '3rem',
-      });
+      await era.printAndWait(
+        '【只 · 要 · 一 · 次 · 错 · 都 · 不 · 犯 · 不 · 就 · 好 · 了 · 吗？】',
+        {
+          fontSize: '3rem',
+        },
+      );
       await era.printAndWait(
         '暴雨梨花般的柔拳，永不停歇的柔拳，坚毅勇绝的柔拳——',
       );

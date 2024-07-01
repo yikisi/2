@@ -518,7 +518,7 @@ function sub_simulate_skill(
       if (!uma.flag.downhill) {
         uma.race.downhill = 0;
       }
-    } else {
+    } else if (timer % 1 === 0) {
       uma.flag.downhill = Math.random() < uma.factorSlope.down;
     }
     if (uma.flag.downhill) {

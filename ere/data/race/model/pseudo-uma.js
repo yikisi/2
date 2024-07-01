@@ -124,7 +124,8 @@ class PseudoUma {
     change_order_finalcorner: 0,
     // 发动绿技能个数
     greenCount: 0,
-    loc_mind_nige_diff_speed_up: 0,
+    loc_mind_nige_diff_speed_up_nige: 0,
+    loc_mind_nige_diff_speed_up_other: 0,
     loc_mind_nige_diff_over_take: 0,
     loc_mind_other_diff_upper: 0,
     loc_mind_other_diff_lower: 0,

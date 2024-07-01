@@ -65,7 +65,7 @@ const random_trainers = [
   'bug',
   'Advocator',
   '清音林檎',
-  '科比·布莱恩特',
+  '科比 · 布莱恩特',
 ];
 
 /**

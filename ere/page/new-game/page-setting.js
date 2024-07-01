@@ -122,7 +122,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 0);
       era.set('flag:极端行为限制', 0);
       era.set('flag:回合声望惩罚', 0);
-      era.set('flag:回合好感惩罚', 10);
+      era.set('flag:回合好感惩罚', 5);
       era.set('flag:回合爱慕惩罚', 0);
       era.set('flag:游戏结束', 0);
       era.set('flag:后代爱慕限制', 0);
@@ -178,7 +178,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 50);
       era.set('flag:极端行为限制', 3);
       era.set('flag:回合声望惩罚', -1);
-      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合好感惩罚', -10);
       era.set('flag:回合爱慕惩罚', 0);
       era.set('flag:游戏结束', 1);
       era.set('flag:后代爱慕限制', 0);
@@ -206,7 +206,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 0);
       era.set('flag:极端行为限制', 1);
       era.set('flag:回合声望惩罚', -1);
-      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合好感惩罚', -10);
       era.set('flag:回合爱慕惩罚', 0);
       era.set('flag:游戏结束', 3);
       era.set('flag:后代爱慕限制', 0);
@@ -234,7 +234,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 50);
       era.set('flag:极端行为限制', 3);
       era.set('flag:回合声望惩罚', -1);
-      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合好感惩罚', -10);
       era.set('flag:回合爱慕惩罚', 1);
       era.set('flag:游戏结束', 0);
       era.set('flag:后代爱慕限制', 1);
@@ -262,7 +262,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 0);
       era.set('flag:极端行为限制', 0);
       era.set('flag:回合声望惩罚', 0);
-      era.set('flag:回合好感惩罚', 10);
+      era.set('flag:回合好感惩罚', 5);
       era.set('flag:回合爱慕惩罚', 0);
       era.set('flag:游戏结束', 0);
       era.set('flag:后代爱慕限制', 0);
@@ -290,7 +290,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 50);
       era.set('flag:极端行为限制', 2);
       era.set('flag:回合声望惩罚', -1);
-      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合好感惩罚', -10);
       era.set('flag:回合爱慕惩罚', 1);
       era.set('flag:游戏结束', 0);
       era.set('flag:后代爱慕限制', 1);
@@ -318,7 +318,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 50);
       era.set('flag:极端行为限制', 2);
       era.set('flag:回合声望惩罚', -1);
-      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合好感惩罚', -10);
       era.set('flag:回合爱慕惩罚', 1);
       era.set('flag:游戏结束', 0);
       era.set('flag:后代爱慕限制', 1);
@@ -568,9 +568,9 @@ async function page_settings() {
         key: '回合好感惩罚',
         label: '好感的变化',
         options: [
-          { l: '愈久愈和', v: 10 },
+          { l: '愈久愈和', v: 5 },
           { l: '君子之交', v: 0 },
-          { l: '相看相厌', v: -25 },
+          { l: '相看相厌', v: -10 },
         ],
         tip: (v) =>
           [

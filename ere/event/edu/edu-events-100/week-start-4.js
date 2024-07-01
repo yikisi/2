@@ -82,7 +82,7 @@ module.exports = (handlers) => {
         await acute.say_and_wait('有哦～');
         await era.printAndWait([acute.sex, '一面说着，一面忙碌着手中的工作——']);
         await acute.say_and_wait('你刚刚是在说，帝王蟹的四种写法对吧～');
-        await me.say_and_wait('完·全·不·是！');
+        await me.say_and_wait('完 · 全 · 不 · 是！');
         await era.printAndWait(
           '别把美食介绍说成像是某个哀怨可怜人的名言成吗？',
         );
@@ -699,8 +699,8 @@ module.exports = (handlers) => {
       ' 看到懒散的这一面——',
     ]);
     await acute.say_and_wait([callname, '？']);
-    await era.printAndWait('——！？');
-    await acute.say_and_wait('待喘息之际，已然出现身后。');
+    await me.say_and_wait('——！？');
+    await era.printAndWait('待喘息之际，已然出现身后。');
     era.printButton(`「奇、${acute.name}！？何时来的？」`, 1);
     await era.waitAnyKey();
     await acute.say_and_wait([

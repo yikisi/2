@@ -32,7 +32,9 @@ async function palace_relation(chara, me) {
         '两位小情人沉浸在幸福的二人世界，仿佛能把俗世的琐事都抛进虚空之中。',
       );
       era.println();
-      await era.printAndWait('我是世界之王！——杰克·道森', { align: 'center' });
+      await era.printAndWait('我是世界之王！——杰克 · 道森', {
+        align: 'center',
+      });
     } else if (love >= 50) {
       await era.printAndWait([
         me.get_couple_title(),

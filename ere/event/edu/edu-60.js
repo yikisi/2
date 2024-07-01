@@ -756,7 +756,7 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
   );
   era.println();
   era.printButton('「海豚秀」', 1);
-  era.printButton('「……极度恐怖·可怕鱼展览！！」', 2);
+  era.printButton('「……极度恐怖 · 可怕鱼展览！！」', 2);
   const ret = await era.input();
   if (ret === 1) {
     await nice_nature.say_and_wait('……我说啊。你有在听我说话吗？');

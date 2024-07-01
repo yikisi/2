@@ -309,7 +309,7 @@ module.exports = async (_, extra_flag) => {
     );
     await say_by_passer_by_and_wait(
       `观众A`,
-      `这次日本杯的参赛阵容 ${your_name} 们都看到了吧。`,
+      '这次日本杯的参赛阵容你们都看到了吧。',
     );
     await say_by_passer_by_and_wait('观众B', '嗯嗯，还真是出乎意料啊。');
     await say_by_passer_by_and_wait(

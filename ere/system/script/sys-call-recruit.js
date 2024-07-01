@@ -7,9 +7,9 @@ const { recruit_chara } = require('#/system/sys-init-chara');
 const rec_common = require('#/event/rec/rec-common');
 const check_before_rec = require('#/event/rec/snippets/check-before-rec');
 
-const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const notes = require('#/data/notes.json');
@@ -77,7 +77,12 @@ async function sys_call_rec_event(chara_id, stage, extra_flag, event_object) {
           },
         ]);
         if (!(await era.input())) {
-          notes[chara_id].forEach((e) => say_by_passer_by(e.title, e.content));
+          notes[chara_id].forEach((e) =>
+            era.print(
+              [{ content: e.title, fontWeight: 'bold' }, '「', e.content, '」'],
+              { color: get_chara_color(chara_id) },
+            ),
+          );
           await era.waitAnyKey();
         }
       }

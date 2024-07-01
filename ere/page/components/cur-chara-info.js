@@ -236,7 +236,7 @@ function cur_chara_component(chara_id, type, location_npc) {
                   content: [
                     {
                       content: chara_desc[characteristic + 3],
-                      title: chara_full_desc[characteristic + 3],
+                      title: `${chara_desc[characteristic + 3]}：${chara_full_desc[characteristic + 3]}`,
                     },
                   ],
                   type: 'text',

@@ -229,7 +229,7 @@ handlers[event_hooks.back_school] = async (_, __, event_object) => {
   if (event_arg !== 'kitasan_touch') {
     return;
   }
-  await print_event_name('紧急开店·小北按摩！', kita);
+  await print_event_name('紧急开店 · 小北按摩！', kita);
   await kita.say_and_wait(
     `训练员${me.get_adult_sex_title()}！欢迎光临小北按摩店！`,
   );

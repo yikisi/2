@@ -151,7 +151,7 @@ module.exports = class extends CustomizedCheck {
       switch (edu_weeks) {
         case 47 + 1: // 新年
         case 47 + 12: // 记者招待会
-        case 95 + 5: // 天皇赏春前·放弃
+        case 95 + 5: // 天皇赏春前 · 放弃
         case 95 + 14: //粉丝感谢祭
           add_event(event_hooks.week_start, event_obj_special);
           break;

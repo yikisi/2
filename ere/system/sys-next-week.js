@@ -827,7 +827,7 @@ async function sys_next_week() {
       );
     }
     get_custom_check(chara_id).check_next_week();
-    new EduEventMarks(chara_id)._r_e_check = 0;
+    new EduEventMarks(chara_id)._r_e_check = 2;
   }
 
   if (race_punish) {

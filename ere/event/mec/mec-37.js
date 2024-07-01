@@ -32,7 +32,10 @@ module.exports = class extends CustomizedMec {
   get_race_contestants(info) {
     switch (era.get('flag:当前赛事')) {
       case race_enum.japa_cup:
-        return [1, 47].map((e) => ({ buff: 1.2, id: e }));
+        if (era.get('cflag:37:育成回合计时') < 96) {
+          return [1, 47].map((e) => ({ buff: 1.2, id: e }));
+        }
+        break;
       case race_enum.arim_kin:
         if (era.get('cflag:37:育成回合计时') < 96) {
           return [1, 5, 18, 47].map((e) => ({ buff: 1.1, id: e }));

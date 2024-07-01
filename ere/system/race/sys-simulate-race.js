@@ -267,16 +267,28 @@ function sys_sim_race(list_chara, race_info) {
 
     list_in_race.forEach((uma, i, l) => {
       // 位置意识
-      let no_loc_mind_flag = true,
-        prob_check =
-          uma.race.loc_mind > 0 || Math.random() < uma.probs.loc_mind;
-      if (uma.race.location < loc_mind_end && !uma.race.temptation) {
-        if (uma.style === 0) {
-          if (i === 0) {
-            if (
-              uma.race.conditionParams.bashin_diff_behind <=
-                uma.base.loc_mind_nige_diff_speed_up &&
-              prob_check
+      if (timer % 2 === 0 && uma.race.location < loc_mind_end) {
+        let no_loc_mind_flag = true;
+        if (
+          !uma.race.temptation &&
+          (uma.race.loc_mind > 0 || Math.random() < uma.probs.loc_mind)
+        ) {
+          if (uma.style === 0) {
+            if (l.slice(0, i).findIndex((e) => e.style > 0) !== -1) {
+              uma.race.loc_mind !== 3 &&
+                record_events_list
+                  .at(-1)
+                  [uma.index_race].push(race_event_enum.loc_mind_nige_ex);
+              no_loc_mind_flag = false;
+              uma.race.loc_mind = 3;
+            } else if (
+              i === 0 &&
+              ((l[i + 1]?.style === 0 &&
+                uma.race.conditionParams.bashin_diff_behind <=
+                  uma.base.loc_mind_nige_diff_speed_up_nige) ||
+                (l[i + 1]?.style > 0 &&
+                  uma.race.conditionParams.bashin_diff_behind <=
+                    uma.base.loc_mind_nige_diff_speed_up_other))
             ) {
               uma.race.loc_mind !== 1 &&
                 record_events_list
@@ -284,22 +296,10 @@ function sys_sim_race(list_chara, race_info) {
                   [uma.index_race].push(race_event_enum.loc_mind_nige_speed_up);
               no_loc_mind_flag = false;
               uma.race.loc_mind = 1;
-            }
-          } else if (
-            l.slice(0, i).findIndex((e) => e.style > 0) !== -1 &&
-            prob_check
-          ) {
-            uma.race.loc_mind !== 3 &&
-              record_events_list
-                .at(-1)
-                [uma.index_race].push(race_event_enum.loc_mind_nige_ex);
-            no_loc_mind_flag = false;
-            uma.race.loc_mind = 3;
-          } else {
-            if (
-              uma.race.conditionParams.bashin_diff_infront >=
-                uma.base.loc_mind_nige_diff_over_take &&
-              prob_check
+            } else if (
+              i > 0 &&
+              uma.race.conditionParams.bashin_diff_infront <
+                uma.base.loc_mind_nige_diff_over_take
             ) {
               uma.race.loc_mind !== 2 &&
                 record_events_list
@@ -310,53 +310,51 @@ function sys_sim_race(list_chara, race_info) {
               no_loc_mind_flag = false;
               uma.race.loc_mind = 2;
             }
-          }
-        } else {
-          if (l[0].style > uma.style && prob_check) {
-            uma.race.loc_mind !== 3 &&
-              record_events_list
-                .at(-1)
-                [uma.index_race].push(race_event_enum.loc_mind_other_ex);
-            no_loc_mind_flag = false;
-            uma.race.loc_mind = 3;
-          } else if (
-            uma.race.conditionParams.distance_diff_top >=
-              uma.base.loc_mind_other_diff_upper &&
-            prob_check
-          ) {
-            uma.race.loc_mind !== 1 &&
-              record_events_list
-                .at(-1)
-                [uma.index_race].push(race_event_enum.loc_mind_other_quick);
-            no_loc_mind_flag = false;
-            uma.race.loc_mind = 1;
-          } else if (
-            uma.race.conditionParams.distance_diff_top <=
-              uma.base.loc_mind_other_diff_lower &&
-            prob_check
-          ) {
-            uma.race.loc_mind !== 2 &&
-              record_events_list
-                .at(-1)
-                [uma.index_race].push(race_event_enum.loc_mind_other_relax);
-            no_loc_mind_flag = false;
-            uma.race.loc_mind = 2;
+          } else {
+            if (l[0].style > uma.style) {
+              uma.race.loc_mind !== 3 &&
+                record_events_list
+                  .at(-1)
+                  [uma.index_race].push(race_event_enum.loc_mind_other_ex);
+              no_loc_mind_flag = false;
+              uma.race.loc_mind = 3;
+            } else if (
+              uma.race.conditionParams.distance_diff_top >=
+              uma.base.loc_mind_other_diff_upper
+            ) {
+              uma.race.loc_mind !== 1 &&
+                record_events_list
+                  .at(-1)
+                  [uma.index_race].push(race_event_enum.loc_mind_other_quick);
+              no_loc_mind_flag = false;
+              uma.race.loc_mind = 1;
+            } else if (
+              uma.race.conditionParams.distance_diff_top <=
+              uma.base.loc_mind_other_diff_lower
+            ) {
+              uma.race.loc_mind !== 2 &&
+                record_events_list
+                  .at(-1)
+                  [uma.index_race].push(race_event_enum.loc_mind_other_relax);
+              no_loc_mind_flag = false;
+              uma.race.loc_mind = 2;
+            }
           }
         }
-      }
-      if (no_loc_mind_flag) {
-        uma.race.loc_mind = 0;
-      }
-      if (uma.race.temptation > 0) {
-        uma.race.loc_mind = 1;
-        uma.race.staminaCost *= 1.6;
-      }
-      if (uma.race.loc_mind === 2 && uma.style > 0) {
-        uma.race.staminaCost *= 0.6;
+        if (no_loc_mind_flag) {
+          uma.race.loc_mind = 0;
+        }
+        if (uma.race.temptation > 0) {
+          uma.race.loc_mind = 1;
+          uma.race.staminaCost *= 1.6;
+        }
+        if (uma.race.loc_mind === 2 && uma.style > 0) {
+          uma.race.staminaCost *= 0.6;
+        }
       }
       // 阻挡
       if (
-        uma.race.phase >= 2 &&
+        uma.race.phase >= 1 &&
         uma.race.conditionParams.blocked_front &&
         Math.random() >=
           uma.race.strength / l[i - 1].race.strength + uma.race.lane_move_buff

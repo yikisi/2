@@ -112,7 +112,7 @@ module.exports = class extends CustomizedCheck {
       );
       switch (edu_weeks) {
         case 31: // 积雨云
-        case 39: // 初始·承诺
+        case 39: // 初始 · 承诺
         case 47: // 第一步
         case 47 + 29: // 愉快而炎热的夏日之初
         case 47 + 48: // 为了圣诞节所做的准备

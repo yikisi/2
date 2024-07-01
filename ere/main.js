@@ -219,7 +219,15 @@ module.exports = async () => {
           .map(Number)
           .sort((a, b) => a - b)) {
           for (const note of notes[id]) {
-            say_by_passer_by(note.title, note.content);
+            era.print(
+              [
+                { content: note.title, fontWeight: 'bold' },
+                '「',
+                note.content,
+                '」',
+              ],
+              { color: get_chara_color(Number(id)) },
+            );
           }
           await era.waitAnyKey();
         }
@@ -482,7 +490,7 @@ module.exports = async () => {
           { isDivider: true },
           '提交bug',
           { isDivider: true },
-          '科比·布莱恩特',
+          '科比 · 布莱恩特',
         ]);
         await era.printAndWait('社区管理', {
           color: el_warning_color,
@@ -496,7 +504,7 @@ module.exports = async () => {
           fontWeight: 'bold',
           isParagraph: true,
         });
-        await era.printAndWait('午马牧师妹·普瑞提达比', {
+        await era.printAndWait('午马牧师妹 · 普瑞提达比', {
           fontSize: '1.25rem',
         });
         era.setAlign('left');

@@ -30,7 +30,7 @@ module.exports = (handlers) => {
     relation,
     love,
   ) => {
-    await print_event_name('变量·群众感情的刺激', tachyon);
+    await print_event_name('变量 · 群众感情的刺激', tachyon);
     await era.printAndWait('大阪杯');
     await era.printAndWait('一年中，中长距离最初的一场G1赛事');
     await era.printAndWait([

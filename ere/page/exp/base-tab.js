@@ -103,7 +103,7 @@ module.exports = {
           ? '幼年'
           : {
               content: chara_desc[characteristic + 3],
-              title: chara_full_desc[characteristic + 3],
+              title: `${chara_desc[characteristic + 3]}：${chara_full_desc[characteristic + 3]}`,
             },
         ' ',
         sex_title[chara.sex_code],
