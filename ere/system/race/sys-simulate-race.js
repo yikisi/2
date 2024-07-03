@@ -330,7 +330,8 @@ function sys_sim_race(list_chara, race_info) {
               uma.race.loc_mind = 1;
             } else if (
               uma.race.conditionParams.distance_diff_top <=
-              uma.base.loc_mind_other_diff_lower
+                uma.base.loc_mind_other_diff_lower &&
+              uma.race.velocityIdealBuff === 0
             ) {
               uma.race.loc_mind !== 2 &&
                 record_events_list
@@ -392,11 +393,13 @@ function sys_sim_race(list_chara, race_info) {
           Math.min(uma.race.velocityIdeal, 30),
           uma.base.velocityMin,
         );
-        if (uma.race.loc_mind === 2 && uma.style > 0) {
-          uma.race.acceleration = race_de_acc[3];
-        } else if (uma.race.velocityReal > uma.race.velocityIdeal) {
-          uma.race.acceleration =
-            race_de_acc[Math.min(uma.race.conditionParams.phase, 2)];
+        if (uma.race.velocityReal > uma.race.velocityIdeal) {
+          if (uma.race.loc_mind === 2 && uma.style > 0) {
+            uma.race.acceleration = race_de_acc[3];
+          } else {
+            uma.race.acceleration =
+              race_de_acc[Math.min(uma.race.conditionParams.phase, 2)];
+          }
         }
       }
       uma.race.acceleration += uma.race.accelerationBuff;

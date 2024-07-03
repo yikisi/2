@@ -579,16 +579,8 @@ module.exports = {
             },
           ]
         : []),
-      ...new Array(2)
-        .fill(0)
-        .map((_, i) => {
-          return {
-            id: i,
-            val: era.get(`talent:${chara_id}:${i + 1090}`),
-          };
-        })
-        .filter((e) => e.val)
-        .map((e) => era.get(`talentname:${e.id + 1090}`)),
+      ...(era.get(`talent:${chara_id}:捉摸不透`) ? ['捉摸不透'] : []),
+      ...(era.get(`talent:${chara_id}:病娇`) === 2 ? ['病娇'] : []),
       ...new Array(18)
         .fill(0)
         .map((_, i) => {

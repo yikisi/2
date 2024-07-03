@@ -25,7 +25,11 @@ const { location_enum } = require('#/data/locations');
 const { attr_names } = require('#/data/train-const');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const button_contents = ['请求帮助', '「帮帮我吧女神大人」', '许下愿望'];
+const button_contents = [
+  '「啊，请帮帮我吧女神大人——」',
+  '「神啊，请您垂怜……」',
+  '「请帮帮我吧，女神大人。」',
+];
 
 module.exports = async () => {
   era.set('flag:当前位置', location_enum.god);
@@ -303,7 +307,6 @@ module.exports = async () => {
         case 7:
           switch (god_id) {
             case 340:
-              await me.say_and_wait('啊，请帮帮我吧女神大人——');
               await era.printAndWait([
                 '忍不住向',
                 era.get('flag:角色性别') - 1 ? '马娘' : '马郎',
@@ -317,8 +320,6 @@ module.exports = async () => {
               await era.printAndWait('而且被笑了。');
               break;
             case 341:
-              era.printButton('「神啊，请您垂怜……」', 1);
-              await era.input();
               await era.printAndWait(
                 '在祈祷的瞬间，或者说愿望自心底冒出的瞬间。',
               );
@@ -331,8 +332,6 @@ module.exports = async () => {
               ]);
               break;
             case 342:
-              era.printButton('请帮帮我吧，女神大人。', 1);
-              await era.input();
               await era.printAndWait(
                 '微微低头向着三女神的神像祈祷，虽然听起来更像是某种随心而为的撒娇，又或者是明知不可能发生但是却依旧期待着奇迹的自己的调侃。',
               );

@@ -34,10 +34,12 @@ const { attr_names } = require('#/data/train-const');
 function reset_chara(chara_id) {
   if (era.get(`cflag:${chara_id}:种族`)) {
     if (era.get(`cflag:${chara_id}:招募状态`) === yes) {
-      era.set(
-        `cflag:${chara_id}:育成回合计时`,
-        (era.get('flag:当前回合数') - 1) % 48,
-      );
+      if (era.get('flag:当前月') <= 3) {
+        era.set(
+          `cflag:${chara_id}:育成回合计时`,
+          (era.get('flag:当前回合数') - 1) % 48,
+        );
+      }
       era.set(`cflag:${chara_id}:自主训练`, 1);
       era.set(`cflag:${chara_id}:腋毛`, 0);
     }
@@ -217,41 +219,106 @@ module.exports = {
       era.set(`base:${chara_id}:体力`, era.get(`maxbase:${chara_id}:体力`));
       era.set(`base:${chara_id}:精力`, era.get(`maxbase:${chara_id}:精力`));
 
-      switch (era.get('flag:彩蛋机制')) {
-        case 179:
-          temp = era.get(`cflag:${chara_id}:身高`);
-          temp = [135 + Math.floor(((temp - 135) * 10) / 45), temp];
-          era.set(
-            `cflag:${chara_id}:胸围`,
-            Math.floor((era.get(`cflag:${chara_id}:胸围`) * temp[0]) / temp[1]),
-          );
-          era.set(
-            `cflag:${chara_id}:下胸围`,
-            Math.floor(
-              (era.get(`cflag:${chara_id}:下胸围`) * temp[0]) / temp[1],
-            ),
-          );
-          era.set(
-            `cflag:${chara_id}:腰围`,
-            Math.floor((era.get(`cflag:${chara_id}:腰围`) * temp[0]) / temp[1]),
-          );
-          era.set(
-            `cflag:${chara_id}:臀围`,
-            Math.floor((era.get(`cflag:${chara_id}:臀围`) * temp[0]) / temp[1]),
-          );
-          era.set(`cflag:${chara_id}:身高`, temp[0]);
-          if (
-            era.get(`cflag:${chara_id}:胸围`) -
-              era.get(`cflag:${chara_id}:下胸围`) <
-            17.5
-          ) {
+      if (era.get(`cflag:${chara_id}:种族`)) {
+        switch (era.get('flag:马娘身高')) {
+          case 0:
+            temp = era.get(`cflag:${chara_id}:身高`);
+            temp = [
+              135 + Math.floor(((temp - 135) * (150 - 135)) / (180 - 135)),
+              temp,
+            ];
+            temp[2] =
+              era.get(`cflag:${chara_id}:胸围`) -
+              era.get(`cflag:${chara_id}:下胸围`);
+            era.set(
+              `cflag:${chara_id}:下胸围`,
+              Math.floor(
+                (era.get(`cflag:${chara_id}:下胸围`) * temp[0]) / temp[1],
+              ),
+            );
             era.set(
               `cflag:${chara_id}:胸围`,
-              era.get(`cflag:${chara_id}:下胸围`) +
-                18 +
-                (era.get(`talent:${chara_id}:乳头类型`) === 2),
+              era.get(`cflag:${chara_id}:胸围`) + temp[2],
             );
-          }
+            era.set(
+              `cflag:${chara_id}:腰围`,
+              Math.floor(
+                (era.get(`cflag:${chara_id}:腰围`) * temp[0]) / temp[1],
+              ),
+            );
+            era.set(
+              `cflag:${chara_id}:臀围`,
+              Math.floor(
+                (era.get(`cflag:${chara_id}:臀围`) * temp[0]) / temp[1],
+              ),
+            );
+            era.set(`cflag:${chara_id}:身高`, temp[0]);
+            break;
+          case 2:
+            temp = era.get(`cflag:${chara_id}:身高`);
+            temp = [
+              175 + Math.floor(((temp - 135) * (224 - 175)) / (180 - 135)),
+              temp,
+            ];
+            era.set(
+              `cflag:${chara_id}:胸围`,
+              Math.floor(
+                (era.get(`cflag:${chara_id}:胸围`) * temp[0]) / temp[1],
+              ),
+            );
+            era.set(
+              `cflag:${chara_id}:下胸围`,
+              Math.floor(
+                (era.get(`cflag:${chara_id}:下胸围`) * temp[0]) / temp[1],
+              ),
+            );
+            era.set(
+              `cflag:${chara_id}:腰围`,
+              Math.floor(
+                (era.get(`cflag:${chara_id}:腰围`) * temp[0]) / temp[1],
+              ),
+            );
+            era.set(
+              `cflag:${chara_id}:臀围`,
+              Math.floor(
+                (era.get(`cflag:${chara_id}:臀围`) * temp[0]) / temp[1],
+              ),
+            );
+            era.set(`cflag:${chara_id}:身高`, temp[0]);
+        }
+
+        switch (era.get('flag:彩蛋机制')) {
+          case 3:
+            if (auto_talent !== 1) {
+              era.set(
+                `talent:${chara_id}:神之足`,
+                era.set(
+                  `talent:${chara_id}:淫身`,
+                  era.set(`talent:${chara_id}:淫臀`, 1),
+                ),
+              );
+            }
+            break;
+          case 179:
+          case 621:
+            if (
+              era.get(`cflag:${chara_id}:胸围`) -
+                era.get(`cflag:${chara_id}:下胸围`) <
+              17.5
+            ) {
+              era.set(
+                `cflag:${chara_id}:胸围`,
+                era.get(`cflag:${chara_id}:下胸围`) +
+                  18 +
+                  (era.get(`talent:${chara_id}:乳头类型`) === 2),
+              );
+            }
+        }
+      }
+      switch (era.get('flag:彩蛋机制')) {
+        case 179:
+        case 621:
+          era.set(`talent:${chara_id}:病娇`, 1);
       }
 
       sys_change_hair(chara_id);

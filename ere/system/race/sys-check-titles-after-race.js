@@ -28,7 +28,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
   team_list.forEach(({ index_chara: id }) => {
     new_title_dict[id] = [];
     const pregnant_stage = era.get(`cflag:${id}:妊娠阶段`);
-    if (pregnant_stage >> pregnant_stage_enum.fetal > 0) {
+    if (pregnant_stage >> pregnant_stage_enum.late > 0) {
       hentai_flag = true;
     }
     if (pregnant_stage >> pregnant_stage_enum.embryo > 0) {

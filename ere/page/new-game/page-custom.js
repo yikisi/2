@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_change_hair = require('#/system/chara/sys-change-hair');
+const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
@@ -138,10 +139,18 @@ function set_height(height) {
 }
 
 function random_chara() {
-  if (era.get('flag:彩蛋机制') === 179) {
-    era.set('callname:0:-2', '豚鼠子');
-  } else {
-    era.set('callname:0:-2', '你');
+  switch (era.get('flag:彩蛋机制')) {
+    case 3:
+      era.set('callname:0:-2', '天马');
+      break;
+    case 179:
+      era.set('callname:0:-2', '豚鼠子');
+      break;
+    case 621:
+      era.set('callname:0:-2', '渡鸦');
+      break;
+    default:
+      era.set('callname:0:-2', '你');
   }
   CharaTalk.me = new CharaTalk(0);
   era.set('cstr:0:发色', get_random_entry(hair_color_names));
@@ -236,7 +245,21 @@ async function page_custom() {
     era.set('flag:彩蛋机制', 179);
     era.set('flag:声望不足替换', 1);
     era.set('flag:不忠惩罚', 0);
+    era.set('flag:马娘身高', 0);
     new CharaTitles(0).push({ c: buff_colors[2], n: '萝莉控', s: true });
+  } else if (era.get('callname:0:-1').indexOf('渡鸦') !== -1) {
+    era.set('flag:角色性别', 0);
+    era.set('flag:彩蛋机制', 621);
+    era.set('flag:不忠惩罚', 1);
+    era.set('flag:马娘身高', 2);
+    new CharaTitles(0).push({ c: buff_colors[2], n: '无法战胜', s: true });
+  } else if (
+    era.get('callname:0:-1').indexOf('天马闪光蹄') !== -1 &&
+    sys_personal_achievement.get(3)
+  ) {
+    era.set('flag:角色性别', 0);
+    era.set('flag:彩蛋机制', 3);
+    new CharaTitles(0).push({ c: buff_colors[2], n: '运动系爱好者', s: true });
   }
   CharaTalk.me = new CharaTalk(0);
   while (flag_custom) {
@@ -627,35 +650,47 @@ async function page_custom() {
 
       era.drawLine();
       era.print('那么就到称呼环节啦！');
-      if (era.get('flag:彩蛋机制') === 179) {
-        era.drawLine();
-        await era.printAndWait('哦哦，您取了一个很萝莉控的名字呢！');
-        era.set('callname:0:-2', '豚鼠子');
-      } else {
-        era.printInColRows([
-          { content: '希望旁白君如何称呼您呢？', type: 'text' },
-          { accelerator: 1, content: '你', type: 'button' },
-          { accelerator: 2, content: '主人公', type: 'button' },
-          { accelerator: 3, content: '自己决定！', type: 'button' },
-        ]);
-        temp = await era.input();
-        switch (temp) {
-          case 1:
-            era.set('callname:0:-2', '你');
-            break;
-          case 2:
-            era.set('callname:0:-2', '主人公');
-            break;
-          case 3:
-            era.print('希望旁白君如何称呼您呢？（6个字符以内）');
-            temp = '';
-            do {
-              if (temp) {
-                await era.printAndWait('太长了，请重新输入！');
-              }
-              temp = era.set('callname:0:-2', await era.input());
-            } while (temp.length > 6);
-        }
+      switch (era.get('flag:彩蛋机制')) {
+        case 3:
+          era.drawLine();
+          await era.printAndWait('哦哦，您取了一个很喜欢马蹄的名字呢！');
+          era.set('callname:0:-2', '天马');
+          break;
+        case 179:
+          era.drawLine();
+          await era.printAndWait('哦哦，您取了一个很萝莉控的名字呢！');
+          era.set('callname:0:-2', '豚鼠子');
+          break;
+        case 621:
+          era.drawLine();
+          await era.printAndWait('哦哦，您取了一个很想被欺负的名字呢！');
+          era.set('callname:0:-2', '渡鸦');
+          break;
+        default:
+          era.printInColRows([
+            { content: '希望旁白君如何称呼您呢？', type: 'text' },
+            { accelerator: 1, content: '你', type: 'button' },
+            { accelerator: 2, content: '主人公', type: 'button' },
+            { accelerator: 3, content: '自己决定！', type: 'button' },
+          ]);
+          temp = await era.input();
+          switch (temp) {
+            case 1:
+              era.set('callname:0:-2', '你');
+              break;
+            case 2:
+              era.set('callname:0:-2', '主人公');
+              break;
+            case 3:
+              era.print('希望旁白君如何称呼您呢？（6个字符以内）');
+              temp = '';
+              do {
+                if (temp) {
+                  await era.printAndWait('太长了，请重新输入！');
+                }
+                temp = era.set('callname:0:-2', await era.input());
+              } while (temp.length > 6);
+          }
       }
       CharaTalk.me = new CharaTalk(0);
       await era.printAndWait([

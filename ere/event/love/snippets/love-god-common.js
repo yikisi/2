@@ -149,7 +149,6 @@ async function love_god_common(
     set(`cflag:${god.id}:出生月份`, cur_month);
     set(`cflag:${god.id}:出生日期`, birth_day);
     set(`cflag:${god.id}:月经周`, 0);
-    set(`cflag:${god.id}:成长阶段`, 2);
     set(`cflag:${god.id}:招募状态`, -24);
   }
 }

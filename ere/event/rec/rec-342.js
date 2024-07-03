@@ -67,5 +67,6 @@ module.exports = {
     await god.say_and_wait('那么，就当做是回应你的愿望，请成为我的训练员吧。');
     set('flag:当前互动角色', 342);
     set('cflag:342:招募状态', recruit_flags.yes);
+    set('cflag:342:育成回合计时', 'x');
   },
 };

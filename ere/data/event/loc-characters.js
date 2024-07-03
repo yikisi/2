@@ -5,10 +5,6 @@ class LocCharacters {
   obj;
 
   constructor() {
-    // TODO v0.7存档临时修复措施
-    if (typeof get('flag:NPC位置') === 'number') {
-      set('flag:NPC位置', {});
-    }
     this.obj = get('flag:NPC位置') || set('flag:NPC位置', {});
   }
 

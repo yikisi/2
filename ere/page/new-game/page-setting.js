@@ -138,6 +138,7 @@ function set_from_theme(theme) {
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 0);
       era.set('flag:性技自主学习', 0);
+      era.set('flag:马娘身高', 1);
       break;
     case 1:
       era.set('flag:训练难度', 0);
@@ -166,6 +167,7 @@ function set_from_theme(theme) {
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 0);
       era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
       break;
     case 2:
       era.set('flag:训练难度', -25);
@@ -194,6 +196,7 @@ function set_from_theme(theme) {
       era.set('flag:不忠惩罚', 0);
       era.set('flag:读档对话', 1);
       era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
       break;
     case 3:
       era.set('flag:训练难度', -25);
@@ -222,6 +225,7 @@ function set_from_theme(theme) {
       era.set('flag:不忠惩罚', 0);
       era.set('flag:读档对话', 1);
       era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
       break;
     case 4:
       era.set('flag:训练难度', 25);
@@ -250,6 +254,7 @@ function set_from_theme(theme) {
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 1);
       era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
       break;
     case 5:
       era.set('flag:训练难度', 25);
@@ -278,6 +283,7 @@ function set_from_theme(theme) {
       era.set('flag:不忠惩罚', 0);
       era.set('flag:读档对话', 0);
       era.set('flag:性技自主学习', 0);
+      era.set('flag:马娘身高', 1);
       break;
     case 6:
       era.set('flag:训练难度', 25);
@@ -306,6 +312,7 @@ function set_from_theme(theme) {
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 1);
       era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
       break;
     case 7:
       era.set('flag:训练难度', 25);
@@ -334,6 +341,7 @@ function set_from_theme(theme) {
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 1);
       era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
   }
 }
 
@@ -681,6 +689,17 @@ async function page_settings() {
             '孩子们对你只有孺慕之情……吗？',
           ][v],
       },
+      {
+        key: '马娘身高',
+        label: '马娘的身高',
+        options: [
+          { l: '这么矮的妈妈', v: 0 },
+          { l: '一般就好', v: 1 },
+          { l: '我想被支配！', v: 2 },
+        ],
+        tip: (v) =>
+          ['被萝莉环绕的天国……', '马娘身高将自然分布', '巨大马娘不可战胜！'][v],
+      },
       // {
       //   label: '带玩具上场比赛',
       //   key: '道具影响',
@@ -742,7 +761,7 @@ async function page_settings() {
     buffer.at(-1).push(
       {
         accelerator: 998,
-        config: { align: 'right', offset: 4, width: 4 },
+        config: { align: 'right', width: 4 },
         content: '进入游戏',
         type: 'button',
       },
