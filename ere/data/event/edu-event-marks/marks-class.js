@@ -8,6 +8,8 @@ class EduEventMarks extends PersonalEventMarks {
   /** @param {number} chara_id */
   constructor(chara_id) {
     super(chara_id, '育成用变量');
+    if (this.constructor.toString().startsWith('class EduEventMarks'))
+      PersonalEventMarks.register_marks(this);
   }
 }
 

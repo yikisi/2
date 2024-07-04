@@ -773,15 +773,15 @@ function sub_simulate_skill(
                         ability_usage_enum.MultiplyTeamTotalSpeed
                     ];
                   if (temp >= 3600) {
-                    temp = 2;
+                    temp = 1.2;
                   } else if (temp >= 2600) {
-                    temp = 17.5;
+                    temp = 1.1;
                   } else if (temp >= 1800) {
-                    temp = 15;
-                  } else if (temp >= 1200) {
-                    temp = 12.5;
-                  } else {
                     temp = 1;
+                  } else if (temp >= 1200) {
+                    temp = 0.9;
+                  } else {
+                    temp = 0.8;
                   }
                   skill.values[i][j] = temp * skill.data.ability_values[i][j];
                   break;

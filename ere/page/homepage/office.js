@@ -672,6 +672,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 212:
       era.drawLine();
+      era.set(`cflag:${chara_id}:爱慕暂拒`, 0);
       get_custom_check(chara_id).check_love_events();
       await era.printAndWait([
         get_chara_talk(chara_id).get_colored_name(),

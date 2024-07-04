@@ -83,7 +83,6 @@ const ability_usage_enum = {
   Direct: 1,
   // 每个技能提升1%，最大20%
   MultiplySkillNum: 2,
-  // 队友属性和，受心情影响，1200、1800、2600、3600，每超过一档提升12.5%
   MultiplyTeamTotalSpeed: 3,
   MultiplyTeamTotalStamina: 4,
   MultiplyTeamTotalPower: 5,

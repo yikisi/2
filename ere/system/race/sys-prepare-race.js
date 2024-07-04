@@ -446,12 +446,12 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     switch (uma.style) {
       case 0:
         if (uma.race.conditionParams.is_used_skill_id === 202051) {
-          uma.base.loc_mind_nige_diff_speed_up_nige = 2 * loc_mind_base_diff;
-          uma.base.loc_mind_nige_diff_speed_up_other = 5 * loc_mind_base_diff;
-          uma.base.loc_mind_nige_diff_over_take = 6 * loc_mind_base_diff;
+          uma.base.loc_mind_nige_diff_speed_up_nige = 9 * loc_mind_base_diff;
+          uma.base.loc_mind_nige_diff_speed_up_other = 9 * loc_mind_base_diff;
+          uma.base.loc_mind_nige_diff_over_take = 12.5 * loc_mind_base_diff;
         } else {
-          uma.base.loc_mind_nige_diff_speed_up_nige = loc_mind_base_diff;
-          uma.base.loc_mind_nige_diff_speed_up_other = 4 * loc_mind_base_diff;
+          uma.base.loc_mind_nige_diff_speed_up_nige = 2.5 * loc_mind_base_diff;
+          uma.base.loc_mind_nige_diff_speed_up_other = 8 * loc_mind_base_diff;
           uma.base.loc_mind_nige_diff_over_take = 5 * loc_mind_base_diff;
         }
         break;
@@ -466,6 +466,18 @@ function sys_prepare_race(list_chara, team_list, race_info) {
       case 3:
         uma.base.loc_mind_other_diff_lower = 7.5 * loc_mind_base_diff;
         uma.base.loc_mind_other_diff_upper = 8 * loc_mind_base_diff;
+    }
+    if (uma.style > 0) {
+      uma.base.loc_mind_other_diff_random = [
+        get_random_value(
+          uma.base.loc_mind_other_diff_lower,
+          uma.base.loc_mind_other_diff_upper,
+          true,
+        ),
+        (uma.base.loc_mind_other_diff_lower +
+          uma.base.loc_mind_other_diff_upper) /
+          2,
+      ];
     }
   }
   logger.debug(`比赛相关变量预计算：${new Date().getTime() - current} ms`);

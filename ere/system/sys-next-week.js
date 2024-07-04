@@ -826,8 +826,10 @@ async function sys_next_week() {
           40,
       );
     }
+    const edu_marks = new EduEventMarks(chara_id);
+    edu_marks._r_e_check = 2;
     get_custom_check(chara_id).check_next_week();
-    new EduEventMarks(chara_id)._r_e_check = 2;
+    edu_marks._r_e_check = 0;
   }
 
   if (race_punish) {

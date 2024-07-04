@@ -129,6 +129,7 @@ class PseudoUma {
     loc_mind_nige_diff_over_take: 0,
     loc_mind_other_diff_upper: 0,
     loc_mind_other_diff_lower: 0,
+    loc_mind_other_diff_random: [0, 0],
     stamina: 0,
     temptationSpan: 0,
     total_attrs: new Array(5).fill(0),

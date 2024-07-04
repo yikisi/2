@@ -36,7 +36,7 @@ race_event_names[race_event_enum.temptation] = '好像有些不冷静！';
 module.exports = {
   acc_up_hill_mode: 2 / 3,
   frame_rate: 15,
-  loc_mind_multiply_velocity_ideal: [1, 1.04, 1.05, 1.2, 1.04, 0.945, 1.2],
+  loc_mind_multiply_velocity_ideal: [1, 1.04, 1.05, 1.25, 1.04, 0.945, 1.25],
   mod_acceleration_adapt_distance: [0.4, 0.5, 0.6, 1, 1, 1, 1, 1],
   mod_acceleration_adapt_ground: [0.1, 0.3, 0.5, 0.7, 0.8, 0.9, 1, 1.05],
   mod_acceleration_style: [
@@ -56,11 +56,11 @@ module.exports = {
   mod_stamina_cost_mess_grass: [1, 1, 1, 1.02, 1.02],
   mod_velocity_final_adapt_distance: [0.1, 0.2, 0.4, 0.6, 0.8, 0.9, 1, 1.05],
   mod_velocity_style: [
-    [1.063, 0.962, 0.955],
-    [1, 0.98, 0.966],
-    [0.978, 0.991, 0.98],
-    [0.938, 0.998, 0.992],
-    [0.931, 1, 1],
+    [1.063, 0.98, 0.968],
+    [1, 0.99, 0.97],
+    [0.978, 0.991, 0.975],
+    [0.938, 0.996, 0.99],
+    [0.931, 0.998, 1],
   ],
   race_de_acc: [-1.2, -0.8, -1, -0.5, -1.2],
   race_event_enum,
