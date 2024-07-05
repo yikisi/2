@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '不擅长起跑，晚出发的时间少量增加',
   20043,
   UmaSkill.rarity_enum.normal,
-  4,
+  32,
   -174,
   [() => true, () => true],
   [(args) => args.always === 1, () => false],

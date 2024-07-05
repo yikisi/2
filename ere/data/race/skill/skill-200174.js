@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '擅长春季的比赛，速度和力量上升',
   20017,
   UmaSkill.rarity_enum.gold,
-  8,
+  1,
   461,
   [() => true, () => true],
   [(args) => args.season === 1 || args.season === 5, () => false],

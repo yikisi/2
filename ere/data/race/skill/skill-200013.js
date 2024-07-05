@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '稍微不擅长顺时针赛道',
   20001,
   UmaSkill.rarity_enum.normal,
-  4,
+  32,
   -129,
   [() => true, () => true],
   [(args) => args.rotation === 1, () => false],

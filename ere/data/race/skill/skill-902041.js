@@ -6,7 +6,10 @@ module.exports = new UmaSkill(
   '终盘初始段位于前方时，稍微向前突进，若是擅长的距离还能提高少许速度',
   90204,
   UmaSkill.rarity_enum.normal,
-  2,
+  UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
   180,
   [() => true, () => true],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛中盘，稍微准备好向终点进发＜短距离＞',
   20100,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   174,
   [() => true, () => true],
   [(args) => args.distance_type === 1 && args.phase_random === 1, () => false],

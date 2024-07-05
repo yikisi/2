@@ -79,7 +79,11 @@ handlers[304] = (chara, me) => {
       disabled: get('flag:当前月') > 3 || sys_check_team_limit() > -1,
       handle: () => {
         set('cflag:304:招募状态', -2);
-        return sys_call_recruit(201, cb_enum.recruit);
+        return sys_call_recruit(201, cb_enum.recruit).then(() => {
+          if (get('cflag:201:育成次数') === 0) {
+            new MeekEduMarks().debuff = 40;
+          }
+        });
       },
       name: get('cflag:201:育成次数') === 0 ? '接受任务' : '再次尝试',
     };
@@ -199,8 +203,6 @@ handlers[306] = (chara, me) => {
           ? async () => {
               const glasse = get_chara_talk(202),
                 cocon = get_chara_talk(203);
-              new GlasseEduMarks().debuff = 20;
-              new CoconEduMarks().debuff = 20;
               await printAndWait([
                 '在 ',
                 chara.get_colored_name(),
@@ -227,6 +229,8 @@ handlers[306] = (chara, me) => {
               );
               await sys_call_recruit(202, cb_enum.recruit);
               await sys_call_recruit(203, cb_enum.recruit);
+              new GlasseEduMarks().debuff = 20;
+              new CoconEduMarks().debuff = 20;
               set('cflag:306:招募状态', [0, 0]);
               set('flag:当前互动角色', get_random_entry([202, 203]));
             }

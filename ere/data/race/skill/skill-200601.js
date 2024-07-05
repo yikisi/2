@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛终盘开始时位于中团以后时，加速度提升＜差马＞',
   20060,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   508,
   [() => true, () => true],
   [

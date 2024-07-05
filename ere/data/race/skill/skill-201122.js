@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛初盘观察力提高，视野稍微开阔＜中距离＞',
   20112,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   129,
   [() => true, () => true],
   [(args) => args.distance_type === 3 && args.phase_random === 0, () => false],

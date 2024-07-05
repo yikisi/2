@@ -446,6 +446,11 @@ async function check_new_activities(cur_round, in_team_list) {
       ? 306
       : 0,
   ]);
+  loc_visitors.set(location_enum.clinic, [
+    !(era.get('cflag:305:育成回合计时') < 3 * 48) && sys_check_npc_working(305)
+      ? 305
+      : 0,
+  ]);
   loc_visitors.set(location_enum.visitor, [
     !(era.get('cflag:303:育成回合计时') < 3 * 48) &&
     era.get('love:303') >= 25 &&

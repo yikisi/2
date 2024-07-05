@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在赛程后半若处于好位置并进行名次争夺时稍微提升速度',
   90022,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

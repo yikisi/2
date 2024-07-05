@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '临近比赛终盘，若位于第2名以后且距离前方马娘2马身以内则速度会短暂稍微提升＜先马＞',
   20241,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   508,
   [() => true, () => true],
   [

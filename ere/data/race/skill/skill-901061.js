@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '最终弯道后半部分位于队伍中间时，速度持续微量提升，且在长距离比赛低人气的情况下，速度持续少量提升',
   90106,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

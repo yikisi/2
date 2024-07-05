@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在最终弯道处于靠后位置时，会看着附近的赛马娘并恢复持久力',
   10052,
   UmaSkill.rarity_enum.spe_n_3,
-  17,
+  10,
   340,
   [() => true, () => true],
   [

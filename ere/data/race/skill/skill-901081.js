@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中段位于后方时速度稍微提升，之后在终盘的最终弯道处准备超越时，短时间内极小幅向前突进',
   90108,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

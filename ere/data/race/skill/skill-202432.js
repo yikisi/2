@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '临近终盘时处于领头或距离领头4马身以内，则速度和加速度略微提升＜先马・中距离＞',
   20243,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

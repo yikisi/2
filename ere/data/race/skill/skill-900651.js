@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在临近终盘的某处位于前方时速度略微提升，若是短距离或英里比赛，则速度略微持续提升',
   90065,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

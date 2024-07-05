@@ -142,7 +142,7 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { width: 5 },
+              config: { width: 3 },
               content: [
                 '草',
                 {
@@ -150,7 +150,7 @@ module.exports = async () => {
                   content: get_adaptability_rank(adaptivity[0]),
                   fontWeight: 'bold',
                 },
-                ' · 泥',
+                '·泥',
                 {
                   color: adaptability_colors[adaptivity[1]],
                   content: get_adaptability_rank(adaptivity[1]),
@@ -165,7 +165,7 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { width: 5 },
+              config: { width: 6 },
               content: [
                 '短',
                 {
@@ -173,19 +173,19 @@ module.exports = async () => {
                   content: get_adaptability_rank(adaptivity[2]),
                   fontWeight: 'bold',
                 },
-                ' · 英',
+                '·英',
                 {
                   color: adaptability_colors[adaptivity[3]],
                   content: get_adaptability_rank(adaptivity[3]),
                   fontWeight: 'bold',
                 },
-                ' · 中',
+                '·中',
                 {
                   color: adaptability_colors[adaptivity[4]],
                   content: get_adaptability_rank(adaptivity[4]),
                   fontWeight: 'bold',
                 },
-                ' · 长',
+                '·长',
                 {
                   color: adaptability_colors[adaptivity[5]],
                   content: get_adaptability_rank(adaptivity[5]),
@@ -200,27 +200,27 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { width: 5 },
+              config: { width: 6 },
               content: [
-                { content: '逃' },
+                '逃',
                 {
                   color: adaptability_colors[adaptivity[6]],
                   content: get_adaptability_rank(adaptivity[6]),
                   fontWeight: 'bold',
                 },
-                { content: ' · 先' },
+                '·先',
                 {
                   color: adaptability_colors[adaptivity[7]],
                   content: get_adaptability_rank(adaptivity[7]),
                   fontWeight: 'bold',
                 },
-                { content: ' · 差' },
+                '·差',
                 {
                   color: adaptability_colors[adaptivity[8]],
                   content: get_adaptability_rank(adaptivity[8]),
                   fontWeight: 'bold',
                 },
-                { content: ' · 追' },
+                '·追',
                 {
                   color: adaptability_colors[adaptivity[9]],
                   content: get_adaptability_rank(adaptivity[9]),
@@ -451,10 +451,12 @@ module.exports = async () => {
                 },
               ],
             );
-            const ret = await era.input();
+            const ret = await era.input({ useRule: false });
             if (ret === 999) {
               flag_skill = false;
-            } else {
+            } else if (ret === 'irwinner') {
+              pt = era.add(`exp:${chara_id}:技能点数`, 9999);
+            } else if (typeof ret === 'number' && buffer[ret - 1]) {
               const skill = skills_dict[buffer[ret - 1].id],
                 to_remove =
                   skills_dict[

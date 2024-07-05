@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '枠号为7时会有好事发生',
   20156,
   UmaSkill.rarity_enum.gold,
-  8,
+  1,
   334,
   [() => true, () => true],
   [(args) => args.random_lot <= 50 && args.post_number === 7, () => false],

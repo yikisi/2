@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛终盘前方受阻时，能够借助预言之力略微开辟道路',
   90056,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛终盘使其他的马娘产生动摇＜差马＞',
   20144,
   UmaSkill.rarity_enum.gold,
-  11,
+  25,
   508,
   [() => true, () => true],
   [

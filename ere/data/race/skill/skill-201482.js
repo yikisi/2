@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '下坡的时略微不容变得疲劳＜追马＞',
   20148,
   UmaSkill.rarity_enum.normal,
-  1,
+  8,
   217,
   [() => true, () => true],
   [

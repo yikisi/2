@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在最终弯道处于内侧的话速度会略微上升＜长距离＞',
   20075,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

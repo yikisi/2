@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛初期略微容易获得领先＜逃马＞',
   20053,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [(args) => args.running_style === 1 && args.phase === 0, () => false],

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中盘时，观察力提高，视野变得宽阔＜差马＞',
   20143,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   334,
   [() => true, () => true],
   [(args) => args.running_style === 3 && args.phase_random === 1, () => false],

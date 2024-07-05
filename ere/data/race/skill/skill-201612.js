@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛中盘发动多个技能时，速度提高',
   20161,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   508,
   [() => true, () => true],
   [(args) => args.activate_count_middle >= 3, () => false],

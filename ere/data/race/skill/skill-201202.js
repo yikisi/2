@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '想要赶超的愿望在心底涌现，略微不容易疲劳＜长距离＞',
   20120,
   UmaSkill.rarity_enum.normal,
-  1,
+  8,
   217,
   [() => true, () => true],
   [

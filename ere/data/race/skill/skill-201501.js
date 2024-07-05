@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛终盘位于后方时，视野更加开阔＜追马＞',
   20150,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   334,
   [() => true, () => true],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '中盘经过弯道竞争，且终盘的最终弯道过半后自身占据好位置时，稍微提升加速度',
   90051,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [
     (args) =>

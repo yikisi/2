@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中盘若处于后方，略微回复持久力＜泥地＞',
   20200,
   UmaSkill.rarity_enum.normal,
-  1,
+  8,
   217,
   [() => true, () => true],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在最终弯道位于中间往后位置时，令前后各3名赛马娘的速度极小幅度下降，并稍微提高自己的速度＜差马＞',
   20254,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

@@ -6,7 +6,10 @@ module.exports = new UmaSkill(
   '进入终盘后提高自身速度，一时看不到终点则会稍作耐力调节',
   90206,
   UmaSkill.rarity_enum.normal,
-  2,
+  UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
   180,
   [() => true, () => true],
   [

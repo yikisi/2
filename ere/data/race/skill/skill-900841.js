@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛终盘位于后方时，在最终直线处稍微向前突进',
   90084,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [(args) => args.phase >= 2 && args.order_rate >= 50, () => true],
   [(args) => args.is_last_straight === 1, () => false],

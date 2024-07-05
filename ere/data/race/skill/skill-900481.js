@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '最终直线上身处前方，完成超越或是即将被超越时，速度稍微提升',
   90048,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛终盘略微容易取得好路线',
   20050,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   129,
   [() => true, () => true],
   [(args) => args.phase_random === 2, () => false],

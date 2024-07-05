@@ -1,3 +1,5 @@
+const skill_name_enum = { buff: 0, heal: 0, speed: 0, control: 0, debuff: 0 };
+Object.keys(skill_name_enum).forEach((k, i) => (skill_name_enum[k] = i));
 const skill_name_colors = [
   '#a7fe9e',
   '#98ccfa',
@@ -6,6 +8,8 @@ const skill_name_colors = [
   '#ce7cff',
 ];
 
+const skill_border_enum = { normal: 0, advanced: 0, spe: 0, evol: 0, cheat: 0 };
+Object.keys(skill_border_enum).forEach((k, i) => (skill_border_enum[k] = i));
 const skill_border_colors = [
   '#c6c5c5',
   '#eeb93f',
@@ -152,10 +156,21 @@ const target_type_enum = {
 };
 
 class UmaSkill {
+  static skill_name_enum = skill_name_enum;
+  static skill_border_enum = skill_border_enum;
   static rarity_enum = rarity_enum;
   static ability_type_enum = ability_type_enum;
   static ability_usage_enum = ability_usage_enum;
   static target_type_enum = target_type_enum;
+
+  /**
+   * @param {number} name
+   * @param {number} border
+   * @returns {number}
+   */
+  static get_skill_color(name, border) {
+    return border + (name << 3);
+  }
 
   /** @type {number} */
   id;
@@ -322,8 +337,8 @@ class UmaSkill {
   }
 
   get_colored_name() {
-    const name_color = skill_name_colors[this.category & 0b111],
-      border_color = skill_border_colors[this.category >> 3];
+    const border_color = skill_border_colors[this.category & 0b111],
+      name_color = skill_name_colors[this.category >> 3];
     return [
       { content: '【', color: border_color },
       {

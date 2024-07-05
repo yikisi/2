@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '华丽地过弯，加速度提升 ',
   20034,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   508,
   [() => true, () => true],
   [(args) => args.all_corner_random === 1, () => false],

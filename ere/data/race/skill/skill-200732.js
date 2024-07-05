@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在最终弯道及往后被紧追不舍时，稍微提高速度并略微提高加速度＜中距离＞',
   20073,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

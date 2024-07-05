@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛最后阶段，如果在后面，就会降低前面的速度＜中距离＞',
   20115,
   UmaSkill.rarity_enum.gold,
-  11,
+  25,
   508,
   [() => true, () => true],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '若是在比赛终盘缩短与前方对手的差距，则在最终直线上小幅提升速度',
   90003,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [
     (args) =>

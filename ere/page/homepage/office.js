@@ -19,6 +19,7 @@ const goto_sex = require('#/page/components/goto-sex');
 const select_target = require('#/page/components/select-target');
 const { generate_race_button } = require('#/page/homepage/snippets');
 const page_chairman_office = require('#/page/page-chairman-office');
+const page_clinic = require('#/page/page-clinic');
 const print_exp_page = require('#/page/page-exp');
 const print_god_shop = require('#/page/page-god-shop');
 const print_juel_shop_page = require('#/page/page-juel-shop');
@@ -368,12 +369,13 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   event_marks.get(event_hooks.back_school)
                     ? 'danger'
                     : 'warning',
-                disabled: true,
-                // !sys_check_awake(0) ||
-                // sys_check_act_disabled(
-                //   sys_get_move_cost(location_enum.clinic),
-                //   player_base,
-                // ),
+                disabled:
+                  !sys_check_awake(0) ||
+                  sys_check_act_disabled(
+                    sys_get_move_cost(location_enum.clinic),
+                    player_base,
+                  ) ||
+                  loc_chara.get(location_enum.clinic).length === 0,
                 width: 6,
               },
               content: '前往保健室',
@@ -700,6 +702,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 303:
       sys_handle_action(sys_get_move_cost(location_enum.clinic));
+      await page_clinic();
       break;
     case 304:
       sys_handle_action(

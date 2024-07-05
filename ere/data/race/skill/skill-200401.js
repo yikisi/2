@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '四周被包围的话，持久力少量减少',
   20040,
   UmaSkill.rarity_enum.normal,
-  4,
+  32,
   -262,
   [() => true, () => true],
   [(args) => args.accumulatetime >= 2 && args.is_surrounded === 1, () => false],

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '稍微不擅长「稍重」「重」「不良」的马场状态',
   20016,
   UmaSkill.rarity_enum.normal,
-  4,
+  32,
   -129,
   [() => true, () => true],
   [

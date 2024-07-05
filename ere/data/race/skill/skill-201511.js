@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛的最终区域使自己紧盯的马娘紧张感上升＜追马＞',
   20151,
   UmaSkill.rarity_enum.gold,
-  11,
+  25,
   508,
   [() => true, () => true],
   [

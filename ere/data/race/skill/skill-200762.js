@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在体力快要耗尽时略微恢复元气＜长距离＞',
   20076,
   UmaSkill.rarity_enum.normal,
-  1,
+  8,
   217,
   [() => true, () => true],
   [(args) => args.distance_type === 4 && args.hp_per <= 30, () => false],

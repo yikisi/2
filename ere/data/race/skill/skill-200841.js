@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中盘令出走策略是逃马的赛马娘焦躁，使其略微容易疲劳',
   20084,
   UmaSkill.rarity_enum.normal,
-  3,
+  24,
   217,
   [() => true, () => true],
   [

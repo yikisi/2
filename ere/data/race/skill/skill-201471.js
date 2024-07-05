@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '左右移动的时候能更好的把握状况，视野更加开阔＜追马＞',
   20147,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   334,
   [() => true, () => true],
   [

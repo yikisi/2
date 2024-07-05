@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛终盘位于前列时，使后面马娘的视野略微变窄＜先马＞',
   20137,
   UmaSkill.rarity_enum.normal,
-  3,
+  24,
   85,
   [() => true, () => true],
   [

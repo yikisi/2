@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中期左右处于队伍中团时重新振作，回复持久力并且稍微提高速度',
   10062,
   UmaSkill.rarity_enum.spe_n_3,
-  17,
+  10,
   340,
   [() => true, () => true],
   [

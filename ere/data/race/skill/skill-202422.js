@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '若经过最后冲刺却仍处于队伍中部靠后则会稍微消耗持久力略微提高加速度＜差马・长距离＞',
   20242,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛中盘处于好位置时，持久力回复',
   10045,
   UmaSkill.rarity_enum.spe_n_3,
-  17,
+  10,
   340,
   [() => true, () => true],
   [

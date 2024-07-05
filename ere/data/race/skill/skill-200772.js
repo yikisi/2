@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中盘位于前方时，使后方焦躁的马娘变得很疲劳',
   20077,
   UmaSkill.rarity_enum.gold,
-  11,
+  25,
   508,
   [() => true, () => true],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '下坡变得略微擅长＜先马＞',
   20134,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

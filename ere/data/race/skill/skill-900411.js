@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛后半段处于前列进行名次争夺时，速度略微加快',
   90041,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

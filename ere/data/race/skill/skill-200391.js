@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '上坡时容易疲劳',
   20039,
   UmaSkill.rarity_enum.normal,
-  4,
+  32,
   -262,
   [() => true, () => true],
   [(args) => args.up_slope_random === 1, () => false],

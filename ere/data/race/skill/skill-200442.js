@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛序盘或中盘前方堵塞时，保持坚定的意志稍微恢复持久力，并且路线选择稍微变得明智',
   20044,
   UmaSkill.rarity_enum.normal,
-  1,
+  8,
   217,
   [() => true, () => true],
   [

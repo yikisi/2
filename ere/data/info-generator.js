@@ -636,12 +636,9 @@ module.exports = {
     ret +=
       level_and_desc.honour.buff[
         level +
-          [304, 306].reduce(
-            (p, a) =>
-              p + (era.get(`cflag:${a}:招募状态`) === recruit_flags.yes),
-            0,
-          )
-      ];
+          (era.get('cflag:304:招募状态') === recruit_flags.yes) +
+          (era.get('cflag:306:招募状态') === recruit_flags.yes)
+      ] ?? 0;
     if (relation > 525) {
       ret += 2.5;
     } else if (relation > 375) {

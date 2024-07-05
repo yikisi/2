@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '准备进行超越时，少量提升加速力＜差马＞',
   20140,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   334,
   [() => true, () => true],
   [

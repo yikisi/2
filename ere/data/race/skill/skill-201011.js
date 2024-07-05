@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛序盘处于前方时令后方的赛马娘萎缩＜短距离＞',
   20101,
   UmaSkill.rarity_enum.gold,
-  11,
+  25,
   508,
   [() => true, () => true],
   [

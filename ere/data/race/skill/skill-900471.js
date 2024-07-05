@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛终盘阶段剩余400m处位于前方时速度略微提升，且在GⅠ比赛等大舞台上取得高人气时，速度少量提升',
   90047,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

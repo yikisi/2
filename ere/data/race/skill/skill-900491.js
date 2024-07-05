@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '最终弯道之后准备超越前方马娘时将在剩余400m以后的好位置处稍微提高速度人气较低的时候速度提升稍多',
   90049,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [
     (args) => args.is_finalcorner === 1 && args.is_overtake === 1,

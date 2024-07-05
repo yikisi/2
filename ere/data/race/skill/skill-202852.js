@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在终盘初段余力十足的话，稍微向前突进＜追马・长距离＞',
   20285,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

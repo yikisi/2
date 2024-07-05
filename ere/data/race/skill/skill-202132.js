@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中盘位于前方时，略微降低后方马娘的速度，自身速度稍微提升＜中距离＞',
   20213,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

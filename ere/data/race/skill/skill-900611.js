@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '能够冷静地进行比赛的规划时，就能够在最后200米发挥实力，少量加速',
   90061,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛后半时，使体力回复的赛马娘稍微畏缩＜泥地＞',
   20236,
   UmaSkill.rarity_enum.normal,
-  3,
+  24,
   217,
   [() => true, () => true],
   [

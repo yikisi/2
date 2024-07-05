@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛后半的随机位置稍微向前突进，并极少量回复体力',
   20255,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   263,
   [() => true, () => true],
   [(args) => args.distance_rate_after_random === 50, () => false],

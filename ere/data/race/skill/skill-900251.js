@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '赛程后半时，由中间梯队稍微提升速度，使前方的马娘稍微萎缩',
   90025,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

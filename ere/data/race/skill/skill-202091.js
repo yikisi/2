@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中盘，在中间集团竞争时，小幅恢复持久力，并提升速度＜中距离＞',
   20209,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   508,
   [() => true, () => true],
   [

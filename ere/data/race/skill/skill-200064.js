@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '擅长京都竞马场的比赛，耐力、智力和速度上升',
   20006,
   UmaSkill.rarity_enum.gold,
-  8,
+  1,
   461,
   [() => true, () => true],
   [(args) => args.track_id === 10008, () => false],

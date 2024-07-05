@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在剩余800m处位于队伍中间时，极少量提升加速度，若在2400m的比赛中取得高人气则少量提升加速度',
   90070,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

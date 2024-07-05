@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛中盘位于队伍中间时，一段时间内速度微量提升＜差马＞',
   20264,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

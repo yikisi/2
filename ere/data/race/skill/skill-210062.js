@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '赛程后半调整呼吸并稍微向前迈进。育成中积累的胜利次数越多，速度、加速度、耐力回复量越高',
   21006,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   263,
   [() => true, () => true],
   [(args) => args.distance_rate_after_random === 50, () => false],

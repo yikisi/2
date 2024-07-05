@@ -6,7 +6,10 @@ module.exports = new UmaSkill(
   '在比赛终盘时失去全部体力开始散步，并且想象着凌辱一般的嫌恶眼神快要去了',
   99002,
   UmaSkill.rarity_enum.spe_r,
-  0b100100,
+  UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.debuff,
+    UmaSkill.skill_border_enum.cheat,
+  ),
   0,
   [() => true, () => true],
   [(args) => args.phase === 2, () => false],

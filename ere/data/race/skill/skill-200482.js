@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中盘被包围时，持久力略微回复',
   20048,
   UmaSkill.rarity_enum.normal,
-  1,
+  8,
   217,
   [() => true, () => true],
   [(args) => args.phase === 1 && args.is_surrounded === 1, () => false],

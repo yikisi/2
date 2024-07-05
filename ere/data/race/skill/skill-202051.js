@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比通常的逃马策略更大幅度地拉开与后方的距离，并且一直到最后都甩开对手＜逃马＞',
   20205,
   UmaSkill.rarity_enum.gold,
-  8,
+  1,
   370,
   [() => true, () => true],
   [(args) => args.running_style === 1, () => false],

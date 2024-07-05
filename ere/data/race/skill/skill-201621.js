@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛终盘发动多个技能时，耐力略微回复',
   20162,
   UmaSkill.rarity_enum.normal,
-  1,
+  8,
   217,
   [() => true, () => true],
   [(args) => args.activate_count_end_after >= 3, () => false],

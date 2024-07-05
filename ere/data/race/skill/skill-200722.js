@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中盘位于前列时，略微容易取得好位置＜中距离＞',
   20072,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

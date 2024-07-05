@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中盘速度稍微提升＜先马＞',
   20237,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [(args) => args.phase_random === 1 && args.running_style === 2, () => false],

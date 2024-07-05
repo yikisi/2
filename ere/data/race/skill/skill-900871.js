@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '剩余400米，位于前方并被后方马娘紧追时，略微容易突围',
   90087,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

@@ -6,7 +6,10 @@ module.exports = new UmaSkill(
   '在比赛终盘处于第三名快要输掉的时候激发潜藏的昂扬斗志，速略微度加快',
   90060,
   UmaSkill.rarity_enum.normal,
-  2,
+  UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
   180,
   [() => true, () => true],
   [

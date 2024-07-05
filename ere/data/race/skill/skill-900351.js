@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '最终弯道之后进行名次争夺，在最终直线位于前方时，稍微提升速度',
   90035,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [
     (args) => args.is_finalcorner === 1 && args.blocked_side_continuetime >= 2,

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛后半且靠近弯道时，稍微恢复持久力，且短时间内略微提高速度',
   90032,
   UmaSkill.rarity_enum.normal,
-  1,
+  8,
   180,
   [() => true, () => true],
   [

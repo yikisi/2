@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '路线选取变得略微流畅＜先马＞',
   20133,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

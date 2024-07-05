@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '附近有多个马娘时，加快速度',
   20159,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   508,
   [() => true, () => true],
   [(args) => args.near_count >= 3 && args.accumulatetime >= 5, () => false],

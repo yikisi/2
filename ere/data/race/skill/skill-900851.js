@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '冷静地进行比赛，突入终盘时位于后方附近时，稍微向前突进，并略微威慑从领头开始至多4名赛马娘',
   90085,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

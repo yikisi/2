@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛终盘的弯道上处于第一位时，稍微提升加速度',
   90020,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

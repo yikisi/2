@@ -25,67 +25,250 @@ Object.entries(UmaSkill.target_type_enum).map(
 );
 
 const icon2skill_color = {
-  10011: 0b00000,
-  10012: 0b01000,
-  10014: 0b00100,
-  10016: 0b10000,
-  10021: 0b00000,
-  10022: 0b01000,
-  10024: 0b00100,
-  10031: 0b00000,
-  10032: 0b01000,
-  10034: 0b00100,
-  10041: 0b00000,
-  10051: 0b00000,
-  10054: 0b00100,
-  10061: 0b00000,
-  10062: 0b01000,
-  20011: 0b00010,
-  20012: 0b01010,
-  20013: 0b10010,
-  20014: 0b00100,
-  20016: 0b11010,
-  20021: 0b00001,
-  20022: 0b01001,
-  20023: 0b10001,
-  20024: 0b00100,
-  20026: 0b11001,
-  20041: 0b00010,
-  20042: 0b01010,
-  20043: 0b10010,
-  20046: 0b11010,
-  20051: 0b00010,
-  20052: 0b01010,
-  20061: 0b00010,
-  20062: 0b01010,
-  20064: 0b00100,
-  20091: 0b00010,
-  20092: 0b01010,
-  20101: 0b00010,
-  20102: 0b01010,
-  20111: 0b00001,
-  20112: 0b01001,
-  20121: 0b00010,
-  20122: 0b01010,
-  20131: 0b00010,
-  20132: 0b01010,
-  20141: 0b00010,
-  20142: 0b01010,
-  20151: 0b00010,
-  20152: 0b01010,
-  20192: 0b01010,
-  20202: 0b01010,
-  20226: 0b11010,
-  30011: 0b00011,
-  30012: 0b01011,
-  30021: 0b00011,
-  30041: 0b00011,
-  30051: 0b00011,
-  30052: 0b01011,
-  30071: 0b00011,
-  30072: 0b01011,
-  40012: 0b01000,
-  2010010: 0b01010,
+  10011: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  10012: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  10014: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.debuff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  10016: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.spe,
+  ),
+  10021: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  10022: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  10024: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.debuff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  10031: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  10032: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  10034: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.debuff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  10041: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  10051: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  10054: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.debuff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  10061: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  10062: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20011: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20012: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20013: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.spe,
+  ),
+  20014: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.debuff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20016: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
+  ),
+  20021: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.heal,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20022: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.heal,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20023: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.heal,
+    UmaSkill.skill_border_enum.spe,
+  ),
+  20024: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.debuff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20026: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.heal,
+    UmaSkill.skill_border_enum.evol,
+  ),
+  20041: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20042: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20043: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.spe,
+  ),
+  20046: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
+  ),
+  20051: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20052: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20061: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20062: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20064: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.debuff,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20091: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20092: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20101: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20102: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20111: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.heal,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20112: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.heal,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20121: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20122: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20131: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20132: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20141: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20142: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20151: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20152: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20192: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20202: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20226: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
+  ),
+  30011: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.control,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  30012: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.control,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  30021: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.control,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  30041: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.control,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  30051: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.control,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  30052: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.control,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  30071: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.control,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  30072: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.control,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  40012: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  2010010: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
 };
 
 function find_many_skills(where) {

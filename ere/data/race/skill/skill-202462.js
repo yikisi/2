@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '最终直线在领头位置且后方1马身内有马娘时，速度少量提升＜逃马＞',
   20246,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

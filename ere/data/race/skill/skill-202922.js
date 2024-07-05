@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛中盘消耗少量体力，使速度少量提升＜追马＞',
   20292,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [(args) => args.running_style === 4 && args.phase_random === 1, () => false],

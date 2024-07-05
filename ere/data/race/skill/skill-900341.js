@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛前半，一直位于队伍中后方等待时机的话，在名次争夺时，将稍微提高速度',
   90034,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [
     (args) => args.distance_rate >= 50 && args.order_rate_out40_continue === 1,

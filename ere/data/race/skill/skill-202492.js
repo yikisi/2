@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '冲进终盘之前一直保持冷静在后方等待机会的话，在终盘一开始会稍微提升加速度＜追马＞',
   20249,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [
     (args) =>

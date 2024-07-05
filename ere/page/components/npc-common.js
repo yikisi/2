@@ -182,7 +182,12 @@ async function npc_common(
           type: 'button',
         },
         { accelerator: 2, content: sex_cb.name, type: 'button' },
-        { accelerator: 3, content: '送礼物', type: 'button' },
+        {
+          accelerator: 3,
+          config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
+          content: '送礼物',
+          type: 'button',
+        },
         {
           accelerator: 4,
           config: {
@@ -221,7 +226,9 @@ async function npc_common(
               type: 'button',
             }
           : undefined,
-        { accelerator: 7, content: '提升对方性爱能力', type: 'button' },
+        era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes
+          ? { accelerator: 7, content: '提升对方性爱能力', type: 'button' }
+          : undefined,
         era.get(`cflag:${chara.id}:爱慕暂拒`) &&
         era.get(`cflag:${chara.id}:爱慕暂拒`) === era.get(`love:${chara.id}`)
           ? {
@@ -318,6 +325,7 @@ async function npc_common(
       await print_juel_shop_page(chara.id);
       break;
     case 8:
+      era.set(`cflag:${chara.id}:爱慕暂拒`, 0);
       get_custom_check(chara.id).check_love_events();
       await era.printAndWait([
         chara.get_colored_name(),

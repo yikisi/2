@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛终盘开始时若位于前方，稍微提升加速度＜先马＞',
   20190,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

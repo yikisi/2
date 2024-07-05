@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在终盘的最终直线位于领头时速度略微提升',
   90107,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

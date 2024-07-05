@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '跑位贴紧前方马娘时，减少自身所承受的阻力',
   20165,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   508,
   [() => true, () => true],
   [

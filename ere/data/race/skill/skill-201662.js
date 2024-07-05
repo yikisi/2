@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '身后有马娘长时间紧追的话将会提高速度',
   20166,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   508,
   [() => true, () => true],
   [

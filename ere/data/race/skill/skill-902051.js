@@ -6,7 +6,10 @@ module.exports = new UmaSkill(
   '在临近终点的弯道时，速度微量提升，同时恢复少量体力',
   90205,
   UmaSkill.rarity_enum.normal,
-  2,
+  UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
   180,
   [() => true, () => true],
   [

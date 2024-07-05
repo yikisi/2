@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '略微擅长上坡',
   20158,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [(args) => args.up_slope_random === 1, () => false],

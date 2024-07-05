@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '最终弯道之后从中间梯队向前突进时，稍微加快速度',
   90050,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

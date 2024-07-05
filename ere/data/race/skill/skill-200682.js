@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '比赛临近中盘时若身处前方，稍微更容易拉开差距＜英里＞',
   20068,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛中盘，一段时间内不容易被包围＜中距离＞',
   20113,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   394,
   [() => true, () => true],
   [(args) => args.distance_type === 3 && args.phase_random === 1, () => false],

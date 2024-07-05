@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛中盘的直线位于前方，并被后面的马娘拉近距离时，绝不让步的想法将会稍微化作动力。',
   90046,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

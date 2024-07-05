@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛终盘2次赶超的话，能够加快速度，且路线选择变得更明智',
   90019,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [(args) => args.change_order_up_end_after >= 2, () => false],

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在最终弯道处于后方位置的话则会提高速度＜英里＞',
   20211,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   508,
   [() => true, () => true],
   [

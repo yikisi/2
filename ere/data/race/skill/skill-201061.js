@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛后半完成超越时，加速力提升＜英里＞',
   20106,
   UmaSkill.rarity_enum.gold,
-  10,
+  17,
   508,
   [() => true, () => true],
   [

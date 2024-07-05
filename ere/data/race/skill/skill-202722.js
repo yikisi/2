@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '在比赛中盘的弯道，一段时间内略微提升速度',
   20272,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [(args) => args.phase_corner_random === 1, () => false],

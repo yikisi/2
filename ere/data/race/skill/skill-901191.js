@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '进入终盘时，若在后方且距离终点较远，则在短时间内稍微向前冲刺，若是中山、阪神赛道的中、长距离比赛，更会在之后的直线上短暂冲刺。',
   90119,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   180,
   [() => true, () => true],
   [

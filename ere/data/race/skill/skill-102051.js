@@ -6,7 +6,10 @@ module.exports = new UmaSkill(
   '在临近终点的弯道时，看准时机将留存的脚力一口气爆发，因其精巧的比赛规划会同时恢复大量体力',
   10205,
   5,
-  18,
+  UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.spe,
+  ),
   340,
   [() => true, () => true],
   [

@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '临近中盘时速度稍微提升',
   20280,
   UmaSkill.rarity_enum.normal,
-  2,
+  16,
   217,
   [() => true, () => true],
   [(args) => args.phase_laterhalf_random === 0, () => false],

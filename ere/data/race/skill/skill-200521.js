@@ -6,7 +6,7 @@ module.exports = new UmaSkill(
   '领跑过头的话，容易疲劳',
   20052,
   UmaSkill.rarity_enum.normal,
-  4,
+  32,
   -262,
   [() => true, () => true],
   [
