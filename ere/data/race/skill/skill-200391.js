@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '不擅长坡道',
   '上坡时容易疲劳',
   20039,
+  -1,
   UmaSkill.rarity_enum.normal,
   32,
   -262,

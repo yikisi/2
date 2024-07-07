@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '一生之梦，刹那的飞翔',
   '在最终直线上和后面的赛马娘距离较近时，会瞬间消耗微量的持久力，短时间内稍微速度',
   90071,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

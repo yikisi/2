@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '没有舞步，我依然……',
   '在比赛终盘中幅提升速度，并恢复冷静',
   90003,
+  1,
   UmaSkill.rarity_enum.normal,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,

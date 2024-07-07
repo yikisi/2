@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '纯粹之心',
   '在比赛中盘处于好位置时，持久力回复',
   90045,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   180,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '狄俄斯库里的流星',
   '在最终直线被前方拉开距离时会如同得到星之引导一般加快速度此时若靠近最后方的话速度会大幅上升',
   10033,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

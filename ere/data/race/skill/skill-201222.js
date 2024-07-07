@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '耐力猎手',
   '比赛中盘位于后方时，就会稍微剥夺前方马娘的耐力＜长距离＞',
   20122,
+  1,
   UmaSkill.rarity_enum.normal,
   24,
   217,

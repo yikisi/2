@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '保持体力',
   '临近比赛中盘时稍微不容易疲惫＜先马＞',
   20056,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

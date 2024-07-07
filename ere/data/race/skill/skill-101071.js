@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '满天星斗',
   '在终盘的最终直线位于领头时速度少量提升，并根据进入终盘前取得的领先距离提供额外速度',
   10107,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

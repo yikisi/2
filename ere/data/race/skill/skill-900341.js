@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '疾走乎，疾走乎！',
   '比赛前半，一直位于队伍中后方等待时机的话，在名次争夺时，将稍微提高速度',
   90034,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

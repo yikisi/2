@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '轻巧舞步',
   '路线选取变得略微流畅＜先马＞',
   20133,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '点燃青春・智',
   '在比赛序盘燃烧青春之魂略微展望赛道，参赛队友的智力属性总和越高，路线的规划越高效',
   21005,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   263,

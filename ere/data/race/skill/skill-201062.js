@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '爆发力',
   '在比赛后半完成超越时，加速力稍微提升＜英里＞',
   20106,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

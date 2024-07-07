@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '永世光辉，照耀那晦暝吧',
   '进入最终直线时，若处于好位置则会怀抱坚强的意志来加快速度，若接近领头马娘的话则会大幅提升速度',
   10067,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

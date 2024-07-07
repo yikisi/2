@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '暴走模式！',
   '比赛终盘位于后方时，加速度提升＜泥地＞',
   20232,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

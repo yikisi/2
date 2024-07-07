@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '∴win Q.E.D.',
   '在终盘的最终弯道前身处前方时，速度提升。若是比赛中全程保持冷静，胜利的方程式会使速度变为大幅提升',
   10023,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

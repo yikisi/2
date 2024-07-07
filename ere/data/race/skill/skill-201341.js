@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '决意直滑降',
   '下坡变得稍微擅长＜先马＞',
   20134,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   334,

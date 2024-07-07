@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '序盘巧者',
   '临近中盘时速度稍微提升',
   20280,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

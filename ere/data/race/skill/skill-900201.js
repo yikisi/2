@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'Angling×Scheming',
   '在比赛终盘的弯道上处于第一位时，稍微提升加速度',
   90020,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '急剧上升',
   '比赛终盘位于后方时，加速度稍微提升＜泥地＞',
   20232,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

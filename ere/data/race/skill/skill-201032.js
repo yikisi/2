@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '英里直线○',
   '在直线上的速度略微加快＜英里＞',
   20103,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

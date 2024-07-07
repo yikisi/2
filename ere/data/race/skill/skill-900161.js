@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'Shadow Break',
   '在最终弯道之后在外道完成赶超时，以怪物般的力量稍微提升速度。若在中盘争夺过名次，变为少量提升速度',
   90016,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

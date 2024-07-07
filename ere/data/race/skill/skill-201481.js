@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '放学后的专家',
   '下坡的时不容易变得疲劳＜追马＞',
   20148,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   508,

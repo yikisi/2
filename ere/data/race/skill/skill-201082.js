@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '速度猎手',
   '比赛中盘在前方时，略微夺取后方马娘的速度＜英里＞',
   20108,
+  1,
   UmaSkill.rarity_enum.normal,
   24,
   217,

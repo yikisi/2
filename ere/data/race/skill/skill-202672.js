@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '雀跃',
   '在刚进入比赛终盘时，若位于前方则稍微提升加速度＜英里＞',
   20267,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

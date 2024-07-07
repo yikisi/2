@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'Nemesis',
   '最终弯道之后从中间梯队向前突进时，稍微加快速度',
   90050,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

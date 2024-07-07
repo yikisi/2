@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '光芒圆刃',
   '在弯道加快速度＜中距离＞',
   20111,
+  3,
   UmaSkill.rarity_enum.gold,
   17,
   508,

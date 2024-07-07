@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '豪华☆喷泉',
   '进入终盘最终直线时若位于队伍中间，则剩余300m之后速度少量提升，如果能冷静地进行比赛则速度大幅提升',
   10091,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

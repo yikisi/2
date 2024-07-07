@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '闪光☆着陆',
   '最终弯道之后处于前列进行名次争夺时，在直线上稍微更容易突围',
   90024,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

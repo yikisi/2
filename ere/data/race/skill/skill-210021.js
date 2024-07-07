@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '燃烧青春・体',
   '在比赛中盘燃烧青春之魂回复持久力，参赛队友的耐力属性总和越高越能回复持久力',
   21002,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   633,

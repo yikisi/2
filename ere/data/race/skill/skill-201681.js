@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '目标是最前列！',
   '比赛终盘采取向前冲刺的姿势＜泥地＞',
   20168,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   394,

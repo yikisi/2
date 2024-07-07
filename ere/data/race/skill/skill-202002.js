@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '习惯沙尘',
   '比赛中盘若处于后方，略微回复持久力＜泥地＞',
   20200,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

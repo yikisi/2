@@ -25,8 +25,7 @@ function get_skills_and_print_in_event(chara_id, skills, skill_control) {
           return true;
         } else if (
           (skills_dict[e].category & skills_dict[os].category & 0b111) === 0 ||
-          skills_dict[e].rarity * 10 + Math.abs((e % 10) * 2 - 3.5) >
-            skills_dict[os].rarity * 10 + Math.abs((os % 10) * 2 - 3.5)
+          skills_dict[e].group_level > skills_dict[os].group_level
         ) {
           to_remove.push(os);
           return true;

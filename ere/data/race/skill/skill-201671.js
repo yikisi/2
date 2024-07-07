@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '排名急上升！',
   '在比赛中盘进行名次争夺时速度上升＜泥地＞',
   20167,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

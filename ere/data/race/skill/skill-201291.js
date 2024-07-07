@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '再次燃烧',
   '在比赛终盘小幅消耗持久力，提升加速度＜逃马＞',
   20129,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

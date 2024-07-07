@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'YEAH☆VIVID TIME!',
   '最终直线上身处前方，完成超越或是即将被超越时，速度稍微提升',
   90048,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

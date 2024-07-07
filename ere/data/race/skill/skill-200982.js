@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '大幅度领先',
   '比赛中盘大幅度领跑时，略微容易保持领先＜短距离＞',
   20098,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   262,

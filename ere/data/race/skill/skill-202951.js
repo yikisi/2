@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '砂之开拓者',
   '临近中盘若位于前方，则提升速度＜泥地＞',
   20295,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

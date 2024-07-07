@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '第二支箭',
   '在比赛终盘小幅消耗持久力，稍微提升加速度＜逃马＞',
   20129,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

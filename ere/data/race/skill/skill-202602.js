@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '点火',
   '比赛中触发了13次技能的话，稍微向前突进＜中距离＞',
   20260,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

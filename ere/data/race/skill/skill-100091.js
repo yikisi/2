@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '闪耀的赤色王牌',
   '在比赛后半段前方位置发挥成为第一的力量',
   10009,
+  1,
   UmaSkill.rarity_enum.spe_n_3,
   18,
   340,

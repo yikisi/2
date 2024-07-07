@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '耳边风',
   '比赛中盘被包围时，持久力回复',
   20048,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   508,

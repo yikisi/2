@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '善后措施',
   '临近比赛终盘并在前方时，略微容易实现赶超＜短距离＞',
   20099,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '钉死后方',
   '比赛序盘处于前方时令后方的赛马娘稍微萎缩＜短距离＞',
   20101,
+  1,
   UmaSkill.rarity_enum.normal,
   24,
   262,

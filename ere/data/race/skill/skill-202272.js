@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '重整旗鼓',
   '比赛中盘位于后方时，稍微提升速度＜泥地＞',
   20227,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

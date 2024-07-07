@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '满怀期待地迎接顶点吧',
   '在最终弯道处于靠后位置时，会看着附近的赛马娘并略微恢复持久力',
   90052,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   180,

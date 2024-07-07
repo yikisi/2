@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '旅途尽头的抒情诗',
   '比赛即将进入终盘时的某刻位于后方时，速度持续上升。若是在中长距离比赛中，距离领先位置越远则效果越强',
   10057,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

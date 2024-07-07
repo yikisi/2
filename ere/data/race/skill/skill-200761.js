@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '火场怪力',
   '在即将耗尽体力时，恢复元气，并且提升速度＜长距离＞',
   20076,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   508,

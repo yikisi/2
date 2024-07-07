@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '破局之策',
   '比赛中盘位于后方时，速度稍微提升，并选择稍好的路线＜追马＞',
   20238,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '对胜利的执念',
   '在最终弯道及往后被紧追不舍时，提高速度并略微提高加速度＜中距离＞',
   20073,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

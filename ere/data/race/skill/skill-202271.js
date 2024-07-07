@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '卷土重来',
   '比赛中盘位于后方时，提升速度＜泥地＞',
   20227,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

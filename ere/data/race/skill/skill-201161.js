@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '魅惑的细语',
   '在比赛中盘让前面的马娘困惑＜中距离＞',
   20116,
+  2,
   UmaSkill.rarity_enum.gold,
   25,
   508,

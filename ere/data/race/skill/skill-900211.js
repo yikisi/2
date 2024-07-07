@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '见识一下白色闪电吧！',
   '在赛程后半段直线若处在好位置或由中间梯队向前冲击时，稍微提升速度与加速度',
   90021,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

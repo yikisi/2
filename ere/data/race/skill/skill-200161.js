@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '路况不佳◎',
   '擅长「稍重」「重」「不良」的马场状态',
   20016,
+  2,
   UmaSkill.rarity_enum.normal,
   0,
   174,

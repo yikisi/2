@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '电光石火',
   '比赛终盘在后方准备超越时，提升加速度＜短距离/英里＞',
   20240,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

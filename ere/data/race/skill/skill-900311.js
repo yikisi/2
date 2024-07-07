@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '充能完毕！全速前进！',
   '剩余300m左右处于前方的话略微提高速度，若刚好上完坡则速度稍微提高',
   90031,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

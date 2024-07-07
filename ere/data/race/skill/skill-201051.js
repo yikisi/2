@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '换挡',
   '比赛中盘位于前列时，就很容易超过＜英里＞',
   20105,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '日本第一赛马娘',
   '背负期待的强烈感情转变为力量，最终弯道处提升速度＜长距离＞',
   20206,
+  1,
   UmaSkill.rarity_enum.gold,
   17,
   508,

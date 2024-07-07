@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '可疑的作战策略',
   '比赛后半速度略微上升但有时会很累',
   20203,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   129,

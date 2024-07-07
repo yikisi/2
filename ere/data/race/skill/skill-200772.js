@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '令人出神的诡计',
   '比赛中盘位于前方时，使后方焦躁的马娘变得很疲劳',
   20077,
+  2,
   UmaSkill.rarity_enum.gold,
   25,
   508,

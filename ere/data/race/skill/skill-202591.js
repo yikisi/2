@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '一气呵成',
   '比赛终盘初段余力十足的话，向前突进＜差马・长距离＞',
   20259,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

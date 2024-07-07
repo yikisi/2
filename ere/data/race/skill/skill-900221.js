@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'Fairy tale',
   '在赛程后半若处于好位置并进行名次争夺时稍微提升速度',
   90022,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

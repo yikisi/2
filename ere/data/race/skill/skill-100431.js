@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '噔！咚！！砰！！！',
   '名次争夺时，速度稍稍上升。若是身处泥地比赛，则会以要噬咬前方选手般的气势进一步提升加速度',
   10043,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

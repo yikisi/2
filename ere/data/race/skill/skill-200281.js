@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '对抗意识◎',
   '很多马娘与自身同一出走策略时能力容易发挥',
   20028,
+  2,
   UmaSkill.rarity_enum.normal,
   0,
   174,

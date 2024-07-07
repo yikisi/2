@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '策士',
   '比赛终盘位于后方时，视野略微开阔＜追马＞',
   20150,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   85,

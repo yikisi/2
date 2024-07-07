@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '闪耀煌星的演剧',
   '在比赛终盘位于前列并突围时，在距终点300米时稍微提升速度',
   90005,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

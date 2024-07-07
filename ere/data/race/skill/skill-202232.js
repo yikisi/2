@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '夜晚○',
   '稍微擅长夜晚的比赛',
   20223,
+  1,
   UmaSkill.rarity_enum.normal,
   0,
   129,

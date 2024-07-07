@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '优雅的沙浴',
   '紧跟前方的赛马娘时，速度提升＜泥地＞',
   20230,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

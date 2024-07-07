@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '准备突围',
   '在最终弯道上略微容易突围＜先马＞',
   20058,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

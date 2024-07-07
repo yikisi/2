@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '机能拔群',
   '在比赛终盘位于后方时，最后冲刺阶段的中段，速度稍微提升＜追马＞',
   20063,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

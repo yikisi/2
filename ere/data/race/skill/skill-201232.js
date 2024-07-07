@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '障眼法',
   '在比赛终盘，使前方马娘的视野稍微变得狭窄＜长距离＞',
   20123,
+  1,
   UmaSkill.rarity_enum.normal,
   24,
   129,

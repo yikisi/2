@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '天骄',
   '在剩余800m处位于队伍中间时，稍微提升加速度，若在2400m的比赛中取得高人气则大幅提升加速度',
   10070,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

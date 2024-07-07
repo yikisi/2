@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '斗争心',
   '比赛中盘，在中间集团竞争时，微幅恢复持久力，并稍微提升速度＜中距离＞',
   20209,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

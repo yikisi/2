@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '豪脚',
   '比赛终盘位于后方时，赶超别人的能力会提升＜英里＞',
   20070,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

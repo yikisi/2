@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '安利',
   '在比赛中盘进行名次争夺时速度略微上升＜泥地＞',
   20167,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '神赐步伐',
   '左右移动不容易产生疲劳＜中距离＞',
   20114,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   508,

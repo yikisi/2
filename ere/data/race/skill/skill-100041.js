@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '红焰齿轮/LP1211-M',
   '最终弯道后处于前列时，就会换挡提升加速度',
   10004,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

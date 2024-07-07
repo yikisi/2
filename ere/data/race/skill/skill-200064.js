@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '淀之神子',
   '擅长京都竞马场的比赛，耐力、智力和速度上升',
   20006,
+  3,
   UmaSkill.rarity_enum.gold,
   1,
   461,

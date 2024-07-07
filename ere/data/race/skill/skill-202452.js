@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '暴走',
   '最终直线位于第二名往后，并距离领头4马身以内时，速度少量提升＜差马＞',
   20245,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

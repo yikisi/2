@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '睥睨八方',
   '在比赛终盘使其他的马娘产生动摇＜差马＞',
   20144,
+  2,
   UmaSkill.rarity_enum.gold,
   25,
   508,

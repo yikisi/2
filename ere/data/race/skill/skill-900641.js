@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '冠绝之路',
   '从起跑到比赛后半程一直保持在前列的话将略微回复持久力且速度一点点上升',
   90064,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   180,

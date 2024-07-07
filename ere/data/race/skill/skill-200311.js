@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'GⅠ苦手',
   '稍微不擅长GⅠ等大舞台的比赛',
   20031,
+  -1,
   UmaSkill.rarity_enum.normal,
   32,
   -129,

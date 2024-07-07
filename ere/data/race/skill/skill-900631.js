@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '百炼成钢',
   '如果能冷静地进行比赛，在最终冲刺的关键时刻会持续略微提升速度',
   90063,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

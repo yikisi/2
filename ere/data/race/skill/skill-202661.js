@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '斗志昂扬',
   '比赛终盘初段位于队伍中间时，向前突进＜中距离/长距离＞',
   20266,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

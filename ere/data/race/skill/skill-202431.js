@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '乘胜追击',
   '临近终盘时处于领头或距离领头4马身以内，则速度和加速度少量提升＜先马・中距离＞',
   20243,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

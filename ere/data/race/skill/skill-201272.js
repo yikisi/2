@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '领者的自尊心',
   '在比赛序盘或中盘，稍微擅于超越和竞争＜逃马＞',
   20127,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

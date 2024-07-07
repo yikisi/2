@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '切割×驱动!',
   '在最后200米处于前列进行名次争夺时，竞争力变强，速度也会加快',
   10008,
+  1,
   UmaSkill.rarity_enum.spe_n_3,
   18,
   340,

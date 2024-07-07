@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '沙尘专家',
   '比赛中盘若位于后方将回复持久力，提升速度＜泥地＞',
   20200,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   508,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '其光环、遮天蔽日',
   '冲进终盘时献出最伟大的舞蹈！距离终点尚远时还会进行耐力调节',
   10206,
+  1,
   5,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,

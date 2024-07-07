@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '回避力竭马',
   '最后冲刺阶段前方拥挤时，会略微擅长回避',
   20049,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   174,

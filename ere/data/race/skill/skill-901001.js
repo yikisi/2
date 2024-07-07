@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'Never Say Never',
   '剩余300m时位于前方，则速度微量提升若在泥地比赛中与领头赛马娘距离较近时再略微向前突进',
   90100,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '恼杀术',
   '比赛序盘处于前方时令后方的赛马娘萎缩＜短距离＞',
   20101,
+  2,
   UmaSkill.rarity_enum.gold,
   25,
   508,

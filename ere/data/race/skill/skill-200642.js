@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '直线一气',
   '在最后冲刺阶段的直线上加速度略微提升＜追马＞',
   20064,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

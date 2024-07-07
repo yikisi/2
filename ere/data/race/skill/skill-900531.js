@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '热血！！风纪进击',
   '比赛终盘处于最终弯道且身处后方向前逼近时短时间内加速度少量提升，每次超越其他马娘都会增强效果并刷新时间，最多增强三次',
   90053,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

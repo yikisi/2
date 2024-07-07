@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '容易放弃',
   '最终直线位于末尾时更容易放弃',
   20041,
+  -1,
   UmaSkill.rarity_enum.normal,
   32,
   -262,

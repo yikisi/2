@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '强攻策',
   '比赛中盘处于后方时一段时间内速度会少量加快＜追马＞',
   20202,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

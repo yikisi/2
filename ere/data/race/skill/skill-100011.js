@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '流星',
   '在比赛终盘处于前方并超越对手时，会趁势向前突进，并且微幅提升加速度',
   10001,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

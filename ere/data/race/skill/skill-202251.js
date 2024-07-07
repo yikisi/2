@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '交流重赏◎',
   '擅长交流重赏比赛',
   20225,
+  2,
   UmaSkill.rarity_enum.normal,
   0,
   174,

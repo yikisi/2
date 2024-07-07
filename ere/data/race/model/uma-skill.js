@@ -184,6 +184,11 @@ class UmaSkill {
    */
   group_id;
   /**
+   * 技能级别（同组内技能级别）
+   * @type {number}
+   */
+  group_level;
+  /**
    * 稀有度
    * @type {number}
    */
@@ -269,6 +274,7 @@ class UmaSkill {
    * @param {string} name
    * @param {string} desc
    * @param {number} group_id
+   * @param {number} group_level
    * @param {number} rarity
    * @param {number} category
    * @param {number} grade_value
@@ -293,6 +299,7 @@ class UmaSkill {
     name,
     desc,
     group_id,
+    group_level,
     rarity,
     category,
     grade_value,
@@ -316,6 +323,7 @@ class UmaSkill {
     this.name = name;
     this.desc = desc;
     this.group_id = group_id;
+    this.group_level = group_level;
     this.category = category;
     this.rarity = rarity;
     this.grade_value = grade_value;

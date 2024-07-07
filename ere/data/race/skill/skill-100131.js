@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '显贵的使命仍需完成',
   '在最终弯道处于前方时，绝对不能被超越的觉悟使得速度提升；若是在长距离比赛中仍体力充沛，变为大幅提升',
   10013,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

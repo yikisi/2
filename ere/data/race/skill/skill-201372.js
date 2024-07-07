@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '干扰',
   '比赛终盘位于前列时，使后面马娘的视野略微变窄＜先马＞',
   20137,
+  1,
   UmaSkill.rarity_enum.normal,
   24,
   85,

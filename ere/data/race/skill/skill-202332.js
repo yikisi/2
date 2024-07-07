@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '擅长迈步',
   '力量十分强劲时速度稍微提升。力量有十二分强劲时，速度少量提升＜泥地＞',
   20233,
+  1,
   UmaSkill.rarity_enum.normal,
   0,
   174,

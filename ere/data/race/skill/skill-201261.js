@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '第六感',
   '在比赛序盘，不容易被包围＜逃马＞',
   20126,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   334,

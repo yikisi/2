@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '梦想的途中',
   '赛程后半若位于前方则速度稍微提高，加速度略微提高，育成中积累的胜利次数越多，效果越好',
   21007,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   263,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '隐身蓑衣',
   '在比赛序盘或中盘前方堵塞时，保持坚定的意志稍微恢复持久力，并且路线选择稍微变得明智',
   20044,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

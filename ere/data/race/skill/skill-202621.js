@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '陷阵之志',
   '临近比赛终盘时位于中后方，则提升速度＜差马＞',
   20262,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

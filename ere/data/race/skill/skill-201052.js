@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '变速',
   '比赛中盘位于前列时，就比较容易超过＜英里＞',
   20105,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

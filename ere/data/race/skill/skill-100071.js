@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '不沉之舰，拔锚起航！',
   '从比赛中段进行长距离冲刺，速度略微加快',
   10007,
+  1,
   UmaSkill.rarity_enum.spe_n_3,
   18,
   340,

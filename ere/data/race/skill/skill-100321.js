@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'U=ma2',
   '在比赛后半且靠近弯道时，持久力恢复，且短时间内稍微提高速度',
   10032,
+  1,
   UmaSkill.rarity_enum.spe_n_3,
   10,
   340,

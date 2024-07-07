@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '放松',
   '比赛中盘位于中团以后时，恢复持久力＜差马＞',
   20142,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   508,

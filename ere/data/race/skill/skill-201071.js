@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '御姐气质',
   '更容易赶超成功＜英里＞',
   20107,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   334,

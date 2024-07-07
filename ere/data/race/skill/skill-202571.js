@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '开拓未来的奇迹',
   '比赛终盘加速力提升以创造更多的奇迹＜短距离＞',
   20257,
+  1,
   UmaSkill.rarity_enum.gold,
   17,
   508,

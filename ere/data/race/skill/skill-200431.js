@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '专注',
   '擅长起跑，晚出发的时间减少',
   20043,
+  3,
   UmaSkill.rarity_enum.gold,
   17,
   394,

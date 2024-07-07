@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '#LookatCurren',
   '比赛中盘附近处于好位置时赶超的话就会充满气势的开始前进',
   10038,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

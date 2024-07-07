@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '努力家',
   '准备进行超越时，少量提升加速力＜差马＞',
   20140,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   334,

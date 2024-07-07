@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '机不可失',
   '比赛进入终盘时若位于中团后方，加速力稍微提升＜中距离＞',
   20208,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

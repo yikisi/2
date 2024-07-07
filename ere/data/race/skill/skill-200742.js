@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '深呼吸',
   '在比赛中盘时重整呼吸，稍微不容易变得疲劳＜长距离＞',
   20074,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

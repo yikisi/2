@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '豪运7号',
   '枠号为7时会有好事发生',
   20156,
+  2,
   UmaSkill.rarity_enum.gold,
   1,
   334,

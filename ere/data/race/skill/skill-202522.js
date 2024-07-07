@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '打破常理',
   '在最终弯道前的第三弯道上位于后方时，稍微向前突进＜中距离/长距离＞',
   20252,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

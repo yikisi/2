@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '气势十足',
   '在最终弯道处于后方位置的话则会略微提高速度＜英里＞',
   20211,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

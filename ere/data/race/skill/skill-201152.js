@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '束缚',
   '在比赛终盘位于后方时，略微降低前方赛马娘的速度＜中距离＞',
   20115,
+  1,
   UmaSkill.rarity_enum.normal,
   24,
   217,

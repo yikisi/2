@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '最高档',
   '最终直线位于第二名往后，并距离领头4马身以内时，速度极大提升＜差马＞',
   20245,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

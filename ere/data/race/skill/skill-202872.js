@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '浑身解数',
   '在终盘的最终弯道处若位于中后方，稍微提升加速度＜追马・中距离＞',
   20287,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

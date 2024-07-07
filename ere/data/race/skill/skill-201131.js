@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '闪光步伐',
   '在比赛中盘，一段时间内不容易被包围＜中距离＞',
   20113,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   394,

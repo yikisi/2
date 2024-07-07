@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '超众的凌厉攻势',
   '冲进终盘之前一直保持冷静在后方等待机会的话，在终盘一开始会提升加速度＜追马＞',
   20249,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

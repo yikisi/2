@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '全速前进！',
   '最终的直线冲刺位于前方时，提升速度＜泥地＞',
   20228,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

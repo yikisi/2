@@ -34,6 +34,7 @@ const {
   attr_names,
   time_cost,
 } = require('#/data/train-const');
+const { sort_list } = require('#/utils/list-utils');
 
 module.exports = async () => {
   const train_list = era
@@ -371,24 +372,15 @@ module.exports = async () => {
               .get()
               .forEach((s) => (got_skills[skills_dict[s].group_id] = s));
             Object.keys(available_skills).forEach((k) => {
-              available_skills[k] = available_skills[k].sort(
-                (a, b) =>
-                  skills_dict[a].rarity * 10 +
-                  Math.abs((a % 10) * 2 - 3.5) -
-                  skills_dict[b].rarity * 10 -
-                  Math.abs((b % 10) * 2 - 3.5),
+              available_skills[k] = sort_list(
+                available_skills[k],
+                (e) => skills_dict[e].group_level,
+                true,
               );
               if (got_skills[k]) {
-                const sort_key =
-                  skills_dict[got_skills[k]].rarity * 10 +
-                  Math.abs((got_skills[k] % 10) * 2 - 3.5);
+                const sort_key = skills_dict[got_skills[k]].group_level;
                 available_skills[k] = available_skills[k]
-                  .filter(
-                    (e) =>
-                      skills_dict[e].rarity * 10 +
-                        Math.abs((e % 10) * 2 - 3.5) >=
-                      sort_key,
-                  )
+                  .filter((e) => skills_dict[e].group_level >= sort_key)
                   .slice(0, 2);
               } else {
                 available_skills[k] = available_skills[k].slice(0, 1);

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '差马诀窍○',
   '稍微容易占据有利位置＜差马＞',
   20154,
+  1,
   UmaSkill.rarity_enum.normal,
   0,
   174,

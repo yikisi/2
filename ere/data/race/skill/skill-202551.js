@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '神速',
   '在比赛后半的随机位置向前突进，并少量回复体力',
   20255,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   633,

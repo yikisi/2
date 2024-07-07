@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '好转一息',
   '身处比赛中盘的直线时，恢复持久力',
   20038,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   508,

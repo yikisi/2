@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '绝不放弃',
   '在比赛中盘的弯道，一段时间内少量提升速度',
   20272,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

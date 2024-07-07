@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '弯道回复○',
   '完美过弯，持久力略微回复',
   20035,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

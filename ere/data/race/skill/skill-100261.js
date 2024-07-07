@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'G00 1st.F∞;',
   '没有起步晚的情况下在最终直线身处前方时，速度提升。若是一直保持在靠前位置的话，变为速度大幅提升。',
   10026,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   "I'M☆FULL☆SPEED!!",
   '比赛的中段处于好位置准备超越时，速度少量提升，若是短距离比赛则效果改为小幅向前突进',
   10028,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

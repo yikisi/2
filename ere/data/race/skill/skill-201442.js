@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '锐利目光',
   '在比赛终盘使其他的马娘略微产生动摇＜差马＞',
   20144,
+  1,
   UmaSkill.rarity_enum.normal,
   24,
   217,

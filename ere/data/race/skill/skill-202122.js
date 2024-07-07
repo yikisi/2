@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '不畏之心',
   '比赛后半程处于中间集团的话会略微提高速度，并且加速度也会略微提高＜差马＞',
   20212,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

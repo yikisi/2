@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '品行方正',
   '位于最终弯道前的第三弯道时，若在队伍前方则稍微向前突进＜英里/中距离＞',
   20274,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

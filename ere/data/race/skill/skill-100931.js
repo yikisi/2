@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '幸福的湛蓝光芒',
   '终盘初段的某处位于前方时，稍微向前突进，若是短距离或英里比赛，则提升技能效果',
   10093,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

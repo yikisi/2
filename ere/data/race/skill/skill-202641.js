@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '以至千里',
   '在比赛中盘位于队伍中间时，一段时间内速度少量提升＜差马＞',
   20264,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

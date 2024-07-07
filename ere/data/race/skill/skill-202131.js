@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '狂乱旋风',
   '比赛中盘位于前方时，稍微降低后方马娘的速度，自身速度提升＜中距离＞',
   20213,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '伏兵○',
   '人气第四以下时能力稍微更容易发挥',
   20030,
+  1,
   UmaSkill.rarity_enum.normal,
   0,
   129,

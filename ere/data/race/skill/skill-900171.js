@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '汝等，瞻仰皇帝之神威吧',
   '在比赛终盘赶超3次后，最终直线上会少量加速',
   90017,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

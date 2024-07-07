@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '#LookatCurren',
   '在比赛中段左右并处于好位置完成赶超时，稍微提升速度与加速度',
   90038,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

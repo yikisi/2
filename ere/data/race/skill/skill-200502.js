@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '临机应变',
   '比赛终盘略微容易取得好路线',
   20050,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   129,

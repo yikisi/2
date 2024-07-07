@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '清晰思考',
   '若使用技能回复过体力，且比赛中盘一开始身处后方时速度稍微提升＜泥地＞',
   20229,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

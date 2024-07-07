@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '非我莫属',
   '最终弯道之后位于前列穷追不舍时，会在最终直线展现不屈的斗志，大幅提升速度',
   11003,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

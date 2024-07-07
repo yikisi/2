@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '短兵相接',
   '比赛终盘开始时若位于前方，提升加速度＜先马＞',
   20190,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

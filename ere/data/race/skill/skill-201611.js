@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '翘尾巴',
   '在比赛中盘发动多个技能时，速度略微提高',
   20161,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

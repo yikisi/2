@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '顺时针之鬼',
   '擅长顺时针赛道，速度和力量上升',
   20001,
+  4,
   UmaSkill.rarity_enum.gold,
   1,
   461,

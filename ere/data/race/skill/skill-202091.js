@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '气势汹汹',
   '比赛中盘，在中间集团竞争时，小幅恢复持久力，并提升速度＜中距离＞',
   20209,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

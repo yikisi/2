@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '技巧派',
   '路线选取变得稍微流畅＜先马＞',
   20133,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   334,

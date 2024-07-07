@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '究极帝王舞步',
   '在比赛终盘缩小与对手的差距时，就会在最终直线展现出华丽的步伐，大幅提升速度',
   10003,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

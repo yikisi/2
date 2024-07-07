@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '胜利的时机',
   '比赛接近终盘时，处于前方的话会提升速度＜泥地＞',
   20226,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

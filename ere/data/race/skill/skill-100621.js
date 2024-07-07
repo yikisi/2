@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '咚、啪、呣',
   '比赛中期左右处于队伍中团时重新振作，回复持久力并且稍微提高速度',
   10062,
+  1,
   UmaSkill.rarity_enum.spe_n_3,
   10,
   340,

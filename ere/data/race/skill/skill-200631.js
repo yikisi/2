@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '疾风怒涛',
   '在比赛终盘位于后方时，最后冲刺阶段的中段，速度提升＜追马＞',
   20063,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

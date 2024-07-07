@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '燃起来燃起来气氛炒起来！',
   '在临近终盘的某处位于前方时速度略微提升，若是短距离或英里比赛，则速度略微持续提升',
   90065,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

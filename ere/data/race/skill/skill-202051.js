@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '大逃',
   '比通常的逃马策略更大幅度地拉开与后方的距离，并且一直到最后都甩开对手＜逃马＞',
   20205,
+  1,
   UmaSkill.rarity_enum.gold,
   1,
   370,

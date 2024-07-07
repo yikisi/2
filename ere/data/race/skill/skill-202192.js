@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '万无一失',
   '没有起跑晚的话就会在中盘一开始时回复少量体力＜先马・长距离＞',
   20219,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

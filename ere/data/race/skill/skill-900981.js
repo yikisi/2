@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '理运开天龙飞翔',
   '在临近终盘的某处，微量提升速度',
   90098,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

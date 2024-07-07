@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'I Never Goof Up!',
   '比赛终盘完成超越时，会以永不放弃之心向前突进',
   10058,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

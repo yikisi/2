@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '不惜一切',
   '比赛中盘消耗少量体力，使速度少量提升＜追马＞',
   20292,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

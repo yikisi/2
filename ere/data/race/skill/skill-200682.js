@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '积极对策',
   '比赛临近中盘时若身处前方，稍微更容易拉开差距＜英里＞',
   20068,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

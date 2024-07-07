@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '最前端的风景……不会让给任何人！',
   '在比赛中后半段位于第一并拉开差距时，提升速度',
   90002,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

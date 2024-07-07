@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '噔！咚！！砰！！！',
   '名次争夺时，速度提高一点。若是身处泥地比赛，加速度会稍微上升',
   90043,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '霹雳中的奥伏赫变',
   '比赛终盘位于后方时，在最终直线处稍微向前突进',
   90084,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

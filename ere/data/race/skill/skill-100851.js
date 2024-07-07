@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '至高无上',
   '冷静地进行比赛，突入终盘时位于后方附近时，稍微向前突进，并略微威慑从领头开始至多4名赛马娘',
   10085,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

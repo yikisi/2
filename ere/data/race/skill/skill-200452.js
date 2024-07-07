@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '距离感',
   '比赛初期略微容易取得好路线',
   20045,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   129,

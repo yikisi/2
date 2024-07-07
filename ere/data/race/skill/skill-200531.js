@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '先手必胜',
   '比赛初期更容易获得领先＜逃马＞',
   20053,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   334,

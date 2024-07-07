@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '云蒸龙变',
   '速度和力量都十分强劲时，提升速度和力量＜英里/中距离＞',
   20265,
+  2,
   UmaSkill.rarity_enum.gold,
   1,
   508,

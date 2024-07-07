@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '忘我之境',
   '若经过最后冲刺却仍处于队伍中部靠后则会稍微消耗持久力提高加速度＜差马・长距离＞',
   20242,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

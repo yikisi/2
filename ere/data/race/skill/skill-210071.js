@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '想要与你一决胜负',
   '赛程后半若位于前方则速度提高，加速度稍微提高，育成中积累的胜利次数越多，效果越好',
   21007,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   633,

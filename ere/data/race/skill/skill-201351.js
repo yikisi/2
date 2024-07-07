@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '大胃王',
   '比赛中盘回复持久力＜先马＞',
   20135,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   508,

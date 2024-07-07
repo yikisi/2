@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '泥泞专家',
   '变得擅长赛场状态为重或不良的比赛，速度和力量上升＜泥地＞',
   20234,
+  3,
   UmaSkill.rarity_enum.gold,
   1,
   461,

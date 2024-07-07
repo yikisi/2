@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '压台好戏',
   '比赛接近终盘时，处于前方的话会提升速度＜长距离＞',
   20201,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

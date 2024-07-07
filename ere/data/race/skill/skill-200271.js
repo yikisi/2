@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '独自一人◎',
   '没有其他马娘选择与自己相同的出走策略时能力更容易发挥',
   20027,
+  2,
   UmaSkill.rarity_enum.normal,
   0,
   174,

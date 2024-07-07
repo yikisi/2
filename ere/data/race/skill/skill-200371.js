@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '一阵狂风',
   '身处直线时，提升加速度，并且稍微提升速度',
   20037,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

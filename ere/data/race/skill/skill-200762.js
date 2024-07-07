@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '第二体力槽',
   '在体力快要耗尽时略微恢复元气＜长距离＞',
   20076,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

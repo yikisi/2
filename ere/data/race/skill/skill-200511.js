@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '全身心',
   '在最后冲刺阶段的关键时刻，速度提升',
   20051,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

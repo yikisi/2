@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '短距齿轮',
   '比赛终盘时，加速力稍微提升＜短距离＞',
   20065,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

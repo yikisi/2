@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '疾步',
   '比赛中盘略微容易获得领先＜逃马＞',
   20054,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '小休息',
   '比赛中盘位于中团以后时，稍微恢复持久力＜差马＞',
   20142,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

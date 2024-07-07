@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '爬山虎',
   '在比赛中盘发动多个技能时，速度提高',
   20161,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

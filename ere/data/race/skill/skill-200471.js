@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '不屈之心',
   '比赛中盘被超过时，持久力回复',
   20047,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   508,

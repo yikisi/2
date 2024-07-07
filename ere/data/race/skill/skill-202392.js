@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '拼命',
   '在比赛中盘一开始的地方消耗大量体力，使速度少量提升＜逃马＞',
   20239,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

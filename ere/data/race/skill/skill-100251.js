@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '逐君之形',
   '赛程后半，从中间梯队追逐『友人』而逐渐提升速度使前方的马娘畏首畏尾',
   10025,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

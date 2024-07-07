@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '玩泥巴○',
   '变得擅长赛场状态为重或不良的比赛，速度稍微上升＜泥地＞',
   20234,
+  1,
   UmaSkill.rarity_enum.normal,
   0,
   129,

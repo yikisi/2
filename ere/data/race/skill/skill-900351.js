@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '为你奉上，胜利奖券！',
   '最终弯道之后进行名次争夺，在最终直线位于前方时，稍微提升速度',
   90035,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

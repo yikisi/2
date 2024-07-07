@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '超越姿态',
   '比赛终盘开始时位于中团以后时，加速度稍微提升＜差马＞',
   20060,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

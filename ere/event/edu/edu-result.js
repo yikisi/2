@@ -60,10 +60,6 @@ function handle_travel_cost(chara_id) {
 function learn_language(chara_id, lan_name) {
   print_attr_change(
     chara_id,
-    sys_change_attr_and_print(chara_id, '精力', -get_random_value(200, 400)),
-  );
-  print_attr_change(
-    chara_id,
     sys_change_attr_and_print(
       chara_id,
       attr_enum.intelligence,
@@ -149,6 +145,15 @@ handlers[event_hooks.foreign_rest] = async (chara_id) => {
  * @param {{lan:string}} extra_flag
  */
 handlers[event_hooks.foreign_study] = async (chara_id, hook, extra_flag) => {
+  print_attr_change(
+    0,
+    sys_change_attr_and_print(chara_id, '精力', -get_random_value(200, 400)),
+  );
+  chara_id &&
+    print_attr_change(
+      0,
+      sys_change_attr_and_print(chara_id, '精力', -get_random_value(200, 400)),
+    );
   if (hook.arg) {
     era.println();
     learn_language(chara_id, extra_flag.lan);

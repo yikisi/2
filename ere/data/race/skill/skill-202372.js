@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '进攻的姿势',
   '比赛中盘速度稍微提升＜先马＞',
   20237,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

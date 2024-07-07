@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '锐脚一闪',
   '在直线的速度上升＜差马＞',
   20138,
+  3,
   UmaSkill.rarity_enum.gold,
   17,
   508,

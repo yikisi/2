@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '速度之星',
   '在最终弯道上容易突围＜先马＞',
   20058,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

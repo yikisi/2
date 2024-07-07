@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '营养补给',
   '比赛中盘略微回复持久力＜先马＞',
   20135,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

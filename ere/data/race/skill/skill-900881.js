@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '逆转魔术',
   '最终弯道位于队伍中间时，比赛剩余400m后速度稍微提升，若是中距离赛在中盘有过赶超，则速度少量提升',
   90088,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

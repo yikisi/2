@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '知天命者',
   '比赛终盘位于后方时，视野更加开阔＜追马＞',
   20150,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   334,

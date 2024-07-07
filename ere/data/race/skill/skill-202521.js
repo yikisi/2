@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '天衣无缝',
   '在最终弯道前的第三弯道上位于后方时，向前突进＜中距离/长距离＞',
   20252,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

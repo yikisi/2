@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '内在体验',
   '在最终弯道处于内侧的话速度会上升＜长距离＞',
   20075,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

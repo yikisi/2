@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '重启',
   '在比赛序盘没取得领先时，让前面的马娘稍微变迟缓＜逃马＞',
   20130,
+  1,
   UmaSkill.rarity_enum.normal,
   24,
   217,

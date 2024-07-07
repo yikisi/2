@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '福岛竞马场○',
   '稍微擅长福岛竞马场的比赛',
   20010,
+  1,
   UmaSkill.rarity_enum.normal,
   0,
   129,

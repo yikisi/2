@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '顺时针◎',
   '会变得擅长顺时针赛道',
   20001,
+  2,
   UmaSkill.rarity_enum.normal,
   0,
   174,

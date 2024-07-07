@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '逃马彷徨',
   '比赛终盘令出走策略是逃马的赛马娘彷徨，使其速度略微下降',
   20085,
+  1,
   UmaSkill.rarity_enum.normal,
   24,
   217,

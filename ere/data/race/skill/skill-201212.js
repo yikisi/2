@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '追击',
   '在比赛终盘完成超越时，速度稍微提升，并且加速力极少量提升＜长距离＞',
   20121,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

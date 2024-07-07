@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '此身为剑所天成，拔剑！',
   '比赛终盘阶段剩余400m处位于前方时速度提升，且在GⅠ比赛等大舞台上取得高人气时，速度极大提升',
   10047,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

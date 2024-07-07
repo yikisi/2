@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '竭尽全力',
   '在比赛终盘发动多个技能时，耐力略微回复',
   20162,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

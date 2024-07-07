@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '心心相印×梦想未来',
   '在比赛前半段的弯道若位于队伍中间则略微提升速度，若是短距离或英里比赛则变为略微持续提升速度',
   90109,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

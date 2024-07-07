@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '我赢定啦☆Strelitzia！',
   '进入最终弯道前能一直保持冷静在后方等待机会的话，会在距离终点剩余300m处略微持续提高速度',
   90044,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

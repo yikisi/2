@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'Silent letter',
   '剩余400米，位于前方并被后方马娘紧追时，略微容易突围',
   90087,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

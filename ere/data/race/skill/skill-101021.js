@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '活泼乐章・飞驰',
   '比赛前半段在队伍中间且前方或后方长时间有赛马娘紧贴，则稍微回复体力之后在比赛中段附近的直线处短时间内速度大幅提升',
   10102,
+  1,
   UmaSkill.rarity_enum.spe_r,
   10,
   340,

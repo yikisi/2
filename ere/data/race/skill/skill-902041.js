@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '牢不可破的城堡',
   '终盘初始段位于前方时，稍微向前突进，若是擅长的距离还能提高少许速度',
   90204,
+  1,
   UmaSkill.rarity_enum.normal,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,

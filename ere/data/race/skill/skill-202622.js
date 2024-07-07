@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '开始出击',
   '临近比赛终盘时位于中后方，则稍微提升速度＜差马＞',
   20262,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

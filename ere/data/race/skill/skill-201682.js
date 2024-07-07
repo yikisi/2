@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '前行',
   '在赛程终盘略微冲刺调整姿态＜泥地＞',
   20168,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   174,

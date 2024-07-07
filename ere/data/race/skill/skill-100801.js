@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '情报：已捕获',
   '比赛前半段一直保持前方位置时，若后半段检测到对手发动了加速技能，则向前小幅突进，若比赛是URA泥地比赛则额外增加少量速度',
   10080,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

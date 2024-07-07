@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '先走一步！',
   '身后有马娘长时间紧追的话将会提高速度',
   20166,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

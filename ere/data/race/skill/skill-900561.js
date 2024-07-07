@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '快来了要来了让它来啊！',
   '在比赛终盘前方受阻时，能够借助预言之力略微开辟道路',
   90056,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

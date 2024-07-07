@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '逃亡禁令',
   '比赛序盘处于后方的话，使前方的赛马娘焦躁和动作迟缓＜短距离＞',
   20102,
+  2,
   UmaSkill.rarity_enum.gold,
   25,
   508,

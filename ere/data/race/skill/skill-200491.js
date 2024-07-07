@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '永不停歇的少女',
   '最后冲刺阶段前方拥挤时，会更擅长回避',
   20049,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   394,

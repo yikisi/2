@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '踏影',
   '比赛后半段进行超越时，速度稍微提升＜追马＞',
   20293,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

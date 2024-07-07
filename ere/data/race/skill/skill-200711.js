@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '开辟者',
   '比赛中盘在前方时，不容易疲劳＜中距离＞',
   20071,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   508,

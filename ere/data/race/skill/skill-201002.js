@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '着手准备',
   '在比赛中盘，稍微准备好向终点进发＜短距离＞',
   20100,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   174,

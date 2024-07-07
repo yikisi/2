@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '憧憬着跨越樱花！',
   '比赛剩余300m处于好位置，且与前方赛马娘距离近时，稍微提升速度。',
   90069,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

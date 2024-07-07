@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '一跃而上',
   '在终盘初段余力十足的话，稍微向前突进＜追马・长距离＞',
   20285,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

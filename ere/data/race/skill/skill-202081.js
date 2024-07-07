@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '起死回生',
   '比赛进入终盘时若位于中团后方，加速力提升＜中距离＞',
   20208,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

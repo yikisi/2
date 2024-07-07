@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '花开世界',
   '如果在比赛半程处于中间梯队，速度会少量提升若是长距离比赛，速度提升的持续时间将延长，并恢复大量体力',
   10076,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

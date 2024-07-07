@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '不屈不挠',
   '比赛中盘位于后方时，加速度少量上升＜先马＞',
   20136,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   334,

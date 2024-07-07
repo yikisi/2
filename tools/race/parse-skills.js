@@ -524,17 +524,50 @@ async function chara_skill() {
     (e) => (pt_dict[e.id] = e.need_skill_point),
   );
 
+  function get_skill_group_level(skill) {
+    if (skill.category >> 3 === 4) {
+      return skill.rarity * 10 - 1;
+    }
+    return skill.rarity * 10 + (skill.id % 10);
+  }
+
+  Object.values(
+    skill_data.reduce((p, c) => {
+      (p[c.group_id] || (p[c.group_id] = [])).push(c);
+      return p;
+    }, {}),
+  ).forEach((s_list) => {
+    s_list.forEach((e) => {
+      e.name = skill_text[e.id][47];
+      e.category = icon2skill_color[e.icon_id];
+    });
+    s_list
+      .sort((a, b) => get_skill_group_level(a) - get_skill_group_level(b))
+      .forEach((e, i) => {
+        if (e.category >> 3 === 4 || e.name.endsWith('×')) {
+          e.group_level = -1;
+        } else if (e.name.endsWith('◎')) {
+          e.group_level = 2;
+        } else if (e.name.endsWith('○')) {
+          e.group_level = 1;
+        } else {
+          e.group_level = i + 1;
+        }
+      });
+  });
+
   skill_data.forEach((e) => {
     const id = e.id;
     buffer += `skills_dict[${id}]=require('#/data/race/skill/skill-${id}');`;
     let sbuffer =
       "const UmaSkill = require('#/data/race/model/uma-skill');\n\nmodule.exports = new UmaSkill(";
     sbuffer += `${id},`;
-    sbuffer += `"${skill_text[id][47]}",`;
+    sbuffer += `"${e.name}",`;
     sbuffer += `"${skill_text[id][48]}",`;
     sbuffer += `${e.group_id},`;
+    sbuffer += `${e.group_level},`;
     sbuffer += `${get_rarity(e.rarity)},`;
-    sbuffer += `${icon2skill_color[e.icon_id]},`;
+    sbuffer += `${e.category},`;
     sbuffer += `${e.grade_value},`;
     sbuffer += `[${parse_condition(e.precondition_1, true)},${parse_condition(e.precondition_2, true)}],`;
     sbuffer += `[${parse_condition(e.condition_1)},${parse_condition(e.condition_2)}],`;

@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   'Déesse réincarnée',
   '在临近终点的弯道时，速度微量提升，同时恢复少量体力',
   90205,
+  1,
   UmaSkill.rarity_enum.normal,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,

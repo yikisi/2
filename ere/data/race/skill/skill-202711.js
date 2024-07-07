@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '将军',
   '在终盘的最终弯道位于队伍中间往前时，若距离终点尚远则提升加速度＜先马/差马＞',
   20271,
+  1,
   UmaSkill.rarity_enum.gold,
   17,
   508,

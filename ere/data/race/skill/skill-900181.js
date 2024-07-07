@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '荣耀之刃',
   '在最终弯道从中后方赶超时，速度稍微加快',
   90018,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   180,

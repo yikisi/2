@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '沉睡的狮子',
   '在比赛中盘积攒脚力，不容易疲劳＜追马＞',
   20062,
+  2,
   UmaSkill.rarity_enum.gold,
   9,
   508,

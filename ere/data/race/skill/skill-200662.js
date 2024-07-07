@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '观望',
   '比赛中盘在后方时稍微不容易疲劳并提高一点加速度＜短距离＞',
   20066,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

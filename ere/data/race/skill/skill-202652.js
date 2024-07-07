@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '自信者',
   '速度和力量都十分强劲时，稍微提升速度和力量＜英里/中距离＞',
   20265,
+  1,
   UmaSkill.rarity_enum.normal,
   0,
   217,

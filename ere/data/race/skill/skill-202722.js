@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '坚强的心',
   '在比赛中盘的弯道，一段时间内略微提升速度',
   20272,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

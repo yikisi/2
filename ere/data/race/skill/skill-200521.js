@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '空转',
   '领跑过头的话，容易疲劳',
   20052,
+  -1,
   UmaSkill.rarity_enum.normal,
   32,
   -262,

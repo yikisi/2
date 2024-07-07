@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '坚韧不拔',
   '最终直线在领头位置且后方1马身内有马娘时，速度少量提升＜逃马＞',
   20246,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

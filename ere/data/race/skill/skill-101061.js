@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '砰☆奇迹天降！',
   '最终弯道后半部分位于队伍中间时，速度持续少量提升，且在长距离比赛低人气的情况下，速度持续大幅提升',
   10106,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,

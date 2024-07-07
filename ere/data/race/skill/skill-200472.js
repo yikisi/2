@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '保持步伐',
   '比赛中盘被超过时，持久力略微回复',
   20047,
+  1,
   UmaSkill.rarity_enum.normal,
   8,
   217,

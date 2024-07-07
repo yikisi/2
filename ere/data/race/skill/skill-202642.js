@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '持之以恒',
   '在比赛中盘位于队伍中间时，一段时间内速度微量提升＜差马＞',
   20264,
+  1,
   UmaSkill.rarity_enum.normal,
   16,
   217,

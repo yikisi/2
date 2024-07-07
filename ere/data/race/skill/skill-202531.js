@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '优位形成',
   '在比赛中盘时，速度提升＜英里/中距离＞',
   20253,
+  2,
   UmaSkill.rarity_enum.gold,
   17,
   508,

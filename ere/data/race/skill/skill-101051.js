@@ -5,6 +5,7 @@ module.exports = new UmaSkill(
   '终达群星',
   '在比赛中段左右处在中间集团，速度提升，若是中距离比赛，且至此为止发动过7次技能，则速度会大幅提高',
   10105,
+  1,
   UmaSkill.rarity_enum.spe_r,
   18,
   340,
