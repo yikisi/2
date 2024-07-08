@@ -29,7 +29,7 @@ async function simulation_game_in_event(
         'Sim',
         race_name || '模拟赛',
         RaceInfo.class_enum.Spe,
-        0,
+        undefined,
         reference.ground,
         reference.span,
         reference.distance,

@@ -25,7 +25,8 @@ show_race_loc_dict[location_enum.office] =
   show_race_loc_dict[location_enum.guangzhou] =
     1;
 
-function page_header() {
+/** @param {boolean} [disable_race_info] */
+function page_header(disable_race_info) {
   let cur_year = era.get('flag:当前年');
 
   if (!cur_year) {
@@ -191,6 +192,7 @@ function page_header() {
                       config: {
                         align: 'center',
                         disableWarning: true,
+                        disabled: disable_race_info,
                         showAcc: false,
                       },
                       content: '查看全部',

@@ -492,7 +492,7 @@ async function page_race_result(contestants, records, info) {
               {
                 config: { align: 'center' },
                 content: [
-                  ...(info.track
+                  ...(info.track !== undefined
                     ? [
                         track_names[info.track],
                         '竞马场 ',

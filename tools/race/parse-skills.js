@@ -217,11 +217,43 @@ const icon2skill_color = {
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.advanced,
   ),
+  20191: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
   20192: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.advanced,
   ),
+  20201: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
   20202: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20211: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20212: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20221: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20222: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20241: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20242: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.advanced,
   ),
@@ -561,6 +593,10 @@ async function chara_skill() {
     buffer += `skills_dict[${id}]=require('#/data/race/skill/skill-${id}');`;
     let sbuffer =
       "const UmaSkill = require('#/data/race/model/uma-skill');\n\nmodule.exports = new UmaSkill(";
+    console.log(e.name);
+    if (e.category === undefined) {
+      console.log('\tmissed! ', e.icon_id);
+    }
     sbuffer += `${id},`;
     sbuffer += `"${e.name}",`;
     sbuffer += `"${skill_text[id][48]}",`;

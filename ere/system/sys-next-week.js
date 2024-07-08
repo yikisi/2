@@ -96,7 +96,10 @@ async function sys_next_week() {
         era.get('flag:地下室之主') === chara_id ||
         get_custom_check(chara_id).is_prison()
       ) {
-        act_list.push({ chara_id, prison: true });
+        act_list.push({
+          chara_id,
+          prison: !era.get('item:透明棉被') || Math.random() < 0.5,
+        });
       } else if (get_custom_check(chara_id).is_rape_in_sleeping()) {
         act_list.push({ chara_id, prison: false });
       }

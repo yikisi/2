@@ -6,8 +6,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sort_list } = require('#/utils/list-utils');
 
 const CharaSkills = require('#/data/chara-skills');
+const { get_trainer_level } = require('#/data/info-generator');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceHistory = require('#/data/race/model/race-history');
+const { race_infos } = require('#/data/race/race-const');
+const { track2location } = require('#/data/race/race-location');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names, attr_names } = require('#/data/train-const');
 
@@ -108,6 +111,14 @@ function sys_get_chara_pseudo(chara_id) {
     (buff) => Number(buff.substring(0, buff.indexOf('['))),
     false,
   );
+  temp = track2location[race_infos[era.get('flag:当前赛事')].track];
+  if (temp) {
+    uma.base.language = era.get(`abl:${chara_id}:${temp.lan}语`);
+  }
+  temp = uma.attrs.reduce((p, c) => p + c, 0) / 5;
+  uma.base.attr_err = uma.attrs.reduce((p, c) => p + (c - temp) ** 2, 0) / 5;
+  uma.base.weight = era.get(`base:${chara_id}:体重偏差`);
+  uma.base.fame = get_trainer_level();
   return uma;
 }
 

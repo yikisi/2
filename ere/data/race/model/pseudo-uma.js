@@ -122,14 +122,21 @@ class PseudoUma {
     accBuffFromWiz: 0,
     acceleration: 0,
     change_order_finalcorner: 0,
+    // 五项属性方差
+    attr_err: 0,
+    // 训练员声望
+    fame: 0,
     // 发动绿技能个数
     greenCount: 0,
+    // 比赛地语言等级
+    language: 0,
     loc_mind_nige_diff_speed_up_nige: 0,
     loc_mind_nige_diff_speed_up_other: 0,
     loc_mind_nige_diff_over_take: 0,
     loc_mind_other_diff_upper: 0,
     loc_mind_other_diff_lower: 0,
     loc_mind_other_diff_random: [0, 0],
+    skill_count: 0,
     stamina: 0,
     temptationSpan: 0,
     total_attrs: new Array(5).fill(0),
@@ -138,6 +145,8 @@ class PseudoUma {
     velocityMin: 0,
     // 胜场数
     winCount: 0,
+    // 体重
+    weight: 4000,
   };
   // 比赛时信息
   race = {

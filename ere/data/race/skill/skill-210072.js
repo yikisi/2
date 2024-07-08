@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   210072,
   '梦想的途中',
-  '赛程后半若位于前方则速度稍微提高，加速度略微提高，育成中积累的胜利次数越多，效果越好',
+  '赛程后半若位于前方则速度稍微提高，加速度略微提高；训练员的声望越高，效果越好',
   21007,
   1,
   UmaSkill.rarity_enum.normal,

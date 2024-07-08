@@ -235,10 +235,11 @@ class CustomizedCheck {
     }
     const dice = Math.random();
     era.logger.debug(
-      `角色 ${this.id} 地下室：${(ratio * 100).toFixed(2)}% 掷骰：${dice} 计算：
-    ${ratio}=${delta > 0}(开关)*(0.05(基础)+${
-      delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)
-    }(好感爱慕)-${0.25 * get_action_debuff(this.id)}(行动debuff))`,
+      `角色 ${this.id} 地下室：${(ratio * 100).toFixed(2)}% 掷骰：${dice} 计算：${
+        ratio
+      }=${delta > 0}(开关)*(0.05(基础)+${
+        delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)
+      }(好感爱慕)-${0.25 * get_action_debuff(this.id)}(行动debuff))`,
     );
     return ratio >= 1 || dice < ratio;
   }
@@ -263,10 +264,6 @@ class CustomizedCheck {
     ) {
       return false;
     }
-    if (era.get('item:透明棉被')) {
-      era.logger.debug(`角色 ${this.id} 睡奸：100%(透明棉被)`);
-      return true;
-    }
     if (delta < 0) {
       delta = 0;
     }
@@ -274,7 +271,8 @@ class CustomizedCheck {
       Math.pow(2, Math.min(delta / 6 - 100, 0)) * 0.3 +
       Math.pow(2, era.get(`base:${this.id}:性欲`) / 2000 - 5) *
         (0.7 + 0.1 * era.get(`mark:${this.id}:欢愉`)) +
-      0.05 * era.get(`talent:${this.id}:工口意愿`) -
+      0.05 * era.get(`talent:${this.id}:工口意愿`) +
+      0.5 * era.get('item:透明棉被') -
       0.5 * get_action_debuff(this.id);
     if (punish_level >= 2) {
       ratio += 0.3;
@@ -289,7 +287,7 @@ class CustomizedCheck {
       era.get(`base:${this.id}:性欲`) / 2000 - 5,
     )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
       0.05 * era.get(`talent:${this.id}:工口意愿`)
-    }(好色)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
+    }(好色)+${0.5 * era.get('item:透明棉被')}(透明棉被)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
     );
     return ratio >= 1 || dice < ratio;
   }
@@ -313,16 +311,17 @@ class CustomizedCheck {
     }
     const dice = Math.random();
     era.logger.debug(
-      `角色 ${this.id} 求爱：${(ratio * 100).toFixed(2)}%；掷骰：${dice} 计算：
-    ${ratio}=${
-      Math.log(Math.max(6 * love - era.get(`relation:${this.id}:0`), 1)) /
-      log_600m4
-    }(好感爱慕)+${Math.pow(
-      2,
-      era.get(`base:${this.id}:性欲`) / 1250 - 8,
-    )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
-      0.05 * era.get(`talent:${this.id}:工口意愿`)
-    }(好色)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
+      `角色 ${this.id} 求爱：${(ratio * 100).toFixed(2)}%；掷骰：${dice} 计算：${
+        ratio
+      }=${
+        Math.log(Math.max(6 * love - era.get(`relation:${this.id}:0`), 1)) /
+        log_600m4
+      }(好感爱慕)+${Math.pow(
+        2,
+        era.get(`base:${this.id}:性欲`) / 1250 - 8,
+      )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
+        0.05 * era.get(`talent:${this.id}:工口意愿`)
+      }(好色)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
     );
     if (ratio >= 1 || dice < ratio) {
       return (

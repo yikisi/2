@@ -22,7 +22,7 @@ module.exports = async () => {
 
   while (flag_load_game) {
     await era.clear();
-    print_page_header();
+    print_page_header(true);
 
     era.drawLine();
     msg_notification && era.print(msg_notification, { align: 'center' });

@@ -3,6 +3,7 @@
 const sub_simulate_skill = require('#/system/race/sub-simulate-skill');
 
 const { sort_list } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const { ability_type_enum } = require('#/data/race/model/uma-skill');
@@ -108,7 +109,7 @@ function sys_sim_race(list_chara, race_info) {
     record_location_list[0][uma.index_race] = [0, lane, slope];
 
     start_delay[uma.index_race] =
-      (Math.random() - 0.01 * (uma.chara === -2)) * 0.1;
+      Math.random() * (0.1 - 0.001 * (uma.chara === -2));
     uma.list_skill = uma.list_skill.filter((s) => {
       if (s.data.ability_types[0][0] !== ability_type_enum.StartDash) {
         return true;
@@ -176,10 +177,8 @@ function sys_sim_race(list_chara, race_info) {
       }
       const stamina_ratio = uma.race.stamina / uma.base.stamina;
       uma.race.strength = uma.attrs[attr_enum.strength];
-      if (stamina_ratio < 0.2) {
-        uma.race.strength /= 2;
-      } else if (stamina_ratio < 0.5) {
-        uma.race.strength *= 3 / 4;
+      if (stamina_ratio < 0.5) {
+        uma.race.strength *= 0.2 + 1.6 * stamina_ratio;
       }
 
       record_speed_list.at(-1)[uma.index_race] = uma.race.velocityReal;
@@ -193,11 +192,9 @@ function sys_sim_race(list_chara, race_info) {
         uma.race.conditionParams.bashin_diff_infront =
           (i === 0 ? 50 : l[i - 1].race.location - uma.race.location) / 2.5;
         uma.race.conditionParams.blocked_front = Number(
-          uma.race.conditionParams.bashin_diff_infront < 0.8,
+          uma.race.conditionParams.bashin_diff_infront < 0.8 &&
+            uma.race.velocityReal > l[i - 1].race.velocityReal,
         );
-        if (i === 0 && uma.race.conditionParams.blocked_front) {
-          throw new Error();
-        }
         uma.race.conditionParams.bashin_diff_behind =
           (i === l.length - 1
             ? 50
@@ -461,11 +458,21 @@ function sys_sim_race(list_chara, race_info) {
       }
       // 阻挡
       if (
-        uma.race.phase >= 1 &&
+        uma.race.conditionParams.phase >= 1 &&
         uma.race.conditionParams.blocked_front &&
         Math.random() >=
-          uma.race.strength / l[i - 1].race.strength + uma.race.lane_move_buff
+          (uma.race.strength * get_random_value(0.4, 0.6, true)) /
+            l[i - 1].race.strength +
+            uma.race.lane_move_buff
       ) {
+        if (
+          (uma.race.velocityReal - l[i - 1].race.velocityReal) / frame_rate >
+          l[i - 1].race.location - uma.race.location
+        ) {
+          record_events_list
+            .at(-1)
+            [uma.index_race].push(race_event_enum.blocked);
+        }
         uma.race.velocityReal = Math.max(
           Math.min(
             l[i - 1].race.velocityReal *
@@ -476,7 +483,6 @@ function sys_sim_race(list_chara, race_info) {
           ),
           uma.base.velocityMin,
         );
-        record_events_list.at(-1)[uma.index_race].push(race_event_enum.blocked);
         uma.race.staminaCost *= 1.1;
       }
       uma.race.stamina = Math.min(

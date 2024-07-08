@@ -82,6 +82,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
   const team_total_attrs = new Array(5).fill(0);
 
   for (const uma of list_chara) {
+    uma.base.skill_count = uma.list_skill.length;
     uma.race.conditionParams.activate_count_all = 0;
     uma.race.conditionParams.activate_count_end_after = 0;
     uma.race.conditionParams.activate_count_heal = 0;

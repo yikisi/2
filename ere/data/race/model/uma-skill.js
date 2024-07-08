@@ -15,7 +15,7 @@ const skill_border_colors = [
   '#eeb93f',
   '#ffc0cb',
   '#ee82ee',
-  '#e6a23c',
+  '#ff7373',
 ];
 
 const rarity_enum = {
@@ -114,6 +114,9 @@ const ability_usage_enum = {
   MultiplyBlockedSideMaxContinueTimePhaseMiddleRun2: 21,
   // 根据速度决定倍率
   MultiplyBaseSpeed: 22,
+  MultiplyForeignAdaptability: 24,
+  MultiplyUAFWins: 26,
+  MultiplyCookingPt: 27,
   Unknown: 25,
 };
 

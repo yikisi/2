@@ -727,9 +727,18 @@ handlers[event_hooks.good_night] = async (hook) => {
     kita.say(
       `训练员${me.get_adult_sex_title()}，今天真是辛苦您了，明天我也会继续努力的。`,
     );
-    era.print(
-      `${kita.name} 深深地向 ${me.name} 的鞠了一躬，${me.name} 摸了摸小北的脑袋，在看到${kita.sex}走进宿舍后才转身离开。`,
-    );
+    era.print([
+      kita.get_colored_name(),
+      ' 深深地向 ',
+      me.get_colored_name(),
+      ' 鞠了一躬，',
+      me.get_colored_name(),
+      ' 摸了摸 ',
+      kita.get_colored_name(),
+      ' 的脑袋，在看到',
+      kita.sex,
+      '走进宿舍后才转身离开。',
+    ]);
   }
 };
 

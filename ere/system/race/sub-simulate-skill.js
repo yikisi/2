@@ -693,10 +693,7 @@ function sub_simulate_skill(
                 case ability_usage_enum.MultiplySkillNum:
                   skill.values[i][j] =
                     skill.data.ability_values[i][j] *
-                    Math.min(
-                      1 + uma.race.conditionParams.activate_count_all * 0.01,
-                      1.2,
-                    );
+                    Math.min(1 + uma.base.skill_count * 0.01, 1.2);
                   break;
                 case ability_usage_enum.MultiplyRandom1:
                   skill.values[i][j] = Math.random();
@@ -709,7 +706,6 @@ function sub_simulate_skill(
                   }
                   skill.values[i][j] *= skill.data.ability_values[i][j];
                   break;
-                case ability_usage_enum.MultiplyFanCount:
                 case ability_usage_enum.MultiplySingleModeWinCount:
                   if (uma.base.winCount < 6) {
                     skill.values[i][j] = skill.data.ability_values[i][j] * 0.8;
@@ -767,23 +763,50 @@ function sub_simulate_skill(
                 case ability_usage_enum.MultiplyTeamTotalPower:
                 case ability_usage_enum.MultiplyTeamTotalGuts:
                 case ability_usage_enum.MultiplyTeamTotalWiz:
-                  temp =
+                  skill.values[i][j] =
                     uma.base.total_attrs[
                       skill.data.ability_value_usages[i][j] -
                         ability_usage_enum.MultiplyTeamTotalSpeed
                     ];
                   if (temp >= 3600) {
-                    temp = 1.2;
+                    skill.values[i][j] = 1.2;
                   } else if (temp >= 2600) {
-                    temp = 1.1;
+                    skill.values[i][j] = 1.1;
                   } else if (temp >= 1800) {
-                    temp = 1;
-                  } else if (temp >= 1200) {
-                    temp = 0.9;
+                    skill.values[i][j] = 1;
+                  } else if (skill.values[i][j] >= 1200) {
+                    skill.values[i][j] = 0.9;
                   } else {
-                    temp = 0.8;
+                    skill.values[i][j] = 0.8;
                   }
-                  skill.values[i][j] = temp * skill.data.ability_values[i][j];
+                  skill.values[i][j] *= skill.data.ability_values[i][j];
+                  break;
+                case ability_usage_enum.MultiplyFanCount:
+                  skill.values[i][j] =
+                    (1 + uma.base.fame * 0.05) *
+                    skill.data.ability_values[i][j];
+                  break;
+                case ability_usage_enum.MultiplyForeignAdaptability:
+                  skill.values[i][j] =
+                    (1 + uma.base.language * 0.04) *
+                    skill.data.ability_values[i][j];
+                  break;
+                case ability_usage_enum.MultiplyUAFWins:
+                  if (uma.base.attr_err < 100) {
+                    skill.values[i][j] = 1.2;
+                  } else if (uma.base.attr_err < 200) {
+                    skill.values[i][j] = 1.1;
+                  } else {
+                    skill.values[i][j] = 1;
+                  }
+                  skill.values[i][j] *= skill.data.ability_values[i][j];
+                  break;
+                case ability_usage_enum.MultiplyCookingPt:
+                  skill.values[i][j] = skill.data.ability_values[i][j];
+                  if (uma.base.weight < 4000) {
+                    skill.values[i][j] *=
+                      1 + ((4000 - uma.base.weight) * 0.2) / 4000;
+                  }
                   break;
                 default:
                   skill.values[i][j] = skill.data.ability_values[i][j];
