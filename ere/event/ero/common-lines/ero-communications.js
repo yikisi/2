@@ -116,6 +116,7 @@ module.exports = (handlers) => {
       (!defender || era.get(`love:${defender}`) >= 50) &&
       !era.get(`tcvar:${defender}:发情`) &&
       Math.random() < Math.log(era.get(`abl:${attacker}:甜言蜜语`) + 2) / log_7;
+
     if (hook.arg) {
       await era.printAndWait([
         defender.get_colored_name(),

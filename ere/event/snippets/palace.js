@@ -16,6 +16,7 @@ const { race_rewards } = require('#/data/race/race-const');
  */
 async function palace(chara, me) {
   const { check, count, buffer } = get_palace_info(chara);
+
   if (check >= 6) {
     await print_event_name('登上殿堂宝座', chara);
 
