@@ -13,7 +13,10 @@ const passer_by_list = require('#/data/race/contestants/unnamed.json');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
-const { mod_motivation_coefficients } = require('#/data/race/race-sim-const');
+const {
+  max_extra_attr,
+  mod_motivation_coefficients,
+} = require('#/data/race/race-sim-const');
 const {
   mod_acceleration_adapt_ground,
 } = require('#/data/race/race-sim-const.js');
@@ -77,6 +80,9 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
           1,
         0,
       ];
+    info.extra_attr = Math.floor(
+      (max_extra_attr * (144 - edu_phase)) / (144 - 24),
+    );
     const contestant_dict = {};
     team_chara.forEach((e) => (contestant_dict[e.index_chara] = 1));
     let legend_count = get_random_value(0, info.legend_count);

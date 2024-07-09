@@ -266,6 +266,8 @@ module.exports = class RaceInfo {
   weather;
   // 是否有传奇对手
   has_legend;
+  // 额外属性
+  extra_attr = 0;
 
   /**
    * @param {string} name_en
