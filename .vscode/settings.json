@@ -1,11 +1,25 @@
 {
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+ 
+  "eslint.options": {
+      "extensions": [".js", ".vue"]
   },
+  "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "vue-html",
+      {
+          "language": "vue",
+          "autoFix": true
+      },
+      {
+          "language": "html",
+          "autoFix": true
+      }
+  ],
+  "eslint.run": "onSave",
+  "eslint.autoFixOnSave": true,
+  
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "eslint.format.enable": true
+    "source.fixAll.eslint": "explicit"
+}
 }
