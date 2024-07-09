@@ -5,7 +5,10 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const { ability_type_enum } = require('#/data/race/model/uma-skill');
-const { mod_motivation_coefficients } = require('#/data/race/race-sim-const');
+const {
+  max_attr,
+  mod_motivation_coefficients,
+} = require('#/data/race/race-sim-const');
 const {
   mod_acceleration_adapt_distance,
   mod_acceleration_adapt_ground,
@@ -80,6 +83,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
   }
 
   const team_total_attrs = new Array(5).fill(0);
+  const half_attr_border = max_attr - 2 * race_info.extra_attr;
 
   for (const uma of list_chara) {
     uma.base.skill_count = uma.list_skill.length;
@@ -241,8 +245,8 @@ function sys_prepare_race(list_chara, team_list, race_info) {
 
     // 计算基础属性值（属性值加干劲修正）
     Object.values(attr_enum).forEach((v) => {
-      if (uma.attrs[v] > 1200) {
-        uma.attrs[v] = 1200 + (uma.attrs[v] - 1200) / 2;
+      if (uma.attrs[v] > half_attr_border) {
+        uma.attrs[v] = half_attr_border + (uma.attrs[v] - half_attr_border) / 2;
       }
       uma.attrs[v] *= motivation_coefficient;
     });
@@ -363,7 +367,9 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     } else {
       uma.base.temptationSpan = 50000;
     }
-    uma.attrs = uma.attrs.map((e) => Math.min(Math.max(e + 400, 1), 2000));
+    uma.attrs = uma.attrs.map((e) =>
+      Math.min(Math.max(e + race_info.extra_attr, 1), max_attr),
+    );
 
     // 01234：大逃、逃先差追
     const style_index =

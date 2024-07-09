@@ -284,18 +284,49 @@ module.exports = async () => {
           },
         ]);
         await era.waitAnyKey();
-        await era.printAndWait('开发', {
-          color: el_warning_color,
-          fontSize: '1.25rem',
-          isParagraph: true,
-        });
-        await era.printAndWait([
-          '无名路人',
-          { isDivider: true },
-          '色色',
-          { isDivider: true },
-          '黑奴队长',
+        era.printMultiColumns([
+          {
+            config: {
+              color: el_warning_color,
+              fontSize: '1.25rem',
+              isParagraph: true,
+              offset: 3,
+              width: 9,
+            },
+            content: '开发',
+            type: 'text',
+          },
+          {
+            config: {
+              color: el_warning_color,
+              fontSize: '1.25rem',
+              isParagraph: true,
+              width: 9,
+            },
+            content: '安卓移植',
+            type: 'text',
+          },
         ]);
+        await era.waitAnyKey();
+        era.printMultiColumns([
+          {
+            config: { offset: 3, width: 9 },
+            content: [
+              '无名路人',
+              { isDivider: true },
+              '色色',
+              { isDivider: true },
+              '黑奴队长',
+            ],
+            type: 'text',
+          },
+          {
+            config: { width: 9 },
+            content: '星尘之路',
+            type: 'text',
+          },
+        ]);
+        await era.waitAnyKey();
         await era.printAndWait('美术', {
           color: el_warning_color,
           fontSize: '1.25rem',
@@ -498,6 +529,24 @@ module.exports = async () => {
           isParagraph: true,
         });
         await era.printAndWait(['Advocator', { isDivider: true }, '雞雞']);
+        await era.printAndWait('社区贡献', {
+          color: el_warning_color,
+          fontSize: '1.25rem',
+          isParagraph: true,
+        });
+        await era.printAndWait([
+          '功德林今天的饭',
+          { isDivider: true },
+          'Manifold Paradox',
+          { isDivider: true },
+          'morrowind',
+          { isDivider: true },
+          'Great Sakiko',
+          { isDivider: true },
+          'odakasuya',
+          { isDivider: true },
+          'hsyzg1626',
+        ]);
         await era.printAndWait('特别鸣谢（笑）', {
           color: el_warning_color,
           fontSize: '1.5rem',

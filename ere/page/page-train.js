@@ -448,6 +448,7 @@ module.exports = async () => {
               flag_skill = false;
             } else if (ret === 'irwinner') {
               pt = era.add(`exp:${chara_id}:技能点数`, 9999);
+              await era.clear();
             } else if (typeof ret === 'number' && buffer[ret - 1]) {
               const skill = skills_dict[buffer[ret - 1].id],
                 to_remove =
