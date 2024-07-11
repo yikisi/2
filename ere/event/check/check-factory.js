@@ -10,17 +10,25 @@ const cons_dict = {},
 
 const current = new Date().getTime();
 
+cons_dict[1] = require('#/event/check/check-1');
+cons_dict[2] = require('#/event/check/check-2');
 cons_dict[3] = require('#/event/check/check-3');
+cons_dict[5] = require('#/event/check/check-5');
+cons_dict[6] = require('#/event/check/check-6');
 cons_dict[7] = require('#/event/check/check-7');
 cons_dict[8] = require('#/event/check/check-8');
 cons_dict[9] = require('#/event/check/check-9');
+cons_dict[10] = require('#/event/check/check-10');
 cons_dict[11] = require('#/event/check/check-11');
+cons_dict[12] = require('#/event/check/check-12');
 cons_dict[13] = require('#/event/check/check-13');
 cons_dict[14] = require('#/event/check/check-14');
+cons_dict[15] = require('#/event/check/check-15');
 cons_dict[16] = require('#/event/check/check-16');
 cons_dict[17] = require('#/event/check/check-17');
 cons_dict[18] = require('#/event/check/check-18');
 cons_dict[19] = require('#/event/check/check-19');
+cons_dict[20] = require('#/event/check/check-20');
 cons_dict[24] = require('#/event/check/check-24');
 cons_dict[25] = require('#/event/check/check-25');
 cons_dict[26] = require('#/event/check/check-26');

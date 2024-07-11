@@ -85,21 +85,12 @@ module.exports = {
             content: skills_dict[e].get_colored_name(),
             type: 'text',
           })),
-          ...skill_names
-            .map((e) => {
-              return {
-                n: e,
-                l: era.get(`abl:${chara.id}:${e}`),
-              };
-            })
-            .filter((e) => e.l)
-            .map((e) => {
-              return {
-                config: { width: 6 },
-                content: `[${e.n}] Lv.${e.l}`,
-                type: 'text',
-              };
-            }),
+          { content: [], type: 'text' },
+          ...skill_names.map((e) => ({
+            config: { width: 6 },
+            content: `[${e}] Lv.${era.get(`abl:${chara.id}:${e}`)}`,
+            type: 'text',
+          })),
           {
             config: { content: '因子继承', position: 'left' },
             type: 'divider',
@@ -155,19 +146,17 @@ module.exports = {
           config: { content: '习得技能', position: 'left' },
           type: 'divider',
         },
-        ...skill_names
-          .map((e) => {
-            return {
-              n: e,
-              l: era.get(`abl:${chara.id}:${e}`),
-            };
-          })
-          .filter((e) => e.l)
-          .map((e) => ({
-            config: { width: 4 },
-            content: `[${e.n}] Lv.${e.l}`,
-            type: 'text',
-          })),
+        ...new CharaSkills(chara.id).get().map((e) => ({
+          config: { width: 6 },
+          content: skills_dict[e].get_colored_name(),
+          type: 'text',
+        })),
+        { content: [], type: 'text' },
+        ...skill_names.map((e) => ({
+          config: { width: 6 },
+          content: `[${e}] Lv.${era.get(`abl:${chara.id}:${e}`)}`,
+          type: 'text',
+        })),
       );
     }
 
