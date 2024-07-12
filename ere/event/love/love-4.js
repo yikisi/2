@@ -728,6 +728,7 @@ module.exports = async (hook) => {
         },我能遇见你真是太好了,谢谢你。`,
       );
       await era.printAndWait(`在寂静的深夜公路上又刮起了一阵潮湿的自然风.`);
+
       await sys_love_uma_in_event(4);
     }
   }

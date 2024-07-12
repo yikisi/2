@@ -21,23 +21,21 @@ class MaEduMarks extends EduEventMarks {
   find_love;
   //离别(粉丝袭击)
   crazy_fan;
-  //金
-  golden;
+  // 焦鹿梦
+  dream;
   //木
-  wood;
-  //水
-  water;
-  //火
-  fire;
-  //土
-  soil;
-  //be1 木旺土溃
+  wind;
+  // BAD END 1 木旺土溃
   Self_contempt;
-  //ne1 平淡的每一天
+  // BAD END 2 丸善斯基的信
+  broken_tears;
+  //NORMAL END 1 平淡的每一天
   happiness_day;
-  //GOOD END 温柔的世界
+  // GOOD END 误入乐园的旅人
+  fall_heaven;
+  //TURE END 温柔的世界
   gentle_wind;
-  //NORMAL END 梦的远方
+  // NORMAL END 2 梦的远方
   girls_dream;
   // 迷茫
   mygo;

@@ -31,6 +31,14 @@ handlers[event_hooks.select] = function () {
       `.....不过话说回来,训练员君看起来真可爱呢,让我想起了炎热的夏天`,
     );
     temp.sub('after_recruit');
+  } else if (new EduEventMarks(4).get('Self_contempt')) {
+    chara_talk.say(`训练员君为什么看起来有些消沉呢？`);
+    chara_talk.say('快点打气精神来吧！');
+    chara_talk.say('我可是一直在等着训练员君呢！');
+  } else if (new EduEventMarks(4).get('happiness_day')) {
+    chara_talk.say(`湛蓝的天空，清新的草地，总会让人有一种怀念的感觉呢。`);
+    chara_talk.say('哎呀，训练员君什么时候过来的。');
+    chara_talk.say('那么一起享受美好的每一天吧。');
   } else {
     if (era.get('base:4:体力') < era.get('maxbase:4:体力') / 3) {
       buffer.push([
