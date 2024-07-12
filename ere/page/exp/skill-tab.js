@@ -9,8 +9,10 @@ const {
   get_adaptability_rank,
   get_train_time,
 } = require('#/data/info-generator');
+const { gene_juel_names } = require('#/data/other-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names, out_of_train_type } = require('#/data/train-const');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const page_name = '育成情况';
 
@@ -28,12 +30,14 @@ module.exports = {
         .filter((e) => e[1] >= 15 && e[1] <= 17)
         .map((e) => e[0]);
     }
-    const aim_list = [];
+    const aim_list = [],
+      in_edu = era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48,
+      in_palace = era.get(`cflag:${chara.id}:殿堂`);
     if (era.get(`cflag:${chara.id}:种族`)) {
       if (
         !chara.id ||
         era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48 ||
-        era.get(`cflag:${chara.id}:殿堂`)
+        in_palace
       ) {
         const out_of_train = era.get(`cflag:${chara.id}:殿堂`),
           train_time = get_train_time(chara.id);
@@ -95,6 +99,42 @@ module.exports = {
             config: { content: '因子继承', position: 'left' },
             type: 'divider',
           },
+          ...(!chara.id || (in_edu && era.get(`cflag:${chara.id}:继承方1`))
+            ? [
+                ...gene_juel_names.map((e) => ({
+                  config: { width: 6 },
+                  content: `${e}因子：${era.get(`juel:${chara.id}:${e}`)}`,
+                  type: 'text',
+                })),
+              ]
+            : [{ content: '未继承', type: 'text' }]),
+          ...(in_palace
+            ? [
+                {
+                  config: { content: '可继承因子', position: 'left' },
+                  type: 'divider',
+                },
+                ...gene_juel_names.map((e) => ({
+                  config: { width: 6 },
+                  content: `${e}因子：${era.get(`juel:${chara.id}:${e}`)}`,
+                  type: 'text',
+                })),
+                ...(era.get(`cflag:${chara.id}:被继承`)
+                  ? [
+                      {
+                        config: { width: 6 },
+                        content: [
+                          '=> ',
+                          get_chara_talk(
+                            era.get(`cflag:${chara.id}:被继承`),
+                          ).get_colored_name(),
+                        ],
+                        type: 'text',
+                      },
+                    ]
+                  : []),
+              ]
+            : []),
         );
         if (chara.id) {
           const aims = get_custom_check(chara.id).get_edu_aims(),

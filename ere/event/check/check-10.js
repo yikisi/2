@@ -19,8 +19,8 @@ aim_races[get_aim_race_index(race_enum.yasu_kin, 1)] = -4;
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
-  (races) =>
-    Object.values(races).filter(
+  (races, race_list) =>
+    race_list.filter(
       (e) =>
         race_infos[e.race].distance === distance_enum.mile &&
         race_infos[e.race].race_class <= class_enum.G3 &&

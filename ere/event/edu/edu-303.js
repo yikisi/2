@@ -76,7 +76,7 @@ function get_mvp_sort_by(chara_info) {
   const metric = [0, 0, 0, 0];
   chara_info.history.forEach((e) => {
     if (e.rank === 1) {
-      metric[Math.min(race_infos[e.race].race_class - 1, 3)]++;
+      metric[Math.min(race_infos[e.race].race_class, 3)]++;
     }
   });
   return (metric[0] << 18) + (metric[1] << 12) + (metric[2] << 6) + metric[3];

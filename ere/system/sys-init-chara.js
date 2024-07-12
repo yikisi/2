@@ -42,6 +42,10 @@ function reset_chara(chara_id) {
       }
       era.set(`cflag:${chara_id}:自主训练`, 1);
       era.set(`cflag:${chara_id}:腋毛`, 0);
+      era.set(
+        `juel:${chara_id}:粉`,
+        era.set(`juel:${chara_id}:蓝`, era.set(`juel:${chara_id}:白`, 0)),
+      );
     }
     Object.values(attr_names).forEach((v) =>
       era.set(`base:${chara_id}:${v}`, era.get(`cflag:${chara_id}:初始${v}`)),

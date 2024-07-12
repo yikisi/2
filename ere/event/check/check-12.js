@@ -18,10 +18,10 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
-  (races) => {
+  (races, race_list) => {
     let max = 0,
       wins = 0;
-    Object.values(races).forEach((e) => {
+    race_list.forEach((e) => {
       if (race_infos[e.race].race_class <= class_enum.G3) {
         if (e.st === 3 && e.pop === 1) {
           wins++;

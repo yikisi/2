@@ -174,8 +174,9 @@ handlers[306] = (chara, me) => {
           name: '请教训练员的工作',
         }
       : {
-          handle: () =>
-            printAndWait([
+          handle: () => {
+            set('cflag:306:招募状态', -1);
+            return printAndWait([
               chara.get_colored_name(),
               ' 赞许了 ',
               me.get_colored_name(),
@@ -192,7 +193,8 @@ handlers[306] = (chara, me) => {
                 chara.get_uma_sex_title(),
                 '。',
               ]),
-            ),
+            );
+          },
           name: '讨论训练员的工作',
         };
   } else if (get('cflag:306:招募状态') === -1) {

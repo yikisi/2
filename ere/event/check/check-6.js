@@ -33,8 +33,8 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
       edu_marks.aim_check++;
     }
   },
-  (races) =>
-    Object.values(races).filter(
+  (races, race_list) =>
+    race_list.filter(
       (e) => race_infos[e.race].race_class === class_enum.G1 && e.pop === 1,
     ).length >= 6 &&
     check_aim_race(races, race_enum.mile_cha, 1, 1) &&

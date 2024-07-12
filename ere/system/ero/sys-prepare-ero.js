@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_count_juels = require('#/system/chara/sys-count-juels');
 const get_ex_result_in_the_end = require('#/system/ero/sub-begin-and-end/get-ex-result-in-the-end');
 const {
   init_items,
@@ -25,6 +26,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_gradient_color = require('#/utils/gradient-color');
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaAvailableGenes = require('#/data/chara-available-genes');
 const { palam_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
 const { item_enum } = require('#/data/ero/item-const');
@@ -43,6 +45,7 @@ const {
   pleasure_list,
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
+const { gene_juel_names } = require('#/data/other-const');
 const { attr_enum } = require('#/data/train-const');
 
 let juel_names;
@@ -389,6 +392,26 @@ function init_ero(...ids) {
     if (chara_id && is_sex && !era.get(`love:${chara_id}`)) {
       era.set(`love:${chara_id}`, 1);
     }
+    if (chara_id && era.get(`cflag:${chara_id}:种族`)) {
+      let edu_phase = era.get(`cflag:${chara_id}:育成回合计时`);
+      if (edu_phase < 3 * 48) {
+        edu_phase = Math.floor(edu_phase / 48) / 3;
+        const juels = sys_count_juels(chara_id);
+        era.set(`tcvar:${chara_id}:粉因子`, Math.floor(juels.pink * edu_phase));
+        era.set(`tcvar:${chara_id}:蓝因子`, Math.floor(juels.blue * edu_phase));
+        era.set(
+          `tcvar:${chara_id}:白因子`,
+          Math.floor(juels.white * edu_phase),
+        );
+      } else {
+        gene_juel_names.forEach((e) =>
+          era.set(
+            `tcvar:${chara_id}:${e}因子`,
+            era.get(`juel:${chara_id}:${e}`),
+          ),
+        );
+      }
+    }
   });
 }
 
@@ -548,12 +571,12 @@ function end_ero(skip_juels, log_juels, ids) {
     sys_change_attr_and_print(
       chara_id,
       attr_enum.speed,
-      era.get(`ex:${chara_id}:速度获取`) / get_random_value(16, 24),
+      era.get(`ex:${chara_id}:速度获取`) / get_random_value(12, 18),
     );
     sys_change_attr_and_print(
       chara_id,
       attr_enum.strength,
-      era.get(`ex:${chara_id}:力量获取`) / get_random_value(16, 24),
+      era.get(`ex:${chara_id}:力量获取`) / get_random_value(12, 18),
     );
     sys_change_attr_and_print(
       chara_id,
@@ -561,6 +584,31 @@ function end_ero(skip_juels, log_juels, ids) {
       era.get(`ex:${chara_id}:根性获取`) / get_random_value(4, 6),
     );
   });
+  ids.forEach((chara_id) => {
+    if (chara_id && era.get(`cflag:${chara_id}:种族`)) {
+      let got = Math.floor(era.get(`tcvar:${chara_id}:获得因子`) / palam2juel),
+        juels = gene_juel_names.map((e) =>
+          era.get(`tcvar:${chara_id}:${e}因子`),
+        );
+      if (got) {
+        if (got < juels.reduce((p, c) => p + c, 0)) {
+          juels = juels.map((e, i, l) => {
+            const val = get_random_value(
+              Math.max(got - l.slice(i + 1).reduce((p, c) => p + c, 0), 0),
+              got,
+            );
+            got -= val;
+            return val;
+          });
+        }
+        juels.forEach((e, i) => era.add(`gotjuel:0:${gene_juel_names[i]}`, e));
+      }
+      CharaAvailableGenes.merge_into_player(new CharaAvailableGenes(chara_id));
+    }
+  });
+  gene_juel_names.forEach((e) =>
+    era.add(`juel:0:${e}`, era.get(`gotjuel:0:${e}`)),
+  );
   if (!log_juels) {
     tmp = undefined;
   }
@@ -697,10 +745,58 @@ function get_juel_result(chara_id) {
       },
       {
         config: { width: 4 },
-        content: '',
+        content: [],
         type: 'text',
       },
     );
+  }
+  if (!chara_id) {
+    gene_juel_names.forEach((j_name) => {
+      const val = era.get(`juel:${chara_id}:${j_name}`),
+        got = era.get(`gotjuel:${chara_id}:${j_name}`);
+      if (got) {
+        buffer.push(
+          {
+            config: { width: 4 },
+            content: `${j_name}因子：`,
+            type: 'text',
+          },
+          {
+            config: { align: 'right', width: 4 },
+            content: `${(val - got).toLocaleString()} (具有) + `,
+            type: 'text',
+          },
+          {
+            config: { align: 'right', width: 8 },
+            content: [
+              {
+                color: palam_colors.notifications[1],
+                content: got.toLocaleString(),
+              },
+              ' (获得) = ',
+            ],
+            type: 'text',
+          },
+          {
+            config: { align: 'right', width: 4 },
+            content: [
+              {
+                color: palam_colors.notifications[1],
+                content: val.toLocaleString(),
+                fontWeight: 'bold',
+              },
+              ' (总计)',
+            ],
+            type: 'text',
+          },
+          {
+            config: { width: 4 },
+            content: [],
+            type: 'text',
+          },
+        );
+      }
+    });
   }
   if (buffer.length === 1) {
     buffer.push({ content: '无变化', type: 'text' });

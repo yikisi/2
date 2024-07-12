@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
+const sys_count_juels = require('#/system/chara/sys-count-juels');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { get_custom_check } = require('#/event/check/check-factory');
@@ -17,6 +18,7 @@ const { vp_status_enum } = require('#/data/ero/status-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
+const { adaptability_names, attr_names } = require('#/data/train-const');
 
 /** @param {number} chara_id */
 function sys_handle_palace(chara_id) {
@@ -108,6 +110,19 @@ function sys_handle_palace(chara_id) {
   sys_like_chara(chara_id, 0, -(miss_count + aim_punish_count) * 100);
   sys_like_chara(302, 0, -aim_punish_count * 20);
   era.println();
+  const attr_list = attr_names.map((e) => era.get(`base:${chara_id}:${e}`)),
+    adapt_list = adaptability_names.map((e) =>
+      era.get(`cflag:${chara_id}:${e}适性`),
+    ),
+    { blue, pink, white } = sys_count_juels(
+      chara_id,
+      attr_list,
+      adapt_list,
+      aim_count / aim_check.length,
+    );
+  era.set(`juel:${chara_id}:粉`, Math.floor(pink));
+  era.set(`juel:${chara_id}:蓝`, Math.floor(blue));
+  era.set(`juel:${chara_id}:白`, Math.floor(white));
 }
 
 module.exports = sys_handle_palace;

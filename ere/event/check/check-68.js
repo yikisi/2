@@ -154,11 +154,11 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_palace_and_get_aims() {
-    const races = new RaceHistory(68).get();
     if (
-      Object.values(races).filter(
-        (e) => e.rank === 1 && e.race !== race_enum.begin_race,
-      ).length < 4
+      new RaceHistory(68)
+        .get_values()
+        .filter((e) => e.rank === 1 && e.race !== race_enum.begin_race).length <
+      4
     ) {
       new KitaEduMarks().crazy_fan++;
       new CrazyFans().push(68);
