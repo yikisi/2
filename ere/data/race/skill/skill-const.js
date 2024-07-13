@@ -1998,6 +1998,7 @@ skills_dict[901071] = require('#/data/race/skill/skill-901071');
 skills_dict[901081] = require('#/data/race/skill/skill-901081');
 skills_dict[901091] = require('#/data/race/skill/skill-901091');
 skills_dict[901191] = require('#/data/race/skill/skill-901191');
+skills_dict[910031] = require('#/data/race/skill/skill-910031');
 
 console.log(
   '[skill-const.js] skill list init done!',

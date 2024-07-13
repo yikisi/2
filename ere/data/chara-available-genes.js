@@ -1,5 +1,7 @@
 const { get, set } = require('#/era-electron');
 
+const { sort_list } = require('#/utils/list-utils');
+
 class CharaAvailableGenes {
   /**
    * @param {CharaAvailableGenes} c
@@ -21,15 +23,22 @@ class CharaAvailableGenes {
   obj;
 
   constructor(chara_id) {
+    this.id = chara_id;
     this.obj =
       get(`skill:${chara_id}:可继承因子`) ||
       set(`skill:${chara_id}:可继承因子`, {});
   }
 
-  /** @type {number|string} gene */
-  add(gene) {
+  /**
+   * @param {number|string} gene
+   * @param {number} [val]*/
+  add(gene, val) {
     this.obj[gene] || (this.obj[gene] = 0);
-    this.obj[gene]++;
+    if (!val || isNaN(Number(val))) {
+      this.obj[gene]++;
+    } else {
+      this.obj[gene] += val;
+    }
   }
 
   clear() {
@@ -38,6 +47,13 @@ class CharaAvailableGenes {
 
   get() {
     return this.obj;
+  }
+
+  get_values() {
+    return sort_list(
+      Object.entries(this.obj).map((e) => ({ count: e[1], id: e[0] })),
+      (e) => Number(e.id),
+    );
   }
 
   /**

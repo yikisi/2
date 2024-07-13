@@ -102,21 +102,35 @@ const exp_chara_info = require('#/page/exp/exp-chara-info');
 //   },
 // };
 
-/** @type {{generate:function(CharaTalk,{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}):{print:function:*[],[handle]:function(number)},name:string,[virgin]:boolean}[]} */
+/** @type {{generate:function(CharaTalk,{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}):{print:function:*[],[handle]:function(number)},name:string,[virgin]:boolean,[uma]:boolean}[]} */
 const handlers = [];
-handlers.push(require('#/page/exp/base-tab'));
-handlers.push(require('#/page/exp/skill-tab'));
-handlers.push(require('#/page/exp/race-tab'));
-handlers.push(require('#/page/exp/relation-tab'));
-handlers.push(require('#/page/exp/sex-tab'));
-handlers.push(require('#/page/exp/exp-tab-1'));
-handlers.push(require('#/page/exp/exp-tab-2'));
-handlers.push(require('#/page/exp/exp-tab-3'));
-handlers.push(require('#/page/exp/exp-tab-4'));
-handlers.push(require('#/page/exp/exp-tab-5'));
-handlers.push(require('#/page/exp/exp-tab-6'));
-handlers.push(require('#/page/exp/exp-tab-7'));
-handlers.push(require('#/page/exp/exp-tab-8'));
+handlers.push(
+  require('#/page/exp/base-tab'),
+  require('#/page/exp/edu-tab'),
+  require('#/page/exp/skill-tab'),
+  require('#/page/exp/race-tab'),
+  require('#/page/exp/relation-tab'),
+  require('#/page/exp/sex-tab'),
+  require('#/page/exp/exp-tab-1'),
+  require('#/page/exp/exp-tab-2'),
+  require('#/page/exp/exp-tab-3'),
+  require('#/page/exp/exp-tab-4'),
+  require('#/page/exp/exp-tab-5'),
+  require('#/page/exp/exp-tab-6'),
+  require('#/page/exp/exp-tab-7'),
+  require('#/page/exp/exp-tab-8'),
+);
+
+/**
+ * @param {CharaTalk} chara
+ * @param {{[uma]:boolean,[virgin]:boolean}} page
+ */
+function check_page_disabled(chara, page) {
+  return (
+    (chara.sex_code === 1 && page.virgin) ||
+    (!era.get(`cflag:${chara.id}:种族`) && page.uma)
+  );
+}
 
 /**
  * @param {number} chara_id
@@ -155,7 +169,7 @@ async function print_chara_info(_id, chara_list, _page) {
     await era.clear();
     era.setToBottom();
     let page = _page === undefined ? era.get('flag:情报翻页') : _page;
-    if (chara.sex_code === 1 && handlers[page].virgin) {
+    while (check_page_disabled(chara, handlers[page])) {
       page--;
     }
     const info_page = handlers[page].generate(chara, flags);
@@ -175,7 +189,7 @@ async function print_chara_info(_id, chara_list, _page) {
                   accelerator: i + 10,
                   config: {
                     buttonType: i === page ? 'warning' : 'info',
-                    disabled: chara.sex_code === 1 && e.virgin,
+                    disabled: check_page_disabled(chara, e),
                     offset: 2,
                     width: 22,
                   },
@@ -232,16 +246,16 @@ async function print_chara_info(_id, chara_list, _page) {
           chara_id = prev;
           chara = get_chara_talk(prev);
           flags = get_flags(chara.id);
-          if (chara.sex_code === 1 && handlers[page].virgin) {
-            era.add('flag:情报翻页', -1);
+          while (check_page_disabled(chara, handlers[page])) {
+            page = era.add('flag:情报翻页', -1);
           }
           break;
         case 6:
           chara_id = next;
           chara = get_chara_talk(next);
           flags = get_flags(chara.id);
-          if (chara.sex_code === 1 && handlers[page].virgin) {
-            era.add('flag:情报翻页', -1);
+          while (check_page_disabled(chara, handlers[page])) {
+            page = era.add('flag:情报翻页', -1);
           }
           break;
         case 999:

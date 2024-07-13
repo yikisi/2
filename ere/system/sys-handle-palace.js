@@ -9,6 +9,8 @@ const { remove_edu_events } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const CharaAvailableGenes = require('#/data/chara-available-genes');
+const CharaSkills = require('#/data/chara-skills');
 const {
   attr_change_colors,
   buff_colors,
@@ -123,6 +125,33 @@ function sys_handle_palace(chara_id) {
   era.set(`juel:${chara_id}:粉`, Math.floor(pink));
   era.set(`juel:${chara_id}:蓝`, Math.floor(blue));
   era.set(`juel:${chara_id}:白`, Math.floor(white));
+  const genes = new CharaAvailableGenes(chara_id);
+  genes.clear();
+  adapt_list.forEach((e, i) => {
+    if (e === 6) {
+      genes.add(100000 + i);
+    } else if (e === 7) {
+      genes.add(100000 + i, 2);
+    }
+  });
+  attr_list.forEach((e, i) => {
+    if (e >= 800) {
+      genes.add(200000 + i * 10);
+    }
+    if (e >= 1200) {
+      genes.add(200001 + i * 10);
+    }
+    if (e >= 1500) {
+      genes.add(200002 + i * 10);
+    }
+    if (e >= 1800) {
+      genes.add(200003 + i * 10);
+    }
+  });
+  new CharaSkills(chara_id)
+    .get()
+    .filter((e) => e - 100000 < 100000)
+    .forEach((e) => genes.add(e + 800000));
 }
 
 module.exports = sys_handle_palace;

@@ -1,5 +1,7 @@
 const { get, set } = require('#/era-electron');
 
+const { sort_list } = require('#/utils/list-utils');
+
 class CharaGenes {
   /** @type {number} */
   id;
@@ -21,6 +23,13 @@ class CharaGenes {
 
   clear() {
     this.obj = set(`skill:${this.id}:继承因子`, {});
+  }
+
+  get_values() {
+    return sort_list(
+      Object.entries(this.obj).map((e) => ({ count: e[1], id: e[0] })),
+      (e) => Number(e.id),
+    );
   }
 
   /** @type {number|string} gene */

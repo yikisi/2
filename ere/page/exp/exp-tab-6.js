@@ -34,7 +34,6 @@ const virgin_semen_desc = [
 const virgin_color_desc = ['粉嫩可人', '红润泛紫', '深邃成熟'];
 
 module.exports = {
-  virgin: true,
   /**
    * @param {CharaTalk} chara
    * @param {{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}} flags
@@ -294,4 +293,5 @@ module.exports = {
     };
   },
   name: page_name,
+  virgin: true,
 };
