@@ -512,7 +512,7 @@ async function love_89(chara_talk) {
   return;
 }
 
-async function love_99(chara_talk) {
+async function love_100(chara_talk) {
   const me = get_chara_talk(0);
   const MF = get_chara_talk(56);
 
@@ -673,8 +673,8 @@ module.exports = async (hook, _, event_object) => {
       await love_74(MF, event_object);
     } else if (love === 89) {
       await love_89(MF, event_object);
-    } else if (love === 99) {
-      await love_99(MF, event_object);
+    } else if (love === 100) {
+      await love_100(MF, event_object);
     }
   } else if (hook === event_hooks.back_school) {
     await love_74_back_school(MF, event_object);

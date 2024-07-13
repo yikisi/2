@@ -11,7 +11,10 @@ class CustomizedMec {
   }
 
   init_love() {
-    era.set(`love:${this.id}`, era.get('flag:马娘初始爱慕'));
+    era.set(
+      `love:${this.id}`,
+      era.get(`cflag:${this.id}:种族`) ? era.get('flag:马娘初始爱慕') : 0,
+    );
   }
 
   is_able_to_be_selected() {

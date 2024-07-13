@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 const FukuEventMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
 const event_hooks = require('#/data/event/event-hooks');
 const { race_enum } = require('#/data/race/race-const');
@@ -17,6 +18,7 @@ const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 
 const { part_enum } = require('#/data/ero/part-const');
+const { attr_enum, fumble_result } = require('#/data/train-const');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
@@ -30,7 +32,6 @@ const {
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
 
-const fumble_result = require('#/data/train-const');
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
@@ -5642,7 +5643,10 @@ handlers[event_hooks.office_game] = async (hook, _, event_object) => {
  * @param {{args:*,fumble:boolean,train:number}} extra_flag
  */
 handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
-  extra_flag.args = extra_flag.fumble
+  if (extra_flag.train === attr_enum.intelligence) {
+    throw new Error();
+  }
+  extra_flag['args'] = extra_flag.fumble
     ? fumble_result.fumble
     : fumble_result.fail;
 
@@ -5994,8 +5998,8 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
     era.printButton('「别想太多！」', 1);
     era.printButton('「干脆趁着休息的时候做个开运仪式？」', 2);
     // era.printButton('（陪着待兼福来到晚上）', 3, { disabled: era.get('love:56') < 75 });
-    let ret = await era.input();
-    if (ret === 1) {
+    hook.arg = (await era.input()) === 1;
+    if (hook.arg) {
       await me.print_and_wait([
         `说话的同时一边伸手顺着福来那乱糟糟的头发，在 `,
         me.get_colored_name(),
@@ -6022,7 +6026,8 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
         MF.get_colored_name(),
         ` 的指挥下开始布置起仪式所需的场地来，直到保健室内看着像是祭拜什么东西的神龛。`,
       ]);
-      if (Math.random() < extra_flag.args.ratio.fail_again) {
+
+      if (Math.random() < extra_flag['args'].ratio.fail_again) {
         await me.print_and_wait(`看来是布置仪式时的动作恶化了伤口呢。`);
         await me.print_and_wait([
           ` `,
@@ -6041,7 +6046,7 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
           MF.get_colored_name(),
           ` 得意洋洋的对保健室新来的病患布道着自己的白兴大人。`,
         ]);
-        hook.arg = 1; // 好事
+        hook.arg = 1;
       }
     }
   } else {
@@ -6055,8 +6060,8 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
     await MF.say_and_wait(`明明神签上写了今天是大吉来着呢！`);
     era.printButton('「好好休息吧！」', 1);
     era.printButton('「不要老是迷信占卜啊！」', 2);
-    let ret = await era.input();
-    if (ret === 1) {
+    hook.arg = (await era.input()) === 1;
+    if (hook.arg) {
       await MF.say_and_wait(`唔！`);
       await me.print_and_wait([
         `将自己整个人埋在白色的被褥里， `,
@@ -6066,12 +6071,12 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
       hook.arg = 0;
     } else {
       await MF.say_and_wait(`啊！训练员说的也是呢！`);
-      if (Math.random() < extra_flag.args.ratio.fail_again) {
-        await me.print_and_wait(
+      if (Math.random() < extra_flag['args'].ratio.fail_again) {
+        await me.print_and_wait([
           `不过第二天来保健室看望她的时候， `,
           me.get_colored_name(),
           ` 听见她又提出了新的占卜方式。`,
-        );
+        ]);
         await me.print_and_wait([
           `看来 `,
           MF.get_colored_name(),

@@ -12,6 +12,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
 const LocCharacters = require('#/data/event/loc-characters');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
@@ -44,7 +45,20 @@ async function page_clinic() {
       },
       { loc: location_enum.clinic, name: '约会', print_out_page },
       { name: `庆祝 ${celebration}` },
-      {},
+      era.get('cflag:305:招募状态') !== recruit_flags.yes &&
+        era.get('love:305') >= 50
+        ? {
+            name: '「一起努力吧！」（招募）',
+            handle() {
+              era.set('callname:305:-2', '安心泽刺刺美');
+              era.set('cflag:305:招募状态', recruit_flags.yes);
+              return era.printAndWait([
+                get_chara_talk(305).get_colored_name(),
+                ' 加入了队伍！',
+              ]);
+            },
+          }
+        : {},
       { name: '再见' },
     );
     if ((flag_page &&= temp)) {
