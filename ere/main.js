@@ -87,7 +87,7 @@ module.exports = async () => {
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
-            content: `版本号：v${era.get('gamebase').version / 1000}`,
+            content: `版本号：v0.706-kitaru`,
             type: 'text',
           },
         ],
@@ -408,6 +408,7 @@ module.exports = async () => {
             '爱放箭的袁本初',
           ],
           [[{ color: get_chara_color(52), content: '春乌拉拉' }], '99'],
+          [[{ color: get_chara_color(56), content: '待兼福来' }], 'ALEX'],
           [
             [{ color: get_chara_color(60), content: '优秀素质' }],
             '红红火火恍惚',
