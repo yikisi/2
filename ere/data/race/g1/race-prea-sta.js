@@ -5,7 +5,7 @@ module.exports = new RaceInfo(
   '普瑞克尼斯锦标赛',
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.baltimore,
-  RaceInfo.ground_enum.grass,
+  RaceInfo.ground_enum.mud,
   1900,
   RaceInfo.distance_enum.medium,
   RaceInfo.rotation_enum.right,

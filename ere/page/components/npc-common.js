@@ -311,6 +311,8 @@ async function npc_common(
       break;
     case 5:
       await func_cb.handle();
+      chara.name = era.get(`callname:${chara.id}:-2`);
+      chara.actual_name = era.get(`callname:${chara.id}:-1`);
       break;
     case 6:
       if (cele_cb.handle) {

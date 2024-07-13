@@ -225,7 +225,7 @@ module.exports = async () => {
       if (await check_game_over()) {
         return;
       }
-      if (era.get('flag:当前周') === 1) {
+      if (era.get('flag:当前月') <= 3 && era.get('flag:当前周') === 1) {
         const added_list = era.getAddedCharacters();
         gacha(
           era

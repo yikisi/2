@@ -8,13 +8,7 @@ const { buff_colors } = require('#/data/color-const');
 
 module.exports = class extends CustomizedMec {
   init_love() {
-    set(
-      'love:303',
-      Math.min(
-        get('flag:马娘初始爱慕') + sys_personal_achievement.get(303) * 20,
-        20,
-      ),
-    );
+    set('love:303', sys_personal_achievement.get(303) * 20);
   }
 
   is_able_to_be_selected() {

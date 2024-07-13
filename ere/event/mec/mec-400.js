@@ -19,7 +19,7 @@ module.exports = class extends CustomizedMec {
   }
 
   get_relation_buff() {
-    return Math.min(new SSEduMarks().wins, 20);
+    return Math.min(new SSEduMarks().wins * 2, 30);
   }
 
   get_status() {
@@ -49,7 +49,9 @@ module.exports = class extends CustomizedMec {
   set_pseudo_uma(uma) {
     const { wins } = new SSEduMarks();
     if (wins > 0) {
-      uma.attr_buffs.forEach((l) => l.push(`+${3 * wins}%[胜利的承诺]`));
+      uma.attr_buffs.forEach((l) =>
+        l.push(`+${this.get_relation_buff()}%[胜利的承诺]`),
+      );
     }
   }
 };
