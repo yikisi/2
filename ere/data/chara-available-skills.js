@@ -6,9 +6,10 @@ class CharaAvailableSkills {
 
   constructor(chara_id) {
     this.id = chara_id;
-    this.obj =
+    this.obj = (
       get(`skill:${this.id}:可习得技能`) ||
-      set(`skill:${this.id}:可习得技能`, []);
+      set(`skill:${this.id}:可习得技能`, [])
+    ).filter((e) => e);
   }
 
   /**

@@ -152,6 +152,11 @@ function sys_handle_palace(chara_id) {
     .get()
     .filter((e) => e - 100000 < 100000)
     .forEach((e) => genes.add(e + 800000));
+  const gene_a = era.get(`cflag:${chara_id}:继承方1`);
+  if (gene_a) {
+    era.set(`cflag:${gene_a}:被继承`, 0);
+    era.set(`cflag:${era.get(`cflag:${chara_id}:继承方2`)}:被继承`, 0);
+  }
 }
 
 module.exports = sys_handle_palace;

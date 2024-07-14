@@ -17,11 +17,13 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const goto_sex = require('#/page/components/goto-sex');
 const select_target = require('#/page/components/select-target');
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { generate_race_button } = require('#/page/homepage/snippets');
 const page_chairman_office = require('#/page/page-chairman-office');
 const page_clinic = require('#/page/page-clinic');
 const print_exp_page = require('#/page/page-exp');
 const print_god_shop = require('#/page/page-god-shop');
+const print_inherit_page = require('#/page/page-inherit');
 const print_juel_shop_page = require('#/page/page-juel-shop');
 const print_load_page = require('#/page/page-load-game');
 const print_out_page = require('#/page/page-out');
@@ -709,7 +711,18 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         sys_get_move_cost(location_enum.god, chara_id),
         chara_id,
       );
-      await print_god_shop();
+      if (
+        era.get('flag:当前月') === 3 &&
+        (await select_yes_or_no(
+          '可以因子继承了！要进行吗',
+          '因子继承！',
+          '普通拜谒就好',
+        ))
+      ) {
+        await print_inherit_page();
+      } else {
+        await print_god_shop();
+      }
       break;
     case 305:
       sys_handle_action(

@@ -298,8 +298,9 @@ async function reg_race_page() {
             return {
               accelerator: 1000 + e,
               config: {
-                width: 4,
+                buttonType: e === chara_id ? 'warning' : 'info',
                 disabled: e === chara_id,
+                width: 4,
               },
               content: era.get(`callname:${e}:-1`),
               type: 'button',

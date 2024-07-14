@@ -602,8 +602,12 @@ function end_ero(skip_juels, log_juels, ids) {
           });
         }
         juels.forEach((e, i) => era.add(`gotjuel:0:${gene_juel_names[i]}`, e));
+        if (era.get(`cflag:${chara_id}:殿堂`) > 0) {
+          CharaAvailableGenes.merge_into_player(
+            new CharaAvailableGenes(chara_id),
+          );
+        }
       }
-      CharaAvailableGenes.merge_into_player(new CharaAvailableGenes(chara_id));
     }
   });
   gene_juel_names.forEach((e) =>

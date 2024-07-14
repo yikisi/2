@@ -61,13 +61,13 @@ module.exports = {
                 ]
               : []),
             ...gene_juel_names.map((e, i) => ({
-              config: { color: gene_type_colors[i], width: 6 },
+              config: { color: gene_type_colors[i], width: 8 },
               content: `${e}因子：${era.get(`juel:${chara.id}:${e}`)}`,
               type: 'text',
             })),
             { content: [], type: 'text' },
             ...new CharaGenes(chara.id).get_values().map((e) => ({
-              config: { width: 6 },
+              config: { width: 8 },
               content: [...gene_dict[e.id].get_colored_name(), `× ${e.count}`],
               type: 'text',
             })),

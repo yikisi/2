@@ -440,7 +440,7 @@ module.exports = async () => {
             [
               { color: get_chara_color(400), content: '周日宁静' },
               '、',
-              { color: get_chara_color(342), content: '拜耶尔土耳其' },
+              { color: get_chara_color(342), content: '拜耶尔土耳其（招募）' },
             ],
             '黑衣剑士-星爆气流斩准备就绪',
           ],
@@ -449,11 +449,11 @@ module.exports = async () => {
             ['雞雞', { isDivider: true }, '幽白書'],
           ],
           [
-            [{ color: get_chara_color(340), content: '达利阿拉伯' }],
+            [{ color: get_chara_color(340), content: '达利阿拉伯（招募）' }],
             'O口口口口口',
           ],
           [
-            [{ color: get_chara_color(341), content: '高多芬柏布' }],
+            [{ color: get_chara_color(341), content: '高多芬柏布（招募）' }],
             'フィンランド',
           ],
         ]) {

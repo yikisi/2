@@ -39,7 +39,7 @@ function get_skills_and_print_in_event(chara_id, skills, skill_control) {
       got.forEach((e) => buffer.push(...skills_dict[e].get_colored_name()));
       era.print([
         get_chara_talk(chara_id).get_colored_name(),
-        ' 习得了 ',
+        ' 习得了',
         ...buffer,
       ]);
       ret_flag = true;

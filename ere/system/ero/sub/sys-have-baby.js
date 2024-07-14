@@ -20,6 +20,8 @@ const { buff_colors } = require('#/data/color-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_filtered_talents } = require('#/data/info-generator');
+const { gene_juel_names } = require('#/data/other-const');
+const { gene_type_colors } = require('#/data/race/model/uma-gene');
 const { adaptability_names } = require('#/data/train-const');
 
 /** @param {number} mother_id */
@@ -353,6 +355,24 @@ async function sys_have_baby(mother_id) {
   } else if (!father_id || !mother_id) {
     sys_like_chara(mother_id || father_id, 0, 100);
     await add_juel_out_of_train(mother_id || father_id, '顺从', 300);
+  }
+  const juel_index = get_random_value(0, 2);
+  let juel_num = 0;
+  if (!father_id) {
+    juel_num = get_random_value(25, 75);
+  } else if (!mother_id) {
+    juel_num = get_random_value(75, 125);
+  }
+  if (juel_num > 0) {
+    era.add(`juel:0:${gene_juel_names[juel_index]}`, juel_num);
+    era.print([
+      get_chara_talk(0).get_colored_name(),
+      ' 获得了 ',
+      {
+        content: `${gene_juel_names[juel_index]} × ${juel_num}`,
+        color: gene_type_colors[juel_index],
+      },
+    ]);
   }
   new Array(3)
     .fill(0)
