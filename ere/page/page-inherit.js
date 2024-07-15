@@ -192,6 +192,11 @@ function generate_gene_buttons(
           content: '学习',
           type: 'button',
         },
+      ],
+      config: { width: 12 },
+    },
+    {
+      columns: [
         {
           accelerator: available_genes.get_values().length + 2,
           config: {
@@ -251,11 +256,14 @@ async function print_inherit_page() {
           {
             columns: [
               { config: { content: '因子' }, type: 'divider' },
-              ...gene_juel_names.map((e, i) => ({
-                config: { align: 'center', color: gene_type_colors[i] },
-                content: `${e}因子：${get(`juel:${chara.id}:${e}`)}`,
-                type: 'text',
-              })),
+              ...gene_juel_names.map((e, i) => {
+                const my_juel = get(`juel:0:${e}`);
+                return {
+                  config: { color: gene_type_colors[i], offset: 1, width: 23 },
+                  content: `${e}因子：${get(`juel:${chara.id}:${e}`)}${my_juel ? ` (+${my_juel})` : ''}`,
+                  type: 'text',
+                };
+              }),
             ],
             config: { width: 4 },
           },
@@ -278,12 +286,12 @@ async function print_inherit_page() {
           {
             columns: [
               {
-                config: { width: 3 },
+                config: { offset: 1, width: 3 },
                 names: get_image(gene_a).join('\t'),
                 type: 'image.whole',
               },
               {
-                config: { offset: 1, width: 19 },
+                config: { offset: 1, width: 18 },
                 content: [
                   '因子能力：',
                   ...new CharaAvailableGenes(gene_a).get_summary(),
@@ -291,18 +299,18 @@ async function print_inherit_page() {
                 type: 'text',
               },
               {
-                config: { align: 'center', width: 3 },
+                config: { align: 'center', offset: 1, width: 3 },
                 content: [get_chara_talk(gene_a).get_colored_name()],
                 type: 'text',
               },
               { content: [], type: 'text' },
               {
-                config: { width: 3 },
+                config: { offset: 1, width: 3 },
                 names: get_image(gene_b).join('\t'),
                 type: 'image.whole',
               },
               {
-                config: { offset: 1, width: 19 },
+                config: { offset: 1, width: 18 },
                 content: [
                   '因子能力：',
                   ...new CharaAvailableGenes(gene_b).get_summary(),
@@ -310,7 +318,7 @@ async function print_inherit_page() {
                 type: 'text',
               },
               {
-                config: { align: 'center', width: 3 },
+                config: { align: 'center', offset: 1, width: 3 },
                 content: [get_chara_talk(gene_b).get_colored_name()],
                 type: 'text',
               },
@@ -325,6 +333,13 @@ async function print_inherit_page() {
             juels.reduce((p, c) => p + c),
             selected_id,
           ),
+          [
+            {
+              content:
+                '* 马娘的因子不足以继承因子能力时，训练员可以支付双倍差额帮助马娘继承因子能力',
+              type: 'text',
+            },
+          ],
         );
       } else if (palace_list.length > 0) {
         printButton('选择继承角色', 200, { align: 'center' });
@@ -362,7 +377,7 @@ async function print_inherit_page() {
             content: '遗忘所有因子能力',
             type: 'button',
           },
-          { content: '* 马娘训练员最多继承15个因子', type: 'text' },
+          { content: '* 马娘训练员最多继承15个因子能力', type: 'text' },
         ],
       );
     }
@@ -419,6 +434,7 @@ async function print_inherit_page() {
             config: { width: 8 },
           })),
           [
+            { content: '* 必须同时选中两个角色才能开始因子继承', type: 'text' },
             {
               accelerator: 1000,
               config: {

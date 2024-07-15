@@ -17,6 +17,7 @@ const {
   sex_colors,
 } = require('#/data/color-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
+const { get_chara_score } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
@@ -150,13 +151,20 @@ function sys_handle_palace(chara_id) {
   });
   new CharaSkills(chara_id)
     .get()
-    .filter((e) => e - 100000 < 100000)
+    .filter((e) => e < 200000)
     .forEach((e) => genes.add(e + 800000));
   const gene_a = era.get(`cflag:${chara_id}:继承方1`);
   if (gene_a) {
     era.set(`cflag:${gene_a}:被继承`, 0);
     era.set(`cflag:${era.get(`cflag:${chara_id}:继承方2`)}:被继承`, 0);
   }
+  if (get_chara_score(chara_id).charAt(0) >= 'S') {
+    era.set(
+      'flag:初见重复育成',
+      Number(era.get('flag:初见重复育成') || !era.get('flag:初见重复育成')),
+    );
+  }
+  era.set(`cflag:${chara_id}:自主训练`, 0);
 }
 
 module.exports = sys_handle_palace;

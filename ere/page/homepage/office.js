@@ -386,9 +386,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 304,
               config: {
-                buttonType: new EventMarks(0).get(event_hooks.back_school)
-                  ? 'danger'
-                  : 'warning',
+                buttonType:
+                  new EventMarks(0).get(event_hooks.back_school) ||
+                  era.get('flag:当前月') === 3
+                    ? 'danger'
+                    : 'warning',
                 disabled:
                   growth_stage < 1 ||
                   (chara_id && !sys_check_train_enabled(chara_id)) ||

@@ -421,9 +421,9 @@ async function check_new_activities(cur_round, in_team_list) {
   // 出差的理事长
   let chairman = 0;
   if (
-    era.get('flag:当前月') > 3 &&
-    !(era.get('cflag:302:育成回合计时') < 3 * 48) &&
-    (Math.random() < 0.2 || (era.get('cflag:302:妊娠阶段') & 0b100001) > 0)
+    era.get('cflag:302:育成回合计时') < 3 * 48 ||
+    (era.get('flag:当前月') > 3 &&
+      (Math.random() < 0.2 || (era.get('cflag:302:妊娠阶段') & 0b100001) > 0))
   ) {
     if (
       !(era.get('cflag:306:育成回合计时') < 3 * 48) &&

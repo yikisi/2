@@ -362,6 +362,13 @@ module.exports = class extends CustomizedCheck {
     return super.check_palace_and_get_aims();
   }
 
+  check_second_chance() {
+    add_event(
+      event_hooks.week_start,
+      new EventObject(this.id, cb_enum.edu).set_arg('second_chance'),
+    );
+  }
+
   get_edu_aims() {
     const buffer = [],
       races = new RaceHistory(32).get();

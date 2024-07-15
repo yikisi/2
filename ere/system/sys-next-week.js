@@ -65,6 +65,7 @@ const LoveLimitStatus = require('#/data/love-limit-status');
 const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { pressure_border } = require('#/data/train-const');
+const { reset_chara } = require('#/system/sys-init-chara');
 
 async function sys_next_week() {
   const health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes,
@@ -560,7 +561,7 @@ async function sys_next_week() {
       cur_month < 4 &&
       era.get(`cflag:${chara_id}:育成回合计时`) === 'x'
     ) {
-      era.set(`cflag:${chara_id}:育成回合计时`, (cur_round - 1) % 48);
+      reset_chara(chara_id);
       await sys_call_daily_event(chara_id, event_hooks.growth, { stage: 2 });
     }
 

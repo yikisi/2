@@ -11,6 +11,7 @@ const {
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const get_riko_button = require('#/page/components/get-riko-button');
 const goto_sex = require('#/page/components/goto-sex');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
@@ -308,7 +309,7 @@ async function page_chairman_office() {
           },
           { loc: location_enum.chairman, name: '约会', print_out_page },
           { name: `庆祝 ${celebration}` },
-          {},
+          get_riko_button(chara, get_chara_talk(0)),
           { name: '再见' },
         );
     }

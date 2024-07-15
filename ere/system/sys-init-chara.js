@@ -9,7 +9,9 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaAvailableGenes = require('#/data/chara-available-genes');
 const CharaAvailableSkills = require('#/data/chara-available-skills');
+const CharaGenes = require('#/data/chara-genes');
 const CharaSkills = require('#/data/chara-skills');
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
@@ -34,13 +36,19 @@ const { attr_names } = require('#/data/train-const');
 function reset_chara(chara_id) {
   if (era.get(`cflag:${chara_id}:种族`)) {
     if (era.get(`cflag:${chara_id}:招募状态`) === yes) {
-      if (era.get('flag:当前月') <= 3) {
+      if (
+        era.get('flag:当前月') <= 3 &&
+        (era.get(`cflag:${chara_id}:育成回合计时`) === 'x' ||
+          era.get(`cflag:${chara_id}:成长阶段`) < 5)
+      ) {
         era.set(
           `cflag:${chara_id}:育成回合计时`,
           (era.get('flag:当前回合数') - 1) % 48,
         );
+        era.set(`cflag:${chara_id}:继承方1`, 0);
+        era.set(`cflag:${chara_id}:继承方2`, 0);
+        era.set(`cflag:${chara_id}:可再次育成`, 0);
       }
-      era.set(`cflag:${chara_id}:自主训练`, 1);
       era.set(`cflag:${chara_id}:腋毛`, 0);
       era.set(
         `juel:${chara_id}:粉`,
@@ -60,11 +68,14 @@ function reset_chara(chara_id) {
           ? era.get(`cflag:${chara_id}:模版角色`)
           : chara_id
       ] || [];
-    new CharaSkills(chara_id).add(...skill_set.slice(0, 4));
-    new CharaAvailableSkills(chara_id).add(...skill_set.slice(4));
+    era.set(`cflag:${chara_id}:殿堂`, 0);
+    new CharaSkills(chara_id).clear().add(...skill_set.slice(0, 4));
+    new CharaAvailableSkills(chara_id).clear().add(...skill_set.slice(4));
     era.set(`exp:${chara_id}:技能点数`, 120 + 680 * (skill_set.length === 0));
     era.set(`cflag:${chara_id}:育成用变量`, {});
     new RaceHistory(chara_id).reset();
+    new CharaGenes(chara_id).clear();
+    new CharaAvailableGenes(chara_id).clear();
   } else {
     Object.values(attr_names).forEach((v) => {
       era.set(
@@ -336,6 +347,7 @@ module.exports = {
   },
   recruit_chara(chara_id) {
     reset_chara(chara_id);
+    era.set(`cflag:${chara_id}:自主训练`, 1);
     const honor = era.get('flag:当前声望');
     // 先结算声望奖励
     let relation = honor > 500 ? Math.floor((honor - 500) / 12) : 0;

@@ -10,6 +10,7 @@ const cons_dict = {},
 
 const current = new Date().getTime();
 
+cons_dict[0] = require('#/event/check/check-0');
 cons_dict[1] = require('#/event/check/check-1');
 cons_dict[2] = require('#/event/check/check-2');
 cons_dict[3] = require('#/event/check/check-3');

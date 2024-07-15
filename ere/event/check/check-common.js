@@ -137,6 +137,8 @@ class CustomizedCheck {
     return this.get_edu_aims();
   }
 
+  check_second_chance() {}
+
   /** @returns {Record<string,number>} */
   get_aim_races() {
     return aim_races;

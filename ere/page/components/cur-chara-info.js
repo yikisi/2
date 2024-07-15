@@ -131,7 +131,7 @@ function cur_chara_component(chara_id, type, location_npc) {
         ' ',
         get_train_time(chara_id).substring(0, 3),
       );
-    } else if (race && !out_of_train && growth >= 2 && growth !== 4) {
+    } else if (race && !out_of_train && (growth === 2 || growth === 3)) {
       name_columns.push(' 待入学');
     }
     name_columns.push(...race_indicator(chara_id));

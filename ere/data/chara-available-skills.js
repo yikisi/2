@@ -25,6 +25,11 @@ class CharaAvailableSkills {
     return this.obj;
   }
 
+  clear() {
+    this.obj = set(`skill:${this.id}:可习得技能`, []);
+    return this;
+  }
+
   remove(...skill_id) {
     this.obj = set(
       `skill:${this.id}:可习得技能`,

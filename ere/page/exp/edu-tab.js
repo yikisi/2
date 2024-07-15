@@ -73,7 +73,9 @@ module.exports = {
             content: out_of_train
               ? out_of_train_type[out_of_train - 1]
               : [
-                  train_time.length > 1 ? train_time + ' ｜ ' : '',
+                  train_time.length > 1
+                    ? `${train_time}${era.get(`cflag:${chara.id}:育成次数`) ? ` (第 ${era.get(`cflag:${chara.id}:育成次数`) + 1} 轮)` : ''} ｜ `
+                    : '',
                   '拥有 ',
                   {
                     content: era.get(`exp:${chara.id}:技能点数`),

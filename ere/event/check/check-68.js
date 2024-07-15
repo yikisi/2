@@ -163,7 +163,10 @@ module.exports = class extends CustomizedCheck {
       new KitaEduMarks().crazy_fan++;
       new CrazyFans().push(68);
     } else {
-      add_event(event_hooks.week_end, new EventObject(68, cb_enum.edu));
+      add_event(
+        event_hooks.week_end,
+        new EventObject(68, cb_enum.edu).set_arg(144),
+      );
     }
     return super.check_palace_and_get_aims();
   }

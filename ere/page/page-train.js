@@ -14,6 +14,8 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
+const { sort_list } = require('#/utils/list-utils');
+
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const chara_info_type = require('#/data/chara-info-type');
 const CharaSkills = require('#/data/chara-skills');
@@ -34,7 +36,10 @@ const {
   attr_names,
   time_cost,
 } = require('#/data/train-const');
-const { sort_list } = require('#/utils/list-utils');
+
+function get_discount(chara_id) {
+  return Math.min(era.get(`cflag:${chara_id}:育成次数`) * 0.015, 0.1);
+}
 
 module.exports = async () => {
   const train_list = era
@@ -43,7 +48,8 @@ module.exports = async () => {
   let flag_train = true,
     chara_id = era.get('flag:当前互动角色'),
     skill_control = new CharaSkills(chara_id),
-    index = train_list.indexOf(chara_id);
+    index = train_list.indexOf(chara_id),
+    discount = get_discount(chara_id);
 
   while (flag_train) {
     await era.clear();
@@ -336,11 +342,13 @@ module.exports = async () => {
           await select_target_chara(chara_info_type.train),
         );
         skill_control = new CharaSkills(chara_id);
+        discount = get_discount(chara_id);
         break;
       case 101:
       case 102:
         chara_id = train_list[ret === 101 ? --index : ++index];
         skill_control = new CharaSkills(chara_id);
+        discount = get_discount(chara_id);
         break;
       case 103:
         if (chara_id === 0 && skill_control.get().length >= 9) {
@@ -392,6 +400,7 @@ module.exports = async () => {
             Object.values(available_skills).map((e) =>
               e.forEach((s) => {
                 const skill = skills_dict[s];
+                const price = Math.floor(skill.price * (1 - discount));
                 buffer.push({
                   columns: [
                     {
@@ -411,11 +420,11 @@ module.exports = async () => {
                       : {
                           config: {
                             align: 'right',
-                            disabled: got_skills[s] || pt < skill.price,
+                            disabled: got_skills[s] || pt < price,
                             showAcc: got_skills[s] !== 1,
                             width: 8,
                           },
-                          content: `${skill.price} PT`,
+                          content: `${price} PT`,
                           type: 'button',
                         },
                   ],
@@ -471,7 +480,10 @@ module.exports = async () => {
                     : []),
                 ])
               ) {
-                pt = era.add(`exp:${chara_id}:技能点数`, -skill.price);
+                pt = era.add(
+                  `exp:${chara_id}:技能点数`,
+                  -Math.floor(skill.price * (1 - discount)),
+                );
                 get_skills_and_print_in_event(
                   chara_id,
                   [skill.id],
