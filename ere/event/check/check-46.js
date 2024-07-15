@@ -156,13 +156,17 @@ module.exports = class extends CustomizedCheck {
         );
       }
       switch (edu_weeks) {
-        //6月第四周 油桐花
+        // 6月第四周 油桐花
         case 24:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        //9月第二周 努力减肥的飞鹰子！
+        // 9月第二周 努力减肥的飞鹰子！
         case 34:
           add_event(event_hooks.week_end, event_obj_special);
+          break;
+        // todo 10月第四周 飞鹰子fight！
+        case 40:
+          add_event(event_hooks.week_start, event_obj_special);
           break;
         // 经典年1月第一周 新年
         case 47 + 1:
@@ -172,7 +176,7 @@ module.exports = class extends CustomizedCheck {
         case 47 + 6:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        //3月第四周 目标！皋月赏！
+        // 3月第四周 目标！皋月赏！
         case 47 + 12:
           add_event(event_hooks.week_start, event_obj_special);
           break;
@@ -184,7 +188,7 @@ module.exports = class extends CustomizedCheck {
         case 47 + 29:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        //8月第四周 夏季合宿 结束
+        // 8月第四周 夏季合宿 结束
         case 47 + 32:
           add_event(event_hooks.week_end, event_obj_special);
           break;
@@ -229,6 +233,10 @@ module.exports = class extends CustomizedCheck {
           add_event(event_hooks.week_end, event_obj_special);
           break;
         // 12月第三周 紧张
+        case 95 + 40:
+          add_event(event_hooks.week_end, event_obj_special);
+          break;
+        // 10月第四周 天空、大地、以及生活在这里的我们
         case 95 + 47:
           add_event(event_hooks.week_end, event_obj_special);
           break;
@@ -236,7 +244,6 @@ module.exports = class extends CustomizedCheck {
         case 95 + 48:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-
         // //奋斗的偶像！
         // case 25:
         //   if (

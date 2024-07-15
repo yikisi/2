@@ -553,6 +553,143 @@ module.exports = async function () {
     );
     await me.say_and_wait(`那么，就朝着梦想开始训练吧！`);
     await falcon.say_and_wait(`好！`);
+  } else if (edu_weeks === 95 + 40) {
+    await print_event_name(`天空、大地以及生活在这里的我们`, falcon);
+    await era.printAndWait(`公园`);
+    await era.printAndWait(`在飞鹰子的提议下，你们来到了公园的一处草坪上。`);
+    await era.printAndWait(
+      `转眼之间秋天已经过去一半了，一路上的行人也纷纷穿起了外套。`,
+    );
+    await me.say_and_wait(`飞鹰子不觉得冷吗？`);
+    await era.printAndWait(
+      `看着蹦蹦跳跳地在前方带路的飞鹰子，你实在忍不住好奇的向她询问。`,
+    );
+    await falcon.say_and_wait(`飞鹰子不觉得冷哦？`);
+    await era.printAndWait(`说起来也是，毕竟马娘比起人类体温更高一点。`);
+    await me.say_and_wait(`真是有点羡慕飞鹰子呢。`);
+    await falcon.say_and_wait(`训练员先生突然之间在说什么呢？`);
+    await me.say_and_wait(
+      `像飞鹰子这么开朗可爱的马娘偶像，作为训练员真是幸运。`,
+    );
+    await falcon.say_and_wait(
+      `诶~~？真是的！训练员先生突然之间这么说，飞鹰子。`,
+    );
+    await me.say_and_wait(`啊，到了。`);
+    await era.printAndWait(
+      `公园一处靠近湖边的草坪之上，随处可见的旅人与正在嬉戏的孩童。`,
+    );
+    await me.say_and_wait(`来湖边的游客比想象之中还多啊。`);
+    await era.printAndWait(
+      `你一边从带来的背包之中取出亲手制作的便当，一遍随口问道。`,
+    );
+    await falcon.say_and_wait(`来湖边的游客很大一部分都是情侣呢。`);
+    await era.printAndWait(`飞鹰子乖巧的坐在了铺好的毯子上看着你。`);
+    await me.say_and_wait(`也许在马推上作为著名的情侣打卡圣地而出名了吧。给。`);
+    await falcon.say_and_wait(`毕竟情侣们只有休息日才会有时间出来玩呢——`);
+    await era.printAndWait(`飞鹰子接过了准备好的胡萝卜蜂蜜特饮。`);
+    await falcon.say_and_wait(`......情侣吗？`, true);
+    await me.say_and_wait(`飞鹰子怎么想的呢？`);
+    await falcon.say_and_wait(`诶？`);
+    await era.printAndWait(
+      `被你看穿了的飞鹰子不小心用力过猛，盖子划过一条优美的弧线牢牢的嵌在了不远处的树干。`,
+    );
+    await falcon.say_and_wait(`......训练员先生看好了！呀啊！`);
+    await era.printAndWait(
+      `趁着你还没反应过来，飞鹰子飞奔向了盖子所在的大树。`,
+    );
+    await falcon.say_and_wait(`情侣吗？我和训练员先生`, true);
+    await era.printAndWait(
+      `还没反应过来的时候，飞鹰子飞奔向了盖子所在的大树\n\n。`,
+    );
+    await era.printAndWait(`小小的插曲结束后，两人重新坐了下来。`);
+    await era.printAndWait(
+      `你享用着飞鹰子亲手制作的便当，然后接过一旁递过来的饮料。`,
+    );
+    await era.printAndWait(
+      `顺着冰凉的水流划过喉咙，像是满足了一样打了一个饱嗝。`,
+    );
+    await me.say_and_wait(`嗯——稍微有点甜呢。`);
+    await falcon.say_and_wait(`毕竟是用草莓汁浇在了便当之上呢。`);
+    await falcon.say_and_wait(
+      `说起来，闪耀同学试吃的时候也给出了差不多的评价呢。`,
+    );
+    await era.printAndWait(
+      `如果是荣进闪耀在旁边指导的话，偏甜也是可以理解吧。`,
+    );
+    await me.say_and_wait(`原来是这样啊，毕竟是蛋糕——`);
+    await falcon.say_and_wait(`不对！这是飞鹰子自己想出来的！`);
+    await era.printAndWait(`声音突然变大的飞鹰子让周围的人视线都看了过来。`);
+    await falcon.say_and_wait(`啊，对不起。突然之间激动起来了。`);
+    await falcon.say_and_wait(`这样子可不像飞鹰子呢⭐哈哈哈。`);
+    await era.printAndWait(`意识到了什么，飞鹰子低着头脸红得几乎滴出水来。`);
+    era.printButton(`谢谢你，飞鹰子`, 1);
+    await era.input();
+    await era.printAndWait(`你轻轻抚摸着飞鹰子的小脑袋。`);
+    await falcon.say_and_wait(`飞鹰子已经不是小孩子了。`);
+    await era.printAndWait(
+      `虽然嘴巴上这么抗议着，但却没有激烈的反抗，就这样任凭你抚摸着。`,
+    );
+    await me.say_and_wait(`飞鹰子不太适应这样的场合吗？`);
+    await falcon.say_and_wait(
+      `虽然也没有那么在意别人的目光呢，不过还是多少有一点。`,
+    );
+    await falcon.say_and_wait(`......稍微有点在意训练员先生的评价呢。`);
+    await era.printAndWait(`最后的声音慢慢变得听不清了。`);
+    await me.say_and_wait(
+      `与舞台之上的飞鹰子相比，果然这样的飞鹰子也很可爱呢。`,
+    );
+    await me.say_and_wait(`飞鹰子闪耀的样子也很可爱。`);
+    await falcon.say_and_wait(`飞鹰子也没有想象之中那么闪耀呢。`);
+    await falcon.say_and_wait(
+      `遇到训练员先生之前，飞鹰子每天都在为偶像活动还有逼近死线的挂科奔波呢。`,
+    );
+    await falcon.say_and_wait(
+      `有的时候，在终于能闲下来休息时，总会忍不住想着。`,
+    );
+    await falcon.say_and_wait(`说不定飞鹰子走的路是错的呢。`);
+    await era.printAndWait(`凝视着手中茶杯的飞鹰子。你正打算开口安慰`);
+    await falcon.say_and_wait(`不过经过这段时间后，我也释然了呢。`);
+    await falcon.say_and_wait(
+      `像这样一直错误的道路上一路奔跑过来的，才是飞鹰子嘛！`,
+    );
+    await falcon.say_and_wait(`说起来，偶像就是这样才对吧？`);
+    era.printButton(`为其他人带来希望，引导更多的人？`, 1);
+    await era.input();
+    await falcon.say_and_wait(
+      `不对！是鼓励更多内心渴望走上这条道路的人，给予的勇气！`,
+    );
+    await falcon.say_and_wait(
+      `走上这条道路的人们，一定比飞鹰子更加聪明，更加努力，所以会更加的闪耀！`,
+    );
+    era.printButton(`只是缺少了这份勇气？`, 1);
+    await era.input();
+    await falcon.say_and_wait(`这就是飞鹰子为什么作为马娘偶像的原因！`);
+    await falcon.say_and_wait(
+      `正因为飞鹰子不太聪明，所以鼓起勇气帮助更多的人！`,
+    );
+    await falcon.say_and_wait(
+      `看到那些被飞鹰子的舞蹈感染到的马娘们走上飞鹰子走过的道路后。`,
+    );
+    await falcon.say_and_wait(`飞鹰子才会由衷的感到开心。`);
+    await falcon.say_and_wait(`就像是，被电视上的偶像所激励的我一样呢。`);
+    await era.printAndWait(
+      `聚精会神诉说着的飞鹰子，才意识到自己一直端着的茶水变凉了。`,
+    );
+    era.printButton(`飞鹰子很伟大呢。`, 1);
+    await era.input();
+    await falcon.say_and_wait(`才没有呢！飞鹰子也只是普通的马娘偶像罢了。`);
+    await falcon.say_and_wait(
+      `只是一个觉得这么做会很开心才去做的普通小马娘罢了。`,
+    );
+    await falcon.say_and_wait(`而且`);
+    await falcon.say_and_wait(
+      `不过只是一个连告白都不敢的最差劲的马娘偶像罢了。`,
+      true,
+    );
+    era.printButton(`而且？`, 1);
+    await era.input();
+    await falcon.say_and_wait(`诶嘿嘿⭐`);
+    await era.printAndWait(`之后的谈话便在湖泊染上第一缕金色的光辉后结束了。`);
   } else if (edu_weeks === 95 + 47) {
     await print_event_name(`迷茫少女`, falcon);
     await era.printAndWait(
