@@ -62,7 +62,7 @@ function handle_foreign_debuff(chara_id, language, loc, before_race) {
 async function check_new_activities(cur_round, in_team_list) {
   era.drawLine();
   const celebration = get_celebration(cur_round);
-  if (celebration) {
+  if (celebration && era.get('flag:当前回合数') > 1) {
     era.print([
       '本周有 ',
       { content: celebration, color: celebration_color },

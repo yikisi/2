@@ -164,6 +164,7 @@ module.exports = async () => {
     switch (ret) {
       case 1:
         if (await new_game()) {
+          era.set('global:新手教学', 1);
           await homepage();
         }
         break;
@@ -373,6 +374,7 @@ module.exports = async () => {
               '幽白書',
             ],
           ],
+          ['教学口上', ['雞雞']],
           ['特殊角色（临时）', '黑奴队长'],
           [[{ color: get_chara_color(3), content: '东海帝王' }], '天马闪光蹄'],
           [[{ color: get_chara_color(7), content: '黄金船' }], '雞雞'],

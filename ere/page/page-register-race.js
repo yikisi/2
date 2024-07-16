@@ -7,6 +7,7 @@ const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const GameGuides = require('#/event/game-guides');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -113,6 +114,7 @@ function generate_race_dict(
 }
 
 async function reg_race_page() {
+  await new GameGuides().office_register();
   const cur_round = era.get('flag:当前回合数') - 1,
     begin_round = cur_round - (cur_round % 4),
     team_list = sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(

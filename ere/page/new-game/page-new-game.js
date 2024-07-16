@@ -7,6 +7,8 @@ const sys_next_week = require('#/system/sys-next-week');
 const page_custom = require('#/page/new-game/page-custom');
 const print_set_page = require('#/page/new-game/page-setting');
 
+const GameGuides = require('#/event/game-guides');
+
 const { get_random_value } = require('#/utils/value-utils');
 
 const { player_sex_title } = require('#/data/ero/status-const');
@@ -143,6 +145,11 @@ module.exports = async () => {
 
           if (await print_set_page()) {
             return false;
+          }
+
+          if (era.get('flag:新手教学')) {
+            era.set('flag:新手教学', {});
+            new GameGuides().init();
           }
 
           if (await page_custom()) {

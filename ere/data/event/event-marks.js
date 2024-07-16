@@ -17,6 +17,11 @@ class EventMarks {
     Object.entries(this.obj).map((e) => !e[1] && delete this.obj[e[0]]);
   }
 
+  /** @param {number|string} hook */
+  check(...hook) {
+    return this.get(...hook) > 0;
+  }
+
   count() {
     return (
       Object.entries(this.obj)
@@ -27,8 +32,8 @@ class EventMarks {
   }
 
   /** @param {number|string} hook */
-  get(hook) {
-    return this.obj[hook] || 0;
+  get(...hook) {
+    return hook.reduce((p, c) => p + (this.obj[c] || 0), 0);
   }
 
   /** @param {number|string} hook */
@@ -39,7 +44,7 @@ class EventMarks {
 
   /** @param {number|string} hook */
   sub(hook) {
-    this.obj[hook] = Math.max(this.get(hook) - 1, 0);
+    this.obj[hook] = this.get(hook) - 1;
     if (!this.obj[hook]) {
       delete this.obj[hook];
     }

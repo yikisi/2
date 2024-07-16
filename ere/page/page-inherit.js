@@ -434,7 +434,14 @@ async function print_inherit_page() {
             config: { width: 8 },
           })),
           [
-            { content: '* 必须同时选中两个角色才能开始因子继承', type: 'text' },
+            {
+              content: [
+                '* 必须同时选中两个角色才能开始因子继承',
+                { isBr: true },
+                '** 被继承的角色在继承角色结束育成前无法重新育成！',
+              ],
+              type: 'text',
+            },
             {
               accelerator: 1000,
               config: {

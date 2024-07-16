@@ -9,6 +9,8 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const print_page_header = require('#/page/components/page-header');
 
+const GameGuides = require('#/event/game-guides');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry } = require('#/utils/list-utils');
 
@@ -42,6 +44,7 @@ async function print_rec_page() {
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了训练场……',
   ]);
+  await new GameGuides().recruit();
   flag_leave = await sys_get_random_event(event_hooks.recruit_start)();
   const flag_limit = sys_check_team_limit() >= 0;
   flag_recruit = !flag_leave;
@@ -191,6 +194,7 @@ async function print_rec_page() {
     await era.printAndWait([me.get_colored_name(), ' 离开了训练场……']);
     await sys_get_random_event(event_hooks.recruit_end)();
   }
+  await new GameGuides().recruit_end();
   era.set('flag:当前位置', location_enum.office);
 }
 
