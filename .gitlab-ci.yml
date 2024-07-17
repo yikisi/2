@@ -50,7 +50,8 @@ pages:
     - mkdir public
     - 7zz a base.7z ./ere ./csv RELEASE.md CHANGELOG.md
     - mv *.7z public/
-    - echo "$CI_COMMIT_TAG" > public/RELEASE
+    - VERSION=`cat csv/GameBase.csv | grep 'バージョン,'`
+    - echo ${VERSION#*,} > public/RELEASE
   artifacts:
     paths:
       - public
