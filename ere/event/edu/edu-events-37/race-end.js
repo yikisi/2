@@ -391,7 +391,11 @@ module.exports = async (hook, extra_flag) => {
     era.printButton('「等回去以后，一起来规划未来吧。」', 1);
     await era.input();
     await flash.say_and_wait('嗯！');
-  } else if (extra_flag.race === race_enum.tenn_sho && extra_flag.rank === 1) {
+  } else if (
+    extra_flag.race === race_enum.tenn_sho &&
+    extra_flag.rank === 1 &&
+    edu_weeks > 96
+  ) {
     await print_event_name('璀璨之秋 · 二', flash);
     const me = get_chara_talk(0);
     await say_by_passer_by_and_wait(

@@ -13,14 +13,15 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
  * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
  */
 module.exports = (handlers) => {
-  handlers[ero_hooks.go_on] = async (attacker, defender) =>
-    era.printAndWait([
+  handlers[ero_hooks.go_on] = async (attacker, defender) => {
+    await era.printAndWait([
       '【',
       attacker.get_colored_name(),
       ' 放弃了抵抗，任 ',
       defender.get_colored_name(),
       ' 施为……】',
     ]);
+  };
 
   handlers[ero_hooks.kiss] = async (attacker, defender, hook) => {
     await era.printAndWait([

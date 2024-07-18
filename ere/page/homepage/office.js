@@ -609,6 +609,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
   );
 
   let temp = await era.input();
+  era.drawLine();
   switch (temp) {
     case 100:
       flags.after_select =
@@ -732,7 +733,9 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 303:
       sys_handle_action(sys_get_move_cost(location_enum.clinic));
-      await page_clinic();
+      if (!(await sys_get_random_event(event_hooks.school_clinic)())) {
+        await page_clinic();
+      }
       break;
     case 304:
       sys_handle_action(

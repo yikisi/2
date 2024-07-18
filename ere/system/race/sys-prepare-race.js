@@ -418,7 +418,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
 
     // 由力量决定基础加速度
     uma.base.acceleration =
-      0.006 *
+      0.0006 *
       Math.sqrt(500 * uma.attrs[attr_enum.strength]) *
       mod_acceleration_adapt_ground[uma.adapts.ground] *
       mod_acceleration_adapt_distance[uma.adapts.distance];
