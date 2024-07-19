@@ -401,7 +401,7 @@ function sys_do_sex(attacker, defender, item) {
         damage.attacker += 20 * era.get(`talent:${defender.id}:凶器`);
         damage = change_cost(defender.id, attacker.id, part_enum.anal, damage);
       }
-      attack_extra_buff += 2 * era.get(`talent:${attacker.id}:淫臀`);
+      attack_extra_buff += 2 * (era.get(`talent:${attacker.id}:淫臀`) === 2);
       break;
     case part_enum.penis:
       switch (defender_part) {

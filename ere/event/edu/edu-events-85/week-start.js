@@ -727,7 +727,7 @@ module.exports = (handlers) => {
         me.get_colored_name(),
         ' 让 ',
         ruby.get_colored_name(),
-        ' 赶紧随便找个理由打法',
+        ' 赶紧随便找个理由打发',
         ruby.sex,
         '走。',
       ]);

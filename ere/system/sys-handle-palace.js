@@ -12,6 +12,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaAvailableGenes = require('#/data/chara-available-genes');
 const CharaSkills = require('#/data/chara-skills');
 const {
+  adaptability_colors,
   attr_change_colors,
   buff_colors,
   sex_colors,
@@ -99,6 +100,12 @@ function sys_handle_palace(chara_id) {
   if (races.length >= 30) {
     titles.push({ n: '铁马娘子', c: buff_colors[1] });
     g1_count && titles.push({ n: '黄金旅程', c: buff_colors[1] });
+  }
+  if (
+    g1_count >= 10 &&
+    races.findIndex((e) => e.pop !== 1 || e.rank !== 1) === -1
+  ) {
+    titles.push({ n: '傲视一切', c: adaptability_colors.at(-1) });
   }
   if (
     era.get(`talent:${chara_id}:童贞`) === vp_status_enum.virgin &&

@@ -50,7 +50,6 @@ module.exports = async () => {
     flag_storage = true;
   while (flag_storage) {
     let line_count = era.printMultiColumns([
-      { type: 'divider' },
       {
         content:
           buffer.length > 0
