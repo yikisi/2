@@ -103,7 +103,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     uma.race.conditionParams.is_lastspurt = 0;
     uma.race.conditionParams.is_other_character_activate_advantage_skill = 0;
     uma.race.conditionParams.is_temptation = 0;
-    uma.race.conditionParams.is_used_skill_id = 0;
+    uma.race.conditionParams.is_used_skill_id = [];
     uma.race.conditionParams.lastspurt = 0;
     uma.race.conditionParams.order_rate_in20_continue = 1;
     uma.race.conditionParams.order_rate_in80_continue = 1;
@@ -341,7 +341,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
                   skill.data.ability_values[i][j];
                 break;
               case ability_type_enum.RunningStyleExOonige:
-                uma.race.conditionParams.is_used_skill_id = 202051;
+                uma.race.conditionParams.is_used_skill_id.push(202051);
                 break;
               case ability_type_enum.TemptationPer:
                 temptation_prob += skill.data.ability_values[i][j];
@@ -373,7 +373,8 @@ function sys_prepare_race(list_chara, team_list, race_info) {
 
     // 01234：大逃、逃先差追
     const style_index =
-      uma.style + (uma.race.conditionParams.is_used_skill_id !== 202051);
+      uma.style +
+      (uma.race.conditionParams.is_used_skill_id.indexOf(202051) !== -1);
     //调取当前跑法在赛中各阶段的目标速度及加速度倍率
     uma.factorPhase.vStyle = mod_velocity_style[style_index];
     uma.factorPhase.aStyle = mod_acceleration_style[style_index];
@@ -452,7 +453,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     // 位置意识
     switch (uma.style) {
       case 0:
-        if (uma.race.conditionParams.is_used_skill_id === 202051) {
+        if (uma.race.conditionParams.is_used_skill_id.indexOf(202051) !== -1) {
           uma.base.loc_mind_nige_diff_speed_up_nige = 9 * loc_mind_base_diff;
           uma.base.loc_mind_nige_diff_speed_up_other = 9 * loc_mind_base_diff;
           uma.base.loc_mind_nige_diff_over_take = 12.5 * loc_mind_base_diff;
