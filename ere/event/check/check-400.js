@@ -15,6 +15,7 @@ const SSEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-400');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const SSLifeMarks = require('#/data/event/life-event-marks/life-event-marks-400');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -72,6 +73,7 @@ module.exports = class extends CustomizedCheck {
   check_next_week() {
     const edu_weeks = era.get('cflag:400:育成回合计时');
     if (
+      era.get('cflag:400:招募状态') === recruit_flags.yes &&
       !era.get('flag:回合爱慕惩罚') &&
       era.get('love:400') === 74 &&
       edu_weeks > 47 + race_infos[race_enum.belm_sta].date &&

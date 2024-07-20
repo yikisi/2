@@ -30,7 +30,11 @@ const {
   get_trainer_train_buff,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { common_skills, skills_dict } = require('#/data/race/skill/skill-const');
+const {
+  chara_skill_dict,
+  common_skills,
+  skills_dict,
+} = require('#/data/race/skill/skill-const');
 const {
   adaptability_names,
   attr_enum,
@@ -358,6 +362,11 @@ module.exports = async () => {
           if (await select_yes_or_no('要使用 100 点技能点数重置技能吗？')) {
             era.add('exp:0:技能点数', -100);
             skill_control.clear();
+            if (era.get('cflag:0:模版角色') > 0) {
+              chara_skill_dict[era.get('cflag:0:模版角色')].forEach((s) =>
+                get_skills_and_print_in_event(0, [s], skill_control, false),
+              );
+            }
           }
         } else {
           while (flag_skill) {

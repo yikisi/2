@@ -145,16 +145,29 @@ class CustomizedMec {
     return 0;
   }
 
-  set_callname() {
-    let callname;
-    if (!era.get(`cflag:${this.id}:父方角色`)) {
-      callname = '爸爸';
-    } else if (!era.get(`cflag:${this.id}:母方角色`)) {
-      callname = '妈妈';
-    } else {
-      callname = '训练员' + get_chara_talk(0).get_adult_sex_title();
+  set_callname_from_src() {
+    const my_src_chara = era.get('cflag:0:模版角色');
+    if (my_src_chara > 0 && era.get(`callname:${this.id}`)[my_src_chara]) {
+      era.set(
+        `callname:${this.id}:0`,
+        era.get(`callname:${this.id}:${my_src_chara}`),
+      );
+      return true;
     }
-    era.set(`callname:${this.id}:0`, callname);
+  }
+
+  set_callname() {
+    if (!this.set_callname_from_src()) {
+      let callname;
+      if (!era.get(`cflag:${this.id}:父方角色`)) {
+        callname = '爸爸';
+      } else if (!era.get(`cflag:${this.id}:母方角色`)) {
+        callname = '妈妈';
+      } else {
+        callname = '训练员' + get_chara_talk(0).get_adult_sex_title();
+      }
+      era.set(`callname:${this.id}:0`, callname);
+    }
   }
 
   /**

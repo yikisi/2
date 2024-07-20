@@ -29,7 +29,7 @@ build:
     - cp -r ../csv ./$GAME_ALL_DIR/game/
     - cp -r ../res ./$GAME_ALL_DIR/game/
     - 7zz a -pera $GAME_ALL_ZIP ./$GAME_ALL_DIR
-    - 'curl --fail-with-body --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${GAME_ALL_ZIP} "${GAME_ZIP_URL}"'
+    - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${GAME_ALL_ZIP} "${GAME_ZIP_URL}"'
 
 pages:
   stage: deploy
@@ -55,7 +55,6 @@ release:
     - docker
   script:
     - echo "Releasing..."
-    - echo $ASSET_FILE_URL
   release:
     tag_name: $CI_COMMIT_TAG
     name: 'EraUma $CI_COMMIT_TAG'

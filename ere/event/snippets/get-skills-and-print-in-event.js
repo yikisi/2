@@ -9,9 +9,10 @@ const { skills_dict } = require('#/data/race/skill/skill-const');
  * @param {number} chara_id
  * @param {number[]} skills
  * @param {CharaSkills} [skill_control]
+ * @param {boolean} [shown]
  * @returns {boolean}
  */
-function get_skills_and_print_in_event(chara_id, skills, skill_control) {
+function get_skills_and_print_in_event(chara_id, skills, skill_control, shown) {
   let ret_flag = false;
   if (skills instanceof Array) {
     const _control = skill_control || new CharaSkills(chara_id),
@@ -34,7 +35,7 @@ function get_skills_and_print_in_event(chara_id, skills, skill_control) {
       });
     _control.remove(...to_remove);
     const got = _control.add(...new_skills);
-    if (got.length > 0) {
+    if (got.length > 0 && shown !== false) {
       const buffer = [];
       got.forEach((e) => buffer.push(...skills_dict[e].get_colored_name()));
       era.print([

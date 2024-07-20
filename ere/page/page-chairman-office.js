@@ -150,7 +150,8 @@ async function page_chairman_office() {
                       (era.get(`cflag:${chara_id}:随机招募`) ||
                         era.get(`staticcflag:${chara_id}:随机招募`)) &&
                       era.get(`cflag:${chara_id}:招募状态`) !==
-                        recruit_flags.yes,
+                        recruit_flags.yes &&
+                      era.get('cflag:0:模版角色') !== chara_id,
                   );
                 if (
                   era.get('cflag:302:招募状态') !== recruit_flags.yes &&
