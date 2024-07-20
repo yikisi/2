@@ -1171,15 +1171,31 @@ handlers[event_hooks.school_rooftop] = async (
       await era.printAndWait(
         `尽管语气与之前相比更加轻快，但那份刺耳的刻意感却让你感到了难过。`,
       );
-      era.printButton(`不，没什么。`, 1);
+      era.printButton(`......丸善斯基。`, 1);
       era.printButton(`我有个问题想问`, 2);
-      await era.input();
-      await era.printAndWait(
-        `丸善斯基恍若置身于风暴之中，对你的问题充耳不闻。`,
-      );
-      await era.printAndWait(
-        `偶然间与匆匆离开的丸善斯基对视，却看到了她失神的眼眸，（玩家名）一时之间不知该如何是好，只能目送对方离去。`,
-      );
+      const ret2 = await era.input();
+      if (ret2 === 1) {
+        await chara_talk.say_and_wait(`训练员君，可以借一下你的肩膀吗？`);
+        await era.printAndWait(
+          `你无言的借过肩膀，丸善斯基紧紧抱住了你的手臂。`,
+        );
+        await era.printAndWait(
+          `欢声笑语的背后是终于解脱的枷锁与随之而来的迷茫，而两人只是沉默的看着发生的一切。`,
+        );
+      } else {
+        await me.say_and_wait(`请等一下，丸善斯基。`);
+        await chara_talk.say_and_wait(`抱歉，训练员君。`);
+        await chara_talk.say_and_wait(
+          `这里的声音太大，我恐怕听不清你问的问题。`,
+        );
+        await chara_talk.say_and_wait(`有什么问题，可以回去再说吗？`);
+        await era.printAndWait(
+          `丸善斯基恍若置身于风暴之中，对你的问题充耳不闻。`,
+        );
+        await era.printAndWait(
+          `偶然间与匆匆离开的丸善斯基对视，却看到了她失神的眼眸，（玩家名）一时之间不知该如何是好，只能目送对方离去。`,
+        );
+      }
     }
     event_marks.mygo++;
     event_marks.wind--;

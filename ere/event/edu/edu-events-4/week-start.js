@@ -929,7 +929,6 @@ module.exports = async function (hook, _, event_object) {
           era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
         }我约会吗?`,
       );
-      //好感+5 爱慕+3
       await chara_talk.say_and_wait('这样的话不好好计划可不行呢');
       await chara_talk.say_and_wait('那么就开着小塔');
       era.printButton(`既然是约会的话不如一起走过去吧`, 1);
@@ -1444,8 +1443,13 @@ module.exports = async function (hook, _, event_object) {
     await me.say_and_wait(`就这样一直等到她醒来吧。`, true);
     await era.printAndWait(`这么想着，你闭上了眼等待着天亮的时候。`);
     event_marks.wind++;
-    wait_flag =
-      get_attr_and_print_in_event(4, [0, 20, 0, 0, 0], 0) || wait_flag;
+    if (ret1 === 1) {
+      wait_flag =
+        get_attr_and_print_in_event(4, [0, 20, 0, 20, 0], 0) || wait_flag;
+    } else {
+      wait_flag =
+        get_attr_and_print_in_event(4, [20, 0, 20, 0, 0], 0) || wait_flag;
+    }
   } else if (edu_weeks === 47 + 29) {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
@@ -1726,10 +1730,11 @@ module.exports = async function (hook, _, event_object) {
       get_attr_and_print_in_event(4, [20, 0, 0, 0, 0], undefined) || wait_flag;
     era.set('cflag:4:节日事件标记', 0);
   } else if (edu_weeks === 47 + 31) {
-    if (era.get('flag:当前位置') !== location_enum.beach) {
-      if (era.get('cflag:4:位置') !== era.get('cflag:0:位置')) {
-        add_event(event_hooks.week_start, event_object);
-      }
+    if (
+      era.get('cflag:0:位置') !== location_enum.beach ||
+      era.get('cflag:4:位置') !== era.get('cflag:0:位置')
+    ) {
+      add_event(event_hooks.week_start, event_object);
       return;
     }
     await print_event_name('抉择', chara_talk);

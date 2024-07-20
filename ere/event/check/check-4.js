@@ -155,6 +155,7 @@ module.exports = class extends CustomizedCheck {
         case 47 + 7:
           add_event(event_hooks.week_start, event_obj_special);
           break;
+        // todo 4月2日 粉丝感谢祭
         // 5月第二周 晚上好，是丸善斯基哦(已完成) wind +-
         case 47 + 16:
           add_event(event_hooks.week_end, event_obj_special);
@@ -163,7 +164,7 @@ module.exports = class extends CustomizedCheck {
         case 47 + 17:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 8月第一周 夏季合宿 (已完成) wind = 9
+        // 8月第一周 夏季合宿开始 (已完成) wind = 9
         case 47 + 29:
           add_event(event_hooks.week_start, event_obj_special);
           break;
@@ -177,6 +178,10 @@ module.exports = class extends CustomizedCheck {
           break;
         //8月第四周 夏季合宿结束 (已完成) wind = 12
         case 47 + 32:
+          add_event(event_hooks.week_end, event_obj_special);
+          break;
+        //9月第一周 抉择 (已完成) wind = 11
+        case 47 + 33:
           add_event(event_hooks.week_end, event_obj_special);
           break;
         //9月第二周 无风带（已完成）
@@ -255,7 +260,7 @@ module.exports = class extends CustomizedCheck {
           }
           break;
         // 6月第三周 少女的忧郁（上）
-        case 47 + 25:
+        case 47 + 21:
           if (
             check_aim_race(
               era.get('cflag:4:育成成绩'),
@@ -269,7 +274,7 @@ module.exports = class extends CustomizedCheck {
           }
           break;
         // 6月第四周 少女的忧郁（下）wind = 8
-        case 47 + 26:
+        case 47 + 22:
           if (
             check_aim_race(
               era.get('cflag:4:育成成绩'),
@@ -292,14 +297,15 @@ module.exports = class extends CustomizedCheck {
       check_aim_race(races, race_enum.toky_yus, 3, 1) &&
       check_aim_race(races, race_enum.sank_hai, 3, 1) &&
       check_aim_race(races, race_enum.tenn_sho, 3, 1) &&
-      event_marks.wind >= 14 &&
-      event_marks.wind <= 18
+      event_marks.wind === 20
     ) {
       new MaEduMarks().fall_heaven++;
     } else if (
       check_aim_race(races, race_enum.toky_yus, 3, 1) &&
       check_aim_race(races, race_enum.sank_hai, 3, 1) &&
-      check_aim_race(races, race_enum.tenn_sho, 3, 1)
+      check_aim_race(races, race_enum.tenn_sho, 3, 1) &&
+      event_marks.wind >= 14 &&
+      event_marks.wind <= 18
     ) {
       new MaEduMarks().gentle_wind++;
     } else if (check_aim_race(races, race_enum.sank_hai, 3, 1)) {

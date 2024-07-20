@@ -54,9 +54,6 @@ module.exports = async (hook) => {
       await era.printAndWait(
         `直到有一天,在自助餐厅聊天的时候,${chara_self_name1}向${chara_talk.name}询问有关恋爱的话题.`,
       );
-      await era.printAndWait(
-        `直到有一天,在自助餐厅聊天的时候,${chara_self_name1}向${chara_talk.name}询问有关恋爱的话题.`,
-      );
       await chara_talk.say_and_wait(`......原来是这样吗,谢谢你,小重炮`);
       era.println();
       await era.printAndWait(`${chara_talk.name}意识到了自己对训练员的好感.`);

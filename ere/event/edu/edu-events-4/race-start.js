@@ -148,8 +148,8 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `${me.name}将这份不安深深的埋进了心底,看着爱马走向了赛场`,
     );
-  } else if (extra_flag.race === race_enum.radi_shi && edu_weeks < 95) {
-    await print_event_name(`皐月賞前・`, chara_talk);
+  } else if (extra_flag.race === race_enum.sats_sho && edu_weeks < 95) {
+    await print_event_name(`皐月賞前・再一次`, chara_talk);
     await era.printAndWait(`比赛开始前·发布会上`);
     await say_by_passer_by(`记者A`, `非常荣幸能采访到丸善斯基小姐。`);
     await say_by_passer_by(`记者A`, `请问您这次的目标也是取得皋月赏的胜利吗？`);
@@ -217,7 +217,7 @@ module.exports = async (hook, extra_flag) => {
     );
     await era.printAndWait(`${chara_talk.name}做好准备后，走向了地下通道。`);
     await me.say_and_wait(`我也差不多该去观众席了。`);
-  } else if (extra_flag.race === race_enum.tana_sho && edu_weeks < 95) {
+  } else if (extra_flag.race === race_enum.radi_shi && edu_weeks < 95) {
     await print_event_name('日经广播赏前・为了何人的奔跑', chara_talk);
     await era.printAndWait(`训练室中`);
     await era.printAndWait(
