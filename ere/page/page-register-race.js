@@ -126,7 +126,7 @@ async function reg_race_page() {
     ),
     year_begin = Math.floor(cur_round / 48) * 48;
   let chara_id = era.get('flag:当前互动角色'),
-    chara_talk = get_chara_talk(chara_id),
+    chara = get_chara_talk(chara_id),
     registered_race = sys_reg_race(chara_id).curr,
     dict = generate_race_dict(
       chara_id,
@@ -156,7 +156,7 @@ async function reg_race_page() {
         { type: 'divider' },
         {
           config: { align: 'center' },
-          content: ['为 ', chara_talk.get_colored_name(), ' 报名下一场比赛'],
+          content: ['为 ', chara.get_colored_name(), ' 报名下一场比赛'],
           type: 'text',
         },
       ],
@@ -273,10 +273,14 @@ async function reg_race_page() {
             {
               content: [
                 '* ',
-                chara_talk.get_colored_name(),
-                ' 很关注显示为',
-                { color: el_danger_color, content: '红色' },
-                '的比赛……',
+                chara.get_colored_name(),
+                ...(new RaceHistory(chara.id).check_begin()
+                  ? [
+                      ' 很关注显示为',
+                      { color: el_danger_color, content: '红色' },
+                      '的比赛……',
+                    ]
+                  : [' 需要先在下半年的出道战出道才能参加其他比赛……']),
                 { isBr: true },
                 '** 参加带有星号(*)后缀的比赛可能会有特殊的事情发生……',
                 { isBr: true },
@@ -284,11 +288,10 @@ async function reg_race_page() {
                   ? [
                       '*** 带有🎤后缀的比赛会开设大舞台，参加能够获得更多的声望……',
                       { isBr: true },
-                      '**** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
+                      '*',
                     ]
-                  : [
-                      '*** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
-                    ]),
+                  : []),
+                '*** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
               ],
               type: 'text',
             },
@@ -345,7 +348,7 @@ async function reg_race_page() {
       flag_race_reg = false;
     } else if (ret >= 1000) {
       chara_id = ret - 1000;
-      chara_talk = get_chara_talk(chara_id);
+      chara = get_chara_talk(chara_id);
       registered_race = sys_reg_race(chara_id).curr;
       dict = generate_race_dict(
         chara_id,

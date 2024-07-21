@@ -82,7 +82,7 @@ async function sys_rape_in_sleeping(chara_id, supporter) {
   }
   await end_ero_and_show_result(wake_up);
   era.endTrain();
-  era.set('status:0:熬夜', 1);
+  era.set('status:0:熬夜', 1 - era.get('status:0:马跳S'));
   era.set(`status:${chara_id}:熬夜`, 1);
   sys_like_chara(chara_id, 0, 25, false);
   if (supporter) {
