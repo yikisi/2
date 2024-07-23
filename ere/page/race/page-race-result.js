@@ -19,7 +19,9 @@ const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'],
     radius: 0,
     responsive: true,
   },
-  record_time_window = 5;
+  skill_record_time_window = 5,
+  report_record_time_window = 15,
+  max_records_num = 5;
 
 /**
  * @param {PseudoUma[]} contestants
@@ -66,20 +68,28 @@ async function page_race_result(contestants, info) {
       timer = 0;
 
     while (flag_result && index < result.dynamic_table.length) {
+      let report_count = max_records_num,
+        skill_count = max_records_num;
       (index ? era.replaceInColRows : era.printInColRows)(
         ...result.dynamic_table[index],
         [{ content: [{ isBr: true }], type: 'text' }],
         {
           columns: result.buffer.report.filter(
-            (e) => timer >= e.timer && timer < e.timer + record_time_window,
+            (e) =>
+              timer >= e.timer &&
+              timer < e.timer + report_record_time_window &&
+              report_count-- > 0,
           ),
-          config: { width: 12 },
+          config: { width: 16 },
         },
         {
           columns: result.buffer.skill.filter(
-            (e) => timer >= e.timer && timer < e.timer + record_time_window,
+            (e) =>
+              timer >= e.timer &&
+              timer < e.timer + skill_record_time_window &&
+              skill_count-- > 0,
           ),
-          config: { width: 12 },
+          config: { width: 8 },
         },
       );
       await era.delay(interval);
@@ -111,21 +121,7 @@ async function page_race_result(contestants, info) {
   const labels = new Array(result.statistics.loc[0].data.length)
       .fill(0)
       .map((_, i) => get_timer_record(i)),
-    rows_num = Math.floor(result.buffer.report.length / 2),
     speed_min = (22 - info.span / 1000) * 0.85;
-  let result_reports = [];
-  for (let i = 0; i < rows_num; ++i) {
-    result_reports.push(
-      result.buffer.report[i],
-      result.buffer.report[i + rows_num],
-    );
-  }
-  result_reports = result_reports
-    .filter((e) => e)
-    .map((e) => {
-      e.config.width = 12;
-      return e;
-    });
   while (flag_charts > 0) {
     await era.clear();
     era.setAlign('center');
@@ -335,7 +331,7 @@ async function page_race_result(contestants, info) {
               type: 'text',
             },
           ],
-          { columns: result_reports, config: { width: 16 } },
+          { columns: result.buffer.report, config: { width: 16 } },
           { columns: result.buffer.skill, config: { width: 8 } },
         );
     }

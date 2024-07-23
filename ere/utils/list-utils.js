@@ -80,6 +80,37 @@ module.exports = {
     }
     return sort_list(ret, (x) => x, true).map((i) => list[i]);
   },
+  /**
+   * @template T
+   * @param {T[]} list
+   * @param {(T)=>number} order_by
+   * @returns {T}
+   */
+  get_extremum_entry(list, order_by) {
+    if (list.length <= 1) {
+      return list[0];
+    }
+    const _list = list.map((v) => {
+      return {
+        val: v,
+        orderBy: order_by(v),
+      };
+    });
+    let max_entry = _list[0],
+      min_entry = _list[0],
+      max_val = max_entry.orderBy,
+      min_val = min_entry.orderBy;
+    for (let i = 1; i < _list.length; ++i) {
+      if (_list[i].orderBy > max_val) {
+        max_entry = _list[i];
+        max_val = max_entry.orderBy;
+      } else if (_list[i].orderBy < min_val) {
+        min_entry = _list[i];
+        min_val = min_entry.orderBy;
+      }
+    }
+    return { max: max_entry.val, min: min_entry.val };
+  },
   get_random_entry,
   /**
    * @param {*[]} list

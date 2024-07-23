@@ -953,7 +953,7 @@ function sub_simulate_skill(
             skill.aims[i] = [];
             skill.values[i] = [];
           }
-          buffer.skill.push(
+          buffer.skill.unshift(
             get_skill_record(uma, skill.data.id, params.timer_record, timer),
           );
           switch (uma.race.conditionParams.phase) {

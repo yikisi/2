@@ -6,6 +6,27 @@ const fron_cols = 4,
   progress_width = 24 - 10 - 2 * fron_cols - 1,
   timer_unit = Math.floor(1000 / frame_rate) / 1000;
 
+/**
+ * @param {string|array} message
+ * @param {string} [timer_record]
+ * @param {number} [timer]
+ */
+function get_event_record(message, timer_record, timer) {
+  const _content = message instanceof Array ? message : [message];
+  return {
+    config: { align: 'left' },
+    content: [
+      ...(timer_record ? [timer_record, ' '] : []),
+      { content: '解说', fontWeight: 'bold' },
+      '「',
+      ..._content,
+      '」',
+    ],
+    timer,
+    type: 'text',
+  };
+}
+
 module.exports = {
   /**
    * @param {number} timer
@@ -57,12 +78,33 @@ module.exports = {
       }
     }
   },
+  get_event_record,
   /**
    * @param {RaceLane} lane
    * @returns {string}
    */
   get_lane_name(lane) {
     return `${lane.is_last ? '终' : lane.index}${lane.is_curve ? '弯' : '直'}`;
+  },
+  /**
+   * @param {PseudoUma} uma
+   * @param {number} skill_id
+   * @param {string} timer_record
+   * @param {number} timer
+   */
+  get_skill_record(uma, skill_id, timer_record, timer) {
+    return {
+      config: { align: 'right' },
+      content: [
+        ...skills_dict[skill_id].get_colored_name(),
+        ' ',
+        { color: uma.color, content: uma.name, fontWeight: 'bold' },
+        ' ',
+        timer_record,
+      ],
+      timer,
+      type: 'text',
+    };
   },
   /**
    * @param {number[]} fron_list
@@ -199,26 +241,6 @@ module.exports = {
     const seconds = timer % 60,
       minutes = Math.floor(timer / 60);
     return `${minutes ? `${minutes}'` : ''}${minutes ? `${seconds.toString().padStart(2, '0')}` : seconds.toFixed(1)}"`;
-  },
-  /**
-   * @param {PseudoUma} uma
-   * @param {number} skill_id
-   * @param {string} timer_record
-   * @param {number} timer
-   */
-  get_skill_record(uma, skill_id, timer_record, timer) {
-    return {
-      config: { align: 'right' },
-      content: [
-        ...skills_dict[skill_id].get_colored_name(),
-        ' ',
-        { color: uma.color, content: uma.name, fontWeight: 'bold' },
-        ' ',
-        timer_record,
-      ],
-      timer,
-      type: 'text',
-    };
   },
   progress_width,
   screen_size: 8,

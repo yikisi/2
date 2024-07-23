@@ -4,6 +4,7 @@ const {
   add_timer,
   fron_cols,
   get_bashin_desc,
+  get_event_record,
   get_lane_name,
   get_skill_record,
   get_table_header,
@@ -14,11 +15,17 @@ const {
 } = require('#/system/race/snippets');
 const sub_simulate_skill = require('#/system/race/sub-simulate-skill');
 
-const { median, sort_list } = require('#/utils/list-utils');
+const {
+  get_extremum_entry,
+  get_random_entry,
+  median,
+  sort_list,
+} = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const { ability_type_enum } = require('#/data/race/model/uma-skill');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 const {
   frame_rate,
   loc_mind_multiply_velocity_ideal,
@@ -30,6 +37,12 @@ const {
   start_velocity,
 } = require('#/data/race/race-sim-const');
 const { attr_enum } = require('#/data/train-const');
+
+/** @type {(string|array)[][]} */
+const beginning_reports = [
+  ['赛马娘请入闸……', '全部马娘准备妥当……', '准备……', '一开闸！'],
+  ['赛马娘准备好……', '随时预备起步……', '预备……', '一起步！'],
+];
 
 /**
  * @param {PseudoUma} uma
@@ -89,25 +102,46 @@ function check_nige_loc_mind_ex_mode(uma, i, l) {
  * @param {RaceInfo} race_info
  */
 function sys_sim_race(list_chara, race_info) {
-  const current = new Date().getTime(),
+  const beginning_report = get_random_entry(beginning_reports),
+    current = new Date().getTime(),
     count_uma = list_chara.length,
+    top_pop = list_chara.find((e) => e.pop[0] === 1),
+    top_pop_message = [
+      '第 1 人气，',
+      { content: top_pop.name, color: top_pop.color, fontWeight: 'bold' },
+      ' 今天看上去干劲',
+      top_pop.motivation > 0
+        ? '满满'
+        : top_pop.motivation < 0
+          ? '不是很好'
+          : '似乎一般',
+      '！',
+    ],
+    fron_header = new Array(Math.floor(race_info.span / 200) - 1)
+      .fill(0)
+      .map((_, i) => (race_info.span % 200) + (i + 1) * 200),
+    fron_record_index = list_chara.map(() => 0),
+    fron_records = list_chara.map(() => {
+      return new Array(Math.floor(race_info.span / 200)).fill('');
+    }),
+    has_final_corner = race_info.lanes.find((e) => e.is_curve && e.is_last),
+    message_buffer = [],
     mod_stamina_cost_mess =
       race_info.ground === RaceInfo.ground_enum.grass
         ? mod_stamina_cost_mess_grass[race_info.mess]
         : mod_stamina_cost_mess_dirt[race_info.mess],
-    has_final_corner = race_info.lanes.find((e) => e.is_curve && e.is_last),
-    fron_records = list_chara.map(() => {
-      return new Array(Math.floor(race_info.span / 200)).fill('');
-    }),
-    fron_record_index = list_chara.map(() => 0),
-    fron_header = new Array(Math.floor(race_info.span / 200) - 1)
-      .fill(0)
-      .map((_, i) => (race_info.span % 200) + (i + 1) * 200);
-  let flag_race_phase = 0;
-  printInColRows([
-    { type: 'divider' },
-    { content: '选手检查蹄铁……', type: 'text' },
-  ]);
+    race_message =
+      race_infos.indexOf(race_info) === race_enum.toky_yus
+        ? ['赛马娘一生一度的德比，马上就要决出赢家了。']
+        : [
+            '在这 ',
+            race_info.get_colored_name(),
+            ' 的赛场上，各位赛马娘也会全力以赴为大家带来梦想。',
+          ];
+  let flag_race_phase = 1;
+  message_buffer.push(get_event_record(race_message));
+  printInColRows([{ type: 'divider' }, ...message_buffer]);
+  beginning_report.unshift(top_pop_message);
 
   const start_delay = new Array(count_uma).fill(0);
   const statistics = {
@@ -129,19 +163,19 @@ function sys_sim_race(list_chara, race_info) {
       }))),
   );
 
-  const lane = get_lane_name(race_info.lanes[0]),
-    slope = race_info.slopes[0]?.start === 0 ? race_info.slopes[0].slope : 0,
-    loc_mind_end = (race_info.span * 10) / 24;
-
   dynamic_table.push([
     get_table_header(
       fron_header.slice(0, fron_cols),
-      '0"',
+      '0.0"',
       0,
       race_info.span,
       false,
     ),
   ]);
+
+  const lane = get_lane_name(race_info.lanes[0]),
+    slope = race_info.slopes[0]?.start === 0 ? race_info.slopes[0].slope : 0,
+    loc_mind_end = (race_info.span * 10) / 24;
 
   // 出闸
   list_chara.forEach((uma) => {
@@ -155,7 +189,7 @@ function sys_sim_race(list_chara, race_info) {
         return true;
       }
       start_delay[uma.index_race] *= s.data.ability_values[0];
-      buffer.skill.push(get_skill_record(uma, s.data.id, '0"', 0));
+      buffer.skill.unshift(get_skill_record(uma, s.data.id, '0.0"', 0));
       uma.race.conditionParams.activate_count_all++;
       uma.race.conditionParams.activate_count_start++;
     });
@@ -195,6 +229,27 @@ function sys_sim_race(list_chara, race_info) {
       }),
     );
   });
+
+  if (list_chara.findIndex((e) => e.race.conditionParams.is_badstart) === -1) {
+    buffer.report.unshift(get_event_record('所有马娘平排出闸！', '0.0"', 0));
+  } else {
+    const { max, min } = get_extremum_entry(
+      list_chara,
+      (e) => start_delay[e.index_race],
+    );
+    buffer.report.unshift(
+      get_event_record(
+        [
+          { color: max.color, content: max.name, fontWeight: 'bold' },
+          ' 首先跑出！',
+          { color: min.color, content: min.name, fontWeight: 'bold' },
+          Math.random() < 0.5 ? ' 出闸慢了！' : ' 落后了！',
+        ],
+        '0.0"',
+        0,
+      ),
+    );
+  }
 
   const list_finished = [];
   let flag_race = true,
@@ -367,48 +422,13 @@ function sys_sim_race(list_chara, race_info) {
     );
 
     if (
-      list_in_race[0].race.conditionParams.distance_diff_rate >=
+      list_in_race[0].race.conditionParams.distance_rate >
       20 * flag_race_phase
     ) {
-      switch (flag_race_phase++) {
-        case 0:
-          replaceInColRows([
-            { type: 'divider' },
-            {
-              content: '选手检查蹄铁……正在检查跑道……',
-              type: 'text',
-            },
-          ]);
-          break;
-        case 1:
-          replaceInColRows([
-            { type: 'divider' },
-            {
-              content: '选手检查蹄铁……正在检查跑道……正在检查马闸……',
-              type: 'text',
-            },
-          ]);
-          break;
-        case 2:
-          replaceInColRows([
-            { type: 'divider' },
-            {
-              content:
-                '选手检查蹄铁……正在检查跑道……正在检查马闸……正在检查令枪……',
-              type: 'text',
-            },
-          ]);
-          break;
-        case 3:
-          replaceInColRows([
-            { type: 'divider' },
-            {
-              content:
-                '选手检查蹄铁……正在检查跑道……正在检查马闸……正在检查令枪……选手入闸……',
-              type: 'text',
-            },
-          ]);
-      }
+      message_buffer.push(
+        get_event_record(beginning_report[flag_race_phase++ - 1]),
+      );
+      replaceInColRows([{ type: 'divider' }, ...message_buffer]);
     }
 
     list_in_race.forEach((uma, i, l) => {
@@ -653,14 +673,8 @@ function sys_sim_race(list_chara, race_info) {
   logger.debug(
     `比赛模拟：${duration} ms / ${Math.ceil(timer * frame_rate)} 帧，平均 ${(duration / (timer * frame_rate)).toFixed(4)} ms/帧`,
   );
-  replaceInColRows([
-    { type: 'divider' },
-    {
-      content:
-        '选手检查蹄铁……正在检查跑道……正在检查马闸……正在检查令枪……选手入闸……开赛！',
-      type: 'text',
-    },
-  ]);
+  message_buffer.push(get_event_record(beginning_report.at(-1)));
+  replaceInColRows([{ type: 'divider' }, ...message_buffer]);
   const speed_min = (22 - race_info.span / 1000) * 0.85;
   statistics.speed = statistics.speed.map((e) => {
     e.data = e.data.map((v) => Math.max(v, speed_min));
