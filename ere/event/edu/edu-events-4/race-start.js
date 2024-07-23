@@ -13,8 +13,7 @@ const chara_talk = new CharaTalk(4);
  * @param {{race:number,rank:number,relation_change:number}} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
-  const chara17_talk = get_chara_talk(17),
-    me = get_chara_talk(0),
+  const me = get_chara_talk(0),
     edu_weeks = era.get('cflag:4:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name('出道战前・一切的起点', chara_talk);
@@ -260,7 +259,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `任何想法都已经无所谓了，${chara_talk.name}走向了赛场。`,
     );
-  } else if (extra_flag.race === race_enum.arim_kin && edu_weeks < 95) {
+  } else if (extra_flag.race === race_enum.arim_kin && edu_weeks >= 95) {
     await print_event_name('有马纪念前・最盛大的舞台', chara_talk);
     await era.printAndWait(
       `有马纪念是日本赛事之中最盛大的一场，众多的赛${chara_talk.get_uma_sex_title()}通过投票获得出场许可。`,
@@ -365,62 +364,79 @@ module.exports = async (hook, extra_flag) => {
     );
   } else if (extra_flag.race === race_enum.tenn_sho && edu_weeks > 95) {
     await print_event_name('天皇赏秋前・伊甸之梦', chara_talk);
-    //todo 强敌：鲁铎象征 速1700 力1200 耐1150 根1500 智1200 汝、皇帝の神威を見よ/汝等，瞻仰皇帝之神威吧 鎧袖一触/易如反掌 皇帝の眼差し/皇帝的视线 王手 优位形成 神速 光芒一閃
+    //todo 强敌：鲁铎象征(差) 速1700 力1200 耐1150 根1500 智1200 汝、皇帝の神威を見よ/汝等，瞻仰皇帝之神威吧 鎧袖一触/易如反掌 皇帝の眼差し/皇帝的视线 王手 优位形成 神速 光芒一閃
     await era.printAndWait(`与皇帝的第二次对决即将开始。`);
-    era.drawLine({ content: '准备室中' });
-    await chara_talk.say_and_wait(
-      `准备好了！这下一定会让小鲁铎看到最棒的风景。`,
-    );
     await era.printAndWait(
       `作为丸善斯基与皇帝之间的第二次对决，对于观众们来说是空前盛大的盛况。`,
     );
-    await era.printAndWait(`你与丸善斯基同样对皇帝抱有最高的敬意。`);
-    await era.printAndWait(`当两种同一层次的理论平行却都能自圆其说时。`);
-    await era.printAndWait(`就只能以最终冲线之人，交给三女神来判断了。`);
-    await chara17_talk.say_and_wait(
-      `希望你能让我看到最精彩的一面，${chara_talk.name}？`,
+    era.drawLine({ content: '准备室中' });
+    era.printButton(`让我看到最棒的背影吧`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(`能与小鲁铎同台竞技，毫无疑问是最棒的舞台♪`);
+    era.printButton(`这样的话，你满足了吗？`, 1);
+    await era.input();
+    await me.say_and_wait(`挑战赫赫有名的马娘们，与她们交流，对抗，决定胜负。`);
+    await me.say_and_wait(`在这副风景之中，你看到了什么？`);
+    await chara_talk.say_and_wait(`......`);
+    await chara_talk.say_and_wait(
+      `训练员君对在赛场之中奔跑的马娘们怎么看的呢？`,
     );
+    await me.say_and_wait(`为了在赛场上胜利，背后付出了汗水与努力。`);
+    await me.say_and_wait(`可是。`);
+    await chara_talk.say_and_wait(`是啊，只有一名马娘能胜利。`);
     await era.printAndWait(
-      `如同交战之前需要告知对方自己的意图，皇帝向你们告知了交战的通知。`,
+      `你的眼前再次浮现出了学生会办公室，正中央的那副名言。`,
     );
-    await chara17_talk.say_and_wait(
-      `身为皇帝，从没有路的地方走出路来，从走过的路上走出新路来，是要带领他人航向未知之地之人。`,
+    await me.say_and_wait(`一马当先，万马齐喑。`);
+    await chara_talk.say_and_wait(
+      `第一次见到的时候，我想了很久也没想明白该怎么理解。`,
     );
-    await chara17_talk.say_and_wait(`我终将带领马娘走出`);
-    await chara_talk.say_and_wait(`鲁铎象征，此时此刻我不是作为前辈站在这里。`);
-    await chara_talk.say_and_wait(`而是作为友人，作为对手身怀敬意进行决斗`);
-    await chara_talk.say_and_wait(`————我会让你看到新的可能。`);
-    await era.printAndWait(
-      `沉默不语，静静听完${chara_talk.name}讲述的皇帝笑了。`,
+    await chara_talk.say_and_wait(
+      `那些默默努力的马娘们，只是因为失败了，努力就全部都被否定了。`,
     );
-    await chara17_talk.say_and_wait(`可以，这才适合作为皇帝——鲁铎象征的对手`);
-    await chara17_talk.say_and_wait(
-      `那么，作为丸善斯基的训练员，在决斗开始之前，你有什么想说的吗？`,
+    await chara_talk.say_and_wait(
+      `如果只有一名马娘能够获胜的话，那么其他马娘的努力不就全部白费了吗？`,
     );
-    await era.printAndWait(`......想说的话吗？`);
+    await chara_talk.say_and_wait(
+      `如果是注定失败的结局，那从一开始就放弃转向其他方向才是明智的选择吧？`,
+    );
+    await chara_talk.say_and_wait(`——但是，奔跑才是马娘的天性吧？`);
+    await chara_talk.say_and_wait(`起跑前紧张的等待着发令枪的响起。`);
+    await chara_talk.say_and_wait(
+      `奔跑中孤独面对未知的世界，但并没有想象中那么害怕。`,
+    );
+    await chara_talk.say_and_wait(`冲刺时后方传来的阵阵踩踏声。`);
+    await chara_talk.say_and_wait(
+      `想要超越前方的背影，想要跑得更快，想要比她迈的更远。`,
+    );
+    await chara_talk.say_and_wait(`最后冲线的那一刻，反而不是那么重要了。`);
+    await chara_talk.say_and_wait(
+      `抱着这样的想法，然后取得成功，就这样让后辈们在看不清前方的道路时，按照这条路。`,
+    );
+    await chara_talk.say_and_wait(
+      `被证明是可以走下去的道路，抱着试一试说不定能行的态度。`,
+    );
+    await chara_talk.say_and_wait(`说不定就成功了呢。`);
+    await era.printAndWait(`宣布着比赛即将开始的广播响起。`);
+    await chara_talk.say_and_wait(`抱歉，一不小心就说的有点多了呢。`);
+    await era.printAndWait(`稍微有点不好意思的丸善斯基脸红了。`);
     await era.printAndWait(`从招募${chara_talk.name}开始经历了这么多的事件。`);
     await era.printAndWait(
       `哭泣也好，欢笑也好，哀怮也好，欢喜也好，信任也好，背叛也好。`,
     );
     await era.printAndWait(`已经全部经历过一边了。`);
     await era.printAndWait(`对于${chara_talk.name}来说————`);
-    await chara_talk.say_and_wait(
-      `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，一起出发吧。`,
-    );
-    await chara_talk.say_and_wait(`让我们写下属于我们自己的故事吧。`);
-    await chara_talk.say_and_wait(
-      `无论最终的结果是什么？你都要一直在我身边哦？`,
-    );
-    era.printButton(`无论三女神最终的裁定是什么。`, 1);
+    era.printButton(`一起出发吧。`, 1);
     await era.input();
-    era.printButton(`我都会笑着和你一起接受的。`, 1);
+    era.printButton(`让我们写下属于我们自己的故事吧。`, 1);
     await era.input();
+    await chara_talk.say_and_wait(`......呵呵♪`);
     await era.printAndWait(`丸善斯基露出了笑容。`);
+    await chara_talk.say_and_wait(`无论接下来发生什么。你都要一直在我身边哦？`);
+    await chara_talk.say_and_wait(`欢笑也好，哭泣也好。都要一起面对哦？`);
     await era.printAndWait(`恐怕是你记忆之中最美丽的笑容。`);
-    await era.printAndWait(`与沉默不语的皇帝一起，双方走向了战场。`);
-    await era.printAndWait(
-      `两人之间的对决究竟以何人的理想为结局，恐怕只有三女神才能知道了。`,
-    );
+    await era.printAndWait(`丸善斯基走向了赛场。`);
+    await era.printAndWait(`不远处，皇帝正等待着挑战者的到来。`);
     await era.printAndWait(`你祈祷着丸善斯基的胜利。`);
     await era.printAndWait(`时间，在此流转。`);
   } else {

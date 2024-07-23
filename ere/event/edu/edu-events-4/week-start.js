@@ -25,6 +25,7 @@ module.exports = async function (hook, _, event_object) {
     edu_weeks = era.get('cflag:4:育成回合计时');
   let wait_flag = false;
   if (event_marks.memory === 1) {
+    event_marks.memory++;
     await print_event_name(`早上好，丸善斯基`, chara_talk);
     chara_talk.print(`被直射的阳光照在脸上，不情愿地醒来了。`);
     chara_talk.print(`是昨天晚上玩过头了吗？`);
@@ -2162,9 +2163,9 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(
       `12月的寒风仿佛见证了${me.name}和${chara_talk.name}之间的亲密关系.`,
     );
+    era.set('cflag:4:节日事件标记', 0);
     wait_flag =
       get_attr_and_print_in_event(4, [0, 0, 0, 20, 0], undefined) || wait_flag;
-    era.set('cflag:4:节日事件标记', 0);
   } else if (edu_weeks === 95 + 6) {
     await print_event_name('情人节', chara_talk);
     await chara_talk.say_and_wait(`给,这是我亲手制作的巧克力.`);
@@ -2317,16 +2318,21 @@ module.exports = async function (hook, _, event_object) {
       `在经过漫长的折磨后,这份巴菲终于见底了.${me.get_couple_title()}沉默着离开了店铺,走在大街上，掠过河提，最后回到了训练室.`,
     );
     await chara_talk.say_and_wait(
-      `呐,${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}.`,
+      `呐,${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}。`,
+    );
+    await era.printAndWait(`突然停下脚步的丸善斯基，抱住了你。`);
+    await era.printAndWait(`嘴唇传来的湿润感觉，像是波纹一样扩散开来。`);
+    await chara_talk.say_and_wait(`这是大人的吻哦？`);
+    await era.printAndWait(
+      `从最初的错愕之中恢复过来的你，看着努力维持着大人充裕的丸善斯基。`,
     );
     await era.printAndWait(
-      `${me.name}突然发现一路上两人的手紧紧握在一起,下意识想要放开.`,
+      `对这副模样的丸善斯基感到好笑，却又觉得这样的她实在可爱，像是丝线交织而成的丝绸轻轻铺在了心上。`,
     );
-    await chara_talk.say_and_wait(`再来一个吻吧.`);
-    await era.printAndWait(
-      `当${me.name}与${chara_talk.name}再次接吻的时候,${me.name}感受了更为炽热的爱意.`,
-    );
-    await era.printAndWait(`今天的情人节让${me.name}难以忘怀.`);
+    era.printButton(`大人的吻，真复杂呢。`, 1);
+    await era.input();
+    await era.printAndWait(`在星空与霓虹灯的照耀下，两人的手紧紧握在了一起。`);
+    era.set('cflag:4:节日事件标记', 0);
     wait_flag =
       get_attr_and_print_in_event(4, [0, 20, 0, 0, 0], undefined) || wait_flag;
   } else if (edu_weeks === 95 + 14) {

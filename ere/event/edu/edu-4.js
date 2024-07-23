@@ -1126,7 +1126,7 @@ handlers[event_hooks.school_rooftop] = async (
     get_attr_and_print_in_event(4, [0, 0, 0, 0, 20], 0) &&
       (await era.waitAnyKey());
     return true;
-  } else if (edu_weeks === 47 + 26 && event_marks.girls_blue === 2) {
+  } else if (edu_weeks === 47 + 22 && event_marks.girls_blue === 2) {
     event_marks.girls_blue++;
     await era.printAndWait(`马娘作为普通的赛马娘引退。`);
     await era.printAndWait(

@@ -180,7 +180,7 @@ module.exports = class extends CustomizedCheck {
         case 47 + 32:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        //9月第一周 抉择 (已完成) wind = 11
+        //9月第一周 水与沙 (已完成)
         case 47 + 33:
           add_event(event_hooks.week_end, event_obj_special);
           break;
@@ -294,14 +294,14 @@ module.exports = class extends CustomizedCheck {
     const races = new RaceHistory(4).get();
     const event_marks = new MaEduMarks(4);
     if (
-      check_aim_race(races, race_enum.toky_yus, 3, 1) &&
+      check_aim_race(races, race_enum.toky_yus, 2, 1) &&
       check_aim_race(races, race_enum.sank_hai, 3, 1) &&
       check_aim_race(races, race_enum.tenn_sho, 3, 1) &&
       event_marks.wind === 20
     ) {
       new MaEduMarks().fall_heaven++;
     } else if (
-      check_aim_race(races, race_enum.toky_yus, 3, 1) &&
+      check_aim_race(races, race_enum.toky_yus, 2, 1) &&
       check_aim_race(races, race_enum.sank_hai, 3, 1) &&
       check_aim_race(races, race_enum.tenn_sho, 3, 1) &&
       event_marks.wind >= 14 &&

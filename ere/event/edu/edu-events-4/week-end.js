@@ -45,7 +45,7 @@ module.exports = async function (hook, _, event_object) {
       }我也想再跑一圈了呢♪`,
     );
     await era.printAndWait(
-      `紧挨着${me.actual_name}坐下的马娘补充完了最后一点水分后站了起来，被残阳照射下的波浪长发像燃烧着的火焰一样。`,
+      `紧挨着${me.actual_name}坐下的马娘补充了水分后站起，被残阳照射下的波浪长发像燃烧着的火焰一样。`,
     );
     await me.say_and_wait(`不要跑过头了。`);
     await chara_talk.say_and_wait(`知道了♪`);
@@ -219,6 +219,7 @@ module.exports = async function (hook, _, event_object) {
     wait_flag = get_attr_and_print_in_event(4, undefined, 120) || wait_flag;
   } else if (event_marks.dream === 1) {
     await print_event_name(`焦鹿梦`, chara_talk);
+    event_marks.dream++;
     //比喻虚幻迷离、得失无常，以及稀里糊涂、犹如做梦的状况。
     chara_talk.print(
       `醒来的时候，发现自己躺在草地上，周围是一片花田，从身边的草地一路延伸到地平线的尽头。`,
@@ -991,7 +992,7 @@ module.exports = async function (hook, _, event_object) {
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
-  } else if (edu_weeks === 47 + 25 && event_marks.girls_blue === 1) {
+  } else if (edu_weeks === 47 + 21 && event_marks.girls_blue === 1) {
     event_marks.girls_blue++;
     await print_event_name(
       `${chara_talk.get_teen_sex_title()}的忧郁`,
@@ -1659,7 +1660,6 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(
       `轻轻叩击理事长的办公室门，在听到请进的声音后推开了大门。`,
     );
-    //todo 理事长的没做出来，明天晚上替换掉
     await say_by_passer_by(
       `北方风味`,
       `质问！这位训练员借用夜晚的训练场打算做什么？`,
@@ -1903,6 +1903,7 @@ module.exports = async function (hook, _, event_object) {
     event_marks.mygo--;
     //todo 领域
   } else if (edu_weeks === 47 + 40) {
+    era.set('cflag:4:节日事件标记', 0);
     await print_event_name(`万圣节`, chara_talk);
     await era.printAndWait(`在深海之中苏醒的我，眼前除了黑暗什么也看不见。`);
     await era.printAndWait(
@@ -1998,7 +1999,6 @@ module.exports = async function (hook, _, event_object) {
       `${chara_talk.name}清脆的笑声顺着被风吹拂着的发丝，将愉悦的情绪传达到了训练室中。`,
     );
     event_marks.wind++;
-    era.set('cflag:4:节日事件标记', 0);
     wait_flag =
       get_attr_and_print_in_event(4, [0, 0, 0, 0, 20], undefined) || wait_flag;
   } else if (edu_weeks === 95 + 9) {
@@ -2255,10 +2255,10 @@ module.exports = async function (hook, _, event_object) {
     );
     await chara_talk.say_and_wait(
       `......真是期待可爱的后辈们最终能达到什么地步呢`,
-      true,
     );
+    chara_talk.print(`像是说给落叶，又像是对着自己诉说。`);
     await chara_talk.say_and_wait(`等待着后辈们超越我的那一天`, true);
-    chara_talk.print(`温柔的风注视着后辈们的成长`);
+    chara_talk.print(`直到后辈们追上背影的那一天，丸善斯基都会一直等待着。`);
   }
   wait_flag && (await era.waitAnyKey());
 };

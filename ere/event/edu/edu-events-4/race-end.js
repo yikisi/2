@@ -572,7 +572,7 @@ module.exports = async (hook, extra_flag) => {
     );
   } else if (
     extra_flag.race === race_enum.arim_kin &&
-    edu_weeks < 95 &&
+    edu_weeks >= 95 &&
     extra_flag.rank === 1
   ) {
     await print_event_name('有马纪念后・希望的辉光', chara_talk);
