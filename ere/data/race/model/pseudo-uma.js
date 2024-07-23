@@ -171,6 +171,7 @@ class PseudoUma {
     strength: 0,
     // 焦躁计时
     temptation: 0,
+    totalTime: '',
     velocityIdeal: 0,
     velocityIdealBuff: 0,
     velocityPlanRush: 0,
