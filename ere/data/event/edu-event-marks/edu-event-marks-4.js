@@ -37,6 +37,10 @@ class MaEduMarks extends EduEventMarks {
   gentle_wind;
   // NORMAL END 2 梦的远方
   girls_dream;
+  // TE导航
+  true_end;
+  // GE导航
+  good_end;
   // 迷茫
   mygo;
 

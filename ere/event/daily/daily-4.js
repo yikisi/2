@@ -31,14 +31,57 @@ handlers[event_hooks.select] = function () {
       `.....不过话说回来,训练员君看起来真可爱呢,让我想起了炎热的夏天`,
     );
     temp.sub('after_recruit');
+  } else if (new EduEventMarks(4).get('wind') === 1) {
+    chara_talk.say('接下来也请多多指教了。训练员君♪');
+  } else if (new EduEventMarks(4).get('wind') === 5) {
+    chara_talk.say('这是给我的吗？');
+    chara_talk.say('那就谢谢训练员君了♪');
+    chara_talk.say('呵呵~看起来真漂亮呢。');
+  } else if (new EduEventMarks(4).get('wind') === 10) {
+    chara_talk.say('不管在草场之上奔跑多少回，似乎都找不到当初的感觉了呢。');
+    chara_talk.say('......');
+    chara_talk.say('风停了。');
+  } else if (new EduEventMarks(4).get('wind') === 15) {
+    chara_talk.say('在特雷森的那个夜晚，在草场上奔跑的马娘们。');
+    chara_talk.say('支持着我的后辈们，还有身边的训练员君。');
+    chara_talk.say('我由衷的感到了幸福。');
+  } else if (new EduEventMarks(4).get('wind') === 20) {
+    chara_talk.say('天空、草地，与徘徊的我们。');
+    chara_talk.say('令人怀念的潮湿夏天与干燥的秋天。');
+    chara_talk.say('接下来我们也要一路走下去哦？训·练·员·君♪');
   } else if (new EduEventMarks(4).get('Self_contempt')) {
     chara_talk.say(`训练员君为什么看起来有些消沉呢？`);
-    chara_talk.say('快点打气精神来吧！');
+    chara_talk.say('快点打起精神来吧！');
     chara_talk.say('我可是一直在等着训练员君呢！');
   } else if (new EduEventMarks(4).get('happiness_day')) {
     chara_talk.say(`湛蓝的天空，清新的草地，总会让人有一种怀念的感觉呢。`);
     chara_talk.say('哎呀，训练员君什么时候过来的。');
     chara_talk.say('那么一起享受美好的每一天吧。');
+  } else if (new EduEventMarks(4).get('sister_annoyance') === 1) {
+    chara_talk.say('在更加盛大的舞台之上比赛，心情都变得亮闪闪的呢♪');
+    chara_talk.say('有什么事一定要和姐姐我商量哦？');
+    chara_talk.say('......如果我们之间没有秘密的话就好了呢。');
+    temp.sub('sister_annoyance');
+  } else if (new EduEventMarks(4).get('girls_blue') === 1) {
+    chara_talk.say('......膝盖比以前还要疼的厉害。');
+    chara_talk.say('接下来还能撑多久呢？');
+    chara_talk.say('至少，不能让训练员君看出来。');
+    temp.sub('girls_blue');
+  } else if (new EduEventMarks(4).get('true_end')) {
+    chara_talk.say('为了不让遗憾再次发生。');
+    chara_talk.say('至少，为苦苦探索的后辈们提供一个可以参考的方法。');
+    chara_talk.say('接下来也要努力才行！');
+    temp.sub('true_end');
+  } else if (new EduEventMarks(4).get('good_end')) {
+    chara_talk.say(
+      '苦闷也好，孤独也好，与训练员君在一起，似乎都不算什么了呢。',
+    );
+    chara_talk.say(
+      '能在作为赛马娘的道路上遇到训练员君，说不定是我一生的幸运呢。',
+    );
+    chara_talk.say('一直以来非常感谢你的帮助。');
+    chara_talk.say('接下来也要一起努力才行哦？');
+    temp.sub('good_end');
   } else {
     if (era.get('base:4:体力') < era.get('maxbase:4:体力') / 3) {
       buffer.push([

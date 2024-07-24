@@ -1445,11 +1445,11 @@ handlers[event_hooks.crazy_fan_end] = async function () {
     chara_talk.print(`就这么说定了哦！\n\n\n\n\n\n`);
     chara_talk.print(`对不起。`);
     await era.printAndWait(
-      `信的最后一行被泪水沾湿，墨水向四周扩散，字迹几乎分辨不清。`,
+      `信的最后一行被泪水沾湿，向四周扩散的字迹模糊不清。`,
     );
     await me.say_and_wait(`......`);
-    await era.printAndWait(`如果能够重来的话，我应该更加勇敢点才行。`);
-    await era.printAndWait(`无论，如何，都不会陷入这种悲惨的境地。`);
+    await era.printAndWait(`但是丸善斯基已经不会再回来了。你心中比谁都清楚。`);
+    await era.printAndWait(`无可奈何。`);
     await print_event_name('丸善斯基的信', chara_talk);
   } else {
     throw new Error();

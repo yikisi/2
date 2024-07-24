@@ -540,12 +540,16 @@ module.exports = async (hook, extra_flag) => {
     extra_flag.rank === 1
   ) {
     await print_event_name('日经广播赏后・迷茫之路', chara_talk);
-    await era.printAndWait(`${chara_talk.name}取得了比赛的胜利。`);
-    await chara_talk.say_and_wait(
-      `${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }我把胜利带回来了呦♪`,
+    await era.printAndWait(`休息室\n`);
+    await me.say_and_wait(`辛苦了，丸善斯基。`);
+    await era.printAndWait(
+      `虽然中盘险些被马群所追上，但丸善斯基有惊无险的取得了比赛的胜利。`,
     );
+    await me.say_and_wait(`这可不像平时的那位姐姐模样的她。`, true);
+    await me.say_and_wait(`恐怕现在还困在怀疑的阴影之中吧。`, true);
+    await chara_talk.say_and_wait(`训练员君！`);
+    await era.printAndWait(`注意到你的瞬间，丸善斯基露出了开朗的笑容。`);
+    await era.printAndWait(`然而，那黯淡的神情却深深烙印在你的脑海之中。`);
     await chara_talk.say_and_wait(`可以多夸夸我吗？`);
     era.printButton(
       `辛苦了，作为美丽又强大的${
@@ -557,18 +561,21 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       `哼哼~那是当然的事情呦，不如说失败的话才更奇怪吧？`,
     );
-    era.printButton(`那么接下来的话，${chara_talk.name}打算怎么办呢？`, 1);
+    era.printButton(`大腿怎么样了？`, 1);
     await era.input();
-    await chara_talk.say_and_wait(
-      `......说到接下来的话，就应该是准备胜者舞台然后好好享受青春才对吧。`,
+    await chara_talk.say_and_wait(`比想象之中要好的多。`);
+    era.printButton(`大腿怎么样了？`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(`......`);
+    era.printButton(
+      `作为你的训练员，我不会眼睁睁看着爱马因为不断积累的压力最后黯然退场。`,
+      1,
     );
-    await chara_talk.say_and_wait(
-      `我先去准备胜者舞台了，虽然有点不舍不过${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }要好好地将我的身影映在心底哦。`,
-    );
+    await era.input();
+    await me.say_and_wait(`就像之前的马娘一样。`);
+    await me.say_and_wait(`原谅我，对不起。`);
     await era.printAndWait(
-      `在胜者舞台结束后，邀请你一起在夜晚的山道上疾驰的丸善斯基，稍微回复了以往的神情。`,
+      `在胜者舞台结束后，你决定放弃秋季的菊花赏，转而备战有马纪念。`,
     );
   } else if (
     extra_flag.race === race_enum.arim_kin &&
