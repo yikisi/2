@@ -136,7 +136,9 @@ function get_suffix(chara_id, type) {
               ? out_of_train_type[palace - 1]
               : in_train
                 ? get_train_time(chara_id).substring(0, 3)
-                : '待入学'
+                : era.get(`cflag:${chara_id}:可再次育成`)
+                  ? '-'
+                  : '待入学'
             : '-',
         type: 'text',
       },

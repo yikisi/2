@@ -69,6 +69,7 @@ function add_palam(chara_id, part, _attack) {
  * @param {boolean} [pass_transfer]
  */
 function calc_pleasure(chara_id, part, attack, pass_transfer) {
+  attack = Math.max(attack, 0);
   add_palam(chara_id, part, attack);
   if (!pass_transfer) {
     // 有阴茎未攻击，联动增加阴茎快感

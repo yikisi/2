@@ -17,7 +17,6 @@ class GrandLives {
 
   /** @type {number[]} l */
   add(l) {
-    this.clean();
     if (this.obj.length === 0) {
       this.obj.push({});
     }
@@ -31,7 +30,6 @@ class GrandLives {
    * @param {0|1} [year]
    */
   check(race, year) {
-    this.clean();
     const _year = year || 0;
     if (_year >= this.obj.length) {
       return 0;
@@ -40,7 +38,6 @@ class GrandLives {
   }
 
   shift() {
-    this.clean();
     if (this.obj.length === 2) {
       this.obj.shift();
     }

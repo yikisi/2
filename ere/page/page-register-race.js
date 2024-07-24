@@ -7,6 +7,7 @@ const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const GameGuides = require('#/event/game-guides');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -113,6 +114,7 @@ function generate_race_dict(
 }
 
 async function reg_race_page() {
+  await new GameGuides().office_register();
   const cur_round = era.get('flag:当前回合数') - 1,
     begin_round = cur_round - (cur_round % 4),
     team_list = sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
@@ -124,7 +126,7 @@ async function reg_race_page() {
     ),
     year_begin = Math.floor(cur_round / 48) * 48;
   let chara_id = era.get('flag:当前互动角色'),
-    chara_talk = get_chara_talk(chara_id),
+    chara = get_chara_talk(chara_id),
     registered_race = sys_reg_race(chara_id).curr,
     dict = generate_race_dict(
       chara_id,
@@ -154,7 +156,7 @@ async function reg_race_page() {
         { type: 'divider' },
         {
           config: { align: 'center' },
-          content: ['为 ', chara_talk.get_colored_name(), ' 报名下一场比赛'],
+          content: ['为 ', chara.get_colored_name(), ' 报名下一场比赛'],
           type: 'text',
         },
       ],
@@ -271,10 +273,14 @@ async function reg_race_page() {
             {
               content: [
                 '* ',
-                chara_talk.get_colored_name(),
-                ' 很关注显示为',
-                { color: el_danger_color, content: '红色' },
-                '的比赛……',
+                chara.get_colored_name(),
+                ...(new RaceHistory(chara.id).check_begin()
+                  ? [
+                      ' 很关注显示为',
+                      { color: el_danger_color, content: '红色' },
+                      '的比赛……',
+                    ]
+                  : [' 需要先在下半年的出道战出道才能参加其他比赛……']),
                 { isBr: true },
                 '** 参加带有星号(*)后缀的比赛可能会有特殊的事情发生……',
                 { isBr: true },
@@ -282,11 +288,10 @@ async function reg_race_page() {
                   ? [
                       '*** 带有🎤后缀的比赛会开设大舞台，参加能够获得更多的声望……',
                       { isBr: true },
-                      '**** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
+                      '*',
                     ]
-                  : [
-                      '*** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
-                    ]),
+                  : []),
+                '*** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前一周出发远征……',
               ],
               type: 'text',
             },
@@ -298,8 +303,9 @@ async function reg_race_page() {
             return {
               accelerator: 1000 + e,
               config: {
-                width: 4,
+                buttonType: e === chara_id ? 'warning' : 'info',
                 disabled: e === chara_id,
+                width: 4,
               },
               content: era.get(`callname:${e}:-1`),
               type: 'button',
@@ -342,7 +348,7 @@ async function reg_race_page() {
       flag_race_reg = false;
     } else if (ret >= 1000) {
       chara_id = ret - 1000;
-      chara_talk = get_chara_talk(chara_id);
+      chara = get_chara_talk(chara_id);
       registered_race = sys_reg_race(chara_id).curr;
       dict = generate_race_dict(
         chara_id,

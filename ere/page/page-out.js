@@ -13,6 +13,8 @@ const print_chara_info = require('#/page/components/cur-chara-info');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 
+const GameGuides = require('#/event/game-guides');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
@@ -34,7 +36,7 @@ function get_position_buttons(positions, event_marks) {
     return {
       accelerator: i + 1,
       config: {
-        buttonType: event_marks.get(e.s) ? 'danger' : 'warning',
+        buttonType: event_marks.check(e.s) ? 'danger' : 'warning',
         disabled: e.d,
         width: 4,
       },
@@ -132,17 +134,13 @@ async function out_page() {
     let positions = get_positions(chara_id, player_base, chara_base);
     vehicle = !chara_id && era.get('flag:单人载具');
     era.drawLine();
+    if (vehicle) {
+      era.print(
+        `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}到达了学园大门……`,
+      );
+    }
+    await new GameGuides().out();
     era.printMultiColumns([
-      {
-        content: vehicle
-          ? [
-              `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}到达了学园大门……`,
-              { isBr: true },
-              { isBr: true },
-            ]
-          : '',
-        type: 'text',
-      },
       {
         content: [
           '要',

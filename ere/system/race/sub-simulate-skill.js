@@ -109,6 +109,10 @@ function sub_simulate_skill(
       get_lane_name(cur_lane),
       uma.race.slope,
     ];
+    uma.race.conditionParams.furlong = 0;
+    if (uma.race.location < 800) {
+      uma.race.conditionParams.furlong = Math.floor(uma.race.location / 200);
+    }
 
     while (
       uma.race.conditionParams.phase < 3 &&
@@ -221,11 +225,13 @@ function sub_simulate_skill(
       uma.race.overtakeAim !== undefined,
     );
     uma.race.conditionParams.near_count = 0;
+    uma.race.conditionParams.near_infront_count = 0;
     for (let k = i - 1; k >= 0; --k) {
       if (l[k].race.location - uma.race.location >= 3) {
         break;
       }
       uma.race.conditionParams.near_count++;
+      uma.race.conditionParams.near_infront_count++;
     }
     uma.race.conditionParams.is_surrounded = Number(
       uma.race.conditionParams.near_count >= 3,
@@ -594,6 +600,11 @@ function sub_simulate_skill(
           skill.precondition[i] &&
           skill.data.conditions[i](uma.race.conditionParams)
         ) {
+          switch (skill.data.id) {
+            case 203061:
+            case 203071:
+              uma.race.conditionParams.is_used_skill_id.push(skill.data.id);
+          }
           uma.race.conditionParams.is_activate_any_skill = 1;
           skill.count[i]++;
           skill.cooldown[i] =

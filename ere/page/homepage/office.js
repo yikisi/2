@@ -17,11 +17,13 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const goto_sex = require('#/page/components/goto-sex');
 const select_target = require('#/page/components/select-target');
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { generate_race_button } = require('#/page/homepage/snippets');
 const page_chairman_office = require('#/page/page-chairman-office');
 const page_clinic = require('#/page/page-clinic');
 const print_exp_page = require('#/page/page-exp');
 const print_god_shop = require('#/page/page-god-shop');
+const print_inherit_page = require('#/page/page-inherit');
 const print_juel_shop_page = require('#/page/page-juel-shop');
 const print_load_page = require('#/page/page-load-game');
 const print_out_page = require('#/page/page-out');
@@ -38,6 +40,7 @@ const page_trainer_office = require('#/page/page-trainer-office');
 const page_visitors = require('#/page/page-visitors');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const GameGuides = require('#/event/game-guides');
 const { shop_end, shop_start } = require('#/event/shop/tachyon-shop');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -58,6 +61,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
     celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1),
     cur_weeks = era.get('flag:当前回合数'),
     event_marks = new EventMarks(chara_id),
+    my_event_marks = new EventMarks(0),
     growth_stage = era.get(`cflag:${chara_id}:成长阶段`),
     is_love_rejected = era.get(`cflag:${chara_id}:爱慕暂拒`),
     jpy = era.get('flag:当前马币'),
@@ -91,6 +95,9 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         {
           accelerator: 101,
           config: {
+            buttonType: my_event_marks.check(event_hooks.train)
+              ? 'danger'
+              : 'warning',
             disabled: !sys_check_train_enabled(chara_id) || !sys_check_awake(0),
             width: 6,
           },
@@ -119,9 +126,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         {
           accelerator: 999,
           config: {
-            buttonType: event_marks.get(event_hooks.week_end)
-              ? 'danger'
-              : 'warning',
+            buttonType:
+              event_marks.check(event_hooks.week_end) ||
+              my_event_marks.check(event_hooks.week_end)
+                ? 'danger'
+                : 'warning',
             width: 6,
           },
           content: '休息到下周',
@@ -135,7 +144,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 201,
               config: {
-                buttonType: event_marks.get(event_hooks.office_study)
+                buttonType: event_marks.check(event_hooks.office_study)
                   ? 'danger'
                   : 'warning',
                 disabled:
@@ -153,7 +162,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 202,
               config: {
-                buttonType: event_marks.get(event_hooks.office_prepare)
+                buttonType: event_marks.check(event_hooks.office_prepare)
                   ? 'danger'
                   : 'warning',
                 disabled:
@@ -197,7 +206,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 205,
               config: {
-                buttonType: event_marks.get(event_hooks.office_cook)
+                buttonType: event_marks.check(event_hooks.office_cook)
                   ? 'danger'
                   : 'warning',
                 disabled:
@@ -213,7 +222,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 206,
               config: {
-                buttonType: event_marks.get(event_hooks.office_rest)
+                buttonType: event_marks.check(event_hooks.office_rest)
                   ? 'danger'
                   : 'warning',
                 disabled:
@@ -229,7 +238,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 207,
               config: {
-                buttonType: event_marks.get(event_hooks.office_game)
+                buttonType: event_marks.check(event_hooks.office_game)
                   ? 'danger'
                   : 'warning',
                 disabled:
@@ -326,11 +335,12 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 301,
               config: {
-                buttonType:
-                  new EventMarks(0).get(event_hooks.recruit_start) ||
-                  new EventMarks(0).get(event_hooks.recruit)
-                    ? 'danger'
-                    : 'warning',
+                buttonType: my_event_marks.check(
+                  event_hooks.recruit_start,
+                  event_hooks.recruit,
+                )
+                  ? 'danger'
+                  : 'warning',
                 disabled:
                   era.get('flag:当前月') >= 4 ||
                   !sys_check_awake(0) ||
@@ -346,9 +356,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 302,
               config: {
-                buttonType: event_marks.get(event_hooks.back_school)
-                  ? 'danger'
-                  : 'warning',
+                buttonType:
+                  event_marks.check(event_hooks.back_school) ||
+                  my_event_marks.check(event_hooks.school_trainer_office)
+                    ? 'danger'
+                    : 'warning',
                 disabled:
                   !sys_check_awake(0) ||
                   sys_check_act_disabled(
@@ -365,8 +377,10 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
               accelerator: 303,
               config: {
                 buttonType:
-                  event_marks.get(event_hooks.school_clinic) ||
-                  event_marks.get(event_hooks.back_school)
+                  event_marks.check(
+                    event_hooks.school_clinic,
+                    event_hooks.back_school,
+                  ) || my_event_marks.check(event_hooks.school_clinic)
                     ? 'danger'
                     : 'warning',
                 disabled:
@@ -384,9 +398,12 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 304,
               config: {
-                buttonType: new EventMarks(0).get(event_hooks.back_school)
-                  ? 'danger'
-                  : 'warning',
+                buttonType:
+                  event_marks.check(event_hooks.back_school) ||
+                  era.get('flag:当前月') === 3 ||
+                  my_event_marks.check(event_hooks.school_god)
+                    ? 'danger'
+                    : 'warning',
                 disabled:
                   growth_stage < 1 ||
                   (chara_id && !sys_check_train_enabled(chara_id)) ||
@@ -407,8 +424,10 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
               accelerator: 305,
               config: {
                 buttonType:
-                  event_marks.get(event_hooks.school_atrium) ||
-                  event_marks.get(event_hooks.back_school)
+                  event_marks.check(
+                    event_hooks.school_atrium,
+                    event_hooks.back_school,
+                  ) || my_event_marks.check(event_hooks.school_atrium)
                     ? 'danger'
                     : 'warning',
                 disabled:
@@ -430,8 +449,10 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
               accelerator: 306,
               config: {
                 buttonType:
-                  event_marks.get(event_hooks.school_rooftop) ||
-                  event_marks.get(event_hooks.back_school)
+                  event_marks.check(
+                    event_hooks.school_rooftop,
+                    event_hooks.back_school,
+                  ) || my_event_marks.check(event_hooks.school_rooftop)
                     ? 'danger'
                     : 'warning',
                 disabled:
@@ -452,9 +473,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 307,
               config: {
-                buttonType: event_marks.get(event_hooks.back_school)
-                  ? 'danger'
-                  : 'warning',
+                buttonType:
+                  event_marks.check(event_hooks.back_school) ||
+                  my_event_marks.check(event_hooks.school_chairman)
+                    ? 'danger'
+                    : 'warning',
                 disabled:
                   !sys_check_awake(0) ||
                   sys_check_act_disabled(
@@ -470,16 +493,19 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             {
               accelerator: 308,
               config: {
-                buttonType: event_marks.get(event_hooks.back_school)
-                  ? 'danger'
-                  : 'warning',
+                buttonType:
+                  event_marks.check(event_hooks.back_school) ||
+                  my_event_marks.check(event_hooks.school_visitors)
+                    ? 'danger'
+                    : 'warning',
                 disabled:
                   !sys_check_awake(0) ||
                   sys_check_act_disabled(
                     sys_get_move_cost(location_enum.visitor),
                     player_base,
                   ) ||
-                  loc_chara.get(location_enum.visitor).length === 0,
+                  (loc_chara.get(location_enum.visitor).length === 0 &&
+                    !my_event_marks.check(event_hooks.school_visitors)),
                 width: 6,
               },
               content: '前往访客接待室',
@@ -499,12 +525,14 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
               // 幼年期只能呆在训练室
               config: {
                 buttonType:
-                  event_marks.get(event_hooks.out_start) ||
-                  event_marks.get(event_hooks.out_river) ||
-                  event_marks.get(event_hooks.out_shopping) ||
-                  event_marks.get(event_hooks.out_church) ||
-                  event_marks.get(event_hooks.out_station) ||
-                  event_marks.get(event_hooks.back_school)
+                  event_marks.check(
+                    event_hooks.out_start,
+                    event_hooks.out_river,
+                    event_hooks.out_shopping,
+                    event_hooks.out_church,
+                    event_hooks.out_station,
+                    event_hooks.back_school,
+                  ) || my_event_marks.check(event_hooks.out_start)
                     ? 'danger'
                     : 'warning',
                 disabled:
@@ -581,6 +609,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
   );
 
   let temp = await era.input();
+  era.drawLine();
   switch (temp) {
     case 100:
       flags.after_select =
@@ -698,32 +727,53 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 302:
       sys_handle_action(sys_get_move_cost(location_enum.trainer));
-      await page_trainer_office();
+      if (!(await new GameGuides().school_trainer_office())) {
+        await page_trainer_office();
+      }
       break;
     case 303:
       sys_handle_action(sys_get_move_cost(location_enum.clinic));
-      await page_clinic();
+      if (!(await sys_get_random_event(event_hooks.school_clinic)())) {
+        await page_clinic();
+      }
       break;
     case 304:
       sys_handle_action(
         sys_get_move_cost(location_enum.god, chara_id),
         chara_id,
       );
-      await print_god_shop();
+      if (!(await new GameGuides().school_god())) {
+        if (
+          era.get('flag:当前月') === 3 &&
+          (await select_yes_or_no(
+            '可以因子继承了！要进行吗',
+            '因子继承！',
+            '普通拜谒就好',
+          ))
+        ) {
+          await print_inherit_page();
+        } else {
+          await print_god_shop();
+        }
+      }
       break;
     case 305:
       sys_handle_action(
         sys_get_move_cost(location_enum.atrium, chara_id),
         chara_id,
       );
-      await print_school_page(location_enum.atrium);
+      if (!(await new GameGuides().school_atrium())) {
+        await print_school_page(location_enum.atrium);
+      }
       break;
     case 306:
       sys_handle_action(
         sys_get_move_cost(location_enum.rooftop, chara_id),
         chara_id,
       );
-      await print_school_page(location_enum.rooftop);
+      if (!(await new GameGuides().school_rooftop())) {
+        await print_school_page(location_enum.rooftop);
+      }
       break;
     case 307:
       sys_handle_action(sys_get_move_cost(location_enum.chairman));
@@ -731,7 +781,9 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 308:
       sys_handle_action(sys_get_move_cost(location_enum.visitor));
-      await page_visitors();
+      if (!(await new GameGuides().school_visitors())) {
+        await page_visitors();
+      }
       break;
     case 309:
       era.set('flag:当前位置', location_enum.school_shop);

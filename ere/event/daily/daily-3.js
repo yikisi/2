@@ -531,7 +531,7 @@ handlers[event_hooks.good_night] = async (hook) => {
             me.get_colored_name(),
             ' 的意见在此时此地并不重要，',
             teio.get_colored_name(),
-            '只是单纯地通知一下 ',
+            ' 只是单纯地通知一下 ',
             me.get_colored_name(),
             ' 接下来会发生什么。',
           ]);

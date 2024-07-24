@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+/** @type {Record<string,number>} */
 let global_object = {};
 
 const sys_personal_achievement = {
@@ -20,6 +21,11 @@ const sys_personal_achievement = {
   init() {
     return (global_object =
       era.get('global:角色成就') || era.set('global:角色成就', {}));
+  },
+  list() {
+    return Object.entries(global_object)
+      .filter((e) => e[1])
+      .map((e) => Number(e[0]));
   },
 };
 

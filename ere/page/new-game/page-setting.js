@@ -349,6 +349,7 @@ async function page_settings() {
   let flag_default = true,
     flag_setting = false;
   let theme;
+  era.set('flag:新手教学', Number(!era.get('global:新手教学')));
   set_from_theme((theme = 1));
 
   while (flag_default) {
@@ -370,10 +371,18 @@ async function page_settings() {
         },
       );
     });
-    buffer.push({
-      content: '\n* 初次游玩强烈建议从【地上神国】或【尘世间】模式开始游戏！',
-      type: 'text',
-    });
+    buffer.push(
+      {
+        accelerator: 98,
+        config: { buttonType: era.get('flag:新手教学') ? 'warning' : 'info' },
+        content: '显示新手教学',
+        type: 'button',
+      },
+      {
+        content: '\n* 初次游玩强烈建议从【地上神国】或【尘世间】模式开始游戏！',
+        type: 'text',
+      },
+    );
     buffer.push(
       {
         accelerator: 10,
@@ -394,6 +403,9 @@ async function page_settings() {
       case 10:
         flag_default = false;
         flag_setting = true;
+        break;
+      case 98:
+        era.set('flag:新手教学', 1 - era.get('flag:新手教学'));
         break;
       case 99:
         return true;
@@ -700,6 +712,14 @@ async function page_settings() {
         tip: (v) =>
           ['被萝莉环绕的天国……', '马娘身高将自然分布', '巨大马娘不可战胜！'][v],
       },
+      {
+        key: '新手教学',
+        label: '引导教学',
+        options: [
+          { l: '我已完全掌握！', v: 0 },
+          { l: '第一次的时候显示一下吧', v: 1 },
+        ],
+      },
       // {
       //   label: '带玩具上场比赛',
       //   key: '道具影响',
@@ -761,7 +781,7 @@ async function page_settings() {
     buffer.at(-1).push(
       {
         accelerator: 998,
-        config: { align: 'right', width: 4 },
+        config: { align: 'right', offset: 4, width: 4 },
         content: '进入游戏',
         type: 'button',
       },

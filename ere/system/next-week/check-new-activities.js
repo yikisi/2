@@ -62,7 +62,7 @@ function handle_foreign_debuff(chara_id, language, loc, before_race) {
 async function check_new_activities(cur_round, in_team_list) {
   era.drawLine();
   const celebration = get_celebration(cur_round);
-  if (celebration) {
+  if (celebration && era.get('flag:当前回合数') > 1) {
     era.print([
       '本周有 ',
       { content: celebration, color: celebration_color },
@@ -421,9 +421,9 @@ async function check_new_activities(cur_round, in_team_list) {
   // 出差的理事长
   let chairman = 0;
   if (
-    era.get('flag:当前月') > 3 &&
-    !(era.get('cflag:302:育成回合计时') < 3 * 48) &&
-    (Math.random() < 0.2 || (era.get('cflag:302:妊娠阶段') & 0b100001) > 0)
+    era.get('cflag:302:育成回合计时') < 3 * 48 ||
+    (era.get('flag:当前月') > 3 &&
+      (Math.random() < 0.2 || (era.get('cflag:302:妊娠阶段') & 0b100001) > 0))
   ) {
     if (
       !(era.get('cflag:306:育成回合计时') < 3 * 48) &&

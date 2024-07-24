@@ -4,6 +4,7 @@ class RubyLifeMarks extends LifeEventMarks {
   love_75;
   love_90;
   love_100;
+  shame;
   foot_job;
   sex_mark;
 

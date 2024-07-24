@@ -36,7 +36,7 @@ async function common_pregnant_report_in_love(
       ' 再三询问确认，还是得到了孩子是自己骨肉的回答。',
     ]);
     await era.printAndWait([
-      '但',
+      '但 ',
       father.get_colored_name(),
       ' 对此毫无印象……',
     ]);

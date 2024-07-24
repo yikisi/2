@@ -16,10 +16,8 @@ const {
   human_sex_title,
   penis_colors,
   penis_desc,
-  pregnant_stage_enum,
   skin_desc,
 } = require('#/data/ero/status-const');
-const { yes } = require('#/data/event/recruit-flags');
 const {
   get_breast_cup,
   get_filtered_talents,
@@ -219,38 +217,19 @@ async function page_custom() {
   let buffer,
     flag_custom = true,
     temp;
-  era.set('cflag:0:阴道尺寸', era.get('cflag:0:性别') - 1 ? 1 : 0);
-  era.set('abl:0:速度训练等级', 1);
-  era.set('abl:0:耐力训练等级', 1);
-  era.set('abl:0:力量训练等级', 1);
-  era.set('abl:0:根性训练等级', 1);
-  era.set('abl:0:智力训练等级', 1);
-
-  era.set('base:0:性欲', 0);
-  era.set('base:0:压力', 0);
-  era.set('base:0:体重偏差', 0);
-  era.set('base:0:药物残留', 0);
-
-  era.set('cflag:0:种族', 0);
-  era.set('cflag:0:招募状态', yes);
-  era.set('cflag:0:父方角色', -1);
-  era.set('cflag:0:母方角色', -1);
-  era.set('cflag:0:妊娠阶段', 1 << pregnant_stage_enum.no);
-
-  era.set('talent:0:童贞', 1);
-  era.set('talent:0:处女', 1);
 
   if (era.get('callname:0:-1').indexOf('豚鼠子') !== -1) {
     era.set('flag:角色性别', 0);
     era.set('flag:彩蛋机制', 179);
+    era.set('flag:游戏结束', 0);
     era.set('flag:声望不足替换', 1);
-    era.set('flag:不忠惩罚', 0);
     era.set('flag:马娘身高', 0);
     new CharaTitles(0).push({ c: buff_colors[2], n: '萝莉控', s: true });
   } else if (era.get('callname:0:-1').indexOf('渡鸦') !== -1) {
-    era.set('flag:角色性别', 0);
+    era.set('flag:角色性别', 10);
+    era.set('flag:游戏结束', 0);
     era.set('flag:彩蛋机制', 621);
-    era.set('flag:不忠惩罚', 1);
+    era.set('flag:极端行为限制', 3);
     era.set('flag:马娘身高', 2);
     new CharaTitles(0).push({ c: buff_colors[2], n: '无法战胜', s: true });
   } else if (

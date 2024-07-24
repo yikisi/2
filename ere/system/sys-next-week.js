@@ -62,8 +62,10 @@ const {
   get_trainer_title,
 } = require('#/data/info-generator');
 const LoveLimitStatus = require('#/data/love-limit-status');
+const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { pressure_border } = require('#/data/train-const');
+const { reset_chara } = require('#/system/sys-init-chara');
 
 async function sys_next_week() {
   const health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes,
@@ -438,8 +440,8 @@ async function sys_next_week() {
         if (edu_weeks === 3 * 48) {
           sys_handle_palace(chara_id);
           await era.waitAnyKey();
-        } else {
-          if (edu_weeks === 48 || edu_weeks === 96) {
+        } else if (edu_weeks < 3 * 48) {
+          if (edu_weeks > 0 && edu_weeks % 48 === 0) {
             const skill_control = new CharaSkills(chara_id),
               available_control = new CharaAvailableSkills(chara_id),
               to_get = available_control.get().slice(0, 2);
@@ -449,11 +451,38 @@ async function sys_next_week() {
               available_control.remove(...to_get);
               get_skills_and_print_in_event(chara_id, to_get, skill_control);
             }
+          } else if (
+            edu_weeks % 48 === 9 &&
+            era.get(`cflag:${chara_id}:继承方1`)
+          ) {
+            const a = era.get(`cflag:${chara_id}:继承方1`),
+              b = era.get(`cflag:${chara_id}:继承方2`),
+              juel_list = gene_juel_names.map(
+                (e) => era.get(`juel:${a}:${e}`) + era.get(`juel:${b}:${e}`),
+              );
+            if (edu_weeks > 96) {
+              juel_list.forEach((e, i) =>
+                era.add(
+                  `juel:${chara_id}:${gene_juel_names[i]}`,
+                  Math.floor(e * 0.4),
+                ),
+              );
+            } else {
+              juel_list.forEach((e, i) =>
+                era.add(
+                  `juel:${chara_id}:${gene_juel_names[i]}`,
+                  e - Math.floor(e * 0.3) - Math.floor(e * 0.4),
+                ),
+              );
+            }
+            era.print([
+              get_chara_talk(chara_id).get_colored_name(),
+              ' 继承了新的因子！',
+            ]);
           }
           if (
-            edu_weeks < 3 * 48 &&
-            (era.get(`status:${chara_id}:摸鱼`) ||
-              (stay_up && Math.random() < 0.2))
+            era.get(`status:${chara_id}:摸鱼`) ||
+            (stay_up && Math.random() < 0.2)
           ) {
             // 没进殿堂，摸鱼和熬夜才会正常造成干劲下降
             motivation_change -= 1;
@@ -532,7 +561,7 @@ async function sys_next_week() {
       cur_month < 4 &&
       era.get(`cflag:${chara_id}:育成回合计时`) === 'x'
     ) {
-      era.set(`cflag:${chara_id}:育成回合计时`, (cur_round - 1) % 48);
+      reset_chara(chara_id);
       await sys_call_daily_event(chara_id, event_hooks.growth, { stage: 2 });
     }
 

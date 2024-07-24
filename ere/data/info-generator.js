@@ -15,6 +15,7 @@ const {
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const attr_score_table = require('#/data/attr-score-table.json');
+const chara_score = require('#/data/chara-score-table.json');
 const { buff_colors } = require('#/data/color-const');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
@@ -81,7 +82,7 @@ const level_and_desc = {
     'UA', // 1900
     'UA',
   ],
-  chara_score: require('#/data/chara-score-table.json'),
+  chara_score,
   relation: {
     border: [-100, 0, 75, 150, 225, 375, 525],
     mark: ['失望', '怀疑', '冷淡', '融洽', '热忱', '喜爱', '亲密', '不渝'],

@@ -355,7 +355,6 @@ class UmaSkill {
       {
         color: name_color,
         content: this.name,
-        display: 'inline-block',
         fontWeight: 'bold',
         title: `[${this.name}]：${this.desc}`,
       },

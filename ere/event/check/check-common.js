@@ -63,6 +63,7 @@ class CustomizedCheck {
   check_and_get_titles(aim_check) {
     const ret = [];
     if (
+      era.get(`cflag:${this.id}:模版角色`) === -1 &&
       new RaceHistory(this.id)
         .get_values()
         .filter(
@@ -136,6 +137,8 @@ class CustomizedCheck {
     }
     return this.get_edu_aims();
   }
+
+  check_second_chance() {}
 
   /** @returns {Record<string,number>} */
   get_aim_races() {

@@ -71,6 +71,9 @@ function sys_do_sex(attacker, defender, item) {
           attacker_skill_part = '接吻';
           era.add(`exp:${attacker.id}:接吻次数`, 1);
           era.add(`exp:${defender.id}:接吻次数`, 1);
+          if (!attacker.id || !defender.id) {
+            era.add(`tcvar:${attacker.id || defender.id}:获得因子`, 1);
+          }
           if (!era.get(`cstr:${attacker.id}:初吻经历`)) {
             era.set(`cstr:${attacker.id}:初吻经历`, [
               `初吻在 ${date} 献给了 `,
@@ -100,6 +103,9 @@ function sys_do_sex(attacker, defender, item) {
         case part_enum.virgin:
           era.add(`exp:${attacker.id}:口交次数`, 1);
           era.add(`exp:${defender.id}:阴部玩弄次数`, 1);
+          if (!attacker.id || !defender.id) {
+            era.add(`tcvar:${attacker.id || defender.id}:获得因子`, 1);
+          }
           update_blow_job_exp(date, attacker.id, defender.id);
           break;
         case part_enum.penis:
@@ -251,6 +257,9 @@ function sys_do_sex(attacker, defender, item) {
         case part_enum.mouth:
           era.add(`exp:${attacker.id}:阴部玩弄次数`, 1);
           era.add(`exp:${defender.id}:口交次数`, 1);
+          if (!attacker.id || !defender.id) {
+            era.add(`tcvar:${attacker.id || defender.id}:获得因子`, 1);
+          }
           if (!era.get(`cstr:${defender.id}:初次口交经历`)) {
             era.set(`cstr:${defender.id}:初次口交经历`, [
               `在 ${date} 被 `,
@@ -274,6 +283,9 @@ function sys_do_sex(attacker, defender, item) {
         case part_enum.mouth:
           era.add(`exp:${attacker.id}:阴部玩弄次数`, 1);
           era.add(`exp:${defender.id}:口交次数`, 1);
+          if (!attacker.id || !defender.id) {
+            era.add(`tcvar:${attacker.id || defender.id}:获得因子`, 1);
+          }
           update_attacking_mouth_exp(date, defender.id, attacker.id);
           set_stain(attacker.id, attacker.part, stain_enum.saliva);
           break;
@@ -389,7 +401,7 @@ function sys_do_sex(attacker, defender, item) {
         damage.attacker += 20 * era.get(`talent:${defender.id}:凶器`);
         damage = change_cost(defender.id, attacker.id, part_enum.anal, damage);
       }
-      attack_extra_buff += 2 * era.get(`talent:${attacker.id}:淫臀`);
+      attack_extra_buff += 2 * (era.get(`talent:${attacker.id}:淫臀`) === 2);
       break;
     case part_enum.penis:
       switch (defender_part) {

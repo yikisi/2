@@ -66,14 +66,21 @@ const hooks = {
   recruit_end: 0,
   // 招募开始
   recruit_start: 0,
+  register_race: 0,
   // 前往中庭
   school_atrium: 0,
-  // 前往保健室
-  school_clinic: 0,
   // 前往理事长办公室
   school_chairman: 0,
+  // 前往保健室
+  school_clinic: 0,
+  // 前往三女神像
+  school_god: 0,
   // 前往天台
   school_rooftop: 0,
+  // 前往训练员办公室
+  school_trainer_office: 0,
+  // 前往访客接待室
+  school_visitors: 0,
   // 选择互动角色
   select: 0,
   // 金钱奴隶结局

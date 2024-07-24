@@ -57,7 +57,7 @@ module.exports = class extends CustomizedMec {
         `训练员${get_chara_talk(0).get_adult_sex_title()}`,
         get_chara_talk(0).sex_code - 1 ? 'Mein Lieben' : 'Mein Lieber',
       ]);
-    } else {
+    } else if (!this.set_callname_from_src()) {
       era.set(
         'callname:37:0',
         `训练员${get_chara_talk(0).get_adult_sex_title()}`,

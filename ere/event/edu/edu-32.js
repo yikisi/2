@@ -38,6 +38,7 @@ const week_start_handlers = {};
   require('#/event/edu/edu-events-32/week-start-09'),
   require('#/event/edu/edu-events-32/week-start-10'),
   require('#/event/edu/edu-events-32/week-start-11'),
+  require('#/event/edu/edu-events-32/week-start-12'),
 ].forEach((f) => f(week_start_handlers));
 
 handlers[event_hooks.week_start] = async (_, __, event_object) => {
