@@ -250,7 +250,6 @@ handlers[event_hooks.out_start] = async (extra_flag, event_object) => {
       if (ret === 2) {
         era.get('cflag:85:招募状态').special++;
       }
-      await era.waitAnyKey();
       era.println();
 
       era.print(`用餐，或者说测试结束，${ruby.name} 起身离席。`);

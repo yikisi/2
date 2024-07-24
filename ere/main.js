@@ -160,10 +160,68 @@ module.exports = async () => {
     );
     era.setAlign('left');
 
+    const achievements = sys_personal_achievement.list().filter((e) => e < 200);
     let ret = await era.input();
     switch (ret) {
       case 1:
-        if (await new_game()) {
+        if (achievements.length > 0) {
+          era.drawLine();
+          era.printButton('做我自己', 1);
+          era.printButton('扮演角色', 2);
+          if ((await era.input()) === 1) {
+            ret = 0;
+          } else {
+            era.printMultiColumns([
+              { config: { content: '选择要扮演的角色' }, type: 'divider' },
+              {
+                accelerator: 0,
+                config: {
+                  align: 'center',
+                  width: 6,
+                },
+                content: '我自己',
+                type: 'button',
+              },
+              ...achievements.map((e) => {
+                let flag_script;
+                try {
+                  require(`#/event/rec/rec-${e}`);
+                  flag_script = true;
+                } catch (_) {
+                  flag_script = false;
+                }
+                return {
+                  accelerator: e,
+                  config: {
+                    align: 'center',
+                    buttonType: '',
+                    color: get_chara_color(e),
+                    width: 6,
+                  },
+                  content: `${era.get(`static:${e}:name`)}${
+                    flag_script ? '*' : ''
+                  }`,
+                  type: 'button',
+                };
+              }),
+              {
+                content: [
+                  '* 带有',
+                  { content: '*', fontWeight: 'bold' },
+                  '号后缀的角色有专属口上',
+                  { isBr: true },
+                  '** 只有完成了个人成就的角色才能进行扮演',
+                  { isBr: true },
+                  '*** 快乐米可、望族、骏川缰绳、桐生院葵等特殊角色无法扮演',
+                ],
+                type: 'text',
+              },
+            ]);
+            ret = await era.input();
+          }
+        }
+        if (await new_game(ret)) {
+          era.set('global:新手教学', 1);
           await homepage();
         }
         break;
@@ -373,6 +431,7 @@ module.exports = async () => {
               '幽白書',
             ],
           ],
+          ['教学口上', ['雞雞']],
           ['特殊角色（临时）', '黑奴队长'],
           [[{ color: get_chara_color(3), content: '东海帝王' }], '天马闪光蹄'],
           [[{ color: get_chara_color(7), content: '黄金船' }], '雞雞'],
@@ -441,7 +500,7 @@ module.exports = async () => {
             [
               { color: get_chara_color(400), content: '周日宁静' },
               '、',
-              { color: get_chara_color(342), content: '拜耶尔土耳其' },
+              { color: get_chara_color(342), content: '拜耶尔土耳其（招募）' },
             ],
             '黑衣剑士-星爆气流斩准备就绪',
           ],
@@ -450,11 +509,11 @@ module.exports = async () => {
             ['雞雞', { isDivider: true }, '幽白書'],
           ],
           [
-            [{ color: get_chara_color(340), content: '达利阿拉伯' }],
+            [{ color: get_chara_color(340), content: '达利阿拉伯（招募）' }],
             'O口口口口口',
           ],
           [
-            [{ color: get_chara_color(341), content: '高多芬柏布' }],
+            [{ color: get_chara_color(341), content: '高多芬柏布（招募）' }],
             'フィンランド',
           ],
         ]) {

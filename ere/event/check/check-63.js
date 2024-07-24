@@ -25,13 +25,12 @@ aim_races[get_aim_race_index(race_enum.eliz_cup, 2)] = 4;
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
-  (races) =>
+  (races, race_list) =>
     check_aim_race(races, race_enum.yasu_kin, 2, 1) &&
     check_aim_race(races, race_enum.takz_kin, 2, 1) &&
     era.get('base:63:根性') >= 1200 &&
-    Object.values(races).filter(
-      (e) => race_infos[e.race].race_class <= class_enum.G3,
-    ).length >= 30,
+    race_list.filter((e) => race_infos[e.race].race_class <= class_enum.G3)
+      .length >= 30,
   aim_races,
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));

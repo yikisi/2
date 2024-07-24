@@ -49,10 +49,12 @@ module.exports = class extends CustomizedMec {
   }
 
   set_callname() {
-    if (era.get('relation:3:0') > 375) {
-      era.set('callname:3:0', '训\\练/员');
-    } else {
-      era.set('callname:3:0', '训练员');
+    if (!this.set_callname_from_src()) {
+      if (era.get('relation:3:0') > 375) {
+        era.set('callname:3:0', '训\\练/员');
+      } else {
+        era.set('callname:3:0', '训练员');
+      }
     }
   }
 };

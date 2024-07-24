@@ -13,14 +13,15 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
  * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
  */
 module.exports = (handlers) => {
-  handlers[ero_hooks.go_on] = async (attacker, defender) =>
-    era.printAndWait([
+  handlers[ero_hooks.go_on] = async (attacker, defender) => {
+    await era.printAndWait([
       '【',
       attacker.get_colored_name(),
       ' 放弃了抵抗，任 ',
       defender.get_colored_name(),
       ' 施为……】',
     ]);
+  };
 
   handlers[ero_hooks.kiss] = async (attacker, defender, hook) => {
     await era.printAndWait([
@@ -153,27 +154,39 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.switch] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 将主导权交给 ',
-      defender.get_colored_name(),
-      '……】',
-    ]);
-    await defender.say_and_wait('诶……？');
-    await defender.print_and_wait([
-      '原本近在咫尺的恋人突然拉远了距离，被压在身下的 ',
-      defender.get_colored_name(),
-      ' 眨着眼没能及时反应过来。',
-    ]);
-    await defender.print_and_wait('然后，眼前便是天旋地转……');
-    await attacker.say_and_wait('现在，是你的时间了。');
-    await defender.print_and_wait([
-      '张开双手的 ',
-      sys_get_colored_callname(defender.id, attacker.id),
-      ' 露出鼓励的笑容。',
-    ]);
-    attacker.say('……想怎么做都可以哦。');
+    if (
+      !defender.id &&
+      (era.get(`tcvar:${defender.id}:脱力`) ||
+        era.get(`tcvar:${defender.id}:失神`))
+    ) {
+      await era.printAndWait([
+        '【',
+        attacker.get_colored_name(),
+        ' 暂时不想再继续了……】',
+      ]);
+    } else {
+      await era.printAndWait([
+        '【',
+        attacker.get_colored_name(),
+        ' 将主导权交给 ',
+        defender.get_colored_name(),
+        '……】',
+      ]);
+      await defender.say_and_wait('诶……？');
+      await defender.print_and_wait([
+        '原本近在咫尺的恋人突然拉远了距离，被压在身下的 ',
+        defender.get_colored_name(),
+        ' 眨着眼没能及时反应过来。',
+      ]);
+      await defender.print_and_wait('然后，眼前便是天旋地转……');
+      await attacker.say_and_wait('现在，是你的时间了。');
+      await defender.print_and_wait([
+        '张开双手的 ',
+        sys_get_colored_callname(defender.id, attacker.id),
+        ' 露出鼓励的笑容。',
+      ]);
+      attacker.say('……想怎么做都可以哦。');
+    }
   };
 
   const resist_race_desc = ['你也不', undefined, '我才', '我也'];

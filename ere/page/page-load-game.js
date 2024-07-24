@@ -9,7 +9,11 @@ const print_page_header = require('#/page/components/page-header');
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 
+const { chara_colors, get_chara_color } = require('#/data/chara-colors');
+const CrazyFans = require('#/data/event/crazy-fans');
 const event_hooks = require('#/data/event/event-hooks');
+const GrandLives = require('#/data/event/grand-lives');
+const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
@@ -75,7 +79,13 @@ module.exports = async () => {
           if (await era.loadData(ret)) {
             flag_load_game = false;
             event_queue.init();
+            const src_chara = era.get('cflag:0:模版角色');
+            chara_colors[0] =
+              src_chara > 0 ? get_chara_color(src_chara) : '#ffffff';
             CharaTalk.me = new CharaTalk(0);
+            new CrazyFans().clean();
+            new GrandLives().clean();
+            new LocCharacters().clean();
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;

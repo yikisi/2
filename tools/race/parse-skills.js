@@ -514,6 +514,7 @@ async function chara_skill() {
   skill_dict[202051] = 1;
   skill_dict[200301] = 1;
   skill_dict[200302] = 1;
+  skill_dict[910031] = 1;
   delete skill_dict[100601];
   delete skill_dict[900601];
   console.log('+通用技能', Object.keys(skill_dict).length);

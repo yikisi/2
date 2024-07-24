@@ -342,9 +342,10 @@ function get_image(chara_id) {
     } else {
       img_list.push('通用_脸_微笑');
     }
+    const suffix = era.get(`cflag:${chara_id}:种族`) ? '_马' : '';
     img_list.push({
       filter: hair_css_filter,
-      names: `通用_前发_${era.get(`cstr:${chara_id}:前发`)}\t通用_前发_厚刘海`,
+      names: `通用_前发_${era.get(`cstr:${chara_id}:前发`)}${suffix}\t通用_前发_厚刘海${suffix}`,
     });
     if ((temp = era.get(`cstr:${chara_id}:呆毛`))) {
       img_list.push({
@@ -693,6 +694,7 @@ async function page_ero(lover, skip_start_end) {
             last_action: era.get('tflag:前回行动'),
             lover_action: era.get('tflag:对手行动'),
           };
+    let all_action_disabled = true;
     era.printInColRows(
       [{ type: 'divider' }],
       {
@@ -733,14 +735,15 @@ async function page_ero(lover, skip_start_end) {
         if (isNaN(check_val)) {
           era.logger.debug(`${Object.keys(ero_hooks)[e]} ${check_val}`);
         }
+        const action_disabled =
+          lost_mind > 0 ||
+          (base_check && check_ero_enabled(curr_lover, curr_supporter, e) < 0);
+        all_action_disabled &&= action_disabled;
         return {
           accelerator: e,
           config: {
             buttonType: ero_derive_check[e] ? 'danger' : 'warning',
-            disabled:
-              lost_mind > 0 ||
-              (base_check &&
-                check_ero_enabled(curr_lover, curr_supporter, e) < 0),
+            disabled: action_disabled,
             width: 4,
           },
           content: ero_action_names[e],
@@ -814,7 +817,7 @@ async function page_ero(lover, skip_start_end) {
       ).toLocaleString()}ms`,
     );
     let ret;
-    if (lost_mind) {
+    if (all_action_disabled) {
       ret = ero_hooks.relax;
     } else {
       ret = await era.input();

@@ -23,6 +23,7 @@ const print_page_header = require('#/page/components/page-header');
 const print_ero_page = require('#/page/page-ero');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const GameGuides = require('#/event/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 
 const {
@@ -211,6 +212,7 @@ module.exports = async () => {
     homepage: true,
     week_start: false,
   };
+  await new GameGuides().game_start();
   while (flags.homepage) {
     await era.clear();
     let flag_skip_this_week = false;

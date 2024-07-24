@@ -15,6 +15,7 @@ const CoffeeEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-25'
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -105,6 +106,7 @@ module.exports = class extends CustomizedCheck {
     const edu_marks = new CoffeeEduMarks(),
       edu_weeks = era.get('cflag:25:育成回合计时');
     if (
+      era.get('cflag:25:招募状态') === recruit_flags.yes &&
       era.get('love:25') === 74 &&
       edu_marks.our_taste === 1 &&
       !era.get('flag:回合爱慕惩罚')

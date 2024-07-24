@@ -189,14 +189,14 @@ module.exports = {
           shame_mark = era.get(`mark:${chara_id}:羞耻`),
           hate_mark = era.get(`mark:${chara_id}:反抗`),
           ero_mark = era.get(`mark:${chara_id}:淫纹`),
-          pleasure_params = body_juels + spirit_juels / 5,
+          pleasure_params = body_juels + spirit_juels / 10,
           total_ex = era.get(`ex:${chara_id}:TotalEX`),
           pain_params = pain_juels / 10 + fear_juels / 10 - spirit_juels / 25,
           shame_params =
-            body_juels / 5 +
-            shame_juels / 5 -
-            meek_juels / 5 -
-            spirit_juels / 25;
+            body_juels / 20 +
+            shame_juels / 2 +
+            spirit_juels / 10 -
+            meek_juels / 5;
         if (!ero_mark) {
           if (pleasure_params >= 4000 && total_ex >= 6 && pleasure_mark < 3) {
             era.set(`nowex:${chara_id}:欢愉获取`, 3 - pleasure_mark);

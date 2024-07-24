@@ -61,13 +61,16 @@ function check_nige_loc_mind_over_take_mode(uma, i) {
  * @returns {boolean}
  */
 function check_nige_loc_mind_ex_mode(uma, i, l) {
+  const nige_type =
+    uma.race.conditionParams.is_used_skill_id.indexOf(202051) + 1;
   return (
     l
       .slice(0, i)
       .findIndex(
         (e) =>
-          e.style - e.race.conditionParams.is_used_skill_id >
-          -uma.race.conditionParams.is_used_skill_id,
+          e.style -
+            (e.race.conditionParams.is_used_skill_id.indexOf(202051) + 1) >
+          -nige_type,
       ) !== -1
   );
 }

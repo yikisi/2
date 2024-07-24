@@ -30,6 +30,7 @@ class ConditionParams {
   distance_rate_after_random;
   distance_type;
   down_slope_random;
+  furlong;
   grade;
   ground_condition;
   ground_type;
@@ -57,6 +58,7 @@ class ConditionParams {
   last_straight_random;
   lastspurt;
   near_count;
+  near_infront_count;
   order;
   order_rate;
   order_rate_in20_continue;

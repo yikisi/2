@@ -5,7 +5,9 @@ const CustomizedMec = require('#/event/mec/mec-common');
 
 module.exports = class extends CustomizedMec {
   set_callname() {
-    era.set('callname:24:0', '托雷纳酱');
+    if (!this.set_callname_from_src()) {
+      era.set('callname:24:0', '托雷纳酱');
+    }
   }
 
   get_race_contestants(info) {

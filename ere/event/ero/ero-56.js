@@ -1861,6 +1861,10 @@ handlers[ero_hooks.ero_start] = async () => {
     throw new Error(`unsupported hook!`); // 还没写
   }
 
+  if (!sys_check_awake(56)) {
+    throw new Error(`unsupported hook!`); // 还没写
+  }
+
   if (UMAZ) {
     await MF.say_and_wait([`我的身体……好热啊......`]);
     await me.print_and_wait([

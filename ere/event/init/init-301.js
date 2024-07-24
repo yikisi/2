@@ -17,6 +17,10 @@ module.exports = (is_reset) => {
         `骏川${era.get('cflag:301:性别') === 1 ? '先生' : '小姐'}`,
       );
     }
+    era.set(
+      'callname:301:305',
+      `安心泽${era.get('cflag:301:性别') === 1 ? '先生' : '小姐'}`,
+    );
     attr_names.forEach((e) => era.set(`base:301:${e}`, 1200));
   }
 };

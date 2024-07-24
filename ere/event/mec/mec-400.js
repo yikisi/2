@@ -36,7 +36,9 @@ module.exports = class extends CustomizedMec {
   }
 
   set_callname() {
-    era.set('callname:400:0', '托雷纳君');
+    if (!this.set_callname_from_src()) {
+      era.set('callname:400:0', '托雷纳君');
+    }
   }
 
   set_foreign_debuff(before_race, loc) {

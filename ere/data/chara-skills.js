@@ -8,8 +8,9 @@ class CharaSkills {
 
   constructor(chara_id) {
     this.id = chara_id;
-    this.obj =
-      get(`skill:${this.id}:习得技能`) || set(`skill:${this.id}:习得技能`, []);
+    this.obj = (
+      get(`skill:${this.id}:习得技能`) || set(`skill:${this.id}:习得技能`, [])
+    ).filter((e) => e);
   }
 
   /**
@@ -17,7 +18,6 @@ class CharaSkills {
    * @returns {number[]}
    */
   add(...skill_id) {
-    this.clean();
     const count = this.obj.length;
     this.obj.push(...skill_id);
     this.obj = set(
@@ -33,21 +33,14 @@ class CharaSkills {
     return ret;
   }
 
-  clean() {
-    this.obj = set(
-      `skill:${this.id}:习得技能`,
-      this.obj.filter((e) => e),
-    );
-  }
-
   clear() {
     this.obj = set(`skill:${this.id}:习得技能`, []);
     set(`exp:${this.id}:技能评价分`, 0);
+    return this;
   }
 
   /** @returns {number[]} */
   get() {
-    this.clean();
     return this.obj;
   }
 

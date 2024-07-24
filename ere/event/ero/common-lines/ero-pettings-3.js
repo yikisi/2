@@ -887,8 +887,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.self_pet_nipple] = (attacker, defender) =>
-    era.printAndWait([
+  handlers[ero_hooks.self_pet_nipple] = async (attacker, defender) => {
+    await era.printAndWait([
       '【',
       attacker.get_colored_name(),
       ' 在 ',
@@ -897,9 +897,10 @@ module.exports = (handlers) => {
       sys_get_colored_full_callname(attacker.id, attacker.id),
       ' 的胸部……】',
     ]);
+  };
 
-  handlers[ero_hooks.self_hand_job] = (attacker, defender) =>
-    era.printAndWait([
+  handlers[ero_hooks.self_hand_job] = async (attacker, defender) => {
+    await era.printAndWait([
       '【',
       attacker.get_colored_name(),
       ' 在 ',
@@ -908,9 +909,10 @@ module.exports = (handlers) => {
       sys_get_colored_full_callname(attacker.id, attacker.id),
       ' 的肉棒……】',
     ]);
+  };
 
-  handlers[ero_hooks.self_pet_clitoris] = (attacker, defender) =>
-    era.printAndWait([
+  handlers[ero_hooks.self_pet_clitoris] = async (attacker, defender) => {
+    await era.printAndWait([
       '【',
       attacker.get_colored_name(),
       ' 在 ',
@@ -919,9 +921,10 @@ module.exports = (handlers) => {
       sys_get_colored_full_callname(attacker.id, attacker.id),
       ' 的阴核……】',
     ]);
+  };
 
-  handlers[ero_hooks.self_finger_fuck] = (attacker, defender) =>
-    era.printAndWait([
+  handlers[ero_hooks.self_finger_fuck] = async (attacker, defender) => {
+    await era.printAndWait([
       '【',
       attacker.get_colored_name(),
       ' 在 ',
@@ -930,9 +933,10 @@ module.exports = (handlers) => {
       sys_get_colored_full_callname(attacker.id, attacker.id),
       ' 的小穴……】',
     ]);
+  };
 
-  handlers[ero_hooks.self_pet_anal] = (attacker, defender) =>
-    era.printAndWait([
+  handlers[ero_hooks.self_pet_anal] = async (attacker, defender) => {
+    await era.printAndWait([
       '【',
       attacker.get_colored_name(),
       ' 在 ',
@@ -941,4 +945,5 @@ module.exports = (handlers) => {
       sys_get_colored_full_callname(attacker.id, attacker.id),
       ' 的屁穴……】',
     ]);
+  };
 };

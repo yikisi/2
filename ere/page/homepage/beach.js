@@ -80,7 +80,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       {
         accelerator: 999,
         config: {
-          buttonType: event_marks.get(event_hooks.week_end)
+          buttonType: event_marks.check(event_hooks.week_end)
             ? 'danger'
             : 'warning',
           width: 6,

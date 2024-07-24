@@ -460,6 +460,11 @@ async function sys_calc_orgasm(shown, ...ids) {
               if (other_part === part_enum.mouth) {
                 era.add(`exp:${other_id}:饮精量`, amount);
                 era.add(`nowex:${other_id}:饮精量`, amount);
+                if (!chara_id) {
+                  era.add(`tcvar:${other_id}:获得因子`, amount * 2.5);
+                } else if (!other_id) {
+                  era.add(`tcvar:${chara_id}:获得因子`, amount * 5);
+                }
                 if (!era.get(`cstr:${other_id}:初次吞精经历`)) {
                   if (sys_check_awake(other_id)) {
                     era.set(`cstr:${other_id}:初次吞精经历`, [
@@ -513,6 +518,11 @@ async function sys_calc_orgasm(shown, ...ids) {
                 era.add(`exp:${other_id}:内射次数`, 1);
                 era.add(`exp:${other_id}:膣内精液量`, amount);
                 era.add(`nowex:${other_id}:膣内精液`, amount);
+                if (!chara_id) {
+                  era.add(`tcvar:${other_id}:获得因子`, amount * 3);
+                } else if (!other_id) {
+                  era.add(`tcvar:${chara_id}:获得因子`, amount * 6);
+                }
                 if (!era.get(`cstr:${chara_id}:初次内射经历`)) {
                   if (sys_check_awake(chara_id)) {
                     era.set(`cstr:${chara_id}:初次内射经历`, [
@@ -591,6 +601,11 @@ async function sys_calc_orgasm(shown, ...ids) {
                 era.add(`exp:${other_id}:肠内射精次数`, 1);
                 era.add(`exp:${other_id}:肠内精液量`, amount);
                 era.set(`nowex:${other_id}:肠内精液`, amount);
+                if (!chara_id) {
+                  era.add(`tcvar:${chara_id}:获得因子`, amount * 2.5);
+                } else if (!other_id) {
+                  era.add(`tcvar:${other_id}:获得因子`, amount * 5);
+                }
                 update_juels_from_talent(other_id, '精液灌肠');
                 update_palam_from_talent(other_id, '肠道敏感', part_enum.anal);
               } else if (other_part !== part_enum.item) {
@@ -623,6 +638,13 @@ async function sys_calc_orgasm(shown, ...ids) {
               new EroParticipant(chara_id, part_enum.virgin),
               new EroParticipant(other_id, other_part),
             );
+            if (other_part === part_enum.mouth) {
+              if (!chara_id) {
+                era.add(`tcvar:${other_id}:获得因子`, 5);
+              } else if (!other_id) {
+                era.add(`tcvar:${chara_id}:获得因子`, 10);
+              }
+            }
           }
         }
       }

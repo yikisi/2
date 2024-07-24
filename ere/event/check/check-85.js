@@ -16,6 +16,7 @@ const RubyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-85');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const RubyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-85');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -55,7 +56,11 @@ module.exports = class extends CustomizedCheck {
   check_next_week() {
     const rec_status = era.get(`cflag:${this.id}:招募状态`),
       edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
-    if (era.get('cflag:0:性别') === 1 && era.get('cflag:85:性别') === 0) {
+    if (
+      rec_status === recruit_flags.yes &&
+      era.get('cflag:0:性别') === 1 &&
+      era.get('cflag:85:性别') === 0
+    ) {
       const love = era.get('love:85'),
         life_marks = new RubyLifeMarks();
       if (love >= 75 && !life_marks.love_75) {

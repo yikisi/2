@@ -61,7 +61,8 @@ module.exports = class extends CustomizedCheck {
     const edu_weeks = era.get('cflag:100:育成回合计时');
     if (
       era.get('cflag:100:招募状态') === recruit_flags.yes &&
-      Math.random() < 0.2 * (era.get('status:0:熬夜') + 1)
+      Math.random() < 0.2 * (era.get('status:0:熬夜') + 1) &&
+      era.get('cflag:0:位置') === era.get('cflag:100:位置')
     ) {
       add_event(
         event_hooks.week_start,

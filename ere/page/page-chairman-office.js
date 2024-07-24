@@ -11,10 +11,13 @@ const {
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const get_riko_button = require('#/page/components/get-riko-button');
 const goto_sex = require('#/page/components/goto-sex');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
+
+const GameGuides = require('#/event/game-guides');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -40,6 +43,7 @@ async function page_chairman_office() {
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了理事长办公室……',
   ]);
+  await new GameGuides().school_chairman();
   const loc_characters = new LocCharacters(),
     celebration = get_celebration(),
     chara = get_chara_talk(loc_characters.get(location_enum.chairman)[0]),
@@ -146,7 +150,8 @@ async function page_chairman_office() {
                       (era.get(`cflag:${chara_id}:随机招募`) ||
                         era.get(`staticcflag:${chara_id}:随机招募`)) &&
                       era.get(`cflag:${chara_id}:招募状态`) !==
-                        recruit_flags.yes,
+                        recruit_flags.yes &&
+                      era.get('cflag:0:模版角色') !== chara_id,
                   );
                 if (
                   era.get('cflag:302:招募状态') !== recruit_flags.yes &&
@@ -308,7 +313,7 @@ async function page_chairman_office() {
           },
           { loc: location_enum.chairman, name: '约会', print_out_page },
           { name: `庆祝 ${celebration}` },
-          {},
+          get_riko_button(chara, get_chara_talk(0)),
           { name: '再见' },
         );
     }

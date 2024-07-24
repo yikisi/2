@@ -11,7 +11,7 @@ const { get_image } = require('#/system/sys-calc-image');
 const { join_list } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
-const { attr_colors, hair_colors, skin_colors } = require('#/data/const.json');
+const { hair_colors, skin_colors } = require('#/data/const.json');
 const {
   chara_desc,
   chara_full_desc,
@@ -32,7 +32,6 @@ const {
   race_clothe_list,
   top_hairs,
 } = require('#/data/other-const');
-const { attr_names } = require('#/data/train-const');
 
 const page_name = '个人情报';
 
@@ -503,27 +502,6 @@ module.exports = {
                 },
               ]
             : []),
-          {
-            config: { content: '属性', position: 'left' },
-            type: 'divider',
-          },
-          ...(flags.in_growth
-            ? [{ content: growth_info, type: 'text' }]
-            : attr_names.map((e) => {
-                const num = era.get(`base:${chara.id}:${e}`);
-                return {
-                  config: { width: 4, color: attr_colors[e] },
-                  content: [
-                    e,
-                    '：',
-                    {
-                      content: Math.floor(num).toLocaleString(),
-                      fontWeight: 'bold',
-                    },
-                  ],
-                  type: 'text',
-                };
-              })),
           {
             config: { content: '称号', position: 'left' },
             type: 'divider',
