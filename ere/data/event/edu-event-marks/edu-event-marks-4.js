@@ -31,12 +31,12 @@ class MaEduMarks extends EduEventMarks {
   broken_tears;
   //NORMAL END 1 平淡的每一天
   happiness_day;
-  // GOOD END 误入乐园的旅人
-  fall_heaven;
-  //TURE END 温柔的世界
-  gentle_wind;
   // NORMAL END 2 梦的远方
   girls_dream;
+  //TURE END 温柔的世界
+  gentle_wind;
+  // GOOD END 误入乐园的旅人
+  fall_heaven;
   // TE导航
   true_end;
   // GE导航

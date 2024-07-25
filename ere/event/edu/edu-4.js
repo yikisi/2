@@ -284,7 +284,6 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
       } else {
         await chara_talk.say_and_wait('一、二、三、四，游刃有余♪');
         await chara_talk.say_and_wait('五、六、七、八，完全没问题♪');
-
         await chara_talk.say_and_wait(
           `${get_chara_talk(0).name}，我跳得怎么样？`,
         );
@@ -1198,7 +1197,6 @@ handlers[event_hooks.school_rooftop] = async (
       }
     }
     event_marks.mygo++;
-    event_marks.wind--;
     get_attr_and_print_in_event(4, [0, 0, 0, 0, 10], 0) &&
       (await era.waitAnyKey());
     return true;

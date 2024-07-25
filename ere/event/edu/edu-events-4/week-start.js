@@ -825,10 +825,10 @@ module.exports = async function (hook, _, event_object) {
     await me.say_and_wait(`找个没人的荒岛就这样度过余生吧。`, true);
     era.printButton(`抱歉，你认错人了。`, 1);
     await era.input();
-    era.printButton(`现在的我只是一个路过的普通训练员罢了。`, 1);
+    era.printButton(`现在的我只是一个非常普通的训练员罢了。`, 1);
     await era.input();
     await chara_talk.say_and_wait(
-      `......啊啦，这位普通的训练员${me.get_adult_sex_title()}。`,
+      `......啊啦，这位嗯...非常普通的训练员${me.get_adult_sex_title()}。`,
     );
     await chara_talk.say_and_wait(
       `刚才喊的可真有气势，我在楼梯上都听到了那充满热情的声音。`,
@@ -1064,6 +1064,7 @@ module.exports = async function (hook, _, event_object) {
           era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
         }最可爱了♪`,
       );
+      event_marks.wind--;
     } else {
       await chara_talk.say_and_wait(`欸——`);
       await era.printAndWait(`丸善斯基带着不可思议的表情看着你。`);
@@ -1091,6 +1092,7 @@ module.exports = async function (hook, _, event_object) {
       await chara_talk.say_and_wait(
         `哈啊，不管怎么样，一定不要对其他的孩子这么说哦，这次的对象是我还好。不，即使是我的话也不要。`,
       );
+      event_marks.wind++;
     }
     await me.say_and_wait(`说起来，丸善斯基。`);
     await me.say_and_wait(`虽然有些突兀，不过有个问题困扰了我很久。`);
@@ -1128,7 +1130,6 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(
       `虽然冬日的寒冷尚未撤去，但丸善斯基的笑容却令你感到了温暖。`,
     );
-    event_marks.wind++;
     wait_flag =
       get_attr_and_print_in_event(4, [0, 20, 0, 0, 0], undefined) || wait_flag;
   } else if (edu_weeks === 47 + 6) {
@@ -1306,8 +1307,8 @@ module.exports = async function (hook, _, event_object) {
     await me.say_and_wait(`......`);
     await era.printAndWait(`赛马娘界不是那个付出就能得到回报的温柔的世界。`);
     await era.printAndWait(`尽管如此。`);
-    era.printButton(`付出终会有回报的一天`, 1); //wind +1
-    era.printButton(`或许尽早退出也是一件好事`, 2); //wind -1
+    era.printButton(`付出终会有回报的一天`, 1);
+    era.printButton(`或许尽早退出也是一件好事`, 2);
     const ret = await era.input();
     if (ret === 1) {
       await me.say_and_wait(`付出终会有回报的一天。`);
@@ -1330,7 +1331,6 @@ module.exports = async function (hook, _, event_object) {
       get_attr_and_print_in_event(4, [0, 0, 0, 0, 20], undefined) || wait_flag;
   } else if (edu_weeks === 47 + 9) {
     await print_event_name('殿堂周（因子继承）', chara_talk);
-    // 继承选择与购买技能
     era.set('cflag:4:节日事件标记', 0);
     await era.printAndWait(`礼堂\n`);
     await era.printAndWait(`殿堂周是特雷森最重要的几个节日之一。`);
@@ -1374,8 +1374,40 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(`回到训练室后，你们坐在一起看录像带直到深夜。`);
     wait_flag =
       get_attr_and_print_in_event(4, [0, 0, 0, 0, 20], undefined) || wait_flag;
+  } else if (edu_weeks === 47 + 12) {
+    // 大舞台 上台表演 很久以前的舞蹈 潮流 从来没听过这样的马娘
+    await print_event_name('粉丝感谢祭', chara_talk);
+    await era.printAndWait(
+      `粉丝感谢祭是为了感谢一直支持赛场上的马娘们的粉丝们而召开的节日。`,
+    );
+    await era.printAndWait(
+      `这一天，特雷森会开放大门，在特雷森就读的学生们会在学生会安排下的主舞台以及几个副舞台进行表演。`,
+    );
+    await era.printAndWait(
+      `作为在赛马娘道路上前进的马娘们，往往会得到更多的关注。`,
+    );
+    await era.printAndWait(`舞蹈室\n`);
+    await chara_talk.say_and_wait('一、二、三、四，游刃有余♪');
+    await chara_talk.say_and_wait('五、六、七、八，完全没问题♪');
+    await era.printAndWait(`你看着丸善斯基进行最后一遍排练。`);
+    await chara_talk.say_and_wait('训练员君你觉得怎么样？');
+    era.printButton(`好怀念的歌曲`, 1);
+    await era.input();
+    await era.printAndWait(
+      `世纪初的非主流歌曲在耳边响起，激烈的鼓点与明快的节奏以及伴随着节拍摆动着步伐的丸善斯基。`,
+    );
+    await era.printAndWait(
+      `恍惚之间似乎回到了学生时代，那个下课后便三三两两聚在一起讨论着最新的CD集。`,
+    );
+    await chara_talk.say_and_wait(
+      '训练员君这可是现在最新潮的流行歌曲哦？这样下去的话会跟不上时代的。',
+    );
+    await chara_talk.say_and_wait(`差不多该我出场了。`);
+    await chara_talk.say_and_wait(`训练员君就在台下好好欣赏吧。`);
+    await era.printAndWait(`一部分游客很喜欢这种复古音乐。`);
+    await era.printAndWait(`像是回到了那个时代一样。`);
+    await era.printAndWait(`丸善斯基定义的潮流总是令人怀念。`);
   } else if (edu_weeks === 47 + 17) {
-    // 玩家病倒，丸善斯基照顾，夏季合宿阶段丸善斯基生病，玩家照顾，核心语句应该包括对人生的意义看法，为后文丸善斯基的觉醒做铺垫
     await print_event_name('憧憬', chara_talk);
     await era.printAndWait(`训练室\n`);
     await era.printAndWait(
@@ -1457,23 +1489,39 @@ module.exports = async function (hook, _, event_object) {
       `已经煮好一段时间了，如果还是有点烫的话，要和我说哦。`,
     );
     await era.printAndWait(
-      `温暖的流体送进了你的口中，昏昏沉沉的大脑只能凭借本能认定这是对自己有利的东西。`,
+      `温热的流体送进了你的口中，昏昏沉沉的大脑只能凭借本能认定这是对自己有利的东西。`,
     );
-    await me.say_and_wait(`不用了，我自己来。`);
-    await era.printAndWait(
-      `刚想要就这么坐起来，却被更加强而有力的双手制止住了。`,
-    );
-    await chara_talk.say_and_wait(
-      `现在不是逞强的时候，病人应该乖乖躺在床上然后好好休息。`,
-    );
-    await me.say_and_wait(`丸善斯基...`);
-    await era.printAndWait(
-      `终于耗尽了最后一丝力气，不得不躺在床上。努力将送入口中的食物吞咽下去。`,
-    );
-    await era.printAndWait(
-      `那双温暖的双手，以及那副认真的模样，不知不觉间，似乎与母亲的面貌慢慢重合在了一起。`,
-    );
-    await me.say_and_wait(`......妈妈。`);
+    era.printButton(`谢谢。`, 1);
+    era.printButton(`不用了，我自己来。`, 2);
+    const ret2 = await era.input();
+    if (ret2 === 1) {
+      await era.printAndWait(
+        `眼前的身影似乎披上了一层模糊的雾，你有些看不清她的动作。`,
+      );
+      await era.printAndWait(`既然这样，还是干脆闭上眼睛吧。`);
+      await era.printAndWait(`打定主意后，你闭上眼睛，配合着对方的动作。`);
+      await era.printAndWait(
+        `每一次调羹与瓷碗之间的碰撞，都会有一股温热的流体进入口腔之中。`,
+      );
+      await era.printAndWait(
+        `温暖的感触，以及熟练且精准的动作。而最重要的则是，那怀念的感觉。不知不觉间，似乎与母亲的面貌慢慢重合在了一起。`,
+      );
+      event_marks.wind++;
+    } else {
+      await me.say_and_wait(`不用了，我自己来。`);
+      await era.printAndWait(
+        `刚想要就这么坐起来，却被更加强而有力的双手制止住了。`,
+      );
+      await chara_talk.say_and_wait(
+        `现在不是逞强的时候，病人应该乖乖躺在床上然后好好休息。`,
+      );
+      await me.say_and_wait(`丸善斯基...`);
+      await era.printAndWait(
+        `终于耗尽了最后一丝力气，不得不躺在床上。努力将送入口中的食物吞咽下去。`,
+      );
+      event_marks.wind--;
+    }
+    await me.say_and_wait(`......好温暖。`);
     await era.printAndWait(`怀念的气息让你闭上了眼睛，陷入了沉沉的睡眠之中。`);
     await era.printAndWait(`因为恐惧而不断奔波的身体，终于得到了安心。`);
     era.drawLine();
@@ -1490,7 +1538,6 @@ module.exports = async function (hook, _, event_object) {
     );
     await me.say_and_wait(`就这样一直等到她醒来吧。`, true);
     await era.printAndWait(`这么想着，你闭上了眼等待着天亮的时候。`);
-    event_marks.wind++;
     if (ret1 === 1) {
       wait_flag =
         get_attr_and_print_in_event(4, [0, 20, 0, 20, 0], 0) || wait_flag;
@@ -1922,8 +1969,8 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(
       `人类远古时期流传下来的恐惧让你的大脑全速运转，你的决定是。`,
     );
-    era.printButton(`抱歉，我不会在这点上让步`, 1);
-    era.printButton(`非常抱歉，我是个罪人`, 2);
+    era.printButton(`我不会让步的`, 1);
+    era.printButton(`对不起`, 2);
     const ret1 = await era.input();
     if (ret1 === 1) {
       await chara_talk.say_and_wait(`......`);
@@ -2008,7 +2055,8 @@ module.exports = async function (hook, _, event_object) {
         `这是你第一次直面领域，但心中有种难以形容的温暖与激情让你凝视着她的双眼。`,
       );
       await era.printAndWait(`然后，你看着她的气势慢慢的消散，越来越小。`);
-      await era.printAndWait(`最后，丸善斯基耷拉着耳朵，乖乖地听着你的说教。`);
+      await era.printAndWait(`最后，丸善斯基叹了口气，然后露出了欣慰的表情。`);
+
       event_marks.wind++;
       wait_flag =
         get_attr_and_print_in_event(4, [20, 20, 20, 20, 20], undefined) ||
@@ -3099,10 +3147,10 @@ module.exports = async function (hook, _, event_object) {
       await era.printAndWait(`想要达成GOOD END 生涯比赛需要全部获胜。`);
       await era.printAndWait(`节日相关剧情选项不影响结局。`);
       await era.printAndWait(
-        `剧情相关注意第二年选项，存档可以考虑从二年1月第三周开始。`,
+        `剧情相关注意第二年选项，存档可以考虑从二年1月第三周开始，事件名：春冬之交。`,
       );
       await era.printAndWait(
-        `若满足TE/GE条件，3年1月会在选择对话中出现特殊台词。`,
+        `若满足TE/GE条件，3年1月选择清空队伍列表，重新选择丸善斯基触发对话，会出现特殊台词。`,
       );
       await era.printAndWait(`最后，祝你早日达成GE。`);
     } else {
@@ -3220,10 +3268,10 @@ module.exports = async function (hook, _, event_object) {
       await era.printAndWait(`想要达成GOOD END 生涯比赛需要全部获胜。`);
       await era.printAndWait(`节日相关剧情选项不影响结局。`);
       await era.printAndWait(
-        `剧情相关注意第二年选项，存档可以考虑从二年1月第三周开始。`,
+        `剧情相关注意第二年选项，存档可以考虑从第二年1月第三周开始，事件名：春冬之交。`,
       );
       await era.printAndWait(
-        `若满足GE条件，3年1月会在选择对话中出现特殊台词。`,
+        `若满足GE条件，3年1月选择清空队伍列表，重新选择丸善斯基触发对话，会出现特殊台词。`,
       );
       await era.printAndWait(`最后，祝你早日达成GE。`);
     } else {
@@ -3508,7 +3556,7 @@ module.exports = async function (hook, _, event_object) {
     await era.input();
     await era.printAndWait(`就像是梦中的幻影一样，丸善斯基露出了笑容。`);
     await chara_talk.say_and_wait(`欢迎回来。`);
-    await print_event_name(`TRUE END 伊甸之梦`, chara_talk);
+    await print_event_name(`GOOD END 伊甸之梦`, chara_talk);
     await era.printAndWait(`Thank you for your watching!`);
   }
   wait_flag && (await era.waitAnyKey());

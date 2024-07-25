@@ -11,6 +11,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -114,6 +115,14 @@ module.exports = class extends CustomizedCheck {
           event_hooks.week_end,
           event_obj,
         );
+      new EduEventMarks(4).get('wind') === 20 &&
+        check_and_add_event(
+          event_marks,
+          edu_weeks,
+          'windy',
+          event_hooks.week_start,
+          event_obj,
+        );
       switch (edu_weeks) {
         // 丸善斯基登场 wind = 1
         case 5: //来自姐姐的礼物 (已完成) wind = 2
@@ -158,7 +167,6 @@ module.exports = class extends CustomizedCheck {
         case 47 + 9:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // todo 4月2日 粉丝感谢祭
         // 5月第二周 晚上好，是丸善斯基哦(已完成) wind +- 9
         case 47 + 16:
           add_event(event_hooks.week_end, event_obj_special);
@@ -260,6 +268,9 @@ module.exports = class extends CustomizedCheck {
           ) {
             event_marks.sister_annoyance++;
             add_event(event_hooks.week_end, event_obj_special);
+          } else {
+            add_event(event_hooks.week_start, event_obj_special);
+            break;
           }
           break;
         // 6月第三周 少女的忧郁（上）
@@ -306,7 +317,9 @@ module.exports = class extends CustomizedCheck {
       check_aim_race(races, race_enum.toky_yus, 1, 1) &&
       check_aim_race(races, race_enum.sank_hai, 2, 1) &&
       check_aim_race(races, race_enum.tenn_sho, 2, 1) &&
-      event_marks.wind === 20
+      event_marks.wind === 20 &&
+      event_marks.sister_annoyance === 2 &&
+      event_marks.girls_blue === 3
     ) {
       new MaEduMarks().fall_heaven++;
     } else if (
@@ -314,7 +327,9 @@ module.exports = class extends CustomizedCheck {
       check_aim_race(races, race_enum.sank_hai, 2, 1) &&
       check_aim_race(races, race_enum.tenn_sho, 2, 1) &&
       event_marks.wind >= 14 &&
-      event_marks.wind <= 22
+      event_marks.wind <= 22 &&
+      event_marks.sister_annoyance === 2 &&
+      event_marks.girls_blue === 3
     ) {
       new MaEduMarks().gentle_wind++;
     } else if (check_aim_race(races, race_enum.sank_hai, 2, 1)) {
