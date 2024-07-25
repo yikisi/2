@@ -12,7 +12,8 @@ const fron_cols = 4,
  * @param {number} [timer]
  */
 function get_event_record(message, timer_record, timer) {
-  const _content = message instanceof Array ? message : [message];
+  const _content = message instanceof Array ? message : [message],
+    count = _content.reduce((p, c) => p + (c['content'] || c).length, 0);
   return {
     config: { align: 'left' },
     content: [
@@ -22,6 +23,7 @@ function get_event_record(message, timer_record, timer) {
       ..._content,
       '」',
     ],
+    speak: count,
     timer,
     type: 'text',
   };

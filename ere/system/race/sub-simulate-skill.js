@@ -2,7 +2,6 @@ const { logger } = require('#/era-electron');
 
 const {
   add_timer,
-  get_lane_name,
   get_skill_record,
   get_table_row,
   progress_width,
@@ -20,6 +19,9 @@ const {
   frame_rate,
   race_event_enum,
 } = require('#/data/race/race-sim-const');
+
+let top_lane = undefined,
+  top_slope = 0;
 
 /**
  * @param {PseudoUma} uma
@@ -66,7 +68,7 @@ function check_random_loc(uma, key, param_val) {
  * @param {string[][]} fron_records
  * @param {{loc:{data:number[]}[],skill:{data:number[]}[],speed:{data:number[]}[],stamina:{data:number[]}[]}} statistics
  * @param {{report:[],skill:[]}} buffer
- * @param {Record<string,{e:number,u:PseudoUma}[]>} report_cache
+ * @param {{e:number,[u]:PseudoUma,[l]:RaceLane,[s]:number}[][]} report_cache
  * @param {{fron_end:number,fron_start:number,progress_width:number,has_final_corner:RaceLane|undefined,timer_record:string}} params
  */
 function sub_simulate_skill(
@@ -97,6 +99,20 @@ function sub_simulate_skill(
       race_info.slopes.find(
         (e) => uma.race.location >= e.start && uma.race.location < e.end,
       )?.slope || 0;
+    if (uma.rank.curr === 1) {
+      cur_lane !== top_lane &&
+        report_cache
+          .at(-1)
+          .push({ e: race_event_enum.loc_change, l: cur_lane });
+      uma.race.slope !== top_slope &&
+        report_cache.at(-1).push({
+          c: uma.race.slope - top_slope,
+          e: race_event_enum.loc_change,
+          s: uma.race.slope,
+        });
+      top_lane = cur_lane;
+      top_slope = uma.race.slope;
+    }
 
     dynamic_table.at(-1).push(
       get_table_row(
@@ -115,7 +131,7 @@ function sub_simulate_skill(
               ? '头马'
               : `${(uma.race.location - top_location_in_race).toFixed(1)}m`,
             `(${Math.round(uma.race.location).toLocaleString()}m`,
-            get_lane_name(cur_lane),
+            cur_lane.get_abbr(),
             uma.race.slope > 0
               ? '上坡'
               : uma.race.slope < 0
@@ -157,10 +173,7 @@ function sub_simulate_skill(
           Math.random() < 0.55) ||
         !uma.race.temptation
       ) {
-        (
-          report_cache[params.timer_record] ||
-          (report_cache[params.timer_record] = [])
-        ).push({ e: race_event_enum.temp_end, u: uma });
+        report_cache.at(-1).push({ e: race_event_enum.temp_end, u: uma });
         uma.race.temptation = 0;
         uma.race.conditionParams.is_temptation = 0;
       }
@@ -168,10 +181,7 @@ function sub_simulate_skill(
       uma.base.temptationSpan < race_info.span &&
       uma.race.location >= uma.base.temptationSpan
     ) {
-      (
-        report_cache[params.timer_record] ||
-        (report_cache[params.timer_record] = [])
-      ).push({ e: race_event_enum.temptation, u: uma });
+      report_cache.at(-1).push({ e: race_event_enum.temptation, u: uma });
       uma.base.temptationSpan = 50000;
       uma.race.temptation = 12 * frame_rate;
       uma.race.conditionParams.is_temptation = 1;
@@ -490,10 +500,7 @@ function sub_simulate_skill(
       !uma.race.conditionParams.is_lastspurt &&
       uma.race.location >= uma.race.locationPlanRush
     ) {
-      (
-        report_cache[params.timer_record] ||
-        (report_cache[params.timer_record] = [])
-      ).push({ e: race_event_enum.final_push, u: uma });
+      report_cache.at(-1).push({ e: race_event_enum.final_push, u: uma });
       uma.race.conditionParams.is_lastspurt = 1;
     }
     if (uma.race.conditionParams.is_lastspurt) {
@@ -514,7 +521,7 @@ function sub_simulate_skill(
         uma.race.competeFightAim = undefined;
         uma.race.competeFightTimer = 0;
       } else {
-        uma.race.competeFightTimer = add_timer(uma.race.competeFightAim);
+        uma.race.competeFightTimer = add_timer(uma.race.competeFightTimer);
       }
     } else if (
       uma.race.conditionParams.is_last_straight &&
@@ -536,10 +543,11 @@ function sub_simulate_skill(
     }
     if (uma.race.competeFightTimer >= 2) {
       if (uma.race.competeFightTimer === 2) {
-        (
-          report_cache[params.timer_record] ||
-          (report_cache[params.timer_record] = [])
-        ).push({ e: race_event_enum.compete_fight, u: uma });
+        report_cache.at(-1).push({
+          a: uma.race.competeFightAim,
+          e: race_event_enum.compete_fight,
+          u: uma,
+        });
       }
       uma.race.velocityIdeal += uma.factorFinal.vCompeteFightBuff;
       uma.race.acceleration += uma.factorFinal.accCompeteFightBuff;
@@ -881,10 +889,7 @@ function sub_simulate_skill(
                     e.race.conditionParams.is_temptation = Number(
                       skill.values[i][j] > 0,
                     );
-                    (
-                      report_cache[params.timer_record] ||
-                      (report_cache[params.timer_record] = [])
-                    ).push({
+                    report_cache.at(-1).push({
                       e: e.race.conditionParams.is_temptation
                         ? e.race.temptation > 0
                           ? race_event_enum.temp_continue
@@ -981,3 +986,11 @@ function sub_simulate_skill(
 }
 
 module.exports = sub_simulate_skill;
+/**
+ * @param {RaceLane} lane
+ * @param {number} slope
+ */
+module.exports.init = (lane, slope) => {
+  top_lane = lane;
+  top_slope = slope;
+};

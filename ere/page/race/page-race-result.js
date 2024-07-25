@@ -26,9 +26,10 @@ const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'],
 /**
  * @param {PseudoUma[]} contestants
  * @param {RaceInfo} info
+ * @param {number} [race_id]
  */
-async function page_race_result(contestants, info) {
-  const result = sys_sim_race(contestants, info);
+async function page_race_result(contestants, info, race_id) {
+  const result = sys_sim_race(contestants, info, race_id);
   era.printMultiColumns([
     { type: 'divider' },
     {

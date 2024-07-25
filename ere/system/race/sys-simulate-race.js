@@ -1,11 +1,15 @@
-﻿const { logger, printInColRows, replaceInColRows } = require('#/era-electron');
+﻿const {
+  get,
+  logger,
+  printInColRows,
+  replaceInColRows,
+} = require('#/era-electron');
 
 const {
   add_timer,
   fron_cols,
   get_bashin_desc,
   get_event_record,
-  get_lane_name,
   get_skill_record,
   get_table_header,
   get_table_row,
@@ -13,6 +17,7 @@ const {
   progress_width,
   screen_size,
 } = require('#/system/race/snippets');
+const sub_simulate_report = require('#/system/race/sub-simulate-report');
 const sub_simulate_skill = require('#/system/race/sub-simulate-skill');
 
 const {
@@ -25,7 +30,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
 const { ability_type_enum } = require('#/data/race/model/uma-skill');
-const { race_enum, race_infos } = require('#/data/race/race-const');
+const { race_enum } = require('#/data/race/race-const');
 const {
   frame_rate,
   loc_mind_multiply_velocity_ideal,
@@ -38,10 +43,15 @@ const {
 } = require('#/data/race/race-sim-const');
 const { attr_enum } = require('#/data/train-const');
 
-/** @type {(string|array)[][]} */
-const beginning_reports = [
-  ['赛马娘请入闸……', '全部马娘准备妥当……', '准备……', '一开闸！'],
-  ['赛马娘准备好……', '随时预备起步……', '预备……', '一起步！'],
+const beginning_report_handlers = [
+  () => ['赛马娘请入闸……', '全部马娘准备妥当……', '准备……', '一开闸！'],
+  () => ['赛马娘准备好……', '随时预备起步……', '预备……', '一起步！'],
+  (info) => [
+    '比赛马上开始……',
+    `马娘 ${info.gates} 名`,
+    [`${get('flag:当前年')} 年度 `, info.get_colored_name()],
+    '——开始！',
+  ],
 ];
 
 /**
@@ -97,26 +107,58 @@ function check_nige_loc_mind_ex_mode(uma, i, l) {
   );
 }
 
+/** @type {Record<string,function(RaceInfo,PseudoUma):((string|{content:string})[])>} */
+const race_message_handlers = {};
+race_message_handlers.undefined = () => ['正在检查跑道……'];
+race_message_handlers[race_enum.sats_sho] = (_, top_pop) => [
+  top_pop.get_colored_name(),
+  ' 顺利入闸，感觉之后会成为名马娘呢。',
+];
+race_message_handlers[race_enum.toky_yus] = () => [
+  '赛马娘一生一度的德比，马上就要决出赢家了。',
+];
+race_message_handlers[race_enum.kiku_sho] = (info) => [
+  '今年的 ',
+  info.get_colored_name(),
+  ' 可谓战国时代，群雄辈出。',
+];
+race_message_handlers[race_enum.takz_kin] = (_, top_pop) => [
+  '各位的梦想是谁呢？我的梦想是 ',
+  top_pop.get_colored_name(),
+];
+race_message_handlers.default = (info) => [
+  '在这 ',
+  info.get_colored_name(),
+  ' 的赛场上，各位赛马娘也会全力以赴为大家带来梦想。',
+];
+
 /**
  * @param {PseudoUma[]} list_chara
  * @param {RaceInfo} race_info
+ * @param {number} [race_id]
  */
-function sys_sim_race(list_chara, race_info) {
-  const beginning_report = get_random_entry(beginning_reports),
+function sys_sim_race(list_chara, race_info, race_id) {
+  const beginning_report =
+      race_id === undefined
+        ? ['正在检查马闸……', '正在检查令枪……', '选手入闸……', '开赛！']
+        : get_random_entry(beginning_report_handlers)(race_info),
     current = new Date().getTime(),
     count_uma = list_chara.length,
     top_pop = list_chara.find((e) => e.pop[0] === 1),
-    top_pop_message = [
-      '第 1 人气，',
-      { content: top_pop.name, color: top_pop.color, fontWeight: 'bold' },
-      ' 今天看上去干劲',
-      top_pop.motivation > 0
-        ? '满满'
-        : top_pop.motivation < 0
-          ? '不是很好'
-          : '似乎一般',
-      '！',
-    ],
+    top_pop_message =
+      race_id === undefined
+        ? '选手检查蹄铁……'
+        : [
+            '第 1 人气，',
+            top_pop.get_colored_name(),
+            ' 今天看上去干劲',
+            top_pop.motivation > 0
+              ? '满满'
+              : top_pop.motivation < 0
+                ? '不是很好'
+                : '似乎一般',
+            '！',
+          ],
     fron_header = new Array(Math.floor(race_info.span / 200) - 1)
       .fill(0)
       .map((_, i) => (race_info.span % 200) + (i + 1) * 200),
@@ -130,14 +172,9 @@ function sys_sim_race(list_chara, race_info) {
       race_info.ground === RaceInfo.ground_enum.grass
         ? mod_stamina_cost_mess_grass[race_info.mess]
         : mod_stamina_cost_mess_dirt[race_info.mess],
-    race_message =
-      race_infos.indexOf(race_info) === race_enum.toky_yus
-        ? ['赛马娘一生一度的德比，马上就要决出赢家了。']
-        : [
-            '在这 ',
-            race_info.get_colored_name(),
-            ' 的赛场上，各位赛马娘也会全力以赴为大家带来梦想。',
-          ];
+    race_message = (
+      race_message_handlers[race_id] || race_message_handlers.default
+    )(race_info, top_pop);
   let flag_race_phase = 1;
   message_buffer.push(get_event_record(race_message));
   printInColRows([{ type: 'divider' }, ...message_buffer]);
@@ -152,7 +189,7 @@ function sys_sim_race(list_chara, race_info) {
     },
     buffer = { report: [], skill: [] };
   let dynamic_table = [],
-    report_cache = {};
+    report_cache = [];
   Object.keys(statistics).forEach(
     (k) =>
       (statistics[k] = list_chara.map((uma) => ({
@@ -173,9 +210,10 @@ function sys_sim_race(list_chara, race_info) {
     ),
   ]);
 
-  const lane = get_lane_name(race_info.lanes[0]),
+  const lane = race_info.lanes[0],
     slope = race_info.slopes[0]?.start === 0 ? race_info.slopes[0].slope : 0,
     loc_mind_end = (race_info.span * 10) / 24;
+  sub_simulate_skill.init(lane, slope);
 
   // 出闸
   list_chara.forEach((uma) => {
@@ -218,7 +256,7 @@ function sys_sim_race(list_chara, race_info) {
         },
         inContent: [
           '出闸 (0m',
-          lane,
+          lane.get_abbr(),
           slope > 0 ? '上坡' : slope < 0 ? '下坡' : undefined,
           ')',
         ]
@@ -230,35 +268,58 @@ function sys_sim_race(list_chara, race_info) {
     );
   });
 
-  if (list_chara.findIndex((e) => e.race.conditionParams.is_badstart) === -1) {
-    buffer.report.unshift(get_event_record('所有马娘平排出闸！', '0.0"', 0));
-  } else {
-    const { max, min } = get_extremum_entry(
-      list_chara,
-      (e) => start_delay[e.index_race],
-    );
-    buffer.report.unshift(
-      get_event_record(
-        [
-          { color: max.color, content: max.name, fontWeight: 'bold' },
-          ' 首先跑出！',
-          { color: min.color, content: min.name, fontWeight: 'bold' },
-          Math.random() < 0.5 ? ' 出闸慢了！' : ' 落后了！',
-        ],
-        '0.0"',
-        0,
+  if (race_id !== undefined) {
+    if (
+      list_chara.findIndex((e) => e.race.conditionParams.is_badstart) === -1
+    ) {
+      buffer.report.unshift(
+        get_event_record('比赛开始，所有马娘平排出闸！', '0.0"', 0),
+      );
+    } else {
+      const { max, min } = get_extremum_entry(
+        list_chara,
+        (e) => start_delay[e.index_race],
+      );
+      buffer.report.unshift(
+        get_event_record(
+          [
+            '比赛开始，',
+            max.get_colored_name(),
+            ' 首先跑出！其他马娘紧随其后，最后是',
+            Math.random() < 0.5 ? '出闸慢了的 ' : '落后了的 ',
+            min.get_colored_name(),
+            '！',
+          ],
+          '0.0"',
+          0,
+        ),
+      );
+    }
+  }
+
+  function get_report_internal() {
+    return Math.max(
+      Math.min(
+        (buffer.report.at(-1).speak * 3) / 20,
+        get_random_value(3.5, 4.5, true),
       ),
+      get_random_value(1.5, 2.5, true),
     );
   }
 
   const list_finished = [];
   let flag_race = true,
     list_in_race = list_chara,
-    timer = 0;
+    timer = 0,
+    timer_record,
+    next_report = get_report_internal(),
+    temp_report;
 
+  sub_simulate_report.init();
   while (flag_race) {
     timer = add_timer(timer);
-    const timer_record = get_timer_record(timer);
+    timer_record = get_timer_record(timer);
+    report_cache.push([]);
 
     // 位置和速度结算
     list_in_race.forEach((uma) => {
@@ -346,9 +407,7 @@ function sys_sim_race(list_chara, race_info) {
           uma.race.location = race_info.span;
           list_finished.push(uma);
           uma.race.totalTime = timer_record;
-          (
-            report_cache[timer_record] || (report_cache[timer_record] = [])
-          ).push({ e: race_event_enum.finish, u: uma });
+          report_cache.at(-1).push({ e: race_event_enum.finish, u: uma });
           return false;
         } else if (
           fron_record_index[uma.index_race] < fron_header.length &&
@@ -438,28 +497,22 @@ function sys_sim_race(list_chara, race_info) {
         if (uma.style === 0) {
           if (uma.race.loc_mind < 3 && check_nige_loc_mind_ex_mode(uma, i, l)) {
             uma.race.loc_mind = 3;
-            (
-              report_cache[timer_record] || (report_cache[timer_record] = [])
-            ).push({ e: race_event_enum.loc_mind_nige_ex, u: uma });
+            report_cache
+              .at(-1)
+              .push({ e: race_event_enum.loc_mind_nige_ex, u: uma });
           } else {
             switch (uma.race.loc_mind) {
               case 0:
                 if (prob_check) {
                   if (check_nige_loc_mind_speed_up_mode(uma, i, l)) {
                     uma.race.loc_mind = 1;
-                    (
-                      report_cache[timer_record] ||
-                      (report_cache[timer_record] = [])
-                    ).push({
+                    report_cache.at(-1).push({
                       e: race_event_enum.loc_mind_nige_speed_up,
                       u: uma,
                     });
                   } else if (check_nige_loc_mind_over_take_mode(uma, i)) {
                     uma.race.loc_mind = 2;
-                    (
-                      report_cache[timer_record] ||
-                      (report_cache[timer_record] = [])
-                    ).push({
+                    report_cache.at(-1).push({
                       e: race_event_enum.loc_mind_nige_over_take,
                       u: uma,
                     });
@@ -469,10 +522,7 @@ function sys_sim_race(list_chara, race_info) {
               case 1:
                 if (check_nige_loc_mind_over_take_mode(uma, i)) {
                   uma.race.loc_mind = 2;
-                  (
-                    report_cache[timer_record] ||
-                    (report_cache[timer_record] = [])
-                  ).push({
+                  report_cache.at(-1).push({
                     e: race_event_enum.loc_mind_nige_over_take,
                     u: uma,
                   });
@@ -483,10 +533,7 @@ function sys_sim_race(list_chara, race_info) {
               case 2:
                 if (check_nige_loc_mind_speed_up_mode(uma, i, l)) {
                   uma.race.loc_mind = 1;
-                  (
-                    report_cache[timer_record] ||
-                    (report_cache[timer_record] = [])
-                  ).push({
+                  report_cache.at(-1).push({
                     e: race_event_enum.loc_mind_nige_speed_up,
                     u: uma,
                   });
@@ -502,9 +549,7 @@ function sys_sim_race(list_chara, race_info) {
           }
         } else if (uma.race.loc_mind < 3 && l[0].style > uma.style) {
           uma.race.loc_mind = 3;
-          (
-            report_cache[timer_record] || (report_cache[timer_record] = [])
-          ).push({
+          report_cache.at(-1).push({
             e: race_event_enum.loc_mind_other_ex,
             u: uma,
           });
@@ -517,10 +562,7 @@ function sys_sim_race(list_chara, race_info) {
                   uma.base.loc_mind_other_diff_upper
                 ) {
                   uma.race.loc_mind = 1;
-                  (
-                    report_cache[timer_record] ||
-                    (report_cache[timer_record] = [])
-                  ).push({
+                  report_cache.at(-1).push({
                     e: race_event_enum.loc_mind_other_quick,
                     u: uma,
                   });
@@ -530,10 +572,7 @@ function sys_sim_race(list_chara, race_info) {
                   uma.race.velocityIdealBuff === 0
                 ) {
                   uma.race.loc_mind = 2;
-                  (
-                    report_cache[timer_record] ||
-                    (report_cache[timer_record] = [])
-                  ).push({
+                  report_cache.at(-1).push({
                     e: race_event_enum.loc_mind_other_relax,
                     u: uma,
                   });
@@ -547,10 +586,7 @@ function sys_sim_race(list_chara, race_info) {
                 uma.race.velocityIdealBuff === 0
               ) {
                 uma.race.loc_mind = 2;
-                (
-                  report_cache[timer_record] ||
-                  (report_cache[timer_record] = [])
-                ).push({
+                report_cache.at(-1).push({
                   e: race_event_enum.loc_mind_other_relax,
                   u: uma,
                 });
@@ -569,10 +605,7 @@ function sys_sim_race(list_chara, race_info) {
                 uma.base.loc_mind_other_diff_upper
               ) {
                 uma.race.loc_mind = 1;
-                (
-                  report_cache[timer_record] ||
-                  (report_cache[timer_record] = [])
-                ).push({
+                report_cache.at(-1).push({
                   e: race_event_enum.loc_mind_other_quick,
                   u: uma,
                 });
@@ -615,9 +648,7 @@ function sys_sim_race(list_chara, race_info) {
           (uma.race.velocityReal - l[i - 1].race.velocityReal) / frame_rate >
           l[i - 1].race.location - uma.race.location
         ) {
-          (
-            report_cache[timer_record] || (report_cache[timer_record] = [])
-          ).push({
+          report_cache.at(-1).push({
             e: race_event_enum.blocked,
             u: uma,
           });
@@ -665,10 +696,29 @@ function sys_sim_race(list_chara, race_info) {
       }
       uma.race.acceleration += uma.race.accelerationBuff;
     });
-    if (timer % 3 === 0) {
-      report_cache = {};
+    if (timer >= next_report) {
+      race_id !== undefined &&
+        (temp_report = sub_simulate_report(
+          report_cache,
+          list_in_race,
+          race_info,
+          race_id,
+        )) &&
+        buffer.report.unshift(
+          get_event_record(temp_report, timer_record, timer),
+        );
+      report_cache = [];
+      next_report += get_report_internal();
     }
   }
+  race_id !== undefined &&
+    (temp_report = sub_simulate_report(
+      report_cache,
+      list_in_race,
+      race_info,
+      race_id,
+    )) &&
+    buffer.report.unshift(get_event_record(temp_report, timer_record, timer));
   const duration = new Date().getTime() - current;
   logger.debug(
     `比赛模拟：${duration} ms / ${Math.ceil(timer * frame_rate)} 帧，平均 ${(duration / (timer * frame_rate)).toFixed(4)} ms/帧`,

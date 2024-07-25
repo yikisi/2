@@ -1,18 +1,18 @@
 ﻿const race_event_enum = {
-  bad_start: 0,
-  blocked: 0,
-  compete_fight: 0,
-  final_push: 0,
   finish: 0,
+  loc_change: 0,
+  final_push: 0,
+  compete_fight: 0,
+  blocked: 0,
   loc_mind_nige_ex: 0,
+  loc_mind_other_ex: 0,
+  temptation: 0,
   loc_mind_nige_over_take: 0,
   loc_mind_nige_speed_up: 0,
-  loc_mind_other_ex: 0,
+  temp_end: 0,
   loc_mind_other_quick: 0,
   loc_mind_other_relax: 0,
   temp_continue: 0,
-  temp_end: 0,
-  temptation: 0,
 };
 Object.keys(race_event_enum).forEach((k, i) => (race_event_enum[k] = i));
 

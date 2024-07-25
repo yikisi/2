@@ -151,6 +151,14 @@ class RaceLane {
     this.is_curve = is_curve;
     this.is_last = isLast;
   }
+
+  get_abbr() {
+    return `${this.is_last ? '终' : this.index}${this.is_curve ? '弯' : '直'}`;
+  }
+
+  get_name() {
+    return `${this.is_last ? '最终' : `第 ${this.index} `}${this.is_curve ? '弯道' : '直线'}`;
+  }
 }
 
 module.exports = class RaceInfo {

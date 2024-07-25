@@ -250,7 +250,7 @@ async function race_page(race) {
     }
   }
   sys_prepare_race(contestants, team_list, info);
-  await page_race_result(contestants, info);
+  await page_race_result(contestants, info, race);
   team_list.forEach((uma) => {
     aim_race_dict[uma.index_chara] = get_custom_check(
       uma.index_chara,
