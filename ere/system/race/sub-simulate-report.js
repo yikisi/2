@@ -288,7 +288,7 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
             ret_list.push(...name, ' 的步伐被阻挡了，真是可惜！');
             break;
           case race_event_enum.temptation:
-            ret_list.push(...name, ' 的节奏略微紊乱，似乎有点焦躁！');
+            ret_list.push(...name, ' 的节奏略显凌乱，似乎有点焦躁！');
             break;
           case race_event_enum.temp_end:
             ret_list.push(...name, ' 回归了正常的节奏，是冷静下来了吗！');

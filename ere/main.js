@@ -164,6 +164,7 @@ module.exports = async () => {
     let ret = await era.input();
     switch (ret) {
       case 1:
+        ret = 0;
         if (achievements.length > 0) {
           era.drawLine();
           era.printButton('做我自己', 1);

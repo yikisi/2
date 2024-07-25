@@ -230,10 +230,10 @@ module.exports = class RaceInfo {
    */
   gates;
   /**
-   * 传奇人数
-   * @type {number}
+   * 史实冠军
+   * @type {number[]}
    */
-  legend_count;
+  legends;
   /**
    * 育成时间限制（年）
    * @type {number}
@@ -287,7 +287,7 @@ module.exports = class RaceInfo {
    * @param {number} distance
    * @param {number} rotation
    * @param {number} gates
-   * @param {number} legend_count
+   * @param {number[]} legends
    * @param {number} limit
    * @param {number} date
    * @param {number} prize
@@ -303,7 +303,7 @@ module.exports = class RaceInfo {
     distance,
     rotation,
     gates,
-    legend_count,
+    legends,
     limit,
     date,
     prize,
@@ -319,7 +319,7 @@ module.exports = class RaceInfo {
     this.distance = distance;
     this.rotation = rotation;
     this.gates = gates;
-    this.legend_count = legend_count;
+    this.legends = legends;
     this.limit = limit;
     this.date = date;
     this.prize =

@@ -48,8 +48,8 @@ const beginning_report_handlers = [
   () => ['赛马娘准备好……', '随时预备起步……', '预备……', '一起步！'],
   (info) => [
     '比赛马上开始……',
-    `马娘 ${info.gates} 名`,
-    [`${get('flag:当前年')} 年度 `, info.get_colored_name()],
+    `参赛马娘 ${info.gates} 名……`,
+    [`${get('flag:当前年')} 年度 `, info.get_colored_name(), '……'],
     '——开始！',
   ],
 ];

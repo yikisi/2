@@ -242,7 +242,7 @@ module.exports = {
   get_timer_record(timer) {
     const seconds = timer % 60,
       minutes = Math.floor(timer / 60);
-    return `${minutes ? `${minutes}'` : ''}${minutes ? `${seconds.toString().padStart(2, '0')}` : seconds.toFixed(1)}"`;
+    return `${minutes ? `${minutes}'` : ''}${minutes && seconds < 10 ? '0' : ''}${seconds.toFixed(1)}"`;
   },
   progress_width,
   screen_size: 8,
