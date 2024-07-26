@@ -126,10 +126,10 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const edu_marks = new TachyonEduMarks();
+    const edu_marks = new TachyonEduMarks(),
+      life_marks = new TachyonLifeMarks();
     if (era.get('cflag:32:招募状态') === recruit_flags.yes) {
       const daily_event_object = new EventObject(32, cb_enum.daily),
-        life_marks = new TachyonLifeMarks(),
         relation = era.get('relation:32:0');
       let temp;
       if (
@@ -175,6 +175,14 @@ module.exports = class extends CustomizedCheck {
         add_event(
           event_hooks.week_start,
           new EventObject(32, cb_enum.love).set_arg(25),
+        );
+      }
+    }
+    if (life_marks.drug_notice > 0) {
+      if (era.get('cflag:0:位置') === 0 && --life_marks.drug_notice === 0) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(32, cb_enum.edu).set_arg('drug_notice'),
         );
       }
     }

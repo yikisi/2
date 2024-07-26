@@ -7,6 +7,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
@@ -681,6 +682,7 @@ module.exports = {
           '度过一段奇妙的时光了。',
         ]);
         era.set('cflag:25:招募状态', recruit_flags.yes);
+        new MyEduMarks().experiment = 0;
         era.set('flag:物色对象', 0);
         event_marks.sub(event_hooks.week_end);
         add_event(

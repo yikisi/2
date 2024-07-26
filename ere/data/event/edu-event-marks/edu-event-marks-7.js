@@ -13,6 +13,8 @@ class GoldShipEduMarks extends EduEventMarks {
   keywords;
   // 称号检查 - 两次凯旋门参战
   title_check;
+  // 拔萝卜之鬼
+  carrot;
 
   constructor() {
     super(7);

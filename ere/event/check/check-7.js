@@ -73,9 +73,15 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const event_marks = new GoldShipEduMarks(7),
+    const event_marks = new GoldShipEduMarks(),
       event_obj = new EventObject(7, cb_enum.edu),
       edu_weeks = era.get('cflag:7:育成回合计时');
+    if (event_marks.carrot > 0 && --event_marks.carrot === 0) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(7, cb_enum.edu).set_arg('carrot'),
+      );
+    }
     if (edu_weeks < 3 * 48) {
       const event_obj_special = new EventObject(7, cb_enum.edu, true).set_arg(
         edu_weeks,

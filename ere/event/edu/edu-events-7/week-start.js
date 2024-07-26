@@ -15,6 +15,7 @@ const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
+const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 /**
  * @param {HookArg} hook
@@ -631,6 +632,32 @@ module.exports = async (hook, _, event_object) => {
       );
     }
     sys_like_chara(7, 0, 200) && (await era.waitAnyKey());
+  } else if (event_arg === 'carrot') {
+    await print_event_name('拔萝卜之鬼', gold_ship);
+    await era.printAndWait([
+      '在学校里被一头芦毛的诡异',
+      gold_ship.get_colored_name(),
+      '拦住了。',
+    ]);
+    await gold_ship.say_and_wait(
+      '唏！那边那位训练员！要不要跟小金船一起到海边拔萝卜啊！',
+    );
+    await era.printAndWait(
+      '原来是问题儿童黄金船……而且海边哪有什么萝卜可以拔啊？',
+    );
+    era.printButton('「你要拔，那便拔！」（马币+50）', 1);
+    era.printButton('「总觉得有点可疑……」（体力+100）', 2);
+    if ((await era.input()) === 1) {
+      await era.printAndWait(
+        '竟然从沙滩里挖出来了散发着彩虹色光芒，而且看起来像是宝石的萝卜？！',
+      );
+      sys_change_money(50);
+    } else {
+      await era.printAndWait(
+        '得到了普通的萝卜……等下长在海边真的算普通吗！？总之先拿回去给午饭加餐了。',
+      );
+      sys_change_attr_and_print(0, '体力', 100);
+    }
   } else {
     throw new Error();
   }

@@ -9,6 +9,7 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
 const check_new_activities = require('#/system/next-week/check-new-activities');
+const morning_sex = require('#/system/next-week/morning-sex');
 const randomly_interact = require('#/system/next-week/randomly-interact');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
@@ -28,6 +29,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const filter_chara = require('#/system/sys-filter-chara');
 const sys_handle_palace = require('#/system/sys-handle-palace');
+const { reset_chara } = require('#/system/sys-init-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
@@ -65,7 +67,6 @@ const LoveLimitStatus = require('#/data/love-limit-status');
 const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { pressure_border } = require('#/data/train-const');
-const { reset_chara } = require('#/system/sys-init-chara');
 
 async function sys_next_week() {
   const health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes,
@@ -943,6 +944,7 @@ async function sys_next_week() {
     );
   }
 
+  await morning_sex();
   era.set('flag:床伴', 0);
   const hash = crypto.createHash('md5');
   hash.update(era.get('callname:0:-1') + era.get('flag:当前回合数'));

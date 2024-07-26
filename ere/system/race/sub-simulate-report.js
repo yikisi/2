@@ -116,7 +116,7 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
         if (lane_events.length > 2) {
           message_buffer[0] += '与';
         }
-        message_buffer[0] += `${lane_events.at(-2).get_name()}，现在进入${lane_events.at(-1).get_name()}`;
+        message_buffer[0] += `${lane_events.at(-2).get_name()}，进入${lane_events.at(-1).get_name()}`;
       }
       if (slope_events.length > 0 && slope_events.at(-1).s !== 0) {
         message_buffer.push(`正在${slope_events[0].s > 0 ? '爬' : '下'}坡`);
@@ -124,7 +124,7 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
         message_buffer.push(`经过${slope_events.at(-2).s > 0 ? '爬' : '下'}坡`);
       }
       if (message_buffer.length > 0) {
-        ret_list.push(message_buffer.join('，'));
+        ret_list.push('现在', message_buffer.join('，'));
       }
     }
     if (report_list.length === 0) {

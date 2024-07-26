@@ -2,7 +2,7 @@
 
 _incoming_
 
-EraUma v0.8，适配 [EraElectron v1.3.0 (zero)](https://gitgud.io/umaera/era-electron/-/releases/permalink/latest) 版本
+EraUma v0.8，适配 [EraElectron v2.0.0 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/v2.0.0) 版本
 
 ## Added
 
@@ -103,6 +103,8 @@ EraUma v0.8，适配 [EraElectron v1.3.0 (zero)](https://gitgud.io/umaera/era-el
   * 注意：以扮演角色开始游戏时，因为身为马娘，玩家一开始就可以自主训练、参加比赛，且拥有该角色技能组内的所有技能（如果该角色有技能组），但技能限制仍为9个，因子能力限制仍为15个
   * 注意：该模式下玩家控制角色仍然不能获取其他角色专属的称号（如【父亲力量】等），但仍然能获取玩家专属的称号（【万马骑】等）
 * 新增比赛解说：现在正式比赛中将有一位解说，根据当前局势持续发表评论
+* 新增新手教学口上
+* 新增特殊随机事件
 * 新增游戏选项【马娘的身高】，可以控制马娘角色的身高均低于150cm、按照角色设定自然分布或均高于175cm
 * 扩展了出走情报界面，现在可以通过出走情报界面中的快捷键直接出走比赛
 * 新增以下技能
@@ -111,7 +113,6 @@ EraUma v0.8，适配 [EraElectron v1.3.0 (zero)](https://gitgud.io/umaera/era-el
   * 【背负理想】、【巅峰的梦想】：【巅峰的梦想】在海外赛事中效果会随赛事举办地语言等级提高而提高
   * 【燃魂】、【爆烈焰光！】：【爆烈焰光！】效果会随属性平均程度提高而提高
   * 【健健康康】、【我们奔跑的道路】：【我们奔跑的道路】效果会随着体重偏差的降低而提高
-* 增加了新手教学口上
 
 ## Changed
 

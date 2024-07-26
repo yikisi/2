@@ -432,7 +432,7 @@ module.exports = async () => {
               '幽白書',
             ],
           ],
-          ['教学口上', ['雞雞']],
+          ['教学口上、随机事件', ['雞雞']],
           ['特殊角色（临时）', '黑奴队长'],
           [[{ color: get_chara_color(3), content: '东海帝王' }], '天马闪光蹄'],
           [[{ color: get_chara_color(7), content: '黄金船' }], '雞雞'],

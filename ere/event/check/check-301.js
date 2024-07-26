@@ -9,15 +9,24 @@ const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-
 
 module.exports = class extends CustomizedCheck {
   check_next_week() {
+    const life_marks = new TokinoLifeMarks();
     if (
       get('flag:回合爱慕惩罚') &&
       get('love:301') >= 50 &&
-      new TokinoLifeMarks().who_am_i < 2
+      life_marks.who_am_i < 2
     ) {
       add_event(
         event_hooks.week_end,
         new EventObject(301, cb_enum.love).set_arg(49),
       );
+    }
+    if (life_marks.shadow > 0) {
+      if (--life_marks.shadow === 0) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(301, cb_enum.edu).set_arg('shadow'),
+        );
+      }
     }
     super.check_next_week();
   }

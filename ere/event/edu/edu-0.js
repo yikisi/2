@@ -1,41 +1,41 @@
 const {
+  add,
   get,
   input,
   printAndWait,
+  printButton,
   printInColRows,
   println,
   replaceInColRows,
   set,
+  waitAnyKey,
 } = require('#/era-electron');
 
 const check_team_limit = require('#/system/chara/sys-check-team-limit');
+const sys_get_random_uma_god = require('#/system/chara/sys-get-random-uma-god');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const { reset_chara } = require('#/system/sys-init-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
-const event_hooks = require('#/data/event/event-hooks');
+const { get_chara_color } = require('#/data/chara-colors');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
+const { get_random_entry } = require('#/utils/list-utils');
 
-/**
- * 玩家育成事件 - 重复育成
- *
- * @author 天马闪光蹄
- *
- * @param {HookArg} hook
- * @param _
- * @param {EventObject} event_object
- */
-module.exports = async (hook, _, event_object) => {
-  if (
-    hook.hook !== event_hooks.week_end ||
-    event_object.arg !== 'second_chance'
-  ) {
-    throw new Error();
-  }
+/** @type {Record<string,function(CharaTalk):Promise>} */
+const handlers = {};
+
+/** @author 天马闪光蹄 */
+handlers.second_chance = async (me) => {
   const team_limit = -check_team_limit();
   let second_list = sys_filter_chara(
     'cflag',
@@ -45,7 +45,6 @@ module.exports = async (hook, _, event_object) => {
   if (second_list.length === 0 || team_limit <= 0) {
     return;
   }
-  const me = get_chara_talk(0);
   let yes_button = '继续前进',
     no_button = '就此回头';
   await print_event_name('「梦」', me);
@@ -175,4 +174,269 @@ module.exports = async (hook, _, event_object) => {
     });
   }
   set('flag:初见重复育成', 2);
+};
+
+/** @author 雞雞 */
+handlers.god_coin = async (me) => {
+  const cur_weeks = get('flag:当前回合数'),
+    next_year = Math.floor((cur_weeks + 47) / 48) * 48;
+  new MyEduMarks().god = next_year + get_random_value(13, 40) - cur_weeks;
+  if (cur_weeks % 48 >= 13 && cur_weeks % 48 <= 40) {
+    await print_event_name('三女神雕像下的许愿池', me);
+  }
+  await printAndWait('投个硬币许个愿吧……');
+  const dice = Math.random(),
+    god = sys_get_random_uma_god();
+  if (dice < 0.4 && god) {
+    await printAndWait('是……幻听吗？听到了会让人莫名亲近并信赖的声音呢……');
+    const color = get_chara_color(god);
+    switch (god) {
+      case 340:
+        await printAndWait('热情的，红色的声音……', {
+          color,
+        });
+        break;
+      case 341:
+        await printAndWait('包容的，蓝色的声音……', {
+          color,
+        });
+        break;
+      case 342:
+        await printAndWait('严厉的，黄色的声音……', {
+          color,
+        });
+    }
+    println();
+    sys_like_chara(god, 0, get_random_value(25, 75)) && (await waitAnyKey());
+  } else if (dice < 0.7) {
+    await printAndWait('啊……这个说不定可以……？');
+    await printAndWait(
+      '不过虽然这么说……好像什么都没想到，但是仔细想想似乎又明白了什么……',
+    );
+    const cur_chara = get('flag:当前互动角色');
+    if (
+      get(`cflag:${cur_chara}:育成回合计时`) < 3 * 48 ||
+      (cur_chara === 0 && get('cflag:0:种族'))
+    ) {
+      get_attr_and_print_in_event(
+        cur_chara,
+        undefined,
+        get_random_value(5, 10),
+      ) && (await waitAnyKey());
+    }
+  } else if (dice < 0.9) {
+    await printAndWait('果然无事发生呢……');
+  } else {
+    await printAndWait('捡起来的时候变成了两枚！');
+    sys_change_money(50);
+  }
+};
+
+/** @author 雞雞 */
+handlers.experiment = async (me) => {
+  new MyEduMarks().experiment = get_random_value(36, 60);
+  await print_event_name('废旧理科教室探险', me);
+  await me.say_and_wait('有人吗……');
+  println();
+  await printAndWait('没听说这件教室有被另外采用啊……');
+  await printAndWait([
+    '唐突的大雨，唐突的雷声，像是被驱赶了似的，',
+    me.get_colored_name(),
+    ' 来到了这件小小的宝库。',
+  ]);
+  println();
+  await me.say_and_wait('大概是，让我选一样的意思？');
+  println();
+  await printAndWait('一支装在束带中的酒红色药剂');
+  await printAndWait('和一只有些破旧的黑猫玩偶');
+  println();
+  me.say('选哪个呢……', true);
+  printButton('药剂（耐力+? or 体力+100）', 1);
+  printButton('玩偶（智力+8，技能点数+?）', 2);
+  let wait_flag;
+  if ((await input()) === 1) {
+    get_chara_talk(32);
+    if (Math.random() < 0.5) {
+      await printAndWait('好苦——');
+      wait_flag = get_attr_and_print_in_event(
+        0,
+        [0, get_random_value(5, 15)],
+        0,
+      );
+    } else {
+      await printAndWait('好辣——');
+      wait_flag = get_attr_and_print_in_event(
+        0,
+        undefined,
+        0,
+        JSON.parse('{"体力":100}'),
+      );
+    }
+    wait_flag = sys_like_chara(32, 0, get_random_value(10, 20)) || wait_flag;
+  } else {
+    const coffee = get_chara_talk(25);
+    await coffee.say_as_unknown_and_wait('呦西呦西呦西呦西——');
+    await coffee.say_as_unknown_and_wait('嗯……？');
+    await printAndWait(
+      `好像有看见窗外有${coffee.get_uma_sex_title()}的影子掠过？怎么可能～这里可不是一楼啊。`,
+    );
+    wait_flag = get_attr_and_print_in_event(
+      0,
+      [0, 0, 0, 0, 8],
+      get_random_value(5, 10),
+    );
+    wait_flag = sys_like_chara(25, 0, get_random_value(10, 20)) || wait_flag;
+  }
+  wait_flag && (await waitAnyKey());
+};
+
+/** @author 雞雞 */
+handlers.custom = async (me) => {
+  new MyEduMarks().custom = get_random_value(24, 48);
+  await print_event_name('习惯成自然', me);
+  await printAndWait([
+    '某天下午 ',
+    me.get_colored_name(),
+    ' 在最近开始游玩的手机游戏《闪光的优秀少女》里又遇到低机率的训练失败了……习惯就好……',
+  ]);
+  printButton('「……习惯个屁！」（马币-50，育成中马娘体力+15%）', 1, {
+    disabled: get('flag:当前马币') >= 50,
+  });
+  printButton('「习惯就好！」', 2);
+  if ((await input()) === 1) {
+    await printAndWait([
+      me.get_colored_name(),
+      ' 直接使出了成年人的魔法・氪金！',
+    ]);
+    add('flag:当前马币', -50);
+    sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
+      .filter((e) => get(`cflag:${e}:育成回合计时`) < 3 * 48)
+      .forEach((e) =>
+        sys_change_attr_and_print(e, '体力', get(`maxbase:${e}:体力`) * 0.15),
+      );
+  } else {
+    await printAndWait([me.get_colored_name(), ' 按住了把手机摔烂的冲动……']);
+  }
+};
+
+/** @author 雞雞 */
+handlers.custom = async (me) => {
+  new MyEduMarks().trainer_race = get_random_value(24, 48);
+  await print_event_name('随风飘扬的海报', me);
+  await printAndWait([
+    '前往特雷森学园的路上，一张海报随风哗啦一声地拍到了 ',
+    me.get_colored_name(),
+    ' 的脸上。',
+  ]);
+  await printAndWait([
+    '把海报摘下来一看，似乎是只面向训练员的',
+    get_random_entry(['短跑', '游泳', '登山）']),
+    '比赛，上面写着哪怕对体质没自信现场也会有官方支援的样子，要参加吗？',
+  ]);
+  printButton('（试试也不会少块肉？）', 1);
+  printButton('（忙死了，哪来的时间参加啊——！）', 2);
+  if ((await input()) === 1) {
+    await printAndWait(
+      '在接受诡异的针炙后竟然顺利获胜了！还得到了主办方安排的奖品！',
+    );
+    await printAndWait(
+      '但顺利得让人背脊发凉啊……就像是自己被当成什么实验品一样……',
+    );
+    println();
+    sys_like_chara(305, 0, get_random_value(0, 10)) && (await waitAnyKey());
+  } else {
+    await printAndWait([
+      '后来听说是 ',
+      get_chara_talk(304).get_colored_name(),
+      ' 在没有支援的场合下获胜了的样子。',
+    ]);
+    await printAndWait('果然，那个人强得像鬼一样……');
+    println();
+    sys_like_chara(304, 0, get_random_value(0, 10)) && (await waitAnyKey());
+  }
+};
+
+/** @author 雞雞 */
+handlers.bankruptcy = async (me) => {
+  new MyEduMarks().bankruptcy = 1;
+  await print_event_name('破产', me);
+  await printAndWait([
+    '游手好闲不好好工作？抑或时运实在不站在 ',
+    me.get_colored_name(),
+    ' 身边？总之 ',
+    me.get_colored_name(),
+    ' 还是让银行户头的数字见底了！',
+  ]);
+  await printAndWait([
+    '虽然很可悲，但只能请求负责马',
+    get('flag:角色性别') === 1 ? '郎' : '娘',
+    '慷慨解囊了……吗？',
+  ]);
+  printButton('「怎么会这样……」', 1);
+  await input();
+};
+
+/** @author 雞雞 */
+handlers.reject = async (me) => {
+  await print_event_name('污蔑，都是污蔑！', me);
+  await printAndWait('不知何故，最近在校园走路的时候总会引来窃窃私语。');
+  await printAndWait([
+    me.get_colored_name(),
+    ' 尝试探查一番后发现，自己竟然在不知不觉间被当成了负心渣',
+    me.get_phy_sex_title()[0],
+    '？ ！',
+  ]);
+  printButton('「我不是，我没有！」', 1);
+  await input();
+  sys_change_fame(-50);
+};
+
+/** @author 雞雞 */
+handlers.work_over = async (me) => {
+  new MyEduMarks().work_over = get_random_value(12, 36);
+  await print_event_name('人生无常之加班', me);
+  await printAndWait('训练员这工作高薪厚职，但并不好做。');
+  await printAndWait([
+    '除了负责自己旗下赛马',
+    get('flag:角色性别') === 1 ? '郎' : '娘',
+    '的训练外，还有校园事务记者发布会财务管理撰写研究报告等等繁重职责。',
+  ]);
+  println();
+  await printAndWait('今天也是喝能量饮料强撑、睡办公室桌下的一天。');
+  printButton('「地板好硬……」', 1);
+  get_attr_and_print_in_event(0, undefined, 0, JSON.parse('{"体力":-50}')) &&
+    (await waitAnyKey());
+};
+
+/** @author 雞雞 */
+handlers.sick = async (me) => {
+  new MyEduMarks().sick = get_random_value(36, 60);
+  await print_event_name('人生无常之生病', me);
+  await printAndWait([
+    me.get_colored_name(),
+    ' 一觉起来便觉头昏脑胀、昏昏欲睡，总之便是浑身不对劲。',
+  ]);
+  printButton('「丢哪妈，顶硬上！」', 1);
+  printButton('「打电话请假，然后去看医生吧……」', 2);
+  if ((await input()) === 1) {
+    get_attr_and_print_in_event(0, undefined, 0, JSON.parse('{"体力":-50}')) &&
+      (await waitAnyKey());
+    sys_change_money(get_random_value(10, 20));
+  } else {
+    sys_like_chara(305, 0, get_random_value(0, 10)) && (await waitAnyKey());
+  }
+};
+
+/**
+ * 玩家育成事件
+ *
+ * @param {HookArg} hook
+ * @param _
+ * @param {EventObject} event_object
+ */
+module.exports = async (hook, _, event_object) => {
+  if (!handlers[event_object?.arg]) {
+    throw new Error();
+  }
+  return await handlers[event_object?.arg](get_chara_talk(0));
 };

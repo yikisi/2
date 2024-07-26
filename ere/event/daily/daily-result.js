@@ -18,6 +18,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { attr_enum } = require('#/data/train-const');
@@ -177,9 +178,8 @@ handlers[event_hooks.good_night] = async (chara_id, hook) => {
     } else {
       sys_change_lust(chara_id, lust_from_palam);
       era.println();
-      if (sys_like_chara(chara_id, 0, -100)) {
-        await era.waitAnyKey();
-      }
+      sys_like_chara(chara_id, 0, -100) && (await era.waitAnyKey());
+      new MyEduMarks().reject++;
     }
   }
 };

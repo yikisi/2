@@ -264,6 +264,7 @@ async function out_page() {
                   handle() {
                     temp.chara.name = era.set('callname:301:-2', '骏川缰绳');
                     era.set('cflag:301:招募状态', recruit_flags.yes);
+                    new TokinoLifeMarks().shadow = 0;
                     return era.printAndWait([
                       temp.chara.get_colored_name(),
                       ' 加入了队伍！',

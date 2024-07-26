@@ -21,6 +21,10 @@ const {
   player_sex_title,
   pregnant_stage_enum,
 } = require('#/data/ero/status-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
+const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
+const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
+const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-302');
 const { yes } = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { first_child_id } = require('#/data/other-const');
@@ -52,6 +56,7 @@ module.exports = async (src_chara) => {
     new CharaAvailableSkills(0).clear();
     era.set('callname:0:-2', '你');
   }
+  const my_marks = new MyEduMarks();
 
   let player_gender = 3;
 
@@ -256,6 +261,14 @@ module.exports = async (src_chara) => {
           era.add('flag:当前声望', -era.get('flag:回合声望惩罚'));
 
           await sys_next_week();
+          my_marks.god = get_random_value(13, 40);
+          my_marks.experiment = get_random_value(1, 24);
+          my_marks.custom = get_random_value(1, 12);
+          my_marks.trainer_race = get_random_value(13, 36);
+          my_marks.work_over = my_marks.sick = 24;
+          new MeekEduMarks().all_round = get_random_value(5, 12);
+          new TokinoLifeMarks().shadow = get_random_value(5, 12);
+          new TasteLifeMarks().annoyance = get_random_value(13, 20);
           return true;
         case 97:
           player_name = '';

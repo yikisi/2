@@ -5,6 +5,7 @@ const check_and_register_aim_race = require('#/event/check/snippets/check-and-re
 const { add_event, cb_enum } = require('#/event/queue');
 
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -23,7 +24,8 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const edu_weeks = get(`cflag:${this.id}:育成回合计时`);
+    const edu_weeks = get(`cflag:${this.id}:育成回合计时`),
+      edu_marks = new MeekEduMarks();
     if (edu_weeks < 3 * 48) {
       if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
         add_event(
@@ -40,6 +42,13 @@ module.exports = class extends CustomizedCheck {
         event_hooks.week_start,
         new EventObject(this.id, cb_enum.edu).set_arg('palace'),
       );
+    } else if (edu_marks.all_round > 0) {
+      if (--edu_marks.all_round === 0) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(this.id, cb_enum.edu).set_arg('all_round'),
+        );
+      }
     }
   }
 

@@ -3,11 +3,79 @@ const { get } = require('#/era-electron');
 const CustomizedCheck = require('#/event/check/check-common');
 const { add_event, cb_enum } = require('#/event/queue');
 
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 
 module.exports = class extends CustomizedCheck {
   check_next_week() {
+    const my_edu_marks = new MyEduMarks();
+    if (my_edu_marks.god > 0) {
+      if (--my_edu_marks.god === 0) {
+        add_event(
+          event_hooks.school_god,
+          new EventObject(0, cb_enum.edu).set_arg('god_coin'),
+        );
+      }
+    }
+    if (my_edu_marks.experiment > 0) {
+      if (--my_edu_marks.experiment === 0) {
+        add_event(
+          event_hooks.week_end,
+          new EventObject(0, cb_enum.edu).set_arg('experiment'),
+        );
+      }
+    }
+    if (my_edu_marks.custom >= 0) {
+      if (--my_edu_marks.custom === 0) {
+        add_event(
+          event_hooks.week_end,
+          new EventObject(0, cb_enum.edu).set_arg('custom'),
+        );
+      }
+    }
+    if (my_edu_marks.trainer_race >= 0) {
+      if (--my_edu_marks.trainer_race === 0) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(0, cb_enum.edu).set_arg('trainer_race'),
+        );
+      }
+    }
+    if (get('flag:当前马币') <= 0 && !my_edu_marks.bankruptcy) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(0, cb_enum.edu).set_arg('bankruptcy'),
+      );
+    } else {
+      my_edu_marks.bankruptcy = 0;
+    }
+    if (my_edu_marks.reject === 3) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(0, cb_enum.edu).set_arg('reject'),
+      );
+    }
+    if (my_edu_marks.work_over > 0 && --my_edu_marks.work_over === 0) {
+      if (Math.random() < 0.01) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(0, cb_enum.edu).set_arg('work_over'),
+        );
+      } else {
+        my_edu_marks.work_over = 1;
+      }
+    }
+    if (my_edu_marks.sick > 0 && --my_edu_marks.sick === 0) {
+      if (Math.random() < 0.01) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(0, cb_enum.edu).set_arg('sick'),
+        );
+      } else {
+        my_edu_marks.sick = 1;
+      }
+    }
     if (get('flag:当前回合数') % 48 === 9 && get('flag:初见重复育成') > 0) {
       add_event(
         event_hooks.week_end,
