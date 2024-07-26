@@ -1102,10 +1102,10 @@ handlers[event_hooks.school_rooftop] = async (
       get_attr_and_print_in_event(4, [0, 10, 0, 0, 0], 0) &&
         (await era.waitAnyKey());
     } else {
-      await chara_talk.say_and_wait(`
-  OK！那就采取B计划吧！`);
-      await chara_talk.say_and_wait(`
-  简单的说，就是把对面引诱到地势复杂的地方，比如说校舍之类的，然后在分叉处甩掉对方！`);
+      await chara_talk.say_and_wait(` OK！那就采取B计划吧！`);
+      await chara_talk.say_and_wait(
+        ` 简单的说，就是把对面引诱到地势复杂的地方，比如说校舍之类的，然后在分叉处甩掉对方！`,
+      );
       await chara_30.say_and_wait('米、米浴，做得到这种事情吗......!');
       await chara_30.say_and_wait('可以的！米浴不是很擅长思考吗？');
       await era.printAndWait(`${chara_talk.name}说着紧紧地握住了米浴的手。`);
@@ -1196,6 +1196,7 @@ handlers[event_hooks.school_rooftop] = async (
         );
       }
     }
+    event_marks.wind--;
     event_marks.mygo++;
     get_attr_and_print_in_event(4, [0, 0, 0, 0, 10], 0) &&
       (await era.waitAnyKey());

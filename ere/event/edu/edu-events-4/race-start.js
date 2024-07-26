@@ -73,34 +73,39 @@ module.exports = async (hook, extra_flag) => {
     await print_event_name(`春季锦标前・火焰兰`, chara_talk);
     await era.printAndWait(`准备室`);
     await era.printAndWait(
-      `春季锦标，作为皋月赏的前哨战，许多马娘全力以赴的场所。`,
+      `春季锦标，作为皋月赏的前哨战，许多${chara_talk.get_uma_sex_title()}全力以赴的场所。`,
     );
     await era.printAndWait(`然而此时。`);
     await say_by_passer_by(
       `工作人员`,
-      `已经确认过三遍了，包括丸善斯基在内，一共只有五名赛马娘。`,
+      `已经确认过三遍了，包括丸善斯基在内，一共只有五名赛${chara_talk.get_uma_sex_title()}。`,
     );
     await me.say_and_wait(`啊......谢谢。`);
     await era.printAndWait(
-      `对于丸善斯基来说，在赛场上能享受到了快乐程度是与赛事等级以及参赛的马娘成正比。`,
+      `对于丸善斯基来说，在赛场上能享受到了快乐程度是与赛事等级以及参赛的${chara_talk.get_uma_sex_title()}成正比。`,
     );
     await era.printAndWait(
-      `换句话说，赛事等级越高，能参战的马娘人数以及质量也随之变高，丸善斯基也就愈加享受。`,
+      `换句话说，赛事等级越高，能参战的${chara_talk.get_uma_sex_title()}人数以及质量也随之变高，丸善斯基也就愈加享受。`,
     );
     await era.printAndWait(`如果仅仅是这点还好。`);
     await say_by_passer_by(
-      `马娘A`,
+      `${chara_talk.get_uma_sex_title()}A`,
       `啊，我知道的，这场比赛一定是丸善斯基的胜利。`,
     );
     await say_by_passer_by(
-      `马娘B`,
-      `还有考虑的必要吗？如果不是丸善斯基获胜，我根本想不到其他人怎么战胜她。`,
+      `${chara_talk.get_uma_sex_title()}B`,
+      `还有考虑的必要吗？如果不是丸善斯基获胜，我根本想不到其他人怎么战胜${
+        chara_talk.sex_code - 1 ? '她' : '他'
+      }。`,
     );
     await say_by_passer_by(
-      `参赛的赛马娘A`,
+      `参赛的赛${chara_talk.get_uma_sex_title()}A`,
       `已经无所谓了，反正接下来一定是丸善斯基的胜利，我还是节省体力准备之后的赛事吧。`,
     );
-    await say_by_passer_by(`参赛的赛马娘A`, `说到底，没有人能战胜那种怪物。`);
+    await say_by_passer_by(
+      `参赛的赛${chara_talk.get_uma_sex_title()}A`,
+      `说到底，没有人能战胜那种怪物。`,
+    );
     await chara_talk.say_and_wait(
       `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'},我已经准备好了`,
     );
@@ -117,7 +122,12 @@ module.exports = async (hook, extra_flag) => {
       `丸善斯基，将我们之前的训练成果好好展示给在场的观众们看吧`,
       1,
     );
-    era.printButton(`如果能看到丸善斯基的奔跑，我相信她们一定会改变主意的`, 2);
+    era.printButton(
+      `如果能看到丸善斯基的奔跑，我相信${
+        chara_talk.sex_code - 1 ? '她' : '他'
+      }们一定会改变主意的`,
+      2,
+    );
     const ret1 = await era.input();
     if (ret1 === 1) {
       await chara_talk.say_and_wait(
@@ -150,16 +160,21 @@ module.exports = async (hook, extra_flag) => {
   } else if (extra_flag.race === race_enum.sats_sho && edu_weeks < 95) {
     await print_event_name(`皐月賞前・再一次`, chara_talk);
     await era.printAndWait(`比赛开始前·发布会上`);
-    await say_by_passer_by(`记者A`, `非常荣幸能采访到丸善斯基小姐。`);
+    await say_by_passer_by(
+      `记者A`,
+      `非常荣幸能采访到丸善斯基${
+        chara_talk.sex_code === 1 ? '先生' : '小姐'
+      }。`,
+    );
     await say_by_passer_by(`记者A`, `请问您这次的目标也是取得皋月赏的胜利吗？`);
     await chara_talk.say_and_wait(`是的，这是和负责的训练员商量之后的结果。`);
     await say_by_passer_by(
       `记者B`,
-      `不好意思打扰一下，听说上次春季锦标报名的赛马娘数只满足了最低参与条件的5人。`,
+      `不好意思打扰一下，听说上次春季锦标报名的赛${chara_talk.get_uma_sex_title()}数只满足了最低参与条件的5人。`,
     );
     await say_by_passer_by(
       `记者B`,
-      `是否可以认为赛马娘们认为自己赢不了丸善斯基所以纷纷避战了呢？`,
+      `是否可以认为赛${chara_talk.get_uma_sex_title()}们认为自己赢不了丸善斯基所以纷纷避战了呢？`,
     );
     await chara_talk.say_and_wait(
       `关于春季锦标相关问题请咨询负责训练员，这里不做表态。`,
@@ -373,17 +388,25 @@ module.exports = async (hook, extra_flag) => {
     era.printButton(`让我看到最棒的背影吧`, 1);
     await era.input();
     await chara_talk.say_and_wait(`能与小鲁铎同台竞技，毫无疑问是最棒的舞台♪`);
-    era.printButton(`这样的话，你满足了吗？`, 1);
+    era.printButton(`有成功的把握吗？`, 1);
     await era.input();
-    await me.say_and_wait(`挑战赫赫有名的马娘们，与她们交流，对抗，决定胜负。`);
-    await me.say_and_wait(`在这副风景之中，你看到了什么？`);
-    await chara_talk.say_and_wait(`......`);
+    await me.say_and_wait(
+      `挑战赫赫有名的${chara_talk.get_uma_sex_title()}们，与${
+        chara_talk.sex_code - 1 ? '她' : '他'
+      }们交流，对抗，决定胜负。`,
+    );
+    await me.say_and_wait(`有成功的把握吗？`);
+    await era.printAndWait(`丸善斯基沉默了一会后，给出了答案。`);
     await chara_talk.say_and_wait(
-      `训练员君对在赛场之中奔跑的马娘们怎么看的呢？`,
+      `${
+        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
+      }对在赛场之中奔跑的${chara_talk.get_uma_sex_title()}们怎么看的呢？`,
     );
     await me.say_and_wait(`为了在赛场上胜利，背后付出了汗水与努力。`);
     await me.say_and_wait(`可是。`);
-    await chara_talk.say_and_wait(`是啊，只有一名马娘能胜利。`);
+    await chara_talk.say_and_wait(
+      `是啊，只有一名${chara_talk.get_uma_sex_title()}能胜利。`,
+    );
     await era.printAndWait(
       `你的眼前再次浮现出了学生会办公室，正中央的那副名言。`,
     );
@@ -392,22 +415,26 @@ module.exports = async (hook, extra_flag) => {
       `第一次见到的时候，我想了很久也没想明白该怎么理解。`,
     );
     await chara_talk.say_and_wait(
-      `那些默默努力的马娘们，只是因为失败了，努力就全部都被否定了。`,
+      `那些默默努力的${chara_talk.get_uma_sex_title()}们，只是因为失败了，努力就全部都被否定了。`,
     );
     await chara_talk.say_and_wait(
-      `如果只有一名马娘能够获胜的话，那么其他马娘的努力不就全部白费了吗？`,
+      `如果只有一名${chara_talk.get_uma_sex_title()}能够获胜的话，那么其他${chara_talk.get_uma_sex_title()}的努力不就全部白费了吗？`,
     );
     await chara_talk.say_and_wait(
       `如果是注定失败的结局，那从一开始就放弃转向其他方向才是明智的选择吧？`,
     );
-    await chara_talk.say_and_wait(`——但是，奔跑才是马娘的天性吧？`);
+    await chara_talk.say_and_wait(
+      `——但是，奔跑才是${chara_talk.get_uma_sex_title()}的天性吧？`,
+    );
     await chara_talk.say_and_wait(`起跑前紧张的等待着发令枪的响起。`);
     await chara_talk.say_and_wait(
       `奔跑中孤独面对未知的世界，但并没有想象中那么害怕。`,
     );
     await chara_talk.say_and_wait(`冲刺时后方传来的阵阵踩踏声。`);
     await chara_talk.say_and_wait(
-      `想要超越前方的背影，想要跑得更快，想要比她迈的更远。`,
+      `想要超越前方的背影，想要跑得更快，想要比${
+        chara_talk.sex_code - 1 ? '她' : '他'
+      }迈的更远。`,
     );
     await chara_talk.say_and_wait(`最后冲线的那一刻，反而不是那么重要了。`);
     await chara_talk.say_and_wait(
@@ -416,7 +443,9 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       `被证明是可以走下去的道路，抱着试一试说不定能行的态度。`,
     );
-    await chara_talk.say_and_wait(`说不定就成功了呢。`);
+    await chara_talk.say_and_wait(
+      `所以我的答案是——无论成败，这场冒险都有值得去做的理由。`,
+    );
     await era.printAndWait(`宣布着比赛即将开始的广播响起。`);
     await chara_talk.say_and_wait(`抱歉，一不小心就说的有点多了呢。`);
     await era.printAndWait(`稍微有点不好意思的丸善斯基脸红了。`);
