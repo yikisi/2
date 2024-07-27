@@ -1,6 +1,6 @@
 # [EraUma v0.8](https://gitgud.io/umaera/erauma/-/releases/v0.8)
 
-_incoming_
+_2024/7/27_
 
 EraUma v0.8，适配 [EraElectron v2.0.0 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/v2.0.0) 版本
 
