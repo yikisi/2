@@ -134,14 +134,14 @@ module.exports = async (hook, extra_flag) => {
         chara_talk.name
       }首战获胜的${chara_talk.get_uma_sex_title()}们发出的尖叫。`,
     );
-    era.printButton(`差不多该去迎接${chara_talk.name}了`, 1);
+    era.printButton(`「差不多该去迎接${chara_talk.name}了」`, 1);
     await era.input();
     await chara_talk.say_and_wait(
       `${
         era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
       }♪,看到了我刚才的精彩表演了吗?`,
     );
-    era.printButton(`比想象之中还要精彩的演出！`, 1);
+    era.printButton(`「比想象之中还要精彩的演出！」`, 1);
     await era.input();
     await chara_talk.say_and_wait(
       `嗯嗯,那么我去准备胜者舞台了，${
@@ -176,7 +176,7 @@ module.exports = async (hook, extra_flag) => {
         era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
       }这么说，我的心情也愈发高涨起来了呢，嗯——今晚的话要不和小特们一起开个派对庆祝吧！`,
     );
-    era.printButton(`丸善斯基比平时还要兴奋的样子呢`, 1);
+    era.printButton(`「丸善斯基比平时还要兴奋的样子呢」`, 1);
     await era.input();
     await me.say_and_wait(
       `像是火焰一样席卷了整个草场的${chara_talk.name}可真帅气啊。`,
@@ -187,7 +187,7 @@ module.exports = async (hook, extra_flag) => {
       }这么说，可真是让人感到安心呢。`,
     );
     await chara_talk.say_and_wait(`不过在继续夸赞之前,下一个目标是？`);
-    era.printButton(`朝日杯怎么样？`, 1);
+    era.printButton(`「朝日杯怎么样？」`, 1);
     await era.input();
     await chara_talk.say_and_wait(`朝日杯吗?`);
     await chara_talk.say_and_wait(
@@ -333,8 +333,8 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       `${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我的表现怎么样？`,
     );
-    era.printButton(`嗯，非常不错。`, 1); //be1
-    era.printButton(`......丸善斯基。`, 2);
+    era.printButton(`「嗯，非常不错。」`, 1); //be1
+    era.printButton(`「......丸善斯基。」`, 2);
     const ret1 = await era.input();
     if (ret1 === 1) {
       await chara_talk.say_and_wait(`嗯嗯，我也这么想的哦。`);
@@ -420,7 +420,7 @@ module.exports = async (hook, extra_flag) => {
       `不论是最后冲线的刹那，还是在胜者舞台中央的表演，俘获了众多粉丝的丸善斯基。`,
     );
     await era.printAndWait(`带着满足的笑容回到了休息室。`);
-    era.printButton(`辛苦了，演出很精彩。`, 1);
+    era.printButton(`「辛苦了，演出很精彩。」`, 1);
     await era.input();
     await era.printAndWait(
       `轻轻脱下丸善斯基的长靴，从脚踝开始一直到大腿，小心翼翼控制着按摩的力度。`,
@@ -464,7 +464,7 @@ module.exports = async (hook, extra_flag) => {
       `按摩结束之后，似乎意犹未尽的丸善斯基在座位上发出了满足的感叹声。`,
     );
     await chara_talk.say_and_wait(`高档餐厅？还是亲民的赛利亚？还是说`);
-    era.printButton(`干脆在训练室庆祝吧！`, 1);
+    era.printButton(`「干脆在训练室庆祝吧！」`, 1);
     await era.input();
     await me.say_and_wait(`多点一份披萨和饮料，然后邀请后辈们一起庆祝。`);
     await chara_talk.say_and_wait(
@@ -492,16 +492,16 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       `参加德比的赛${chara_talk.get_uma_sex_title()}们个个都是赛${chara_talk.get_uma_sex_title()}的精英呢。`,
     );
-    era.printButton(`虽然跑道是在德比最外侧，但是在这种不利条件下。`, 1);
+    era.printButton(`「虽然跑道是在德比最外侧，但是在这种不利条件下。」`, 1);
     await era.input();
-    era.printButton(`还能漂亮赢下德比的丸善斯基才是最厉害的。`, 1);
+    era.printButton(`「还能漂亮赢下德比的丸善斯基才是最厉害的。」`, 1);
     await era.input();
     await chara_talk.say_and_wait(
       `其实也没那么厉害啦⭐只是和往常一样，不对，也就比之前稍稍跑得更快了一点的程度呢。`,
     );
     await chara_talk.say_and_wait(`接下来的话，嗯——果然还是。`);
-    era.printButton(`要不要去凯旋门？`, 1);
-    era.printButton(`果然还是有马纪念吗？`, 2);
+    era.printButton(`「要不要去凯旋门？」`, 1);
+    era.printButton(`「果然还是有马纪念吗？」`, 2);
     const ret1 = await era.input();
     if (ret1 === 1) {
       await chara_talk.say_and_wait(`诶？凯旋门吗？`);
@@ -516,7 +516,7 @@ module.exports = async (hook, extra_flag) => {
       await chara_talk.say_and_wait(`嗯——怎么办才好呢？`);
     } else {
       await chara_talk.say_and_wait(`对吧？果然还是有马纪念。`);
-      era.printButton(`我也期待着丸善斯基能在有马纪念上玩得开心。`, 1);
+      era.printButton(`「我也期待着丸善斯基能在有马纪念上玩得开心。」`, 1);
       await era.input();
       await chara_talk.say_and_wait(
         `${
@@ -550,8 +550,8 @@ module.exports = async (hook, extra_flag) => {
       `丸善前辈，我有些疑问想要问你，如果可以的话，明天晚上可以到空教室里见面吗？`,
     );
     await era.printAndWait(`你决定`);
-    era.printButton(`告诉丸善斯基`, 1); //NE
-    era.printButton(`代替丸善斯基前去`, 2);
+    era.printButton(`「告诉丸善斯基」`, 1); //NE
+    era.printButton(`「代替丸善斯基前去」`, 2);
     const ret2 = await era.input();
     if (ret2 === 1) {
       await me.say_and_wait(`有点头疼啊，是给丸善斯基的。`);
@@ -612,10 +612,10 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       `哼哼~那是当然的事情呦，不如说失败的话才更奇怪吧？`,
     );
-    era.printButton(`大腿怎么样了？`, 1);
+    era.printButton(`「大腿怎么样了？」`, 1);
     await era.input();
     await chara_talk.say_and_wait(`比想象之中要好的多。`);
-    era.printButton(`大腿怎么样了？`, 1);
+    era.printButton(`「大腿怎么样了？」`, 1);
     await era.input();
     await chara_talk.say_and_wait(`......`);
     era.printButton(
@@ -661,7 +661,10 @@ module.exports = async (hook, extra_flag) => {
       `记者A`,
       `请问训练员先生对${chara_talk.name}获胜有什么感谢吗？`,
     );
-    era.printButton(`比起胜利与否，${chara_talk.name}能够高兴才是最重要的`, 1);
+    era.printButton(
+      `「比起胜利与否，${chara_talk.name}能够高兴才是最重要的」`,
+      1,
+    );
     await era.input();
     await chara_talk.say_and_wait(
       `${
@@ -794,7 +797,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `${me.actual_name}回忆起了松软奶酪与浇灌着蜂蜜的面包发出的香甜气息，以及${chara_talk.name}在晴朗的天空之下露出的笑容。`,
     );
-    era.printButton(`${chara_talk.name}的厨艺一直都是这么好呢`, 1);
+    era.printButton(`「${chara_talk.name}的厨艺一直都是这么好呢」`, 1);
     await era.input();
     await era.printAndWait(
       `像是回忆起了什么一样，微笑之中露出了狡黠表情的${chara_talk.name}轻轻摆动着尾巴。`,
@@ -952,7 +955,7 @@ module.exports = async (hook, extra_flag) => {
       `在意识消失之前的一刹那，丸善斯基将这片黄金般的故乡深深铭记在了心底。`,
     );
     era.drawLine();
-    era.printButton(`丸善斯基？`, 1);
+    era.printButton(`「丸善斯基？」`, 1);
     await era.input();
     await era.printAndWait(
       `应该说是不幸中的万幸吗？从比赛结束之后就一直浑浑噩噩的丸善斯基，在胜者舞台上依然将自己的舞蹈传达到了每一个支持者的心底。`,
@@ -962,7 +965,7 @@ module.exports = async (hook, extra_flag) => {
         chara_talk.sex_code - 1 ? '她' : '他'
       }送到了居住的公寓中。`,
     );
-    era.printButton(`打扰了。`, 1);
+    era.printButton(`「打扰了。」`, 1);
     await era.input();
     await era.printAndWait(
       `一边将小塔停在附近的停车场，一边小心翼翼的抱起丸善斯基。`,
@@ -1017,8 +1020,8 @@ module.exports = async (hook, extra_flag) => {
       `victory!victory！胜利了哦，训练员♪第一名果然不一样呢，内心的兴奋完全停不下来啊`,
     );
     await chara_talk.say_and_wait(`训练员看到了我跑步的模样吗？`);
-    era.printButton(`你是最棒的！`, 1);
-    era.printButton(`还可以做的更好哦！`, 2);
+    era.printButton(`「你是最棒的！」`, 1);
+    era.printButton(`「还可以做的更好哦！」`, 2);
     const ret = await era.input();
     if (ret === 1) {
       await chara_talk.say_and_wait(
@@ -1043,8 +1046,8 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       `虽然想为了来看比赛的后辈们拿下第一的，不过我的实力还不够呢......`,
     );
-    era.printButton(`你跑的并不差！`, 1);
-    era.printButton(`下次要拿第一名！`, 2);
+    era.printButton(`「你跑的并不差！」`, 1);
+    era.printButton(`「下次要拿第一名！」`, 2);
     const ret = await era.input();
     if (ret === 1) {
       await chara_talk.say_and_wait(`呵呵，训练员在安慰我吧。谢谢你。`);
@@ -1076,8 +1079,8 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       `抱歉呢....训练员。没能让你看到我帅气的模样.......`,
     );
-    era.printButton(`期待下一次的表现！`, 1);
-    era.printButton(`垂头丧气也没有用！`, 2);
+    era.printButton(`「期待下一次的表现！」`, 1);
+    era.printButton(`「垂头丧气也没有用！」`, 2);
     const ret = await era.input();
     if (ret === 1) {
       await chara_talk.say_and_wait(`......你真温柔呢，训练员。`);

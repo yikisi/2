@@ -21,7 +21,7 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       `虽然还是有些紧张，不过现在的话倒是完全放松下来了。`,
     );
-    era.printButton(`就这样让后辈们看到丸善斯基帅气的一面吧！`, 1);
+    era.printButton(`「就这样让后辈们看到丸善斯基帅气的一面吧！」`, 1);
     await era.input();
     await chara_talk.say_and_wait(
       `嗯嗯,${
@@ -37,7 +37,7 @@ module.exports = async (hook, extra_flag) => {
         era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
       }，待会见！`,
     );
-    era.printButton(`祝你武运昌隆`, 1);
+    era.printButton(`「祝你武运昌隆」`, 1);
     await era.input();
     await era.printAndWait(`点了点头后，${chara_talk.name}走向了赛场`);
   } else if (extra_flag.race === race_enum.asah_sta && edu_weeks < 95) {
@@ -50,7 +50,7 @@ module.exports = async (hook, extra_flag) => {
       `哎呀，是${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}啊。`,
     );
     await chara_talk.say_and_wait(`正如你所见，现在是马力全开的状态。`);
-    era.printButton(`接下来也要好好享受比赛哦！`, 1);
+    era.printButton(`「接下来也要好好享受比赛哦！」`, 1);
     await era.input();
     await me.say_and_wait(
       `毕竟，我一直都想看到朝着未来奔跑的丸善斯基帅气的样子。`,
@@ -62,7 +62,7 @@ module.exports = async (hook, extra_flag) => {
     );
     await chara_talk.say_and_wait(`在赛场上奔跑的丸善斯基的模样。`);
     await chara_talk.say_and_wait(`那么，我出发了。`);
-    era.printButton(`丸善斯基加油！`, 1);
+    era.printButton(`「丸善斯基加油！」`, 1);
     await era.input();
     await era.printAndWait(`做好准备的${chara_talk.name}走向了赛场。`);
     await me.say_and_wait(
@@ -288,7 +288,7 @@ module.exports = async (hook, extra_flag) => {
         era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
       }，这下要让后辈们好好看着我的背影哦`,
     );
-    era.printButton(`唔`, 1);
+    era.printButton(`「唔」`, 1);
     await era.input();
     await era.printAndWait(
       `在${chara_talk.name}摆脱阴影之后，以国内最大的舞台——有马纪念为目标，你们开始了练习。`,
@@ -321,7 +321,7 @@ module.exports = async (hook, extra_flag) => {
     era.drawLine({ content: '准备室中' });
     await chara_talk.say_and_wait(`哼哼哼~`);
     await era.printAndWait(`如此紧张的时刻${chara_talk.name}依然相当从容。`);
-    era.printButton(`${chara_talk.name}，这次一定会跑的非常开心`, 1);
+    era.printButton(`「${chara_talk.name}，这次一定会跑的非常开心」`, 1);
     await era.input();
     await era.printAndWait(
       `没有比皇帝登场更能让${chara_talk.name}对比赛感到兴奋的事情了。`,
@@ -371,7 +371,7 @@ module.exports = async (hook, extra_flag) => {
         era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
       }我也会吃醋的。`,
     );
-    era.printButton(`我会一直看着你的`, 1);
+    era.printButton(`「我会一直看着你的」`, 1);
     await era.input();
     await chara_talk.say_and_wait(`那么最后一次♪`);
     await era.printAndWait(
@@ -385,10 +385,10 @@ module.exports = async (hook, extra_flag) => {
       `作为丸善斯基与皇帝之间的第二次对决，对于观众们来说是空前盛大的盛况。`,
     );
     era.drawLine({ content: '准备室中' });
-    era.printButton(`让我看到最棒的背影吧`, 1);
+    era.printButton(`「让我看到最棒的背影吧」`, 1);
     await era.input();
     await chara_talk.say_and_wait(`能与小鲁铎同台竞技，毫无疑问是最棒的舞台♪`);
-    era.printButton(`有成功的把握吗？`, 1);
+    era.printButton(`「有成功的把握吗？」`, 1);
     await era.input();
     await me.say_and_wait(
       `挑战赫赫有名的${chara_talk.get_uma_sex_title()}们，与${
@@ -455,9 +455,9 @@ module.exports = async (hook, extra_flag) => {
     );
     await era.printAndWait(`已经全部经历过一边了。`);
     await era.printAndWait(`对于${chara_talk.name}来说————`);
-    era.printButton(`一起出发吧。`, 1);
+    era.printButton(`「一起出发吧。」`, 1);
     await era.input();
-    era.printButton(`让我们写下属于我们自己的故事吧。`, 1);
+    era.printButton(`「让我们写下属于我们自己的故事吧。」`, 1);
     await era.input();
     await chara_talk.say_and_wait(`......呵呵♪`);
     await era.printAndWait(`丸善斯基露出了笑容。`);
@@ -472,7 +472,7 @@ module.exports = async (hook, extra_flag) => {
     await print_event_name('比赛开始', chara_talk);
     await era.printAndWait(`地下通道内`);
     await chara_talk.say_and_wait(`今天的比赛也要让后辈们看到我帅气的背影`);
-    era.printButton(`${chara_talk.name}加油`, 1);
+    era.printButton(`「${chara_talk.name}加油」`, 1);
     await era.input();
     await chara_talk.say_and_wait(
       `呵呵,谢谢${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}了`,
