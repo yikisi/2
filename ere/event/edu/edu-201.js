@@ -35,11 +35,11 @@ handlers.all_round = async (meek) => {
   let wait_flag = get_attr_and_print_in_event(
     0,
     [0, 0, 0, 0, 3],
-    10,
+    get_random_value(0, 10),
     undefined,
     true,
   );
-  wait_flag = sys_like_chara(201, 0, get_random_value(10, 20)) || wait_flag;
+  wait_flag = sys_like_chara(201, 0, get_random_value(5, 15)) || wait_flag;
   wait_flag && (await waitAnyKey());
   new MeekEduMarks().all_round = get_random_value(36, 60);
 };

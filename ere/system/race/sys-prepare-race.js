@@ -454,13 +454,28 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     switch (uma.style) {
       case 0:
         if (uma.race.conditionParams.is_used_skill_id.indexOf(202051) !== -1) {
-          uma.base.loc_mind_nige_diff_speed_up_nige = 9 * loc_mind_base_diff;
-          uma.base.loc_mind_nige_diff_speed_up_other = 9 * loc_mind_base_diff;
-          uma.base.loc_mind_nige_diff_over_take = 12.5 * loc_mind_base_diff;
+          uma.base.loc_mind_nige_diff_speed_up_nige =
+            uma.base.loc_mind_nige_diff_speed_up_other = Math.max(
+              6 * loc_mind_base_diff,
+              17.5,
+            );
+          uma.base.loc_mind_nige_diff_over_take = Math.max(
+            8 * loc_mind_base_diff,
+            27.5,
+          );
         } else {
-          uma.base.loc_mind_nige_diff_speed_up_nige = 2.5 * loc_mind_base_diff;
-          uma.base.loc_mind_nige_diff_speed_up_other = 8 * loc_mind_base_diff;
-          uma.base.loc_mind_nige_diff_over_take = 5 * loc_mind_base_diff;
+          uma.base.loc_mind_nige_diff_speed_up_nige = Math.max(
+            loc_mind_base_diff,
+            4.5,
+          );
+          uma.base.loc_mind_nige_diff_speed_up_other = Math.max(
+            5 * loc_mind_base_diff,
+            12.5,
+          );
+          uma.base.loc_mind_nige_diff_over_take = Math.max(
+            3 * loc_mind_base_diff,
+            10,
+          );
         }
         break;
       case 1:

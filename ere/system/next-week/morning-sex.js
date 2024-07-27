@@ -104,7 +104,11 @@ async function blowjob(chara, me) {
         : '生涩',
     '地',
     me.sex_code === 0 ? '舔舐着阴蒂' : '吞吐着阴茎',
-    '（玩家名）也不禁以手按住（角色名）的脑袋渴求更多的快感。',
+    '，',
+    me.get_colored_name(),
+    ' 也不禁以手按住 ',
+    chara.get_colored_name(),
+    ' 的脑袋渴求更多的快感。',
   ]);
   const my_cache = { s: get('base:0:体力'), t: get('base:0:精力') },
     chara_cache = {

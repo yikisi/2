@@ -2,6 +2,7 @@ const {
   add,
   get,
   input,
+  print,
   printAndWait,
   printButton,
   printInColRows,
@@ -13,6 +14,7 @@ const {
 
 const check_team_limit = require('#/system/chara/sys-check-team-limit');
 const sys_get_random_uma_god = require('#/system/chara/sys-get-random-uma-god');
+const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
@@ -23,13 +25,12 @@ const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
-const { get_random_entry } = require('#/utils/list-utils');
 
 /** @type {Record<string,function(CharaTalk):Promise>} */
 const handlers = {};
@@ -207,7 +208,7 @@ handlers.god_coin = async (me) => {
         });
     }
     println();
-    sys_like_chara(god, 0, get_random_value(25, 75)) && (await waitAnyKey());
+    sys_like_chara(god, 0, get_random_value(10, 20)) && (await waitAnyKey());
   } else if (dice < 0.7) {
     await printAndWait('啊……这个说不定可以……？');
     await printAndWait(
@@ -220,8 +221,8 @@ handlers.god_coin = async (me) => {
     ) {
       get_attr_and_print_in_event(
         cur_chara,
-        undefined,
-        get_random_value(5, 10),
+        [0, 0, 0, 0, 3],
+        get_random_value(0, 10),
       ) && (await waitAnyKey());
     }
   } else if (dice < 0.9) {
@@ -251,7 +252,7 @@ handlers.experiment = async (me) => {
   await printAndWait('和一只有些破旧的黑猫玩偶');
   println();
   me.say('选哪个呢……', true);
-  printButton('药剂（耐力+? or 体力+100）', 1);
+  printButton('药剂（耐力+? or 体力+50）', 1);
   printButton('玩偶（智力+8，技能点数+?）', 2);
   let wait_flag;
   if ((await input()) === 1) {
@@ -260,7 +261,7 @@ handlers.experiment = async (me) => {
       await printAndWait('好苦——');
       wait_flag = get_attr_and_print_in_event(
         0,
-        [0, get_random_value(5, 15)],
+        [0, get_random_value(0, 10)],
         0,
       );
     } else {
@@ -269,10 +270,10 @@ handlers.experiment = async (me) => {
         0,
         undefined,
         0,
-        JSON.parse('{"体力":100}'),
+        JSON.parse('{"体力":50}'),
       );
     }
-    wait_flag = sys_like_chara(32, 0, get_random_value(10, 20)) || wait_flag;
+    wait_flag = sys_like_chara(32, 0, get_random_value(5, 15)) || wait_flag;
   } else {
     const coffee = get_chara_talk(25);
     await coffee.say_as_unknown_and_wait('呦西呦西呦西呦西——');
@@ -283,9 +284,9 @@ handlers.experiment = async (me) => {
     wait_flag = get_attr_and_print_in_event(
       0,
       [0, 0, 0, 0, 8],
-      get_random_value(5, 10),
+      get_random_value(0, 10),
     );
-    wait_flag = sys_like_chara(25, 0, get_random_value(10, 20)) || wait_flag;
+    wait_flag = sys_like_chara(25, 0, get_random_value(5, 15)) || wait_flag;
   }
   wait_flag && (await waitAnyKey());
 };
@@ -300,7 +301,7 @@ handlers.custom = async (me) => {
     ' 在最近开始游玩的手机游戏《闪光的优秀少女》里又遇到低机率的训练失败了……习惯就好……',
   ]);
   printButton('「……习惯个屁！」（马币-50，育成中马娘体力+15%）', 1, {
-    disabled: get('flag:当前马币') >= 50,
+    disabled: get('flag:当前马币') < 50,
   });
   printButton('「习惯就好！」', 2);
   if ((await input()) === 1) {
@@ -320,7 +321,7 @@ handlers.custom = async (me) => {
 };
 
 /** @author 雞雞 */
-handlers.custom = async (me) => {
+handlers.trainer_race = async (me) => {
   new MyEduMarks().trainer_race = get_random_value(24, 48);
   await print_event_name('随风飘扬的海报', me);
   await printAndWait([
@@ -333,7 +334,7 @@ handlers.custom = async (me) => {
     get_random_entry(['短跑', '游泳', '登山）']),
     '比赛，上面写着哪怕对体质没自信现场也会有官方支援的样子，要参加吗？',
   ]);
-  printButton('（试试也不会少块肉？）', 1);
+  printButton('（试试也不会少块肉？）（体力&精力-25%，可能获得奖品）', 1);
   printButton('（忙死了，哪来的时间参加啊——！）', 2);
   if ((await input()) === 1) {
     await printAndWait(
@@ -343,7 +344,13 @@ handlers.custom = async (me) => {
       '但顺利得让人背脊发凉啊……就像是自己被当成什么实验品一样……',
     );
     println();
-    sys_like_chara(305, 0, get_random_value(0, 10)) && (await waitAnyKey());
+    sys_change_attr_and_print(0, '体力', get('maxbase:0:体力') * 0.25);
+    sys_change_attr_and_print(0, '精力', get('maxbase:0:精力') * 0.25);
+    const item = get_random_value(700, 707);
+    print([`获得了奖品：[${get(`itemname:${item}`)}]！`]);
+    add(`item:${item}`, 1);
+    sys_like_chara(305, 0, get_random_value(0, 10));
+    await waitAnyKey();
   } else {
     await printAndWait([
       '后来听说是 ',
@@ -351,8 +358,6 @@ handlers.custom = async (me) => {
       ' 在没有支援的场合下获胜了的样子。',
     ]);
     await printAndWait('果然，那个人强得像鬼一样……');
-    println();
-    sys_like_chara(304, 0, get_random_value(0, 10)) && (await waitAnyKey());
   }
 };
 
@@ -388,7 +393,7 @@ handlers.reject = async (me) => {
   ]);
   printButton('「我不是，我没有！」', 1);
   await input();
-  sys_change_fame(-50);
+  sys_change_fame(-20);
 };
 
 /** @author 雞雞 */

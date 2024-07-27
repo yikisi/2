@@ -54,8 +54,8 @@ handlers.shadow = async (tokino, me) => {
     ' 言谢。又做了一件好事！',
   ]);
   println();
-  let wait_flag = sys_like_chara(10, 0, get_random_value(5, 10));
-  wait_flag = sys_like_chara(301, 0, get_random_value(5, 10)) || wait_flag;
+  let wait_flag = sys_like_chara(10, 0, get_random_value(5, 15));
+  wait_flag = sys_like_chara(301, 0, get_random_value(5, 15)) || wait_flag;
   wait_flag && (await waitAnyKey());
   life_marks.shadow = get_random_value(36, 60);
 };

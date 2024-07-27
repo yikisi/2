@@ -26,7 +26,7 @@ module.exports = class extends CustomizedCheck {
         );
       }
     }
-    if (my_edu_marks.custom >= 0) {
+    if (my_edu_marks.custom > 0) {
       if (--my_edu_marks.custom === 0) {
         add_event(
           event_hooks.week_end,
@@ -34,7 +34,7 @@ module.exports = class extends CustomizedCheck {
         );
       }
     }
-    if (my_edu_marks.trainer_race >= 0) {
+    if (my_edu_marks.trainer_race > 0) {
       if (--my_edu_marks.trainer_race === 0) {
         add_event(
           event_hooks.week_start,

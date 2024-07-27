@@ -636,7 +636,7 @@ module.exports = async (hook, _, event_object) => {
     await print_event_name('拔萝卜之鬼', gold_ship);
     await era.printAndWait([
       '在学校里被一头芦毛的诡异',
-      gold_ship.get_colored_name(),
+      gold_ship.get_uma_sex_title(),
       '拦住了。',
     ]);
     await gold_ship.say_and_wait(
@@ -645,13 +645,13 @@ module.exports = async (hook, _, event_object) => {
     await era.printAndWait(
       '原来是问题儿童黄金船……而且海边哪有什么萝卜可以拔啊？',
     );
-    era.printButton('「你要拔，那便拔！」（马币+50）', 1);
+    era.printButton('「你要拔，那便拔！」（马币+20）', 1);
     era.printButton('「总觉得有点可疑……」（体力+100）', 2);
     if ((await era.input()) === 1) {
       await era.printAndWait(
         '竟然从沙滩里挖出来了散发着彩虹色光芒，而且看起来像是宝石的萝卜？！',
       );
-      sys_change_money(50);
+      sys_change_money(20);
     } else {
       await era.printAndWait(
         '得到了普通的萝卜……等下长在海边真的算普通吗！？总之先拿回去给午饭加餐了。',

@@ -7,7 +7,7 @@ const { get_random_entry, sort_list } = require('#/utils/list-utils');
 const { race_enum } = require('#/data/race/race-const');
 const { race_event_enum } = require('#/data/race/race-sim-const');
 
-/** @type {(function(PseudoUma,PseudoUma):((string|{content:string})[]))[]} */
+/** @type {(function(PseudoUma,PseudoUma))[]} */
 const overtake_handlers = [
   (top, over) => [
     over.get_colored_name(),
@@ -30,7 +30,7 @@ const overtake_handlers = [
   ],
 ];
 
-/** @type {(function(PseudoUma,PseudoUma):((string|{content:string})[]))[]} */
+/** @type {(function(PseudoUma,PseudoUma))[]} */
 const battle_handlers = [
   (first, second) => [
     first.get_colored_name(),
@@ -53,7 +53,7 @@ const battle_handlers = [
   ],
 ];
 
-/** @type {(function(PseudoUma):((string|{content:string})[]))[]} */
+/** @type {(function(PseudoUma,PseudoUma))[]} */
 const top_handlers = [
   (uma) => [uma.get_colored_name(), ' 牢牢把持着头位！'],
   (uma) => ['太快了太快了！', uma.get_colored_name(), ' 一骑绝尘！'],
@@ -61,7 +61,62 @@ const top_handlers = [
   (uma) => ['持续领先！终盘的 ', uma.get_colored_name(), ' 似乎已无人能敌！'],
   (uma) => [uma.get_colored_name(), ' 即将迎来胜利！'],
 ];
-/** @type {(function(PseudoUma):((string|{content:string})[]))[]} */
+
+/** @type {Record<string,(function([]))[]>} */
+const other_handlers = {};
+
+other_handlers[race_event_enum.loc_mind_nige_ex] = [
+  (names) => ['逃马怎容他马在前！冲啊，', ...names, '！'],
+  (names) => ['那不是你的位置！', ...names, ' 在用奔跑警告着！'],
+  (names) => [...names, ' 正在夺回自己的头马之位！'],
+];
+other_handlers[race_event_enum.loc_mind_other_ex] = [
+  (names) => [...names, ' 大步奔向自己应处的位置！'],
+  (names) => [
+    `这才不是${names.length > 1 ? '你' : '你们'}的位置！加油啊 `,
+    ...names,
+    '！',
+  ],
+  (names) => [...names, ' 正在为夺回位置而战！'],
+];
+other_handlers[race_event_enum.loc_mind_nige_over_take] = [
+  (names) => [...names, ' 毫不犹豫向头位进发！'],
+  (names) => [...names, ' 的眼里只有头位！'],
+];
+other_handlers[race_event_enum.loc_mind_nige_speed_up] = [
+  (names) => [...names, ' 持续加速，想要拉开更多距离！'],
+  (names) => [...names, ' 要逃得更远了！'],
+  (names) => ['逃下去，逃到世界尽头吧！', ...names, '！'],
+];
+other_handlers[race_event_enum.loc_mind_other_quick] = [
+  (names) => [...names, ' 不甘于被拉开距离，在奋起直追！'],
+  (names) => ['被拉得太远了！', ...names, ' 奋起直追！'],
+  (names) => [...names, ' 紧紧把持着自己的距离！'],
+];
+other_handlers[race_event_enum.loc_mind_other_relax] = [
+  (names) => [...names, ' 似乎在保持体力，很大胆的战术！！'],
+  (names) => [...names, ' 的节奏变慢了，要小心啊！！'],
+  (names) => [...names, '，松懈可是大敌！'],
+];
+other_handlers[race_event_enum.blocked] = [
+  (names) => [...names, ' 被阻挡了，真是可惜！'],
+  (names) => [...names, ' 突围失败！'],
+  (names) => [...names, ' 身陷马群无法自拔！'],
+];
+other_handlers[race_event_enum.temptation] = [
+  (names) => [...names, ' 的节奏略显凌乱，似乎有点焦躁！'],
+  (names) => [...names, ' 有点气急了吗！'],
+];
+other_handlers[race_event_enum.temp_end] = [
+  (names) => [...names, ' 终于回归了正常的节奏！'],
+  (names) => [...names, ' 好像冷静下来了！'],
+];
+other_handlers[race_event_enum.temp_continue] = [
+  (names) => [...names, ' 的节奏持续紊乱，有点糟糕！'],
+  (names) => ['冷静下来啊 ', ...names, '！小心错失时机！'],
+];
+
+/** @type {(function(PseudoUma,PseudoUma))[]} */
 let top_list;
 
 let order_start = 0,
@@ -246,24 +301,6 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
           .forEach((e) => name.push(' 与 ', e.u.get_colored_name()));
         name.shift();
         switch (entry.e) {
-          case race_event_enum.loc_mind_nige_ex:
-            ret_list.push('逃马怎容他马在前！', ...name, ' 势要夺回头位！');
-            break;
-          case race_event_enum.loc_mind_other_ex:
-            ret_list.push(...name, ' 大步奔向自己应处的位置！');
-            break;
-          case race_event_enum.loc_mind_nige_over_take:
-            ret_list.push(...name, ' 毫不犹豫向头位进发！');
-            break;
-          case race_event_enum.loc_mind_nige_speed_up:
-            ret_list.push(...name, ' 持续加速，想要拉开更多距离！');
-            break;
-          case race_event_enum.loc_mind_other_quick:
-            ret_list.push(...name, ' 不甘于被拉开距离，在奋起直追！');
-            break;
-          case race_event_enum.loc_mind_other_relax:
-            ret_list.push(...name, ' 似乎放缓了节奏以保持体力，很大胆的策略！');
-            break;
           case race_event_enum.final_push:
             if (final_push_pop !== undefined) {
               ret_list.push(...name, ' 也开始最终冲刺了！');
@@ -284,17 +321,17 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
               ' 加快了自己的速度！',
             );
             break;
+          case race_event_enum.loc_mind_nige_ex:
+          case race_event_enum.loc_mind_other_ex:
+          case race_event_enum.loc_mind_nige_over_take:
+          case race_event_enum.loc_mind_nige_speed_up:
+          case race_event_enum.loc_mind_other_quick:
+          case race_event_enum.loc_mind_other_relax:
           case race_event_enum.blocked:
-            ret_list.push(...name, ' 的步伐被阻挡了，真是可惜！');
-            break;
           case race_event_enum.temptation:
-            ret_list.push(...name, ' 的节奏略显凌乱，似乎有点焦躁！');
-            break;
           case race_event_enum.temp_end:
-            ret_list.push(...name, ' 回归了正常的节奏，是冷静下来了吗！');
-            break;
           case race_event_enum.temp_continue:
-            ret_list.push(...name, ' 的节奏持续紊乱，有点糟糕！');
+            ret_list.push(...get_random_entry(other_handlers[entry.e])(name));
             break;
           default:
             ret_list.push(

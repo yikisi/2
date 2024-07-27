@@ -640,7 +640,7 @@ function sys_sim_race(list_chara, race_info, race_id) {
         uma.race.conditionParams.phase >= 1 &&
         uma.race.conditionParams.blocked_front &&
         Math.random() >=
-          (uma.race.strength * get_random_value(0.4, 0.6, true)) /
+          (uma.race.strength * get_random_value(0.6, 0.8, true)) /
             l[i - 1].race.strength +
             uma.race.lane_move_buff
       ) {

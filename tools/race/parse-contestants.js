@@ -47,6 +47,7 @@ async function task() {
       } else if (e.chara_id > 2000) {
         tmp.id += 200;
       }
+      tmp.attrs = tmp.attrs.map((e) => Math.floor(e - Math.min(e * 0.2, 100)));
       contestants.named.push(tmp);
     }
   });
