@@ -34,18 +34,13 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   if (Math.random() < 0.9 * extra_flag.stamina_ratio) {
     const me = get_chara_talk(0);
     await print_event_name('额外的自主训练', chara_talk);
-
     await era.printAndWait(`在${chara_talk.name}的训练结束后。`);
-
     await chara_talk.say_and_wait(
-      `喂喂，${
+      `哈喽？${
         era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
       }，待会有空吗？`,
     );
-
-    await chara_talk.say_and_wait(
-      '我在雨天兜风的时候，在这种天气跑步应该会很开心。',
-    );
+    await chara_talk.say_and_wait('在这种天气跑步应该会很开心吧？');
 
     await chara_talk.say_and_wait(
       '溅起的水花、雨中朦胧的视野……这种时候好像可以感受到别具一格的风。',

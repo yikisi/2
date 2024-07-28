@@ -2212,7 +2212,7 @@ module.exports = async function (hook, _, event_object) {
       await chara_talk.say_and_wait(`接下来请多多关照了♪`);
     } else {
       await chara_talk.say_and_wait(
-        `诶，${
+        `虾米？${
           era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
         }面对这样的美${chara_talk.get_teen_sex_title()}都提不起兴趣吗？${
           era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'

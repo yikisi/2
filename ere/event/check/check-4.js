@@ -328,8 +328,6 @@ module.exports = class extends CustomizedCheck {
       event_marks.wind <= 19
     ) {
       new MaEduMarks().gentle_wind++;
-    } else if (check_aim_race(races, race_enum.sank_hai, 2, 1)) {
-      new MaEduMarks().girls_dream++;
     } else {
       new MaEduMarks().girls_dream++;
     }

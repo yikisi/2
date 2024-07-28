@@ -197,6 +197,21 @@ module.exports = async (hook, extra_flag) => {
     );
     await chara_talk.say_and_wait(`那么,接下来就朝着朝日杯前进吧！`);
     await era.printAndWait(`你和${chara_talk.name}确定了接下来的目标.`);
+  }
+  if (
+    extra_flag.race === race_enum.begin_race &&
+    edu_weeks < 48 &&
+    extra_flag.rank > 1
+  ) {
+    await print_event_name('出道战后・再次努力', chara_talk);
+    await chara_talk.say_and_wait(`啊，输了......`);
+    await era.printAndWait(
+      `不知是意外还是训练不足的缘故，丸善斯基在出道战失利。`,
+    );
+    era.printButton(`回去开反省会吧。`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(`嗯！下次绝对会胜利！`);
+    await era.printAndWait(`你和丸善斯基确定了接下来的目标。`);
   } else if (
     extra_flag.race === race_enum.asah_sta &&
     edu_weeks < 48 &&
@@ -214,6 +229,78 @@ module.exports = async (hook, extra_flag) => {
       true,
     );
     await era.printAndWait(`你紧紧的凝视着比赛开始的时刻。`);
+    era.drawLine({ content: '观众席的另一端' });
+    await era.printAndWait(
+      `紧紧握住来之不易的马票,${chara_talk.get_uma_sex_title()}紧紧地盯着丸善斯基的身影。`,
+    );
+    await era.printAndWait(`然而，`);
+    await say_by_passer_by(
+      `${chara_talk.get_uma_sex_title()}`,
+      `所以我的存在意义是......`,
+    );
+    await era.printAndWait(
+      `不小心下意识将自己与${chara_talk.sex_code - 1 ? '她' : '他'}对比了。`,
+    );
+    await say_by_passer_by(
+      `${chara_talk.get_uma_sex_title()}`,
+      `啊！不小心将心底里的话说出来了。`,
+      true,
+    );
+    await say_by_passer_by(
+      `${chara_talk.get_uma_sex_title()}`,
+      `可是为什么，心会这么痛呢？`,
+      true,
+    );
+    await era.printAndWait(`我与你的距离，是用尽全力也触摸不到的程度。`);
+    await say_by_passer_by(`${chara_talk.get_uma_sex_title()}`, `为什么......`);
+    await era.printAndWait(
+      `不甘心的咬着嘴唇，将手中紧握的马票搓成了一个圆球。`,
+    );
+    await say_by_passer_by(
+      `${chara_talk.get_uma_sex_title()}`,
+      `为什么我无法从你的脚步之中看到希望呢`,
+      true,
+    );
+    await say_by_passer_by(
+      `${chara_talk.get_uma_sex_title()}`,
+      `不对！我在想什么。`,
+    );
+    await era.printAndWait(
+      `似乎有什么珍贵的东西碎裂了，再也找不回来了。${chara_talk.get_uma_sex_title()}重新看向了丸善斯基的身影。`,
+    );
+  } else if (
+    extra_flag.race === race_enum.asah_sta &&
+    edu_weeks < 48 &&
+    extra_flag.rank > 1 &&
+    extra_flag.rank < 5
+  ) {
+    await print_event_name('朝日杯后・兴奋的感觉', chara_talk);
+    await era.printAndWait(`丸善斯基入着。`);
+    await chara_talk.say_and_wait(
+      `嗨！${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，看到${
+        era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'
+      }我帅气的样子了吗？`,
+    );
+    era.printButton(`辛苦了。`, 1);
+    await era.input();
+    era.printButton(`能在G1赛事入着能很厉害了。`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(
+      `奔跑的${chara_talk.get_uma_sex_title()}们都是斗志昂扬的想要取得胜利呢，${
+        era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
+      }我有点压力山大呢。`,
+    );
+    await me.say_and_wait(`丸善斯基看上去明明乐在其中吧。`);
+    await chara_talk.say_and_wait(
+      `毕竟是G1级赛事嘛，遇到的对手比平常要强一个档次。`,
+    );
+    await chara_talk.say_and_wait(
+      `相应的，能在草场上获得的快乐也比之前高了一个级别♪`,
+    );
+    await me.say_and_wait(`接下来去哪里庆祝一下吧？`);
+    await chara_talk.say_and_wait(
+      `酱紫的话，${era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'}我知道一家很受欢迎的甜品店。`,
+    );
     era.drawLine({ content: '观众席的另一端' });
     await era.printAndWait(
       `紧紧握住来之不易的马票,${chara_talk.get_uma_sex_title()}紧紧地盯着丸善斯基的身影。`,
@@ -333,10 +420,16 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       `${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我的表现怎么样？`,
     );
-    era.printButton(`「嗯，非常不错。」`, 1); //be1
+    era.printButton(`「......也许吧」`, 1); //be1
     era.printButton(`「......丸善斯基。」`, 2);
     const ret1 = await era.input();
     if (ret1 === 1) {
+      await chara_talk.say_and_wait(`虾米？`);
+      era.printButton(`啊，抱歉，刚才走神了。`, 1);
+      await era.input();
+      await me.say_and_wait(
+        `不愧是${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}，非常棒哦！`,
+      );
       await chara_talk.say_and_wait(`嗯嗯，我也这么想的哦。`);
       await chara_talk.say_and_wait(`嗯——接下来的话，去哪里吃比较好呢？`);
       await chara_talk.say_and_wait(
@@ -372,10 +465,9 @@ module.exports = async (hook, extra_flag) => {
         `背后已经被汗水打湿，虽然已经做好了最坏的打算，但能得到丸善斯基的同意，还是让你长呼了一口气。`,
       );
       await chara_talk.say_and_wait(
-        `我做了让${
+        `${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我做了让${
           era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
         }受伤的事情吗？`,
-        true,
       );
     }
   } else if (
@@ -476,6 +568,38 @@ module.exports = async (hook, extra_flag) => {
       `穿起靴子，重新适应着走路感觉的${chara_talk.sex_code - 1 ? '少女' : '少年'}期待着之后的庆典。`,
     );
   } else if (
+    extra_flag.race === race_enum.sats_sho &&
+    edu_weeks < 95 &&
+    extra_flag.rank > 1 &&
+    extra_flag.rank < 5
+  ) {
+    await print_event_name('皐月賞后・换挡起步', chara_talk);
+    await era.printAndWait(`等候室\n`);
+    await chara_talk.say_and_wait(
+      `嗨！${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}！`,
+    );
+    await era.printAndWait(`从胜者舞台下来的丸善斯基回到了等候室`);
+    await me.say_and_wait(`感觉怎么样？`);
+    await era.printAndWait(
+      `轻轻脱下丸善斯基的靴子，从脚踝开始一直到大腿，小心翼翼控制着按摩的力度。`,
+    );
+    await chara_talk.say_and_wait(
+      `超级稀饭这种感觉！不愧是经典三冠的皋月赏，为争夺三冠聚集而来的${chara_talk.get_uma_sex_title()}们强者如云呢。`,
+    );
+    await chara_talk.say_and_wait(
+      `还能在之后德比体验更大规模的赛事，${
+        era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
+      }我有点生无可恋的感觉呢。`,
+    );
+    await era.printAndWait(
+      `在按摩了大约五分钟左右，十指轻轻按压大腿内侧，一遍观察着丸善斯基的反应一遍继续着对话。`,
+    );
+    await me.say_and_wait(`就按这样的气势挑战德比吧！`);
+    await chara_talk.say_and_wait(`没错！就是这种感觉！`);
+    await era.printAndWait(
+      `按摩结束后，你轻轻给丸善斯基套上靴子，后者站了起来气势高涨的决定了接下来的目标。`,
+    );
+  } else if (
     extra_flag.race === race_enum.toky_yus &&
     edu_weeks < 95 &&
     extra_flag.rank === 1
@@ -499,14 +623,14 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(
       `其实也没那么厉害啦⭐只是和往常一样，不对，也就比之前稍稍跑得更快了一点的程度呢。`,
     );
-    await chara_talk.say_and_wait(`接下来的话，嗯——果然还是。`);
+    await chara_talk.say_and_wait(`能比德比还要盛大的赛事，恐怕也剩下——`);
     era.printButton(`「要不要去凯旋门？」`, 1);
     era.printButton(`「果然还是有马纪念吗？」`, 2);
     const ret1 = await era.input();
     if (ret1 === 1) {
       await chara_talk.say_and_wait(`诶？凯旋门吗？`);
       await chara_talk.say_and_wait(
-        `......果然和${
+        `跪了！果然和${
           era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
         }在一起每次都能感受到惊喜呢~`,
       );
@@ -514,6 +638,106 @@ module.exports = async (hook, extra_flag) => {
         `如果是凯旋门的话，说不定能在那里遇到世界级的赛${chara_talk.get_uma_sex_title()}呢。`,
       );
       await chara_talk.say_and_wait(`嗯——怎么办才好呢？`);
+      era.printButton(`怎么样才好呢？`, 1);
+      await era.input();
+    } else {
+      await chara_talk.say_and_wait(`对吧？果然还是有马纪念。`);
+      era.printButton(`「我也期待着丸善斯基能在有马纪念上玩得开心。」`, 1);
+      await era.input();
+      await chara_talk.say_and_wait(
+        `${
+          era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
+        }就好好看着吧。`,
+      );
+    }
+    await chara_talk.say_and_wait(`啊，差不多该去胜者舞台了。`);
+    await chara_talk.say_and_wait(
+      `跟${
+        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
+      }在一起，时间总是过得很快呢。`,
+    );
+    await me.say_and_wait(
+      `在舞台之上也要把这份感情让一直支持着丸善斯基的粉丝们感受到哦！`,
+    );
+    await chara_talk.say_and_wait(`嗯。要让一直支持着的粉丝们好好看着我才行。`);
+    await chara_talk.say_and_wait(`差不多该出发了。`);
+    await era.printAndWait(`丸善斯基离开了休息室。`);
+    await me.say_and_wait(`......`);
+    await era.printAndWait(`把休息室门关上后，房间里只剩下自己一个人了。`);
+    await me.say_and_wait(`差不多该下定决心了吧。`, true);
+    await era.printAndWait(`正准备出发的时候。`);
+    await era.printAndWait(`咚咚咚`);
+    await era.printAndWait(`真是的，又想到什么新奇的潮流了吗？`);
+    await era.printAndWait(`一边苦笑着一边打开了休息室的门。`);
+    await me.say_and_wait(`丸善——`);
+    await era.printAndWait(`门口留下了一张纸条。`);
+    await say_by_passer_by(
+      `${chara_talk.get_uma_sex_title()}`,
+      `丸善前辈，我有些疑问想要问你，如果可以的话，明天晚上可以到空教室里见面吗？`,
+    );
+    await era.printAndWait(`你决定`);
+    era.printButton(`「告诉丸善斯基」`, 1); //NE
+    era.printButton(`「代替丸善斯基前去」`, 2);
+    const ret2 = await era.input();
+    if (ret2 === 1) {
+      await me.say_and_wait(`有点头疼啊，是给丸善斯基的。`);
+      await me.say_and_wait(
+        `虽然也想自己去看看，不过还是交给${
+          chara_talk.sex_code - 1 ? '她' : '他'
+        }比较好吧？`,
+      );
+      await era.printAndWait(
+        `等到丸善斯基回来后，你将这张纸条上的事情告诉了${
+          chara_talk.sex_code - 1 ? '她' : '他'
+        }。`,
+      );
+      event_marks.happiness_day++;
+      era.set('flag:强制BE', 4);
+    } else {
+      await era.printAndWait(
+        `环顾四周无人后，你将纸条捡起，然后放进了口袋之中。`,
+      );
+      await me.say_and_wait(`......`);
+      await era.printAndWait(`为什么要捡起这张纸条，连自己也不清楚。不过——`);
+      await era.printAndWait(`总觉得，如果就这么错过的话。`);
+      await era.printAndWait(`我可能会失去什么。`);
+      await me.say_and_wait(`......抱歉，丸善斯基。`);
+      await me.say_and_wait(`无论如何我都要过去一趟。`);
+    }
+  } else if (
+    extra_flag.race === race_enum.toky_yus &&
+    edu_weeks < 95 &&
+    extra_flag.rank > 1
+  ) {
+    await print_event_name('日本德比后・抉择开始', chara_talk);
+    await era.printAndWait(`没有任何意外，丸善斯基漂亮的取得了德比的优胜。`);
+    await era.printAndWait(
+      `当${
+        chara_talk.sex_code - 1 ? '她' : '他'
+      }冲线的那一刻，如雷鸣般的喝彩声从观众席上传来。`,
+    );
+    await era.printAndWait(`休息室\n`);
+    await chara_talk.say_and_wait(`呼~不愧是经典三冠之中最受瞩目的赛事呢。`);
+    await chara_talk.say_and_wait(
+      `参加德比的赛${chara_talk.get_uma_sex_title()}们个个都是赛${chara_talk.get_uma_sex_title()}的精英呢。`,
+    );
+    await chara_talk.say_and_wait(`能比德比还要盛大的赛事，恐怕也剩下`);
+    era.printButton(`「要不要去凯旋门？」`, 1);
+    era.printButton(`「果然还是有马纪念吧！」`, 2);
+    const ret1 = await era.input();
+    if (ret1 === 1) {
+      await chara_talk.say_and_wait(`诶？凯旋门吗？`);
+      await chara_talk.say_and_wait(
+        `跪了！果然和${
+          era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
+        }在一起每次都能感受到惊喜呢~`,
+      );
+      await chara_talk.say_and_wait(
+        `如果是凯旋门的话，说不定能在那里遇到世界级的赛${chara_talk.get_uma_sex_title()}呢。`,
+      );
+      await chara_talk.say_and_wait(`嗯——怎么办才好呢？`);
+      era.printButton(`怎么样才好呢？`, 1);
+      await era.input();
     } else {
       await chara_talk.say_and_wait(`对吧？果然还是有马纪念。`);
       era.printButton(`「我也期待着丸善斯基能在有马纪念上玩得开心。」`, 1);
@@ -680,11 +904,31 @@ module.exports = async (hook, extra_flag) => {
     await chara_talk.say_and_wait(`今天去哪里大吃一顿庆祝一下吧`);
     await me.say_and_wait(`果然还是露出笑脸的${chara_talk.name}最棒了`, true);
   } else if (
+    extra_flag.race === race_enum.arim_kin &&
+    edu_weeks >= 95 &&
+    extra_flag.rank > 1
+  ) {
+    await print_event_name('有马纪念后・最大的舞台！', chara_talk);
+    await era.printAndWait(`等候室\n`);
+    await me.say_and_wait(`感觉怎么样？`);
+    await chara_talk.say_and_wait(
+      `一起奔跑的赛${chara_talk.get_uma_sex_title()}都是以最强赛${chara_talk.get_uma_sex_title()}为目标的${chara_talk.get_uma_sex_title()}，能与这些她们奔跑也很开心呢。`,
+    );
+    await me.say_and_wait(`满足了吗？`);
+    await chara_talk.say_and_wait(
+      `虾米？能比这更大的赛事也只有凯旋门了吧。我喜欢这种感觉哦？`,
+    );
+    await me.say_and_wait(`等到资深年结束后，第二年夏天去法国参加比赛吧？`);
+    await chara_talk.say_and_wait(
+      `${era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'}我也是这么想的呢。`,
+    );
+    await chara_talk.say_and_wait(`接下来也一起努力吧！`);
+  } else if (
     extra_flag.race === race_enum.sank_hai &&
     edu_weeks > 95 &&
     extra_flag.rank === 1
   ) {
-    await print_event_name('大阪杯结束后・郁郁苍苍', chara_talk);
+    await print_event_name('大阪杯结束后・风卷残云', chara_talk);
     await chara_talk.say_and_wait(`哈啊，哈啊，哈啊。`);
     await chara_talk.say_and_wait(`赢了吗？`, true);
     await era.printAndWait(
@@ -732,10 +976,20 @@ module.exports = async (hook, extra_flag) => {
       `褪下你的教养、撕开你文明的包装！用尽一切方法，卑贱也罢、粗鲁也好，最好无所不用其极！！！`,
     );
     await chara17_talk.say_and_wait(
-      `再怎么难看也是被允许的。做好所有准备……在天皇赏秋，迎接吾（皇帝）的复仇。`,
+      `再怎么难看也是被允许的。做好所有准备……在天皇赏秋，迎接吾（皇帝）的复仇。\n`,
     );
-    era.println();
     await era.printAndWait(`说罢，和颜悦色的皇帝脚步轻盈，离开了赛场。`);
+  } else if (
+    extra_flag.race === race_enum.sank_hai &&
+    edu_weeks > 95 &&
+    extra_flag.rank > 1
+  ) {
+    await print_event_name('大阪杯结束后・郁郁苍苍', chara_talk);
+    await chara_talk.say_and_wait(`没想到还是输给小鲁铎了呜呜——`);
+    await era.printAndWait(`但是丸善斯基却并没有想象之中消沉。`);
+    era.printButton(`回去开反省会重新商量一下复仇战吧`, 1);
+    await era.input();
+    await era.printAndWait(`与皇帝之间的对决暂时告一段落。`);
   } else if (
     extra_flag.race === race_enum.yasu_kin &&
     edu_weeks > 95 &&
