@@ -87,7 +87,7 @@ module.exports = async () => {
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
-            content: `版本号：v0.706-kitaru`,
+            content: `版本号：v${era.get('gamebase').version / 1000}`,
             type: 'text',
           },
         ],
@@ -164,6 +164,7 @@ module.exports = async () => {
     let ret = await era.input();
     switch (ret) {
       case 1:
+        ret = 0;
         if (achievements.length > 0) {
           era.drawLine();
           era.printButton('做我自己', 1);
@@ -431,7 +432,7 @@ module.exports = async () => {
               '幽白書',
             ],
           ],
-          ['教学口上', ['雞雞']],
+          ['教学口上、随机事件', ['雞雞']],
           ['特殊角色（临时）', '黑奴队长'],
           [[{ color: get_chara_color(3), content: '东海帝王' }], '天马闪光蹄'],
           [[{ color: get_chara_color(7), content: '黄金船' }], '雞雞'],
@@ -467,7 +468,6 @@ module.exports = async () => {
             '爱放箭的袁本初',
           ],
           [[{ color: get_chara_color(52), content: '春乌拉拉' }], '99'],
-          [[{ color: get_chara_color(56), content: '待兼福来' }], 'ALEX'],
           [
             [{ color: get_chara_color(60), content: '优秀素质' }],
             '红红火火恍惚',

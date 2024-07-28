@@ -1,13 +1,18 @@
 const era = require('#/era-electron');
 
+const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
+
 const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
 const palace = require('#/event/snippets/palace');
 const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_name } = require('#/data/locations');
 const { attr_enum, fumble_result } = require('#/data/train-const');
@@ -79,40 +84,64 @@ handlers[event_hooks.train] = async (chara_id, _, extra_flag) => {
  * @param {TrainSuccessParams} extra_flag
  */
 handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
-  const chara_talk = get_chara_talk(chara_id);
-  era.print([chara_talk.get_colored_name(), ' 的训练顺利结束了！']);
+  const chara = get_chara_talk(chara_id);
+  era.print([chara.get_colored_name(), ' 的训练顺利结束了！']);
   era.println();
-  if (
-    chara_id &&
-    !era.get(`status:${chara_id}:摸鱼`) &&
-    Math.random() < 0.2 * extra_flag.stamina_ratio
-  ) {
-    await era.waitAnyKey();
-    await print_event_name('热血的追加训练！', chara_talk);
+  if (chara_id) {
+    if (
+      !era.get(`status:${chara_id}:摸鱼`) &&
+      Math.random() < 0.2 * extra_flag.stamina_ratio
+    ) {
+      await era.waitAnyKey();
+      await print_event_name('热血的追加训练！', chara);
 
-    await era.printAndWait([
-      chara_talk.get_colored_name(),
-      ' 似乎意犹未尽的样子，是想自主训练吗？',
-    ]);
-    ['许可！', '会超出计划的……'].forEach((e, i) => {
-      era.printButton(`「${e}」`, i + 1);
-    });
-    if ((await era.input()) === 1) {
       await era.printAndWait([
-        get_chara_talk(0).get_colored_name(),
-        ' 默许了 ',
-        chara_talk.get_colored_name(),
-        ` 的自主训练，并称赞了${chara_talk.sex}的干劲`,
+        chara.get_colored_name(),
+        ' 似乎意犹未尽的样子，是想自主训练吗？',
       ]);
-      hook.arg = true;
-    } else {
+      ['许可！', '会超出计划的……'].forEach((e, i) => {
+        era.printButton(`「${e}」`, i + 1);
+      });
+      if ((await era.input()) === 1) {
+        await era.printAndWait([
+          get_chara_talk(0).get_colored_name(),
+          ' 默许了 ',
+          chara.get_colored_name(),
+          ` 的自主训练，并称赞了${chara.sex}的干劲`,
+        ]);
+        hook.arg = true;
+      } else {
+        await era.printAndWait([
+          get_chara_talk(0).get_colored_name(),
+          ' 出言禁止了 ',
+          chara.get_colored_name(),
+          ' 的自主训练，并叮嘱要好好休息',
+        ]);
+        hook.arg = false;
+      }
+    } else if (
+      era.get(`love:${chara_id}`) >= 50 &&
+      era.get(`base:${chara_id}:性欲`) >= lust_border.itch &&
+      Math.random() <
+        (0.2 * era.get(`base:${chara_id}:性欲`)) / lust_border.want_sex
+    ) {
+      await era.waitAnyKey();
+      await print_event_name('训练后的性欲高涨', chara);
       await era.printAndWait([
-        get_chara_talk(0).get_colored_name(),
-        ' 出言禁止了 ',
-        chara_talk.get_colored_name(),
-        ' 的自主训练，并叮嘱要好好休息',
+        '一天的训练结束后，',
+        chara.get_colored_name(),
+        ' 的样子好像有点奇怪……',
       ]);
-      hook.arg = false;
+      await era.printAndWait(
+        '面色潮红，在双腿间流下的不明液体与汗液混在一起，散发出一股淫靡的味道。',
+      );
+      era.printButton('「这也是训练员的义务……」', 1);
+      era.printButton('「总之先去医务室吧！」', 2);
+      if (await era.input()) {
+        await quick_into_sex(chara_id);
+      } else {
+        sys_change_lust(chara_id, get_random_value(500, 1500));
+      }
     }
   }
 };

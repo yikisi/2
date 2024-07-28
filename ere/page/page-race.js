@@ -7,7 +7,6 @@ const get_status = require('#/system/chara/sys-get-status');
 const sys_check_titles_after_race = require('#/system/race/sys-check-titles-after-race');
 const sys_parse_for_race = require('#/system/race/sys-parse-race-uma');
 const sys_prepare_race = require('#/system/race/sys-prepare-race');
-const sys_sim_race = require('#/system/race/sys-simulate-race');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
   sys_change_attr_and_print,
@@ -251,7 +250,7 @@ async function race_page(race) {
     }
   }
   sys_prepare_race(contestants, team_list, info);
-  await page_race_result(contestants, sys_sim_race(contestants, info), info);
+  await page_race_result(contestants, info, race);
   team_list.forEach((uma) => {
     aim_race_dict[uma.index_chara] = get_custom_check(
       uma.index_chara,

@@ -742,7 +742,10 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         sys_get_move_cost(location_enum.god, chara_id),
         chara_id,
       );
-      if (!(await new GameGuides().school_god())) {
+      if (
+        !(await new GameGuides().school_god()) &&
+        !(await sys_get_random_event(event_hooks.school_god)())
+      ) {
         if (
           era.get('flag:当前月') === 3 &&
           (await select_yes_or_no(
@@ -777,7 +780,9 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 307:
       sys_handle_action(sys_get_move_cost(location_enum.chairman));
-      await page_chairman_office();
+      if (!(await sys_get_random_event(event_hooks.school_chairman)())) {
+        await page_chairman_office();
+      }
       break;
     case 308:
       sys_handle_action(sys_get_move_cost(location_enum.visitor));

@@ -17,6 +17,8 @@ class TachyonLifeMarks extends LifeEventMarks {
   choco;
   // 实验的奖励
   reward;
+  // 学园通知・药物散播
+  drug_notice;
 
   constructor() {
     super(32);

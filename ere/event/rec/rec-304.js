@@ -13,6 +13,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -153,6 +154,7 @@ module.exports = {
     }
     set('callname:304:-2', '桐生院葵');
     set('cflag:304:招募状态', recruit_flags.yes);
+    new MyEduMarks().trainer_race = 0;
     new MeekEduMarks().debuff = 0;
   },
 };

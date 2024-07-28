@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const CustomizedMec = require('#/event/mec/mec-common');
 
 const { buff_colors } = require('#/data/color-const');
+const { distance_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
@@ -28,6 +29,31 @@ module.exports = class extends CustomizedMec {
 
   get_pressure_buff() {
     return 0.1 * era.get('status:3:腿伤');
+  }
+
+  get_race_finish_report(uma, race_id) {
+    if (race_id === race_enum.arim_kin && era.get('status:3:腿伤')) {
+      return [
+        uma.get_colored_name(),
+        { color: uma.color, content: '，奇迹的复活！' },
+      ];
+    } else if (
+      era.get('cflag:3:育成回合计时') > 96 &&
+      race_infos[race_id]?.distance === distance_enum.long
+    ) {
+      return [
+        {
+          color: uma.color,
+          content: '超越极限，奔向世界的尽头——',
+        },
+        uma.get_colored_name(),
+        {
+          color: uma.color,
+          content: ' 再夺一胜！',
+        },
+      ];
+    }
+    return super.get_race_finish_report(uma, race_id);
   }
 
   get_status() {

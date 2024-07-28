@@ -1,37 +1,20 @@
 ﻿const race_event_enum = {
-  bad_start: 0,
-  blocked: 0,
-  compete_fight: 0,
-  final_push: 0,
   finish: 0,
+  loc_change: 0,
+  final_push: 0,
+  compete_fight: 0,
+  blocked: 0,
   loc_mind_nige_ex: 0,
+  loc_mind_other_ex: 0,
+  temptation: 0,
   loc_mind_nige_over_take: 0,
   loc_mind_nige_speed_up: 0,
-  loc_mind_other_ex: 0,
+  temp_end: 0,
   loc_mind_other_quick: 0,
   loc_mind_other_relax: 0,
   temp_continue: 0,
-  temp_end: 0,
-  temptation: 0,
 };
 Object.keys(race_event_enum).forEach((k, i) => (race_event_enum[k] = i));
-
-const race_event_names = {};
-race_event_names[race_event_enum.bad_start] = '出迟！';
-race_event_names[race_event_enum.blocked] = '被挡住了！';
-race_event_names[race_event_enum.compete_fight] = '展开冲刺竞逐！';
-race_event_names[race_event_enum.final_push] = '开始冲刺！';
-race_event_names[race_event_enum.finish] = '冲线！';
-race_event_names[race_event_enum.loc_mind_nige_ex] = race_event_names[
-  race_event_enum.loc_mind_other_ex
-] = '大幅提升自己的速度！';
-race_event_names[race_event_enum.loc_mind_nige_over_take] = '在试图超越！';
-race_event_names[race_event_enum.loc_mind_nige_speed_up] = '想要扩大优势！';
-race_event_names[race_event_enum.loc_mind_other_quick] = '紧追不舍！';
-race_event_names[race_event_enum.loc_mind_other_relax] = '放缓节奏以保持体力！';
-race_event_names[race_event_enum.temp_continue] = '的心绪迟迟无法平复！';
-race_event_names[race_event_enum.temp_end] = '冷静下来了';
-race_event_names[race_event_enum.temptation] = '好像有些不冷静！';
 
 module.exports = {
   acc_up_hill_mode: 2 / 3,
@@ -58,15 +41,14 @@ module.exports = {
   mod_stamina_cost_mess_grass: [1, 1, 1, 1.02, 1.02],
   mod_velocity_final_adapt_distance: [0.1, 0.2, 0.4, 0.6, 0.8, 0.9, 1, 1.05],
   mod_velocity_style: [
-    [1.063, 0.98, 0.968],
-    [1, 0.99, 0.97],
-    [0.978, 0.991, 0.975],
-    [0.938, 0.996, 0.99],
-    [0.931, 0.998, 1],
+    [1.063, 0.97, 0.96],
+    [1, 0.984, 0.964],
+    [0.978, 0.99, 0.972],
+    [0.938, 0.996, 0.988],
+    [0.931, 1, 1],
   ],
   race_de_acc: [-1.2, -0.8, -1, -0.5, -1.2],
   race_event_enum,
-  race_event_names,
   start_acc: 24,
   start_velocity: 3,
 };

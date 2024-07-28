@@ -1,6 +1,5 @@
 const sys_parse_for_race = require('#/system/race/sys-parse-race-uma');
 const sys_prepare_race = require('#/system/race/sys-prepare-race');
-const sys_sim_race = require('#/system/race/sys-simulate-race');
 
 const fill_race_weather_and_mess = require('#/page/race/fill-race-weather-and-mess');
 const page_race_result = require('#/page/race/page-race-result');
@@ -49,7 +48,7 @@ async function simulation_game_in_event(
   info.attr_bonus = reference.attr_bonus;
   await preview_race(info, [chara], contestants);
   sys_prepare_race(contestants, [chara], info);
-  await page_race_result(contestants, sys_sim_race(contestants, info), info);
+  await page_race_result(contestants, info);
 }
 
 module.exports = simulation_game_in_event;

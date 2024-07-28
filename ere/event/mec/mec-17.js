@@ -5,6 +5,7 @@ const CustomizedMec = require('#/event/mec/mec-common');
 const color_17 = require('#/data/chara-colors').chara_colors[17];
 const { buff_colors } = require('#/data/color-const');
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
+const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
   init_love() {
@@ -17,6 +18,18 @@ module.exports = class extends CustomizedMec {
 
   get_love_limit() {
     return era.get('status:17:心术') ? 40 : 0;
+  }
+
+  get_race_finish_report(uma, race_id) {
+    if (race_id === race_enum.kiku_sho) {
+      return [
+        {
+          color: uma.color,
+          content: '红色的大朵鲜花在京都的阴云下盛放！',
+        },
+      ];
+    }
+    return super.get_race_finish_report(uma, race_id);
   }
 
   get_relation_buff() {

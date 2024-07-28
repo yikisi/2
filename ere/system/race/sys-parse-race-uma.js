@@ -59,7 +59,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
   if (contestants) {
     ret.push(...contestants);
   } else {
-    const legends = info['legends'] || [],
+    const legends = info.legends,
       edu_phase = Math.max(
         ...team_chara.map((e) =>
           e.index_chara === 0
@@ -79,13 +79,17 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
             (144 - 24) -
           1,
         0,
-      ];
+      ],
+      info_legends = ((edu_phase - 24) * info.gates) / (144 - 24);
     info.extra_attr = Math.floor(
       (max_extra_attr * (144 - edu_phase)) / (144 - 24),
     );
     const contestant_dict = {};
     team_chara.forEach((e) => (contestant_dict[e.index_chara] = 1));
-    let legend_count = get_random_value(0, info.legend_count);
+    let legend_count = get_random_value(
+      Math.floor(info_legends / 2),
+      Math.floor(info_legends),
+    );
 
     team_chara.forEach(({ index_chara: id }) =>
       get_custom_mec(id)
@@ -158,8 +162,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       }
       const list_history = legends.filter(
         (e) =>
-          !contestant_dict[e.id] &&
-          era.get(`cflag:${e.id}:招募状态`) !== recruit_flags.yes,
+          !contestant_dict[e] &&
+          era.get(`cflag:${e}:招募状态`) !== recruit_flags.yes,
       );
       // 先填史实冠军,史实冠军保证干劲非负
       gacha(
@@ -167,7 +171,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
         Math.min(legend_count, info.gates - ret.length),
       ).forEach((id) => {
         //对应json中存在幻影数据则优先读取
-        let uma = legends_history.find((e) => e.id === id);
+        let uma = legends_history[id];
         if (uma) {
           ret.push(
             new PseudoUma(
