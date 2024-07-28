@@ -171,7 +171,7 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
         if (lane_events.length > 2) {
           message_buffer[0] += '与';
         }
-        message_buffer[0] += `${lane_events.at(-2).get_name()}，进入${lane_events.at(-1).get_name()}`;
+        message_buffer[0] += `${lane_events.at(-2).l.get_name()}，进入${lane_events.at(-1).l.get_name()}`;
       }
       if (slope_events.length > 0 && slope_events.at(-1).s !== 0) {
         message_buffer.push(`正在${slope_events[0].s > 0 ? '爬' : '下'}坡`);
