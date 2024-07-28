@@ -140,7 +140,7 @@ module.exports = async () => {
           config: { align: 'left', width: 8 },
           content: [
             {
-              content: 'EraUma游戏发布页（需要登录gitgud.io）',
+              content: 'EraUma游戏发布页',
               url: 'https://gitgud.io/umaera/erauma/-/releases/permalink/latest',
             },
             { isBr: true },

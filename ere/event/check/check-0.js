@@ -62,6 +62,7 @@ module.exports = class extends CustomizedCheck {
       my_edu_marks.bankruptcy = 0;
     }
     if (my_edu_marks.reject === 3) {
+      my_edu_marks.reject++;
       add_event(
         event_hooks.week_start,
         new EventObject(0, cb_enum.edu).set_arg('reject'),
