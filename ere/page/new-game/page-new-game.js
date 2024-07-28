@@ -55,6 +55,7 @@ module.exports = async (src_chara) => {
     );
     new CharaAvailableSkills(0).clear();
     era.set('callname:0:-2', '你');
+    era.set('cstr:0:决胜服', '');
   }
   const my_marks = new MyEduMarks();
 

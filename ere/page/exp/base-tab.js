@@ -223,7 +223,7 @@ module.exports = {
     let image_list;
     if (
       era.get(`cflag:${chara.id}:种族`) &&
-      chara.id &&
+      (chara.id || era.get('cflag:0:模版角色') > 0) &&
       (image_list = race_clothe_list.filter((e) =>
         era.checkImage(`${image_prefix}${e.s}`),
       )).length > 1 &&
