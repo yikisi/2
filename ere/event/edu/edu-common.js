@@ -137,7 +137,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
       );
       era.printButton('「这也是训练员的义务……」', 1);
       era.printButton('「总之先去医务室吧！」', 2);
-      if (await era.input()) {
+      if ((await era.input()) === 1) {
         await quick_into_sex(chara_id);
       } else {
         sys_change_lust(chara_id, get_random_value(500, 1500));
