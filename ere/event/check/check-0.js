@@ -6,6 +6,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedCheck {
   check_next_week() {
@@ -19,7 +20,12 @@ module.exports = class extends CustomizedCheck {
       }
     }
     if (my_edu_marks.experiment > 0) {
-      if (--my_edu_marks.experiment === 0) {
+      if (
+        get('cflag:25:招募状态') === recruit_flags.yes ||
+        get('cflag:32:招募状态') === recruit_flags.yes
+      ) {
+        my_edu_marks.experiment = 0;
+      } else if (--my_edu_marks.experiment === 0) {
         add_event(
           event_hooks.week_end,
           new EventObject(0, cb_enum.edu).set_arg('experiment'),
@@ -35,7 +41,12 @@ module.exports = class extends CustomizedCheck {
       }
     }
     if (my_edu_marks.trainer_race > 0) {
-      if (--my_edu_marks.trainer_race === 0) {
+      if (
+        get('cflag:304:招募状态') === recruit_flags.yes ||
+        get('cflag:305:招募状态') === recruit_flags.yes
+      ) {
+        my_edu_marks.trainer_race = 0;
+      } else if (--my_edu_marks.trainer_race === 0) {
         add_event(
           event_hooks.week_start,
           new EventObject(0, cb_enum.edu).set_arg('trainer_race'),

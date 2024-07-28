@@ -6,6 +6,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedCheck {
   check_next_week() {
@@ -21,7 +22,12 @@ module.exports = class extends CustomizedCheck {
       );
     }
     if (life_marks.shadow > 0) {
-      if (--life_marks.shadow === 0) {
+      if (
+        get('cflag:10:招募状态') === recruit_flags.yes ||
+        get('cflag:301:招募状态') === recruit_flags.yes
+      ) {
+        life_marks.shadow = 0;
+      } else if (--life_marks.shadow === 0) {
         add_event(
           event_hooks.week_start,
           new EventObject(301, cb_enum.edu).set_arg('shadow'),

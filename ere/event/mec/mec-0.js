@@ -12,6 +12,8 @@ module.exports = class extends CustomizedMec {
       ret_list.push({
         color: buff_colors[1],
         content: '比赛用母马',
+        title:
+          '现役马娘，但是只能参加资深年比赛；没有工资，参赛时赏金分成+400%',
       });
     }
     if (era.get('status:0:马语者')) {
@@ -19,34 +21,42 @@ module.exports = class extends CustomizedMec {
         color: buff_colors[2],
         key: '马语者',
         content: `马语者(${era.get('status:0:马语者')})`,
+        title:
+          '奇怪的App，打开后显示了人名、数字、性……性经验以及……裸体（鼻血）',
       });
     }
     if (era.get('status:0:好感度镜片')) {
       ret_list.push({
         color: buff_colors[2],
         content: '好感度眼镜',
+        title: '人们头顶上出现了两个奇怪的数字……显示真实的好感和爱慕',
       });
     } else if (era.get('status:0:马跳次数镜片')) {
       ret_list.push({
         color: buff_colors[2],
         content: '马跳次数眼镜',
+        title: '人们头顶上出现了奇怪的文字……显示所有性爱能力和经历',
       });
     } else if (era.get('status:0:透视镜片')) {
       ret_list.push({
         color: buff_colors[2],
         content: '透视眼镜',
+        title:
+          '不管是品鉴最自然的肉体美感，还是研究体重控制的计划，都是不可或缺的道具……显示真实的身材',
       });
     }
     if (era.get('cflag:301:招募状态') === recruit_flags.yes) {
       ret_list.push({
         color: buff_colors[1],
         content: '骏川的协助',
+        title: '体力与精力消耗-10%',
       });
     }
     if (era.get('cflag:303:招募状态') === recruit_flags.yes) {
       ret_list.push({
         color: buff_colors[1],
         content: '彻底取材',
+        title: '声望获取+10%，声望下降-10%',
       });
     }
     return ret_list;

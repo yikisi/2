@@ -178,12 +178,14 @@ module.exports = class extends CustomizedCheck {
         );
       }
     }
-    if (life_marks.drug_notice > 0) {
-      if (era.get('cflag:0:位置') === 0 && --life_marks.drug_notice === 0) {
+    if (life_marks.drug_notice > 0 && --life_marks.drug_notice === 0) {
+      if (era.get('cflag:0:位置') === 0) {
         add_event(
           event_hooks.week_start,
           new EventObject(32, cb_enum.edu).set_arg('drug_notice'),
         );
+      } else {
+        life_marks.drug_notice++;
       }
     }
     const edu_weeks = era.get('cflag:32:育成回合计时');

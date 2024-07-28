@@ -14,6 +14,7 @@ const { get_chara_color } = require('#/data/chara-colors');
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -76,11 +77,15 @@ module.exports = class extends CustomizedCheck {
     const event_marks = new GoldShipEduMarks(),
       event_obj = new EventObject(7, cb_enum.edu),
       edu_weeks = era.get('cflag:7:育成回合计时');
-    if (event_marks.carrot > 0 && --event_marks.carrot === 0) {
-      add_event(
-        event_hooks.week_start,
-        new EventObject(7, cb_enum.edu).set_arg('carrot'),
-      );
+    if (event_marks.carrot > 0) {
+      if (era.get('cflag:7:招募状态') === recruit_flags.yes) {
+        event_marks.carrot = 0;
+      } else if (--event_marks.carrot === 0) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(7, cb_enum.edu).set_arg('carrot'),
+        );
+      }
     }
     if (edu_weeks < 3 * 48) {
       const event_obj_special = new EventObject(7, cb_enum.edu, true).set_arg(

@@ -1,12 +1,7 @@
 const era = require('#/era-electron');
 
-const FukuEventMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
-const event_hooks = require('#/data/event/event-hooks');
-const EventObject = require('#/data/event/event-object');
+const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
-const RaceHistory = require('#/data/race/model/race-history');
-const { class_enum } = require('#/data/race/model/race-info');
-const { race_enum, race_infos } = require('#/data/race/race-const');
 const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
@@ -14,6 +9,15 @@ const check_and_register_aim_race = require('#/event/check/snippets/check-and-re
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const FukukitaruEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
+const RaceHistory = require('#/data/race/model/race-history');
+const { class_enum } = require('#/data/race/model/race-info');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 3;
@@ -26,12 +30,6 @@ aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 3;
 //aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 3; 暂时先不跑。
 aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 3;
 
-/**
- * 待兼福来 
- *
- * @author Alex
-
- */
 module.exports = class extends CustomizedCheck {
   check_after_punish(level) {
     if (level === 1 || level === 2 || level === 3) {
@@ -40,66 +38,92 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_after_race(extra_flag) {
-    const FUKU = new FukuEventMarks();
+    const edu_marks = new FukukitaruEduMarks();
     const edu_weeks = era.get('cflag:56:育成回合计时');
     if (
-      extra_flag.rank === 1 &&
-      race_infos[extra_flag.race].race_class === class_enum.G1
+      extra_flag.contestants.find((e) => e.index_chara === 56).motivation ===
+        2 &&
+      race_infos[extra_flag.race].race_class <= class_enum.G2
     ) {
-      new FukuEventMarks().g1_count++;
+      new FukukitaruEduMarks().best_g2_count++;
     }
 
     if (
-      (extra_flag.race === race_enum.kiku_sho &&
-        edu_weeks < 95 &&
-        extra_flag.rank != 1) ||
+      (extra_flag.race === race_enum.kiku_sho && extra_flag.rank !== 1) ||
       (extra_flag.race === race_enum.takz_kin &&
-        edu_weeks < 3 * 48 &&
-        edu_weeks >= 48 * 2 &&
-        extra_flag.rank != 1) ||
+        edu_weeks > 96 &&
+        extra_flag.rank !== 1) ||
       (extra_flag.race === race_enum.arim_kin &&
-        edu_weeks < 3 * 48 &&
-        edu_weeks >= 48 * 2 &&
-        extra_flag.rank != 1)
+        edu_weeks > 96 &&
+        extra_flag.rank !== 1)
     ) {
       // 直接坏结局
-      FUKU.be_end_1 = 1;
+      edu_marks.be_end_1 = 1;
       era.set('flag:强制BE', 56);
     }
+  }
+
+  check_and_get_titles(aim_check) {
+    const ret = [],
+      race_list = new RaceHistory(56).get_values(),
+      kiku_sho_index = race_list.findIndex(
+        (e) => e.race === race_enum.kiku_sho,
+      );
+    if (kiku_sho_index >= 0 && race_list[kiku_sho_index].rank === 1) {
+      let count = 1;
+      for (let i = kiku_sho_index - 1; i >= 0; --i) {
+        if (race_infos[race_list[i].race].race_class <= class_enum.G2) {
+          if (race_list[i].rank === 1) {
+            count++;
+          } else {
+            break;
+          }
+        }
+      }
+      for (let i = kiku_sho_index + 1; i < race_list.length; ++i) {
+        if (race_infos[race_list[i].race].race_class <= class_enum.G2) {
+          if (race_list[i].rank === 1) {
+            count++;
+          } else {
+            break;
+          }
+        }
+      }
+      if (new FukukitaruEduMarks().best_g2_count >= 15 && count >= 3) {
+        ret.push({
+          c: get_chara_talk(this.id),
+          n: this.get_personal_titles()[0],
+        });
+        aim_check && sys_personal_achievement.set(this.id, 1);
+      }
+    }
+    return ret;
   }
 
   check_next_week() {
     const edu_weeks = era.get('cflag:56:育成回合计时');
     const event_obj_special = new EventObject(56, cb_enum.edu, true);
     const event_obj = new EventObject(56, cb_enum.edu);
-    const FUKU = new FukuEventMarks();
+    const edu_marks = new FukukitaruEduMarks();
     const love = era.get('love:56');
 
-    if (FUKU.fans_thank < 1) {
-      era.set('status:56:运势依赖', 1);
-
-      FUKU.fortune_week = 0;
+    if (edu_marks.fans_thank < 1) {
+      edu_marks.fortune_week = 0;
       add_event(event_hooks.week_start, event_obj_special);
-    } else if (FUKU.fans_thank >= 1) {
-      era.set('status:56:运势依赖', 0);
-      era.set('status:56:大吉', 0);
-      era.set('status:56:中吉', 0);
-      era.set('status:56:小吉', 0);
-      era.set('status:56:凶', 0);
     }
 
-    if (FUKU.last_edu != edu_weeks) {
-      FUKU.luck_train = Math.floor(Math.random() * 5) + 1; // 我计划是在这里做一个随即的运势训练相关，之后可能会改成类狩猎笛或者可能的仪式系统也不一定。
-      FUKU.last_edu = edu_weeks;
+    if (edu_marks.last_edu !== edu_weeks) {
+      edu_marks.luck_train = Math.floor(Math.random() * 5) + 1; // 我计划是在这里做一个随即的运势训练相关，之后可能会改成类狩猎笛或者可能的仪式系统也不一定。
+      edu_marks.last_edu = edu_weeks;
     }
 
-    if (FUKU.RECTIME === 0) {
-      FUKU.RECTIME = era.get('cflag:56:育成回合计时') + 1;
+    if (edu_marks.RECTIME === 0) {
+      edu_marks.RECTIME = era.get('cflag:56:育成回合计时') + 1;
     }
 
     if (edu_weeks < 3 * 48) {
       switch (edu_weeks) {
-        case FUKU.RECTIME: //窥视命运的少女 (已完成)
+        case edu_marks.RECTIME: //窥视命运的少女 (已完成)
           add_event(event_hooks.week_start, event_obj_special);
           break;
         case 14:
@@ -176,7 +200,7 @@ module.exports = class extends CustomizedCheck {
     }
     if (love > 25) {
       check_and_add_event(
-        FUKU,
+        edu_marks,
         edu_weeks,
         'hot_line',
         event_hooks.out_start,
@@ -186,7 +210,7 @@ module.exports = class extends CustomizedCheck {
 
     if (love > 25) {
       check_and_add_event(
-        FUKU,
+        edu_marks,
         edu_weeks,
         'god_study',
         event_hooks.office_study,
@@ -196,7 +220,7 @@ module.exports = class extends CustomizedCheck {
 
     if (love > 25) {
       check_and_add_event(
-        FUKU,
+        edu_marks,
         edu_weeks,
         'luck_name',
         event_hooks.office_study,
@@ -205,7 +229,7 @@ module.exports = class extends CustomizedCheck {
     }
     if (love > 49) {
       check_and_add_event(
-        FUKU,
+        edu_marks,
         edu_weeks,
         'miso_fortune',
         event_hooks.office_cook,
@@ -213,7 +237,7 @@ module.exports = class extends CustomizedCheck {
       );
     }
 
-    if (love >= 25 && FUKU.love25 === 0) {
+    if (love >= 25 && edu_marks.love25 === 0) {
       /*
           check_and_add_event(
             FUKU,
@@ -222,11 +246,11 @@ module.exports = class extends CustomizedCheck {
             event_hooks.out_start,
             event_obj ,
           );*/
-      FUKU.love25 = 1;
+      edu_marks.love25 = 1;
       add_event(event_hooks.out_start, event_obj_special);
     }
 
-    if (era.get('mark:56:淫纹') > 0 && FUKU.tattoo === 0) {
+    if (era.get('mark:56:淫纹') > 0 && edu_marks.tattoo === 0) {
       /* check_and_add_event(
             FUKU,
             edu_weeks,
@@ -234,21 +258,21 @@ module.exports = class extends CustomizedCheck {
             event_hooks.race_start,
             event_obj ,
           );*/
-      FUKU.tattoo = 1;
+      edu_marks.tattoo = 1;
       add_event(event_hooks.race_start, event_obj_special);
     }
 
-    if (FUKU.GAME_TIMES === 3) {
-      FUKU.fortune_game_duel = 1;
+    if (edu_marks.GAME_TIMES === 3) {
+      edu_marks.fortune_game_duel = 1;
       add_event(event_hooks.office_game, event_obj_special);
     }
 
     if (
-      FUKU.fortune_game_duel === 2 &&
+      edu_marks.fortune_game_duel === 2 &&
       era.get(`exp:56:性交次数`) > 3 &&
       era.get('love:56') >= 75
     ) {
-      FUKU.fortune_game_duel1 = 1;
+      edu_marks.fortune_game_duel1 = 1;
 
       add_event(event_hooks.office_game, event_obj_special);
     }
@@ -262,7 +286,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_palace_and_get_aims() {
-    const FUKU = new FukuEventMarks();
+    const FUKU = new FukukitaruEduMarks();
     const races = new RaceHistory(56).get();
 
     if (

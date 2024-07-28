@@ -140,7 +140,7 @@ module.exports = async () => {
           config: { align: 'left', width: 8 },
           content: [
             {
-              content: 'EraUma游戏发布页（需要登录gitgud.io）',
+              content: 'EraUma游戏发布页',
               url: 'https://gitgud.io/umaera/erauma/-/releases/permalink/latest',
             },
             { isBr: true },
@@ -468,6 +468,7 @@ module.exports = async () => {
             '爱放箭的袁本初',
           ],
           [[{ color: get_chara_color(52), content: '春乌拉拉' }], '99'],
+          [[{ color: get_chara_color(56), content: '待兼福来' }], 'ALEX'],
           [
             [{ color: get_chara_color(60), content: '优秀素质' }],
             '红红火火恍惚',

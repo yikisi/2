@@ -1112,7 +1112,7 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
       ` 陷入了沉思，精神上的缺陷远比肉体上的问题更加棘手。`,
     ]);
 
-    era.set('status:56:创伤后应激障碍', 1);
+    era.set('status:56:PTSD', 1);
     era.printMultiColumns([
       {
         content: [` `, MF.get_colored_name(), `  发现对赛跑患有了PTSD。`],
@@ -1182,7 +1182,7 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
     await MF.say_and_wait(`虽然可能有些困难啦......`);
     await MF.say_and_wait(`但是相信我和训练员一定没问题的！`);
 
-    era.set('status:56:创伤后应激障碍', 0);
+    era.set('status:56:PTSD', 0);
     era.printMultiColumns([
       {
         content: [` `, MF.get_colored_name(), `  的PTSD暂时失去了。`],
@@ -1477,7 +1477,7 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
       await era.input();
       await MF.say_and_wait(`抱歉……`);
       await MF.say_and_wait(`让我静一静。`);
-      era.set('status:56:创伤后应激障碍', 1);
+      era.set('status:56:PTSD', 1);
       era.printMultiColumns([
         {
           content: [` `, MF.get_colored_name(), `  的PTSD再度复发了。`],
@@ -1526,7 +1526,7 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
       await era.input();
       await MF.say_and_wait(`抱歉……`);
       await MF.say_and_wait(`让我静一静。`);
-      era.set('status:56:创伤后应激障碍', 1);
+      era.set('status:56:PTSD', 1);
       era.printMultiColumns([
         {
           content: [` `, MF.get_colored_name(), `  的PTSD再度复发了。`],
@@ -1938,7 +1938,7 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
     //
     let luck_result = ['小吉', '中吉', '大吉', '凶'];
 
-    if (era.get('status:56:创伤后应激障碍') === 1) {
+    if (era.get('status:56:PTSD') === 1) {
       luck = 3;
     }
     era.println();
@@ -1963,7 +1963,7 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
       era.set('status:56:中吉', 0);
       era.set('status:56:小吉', 0);
       era.set('status:56:凶', 0);
-      if (era.get('status:56:创伤后应激障碍') != 1) {
+      if (era.get('status:56:PTSD') != 1) {
         era.set('cflag:56:干劲', 2);
       }
     }
@@ -1972,7 +1972,7 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
       era.set('status:56:大吉', 0);
       era.set('status:56:小吉', 0);
       era.set('status:56:凶', 0);
-      if (era.get('status:56:创伤后应激障碍') != 1) {
+      if (era.get('status:56:PTSD') != 1) {
         era.set('cflag:56:干劲', 1);
       }
     }
@@ -1981,7 +1981,7 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
       era.set('status:56:大吉', 0);
       era.set('status:56:中吉', 0);
       era.set('status:56:凶', 0);
-      if (era.get('status:56:创伤后应激障碍') != 1) {
+      if (era.get('status:56:PTSD') != 1) {
         era.set('cflag:56:干劲', 0);
       }
     }
@@ -3863,7 +3863,7 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
       ` 开始替她思考起粉丝感谢祭拉票的办法。`,
     ]);
     await era.println();
-    era.set('status:56:创伤后应激障碍', 0);
+    era.set('status:56:PTSD', 0);
     era.printMultiColumns([
       {
         content: [` `, MF.get_colored_name(), `  的PTSD暂时失去了。`],

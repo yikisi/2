@@ -484,11 +484,11 @@ module.exports = async () => {
                   ];
               if (
                 await select_yes_or_no([
-                  '要学习 ',
+                  '要学习',
                   ...skill.get_colored_name(),
-                  ' 吗？',
+                  '吗？',
                   ...(to_remove
-                    ? ['将遗忘 ', ...to_remove.get_colored_name(), '。']
+                    ? ['将遗忘', ...to_remove.get_colored_name(), '。']
                     : []),
                 ])
               ) {

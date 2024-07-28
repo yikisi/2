@@ -26,6 +26,16 @@ module.exports = class extends CustomizedCheck {
   check_next_week() {
     const edu_weeks = get(`cflag:${this.id}:育成回合计时`),
       edu_marks = new MeekEduMarks();
+    if (edu_marks.all_round > 0) {
+      if (get('cflag:201:招募状态') === recruit_flags.yes) {
+        edu_marks.all_round = 0;
+      } else if (--edu_marks.all_round === 0) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(this.id, cb_enum.edu).set_arg('all_round'),
+        );
+      }
+    }
     if (edu_weeks < 3 * 48) {
       if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
         add_event(
@@ -42,13 +52,6 @@ module.exports = class extends CustomizedCheck {
         event_hooks.week_start,
         new EventObject(this.id, cb_enum.edu).set_arg('palace'),
       );
-    } else if (edu_marks.all_round > 0) {
-      if (--edu_marks.all_round === 0) {
-        add_event(
-          event_hooks.week_start,
-          new EventObject(this.id, cb_enum.edu).set_arg('all_round'),
-        );
-      }
     }
   }
 

@@ -1,7 +1,8 @@
 const era = require('#/era-electron');
 
-const { race_enum } = require('#/data/race/race-const');
 const CustomizedMec = require('#/event/mec/mec-common');
+
+const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
   set_callname() {

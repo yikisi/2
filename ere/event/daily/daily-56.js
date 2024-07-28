@@ -735,7 +735,7 @@ handlers[event_hooks.out_church] = async function () {
   await MF.say_and_wait(`嘿！`);
   let luck = get_random_value(0, 3);
   // test here
-  if (era.get('status:56:创伤后应激障碍') === 1) {
+  if (era.get('status:56:PTSD') === 1) {
     luck = 3;
   }
   switch (luck) {
@@ -812,7 +812,7 @@ handlers[event_hooks.out_church] = async function () {
       era.set('status:56:小吉', 0);
       era.set('status:56:凶', 0);
 
-      if (era.get('status:56:创伤后应激障碍') != 1) {
+      if (era.get('status:56:PTSD') != 1) {
         era.set('cflag:56:干劲', 2);
       }
     }
@@ -821,7 +821,7 @@ handlers[event_hooks.out_church] = async function () {
       era.set('status:56:大吉', 0);
       era.set('status:56:小吉', 0);
       era.set('status:56:凶', 0);
-      if (era.get('status:56:创伤后应激障碍') != 1) {
+      if (era.get('status:56:PTSD') != 1) {
         era.set('cflag:56:干劲', 1);
       }
     }
@@ -830,7 +830,7 @@ handlers[event_hooks.out_church] = async function () {
       era.set('status:56:大吉', 0);
       era.set('status:56:中吉', 0);
       era.set('status:56:凶', 0);
-      if (era.get('status:56:创伤后应激障碍') != 1) {
+      if (era.get('status:56:PTSD') != 1) {
         era.set('cflag:56:干劲', 0);
       }
     }
@@ -3321,16 +3321,16 @@ handlers[event_hooks.celebration] = async () => {
     await me.print_and_wait(`粉丝B:「我会去帮你投票的！一定要出赛啊！」`);
     await MF.say_and_wait(`大家是怎么了？明明那次的采访那么糟糕…… `);
     await me.print_and_wait(
-      `粉丝A:「啊！实在是太惨了呢，不过这就是待兼福来呀。」`,
+      `粉丝A「啊！实在是太惨了呢，不过这就是待兼福来呀。」`,
     );
     await me.print_and_wait(
-      `粉丝B:「人偶尔也是会迷惘的嘛，该说会有种亲切感吗？」`,
+      `粉丝B「人偶尔也是会迷惘的嘛，该说会有种亲切感吗？」`,
     );
     await MF.say_and_wait(`亲切感……所以大家还没有放弃我吗？`);
     await me.print_and_wait(
       `粉丝C:「才不会放弃你呢！在菊花赏上的表现那么拼命，真是令人难忘！」`,
     );
-    await me.print_and_wait(`粉丝D:「是啊！宝冢纪念一定要加油啊！」`);
+    await me.print_and_wait(`粉丝D「是啊！宝冢纪念一定要加油啊！」`);
     await MF.say_and_wait(`是的……是的……!`);
     await MF.say_and_wait(`我会再挑战一次看看的！`);
     await me.print_and_wait([
@@ -3340,20 +3340,13 @@ handlers[event_hooks.celebration] = async () => {
     ]);
     era.set('cflag:56:节日事件标记', 0);
     FUKU.fans_thank++;
-
-    era.printMultiColumns([
-      {
-        content: [` `, MF.get_colored_name(), `  失去了运势依赖。`],
-        type: 'text',
-      },
-    ]);
+    await era.printAndWait([MF.get_colored_name(), ' 失去了运势依赖。']);
 
     era.set('status:56:运势依赖', 0);
     era.set('status:56:大吉', 0);
     era.set('status:56:中吉', 0);
     era.set('status:56:小吉', 0);
     era.set('status:56:凶', 0);
-    await era.waitAnyKey();
     return true;
   } else if (cele_check === 39) {
     // 通用万圣节
