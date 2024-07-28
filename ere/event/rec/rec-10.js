@@ -10,6 +10,5 @@ module.exports = {
   async run() {
     new TokinoLifeMarks().shadow = 0;
     set('cflag:10:招募状态', recruit_flags.yes);
-    throw new Error();
   },
 };

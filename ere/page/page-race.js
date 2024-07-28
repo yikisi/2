@@ -161,7 +161,6 @@ async function race_page(race) {
   });
   wait_flag && (await era.waitAnyKey());
   await preview_race(info, team_list, contestants, is_grand_live);
-  await era.clear();
   const race_start = {},
     race_end = {};
   team_list.forEach((chara) => {
@@ -178,7 +177,8 @@ async function race_page(race) {
   let start_count = team_list.filter((e) => e.index_chara > 0).length,
     end_count = start_count,
     time_cost = 0;
-  while (start_count) {
+  start_count === 0 && (await era.clear());
+  while (start_count > 0) {
     await era.clear();
     page_race_header(info, is_grand_live);
     const player_time = era.get('base:0:精力');
@@ -327,7 +327,7 @@ async function race_page(race) {
   });
   await era.waitAnyKey();
   time_cost = 0;
-  while (end_count) {
+  while (end_count > 0) {
     await era.clear();
     page_race_header(info, is_grand_live);
     const player_time = era.get('base:0:精力');

@@ -86,6 +86,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     );
     const contestant_dict = {};
     team_chara.forEach((e) => (contestant_dict[e.index_chara] = 1));
+    contestant_dict[era.get('cflag:0:模版角色')] = 1;
     let legend_count = get_random_value(
       Math.floor(info_legends / 2),
       Math.floor(info_legends),
