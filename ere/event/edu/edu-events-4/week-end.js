@@ -301,9 +301,9 @@ module.exports = async function (hook, _, event_object) {
       );
       await say_by_passer_by(
         `幻影声`,
-        `为什么？为什么？爱情(love)不过只是终有一天会破灭的幻觉。`,
+        `为什么？为什么？爱情不过只是终有一天会破灭的幻觉。`,
       );
-      await chara_talk.say_and_wait(`我说的爱(caritas)可不是爱情(love)哦？`);
+      await chara_talk.say_and_wait(`爱才不是那么肤浅的东西呢！`);
       await chara_talk.say_and_wait(
         `恋人之间如果只有泡沫般易逝的激情，会因为终有一天的分别消失而感到深深恐惧，这是不会幸福的。`,
       );
@@ -2238,7 +2238,7 @@ module.exports = async function (hook, _, event_object) {
     chara_talk.print(
       `屋外的金黄色的树叶也脱离了母树的怀抱，随着金风的引导拜访了这里。`,
     );
-    await chara_talk.say_and_wait(`欢迎光临`);
+    await chara_talk.say_and_wait(`哈喽！`);
     chara_talk.print(`对着小小的客人露出笑脸迎接到来`);
     chara_talk.print(
       `在接受了主人的邀请后，小小的客人便稳稳当当地落在了书桌上`,
@@ -2263,7 +2263,7 @@ module.exports = async function (hook, _, event_object) {
       `像小溪一样奔涌着的，无数的落叶在风的指引下欢快的汇入大地的海洋之中。`,
     );
     await chara_talk.say_and_wait(
-      `......真是期待可爱的后辈们最终能达到什么地步呢`,
+      `真是期待可爱的后辈们最终能达到什么地步呢。唔，一想到这个总觉得亚历山大。`,
     );
     chara_talk.print(`像是说给落叶，又像是对着自己诉说。`);
     await chara_talk.say_and_wait(`等待着后辈们超越我的那一天`, true);

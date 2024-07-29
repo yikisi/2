@@ -813,23 +813,27 @@ ${chara_talk.name}的耳朵又立刻竖了起来，耳朵也开始随着车载�
       await era.input();
       era.printButton('「除此之外，再向前一步就是三女神的宠爱了」', 1);
       await era.input();
-      await chara_talk.say_and_wait(`
-呵呵♪训练员真是给了我一个有趣的答复，作为${chara_talk.get_uma_sex_title()}我也希望能在这三年内能和${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }一起积累更多美好的回忆呢.`);
-      await chara_talk.say_and_wait(`
-  那么接下来也请多指教了,训·练·员·君♪`);
-      await era.printAndWait(`
-天空虽然东边被太阳染成了橙红色，但头顶却依然是深沉的蓝，太阳与星星的交汇一处那渐变的色彩真是怎么看也看不够`);
-      await era.printAndWait(`
-${me.name}忍不住打了一个呵欠.`);
-      await chara_talk.say_and_wait(`
-训练员如果困了的话，可以在副驾驶座上稍微睡一会哦，到了海边我和小塔会把${me.name}唤醒的。`);
-      await era.printAndWait(`
-本来就十分疲惫的身体在听到令人安心的话语之后像如释重负一样安心的闭上了双眼，享受着微风柔和的吹拂以及从丸善身上传来的若有若无的香气`);
-
-      await era.printAndWait(`
-      本来就十分疲惫的身体在听到令人安心的话语之后像如释重负一样安心的闭上了双眼，享受着微风柔和的吹拂以及从丸善身上传来的若有若无的香气`);
+      await chara_talk.say_and_wait(
+        `呵呵♪训练员真是给了我一个有趣的答复，作为${chara_talk.get_uma_sex_title()}我也希望能在这三年内能和${
+          era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
+        }一起积累更多美好的回忆呢.`,
+      );
+      await chara_talk.say_and_wait(
+        ` 那么接下来也请多指教了,${era.get('cflag:0:性别') - 1 ? '训·练·员·酱' : '训·练·员·君'}♪`,
+      );
+      await era.printAndWait(
+        `天空虽然东边被太阳染成了橙红色，但头顶却依然是深沉的蓝，太阳与星星的交汇一处那渐变的色彩真是怎么看也看不够`,
+      );
+      await era.printAndWait(`${me.name}忍不住打了一个呵欠.`);
+      await chara_talk.say_and_wait(
+        `训练员如果困了的话，可以在副驾驶座上稍微睡一会哦，到了海边我和小塔会把${me.name}唤醒的。`,
+      );
+      await era.printAndWait(
+        `本来就十分疲惫的身体在听到令人安心的话语之后像如释重负一样安心的闭上了双眼，享受着微风柔和的吹拂以及从丸善身上传来的若有若无的香气`,
+      );
+      await era.printAndWait(
+        `      本来就十分疲惫的身体在听到令人安心的话语之后像如释重负一样安心的闭上了双眼，享受着微风柔和的吹拂以及从丸善身上传来的若有若无的香气`,
+      );
       era.println();
       era.println();
       era.println();
@@ -951,20 +955,16 @@ handlers[event_hooks.out_church] = async () => {
       `为了迎接新年.${me.name}和${chara_talk.name}一起去新年参拜.`,
     );
     await era.printAndWait(
-      `可能是大家都习惯在家里度过新年吧，在通向神社的马路上几乎没有看到车辆经过.`,
+      `实际上也不是为了遵循传统，单纯的只是想要谋求好运气罢了。`,
     );
     await chara_talk.say_and_wait(
-      `新年期间路上都没人，本来还在想要不要就这样去兜风呢.`,
+      `果然新年还是在神社祈福对吧？这样比较有新年的感觉呢~！`,
     );
     await chara_talk.say_and_wait(
-      `不过还是得来新年参拜比较好吧？这样才比较有新年的感觉呢~！`,
+      `一年之计在于春，向三女神大人献上一年份的汗水与努力吧！`,
     );
-    await chara_talk.say_and_wait(
-      `听说“一年之计在于春”，所以就来这里祈求今年能达成目标吧.`,
-    );
-    era.printButton(`「${me.name}接下来的目标是什么？」`, 1);
+    era.printButton(`「接下来的目标是什么？」`, 1);
     await era.input();
-
     await chara_talk.say_and_wait(
       `呵呵~我的目标是——今年也能参加许多有趣的比赛！`,
     );
@@ -974,11 +974,9 @@ handlers[event_hooks.out_church] = async () => {
     era.printButton(`「我会好好协助${me.name}的！」`, 1);
     await era.input();
     await chara_talk.say_and_wait(
-      `${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }真可靠呢~那接下来就靠${me.name}了咯？`,
+      `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}真可靠呢~${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我很稀饭这种感觉哦？`,
     );
-    await era.printAndWait(`那么，为了达到目标.具体应该往哪方面努力比较好呢?`);
+    await era.printAndWait(`话说回来，接下来努力的方向是?`);
     era.println();
     era.printButton(`「基本的健康管理！」`, 1);
     era.printButton(`「大概是各方面都很均衡的训练吧！」`, 2);
@@ -988,10 +986,8 @@ handlers[event_hooks.out_church] = async () => {
       await chara_talk.say_and_wait(
         '俗话说“居移气,养移体”，注意身体健康确实很重要呢.',
       );
-      await chara_talk.say_and_wait(
-        '我知道了。我也会比之前更加注意身体健康管理的！',
-      );
-      await chara_talk.say_and_wait('好了，那么赶快进去吧！');
+      await chara_talk.say_and_wait('决定了！接下来的目标是身体健康管理！');
+      await chara_talk.say_and_wait('好了，赶快进去吧！');
       get_attr_and_print_in_event(
         4,
         [0, 0, 0, 0, 0],
@@ -1432,7 +1428,11 @@ handlers[event_hooks.crazy_fan_end] = async function () {
     chara_talk.print(
       `我发自内心的相信，她们一定会变得更加勇敢，更加努力的向着更高的顶峰奔跑。`,
     );
-    chara_talk.print(`啊，好像过于消极了呢。这样子可不像姐姐大人。`);
+    chara_talk.print(
+      `啊，好像过于消极了呢。这样子可不像${
+        era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
+      }大人。`,
+    );
     chara_talk.print(`等到了法国，我会将这边的风土人情通过照片和视频发过来。`);
     chara_talk.print(`到时候和以前一样，拜托训练员君发在马推上了哦？`);
     chara_talk.print(`到时候后辈们也会大吃一惊吧！`);
