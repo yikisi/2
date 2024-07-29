@@ -100,7 +100,7 @@ module.exports = async () => {
             { isDivider: true },
             '无名路人',
             { isDivider: true },
-            '黑奴队长',
+            '黑奴零号',
           ],
           type: 'text',
         },
@@ -362,7 +362,7 @@ module.exports = async () => {
           },
           {
             config: { width: 9 },
-            content: '黑奴队长',
+            content: '黑奴零号',
             type: 'text',
           },
         ]);
@@ -399,7 +399,7 @@ module.exports = async () => {
               { isDivider: true },
               '色色',
               { isDivider: true },
-              '黑奴队长',
+              '黑奴零号',
             ],
             type: 'text',
           },
@@ -437,7 +437,7 @@ module.exports = async () => {
             [
               '雞雞',
               { isDivider: true },
-              '黑奴队长',
+              '黑奴零号',
               { isDivider: true },
               '天马闪光蹄',
             ],
@@ -457,7 +457,7 @@ module.exports = async () => {
             ],
           ],
           ['教学口上、随机事件', ['雞雞']],
-          ['特殊角色（临时）', '黑奴队长'],
+          ['特殊角色（临时）', '黑奴零号'],
           [[{ color: get_chara_color(3), content: '东海帝王' }], '天马闪光蹄'],
           [[{ color: get_chara_color(7), content: '黄金船' }], '雞雞'],
           [[{ color: get_chara_color(17), content: '鲁铎象征' }], '露娜俘虏'],
@@ -503,7 +503,7 @@ module.exports = async () => {
               { isDivider: true },
               '黑奴二号',
               { isDivider: true },
-              '黑奴队长',
+              '黑奴零号',
             ],
           ],
           [
@@ -513,7 +513,7 @@ module.exports = async () => {
               { isDivider: true },
               '黑奴一号',
               { isDivider: true },
-              '黑奴队长',
+              '黑奴零号',
             ],
           ],
           [
@@ -587,7 +587,7 @@ module.exports = async () => {
           isParagraph: true,
         });
         await era.printAndWait([
-          '黑奴队长',
+          '黑奴零号',
           { isDivider: true },
           '黑奴一号',
           { isDivider: true },

@@ -38,7 +38,7 @@ handler_dict[event_hooks.select] = function (_, extra_flag) {
  * 示例用的日常事件口上，请不要上纲上线
  * 不满意的话请自己写口上
  *
- * @author 黑奴队长
+ * @author 黑奴零号
  */
 module.exports = {
   /**

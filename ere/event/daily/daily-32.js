@@ -839,7 +839,7 @@ handlers[
  * 速子的日常事件，id=32
  *
  * @author 幽白書
- * @author 黑奴一号 黑奴队长（修订）
+ * @author 黑奴一号 黑奴零号（修订）
  */
 module.exports = {
   /**

@@ -43,7 +43,7 @@ const random_trainers = [
   undefined,
   '雞雞',
   '无名路人',
-  '黑奴队长',
+  '黑奴零号',
   '天马闪光蹄',
   '黑奴一号',
   '露娜俘虏',
@@ -174,7 +174,7 @@ function print_character_statistics({ id, history }) {
 /**
  * 乙名史悦子 - 育成
  *
- * @author 黑奴队长（临时）
+ * @author 黑奴零号（临时）
  */
 module.exports = async (hook, extra_flag, event_object) => {
   if (event_object?.arg !== 'reward') {

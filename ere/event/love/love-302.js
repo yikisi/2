@@ -12,7 +12,7 @@ const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3
 /**
  * 秋川弥生 - 爱慕
  *
- * @author 黑奴队长（临时）
+ * @author 黑奴零号（临时）
  *
  * @param _
  * @param __
