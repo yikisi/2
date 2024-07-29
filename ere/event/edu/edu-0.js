@@ -346,7 +346,11 @@ handlers.trainer_race = async (me) => {
     println();
     sys_change_attr_and_print(0, '体力', get('maxbase:0:体力') * 0.25);
     sys_change_attr_and_print(0, '精力', get('maxbase:0:精力') * 0.25);
-    const item = get_random_value(700, 707);
+    const item = get_random_entry([
+      ...new Array(4).fill(0).map((e) => 700 + e),
+      ...new Array(4).fill(0).map((e) => 705 + e),
+      ...new Array(7).fill(0).map((e) => 850 + e),
+    ]);
     print([`获得了奖品：[${get(`itemname:${item}`)}]！`]);
     add(`item:${item}`, 1);
     sys_like_chara(305, 0, get_random_value(0, 10));

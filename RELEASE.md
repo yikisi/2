@@ -1,4 +1,4 @@
-# [EraUma v0.8](https://gitgud.io/umaera/erauma/-/releases/v0.9)
+# [EraUma v0.9](https://gitgud.io/umaera/erauma/-/releases/v0.9)
 
 _incoming_
 
@@ -7,8 +7,12 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
 ## Added
 
 * 追加了新的调教指令动画
+* 增加了新类型的赛事解说
 
 ## Changed
+
+* 现在角色扮演模式下不会触发那些有模版角色参与的随机小事件了
+* 现在扮演爱丽速子时，神秘的小卖部不再是由【爱丽速子】经营了
 
 ## Fixed
 
@@ -16,3 +20,6 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
 * 修复了生成模拟解说时因赛段获取错误导致的bug
 * 修复了角色扮演模式下参赛对手可能会刷出玩家自己的模版角色的问题
 * 修复了训练后求爱事件中无法拒绝的问题
+* 修复了小事件【污蔑，都是污蔑！】反复触发的问题
+* 修复了三女神参与出道战时报错的bug
+* 修复了随机小事件【随风飘扬的海报】中奖品是 \[undefined\] 的bug

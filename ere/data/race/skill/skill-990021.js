@@ -47,7 +47,7 @@ module.exports = new UmaSkill(
   [
     [
       UmaSkill.target_type_enum.Self,
-      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.Self,
       UmaSkill.target_type_enum.no,
     ],
     [

@@ -53,7 +53,7 @@ function fill_race_weather_and_mess(race, chara, _info) {
         adaptability2race.indexOf(race_id) % 4,
         aim_info.rotation,
         info.gates,
-        0,
+        [],
         info.limit,
         0,
         info.prize,
