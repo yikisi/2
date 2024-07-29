@@ -65,10 +65,17 @@ const top_handlers = [
 /** @type {Record<string,(function([]))[]>} */
 const other_handlers = {};
 
+other_handlers[race_event_enum.lost_stamina] = [
+  (names) => [names, '，失速！'],
+  (names) => [names, ' 的步伐踉跄了起来，已经无法维持速度了！'],
+  (names) => [names, ' 速度变慢了！'],
+  (names) => [names, ' 到极限了吗！？'],
+];
 other_handlers[race_event_enum.loc_mind_nige_ex] = [
   (names) => ['逃马怎容他马在前！冲啊，', ...names, '！'],
   (names) => ['那不是你的位置！', ...names, ' 在用奔跑警告着！'],
   (names) => [...names, ' 正在夺回自己的头马之位！'],
+  (names) => [...names, ' 持续加速，要比其他马娘逃得更前！'],
 ];
 other_handlers[race_event_enum.loc_mind_other_ex] = [
   (names) => [...names, ' 大步奔向自己应处的位置！'],
@@ -81,6 +88,7 @@ other_handlers[race_event_enum.loc_mind_other_ex] = [
 ];
 other_handlers[race_event_enum.loc_mind_nige_over_take] = [
   (names) => [...names, ' 毫不犹豫向头位进发！'],
+  (names) => [...names, ' 正在争取头位！'],
   (names) => [...names, ' 的眼里只有头位！'],
 ];
 other_handlers[race_event_enum.loc_mind_nige_speed_up] = [
@@ -91,7 +99,7 @@ other_handlers[race_event_enum.loc_mind_nige_speed_up] = [
 other_handlers[race_event_enum.loc_mind_other_quick] = [
   (names) => [...names, ' 不甘于被拉开距离，在奋起直追！'],
   (names) => ['被拉得太远了！', ...names, ' 奋起直追！'],
-  (names) => [...names, ' 紧紧把持着自己的距离！'],
+  (names) => [...names, ' 紧紧保持着距离！'],
 ];
 other_handlers[race_event_enum.loc_mind_other_relax] = [
   (names) => [...names, ' 似乎在保持体力，很大胆的战术！！'],
@@ -106,13 +114,16 @@ other_handlers[race_event_enum.blocked] = [
 other_handlers[race_event_enum.temptation] = [
   (names) => [...names, ' 的节奏略显凌乱，似乎有点焦躁！'],
   (names) => [...names, ' 有点气急了吗！'],
+  (names) => [...names, ' 陷入焦躁！'],
 ];
 other_handlers[race_event_enum.temp_end] = [
   (names) => [...names, ' 终于回归了正常的节奏！'],
   (names) => [...names, ' 好像冷静下来了！'],
+  (names) => [...names, ' 摆脱焦躁了！'],
 ];
 other_handlers[race_event_enum.temp_continue] = [
   (names) => [...names, ' 的节奏持续紊乱，有点糟糕！'],
+  (names) => [...names, ' 深陷焦躁无法自拔！'],
   (names) => ['冷静下来啊 ', ...names, '！小心错失时机！'],
 ];
 
@@ -331,6 +342,7 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
           case race_event_enum.temptation:
           case race_event_enum.temp_end:
           case race_event_enum.temp_continue:
+          case race_event_enum.lost_stamina:
             ret_list.push(...get_random_entry(other_handlers[entry.e])(name));
             break;
           default:
