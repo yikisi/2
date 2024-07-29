@@ -263,12 +263,16 @@ module.exports = async (src_chara) => {
 
           await sys_next_week();
           my_marks.god = get_random_value(13, 40);
-          my_marks.experiment = get_random_value(1, 24);
+          if (src_chara !== 25 && src_chara !== 32) {
+            my_marks.experiment = get_random_value(1, 24);
+          }
           my_marks.custom = get_random_value(1, 12);
           my_marks.trainer_race = get_random_value(13, 36);
           my_marks.work_over = my_marks.sick = 24;
           new MeekEduMarks().all_round = get_random_value(5, 12);
-          new TokinoLifeMarks().shadow = get_random_value(5, 12);
+          if (src_chara !== 10) {
+            new TokinoLifeMarks().shadow = get_random_value(5, 12);
+          }
           new TasteLifeMarks().annoyance = get_random_value(13, 20);
           return true;
         case 97:
