@@ -57,7 +57,7 @@ release:
     - echo "Releasing..."
   release:
     tag_name: $CI_COMMIT_TAG
-    name: 'EraUma $CI_COMMIT_TAG'
+    name: 'EraUma v$CI_COMMIT_TAG'
     description: './RELEASE.md'
     assets:
       links:
