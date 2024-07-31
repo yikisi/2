@@ -33,6 +33,13 @@ const rarity_enum = {
   evol: 6,
 };
 
+const ability_time_usage_enum = {
+  normal: 1,
+  top_distance: 2,
+  stamina: 3,
+  order_change: 4,
+};
+
 const ability_type_enum = {
   no: 0,
   // 速度
@@ -162,6 +169,7 @@ class UmaSkill {
   static skill_name_enum = skill_name_enum;
   static skill_border_enum = skill_border_enum;
   static rarity_enum = rarity_enum;
+  static ability_time_usage_enum = ability_time_usage_enum;
   static ability_type_enum = ability_type_enum;
   static ability_usage_enum = ability_usage_enum;
   static target_type_enum = target_type_enum;
@@ -227,6 +235,11 @@ class UmaSkill {
    */
   cooldown_times;
   /**
+   * 延长技能时间方式
+   * @type {number[]}
+   */
+  ability_time_usages;
+  /**
    * 作用类型
    * @type {number[][]}
    */
@@ -285,6 +298,7 @@ class UmaSkill {
    * @param {function[]} conditions
    * @param {number[]} ability_times
    * @param {number[]} cooldown_times
+   * @param {number[]} ability_time_usages
    * @param {number[][]} ability_types
    * @param {number[][]} ability_value_usages
    * @param {number[][]} ability_values
@@ -310,6 +324,7 @@ class UmaSkill {
     conditions,
     ability_times,
     cooldown_times,
+    ability_time_usages,
     ability_types,
     ability_value_usages,
     ability_values,
@@ -334,6 +349,7 @@ class UmaSkill {
     this.conditions = conditions;
     this.ability_times = ability_times;
     this.cooldown_times = cooldown_times;
+    this.ability_time_usages = ability_time_usages;
     this.ability_types = ability_types;
     this.ability_value_usages = ability_value_usages;
     this.ability_values = ability_values;

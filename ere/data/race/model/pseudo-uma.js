@@ -163,6 +163,7 @@ class PseudoUma {
     loc_mind: 0,
     location: 0,
     locationPlanRush: undefined,
+    order_change: 0,
     overtakeAim: undefined,
     slope: 0,
     stamina: 0,

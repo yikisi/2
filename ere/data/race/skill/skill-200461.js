@@ -14,6 +14,10 @@ module.exports = new UmaSkill(
   [1.8, 0],
   [30, 0],
   [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
     [
       UmaSkill.ability_type_enum.TargetSpeed,
       UmaSkill.ability_type_enum.no,

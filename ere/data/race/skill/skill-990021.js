@@ -17,6 +17,10 @@ module.exports = new UmaSkill(
   [60, 0],
   [500, 500],
   [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
     [
       UmaSkill.ability_type_enum.CurrentSpeed,
       UmaSkill.ability_type_enum.HpRate,

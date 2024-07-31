@@ -8,6 +8,7 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
 
 * 追加了新的调教指令动画
 * 增加了新类型的赛事解说
+* 现在某些技能会因为比赛中的其他因素而延长持续时间
 
 ## Changed
 

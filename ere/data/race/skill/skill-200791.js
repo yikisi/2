@@ -19,6 +19,10 @@ module.exports = new UmaSkill(
   [0, 0],
   [500, 0],
   [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
     [
       UmaSkill.ability_type_enum.TemptationEndTime,
       UmaSkill.ability_type_enum.no,

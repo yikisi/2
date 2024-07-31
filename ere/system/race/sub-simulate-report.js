@@ -94,7 +94,7 @@ other_handlers[race_event_enum.loc_mind_nige_over_take] = [
 other_handlers[race_event_enum.loc_mind_nige_speed_up] = [
   (names) => [...names, ' 持续加速，想要拉开更多距离！'],
   (names) => [...names, ' 要逃得更远了！'],
-  (names) => ['逃下去，逃到世界尽头吧！', ...names, '！'],
+  (names) => ['逃下去，逃到世界尽头吧，', ...names, '！'],
 ];
 other_handlers[race_event_enum.loc_mind_other_quick] = [
   (names) => [...names, ' 不甘于被拉开距离，在奋起直追！'],
