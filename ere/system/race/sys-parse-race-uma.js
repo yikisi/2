@@ -8,7 +8,6 @@ const { get_random_value } = require('#/utils/value-utils');
 const { get_chara_color } = require('#/data/chara-colors');
 const recruit_flags = require('#/data/event/recruit-flags');
 const named_list = require('#/data/race/contestants/named.json');
-const passer_by_names = require('#/data/race/contestants/passer-by-names.json');
 const passer_by_list = require('#/data/race/contestants/unnamed.json');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceInfo = require('#/data/race/model/race-info');
@@ -22,6 +21,10 @@ const {
 } = require('#/data/race/race-sim-const.js');
 const { skill_sets, skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
+
+const passer_by_names = require('#/data/race/contestants/uma-mob.json').map(
+  (e) => e['ChineseName'],
+);
 
 const named_level = [
     Math.min(...named_list.map((e) => e.level)),
