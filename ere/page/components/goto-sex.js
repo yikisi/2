@@ -216,20 +216,24 @@ async function goto_sex(chara_id, sex_loc) {
       } else {
         era.set('flag:当前位置', sex_loc);
       }
-      begin_and_init_ero(0, chara_id);
+      let is_rape = false;
       switch (ret) {
         case 2:
+          is_rape = true;
           await era.printAndWait([
             chara.get_colored_name(),
             ' 会意地装出了即将被强暴的惊恐神情……',
           ]);
-          era.set('tflag:强奸', 0);
-          update_juel_buff(chara_id);
           break;
         case 3:
           if (await ask_drink_medicine(chara)) {
             return;
           }
+      }
+      begin_and_init_ero(0, chara_id);
+      if (is_rape) {
+        era.set('tflag:强奸', 0);
+        update_juel_buff(chara_id);
       }
       if (era.get(`status:${chara_id}:超马跳Z`)) {
         era.set('tflag:主导权', chara_id);
@@ -296,10 +300,10 @@ async function goto_sex(chara_id, sex_loc) {
         } else {
           era.set('flag:当前位置', sex_loc);
         }
-        begin_and_init_ero(0, chara_id);
         if (ret === 2 && (await ask_drink_medicine(chara))) {
           return;
         }
+        begin_and_init_ero(0, chara_id);
       } else {
         era.printMultiColumns([
           {

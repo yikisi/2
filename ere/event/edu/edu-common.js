@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
+const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 
 const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
 const palace = require('#/event/snippets/palace');
@@ -92,34 +93,38 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
       !era.get(`status:${chara_id}:摸鱼`) &&
       Math.random() < 0.2 * extra_flag.stamina_ratio
     ) {
-      await era.waitAnyKey();
-      await print_event_name('热血的追加训练！', chara);
-
-      await era.printAndWait([
-        chara.get_colored_name(),
-        ' 似乎意犹未尽的样子，是想自主训练吗？',
-      ]);
-      ['许可！', '会超出计划的……'].forEach((e, i) => {
-        era.printButton(`「${e}」`, i + 1);
-      });
-      if ((await era.input()) === 1) {
-        await era.printAndWait([
-          get_chara_talk(0).get_colored_name(),
-          ' 默许了 ',
-          chara.get_colored_name(),
-          ` 的自主训练，并称赞了${chara.sex}的干劲`,
-        ]);
+      if (sys_check_remote(chara_id)) {
         hook.arg = true;
       } else {
+        await era.waitAnyKey();
+        await print_event_name('热血的追加训练！', chara);
         await era.printAndWait([
-          get_chara_talk(0).get_colored_name(),
-          ' 出言禁止了 ',
           chara.get_colored_name(),
-          ' 的自主训练，并叮嘱要好好休息',
+          ' 似乎意犹未尽的样子，是想自主训练吗？',
         ]);
-        hook.arg = false;
+        ['许可！', '会超出计划的……'].forEach((e, i) => {
+          era.printButton(`「${e}」`, i + 1);
+        });
+        if ((await era.input()) === 1) {
+          await era.printAndWait([
+            get_chara_talk(0).get_colored_name(),
+            ' 默许了 ',
+            chara.get_colored_name(),
+            ` 的自主训练，并称赞了${chara.sex}的干劲`,
+          ]);
+          hook.arg = true;
+        } else {
+          await era.printAndWait([
+            get_chara_talk(0).get_colored_name(),
+            ' 出言禁止了 ',
+            chara.get_colored_name(),
+            ' 的自主训练，并叮嘱要好好休息',
+          ]);
+          hook.arg = false;
+        }
       }
     } else if (
+      !sys_check_remote(chara_id) &&
       era.get(`love:${chara_id}`) >= 50 &&
       era.get(`base:${chara_id}:性欲`) >= lust_border.itch &&
       Math.random() <
