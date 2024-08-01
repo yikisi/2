@@ -41,6 +41,38 @@ module.exports = {
     }
     return ret;
   },
+  /**
+   * @param {PseudoUma} uma
+   * @param {string} key
+   * @param {number} phase
+   */
+  check_phase_random_loc(uma, key, phase) {
+    const random_key = `${key}_random`;
+    uma.race.conditionParams[random_key] = -1;
+    if (uma.race.location >= uma.random[key][phase]) {
+      if (uma.race.location <= uma.random[key][phase] + 10) {
+        uma.race.conditionParams[random_key] = phase;
+      } else {
+        uma.random[key][phase] = 50000;
+      }
+    }
+  },
+  /**
+   * @param {PseudoUma} uma
+   * @param {string} key
+   * @param {number} param_val
+   */
+  check_random_loc(uma, key, param_val) {
+    const random_key = `${key}_random`;
+    uma.race.conditionParams[random_key] = 0;
+    if (uma.race.location >= uma.random[key]) {
+      if (uma.race.location <= uma.random[key] + 10) {
+        uma.race.conditionParams[random_key] = param_val;
+      } else {
+        uma.random[key] = 50000;
+      }
+    }
+  },
   fron_cols,
   /**
    * @param {number} bashin

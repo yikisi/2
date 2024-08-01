@@ -7,7 +7,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 /**
  * 光辉致意 - 招募
  *
- * @author 黑奴队长（临时）
+ * @author 黑奴零号（临时）
  */
 module.exports = {
   async run() {

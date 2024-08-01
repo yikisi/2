@@ -1,6 +1,7 @@
 ﻿const race_event_enum = {
   finish: 0,
   loc_change: 0,
+  lost_stamina: 0,
   final_push: 0,
   compete_fight: 0,
   blocked: 0,

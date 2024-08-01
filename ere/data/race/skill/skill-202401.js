@@ -25,6 +25,10 @@ module.exports = new UmaSkill(
   [2, 0],
   [500, 0],
   [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
     [
       UmaSkill.ability_type_enum.Accel,
       UmaSkill.ability_type_enum.no,

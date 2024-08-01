@@ -28,6 +28,10 @@ module.exports = new UmaSkill(
   [5, 5],
   [500, 500],
   [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
     [
       UmaSkill.ability_type_enum.CurrentSpeedWithNaturalDeceleration,
       UmaSkill.ability_type_enum.no,

@@ -10,7 +10,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 /**
  * 佐岳五月 - 爱慕
  *
- * @author 黑奴队长（临时）
+ * @author 黑奴零号（临时）
  *
  * @param _
  * @param __

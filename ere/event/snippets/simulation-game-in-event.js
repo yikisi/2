@@ -34,7 +34,7 @@ async function simulation_game_in_event(
         reference.distance,
         reference.rotation,
         2,
-        0,
+        [],
         reference.limit,
         0,
         0,

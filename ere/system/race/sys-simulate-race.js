@@ -665,11 +665,14 @@ function sys_sim_race(list_chara, race_info, race_id) {
         );
         uma.race.staminaCost *= 1.1;
       }
+      const stamina_before = uma.race.stamina;
       uma.race.stamina = Math.min(
         Math.max(uma.race.stamina - uma.race.staminaCost, 0),
         uma.base.stamina,
       );
       if (uma.race.stamina === 0) {
+        stamina_before > 0 &&
+          report_cache.at(-1).push({ e: race_event_enum.lost_stamina, u: uma });
         uma.race.velocityIdeal =
           uma.base.velocityMin + uma.race.velocityIdealBuff;
         uma.race.acceleration = race_de_acc[4];

@@ -14,6 +14,10 @@ module.exports = new UmaSkill(
   [4, 0],
   [500, 0],
   [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
     [
       UmaSkill.ability_type_enum.LaneMoveSpeed,
       UmaSkill.ability_type_enum.VisibleDistance,

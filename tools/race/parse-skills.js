@@ -7,12 +7,16 @@ const prisma = new PrismaClient();
 const UmaSkill = require('../../ere/data/race/model/uma-skill');
 
 const rarity_names = {},
+  ability_time_usage_names = {},
   ability_type_names = {},
   ability_type_usage_names = {},
   target_type_names = {};
 
 Object.entries(UmaSkill.rarity_enum).map(
   ([key, value]) => (rarity_names[value] = key),
+);
+Object.entries(UmaSkill.ability_time_usage_enum).map(
+  ([k, v]) => (ability_time_usage_names[v] = k),
 );
 Object.entries(UmaSkill.ability_type_enum).map(
   ([k, v]) => (ability_type_names[v] = k),
@@ -425,6 +429,13 @@ function get_rarity(v) {
   return `UmaSkill.rarity_enum.${rarity_names[v]}`;
 }
 
+function get_ability_time_usage(v) {
+  if (!ability_time_usage_names[v]) {
+    throw new Error(v);
+  }
+  return `UmaSkill.ability_time_usage_enum.${ability_time_usage_names[v]}`;
+}
+
 function get_ability_type(v) {
   if (!ability_type_names[v]) {
     throw new Error(v);
@@ -610,6 +621,7 @@ async function chara_skill() {
     sbuffer += `[${parse_condition(e.condition_1)},${parse_condition(e.condition_2)}],`;
     sbuffer += `[${e.float_ability_time_1 / 10000},${e.float_ability_time_2 / 10000}],`;
     sbuffer += `[${e.float_cooldown_time_1 / 10000},${e.float_cooldown_time_2 / 10000}],`;
+    sbuffer += `[${get_ability_time_usage(e.ability_time_usage_1)},${get_ability_time_usage(e.ability_time_usage_2)}],`;
     sbuffer += `[[${get_ability_type(e.ability_type_1_1)},${get_ability_type(e.ability_type_1_2)},${get_ability_type(e.ability_type_1_3)}],[${get_ability_type(e.ability_type_2_1)},${get_ability_type(e.ability_type_2_2)},${get_ability_type(e.ability_type_2_3)}]],`;
     sbuffer += `[[${get_ability_usage(e.ability_value_usage_1_1)},${get_ability_usage(e.ability_value_usage_1_2)},${get_ability_usage(e.ability_value_usage_1_3)}],[${get_ability_usage(e.ability_value_usage_2_1)},${get_ability_usage(e.ability_value_usage_2_2)},${get_ability_usage(e.ability_value_usage_2_3)}]],`;
     sbuffer += `[[${e.float_ability_value_1_1 / 10000},${e.float_ability_value_1_2 / 10000},${e.float_ability_value_1_3 / 10000}],[${e.float_ability_value_2_1 / 10000},${e.float_ability_value_2_2 / 10000},${e.float_ability_value_2_3 / 10000}]],`;

@@ -793,11 +793,9 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
     case 309:
       era.set('flag:当前位置', location_enum.school_shop);
       era.drawLine();
-      temp = era.get('flag:当前互动角色');
-      era.set('flag:当前互动角色', 0);
-      await shop_start();
-      await shop_end(
-        await print_shop_page([
+      temp = [era.get('flag:当前互动角色')];
+      temp[1] = () =>
+        print_shop_page([
           ...new Array(4).fill(0).map((_, i) => 700 + i),
           ...new Array(4).fill(0).map((_, i) => 705 + i),
           800,
@@ -808,9 +806,15 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
           { id: 841, limit: true },
           ...new Array(7).fill(0).map((_, i) => 850 + i),
           ...new Array(4).fill(0).map((_, i) => 870 + i),
-        ]),
-      );
-      era.set('flag:当前互动角色', temp);
+        ]);
+      era.set('flag:当前互动角色', 0);
+      if (era.get('cflag:0:模版角色') !== 32) {
+        await shop_start();
+        await shop_end(await temp[1]());
+      } else {
+        await temp[1]();
+      }
+      era.set('flag:当前互动角色', temp[0]);
       era.set('flag:当前位置', location_enum.office);
       break;
     case 310:

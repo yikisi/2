@@ -2,6 +2,8 @@ const { logger } = require('#/era-electron');
 
 const {
   add_timer,
+  check_phase_random_loc,
+  check_random_loc,
   get_skill_record,
   get_table_row,
   progress_width,
@@ -10,6 +12,7 @@ const {
 const { sort_list } = require('#/utils/list-utils');
 
 const {
+  ability_time_usage_enum,
   ability_type_enum,
   ability_usage_enum,
   target_type_enum,
@@ -22,40 +25,6 @@ const {
 
 let top_lane = undefined,
   top_slope = 0;
-
-/**
- * @param {PseudoUma} uma
- * @param {string} key
- * @param {number} phase
- */
-function check_phase_random_loc(uma, key, phase) {
-  const random_key = `${key}_random`;
-  uma.race.conditionParams[random_key] = -1;
-  if (uma.race.location >= uma.random[key][phase]) {
-    if (uma.race.location <= uma.random[key][phase] + 10) {
-      uma.race.conditionParams[random_key] = phase;
-    } else {
-      uma.random[key][phase] = 50000;
-    }
-  }
-}
-
-/**
- * @param {PseudoUma} uma
- * @param {string} key
- * @param {number} param_val
- */
-function check_random_loc(uma, key, param_val) {
-  const random_key = `${key}_random`;
-  uma.race.conditionParams[random_key] = 0;
-  if (uma.race.location >= uma.random[key]) {
-    if (uma.race.location <= uma.random[key] + 10) {
-      uma.race.conditionParams[random_key] = param_val;
-    } else {
-      uma.random[key] = 50000;
-    }
-  }
-}
 
 /**
  * @param {PseudoUma[]} list_chara
@@ -229,6 +198,18 @@ function sub_simulate_skill(
           uma.base.change_order_finalcorner++;
         }
       }
+      uma.list_skill.forEach((e) => {
+        for (let i = 0; i < e.ability_time; ++i) {
+          if (
+            e.ability_time[i] &&
+            e.data.ability_time_usages[i] ===
+              ability_time_usage_enum.order_change &&
+            uma.race.order_change++ < 3
+          ) {
+            e.ability_time[i] += frame_rate;
+          }
+        }
+      });
     }
     uma.race.conditionParams.corner = cur_lane.corner;
     uma.race.conditionParams.distance_diff_rate =
@@ -404,7 +385,6 @@ function sub_simulate_skill(
     uma.race.conditionParams.running_style_temptation_opponent_count_oikomi =
       running_style_temptations[3] -
       (uma.style === 3 && uma.race.temptation > 0);
-
     // 重置目标速度和加速度为赛段基础值
     uma.race.velocityIdeal =
       uma.base.velocityIdeal *
@@ -421,7 +401,6 @@ function sub_simulate_skill(
     // 每个赛段的随机浮动
     uma.race.velocityIdeal +=
       uma.factorPhase.vRand[Math.min(uma.race.conditionParams.phase, 2)];
-
     // 冲刺
     if (
       uma.flag.allowPlan &&
@@ -506,7 +485,6 @@ function sub_simulate_skill(
     if (uma.race.conditionParams.is_lastspurt) {
       uma.race.velocityIdeal = uma.race.velocityPlanRush;
     }
-
     // 追比
     if (uma.race.competeFightAim) {
       if (
@@ -555,7 +533,6 @@ function sub_simulate_skill(
     } else {
       uma.race.conditionParams.compete_fight_count = 0;
     }
-
     if (uma.race.slope >= 0) {
       uma.flag.downhill = false;
       uma.race.downhill = 0;
@@ -574,7 +551,6 @@ function sub_simulate_skill(
       uma.race.velocityIdeal += 0.3 - uma.race.slope / 10;
       uma.race.staminaCost *= 0.4;
     }
-
     uma.list_skill.forEach((skill) => {
       uma.race.conditionParams.is_activate_other_skill_detail = Number(
         skill.data.is_two_phase && skill.count[0] > 0,
@@ -649,6 +625,7 @@ function sub_simulate_skill(
           }
           uma.race.conditionParams.is_activate_any_skill = 1;
           skill.count[i]++;
+          skill.ability_time[i] = skill.data.ability_times[i] * frame_rate;
           skill.cooldown[i] =
             (skill.data.cooldown_times[i] * frame_rate * race_info.span) / 1000;
           if (uma.chara === -1) {
@@ -657,8 +634,34 @@ function sub_simulate_skill(
           if (!skill.data.is_two_phase) {
             skill.cooldown[1 - i] = skill.cooldown[i];
           }
-          skill.ability_time[i] =
-            (skill.data.ability_times[i] * frame_rate * race_info.span) / 1000;
+          switch (skill.data.ability_time_usages[i]) {
+            case ability_time_usage_enum.normal:
+            case ability_time_usage_enum.order_change:
+              skill.ability_time[i] *= race_info.span / 1000;
+              break;
+            case ability_time_usage_enum.top_distance:
+              skill.ability_time[i] *= Math.min(
+                0.8 + uma.race.conditionParams.distance_diff_top / 62.5,
+                1.6,
+              );
+              break;
+            case ability_time_usage_enum.stamina:
+              if (uma.race.stamina >= 3500) {
+                skill.ability_time[i] *= 4;
+              } else if (uma.race.stamina >= 3200) {
+                skill.ability_time[i] *= 3.5;
+              } else if (uma.race.stamina >= 3000) {
+                skill.ability_time[i] *= 3;
+              } else if (uma.race.stamina >= 2800) {
+                skill.ability_time[i] *= 2.5;
+              } else if (uma.race.stamina >= 2600) {
+                skill.ability_time[i] *= 2.2;
+              } else if (uma.race.stamina >= 2400) {
+                skill.ability_time[i] *= 2;
+              } else if (uma.race.stamina >= 2000) {
+                skill.ability_time[i] *= 1.5;
+              }
+          }
           for (let j = 0; j < skill.data.ability_types[i].length; ++j) {
             if (skill.data.ability_types[i][j] > 0) {
               let temp;

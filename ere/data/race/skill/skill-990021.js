@@ -17,6 +17,10 @@ module.exports = new UmaSkill(
   [60, 0],
   [500, 500],
   [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
     [
       UmaSkill.ability_type_enum.CurrentSpeed,
       UmaSkill.ability_type_enum.HpRate,
@@ -47,7 +51,7 @@ module.exports = new UmaSkill(
   [
     [
       UmaSkill.target_type_enum.Self,
-      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.Self,
       UmaSkill.target_type_enum.no,
     ],
     [

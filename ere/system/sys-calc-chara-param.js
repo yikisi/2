@@ -220,7 +220,7 @@ module.exports = {
       chara_id > 0 &&
       era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置') &&
       (race_infos[era.get('flag:当前赛事')].track >= track_enum.longchamp ||
-        era.get('cflag:0:位置') !== location_enum.office)
+        era.get('cflag:0:位置') !== 0)
     );
   },
   sys_check_train_enabled,

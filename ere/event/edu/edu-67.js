@@ -801,7 +801,7 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
  *
  * @author cy
  * @author 黑奴二号（改编）
- * @author 黑奴队长（修订）
+ * @author 黑奴零号（修订）
  *
  * @param {HookArg} hook
  * @param {*} extra_flag

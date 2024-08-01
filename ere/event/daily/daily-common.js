@@ -870,7 +870,7 @@ handlers[event_hooks.load_talk] = async (chara_id) => {
  * 通用日常事件
  *
  * @author 雞雞
- * @author 黑奴队长
+ * @author 黑奴零号
  *
  * @param {number} chara_id
  * @param {HookArg} hook
