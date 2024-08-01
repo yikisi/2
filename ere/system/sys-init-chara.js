@@ -344,6 +344,12 @@ module.exports = {
             era.get(`callname:${my_src_chara}:${chara_id}`),
           );
         }
+        era.set(
+          `cflag:${chara_id}:可再次育成`,
+          Number(
+            era.get(`cflag:${chara_id}:可再次育成`) > 0 && my_src_chara <= 0,
+          ),
+        );
       }
 
       sys_change_hair(chara_id);
