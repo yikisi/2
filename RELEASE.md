@@ -28,3 +28,4 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
 * 修复了三女神参与出道战时报错的bug
 * 修复了随机小事件【随风飘扬的海报】中奖品是 \[undefined\] 的bug
 * 现在秋川弥生、骏川缰绳、光辉致意和佐岳五月的孩子不再在还未育成的情况下开始重复育成了
+* 修复了模拟赛过程中因解说词缺失导致的bug

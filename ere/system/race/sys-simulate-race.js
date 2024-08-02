@@ -301,7 +301,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
   function get_report_internal() {
     return Math.max(
       Math.min(
-        (buffer.report.at(-1).speak * 3) / 20,
+        (buffer.report.at(-1)?.speak * 3) / 20,
         get_random_value(3.5, 4.5, true),
       ),
       get_random_value(1.5, 2.5, true),
