@@ -82,18 +82,36 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
             (144 - 24) -
           1,
         0,
-      ],
-      info_legends = ((edu_phase - 24) * info.gates) / (144 - 24);
+      ];
     info.extra_attr = Math.floor(
       (max_extra_attr * (144 - edu_phase)) / (144 - 24),
     );
     const contestant_dict = {};
     team_chara.forEach((e) => (contestant_dict[e.index_chara] = 1));
     contestant_dict[era.get('cflag:0:模版角色')] = 1;
-    let legend_count = get_random_value(
-      Math.floor(info_legends / 2),
-      Math.floor(info_legends),
-    );
+    let legend_count = ((edu_phase - 24) * info.gates) / (144 - 24);
+    switch (info.race_class) {
+      case RaceInfo.class_enum.G1:
+        legend_count = get_random_value(
+          Math.floor(legend_count / 2),
+          Math.floor(legend_count),
+        );
+        break;
+      case RaceInfo.class_enum.G2:
+        legend_count = get_random_value(
+          Math.floor(legend_count / 4),
+          Math.floor(legend_count / 2),
+        );
+        break;
+      case RaceInfo.class_enum.G3:
+        legend_count = get_random_value(
+          Math.floor(legend_count / 8),
+          Math.floor(legend_count / 4),
+        );
+        break;
+      default:
+        legend_count = 0;
+    }
 
     team_chara.forEach(({ index_chara: id }) =>
       get_custom_mec(id)
