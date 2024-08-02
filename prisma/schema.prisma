@@ -3077,19 +3077,6 @@ model race_bgm_cutin {
   @@index([bgm_group_id], map: "race_bgm_cutin_0_bgm_group_id")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model race_bgm_cutin_extension_time {
-  id                 Int
-  cutin_category     Int
-  card_id            Int
-  chara_id           Int
-  extension_sec      Int
-  extension_sec_long Int
-
-  @@index([cutin_category], map: "race_bgm_cutin_extension_time_0_cutin_category")
-  @@ignore
-}
-
 model race_bgm_pattern {
   id                             Int    @id @default(autoincrement())
   bgm_time_1                     Int
