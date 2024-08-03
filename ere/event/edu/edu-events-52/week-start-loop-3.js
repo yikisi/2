@@ -579,11 +579,11 @@ module.exports = async (urara, me, in_urara, callname) => {
     chara,
     [
       new PseudoUma(
-        0,
+        -1,
         '「春乌拉拉」',
         in_urara.color,
         chara.motivation,
-        attr_names.map((e) => era.get(`base:52:${e}`)),
+        attr_names.map((e) => Math.min(era.get(`base:52:${e}`), 1200)),
         chara.style,
         [...chara.adapt_style_list],
         [...chara.adapt_distance_list],
