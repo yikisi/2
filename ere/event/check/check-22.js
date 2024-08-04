@@ -24,7 +24,7 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = -4;
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   (extra_flag) => {
-    if (era.get(`cflag:${this.id}:育成回合计时`) <= 95) {
+    if (era.get('cflag:22:育成回合计时') <= 95) {
       switch (extra_flag.race) {
         case race_enum.shuk_sho:
           if (

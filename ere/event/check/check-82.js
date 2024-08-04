@@ -24,7 +24,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     check_aim_race(races, race_enum.mile_cup, 2, 1) &&
     check_aim_race(races, race_enum.yasu_kin, 2, 1) &&
     check_aim_race(races, race_enum.mile_cha, 2, 1) &&
-    get(`base:${this.id}:速度`) >= 1200,
+    get('base:82:速度') >= 1200,
   aim_races,
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));

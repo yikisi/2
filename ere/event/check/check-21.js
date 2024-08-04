@@ -21,7 +21,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   (extra_flag) => {
     const edu_marks = new TamaEduMarks();
     if (
-      era.get(`cflag:${this.id}:育成回合计时`) <= 95 &&
+      era.get('cflag:21:育成回合计时') <= 95 &&
       race_infos[extra_flag.race].race_class <= class_enum.G3 &&
       extra_flag.rank === 1 &&
       edu_marks.aim_check < 4

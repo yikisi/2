@@ -94,57 +94,60 @@ function generate_gene_buttons(
         type: 'text',
       },
     ],
-    ...available_genes.get_values().map((e, i) => {
-      const gene = gene_dict[e.id];
-      const price =
-        Math.floor((gene.cost * (100 + discount)) / 100) * (1 + !chara_id);
-      return {
-        columns: [
-          {
-            config: { width: 12 },
-            content: gene.get_colored_name(),
-            type: 'text',
-          },
-          {
-            config: { align: 'right', width: 2 },
-            content: genes.get_count(e.id) || 0,
-            type: 'text',
-          },
-          {
-            config: { align: 'right', width: 2 },
-            content: e.count.toString(),
-            type: 'text',
-          },
-          {
-            config: {
-              align: 'right',
-              color: gene_type_colors[gene_dict[e.id].type],
-              width: 2,
+    ...available_genes
+      .get_values()
+      .filter((e) => gene_dict[e.id] !== undefined)
+      .map((e, i) => {
+        const gene = gene_dict[e.id];
+        const price =
+          Math.floor((gene.cost * (100 + discount)) / 100) * (1 + !chara_id);
+        return {
+          columns: [
+            {
+              config: { width: 12 },
+              content: gene.get_colored_name(),
+              type: 'text',
             },
-            content: price.toString(),
-            type: 'text',
-          },
-          {
-            accelerator: i + 1,
-            config: {
-              align: 'center',
-              disabled:
-                e.count === genes.get_count(e.id) ||
-                price > juels[gene.type] ||
-                (gene.type === gene_type_enum.adapt &&
-                  get(`cflag:${chara_id}:${gene.type_value}适性`) === 7) ||
-                (gene.type === gene_type_enum.base &&
-                  get(`maxbase:${chara_id}:${gene.type_value}`) === 2000) ||
-                (!chara_id && genes.count() > 15),
-              width: 6,
+            {
+              config: { align: 'right', width: 2 },
+              content: genes.get_count(e.id) || 0,
+              type: 'text',
             },
-            content: '学习',
-            type: 'button',
-          },
-        ],
-        config: { width: 12 },
-      };
-    }),
+            {
+              config: { align: 'right', width: 2 },
+              content: e.count.toString(),
+              type: 'text',
+            },
+            {
+              config: {
+                align: 'right',
+                color: gene_type_colors[gene_dict[e.id].type],
+                width: 2,
+              },
+              content: price.toString(),
+              type: 'text',
+            },
+            {
+              accelerator: i + 1,
+              config: {
+                align: 'center',
+                disabled:
+                  e.count === genes.get_count(e.id) ||
+                  price > juels[gene.type] ||
+                  (gene.type === gene_type_enum.adapt &&
+                    get(`cflag:${chara_id}:${gene.type_value}适性`) === 7) ||
+                  (gene.type === gene_type_enum.base &&
+                    get(`maxbase:${chara_id}:${gene.type_value}`) === 2000) ||
+                  (!chara_id && genes.count() > 15),
+                width: 6,
+              },
+              content: '学习',
+              type: 'button',
+            },
+          ],
+          config: { width: 12 },
+        };
+      }),
     {
       columns: [
         {
