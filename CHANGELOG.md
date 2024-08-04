@@ -1,5 +1,73 @@
 # Changelog
 
+## [EraUma v0.805](https://gitgud.io/umaera/erauma/-/releases/0.805)
+_2024/8/4_
+
+### Fixed
+
+* 修复了马娘玩家在解锁因子能力后进入因子继承时报错的bug
+* 修复了部分角色check脚本工作不正常的问题
+
+## [EraUma v0.804](https://gitgud.io/umaera/erauma/-/releases/0.804)
+_2024/8/3_
+
+### Added
+
+* 现在某些技能会因为比赛中的其他因素而延长持续时间
+
+### Changed
+
+* 现在远程训练的马娘将在触发加训后总是选择加训，并且不再要求「特别训练」了
+* 现在比赛会出现的传奇对手数量会随比赛等级降低而变化，非重赏比赛将不再出现传奇对手（除非角色口上脚本中指定了传奇对手）
+* 更新了部分马娘数据和图片资源
+
+### Fixed
+
+* 现在秋川弥生、骏川缰绳、光辉致意和佐岳五月的孩子不再在还未育成的情况下开始重复育成了
+* 修复了鸣尾纪念赛事数据的错误
+* 修复了模拟赛过程中因解说词缺失导致的bug
+
+## [EraUma v0.803](https://gitgud.io/umaera/erauma/-/releases/0.803)
+_2024/7/30_
+
+EraUma v0.803，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/2.0.1) 版本
+
+### Changed
+
+* 现在当【爱慕的变化】为【不敢肖想】、且未在队伍中时，三女神的爱慕不会超过54了
+
+## [EraUma v0.802](https://gitgud.io/umaera/erauma/-/releases/0.802)
+_2024/7/29_
+
+### Added
+
+* 增加了新类型的赛事解说
+
+### Changed
+
+* 现在角色扮演模式下不会触发那些有模版角色参与的随机小事件了
+* 现在扮演爱丽速子时，神秘的小卖部不再是由【爱丽速子】经营了
+
+### Fixed
+
+* 修复了小事件【污蔑，都是污蔑！】反复触发的问题
+* 修复了三女神参与出道战时报错的bug
+* 修复了随机小事件【随风飘扬的海报】中奖品是 \[undefined\] 的bug
+
+## [EraUma v0.801](https://gitgud.io/umaera/erauma/-/releases/v0.801)
+_2024/7/28_
+
+### Added
+
+* 追加了新的调教指令动画
+
+### Fixed
+
+* 修复了大树快车的招募脚本错误（大树快车只有临时招募脚本，暂无口上作者）
+* 修复了生成模拟解说时因赛段获取错误导致的bug
+* 修复了角色扮演模式下参赛对手可能会刷出玩家自己的模版角色的问题
+* 修复了训练后求爱事件中无法拒绝的问题
+
 ## [EraUma v0.8](https://gitgud.io/umaera/erauma/-/releases/v0.8)
 
 _2024/7/27_
