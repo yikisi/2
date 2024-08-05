@@ -87,7 +87,6 @@ handlers[event_hooks.train] = async (chara_id, _, extra_flag) => {
 handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
   const chara = get_chara_talk(chara_id);
   era.print([chara.get_colored_name(), ' 的训练顺利结束了！']);
-  era.println();
   if (chara_id) {
     if (
       !era.get(`status:${chara_id}:摸鱼`) &&
@@ -96,6 +95,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
       if (sys_check_remote(chara_id)) {
         hook.arg = true;
       } else {
+        era.println();
         await era.waitAnyKey();
         await print_event_name('热血的追加训练！', chara);
         await era.printAndWait([
@@ -130,6 +130,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
       Math.random() <
         (0.2 * era.get(`base:${chara_id}:性欲`)) / lust_border.want_sex
     ) {
+      era.println();
       await era.waitAnyKey();
       await print_event_name('训练后的性欲高涨', chara);
       await era.printAndWait([
