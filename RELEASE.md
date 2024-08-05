@@ -8,6 +8,7 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
 ## Changed
 
 * 优化了超得功能界面的显示
+* 现在睡奸状态下使用道具时也会使用非睡奸状态下的地文了
 
 ## Fixed
 
