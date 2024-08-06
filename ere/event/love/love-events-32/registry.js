@@ -623,8 +623,8 @@ module.exports = (handlers) => {
     await tachyon.print_and_wait('这就是，恋爱吗？');
     era.println();
     tachyon.print('如果是的话……那');
-    era.printButton('……必须做点什么了', 1);
-    era.printButton('……不，还是不要吧', 2);
+    era.printButton('……必须做点什么了（升级关系）', 1);
+    era.printButton('……不，还是不要吧（暂不升级）', 2);
     if ((await era.input()) === 1) {
       await tachyon.print_and_wait('必须要做些什么');
       await tachyon.print_and_wait('像这样焦躁也改变不了任何事情');
