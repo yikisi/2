@@ -192,12 +192,21 @@ module.exports = (handlers, normal_handlers) => {
         '笑得眯起了双眼。',
       ]);
     } else {
-      await attacker.print_and_wait('说不定能就这么挤出乳汁来……');
-      await attacker.print_and_wait(
-        '眼前被连续不断的爱抚弄得硬邦邦的下流乳头叫人忍不住这么想。',
-      );
-      await attacker.print_and_wait('而且这么僵硬地紧绷着身子，简直就是在说……');
-      await defender.say_and_wait('这里是不能碰的敏感弱点！', true);
+      if (era.get(`cflag:${defender.id}:性别`) - 1) {
+        await attacker.print_and_wait('说不定能就这么挤出乳汁来……');
+        await attacker.print_and_wait(
+          '眼前被连续不断的爱抚弄得硬邦邦的下流乳头叫人忍不住这么想……',
+        );
+        await attacker.print_and_wait(
+          '而且这么僵硬地紧绷着身子，简直就是在说……',
+        );
+      } else {
+        await attacker.print_and_wait(
+          '眼前下流乳头的被连续不断的爱抚弄得硬邦邦的。',
+        );
+        await attacker.print_and_wait('这么僵硬地紧绷着身子，简直就是在说……');
+      }
+      await defender.used_to_say_and_wait('这里是不能碰的敏感弱点！');
       await attacker.print_and_wait('真是可爱过头了ww');
     }
   };

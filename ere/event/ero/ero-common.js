@@ -47,6 +47,7 @@ const handlers = {},
   require('#/event/ero/common-lines/ero-sleeping-pettings-1'),
   require('#/event/ero/common-lines/ero-sleeping-pettings-2'),
   require('#/event/ero/common-lines/ero-sleeping-fuckings'),
+  require('#/event/ero/common-lines/ero-items'),
 ].forEach((f) => f(sleep_handlers, handlers));
 
 console.log(

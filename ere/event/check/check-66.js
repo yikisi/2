@@ -19,7 +19,7 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   (extra) => {
-    const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
+    const edu_weeks = era.get('cflag:66:育成回合计时');
     if (
       edu_weeks > 47 + 36 &&
       edu_weeks < 95 + 19 &&
@@ -31,7 +31,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   },
   (races) =>
     check_aim_race(races, race_enum.asah_sta, 2, 1, (e) => e.st === 0) &&
-    era.get(`base:${this.id}:速度`) >= 1200,
+    era.get('base:66:速度') >= 1200,
   aim_races,
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));

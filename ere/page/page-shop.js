@@ -13,8 +13,7 @@ module.exports = async (item_list) => {
   const item_keys = era.get('itemkeys'),
     off_index = era.get('flag:打折商品'),
     off = item_keys[off_index % item_keys.length],
-    price_cache = era.get(`itemprice:${off}`),
-    in_list = item_list.filter((e) => e === off || e.id === off).length > 0;
+    price_cache = era.get(`itemprice:${off}`);
   era.set(
     `itemprice:${off}`,
     Math.max(Math.ceil(price_cache * ((off_index & 0x80) > 0 ? 0.5 : 0.7)), 1),
@@ -164,7 +163,7 @@ module.exports = async (item_list) => {
       type: 'text',
       content: '\n* 点击道具查看说明\n** 带「限」字样的商品只能拥有一件',
     });
-    if (in_list) {
+    if (on_sell_list.findIndex((e) => e === off) !== -1) {
       buffer.push({
         type: 'text',
         content: [

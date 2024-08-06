@@ -21,6 +21,7 @@ const {
   adaptability_colors,
   celebration_color,
 } = require('#/data/color-const');
+const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
@@ -146,11 +147,22 @@ async function check_new_activities(cur_round, in_team_list) {
             pregnant: era.get(`cflag:${e}:妊娠回合计时`),
           };
         });
-      const punish_list = foreign_list
-        .filter((e) => e.pregnant >= 33 || e.hurt)
-        .map((e) => e.id);
+      const punish_list = [];
       foreign_list = foreign_list
-        .filter((e) => e.pregnant < 33 && !e.hurt)
+        .filter((e) => {
+          if (
+            e.pregnant <
+              33 -
+                3 *
+                  (era.get(`equip:${e.id}:淫纹奴役`) ===
+                    slavery_enum.pregnant) &&
+            !e.hurt
+          ) {
+            return true;
+          }
+          punish_list.push(e.id);
+          return false;
+        })
         .map((e) => e.id);
       era.print([race_colored_name, ' 即将举办，参赛选手们要踏上远征之路了……']);
       if (

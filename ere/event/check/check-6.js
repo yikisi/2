@@ -24,10 +24,10 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   (extra_flag) => {
     const edu_marks = new OguriEduMarks();
     if (
-      get(`cflag:${this.id}:育成回合计时`) >= 96 &&
-      get(`cflag:${this.id}:育成回合计时`) <= 95 + 24 &&
+      get('cflag:6:育成回合计时') >= 96 &&
+      get('cflag:6:育成回合计时') <= 95 + 24 &&
       race_infos[extra_flag.race].race_class === class_enum.G1 &&
-      extra_flag.rank <= 2 &&
+      extra_flag.rank <= 3 &&
       edu_marks.aim_check < 2
     ) {
       edu_marks.aim_check++;
@@ -50,7 +50,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 3));
     const { aim_check } = new OguriEduMarks();
     buffer.push({
-      check: Math.min(aim_check, 3) - 1,
+      check: aim_check - 1,
       color: aim_check >= 2 ? attr_change_colors.up : attr_change_colors.down,
       content: `资深年 1-6月 二场G1 前三名 ${aim_check}/2 ${
         aim_check >= 2 ? '✔' : '✘'

@@ -193,9 +193,9 @@ module.exports = {
           total_ex = era.get(`ex:${chara_id}:TotalEX`),
           pain_params = pain_juels / 10 + fear_juels / 10 - spirit_juels / 25,
           shame_params =
-            body_juels / 20 +
+            body_juels / 50 +
             shame_juels / 2 +
-            spirit_juels / 10 -
+            spirit_juels / 25 -
             meek_juels / 5;
         if (!ero_mark) {
           if (pleasure_params >= 4000 && total_ex >= 6 && pleasure_mark < 3) {

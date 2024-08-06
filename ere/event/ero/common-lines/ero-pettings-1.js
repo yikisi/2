@@ -172,10 +172,16 @@ module.exports = (handlers) => {
       ]);
       await attacker.print_and_wait('啊，被用尾巴教训了。');
     } else {
-      await attacker.print_and_wait('说不定能就这么挤出乳汁来……');
-      await attacker.print_and_wait(
-        '眼前被连续不断的爱抚弄得硬邦邦的下流乳头叫人忍不住这么想……',
-      );
+      if (era.get(`cflag:${defender.id}:性别`) - 1) {
+        await attacker.print_and_wait('说不定能就这么挤出乳汁来……');
+        await attacker.print_and_wait(
+          '眼前被连续不断的爱抚弄得硬邦邦的下流乳头叫人忍不住这么想……',
+        );
+      } else {
+        await attacker.print_and_wait(
+          '眼前下流乳头的被连续不断的爱抚弄得硬邦邦的。',
+        );
+      }
       await defender.say_and_wait('呀——');
       await attacker.print_and_wait([
         '趁着 ',

@@ -128,7 +128,6 @@ async function page_chairman_office() {
             },
           },
           {
-            name: '「抗 议！训练场没有想训的爱马！」',
             async handle() {
               nothing = false;
               if (sys_check_team_limit() >= 0) {
@@ -186,38 +185,49 @@ async function page_chairman_office() {
                     break;
                   case 3:
                     temp = [];
-                    temp_list.forEach((chara_id) => {
-                      const color = get_chara_color(chara_id);
-                      let flag_script;
-                      try {
-                        require(`#/event/rec/rec-${chara_id}`);
-                        flag_script = true;
-                      } catch (_) {
-                        flag_script = false;
-                      }
-                      temp.push({
-                        accelerator: chara_id,
-                        config: {
-                          align: 'center',
-                          buttonType: '',
-                          color,
-                          width: 6,
+                    temp_list
+                      .map((chara_id) => {
+                        const color = get_chara_color(chara_id);
+                        let flag_script;
+                        try {
+                          require(`#/event/rec/rec-${chara_id}`);
+                          flag_script = true;
+                        } catch (_) {
+                          flag_script = false;
+                        }
+                        return {
+                          accelerator: chara_id,
+                          config: {
+                            align: 'center',
+                            buttonType: '',
+                            color,
+                            width: 6,
+                          },
+                          content: `${era.get(`static:${chara_id}:name`)}${
+                            flag_script ? '*' : ''
+                          }${star_premium_draw.chara === chara_id ? ' [已指名]' : ''}`,
+                          priority: flag_script,
+                          type: 'button',
+                        };
+                      })
+                      .reduce(
+                        (p, c) => {
+                          p[1 - c.priority].push(c);
+                          return p;
                         },
-                        content: `${era.get(`static:${chara_id}:name`)}${
-                          flag_script ? '*' : ''
-                        }${star_premium_draw.chara === chara_id ? ' [已指名]' : ''}`,
-                        type: 'button',
+                        [[], []],
+                      )
+                      .forEach((l) => {
+                        temp.push({
+                          config: {
+                            content: l[0].priority
+                              ? '使用专属口上的角色'
+                              : '使用地文的角色',
+                          },
+                          type: 'divider',
+                        });
+                        temp.push(...l);
                       });
-                    });
-                    temp.push({
-                      content: [
-                        { isBr: true },
-                        '* 带有',
-                        { content: '*', fontWeight: 'bold' },
-                        '号后缀的角色有专属口上',
-                      ],
-                      type: 'text',
-                    });
                     era.printMultiColumns(temp);
                     temp = await era.input();
                     break;
@@ -283,6 +293,7 @@ async function page_chairman_office() {
                 }
               }
             },
+            name: '「抗 议！训练场没有想训的爱马！」',
           },
           {
             async handle() {

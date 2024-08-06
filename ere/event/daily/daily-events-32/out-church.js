@@ -406,6 +406,7 @@ module.exports = async () => {
         ' 就这么下了山回去了',
       ]);
     }
+    return;
   } else if (edu_marks.plan_b) {
     buffer.push(
       async () => {

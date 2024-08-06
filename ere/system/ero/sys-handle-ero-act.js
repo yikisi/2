@@ -9,6 +9,7 @@ const use_ero_item = require('#/system/ero/ero-act-handler/use-ero-item');
 const use_ero_medicine = require('#/system/ero/ero-act-handler/use-ero-medicine');
 const use_item_by_character = require('#/system/ero/ero-act-handler/use-item-by-chara');
 const use_lubricating_fluid = require('#/system/ero/ero-act-handler/use-lubricating-fluid');
+const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const sys_auto_rape = require('#/system/ero/sub/sys-auto-rape');
 const sys_auto_react = require('#/system/ero/sub/sys-auto-react');
 const {
@@ -25,6 +26,7 @@ const {
   update_juel_buff,
 } = require('#/system/ero/sys-prepare-ero');
 const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -45,8 +47,6 @@ const {
 const { stain_enum } = require('#/data/ero/stain-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
-const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 let shown = true;
 

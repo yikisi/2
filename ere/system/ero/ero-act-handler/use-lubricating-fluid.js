@@ -12,7 +12,6 @@ const { part_enum, part_names } = require('#/data/ero/part-const');
 
 /**
  * @param {CharaTalk} chara
- * @returns {Record<{part:number,user:number}>}
  */
 async function use_lubricating_fluid(chara) {
   era.printMultiColumns([

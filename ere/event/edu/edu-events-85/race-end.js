@@ -507,7 +507,7 @@ module.exports = (handlers) => {
     ]);
     era.drawLine({ content: '比赛前' });
     await ruby.used_to_say_and_wait(
-      '即使堵上一切，也要在现在报恩。那也是很好的选择。',
+      '即使赌上一切，也要在现在报恩。那也是很好的选择。',
     );
     await ruby.used_to_say_and_wait('但是，对你来说这样真的是最好的吗？');
     await ruby.used_to_say_and_wait('你献上一切后，那些人就能得到回报吗？');
