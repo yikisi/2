@@ -14,8 +14,8 @@ module.exports = new UmaSkill(
     (args) =>
       args.furlong === 3 &&
       args.order_rate <= 50 &&
-      args.is_used_skill_id === 203061 &&
-      args.is_used_skill_id === 203071,
+      args.is_used_skill_id.indexOf(203061) !== -1 &&
+      args.is_used_skill_id.indexOf(203071) !== -1,
     (args) => args.furlong === 3 && args.order_rate <= 50,
   ],
   [4, 4],
