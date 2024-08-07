@@ -24,6 +24,7 @@ const { ero_action_names, ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { get_random_value } = require('#/utils/value-utils');
 
 const current = new Date().getTime();
 
@@ -345,11 +346,15 @@ handlers[ero_hooks.get_mark] = async (chara_id, _, extra_flag) => {
 };
 
 handlers[ero_hooks.prison] = (chara_id) => {
-  era.print([
-    get_chara_talk(chara_id).get_colored_name(),
-    ' 监禁了 ',
-    get_chara_talk(0).get_colored_name(),
-  ]);
+  if (era.get(`talent:${chara_id}:病娇`) === 1) {
+    era.set(`talent:${chara_id}:病娇`, 2);
+    new LifeEventMarks(chara_id).yandere = get_random_value(
+      2,
+      (era.get('flag:极端行为') * 2 * era.get(`love:${chara_id}`) -
+        era.get(`relation:${chara_id}:0`)) /
+        100,
+    );
+  }
   era.set('flag:当前位置', location_enum.basement);
   era.set('flag:地下室之主', chara_id);
 };

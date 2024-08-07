@@ -220,7 +220,7 @@ function love_uma(chara_id, val, to_be_shown) {
         border >= 50 &&
         new_val === border - 1
       ) {
-        sys_check_hide_relation_and_love(chara_id) ||
+        (sys_check_hide_relation_and_love(chara_id) & 0b1) > 0 ||
           hide ||
           era.print([
             '和 ',

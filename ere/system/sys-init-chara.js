@@ -18,6 +18,7 @@ const { buff_colors } = require('#/data/color-const');
 const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { yes } = require('#/data/event/recruit-flags');
+const YandereList = require('#/data/event/yandere-list');
 const {
   get_breast_cup,
   get_talent_bust_size,
@@ -230,6 +231,10 @@ module.exports = {
           era.add(`relation:${chara_id}:0`, era.get('flag:马娘初始好感') - 75);
         }
 
+        if (era.get(`talent:${chara_id}:病娇`) > 0) {
+          new YandereList().push(chara_id, true);
+        }
+
         if (era.get(`cflag:${chara_id}:种族`)) {
           switch (era.get('flag:马娘身高')) {
             case 0:
@@ -350,6 +355,8 @@ module.exports = {
             era.get(`cflag:${chara_id}:可再次育成`) > 0 && my_src_chara <= 0,
           ),
         );
+      } else {
+        era.set(`talent:${chara_id}:病娇`, 0);
       }
 
       sys_change_hair(chara_id);

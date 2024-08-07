@@ -19,6 +19,7 @@ const { buff_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const YandereList = require('#/data/event/yandere-list');
 
 /** @param {CharaTalk} gold_ship */
 async function love_49(gold_ship) {
@@ -518,6 +519,7 @@ async function golden_ship_attack() {
     ]);
   }
   if (ret[4] !== 3) {
+    new YandereList().push(7);
     era.set('talent:7:病娇', 1);
   }
   await era.waitAnyKey();

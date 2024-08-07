@@ -101,7 +101,9 @@ async function sys_next_week() {
       ) {
         act_list.push({
           chara_id,
-          prison: !era.get('item:透明棉被') || Math.random() < 0.5,
+          prison:
+            (!era.get('item:透明棉被') || Math.random() < 0.5) &&
+            !new LifeEventMarks(chara_id).basement_cd,
         });
       } else if (get_custom_check(chara_id).is_rape_in_sleeping()) {
         act_list.push({ chara_id, prison: false });
@@ -164,6 +166,20 @@ async function sys_next_week() {
     team_dict[chara_id] = 1;
     if (era.get('flag:性技自主学习') && sys_check_awake(chara_id)) {
       auto_update_ero_skills(chara_id);
+    }
+    if (era.get(`talent:${chara_id}:病娇`) === 2) {
+      const life_event_marks = new LifeEventMarks(chara_id);
+      if (era.get(`relation:${chara_id}:0`) > 525) {
+        if (--life_event_marks.yandere === 0) {
+          era.set(`talent:${chara_id}:病娇`, 1);
+          era.print([
+            get_chara_talk(chara_id).get_colored_name(),
+            ' 重新变得温和起来……',
+          ]);
+        }
+      } else {
+        life_event_marks.yandere = Math.min(life_event_marks.yandere + 1, 8);
+      }
     }
   });
 
@@ -572,6 +588,7 @@ async function sys_next_week() {
 
     let pregnant_stage = era.get(`cflag:${chara_id}:妊娠阶段`);
     const life_marks = new LifeEventMarks(chara_id);
+    life_marks.basement_cd && life_marks.basement_cd--;
     if (pregnant_stage >> pregnant_stage_enum.embryo) {
       sys_change_lust(chara_id, lust_border.itch / 40);
       const timer = era.add(

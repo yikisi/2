@@ -15,6 +15,12 @@ class LifeEventMarks extends PersonalEventMarks {
   breast_buff;
   // 临时腰围
   waist_buff;
+  // 地下室计时（7天168小时10080分钟）
+  basement_timer;
+  // 地下室冷却
+  basement_cd;
+  // 病娇二段转化
+  yandere;
 
   /** @param {number} chara_id */
   constructor(chara_id) {

@@ -115,7 +115,7 @@ module.exports = (handlers) => {
         await tachyon.say_and_wait([
           '此时，你忽然发现，在泳装的下方，有着两颗先前没有，或者说没有那么明显的突起',
         ]);
-        await tachyon.say_and_wait([
+        await era.printAndWait([
           '或许是作为速通的作弊按纽吧，鬼使神差的，你按下了圆润的球体上唯一的突起',
         ]);
         era.println();

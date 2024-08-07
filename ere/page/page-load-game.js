@@ -15,6 +15,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const GrandLives = require('#/data/event/grand-lives');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
+const YandereList = require('#/data/event/yandere-list');
 
 /**
  * load game
@@ -86,6 +87,7 @@ module.exports = async () => {
             new CrazyFans().clean();
             new GrandLives().clean();
             new LocCharacters().clean();
+            new YandereList().clean();
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;

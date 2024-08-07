@@ -5,6 +5,8 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
 
 ## Added
 
+* 新增病娇机制
+
 ## Changed
 
 ## Fixed
