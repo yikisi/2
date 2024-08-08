@@ -414,7 +414,7 @@ handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
  * 通用育成事件
  *
  * @author 雞雞
- * @author 黑奴零号（改编）
+ * @author 无名黑奴（改编）
  *
  * @param {number} chara_id
  * @param {HookArg} hook

@@ -451,9 +451,10 @@ async function golden_ship_attack() {
   await era.printAndWait(`${gold_ship.sex}是如此说的。`);
   era.printButton('「杀死与你生死相依的好兄弟……」', 1);
   era.printButton('「杀死愿意为你牺牲的女朋友……」', 2);
-  setTimeout(() => {
-    ret.length < 5 && era.printButton('「哪个都不选……！」', 3);
-  }, 10000);
+  setTimeout(
+    () => ret.length < 5 && era.printButton('「哪个都不选……！」', 3),
+    10000,
+  );
   ret.push(await era.input());
   era.println();
 

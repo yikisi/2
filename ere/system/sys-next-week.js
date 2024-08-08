@@ -52,6 +52,7 @@ const {
 const { part_enum, part_talents } = require('#/data/ero/part-const');
 const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const BasementOwners = require('#/data/event/basement-owners');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const event_hooks = require('#/data/event/event-hooks');
@@ -96,7 +97,7 @@ async function sys_next_week() {
         : in_team_list.filter((chara_id) => chara_id !== temp);
     prepared_list.forEach((chara_id) => {
       if (
-        era.get('flag:地下室之主') === chara_id ||
+        new BasementOwners().get(0) === chara_id ||
         get_custom_check(chara_id).is_prison()
       ) {
         act_list.push({

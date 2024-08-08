@@ -688,7 +688,7 @@ handlers[ero_hooks.shop_end] = () => {};
 /**
  * @author 雞雞
  * @author 幽白書
- * @author 黑奴零号
+ * @author 无名黑奴
  *
  * @param {HookArg} hook
  * @param {{shown:boolean}} extra_flag

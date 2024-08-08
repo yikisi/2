@@ -676,7 +676,8 @@ module.exports = (handlers) => {
         era.println();
         await tachyon.say_and_wait('……哦呀，居然……');
         era.println();
-        await tachyon.say_and_wait(
+        await say_by_passer_by_and_wait(
+          '店主',
           '欢迎光临！……我说这位客人，应该，是学生吧？',
         );
         era.println();

@@ -269,7 +269,6 @@ handlers[event_hooks.out_shopping] = async (chara_id, hook) => {
     era.println();
     if (hook.arg) {
       // 街机厅和抽奖
-      // TODO 随机获得道具
       random_cost_in_action(chara_id, [0, 100], [0, 100]);
       wait_flag =
         (chara_id && sys_like_chara(chara_id, 0, get_random_value(5, 10))) ||

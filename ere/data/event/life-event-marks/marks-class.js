@@ -21,6 +21,14 @@ class LifeEventMarks extends PersonalEventMarks {
   basement_cd;
   // 病娇二段转化
   yandere;
+  // 地下室初始牢固程度
+  basement_enhance;
+  // 地下室牢固程度
+  basement_now;
+  // 地下室警戒度
+  security_level;
+  // 外出中
+  is_out;
 
   /** @param {number} chara_id */
   constructor(chara_id) {

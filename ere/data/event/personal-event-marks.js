@@ -62,6 +62,7 @@ class PersonalEventMarks {
     if (!this.obj[param]) {
       delete this.obj[param];
     }
+    return this.obj[param] || 0;
   }
 }
 

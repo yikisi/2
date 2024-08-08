@@ -34,12 +34,15 @@ const { gacha, get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const BasementAction = require('#/data/event/basement-action');
+const BasementOwners = require('#/data/event/basement-owners');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
+const basement_queue = require('#/event/basement-queue');
 
 let random_event,
   notes_index = 0;
@@ -206,6 +209,22 @@ handlers[location_enum.guangzhou] =
     require('#/page/homepage/foreign');
 handlers[location_enum.office] = require('#/page/homepage/office');
 
+/** @type {Record<string,function:Promise>} */
+const basement_handlers = {};
+
+basement_handlers[location_enum.basement] = async () => {
+  await era.saveData(
+    0,
+    `${get_chara_talk(0).actual_name} 于 ${new Date().toLocaleString('zh-CN', {
+      timeZone: 'Asia/Shanghai',
+    })} 保存的进度 (${era.get('flag:当前年')} 年 ${era.get(
+      'flag:当前月',
+    )} 月 第 ${era.get('flag:当前周')} 周) (自动存档)`,
+  );
+  era.set('flag:当前互动角色', 0);
+  await next_week();
+};
+
 module.exports = async () => {
   const flags = {
     after_select: true,
@@ -222,7 +241,20 @@ module.exports = async () => {
       cur_location = era.set('flag:当前位置', location_enum.office);
     }
 
+    const my_life_marks = new LifeEventMarks(0);
     if (flags.week_start) {
+      if (cur_location === location_enum.basement) {
+        if (my_life_marks.basement_timer > 0) {
+          my_life_marks.basement_timer = 0;
+          cur_location = location_enum.office;
+          // TODO 救援事件
+          new BasementOwners()
+            .for_each((e) => (new LifeEventMarks(e).security_level = 0))
+            .clear();
+        }
+        era.set('flag:当前位置', location_enum.office);
+      }
+      let count = 0;
       print_page_header();
       if (await check_game_over()) {
         return;
@@ -244,6 +276,7 @@ module.exports = async () => {
       ) {
         era.drawLine();
         flag_skip_this_week = (await random_event()) || flag_skip_this_week;
+        count++;
       }
       stop_machine_gun(event_hooks.week_start);
       const force_be = era.get('flag:强制BE');
@@ -275,6 +308,44 @@ module.exports = async () => {
       if (await check_game_over(true)) {
         return;
       }
+      if (cur_location === location_enum.basement) {
+        // TODO 绑架事件
+        my_life_marks.basement_timer = get_random_value(
+          Math.min(23, count + 6) * 60,
+          24 * 60 - 1,
+        );
+        const owner = new BasementOwners().get(0),
+          owner_marks = new LifeEventMarks(owner);
+        if (era.get('flag:当前回合数') % 48 > 0) {
+          basement_queue.add_action(
+            new BasementAction(
+              owner,
+              7 * 60,
+              BasementAction.action_type_enum.outside,
+            ),
+          );
+        }
+        era.set('status:0:沉睡', 1);
+        basement_queue.add_action(
+          new BasementAction(
+            0,
+            my_life_marks.basement_timer,
+            BasementAction.action_type_enum.get_up,
+          ),
+        );
+        my_life_marks.basement_enhance = 1;
+        owner_marks.security_level = Math.max(
+          Math.floor(
+            (era.get(`love:${owner}`) * era.get('flag:极端行为限制') -
+              era.get(`relation:${owner}:0`)) /
+              200,
+          ),
+          0,
+        );
+        my_life_marks.basement_now = my_life_marks.basement_enhance =
+          get_random_value(owner_marks.security_level, 5);
+      }
+      era.set('flag:当前位置', cur_location);
     }
     if (flag_skip_this_week) {
       era.drawLine();
@@ -287,40 +358,43 @@ module.exports = async () => {
     sys_change_status_by_base(0);
     chara_id && sys_change_status_by_base(chara_id);
 
-    await era.clear();
-    print_page_header();
-    if (cur_location === location_enum.basement) {
-      print_curr_chara(era.get('flag:地下室之主'));
-    } else {
+    if (cur_location !== location_enum.basement) {
+      await era.clear();
+      print_page_header();
       print_curr_chara(chara_id);
-    }
-
-    era.drawLine();
-    let hook = -1;
-    if (flags.week_start) {
-      flags.week_start = false;
-      if (chara_id) {
-        hook = event_hooks.good_morning;
-      }
-    } else if (flags.after_select) {
-      flags.after_select = false;
-      if (chara_id) {
-        hook = event_hooks.select;
-      }
-    }
-    if (hook > 0) {
-      await sys_call_daily_event(chara_id, hook);
-    } else {
-      const note_list = [...notes.common];
-      sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach((e) => {
-        if (era.get(`cflag:${e}:育成回合计时`) < 3 * 48 && notes[e]) {
-          note_list.push(...notes[e]);
+      era.drawLine();
+      let hook = -1;
+      if (flags.week_start) {
+        flags.week_start = false;
+        if (chara_id) {
+          hook = event_hooks.good_morning;
         }
-      });
-      const note = note_list[notes_index++ % note_list.length];
-      say_by_passer_by(note.title, note.content);
+      } else if (flags.after_select) {
+        flags.after_select = false;
+        if (chara_id) {
+          hook = event_hooks.select;
+        }
+      }
+      if (hook > 0) {
+        await sys_call_daily_event(chara_id, hook);
+      } else {
+        const note_list = [...notes.common];
+        sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
+          (e) => {
+            if (era.get(`cflag:${e}:育成回合计时`) < 3 * 48 && notes[e]) {
+              note_list.push(...notes[e]);
+            }
+          },
+        );
+        const note = note_list[notes_index++ % note_list.length];
+        say_by_passer_by(note.title, note.content);
+      }
     }
 
-    await handlers[cur_location](chara_id, save_and_next_week, flags);
+    await handlers[cur_location](
+      chara_id,
+      basement_handlers[cur_location] || save_and_next_week,
+      flags,
+    );
   }
 };

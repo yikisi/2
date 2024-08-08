@@ -32,7 +32,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const print_exp_page = require('#/page/page-exp');
+const { print_chara_info } = require('#/page/page-exp');
 
 const { tequip_parts } = require('#/data/ero/item-const');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
@@ -261,9 +261,9 @@ async function sys_handle_ero_act(command, filters, _shown) {
     print_stain_info(cur_lover);
     await era.waitAnyKey();
   } else if (command === 903) {
-    await print_exp_page(0);
+    await print_chara_info(0, undefined, 5);
   } else if (command === 904) {
-    await print_exp_page(cur_lover);
+    await print_chara_info(cur_lover, undefined, 5);
   } else if (command === 999) {
     if (
       sys_check_awake(cur_lover) &&

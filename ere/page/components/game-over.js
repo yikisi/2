@@ -16,30 +16,34 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { buff_colors } = require('#/data/color-const');
 const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const BasementOwners = require('#/data/event/basement-owners');
 const CrazyFans = require('#/data/event/crazy-fans');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
+const basement_saying_arr = [
+  '九尺二间陋室里，红唇依竹共恩情。——高杉晋作',
+  '每一个被束缚的奴隶都可以靠着他自己的手脱掉锁链。——莎士比亚',
+  '我已不再孤单，如今我生命中的挚爱与我如此靠近。——悲惨世界',
+  '自由不是随心所欲，而是不必身不由己。——康德',
+  '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗杰斯',
+];
+
 /** @param {boolean} [again] */
 async function game_over(again) {
-  const game_over = era.get('flag:游戏结束');
+  const game_over = era.get('flag:游戏结束'),
+    basement_owners = new BasementOwners();
   let end_talk = false,
     saying_arr,
     temp;
   if (game_over === 3 && era.get('flag:当前位置') === location_enum.basement) {
     era.drawLine();
     await sys_call_daily_event(
-      era.get('flag:地下室之主'),
+      basement_owners.get(0),
       event_hooks.basement_end,
     );
-    saying_arr = [
-      '九尺二间陋室里，红唇依竹共恩情。——高杉晋作',
-      '每一个被束缚的奴隶都可以靠着他自己的手脱掉锁链。——莎士比亚',
-      '我已不再孤单，如今我生命中的挚爱与我如此靠近。——悲惨世界',
-      '自由不是随心所欲，而是不必身不由己。——康德',
-      '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗杰斯',
-    ];
+    saying_arr = basement_saying_arr;
   } else if (
     game_over >= 2 &&
     era.get('flag:当前马币') < 0 &&
@@ -366,7 +370,13 @@ async function game_over(again) {
         );
       } else {
         era.drawLine();
-        if (era.get('flag:变态行为')) {
+        if (era.get('flag:当前位置') === location_enum.basement) {
+          await sys_call_daily_event(
+            basement_owners.get(0),
+            event_hooks.basement_end,
+          );
+          saying_arr = basement_saying_arr;
+        } else if (era.get('flag:变态行为')) {
           for (const e of [
             `${CharaTalk.me.name} 忽视了成年人的社会责任，唆使负责马娘进行变态行为的事情败露，哪怕是特雷森也无法为 ${CharaTalk.me.name} 掩盖过去。`,
             `最终校方勒令 ${CharaTalk.me.name} 与负责马娘解除契约，进行移籍。`,

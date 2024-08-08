@@ -1,17 +1,317 @@
 const era = require('#/era-electron');
 
-const { location_enum } = require('#/data/locations');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-// /**
-//  * @param {number} chara_id
-//  * @param {function(number,number,number):Promise} save_and_next_week
-//  * @param {{after_select:boolean,homepage:boolean,week_start:boolean}} flags
-//  */
-module.exports = async function () {
-  era.drawLine();
-  await era.printAndWait('TEST');
-  await era.printAndWait('在地下室了……等待主人的雷普吧');
-  await era.printAndWait('JUMP TO OFFICE');
-  era.set('flag:地下室之主', 0);
-  era.set('flag:当前位置', location_enum.office);
+const print_cur_chara_info = require('#/page/components/cur-chara-info');
+const page_header = require('#/page/components/page-header');
+const { print_chara_info } = require('#/page/page-exp');
+const print_load_page = require('#/page/page-load-game');
+const print_save_page = require('#/page/page-save-game');
+
+const basement_queue = require('#/event/basement-queue');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
+
+const BasementAction = require('#/data/event/basement-action');
+const BasementOwners = require('#/data/event/basement-owners');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+
+const minutes_in_a_day = 24 * 60;
+
+const basement_desc = [
+  '并没有像样的阻碍',
+  '只要略施小计就可以逃脱',
+  '不是那么容易逃脱',
+  '似乎有着难办的机关',
+  '被机关和铁门保卫着',
+  '感觉只能把牢底坐穿了',
+];
+
+const security_desc = [
+  '处于一时冲动的后悔',
+  '有着不可低估的决心',
+  '处于顾此失彼的脆弱',
+  '有着万无一失的心防',
+];
+
+function check_vacation(timer) {
+  const date = Math.floor(timer / minutes_in_a_day);
+  let ret = date >= 5;
+  switch (era.get('flag:当前回合数') % 48) {
+    case 1:
+      ret ||= date === 0;
+      break;
+    case 0:
+      ret ||= date === 2 || date === 3;
+  }
+  return ret;
+}
+
+function get_clock(timer) {
+  return `第 ${Math.floor(
+    timer / minutes_in_a_day + 1,
+  ).toString()} 天 ${Math.floor(
+    (timer % minutes_in_a_day) / 60,
+  ).toString()} 时 ${(timer % 60).toString()} 分`;
+}
+
+/**
+ * @param {[]} info_list
+ * @param info
+ */
+function handle_push_info(info_list, ...info) {
+  if (info_list.length > 0) {
+    info_list.push({ isBr: true });
+  }
+  info_list.push(...info);
+}
+
+/** @param {LifeEventMarks} my_life_marks */
+function handle_time_change(my_life_marks) {
+  new BasementOwners().get().forEach((e) => {
+    if (new LifeEventMarks(e).is_out === 1) {
+      new LifeEventMarks(e).is_out = 0;
+    }
+  });
+  my_life_marks.basement_timer = basement_queue.get_action().map((e) => {
+    switch (e.type) {
+      case BasementAction.action_type_enum.action_end:
+        era.logger.info(`TEST：时间推进到 ${get_clock(e.timer)}`);
+        break;
+      case BasementAction.action_type_enum.get_up:
+        era.logger.info(`TEST：${get_clock(e.timer)} 角色 ${e.chara_id} 醒来`);
+        era.set(`status:${e.chara_id}:沉睡`, 0);
+        break;
+      case BasementAction.action_type_enum.back_basement:
+        era.logger.info(
+          `TEST：${get_clock(e.timer)} 角色 ${e.chara_id} 回到地下室`,
+        );
+        new LifeEventMarks(e.chara_id).is_out = 1;
+        if (
+          !check_vacation(e.timer) &&
+          !check_vacation(e.timer + minutes_in_a_day)
+        ) {
+          basement_queue.add_action(
+            new BasementAction(
+              e.chara_id,
+              e.timer + 14 * 60,
+              BasementAction.action_type_enum.outside,
+            ),
+          );
+        }
+        break;
+      case BasementAction.action_type_enum.outside:
+        era.logger.info(`TEST：${get_clock(e.timer)} 角色 ${e.chara_id} 离开`);
+        new LifeEventMarks(e.chara_id).is_out = 2;
+        if (!check_vacation(e.timer)) {
+          basement_queue.add_action(
+            new BasementAction(
+              e.chara_id,
+              e.timer + 10 * 60,
+              BasementAction.action_type_enum.back_basement,
+            ),
+          );
+        }
+    }
+    return e.timer;
+  })[0];
+}
+
+/**
+ * @param _
+ * @param {function():Promise} save_and_next_week
+ * @param {{after_select:boolean,homepage:boolean,week_start:boolean}} flags
+ */
+module.exports = async (_, save_and_next_week, flags) => {
+  const my_life_marks = new LifeEventMarks(0),
+    basement_info = [];
+  if (my_life_marks.basement_timer >= 7 * minutes_in_a_day) {
+    return save_and_next_week();
+  }
+  if (flags.week_start) {
+    flags.week_start = false;
+    while (era.get('status:0:沉睡')) {
+      handle_time_change(my_life_marks);
+    }
+  }
+  await era.clear();
+  page_header();
+  const chara_list = [
+    0,
+    ...new BasementOwners()
+      .get()
+      .filter((e) => new LifeEventMarks(e).is_out < 2),
+  ];
+  if (chara_list.length > 1) {
+    print_cur_chara_info(chara_list[1], undefined, chara_list[2]);
+  }
+  let strike = false,
+    is_awake = true;
+  if (chara_list.length > 1) {
+    if (
+      chara_list.length === 2 &&
+      new LifeEventMarks(chara_list[1]).is_out === 1
+    ) {
+      strike = true;
+      handle_push_info(
+        basement_info,
+        get_chara_talk(chara_list[1]).get_colored_name(),
+        ' 刚刚回到这里，也许是一个偷袭的好机会……',
+      );
+    } else {
+      is_awake = chara_list.slice(1).reduce((p, chara_id) => {
+        if (sys_check_awake(chara_id)) {
+          handle_push_info(
+            basement_info,
+            get_chara_talk(chara_id).get_colored_name(),
+            ' 看上去',
+            security_desc[
+              (era.get(`love:${chara_id}`) >= 85) * 2 +
+                (new LifeEventMarks(chara_id).security_level >= 3)
+            ],
+          );
+          return true;
+        }
+        handle_push_info(
+          basement_info,
+          get_chara_talk(chara_id).get_colored_name(),
+          ' 静静地沉睡着……',
+        );
+        return p;
+      }, false);
+    }
+    handle_push_info(
+      basement_info,
+      '共处在昏暗的房间内……',
+      basement_desc[my_life_marks.basement_now],
+    );
+  } else {
+    handle_push_info(
+      basement_info,
+      '昏暗、空无一人的房间……',
+      my_life_marks.basement_now > 1 ? '但是' : '',
+      basement_desc[my_life_marks.basement_now],
+      '……',
+    );
+  }
+  era.printInColRows(
+    [
+      { type: 'divider' },
+      {
+        content: basement_info,
+        type: 'text',
+      },
+    ],
+    chara_list.length > 1 && is_awake
+      ? [
+          { type: 'divider' },
+          {
+            accelerator: 100,
+            config: { width: 6 },
+            content: '虚与委蛇',
+            type: 'button',
+          },
+          {
+            accelerator: 101,
+            config: { width: 6 },
+            content: '邀请上床',
+            type: 'button',
+          },
+          {
+            accelerator: 102,
+            config: { width: 6 },
+            content: '请求释放',
+            type: 'button',
+          },
+          {
+            accelerator: 103,
+            config: { width: 6 },
+            content: strike ? '背面偷袭' : '正面反抗',
+            type: 'button',
+          },
+          {
+            accelerator: 999,
+            config: { width: 6 },
+            content: '任其施为 (放弃)',
+            type: 'button',
+          },
+        ]
+      : [
+          { type: 'divider' },
+          {
+            accelerator: 100,
+            config: { width: 6 },
+            content: '尝试脱困',
+            type: 'button',
+          },
+          {
+            accelerator: 101,
+            config: { width: 6 },
+            content: '休息',
+            type: 'button',
+          },
+          {
+            accelerator: 999,
+            config: { width: 6 },
+            content: '听天由命 (放弃)',
+            type: 'button',
+          },
+        ],
+    [
+      {
+        accelerator: 400,
+        config: { width: 6 },
+        content: '个人情报',
+        type: 'button',
+      },
+      chara_list.length > 1
+        ? {
+            accelerator: 401,
+            config: { width: 6 },
+            content: '对方情报',
+            type: 'button',
+          }
+        : undefined,
+      {
+        accelerator: 900,
+        config: { width: 6 },
+        content: '保存进度',
+        type: 'button',
+      },
+      {
+        accelerator: 901,
+        config: { width: 6 },
+        content: '加载存档',
+        type: 'button',
+      },
+    ].filter((e) => e),
+  );
+  const ret = await era.input();
+  switch (ret) {
+    case 400:
+      await print_chara_info(0, chara_list);
+      break;
+    case 401:
+      await print_chara_info(chara_list[1], chara_list);
+      break;
+    case 900:
+      await print_save_page();
+      break;
+    case 901:
+      await print_load_page();
+      break;
+    case 990:
+      era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
+      break;
+    default:
+      basement_queue.add_action(
+        new BasementAction(
+          0,
+          my_life_marks.basement_timer + get_random_value(30, 90),
+          BasementAction.action_type_enum.action_end,
+        ),
+      );
+      handle_time_change(my_life_marks);
+  }
 };

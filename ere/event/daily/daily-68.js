@@ -897,7 +897,7 @@ handlers[
  *
  * @author 小黑（原作）
  * @author 黑奴一号（改编）
- * @author 黑奴零号（改编）
+ * @author 无名黑奴（改编）
  */
 module.exports = {
   /**

@@ -704,7 +704,7 @@ handlers[89] = async (tachyon, me, callname) => {
  * 速子的爱慕事件，id=32
  *
  * @author 幽白書
- * @author 黑奴一号 黑奴零号（修订）
+ * @author 黑奴一号 无名黑奴（修订）
  *
  * @param _
  * @param __

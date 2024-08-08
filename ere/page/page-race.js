@@ -44,8 +44,8 @@ const {
 const { attr_background_colors } = require('#/data/const.json');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const AfterRaceParams = require('#/data/event/after-race-params');
 const event_hooks = require('#/data/event/event-hooks');
+const AfterRaceParams = require('#/data/event/extra-flag/after-race-params');
 const RaceEndParams = require('#/data/event/extra-flag/race-end-params');
 const RaceStartParams = require('#/data/event/extra-flag/race-start-params');
 const GrandLives = require('#/data/event/grand-lives');
@@ -396,7 +396,7 @@ async function race_page(race) {
       time_cost += 100;
     }
   }
-  await check_race_events(info, team_list);
+  await check_race_events(race, info, team_list);
   era.drawLine();
   const best_rank = Math.min(...team_list.map((e) => e.rank.curr)),
     mvp_id = team_list.find((e) => e.rank.curr === best_rank).index_chara,
@@ -595,17 +595,6 @@ async function race_page(race) {
     }
   }
   wait_flag && (await era.waitAnyKey());
-  if (best_rank === 1) {
-    if (race === race_enum.prix_lat) {
-      era.get('cflag:204:随机招募') <= 0 && era.add('cflag:204:随机招募', -1);
-    }
-    if (race === race_enum.prix_lat || race === race_enum.prix_dia) {
-      [205, 206].forEach(
-        (e) =>
-          !era.get(`cflag:${e}:随机招募`) && era.add(`cflag:${e}:随机招募`, -1),
-      );
-    }
-  }
   era.drawLine();
   await era.printAndWait('回去了……');
   era.println();
