@@ -10,3 +10,7 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
 ## Changed
 
 ## Fixed
+
+* 修复了爱慕地文中表白事件演出不正确的问题
+* 修复了爱丽速子的求婚事件无法再次触发的问题
+* 修复了孩子适应性突变异常的问题

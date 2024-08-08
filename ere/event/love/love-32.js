@@ -696,7 +696,7 @@ handlers[89] = async (tachyon, me, callname) => {
       me.get_colored_name(),
       ' 摇了摇头，将内心的奇怪想法飘散，毫无犹豫的踏出了门外',
     ]);
-    era.set('cflag:32:爱慕暂拒', 1);
+    era.set('cflag:32:爱慕暂拒', 89);
   }
 };
 

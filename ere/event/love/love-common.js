@@ -109,12 +109,12 @@ module.exports = async (chara_id, hook, extra_flag, event_object) => {
       }
     } else if (hook === event_hooks.back_school) {
       if (love === 74) {
-        await print_event_name('冲动', chara);
         const cur_chara_id = era.get('flag:当前互动角色');
         if (cur_chara_id && cur_chara_id !== chara_id) {
           add_event(event_hooks.back_school, event_object);
           return;
         }
+        await print_event_name('冲动', chara);
         if (cur_chara_id) {
           await era.printAndWait([
             '回到训练室时，',

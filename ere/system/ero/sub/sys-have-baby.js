@@ -186,9 +186,10 @@ async function sys_have_baby(mother_id) {
     );
   }
 
-  let random_val = Math.random();
+  let random_val;
   adaptability_names.forEach((e) => {
     let val = era.get(`cflag:${child_id}:${e}适性`);
+    random_val = Math.random();
     if (random_val < 0.1) {
       val += random_val < 0.05 ? 1 : -1;
       if (val > 7) {
