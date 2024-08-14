@@ -106,13 +106,13 @@ module.exports = (handlers) => {
           ' 不由得陷入紧张，是自己的技术不够好吗？',
         ]);
         era.println();
-        await tachyon.say_and_wait('不管怎么努力，都还是会被说更用力一些');
-        await tachyon.say_and_wait([
+        await era.printAndWait('不管怎么努力，都还是会被说更用力一些');
+        await era.printAndWait([
           '说到底本来想用人类的力道去满足',
           tachyon.get_uma_sex_title(),
           '就是难以做到的事吧……',
         ]);
-        await tachyon.say_and_wait([
+        await era.printAndWait([
           '此时，你忽然发现，在泳装的下方，有着两颗先前没有，或者说没有那么明显的突起',
         ]);
         await era.printAndWait([
