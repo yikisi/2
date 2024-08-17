@@ -24,9 +24,7 @@ module.exports = async (hook, extra_flag) => {
     era.printButton(`「就这样让后辈们看到丸善斯基帅气的一面吧！」`, 1);
     await era.input();
     await chara_talk.say_and_wait(
-      `嗯嗯,${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }也要好好看着丸善斯基帅气的样子哦。`,
+      `嗯嗯, ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 也要好好看着丸善斯基帅气的样子哦。`,
     );
     await chara_talk.say_and_wait(
       `而且，不仅有在背后一直支持着我的后辈们，还能感受到疾驰过程中的突破极限的风！`,
@@ -47,7 +45,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`丸善斯基心情不错的在准备室里检查着决胜服。`);
     await me.say_and_wait(`丸善斯基，准备的怎么样了？`);
     await chara_talk.say_and_wait(
-      `哎呀，是${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}啊。`,
+      `哎呀，是 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 啊。`,
     );
     await chara_talk.say_and_wait(`正如你所见，现在是马力全开的状态。`);
     era.printButton(`「接下来也要好好享受比赛哦！」`, 1);
@@ -107,7 +105,7 @@ module.exports = async (hook, extra_flag) => {
       `说到底，没有人能战胜那种怪物。`,
     );
     await chara_talk.say_and_wait(
-      `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'},我已经准备好了`,
+      ` ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} ,我已经准备好了`,
     );
     await era.printAndWait(`不合时宜的声音打断了你的回忆。`);
     await me.say_and_wait(`嗯，这次也要好好享受比赛哦。`);
@@ -356,7 +354,7 @@ module.exports = async (hook, extra_flag) => {
     );
     await chara_talk.say_and_wait(`所以我现在也燃烧起来了呢。`);
     await chara_talk.say_and_wait(
-      `那么惯例的，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}。`,
+      `那么惯例的， ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 。`,
     );
     await era.printAndWait(
       `轻搂着${chara_talk.name}纤弱的腰肢，你们沉浸在幸福的时刻之中`,
@@ -475,7 +473,7 @@ module.exports = async (hook, extra_flag) => {
     era.printButton(`「${chara_talk.name}加油」`, 1);
     await era.input();
     await chara_talk.say_and_wait(
-      `呵呵,谢谢${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}了`,
+      `呵呵,谢谢 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 了`,
     );
     await chara_talk.say_and_wait(
       `不要被${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}的背影迷上了哟~`,

@@ -246,6 +246,8 @@ module.exports = async (hook, extra_flag) => {
     era.printButton(`差不多该出发了，飞鹰子。`, 1);
     await era.input();
     await falcon.say_and_wait(`……出发吧，为了追寻那份答案。`);
-    await era.printAndWait(`${falcon.name}走向了赛场之中。`);
+    await era.printAndWait(
+      `被混杂着沙粒的风吹得几乎睁不开眼睛的你，恍惚间将走向赛场的${falcon.name}与初次见面时的少女重合在了一起。`,
+    );
   }
 };

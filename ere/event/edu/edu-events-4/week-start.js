@@ -1175,17 +1175,24 @@ module.exports = async function (hook, _, event_object) {
       get_attr_and_print_in_event(4, [0, 20, 0, 0, 0], undefined) || wait_flag;
   } else if (edu_weeks === 47 + 6) {
     await print_event_name('情人节', chara_talk);
-    await era.printAndWait(`明明空气中散布着巧克力的香味`);
-    await era.printAndWait(`但是一个巧克力都没收到。`);
-    await era.printAndWait(`没人气也该有个限度啊。`);
     await era.printAndWait(
-      `因为受不了学院里甜的发腻的氛围所以你干脆出来到处走走。`,
+      `从居住的训练员公寓来到特雷森时，发现今天的空气比以往更加甜蜜。`,
+    );
+    await era.printAndWait(
+      `看着特雷森的学生们一大早不像以往一副死气沉沉的样子，两两结队兴奋的讨论着被送礼物之人的表情时。`,
+    );
+    await era.printAndWait(`才意识到情人节又到了。`);
+    await era.printAndWait(
+      `虽然思考着如果有马娘送巧克力过来应该怎么应对，不过走到训练室门口却没有任何前来打招呼的人。`,
     );
     await me.say_and_wait(
       `现充啊全部爆炸吧，让FFF团的圣火把你们都烧尽。`,
       true,
     );
-    await era.printAndWait(`胡思乱想的时候不小心撞到了人。`);
+    await era.printAndWait(
+      `一边咒骂着，一边却像是逃避着空气中拉丝的甜味一样漫无目的的奔跑着。`,
+    );
+    await era.printAndWait(`然后，结结实实的撞到了某人的身上。`);
     era.printButton(`「抱歉」`, 1);
     await era.input();
     await era.printAndWait(`虽然只是轻微的碰撞，不过这股气味意外的很熟悉。`);
@@ -2192,20 +2199,28 @@ module.exports = async function (hook, _, event_object) {
         }们的这个名叫爱的东西！`,
       );
       await me.say_and_wait(
-        `所以，我不会阻止${chara_talk.name}践行自己的道路，但不论如何，作为你的训练员，我都要把你从神座上拽下来（只有竭力避免将荣耀归于自身才能妥善处理这份氢氟酸）！`,
+        `所以，我不会阻止${chara_talk.name}践行自己的道路。`,
       );
       await era.printAndWait(
         `这是你第一次直面领域，但心中有种难以形容的温暖与激情让你凝视着${
           chara_talk.sex_code - 1 ? '她' : '他'
         }的双眼。`,
       );
+      await me.say_and_wait(`内心的悲伤、对于未来的迷茫，可以让我分担一点吗？`);
+      await me.say_and_wait(
+        `一个人在伸手不见五指的黑暗之中前进，如果有一盏明灯照亮前方的道路就好了。`,
+      );
+      await me.say_and_wait(
+        `请交给我吧，虽然作为训练员只是马马虎虎，但是作为一盏灯我有信心做好。`,
+      );
+      await me.say_and_wait(`我会一步步，一点点，为他人而死。`);
       await era.printAndWait(
         `然后，你看着${
           chara_talk.sex_code - 1 ? '她' : '他'
         }的气势慢慢的消散，越来越小。`,
       );
       await era.printAndWait(
-        `最后，${chara_talk.name}叹了口气，然后露出了欣慰的表情。`,
+        `最后，${chara_talk.name}叹了口气，然后露出了悲伤的表情。`,
       );
       event_marks.wind++;
       wait_flag =

@@ -1240,7 +1240,16 @@ handlers[event_hooks.crazy_fan_end] = async function () {
     );
     await me.say_and_wait(`差不多该和丸善斯基交代一切了。`, true);
     await era.printAndWait(`你离开了训练室，这个曾经挥洒泪水与汗水的地方。`);
-    await era.printAndWait(`然后重重的关上了门。`);
+    await era.printAndWait(`然后重重的关上了门。\n\n\n\n\n\n`);
+    await era.printAndWait(`——黏在办公桌上的一便利贴`);
+    await era.printAndWait(`与担当马娘丸善斯基于天台见面。`);
+    await era.printAndWait(`......`);
+    await era.printAndWait(`出道战结束后与丸善斯基在预订餐厅庆祝。`);
+    await era.printAndWait(`......`);
+    await era.printAndWait(
+      `等到皋月赏结束后，向丸善斯基学习开车以及做饭的技巧（注：丸善斯基做饭非常好吃！）。`,
+    );
+    await era.printAndWait(`......`);
     await print_event_name('BAD END:木旺土溃', chara_talk);
     await era.printAndWait(`不久之后，你和丸善斯基解除了契约关系。`);
     await era.printAndWait(
