@@ -1205,10 +1205,10 @@ handlers[event_hooks.crazy_fan_end] = async function () {
     await chara_talk.say_and_wait(`${me.actual_name}，我先回去了，明天见！`);
     await era.printAndWait(`丸善斯基离开了训练室。`);
     await era.printAndWait(
-      `风和日丽，一个与平常没有任何不同的休息日，甚至因为眼光充足，生长旺盛的枝条几乎冲破玻璃，伸进训练室之中。`,
+      `天色昏暗，与昨天并无不同的工作日，黄昏与夜晚的交界处所呈现的蓝色光线照射进了训练室中。`,
     );
+    await era.printAndWait(`你呆呆的坐在训练室那张熟悉的座位之上。`);
     await era.printAndWait(`不是为了追加训练，也不是打算制定计划。`);
-    await era.printAndWait(`你只是呆呆的坐在训练室那张熟悉的座位之上。`);
     await me.say_and_wait(`也许我应该就此退出更好一点。`);
     await era.printAndWait(
       `不是因为丸善斯基能力不足。正相反，她出色的完成了每一项计划，甚至反过来根据自己的实际经验反过来对你进行指点。`,
@@ -1250,8 +1250,9 @@ handlers[event_hooks.crazy_fan_end] = async function () {
       `等到皋月赏结束后，向丸善斯基学习开车以及做饭的技巧（注：丸善斯基做饭非常好吃！）。`,
     );
     await era.printAndWait(`......`);
+    await era.printAndWait(`感谢一直以来的陪伴，是我承受不住压力，对不起。`);
     await print_event_name('BAD END:木旺土溃', chara_talk);
-    await era.printAndWait(`不久之后，你和丸善斯基解除了契约关系。`);
+    await era.printAndWait(`不久后，你单方面向理事长提出了辞职申请。`);
     await era.printAndWait(
       `从此，那片失去了营养的泥土再也没有新的嫩芽探出头。`,
     );

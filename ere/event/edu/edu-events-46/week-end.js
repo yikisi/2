@@ -20,6 +20,7 @@ module.exports = async function () {
   let wait_flag = false;
   if (event_marks.beginning === 1) {
     event_marks.beginning++;
+    // 此时，飞鹰子依然抱着试一试的心态，希望能登上有马纪念
     await print_event_name(`请叫我飞鹰子⭐`, falcon);
     await era.printAndWait(`训练室`);
     await era.printAndWait(
@@ -28,30 +29,48 @@ module.exports = async function () {
     await me.say_and_wait(`希望成为偶像吗？`, true);
     await era.printAndWait(`${falcon.name}希望能成为泥地的顶级偶像`);
     await era.printAndWait(`但能登上最大舞台的中央则需要无数的努力。`);
-    await me.say_and_wait(`而且`, true);
+    await me.say_and_wait(`如果只是这样的话还有些许希望`, true);
     await era.printAndWait(
-      `有马纪念——年终最大的舞台，注定与泥地${falcon.get_uma_sex_title()}无缘。`,
-    );
-    await falcon.say_and_wait(
-      `锵锵锵~这里是泥地的${falcon.get_uma_sex_title()}偶像，飞鹰子呦⭐`,
-    );
-    await era.printAndWait(`穿着特雷森校服的担当从门口蹦跳着跑了进来。`);
-    await me.say_and_wait(`${falcon.name}...是${falcon.name}吗？`);
-    await falcon.say_and_wait(
-      `欸？训练员${me.get_adult_sex_title()}要叫我飞鹰子，是飞鹰子哦⭐`,
+      `日本德比，日本杯还有有马纪念，这些万众瞩目的赛事无一例外全是草地。`,
     );
     await era.printAndWait(
-      `像是为了强调作为偶像身份的${falcon.name}，从腰间取出了麦克风不满地盯着${me.actual_name}嘟起了嘴。`,
+      `对于志向泥地的赛马娘来说，最好的可能也就是在冠军杯和东京大赏上登场了吧。`,
     );
-    era.printButton(`比想象之中还要可爱`, 1);
+    await me.say_and_wait(`这两场赛事加起来离有马纪念还差一半。`, true);
+    await falcon.say_and_wait(`训练员先生早上好！`);
+    await era.printAndWait(`穿着特雷森校服的担当推开训练室的大门走了进来。`);
+    await me.say_and_wait(`啊，早上好${falcon.name}。`);
+    await era.printAndWait(`暂且将阴霾放到一边，你看向了飞鹰子。`);
+    await falcon.say_and_wait(
+      `欸？训练员${me.get_adult_sex_title()}要叫我飞鹰子，是飞鹰子，早上好哦⭐`,
+    );
+    await era.printAndWait(
+      `原以为会面带笑容进行回复的${falcon.name}，现在稍稍大声的纠正了你的发言。`,
+    );
+    await era.printAndWait(
+      `像这样全然不顾周围的目光，努力凸显自己与众不同之处。`,
+    );
+    await era.printAndWait(`所谓的青春期吗？`);
+    await era.printAndWait(
+      `年轻人希望快点长大证明着自己的成熟，作为成年人的自己却希望回到那个无忧无虑的快乐庇护所。`,
+    );
+    await era.printAndWait(
+      `过去的日子里与训练员学校的损友们吵闹着度过的每一天，却随着毕业季的到来而天各一方。`,
+    );
+    await era.printAndWait(
+      `互相打趣着下次见面时一定会让对方跪下叫爸爸。然而像学生时代聚集在一起对于成年人来说有多难彼此之间却早已心知肚明，心情微妙的有些伤感了。`,
+    );
+    era.printButton(`青春真好啊。`, 1);
     await era.input();
+    await era.printAndWait(`真心话。`);
+    await falcon.say_and_wait(`这个时候应该夸飞鹰子是偶像才对吧？`);
     await era.printAndWait(
-      `像早起时照在脸上的第一缕阳光，心情也不知何时变得愉悦起来了。`,
+      `像是为了强调作为偶像身份的${falcon.name}，从裙子口袋中掏出了麦克风的${falcon.name}在你面前有意无意的晃了晃。`,
     );
-    await era.printAndWait(
-      `乐观的偶像，期待闪耀的偶像，更重要的是，${falcon.sex}能坚持着自己的理想有多久呢？`,
-    );
+    era.printButton(`飞鹰子希望成为偶像吗？`, 1);
+    await era.input();
     await falcon.say_and_wait(`飞鹰子是可爱系偶像哦♪`);
+    await era.printAndWait(`在这种微妙时刻不会看气氛的醒目飞鹰。`);
     await era.printAndWait(
       `重新调整好因蹦跳而略微向右侧倾斜的校服之后，作为担当的${falcon.name}重新看向了作为训练员的${me.actual_name}。`,
     );

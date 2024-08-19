@@ -9,7 +9,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
-
+const { say_by_passer_by } = require('#/utils/chara-talk-factory');
 /**
  * 醒目飞鹰 - -招募
  *
@@ -28,49 +28,62 @@ module.exports = {
       me = get_chara_talk(0);
     switch (stage_id) {
       case event_hooks.recruit:
-        await era.printAndWait(
-          `在某个令人放松的黄昏时，正打算离开校门的${me.name}突然想起自己遗漏了某件物品在训练室之中。`,
+        await era.printAndWait(`是否跳过招募剧情？`);
+        era.printButton(`是`, 1);
+        era.printButton(`否`, 2);
+        // eslint-disable-next-line no-case-declarations
+        const ret1 = await era.input();
+        if (ret1 === 1) {
+          await era.printAndWait(
+            `黄昏时刻正打算下班的${me.name}突然想起自己遗漏了某件物品在训练室之中。`,
+          );
+          await era.printAndWait(`但在回训练室的路上被歌声所吸引。`);
+          await era.printAndWait(
+            `${me.name}循着声音的轨迹来到了一间空置的训练室。`,
+          );
+          await era.printAndWait(
+            `${chara_talk.get_uma_sex_title()}在训练室中练习着准备在出道战时歌唱的歌曲。`,
+          );
+          await era.printAndWait(
+            `似乎是全身心投入进了音乐的世界，对${me.name}的到来没有一丝注意。`,
+          );
+          await era.printAndWait(`被歌曲所感动的${me.name}拍手作为鼓励。`);
+          await era.printAndWait(
+            `被发现的${chara_talk.get_uma_sex_title()}因为过于羞耻而逃跑。`,
+          );
+          await era.printAndWait(
+            `拾起散落一地的纸张时发现了${chara_talk.get_uma_sex_title()}的属名。`,
+          );
+          await era.printAndWait(
+            `第二天发现徘徊于训练室门口的${chara_talk.get_uma_sex_title()}。`,
+          );
+          await era.printAndWait(
+            `在让对方坐下喝下茶水后，${me.name}送还了歌词。`,
+          );
+          await era.printAndWait(`像逃跑一样的少女吸引了${me.name}的注意。`);
+          await era.printAndWait(`于训练场见到了最后一名的少女。`);
+          await era.printAndWait(
+            `对于更适合泥地而并非草地的${chara_talk.sex}却展示了出乎意料的强硬。`,
+          );
+          await era.printAndWait(
+            `在同为室友且为好友的${chara_talk.get_uma_sex_title()}的关心下。`,
+          );
+          await era.printAndWait(`两人签订了契约。`);
+          await era.printAndWait(`成功招募${chara_talk.name}了！`);
+          new EventMarks(0).sub(event_hooks.school_rooftop);
+          new FalconEduMarks().after_recruit++;
+          era.set('cflag:46:招募状态', recruit_flags.yes);
+          new FalconEduMarks().beginning++;
+          add_event(event_hooks.week_end, new EventObject(46, cb_enum.edu));
+          era.set('flag:物色对象', 0);
+          return true;
+        }
+        await say_by_passer_by(
+          `马娘`,
+          `能得到训练员的邀请非常感谢，不过呢，我觉得自己的实力恐怕还是差了一点。`,
         );
         await era.printAndWait(
-          `在团队实习的时候就一直丢三落四的习惯到现在作为普通训练员独立出来还是没有改掉。`,
-        );
-        await era.printAndWait(`在回训练室的路上被美妙的歌声吸引。`);
-        await era.printAndWait(`循着声音的轨迹来到了被人遗忘的空训练室中。`);
-        await era.printAndWait(
-          `小小的${chara_talk.get_uma_sex_title()}在训练室中练习着歌曲。`,
-        );
-        await era.printAndWait(
-          `似乎是全身心投入进了音乐的世界，对${me.name}的到来没有一丝注意。`,
-        );
-        await era.printAndWait(
-          `一曲结束，被清澈歌曲感动的${me.name}拍手作为赞叹。`,
-        );
-        await era.printAndWait(
-          `被发现的${chara_talk.get_uma_sex_title()}后退了一步像是害怕的样子。`,
-        );
-        await era.printAndWait(`想上前安抚时却被重重推开后逃走了。`);
-        await era.printAndWait(`拾起散落一地的纸张时发现了飞鹰子的名字。`);
-        await era.printAndWait(`第二天回到训练室时发现了少女的身影。`);
-        await era.printAndWait(`似乎是想要回之前自己写下的歌词。`);
-        await era.printAndWait(`在让对方坐下喝下茶水后，送还了歌词。`);
-        await era.printAndWait(`像逃跑一样的少女吸引了${me.name}的注意。`);
-        await era.printAndWait(`于训练场看到了对方执着于草地的身影。`);
-        await era.printAndWait(
-          `交谈几句后感受到了${chara_talk.sex}外表之下燃烧的火焰。`,
-        );
-        await era.printAndWait(
-          `第二天训练室中收到了${chara_talk.sex}的亲笔信。`,
-        );
-        await era.printAndWait(`在之前的空教室中两人谈论了理想与未来。`);
-        await era.printAndWait(`最后签订了契约。`);
-
-        era.printButton(
-          `梦中的，合适的${chara_talk.get_uma_sex_title()}在何处呢？`,
-          1,
-        );
-        await era.input();
-        await era.printAndWait(
-          `看着第三个婉拒契约的${chara_talk.get_uma_sex_title()}，${
+          `看着婉拒契约的${chara_talk.get_uma_sex_title()}，${
             me.actual_name
           }还是忍不住叹了一口气`,
         );

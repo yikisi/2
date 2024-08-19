@@ -221,7 +221,7 @@ handlers[event_hooks.train_fail] =
     } else {
       await print_event_name('保重身体！', chara_talk);
       await chara_talk.say_and_wait(`......训练员${me.get_adult_sex_title()}`);
-      await era.printAndWait(`飞鹰子在训练的时候受到了很严重的伤`);
+      await era.printAndWait(`飞鹰子`);
       await era.printAndWait(
         `校医「你是${chara_talk.sex} 的训练员吧，为什么${chara_talk.sex} 这么疲惫还要冒这份风险？」`,
       );
