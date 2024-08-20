@@ -1,6 +1,10 @@
+const { logger } = require('#/era-electron');
+
+const { ability_usage_enum } = require('#/data/race/model/uma-skill');
 const { frame_rate } = require('#/data/race/race-sim-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names } = require('#/data/train-const');
+const { get_random_value } = require('#/utils/value-utils');
 
 const fron_cols = 4,
   progress_width = 24 - 10 - 2 * fron_cols - 1,
@@ -29,7 +33,25 @@ function get_event_record(message, timer_record, timer) {
   };
 }
 
+/**
+ * @param {PseudoUma} uma
+ * @param {RaceInfo} race_info
+ */
+function reset_loc_mind_other_diff(uma, race_info) {
+  uma.base.loc_mind_other_diff_random = [
+    get_random_value(
+      race_info.loc_mind_diff.other_lower[uma.base.loc_mind_style - 1],
+      race_info.loc_mind_diff.other_upper[uma.base.loc_mind_style - 1],
+      true,
+    ),
+    (race_info.loc_mind_diff.other_lower[uma.base.loc_mind_style - 1] +
+      race_info.loc_mind_diff.other_upper[uma.base.loc_mind_style - 1]) /
+      2,
+  ];
+}
+
 module.exports = {
+  reset_loc_mind_other_diff,
   /**
    * @param {number} timer
    * @returns {number}
@@ -113,13 +135,6 @@ module.exports = {
     }
   },
   get_event_record,
-  /**
-   * @param {RaceLane} lane
-   * @returns {string}
-   */
-  get_lane_name(lane) {
-    return `${lane.is_last ? '终' : lane.index}${lane.is_curve ? '弯' : '直'}`;
-  },
   /**
    * @param {PseudoUma} uma
    * @param {number} skill_id
@@ -276,7 +291,159 @@ module.exports = {
       minutes = Math.floor(timer / 60);
     return `${minutes ? `${minutes}'` : ''}${minutes && seconds < 10 ? '0' : ''}${seconds.toFixed(1)}"`;
   },
+  /**
+   * @param {PseudoUma} uma
+   * @param {RaceInfo} race_info
+   */
+  handle_temptation(uma, race_info) {
+    let dice;
+    switch (uma.style) {
+      case 1:
+        uma.base.loc_mind_style = 0;
+        break;
+      case 2:
+        uma.base.loc_mind_style = Number(Math.random() > 0.75);
+        break;
+      case 3:
+        dice = Math.random();
+        if (dice < 0.7) {
+          uma.base.loc_mind_style = 0;
+        } else {
+          uma.base.loc_mind_style = 1 + Number(dice > 0.9);
+        }
+    }
+    if (uma.base.loc_mind_style > 0) {
+      reset_loc_mind_other_diff(uma, race_info);
+    }
+  },
   progress_width,
   screen_size: 8,
+  /**
+   * @param {RaceSkill} skill
+   * @param {number} i
+   * @param {number} j
+   * @param {PseudoUma} uma
+   */
+  simulate_ability_usage(skill, i, j, uma) {
+    switch (skill.data.ability_value_usages[i][j]) {
+      case ability_usage_enum.MultiplySkillNum:
+        skill.values[i][j] =
+          skill.data.ability_values[i][j] *
+          Math.min(1 + uma.base.skill_count * 0.01, 1.2);
+        break;
+      case ability_usage_enum.MultiplyRandom1:
+        skill.values[i][j] = Math.random();
+        if (skill.values[i][j] < 0.1) {
+          skill.values[i][j] = 0.04;
+        } else if (skill.values[i][j] < 0.4) {
+          skill.values[i][j] = 0.02;
+        } else {
+          skill.values[i][j] = 0;
+        }
+        skill.values[i][j] *= skill.data.ability_values[i][j];
+        break;
+      case ability_usage_enum.MultiplySingleModeWinCount:
+        if (uma.base.winCount < 6) {
+          skill.values[i][j] = skill.data.ability_values[i][j] * 0.8;
+        } else if (uma.base.winCount < 14) {
+          skill.values[i][j] = skill.data.ability_values[i][j] * 0.9;
+        } else if (uma.base.winCount < 18) {
+          skill.values[i][j] = skill.data.ability_values[i][j];
+        } else if (uma.base.winCount < 25) {
+          skill.values[i][j] = skill.data.ability_values[i][j] * 1.1;
+        } else if (uma.base.winCount >= 25) {
+          skill.values[i][j] = skill.data.ability_values[i][j] * 1.2;
+        }
+        break;
+      case ability_usage_enum.MultiplyOvertakeCount:
+        skill.values[i][j] =
+          skill.data.ability_values[i][j] +
+          0.02 * uma.base.change_order_finalcorner;
+        break;
+      case ability_usage_enum.MultiplyActivateSpecificTagSkillCount:
+        if (uma.base.greenCount >= 6) {
+          skill.values[i][j] = skill.data.ability_values[i][j] + 3;
+        } else if (uma.base.greenCount >= 5) {
+          skill.values[i][j] = skill.data.ability_values[i][j] + 2;
+        } else if (uma.base.greenCount >= 3) {
+          skill.values[i][j] = skill.data.ability_values[i][j] + 1;
+        } else {
+          skill.values[i][j] = skill.data.ability_values[i][j];
+        }
+        break;
+      case ability_usage_enum.AddDistanceDiffTop:
+        if (uma.race.conditionParams.distance_diff_top >= 20) {
+          skill.values[i][j] = skill.data.ability_values[i][j] + 0.1;
+        } else {
+          skill.values[i][j] = skill.data.ability_values[i][j];
+        }
+        break;
+      case ability_usage_enum.MultiplyBlockedSideMaxContinueTimePhaseMiddleRun1:
+        skill.values[i][j] =
+          skill.data.ability_values[i][j] *
+          Math.min(uma.race.conditionParams.activate_count_all * 0.01, 0.15);
+        break;
+      case ability_usage_enum.MultiplyBaseSpeed:
+        skill.values[i][j] =
+          skill.data.ability_values[i][j] + uma.base.accBuffFromWiz;
+        break;
+      case ability_usage_enum.Direct:
+      case ability_usage_enum.Unknown:
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        break;
+      case ability_usage_enum.MultiplyTeamTotalSpeed:
+      case ability_usage_enum.MultiplyTeamTotalStamina:
+      case ability_usage_enum.MultiplyTeamTotalPower:
+      case ability_usage_enum.MultiplyTeamTotalGuts:
+      case ability_usage_enum.MultiplyTeamTotalWiz:
+        skill.values[i][j] =
+          uma.base.total_attrs[
+            skill.data.ability_value_usages[i][j] -
+              ability_usage_enum.MultiplyTeamTotalSpeed
+          ];
+        if (skill.values[i][j] >= 3600) {
+          skill.values[i][j] = 1.2;
+        } else if (skill.values[i][j] >= 2600) {
+          skill.values[i][j] = 1.1;
+        } else if (skill.values[i][j] >= 1800) {
+          skill.values[i][j] = 1;
+        } else if (skill.values[i][j] >= 1200) {
+          skill.values[i][j] = 0.9;
+        } else {
+          skill.values[i][j] = 0.8;
+        }
+        skill.values[i][j] *= skill.data.ability_values[i][j];
+        break;
+      case ability_usage_enum.MultiplyFanCount:
+        skill.values[i][j] =
+          (1 + uma.base.fame * 0.05) * skill.data.ability_values[i][j];
+        break;
+      case ability_usage_enum.MultiplyForeignAdaptability:
+        skill.values[i][j] =
+          (1 + uma.base.language * 0.04) * skill.data.ability_values[i][j];
+        break;
+      case ability_usage_enum.MultiplyUAFWins:
+        if (uma.base.attr_err < 100) {
+          skill.values[i][j] = 1.2;
+        } else if (uma.base.attr_err < 200) {
+          skill.values[i][j] = 1.1;
+        } else {
+          skill.values[i][j] = 1;
+        }
+        skill.values[i][j] *= skill.data.ability_values[i][j];
+        break;
+      case ability_usage_enum.MultiplyCookingPt:
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (uma.base.weight < 4000) {
+          skill.values[i][j] *= 1 + ((4000 - uma.base.weight) * 0.2) / 4000;
+        }
+        break;
+      default:
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        logger.debug(
+          `不支持的增幅类型：${skill.data.name} 第${i + 1}段 效果${j + 1} ${skill.data.ability_types[i][j]}`,
+        );
+    }
+  },
   timer_unit,
 };
