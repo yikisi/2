@@ -151,7 +151,7 @@ module.exports = async () => {
             { isBr: true },
             {
               content: 'ERA特雷森学园（Discord社区）',
-              url: 'https://discord.gg/CCsqKXJJjd',
+              url: 'https://discord.gg/a3KXbpZC',
             },
           ],
           type: 'text',
