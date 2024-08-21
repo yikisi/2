@@ -64,8 +64,9 @@ module.exports = {
       } else {
         race_info_list.push({ type: 'text', content: '未出走' });
       }
-      for (let i = 0; i < race_list.length / 2; ++i) {
-        [race_list[i], race_list[i + Math.floor(race_list.length / 2)]]
+      const half_length = Math.ceil(race_list.length / 2);
+      for (let i = 0; i < half_length; ++i) {
+        [race_list[i], race_list[i + half_length]]
           .filter((e) => e)
           .forEach((e) =>
             race_info_list.push({
