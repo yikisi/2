@@ -11,6 +11,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const AcuteEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-100');
+const AcuteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-100');
 const { location_enum } = require('#/data/locations');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean}):Promise<boolean|void>>} handlers */
@@ -268,7 +269,7 @@ module.exports = (handlers) => {
         await era.printAndWait(
           '予以人暂得以偷生的方向，与足以继续向前的希望。',
         );
-        await era.printAndWait('一月北海道的夜晚，四面依旧冷清。');
+        await era.printAndWait('三月北海道的夜晚，四面依旧冷清。');
         await era.printAndWait('但恰是这冷清，能激得人清醒。');
         await era.printAndWait('宴会不错、床铺很软、暖气充足，');
         await era.printAndWait('可这一切总像是浮华的虚影，梦幻泡影。');
@@ -690,6 +691,7 @@ module.exports = (handlers) => {
   };
 
   handlers.leg = async (acute, me, callname, flags) => {
+    new AcuteLifeMarks().leg = get_random_value(6, 10);
     await print_event_name(`在 ${acute.name} 的膝枕上`, acute);
     await era.printAndWait('兴许是未能好好休息的缘故，今早总觉得睡眼惺忪。');
     await era.printAndWait('真糟糕，马上就是训练的时间了；');

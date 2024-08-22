@@ -14,6 +14,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const AcuteEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-100');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const AcuteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-100');
 const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
@@ -58,16 +59,21 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const edu_weeks = era.get('cflag:100:育成回合计时');
+    const edu_weeks = era.get('cflag:100:育成回合计时'),
+      life_marks = new AcuteLifeMarks();
     if (
       era.get('cflag:100:招募状态') === recruit_flags.yes &&
-      Math.random() < 0.1 * (era.get('status:0:熬夜') + 1) &&
-      era.get('cflag:0:位置') === era.get('cflag:100:位置')
+      era.get('status:0:熬夜') &&
+      era.get('cflag:0:位置') === era.get('cflag:100:位置') &&
+      !life_marks.leg
     ) {
       add_event(
         event_hooks.week_start,
         new EventObject(100, cb_enum.edu, true).set_arg('leg'),
       );
+    }
+    if (life_marks.leg > 0) {
+      --life_marks.leg;
     }
     if (edu_weeks < 3 * 48) {
       switch (edu_weeks) {
