@@ -307,8 +307,7 @@ handlers[event_hooks.school_rooftop] = async () => {
     acute.get_colored_name(),
     ' 在天台吃着便当。',
   ]);
-  era.printButton('「嘎吱嘎吱嘎吱——」', 1);
-  await era.input();
+  await era.printAndWait('嘎吱嘎吱嘎吱——');
   if (Math.random() < 0.5) {
     await era.printAndWait('一如既往温和而清脆的口感——');
     await acute.say_and_wait('呵呵～不要紧，这儿还有很多哦～');
@@ -568,8 +567,7 @@ handlers[event_hooks.out_station] = async (hook) => {
         await era.printAndWait(
           '还是这不知是刻意的为了延长保质期还是为了吸引偏向大众重口味而进行的咸味腌制……',
         );
-        era.printButton('「嘎吱嘎吱嘎吱——」', 1);
-        await era.input();
+        await era.printAndWait('嘎吱嘎吱嘎吱——');
         await era.printAndWait('越是咀嚼就越是感觉到咸味在口腔中扩散，');
         await era.printAndWait(
           '本就缺乏水分的萝卜干在这咸气十足的环境中反而在争抢着分泌出的为数不多的唾液……',
