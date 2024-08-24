@@ -15,7 +15,8 @@ module.exports = class extends CustomizedCheck {
     if (
       extra_flag.race === race_enum.begin_race &&
       extra_flag.rank === 1 &&
-      extra_flag.contestants[0].race.conditionParams.bashin_diff_behind >= 8
+      extra_flag.contestants.findIndex((e) => e.rank.curr === 1)['race']
+        .conditionParams.bashin_diff_behind >= 8
     ) {
       new FujikiEduMarks().title_check = 1;
     }

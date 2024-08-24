@@ -30,8 +30,8 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
           if (
             extra_flag.pop !== 1 ||
             extra_flag.rank !== 1 ||
-            extra_flag.contestants[0].race.conditionParams.bashin_diff_behind <
-              3.5
+            extra_flag.contestants.findIndex((e) => e.rank.curr === 1)['race']
+              .conditionParams.bashin_diff_behind < 3.5
           ) {
             new FineEduMarks().title_check = 1;
           }
