@@ -109,7 +109,7 @@ module.exports = {
   init_chara(chara_id, src_chara_id) {
     const current = new Date().getTime();
     if (
-      era.get(`base:${chara_id}:速度`) === undefined &&
+      (era.get(`base:${chara_id}:速度`) === undefined || !chara_id) &&
       era.addCharacter(src_chara_id ? [chara_id, src_chara_id] : chara_id)
     ) {
       if (src_chara_id) {
