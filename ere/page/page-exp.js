@@ -134,7 +134,7 @@ function check_page_disabled(chara, page) {
 
 /**
  * @param {number} chara_id
- * @returns {{in_growth:boolean,mark_level:number,show_all_body:boolean,show_all_exp:boolean,show_body:boolean,show_exp:boolean}}
+ * @returns {{in_growth:boolean,mark_level:number,show_all_body:boolean,show_all_exp:boolean,show_body:boolean,show_exp:boolean,true_mark_level:number}}
  */
 function get_flags(chara_id) {
   const no_fog =

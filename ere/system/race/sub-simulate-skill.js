@@ -154,7 +154,7 @@ function sub_simulate_skill(
       uma.base.temptationSpan < race_info.span &&
       uma.race.location >= uma.base.temptationSpan
     ) {
-      handle_temptation(uma);
+      handle_temptation(uma, race_info);
       report_cache.at(-1).push({ e: race_event_enum.temptation, u: uma });
       uma.base.temptationSpan = 50000;
       uma.race.temptation = 12 * frame_rate;
