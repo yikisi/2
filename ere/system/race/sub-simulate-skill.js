@@ -6,7 +6,10 @@ const {
   check_random_loc,
   get_skill_record,
   get_table_row,
+  handle_temptation,
   progress_width,
+  reset_loc_mind_other_diff,
+  simulate_ability_usage,
 } = require('#/system/race/snippets');
 
 const { sort_list } = require('#/utils/list-utils');
@@ -14,7 +17,6 @@ const { sort_list } = require('#/utils/list-utils');
 const {
   ability_time_usage_enum,
   ability_type_enum,
-  ability_usage_enum,
   target_type_enum,
 } = require('#/data/race/model/uma-skill');
 const {
@@ -145,11 +147,14 @@ function sub_simulate_skill(
         report_cache.at(-1).push({ e: race_event_enum.temp_end, u: uma });
         uma.race.temptation = 0;
         uma.race.conditionParams.is_temptation = 0;
+        uma.base.loc_mind_style = uma.style;
+        reset_loc_mind_other_diff(uma, race_info);
       }
     } else if (
       uma.base.temptationSpan < race_info.span &&
       uma.race.location >= uma.base.temptationSpan
     ) {
+      handle_temptation(uma);
       report_cache.at(-1).push({ e: race_event_enum.temptation, u: uma });
       uma.base.temptationSpan = 50000;
       uma.race.temptation = 12 * frame_rate;
@@ -601,7 +606,6 @@ function sub_simulate_skill(
                         }
                       }
                     });
-                  skill.aims[i][j] = [uma];
               }
             }
             skill.aims[i] = [];
@@ -745,131 +749,7 @@ function sub_simulate_skill(
                     );
                 }
               }
-              switch (skill.data.ability_value_usages[i][j]) {
-                case ability_usage_enum.MultiplySkillNum:
-                  skill.values[i][j] =
-                    skill.data.ability_values[i][j] *
-                    Math.min(1 + uma.base.skill_count * 0.01, 1.2);
-                  break;
-                case ability_usage_enum.MultiplyRandom1:
-                  skill.values[i][j] = Math.random();
-                  if (skill.values[i][j] < 0.1) {
-                    skill.values[i][j] = 0.04;
-                  } else if (skill.values[i][j] < 0.4) {
-                    skill.values[i][j] = 0.02;
-                  } else {
-                    skill.values[i][j] = 0;
-                  }
-                  skill.values[i][j] *= skill.data.ability_values[i][j];
-                  break;
-                case ability_usage_enum.MultiplySingleModeWinCount:
-                  if (uma.base.winCount < 6) {
-                    skill.values[i][j] = skill.data.ability_values[i][j] * 0.8;
-                  } else if (uma.base.winCount < 14) {
-                    skill.values[i][j] = skill.data.ability_values[i][j] * 0.9;
-                  } else if (uma.base.winCount < 18) {
-                    skill.values[i][j] = skill.data.ability_values[i][j];
-                  } else if (uma.base.winCount < 25) {
-                    skill.values[i][j] = skill.data.ability_values[i][j] * 1.1;
-                  } else if (uma.base.winCount >= 25) {
-                    skill.values[i][j] = skill.data.ability_values[i][j] * 1.2;
-                  }
-                  break;
-                case ability_usage_enum.MultiplyOvertakeCount:
-                  skill.values[i][j] =
-                    skill.data.ability_values[i][j] +
-                    0.02 * uma.base.change_order_finalcorner;
-                  break;
-                case ability_usage_enum.MultiplyActivateSpecificTagSkillCount:
-                  if (uma.base.greenCount >= 6) {
-                    skill.values[i][j] = skill.data.ability_values[i][j] + 3;
-                  } else if (uma.base.greenCount >= 5) {
-                    skill.values[i][j] = skill.data.ability_values[i][j] + 2;
-                  } else if (uma.base.greenCount >= 3) {
-                    skill.values[i][j] = skill.data.ability_values[i][j] + 1;
-                  } else {
-                    skill.values[i][j] = skill.data.ability_values[i][j];
-                  }
-                  break;
-                case ability_usage_enum.AddDistanceDiffTop:
-                  if (uma.race.conditionParams.distance_diff_top >= 20) {
-                    skill.values[i][j] = skill.data.ability_values[i][j] + 0.1;
-                  } else {
-                    skill.values[i][j] = skill.data.ability_values[i][j];
-                  }
-                  break;
-                case ability_usage_enum.MultiplyBlockedSideMaxContinueTimePhaseMiddleRun1:
-                  skill.values[i][j] =
-                    skill.data.ability_values[i][j] *
-                    Math.min(
-                      uma.race.conditionParams.activate_count_all * 0.01,
-                      0.15,
-                    );
-                  break;
-                case ability_usage_enum.MultiplyBaseSpeed:
-                  skill.values[i][j] =
-                    skill.data.ability_values[i][j] + uma.base.accBuffFromWiz;
-                  break;
-                case ability_usage_enum.Direct:
-                case ability_usage_enum.Unknown:
-                  skill.values[i][j] = skill.data.ability_values[i][j];
-                  break;
-                case ability_usage_enum.MultiplyTeamTotalSpeed:
-                case ability_usage_enum.MultiplyTeamTotalStamina:
-                case ability_usage_enum.MultiplyTeamTotalPower:
-                case ability_usage_enum.MultiplyTeamTotalGuts:
-                case ability_usage_enum.MultiplyTeamTotalWiz:
-                  skill.values[i][j] =
-                    uma.base.total_attrs[
-                      skill.data.ability_value_usages[i][j] -
-                        ability_usage_enum.MultiplyTeamTotalSpeed
-                    ];
-                  if (temp >= 3600) {
-                    skill.values[i][j] = 1.2;
-                  } else if (temp >= 2600) {
-                    skill.values[i][j] = 1.1;
-                  } else if (temp >= 1800) {
-                    skill.values[i][j] = 1;
-                  } else if (skill.values[i][j] >= 1200) {
-                    skill.values[i][j] = 0.9;
-                  } else {
-                    skill.values[i][j] = 0.8;
-                  }
-                  skill.values[i][j] *= skill.data.ability_values[i][j];
-                  break;
-                case ability_usage_enum.MultiplyFanCount:
-                  skill.values[i][j] =
-                    (1 + uma.base.fame * 0.05) *
-                    skill.data.ability_values[i][j];
-                  break;
-                case ability_usage_enum.MultiplyForeignAdaptability:
-                  skill.values[i][j] =
-                    (1 + uma.base.language * 0.04) *
-                    skill.data.ability_values[i][j];
-                  break;
-                case ability_usage_enum.MultiplyUAFWins:
-                  if (uma.base.attr_err < 100) {
-                    skill.values[i][j] = 1.2;
-                  } else if (uma.base.attr_err < 200) {
-                    skill.values[i][j] = 1.1;
-                  } else {
-                    skill.values[i][j] = 1;
-                  }
-                  skill.values[i][j] *= skill.data.ability_values[i][j];
-                  break;
-                case ability_usage_enum.MultiplyCookingPt:
-                  skill.values[i][j] = skill.data.ability_values[i][j];
-                  if (uma.base.weight < 4000) {
-                    skill.values[i][j] *=
-                      1 + ((4000 - uma.base.weight) * 0.2) / 4000;
-                  }
-                  break;
-                default:
-                  skill.values[i][j] = skill.data.ability_values[i][j];
-                  logger.debug(
-                    `不支持的增幅类型：${skill.data.name} 第${i + 1}段 效果${j + 1} ${skill.data.ability_types[i][j]}`,
-                  );
-              }
+              simulate_ability_usage(skill, i, j, uma);
               switch (skill.data.ability_types[i][j]) {
                 case ability_type_enum.HpRate:
                   skill.aims[i][j].forEach((e) => {
@@ -892,6 +772,12 @@ function sub_simulate_skill(
                     e.race.conditionParams.is_temptation = Number(
                       skill.values[i][j] > 0,
                     );
+                    if (e.race.conditionParams.is_temptation) {
+                      handle_temptation(uma, race_info);
+                    } else {
+                      uma.base.loc_mind_style = uma.style;
+                      reset_loc_mind_other_diff(uma, race_info);
+                    }
                     report_cache.at(-1).push({
                       e: e.race.conditionParams.is_temptation
                         ? e.race.temptation > 0

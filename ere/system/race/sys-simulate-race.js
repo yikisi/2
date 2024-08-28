@@ -58,31 +58,34 @@ const beginning_report_handlers = [
  * @param {PseudoUma} uma
  * @param {number} i
  * @param {PseudoUma[]} l
+ * @param {RaceInfo} race_info
  * @returns {boolean}
  */
-function check_nige_loc_mind_speed_up_mode(uma, i, l) {
+function check_nige_loc_mind_speed_up_mode(uma, i, l, race_info) {
   let temp;
   return (
-    i === 0 &&
-    (((temp = l.slice(1).find((e) => e.style === 0)) &&
-      uma.race.location - temp.race.location <=
-        uma.base.loc_mind_nige_diff_speed_up_nige) ||
-      ((temp = l.slice(1).find((e) => e.style > 0)) &&
+    (i === 0 &&
+      (((temp = l.slice(1).find((e) => e.style === 0)) &&
         uma.race.location - temp.race.location <=
-          uma.base.loc_mind_nige_diff_speed_up_other))
+          race_info.loc_mind_diff.nige_speed_up_nige) ||
+        ((temp = l.slice(1).find((e) => e.style > 0)) &&
+          uma.race.location - temp.race.location <=
+            race_info.loc_mind_diff.nige_speed_up_other))) ||
+    uma.race.conditionParams.is_temptation
   );
 }
 
 /**
  * @param {PseudoUma} uma
  * @param {number} i
+ * @param {RaceInfo} race_info
  * @returns {boolean}
  */
-function check_nige_loc_mind_over_take_mode(uma, i) {
+function check_nige_loc_mind_over_take_mode(uma, i, race_info) {
   return (
     i > 0 &&
     uma.race.conditionParams.distance_diff_top <
-      uma.base.loc_mind_nige_diff_over_take
+      race_info.loc_mind_diff.nige_over_take
   );
 }
 
@@ -496,7 +499,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
       // 位置意识
       if (timer % 2 === 0 && uma.race.location < loc_mind_end) {
         const prob_check = Math.random() < uma.probs.loc_mind;
-        if (uma.style === 0) {
+        if (uma.base.loc_mind_style === 0) {
           if (uma.race.loc_mind < 3 && check_nige_loc_mind_ex_mode(uma, i, l)) {
             uma.race.loc_mind = 3;
             report_cache
@@ -506,13 +509,15 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
             switch (uma.race.loc_mind) {
               case 0:
                 if (prob_check) {
-                  if (check_nige_loc_mind_speed_up_mode(uma, i, l)) {
+                  if (check_nige_loc_mind_speed_up_mode(uma, i, l, race_info)) {
                     uma.race.loc_mind = 1;
                     report_cache.at(-1).push({
                       e: race_event_enum.loc_mind_nige_speed_up,
                       u: uma,
                     });
-                  } else if (check_nige_loc_mind_over_take_mode(uma, i)) {
+                  } else if (
+                    check_nige_loc_mind_over_take_mode(uma, i, race_info)
+                  ) {
                     uma.race.loc_mind = 2;
                     report_cache.at(-1).push({
                       e: race_event_enum.loc_mind_nige_over_take,
@@ -522,24 +527,28 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
                 }
                 break;
               case 1:
-                if (check_nige_loc_mind_over_take_mode(uma, i)) {
+                if (check_nige_loc_mind_over_take_mode(uma, i, race_info)) {
                   uma.race.loc_mind = 2;
                   report_cache.at(-1).push({
                     e: race_event_enum.loc_mind_nige_over_take,
                     u: uma,
                   });
-                } else if (!check_nige_loc_mind_speed_up_mode(uma, i, l)) {
+                } else if (
+                  !check_nige_loc_mind_speed_up_mode(uma, i, l, race_info)
+                ) {
                   uma.race.loc_mind = 0;
                 }
                 break;
               case 2:
-                if (check_nige_loc_mind_speed_up_mode(uma, i, l)) {
+                if (check_nige_loc_mind_speed_up_mode(uma, i, l, race_info)) {
                   uma.race.loc_mind = 1;
                   report_cache.at(-1).push({
                     e: race_event_enum.loc_mind_nige_speed_up,
                     u: uma,
                   });
-                } else if (!check_nige_loc_mind_over_take_mode(uma, i)) {
+                } else if (
+                  !check_nige_loc_mind_over_take_mode(uma, i, race_info)
+                ) {
                   uma.race.loc_mind = 0;
                 }
                 break;
@@ -561,7 +570,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
               if (prob_check) {
                 if (
                   uma.race.conditionParams.distance_diff_top >=
-                  uma.base.loc_mind_other_diff_upper
+                  race_info.loc_mind_diff.other_upper[uma.race.loc_mind - 1]
                 ) {
                   uma.race.loc_mind = 1;
                   report_cache.at(-1).push({
@@ -570,7 +579,9 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
                   });
                 } else if (
                   uma.race.conditionParams.distance_diff_top <=
-                    uma.base.loc_mind_other_diff_lower &&
+                    race_info.loc_mind_diff.other_lower[
+                      uma.race.loc_mind - 1
+                    ] &&
                   uma.race.velocityIdealBuff === 0
                 ) {
                   uma.race.loc_mind = 2;
@@ -584,7 +595,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
             case 1:
               if (
                 uma.race.conditionParams.distance_diff_top <=
-                  uma.base.loc_mind_other_diff_lower &&
+                  race_info.loc_mind_diff.other_lower[uma.race.loc_mind - 1] &&
                 uma.race.velocityIdealBuff === 0
               ) {
                 uma.race.loc_mind = 2;
@@ -604,7 +615,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
             case 2:
               if (
                 uma.race.conditionParams.distance_diff_top >=
-                uma.base.loc_mind_other_diff_upper
+                race_info.loc_mind_diff.other_upper[uma.race.loc_mind - 1]
               ) {
                 uma.race.loc_mind = 1;
                 report_cache.at(-1).push({
@@ -626,10 +637,6 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
                 uma.race.loc_mind = 0;
               }
           }
-        }
-        if (uma.race.temptation > 0) {
-          uma.race.loc_mind = 1;
-          uma.race.staminaCost *= 1.6;
         }
         if (uma.race.loc_mind === 2 && uma.style > 0) {
           uma.race.staminaCost *= 0.6;

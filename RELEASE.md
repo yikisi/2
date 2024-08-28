@@ -5,8 +5,6 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
 
 ## Added
 
-* 新增病娇机制
-
 ## Changed
 
 * 卓芙的抢先体验结束
@@ -17,7 +15,3 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
   * 赢取了三次以上G1比赛胜利，且至少获得【无败三冠】、【无败三宝冠】、【无败泥地三冠】、【无暇美国梦】等称号的其中之一
 
 ## Fixed
-
-* 修复了爱慕地文中表白事件演出不正确的问题
-* 修复了爱丽速子的求婚事件无法再次触发的问题
-* 修复了孩子适应性突变异常的问题

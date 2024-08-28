@@ -108,7 +108,10 @@ function reset_chara(chara_id) {
 module.exports = {
   init_chara(chara_id, src_chara_id) {
     const current = new Date().getTime();
-    if (era.addCharacter(src_chara_id ? [chara_id, src_chara_id] : chara_id)) {
+    if (
+      (era.get(`base:${chara_id}:速度`) === undefined || !chara_id) &&
+      era.addCharacter(src_chara_id ? [chara_id, src_chara_id] : chara_id)
+    ) {
       if (src_chara_id) {
         era.set(`cflag:${chara_id}:模版角色`, src_chara_id);
         era.set(`cflag:${chara_id}:种族`, 1);

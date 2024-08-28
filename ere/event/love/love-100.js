@@ -39,14 +39,17 @@ handlers[49] = async (acute, me, callname, event_object) => {
   await era.printAndWait([
     '如果想要进一步了解 ',
     acute.get_colored_name(),
-    ' 的话，就一个人去中庭的枯树洞看看呢？',
+    ' 的话，就去中庭的枯树洞看看呢？',
   ]);
   add_event(event_hooks.school_atrium, event_object.set_arg('fuck_buddy'));
   new EventMarks(0).add(event_hooks.school_atrium);
 };
 
 handlers.fuck_buddy = async (acute, me, callname, event_object) => {
-  if (era.get('flag:当前互动角色') > 0) {
+  if (
+    era.get('flag:当前互动角色') > 0 &&
+    era.get('flag:当前互动角色') !== 100
+  ) {
     await era.printAndWait('最近，不知为何，');
     await era.printAndWait([
       acute.get_colored_name(),
@@ -55,7 +58,7 @@ handlers.fuck_buddy = async (acute, me, callname, event_object) => {
     await era.printAndWait([
       '如果想要进一步了解 ',
       acute.get_colored_name(),
-      ' 的话，就一个人去中庭的枯树洞看看呢？',
+      ' 的话，就去中庭的枯树洞看看呢？',
     ]);
     add_event(event_hooks.school_atrium, event_object);
     return;
@@ -65,7 +68,7 @@ handlers.fuck_buddy = async (acute, me, callname, event_object) => {
   await era.printAndWait([
     '看到了 ',
     acute.get_colored_name(),
-    ' 偶尔会待在里面的树洞，不由自主得走了过去。',
+    ' 偶尔会待在里面的树洞，不由自主地走了过去。',
   ]);
   await era.printAndWait('躬下身子，凑近了看，却感觉树洞里的空间意外的狭小。');
   await era.printAndWait(
@@ -558,7 +561,7 @@ handlers.wife = async (acute, me, callname, event_object) => {
   await era.printAndWait([
     '怀中的 ',
     acute.get_colored_name(),
-    '，脸颊羞红，眼神迷离得看着自己。',
+    '，脸颊羞红，眼神迷离地看着自己。',
   ]);
   await era.printAndWait('不似拒绝，却也不像同意，倒似欲拒还迎……');
   await era.printAndWait(
@@ -649,7 +652,7 @@ handlers[99] = async (acute, me, callname, event_object) => {
 };
 
 handlers.half_life = async (acute, me, callname, event_object) => {
-  if (era.get('flag:当前互动角色') > 0) {
+  if (era.get('flag:当前互动角色') && era.get('flag:当前互动角色') !== 100) {
     await era.printAndWait([
       '当准备完全后，',
       acute.sex,

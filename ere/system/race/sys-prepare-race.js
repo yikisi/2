@@ -1,5 +1,7 @@
 ﻿const { logger } = require('#/era-electron');
 
+const { reset_loc_mind_other_diff } = require('#/system/race/snippets');
+
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -451,56 +453,46 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     uma.probs.planRush = 0.15 + 0.0005 * uma.attrs[attr_enum.intelligence];
 
     // 位置意识
-    switch (uma.style) {
-      case 0:
-        if (uma.race.conditionParams.is_used_skill_id.indexOf(202051) !== -1) {
-          uma.base.loc_mind_nige_diff_speed_up_nige =
-            uma.base.loc_mind_nige_diff_speed_up_other = Math.max(
-              6 * loc_mind_base_diff,
-              17.5,
-            );
-          uma.base.loc_mind_nige_diff_over_take = Math.max(
-            8 * loc_mind_base_diff,
-            27.5,
-          );
-        } else {
-          uma.base.loc_mind_nige_diff_speed_up_nige = Math.max(
-            loc_mind_base_diff,
-            4.5,
-          );
-          uma.base.loc_mind_nige_diff_speed_up_other = Math.max(
-            5 * loc_mind_base_diff,
-            12.5,
-          );
-          uma.base.loc_mind_nige_diff_over_take = Math.max(
-            3 * loc_mind_base_diff,
-            10,
-          );
-        }
-        break;
-      case 1:
-        uma.base.loc_mind_other_diff_lower = 3;
-        uma.base.loc_mind_other_diff_upper = 5 * loc_mind_base_diff;
-        break;
-      case 2:
-        uma.base.loc_mind_other_diff_lower = 6.5 * loc_mind_base_diff;
-        uma.base.loc_mind_other_diff_upper = 7 * loc_mind_base_diff;
-        break;
-      case 3:
-        uma.base.loc_mind_other_diff_lower = 7.5 * loc_mind_base_diff;
-        uma.base.loc_mind_other_diff_upper = 8 * loc_mind_base_diff;
-    }
-    if (uma.style > 0) {
-      uma.base.loc_mind_other_diff_random = [
-        get_random_value(
-          uma.base.loc_mind_other_diff_lower,
-          uma.base.loc_mind_other_diff_upper,
-          true,
-        ),
-        (uma.base.loc_mind_other_diff_lower +
-          uma.base.loc_mind_other_diff_upper) /
-          2,
-      ];
+    // 逃
+    race_info.loc_mind_diff.nige_speed_up_nige[0] = Math.max(
+      loc_mind_base_diff,
+      4.5,
+    );
+    race_info.loc_mind_diff.nige_speed_up_other[0] = Math.max(
+      5 * loc_mind_base_diff,
+      12.5,
+    );
+    race_info.loc_mind_diff.nige_over_take[0] = Math.max(
+      3 * loc_mind_base_diff,
+      10,
+    );
+
+    // 大逃
+    race_info.loc_mind_diff.nige_speed_up_nige[1] = Math.max(
+      6 * loc_mind_base_diff,
+      17.5,
+    );
+    race_info.loc_mind_diff.nige_speed_up_other[1] =
+      race_info.loc_mind_diff.nige_speed_up_nige[1];
+    race_info.loc_mind_diff.nige_over_take[1] = Math.max(
+      8 * loc_mind_base_diff,
+      27.5,
+    );
+
+    // 先
+    race_info.loc_mind_diff.other_lower[0] = 3;
+    race_info.loc_mind_diff.other_upper[0] = 5 * loc_mind_base_diff;
+
+    // 差
+    race_info.loc_mind_diff.other_lower[1] = 6.5 * loc_mind_base_diff;
+    race_info.loc_mind_diff.other_upper[1] = 7 * loc_mind_base_diff;
+
+    // 追
+    race_info.loc_mind_diff.other_lower[2] = 7.5 * loc_mind_base_diff;
+    race_info.loc_mind_diff.other_upper[2] = 8 * loc_mind_base_diff;
+
+    if (uma.base.loc_mind_style > 0) {
+      reset_loc_mind_other_diff(uma, race_info);
     }
   }
   logger.debug(`比赛相关变量预计算：${new Date().getTime() - current} ms`);

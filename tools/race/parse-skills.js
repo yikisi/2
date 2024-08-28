@@ -1,7 +1,9 @@
-const { PrismaClient } = require('@prisma/client');
 const { execSync } = require('child_process');
 const { writeFileSync } = require('node:fs');
 const { join } = require('path');
+
+const { PrismaClient } = require('@prisma/client');
+
 const prisma = new PrismaClient();
 
 const UmaSkill = require('../../ere/data/race/model/uma-skill');
