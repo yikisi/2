@@ -9,8 +9,6 @@ class SSEduMarks extends EduEventMarks {
   enjoy_cat;
   // 咖啡的味道要怎么样比较好呢?
   sugar_or_milk;
-  // 称号检查 - G1三着以内
-  g1_count;
   // 胜利的承诺 buff
   wins;
 
