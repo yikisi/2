@@ -27,8 +27,12 @@ class LifeEventMarks extends PersonalEventMarks {
   basement_now;
   // 地下室警戒度
   security_level;
-  // 外出中
+  // 地下室 - 外出中
   is_out;
+  // 地下室体力消耗buff
+  basement_stamina_buff;
+  // 地下室精力消耗buff
+  basement_time_buff;
 
   /** @param {number} chara_id */
   constructor(chara_id) {

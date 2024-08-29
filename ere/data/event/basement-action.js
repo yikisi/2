@@ -3,6 +3,7 @@ const action_type_enum = {
   back_basement: 0,
   get_up: 0,
   outside: 0,
+  rescue: 0,
 };
 Object.keys(action_type_enum).forEach((k, i) => (action_type_enum[k] = i));
 

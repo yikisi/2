@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const print_cur_chara_info = require('#/page/components/cur-chara-info');
@@ -11,6 +12,7 @@ const print_save_page = require('#/page/page-save-game');
 const basement_queue = require('#/event/basement-queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const BasementAction = require('#/data/event/basement-action');
@@ -48,7 +50,7 @@ function check_vacation(timer) {
   return ret;
 }
 
-function get_clock(timer) {
+function get_clock_for_debug(timer) {
   return `第 ${Math.floor(
     timer / minutes_in_a_day + 1,
   ).toString()} 天 ${Math.floor(
@@ -67,25 +69,32 @@ function handle_push_info(info_list, ...info) {
   info_list.push(...info);
 }
 
-/** @param {LifeEventMarks} my_life_marks */
-function handle_time_change(my_life_marks) {
+/**
+ * @param {LifeEventMarks} my_life_marks
+ * @param {BasementOwners} basement_owners
+ */
+function handle_time_change(my_life_marks, basement_owners) {
   new BasementOwners().get().forEach((e) => {
     if (new LifeEventMarks(e).is_out === 1) {
       new LifeEventMarks(e).is_out = 0;
     }
   });
-  my_life_marks.basement_timer = basement_queue.get_action().map((e) => {
+  let new_timer;
+  basement_queue.get_action().forEach((e) => {
+    new_timer = e.timer;
     switch (e.type) {
       case BasementAction.action_type_enum.action_end:
-        era.logger.info(`TEST：时间推进到 ${get_clock(e.timer)}`);
+        era.logger.info(`TEST：时间推进到 ${get_clock_for_debug(e.timer)}`);
         break;
       case BasementAction.action_type_enum.get_up:
-        era.logger.info(`TEST：${get_clock(e.timer)} 角色 ${e.chara_id} 醒来`);
+        era.logger.info(
+          `TEST：${get_clock_for_debug(e.timer)} 角色 ${e.chara_id} 醒来`,
+        );
         era.set(`status:${e.chara_id}:沉睡`, 0);
         break;
       case BasementAction.action_type_enum.back_basement:
         era.logger.info(
-          `TEST：${get_clock(e.timer)} 角色 ${e.chara_id} 回到地下室`,
+          `TEST：${get_clock_for_debug(e.timer)} 角色 ${e.chara_id} 回到地下室`,
         );
         new LifeEventMarks(e.chara_id).is_out = 1;
         if (
@@ -102,7 +111,9 @@ function handle_time_change(my_life_marks) {
         }
         break;
       case BasementAction.action_type_enum.outside:
-        era.logger.info(`TEST：${get_clock(e.timer)} 角色 ${e.chara_id} 离开`);
+        era.logger.info(
+          `TEST：${get_clock_for_debug(e.timer)} 角色 ${e.chara_id} 离开`,
+        );
         new LifeEventMarks(e.chara_id).is_out = 2;
         if (!check_vacation(e.timer)) {
           basement_queue.add_action(
@@ -114,8 +125,38 @@ function handle_time_change(my_life_marks) {
           );
         }
     }
-    return e.timer;
-  })[0];
+  });
+  const delta = new_timer - my_life_marks.basement_timer;
+  [0, ...basement_owners.get()].forEach((e) => {
+    const life_marks = new LifeEventMarks(e);
+    if (life_marks.is_out === 0) {
+      let stamina_delta, time_delta;
+      if (era.get(`status:${e}:马跳S`)) {
+        stamina_delta = time_delta = 1;
+      } else if (era.get(`status:${e}:沉睡`)) {
+        stamina_delta = time_delta = 2;
+      } else {
+        stamina_delta = -1;
+        time_delta = -2;
+      }
+      sys_change_attr_and_print(
+        e,
+        '体力',
+        (stamina_delta + life_marks.basement_stamina_buff) *
+          delta *
+          get_random_value(0.8, 1.2, true),
+      );
+      sys_change_attr_and_print(
+        e,
+        '精力',
+        (time_delta + life_marks.basement_time_buff) *
+          delta *
+          get_random_value(0.8, 1.2, true),
+      );
+      life_marks.basement_stamina_buff = life_marks.basement_time_buff = 0;
+    }
+  });
+  my_life_marks.basement_timer = new_timer;
 }
 
 /**
@@ -125,23 +166,26 @@ function handle_time_change(my_life_marks) {
  */
 module.exports = async (_, save_and_next_week, flags) => {
   const my_life_marks = new LifeEventMarks(0),
-    basement_info = [];
+    basement_info = [],
+    basement_owners = new BasementOwners();
   if (my_life_marks.basement_timer >= 7 * minutes_in_a_day) {
     return save_and_next_week();
   }
   if (flags.week_start) {
     flags.week_start = false;
     while (era.get('status:0:沉睡')) {
-      handle_time_change(my_life_marks);
+      handle_time_change(my_life_marks, basement_owners);
     }
   }
   await era.clear();
   page_header();
   const chara_list = [
     0,
-    ...new BasementOwners()
-      .get()
-      .filter((e) => new LifeEventMarks(e).is_out < 2),
+    ...sort_list(
+      basement_owners.get().filter((e) => new LifeEventMarks(e).is_out < 2),
+      (e, i) => (!sys_check_awake(e) << 1) + i,
+      true,
+    ),
   ];
   if (chara_list.length > 1) {
     print_cur_chara_info(chara_list[1], undefined, chara_list[2]);
@@ -176,7 +220,9 @@ module.exports = async (_, save_and_next_week, flags) => {
         handle_push_info(
           basement_info,
           get_chara_talk(chara_id).get_colored_name(),
-          ' 静静地沉睡着……',
+          era.get(`status:${chara_id}:沉睡`)
+            ? ' 静静地睡着……'
+            : ' 沉沉地睡着……',
         );
         return p;
       }, false);
@@ -215,21 +261,43 @@ module.exports = async (_, save_and_next_week, flags) => {
           {
             accelerator: 101,
             config: { width: 6 },
-            content: '邀请上床',
+            content: '只是静坐',
             type: 'button',
           },
           {
             accelerator: 102,
             config: { width: 6 },
-            content: '请求释放',
+            content: '邀请上床',
             type: 'button',
           },
           {
             accelerator: 103,
             config: { width: 6 },
+            content: '请求释放',
+            type: 'button',
+          },
+          {
+            accelerator: 104,
+            config: { width: 6 },
             content: strike ? '背面偷袭' : '正面反抗',
             type: 'button',
           },
+          ...(sys_check_awake(chara_list[1])
+            ? [
+                {
+                  accelerator: 105,
+                  config: { width: 6 },
+                  content: '询问时间',
+                  type: 'button',
+                },
+                {
+                  accelerator: 106,
+                  config: { width: 6 },
+                  content: '尝试说服',
+                  type: 'button',
+                },
+              ]
+            : []),
           {
             accelerator: 999,
             config: { width: 6 },
@@ -248,7 +316,13 @@ module.exports = async (_, save_and_next_week, flags) => {
           {
             accelerator: 101,
             config: { width: 6 },
-            content: '休息',
+            content: '只是静坐',
+            type: 'button',
+          },
+          {
+            accelerator: 102,
+            config: { width: 6 },
+            content: '小睡片刻',
             type: 'button',
           },
           {
@@ -288,7 +362,12 @@ module.exports = async (_, save_and_next_week, flags) => {
     ].filter((e) => e),
   );
   const ret = await era.input();
+  let action_time;
   switch (ret) {
+    case 101:
+      action_time = get_random_value(15, 30);
+      my_life_marks.basement_time_buff = 1;
+      break;
     case 400:
       await print_chara_info(0, chara_list);
       break;
@@ -305,13 +384,16 @@ module.exports = async (_, save_and_next_week, flags) => {
       era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
       break;
     default:
-      basement_queue.add_action(
-        new BasementAction(
-          0,
-          my_life_marks.basement_timer + get_random_value(30, 90),
-          BasementAction.action_type_enum.action_end,
-        ),
-      );
-      handle_time_change(my_life_marks);
+      action_time = get_random_value(30, 90);
+  }
+  if (action_time) {
+    basement_queue.add_action(
+      new BasementAction(
+        0,
+        my_life_marks.basement_timer + action_time,
+        BasementAction.action_type_enum.action_end,
+      ),
+    );
+    handle_time_change(my_life_marks, basement_owners);
   }
 };
