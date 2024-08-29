@@ -36,7 +36,7 @@ const virgin_color_desc = ['粉嫩可人', '红润泛紫', '深邃成熟'];
 module.exports = {
   /**
    * @param {CharaTalk} chara
-   * @param {{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean,true_mark_level:boolean}} flags
+   * @param {{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean,true_mark_level:number}} flags
    * @returns {{print():*[]}}
    */
   generate: function (chara, flags) {
