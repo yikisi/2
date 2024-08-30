@@ -137,7 +137,7 @@ handlers[event_hooks.talk] = () => {
     silence = get_chara_talk(400),
     me = get_chara_talk(0);
   if (era.get('base:400:体力') < era.get('maxbase:400:体力') / 3) {
-    buffer.push(
+    buffer.push(() =>
       silence
         .say_and_wait(
           '我并不觉得这是什么明智的想法，我也必须向你声明，我们之间是平等的关系，我希望你能记住你的职责。',

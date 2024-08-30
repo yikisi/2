@@ -8,3 +8,5 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
 ## Changed
 
 ## Fixed
+
+* 修复了周日宁静good_night事件中的bug
