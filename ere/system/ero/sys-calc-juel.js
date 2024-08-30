@@ -43,9 +43,12 @@ function add_juel(chara_id, key, num) {
  * @returns {number}
  */
 function get_buffed_juel(chara_id, juel_name) {
-  const ret = Math.floor(
-    tmp[chara_id][juel_name] *
-      (1 + era.get(`tcvar:${chara_id}:${juel_name.substring(0, 2)}因子加成`)),
+  const ret = Math.max(
+    Math.floor(
+      tmp[chara_id][juel_name] *
+        (1 + era.get(`tcvar:${chara_id}:${juel_name.substring(0, 2)}因子加成`)),
+    ),
+    -era.get(`gotjuel:${chara_id}:${juel_name}`),
   );
   tmp[chara_id][juel_name] = 0;
   return ret;

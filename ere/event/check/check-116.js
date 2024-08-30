@@ -24,8 +24,8 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     if (
       extra_flag.race === race_enum.yush_him &&
       extra_flag.rank === 1 &&
-      extra_flag.contestants.findIndex((e) => e.rank.curr === 1)['race']
-        .conditionParams.bashin_diff_behind >= 5
+      extra_flag.contestants.find((e) => e.rank.curr === 1).race.conditionParams
+        .bashin_diff_behind >= 5
     ) {
       new DonnaEduMarks().title_check = 1;
     }
