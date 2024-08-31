@@ -44,7 +44,7 @@ handlers[event_hooks.select] = function () {
     chara_talk.say(
       `有什么事一定要和${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我商量哦？`,
     );
-    chara_talk.say('......如果我们之间没有秘密的话就好了呢。');
+    chara_talk.say('……如果我们之间没有秘密的话就好了呢。');
     temp.sub('sister_annoyance');
   } else if (new EduEventMarks(4).get('girls_blue') === 1) {
     chara_talk.say('膝盖比以前还要疼的厉害。');
@@ -88,7 +88,7 @@ handlers[event_hooks.select] = function () {
     chara_talk.say(
       '不管在草场之上奔跑多少回，似乎都找不到当初的感觉了,真是有点生无可恋呢。',
     );
-    chara_talk.say('......');
+    chara_talk.say('……');
     chara_talk.say('风停了。');
   } else if (new EduEventMarks(4).get('wind') === 15) {
     chara_talk.say(
@@ -229,7 +229,7 @@ handlers[event_hooks.good_morning] = function () {
       buffer.push([
         [
           `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}早上好⭐`,
-          '.......为什么跑到隔壁房间叫你起床?',
+          '…….为什么跑到隔壁房间叫你起床?',
           `不觉得有个会叫你起床的温柔大${
             era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
           }是很幸福的事情吗`,
@@ -259,7 +259,7 @@ handlers[event_hooks.good_morning] = function () {
       buffer.push([
         [
           '全力奔跑的时候会有一种若有若无的感觉,这就是所谓的领域吗?',
-          `......啊,${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}早上好`,
+          `……啊,${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}早上好`,
         ],
         `在草地上奔跑的${chara_talk.name}似乎触及到领域的边界了`,
       ]);
@@ -275,8 +275,8 @@ handlers[event_hooks.talk] = async function () {
   switch (era.get('cflag:4:干劲')) {
     case -2:
       talk_arr = [
-        '手上为什么贴了创口贴?囧。今天早上想要自己做一顿早饭的时候听着音乐不小心切到了手指......汗，真的没事的。',
-        `为什么今天这么晚才来,而且头发也乱糟糟的......?今天起床的时候不小心碰倒了纸箱子把里面的东西全部打翻了收拾了好久才放回原位急匆匆赶过来了,不过没关系的啦,今天的训练任务是什么?`,
+        '手上为什么贴了创口贴?囧。今天早上想要自己做一顿早饭的时候听着音乐不小心切到了手指……汗，真的没事的。',
+        `为什么今天这么晚才来,而且头发也乱糟糟的……?今天起床的时候不小心碰倒了纸箱子把里面的东西全部打翻了收拾了好久才放回原位急匆匆赶过来了,不过没关系的啦,今天的训练任务是什么?`,
       ];
       break;
     case -1:
@@ -365,7 +365,7 @@ handlers[event_hooks.office_gift] = async function () {
       `这下不得不考虑回礼了呢，受不鸟了。晚上回去的时候就让你尝尝${
         era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
       }我的手艺吧`,
-      `虾米？！用香槟杯装饰的水果巧克力看上去怎么样？${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}总有一些奇妙的想法呢......找时间试试看吧？`,
+      `虾米？！用香槟杯装饰的水果巧克力看上去怎么样？${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}总有一些奇妙的想法呢……找时间试试看吧？`,
     );
   }
   await chara_talk.say_and_wait(get_random_entry(talk_arr));
@@ -374,14 +374,14 @@ handlers[event_hooks.office_gift] = async function () {
 handlers[event_hooks.office_cook] = async function () {
   const talk_arr = [
     '好怀念的味道,那我就不客气咯?',
-    `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}就乖乖坐在这里看着我做饭吧......欸?希望能和我一起做饭吗?`,
+    `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}就乖乖坐在这里看着我做饭吧……欸?希望能和我一起做饭吗?`,
   ];
   if (era.get('love:4') >= 75) {
     talk_arr.push(
       `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}尝尝这个蛋包饭怎么样吧?怎么样,很好吃吧.看到${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}露出了幸福的笑容我好像也吃饱了呢`,
       `希望能为${
         era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
-      }我做一份饭......我晕，这就是幸福的味道吗,我的心现在正dokidoki的跳个不停呢♪`,
+      }我做一份饭……我晕，这就是幸福的味道吗,我的心现在正dokidoki的跳个不停呢♪`,
     );
   }
   await chara_talk.say_and_wait(get_random_entry(talk_arr));
@@ -389,7 +389,7 @@ handlers[event_hooks.office_cook] = async function () {
 
 handlers[event_hooks.office_study] = async function () {
   const talk_arr = [
-    '如果要参加各种竞赛的话,掌握各种跑法也是很重要的呢......干脆试下甩尾跑法吧？',
+    '如果要参加各种竞赛的话,掌握各种跑法也是很重要的呢……干脆试下甩尾跑法吧？',
     '比起受人引导的位置,像这样一口气冲线的感觉让人欲罢不能呢♪',
   ];
   if (era.get('love:4') >= 75) {
@@ -437,7 +437,7 @@ handlers[event_hooks.office_game] = async function () {
     `${
       era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
     }我对游戏这方面很不擅长呢,${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}有什么推荐的游戏吗?`,
-    `比起在训练室就这样坐着,不如出去训练......希望能看到我穿泳装的样子吗?${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}真H呢。到时候好好期待着吧♪`,
+    `比起在训练室就这样坐着,不如出去训练……希望能看到我穿泳装的样子吗?${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}真H呢。到时候好好期待着吧♪`,
   ];
   if (era.get('love:4') >= 75) {
     talk_arr.push(
@@ -502,7 +502,7 @@ handlers[event_hooks.out_church] = async function () {
       `你握住了${chara_talk.sex_code - 1 ? '她' : '他'}的手`,
     );
     await chara_talk.say_and_wait(
-      `......${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}谢谢你，`,
+      `……${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}谢谢你，`,
     );
     await chara_talk.say_and_wait(`那么和小塔一起兜风来发泄这份情绪吧`);
     await era.printAndWait(`之后你在意识模糊之中似乎看到了三女神的笑容`);
@@ -522,7 +522,7 @@ handlers[event_hooks.out_church] = async function () {
     await era.printAndWait(
       `你偷偷睁开眼睛往${chara_talk.name}的方向瞟了一眼。`,
     );
-    await chara_talk.say_and_wait(`......三女神大人谢谢你，`);
+    await chara_talk.say_and_wait(`……三女神大人谢谢你，`);
     await era.printAndWait(
       `似乎祈愿之事得到了肯定，${chara_talk.name}露出了如释重负的笑容。`,
     );

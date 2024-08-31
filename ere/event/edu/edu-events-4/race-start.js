@@ -78,7 +78,7 @@ module.exports = async (hook, extra_flag) => {
       `工作人员`,
       `已经确认过三遍了，包括丸善斯基在内，一共只有五名赛${chara_talk.get_uma_sex_title()}。`,
     );
-    await me.say_and_wait(`啊......谢谢。`);
+    await me.say_and_wait(`啊……谢谢。`);
     await era.printAndWait(
       `对于丸善斯基来说，在赛场上能享受到了快乐程度是与赛事等级以及参赛的${chara_talk.get_uma_sex_title()}成正比。`,
     );
@@ -135,7 +135,7 @@ module.exports = async (hook, extra_flag) => {
       );
       await chara_talk.say_and_wait(`好好将这份火红的身影记在心底！`);
     } else {
-      await chara_talk.say_and_wait(`......`);
+      await chara_talk.say_and_wait(`……`);
       await me.say_and_wait(
         `通过丸善斯基的背影，让那些有些泄气的大家们重新散发希望吧`,
       );
@@ -199,10 +199,7 @@ module.exports = async (hook, extra_flag) => {
     await me.say_and_wait(`一切顺利。`, true);
     await chara_talk.say_and_wait(`嗯。`);
     await era.printAndWait(`${chara_talk.name}走向了赛场。`);
-    await me.say_and_wait(
-      `......${chara_talk.name}，我会一直注视着你的。`,
-      true,
-    );
+    await me.say_and_wait(`……${chara_talk.name}，我会一直注视着你的。`, true);
   } else if (extra_flag.race === race_enum.toky_yus && edu_weeks < 95) {
     await print_event_name(`日本德比前・${chara_talk.name}`, chara_talk);
     await era.printAndWait(
@@ -262,7 +259,7 @@ module.exports = async (hook, extra_flag) => {
       `我真的应该.....不，一定，一定这是最好的办法了`,
       true,
     );
-    await chara_talk.say_and_wait(`真是令人怀念的衣服......不，没什么`);
+    await chara_talk.say_and_wait(`真是令人怀念的衣服……不，没什么`);
     await era.printAndWait(`${chara_talk.name}穿上了略显紧绷的决胜服。`);
     await chara_talk.say_and_wait(
       `接下来一定要把胜利带给亲爱的${
@@ -457,7 +454,7 @@ module.exports = async (hook, extra_flag) => {
     await era.input();
     era.printButton(`「让我们写下属于我们自己的故事吧。」`, 1);
     await era.input();
-    await chara_talk.say_and_wait(`......呵呵♪`);
+    await chara_talk.say_and_wait(`……呵呵♪`);
     await era.printAndWait(`丸善斯基露出了笑容。`);
     await chara_talk.say_and_wait(`无论接下来发生什么。你都要一直在我身边哦？`);
     await chara_talk.say_and_wait(`欢笑也好，哭泣也好。都要一起面对哦？`);

@@ -75,7 +75,7 @@ module.exports = async function (hook, _, event_object) {
       `虽然一开始计划着在你差不多回到训练室的时候突然发短信来着，不过一直搞不定按键真是急死人了><`,
     );
     await chara_talk.say_and_wait(
-      `最后只能妥协写信了......但是！${
+      `最后只能妥协写信了……但是！${
         era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'
       }我意外发现，通过信件传达感情好像也开始渐渐流行起来了！果然，${
         era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'
@@ -160,14 +160,14 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(
       `比起在草场之上火红色的身影,在月光照耀下默默伫立着的${chara_talk.name}向你露出了笑容。`,
     );
-    era.printButton(`「......${chara_talk.name}」`, 1);
+    era.printButton(`「……${chara_talk.name}」`, 1);
     await era.input();
     await era.printAndWait(`虽然想要开口，却不知道该说些什么。`);
     await era.printAndWait(`只能这样默默的对视。`);
-    await era.printAndWait(`......不知为何感到了害怕。`);
+    await era.printAndWait(`……不知为何感到了害怕。`);
     await era.printAndWait(`该怎么才能与火焰共舞呢？`);
     await era.printAndWait(`该怎么才能让${chara_talk.name}注视着我呢?`);
-    era.printButton(`「......」`, 1);
+    era.printButton(`「……」`, 1);
     await era.input();
     await chara_talk.say_and_wait(
       `^_^ 其实没必要这么紧张的。像正常对话一样就好了。`,
@@ -274,7 +274,7 @@ module.exports = async function (hook, _, event_object) {
         `就算一时之间用意识强行抑制住了，但是那份怀疑的种子已经埋下去了哦？`,
       );
       await say_by_passer_by(`幻影声`, `所以，没有原谅他的必`);
-      await chara_talk.say_and_wait(`啊啊......我知道的。`);
+      await chara_talk.say_and_wait(`啊啊……我知道的。`);
       await chara_talk.say_and_wait(
         `${
           era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
@@ -319,7 +319,7 @@ module.exports = async function (hook, _, event_object) {
         `看似密不透风的荆棘壁露出了一丝裂缝，抓住了机会的${chara_talk.name}就这么冲出了囚笼。`,
       );
       chara_talk.print(`离开了那片荆棘地后，浑身的力气也慢慢恢复过来了。`);
-      await say_by_passer_by(`幻影声`, `......因为生命是可能性的总和吗？`);
+      await say_by_passer_by(`幻影声`, `……因为生命是可能性的总和吗？`);
       chara_talk.print(`思索着话语的幻影，在了然的一刹那消散了。`);
     } else {
       era.drawLine();
@@ -359,7 +359,7 @@ module.exports = async function (hook, _, event_object) {
     await chara_talk.say_and_wait(
       `将过去的灰影远远抛在后面，就这么走在鲜花铺就的地毯之上。`,
     );
-    await chara_talk.say_and_wait(`......我的直觉告诉我。`);
+    await chara_talk.say_and_wait(`……我的直觉告诉我。`);
     era.printButton(`「向着苏醒时的朝向，不断奔跑」`, 1);
     await era.input();
     await chara_talk.say_and_wait(`预备！`);
@@ -371,7 +371,7 @@ module.exports = async function (hook, _, event_object) {
     chara_talk.print(
       `没有呼吸的掣肘，就这样越来越快，越来越快，快到好像要融化成花田的一部分了。`,
     );
-    await chara_talk.say_and_wait(`......这样的话。`);
+    await chara_talk.say_and_wait(`……这样的话。`);
     era.printButton(`「就这样一路加速！」`, 1);
     await era.input();
     await chara_talk.say_and_wait(`就让你看看${chara_talk.name}真正的实力吧！`);
@@ -475,7 +475,7 @@ module.exports = async function (hook, _, event_object) {
     await chara_talk.say_and_wait(
       `很稀饭这种感觉，如果 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 也一起玩的话更口耐了♪。`,
     );
-    await me.say_and_wait(`嗯......`);
+    await me.say_and_wait(`嗯……`);
     await era.printAndWait(
       `打扮成各种鬼怪的${chara_talk.get_uma_sex_title()}们都是未成年的${
         chara_talk.get_teen_sex_title
@@ -594,7 +594,7 @@ module.exports = async function (hook, _, event_object) {
     await me.say_and_wait(`${chara_talk.name}，说不定，我。`);
     await chara_talk.say_and_wait(`差不多快到海边了呢。`);
     await era.printAndWait(`嘴巴边即将蹦出的话语，最终还是化为了沉默。`);
-    await me.say_and_wait(`......是啊。`);
+    await me.say_and_wait(`……是啊。`);
     era.drawLine();
     await era.printAndWait(
       `从${chara_talk.name}的副驾驶位上下来后,${me.actual_name}向远处竭力眺望，在视野之中也只有像芝麻大小的人影。`,
@@ -602,7 +602,7 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(
       `或许是${chara_talk.get_uma_sex_title()}这一种族天生所具有的优势，亦或者是从尚未被海水冲散的脚印之中推断出的情况。`,
     );
-    await chara_talk.say_and_wait(`......`);
+    await chara_talk.say_and_wait(`……`);
     await era.printAndWait(
       `在这片深蓝色的空间之中，${chara_talk.name}凝视着起伏的波浪——`,
     );
@@ -700,7 +700,7 @@ module.exports = async function (hook, _, event_object) {
       `作为指导备受瞩目的赛${chara_talk.get_uma_sex_title()}的训练员，承受的压力比想象中还要巨大。`,
     );
     await say_by_passer_by(`医生`, `请保重身体。\n`);
-    await me.say_and_wait(`......谢谢。`);
+    await me.say_and_wait(`……谢谢。`);
     await chara_talk.say_and_wait(
       ` ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} ？`,
     );
@@ -775,11 +775,11 @@ module.exports = async function (hook, _, event_object) {
     await me.say_and_wait(
       `是感受不到快乐了吗？还是因为感受到了奔跑的赛${chara_talk.get_uma_sex_title()}们心中的自暴自弃？`,
     );
-    await chara_talk.say_and_wait(`......`);
+    await chara_talk.say_and_wait(`……`);
     await era.printAndWait(
       `${chara_talk.name}陷入了迟疑之中， ${chara_talk.sex_code - 1 ? '她' : '他'} 在思考究竟要不要把自己的真实想法告诉我。`,
     );
-    await chara_talk.say_and_wait(`......抱歉。`);
+    await chara_talk.say_and_wait(`……抱歉。`);
     await era.printAndWait(`${chara_talk.name}的声音似乎显得很失落。`);
     era.printButton(`「不，我这边才是。」`, 1);
     await era.input();
@@ -964,11 +964,11 @@ module.exports = async function (hook, _, event_object) {
           chara_talk.sex_code === 1 ? '先生' : '小姐'
         }用冷漠的眼神看着的样子还有最重要的工资飞了。`,
       );
-      await me.say_and_wait(`......`);
+      await me.say_and_wait(`……`);
       await era.printAndWait(`你度过了相当煎熬的一个晚上。`);
       event_marks.wind++;
     } else {
-      await me.say_and_wait(`......${chara_talk.name}，我还是送你回去了吧。`);
+      await me.say_and_wait(`……${chara_talk.name}，我还是送你回去了吧。`);
       await chara_talk.say_and_wait(`诶？真的吗？`);
       await era.printAndWait(
         `经过一番激烈的拉扯后，你最终说服了${chara_talk.name}回到所呆的公寓之中。`,
@@ -1029,7 +1029,7 @@ module.exports = async function (hook, _, event_object) {
     await me.say_and_wait(`抱歉，${chara_talk.name}有事来不了了。`);
     await say_by_passer_by(
       `${chara_talk.get_uma_sex_title()}`,
-      `......怎么会，一定是`,
+      `……怎么会，一定是`,
     );
     await era.printAndWait(`${chara_talk.get_uma_sex_title()}直直的瞪着你——`);
     await era.printAndWait(
@@ -1053,7 +1053,7 @@ module.exports = async function (hook, _, event_object) {
       `然后有些纠结的跟我说，还有一名${chara_talk.get_uma_sex_title()}跟 ${chara_talk.sex_code - 1 ? '她' : '他'} 约定了要在天台之上见面。`,
     );
     await me.say_and_wait(`所以,抱歉了。`);
-    await chara_talk.say_and_wait(`......`);
+    await chara_talk.say_and_wait(`……`);
     await era.printAndWait(
       `不知道对方接下来会做什么，虽然想要逃跑，但是，如果让 ${chara_talk.sex_code - 1 ? '她' : '他'} 就这么回去告诉${chara_talk.name}的话——`,
     );
@@ -1144,7 +1144,7 @@ module.exports = async function (hook, _, event_object) {
       );
       await say_by_passer_by(
         `${chara_talk.get_uma_sex_title()}`,
-        `......是啊，丸善前辈就是这样的人。`,
+        `……是啊，丸善前辈就是这样的人。`,
       );
       await say_by_passer_by(
         `${chara_talk.get_uma_sex_title()}`,
@@ -1240,7 +1240,7 @@ module.exports = async function (hook, _, event_object) {
     );
     chara_talk.print(`与深夜独自前行观看潮水涨落，又是一种不同的感觉呢。`);
     await chara_talk.say_and_wait(
-      `...... ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 。`,
+      `…… ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 。`,
     );
     chara_talk.print(
       `意外的，没有对 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 的背叛感到过于愤怒。`,
@@ -1345,7 +1345,7 @@ module.exports = async function (hook, _, event_object) {
       `也许只有在失去某物，在痛苦之中辗转反侧，才会刻骨铭心的意识到到自己之前是多么傲慢地挥霍一切吧。`,
     );
     await chara_talk.say_and_wait(
-      `......只有这样，在痛苦与迷茫过后，呕心沥血出来的某物才会散发出真正的光芒吧。`,
+      `……只有这样，在痛苦与迷茫过后，呕心沥血出来的某物才会散发出真正的光芒吧。`,
     );
     await chara_talk.say_and_wait(
       `从迷茫与痛苦化为觉悟的那个瞬间，我一直在期待着那一天的到来。`,
@@ -1450,7 +1450,7 @@ module.exports = async function (hook, _, event_object) {
       `${chara_talk.get_uma_sex_title()}A`,
       `‘我这里有你想要的答案。’`,
     );
-    await me.say_and_wait(`......我知道了。现在就出发吧。`);
+    await me.say_and_wait(`……我知道了。现在就出发吧。`);
     await me.say_and_wait(`什么时候，不，难道从一开始就在一旁观看吗？`, true);
     era.drawLine();
     await era.printAndWait(`你跟在${chara_talk.get_uma_sex_title()}的后面。`);
@@ -1493,7 +1493,7 @@ module.exports = async function (hook, _, event_object) {
     await me.say_and_wait(
       `我觉得${chara_talk.get_uma_sex_title()}与训练员之间的关系应该是互相扶持。`,
     );
-    await chara19_talk.say_and_wait(`......然后呢？`);
+    await chara19_talk.say_and_wait(`……然后呢？`);
     await era.printAndWait(`皇帝带着戏谑的表情看着你。`);
     await me.say_and_wait(`比如说二人三足之类`);
     await chara19_talk.say_and_wait(
@@ -1509,7 +1509,7 @@ module.exports = async function (hook, _, event_object) {
       `是在${chara_talk.get_uma_sex_title()}面对未来的迷茫和焦虑问题时，能妥善管理${chara_talk.get_uma_sex_title()}的愿景和信心。`,
     );
     await chara19_talk.say_and_wait(`你做到哪一条了？`);
-    await me.say_and_wait(`......`);
+    await me.say_and_wait(`……`);
     await me.say_and_wait(`皇帝在谈作为训练员所需的领导力。`, true);
     await me.say_and_wait(
       `而在这里的话， ${chara_talk.sex_code - 1 ? '她' : '他'} 想要我证明我是否有资格作为${chara_talk.name}的训练员。`,
@@ -1517,7 +1517,7 @@ module.exports = async function (hook, _, event_object) {
     );
     await me.say_and_wait(`那么`, true);
     await me.say_and_wait(
-      `......我要去的地方与 ${chara_talk.sex_code - 1 ? '她' : '他'} 同路，我要搭船，条件是当水手。`,
+      `……我要去的地方与 ${chara_talk.sex_code - 1 ? '她' : '他'} 同路，我要搭船，条件是当水手。`,
     );
     await me.say_and_wait(
       `每时每刻我都在看，自己是不是在向自己的目标前进，每时每刻都知道自己对船长的配合是出于自愿、是我自己的选择。`,
@@ -1528,7 +1528,7 @@ module.exports = async function (hook, _, event_object) {
     await me.say_and_wait(
       `不必要的重担，被人误解的风险，忍受着独自一人的孤独。`,
     );
-    await me.say_and_wait(`......某种意义上来说，这是我向理想献上的祭品。`);
+    await me.say_and_wait(`……某种意义上来说，这是我向理想献上的祭品。`);
     await me.say_and_wait(`不过，理想的道路怎么可能没有代价呢。`);
 
     await me.say_and_wait(
@@ -1538,7 +1538,7 @@ module.exports = async function (hook, _, event_object) {
       `服从，说到底不过是屈服换了个好听的说法罢了。`,
     );
     await chara19_talk.say_and_wait(`不过是在惊恐之中随意扯下来的谎话吧？`);
-    await me.say_and_wait(`......皇帝陛下应该听说过泥鳅这种生物吧。`);
+    await me.say_and_wait(`……皇帝陛下应该听说过泥鳅这种生物吧。`);
     await chara19_talk.say_and_wait(`在水田池塘里常见的生物，怎么了？`);
     await me.say_and_wait(`那么皇帝应该也知道，泥鳅是很难捕捉的生物吧。`);
     await me.say_and_wait(
@@ -1553,7 +1553,7 @@ module.exports = async function (hook, _, event_object) {
       `一个习惯了失败、接受了失败、最终适应了失败的人，只懂得如何失败、不能梦想甚至不敢梦想自己可能是成功的失败者。`,
     );
     await me.say_and_wait(
-      `......而一个从失败走向下一个失败的人是不可能获取成功的。`,
+      `……而一个从失败走向下一个失败的人是不可能获取成功的。`,
     );
     await me.say_and_wait(
       `从哭喊中赤条条出生，又将伴随着哭喊赤条条离开，不去做点什么在这个世界上留下印记的话，就这么带着遗憾离开的话，多少有点可惜吧。`,
@@ -1568,10 +1568,10 @@ module.exports = async function (hook, _, event_object) {
     await me.say_and_wait(
       `但我确信，${chara_talk.name}对我的信任与爱足够可靠，所以我以行动代替犹疑。`,
     );
-    await chara19_talk.say_and_wait(`......作为指挥者，只能说勉勉强强的及格。`);
+    await chara19_talk.say_and_wait(`……作为指挥者，只能说勉勉强强的及格。`);
     await chara19_talk.say_and_wait(`世界观尚处幼稚，价值观也不过平庸。`);
     await chara19_talk.say_and_wait(`唯一踩线的一点，只是坚定的愿景罢了。`);
-    await chara19_talk.say_and_wait(`......`);
+    await chara19_talk.say_and_wait(`……`);
     await era.printAndWait(`皇帝第一次正视着你。`);
     await chara19_talk.say_and_wait(`如果只有赢家通吃的话，那么`);
     await chara19_talk.say_and_wait(
@@ -1605,7 +1605,7 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(`因为对失败的恐惧，看着合适的机会从手边滑落。`);
     await era.printAndWait(`想要追求什么，又不敢伸出手。`);
     await me.say_and_wait(
-      `......与其说是让${chara_talk.name}，不如说是我要迈出这一步。`,
+      `……与其说是让${chara_talk.name}，不如说是我要迈出这一步。`,
       true,
     );
     await era.printAndWait(`你一边确认着购买的家具，一边思考着该如何行动。`);
@@ -1632,7 +1632,7 @@ module.exports = async function (hook, _, event_object) {
       `哎呀， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 原来这么在意我吗？`,
     );
     await chara_talk.say_and_wait(
-      `${era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'}我也想和 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 留下美好的回忆呢......`,
+      `${era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'}我也想和 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 留下美好的回忆呢……`,
     );
     await chara_talk.say_and_wait(`呵呵~已经开始期待起明天的行程了呢♪`);
     await era.printAndWait(`${chara_talk.name}的心情看起来十分不错。`);
@@ -1717,7 +1717,7 @@ module.exports = async function (hook, _, event_object) {
     chara_talk.print(`为什么我需要忍耐这份痛苦呢？`);
     chara_talk.print(`所以，就这么看着后辈们在赛场之中活跃的样子吧！`);
     chara_talk.print(`现在的我尤其是这点非常擅长哦！`);
-    await chara_talk.say_and_wait(`......`);
+    await chara_talk.say_and_wait(`……`);
     chara_talk.print(`可是，为什么心里还是有些空落落的感觉呢？`);
     chara_talk.print(`好像有什么需要我去寻找的答案在等着我一样？`);
     await chara_talk.say_and_wait(`答案吗？`);
@@ -1842,7 +1842,7 @@ module.exports = async function (hook, _, event_object) {
     chara_talk.print(
       `看来${chara_talk.sex_code - 1 ? '她' : '他'}终于找准自己的目标了。`,
     );
-    chara_talk.print(`......心突然疼了一下。`);
+    chara_talk.print(`……心突然疼了一下。`);
     await me.say_and_wait(
       `或许有些人天生不适合某个领域，不过重新思考自己拥有的资源并向着其他的方向努力，说不定会有很大的惊喜在等着呢！`,
     );
@@ -2000,9 +2000,9 @@ module.exports = async function (hook, _, event_object) {
     );
     await chara17_talk.say_and_wait(`哦？地狱的熊熊烈火没有将你焚烧殆尽吗？`);
     await chara_talk.say_and_wait(`穿过地狱的路离伊甸最近哦♪`);
-    await chara17_talk.say_and_wait(`......我真是越来越期待了。`);
+    await chara17_talk.say_and_wait(`……我真是越来越期待了。`);
     await chara_talk.say_and_wait(`可以当作是夸奖我吗！3q`);
-    await chara17_talk.say_and_wait(`......3q吗？Thank you 呵呵。`);
+    await chara17_talk.say_and_wait(`……3q吗？Thank you 呵呵。`);
     await chara17_talk.say_and_wait(
       `言归正传。既然你已经做好了要成为${chara_talk.get_uma_sex_title()}们心中的偶像，想必你已经做好了粉身碎骨的准备吧。`,
     );
@@ -2060,7 +2060,7 @@ module.exports = async function (hook, _, event_object) {
     );
     await era.printAndWait(`门后出现的${chara_talk.name}向你飞扑了过来。`);
     await chara_talk.say_and_wait(`今天的话一起睡吧？`);
-    await me.say_and_wait(`合宿的时候一起睡的话再怎么说也......`);
+    await me.say_and_wait(`合宿的时候一起睡的话再怎么说也……`);
     await chara_talk.say_and_wait(
       `已经和理事长${chara_talk.sex_code === 1 ? '先生' : '小姐'}说过了哦`,
     );
@@ -2110,7 +2110,7 @@ module.exports = async function (hook, _, event_object) {
     chara_talk.print(
       `在接受了主人的邀请后，小小的客人便稳稳当当地落在了书桌上`,
     );
-    await chara_talk.say_and_wait(`......说起来现在流行用落叶制成的书签呢`);
+    await chara_talk.say_and_wait(`……说起来现在流行用落叶制成的书签呢`);
     chara_talk.print(`小心地将树叶清洗干净后，用字典将树叶进行压平`);
     chara_talk.print(`清爽的空气拜访了这间公寓`);
     await chara_talk.say_and_wait(
