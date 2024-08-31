@@ -98,19 +98,6 @@ async function game_over(again) {
               era.set('cflag:0:下胸围', era.get('cflag:0:胸围') - 15);
             }
             era.set('cflag:0:性别', 10);
-            era.set('cflag:0:种族', 1);
-            era.set(
-              'maxbase:0:速度',
-              Math.min(2000, era.get('maxbase:0:速度') + 800),
-            );
-            era.set(
-              'maxbase:0:耐力',
-              Math.min(2000, era.get('maxbase:0:耐力') + 800),
-            );
-            era.set(
-              'maxbase:0:力量',
-              Math.min(2000, era.get('maxbase:0:力量') + 800),
-            );
             era.set('cflag:0:育成回合计时', 0);
             era.set('flag:当前声望', era.get('global:初始声望增加量') + 100);
             CharaTalk.me = new CharaTalk(0);
@@ -174,14 +161,40 @@ async function game_over(again) {
               width: 12,
             });
             era.println();
-            await era.printAndWait(`${CharaTalk.me.name} 被转变为了马娘！`);
-            await era.printAndWait(
-              `${CharaTalk.me.name} 仍然可以招募马娘，训练她们，陪伴她们奔跑，但不再享有特雷森下发的工资。`,
-            );
-            await era.printAndWait(
-              `相应的，${CharaTalk.me.name} 可以进行自主训练，参与赛事，并赢取奖金和社会声望。`,
-            );
+            if (era.get('cflag:0:种族')) {
+              await era.printAndWait([
+                CharaTalk.me.get_colored_name(),
+                ' 遭受了改造！',
+              ]);
+            } else {
+              era.set(
+                'maxbase:0:速度',
+                Math.min(2000, era.get('maxbase:0:速度') + 800),
+              );
+              era.set(
+                'maxbase:0:耐力',
+                Math.min(2000, era.get('maxbase:0:耐力') + 800),
+              );
+              era.set(
+                'maxbase:0:力量',
+                Math.min(2000, era.get('maxbase:0:力量') + 800),
+              );
+              await era.printAndWait([
+                CharaTalk.me.get_colored_name(),
+                ' 被转变为了马娘！',
+              ]);
+              await era.printAndWait([
+                CharaTalk.me.get_colored_name(),
+                ' 仍然可以招募马娘，训练她们，陪伴她们奔跑，但不再享有特雷森下发的工资。',
+              ]);
+              await era.printAndWait([
+                '相应的，',
+                CharaTalk.me.get_colored_name(),
+                ' 可以进行自主训练，参与赛事，并赢取奖金和社会声望。',
+              ]);
+            }
             await era.printAndWait('声望再次低于零，会遭受更严厉的惩罚！');
+            era.set('cflag:0:种族', 1);
             break;
           case 2:
             new Array(3).fill(0).forEach((_, i) => {
