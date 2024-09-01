@@ -33,6 +33,8 @@ class FalconEduMarks extends EduEventMarks {
   race_count;
   // 招募标记
   after_recruit;
+  // TE 偶像
+  idol;
 
   constructor() {
     super(46);

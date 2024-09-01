@@ -4,6 +4,7 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -385,20 +386,22 @@ handlers[event_hooks.office_prepare] = async function () {
 
 handlers[event_hooks.office_game] = async function () {
   const talk_arr = [
-    `飞鹰子对游戏这部分不太熟悉呢...训练员先生有推荐的吗？`,
-    `说起来最近直播打游戏的偶像也开始变得多起来了呢，飞鹰子？不不不，飞鹰子对游戏领域的话不熟悉呢。`,
+    `飞鹰子不太擅长游戏呢……不过，音游类例外⭐`,
+    `说起来最近主播变得很受欢迎了呢……诶？训练员先生想让飞鹰子也去直播吗？`,
+    `这样的话，不去追逐潮流可不行呢！`,
   ];
   if (era.get('love:46') === 100) {
     talk_arr.push(
-      `训练员先生靠的真近呢...身上的气味也很好闻⭐`,
+      `欸嘿嘿⭐……训练员先生身上的气味真好闻♪`,
       `恋人之间适合玩的游戏的话,嗯……要不要试试看OO厨房？`,
-      `每天花15分钟直播一下和训练员先生一起玩游戏的景象似乎也不错呢，训练员先生怎么看的呢？`,
+      `每天花15分钟直播一下和训练员先生一起玩游戏的景象似乎也不错呢，就这么办吧！`,
     );
   } else if (era.get('love:46') >= 75) {
     talk_arr.push(
-      `飞鹰子很擅长随着动感节奏不断触及屏幕的游戏呢...欸，训练员先生你举起手机在拍视频吗？`,
-      `说起来galgame也是一个人游玩的游戏呢，训练员先生也会对它感兴趣吗？`,
-      `飞鹰子最近也在尝试直播游戏呢，虽然一直失误不过直播间的人数却变得多起来了！？`,
+      `飞鹰子很擅长随着动感节奏不断触及屏幕的游戏呢……欸，训练员先生你举起手机在拍视频吗？`,
+      `说起来galgame作为文字冒险游戏也有相当悠久的历史了呢，训练员先生也会对它感兴趣吗？`,
+      `托街头演出积累起来的经验，直播间的人数也在不断上升中！`,
+      `不管是线上还是线下的粉丝，作为顶级偶像的飞鹰子都会平等对待的！`,
     );
   }
   await chara_talk.say_and_wait(get_random_entry(talk_arr));
@@ -409,21 +412,25 @@ handlers[event_hooks.school_atrium] = async function () {
   if (!temp) {
     switch (get_random_value(0, 1)) {
       case 0:
-        await chara_talk.say_and_wait(
-          `为什么每天还要写作业啊，还有期末考试的时候好麻烦啊`,
-        );
+        await chara_talk.say_and_wait(`数学好困难！下次又要补习了！`);
         break;
       case 1:
         await chara_talk.say_and_wait(
           `为什么那个木头训练员还是没有看懂我的暗示啊！！！`,
         );
         break;
+      case 2:
+        await chara_talk.say_and_wait(
+          `……虽然认识了很多朋友，还有了属于自己的训练员`,
+        );
+        await chara_talk.say_and_wait(`不过为什么，偶尔还是感到害怕呢？`);
+        break;
     }
   } else {
     switch (get_random_value(0, 1)) {
       case 0:
         await chara_talk.say_and_wait(
-          `不能让粉丝一直等着偶像，这是醒目飞鹰流偶像的格言哦。那么，训练员先生接下来去那里玩呢？`,
+          `醒目飞鹰流第一条 让粉丝等待的偶像是失格的！接下来出发的目的地是？`,
         );
         break;
       case 1:
@@ -438,13 +445,14 @@ handlers[event_hooks.school_atrium] = async function () {
 handlers[event_hooks.school_rooftop] = async function () {
   const chara_talk = get_chara_talk(46);
   if (Math.random() < 0.5) {
-    await chara_talk.say_and_wait(
-      `在天台上感受到风的吹拂...不知不觉想要唱歌呢⭐`,
-    );
+    await chara_talk.say_and_wait(`在天台上感受到风的吹拂……突然想要唱歌了呢⭐`);
+    await chara_talk.say_and_wait(`接下来把这段发到马推上吧♪`);
   } else {
     await chara_talk.say_and_wait(
-      `从天台上往下面看去，仿佛整个特雷森变成了我的舞台！终有一天训练员先生也会感受到的！`,
+      `如果有一天要在粉丝与训练员先生之间做出选择的话……`,
+      { color: chara_talk.color, fontSize: '0.75rem' },
     );
+    await chara_talk.say_and_wait(`……飞鹰子刚刚什么都没说哦⭐`);
   }
 };
 
@@ -453,97 +461,172 @@ handlers[event_hooks.out_church] = async function () {
     me = get_chara_talk(0),
     chara340_talk = get_chara_talk(340),
     chara341_talk = get_chara_talk(341),
-    chara342_talk = get_chara_talk(342);
+    chara342_talk = get_chara_talk(342),
+    event_marks = new FalconEduMarks(),
+    edu_weeks = era.get('cflag:46:育成回合计时');
   chara340_talk.name = '温柔的女神';
   chara341_talk.name = '睿智的女神';
   chara342_talk.name = '严肃的女神';
-  await chara_talk.say_and_wait(`训练员先生，这边！`);
-  await era.printAndWait(`今天是休息日，作为偶像的巡回演出也告一段落。`);
-  await era.printAndWait(
-    `无所事事的时候，醒目飞鹰突然提出到附近听说很灵的神社去祈福。`,
-  );
-  await era.printAndWait(
-    `相传三女神下凡时啜饮过此处的清泉,于是这条山间的小溪便得到了她的祝福`,
-  );
-  await era.printAndWait(
-    `古代的人们便围绕着这条小溪建起了神社,前来参拜的人们祈求着事业或者爱情的成功`,
-  );
-  await chara_talk.say_and_wait(
-    `呜~听说小林同学说这个神社很灵的样子所以才过来的，没想到人居然这么多。`,
-  );
-  await era.printAndWait(
-    `因为是突然提议的缘故，等（玩家名）和醒目飞鹰来到这里时，队伍已经排到了山脚`,
-  );
-  era.printButton(`虽然有点晚了，我们也赶快去排队吧`, 1);
-  await era.input();
-  await era.printAndWait(
-    `出发之时长长的影子等到你们的时候已经蜷缩到你们脚底下了。`,
-  );
-  await era.printAndWait(
-    `穿过鸟居,（玩家名）和醒目飞鹰走进了这座三女神的神社之中`,
-  );
-  await era.printAndWait(
-    `学着前面的游客往赛钱箱里投入了几枚硬币,拍了拍手双手合十,闭上眼开始祈祷`,
-  );
-  await chara_talk.say_and_wait(`……⭐`);
-  if (get_random_value(0, 1)) {
-    await era.printAndWait(`等了一会似乎也没有听到铃铛的响声。`);
-    await chara_talk.say_and_wait(`...这份烦恼就让飞鹰子的笑容来治愈吧⭐`);
-    await era.printAndWait(`醒目飞鹰似乎许下了什么很重要的愿望。`);
-    await era.printAndWait(`尽管如此优先想着的依然是安慰你。`);
-    await era.printAndWait(`不由得紧紧握住了她的手。`);
-    await chara_talk.say_and_wait(`……⭐，`);
+  // 相传三女神下凡时啜饮过此处的清泉,于是这条山间的小溪便得到了她的祝福
+  // 古代的人们便围绕着这条小溪建起了神社,前来参拜的人们祈求着事业或者爱情的成功
+  if (edu_weeks < 47 + 15) {
+    // 如果要宣传的话，为什么飞鹰子不去当志愿者或者做兼职巫女呢？
+    // 如果是在这种地方活跃的话，对醒目飞鹰印象深刻的人应该会有很多
+    await era.printAndWait(`休息日的一天上午。`);
     await era.printAndWait(
-      `回到训练室后你在飞鹰子的鼓舞下研究起了接下来该去参加的比赛`,
+      `主动向神社申请作为志愿者的醒目飞鹰拉着你来到了神社。`,
     );
-  } else {
-    switch (get_random_value(0, 2)) {
-      case 0:
-        await chara340_talk.say_and_wait('……真是坚强的孩子啊');
-        break;
-      case 1:
-        await chara341_talk.say_and_wait(
-          '可爱的孩子，希望不要把事情全部揽到自己身上',
-        );
-        break;
-      case 2:
-        await chara342_talk.say_and_wait(
-          '一切问题的尽头，就在伊甸之中，一刻不停的奔跑吧',
-        );
-    }
-    await era.printAndWait(`叮铃铃铃`);
-    await era.printAndWait(`似乎听到了三女神的低语。`);
-    era.printButton(`三女神吗？`, 1);
+    await chara_talk.say_and_wait(`早安⭐`);
+    await chara_talk.say_and_wait(
+      `——即使在领放时依然闪闪发光的可爱马娘飞鹰子♪，应神社的邀请作为志愿者非常荣幸向大家介绍身后的景点。`,
+    );
+    await era.printAndWait(
+      `身穿巫女服作为一日志愿者的醒目飞鹰摇动着手中的御币。`,
+    );
+    await chara_talk.say_and_wait(
+      `还有！飞鹰子每天早上都会在河岸边的草地上开演唱会，希望大家多多支持♪`,
+    );
+    await era.printAndWait(
+      `说到这里，醒目飞鹰大幅度的晃动着手臂，手中的御币在空中划过一条银色之线。`,
+    );
+    await say_by_passer_by(
+      `游客A`,
+      `志愿者小姐，我第一次来，可以给我讲一下这个神社的背景吗？`,
+    );
+    await chara_talk.say_and_wait(
+      `——就是这样！作为偶像不好好回应粉丝的期待可不行！`,
+    );
+    await chara_talk.say_and_wait(`飞鹰子会全力以赴回答你！`);
+    await era.printAndWait(
+      `突然元气十足的声音似乎吓到了第一次前来的游客，但更多的游客却因为好奇而向这边靠近。`,
+    );
+    await chara_talk.say_and_wait(`很久很久以前，这条小溪比现在大的多得多。`);
+    await chara_talk.say_and_wait(
+      `有一天，为了在世界各地创造马娘而不停奔走的三女神来到了这里，她们因为口渴而来到了这条小溪边。`,
+    );
+    await chara_talk.say_and_wait(`源自这条小溪而诞生的神明隆重的迎接了她们。`);
+    await chara_talk.say_and_wait(
+      `在盛情款待之下，心满意足的三女神向小溪的神明提出了建议。`,
+    );
+    await say_by_passer_by(
+      `三女神`,
+      `我们受到了你热情的款待，请允许我们给你祝福。`,
+    );
+    await chara_talk.say_and_wait(`神明则拒绝了她们的好意。`);
+    await say_by_passer_by(
+      `小溪的神明`,
+      `能得到女神的祝福不胜惶恐，但是请把这份祝福赋予围绕这条小溪生存的生灵吧。`,
+    );
+    await say_by_passer_by(`小溪的神明`, `他们比我重要得多。`);
+    await chara_talk.say_and_wait(
+      `被神明无私所感动的三女神们允许了他的请求，将祝福转受给了这条小溪。`,
+    );
+    await chara_talk.say_and_wait(
+      `在那之后，饮用这条小溪的生灵们受到了三女神的祝福。`,
+    );
+    await chara_talk.say_and_wait(
+      `为了纪念这位无私奉献的神明，古代的人们便围绕着这条小溪建起了神社,虽然随着环境的变迁，溪流缩小成了一个池塘。`,
+    );
+    await chara_talk.say_and_wait(`但为了祈求事业和幸福的人们却依然络绎不绝。`);
+    await chara_talk.say_and_wait(`综上，这就是这个神社的由来。`);
+    await say_by_passer_by(`游客A`, `好，再来一个！`);
+    await say_by_passer_by(`游客B`, `果然？`);
+    await say_by_passer_by(`游客C`, `那还用说！`);
+    await era.printAndWait(`被故事吸引的游客们不知不觉间把飞鹰子紧紧围住了。`);
+    await chara_talk.say_and_wait(
+      `大家……没想到大家这么热情！飞鹰子也感受到了大家的火焰！`,
+    );
+    await chara_talk.say_and_wait(`既然这样！醒目飞鹰的临时演唱会——`);
+    era.printButton(`咳咳。`, 1);
     await era.input();
-    await chara_talk.say_and_wait(`说的是什么意思呢？`, true);
-    await chara_talk.say_and_wait(`……飞鹰子一定会坚持下去的`);
-    await era.printAndWait(`与预想之中不同，飞鹰子似乎露出了忧郁的表情。`);
-    await chara_talk.say_and_wait(`……⭐训练员先生许下了什么愿望呢？`);
-    await era.printAndWait(`忧郁很快被少女的笑容所掩盖。`);
-    if (love >= 90) {
-      await era.printAndWait(`直到离开神社后两个人都默默地走着`);
-      await me.say_and_wait(`忧郁的日子已经过去了`);
-      await era.printAndWait(`不知为何（玩家名）忽然安慰着醒目飞鹰。`);
-      await chara_talk.say_and_wait(`不想走在你的前面，因为我不擅长引导`);
-      await era.printAndWait(`两人之间的手紧紧地握在了一起`);
-      await me.say_and_wait(`不想走在你的后面，因为害怕失去你的身影`);
-      await era.printAndWait(`孤独的心找到了另一颗孤独的心`);
-      await chara_talk.say_and_wait(`我只想成为你的朋友走在你的旁边。`);
-      await era.printAndWait(`开口之前，圆圆的脑袋已经靠着你的肩膀了。`);
-      await me.say_and_wait(`请允许我作为您的骑士守护你，我最爱的公主殿下。`); //性转为王子
-      await chara_talk.say_and_wait(`最喜欢你了，（玩家名）。`);
-    } else {
-      await chara_talk.say_and_wait(
-        `没想到神社真的有效呢，飞鹰子都变得亮晶晶了呢⭐`,
-      );
-      await era.printAndWait(`飞鹰子不知何时突然充满了活力。`);
+    await chara_talk.say_and_wait(`哎？训练员先生？`);
+    await era.printAndWait(`被突然打断的醒目飞鹰惊讶的看着你。`);
+    era.printButton(`别忘了来这里的目的！`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(
+      `——对了！飞鹰子每天早上都会在河岸边举办临时演唱会，希望大家多多支持♪`,
+    );
+    era.printButton(`飞鹰子！`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(`诶——`);
+    await me.say_and_wait(
+      `打扰了，神社就在眼前这位可爱的马娘背后，如果再不出发前面的队伍会变得很长。`,
+    );
+    await say_by_passer_by(
+      `游客D`,
+      `说的也是！不赶快排队的话要等的时间就更多了！`,
+    );
+    await chara_talk.say_and_wait(`请跟随飞鹰子的指引——`);
+    await era.printAndWait(
+      `聚拢而来的游客在你和醒目飞鹰的引导之下排成了一条长队。`,
+    );
+    await era.printAndWait(`一段时间过后\n\n`);
+    await say_by_passer_by(`神主`, `醒目飞鹰还有这位训练员辛苦了。`);
+    await chara_talk.say_and_wait(`飞鹰子过得很开心呢⭐`);
+    await say_by_passer_by(`神主`, `作为志愿者的报酬，我想想——`);
+    await era.printAndWait(`准备片刻后，他开始向三女神神像祈祷。`);
+    await say_by_passer_by(
+      `神主`,
+      `美丽又仁慈的三女神大人，请听作为侍从的在下所言。`,
+    );
+    await era.printAndWait(
+      `在神主向三女神祈求之时，你们站在一旁默默的等待者回应。`,
+    );
+    if (love > 75) {
+      await say_by_passer_by(`神主`, `……我知道了。`);
+      await era.printAndWait(`仪式结束，神主看向你们。`);
+      await say_by_passer_by(`神主`, `三女神大人对你们有些话想说。`);
+      await chara_talk.say_and_wait(`欸？`);
       await era.printAndWait(
-        `醒目飞鹰「...明明飞鹰子这么喜欢你，训练员先生可真是木头呢。」。`,
-        { color: chara_talk.color, fontSize: '0.75rem' },
+        `在神主向三女神祈求之时，你们站在一旁默默的等待者回应。`,
       );
-      await chara_talk.say_and_wait(`什么都没有哦⭐`);
-      await era.printAndWait(`带着微妙的感觉两人离开了神社。`);
+      await say_by_passer_by(`神主`, `请不要紧张，三女神大人只是有些好奇。`);
+      await say_by_passer_by(`神主`, `那么，请跟随我的指引……`);
+      await era.printAndWait(`在专业人士的指导之下，你们闭上了眼睛。`);
+      switch (get_random_value(0, 2)) {
+        case 0:
+          await chara340_talk.say_and_wait('……真是坚强的孩子啊');
+          break;
+        case 1:
+          await chara341_talk.say_and_wait(
+            '可爱的孩子，希望不要把事情全部揽到自己身上',
+          );
+          break;
+        case 2:
+          await chara342_talk.say_and_wait(
+            '一切问题的尽头，就在伊甸之中，一刻不停的奔跑吧',
+          );
+      }
+      await era.printAndWait(`叮铃铃铃`);
+      await era.printAndWait(`似乎听到了三女神的低语。`);
+      await chara_talk.say_and_wait(`……飞鹰子已经很幸福了。`);
+      await era.printAndWait(`与预想之中不同，飞鹰子似乎露出了忧郁的表情。`);
+      await chara_talk.say_and_wait(`训练员先生许下了什么愿望呢⭐`);
+      await era.printAndWait(`忧郁很快被少女的笑容所掩盖。`);
+      event_marks.idol++;
+    } else {
+      await say_by_passer_by(`神主`, `……我知道了。`);
+      await era.printAndWait(`仪式结束，神主从怀中取出了一张符卡。`);
+      await say_by_passer_by(`神主`, `小小礼物不成敬意。`);
+      await era.printAndWait([
+        chara_talk.get_colored_name(),
+        '/',
+        me.get_colored_name(),
+        '「',
+        { content: '非常', color: chara_talk.color },
+        '感谢！」',
+      ]);
+      await say_by_passer_by(
+        `神主`,
+        `等二位关系更好一点的时候，希望还能来这里一趟，衷心祝愿二位能实现自己的目标。`,
+      );
+      await era.printAndWait(
+        `回到训练室后，你觉得和醒目飞鹰之间的关系变好了一点。`,
+      );
     }
+  } else {
+    // todo 待更新第二年后续写
+    await era.printAndWait(`醒目飞鹰。`);
   }
 };
 
@@ -556,22 +639,24 @@ handlers[event_hooks.out_shopping] = async function (hook) {
     case 0:
       switch (get_random_value(0, 2)) {
         case 0:
-          await chara_talk.say_and_wait(`飞鹰子也没有玩过街机呢`);
+          await chara_talk.say_and_wait(`训练员先生就好好看着飞鹰子的表现吧！`);
           await chara_talk.say_and_wait(
-            `不过如果是和训练员先生一起的话，飞鹰子会很高兴的哦♪`,
+            `就算是新的事物也要全力以赴，飞鹰子，加油♪`,
           );
           await era.printAndWait(
-            `虽然都是第一次尝试跳舞机，不过作为偶像的身体协调性比你这个上次运动都不知道是什么时候的半吊子强了一条街`,
+            `看着全perfect达成的醒目飞鹰，以及勉强完赛的你，你陷入了沉默。`,
           );
           break;
         case 1:
-          await chara_talk.say_and_wait(`呜——头好晕啊`);
+          await chara_talk.say_and_wait(
+            `如果能打破这个记录的话，说不定会有更多的人认识飞鹰子！`,
+          );
           await era.printAndWait(
-            `走进街机厅面对光污染和激烈的节奏，两人都有点晕乎乎的`,
+            `在面对新记录时，醒目飞鹰在奇怪的地方燃起了胜负欲。`,
           );
           break;
         case 2:
-          await chara_talk.say_and_wait(`...!...!!...成功了!!!训练员先生！`);
+          await chara_talk.say_and_wait(`……成功了!训练员先生！`);
           await era.printAndWait(
             `紧张地盯着夹娃娃机地醒目飞鹰大气不敢出，直到夹到玩偶为止才在欢呼声中放松下来`,
           );
@@ -579,59 +664,149 @@ handlers[event_hooks.out_shopping] = async function (hook) {
       }
       break;
     case 1:
-      await chara_talk.say_and_wait(
-        `训练员先生！买东西出来的时候那边的店主给了我一张抽奖券！`,
+      // 商业街开展活动 醒目飞鹰拿到了一张抽奖券
+      // 玩家决定是自己抽还是让醒目飞鹰抽
+      await say_by_passer_by(
+        `杂货店店主`,
+        `我看看……海报还有传单，嗯……这次还额外购买了空白明信片。`,
       );
-      era.printButton(`应该是附近的商店推出的促销活动吧`, 1);
-      await era.input();
-      await era.printAndWait(`你看向了商店街入口附近的抽奖机`);
-      await chara_talk.say_and_wait(`那么，还是训练员先生来抽吧！`);
+      await say_by_passer_by(`杂货店店主`, `东西都齐了，路上小心。`);
+      await chara_talk.say_and_wait(`好的⭐`);
+      await say_by_passer_by(`杂货店店主`, `哦，对了，这是附赠的抽奖券。`);
+      await era.printAndWait(`店主笑呵呵的递给了醒目飞鹰一张抽奖券。`);
+      await say_by_passer_by(
+        `杂货店店主`,
+        `从进来的入口处那边找那个小老头，然后把这张票交给他就行了。`,
+      );
+      await chara_talk.say_and_wait(`非常感谢。说不定今天是飞鹰子的幸运日呢⭐`);
+      await say_by_passer_by(
+        `杂货店店主`,
+        `幸运星小姐下次也要元气满满的哦，路上小心。`,
+      );
+      await chara_talk.say_and_wait(`下次的印刷还有小礼品也拜托了⭐`);
+      await era.printAndWait(
+        `带着满满一袋的小礼物，醒目飞鹰啪塔啪塔的来到了你的身边。`,
+      );
+      await chara_talk.say_and_wait(`训练员先生接下来还有什么想买的东西吗？`);
+      await era.printAndWait(
+        `你摇了摇头，然后看向了醒目飞鹰紧紧握着的那张抽奖券。`,
+      );
+      await chara_talk.say_and_wait(`……那么，还是让训练员先生来抽吧！`);
       await era.printAndWait(`飞鹰子将你推到了抽奖机边上`);
       era.printButton(`既然这样的话`, 1);
       await era.input();
       switch (get_random_value(0, 4)) {
         case 0:
-          await chara_talk.say_and_wait(
-            `……无论何时，作为偶像都要保持微笑哦！训练员先生看着飞鹰子的笑容然后振作起来吧！`,
+          await say_by_passer_by(`店主`, `四等奖 纸巾！`);
+          await era.printAndWait(
+            `看着从抽奖机里掉落的白色小球，店主摇动手中的铃铛。`,
           );
-          await era.printAndWait(`飞鹰子安慰着抽到了纸巾的你。`);
+          await chara_talk.say_and_wait(
+            `……纸巾吗。没关系！看着飞鹰子的笑容然后振作起来吧！`,
+          );
+          await era.printAndWait(
+            `虽然飞鹰子竭力调整现场的气氛，但抽到纸巾还是让你们感到沮丧。`,
+          );
           break;
         case 1:
-          await chara_talk.say_and_wait(`嗯~胡萝卜看上去很适合作为麦克风呢`);
-          await era.printAndWait(`醒目飞鹰将头上的丝带解下来装饰到了胡萝卜上`);
-          await chara_talk.say_and_wait(`锵锵~醒目飞鹰胡萝卜诞生了！`);
+          await say_by_passer_by(`店主`, `三等奖 一根胡萝卜！`);
           await era.printAndWait(
-            `散发的飞鹰子与系着可爱蝴蝶结的胡萝卜组成了治愈的画面。`,
+            `看着从抽奖机里掉落的黄色小球，店主瞥了一眼，然后摇动手中的铃铛。`,
+          );
+          await chara_talk.say_and_wait(
+            `嗯……这根胡萝卜看上去很适合作为麦克风呢。`,
+          );
+          await era.printAndWait(
+            `醒目飞鹰从购物袋中取出了一张贴纸贴在了胡萝卜上。`,
+          );
+          await chara_talk.say_and_wait(`明天的演出请多指教了~胡萝卜先生！`);
+          era.printButton(`不要玩弄食物啊！`, 1);
+          await era.input();
+          await chara_talk.say_and_wait(`唔——明明飞鹰子觉得很可爱的说。`);
+          await era.printAndWait(
+            `在胡萝卜变成今晚的配菜前，都好好用细绳系在了醒目飞鹰的腰间。`,
           );
           break;
         case 2:
-          await chara_talk.say_and_wait(
-            `哇！这么多胡萝卜的话，不如让胡萝卜先生们作为我的粉丝吧！`,
-          );
-          await chara_talk.say_and_wait(`胡萝卜偶像吗？呵呵⭐`);
+          await say_by_passer_by(`店主`, `二等奖 一堆胡萝卜！`);
           await era.printAndWait(
-            `之后让胡萝卜们坐在了插上了荧光棒的椅子上为飞鹰子应援。`,
+            `看着从抽奖机里掉落的胡萝卜色小球，店主瞥了一眼，然后摇动手中的铃铛。`,
+          );
+          await era.printAndWait(
+            `你从店主手中接过满满一箱胡萝卜，刚苦恼如何带回去时。`,
+          );
+          await era.printAndWait(`一双小手轻轻将困难提了起来。`);
+          await chara_talk.say_and_wait(
+            `哇……比想象之中还要多的胡萝卜，恐怕够吃半个月了。`,
+          );
+          await chara_talk.say_and_wait(
+            `就作为下次演出时给前来观看的粉丝们的纪念品吧！`,
+          );
+          era.printButton(`将胡萝卜竖起来作为假想观众进行偶像练习吧！`, 1);
+          await era.input();
+          await chara_talk.say_and_wait(
+            `诶？假想练习吗？不愧是训练员先生，那就这么办吧。`,
+          );
+          await era.printAndWait(`当晚\n`);
+          await chara_talk.say_and_wait(
+            `即使是领放也在不停闪耀，马娘偶像——醒目飞鹰参上♪`,
+          );
+          await say_by_passer_by(`你与竖着排成一排的胡萝卜们`, `噢噢噢噢！`);
+          await chara_talk.say_and_wait(
+            `嗯嗯！飞鹰子感受到大家的热情了呢！那么Let's go!`,
+          );
+          await say_by_passer_by(
+            `你与竖着排成一排的胡萝卜们`,
+            `(疯狂摇动着应援棒)`,
+          );
+          await chara_talk.say_and_wait(
+            `……没想到大家居然这么热情，飞鹰子感动的都要落泪了……好！为了粉丝们的期待，就让大家看看飞鹰子的浑身解数吧！`,
+          );
+          await era.printAndWait(
+            `不久之后，半夜时分的训练室会有胡萝卜化身马娘开演唱会的怪谈在校园传开了。`,
           );
           break;
         case 3:
-          await chara_talk.say_and_wait(`是胡萝卜汉堡！看上去很好吃的样子！`);
-          await chara_talk.say_and_wait(`运气真好呢！`);
+          await say_by_passer_by(`店主`, `一等奖 胡萝卜汉堡！`);
           await era.printAndWait(
-            `之后（玩家名）因为与飞鹰子一起吃汉堡的自拍照造成的风波，两人被迫乖乖听手纲小姐（绿色恶魔）说教`,
+            `看着从抽奖机里掉落的红色小球，店主轻轻将它拾起，然后摇动着手中的铃铛。`,
+          );
+          await chara_talk.say_and_wait(
+            `诶？是胡萝卜汉堡吗……看上去很好吃的样子！`,
+          );
+          await chara_talk.say_and_wait(`运气真好呢！`);
+          await chara_talk.say_and_wait(`先在马推上发一条消息吧！`);
+          await era.printAndWait(
+            `#商业街一等奖奖品竟然是胡萝卜汉堡？！#与训练员之间发生的故事 很快占据了热搜。`,
+          );
+          await era.printAndWait(
+            `不久之后，因为把训练员一起拍了进去而造成了巨大的舆论被手纲小姐叫了过去一通说教。`,
           );
           break;
         case 4:
-          await era.printAndWait(`叮铃铃`);
-          await chara_talk.say_and_wait(`诶!`);
-          await era.printAndWait(`店主「恭喜」`);
+          await say_by_passer_by(`店主`, `特等奖 温泉旅行券！恭喜！`);
           await era.printAndWait(
-            `看着作为大奖的黄色小球出来的一瞬间，两人都宕机了。`,
+            `看着从抽奖机里掉落的粉色小球，店主将它拾起看了又看，然后大声的宣布结果。`,
           );
-          await chara_talk.say_and_wait(`……训，训练员先生！我们好像中大奖了！`);
-          era.printButton(`是，是啊，中大奖了`, 1);
+          await era.printAndWait(`叮铃铃`);
+          await chara_talk.say_and_wait(`诶……`);
+          await chara_talk.say_and_wait(`果然今天是飞鹰子的幸运日呢！`);
+          era.printButton(`诶？真的中了？`, 1);
           await era.input();
+          await say_by_passer_by(
+            `店主`,
+            `这张温泉旅行券没有使用时间，所以请好好珍惜。`,
+          );
+          await era.printAndWait(`店主满脸笑容的将这张旅行券递给了你们。`);
+          await chara_talk.say_and_wait(`这样的话，什么时候用才好呢？`);
+          era.printButton(`等到第三年结束之后再用吧！`, 1);
+          await era.input();
+          await chara_talk.say_and_wait(
+            `既然训练员先生都这么说了，那就交给训练员先生了哦？`,
+          );
+          await chara_talk.say_and_wait(`一定要好好爱惜才行！`);
           await era.printAndWait(
-            `不顾形象的两人紧紧抱在了一起，突然意识到两人之间的距离过近后又满脸通红的分开了`,
+            `回到训练室，在醒目飞鹰的注视之下，你将这张温泉券放在了抽屉深处。`,
           );
           break;
       }
@@ -671,7 +846,7 @@ handlers[event_hooks.out_shopping] = async function (hook) {
           ],
           [
             [`飞鹰子，其实什么电影都OK哦，只要是和训练员先生一起的话`],
-            `醒目飞鹰看着荧幕上的推荐电影自言自语`,
+            `醒目飞鹰兴致勃勃的看着你`,
           ],
         );
       }
