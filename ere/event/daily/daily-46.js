@@ -818,6 +818,7 @@ handlers[event_hooks.out_shopping] = async function (hook) {
       await era.printAndWait(`看着进入了状态的飞鹰子，你也默默举起了荧光棒。`);
       break;
     case 3:
+      // todo 重要剧情暗示
       buffer.push(
         [
           [`《偶像的烦恼》训练员先生一起来看这部吧。`],
@@ -865,54 +866,43 @@ handlers[event_hooks.out_station] = async function (hook) {
   switch (Math.floor(Math.random() * 3)) {
     case 0:
       switch (get_random_value(0, 1)) {
+        // 吃饭
         case 0:
-          await chara_talk.say_and_wait(
-            `附近有一家甜品店味道很好哦，训练员先生一起来尝尝看吧！`,
-          );
-          await era.printAndWait(
-            `紧紧缠着你的手臂的醒目飞鹰兴奋地将你拉了过去`,
-          );
-          await chara_talk.say_and_wait(`给，训练员先生！`);
-          await era.printAndWait(`两人坐在长椅上一起吃着冰淇淋。`);
-          await era.printAndWait(`醒目飞鹰「稍微有点近呢」`, {
-            color: chara_talk.color,
-            fontSize: '0.75rem',
-          });
-          await chara_talk.say_and_wait(`什么都没有哦⭐`);
+          await say_by_passer_by(`服务员`, `久等了，两份水果巴菲。`);
+          await chara_talk.say_and_wait(`比想象之中还要美味呢。`);
+          await era.printAndWait(``);
           break;
         case 1:
-          await chara_talk.say_and_wait(`作为偶像的话不好好保持身材可不行呢。`);
-          await me.say_and_wait(
-            `不过一直吃减肥餐的话在赛场上饿晕过去就麻烦了。`,
-          );
-          await era.printAndWait(`你们看向了广告牌上非常美味的披萨套餐`);
-          await chara_talk.say_and_wait(
-            `……听丸善学姐说女孩子都有两个胃，所以稍微多吃一点也没关系吧⭐`,
-          );
-          await chara_talk.say_and_wait(`之后就通过大量的训练消耗掉卡路里吧~`);
+          await chara_talk.say_and_wait(`飞鹰子只要这点就满足了！`);
+          await era.printAndWait(`摆在醒目飞鹰面前的只是少量的胡萝卜与蔬菜。`);
+          await me.say_and_wait(`……这样吃的会不会太少了？`);
+          await chara_talk.say_and_wait(`最近花的不小心超出预算了……`);
+          await era.printAndWait(`你们看向了菜单上的披萨套餐。`);
+          await me.say_and_wait(`要来一份吗？我请客。`);
+          await chara_talk.say_and_wait(`非常感谢⭐`);
           await era.printAndWait(
-            `回到特雷森称体重时一口气重了二公斤后差点晕过去的醒目飞鹰就是后话了`,
+            `第二天称体重时发现超重2公斤时慌作一团的醒目飞鹰意外的可爱。`,
           );
           break;
       }
       break;
     case 1:
+      // 约会
       switch (get_random_value(0, 1)) {
         case 0:
+          await era.printAndWait(`偶像和粉丝约会会被愤怒的粉丝炎上吧？`);
           await chara_talk.say_and_wait(
-            `作为偶像来说和粉丝约会是会被炎上的吧？`,
+            `是训练员与担当马娘之间非常健全的关系！`,
           );
-          await era.printAndWait(
-            `不过作为草根偶像的飞鹰子显然没有这方面的问题`,
-          );
-          await chara_talk.say_and_wait(`心情真是微妙呢。`);
+          await era.printAndWait(`心情真是微妙呢。`);
           break;
         case 1:
-          await chara_talk.say_and_wait(
-            `嗯...我们先从这条街进入，然后在右转……不对向前直走左转有一家饰品店，呃，出来之后直走右转前面有一家人气很好的甜品店…….`,
-          );
           await era.printAndWait(
-            `飞鹰子说话断断续续的眼神似乎一直瞄着你身后的样子`,
+            `醒目飞鹰作为现役偶像，像这样和其他人约会的话。`,
+          );
+          await chara_talk.say_and_wait(`看起来并没有被认出来呢。`);
+          await era.printAndWait(
+            `毕竟比起在草地奔跑的赛马娘，泥地偶像离观众的视线更远吧。`,
           );
           break;
       }
@@ -920,17 +910,20 @@ handlers[event_hooks.out_station] = async function (hook) {
     case 2: //逛商场
       switch (get_random_value(0, 1)) {
         case 0:
-          await chara_talk.say_and_wait(
-            `说起来的话最近新开了一家炭烧牛肉的新店，等会一起去看看吧♪`,
+          await era.printAndWait(
+            `在商场里随意闲逛时路过了贩卖赛马娘周边的店铺。`,
+          );
+          await chara_talk.say_and_wait(`飞鹰子的周边比上周多了一点呢♪`);
+          await era.printAndWait(
+            `在泥地主题的货架上，整整一排都是醒目飞鹰的玩偶。`,
           );
           break;
         case 1:
+          await chara_talk.say_and_wait(`三、二、一，好♪`);
           await chara_talk.say_and_wait(
-            `像这样和训练员先生一起出来逛街，飞鹰子真的很高兴呦♪`,
+            `和训练员一起的逛商场♪唔——这张照片还是不要发出去吧。`,
           );
-          await era.printAndWait(
-            `你和飞鹰子像恋人一样牵着手在商场里享受着购物的乐趣。`,
-          );
+          await era.printAndWait(`避免了一场（自认为）炎上，真是可喜可贺。`);
           break;
       }
       break;
@@ -943,41 +936,40 @@ handlers[event_hooks.out_river] = async function (hook) {
   if (ret === 0) {
     switch (get_random_value(0, 1)) {
       case 0: //钓鱼
-        await chara_talk.say_and_wait(
-          `训练员先生好厉害，居然钓到了这么大的鱼！`,
-        );
+        await chara_talk.say_and_wait(`……！好厉害——居然能钓到这么大的鱼。`);
         await era.printAndWait(
-          `望着桶子里不断挣扎的大鱼，飞鹰子露出了倾佩的神色。`,
+          `看着鱼桶中啪嗒啪嗒挣扎的鲫鱼，坐在一旁的飞鹰子目睹了全过程。`,
         );
         break;
       case 1:
-        await chara_talk.say_and_wait(`唔，为什么这么久还没有上钩啊。`);
-        await era.printAndWait(
-          `尾巴不断拍打着草地的飞鹰子拿着鱼竿焦躁的甩来甩去。`,
+        await chara_talk.say_and_wait(
+          `就像在序盘争夺先头位置一样，冷静的等待闸门开启的那一刻。`,
         );
+        await chara_talk.say_and_wait(`然后——就像这样！`);
+        await era.printAndWait(
+          `被鱼钩钩住的贪食鱼儿被一股巨力拽出了水面，稳稳的落入了鱼桶之中。`,
+        );
+        await chara_talk.say_and_wait(`这就是飞鹰子流的钓鱼法！`);
         break;
     }
   } else {
     switch (get_random_value(0, 2)) {
       case 0: //散步
-        await chara_talk.say_and_wait(
-          `说起来的话，在河边的草地上临时举行演唱会也不错呢。`,
-        );
-        await chara_talk.say_and_wait(
-          `不过现在的话，还是希望能和训练员先生多呆一会呢。`,
-        );
+        await chara_talk.say_and_wait(`为了感谢能在河边草地举办演唱会的这里。`);
+        await chara_talk.say_and_wait(`飞鹰子在休息时偶尔会在高架桥下做义工。`);
         break;
       case 1:
         await chara_talk.say_and_wait(
-          `说起来逃马姐妹组合的其他成员现在在做些什么呢？`,
+          `说起来逃马姐妹的大家现在都在做些什么呢？`,
         );
+        await chara_talk.say_and_wait(`飞鹰子很在意！`);
         break;
       case 2:
         await chara_talk.say_and_wait(
-          `丸善学姐虽然实力很强大，也很温柔的指导着我们，不过似乎有些微妙的感觉？`,
+          `丸善前辈虽然实力很强大，也很温柔的指导着我们，不过总有些微妙的不协调感？`,
         );
         await chara_talk.say_and_wait(
-          `……如果我也能有丸善学姐那样天赋的话，也有可能需要肩负更大的责任了吧？`,
+          `如果飞鹰子也处在丸善前辈的位置上……唔，飞鹰子的小脑袋恐怕受不了这么大的压力。`,
         );
         break;
     }

@@ -52,62 +52,43 @@ module.exports = {
           `马娘`,
           `啊，没有指责您的意思，您一定能找到更好的马娘的！`,
         );
-        await era.printAndWait(
-          `看着婉拒契约的马娘，${me.actual_name}还是忍不住叹了一口气`,
+        era.printButton(
+          `不，我这边才是唐突了。祝你接下来遇到更好的训练员。`,
+          1,
         );
-        await me.say_and_wait(
-          `这样也好，比起我这样没什么经验的普通训练员，还是经验丰富的训练员才是马娘们优先选择的对象。`,
-        );
+        await era.input();
         await era.printAndWait(
-          `像是自嘲摇了摇头，${me.actual_name}自言自语地收拾着散落了一地的纸张。`,
-        );
-        await me.say_and_wait(`今天就先到这里吧。`, true);
-        await era.printAndWait(
-          `${me.actual_name}将之前准备好的契约书重新塞回文件夹，然后小心的放回挎包中。`,
+          `送别眼前的马娘，因为失意与懊恼，${me.actual_name}还是忍不住叹了一口气`,
         );
         await era.printAndWait(
-          `从正在热火朝天训练的马娘们身边经过，经过中庭，然后回到教学楼之中。`,
+          `将拿出的契约书草草塞回文件夹，${me.actual_name}从说笑的马娘们身边快步经过，然后回到了训练室。`,
         );
-        await me.say_and_wait(
-          `虽说是以实现马娘们梦想而创立的特雷森，不过似乎我的梦想还是没看到头绪呢。`,
-          true,
-        );
+        await me.say_and_wait(`今天到此为止吧。`);
         await era.printAndWait(
-          `从助理训练员的身份转换到独立训练员之后，一月之内依然未找到合适的担当。`,
+          `夕阳西下，${me.actual_name}锁上了训练室的大门。`,
         );
-
-        await era.printAndWait(
-          `从踌躇满志到怀疑自己，只需要几场失败的拒绝即可。`,
-        );
-        await era.printAndWait(
-          `但作为失败的经验教训，也是重新调整认知的绝妙机会。`,
-        );
-        await era.printAndWait(
-          `${me.actual_name}一边品味着失败与成功的转换，一边锁上了训练室的大门。`,
-        );
+        await era.printAndWait(`从走廊的通道中，无意间撇到了中庭的三女神像。`);
         await me.say_and_wait(
           `美丽又充满智慧的三女神大人啊，请赋予我勇气让我找到合适的马娘吧。`,
         );
         await era.printAndWait(
-          `你半开玩笑半认真的向三女神大人许下了这个愿望。`,
+          `究竟是自暴自弃的埋怨还是自嘲式的苦中作乐，亦或二者兼有。就算问${me.actual_name}自己，恐怕也没有准确回复。`,
         );
         await era.printAndWait(
-          `在夕阳与夜晚的交界时分，金黄色的教学楼也向着深蓝色缓慢而切实的变换着。`,
+          `漫步目的在特雷森闲逛时，不知不觉来到了三女神像面前。`,
         );
-        await era.printAndWait(`不远处的训练场传来了阵阵喧闹声，。`);
-        await era.printAndWait(
-          `志向于赛马娘的马娘们早早在训练场进行着训练，而放弃了成为赛马娘的马娘们也早已回到了宿舍之中。`,
+        // todo 至少要写出不同的招募
+        await say_by_passer_by(
+          `怒气冲冲的人类教师`,
+          `醒目飞鹰！这已经是你第五次未经许可擅自举办演唱会了！`,
         );
-        await era.printAndWait(`换句话说，现在就是享受着孤独之人的庇护所。`);
-        await chara_talk.say_and_wait(`♪♪♪♪`);
-        await era.printAndWait(`美丽的歌声像是从遥远的地方传来一样。`);
-        await me.say_and_wait(`这一定是三女神大人的指引！`);
-        await era.printAndWait(
-          `积极的思考起到了作用，你因为愿望的实现而精神振奋，向着歌声传来的大致方向慢慢走了过去。`,
-        );
-        await era.printAndWait(
-          `仔细听才发现，自己所听见的仅仅只是歌声通过空旷的过道之间传来的回声。`,
-        );
+        await era.printAndWait(`不远处传来了吵闹声。`);
+        await me.say_and_wait(`为什么这么吵？`);
+        await era.printAndWait(`你尚在思考的时候。`);
+        await chara_talk.say_and_wait(`前面的训练员，不好意思麻烦让一下——`);
+        era.printButton(`什——`, 1);
+        await era.input();
+        await era.printAndWait(`一股强劲的巨力将你顶飞。`);
         await me.say_and_wait(`接下来该怎么走？`, true);
         await era.printAndWait(
           `在奇妙的亢奋之中变得愉悦起来的你慢慢顺着歌声的指引前进着。`,
