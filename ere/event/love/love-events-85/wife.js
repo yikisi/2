@@ -513,6 +513,7 @@ module.exports = (handlers) => {
       '。',
     ]);
     era.printButton(`是 ${m_call_r} 太美了，我每次看到都忍不住硬到发疼。`, 1);
+    await era.input();
     await era.printAndWait([
       ruby.get_colored_name(),
       ' 闻言，卷弄了几下 ',
@@ -574,6 +575,7 @@ module.exports = (handlers) => {
     ]);
     era.printButton('轻咬脖子。', 1);
     era.printButton('抚摸大腿内股。', 2);
+    await era.input();
     await era.printAndWait([
       ruby.get_colored_name(),
       ' 吃了一惊，双腿本能地夹紧。',

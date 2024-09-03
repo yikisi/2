@@ -807,6 +807,7 @@ module.exports = (handlers) => {
     ]);
 
     era.printButton('「乌拉拉，工作辛苦了！」', 1);
+    await era.input();
 
     await urara.say_and_wait([callname, '！今天乌拉拉有帮到大家吗？']);
     await era.printAndWait([

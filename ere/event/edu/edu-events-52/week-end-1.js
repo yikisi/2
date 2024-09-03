@@ -205,6 +205,7 @@ module.exports = (handlers) => {
       ' 还是直接抛出了问题。',
     ]);
     era.printButton('「乌拉拉，你不喜欢第一名吗？」', 1);
+    await era.input();
     await era.printAndWait([
       '没有直接回答大人的问题，小',
       urara.get_uma_sex_title(),
@@ -237,6 +238,7 @@ module.exports = (handlers) => {
     );
 
     era.printButton('「是说，奔跑的理由？」', 1);
+    await era.input();
 
     await urara.say_and_wait('嗯！因为我想要用奔跑给大家带来笑容！');
     await urara.say_and_wait(

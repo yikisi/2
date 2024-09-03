@@ -621,6 +621,8 @@ handlers[event_hooks.out_station] = async (hook, __, event_object) => {
     await ruby.say_and_wait('很奇怪吗？');
     era.printButton('「当然很可爱。」', 1);
     era.printButton('「有种清新俏丽的感觉。」', 2);
+    await era.input();
+
     await era.printAndWait([
       me.get_colored_name(),
       ' 和 ',

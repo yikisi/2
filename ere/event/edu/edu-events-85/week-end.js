@@ -170,6 +170,7 @@ module.exports = (handlers) => {
       ]);
       era.printButton('用牙齿轻轻啃。', 1);
       era.printButton('用嘴唇吻掌心。', 2);
+      await era.input();
       await era.printAndWait([
         ruby.get_colored_name(),
         ' 好像很怕痒，',

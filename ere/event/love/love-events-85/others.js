@@ -93,6 +93,7 @@ module.exports = (handlers) => {
     await ruby.say_and_wait([r_call_m, '，喜欢我穿白裤袜的腿是吗？']);
     era.printButton('「嗯。」', 1);
     era.printButton('「因为很好看……又很好摸，所以……」', 2);
+    await era.input();
     await era.printAndWait([
       '突然间，',
       ruby.get_colored_name(),
