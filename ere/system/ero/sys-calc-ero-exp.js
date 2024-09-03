@@ -66,7 +66,7 @@ module.exports = {
     } else {
       semen_list.push(semen);
     }
-    [other_id, supporter_id]
+    [other_id.toString(), supporter_id]
       .filter((e) => e)
       .forEach((c_id, i) => {
         era.add(`exp:${c_id}:胸部沾染精液量`, semen_list[i]);
@@ -94,7 +94,7 @@ module.exports = {
     } else {
       semen_list.push(semen);
     }
-    [other_id, supporter_id]
+    [other_id.toString(), supporter_id]
       .filter((e) => e)
       .forEach((c_id, i) => {
         era.add(`exp:${c_id}:颜射次数`, 1);

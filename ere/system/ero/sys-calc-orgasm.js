@@ -166,52 +166,71 @@ async function sys_calc_orgasm(shown, ...ids) {
             // 性奴和孕袋不能寸止
             if (
               shown &&
-              chara_id === 0 &&
               sys_check_awake(0) &&
               !era.get('tcvar:0:脱力') &&
-              !era.get('tcvar:0:失神') &&
-              era.get('flag:惩戒力度') < 2
+              !era.get('tcvar:0:失神')
             ) {
-              const stopMarks = era.get(`ex:0:寸止`);
-              // 以等差数列计算成功率
-              // 部位快感每级可以提高5%寸止成功率
-              // 早泄-50%成功率
-              // 寸止成功判定，小于几率时成功寸止
-              const stop_success =
-                Math.random() <
-                1 -
-                  ((1 + stopMarks) * stopMarks * 5) / 200 +
-                  0.1 * era.get(`talent:0:钢之意志`) +
-                  0.05 * abl -
-                  0.5 * era.get(`talent:0:早泄`);
-              const ret = await call_ero_script(0, ero_hooks.orgasm_denial, {
-                stop_success,
-              });
-              // 选择射或者没忍住就直接射了
-              cum_flag = !ret || !stop_success;
-              if (!cum_flag) {
-                if (ret === 2) {
-                  // 体外成功，射到身上
-                  if (other_part === part_enum.virgin) {
-                    other_part = part_enum.body;
-                    change_part(
-                      new EroParticipant(chara_id, part_enum.penis),
-                      new EroParticipant(other_id, other_part),
-                    );
-                  } else {
-                    other_part = Object.keys(part_enum).length;
-                    clean_part(new EroParticipant(chara_id, part_enum.penis));
+              let stop_success = undefined;
+              if (chara_id === 0 && era.get('flag:惩戒力度') < 2) {
+                const stopMarks = era.get(`ex:0:寸止`);
+                // 以等差数列计算成功率
+                // 部位快感每级可以提高5%寸止成功率
+                // 早泄-50%成功率
+                // 寸止成功判定，小于几率时成功寸止
+                stop_success =
+                  Math.random() <
+                  1 -
+                    ((1 + stopMarks) * stopMarks * 5) / 200 +
+                    0.1 * era.get(`talent:0:钢之意志`) +
+                    0.05 * abl -
+                    0.5 * era.get(`talent:0:早泄`);
+              } else if (
+                chara_id > 0 &&
+                era.get(`tcvar:${chara_id}:阴茎接触部位`).owner === 0
+              ) {
+                stop_success =
+                  Math.random() <
+                  1 -
+                    0.1 * era.get(`talent:${chara_id}:钢之意志`) +
+                    0.05 * abl -
+                    0.5 * era.get(`talent:${chara_id}:早泄`);
+              }
+              if (stop_success !== undefined) {
+                const ret = await call_ero_script(
+                  chara_id,
+                  ero_hooks.orgasm_denial,
+                  {
+                    stop_success,
+                  },
+                );
+                // 选择射或者没忍住就直接射了
+                cum_flag = !ret || !stop_success;
+                if (!cum_flag) {
+                  if (ret === 2) {
+                    // 体外成功，射到身上
+                    if (other_part === part_enum.mouth) {
+                      other_part = Object.keys(part_enum).length;
+                      clean_part(new EroParticipant(chara_id, part_enum.penis));
+                    } else {
+                      other_part = part_enum.body;
+                      change_part(
+                        new EroParticipant(chara_id, part_enum.penis),
+                        new EroParticipant(other_id, other_part),
+                      );
+                    }
+                    console.log(other_part);
+                    cum_flag = true;
+                  } else if (ret === 1) {
+                    era.set(`nowex:${chara_id}:寸止`, 1);
+                    // 恢复快感条和高潮状态
+                    era.set(`palam:${chara_id}:阴茎快感`, curr);
+                    era.set(`nowex:${chara_id}:阴茎高潮`, 0);
+                    era.set(`nowex:${chara_id}:无自觉阴茎高潮`, 0);
                   }
-                  cum_flag = true;
-                } else if (ret === 1) {
-                  era.set(`nowex:${chara_id}:寸止`, 1);
-                  // 恢复快感条和高潮状态
-                  era.set(`palam:${chara_id}:阴茎快感`, curr);
-                  era.set(`nowex:${chara_id}:阴茎高潮`, 0);
-                  era.set(`nowex:${chara_id}:无自觉阴茎高潮`, 0);
                 }
               }
             }
+
             if (cum_flag) {
               const stop_turn = era.get(`ex:${chara_id}:寸止`);
               if (stop_turn) {

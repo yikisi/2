@@ -261,7 +261,7 @@ async function goto_sex(chara_id, sex_loc) {
               ' 共度春宵……',
               { isBr: true },
               is_pleasure
-                ? `但被肉体欢愉烧灼的内心已无法让${chara.sex}说出拒绝的话语……`
+                ? `但被肉体欢愉烧灼的内心已让${chara.sex}无法说出拒绝的话语……`
                 : '但仍然顺从地准备好了自己……',
             ],
             type: 'text',

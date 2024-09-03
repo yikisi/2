@@ -5,6 +5,8 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
 
 ## Added
 
+* 现在玩家清醒状态下即将被其他角色体内射精时可以选择使对方射在体外，成功率视对方阴茎耐性与敏感度而定
+
 ## Changed
 
 * 对调教因子和刻印重新平衡

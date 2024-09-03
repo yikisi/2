@@ -40,8 +40,8 @@ async function sys_auto_react(shown) {
         0.1 * era.get(`mark:${lover}:羞耻`) +
         0.2 * era.get(`mark:${lover}:反抗`) +
         0.15 * era.get(`talent:${lover}:反抗意愿`) +
-        0.2 * era.get(`talent:${lover}:抖S`) -
-        0.1 *
+        0.1 * era.get(`talent:${lover}:抖S`) -
+        0.05 *
           (era.get(`talent:${lover}:喜欢责骂`) +
             era.get(`talent:${lover}:喜欢痛苦`)) +
         Math.pow(2, era.get(`base:${lover}:性欲`) / 1000 - 10) +

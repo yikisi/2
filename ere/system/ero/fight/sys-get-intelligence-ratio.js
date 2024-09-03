@@ -15,7 +15,7 @@ function sys_get_intelligence_ratio_in_fight(attacker, defender) {
           0.25 * era.get(`mark:${attacker}:羞耻`) -
           era.get(`base:${attacker}:压力`) / 100000 -
           0.3 * (era.get(`tcvar:${attacker}:刚刚高潮`) || 0) -
-          0.5 * (era.get(`tcvar:${attacker}:接近高潮`) || 0) -
+          0.5 * !!era.get(`tcvar:${attacker}:接近高潮`) -
           0.1 * era.get(`status:${attacker}:头风`) -
           0.1 * era.get(`status:${attacker}:发情`)),
       1,
@@ -29,7 +29,7 @@ function sys_get_intelligence_ratio_in_fight(attacker, defender) {
           0.25 * era.get(`mark:${defender}:羞耻`) -
           era.get(`base:${defender}:压力`) / 100000 -
           0.3 * (era.get(`tcvar:${defender}:刚刚高潮`) || 0) -
-          0.5 * (era.get(`tcvar:${defender}:接近高潮`) || 0) -
+          0.5 * !!era.get(`tcvar:${defender}:接近高潮`) -
           0.1 * era.get(`status:${defender}:头风`) -
           0.1 * era.get(`status:${attacker}:发情`)),
       1,

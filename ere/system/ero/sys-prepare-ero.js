@@ -2,10 +2,7 @@ const era = require('#/era-electron');
 
 const sys_count_juels = require('#/system/chara/sys-count-juels');
 const get_ex_result_in_the_end = require('#/system/ero/sub-begin-and-end/get-ex-result-in-the-end');
-const {
-  init_items,
-  remove_all_items,
-} = require('#/system/ero/sys-calc-ero-item');
+const sys_calc_ero_items = require('#/system/ero/sys-calc-ero-item');
 const {
   clean_all_parts,
   reset_parts,
@@ -55,7 +52,7 @@ function update_ero_status(...ids) {
   ids.forEach((chara_id) => {
     const iron_will = era.get(`talent:${chara_id}:钢之意志`),
       penis_size = get_penis_size(chara_id);
-    let base_buff = 5 * iron_will;
+    let base_buff = 5 * iron_will; // 钢之意志全上限+50%
     // 状态结算
     if (era.get(`status:${chara_id}:超马跳Z`)) {
       base_buff -= 3;
@@ -72,7 +69,6 @@ function update_ero_status(...ids) {
       base_buff -= 1;
     }
     pleasure_list.forEach((part) => {
-      // 钢之意志全上限+50%
       let limit = base_buff;
       const talent_name = part_talents[part];
       if (
@@ -355,7 +351,7 @@ function init_ero(...ids) {
   init_palams(...ids);
   init_juels(...ids);
   reset_parts(...ids);
-  init_items(...ids);
+  sys_calc_ero_items.init_items(...ids);
   const is_sex = era.getCharactersInTrain().length > 1;
   const is_raping_in_sleep = is_sex && !sys_check_awake(0);
   ids.forEach((chara_id) => {
@@ -440,7 +436,7 @@ let tmp;
  */
 function end_ero(skip_juels, log_juels, ids) {
   tmp = {};
-  remove_all_items(...ids);
+  sys_calc_ero_items.remove_all_items(...ids);
   clean_all_parts(...ids);
   const is_slave = ids.indexOf(0) !== -1 && era.get('flag:惩戒力度') >= 2;
   ids.forEach((chara_id) => {
@@ -543,16 +539,20 @@ function end_ero(skip_juels, log_juels, ids) {
       era.set(`base:${chara_id}:精力`, 0);
     era.set(
       `base:${chara_id}:体力`,
-      Math.min(
-        era.get(`base:${chara_id}:体力`),
-        era.get(`tcvar:${chara_id}:体力缓存`),
+      Math.floor(
+        Math.min(
+          era.get(`base:${chara_id}:体力`),
+          era.get(`tcvar:${chara_id}:体力缓存`),
+        ),
       ),
     );
     era.set(
       `base:${chara_id}:精力`,
-      Math.min(
-        era.get(`base:${chara_id}:精力`),
-        era.get(`tcvar:${chara_id}:精力缓存`),
+      Math.floor(
+        Math.min(
+          era.get(`base:${chara_id}:精力`),
+          era.get(`tcvar:${chara_id}:精力缓存`),
+        ),
       ),
     );
     if (chara_id && is_slave) {
