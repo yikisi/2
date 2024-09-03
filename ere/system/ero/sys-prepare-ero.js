@@ -200,7 +200,10 @@ function update_temp_base(chara_id, ratio) {
  * @param {number} val
  */
 function set_juel_buff(chara_id, juel_name, val) {
-  era.set(`tcvar:${chara_id}:${juel_name}因子加成`, Math.max(val, -0.99));
+  era.set(
+    `tcvar:${chara_id}:${juel_name}因子加成`,
+    Math.min(Math.max(val, -0.99), 1),
+  );
 }
 
 /** @param {number} ids */

@@ -201,26 +201,24 @@ module.exports = {
             spirit_juels / 25 -
             meek_juels / 5;
         if (!ero_mark) {
-          if (pleasure_params >= 4000 && total_ex >= 6 && pleasure_mark < 3) {
+          if ((pleasure_params >= 4500 || total_ex >= 6) && pleasure_mark < 3) {
             era.set(`nowex:${chara_id}:欢愉获取`, 3 - pleasure_mark);
           } else if (
-            pleasure_params >= 2500 &&
-            total_ex >= 4 &&
+            (pleasure_params >= 3000 || total_ex >= 4) &&
             pleasure_mark < 2
           ) {
             era.set(`nowex:${chara_id}:欢愉获取`, 2 - pleasure_mark);
           } else if (
-            pleasure_params >= 1250 &&
-            total_ex >= 2 &&
+            (pleasure_params >= 1500 || total_ex >= 2) &&
             pleasure_mark < 1
           ) {
             era.set(`nowex:${chara_id}:欢愉获取`, 1);
           }
         }
         if (
-          ((got_meek_juels >= 20000 || meek_juels >= 3000) && meek_mark < 3) ||
-          ((got_meek_juels >= 15000 || meek_juels >= 2250) && meek_mark < 2) ||
-          ((got_meek_juels >= 10000 || meek_juels >= 1500) && meek_mark < 1)
+          ((got_meek_juels >= 25000 || meek_juels >= 3000) && meek_mark < 3) ||
+          ((got_meek_juels >= 20000 || meek_juels >= 2250) && meek_mark < 2) ||
+          ((got_meek_juels >= 15000 || meek_juels >= 1500) && meek_mark < 1)
         ) {
           era.set(`nowex:${chara_id}:同心获取`, 1);
         }
