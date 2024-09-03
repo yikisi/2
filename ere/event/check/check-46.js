@@ -62,13 +62,13 @@ module.exports = class extends CustomizedCheck {
     ) {
       titles.push({
         c: get_chara_talk(46).color,
-        n: 'Top Idol⭐',
+        n: 'Top Idol',
       });
       aim_check && sys_personal_achievement.set(46, 1);
     } else {
       titles.push({
         c: get_chara_talk(46).color,
-        n: '沙之飞隼⭐',
+        n: '沙之飞隼',
       });
     }
     return titles;
@@ -97,6 +97,14 @@ module.exports = class extends CustomizedCheck {
       const event_marks = new FalconEduMarks(46);
       const event_obj = new EventObject(46, cb_enum.edu);
       const event_obj_special = new EventObject(46, cb_enum.edu, true);
+      // todo 思路
+      // 第一高潮幕(前期) 薰衣草(夏季)——为了摆脱某种“我已经过时、即将被埋葬”的恐惧。大量追赶新潮头试图击退自己的生存恐惧。
+      // 第一高潮幕(中期) 水仙(冬季)——粉丝袭击事件 偶像崇拜必要素材已经足够
+      // 第一高潮幕(第三年后半 后期) 山茶花(高贵和纯洁、坚韧不拔 冬季)——虽以偶像之名行动，但更多是以践行爱的标准，所作的真正努力与付出
+      // 第一高潮幕(第三年前半 后期) 雏菊(春季)——粉丝袭击事件后继影响处理
+      // 第二高潮幕（前期过渡）夜来香(夏季到秋季)——与自身恐惧作战，粉丝袭击事件埋下伏笔
+      // 第三高潮幕（中期过渡）萱草(忘忧草)——如何提高自己的影响力，又不成为偶像？
+      // 第四高潮幕——（后期到结局之间不至于无聊）向日葵 学会有足够的勇气去接受事实，学会中性的看待事实。不因为正面的事实“骄傲”，也不因为负面的事实“气馁”。与第一高潮幕之间共鸣
       check_and_add_event(
         event_marks,
         edu_weeks,
