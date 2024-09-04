@@ -4,6 +4,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
@@ -25,92 +26,46 @@ module.exports = async function () {
     // 人是一种很容易寂寞的生物，在曲终人散之后，从亢奋的精神慢慢退回，然后只剩下疲惫
     // 一般人眼中的乐观，仅仅只是将四处收集而来的瓦片聚拢起来，然后拼凑起来的乐观，因此，面对较大的危险就会四分五裂
     // 因此，不过只是装作乐观的悲观者罢了
-    await print_event_name(`请叫我飞鹰子⭐`, falcon);
-    await era.printAndWait(`训练室`);
-    await era.printAndWait(
-      `在与${falcon.name}签约之后，${me.actual_name}早早的来到了训练室。`,
+    await print_event_name(`喊声隆隆的沙地赛`, falcon);
+    await era.printAndWait(`地方沙地赛场\n`);
+    await say_by_passer_by(
+      `解说`,
+      `比赛已经进入最终阶段！二号选手与四号选手从马群之中脱颖而出，开始了最后的角逐！`,
     );
-    await me.say_and_wait(`希望成为偶像吗？`, true);
-    await era.printAndWait(`${falcon.name}希望能成为泥地的顶级偶像`);
-    await era.printAndWait(`但能登上最大舞台的中央则需要无数的努力。`);
-    await me.say_and_wait(`如果只是这样的话还有些许希望`, true);
+    await say_by_passer_by(`沙地比赛观众`, `唔噢噢噢噢噢噢噢！`);
+    await era.printAndWait(`观众将注意力全部集中在两者之间的对决之中。`);
+    await say_by_passer_by(`赛马娘A`, `哈啊啊啊啊！`);
+    await say_by_passer_by(`赛马娘B`, `唔啊啊啊啊！`);
     await era.printAndWait(
-      `日本德比，日本杯还有有马纪念，这些万众瞩目的赛事无一例外全是草地。`,
-    );
-    await era.printAndWait(
-      `而泥地只是赛马娘们实在不适合草地而无奈转战的赛事，因此作为备选品，与草地赛事之间的热度有着决定性的差距。`,
-    );
-    await me.say_and_wait(`东京大赏与有马纪念的热度相比。`, true);
-    await era.printAndWait(`……咚！咚！咚！`);
-    await falcon.say_and_wait(`我进来了⭐，训练员先生早上好！`);
-    await era.printAndWait(`穿着特雷森校服的担当推开训练室的大门走了进来。`);
-    await me.say_and_wait(`啊，早上好${falcon.name}。`);
-    await era.printAndWait(`暂且将发散的思绪放到一边，你看向了醒目飞鹰。`);
-    await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}早上好⭐`);
-    await era.printAndWait(`也许是第一次正式见面的缘故，最初的问候过后。`);
-    await era.printAndWait(`又一颗种子破土而出。`);
-    await era.printAndWait(`所谓的青春期吗？`);
-    await era.printAndWait(
-      `年轻人希望快点长大证明着自己的成熟，作为成年人的自己却希望回到那个无忧无虑的快乐庇护所。`,
+      `与在草地上展现出惊人的豪脚不同，沙地遵循另一套规则。`,
     );
     await era.printAndWait(
-      `过去的日子里与训练员学校的损友们吵闹着度过的每一天，却随着毕业季的到来而天各一方。`,
+      `沙地赛没有长距离的赛事，而且后排成员会受到前排马群大量沙土的践踏。`,
     );
     await era.printAndWait(
-      `互相打趣着下次见面时一定会让对方大吃一惊。然而像学生时代聚集在一起对于成年人来说有多难彼此之间却早已心知肚明，心情微妙的有些伤感了。`,
-    );
-    era.printButton(`青春真好啊。`, 1);
-    await era.input();
-    await era.printAndWait(`真心话。`);
-    await falcon.say_and_wait(`这个时候应该夸飞鹰子是偶像才对吧？`);
-    era.printButton(`飞鹰子是什么类型的偶像？`, 1);
-    await era.input();
-    await falcon.say_and_wait(`……飞鹰子是可爱系偶像哦⭐`);
-    await era.printAndWait(`在这种时刻绝不动摇的醒目飞鹰。`);
-    await era.printAndWait(
-      `重新调整好因蹦跳而略微向右侧倾斜的校服之后，作为担当的${falcon.name}重新看向了作为训练员的${me.actual_name}。`,
-    );
-    await era.printAndWait(`然而，`);
-    await me.say_and_wait(
-      `活泼虽然是一件好事，但也容易被其他的东西所吸引。`,
-      true,
+      `若不是从一开始就全力争夺最前方的位置，呆在马群的后方只会被飞扬的尘土与踩得坑坑洼洼的沙土严重消耗体力。`,
     );
     await era.printAndWait(
-      `那些无法沉下来训练的${falcon.get_uma_sex_title()}们直到最后也没能在G1中登场。`,
+      `在前排的马娘可以轻松保存体力在最后的冲刺阶段一举爆发。`,
     );
-    await era.printAndWait(`被上下打量着的${falcon.name}露出了紧张的神情。`);
-    await falcon.say_and_wait(`训……训练员${me.get_adult_sex_title()}？`);
-    await me.say_and_wait(`接下来去训练场实际看一下吧。`);
-    await falcon.say_and_wait(`嗯，飞鹰子一定会好好表现的！`);
-    await era.printAndWait(
-      `从瑟瑟发抖的样子转换成兴奋的举起手臂，${falcon.name}的心情转换着快啊。`,
-    );
-    era.drawLine({ content: '训练场' });
-    await me.say_and_wait(`最后一圈！`);
-    await era.printAndWait(
-      `呼吸开始混乱的${falcon.name}咬紧了牙关，然后开始加速。`,
-    );
-    await falcon.say_and_wait(`哈啊啊啊啊！`);
-    await era.printAndWait(
-      `因为骤然剧烈的呼吸而痛苦的${falcon.name}驱使着几乎失去知觉的身体开始加速。`,
-    );
-    await era.printAndWait(`直到冲线的一刻————`);
-    await falcon.say_and_wait(
-      `哈啊，哈啊，哈啊......训练员${me.get_adult_sex_title()}觉得怎么样？`,
+    await say_by_passer_by(
+      `解说`,
+      `两人之间的距离在不断缩短！五马身！三马身！一马身！就差一点！`,
     );
     await era.printAndWait(
-      `最后冲刺时刻，骤然发力的双腿所溅起的沙土，以及毫不畏惧衣服脏乱的勇气。`,
+      `紧紧追赶的马娘近乎就要超越前方的马娘，而后者在最后关头踏出了那一步，也就决定了比赛的胜负。`,
     );
-    await me.say_and_wait(`……说不定${falcon.name}真的能在泥地闪闪发光。`);
-    await falcon.say_and_wait(`诶~真的吗？`);
-    await era.printAndWait(`说者无心听着有意，飞鹰子耳朵抖动的样子非常可爱。`);
-    await me.say_and_wait(`嗯——我已经看到了，接下来讨论下打算参加的比赛吧。`);
-    await falcon.say_and_wait(
-      `接下来也请多指教了，粉丝一号${me.get_adult_sex_title()}！啊，训练员${me.get_adult_sex_title()}，抱歉！`,
-    );
+    await era.printAndWait(`胜负已定，观众席爆发出了雷鸣般的喝彩声。`);
     await era.printAndWait(
-      `如像是被火焰所熏烤之后的云朵在黄昏的天空之中漂浮，略显疲惫的${falcon.name}畅想着未来闪耀的日子。`,
+      `取得胜利的马娘，不顾浑身被沙土所覆盖，张开双臂迎接胜利。`,
     );
+    await falcon.say_and_wait(`没想到沙地赛……比想象之中还要有趣呢⭐`);
+    await falcon.say_and_wait(`沙地赛的观众们，对比赛的热情程度……`);
+    await falcon.say_and_wait(`飞鹰子感动得都要哭出来了！`);
+    await era.printAndWait(
+      `胜者舞台结束后，在回特雷森的道路上，被沙地的魅力所折服的醒目飞鹰兴奋的诉说着自己的感想。`,
+    );
+
     new FalconEduMarks().start++;
     add_event(event_hooks.week_start, new EventObject(46, cb_enum.edu));
     wait_flag = get_attr_and_print_in_event(46, undefined, 120) || wait_flag;

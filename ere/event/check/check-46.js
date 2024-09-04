@@ -97,7 +97,7 @@ module.exports = class extends CustomizedCheck {
       const event_marks = new FalconEduMarks(46);
       const event_obj = new EventObject(46, cb_enum.edu);
       const event_obj_special = new EventObject(46, cb_enum.edu, true);
-      // todo 思路
+      // 思路
       // 第一高潮幕(前期) 薰衣草(夏季)——为了摆脱某种“我已经过时、即将被埋葬”的恐惧。大量追赶新潮头试图击退自己的生存恐惧。
       // 第一高潮幕(中期) 水仙(冬季)——粉丝袭击事件 偶像崇拜必要素材已经足够
       // 第一高潮幕(第三年后半 后期) 山茶花(高贵和纯洁、坚韧不拔 冬季)——虽以偶像之名行动，但更多是以践行爱的标准，所作的真正努力与付出
@@ -164,18 +164,38 @@ module.exports = class extends CustomizedCheck {
         );
       }
       switch (edu_weeks) {
-        // 6月第四周 油桐花
+        // 前期 压力 马币不足 艰难的初期 资源匮乏造成的恐慌
+        // 1-24周 三个事件  高架桥捡垃圾 资源匮乏 压力过大
+        // 3月第一周 接下来也请多多指教⭐
+        case 9:
+          add_event(event_hooks.week_start, event_obj_special);
+          break;
+        // 5月第二周 女仆飞鹰子兼职⭐
+        case 18:
+          add_event(event_hooks.week_start, event_obj_special);
+          break;
+        // 6月第三周 出道站前夕 失眠
+        case 23:
+          add_event(event_hooks.week_start, event_obj_special);
+          break;
+        // 6月第四周 薰衣草
         case 24:
+          add_event(event_hooks.week_start, event_obj_special);
+          break;
+        // 24-48周 恐慌 害怕被抛弃的恐慌 在全国各地参与比赛
+        // 七月第一周 夜来香
+        case 25:
           add_event(event_hooks.week_start, event_obj_special);
           break;
         // 9月第二周 努力减肥的飞鹰子！
         case 34:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        // todo 10月第四周 飞鹰子fight！
+        // 10月第四周 飞鹰子，重新振奋起来！
         case 40:
           add_event(event_hooks.week_start, event_obj_special);
           break;
+        // 中期 忙碌 事业的继续发展，因为形势一片大好而放松了警惕 最终导致的粉丝袭击
         // 经典年1月第一周 新年
         case 47 + 1:
           add_event(event_hooks.week_start, event_obj_special);
@@ -200,11 +220,19 @@ module.exports = class extends CustomizedCheck {
         case 47 + 32:
           add_event(event_hooks.week_end, event_obj_special);
           break;
+        // 9月第一周 萱草
+        case 47 + 33:
+          add_event(event_hooks.week_end, event_obj_special);
+          break;
         // 10月第二周 飞鹰子
         case 47 + 38:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 11月第四周 蒲公英
+        // 11月第一周 水仙
+        case 47 + 41:
+          add_event(event_hooks.week_start, event_obj_special);
+          break;
+        // 11月第二周 醒目飞鹰的觉悟
         case 47 + 42:
           add_event(event_hooks.week_start, event_obj_special);
           break;
@@ -214,6 +242,10 @@ module.exports = class extends CustomizedCheck {
           break;
         // 资深年1月第一周 新年
         case 95 + 1:
+          add_event(event_hooks.week_start, event_obj_special);
+          break;
+        // 1月第二周 山茶花
+        case 95 + 2:
           add_event(event_hooks.week_start, event_obj_special);
           break;
         // 2月第二周 情人节
@@ -236,15 +268,23 @@ module.exports = class extends CustomizedCheck {
         case 95 + 32:
           add_event(event_hooks.week_end, event_obj_special);
           break;
+        // 9月第一周 向日葵
+        case 95 + 33:
+          add_event(event_hooks.week_end, event_obj_special);
+          break;
         // 10月第一周 顶级偶像之路
         case 95 + 37:
+          add_event(event_hooks.week_end, event_obj_special);
+          break;
+        // 橡树
+        case 95 + 38:
           add_event(event_hooks.week_end, event_obj_special);
           break;
         // 12月第三周 紧张
         case 95 + 40:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        // 10月第四周 天空、大地、以及生活在这里的我们
+        // 10月第四周 天空、大地以及生活在这里的我们
         case 95 + 47:
           add_event(event_hooks.week_end, event_obj_special);
           break;
@@ -252,27 +292,12 @@ module.exports = class extends CustomizedCheck {
         case 95 + 48:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // //奋斗的偶像！
-        // case 25:
-        //   if (
-        //     extra_flag.race === race_enum.begin_race &&
-        //     edu_weeks < 46 &&
-        //     extra_flag.rank === 1
-        //   ) {
-        //     event_marks.fight_idol++;
-        //     add_event(event_hooks.week_end, event_obj_special);
-        //   }
-        //   break;
-        // //目标达成！
-        // case 47 + 2:
-        //   if (
-        //     new FalconEduMarks().race_count >= 2 &&
-        //     edu_weeks < 95 &&
-        //     extra_flag.rank === 1
-        //   ) {
-        //     event_marks.target_finish++;
-        //     add_event(event_hooks.week_start, event_obj_special);
-        //   }
+        // 1月第2周 目标达成！
+        case 47 + 2:
+          if (new FalconEduMarks().race_count >= 2 && edu_weeks < 95) {
+            event_marks.target_finish++;
+            add_event(event_hooks.week_start, event_obj_special);
+          }
       }
     }
   }

@@ -33,8 +33,7 @@ handlers[event_hooks.select] = function () {
     chara_talk.say(
       `随着粉丝数的不断增加，飞鹰子成为顶级马娘偶像的目标也会一口气实现！。`,
     );
-    chara_talk.say(`所以，作为飞鹰子的训练员还有粉丝一号。`);
-    chara_talk.say(`偶像醒目飞鹰就拜托您的指导了。`);
+    chara_talk.say(`粉丝一号先生，接下来也请多多指教了⭐`);
     temp.after_recruit--;
   } else {
     if (era.get('base:46:体力') < era.get('maxbase:46:体力') / 3) {
@@ -152,7 +151,7 @@ handlers[event_hooks.good_morning] = function () {
       [[`训练员先生,飞鹰子已经准备好了！`], `跃跃欲试的飞鹰子似乎状态非常好`],
       [
         [
-          '在泥地上奔跑的厚重感稍微和可爱的飞鹰子有点不符呢……',
+          '在沙地上奔跑的厚重感稍微和可爱的飞鹰子有点不符呢……',
           '坚强的飞鹰子也很可爱吗？不愧是粉丝一号的训练员先生呢！即使是日常训练飞鹰子也会闪耀起来的！',
         ],
         `解决迷茫后露出可爱笑容的飞鹰子重新燃起了训练的热情`,
@@ -229,7 +228,7 @@ handlers[event_hooks.talk] = async function () {
     case 1:
       talk_arr = [
         `总觉得今天的状态很好呢♪`,
-        `既然决定成为顶级偶像，即使是泥地我也要努力向前迈进！，`,
+        `既然决定成为顶级偶像，即使是沙地我也要努力向前迈进！，`,
         `作为偶像而言，在舞台上的表演比起比赛是过犹不及的事情呢，也许去问问黄金城同学……吗？`,
       ];
       break;
@@ -367,7 +366,7 @@ handlers[event_hooks.office_rest] = async function () {
 handlers[event_hooks.office_prepare] = async function () {
   const talk_arr = [
     `发型OK，决胜服OK,马蹄铁的形状也没有问题！一切都准备好了！`,
-    `接下来就让粉丝们看看什么是泥地的顶级偶像吧！`,
+    `接下来就让粉丝们看看什么是沙地的顶级偶像吧！`,
   ];
   // 好感100暗示剧情
   if (era.get('love:46') === 100) {
@@ -902,7 +901,7 @@ handlers[event_hooks.out_station] = async function (hook) {
           );
           await chara_talk.say_and_wait(`看起来并没有被认出来呢。`);
           await era.printAndWait(
-            `毕竟比起在草地奔跑的赛马娘，泥地偶像离观众的视线更远吧。`,
+            `毕竟比起在草地奔跑的赛马娘，沙地偶像离观众的视线更远吧。`,
           );
           break;
       }
@@ -915,7 +914,7 @@ handlers[event_hooks.out_station] = async function (hook) {
           );
           await chara_talk.say_and_wait(`飞鹰子的周边比上周多了一点呢♪`);
           await era.printAndWait(
-            `在泥地主题的货架上，整整一排都是醒目飞鹰的玩偶。`,
+            `在沙地主题的货架上，整整一排都是醒目飞鹰的玩偶。`,
           );
           break;
         case 1:

@@ -23,27 +23,11 @@ module.exports = {
    * @returns {Promise<boolean>}
    */
   async run(stage_id, extra_flag, event_object) {
-    const chara37_talk = get_chara_talk(37),
-      chara_talk = get_chara_talk(46),
+    const chara_talk = get_chara_talk(46),
+      chara301_talk = get_chara_talk(301),
       me = get_chara_talk(0);
     switch (stage_id) {
       case event_hooks.recruit:
-        /* 黄昏时刻正打算下班的你突然想起自己遗漏了某件物品在训练室之中。
-        但在回训练室的路上被歌声所吸引。
-        你循着声音的轨迹来到了一间空置的训练室。
-        马娘在训练室中练习着准备在出道战时歌唱的歌曲。
-        似乎是全身心投入进了音乐的世界，对你的到来没有一丝注意。
-        被歌曲所感动的你拍手作为鼓励。
-        被发现的马娘因为过于羞耻而逃跑。
-        拾起散落一地的纸张时发现了马娘的属名。
-        第二天发现徘徊于训练室门口的马娘。
-        在招待对方之后，你送还了歌词。
-        像逃跑一样的少女吸引了你的注意。
-        于训练场见到了最后一名的少女。
-        对于更适合泥地而并非草地的她却展示了出乎意料的强硬。
-        在同为室友且为好友的马娘关心下。
-        两人签订了契约。
-         */
         await say_by_passer_by(
           `马娘`,
           `能得到训练员的邀请非常感谢，不过呢，我觉得自己的实力恐怕还是差了一点。`,
@@ -74,342 +58,249 @@ module.exports = {
         await era.printAndWait(
           `究竟是自暴自弃的埋怨还是自嘲式的苦中作乐，亦或二者兼有。就算问${me.actual_name}自己，恐怕也没有准确回复。`,
         );
-        await era.printAndWait(
-          `漫步目的在特雷森闲逛时，不知不觉来到了三女神像面前。`,
-        );
-        // todo 至少要写出不同的招募
+        await era.printAndWait();
         await say_by_passer_by(
           `怒气冲冲的人类教师`,
-          `醒目飞鹰！这已经是你第五次未经许可擅自举办演唱会了！`,
+          `醒目飞鹰！这已经是你这个星期第三次未经许可擅自举办演唱会了！`,
         );
-        await era.printAndWait(`不远处传来了吵闹声。`);
-        await me.say_and_wait(`为什么这么吵？`);
+        await era.printAndWait(
+          `愤怒的喊叫从走廊的另一侧化作蜂鸣声传到了你的耳中。`,
+        );
+        await me.say_and_wait(`发生了什么？`);
         await era.printAndWait(`你尚在思考的时候。`);
         await chara_talk.say_and_wait(`前面的训练员，不好意思麻烦让一下——`);
-        era.printButton(`什——`, 1);
+        era.printButton(`嗯——`, 1);
         await era.input();
-        await era.printAndWait(`一股强劲的巨力将你顶飞。`);
-        await me.say_and_wait(`接下来该怎么走？`, true);
+        await era.printAndWait(`慌不择路的少女便将你撞飞。`);
+        await chara_talk.say_and_wait(`怎、怎么办？`);
+        await era.printAndWait(`想要逃避所做的反抗，却伤害到了陌生人。`);
+        await say_by_passer_by(`怒气冲冲的人类教师`, `醒目飞鹰！`);
+        await chara_talk.say_and_wait(`噫——`);
         await era.printAndWait(
-          `在奇妙的亢奋之中变得愉悦起来的你慢慢顺着歌声的指引前进着。`,
+          `就连片刻的迟疑也不允许，追赶的教师一刻不停地逼迫她做出决定。`,
         );
-        await era.printAndWait(`就像是被妖精吸引的旅人一样。`);
-        await me.say_and_wait(`究竟在哪里呢？`, true);
-        await era.printAndWait(`青涩却包含活力的歌声进入了高潮。`);
-        await me.say_and_wait(`也许闭上双眼跟着直觉走才对？`, true);
+        await era.printAndWait(`像是棋盘上必须在车与马之间选择一样丢弃。`);
+        await chara_talk.say_and_wait(`……飞鹰子可不能在这种地方认输！`);
         await era.printAndWait(
-          `在平时必定会反对的想法此时却从潜意识之中浮现出来。`,
+          `如果是马娘的话，想要从人类的手中逃跑——甚至反过来将他打倒也不是什么难事。`,
         );
-        await era.printAndWait(`想着“也许这才是唯一解”的你干脆闭上了双眼。`);
-        await era.printAndWait(
-          `强行压下烦躁的欲望，${me.actual_name}向着笃定的位置踏出了脚步——`,
-        );
-        await me.say_and_wait(`......是这里吗？`, true);
-        era.drawLine();
-        await era.printAndWait(
-          `在歌声的引导下，你在写着此路不通的横幅面前停下了脚步。`,
-        );
-        await era.printAndWait(`记忆之中，似乎在自己入职时就已经存在了。`);
-        await era.printAndWait(
-          `前辈训练员说过，学院似乎有将这间教室重新翻新的打算。`,
-        );
-        await era.printAndWait(`不过为什么不呢？`);
-        await era.printAndWait(
-          `也许是因为预算不足只能暂且搁置，或者是因为有更加重要的事情需要处理，所以被遗忘在厚厚的代办事项中了吧。`,
-        );
-        await era.printAndWait(
-          `或许是没有想过会有人对这种破旧的空教室感兴趣吧，你很轻松的越过了阻挡物，然后在关上的教室门前停了下来。`,
-        );
+        await era.printAndWait(`毕竟人类无法战胜马娘。`);
         await me.say_and_wait(
-          `如果就这么贸然进去的话，会被里面的人察觉到吧`,
-          true,
+          `作为偶像如果连路人都会误伤的话，是不是已经失格了呢？`,
         );
-        await era.printAndWait(`放在生锈的门把手上的手迟疑了。`);
-        await me.say_and_wait(`悄悄地露出一丝门缝吧`, true);
-        await era.printAndWait(`为了不被里面的人所察觉，悄悄的露出一丝门缝。`);
-        await era.printAndWait(`顺着门缝的视线向内窥去——`);
+        await era.printAndWait(`——又能逃到哪里去呢？`);
+        await chara_talk.say_and_wait(`……`);
         await era.printAndWait(
-          `——梳着双马尾的女孩子握着手中的纸张蹦蹦跳跳的唱着歌`,
+          `马娘从你刚刚经过的楼梯飞速离开，眨眼间便消失的无影无踪。`,
         );
-        await me.say_and_wait(`这就是青春吗？`, true);
-        await era.printAndWait(`高中时的自己也曾像她这样，对未来充满着希望。`);
-        await me.say_and_wait(`————不，这样就好了`);
+        await say_by_passer_by(`人类教师`, `……别让我再遇见你。`);
         await era.printAndWait(
-          `为了不再回忆那段痛苦的回忆，低声对着自己安慰着。`,
+          `因为两者肉眼可见的体能差距，在被愤怒支配大脑终于冷静了下来。`,
         );
-        await me.say_and_wait(`已经结束了`);
+        await era.printAndWait(`耗尽了体力之后，教师便挨着你坐了下来。`);
+        await me.say_and_wait(
+          `明明冲刺时的爆发力非常优秀，那名马娘到现在都没有训练员吗？`,
+        );
+        await say_by_passer_by(`人类教师`, `嗯？你是训练员吗？`);
+        await era.printAndWait(`坐在一旁的教师突然向你搭话。`);
+        await say_by_passer_by(
+          `人类教师`,
+          `不好意思刚刚失态了，我是刚刚跑过去的马娘的班主任。`,
+        );
+        await say_by_passer_by(
+          `人类教师`,
+          `醒目飞鹰是个很外向的孩子，虽然有的时候冒冒失失，但都是为了实现她的偶像梦。`,
+        );
         await era.printAndWait(
-          `无意识地推开了生锈的大门，与房间的主人四目相对时，才想起自己是在偷窥的事实。`,
+          `如果想要参与偶像活动，只要在选拨赛时与训练员签约即可，如果从刚刚的步伐来看，少女也不是不可能。`,
         );
-        await chara_talk.say_and_wait(`唔呀啊啊啊啊啊啊！`);
+        await era.printAndWait(`似乎看出了你的疑惑，教师苦笑着摇了摇头。`);
+        await say_by_passer_by(
+          `人类教师`,
+          `一开始我和你的想法一样，只要能在选拔赛时取得亮眼的表现就能实现她的偶像梦了。`,
+        );
+        await say_by_passer_by(
+          `人类教师`,
+          `但是她不管怎么努力，似乎都像被沉重的铁球系住了脚。`,
+        );
+        await say_by_passer_by(
+          `人类教师`,
+          `在连续三场选拔赛以倒数几名结束后，恐怕她也知道自己在草地方面并不理想。`,
+        );
+        await me.say_and_wait(`为什么不试试看沙地？`);
+        await say_by_passer_by(`人类教师`, `恐怕只有当面问她才知道。`);
         await era.printAndWait(
-          `尖锐的声音让你想起了防空警报的声音，也许她会很适合唱高音？`,
+          `正当你打算询问更多关于醒目飞鹰消息时，急促的铃声打断了你们之间的对话。`,
         );
-        await me.say_and_wait(`——唔`);
         await era.printAndWait(
-          `尽管尽力躲避着飞来的纸张，但还是被其中伴随着尖锐爆鸣声的纸张所击中`,
+          `匆匆与那位教师告别后，你才意识到自己对刚才提及的马娘颇感兴趣。`,
         );
-        await me.say_and_wait(`那名马娘人呢？`);
-        await era.printAndWait(`似乎是趁着你被击中的瞬间迅速逃跑了。`);
-        await me.say_and_wait(`算了，还没问————等一下`);
-        await era.printAndWait(`似乎慌不择路的马娘将自己编写的歌曲扔了过来。`);
-        await me.say_and_wait(`${chara_talk.name}？`);
-        await era.printAndWait(
-          `最显眼的正上方好好写上了自己的名字以及可爱的头像。`,
-        );
-        await me.say_and_wait(`先收起来找机会去问一下那名马娘的事情吧。`);
-        await era.printAndWait(`将散落的纸张收起之后，你关上了教室的大门。`);
         era.drawLine({ content: '第二天' });
         await era.printAndWait(
-          `当${me.name}打着哈欠准备今天的马娘劝诱时，梳着双马尾的少女在${me.name}的门前焦急得等待着。`,
-        );
-        await era.printAndWait(
-          `似乎是听到了${me.name}的脚步声一样，那名马娘将头转向了${me.name}`,
+          `当你像平时一样来到训练室门口，却发现训练室大门上张贴了一张手写的海报。`,
         );
         await chara_talk.say_and_wait(
-          `请...请问是${me.actual_name}${me.get_adult_sex_title()}吗？`,
+          `在领放时闪闪放光的飞鹰子！预定16:00在河边举行突击演唱会！`,
         );
-        era.printButton(`是的，我就是${me.actual_name}`, 1);
+        await era.printAndWait(
+          `你将海报轻轻撕下，指尖的触感却非冰冷的铁块，尚存的余温预示着主人未走多远。`,
+        );
+        era.printButton(`现在追过去还来得及。`, 1);
         await era.input();
-        await era.printAndWait(`被认出来的你干脆地承认了`);
-        await chara_talk.say_and_wait(`呃...嗯，那个可以不可以......`);
-        era.printButton(`总之先到训练室再聊吧`, 1);
-        await era.input();
         await era.printAndWait(
-          `拿出钥匙对准门锁，余光中的${chara_talk.name}似乎在犹豫着要不要说出来。`,
+          `你正准备将海报扔进背包中，不远处却传来了手纲小姐略带怒气的声音。\n\n`,
         );
-        await me.say_and_wait(`请坐，我来收拾一下。`);
-        await era.printAndWait(
-          `${me.actual_name}轻轻拍了拍沙发的坐垫抚去上面的灰尘，将原本作为劝诱马娘使用的果汁拿出来招待客人。`,
-        );
-        await me.say_and_wait(
-          `抱歉，准备仓促，只有果汁了，如果还有想喝的饮料的话我去买。`,
+        await chara301_talk.say_and_wait(
+          `醒目飞鹰小姐，在教职工大门上张贴海报是错误的行为。`,
         );
         await era.printAndWait(
-          `像是被你的举动吓到了一样，${chara_talk.name}战战栗栗地接过了果汁。`,
+          `醒目飞鹰在向理事长办公室上张贴海报时被从里面出来的手纲抓个正着。`,
         );
-        await chara_talk.say_and_wait(`不，不用......总之谢谢了`);
-        await era.printAndWait(
-          `坐在沙发上的${chara_talk.name}接过了果汁，放在了桌子上。`,
+        await chara_talk.say_and_wait(`非常抱歉，下次不会再犯了。`);
+        await chara301_talk.say_and_wait(
+          `醒目飞鹰小姐，如果想要合规的进行偶像活动，请在选拔赛上努力与合适的训练员进行签约。`,
+        );
+        await chara301_talk.say_and_wait(
+          `特雷森学院是以培育优秀赛马娘为目标而创立的，我想以此为目标希望一同前进的训练员应该不会少。`,
+        );
+        await chara301_talk.say_and_wait(
+          `请把努力的方向修正后，与合适的训练员一同前进吧。`,
         );
         await era.printAndWait(
-          `等待着她回复的你和坐立不安的${chara_talk.name}之间弥漫着沉默的氛围。`,
+          `手纲缰绳一边将醒目飞鹰手中尚未分发出去的海报没收，一边郑重的告诫对方。`,
         );
         await chara_talk.say_and_wait(`......`);
-        await chara_talk.say_and_wait(
-          `......那个，训练员${me.get_adult_sex_title()}`,
+        await era.printAndWait(
+          `从低垂的马耳来看，醒目飞鹰似乎陷入了两难之地。`,
+        );
+        await chara301_talk.say_and_wait(`（玩家名）先生，请问有什么事情吗？`);
+        await era.printAndWait(`正处于工作模式的手纲缰绳注意到你的存在。`);
+        await era.printAndWait(
+          `看着眼前低落的少女，你突然回想起了昨天的情景。`,
         );
         await era.printAndWait(
-          `似乎是再也无法忍受这种尴尬的氛围，她终于向你搭话`,
+          `如果自己也陷入这种境地，能有一只手来拉自己一把的话……`,
         );
-        await chara_talk.say_and_wait(`还记得上次见面的事情吗？`);
-        await era.printAndWait(
-          `为了掩盖心中的紧张，她拆开了塑料包装拿起了吸管小口小口地吮吸着饮料`,
+        era.printButton(`抱歉，我之后会好好和醒目飞鹰谈谈的。`, 1);
+        await era.input();
+        await chara301_talk.say_and_wait(
+          `……之后请把契约书复印一份放在理事长办公室，不过在此之前。`,
         );
-        await chara_talk.say_and_wait(
-          `就是之前和训练员${me.get_adult_sex_title()}见面的时候，我不小心把偶像...不对，是我的纸张...不对，是歌词不小心撒在了空教室里，然后当我回去的时候发现纸张都被人收拾走了所以训练员${me.get_adult_sex_title()}请把我的东西还给我。`,
-        );
-        await era.printAndWait(
-          `猛吸了一大口果汁后像是下定了决心一样强迫着自己说出了一大段话`,
-        );
-        await chara_talk.say_and_wait(`我说的是不是太快了？`);
-        await era.printAndWait(
-          `似乎没有等到预料中的反应，偷偷观察着你的${chara_talk.name}被眼前的纸张弄得不知所措。`,
-        );
-        await chara_talk.say_and_wait(`谢谢，就是这个！啊，不好！`);
-        await era.printAndWait(
-          `迫不及待接过你手中纸张的${chara_talk.name}因为过于急切不小心又将纸张散落了一地。`,
-        );
-        await chara_talk.say_and_wait(
-          `又给训练员${me.get_adult_sex_title()}添麻烦了，实在抱歉！！`,
+        await era.printAndWait(`你顺着手纲小姐的目光看向了贴了一路的海报。`);
+        await chara301_talk.say_and_wait(
+          `请在马娘们上课之前把走廊恢复成原来的样子。\n\n\n`,
         );
         await era.printAndWait(
-          `被突然的意外场面吓得不知所措的${chara_talk.name}匆匆道歉后打算低头捡起纸张。`,
+          `在拼命的努力后，总算在上课铃响起之前将海报全部撕了下来。`,
         );
-        await me.say_and_wait(`竖起的尾巴真可爱`, true);
-        await chara_talk.say_and_wait(`呀啊！`);
+        await chara_talk.say_and_wait(`……啊，这个……训练员先生？`);
+        await era.printAndWait(`眼前的始作俑者犹豫着不知该如何开口。`);
+        await chara_talk.say_and_wait(`又给您添麻烦了，非常抱歉！！`);
         await era.printAndWait(
-          `希望尽快离开这个训练室的${chara_talk.name}，与打算帮助她捡起散落纸张的${me.actual_name}不小心撞在了一起。`,
-        );
-        await era.printAndWait(
-          `明明是好事却变成了这种像是会在轻小说里发生的场面一样。`,
+          `似乎是下了很大的决心，醒目飞鹰在鼓起勇气开口后便头也不回的逃跑了。`,
         );
         await era.printAndWait(
-          `因为疼痛无意识向后退了一步的${chara_talk.name}不小心踩中了纸张，向后倒去的${chara_talk.name}像是溺水的人试图抓住救命的稻草一样抓住了你的衣袖。`,
+          `看着落荒而逃的少女，你突然想起了放在背包之中的海报。\n\n`,
         );
-        await era.printAndWait(
-          `就结果而言变成了你试图推倒${chara_talk.name}的样子。`,
-        );
-        await me.say_and_wait(`唔，好近`, true);
-        await era.printAndWait(
-          `盯着你的眼睛看着的${chara_talk.name}的脸逐渐变红，最后像是似乎能滴出水一样.....唔，为什么一直盯着我看？`,
-        );
-        await era.printAndWait(`急忙将手臂移开的你慌忙向她道歉。`);
-        await chara_talk.say_and_wait(`......哎？`);
-        await era.printAndWait(
-          `似乎还没从之前的强烈冲击之中回过神来，在你试探性的向她问话之后才回过神。`,
-        );
-        await chara_talk.say_and_wait(
-          `那个，训练员${me.get_adult_sex_title()}，我先走了。`,
-        );
-        await era.printAndWait(
-          `无视了不停道歉的你，匆匆鞠躬之后带着手稿离开了训练室。`,
-        );
-        await me.say_and_wait(`隐约有种还会见面的感觉`, true);
-        era.drawLine({ content: '训练场' });
-        await era.printAndWait(
-          `带着例行检查是否有合适的马娘，${me.name}来到了训练场。`,
-        );
-        await me.say_and_wait(`接下来的是草地第三组吗？`, true);
-        await era.printAndWait(
-          `看着身边同样的训练员盯着马娘们的身影，${me.name}也将注意力集中于马娘们的身上`,
-        );
-        await me.say_and_wait(`${chara_talk.name}吗？`, true);
-        await era.printAndWait(
-          `一种高兴的感觉从心底之中传来，也许是因为熟悉带来的安全感，${me.name}开始更加关注这名马娘的身影`,
-        );
-        await era.printAndWait(`无名训练员A「各就位，预备！」`);
-        await era.printAndWait(`随着发令枪的响起，马娘们冲了出去。`);
-        era.drawLine();
-        await me.say_and_wait(`只有这种水平吗？`, true);
-        await era.printAndWait(
-          `看着最后一名冲线的${chara_talk.name}耷拉着耳朵，你开始有些怀疑自己的判断了。`,
-        );
-        await me.say_and_wait(`我也许应该——`, true);
-        await chara37_talk.say_and_wait(`请问是${me.actual_name}吗？`);
-        await era.printAndWait(`黑色的马娘不知何时来到了${me.name}的身边。`);
-        await chara37_talk.say_and_wait(
-          `抱歉，忘了自我介绍，我是荣进闪耀，是${chara_talk.name}的室友。`,
-        );
-        await chara37_talk.say_and_wait(
-          `飞鹰同学似乎很在意你的样子，所以我有点好奇，之后可否在天台聊一下？`,
-        );
-        add_event(
-          event_hooks.school_rooftop,
-          new EventObject(46, cb_enum.recruit),
-        );
-        new EventMarks(0).add(event_hooks.school_rooftop);
+
+        add_event(event_hooks.out_river, new EventObject(46, cb_enum.recruit));
+        new EventMarks(0).add(event_hooks.out_river);
         era.set('cflag:46:随机招募', 0);
         return true;
-      case event_hooks.school_rooftop:
+      case event_hooks.out_river:
         if (era.get('flag:当前互动角色')) {
-          add_event(event_hooks.school_rooftop, event_object);
+          add_event(event_hooks.out_river, event_object);
           return false;
         }
-        era.drawLine({ content: '天台' });
-        await chara37_talk.say_and_wait(
-          `原来如此，不是那种会占小马娘便宜的屑训练员，失礼了。`,
+        await era.printAndWait(`放学后，你跟着海报的指引来到了河边。`);
+        await era.printAndWait(`不远处的少女，在高架桥的承托下显得额外渺小。`);
+        await chara_talk.say_and_wait(`~~~♪`);
+        await era.printAndWait(
+          `即使如此，对着空地绽放了笑容的她却显得额外闪耀。`,
+        );
+        await chara_talk.say_and_wait(`~~~♪谢谢大家！`);
+        await era.printAndWait(
+          `像是排练过无数次一样，少女娴熟的面对着空地鞠躬。`,
+        );
+        await era.printAndWait(`——像一场仪式一样按部就班的结束。`);
+        await era.printAndWait(`啪啪啪啪。`);
+        await era.printAndWait(
+          `挥洒的汗水，露出的可爱笑容，就这样无人欣赏默默凋零，实在不可原谅。`,
         );
         await era.printAndWait(
-          `听完前因后果之后，黑色的马娘向${me.name}鞠躬道歉。`,
+          `但即使如此，除了耳朵微微颤动以外，少女不为作动。`,
         );
-        await chara37_talk.say_and_wait(
-          `作为补偿，如果有什么问题的话，可以向我询问。`,
-        );
-        era.printButton(
-          `${chara_talk.name}似乎不擅长草地，为什么还要坚持去跑草地？`,
-          1,
-        );
-        await era.input();
-        await era.printAndWait(
-          `${me.name}将心中的疑问告诉了眼前的马娘，后者报以果然如此的神情。`,
-        );
-        await chara37_talk.say_and_wait(
-          `这个问题相比我自己诉说的话，不如让飞鹰同学自己来回答的话会更好一点。`,
-        );
-        await era.printAndWait(`荣进闪耀扭头看向了天台的入口。`);
-        await chara37_talk.say_and_wait(`差不多飞鹰同学也要到了。`);
+        await era.printAndWait(`连拂去额头上汗珠的闲暇都没有，下一场开始了。`);
+        era.drawLine();
         await chara_talk.say_and_wait(
-          `闪耀同学，你说到天台来是......之前见过的${
-            me.actual_name
-          }${me.get_adult_sex_title()}吗？`,
+          `——呼⭐今天是飞鹰子表现得最完美的一次演出了。`,
         );
-        await era.printAndWait(`小小的身影出现在了天台。`);
-        await chara37_talk.say_and_wait(`恕我失礼了。`);
         await era.printAndWait(
-          `荣进闪耀向你深深鞠躬之后来到了疑惑的${chara_talk.name}旁边耳语几句后，便离开了天台。`,
+          `为了驱散寒风而更加用力的鼓掌，大脑也随之振奋起来。`,
         );
-        era.printButton(`${chara_talk.name}同学？`, 1);
-        await era.input();
+        await chara_talk.say_and_wait(`飞鹰子的粉丝一号先生⭐`);
         await era.printAndWait(
-          `只剩下了${me.get_couple_title()}两个人站在天台上沉默对视着。`,
+          `等到思绪重新回到现实之中，小小的脑袋凑了过来。`,
         );
-        await chara_talk.say_and_wait(
-          `训练员${me.get_adult_sex_title()}，可以成为我的专属训练员吗？`,
-        );
-        era.printButton(`为什么？`, 1);
+        era.printButton(`……粉丝一号？`, 1);
         await era.input();
         await chara_talk.say_and_wait(
-          `......如果是训练员${me.get_adult_sex_title()}的话，说不定可以实现我的梦想。`,
+          `因为粉丝一号先生是第一个听完飞鹰子整场演唱会的人⭐`,
         );
-        era.printButton(`飞鹰同学的梦想是什么呢？`, 1);
+        await era.printAndWait(`醒目飞鹰的兴奋之情溢于言表。`);
+        await chara_talk.say_and_wait(
+          `粉丝一号先生有什么愿望吗？只要是飞鹰子的能力范围内，飞鹰子都会实现的⭐`,
+        );
+        await era.printAndWait(`你想了一下。`);
+        era.printButton(`为什么飞鹰子不愿去试试看沙地呢？`, 1);
         await era.input();
-        await chara_talk.say_and_wait(`马娘偶像，成为闪闪发光的偶像。`);
         await era.printAndWait(
-          `${chara_talk.name}的游移不定的眼神现在直视着你。`,
+          `似乎是始料未及的回复，醒目飞鹰露出了尴尬的神情。`,
         );
         await chara_talk.say_and_wait(
-          `而且训练员${me.get_adult_sex_title()}现在也因为找不到合适的马娘而苦恼吧？`,
+          `……训练员先生真喜欢开玩笑呢，可以换个愿望吗？`,
         );
-        await chara_talk.say_and_wait(`所以说，我是最适合的选择了。`);
+        era.printButton(`作为训练员，我很好奇这个问题。`, 1);
+        await era.input();
+        await chara_talk.say_and_wait(
+          `咦？飞鹰子的粉丝一号先生同时还是训练员先生……这样的话，也没办法呢。`,
+        );
+        await chara_talk.say_and_wait(
+          `因为飞鹰子觉得只有在草地上奔跑才能登上最大最闪亮的舞台！`,
+        );
+        await chara_talk.say_and_wait(
+          `而且泥地和草地之间的人气，相差了三四倍不止！`,
+        );
+        await era.printAndWait(`醒目飞鹰认真的回答你的问题。`);
+        await era.printAndWait(`明明渴望的目标近在咫尺，但这道门是关闭着的。`);
+        era.printButton(`成为泥地的偶像吧！`, 1);
+        await era.input();
+        await chara_talk.say_and_wait(`诶？飞鹰子不是说过了吗？泥地的——`);
         await me.say_and_wait(
-          `飞鹰同学有闪耀的梦想是一件好事，不过我还有一个问题。`,
-        );
-        era.printButton(`为什么执着于草地？`, 1);
-        await era.input();
-        await chara_talk.say_and_wait(
-          `我希望能在最大的舞台之上演出，这样就能成为最闪耀的马娘了。`,
-        );
-        await me.say_and_wait(`但你看上去并不适合去跑草地，而且相比于草地。`);
-        await era.printAndWait(`你看向了她纤细的腿部。`);
-        await me.say_and_wait(`你更适合需要力量的泥地。`);
-        await era.printAndWait(
-          `${chara_talk.name}似乎陷入了思索之中，你叹了口气`,
+          `如果飞鹰子在泥地上不断取胜，那么关注泥地赛事的人也会不断增加。`,
         );
         await me.say_and_wait(
-          `后天有场泥地的赛事，有空的话一起去感受一下泥地的气氛吧。`,
+          `如果把泥地的关注度提到和草地一样，不，甚至比草地人气还要高的话。`,
         );
-        await era.printAndWait(`说完之后你便离开了天台。`);
-        era.drawLine({ content: '泥地赛·观众席上' });
-        await era.printAndWait(`观众「噢噢噢噢噢噢噢噢！」`);
-        await era.printAndWait(
-          `相比与草地赛事，泥地赛事的粉丝们似乎更加热情。`,
-        );
-        await chara_talk.say_and_wait(`原来泥地赛也会有这么多关注的粉丝们吗？`);
-        await era.printAndWait(
-          `像是被抛进了煮沸的开水之中，两人在沸腾的气氛中显得有些格格不入。`,
-        );
-        await me.say_and_wait(`看着这些出场的马娘们。`);
-        await era.printAndWait(
-          `即使是泥地赛事，马娘们执着的眼神却不输于草地的马娘们。`,
-        );
-        await era.printAndWait(
-          `纵使是在泥土扬起的赛道之上，马娘们依然瞪着眼睛，紧紧地盯着最佳地位置。`,
-        );
-        await era.printAndWait(`生命在最艰难的时候反而会爆发出强烈的生命力。`);
-        await era.printAndWait(
-          `身旁的${chara_talk.name}紧紧地盯着马娘们地身影，直至最后冲线为止才缓过神来。`,
-        );
-        await chara_talk.say_and_wait(`马娘们，原来这么闪耀吗？`);
-        await era.printAndWait(`身旁的${chara_talk.name}似乎下定了决心一样。`);
         await chara_talk.say_and_wait(
-          `训练员${me.get_adult_sex_title()}，我决定了。`,
+          `——飞鹰子就能站在最大最闪耀的舞台之上了吗？`,
         );
-        await chara_talk.say_and_wait(`我要以泥地偶像的身份登上最大的舞台。`);
-        await chara_talk.say_and_wait(`接下来请一直盯着飞鹰子看哦⭐`);
-        await me.say_and_wait(`飞鹰子？`, true);
-        era.drawLine({ content: '泥地选拔时' });
-        await era.printAndWait(
-          `泥地第三组的${chara_talk.name}漂亮的取得了一着。`,
+        await chara_talk.say_and_wait(
+          `不过，就算数学不好的飞鹰子也知道，即使是泥地G1，要想不断连胜，也是近乎不可能的事情。`,
         );
-        await era.printAndWait(
-          `关注着泥地赛事的训练员们纷纷试图招揽这颗闪耀的星星。`,
+        era.printButton(`我相信着飞鹰子。`, 1);
+        await era.input();
+        await me.say_and_wait(
+          `为了回应粉丝的梦想，偶像是可以把不可能化作可能的生物，不是吗？`,
         );
-        await chara_talk.say_and_wait(`训练员${me.get_adult_sex_title()}⭐`);
-        await era.printAndWait(`她却飞扑到了你的身边。`);
-        await era.printAndWait(`接下来的话，请多指教了！`);
+        await chara_talk.say_and_wait(`……如果是为了回应粉丝们的期待的话。`);
+        await me.say_and_wait(`不久之后会有一场泥地的比赛，一起去看吧？`);
+        await chara_talk.say_and_wait(`飞鹰子要用自己的双眼见证泥地的比赛！`);
+        await chara_talk.say_and_wait(
+          `接下来这段时间请多指教了，训练员……不！飞鹰子的粉丝一号先生⭐`,
+        );
         await era.printAndWait(`成功招募${chara_talk.name}了！`);
-        new EventMarks(0).sub(event_hooks.school_rooftop);
+        new EventMarks(0).sub(event_hooks.out_river);
         new FalconEduMarks().after_recruit++;
         era.set('cflag:46:招募状态', recruit_flags.yes);
         new FalconEduMarks().beginning++;
