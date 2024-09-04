@@ -13,6 +13,7 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
   * 降低了顺从因子的获取量
   * 提高了同心刻印的获取难度
   * 略微提高了通过调教指令获取的所有情感因子的获取量
+* 现在性经历中对角色的称呼会跟随玩家的设置而变了
 
 ## Fixed
 

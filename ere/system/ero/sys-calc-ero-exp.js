@@ -3,9 +3,6 @@ const era = require('#/era-electron');
 const { update_juels_from_talent } = require('#/system/ero/sys-calc-juel');
 const { update_palam_from_talent } = require('#/system/ero/sys-calc-palam');
 const { merge_stain, set_stain } = require('#/system/ero/sys-calc-stain');
-const {
-  sys_get_colored_full_callname,
-} = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const EroParticipant = require('#/data/ero/ero-participant');
@@ -23,13 +20,13 @@ module.exports = {
       if (sys_check_awake(chara_id)) {
         era.set(`cstr:${chara_id}:初次口交经历`, [
           `在 ${date} 被 `,
-          sys_get_colored_full_callname(chara_id, other_id),
+          { c: other_id },
           ' 教会了这张嘴的另一种用法',
         ]);
       } else if (!era.get(`cstr:${chara_id}:无自觉初次口交经历`)) {
         era.set(`cstr:${chara_id}:无自觉初次口交经历`, [
           `实际上，早在 ${date} 就初次被 `,
-          sys_get_colored_full_callname(chara_id, other_id),
+          { c: other_id },
           ' 使用过了',
         ]);
       }
@@ -44,7 +41,7 @@ module.exports = {
     if (!era.get(`cstr:${chara_id}:初次口交经历`)) {
       era.set(`cstr:${chara_id}:初次口交经历`, [
         `在 ${date} 与 `,
-        sys_get_colored_full_callname(chara_id, other_id),
+        { c: other_id },
         ' 探索了这张嘴的另一种用法',
       ]);
     }
@@ -103,14 +100,14 @@ module.exports = {
           if (!era.get(`cstr:${c_id}:无自觉初次颜射经历`)) {
             era.set(`cstr:${c_id}:无自觉初次颜射经历`, [
               `实际上，在 ${date} 就盖上了 `,
-              sys_get_colored_full_callname(c_id, chara_id),
+              { c: chara_id },
               ' 的精液',
             ]);
           }
         } else if (!era.get(`cstr:${c_id}:初次颜射经历`)) {
           era.set(`cstr:${c_id}:初次颜射经历`, [
             `在 ${date} 初次被 `,
-            sys_get_colored_full_callname(c_id, chara_id),
+            { c: chara_id },
             ' 以精液覆面',
           ]);
         }
@@ -136,7 +133,7 @@ module.exports = {
       era.set(`cstr:${chara_id}:初次手交经历`, [
         `手指，果然是最原始也最好用的取乐道具呀，在 ${date} `,
         chara_id !== other_id ? '因 ' : '',
-        sys_get_colored_full_callname(chara_id, other_id),
+        { c: other_id },
         ' 学会了这一点',
       ]);
     }
@@ -153,10 +150,8 @@ module.exports = {
     if (!era.get(`cstr:${chara_id}:初次授乳经历`)) {
       era.set(`cstr:${chara_id}:初次授乳经历`, [
         `${date}，第一次让 `,
-        sys_get_colored_full_callname(chara_id, other_id),
-        ...(supporter_id > 0
-          ? [' 与 ', sys_get_colored_full_callname(chara_id, supporter_id)]
-          : []),
+        { c: other_id },
+        ...(supporter_id > 0 ? [' 与 ', { c: supporter_id }] : []),
         ` 品尝了自己那对 ${breast_desc} 乳房中内容物的味道`,
       ]);
     }
@@ -190,7 +185,7 @@ module.exports = {
         if (!era.get(`cstr:${c_id}:初次吸奶经历`)) {
           era.set(`cstr:${c_id}:初次吸奶经历`, [
             `${date}，第一次并非因饥饿而吮吸了 `,
-            sys_get_colored_full_callname(c_id, chara_id),
+            { c: chara_id },
             ` 那对 ${breast_desc} 的乳房，不知对味道是否满意呢？`,
           ]);
         }
@@ -205,13 +200,13 @@ module.exports = {
     if (!era.get(`cstr:${attacker_id}:初次施虐经历`)) {
       era.set(`cstr:${attacker_id}:初次施虐经历`, [
         `在 ${date} 初次虐待了 `,
-        sys_get_colored_full_callname(attacker_id, defender_id),
+        { c: defender_id },
       ]);
     }
     if (!era.get(`cstr:${defender_id}:初次受虐经历`)) {
       era.set(`cstr:${defender_id}:初次受虐经历`, [
         `在 ${date} 初次被 `,
-        sys_get_colored_full_callname(defender_id, attacker_id),
+        { c: attacker_id },
         ' 虐待',
       ]);
     }

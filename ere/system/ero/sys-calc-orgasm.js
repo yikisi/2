@@ -35,9 +35,6 @@ const {
 } = require('#/system/ero/sys-calc-stain');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
-const {
-  sys_get_colored_full_callname,
-} = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_random_value, log_max_wp } = require('#/utils/value-utils');
@@ -218,7 +215,6 @@ async function sys_calc_orgasm(shown, ...ids) {
                         new EroParticipant(other_id, other_part),
                       );
                     }
-                    console.log(other_part);
                     cum_flag = true;
                   } else if (ret === 1) {
                     era.set(`nowex:${chara_id}:寸止`, 1);
@@ -488,13 +484,13 @@ async function sys_calc_orgasm(shown, ...ids) {
                   if (sys_check_awake(other_id)) {
                     era.set(`cstr:${other_id}:初次吞精经历`, [
                       `在 ${date} 第一次品尝了 `,
-                      sys_get_colored_full_callname(other_id, chara_id),
+                      { c: chara_id },
                       ' 的精液，莫名地为那腥臭的味道而着迷',
                     ]);
                   } else if (!era.get(`cstr:${other_id}:无自觉初次吞精经历`)) {
                     era.set(`cstr:${other_id}:无自觉初次吞精经历`, [
                       `实际上，在 ${date}，就已经开始习惯 `,
-                      sys_get_colored_full_callname(other_id, chara_id),
+                      { c: chara_id },
                       ' 精液的味道了',
                     ]);
                   }
@@ -546,13 +542,13 @@ async function sys_calc_orgasm(shown, ...ids) {
                   if (sys_check_awake(chara_id)) {
                     era.set(`cstr:${chara_id}:初次内射经历`, [
                       '第一次向 ',
-                      sys_get_colored_full_callname(chara_id, other_id),
+                      { c: other_id },
                       ` 的身体注入 ${amount}ml 种子，是在 ${date}`,
                     ]);
                   } else if (!era.get(`cstr:${chara_id}:无自觉初次内射经历`)) {
                     era.set(`cstr:${chara_id}:无自觉初次内射经历`, [
                       `实际上，在 ${date} 就被 `,
-                      sys_get_colored_full_callname(chara_id, other_id),
+                      { c: other_id },
                       ` 淫乱的小穴榨取了 ${amount}ml 精液`,
                     ]);
                   }
@@ -561,7 +557,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                   if (sys_check_awake(other_id)) {
                     era.set(`cstr:${other_id}:初次被内射经历`, [
                       '接纳了 ',
-                      sys_get_colored_full_callname(other_id, chara_id),
+                      { c: chara_id },
                       ` 的 ${amount}ml 种子，是在 ${date}`,
                     ]);
                   } else if (
@@ -569,7 +565,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                   ) {
                     era.set(`cstr:${other_id}:无自觉初次被内射经历`, [
                       `实际上，宝贵的阴道和子宫在 ${date} 就受到 `,
-                      sys_get_colored_full_callname(other_id, chara_id),
+                      { c: chara_id },
                       ` 的 ${amount}ml 精液洗礼`,
                     ]);
                   }
