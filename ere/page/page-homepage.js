@@ -288,7 +288,7 @@ module.exports = async () => {
     chara_id && sys_change_status_by_base(chara_id);
 
     await era.clear();
-    print_page_header();
+    print_page_header(true);
     if (cur_location === location_enum.basement) {
       print_curr_chara(era.get('flag:地下室之主'));
     } else {
