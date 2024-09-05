@@ -373,12 +373,21 @@ module.exports = async () => {
             era.drawLine({
               content: `为 ${era.get(`callname:${chara_id}:-2`)} 选择技能`,
             });
+            const unused_group2level = {};
             let available_skills = {},
               got_skills = {};
             common_skills.forEach((e) => (available_skills[e] = 1));
-            new CharaAvailableSkills(chara_id)
-              .get()
-              .forEach((e) => delete available_skills[e]);
+            new CharaAvailableSkills(chara_id).get().forEach((e) => {
+              const s = skills_dict[e];
+              if (!unused_group2level[s.group_id]) {
+                unused_group2level[s.group_id] = s.group_level;
+              } else {
+                unused_group2level[s.group_id] = Math.min(
+                  unused_group2level[s.group_id],
+                  s.group_level,
+                );
+              }
+            });
             available_skills = Object.keys(available_skills)
               .map(Number)
               .reduce((p, c) => {
@@ -392,6 +401,15 @@ module.exports = async () => {
               .get()
               .forEach((s) => (got_skills[skills_dict[s].group_id] = s));
             Object.keys(available_skills).forEach((k) => {
+              const learned_skill_level =
+                unused_group2level[
+                  skills_dict[available_skills[k][0]].group_id
+                ];
+              if (learned_skill_level) {
+                available_skills[k] = available_skills[k].filter(
+                  (e) => skills_dict[e].group_level < learned_skill_level,
+                );
+              }
               available_skills[k] = sort_list(
                 available_skills[k],
                 (e) => skills_dict[e].group_level,
