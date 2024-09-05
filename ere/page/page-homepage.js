@@ -238,21 +238,21 @@ module.exports = async () => {
     let cur_location = era.get('flag:当前位置');
 
     if (!handlers[cur_location]) {
-      cur_location = era.set('flag:当前位置', location_enum.office);
+      cur_location = location_enum.office;
     }
 
     const my_life_marks = new LifeEventMarks(0);
     if (flags.week_start) {
-      if (cur_location === location_enum.basement) {
-        if (my_life_marks.basement_timer > 0) {
-          my_life_marks.basement_timer = 0;
-          cur_location = location_enum.office;
-          // TODO 救援事件
-          new BasementOwners()
-            .for_each((e) => (new LifeEventMarks(e).security_level = 0))
-            .clear();
-        }
-        era.set('flag:当前位置', location_enum.office);
+      if (
+        cur_location === location_enum.basement &&
+        my_life_marks.basement_timer > 0
+      ) {
+        my_life_marks.basement_timer = 0;
+        cur_location = location_enum.office;
+        // TODO 救援事件
+        new BasementOwners()
+          .for_each((e) => (new LifeEventMarks(e).security_level = 0))
+          .clear();
       }
       let count = 0;
       print_page_header();
@@ -345,8 +345,8 @@ module.exports = async () => {
         my_life_marks.basement_now = my_life_marks.basement_enhance =
           get_random_value(owner_marks.security_level, 5);
       }
-      era.set('flag:当前位置', cur_location);
     }
+    era.set('flag:当前位置', cur_location);
     if (flag_skip_this_week) {
       era.drawLine();
       await next_week();
@@ -355,10 +355,9 @@ module.exports = async () => {
 
     const chara_id = era.get('flag:当前互动角色');
 
-    sys_change_status_by_base(0);
-    chara_id && sys_change_status_by_base(chara_id);
-
     if (cur_location !== location_enum.basement) {
+      sys_change_status_by_base(0);
+      chara_id && sys_change_status_by_base(chara_id);
       await era.clear();
       print_page_header(true);
       print_curr_chara(chara_id);

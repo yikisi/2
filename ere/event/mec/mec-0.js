@@ -10,18 +10,18 @@ module.exports = class extends CustomizedMec {
   get_status() {
     const ret_list = [];
     if (era.get('flag:当前位置') === location_enum.basement) {
-      if (era.get('base:0:体力') < 100) {
-        ret_list.push({
-          color: buff_colors[3],
-          content: '疲惫不堪',
-          title: '[疲惫不堪]：筋疲力尽，难以为继，随时可能昏倒过去！',
-        });
-      }
       if (era.get('base:0:精力') < 100) {
         ret_list.push({
+          color: buff_colors[3],
+          content: '昏昏欲睡',
+          title: '[昏昏欲睡]：精神疲惫，心神涣散，随时可能昏睡过去！',
+        });
+      }
+      if (era.get('base:0:体力') < 100) {
+        ret_list.push({
           color: buff_colors[0],
-          content: '精力不济',
-          title: '[精力不济]：精神疲惫，心神涣散，体力消耗大幅提高！',
+          content: '疲惫不堪',
+          title: '[疲惫不堪]：筋疲力尽，难以为继，精力消耗大幅提高！',
         });
       }
     }
