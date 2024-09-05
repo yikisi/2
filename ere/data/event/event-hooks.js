@@ -10,8 +10,6 @@ const hooks = {
   celebration: 0,
   // 粉丝袭击结局
   crazy_fan_end: 0,
-  // TODO 兼容
-  edu_end: 0,
   // 声望不足结局时角色的对话
   end_talk: 0,
   // 远征 - 调养
@@ -54,8 +52,6 @@ const hooks = {
   out_start: 0,
   // 前往车站
   out_station: 0,
-  // TODO 兼容
-  race: 0,
   // 比赛结束
   race_end: 0,
   // 比赛开始

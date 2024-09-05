@@ -6,11 +6,7 @@ class YandereList {
   obj;
 
   constructor() {
-    // TODO 兼容
-    this.obj = get('flag:病娇列表');
-    if (!(this.obj instanceof Array)) {
-      this.obj = set('flag:病娇列表', []);
-    }
+    this.obj = get('flag:病娇列表') || set('flag:病娇列表', []);
   }
 
   clean() {
