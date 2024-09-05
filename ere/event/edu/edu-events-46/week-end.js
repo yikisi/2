@@ -27,27 +27,24 @@ module.exports = async function () {
     // 一般人眼中的乐观，仅仅只是将四处收集而来的瓦片聚拢起来，然后拼凑起来的乐观，因此，面对较大的危险就会四分五裂
     // 因此，不过只是装作乐观的悲观者罢了
     await print_event_name(`喊声隆隆的沙地赛`, falcon);
+    // 训练员遵守约定带醒目飞鹰看沙地赛
     await era.printAndWait(`地方沙地赛场\n`);
+    await era.printAndWait(
+      `在凌冽的寒风中，冰霜凝结在枝头，寒气透过衣衫直透骨髓。`,
+    );
+    await era.printAndWait(
+      `然而就在这样的冰雪世界，中京竞马场的一月锦标就在这样的氛围之中举行。`,
+    );
     await say_by_passer_by(
       `解说`,
       `比赛已经进入最终阶段！二号选手与四号选手从马群之中脱颖而出，开始了最后的角逐！`,
     );
-    await say_by_passer_by(`沙地比赛观众`, `唔噢噢噢噢噢噢噢！`);
-    await era.printAndWait(`观众将注意力全部集中在两者之间的对决之中。`);
-    await say_by_passer_by(`赛马娘A`, `哈啊啊啊啊！`);
-    await say_by_passer_by(`赛马娘B`, `唔啊啊啊啊！`);
+    await say_by_passer_by(`观众`, `唔噢噢噢噢噢噢噢！`);
     await era.printAndWait(
-      `与在草地上展现出惊人的豪脚不同，沙地遵循另一套规则。`,
+      `尽管外套之中凝结了一层薄薄的霜，但被激情所点燃的观众们全神贯注的将注意力集中于角逐胜利的马娘之中。`,
     );
-    await era.printAndWait(
-      `沙地赛没有长距离的赛事，而且后排成员会受到前排马群大量沙土的践踏。`,
-    );
-    await era.printAndWait(
-      `若不是从一开始就全力争夺最前方的位置，呆在马群的后方只会被飞扬的尘土与踩得坑坑洼洼的沙土严重消耗体力。`,
-    );
-    await era.printAndWait(
-      `在前排的马娘可以轻松保存体力在最后的冲刺阶段一举爆发。`,
-    );
+    await say_by_passer_by(`赛马娘们`, `哈啊啊啊啊！`);
+    await era.printAndWait(`在沙地上追逐梦想的少女们。`);
     await say_by_passer_by(
       `解说`,
       `两人之间的距离在不断缩短！五马身！三马身！一马身！就差一点！`,
@@ -57,15 +54,24 @@ module.exports = async function () {
     );
     await era.printAndWait(`胜负已定，观众席爆发出了雷鸣般的喝彩声。`);
     await era.printAndWait(
-      `取得胜利的马娘，不顾浑身被沙土所覆盖，张开双臂迎接胜利。`,
+      `取得胜利的马娘，不顾浑身被沙土所覆盖，将混合着汗水与泪水的笑脸献给了观众们。\n\n`,
     );
-    await falcon.say_and_wait(`没想到沙地赛……比想象之中还要有趣呢⭐`);
+    await falcon.say_and_wait(`没想到沙地赛……比想象之中还要热情呢。`);
     await falcon.say_and_wait(`沙地赛的观众们，对比赛的热情程度……`);
     await falcon.say_and_wait(`飞鹰子感动得都要哭出来了！`);
     await era.printAndWait(
-      `胜者舞台结束后，在回特雷森的道路上，被沙地的魅力所折服的醒目飞鹰兴奋的诉说着自己的感想。`,
+      `在胜者舞台上的马娘们热烈地回应着在下面一直支持着她们的观众们。`,
     );
-
+    await era.printAndWait(
+      `从喉咙之中挤出的不甘呐喊、喉咙嘶哑也要触及到的那片心意。`,
+    );
+    await era.printAndWait(
+      `看着在你的身边兴奋的诉说着沙地赛事盛况的醒目飞鹰。`,
+    );
+    await me.say_and_wait(`无论是草地还是沙地，为此付出的爱都是相同的。`, true);
+    await era.printAndWait(
+      `你默默的想着，然后和醒目飞鹰一起踏上了回特雷森的道路。`,
+    );
     new FalconEduMarks().start++;
     add_event(event_hooks.week_start, new EventObject(46, cb_enum.edu));
     wait_flag = get_attr_and_print_in_event(46, undefined, 120) || wait_flag;
