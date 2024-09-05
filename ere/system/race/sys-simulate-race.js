@@ -751,13 +751,35 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
         return e;
       })),
   );
-  const uma_shown_count = list_chara.filter((e) => e.index_chara >= 0).length;
+  const uma_shown_count = list_chara.filter((e) => e.index_chara >= 0).length,
+    team_count = list_chara.filter(
+      (e) => e.index_chara >= 0 && !e.legend,
+    ).length;
   dynamic_table = dynamic_table.map((l) => {
     if (l.length - 1 <= screen_size) {
       return l;
     }
     let count = screen_size - uma_shown_count;
-    return [l[0], ...l.slice(1).filter((e) => e.shown || count-- > 0)];
+    if (count > 0) {
+      count -= l.slice(1, 6).filter((e) => e.shown).length;
+      return [
+        l[0],
+        ...l.slice(1).filter((e, i) => i < 5 || e.shown || count-- > 0),
+      ];
+    } else {
+      count =
+        screen_size -
+        team_count -
+        l.slice(1, 6).filter((e) => e.shown === 2).length;
+      return [
+        l[0],
+        ...l
+          .slice(1)
+          .filter(
+            (e, i) => i < 5 || e.shown === 1 || (e.shown === 2 && count-- > 0),
+          ),
+      ];
+    }
   });
   return { buffer, dynamic_table, statistics };
 }
