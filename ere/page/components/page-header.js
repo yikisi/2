@@ -16,15 +16,6 @@ const { get_celebration, get_trainer_title } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { race_infos } = require('#/data/race/race-const');
 
-const show_race_loc_dict = {};
-show_race_loc_dict[location_enum.office] =
-  show_race_loc_dict[location_enum.beach] =
-  show_race_loc_dict[location_enum.basement] =
-  show_race_loc_dict[location_enum.paris] =
-  show_race_loc_dict[location_enum.hongkong] =
-  show_race_loc_dict[location_enum.guangzhou] =
-    1;
-
 function get_progress_bar() {
   const status_list = get_status(0);
   return [
@@ -71,8 +62,8 @@ function get_progress_bar() {
   ];
 }
 
-/** @param {boolean} [disable_race_info] */
-function page_header(disable_race_info) {
+/** @param {boolean} [enable_race_info] */
+function page_header(enable_race_info) {
   let cur_year = era.get('flag:当前年');
 
   if (!cur_year) {
@@ -214,13 +205,12 @@ function page_header(disable_race_info) {
                     type: 'text',
                   };
                 }),
-                show_race_loc_dict[era.get('flag:当前位置')]
+                enable_race_info
                   ? {
                       accelerator: 991,
                       config: {
                         align: 'center',
                         disableWarning: true,
-                        disabled: disable_race_info,
                         showAcc: false,
                       },
                       content: '查看全部',

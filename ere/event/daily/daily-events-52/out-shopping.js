@@ -711,6 +711,7 @@ handlers[1] = async (urara, me, in_urara, callname, edu_marks) => {
       ]);
 
       era.printButton('「……谢谢。」', 1);
+      await era.input();
 
       await era.printAndWait([
         '又一次被 ',

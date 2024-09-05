@@ -14,6 +14,7 @@ const {
   part_touch,
 } = require('#/data/ero/part-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
+const { get_breast_cup } = require('#/data/info-generator');
 
 class EroHookTag {
   /** @type {(number|function(number,number):boolean)[]} */
@@ -241,7 +242,9 @@ class EroHookTag {
     const touch = era.get(`tcvar:${other_id}:阴茎接触部位`);
     return (
       touch.owner === chara_id &&
-      (touch.part === part_enum.mouth || touch.part === part_enum.breast)
+      (touch.part === part_enum.mouth || touch.part === part_enum.breast) &&
+      get_breast_cup(chara_id, true).charCodeAt(0) >= 'C'.charCodeAt(0) &&
+      get_penis_size(other_id) >= 3
     );
   }
 

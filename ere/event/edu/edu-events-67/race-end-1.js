@@ -305,6 +305,7 @@ module.exports = (handlers) => {
       era.drawLine();
       await era.printAndWait('回到休息室之后，里见光钻就一直保持沉默。');
       era.printButton('「虽然没能跑赢很可惜……」', 1);
+      await era.input();
       await daiya.say_and_wait('……不，训练员。会跑输是因为我自己没用。');
       era.printButton('「没用？」', 1);
       await era.input();

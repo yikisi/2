@@ -69,7 +69,7 @@ async function check_race_events(race, info, team_contestants) {
         track_names[info.track],
         '竞马场时，',
         me.get_colored_name(),
-        '与一位记者打扮的',
+        ' 与一位记者打扮的',
         etsuko.get_phy_sex_title(),
         '不期而遇。',
       ]);

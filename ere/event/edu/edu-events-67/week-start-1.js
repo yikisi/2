@@ -323,6 +323,7 @@ module.exports = (handlers) => {
         '不小心跟着一起太兴奋了！──对了，啦啦队的胜负判决是……',
       );
       era.printButton('「…………唔！…………唔唔！！」', 1);
+      await era.input();
       await era.printAndWait(
         `……看来不用担心${daiya.sex}们会在新年期间变胖，真是太好了。`,
       );

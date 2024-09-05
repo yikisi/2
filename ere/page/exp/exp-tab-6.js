@@ -6,6 +6,7 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 
 const {
+  get_filled_exp_str,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -128,11 +129,13 @@ module.exports = {
           cummed_exp = era.get(`cstr:${chara.id}:初次被内射经历`),
           unknown_cummed_exp = era.get(`cstr:${chara.id}:无自觉初次被内射经历`);
         if (virgin_exp) {
-          virgin_exp_list.push(virgin_exp);
+          virgin_exp_list.push(get_filled_exp_str(virgin_exp, chara.id));
         }
         if (flags.show_all_exp || virgin_exp) {
           if (unknown_virgin_exp) {
-            virgin_exp_list.push(unknown_virgin_exp);
+            virgin_exp_list.push(
+              get_filled_exp_str(unknown_virgin_exp, chara.id),
+            );
           }
           if (virgin_touched_count || penis_sex_count) {
             virgin_exp_list.push(
@@ -151,11 +154,13 @@ module.exports = {
         push_link_break(virgin_exp_list);
 
         if (cummed_exp) {
-          virgin_exp_list.push(cummed_exp);
+          virgin_exp_list.push(get_filled_exp_str(cummed_exp, chara.id));
         }
         if (flags.show_all_exp || cummed_exp) {
           if (unknown_cummed_exp) {
-            virgin_exp_list.push(unknown_cummed_exp);
+            virgin_exp_list.push(
+              get_filled_exp_str(unknown_cummed_exp, chara.id),
+            );
           }
           if (clitoris_semen || virgin_semen) {
             virgin_exp_list.push(

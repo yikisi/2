@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const {
+  get_filled_exp_str,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -82,11 +83,13 @@ module.exports = {
             ),
             milking_exp = era.get(`cstr:${chara.id}:初次授乳经历`);
           if (milk_exp) {
-            breast_exp_list.push(milk_exp);
+            breast_exp_list.push(get_filled_exp_str(milk_exp, chara.id));
           }
           if (flags.show_all_exp || milk_exp) {
             if (unknown_milk_exp) {
-              breast_exp_list.push(unknown_milk_exp);
+              breast_exp_list.push(
+                get_filled_exp_str(unknown_milk_exp, chara.id),
+              );
             }
             if (breast_touched_count) {
               breast_exp_list.push(`被玩弄过 ${breast_touched_count} 次`);
@@ -95,11 +98,13 @@ module.exports = {
           push_link_break(breast_exp_list);
 
           if (tit_job_exp) {
-            breast_exp_list.push(tit_job_exp);
+            breast_exp_list.push(get_filled_exp_str(tit_job_exp, chara.id));
           }
           if (flags.show_all_exp || tit_job_exp) {
             if (unknown_tit_job_exp) {
-              breast_exp_list.push(unknown_tit_job_exp);
+              breast_exp_list.push(
+                get_filled_exp_str(unknown_tit_job_exp, chara.id),
+              );
             }
             if (tit_job_count || breast_semen) {
               breast_exp_list.push(
@@ -116,7 +121,7 @@ module.exports = {
           push_link_break(breast_exp_list);
 
           if (milking_exp) {
-            breast_exp_list.push(milking_exp);
+            breast_exp_list.push(get_filled_exp_str(milking_exp, chara.id));
           }
           if (milking_count || milk_amount) {
             breast_exp_list.push(

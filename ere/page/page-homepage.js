@@ -360,7 +360,7 @@ module.exports = async () => {
 
     if (cur_location !== location_enum.basement) {
       await era.clear();
-      print_page_header();
+      print_page_header(true);
       print_curr_chara(chara_id);
       era.drawLine();
       let hook = -1;

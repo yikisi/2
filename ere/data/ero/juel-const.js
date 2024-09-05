@@ -1,7 +1,7 @@
 const { palam2juel } = require('#/data/ero/orgasm-const');
 
 module.exports = {
-  base_emotion_juel: 75 * palam2juel,
+  base_emotion_juel: 80 * palam2juel,
   base_juel_reward: 100 * palam2juel,
   base_skill_price: 500,
   mark_prices: [0, 1000, 2000, 3500],

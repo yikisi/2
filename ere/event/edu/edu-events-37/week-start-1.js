@@ -251,6 +251,7 @@ module.exports = (handlers) => {
       `从那道目光中，${your_name} 读出了不屈的坚持与无论如何也要达成目的的执着。`,
     );
     era.printButton('「……好吧。如果到时候真的没有问题的话，那就去吧。」', 1);
+    await era.input();
     await era.printAndWait(`最终，${your_name} 轻叹一口气，选择了退让。`);
     era.println();
     era.print([

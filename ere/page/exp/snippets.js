@@ -1,10 +1,28 @@
 const { no_info } = require('#/data/exp-const');
+const {
+  sys_get_colored_full_callname,
+} = require('#/system/sys-calc-chara-others');
 
 function check_line_break(e) {
   return e instanceof Array && e.length && e[0].isBr;
 }
 
 module.exports = {
+  /**
+   * @param arr
+   * @param {number} chara_id
+   */
+  get_filled_exp_str(arr, chara_id) {
+    if (arr instanceof Array) {
+      return arr.map((e) => {
+        if (e.c !== undefined) {
+          return sys_get_colored_full_callname(chara_id, e.c);
+        }
+        return e;
+      });
+    }
+    return arr;
+  },
   /** @param {array} list */
   push_link_break(list) {
     if (list.length && !check_line_break(list[list.length - 1])) {

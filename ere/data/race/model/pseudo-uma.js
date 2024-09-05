@@ -240,6 +240,8 @@ class PseudoUma {
     // 下坡时进入状态的概率
     down: 0,
   };
+  // 传奇对手标记
+  legend = false;
 
   /**
    * @param {number} index_chara 角色编号

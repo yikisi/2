@@ -623,6 +623,7 @@ module.exports = (handlers) => {
     await ruby.say_and_wait('你……干什么啊？');
     era.printButton(`「当然是帮 ${m_call_r} 洗澡啦。」`, 1);
     era.printButton(`「${m_call_r} 的后背也得交给我来才行吧。」`, 2);
+    await era.input();
     await era.printAndWait([
       '不等 ',
       ruby.get_colored_name(),

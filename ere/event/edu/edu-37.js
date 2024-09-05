@@ -724,6 +724,7 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
         `面对 ${your_name} 的提议，荣进闪耀的脸上浮现出犹豫之色。`,
       );
       era.printButton('「要是伤势恶化，情况就会变得更糟糕。」', 1);
+      await era.input();
       await era.printAndWait(`见此，${your_name} 轻叹一口气，说道。`);
       await flash.say_and_wait('……');
       await era.printAndWait(`很明显，${your_name} 的话提醒了面前人。`);

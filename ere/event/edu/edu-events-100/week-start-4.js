@@ -704,7 +704,7 @@ module.exports = (handlers) => {
     await me.say_and_wait('——！？');
     await era.printAndWait('待喘息之际，已然出现身后。');
     era.printButton(`「奇、${acute.name}！？何时来的？」`, 1);
-    await era.waitAnyKey();
+    await era.input();
     await acute.say_and_wait([
       '很早就来了哦？只是 ',
       callname,

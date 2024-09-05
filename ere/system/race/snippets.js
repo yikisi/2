@@ -279,7 +279,7 @@ module.exports = {
           type: 'text',
         },
       ],
-      shown: uma.index_chara >= 0,
+      shown: (uma.index_chara >= 0) + uma.legend,
     };
   },
   /**

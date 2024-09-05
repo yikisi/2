@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const {
+  get_filled_exp_str,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -76,11 +77,11 @@ module.exports = {
           ),
           drunk_milk_exp = era.get(`cstr:${chara.id}:初次吸奶经历`);
         if (kiss_exp) {
-          mouth_exp_list.push(kiss_exp);
+          mouth_exp_list.push(get_filled_exp_str(kiss_exp, chara.id));
         }
         if (flags.show_all_exp || kiss_exp) {
           if (unknown_kiss_exp) {
-            mouth_exp_list.push(unknown_kiss_exp);
+            mouth_exp_list.push(get_filled_exp_str(unknown_kiss_exp, chara.id));
           }
           if (kiss_count) {
             mouth_exp_list.push(`接过 ${kiss_count} 次吻`);
@@ -89,11 +90,13 @@ module.exports = {
         push_link_break(mouth_exp_list);
 
         if (blow_job_exp) {
-          mouth_exp_list.push(blow_job_exp);
+          mouth_exp_list.push(get_filled_exp_str(blow_job_exp, chara.id));
         }
         if (flags.show_all_exp || blow_job_exp) {
           if (unknown_blow_job_exp) {
-            mouth_exp_list.push(unknown_blow_job_exp);
+            mouth_exp_list.push(
+              get_filled_exp_str(unknown_blow_job_exp, chara.id),
+            );
           }
           if (suck_count || blow_job_count) {
             mouth_exp_list.push(
@@ -110,11 +113,13 @@ module.exports = {
         push_link_break(mouth_exp_list);
 
         if (drunk_semen_exp) {
-          mouth_exp_list.push(drunk_semen_exp);
+          mouth_exp_list.push(get_filled_exp_str(drunk_semen_exp, chara.id));
         }
         if (flags.show_all_exp || drunk_semen_exp) {
           if (unknown_drunk_semen_exp) {
-            mouth_exp_list.push(unknown_drunk_semen_exp);
+            mouth_exp_list.push(
+              get_filled_exp_str(unknown_drunk_semen_exp, chara.id),
+            );
           }
           if (drunk_semen) {
             mouth_exp_list.push(`饮用过 ${drunk_semen}ml 精液`);
@@ -126,7 +131,10 @@ module.exports = {
           );
         }
         if (drunk_milk_exp) {
-          mouth_exp_list.push(drunk_milk_exp, `饮用过 ${drunk_milk}ml 乳汁`);
+          mouth_exp_list.push(
+            get_filled_exp_str(drunk_milk_exp, chara.id),
+            `饮用过 ${drunk_milk}ml 乳汁`,
+          );
         }
         push_link_break(mouth_exp_list);
 
