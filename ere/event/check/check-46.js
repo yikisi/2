@@ -170,12 +170,8 @@ module.exports = class extends CustomizedCheck {
         case 9:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 5月第二周 女仆飞鹰子兼职⭐
+        // 5月第二周 醒目飞鹰大危机！？
         case 18:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 6月第三周 出道站前夕 失眠
-        case 23:
           add_event(event_hooks.week_start, event_obj_special);
           break;
         // 6月第四周 薰衣草
