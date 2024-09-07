@@ -179,15 +179,12 @@ module.exports = class extends CustomizedCheck {
           add_event(event_hooks.week_start, event_obj_special);
           break;
         // 24-48周 恐慌 害怕被抛弃的恐慌 在全国各地参与比赛
-        // 七月第一周 夜来香
-        case 25:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
+
         // 9月第二周 努力减肥的飞鹰子！
         case 34:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        // 10月第四周 飞鹰子，重新振奋起来！
+        // 十月第四周 夜来香
         case 40:
           add_event(event_hooks.week_start, event_obj_special);
           break;
@@ -216,19 +213,19 @@ module.exports = class extends CustomizedCheck {
         case 47 + 32:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        // 9月第一周 萱草
-        case 47 + 33:
+        // 10月第三周 萱草
+        case 47 + 39:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        // 10月第二周 飞鹰子
-        case 47 + 38:
+        // 10月第四周 飞鹰子
+        case 47 + 40:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 11月第一周 水仙
+        // 11月第一周 醒目飞鹰
         case 47 + 41:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 11月第二周 醒目飞鹰的觉悟
+        // 11月第二周 水仙
         case 47 + 42:
           add_event(event_hooks.week_start, event_obj_special);
           break;
