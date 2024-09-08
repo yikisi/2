@@ -21,6 +21,7 @@ const CrazyFans = require('#/data/event/crazy-fans');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const basement_saying_arr = [
   '九尺二间陋室里，红唇依竹共恩情。——高杉晋作',
@@ -384,10 +385,23 @@ async function game_over(again) {
       } else {
         era.drawLine();
         if (era.get('flag:当前位置') === location_enum.basement) {
-          await sys_call_daily_event(
-            basement_owners.get(0),
-            event_hooks.basement_end,
-          );
+          if (
+            await select_yes_or_no(
+              [
+                CharaTalk.me.get_colored_name(),
+                ' 在地下室中迎来了结局……',
+                { isBr: true },
+                '要查看地下室结局吗？',
+              ],
+              '直面惨淡',
+              '呱我不要看',
+            )
+          ) {
+            await sys_call_daily_event(
+              basement_owners.get(0),
+              event_hooks.basement_end,
+            );
+          }
           saying_arr = basement_saying_arr;
         } else if (era.get('flag:变态行为')) {
           for (const e of [

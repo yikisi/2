@@ -104,7 +104,7 @@ async function sys_next_week() {
           chara_id,
           prison:
             (!era.get('item:透明棉被') || Math.random() < 0.5) &&
-            !new LifeEventMarks(chara_id).basement_cd,
+            !new LifeEventMarks(chara_id).b_cd,
         });
       } else if (get_custom_check(chara_id).is_rape_in_sleeping()) {
         act_list.push({ chara_id, prison: false });
@@ -589,7 +589,7 @@ async function sys_next_week() {
 
     let pregnant_stage = era.get(`cflag:${chara_id}:妊娠阶段`);
     const life_marks = new LifeEventMarks(chara_id);
-    life_marks.basement_cd && life_marks.basement_cd--;
+    life_marks.b_cd && life_marks.b_cd--;
     if (pregnant_stage >> pregnant_stage_enum.embryo) {
       sys_change_lust(chara_id, lust_border.itch / 40);
       const timer = era.add(

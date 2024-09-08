@@ -22,6 +22,7 @@ const check_game_over = require('#/page/components/game-over');
 const print_page_header = require('#/page/components/page-header');
 const print_ero_page = require('#/page/page-ero');
 
+const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const GameGuides = require('#/event/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
@@ -31,7 +32,7 @@ const {
   say_by_passer_by,
 } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
+const { get_random_value, minutes_in_a_day } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
 const BasementAction = require('#/data/event/basement-action');
@@ -42,7 +43,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
-const basement_queue = require('#/event/basement-queue');
 
 let random_event,
   notes_index = 0;
@@ -243,21 +243,21 @@ module.exports = async () => {
 
     const my_life_marks = new LifeEventMarks(0);
     if (flags.week_start) {
-      if (
-        cur_location === location_enum.basement &&
-        my_life_marks.basement_timer > 0
-      ) {
-        my_life_marks.basement_timer = 0;
-        cur_location = location_enum.office;
-        // TODO 救援事件
-        new BasementOwners()
-          .for_each((e) => (new LifeEventMarks(e).security_level = 0))
-          .clear();
-      }
       let count = 0;
       print_page_header();
       if (await check_game_over()) {
         return;
+      }
+      if (
+        cur_location === location_enum.basement &&
+        my_life_marks.b_timer > 0
+      ) {
+        my_life_marks.b_timer = 0;
+        cur_location = location_enum.office;
+        // TODO 救援事件
+        new BasementOwners()
+          .for_each((e) => (new LifeEventMarks(e).b_s_level = 0))
+          .clear();
       }
       if (era.get('flag:当前月') <= 3 && era.get('flag:当前周') === 1) {
         const added_list = era.getAddedCharacters();
@@ -309,8 +309,7 @@ module.exports = async () => {
         return;
       }
       if (cur_location === location_enum.basement) {
-        // TODO 绑架事件
-        my_life_marks.basement_timer = get_random_value(
+        my_life_marks.b_timer = get_random_value(
           Math.min(23, count + 6) * 60,
           24 * 60 - 1,
         );
@@ -320,12 +319,12 @@ module.exports = async () => {
         basement_queue.add_action(
           new BasementAction(
             0,
-            my_life_marks.basement_timer,
+            my_life_marks.b_timer,
             BasementAction.action_type_enum.get_up,
           ),
         );
-        my_life_marks.basement_enhance = 1;
-        owner_marks.security_level = Math.max(
+        my_life_marks.b_enhance = 1;
+        owner_marks.b_s_level = Math.max(
           Math.floor(
             (era.get(`love:${owner}`) * era.get('flag:极端行为限制') -
               era.get(`relation:${owner}:0`)) /
@@ -333,14 +332,16 @@ module.exports = async () => {
           ),
           0,
         );
-        my_life_marks.basement_now = my_life_marks.basement_enhance =
-          get_random_value(owner_marks.security_level, 5);
+        my_life_marks.b_now = my_life_marks.b_enhance = Math.max(
+          owner_marks.b_s_level + get_random_value(-1, 1),
+          1,
+        );
         my_life_marks.b_status = owner_marks.b_status =
           1 << BasementAction.basement_status_enum.idle;
         if (
           era.get('flag:当前回合数') % 48 > 0 &&
-          my_life_marks.basement_timer > 6 * 60 + 30 &&
-          my_life_marks.basement_timer < 17 * 60
+          my_life_marks.b_timer > 6 * 60 + 30 &&
+          my_life_marks.b_timer < 17 * 60
         ) {
           new LifeEventMarks(owner).b_status =
             1 << BasementAction.basement_status_enum.outside;
@@ -349,6 +350,20 @@ module.exports = async () => {
               owner,
               17 * 60,
               BasementAction.action_type_enum.back_basement,
+            ),
+          );
+        }
+        const rescue_chara = get_random_entry(
+          sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+            (e) => e > 0 && e !== owner && era.get(`love:${e}`) >= 75,
+          ),
+        );
+        if (rescue_chara) {
+          basement_queue.add_action(
+            new BasementAction(
+              rescue_chara,
+              3 * minutes_in_a_day + get_random_value(0, minutes_in_a_day),
+              BasementAction.action_type_enum.rescue,
             ),
           );
         }

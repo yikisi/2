@@ -15,6 +15,13 @@ module.exports = {
     );
     queue.splice(index + 1, 0, action);
   },
+  /** @param {function(BasementAction):boolean} filter_cb */
+  clean_actions(filter_cb) {
+    queue = set(
+      'flag:地下室行动',
+      queue.filter((e) => !filter_cb(e)),
+    );
+  },
   get_action() {
     let pop_count = queue.findIndex((e, _, l) => e.timer !== l[0].timer);
     if (pop_count === -1) {
@@ -23,10 +30,11 @@ module.exports = {
     return queue.splice(0, pop_count);
   },
   init() {
-    queue =
-      get('flag:地下室行动') ||
-      set('flag:地下室行动', [])
+    queue = set(
+      'flag:地下室行动',
+      (get('flag:地下室行动') || [])
         .filter((e) => e)
-        .map(BasementAction.create_from_object);
+        .map(BasementAction.create_from_object),
+    );
   },
 };

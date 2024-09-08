@@ -2,6 +2,7 @@ const action_type_enum = {
   action_end: 0,
   back_basement: 0,
   digestive_end: 0,
+  fix_end: 0,
   get_up: 0,
   rescue: 0,
   stop_sex: 0,
@@ -9,7 +10,9 @@ const action_type_enum = {
 Object.keys(action_type_enum).forEach((k, i) => (action_type_enum[k] = i));
 
 const basement_status_enum = {
+  action: 0,
   escape: 0,
+  fix: 0,
   idle: 0,
   just_back: 0,
   just_stop_sex: 0,

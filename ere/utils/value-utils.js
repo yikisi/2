@@ -22,4 +22,5 @@ module.exports = {
   log_edu_weeks: Math.log(3 * 48 - 1),
   // ln1200，根性最大值的自然对数
   log_max_wp: Math.log(1200),
+  minutes_in_a_day: 24 * 60,
 };

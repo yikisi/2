@@ -16,25 +16,29 @@ class LifeEventMarks extends PersonalEventMarks {
   // 临时腰围
   waist_buff;
   // 地下室计时（7天168小时10080分钟）
-  basement_timer;
+  b_timer;
   // 地下室冷却
-  basement_cd;
+  b_cd;
   // 病娇二段转化
   yandere;
   // 地下室初始牢固程度
-  basement_enhance;
+  b_enhance;
   // 地下室牢固程度
-  basement_now;
+  b_now;
   // 地下室警戒度
-  security_level;
+  b_s_level;
   // 地下室 - 状态机状态
   b_status;
   // 地下室体力消耗buff
-  basement_stamina_buff;
+  b_stamina_buff;
+  // 地下室食物buff
+  b_food_buff;
   // 地下室精力消耗buff
-  basement_time_buff;
+  b_time_buff;
   // 地下室外出cd
-  basement_out_cd;
+  b_out_cd;
+  // 地下室随机种子
+  b_r_seed;
 
   /** @param {number} chara_id */
   constructor(chara_id) {

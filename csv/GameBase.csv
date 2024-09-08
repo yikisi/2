@@ -15,7 +15,7 @@
 タイトル,EraUma
 
 ; 游戏标识号码，相当于 era 的身份证，以保证别的 era 游戏的存档不能和你的混用 [GAMEBASE_GAMECODE]
-コード,76309
+コード,29407
 
 ; 游戏刚开始时就存在的角色编号 [GAMEBASE_DEFAULTCHARA]
 最初からいるキャラ,0
