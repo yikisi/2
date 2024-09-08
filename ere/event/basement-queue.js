@@ -16,10 +16,11 @@ module.exports = {
     queue.splice(index + 1, 0, action);
   },
   get_action() {
-    return queue.splice(
-      0,
-      queue.findIndex((e, _, l) => e.timer !== l[0].timer),
-    );
+    let pop_count = queue.findIndex((e, _, l) => e.timer !== l[0].timer);
+    if (pop_count === -1) {
+      pop_count = queue.length;
+    }
+    return queue.splice(0, pop_count);
   },
   init() {
     queue =

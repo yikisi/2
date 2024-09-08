@@ -316,15 +316,6 @@ module.exports = async () => {
         );
         const owner = new BasementOwners().get(0),
           owner_marks = new LifeEventMarks(owner);
-        if (era.get('flag:当前回合数') % 48 > 0) {
-          basement_queue.add_action(
-            new BasementAction(
-              owner,
-              7 * 60,
-              BasementAction.action_type_enum.outside,
-            ),
-          );
-        }
         era.set('status:0:沉睡', 1);
         basement_queue.add_action(
           new BasementAction(
@@ -344,6 +335,23 @@ module.exports = async () => {
         );
         my_life_marks.basement_now = my_life_marks.basement_enhance =
           get_random_value(owner_marks.security_level, 5);
+        my_life_marks.b_status = owner_marks.b_status =
+          1 << BasementAction.basement_status_enum.idle;
+        if (
+          era.get('flag:当前回合数') % 48 > 0 &&
+          my_life_marks.basement_timer > 6 * 60 + 30 &&
+          my_life_marks.basement_timer < 17 * 60
+        ) {
+          new LifeEventMarks(owner).b_status =
+            1 << BasementAction.basement_status_enum.outside;
+          basement_queue.add_action(
+            new BasementAction(
+              owner,
+              17 * 60,
+              BasementAction.action_type_enum.back_basement,
+            ),
+          );
+        }
       }
     }
     era.set('flag:当前位置', cur_location);

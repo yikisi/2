@@ -18,6 +18,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const BasementAction = require('#/data/event/basement-action');
 const BasementOwners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const { add_action } = require('#/event/basement-queue');
 
 const minutes_in_a_day = 24 * 60;
 
@@ -29,6 +30,15 @@ const basement_desc = [
   '被机关和铁门保卫着',
   '感觉只能把牢底坐穿了',
 ];
+
+const basement_just_status =
+  (1 << BasementAction.basement_status_enum.just_back) +
+  (1 << BasementAction.basement_status_enum.just_stop_sex);
+const basement_no_cost_status =
+  (1 << BasementAction.basement_status_enum.outside) +
+  (1 << BasementAction.basement_status_enum.just_back) +
+  (1 << BasementAction.basement_status_enum.sex) +
+  (1 << BasementAction.basement_status_enum.just_stop_sex);
 
 const security_desc = [
   '处于一时冲动的后悔',
@@ -72,21 +82,30 @@ function handle_push_info(info_list, ...info) {
 /**
  * @param {LifeEventMarks} my_life_marks
  * @param {BasementOwners} basement_owners
+ * @param {number} [sex_end_time]
  */
-async function handle_time_change(my_life_marks, basement_owners) {
+async function handle_time_change(
+  my_life_marks,
+  basement_owners,
+  sex_end_time,
+) {
+  era.logger.debug(`BASEMENT: IN SEX? ${!!sex_end_time}`);
   new BasementOwners().get().forEach((e) => {
-    if (new LifeEventMarks(e).is_out === 1) {
-      new LifeEventMarks(e).is_out = 0;
+    if ((new LifeEventMarks(e).b_status & basement_just_status) > 0) {
+      new LifeEventMarks(e).b_status =
+        1 << BasementAction.basement_status_enum.idle;
     }
   });
   let new_timer,
     wait_flag = false;
   era.drawLine();
-  basement_queue.get_action().forEach((e) => {
+  const actions = basement_queue.get_action();
+  actions.forEach((e) => {
+    const life_marks = new LifeEventMarks(e.chara_id);
     new_timer = e.timer;
     switch (e.type) {
       case BasementAction.action_type_enum.action_end:
-        era.logger.info(`TEST：时间推进到 ${get_clock_for_debug(e.timer)}`);
+        life_marks.b_status = BasementAction.basement_status_enum.idle;
         break;
       case BasementAction.action_type_enum.get_up:
         era.logger.info(
@@ -110,40 +129,41 @@ async function handle_time_change(my_life_marks, basement_owners) {
         era.logger.info(
           `TEST：${get_clock_for_debug(e.timer)} 角色 ${e.chara_id} 回到地下室`,
         );
-        new LifeEventMarks(e.chara_id).is_out = 1;
-        if (
-          !check_vacation(e.timer) &&
-          !check_vacation(e.timer + minutes_in_a_day)
-        ) {
-          basement_queue.add_action(
-            new BasementAction(
-              e.chara_id,
-              e.timer + 14 * 60,
-              BasementAction.action_type_enum.outside,
-            ),
-          );
-        }
-        break;
-      case BasementAction.action_type_enum.outside:
-        era.logger.info(
-          `TEST：${get_clock_for_debug(e.timer)} 角色 ${e.chara_id} 离开`,
+        life_marks.b_status =
+          1 << BasementAction.basement_status_enum.just_back;
+        life_marks.basement_out_cd =
+          e.timer +
+          get_random_value(60, 90) +
+          60 -
+          life_marks.security_level * 12;
+        add_action(
+          new BasementAction(
+            e.chara_id,
+            e.timer + get_random_value(10, 20),
+            BasementAction.action_type_enum.action_end,
+          ),
         );
-        new LifeEventMarks(e.chara_id).is_out = 2;
-        if (!check_vacation(e.timer)) {
-          basement_queue.add_action(
-            new BasementAction(
-              e.chara_id,
-              e.timer + 10 * 60,
-              BasementAction.action_type_enum.back_basement,
-            ),
-          );
-        }
+        break;
+      case BasementAction.action_type_enum.stop_sex:
+        life_marks.b_status =
+          1 << BasementAction.basement_status_enum.just_stop_sex;
+        add_action(
+          new BasementAction(
+            e.chara_id,
+            e.timer + get_random_value(20, 40),
+            BasementAction.action_type_enum.action_end,
+          ),
+        );
     }
   });
-  const delta = new_timer - my_life_marks.basement_timer;
+  const delta = new_timer - my_life_marks.basement_timer,
+    out_characters = [],
+    is_vacation = check_vacation(new_timer);
+  delta > 0 &&
+    era.logger.info(`TEST：时间推进到 ${get_clock_for_debug(new_timer)}`);
   [0, ...basement_owners.get()].forEach((e) => {
     const life_marks = new LifeEventMarks(e);
-    if (life_marks.is_out === 0) {
+    if (delta > 0 && (life_marks.b_status & basement_no_cost_status) === 0) {
       let stamina_delta, time_delta;
       if (
         era.get(`status:${e}:马跳S`) ||
@@ -161,8 +181,6 @@ async function handle_time_change(my_life_marks, basement_owners) {
           time_delta = -4;
         }
       }
-      era.get(`status:${e}:沉睡`) < 0 && era.set(`status:${e}:沉睡`, 0);
-      era.get(`status:${e}:马跳S`) < 0 && era.set(`status:${e}:马跳S`, 0);
       sys_change_attr_and_print(
         e,
         '体力',
@@ -193,6 +211,66 @@ async function handle_time_change(my_life_marks, basement_owners) {
         );
       }
     }
+    era.get(`status:${e}:沉睡`) < 0 && era.set(`status:${e}:沉睡`, 0);
+    era.get(`status:${e}:马跳S`) < 0 && era.set(`status:${e}:马跳S`, 0);
+    if (
+      e > 0 &&
+      sys_check_awake(e) &&
+      life_marks.b_status === 1 << BasementAction.basement_status_enum.idle
+    ) {
+      if (era.get(`base:${e}:体力`) / era.get(`maxbase:${e}:体力`) < 0.45) {
+        // TODO 进食
+      } else if (
+        era.get(`base:${e}:精力`) / era.get(`maxbase:${e}:精力`) <
+        0.3
+      ) {
+        era.set(`status:${e}:沉睡`, 1);
+        add_action(
+          new BasementAction(
+            e,
+            new_timer + get_random_value(60, 120),
+            BasementAction.action_type_enum.get_up,
+          ),
+        );
+      } else {
+        const timer_in_day = new_timer % minutes_in_a_day;
+        if (is_vacation) {
+          if (
+            timer_in_day >= 7 * 60 &&
+            timer_in_day < 16 * 60 &&
+            new_timer - life_marks.basement_out_cd > 0
+          ) {
+            out_characters.push(e);
+          }
+        } else if (timer_in_day >= 6 * 60 + 30 && timer_in_day < 16 * 60) {
+          out_characters.push(e);
+        }
+      }
+    }
+  });
+  out_characters.forEach((e) => {
+    const life_marks = new LifeEventMarks(e);
+    life_marks.b_status = 1 << BasementAction.basement_status_enum.outside;
+    if (is_vacation) {
+      add_action(
+        new BasementAction(
+          e,
+          new_timer +
+            get_random_value(60, 120) +
+            120 -
+            life_marks.security_level * 24,
+          BasementAction.action_type_enum.back_basement,
+        ),
+      );
+    } else {
+      add_action(
+        new BasementAction(
+          e,
+          new_timer - (new_timer % minutes_in_a_day) + 17 * 60,
+          BasementAction.action_type_enum.back_basement,
+        ),
+      );
+    }
   });
   my_life_marks.basement_timer = new_timer;
   wait_flag && (await era.waitAnyKey());
@@ -211,7 +289,7 @@ module.exports = async (_, save_and_next_week, flags) => {
   if (my_life_marks.basement_timer >= 7 * minutes_in_a_day) {
     return save_and_next_week();
   }
-  while (era.get('status:0:沉睡') || era.get('status:0:马跳S')) {
+  while (!sys_check_awake(0)) {
     await handle_time_change(my_life_marks, basement_owners);
   }
   await era.clear();
@@ -219,7 +297,13 @@ module.exports = async (_, save_and_next_week, flags) => {
   const chara_list = [
     0,
     ...sort_list(
-      basement_owners.get().filter((e) => new LifeEventMarks(e).is_out < 2),
+      basement_owners
+        .get()
+        .filter(
+          (e) =>
+            new LifeEventMarks(e).b_status !==
+            1 << BasementAction.basement_status_enum.outside,
+        ),
       (e, i) => (!sys_check_awake(e) << 1) + i,
       true,
     ),
@@ -232,7 +316,8 @@ module.exports = async (_, save_and_next_week, flags) => {
   if (chara_list.length > 1) {
     if (
       chara_list.length === 2 &&
-      new LifeEventMarks(chara_list[1]).is_out === 1
+      new LifeEventMarks(chara_list[1]).b_status ===
+        1 << BasementAction.basement_status_enum.just_back
     ) {
       strike = true;
       handle_push_info(
@@ -403,6 +488,9 @@ module.exports = async (_, save_and_next_week, flags) => {
     );
     do {
       await handle_time_change(my_life_marks, basement_owners);
-    } while (era.get('status:0:沉睡') || era.get('status:0:马跳S'));
+    } while (
+      !sys_check_awake(0) ||
+      my_life_marks.b_status === 1 << BasementAction.basement_status_enum.sex
+    );
   }
 };
