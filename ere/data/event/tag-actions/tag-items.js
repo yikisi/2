@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { ero_action_tags, ero_actions } = require('#/data/event/ero-actions');
 const EroHookTag = require('#/data/event/ero-hook-tag');
+const { location_enum } = require('#/data/locations');
 
 /**
  * @param {string[]} ero_action_names
@@ -10,13 +11,21 @@ const EroHookTag = require('#/data/event/ero-hook-tag');
 module.exports = (ero_action_names, ero_tagged_hooks) => {
   ero_action_names[ero_actions.use_lubricating_fluid] = '使用润滑液';
   ero_tagged_hooks[ero_actions.use_lubricating_fluid] = new EroHookTag(
-    [(chara_id) => !chara_id && era.get('item:润滑液')],
+    [
+      (chara_id) =>
+        !chara_id &&
+        era.get('item:润滑液') &&
+        era.get('flag:当前位置') !== location_enum.basement,
+    ],
     [],
   );
 
   ero_action_names[ero_actions.use_medicine] = '喂食药物';
   ero_tagged_hooks[ero_actions.use_medicine] = new EroHookTag(
-    [(chara_id) => !chara_id],
+    [
+      (chara_id) =>
+        !chara_id && era.get('flag:当前位置') !== location_enum.basement,
+    ],
     [],
   );
 
@@ -28,14 +37,20 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
         !chara_id &&
         era.get('item:避孕套') &&
         !era.get(`tcvar:${chara_id}:避孕套`) &&
-        !era.get(`status:${chara_id}:弗隆K`),
+        !era.get(`status:${chara_id}:弗隆K`) &&
+        era.get('flag:当前位置') !== location_enum.basement,
     ],
     [],
   );
 
   ero_action_names[ero_actions.other_condom] = '给对方戴避孕套';
   ero_tagged_hooks[ero_actions.other_condom] = new EroHookTag(
-    [(chara_id) => !chara_id && era.get('item:避孕套')],
+    [
+      (chara_id) =>
+        !chara_id &&
+        era.get('item:避孕套') &&
+        era.get('flag:当前位置') !== location_enum.basement,
+    ],
     [
       ero_action_tags.penis,
       (chara_id) =>
@@ -46,7 +61,11 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
 
   ero_action_names[ero_actions.use_item] = '使用性玩具';
   ero_tagged_hooks[ero_actions.use_item] = new EroHookTag(
-    [ero_action_tags.sadism],
+    [
+      ero_action_tags.sadism,
+      (chara_id) =>
+        chara_id > 0 || era.get('flag:当前位置') !== location_enum.basement,
+    ],
     [],
   );
 

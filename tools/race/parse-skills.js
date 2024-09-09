@@ -607,7 +607,6 @@ async function chara_skill() {
     buffer += `skills_dict[${id}]=require('#/data/race/skill/skill-${id}');`;
     let sbuffer =
       "const UmaSkill = require('#/data/race/model/uma-skill');\n\nmodule.exports = new UmaSkill(";
-    console.log(e.name);
     if (e.category === undefined) {
       console.log('\tmissed! ', e.icon_id);
     }

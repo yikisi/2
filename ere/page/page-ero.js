@@ -520,9 +520,10 @@ function print_milking(type, size) {
  * @param {boolean} [skip_start_end]
  */
 async function page_ero(lover, skip_start_end) {
-  let curr_lover = lover || era.get('flag:当前互动角色');
+  const in_basement = era.get('flag:当前位置') === location_enum.basement;
+  let curr_lover = lover || era.get('flag:当前互动角色'),
+    ero_flag = true;
   era.set('tflag:当前对手', curr_lover);
-  let ero_flag = true;
   if (!skip_start_end) {
     era.drawLine();
     await sys_call_ero_event(curr_lover, ero_hooks.ero_start);
@@ -544,15 +545,19 @@ async function page_ero(lover, skip_start_end) {
       rape = era.get('tflag:强奸'),
       relation = get_relation_info(curr_lover);
     left_columns.push(
+      ...(era.get('flag:当前位置') === location_enum.basement
+        ? []
+        : [
+            {
+              config: { width: 8 },
+              content: `${era.get('flag:当前年')} 年 ${era.get(
+                'flag:当前月',
+              )} 月 第 ${era.get('flag:当前周')} 周`,
+              type: 'text',
+            },
+          ]),
       {
-        config: { width: 8 },
-        content: `${era.get('flag:当前年')} 年 ${era.get(
-          'flag:当前月',
-        )} 月 第 ${era.get('flag:当前周')} 周`,
-        type: 'text',
-      },
-      {
-        config: { align: 'right', width: 16 },
+        config: { align: in_basement ? undefined : 'right', width: 16 },
         content: [
           `位于 ${location_name[era.get('flag:当前位置')]} `,
           {
@@ -864,45 +869,47 @@ async function page_ero(lover, skip_start_end) {
       }
     }
   }
-  const punish_option = era.get('flag:不忠惩罚'),
-    me = get_chara_talk(0);
-  let temp_chara_list = era.getCharactersInTrain();
-  wait_flag = sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
-    .filter(
-      (e) =>
-        temp_chara_list.indexOf(e) === -1 &&
-        era.get(`love:${e}`) >= 75 &&
-        sys_check_awake(e) &&
-        era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
-        !era.get(`talent:${e}:绿帽癖`) &&
-        get_custom_mec(e).is_anger_for_unfaithful() &&
-        (punish_option || era.get(`talent:${e}:病娇`)),
-    )
-    .reduce((p, c) => {
-      era.print([
-        me.get_colored_name(),
-        ' 的不忠让 ',
-        get_chara_talk(c).get_colored_name(),
-        ' 无比愤怒……',
-      ]);
-      sys_change_pressure(
-        c,
-        get_random_value(2000, 4000) / (1 + (era.get('tflag:强奸') > 0)),
-      );
-      return (
-        sys_like_chara(
+  if (!in_basement) {
+    const punish_option = era.get('flag:不忠惩罚'),
+      me = get_chara_talk(0);
+    let temp_chara_list = era.getCharactersInTrain();
+    wait_flag = sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
+      .filter(
+        (e) =>
+          temp_chara_list.indexOf(e) === -1 &&
+          era.get(`love:${e}`) >= 75 &&
+          sys_check_awake(e) &&
+          era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
+          !era.get(`talent:${e}:绿帽癖`) &&
+          get_custom_mec(e).is_anger_for_unfaithful() &&
+          (punish_option || era.get(`talent:${e}:病娇`)),
+      )
+      .reduce((p, c) => {
+        era.print([
+          me.get_colored_name(),
+          ' 的不忠让 ',
+          get_chara_talk(c).get_colored_name(),
+          ' 无比愤怒……',
+        ]);
+        sys_change_pressure(
           c,
-          0,
-          -get_random_value(
-            100,
-            (200 +
-              8 * (era.get(`love:${c}`) - 75) +
-              100 * era.get(`talent:${c}:病娇`)) /
-              (1 + (era.get('tflag:强奸') > 0)),
-          ),
-        ) || wait_flag
-      );
-    }, wait_flag);
+          get_random_value(2000, 4000) / (1 + (era.get('tflag:强奸') > 0)),
+        );
+        return (
+          sys_like_chara(
+            c,
+            0,
+            -get_random_value(
+              100,
+              (200 +
+                8 * (era.get(`love:${c}`) - 75) +
+                100 * era.get(`talent:${c}:病娇`)) /
+                (1 + (era.get('tflag:强奸') > 0)),
+            ),
+          ) || wait_flag
+        );
+      }, wait_flag);
+  }
   const size = 200 + 300 * !era.get('item:乳汁处理装置');
   wait_flag = print_milking('人奶', size) || wait_flag;
   wait_flag = print_milking('马奶', size) || wait_flag;
