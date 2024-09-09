@@ -24,6 +24,7 @@ const { minutes_in_a_day } = require('#/utils/value-utils');
 const BasementAction = require('#/data/event/basement-action');
 const BasementOwners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const { get_custom_basement } = require('#/event/basement/basement-factory');
 
 const basement_desc = [
   '并没有像样的阻碍',
@@ -394,7 +395,10 @@ module.exports = async (_, save_and_next_week, flags) => {
         n: '请求释放',
       },
       {
-        h() {},
+        async h() {
+          action_time = get_random_value(1, 5);
+          await get_custom_basement(chara_list[1]).ask_time();
+        },
         n: '询问时间',
       },
       {

@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
@@ -14,24 +15,28 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const print_ero_page = require('#/page/page-ero');
 
 const basement_queue = require('#/event/basement-queue');
+const { get_custom_check } = require('#/event/check/check-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { log_max_wp, minutes_in_a_day } = require('#/utils/value-utils');
 
 const BasementAction = require('#/data/event/basement-action');
 const BasementOwners = require('#/data/event/basement-owners');
+const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { location_enum } = require('#/data/locations');
-const { get_custom_check } = require('#/event/check/check-factory');
+const page_ero = require('#/page/page-ero');
+const { check_satisfied } = require('#/system/ero/sys-calc-ero-status');
 
 const basement_just_status =
-  (1 << BasementAction.basement_status_enum.just_back) +
-  (1 << BasementAction.basement_status_enum.just_stop_sex);
-const basement_no_cost_status =
-  (1 << BasementAction.basement_status_enum.outside) +
-  (1 << BasementAction.basement_status_enum.just_back) +
-  (1 << BasementAction.basement_status_enum.sex) +
-  (1 << BasementAction.basement_status_enum.just_stop_sex);
+    (1 << BasementAction.basement_status_enum.just_back) +
+    (1 << BasementAction.basement_status_enum.just_stop_sex),
+  basement_no_cost_status =
+    (1 << BasementAction.basement_status_enum.outside) +
+    (1 << BasementAction.basement_status_enum.just_back) +
+    (1 << BasementAction.basement_status_enum.sex) +
+    (1 << BasementAction.basement_status_enum.just_stop_sex),
+  default_my_filter = new Array(5).fill(false);
 
 let get_random_value = () => 0;
 let sex_end_time = undefined;
@@ -135,13 +140,81 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
       cache[e] = era.get(`relation:${e}:0`);
     }
   });
-  basement_queue.clean_actions((e) => part_list.indexOf(e.chara_id) !== -1);
+  basement_queue.clean_actions(
+    (e) =>
+      part_list.indexOf(e.chara_id) !== -1 &&
+      e.type !== BasementAction.action_type_enum.get_up,
+  );
   begin_and_init_ero(...part_list);
   if (is_rape) {
-    era.set('tflag:强奸', part_list[1]);
-    era.set('tflag:主导权', part_list[1]);
+    era.set(
+      'tflag:主导权',
+      era.set('tflag:当前对手', era.set('tflag:强奸', part_list[1])),
+    );
+    if (part_list[2]) {
+      era.set('tflag:当前助手', part_list[2]);
+    }
   }
-  await print_ero_page(part_list[1], true);
+  let wake_up = true;
+  if (sys_check_awake(0)) {
+    await print_ero_page(undefined, true);
+  } else {
+    const get_up_time =
+      basement_queue.find_action(
+        (e) =>
+          e.chara_id === 0 && e.type === BasementAction.action_type_enum.get_up,
+      ).timer - my_life_marks.b_timer;
+    let action_count = 0,
+      current = new Date().getTime(),
+      flag_rape = true,
+      temp;
+    wake_up = false;
+    while (flag_rape) {
+      await sys_handle_ero_act(ero_hooks.relax, default_my_filter, false);
+      action_count++;
+      if (
+        (check_satisfied(part_list[1]) &&
+          (!part_list[2] || check_satisfied(part_list[2]))) ||
+        (wake_up =
+          era.get('base:0:精力') > 0 &&
+          !era.get('status:0:马跳S') &&
+          (3 * era.get('tflag:回合') >= get_up_time ||
+            ((temp = era.get('ex:0:TotalEX')) > 0 &&
+              Math.random() < Math.min(temp, 5) * 0.05)))
+      ) {
+        flag_rape = false;
+      }
+    }
+    current = new Date().getTime() - current;
+    era.logger.debug(
+      `角色 ${part_list[1]}${
+        part_list[2] ? ' & ' + part_list[2] : ''
+      } 睡奸完毕！${action_count} actions, ${current}ms, ${(
+        current / action_count
+      ).toFixed(2)} ms/action`,
+    );
+    if (wake_up) {
+      era.set('status:0:沉睡', 0);
+      basement_queue.clean_actions(
+        (e) =>
+          e.chara_id === 0 && e.type === BasementAction.action_type_enum.get_up,
+      );
+      await era.printAndWait([
+        '强烈的刺激使 ',
+        get_chara_talk(0).get_colored_name(),
+        ' 从睡梦中惊醒，发现 ',
+        get_chara_talk(part_list[1]).get_colored_name(),
+        ...(part_list[2]
+          ? [' 与 ', get_chara_talk(part_list[2]).get_colored_name()]
+          : []),
+        ' 伏在身上！',
+      ]);
+      await page_ero(part_list[1]);
+      era
+        .getCharactersInTrain()
+        .forEach((e) => era.add(`exp:${e}:睡奸次数`, -1));
+    }
+  }
   my_life_marks.b_timer = sex_end_time =
     my_life_marks.b_timer + Math.max((era.get('tflag:回合') - 1) * 3, 10);
   basement_queue.add_action(
@@ -157,6 +230,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
         e,
         0,
         is_rape ? get_random_value(50, 75) : get_random_value(75, 125),
+        false,
       );
     }
     basement_queue.add_action(
@@ -167,7 +241,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
       ),
     );
   });
-  await end_ero_and_show_result();
+  await end_ero_and_show_result(wake_up);
 }
 
 /**
@@ -279,7 +353,16 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         basement_queue.add_action(
           new BasementAction(
             e.chara_id,
-            e.timer + get_random_value(20, 40),
+            e.timer +
+              Math.floor(
+                get_random_value(20, 40) *
+                  (era.get(`base:${e.chara_id}:精力`)
+                    ? 1
+                    : 0.5 +
+                      Math.log(
+                        (era.get(`base:${e.chara_id}:根性`) * 0.5) / log_max_wp,
+                      )),
+              ),
             BasementAction.action_type_enum.action_end,
           ),
         );
@@ -340,7 +423,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             ]);
           }
           era.set(`status:${e}:沉睡`, 1);
-          basement_queue.clean_actions((e) => e.chara_id === e);
+          basement_queue.clean_actions((a) => a.chara_id === e);
           basement_queue.add_action(
             new BasementAction(
               e,
@@ -398,7 +481,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             ]);
           }
           era.set(`status:${e}:沉睡`, 1);
-          basement_queue.clean_actions((e) => e.chara_id === e);
+          basement_queue.clean_actions((a) => a.chara_id === e);
           basement_queue.add_action(
             new BasementAction(
               e,
@@ -455,7 +538,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
                   get_chara_talk(0).get_colored_name(),
                   ' ……',
                 ]);
-                sys_like_chara(e, 0, get_random_value(-10, 10), false);
+                sys_like_chara(e, 0, get_random_value(0, 5), false);
                 sys_change_lust(0, get_random_value(0, 100));
                 sys_change_lust(e, get_random_value(0, 200));
               } else {
@@ -463,7 +546,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
                 basement_queue.add_action(
                   my_life_marks.b_timer + get_random_value(15, 45),
                 );
-                sys_like_chara(e, 0, get_random_value(-10, 10), false);
+                sys_like_chara(e, 0, get_random_value(0, 10), false);
               }
             }
           }
@@ -483,23 +566,25 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
                 1 << BasementAction.basement_status_enum.outside,
           ),
       ];
-      if (part_list.length > 1) {
-        await era.printAndWait([
-          '在 ',
-          get_chara_talk(part_list[0]).get_colored_name(),
-          ' 的带领下，',
-          get_chara_talk(part_list[1]).get_colored_name(),
-          ' 一起向 ',
-          get_chara_talk(0).get_colored_name(),
-          ' 缓缓逼近……',
-        ]);
-      } else {
-        await era.printAndWait([
-          get_chara_talk(part_list[0]).get_colored_name(),
-          ' 向 ',
-          get_chara_talk(0).get_colored_name(),
-          ' 缓缓逼近……',
-        ]);
+      if (sys_check_awake(0)) {
+        if (!part_list[1]) {
+          await era.printAndWait([
+            '在 ',
+            get_chara_talk(part_list[0]).get_colored_name(),
+            ' 的带领下，',
+            get_chara_talk(part_list[1]).get_colored_name(),
+            ' 一起向 ',
+            get_chara_talk(0).get_colored_name(),
+            ' 缓缓逼近……',
+          ]);
+        } else {
+          await era.printAndWait([
+            get_chara_talk(part_list[0]).get_colored_name(),
+            ' 向 ',
+            get_chara_talk(0).get_colored_name(),
+            ' 缓缓逼近……',
+          ]);
+        }
       }
       await handle_rape([0, ...part_list], my_life_marks, true);
     } else {

@@ -22,6 +22,10 @@ module.exports = {
       queue.filter((e) => !filter_cb(e)),
     );
   },
+  /** @param {function(BasementAction):boolean} filter_cb */
+  find_action(filter_cb) {
+    return queue.find(filter_cb);
+  },
   get_action() {
     let pop_count = queue.findIndex((e, _, l) => e.timer !== l[0].timer);
     if (pop_count === -1) {

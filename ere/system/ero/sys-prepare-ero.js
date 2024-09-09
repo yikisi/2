@@ -112,7 +112,6 @@ function update_ero_status(...ids) {
     if (estrus && era.get(`talent:${chara_id}:淫口`)) {
       set_stain(chara_id, part_enum.mouth, stain_enum.saliva);
     }
-    // 胸前变湿
     if (
       estrus &&
       era.get(`talent:${chara_id}:淫乳`) &&
@@ -126,7 +125,6 @@ function update_ero_status(...ids) {
     ) {
       era.set(`tcvar:${chara_id}:乳突`, 1);
     }
-    // 勃起并流出先走液
     if (
       penis_size &&
       (estrus ||
@@ -145,7 +143,6 @@ function update_ero_status(...ids) {
       );
       set_stain(chara_id, part_enum.penis, stain_enum.semen);
     }
-    // 变湿
     if (
       era.get(`cflag:${chara_id}:阴道尺寸`) &&
       (estrus ||
@@ -154,7 +151,6 @@ function update_ero_status(...ids) {
     ) {
       set_stain(chara_id, part_enum.virgin, stain_enum.secretion);
     }
-    // 肠道变湿
     if (estrus || era.get(`talent:${chara_id}:淫臀`) === 2) {
       set_stain(chara_id, part_enum.anal, stain_enum.anal);
     }

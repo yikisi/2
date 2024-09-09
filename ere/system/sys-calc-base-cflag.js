@@ -158,6 +158,11 @@ module.exports = {
           );
         }
       }
+      if (change > 0) {
+        change = Math.max(change, 1);
+      } else {
+        change = Math.min(change, -1);
+      }
     } else if (
       chara_id &&
       !(era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)
