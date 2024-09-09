@@ -2214,7 +2214,7 @@ module.exports = async function (hook, _, event_object) {
         }的气势慢慢的消散，越来越小。`,
       );
       await era.printAndWait(
-        `最后，${chara_talk.name}叹了口气，然后露出了悲伤的表情。`,
+        `最后，${chara_talk.name}像是自责一般，叹了口气。`,
       );
       event_marks.wind++;
       wait_flag =

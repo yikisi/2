@@ -942,39 +942,154 @@ module.exports = async function (event_object) {
     // 训练员被粉丝袭击，此刻的醒目飞鹰被
     await print_event_name(`醒目飞鹰`, falcon);
     await era.printAndWait(`与11月的气候变换成反比的，是醒目飞鹰热烈的演出。`);
+    await era.printAndWait(
+      `突然，毫无征兆的，眼前的粉丝将藏于贴身的小刀抽出。`,
+    );
+    await era.printAndWait(`大脑还在处理发生于眼前的，超出现实的事件。`);
+    await era.printAndWait(`于是你只能站在原地呆呆地看着小刀刺中你的腹部。`);
+    await era.printAndWait(`就这样无奈的迎来自己的末路。`);
+    await me.say_and_wait(`唔！`);
+    await era.printAndWait(`——如果你没有下意识将公文包作为缓冲的话。`);
+    await say_by_passer_by(`狂热粉丝`, `该死。`);
+    await era.printAndWait(
+      `尽管如此，突然之间受到的冲击还是让你下意识的扬起了头，险些一屁股坐到地上。`,
+    );
     await say_by_passer_by(
       `狂热粉丝`,
       `飞鹰子明明这么完美，为什么会喜欢上你？`,
     );
+    await era.printAndWait(`意识到触感不对的暴徒被眼前的失败所激怒。`);
+    await say_by_passer_by(`狂热粉丝`, `唔哦哦哦哦哦!`);
+    await era.printAndWait(
+      `不抽出小刀，反而接着这股冲劲意图将你逼迫到墙壁之上。`,
+    );
+    await me.say_and_wait(`该死，防狼喷雾就在不远处的准备桌上。`);
+    await era.printAndWait(
+      `不抽出小刀，趁你失去着力点就这么将你逼迫到墙壁之上。`,
+    );
     await say_by_passer_by(
       `狂热粉丝`,
-      `那个青涩、敏感细腻的偶像，怎么会干这种——`,
+      `那个青涩、敏感细腻的飞鹰子，怎么会干这种——`,
+    );
+    await era.printAndWait(
+      `不知是理智被愤怒所冲散的缘故，越说越激动的粉丝用力将小刀向前深入。`,
     );
     await say_by_passer_by(`狂热粉丝`, `——原来如此，我明白了。。`);
+    await era.printAndWait(`一瞬间露出了迷惑表情的狂热者恍然大悟。`);
     await say_by_passer_by(
       `狂热粉丝`,
       `都是因为你的存在，可爱的飞鹰子才会变成这样。`,
     );
     await say_by_passer_by(
       `狂热粉丝`,
-      `那么，把你除掉的话，可爱的飞鹰子也会回来的吧？`,
+      `如果你消失的话，飞鹰子就会回到从前的样子吧？`,
+    );
+    await era.printAndWait(`肾上腺素飙升的你看着眼前绝望的一幕。`);
+    await era.printAndWait(`像是冰块粗暴地插入小腹，鲜血染红了文件夹的纸张。`);
+    await say_by_passer_by(`狂热粉丝`, `哈哈哈哈哈哈，就这么下地狱去吧！`);
+    await era.printAndWait(
+      `看着自己亲手创造的“杰作”，恶魔歇斯底里的笑了起来。`,
+    );
+    await me.say_and_wait(`不要害怕！这种时候反而要冷静观察。`, true);
+    await era.printAndWait(`遇到这种绝望的场面，你反而冷静了下来。`);
+    await era.printAndWait(
+      `激烈的心脏跳动，身体感知到自己所遭受的苦难，在大量的肾上激素下，你以前所未有的集中力思考着突破的方式。`,
+    );
+    await me.say_and_wait(
+      `如果能制造出一点巨大的噪声，说不定能把他吓跑。`,
+      true,
+    );
+    await era.printAndWait(
+      `虽然也有反过来彻底激怒对方的可能，但这种时候只考虑赌对的可能性。`,
+    );
+    await era.printAndWait(
+      `你趁着对方一时偷袭得手后暂时放松的警惕狠狠的一脚踢到对方下体。`,
+    );
+    await say_by_passer_by(`狂热粉丝`, `啊啊啊啊啊啊！`);
+    await era.printAndWait(
+      `似乎疼痛感超过了快感所带来的麻痹，对方的手一下子松开了。`,
+    );
+    await me.say_and_wait(`好机会！`, true);
+    await era.printAndWait(
+      `猛地一下将对方推倒在地，将准备室中备用的扩音器音量调到最大，然后对着扩音器使出全身力气。`,
+    );
+    await me.say_and_wait(`救命啊！`);
+    await era.printAndWait(`巨大的噪音带着求生的希望传遍了整栋大厦。`);
+    await say_by_passer_by(
+      `狂热粉丝`,
+      `该死该死该死该死，明明就差最后一步了！`,
+    );
+    await era.printAndWait(`晃晃悠悠站起来的恶魔进行着最后一搏。`);
+    await me.say_and_wait(`一切就这么结束了吗？`, true);
+    await era.printAndWait(
+      `恐怕还没等到保安赶到，自己就已经变成一具冰冷的尸体了。`,
+    );
+    await me.say_and_wait(`现在得争取时间。`);
+    await era.printAndWait(
+      `肾上腺素带来的麻痹感即将过去，伤口处已经开始疼起来了。`,
+    );
+    era.printButton(`为什么要袭击我？`, 1);
+    await era.input();
+    await say_by_passer_by(`狂热粉丝`, `为什么，为什么你问我为什么！`);
+    await say_by_passer_by(
+      `狂热粉丝`,
+      `连我生命之中唯一的光都要玷污的你也配来问我为什么？`,
     );
     await say_by_passer_by(
       `狂热粉丝`,
-      `你的疼痛也就是一瞬间的事情，我可是因为飞鹰子被人玷污而辗转反侧了一个月哦？`,
-    );
-    await say_by_passer_by(`狂热粉丝`, `下地狱去吧！`);
-    await say_by_passer_by(
-      `狂热粉丝`,
-      `干什么玩笑！难道我不可以爱慕、追求远远比我更好的人吗？`,
+      `我的爱，我的救赎，被我视作女神一样的存在，在我最黑暗的时刻伸出的那一双手。`,
     );
     await say_by_passer_by(
       `狂热粉丝`,
-      `为什么我会陷入到这种境地？我绝对不会放过你们的！`,
+      `像太阳一样平等的温暖着所有为此付出的我们。`,
     );
-    await era.printAndWait(`狂热粉丝的袭击告一段落，听到动静的保安珊珊来迟。`);
-    await era.printAndWait(`你有点头晕目眩。`);
-    await era.printAndWait(`育马场经典赛马上就要开始了。`);
+    await say_by_passer_by(`狂热粉丝`, `这样完美无缺的存在，居然会恋爱？`);
+    await say_by_passer_by(`狂热粉丝`, `开什么玩笑！开什么玩笑！`);
+    await era.printAndWait(`因为出离愤怒而胡乱破坏着周围的粉丝拿刀指向了你。`);
+    await say_by_passer_by(
+      `狂热粉丝`,
+      `开什么玩笑！那我来告诉你！偶像就是默默无闻的我们的希望！`,
+    );
+    await say_by_passer_by(
+      `狂热粉丝`,
+      `在痛苦、迷茫之中徘徊着的我们的唯一救赎！`,
+    );
+    await say_by_passer_by(
+      `狂热粉丝`,
+      `可笑吧！一直梦想着成为电视之中保护世界的英雄，却沦为现在这副连自己都憎恶的模样。`,
+    );
+    era.printButton(`你的所作所为和英雄有什么关系！`, 1);
+    await era.input();
+    await era.printAndWait(
+      `楼下传来的急促脚步声越来越近，因为疼痛而流下的汗水将背部打湿。`,
+    );
+    await say_by_passer_by(
+      `狂热粉丝`,
+      `为什么，我来告诉你！当你看到自己在一次次的竞争之中失败，在剧烈的痛苦之下才恍然意识到`,
+    );
+    await say_by_passer_by(
+      `狂热粉丝`,
+      `这个世界跟你又有什么关系！你根本不是什么英雄，不过是每集开头被批量打死的喽啰罢了。`,
+    );
+    await say_by_passer_by(`狂热粉丝`, `所以，我追求闪耀的偶像又有什么错？`);
+    await say_by_passer_by(
+      `狂热粉丝`,
+      `幻想着她会作为自己的伴侣所快乐的每一天，不去给任何人添麻烦，就这么默默无闻的度过，我都觉得这样就好了的时候。`,
+    );
+    await say_by_passer_by(`狂热粉丝`, `然后你就出现了。`);
+    await say_by_passer_by(
+      `狂热粉丝`,
+      `你就没想过打破别人的梦是多么残忍的事情吗？`,
+    );
+    await say_by_passer_by(
+      `狂热粉丝`,
+      `对醒目飞鹰做出那种事情的你，连我最后的幻想都要嘲笑吗?`,
+    );
+    await era.printAndWait(
+      `珊珊来迟的保安将狂热粉丝拘束在地板之上，你的视线渐渐变得模糊。`,
+    );
+    await era.printAndWait(`即将远去的意识在最后一刻看到的——`);
+    await era.printAndWait(`是那个标志性的麦克风。`);
   } else if (edu_weeks === 47 + 42) {
     // 我越喜欢，我对“我受不了的方式”的定义就越严苛。我去做点什么的动能就越强。
     // 什么也不做，对我就是痛苦的，内心深处就有双重辜负感——第一感觉自己辜负了自己所喜欢的对象，第二感觉辜负了自己的喜欢本身。

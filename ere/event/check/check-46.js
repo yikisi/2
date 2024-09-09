@@ -8,7 +8,6 @@ const check_and_add_event = require('#/event/check/snippets/check-and-add-event'
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
-
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
@@ -25,7 +24,6 @@ aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = 3;
 aim_races[get_aim_race_index(race_enum.japa_dir, 1)] = 3;
 aim_races[get_aim_race_index(race_enum.jbc_cls, 1)] = 3;
 aim_races[get_aim_race_index(race_enum.toky_dai, 1)] = 3;
-
 aim_races[get_aim_race_index(race_enum.febr_sta, 2)] = 3;
 aim_races[get_aim_race_index(race_enum.teio_sho, 2)] = 3;
 aim_races[get_aim_race_index(race_enum.jbc_cls, 2)] = 3;
