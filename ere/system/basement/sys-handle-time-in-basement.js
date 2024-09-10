@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_handle_escape_basement = require('#/system/basement/sys-handle-escape-basement');
+const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const { check_satisfied } = require('#/system/ero/sys-calc-ero-status');
 const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
@@ -18,6 +19,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const page_ero = require('#/page/page-ero');
 
 const basement_queue = require('#/event/basement-queue');
+const { get_custom_basement } = require('#/event/basement/basement-factory');
 const { get_custom_check } = require('#/event/check/check-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -28,8 +30,6 @@ const BasementOwners = require('#/data/event/basement-owners');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { location_enum } = require('#/data/locations');
-const { get_custom_basement } = require('#/event/basement/basement-factory');
-const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
 
 const basement_just_status =
     (1 << BasementAction.basement_status_enum.just_back) +
@@ -99,18 +99,16 @@ function handle_prison_again(my_marks, owner_marks, owner_id) {
             ' 发现了！',
           ];
     if (my_marks.b_now < 0) {
-      new BasementOwners()
-        .get()
-        .forEach((e) =>
-          sys_like_chara(e, 0, -50 - 30 * (e === owner_id), false),
-        );
+      new BasementOwners().get().forEach((e) => {
+        new LifeEventMarks(e).b_escape = 0;
+        sys_like_chara(e, 0, -50 - 30 * (e === owner_id), false);
+      });
       my_marks.b_now = 1;
     } else {
-      new BasementOwners()
-        .get()
-        .forEach((e) =>
-          sys_like_chara(e, 0, -20 - 30 * (e === owner_id), false),
-        );
+      new BasementOwners().get().forEach((e) => {
+        new LifeEventMarks(e).b_escape = 0;
+        sys_like_chara(e, 0, -20 - 30 * (e === owner_id), false);
+      });
     }
     return () => {
       let ret = era.print(to_print);
@@ -400,9 +398,9 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
           sys_get_strength_ratio_in_fight(e.chara_id, owner)
         ) {
           rescue_result_type = 4 + (relation_check > 0);
-          sys_hurt_uma(owner, get_random_value(0, 2), sys_check_awake(0));
+          sys_hurt_uma(owner, get_random_value(0, 2), false);
         } else {
-          sys_hurt_uma(e.chara_id, get_random_value(0, 2), sys_check_awake(0));
+          sys_hurt_uma(e.chara_id, get_random_value(0, 2), false);
         }
         const basement_scripts = get_custom_basement(e.chara_id);
         switch (rescue_result_type) {
@@ -424,6 +422,13 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
           case 5:
             await basement_scripts.rescue_battle_prison(owner);
         }
+        era.set('status:0:沉睡', 0);
+        era.set('status:0:马跳S', 0);
+        basement_queue.clean_actions(
+          (a) =>
+            a.chara_id === 0 &&
+            a.type === BasementAction.action_type_enum.get_up,
+        );
         era.drawLine();
         if (rescue_result_type === 1 || rescue_result_type === 4) {
           era.set('flag:当前位置', location_enum.office);

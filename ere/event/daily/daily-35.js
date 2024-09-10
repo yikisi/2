@@ -28,6 +28,25 @@ handlers[event_hooks.select] = () => {
   throw new Error();
 };
 
+/** @author 幽白書 */
+handlers[event_hooks.good_morning] = () => {
+  const life_marks = new LifeEventMarks(35);
+  if (life_marks.b_escape) {
+    const callname = sys_get_callname(35, 0),
+      ticket = get_chara_talk(35);
+    ticket.say(['诶？', callname, '，为什么看到我脸上的表情却那么惊讶呢？']);
+    ticket.say('难道说……不想再见到我吗？想要从我身边永远逃开吗？');
+    ticket.say([
+      '欸……欸嘿嘿，嗯，我就知道不是那样，',
+      callname,
+      ' 会一直和我在一起的，对吧？',
+    ]);
+    life_marks.b_escape = 0;
+    return;
+  }
+  throw new Error();
+};
+
 /**
  * 胜利奖券 日常
  */

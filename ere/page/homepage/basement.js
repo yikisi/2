@@ -27,19 +27,12 @@ const BasementOwners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 const basement_desc = [
-  '并没有像样的阻碍',
-  '只要略施小计就可以逃脱',
-  '不是那么容易逃脱',
-  '似乎有着难办的机关',
-  '被机关和铁门保卫着',
-  '感觉只能把牢底坐穿了',
-];
-
-const security_desc = [
-  '处于一时冲动的后悔',
-  '有着不可低估的决心',
-  '处于顾此失彼的脆弱',
-  '有着万无一失的心防',
+  '但完全没有防备',
+  '但看来只需略施小计',
+  '大门似乎很难打开',
+  '存在大量棘手的障碍',
+  '所有的设施都坚不可摧',
+  '任何反抗对这里都不痛不痒',
 ];
 
 /**
@@ -144,43 +137,27 @@ module.exports = async (_, save_and_next_week, flags) => {
       is_awake = 1;
       handle_push_info(
         basement_info,
-        get_chara_talk(chara_list[1]).get_colored_name(),
-        ' 刚刚回到这里，也许是一个偷袭的好机会……',
+        ...get_custom_basement(chara_list[1]).get_basement_info(true),
       );
     } else {
-      is_awake = chara_list.slice(1).reduce((p, chara_id) => {
-        if (sys_check_awake(chara_id)) {
-          handle_push_info(
-            basement_info,
-            get_chara_talk(chara_id).get_colored_name(),
-            ' 看上去',
-            security_desc[
-              (era.get(`love:${chara_id}`) >= 85) * 2 +
-                (new LifeEventMarks(chara_id).b_s_level >= 3)
-            ],
-          );
-          return p + 1;
-        }
+      chara_list.slice(1).forEach((chara_id) => {
+        is_awake += sys_check_awake(chara_id);
         handle_push_info(
           basement_info,
-          get_chara_talk(chara_id).get_colored_name(),
-          era.get(`status:${chara_id}:马跳S`)
-            ? ' 沉沉地睡着……'
-            : ' 静静地睡着……',
+          ...get_custom_basement(chara_id).get_basement_info(),
         );
-        return p;
-      }, 0);
+      });
     }
     handle_push_info(
       basement_info,
-      '共处在昏暗的房间内……',
+      '昏暗的房间……',
       basement_desc[my_life_marks.b_now],
+      '……',
     );
   } else {
     handle_push_info(
       basement_info,
       '昏暗、空无一人的房间……',
-      my_life_marks.b_now > 1 ? '但是' : '',
       basement_desc[my_life_marks.b_now],
       '……',
     );
