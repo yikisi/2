@@ -64,15 +64,17 @@ handlers[ero_hooks.become_lubrication] = (chara_id, _, extra_flag) => {
 };
 
 handlers[ero_hooks.prison] = (chara_id) => {
+  const life_marks = new LifeEventMarks(chara_id);
   if (era.get(`talent:${chara_id}:病娇`) === 1) {
     era.set(`talent:${chara_id}:病娇`, 2);
-    new LifeEventMarks(chara_id).yandere = get_random_value(
+    life_marks.yandere = get_random_value(
       2,
       (era.get('flag:极端行为') * 2 * era.get(`love:${chara_id}`) -
         era.get(`relation:${chara_id}:0`)) /
         100,
     );
   }
+  life_marks.b_cd = get_random_value(4, 8);
   era.set('flag:当前位置', location_enum.basement);
   const basement_owners = new BasementOwners();
   basement_owners.get(0) !== chara_id && basement_owners.push(chara_id);

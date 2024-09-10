@@ -521,7 +521,8 @@ function print_milking(type, size) {
  */
 async function page_ero(lover, skip_start_end) {
   const in_basement = era.get('flag:当前位置') === location_enum.basement;
-  let curr_lover = lover || era.get('flag:当前互动角色'),
+  let curr_lover =
+      lover || era.get('tflag:当前对手') || era.get('flag:当前互动角色'),
     ero_flag = true;
   era.set('tflag:当前对手', curr_lover);
   if (!skip_start_end) {

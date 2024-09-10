@@ -1,5 +1,6 @@
 ﻿const era = require('#/era-electron');
 
+const sys_handle_escape_basement = require('#/system/basement/sys-handle-escape-basement');
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
@@ -80,15 +81,17 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   }
   let continue_flag = true,
     temp;
-  start_machine_gun(event_hooks.week_end);
-  while (
-    continue_flag &&
-    (random_event = sys_get_random_event(event_hooks.week_end))
-  ) {
-    era.drawLine();
-    continue_flag = !(await random_event(chara_id));
+  if (era.get('flag:当前位置') !== location_enum.basement) {
+    start_machine_gun(event_hooks.week_end);
+    while (
+      continue_flag &&
+      (random_event = sys_get_random_event(event_hooks.week_end))
+    ) {
+      era.drawLine();
+      continue_flag = !(await random_event(chara_id));
+    }
+    stop_machine_gun(event_hooks.week_end);
   }
-  stop_machine_gun(event_hooks.week_end);
   if ((temp = era.get('flag:床伴'))) {
     era.set(`cflag:${temp}:自主训练`, 0);
     const life_marks = new LifeEventMarks(temp);
@@ -252,12 +255,19 @@ module.exports = async () => {
         cur_location === location_enum.basement &&
         my_life_marks.b_timer > 0
       ) {
-        my_life_marks.b_timer = 0;
         cur_location = location_enum.office;
-        // TODO 救援事件
-        new BasementOwners()
-          .for_each((e) => (new LifeEventMarks(e).b_s_level = 0))
-          .clear();
+        era.drawLine();
+        await era.printAndWait([
+          '在经历了惊魂的一周后 ',
+          get_chara_talk(0).get_colored_name(),
+          ' 被学园的救援队救出了地下室……',
+        ]);
+        const jpy = Math.ceil(era.get('flag:当前马币') / 2);
+        if (jpy) {
+          await era.printAndWait('……但是被扣除了一半存款作为上周误工的罚款。');
+          era.add('flag:当前马币', -jpy);
+        }
+        sys_handle_escape_basement(false);
       }
       if (era.get('flag:当前月') <= 3 && era.get('flag:当前周') === 1) {
         const added_list = era.getAddedCharacters();
@@ -338,12 +348,13 @@ module.exports = async () => {
         );
         my_life_marks.b_status = owner_marks.b_status =
           1 << BasementAction.basement_status_enum.idle;
+        owner_marks.b_escape = 0;
         if (
           era.get('flag:当前回合数') % 48 > 0 &&
           my_life_marks.b_timer > 6 * 60 + 30 &&
           my_life_marks.b_timer < 17 * 60
         ) {
-          new LifeEventMarks(owner).b_status =
+          owner_marks.b_status =
             1 << BasementAction.basement_status_enum.outside;
           basement_queue.add_action(
             new BasementAction(

@@ -16,15 +16,15 @@ const print_load_page = require('#/page/page-load-game');
 const print_save_page = require('#/page/page-save-game');
 
 const basement_queue = require('#/event/basement-queue');
+const { get_custom_basement } = require('#/event/basement/basement-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sort_list } = require('#/utils/list-utils');
-const { minutes_in_a_day } = require('#/utils/value-utils');
+const { log_max_wp, minutes_in_a_day } = require('#/utils/value-utils');
 
 const BasementAction = require('#/data/event/basement-action');
 const BasementOwners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
-const { get_custom_basement } = require('#/event/basement/basement-factory');
 
 const basement_desc = [
   '并没有像样的阻碍',
@@ -100,7 +100,8 @@ module.exports = async (_, save_and_next_week, flags) => {
     flags.week_start = false;
   }
   if (my_life_marks.b_timer >= 7 * minutes_in_a_day) {
-    return save_and_next_week();
+    flags.week_start = true;
+    return await save_and_next_week();
   }
   while (!sys_check_awake(0)) {
     await sys_handle_time_in_basement(my_life_marks, basement_owners);
@@ -252,6 +253,36 @@ module.exports = async (_, save_and_next_week, flags) => {
       n: '小睡片刻',
     },
   );
+  if (!my_life_marks.b_food_buff) {
+    action_list.push({
+      async h() {
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 略微食用了一些食物……',
+        ]);
+        if (my_life_marks.b_food_medicine) {
+          await era.printAndWait([
+            me.get_colored_name(),
+            ' 突然感到心跳加快，热血上涌，同时伴随着强烈的眩晕……',
+          ]);
+          era.set('status:0:马跳S', 1);
+          action_time = Math.floor(
+            get_random_value(240, 360) *
+              (1 - Math.log(era.get('base:0:根性')) / log_max_wp),
+          );
+          my_life_marks.b_food_medicine = 0;
+        }
+        basement_queue.add_action(
+          new BasementAction(
+            0,
+            my_life_marks.b_timer + 4 * 60,
+            BasementAction.action_type_enum.digestive_end,
+          ),
+        );
+      },
+      n: '略微进食',
+    });
+  }
   let action_time;
   if (is_awake > 0) {
     action_list.push({
@@ -275,6 +306,7 @@ module.exports = async (_, save_and_next_week, flags) => {
               (sys_get_strength_ratio_in_fight(0, chara_list[1]) +
                 sys_get_intelligence_ratio_in_fight(0, chara_list[1]))
           ) {
+            new LifeEventMarks(chara_list[1]).b_escape = 3;
             await era.printAndWait([
               me.get_colored_name(),
               ' 的偷袭奏效了！成功逃离了地下室！',
@@ -318,8 +350,9 @@ module.exports = async (_, save_and_next_week, flags) => {
         async h() {
           sys_change_attr_and_print(0, '体力', -get_random_value(125, 175));
           sys_change_attr_and_print(0, '精力', -get_random_value(100, 150));
+          const beat_list = chara_list.filter(sys_check_awake);
           if (
-            chara_list.slice(1).reduce((p, c) => {
+            beat_list.reduce((p, c) => {
               sys_like_chara(
                 chara_list[1],
                 0,
@@ -334,6 +367,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             }, false)
           ) {
             await era.printAndWait([me.get_colored_name(), ' 的反抗成功了！']);
+            beat_list.forEach((e) => (new LifeEventMarks(e).b_escape = 2));
             if (
               get_random_value(0, 100) <
               (100 + era.get('base:0:速度') / 200) / (my_life_marks.b_now + 1)
@@ -389,11 +423,29 @@ module.exports = async (_, save_and_next_week, flags) => {
         n: '正面反抗',
       });
     }
-    action_list.push(
-      {
-        h() {},
+    if (is_awake === 1) {
+      action_list.push({
+        async h() {
+          action_time = get_random_value(5, 10);
+          if (
+            era.get(`relation:${chara_list[1]}:0`) >
+            (era.get('flag:极端行为限制') || 1) *
+              era.get(`love:${chara_list[1]}`)
+          ) {
+            await get_custom_basement(chara_list[1]).ask_release_agree();
+            my_life_marks.b_now = -1;
+            new LifeEventMarks(chara_list[1]).b_escape = -1;
+            my_life_marks.b_status =
+              1 << BasementAction.basement_status_enum.escape;
+          } else {
+            await get_custom_basement(chara_list[1]).ask_release_reject();
+            sys_like_chara(chara_list[1], 0, -get_random_value(25, 75), false);
+          }
+        },
         n: '请求释放',
-      },
+      });
+    }
+    action_list.push(
       {
         async h() {
           action_time = get_random_value(1, 5);
@@ -401,17 +453,18 @@ module.exports = async (_, save_and_next_week, flags) => {
         },
         n: '询问时间',
       },
-      {
-        h() {},
-        n: '任其施为 (放弃)',
-      },
+      // {
+      //   h() {},
+      //   n: '任其施为 (放弃)',
+      // },
     );
-  } else {
-    action_list.push({
-      h() {},
-      n: '听天由命 (放弃)',
-    });
   }
+  // else {
+  //   action_list.push({
+  //     h() {},
+  //     n: '听天由命 (放弃)',
+  //   });
+  // }
   era.printInColRows(
     [
       { type: 'divider' },
@@ -482,9 +535,9 @@ module.exports = async (_, save_and_next_week, flags) => {
       new BasementAction(
         0,
         my_life_marks.b_timer + action_time,
-        era.get('status:0:沉睡')
-          ? BasementAction.action_type_enum.get_up
-          : BasementAction.action_type_enum.action_end,
+        sys_check_awake(0)
+          ? BasementAction.action_type_enum.action_end
+          : BasementAction.action_type_enum.get_up,
       ),
     );
   }

@@ -67,21 +67,24 @@ module.exports = class extends CustomizedCheck {
 
   check_next_week() {
     const edu_weeks = era.get('cflag:17:育成回合计时'),
-      edu_object = new EventObject(17, cb_enum.edu).set_arg(edu_weeks);
+      edu_object = new EventObject(17, cb_enum.edu).set_arg(edu_weeks),
+      edu_object_spe = new EventObject(17, cb_enum.edu, true).set_arg(
+        edu_weeks,
+      );
     if (edu_weeks < 3 * 48) {
       add_event(event_hooks.week_start, edu_object);
       if (
         edu_weeks === 47 + 41 &&
         check_aim_race(new RaceHistory(17).get(), race_enum.kiku_sho, 1, 1)
       ) {
-        add_event(event_hooks.week_end, edu_object);
+        add_event(event_hooks.week_end, edu_object_spe);
       } else if (edu_weeks === 95 + 1) {
         add_event(
           event_hooks.out_church,
           new EventObject(17, cb_enum.edu, true),
         );
       } else if (edu_weeks === 95 + 10) {
-        add_event(event_hooks.week_end, edu_object);
+        add_event(event_hooks.week_end, edu_object_spe);
       }
       check_and_register_aim_race(17, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 1 || edu_weeks === 143 + 9) {

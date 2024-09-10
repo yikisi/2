@@ -38,6 +38,7 @@ async function update_marks(shown, ...ids) {
         });
         shown &&
           (await era.printAndWait([
+            { isBr: true },
             get_chara_talk(chara_id).get_colored_name(),
             ' 获得了 ',
             {

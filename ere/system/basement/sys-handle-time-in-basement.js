@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const sys_handle_escape_basement = require('#/system/basement/sys-handle-escape-basement');
+const { check_satisfied } = require('#/system/ero/sys-calc-ero-status');
 const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
 const {
   begin_and_init_ero,
@@ -12,7 +14,7 @@ const {
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const print_ero_page = require('#/page/page-ero');
+const page_ero = require('#/page/page-ero');
 
 const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
@@ -25,8 +27,6 @@ const BasementOwners = require('#/data/event/basement-owners');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { location_enum } = require('#/data/locations');
-const page_ero = require('#/page/page-ero');
-const { check_satisfied } = require('#/system/ero/sys-calc-ero-status');
 
 const basement_just_status =
     (1 << BasementAction.basement_status_enum.just_back) +
@@ -143,7 +143,8 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
   basement_queue.clean_actions(
     (e) =>
       part_list.indexOf(e.chara_id) !== -1 &&
-      e.type !== BasementAction.action_type_enum.get_up,
+      e.type !== BasementAction.action_type_enum.get_up &&
+      e.type !== BasementAction.action_type_enum.digestive_end,
   );
   begin_and_init_ero(...part_list);
   if (is_rape) {
@@ -157,7 +158,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
   }
   let wake_up = true;
   if (sys_check_awake(0)) {
-    await print_ero_page(undefined, true);
+    await page_ero(part_list[1], true);
   } else {
     const get_up_time =
       basement_queue.find_action(
@@ -209,7 +210,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
           : []),
         ' 伏在身上！',
       ]);
-      await page_ero(part_list[1]);
+      await page_ero(undefined, true);
       era
         .getCharactersInTrain()
         .forEach((e) => era.add(`exp:${e}:睡奸次数`, -1));
@@ -249,7 +250,6 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
  * @param {BasementOwners} basement_owners
  */
 async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
-  era.logger.debug(`BASEMENT: IN SEX? ${!!sex_end_time}`);
   new BasementOwners().get().forEach((e) => {
     if ((new LifeEventMarks(e).b_status & basement_just_status) > 0) {
       new LifeEventMarks(e).b_status =
@@ -267,7 +267,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
     switch (e.type) {
       case BasementAction.action_type_enum.action_end:
         if (
-          !e &&
+          !e.chara_id &&
           life_marks.b_status ===
             1 << BasementAction.basement_status_enum.escape &&
           life_marks.b_now < 0
@@ -367,6 +367,8 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
           ),
         );
         sex_end_time = undefined;
+        break;
+      case BasementAction.action_type_enum.rescue:
     }
     if (era.get('flag:当前位置') !== location_enum.basement) {
       break;
@@ -423,7 +425,11 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             ]);
           }
           era.set(`status:${e}:沉睡`, 1);
-          basement_queue.clean_actions((a) => a.chara_id === e);
+          basement_queue.clean_actions(
+            (a) =>
+              a.chara_id === e &&
+              a.type !== BasementAction.action_type_enum.digestive_end,
+          );
           basement_queue.add_action(
             new BasementAction(
               e,
@@ -455,6 +461,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               ' 肚子饿了，吃了点东西……',
             ]);
           }
+          life_marks.b_status = 1 << BasementAction.basement_status_enum.action;
           basement_queue.add_action(
             new BasementAction(
               e,
@@ -481,7 +488,11 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             ]);
           }
           era.set(`status:${e}:沉睡`, 1);
-          basement_queue.clean_actions((a) => a.chara_id === e);
+          basement_queue.clean_actions(
+            (a) =>
+              a.chara_id === e &&
+              a.type !== BasementAction.action_type_enum.digestive_end,
+          );
           basement_queue.add_action(
             new BasementAction(
               e,
@@ -567,7 +578,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
           ),
       ];
       if (sys_check_awake(0)) {
-        if (!part_list[1]) {
+        if (part_list[1]) {
           await era.printAndWait([
             '在 ',
             get_chara_talk(part_list[0]).get_colored_name(),
@@ -614,6 +625,9 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             ' 要出去一趟……',
           ]);
         }
+        if (get_random_value(0, 100) < (life_marks.b_s_level - 2) * 20) {
+          my_life_marks.b_food_medicine = 1;
+        }
         if (is_vacation) {
           basement_queue.add_action(
             new BasementAction(
@@ -638,8 +652,8 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
     }
     my_life_marks.b_timer = new_timer;
   } else {
-    // 逃离处理
-    era.logger.info('TEST: OUT!');
+    wait_flag = era.print('成功回到了训练室……');
+    sys_handle_escape_basement();
   }
   wait_flag && (await era.waitAnyKey());
 }
