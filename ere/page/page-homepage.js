@@ -44,6 +44,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
+const { pressure_border } = require('#/data/train-const');
 
 let random_event,
   notes_index = 0;
@@ -336,7 +337,7 @@ module.exports = async () => {
         my_life_marks.b_enhance = 1;
         owner_marks.b_s_level = Math.max(
           Math.floor(
-            (era.get(`love:${owner}`) * era.get('flag:极端行为限制') -
+            (era.get(`love:${owner}`) * (era.get('flag:极端行为限制') || 1) -
               era.get(`relation:${owner}:0`)) /
               200,
           ),
@@ -366,7 +367,12 @@ module.exports = async () => {
         }
         const rescue_chara = get_random_entry(
           sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-            (e) => e > 0 && e !== owner && era.get(`love:${e}`) >= 75,
+            (e) =>
+              e > 0 &&
+              e !== owner &&
+              era.get(`love:${e}`) >= 75 &&
+              !era.get(`status:${e}:伤病`) &&
+              era.get(`base:${e}:压力`) < pressure_border.depression,
           ),
         );
         if (rescue_chara) {

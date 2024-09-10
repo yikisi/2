@@ -6,12 +6,9 @@ const CustomizedBase = require('#/event/basement/basement-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-/**
- * 梦之旅 - 地下室
- *
- * @author 幽白書
- */
+/** 梦之旅 - 地下室 */
 module.exports = class extends CustomizedBase {
+  /** @author 幽白書 */
   async ask_release_agree() {
     const callname = sys_get_callname(119, 0),
       dj = get_chara_talk(this.id),
@@ -77,6 +74,7 @@ module.exports = class extends CustomizedBase {
     ]);
   }
 
+  /** @author 幽白書 */
   async ask_release_reject() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0);
@@ -104,6 +102,7 @@ module.exports = class extends CustomizedBase {
     await era.printAndWait('地下室的支配者，露出了从容的笑容');
   }
 
+  /** @author 幽白書 */
   async ask_time() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0);

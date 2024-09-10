@@ -272,6 +272,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           );
           my_life_marks.b_food_medicine = 0;
         }
+        my_life_marks.b_food_buff = 2.5;
         basement_queue.add_action(
           new BasementAction(
             0,
