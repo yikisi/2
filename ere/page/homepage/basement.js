@@ -179,6 +179,10 @@ module.exports = async (_, save_and_next_week, flags) => {
             : [get_chara_talk(chara_list[1]).sex, '们']),
           '……',
         ]);
+        await get_custom_basement(chara_list[1]).flatter(chara_list[2]);
+        if (chara_list[2]) {
+          await get_custom_basement(chara_list[2]).flatter(chara_list[1]);
+        }
         chara_list
           .slice(1)
           .forEach((e) => sys_like_chara(e, 0, get_random_value(5, 10), false));
@@ -193,10 +197,13 @@ module.exports = async (_, save_and_next_week, flags) => {
           1 << BasementAction.basement_status_enum.escape;
         if (
           get_random_value(0, 100) <
-          (100 + era.get('base:0:速度') / 200) / (my_life_marks.b_now + 1)
+          (100 + era.get('base:0:速度') / 200) /
+            (my_life_marks.b_now +
+              !!my_life_marks.b_now * !!era.get('flag:极端行为限制') +
+              1)
         ) {
           my_life_marks.b_now--;
-          if (!my_life_marks.b_now) {
+          if (my_life_marks.b_now < 0) {
             await era.printAndWait([
               me.get_colored_name(),
               ' 成功解除了机关，逃离了地下室！',
@@ -231,7 +238,10 @@ module.exports = async (_, save_and_next_week, flags) => {
         my_life_marks.b_stamina_buff = 0.5;
         my_life_marks.b_time_buff = 1;
         era.set('status:0:沉睡', 1);
-        await era.printAndWait([me.get_colored_name(), ' 选择了小睡片刻……']);
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 决定躺到床上小睡片刻恢复精神……',
+        ]);
       },
       n: '小睡片刻',
     },
@@ -240,8 +250,11 @@ module.exports = async (_, save_and_next_week, flags) => {
     action_list.push({
       async h() {
         await era.printAndWait([
+          '嫌犯给 ',
           me.get_colored_name(),
-          ' 略微食用了一些食物……',
+          ' 留下了一些粮食，',
+          me.get_colored_name(),
+          ' 决定稍微食用一点……',
         ]);
         if (my_life_marks.b_food_medicine) {
           await era.printAndWait([
@@ -292,18 +305,13 @@ module.exports = async (_, save_and_next_week, flags) => {
                 sys_get_intelligence_ratio_in_fight(0, chara_list[1]))
           ) {
             new LifeEventMarks(chara_list[1]).b_escape = 3;
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 的偷袭奏效了！成功逃离了地下室！',
-            ]);
+            await get_custom_basement(chara_list[1]).strike_success();
             my_life_marks.b_status =
               1 << BasementAction.basement_status_enum.escape;
             my_life_marks.b_now = -1;
+            action_time = get_random_value(5, 10);
           } else {
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 的偷袭失败了！被打晕了过去！',
-            ]);
+            await get_custom_basement(chara_list[1]).strike_fail();
           }
           if (my_life_marks.b_now >= 0) {
             my_life_marks.b_enhance = Math.min(
@@ -336,50 +344,38 @@ module.exports = async (_, save_and_next_week, flags) => {
           sys_change_attr_and_print(0, '体力', -get_random_value(125, 175));
           sys_change_attr_and_print(0, '精力', -get_random_value(100, 150));
           const beat_list = chara_list.filter(sys_check_awake);
-          if (
-            beat_list.reduce((p, c) => {
-              sys_like_chara(
-                chara_list[1],
-                0,
-                -get_random_value(75, 125),
-                false,
-              );
-              sys_change_pressure(chara_list[1], get_random_value(1000, 1500));
-              return (
-                p &&
-                get_random_value(0, 100) <
-                  100 * sys_get_strength_ratio_in_fight(0, c)
-              );
-            }, false)
-          ) {
-            await era.printAndWait([me.get_colored_name(), ' 的反抗成功了！']);
-            beat_list.forEach((e) => (new LifeEventMarks(e).b_escape = 2));
+          let win = true;
+          for (const chara_id of beat_list) {
+            sys_like_chara(chara_id, 0, -get_random_value(75, 125), false);
+            sys_change_pressure(chara_id, get_random_value(1000, 1500));
+            win =
+              get_random_value(0, 100) <
+                100 * sys_get_strength_ratio_in_fight(0, chara_id) && win;
+            if (win) {
+              await get_custom_basement(chara_id).battle_success();
+            } else {
+              await get_custom_basement(chara_id).battle_fail();
+            }
+            if (!win) {
+              break;
+            }
+          }
+          if (win) {
             if (
               get_random_value(0, 100) <
-              (100 + era.get('base:0:速度') / 200) / (my_life_marks.b_now + 1)
+              (100 + era.get('base:0:速度') / 200) /
+                (my_life_marks.b_now +
+                  !!my_life_marks.b_now * !!era.get('flag:极端行为限制') +
+                  1)
             ) {
-              await era.printAndWait([
-                me.get_colored_name(),
-                ' 成功解除了机关，逃离了地下室！',
-              ]);
+              beat_list.forEach((e) => (new LifeEventMarks(e).b_escape = 2));
+              await get_custom_basement(beat_list[0]).battle_escape();
               my_life_marks.b_status =
                 1 << BasementAction.basement_status_enum.escape;
               my_life_marks.b_now = -1;
             } else {
-              await era.printAndWait([
-                '但 ',
-                me.get_colored_name(),
-                ' 败给了机关……',
-                { isBr: true },
-                me.get_colored_name(),
-                '被打晕后带回了地下室……',
-              ]);
+              await get_custom_basement(beat_list[0]).battle_prison();
             }
-          } else {
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 的反抗失败了！被打晕了过去！',
-            ]);
           }
           if (my_life_marks.b_now >= 0) {
             my_life_marks.b_enhance = Math.min(
@@ -542,7 +538,8 @@ module.exports = async (_, save_and_next_week, flags) => {
       await sys_handle_time_in_basement(my_life_marks, basement_owners);
     } while (
       !sys_check_awake(0) ||
-      my_life_marks.b_status === 1 << BasementAction.basement_status_enum.sex
+      my_life_marks.b_status === 1 << BasementAction.basement_status_enum.sex ||
+      my_life_marks.b_status === 1 << BasementAction.basement_status_enum.escape
     );
   }
 };

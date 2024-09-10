@@ -26,6 +26,8 @@ function sys_handle_escape_basement(clear_chara) {
     if (life_marks.b_escape <= 0) {
       life_marks.b_escape++;
     }
+    era.set(`status:${e}:沉睡`, 0);
+    era.set(`status:${e}:马跳S`, 0);
   });
   basement_owners.clear();
 }
