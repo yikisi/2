@@ -943,7 +943,42 @@ module.exports = async function (event_object) {
     await print_event_name(`醒目飞鹰`, falcon);
     await era.printAndWait(`与11月的气候变换成反比的，是醒目飞鹰热烈的演出。`);
     await era.printAndWait(
+      `以泥地新星而闻名的醒目飞鹰终于像钻石一样散发出了迷人的光芒。`,
+    );
+    await era.printAndWait(`在其背后默默支持的粉丝团体与本人外向乐观的性格。`);
+    await era.printAndWait(`以及嗅到了新闻的各大媒体对此全方位的报道与造谣。`);
+    await me.say_and_wait(`等这次演唱会结束后，回去和醒目飞鹰商量一下吧。`);
+    await say_by_passer_by(
+      `醒目飞鹰的粉丝`,
+      `啊，您好，请问是醒目飞鹰的训练员先生吗？`,
+    );
+    await era.printAndWait(
+      `不知何时出现在走廊上的男人像是终于找到了目标后眼睛发亮的向你快步走来。`,
+    );
+    await me.say_and_wait(
+      `没错，请问您有什么事？如果是打算要飞鹰子的签名，向前走到尽头后向左拐。`,
+    );
+    await era.printAndWait(`……说起来，一般不都是直接找醒目飞鹰的吗？`);
+    await say_by_passer_by(
+      `醒目飞鹰的粉丝`,
+      `啊……不，仅仅是我个人的好奇罢了。`,
+    );
+    await era.printAndWait(`像是为了掩饰着什么一样，连口罩手套都戴上了。`);
+    await say_by_passer_by(
+      `醒目飞鹰的粉丝`,
+      `比起飞鹰子，我对她的训练员更感兴趣呢。`,
+    );
+    await era.printAndWait(`原来飞鹰子的成功连带着你这么训练员都出名了吗？`);
+    await me.say_and_wait(`……不，不对，哪里不对劲。`);
+    await say_by_passer_by(
+      `醒目飞鹰的粉丝`,
+      `不要怨我，就这么一无所知的下地狱去吧！`,
+    );
+    await era.printAndWait(
       `突然，毫无征兆的，眼前的粉丝将藏于贴身的小刀抽出。`,
+    );
+    await era.printAndWait(
+      `虽然也有考虑后会被粉丝的报复，但没想到会有如此的激进事情发生。`,
     );
     await era.printAndWait(`大脑还在处理发生于眼前的，超出现实的事件。`);
     await era.printAndWait(`于是你只能站在原地呆呆地看着小刀刺中你的腹部。`);
@@ -1089,7 +1124,7 @@ module.exports = async function (event_object) {
       `珊珊来迟的保安将狂热粉丝拘束在地板之上，你的视线渐渐变得模糊。`,
     );
     await era.printAndWait(`即将远去的意识在最后一刻看到的——`);
-    await era.printAndWait(`是那个标志性的麦克风。`);
+    await era.printAndWait(`是抛弃神的愤怒信徒在燃尽一切后虚无的神情。`);
   } else if (edu_weeks === 47 + 42) {
     // 我越喜欢，我对“我受不了的方式”的定义就越严苛。我去做点什么的动能就越强。
     // 什么也不做，对我就是痛苦的，内心深处就有双重辜负感——第一感觉自己辜负了自己所喜欢的对象，第二感觉辜负了自己的喜欢本身。
@@ -1099,24 +1134,99 @@ module.exports = async function (event_object) {
       `身处于事件的风暴中心，出于对你与醒目飞鹰的人生安全考虑。`,
     );
     await era.printAndWait(`学院决定暂时限制你们的外出。`);
-    await era.printAndWait(`……某种意义上来说也是一种反省。`);
+    await era.printAndWait(`……某种意义上也是一种解脱。`);
     await era.printAndWait(
       `看着醒目飞鹰轻轻推开训练室的大门，向你勉强露出微笑时。`,
     );
     await era.printAndWait(
       `你将看向醒目飞鹰的视线向下挪开，看着训练计划发呆。`,
     );
-    era.printButton(`但是，飞鹰子是马娘偶像。`, 1);
-    await era.input();
-    await me.say_and_wait(`那就要自己承担起，自己所作事情的责任。`);
-    await falcon.say_and_wait(`…...`);
+    await era.printAndWait(
+      `上周的袭击虽然惊险无比，但真正造成的伤害也仅仅只是在你小腹之上划了一道口子。`,
+    );
+    await era.printAndWait(
+      `多亏特雷森考虑到训练员在与所属马娘起冲突时可能会发生的暴力事件，因此采用了凯夫拉纤维作为训练员制服的一部分。`,
+    );
+    await era.printAndWait(
+      `虽说是为了防止被愤怒的马娘直接踢中导致重伤，但意外的在防刺方面也有出色的性能。`,
+    );
+    await era.printAndWait(`怎么说呢？因祸得福？`);
+    await me.say_and_wait(`飞鹰子……不，醒目飞鹰。`);
+    await era.printAndWait(
+      `将发散的思绪重新集中到眼前的少女身上。你犹豫着要不要使用这个艺名称呼她。`,
+    );
+    await falcon.say_and_wait(`训练员先生，飞鹰子没关系的。`);
+    await era.printAndWait(
+      `比想象之中还要坚强的少女即令你高兴又感到了一丝悲哀。`,
+    );
+    await era.printAndWait(`被阴影所覆盖的少女低下了头。`);
+    await falcon.say_and_wait(
+      `飞鹰子作为马娘偶像，心中隐隐约约就有这种不安，不如说这种事情一定会到来。`,
+    );
+    await falcon.say_and_wait(
+      `所以，与其是训练员先生道歉，倒不如说我才是应该道歉的那一边。`,
+    );
     await era.printAndWait(
       `醒目飞鹰的视线上下浮动着，似乎不太擅长这样的对话。`,
     );
     await era.printAndWait(`你深吸一口气，准备继续说下去时——`);
     await falcon.say_and_wait(`飞鹰子知道的。`);
-    await era.printAndWait(`不是敷衍、也不是推脱，醒目飞鹰平静的开口。`);
-    await falcon.say_and_wait(`飞鹰子想要。`);
+    await era.printAndWait(
+      `比镜面的湖泊还要平静的醒目飞鹰抬起头直视你的双眼。`,
+    );
+    await falcon.say_and_wait(
+      `飞鹰子的粉丝们将希望寄托在了飞鹰子的身上，所以，飞鹰子不能有任何的污点存在。`,
+    );
+    await falcon.say_and_wait(
+      `但是，飞鹰子不这么想，只要有为了成为偶像付出的汗水，然后再加上一点点的运气。`,
+    );
+    await falcon.say_and_wait(
+      `无论是谁都可以成为比醒目飞鹰更伟大的偶像……但是……做出这种事来不是很奇怪吗。`,
+    );
+    await era.printAndWait(`你想要逃避这双悲哀的眼睛，但无法将视线从中移开。`);
+    era.printButton(`飞鹰子为什么想成为偶像？`, 1);
+    await era.input();
+    await era.printAndWait(`逃避会有比不逃避更惨重的事情发生，。`);
+    await falcon.say_and_wait(
+      `……为了让像飞鹰子这样寂寞的人也能暂时忘掉孤独的痛苦。`,
+    );
+    await era.printAndWait(`是了，就是为了这个。`);
+    await era.printAndWait(`不管如何哀叹自身的不幸，责任都是一样的。`);
+    await era.printAndWait(
+      `作为马娘偶像一帆风顺的走到了现在，已经是难以想象的奇迹般的幸运了。`,
+    );
+    await me.say_and_wait(
+      `我知道的，就像心脏被掏空，那片黑洞洞的伤口，无论何时都在向外流血。`,
+    );
+    await me.say_and_wait(
+      `就算有无数的鲜花与掌声否定这判断，也会在演出结束之后，从舞台之上走下时，从伤口之中流出的鲜血质问着自己。`,
+    );
+    era.printButton(`比起为了减轻罪恶感的流泪，作为偶像有更重要的事情去做`, 1);
+    await era.input();
+    await me.say_and_wait(
+      `飞鹰子要考虑的是如何赢得接下来的比赛，以及第三年的泥地赛事。`,
+    );
+    await me.say_and_wait(
+      `除了回应粉丝们的期待，更重要的，为了也有以泥地马娘偶像为目标的后辈们。`,
+    );
+    await me.say_and_wait(
+      `就算看不到方向又如何，就算错了又怎么样！就这么带着这个伤口一直向前！就这样在赛场之上舞台中心一直闪耀下去！。`,
+    );
+    await me.say_and_wait(
+      `让她们看看作为初代马娘偶像的醒目飞鹰，到底能做到什么地步！`,
+    );
+    await era.printAndWait(
+      `世界上不存在同时满足正确的方向与正确的目标而造成的成功。`,
+    );
+    await era.printAndWait(
+      `严肃考虑的话，正确的方向与正确的目标都是不存在的。`,
+    );
+    await era.printAndWait(
+      `然而，就算方向与目标都是错的，我们也依然做成了无数的成功，不是吗？`,
+    );
+    await era.printAndWait(
+      `前半段旅程取得的成功都是这么过来的，又有什么理由不能证明后面的成功不也是顺着错误的方向与错误的目标而成就的呢？`,
+    );
   } else if (edu_weeks === 47 + 48) {
     await print_event_name(`圣诞祈愿`, falcon);
     await era.printAndWait(`中山竞马场·有马纪念`);
