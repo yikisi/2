@@ -50,3 +50,4 @@ EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-e
 * 修复了周日宁静good_night事件中的bug
 * 修复了本周赛事指示器的按钮在非预期地点被触发导致的bug
 * 修复了角色可以在未习得前置技能的情况下即可学习上位技能的bug
+* 现在玩家只有非继承技能受到9个的限制，且重置技能时不会重置自身习得的继承技能了

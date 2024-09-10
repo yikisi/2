@@ -289,11 +289,17 @@ module.exports = async () => {
               accelerator: 103,
               config: {
                 disabled:
-                  chara_id === 0 && skill_control.get().length >= 9 && pt < 100,
+                  chara_id === 0 &&
+                  skill_control
+                    .get()
+                    .filter((e) => !e.toString().startsWith('9')).length >= 9 &&
+                  pt < 100,
                 width: 4,
               },
               content:
-                chara_id === 0 && skill_control.get().length >= 9
+                chara_id === 0 &&
+                skill_control.get().filter((e) => !e.toString().startsWith('9'))
+                  .length >= 9
                   ? '重置技能'
                   : '学习技能',
               type: 'button',
@@ -358,15 +364,23 @@ module.exports = async () => {
         discount = get_discount(chara_id);
         break;
       case 103:
-        if (chara_id === 0 && skill_control.get().length >= 9) {
+        if (
+          chara_id === 0 &&
+          skill_control.get().filter((e) => !e.toString().startsWith('9'))
+            .length >= 9
+        ) {
           if (await select_yes_or_no('要使用 100 点技能点数重置技能吗？')) {
             era.add('exp:0:技能点数', -100);
+            const generated_skills = skill_control
+              .get()
+              .filter((e) => e.toString().startsWith('9'));
             skill_control.clear();
             if (era.get('cflag:0:模版角色') > 0) {
               chara_skill_dict[era.get('cflag:0:模版角色')].forEach((s) =>
                 get_skills_and_print_in_event(0, [s], skill_control, false),
               );
             }
+            skill_control.add(...generated_skills);
           }
         } else {
           while (flag_skill) {
