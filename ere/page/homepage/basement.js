@@ -197,7 +197,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           1 << BasementAction.basement_status_enum.escape;
         if (
           get_random_value(0, 100) <
-          (100 + era.get('base:0:速度') / 200) /
+          (100 + era.get('base:0:速度') / 20) /
             (my_life_marks.b_now +
               !!my_life_marks.b_now * !!era.get('flag:极端行为限制') +
               1)
@@ -363,7 +363,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           if (win) {
             if (
               get_random_value(0, 100) <
-              (100 + era.get('base:0:速度') / 200) /
+              (100 + era.get('base:0:速度') / 20) /
                 (my_life_marks.b_now +
                   !!my_life_marks.b_now * !!era.get('flag:极端行为限制') +
                   1)

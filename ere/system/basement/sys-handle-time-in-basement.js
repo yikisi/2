@@ -442,7 +442,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
       out_characters = [],
       is_vacation = check_vacation(new_timer);
     let fix_character = 0,
-      rape_character = false;
+      rape_character = 0;
     [0, ...basement_owners.get()].forEach((e) => {
       const life_marks = new LifeEventMarks(e);
       if (delta > 0 && (life_marks.b_status & basement_no_cost_status) === 0) {
@@ -594,20 +594,31 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               stay_flag = false;
             }
             if (stay_flag) {
-              if (get_custom_check(e).is_want_make_love() > 0) {
+              if (
+                !fix_character &&
+                get_custom_check(e).is_want_make_love() > 0
+              ) {
                 rape_character = e;
-              } else if (sys_check_awake(0)) {
-                wait_flag = 1;
-                get_custom_basement(e).lure();
-                sys_like_chara(e, 0, get_random_value(-5, 5), false);
-                sys_change_lust(0, get_random_value(0, 100));
-                sys_change_lust(e, get_random_value(0, 200));
               } else {
-                sys_change_lust(e, get_random_value(-100, 200));
+                if (sys_check_awake(0)) {
+                  wait_flag = 1;
+                  get_custom_basement(e).lure();
+                  sys_like_chara(e, 0, get_random_value(-5, 5), false);
+                  sys_change_lust(0, get_random_value(0, 100));
+                  sys_change_lust(e, get_random_value(0, 200));
+                } else {
+                  sys_change_lust(e, get_random_value(-100, 200));
+                  sys_like_chara(e, 0, get_random_value(-5, 19), false);
+                }
+                life_marks.b_status =
+                  1 << BasementAction.basement_status_enum.action;
                 basement_queue.add_action(
-                  my_life_marks.b_timer + get_random_value(15, 45),
+                  new BasementAction(
+                    e,
+                    new my_life_marks.b_timer() + get_random_value(15, 45),
+                    BasementAction.action_type_enum.action_end,
+                  ),
                 );
-                sys_like_chara(e, 0, get_random_value(-5, 19), false);
               }
             }
           }
