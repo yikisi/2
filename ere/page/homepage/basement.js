@@ -5,7 +5,10 @@ const era = require('#/era-electron');
 const sys_handle_time_in_basement = require('#/system/basement/sys-handle-time-in-basement');
 const sys_get_intelligence_ratio_in_fight = require('#/system/ero/fight/sys-get-intelligence-ratio');
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
-const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_change_attr_and_print,
+  sys_change_pressure,
+} = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
@@ -198,6 +201,9 @@ module.exports = async (_, save_and_next_week, flags) => {
               me.get_colored_name(),
               ' 成功解除了机关，逃离了地下室！',
             ]);
+            basement_owners.for_each((e) =>
+              sys_change_pressure(e, get_random_value(100, 500)),
+            );
           } else {
             await era.printAndWait([
               me.get_colored_name(),
@@ -278,6 +284,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           sys_change_attr_and_print(0, '体力', -get_random_value(75, 125));
           sys_change_attr_and_print(0, '精力', -get_random_value(75, 125));
           sys_like_chara(chara_list[1], 0, -get_random_value(75, 125), false);
+          sys_change_pressure(chara_list[1], get_random_value(1000, 2000));
           if (
             get_random_value(0, 100) <
             60 *
@@ -337,6 +344,7 @@ module.exports = async (_, save_and_next_week, flags) => {
                 -get_random_value(75, 125),
                 false,
               );
+              sys_change_pressure(chara_list[1], get_random_value(1000, 1500));
               return (
                 p &&
                 get_random_value(0, 100) <
@@ -427,7 +435,14 @@ module.exports = async (_, save_and_next_week, flags) => {
       {
         async h() {
           action_time = get_random_value(1, 5);
-          await get_custom_basement(chara_list[1]).ask_time();
+          const date = my_life_marks.b_timer / minutes_in_a_day + 1,
+            hours = Math.floor((my_life_marks.b_timer % minutes_in_a_day) / 60),
+            minutes = my_life_marks.b_timer % 60;
+          await get_custom_basement(chara_list[1]).ask_time(
+            date,
+            hours,
+            minutes,
+          );
         },
         n: '询问时间',
       },

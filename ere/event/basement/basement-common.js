@@ -114,7 +114,8 @@ class CustomizedBase {
     ]);
   }
 
-  async ask_time() {
+  // eslint-disable-next-line no-unused-vars
+  async ask_time(date, hours, minutes) {
     const chara = get_chara_talk(this.id),
       me = get_chara_talk(0);
     await chara.say_and_wait('几点了呢？');

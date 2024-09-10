@@ -12,6 +12,7 @@ const {
 const {
   sys_change_attr_and_print,
   sys_change_lust,
+  sys_change_pressure,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -57,14 +58,6 @@ function check_vacation(timer) {
   return ret;
 }
 
-function get_clock_for_debug(timer) {
-  return `第 ${Math.floor(
-    timer / minutes_in_a_day + 1,
-  ).toString()} 天 ${Math.floor(
-    (timer % minutes_in_a_day) / 60,
-  ).toString()} 时 ${(timer % 60).toString()} 分`;
-}
-
 /**
  * @param {LifeEventMarks} my_marks
  * @param {LifeEventMarks} owner_marks
@@ -99,15 +92,17 @@ function handle_prison_again(my_marks, owner_marks, owner_id) {
             ' 发现了！',
           ];
     if (my_marks.b_now < 0) {
-      new BasementOwners().get().forEach((e) => {
+      new BasementOwners().for_each((e) => {
         new LifeEventMarks(e).b_escape = 0;
         sys_like_chara(e, 0, -50 - 30 * (e === owner_id), false);
+        sys_change_pressure(e, get_random_value(100, 500));
       });
       my_marks.b_now = 1;
     } else {
-      new BasementOwners().get().forEach((e) => {
+      new BasementOwners().for_each((e) => {
         new LifeEventMarks(e).b_escape = 0;
         sys_like_chara(e, 0, -20 - 30 * (e === owner_id), false);
+        sys_change_pressure(e, get_random_value(100, 500));
       });
     }
     return () => {
@@ -251,7 +246,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
  * @param {BasementOwners} basement_owners
  */
 async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
-  new BasementOwners().get().forEach((e) => {
+  new BasementOwners().for_each((e) => {
     if ((new LifeEventMarks(e).b_status & basement_just_status) > 0) {
       new LifeEventMarks(e).b_status =
         1 << BasementAction.basement_status_enum.idle;
@@ -293,9 +288,6 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         life_marks.b_food_buff = 0;
         break;
       case BasementAction.action_type_enum.get_up:
-        era.logger.info(
-          `TEST：${get_clock_for_debug(e.timer)} 角色 ${e.chara_id} 醒来`,
-        );
         if (e.chara_id > 0) {
           print_handler = handle_prison_again(
             my_life_marks,
@@ -321,9 +313,6 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         );
         break;
       case BasementAction.action_type_enum.back_basement:
-        era.logger.info(
-          `TEST：${get_clock_for_debug(e.timer)} 角色 ${e.chara_id} 回到地下室`,
-        );
         print_handler = handle_prison_again(
           my_life_marks,
           life_marks,
@@ -399,8 +388,10 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         ) {
           rescue_result_type = 4 + (relation_check > 0);
           sys_hurt_uma(owner, get_random_value(0, 2), false);
+          sys_change_pressure(owner, get_random_value(500, 1000));
         } else {
           sys_hurt_uma(e.chara_id, get_random_value(0, 2), false);
+          sys_change_pressure(e.chara_id, get_random_value(500, 1000));
         }
         const basement_scripts = get_custom_basement(e.chara_id);
         switch (rescue_result_type) {
@@ -483,8 +474,6 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
       is_vacation = check_vacation(new_timer);
     let fix_character = 0,
       rape_character = false;
-    delta > 0 &&
-      era.logger.info(`TEST：时间推进到 ${get_clock_for_debug(new_timer)}`);
     [0, ...basement_owners.get()].forEach((e) => {
       const life_marks = new LifeEventMarks(e);
       if (delta > 0 && (life_marks.b_status & basement_no_cost_status) === 0) {

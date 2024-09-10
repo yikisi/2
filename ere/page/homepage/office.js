@@ -51,6 +51,7 @@ const EventMarks = require('#/data/event/event-marks');
 const LocCharacters = require('#/data/event/loc-characters');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { pressure_border } = require('#/data/train-const');
 
 /**
  * @param {number} chara_id
@@ -307,7 +308,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 type: 'button',
               }
             : undefined,
-          chara_id && new BasementOwners().is_empty()
+          chara_id &&
+          new BasementOwners().is_empty() &&
+          era.get('flag:惩戒力度') >= 2 &&
+          !era.get(`status:${chara_id}:伤病`) &&
+          era.get(`base:${chara_id}:压力`) < pressure_border.depression
             ? {
                 accelerator: 213,
                 config: {
