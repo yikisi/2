@@ -3,6 +3,8 @@ _incoming_
 
 EraUma v0.9，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/permalink/latest) 版本
 
+因为变量位置变化，需要重开档
+
 ## Added
 
 * 新增地下室机制

@@ -251,12 +251,19 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             content: `${chara_id ? '一起' : ''}打游戏`,
             type: 'button',
           },
-          {
-            accelerator: 208,
-            config: { disabled: chara_id && growth_stage < 1, width: 6 },
-            content: `提升${chara_id ? '对方' : '自身'}性爱能力`,
-            type: 'button',
-          },
+          !chara_id ||
+          (growth_stage > 1 &&
+            era.get(`exp:${chara_id}:性爱次数`) >
+              era.get(`exp:${chara_id}:睡奸次数`))
+            ? {
+                accelerator: 208,
+                config: {
+                  width: 6,
+                },
+                content: `提升${chara_id ? '对方' : '自身'}性爱能力`,
+                type: 'button',
+              }
+            : undefined,
           era.get('flag:惩戒力度') <= 1 &&
           chara_id &&
           !sys_get_billings()[0].creditor &&

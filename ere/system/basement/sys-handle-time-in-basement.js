@@ -313,14 +313,11 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
           new BasementAction(
             e.chara_id,
             e.timer +
-              Math.floor(
+              Math.ceil(
                 get_random_value(20, 40) *
-                  (era.get(`base:${e.chara_id}:精力`)
-                    ? 1
-                    : 0.5 +
-                      Math.log(
-                        (era.get(`base:${e.chara_id}:根性`) * 0.5) / log_max_wp,
-                      )),
+                  (1 -
+                    (0.5 * Math.log(era.get(`base:${e.chara_id}:根性`))) /
+                      log_max_wp),
               ),
             BasementAction.action_type_enum.action_end,
           ),
@@ -492,10 +489,10 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             new BasementAction(
               e,
               new_timer +
-                Math.floor(
+                Math.ceil(
                   get_random_value(120, 180) *
                     (1 -
-                      (Math.log(era.get(`base:${e}:根性`)) * 0.5) / log_max_wp),
+                      (0.5 * Math.log(era.get(`base:${e}:根性`))) / log_max_wp),
                 ),
               BasementAction.action_type_enum.get_up,
             ),
@@ -615,7 +612,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
                 basement_queue.add_action(
                   new BasementAction(
                     e,
-                    new my_life_marks.b_timer() + get_random_value(15, 45),
+                    my_life_marks.b_timer + get_random_value(15, 45),
                     BasementAction.action_type_enum.action_end,
                   ),
                 );
@@ -649,7 +646,13 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         basement_queue.add_action(
           new BasementAction(
             fix_character,
-            new_timer + get_random_value(30, 60),
+            new_timer +
+              Math.ceil(
+                get_random_value(30, 60) *
+                  (1 -
+                    (0.5 * Math.log(era.get(`base:${fix_character}:速度`))) /
+                      log_max_wp),
+              ),
             BasementAction.action_type_enum.fix_end,
           ),
         );

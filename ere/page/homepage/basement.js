@@ -192,14 +192,20 @@ module.exports = async (_, save_and_next_week, flags) => {
   } else {
     action_list.push({
       async h() {
-        action_time = get_random_value(30, 60);
+        action_time = Math.ceil(
+          get_random_value(60, 90) *
+            (1 - (0.5 * Math.log(era.get('base:0:速度'))) / log_max_wp),
+        );
         my_life_marks.b_status =
           1 << BasementAction.basement_status_enum.escape;
+        my_life_marks.b_stamina_buff = -4;
+        my_life_marks.b_time_buff = -2;
         if (
           get_random_value(0, 100) <
-          (100 + era.get('base:0:速度') / 20) /
+          (100 -
+            50 * (era.get('base:0:体力') / era.get('maxbase:0:体力') < 0.3)) /
             (my_life_marks.b_now +
-              !!my_life_marks.b_now * !!era.get('flag:极端行为限制') +
+              !!my_life_marks.b_now * era.get('flag:极端行为限制') +
               1)
         ) {
           my_life_marks.b_now--;
@@ -235,8 +241,6 @@ module.exports = async (_, save_and_next_week, flags) => {
     {
       async h() {
         action_time = get_random_value(45, 90);
-        my_life_marks.b_stamina_buff = 0.5;
-        my_life_marks.b_time_buff = 1;
         era.set('status:0:沉睡', 1);
         await era.printAndWait([
           me.get_colored_name(),
@@ -262,9 +266,9 @@ module.exports = async (_, save_and_next_week, flags) => {
             ' 突然感到心跳加快，热血上涌，同时伴随着强烈的眩晕……',
           ]);
           era.set('status:0:马跳S', 1);
-          action_time = Math.floor(
+          action_time = Math.ceil(
             get_random_value(240, 360) *
-              (1 - Math.log(era.get('base:0:根性')) / log_max_wp),
+              (1 - (0.5 * Math.log(era.get('base:0:根性'))) / log_max_wp),
           );
           my_life_marks.b_food_medicine = 0;
         }
@@ -365,7 +369,7 @@ module.exports = async (_, save_and_next_week, flags) => {
               get_random_value(0, 100) <
               (100 + era.get('base:0:速度') / 20) /
                 (my_life_marks.b_now +
-                  !!my_life_marks.b_now * !!era.get('flag:极端行为限制') +
+                  !!my_life_marks.b_now * era.get('flag:极端行为限制') +
                   1)
             ) {
               beat_list.forEach((e) => (new LifeEventMarks(e).b_escape = 2));
@@ -373,6 +377,7 @@ module.exports = async (_, save_and_next_week, flags) => {
               my_life_marks.b_status =
                 1 << BasementAction.basement_status_enum.escape;
               my_life_marks.b_now = -1;
+              action_time = get_random_value(10, 15);
             } else {
               await get_custom_basement(beat_list[0]).battle_prison();
             }
