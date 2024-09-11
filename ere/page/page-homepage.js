@@ -24,6 +24,7 @@ const print_page_header = require('#/page/components/page-header');
 const print_ero_page = require('#/page/page-ero');
 
 const basement_queue = require('#/event/basement-queue');
+const { common_no_action_check } = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
 const GameGuides = require('#/event/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
@@ -371,6 +372,7 @@ module.exports = async () => {
             (e) =>
               e > 0 &&
               e !== owner &&
+              !common_no_action_check(e) &&
               era.get(`love:${e}`) >= 75 &&
               !era.get(`status:${e}:伤病`) &&
               era.get(`base:${e}:压力`) < pressure_border.depression,

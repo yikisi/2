@@ -25,8 +25,8 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 module.exports = async (vp, me) => {
   await print_event_name('Premier amou（初恋这件小事）', vp);
   if (
-    vp.sex_code - 1 &&
-    me.sex_code &&
+    vp.sex_code - 1 !== 0 &&
+    me.sex_code > 0 &&
     era.get('cflag:205:妊娠阶段') === 1 << pregnant_stage_enum.no
   ) {
     begin_and_init_ero(0, 205);

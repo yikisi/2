@@ -6,6 +6,8 @@ const CustomizedBase = require('#/event/basement/basement-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+
 /** 梦之旅 - 地下室 */
 module.exports = class extends CustomizedBase {
   /** @author 幽白書 */
@@ -24,6 +26,26 @@ module.exports = class extends CustomizedBase {
     dj.say('不是啊……但，对我来说，就是这样的哦。');
     dj.say('只有有您在的地方，才是我的归处。');
     era.drawLine();
+  }
+
+  /** @author 幽白書 */
+  back_basement() {
+    const dj = get_chara_talk(this.id),
+      callname = sys_get_callname(this.id, 0),
+      life_marks = new LifeEventMarks(this.id);
+    if (!life_marks.b_start) {
+      era.print([dj.get_colored_name(), ' 还有其他的事要做，即将离开……']);
+      era.println();
+      dj.say(['对不起，', callname, '……我必须先离开了。']);
+      dj.say(
+        '如果有什么烦恼的话可以为我分忧……？明明我是将您监禁在这里的人，您却依然希望能够帮上我的忙吗？',
+      );
+      dj.say(
+        '真是个烂好人呐……不过，不用了，因为您只需要待在这里，作为我唯一的『归处』，就已经是帮我最大的忙了。',
+      );
+    } else {
+      super.back_basement();
+    }
   }
 
   /** @author 幽白書 */

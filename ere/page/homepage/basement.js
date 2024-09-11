@@ -198,8 +198,8 @@ module.exports = async (_, save_and_next_week, flags) => {
         );
         my_life_marks.b_status =
           1 << BasementAction.basement_status_enum.escape;
-        my_life_marks.b_stamina_buff = -4;
-        my_life_marks.b_time_buff = -2;
+        my_life_marks.b_stamina_buff = -3;
+        my_life_marks.b_time_buff = -1.5;
         if (
           get_random_value(0, 100) <
           (100 -
@@ -253,6 +253,7 @@ module.exports = async (_, save_and_next_week, flags) => {
   if (!my_life_marks.b_food_buff) {
     action_list.push({
       async h() {
+        action_time = get_random_value(5, 10);
         await era.printAndWait([
           '嫌犯给 ',
           me.get_colored_name(),

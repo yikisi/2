@@ -69,14 +69,14 @@ handlers[49] = async (vp, me) => {
       vp.sex_code === 0 &&
       (era.get('talent:205:处女') === vp_status_enum.yes ||
         era.get('talent:205:处女') === vp_status_enum.dont_know) &&
-      era.get('cflag:0:性别') - 1
+      era.get('cflag:0:性别') > 0
     ) {
-      await sys_love_uma_in_event(205);
-    } else {
       add_event(
         event_hooks.week_end,
         new EventObject(205, cb_enum.love).set_arg('lust'),
       );
+    } else {
+      await sys_love_uma_in_event(205);
     }
   } else {
     era.set('cflag:205:爱慕暂拒', 49);
@@ -84,7 +84,7 @@ handlers[49] = async (vp, me) => {
 };
 
 handlers.lust = async (vp, me) => {
-  await print_event_name('爱上凡人的仙女（La fée）', vp);
+  await print_event_name('La fée（爱上凡人的仙女）', vp);
   await era.printAndWait([
     '清风吹拂，扬起 ',
     vp.get_colored_name(),

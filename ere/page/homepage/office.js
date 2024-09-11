@@ -39,6 +39,7 @@ const print_train_page = require('#/page/page-train');
 const page_trainer_office = require('#/page/page-trainer-office');
 const page_visitors = require('#/page/page-visitors');
 
+const { common_no_action_check } = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
 const GameGuides = require('#/event/game-guides');
 const { shop_end, shop_start } = require('#/event/shop/tachyon-shop');
@@ -316,6 +317,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
               }
             : undefined,
           chara_id &&
+          !common_no_action_check(chara_id) &&
           new BasementOwners().is_empty() &&
           era.get('flag:惩戒力度') >= 2 &&
           !era.get(`status:${chara_id}:伤病`) &&

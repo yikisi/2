@@ -9,6 +9,7 @@ const {
   begin_and_init_ero,
   end_ero_and_show_result,
 } = require('#/system/ero/sys-prepare-ero');
+const sys_call_ero_script = require('#/system/script/sys-call-ero-script');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
@@ -202,7 +203,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
     ),
   );
   part_list.slice(1).forEach((e) => {
-    if (cache[e] !== era.get(`relation:${e}:0`)) {
+    if (cache[e] === era.get(`relation:${e}:0`)) {
       sys_like_chara(
         e,
         0,
@@ -438,13 +439,15 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             }
           }
           if (rescue_result_type > 0) {
-            basement_owners.push(e.chara_id);
             life_marks.b_s_level = Math.max(
               Math.floor(relation_check / 200),
               0,
             );
             life_marks.b_status = 1 << BasementAction.basement_status_enum.idle;
             life_marks.b_escape = 0;
+            await sys_call_ero_script(e.chara_id, ero_hooks.prison, {
+              shown: false,
+            });
             if (rescue_result_type !== 3) {
               my_life_marks.b_now = my_life_marks.b_enhance = Math.max(
                 life_marks.b_s_level + get_random_value(-1, 1),
@@ -505,7 +508,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             wait_flag = 1;
             get_custom_basement(e).deep_sleep();
           }
-          era.set(`status:${e}:沉睡`, 1);
+          era.set(`status:${e}:沉睡`, 2);
           basement_queue.clean_actions(
             (a) =>
               a.chara_id === e &&
@@ -595,7 +598,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
                   new LifeEventMarks(e).b_status ===
                   1 << BasementAction.basement_status_enum.fix,
               ).length &&
-            (my_life_marks.b_now <= 1 ||
+            (!my_life_marks.b_now ||
               my_life_marks.b_enhance - my_life_marks.b_now >=
                 6 - life_marks.b_s_level) &&
             get_random_value(0, 100) < life_marks.b_s_level * 19
