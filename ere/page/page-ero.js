@@ -401,7 +401,7 @@ function get_chara_info(chara_id) {
       { config: { width: 1 }, content: e.substring(0, 1), type: 'text' },
       {
         config: { color: attr_background_colors[e], height: 22, width: 3 },
-        inContent: `${val}/${limit}`,
+        inContent: `${Math.floor(val)}/${Math.floor(limit)}`,
         percentage: (val * 100) / limit,
         type: 'progress',
       },

@@ -361,12 +361,10 @@ function init_ero(...ids) {
       `tcvar:${chara_id}:体力缓存`,
       Math.max(
         Math.min(
-          Math.floor(
-            (temp = era.set(
-              `base:${chara_id}:体力`,
-              Math.floor(era.get(`base:${chara_id}:体力`)),
-            )) / 2,
-          ),
+          (temp = era.set(
+            `base:${chara_id}:体力`,
+            Math.floor(era.get(`base:${chara_id}:体力`)),
+          )) / 2,
           temp - 100,
         ),
         1,
@@ -376,12 +374,10 @@ function init_ero(...ids) {
       `tcvar:${chara_id}:精力缓存`,
       Math.max(
         Math.min(
-          Math.floor(
-            (temp = era.set(
-              `base:${chara_id}:精力`,
-              era.get(`base:${chara_id}:精力`),
-            )) / 2,
-          ),
+          (temp = era.set(
+            `base:${chara_id}:精力`,
+            era.get(`base:${chara_id}:精力`),
+          )) / 2,
           temp - 100,
         ),
         1,

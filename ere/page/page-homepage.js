@@ -347,6 +347,7 @@ module.exports = async () => {
           owner_marks.b_s_level + get_random_value(-1, 1),
           1,
         );
+        my_life_marks.b_start = owner_marks.b_start = 1;
         my_life_marks.b_status = owner_marks.b_status =
           1 << BasementAction.basement_status_enum.idle;
         owner_marks.b_escape = 0;

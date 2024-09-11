@@ -43,6 +43,8 @@ class LifeEventMarks extends PersonalEventMarks {
   b_food_medicine;
   // 地下室 - 逃脱方式（1-此人不在时逃出，2-击败此人逃出，3-偷袭此人逃出）
   b_escape;
+  // 地下室 - 初见
+  b_start;
 
   /** @param {number} chara_id */
   constructor(chara_id) {

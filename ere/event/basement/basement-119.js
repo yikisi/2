@@ -9,6 +9,81 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 /** 梦之旅 - 地下室 */
 module.exports = class extends CustomizedBase {
   /** @author 幽白書 */
+  welcome() {
+    const dj = get_chara_talk(this.id),
+      me = get_chara_talk(0),
+      callname = sys_get_callname(this.id, 0);
+    era.drawLine();
+    era.print([me.get_colored_name(), ' 悠悠醒转……']);
+    era.println();
+    dj.say(['睡得还舒服吗，', callname, '？']);
+    dj.say('如果舒服的话那就太好了……神经大条？不，不是的。');
+    dj.say(
+      '这说明，哪怕只是浅意识，您也已经将这里视作能安心的地方……视作『家』了，不是吗？',
+    );
+    dj.say('不是啊……但，对我来说，就是这样的哦。');
+    dj.say('只有有您在的地方，才是我的归处。');
+    era.drawLine();
+  }
+
+  /** @author 幽白書 */
+  find_escape(out_of_prison, s_level_up, is_back) {
+    const dj = get_chara_talk(this.id),
+      me = get_chara_talk(0),
+      callname = sys_get_callname(this.id, 0);
+    if (!out_of_prison) {
+      era.drawLine();
+      if (is_back) {
+        dj.say('哎呀……');
+        dj.say([callname, '……您尝试打开这个锁了吗？']);
+        dj.say('打不开？……呵呵，那真是令人高兴的消息。');
+        dj.say(
+          '像您一样正直的人，是绝对打不开这样的锁的……这是，为了我这种心思扭曲之人而准备的锁……',
+        );
+        dj.say('所以，对于您无法将这锁打开这件事，我感到由衷的庆幸及欢喜。');
+      } else {
+        dj.say('无法解开吗？');
+        era.println();
+        era.print([
+          '听见 ',
+          dj.get_colored_name(),
+          ' 的声音，',
+          me.get_colored_name(),
+          ' 下意识投降般地将手举起。',
+        ]);
+        era.print([
+          dj.get_colored_name(),
+          ' 不慌不忙的走到 ',
+          me.get_colored_name(),
+          ' 身旁，只用一根铁丝，快速两下，连 ',
+          me.get_colored_name(),
+          ' 都看不清对方到底做了什么。',
+        ]);
+        era.print([
+          '困了 ',
+          me.get_colored_name(),
+          ' 许久的锁就在眼前轻而易举的被解开了。',
+        ]);
+        era.print('随后，锁又被关了回去。');
+        era.println();
+        dj.say(['呵呵……作为余兴表演，还满意吗？', callname, '？']);
+        dj.say(
+          '不必感到灰心……适才适所，由于父亲是金匠的关系，在这些机关上我也略有心得而已。',
+        );
+        dj.say([callname, '，不是也有自己更擅长的事吗？比如……床第之事♡']);
+      }
+      era.println();
+      era.print([
+        me.get_colored_name(),
+        ' 被 ',
+        dj.get_colored_name(),
+        ' 带回了床旁……',
+      ]);
+      era.drawLine();
+    }
+  }
+
+  /** @author 幽白書 */
   async ask_release_agree() {
     const callname = sys_get_callname(119, 0),
       dj = get_chara_talk(this.id),

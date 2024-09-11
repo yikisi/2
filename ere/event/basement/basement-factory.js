@@ -10,6 +10,7 @@ const cons_dict = {},
 
 const current = new Date().getTime();
 
+cons_dict[0] = require('#/event/basement/basement-0');
 cons_dict[119] = require('#/event/basement/basement-119');
 
 console.log(

@@ -6,18 +6,14 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const BasementAction = require('#/data/event/basement-action');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 const desc_replace_type = { chara_sex: 0, my_name: 1 };
 
 const love_desc = [
+    [{ t: desc_replace_type.chara_sex }, '还有其它的事要做，很快就会离开'],
     [
-      '但',
-      { t: desc_replace_type.chara_sex },
-      '还有其它的事要做，很快就会离开',
-    ],
-    [
-      '不过',
       { t: desc_replace_type.chara_sex },
       '紧紧地盯着 ',
       { t: desc_replace_type.my_name },
@@ -26,7 +22,6 @@ const love_desc = [
       '不会轻易离开',
     ],
     [
-      '不过',
       { t: desc_replace_type.chara_sex },
       '死死地盯着 ',
       { t: desc_replace_type.my_name },
@@ -42,7 +37,6 @@ const love_desc = [
       { t: desc_replace_type.my_name },
     ],
     [
-      '但',
       { t: desc_replace_type.chara_sex },
       '的面容因心碎而扭曲，丝毫没有离开 ',
       { t: desc_replace_type.my_name },
@@ -60,6 +54,38 @@ const love_desc = [
 class CustomizedBase {
   constructor(chara_id) {
     this.id = chara_id;
+  }
+
+  welcome() {
+    const me = get_chara_talk(0),
+      chara = get_chara_talk(this.id);
+    if (new LifeEventMarks(0).b_start) {
+      era.print([
+        '不知过了多久，',
+        me.get_colored_name(),
+        ' 在一张简单的小床上悠悠醒转……',
+      ]);
+      era.print([
+        '眼前是陌生的天花板……与微笑的 ',
+        chara.get_colored_name(),
+        '。',
+      ]);
+      era.print([
+        '现在，',
+        me.get_colored_name(),
+        ' 成为了这座爱意牢笼中的囚徒……而',
+        chara.get_colored_name(),
+        ' 是唯一的狱卒……',
+      ]);
+    } else {
+      era.print(['不知过了多久，', me.get_colored_name(), ' 悠悠醒转……']);
+      era.print([
+        '眼前是依然陌生的天花板……与微笑的 ',
+        chara.get_colored_name(),
+        '。',
+      ]);
+      era.print(['囚徒和', me.sex, '唯一的狱卒，终于在这爱意的囚笼中相会了……']);
+    }
   }
 
   /**
@@ -100,6 +126,10 @@ class CustomizedBase {
           return e;
         }),
         '……',
+        new LifeEventMarks(this.id).b_status ===
+        1 << BasementAction.basement_status_enum.fix
+          ? '正在加固地下室……'
+          : '',
       ];
     } else {
       return [
@@ -176,31 +206,34 @@ class CustomizedBase {
   }
 
   /**
+   * 角色回到地下室/醒来发现玩家在逃离地下室
+   *
    * @param {boolean} out_of_prison
    * @param {boolean} s_level_up
-   * @returns {number}
+   * @param {boolean} [is_back]
    */
-  find_escape(out_of_prison, s_level_up) {
+  find_escape(out_of_prison, s_level_up, is_back) {
     const chara = get_chara_talk(this.id),
       me = get_chara_talk(0);
     if (out_of_prison) {
       era.print([
-        '但是 ',
         me.get_colored_name(),
-        ' 被 ',
+        ' 被刚',
+        is_back ? '回来' : '醒来',
+        '的 ',
         chara.get_colored_name(),
-        ' 抓回来了！',
+        ' 撞个正着！',
       ]);
     } else {
-      era.print([
-        me.get_colored_name(),
-        ' 尝试解开门锁的行为被当场撞破，愠怒的 ',
-        chara.get_colored_name(),
-        ' 将 ',
-        me.get_colored_name(),
-        '拖了回去！',
-      ]);
+      era.print([me.get_colored_name(), ' 尝试逃离地下室的行为被当场撞破！']);
     }
+    era.print([
+      '愠怒的 ',
+      chara.get_colored_name(),
+      ' 将 ',
+      me.get_colored_name(),
+      '拖了回去！',
+    ]);
     if (s_level_up) {
       era.print([
         chara.get_colored_name(),
@@ -209,7 +242,6 @@ class CustomizedBase {
         ' 更加警惕了……',
       ]);
     }
-    return 1;
   }
 
   /** 加固地下室 */
@@ -219,16 +251,37 @@ class CustomizedBase {
 
   /** 从沉睡中清醒 */
   get_up() {
-    era.print([
-      '不知过了多久，',
-      get_chara_talk(this.id).get_colored_name(),
-      ' 悠悠醒转……',
-    ]);
+    const chara = get_chara_talk(this.id),
+      life_marks = new LifeEventMarks(this.id);
+    if (life_marks.b_start) {
+      era.print([
+        '在酣眠过后，这间地下室的主人——',
+        chara.get_colored_name(),
+        ' 终于醒来，开始享受与 ',
+        get_chara_talk(0).get_colored_name(),
+        ' 共度的时光……',
+      ]);
+      life_marks.b_start = 0;
+    } else {
+      era.print([chara.get_colored_name(), ' 悠悠醒转……']);
+    }
   }
 
   /** 回到地下室 */
   back_basement() {
-    era.print([get_chara_talk(this.id).get_colored_name(), ' 回到地下室了……']);
+    const chara = get_chara_talk(this.id),
+      life_marks = new LifeEventMarks(this.id);
+    if (life_marks.b_start) {
+      era.print([
+        '在漫长的等待后，这间地下室的主人——',
+        chara.get_colored_name(),
+        ' 终于现身，开始享受与 ',
+        get_chara_talk(0).get_colored_name(),
+        ' 共度的时光……',
+      ]);
+    } else {
+      era.print([chara.get_colored_name(), ' 回到地下室了……']);
+    }
   }
 
   /** 因精力不足而昏睡 */
@@ -580,7 +633,7 @@ class CustomizedBase {
       await era.printAndWait([
         '醒来之后，却仍然身处地下室，布局与之前的有所不同，而面前站着衣着有些褶皱、但仍在微笑的 ',
         chara.get_colored_name(),
-        '。',
+        '……',
       ]);
     }
     await era.printAndWait('「咔哒」', { fontSize: '1.5rem' });

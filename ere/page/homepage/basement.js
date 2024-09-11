@@ -347,7 +347,7 @@ module.exports = async (_, save_and_next_week, flags) => {
         async h() {
           sys_change_attr_and_print(0, '体力', -get_random_value(125, 175));
           sys_change_attr_and_print(0, '精力', -get_random_value(100, 150));
-          const beat_list = chara_list.filter(sys_check_awake);
+          const beat_list = chara_list.slice(1).filter(sys_check_awake);
           let win = true;
           for (const chara_id of beat_list) {
             sys_like_chara(chara_id, 0, -get_random_value(75, 125), false);
