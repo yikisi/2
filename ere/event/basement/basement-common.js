@@ -6,7 +6,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const BasementAction = require('#/data/event/basement-action');
+const { basement_status_enum } = require('#/data/basement-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 const desc_replace_type = { chara_sex: 0, my_name: 1 };
@@ -56,6 +56,7 @@ class CustomizedBase {
     this.id = chara_id;
   }
 
+  /** 初入地下室的欢迎 */
   welcome() {
     const me = get_chara_talk(0),
       chara = get_chara_talk(this.id);
@@ -126,8 +127,7 @@ class CustomizedBase {
           return e;
         }),
         '……',
-        new LifeEventMarks(this.id).b_status ===
-        1 << BasementAction.basement_status_enum.fix
+        new LifeEventMarks(this.id).b_status === 1 << basement_status_enum.fix
           ? '正在加固地下室……'
           : '',
       ];

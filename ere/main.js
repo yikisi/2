@@ -488,6 +488,10 @@ module.exports = async () => {
           ],
           [[{ color: get_chara_color(32), content: '爱丽速子' }], '幽白書'],
           [
+            [{ color: get_chara_color(35), content: '胜利奖券（部分地下室）' }],
+            '幽白書',
+          ],
+          [
             [{ color: get_chara_color(37), content: '荣进闪耀' }],
             '爱放箭的袁本初',
           ],
@@ -517,8 +521,16 @@ module.exports = async () => {
             ],
           ],
           [
+            [{ color: get_chara_color(86), content: '目白高峰（部分地下室）' }],
+            'イーウィヤ',
+          ],
+          [
             [{ color: get_chara_color(100), content: '奇锐骏' }],
             '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生',
+          ],
+          [
+            [{ color: get_chara_color(119), content: '梦之旅（地下室）' }],
+            '幽白書',
           ],
           [
             [

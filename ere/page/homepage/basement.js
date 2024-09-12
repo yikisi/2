@@ -25,6 +25,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sort_list } = require('#/utils/list-utils');
 const { log_max_wp, minutes_in_a_day } = require('#/utils/value-utils');
 
+const {
+  action_type_enum,
+  basement_status_enum,
+  escape_enum,
+} = require('#/data/basement-const');
 const BasementAction = require('#/data/event/basement-action');
 const BasementOwners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -103,10 +108,9 @@ module.exports = async (_, save_and_next_week, flags) => {
     await sys_handle_time_in_basement(my_life_marks, basement_owners);
   }
   basement_queue.clean_actions(
-    (e) =>
-      e.chara_id === 0 && e.type === BasementAction.action_type_enum.action_end,
+    (e) => e.chara_id === 0 && e.type === action_type_enum.action_end,
   );
-  my_life_marks.b_status = 1 << BasementAction.action_type_enum.idle;
+  my_life_marks.b_status = 1 << action_type_enum.idle;
   my_life_marks.b_stamina_buff = 0;
   my_life_marks.b_time_buff = 0;
   await era.clear();
@@ -119,7 +123,7 @@ module.exports = async (_, save_and_next_week, flags) => {
         .filter(
           (e) =>
             new LifeEventMarks(e).b_status !==
-            1 << BasementAction.basement_status_enum.outside,
+            1 << basement_status_enum.outside,
         ),
       (e, i) => (!sys_check_awake(e) << 1) + i,
       true,
@@ -134,7 +138,7 @@ module.exports = async (_, save_and_next_week, flags) => {
     if (
       chara_list.length === 2 &&
       new LifeEventMarks(chara_list[1]).b_status ===
-        1 << BasementAction.basement_status_enum.just_back
+        1 << basement_status_enum.just_back
     ) {
       strike = true;
       is_awake = 1;
@@ -196,8 +200,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           get_random_value(60, 90) *
             (1 - (0.5 * Math.log(era.get('base:0:速度'))) / log_max_wp),
         );
-        my_life_marks.b_status =
-          1 << BasementAction.basement_status_enum.escape;
+        my_life_marks.b_status = 1 << basement_status_enum.escape;
         my_life_marks.b_stamina_buff = -3;
         my_life_marks.b_time_buff = -1.5;
         if (
@@ -255,7 +258,7 @@ module.exports = async (_, save_and_next_week, flags) => {
       async h() {
         action_time = get_random_value(5, 10);
         await era.printAndWait([
-          '嫌犯给 ',
+          '地下室主人给 ',
           me.get_colored_name(),
           ' 留下了一些粮食，',
           me.get_colored_name(),
@@ -278,7 +281,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           new BasementAction(
             0,
             my_life_marks.b_timer + 4 * 60,
-            BasementAction.action_type_enum.digestive_end,
+            action_type_enum.digestive_end,
           ),
         );
       },
@@ -309,10 +312,9 @@ module.exports = async (_, save_and_next_week, flags) => {
               (sys_get_strength_ratio_in_fight(0, chara_list[1]) +
                 sys_get_intelligence_ratio_in_fight(0, chara_list[1]))
           ) {
-            new LifeEventMarks(chara_list[1]).b_escape = 3;
+            new LifeEventMarks(chara_list[1]).b_escape = escape_enum.strike;
             await get_custom_basement(chara_list[1]).strike_success();
-            my_life_marks.b_status =
-              1 << BasementAction.basement_status_enum.escape;
+            my_life_marks.b_status = 1 << basement_status_enum.escape;
             my_life_marks.b_now = -1;
             action_time = get_random_value(5, 10);
           } else {
@@ -336,7 +338,7 @@ module.exports = async (_, save_and_next_week, flags) => {
               new BasementAction(
                 0,
                 my_life_marks.b_timer + get_random_value(180, 240),
-                BasementAction.action_type_enum.get_up,
+                action_type_enum.get_up,
               ),
             );
           }
@@ -356,6 +358,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             win =
               get_random_value(0, 100) <
                 100 * sys_get_strength_ratio_in_fight(0, chara_id) && win;
+            win = true;
             if (win) {
               await get_custom_basement(chara_id).battle_success();
             } else {
@@ -373,10 +376,11 @@ module.exports = async (_, save_and_next_week, flags) => {
                   !!my_life_marks.b_now * era.get('flag:极端行为限制') +
                   1)
             ) {
-              beat_list.forEach((e) => (new LifeEventMarks(e).b_escape = 2));
+              beat_list.forEach(
+                (e) => (new LifeEventMarks(e).b_escape = escape_enum.beat),
+              );
               await get_custom_basement(beat_list[0]).battle_escape();
-              my_life_marks.b_status =
-                1 << BasementAction.basement_status_enum.escape;
+              my_life_marks.b_status = 1 << basement_status_enum.escape;
               my_life_marks.b_now = -1;
               action_time = get_random_value(10, 15);
             } else {
@@ -403,7 +407,7 @@ module.exports = async (_, save_and_next_week, flags) => {
               new BasementAction(
                 0,
                 my_life_marks.b_timer + get_random_value(180, 240),
-                BasementAction.action_type_enum.get_up,
+                action_type_enum.get_up,
               ),
             );
           }
@@ -423,8 +427,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             await get_custom_basement(chara_list[1]).ask_release_agree();
             my_life_marks.b_now = -1;
             new LifeEventMarks(chara_list[1]).b_escape = -1;
-            my_life_marks.b_status =
-              1 << BasementAction.basement_status_enum.escape;
+            my_life_marks.b_status = 1 << basement_status_enum.escape;
           } else {
             await get_custom_basement(chara_list[1]).ask_release_reject();
             sys_like_chara(chara_list[1], 0, -get_random_value(25, 75), false);
@@ -437,13 +440,10 @@ module.exports = async (_, save_and_next_week, flags) => {
       {
         async h() {
           action_time = get_random_value(1, 5);
-          const date = my_life_marks.b_timer / minutes_in_a_day + 1,
-            hours = Math.floor((my_life_marks.b_timer % minutes_in_a_day) / 60),
-            minutes = my_life_marks.b_timer % 60;
           await get_custom_basement(chara_list[1]).ask_time(
-            date,
-            hours,
-            minutes,
+            my_life_marks.b_timer / minutes_in_a_day + 1,
+            Math.floor((my_life_marks.b_timer % minutes_in_a_day) / 60),
+            my_life_marks.b_timer % 60,
           );
         },
         n: '询问时间',
@@ -531,8 +531,8 @@ module.exports = async (_, save_and_next_week, flags) => {
         0,
         my_life_marks.b_timer + action_time,
         sys_check_awake(0)
-          ? BasementAction.action_type_enum.action_end
-          : BasementAction.action_type_enum.get_up,
+          ? action_type_enum.action_end
+          : action_type_enum.get_up,
       ),
     );
   }
@@ -541,8 +541,8 @@ module.exports = async (_, save_and_next_week, flags) => {
       await sys_handle_time_in_basement(my_life_marks, basement_owners);
     } while (
       !sys_check_awake(0) ||
-      my_life_marks.b_status === 1 << BasementAction.basement_status_enum.sex ||
-      my_life_marks.b_status === 1 << BasementAction.basement_status_enum.escape
+      my_life_marks.b_status === 1 << basement_status_enum.sex ||
+      my_life_marks.b_status === 1 << basement_status_enum.escape
     );
   }
 };

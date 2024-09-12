@@ -11,25 +11,85 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
-const event_hooks = require('#/data/event/event-hooks');
-
 const chara_colors = require('#/data/chara-colors').chara_colors[7];
+const { escape_enum } = require('#/data/basement-const');
+const event_hooks = require('#/data/event/event-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 /** @type {Record<string,function(HookArg,*):Promise<*>>} */
 const handlers = {};
 
 handlers[event_hooks.select] = () => {
-  if (!sys_check_awake(7)) {
+  const life_marks = new LifeEventMarks(7);
+  if (sys_check_awake(7)) {
+    const gold_ship = get_chara_talk(7),
+      me = get_chara_talk(0);
+    if (sys_check_awake(0) && life_marks.b_escape) {
+      switch (life_marks.b_escape) {
+        case escape_enum.sneak:
+          gold_ship.say([
+            me.get_colored_name(),
+            ' 是那种会自己溜出去玩，然后自觉回家的宠物吗？',
+          ]);
+          gold_ship.say([
+            { color: chara_colors[1], content: '也好，省得麻烦。' },
+          ]);
+          break;
+        case escape_enum.beat:
+          gold_ship.say('呵呵呵，没想到竟然栽在你手里了。');
+          gold_ship.say([
+            { color: chara_colors[1], content: '『下次』可得更努力点哦。' },
+          ]);
+          break;
+        case escape_enum.strike:
+          gold_ship.say('喂喂，对自己的爱马下手那么狠，也太绝情了吧？');
+          gold_ship.say([
+            {
+              color: chara_colors[1],
+              content: '不过小金船我可能喜欢有魄力的训练员呢❤️',
+            },
+          ]);
+      }
+      life_marks.b_escape = 0;
+    } else {
+      gold_ship.say(
+        Math.random() < 0.5
+          ? '噢！你找本金船大人有事吗？'
+          : '跟本金船大人走吧！',
+      );
+    }
+  } else {
     throw new Error();
   }
-  get_chara_talk(7).say(
-    Math.random() < 0.5 ? '噢！你找本金船大人有事吗？' : '跟本金船大人走吧！',
-  );
 };
 
 handlers[event_hooks.good_morning] = () => {
-  const gold_ship = get_chara_talk(7);
-  if (era.get('base:7:体力') < 0.45 * era.get('maxbase:7:体力')) {
+  const gold_ship = get_chara_talk(7),
+    life_marks = new LifeEventMarks(7);
+  if (life_marks.b_escape) {
+    switch (life_marks.b_escape) {
+      case escape_enum.sneak:
+        gold_ship.say('少侠果真好身手，竟然乘小金船不注意的时候就溜走了。');
+        gold_ship.say([
+          { color: chara_colors[1], content: '呵呵，下次得加紧严防了哪……' },
+        ]);
+        break;
+      case escape_enum.beat:
+        gold_ship.say('不愧是你啊，竟然正面打败了金船大魔王。');
+        gold_ship.say([
+          {
+            color: chara_colors[1],
+            content: '那么厉害的勇者应该不会害怕更多挑战的，你说对吗？',
+          },
+        ]);
+        break;
+      case escape_enum.strike:
+        gold_ship.say('呵呵呵，没想到竟然栽在你手里了。');
+        gold_ship.say([
+          { color: chara_colors[1], content: '『下次』可得更努力点哦。' },
+        ]);
+    }
+  } else if (era.get('base:7:体力') < 0.45 * era.get('maxbase:7:体力')) {
     gold_ship.say(
       Math.random() < 0.5
         ? '好累啊……累得就像蝉生已经到达第二周的蝉子一样……'

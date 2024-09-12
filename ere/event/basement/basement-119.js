@@ -11,126 +11,6 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 /** 梦之旅 - 地下室 */
 module.exports = class extends CustomizedBase {
   /** @author 幽白書 */
-  welcome() {
-    const dj = get_chara_talk(this.id),
-      me = get_chara_talk(0),
-      callname = sys_get_callname(this.id, 0);
-    era.drawLine();
-    era.print([me.get_colored_name(), ' 悠悠醒转……']);
-    era.println();
-    dj.say(['睡得还舒服吗，', callname, '？']);
-    dj.say('如果舒服的话那就太好了……神经大条？不，不是的。');
-    dj.say(
-      '这说明，哪怕只是浅意识，您也已经将这里视作能安心的地方……视作『家』了，不是吗？',
-    );
-    dj.say('不是啊……但，对我来说，就是这样的哦。');
-    dj.say('只有有您在的地方，才是我的归处。');
-    era.drawLine();
-  }
-
-  /** @author 幽白書 */
-  get_up() {
-    const dj = get_chara_talk(this.id),
-      callname = sys_get_callname(this.id, 0),
-      life_marks = new LifeEventMarks(this.id);
-    era.print([dj.get_colored_name(), ' 醒了过来……']);
-    if (life_marks.b_start) {
-      era.println();
-      dj.say(['嗯……', callname, '，睡得还好吗？']);
-      dj.say(
-        '为什么会在这里……比起这个，抱起来的手感如何呢？这正符合某人兴趣的娇小身躯。',
-      );
-      dj.say('……很舒服……吗？呵呵，您的诚实还是一如既往的令人心喜。');
-    }
-  }
-
-  /** @author 幽白書 */
-  back_basement() {
-    const dj = get_chara_talk(this.id),
-      callname = sys_get_callname(this.id, 0),
-      life_marks = new LifeEventMarks(this.id);
-    dj.say([callname, '，我回来了。']);
-    if (life_marks.b_start) {
-      dj.say(['……啊，', callname, ' 醒了吗？']);
-      dj.say('总之，我回来了。嗯……啾……咕啾……');
-      dj.say('我在做什么？只是回家时的仪式而已。');
-      dj.say('地下室？不，家指的，当然是您了……我最亲爱的，肉体与灵魂的归属❤️');
-    }
-  }
-
-  /** @author 幽白書 */
-  out() {
-    const dj = get_chara_talk(this.id),
-      callname = sys_get_callname(this.id, 0);
-    era.print([dj.get_colored_name(), ' 还有其他的事要做，即将离开……']);
-    era.println();
-    dj.say(['对不起，', callname, '……我必须先离开了。']);
-    dj.say(
-      '如果有什么烦恼的话可以为我分忧……？明明我是将您监禁在这里的人，您却依然希望能够帮上我的忙吗？',
-    );
-    dj.say(
-      '真是个烂好人呐……不过，不用了，因为您只需要待在这里，作为我唯一的『归处』，就已经是帮我最大的忙了。',
-    );
-  }
-
-  /** @author 幽白書 */
-  find_escape(out_of_prison, s_level_up, is_back) {
-    const dj = get_chara_talk(this.id),
-      me = get_chara_talk(0),
-      callname = sys_get_callname(this.id, 0);
-    if (!out_of_prison) {
-      era.drawLine();
-      if (is_back) {
-        dj.say('哎呀……');
-        dj.say([callname, '……您尝试打开这个锁了吗？']);
-        dj.say('打不开？……呵呵，那真是令人高兴的消息。');
-        dj.say(
-          '像您一样正直的人，是绝对打不开这样的锁的……这是，为了我这种心思扭曲之人而准备的锁……',
-        );
-        dj.say('所以，对于您无法将这锁打开这件事，我感到由衷的庆幸及欢喜。');
-      } else {
-        dj.say('无法解开吗？');
-        era.println();
-        era.print([
-          '听见 ',
-          dj.get_colored_name(),
-          ' 的声音，',
-          me.get_colored_name(),
-          ' 下意识投降般地将手举起。',
-        ]);
-        era.print([
-          dj.get_colored_name(),
-          ' 不慌不忙的走到 ',
-          me.get_colored_name(),
-          ' 身旁，只用一根铁丝，快速两下，连 ',
-          me.get_colored_name(),
-          ' 都看不清对方到底做了什么。',
-        ]);
-        era.print([
-          '困了 ',
-          me.get_colored_name(),
-          ' 许久的锁就在眼前轻而易举的被解开了。',
-        ]);
-        era.print('随后，锁又被关了回去。');
-        era.println();
-        dj.say(['呵呵……作为余兴表演，还满意吗？', callname, '？']);
-        dj.say(
-          '不必感到灰心……适才适所，由于父亲是金匠的关系，在这些机关上我也略有心得而已。',
-        );
-        dj.say([callname, '，不是也有自己更擅长的事吗？比如……床第之事❤️']);
-      }
-      era.println();
-      era.print([
-        me.get_colored_name(),
-        ' 被 ',
-        dj.get_colored_name(),
-        ' 带回了床旁……',
-      ]);
-      era.drawLine();
-    }
-  }
-
-  /** @author 幽白書 */
   async ask_release_agree() {
     const callname = sys_get_callname(119, 0),
       dj = get_chara_talk(this.id),
@@ -241,5 +121,317 @@ module.exports = class extends CustomizedBase {
       ' 的手腕，那里挥发着最为浓郁的香味。',
     ]);
     await era.printAndWait(['——只属于 ', dj.get_colored_name(), ' 的香味。']);
+  }
+
+  /** @author 幽白書 */
+  back_basement() {
+    const dj = get_chara_talk(this.id),
+      callname = sys_get_callname(this.id, 0),
+      life_marks = new LifeEventMarks(this.id);
+    dj.say([callname, '，我回来了。']);
+    if (life_marks.b_start) {
+      dj.say(['……啊，', callname, ' 醒了吗？']);
+      dj.say('总之，我回来了。嗯……啾……咕啾……');
+      dj.say('我在做什么？只是回家时的仪式而已。');
+      dj.say('地下室？不，家指的，当然是您了……我最亲爱的，肉体与灵魂的归属❤️');
+    }
+  }
+
+  /** @author 幽白書 */
+  async battle_escape() {
+    const dj = get_chara_talk(this.id),
+      me = get_chara_talk(0);
+    era.drawLine();
+    await era.printAndWait('解开了。');
+    await era.printAndWait([
+      '最后一层锁……看着熟悉的钥匙孔形状，',
+      me.get_colored_name(),
+      ' 回到晕倒在地的 ',
+      dj.get_colored_name(),
+      ' 身旁。',
+    ]);
+    await era.printAndWait([
+      '那熟悉的形状，不正是 ',
+      dj.get_colored_name(),
+      ' 的耳饰吗？',
+    ]);
+    era.println();
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 将 ',
+      dj.get_colored_name(),
+      ' 的头饰在不惊醒对方的情况下轻柔取下，将最后一层机关打开。',
+    ]);
+    era.println();
+    await era.printAndWait([
+      '随着机关的打开，一捲被卷起的信纸落到了 ',
+      me.get_colored_name(),
+      ' 的手上。',
+    ]);
+    await era.printAndWait([
+      '信纸中书写着对 ',
+      me.get_colored_name(),
+      ' 的爱意及歉意。',
+    ]);
+    era.println();
+    await era.printAndWait('……这是真情流露写下的告白吗？');
+    await era.printAndWait('又或者，是又一层的算计？');
+    await era.printAndWait([
+      '看着依旧躺在地上的 ',
+      dj.get_colored_name(),
+      '，',
+      me.get_colored_name(),
+      ' 犹豫了一会。',
+    ]);
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 回到 ',
+      dj.get_colored_name(),
+      ' 身边，将那瘫软的身体背起。',
+    ]);
+    await era.printAndWait([
+      '最起码，这个地下室绝对不是适合',
+      dj.sex,
+      '待的地方……',
+    ]);
+    era.drawLine();
+  }
+
+  /** @author 幽白書 */
+  async battle_prison() {
+    const dj = get_chara_talk(this.id),
+      me = get_chara_talk(0),
+      callname = sys_get_callname(this.id, 0);
+    era.drawLine();
+    await era.printAndWait('前面的机关都解开了。');
+    await era.printAndWait([
+      '最后一层锁……看着熟悉的钥匙孔形状，',
+      me.get_colored_name(),
+      ' 却怎么也想不起，到底在哪里看过这样的东西。',
+    ]);
+    era.println();
+    await era.printAndWait([
+      '时间缓缓流逝，',
+      me.get_colored_name(),
+      ' 无助的用力拉扯门锁，却毫无帮助……',
+    ]);
+    era.println();
+    await dj.say_and_wait(['打不开吗，', callname, '？']);
+    era.println();
+    await era.printAndWait('终于，身后的声音响起。');
+    await era.printAndWait('徒劳的挣扎已经结束。');
+    era.println();
+    await dj.say_and_wait('……果然，还是无法取得您的信任啊，令人难过……');
+    era.println();
+    await era.printAndWait('明明说着难过，但却看不出有任何沮丧的表现。');
+    era.println();
+    await dj.say_and_wait([
+      '不过……据我所知，信赖是可以培养的，我相信，只要 ',
+      callname,
+      ' 对我了解的更多，一定会更加信任我的吧？',
+    ]);
+    await dj.say_and_wait('所以请，更加了解我的身体，我的一切吧……');
+    era.println();
+    await era.printAndWait([
+      '连抵抗的机会都没有，',
+      me.get_colored_name(),
+      ' 便被 ',
+      dj.get_colored_name(),
+      ' 按倒在地……',
+    ]);
+    await era.printAndWait([
+      '只余 ',
+      dj.get_colored_name(),
+      ' 的头饰在地下室昏暗的灯光下闪烁着银色的光芒……',
+    ]);
+    era.drawLine();
+  }
+
+  async battle_success() {}
+
+  /** @author 幽白書 */
+  find_escape(out_of_prison, s_level_up, is_back) {
+    const dj = get_chara_talk(this.id),
+      me = get_chara_talk(0),
+      callname = sys_get_callname(this.id, 0);
+    if (!out_of_prison) {
+      era.drawLine();
+      if (is_back) {
+        dj.say('哎呀……');
+        dj.say([callname, '……您尝试打开这个锁了吗？']);
+        dj.say('打不开？……呵呵，那真是令人高兴的消息。');
+        dj.say(
+          '像您一样正直的人，是绝对打不开这样的锁的……这是，为了我这种心思扭曲之人而准备的锁……',
+        );
+        dj.say('所以，对于您无法将这锁打开这件事，我感到由衷的庆幸及欢喜。');
+      } else {
+        dj.say('无法解开吗？');
+        era.println();
+        era.print([
+          '听见 ',
+          dj.get_colored_name(),
+          ' 的声音，',
+          me.get_colored_name(),
+          ' 下意识投降般地将手举起。',
+        ]);
+        era.print([
+          dj.get_colored_name(),
+          ' 不慌不忙的走到 ',
+          me.get_colored_name(),
+          ' 身旁，只用一根铁丝，快速两下，连 ',
+          me.get_colored_name(),
+          ' 都看不清对方到底做了什么。',
+        ]);
+        era.print([
+          '困了 ',
+          me.get_colored_name(),
+          ' 许久的锁就在眼前轻而易举的被解开了。',
+        ]);
+        era.print('随后，锁又被关了回去。');
+        era.println();
+        dj.say(['呵呵……作为余兴表演，还满意吗？', callname, '？']);
+        dj.say(
+          '不必感到灰心……适才适所，由于父亲是金匠的关系，在这些机关上我也略有心得而已。',
+        );
+        dj.say([callname, '，不是也有自己更擅长的事吗？比如……床第之事❤️']);
+      }
+      era.println();
+      era.print([
+        me.get_colored_name(),
+        ' 被 ',
+        dj.get_colored_name(),
+        ' 带回了床旁……',
+      ]);
+      era.drawLine();
+    }
+  }
+
+  /** @author 幽白書 */
+  get_up() {
+    const dj = get_chara_talk(this.id),
+      callname = sys_get_callname(this.id, 0),
+      life_marks = new LifeEventMarks(this.id);
+    era.print([dj.get_colored_name(), ' 醒了过来……']);
+    if (life_marks.b_start) {
+      era.println();
+      dj.say(['嗯……', callname, '，睡得还好吗？']);
+      dj.say(
+        '为什么会在这里……比起这个，抱起来的手感如何呢？这正符合某人兴趣的娇小身躯。',
+      );
+      dj.say('……很舒服……吗？呵呵，您的诚实还是一如既往的令人心喜。');
+    }
+  }
+
+  /** @author 幽白書 */
+  out() {
+    const dj = get_chara_talk(this.id),
+      callname = sys_get_callname(this.id, 0);
+    era.drawLine();
+    era.print([dj.get_colored_name(), ' 还有其他的事要做，即将离开……']);
+    era.println();
+    dj.say(['对不起，', callname, '……我必须先离开了。']);
+    dj.say(
+      '如果有什么烦恼的话可以为我分忧……？明明我是将您监禁在这里的人，您却依然希望能够帮上我的忙吗？',
+    );
+    dj.say(
+      '真是个烂好人呐……不过，不用了，因为您只需要待在这里，作为我唯一的『归处』，就已经是帮我最大的忙了。',
+    );
+    era.drawLine();
+  }
+
+  start_fixing() {
+    const dj = get_chara_talk(this.id),
+      callname = sys_get_callname(this.id, 0);
+    era.drawLine();
+    dj.say(['啊，', callname, '，可以帮我个忙吗？']);
+    dj.say(
+      '是的，请扶我一下……这个梯子，稍微有点抖呢……真是惭愧，由于身高不够，让您看见了这样的丑态。',
+    );
+    dj.say('呼……好了，谢谢您。');
+    dj.say('在做什么？只是在给门上新的锁而已……感谢您的帮助。');
+    era.println();
+    era.print(['……早知道就不帮', dj.sex, '了……']);
+    era.drawLine();
+  }
+
+  /** @author 幽白書 */
+  async strike_fail() {
+    const dj = get_chara_talk(this.id),
+      me = get_chara_talk(0),
+      callname = sys_get_callname(this.id, 0);
+    await era.printAndWait('失败了……');
+    await era.printAndWait([dj.get_colored_name(), ' 转过头来，要生气了吗？']);
+    era.println();
+    await dj.say_and_wait([callname, '……很努力了哦……']);
+    era.println();
+    await era.printAndWait([
+      dj.get_colored_name(),
+      ' 轻轻地抱住了 ',
+      me.get_colored_name(),
+      '。',
+    ]);
+    era.println();
+    await dj.say_and_wait(
+      '努力学习了自己不擅长的技术……真的，要是稍微再用力一些，就能让我陷入短暂眩晕了……',
+    );
+    era.println();
+    await era.printAndWait([
+      dj.get_colored_name(),
+      ' 娇小的身躯，更紧地钻入怀中。',
+    ]);
+    era.println();
+    await dj.say_and_wait(
+      '但除此之外，人体也还是有着其他可以利用的弱点……比如……',
+    );
+    era.println();
+    await era.printAndWait([
+      dj.get_colored_name(),
+      ' 环抱的手，以不轻不重的力道敲中了腰上的某个地方。',
+    ]);
+    await era.printAndWait('瞬间，身体变得动弹不得……');
+    era.println();
+    await dj.say_and_wait('那么，请和我回去好好学习吧……关于人体的知识❤️');
+    era.println();
+    await era.printAndWait([me.get_colored_name(), ' 陷入了黑暗……']);
+  }
+
+  /** @author 幽白書 */
+  async strike_success() {
+    const dj = get_chara_talk(this.id),
+      me = get_chara_talk(0);
+    await dj.say_and_wait('到最后……我也还是无法获得您的信任吗？');
+    era.println();
+    if (!era.get('cflag:0:种族')) {
+      await era.printAndWait([
+        '虽然是人类的力气，但对 ',
+        dj.get_colored_name(),
+        ' 这样娇小的',
+        dj.get_uma_sex_title(),
+        '却也已经足够',
+      ]);
+    }
+    await era.printAndWait([
+      dj.get_colored_name(),
+      ' 露出了悲伤的表情，缓缓倒地……',
+    ]);
+    await era.printAndWait([me.get_colored_name(), ' 逃离了地下室……']);
+  }
+
+  /** @author 幽白書 */
+  welcome() {
+    const dj = get_chara_talk(this.id),
+      me = get_chara_talk(0),
+      callname = sys_get_callname(this.id, 0);
+    era.drawLine();
+    era.print([me.get_colored_name(), ' 悠悠醒转……']);
+    era.println();
+    dj.say(['睡得还舒服吗，', callname, '？']);
+    dj.say('如果舒服的话那就太好了……神经大条？不，不是的。');
+    dj.say(
+      '这说明，哪怕只是浅意识，您也已经将这里视作能安心的地方……视作『家』了，不是吗？',
+    );
+    dj.say('不是啊……但，对我来说，就是这样的哦。');
+    dj.say('只有有您在的地方，才是我的归处。');
+    era.drawLine();
   }
 };

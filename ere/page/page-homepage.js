@@ -36,6 +36,10 @@ const {
 const { gacha, get_random_entry } = require('#/utils/list-utils');
 const { get_random_value, minutes_in_a_day } = require('#/utils/value-utils');
 
+const {
+  action_type_enum,
+  basement_status_enum,
+} = require('#/data/basement-const');
 const { buff_colors } = require('#/data/color-const');
 const BasementAction = require('#/data/event/basement-action');
 const BasementOwners = require('#/data/event/basement-owners');
@@ -329,11 +333,7 @@ module.exports = async () => {
           owner_marks = new LifeEventMarks(owner);
         era.set('status:0:沉睡', 1);
         basement_queue.add_action(
-          new BasementAction(
-            0,
-            my_life_marks.b_timer,
-            BasementAction.action_type_enum.get_up,
-          ),
+          new BasementAction(0, my_life_marks.b_timer, action_type_enum.get_up),
         );
         my_life_marks.b_enhance = 1;
         owner_marks.b_s_level = Math.max(
@@ -350,21 +350,16 @@ module.exports = async () => {
         );
         my_life_marks.b_start = owner_marks.b_start = 1;
         my_life_marks.b_status = owner_marks.b_status =
-          1 << BasementAction.basement_status_enum.idle;
+          1 << basement_status_enum.idle;
         owner_marks.b_escape = 0;
         if (
           era.get('flag:当前回合数') % 48 > 0 &&
           my_life_marks.b_timer > 6 * 60 + 30 &&
           my_life_marks.b_timer < 17 * 60
         ) {
-          owner_marks.b_status =
-            1 << BasementAction.basement_status_enum.outside;
+          owner_marks.b_status = 1 << basement_status_enum.outside;
           basement_queue.add_action(
-            new BasementAction(
-              owner,
-              17 * 60,
-              BasementAction.action_type_enum.back_basement,
-            ),
+            new BasementAction(owner, 17 * 60, action_type_enum.back_basement),
           );
         }
         const rescue_chara = get_random_entry(
@@ -383,7 +378,7 @@ module.exports = async () => {
             new BasementAction(
               rescue_chara,
               3 * minutes_in_a_day + get_random_value(0, minutes_in_a_day),
-              BasementAction.action_type_enum.rescue,
+              action_type_enum.rescue,
             ),
           );
         }
