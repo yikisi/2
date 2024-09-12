@@ -29,23 +29,48 @@ module.exports = class extends CustomizedBase {
   }
 
   /** @author 幽白書 */
+  get_up() {
+    const dj = get_chara_talk(this.id),
+      callname = sys_get_callname(this.id, 0),
+      life_marks = new LifeEventMarks(this.id);
+    era.print([dj.get_colored_name(), ' 醒了过来……']);
+    if (life_marks.b_start) {
+      era.println();
+      dj.say(['嗯……', callname, '，睡得还好吗？']);
+      dj.say(
+        '为什么会在这里……比起这个，抱起来的手感如何呢？这正符合某人兴趣的娇小身躯。',
+      );
+      dj.say('……很舒服……吗？呵呵，您的诚实还是一如既往的令人心喜。');
+    }
+  }
+
+  /** @author 幽白書 */
   back_basement() {
     const dj = get_chara_talk(this.id),
       callname = sys_get_callname(this.id, 0),
       life_marks = new LifeEventMarks(this.id);
-    if (!life_marks.b_start) {
-      era.print([dj.get_colored_name(), ' 还有其他的事要做，即将离开……']);
-      era.println();
-      dj.say(['对不起，', callname, '……我必须先离开了。']);
-      dj.say(
-        '如果有什么烦恼的话可以为我分忧……？明明我是将您监禁在这里的人，您却依然希望能够帮上我的忙吗？',
-      );
-      dj.say(
-        '真是个烂好人呐……不过，不用了，因为您只需要待在这里，作为我唯一的『归处』，就已经是帮我最大的忙了。',
-      );
-    } else {
-      super.back_basement();
+    dj.say([callname, '，我回来了。']);
+    if (life_marks.b_start) {
+      dj.say(['……啊，', callname, ' 醒了吗？']);
+      dj.say('总之，我回来了。嗯……啾……咕啾……');
+      dj.say('我在做什么？只是回家时的仪式而已。');
+      dj.say('地下室？不，家指的，当然是您了……我最亲爱的，肉体与灵魂的归属❤️');
     }
+  }
+
+  /** @author 幽白書 */
+  out() {
+    const dj = get_chara_talk(this.id),
+      callname = sys_get_callname(this.id, 0);
+    era.print([dj.get_colored_name(), ' 还有其他的事要做，即将离开……']);
+    era.println();
+    dj.say(['对不起，', callname, '……我必须先离开了。']);
+    dj.say(
+      '如果有什么烦恼的话可以为我分忧……？明明我是将您监禁在这里的人，您却依然希望能够帮上我的忙吗？',
+    );
+    dj.say(
+      '真是个烂好人呐……不过，不用了，因为您只需要待在这里，作为我唯一的『归处』，就已经是帮我最大的忙了。',
+    );
   }
 
   /** @author 幽白書 */
@@ -92,7 +117,7 @@ module.exports = class extends CustomizedBase {
         dj.say(
           '不必感到灰心……适才适所，由于父亲是金匠的关系，在这些机关上我也略有心得而已。',
         );
-        dj.say([callname, '，不是也有自己更擅长的事吗？比如……床第之事♡']);
+        dj.say([callname, '，不是也有自己更擅长的事吗？比如……床第之事❤️']);
       }
       era.println();
       era.print([

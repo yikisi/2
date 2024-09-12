@@ -536,10 +536,7 @@ module.exports = async (_, save_and_next_week, flags) => {
       ),
     );
   }
-  if (
-    action_time ||
-    my_life_marks.b_status === 1 << BasementAction.basement_status_enum.sex
-  ) {
+  if (ret < 400) {
     do {
       await sys_handle_time_in_basement(my_life_marks, basement_owners);
     } while (
