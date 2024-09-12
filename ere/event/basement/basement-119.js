@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+} = require('#/system/sys-calc-chara-others');
 
 const CustomizedBase = require('#/event/basement/basement-common');
 
@@ -306,6 +309,91 @@ module.exports = class extends CustomizedBase {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
+  async flatter(supporter) {
+    const dj = get_chara_talk(this.id),
+      me = get_chara_talk(0),
+      m_call_d = sys_get_colored_callname(0, this.id),
+      d_call_m = sys_get_colored_callname(this.id, 0);
+    era.println();
+    if (Math.random() < 0.5) {
+      await me.say_and_wait([
+        '对不起，',
+        m_call_d,
+        '，一定是我做了什么惹 ',
+        m_call_d,
+        ' 不开心的事吧，我会改的……',
+      ]);
+      era.println();
+      await era.printAndWait('总而言之，先道歉吧。');
+      await era.printAndWait([
+        dj.get_colored_name(),
+        ' 听完之后靠近了 ',
+        me.get_colored_name(),
+        '。',
+      ]);
+      await era.printAndWait([
+        '然后………用手指抵住了 ',
+        me.get_colored_name(),
+        ' 的嘴。',
+      ]);
+      era.println();
+      await dj.say_and_wait('嘘……');
+      await dj.say_and_wait('请不要用我最喜欢的那张嘴，吐出这样的谎言……');
+      await dj.say_and_wait('其实，您根本不觉得自己有什么做错吧？');
+      era.println();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 犹豫再三，还是点了点头。',
+      ]);
+      await era.printAndWait([
+        dj.get_colored_name(),
+        ' 露出责备的表情，将身体俯了过来。',
+      ]);
+      era.println();
+      await dj.say_and_wait(
+        '您的唇舌，不是为了谎言而存在的……不过没有关系，就让我来教育它，它的存在意义为何吧……啾……嗯……咕啾……',
+      );
+    } else {
+      await me.say_and_wait([
+        '对不起，',
+        m_call_d,
+        '，我仔细想了想，果然还是不知道……是我不小心在什么时候惹你不高兴了吗？才让你把我关在这里……',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '不管三七二十一的道歉来取得 ',
+        dj.get_colored_name(),
+        ' 的原谅固然容易……',
+      ]);
+      await era.printAndWait([
+        '但这样欺骗 ',
+        dj.get_colored_name(),
+        ' 果然还是不太好的吧……',
+      ]);
+      await era.printAndWait('最起码，要在知道错在哪里之后才道歉。');
+      era.println();
+      await dj.say_and_wait('……');
+      await dj.say_and_wait([d_call_m, '……您的诚实，还是一如既往的令人欣喜……']);
+      await dj.say_and_wait(
+        '不过……没有，您没有做错任何事，只是，我的心因无法独占您的爱而感到焦虑而已……',
+      );
+      era.println();
+      await me.say_and_wait('可是……');
+      era.println();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 想再说些什么，然而嘴唇却被堵住。',
+      ]);
+      era.println();
+      await dj.say_and_wait([
+        '……嗯，我改变想法了……',
+        d_call_m,
+        '，您确实错了……你的唇，太过聒噪了……请您好好的发挥它唯一的用途……用来倾诉对我的爱意❤️',
+      ]);
+    }
+  }
+
   /** @author 幽白書 */
   get_up() {
     const dj = get_chara_talk(this.id),
@@ -344,9 +432,11 @@ module.exports = class extends CustomizedBase {
       callname = sys_get_callname(this.id, 0);
     era.drawLine();
     dj.say(['啊，', callname, '，可以帮我个忙吗？']);
-    dj.say(
-      '是的，请扶我一下……这个梯子，稍微有点抖呢……真是惭愧，由于身高不够，让您看见了这样的丑态。',
-    );
+    if (era.get('cflag:0:身高') > era.get('cflag:119:身高')) {
+      dj.say(
+        '是的，请扶我一下……这个梯子，稍微有点抖呢……真是惭愧，由于身高不够，让您看见了这样的丑态。',
+      );
+    }
     dj.say('呼……好了，谢谢您。');
     dj.say('在做什么？只是在给门上新的锁而已……感谢您的帮助。');
     era.println();

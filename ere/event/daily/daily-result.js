@@ -166,6 +166,7 @@ handlers[event_hooks.office_game] = async (chara_id) => {
       sys_like_chara(chara_id, 0, get_random_value(5, 10)) || wait_flag;
     wait_flag =
       (Math.random() < 0.25 && sys_change_motivation(chara_id, 1)) || wait_flag;
+    sys_change_pressure(chara_id, -get_random_value(100, 300));
   }
   wait_flag && (await era.waitAnyKey());
 };

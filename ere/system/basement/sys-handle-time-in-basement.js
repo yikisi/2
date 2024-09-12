@@ -208,6 +208,18 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
         false,
       );
     }
+    const life_marks = new LifeEventMarks(e),
+      relation = era.get(`relation:${e}:0`);
+    if (
+      !is_rape &&
+      relation > 0 &&
+      life_marks.b_s_level > 1 &&
+      get_random_value(0, 100) <
+        (100 * relation) /
+          ((era.get('flag:极端行为限制') || 1) * era.get(`love:${e}`))
+    ) {
+      life_marks.b_s_level--;
+    }
     basement_queue.add_action(
       new BasementAction(e, sex_end_time, action_type_enum.stop_sex),
     );

@@ -2,6 +2,7 @@ const { createHash } = require('crypto');
 
 const era = require('#/era-electron');
 
+const sys_handle_prison_guides = require('#/system/basement/sys-handle-prison-guides');
 const sys_handle_time_in_basement = require('#/system/basement/sys-handle-time-in-basement');
 const sys_get_intelligence_ratio_in_fight = require('#/system/ero/fight/sys-get-intelligence-ratio');
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
@@ -178,18 +179,34 @@ module.exports = async (_, save_and_next_week, flags) => {
         await era.printAndWait([
           me.get_colored_name(),
           ' 尝试讨好',
-          ...(chara_list.length === 2
+          ...(is_awake === 2
             ? [' ', get_chara_talk(chara_list[1]).get_colored_name()]
             : [get_chara_talk(chara_list[1]).sex, '们']),
           '……',
         ]);
-        await get_custom_basement(chara_list[1]).flatter(chara_list[2]);
-        if (chara_list[2]) {
+        await get_custom_basement(chara_list[1]).flatter(
+          is_awake === 2 ? chara_list[2] : undefined,
+        );
+        if (is_awake === 2) {
           await get_custom_basement(chara_list[2]).flatter(chara_list[1]);
         }
         chara_list
           .slice(1)
-          .forEach((e) => sys_like_chara(e, 0, get_random_value(5, 10), false));
+          .filter((_, i) => i < is_awake)
+          .forEach((e) => {
+            sys_like_chara(e, 0, get_random_value(5, 10), false);
+            const life_marks = new LifeEventMarks(e),
+              relation = era.get(`relation:${e}:0`);
+            if (
+              relation > 0 &&
+              life_marks.b_s_level > 1 &&
+              get_random_value(0, 100) <
+                (100 * relation) /
+                  ((era.get('flag:极端行为限制') || 1) * era.get(`love:${e}`))
+            ) {
+              life_marks.b_s_level--;
+            }
+          });
       },
       n: '虚与委蛇',
     });
@@ -491,6 +508,12 @@ module.exports = async (_, save_and_next_week, flags) => {
           }
         : undefined,
       {
+        accelerator: 500,
+        config: { width: 6 },
+        content: '逃生指南',
+        type: 'button',
+      },
+      {
         accelerator: 900,
         config: { width: 6 },
         content: '保存进度',
@@ -511,6 +534,9 @@ module.exports = async (_, save_and_next_week, flags) => {
       break;
     case 401:
       await print_chara_info(chara_list[1], chara_list);
+      break;
+    case 500:
+      await sys_handle_prison_guides();
       break;
     case 900:
       await print_save_page();

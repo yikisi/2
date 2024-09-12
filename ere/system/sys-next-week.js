@@ -64,6 +64,7 @@ const {
   get_talent_bust_size,
   get_trainer_title,
 } = require('#/data/info-generator');
+const { location_enum } = require('#/data/locations');
 const LoveLimitStatus = require('#/data/love-limit-status');
 const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -158,7 +159,10 @@ async function sys_next_week() {
       } else {
         await sys_rape_in_sleeping(act.chara_id, act.supporter);
       }
-      if (era.get('flag:床伴')) {
+      if (
+        era.get('flag:床伴') ||
+        era.get('flag:当前位置') === location_enum.basement
+      ) {
         break;
       }
     }

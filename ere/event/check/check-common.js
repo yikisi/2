@@ -209,7 +209,7 @@ class CustomizedCheck {
 
   /** @returns {boolean} */
   is_prison() {
-    if (common_no_action_check(this.id)) {
+    if (common_no_action_check(this.id) || era.get('cflag:0:位置') !== 0) {
       return false;
     }
     const love = era.get(`love:${this.id}`),
