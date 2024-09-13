@@ -24,7 +24,7 @@
 バージョン,0900
 
 ; 游戏当前支持的最低版本，低于此版本的存档会拒绝读取 [GAMEBASE_ALLOWVERSION]
-バージョン違い認める,0800
+バージョン違い認める,0900
 
 发布页,https://gitgud.io/umaera/erauma/-/releases/permalink/latest
 
