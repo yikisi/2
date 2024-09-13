@@ -460,21 +460,27 @@ async function race_page(race) {
     }
   }
   fame_reward += race_title_reward * 40;
+  let trainer_hentai_flag = false;
   if (
     era.get('cflag:0:妊娠阶段') >> pregnant_stage_enum.late > 0 &&
     team_list.findIndex((uma) => uma.index_chara === 0) === -1
   ) {
+    trainer_hentai_flag = true;
     fame_reward -= 50;
   }
   if (fame_reward !== 0 && (fame_reward > 0 || !is_pregnant_slave)) {
     sys_change_fame(fame_reward);
     if (fame_reward > 0) {
       await era.printAndWait([
-        '因为队伍成员的',
-        '出色表现',
-        '，社会对 ',
+        '因为队伍成员的出色表现，社会对 ',
         get_chara_talk(0).get_colored_name(),
         ' 的评价上升了！',
+      ]);
+    } else if (!hentai_flag && trainer_hentai_flag) {
+      await era.printAndWait([
+        '虽然队伍成员表现很出色，但现役训练员的私生子丑闻还是让社会对 ',
+        get_chara_talk(0).get_colored_name(),
+        ' 的评价降低了！',
       ]);
     } else {
       await era.printAndWait([
