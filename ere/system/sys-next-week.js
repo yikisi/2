@@ -93,9 +93,11 @@ async function sys_next_week() {
       (temp = era.get('flag:床伴')) &&
       era.get(`base:${temp}:体力`) &&
       era.get(`base:${temp}:精力`) &&
-      !era.get(`status:${temp}:马跳S`)
+      sys_check_awake(temp)
         ? [temp].filter(check_pregnant_unprotect)
-        : in_team_list.filter((chara_id) => chara_id !== temp);
+        : in_team_list.filter(
+            (chara_id) => chara_id !== temp && sys_check_awake(temp),
+          );
     prepared_list.forEach((chara_id) => {
       if (
         new BasementOwners().get(0) === chara_id ||

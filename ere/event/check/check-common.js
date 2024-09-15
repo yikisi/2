@@ -209,19 +209,18 @@ class CustomizedCheck {
 
   /** @returns {boolean} */
   is_prison() {
-    if (common_no_action_check(this.id) || era.get('cflag:0:位置') !== 0) {
+    if (
+      common_no_action_check(this.id) ||
+      era.get('flag:当前位置') === location_enum.basement ||
+      era.get('cflag:0:位置') !== 0
+    ) {
       return false;
     }
     const love = era.get(`love:${this.id}`),
       prison_limit = era.get('flag:极端行为限制'),
       relation = era.get(`relation:${this.id}:0`);
     let delta = love * prison_limit - relation;
-    if (
-      era.get('flag:当前位置') === location_enum.basement ||
-      !prison_limit ||
-      love < 50 ||
-      delta < 0
-    ) {
+    if (!prison_limit || love < 50 || delta < 0) {
       return false;
     }
     let ratio =
