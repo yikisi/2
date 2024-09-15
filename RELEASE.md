@@ -1,7 +1,7 @@
 # [EraUma v0.9](https://gitgud.io/umaera/erauma/-/releases/v0.9)
-_incoming_
+_2024/9/15_
 
-EraUma v0.9，适配 [EraElectron v2.1.0 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/2.1.0) 版本
+EraUma v0.9，适配 [EraElectron v2.1.1 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/2.1.1) 版本
 
 因为变量位置变化，需要重开档
 
