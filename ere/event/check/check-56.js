@@ -32,9 +32,10 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 3;
 
 module.exports = class extends CustomizedCheck {
   check_after_punish(level) {
-    if (level === 1 || level === 2 || level === 3) {
-      add_event(event_hooks.week_start, new EventObject(56, cb_enum.daily));
-    }
+    add_event(
+      event_hooks.week_start,
+      new EventObject(56, cb_enum.daily).set_arg(`p${level}`),
+    );
   }
 
   check_after_race(extra_flag) {

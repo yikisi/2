@@ -376,11 +376,13 @@ const era = {
 Object.keys(era).forEach((key) => {
   if (era[key] instanceof Function && key !== 'delay') {
     era[key] = (...args) => {
-      /*if (!era[key]._s) {
+      if (!era[key]._s) {
         era.logger.error(
-          `unsupported api! please check the version of the engine! current version: sdk=${era.version.sdk}, engine=${era.version.engine}`,
+          `unsupported api! please check the version of the engine! current version: sdk=${
+            era.version.sdk
+          }, engine=${era.version.engine}`,
         );
-      }*/
+      }
       return era[key](...args);
     };
   }
