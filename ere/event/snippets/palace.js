@@ -15,9 +15,23 @@ const { race_rewards } = require('#/data/race/race-const');
  * @param {CharaTalk} me
  */
 async function palace(chara, me) {
-  const { check, count, buffer } = get_palace_info(chara);
-
-  if (check >= 6) {
+  const { check, count, buffer } = get_palace_info(chara),
+    titles = new CharaTitles(chara.id).get();
+  if (
+    check >= 6 ||
+    (check >= 4 &&
+      titles.findIndex(
+        (e) =>
+          e.n.endsWith('三冠') || e.n.endsWith('三宝冠') || e.n === '美国梦',
+      ) !== -1) ||
+    (check >= 3 &&
+      titles.findIndex(
+        (e) =>
+          e.n.startsWith('无败三') ||
+          e.n.startsWith('无败泥') ||
+          e.n === '无暇美国梦',
+      ) !== -1)
+  ) {
     await print_event_name('登上殿堂宝座', chara);
 
     await era.printAndWait(

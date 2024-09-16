@@ -29,7 +29,8 @@ module.exports = class extends CustomizedCheck {
       if (
         extra_flag.rank === 1 &&
         extra_flag.pop === 1 &&
-        extra_flag.contestants[0].race.conditionParams.bashin_diff_behind >= 5
+        extra_flag.contestants.find((e) => e.rank.curr === 1).race
+          .conditionParams.bashin_diff_behind >= 5
       ) {
         new SpeEduMarks().title_check = 1;
       }

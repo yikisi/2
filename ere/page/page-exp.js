@@ -134,7 +134,7 @@ function check_page_disabled(chara, page) {
 
 /**
  * @param {number} chara_id
- * @returns {{in_growth:boolean,mark_level:number,show_all_body:boolean,show_all_exp:boolean,show_body:boolean,show_exp:boolean}}
+ * @returns {{in_growth:boolean,mark_level:number,show_all_body:boolean,show_all_exp:boolean,show_body:boolean,show_exp:boolean,true_mark_level:number}}
  */
 function get_flags(chara_id) {
   const no_fog =
@@ -274,24 +274,20 @@ async function print_chara_info(_id, chara_list, _page) {
   }
 }
 
-/** @param {number} [chara_id] */
-async function page_exp(chara_id) {
-  if (chara_id !== undefined) {
-    await print_chara_info(chara_id, undefined, 5);
-  } else {
-    let exp_flag = true;
-    while (exp_flag) {
-      const selected = await print_select_tar_page(chara_into_type.info);
-      if (selected === undefined) {
-        exp_flag = false;
-        continue;
-      }
-      await print_chara_info(
-        selected,
-        sys_filter_chara('cflag', '招募状态', recruit_flags.yes),
-      );
+async function page_exp() {
+  let exp_flag = true;
+  while (exp_flag) {
+    const selected = await print_select_tar_page(chara_into_type.info);
+    if (selected === undefined) {
+      exp_flag = false;
+      continue;
     }
+    await print_chara_info(
+      selected,
+      sys_filter_chara('cflag', '招募状态', recruit_flags.yes),
+    );
   }
 }
 
 module.exports = page_exp;
+module.exports.print_chara_info = print_chara_info;

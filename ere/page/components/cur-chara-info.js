@@ -5,6 +5,8 @@ const { get_image } = require('#/system/sys-calc-image');
 
 const race_indicator = require('#/page/components/race-indicator');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
@@ -26,7 +28,6 @@ const {
   get_train_time,
 } = require('#/data/info-generator');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
-const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 /**
  * @param {number} chara_id
@@ -46,7 +47,9 @@ function cur_chara_component(chara_id, type, location_npc) {
           columns: [
             {
               config: { width: 23 },
-              names: `${era.get(`cstr:${location_npc}:头像`)}_半身`,
+              names: get_image(location_npc)
+                .map((e) => `${e}_半身`)
+                .join('\t'),
               type: 'image.whole',
             },
           ],
@@ -57,7 +60,7 @@ function cur_chara_component(chara_id, type, location_npc) {
             {
               content: [
                 title ? [title, ' '] : [],
-                get_chara_talk(301).get_colored_name(),
+                get_chara_talk(location_npc).get_colored_name(),
               ],
               type: 'text',
             },
@@ -138,7 +141,8 @@ function cur_chara_component(chara_id, type, location_npc) {
     location_npc &&
       (temp = new CharaTitles(location_npc).get_colored_curr_title());
     era.setVerticalAlign('middle');
-    const image_switch = era.get('flag:显示半身像');
+    const image_switch = era.get('flag:显示半身像'),
+      status_list = get_status(chara_id);
     era.printInColRows(
       {
         columns: [{ content: name_columns, type: 'text' }],
@@ -250,7 +254,7 @@ function cur_chara_component(chara_id, type, location_npc) {
           },
           {
             config: { width: 16 + !(race && growth >= 1) * 6 },
-            content: get_status(chara_id),
+            content: status_list.length > 0 ? status_list : '正常',
             type: 'text',
           },
           {
@@ -282,7 +286,9 @@ function cur_chara_component(chara_id, type, location_npc) {
           ? [
               {
                 config: { width: 23 },
-                names: `${era.get(`cstr:${location_npc}:头像`)}_半身`,
+                names: get_image(location_npc)
+                  .map((e) => `${e}_半身`)
+                  .join('\t'),
                 type: 'image.whole',
               },
             ]

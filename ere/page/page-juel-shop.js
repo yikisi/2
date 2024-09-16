@@ -17,7 +17,6 @@ const {
   print_price_and_confirm,
 } = require('#/page/juel-shop/snippets');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const {
@@ -37,10 +36,11 @@ module.exports = async (_id) => {
   const chara_id = _id || era.get('flag:当前互动角色');
   await call_ero_script(chara_id, ero_hooks.shop_start);
   const chara_sex = era.get(`cflag:${chara_id}:性别`),
-    chara_talk = get_chara_talk(chara_id);
-  let display_name = chara_talk.name;
-  if (chara_talk.name !== chara_talk.actual_name) {
-    display_name += ` (${chara_talk.actual_name})`;
+    chara = get_chara_talk(chara_id),
+    me = get_chara_talk(0);
+  let display_name = chara.name;
+  if (chara.name !== chara.actual_name) {
+    display_name += ` (${chara.actual_name})`;
   }
   const page_pointer = {
     flag: true,
@@ -224,7 +224,7 @@ module.exports = async (_id) => {
 
       era.print(
         '\n* 点击能力名显示说明，或者点击升/降升级或降级能力\n' +
-          `** 角色身体部位的调教因子不足所需时，${CharaTalk.me.name} 可以以两倍的因子补足差额`,
+          `** 角色身体部位的调教因子不足所需时，${me.name} 可以以两倍的因子补足差额`,
       );
       print_footer(chara_id, page_pointer.tab);
       const ret = await era.input();
@@ -237,7 +237,7 @@ module.exports = async (_id) => {
         } else {
           era.print([
             '要将 ',
-            chara_talk.get_colored_name(),
+            chara.get_colored_name(),
             ' 的',
             {
               content: ` ${skill_name} Lv.${skill_dict[skill_name]}`,
@@ -536,7 +536,7 @@ module.exports = async (_id) => {
 
       era.print(
         '\n* 点击特性名显示说明，或者点击之后的按钮升降感度/获取或消除特性\n' +
-          `** 角色身体部位的调教因子不足所需时，${CharaTalk.me.name} 可以以两倍的因子补足差额`,
+          `** 角色身体部位的调教因子不足所需时，${me.name} 可以以两倍的因子补足差额`,
       );
       print_footer(chara_id, page_pointer.tab);
       const ret = await era.input();
@@ -556,7 +556,7 @@ module.exports = async (_id) => {
               action === 100
                 ? { content: ' 获取 ', color: attr_change_colors.up }
                 : { content: ' 消除 ', color: attr_change_colors.down },
-              chara_talk.get_colored_name(),
+              chara.get_colored_name(),
               ' 的',
               {
                 content: ` [${talent_name}] `,
@@ -591,7 +591,7 @@ module.exports = async (_id) => {
                 action === 100
                   ? { content: ' 提升 ', color: attr_change_colors.up }
                   : { content: ' 降低 ', color: attr_change_colors.down },
-                chara_talk.get_colored_name(),
+                chara.get_colored_name(),
                 ' 的',
                 {
                   content: ` ${trained_talent_names[talent_name][0].substring(
@@ -608,7 +608,7 @@ module.exports = async (_id) => {
                 action === 100
                   ? { content: ' 获取 ', color: attr_change_colors.up }
                   : { content: ' 消除 ', color: attr_change_colors.down },
-                chara_talk.get_colored_name(),
+                chara.get_colored_name(),
                 ' 的',
                 {
                   content: ` [${talent_name}] `,
@@ -642,7 +642,7 @@ module.exports = async (_id) => {
     } else if (page_pointer.tab === 2) {
       await print_mark_tab(
         chara_id,
-        chara_talk,
+        chara,
         display_name,
         juel_dict,
         total_delta,
@@ -651,57 +651,67 @@ module.exports = async (_id) => {
     } else {
       era.drawLine({ content: '采补之术' });
       era.printMultiColumns(
-        Object.keys(juel_dict)
-          .slice(0, 10)
-          .map((e, i) => {
-            return {
-              accelerator: i,
-              config: { width: 12, disabled: origin_dict[e] < 10000 },
-              content: `将 ${chara_talk.name} 的 ${e.substring(
-                0,
-                2,
-              )}因子 转换给 ${CharaTalk.me.name}`,
-              type: 'button',
-            };
-          }),
+        Object.keys(juel_dict).map((e, i) => {
+          return {
+            accelerator: i,
+            config: { width: 12, disabled: origin_dict[e] < 10000 },
+            content: `将 ${chara.name} 的 ${e.substring(
+              0,
+              2,
+            )}因子 转换给 ${me.name}`,
+            type: 'button',
+          };
+        }),
       );
       era.print([
         { isBr: true },
         '* ',
-        chara_talk.get_colored_name(),
+        chara.get_colored_name(),
         ' 的',
         { content: ' 10,000 ', color: buff_colors[2] },
-        { content: `个因子，可以转换为 ${CharaTalk.me.name} 的` },
+        { content: `个部位因子与顺从因子，可以转换为 ${me.name} 的` },
         { content: ' 10 ', color: buff_colors[2] },
+        '个因子',
+        { isBr: true },
+        '* ',
+        chara.get_colored_name(),
+        ' 的',
+        { content: ' 10,000 ', color: buff_colors[2] },
+        {
+          content: `个痛苦、恐惧、羞耻因子，可以转换为 ${me.name} 的`,
+        },
+        { content: ' 1 ', color: buff_colors[2] },
         '个因子',
       ]);
       print_footer(chara_id, page_pointer.tab);
       const ret = await era.input();
       if (ret < 990) {
-        const juel_name = Object.keys(juel_dict)[ret];
+        const src_juel_name = Object.keys(juel_dict)[ret],
+          dst_juel_name = ret < 10 ? src_juel_name : '顺从',
+          dst_juel_num = ret < 10 ? 10 : 1;
         era.print([
           '将 ',
-          chara_talk.get_colored_name(),
+          chara.get_colored_name(),
           ' 的',
           {
-            content: ` ${juel_name.substring(0, 2)}因子 × 10,000`,
+            content: ` ${src_juel_name.substring(0, 2)}因子 × 10,000`,
             color: buff_colors[2],
           },
-          '（总共',
+          '（总共 ',
           {
-            content: origin_dict[juel_name].toLocaleString(),
+            content: origin_dict[src_juel_name].toLocaleString(),
             color: buff_colors[2],
           },
-          `）转换为 ${CharaTalk.me.name} 的`,
+          `）转换为 ${me.name} 的`,
           {
-            content: ` ${juel_name.substring(0, 2)}因子 × 10 `,
+            content: ` ${dst_juel_name.substring(0, 2)}因子 × ${dst_juel_num} `,
             color: buff_colors[2],
           },
           '吗？',
         ]);
         if (await print_confirm_and_return()) {
-          era.add(`juel:${chara_id}:${juel_name}`, -10000);
-          era.add(`juel:0:${juel_name}`, 10);
+          era.add(`juel:${chara_id}:${src_juel_name}`, -10000);
+          era.add(`juel:0:${dst_juel_name}`, dst_juel_num);
         }
       } else {
         default_handler(ret, page_pointer);

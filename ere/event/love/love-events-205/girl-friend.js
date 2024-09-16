@@ -24,7 +24,11 @@ const { part_enum } = require('#/data/ero/part-const');
  */
 module.exports = async (vp, me) => {
   await print_event_name('Un heureux événement（一件幸福的事情）', vp);
-  if (vp.sex_code - 1 && me.sex_code && check_pregnant_unprotect(205)) {
+  if (
+    vp.sex_code - 1 !== 0 &&
+    me.sex_code > 0 &&
+    check_pregnant_unprotect(205)
+  ) {
     begin_and_init_ero(0, 205);
     await vp.print_and_wait(
       `那天放学后，${sys_get_callname(

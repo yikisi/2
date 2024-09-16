@@ -7,8 +7,10 @@ const sys_next_week = require('#/system/sys-next-week');
 const page_custom = require('#/page/new-game/page-custom');
 const print_set_page = require('#/page/new-game/page-setting');
 
+const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const GameGuides = require('#/event/game-guides');
+const event_queue = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const CharaTalk = require('#/utils/chara-talk');
@@ -236,7 +238,8 @@ module.exports = async (src_chara) => {
           // 游戏设置
           era.set('flag:新生儿ID', first_child_id);
 
-          require('#/event/queue').init();
+          event_queue.init();
+          basement_queue.init();
 
           [
             201, 202, 203, 204, 205, 206, 301, 302, 303, 304, 305, 306, 308,

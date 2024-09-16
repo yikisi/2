@@ -234,7 +234,7 @@ async function page_trainer_office() {
               name: '聊天',
             },
             {
-              loc: location_enum.restroom,
+              loc: trainer_list.length > 1 && location_enum.restroom,
               name: '求爱',
               fail_cb() {
                 flag_trainer = flag_page = false;

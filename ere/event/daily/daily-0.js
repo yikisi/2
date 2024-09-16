@@ -111,7 +111,7 @@ handlers[event_hooks.out_station] = async (hook) => {
 
 /**
  * @author 雞雞
- * @author 黑奴零号（改编）
+ * @author 无名黑奴（改编）
  */
 module.exports = {
   /**

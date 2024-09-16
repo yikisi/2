@@ -29,13 +29,14 @@ async function sys_have_baby(mother_id) {
   const mother_life_marks = new LifeEventMarks(mother_id),
     father_id = mother_life_marks.sperm,
     child_id = era.add('flag:新生儿ID', 1) - 1;
-  let src_chara_id;
-  if (mother_id) {
-    src_chara_id = era.get(`cflag:${mother_id}:模版角色`);
-    src_chara_id = src_chara_id !== -1 ? src_chara_id : mother_id;
-  } else {
-    src_chara_id = era.get(`cflag:${father_id}:模版角色`);
-    src_chara_id = src_chara_id !== -1 ? src_chara_id : father_id;
+  let src_chara_id = era.get(`cflag:${mother_id}:模版角色`);
+  if (src_chara_id === -1) {
+    if (mother_id) {
+      src_chara_id = mother_id;
+    } else {
+      src_chara_id = era.get(`cflag:${father_id}:模版角色`);
+      src_chara_id = src_chara_id !== -1 ? src_chara_id : father_id;
+    }
   }
 
   init_chara(child_id, src_chara_id);
@@ -186,9 +187,10 @@ async function sys_have_baby(mother_id) {
     );
   }
 
-  let random_val = Math.random();
+  let random_val;
   adaptability_names.forEach((e) => {
     let val = era.get(`cflag:${child_id}:${e}适性`);
+    random_val = Math.random();
     if (random_val < 0.1) {
       val += random_val < 0.05 ? 1 : -1;
       if (val > 7) {

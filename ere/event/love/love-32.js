@@ -696,7 +696,7 @@ handlers[89] = async (tachyon, me, callname) => {
       me.get_colored_name(),
       ' 摇了摇头，将内心的奇怪想法飘散，毫无犹豫的踏出了门外',
     ]);
-    era.set('cflag:32:爱慕暂拒', 1);
+    era.set('cflag:32:爱慕暂拒', 89);
   }
 };
 
@@ -704,7 +704,7 @@ handlers[89] = async (tachyon, me, callname) => {
  * 速子的爱慕事件，id=32
  *
  * @author 幽白書
- * @author 黑奴一号 黑奴零号（修订）
+ * @author 黑奴一号 无名黑奴（修订）
  *
  * @param _
  * @param __

@@ -32,7 +32,7 @@ class RaceSkill {
 class PseudoUma {
   static RaceSkill = RaceSkill;
 
-  // 需要通过construcor提供的值
+  // 需要通过constructor提供的值
   /**
    * 角色编号
    * @type {number}
@@ -121,21 +121,17 @@ class PseudoUma {
   base = {
     accBuffFromWiz: 0,
     acceleration: 0,
-    change_order_finalcorner: 0,
-    // 五项属性方差
     attr_err: 0,
+    // 五项属性方差
+    change_order_finalcorner: 0,
     // 训练员声望
     fame: 0,
     // 发动绿技能个数
     greenCount: 0,
     // 比赛地语言等级
     language: 0,
-    loc_mind_nige_diff_speed_up_nige: 0,
-    loc_mind_nige_diff_speed_up_other: 0,
-    loc_mind_nige_diff_over_take: 0,
-    loc_mind_other_diff_upper: 0,
-    loc_mind_other_diff_lower: 0,
     loc_mind_other_diff_random: [0, 0],
+    loc_mind_style: 0,
     skill_count: 0,
     stamina: 0,
     temptationSpan: 0,
@@ -143,10 +139,10 @@ class PseudoUma {
     velocityIdeal: 0,
     velocityMaxRush: 0,
     velocityMin: 0,
-    // 胜场数
-    winCount: 0,
     // 体重
     weight: 4000,
+    // 胜场数
+    winCount: 0,
   };
   // 比赛时信息
   race = {
@@ -244,6 +240,8 @@ class PseudoUma {
     // 下坡时进入状态的概率
     down: 0,
   };
+  // 传奇对手标记
+  legend = false;
 
   /**
    * @param {number} index_chara 角色编号
@@ -274,7 +272,7 @@ class PseudoUma {
     this.color = color;
     this.motivation = motivation;
     this.attrs = attrs;
-    this.style = style;
+    this.style = this.base.loc_mind_style = style;
     this.adapt_style_list = adapt_style_list;
     this.adapt_distance_list = adapt_distance_list;
     this.adapt_ground_list = adapt_ground_list;

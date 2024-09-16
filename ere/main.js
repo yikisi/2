@@ -100,7 +100,7 @@ module.exports = async () => {
             { isDivider: true },
             '无名路人',
             { isDivider: true },
-            '黑奴零号',
+            '无名黑奴',
           ],
           type: 'text',
         },
@@ -151,7 +151,7 @@ module.exports = async () => {
             { isBr: true },
             {
               content: 'ERA特雷森学园（Discord社区）',
-              url: 'https://discord.gg/CCsqKXJJjd',
+              url: 'https://discord.gg/vc9dtQ85',
             },
           ],
           type: 'text',
@@ -362,7 +362,7 @@ module.exports = async () => {
           },
           {
             config: { width: 9 },
-            content: '黑奴零号',
+            content: '无名黑奴',
             type: 'text',
           },
         ]);
@@ -399,7 +399,7 @@ module.exports = async () => {
               { isDivider: true },
               '色色',
               { isDivider: true },
-              '黑奴零号',
+              '无名黑奴',
             ],
             type: 'text',
           },
@@ -437,7 +437,7 @@ module.exports = async () => {
             [
               '雞雞',
               { isDivider: true },
-              '黑奴零号',
+              '无名黑奴',
               { isDivider: true },
               '天马闪光蹄',
             ],
@@ -457,7 +457,7 @@ module.exports = async () => {
             ],
           ],
           ['教学口上、随机事件', ['雞雞']],
-          ['特殊角色（临时）', '黑奴零号'],
+          ['特殊角色（临时）', '无名黑奴'],
           [[{ color: get_chara_color(3), content: '东海帝王' }], '天马闪光蹄'],
           [[{ color: get_chara_color(7), content: '黄金船' }], '雞雞'],
           [[{ color: get_chara_color(17), content: '鲁铎象征' }], '露娜俘虏'],
@@ -488,6 +488,10 @@ module.exports = async () => {
           ],
           [[{ color: get_chara_color(32), content: '爱丽速子' }], '幽白書'],
           [
+            [{ color: get_chara_color(35), content: '胜利奖券（部分地下室）' }],
+            '幽白書',
+          ],
+          [
             [{ color: get_chara_color(37), content: '荣进闪耀' }],
             '爱放箭的袁本初',
           ],
@@ -504,7 +508,7 @@ module.exports = async () => {
               { isDivider: true },
               '黑奴二号',
               { isDivider: true },
-              '黑奴零号',
+              '无名黑奴',
             ],
           ],
           [
@@ -514,12 +518,20 @@ module.exports = async () => {
               { isDivider: true },
               '黑奴一号',
               { isDivider: true },
-              '黑奴零号',
+              '无名黑奴',
             ],
+          ],
+          [
+            [{ color: get_chara_color(86), content: '目白高峰（部分地下室）' }],
+            'イーウィヤ',
           ],
           [
             [{ color: get_chara_color(100), content: '奇锐骏' }],
             '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生',
+          ],
+          [
+            [{ color: get_chara_color(119), content: '梦之旅（地下室）' }],
+            '幽白書',
           ],
           [
             [
@@ -588,7 +600,7 @@ module.exports = async () => {
           isParagraph: true,
         });
         await era.printAndWait([
-          '黑奴零号',
+          '无名黑奴',
           { isDivider: true },
           '黑奴一号',
           { isDivider: true },

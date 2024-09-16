@@ -52,6 +52,7 @@ const {
 const { part_enum, part_talents } = require('#/data/ero/part-const');
 const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const BasementOwners = require('#/data/event/basement-owners');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const event_hooks = require('#/data/event/event-hooks');
@@ -63,6 +64,7 @@ const {
   get_talent_bust_size,
   get_trainer_title,
 } = require('#/data/info-generator');
+const { location_enum } = require('#/data/locations');
 const LoveLimitStatus = require('#/data/love-limit-status');
 const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -91,17 +93,21 @@ async function sys_next_week() {
       (temp = era.get('flag:床伴')) &&
       era.get(`base:${temp}:体力`) &&
       era.get(`base:${temp}:精力`) &&
-      !era.get(`status:${temp}:马跳S`)
+      sys_check_awake(temp)
         ? [temp].filter(check_pregnant_unprotect)
-        : in_team_list.filter((chara_id) => chara_id !== temp);
+        : in_team_list.filter(
+            (chara_id) => chara_id !== temp && sys_check_awake(temp),
+          );
     prepared_list.forEach((chara_id) => {
       if (
-        era.get('flag:地下室之主') === chara_id ||
+        new BasementOwners().get(0) === chara_id ||
         get_custom_check(chara_id).is_prison()
       ) {
         act_list.push({
           chara_id,
-          prison: !era.get('item:透明棉被') || Math.random() < 0.5,
+          prison:
+            (!era.get('item:透明棉被') || Math.random() < 0.5) &&
+            !new LifeEventMarks(chara_id).b_cd,
         });
       } else if (get_custom_check(chara_id).is_rape_in_sleeping()) {
         act_list.push({ chara_id, prison: false });
@@ -155,7 +161,10 @@ async function sys_next_week() {
       } else {
         await sys_rape_in_sleeping(act.chara_id, act.supporter);
       }
-      if (era.get('flag:床伴')) {
+      if (
+        era.get('flag:床伴') ||
+        era.get('flag:当前位置') === location_enum.basement
+      ) {
         break;
       }
     }
@@ -164,6 +173,20 @@ async function sys_next_week() {
     team_dict[chara_id] = 1;
     if (era.get('flag:性技自主学习') && sys_check_awake(chara_id)) {
       auto_update_ero_skills(chara_id);
+    }
+    if (era.get(`talent:${chara_id}:病娇`) === 2) {
+      const life_event_marks = new LifeEventMarks(chara_id);
+      if (era.get(`relation:${chara_id}:0`) > 525) {
+        if (--life_event_marks.yandere === 0) {
+          era.set(`talent:${chara_id}:病娇`, 1);
+          era.print([
+            get_chara_talk(chara_id).get_colored_name(),
+            ' 重新变得温和起来……',
+          ]);
+        }
+      } else {
+        life_event_marks.yandere = Math.min(life_event_marks.yandere + 1, 8);
+      }
     }
   });
 
@@ -572,6 +595,7 @@ async function sys_next_week() {
 
     let pregnant_stage = era.get(`cflag:${chara_id}:妊娠阶段`);
     const life_marks = new LifeEventMarks(chara_id);
+    life_marks.b_cd && life_marks.b_cd--;
     if (pregnant_stage >> pregnant_stage_enum.embryo) {
       sys_change_lust(chara_id, lust_border.itch / 40);
       const timer = era.add(

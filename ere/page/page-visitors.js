@@ -12,6 +12,7 @@ const {
 } = require('#/era-electron');
 
 const sys_call_recruit = require('#/system/script/sys-call-recruit');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { get_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
@@ -29,7 +30,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
@@ -132,7 +132,7 @@ async function page_visitors() {
               name: '聊天',
             },
             {
-              loc: location_enum.restroom,
+              loc: visitor_list.length > 1 && location_enum.restroom,
               name: '求爱',
               fail_cb() {
                 flag_visitor = flag_page = false;

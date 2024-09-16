@@ -192,7 +192,7 @@ function get_filtered_talents(sex, begin_talent_id) {
  * @returns {string}
  */
 function get_love_mark(love, chara_id) {
-  if (sys_check_hide_relation_and_love(chara_id)) {
+  if ((sys_check_hide_relation_and_love(chara_id) & 0b1) > 0) {
     return '？';
   }
   let level = 0;
@@ -211,7 +211,7 @@ function get_love_mark(love, chara_id) {
  * @returns {string}
  */
 function get_relation_mark(relation, chara_id) {
-  if (sys_check_hide_relation_and_love(chara_id)) {
+  if (sys_check_hide_relation_and_love(chara_id) > 0) {
     return '？';
   }
   const val =
@@ -521,7 +521,7 @@ module.exports = {
     if (!chara_id) {
       return ['-'];
     }
-    if (sys_check_hide_relation_and_love(chara_id)) {
+    if ((sys_check_hide_relation_and_love(chara_id) & 0b1) > 0) {
       return ['？', '(?)'];
     }
     if (sys_check_limit_relation_and_love(chara_id)) {
@@ -556,7 +556,7 @@ module.exports = {
     if (!target) {
       target = 0;
     }
-    if (sys_check_hide_relation_and_love(chara_id)) {
+    if (sys_check_hide_relation_and_love(chara_id) > 0) {
       return ['？', '(?)'];
     }
     const relation = era.get(`relation:${chara_id}:${target}`);
@@ -581,7 +581,9 @@ module.exports = {
           ]
         : []),
       ...(era.get(`talent:${chara_id}:捉摸不透`) ? ['捉摸不透'] : []),
-      ...(era.get(`talent:${chara_id}:病娇`) === 2 ? ['病娇'] : []),
+      ...(era.get(`talent:${chara_id}:病娇`) === 2
+        ? [{ color: buff_colors[3], content: '[病娇]', key: '病娇' }]
+        : []),
       ...new Array(18)
         .fill(0)
         .map((_, i) => {

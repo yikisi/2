@@ -10,7 +10,7 @@ module.exports = async () => {
 
   while (flag_save_game) {
     await era.clear();
-    print_page_header(true);
+    print_page_header();
 
     era.drawLine();
     msg_notification && era.print(msg_notification, { align: 'center' });

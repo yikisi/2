@@ -7,6 +7,8 @@ const { attr_colors } = require('#/data/const.json');
 const { growth_info, no_info } = require('#/data/exp-const');
 const {
   get_adaptability_rank,
+  get_chara_score,
+  get_rank_level,
   get_train_time,
 } = require('#/data/info-generator');
 const {
@@ -63,7 +65,9 @@ module.exports = {
         era.get(`cflag:${chara.id}:殿堂`)
       ) {
         const out_of_train = era.get(`cflag:${chara.id}:殿堂`),
-          train_time = get_train_time(chara.id);
+          train_time = get_train_time(chara.id),
+          chara_score = get_chara_score(chara.id),
+          chara_level = get_rank_level(chara_score);
         aim_list.push(
           {
             config: { content: '育成情况', position: 'left' },
@@ -71,8 +75,23 @@ module.exports = {
           },
           {
             content: out_of_train
-              ? out_of_train_type[out_of_train - 1]
+              ? [
+                  out_of_train_type[out_of_train - 1],
+                  ' ｜ 评价：',
+                  {
+                    content: chara_score,
+                    color: adaptability_colors[chara_level],
+                    fontWeight: 'bold',
+                  },
+                ]
               : [
+                  '评价：',
+                  {
+                    content: chara_score,
+                    color: adaptability_colors[chara_level],
+                    fontWeight: 'bold',
+                  },
+                  ' ｜ ',
                   train_time.length > 1
                     ? `${train_time}${era.get(`cflag:${chara.id}:育成次数`) ? ` (第 ${era.get(`cflag:${chara.id}:育成次数`) + 1} 轮)` : ''} ｜ `
                     : '',

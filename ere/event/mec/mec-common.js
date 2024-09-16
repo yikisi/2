@@ -1,10 +1,13 @@
 const era = require('#/era-electron');
 
+const check_aim_race = require('#/event/snippets/check-aim-race');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_entry } = require('#/utils/list-utils');
+
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const check_aim_race = require('#/event/snippets/check-aim-race');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 class CustomizedMec {
   /** @type {number} */
@@ -238,7 +241,15 @@ class CustomizedMec {
 
   /** @returns {number} */
   set_my_sex() {
-    return era.set(`cflag:${this.id}:性别`, era.get('flag:角色性别'));
+    const global_sex = era.get('flag:角色性别');
+    return era.set(
+      `cflag:${this.id}:性别`,
+      global_sex === 99
+        ? era.get(`cflag:${this.id}:模版角色`) === -1
+          ? era.get(`staticcflag:${this.id}:性别`)
+          : get_random_entry([0, 10])
+        : global_sex,
+    );
   }
 
   /** @param {PseudoUma} uma */

@@ -18,7 +18,7 @@ function get_random_entry(list) {
 /**
  * @template T
  * @param {T[]} list
- * @param {(T)=>number} order_by
+ * @param {function(T,number):number} order_by
  * @param {boolean} [is_asc]
  * @returns {T[]}
  */
@@ -27,10 +27,10 @@ function sort_list(list, order_by, is_asc) {
     return list;
   }
   return list
-    .map((v) => {
+    .map((v, i) => {
       return {
         val: v,
-        orderBy: order_by(v),
+        orderBy: order_by(v, i),
       };
     })
     .sort((a, b) => (is_asc ? a.orderBy - b.orderBy : b.orderBy - a.orderBy))

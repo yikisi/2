@@ -9,7 +9,7 @@ const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343
 /**
  * 佐岳五月 - 育成
  *
- * @author 黑奴零号（临时）
+ * @author 无名黑奴（临时）
  */
 module.exports = async (hook, extra_flag, event_object) => {
   if (event_object?.arg !== 'welcome') {

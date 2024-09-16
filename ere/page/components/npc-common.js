@@ -226,7 +226,9 @@ async function npc_common(
               type: 'button',
             }
           : undefined,
-        era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes
+        era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes &&
+        era.get(`exp:${chara.id}:性爱次数`) >
+          era.get(`exp:${chara.id}:睡奸次数`)
           ? { accelerator: 7, content: '提升对方性爱能力', type: 'button' }
           : undefined,
         era.get(`cflag:${chara.id}:爱慕暂拒`) &&

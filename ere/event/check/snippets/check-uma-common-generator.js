@@ -8,7 +8,7 @@ const RaceHistory = require('#/data/race/model/race-history');
 /**
  *
  * @param {function(AfterRaceParams)} after_race_cb
- * @param {function(Record<string,RaceResult>,RaceResult[],boolean):boolean} title_check_cb
+ * @param {(function(Record<string,RaceResult>,RaceResult[],boolean):boolean)|undefined} title_check_cb
  * @param {Record<string,number>} aim_races
  * @param {function({check:number,color:string,content:string}[],Record<string,RaceResult>)} fill_edu_aims_cb
  * @param {string[]} [personal_titles]
@@ -27,6 +27,9 @@ module.exports = (
     }
 
     check_and_get_titles(aim_check) {
+      if (!title_check_cb) {
+        return super.check_and_get_titles(aim_check);
+      }
       const races = new RaceHistory(this.id),
         titles = [];
       if (title_check_cb(races.get(), races.get_values(), aim_check)) {

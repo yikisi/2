@@ -240,15 +240,17 @@ model campaign_chara_story_schedule {
 }
 
 model campaign_cutt_data {
-  id          Int @id @default(autoincrement())
-  chara_id    Int
-  campaign_id Int
-  dress_id    Int
-  color_type  Int
-  cut_id      Int
-  cut_sub_id  Int
-  motion_type Int
-  motion_rate Int
+  id                  Int @id @default(autoincrement())
+  chara_id            Int
+  campaign_id         Int
+  dress_id            Int
+  color_type          Int
+  chara_no_change     Int
+  trainer_gender_type Int
+  cut_id              Int
+  cut_sub_id          Int
+  motion_type         Int
+  motion_rate         Int
 
   @@index([chara_id], map: "campaign_cutt_data_0_chara_id")
   @@index([campaign_id], map: "campaign_cutt_data_0_campaign_id")
@@ -372,6 +374,7 @@ model campaign_story_data {
 
 model campaign_swap_motion_data {
   id            Int @id @default(autoincrement())
+  chara_id      Int
   dress_id      Int
   cut_id        Int
   cut_sub_id    Int
@@ -396,12 +399,14 @@ model campaign_walking_chara {
 model campaign_walking_data {
   id                       Int @id @default(autoincrement())
   campaign_id              Int
+  special_campaign_type    Int
   logo_id                  Int
   map_id                   Int
   icon_id_location_1       Int
   icon_id_location_2       Int
   icon_id_location_3       Int
   walking_limit            Int
+  gauge_consume_num        Int
   gauge_max                Int
   gauge_up_singlemode      Int
   gauge_up_teamstadium     Int
@@ -431,6 +436,7 @@ model campaign_walking_location {
   reward_set_id      Int
   love_point         Int
   friend_list_id     Int
+  place_tail         Int
   place_position_x   Int
   place_position_y   Int
   place_color_main   String
@@ -1080,6 +1086,11 @@ model collect_raid_individual_reward {
 
 model collect_raid_master {
   id                          Int @id @default(autoincrement())
+  use_mission                 Int
+  use_transition_dialog       Int
+  story_extra_id              Int
+  story_voice_type            Int
+  use_all_reward_voice        Int
   collect_item_id             Int
   gain_collect_item_rate      Int
   gain_collect_item_min       Int
@@ -1133,6 +1144,20 @@ model collect_raid_staging_mini_chara {
   chara_id                    Int
   dress_id                    Int
   mini_motion_id              Int
+  chara_angle                 Int
+  chara_id_2                  Int
+  dress_id_2                  Int
+  mini_motion_id_2            Int
+  chara_angle_2               Int
+  chara_id_3                  Int
+  dress_id_3                  Int
+  mini_motion_id_3            Int
+  chara_angle_3               Int
+  chara_id_4                  Int
+  dress_id_4                  Int
+  mini_motion_id_4            Int
+  chara_angle_4               Int
+  rate                        Int
 
   @@index([staging_mini_chara_group_id, staging_type], map: "collect_raid_staging_mini_chara_0_staging_mini_chara_group_id_1_staging_type")
   @@index([staging_mini_chara_group_id], map: "collect_raid_staging_mini_chara_0_staging_mini_chara_group_id")
@@ -1141,7 +1166,9 @@ model collect_raid_staging_mini_chara {
 model collect_raid_story {
   id                   Int @id @default(autoincrement())
   story_set_id         Int
+  collect_raid_id      Int
   story_condition_type Int
+  unlock_condition     Int
   episode_index_id     Int
   story_type_1         Int
   story_id_1           Int
@@ -1150,7 +1177,8 @@ model collect_raid_story {
   story_type_3         Int
   story_id_3           Int
 
-  @@index([story_set_id], map: "collect_raid_story_0_story_set_id")
+  @@index([collect_raid_id, episode_index_id], map: "collect_raid_story_0_collect_raid_id_1_episode_index_id")
+  @@index([collect_raid_id], map: "collect_raid_story_0_collect_raid_id")
 }
 
 model collect_raid_top_data {
@@ -1659,6 +1687,7 @@ model gacha_data {
   daily_pay_cost                      Int
   disp_order                          Int
   only_once_flag                      Int
+  draw_limit                          Int
   gacha_odds_id                       Int
   rarity_odds_id                      Int
   draw_guarantee_type                 Int
@@ -1999,6 +2028,7 @@ model home_character_type {
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model home_eat {
   chara_id                 Int
+  event_type               Int
   body_shape               Int
   prop_id_right            Int
   prop_eat_animation_right String
@@ -2013,6 +2043,7 @@ model home_eat {
   odds                     Int
 
   @@index([chara_id], map: "home_eat_0_chara_id")
+  @@index([chara_id, event_type], map: "home_eat_0_chara_id_1_event_type")
   @@ignore
 }
 
@@ -2774,6 +2805,7 @@ model mini_motion_set {
   tail_motion                  String
   tail_motion_type             Int
   is_enable_randome_tail       Int
+  use_tail_in_body_motion      Int
   prop_id                      Int
   prop_motion                  String
   prop_motion_scene_type       Int
@@ -3959,6 +3991,7 @@ model single_mode_event_item_detail {
   event_category_id Int
   item_id           Int
   name_index        Int
+  is_special        Int
 
   @@index([event_category_id, item_id], map: "single_mode_event_item_detail_0_event_category_id_1_item_id")
 }
@@ -5762,6 +5795,10 @@ model team_stadium_class_reward {
   item_category_5   Int
   item_id_5         Int
   item_num_5        Int
+  disp_start_date   Int
+  disp_end_date     Int
+  start_date        Int
+  end_date          Int
 
   @@index([team_stadium_id, class_reward_type], map: "team_stadium_class_reward_0_team_stadium_id_1_class_reward_type")
 }
@@ -6020,16 +6057,17 @@ model training_report_normal_reward {
 }
 
 model training_report_pass {
-  id                 Int    @id @default(autoincrement())
-  season_id          Int    @unique(map: "training_report_pass_0_season_id")
-  product_master_id  Int
-  inflation_coef     Int
-  normal_reward_set  Int
-  special_reward_set Int
-  remind_date        String
-  start_date         String
-  end_date           String
-  bg_image           String
+  id                               Int    @id @default(autoincrement())
+  season_id                        Int    @unique(map: "training_report_pass_0_season_id")
+  product_master_id                Int
+  inflation_coef                   Int
+  normal_reward_set                Int
+  special_reward_set               Int
+  jobs_training_report_point_limit Int
+  remind_date                      String
+  start_date                       String
+  end_date                         String
+  bg_image                         String
 }
 
 model training_report_ratio {
@@ -6589,4 +6627,123 @@ model single_mode_cook_success_type {
   success_effect_swap2_name String
 
   @@index([success_motion_id], map: "single_mode_cook_success_type_0_success_motion_id")
+}
+
+model collect_raid_dress_color {
+  id              Int @id @default(autoincrement())
+  collect_raid_id Int
+  chara_id        Int
+  dress_id        Int
+  color_id        Int
+
+  @@index([collect_raid_id], map: "collect_raid_dress_color_0_collect_raid_id")
+}
+
+model jobs_genre {
+  id           Int @id @default(autoincrement())
+  mini_bg_id_1 Int
+  mini_bg_id_2 Int
+  mini_bg_id_3 Int
+}
+
+model jobs_place {
+  id            Int @id @default(autoincrement())
+  race_track_id Int
+}
+
+model jobs_point_limit {
+  id                                   Int @id @default(autoincrement())
+  jobs_story_event_point_limit         Int
+  jobs_story_event_roulette_coin_limit Int
+  jobs_training_challenge_coin_limit   Int
+}
+
+model jobs_random_drop_reward {
+  id            Int @id @default(autoincrement())
+  group_id      Int
+  item_category Int
+  item_id       Int
+  item_num      Int
+
+  @@index([group_id], map: "jobs_random_drop_reward_0_group_id")
+}
+
+model jobs_reward {
+  id                                      Int @id @default(autoincrement())
+  place_id                                Int
+  genre_id                                Int
+  main_reward_slots_id                    Int
+  main_reward_1_item_disp_type            Int
+  main_reward_1_item_category             Int
+  main_reward_1_item_id                   Int
+  main_reward_1_item_num                  Int
+  main_reward_2_item_disp_type            Int
+  main_reward_2_item_category             Int
+  main_reward_2_item_id                   Int
+  main_reward_2_item_num                  Int
+  main_reward_3_item_disp_type            Int
+  main_reward_3_item_category             Int
+  main_reward_3_item_id                   Int
+  main_reward_3_item_num                  Int
+  main_reward_4_item_disp_type            Int
+  main_reward_4_item_category             Int
+  main_reward_4_item_id                   Int
+  main_reward_4_item_num                  Int
+  main_reward_5_item_disp_type            Int
+  main_reward_5_item_category             Int
+  main_reward_5_item_id                   Int
+  main_reward_5_item_num                  Int
+  main_reward_6_item_disp_type            Int
+  main_reward_6_item_category             Int
+  main_reward_6_item_id                   Int
+  main_reward_6_item_num                  Int
+  main_reward_7_item_disp_type            Int
+  main_reward_7_item_category             Int
+  main_reward_7_item_id                   Int
+  main_reward_7_item_num                  Int
+  main_reward_8_item_disp_type            Int
+  main_reward_8_item_category             Int
+  main_reward_8_item_id                   Int
+  main_reward_8_item_num                  Int
+  main_reward_9_item_disp_type            Int
+  main_reward_9_item_category             Int
+  main_reward_9_item_id                   Int
+  main_reward_9_item_num                  Int
+  random_drop_reward_group_id             Int
+  money_reward_item_odds_group_id         Int
+  money_min                               Int
+  support_point_reward_item_odds_group_id Int
+  support_point_min                       Int
+  trainer_medal                           Int
+  fan_num_odds_group_id                   Int
+  fan_num_min                             Int
+  love_point                              Int
+  minutes_to_job_complete                 Int
+  story_event_event_pt                    Int
+  story_event_roulette_coin               Int
+  factor_research_gauge_up                Int
+  campaign_walking_gauge_up               Int
+  training_challenge_reward_coin          Int
+  training_report_pt                      Int
+
+  @@index([place_id], map: "jobs_reward_0_place_id")
+}
+
+model jobs_reward_sort_disp_order {
+  id            Int @id @default(autoincrement())
+  item_category Int
+  item_id       Int
+  disp_order    Int
+
+  @@index([item_category, item_id], map: "jobs_reward_sort_disp_order_0_item_category_1_item_id")
+}
+
+model single_mode_race_limit_reward {
+  id            Int @id @default(autoincrement())
+  item_category Int
+  item_id       Int
+  reward_num    Int
+  reward_limit  Int
+  start_date    Int
+  end_date      Int
 }

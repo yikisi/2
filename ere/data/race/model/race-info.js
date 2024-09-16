@@ -276,6 +276,15 @@ module.exports = class RaceInfo {
   has_legend;
   // 额外属性
   extra_attr = 0;
+  loc_mind_diff = {
+    // 逃, 大逃
+    nige_speed_up_other: [0, 0],
+    nige_over_take: [0, 0],
+    nige_speed_up_nige: [0, 0],
+    // 先、差、追
+    other_lower: [0, 0, 0],
+    other_upper: [0, 0, 0],
+  };
 
   /**
    * @param {string} name_en

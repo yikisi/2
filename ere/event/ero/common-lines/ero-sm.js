@@ -15,6 +15,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const { get_random_entry } = require('#/utils/list-utils');
 
 /**
  * @author 黑衣剑士-星爆气流斩准备就绪
@@ -22,6 +23,32 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
  * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
  */
 module.exports = (handlers) => {
+  handlers[ero_hooks.insult] = async (attacker, defender) => {
+    await era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 辱骂着 ',
+      defender.get_colored_name(),
+      '……】',
+    ]);
+    const talk_arr = [];
+    if (era.get('tflag:强奸') === attacker.id) {
+      talk_arr.push('人渣！强奸犯！去死吧！');
+    }
+    if (era.get(`talent:${attacker.id}:小恶魔`)) {
+      talk_arr.push('杂鱼～杂鱼～');
+    }
+    if (era.get(`talent:${attacker.id}:抖S`)) {
+      talk_arr.push(
+        `蠢货！废物${defender.get_sex_slave_title()}！欠操的变态！`,
+      );
+    }
+    if (talk_arr.length === 0) {
+      talk_arr.push(`就这么想被人辱骂吗，${defender.get_sex_slave_title()}？`);
+    }
+    await attacker.say_and_wait(get_random_entry(talk_arr));
+  };
+
   handlers[ero_hooks.ask_insult] = async (attacker, defender, hook) => {
     if (hook.arg) {
       await era.printAndWait([

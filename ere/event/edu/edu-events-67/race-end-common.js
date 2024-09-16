@@ -85,11 +85,14 @@ async function race_end_67_common(daiya, me, edu_weeks, extra_flag) {
         '没关系的！为了下次一定能跑赢，无论是什么样的训练，我都一定能完成的……！',
       );
       era.printButton('「那就先深呼吸吧」', 1);
+      await era.input();
       await daiya.say_and_wait('是！');
       await daiya.say_and_wait('吸……吐……！吸……吐……');
       era.printButton('「……冷静下来了吗？」', 1);
+      await era.input();
       await daiya.say_and_wait('……啊！是、是。');
       era.printButton('「不要逞强，继续往前迈进吧」', 1);
+      await era.input();
       await daiya.say_and_wait('训练员……！……嗯！');
       await daiya.say_and_wait(
         '嗯！无论多少次，我都会重新爬起来的……！我想要和你一起努力！',

@@ -19,6 +19,7 @@ const { buff_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const YandereList = require('#/data/event/yandere-list');
 
 /** @param {CharaTalk} gold_ship */
 async function love_49(gold_ship) {
@@ -450,9 +451,10 @@ async function golden_ship_attack() {
   await era.printAndWait(`${gold_ship.sex}是如此说的。`);
   era.printButton('「杀死与你生死相依的好兄弟……」', 1);
   era.printButton('「杀死愿意为你牺牲的女朋友……」', 2);
-  setTimeout(() => {
-    ret.length < 5 && era.printButton('「哪个都不选……！」', 3);
-  }, 10000);
+  setTimeout(
+    () => ret.length < 5 && era.printButton('「哪个都不选……！」', 3),
+    10000,
+  );
   ret.push(await era.input());
   era.println();
 
@@ -518,6 +520,7 @@ async function golden_ship_attack() {
     ]);
   }
   if (ret[4] !== 3) {
+    new YandereList().push(7);
     era.set('talent:7:病娇', 1);
   }
   await era.waitAnyKey();

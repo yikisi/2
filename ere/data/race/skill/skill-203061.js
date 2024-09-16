@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   203061,
   '无二',
-  '到达第2浪时前方有空位则稍微提升速度，发动技能时不在弯道则效果提升。＜短距离＞',
+  '到达第2浪时前方有空位则稍微提升速度，发动技能时不在弯道则效果提升＜短距离＞',
   20306,
   1,
   UmaSkill.rarity_enum.normal,

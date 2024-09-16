@@ -92,7 +92,9 @@ async function love_god_common(
       break;
     case 1:
       await fuck_me_cb();
-      set(`cflag:${god.id}:阴茎尺寸`, 1);
+      if (!get(`cflag:${god.id}:性别`)) {
+        set(`cflag:${god.id}:阴茎尺寸`, 1);
+      }
       begin_and_init_ero(0, god.id);
       set('tcvar:0:发情', 1);
       set(`tcvar:${god.id}:发情`, 1);
@@ -108,7 +110,9 @@ async function love_god_common(
         false,
       );
       await end_ero_and_show_result();
-      set(`cflag:${god.id}:阴茎尺寸`, 0);
+      if (!get(`cflag:${god.id}:性别`)) {
+        set(`cflag:${god.id}:阴茎尺寸`, 0);
+      }
       set(`cflag:${god.id}:招募状态`, recruit_flags.yes);
       new LifeEventMarks(god.id).add('love');
       set(`cflag:${god.id}:父方角色`, god.id);

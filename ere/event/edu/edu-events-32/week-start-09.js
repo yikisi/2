@@ -776,7 +776,7 @@ module.exports = (handlers) => {
     await tachyon.print_and_wait([
       '……但从身上不适的感觉来看，八成又是日本杯那时的事吧',
     ]);
-    await tachyon.print_and_wait([t_call_c, '已经超越了极限']);
+    await tachyon.print_and_wait([t_call_c, ' 已经超越了极限']);
     await tachyon.print_and_wait(['超越了 ', tachyon.get_colored_name()]);
     await tachyon.print_and_wait([
       '所以……就算',

@@ -51,9 +51,9 @@ function get_suffix(chara_id, type) {
   const ret = [];
   if (type === chara_info_type.train) {
     const chara_score = get_chara_score(chara_id),
-      motivation = era.get(`cflag:${chara_id}:干劲`);
-    let chara_level = get_rank_level(chara_score);
-    const races = new RaceHistory(chara_id).get_values();
+      motivation = era.get(`cflag:${chara_id}:干劲`),
+      chara_level = get_rank_level(chara_score),
+      races = new RaceHistory(chara_id).get_values();
     ret.push(
       {
         config: {
@@ -247,7 +247,7 @@ async function select_target(type) {
         buffer.push(
           {
             config: { align: 'center', width: 1 },
-            content: '评分',
+            content: '评价',
             type: 'text',
           },
           {

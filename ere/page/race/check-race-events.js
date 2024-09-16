@@ -1,4 +1,5 @@
 const {
+  add,
   drawLine,
   get,
   input,
@@ -34,12 +35,23 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 /**
  * 特殊赛后事件口上
  *
+ * @param {number} race
  * @param {RaceInfo} info
  * @param {PseudoUma[]} team_contestants
  */
-async function check_race_events(info, team_contestants) {
+async function check_race_events(race, info, team_contestants) {
   const may_life_marks = new MayLifeMarks();
   let handler = undefined;
+  if (team_contestants.findIndex((e) => e.rank.curr === 1) !== -1) {
+    if (race === race_enum.prix_lat) {
+      get('cflag:204:随机招募') <= 0 && add('cflag:204:随机招募', -1);
+    }
+    if (race === race_enum.prix_lat || race === race_enum.prix_dia) {
+      [205, 206].forEach(
+        (e) => !get(`cflag:${e}:随机招募`) && add(`cflag:${e}:随机招募`, -1),
+      );
+    }
+  }
   if (
     info === race_infos[race_enum.prix_lat] &&
     team_contestants.findIndex((e) => e.rank.curr === 1) !== -1 &&
@@ -57,7 +69,7 @@ async function check_race_events(info, team_contestants) {
         track_names[info.track],
         '竞马场时，',
         me.get_colored_name(),
-        '与一位记者打扮的',
+        ' 与一位记者打扮的',
         etsuko.get_phy_sex_title(),
         '不期而遇。',
       ]);

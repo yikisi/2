@@ -137,32 +137,31 @@ module.exports = {
               era.get(`status:${chara_id}:健康茶`));
           era.add(`base:${chara_id}:体重偏差`, Math.ceil(lose_weight));
           sys_change_pressure(chara_id, get_random_value(change / 5, 0));
-          if (
-            -change >= 500 ||
-            Math.random() < Math.pow(2, (-change - 500) / 100)
-          ) {
-            era.add(
-              `base:${chara_id}:耐力`,
-              1 +
-                (era.get(`base:${chara_id}:体力`) <
-                  0.45 * era.get(`maxbase:${chara_id}:体力`)),
-            );
-          }
+          era.add(
+            `base:${chara_id}:耐力`,
+            Math.min(-change / 500, 1) +
+              (era.get(`base:${chara_id}:体力`) <
+                0.45 * era.get(`maxbase:${chara_id}:体力`))
+              ? Math.random()
+              : 0,
+          );
         } else {
           sys_change_lust(chara_id, get_random_value(change, 0) / 4);
           sys_change_pressure(chara_id, get_random_value(change / 10, 0));
-          if (
-            -change >= 500 ||
-            Math.random() < Math.pow(2, (-change - 500) / 100)
-          ) {
-            era.add(
-              `base:${chara_id}:智力`,
-              1 +
-                (era.get(`base:${chara_id}:精力`) <
-                  0.5 * era.get(`maxbase:${chara_id}:精力`)),
-            );
-          }
+          era.add(
+            `base:${chara_id}:智力`,
+            Math.min(-change / 500) +
+              (era.get(`base:${chara_id}:精力`) <
+                0.5 * era.get(`maxbase:${chara_id}:精力`))
+              ? Math.random()
+              : 0,
+          );
         }
+      }
+      if (change > 0) {
+        change = Math.max(change, 1);
+      } else {
+        change = Math.min(change, -1);
       }
     } else if (
       chara_id &&

@@ -79,10 +79,10 @@ handlers[ero_hooks.orgasm_denial] = async (_, extra_flag) => {
     is_double_blow_job =
       last_action === ero_hooks.ask_double_blow_job ||
       last_action === ero_hooks.double_blow_job;
-  era.print([me.get_colored_name(), ' 的肉棒已经达到极限……']);
 
-  era.printMultiColumns(
-    [
+  era.printMultiColumns([
+    { content: [me.get_colored_name(), ' 的肉棒已经达到极限……'], type: 'text' },
+    ...[
       '射了！',
       '再忍一下',
       !era.get('tcvar:0:避孕套') && stop_ex_options[touch.part]
@@ -90,15 +90,13 @@ handlers[ero_hooks.orgasm_denial] = async (_, extra_flag) => {
         : '',
     ]
       .filter((e) => e)
-      .map((e, i, l) => {
-        return {
-          accelerator: i,
-          config: { width: 24 / l.length, align: 'center' },
-          content: e,
-          type: 'button',
-        };
-      }),
-  );
+      .map((e, i, l) => ({
+        accelerator: i,
+        config: { align: 'center', width: 24 / l.length },
+        content: e,
+        type: 'button',
+      })),
+  ]);
   const ret = await era.input();
   if (ret) {
     // 寸止但没忍住
@@ -688,7 +686,7 @@ handlers[ero_hooks.shop_end] = () => {};
 /**
  * @author 雞雞
  * @author 幽白書
- * @author 黑奴零号
+ * @author 无名黑奴
  *
  * @param {HookArg} hook
  * @param {{shown:boolean}} extra_flag

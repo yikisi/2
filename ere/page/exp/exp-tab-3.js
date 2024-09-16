@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const {
+  get_filled_exp_str,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -64,11 +65,13 @@ module.exports = {
           body_sex_exp = era.get(`cstr:${chara.id}:初次身交经历`),
           unknown_body_sex_exp = era.get(`cstr:${chara.id}:无自觉初次身交经历`);
         if (face_semen_exp) {
-          body_exp_list.push(face_semen_exp);
+          body_exp_list.push(get_filled_exp_str(face_semen_exp, chara.id));
         }
         if (flags.show_all_exp || face_semen_exp) {
           if (unknown_face_semen_exp) {
-            body_exp_list.push(unknown_face_semen_exp);
+            body_exp_list.push(
+              get_filled_exp_str(unknown_face_semen_exp, chara.id),
+            );
           }
           if (face_semen) {
             body_exp_list.push(
@@ -81,11 +84,13 @@ module.exports = {
         push_link_break(body_exp_list);
 
         if (body_sex_exp) {
-          body_exp_list.push(body_sex_exp);
+          body_exp_list.push(get_filled_exp_str(body_sex_exp, chara.id));
         }
         if (flags.show_all_exp || body_sex_exp) {
           if (unknown_body_sex_exp) {
-            body_exp_list.push(unknown_body_sex_exp);
+            body_exp_list.push(
+              get_filled_exp_str(unknown_body_sex_exp, chara.id),
+            );
           }
           if (body_fuck_count || body_semen) {
             body_exp_list.push(

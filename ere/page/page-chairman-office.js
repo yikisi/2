@@ -159,7 +159,7 @@ async function page_chairman_office() {
                   temp_list.push(302);
                 }
                 era.printMultiColumns(
-                  ['用名字指名', '用ID指名', '从列表里选', '再想想'].map(
+                  ['从列表里选', '用名字指名', '用ID指名', '再想想'].map(
                     (e, i) => {
                       return {
                         accelerator: i + 1,
@@ -173,17 +173,6 @@ async function page_chairman_office() {
                 let temp = await era.input();
                 switch (temp) {
                   case 1:
-                    era.print('请输入想指名的角色名');
-                    temp = await era.input();
-                    temp = temp_list.filter(
-                      (e) => era.get(`static:${e}:name`) === temp,
-                    )[0];
-                    break;
-                  case 2:
-                    era.print('请输入想指名的角色ID');
-                    temp = await era.input();
-                    break;
-                  case 3:
                     temp = [];
                     temp_list
                       .map((chara_id) => {
@@ -229,6 +218,17 @@ async function page_chairman_office() {
                         temp.push(...l);
                       });
                     era.printMultiColumns(temp);
+                    temp = await era.input();
+                    break;
+                  case 2:
+                    era.print('请输入想指名的角色名');
+                    temp = await era.input();
+                    temp = temp_list.filter(
+                      (e) => era.get(`static:${e}:name`) === temp,
+                    )[0];
+                    break;
+                  case 3:
+                    era.print('请输入想指名的角色ID');
                     temp = await era.input();
                     break;
                   case 4:

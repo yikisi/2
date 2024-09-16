@@ -10,7 +10,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 /**
  * 佐岳五月 - 爱慕
  *
- * @author 黑奴零号（临时）
+ * @author 无名黑奴（临时）
  *
  * @param _
  * @param __
@@ -68,6 +68,7 @@ module.exports = async (_, __, event_object) => {
     '最重要的追梦伙伴。',
   ]);
   if (life_marks.who_am_i !== 2) {
+    may.actual_name = era.set('callname:343:-1', '狄杜斯');
     await era.printAndWait([
       '深深吸了口气，',
       may.sex,
@@ -75,7 +76,9 @@ module.exports = async (_, __, event_object) => {
     ]);
     await era.printAndWait([
       may.sex,
-      '为隐藏身份至今向 ',
+      ' 说自己的真名是 ',
+      may.get_colored_actual_name(),
+      '，并为隐藏身份至今向 ',
       me.get_colored_name(),
       ' 道歉，希望以后 ',
       me.get_couple_title(),

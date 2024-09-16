@@ -20,6 +20,7 @@ const {
 
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
+const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { attr_names } = require('#/data/train-const');
 
@@ -704,8 +705,18 @@ module.exports = (handlers) => {
       coffee.get_colored_name(),
       ' 的训练员，应该对此做出回应吧',
     ]);
-    era.printButton('「很不甘心……没能带着茶座取得胜利」', 1);
-    era.printButton('「所以，宝冢茶座绝对会变得比现在更强来超越速子！」', 2);
+    const { winner, loser } =
+      (new RaceHistory(32).get_result(95 + race_infos[race_enum.takz_kin].date)
+        ?.rank || 20) <
+      (new RaceHistory(25).get_result(95 + race_infos[race_enum.takz_kin].date)
+        ?.rank || 20)
+        ? { loser: '茶座', winner: '速子' }
+        : { loser: '速子', winner: '茶座' };
+    era.printButton(`「很不甘心……没能带着${loser}取得胜利」`, 1);
+    era.printButton(
+      `「所以，宝冢${loser}绝对会变得比现在更强来超越${winner}！」`,
+      2,
+    );
     await era.input();
     await tachyon.say_and_wait('……不甘心……吗？');
     era.println();
@@ -713,8 +724,11 @@ module.exports = (handlers) => {
       tachyon.get_colored_name(),
       ' 咀嚼着话语，但是，要说的还没说完',
     ]);
-    era.printButton('「但是，身为速子的训练员！」', 1);
-    era.printButton('「绝不会让速子输给茶座的，宝冢一定也是速子的胜利！」', 2);
+    era.printButton(`「但是，身为${winner}的训练员！」`, 1);
+    era.printButton(
+      `「绝不会让${winner}输给${loser}的，宝冢一定也是${winner}的胜利！」`,
+      2,
+    );
     await era.input();
     await era.printAndWait('没有错');
     await era.printAndWait([

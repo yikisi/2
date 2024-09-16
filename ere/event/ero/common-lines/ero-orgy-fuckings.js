@@ -100,19 +100,19 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.ask_spit_roast] = async (
-    attacker,
-    defender,
-    hook,
-    extra_flag,
-  ) => {
-    const supporter = get_chara_talk(extra_flag.supporter);
+  handlers[ero_hooks.ask_spit_roast] = handlers[
+    ero_hooks.ask_spit_roast_anal_sex
+  ] = async (attacker, defender, hook, extra_flag) => {
+    const supporter = get_chara_talk(extra_flag.supporter),
+      part_name = hook.hook === ero_hooks.ask_spit_roast ? '小穴' : '屁穴';
     if (hook.arg) {
       await era.printAndWait([
         attacker.get_colored_name(),
         ` ${Math.random() < 0.5 ? '张开双腿' : '四肢着地'}摇晃着屁股，示意 `,
         defender.get_colored_name(),
-        ' 插入自己的小穴，又贪婪地把 ',
+        ' 插入自己的',
+        part_name,
+        '，又贪婪地把 ',
         supporter.get_colored_name(),
         ' 的肉棒含进口中……',
       ]);
@@ -123,40 +123,9 @@ module.exports = (handlers) => {
         supporter.get_colored_name(),
         ' 一起不断进攻着 ',
         attacker.get_colored_name(),
-        ' 的小穴和口穴，',
-      ]);
-      await era.printAndWait([
-        '身下的快感与口中肉棒令人窒息的冲击感觉让 ',
-        attacker.get_colored_name(),
-        ' 的脑中已经只剩下肉棒了……',
-      ]);
-    }
-  };
-
-  handlers[ero_hooks.ask_spit_roast_anal_sex] = async (
-    attacker,
-    defender,
-    hook,
-    extra_flag,
-  ) => {
-    const supporter = get_chara_talk(extra_flag.supporter);
-    if (hook.arg) {
-      await era.printAndWait([
-        attacker.get_colored_name(),
-        ` ${Math.random() < 0.5 ? '张开双腿' : '四肢着地'}摇晃着屁股，示意 `,
-        defender.get_colored_name(),
-        ' 插入自己的屁穴，又贪婪地把 ',
-        supporter.get_colored_name(),
-        ' 的肉棒含进口中……',
-      ]);
-    } else {
-      await era.printAndWait([
-        defender.get_colored_name(),
-        ' 与 ',
-        supporter.get_colored_name(),
-        ' 一起不断进攻着 ',
-        attacker.get_colored_name(),
-        ' 的屁穴和口穴，',
+        ' 的',
+        part_name,
+        '和口穴，',
       ]);
       await era.printAndWait([
         '身下的快感与口中肉棒令人窒息的冲击感觉让 ',
@@ -294,89 +263,47 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.spit_roast] = async (
-    attacker,
-    defender,
-    hook,
-    extra_flag,
-  ) => {
-    const supporter = get_chara_talk(extra_flag.supporter);
-    if (hook.arg) {
-      await era.printAndWait([
-        defender.get_colored_name(),
-        ' 被 ',
-        attacker.get_colored_name(),
-        ' 与 ',
-        supporter.get_colored_name(),
-        ' 一把按住，',
-      ]);
-      await era.printAndWait([
-        '二人丝毫不考虑 ',
-        defender.get_colored_name(),
-        ' 的感受。',
-      ]);
-      await era.printAndWait([
-        '只管一前一后地把兴奋得高高挺起的肉棒插入 ',
-        defender.get_colored_name(),
-        ' 的小穴和口穴里用力抽插……',
-      ]);
-    } else {
-      await era.printAndWait([
-        attacker.get_colored_name(),
-        ' 与 ',
-        supporter.get_colored_name(),
-        ' 一起不断进攻着 ',
-        defender.get_colored_name(),
-        ' 的小穴和口穴，',
-      ]);
-      await era.printAndWait([
-        '身下的快感与口中肉棒令人窒息的冲击感觉让 ',
-        defender.get_colored_name(),
-        ' 的脑中已经只剩下肉棒了……',
-      ]);
-    }
-  };
-
-  handlers[ero_hooks.spit_roast_anal_sex] = async (
-    attacker,
-    defender,
-    hook,
-    extra_flag,
-  ) => {
-    const supporter = get_chara_talk(extra_flag.supporter);
-    if (hook.arg) {
-      await era.printAndWait([
-        defender.get_colored_name(),
-        ' 被 ',
-        attacker.get_colored_name(),
-        ' 与 ',
-        supporter.get_colored_name(),
-        ' 一把按住，',
-      ]);
-      await era.printAndWait([
-        '二人丝毫不考虑 ',
-        defender.get_colored_name(),
-        ' 的感受。',
-      ]);
-      await era.printAndWait([
-        '只管一前一后地把兴奋得高高挺起的肉棒插入 ',
-        defender.get_colored_name(),
-        ' 的屁穴和口穴里用力抽插……',
-      ]);
-    } else {
-      await era.printAndWait([
-        attacker.get_colored_name(),
-        ' 与 ',
-        supporter.get_colored_name(),
-        ' 一起不断进攻着 ',
-        defender.get_colored_name(),
-        ' 的屁穴和口穴，',
-      ]);
-      await era.printAndWait([
-        '身下的快感与口中肉棒令人窒息的冲击感觉让 ',
-        defender.get_colored_name(),
-        ' 的脑中已经只剩下肉棒了……',
-      ]);
-    }
-  };
+  handlers[ero_hooks.spit_roast] = handlers[ero_hooks.spit_roast_anal_sex] =
+    async (attacker, defender, hook, extra_flag) => {
+      const supporter = get_chara_talk(extra_flag.supporter),
+        part_name = hook.hook === ero_hooks.spit_roast ? '小穴' : '屁穴';
+      if (hook.arg) {
+        await era.printAndWait([
+          defender.get_colored_name(),
+          ' 被 ',
+          attacker.get_colored_name(),
+          ' 与 ',
+          supporter.get_colored_name(),
+          ' 一把按住，',
+        ]);
+        await era.printAndWait([
+          '二人丝毫不考虑 ',
+          defender.get_colored_name(),
+          ' 的感受。',
+        ]);
+        await era.printAndWait([
+          '只管一前一后地把兴奋得高高挺起的肉棒插入 ',
+          defender.get_colored_name(),
+          ' 的',
+          part_name,
+          '和口穴里用力抽插……',
+        ]);
+      } else {
+        await era.printAndWait([
+          attacker.get_colored_name(),
+          ' 与 ',
+          supporter.get_colored_name(),
+          ' 一起不断进攻着 ',
+          defender.get_colored_name(),
+          ' 的',
+          part_name,
+          '和口穴，',
+        ]);
+        await era.printAndWait([
+          '身下的快感与口中肉棒令人窒息的冲击感觉让 ',
+          defender.get_colored_name(),
+          ' 的脑中已经只剩下肉棒了……',
+        ]);
+      }
+    };
 };

@@ -7,7 +7,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 /**
  * 快乐米可 - 招募
  *
- * @author 黑奴零号（临时）
+ * @author 无名黑奴（临时）
  */
 module.exports = {
   async run() {

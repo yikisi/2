@@ -7,7 +7,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 /**
  * 佐岳五月 - 招募
  *
- * @author 黑奴零号（临时）
+ * @author 无名黑奴（临时）
  */
 module.exports = {
   async run() {

@@ -289,11 +289,17 @@ module.exports = async () => {
               accelerator: 103,
               config: {
                 disabled:
-                  chara_id === 0 && skill_control.get().length >= 9 && pt < 100,
+                  chara_id === 0 &&
+                  skill_control
+                    .get()
+                    .filter((e) => !e.toString().startsWith('9')).length >= 9 &&
+                  pt < 100,
                 width: 4,
               },
               content:
-                chara_id === 0 && skill_control.get().length >= 9
+                chara_id === 0 &&
+                skill_control.get().filter((e) => !e.toString().startsWith('9'))
+                  .length >= 9
                   ? '重置技能'
                   : '学习技能',
               type: 'button',
@@ -358,27 +364,44 @@ module.exports = async () => {
         discount = get_discount(chara_id);
         break;
       case 103:
-        if (chara_id === 0 && skill_control.get().length >= 9) {
+        if (
+          chara_id === 0 &&
+          skill_control.get().filter((e) => !e.toString().startsWith('9'))
+            .length >= 9
+        ) {
           if (await select_yes_or_no('要使用 100 点技能点数重置技能吗？')) {
             era.add('exp:0:技能点数', -100);
+            const generated_skills = skill_control
+              .get()
+              .filter((e) => e.toString().startsWith('9'));
             skill_control.clear();
             if (era.get('cflag:0:模版角色') > 0) {
               chara_skill_dict[era.get('cflag:0:模版角色')].forEach((s) =>
                 get_skills_and_print_in_event(0, [s], skill_control, false),
               );
             }
+            skill_control.add(...generated_skills);
           }
         } else {
           while (flag_skill) {
             era.drawLine({
               content: `为 ${era.get(`callname:${chara_id}:-2`)} 选择技能`,
             });
+            const unused_group2level = {};
             let available_skills = {},
               got_skills = {};
             common_skills.forEach((e) => (available_skills[e] = 1));
-            new CharaAvailableSkills(chara_id)
-              .get()
-              .forEach((e) => delete available_skills[e]);
+            new CharaAvailableSkills(chara_id).get().forEach((e) => {
+              const s = skills_dict[e];
+              if (!unused_group2level[s.group_id]) {
+                unused_group2level[s.group_id] = s.group_level;
+              } else {
+                unused_group2level[s.group_id] = Math.min(
+                  unused_group2level[s.group_id],
+                  s.group_level,
+                );
+              }
+            });
             available_skills = Object.keys(available_skills)
               .map(Number)
               .reduce((p, c) => {
@@ -392,6 +415,15 @@ module.exports = async () => {
               .get()
               .forEach((s) => (got_skills[skills_dict[s].group_id] = s));
             Object.keys(available_skills).forEach((k) => {
+              const learned_skill_level =
+                unused_group2level[
+                  skills_dict[available_skills[k][0]].group_id
+                ];
+              if (learned_skill_level) {
+                available_skills[k] = available_skills[k].filter(
+                  (e) => skills_dict[e].group_level < learned_skill_level,
+                );
+              }
               available_skills[k] = sort_list(
                 available_skills[k],
                 (e) => skills_dict[e].group_level,

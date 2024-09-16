@@ -223,8 +223,8 @@ module.exports = (handlers) => {
       '了',
     ]);
     era.println();
-    await era.printAndWait(['闪烁如光的', tachyon.sex]);
-    await era.printAndWait(['漆黑如影的', coffee.sex]);
+    await era.printAndWait(['闪烁如光的', tachyon.get_colored_sex()]);
+    await era.printAndWait(['漆黑如影的', coffee.get_colored_sex()]);
     await era.printAndWait(['最开始就是如此简单的事']);
     era.println();
     await era.printAndWait('只是像孩子一样稚气的愿望');

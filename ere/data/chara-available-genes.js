@@ -5,9 +5,7 @@ const { sort_list } = require('#/utils/list-utils');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 
 class CharaAvailableGenes {
-  /**
-   * @param {CharaAvailableGenes} c
-   */
+  /** @param {CharaAvailableGenes} c */
   static merge_into_player(c) {
     const player_genes = new CharaAvailableGenes(0);
     if (!player_genes.obj[`c${c.id}`]) {

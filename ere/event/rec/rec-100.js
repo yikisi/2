@@ -34,53 +34,61 @@ module.exports = {
       if (await check_before_rec(100)) {
         return false;
       }
-      await me.say_and_wait('……我这一生，尽是些可耻之事。', true);
       await me.say_and_wait(
-        '抱歉，之所以引用这句名言，并非是想恬不知耻的将自己比作那位知名的文学家。',
+        '……我家门前有两棵树，一颗是枣树、另一颗也是枣树。',
         true,
       );
-      await me.say_and_wait('而只是想说——我实在是一个羞耻的人。', true);
       await me.say_and_wait(
-        '在这所人才辈出的特雷森学园中，我是那仅存的「没有才能」的训练员。',
+        '抱歉，之所以引用这句名言，并非是想借文学家的名言附庸风雅。',
+        true,
+      );
+      await me.say_and_wait('而只是想说些什么……又或者是实在无话可说。', true);
+      await me.say_and_wait(
+        '是工作上带来的疲劳压垮了自己作为训练员的自信吗？',
+        true,
+      );
+      await me.say_and_wait(
+        '是最近几场连轴转的比赛给自己带来了过大的压力吗？',
         true,
       );
       await me.say_and_wait(
         [
-          '赛',
+          '还是对于付出了真情的赛',
           acute.get_uma_sex_title(),
-          '们总是以我没有才能为由，拒绝我来担当训练员的申请——这已经是第十一次了。',
+          '，一直犹豫不决不知道作为训练员究竟该与其保持怎样的距离；结果让双方一同受伤了呢？',
         ],
         true,
       );
+      await me.say_and_wait('可能都有……也可能都没有。', true);
       era.drawLine();
       if (era.get('cflag:60:招募状态') === recruit_flags.yes) {
-        await get_chara_talk(60).say_and_wait(
-          '好啦好啦，因为是普通人，被拒绝是很正常的啦。',
+        await get_chara_talk(60).used_to_say_and_wait(
+          '好啦好啦，因为是普通人，感到疲惫是很正常的啦。',
         );
       }
       if (era.get('cflag:62:招募状态') === recruit_flags.yes) {
-        await get_chara_talk(62).say_and_wait([
+        await get_chara_talk(62).used_to_say_and_wait([
           '没事的啦，',
           sys_get_colored_callname(62, 0),
-          '～总有预感，下次会很顺利的啦～',
+          '～提起精神啦～',
         ]);
       }
       if (era.get('cflag:13:招募状态') === recruit_flags.yes) {
-        await get_chara_talk(13).say_and_wait([
+        await get_chara_talk(13).used_to_say_and_wait([
           '嘛……总之，要一起来喝下午茶吗，',
           sys_get_colored_callname(13, 0),
           '？',
         ]);
       }
       if (era.get('cflag:7:招募状态') === recruit_flags.yes) {
-        await get_chara_talk(7).say_and_wait([
+        await get_chara_talk(7).used_to_say_and_wait([
           '哦，',
           sys_get_colored_callname(7, 0),
           '～拉面一狗贼？',
         ]);
       }
       if (era.get('cflag:71:招募状态') === recruit_flags.yes) {
-        await get_chara_talk(71).say_and_wait([
+        await get_chara_talk(71).used_to_say_and_wait([
           '没事的，',
           sys_get_colored_callname(71, 0),
           '！只要凭借目白家的财力的话——',
@@ -88,21 +96,21 @@ module.exports = {
       }
       if (era.get('cflag:61:招募状态') === recruit_flags.yes) {
         const temp = get_chara_talk(61);
-        await temp.say_and_wait([
-          '哦——吼吼！不用在意凡人的眼光。你的才能，由我 ',
+        await temp.used_to_say_and_wait([
+          '哦——吼吼！不用在意凡人的眼光。无论何时，你的才能与身姿都将由我 ',
           temp.name,
-          ' 所认可了哦！',
+          ' 认可了哦！',
         ]);
       }
       if (era.get('cflag:6:招募状态') === recruit_flags.yes) {
-        await get_chara_talk(6).say_and_wait([
+        await get_chara_talk(6).used_to_say_and_wait([
           '……',
           sys_get_colored_callname(6, 0),
           '，肚子饿了。',
         ]);
       }
       if (era.get('cflag:21:招募状态') === recruit_flags.yes) {
-        await get_chara_talk(21).say_and_wait([
+        await get_chara_talk(21).used_to_say_and_wait([
           '诺，',
           sys_get_colored_callname(21, 0),
           '。这是大阪烧哇，我给你和 ',
@@ -111,49 +119,27 @@ module.exports = {
         ]);
       }
       if (era.get('cflag:11:招募状态') === recruit_flags.yes) {
-        await get_chara_talk(11).say_and_wait([
+        await get_chara_talk(11).used_to_say_and_wait([
           '呼呼～真是可爱呢，',
           sys_get_colored_callname(11, 0),
           '～',
         ]);
       }
       if (era.get('cflag:32:招募状态') === recruit_flags.yes) {
-        await get_chara_talk(32).say_and_wait([
-          '放心吧，',
+        await get_chara_talk(32).used_to_say_and_wait([
+          '哦呀，',
           sys_get_colored_callname(32, 0),
-          '！变得受欢迎的药很快就能研究出来了！',
+          '！既然你那么在意的话，那要来尝尝这个能忘记一切的药吗？不收你钱的哦～',
         ]);
       }
       if (era.get('cflag:25:招募状态') === recruit_flags.yes) {
-        await get_chara_talk(25).say_and_wait([
+        await get_chara_talk(25).used_to_say_and_wait([
           '……再继续下去的话，',
           sys_get_colored_callname(25, 0),
           '……你会被杀掉的哦？',
         ]);
       }
       era.drawLine();
-      await era.printAndWait([
-        '虽然得到过理事长与担当',
-        acute.get_uma_sex_title(),
-        '们的安慰……',
-      ]);
-      await era.printAndWait([
-        '但被拒绝十一次的经历，实在犹如一枚失败的印记，刻印在 ',
-        me.get_colored_name(),
-        ' 的身上。',
-      ]);
-      await era.printAndWait(
-        '——更别提因为某场比赛的事故，而欠下的一百二十一亿的债务了。',
-      );
-      await era.printAndWait([
-        '虽然想方设法暂时填上了这个窟窿……但 ',
-        me.get_colored_name(),
-        ' 曾经的热情也因那向天际的一指而失去了。',
-      ]);
-      await era.printAndWait(
-        `自以为能成为优秀的训练员，而来到特雷森学园的${sys_get_callname(0, 0)}。`,
-      );
-      await era.printAndWait('终于，连那份支撑自己的感情，也消失了吗？');
       await era.printAndWait('去天台抽根烟吧……');
       era.set('cflag:100:随机招募', 0);
       era.set('flag:物色对象', 100);
@@ -169,7 +155,64 @@ module.exports = {
       }
       era.set('flag:物色对象', 0);
       new EventMarks(0).sub(event_hooks.school_rooftop);
-      era.printButton('「……叹气」', 1);
+      await era.printAndWait(
+        '黄昏的天台上，下意识地想要点上一根能让自己暂时忘记一切的香烟。',
+      );
+      await era.printAndWait('于是伸出手，摸了摸自己的口袋。');
+      await era.printAndWait('——可口袋里什么都没有。');
+      era.drawLine();
+      await era.printAndWait(
+        '黄昏的夕阳下，一架飞机在天边航行，留下一条橘黄色的直线。',
+      );
+      await era.printAndWait(
+        '依在栏杆上望向天空，从未感受过如此的自由、也从未感受过如此的压抑。',
+      );
+      await era.printAndWait([
+        '当初，自己欠下一百二十一亿天价债务时，是 ',
+        get_chara_talk(302).get_colored_name(),
+        ' 收留了 ',
+        me.get_colored_name(),
+        '，让 ',
+        me.get_colored_name(),
+        ' 作为训练员想方设法度过了还款地狱、补上了这天价的窟窿。',
+      ]);
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 想，时至今日，或许 ',
+        sys_get_colored_callname(0, 302),
+        ' 仍旧很信任 ',
+        me.get_colored_name(),
+        '。',
+      ]);
+      await era.printAndWait([
+        '除却 ',
+        sys_get_colored_callname(0, 302),
+        ' 外，还有 ',
+        sys_get_colored_callname(0, 301),
+        '、乃至于其他的担当',
+        acute.get_uma_sex_title(),
+        '……',
+        me.get_colored_name(),
+        ' 想，',
+        acute.sex,
+        '们仍对 ',
+        me.get_colored_name(),
+        ' 有期望。',
+      ]);
+      await era.printAndWait('可这份期望，又何尝不是一种重担呢？');
+      await era.printAndWait([
+        '归根结底，',
+        me.get_colored_name(),
+        ' 也只是一个【凡人】而已吧。',
+      ]);
+      await era.printAndWait(
+        '一个做不到任何事情都面面俱到、本不该承受如此的厚望、只是一个在世间拼命挣扎，如果可以的话也想要后退逃跑的，最为普通的【凡人】吧？',
+      );
+      await me.say_and_wait('……………………');
+      await me.say_and_wait('…………');
+      await me.say_and_wait('……');
+      await me.say_and_wait('好想……逃跑啊。', true);
+      era.printButton('「唉……（叹气）」', 1);
       await era.input();
       await acute.say_as_unknown_and_wait(
         '哎呀呀……总是叹气的话，福气可是会跑出去的哦？',

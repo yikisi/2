@@ -12,7 +12,7 @@ const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-
 /**
  * 骏川缰绳 - 爱慕
  *
- * @author 黑奴零号（临时）
+ * @author 无名黑奴（临时）
  *
  * @param _
  * @param __

@@ -1,7 +1,9 @@
-const { PrismaClient } = require('@prisma/client');
 const { execSync } = require('child_process');
 const { writeFileSync } = require('node:fs');
 const { join } = require('path');
+
+const { PrismaClient } = require('@prisma/client');
+
 const prisma = new PrismaClient();
 
 const UmaSkill = require('../../ere/data/race/model/uma-skill');
@@ -605,7 +607,6 @@ async function chara_skill() {
     buffer += `skills_dict[${id}]=require('#/data/race/skill/skill-${id}');`;
     let sbuffer =
       "const UmaSkill = require('#/data/race/model/uma-skill');\n\nmodule.exports = new UmaSkill(";
-    console.log(e.name);
     if (e.category === undefined) {
       console.log('\tmissed! ', e.icon_id);
     }
