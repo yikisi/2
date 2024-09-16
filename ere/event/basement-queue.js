@@ -15,12 +15,16 @@ module.exports = {
     );
     queue.splice(index + 1, 0, action);
   },
-  /** @param {function(BasementAction):boolean} filter_cb */
+  /**
+   * @param {function(BasementAction):boolean} filter_cb
+   * @returns {BasementAction[]}
+   */
   clean_actions(filter_cb) {
-    queue = set(
-      'flag:地下室行动',
-      queue.filter((e) => !filter_cb(e)),
-    );
+    const ret = [],
+      rest = [];
+    queue.forEach((e) => (filter_cb(e) ? rest : ret).push(e));
+    queue = set('flag:地下室行动', rest);
+    return ret;
   },
   /** @param {function(BasementAction):boolean} filter_cb */
   find_action(filter_cb) {

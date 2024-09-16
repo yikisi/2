@@ -19,7 +19,23 @@ class BasementOwners {
     this.obj = era.set('flag:地下室之主', []);
   }
 
-  /** @param {function(number)} cb */
+  /**
+   * @param {function(number,number,number[])} cb
+   * @returns {number}
+   */
+  count(cb) {
+    return this.obj.filter(cb).length;
+  }
+
+  /**
+   * @param {function(number,number,number[])} cb
+   * @returns {number[]}
+   */
+  filter(cb) {
+    return this.obj.filter(cb);
+  }
+
+  /** @param {function(number,number,number[])} cb */
   for_each(cb) {
     this.obj.forEach(cb);
     return this;

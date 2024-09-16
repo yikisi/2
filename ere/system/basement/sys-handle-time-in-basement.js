@@ -120,12 +120,16 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
       cache[e] = era.get(`relation:${e}:0`);
     }
   });
-  basement_queue.clean_actions(
-    (e) =>
-      part_list.indexOf(e.chara_id) !== -1 &&
-      e.type !== action_type_enum.get_up &&
-      e.type !== action_type_enum.digestive_end,
-  );
+  basement_queue
+    .clean_actions(
+      (e) =>
+        part_list.indexOf(e.chara_id) !== -1 &&
+        e.type !== action_type_enum.get_up,
+    )
+    .filter((a) => a.type === action_type_enum.digestive_end)
+    .forEach((a) =>
+      sys_change_attr_and_print(a.chara_id, '体力', get_random_value(100, 200)),
+    );
   begin_and_init_ero(...part_list);
   if (is_rape) {
     era.set(
@@ -578,16 +582,14 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               action_type_enum.get_up,
             ),
           );
-        } else if (!rape_character) {
+        } else {
+          const fixing = basement_owners.count(
+            (e) =>
+              new LifeEventMarks(e).b_status === 1 << basement_status_enum.fix,
+          );
           if (
+            !fixing &&
             !fix_character &&
-            !basement_owners
-              .get()
-              .filter(
-                (e) =>
-                  new LifeEventMarks(e).b_status ===
-                  1 << basement_status_enum.fix,
-              ).length &&
             (!my_life_marks.b_now ||
               my_life_marks.b_enhance - my_life_marks.b_now >=
                 6 - life_marks.b_s_level) &&
@@ -612,6 +614,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             }
             if (stay_flag) {
               if (
+                !fixing &&
                 !fix_character &&
                 get_custom_check(e).is_want_make_love() > 0
               ) {
@@ -641,18 +644,22 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         }
       }
     });
-    if (rape_character) {
+    if (
+      rape_character &&
+      !fix_character &&
+      !basement_owners.count(
+        (e) => new LifeEventMarks(e).b_status === 1 << basement_status_enum.fix,
+      )
+    ) {
       const part_list = [
         rape_character,
-        ...basement_owners
-          .get()
-          .filter(
-            (e) =>
-              e !== rape_character &&
-              sys_check_awake(e) &&
-              new LifeEventMarks(e).b_status !==
-                1 << basement_status_enum.outside,
-          ),
+        ...basement_owners.filter(
+          (e) =>
+            e !== rape_character &&
+            sys_check_awake(e) &&
+            new LifeEventMarks(e).b_status !==
+              1 << basement_status_enum.outside,
+        ),
       ];
       if (sys_check_awake(0)) {
         await get_custom_basement(part_list[0]).rape(part_list[1]);
@@ -709,6 +716,14 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               action_type_enum.back_basement,
             ),
           );
+        }
+        if (
+          basement_queue.clean_actions(
+            (a) =>
+              a.chara_id === e && a.type === action_type_enum.digestive_end,
+          ).length
+        ) {
+          sys_change_attr_and_print(e, '体力', get_random_value(100, 200));
         }
       });
     }

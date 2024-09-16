@@ -119,13 +119,10 @@ module.exports = async (_, save_and_next_week, flags) => {
   const chara_list = [
     0,
     ...sort_list(
-      basement_owners
-        .get()
-        .filter(
-          (e) =>
-            new LifeEventMarks(e).b_status !==
-            1 << basement_status_enum.outside,
-        ),
+      basement_owners.filter(
+        (e) =>
+          new LifeEventMarks(e).b_status !== 1 << basement_status_enum.outside,
+      ),
       (e, i) => (!sys_check_awake(e) << 1) + i,
       true,
     ),
