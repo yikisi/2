@@ -530,6 +530,7 @@ async function chara_skill() {
   skill_dict[910031] = 1;
   delete skill_dict[100601];
   delete skill_dict[900601];
+  delete skill_dict[101201];
   console.log('+通用技能', Object.keys(skill_dict).length);
   const skill_data = await find_many_skills({
     id: { in: Object.keys(skill_dict).map(Number) },

@@ -1096,7 +1096,6 @@ model collect_raid_master {
   gain_collect_item_min       Int
   individual_reward_set_id    Int
   all_reward_set_id           Int
-  story_set_id                Int
   mission_top_chara_group_id  Int
   staging_mini_chara_group_id Int
   story_list_bg_id            Int
@@ -1165,7 +1164,6 @@ model collect_raid_staging_mini_chara {
 
 model collect_raid_story {
   id                   Int @id @default(autoincrement())
-  story_set_id         Int
   collect_raid_id      Int
   story_condition_type Int
   unlock_condition     Int
@@ -2532,38 +2530,39 @@ model love_rank {
 }
 
 model main_story_data {
-  id                    Int @id @default(autoincrement())
-  part_id               Int
-  episode_index         Int
-  prev_episode_index    Int
-  next_episode_index    Int
-  story_number          Int
-  display_type          Int
-  story_type_1          Int
-  story_id_1            Int @unique(map: "sqlite_autoindex_main_story_data_1")
-  story_type_2          Int
-  story_id_2            Int
-  story_type_3          Int
-  story_id_3            Int
-  story_type_4          Int
-  story_id_4            Int
-  story_type_5          Int
-  story_id_5            Int
-  lock_type_1           Int
-  lock_value_1_1        Int
-  lock_value_1_2        Int
-  lock_type_2           Int
-  lock_value_2_1        Int
-  lock_value_2_2        Int
-  lock_type_3           Int
-  lock_value_3_1        Int
-  lock_value_3_2        Int
-  add_reward_category_1 Int
-  add_reward_id_1       Int
-  add_reward_num_1      Int
-  add_reward_category_2 Int
-  add_reward_id_2       Int
-  add_reward_num_2      Int
+  id                        Int @id @default(autoincrement())
+  part_id                   Int
+  episode_index             Int
+  prev_episode_index        Int
+  next_episode_index        Int
+  lock_reference_episode_id Int
+  story_number              Int
+  display_type              Int
+  story_type_1              Int
+  story_id_1                Int @unique(map: "sqlite_autoindex_main_story_data_1")
+  story_type_2              Int
+  story_id_2                Int
+  story_type_3              Int
+  story_id_3                Int
+  story_type_4              Int
+  story_id_4                Int
+  story_type_5              Int
+  story_id_5                Int
+  lock_type_1               Int
+  lock_value_1_1            Int
+  lock_value_1_2            Int
+  lock_type_2               Int
+  lock_value_2_1            Int
+  lock_value_2_2            Int
+  lock_type_3               Int
+  lock_value_3_1            Int
+  lock_value_3_2            Int
+  add_reward_category_1     Int
+  add_reward_id_1           Int
+  add_reward_num_1          Int
+  add_reward_category_2     Int
+  add_reward_id_2           Int
+  add_reward_num_2          Int
 
   @@index([part_id], map: "main_story_data_0_part_id")
 }
