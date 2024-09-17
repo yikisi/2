@@ -232,7 +232,7 @@ class CustomizedBase {
       chara.get_colored_name(),
       ' 将 ',
       me.get_colored_name(),
-      '拖了回去！',
+      ' 拖了回去！',
     ]);
     if (s_level_up) {
       era.print([

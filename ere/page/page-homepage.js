@@ -269,7 +269,7 @@ module.exports = async () => {
           ' 被学园的救援队救出了地下室……',
         ]);
         const jpy = Math.ceil(era.get('flag:当前马币') / 2);
-        if (jpy) {
+        if (jpy > 0) {
           await era.printAndWait('……但是被扣除了一半存款作为上周误工的罚款。');
           era.add('flag:当前马币', -jpy);
         }

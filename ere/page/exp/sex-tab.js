@@ -12,7 +12,12 @@ const get_gradient_color = require('#/utils/gradient-color');
 const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
 const { palam2juel } = require('#/data/ero/orgasm-const');
-const { growth_info, no_info, unknown_info } = require('#/data/exp-const');
+const {
+  abl_desc,
+  growth_info,
+  no_info,
+  unknown_info,
+} = require('#/data/exp-const');
 const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
 
 const page_name = '性爱情况';
@@ -225,6 +230,7 @@ module.exports = {
                 palam_colors.notifications[1],
                 level / 5,
               ),
+              title: (abl_desc[e] || abl_desc[e.substring(2)])[level],
             },
           ],
           type: 'text',

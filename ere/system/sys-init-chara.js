@@ -106,6 +106,10 @@ function reset_chara(chara_id) {
 }
 
 module.exports = {
+  /**
+   * @param {number} chara_id
+   * @param {number} [src_chara_id]
+   */
   init_chara(chara_id, src_chara_id) {
     const current = new Date().getTime();
     if (
@@ -234,10 +238,6 @@ module.exports = {
           era.add(`relation:${chara_id}:0`, era.get('flag:马娘初始好感') - 75);
         }
 
-        if (era.get(`talent:${chara_id}:病娇`) > 0) {
-          new YandereList().push(chara_id, true);
-        }
-
         if (era.get(`cflag:${chara_id}:种族`)) {
           switch (era.get('flag:马娘身高')) {
             case 0:
@@ -339,6 +339,9 @@ module.exports = {
           case 621:
             era.set(`talent:${chara_id}:病娇`, 1);
         }
+        if (era.get(`talent:${chara_id}:病娇`) > 0) {
+          new YandereList().push(chara_id, true);
+        }
         const my_src_chara = era.get('cflag:0:模版角色');
         if (era.get(`relation:${chara_id}`)[my_src_chara]) {
           era.set(
@@ -371,6 +374,7 @@ module.exports = {
       );
     }
   },
+  /** @param {number} chara_id */
   recruit_chara(chara_id) {
     reset_chara(chara_id);
     era.set(`cflag:${chara_id}:自主训练`, 1);
