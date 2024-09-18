@@ -11,6 +11,7 @@ const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46'
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_names, fumble_result } = require('#/data/train-const');
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise<*>>}*/
 const handlers = {};
@@ -586,7 +587,7 @@ handlers[event_hooks.out_shopping] = async (hook, extra_flag, event_object) => {
   if (event_marks.curiosity_girl === 1) {
     event_marks.curiosity_girl++;
   }
-  await print_event_name(`黄金菊！`, chara_talk);
+  await print_event_name(`黄金菊`, chara_talk);
   await era.printAndWait(`休息日的某一天`);
   await chara_talk.say_and_wait(
     `训练员${me.get_adult_sex_title()},可以过来一下吗？`,
@@ -1032,7 +1033,72 @@ handlers[event_hooks.crazy_fan_end] = async function () {
     await print_event_name(`Freesia`, chara_talk);
   }
 };
-
+handlers[event_hooks.out_church] = async () => {
+  const me = get_chara_talk(0),
+    edu_weeks = era.get('cflag:4:育成回合计时');
+  const chara_talk = get_chara_talk(46);
+  if (edu_weeks === 95 + 1) {
+    await print_event_name('神社祈愿', chara_talk);
+    await chara_talk.say_and_wait(`不管来多少次，这里看起来都是这么安静呢⭐`);
+    await chara_talk.say_and_wait(
+      `唔——虽然干脆让神明大人也来看飞鹰子的演唱会吧！`,
+    );
+    era.printButton(`犯傻也要适可而止！`, 1);
+    await era.input();
+    await era.printAndWait(
+      `你轻轻敲了敲醒目飞鹰的脑袋，随着后者发出唔嗯一声，涟漪的水面又恢复了平静。`,
+    );
+    await era.printAndWait(
+      `抬头再次看向排成长队的香客，一阵无力感袭击了全身。`,
+    );
+    era.printButton(`前来参拜的游客比想象之中多得多啊。`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(`因为大家都要宁愿花费时间也要实现的愿望呢。`);
+    await chara_talk.say_and_wait(
+      `不过飞鹰子会给作为粉丝们（预定）的大家努力加油的！`,
+    );
+    await era.printAndWait(
+      `看着大量人群向着同一处前进，化为本能的偶像意识让醒目飞鹰一瞬间就兴奋起来。`,
+    );
+    await me.say_and_wait(`……至少先参拜完再说吧。`);
+    await era.printAndWait(
+      `看着旁边精力似乎永远花不完的少女，你稍微有些头疼。`,
+    );
+    await era.printAndWait(
+      `既不是因为随意举办临时演唱会造成的困扰，也不是因为对接下来的泥地G1全部胜利的苛刻要求感到头疼。`,
+    );
+    await me.say_and_wait(`那个笑容，怎么看都是挤出来的。`, true);
+    era.drawLine();
+    await era.printAndWait(`漫长的等待过后，你们站在了奉纳箱前。`);
+    await era.printAndWait(
+      `看着近在咫尺的三女神雕像，向三女神祈求繁荣的河神传说浮现在脑海之中。`,
+    );
+    await era.printAndWait(`……祈求着繁荣的河神吗？`);
+    await era.printAndWait(`思考在时间面前来回踱步。`);
+    await chara_talk.say_and_wait(`三女神大人——`);
+    await era.printAndWait(`身体模仿着旁边的物体做出了相同的动作。`);
+    await era.printAndWait(`在这霎那之间，你思考的结果是`);
+    era.printButton(`河神祈求土地的人们健康`, 1);
+    era.printButton(`河神祈求土地的人们勇敢`, 2);
+    era.printButton(`河神祈求土地的人们智慧`, 3);
+    const ret1 = await era.input();
+    if (ret1 === 1) {
+      get_attr_and_print_in_event(
+        46,
+        [0, 0, 0, 0, 0],
+        0,
+        JSON.parse('{"体力":600}'),
+      ) && (await era.waitAnyKey());
+    } else if (ret1 === 2) {
+      get_attr_and_print_in_event(46, [10, 10, 10, 10, 10], 0) &&
+        (await era.waitAnyKey());
+    } else {
+      get_attr_and_print_in_event(46, [0, 0, 10, 0, 0], 100) &&
+        (await era.waitAnyKey());
+    }
+    await era.printAndWait(`之后，你的耳边传来了三女神的低语。`);
+  }
+};
 /**
  * 醒目飞鹰 - 育成
  *

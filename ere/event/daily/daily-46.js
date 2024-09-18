@@ -12,7 +12,6 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
 const event_hooks = require('#/data/event/event-hooks');
-
 const chara_talk = get_chara_talk(46);
 
 /** @type {Record<string,function(stage_id:HookArg,extra_flag:*):Promise<boolean>>} */
@@ -623,9 +622,6 @@ handlers[event_hooks.out_church] = async function () {
         `回到训练室后，你觉得和醒目飞鹰之间的关系变好了一点。`,
       );
     }
-  } else {
-    // todo 待更新第二年后续写
-    await era.printAndWait(`醒目飞鹰。`);
   }
 };
 

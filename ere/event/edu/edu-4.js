@@ -992,7 +992,7 @@ handlers[event_hooks.out_church] = async () => {
         4,
         [0, 0, 0, 0, 0],
         0,
-        JSON.parse('{"体力":300}'),
+        JSON.parse('{"体力":600}'),
       ) && (await era.waitAnyKey());
     } else if (ret === 2) {
       await chara_talk.say_and_wait(
@@ -1003,7 +1003,7 @@ handlers[event_hooks.out_church] = async () => {
       );
       await chara_talk.say_and_wait('那么，已经决定好的话，就赶快进去吧！');
       era.println();
-      get_attr_and_print_in_event(4, [10, 0, 0, 0, 0], 0) &&
+      get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], 0) &&
         (await era.waitAnyKey());
     } else {
       await chara_talk.say_and_wait('说到我的长处的话，果然还是驾驶技术吧？');
@@ -1011,7 +1011,7 @@ handlers[event_hooks.out_church] = async () => {
       await chara_talk.say_and_wait('OK！训练的时候我也会注意这一方面的.');
       await chara_talk.say_and_wait('嗯，稍微耽搁了一下下呢，赶快进去吧！');
       era.println();
-      get_attr_and_print_in_event(4, [0, 0, 0, 0, 0], 20) &&
+      get_attr_and_print_in_event(4, [0, 0, 0, 0, 0], 100) &&
         (await era.waitAnyKey());
     }
   }
