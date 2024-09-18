@@ -87,27 +87,35 @@ async function sys_next_week() {
   randomly_interact(in_team_list);
   // 极端事件判定
   if (check_pregnant_unprotect(0)) {
+    const basement_owners = new BasementOwners();
     /** @type {{chara_id:number,prison:boolean,[supporter]:number}[]} */
     let act_list = [];
-    let prepared_list =
-      (temp = era.get('flag:床伴')) &&
+    let prepared_list;
+    if (
+      (temp = era.get('flag:床伴')) > 0 &&
       era.get(`base:${temp}:体力`) &&
       era.get(`base:${temp}:精力`) &&
       sys_check_awake(temp)
-        ? [temp].filter(check_pregnant_unprotect)
-        : in_team_list.filter(
-            (chara_id) => chara_id !== temp && sys_check_awake(temp),
-          );
-    prepared_list.forEach((chara_id) => {
+    ) {
+      prepared_list = [temp];
+    } else if (era.get('flag:当前位置') === location_enum.basement) {
+      prepared_list = basement_owners.get();
+    } else {
+      prepared_list = in_team_list.filter(
+        (chara_id) => chara_id !== temp && sys_check_awake(chara_id),
+      );
+    }
+    prepared_list.filter(check_pregnant_unprotect).forEach((chara_id) => {
       if (
-        new BasementOwners().get(0) === chara_id ||
+        basement_owners.get(0) === chara_id ||
         get_custom_check(chara_id).is_prison()
       ) {
         act_list.push({
           chara_id,
           prison:
             (!era.get('item:透明棉被') || Math.random() < 0.5) &&
-            !new LifeEventMarks(chara_id).b_cd,
+            !new LifeEventMarks(chara_id).b_cd &&
+            era.get('flag:当前位置') !== location_enum.basement,
         });
       } else if (get_custom_check(chara_id).is_rape_in_sleeping()) {
         act_list.push({ chara_id, prison: false });

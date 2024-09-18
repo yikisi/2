@@ -568,4 +568,5 @@ module.exports = async (_, save_and_next_week, flags) => {
       my_life_marks.b_status === 1 << basement_status_enum.escape
     );
   }
+  flags.after_select = true;
 };

@@ -22,7 +22,7 @@ module.exports = {
   clean_actions(filter_cb) {
     const ret = [],
       rest = [];
-    queue.forEach((e) => (filter_cb(e) ? rest : ret).push(e));
+    queue.forEach((e) => (filter_cb(e) ? ret : rest).push(e));
     queue = set('flag:地下室行动', rest);
     return ret;
   },

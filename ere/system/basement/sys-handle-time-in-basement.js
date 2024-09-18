@@ -294,10 +294,12 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               sys_check_awake(basement_owners.get(0))
             ) {
               get_custom_basement(basement_owners.get(0)).welcome();
-              life_marks.b_start = owner_marks.b_start = 0;
-            } else {
+              owner_marks.b_start = 0;
+            } else if (my_life_marks.b_start) {
               get_custom_basement(0).welcome();
-              life_marks.b_start = 0;
+            } else {
+              get_custom_basement(e.chara_id).get_up();
+              print_handler && print_handler();
             }
           } else {
             get_custom_basement(e.chara_id).get_up();
@@ -355,109 +357,110 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         );
         sex_end_time = undefined;
         break;
-      case action_type_enum.rescue: {
-        const owner = basement_owners.get(0),
-          life_marks_o = new LifeEventMarks(owner),
-          relation_check =
-            (era.get('flag:极端行为限制') || 1) *
-              era.get(`love:${e.chara_id}`) -
-            era.get(`relation:${e.chara_id}:0`);
-        my_life_marks.b_now = Math.min(my_life_marks.b_now, 1);
-        // 0-无事发生，1-趁人不备救援成功，2-趁人不备绑回地下室，3-同流合污，4-击败对方救援成功，5-击败对方绑回地下室
-        let rescue_result_type = 0;
-        if (
-          life_marks_o.b_status === 1 << basement_status_enum.outside ||
-          !sys_check_awake(owner)
-        ) {
-          rescue_result_type = 1 + (relation_check > 0);
-        } else if (
-          era.get(`relation:${owner}:${e.chara_id}`) > 375 &&
-          era.get(`relation:${e.chara_id}:${owner}`) > 75 &&
-          relation_check > 0 &&
-          !era.get(`talent:${owner}:病娇`) &&
-          !era.get(`talent:${e.chara_id}:病娇`)
-        ) {
-          rescue_result_type = 3;
-        } else if (
-          get_random_value(0, 1, true) <
-          sys_get_strength_ratio_in_fight(e.chara_id, owner)
-        ) {
-          rescue_result_type = 4 + (relation_check > 0);
-          sys_hurt_uma(owner, get_random_value(0, 2), false);
-          sys_change_pressure(owner, get_random_value(500, 1000));
-        } else {
-          sys_hurt_uma(e.chara_id, get_random_value(0, 2), false);
-          sys_change_pressure(e.chara_id, get_random_value(500, 1000));
-        }
-        const basement_scripts = get_custom_basement(e.chara_id);
-        switch (rescue_result_type) {
-          case 0:
-            await basement_scripts.rescue_fail(owner);
-            break;
-          case 1:
-            await basement_scripts.rescue_sneak_success(owner);
-            break;
-          case 2:
-            await basement_scripts.rescue_sneak_prison(owner);
-            break;
-          case 3:
-            await basement_scripts.rescue_join(owner);
-            break;
-          case 4:
-            await basement_scripts.rescue_battle_success(owner);
-            break;
-          case 5:
-            await basement_scripts.rescue_battle_prison(owner);
-        }
-        era.set('status:0:沉睡', 0);
-        era.set('status:0:马跳S', 0);
-        basement_queue.clean_actions(
-          (a) => a.chara_id === 0 && a.type === action_type_enum.get_up,
-        );
-        era.drawLine();
-        if (rescue_result_type === 1 || rescue_result_type === 4) {
-          era.set('flag:当前位置', location_enum.office);
-          era.set('flag:当前互动角色', e.chara_id);
-          sys_handle_escape_basement(false);
-        } else {
-          if (rescue_result_type === 2 || rescue_result_type === 5) {
-            basement_queue.clean_actions((a) => a.chara_id === owner);
-            basement_owners.clear();
-            life_marks_o.b_timer =
-              life_marks_o.b_enhance =
-              life_marks_o.b_now =
-              life_marks_o.b_s_level =
-              life_marks_o.b_status =
-              life_marks_o.b_stamina_buff =
-              life_marks_o.b_food_buff =
-              life_marks_o.b_time_buff =
-              life_marks_o.b_out_cd =
-              life_marks_o.b_r_seed =
-              life_marks_o.b_food_medicine =
-                0;
-            if (life_marks_o.b_escape <= 0) {
-              life_marks_o.b_escape++;
-            }
+      case action_type_enum.rescue:
+        if (my_life_marks.b_now >= 0) {
+          const owner = basement_owners.get(0),
+            life_marks_o = new LifeEventMarks(owner),
+            relation_check =
+              (era.get('flag:极端行为限制') || 1) *
+                era.get(`love:${e.chara_id}`) -
+              era.get(`relation:${e.chara_id}:0`);
+          my_life_marks.b_now = Math.min(my_life_marks.b_now, 1);
+          // 0-无事发生，1-趁人不备救援成功，2-趁人不备绑回地下室，3-同流合污，4-击败对方救援成功，5-击败对方绑回地下室
+          let rescue_result_type = 0;
+          if (
+            life_marks_o.b_status === 1 << basement_status_enum.outside ||
+            !sys_check_awake(owner)
+          ) {
+            rescue_result_type = 1 + (relation_check > 0);
+          } else if (
+            era.get(`relation:${owner}:${e.chara_id}`) > 375 &&
+            era.get(`relation:${e.chara_id}:${owner}`) > 75 &&
+            relation_check > 0 &&
+            !era.get(`talent:${owner}:病娇`) &&
+            !era.get(`talent:${e.chara_id}:病娇`)
+          ) {
+            rescue_result_type = 3;
+          } else if (
+            get_random_value(0, 1, true) <
+            sys_get_strength_ratio_in_fight(e.chara_id, owner)
+          ) {
+            rescue_result_type = 4 + (relation_check > 0);
+            sys_hurt_uma(owner, get_random_value(0, 2), false);
+            sys_change_pressure(owner, get_random_value(500, 1000));
+          } else {
+            sys_hurt_uma(e.chara_id, get_random_value(0, 2), false);
+            sys_change_pressure(e.chara_id, get_random_value(500, 1000));
           }
-          if (rescue_result_type > 0) {
-            life_marks.b_s_level = Math.max(
-              Math.floor(relation_check / 200),
-              0,
-            );
-            life_marks.b_status = 1 << basement_status_enum.idle;
-            life_marks.b_escape = 0;
-            await sys_call_ero_script(e.chara_id, ero_hooks.prison, {
-              shown: false,
-            });
-            if (rescue_result_type !== 3) {
-              my_life_marks.b_now = my_life_marks.b_enhance = Math.max(
-                life_marks.b_s_level + get_random_value(-1, 1),
-                1,
+          const basement_scripts = get_custom_basement(e.chara_id);
+          switch (rescue_result_type) {
+            case 0:
+              await basement_scripts.rescue_fail(owner);
+              break;
+            case 1:
+              await basement_scripts.rescue_sneak_success(owner);
+              break;
+            case 2:
+              await basement_scripts.rescue_sneak_prison(owner);
+              break;
+            case 3:
+              await basement_scripts.rescue_join(owner);
+              break;
+            case 4:
+              await basement_scripts.rescue_battle_success(owner);
+              break;
+            case 5:
+              await basement_scripts.rescue_battle_prison(owner);
+          }
+          era.set('status:0:沉睡', 0);
+          era.set('status:0:马跳S', 0);
+          basement_queue.clean_actions(
+            (a) => a.chara_id === 0 && a.type === action_type_enum.get_up,
+          );
+          era.drawLine();
+          if (rescue_result_type === 1 || rescue_result_type === 4) {
+            era.set('flag:当前位置', location_enum.office);
+            era.set('flag:当前互动角色', e.chara_id);
+            sys_handle_escape_basement(false);
+          } else {
+            if (rescue_result_type === 2 || rescue_result_type === 5) {
+              basement_queue.clean_actions((a) => a.chara_id === owner);
+              basement_owners.clear();
+              life_marks_o.b_timer =
+                life_marks_o.b_enhance =
+                life_marks_o.b_now =
+                life_marks_o.b_s_level =
+                life_marks_o.b_status =
+                life_marks_o.b_stamina_buff =
+                life_marks_o.b_food_buff =
+                life_marks_o.b_time_buff =
+                life_marks_o.b_out_cd =
+                life_marks_o.b_r_seed =
+                life_marks_o.b_food_medicine =
+                  0;
+              if (life_marks_o.b_escape <= 0) {
+                life_marks_o.b_escape++;
+              }
+            }
+            if (rescue_result_type > 0) {
+              life_marks.b_s_level = Math.max(
+                Math.floor(relation_check / 200),
+                0,
               );
+              life_marks.b_status = 1 << basement_status_enum.idle;
+              life_marks.b_escape = 0;
+              await sys_call_ero_script(e.chara_id, ero_hooks.prison, {
+                shown: false,
+              });
+              if (rescue_result_type !== 3) {
+                my_life_marks.b_now = my_life_marks.b_enhance = Math.max(
+                  life_marks.b_s_level + get_random_value(-1, 1),
+                  1,
+                );
+              }
             }
           }
         }
-      }
     }
     if (era.get('flag:当前位置') !== location_enum.basement) {
       break;

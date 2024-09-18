@@ -335,7 +335,6 @@ module.exports = async () => {
         basement_queue.add_action(
           new BasementAction(0, my_life_marks.b_timer, action_type_enum.get_up),
         );
-        my_life_marks.b_enhance = 1;
         owner_marks.b_s_level = Math.max(
           Math.floor(
             (era.get(`love:${owner}`) * (era.get('flag:极端行为限制') || 1) -
@@ -402,16 +401,15 @@ module.exports = async () => {
       era.drawLine();
       let hook = -1;
       if (flags.week_start) {
-        flags.week_start = false;
         if (chara_id) {
           hook = event_hooks.good_morning;
         }
       } else if (flags.after_select) {
-        flags.after_select = false;
         if (chara_id) {
           hook = event_hooks.select;
         }
       }
+      flags.week_start = flags.after_select = false;
       if (hook > 0) {
         await sys_call_daily_event(chara_id, hook);
       } else {
