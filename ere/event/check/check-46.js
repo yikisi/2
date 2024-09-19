@@ -176,8 +176,10 @@ module.exports = class extends CustomizedCheck {
         case 24:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 24-48周 恐慌 害怕被抛弃的恐慌 在全国各地参与比赛
-
+        // 8月第二周 与平日没有区别的日常
+        case 30:
+          add_event(event_hooks.week_start, event_obj_special);
+          break;
         // 9月第二周 努力减肥的飞鹰子！
         case 34:
           add_event(event_hooks.week_end, event_obj_special);
@@ -219,7 +221,7 @@ module.exports = class extends CustomizedCheck {
         case 47 + 40:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 11月第一周 醒目飞鹰
+        // 11月第一周 偶像的代价
         case 47 + 41:
           add_event(event_hooks.week_start, event_obj_special);
           break;
@@ -235,12 +237,12 @@ module.exports = class extends CustomizedCheck {
         case 95 + 1:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 1月第二周 山茶花
-        case 95 + 2:
-          add_event(event_hooks.week_start, event_obj_special);
-          break;
         // 2月第二周 情人节
         case 95 + 6:
+          add_event(event_hooks.week_start, event_obj_special);
+          break;
+        // 1月第二周 醒目飞鹰
+        case 95 + 9:
           add_event(event_hooks.week_start, event_obj_special);
           break;
         // 4月第二周 粉丝感谢祭
@@ -250,6 +252,10 @@ module.exports = class extends CustomizedCheck {
         // 5月第四周 前辈与后辈
         case 95 + 20:
           add_event(event_hooks.week_end, event_obj_special);
+          break;
+        // 5月第四周 前辈与后辈
+        case 95 + 23:
+          add_event(event_hooks.week_start, event_obj_special);
           break;
         // 8月第一周 夏季合宿开始
         case 95 + 29:
