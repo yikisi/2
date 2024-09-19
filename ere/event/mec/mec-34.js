@@ -1,4 +1,5 @@
 const { race_enum } = require('#/data/race/race-const');
+const era = require('#/era-electron');
 const CustomizedMec = require('#/event/mec/mec-common');
 
 module.exports = class extends CustomizedMec {
@@ -17,5 +18,11 @@ module.exports = class extends CustomizedMec {
       ];
     }
     return super.get_race_finish_report(uma, race_id);
+  }
+
+  set_callname() {
+    if (!this.set_callname_from_src()) {
+      era.set(`callname:${this.id}:0`, '老爷');
+    }
   }
 };

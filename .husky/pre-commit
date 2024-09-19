@@ -1,3 +1,8 @@
+cd tools/event
+node generate-check-factory.js
+node generate-mec-factory.js
+cd ../..
+git add .
 npm run lint
 cd tools/uma
 node check-chara-colors.js
