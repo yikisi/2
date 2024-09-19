@@ -464,5 +464,9 @@ module.exports = async (tachyon, me, callname, life_marks) => {
   era.set('love:32', 0);
   life_marks.reset();
   era.set('callname:32:0', '训练员君');
-  era.set('flag:当前声望', 0);
+  if (era.get('flag:声望不足替换')) {
+    era.set('flag:当前声望', 0);
+  } else {
+    era.set('flag:强制BE', 32);
+  }
 };

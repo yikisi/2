@@ -6,6 +6,7 @@ EraUma v0.901，适配 [EraElectron v2.2.0 (ginga)](https://gitgud.io/umaera/era
 ## Added
 
 * 丰富了角色情报-性爱情况界面中性爱能力的显示，现在所有等级文字有浮窗显示描述文字
+* 补充了爱丽速子的爱慕相关专属BE口上
 
 ## Changed
 
