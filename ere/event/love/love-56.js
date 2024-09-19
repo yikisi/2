@@ -32,6 +32,72 @@ const { location_enum } = require('#/data/locations');
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,EventObject):Promise>} */
 const handlers = {};
 
+handlers[25] = async (kitaru, me, callname) => {
+  await print_event_name(`恋心初动`, kitaru);
+  await era.printAndWait([
+    '某个假日，',
+    kitaru.get_colored_name(),
+    ' 正思考着最近发生的事情。',
+  ]);
+  await kitaru.say_and_wait(
+    ['唔，想到 ', callname, ' 心跳会加速是什么的预兆呢？'],
+    true,
+  );
+  await kitaru.say_and_wait('嗯……一定是大吉的状况吧！', true);
+  await kitaru.say_and_wait(
+    ['果然啊！', callname, ' 和占卜结果说的一样，是我的命定之人！'],
+    true,
+  );
+  await kitaru.say_and_wait('哼哼，我的占卜是不会有错的！', true);
+  await kitaru.say_and_wait(
+    '那么，之后也一直遵循下去就能找到属于自己的幸福吧？',
+    true,
+  );
+  await kitaru.say_and_wait('是这样吗……？', true);
+  await kitaru.say_and_wait(
+    [
+      '明明 ',
+      callname,
+      ' 给出的指示有时和占卜出的结果完全不一致，那为什么我还会……',
+    ],
+    true,
+  );
+  era.printButton('「待兼福来？」', 1);
+  await era.input();
+  await kitaru.say_and_wait(['啊！', callname, '，没想到能在这里见到你！']);
+  await kitaru.say_and_wait('诶！我吗？');
+  await kitaru.say_and_wait(
+    '唔……通过灵摆占卜到，这里是一个很适合想事情的地点哦！',
+  );
+  await kitaru.say_and_wait([callname, '是要去干什么呢？']);
+  era.printButton('回答', 1);
+  await era.input();
+  await kitaru.say_and_wait('喔！正好，那一起去吧！');
+  await kitaru.say_and_wait('嗯！为什么？');
+  await kitaru.say_and_wait('是……是因为……');
+  await era.printAndWait([
+    '似乎是自己也不知道为什么会突然说出这番话来，有些着急的',
+    kitaru.get_teen_sex_title(),
+    '居然开始下意识的捋着自己的耳朵来。',
+  ]);
+  era.printButton('「占卜的结果？」', 1);
+  await era.input();
+  await kitaru.say_and_wait('对的对的！');
+  await era.printAndWait([
+    '看来是察觉到了 ',
+    me.get_colored_name(),
+    ' 似笑非笑的目光，',
+    kitaru.get_colored_name(),
+    ' 的脸颊泛起了些微的绯红。',
+  ]);
+  await kitaru.say_and_wait('总之就是能开运啦！');
+  await era.printAndWait([
+    '之后在',
+    kitaru.sex,
+    '的死缠烂打之下，不得不同意了一起去购买日用品的要求。',
+  ]);
+};
+
 handlers[49] = async (kitaru, me, callname) => {
   await print_event_name('爱欲', kitaru);
   if (kitaru.sex_code === 1) {

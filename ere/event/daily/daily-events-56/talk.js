@@ -6,6 +6,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const FukuEventMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
+const { attr_enum } = require('#/data/train-const');
 
 module.exports = async () => {
   const message = [],
@@ -144,27 +145,28 @@ module.exports = async () => {
 
   await get_random_entry(message)();
 
-  era.drawLine();
-
-  await era.printAndWait([
-    '看见了 ',
-    kitaru.get_colored_name(),
-    ' 留在桌面上的纸条。',
-  ]);
-  switch (edu_marks.luck_train) {
-    case 1:
-      await kitaru.used_to_say_and_wait('对了，今天似乎速度训练是吉哦！');
-      break;
-    case 2:
-      await kitaru.used_to_say_and_wait('今天的吉项是耐力训练哦！');
-      break;
-    case 3:
-      await kitaru.used_to_say_and_wait('力量训练看起来不错的样子！');
-      break;
-    case 4:
-      await kitaru.used_to_say_and_wait('根性训练会不会适合一点！');
-      break;
-    case 5:
-      await kitaru.used_to_say_and_wait('智力训练乃是大吉！');
+  if (edu_marks.luck_train > 0) {
+    era.drawLine();
+    await era.printAndWait([
+      '看见了 ',
+      kitaru.get_colored_name(),
+      ' 留在桌面上的纸条。',
+    ]);
+    switch (edu_marks.luck_train - 1) {
+      case attr_enum.speed:
+        await kitaru.used_to_say_and_wait('对了，今天似乎速度训练是吉哦！');
+        break;
+      case attr_enum.endurance:
+        await kitaru.used_to_say_and_wait('今天的吉项是耐力训练哦！');
+        break;
+      case attr_enum.strength:
+        await kitaru.used_to_say_and_wait('力量训练看起来不错的样子！');
+        break;
+      case attr_enum.toughness:
+        await kitaru.used_to_say_and_wait('根性训练会不会适合一点！');
+        break;
+      case attr_enum.intelligence:
+        await kitaru.used_to_say_and_wait('智力训练乃是大吉！');
+    }
   }
 };

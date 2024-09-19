@@ -4,6 +4,8 @@ const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-dr
 const get_aim_function = require('#/system/script/get-aim-function');
 const { recruit_chara } = require('#/system/sys-init-chara');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const rec_common = require('#/event/rec/rec-common');
 const check_before_rec = require('#/event/rec/snippets/check-before-rec');
 const punish_by_yandere = require('#/event/snippets/punish-by-yandere');
@@ -59,25 +61,14 @@ async function sys_call_rec_event(chara_id, hook, extra_flag, event_object) {
         ]);
       }
       if (notes[chara_id]) {
-        era.printMultiColumns([
-          {
-            content: '是否查看相关的小纸条？',
-            type: 'text',
-          },
-          {
-            accelerator: 0,
-            config: { width: 12, align: 'center' },
-            content: '查看',
-            type: 'button',
-          },
-          {
-            accelerator: 100,
-            config: { width: 12, align: 'center' },
-            content: '之后去首页确认',
-            type: 'button',
-          },
-        ]);
-        if (!(await era.input())) {
+        era.drawLine();
+        if (
+          !(await select_yes_or_no(
+            '是否查看相关的小纸条？',
+            '查看',
+            '之后去首页确认',
+          ))
+        ) {
           notes[chara_id].forEach((e) =>
             era.print(
               [{ content: e.title, fontWeight: 'bold' }, '「', e.content, '」'],

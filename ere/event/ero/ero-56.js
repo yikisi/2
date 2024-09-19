@@ -1,23 +1,25 @@
 const era = require(`#/era-electron`);
 
-const { get_chara_talk } = require(`#/utils/chara-talk-factory`);
-const { buff_colors } = require('#/data/color-const');
-const { part_enum, part_names } = require('#/data/ero/part-const');
-const { ero_action_names, ero_hooks } = require('#/data/event/ero-hooks');
+const { orgasm_check_list } = require('#/system/ero/sys-calc-ero-status');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+
 const {
   after_refusing_by_attacker,
   after_refusing_by_defender,
   ask_action,
 } = require('#/event/ero/common-lines/snippets');
 const get_participants_and_first_action = require('#/event/ero/snippets/get-participants-and-first-action');
-const { get_random_value } = require('#/utils/value-utils');
 
-const { orgasm_check_list } = require('#/system/ero/sys-calc-ero-status');
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 const { log_7 } = require('#/utils/value-utils');
 
+const { buff_colors } = require('#/data/color-const');
+const { part_enum, part_names } = require('#/data/ero/part-const');
+const { ero_action_names, ero_hooks } = require('#/data/event/ero-hooks');
 const { location_name } = require('#/data/locations');
+
 const handlers = {},
   sleep_handlers = {};
 
@@ -262,7 +264,6 @@ handlers[ero_hooks.get_mark] = async (chara_id, _, extra_flag) => {
           await MF.say_and_wait(`呀！！！`);
           await MF.say_and_wait(`不，没事~命定之人请继续吧！`);
           await me.print_and_wait([
-            ``,
             MF.get_colored_name(),
             `那蒙上了层水雾的橙色双眸注视着`,
             me.get_colored_name(),
@@ -3264,7 +3265,7 @@ handlers[ero_hooks.bite_nipple] = async (attacker, defender, _, extra_flag) => {
 };
 
 handlers[ero_hooks.ask_insult] = async (attacker, defender, hook) => {
-  if (attacker.id != 56) {
+  if (attacker.id !== 56) {
     throw new Error(`unsupported hook!`);
   }
   if (hook.arg) {

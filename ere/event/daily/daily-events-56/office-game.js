@@ -1,7 +1,11 @@
+const { add_event, cb_enum } = require('#/event/queue');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const FukuEventMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 
 module.exports = async () => {
   const kitaru = get_chara_talk(56),
@@ -19,11 +23,18 @@ module.exports = async () => {
     () => kitaru.say_and_wait('命运COOP，看来是同行呢！'),
   );
 
-  if (edu_marks.fortune_game_duel >= 1) {
+  if (edu_marks.game_times >= 5) {
     message.push(() =>
       kitaru.say_and_wait('呼呼……用占卜来读指令什么的，果然特别好用呢！'),
     );
   }
-  edu_marks.GAME_TIMES++;
+  edu_marks.game_times < 3 && edu_marks.game_times++;
+  if (edu_marks.game_times === 3) {
+    edu_marks.game_times = 4;
+    add_event(
+      event_hooks.office_game,
+      new EventObject(56, cb_enum.edu).set_arg('fortune_game_duel_1'),
+    );
+  }
   await get_random_entry(message)();
 };

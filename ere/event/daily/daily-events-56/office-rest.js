@@ -44,7 +44,7 @@ module.exports = async () => {
     ]);
     await era.printAndWait([
       me.get_colored_name(),
-      '则开始准备起先前二人一起买回来的苹果。',
+      ' 则开始准备起先前二人一起买回来的苹果。',
     ]);
   }
 };

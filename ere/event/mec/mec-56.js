@@ -6,6 +6,9 @@ const { buff_colors } = require('#/data/color-const');
 
 module.exports = class extends CustomizedMec {
   set_callname() {
+    if (super.set_callname_from_src() || era.get('love:56') < 75) {
+      super.set_callname();
+    }
     era.set('callname:56:0', '命定之人');
   }
 
@@ -64,18 +67,11 @@ module.exports = class extends CustomizedMec {
           '训练员在身边的话，毫无疑问的是大吉呢！训练成功率+10%，所有训练效果+5%，好感获取+10%，参赛时属性+5%',
       });
     }
-    return ret;
+    return ret.map((e) => {
+      e.title = `[${e.content}]：${e.title}`;
+      return e;
+    });
   }
-  /**
-    "运势依赖":"今天的运势是什么呢？",
-  "大吉": "灵力满溢！训练成功率+10% 所有训练效果+5% 好感获取+10% 参赛时属性+5% ",
-  "中吉": "好运气呢！训练成功率+5% 所有训练效果+5% 参赛时属性+3%",
-  "小吉": "总之不坏！训练成功率+5% 参赛时属性+1%",
-  "凶": "这个时候去安慰福来的话？训练成功率-10% 所有训练效果-10% 参赛时属性-10% 好感获取+20%",
-  "PTSD":"不得不去面对的阴影。训练成功率-10% 所有训练效果-10% 参赛时属性-10% 干劲上限-3",
-  "稳定":"训练员在身边的话，毫无疑问的是大吉呢！训练成功率+10% 所有训练效果+5% 好感获取+10% 参赛时属性+5%"
-
-   */
 
   get_motivation_limit() {
     return -3 * era.get('status:56:PTSD');
