@@ -29,17 +29,26 @@ aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = 2;
 aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 2;
 aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 2;
 aim_races[get_aim_race_index(race_enum.japa_cup, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 3;
+aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 0b01;
 
-aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 0b100;
 aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 3;
 aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
 
 const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date;
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
+    const edu_marks = new LunaEduMarks();
     if (extra_flag.rank !== 1 && extra_flag.edu_weeks < edu_weeks_kiku_sho) {
-      new LunaEduMarks().title_check = 1;
+      edu_marks.title_check = 1;
+    }
+    if (
+      extra_flag.rank === 1 &&
+      ((extra_flag.race === race_enum.arim_kin &&
+        era.get('cflag:17:育成回合计时') < 96) ||
+        extra_flag.race === race_enum.tenn_spr)
+    ) {
+      CustomizedCheck.love_uma(edu_marks.emperor ? 9017 : 17, 4);
     }
   }
 

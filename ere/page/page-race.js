@@ -202,7 +202,7 @@ async function race_page(race) {
                 config: {
                   align: 'center',
                   buttonType:
-                    (aim_race_dict[id] & 0x1) > 0 ? 'danger' : 'warning',
+                    (aim_race_dict[id] & 0b1) > 0 ? 'danger' : 'warning',
                   disabled: race_start[id] || player_time < time_cost,
                 },
                 content: era.get(`callname:${id}:-2`),
@@ -351,7 +351,7 @@ async function race_page(race) {
                 config: {
                   align: 'center',
                   buttonType:
-                    (aim_race_dict[id] & 0x2) > 0 ? 'danger' : 'warning',
+                    (aim_race_dict[id] & 0b10) > 0 ? 'danger' : 'warning',
                   disabled: race_end[id] || player_time < time_cost,
                 },
                 content: `${era.get(`callname:${id}:-2`)} (${uma.rank.curr}着)`,

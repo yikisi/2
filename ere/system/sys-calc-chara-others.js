@@ -283,6 +283,7 @@ function print_change(chara_id, old_val, new_val, to_be_shown) {
 }
 
 CustomizedCheck.like_chara = like_chara;
+CustomizedCheck.love_uma = love_uma;
 
 module.exports = {
   sys_change_status_by_base(chara_id) {
