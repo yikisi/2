@@ -17,6 +17,7 @@ const print_ero_page = require('#/page/page-ero');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -274,7 +275,7 @@ handlers[event_hooks.school_atrium] = async (
         Math.max(era.get('base:49:性欲'), lust_border.itch),
       );
       begin_and_init_ero(0, 7, 49);
-      await print_ero_page(7);
+      await print_ero_page(7, true);
       await end_ero_and_show_result(true);
     }
 
@@ -307,8 +308,8 @@ handlers[event_hooks.school_atrium] = async (
     await era.printAndWait(
       `虽然有所偏差，但 ${gold_ship.name} 说得倒没错……但要不要借这个机会教育教育一下呢？`,
     );
-    era.printButton('「世界上也有很多种红色。」', 1);
-    era.printButton('「要贯彻自己的信念！」', 2);
+    era.printButton('「世界上也有很多种红色。」（智力+20）', 1);
+    era.printButton('「要贯彻自己的信念！」（根性+20）', 2);
     const ret = await era.input();
     if (ret === 1) {
       await gold_ship.say_and_wait('你说世上也有香艳的红色和反派的红色？！');
@@ -398,8 +399,8 @@ handlers[event_hooks.school_atrium] = async (
     );
     era.println();
 
-    era.printButton('「试着重现当时的汤头吧？」', 1);
-    era.printButton('「到当时的地方再看看吧？」', 2);
+    era.printButton('「试着重现当时的汤头吧？」（耐力&智力+10）', 1);
+    era.printButton('「到当时的地方再看看吧？」（速度+20）', 2);
     const ret = await era.input();
 
     if (ret === 1) {
@@ -456,12 +457,10 @@ handlers[event_hooks.school_atrium] = async (
     era.println();
 
     if (ret === 1) {
-      // TODO 技能「天赋异禀（切れ者）」
-      get_attr_and_print_in_event(7, [0, 10, 0, 0, 10], 0) &&
+      get_attr_and_print_in_event(7, [0, 10, 0, 0, 10], 50) &&
         (await era.waitAnyKey());
     } else {
-      // TODO 技能「天赋异禀（切れ者）」
-      get_attr_and_print_in_event(7, [20, 0, 0, 0, 0], 0) &&
+      get_attr_and_print_in_event(7, [20, 0, 0, 0, 0], 50) &&
         (await era.waitAnyKey());
     }
   }
@@ -506,8 +505,8 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
   era.println();
 
   await gold_ship.say_and_wait('呼～我也有点累了。之后要干嘛好？');
-  era.printButton('「我去买饮料吧。」', 1);
-  era.printButton('「延长赛！比到我赢为止！。」', 2);
+  era.printButton('「我去买饮料吧。」（耐力+20）', 1);
+  era.printButton('「延长赛！比到我赢为止！。」（力量+20）', 2);
   const ret = await era.input();
   if (ret === 1) {
     await era.printAndWait(
@@ -593,7 +592,7 @@ handlers[event_hooks.school_rooftop] = async (
       Math.max(era.get('base:49:性欲'), lust_border.absent_mind),
     );
     begin_and_init_ero(0, 7, 49);
-    await print_ero_page(49);
+    await print_ero_page(49, true);
     await end_ero_and_show_result(true);
   } else {
     await era.printAndWait(
@@ -609,8 +608,11 @@ handlers[event_hooks.school_rooftop] = async (
           : '他'
       }们的性格，等搞定之后午饭都要凉透了！怎么办，该阻止吗……？！`,
     );
-    era.printButton('「不，就由我来顶上吧！」', 1);
-    era.printButton('「加油啊……！」', 2);
+    era.printButton('「不，就由我来顶上吧！」（体力+100）', 1);
+    era.printButton(
+      '「加油啊……！」（习得【非根干距离○】、技能点数+60 or 技能点数+15）',
+      2,
+    );
     ret = await era.input();
     if (ret === 1) {
       await festa.say_and_wait('什么？没想到你竟然还挺勇的嘛……有趣！');
@@ -636,9 +638,9 @@ handlers[event_hooks.school_rooftop] = async (
         await era.printAndWait('但午休还是在不知不觉间过去了！');
         era.println();
 
+        get_skills_and_print_in_event(7, [200142]) && (await era.waitAnyKey());
         get_attr_and_print_in_event(7, undefined, 60) &&
           (await era.waitAnyKey());
-        // TODO 获得技能「非根干距离〇」
       } else {
         await era.printAndWait(
           `${gold_ship.name} 使出了浑身解数，但还是没赢过 ${festa.name}……`,

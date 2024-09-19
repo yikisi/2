@@ -9,7 +9,8 @@ module.exports = (is_reset) => {
   if (!is_reset) {
     if (sys_personal_achievement.get(302)) {
       new TasteLifeMarks().who_am_i = 1;
-      era.set('callname:302:-2', era.get('callname:302:-1'));
+      era.set('callname:302:-1', '北方风味');
+      era.set('callname:302:-2', '秋川弥生');
     }
     attr_names.forEach((e) => era.set(`base:302:${e}`, 1200));
   }

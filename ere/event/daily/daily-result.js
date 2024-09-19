@@ -18,6 +18,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { attr_enum } = require('#/data/train-const');
@@ -165,6 +166,7 @@ handlers[event_hooks.office_game] = async (chara_id) => {
       sys_like_chara(chara_id, 0, get_random_value(5, 10)) || wait_flag;
     wait_flag =
       (Math.random() < 0.25 && sys_change_motivation(chara_id, 1)) || wait_flag;
+    sys_change_pressure(chara_id, -get_random_value(100, 300));
   }
   wait_flag && (await era.waitAnyKey());
 };
@@ -177,9 +179,8 @@ handlers[event_hooks.good_night] = async (chara_id, hook) => {
     } else {
       sys_change_lust(chara_id, lust_from_palam);
       era.println();
-      if (sys_like_chara(chara_id, 0, -100)) {
-        await era.waitAnyKey();
-      }
+      sys_like_chara(chara_id, 0, -100) && (await era.waitAnyKey());
+      new MyEduMarks().reject++;
     }
   }
 };
@@ -255,38 +256,47 @@ handlers[event_hooks.out_river] = async (chara_id, hook, extra_flag) => {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.out_shopping] = async (chara_id, stage_id) => {
+handlers[event_hooks.out_shopping] = async (chara_id, hook) => {
   let wait_flag = false;
-  era.println();
-  if (stage_id.arg) {
-    // 街机厅和抽奖
-    // TODO 随机获得道具
-    random_cost_in_action(chara_id, [0, 100], [0, 100]);
-    wait_flag =
-      (chara_id && sys_like_chara(chara_id, 0, get_random_value(5, 10))) ||
-      wait_flag;
+  if (hook.arg === 2) {
+    await print_shop_page([
+      ...new Array(11).fill(0).map((_, i) => 810 + i),
+      { id: 821, limit: true },
+      { id: 824, limit: true },
+      { id: 825, limit: true },
+    ]);
+    random_cost_in_action(0, [0, 100], [0, 100]);
   } else {
-    // 卡拉OK和看电影
-    const temp = era.get(`cflag:${chara_id}:种族`)
-      ? sys_change_attr_and_print(
-          chara_id,
-          attr_enum.intelligence,
-          get_random_value(5, 10),
-        )
-      : [];
-    wait_flag =
-      (chara_id && sys_like_chara(chara_id, 0, get_random_value(10, 15))) ||
-      wait_flag;
-    print_attr_change(chara_id, temp);
-    wait_flag ||= temp.length > 0;
-    random_cost_in_action(chara_id, [0, 100], [200, 600]);
-    wait_flag =
-      (Math.random() < 0.5 &&
-        sys_change_motivation(chara_id, get_random_value(0, 2))) ||
-      wait_flag;
+    era.println();
+    if (hook.arg) {
+      // 街机厅和抽奖
+      random_cost_in_action(chara_id, [0, 100], [0, 100]);
+      wait_flag =
+        (chara_id && sys_like_chara(chara_id, 0, get_random_value(5, 10))) ||
+        wait_flag;
+    } else {
+      // 卡拉OK和看电影
+      const temp = era.get(`cflag:${chara_id}:种族`)
+        ? sys_change_attr_and_print(
+            chara_id,
+            attr_enum.intelligence,
+            get_random_value(5, 10),
+          )
+        : [];
+      wait_flag =
+        (chara_id && sys_like_chara(chara_id, 0, get_random_value(10, 15))) ||
+        wait_flag;
+      print_attr_change(chara_id, temp);
+      wait_flag ||= temp.length > 0;
+      random_cost_in_action(chara_id, [0, 100], [200, 600]);
+      wait_flag =
+        (Math.random() < 0.5 &&
+          sys_change_motivation(chara_id, get_random_value(0, 2))) ||
+        wait_flag;
+    }
+    sys_change_money(-10);
+    wait_flag && (await era.waitAnyKey());
   }
-  sys_change_money(-10);
-  wait_flag && (await era.waitAnyKey());
 };
 
 handlers[event_hooks.out_church] = async (chara_id) => {

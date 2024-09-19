@@ -41,7 +41,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
       '……那个，不好意思。我还是决定要做额外训练了，可以吗？',
     );
     era.printButton('「还是不要太过勉强……」', 1);
-    await era.waitAnyKey();
+    await era.input();
     await daiya.say_and_wait('……其实我昨天才刚看过小北比赛的影片──');
     await daiya.say_and_wait(
       '小北现在的表现真的变得越来越快，实力越来越坚强了……',
@@ -66,7 +66,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
         '留着明天再用吗……？唔唔，可是我没有自信自己一定忍得住……！',
       );
       era.printButton('「把斗志储蓄下来，最后再一次爆发吧」', 1);
-      await era.waitAnyKey();
+      await era.input();
       await daiya.say_and_wait(
         '……我明白了。那就这么说好了哦。明天一定要让我彻底训练……！',
       );
@@ -77,7 +77,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
         '这样的话，心里的那股冲动就会越来越高昂，明天一定就能非常地努力了！',
       );
       era.printButton('「那我们就一起看吧！」', 1);
-      await era.waitAnyKey();
+      await era.input();
       await daiya.say_and_wait('嗯♪');
       await era.printAndWait(
         '于是，在里见光钻热情的解说下，我们一起看完了以北部玄驹为重点的比赛影片。',
@@ -163,7 +163,7 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
           '可是，在我休养的时候，比赛中的其他对手们都会更加进步──',
         );
         era.printButton('「你一定能追过她们的」', 1);
-        await era.waitAnyKey();
+        await era.input();
         await daiya.say_and_wait('……我知道了。凡事都不能过于心急，对吧？');
         await daiya.say_and_wait(
           '虽然心情上会觉得很不甘心，但这份心情就等伤势复原后再用在训练上吧。',
@@ -217,7 +217,7 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
           '可是我几乎都不觉得痛了呀。只要小心一点就不会有问题的……！',
         );
         era.printButton('「还是在伤势恶化之前打消念头吧」', 1);
-        await era.waitAnyKey();
+        await era.input();
         await daiya.say_and_wait(
           '……说得也是呢。轻伤也是有可能不小心变成重伤的。',
         );
@@ -801,7 +801,7 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
  *
  * @author cy
  * @author 黑奴二号（改编）
- * @author 黑奴队长（修订）
+ * @author 无名黑奴（修订）
  *
  * @param {HookArg} hook
  * @param {*} extra_flag

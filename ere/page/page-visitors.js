@@ -11,8 +11,8 @@ const {
   setHorizontalAlign,
 } = require('#/era-electron');
 
-const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
 const sys_call_recruit = require('#/system/script/sys-call-recruit');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { get_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
@@ -25,11 +25,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
+const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
@@ -48,7 +48,7 @@ handlers[308] = () =>
   get('cflag:308:招募状态') === recruit_flags.yes || get('love:308') < 25
     ? {}
     : {
-        name: '一起努力吧！（招募）',
+        name: '「一起努力吧！」（招募）',
         handle() {
           set('callname:308:-2', '光辉致意');
           set('cflag:308:招募状态', recruit_flags.yes);
@@ -61,10 +61,10 @@ handlers[308] = () =>
 
 handlers[343] = () =>
   get('cflag:343:招募状态') === recruit_flags.yes ||
-  new MayLifeMarks().who_am_i !== 2
+  new MayLifeMarks().who_am_i !== 3
     ? {}
     : {
-        name: '一起努力吧！（招募）',
+        name: '「一起努力吧！」（招募）',
         handle() {
           set('callname:343:-2', '佐岳五月');
           set('cflag:343:招募状态', recruit_flags.yes);
@@ -82,38 +82,15 @@ async function page_visitors() {
   await clear();
   print_page_header();
   drawLine();
-  const vehicle = get('equip:0:单人载具');
+  const vehicle = get('flag:单人载具');
   print([
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了 ',
     location_name[location_enum.visitor],
     '……',
   ]);
-  let visitor_list = [];
-  if (
-    !(get('cflag:303:育成回合计时') < 3 * 48) &&
-    get('love:303') >= 25 &&
-    sys_check_npc_working(303)
-  ) {
-    visitor_list.push(303);
-  }
-  if (
-    !(get('cflag:308:育成回合计时') < 3 * 48) &&
-    get('flag:当前回合数') > 40 &&
-    (get('love:308') >= 25 || get('flag:当前回合数') % 48 === 40) &&
-    sys_check_npc_working(308)
-  ) {
-    visitor_list.push(308);
-  }
-  if (
-    !(get('cflag:343:育成回合计时') < 3 * 48) &&
-    !get('cflag:343:位置') &&
-    get('flag:当前回合数') > 12 &&
-    get('love:343') >= 40 &&
-    sys_check_npc_working(343)
-  ) {
-    visitor_list.push(343);
-  }
+  const loc_visitors = new LocCharacters();
+  let visitor_list = loc_visitors.get(location_enum.visitor);
   if (visitor_list.length > 0) {
     const celebration = get_celebration(),
       me = get_chara_talk(0);
@@ -155,7 +132,7 @@ async function page_visitors() {
               name: '聊天',
             },
             {
-              loc: location_enum.restroom,
+              loc: visitor_list.length > 1 && location_enum.restroom,
               name: '求爱',
               fail_cb() {
                 flag_visitor = flag_page = false;
@@ -194,6 +171,7 @@ async function page_visitors() {
     drawLine();
     await printAndWait('没有人在的样子……回去了……');
   }
+  loc_visitors.set(location_enum.visitor, visitor_list);
   println();
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.visitor,

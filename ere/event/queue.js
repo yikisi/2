@@ -15,7 +15,7 @@ const cb_enum = { daily: 0, edu: 0, recruit: 0, love: 0 };
 Object.keys(cb_enum).forEach((k, i) => (cb_enum[k] = i));
 
 /**
- * @param {function(event_object:EventObject):boolean} condition
+ * @param {function(EventObject):boolean} condition
  * @returns {Record<string,number>}
  */
 function filter_event_object(condition) {
@@ -60,18 +60,18 @@ module.exports = {
   cb_enum,
   /**
    * get a random event from stage's queue
-   * @param {number} stage_id
+   * @param {number} stage
    * @param {boolean} [random]
    * @returns {EventObject}
    */
-  get_random_event_object(stage_id, random) {
-    if (queue && queue[stage_id] && queue[stage_id].length) {
+  get_random_event_object(stage, random) {
+    if (queue && queue[stage] && queue[stage].length) {
       const id =
-        queue[stage_id].length === 1 || random
+        queue[stage].length === 1 || random
           ? 0
-          : get_random_value(0, queue[stage_id].length - 1);
-      const event_object = queue[stage_id].splice(id, 1)[0];
-      new EventMarks(event_object.chara_id).sub(stage_id);
+          : get_random_value(0, queue[stage].length - 1);
+      const event_object = queue[stage].splice(id, 1)[0];
+      new EventMarks(event_object.chara_id).sub(stage);
       return event_object;
     }
   },

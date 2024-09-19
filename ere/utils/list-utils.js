@@ -18,7 +18,7 @@ function get_random_entry(list) {
 /**
  * @template T
  * @param {T[]} list
- * @param {(T)=>number} order_by
+ * @param {function(T,number):number} order_by
  * @param {boolean} [is_asc]
  * @returns {T[]}
  */
@@ -27,10 +27,10 @@ function sort_list(list, order_by, is_asc) {
     return list;
   }
   return list
-    .map((v) => {
+    .map((v, i) => {
       return {
         val: v,
-        orderBy: order_by(v),
+        orderBy: order_by(v, i),
       };
     })
     .sort((a, b) => (is_asc ? a.orderBy - b.orderBy : b.orderBy - a.orderBy))
@@ -38,6 +38,19 @@ function sort_list(list, order_by, is_asc) {
 }
 
 module.exports = {
+  /**
+   * @template T
+   * @param {T[]} list
+   * @param {function(T):string} key_cb
+   */
+  distinct_list(list, key_cb) {
+    /** @type {Record<string,{entry:*,index:number}>} */
+    const dict = {};
+    list.forEach((e, i) => (dict[key_cb(e)] = { entry: e, index: i }));
+    return Object.values(dict)
+      .sort((a, b) => a.index - b.index)
+      .map((e) => e.entry);
+  },
   /**
    * @template T
    * @param {T[]} list
@@ -67,20 +80,38 @@ module.exports = {
     }
     return sort_list(ret, (x) => x, true).map((i) => list[i]);
   },
-  get_random_entry,
   /**
    * @template T
    * @param {T[]} list
-   * @param {function(T):string} key_cb
+   * @param {(T)=>number} order_by
+   * @returns {T}
    */
-  distinct_list(list, key_cb) {
-    /** @type {Record<string,{entry:*,index:number}>} */
-    const dict = {};
-    list.forEach((e, i) => (dict[key_cb(e)] = { entry: e, index: i }));
-    return Object.values(dict)
-      .sort((a, b) => a.index - b.index)
-      .map((e) => e.entry);
+  get_extremum_entry(list, order_by) {
+    if (list.length <= 1) {
+      return list[0];
+    }
+    const _list = list.map((v) => {
+      return {
+        val: v,
+        orderBy: order_by(v),
+      };
+    });
+    let max_entry = _list[0],
+      min_entry = _list[0],
+      max_val = max_entry.orderBy,
+      min_val = min_entry.orderBy;
+    for (let i = 1; i < _list.length; ++i) {
+      if (_list[i].orderBy > max_val) {
+        max_entry = _list[i];
+        max_val = max_entry.orderBy;
+      } else if (_list[i].orderBy < min_val) {
+        min_entry = _list[i];
+        min_val = min_entry.orderBy;
+      }
+    }
+    return { max: max_entry.val, min: min_entry.val };
   },
+  get_random_entry,
   /**
    * @param {*[]} list
    * @param {string} separator
@@ -88,6 +119,21 @@ module.exports = {
    */
   join_list(list, separator) {
     return list.filter((e) => e).join(separator);
+  },
+  /**
+   * @param {number[]} list
+   * @returns {number}
+   */
+  median(list) {
+    if (list.length === 0) {
+      return undefined;
+    }
+    const sorted = sort_list(list, (e) => e);
+    if (sorted.length % 2) {
+      return sorted[Math.floor(sorted.length / 2)];
+    } else {
+      return (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
+    }
   },
   sort_list,
 };

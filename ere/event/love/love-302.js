@@ -7,19 +7,57 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-302');
+
 /**
  * 秋川弥生 - 爱慕
  *
- * @author 黑奴队长（临时）
+ * @author 无名黑奴（临时）
  *
  * @param _
  * @param __
  * @param {EventObject} event_object
  */
 module.exports = async (_, __, event_object) => {
+  const life_marks = new TasteLifeMarks(),
+    me = get_chara_talk(0),
+    taste = get_chara_talk(302);
   switch (event_object?.arg) {
     case 49:
       await print_event_name('发 情！', get_chara_talk(302));
+      if (life_marks.who_am_i === 0) {
+        await era.printAndWait([
+          '一个偶然的机会，',
+          me.get_colored_name(),
+          ' 得知了 ',
+          taste.get_colored_name(),
+          ' 的真实身份——',
+          taste.get_uma_sex_title(),
+          ' ',
+          { color: taste.color, content: '北方风味', fontWeight: 'bold' },
+          '。',
+        ]);
+        taste.actual_name = era.set('callname:302:-1', '北方风味');
+        await era.printAndWait([
+          taste.get_colored_name(),
+          ' 一脸挫败的表情，拜托 ',
+          me.get_colored_name(),
+          ' 帮',
+          taste.sex,
+          '保守秘密。',
+        ]);
+      }
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 与 ',
+        taste.get_colored_name(),
+        ' 的关系出现了突破性的进展……',
+      ]);
+      await era.printAndWait([
+        taste.get_colored_name(),
+        ' 「啪」地把折扇打开，遮住了流转的眼波……',
+      ]);
+      life_marks.who_am_i = 2;
       break;
     case 74:
       await print_event_name('倾 慕！', get_chara_talk(302));
@@ -39,5 +77,7 @@ module.exports = async (_, __, event_object) => {
       return;
     }
   }
-  await sys_love_uma_in_event(302);
+  if (!era.get('flag:回合爱慕惩罚')) {
+    await sys_love_uma_in_event(302);
+  }
 };

@@ -80,7 +80,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       {
         accelerator: 999,
         config: {
-          buttonType: event_marks.get(event_hooks.week_end)
+          buttonType: event_marks.check(event_hooks.week_end)
             ? 'danger'
             : 'warning',
           width: 6,
@@ -130,7 +130,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       },
       {
         accelerator: 403,
-        config: { width: 6 },
+        config: { disabled: !sys_check_awake(0), width: 6 },
         content: '持有物品',
         type: 'button',
       },
@@ -201,6 +201,9 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       break;
     case 901:
       await print_load_page();
+      break;
+    case 990:
+      era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
       break;
     case 999:
       flags.week_start = true;

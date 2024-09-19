@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const get_status = require('#/system/chara/sys-get-status');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const {
   sys_change_attr_and_print,
@@ -12,8 +13,12 @@ const {
   sys_get_move_cost,
 } = require('#/system/sys-calc-chara-param');
 
+const goto_sex = require('#/page/components/goto-sex');
+const print_juel_shop_page = require('#/page/page-juel-shop');
+
 const { get_custom_check } = require('#/event/check/check-factory');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const {
@@ -25,10 +30,6 @@ const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_love_info, get_relation_info } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { printAndWait } = require('#/era-electron');
-const goto_sex = require('#/page/components/goto-sex');
-const get_status = require('#/system/chara/sys-get-status');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /**
  * @param {CharaTalk} chara
@@ -105,7 +106,7 @@ async function npc_common(
                   height: 22,
                   width: 12,
                 },
-                inContent: `${era.get(`base:${chara.id}:体力`)}/${era.get(
+                inContent: `${Math.floor(era.get(`base:${chara.id}:体力`))}/${era.get(
                   `maxbase:${chara.id}:体力`,
                 )}`,
                 percentage:
@@ -125,7 +126,7 @@ async function npc_common(
                   height: 22,
                   width: 12,
                 },
-                inContent: `${era.get(`base:${chara.id}:精力`)}/${era.get(
+                inContent: `${Math.floor(era.get(`base:${chara.id}:精力`))}/${era.get(
                   `maxbase:${chara.id}:精力`,
                 )}`,
                 percentage:
@@ -173,65 +174,83 @@ async function npc_common(
     },
     [
       { type: 'divider' },
-      {
-        accelerator: 1,
-        config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
-        content: talk_cb.name,
-        type: 'button',
-      },
-      { accelerator: 2, content: sex_cb.name, type: 'button' },
-      {
-        accelerator: 3,
-        config: {
-          disabled:
-            !is_awake ||
-            sys_check_act_disabled(
-              sys_get_move_cost(location_enum.gate, chara.id),
-              player_base,
-              chara_base,
-            ) ||
-            relation_check,
+      ...[
+        {
+          accelerator: 1,
+          config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
+          content: talk_cb.name,
+          type: 'button',
         },
-        content: out_cb.name,
-        type: 'button',
-      },
-      era.get(`cflag:${chara.id}:节日事件标记`)
-        ? {
-            accelerator: 4,
-            config: {
-              buttonType: 'danger',
-              disabled:
-                !is_awake ||
-                chara_base.time < 50 ||
-                player_base.time < celebration_cost ||
-                relation_check,
-            },
-            content: cele_cb.name,
-            type: 'button',
-          }
-        : undefined,
-      func_cb.handle
-        ? {
-            accelerator: 5,
-            config: { disabled: !is_awake || func_cb.disabled },
-            content: func_cb.name,
-            type: 'button',
-          }
-        : undefined,
-      era.get(`cflag:${chara.id}:爱慕暂拒`) &&
-      era.get(`cflag:${chara.id}:爱慕暂拒`) === era.get(`love:${chara.id}`)
-        ? {
-            accelerator: 6,
-            content: '重新触发爱慕事件',
-            type: 'button',
-          }
-        : undefined,
+        { accelerator: 2, content: sex_cb.name, type: 'button' },
+        {
+          accelerator: 3,
+          config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
+          content: '送礼物',
+          type: 'button',
+        },
+        {
+          accelerator: 4,
+          config: {
+            disabled:
+              !is_awake ||
+              sys_check_act_disabled(
+                sys_get_move_cost(location_enum.gate, chara.id),
+                player_base,
+                chara_base,
+              ) ||
+              relation_check,
+          },
+          content: out_cb.name,
+          type: 'button',
+        },
+        func_cb.handle
+          ? {
+              accelerator: 5,
+              config: { disabled: !is_awake || func_cb.disabled },
+              content: func_cb.name,
+              type: 'button',
+            }
+          : undefined,
+        era.get(`cflag:${chara.id}:节日事件标记`)
+          ? {
+              accelerator: 6,
+              config: {
+                buttonType: 'danger',
+                disabled:
+                  !is_awake ||
+                  chara_base.time < 50 ||
+                  player_base.time < celebration_cost ||
+                  relation_check,
+              },
+              content: cele_cb.name,
+              type: 'button',
+            }
+          : undefined,
+        era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes &&
+        era.get(`exp:${chara.id}:性爱次数`) >
+          era.get(`exp:${chara.id}:睡奸次数`)
+          ? { accelerator: 7, content: '提升对方性爱能力', type: 'button' }
+          : undefined,
+        era.get(`cflag:${chara.id}:爱慕暂拒`) &&
+        era.get(`cflag:${chara.id}:爱慕暂拒`) === era.get(`love:${chara.id}`)
+          ? {
+              accelerator: 8,
+              content: '重新触发爱慕事件',
+              type: 'button',
+            }
+          : undefined,
+      ]
+        .filter((e) => e)
+        .map((e) => {
+          (e.config || (e.config = {})).width = 8;
+          return e;
+        }),
       {
         accelerator: 99,
         content: back_cb.name,
         type: 'button',
       },
-    ].filter((e) => e),
+    ],
   );
   era.setVerticalAlign('top');
   let temp = await era.input();
@@ -253,7 +272,7 @@ async function npc_common(
           await goto_sex(chara.id, sex_cb.loc || era.get('flag:当前位置'))
         ) {
           case true:
-            await printAndWait([
+            await era.printAndWait([
               chara.get_colored_name(),
               ' 与 ',
               get_chara_talk(0).get_colored_name(),
@@ -267,6 +286,16 @@ async function npc_common(
       }
       break;
     case 3:
+      era.drawLine();
+      era.print([
+        '给 ',
+        get_chara_talk(chara.id).get_colored_name(),
+        ' 送上了一份小礼物……',
+      ]);
+      era.println();
+      await sys_call_daily_event(chara.id, event_hooks.office_gift);
+      break;
+    case 4:
       temp = era.get('flag:当前互动角色');
       era.set('flag:当前互动角色', chara.id);
       if (out_cb.handle) {
@@ -282,7 +311,12 @@ async function npc_common(
       }
       era.set('flag:当前互动角色', temp);
       break;
-    case 4:
+    case 5:
+      await func_cb.handle();
+      chara.name = era.get(`callname:${chara.id}:-2`);
+      chara.actual_name = era.get(`callname:${chara.id}:-1`);
+      break;
+    case 6:
       if (cele_cb.handle) {
         await cele_cb.handle();
       }
@@ -291,10 +325,11 @@ async function npc_common(
       era.drawLine();
       await sys_call_daily_event(chara.id, event_hooks.celebration);
       break;
-    case 5:
-      await func_cb.handle();
+    case 7:
+      await print_juel_shop_page(chara.id);
       break;
-    case 6:
+    case 8:
+      era.set(`cflag:${chara.id}:爱慕暂拒`, 0);
       get_custom_check(chara.id).check_love_events();
       await era.printAndWait([
         chara.get_colored_name(),

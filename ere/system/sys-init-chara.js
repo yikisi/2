@@ -9,15 +9,22 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaAvailableGenes = require('#/data/chara-available-genes');
+const CharaAvailableSkills = require('#/data/chara-available-skills');
+const CharaGenes = require('#/data/chara-genes');
+const CharaSkills = require('#/data/chara-skills');
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const { yes } = require('#/data/event/recruit-flags');
+const YandereList = require('#/data/event/yandere-list');
 const {
   get_breast_cup,
   get_talent_bust_size,
 } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
+const { chara_skill_dict } = require('#/data/race/skill/skill-const');
 const { attr_names } = require('#/data/train-const');
 
 /**
@@ -28,6 +35,26 @@ const { attr_names } = require('#/data/train-const');
  */
 function reset_chara(chara_id) {
   if (era.get(`cflag:${chara_id}:种族`)) {
+    if (era.get(`cflag:${chara_id}:招募状态`) === yes) {
+      if (
+        era.get('flag:当前月') <= 3 &&
+        (era.get(`cflag:${chara_id}:育成回合计时`) === 'x' ||
+          era.get(`cflag:${chara_id}:成长阶段`) < 5)
+      ) {
+        era.set(
+          `cflag:${chara_id}:育成回合计时`,
+          (era.get('flag:当前回合数') - 1) % 48,
+        );
+        era.set(`cflag:${chara_id}:继承方1`, 0);
+        era.set(`cflag:${chara_id}:继承方2`, 0);
+        era.set(`cflag:${chara_id}:可再次育成`, 0);
+      }
+      era.set(`cflag:${chara_id}:腋毛`, 0);
+      era.set(
+        `juel:${chara_id}:粉`,
+        era.set(`juel:${chara_id}:蓝`, era.set(`juel:${chara_id}:白`, 0)),
+      );
+    }
     Object.values(attr_names).forEach((v) =>
       era.set(`base:${chara_id}:${v}`, era.get(`cflag:${chara_id}:初始${v}`)),
     );
@@ -35,9 +62,16 @@ function reset_chara(chara_id) {
       era.set(`abl:${chara_id}:${v}训练等级`, 1);
       era.set(`exp:${chara_id}:${v}训练经验`, 0);
     });
-    era.set(`exp:${chara_id}:技能点数`, 0);
+    const src_chara = era.get(`cflag:${chara_id}:模版角色`),
+      skill_set = chara_skill_dict[src_chara > 0 ? src_chara : chara_id] || [];
+    era.set(`cflag:${chara_id}:殿堂`, 0);
+    new CharaSkills(chara_id).clear().add(...skill_set.slice(0, 4));
+    new CharaAvailableSkills(chara_id).clear().add(...skill_set.slice(4));
+    era.set(`exp:${chara_id}:技能点数`, 120 + 680 * (skill_set.length === 0));
     era.set(`cflag:${chara_id}:育成用变量`, {});
     new RaceHistory(chara_id).reset();
+    new CharaGenes(chara_id).clear();
+    new CharaAvailableGenes(chara_id).clear();
   } else {
     Object.values(attr_names).forEach((v) => {
       era.set(
@@ -46,6 +80,8 @@ function reset_chara(chara_id) {
       );
       era.set(`cflag:${chara_id}:${v}加成`, 0);
     });
+    era.set(`skill:${chara_id}:习得技能`, []);
+    era.set(`skill:${chara_id}:可习得技能`, []);
   }
 
   sys_fix_chara_base(chara_id);
@@ -72,7 +108,10 @@ function reset_chara(chara_id) {
 module.exports = {
   init_chara(chara_id, src_chara_id) {
     const current = new Date().getTime();
-    if (era.addCharacter(src_chara_id ? [chara_id, src_chara_id] : chara_id)) {
+    if (
+      (era.get(`base:${chara_id}:速度`) === undefined || !chara_id) &&
+      era.addCharacter(src_chara_id ? [chara_id, src_chara_id] : chara_id)
+    ) {
       if (src_chara_id) {
         era.set(`cflag:${chara_id}:模版角色`, src_chara_id);
         era.set(`cflag:${chara_id}:种族`, 1);
@@ -83,7 +122,6 @@ module.exports = {
         era.set(`cflag:${chara_id}:模版角色`, -1);
       }
       const sex = get_custom_mec(chara_id).set_my_sex();
-      era.set(`cflag:${chara_id}:性别`, era.get('flag:角色性别'));
       era.set(`cflag:${chara_id}:育成回合计时`, 4800);
       let temp;
       switch (sex) {
@@ -186,49 +224,142 @@ module.exports = {
       get_custom_mec(chara_id).set_callname();
       get_custom_mec(chara_id).set_my_name();
       get_custom_mec(chara_id).init_love();
-      if (era.get(`relation:${chara_id}:0`) === undefined) {
-        era.set(`relation:${chara_id}:0`, era.get('flag:马娘初始好感'));
-      } else {
-        era.add(`relation:${chara_id}:0`, era.get('flag:马娘初始好感') - 75);
-      }
       era.set(`base:${chara_id}:体力`, era.get(`maxbase:${chara_id}:体力`));
       era.set(`base:${chara_id}:精力`, era.get(`maxbase:${chara_id}:精力`));
 
-      switch (era.get('flag:彩蛋机制')) {
-        case 179:
-          temp = era.get(`cflag:${chara_id}:身高`);
-          temp = [135 + Math.floor(((temp - 135) * 10) / 45), temp];
-          era.set(
-            `cflag:${chara_id}:胸围`,
-            Math.floor((era.get(`cflag:${chara_id}:胸围`) * temp[0]) / temp[1]),
-          );
-          era.set(
-            `cflag:${chara_id}:下胸围`,
-            Math.floor(
-              (era.get(`cflag:${chara_id}:下胸围`) * temp[0]) / temp[1],
-            ),
-          );
-          era.set(
-            `cflag:${chara_id}:腰围`,
-            Math.floor((era.get(`cflag:${chara_id}:腰围`) * temp[0]) / temp[1]),
-          );
-          era.set(
-            `cflag:${chara_id}:臀围`,
-            Math.floor((era.get(`cflag:${chara_id}:臀围`) * temp[0]) / temp[1]),
-          );
-          era.set(`cflag:${chara_id}:身高`, temp[0]);
-          if (
-            era.get(`cflag:${chara_id}:胸围`) -
-              era.get(`cflag:${chara_id}:下胸围`) <
-            17.5
-          ) {
-            era.set(
-              `cflag:${chara_id}:胸围`,
-              era.get(`cflag:${chara_id}:下胸围`) +
-                18 +
-                (era.get(`talent:${chara_id}:乳头类型`) === 2),
-            );
+      if (chara_id > 0) {
+        if (era.get(`relation:${chara_id}:0`) === undefined) {
+          era.set(`relation:${chara_id}:0`, era.get('flag:马娘初始好感'));
+        } else {
+          era.add(`relation:${chara_id}:0`, era.get('flag:马娘初始好感') - 75);
+        }
+
+        if (era.get(`talent:${chara_id}:病娇`) > 0) {
+          new YandereList().push(chara_id, true);
+        }
+
+        if (era.get(`cflag:${chara_id}:种族`)) {
+          switch (era.get('flag:马娘身高')) {
+            case 0:
+              temp = era.get(`cflag:${chara_id}:身高`);
+              temp = [
+                135 + Math.floor(((temp - 135) * (150 - 135)) / (180 - 135)),
+                temp,
+              ];
+              temp[2] =
+                era.get(`cflag:${chara_id}:胸围`) -
+                era.get(`cflag:${chara_id}:下胸围`);
+              era.set(
+                `cflag:${chara_id}:下胸围`,
+                Math.floor(
+                  (era.get(`cflag:${chara_id}:下胸围`) * temp[0]) / temp[1],
+                ),
+              );
+              era.set(
+                `cflag:${chara_id}:胸围`,
+                era.get(`cflag:${chara_id}:胸围`) + temp[2],
+              );
+              era.set(
+                `cflag:${chara_id}:腰围`,
+                Math.floor(
+                  (era.get(`cflag:${chara_id}:腰围`) * temp[0]) / temp[1],
+                ),
+              );
+              era.set(
+                `cflag:${chara_id}:臀围`,
+                Math.floor(
+                  (era.get(`cflag:${chara_id}:臀围`) * temp[0]) / temp[1],
+                ),
+              );
+              era.set(`cflag:${chara_id}:身高`, temp[0]);
+              break;
+            case 2:
+              temp = era.get(`cflag:${chara_id}:身高`);
+              temp = [
+                175 + Math.floor(((temp - 135) * (224 - 175)) / (180 - 135)),
+                temp,
+              ];
+              era.set(
+                `cflag:${chara_id}:胸围`,
+                Math.floor(
+                  (era.get(`cflag:${chara_id}:胸围`) * temp[0]) / temp[1],
+                ),
+              );
+              era.set(
+                `cflag:${chara_id}:下胸围`,
+                Math.floor(
+                  (era.get(`cflag:${chara_id}:下胸围`) * temp[0]) / temp[1],
+                ),
+              );
+              era.set(
+                `cflag:${chara_id}:腰围`,
+                Math.floor(
+                  (era.get(`cflag:${chara_id}:腰围`) * temp[0]) / temp[1],
+                ),
+              );
+              era.set(
+                `cflag:${chara_id}:臀围`,
+                Math.floor(
+                  (era.get(`cflag:${chara_id}:臀围`) * temp[0]) / temp[1],
+                ),
+              );
+              era.set(`cflag:${chara_id}:身高`, temp[0]);
           }
+
+          switch (era.get('flag:彩蛋机制')) {
+            case 3:
+              if (auto_talent !== 1) {
+                era.set(
+                  `talent:${chara_id}:神之足`,
+                  era.set(
+                    `talent:${chara_id}:淫身`,
+                    era.set(`talent:${chara_id}:淫臀`, 1),
+                  ),
+                );
+              }
+              break;
+            case 179:
+            case 621:
+              if (
+                era.get(`cflag:${chara_id}:胸围`) -
+                  era.get(`cflag:${chara_id}:下胸围`) <
+                17.5
+              ) {
+                era.set(
+                  `cflag:${chara_id}:胸围`,
+                  era.get(`cflag:${chara_id}:下胸围`) +
+                    18 +
+                    (era.get(`talent:${chara_id}:乳头类型`) === 2),
+                );
+              }
+          }
+        }
+        switch (era.get('flag:彩蛋机制')) {
+          case 179:
+          case 621:
+            era.set(`talent:${chara_id}:病娇`, 1);
+        }
+        const my_src_chara = era.get('cflag:0:模版角色');
+        if (era.get(`relation:${chara_id}`)[my_src_chara]) {
+          era.set(
+            `relation:${chara_id}:0`,
+            era.get(`relation:${chara_id}:${my_src_chara}`),
+          );
+        }
+        if (era.get(`callname:${my_src_chara}`)[chara_id]) {
+          era.set(
+            `callname:0:${chara_id}`,
+            era.get(`callname:${my_src_chara}:${chara_id}`),
+          );
+        }
+        era.set(
+          `cflag:${chara_id}:可再次育成`,
+          Number(
+            era.get(`cflag:${chara_id}:可再次育成`) > 0 && my_src_chara <= 0,
+          ),
+        );
+      } else {
+        era.set(`talent:${chara_id}:病娇`, 0);
       }
 
       sys_change_hair(chara_id);
@@ -241,18 +372,8 @@ module.exports = {
     }
   },
   recruit_chara(chara_id) {
-    if (era.get(`cflag:${chara_id}:种族`)) {
-      if (era.get('flag:当前月') < 4) {
-        era.set(
-          `cflag:${chara_id}:育成回合计时`,
-          (era.get('flag:当前回合数') - 1) % 48,
-        );
-        era.set(`cflag:${chara_id}:自主训练`, 1);
-      } else {
-        era.set(`cflag:${chara_id}:育成回合计时`, 'x');
-      }
-    }
-    era.set(`cflag:${chara_id}:腋毛`, 0);
+    reset_chara(chara_id);
+    era.set(`cflag:${chara_id}:自主训练`, 1);
     const honor = era.get('flag:当前声望');
     // 先结算声望奖励
     let relation = honor > 500 ? Math.floor((honor - 500) / 12) : 0;

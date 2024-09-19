@@ -140,6 +140,7 @@ async function love_74_week_end(flash) {
     `因为直觉告诉 ${your_name}，这绝对不是${flash.sex}今天第一次或者第二次这么做了。`,
   );
   era.printButton('「闪耀？」', 1);
+  await era.input();
   await era.printAndWait(
     `更重要的是，${your_name} 知道这道目光中蕴涵着情感，但 ${your_name} 却无法更进一步的理解这份情感具体是什么。`,
   );
@@ -172,6 +173,7 @@ async function love_74_week_end(flash) {
     `老实说在这种场合下突然谈论这类话题是否有些太敏感了，于是 ${your_name} 带着疑惑地将视线从窗外收回，看向面前人。`,
   );
   era.printButton('「！」', 1);
+  await era.input();
   await era.printAndWait(
     `然后，${your_name} 就惊讶地发现，此时的荣进闪耀，正以一种热情的眼神看着 ${your_name}。`,
   );
@@ -263,8 +265,8 @@ async function love_74_week_end(flash) {
     `${your_name} 知道，无论成与否，${your_name} 都必须要给${flash.sex}一个准确的答复。`,
   );
   await era.printAndWait('一个……必须要经过慎重决定后才能给出的答复。');
-  era.printButton(`「握紧${flash.sex}的手。」`, 1);
-  era.printButton(`「回避${flash.sex}的眼神。」`, 2);
+  era.printButton(`「握紧${flash.sex}的手。」（升级关系）`, 1);
+  era.printButton(`「回避${flash.sex}的眼神。」（暂不升级）`, 2);
   ret = await era.input();
   if (ret === 1) {
     await era.printAndWait(`${your_name} 爱${flash.sex}吗？`);
@@ -362,6 +364,7 @@ async function love_74_week_end(flash) {
       `可后者却是将 ${your_name} 的手轻轻按下，随后扭头，看向窗外。`,
     );
     era.printButton('「………」', 1);
+    await era.input();
     await era.printAndWait(
       '尴尬的气氛慢慢在房间内扩散，场景开始陷入一种令人有些窒息的沉默。',
     );
@@ -379,6 +382,7 @@ async function love_74_week_end(flash) {
       `似乎是在这短暂的平静中调整好了心态，荣进闪耀回头看向 ${your_name}，脸上再次浮现往日的平和。`,
     );
     era.printButton('「我也很开心能认识你。」', 1);
+    await era.input();
     await era.printAndWait(`见此，${your_name} 点头回应。`);
     await era.printAndWait('「滴。」');
     await era.printAndWait(

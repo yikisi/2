@@ -149,21 +149,24 @@ module.exports = class extends CustomizedCheck {
       }
       check_and_register_aim_race(68, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 9) {
-      add_event(event_hooks.week_start, event_obj);
+      add_event(event_hooks.week_start, event_obj.set_arg('palace'));
     }
   }
 
   check_palace_and_get_aims() {
-    const races = new RaceHistory(68).get();
     if (
-      Object.values(races).filter(
-        (e) => e.rank === 1 && e.race !== race_enum.begin_race,
-      ).length < 4
+      new RaceHistory(68)
+        .get_values()
+        .filter((e) => e.rank === 1 && e.race !== race_enum.begin_race).length <
+      4
     ) {
       new KitaEduMarks().crazy_fan++;
       new CrazyFans().push(68);
     } else {
-      add_event(event_hooks.week_end, new EventObject(68, cb_enum.edu));
+      add_event(
+        event_hooks.week_end,
+        new EventObject(68, cb_enum.edu).set_arg(144),
+      );
     }
     return super.check_palace_and_get_aims();
   }

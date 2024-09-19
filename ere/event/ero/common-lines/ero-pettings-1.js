@@ -23,34 +23,36 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' 的耳朵……】',
     ]);
-    if (hook.arg) {
-      await attacker.print_and_wait(
-        `${defender.get_uma_sex_title()}的耳朵，果然是会让人憧憬的东西啊，不论是将它视为作为肢体的延伸，作为表情的延伸，亦或是作为……敏感带的延伸……`,
-      );
-      await attacker.print_and_wait([
-        `只是用指尖蜻蜓点水似的轻柔触碰，`,
-        attacker.get_colored_name(),
-        ` 还没能细细感受那份按摩着指尖的细腻触感，那对尖尖长长的马耳朵便害羞地从 ${attacker.get_phy_sex_title()} 的指间溜走了。`,
-      ]);
-      await attacker.say_and_wait('…………');
-      await defender.say_and_wait('请……再来摸一次吧，这次不会逃走了。');
-      await attacker.print_and_wait([
-        '怀里的 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        '，现在脸很红。',
-      ]);
-    } else {
-      await attacker.print_and_wait('呼呼……');
-      await attacker.print_and_wait(
-        '掌中有了一对不会逃走的马耳朵，被细密的绒毛按摩着指腹…有种身与心都被疗愈了的感觉。',
-      );
-      await attacker.print_and_wait('这就是作为恋人的特权吗……');
-      await attacker.print_and_wait('不过，现在有点好奇那里的状态……');
-      await attacker.print_and_wait([
-        '仿佛由看不清的丝线连在一处，',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ` 的双腿随着 ${attacker.get_phy_sex_title()} 被马耳朵黏住的手羞人地一颤一颤。`,
-      ]);
+    if (era.get(`cflag:${defender.id}:种族`)) {
+      if (hook.arg) {
+        await attacker.print_and_wait(
+          `${defender.get_uma_sex_title()}的耳朵，果然是会让人憧憬的东西啊，不论是将它视为作为肢体的延伸，作为表情的延伸，亦或是作为……敏感带的延伸……`,
+        );
+        await attacker.print_and_wait([
+          `只是用指尖蜻蜓点水似的轻柔触碰，`,
+          attacker.get_colored_name(),
+          ` 还没能细细感受那份按摩着指尖的细腻触感，那对尖尖长长的马耳朵便害羞地从 ${attacker.get_phy_sex_title()} 的指间溜走了。`,
+        ]);
+        await attacker.say_and_wait('…………');
+        await defender.say_and_wait('请……再来摸一次吧，这次不会逃走了。');
+        await attacker.print_and_wait([
+          '怀里的 ',
+          sys_get_colored_callname(attacker.id, defender.id),
+          '，现在脸很红。',
+        ]);
+      } else {
+        await attacker.print_and_wait('呼呼……');
+        await attacker.print_and_wait(
+          '掌中有了一对不会逃走的马耳朵，被细密的绒毛按摩着指腹…有种身与心都被疗愈了的感觉。',
+        );
+        await attacker.print_and_wait('这就是作为恋人的特权吗……');
+        await attacker.print_and_wait('不过，现在有点好奇那里的状态……');
+        await attacker.print_and_wait([
+          '仿佛由看不清的丝线连在一处，',
+          sys_get_colored_callname(attacker.id, defender.id),
+          ` 的双腿随着 ${attacker.get_phy_sex_title()} 被马耳朵黏住的手羞人地一颤一颤。`,
+        ]);
+      }
     }
   };
 
@@ -170,10 +172,16 @@ module.exports = (handlers) => {
       ]);
       await attacker.print_and_wait('啊，被用尾巴教训了。');
     } else {
-      await attacker.print_and_wait('说不定能就这么挤出乳汁来……');
-      await attacker.print_and_wait(
-        '眼前被连续不断的爱抚弄得硬邦邦的下流乳头叫人忍不住这么想……',
-      );
+      if (era.get(`cflag:${defender.id}:性别`) - 1) {
+        await attacker.print_and_wait('说不定能就这么挤出乳汁来……');
+        await attacker.print_and_wait(
+          '眼前被连续不断的爱抚弄得硬邦邦的下流乳头叫人忍不住这么想……',
+        );
+      } else {
+        await attacker.print_and_wait(
+          '眼前下流乳头的被连续不断的爱抚弄得硬邦邦的。',
+        );
+      }
       await defender.say_and_wait('呀——');
       await attacker.print_and_wait([
         '趁着 ',
@@ -418,7 +426,7 @@ module.exports = (handlers) => {
         ' 的大腿……】',
       ]));
     if (hook.arg) {
-      if (!attacker.id) {
+      if (!attacker.id && era.get(`cflag:${defender.id}:种族`)) {
         await attacker.print_and_wait(
           '作为训练员，将面前担当的双腿，用性的意味去观赏与抚摸……',
         );
@@ -440,8 +448,10 @@ module.exports = (handlers) => {
       await attacker.print_and_wait(
         '有着能因为手指的爱抚而发起抖的绝佳敏感度。',
       );
-      await attacker.print_and_wait('真浪费啊……');
-      await attacker.print_and_wait('这样的双腿只是为了比赛而存在什么的……');
+      if (era.get(`cflag:${defender.id}:种族`)) {
+        await attacker.print_and_wait('真浪费啊……');
+        await attacker.print_and_wait('这样的双腿只是为了比赛而存在什么的……');
+      }
     }
   };
 

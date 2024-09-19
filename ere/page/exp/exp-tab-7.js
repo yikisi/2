@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const {
+  get_filled_exp_str,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -66,11 +67,13 @@ module.exports = {
           unknown_anal_sex_exp = era.get(`cstr:${chara.id}:无自觉初次肛交经历`);
 
         if (anal_sex_exp) {
-          anal_exp_list.push(anal_sex_exp);
+          anal_exp_list.push(get_filled_exp_str(anal_sex_exp, chara.id));
         }
         if (flags.show_all_exp || anal_sex_exp) {
           if (unknown_anal_sex_exp) {
-            anal_exp_list.push(unknown_anal_sex_exp);
+            anal_exp_list.push(
+              get_filled_exp_str(unknown_anal_sex_exp, chara.id),
+            );
           }
           if (anal_sex_count || cum_in_anal) {
             anal_exp_list.push(

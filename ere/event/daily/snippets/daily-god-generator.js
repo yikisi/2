@@ -20,6 +20,8 @@ const event_hooks = require('#/data/event/event-hooks');
 module.exports = (god_id) => {
   const handlers = {};
 
+  handlers[event_hooks.growth] = () => {};
+
   handlers[event_hooks.borrow_money] = async () => {
     const god = get_chara_talk(god_id),
       me = get_chara_talk(0),

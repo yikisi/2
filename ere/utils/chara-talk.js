@@ -70,12 +70,6 @@ class CharaTalk {
     }
     this.actual_name = era.get(`callname:${id}:-1`);
     this.color = color || get_chara_color(id);
-    if (!this.color) {
-      const id_color = this.id.toString(9).padStart(3, '0');
-      this.color = `#${[id_color[0], id_color[1], id_color[2]]
-        .map((e) => (0xff - Number(e) * 16).toString(16).padStart(2, '0'))
-        .join('')}`;
-    }
     this.sex_code = era.get(`cflag:${this.id}:性别`);
     this.sex = this.sex_code - 1 ? '她' : '他';
   }

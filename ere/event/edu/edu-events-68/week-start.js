@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_like_chara,
+} = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -16,7 +19,7 @@ const { location_enum } = require('#/data/locations');
  * @param _
  * @param {EventObject} event_object
  */
-module.exports = async function (hook, _, event_object) {
+module.exports = async (hook, _, event_object) => {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
     event_arg = event_object?.arg,
@@ -346,15 +349,21 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(
       `抱着一大盘食物坐在空出的椅子上，${kita.name} 露出不好意思的表情，将可乐递给了 ${me.name}。`,
     );
-    await kita.say_and_wait(
-      `${me.name} 喝着可乐环顾四周，零星也能看到几个同样在大吃特吃的孩子，看来对年轻人来说这么点上一大盘食物也不是什么奇怪的事……`,
-    );
-    await era.printAndWait(
-      `${me.name} 将视线收回，${kita.name}正在 ${me.name} 面前小口小口地吃着薯条，明明只是普通的庶民食物却吃得不亦乐乎。`,
-    );
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 喝着可乐环顾四周，零星也能看到几个同样在大吃特吃的孩子，看来对年轻人来说这么点上一大盘食物也不是什么奇怪的事……',
+    ]);
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 将视线收回，',
+      kita.get_colored_name(),
+      ' 正在 ',
+      me.get_colored_name(),
+      ' 面前小口小口地吃着薯条，明明只是普通的庶民食物却吃得不亦乐乎。',
+    ]);
     era.println();
-    era.printButton(`「感觉小北是很适合吃薯条的孩子呢。」`, 1);
-    era.printButton(`「感觉小北是很适合吃汉堡的孩子呢。」`, 2);
+    era.printButton('「感觉小北是很适合吃薯条的孩子呢。」', 1);
+    era.printButton('「感觉小北是很适合吃汉堡的孩子呢。」', 2);
     const ret = await era.input();
     if (ret === 1) {
       await kita.say_and_wait(`诶？很适合吃薯条是指？`);
@@ -416,14 +425,14 @@ module.exports = async function (hook, _, event_object) {
         `嘟着嘴咔嚓咔嚓地薯条，${kita.name} 仿佛是威胁一样地说着话。`,
       );
       era.println();
-      era.printButton(`对不起是我不好……请小北大人饶了我吧……`, 1);
+      era.printButton(`「对不起是我不好……请小北大人饶了我吧……」`, 1);
       await era.input();
       await era.printAndWait(`哼～`);
       await era.printAndWait(
         `上下抖动着耳朵的 ${kita.name} 侧过身去，闭着眼摸索着薯条塞进嘴里。`,
       );
       await kita.say_and_wait(
-        `唔唔唔……居然这么说人家，小北我真是对训练员${me.get_adult_sex_title()}太失望了。`,
+        `唔唔唔……居然这么说人家，小北我真是对 ${sys_get_callname(68, 0)} 太失望了。`,
       );
       await era.printAndWait(
         `所言极是……不如说这么瞎说了还没发大火已经是小北宽容大量了……`,

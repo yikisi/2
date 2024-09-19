@@ -701,11 +701,14 @@ handlers[event_hooks.out_river] = async (hook) => {
 };
 
 handlers[event_hooks.good_night] = async (hook) => {
+  if (!sys_check_awake(0) || !sys_check_awake(68)) {
+    throw new Error();
+  }
   const check = get_custom_check(68).is_want_make_love(),
     me = get_chara_talk(0),
     kita = get_chara_talk(68);
   era.print(`繁忙的一天结束，${me.name} 将 ${kita.name} 送到学生宿舍门口……`);
-  if (sys_check_awake(0) && sys_check_awake(68) && check) {
+  if (check > 0) {
     era.print(
       `${me.name} 刚想和往常一样告别，但小北却一反常态地不让 ${me.name} 离开`,
     );
@@ -724,9 +727,18 @@ handlers[event_hooks.good_night] = async (hook) => {
     kita.say(
       `训练员${me.get_adult_sex_title()}，今天真是辛苦您了，明天我也会继续努力的。`,
     );
-    era.print(
-      `${kita.name} 深深地向 ${me.name} 的鞠了一躬，${me.name} 摸了摸小北的脑袋，在看到${kita.sex}走进宿舍后才转身离开。`,
-    );
+    era.print([
+      kita.get_colored_name(),
+      ' 深深地向 ',
+      me.get_colored_name(),
+      ' 鞠了一躬，',
+      me.get_colored_name(),
+      ' 摸了摸 ',
+      kita.get_colored_name(),
+      ' 的脑袋，在看到',
+      kita.sex,
+      '走进宿舍后才转身离开。',
+    ]);
   }
 };
 
@@ -885,7 +897,7 @@ handlers[
  *
  * @author 小黑（原作）
  * @author 黑奴一号（改编）
- * @author 黑奴队长（改编）
+ * @author 无名黑奴（改编）
  */
 module.exports = {
   /**

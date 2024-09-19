@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const {
+  get_filled_exp_str,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -45,11 +46,13 @@ module.exports = {
           unknown_hand_job_exp = era.get(`cstr:${chara.id}:无自觉初次手交经历`);
 
         if (hand_job_exp) {
-          hand_exp_list.push(hand_job_exp);
+          hand_exp_list.push(get_filled_exp_str(hand_job_exp, chara.id));
         }
         if (flags.show_all_exp || hand_job_exp) {
           if (unknown_hand_job_exp) {
-            hand_exp_list.push(unknown_hand_job_exp);
+            hand_exp_list.push(
+              get_filled_exp_str(unknown_hand_job_exp, chara.id),
+            );
           }
           if (handjob_count || touch_virgin_count || touch_anal_count) {
             hand_exp_list.push(

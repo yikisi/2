@@ -1,0 +1,86 @@
+const UmaSkill = require('#/data/race/model/uma-skill');
+
+module.exports = new UmaSkill(
+  900161,
+  'Shadow Break',
+  '在最终弯道之后在外道完成赶超时，以怪物般的力量稍微提升速度。若在中盘争夺过名次，变为少量提升速度',
+  90016,
+  1,
+  UmaSkill.rarity_enum.normal,
+  16,
+  180,
+  [
+    (args) => args.phase === 1 && args.blocked_side_continuetime >= 2,
+    () => true,
+  ],
+  [
+    (args) =>
+      args.is_finalcorner === 1 &&
+      args.order >= 2 &&
+      args.order_rate <= 75 &&
+      args.is_behind_in === 1 &&
+      args.change_order_onetime < 0,
+    (args) =>
+      args.is_finalcorner === 1 &&
+      args.order >= 2 &&
+      args.order_rate <= 75 &&
+      args.is_behind_in === 1 &&
+      args.change_order_onetime < 0,
+  ],
+  [3, 3],
+  [500, 500],
+  [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+  ],
+  [
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+  ],
+  [
+    [0.25, 0, 0],
+    [0.15, 0, 0],
+  ],
+  [
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+  ],
+  [
+    [0, 0, 0],
+    [0, 0, 0],
+  ],
+  [1, 0],
+  [15, 0],
+  1,
+  200,
+  false,
+  true,
+);

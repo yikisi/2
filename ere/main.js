@@ -100,7 +100,7 @@ module.exports = async () => {
             { isDivider: true },
             '无名路人',
             { isDivider: true },
-            '黑奴队长',
+            '无名黑奴',
           ],
           type: 'text',
         },
@@ -140,7 +140,7 @@ module.exports = async () => {
           config: { align: 'left', width: 8 },
           content: [
             {
-              content: 'EraUma游戏发布页（需要登录gitgud.io）',
+              content: 'EraUma游戏发布页',
               url: 'https://gitgud.io/umaera/erauma/-/releases/permalink/latest',
             },
             { isBr: true },
@@ -151,7 +151,7 @@ module.exports = async () => {
             { isBr: true },
             {
               content: 'ERA特雷森学园（Discord社区）',
-              url: 'https://discord.gg/CCsqKXJJjd',
+              url: 'https://discord.gg/vc9dtQ85',
             },
           ],
           type: 'text',
@@ -160,10 +160,93 @@ module.exports = async () => {
     );
     era.setAlign('left');
 
+    const achievements = sys_personal_achievement.list().filter((e) => e < 200);
     let ret = await era.input();
     switch (ret) {
       case 1:
-        if (await new_game()) {
+        ret = 0;
+        if (achievements.length > 0) {
+          era.drawLine();
+          era.printButton('做我自己', 1);
+          era.printButton('扮演角色', 2);
+          if ((await era.input()) === 1) {
+            ret = 0;
+          } else {
+            era.printMultiColumns([
+              { config: { content: '选择要扮演的角色' }, type: 'divider' },
+              {
+                accelerator: 0,
+                config: {
+                  align: 'center',
+                  width: 6,
+                },
+                content: '我自己',
+                type: 'button',
+              },
+              ...achievements.map((e) => {
+                let flag_script;
+                try {
+                  require(`#/event/rec/rec-${e}`);
+                  flag_script = true;
+                } catch (_) {
+                  flag_script = false;
+                }
+                return {
+                  accelerator: e,
+                  config: {
+                    align: 'center',
+                    buttonType: '',
+                    color: get_chara_color(e),
+                    width: 6,
+                  },
+                  content: `${era.get(`static:${e}:name`)}${
+                    flag_script ? '*' : ''
+                  }`,
+                  type: 'button',
+                };
+              }),
+              {
+                content: [
+                  '* 带有',
+                  { content: '*', fontWeight: 'bold' },
+                  '号后缀的角色有专属口上',
+                  { isBr: true },
+                  '** 只有完成了个人成就的角色才能进行扮演',
+                  { isBr: true },
+                  '*** ',
+                  {
+                    color: get_chara_color(201),
+                    content: '快乐米可',
+                    fontWeight: 'bold',
+                  },
+                  '、',
+                  {
+                    color: get_chara_color(204),
+                    content: '望族',
+                    fontWeight: 'bold',
+                  },
+                  '、',
+                  {
+                    color: get_chara_color(301),
+                    content: '骏川缰绳',
+                    fontWeight: 'bold',
+                  },
+                  '、',
+                  {
+                    color: get_chara_color(304),
+                    content: '桐生院葵',
+                    fontWeight: 'bold',
+                  },
+                  ' 等特殊角色无法扮演',
+                ],
+                type: 'text',
+              },
+            ]);
+            ret = await era.input();
+          }
+        }
+        if (await new_game(ret)) {
+          era.set('global:新手教学', 1);
           await homepage();
         }
         break;
@@ -219,7 +302,15 @@ module.exports = async () => {
           .map(Number)
           .sort((a, b) => a - b)) {
           for (const note of notes[id]) {
-            say_by_passer_by(note.title, note.content);
+            era.print(
+              [
+                { content: note.title, fontWeight: 'bold' },
+                '「',
+                note.content,
+                '」',
+              ],
+              { color: get_chara_color(Number(id)) },
+            );
           }
           await era.waitAnyKey();
         }
@@ -271,23 +362,54 @@ module.exports = async () => {
           },
           {
             config: { width: 9 },
-            content: '黑奴队长',
+            content: '无名黑奴',
             type: 'text',
           },
         ]);
         await era.waitAnyKey();
-        await era.printAndWait('开发', {
-          color: el_warning_color,
-          fontSize: '1.25rem',
-          isParagraph: true,
-        });
-        await era.printAndWait([
-          '无名路人',
-          { isDivider: true },
-          '色色',
-          { isDivider: true },
-          '黑奴队长',
+        era.printMultiColumns([
+          {
+            config: {
+              color: el_warning_color,
+              fontSize: '1.25rem',
+              isParagraph: true,
+              offset: 3,
+              width: 9,
+            },
+            content: '开发',
+            type: 'text',
+          },
+          {
+            config: {
+              color: el_warning_color,
+              fontSize: '1.25rem',
+              isParagraph: true,
+              width: 9,
+            },
+            content: '安卓移植',
+            type: 'text',
+          },
         ]);
+        await era.waitAnyKey();
+        era.printMultiColumns([
+          {
+            config: { offset: 3, width: 9 },
+            content: [
+              '无名路人',
+              { isDivider: true },
+              '色色',
+              { isDivider: true },
+              '无名黑奴',
+            ],
+            type: 'text',
+          },
+          {
+            config: { width: 9 },
+            content: '星尘之路',
+            type: 'text',
+          },
+        ]);
+        await era.waitAnyKey();
         await era.printAndWait('美术', {
           color: el_warning_color,
           fontSize: '1.25rem',
@@ -315,7 +437,7 @@ module.exports = async () => {
             [
               '雞雞',
               { isDivider: true },
-              '黑奴队长',
+              '无名黑奴',
               { isDivider: true },
               '天马闪光蹄',
             ],
@@ -334,16 +456,9 @@ module.exports = async () => {
               '幽白書',
             ],
           ],
-          ['特殊角色（临时）', '黑奴队长'],
+          ['教学口上、随机事件', ['雞雞']],
+          ['特殊角色（临时）', '无名黑奴'],
           [[{ color: get_chara_color(3), content: '东海帝王' }], '天马闪光蹄'],
-          [
-            [
-              { color: get_chara_color(4), content: '丸善斯基' },
-              '、',
-              { color: get_chara_color(46), content: '醒目飞鹰' },
-            ],
-            '黑奴一号',
-          ],
           [[{ color: get_chara_color(7), content: '黄金船' }], '雞雞'],
           [[{ color: get_chara_color(17), content: '鲁铎象征' }], '露娜俘虏'],
           [
@@ -373,6 +488,10 @@ module.exports = async () => {
           ],
           [[{ color: get_chara_color(32), content: '爱丽速子' }], '幽白書'],
           [
+            [{ color: get_chara_color(35), content: '胜利奖券（部分地下室）' }],
+            '幽白書',
+          ],
+          [
             [{ color: get_chara_color(37), content: '荣进闪耀' }],
             '爱放箭的袁本初',
           ],
@@ -388,7 +507,7 @@ module.exports = async () => {
               { isDivider: true },
               '黑奴二号',
               { isDivider: true },
-              '黑奴队长',
+              '无名黑奴',
             ],
           ],
           [
@@ -398,18 +517,26 @@ module.exports = async () => {
               { isDivider: true },
               '黑奴一号',
               { isDivider: true },
-              '黑奴队长',
+              '无名黑奴',
             ],
+          ],
+          [
+            [{ color: get_chara_color(86), content: '目白高峰（部分地下室）' }],
+            'イーウィヤ',
           ],
           [
             [{ color: get_chara_color(100), content: '奇锐骏' }],
             '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生',
           ],
           [
+            [{ color: get_chara_color(119), content: '梦之旅（地下室）' }],
+            '幽白書',
+          ],
+          [
             [
               { color: get_chara_color(400), content: '周日宁静' },
               '、',
-              { color: get_chara_color(342), content: '拜耶尔土耳其' },
+              { color: get_chara_color(342), content: '拜耶尔土耳其（招募）' },
             ],
             '黑衣剑士-星爆气流斩准备就绪',
           ],
@@ -418,11 +545,11 @@ module.exports = async () => {
             ['雞雞', { isDivider: true }, '幽白書'],
           ],
           [
-            [{ color: get_chara_color(340), content: '达利阿拉伯' }],
+            [{ color: get_chara_color(340), content: '达利阿拉伯（招募）' }],
             'O口口口口口',
           ],
           [
-            [{ color: get_chara_color(341), content: '高多芬柏布' }],
+            [{ color: get_chara_color(341), content: '高多芬柏布（招募）' }],
             'フィンランド',
           ],
         ]) {
@@ -472,7 +599,7 @@ module.exports = async () => {
           isParagraph: true,
         });
         await era.printAndWait([
-          '黑奴队长',
+          '无名黑奴',
           { isDivider: true },
           '黑奴一号',
           { isDivider: true },
@@ -490,7 +617,7 @@ module.exports = async () => {
           { isDivider: true },
           '提交bug',
           { isDivider: true },
-          '科比·布莱恩特',
+          '科比 · 布莱恩特',
         ]);
         await era.printAndWait('社区管理', {
           color: el_warning_color,
@@ -498,13 +625,31 @@ module.exports = async () => {
           isParagraph: true,
         });
         await era.printAndWait(['Advocator', { isDivider: true }, '雞雞']);
+        await era.printAndWait('社区贡献', {
+          color: el_warning_color,
+          fontSize: '1.25rem',
+          isParagraph: true,
+        });
+        await era.printAndWait([
+          '功德林今天的饭',
+          { isDivider: true },
+          'Manifold Paradox',
+          { isDivider: true },
+          'morrowind',
+          { isDivider: true },
+          'Great Sakiko',
+          { isDivider: true },
+          'odakasuya',
+          { isDivider: true },
+          'hsyzg1626',
+        ]);
         await era.printAndWait('特别鸣谢（笑）', {
           color: el_warning_color,
           fontSize: '1.5rem',
           fontWeight: 'bold',
           isParagraph: true,
         });
-        await era.printAndWait('午马牧师妹·普瑞提达比', {
+        await era.printAndWait('午马牧师妹 · 普瑞提达比', {
           fontSize: '1.25rem',
         });
         era.setAlign('left');

@@ -11,9 +11,10 @@ const { get_image } = require('#/system/sys-calc-image');
 const { join_list } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
-const { attr_colors, hair_colors, skin_colors } = require('#/data/const.json');
+const { hair_colors, skin_colors } = require('#/data/const.json');
 const {
   chara_desc,
+  chara_full_desc,
   human_sex_title,
   sex_title,
 } = require('#/data/ero/status-const');
@@ -31,7 +32,6 @@ const {
   race_clothe_list,
   top_hairs,
 } = require('#/data/other-const');
-const { attr_names } = require('#/data/train-const');
 
 const page_name = '个人情报';
 
@@ -58,8 +58,7 @@ module.exports = {
    */
   generate(chara, flags) {
     const right_intro_list = [];
-    // TODO 兼容旧存档，记得删掉
-    const body_hair_color = era.get(`cstr:${chara.id}:毛色`) || '栗',
+    const body_hair_color = era.get(`cstr:${chara.id}:毛色`),
       hair_color = era.get(`cstr:${chara.id}:发色`),
       growth = era.get(`cflag:${chara.id}:成长阶段`),
       race = era.get(`cflag:${chara.id}:种族`),
@@ -97,8 +96,14 @@ module.exports = {
       ' ',
     );
     if (race) {
+      const characteristic = era.get(`cflag:${chara.id}:气性`);
       right_intro_list.push(
-        !growth ? '幼年' : chara_desc[era.get(`cflag:${chara.id}:气性`) + 3],
+        !growth
+          ? '幼年'
+          : {
+              content: chara_desc[characteristic + 3],
+              title: `${chara_desc[characteristic + 3]}：${chara_full_desc[characteristic + 3]}`,
+            },
         ' ',
         sex_title[chara.sex_code],
       );
@@ -218,7 +223,7 @@ module.exports = {
     let image_list;
     if (
       era.get(`cflag:${chara.id}:种族`) &&
-      chara.id &&
+      (chara.id || era.get('cflag:0:模版角色') > 0) &&
       (image_list = race_clothe_list.filter((e) =>
         era.checkImage(`${image_prefix}${e.s}`),
       )).length > 1 &&
@@ -244,9 +249,10 @@ module.exports = {
       async handle(command) {
         if (command === 100) {
           let flag_hair = true,
-            hair_indexes = generate_hair_index(chara.id);
+            hair_indexes = generate_hair_index(chara.id),
+            flag_print = true;
           while (flag_hair) {
-            era.printInColRows(
+            (flag_print ? era.printInColRows : era.replaceInColRows)(
               [
                 { type: 'divider' },
                 {
@@ -327,7 +333,7 @@ module.exports = {
                 },
               ],
             );
-            const ret = await era.input();
+            const ret = await era.input({ hideInput: true });
             switch (ret) {
               case 10:
                 hair_indexes.top =
@@ -368,9 +374,8 @@ module.exports = {
                 era.set(`cstr:${chara.id}:后发`, back_hairs[hair_indexes.back]);
                 flag_hair = false;
             }
+            flag_print = false;
             sys_change_hair(chara.id);
-            await era.clear();
-            era.setToBottom();
           }
         } else if (command !== 101) {
           const selected = command - 31;
@@ -497,27 +502,6 @@ module.exports = {
                 },
               ]
             : []),
-          {
-            config: { content: '属性', position: 'left' },
-            type: 'divider',
-          },
-          ...(flags.in_growth
-            ? [{ content: growth_info, type: 'text' }]
-            : attr_names.map((e) => {
-                const num = era.get(`base:${chara.id}:${e}`);
-                return {
-                  config: { width: 4, color: attr_colors[e] },
-                  content: [
-                    e,
-                    '：',
-                    {
-                      content: num.toLocaleString(),
-                      fontWeight: 'bold',
-                    },
-                  ],
-                  type: 'text',
-                };
-              })),
           {
             config: { content: '称号', position: 'left' },
             type: 'divider',

@@ -9,7 +9,12 @@ class CharaTitles {
   constructor(chara_id) {
     this.chara_id = chara_id;
     this.obj = era.get(`cstr:${chara_id}:称号`);
-    if (!(this.obj instanceof Array)) {
+    if (this.obj instanceof Array) {
+      this.obj = era.set(
+        `cstr:${chara_id}:称号`,
+        this.obj.filter((e) => e),
+      );
+    } else {
       this.obj = era.set(`cstr:${chara_id}:称号`, []);
     }
   }

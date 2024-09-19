@@ -334,7 +334,7 @@ module.exports = (handlers) => {
       }的分数超越了曼城茶座，成为了第一名──！」`,
     );
     await gold_ship.say_and_wait(
-      '啊──哈哈哈哈哈！！我就在等这一刻呢！THE·渔翁之利！我要对里见发动挑战书──！',
+      '啊──哈哈哈哈哈！！我就在等这一刻呢！THE · 渔翁之利！我要对里见发动挑战书──！',
     );
     await gold_ship.say_and_wait('来啦来啦拼胜负啦──！！');
     await gold_ship.say_and_wait('剪刀、石头、布！！');

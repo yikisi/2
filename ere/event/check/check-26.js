@@ -30,7 +30,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     check_aim_race(
       races,
       race_enum.asah_sta,
-      1,
+      0,
       1,
       (e) => e.pop === 1 && e.st === 0,
     ) &&

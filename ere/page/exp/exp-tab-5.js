@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 
 const {
+  get_filled_exp_str,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -87,11 +88,13 @@ module.exports = {
             `cstr:${chara.id}:无自觉初次内射经历`,
           );
         if (penis_exp) {
-          penis_exp_list.push(penis_exp);
+          penis_exp_list.push(get_filled_exp_str(penis_exp, chara.id));
         }
         if (flags.show_all_exp || penis_exp) {
           if (unknown_penis_exp) {
-            penis_exp_list.push(unknown_penis_exp);
+            penis_exp_list.push(
+              get_filled_exp_str(unknown_penis_exp, chara.id),
+            );
           }
           if (body_sex_count || virgin_sex_count || active_anal_sex_count) {
             penis_exp_list.push(
@@ -113,11 +116,13 @@ module.exports = {
         push_link_break(penis_exp_list);
 
         if (cum_semen_exp) {
-          penis_exp_list.push(cum_semen_exp);
+          penis_exp_list.push(get_filled_exp_str(cum_semen_exp, chara.id));
         }
         if (flags.show_all_exp || cum_semen_exp) {
           if (unknown_cum_semen_exp) {
-            penis_exp_list.push(unknown_cum_semen_exp);
+            penis_exp_list.push(
+              get_filled_exp_str(unknown_cum_semen_exp, chara.id),
+            );
           }
           if (penis_orgasm_count) {
             penis_exp_list.push(

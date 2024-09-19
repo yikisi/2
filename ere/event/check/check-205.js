@@ -125,20 +125,14 @@ module.exports = class extends CustomizedCheck {
         );
       }
     } else if (
-      // TODO 抢先体验
-      (era.get('cflag:205:随机招募') === 0 &&
-        era.get('flag:当前回合数') >= 4) ||
-      (era.get('cflag:205:随机招募') < 0 && era.get('flag:当前声望') >= 1000)
+      era.get('cflag:205:随机招募') < 0 &&
+      era.get('flag:当前声望') >= 1000
     ) {
       era.set('cflag:205:随机招募', 1);
       era.print(
         '据说有一名优秀的法国幼驹已经准备来到中央交流，也许可以在训练场遇到……',
       );
     }
-  }
-
-  get_aim_races() {
-    return aim_races;
   }
 
   get_edu_aims() {

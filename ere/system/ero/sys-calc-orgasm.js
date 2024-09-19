@@ -35,9 +35,6 @@ const {
 } = require('#/system/ero/sys-calc-stain');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
-const {
-  sys_get_colored_full_callname,
-} = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_random_value, log_max_wp } = require('#/utils/value-utils');
@@ -166,52 +163,70 @@ async function sys_calc_orgasm(shown, ...ids) {
             // 性奴和孕袋不能寸止
             if (
               shown &&
-              chara_id === 0 &&
               sys_check_awake(0) &&
               !era.get('tcvar:0:脱力') &&
-              !era.get('tcvar:0:失神') &&
-              era.get('flag:惩戒力度') < 2
+              !era.get('tcvar:0:失神')
             ) {
-              const stopMarks = era.get(`ex:0:寸止`);
-              // 以等差数列计算成功率
-              // 部位快感每级可以提高5%寸止成功率
-              // 早泄-50%成功率
-              // 寸止成功判定，小于几率时成功寸止
-              const stop_success =
-                Math.random() <
-                1 -
-                  ((1 + stopMarks) * stopMarks * 5) / 200 +
-                  0.1 * era.get(`talent:0:钢之意志`) +
-                  0.05 * abl -
-                  0.5 * era.get(`talent:0:早泄`);
-              const ret = await call_ero_script(0, ero_hooks.orgasm_denial, {
-                stop_success,
-              });
-              // 选择射或者没忍住就直接射了
-              cum_flag = !ret || !stop_success;
-              if (!cum_flag) {
-                if (ret === 2) {
-                  // 体外成功，射到身上
-                  if (other_part === part_enum.virgin) {
-                    other_part = part_enum.body;
-                    change_part(
-                      new EroParticipant(chara_id, part_enum.penis),
-                      new EroParticipant(other_id, other_part),
-                    );
-                  } else {
-                    other_part = Object.keys(part_enum).length;
-                    clean_part(new EroParticipant(chara_id, part_enum.penis));
+              let stop_success = undefined;
+              if (chara_id === 0 && era.get('flag:惩戒力度') < 2) {
+                const stopMarks = era.get(`ex:0:寸止`);
+                // 以等差数列计算成功率
+                // 部位快感每级可以提高5%寸止成功率
+                // 早泄-50%成功率
+                // 寸止成功判定，小于几率时成功寸止
+                stop_success =
+                  Math.random() <
+                  1 -
+                    ((1 + stopMarks) * stopMarks * 5) / 200 +
+                    0.1 * era.get(`talent:0:钢之意志`) +
+                    0.05 * abl -
+                    0.5 * era.get(`talent:0:早泄`);
+              } else if (
+                chara_id > 0 &&
+                era.get(`tcvar:${chara_id}:阴茎接触部位`).owner === 0
+              ) {
+                stop_success =
+                  Math.random() <
+                  1 -
+                    0.1 * era.get(`talent:${chara_id}:钢之意志`) +
+                    0.05 * abl -
+                    0.5 * era.get(`talent:${chara_id}:早泄`);
+              }
+              if (stop_success !== undefined) {
+                const ret = await call_ero_script(
+                  chara_id,
+                  ero_hooks.orgasm_denial,
+                  {
+                    stop_success,
+                  },
+                );
+                // 选择射或者没忍住就直接射了
+                cum_flag = !ret || !stop_success;
+                if (!cum_flag) {
+                  if (ret === 2) {
+                    // 体外成功，射到身上
+                    if (other_part === part_enum.mouth) {
+                      other_part = Object.keys(part_enum).length;
+                      clean_part(new EroParticipant(chara_id, part_enum.penis));
+                    } else {
+                      other_part = part_enum.body;
+                      change_part(
+                        new EroParticipant(chara_id, part_enum.penis),
+                        new EroParticipant(other_id, other_part),
+                      );
+                    }
+                    cum_flag = true;
+                  } else if (ret === 1) {
+                    era.set(`nowex:${chara_id}:寸止`, 1);
+                    // 恢复快感条和高潮状态
+                    era.set(`palam:${chara_id}:阴茎快感`, curr);
+                    era.set(`nowex:${chara_id}:阴茎高潮`, 0);
+                    era.set(`nowex:${chara_id}:无自觉阴茎高潮`, 0);
                   }
-                  cum_flag = true;
-                } else if (ret === 1) {
-                  era.set(`nowex:${chara_id}:寸止`, 1);
-                  // 恢复快感条和高潮状态
-                  era.set(`palam:${chara_id}:阴茎快感`, curr);
-                  era.set(`nowex:${chara_id}:阴茎高潮`, 0);
-                  era.set(`nowex:${chara_id}:无自觉阴茎高潮`, 0);
                 }
               }
             }
+
             if (cum_flag) {
               const stop_turn = era.get(`ex:${chara_id}:寸止`);
               if (stop_turn) {
@@ -460,17 +475,22 @@ async function sys_calc_orgasm(shown, ...ids) {
               if (other_part === part_enum.mouth) {
                 era.add(`exp:${other_id}:饮精量`, amount);
                 era.add(`nowex:${other_id}:饮精量`, amount);
+                if (!chara_id) {
+                  era.add(`tcvar:${other_id}:获得因子`, amount * 2.5);
+                } else if (!other_id) {
+                  era.add(`tcvar:${chara_id}:获得因子`, amount * 5);
+                }
                 if (!era.get(`cstr:${other_id}:初次吞精经历`)) {
                   if (sys_check_awake(other_id)) {
                     era.set(`cstr:${other_id}:初次吞精经历`, [
                       `在 ${date} 第一次品尝了 `,
-                      sys_get_colored_full_callname(other_id, chara_id),
+                      { c: chara_id },
                       ' 的精液，莫名地为那腥臭的味道而着迷',
                     ]);
                   } else if (!era.get(`cstr:${other_id}:无自觉初次吞精经历`)) {
                     era.set(`cstr:${other_id}:无自觉初次吞精经历`, [
                       `实际上，在 ${date}，就已经开始习惯 `,
-                      sys_get_colored_full_callname(other_id, chara_id),
+                      { c: chara_id },
                       ' 精液的味道了',
                     ]);
                   }
@@ -513,17 +533,22 @@ async function sys_calc_orgasm(shown, ...ids) {
                 era.add(`exp:${other_id}:内射次数`, 1);
                 era.add(`exp:${other_id}:膣内精液量`, amount);
                 era.add(`nowex:${other_id}:膣内精液`, amount);
+                if (!chara_id) {
+                  era.add(`tcvar:${other_id}:获得因子`, amount * 3);
+                } else if (!other_id) {
+                  era.add(`tcvar:${chara_id}:获得因子`, amount * 6);
+                }
                 if (!era.get(`cstr:${chara_id}:初次内射经历`)) {
                   if (sys_check_awake(chara_id)) {
                     era.set(`cstr:${chara_id}:初次内射经历`, [
                       '第一次向 ',
-                      sys_get_colored_full_callname(chara_id, other_id),
+                      { c: other_id },
                       ` 的身体注入 ${amount}ml 种子，是在 ${date}`,
                     ]);
                   } else if (!era.get(`cstr:${chara_id}:无自觉初次内射经历`)) {
                     era.set(`cstr:${chara_id}:无自觉初次内射经历`, [
                       `实际上，在 ${date} 就被 `,
-                      sys_get_colored_full_callname(chara_id, other_id),
+                      { c: other_id },
                       ` 淫乱的小穴榨取了 ${amount}ml 精液`,
                     ]);
                   }
@@ -532,7 +557,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                   if (sys_check_awake(other_id)) {
                     era.set(`cstr:${other_id}:初次被内射经历`, [
                       '接纳了 ',
-                      sys_get_colored_full_callname(other_id, chara_id),
+                      { c: chara_id },
                       ` 的 ${amount}ml 种子，是在 ${date}`,
                     ]);
                   } else if (
@@ -540,7 +565,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                   ) {
                     era.set(`cstr:${other_id}:无自觉初次被内射经历`, [
                       `实际上，宝贵的阴道和子宫在 ${date} 就受到 `,
-                      sys_get_colored_full_callname(other_id, chara_id),
+                      { c: chara_id },
                       ` 的 ${amount}ml 精液洗礼`,
                     ]);
                   }
@@ -569,8 +594,10 @@ async function sys_calc_orgasm(shown, ...ids) {
                     1 << pregnant_stage_enum.embryo,
                   );
                   era.set(`cflag:${other_id}:妊娠回合计时`, 0);
-                  new LifeEventMarks(other_id).sperm = chara_id;
-                  new LifeEventMarks(other_id).unexpected_pregnant =
+                  const life_marks = new LifeEventMarks(other_id);
+                  life_marks.report = 1;
+                  life_marks.sperm = chara_id;
+                  life_marks.unexpected_pregnant =
                     sys_check_awake(chara_id) - sys_check_awake(other_id);
                   era.set(`status:${other_id}:排卵期`, 0);
                   await call_ero_script(
@@ -589,6 +616,11 @@ async function sys_calc_orgasm(shown, ...ids) {
                 era.add(`exp:${other_id}:肠内射精次数`, 1);
                 era.add(`exp:${other_id}:肠内精液量`, amount);
                 era.set(`nowex:${other_id}:肠内精液`, amount);
+                if (!chara_id) {
+                  era.add(`tcvar:${chara_id}:获得因子`, amount * 2.5);
+                } else if (!other_id) {
+                  era.add(`tcvar:${other_id}:获得因子`, amount * 5);
+                }
                 update_juels_from_talent(other_id, '精液灌肠');
                 update_palam_from_talent(other_id, '肠道敏感', part_enum.anal);
               } else if (other_part !== part_enum.item) {
@@ -621,6 +653,13 @@ async function sys_calc_orgasm(shown, ...ids) {
               new EroParticipant(chara_id, part_enum.virgin),
               new EroParticipant(other_id, other_part),
             );
+            if (other_part === part_enum.mouth) {
+              if (!chara_id) {
+                era.add(`tcvar:${other_id}:获得因子`, 5);
+              } else if (!other_id) {
+                era.add(`tcvar:${chara_id}:获得因子`, 10);
+              }
+            }
           }
         }
       }

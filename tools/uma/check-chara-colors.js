@@ -3,6 +3,8 @@ const { chara_colors } = require('../../ere/data/chara-colors');
 let dict = {},
   flag = true;
 
+console.log('[check-chara-colors.js] checking...');
+
 function a(k, v) {
   if (dict[k]) {
     console.log(`Error! ${k} ${dict[k]} <-> ${v}`);
@@ -21,5 +23,7 @@ Object.entries(chara_colors).forEach((e) => {
 });
 
 if (flag) {
-  console.log('clear');
+  console.log('[check-chara-colors.js] clear');
+} else {
+  process.exit(1);
 }

@@ -43,7 +43,7 @@ const random_trainers = [
   undefined,
   '雞雞',
   '无名路人',
-  '黑奴队长',
+  '无名黑奴',
   '天马闪光蹄',
   '黑奴一号',
   '露娜俘虏',
@@ -65,7 +65,7 @@ const random_trainers = [
   'bug',
   'Advocator',
   '清音林檎',
-  '科比·布莱恩特',
+  '科比 · 布莱恩特',
 ];
 
 /**
@@ -76,7 +76,7 @@ function get_mvp_sort_by(chara_info) {
   const metric = [0, 0, 0, 0];
   chara_info.history.forEach((e) => {
     if (e.rank === 1) {
-      metric[Math.min(race_infos[e.race].race_class - 1, 3)]++;
+      metric[Math.min(race_infos[e.race].race_class, 3)]++;
     }
   });
   return (metric[0] << 18) + (metric[1] << 12) + (metric[2] << 6) + metric[3];
@@ -174,7 +174,7 @@ function print_character_statistics({ id, history }) {
 /**
  * 乙名史悦子 - 育成
  *
- * @author 黑奴队长（临时）
+ * @author 无名黑奴（临时）
  */
 module.exports = async (hook, extra_flag, event_object) => {
   if (event_object?.arg !== 'reward') {

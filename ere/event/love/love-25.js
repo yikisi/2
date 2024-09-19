@@ -355,6 +355,7 @@ handlers.girl_friend = async (coffee, me, callname) => {
     );
     era.printButton('「后来也在各种各样的事件中，也……」', 2);
     era.printButton('「但，能请你和这样的我交往吗？」', 3);
+    await era.input();
     await era.printAndWait([
       coffee.get_colored_name(),
       ' 的表情，像是在仍未从梦中醒来，但从中微微流露出的色彩已经能够得到答案——',

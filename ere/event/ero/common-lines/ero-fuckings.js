@@ -387,7 +387,7 @@ module.exports = (handlers) => {
       await defender.print_and_wait([
         '会沿着 ',
         sys_get_colored_callname(defender.id, attacker.id),
-        ' 的腰向下流吗…绝对…会的吧❤️',
+        ' 的腰向下流吗……绝对……会的吧❤️',
       ]);
     } else {
       await era.printAndWait([
@@ -398,6 +398,35 @@ module.exports = (handlers) => {
         ` 的浮空${
           hook.hook === ero_hooks.suspended_congress ? '小穴' : '屁穴'
         }……】`,
+      ]);
+      await continue_fucking_common(attacker, defender);
+    }
+  };
+
+  handlers[ero_hooks.fucked_suspended_congress] = handlers[
+    ero_hooks.fucked_suspended_congress_anal_sex
+  ] = async (attacker, defender, hook) => {
+    if (hook.arg) {
+      await era.printAndWait([
+        '【',
+        attacker.get_colored_name(),
+        ' 将 ',
+        defender.get_colored_name(),
+        ' 抬起架住，用',
+        hook.hook === ero_hooks.fucked_suspended_congress ? '小穴' : '屁穴',
+        '容纳了 ',
+        defender.get_colored_name(),
+        ' 的肉棒……】',
+      ]);
+    } else {
+      await era.printAndWait([
+        '【',
+        attacker.get_colored_name(),
+        ' 用自己的',
+        hook.hook === ero_hooks.fucked_suspended_congress ? '阴道' : '肠道',
+        ' 摩擦着 ',
+        defender.get_colored_name(),
+        ' 的浮空肉棒……】',
       ]);
       await continue_fucking_common(attacker, defender);
     }

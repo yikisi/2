@@ -26,7 +26,7 @@ module.exports = async (location) => {
       : event_hooks.school_rooftop;
   if (!(await sys_get_random_event(hook)())) {
     era.drawLine();
-    const vehicle = !chara_id && era.get('equip:0:单人载具');
+    const vehicle = !chara_id && era.get('flag:单人载具');
     era.print([
       ...(chara_id
         ? ['和 ', get_chara_talk(chara_id).get_colored_name(), ' 一起']

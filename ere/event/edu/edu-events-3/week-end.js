@@ -431,7 +431,7 @@ module.exports = async (_, __, event_object) => {
         new EroParticipant(3, part_enum.breast),
         false,
       );
-      await print_ero_page(3);
+      await print_ero_page(3, true);
       end_ero_and_train();
 
       era.printButton('「抱歉」', 1);

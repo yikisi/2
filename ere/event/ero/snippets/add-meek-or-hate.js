@@ -10,7 +10,11 @@ const { base_emotion_juel } = require('#/data/ero/juel-const');
 
 function add_meek_or_hate(chara_id, check, cb) {
   if (check === undefined || check >= 0) {
-    add_juel(chara_id, '顺从', base_emotion_juel * (1 + check / 100));
+    add_juel(
+      chara_id,
+      '顺从',
+      base_emotion_juel * Math.min(1 + check / 100, 2),
+    );
   } else {
     add_juel(chara_id, '反感', base_emotion_juel * (1 + cb(-check) / 10));
   }

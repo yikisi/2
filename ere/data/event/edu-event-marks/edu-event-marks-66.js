@@ -5,7 +5,7 @@ class TurboEduMarks extends EduEventMarks {
   title_check;
 
   constructor() {
-    super(26);
+    super(66);
     EduEventMarks.register_marks(this);
   }
 }

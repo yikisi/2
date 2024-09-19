@@ -8,6 +8,7 @@ const {
   sys_get_callname,
   sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const tachyon_default_talk = require('#/event/daily/daily-events-32/talk-default');
 
@@ -20,6 +21,9 @@ const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 module.exports = async () => {
+  if (!sys_check_awake(32)) {
+    throw new Error();
+  }
   const buffer = [],
     callname = sys_get_callname(32, 0),
     edu_marks = new TachyonEduMarks(),

@@ -49,8 +49,7 @@ module.exports = async () => {
   let buffer = get_item_list(),
     flag_storage = true;
   while (flag_storage) {
-    era.printMultiColumns([
-      { type: 'divider' },
+    let line_count = era.printMultiColumns([
       {
         content:
           buffer.length > 0
@@ -81,6 +80,10 @@ module.exports = async () => {
         (await handlers[ret]()) && (buffer = get_item_list());
       } else {
         await era.waitAnyKey();
+      }
+      line_count = era.getLineCount() - line_count - 1;
+      if (line_count > 0) {
+        await era.clear(line_count);
       }
     }
   }

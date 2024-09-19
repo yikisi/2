@@ -12,10 +12,12 @@ const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_random_name = require('#/utils/naming');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { part_names } = require('#/data/ero/part-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
+const BasementOwners = require('#/data/event/basement-owners');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
   ero_action_names,
@@ -23,6 +25,7 @@ const {
   ero_tagged_hooks,
 } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const { location_enum } = require('#/data/locations');
 
 const current = new Date().getTime();
 /** @type {Record<string,function>} */
@@ -58,6 +61,23 @@ handlers[ero_hooks.become_lubrication] = (chara_id, _, extra_flag) => {
   if (!era.get(`exp:${chara_id}:${part_names[extra_flag.part]}`)) {
     add_juel(chara_id, '恐惧', (base_emotion_juel * ratio) / 2);
   }
+};
+
+handlers[ero_hooks.prison] = (chara_id) => {
+  const life_marks = new LifeEventMarks(chara_id);
+  if (era.get(`talent:${chara_id}:病娇`) === 1) {
+    era.set(`talent:${chara_id}:病娇`, 2);
+    life_marks.yandere = get_random_value(
+      2,
+      (era.get('flag:极端行为') * 2 * era.get(`love:${chara_id}`) -
+        era.get(`relation:${chara_id}:0`)) /
+        100,
+    );
+  }
+  life_marks.b_cd = get_random_value(4, 8);
+  era.set('flag:当前位置', location_enum.basement);
+  const basement_owners = new BasementOwners();
+  basement_owners.get(0) !== chara_id && basement_owners.push(chara_id);
 };
 
 /**
@@ -102,7 +122,7 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
   let wait_flag;
   if (mother_id) {
     let relation_change = 100;
-    if (love < 90) {
+    if (love < 90 && (mother_id < 340 || mother_id > 342)) {
       switch (unexpected_pregnant) {
         case unexpected_pregnant_enum.father_sleep:
           relation_change = 0;

@@ -32,9 +32,8 @@ module.exports = {
           races.filter((e) => e.race !== race_enum.begin_race),
           (e) =>
             ((class_enum.Spe - race_infos[e.race].race_class) << 13) +
-            (e.rank << 8) +
+            ((20 - e.rank) << 8) +
             e.weeks,
-          false,
         );
       race_info_list.push({
         config: {
@@ -65,23 +64,30 @@ module.exports = {
       } else {
         race_info_list.push({ type: 'text', content: '未出走' });
       }
-      race_list.forEach((e) => {
-        race_info_list.push({
-          content: [
-            `${e.year} 年 `,
-            race_infos[e.race].get_colored_name_with_class(),
-            ` · 第 ${e.pop} 人气 · ${adaptability_names[6 + e.st]} · `,
-            {
-              content: `${e.rank} 着`,
-              color:
-                e.rank <= 5
-                  ? adaptability_colors.at(-1 - e.rank)
-                  : adaptability_colors[0],
-            },
-          ],
-          type: 'text',
-        });
-      });
+      const half_length = Math.ceil(race_list.length / 2);
+      for (let i = 0; i < half_length; ++i) {
+        [race_list[i], race_list[i + half_length]]
+          .filter((e) => e)
+          .forEach((e) =>
+            race_info_list.push({
+              config: { width: 12 },
+              content: [
+                `${e.year} 年 `,
+                race_infos[e.race].get_colored_name_with_class(),
+                ' · ',
+                {
+                  content: `${e.rank} 着`,
+                  color:
+                    e.rank <= class_enum.Spe
+                      ? adaptability_colors.at(-1 - e.rank)
+                      : adaptability_colors[0],
+                  title: `第 ${e.pop} 人气 · ${adaptability_names[6 + e.st]}`,
+                },
+              ],
+              type: 'text',
+            }),
+          );
+      }
       if (race_info_list.length === 1) {
         race_info_list.push({
           content: '还没有可称道的战绩……',
@@ -135,4 +141,5 @@ module.exports = {
     };
   },
   name: page_name,
+  uma: true,
 };

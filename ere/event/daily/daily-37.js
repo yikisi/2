@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
@@ -11,13 +12,18 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
 const FlashLifeMarks = require('#/data/event/life-event-marks/life-event-marks-37');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise<boolean|undefined|void>>} */
 const handlers = {};
 
 handlers[event_hooks.select] = () => {
+  if (!sys_check_awake(37)) {
+    throw new Error();
+  }
   const callname = sys_get_callname(37, 0),
     talk_arr = [],
     relation = era.get(`relation:37:0`);
@@ -54,6 +60,9 @@ handlers[event_hooks.good_morning] = () => {
 };
 
 handlers[event_hooks.good_night] = async () => {
+  if (!sys_check_awake(0) || !sys_check_awake(37)) {
+    throw new Error();
+  }
   const callname = sys_get_callname(37, 0);
   const talk_arr = [
     `今天辛苦了，${callname}。一天的劳累之后，还请注意让自己的身体放松一下哦。`,
@@ -75,6 +84,9 @@ handlers[event_hooks.good_night] = async () => {
 };
 
 handlers[event_hooks.talk] = async () => {
+  if (!sys_check_awake(37)) {
+    throw new Error();
+  }
   const callname = sys_get_callname(37, 0),
     flash = get_chara_talk(37),
     relation = era.get(`relation:37:0`);
@@ -365,11 +377,12 @@ handlers[event_hooks.school_rooftop] = async () => {
   }
 };
 
-handlers[event_hooks.out_river] = async () => {
+handlers[event_hooks.out_river] = async (hook) => {
   const callname = sys_get_callname(37, 0),
     flash = get_chara_talk(37),
     temp = await select_action_around_river();
-  if (!temp) {
+  hook.arg = !!temp;
+  if (!hook.arg) {
     await era.printAndWait(
       `${get_chara_talk(0).name} 和荣进闪耀一起来到湖边钓鱼。`,
     );
@@ -700,7 +713,11 @@ handlers[event_hooks.out_station] = async (hook) => {
 
 handlers[event_hooks.load_talk] = async () => {
   const flash = get_chara_talk(37);
-  if (era.get('cflag:37:妊娠回合计时') || era.get(`exp:37:生产次数`)) {
+  if (
+    (era.get('cflag:37:妊娠阶段') !== 1 << pregnant_stage_enum.no &&
+      !new LifeEventMarks(37).report) ||
+    era.get(`exp:37:生产次数`) > 0
+  ) {
     await flash.say_and_wait('是吗……你最终还是做出了这样的选择啊。');
     await era.printAndWait([
       flash.get_colored_name(),

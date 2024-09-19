@@ -86,6 +86,9 @@ handlers[event_hooks.good_morning] = () => {
 };
 
 handlers[event_hooks.talk] = async () => {
+  if (!sys_check_awake(30)) {
+    throw new Error();
+  }
   const rice = get_chara_talk(30),
     callname = sys_get_callname(30, 0),
     motivation = era.get('cflag:30:干劲'),

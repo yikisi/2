@@ -14,6 +14,7 @@ const { gacha } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
@@ -57,10 +58,6 @@ function handle_travel_cost(chara_id) {
  * @param {string} lan_name
  */
 function learn_language(chara_id, lan_name) {
-  print_attr_change(
-    chara_id,
-    sys_change_attr_and_print(chara_id, '精力', -get_random_value(200, 400)),
-  );
   print_attr_change(
     chara_id,
     sys_change_attr_and_print(
@@ -148,6 +145,15 @@ handlers[event_hooks.foreign_rest] = async (chara_id) => {
  * @param {{lan:string}} extra_flag
  */
 handlers[event_hooks.foreign_study] = async (chara_id, hook, extra_flag) => {
+  print_attr_change(
+    0,
+    sys_change_attr_and_print(chara_id, '精力', -get_random_value(200, 400)),
+  );
+  chara_id &&
+    print_attr_change(
+      0,
+      sys_change_attr_and_print(chara_id, '精力', -get_random_value(200, 400)),
+    );
   if (hook.arg) {
     era.println();
     learn_language(chara_id, extra_flag.lan);
@@ -209,15 +215,16 @@ handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
   extra_flag,
 ) => {
   era.println();
-  let wait_flag = false;
+  let wait_flag = get_attr_and_print_in_event(
+    chara_id,
+    extra_flag.attr_change,
+    extra_flag.pt_change,
+    extra_flag.base_change,
+    true,
+  );
   wait_flag =
-    get_attr_and_print_in_event(
-      chara_id,
-      extra_flag.attr_change,
-      extra_flag.pt_change,
-      extra_flag.base_change,
-      true,
-    ) || wait_flag;
+    get_skills_and_print_in_event(chara_id, extra_flag.skill_change) ||
+    wait_flag;
   wait_flag =
     sys_change_motivation(chara_id, extra_flag.motivation_change || 0) ||
     wait_flag;

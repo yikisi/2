@@ -58,5 +58,6 @@ module.exports = {
     await god.say_and_wait('今后请多指教。');
     set('flag:当前互动角色', 341);
     set('cflag:341:招募状态', recruit_flags.yes);
+    set('cflag:341:育成回合计时', 'x');
   },
 };

@@ -6,6 +6,7 @@ const CustomizedMec = require('#/event/mec/mec-common');
 
 const { buff_colors } = require('#/data/color-const');
 const ByerleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-342');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedMec {
   init_love() {
@@ -23,6 +24,10 @@ module.exports = class extends CustomizedMec {
       return Math.min(40, 90 - get('love:342'));
     }
     return super.get_ero_check(action);
+  }
+
+  get_love_limit() {
+    return get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes ? 55 : 0;
   }
 
   get_talents() {
@@ -45,6 +50,6 @@ module.exports = class extends CustomizedMec {
   set_foreign_debuff(before_race, loc) {}
 
   set_my_sex() {
-    return 0;
+    return get('flag:角色性别') === 99 ? 10 : set('cflag:342:性别', 0);
   }
 };

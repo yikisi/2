@@ -29,11 +29,11 @@ module.exports = class extends CustomizedCheck {
     if (
       era.get('flag:回合爱慕惩罚') &&
       era.get('love:343') >= 50 &&
-      new MayLifeMarks().who_am_i < 2
+      new MayLifeMarks().who_am_i < 3
     ) {
       add_event(
         event_hooks.week_end,
-        new EventObject(343, cb_enum.love).set_arg(49),
+        new EventObject(343, cb_enum.love, true).set_arg(49),
       );
     }
     super.check_next_week();

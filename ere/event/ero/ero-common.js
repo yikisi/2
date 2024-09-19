@@ -23,7 +23,6 @@ const {
 const { ero_action_names, ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
-const { location_enum } = require('#/data/locations');
 
 const current = new Date().getTime();
 
@@ -47,6 +46,7 @@ const handlers = {},
   require('#/event/ero/common-lines/ero-sleeping-pettings-1'),
   require('#/event/ero/common-lines/ero-sleeping-pettings-2'),
   require('#/event/ero/common-lines/ero-sleeping-fuckings'),
+  require('#/event/ero/common-lines/ero-items'),
 ].forEach((f) => f(sleep_handlers, handlers));
 
 console.log(
@@ -158,6 +158,67 @@ handlers[ero_hooks.lose_virginity] = (chara_id, _, extra_flag) =>
     { content: extra_flag.virgin ? '处女' : '童贞', color: buff_colors[2] },
     '！',
   ]);
+
+const optimized_part_names = {};
+optimized_part_names[part_enum.mouth] = '口穴';
+optimized_part_names[part_enum.virgin] = '小穴';
+optimized_part_names[part_enum.anal] = '屁穴';
+
+/**
+ * @param {number} chara_id
+ * @param _
+ * @param {{stop_success:boolean}} extra_flag
+ */
+handlers[ero_hooks.orgasm_denial] = async (chara_id, _, extra_flag) => {
+  const me = get_chara_talk(0),
+    chara = get_chara_talk(chara_id),
+    touch = era.get(`tcvar:${chara_id}:阴茎接触部位`);
+  if (
+    touch.part === part_enum.mouth ||
+    touch.part === part_enum.virgin ||
+    touch.part === part_enum.anal
+  ) {
+    era.printMultiColumns([
+      {
+        content: [chara.get_colored_name(), ' 的肉棒已经达到极限……'],
+        type: 'text',
+      },
+      ...[`以 ${optimized_part_names[touch.part]} 接纳`, '避开精芒'].map(
+        (e, i) => ({
+          accelerator: i * 2,
+          config: { align: 'center', width: 12 },
+          content: e,
+          type: 'button',
+        }),
+      ),
+    ]);
+  }
+  const ret = await era.input();
+  if (ret) {
+    if (!extra_flag.stop_success) {
+      era.print([
+        me.get_colored_name(),
+        ' 在和 ',
+        chara.get_colored_name(),
+        ' 的竞速中失败了……',
+      ]);
+    } else if (ret === 2) {
+      era.print([
+        me.get_colored_name(),
+        ' 的 ',
+        optimized_part_names[touch.part],
+        ' 吐出了 ',
+        chara.get_colored_name(),
+        ' 蓄势待发的肉棒，温热的精液径直喷向了 ',
+        me.get_colored_name(),
+        ' 的 ',
+        touch.part === part_enum.mouth ? '俏脸' : '玉体',
+        '……',
+      ]);
+    }
+  }
+  return ret;
+};
 
 /** @param {number} chara_id */
 handlers[ero_hooks.orgasm] = async (chara_id) => {
@@ -341,16 +402,6 @@ handlers[ero_hooks.get_mark] = async (chara_id, _, extra_flag) => {
     get_chara_talk(chara_id).get_colored_name(),
     ` ${message}`,
   ]);
-};
-
-handlers[ero_hooks.prison] = (chara_id) => {
-  era.print([
-    get_chara_talk(chara_id).get_colored_name(),
-    ' 监禁了 ',
-    get_chara_talk(0).get_colored_name(),
-  ]);
-  era.set('flag:当前位置', location_enum.basement);
-  era.set('flag:地下室之主', chara_id);
 };
 
 /**
@@ -754,17 +805,22 @@ module.exports = async (chara_id, hook, extra_flag) => {
       hook,
       extra_flag,
     );
-    const aim_handler =
-      (sys_check_awake(defender) ? handlers : sleep_handlers)[hook.hook] ||
-      handlers[hook.hook];
-    if (aim_handler) {
-      await aim_handler(
+    let handler_dict = {};
+    if (!sys_check_awake(defender)) {
+      handler_dict = sleep_handlers;
+    } else if (era.get('tflag:强奸') < 0) {
+      handler_dict = handlers;
+    }
+    const aim_handler = handler_dict[hook.hook];
+    if (
+      !aim_handler ||
+      (await aim_handler(
         get_chara_talk(attacker),
         get_chara_talk(defender),
         hook,
         extra_flag,
-      );
-    } else {
+      ))
+    ) {
       era.print([
         '【',
         get_chara_talk(attacker).get_colored_name(),

@@ -36,15 +36,15 @@ aim_races[get_aim_race_index(race_enum.yasu_kin, 1)] = -4;
 
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
-    const event_marks = new AgEduMarks();
+    const edu_marks = new AgEduMarks();
     if (
       extra_flag.edu_weeks >= 96 &&
       extra_flag.edu_weeks < 95 + 24 &&
       extra_flag.rank <= 3 &&
       race_infos[extra_flag.race].race_class === class_enum.G1 &&
-      event_marks.yuusha_fight < 3
+      edu_marks.yuusha_fight < 3
     ) {
-      event_marks.yuusha_fight++;
+      edu_marks.yuusha_fight++;
     }
   }
 
@@ -164,27 +164,19 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(19).get();
+      races = new RaceHistory(19).get(),
+      { yuusha_fight } = new AgEduMarks();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hyac_sta, 1, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.nhk_cup, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.japa_dir, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.mile_cha, 1, 1));
-    const g1_count = Object.entries(races).filter((e) => {
-      const weeks = Number(e[0]);
-      const race = e[1];
-      return (
-        weeks >= 96 &&
-        weeks < 96 + 24 &&
-        race.rank <= 3 &&
-        race_infos[race.race].race_class === class_enum.G1
-      );
-    }).length;
     buffer.push({
-      check: Math.min(g1_count, 3) - 2,
-      color: g1_count >= 3 ? attr_change_colors.up : attr_change_colors.down,
-      content: `资深年 1-6月 三场G1 前三名 ${g1_count}/3 ${
-        g1_count >= 3 ? '✔' : '✘'
+      check: Math.min(yuusha_fight, 3) - 2,
+      color:
+        yuusha_fight >= 3 ? attr_change_colors.up : attr_change_colors.down,
+      content: `资深年 1-6月 三场G1 前三名 ${yuusha_fight}/3 ${
+        yuusha_fight >= 3 ? '✔' : '✘'
       }`,
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.tenn_sho, 2, 1));

@@ -22,7 +22,7 @@ module.exports = (handlers) => {
 
   handlers[836] = async () => {
     const ret = await select_target_in_storage(
-      861,
+      836,
       (e) => !era.get(`talent:${e}:泌乳`),
     );
     if (ret !== undefined) {

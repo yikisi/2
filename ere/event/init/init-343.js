@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
+const { attr_names } = require('#/data/train-const');
 
 module.exports = (is_reset) => {
   if (!is_reset) {
@@ -12,8 +13,9 @@ module.exports = (is_reset) => {
     } else {
       era.set(
         'callname:343:-2',
-        `佐岳${era.get('cflag:343:性别') === 1 ? '先生' : '女士'}`,
+        `佐岳${era.get('cflag:343:性别') === 1 ? '先生' : '小姐'}`,
       );
     }
+    attr_names.forEach((e) => era.set(`base:343:${e}`, 800));
   }
 };

@@ -5,7 +5,10 @@ const {
   begin_and_init_ero,
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_like_chara,
+} = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
@@ -46,7 +49,7 @@ module.exports = async (hook, __, event_object) => {
       `在这样美好的日子里，${me.name} 整理好着装，想好致辞，准备和担当迎接一起努力奔驰的三年。`,
     );
     await era.printAndWait(`而${kita.sex}的名字就是————`);
-    await kita.say_and_wait('请多指教！训练员先生！');
+    await kita.say_and_wait(`请多指教！${sys_get_callname(68, 0)}！`);
     await era.printAndWait(
       `北部玄驹跟黑道似的起身向 ${me.name} 深深鞠躬，黑色的短发随着大幅度的动作摇晃起来。`,
     );
@@ -82,7 +85,6 @@ module.exports = async (hook, __, event_object) => {
     );
     await era.printAndWait(`而 ${kita.name} 的故事，也由此开始了。`);
     era.println();
-    wait_flag = get_attr_and_print_in_event(68, undefined, 120) || wait_flag;
   } else if (event_arg === 47 + 32 || event_arg === 95 + 32) {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||

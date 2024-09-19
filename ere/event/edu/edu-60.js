@@ -9,6 +9,7 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -609,10 +610,10 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
           `优秀素质虽然感到害羞，却发自内心地为 ${me.name} 加油。这一天 ${me.name} 留下了无可取代的宝贵回忆！`,
         );
         era.println();
+        get_skills_and_print_in_event(60, [202121]);
         get_attr_and_print_in_event(60, [0, 20, 0, 0, 0], 20);
         sys_change_motivation(60, 1);
         await era.waitAnyKey();
-        // TODO 无畏之心+1
       } else if (ret === 2) {
         await nature.say_and_wait(
           `不不不，别那么说。${era.get(
@@ -627,9 +628,9 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
           `${me.name} 感受到彼此之间深刻的情谊，真是美好的一天！`,
         );
         era.println();
+        get_skills_and_print_in_event(60, [202121]);
         get_attr_and_print_in_event(60, [0, 20, 20, 0, 0], 20);
         await era.waitAnyKey();
-        // TODO 无畏之心+1
       } else {
         await nature.say_and_wait('呃，别喊那么大声～这样很引人注目的！');
         await era.printAndWait(`优秀素质涨红了脸颊，回应着 ${me.name} 的呼喊`);
@@ -755,7 +756,7 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
   );
   era.println();
   era.printButton('「海豚秀」', 1);
-  era.printButton('「……极度恐怖．可怕鱼展览！！」', 2);
+  era.printButton('「……极度恐怖 · 可怕鱼展览！！」', 2);
   const ret = await era.input();
   if (ret === 1) {
     await nice_nature.say_and_wait('……我说啊。你有在听我说话吗？');

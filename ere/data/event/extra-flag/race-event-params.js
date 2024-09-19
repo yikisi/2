@@ -5,7 +5,7 @@ class RaceEventParams extends ExtraFlagsParams {
   attr_change;
   /** @type {number} */
   pt_change;
-  /** @type {*[]} */
+  /** @type {number[]} */
   skill_change;
   /** @type {number} */
   motivation_change;

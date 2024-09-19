@@ -39,8 +39,8 @@ function check_pregnant_unprotect(chara_id, _virgin_size) {
     // 人类只有未怀孕和安定期没保护
     return (
       (pregnant_stage & 0xa) > 0 ||
-      // 0周怀孕的情况
-      !era.get(`cflag:${chara_id}:妊娠回合计时`)
+      (pregnant_stage !== 1 << pregnant_stage_enum.no &&
+        era.get(`cflag:${chara_id}:妊娠回合计时`) < 4)
     );
   }
 }

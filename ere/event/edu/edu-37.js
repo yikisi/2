@@ -301,13 +301,13 @@ handlers[event_hooks.week_end] = async (_, __, event_object) => {
     era.set('status:37:分心', 0);
     await era.printAndWait([
       flash.get_colored_name(),
-      '不再',
+      ' 不再 ',
       {
         color: buff_colors[0],
         content: '[分心]',
         title: status_desc['闪耀分心'],
       },
-      '了！',
+      ' 了！',
     ]);
   } else if (
     event_arg === 95 + 32 &&
@@ -724,6 +724,7 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
         `面对 ${your_name} 的提议，荣进闪耀的脸上浮现出犹豫之色。`,
       );
       era.printButton('「要是伤势恶化，情况就会变得更糟糕。」', 1);
+      await era.input();
       await era.printAndWait(`见此，${your_name} 轻叹一口气，说道。`);
       await flash.say_and_wait('……');
       await era.printAndWait(`很明显，${your_name} 的话提醒了面前人。`);

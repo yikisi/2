@@ -1,1 +1,4 @@
 npm run lint
+cd tools/uma
+node check-chara-colors.js
+node check-child-names.js

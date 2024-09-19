@@ -111,8 +111,7 @@ module.exports = {
    * @returns {*[]}
    */
   sys_change_attr_and_print(chara_id, attr_id_or_name, change) {
-    let stat = Math.floor(change);
-    if (!stat) {
+    if (!change) {
       return [];
     }
     const attr_name =
@@ -123,47 +122,46 @@ module.exports = {
       max = era.get(`maxbase:${chara_id}:${attr_name}`),
       ret = [];
     if (typeof attr_id_or_name === 'string') {
-      if (stat < 0) {
+      if (change < 0) {
         let debuff =
           sys_get_debuff(chara_id) +
           (era.get('flag:当前位置') === location_enum.beach &&
             attr_id_or_name === '体力') *
             0.2;
-        stat = Math.floor(stat * (debuff > 10 ? 1 : debuff + 1));
+        change = Math.floor(change * (debuff > 10 ? 1 : debuff + 1));
         if (attr_id_or_name === '体力') {
           let lose_weight =
-            stat *
+            change *
             (1 -
               0.4 * era.get(`status:${chara_id}:发胖`) +
               era.get(`status:${chara_id}:健康茶`));
           era.add(`base:${chara_id}:体重偏差`, Math.ceil(lose_weight));
-          sys_change_pressure(chara_id, get_random_value(stat / 5, 0));
-          if (
-            -stat >= 500 ||
-            Math.random() < Math.pow(2, (-stat - 500) / 100)
-          ) {
-            era.add(
-              `base:${chara_id}:耐力`,
-              1 +
-                (era.get(`base:${chara_id}:体力`) <
-                  0.45 * era.get(`maxbase:${chara_id}:体力`)),
-            );
-          }
+          sys_change_pressure(chara_id, get_random_value(change / 5, 0));
+          era.add(
+            `base:${chara_id}:耐力`,
+            Math.min(-change / 500, 1) +
+              (era.get(`base:${chara_id}:体力`) <
+                0.45 * era.get(`maxbase:${chara_id}:体力`))
+              ? Math.random()
+              : 0,
+          );
         } else {
-          sys_change_lust(chara_id, get_random_value(stat, 0) / 4);
-          sys_change_pressure(chara_id, get_random_value(stat / 10, 0));
-          if (
-            -stat >= 500 ||
-            Math.random() < Math.pow(2, (-stat - 500) / 100)
-          ) {
-            era.add(
-              `base:${chara_id}:智力`,
-              1 +
-                (era.get(`base:${chara_id}:精力`) <
-                  0.5 * era.get(`maxbase:${chara_id}:精力`)),
-            );
-          }
+          sys_change_lust(chara_id, get_random_value(change, 0) / 4);
+          sys_change_pressure(chara_id, get_random_value(change / 10, 0));
+          era.add(
+            `base:${chara_id}:智力`,
+            Math.min(-change / 500) +
+              (era.get(`base:${chara_id}:精力`) <
+                0.5 * era.get(`maxbase:${chara_id}:精力`))
+              ? Math.random()
+              : 0,
+          );
         }
+      }
+      if (change > 0) {
+        change = Math.max(change, 1);
+      } else {
+        change = Math.min(change, -1);
       }
     } else if (
       chara_id &&
@@ -176,20 +174,21 @@ module.exports = {
     ) {
       return [];
     }
-    if (stat > max - val) {
-      stat = max - val;
+    if (change > max - val) {
+      change = max - val;
     }
-    if (stat + val < 0) {
-      stat = 0 - val;
+    if (change + val < 0) {
+      change = 0 - val;
     }
-    if (stat) {
-      era.add(`base:${chara_id}:${attr_name}`, stat);
+    if (change) {
+      era.add(`base:${chara_id}:${attr_name}`, change);
+      const stat = Math.floor(Math.abs(change));
       ret.push(
         {
           color: attr_colors[attr_name],
           content: attr_name,
         },
-        stat > 0
+        change > 0
           ? {
               color: attr_change_colors.up,
               content: ' 上升',
@@ -198,11 +197,13 @@ module.exports = {
               color: attr_change_colors.down,
               content: ' 下降',
             },
-        ' 了 ',
-        {
-          color: attr_colors[attr_name],
-          content: (stat > 0 ? stat : -stat).toLocaleString(),
-        },
+        ' 了',
+        stat >= 1
+          ? {
+              color: attr_colors[attr_name],
+              content: ` ${stat.toLocaleString()}`,
+            }
+          : '',
       );
     }
     return ret;
@@ -287,8 +288,8 @@ module.exports = {
           week: -1,
         },
       });
-    delete ret.curr.id;
-    delete ret.last.id;
+    ret.curr = { race: ret.curr.race, week: ret.curr.week };
+    ret.last = { race: ret.last.race, week: ret.last.week };
     return ret;
   },
 };

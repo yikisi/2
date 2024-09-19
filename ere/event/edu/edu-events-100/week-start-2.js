@@ -10,7 +10,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 module.exports = (handlers) => {
   handlers[95 + 6] = async (acute, me, callname) => {
     era.set('cflag:100:节日事件标记', 0);
-    await print_event_name('拳人节·特大号追加超量叠放无敌燃烧版', acute);
+    await print_event_name('拳人节 · 特大号追加超量叠放无敌燃烧版', acute);
     const digital = get_chara_talk(19);
     const jordan = get_chara_talk(48);
     const festa = get_chara_talk(49);
@@ -324,7 +324,7 @@ module.exports = (handlers) => {
       acute.get_colored_name(),
       ' 的情人节礼物……原来如此。看来传说中的拳术师，很快就要隐退了啊——',
     ]);
-    era.drawLine({ content: '特雷森学园·楼道' });
+    era.drawLine({ content: '特雷森学园 · 楼道' });
     const a_call_d = sys_get_colored_callname(100, 19);
     await acute.say_and_wait([a_call_d, '，', a_call_d, '，不得了啦啊！～']);
     await digital.say_and_wait([

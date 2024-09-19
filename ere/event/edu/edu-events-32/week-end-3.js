@@ -17,7 +17,7 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},TachyonEduMarks,number,number,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
   handlers[95 + 35] = async (tachyon, me, callname, flags) => {
-    await print_event_name('因素·旁观者设置', tachyon);
+    await print_event_name('因素 · 旁观者设置', tachyon);
     await tachyon.say_and_wait(
       '不过仔细想想……这大概是我第一次在观众席看比赛吧',
     );

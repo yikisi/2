@@ -69,6 +69,10 @@ handlers[event_hooks.out_shopping] = async (hook) => {
       break;
     case 3:
       talk = '看电影，在人群中格格不入的感觉挥之不去。';
+      break;
+    case 4:
+      hook.arg = 2;
+      talk = '，径直走向了那家不起眼的粉红的小店……';
   }
   await era.printAndWait([
     get_chara_talk(0).get_colored_name(),
@@ -107,7 +111,7 @@ handlers[event_hooks.out_station] = async (hook) => {
 
 /**
  * @author 雞雞
- * @author 黑奴队长（改编）
+ * @author 无名黑奴（改编）
  */
 module.exports = {
   /**

@@ -126,10 +126,10 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const edu_marks = new TachyonEduMarks();
+    const edu_marks = new TachyonEduMarks(),
+      life_marks = new TachyonLifeMarks();
     if (era.get('cflag:32:招募状态') === recruit_flags.yes) {
       const daily_event_object = new EventObject(32, cb_enum.daily),
-        life_marks = new TachyonLifeMarks(),
         relation = era.get('relation:32:0');
       let temp;
       if (
@@ -178,6 +178,14 @@ module.exports = class extends CustomizedCheck {
         );
       }
     }
+    if (life_marks.drug_notice > 0) {
+      if (era.get('cflag:0:位置') === 0 && --life_marks.drug_notice === 0) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(32, cb_enum.edu).set_arg('drug_notice'),
+        );
+      }
+    }
     const edu_weeks = era.get('cflag:32:育成回合计时');
     if (edu_weeks < 3 * 48) {
       edu_marks.train_stop = 0;
@@ -212,7 +220,7 @@ module.exports = class extends CustomizedCheck {
             // 法国（？）
             add_event(event_hooks.week_start, event_obj_special);
           } else {
-            // 因素·旁观者设置
+            // 因素 · 旁观者设置
             add_event(event_hooks.week_end, event_obj_special);
           }
           break;
@@ -360,6 +368,13 @@ module.exports = class extends CustomizedCheck {
     }
     new TachyonEduMarks().limited = 0;
     return super.check_palace_and_get_aims();
+  }
+
+  check_second_chance() {
+    add_event(
+      event_hooks.week_start,
+      new EventObject(this.id, cb_enum.edu).set_arg('second_chance'),
+    );
   }
 
   get_edu_aims() {

@@ -43,6 +43,7 @@ function common_no_action_check(chara_id) {
 
 class CustomizedCheck {
   static like_chara;
+  static common_no_action_check = common_no_action_check;
 
   constructor(chara_id) {
     this.id = chara_id;
@@ -63,6 +64,7 @@ class CustomizedCheck {
   check_and_get_titles(aim_check) {
     const ret = [];
     if (
+      era.get(`cflag:${this.id}:模版角色`) === -1 &&
       new RaceHistory(this.id)
         .get_values()
         .filter(
@@ -137,6 +139,8 @@ class CustomizedCheck {
     return this.get_edu_aims();
   }
 
+  check_second_chance() {}
+
   /** @returns {Record<string,number>} */
   get_aim_races() {
     return aim_races;
@@ -205,19 +209,18 @@ class CustomizedCheck {
 
   /** @returns {boolean} */
   is_prison() {
-    if (common_no_action_check(this.id)) {
+    if (
+      common_no_action_check(this.id) ||
+      era.get('flag:当前位置') === location_enum.basement ||
+      era.get('cflag:0:位置') !== 0
+    ) {
       return false;
     }
     const love = era.get(`love:${this.id}`),
       prison_limit = era.get('flag:极端行为限制'),
       relation = era.get(`relation:${this.id}:0`);
     let delta = love * prison_limit - relation;
-    if (
-      era.get('flag:当前位置') === location_enum.basement ||
-      !prison_limit ||
-      love < 50 ||
-      delta < 0
-    ) {
+    if (!prison_limit || love < 50 || delta < 0) {
       return false;
     }
     let ratio =
@@ -235,10 +238,11 @@ class CustomizedCheck {
     }
     const dice = Math.random();
     era.logger.debug(
-      `角色 ${this.id} 地下室：${(ratio * 100).toFixed(2)}% 掷骰：${dice} 计算：
-    ${ratio}=${delta > 0}(开关)*(0.05(基础)+${
-      delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)
-    }(好感爱慕)-${0.25 * get_action_debuff(this.id)}(行动debuff))`,
+      `角色 ${this.id} 地下室：${(ratio * 100).toFixed(2)}% 掷骰：${dice} 计算：${
+        ratio
+      }=${delta > 0}(开关)*(0.05(基础)+${
+        delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)
+      }(好感爱慕)-${0.25 * get_action_debuff(this.id)}(行动debuff))`,
     );
     return ratio >= 1 || dice < ratio;
   }
@@ -270,7 +274,8 @@ class CustomizedCheck {
       Math.pow(2, Math.min(delta / 6 - 100, 0)) * 0.3 +
       Math.pow(2, era.get(`base:${this.id}:性欲`) / 2000 - 5) *
         (0.7 + 0.1 * era.get(`mark:${this.id}:欢愉`)) +
-      0.05 * era.get(`talent:${this.id}:工口意愿`) -
+      0.05 * era.get(`talent:${this.id}:工口意愿`) +
+      0.5 * era.get('item:透明棉被') -
       0.5 * get_action_debuff(this.id);
     if (punish_level >= 2) {
       ratio += 0.3;
@@ -285,7 +290,7 @@ class CustomizedCheck {
       era.get(`base:${this.id}:性欲`) / 2000 - 5,
     )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
       0.05 * era.get(`talent:${this.id}:工口意愿`)
-    }(好色)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
+    }(好色)+${0.5 * era.get('item:透明棉被')}(透明棉被)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
     );
     return ratio >= 1 || dice < ratio;
   }
@@ -309,16 +314,17 @@ class CustomizedCheck {
     }
     const dice = Math.random();
     era.logger.debug(
-      `角色 ${this.id} 求爱：${(ratio * 100).toFixed(2)}%；掷骰：${dice} 计算：
-    ${ratio}=${
-      Math.log(Math.max(6 * love - era.get(`relation:${this.id}:0`), 1)) /
-      log_600m4
-    }(好感爱慕)+${Math.pow(
-      2,
-      era.get(`base:${this.id}:性欲`) / 1250 - 8,
-    )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
-      0.05 * era.get(`talent:${this.id}:工口意愿`)
-    }(好色)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
+      `角色 ${this.id} 求爱：${(ratio * 100).toFixed(2)}%；掷骰：${dice} 计算：${
+        ratio
+      }=${
+        Math.log(Math.max(6 * love - era.get(`relation:${this.id}:0`), 1)) /
+        log_600m4
+      }(好感爱慕)+${Math.pow(
+        2,
+        era.get(`base:${this.id}:性欲`) / 1250 - 8,
+      )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
+        0.05 * era.get(`talent:${this.id}:工口意愿`)
+      }(好色)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
     );
     if (ratio >= 1 || dice < ratio) {
       return (

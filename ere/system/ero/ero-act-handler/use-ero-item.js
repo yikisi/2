@@ -84,8 +84,8 @@ async function use_ero_item(chara) {
       e.e = e.e ? e.e() : true;
       return e;
     });
-  if (!item_list.length) {
-    era.print('暂时没有可用的性玩具……');
+  if (!item_list.filter((e) => e.e).length) {
+    await era.printAndWait('暂时没有可用的性玩具……');
     return undefined;
   }
   era.printInColRows(
@@ -247,7 +247,7 @@ async function use_ero_item(chara) {
       part = await era.input();
       part = part_list[part].a;
     } else {
-      era.print('没有可以使用该性玩具的部位……');
+      await era.printAndWait('没有可以使用该性玩具的部位……');
     }
   }
   if (part !== 100) {
@@ -298,7 +298,7 @@ async function use_ero_item(chara) {
     part = (await era.input()) || part;
   }
   if (part === 100) {
-    era.print([
+    await era.printAndWait([
       CharaTalk.me.get_colored_name(),
       ' 放弃了使用 ',
       { color: buff_colors[2], content: item_names[item] },

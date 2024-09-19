@@ -100,7 +100,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       {
         accelerator: 999,
         config: {
-          buttonType: event_marks.get(event_hooks.week_end)
+          buttonType: event_marks.check(event_hooks.week_end)
             ? 'danger'
             : 'warning',
           width: 6,
@@ -171,7 +171,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       {
         accelerator: 205,
         config: {
-          buttonType: event_marks.get(event_hooks.foreign_travel)
+          buttonType: event_marks.check(event_hooks.foreign_travel)
             ? 'danger'
             : 'warning',
           disabled:
@@ -220,7 +220,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       },
       {
         accelerator: 403,
-        config: { width: 6 },
+        config: { disabled: !sys_check_awake(0), width: 6 },
         content: '持有物品',
         type: 'button',
       },

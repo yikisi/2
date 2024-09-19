@@ -149,7 +149,7 @@ module.exports = (handlers) => {
   };
 
   handlers[39] = async (ss, me, callname, flags) => {
-    await print_event_name('初始·承诺', ss);
+    await print_event_name('初始 · 承诺', ss);
     await ss.say_and_wait(
       '今年似乎很快就要过去了，总感觉我对时间的感知都迟钝了呢。',
     );

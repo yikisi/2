@@ -9,6 +9,7 @@ const use_ero_item = require('#/system/ero/ero-act-handler/use-ero-item');
 const use_ero_medicine = require('#/system/ero/ero-act-handler/use-ero-medicine');
 const use_item_by_character = require('#/system/ero/ero-act-handler/use-item-by-chara');
 const use_lubricating_fluid = require('#/system/ero/ero-act-handler/use-lubricating-fluid');
+const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const sys_auto_rape = require('#/system/ero/sub/sys-auto-rape');
 const sys_auto_react = require('#/system/ero/sub/sys-auto-react');
 const {
@@ -25,12 +26,13 @@ const {
   update_juel_buff,
 } = require('#/system/ero/sys-prepare-ero');
 const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const print_exp_page = require('#/page/page-exp');
+const { print_chara_info } = require('#/page/page-exp');
 
 const { tequip_parts } = require('#/data/ero/item-const');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
@@ -45,8 +47,6 @@ const {
 const { stain_enum } = require('#/data/ero/stain-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
-const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 let shown = true;
 
@@ -230,9 +230,9 @@ async function sys_handle_ero_act(command, filters, _shown) {
       await next_turn();
     }
   } else if (command === 900) {
-    let option_flag = true;
+    let option_flag = 1;
     while (option_flag) {
-      era.printMultiColumns([
+      (option_flag - 1 ? era.replaceInColRows : era.printInColRows)([
         ...new Array(8).fill(0).map((_, i) => {
           return {
             accelerator: i,
@@ -246,9 +246,10 @@ async function sys_handle_ero_act(command, filters, _shown) {
         }),
         { accelerator: 999, content: '返回', type: 'button' },
       ]);
-      const ret = await era.input();
+      option_flag = 2;
+      const ret = await era.input({ hideInput: true });
       if (ret === 999) {
-        option_flag = false;
+        option_flag = 0;
       } else {
         era.set(`flag:${ret + 950}`, !era.get(`flag:${ret + 950}`));
       }
@@ -260,9 +261,9 @@ async function sys_handle_ero_act(command, filters, _shown) {
     print_stain_info(cur_lover);
     await era.waitAnyKey();
   } else if (command === 903) {
-    await print_exp_page(0);
+    await print_chara_info(0, undefined, 5);
   } else if (command === 904) {
-    await print_exp_page(cur_lover);
+    await print_chara_info(cur_lover, undefined, 5);
   } else if (command === 999) {
     if (
       sys_check_awake(cur_lover) &&

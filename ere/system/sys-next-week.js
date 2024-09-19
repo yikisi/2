@@ -9,6 +9,7 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
 const check_new_activities = require('#/system/next-week/check-new-activities');
+const morning_sex = require('#/system/next-week/morning-sex');
 const randomly_interact = require('#/system/next-week/randomly-interact');
 const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
@@ -28,15 +29,19 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const filter_chara = require('#/system/sys-filter-chara');
 const sys_handle_palace = require('#/system/sys-handle-palace');
+const { reset_chara } = require('#/system/sys-init-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { remove_special_events } = require('#/event/queue');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry, sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaAvailableSkills = require('#/data/chara-available-skills');
+const CharaSkills = require('#/data/chara-skills');
 const { buff_colors, money_color } = require('#/data/color-const');
 const { trainer_salary } = require('#/data/const.json');
 const {
@@ -47,6 +52,8 @@ const {
 const { part_enum, part_talents } = require('#/data/ero/part-const');
 const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const BasementOwners = require('#/data/event/basement-owners');
+const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const event_hooks = require('#/data/event/event-hooks');
 const GrandLives = require('#/data/event/grand-lives');
@@ -57,7 +64,9 @@ const {
   get_talent_bust_size,
   get_trainer_title,
 } = require('#/data/info-generator');
+const { location_enum } = require('#/data/locations');
 const LoveLimitStatus = require('#/data/love-limit-status');
+const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { pressure_border } = require('#/data/train-const');
 
@@ -84,15 +93,22 @@ async function sys_next_week() {
       (temp = era.get('flag:床伴')) &&
       era.get(`base:${temp}:体力`) &&
       era.get(`base:${temp}:精力`) &&
-      !era.get(`status:${temp}:马跳S`)
+      sys_check_awake(temp)
         ? [temp].filter(check_pregnant_unprotect)
-        : in_team_list.filter((chara_id) => chara_id !== temp);
+        : in_team_list.filter(
+            (chara_id) => chara_id !== temp && sys_check_awake(temp),
+          );
     prepared_list.forEach((chara_id) => {
       if (
-        era.get('flag:地下室之主') === chara_id ||
+        new BasementOwners().get(0) === chara_id ||
         get_custom_check(chara_id).is_prison()
       ) {
-        act_list.push({ chara_id, prison: true });
+        act_list.push({
+          chara_id,
+          prison:
+            (!era.get('item:透明棉被') || Math.random() < 0.5) &&
+            !new LifeEventMarks(chara_id).b_cd,
+        });
       } else if (get_custom_check(chara_id).is_rape_in_sleeping()) {
         act_list.push({ chara_id, prison: false });
       }
@@ -136,13 +152,19 @@ async function sys_next_week() {
       final_act_list.push(act);
       tmp = final_act_list.length - 1;
     }
+    if (final_act_list.length > 0 && era.get('item:马跳S家庭装')) {
+      era.set('status:0:马跳S', 1);
+    }
     for (const act of final_act_list) {
       if (act.prison) {
         await call_ero_script(act.chara_id, ero_hooks.prison);
       } else {
         await sys_rape_in_sleeping(act.chara_id, act.supporter);
       }
-      if (era.get('flag:床伴')) {
+      if (
+        era.get('flag:床伴') ||
+        era.get('flag:当前位置') === location_enum.basement
+      ) {
         break;
       }
     }
@@ -151,6 +173,20 @@ async function sys_next_week() {
     team_dict[chara_id] = 1;
     if (era.get('flag:性技自主学习') && sys_check_awake(chara_id)) {
       auto_update_ero_skills(chara_id);
+    }
+    if (era.get(`talent:${chara_id}:病娇`) === 2) {
+      const life_event_marks = new LifeEventMarks(chara_id);
+      if (era.get(`relation:${chara_id}:0`) > 525) {
+        if (--life_event_marks.yandere === 0) {
+          era.set(`talent:${chara_id}:病娇`, 1);
+          era.print([
+            get_chara_talk(chara_id).get_colored_name(),
+            ' 重新变得温和起来……',
+          ]);
+        }
+      } else {
+        life_event_marks.yandere = Math.min(life_event_marks.yandere + 1, 8);
+      }
     }
   });
 
@@ -424,16 +460,57 @@ async function sys_next_week() {
       }
       // 殿堂计算
       if (chara_id) {
-        if (era.get(`cflag:${chara_id}:育成回合计时`) === 3 * 48) {
+        const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
+        if (edu_weeks === 3 * 48) {
           sys_handle_palace(chara_id);
           await era.waitAnyKey();
-        } else if (
-          era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 &&
-          (era.get(`status:${chara_id}:摸鱼`) ||
-            (stay_up && Math.random() < 0.2))
-        ) {
-          // 没进殿堂，摸鱼和熬夜才会正常造成干劲下降
-          motivation_change -= 1;
+        } else if (edu_weeks < 3 * 48) {
+          if (edu_weeks > 0 && edu_weeks % 48 === 0) {
+            const skill_control = new CharaSkills(chara_id),
+              available_control = new CharaAvailableSkills(chara_id),
+              to_get = available_control.get().slice(0, 2);
+            if (to_get.length === 0) {
+              era.add(`exp:${chara_id}:技能点数`, 320);
+            } else {
+              available_control.remove(...to_get);
+              get_skills_and_print_in_event(chara_id, to_get, skill_control);
+            }
+          } else if (
+            edu_weeks % 48 === 9 &&
+            era.get(`cflag:${chara_id}:继承方1`)
+          ) {
+            const a = era.get(`cflag:${chara_id}:继承方1`),
+              b = era.get(`cflag:${chara_id}:继承方2`),
+              juel_list = gene_juel_names.map(
+                (e) => era.get(`juel:${a}:${e}`) + era.get(`juel:${b}:${e}`),
+              );
+            if (edu_weeks > 96) {
+              juel_list.forEach((e, i) =>
+                era.add(
+                  `juel:${chara_id}:${gene_juel_names[i]}`,
+                  Math.floor(e * 0.4),
+                ),
+              );
+            } else {
+              juel_list.forEach((e, i) =>
+                era.add(
+                  `juel:${chara_id}:${gene_juel_names[i]}`,
+                  e - Math.floor(e * 0.3) - Math.floor(e * 0.4),
+                ),
+              );
+            }
+            era.print([
+              get_chara_talk(chara_id).get_colored_name(),
+              ' 继承了新的因子！',
+            ]);
+          }
+          if (
+            era.get(`status:${chara_id}:摸鱼`) ||
+            (stay_up && Math.random() < 0.2)
+          ) {
+            // 没进殿堂，摸鱼和熬夜才会正常造成干劲下降
+            motivation_change -= 1;
+          }
         }
       }
       sys_change_motivation(chara_id, motivation_change);
@@ -508,7 +585,7 @@ async function sys_next_week() {
       cur_month < 4 &&
       era.get(`cflag:${chara_id}:育成回合计时`) === 'x'
     ) {
-      era.set(`cflag:${chara_id}:育成回合计时`, (cur_round - 1) % 48);
+      reset_chara(chara_id);
       await sys_call_daily_event(chara_id, event_hooks.growth, { stage: 2 });
     }
 
@@ -518,24 +595,29 @@ async function sys_next_week() {
 
     let pregnant_stage = era.get(`cflag:${chara_id}:妊娠阶段`);
     const life_marks = new LifeEventMarks(chara_id);
+    life_marks.b_cd && life_marks.b_cd--;
     if (pregnant_stage >> pregnant_stage_enum.embryo) {
       sys_change_lust(chara_id, lust_border.itch / 40);
       const timer = era.add(
-          `cflag:${chara_id}:妊娠回合计时`,
-          1 + is_pregnant_slave,
-        ),
-        o_timer = timer - 1 - is_pregnant_slave;
+        `cflag:${chara_id}:妊娠回合计时`,
+        1 + is_pregnant_slave,
+      );
       const pregnant_times = era.get(`exp:${chara_id}:生产次数`);
       era.add(
         `base:${chara_id}:体重偏差`,
         get_random_value(50 + timer * 5, 150 + timer * 10),
       );
-      if (!o_timer) {
+      const life_marks = new LifeEventMarks(chara_id);
+      if (
+        life_marks.report &&
+        (era.get(`mark:${chara_id}:淫纹`) === 3 || timer >= 4)
+      ) {
         sys_change_pressure(
           chara_id,
           500 * (1 + (era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)),
         );
-        const father_id = new LifeEventMarks(chara_id).sperm;
+        life_marks.report = 0;
+        const father_id = life_marks.sperm;
         await call_ero_script(
           chara_id || father_id,
           ero_hooks.report_pregnant_between_weeks,
@@ -801,7 +883,10 @@ async function sys_next_week() {
           40,
       );
     }
+    const edu_marks = new EduEventMarks(chara_id);
+    edu_marks._r_e_check = 2;
     get_custom_check(chara_id).check_next_week();
+    edu_marks._r_e_check = 0;
   }
 
   if (race_punish) {
@@ -883,6 +968,7 @@ async function sys_next_week() {
     );
   }
 
+  await morning_sex();
   era.set('flag:床伴', 0);
   const hash = crypto.createHash('md5');
   hash.update(era.get('callname:0:-1') + era.get('flag:当前回合数'));

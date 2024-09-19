@@ -79,12 +79,17 @@ const era = {
   getAllCharacters() {},
   /**
    * get characters added in train
-   * @returns {array<number>} ids of characters in train
+   * @returns {number[]} ids of characters in train
    */
   getCharactersInTrain() {},
   /**
+   * get the number of current lines
+   * @returns {number} the number of current lines
+   */
+  getLineCount() {},
+  /**
    * wait for use's input, the engine will try to return number
-   * @param {{[disableBefore]: boolean, [rule]: string, [useRule]: boolean}} [config] config of input, like rule
+   * @param {{[disableBefore]:boolean,[rule]:string,[useRule]:boolean,[hideInput]:boolean}} [config] config of input, like rule
    * @returns {Promise<any>} a promise of the user input, please use await
    */
   // eslint-disable-next-line no-unused-vars
@@ -147,7 +152,7 @@ const era = {
   },
   /**
    * print some text
-   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
+   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
    * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line
    * @returns {number} line number of the printed
    */
@@ -155,7 +160,7 @@ const era = {
   print(content, config) {},
   /**
    * print some text and wait any key from user
-   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
+   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
    * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line   * @returns {Promise<number>} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
@@ -360,7 +365,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '1.2.3', engine: undefined },
+  version: { sdk: '2.1.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await

@@ -389,7 +389,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
     case 0:
       if (Math.random() < 0.5) {
         await ruby.say_and_wait(
-          `我知道这个，是里见集团最新推出的JRPG。它的起源：《真·三女神转生》的大名哪怕是我都有所耳闻。`,
+          `我知道这个，是里见集团最新推出的JRPG。它的起源：《真 · 三女神转生》的大名哪怕是我都有所耳闻。`,
         );
       } else {
         await ruby.say_and_wait(

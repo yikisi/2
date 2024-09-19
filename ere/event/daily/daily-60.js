@@ -18,12 +18,17 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean>>} */
 const handlers = {};
 
-handlers[event_hooks.select] = function () {
+handlers[event_hooks.select] = () => {
+  if (!sys_check_awake(60)) {
+    throw new Error();
+  }
   get_chara_talk(60).say(
     Math.random() < 0.5
       ? `怎么了怎么了？找 ${sys_get_callname(60, 60)} 有什么事吗？`
@@ -61,10 +66,13 @@ handlers[event_hooks.good_morning] = function () {
 };
 
 handlers[event_hooks.good_night] = async function (hook) {
+  if (!sys_check_awake(0) || !sys_check_awake(60)) {
+    throw new Error();
+  }
   const chara = get_chara_talk(60),
     check = get_custom_check(60).is_want_make_love(),
     me = get_chara_talk(0);
-  if (sys_check_awake(0) && sys_check_awake(60) && check) {
+  if (check > 0) {
     era.print(`繁忙的一天结束，${me.name} 把 ${chara.name} 送到学生宿舍门口。`);
     era.print(
       `${me.name} 刚打算如往常一样挥手告别，却突然被优秀素质拽住了袖脚。`,
@@ -96,7 +104,7 @@ handlers[event_hooks.good_night] = async function (hook) {
         `优秀素质原本羞涩的脸上瞬间涌起了激动与喜悦，不等 ${me.name} 再次肯定，不由分说的便抱住了 ${me.name} 的手臂，并附在耳边轻声低语：`,
       );
       chara.say(
-        `今晚的训练，也请你多多指教咯？训·练·员·${me.get_adult_sex_title()} ❤️`,
+        `今晚的训练，也请你多多指教咯？训 · 练 · 员 · ${me.get_adult_sex_title()} ❤️`,
       );
       era.print(
         `就这样，${
@@ -135,6 +143,9 @@ handlers[event_hooks.good_night] = async function (hook) {
 };
 
 handlers[event_hooks.talk] = async function () {
+  if (!sys_check_awake(60)) {
+    throw new Error();
+  }
   const chara_self_name = sys_get_callname(60, 60),
     callname = sys_get_callname(60, 0);
   let talk_arr;
@@ -523,7 +534,10 @@ handlers[event_hooks.celebration] = async () => {
 
 handlers[event_hooks.load_talk] = async () => {
   const nice_nature = get_chara_talk(60);
-  if (era.get('cflag:60:妊娠回合计时')) {
+  if (
+    era.get('cflag:60:妊娠阶段') >> pregnant_stage_enum.embryo &&
+    !new LifeEventMarks(60).report
+  ) {
     await nice_nature.say_and_wait(
       `啊哈，是吗，果然内恰小姐还是……但是等等，不行，${sys_get_callname(
         60,

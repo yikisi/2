@@ -20,6 +20,8 @@ const { buff_colors } = require('#/data/color-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_filtered_talents } = require('#/data/info-generator');
+const { gene_juel_names } = require('#/data/other-const');
+const { gene_type_colors } = require('#/data/race/model/uma-gene');
 const { adaptability_names } = require('#/data/train-const');
 
 /** @param {number} mother_id */
@@ -27,13 +29,14 @@ async function sys_have_baby(mother_id) {
   const mother_life_marks = new LifeEventMarks(mother_id),
     father_id = mother_life_marks.sperm,
     child_id = era.add('flag:新生儿ID', 1) - 1;
-  let src_chara_id;
-  if (mother_id) {
-    src_chara_id = era.get(`cflag:${mother_id}:模版角色`);
-    src_chara_id = src_chara_id !== -1 ? src_chara_id : mother_id;
-  } else {
-    src_chara_id = era.get(`cflag:${father_id}:模版角色`);
-    src_chara_id = src_chara_id !== -1 ? src_chara_id : father_id;
+  let src_chara_id = era.get(`cflag:${mother_id}:模版角色`);
+  if (src_chara_id === -1) {
+    if (mother_id) {
+      src_chara_id = mother_id;
+    } else {
+      src_chara_id = era.get(`cflag:${father_id}:模版角色`);
+      src_chara_id = src_chara_id !== -1 ? src_chara_id : father_id;
+    }
   }
 
   init_chara(child_id, src_chara_id);
@@ -184,9 +187,10 @@ async function sys_have_baby(mother_id) {
     );
   }
 
-  let random_val = Math.random();
+  let random_val;
   adaptability_names.forEach((e) => {
     let val = era.get(`cflag:${child_id}:${e}适性`);
+    random_val = Math.random();
     if (random_val < 0.1) {
       val += random_val < 0.05 ? 1 : -1;
       if (val > 7) {
@@ -339,7 +343,11 @@ async function sys_have_baby(mother_id) {
   child_life_marks.unexpected_child = mother_life_marks.unexpected_pregnant;
   mother_life_marks.unexpected_pregnant = 0;
 
-  if (!father_id && era.get(`love:${mother_id}`) < 90) {
+  if (
+    !father_id &&
+    era.get(`love:${mother_id}`) < 90 &&
+    (mother_id < 340 || mother_id > 342)
+  ) {
     if (era.get(`mark:${mother_id}:同心`) >= 2) {
       sys_like_chara(mother_id, 0, 50);
       await add_juel_out_of_train(mother_id, '顺从', 200);
@@ -349,6 +357,24 @@ async function sys_have_baby(mother_id) {
   } else if (!father_id || !mother_id) {
     sys_like_chara(mother_id || father_id, 0, 100);
     await add_juel_out_of_train(mother_id || father_id, '顺从', 300);
+  }
+  const juel_index = get_random_value(0, 2);
+  let juel_num = 0;
+  if (!father_id) {
+    juel_num = get_random_value(25, 75);
+  } else if (!mother_id) {
+    juel_num = get_random_value(75, 125);
+  }
+  if (juel_num > 0) {
+    era.add(`juel:0:${gene_juel_names[juel_index]}`, juel_num);
+    era.print([
+      get_chara_talk(0).get_colored_name(),
+      ' 获得了 ',
+      {
+        content: `${gene_juel_names[juel_index]} × ${juel_num}`,
+        color: gene_type_colors[juel_index],
+      },
+    ]);
   }
   new Array(3)
     .fill(0)

@@ -13,12 +13,16 @@ const print_chara_info = require('#/page/components/cur-chara-info');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 
+const GameGuides = require('#/event/game-guides');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
+const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
@@ -32,7 +36,7 @@ function get_position_buttons(positions, event_marks) {
     return {
       accelerator: i + 1,
       config: {
-        buttonType: event_marks.get(e.s) ? 'danger' : 'warning',
+        buttonType: event_marks.check(e.s) ? 'danger' : 'warning',
         disabled: e.d,
         width: 4,
       },
@@ -128,19 +132,15 @@ async function out_page() {
   if (!(await sys_get_random_event(event_hooks.out_start)())) {
     const event_marks = new EventMarks(chara_id);
     let positions = get_positions(chara_id, player_base, chara_base);
-    vehicle = !chara_id && era.get('equip:0:单人载具');
+    vehicle = !chara_id && era.get('flag:单人载具');
     era.drawLine();
+    if (vehicle) {
+      era.print(
+        `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}到达了学园大门……`,
+      );
+    }
+    await new GameGuides().out();
     era.printMultiColumns([
-      {
-        content: vehicle
-          ? [
-              `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}到达了学园大门……`,
-              { isBr: true },
-              { isBr: true },
-            ]
-          : '',
-        type: 'text',
-      },
       {
         content: [
           '要',
@@ -222,7 +222,7 @@ async function out_page() {
                 ]);
                 const aim = await era.input();
                 if (aim !== 999) {
-                  vehicle = era.get('equip:0:多人载具');
+                  vehicle = era.get('flag:多人载具');
                   era.printMultiColumns([
                     { type: 'divider' },
                     {
@@ -256,7 +256,20 @@ async function out_page() {
             {
               name: '庆贺',
             },
-            {},
+            era.get('cflag:301:招募状态') === recruit_flags.yes ||
+              new TokinoLifeMarks().who_am_i !== 2
+              ? {}
+              : {
+                  name: '「来帮帮我吧」（招募）',
+                  handle() {
+                    temp.chara.name = era.set('callname:301:-2', '骏川缰绳');
+                    era.set('cflag:301:招募状态', recruit_flags.yes);
+                    return era.printAndWait([
+                      temp.chara.get_colored_name(),
+                      ' 加入了队伍！',
+                    ]);
+                  },
+                },
             {
               handle() {
                 return era.printAndWait([
@@ -280,8 +293,8 @@ async function out_page() {
         break;
       default:
         vehicle = chara_id
-          ? era.get('equip:0:多人载具')
-          : era.get('equip:0:多人载具') || era.get('equip:0:单人载具');
+          ? era.get('flag:多人载具')
+          : era.get('flag:多人载具') || era.get('flag:单人载具');
         era.printMultiColumns([
           {
             type: 'divider',
@@ -314,7 +327,7 @@ async function out_page() {
     await era.printAndWait('回去了……');
     era.println();
     await sys_get_random_event(event_hooks.back_school)({
-      loc: positions[aim]?.l,
+      loc: positions[aim - 1]?.l,
     });
   }
 }

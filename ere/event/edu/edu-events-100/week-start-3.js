@@ -283,7 +283,7 @@ module.exports = (handlers) => {
       '……到底是谁给了他普通人也能拥有各种武术各种专业名词作为常识的自信啊？',
     );
     await say_by_passer_by_and_wait('黝黑大汉', [
-      '如果只是这·种·程·度的攻击频率，使用呼吸法的 ',
+      '如果只是这 · 种 · 程 · 度的攻击频率，使用呼吸法的 ',
       muteki.get_colored_name(),
       '，就算再打上三天三夜也不会觉得累吧。',
     ]);
@@ -397,7 +397,7 @@ module.exports = (handlers) => {
       );
       await era.printAndWait('但只有这一击，便足够了。');
       await era.printAndWait('想要击败金刚不坏的刚勇——');
-      await era.printAndWait('只需这一击，便·足·够·了。');
+      await era.printAndWait('只需这一击，便 · 足 · 够 · 了。');
       await muteki.say_and_wait('啊！库——');
       await muteki.say_and_wait('呼、呼吸的节奏！？', true);
       await say_by_passer_by_and_wait('裁判', '逼、逼、逼——');
@@ -445,7 +445,7 @@ module.exports = (handlers) => {
         ' 便可以重新找回呼吸的节奏。',
       ]);
       await era.printAndWait(
-        '或许，只需要进攻的节奏稍缓，无敌的刚拳便可以重返无尽得攻势。',
+        '或许，只需要进攻的节奏稍缓，无敌的刚拳便可以重返无尽的攻势。',
       );
       await era.printAndWait([
         '或许，对于新时代的翘楚——',
@@ -456,9 +456,13 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait('——但是，那又怎样呢？');
       await era.printAndWait('既然「犯了一次错误就将败下阵来」，那么——');
-      await era.printAndWait('【只·要·一·次·错·都·不·犯·不·就·好·了·吗？】', {
-        fontSize: '3rem',
-      });
+      await era.printAndWait(
+        '【只 · 要 · 一 · 次 · 错 · 都 · 不 · 犯 · 不 · 就 · 好 · 了 · 吗？】',
+        {
+          color: acute.color,
+          fontSize: '2rem',
+        },
+      );
       await era.printAndWait(
         '暴雨梨花般的柔拳，永不停歇的柔拳，坚毅勇绝的柔拳——',
       );
@@ -622,7 +626,7 @@ module.exports = (handlers) => {
         acute.sex,
         '就仍然会是最后的赢家。',
       ]);
-      await era.printAndWait('这是一个非常浅显的道路。');
+      await era.printAndWait('这是一个非常浅显的道理。');
       await era.printAndWait([
         '——可与此同时，这也是 ',
         acute.get_colored_name(),
@@ -669,7 +673,7 @@ module.exports = (handlers) => {
         callname,
         '，其实我跟你撒了个慌。',
       ]);
-      await era.printAndWait('燥热的心，砰砰得跳动。');
+      await era.printAndWait('燥热的心，砰砰地跳动。');
       await acute.say_and_wait(
         '其实啊……比赛之后呢。我还是有那么一点点的精力得啦……走回休息室，其实是没问题的。',
       );

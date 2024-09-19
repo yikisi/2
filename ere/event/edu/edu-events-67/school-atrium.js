@@ -111,20 +111,20 @@ module.exports = async (hook, _, event_object) => {
     );
     await sweepy.print_and_wait('？？？「找到了──────！！！！」');
     await sweepy.say_and_wait(
-      '里见！从今天开始，我就任命你为『魔法少女·光钻』！',
+      '里见！从今天开始，我就任命你为『魔法少女 · 光钻』！',
     );
-    await daiya.say_and_wait('咦？『魔法少女·光钻』……吗？');
-    await kita.say_and_wait('『魔法少女☆Sweepy5』。魔法少女·玄驹登场！嘿嘿♪');
+    await daiya.say_and_wait('咦？『魔法少女 · 光钻』……吗？');
+    await kita.say_and_wait('『魔法少女☆Sweepy5』。魔法少女 · 玄驹登场！嘿嘿♪');
     await daiya.say_and_wait('哇啊，连小北也在说这个！？');
     await kita.say_and_wait(
       '嘿嘿♪其实是一个由变革创立的团体，叫做『魔法少女☆Sweepy5』啦。',
     );
-    await kita.say_and_wait('我也是在不久前刚被任命为魔法少女·玄驹的！');
+    await kita.say_and_wait('我也是在不久前刚被任命为魔法少女 · 玄驹的！');
     await kita.say_and_wait(
       '然后我就想说，要是小钻也愿意一起参加的话……你觉得呢？',
     );
     await sweepy.say_and_wait(
-      '团员有我──天才魔法少女Sweepy跟魔法少女·玄驹，还有速子博士喔。',
+      '团员有我──天才魔法少女Sweepy跟魔法少女 · 玄驹，还有速子博士喔。',
     );
     await daiya.say_and_wait(
       '哎呀，大家一起玩魔法吗？还是什么之类的吗？真有趣♪请一定要让我参加！',
@@ -162,7 +162,7 @@ module.exports = async (hook, _, event_object) => {
       await sweepy.say_and_wait(
         '哼哼～这还用说嘛！那就让我示范怎么用魔法给你看♪准备好啰──',
       );
-      await sweepy.say_and_wait('情情·爱爱·爱情花☆繁星之光降落吧！');
+      await sweepy.say_and_wait('情情 · 爱爱 · 爱情花☆繁星之光降落吧！');
       await era.printAndWait(
         '……什么也没有发生。但她的确架式十足，不愧是自称魔法少女的人。',
       );
@@ -181,9 +181,9 @@ module.exports = async (hook, _, event_object) => {
         '哇啊，真的看起来亮晶晶的耶……！里见，你很厉害嘛♪',
       );
       await sweepy.say_and_wait(
-        '魔法少女·光钻！我正式允许你入团！现在开始你就是『魔法少女☆Sweepy5』的团员了♪知道了吗？',
+        '魔法少女 · 光钻！我正式允许你入团！现在开始你就是『魔法少女☆Sweepy5』的团员了♪知道了吗？',
       );
-      await daiya.say_and_wait('是！魔法少女·光钻，今后会更加耀眼的！');
+      await daiya.say_and_wait('是！魔法少女 · 光钻，今后会更加耀眼的！');
       await era.printAndWait(
         `虽然我不太懂魔法相关的东西，但看到几个同龄的学生玩得这么开心的模样，让 ${me.name} 不由得也跟着开心了起来。`,
       );
@@ -217,7 +217,7 @@ module.exports = async (hook, _, event_object) => {
       );
       await me.say_and_wait('辣椒素……！？', true);
       await sweepy.say_and_wait(
-        '你、你很有一套嘛……！魔法少女·光钻！现在开始你就正式是『魔法少女☆Sweepy5』的团员了♪',
+        '你、你很有一套嘛……！魔法少女 · 光钻！现在开始你就正式是『魔法少女☆Sweepy5』的团员了♪',
       );
       await era.printAndWait(
         `东商变革等人离开后，${me.name} 走向里见光钻。……${me.name} 很在意${daiya.sex}刚才喝下辣椒素的事情。`,

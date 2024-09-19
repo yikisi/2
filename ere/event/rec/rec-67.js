@@ -117,7 +117,7 @@ async function common_comments(me, daiya, other) {
  *
  * @author cy
  * @author 黑奴二号（改编）
- * @author 黑奴队长（修订）
+ * @author 无名黑奴（修订）
  */
 module.exports = {
   override: true,

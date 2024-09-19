@@ -15,6 +15,7 @@ const {
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const attr_score_table = require('#/data/attr-score-table.json');
+const chara_score = require('#/data/chara-score-table.json');
 const { buff_colors } = require('#/data/color-const');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
@@ -42,46 +43,46 @@ const level_and_desc = {
   },
   attr_score: [
     'G',
-    'G+',
+    'G+', // 100
     'F',
-    'F+',
+    'F+', // 200
     'E',
-    'E+',
+    'E+', // 300
     'D',
-    'D+',
+    'D+', // 400
     'C',
-    'C',
+    'C', // 500
     'C+',
-    'C+',
+    'C+', // 600
     'B',
-    'B',
+    'B', // 700
     'B+',
-    'B+',
+    'B+', // 800
     'A',
-    'A',
+    'A', // 900
     'A+',
-    'A+',
+    'A+', // 1000
     'S',
-    'S',
+    'S', // 1100
     'SS',
+    'SS', // 1200
     'SS',
-    'SS',
+    'UG', // 1300
     'UG',
-    'UG',
+    'UF', // 1400
     'UF',
-    'UF',
+    'UE', // 1500
     'UE',
-    'UE',
+    'UD', // 1600
     'UD',
-    'UD',
+    'UC', // 1700
     'UC',
-    'UC',
+    'UB', // 1800
     'UB',
-    'UB',
-    'UA',
+    'UA', // 1900
     'UA',
   ],
-  chara_score: require('#/data/chara-score-table.json'),
+  chara_score,
   relation: {
     border: [-100, 0, 75, 150, 225, 375, 525],
     mark: ['失望', '怀疑', '冷淡', '融洽', '热忱', '喜爱', '亲密', '不渝'],
@@ -124,7 +125,7 @@ function get_attr_score(attr) {
   if (attr > 1200) {
     return attr_score_table[1200];
   }
-  return attr_score_table[attr];
+  return attr_score_table[Math.floor(attr)];
 }
 
 /**
@@ -191,7 +192,7 @@ function get_filtered_talents(sex, begin_talent_id) {
  * @returns {string}
  */
 function get_love_mark(love, chara_id) {
-  if (sys_check_hide_relation_and_love(chara_id)) {
+  if ((sys_check_hide_relation_and_love(chara_id) & 0b1) > 0) {
     return '？';
   }
   let level = 0;
@@ -210,7 +211,7 @@ function get_love_mark(love, chara_id) {
  * @returns {string}
  */
 function get_relation_mark(relation, chara_id) {
-  if (sys_check_hide_relation_and_love(chara_id)) {
+  if (sys_check_hide_relation_and_love(chara_id) > 0) {
     return '？';
   }
   const val =
@@ -283,11 +284,11 @@ module.exports = {
     if (is_number) {
       return score;
     }
-    let scoreLevel = 0;
-    while (score >= level_and_desc.chara_score.border[scoreLevel]) {
-      scoreLevel++;
+    let score_level = 0;
+    while (score >= level_and_desc.chara_score.border[score_level]) {
+      score_level++;
     }
-    return level_and_desc.chara_score.mark[scoreLevel];
+    return level_and_desc.chara_score.mark[score_level];
   },
   /**
    * @param {number} chara_id
@@ -416,7 +417,10 @@ module.exports = {
         key: '避孕套溶解剂',
       });
     }
-    if (era.get(`status:${chara_id}:短效避孕药`)) {
+    if (
+      era.get(`status:${chara_id}:短效避孕药`) ||
+      era.get(`status:${chara_id}:长效避孕药`)
+    ) {
       status_list.push({ color: buff_colors[0], content: '避孕' });
     }
     const orgasm_denial = era.get(`ex:${chara_id}:寸止`);
@@ -438,7 +442,7 @@ module.exports = {
     }
     if (
       era.get(`cflag:${chara_id}:妊娠阶段`) >> pregnant_stage_enum.embryo &&
-      (era.get(`cflag:${chara_id}:妊娠回合计时`) ||
+      (era.get(`cflag:${chara_id}:妊娠回合计时`) >= 4 ||
         (chara_id && mark_level >= 2))
     ) {
       status_list.push({
@@ -517,7 +521,7 @@ module.exports = {
     if (!chara_id) {
       return ['-'];
     }
-    if (sys_check_hide_relation_and_love(chara_id)) {
+    if ((sys_check_hide_relation_and_love(chara_id) & 0b1) > 0) {
       return ['？', '(?)'];
     }
     if (sys_check_limit_relation_and_love(chara_id)) {
@@ -552,7 +556,7 @@ module.exports = {
     if (!target) {
       target = 0;
     }
-    if (sys_check_hide_relation_and_love(chara_id)) {
+    if (sys_check_hide_relation_and_love(chara_id) > 0) {
       return ['？', '(?)'];
     }
     const relation = era.get(`relation:${chara_id}:${target}`);
@@ -576,16 +580,10 @@ module.exports = {
             },
           ]
         : []),
-      ...new Array(2)
-        .fill(0)
-        .map((_, i) => {
-          return {
-            id: i,
-            val: era.get(`talent:${chara_id}:${i + 1090}`),
-          };
-        })
-        .filter((e) => e.val)
-        .map((e) => era.get(`talentname:${e.id + 1090}`)),
+      ...(era.get(`talent:${chara_id}:捉摸不透`) ? ['捉摸不透'] : []),
+      ...(era.get(`talent:${chara_id}:病娇`) === 2
+        ? [{ color: buff_colors[3], content: '[病娇]', key: '病娇' }]
+        : []),
       ...new Array(18)
         .fill(0)
         .map((_, i) => {
@@ -641,12 +639,9 @@ module.exports = {
     ret +=
       level_and_desc.honour.buff[
         level +
-          [304, 306].reduce(
-            (p, a) =>
-              p + (era.get(`cflag:${a}:招募状态`) === recruit_flags.yes),
-            0,
-          )
-      ];
+          (era.get('cflag:304:招募状态') === recruit_flags.yes) +
+          (era.get('cflag:306:招募状态') === recruit_flags.yes)
+      ] ?? 0;
     if (relation > 525) {
       ret += 2.5;
     } else if (relation > 375) {

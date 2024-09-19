@@ -51,9 +51,9 @@ function get_suffix(chara_id, type) {
   const ret = [];
   if (type === chara_info_type.train) {
     const chara_score = get_chara_score(chara_id),
-      motivation = era.get(`cflag:${chara_id}:干劲`);
-    let chara_level = get_rank_level(chara_score);
-    const races = new RaceHistory(chara_id).get_values();
+      motivation = era.get(`cflag:${chara_id}:干劲`),
+      chara_level = get_rank_level(chara_score),
+      races = new RaceHistory(chara_id).get_values();
     ret.push(
       {
         config: {
@@ -136,7 +136,9 @@ function get_suffix(chara_id, type) {
               ? out_of_train_type[palace - 1]
               : in_train
                 ? get_train_time(chara_id).substring(0, 3)
-                : '待入学'
+                : era.get(`cflag:${chara_id}:可再次育成`)
+                  ? '-'
+                  : '待入学'
             : '-',
         type: 'text',
       },
@@ -151,7 +153,7 @@ function get_suffix(chara_id, type) {
         width: 3,
         barWidth: 20,
       },
-      inContent: `${era.get(`base:${chara_id}:体力`)}/${era.get(
+      inContent: `${Math.floor(era.get(`base:${chara_id}:体力`))}/${era.get(
         `maxbase:${chara_id}:体力`,
       )}`,
       percentage:
@@ -166,7 +168,7 @@ function get_suffix(chara_id, type) {
         width: 3,
         barWidth: 20,
       },
-      inContent: `${era.get(`base:${chara_id}:精力`)}/${era.get(
+      inContent: `${Math.floor(era.get(`base:${chara_id}:精力`))}/${era.get(
         `maxbase:${chara_id}:精力`,
       )}`,
       percentage:
@@ -245,7 +247,7 @@ async function select_target(type) {
         buffer.push(
           {
             config: { align: 'center', width: 1 },
-            content: '评分',
+            content: '评价',
             type: 'text',
           },
           {

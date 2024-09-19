@@ -31,6 +31,8 @@ const ero_action_tags = {
 Object.keys(ero_action_tags).forEach((e, i) => (ero_action_tags[e] = i));
 
 const ero_actions = {
+  // 放弃挣扎
+  go_on: 0,
   // 接吻
   kiss: 0,
   // 法式湿吻
@@ -195,6 +197,8 @@ const ero_actions = {
   hug_standing: 0,
   // 火车便当
   suspended_congress: 0,
+  // 火车便当
+  fucked_suspended_congress: 0,
   // 背对火车便当
   hug_suspended_congress: 0,
   // 要求女上位
@@ -217,6 +221,8 @@ const ero_actions = {
   hug_standing_anal_sex: 0,
   // 火车便当肛交
   suspended_congress_anal_sex: 0,
+  // 火车便当肛交
+  fucked_suspended_congress_anal_sex: 0,
   // 背对火车便当肛交
   hug_suspended_congress_anal_sex: 0,
   // 要求女上位肛交

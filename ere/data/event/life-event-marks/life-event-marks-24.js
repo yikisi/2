@@ -5,7 +5,7 @@ class MayaLifeMarks extends LifeEventMarks {
   _24;
 
   constructor() {
-    super(19);
+    super(24);
     LifeEventMarks.register_marks(this);
   }
 }

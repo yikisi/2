@@ -412,7 +412,11 @@ async function sys_auto_rape(shown) {
   era.logger.debug(
     `raping done! ${(new Date().getTime() - current).toLocaleString()}ms`,
   );
-  if (ero_tagged_hooks[action] && !era.get(`talent:${master}:病娇`)) {
+  if (
+    ero_tagged_hooks[action] &&
+    !era.get(`talent:${master}:病娇`) &&
+    (master < 340 || master > 342)
+  ) {
     const ero = era.get(`talent:${master}:工口意愿`),
       love = era.get(`love:${master}`);
     if (

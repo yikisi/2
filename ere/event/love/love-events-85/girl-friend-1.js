@@ -382,6 +382,7 @@ module.exports = (handlers) => {
       ]);
       era.printButton('摸头安慰。', 1);
       era.printButton('抱住她。', 2);
+      await era.input();
       await era.printAndWait(
         '起身的同时，敏感的龟头已经艰难挺进了一处紧俏到极致的火热肉壶中。',
       );
@@ -421,6 +422,7 @@ module.exports = (handlers) => {
       await era.printAndWait('被上脑精虫击溃的理智。');
       era.printButton(`「${m_call_r}，我爱你。」`, 1);
       era.printButton('「我会好好陪伴着你的。」', 2);
+      await era.input();
       await era.printAndWait([
         ruby.get_colored_name(),
         ' 精致如花的眉眼间瞬间洋溢起幸福的神色，娇小的酮体坐了下去。',

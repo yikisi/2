@@ -1,13 +1,19 @@
 const era = require('#/era-electron');
 
+const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
+const { sys_check_remote } = require('#/system/sys-calc-chara-param');
+
 const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
 const palace = require('#/event/snippets/palace');
 const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_name } = require('#/data/locations');
 const { attr_enum, fumble_result } = require('#/data/train-const');
@@ -79,40 +85,69 @@ handlers[event_hooks.train] = async (chara_id, _, extra_flag) => {
  * @param {TrainSuccessParams} extra_flag
  */
 handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
-  const chara_talk = get_chara_talk(chara_id);
-  era.print([chara_talk.get_colored_name(), ' 的训练顺利结束了！']);
-  era.println();
-  if (
-    chara_id &&
-    !era.get(`status:${chara_id}:摸鱼`) &&
-    Math.random() < 0.2 * extra_flag.stamina_ratio
-  ) {
-    await era.waitAnyKey();
-    await print_event_name('热血的追加训练！', chara_talk);
-
-    await era.printAndWait([
-      chara_talk.get_colored_name(),
-      ' 似乎意犹未尽的样子，是想自主训练吗？',
-    ]);
-    ['许可！', '会超出计划的……'].forEach((e, i) => {
-      era.printButton(`「${e}」`, i + 1);
-    });
-    if ((await era.input()) === 1) {
+  const chara = get_chara_talk(chara_id);
+  era.print([chara.get_colored_name(), ' 的训练顺利结束了！']);
+  if (chara_id) {
+    if (
+      !era.get(`status:${chara_id}:摸鱼`) &&
+      Math.random() < 0.2 * extra_flag.stamina_ratio
+    ) {
+      if (sys_check_remote(chara_id)) {
+        hook.arg = true;
+      } else {
+        era.println();
+        await era.waitAnyKey();
+        await print_event_name('热血的追加训练！', chara);
+        await era.printAndWait([
+          chara.get_colored_name(),
+          ' 似乎意犹未尽的样子，是想自主训练吗？',
+        ]);
+        ['许可！', '会超出计划的……'].forEach((e, i) => {
+          era.printButton(`「${e}」`, i + 1);
+        });
+        if ((await era.input()) === 1) {
+          await era.printAndWait([
+            get_chara_talk(0).get_colored_name(),
+            ' 默许了 ',
+            chara.get_colored_name(),
+            ` 的自主训练，并称赞了${chara.sex}的干劲`,
+          ]);
+          hook.arg = true;
+        } else {
+          await era.printAndWait([
+            get_chara_talk(0).get_colored_name(),
+            ' 出言禁止了 ',
+            chara.get_colored_name(),
+            ' 的自主训练，并叮嘱要好好休息',
+          ]);
+          hook.arg = false;
+        }
+      }
+    } else if (
+      !sys_check_remote(chara_id) &&
+      era.get(`love:${chara_id}`) >= 50 &&
+      era.get(`base:${chara_id}:性欲`) >= lust_border.itch &&
+      Math.random() <
+        (0.2 * era.get(`base:${chara_id}:性欲`)) / lust_border.want_sex
+    ) {
+      era.println();
+      await era.waitAnyKey();
+      await print_event_name('训练后的性欲高涨', chara);
       await era.printAndWait([
-        get_chara_talk(0).get_colored_name(),
-        ' 默许了 ',
-        chara_talk.get_colored_name(),
-        ` 的自主训练，并称赞了${chara_talk.sex}的干劲`,
+        '一天的训练结束后，',
+        chara.get_colored_name(),
+        ' 的样子好像有点奇怪……',
       ]);
-      hook.arg = true;
-    } else {
-      await era.printAndWait([
-        get_chara_talk(0).get_colored_name(),
-        ' 出言禁止了 ',
-        chara_talk.get_colored_name(),
-        ' 的自主训练，并叮嘱要好好休息',
-      ]);
-      hook.arg = false;
+      await era.printAndWait(
+        '面色潮红，在双腿间流下的不明液体与汗液混在一起，散发出一股淫靡的味道。',
+      );
+      era.printButton('「这也是训练员的义务……」', 1);
+      era.printButton('「总之先去医务室吧！」', 2);
+      if ((await era.input()) === 1) {
+        await quick_into_sex(chara_id);
+      } else {
+        sys_change_lust(chara_id, get_random_value(500, 1500));
+      }
     }
   }
 };
@@ -271,9 +306,9 @@ handlers[event_hooks.foreign_travel] = async (chara_id) => {
 handlers[event_hooks.race_start] = async (chara_id) => {
   const chara_talk = get_chara_talk(chara_id);
   await print_event_name('竞赛之前', chara_talk);
-  era.printButton('「尽全力就好！」', 1);
-  era.printButton('「跑出自己的气势来！」', 2);
-  await era.input();
+  await get_chara_talk(0).say_and_wait(
+    Math.random() < 0.5 ? '尽全力就好！' : '跑出自己的气势来！',
+  );
 };
 
 /**
@@ -285,22 +320,25 @@ handlers[event_hooks.race_end] = async (chara_id, _, extra_flag) => {
   const chara_talk = get_chara_talk(chara_id);
   if (extra_flag.rank === 1) {
     await print_event_name('竞赛获胜', chara_talk);
-    era.printButton('「太棒了！」', 1);
-    era.printButton('「往更高的目标迈进吧！」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '太棒了！' : '往更高的目标迈进吧！',
+    );
   } else if (extra_flag.rank <= 5) {
     await print_event_name('竞赛上榜', chara_talk);
-    era.printButton('「今天的表现也很好！」', 1);
-    era.printButton('「绝对不能输给她们！」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '今天的表现也很好！' : '绝对不能输给她们！',
+    );
   } else if (extra_flag.rank <= 10) {
     await print_event_name('竞赛败北', chara_talk);
-    era.printButton('「下次表现一定更好！」', 1);
-    era.printButton('「沮丧也不是办法！」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '下次表现一定更好！' : '沮丧也不是办法！',
+    );
   } else {
     await print_event_name('下次不会输了！', chara_talk);
-    era.printButton('「总有一天绝对会赢！」', 1);
-    era.printButton('「你愿意就这样丢脸下去？」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '总有一天绝对会赢！' : '你愿意就这样丢脸下去？',
+    );
   }
-  await era.input();
 };
 
 handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
@@ -376,7 +414,7 @@ handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
  * 通用育成事件
  *
  * @author 雞雞
- * @author 黑奴队长（改编）
+ * @author 无名黑奴（改编）
  *
  * @param {number} chara_id
  * @param {HookArg} hook

@@ -47,7 +47,7 @@ handlers[49] = async (god, me) => {
 
 handlers[50] = async (god, me, callname) => {
   await print_event_name('梦中访客', god);
-  await printAndWait('「咔哒」');
+  await printAndWait('（咔哒）');
   await printAndWait(
     '明明并没有门，却传来了门闩转动的声音，接着浮现出一张熟悉的脸。',
   );

@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const simulation_game_in_event = require('#/event/snippets/simulation-game-in-event');
+const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
 const {
   sys_get_callname,
   sys_get_colored_callname,
@@ -562,9 +564,14 @@ module.exports = (handlers) => {
     await amazon.say_and_wait('喂！？你那样也有点太得意忘形了吧！？');
     await era.printAndWait('接着，沙土2000米开赛了──');
     era.drawLine();
-    // TODO 模拟赛
-    let rank = 1;
-    if (rank === 1) {
+    const chara = sys_get_chara_pseudo(24);
+    await simulation_game_in_event(
+      chara,
+      undefined,
+      race_enum.siri_sta,
+      '粉丝感谢祭',
+    );
+    if (chara.rank.curr === 1) {
       await maya.say_and_wait([callname, '────！我拿到了第一名哦──☆']);
       era.printButton('「真是厉害！」', 1);
       await era.input();

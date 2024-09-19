@@ -5,6 +5,7 @@ workflow:
 variables:
   GAME_ALL_DIR: 'erauma-with-engine-${CI_COMMIT_TAG}'
   GAME_ALL_ZIP: 'era-uma-preview-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
+  GAME_ZIP_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/erauma/${CI_COMMIT_TAG}/era-uma-preview-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
 
 build:
   stage: build
@@ -27,19 +28,14 @@ build:
     - cp -r ../ere ./$GAME_ALL_DIR/game/
     - cp -r ../csv ./$GAME_ALL_DIR/game/
     - cp -r ../res ./$GAME_ALL_DIR/game/
+    - '[ -f ./$GAME_ALL_ZIP ] && rm ./$GAME_ALL_ZIP'
     - 7zz a -pera $GAME_ALL_ZIP ./$GAME_ALL_DIR
+    - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${GAME_ALL_ZIP} "${GAME_ZIP_URL}"'
     - cd ..
-    - rm -rf dist
-    - mkdir dist
-    - mv ./engine/$GAME_ALL_ZIP ./dist/
-    - echo "FILE_JOB_ID=$CI_JOB_ID" >> variables.env
-  artifacts:
-    expire_in: never
-    reports:
-      dotenv: variables.env
-    paths:
-      - dist/
-    when: on_success
+    - '[ -f base.zip ] && rm base.zip'
+    - zip -r base.zip ./ere ./csv RELEASE.md CHANGELOG.md
+    - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./base.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip"'
+
 
 pages:
   stage: deploy
@@ -48,9 +44,8 @@ pages:
   script:
     - rm -rf public
     - mkdir public
-    - 7zz a base.7z ./ere ./csv RELEASE.md CHANGELOG.md
-    - mv *.7z public/
-    - echo "$CI_COMMIT_TAG" > public/RELEASE
+    - VERSION=`cat csv/GameBase.csv | grep 'バージョン,'`
+    - echo ${VERSION#*,} > public/RELEASE
   artifacts:
     paths:
       - public
@@ -60,18 +55,17 @@ release:
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   needs:
     - job: build
-      artifacts: true
   tags:
     - docker
   script:
     - echo "Releasing..."
-    - echo $ASSET_FILE_URL
   release:
-    tag_name: $CI_COMMIT_TAG
-    name: 'EraUma $CI_COMMIT_TAG'
+    name: 'EraUma v$CI_COMMIT_TAG'
     description: './RELEASE.md'
+    tag_name: $CI_COMMIT_TAG
+    ref: '$CI_COMMIT_SHA'
     assets:
       links:
         - name: '[解压即玩包] $GAME_ALL_ZIP'
-          url: 'https://gitgud.io/umaera/erauma/-/jobs/${FILE_JOB_ID}/artifacts/raw/dist/${GAME_ALL_ZIP}'
+          url: '${GAME_ZIP_URL}'
           link_type: package

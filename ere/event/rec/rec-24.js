@@ -10,12 +10,6 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-//招募事件流程说明
-//一阶段在招募界面选中触发，触发后随机招募设为0，选项对招募结果无影响
-//二阶段进入招募界面自动触发，触发后招募状态设为-3，随机招募设为0，以进入3阶段，结束事件后返回招募界面
-//三阶段在招募界面选中触发，触发后随机招募设为0，事件结束可选前往外出或返回招募
-//四阶段外出事件，三阶段返回招募后前往车站触发，选3则跳回3阶段，再次点击有单独的对话
-
 /**
  * 摩耶重炮 - 招募
  *
@@ -30,11 +24,10 @@ module.exports = {
     const event_marks = new EventMarks(0);
     switch (stage_id) {
       case event_hooks.recruit:
-        if (!era.get(`cflag:24:招募状态`)) {
+        if (era.get(`cflag:24:招募状态`) === recruit_flags.no) {
           if (await check_before_rec(24)) {
             return false;
           }
-          era.set('flag:物色对象', 24);
           await era.printAndWait(
             `今天是为了看清并发掘未来有望的实力赛马娘们的选拔比赛的日子，会遇见怎样的赛马娘呢？${CharaTalk.me.name} 一边兴奋着一边来到了比赛现场——`,
           );
@@ -103,7 +96,7 @@ module.exports = {
                 event_hooks.recruit_start,
                 new EventObject(24, cb_enum.recruit),
               );
-              return false;
+              return true;
             }
           }
           await chara.say_and_wait('嗯，Maya没事！因为被你接住了……');
@@ -218,10 +211,11 @@ module.exports = {
             event_hooks.recruit_start,
             new EventObject(24, cb_enum.recruit),
           );
-          return false;
+          return true;
         } else {
           era.set(`cflag:24:随机招募`, 0); //三阶段把随机招募设为0
           if (era.get(`cflag:24:招募状态`) === -3) {
+            era.set('flag:物色对象', 24);
             await chara.say_and_wait('呀吼——♪最近经常遇到你啊。');
             await chara.say_and_wait(
               '现在啊，我正在看下面赛场上的模拟赛。毕竟Maya又参不了赛——。',

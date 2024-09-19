@@ -11,6 +11,7 @@ const {
 } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaSkills = require('#/data/chara-skills');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,string,RaceEndParams)>} handlers */
@@ -216,65 +217,86 @@ module.exports = (handlers) => {
     m_call_r,
     extra_flag,
   ) => {
-    await print_event_name('橡树的叶子很宽大', ruby);
-    await ruby.say_and_wait('是吗，果然，我……', true);
-    await ruby.say_and_wait('非常抱歉，让您看到了我不成气候的样子。');
-    await ruby.say_and_wait([
-      r_call_m,
-      ' 也，为了今天，提供了很多训练以外的帮助。',
-    ]);
-    await ruby.say_and_wait('没能回报您的努力，我感到非常惭愧。');
-    era.printButton('「我也对不起……」', 1);
-    era.printButton('「其实有其他的回报方式。」', 2);
-    if ((await era.input()) === 1) {
-      extra_flag.relation_change = 3;
-      await ruby.say_and_wait('……诶？');
-      await era.printAndWait([
-        ruby.get_colored_name(),
-        ' 这不把内心展露出来的表明上的平静，让 ',
-        me.get_colored_name(),
-        ' 觉得非常的懊悔。',
-      ]);
-      era.printButton('「下次……会让你……」', 1);
-      await era.input();
-      await ruby.say_and_wait('……');
-      await ruby.say_and_wait('……非常、感谢。');
-      await ruby.say_and_wait([
-        '下一个目标是 ',
-        race_infos[race_enum.shuk_sho].get_colored_name(),
-        '，在那之前我有一个提案。',
-      ]);
-      await ruby.say_and_wait([
-        '我想参加作为其前哨战的 ',
-        race_infos[race_enum.rose_sta].get_colored_name(),
-        '。',
-      ]);
+    if (extra_flag.rank === 1) {
+      await print_event_name('鸽血红', ruby);
+      await ruby.say_and_wait('不协调感。');
       await ruby.say_and_wait(
-        '夏天的集训也很辛苦，但为了本命的比赛必须保持在最佳状态。',
+        '没有计策可言，也根本不需要看准时机，只靠身体能力居然就……',
       );
-      await era.printAndWait('确实，夹着一场比赛，状态会更适应大赛吧。');
-      era.printButton('「我知道了。」', 1);
-      await era.input();
-      await ruby.say_and_wait('拜托您了。');
-      era.printButton('「那么，我在入口等你。」', 1);
-      await era.input();
-      await ruby.say_and_wait('嗯。');
+      await ruby.say_and_wait('我被自己以外的人，掌握了？');
+      await ruby.say_and_wait([r_call_m, '，你到底……']);
+      era.printButton('（察觉到了啊）', 1);
+      era.printButton('「还不赖吧？」', 2);
+      if ((await era.input()) === 1) {
+        extra_flag.relation_change = 3;
+      } else {
+        extra_flag.love_change = 1;
+      }
+      await ruby.say_and_wait('你对我的身体做了什么？');
+      await ruby.say_and_wait('……');
+      await ruby.say_and_wait('不，是我失言了。今后请你继续随心所欲。');
+      await ruby.say_and_wait('为了一族，我随时可以向你献上自己的全部。');
     } else {
-      extra_flag.love_change = 1;
-      await ruby.say_and_wait('这种玩笑，我不希望听到第二次。');
-      era.printButton('「享受比赛了吗？」', 1);
-      await era.input();
-      await ruby.say_and_wait('诶？');
-      era.printButton('「试试看享受比赛吧。」', 1);
-      await era.input();
-      era.printButton('「如何让你胜利，是该由我考虑的事情。」', 1);
-      await era.input();
-      await era.printAndWait([
-        ruby.get_colored_name(),
-        ' 低着头思索着什么，',
-        me.get_colored_name(),
-        ' 先行离开了。',
+      await print_event_name('橡树的叶子很宽大', ruby);
+      await ruby.say_and_wait('是吗，果然，我……', true);
+      await ruby.say_and_wait('非常抱歉，让您看到了我不成气候的样子。');
+      await ruby.say_and_wait([
+        r_call_m,
+        ' 也，为了今天，提供了很多训练以外的帮助。',
       ]);
+      await ruby.say_and_wait('没能回报您的努力，我感到非常惭愧。');
+      era.printButton('「我也对不起……」', 1);
+      era.printButton('「其实有其他的回报方式。」', 2);
+      if ((await era.input()) === 1) {
+        extra_flag.relation_change = 3;
+        await ruby.say_and_wait('……诶？');
+        await era.printAndWait([
+          ruby.get_colored_name(),
+          ' 这不把内心展露出来的表明上的平静，让 ',
+          me.get_colored_name(),
+          ' 觉得非常的懊悔。',
+        ]);
+        era.printButton('「下次……会让你……」', 1);
+        await era.input();
+        await ruby.say_and_wait('……');
+        await ruby.say_and_wait('……非常、感谢。');
+        await ruby.say_and_wait([
+          '下一个目标是 ',
+          race_infos[race_enum.shuk_sho].get_colored_name(),
+          '，在那之前我有一个提案。',
+        ]);
+        await ruby.say_and_wait([
+          '我想参加作为其前哨战的 ',
+          race_infos[race_enum.rose_sta].get_colored_name(),
+          '。',
+        ]);
+        await ruby.say_and_wait(
+          '夏天的集训也很辛苦，但为了本命的比赛必须保持在最佳状态。',
+        );
+        await era.printAndWait('确实，夹着一场比赛，状态会更适应大赛吧。');
+        era.printButton('「我知道了。」', 1);
+        await era.input();
+        await ruby.say_and_wait('拜托您了。');
+        era.printButton('「那么，我在入口等你。」', 1);
+        await era.input();
+        await ruby.say_and_wait('嗯。');
+      } else {
+        extra_flag.love_change = 1;
+        await ruby.say_and_wait('这种玩笑，我不希望听到第二次。');
+        era.printButton('「享受比赛了吗？」', 1);
+        await era.input();
+        await ruby.say_and_wait('诶？');
+        era.printButton('「试试看享受比赛吧。」', 1);
+        await era.input();
+        era.printButton('「如何让你胜利，是该由我考虑的事情。」', 1);
+        await era.input();
+        await era.printAndWait([
+          ruby.get_colored_name(),
+          ' 低着头思索着什么，',
+          me.get_colored_name(),
+          ' 先行离开了。',
+        ]);
+      }
     }
     extra_flag.attr_change = new Array(5).fill(3);
     extra_flag.pt_change = 45;
@@ -310,7 +332,7 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by('医生', [
       ruby.get_colored_name(),
-      '的右脚，是急性化脓性疾病。',
+      ' 的右脚，是急性化脓性疾病。',
     ]);
     await say_by_passer_by('医生', '也就是所谓的【蜂窝织炎】。');
     await me.say_and_wait('！', true);
@@ -318,7 +340,7 @@ module.exports = (handlers) => {
     await say_by_passer_by('医生', '多亏你在违和感阶段，就及时来就诊了。');
     await say_by_passer_by('医生', [
       '在你们下次的目标 ',
-      race_infos[race_enum.sats_sho].get_colored_name(),
+      race_infos[race_enum.shuk_sho].get_colored_name(),
       ' 前，就可以痊愈。',
     ]);
     await ruby.say_and_wait('……');
@@ -433,9 +455,11 @@ module.exports = (handlers) => {
     await ruby.say_and_wait('虽然是人类，但你在某方面是很强的生物。');
     await ruby.say_and_wait('今后，我可能还会碰壁。');
     await ruby.say_and_wait('还请，不要放开我的手。');
-    //TODO【紧追不舍】lv+1
     extra_flag.attr_change = new Array(5).fill(3);
     extra_flag.pt_change = 45;
+    extra_flag.skill_change = [
+      new CharaSkills(85).get().indexOf(200672) === -1 ? 200672 : 200671,
+    ];
   };
 
   handlers[race_enum.yasu_kin] = async (
@@ -473,9 +497,11 @@ module.exports = (handlers) => {
     await ruby.say_and_wait('我认为在那里，我可以触摸到更高的顶峰。');
     await ruby.say_and_wait('优秀的参赛者和对手们，会盯上我们吧。');
     await ruby.say_and_wait('但我感受到了，不能置之不理的义务感。');
-    //TODO 【差行直线】lv+1
     extra_flag.attr_change = new Array(5).fill(3);
     extra_flag.pt_change = 45;
+    extra_flag.skill_change = [
+      new CharaSkills(85).get().indexOf(201382) === -1 ? 201382 : 201381,
+    ];
   };
 
   handlers[race_enum.sprt_sta] = async (
@@ -502,7 +528,7 @@ module.exports = (handlers) => {
     ]);
     era.drawLine({ content: '比赛前' });
     await ruby.used_to_say_and_wait(
-      '即使堵上一切，也要在现在报恩。那也是很好的选择。',
+      '即使赌上一切，也要在现在报恩。那也是很好的选择。',
     );
     await ruby.used_to_say_and_wait('但是，对你来说这样真的是最好的吗？');
     await ruby.used_to_say_and_wait('你献上一切后，那些人就能得到回报吗？');
@@ -603,10 +629,13 @@ module.exports = (handlers) => {
       ruby.get_colored_name(),
       ' 露出了会心的微笑。',
     ]);
-    //TODO 【短距离直线】lv+5，【短距离弯道】lv+5；
     extra_flag.attr_change = new Array(5).fill(20);
     extra_flag.base_change = JSON.parse('{"体力":-150}');
     extra_flag.pt_change = 120;
+    extra_flag.skill_change = [
+      new CharaSkills(85).get().indexOf(200962) === -1 ? 200962 : 200961,
+      new CharaSkills(85).get().indexOf(200972) === -1 ? 200972 : 200971,
+    ];
   };
 
   handlers[race_enum.mile_cha] = async (
@@ -650,6 +679,10 @@ module.exports = (handlers) => {
     await era.printAndWait('这天，后来人们如此描述：华丽一族新的象征诞生了。');
     extra_flag.attr_change = new Array(5).fill(3);
     extra_flag.pt_change = 45;
-    // TODO 【短距离弯道】，【英里弯道】【外道超车准备】lv+2
+    extra_flag.skill_change = [
+      new CharaSkills(85).get().indexOf(200612) === -1 ? 200612 : 200611,
+      new CharaSkills(85).get().indexOf(201032) === -1 ? 201032 : 201031,
+      new CharaSkills(85).get().indexOf(201042) === -1 ? 201042 : 201041,
+    ];
   };
 };

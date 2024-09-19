@@ -60,5 +60,6 @@ module.exports = {
     );
     set('flag:当前互动角色', 340);
     set('cflag:340:招募状态', recruit_flags.yes);
+    set('cflag:340:育成回合计时', 'x');
   },
 };

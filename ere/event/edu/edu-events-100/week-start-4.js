@@ -11,6 +11,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const AcuteEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-100');
+const AcuteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-100');
 const { location_enum } = require('#/data/locations');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean}):Promise<boolean|void>>} handlers */
@@ -82,7 +83,7 @@ module.exports = (handlers) => {
         await acute.say_and_wait('有哦～');
         await era.printAndWait([acute.sex, '一面说着，一面忙碌着手中的工作——']);
         await acute.say_and_wait('你刚刚是在说，帝王蟹的四种写法对吧～');
-        await me.say_and_wait('完·全·不·是！');
+        await me.say_and_wait('完 · 全 · 不 · 是！');
         await era.printAndWait(
           '别把美食介绍说成像是某个哀怨可怜人的名言成吗？',
         );
@@ -268,7 +269,7 @@ module.exports = (handlers) => {
         await era.printAndWait(
           '予以人暂得以偷生的方向，与足以继续向前的希望。',
         );
-        await era.printAndWait('一月北海道的夜晚，四面依旧冷清。');
+        await era.printAndWait('三月北海道的夜晚，四面依旧冷清。');
         await era.printAndWait('但恰是这冷清，能激得人清醒。');
         await era.printAndWait('宴会不错、床铺很软、暖气充足，');
         await era.printAndWait('可这一切总像是浮华的虚影，梦幻泡影。');
@@ -690,6 +691,7 @@ module.exports = (handlers) => {
   };
 
   handlers.leg = async (acute, me, callname, flags) => {
+    new AcuteLifeMarks().leg = get_random_value(6, 10);
     await print_event_name(`在 ${acute.name} 的膝枕上`, acute);
     await era.printAndWait('兴许是未能好好休息的缘故，今早总觉得睡眼惺忪。');
     await era.printAndWait('真糟糕，马上就是训练的时间了；');
@@ -699,10 +701,10 @@ module.exports = (handlers) => {
       ' 看到懒散的这一面——',
     ]);
     await acute.say_and_wait([callname, '？']);
-    await era.printAndWait('——！？');
-    await acute.say_and_wait('待喘息之际，已然出现身后。');
+    await me.say_and_wait('——！？');
+    await era.printAndWait('待喘息之际，已然出现身后。');
     era.printButton(`「奇、${acute.name}！？何时来的？」`, 1);
-    await era.waitAnyKey();
+    await era.input();
     await acute.say_and_wait([
       '很早就来了哦？只是 ',
       callname,

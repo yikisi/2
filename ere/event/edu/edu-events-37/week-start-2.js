@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -11,6 +12,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
 const { location_enum } = require('#/data/locations');
+const { race_enum } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,string,string,{wait:boolean},function):Promise<*>>} handlers */
 module.exports = (handlers) => {
@@ -288,8 +290,8 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `那么，为了让${flash.sex}在得到这枚盾徽的过程更加顺利，${your_name} 决定——`,
     );
-    era.printButton('「去神社祈福吧！」', 1);
-    era.printButton(`「需要更改未来的计划吗？」`, 2);
+    era.printButton('「去神社祈福吧！」（全属性+20）', 1);
+    era.printButton(`「需要更改未来的计划吗？」（获得【必行之事】状态）`, 2);
     const ret = await era.input();
     if (ret === 1) {
       await era.printAndWait(
@@ -384,6 +386,7 @@ module.exports = (handlers) => {
   };
 
   handlers[95 + 14] = async (flash) => {
+    era.set('cflag:37:节日事件标记', 0);
     const gold_ship = get_chara_talk(7);
     const festa = get_chara_talk(49);
     await print_event_name('粉丝感谢祭', flash);
@@ -450,7 +453,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       '也不知道有没有听见粉丝的这句回复，总之荣进闪耀牵起粉丝的手。',
     );
-    await say_by_passer_by_and_wait('荣进闪耀的粉丝', '公，公主抱！！！」');
+    await say_by_passer_by_and_wait('荣进闪耀的粉丝', '公，公主抱！！！');
     await era.printAndWait(
       `在一声惊呼之中，荣进闪耀抱起这位看起来有些怯懦的粉丝，向着前方已经与${flash.sex}拉开些许差距的二人奋起直追。`,
     );
@@ -486,8 +489,9 @@ module.exports = (handlers) => {
       `说什么也不可能像${flash.sex}那样荒谬地对待自己珍贵的粉丝啊。`,
     );
     await say_by_passer_by_and_wait('荣进闪耀的粉丝', '！！！！');
-    await era.printAndWait(
-      `荣进闪耀的粉丝','荣……荣进${flash.get_adult_sex_title()}，非常感谢您！`,
+    await say_by_passer_by_and_wait(
+      '荣进闪耀的粉丝',
+      `荣……荣进${flash.get_adult_sex_title()}，非常感谢您！`,
     );
     await flash.say_and_wait(
       '呵呵～是我应该这么说才对哦，感谢你愿意来与我一起参加这场比赛。',
@@ -603,6 +607,10 @@ module.exports = (handlers) => {
     era.println();
     sys_hurt_uma(37, 1);
     flags.wait = true;
+    const reg_race = sys_reg_race(37).curr;
+    if (reg_race.race === race_enum.takz_kin) {
+      reg_race.race = reg_race.week = -1;
+    }
   };
 
   handlers[95 + 29] = async (flash, your_name, callname, flags, cb) => {

@@ -430,7 +430,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
       rice.get_colored_name(),
       ' 一起踏上了回家的路。',
     ]);
-    hook.arg = 1;
+    hook.arg = true;
   }
 };
 

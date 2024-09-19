@@ -89,6 +89,9 @@ handlers[event_hooks.good_morning] = function () {
 };
 
 handlers[event_hooks.talk] = async function () {
+  if (!sys_check_awake(17)) {
+    throw new Error();
+  }
   const talk_list = [],
     is_emperor = new LunaEduMarks().emperor;
   if (era.get('base:17:体力') < 0.4 * era.get('maxbase:17:体力')) {

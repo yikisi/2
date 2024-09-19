@@ -1,0 +1,81 @@
+const UmaSkill = require('#/data/race/model/uma-skill');
+
+module.exports = new UmaSkill(
+  900081,
+  '切割×驱动!',
+  '在最后200米处于前列进行名次争夺时，竞争力变强，速度也会略微加快',
+  90008,
+  1,
+  UmaSkill.rarity_enum.normal,
+  16,
+  180,
+  [() => true, () => true],
+  [
+    (args) =>
+      (args.order >= 3 &&
+        args.order_rate <= 50 &&
+        args.remain_distance <= 200 &&
+        args.bashin_diff_infront <= 1) ||
+      (args.order >= 3 &&
+        args.order_rate <= 50 &&
+        args.remain_distance <= 200 &&
+        args.bashin_diff_behind <= 1),
+    () => false,
+  ],
+  [3, 0],
+  [500, 0],
+  [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+  ],
+  [
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+  ],
+  [
+    [0.15, 0, 0],
+    [0, 0, 0],
+  ],
+  [
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+  ],
+  [
+    [0, 0, 0],
+    [0, 0, 0],
+  ],
+  [1, 0],
+  [15, 0],
+  1,
+  200,
+  false,
+  true,
+);

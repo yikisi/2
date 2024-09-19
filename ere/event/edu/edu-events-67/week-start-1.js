@@ -323,6 +323,7 @@ module.exports = (handlers) => {
         '不小心跟着一起太兴奋了！──对了，啦啦队的胜负判决是……',
       );
       era.printButton('「…………唔！…………唔唔！！」', 1);
+      await era.input();
       await era.printAndWait(
         `……看来不用担心${daiya.sex}们会在新年期间变胖，真是太好了。`,
       );
@@ -753,7 +754,7 @@ module.exports = (handlers) => {
     await mcqueen.say_and_wait('……里见，你买了真大一杯啊……');
     await daiya.say_and_wait('嘿嘿嘿，其实这个摊贩有个很有名的魔咒喔。');
     await daiya.say_and_wait(
-      '据说只要在比赛前喝一杯『LL杯的蜂蜜柠檬·蜂蜜偏软·特浓·特多』就会输掉比赛的魔咒！',
+      '据说只要在比赛前喝一杯『LL杯的蜂蜜柠檬 · 蜂蜜偏软 · 特浓 · 特多』就会输掉比赛的魔咒！',
     );
     await daiya.say_and_wait(
       '所以我才想故意在『菊花赏』之前喝一杯，挑战破除这个魔咒！',

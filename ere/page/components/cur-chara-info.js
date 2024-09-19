@@ -5,6 +5,8 @@ const { get_image } = require('#/system/sys-calc-image');
 
 const race_indicator = require('#/page/components/race-indicator');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
@@ -15,14 +17,17 @@ const {
   love_colors,
   relation_colors,
 } = require('#/data/const.json');
-const { chara_desc, growth_stage } = require('#/data/ero/status-const');
+const {
+  chara_desc,
+  chara_full_desc,
+  growth_stage,
+} = require('#/data/ero/status-const');
 const {
   get_love_info,
   get_relation_info,
   get_train_time,
 } = require('#/data/info-generator');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
-const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 /**
  * @param {number} chara_id
@@ -42,7 +47,9 @@ function cur_chara_component(chara_id, type, location_npc) {
           columns: [
             {
               config: { width: 23 },
-              names: `${era.get(`cstr:${location_npc}:头像`)}_半身`,
+              names: get_image(location_npc)
+                .map((e) => `${e}_半身`)
+                .join('\t'),
               type: 'image.whole',
             },
           ],
@@ -53,7 +60,7 @@ function cur_chara_component(chara_id, type, location_npc) {
             {
               content: [
                 title ? [title, ' '] : [],
-                get_chara_talk(301).get_colored_name(),
+                get_chara_talk(location_npc).get_colored_name(),
               ],
               type: 'text',
             },
@@ -102,7 +109,9 @@ function cur_chara_component(chara_id, type, location_npc) {
       in_train =
         growth >= 2 && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48,
       motivation = era.get(`cflag:${chara_id}:干劲`),
-      out_of_train = era.get(`cflag:${chara_id}:殿堂`);
+      out_of_train = era.get(`cflag:${chara_id}:殿堂`),
+      race = era.get(`cflag:${chara_id}:种族`),
+      characteristic = era.get(`cflag:${chara_id}:气性`);
     /** @type {*[]} */
     const name_columns = ['当前角色：'];
     if (title) {
@@ -125,19 +134,15 @@ function cur_chara_component(chara_id, type, location_npc) {
         ' ',
         get_train_time(chara_id).substring(0, 3),
       );
-    } else if (
-      era.get(`cflag:${chara_id}:种族`) &&
-      !out_of_train &&
-      growth >= 2 &&
-      growth !== 4
-    ) {
+    } else if (race && !out_of_train && (growth === 2 || growth === 3)) {
       name_columns.push(' 待入学');
     }
     name_columns.push(...race_indicator(chara_id));
     location_npc &&
       (temp = new CharaTitles(location_npc).get_colored_curr_title());
     era.setVerticalAlign('middle');
-    const image_switch = era.get('flag:显示半身像');
+    const image_switch = era.get('flag:显示半身像'),
+      status_list = get_status(chara_id);
     era.printInColRows(
       {
         columns: [{ content: name_columns, type: 'text' }],
@@ -194,7 +199,7 @@ function cur_chara_component(chara_id, type, location_npc) {
               height: 22,
               width: 12,
             },
-            inContent: `${era.get(`base:${chara_id}:体力`)}/${era.get(
+            inContent: `${Math.floor(era.get(`base:${chara_id}:体力`))}/${era.get(
               `maxbase:${chara_id}:体力`,
             )}`,
             percentage:
@@ -214,7 +219,7 @@ function cur_chara_component(chara_id, type, location_npc) {
               height: 22,
               width: 12,
             },
-            inContent: `${era.get(`base:${chara_id}:精力`)}/${era.get(
+            inContent: `${Math.floor(era.get(`base:${chara_id}:精力`))}/${era.get(
               `maxbase:${chara_id}:精力`,
             )}`,
             percentage:
@@ -223,24 +228,33 @@ function cur_chara_component(chara_id, type, location_npc) {
             type: 'progress',
           },
           { content: '', type: 'text' },
-          {
-            config: { width: 2 },
-            content: '气性',
-            type: 'text',
-          },
-          {
-            config: { width: 4 },
-            content: chara_desc[era.get(`cflag:${chara_id}:气性`) + 3],
-            type: 'text',
-          },
+          ...(race && growth >= 1
+            ? [
+                {
+                  config: { width: 2 },
+                  content: '气性',
+                  type: 'text',
+                },
+                {
+                  config: { width: 4 },
+                  content: [
+                    {
+                      content: chara_desc[characteristic + 3],
+                      title: `${chara_desc[characteristic + 3]}：${chara_full_desc[characteristic + 3]}`,
+                    },
+                  ],
+                  type: 'text',
+                },
+              ]
+            : []),
           {
             config: { width: 2 },
             content: '状态',
             type: 'text',
           },
           {
-            config: { width: 16 },
-            content: get_status(chara_id),
+            config: { width: 16 + !(race && growth >= 1) * 6 },
+            content: status_list.length > 0 ? status_list : '正常',
             type: 'text',
           },
           {
@@ -272,7 +286,9 @@ function cur_chara_component(chara_id, type, location_npc) {
           ? [
               {
                 config: { width: 23 },
-                names: `${era.get(`cstr:${location_npc}:头像`)}_半身`,
+                names: get_image(location_npc)
+                  .map((e) => `${e}_半身`)
+                  .join('\t'),
                 type: 'image.whole',
               },
             ]

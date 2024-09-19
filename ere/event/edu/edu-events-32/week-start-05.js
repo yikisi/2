@@ -618,6 +618,7 @@ module.exports = (handlers) => {
     ]);
     era.printButton('「目标……」', 1);
     era.printButton('「啊，是研究的目标吧」', 2);
+    await era.input();
     await era.printAndWait([
       '肯定是这样吧，是指实验，毕竟 ',
       tachyon.get_colored_name(),

@@ -9,8 +9,18 @@ module.exports = (is_reset) => {
   if (!is_reset) {
     if (sys_personal_achievement.get(301)) {
       new TokinoLifeMarks().who_am_i = 1;
-      era.set('callname:301:-2', era.get('callname:301:-1'));
+      era.set('callname:301:-1', '丰收时刻');
+      era.set('callname:301:-2', '骏川缰绳');
+    } else {
+      era.set(
+        'callname:301:-2',
+        `骏川${era.get('cflag:301:性别') === 1 ? '先生' : '小姐'}`,
+      );
     }
+    era.set(
+      'callname:301:305',
+      `安心泽${era.get('cflag:301:性别') === 1 ? '先生' : '小姐'}`,
+    );
     attr_names.forEach((e) => era.set(`base:301:${e}`, 1200));
   }
 };

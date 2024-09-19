@@ -6,6 +6,7 @@ const {
   sys_change_motivation,
   sys_change_weight,
 } = require('#/system/sys-calc-base-cflag');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const select_target_in_storage = require('#/page/storage/select-target');
@@ -55,8 +56,7 @@ module.exports = (handlers) => {
         ' 的 ',
         ...sys_change_attr_and_print(aim, '体力', val),
       ]);
-      sys_change_motivation(aim, era.get(`cflag:${aim}:干劲`) - 1) &&
-        (await era.waitAnyKey());
+      sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add('item:蔬菜汁', -1);
       return true;
     }
@@ -83,7 +83,7 @@ module.exports = (handlers) => {
         '，',
         ...sys_change_attr_and_print(aim, '体力', 2000),
       ]);
-      era.add(`base:${aim}:药物残留`, 10);
+      era.add(`base:${aim}:药物残留`, 5);
       era.add('item:强化青汁', -1);
       return true;
     }
@@ -106,8 +106,7 @@ module.exports = (handlers) => {
         ' 的 ',
         ...sys_change_attr_and_print(aim, '精力', val),
       ]);
-      sys_change_motivation(aim, era.get(`cflag:${aim}:干劲`) - 1) &&
-        (await era.waitAnyKey());
+      sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add(`base:${aim}:药物残留`, 5);
       era.add('item:浓缩咖啡', -1);
       return true;
@@ -118,8 +117,9 @@ module.exports = (handlers) => {
     const aim = await select_target_in_storage(
       703,
       (chara_id) =>
-        era.get(`maxbase:${chara_id}:精力`) >
-          era.get(`base:${chara_id}:精力`) &&
+        (era.get(`maxbase:${chara_id}:精力`) >
+          era.get(`base:${chara_id}:精力`) ||
+          !sys_check_awake(chara_id)) &&
         era.get(`base:${chara_id}:智力`) > 10,
     );
     if (aim !== undefined) {
@@ -135,6 +135,11 @@ module.exports = (handlers) => {
         '，',
         ...sys_change_attr_and_print(aim, '精力', 2000),
       ]);
+      if (!era.get(`base:${aim}:体力`) < 1) {
+        era.add(`base:${aim}:体力`, 1);
+      }
+      era.set(`status:${aim}:沉睡`, 0);
+      era.set(`status:${aim}:马跳S`, 0);
       era.add(`base:${aim}:药物残留`, 10);
       era.add('item:提神剂', -1);
       return true;
@@ -149,10 +154,7 @@ module.exports = (handlers) => {
     if (undefined !== aim) {
       const aim_chara = get_chara_talk(aim);
       await era.printAndWait([aim_chara.get_colored_name(), ' 的压力降低了……']);
-      sys_change_motivation(
-        aim,
-        Math.max(era.get(`cflag:${aim}:干劲`) - 1, -2),
-      ) && (await era.waitAnyKey());
+      sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add(`base:${aim}:压力`, -2500);
       era.add(`base:${aim}:药物残留`, 40);
       era.add('item:705', -1);
@@ -168,10 +170,7 @@ module.exports = (handlers) => {
     if (undefined !== aim) {
       const aim_chara = get_chara_talk(aim);
       await era.printAndWait([aim_chara.get_colored_name(), ' 的性欲降低了……']);
-      sys_change_motivation(
-        aim,
-        Math.max(era.get(`cflag:${aim}:干劲`) - 1, -2),
-      ) && (await era.waitAnyKey());
+      sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add(`base:${aim}:性欲`, -1500);
       era.add(`base:${aim}:药物残留`, 40);
       era.add('item:706', -1);

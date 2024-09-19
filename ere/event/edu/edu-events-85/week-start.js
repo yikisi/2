@@ -727,12 +727,15 @@ module.exports = (handlers) => {
         me.get_colored_name(),
         ' 让 ',
         ruby.get_colored_name(),
-        ' 赶紧随便找个理由打法',
+        ' 赶紧随便找个理由打发',
         ruby.sex,
         '走。',
       ]);
       await era.printAndWait([ruby.get_colored_name(), ' 不得已只好说。']);
-      await ruby.say_and_wait('奇迹同学，我在休息，有什么话明天在说吧。');
+      await ruby.say_and_wait([
+        sys_get_colored_callname(85, 93),
+        '，我在休息，有什么话明天在说吧。',
+      ]);
       await era.printAndWait([
         '说完轻颦薄怒地瞪了 ',
         me.get_colored_name(),

@@ -5,10 +5,12 @@ const CustomizedMec = require('#/event/mec/mec-common');
 
 module.exports = class extends CustomizedMec {
   set_callname() {
-    era.set('callname:24:0', '托雷纳酱');
+    if (!this.set_callname_from_src()) {
+      era.set('callname:24:0', '托雷纳酱');
+    }
   }
 
-  get_race_contestants() {
+  get_race_contestants(info) {
     switch (era.get('flag:当前赛事')) {
       case race_enum.arim_kin:
         return [
@@ -19,6 +21,6 @@ module.exports = class extends CustomizedMec {
       case race_enum.tenn_spr:
         return [{ id: 16, buff: 1.2 }];
     }
-    return super.get_race_contestants();
+    return super.get_race_contestants(info);
   }
 };

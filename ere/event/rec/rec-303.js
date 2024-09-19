@@ -10,7 +10,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 /**
  * 乙名史悦子 - 招募
  *
- * @author 黑奴队长（临时）
+ * @author 无名黑奴（临时）
  */
 module.exports = {
   override: true,

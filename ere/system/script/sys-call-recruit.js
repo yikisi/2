@@ -6,21 +6,22 @@ const { recruit_chara } = require('#/system/sys-init-chara');
 
 const rec_common = require('#/event/rec/rec-common');
 const check_before_rec = require('#/event/rec/snippets/check-before-rec');
+const punish_by_yandere = require('#/event/snippets/punish-by-yandere');
 
-const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const notes = require('#/data/notes.json');
 
 /**
  * @param {number} chara_id
- * @param {number} stage
+ * @param {number} hook
  * @param [extra_flag]
  * @param {EventObject} [event_object]
  */
-async function sys_call_rec_event(chara_id, stage, extra_flag, event_object) {
+async function sys_call_rec_event(chara_id, hook, extra_flag, event_object) {
   let aim_func = undefined;
   try {
     const { func, _extra } = get_aim_function('rec', chara_id, extra_flag);
@@ -32,7 +33,7 @@ async function sys_call_rec_event(chara_id, stage, extra_flag, event_object) {
     }
   }
   if (
-    stage === event_hooks.recruit &&
+    hook === event_hooks.recruit &&
     (!aim_func || !aim_func.override) &&
     (await check_before_rec(chara_id))
   ) {
@@ -40,8 +41,8 @@ async function sys_call_rec_event(chara_id, stage, extra_flag, event_object) {
   }
   try {
     const ret = aim_func
-      ? await aim_func.run(stage, extra_flag, event_object)
-      : await rec_common(chara_id, stage);
+      ? await aim_func.run(hook, extra_flag, event_object)
+      : await rec_common(chara_id, hook);
     // 招募成功时初始化好感并重置育成回合
     if (era.get(`cflag:${chara_id}:招募状态`) === recruit_flags.yes) {
       recruit_chara(chara_id);
@@ -77,11 +78,17 @@ async function sys_call_rec_event(chara_id, stage, extra_flag, event_object) {
           },
         ]);
         if (!(await era.input())) {
-          notes[chara_id].forEach((e) => say_by_passer_by(e.title, e.content));
+          notes[chara_id].forEach((e) =>
+            era.print(
+              [{ content: e.title, fontWeight: 'bold' }, '「', e.content, '」'],
+              { color: get_chara_color(chara_id) },
+            ),
+          );
           await era.waitAnyKey();
         }
       }
     }
+    await punish_by_yandere(chara_id, hook);
     return ret;
   } catch (e) {
     era.logger.error(e);

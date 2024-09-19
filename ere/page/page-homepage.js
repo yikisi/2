@@ -1,5 +1,6 @@
 ﻿const era = require('#/era-electron');
 
+const sys_handle_escape_basement = require('#/system/basement/sys-handle-escape-basement');
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
@@ -22,7 +23,10 @@ const check_game_over = require('#/page/components/game-over');
 const print_page_header = require('#/page/components/page-header');
 const print_ero_page = require('#/page/page-ero');
 
+const basement_queue = require('#/event/basement-queue');
+const { common_no_action_check } = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
+const GameGuides = require('#/event/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 
 const {
@@ -30,15 +34,22 @@ const {
   say_by_passer_by,
 } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
+const { get_random_value, minutes_in_a_day } = require('#/utils/value-utils');
 
+const {
+  action_type_enum,
+  basement_status_enum,
+} = require('#/data/basement-const');
 const { buff_colors } = require('#/data/color-const');
+const BasementAction = require('#/data/event/basement-action');
+const BasementOwners = require('#/data/event/basement-owners');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
+const { pressure_border } = require('#/data/train-const');
 
 let random_event,
   notes_index = 0;
@@ -76,15 +87,17 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   }
   let continue_flag = true,
     temp;
-  start_machine_gun(event_hooks.week_end);
-  while (
-    continue_flag &&
-    (random_event = sys_get_random_event(event_hooks.week_end))
-  ) {
-    era.drawLine();
-    continue_flag = !(await random_event(chara_id));
+  if (era.get('flag:当前位置') !== location_enum.basement) {
+    start_machine_gun(event_hooks.week_end);
+    while (
+      continue_flag &&
+      (random_event = sys_get_random_event(event_hooks.week_end))
+    ) {
+      era.drawLine();
+      continue_flag = !(await random_event(chara_id));
+    }
+    stop_machine_gun(event_hooks.week_end);
   }
-  stop_machine_gun(event_hooks.week_end);
   if ((temp = era.get('flag:床伴'))) {
     era.set(`cflag:${temp}:自主训练`, 0);
     const life_marks = new LifeEventMarks(temp);
@@ -205,27 +218,64 @@ handlers[location_enum.guangzhou] =
     require('#/page/homepage/foreign');
 handlers[location_enum.office] = require('#/page/homepage/office');
 
+/** @type {Record<string,function:Promise>} */
+const basement_handlers = {};
+
+basement_handlers[location_enum.basement] = async () => {
+  await era.saveData(
+    0,
+    `${get_chara_talk(0).actual_name} 于 ${new Date().toLocaleString('zh-CN', {
+      timeZone: 'Asia/Shanghai',
+    })} 保存的进度 (${era.get('flag:当前年')} 年 ${era.get(
+      'flag:当前月',
+    )} 月 第 ${era.get('flag:当前周')} 周) (自动存档)`,
+  );
+  era.set('flag:当前互动角色', 0);
+  await next_week();
+};
+
 module.exports = async () => {
   const flags = {
     after_select: true,
     homepage: true,
     week_start: false,
   };
+  await new GameGuides().game_start();
   while (flags.homepage) {
     await era.clear();
     let flag_skip_this_week = false;
     let cur_location = era.get('flag:当前位置');
 
     if (!handlers[cur_location]) {
-      cur_location = era.set('flag:当前位置', location_enum.office);
+      cur_location = location_enum.office;
     }
 
+    const my_life_marks = new LifeEventMarks(0);
     if (flags.week_start) {
+      let count = 0;
       print_page_header();
       if (await check_game_over()) {
         return;
       }
-      if (era.get('flag:当前周') === 1) {
+      if (
+        cur_location === location_enum.basement &&
+        my_life_marks.b_timer > 0
+      ) {
+        cur_location = location_enum.office;
+        era.drawLine();
+        await era.printAndWait([
+          '在经历了惊魂的一周后 ',
+          get_chara_talk(0).get_colored_name(),
+          ' 被学园的救援队救出了地下室……',
+        ]);
+        const jpy = Math.ceil(era.get('flag:当前马币') / 2);
+        if (jpy) {
+          await era.printAndWait('……但是被扣除了一半存款作为上周误工的罚款。');
+          era.add('flag:当前马币', -jpy);
+        }
+        sys_handle_escape_basement(false);
+      }
+      if (era.get('flag:当前月') <= 3 && era.get('flag:当前周') === 1) {
         const added_list = era.getAddedCharacters();
         gacha(
           era
@@ -242,6 +292,7 @@ module.exports = async () => {
       ) {
         era.drawLine();
         flag_skip_this_week = (await random_event()) || flag_skip_this_week;
+        count++;
       }
       stop_machine_gun(event_hooks.week_start);
       const force_be = era.get('flag:强制BE');
@@ -273,7 +324,67 @@ module.exports = async () => {
       if (await check_game_over(true)) {
         return;
       }
+      if (cur_location === location_enum.basement) {
+        my_life_marks.b_timer = get_random_value(
+          Math.min(23, count + 6) * 60,
+          24 * 60 - 1,
+        );
+        const owner = new BasementOwners().get(0),
+          owner_marks = new LifeEventMarks(owner);
+        era.set('status:0:沉睡', 1);
+        basement_queue.add_action(
+          new BasementAction(0, my_life_marks.b_timer, action_type_enum.get_up),
+        );
+        my_life_marks.b_enhance = 1;
+        owner_marks.b_s_level = Math.max(
+          Math.floor(
+            (era.get(`love:${owner}`) * (era.get('flag:极端行为限制') || 1) -
+              era.get(`relation:${owner}:0`)) /
+              200,
+          ),
+          0,
+        );
+        my_life_marks.b_now = my_life_marks.b_enhance = Math.max(
+          owner_marks.b_s_level + get_random_value(-1, 1),
+          1,
+        );
+        my_life_marks.b_start = owner_marks.b_start = 1;
+        my_life_marks.b_status = owner_marks.b_status =
+          1 << basement_status_enum.idle;
+        owner_marks.b_escape = 0;
+        if (
+          era.get('flag:当前回合数') % 48 > 0 &&
+          my_life_marks.b_timer > 6 * 60 + 30 &&
+          my_life_marks.b_timer < 17 * 60
+        ) {
+          owner_marks.b_status = 1 << basement_status_enum.outside;
+          basement_queue.add_action(
+            new BasementAction(owner, 17 * 60, action_type_enum.back_basement),
+          );
+        }
+        const rescue_chara = get_random_entry(
+          sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+            (e) =>
+              e > 0 &&
+              e !== owner &&
+              !common_no_action_check(e) &&
+              era.get(`love:${e}`) >= 75 &&
+              !era.get(`status:${e}:伤病`) &&
+              era.get(`base:${e}:压力`) < pressure_border.depression,
+          ),
+        );
+        if (rescue_chara) {
+          basement_queue.add_action(
+            new BasementAction(
+              rescue_chara,
+              3 * minutes_in_a_day + get_random_value(0, minutes_in_a_day),
+              action_type_enum.rescue,
+            ),
+          );
+        }
+      }
     }
+    era.set('flag:当前位置', cur_location);
     if (flag_skip_this_week) {
       era.drawLine();
       await next_week();
@@ -282,43 +393,45 @@ module.exports = async () => {
 
     const chara_id = era.get('flag:当前互动角色');
 
-    sys_change_status_by_base(0);
-    chara_id && sys_change_status_by_base(chara_id);
-
-    await era.clear();
-    print_page_header();
-    if (cur_location === location_enum.basement) {
-      print_curr_chara(era.get('flag:地下室之主'));
-    } else {
+    if (cur_location !== location_enum.basement) {
+      sys_change_status_by_base(0);
+      chara_id && sys_change_status_by_base(chara_id);
+      await era.clear();
+      print_page_header(true);
       print_curr_chara(chara_id);
-    }
-
-    era.drawLine();
-    let hook = -1;
-    if (flags.week_start) {
-      flags.week_start = false;
-      if (chara_id) {
-        hook = event_hooks.good_morning;
-      }
-    } else if (flags.after_select) {
-      flags.after_select = false;
-      if (chara_id) {
-        hook = event_hooks.select;
-      }
-    }
-    if (hook > 0) {
-      await sys_call_daily_event(chara_id, hook);
-    } else {
-      const note_list = [...notes.common];
-      sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach((e) => {
-        if (era.get(`cflag:${e}:育成回合计时`) < 3 * 48 && notes[e]) {
-          note_list.push(...notes[e]);
+      era.drawLine();
+      let hook = -1;
+      if (flags.week_start) {
+        flags.week_start = false;
+        if (chara_id) {
+          hook = event_hooks.good_morning;
         }
-      });
-      const note = note_list[notes_index++ % note_list.length];
-      say_by_passer_by(note.title, note.content);
+      } else if (flags.after_select) {
+        flags.after_select = false;
+        if (chara_id) {
+          hook = event_hooks.select;
+        }
+      }
+      if (hook > 0) {
+        await sys_call_daily_event(chara_id, hook);
+      } else {
+        const note_list = [...notes.common];
+        sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
+          (e) => {
+            if (era.get(`cflag:${e}:育成回合计时`) < 3 * 48 && notes[e]) {
+              note_list.push(...notes[e]);
+            }
+          },
+        );
+        const note = note_list[notes_index++ % note_list.length];
+        say_by_passer_by(note.title, note.content);
+      }
     }
 
-    await handlers[cur_location](chara_id, save_and_next_week, flags);
+    await handlers[cur_location](
+      chara_id,
+      basement_handlers[cur_location] || save_and_next_week,
+      flags,
+    );
   }
 };

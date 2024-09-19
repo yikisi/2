@@ -165,7 +165,7 @@ module.exports = class extends CustomizedCheck {
     const c = get_chara_color(52),
       titles = [];
     const races = new RaceHistory(52).get();
-    if (new UraraEduMarks().fans >= 550000) {
+    if (new UraraEduMarks().fans >= 250000) {
       titles.push({
         c,
         n: '乌拉拉加油',

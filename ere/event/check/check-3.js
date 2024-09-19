@@ -19,6 +19,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const CharaSkills = require('#/data/chara-skills');
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
@@ -86,8 +87,8 @@ module.exports = class extends CustomizedCheck {
 
   check_next_week() {
     const event_marks = new TeioEduMarks(),
-      event_obj = new EventObject(3, cb_enum.edu),
-      edu_weeks = era.get('cflag:3:育成回合计时');
+      edu_weeks = era.get('cflag:3:育成回合计时'),
+      event_obj = new EventObject(3, cb_enum.edu).set_arg(edu_weeks);
     if (edu_weeks < 3 * 48) {
       const event_obj_special = new EventObject(3, cb_enum.edu, true).set_arg(
         edu_weeks,
@@ -150,7 +151,7 @@ module.exports = class extends CustomizedCheck {
       switch (edu_weeks) {
         case 47 + 1: // 新年
         case 47 + 12: // 记者招待会
-        case 95 + 5: // 天皇赏春前·放弃
+        case 95 + 5: // 天皇赏春前 · 放弃
         case 95 + 14: //粉丝感谢祭
           add_event(event_hooks.week_start, event_obj_special);
           break;
@@ -209,6 +210,14 @@ module.exports = class extends CustomizedCheck {
               },
               '……',
             ]);
+          }
+          break;
+        case 95 + 48:
+          if (
+            era.get('status:3:腿伤') &&
+            sys_reg_race(3).curr.race === race_enum.arim_kin
+          ) {
+            new CharaSkills(3).add(110031);
           }
           break;
         case 47 + 5: // 所以，衣服是怎样啦！
@@ -321,12 +330,11 @@ module.exports = class extends CustomizedCheck {
     return titles;
   }
 
-  get_personal_titles() {
-    return ['帝王', '无瑕帝王', '不屈帝王'];
+  get_aim_races() {
+    return aim_races;
   }
 
-  // eslint-disable-next-line no-unused-vars
-  is_aim_race(race, edu_weeks, rank) {
-    return aim_races[`${edu_weeks}_${race}`] || aim_races[race];
+  get_personal_titles() {
+    return ['帝王', '无瑕帝王', '不屈帝王'];
   }
 };

@@ -198,7 +198,8 @@ async function update_orgasms(shown, ...ids) {
     if (era.get(`tcvar:${chara_id}:肛门扩张`)) {
       era.add(`tcvar:${chara_id}:肛门扩张`, -1);
     }
-
+  }
+  for (const chara_id of ids) {
     era.add(
       `nowex:${chara_id}:胸部高潮`,
       era.get(`nowex:${chara_id}:乳头高潮`),

@@ -9,18 +9,21 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
-const print_event_name = require('#/event/snippets/print-event-name');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean>>} */
 const handlers = {};
 
 handlers[event_hooks.select] = () => {
+  if (!sys_check_awake(19)) {
+    throw new Error();
+  }
   const callname = sys_get_callname(19, 0),
     digital = get_chara_talk(19);
   const buffer = [

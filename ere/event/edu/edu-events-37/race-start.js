@@ -180,11 +180,11 @@ module.exports = async (_, extra_flag) => {
       )
     ) {
       await era.printAndWait(
-        `主持人：「让我们有请下一位选手登场，${flash.sex}就是今年京成杯的冠军，本场比赛的三番人气——荣进闪耀！！」`,
+        `主持人「让我们有请下一位选手登场，${flash.sex}就是今年京成杯的冠军，本场比赛的三番人气——荣进闪耀！！」`,
       );
     } else {
       await era.printAndWait(
-        `主持人：「让我们有请下一位选手登场，${flash.sex}就是在今年的京成杯上表现亮眼，本场比赛的三番人气——荣进闪耀！！」`,
+        `主持人「让我们有请下一位选手登场，${flash.sex}就是在今年的京成杯上表现亮眼，本场比赛的三番人气——荣进闪耀！！」`,
       );
     }
     await flash.say_and_wait('………');
@@ -309,7 +309,7 @@ module.exports = async (_, extra_flag) => {
     );
     await say_by_passer_by_and_wait(
       `观众A`,
-      `这次日本杯的参赛阵容 ${your_name} 们都看到了吧。`,
+      '这次日本杯的参赛阵容你们都看到了吧。',
     );
     await say_by_passer_by_and_wait('观众B', '嗯嗯，还真是出乎意料啊。');
     await say_by_passer_by_and_wait(
@@ -358,7 +358,6 @@ module.exports = async (_, extra_flag) => {
     await flash.say_and_wait(`嗯！那么我出发了，${callname}。`);
     era.printButton('「加油！」', 1);
     await era.input();
-    //todo 本场比赛中，特别周，荒漠英雄，均获得强敌buff（实际比赛中面板数据提高2倍。）
   } else if (extra_flag.race === race_enum.arim_kin && edu_weeks < 96) {
     await print_event_name('挑战之路 · 三', flash);
     await era.printAndWait(
@@ -419,7 +418,6 @@ module.exports = async (_, extra_flag) => {
     await flash.say_and_wait('嗯！');
     await flash.say_and_wait('要一直奔跑下去，直至登临绝巅。');
     era.println();
-    //todo （本场比赛中，特别周，荒漠英雄，气槽，富士奇石获得强敌buff[实际比赛面板数值提升至1.5倍）
   } else if (extra_flag.race === race_enum.sank_hai && edu_weeks > 95) {
     await print_event_name('挑战之路 · 五', flash);
     await era.printAndWait('春季三冠中的第一冠——大阪杯，就要开始了。');
@@ -510,7 +508,6 @@ module.exports = async (_, extra_flag) => {
     );
     await flash.say_and_wait('我和转瞬即逝的闪光可不一样。');
     await flash.say_and_wait('我会耀眼夺目地奔跑下去，直至最后的那一刻。');
-    //todo （本场比赛中，曼城茶座获得强敌buff[对战时所有面板数据提升至1.5倍]）
   } else if (extra_flag.race === race_enum.tenn_sho && edu_weeks > 95) {
     await print_event_name('璀璨之秋 · 一', flash);
     await era.printAndWait('万众瞩目的秋季天皇赏，终于开始了。');
@@ -556,7 +553,7 @@ module.exports = async (_, extra_flag) => {
       `赛前，选手休息室内。荣进闪耀看了眼时间，随后起身，向 ${your_name} 道别。`,
     );
     await flash.say_and_wait(
-      '呵呵~说起来，这还是第一次呢，没有以自己的梦想为前提参加比赛。',
+      '呵呵～说起来，这还是第一次呢，没有以自己的梦想为前提参加比赛。',
     );
     await era.printAndWait(
       `然后紧接着下一秒，${flash.sex}又带着调侃地露出微笑。`,
@@ -598,7 +595,7 @@ module.exports = async (_, extra_flag) => {
     era.printButton('「行应行之事……」', 1);
     await era.input();
     await flash.say_and_wait('尽应尽之力。');
-    await flash.say_and_wait('呵呵呵~');
+    await flash.say_and_wait('呵呵呵～');
     era.printButton('「哈哈。」', 1);
     await era.input();
     await era.printAndWait(`接龙成功，${your_name} 们两人同时哈哈大笑。`);
