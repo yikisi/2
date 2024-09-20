@@ -241,21 +241,29 @@ module.exports = class extends CustomizedCheck {
         case 95 + 6:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 1月第二周 醒目飞鹰
+        // 3月第一周 醒目飞鹰
         case 95 + 9:
           add_event(event_hooks.week_start, event_obj_special);
+          break;
+        // 3月第二周 目眩
+        case 95 + 10:
+          add_event(event_hooks.week_end, event_obj_special);
           break;
         // 4月第二周 粉丝感谢祭
         case 95 + 14:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 5月第四周 前辈与后辈
-        case 95 + 20:
+        // 5月第一周 欲速则不达
+        case 95 + 17:
           add_event(event_hooks.week_end, event_obj_special);
+          break;
+        // 5月第二周 压力
+        case 95 + 18:
+          add_event(event_hooks.week_start, event_obj_special);
           break;
         // 5月第四周 前辈与后辈
         case 95 + 23:
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_end, event_obj_special);
           break;
         // 8月第一周 夏季合宿开始
         case 95 + 29:
