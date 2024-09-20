@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202331,
   '超群的迈步',
-  '力量十分强劲时速度提升。力量有十二分强劲时，速度极大提升＜泥地＞',
+  '力量十分强劲时速度提升；力量有十二分强劲时，速度极大提升＜泥地＞',
   20233,
   2,
   UmaSkill.rarity_enum.gold,

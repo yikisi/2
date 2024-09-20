@@ -20,7 +20,9 @@ module.exports = class extends CustomizedMec {
     if (get('cflag:32:招募状态') !== recruit_flags.yes) {
       return super.set_callname();
     }
-    set('callname:32:0', '豚鼠君');
+    if (!this.set_callname_from_src()) {
+      set('callname:32:0', '豚鼠君');
+    }
   }
 
   get_status() {

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   900461,
   '闪亮闪亮☆STARDOM',
-  '在比赛中盘的直线位于前方，并被后面的马娘拉近距离时，绝不让步的想法将会稍微化作动力。',
+  '在比赛中盘的直线位于前方，并被后面的马娘拉近距离时，绝不让步的想法将会稍微化作动力',
   90046,
   1,
   UmaSkill.rarity_enum.normal,

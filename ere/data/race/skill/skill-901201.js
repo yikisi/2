@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   901201,
   '无二无三的唯一通路',
-  '到达第4浪时若位于前方，则于短时间内稍微提升速度。',
+  '到达第4浪时若位于前方，则于短时间内稍微提升速度',
   90120,
   1,
   UmaSkill.rarity_enum.normal,

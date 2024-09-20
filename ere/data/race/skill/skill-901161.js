@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   901161,
   '烈华的洗礼',
-  '比赛前半段的弯道时若在前方，则稍微提高速度；之后在终盘的最终直线时若在马群前方，则在短时间内小幅提高速度。',
+  '比赛前半段的弯道时若在前方，则稍微提高速度；之后在终盘的最终直线时若在马群前方，则在短时间内小幅提高速度',
   90116,
   1,
   UmaSkill.rarity_enum.normal,

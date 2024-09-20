@@ -394,7 +394,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
   // 看台砍掉了：随机对面或者同侧
   // 比赛时间：随机白天或晚上
   const straight_front_type = (Math.random() < 0.5) + 1,
-    day_time = 4 * (Math.random() < 0.5);
+    day_time = 4 * (Math.random() < 0.5),
+    corner_count = info.lanes.filter((e) => e.is_curve).length;
   ret.forEach((uma) => {
     uma.attrs = uma.attrs.map(Math.ceil);
     let motivation_coefficient = (mod_motivation_coefficients[uma.chara] ||
@@ -423,6 +424,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       uma.attrs[attr_enum.strength] * motivation_coefficient;
     uma.race.conditionParams.base_wiz =
       uma.attrs[attr_enum.intelligence] * motivation_coefficient;
+    uma.race.conditionParams.corner_count = corner_count;
     uma.race.conditionParams.course_distance = info.span;
     uma.race.conditionParams.distance_type = info.distance + 1;
     uma.race.conditionParams.grade =
