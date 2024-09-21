@@ -402,6 +402,11 @@ module.exports = async function (hook, _, event_object) {
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
+  } else if (event_marks.windy === 1) {
+    // todo 丸善斯基与训练员交流
+    await print_event_name('如宝石般闪耀的一天', chara_talk);
+    await era.printAndWait(`训练室\n`);
+    await era.printAndWait(`。`);
   } else if (edu_weeks === 39) {
     await print_event_name('万圣夜', chara_talk);
     await era.printAndWait(

@@ -25,6 +25,8 @@ class MaEduMarks extends EduEventMarks {
   dream;
   //木
   wind;
+  // 舒适的一天！
+  windy;
   // BAD END 1 木旺土溃
   Self_contempt;
   // BAD END 2 丸善斯基的信
@@ -43,6 +45,8 @@ class MaEduMarks extends EduEventMarks {
   good_end;
   // 迷茫
   mygo;
+  // 丸善斯基老师，请指导我！
+  teacher_sister;
 
   constructor() {
     super(4);

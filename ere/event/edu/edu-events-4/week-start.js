@@ -125,6 +125,126 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(
       `带着这份对未来的憧憬，${chara_talk.name}迎来了新的一天。`,
     );
+  } else if (event_marks.teacher_sister === 1) {
+    // 训练员面对想要学习的东西提不起兴趣，丸善斯基对其进行指导
+    await print_event_name(`请指导我，丸善斯基老师！`, chara_talk);
+    await era.printAndWait(`某个休息日的早上。`);
+    await era.printAndWait(`你爬在办公桌上什么都不想干。`);
+    await era.printAndWait(
+      `自从成功进入特雷森之后，不知为何学生时代的动力一下子全部消失了。`,
+    );
+    await era.printAndWait(
+      `虽然在与丸善斯基的交流之中慢慢找回之前的感觉，但这种勉强感还是有些烦恼。`,
+    );
+    await me.say_and_wait(`平时都这么辛苦了，今天就好好休息一下吧。`);
+    await chara_talk.say_and_wait(`训练员君，我进来了哦♪`);
+    await era.printAndWait(`正准备带着这种借口摸鱼的时候，丸善斯基推门而入。`);
+    await era.printAndWait(`该说是不是巧合呢，丸善斯基看上去心情正好的样子。`);
+    await chara_talk.say_and_wait(`这样的话，不得不和训练员君好好讲解一下了。`);
+    await me.say_and_wait(
+      `或许和丸善斯基商量一下的话，说不定会有新的看法。`,
+      true,
+    );
+    await era.printAndWait(
+      `带着这种试试看的想法，你向丸善斯基倾诉了心中的困扰。`,
+    );
+    await chara_talk.say_and_wait(`唔——原来是这样啊。`);
+    await era.printAndWait(
+      `丸善斯基一边轻轻的笑着，一边将放在角落里的小黑板拉了出来。`,
+    );
+    await chara_talk.say_and_wait(`这样的话，就让姐姐我来分享一下我的看法吧。`);
+    await era.printAndWait(`丸善斯基在黑板左侧上画下了Q版的自己。`);
+    await chara_talk.say_and_wait(
+      `有的时候面对一些不去做就会后悔的事物时，是不是总会有种怎么也提不起干劲的状态呢？`,
+    );
+    await era.printAndWait(
+      `在黑板的右侧将作为烦恼的功课、名次，以及舞蹈圈了起来。`,
+    );
+    await chara_talk.say_and_wait(
+      `虽然知道它很重要，不去做的话与亲近的人就会有一种焦虑惶恐的感觉。`,
+    );
+    await era.printAndWait(`她一边解释着，一边贴心的为小人补上乌云。`);
+    await chara_talk.say_and_wait(
+      `在后悔与焦躁之中度过，但是好像这样也能维持下来的样子？！`,
+    );
+    await era.printAndWait(`在两者的下方，Q版小人开始向训练员道歉。`);
+    await chara_talk.say_and_wait(
+      `于是下一次这种事情发生的时候，只要表现出后悔的样子，周围的人也不会说些什么，最后大家都维持在了一个合适的状态上。`,
+    );
+    await era.printAndWait(`将三幅图依次用箭头联系在一起，一个循环便诞生了。`);
+    await chara_talk.say_and_wait(`训练员君觉得如何呢?`);
+    era.printButton(`事态也没有得到解决吧？`, 1);
+    await era.input();
+    await me.say_and_wait(
+      `从事情开始恶化，到周围的人对你施加压力，自己做出后悔的样子，周围的人无可奈何的放弃 这个循环之中，只有事物没有被解决吧？`,
+    );
+    await me.say_and_wait(
+      `本应作为激发动力的燃料被做出后悔姿态的自己消除了，最后事态却向着更糟糕的方向发展了。`,
+    );
+    await me.say_and_wait(
+      `于是在事态越来越严重时，这套懊悔循环不仅能够自我维持，甚至得到了强化。`,
+    );
+    await era.printAndWait(`在思考了8分钟左右，你犹豫的给出了答案。`);
+    await chara_talk.say_and_wait(
+      `没错，这种循环本身不解决问题，只解决问题感。对于当事人来说，就像明明知道下周就要考试了，但还是打算趁着时间还有多，跑去街机厅的学生一样。`,
+    );
+    await chara_talk.say_and_wait(`本质上只是因为害怕疼痛而吃止痛药麻痹自己。`);
+    await chara_talk.say_and_wait(`所以，我们要找到行动的动机。`);
+    await era.printAndWait(
+      `似乎是正确的答案，像是花朵一样的笑容在她的脸上绽放。`,
+    );
+    await chara_talk.say_and_wait(
+      `为了将圆周率精确到第七位小数，人类文明普遍花了至少两千年。`,
+    );
+    await chara_talk.say_and_wait(`认识到无理数，用了一千年。`);
+    await chara_talk.say_and_wait(
+      `二元方程、三角函数、对数、阶乘，都是人类长达数千年的集体探索才逐步达成的学术成就。`,
+    );
+    await era.printAndWait(
+      `白板擦将之前的画面擦干净之后，画下了一个巨大的水晶萝卜。`,
+    );
+    await chara_talk.say_and_wait(
+      `能够通过仅仅八年的学习，就将这些成就运用自如，是一件堪称华丽的成就。`,
+    );
+    await chara_talk.say_and_wait(
+      `有些人非常聪明而且有足够的运气，借助名次以及周围人的称赞化为燃料，帮她更快的掌握了这些东西。`,
+    );
+    await era.printAndWait(`Q版小人通过钻头很快就找到了水晶萝卜。`);
+    await me.say_and_wait(`如果我花了很久也没弄懂，怎么办呢？`);
+    await chara_talk.say_and_wait(`那又怎么样呢？`);
+    await era.printAndWait(`丸善斯基眨了眨眼。`);
+    await chara_talk.say_and_wait(
+      `训练员君的目标就是为了十足的领取这份文明的遗产，无论花多久，只要最终学到了就是大赚。`,
+    );
+    await me.say_and_wait(`可是我遇到看不懂的公式又该怎么处理呢？`);
+    await chara_talk.say_and_wait(
+      `最好的办法是去阅读与它相关的背景知识，以及相关的历史，去回溯这个思想成就当年是怎么从历史中淘洗出来的。`,
+    );
+    await era.printAndWait(
+      `白板上的Q版小人查阅着矿物知识，向经验丰富的前辈请教。`,
+    );
+    await chara_talk.say_and_wait(
+      `这样不仅能降低认知门槛，更重要的是正确的历史感能帮你洗脱你对社会的扭曲想象带来的虚假价值评估。`,
+    );
+    await chara_talk.say_and_wait(`因为没有动力的根本原因总是估错了价格。`);
+    await era.printAndWait(`水晶胡萝卜变得闪闪发亮。`);
+    await chara_talk.say_and_wait(
+      `历史上重要珍贵的东西，自然也围绕其滋生了庞大的产业与生态。`,
+    );
+    await era.printAndWait(`Q版小人们围绕着女神祭坛将水晶胡萝卜放了上去。`);
+    await chara_talk.say_and_wait(
+      `而这份庞大的产业与生态，自然为了这份这些知识的价格做了担保，为了熟知它们的人提供了机会与丰厚的报酬。`,
+    );
+    await era.printAndWait(`故事的最后，三女神们为Q版小人送上了胡萝卜山。`);
+    await chara_talk.say_and_wait(`所以学习是一个利润极高的收益机会。`);
+    await me.say_and_wait(`原来如此，谢谢丸善斯基老师！`);
+    await chara_talk.say_and_wait(
+      `哎呀~训练员君真是太客气了。如果能帮助到训练员君，姐姐我才是最高兴的一边。`,
+    );
+    await era.printAndWait(
+      `因为帮助到了你而由衷高兴的丸善斯基周围似乎有彩虹浮现。`,
+    );
+    await era.printAndWait(`你们度过了有意义的一天。`);
   } else if (edu_weeks === 5) {
     await print_event_name(
       `来自${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}的礼物`,

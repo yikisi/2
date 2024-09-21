@@ -99,6 +99,14 @@ module.exports = class extends CustomizedCheck {
           event_hooks.week_start,
           event_obj,
         );
+      era.get('love:4') >= 50 &&
+        check_and_add_event(
+          event_marks,
+          edu_weeks,
+          'teacher_sister',
+          event_hooks.week_start,
+          event_obj,
+        );
       era.get('love:4') >= 75 &&
         check_and_add_event(
           event_marks,

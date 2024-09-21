@@ -1162,51 +1162,31 @@ module.exports = async function (event_object) {
     );
     await say_by_passer_by(`狂热粉丝`, `这样完美无缺的存在，居然会恋爱？`);
     await say_by_passer_by(`狂热粉丝`, `开什么玩笑！开什么玩笑！`);
-    await era.printAndWait(`因为出离愤怒而胡乱破坏着周围的粉丝拿刀指向了你。`);
+    await era.printAndWait(
+      `以愤怒为引擎驱使着力量肆意破坏的粉丝狠狠的撞在了墙壁之上。`,
+    );
+    await era.printAndWait(`而因为这一刻他才冷静了下来。`);
+    await say_by_passer_by(`狂热粉丝`, `……其实醒目飞鹰究竟怎么样我并不关心。`);
     await say_by_passer_by(
       `狂热粉丝`,
-      `开什么玩笑！那我来告诉你！偶像就是默默无闻的我们的希望！`,
+      `不管她是不是马娘偶像，她和其他人之间有什么关系一点都不重要，真正重要的其实是我参与了这场演出`,
     );
     await say_by_passer_by(
       `狂热粉丝`,
-      `在痛苦、迷茫之中徘徊着的我们的唯一救赎！`,
+      `如果聚光灯不能打到我的头上，在黑暗之中哭泣的我，恐怕就会这样默默消失了。`,
     );
-    await say_by_passer_by(
-      `狂热粉丝`,
-      `可笑吧！一直梦想着成为电视之中保护世界的英雄，却沦为现在这副连自己都憎恶的模样。`,
-    );
-    era.printButton(`你的所作所为和英雄有什么关系！`, 1);
-    await era.input();
+    await era.printAndWait(`在极度的兴奋过后，依靠着墙壁卷缩起来。`);
+    await say_by_passer_by(`狂热粉丝`, `喂，那边的训练员。`);
+    await say_by_passer_by(`狂热粉丝`, `我给你一个忠告。`);
     await era.printAndWait(
       `楼下传来的急促脚步声越来越近，因为疼痛而流下的汗水将背部打湿。`,
     );
-    await say_by_passer_by(
-      `狂热粉丝`,
-      `为什么，我来告诉你！当你看到自己在一次次的竞争之中失败，在剧烈的痛苦之下才恍然意识到`,
-    );
-    await say_by_passer_by(
-      `狂热粉丝`,
-      `这个世界跟你又有什么关系！你根本不是什么英雄，不过是每集开头被批量打死的喽啰罢了。`,
-    );
-    await say_by_passer_by(`狂热粉丝`, `所以，我追求闪耀的偶像又有什么错？`);
-    await say_by_passer_by(
-      `狂热粉丝`,
-      `幻想着她会作为自己的伴侣所快乐的每一天，不去给任何人添麻烦，就这么默默无闻的度过，我都觉得这样就好了的时候。`,
-    );
-    await say_by_passer_by(`狂热粉丝`, `然后你就出现了。`);
-    await say_by_passer_by(
-      `狂热粉丝`,
-      `你就没想过打破别人的梦是多么残忍的事情吗？`,
-    );
-    await say_by_passer_by(
-      `狂热粉丝`,
-      `对醒目飞鹰做出那种事情的你，连我最后的幻想都要嘲笑吗?`,
-    );
+    await say_by_passer_by(`狂热粉丝`, `存在重于生命本身。`);
     await era.printAndWait(
       `珊珊来迟的保安将狂热粉丝拘束在地板之上，你的视线渐渐变得模糊。`,
     );
     await era.printAndWait(`即将远去的意识在最后一刻看到的——`);
-    await era.printAndWait(`是抛弃神的愤怒信徒在燃尽一切后虚无的神情。`);
+    await era.printAndWait(`是赶不上新时代船只的乘客。`);
   } else if (edu_weeks === 47 + 42) {
     // 我越喜欢，我对“我受不了的方式”的定义就越严苛。我去做点什么的动能就越强。
     // 什么也不做，对我就是痛苦的，内心深处就有双重辜负感——第一感觉自己辜负了自己所喜欢的对象，第二感觉辜负了自己的喜欢本身。
@@ -1217,6 +1197,40 @@ module.exports = async function (event_object) {
     );
     await era.printAndWait(`学院决定暂时限制你们的外出。`);
     await era.printAndWait(`……某种意义上也是一种解脱。`);
+    await era.printAndWait(
+      `虽然心里一直再说忘记这件事，但自己总会不由自主的想起那副空虚的模样`,
+    );
+    await me.say_and_wait(`存在感焦虑吗？`, true);
+    await era.printAndWait(
+      `因为在任何角度之上都是零，任何机会都因为技能和资历的空白从一开始就没有入场的资格。`,
+    );
+    await era.printAndWait(
+      `一开始或许还可以借着说不定自己不适合这行转向其他方面。`,
+    );
+    await era.printAndWait(`直到在新的行业再次面对一摸一样的窘境。`);
+    await era.printAndWait(`回过头来只是白白虚度了几年的岁月。`);
+    await era.printAndWait(
+      `或许曾经一腔热血想要做出什么，但在现实面前被迫承认自己什么都做不好。`,
+    );
+    await era.printAndWait(
+      `对于不甘心现状的人来说，证明自己存在确实比生命更加重要。`,
+    );
+    await era.printAndWait(
+      `因为没有存在，生命也只是没有显示和输出、途耗能量的过程罢了。`,
+    );
+    await era.printAndWait(`如果在这个时候有个机会能站在聚光灯下呢？`);
+    await era.printAndWait(`就算这件事会给你们造成巨大的伤害。`);
+    await era.printAndWait(`我很抱歉，但我必须存在。`);
+    await era.printAndWait(
+      `因为迷茫而寻求证明自身存在的事物，主动将自己染上色彩，加入和自己色彩相同的人群之中，假装自己不是迷茫的存在。`,
+    );
+    await era.printAndWait(
+      `虽然知道自己得出的结论可能是错的，但现在只能暂时接受这一观点说服自己。`,
+    );
+    await era.printAndWait(
+      `如果从这个角度考虑，上周的袭击事件只是为了证明存在感的绝望之人找到了最能引起热议的话题。`,
+    );
+    await era.printAndWait(`只是对方恰好是醒目飞鹰的粉丝罢了。`);
     await era.printAndWait(
       `看着醒目飞鹰轻轻推开训练室的大门，向你勉强露出微笑时。`,
     );
@@ -1616,11 +1630,9 @@ module.exports = async function (event_object) {
       `这么考虑的话，就算在大街上突然变成马娘，对大多数人也就是一个记忆不到一个月的新闻罢了。`,
     );
     await era.printAndWait(
-      `在拥挤的人群之中慢慢前进，不知不觉就顺着人群来到了副舞台这边。`,
+      `像跟随着洋流游动的鱼群一样，不知不觉就来到了副舞台这边。`,
     );
-    await era.printAndWait(
-      `混杂在人群之中，看着作为一日明星的泥地马娘们闪耀的瞬间。`,
-    );
+    await era.printAndWait(`看着作为一日明星的马娘们闪耀的瞬间。`);
     await me.say_and_wait(`……醒目飞鹰`, true);
     await era.printAndWait(
       `以顶级马娘偶像为目标一直闪耀到尽头为止的，不服输的少女。`,
@@ -1630,14 +1642,97 @@ module.exports = async function (event_object) {
     );
     await me.say_and_wait(`醒目飞鹰也有自己的苦衷吧。`);
     await era.printAndWait(`光是意识到这一点，就已经是一种深层的安慰了。`);
-    await me.say_and_wait(
-      `冷静下来仔细想想，是不是因为自己的态度让醒目飞鹰感受到了不安。`,
-      true,
+    await era.printAndWait(
+      `——哪怕这安全感并不真实，但不真实的安全感也是安全感。`,
     );
     await me.say_and_wait(`接下来找机会好好和醒目飞鹰聊聊吧。`, true);
+    await era.printAndWait(
+      `心态重新调整过后，你将注意力重新集中在训练计划上。`,
+    );
   } else if (edu_weeks === 95 + 17) {
+    await print_event_name('倘若泪水能回到眼眶', falcon);
+    await era.printAndWait(`打定主意后，你便强行将醒目飞鹰拉了过去。`);
+    await me.say_and_wait(
+      `抱歉，虽然这样非常失礼，不过有什么能改变的话，恐怕也只有这么做了。`,
+    );
+    await era.printAndWait(
+      `不容分说强行拉过她的手腕，带着她向着目标地点前进。`,
+    );
+    await era.printAndWait(
+      `虽然一开始受到惊吓而猛然加大力度，但骤然之间力度突然就变小了。`,
+    );
+    await era.printAndWait(`你的内心已经被即将实现的美好憧憬填满。`);
+    await era.printAndWait(
+      `想要告诉她，告诉她，作为偶像追求自己的幸福这件事是没有任何问题的。`,
+    );
+    await era.printAndWait(`你与醒目飞鹰来到了这片空旷的草坪上。`);
+    await era.printAndWait(`令人难以忍受的尴尬氛围在你们之间扩散开来。`);
+    await era.printAndWait(
+      `不用一个人背负着这么沉重的压力，之前的事情仅仅只是一个意外，只需要将注意力。`,
+    );
+    await era.printAndWait(`如果你是醒目飞鹰。这种话能说服自己吗？`);
+    await me.say_and_wait(`……请多信任我一点。`);
+    await era.printAndWait(`飞鹰子已经不堪重负了。`);
+    await falcon.say_and_wait(`……诶？`);
+    await era.printAndWait(`醒目飞鹰的语气之中夹杂着困惑与不解。`);
+    await falcon.say_and_wait(`我一直都相信训练员先生呦？`);
+    await era.printAndWait(`不对，你摇了摇头。`);
+    await me.say_and_wait(
+      `不只是训练员与马娘之间，也不止粉丝与偶像之间的关系，我希望能被醒目飞鹰作为最信任的人对待。`,
+    );
+    await falcon.say_and_wait(`……哪怕是飞鹰子的缘故，训练员先生受到了伤害？`);
+    era.printButton(`我对醒目飞鹰的爱不会因为这种程度受到动摇。`, 1);
+    era.printButton(`我对飞鹰子的爱不会因为这种程度受到动摇。`, 2);
+    const ret1 = await era.input();
+    if (ret1 === 1) {
+      await falcon.say_and_wait(`……诶？`);
+      await era.printAndWait(
+        `像是听到了不可思议的话语，醒目飞鹰的瞳孔也一瞬间放大了。`,
+      );
+      await falcon.say_and_wait(`……真讨厌……最喜欢了……训练员先生怎么可以这样……`);
+      await falcon.say_and_wait(`这样下去的话，飞鹰子……还怎么……抱歉。`);
+      await era.printAndWait(`人类在马娘的面前脆弱的像布娃娃一样。`);
+      await era.printAndWait(
+        `让人觉得像是错觉一样，仅仅一瞬间，你便陷入了黑暗之中。`,
+      );
+      await era.printAndWait(`就这样，沉沉的睡去。`);
+    } else {
+      await falcon.say_and_wait(`……飞鹰子吗？`);
+      await era.printAndWait(`醒目飞鹰的表情变得僵硬。`);
+      await falcon.say_and_wait(`飞鹰子……果然还是飞鹰子才对呢……训练员先生。`);
+      await era.printAndWait(`像是相当怀念一样，眯起了眼睛。`);
+      await falcon.say_and_wait(
+        `呐……看着飞鹰子吧。如果是为了训练员先生的话，飞鹰子什么都……`,
+      );
+      await era.printAndWait(`黯淡火燃的眼神一瞬间陷入死寂之中。`);
+      await falcon.say_and_wait(
+        `不对！这样的飞鹰子才不是训练员先生喜欢的那个包容着所有粉丝们的马娘偶像！`,
+      );
+      await era.printAndWait(`罪恶感像针一样刺入了胸口。`);
+      await falcon.say_and_wait(
+        `舞台之上的飞鹰子是所有粉丝们的，像这样……这样的行为是不可能被允许的。`,
+      );
+      await falcon.say_and_wait(
+        `飞鹰子因为抛弃了作为马娘偶像的原则，结果训练员先生像是破烂的布娃娃一样被随意丢弃在血泊之中`,
+      );
+      await falcon.say_and_wait(
+        `可是，明明已经发誓绝对会将爱平等的分给所有的粉丝，可是……看到训练员先生的时候，飞鹰子还是忍不住像倾注更多的爱。`,
+      );
+      await falcon.say_and_wait(
+        `飞鹰子不会将爱全部倾注在训练员先生身上，而将爱倾注在训练员先生身上的时候，飞鹰子也就不是飞鹰子了。`,
+      );
+      await era.printAndWait(
+        `比起单纯的失败，在最大的努力下遇到的两难抉择，更令人感到悲哀。`,
+      );
+      await falcon.say_and_wait(`……如果是这样的话。`);
+      await era.printAndWait(
+        `像是错觉一样，随着下颚传来的剧痛，你陷入了黑暗之中。`,
+      );
+      await era.printAndWait(`就这样，沉沉的睡去。`);
+    }
+  } else if (edu_weeks === 95 + 18) {
     // 舞台：草地 时间 夜间 原因 为了挽留醒目飞鹰
-    await print_event_name('', falcon);
+    await print_event_name('倘若泪水能回到眼眶', falcon);
     await era.printAndWait(`你又一次回到了这片草地上。`);
     await era.printAndWait(
       `废墟夹缝间的草地，从远处天空飘来的积雨云，那段令人怀念的美好时光。`,

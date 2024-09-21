@@ -419,17 +419,15 @@ module.exports = async function () {
   } else if (edu_weeks === 95 + 10) {
     await print_event_name('目眩感', falcon);
     await era.printAndWait(`训练室\n`);
+    await era.printAndWait(`提不起劲。`);
     await era.printAndWait(
-      `看着手中的训练计划，不知为何一股泄气的感觉从心底发出。`,
-    );
-    await era.printAndWait(
-      `或许是因为醒目飞鹰决绝的态度，两人之间的关系变得相当微妙。`,
+      `或许是因为醒目飞鹰决绝的态度，不知道应该从什么方面入手。`,
     );
     await era.printAndWait(
       `是不是被醒目飞鹰讨厌了？想要旁观醒目飞鹰的演唱会都被醒目飞鹰找了各种理由婉拒。`,
     );
     await era.printAndWait(`但是——`);
-    await era.printAndWait(`这样只会让人更加恐慌。`);
+    await era.printAndWait(`因为被拒绝而更加恐慌。`);
     await me.say_and_wait(`可恶！`);
     await era.printAndWait(`借着用力捶打桌面发泄心中的情绪。`);
     await era.printAndWait(
@@ -456,42 +454,6 @@ module.exports = async function () {
     await falcon.say_and_wait(`飞鹰子加油！`);
     await era.printAndWait(
       `重新为自己打气，作为马娘偶像的醒目飞鹰从后台回到了舞台之上。`,
-    );
-  } else if (edu_weeks === 95 + 16) {
-    await print_event_name('', falcon);
-    await era.printAndWait(`打定主意后，你便强行将醒目飞鹰拉了过去。`);
-    await me.say_and_wait(
-      `抱歉，虽然这样非常失礼，不过有什么能改变的话，恐怕也只有这么做了。`,
-    );
-    await era.printAndWait(
-      `不容分说强行拉过她的手腕，带着她向着目标地点前进。`,
-    );
-    await era.printAndWait(
-      `虽然一开始受到惊吓而猛然加大力度，但骤然之间力度突然就变小了。`,
-    );
-    await era.printAndWait(`你的内心已经被即将实现的美好憧憬填满。`);
-    await era.printAndWait(
-      `想要告诉她，告诉她，作为偶像追求自己的幸福这件事是没有任何问题的。`,
-    );
-    await era.printAndWait(`你与醒目飞鹰来到了这片空旷的草坪上。`);
-    await era.printAndWait(`令人难以忍受的尴尬氛围在你们之间扩散开来。`);
-    await era.printAndWait(
-      `不用一个人背负着这么沉重的压力，之前的事情仅仅只是一个意外，只需要将注意力。`,
-    );
-    await era.printAndWait(`如果你是醒目飞鹰。这种话能说服自己吗？`);
-    await me.say_and_wait(`……请多信任我一点。`);
-    await era.printAndWait(`飞鹰子已经不堪重负了。`);
-    await falcon.say_and_wait(`……诶？`);
-    await era.printAndWait(`醒目飞鹰的语气之中夹杂着困惑与不解。`);
-    await falcon.say_and_wait(`我一直都信任着训练员先生。`);
-    await era.printAndWait(`不对，你摇了摇头。`);
-    await me.say_and_wait(
-      `不只是训练员与马娘之间，也不止粉丝与偶像之间的关系，我希望能被醒目飞鹰作为最信任的人对待。`,
-    );
-    // todo
-    await falcon.say_and_wait(`。`);
-    await era.printAndWait(
-      `醒目飞鹰的瞳孔瞬间放大，似乎是听到了不可思议的话语。`,
     );
   } else if (edu_weeks === 95 + 23) {
     const love = era.get('love:46');
