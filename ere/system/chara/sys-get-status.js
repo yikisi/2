@@ -33,12 +33,21 @@ function sys_get_status(chara_id) {
     };
     if (!chara_id) {
       obj.title = sex_equip
-        ? '[繁殖用母马] 现役孕袋，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱、生下孩子时获得声望，子代参赛声望奖励+100%'
-        : '[泄欲用母马] 现役性奴，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱时获得声望';
+        ? '[繁殖用母马]：现役孕袋，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱、生下孩子时获得声望，子代参赛声望奖励+100%'
+        : '[泄欲用母马]：现役性奴，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱时获得声望';
     }
     status_list.push(obj);
   }
-  status_list.push(...get_custom_mec(chara_id).get_status());
+  status_list.push(
+    ...get_custom_mec(chara_id)
+      .get_status()
+      .map((e) => {
+        if (e.title && !e.title.startsWith('[')) {
+          e.title = `[${e.content}]：${e.title}`;
+        }
+        return e;
+      }),
+  );
   era.get(`status:${chara_id}:生日`) &&
     status_list.push({
       color: buff_colors[1],

@@ -75,10 +75,7 @@ module.exports = class extends CustomizedMec {
           '训练员在身边的话，毫无疑问的是大吉呢！训练成功率+10%，所有训练效果+5%，好感获取+10%，参赛时属性+5%',
       });
     }
-    return ret.map((e) => {
-      e.title = `[${e.content}]：${e.title}`;
-      return e;
-    });
+    return ret;
   }
 
   get_motivation_limit() {
