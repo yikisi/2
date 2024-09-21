@@ -26,22 +26,21 @@ module.exports = class extends CustomizedCheck {
   check_next_week() {
     const edu_weeks = get(`cflag:${this.id}:育成回合计时`),
       edu_marks = new MeekEduMarks();
-    if (edu_weeks < 3 * 48) {
-      if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
+    if (get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+      if (edu_weeks < 3 * 48) {
+        if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
+          add_event(
+            event_hooks.week_start,
+            new EventObject(this.id, cb_enum.edu, true).set_arg(edu_weeks),
+          );
+        }
+        check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
+      } else if (edu_weeks === 143 + 9) {
         add_event(
           event_hooks.week_start,
-          new EventObject(this.id, cb_enum.edu, true).set_arg(edu_weeks),
+          new EventObject(this.id, cb_enum.edu).set_arg('palace'),
         );
       }
-      check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
-    } else if (
-      edu_weeks === 143 + 9 &&
-      get(`cflag:${this.id}:招募状态`) === recruit_flags.yes
-    ) {
-      add_event(
-        event_hooks.week_start,
-        new EventObject(this.id, cb_enum.edu).set_arg('palace'),
-      );
     } else if (edu_marks.all_round > 0) {
       if (--edu_marks.all_round === 0) {
         add_event(

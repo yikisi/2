@@ -2,6 +2,7 @@ const { get, printAndWait, set } = require('#/era-electron');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
@@ -37,5 +38,6 @@ module.exports = {
     );
     set('cflag:201:招募状态', recruit_flags.yes);
     set('flag:当前互动角色', 201);
+    new MeekEduMarks().all_round = 0;
   },
 };
