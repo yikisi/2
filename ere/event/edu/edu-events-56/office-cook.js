@@ -20,18 +20,18 @@ module.exports = async (_, __, event_object) => {
     add_event(event_hooks.office_cook, event_object);
     return;
   }
-  if (event_object?.arg === 'miso_fortune') {
+  if (event_object?.arg !== 'miso_fortune') {
     return;
   }
   const callname = sys_get_callname(56, 0),
     kitaru = get_chara_talk(56),
     me = get_chara_talk(0);
-  await print_event_name('味增占卜', kitaru);
-  await kitaru.say_and_wait(['那么！', callname, '！今天来做味增汤占卜吧！']);
+  await print_event_name('味噌占卜', kitaru);
+  await kitaru.say_and_wait(['那么！', callname, '！今天来做味噌汤占卜吧！']);
   await era.printAndWait([
     '兴高采烈的 ',
     kitaru.get_colored_name(),
-    ' 将一碗味增汤放在了 ',
+    ' 将一碗味噌汤放在了 ',
     me.get_colored_name(),
     ' 的面前。',
   ]);
@@ -85,7 +85,7 @@ module.exports = async (_, __, event_object) => {
     me.get_colored_name(),
     ' 放下的瓷碗，扫视起碗底。',
   ]);
-  await kitaru.say_and_wait('从味增渣的形状来看……这个占卜结果是——');
+  await kitaru.say_and_wait('从味噌渣的形状来看……这个占卜结果是——');
   await kitaru.say_and_wait('凶！');
   await era.printAndWait('该说是毫不意外吗？');
   await kitaru.say_and_wait([
@@ -106,4 +106,5 @@ module.exports = async (_, __, event_object) => {
   ]);
   era.println();
   get_skills_and_print_in_event(56, [201442]) && (await era.waitAnyKey());
+  return true;
 };

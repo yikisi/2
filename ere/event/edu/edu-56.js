@@ -40,6 +40,10 @@ handlers[
 handlers[event_hooks.race_end] = require('#/event/edu/edu-events-56/race-end');
 
 handlers[
+  event_hooks.celebration
+] = require('#/event/edu/edu-events-56/celebration');
+
+handlers[
   event_hooks.crazy_fan_end
 ] = require('#/event/edu/edu-events-56/crazy-fan-end');
 

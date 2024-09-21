@@ -322,4 +322,5 @@ module.exports = async (_, __, event_object) => {
     }
   }
   wait_flag && (await era.waitAnyKey());
+  return true;
 };

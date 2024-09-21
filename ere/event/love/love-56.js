@@ -96,6 +96,7 @@ handlers[25] = async (kitaru, me, callname) => {
     kitaru.sex,
     '的死缠烂打之下，不得不同意了一起去购买日用品的要求。',
   ]);
+  return true;
 };
 
 handlers[49] = async (kitaru, me, callname) => {
@@ -104,8 +105,7 @@ handlers[49] = async (kitaru, me, callname) => {
     await sys_love_uma_in_event(56);
     return;
   }
-  era.drawLine({ content: '待兼福来的宿舍' });
-  await era.printAndWait([
+  await kitaru.print_and_wait([
     '某个晚上，躺在床上的 ',
     kitaru.get_colored_name(),
     '，得意洋洋地思考起今天是如何通过占卜来解决了同学疑惑的。',
@@ -201,7 +201,9 @@ handlers[49] = async (kitaru, me, callname) => {
     era.set('cflag:56:爱慕暂拒', 49);
     sys_change_motivation(56, -1);
   }
+  begin_and_init_ero(56);
   await masturbate(56);
+  end_ero_and_train();
 };
 
 handlers[74] = async (kitaru, me, callname, event_object) => {
@@ -215,7 +217,6 @@ handlers[74] = async (kitaru, me, callname, event_object) => {
     }
     return;
   }
-  era.drawLine({ content: me.actual_name + ' 的办公室' });
   await kitaru.print_and_wait([
     '结束了日常训练，和 ',
     callname,
@@ -395,15 +396,14 @@ handlers.tell_me = async (kitaru, me, callname, event_object) => {
     return;
   }
   await print_event_name('告白', kitaru);
-  era.drawLine({ content: me.actual_name + ' 的家' });
   await era.printAndWait('咚，咚，咚');
   await kitaru.say_and_wait([callname, '！']);
   await era.printAndWait([
     '如往常一样，叫做 ',
     kitaru.get_colored_name(),
-    ' 的少女再次敲响了',
+    ' 的少女再次敲响了 ',
     me.get_colored_name(),
-    '家的门口。',
+    ' 家的门口。',
   ]);
   await era.printAndWait([
     '对，不是 ',
@@ -411,9 +411,9 @@ handlers.tell_me = async (kitaru, me, callname, event_object) => {
     ' 的办公室，或者在特雷森宿舍的门。',
   ]);
   await era.printAndWait([
-    '最开始，只是因为代她保管那些开运道具，才让她知道了',
+    '最开始，只是因为代她保管那些开运道具，才让她知道了 ',
     me.get_colored_name(),
-    '的住址。',
+    ' 的住址。',
   ]);
   await era.printAndWait([
     '在那之后，不只是开运道具，而是单纯为了请教训练计划，或是要求出去玩，甚至只是因为‘今天是大吉’这样虚无缥缈理由而来找 ',
@@ -438,16 +438,16 @@ handlers.tell_me = async (kitaru, me, callname, event_object) => {
   era.printButton('开门', 1);
   await era.input();
   await era.printAndWait([
-    '假设有一位和',
+    '假设有一位和 ',
     me.get_colored_name(),
-    '没有血缘关系的异性。',
+    ' 没有血缘关系的异性。',
   ]);
   await era.printAndWait([
-    '天天黏着',
+    '天天黏着 ',
     me.get_colored_name(),
-    '，还能自由的出入',
+    '，还能自由的出入 ',
     me.get_colored_name(),
-    '家的房门，明明工作日的时都住在学院的宿舍，出门却得非常有仪式感的约在外面见面，那么两人可能会是什么关系呢？',
+    ' 家的房门，明明工作日的时都住在学院的宿舍，出门却得非常有仪式感的约在外面见面，那么两人可能会是什么关系呢？',
   ]);
   await era.printAndWait([me.get_colored_name(), '打开了门']);
   await kitaru.say_and_wait([callname, '！']);
@@ -555,16 +555,15 @@ handlers[89] = async (kitaru, me, callname) => {
     return;
   }
   await print_event_name('佳偶', kitaru);
-  era.drawLine({ content: me.actual_name + ' 的家' });
   await era.printAndWait([
     me.get_colored_name(),
-    '听别人说过耳朵大的',
+    ' 听别人说过耳朵大的',
     kitaru.get_uma_sex_title(),
     '性欲强。',
   ]);
   await era.printAndWait([
     me.get_colored_name(),
-    '也听说跑长距离的',
+    ' 也听说跑长距离的',
     kitaru.get_uma_sex_title(),
     '性欲强',
   ]);
@@ -596,9 +595,9 @@ handlers[89] = async (kitaru, me, callname) => {
   await kitaru.say_and_wait('感觉……怎么样？');
   await era.printAndWait([
     kitaru.get_colored_name(),
-    ' 赤着双足踏在地板上，属于',
+    ' 赤着双足踏在地板上，属于 ',
     me.get_colored_name(),
-    '的衬衫正被她穿在身上。',
+    ' 的衬衫正被她穿在身上。',
   ]);
   await era.printAndWait([
     '伴着洗浴后的热气，她在 ',
@@ -704,13 +703,13 @@ handlers[99] = async (kitaru, me, callname) => {
   await era.printAndWait([
     '今天，',
     kitaru.get_colored_name(),
-    ' 一反常态的，主动向',
+    ' 一反常态的，主动向 ',
     me.get_colored_name(),
-    '提出了求欢的邀请。',
+    ' 提出了求欢的邀请。',
   ]);
   await era.printAndWait([
     me.get_colored_name(),
-    '只是插入，担当',
+    ' 只是插入，担当',
     kitaru.get_uma_sex_title(),
     '敏感的身躯便几乎要抵达高潮，失焦的双眼不知道在想着些什么。',
   ]);
@@ -805,7 +804,6 @@ handlers[99] = async (kitaru, me, callname) => {
     false,
   );
   end_ero_and_train();
-  await add_juel_out_of_train(56, ['顺从', '羞耻'], [100, 50]);
   era.drawLine({ content: '一段时间后' });
   await kitaru.say_and_wait('好激烈啊……');
   await era.printAndWait([
@@ -825,6 +823,9 @@ handlers[99] = async (kitaru, me, callname) => {
     me.get_colored_actual_name(),
     ' 可是我的命定之人啊！',
   ]);
+  era.println();
+  await add_juel_out_of_train(56, ['顺从', '羞耻'], [100, 50]);
+  await sys_love_uma_in_event(56);
 };
 
 /**
@@ -833,10 +834,12 @@ handlers[99] = async (kitaru, me, callname) => {
  * @author ALEX
  */
 module.exports = async (hook, _, event_object) => {
-  return await handlers[era.get('love:56')](
-    get_chara_talk(56),
-    get_chara_talk(0),
-    sys_get_callname(56, 0),
-    event_object,
-  );
+  if (handlers[event_object.arg]) {
+    return await handlers[event_object.arg](
+      get_chara_talk(56),
+      get_chara_talk(0),
+      sys_get_callname(56, 0),
+      event_object,
+    );
+  }
 };

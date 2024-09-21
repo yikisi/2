@@ -60,6 +60,38 @@ module.exports = class extends CustomizedCheck {
       case race_enum.arim_kin:
         era.set('flag:强制BE', 56 * (edu_weeks > 96 && extra_flag.rank !== 1));
     }
+    if (extra_flag.rank === 1) {
+      switch (extra_flag.race) {
+        case race_enum.begin_race:
+          edu_marks.begin_race_end = 1;
+          break;
+        case race_enum.aoba_sho:
+          edu_marks.begin_race_end = 2;
+          break;
+        case race_enum.toky_yus:
+          edu_marks.begin_race_end = 3;
+          break;
+        case race_enum.kobe_hai:
+          edu_marks.begin_race_end = 4;
+          break;
+        case race_enum.kiku_sho:
+          edu_marks.begin_race_end = 5;
+          break;
+        case race_enum.kink_sho:
+          edu_marks.begin_race_end = 6;
+          break;
+        case race_enum.takz_kin:
+          if (edu_weeks > 96) {
+            edu_marks.begin_race_end = 8;
+          }
+          break;
+        case race_enum.arim_kin:
+          if (edu_weeks > 96) {
+            edu_marks.begin_race_end = 10;
+          }
+          break;
+      }
+    }
   }
 
   check_and_get_titles(aim_check) {
@@ -115,12 +147,6 @@ module.exports = class extends CustomizedCheck {
       );
     }
     if (edu_weeks < 3 * 48) {
-      if (era.get('status:56:运势依赖')) {
-        add_event(
-          event_hooks.week_start,
-          event_obj.copy().set_arg('fortune_week'),
-        );
-      }
       if (love >= 25) {
         check_and_add_event(
           edu_marks,
@@ -210,7 +236,7 @@ module.exports = class extends CustomizedCheck {
           break;
         // 金鯱赏前后剧情
         case 95 + 11: // 不稳定星等
-        case 95 + 12: //落入鲸鱼之腹
+        case 95 + 12: // 落入鲸鱼之腹
         case 95 + 14: // 背负众人愿望的少女
           add_event(event_hooks.week_start, event_obj_special);
           break;
@@ -228,9 +254,15 @@ module.exports = class extends CustomizedCheck {
           }
           break;
         case 95 + 48: // 摘下胜利之星 or 名叫待兼福来的星星
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.celebration, event_obj_special);
       }
       check_and_register_aim_race(56, aim_races, edu_weeks);
+      if (era.get('status:56:运势依赖')) {
+        add_event(
+          event_hooks.week_start,
+          event_obj.copy().set_arg('fortune_week'),
+        );
+      }
     } else if (edu_weeks === 143 + 1) {
       // Farewell Matikane……
       add_event(event_hooks.week_start, event_obj_special);
@@ -247,7 +279,7 @@ module.exports = class extends CustomizedCheck {
 
   check_palace_and_get_aims() {
     const edu_marks = new KitaruEduMarks(),
-      races = new RaceHistory(56).get();
+      races = new RaceHistory(this.id).get();
     if (
       check_aim_race(races, race_enum.takz_kin, 2, 1) &&
       check_aim_race(races, race_enum.arim_kin, 2, 1) &&

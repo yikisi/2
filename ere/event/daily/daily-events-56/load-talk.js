@@ -7,7 +7,6 @@ const get_gradient_color = require('#/utils/gradient-color');
 
 module.exports = async () => {
   const kitaru = get_chara_talk(56),
-    me = get_chara_talk(0),
     love = era.get('love:56'),
     callname = sys_get_callname(56, 0);
   if (era.get('cflag:56:妊娠回合计时') > 0) {
@@ -28,11 +27,12 @@ module.exports = async () => {
           fontWeight: 'bold',
         },
       ],
-      { fontSize: '24px' },
+      { fontSize: '1.5rem' },
     );
     await kitaru.say_and_wait([
       '献祭需要孩子的血，这样就能追踪到 ',
-      me.get_colored_actual_name(),
+      sys_get_callname(56, 0),
+      '！',
     ]);
     await kitaru.print_and_wait([
       '摸着自己微微隆起的肚子，披头散发的 ',
@@ -55,7 +55,7 @@ module.exports = async () => {
           fontWeight: 'bold',
         },
       ],
-      { fontSize: '24px' },
+      { fontSize: '1.5rem' },
     );
   }
 };

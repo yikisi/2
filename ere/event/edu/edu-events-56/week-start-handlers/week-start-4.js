@@ -105,8 +105,8 @@ module.exports = (handlers) => {
         await era.printAndWait([
           '出目：',
           result,
-          '/？？',
-          { isBr: true },
+          '/??',
+          { isDivider: true },
           me.get_colored_name(),
           ' 的聆听检定: 失败',
         ]);
@@ -520,27 +520,36 @@ module.exports = (handlers) => {
       kitaru.get_colored_name(),
       ' 被汗浸润的橘发贴在额头上，马耳像是受惊了般竖起来。',
     ]);
-    await era.printAndWait('必须要叫停了，然而下一个问题已近被抛了出来。');
-    await era.printAndWait(['女主持人:「那么，我想问一下……」']);
-    await era.printAndWait([
-      '女主持人:「',
+    await era.printAndWait('必须要叫停了，然而下一个问题已经被抛了出来。');
+    await say_by_passer_by_and_wait('女主持人', '那么，我想问一下……');
+    await say_by_passer_by_and_wait('女主持人', [
       kitaru.get_colored_name(),
-      ' 选手目前是为了什么在奔跑呢？」',
+      ' 选手目前是为了什么在奔跑呢？',
     ]);
     await kitaru.say_and_wait('为什么', true);
     await kitaru.say_and_wait('胜利吗？', true);
     await kitaru.say_and_wait('奖金吗？', true);
     await kitaru.say_and_wait('还是别的什么？', true);
-    await kitaru.say_and_wait('姐姐？');
-    await era.printAndWait(['女主持人:「嗯？抱歉，能再说一遍吗？」']);
+    await kitaru.say_and_wait([kitaru.get_bigger_sibling_sex_title(), '？']);
+    await say_by_passer_by_and_wait('女主持人', '嗯？抱歉，能再说一遍吗？');
     await kitaru.say_and_wait('但是……', true);
     await kitaru.say_and_wait('但是我已经跑出来了啊！！！！！');
-    await era.printAndWait('不不不不不！！！！！', {
-      align: 'center',
-      color: get_gradient_color(kitaru.color, '#ff0000', 0.5),
-      fontSize: '24px',
-      fontWeight: 'bold',
-    });
+    await era.printAndWait(
+      [
+        kitaru.get_colored_name(),
+        '「',
+        {
+          color: get_gradient_color(kitaru.color, '#ff0000', 0.5),
+          content: '不不不不不！！！！！',
+        },
+        '」',
+      ],
+      {
+        align: 'center',
+        fontSize: '1.5rem',
+        fontWeight: 'bold',
+      },
+    );
     await kitaru.say_and_wait('唔！');
     await era.printAndWait([
       '在昏迷的 ',
@@ -613,16 +622,16 @@ module.exports = (handlers) => {
     ]);
 
     //理论上来说，这里应该有差分
-    await bright.say_as_unknown([
+    await bright.say_and_wait([
       sys_get_colored_callname(16, 56),
       ' 吗？……没见到呢。',
     ]);
-    await tannhauser.say_as_unknown([
+    await tannhauser.say_and_wait([
       '诶！今天',
       kitaru.sex,
       '早上出宿舍就没见过了。',
     ]);
-    await suzuka.say_as_unknown([
+    await suzuka.say_and_wait([
       '抱歉……',
       sys_get_callname(2, 0),
       '，我也没见到。',
@@ -644,7 +653,9 @@ module.exports = (handlers) => {
       kitaru.get_uma_sex_title(),
       '正对着那方代表着',
       kitaru.sex,
-      '已逝姐姐的墓碑发着呆。',
+      '已逝',
+      kitaru.get_bigger_sibling_sex_title(),
+      '的墓碑发着呆。',
     ]);
     era.printButton('「待兼福来？」', 1);
     await era.input();
@@ -685,13 +696,17 @@ module.exports = (handlers) => {
     await kitaru.say_and_wait([
       '就这样，大吉之日的我碰到了 ',
       callname,
-      '，强撑着一直往答应姐姐的菊花赏走了下去。',
+      '，强撑着一直往答应',
+      kitaru.get_bigger_sibling_sex_title(),
+      '的菊花赏走了下去。',
     ]);
     await kitaru.say_and_wait(
       '本来以为夺下菊花赏之后，只要有着命定之人和开运物品的陪伴，我就会幸福的吧？',
     );
     await kitaru.say_and_wait([
-      '结果在金鯱赏之后，发现自己还是以前那个缩在姐姐影子里的小',
+      '结果在金鯱赏之后，发现自己还是以前那个缩在',
+      kitaru.get_bigger_sibling_sex_title(),
+      '影子里的小',
       kitaru.get_uma_sex_title(),
       '。',
     ]);
@@ -787,13 +802,16 @@ module.exports = (handlers) => {
     ]);
     await kitaru.say_and_wait(['唔啊！', callname, '。真的没有问题吗？']);
     await kitaru.say_and_wait('那个，我记得那些报纸上都说我……');
-    await me.say_and_wait([
+    await say_by_passer_by_and_wait('报纸', [
       '……',
       kitaru.get_colored_name(),
       ' 的表现实在让人看不下去……',
     ]);
-    await me.say_and_wait(['……缺乏运动员的骄傲与回应粉丝的精神……']);
-    await me.say_and_wait(['……并不热爱比赛……']);
+    await say_by_passer_by_and_wait(
+      '报纸',
+      '……缺乏运动员的骄傲与回应粉丝的精神……',
+    );
+    await say_by_passer_by_and_wait('报纸', '……并不热爱比赛……');
     await kitaru.say_and_wait('啊！没必要说出来吧！');
     await kitaru.say_and_wait('不过……算了，毕竟我就是那样没错。');
     await kitaru.say_and_wait('真的，很刺耳……刺耳到感觉耳朵快掉下来了。');
@@ -881,26 +899,31 @@ module.exports = (handlers) => {
     await era.input();
     await era.printAndWait('台下响起了一阵掌声。');
     await kitaru.say_and_wait('鼓掌？为什么呢？');
-    await era.printAndWait([
-      '粉丝A:「加油啊！',
+    await say_by_passer_by_and_wait('粉丝A', [
+      '加油啊！',
       kitaru.get_colored_name(),
-      '！」',
+      '！',
     ]);
-    await era.printAndWait('粉丝B:「我会去帮你投票的！一定要出赛啊！」');
+    await say_by_passer_by_and_wait(
+      '粉丝B',
+      '我会去帮你投票的！一定要出赛啊！',
+    );
     await kitaru.say_and_wait('大家是怎么了？明明那次的采访那么糟糕……');
-    await era.printAndWait([
-      '粉丝A「啊！实在是太惨了呢，不过这就是 ',
+    await say_by_passer_by_and_wait('粉丝A', [
+      '啊！实在是太惨了呢，不过这就是 ',
       kitaru.get_colored_name(),
-      ' 呀。」',
+      ' 呀。',
     ]);
-    await era.printAndWait(
-      '粉丝B「人偶尔也是会迷惘的嘛，该说会有种亲切感吗？」',
+    await say_by_passer_by_and_wait(
+      '粉丝B',
+      '人偶尔也是会迷惘的嘛，该说会有种亲切感吗？',
     );
     await kitaru.say_and_wait('亲切感……所以大家还没有放弃我吗？');
-    await era.printAndWait(
-      '粉丝C:「才不会放弃你呢！在菊花赏上的表现那么拼命，真是令人难忘！」',
+    await say_by_passer_by_and_wait(
+      '粉丝C',
+      '才不会放弃你呢！在菊花赏上的表现那么拼命，真是令人难忘！',
     );
-    await era.printAndWait('粉丝D「是啊！宝冢纪念一定要加油啊！」');
+    await say_by_passer_by_and_wait('粉丝D', '是啊！宝冢纪念一定要加油啊！');
     await kitaru.say_and_wait('是的……是的……！');
     await kitaru.say_and_wait('我会再挑战一次看看的！');
     await era.printAndWait([

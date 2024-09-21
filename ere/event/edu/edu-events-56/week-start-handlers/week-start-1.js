@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const set_luck_result = require('#/event/edu/edu-events-56/snippets/set-luck-result');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -34,56 +35,18 @@ module.exports = (handlers) => {
       ' 尝试用 ',
       { color: kitaru.color, content: get_random_entry(luck_ways) },
       ' 进行了占卜，结果是 ',
-      { color: motivation_colors[luck + 1], content: luck_result[luck] },
+      {
+        color: motivation_colors[luck === 3 ? 1 : luck + 2],
+        content: luck_result[luck],
+      },
       '！',
     ]);
 
-    if (luck === 2) {
-      era.set('status:56:大吉', 1);
-      era.set('status:56:中吉', 0);
-      era.set('status:56:小吉', 0);
-      era.set('status:56:凶', 0);
-      if (era.get('status:56:PTSD') !== 1) {
-        era.set('cflag:56:干劲', 2);
-      }
-    }
-    if (luck === 1) {
-      era.set('status:56:中吉', 1);
-      era.set('status:56:大吉', 0);
-      era.set('status:56:小吉', 0);
-      era.set('status:56:凶', 0);
-      if (era.get('status:56:PTSD') !== 1) {
-        era.set('cflag:56:干劲', 1);
-      }
-    }
-    if (luck === 0) {
-      era.set('status:56:小吉', 1);
-      era.set('status:56:大吉', 0);
-      era.set('status:56:中吉', 0);
-      era.set('status:56:凶', 0);
-      if (era.get('status:56:PTSD') !== 1) {
-        era.set('cflag:56:干劲', 0);
-      }
-    }
-    if (luck === 3) {
-      era.set('status:56:凶', 1);
-      era.set('status:56:大吉', 0);
-      era.set('status:56:小吉', 0);
-      era.set('status:56:中吉', 0);
-      // random 0 1
-      switch (get_random_value(0, 1)) {
-        case 0:
-          era.set('cflag:56:干劲', -1);
-          break;
-        case 1:
-          era.set('cflag:56:干劲', -2);
-      }
-    }
+    set_luck_result(luck);
   };
 
   handlers.beginning = async (kitaru, me, callname, flags) => {
     await print_event_name(['窥视命运的', kitaru.get_teen_sex_title()], kitaru);
-    era.drawLine({ content: '特雷森学院 田径场' });
     await kitaru.say_and_wait([callname, '！我做完了哦！']);
     await era.printAndWait([
       '不远处，刚做完一组训练的 ',
@@ -344,7 +307,11 @@ module.exports = (handlers) => {
     era.printButton('不对，年纪对不上', 1);
     await era.input();
     await era.printAndWait([
-      '看起来是一对姐妹，年长的姐姐正握着年幼妹妹的手。',
+      '看起来是一对',
+      kitaru.get_siblings_sex_title(),
+      '，年长的',
+      kitaru.get_bigger_sibling_sex_title(),
+      '正握着年幼妹妹的手。',
     ]);
     await era.printAndWait([
       '年纪稍小的那位 ',
@@ -355,14 +322,16 @@ module.exports = (handlers) => {
       kitaru.sex,
       '身边的那一位是……？',
     ]);
-    era.printButton('（姐姐吗？）', 1);
+    era.printButton(`（${kitaru.get_bigger_sibling_sex_title()}吗？）`, 1);
     await era.input();
     await era.printAndWait([
       '不过之前从来没有听 ',
       kitaru.get_colored_name(),
       ' 说过',
       kitaru.sex,
-      '还有一个姐姐。',
+      '还有一个',
+      kitaru.get_bigger_sibling_sex_title(),
+      '。',
     ]);
     await kitaru.say_and_wait(['欸！', callname, ' 站在那里做什么呢？']);
     await era.printAndWait([
@@ -491,14 +460,16 @@ module.exports = (handlers) => {
       ' 的眼神变得有些游离不定，晃了几下脑袋。',
     ]);
     await kitaru.say_and_wait([
-      '想到了我的姐姐啦！以前和',
+      '想到了我的',
+      kitaru.get_bigger_sibling_sex_title(),
+      '啦！以前和',
       kitaru.sex,
       '一起并走的时候，',
       kitaru.sex,
       '总是像电视里那些逃马一样把我甩开了好大好大的一段距离呢！',
     ]);
     era.printButton(
-      `「听起来你的姐姐是位很优秀的赛${kitaru.get_uma_sex_title()}吧？」`,
+      `「听起来你的',kitaru.get_bigger_sibling_sex_title(),'是位很优秀的赛${kitaru.get_uma_sex_title()}吧？」`,
       1,
     );
     await era.input();
@@ -690,9 +661,9 @@ module.exports = (handlers) => {
     do {
       era.printMultiColumns(
         [
-          { c: '看起来平平无奇的瓶盖', e: !a },
-          { c: '损坏颇为严重的人偶', e: !b },
-          { c: '写有【大愿成就】的御守', e: !c },
+          { c: '看起来平平无奇的瓶盖', e: a },
+          { c: '损坏颇为严重的人偶', e: b },
+          { c: '写有【大愿成就】的御守', e: c },
         ].map((e, i) => ({
           accelerator: i + 1,
           config: { disabled: !e.e },
@@ -739,7 +710,6 @@ module.exports = (handlers) => {
 
   handlers[38] = async (kitaru, me, callname, flags) => {
     await print_event_name('收容！开运物品', kitaru);
-    era.drawLine({ content: me.name + ' 的家' });
     await kitaru.say_and_wait([callname, ' 真是太好了！']);
     await era.printAndWait([
       '在一番思量之下，',

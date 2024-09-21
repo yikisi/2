@@ -8,6 +8,7 @@ const {
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const typing = require('#/event/edu/edu-events-56/snippets/typing');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -15,6 +16,8 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
+const RaceHistory = require('#/data/race/model/race-history');
+const { race_enum } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FukukitaruEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
@@ -80,27 +83,39 @@ module.exports = (handlers) => {
       callname,
       ' 一直不是很好奇白兴大人的事情吗……？',
     ]);
-    await kitaru.say_and_wait('其实，那个是姐姐告诉我的神明！');
+    await kitaru.say_and_wait([
+      '其实，那个是',
+      kitaru.get_bigger_sibling_sex_title(),
+      '告诉我的神明！',
+    ]);
     await era.printAndWait(
       '用双手捂着脑袋，将那本就乱糟糟的橙发弄的更加混乱，就像是强迫着自己回忆一样。',
     );
-    await kitaru.say_and_wait(
-      '记得小时候，我经常被拿去和事事都能做好的姐姐相比较。',
-    );
+    await kitaru.say_and_wait([
+      '记得小时候，我经常被拿去和事事都能做好的',
+      kitaru.get_bigger_sibling_sex_title(),
+      '相比较。',
+    ]);
     await kitaru.say_and_wait('那时我跑的很慢，甚至连闸门都不敢出。');
     await kitaru.say_and_wait([
-      '但姐姐和我不同，',
+      '但',
+      kitaru.get_bigger_sibling_sex_title(),
+      '和我不同，',
       kitaru.sex,
       '是位很优秀的逃马呢！连特雷森都对',
       kitaru.sex,
       '发出过邀请哦！',
     ]);
-    await kitaru.say_and_wait(
-      '为了安慰我，姐姐会给我做每次都是大吉的占卜，还有就是各种开运物品！',
-    );
-    await kitaru.say_and_wait(
-      '还有白兴大人的加持！姐姐告诉我，只要有白兴大人的加持，就能变得幸运！',
-    );
+    await kitaru.say_and_wait([
+      '为了安慰我，',
+      kitaru.get_bigger_sibling_sex_title(),
+      '会给我做每次都是大吉的占卜，还有就是各种开运物品！',
+    ]);
+    await kitaru.say_and_wait([
+      '还有白兴大人的加持！',
+      kitaru.get_bigger_sibling_sex_title(),
+      '告诉我，只要有白兴大人的加持，就能变得幸运！',
+    ]);
     await kitaru.say_and_wait('所以，我一直都在相信着白兴大人！');
     await kitaru.say_and_wait('直到……');
     await kitaru.say_and_wait(['直到后面', kitaru.sex, '去世了。']);
@@ -132,7 +147,10 @@ module.exports = (handlers) => {
       ' 狠狠地甩了几下头，而后再次尝试露出往日的笑容。',
     ]);
     await kitaru.say_and_wait('不能哭……不能哭……');
-    await kitaru.say_and_wait('姐姐最喜欢看见我的笑容了……');
+    await kitaru.say_and_wait([
+      kitaru.get_bigger_sibling_sex_title(),
+      '最喜欢看见我的笑容了……',
+    ]);
     await era.printAndWait([
       me.get_colored_name(),
       ' 听见 ',
@@ -406,7 +424,9 @@ module.exports = (handlers) => {
       me.get_colored_name(),
       ' 再也没有和 ',
       kitaru.get_colored_name(),
-      ' 聊过有关于姐姐，甚至尽力避免涉及家庭的相关话题。',
+      ' 聊过有关于',
+      kitaru.get_bigger_sibling_sex_title(),
+      '，甚至尽力避免涉及家庭的相关话题。',
     ]);
     await era.printAndWait([
       '不过，对于赛',
@@ -417,7 +437,7 @@ module.exports = (handlers) => {
       kitaru.sex,
       '立下约定的会是……？',
     ]);
-    era.printButton('「和姐姐吗？」', 1);
+    era.printButton(`「和${kitaru.get_bigger_sibling_sex_title()}吗？」`, 1);
     era.printButton('「和白兴大人吗？」', 2);
     await era.input();
     await kitaru.say_and_wait('也许吧……唔。');
@@ -438,9 +458,11 @@ module.exports = (handlers) => {
       kitaru.get_uma_sex_title(),
       '通过献祭变成神明什么的？',
     ]);
-    await era.printAndWait(
-      '本来在提到姐姐后略有不快的面容，突然变得的明快起来。',
-    );
+    await era.printAndWait([
+      '本来在提到',
+      kitaru.get_bigger_sibling_sex_title(),
+      '后略有不快的面容，突然变得的明快起来。',
+    ]);
     await era.printAndWait([
       '话题的突然转向令 ',
       me.get_colored_name(),
@@ -471,7 +493,6 @@ module.exports = (handlers) => {
   handlers[47 + 18] = async (kitaru, me, callname, flags) => {
     const suzuka = get_chara_talk(2);
     await print_event_name('门槛前', kitaru);
-    era.drawLine({ content: '特雷森学院 ' + me.name + ' 的办公室' });
     await era.printAndWait([
       '休息日，',
       me.get_colored_name(),
@@ -542,7 +563,9 @@ module.exports = (handlers) => {
       kitaru.get_teen_sex_title(),
       '的活泼，只有提到与',
       kitaru.sex,
-      '姐姐相关的事物时才会流露出悲伤正是因为如此。',
+      '',
+      kitaru.get_bigger_sibling_sex_title(),
+      '相关的事物时才会流露出悲伤正是因为如此。',
     ]);
     await era.printAndWait([
       '继续据此推测，当时赛场上的情景，配合着赛跑本就紧张的高压，一定触发了 ',
@@ -560,7 +583,9 @@ module.exports = (handlers) => {
       kitaru.get_uma_sex_title(),
       '的事故话，当地的报纸应该会有相关报道。而 ',
       kitaru.get_colored_name(),
-      ' 曾经也透露过姐姐受到特雷森邀请的事实。',
+      ' 曾经也透露过',
+      kitaru.get_bigger_sibling_sex_title(),
+      '受到特雷森邀请的事实。',
     ]);
     await era.printAndWait(['调查开始，', me.get_colored_name(), ' 决定从……']);
     era.printButton('翻阅旧报纸', 1);
@@ -584,7 +609,9 @@ module.exports = (handlers) => {
         kitaru.get_colored_name(),
         ' 也在场，',
         kitaru.sex,
-        '亲眼看着自己的姐姐用逃马在终盘时的冲刺速度撞在了护栏上。',
+        '亲眼看着自己的',
+        kitaru.get_bigger_sibling_sex_title(),
+        '用逃马在终盘时的冲刺速度撞在了护栏上。',
       ]);
       await era.printAndWait([
         '尽管大脑的保护机制将真实的记忆埋于其下，但在全神贯注的青叶赏赛场上，终盘前的逃马冲刺时那似曾相识的画面，还是引发了 ',
@@ -617,7 +644,9 @@ module.exports = (handlers) => {
         kitaru.get_colored_name(),
         ' 也在场，',
         kitaru.sex,
-        '亲眼看着自己的姐姐用逃马在终盘时的冲刺速度撞在了护栏上。',
+        '亲眼看着自己的',
+        kitaru.get_bigger_sibling_sex_title(),
+        '用逃马在终盘时的冲刺速度撞在了护栏上。',
       ]);
       await era.printAndWait([
         '尽管大脑的保护机制将真实的记忆埋于其下，但在全神贯注的青叶赏赛场上，终盘前的逃马冲刺时那似曾相识的画面，还是引发了 ',
@@ -719,13 +748,17 @@ module.exports = (handlers) => {
     }
     await kitaru.say_and_wait([
       callname,
-      ' 是姐姐之后，第二个愿意认可我的人……',
+      ' 是',
+      kitaru.get_bigger_sibling_sex_title(),
+      '之后，第二个愿意认可我的人……',
     ]);
     await kitaru.say_and_wait('但我这么没用……');
     await kitaru.say_and_wait('我，我真的很害怕……');
     await kitaru.say_and_wait([
       callname,
-      ' 也会像是姐姐一样，抛下我一个人吗？',
+      ' 也会像是',
+      kitaru.get_bigger_sibling_sex_title(),
+      '一样，抛下我一个人吗？',
     ]);
     await era.printAndWait([
       kitaru.get_colored_name(),
@@ -741,7 +774,9 @@ module.exports = (handlers) => {
     await era.printAndWait([me.get_colored_name(), ' 伸出了手']);
     await kitaru.say_and_wait('嗯，拉钩仪式！');
     await kitaru.say_and_wait([
-      '是姐姐教给我的哦，当时和',
+      '是',
+      kitaru.get_bigger_sibling_sex_title(),
+      '教给我的哦，当时和',
       kitaru.sex,
       '约定好了……',
     ]);
@@ -752,7 +787,9 @@ module.exports = (handlers) => {
       '的约定呢。',
     ]);
     await era.printAndWait([
-      '和姐姐的约定，难怪 ',
+      '和',
+      kitaru.get_bigger_sibling_sex_title(),
+      '的约定，难怪 ',
       kitaru.get_colored_name(),
       ' 会对菊花赏如此看重。',
     ]);
@@ -766,10 +803,13 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '对于 ',
       kitaru.get_colored_name(),
-      ' 而言，早夭的姐姐，因丧女后而变得有些严厉的母亲，神社充斥着的神秘主义氛围。',
+      ' 而言，早夭的',
+      kitaru.get_bigger_sibling_sex_title(),
+      '，因丧女后而变得有些严厉的母亲，神社充斥着的神秘主义氛围。',
     ]);
     await era.printAndWait([
-      '姐姐日常用来安慰',
+      kitaru.get_bigger_sibling_sex_title(),
+      '日常用来安慰',
       kitaru.sex,
       '的白兴大人，毫无疑问成了',
       kitaru.sex,
@@ -844,7 +884,6 @@ module.exports = (handlers) => {
 
   handlers[47 + 21] = async (kitaru, me, callname, flags) => {
     await print_event_name('开运投射', kitaru);
-    era.drawLine({ content: '特雷森学院 训练场' });
     await era.printAndWait([
       '训练的休息时间，',
       me.get_colored_name(),
@@ -860,16 +899,22 @@ module.exports = (handlers) => {
     await era.input();
     await kitaru.say_and_wait('嗯……');
     await kitaru.say_and_wait('占卜不出结果呢……');
-    await kitaru.say_and_wait('不过这是和我姐姐的约定！我一定会实现的！');
+    await kitaru.say_and_wait(
+      '不过这是和我',
+      kitaru.get_bigger_sibling_sex_title(),
+      '的约定！我一定会实现的！',
+    );
     await kitaru.say_and_wait(['我用拉勾仪式向', kitaru.sex, '保证过的！']);
-    await era.printAndWait([
-      kitaru.get_colored_name(),
-      ' 在日本德比终盘的冲刺令 ',
-      me.get_colored_name(),
-      ' 难忘，似乎',
-      kitaru.sex,
-      '完全走出了自己内心的困境。',
-    ]);
+    if (check_aim_race(new RaceHistory(56).get(), race_enum.toky_yus, 1, 20)) {
+      await era.printAndWait([
+        kitaru.get_colored_name(),
+        ' 在日本德比终盘的冲刺令 ',
+        me.get_colored_name(),
+        ' 难忘，似乎',
+        kitaru.sex,
+        '完全走出了自己内心的困境。',
+      ]);
+    }
     await era.printAndWait([
       '况且，这种终盘爆发力，倘若利用好的话，势必能成为',
       kitaru.sex,

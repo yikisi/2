@@ -31,7 +31,8 @@ module.exports = async (hook) => {
       //判断 所谓白兴大人
       message.push(async () => {
         await kitaru.say_and_wait([
-          '姐姐！我一定会成为一名优秀的赛',
+          kitaru.get_bigger_sibling_sex_title(),
+          '！我一定会成为一名优秀的赛',
           kitaru.get_uma_sex_title(),
           '的！',
         ]);

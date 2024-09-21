@@ -70,7 +70,7 @@ module.exports = async (hook) => {
     era.printButton('接受', 1);
     era.printButton('拒绝', 2);
     if ((await era.input()) === 1) {
-      hook.arg = 1;
+      hook.arg = true;
     } else if (check === 2) {
       await kitaru.say_and_wait('……真的，真的不可以吗，明明正是大吉的时候呢？');
       await era.printAndWait([
@@ -82,7 +82,7 @@ module.exports = async (hook) => {
         me.get_colored_name(),
         ' 离开了学生宿舍。',
       ]);
-      hook.arg = 2;
+      hook.arg = true;
     } else {
       await kitaru.say_and_wait('下次……还是先占卜一下？');
       await kitaru.say_and_wait('或者，我也学着强硬一点？');
@@ -95,6 +95,7 @@ module.exports = async (hook) => {
         kitaru.sex,
         '如此喃喃自语着。',
       ]);
+      hook.arg = false;
     }
     return;
   } else if (era.get('love:56') >= 75) {

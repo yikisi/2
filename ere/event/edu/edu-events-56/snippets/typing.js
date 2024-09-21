@@ -11,11 +11,11 @@ async function typing(content) {
       {
         align: 'center',
         color: get_chara_color(56),
-        fontSize: '36px',
+        fontSize: '2.25rem',
         fontWeight: 'bold',
       },
     );
-    i < content.length && (await era.delay(150));
+    await era.delay(150);
     print_flag = false;
   }
 }

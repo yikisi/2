@@ -104,7 +104,11 @@ handlers[race_enum.begin_race] = async (kitaru, me, callname, edu_weeks) => {
     kitaru.get_colored_name(),
     ' 突然顿住了，表情变得有些复杂。',
   ]);
-  await kitaru.say_and_wait('在我姐姐……总之……');
+  await kitaru.say_and_wait([
+    '在我',
+    kitaru.get_bigger_sibling_sex_title(),
+    '……总之……',
+  ]);
   await era.printAndWait([
     kitaru.get_colored_name(),
     ' 深吸了几口气，随后继续讲了下去。',
@@ -166,7 +170,13 @@ handlers[race_enum.aoba_sho] = async (kitaru, me, callname) => {
   await era.input();
   await kitaru.say_and_wait('啊哈哈……没事的！没事的！');
   await kitaru.say_and_wait('就连赛前的占卜不是也说我现在是大吉吗？');
-  await kitaru.say_and_wait(['白兴大人……', callname, '……还有姐姐……']);
+  await kitaru.say_and_wait([
+    '白兴大人……',
+    callname,
+    '……还有',
+    kitaru.get_bigger_sibling_sex_title(),
+    '……',
+  ]);
   await kitaru.say_and_wait('没事的！一定会没事的！');
   await era.printAndWait([
     '不应该……',
@@ -280,7 +290,7 @@ handlers[race_enum.toky_yus] = async (kitaru, me, callname) => {
       '过了好一会儿，心满意足的 ',
       kitaru.get_colored_name(),
       ' 才抬起头看着 ',
-      me.get_colored_name,
+      me.get_colored_name(),
       '。',
     ]);
   }
@@ -365,7 +375,9 @@ handlers[race_enum.kobe_hai] = async (kitaru, me, callname) => {
     '在我看来，做了约定的双方，就会互相把自己命运中的一部分和对方绑在一起。',
   );
   await kitaru.say_and_wait([
-    '所以啊，和姐姐做了约定的我，踏上了本该属于',
+    '所以啊，和',
+    kitaru.get_bigger_sibling_sex_title(),
+    '做了约定的我，踏上了本该属于',
     kitaru.sex,
     '的道路，为此当然要好好表现才行。',
   ]);
@@ -398,7 +410,9 @@ handlers[race_enum.kiku_sho] = async (kitaru, me, callname) => {
     me.get_colored_name(),
     ' 便能感受到',
     kitaru.sex,
-    '对于此的执念，和姐姐的约定，和 ',
+    '对于此的执念，和',
+    kitaru.get_bigger_sibling_sex_title(),
+    '的约定，和 ',
     me.get_colored_name(),
     ' 的约定，支撑着名为 ',
     kitaru.get_colored_name(),
@@ -437,7 +451,9 @@ handlers[race_enum.kiku_sho] = async (kitaru, me, callname) => {
   ]);
   await kitaru.say_and_wait('虽然……现在可能不是说这个的时候。');
   await kitaru.say_and_wait([
-    '即使在姐姐去世后，承诺替',
+    '即使在',
+    kitaru.get_bigger_sibling_sex_title(),
+    '去世后，承诺替',
     kitaru.sex,
     '实现在菊花赏上奔跑的愿望，对我来说也不过是奢望罢了。',
   ]);
@@ -544,7 +560,9 @@ handlers[race_enum.takz_kin] = async (kitaru, me, callname, edu_weeks) => {
   era.printButton('「已经没事了？」', 1);
   await era.input();
   await kitaru.say_and_wait(
-    '是的！之前我只是背着姐姐的愿望，靠着大大小小的开运道具前行。',
+    '是的！之前我只是背着',
+    kitaru.get_bigger_sibling_sex_title(),
+    '的愿望，靠着大大小小的开运道具前行。',
   );
   await kitaru.say_and_wait(
     '但现在的我，还背负着许多粉丝的愿望！比之前强太多了！',
@@ -637,7 +655,7 @@ handlers[race_enum.arim_kin] = async (kitaru, me, callname, edu_weeks) => {
     await era.printAndWait('在明知可能会被其他选手看见的场合交换起唾液来。');
     era.println();
     await say_by_passer_by_and_wait(
-      `路人${kitaru.get_uma_sex_title}`,
+      `路人${kitaru.get_uma_sex_title()}`,
       '真是肉麻……',
     );
     era.println();
@@ -667,7 +685,11 @@ handlers[race_enum.arim_kin] = async (kitaru, me, callname, edu_weeks) => {
   );
   await kitaru.print_and_wait('把自己投射在我身上，为我加油的粉丝们！');
   await kitaru.print_and_wait('同期的伙伴！');
-  await kitaru.print_and_wait('过世的姐姐！');
+  await kitaru.print_and_wait(
+    '过世的',
+    kitaru.get_bigger_sibling_sex_title(),
+    '！',
+  );
   await kitaru.print_and_wait(['还有一直拼命培育我的 ', callname, '！']);
   await kitaru.print_and_wait('我今天不会向神明祈祷。');
   await kitaru.print_and_wait('今天——');

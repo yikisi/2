@@ -136,6 +136,12 @@ class CharaTalk {
   /** UMA角色的称呼 */
   get_uma_sex_title = () => (this.sex_code - 1 ? '马娘' : '马郎');
 
+  get_bigger_sibling_sex_title = () => (this.sex_code - 1 ? '哥哥' : '姐姐');
+
+  get_smaller_sibling_sex_title = () => (this.sex_code - 1 ? '弟弟' : '妹妹');
+
+  get_siblings_sex_title = () => (this.sex_code - 1 ? '兄弟' : '姐妹');
+
   /**
    * 事件从该角色视角展开时的旁白
    *

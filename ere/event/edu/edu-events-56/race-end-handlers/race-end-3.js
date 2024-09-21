@@ -9,7 +9,6 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -30,57 +29,74 @@ module.exports = (handlers) => {
     if (extra_flag.rank === 1) {
       // 并且菊花赏胜利
       await print_event_name('被凭依者', kitaru);
-      await kitaru.say_and_wait(
-        ['轻松的取得了胜利，就像是和 ', callname, ' 约定的一样。'],
-        true,
-      );
-      await kitaru.say_and_wait('想向姐姐报告我现在的状态。', true);
+      await kitaru.print_and_wait([
+        '轻松地取得了胜利，就像是和 ',
+        callname,
+        ' 约定的一样。',
+      ]);
+      await kitaru.print_and_wait([
+        '想向',
+        kitaru.get_bigger_sibling_sex_title(),
+        '报告我现在的状态。',
+      ]);
       await kitaru.say_and_wait([
         '我已经是一位优秀的赛',
         kitaru.get_uma_sex_title(),
         '了哦！',
       ]);
-      await kitaru.say_and_wait(
-        ['在姐姐的墓前，我对着', kitaru.sex, '的墓碑这样说着。'],
-        true,
-      );
+      await kitaru.print_and_wait([
+        '在',
+        kitaru.get_bigger_sibling_sex_title(),
+        '的墓前，我对着',
+        kitaru.sex,
+        '的墓碑这样说着。',
+      ]);
       await kitaru.say_and_wait([callname, ' 有没有什么想说的？']);
-      await kitaru.say_and_wait(
-        ['我看见 ', callname, ' 双手合十，认真的侧脸只能看到微动的嘴唇。'],
-        true,
-      );
+      await kitaru.print_and_wait([
+        '我看见 ',
+        callname,
+        ' 双手合十，认真的侧脸只能看到微动的嘴唇。',
+      ]);
       await me.say_and_wait([
         sys_get_colored_callname(0, 56),
-        ' 的姐姐，谢谢你，一直以来照顾着',
+        ' 的',
+        kitaru.get_bigger_sibling_sex_title(),
+        '，谢谢你，一直以来照顾着',
         kitaru.sex,
         '！',
       ]);
-      await kitaru.say_and_wait('嗯，姐姐一定会为我高兴的吧！', true);
+      await kitaru.print_and_wait([
+        '嗯，',
+        kitaru.get_bigger_sibling_sex_title(),
+        '一定会为我高兴的吧！',
+      ]);
       era.drawLine({ content: '一段时间后 特雷森的宿舍内' });
       await kitaru.say_and_wait('……');
-      await kitaru.say_and_wait('是吗？', true);
-      await kitaru.say_and_wait(
+      await kitaru.print_and_wait('是吗？');
+      await kitaru.print_and_wait(
         '青叶赏，日本德比，神户新闻赏，菊花赏，金號赏……',
-        true,
       );
-      await kitaru.say_and_wait('驱使我跑到现在的到底是什么呢？', true);
-      await kitaru.say_and_wait('姐姐……');
-      await kitaru.say_and_wait(
+      await kitaru.print_and_wait('驱使我跑到现在的到底是什么呢？');
+      await kitaru.say_and_wait([kitaru.get_bigger_sibling_sex_title(), '……']);
+      await kitaru.print_and_wait(
         '只是偶然一瞥，窗户变成了镜子，映出了独自站着的我。',
-        true,
       );
-      await kitaru.say_and_wait('身高比以前高了，头发也变长了。', true);
-      await kitaru.say_and_wait(
-        ['比起第一次遇到 ', callname, ' 时，更加成熟的模样。'],
-        true,
-      );
-      await kitaru.say_and_wait('简直和照片中的姐姐别无二致。', true);
-      await kitaru.say_and_wait('那……我呢？', true);
+      await kitaru.print_and_wait('身高比以前高了，头发也变长了。');
+      await kitaru.print_and_wait([
+        '比起第一次遇到 ',
+        callname,
+        ' 时，更加成熟的模样。',
+      ]);
+      await kitaru.print_and_wait([
+        '简直和照片中的',
+        kitaru.get_bigger_sibling_sex_title(),
+        '别无二致。',
+      ]);
+      await kitaru.print_and_wait('那……我呢？');
       await kitaru.say_and_wait([callname, '……']);
       await kitaru.say_and_wait('被凭依的空壳……');
-      await kitaru.say_and_wait(
+      await kitaru.print_and_wait(
         '莫名的恶心感涌上心头，胃和肠子像是绞成了一团。',
-        true,
       );
       era.drawLine({ content: '次日 ' + me.name + ' 的办公室' });
       era.printButton('「空壳？」', 1);
@@ -89,7 +105,9 @@ module.exports = (handlers) => {
         me.get_colored_name(),
         ' 喃喃地念着 ',
         kitaru.get_colored_name(),
-        ' 告诉的这个结论，那个认为自己被姐姐的灵魂凭依上的',
+        ' 告诉的这个结论，那个认为自己被',
+        kitaru.get_bigger_sibling_sex_title(),
+        '的灵魂凭依上的',
         kitaru.get_teen_sex_title(),
         '，正不安的站在屋内的一角。',
       ]);
@@ -115,6 +133,7 @@ module.exports = (handlers) => {
         '  的PTSD再度复发了。',
       ]);
     } else {
+      await print_event_name('运气用尽', kitaru);
       await kitaru.say_and_wait('咦……我输了……？');
       await kitaru.say_and_wait('我的运气，居然没效……？');
       await kitaru.say_and_wait('这是骗人的吧！这不可能发生的！我的运气是……！');
@@ -168,7 +187,6 @@ module.exports = (handlers) => {
     era.set('status:56:大吉', 0);
     era.set('status:56:小吉', 0);
     era.set('status:56:中吉', 0);
-    edu_marks.begin_race_end = 6;
   };
 
   handlers[race_enum.takz_kin] = async (
@@ -235,7 +253,6 @@ module.exports = (handlers) => {
       era.printButton('拒绝', 2);
       if ((await era.input()) === 1) {
         begin_and_init_ero(0, 56);
-        era.set('flag:当前位置', location_enum.restroom);
         await era.printAndWait([
           '把得胜回来的 ',
           kitaru.get_colored_name(),
@@ -288,10 +305,6 @@ module.exports = (handlers) => {
         await era.printAndWait(
           'LIVE还未过半，新换上的舞台服就已经被汗水浸透，胸腹之间的衣料隐隐透出水痕，而短裙里颤抖双腿间流下的液滴，和沿着下巴滴落的汗水一起落在舞台上。',
         );
-        era.set('status:56:短效避孕药', 1);
-        era.add('exp:56:阴道高潮次数', 2);
-        era.add('exp:0:阴茎高潮次数', 2);
-        era.add('exp:0:射精量', 10);
         end_ero_and_train();
       } else {
         await era.printAndWait([
@@ -303,7 +316,6 @@ module.exports = (handlers) => {
         ]);
       }
     }
-    edu_marks.begin_race_end = 8;
   };
 
   handlers[race_enum.arim_kin] = async (
@@ -407,6 +419,5 @@ module.exports = (handlers) => {
       kitaru.get_colored_name(),
       ' 一起登上了许多家媒体的报纸。',
     ]);
-    edu_marks.begin_race_end = 10;
   };
 };

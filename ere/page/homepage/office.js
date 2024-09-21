@@ -699,7 +699,10 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       sys_change_attr_and_print(0, '精力', -celebration_cost);
       sys_change_attr_and_print(chara_id, '精力', -50);
       era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.celebration, {});
+      if (!(await sys_get_random_event(event_hooks.celebration)())) {
+        era.drawLine();
+        await sys_call_daily_event(chara_id, event_hooks.celebration, {});
+      }
       break;
     case 211:
       era.drawLine();

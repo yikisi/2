@@ -48,7 +48,9 @@ module.exports = async (_, __, event_object) => {
     await kitaru.say_and_wait('就是，有关神社供奉的主神是谁哦！');
     await era.printAndWait([
       me.get_colored_name(),
-      ' 记得的确问过福来这个问题。',
+      ' 记得的确问过 ',
+      kitaru.get_colored_name(),
+      ' 这个问题。',
     ]);
     await kitaru.say_and_wait('你看这里！说是三女神会有多个化身哦！');
     await kitaru.say_and_wait('白兴大人也在呢！');
@@ -70,12 +72,12 @@ module.exports = async (_, __, event_object) => {
     await kitaru.say_and_wait('也就是受到神明眷顾之类的意思啦！');
     await kitaru.say_and_wait([
       '赛',
-      kitaru.get_colored_name(),
+      kitaru.get_uma_sex_title(),
       '也在其中呢！',
     ]);
     await era.printAndWait([
       '头突然有点疼，眼前的橙色',
-      kitaru.get_colored_name(),
+      kitaru.get_uma_sex_title(),
       '隐约变得不真切了起来……',
     ]);
     await kitaru.say_and_wait('哦！对了！');
@@ -216,4 +218,5 @@ module.exports = async (_, __, event_object) => {
     }
   }
   wait_flag && (await era.waitAnyKey());
+  return true;
 };

@@ -9,7 +9,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 module.exports = async () => {
   const callname = sys_get_callname(56, 0),
-    kitaru = get_chara_talk(58),
+    kitaru = get_chara_talk(56),
     me = get_chara_talk(0);
 
   if (kitaru.sex_code === 1) {

@@ -110,7 +110,7 @@ module.exports = async () => {
     ' 的确变得强硬了很多，作为差马在红技能的使用上变得愈发熟练，或者说……狠毒？',
   ]);
   await era.printAndWait([
-    '在推开家里的门前， ',
+    '在推开家里的门前，',
     me.get_colored_name(),
     ' 想着这件事。',
   ]);
@@ -131,7 +131,7 @@ module.exports = async () => {
     kitaru.sex,
     '下一脚踢到 ',
     me.get_colored_name(),
-    ' 的肚子上前， ',
+    ' 的肚子上前，',
     me.get_colored_name(),
     ' 突然想起还没有约定今天的安全词是什么。',
   ]);

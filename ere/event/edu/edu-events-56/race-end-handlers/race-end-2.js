@@ -6,6 +6,7 @@ const {
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
 
+const check_aim_race = require('#/event/snippets/check-aim-race');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk-factory');
@@ -13,6 +14,7 @@ const get_gradient_color = require('#/utils/gradient-color');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
+const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,number,FukukitaruEduMarks,RaceEndParams):Promise>} handlers */
@@ -177,16 +179,26 @@ module.exports = (handlers) => {
       await era.printAndWait(
         '马耳向后背的几乎是要插入自己的脑袋中，原本明亮的双眼染上了浑浊。',
       );
-      await era.printAndWait('啊啊啊啊啊！！！！！', {
-        align: 'center',
-        color: get_gradient_color(kitaru.color, '#ff0000', 0.5),
-        fontSize: '24px',
-        fontWeight: 'bold',
-      });
+      await era.printAndWait(
+        [
+          kitaru.get_colored_name(),
+          '「',
+          {
+            color: get_gradient_color(kitaru.color, '#ff0000', 0.5),
+            content: '啊啊啊啊啊！！！！！',
+          },
+          '」',
+        ],
+        {
+          align: 'center',
+          fontSize: '1.5rem',
+          fontWeight: 'bold',
+        },
+      );
       await era.printAndWait('砰！', {
         align: 'center',
         color: 'red',
-        fontSize: '36px',
+        fontSize: '2.25rem',
         fontWeight: 'bold',
       });
       await era.printAndWait([
@@ -231,16 +243,9 @@ module.exports = (handlers) => {
     era.set('status:56:大吉', 0);
     era.set('status:56:小吉', 0);
     era.set('status:56:中吉', 0);
-    edu_marks.begin_race_end = 2;
   };
 
-  handlers[race_enum.toky_yus] = async (
-    kitaru,
-    me,
-    callname,
-    edu_weeks,
-    edu_marks,
-  ) => {
+  handlers[race_enum.toky_yus] = async (kitaru, me, callname) => {
     await print_event_name('曙光初现', kitaru);
     await kitaru.print_and_wait(
       '进入了终盘，大家开始冲刺了，位于前方的逃马也开始了加速！',
@@ -274,7 +279,7 @@ module.exports = (handlers) => {
     await kitaru.say_as_unknown_and_wait('阿福……');
     await kitaru.say_as_unknown_and_wait('让我们做个约定吧。');
     await kitaru.say_as_unknown_and_wait('将来要看到阿福在菊花赏上奔跑哦！');
-    await kitaru.say_and_wait('姐姐？');
+    await kitaru.say_and_wait([kitaru.get_bigger_sibling_sex_title(), '？']);
     await kitaru.say_and_wait('唔……约定。');
     await kitaru.say_and_wait(['对，约定……我答应过 ', callname, ' 的！']);
     await kitaru.say_and_wait('平安归来！');
@@ -303,20 +308,13 @@ module.exports = (handlers) => {
 
     era.set('status:56:PTSD', 0);
     await era.printAndWait([kitaru.get_colored_name(), '  的PTSD暂时失去了。']);
-    edu_marks.begin_race_end = 3;
 
     era.set('status:56:凶', 0);
     era.set('status:56:大吉', 1);
     era.set('cflag:56:干劲', 2);
   };
 
-  handlers[race_enum.kobe_hai] = async (
-    kitaru,
-    me,
-    callname,
-    edu_weeks,
-    edu_marks,
-  ) => {
+  handlers[race_enum.kobe_hai] = async (kitaru, me, callname) => {
     await print_event_name('绑定', kitaru);
     await say_by_passer_by_and_wait('解说', [
       kitaru.get_colored_name(),
@@ -330,10 +328,10 @@ module.exports = (handlers) => {
       kitaru.get_colored_name(),
       '！',
     ]);
-    await era.printAndWait(
+    await kitaru.print_and_wait(
       '没有恐惧，没有犹豫，而是将自己平日里的训练，积攒下来的努力，在终盘的时候全部都释放出来。',
     );
-    await era.printAndWait('非常好，不是吗？');
+    await kitaru.print_and_wait('非常好，不是吗？');
     era.drawLine({ content: '阪神赛马场 休息室内' });
     await kitaru.say_and_wait('呼！！！');
     era.printButton('「幸苦了！」', 1);
@@ -389,21 +387,15 @@ module.exports = (handlers) => {
       await kitaru.say_and_wait('怎么会！');
     }
     await kitaru.say_and_wait([
-      '属于姐姐的参拜道路，我会替',
+      '属于',
+      kitaru.get_bigger_sibling_sex_title(),
+      '的参拜道路，我会替',
       kitaru.sex,
       '走完的！',
     ]);
-
-    edu_marks.begin_race_end = 4;
   };
 
-  handlers[race_enum.kiku_sho] = async (
-    kitaru,
-    me,
-    callname,
-    edu_weeks,
-    edu_marks,
-  ) => {
+  handlers[race_enum.kiku_sho] = async (kitaru, me, callname) => {
     await print_event_name('命运的半途', kitaru);
     await era.printAndWait('马群进入了第四弯道，比赛也将进入终局。');
     await era.printAndWait([
@@ -425,7 +417,10 @@ module.exports = (handlers) => {
       kitaru.get_colored_name(),
       ' 而言，会是大凶吗？',
     ]);
-    await era.printAndWait(['解说:「第四弯道过后，接下来就是最后的直线……」']);
+    await say_by_passer_by_and_wait(
+      '解说',
+      '第四弯道过后，接下来就是最后的直线……',
+    );
     await era.printAndWait(['被堵住了吗？然而终点已近在咫尺。']);
     await era.printAndWait([
       '观察，调整，决定，与行动，现在这个循环唯有身处漩涡中心的 ',
@@ -438,7 +433,9 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '或许，',
       me.get_colored_name(),
-      ' 此刻的无力感，一如姐姐夭折那一天时的 ',
+      ' 此刻的无力感，一如',
+      kitaru.get_bigger_sibling_sex_title(),
+      '夭折那一天时的 ',
       kitaru.get_colored_name(),
       '。',
     ]);
@@ -458,14 +455,17 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '仿佛圣人开海一般，又或者说像阿拉伯的少年以咒语打开门扉一般，那道橙色的闪电劈开了马群。',
     ]);
-    await era.printAndWait([
-      '解说:「——是待兼！',
+    await say_by_passer_by_and_wait('解说', [
+      '——是待兼！',
       kitaru.get_colored_name(),
-      '！福气仍将继续到来吗？！！」',
+      '！福气仍将继续到来吗？！！',
     ]);
-    await era.printAndWait([
-      '解说:「冲线了！自神户之后！！！福气也来到了菊花的舞台！！！」',
-    ]);
+    await say_by_passer_by_and_wait(
+      '解说',
+      check_aim_race(new RaceHistory(56).get(), race_enum.kobe_hai, 1, 1)
+        ? '冲线了！自神户之后！！！福气也来到了菊花的舞台！！！'
+        : '冲线了！',
+    );
     era.drawLine({ content: '京都竞马场 菊花赏结束后' });
     await kitaru.say_and_wait([callname, '！！']);
     await kitaru.say_and_wait('我……我赢了！赢了哦……！');
@@ -540,6 +540,5 @@ module.exports = (handlers) => {
       '，实现了自己的执念，在追寻自己幸福的命运之路上踏出了一大步。',
     ]);
     await era.printAndWait(['但', kitaru.sex, '下一步，又该往何处去呢？']);
-    edu_marks.begin_race_end = 5;
   };
 };

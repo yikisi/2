@@ -245,6 +245,9 @@ function get_callname(_from, _to) {
   if (callname instanceof Array) {
     return get_random_entry(callname);
   }
+  if (callname === '-') {
+    return era.get(`static:${_to}:callname`);
+  }
   return callname;
 }
 

@@ -47,7 +47,7 @@ module.exports = async (hook, extra_flag) => {
       me.get_colored_name(),
       ' 正位于',
       kitaru.sex,
-      '肩胛和腿弯处的手，  ',
+      '肩胛和腿弯处的手，',
       kitaru.get_colored_name(),
       ' 的脸上显出了些许酡红。',
     ]);
@@ -312,11 +312,11 @@ module.exports = async (hook, extra_flag) => {
             kitaru.get_colored_name(),
             ' 脸上露出的失态的下流表情，难耐地发出唔唔的沉闷呻吟声。',
           ]);
-          await kitaru.say_and_wait('欸嘿嘿……粗暴的命定之人， 也好喜欢～！');
+          await kitaru.say_and_wait('欸嘿嘿……粗暴的命定之人，也好喜欢～！');
           await era.printAndWait([
             '捏住了 ',
             kitaru.get_colored_name(),
-            ' 想要发颤的脚腕，轻轻用力， 发泄般地使用起这对足穴飞机杯。',
+            ' 想要发颤的脚腕，轻轻用力，发泄般地使用起这对足穴飞机杯。',
           ]);
           await kitaru.say_and_wait(['哈～哈～……哈！']);
           await kitaru.say_and_wait(['去了❤️去了❤️咕……']);

@@ -4,6 +4,8 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const FukukitaruEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
+
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FukukitaruEduMarks,EventObject):Promise>} */
 const week_start_handlers = {};
 
@@ -29,6 +31,7 @@ module.exports = async (_, __, event_object) => {
       get_chara_talk(0),
       sys_get_callname(56, 0),
       flags,
+      new FukukitaruEduMarks(),
       event_object,
     );
     flags.wait_flag && (await era.waitAnyKey());

@@ -10,12 +10,12 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FukukitaruEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
   handlers[95 + 25] = async (kitaru, me, callname, flags) => {
     await print_event_name('无愿之愿', kitaru);
-    era.drawLine({ content: '待兼福来家的神社' });
     await era.printAndWait([
       kitaru.get_colored_name(),
       ' 如往常一样，站在神社的摇铃前',
@@ -251,7 +251,8 @@ module.exports = (handlers) => {
     await kitaru.say_as_unknown_and_wait('喂！');
     await kitaru.say_as_unknown_and_wait([
       me.get_colored_actual_name(),
-      '先生！',
+      me.get_adult_sex_title(),
+      '！',
     ]);
     await kitaru.say_as_unknown_and_wait('在这里！');
     await era.printAndWait([
@@ -261,11 +262,7 @@ module.exports = (handlers) => {
       me.get_colored_name(),
       ' 的身后。',
     ]);
-    await kitaru.say_and_wait([
-      '那么！为了防止 ',
-      me.get_colored_name(),
-      ' 再次掉队。',
-    ]);
+    await kitaru.say_and_wait('那么！为了防止你再次掉队。');
     await kitaru.say_and_wait('请握住我的手吧！');
     era.printButton('伸手', 1);
     era.printButton('当然是伸手了', 2);
@@ -292,12 +289,8 @@ module.exports = (handlers) => {
       era.printButton('走右边', 2);
       temp = await era.input();
       direction += temp === 2;
-    } while (temp === 1 || direction === 3);
+    } while (temp === 2 && direction < 3);
     if (direction < 3) {
-      await era.printAndWait([
-        '兜兜转转，总算是走出来了，远处宿舍楼的灯光依稀可见……',
-      ]);
-    } else {
       await era.printAndWait([
         '树木变得稀疏，视野所及之处总算是变得明亮了起来，直到 ',
         me.get_colored_name(),
@@ -318,14 +311,14 @@ module.exports = (handlers) => {
       await kitaru.say_and_wait([
         '那么，',
         me.get_colored_actual_name(),
-        '先生，有什么想要我占卜的吗？',
+        me.get_adult_sex_title(),
+        '，有什么想要我占卜的吗？',
       ]);
       era.printButton('「该回去了吧？」', 1);
       era.printButton('「能问个问题吗？」', 2, {
         disabled: era.get('love:56') < 75,
       }); // 好感度解锁
-      await era.input();
-      if (temp === 1) {
+      if ((await era.input()) === 1) {
         await kitaru.say_and_wait('这样吗？');
         await kitaru.say_and_wait('那就回去吧！');
         await era.printAndWait([
@@ -356,7 +349,9 @@ module.exports = (handlers) => {
       ]);
       era.printButton('「你是谁？」', 1);
       await era.input();
-      await kitaru.say_and_wait([
+      const kami = get_chara_talk(56);
+      kami.name = '待兼福来？';
+      await kami.say_and_wait([
         '……啊哈哈。不愧是那孩子的 ',
         callname,
         '/引路人。',
@@ -377,7 +372,7 @@ module.exports = (handlers) => {
         me.get_colored_name(),
         ' 的意识中一样。',
       ]);
-      await kitaru.say_and_wait([
+      await kami.say_and_wait([
         '抱歉借用了自家巫女/你担当的身体，不过，自从',
         kitaru.sex,
         '找到了命定之人，就想抽空来聊聊呢。',
@@ -386,19 +381,23 @@ module.exports = (handlers) => {
       era.printButton('（毕竟我是待兼福来的训练员）', 1);
       era.printButton(`（这种事情出现在${kitaru.sex}身上，也不算离奇吧？）`, 2); // 好感度解锁
       await era.input();
-      await kitaru.say_and_wait('啊啦！');
-      await kitaru.say_and_wait([
+      await kami.say_and_wait('啊啦！');
+      await kami.say_and_wait([
         '话虽如此，在',
         kitaru.sex,
-        '姐姐去世前，',
+        '',
+        kitaru.get_bigger_sibling_sex_title(),
+        '去世前，',
         kitaru.sex,
         '也并不热衷于占卜和咒术，以前啊，总是追着',
         kitaru.sex,
-        '姐姐的后背走，每次有什么事都叫',
+        '',
+        kitaru.get_bigger_sibling_sex_title(),
+        '的后背走，每次有什么事都叫',
         kitaru.sex,
         '。',
       ]);
-      await kitaru.say_and_wait('很麻烦吧？');
+      await kami.say_and_wait('很麻烦吧？');
       era.printButton('（点头）', 1);
       era.printButton('「的确，我也经常一有事就被那家伙叫来叫去」', 2);
       await era.input();
@@ -412,20 +411,20 @@ module.exports = (handlers) => {
         ' 做出了回答。',
       ]);
       if (sys_filter_chara('cflag', '招募状态', recruit_flags.yes).length > 2) {
-        await kitaru.say_and_wait([
+        await kami.say_and_wait([
           '帮助',
           kitaru.sex,
           '了却了菊花赏的约定，真的很厉害。',
         ]);
       } else {
-        await kitaru.say_and_wait('第一位担当就能拿下菊花赏，真的很厉害。');
+        await kami.say_and_wait('第一位担当就能拿下菊花赏，真的很厉害。');
       }
-      await kitaru.say_and_wait([
+      await kami.say_and_wait([
         '作为被',
         kitaru.sex,
         '信仰的神明大人，我倒觉得自己挺失败的，明明自己有个灵力如此出众的巫女。',
       ]);
-      await kitaru.say_and_wait([
+      await kami.say_and_wait([
         '却没能在',
         kitaru.sex,
         '最需要的时候出现，也没能在',
@@ -438,8 +437,8 @@ module.exports = (handlers) => {
         kitaru.sex,
         '一些提示的样子。',
       ]);
-      await kitaru.say_and_wait('呜呜呜……还是信众太少了呀，。');
-      await kitaru.say_and_wait([
+      await kami.say_and_wait('呜呜呜……还是信众太少了呀，。');
+      await kami.say_and_wait([
         '不过，人多起来的话，我也没办法一直关注着',
         kitaru.sex,
         '吧，是好事也不一定？',
@@ -451,11 +450,14 @@ module.exports = (handlers) => {
         kitaru.get_colored_name(),
         ' 一个模子刻出来的吗？',
       ]);
-      await kitaru.say_and_wait([me.get_colored_actual_name(), ' 先生']);
+      await kami.say_and_wait([
+        me.get_colored_actual_name(),
+        me.get_adult_sex_title(),
+      ]);
       era.printButton('「在？」', 1);
       era.printButton('「什么事？」', 2);
       await era.input();
-      await kitaru.say_and_wait([
+      await kami.say_and_wait([
         me.get_colored_name(),
         ' 是',
         kitaru.sex,
@@ -474,12 +476,15 @@ module.exports = (handlers) => {
       era.set('status:56:稳定', 1);
       await era.printAndWait([kitaru.get_colored_name(), ' 的身体微微发热。']);
       flags.wait_flag = get_attr_and_print_in_event(56, [3, 3, 3, 3, 3], 0);
+    } else {
+      await era.printAndWait([
+        '兜兜转转，总算是走出来了，远处宿舍楼的灯光依稀可见……',
+      ]);
     }
   };
 
   handlers[95 + 37] = async (kitaru, me, callname, flags) => {
     await print_event_name('每个人的天命', kitaru);
-    era.drawLine({ content: '市郊墓园' });
     await era.printAndWait([
       me.get_colored_name(),
       ' 看见自己橘色头发的担当轻抚着大理石墓碑的表面。',
@@ -501,9 +506,11 @@ module.exports = (handlers) => {
     ]);
     era.printButton('「怎么了？」', 1);
     await era.input();
-    await kitaru.say_and_wait(
-      '拿下菊花赏，走出了姐姐的阴影，还有和训练员在一起的日子。',
-    );
+    await kitaru.say_and_wait([
+      '拿下菊花赏，走出了',
+      kitaru.get_bigger_sibling_sex_title(),
+      '的阴影，还有和训练员在一起的日子。',
+    ]);
     await kitaru.say_and_wait('这三年对我来说简直就像是梦一样。');
     await era.printAndWait([
       '说完这番话的',

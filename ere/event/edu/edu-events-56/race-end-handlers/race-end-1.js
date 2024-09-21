@@ -76,6 +76,5 @@ module.exports = (handlers) => {
       '。',
     ]);
     await era.printAndWait('青叶赏会是一个不错的选择。');
-    edu_marks.begin_race_end = 1;
   };
 };

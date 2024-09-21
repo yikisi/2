@@ -72,7 +72,6 @@ module.exports = (handlers) => {
 
   handlers[47 + 32] = async (kitaru, me, callname, flags) => {
     await print_event_name('坠入凡间的星', kitaru);
-    era.drawLine({ content: '无人岛 沙滩上' });
     await era.printAndWait([
       '今天，是 ',
       me.get_colored_name(),
@@ -316,7 +315,11 @@ module.exports = (handlers) => {
       kitaru.get_colored_name(),
       ' 有几分神似，不过倒是留了显得更成熟的长发。',
     ]);
-    await kitaru.say_and_wait('嗯……我的姐姐。');
+    await kitaru.say_and_wait([
+      '嗯……我的',
+      kitaru.get_bigger_sibling_sex_title(),
+      '。',
+    ]);
     await kitaru.say_and_wait(
       '不过之前总是不想来，即使是妈妈的要求也会尝试拒绝掉。',
     );
@@ -339,7 +342,9 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait(['而后，', kitaru.sex, '缓缓上前。']);
     await kitaru.say_and_wait([
-      '那个，姐姐，我带着我现在的 ',
+      '那个，',
+      kitaru.get_bigger_sibling_sex_title(),
+      '，我带着我现在的 ',
       callname,
       ' 来看你了……',
     ]);
@@ -349,7 +354,9 @@ module.exports = (handlers) => {
       kitaru.get_colored_name(),
       ' 对着那方墓碑倾诉着，也许算不上多么庄重，甚至是有些轻松，那种语气就像',
       kitaru.sex,
-      '的姐姐仍存活于世一样。',
+      '的',
+      kitaru.get_bigger_sibling_sex_title(),
+      '仍存活于世一样。',
     ]);
     await era.printAndWait([
       '从如何与 ',
@@ -360,7 +367,9 @@ module.exports = (handlers) => {
       kitaru.get_colored_name(),
       ' 向',
       kitaru.sex,
-      '去世的姐姐转述着 ',
+      '去世的',
+      kitaru.get_bigger_sibling_sex_title(),
+      '转述着 ',
       me.get_colored_name(),
       ' 和',
       kitaru.sex,
@@ -369,7 +378,10 @@ module.exports = (handlers) => {
     era.drawLine({ content: '一段时间后' });
     await kitaru.say_and_wait('下周就是菊花赏了呢！');
     await kitaru.say_and_wait('真是花了好长时间才完完整整的想起来呢……');
-    await kitaru.say_and_wait('姐姐，我会像约好的那样夺下胜利的！');
+    await kitaru.say_and_wait([
+      kitaru.get_bigger_sibling_sex_title(),
+      '，我会像约好的那样夺下胜利的！',
+    ]);
     flags.wait_flag = get_skills_and_print_in_event(56, [200841]);
     flags.wait_flag =
       get_attr_and_print_in_event(56, [3, 3, 3, 3, 3], 0) || flags.wait_flag;
@@ -390,7 +402,9 @@ module.exports = (handlers) => {
     await era.input();
     await kitaru.say_and_wait('唔……');
     await era.printAndWait([
-      '从姐姐的阴影中走了出来，也实现了想要在菊花赏上奔跑的愿望，但此时的 ',
+      '从',
+      kitaru.get_bigger_sibling_sex_title(),
+      '的阴影中走了出来，也实现了想要在菊花赏上奔跑的愿望，但此时的 ',
       kitaru.get_colored_name(),
       '，反倒是显得有些迷惘。',
     ]);

@@ -63,11 +63,11 @@ async function sys_call_rec_event(chara_id, hook, extra_flag, event_object) {
       if (notes[chara_id]) {
         era.drawLine();
         if (
-          !(await select_yes_or_no(
+          await select_yes_or_no(
             '是否查看相关的小纸条？',
             '查看',
             '之后去首页确认',
-          ))
+          )
         ) {
           notes[chara_id].forEach((e) =>
             era.print(

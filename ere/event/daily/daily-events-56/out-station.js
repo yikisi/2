@@ -177,9 +177,10 @@ module.exports = async (hook) => {
               callname,
               ' 想看我留长发的样子吗？',
             ]);
-            await kitaru.say_and_wait(
-              '小学的时候倒是试着留过长发，但照镜子的时候，总是会想到照片里的姐姐',
-            );
+            await kitaru.say_and_wait([
+              '小学的时候倒是试着留过长发，但照镜子的时候，总是会想到照片里的',
+              kitaru.get_bigger_sibling_sex_title(),
+            ]);
             await kitaru.say_and_wait(['不过，如果 ', callname, ' 喜欢的话！']);
             await era.printAndWait([
               '看来 ',
@@ -230,6 +231,7 @@ module.exports = async (hook) => {
         }
         switch (branch) {
           case 1:
+            hook.override = true;
             await era.printAndWait([
               '那么，',
               me.get_colored_name(),

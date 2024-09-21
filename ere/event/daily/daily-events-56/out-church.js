@@ -2,6 +2,8 @@ const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
+const set_luck_result = require('#/event/edu/edu-events-56/snippets/set-luck-result');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -88,41 +90,6 @@ module.exports = async () => {
       ]);
   }
   if (era.get('status:56:运势依赖') === 1 || era.get('status:56:稳定') !== 1) {
-    if (luck === 2) {
-      era.set('status:56:大吉', 1);
-      era.set('status:56:中吉', 0);
-      era.set('status:56:小吉', 0);
-      era.set('status:56:凶', 0);
-
-      if (era.get('status:56:PTSD') !== 1) {
-        era.set('cflag:56:干劲', 2);
-      }
-    }
-    if (luck === 1) {
-      era.set('status:56:中吉', 1);
-      era.set('status:56:大吉', 0);
-      era.set('status:56:小吉', 0);
-      era.set('status:56:凶', 0);
-      if (era.get('status:56:PTSD') !== 1) {
-        era.set('cflag:56:干劲', 1);
-      }
-    }
-    if (luck === 0) {
-      era.set('status:56:小吉', 1);
-      era.set('status:56:大吉', 0);
-      era.set('status:56:中吉', 0);
-      era.set('status:56:凶', 0);
-      if (era.get('status:56:PTSD') !== 1) {
-        era.set('cflag:56:干劲', 0);
-      }
-    }
-    if (luck === 3) {
-      era.set('status:56:凶', 1);
-      era.set('status:56:大吉', 0);
-      era.set('status:56:小吉', 0);
-      era.set('status:56:中吉', 0);
-
-      era.set('cflag:56:干劲', -1 - (Math.random() < 0.5));
-    }
+    set_luck_result(luck);
   }
 };

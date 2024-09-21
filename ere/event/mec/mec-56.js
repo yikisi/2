@@ -2,28 +2,36 @@ const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
-const { buff_colors } = require('#/data/color-const');
+const CharaTalk = require('#/utils/chara-talk');
+
+const { get_chara_color } = require('#/data/chara-colors');
+const { buff_colors, motivation_colors } = require('#/data/color-const');
 
 module.exports = class extends CustomizedMec {
   set_callname() {
-    if (super.set_callname_from_src() || era.get('love:56') < 75) {
-      super.set_callname();
+    if (!super.set_callname_from_src()) {
+      if (era.get('love:56') < 75) {
+        return super.set_callname();
+      }
+      era.set('callname:56:0', [
+        '命定之人',
+        `训练员${CharaTalk.me.get_adult_sex_title()}`,
+      ]);
     }
-    era.set('callname:56:0', '命定之人');
   }
 
   get_status() {
     const ret = [];
     if (era.get('status:56:运势依赖')) {
       ret.push({
-        color: buff_colors[1],
+        color: get_chara_color(56),
         content: '运势依赖',
         title: '今天的运势是什么呢？',
       });
     }
     if (era.get('status:56:大吉')) {
       ret.push({
-        color: buff_colors[1],
+        color: motivation_colors.at(-1),
         content: '大吉',
         title:
           '灵力满溢！训练成功率+10%，所有训练效果+5%，好感获取+10%，参赛时属性+5%',
@@ -31,21 +39,21 @@ module.exports = class extends CustomizedMec {
     }
     if (era.get('status:56:中吉')) {
       ret.push({
-        color: buff_colors[1],
+        color: motivation_colors.at(-2),
         content: '中吉',
         title: '好运气呢！训练成功率+5%，所有训练效果+5%，参赛时属性+3%',
       });
     }
     if (era.get('status:56:小吉')) {
       ret.push({
-        color: buff_colors[1],
+        color: motivation_colors.at(-3),
         content: '小吉',
         title: '总之不坏！训练成功率+5%，参赛时属性+1%',
       });
     }
     if (era.get('status:56:凶')) {
       ret.push({
-        color: buff_colors[3],
+        color: motivation_colors.at(-4),
         content: '凶',
         title:
           '这个时候去安慰福来的话？训练成功率-10%，所有训练效果-10%，参赛时属性-10%，好感获取+20%',
