@@ -1,4 +1,5 @@
 cd tools/event
+node generate-basement-factory.js
 node generate-check-factory.js
 node generate-mec-factory.js
 cd ../..
