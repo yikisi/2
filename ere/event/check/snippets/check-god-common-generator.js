@@ -191,7 +191,7 @@ module.exports = (god_id) => {
                     ) !== -1
                   : era.get(`status:${cur_id}:熬夜`) ||
                     era.get(`status:${cur_id}:发胖`) ||
-                    era.get(`status:${cur_id}:头风`) ||
+                    era.get(`status:${cur_id}:偏头痛`) ||
                     era.get(`status:${cur_id}:伤病`) ||
                     era.get(`status:${cur_id}:疲惫`),
               );
@@ -254,7 +254,7 @@ module.exports = (god_id) => {
                     era.set(`base:${ret[1]}:压力`, 0);
                     era.set(`status:${ret[1]}:熬夜`, 0);
                     era.set(`status:${ret[1]}:发胖`, 0);
-                    era.set(`status:${ret[1]}:头风`, 0);
+                    era.set(`status:${ret[1]}:偏头痛`, 0);
                     era.set(`status:${ret[1]}:伤病`, 0);
                     era.set(`status:${ret[1]}:疲惫`, 0);
                     sys_change_motivation(ret[1], 4);

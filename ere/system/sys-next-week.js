@@ -322,24 +322,24 @@ async function sys_next_week() {
           (1 + race + era.get(`status:${chara_id}:健康茶`)),
     );
     if (
-      !era.get(`status:${chara_id}:头风`) &&
+      !era.get(`status:${chara_id}:偏头痛`) &&
       drug_delta >= 100 + 20 * health_talent + 50 * race
     ) {
-      era.set(`status:${chara_id}:头风`, 1);
+      era.set(`status:${chara_id}:偏头痛`, 1);
       era.print([
         chara.get_colored_name(),
         ' 罹患了 ',
-        { color: buff_colors[0], content: '[头风]' },
+        { color: buff_colors[0], content: '[偏头痛]' },
         '……',
       ]);
       sys_change_pressure(chara_id, get_random_value(500, 1500));
-    } else if (era.get(`status:${chara_id}:头风`)) {
+    } else if (era.get(`status:${chara_id}:偏头痛`)) {
       if (drug_delta <= 80 + 20 * health_talent + 50 * race) {
-        era.set(`status:${chara_id}:头风`, 0);
+        era.set(`status:${chara_id}:偏头痛`, 0);
         era.print([
           chara.get_colored_name(),
           ' 的 ',
-          { color: buff_colors[0], content: '[头风]' },
+          { color: buff_colors[0], content: '[偏头痛]' },
           ' 痊愈了……',
         ]);
       } else {

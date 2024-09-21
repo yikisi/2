@@ -133,8 +133,8 @@ function sys_get_status(chara_id) {
   if (era.get(`status:${chara_id}:发胖`)) {
     status_list.push({ color: buff_colors[0], content: '发胖' });
   }
-  if (era.get(`status:${chara_id}:头风`)) {
-    status_list.push({ color: buff_colors[0], content: '头风' });
+  if (era.get(`status:${chara_id}:偏头痛`)) {
+    status_list.push({ color: buff_colors[0], content: '偏头痛' });
   }
   if (era.get(`status:${chara_id}:发情`)) {
     status_list.push({
