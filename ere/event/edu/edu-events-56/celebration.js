@@ -130,7 +130,7 @@ module.exports = async (hook, __, event_object) => {
     ]);
     await cristmas_common(kitaru, me, callname);
 
-    if (era.get('love:56') < 75) {
+    if (era.get('love:56') < 75 || kitaru.sex_code === 1 || me.sex_code === 0) {
       await era.printAndWait([
         '庆祝一阵后，和 ',
         kitaru.get_colored_name(),
@@ -138,7 +138,6 @@ module.exports = async (hook, __, event_object) => {
       ]);
       return;
     }
-
     era.printButton('「比较想要实体的星星。」', 1);
     await era.input();
     await kitaru.say_and_wait('欸！天上的星星也不行吗？');

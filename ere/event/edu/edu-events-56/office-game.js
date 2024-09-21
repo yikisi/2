@@ -166,6 +166,10 @@ module.exports = async (_, __, event_object) => {
         ' 的赛车前面。',
       ]);
     }
+    if (kitaru.sex_code === 1 || me.sex_code === 0) {
+      await era.printAndWait('赢了！');
+      return true;
+    }
     await era.printAndWait('赢定了……吗？');
     await me.say_and_wait('唔……');
     await era.printAndWait(

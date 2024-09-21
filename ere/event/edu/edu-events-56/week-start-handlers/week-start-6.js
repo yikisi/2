@@ -5,6 +5,7 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const palace = require('#/event/snippets/palace');
 const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FukukitaruEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
@@ -49,7 +50,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       kitaru.get_colored_name(),
       ' 正有条不紊的指挥着包括 ',
-      kitaru.get_colored_name(),
+      get_chara_talk(58).get_colored_name(),
       ' 在内几位邀请来帮忙的同学装点着新年的神社。',
     ]);
     await era.printAndWait(

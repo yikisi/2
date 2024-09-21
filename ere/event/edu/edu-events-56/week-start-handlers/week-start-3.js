@@ -495,6 +495,7 @@ module.exports = (handlers) => {
   };
 
   handlers[95 + 1] = async (kitaru, me, callname, flags) => {
+    era.set('cflag:56:节日事件标记', 0);
     await print_event_name('神乐', kitaru);
     await era.printAndWait([
       '和去年不同，今年的 ',
@@ -557,8 +558,7 @@ module.exports = (handlers) => {
         await kitaru.print_and_wait('云朵分离——墙壁碾动——旧伤作痛……');
         pt_change = 30;
     }
-    if (era.get('love:56') < 49) {
-      era.set('cflag:56:节日事件标记', 0);
+    if (era.get('love:56') < 49 || me.sex_code === 0 || kitaru.sex_code === 1) {
       await era.printAndWait([
         '当 ',
         me.get_colored_name(),
@@ -700,7 +700,6 @@ module.exports = (handlers) => {
       disabled: era.get('love:56') < 75,
     });
     if ((await era.input()) === 1) {
-      era.set('cflag:56:节日事件标记', 0);
       await era.printAndWait([
         '强压下自己的欲望，向 ',
         kitaru.get_colored_name(),
@@ -955,7 +954,6 @@ module.exports = (handlers) => {
       );
       end_ero_and_train();
     }
-    era.set('cflag:56:节日事件标记', 0);
     flags.wait_flag = get_attr_and_print_in_event(56, attr_change, pt_change);
   };
 };

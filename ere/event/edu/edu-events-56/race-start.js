@@ -726,7 +726,6 @@ module.exports = async (_, extra_flag) => {
     ) {
       edu_marks.tattoo = 1;
       await print_event_name('不合时宜的发情', kitaru);
-      era.drawLine({ content: '赛前休息室' });
       await kitaru.say_and_wait('唔……');
       await kitaru.say_and_wait([callname, '……']);
       await era.printAndWait([

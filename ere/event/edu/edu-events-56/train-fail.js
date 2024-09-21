@@ -29,6 +29,7 @@ module.exports = async (hook, extra_flag) => {
 
   if (
     me.sex_code > 0 &&
+    kitaru.sex_code !== 1 &&
     !edu_marks.fortune_train_fail &&
     era.get('love:56') > 75
   ) {
