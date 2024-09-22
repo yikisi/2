@@ -455,9 +455,212 @@ module.exports = async function () {
     await era.printAndWait(
       `重新为自己打气，作为马娘偶像的醒目飞鹰从后台回到了舞台之上。`,
     );
+  } else if (edu_weeks === 95 + 17) {
+    await print_event_name('倘若泪水能回到眼眶', falcon);
+    await era.printAndWait(`打定主意后，你便强行将醒目飞鹰拉了过去。`);
+    await me.say_and_wait(
+      `抱歉，虽然这样非常失礼，不过有什么能改变的话，恐怕也只有这么做了。`,
+    );
+    await era.printAndWait(
+      `不容分说强行拉过她的手腕，带着她向着目标地点前进。`,
+    );
+    await era.printAndWait(
+      `虽然一开始受到惊吓而猛然加大力度，但骤然之间力度突然就变小了。`,
+    );
+    await era.printAndWait(`你的内心已经被即将实现的美好憧憬填满。`);
+    await era.printAndWait(
+      `想要告诉她，告诉她，作为偶像追求自己的幸福这件事是没有任何问题的。`,
+    );
+    await era.printAndWait(`你与醒目飞鹰来到了这片空旷的草坪上。`);
+    await era.printAndWait(`令人难以忍受的尴尬氛围在你们之间扩散开来。`);
+    await era.printAndWait(
+      `不用一个人背负着这么沉重的压力，之前的事情仅仅只是一个意外，只需要将注意力。`,
+    );
+    await era.printAndWait(`如果你是醒目飞鹰。这种话能说服自己吗？`);
+    await me.say_and_wait(`……请多信任我一点。`);
+    await era.printAndWait(`飞鹰子已经不堪重负了。`);
+    await falcon.say_and_wait(`……诶？`);
+    await era.printAndWait(`醒目飞鹰的语气之中夹杂着困惑与不解。`);
+    await falcon.say_and_wait(`我一直都相信训练员先生呦？`);
+    await era.printAndWait(`不对，你摇了摇头。`);
+    await me.say_and_wait(
+      `不只是训练员与马娘之间，也不止粉丝与偶像之间的关系，我希望能被醒目飞鹰作为最信任的人对待。`,
+    );
+    await falcon.say_and_wait(`……哪怕是飞鹰子的缘故，训练员先生受到了伤害？`);
+    era.printButton(`我对醒目飞鹰的爱不会因为这种程度受到动摇。`, 1);
+    era.printButton(`我对飞鹰子的爱不会因为这种程度受到动摇。`, 2);
+    const ret1 = await era.input();
+    if (ret1 === 1) {
+      await falcon.say_and_wait(`……诶？`);
+      await era.printAndWait(
+        `像是听到了不可思议的话语，醒目飞鹰的瞳孔也一瞬间放大了。`,
+      );
+      await falcon.say_and_wait(`……真讨厌……最喜欢了……训练员先生怎么可以这样……`);
+      await falcon.say_and_wait(`这样下去的话，飞鹰子……还怎么……抱歉。`);
+      await era.printAndWait(
+        `像是错觉一样，随着下颚传来的剧痛，你陷入了黑暗之中。`,
+      );
+      await era.printAndWait(`就这样，沉沉的睡去。`);
+    } else {
+      await falcon.say_and_wait(`……飞鹰子吗？`);
+      await era.printAndWait(`醒目飞鹰的表情变得僵硬。`);
+      await falcon.say_and_wait(`飞鹰子……果然还是飞鹰子才对呢……训练员先生。`);
+      await era.printAndWait(`像是相当怀念一样，眯起了眼睛。`);
+      await falcon.say_and_wait(
+        `呐……看着飞鹰子吧。如果是为了训练员先生的话，飞鹰子什么都……`,
+      );
+      await era.printAndWait(`黯淡火燃的眼神一瞬间陷入死寂之中。`);
+      await falcon.say_and_wait(
+        `不对！这样的飞鹰子才不是训练员先生喜欢的那个包容着所有粉丝们的马娘偶像！`,
+      );
+      await era.printAndWait(`罪恶感像针一样刺入了胸口。`);
+      await falcon.say_and_wait(
+        `舞台之上的飞鹰子是所有粉丝们的，像这样……这样的行为是不可能被允许的。`,
+      );
+      await falcon.say_and_wait(
+        `飞鹰子因为抛弃了作为马娘偶像的原则，结果训练员先生像是破烂的布娃娃一样被随意丢弃在血泊之中`,
+      );
+      await falcon.say_and_wait(
+        `可是，明明已经发誓绝对会将爱平等的分给所有的粉丝，可是……看到训练员先生的时候，飞鹰子还是忍不住像倾注更多的爱。`,
+      );
+      await falcon.say_and_wait(
+        `飞鹰子不会将爱全部倾注在训练员先生身上，而将爱倾注在训练员先生身上的时候，飞鹰子也就不是飞鹰子了。`,
+      );
+      await era.printAndWait(
+        `比起单纯的失败，在最大的努力下遇到的两难抉择，更令人感到悲哀。`,
+      );
+      await falcon.say_and_wait(`……如果是这样的话。`);
+      await era.printAndWait(
+        `像是错觉一样，随着下颚传来的剧痛，你陷入了黑暗之中。`,
+      );
+      await era.printAndWait(`就这样，沉沉的睡去。`);
+    }
+    era.drawLine();
+    await era.printAndWait(`你又一次站在了这片草地上。`);
+    await era.printAndWait(
+      `废墟夹缝间的草地，从远处天空飘来的积雨云，那段令人怀念的美好时光。`,
+    );
+    await era.printAndWait(`以及旁边的少女。`);
+    await era.printAndWait(`是啊，就是这种地方，才适合好好交流。`);
+    await me.say_and_wait(`飞鹰子——`);
+    await era.printAndWait(`飞鹰子没有任何回应。`);
+    await me.say_and_wait(`飞鹰子？`);
+    await era.printAndWait(`你试探性的触碰着身旁的少女。`);
+    await era.printAndWait(`体温正常，从手指传来的肌肤触感也没有区别。`);
+    await me.say_and_wait(`仔细观察的话，好像有一条细细的银线在控制着她一样。`);
+    await era.printAndWait(`就像是人偶一样。`);
+    await me.say_and_wait(`如果顺着银线寻找的话，说不定就能找到操纵者。`);
+    await era.printAndWait(`拇指与食指握住这条细线，顺着这条细线的来源——`);
+    await era.printAndWait(`一阵剧烈的强光晃得你睁不开眼。`);
+    await era.printAndWait(`眼前的草地变成了舞台现场。`);
+    await era.printAndWait(
+      `自己正站在舞台中央，不，确切的说是醒目飞鹰站在舞台中央。`,
+    );
+    await era.printAndWait(`密密麻麻的观众跟随着你所熟悉的歌曲按节拍摇摆着。`);
+    await me.say_and_wait(`演唱会吗？但为什么违和感这么重。`);
+    await era.printAndWait(`从刚才开始，空气之中就有一缕若有若无的腥味。`);
+    await era.printAndWait(`察觉到这究竟代表着什么的时候毛孔瞬间竖立。`);
+    await me.say_and_wait(`飞鹰子？`);
+    await era.printAndWait(`被称为飞鹰子的人偶转向了你，然后——`);
+    await era.printAndWait(`左眼右眼左耳右耳左鼻右鼻口腔之中暗红色的液体`);
+    await era.printAndWait(`视觉触觉嗅觉味觉听觉理性感性混杂黏糊糊的一团\n\n`);
+    await me.say_and_wait(`哈啊哈啊哈啊。`);
+    await era.printAndWait(
+      `猛地从噩梦之中惊醒，额头上的汗珠，被汗水打湿的衬衫，无不再提醒刚才的一切不过是场噩梦。`,
+    );
+    await me.say_and_wait(`刚才的是？`);
+    await era.printAndWait(`用力将液体咳出，嘴巴传来了一阵苦涩的腥味。`);
+    await era.printAndWait(
+      `虽然很想回忆起之前发生了什么，但稍微思考就头疼欲裂。`,
+    );
+    await era.printAndWait(`只能暂且作罢，转而观察起周围的环境。`);
+    await era.printAndWait(
+      `承载着自己的沙发，沙发右侧的办公桌，办公桌后方的墙壁上用相框装潢的合照。`,
+    );
+    await me.say_and_wait(`好像回到了训练室？`);
+    await era.printAndWait(
+      `记忆消失的前一刻，自己在干什么，晕倒过后又是谁把自己送回来的。`,
+    );
+    await era.printAndWait(`下意识将手伸进裤子口袋之中确认着手机。`);
+    await era.printAndWait(`却碰到了更加软绵绵的东西。`);
+    await me.say_and_wait(`这是？`);
+    await era.printAndWait(`像是用来固定头发的，经过精心保养的缎带。`);
+    await era.printAndWait(`如果飞鹰子逃走了？`);
+    await me.say_and_wait(`……原来如此。`);
+    await era.printAndWait(`答案已经不言而喻。`);
+    await era.printAndWait(`将小心保存的缎带系在手腕上。`);
+    await era.printAndWait(`你决定\n`);
+    era.printButton(`追赶醒目飞鹰`, 1);
+    await era.input();
+    era.drawLine();
+    await era.printAndWait(`不知已经过去了多久，商业街、百货商场、河边草地。`);
+    await era.printAndWait(
+      `即使是向亲近的粉丝与好友询问，得到的答案都是否定。`,
+    );
+    await me.say_and_wait(`哈啊……哈啊……哈啊……`);
+    await era.printAndWait(
+      `就这么放弃的话，从飞鹰子身边逃走的话，果然还是不甘心。`,
+    );
+    await era.printAndWait(`常言道，君子不立于危墙之下。`);
+    await era.printAndWait(
+      `即使是在东京这样的大都市，在深夜徘徊也是一种极其危险的行为。`,
+    );
+    await era.printAndWait(`之所以会发生这种事情，自己恐怕也脱不了干系。`);
+    await era.printAndWait(
+      `但是，这不是责怪自己的理由，因为自己没有自己想象中那么睿智，自己也没想象中的自己那般充满勇气。`,
+    );
+    await era.printAndWait(
+      `自己只有这点智慧，自己只有这种程度的勇气，这已经被不理想的现实所证明。`,
+    );
+    await era.printAndWait(
+      `如果明白这点的话，后悔恐怕是在后悔自己明明充满智慧与勇气却失败了。`,
+    );
+    await era.printAndWait(`有很大可能走向认知失调的风险。\n`);
+    await era.printAndWait(`不知不觉回到了熟悉的草地上。`);
+    await era.printAndWait(`正值春夏交替之时，深夜的草地比想象之中更加寒冷。`);
+    await era.printAndWait(`你不禁打了一个寒颤。`);
+    await era.printAndWait(`正值春夏交替之时，深夜的草地比想象之中更加寒冷。`);
+    await era.printAndWait(
+      `潮湿的空气混杂着泥土的芳香，月光照耀下的废墟将这片草地团团包围。`,
+    );
+    await era.printAndWait(`就像是拉起了帷幕一样。`);
+    await era.printAndWait(`而期待的少女——醒目飞鹰就在这片草地之上。\n`);
+    await era.printAndWait(`只要向她道歉，然后好好交流，一切误会都会化解。`);
+    await falcon.say_and_wait(`诶?训练员先生怎么这么快……`);
+    await era.printAndWait(`舞台的主角带着惊讶的表情看着你。`);
+    await era.printAndWait(
+      `是因为从昨天下午开始就没有吃饭的缘故吗?此刻摇摇欲坠的她就像是苍白的人偶一样脆弱。`,
+    );
+    await falcon.say_and_wait(
+      `……不，没关系的呦？飞鹰子只是稍微有些烦恼罢了，等到明天，飞鹰子还会回到原来的——`,
+    );
+    await era.printAndWait(`就这么双腿并拢跌坐在了地上，痛苦的咳嗽着。`);
+    era.printButton(`飞鹰子！`, 1);
+    await era.input();
+    await era.printAndWait(`想好的话语全部抛到了脑后，你奔向了少女。`);
+    await me.say_and_wait(`忍耐一下，这一切马上就会结束。`);
+    await era.printAndWait(`醒目飞鹰拉住了你。`);
+    await era.printAndWait(`比起双手所感知的寒冷，那明亮的双眼却吸引了你。`);
+    await falcon.say_and_wait(`飞鹰子……没有责怪训练员先生的意思……只是。`);
+    await falcon.say_and_wait(
+      `比起飞鹰子的幸福……如果训练员先生能更加幸福的话……`,
+    );
+    await falcon.say_and_wait(
+      `抱歉……连粉丝一号的幸福都无法保证，作为偶像真是失格了呢……`,
+    );
+    await era.printAndWait(
+      `大概是终于承受不住压力，平日里绝不会表达出来的话语就这么宣泄而出。`,
+    );
+    await era.printAndWait(
+      `虽然心中已有猜测，直到她亲口说出为止自己才能确认，醒目飞鹰心底真正希望的是什么。`,
+    );
+    await era.printAndWait(`对不起，发生了这种事情。`);
+    await era.printAndWait(
+      `将少女轻轻背起，确认着这份重量，那就是与她一同前行的重量。`,
+    );
   } else if (edu_weeks === 95 + 23) {
     const love = era.get('love:46');
-    await print_event_name('前辈与后辈（二）', falcon);
+    await print_event_name('前辈与后辈', falcon);
     await era.printAndWait(
       `短暂的春季即将过去，夏天带着若有若无的气息敲开了世界的大门。`,
     );

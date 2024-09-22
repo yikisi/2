@@ -253,13 +253,9 @@ module.exports = class extends CustomizedCheck {
         case 95 + 14:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 5月第一周 欲速则不达
+        // 5月第一周 泪水
         case 95 + 17:
           add_event(event_hooks.week_end, event_obj_special);
-          break;
-        // 5月第二周 压力
-        case 95 + 18:
-          add_event(event_hooks.week_start, event_obj_special);
           break;
         // 5月第四周 前辈与后辈
         case 95 + 23:
