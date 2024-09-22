@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const CharaAvailableGenes = require('#/data/chara-available-genes');
+const CharaAvailableSkills = require('#/data/chara-available-skills');
 const CharaGenes = require('#/data/chara-genes');
 const CharaSkills = require('#/data/chara-skills');
 const { gene_juel_names } = require('#/data/other-const');
@@ -31,12 +32,22 @@ module.exports = {
       ...(skill_list.length
         ? skill_list
         : [{ content: '未习得', type: 'text' }]),
-      { content: [], type: 'text' },
-      ...[].map((e) => ({
-        config: { width: 6 },
-        content: `[${e}] Lv.${era.get(`abl:${chara.id}:${e}`)}`,
-        type: 'text',
-      })),
+    ];
+    const available_skills = new CharaAvailableSkills(chara.id).get();
+    if (available_skills.length > 0) {
+      aim_list.push(
+        {
+          config: { content: '待解锁技能', position: 'left' },
+          type: 'divider',
+        },
+        ...available_skills.map((e) => ({
+          config: { width: 6 },
+          content: skills_dict[e].get_colored_name(),
+          type: 'text',
+        })),
+      );
+    }
+    aim_list.push(
       {
         config: { content: '因子继承', position: 'left' },
         type: 'divider',
@@ -106,7 +117,7 @@ module.exports = {
             })),
           ]
         : []),
-    ];
+    );
     return {
       print() {
         return aim_list;

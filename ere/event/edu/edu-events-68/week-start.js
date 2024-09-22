@@ -454,7 +454,7 @@ module.exports = async (hook, _, event_object) => {
       era.println();
       wait_flag = sys_like_chara(68, 0, 10, true, 2) || wait_flag;
     }
-    era.set('flag:68:节日事件标记', 0);
+    era.set('cflag:68:节日事件标记', 0);
   } else if (event_arg === 95 + 1) {
     await print_event_name('小北的熟人？', kita);
     await era.printAndWait('一年的时光转瞬即逝，很快就到了新年伊始。');
@@ -522,7 +522,7 @@ module.exports = async (hook, _, event_object) => {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [10, 10, 10, 10, 10], 0) || wait_flag;
-    era.set('flag:68:节日事件标记', 0);
+    era.set('cflag:68:节日事件标记', 0);
   } else if (event_arg === 95 + 6) {
     await print_event_name('略微有些破碎的甜酒味', kita);
     await era.printAndWait(
@@ -567,7 +567,7 @@ module.exports = async (hook, _, event_object) => {
     era.println();
     wait_flag = sys_like_chara(68, 0, 100) || wait_flag;
     event_marks.senior_valentine++;
-    era.set('flag:68:节日事件标记', 0);
+    era.set('cflag:68:节日事件标记', 0);
   } else {
     throw new Error('unsupported!');
   }

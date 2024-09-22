@@ -3,7 +3,9 @@ node generate-basement-factory.js
 node generate-check-factory.js
 node generate-mec-factory.js
 cd ../..
-git add .
+git add ere/event/basement
+git add ere/event/check
+git add ere/event/mec
 npm run lint
 cd tools/uma
 node check-chara-colors.js

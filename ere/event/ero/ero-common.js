@@ -6,6 +6,8 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const common_pregnant_report_in_love = require('#/event/ero/snippets/common-pregnant-report-in-love');
 const get_participants_and_first_action = require('#/event/ero/snippets/get-participants-and-first-action');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -178,45 +180,37 @@ handlers[ero_hooks.orgasm_denial] = async (chara_id, _, extra_flag) => {
     touch.part === part_enum.virgin ||
     touch.part === part_enum.anal
   ) {
-    era.printMultiColumns([
-      {
-        content: [chara.get_colored_name(), ' 的肉棒已经达到极限……'],
-        type: 'text',
-      },
-      ...[`以 ${optimized_part_names[touch.part]} 接纳`, '避开精芒'].map(
-        (e, i) => ({
-          accelerator: i * 100,
-          config: { align: 'center', width: 12 },
-          content: e,
-          type: 'button',
-        }),
-      ),
-    ]);
-    const ret = await era.input();
-    if (ret) {
-      if (!extra_flag.stop_success) {
-        era.print([
-          me.get_colored_name(),
-          ' 在和 ',
-          chara.get_colored_name(),
-          ' 的竞速中失败了……',
-        ]);
-      } else if (ret === 2) {
-        era.print([
-          me.get_colored_name(),
-          ' 的 ',
-          optimized_part_names[touch.part],
-          ' 吐出了 ',
-          chara.get_colored_name(),
-          ' 蓄势待发的肉棒，温热的精液径直喷向了 ',
-          me.get_colored_name(),
-          ' 的 ',
-          touch.part === part_enum.mouth ? '俏脸' : '玉体',
-          '……',
-        ]);
-      }
+    if (
+      await select_yes_or_no(
+        [chara.get_colored_name(), ' 的肉棒已经达到极限……'],
+        `以 ${optimized_part_names[touch.part]} 接纳`,
+        '避开精芒',
+      )
+    ) {
+      return 0;
     }
-    return ret;
+    if (!extra_flag.stop_success) {
+      era.print([
+        me.get_colored_name(),
+        ' 在和 ',
+        chara.get_colored_name(),
+        ' 的竞速中失败了……',
+      ]);
+    } else {
+      era.print([
+        me.get_colored_name(),
+        ' 的 ',
+        optimized_part_names[touch.part],
+        ' 吐出了 ',
+        chara.get_colored_name(),
+        ' 蓄势待发的肉棒，温热的精液径直喷向了 ',
+        me.get_colored_name(),
+        ' 的 ',
+        touch.part === part_enum.mouth ? '俏脸' : '玉体',
+        '……',
+      ]);
+    }
+    return 2;
   }
 };
 

@@ -76,8 +76,11 @@ async function sys_next_week() {
     punish_level = era.get('flag:惩戒力度'),
     team_dict = {},
     your_race = era.get('cflag:0:种族');
-  let in_team_list = filter_chara('cflag', '招募状态', recruit_flags.yes);
-  in_team_list.shift();
+  let in_team_list = filter_chara(
+    'cflag',
+    '招募状态',
+    recruit_flags.yes,
+  ).filter((e) => e);
   let temp;
   era.set('status:0:沉睡', 1);
   era.set('status:0:熬夜', 0);

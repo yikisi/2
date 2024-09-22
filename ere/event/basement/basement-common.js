@@ -74,7 +74,7 @@ class CustomizedBase {
       era.print([
         '现在，',
         me.get_colored_name(),
-        ' 成为了这座爱意牢笼中的囚徒……而',
+        ' 成为了这座爱意牢笼中的囚徒……而 ',
         chara.get_colored_name(),
         ' 是唯一的狱卒……',
       ]);
@@ -201,7 +201,7 @@ class CustomizedBase {
       ' 败给了机关……',
       { isBr: true },
       me.get_colored_name(),
-      '被打晕后带回了地下室……',
+      ' 被打晕后带回了地下室……',
     ]);
   }
 

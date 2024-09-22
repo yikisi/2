@@ -884,7 +884,7 @@ module.exports = async (hook, _, event_object) => {
       era.println();
       wait_flag = get_attr_and_print_in_event(67, undefined, 70);
     }
-    era.set('flag:67:节日事件标记', 0);
+    era.set('cflag:67:节日事件标记', 0);
   }
   wait_flag && (await era.waitAnyKey());
   return true;

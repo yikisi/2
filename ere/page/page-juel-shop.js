@@ -6,13 +6,13 @@ const {
 } = require('#/system/ero/sys-get-juel-price');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const print_mark_tab = require('#/page/juel-shop/mark-tab');
 const {
   default_handler,
   get_skill_buttons,
   get_talent_buttons,
   pay_juels,
-  print_confirm_and_return,
   print_footer,
   print_price_and_confirm,
 } = require('#/page/juel-shop/snippets');
@@ -689,27 +689,32 @@ module.exports = async (_id) => {
         const src_juel_name = Object.keys(juel_dict)[ret],
           dst_juel_name = ret < 10 ? src_juel_name : '顺从',
           dst_juel_num = ret < 10 ? 10 : 1;
-        era.print([
-          '将 ',
-          chara.get_colored_name(),
-          ' 的',
-          {
-            content: ` ${src_juel_name.substring(0, 2)}因子 × 10,000`,
-            color: buff_colors[2],
-          },
-          '（总共 ',
-          {
-            content: origin_dict[src_juel_name].toLocaleString(),
-            color: buff_colors[2],
-          },
-          `）转换为 ${me.name} 的`,
-          {
-            content: ` ${dst_juel_name.substring(0, 2)}因子 × ${dst_juel_num} `,
-            color: buff_colors[2],
-          },
-          '吗？',
-        ]);
-        if (await print_confirm_and_return()) {
+        if (
+          await select_yes_or_no(
+            [
+              '将 ',
+              chara.get_colored_name(),
+              ' 的',
+              {
+                content: ` ${src_juel_name.substring(0, 2)}因子 × 10,000`,
+                color: buff_colors[2],
+              },
+              '（总共 ',
+              {
+                content: origin_dict[src_juel_name].toLocaleString(),
+                color: buff_colors[2],
+              },
+              `）转换为 ${me.name} 的`,
+              {
+                content: ` ${dst_juel_name.substring(0, 2)}因子 × ${dst_juel_num} `,
+                color: buff_colors[2],
+              },
+              '吗？',
+            ],
+            '确定',
+            '还是算了',
+          )
+        ) {
           era.add(`juel:${chara_id}:${src_juel_name}`, -10000);
           era.add(`juel:0:${dst_juel_name}`, dst_juel_num);
         }

@@ -2,6 +2,8 @@ const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const CharaTalk = require('#/utils/chara-talk');
 
 const { buff_colors } = require('#/data/color-const');
@@ -163,9 +165,9 @@ async function use_ero_medicine(chara) {
     { horizontalAlign: 'space-evenly' },
   );
   const item_id = await era.input();
-  era.printMultiColumns([
-    {
-      content: aim_id
+  if (
+    !(await select_yes_or_no(
+      aim_id
         ? [
             '要给 ',
             aim_chara.get_colored_name(),
@@ -184,18 +186,10 @@ async function use_ero_medicine(chara) {
             },
             ' 吗？',
           ],
-      type: 'text',
-    },
-    ...['确定', '容我想想'].map((e, i) => {
-      return {
-        accelerator: 100 * i,
-        config: { align: 'center', width: 12 },
-        content: e,
-        type: 'button',
-      };
-    }),
-  ]);
-  if (await era.input()) {
+      '确定',
+      '容我想想',
+    ))
+  ) {
     era.print([
       CharaTalk.me.get_colored_name(),
       ' 放弃了',

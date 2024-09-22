@@ -12,6 +12,8 @@ const {
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_money } = require('#/system/sys-calc-flag');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
@@ -738,23 +740,12 @@ module.exports = {
         }
         break;
       case event_hooks.school_atrium:
-        era.print('一起前往中庭做什么呢？');
-        era.printMultiColumns([
-          {
-            accelerator: 0,
-            config: { align: 'center', width: 12 },
-            content: '去看看枯树洞吧',
-            type: 'button',
-          },
-          {
-            accelerator: 100,
-            config: { align: 'center', width: 12 },
-            content: '去约会吧',
-            type: 'button',
-          },
-        ]);
         await maya.say_and_wait(
-          (await era.input()) === 0
+          (await select_yes_or_no(
+            '一起前往中庭做什么呢？',
+            '去看看枯树洞吧',
+            '去约会吧',
+          ))
             ? ['人家可是成熟的', maya.get_colored_name(), '，才，才不会哭的？']
             : ['去约会吧！人家要和 ', callname, ' 成为学园里最般配的情侣！'],
         );

@@ -9,6 +9,8 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_money } = require('#/system/sys-calc-flag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const { get_custom_check } = require('#/event/check/check-factory');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
@@ -145,45 +147,21 @@ handlers[event_hooks.good_night] = async (chara_id, hook) => {
   if (awake === 3) {
     const check = get_custom_check(chara_id).is_want_make_love();
     if (check) {
-      era.print([
-        '繁忙的一天结束，',
-        me.get_colored_name(),
-        ' 把 ',
-        chara.get_colored_name(),
-        ' 送到学生宿舍门口，',
-        chara.get_colored_name(),
-        ' 扭扭捏捏地提出了一起睡觉的邀请……',
-      ]);
-      era.printMultiColumns(
-        ['答应', '拒绝'].map((e, i) => {
-          return {
-            accelerator: i * 100,
-            config: { align: 'center', width: 12 },
-            content: e,
-            type: 'button',
-          };
-        }),
-      );
-      if (await era.input()) {
-        if (check === 2) {
-          await era.printAndWait([
-            '哗，那 ',
-            chara.get_colored_name(),
-            ' 脸色一变，挟着 ',
+      if (
+        await select_yes_or_no(
+          [
+            '繁忙的一天结束，',
             me.get_colored_name(),
-            ` 强行向外走，定是要迫${chara.sex}的 `,
-            sys_get_colored_callname(chara_id, 0),
-            ' 跪地做星努力呀！',
-          ]);
-          hook.arg = 2;
-        } else {
-          await era.printAndWait([
+            ' 把 ',
             chara.get_colored_name(),
-            ' 失落地转身向学生宿舍走去……',
-          ]);
-          hook.arg = 0;
-        }
-      } else {
+            ' 送到学生宿舍门口，',
+            chara.get_colored_name(),
+            ' 扭扭捏捏地提出了一起睡觉的邀请……',
+          ],
+          '答应',
+          '拒绝',
+        )
+      ) {
         hook.arg = 1;
         await era.printAndWait([
           '在其他人温暖的目光中，脸色绯红的 ',
@@ -192,6 +170,23 @@ handlers[event_hooks.good_night] = async (chara_id, hook) => {
           me.get_colored_name(),
           ` 的手向${location_name[era.get('flag:当前位置')]}走去……`,
         ]);
+      } else if (check === 2) {
+        await era.printAndWait([
+          '哗，那 ',
+          chara.get_colored_name(),
+          ' 脸色一变，挟着 ',
+          me.get_colored_name(),
+          ` 强行向外走，定是要迫${chara.sex}的 `,
+          sys_get_colored_callname(chara_id, 0),
+          ' 跪地做星努力呀！',
+        ]);
+        hook.arg = 2;
+      } else {
+        await era.printAndWait([
+          chara.get_colored_name(),
+          ' 失落地转身向学生宿舍走去……',
+        ]);
+        hook.arg = 0;
       }
     } else {
       era.print([
@@ -424,41 +419,26 @@ handlers[event_hooks.borrow_money] = async (chara_id) => {
       const repay = Math.ceil(
         (amount * (1 + 0.0125 * (1 - love_buff) * time)) / time,
       );
-      era.printInColRows(
-        {
-          columns: [
+      if (
+        await select_yes_or_no(
+          [
+            '借款 ',
+            { content: amount.toLocaleString(), color: money_color },
+            ' 马币，此后 ',
+            { content: time.toLocaleString(), color: buff_colors[3] },
+            ' 周内每周还款 ',
+            { content: repay.toLocaleString(), color: money_color },
+            ' 马币，共 ',
             {
-              content: [
-                '借款 ',
-                { content: amount.toLocaleString(), color: money_color },
-                ' 马币，此后 ',
-                { content: time.toLocaleString(), color: buff_colors[3] },
-                ' 周内每周还款 ',
-                { content: repay.toLocaleString(), color: money_color },
-                ' 马币，共 ',
-                {
-                  content: (repay * time).toLocaleString(),
-                  color: money_color,
-                },
-                ' 马币，接受吗？',
-              ],
-              type: 'text',
+              content: (repay * time).toLocaleString(),
+              color: money_color,
             },
+            ' 马币，接受吗？',
           ],
-        },
-        {
-          columns: ['算了', '好吧'].map((e, i) => {
-            return {
-              accelerator: i * 100,
-              config: { align: 'center', width: 12 },
-              content: e,
-              type: 'button',
-            };
-          }),
-        },
-      );
-      const ret = await era.input();
-      if (ret) {
+          '算了',
+          '好吧',
+        )
+      ) {
         sys_change_money(amount);
         billing.creditor = chara_id;
         billing.repay = -repay;
