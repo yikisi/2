@@ -7,10 +7,11 @@ const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FukukitaruEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {

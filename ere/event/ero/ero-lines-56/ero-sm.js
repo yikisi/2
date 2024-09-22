@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+
 const {
   after_refusing_by_attacker,
   after_refusing_by_defender,
@@ -9,7 +11,6 @@ const {
 const { get_random_value } = require('#/utils/value-utils');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 /**
  * @author Alex

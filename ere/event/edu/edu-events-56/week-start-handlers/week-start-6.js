@@ -5,6 +5,7 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const palace = require('#/event/snippets/palace');
 const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FukukitaruEduMarks,EventObject):Promise>} handlers */

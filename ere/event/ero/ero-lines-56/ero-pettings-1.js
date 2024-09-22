@@ -2,12 +2,13 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const { part_enum } = require('#/data/ero/part-const');
-const { ero_hooks } = require('#/data/event/ero-hooks');
 const {
   after_refusing_by_defender,
   ask_action,
 } = require('#/event/ero/common-lines/snippets');
+
+const { part_enum } = require('#/data/ero/part-const');
+const { ero_hooks } = require('#/data/event/ero-hooks');
 
 async function deep_blow_job_kitaru(attacker, defender, hook) {
   if (hook.arg) {

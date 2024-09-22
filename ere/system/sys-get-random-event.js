@@ -1,4 +1,8 @@
-const { cb_enum, get_random_event_object } = require('#/event/queue');
+const {
+  cb_enum,
+  get_chara_event_object,
+  get_random_event_object,
+} = require('#/event/queue');
 
 const event_hooks = require('#/data/event/event-hooks');
 
@@ -9,13 +13,17 @@ cb_dict[cb_enum.edu] = require('#/system/script/sys-call-edu-script');
 cb_dict[cb_enum.love] = require('#/system/script/sys-call-love-script');
 
 /**
- * get a random event from stage's queue
+ * get a random or character's specified event from stage's queue
  * @param {number} stage
- * @param {boolean} [random]
+ * @param {boolean|number} [random_or_chara_id]
  * @returns {undefined|function(*?):Promise<*>}
  */
-function sys_get_random_event(stage, random) {
-  const event_object = get_random_event_object(stage, random);
+function sys_get_random_event(stage, random_or_chara_id) {
+  const event_object = (
+    typeof random_or_chara_id === 'number'
+      ? get_chara_event_object
+      : get_random_event_object
+  )(stage, random_or_chara_id);
   if (event_object && cb_dict[event_object.type]) {
     return async (extra_flag) =>
       await cb_dict[event_object.type](

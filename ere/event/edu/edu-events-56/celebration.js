@@ -2,6 +2,9 @@ const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
+  check_pregnant_unprotect,
+} = require('#/system/ero/sys-calc-ero-status');
+const {
   begin_and_init_ero,
   end_ero_and_train,
   set_palam_to_max,
@@ -19,9 +22,6 @@ const { part_enum } = require('#/data/ero/part-const');
 const FukukitaruEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
-const {
-  check_pregnant_unprotect,
-} = require('#/system/ero/sys-calc-ero-status');
 
 /**
  * @param {CharaTalk} kitaru
