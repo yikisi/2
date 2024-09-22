@@ -183,7 +183,8 @@ async function sys_calc_orgasm(shown, ...ids) {
                     0.5 * era.get(`talent:0:早泄`);
               } else if (
                 chara_id > 0 &&
-                era.get(`tcvar:${chara_id}:阴茎接触部位`).owner === 0
+                era.get(`tcvar:${chara_id}:阴茎接触部位`).owner === 0 &&
+                !era.get(`tcvar:${chara_id}:避孕套`)
               ) {
                 stop_success =
                   Math.random() <

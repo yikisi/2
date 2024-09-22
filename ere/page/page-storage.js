@@ -48,8 +48,9 @@ function get_item_list() {
 module.exports = async () => {
   let buffer = get_item_list(),
     flag_storage = true;
+  const cur_lines = era.getLineCount();
   while (flag_storage) {
-    let line_count = era.printMultiColumns([
+    era.printMultiColumns([
       {
         content:
           buffer.length > 0
@@ -81,7 +82,7 @@ module.exports = async () => {
       } else {
         await era.waitAnyKey();
       }
-      line_count = era.getLineCount() - line_count - 1;
+      const line_count = era.getLineCount() - cur_lines;
       if (line_count > 0) {
         await era.clear(line_count);
       }

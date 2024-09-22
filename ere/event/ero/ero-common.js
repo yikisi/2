@@ -185,39 +185,39 @@ handlers[ero_hooks.orgasm_denial] = async (chara_id, _, extra_flag) => {
       },
       ...[`以 ${optimized_part_names[touch.part]} 接纳`, '避开精芒'].map(
         (e, i) => ({
-          accelerator: i * 2,
+          accelerator: i * 100,
           config: { align: 'center', width: 12 },
           content: e,
           type: 'button',
         }),
       ),
     ]);
-  }
-  const ret = await era.input();
-  if (ret) {
-    if (!extra_flag.stop_success) {
-      era.print([
-        me.get_colored_name(),
-        ' 在和 ',
-        chara.get_colored_name(),
-        ' 的竞速中失败了……',
-      ]);
-    } else if (ret === 2) {
-      era.print([
-        me.get_colored_name(),
-        ' 的 ',
-        optimized_part_names[touch.part],
-        ' 吐出了 ',
-        chara.get_colored_name(),
-        ' 蓄势待发的肉棒，温热的精液径直喷向了 ',
-        me.get_colored_name(),
-        ' 的 ',
-        touch.part === part_enum.mouth ? '俏脸' : '玉体',
-        '……',
-      ]);
+    const ret = await era.input();
+    if (ret) {
+      if (!extra_flag.stop_success) {
+        era.print([
+          me.get_colored_name(),
+          ' 在和 ',
+          chara.get_colored_name(),
+          ' 的竞速中失败了……',
+        ]);
+      } else if (ret === 2) {
+        era.print([
+          me.get_colored_name(),
+          ' 的 ',
+          optimized_part_names[touch.part],
+          ' 吐出了 ',
+          chara.get_colored_name(),
+          ' 蓄势待发的肉棒，温热的精液径直喷向了 ',
+          me.get_colored_name(),
+          ' 的 ',
+          touch.part === part_enum.mouth ? '俏脸' : '玉体',
+          '……',
+        ]);
+      }
     }
+    return ret;
   }
-  return ret;
 };
 
 /** @param {number} chara_id */

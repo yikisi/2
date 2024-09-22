@@ -132,7 +132,7 @@ const era = {
      * @param {any} msg
      */
     debug(msg) {
-      return era.logger.debug(msg);
+      era.logger.debug(msg);
     },
     /**
      * to log something into program logs as error level
@@ -140,14 +140,14 @@ const era = {
      * @param {any} [stack]
      */
     error(msg, stack) {
-      return era.logger.error(msg, stack);
+      era.logger.error(msg, stack);
     },
     /**
      * to log something into program logs
      * @param {any} msg
      */
     info(msg) {
-      return era.logger.info(msg);
+      era.logger.info(msg);
     },
   },
   /**
@@ -174,15 +174,6 @@ const era = {
    */
   // eslint-disable-next-line no-unused-vars
   printButton(content, accelerator, config) {},
-  /**
-   *
-   * @param content
-   * @param [config]
-   * @param [style]
-   * @returns {number} line number of the printed
-   */
-  // eslint-disable-next-line no-unused-vars
-  printDynamicText(content, config, style) {},
   /**
    * print images that must be declared in csv files in #/resources
    * @param {string} names REQUIRED image names
@@ -316,20 +307,18 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   setAlign(textAlign) {},
   /**
-   * set style of dynamic text
-   * @param lineNumber
-   * @param style
-   * @returns {void}
-   */
-  // eslint-disable-next-line no-unused-vars
-  setDynamicStyle(lineNumber, style) {},
-  /**
    * set default horizontal align of inColRows
    * @param {string} align REQUIRED the vertical align, start, end, center, space-around, space-between or space-evenly
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
   setHorizontalAlign(align) {},
+  /**
+   * @param {string} [maskName]
+   * @param {number} [opacity]
+   */
+  // eslint-disable-next-line no-unused-vars
+  setMask(maskName, opacity) {},
   /**
    * set default offset
    * @param {number} offset REQUIRED an integer between 0 and 23
@@ -365,7 +354,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '2.1.0', engine: undefined },
+  version: { sdk: '2.2.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
@@ -378,7 +367,9 @@ Object.keys(era).forEach((key) => {
     era[key] = (...args) => {
       if (!era[key]._s) {
         era.logger.error(
-          `unsupported api! please check the version of the engine! current version: sdk=${era.version.sdk}, engine=${era.version.engine}`,
+          `unsupported api! please check the version of the engine! current version: sdk=${
+            era.version.sdk
+          }, engine=${era.version.engine}`,
         );
       }
       return era[key](...args);
