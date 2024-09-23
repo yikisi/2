@@ -1,3 +1,9 @@
+/**
+ * @file 爱丽速子 - 日常
+ *
+ * @author 幽白書
+ * @author 黑奴一号 无名黑奴（修订）
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -835,12 +841,6 @@ handlers[
   event_hooks.slave_end
 ] = require('#/event/daily/daily-events-32/slave-end');
 
-/**
- * 速子的日常事件，id=32
- *
- * @author 幽白書
- * @author 黑奴一号 无名黑奴（修订）
- */
 module.exports = {
   /**
    * @param {HookArg} hook

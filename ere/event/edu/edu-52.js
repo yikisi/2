@@ -1,3 +1,8 @@
+/**
+ * @file 春乌拉拉 - 育成
+ *
+ * @author 99
+ */
 const era = require('#/era-electron');
 
 const {
@@ -756,10 +761,6 @@ handlers[
 ] = require('#/event/edu/edu-events-52/crazy-fan-end');
 
 /**
- * 春乌拉拉的育成事件
- *
- * @author 99
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

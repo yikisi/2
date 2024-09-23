@@ -1,14 +1,14 @@
+/**
+ * @file 佐岳五月 - 招募
+ *
+ * @author 无名黑奴（临时）
+ */
 const { printAndWait } = require('#/era-electron');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-/**
- * 佐岳五月 - 招募
- *
- * @author 无名黑奴（临时）
- */
 module.exports = {
   async run() {
     const may = get_chara_talk(343),

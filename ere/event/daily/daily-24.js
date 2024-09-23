@@ -1,3 +1,8 @@
+/**
+ * @file 摩耶重炮 - 日常
+ *
+ * @author 黑奴二号
+ */
 const era = require('#/era-electron');
 
 const {
@@ -34,11 +39,6 @@ function print_attr_change(chara_id, attr_name, val) {
   }
 }
 
-/**
- * 重炮的日常事件，id=24
- *
- * @author 黑奴二号
- */
 module.exports = {
   override: true, //override设为true会跳过默认的数值结算，反之则会套用默认的数值结算
   /**

@@ -1,3 +1,10 @@
+/**
+ * @file 玩家 - 日常
+ *
+ * @author 雞雞
+ * @author 无名黑奴（改编）
+ */
+
 const era = require('#/era-electron');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -109,10 +116,6 @@ handlers[event_hooks.out_station] = async (hook) => {
   ]);
 };
 
-/**
- * @author 雞雞
- * @author 无名黑奴（改编）
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

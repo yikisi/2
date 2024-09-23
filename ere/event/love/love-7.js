@@ -1,3 +1,8 @@
+/**
+ * @file 黄金船 - 爱慕
+ *
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
@@ -539,10 +544,6 @@ async function golden_ship_attack() {
 }
 
 /**
- * 黄金船 - 爱慕
- *
- * @author 雞雞
- *
  * @param {HookArg} hook
  * @param _
  * @param {EventObject} event_object

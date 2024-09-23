@@ -1,3 +1,8 @@
+/**
+ * @file 奇锐骏 - 育成
+ *
+ * @author 夕阳红艺术团小组长-赤红彗星红桃爵士Q先生
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -340,10 +345,6 @@ handlers[event_hooks.race_end] = async (hook, extra_flag) => {
 };
 
 /**
- * 奇锐骏 - 育成
- *
- * @author 夕阳红艺术团小组长-赤红彗星红桃爵士Q先生
- *
  * @param {HookArg} hook
  * @param {Record<string,any>} extra_flag
  * @param {EventObject} event_object

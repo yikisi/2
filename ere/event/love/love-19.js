@@ -1,3 +1,8 @@
+/**
+ * @file 爱丽数码 - 爱慕
+ *
+ * @author 片手虾好评发售中！
+ */
 const era = require('#/era-electron');
 
 const {
@@ -916,11 +921,6 @@ handlers[99] = async (digital, me, callname) => {
   await quick_into_sex(19);
 };
 
-/**
- * 爱丽数码 - 爱慕
- *
- * @author 片手虾好评发售中！
- */
 module.exports = async (hook, _, event_object) => {
   if (handlers[event_object.arg]) {
     return await handlers[event_object.arg](

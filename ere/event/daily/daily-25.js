@@ -1,3 +1,8 @@
+/**
+ * @file 曼城茶座 - 日常
+ *
+ * @author Necroz
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -834,11 +839,6 @@ handlers[
   event_hooks.celebration
 ] = require('#/event/daily/daily-events-25/celebration');
 
-/**
- * 曼城茶座的日常事件，id=25
- *
- * @author Necroz
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

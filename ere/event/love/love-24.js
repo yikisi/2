@@ -1,3 +1,8 @@
+/**
+ * @file 摩耶重炮 - 爱慕
+ *
+ * @author 黑奴二号
+ */
 const era = require('#/era-electron');
 
 const {
@@ -10,11 +15,6 @@ const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-lo
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-/**
- * 摩耶重炮 - 爱慕
- *
- * @author 黑奴二号
- */
 module.exports = async (hook, _, event_object) => {
   const maya = get_chara_talk(24),
     me = get_chara_talk(0),

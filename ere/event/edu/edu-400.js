@@ -1,3 +1,8 @@
+/**
+ * @file 周日宁静 - 育成
+ *
+ * @author 黑衣剑士-星爆气流斩准备就绪
+ */
 const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
@@ -852,10 +857,6 @@ handlers[event_hooks.school_atrium] = async (_, __, event_object) => {
 };
 
 /**
- * 周日宁静的育成事件
- *
- * @author 黑衣剑士-星爆气流斩准备就绪
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

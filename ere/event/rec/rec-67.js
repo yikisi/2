@@ -1,3 +1,10 @@
+/**
+ * @file 里见光钻 - 招募
+ *
+ * @author 某知名手游公司编剧
+ * @author 黑奴二号（改编）
+ * @author 无名黑奴（修订）
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -112,13 +119,6 @@ async function common_comments(me, daiya, other) {
   });
 }
 
-/**
- * 里见光钻的育成事件
- *
- * @author cy
- * @author 黑奴二号（改编）
- * @author 无名黑奴（修订）
- */
 module.exports = {
   override: true,
   async run(stage_id) {

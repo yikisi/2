@@ -1,3 +1,8 @@
+/**
+ * @file 秋川弥生 - 爱慕
+ *
+ * @author 无名黑奴（临时）
+ */
 const era = require('#/era-electron');
 
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
@@ -10,10 +15,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-302');
 
 /**
- * 秋川弥生 - 爱慕
- *
- * @author 无名黑奴（临时）
- *
  * @param _
  * @param __
  * @param {EventObject} event_object

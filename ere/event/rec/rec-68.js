@@ -1,3 +1,8 @@
+/**
+ * @file 北部玄驹 - 招募
+ *
+ * @author 小黑
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -8,11 +13,6 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 北部玄驹的招募事件，id=68
- *
- * @author 小黑
- */
 module.exports = {
   async run() {
     const kita = get_chara_talk(68),

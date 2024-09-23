@@ -1,3 +1,8 @@
+/**
+ * @file 桐生院葵 - 招募
+ *
+ * @author 无名黑奴（临时）
+ */
 const {
   get,
   printAndWait,
@@ -20,11 +25,6 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
 
-/**
- * 桐生院葵 - 招募
- *
- * @author 无名黑奴（临时）
- */
 module.exports = {
   async run() {
     const aoi = get_chara_talk(304),

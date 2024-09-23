@@ -1,3 +1,8 @@
+/**
+ * @file 荣进闪耀 - 日常
+ *
+ * @author 爱放箭的袁本初
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -739,11 +744,6 @@ handlers[event_hooks.load_talk] = async () => {
   }
 };
 
-/**
- * 荣进闪耀的日常事件，id=37
- *
- * @author 爱放箭的袁本初
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

@@ -1,3 +1,8 @@
+/**
+ * @file 爱丽速子 - 招募
+ *
+ * @author 幽白書
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -12,11 +17,6 @@ const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 爱丽速子的招募事件，id=32
- *
- * @author 幽白書
- */
 module.exports = {
   override: true,
   /**

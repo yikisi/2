@@ -1,3 +1,8 @@
+/**
+ * @file 周日宁静 - 招募
+ *
+ * @author 黑衣剑士-星爆气流斩准备就绪
+ */
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
@@ -11,11 +16,6 @@ const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 
-/**
- * 周日宁静的招募事件，id=400
- *
- * @author 黑衣剑士-星爆气流斩准备就绪
- */
 module.exports = {
   async run() {
     const silence = get_chara_talk(400),

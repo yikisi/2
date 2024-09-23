@@ -1,3 +1,8 @@
+/**
+ * @file 第一红宝石 - 爱慕
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -18,11 +23,6 @@ const handlers = {};
   require('#/event/love/love-events-85/others'),
 ].forEach((f) => f(handlers));
 
-/**
- * 第一红宝石 - 爱慕
- *
- * @author 梦露
- */
 module.exports = async (hook, _, event_object) => {
   const me = get_chara_talk(0),
     ruby = get_chara_talk(85);

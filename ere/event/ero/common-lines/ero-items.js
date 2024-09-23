@@ -1,3 +1,8 @@
+/**
+ * @file 调教地文 - 道具系
+ *
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
@@ -15,12 +20,13 @@ const {
 const { part_names, part_names4item } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @author 无名黑奴
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
- */
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
-  /** @param {CharaTalk} attacker */
+  /**
+   * @author 无名黑奴
+   *
+   * @param {CharaTalk} attacker
+   */
   handlers[ero_hooks.condom] = (attacker) =>
     era.printAndWait([
       '【',
@@ -36,6 +42,8 @@ module.exports = (handlers) => {
     ]);
 
   /**
+   * @author 无名黑奴
+   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    */
@@ -51,6 +59,8 @@ module.exports = (handlers) => {
     ]);
 
   /**
+   * @author 无名黑奴
+   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param _
@@ -82,6 +92,8 @@ module.exports = (handlers) => {
   };
 
   /**
+   * @author 无名黑奴
+   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param _
@@ -154,6 +166,8 @@ module.exports = (handlers) => {
   };
 
   /**
+   * @author 无名黑奴
+   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} _
@@ -222,6 +236,8 @@ module.exports = (handlers) => {
   };
 
   /**
+   * @author 无名黑奴
+   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -262,6 +278,8 @@ module.exports = (handlers) => {
   };
 
   /**
+   * @author 无名黑奴
+   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

@@ -1,4 +1,9 @@
-﻿const era = require('#/era-electron');
+﻿/**
+ * @file 爱丽数码 - 日常
+ *
+ * @author 片手虾好评发售中！
+ */
+const era = require('#/era-electron');
 
 const {
   sys_get_callname,
@@ -549,11 +554,6 @@ handlers[event_hooks.out_station] = async (hook) => {
   }
 };
 
-/**
- * 爱丽数码的日常事件，id=19
- *
- * @author 片手虾好评发售中！
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

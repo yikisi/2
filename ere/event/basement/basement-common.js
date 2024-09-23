@@ -1,3 +1,8 @@
+/**
+ * @file 地下室地文
+ *
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -56,7 +61,11 @@ class CustomizedBase {
     this.id = chara_id;
   }
 
-  /** 初入地下室的欢迎 */
+  /**
+   * 初入地下室的欢迎
+   *
+   * @author 无名黑奴
+   */
   welcome() {
     const me = get_chara_talk(0),
       chara = get_chara_talk(this.id);
@@ -91,6 +100,8 @@ class CustomizedBase {
 
   /**
    * 地下室的基础情报，显示在当前互动角色情报下面，说明角色当前的警戒度和独占力情况
+   *
+   * @author 无名黑奴
    *
    * @param {boolean} [can_strike]
    */
@@ -143,12 +154,18 @@ class CustomizedBase {
   /**
    * 讨好角色后的反应
    *
+   * @author 无名黑奴
+   *
    * @param {number} [supporter]
    */
   // eslint-disable-next-line no-unused-vars
   async flatter(supporter) {}
 
-  /** 趁角色刚回到地下室偷袭成功 */
+  /**
+   * 趁角色刚回到地下室偷袭成功
+   *
+   * @author 无名黑奴
+   */
   async strike_success() {
     await era.printAndWait([
       get_chara_talk(0).get_colored_name(),
@@ -156,7 +173,11 @@ class CustomizedBase {
     ]);
   }
 
-  /** 趁角色刚回到地下室偷袭失败，被打晕了 */
+  /**
+   * 趁角色刚回到地下室偷袭失败，被打晕了
+   *
+   * @author 无名黑奴
+   */
   async strike_fail() {
     await era.printAndWait([
       get_chara_talk(0).get_colored_name(),
@@ -164,7 +185,11 @@ class CustomizedBase {
     ]);
   }
 
-  /** 正面击败角色，但还不知道能不能解除机关 */
+  /**
+   * 正面击败角色，但还不知道能不能解除机关
+   *
+   * @author 无名黑奴
+   */
   async battle_success() {
     await era.printAndWait([
       get_chara_talk(0).get_colored_name(),
@@ -174,7 +199,11 @@ class CustomizedBase {
     ]);
   }
 
-  /** 没能正面击败角色，直接就被打晕了 */
+  /**
+   * 没能正面击败角色，直接就被打晕了
+   *
+   * @author 无名黑奴
+   */
   async battle_fail() {
     await era.printAndWait([
       get_chara_talk(0).get_colored_name(),
@@ -184,7 +213,11 @@ class CustomizedBase {
     ]);
   }
 
-  /** 正面击败角色后当面成功解除机关 */
+  /**
+   * 正面击败角色后当面成功解除机关
+   *
+   * @author 无名黑奴
+   */
   async battle_escape() {
     await era.printAndWait([
       get_chara_talk(0).get_colored_name(),
@@ -192,7 +225,11 @@ class CustomizedBase {
     ]);
   }
 
-  /** 正面击败角色后解除机关失败，没跑出去又被打晕了 */
+  /**
+   * 正面击败角色后解除机关失败，没跑出去又被打晕了
+   *
+   * @author 无名黑奴
+   */
   async battle_prison() {
     const me = get_chara_talk(0);
     await era.printAndWait([
@@ -207,6 +244,8 @@ class CustomizedBase {
 
   /**
    * 角色回到地下室/醒来发现玩家在逃离地下室
+   *
+   * @author 无名黑奴
    *
    * @param {boolean} out_of_prison
    * @param {boolean} s_level_up
@@ -244,12 +283,20 @@ class CustomizedBase {
     }
   }
 
-  /** 加固地下室 */
+  /**
+   * 加固地下室
+   *
+   * @author 无名黑奴
+   */
   fix_prison() {
     era.print([get_chara_talk(this.id).get_colored_name(), ' 加固了地下室……']);
   }
 
-  /** 从沉睡中清醒 */
+  /**
+   * 从沉睡中清醒
+   *
+   * @author 无名黑奴
+   */
   get_up() {
     const chara = get_chara_talk(this.id),
       life_marks = new LifeEventMarks(this.id);
@@ -267,7 +314,11 @@ class CustomizedBase {
     }
   }
 
-  /** 回到地下室 */
+  /**
+   * 回到地下室
+   *
+   * @author 无名黑奴
+   */
   back_basement() {
     const chara = get_chara_talk(this.id),
       life_marks = new LifeEventMarks(this.id);
@@ -284,7 +335,11 @@ class CustomizedBase {
     }
   }
 
-  /** 因精力不足而昏睡 */
+  /**
+   * 因精力不足而昏睡
+   *
+   * @author 无名黑奴
+   */
   deep_sleep() {
     era.print([
       get_chara_talk(this.id).get_colored_name(),
@@ -292,7 +347,11 @@ class CustomizedBase {
     ]);
   }
 
-  /** 进食 */
+  /**
+   * 进食
+   *
+   * @author 无名黑奴
+   */
   eat_something() {
     era.print([
       get_chara_talk(this.id).get_colored_name(),
@@ -300,7 +359,11 @@ class CustomizedBase {
     ]);
   }
 
-  /** 因精力不足而主动选择睡眠 */
+  /**
+   * 因精力不足而主动选择睡眠
+   *
+   * @author 无名黑奴
+   */
   sleep() {
     era.print([
       get_chara_talk(this.id).get_colored_name(),
@@ -308,7 +371,11 @@ class CustomizedBase {
     ]);
   }
 
-  /** 角色主动调情 */
+  /**
+   * 角色主动调情
+   *
+   * @author 无名黑奴
+   */
   lure() {
     era.print([
       get_chara_talk(this.id).get_colored_name(),
@@ -318,7 +385,11 @@ class CustomizedBase {
     ]);
   }
 
-  /** 选择雷普玩家 */
+  /**
+   * 选择雷普玩家
+   *
+   * @author 无名黑奴
+   */
   async rape(supporter) {
     if (supporter) {
       await era.printAndWait([
@@ -340,7 +411,11 @@ class CustomizedBase {
     }
   }
 
-  /** 开始加固地下室 */
+  /**
+   * 开始加固地下室
+   *
+   * @author 无名黑奴
+   */
   start_fixing() {
     era.print([
       get_chara_talk(this.id).get_colored_name(),
@@ -348,12 +423,20 @@ class CustomizedBase {
     ]);
   }
 
-  /** 刚刚离开 */
+  /**
+   * 刚刚离开
+   *
+   * @author 无名黑奴
+   */
   out() {
     era.print([get_chara_talk(this.id).get_colored_name(), ' 要出去一趟……']);
   }
 
-  /** 请求对方释放，对方同意 */
+  /**
+   * 请求对方释放，对方同意
+   *
+   * @author 无名黑奴
+   */
   async ask_release_agree() {
     const chara = get_chara_talk(this.id),
       me = get_chara_talk(0);
@@ -371,7 +454,11 @@ class CustomizedBase {
     ]);
   }
 
-  /** 请求对方释放，对方拒绝 */
+  /**
+   * 请求对方释放，对方拒绝
+   *
+   * @author 无名黑奴
+   */
   async ask_release_reject() {
     const chara = get_chara_talk(this.id),
       me = get_chara_talk(0);
@@ -383,7 +470,11 @@ class CustomizedBase {
     ]);
   }
 
-  /** 询问时间 */
+  /**
+   * 询问时间
+   *
+   * @author 无名黑奴
+   */
   // eslint-disable-next-line no-unused-vars
   async ask_time(date, hours, minutes) {
     const chara = get_chara_talk(this.id),
@@ -399,6 +490,8 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 失败
+   *
+   * @author 无名黑奴
    *
    * @param {number} owner_id
    */
@@ -440,6 +533,8 @@ class CustomizedBase {
   /**
    * 救援事件 - 趁主人不在时救援成功
    *
+   * @author 无名黑奴
+   *
    * @param {number} owner_id
    */
   async rescue_sneak_success(owner_id) {
@@ -472,6 +567,8 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 趁主人不在时救援成功，但是将玩家关到自己的地下室
+   *
+   * @author 无名黑奴
    *
    * @param {number} owner_id
    */
@@ -516,6 +613,8 @@ class CustomizedBase {
   /**
    * 救援事件 - 和玩家关系不睦，因此同流合污
    *
+   * @author 无名黑奴
+   *
    * @param {number} owner_id
    */
   async rescue_join(owner_id) {
@@ -559,6 +658,8 @@ class CustomizedBase {
   /**
    * 救援事件 - 正面击败主人，救援成功
    *
+   * @author 无名黑奴
+   *
    * @param {number} owner_id
    */
   async rescue_battle_success(owner_id) {
@@ -599,6 +700,8 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 正面击败主人，但是把玩家关到自己的地下室
+   *
+   * @author 无名黑奴
    *
    * @param {number} owner_id
    */

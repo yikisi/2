@@ -1,3 +1,8 @@
+/**
+ * @file 优秀素质 - 育成
+ *
+ * @author 红红火火恍惚
+ */
 const era = require('#/era-electron');
 
 const {
@@ -827,10 +832,6 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
 handlers[event_hooks.race_end] = require('#/event/edu/edu-events-60/race-end');
 
 /**
- * 优秀素质的育成事件
- *
- * @author 红红火火恍惚
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

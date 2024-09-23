@@ -1,3 +1,8 @@
+/**
+ * @file 第一红宝石 - 招募
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -656,11 +661,6 @@ handlers[event_hooks.week_start] = async function () {
   era.set('flag:物色对象', 0);
 };
 
-/**
- * 第一红宝石的招募事件，id=85
- *
- * @author 梦露
- */
 module.exports = {
   /**
    * @param {number} stage_id

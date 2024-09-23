@@ -1,3 +1,9 @@
+/**
+ * @file 育成地文
+ *
+ * @author 雞雞
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
@@ -22,6 +28,8 @@ const { attr_enum, fumble_result } = require('#/data/train-const');
 const handlers = {};
 
 /**
+ * @author 雞雞
+ *
  * @param {number} chara_id
  * @param _
  * @param {{attr:number}} extra_flag
@@ -80,6 +88,9 @@ handlers[event_hooks.train] = async (chara_id, _, extra_flag) => {
 };
 
 /**
+ * @author 雞雞
+ * @author 无名黑奴
+ *
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {TrainSuccessParams} extra_flag
@@ -153,6 +164,8 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
 };
 
 /**
+ * @author 雞雞
+ *
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {{args:*,fumble:boolean,train:number}} extra_flag
@@ -192,6 +205,7 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
   }
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.week_start] = async (chara_id) => {
   const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
   const chara = get_chara_talk(chara_id),
@@ -218,6 +232,8 @@ handlers[event_hooks.week_start] = async (chara_id) => {
 };
 
 /**
+ * @author 雞雞
+ *
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {{lan:string}} extra_flag
@@ -248,6 +264,7 @@ handlers[event_hooks.foreign_study] = async (chara_id, hook, extra_flag) => {
   }
 };
 
+/** @author 无名黑奴 */
 handlers[event_hooks.foreign_rest] = async (chara_id) => {
   const chara = get_chara_talk(chara_id),
     chara_name = chara.get_colored_name(),
@@ -268,6 +285,7 @@ handlers[event_hooks.foreign_rest] = async (chara_id) => {
   ]);
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.foreign_train] = async (chara_id) => {
   const chara = get_chara_talk(chara_id),
     chara_name = chara.get_colored_name(),
@@ -288,6 +306,7 @@ handlers[event_hooks.foreign_train] = async (chara_id) => {
   ]);
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.foreign_travel] = async (chara_id) => {
   const me = get_chara_talk(0);
   await era.printAndWait([
@@ -312,6 +331,8 @@ handlers[event_hooks.race_start] = async (chara_id) => {
 };
 
 /**
+ * @author 雞雞
+ *
  * @param {number} chara_id
  * @param _
  * @param {RaceEndParams} extra_flag
@@ -341,6 +362,7 @@ handlers[event_hooks.race_end] = async (chara_id, _, extra_flag) => {
   }
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
@@ -411,11 +433,6 @@ handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
 };
 
 /**
- * 通用育成事件
- *
- * @author 雞雞
- * @author 无名黑奴（改编）
- *
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {*} extra_flag

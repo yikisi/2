@@ -1,3 +1,7 @@
+/**
+ * @file 目白阿尔丹 - 育成
+ * 只进行成就判定，无文本
+ */
 const ArdanEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-71');
 const event_hooks = require('#/data/event/event-hooks');
 
@@ -10,9 +14,6 @@ handlers[event_hooks.train_fail] = async () => {
 };
 
 /**
- * 目白阿尔丹育成
- * 只进行成就判定，无文本
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

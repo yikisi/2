@@ -127,9 +127,10 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
         e.type !== action_type_enum.get_up,
     )
     .filter((a) => a.type === action_type_enum.digestive_end)
-    .forEach((a) =>
-      sys_change_attr_and_print(a.chara_id, '体力', get_random_value(100, 200)),
-    );
+    .forEach((a) => {
+      sys_change_attr_and_print(a.chara_id, '体力', get_random_value(100, 200));
+      new LifeEventMarks(a.chara_id).b_food_buff = 0;
+    });
   begin_and_init_ero(...part_list);
   if (is_rape) {
     era.set(
@@ -727,6 +728,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
           ).length
         ) {
           sys_change_attr_and_print(e, '体力', get_random_value(100, 200));
+          life_marks.b_food_buff = 0;
         }
       });
     }

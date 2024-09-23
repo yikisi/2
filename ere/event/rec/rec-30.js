@@ -1,3 +1,8 @@
+/**
+ * @file 米浴 - 招募
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
@@ -10,11 +15,6 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 米浴的招募事件，id=30
- *
- * @author 梦露
- */
 module.exports = {
   /**
    * @param {number} hook

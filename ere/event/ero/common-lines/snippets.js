@@ -8,6 +8,8 @@ const { part_touch } = require('#/data/ero/part-const');
 
 module.exports = {
   /**
+   * @author O口口口口口
+   *
    * @param {CharaTalk} attacker
    * @param _
    * @param {HookArg} hook
@@ -26,6 +28,8 @@ module.exports = {
     sys_change_lust(attacker.id, 100);
   },
   /**
+   * @author O口口口口口
+   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

@@ -1,3 +1,8 @@
+/**
+ * @file 鲁铎象征 - 招募
+ *
+ * @author 露娜俘虏
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -10,11 +15,6 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 鲁铎象征 - 招募
- *
- * @author 露娜俘虏
- */
 module.exports = {
   override: true,
   async run(hook) {

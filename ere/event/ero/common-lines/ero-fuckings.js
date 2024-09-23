@@ -1,3 +1,8 @@
+/**
+ * @file 调教地文 - 性交系
+ *
+ * @author O口口口口口
+ */
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
@@ -11,10 +16,7 @@ const {
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @author O口口口口口
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
- */
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
   /**
    * @param {CharaTalk} attacker

@@ -1,3 +1,8 @@
+/**
+ * @file 拜耶尔土耳其 - 爱慕
+ *
+ * @author 黑衣剑士-星爆气流斩准备就绪
+ */
 const {
   get,
   input,
@@ -253,10 +258,6 @@ handlers[50] = async (god, me, callname) => {
 };
 
 /**
- * 拜耶尔土耳其 - 爱慕
- *
- * @author 黑衣剑士-星爆气流斩准备就绪
- *
  * @param _
  * @param __
  * @param {EventObject} event_object

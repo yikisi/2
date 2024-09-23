@@ -1,3 +1,8 @@
+/**
+ * @file 拜耶尔土耳其 - 招募
+ *
+ * @author 黑衣剑士-星爆气流斩准备就绪
+ */
 const {
   get,
   input,
@@ -12,11 +17,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 拜耶尔土耳其 - 招募
- *
- * @author 黑衣剑士-星爆气流斩准备就绪
- */
 module.exports = {
   async run() {
     const me = get_chara_talk(0),

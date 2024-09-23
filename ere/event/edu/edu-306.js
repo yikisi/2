@@ -1,3 +1,8 @@
+/**
+ * @file 㭴本理子 - 育成
+ *
+ * @author 无名黑奴（临时）
+ */
 const {
   get,
   printAndWait,
@@ -129,11 +134,6 @@ const handlers = {
   },
 };
 
-/**
- * 㭴本理子 - 育成
- *
- * @author 无名黑奴（临时）
- */
 module.exports = async (hook, extra_flag, event_object) => {
   if (!handlers[event_object?.arg]) {
     throw new Error();

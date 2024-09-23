@@ -1,3 +1,8 @@
+/**
+ * @file 玩家 - 地下室
+ *
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const CustomizedBase = require('#/event/basement/basement-common');

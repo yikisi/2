@@ -1,3 +1,8 @@
+/**
+ * @file 爱丽速子 - 调教
+ *
+ * @author 幽白書
+ */
 const {
   drawLine,
   get,
@@ -386,14 +391,14 @@ handlers[ero_hooks.ero_start] = async () => {
           return;
         }
         await tachyon.say_and_wait([callname, '～今天的实验也辛苦了']);
-        await tachyon.say_and_wait('那么……需要奖励吗♡');
+        await tachyon.say_and_wait('那么……需要奖励吗❤️');
         await me.say_and_wait('来吧');
         println();
         await printAndWait('滋啾滋啾');
         await printAndWait('实验室裏满是下流的声响');
         println();
-        await tachyon.say_and_wait([callname, '……', callname, '♡']);
-        await tachyon.say_and_wait('快点……填满我的骚穴♡');
+        await tachyon.say_and_wait([callname, '……', callname, '❤️']);
+        await tachyon.say_and_wait('快点……填满我的骚穴❤️');
         await tachyon.say_and_wait(
           '好好调教这个……在实验途中就开始不停流水的淫穴',
         );
@@ -409,9 +414,9 @@ handlers[ero_hooks.ero_start] = async () => {
           ' 的腥臭穴汁',
         ]);
         println();
-        await tachyon.say_and_wait('呜……好用力♡');
-        await tachyon.say_and_wait('稍微…稍微慢一点……♡');
-        await tachyon.say_and_wait('声音……啊嗯♡');
+        await tachyon.say_and_wait('呜……好用力❤️');
+        await tachyon.say_and_wait('稍微…稍微慢一点……❤️');
+        await tachyon.say_and_wait('声音……啊嗯❤️');
         println();
         await printAndWait('都这样勾引了还希望自己能慢一点？');
         await printAndWait([
@@ -427,9 +432,9 @@ handlers[ero_hooks.ero_start] = async () => {
         );
         await printAndWait('不管不顾的加快了速度');
         println();
-        await tachyon.say_and_wait([callname, '……', callname, '♡']);
-        await tachyon.say_and_wait('啊♡嗯啊♡啊♡啊啊♡');
-        await tachyon.say_and_wait([callname, '……给我♡给我更多♡']);
+        await tachyon.say_and_wait([callname, '……', callname, '❤️']);
+        await tachyon.say_and_wait('啊❤️嗯啊❤️啊❤️啊啊❤️');
+        await tachyon.say_and_wait([callname, '……给我❤️给我更多❤️']);
         println();
         await printAndWait([
           '渐入佳境后，腰甚至脱离了 ',
@@ -442,24 +447,24 @@ handlers[ero_hooks.ero_start] = async () => {
           ' 的兴奋程度也更上层楼，渴望将眼前雌性的身体，任凭雄性本能操控着身体',
         ]);
         println();
-        await tachyon.say_and_wait(['好棒♡', callname, ' 的肉棒♡好厉害♡']);
+        await tachyon.say_and_wait(['好棒❤️', callname, ' 的肉棒❤️好厉害❤️']);
         println();
         await printAndWait('肉体碰撞的声音更加响亮');
         await printAndWait('整个实验室中充斥着淫猥的气味及声音');
         println();
-        await tachyon.say_and_wait('又……又更大了♡');
+        await tachyon.say_and_wait('又……又更大了❤️');
         await tachyon.say_and_wait([
-          '要射了吗……在，在里面出来♡好想要……',
+          '要射了吗……在，在里面出来❤️好想要……',
           callname,
-          ' 的小宝宝♡',
+          ' 的小宝宝❤️',
         ]);
-        await tachyon.say_and_wait(['喜欢……最喜欢被 ', callname, ' 内射了♡']);
+        await tachyon.say_and_wait(['喜欢……最喜欢被 ', callname, ' 内射了❤️']);
         await tachyon.say_and_wait([
           '在小穴里面……尽情的出来……想生下 ',
           callname,
-          ' 的孩子♡想给 ',
+          ' 的孩子❤️想给 ',
           callname,
-          ' 生一窝小豚鼠♡',
+          ' 生一窝小豚鼠❤️',
         ]);
         println();
         await printAndWait([
@@ -486,10 +491,10 @@ handlers[ero_hooks.ero_start] = async () => {
           false,
         );
         println();
-        await tachyon.say_and_wait('齁喔喔喔喔喔喔♡');
-        await tachyon.say_and_wait('去，去了♡要被扯着奶头去了♡');
+        await tachyon.say_and_wait('齁喔喔喔喔喔喔❤️');
+        await tachyon.say_and_wait('去，去了❤️要被扯着奶头去了❤️');
         println();
-        await printAndWait('咚咕，嘟咕，咻噜噜噜♡');
+        await printAndWait('咚咕，嘟咕，咻噜噜噜❤️');
         await printAndWait('最后，最深入的插抽了几下后，精关彻底放开');
         await printAndWait([
           '白浆灌满了 ',
@@ -505,9 +510,9 @@ handlers[ero_hooks.ero_start] = async () => {
         await tachyon.say_and_wait([
           '好几天没能品尝到的……',
           callname,
-          ' 的肉棒♡欸嘿嘿♡',
+          ' 的肉棒❤️欸嘿嘿❤️',
         ]);
-        await tachyon.say_and_wait(['好棒……', callname, ' 的……好唔唔♡']);
+        await tachyon.say_and_wait(['好棒……', callname, ' 的……好唔唔❤️']);
         println();
         await printAndWait([
           '自以为已经结束的 ',
@@ -527,7 +532,7 @@ handlers[ero_hooks.ero_start] = async () => {
           ' 的肉棒再度堵住了嘴',
         ]);
         println();
-        await tachyon.say_and_wait('啾……啾啾♡');
+        await tachyon.say_and_wait('啾……啾啾❤️');
         println();
         await printAndWait([
           tachyon.get_colored_name(),
@@ -552,8 +557,8 @@ handlers[ero_hooks.ero_start] = async () => {
           '大概都会优先选择肉棒',
         ]);
         println();
-        await tachyon.say_and_wait('下次实验……一样拜托你了♡啾♡啾啵♡');
-        await tachyon.say_and_wait('唔！唔啾♡啾噜♡');
+        await tachyon.say_and_wait('下次实验……一样拜托你了❤️啾❤️啾啵❤️');
+        await tachyon.say_and_wait('唔！唔啾❤️啾噜❤️');
         println();
         await printAndWait([
           '听见 ',
@@ -576,7 +581,7 @@ handlers[ero_hooks.ero_start] = async () => {
           return;
         }
         await tachyon.say_and_wait([callname, '～今天的实验也辛苦了']);
-        await tachyon.say_and_wait('那么……需要奖励吗♡');
+        await tachyon.say_and_wait('那么……需要奖励吗❤️');
         await me.say_and_wait('来吧');
         await tachyon.print_and_wait('果然，不应该是这个洞口的吧？');
         await tachyon.print_and_wait('明明下面的骚穴也痒的不行');
@@ -603,11 +608,11 @@ handlers[ero_hooks.ero_start] = async () => {
         );
         println();
         await tachyon.say_and_wait(
-          '这种像小狗一样的姿势……再加上这个穴……这不就是真正的小狗吗♡',
+          '这种像小狗一样的姿势……再加上这个穴……这不就是真正的小狗吗❤️',
           true,
         );
         println();
-        await tachyon.print_and_wait('但是……仔细想想似乎也不是不行♡');
+        await tachyon.print_and_wait('但是……仔细想想似乎也不是不行❤️');
         await tachyon.print_and_wait([callname, ' 是自己专属的 ', callname]);
         await tachyon.print_and_wait([
           tachyon.get_colored_name(),
@@ -671,7 +676,7 @@ handlers[ero_hooks.ero_start] = async () => {
           false,
         );
         println();
-        await tachyon.say_and_wait('汪……汪汪♡');
+        await tachyon.say_and_wait('汪……汪汪❤️');
         await printAndWait([
           '看见 ',
           me.get_colored_name(),
@@ -739,12 +744,12 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
               '……给我……我还要……',
             ]);
           } else {
-            await tachyon.say_and_wait([callname, '♡', callname, '♡']);
+            await tachyon.say_and_wait([callname, '❤️', callname, '❤️']);
             await tachyon.say_and_wait(
-              '更多……给我更多……从里到外把我完全填满……♡',
+              '更多……给我更多……从里到外把我完全填满……❤️',
             );
             await tachyon.say_and_wait(
-              '是你把我变成这样的……所以，还想要更多♡让我聪明的脑袋再也无法思考肉体交合以外的东西♡',
+              '是你把我变成这样的……所以，还想要更多❤️让我聪明的脑袋再也无法思考肉体交合以外的东西❤️',
             );
           }
       }
@@ -760,9 +765,9 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
             await tachyon.say_and_wait([callname, '………………不对，我在想什么！']);
           } else {
             await tachyon.say_and_wait([
-              '嗯♡嗯啊♡',
+              '嗯❤️嗯啊❤️',
               callname,
-              '♡等等……停，停一下♡',
+              '❤️等等……停，停一下❤️',
             ]);
             await tachyon.say_and_wait('哈啊……哈啊……');
             await tachyon.say_and_wait(
@@ -800,14 +805,14 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
             await tachyon.say_and_wait([
               '唔嗯……',
               callname,
-              '，等一下……太用力……咿♡',
+              '，等一下……太用力……咿❤️',
             ]);
             await tachyon.say_and_wait('讨厌……………不，也没有……');
-            await tachyon.say_and_wait('等！又忽然这么……嗯啊♡♡');
+            await tachyon.say_and_wait('等！又忽然这么……嗯啊❤️❤️');
             await tachyon.say_and_wait(['都说住手了……', callname, ' 你啊，唉']);
             await tachyon.say_and_wait('明明……支配权应该在我手上的啊', true);
             await tachyon.say_and_wait('为什么，我却反过来……想被支配……', true);
-            await tachyon.say_and_wait('不妙……真的不妙啊♡', true);
+            await tachyon.say_and_wait('不妙……真的不妙啊❤️', true);
           }
           break;
         case 3:
@@ -818,14 +823,14 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
           await tachyon.say_and_wait('啊啊……之前的自己到底在抵抗什么呢', true);
           await tachyon.say_and_wait([
             callname,
-            '……不，主人……大人……给我，还想要更多……♡',
+            '……不，主人……大人……给我，还想要更多……❤️',
           ]);
           await tachyon.say_and_wait(
             '没关系的……这只是……只是……增加情趣的玩法',
             true,
           );
           await tachyon.say_and_wait('结束之后就恢复正常了……对……所以……', true);
-          await tachyon.say_and_wait('请再……给我更多命令吧……♡');
+          await tachyon.say_and_wait('请再……给我更多命令吧……❤️');
           set('callname:32:0', [callname.content, '主人大人']);
       }
       break;

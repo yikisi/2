@@ -1,3 +1,9 @@
+/**
+ * @file 爱丽速子 - 育成
+ *
+ * @author 幽白書
+ * @author 黑奴一号 无名黑奴（修订）
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -325,11 +331,6 @@ handlers[
 ] = require('#/event/edu/edu-events-32/crazy-fan-end');
 
 /**
- * 速子的日常事件，id=32
- *
- * @author 幽白書
- * @author 黑奴一号 无名黑奴（修订）
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

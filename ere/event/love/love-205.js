@@ -1,3 +1,8 @@
+/**
+ * @file 卓芙 - 爱慕
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -694,10 +699,6 @@ handlers[89] = require('#/event/love/love-events-205/wife');
 handlers[99] = require('#/event/love/love-events-205/half-life');
 
 /**
- * 金星公园 - 爱慕
- *
- * @author 梦露
- *
  * @param _
  * @param __
  * @param {EventObject} event_object

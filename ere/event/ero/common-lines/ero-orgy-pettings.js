@@ -1,3 +1,8 @@
+/**
+ * @file 调教地文 - 银趴爱抚系
+ *
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
@@ -7,11 +12,9 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { penis_desc } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @author O口口口口口
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,{supporter:number})>} handlers
- */
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
+  /** @author 无名黑奴 */
   handlers[ero_hooks.ask_double_suck_nipple] = async (
     attacker,
     defender,
@@ -30,6 +33,7 @@ module.exports = (handlers) => {
     ]);
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.double_suck_nipple] = async (
     attacker,
     defender,
@@ -48,6 +52,7 @@ module.exports = (handlers) => {
     ]);
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.ask_double_blow_job] = async (
     attacker,
     defender,
@@ -79,6 +84,7 @@ module.exports = (handlers) => {
     }
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.double_blow_job] = async (
     attacker,
     defender,
@@ -97,6 +103,7 @@ module.exports = (handlers) => {
     ]);
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.ask_double_cunnilingus] = async (
     attacker,
     defender,
@@ -115,6 +122,7 @@ module.exports = (handlers) => {
     ]);
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.double_cunnilingus] = async (
     attacker,
     defender,
@@ -133,6 +141,7 @@ module.exports = (handlers) => {
     ]);
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.ask_double_suck_virgin] = async (
     attacker,
     defender,
@@ -151,6 +160,7 @@ module.exports = (handlers) => {
     ]);
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.double_suck_virgin] = async (
     attacker,
     defender,
@@ -169,6 +179,7 @@ module.exports = (handlers) => {
     ]);
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.ask_double_tit_job] = async (
     attacker,
     defender,
@@ -187,6 +198,7 @@ module.exports = (handlers) => {
     ]);
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.double_tit_job] = async (
     attacker,
     defender,

@@ -1,3 +1,9 @@
+/**
+ * @file 玩家 - 育成
+ *
+ * @author 雞雞
+ * @author 天马闪光蹄
+ */
 const {
   add,
   get,
@@ -437,8 +443,6 @@ handlers.sick = async (me) => {
 };
 
 /**
- * 玩家育成事件
- *
  * @param {HookArg} hook
  * @param _
  * @param {EventObject} event_object

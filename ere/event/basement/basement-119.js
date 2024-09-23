@@ -1,3 +1,8 @@
+/**
+ * @file 梦之旅 - 地下室
+ *
+ * @author 幽白書
+ */
 const era = require('#/era-electron');
 
 const {
@@ -11,9 +16,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
-/** 梦之旅 - 地下室 */
 module.exports = class extends CustomizedBase {
-  /** @author 幽白書 */
   async ask_release_agree() {
     const callname = sys_get_callname(119, 0),
       dj = get_chara_talk(this.id),
@@ -79,7 +82,6 @@ module.exports = class extends CustomizedBase {
     ]);
   }
 
-  /** @author 幽白書 */
   async ask_release_reject() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0);
@@ -107,7 +109,6 @@ module.exports = class extends CustomizedBase {
     await era.printAndWait('地下室的支配者，露出了从容的笑容');
   }
 
-  /** @author 幽白書 */
   async ask_time() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0);
@@ -126,7 +127,6 @@ module.exports = class extends CustomizedBase {
     await era.printAndWait(['——只属于 ', dj.get_colored_name(), ' 的香味。']);
   }
 
-  /** @author 幽白書 */
   back_basement() {
     const dj = get_chara_talk(this.id),
       callname = sys_get_callname(this.id, 0),
@@ -140,7 +140,6 @@ module.exports = class extends CustomizedBase {
     }
   }
 
-  /** @author 幽白書 */
   async battle_escape() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0);
@@ -200,7 +199,6 @@ module.exports = class extends CustomizedBase {
     era.drawLine();
   }
 
-  /** @author 幽白書 */
   async battle_prison() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0),
@@ -252,7 +250,6 @@ module.exports = class extends CustomizedBase {
 
   async battle_success() {}
 
-  /** @author 幽白書 */
   find_escape(out_of_prison, s_level_up, is_back) {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0),
@@ -394,7 +391,6 @@ module.exports = class extends CustomizedBase {
     }
   }
 
-  /** @author 幽白書 */
   get_up() {
     const dj = get_chara_talk(this.id),
       callname = sys_get_callname(this.id, 0),
@@ -410,7 +406,6 @@ module.exports = class extends CustomizedBase {
     }
   }
 
-  /** @author 幽白書 */
   out() {
     const dj = get_chara_talk(this.id),
       callname = sys_get_callname(this.id, 0);
@@ -444,7 +439,6 @@ module.exports = class extends CustomizedBase {
     era.drawLine();
   }
 
-  /** @author 幽白書 */
   async strike_fail() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0),
@@ -485,7 +479,6 @@ module.exports = class extends CustomizedBase {
     await era.printAndWait([me.get_colored_name(), ' 陷入了黑暗……']);
   }
 
-  /** @author 幽白書 */
   async strike_success() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0);
@@ -507,7 +500,6 @@ module.exports = class extends CustomizedBase {
     await era.printAndWait([me.get_colored_name(), ' 逃离了地下室……']);
   }
 
-  /** @author 幽白書 */
   welcome() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0),

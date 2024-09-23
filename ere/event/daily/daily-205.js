@@ -1,3 +1,8 @@
+/**
+ * @file 卓芙 - 日常
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const {
@@ -542,11 +547,6 @@ handlers[event_hooks.basement_end] = async () => {
   await vp.say_as_unknown_and_wait('呵呵……');
 };
 
-/**
- * 金星公园的日常事件，角色id=205
- *
- * @author 梦露
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

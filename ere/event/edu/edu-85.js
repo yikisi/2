@@ -1,3 +1,8 @@
+/**
+ * @file 第一红宝石 - 育成
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const {
@@ -705,10 +710,6 @@ handlers[
 ] = require('#/event/edu/edu-events-85/crazy-fan-end');
 
 /**
- * 第一红宝石的育成事件
- *
- * @author 梦露
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

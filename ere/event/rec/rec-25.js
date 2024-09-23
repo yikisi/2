@@ -1,3 +1,8 @@
+/**
+ * @file 曼城茶座-招募，id=25
+ *
+ * @author Necroz
+ */
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
@@ -13,11 +18,6 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 曼城茶座-招募，id=25
- *
- * @author Necroz
- */
 module.exports = {
   override: true,
   /** @param {number} stage */

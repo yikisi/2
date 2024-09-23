@@ -1,3 +1,8 @@
+/**
+ * @file 目白高峰 - 日常
+ *
+ * @author イーウィヤ
+ */
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -24,9 +29,6 @@ handlers[event_hooks.select] = handlers[event_hooks.good_morning] = () => {
   throw new Error();
 };
 
-/**
- * 目白高峰 日常
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

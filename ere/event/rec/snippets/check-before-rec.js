@@ -5,6 +5,8 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /**
+ * @author 雞雞
+ *
  * @param chara_id
  * @returns {Promise<boolean>} if leave
  */

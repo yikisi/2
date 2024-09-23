@@ -1,3 +1,8 @@
+/**
+ * @file 优秀素质 - 招募
+ *
+ * @author 红红火火恍惚
+ */
 const era = require('#/era-electron');
 
 const CharaTalk = require('#/utils/chara-talk');
@@ -5,11 +10,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { yes } = require('#/data/event/recruit-flags');
 
-/**
- * 优秀素质的招募事件，id=60
- *
- * @author 红红火火恍惚
- */
 module.exports = {
   async run() {
     const chara_talk = get_chara_talk(60);

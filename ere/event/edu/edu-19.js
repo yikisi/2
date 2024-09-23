@@ -1,3 +1,8 @@
+/**
+ * @file 爱丽数码 - 育成
+ *
+ * @author 片手虾好评发售中！
+ */
 const era = require('#/era-electron');
 
 const {
@@ -849,10 +854,6 @@ handlers[event_hooks.out_church] = async (_, __, event_object) => {
 };
 
 /**
- *
- * 爱丽数码的育成事件
- *
- * @author 片手虾好评发售中！*
  * @param {HookArg} hook
  * @param {Record<string,any>} extra_flag
  * @param {EventObject} event_object

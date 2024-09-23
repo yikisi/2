@@ -1,3 +1,8 @@
+/**
+ * @file 乙名史悦子 - 招募
+ *
+ * @author 无名黑奴（临时）
+ */
 const { get, printAndWait, set } = require('#/era-electron');
 
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -7,11 +12,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 乙名史悦子 - 招募
- *
- * @author 无名黑奴（临时）
- */
 module.exports = {
   override: true,
   /** @param {number} stage */

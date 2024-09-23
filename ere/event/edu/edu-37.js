@@ -1,3 +1,8 @@
+/**
+ * @file 荣进闪耀 - 育成
+ *
+ * @author 爱放箭的袁本初
+ */
 const era = require('#/era-electron');
 
 const {
@@ -909,10 +914,6 @@ handlers[
 handlers[event_hooks.race_end] = require('#/event/edu/edu-events-37/race-end');
 
 /**
- * 荣进闪耀的育成事件
- *
- * @author 爱放箭的袁本初
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

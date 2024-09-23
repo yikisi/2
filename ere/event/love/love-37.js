@@ -1,3 +1,8 @@
+/**
+ * @file 荣进闪耀 - 爱慕
+ *
+ * @author 爱放箭的袁本初
+ */
 const era = require('#/era-electron');
 
 const {
@@ -395,11 +400,6 @@ async function love_74_week_end(flash) {
   }
 }
 
-/**
- * 荣进闪耀 - 爱慕
- *
- * @author 爱放箭的袁本初
- */
 module.exports = async (hook) => {
   const love = era.get('love:37');
   if (

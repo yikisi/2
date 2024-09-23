@@ -1,3 +1,8 @@
+/**
+ * @file 奇锐骏 - 日常
+ *
+ * @author 夕阳红艺术团小组长-赤红彗星红桃爵士Q先生
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -839,11 +844,6 @@ handlers[event_hooks.out_station] = async (hook) => {
   }
 };
 
-/**
- * 奇锐骏的日常事件，id=100
- *
- * @author 夕阳红艺术团小组长-赤红彗星红桃爵士Q先生
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

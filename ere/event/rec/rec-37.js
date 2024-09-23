@@ -1,3 +1,8 @@
+/**
+ * @file 荣进闪耀 - 招募
+ *
+ * @author 爱放箭的袁本初
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -90,11 +95,6 @@ async function why_choose_me(me, flash, me_is_new) {
   await era.printAndWait(`${me.name} 点了点头。`);
 }
 
-/**
- * 荣进闪耀的招募事件，id=37
- *
- * @author 爱放箭的袁本初
- */
 module.exports = {
   override: true,
   /**

@@ -1,3 +1,8 @@
+/**
+ * @file 爱慕织姬 - 育成
+ *
+ * @author 雞雞
+ */
 const {
   get,
   input,
@@ -64,8 +69,6 @@ handlers.meteor = async (vega, me) => {
 };
 
 /**
- * 快乐米可 - 育成
- *
  * @param {HookArg} hook
  * @param _
  * @param {EventObject} event_object

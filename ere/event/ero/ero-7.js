@@ -1,6 +1,9 @@
+/**
+ * @file 黄金船 - 调教
+ *
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
-
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -74,9 +77,9 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (_, extra_flag) => {
   era.println();
   await era.printAndWait([
     '让负责马娘怀孕的事不得不向特雷森高层报告，',
-    sys_get_colored_callname(0, 302),
+    get_chara_talk(302).get_colored_name(),
     ' 与 ',
-    sys_get_colored_callname(0, 301),
+    get_chara_talk(301).get_colored_name(),
     ' 难得地露出了想要杀人的眼神，但她们还是会很负责地协助 ',
     me.get_couple_title(),
     ' 应对将要来临的育儿生活——以及尽力按下一切影响声誉的丑闻。',

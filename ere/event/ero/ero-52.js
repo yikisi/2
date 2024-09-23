@@ -1,3 +1,8 @@
+/**
+ * @file 春乌拉拉 - 调教
+ *
+ * @author 99
+ */
 const era = require('#/era-electron');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');

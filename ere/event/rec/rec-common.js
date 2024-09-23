@@ -1,3 +1,8 @@
+/**
+ * @file 招募地文
+ *
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
 
 const CharaTalk = require('#/utils/chara-talk');
@@ -7,10 +12,6 @@ const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
- * 通用招募事件
- *
- * @author 雞雞
- *
  * @param {number} chara_id
  * @param {number} stage_id
  * @returns {Promise<boolean>}

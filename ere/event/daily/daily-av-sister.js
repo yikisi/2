@@ -1,3 +1,12 @@
+/**
+ * @file 爱慕织姬产驹，爱慕彦星的日常口上（临时）
+ *
+ * 设定是织姬的第一个产驹是妹妹<br>
+ * 示例用的日常事件口上<br>
+ * 欢迎创作替代
+ *
+ * @author 无名黑奴（临时）
+ */
 const era = require('#/era-electron');
 
 const event_hooks = require('#/data/event/event-hooks');
@@ -32,14 +41,6 @@ handler_dict[event_hooks.select] = function (_, extra_flag) {
   );
 };
 
-/**
- * 爱慕织姬产驹，爱慕彦星的日常口上
- * 设定是织姬的第一个产驹是妹妹
- * 示例用的日常事件口上，请不要上纲上线
- * 不满意的话请自己写口上
- *
- * @author 无名黑奴
- */
 module.exports = {
   /**
    * @param {HookArg} hook

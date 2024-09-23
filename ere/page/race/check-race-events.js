@@ -1,3 +1,9 @@
+/**
+ * @file 特殊赛后事件口上
+ *
+ * @author 幽白書
+ * @author 无名黑奴（临时）
+ */
 const {
   add,
   drawLine,
@@ -33,8 +39,6 @@ const { class_enum, track_names } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
- * 特殊赛后事件口上
- *
  * @param {number} race
  * @param {RaceInfo} info
  * @param {PseudoUma[]} team_contestants
@@ -60,6 +64,11 @@ async function check_race_events(race, info, team_contestants) {
     may_life_marks.who_am_i = 1;
   }
   if (get('flag:初见URA颁奖') < 2) {
+    /**
+     * 乙名史悦子 - 初见
+     *
+     * @author 无名黑奴
+     */
     handler = async () => {
       const etsuko = get_chara_talk(303),
         me = get_chara_talk(0);
@@ -114,8 +123,6 @@ async function check_race_events(race, info, team_contestants) {
      * 乙名史悦子 - 孕袋
      *
      * @author 幽白書
-     *
-     * @type {function:Promise}
      */
     handler = async () => {
       const etsuko = get_chara_talk(303),

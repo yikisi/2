@@ -1,3 +1,8 @@
+/**
+ * @file 达利阿拉伯 - 招募
+ *
+ * @author O口口口口口
+ */
 const { printAndWait, println, set } = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -8,11 +13,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 达利阿拉伯 - 招募
- *
- * @author O口口口口口
- */
 module.exports = {
   async run() {
     const god = get_chara_talk(340),

@@ -1,3 +1,13 @@
+/**
+ * @file 调教地文
+ *
+ * @author O口口口口口
+ * @author 雞雞
+ * @author 天马闪光蹄
+ * @author 黑衣剑士-星爆气流斩准备就绪
+ * @author 幽白書
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const {
@@ -30,13 +40,16 @@ const current = new Date().getTime();
 
 /** @type {Record<string,function>} */
 const handlers = {},
-  sleep_handlers = {};
+  sleep_handlers = {},
+  raping_handlers = {};
 
 [
   require('#/event/ero/common-lines/ero-communications'),
   require('#/event/ero/common-lines/ero-pettings-1'),
   require('#/event/ero/common-lines/ero-pettings-2'),
   require('#/event/ero/common-lines/ero-pettings-3'),
+  require('#/event/ero/common-lines/ero-pettings-4'),
+  require('#/event/ero/common-lines/ero-pettings-5'),
   require('#/event/ero/common-lines/ero-fuckings'),
   require('#/event/ero/common-lines/ero-items'),
   require('#/event/ero/common-lines/ero-sm'),
@@ -51,6 +64,12 @@ const handlers = {},
   require('#/event/ero/common-lines/ero-items'),
 ].forEach((f) => f(sleep_handlers, handlers));
 
+[
+  require('#/event/ero/common-lines/ero-items'),
+  require('#/event/ero/common-lines/ero-orgy-pettings'),
+  require('#/event/ero/common-lines/ero-orgy-fuckings'),
+].forEach((f) => f(raping_handlers, handlers));
+
 console.log(
   '[ero-common.js] ero common handlers init done!',
   (new Date().getTime() - current).toLocaleString(),
@@ -58,6 +77,11 @@ console.log(
 );
 
 // 色色关联系
+/**
+ * @author 雞雞
+ *
+ * @param {number} chara_id
+ */
 handlers[ero_hooks.ero_start] = async (chara_id) => {
   let father_id;
   if (
@@ -78,6 +102,13 @@ handlers[ero_hooks.filter_in_rape] = () => (e) =>
   (e >= ero_hooks.missionary && e <= ero_hooks.ask_stimulate_womb) ||
   (e >= ero_hooks.ask_double_suck_nipple && e <= ero_hooks.spit_roast_anal_sex);
 
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ * @param _
+ * @param {{part:number}} extra_flag
+ */
 handlers[ero_hooks.become_erect] = (chara_id, _, extra_flag) => {
   if (extra_flag.part === part_enum.penis) {
     era.print([
@@ -96,6 +127,8 @@ handlers[ero_hooks.become_erect] = (chara_id, _, extra_flag) => {
 };
 
 /**
+ * @author 无名黑奴
+ *
  * @param {number} chara_id
  * @param _
  * @param {{part:number}} extra_flag
@@ -149,6 +182,8 @@ handlers[ero_hooks.wound] = (chara_id, _, extra_flag) =>
   );
 
 /**
+ * @author 无名黑奴
+ *
  * @param {number} chara_id
  * @param _
  * @param {{virgin:boolean}} extra_flag
@@ -167,6 +202,8 @@ optimized_part_names[part_enum.virgin] = '小穴';
 optimized_part_names[part_enum.anal] = '屁穴';
 
 /**
+ * @author 无名黑奴
+ *
  * @param {number} chara_id
  * @param _
  * @param {{stop_success:boolean}} extra_flag
@@ -214,7 +251,11 @@ handlers[ero_hooks.orgasm_denial] = async (chara_id, _, extra_flag) => {
   }
 };
 
-/** @param {number} chara_id */
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ */
 handlers[ero_hooks.orgasm] = async (chara_id) => {
   const chara = get_chara_talk(chara_id);
   let multi_orgasm = undefined;
@@ -317,14 +358,22 @@ handlers[ero_hooks.orgasm] = async (chara_id) => {
   });
 };
 
-/** @param {number} chara_id */
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ */
 handlers[ero_hooks.zero_stamina] = (chara_id) =>
   era.print([
     get_chara_talk(chara_id).get_colored_name(),
     ' 因体力过分消耗陷入了昏迷……',
   ]);
 
-/** @param {number} chara_id */
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ */
 handlers[ero_hooks.lost_mind] = (chara_id) =>
   era.print([
     get_chara_talk(chara_id).get_colored_name(),
@@ -358,6 +407,8 @@ const sex_mark_desc = [
 ];
 
 /**
+ * @author 无名黑奴
+ *
  * @param {number} chara_id
  * @param _
  * @param {{level:number,name:string,new:boolean}} extra_flag
@@ -399,6 +450,8 @@ handlers[ero_hooks.get_mark] = async (chara_id, _, extra_flag) => {
 };
 
 /**
+ * @author 雞雞
+ *
  * @param _
  * @param __
  * @param {{father_id:number,mother_id:number,shown:boolean}} extra_flag
@@ -527,6 +580,8 @@ handlers[ero_hooks.cum_in_womb] = async (_, __, extra_flag) => {
 };
 
 /**
+ * @author 无名黑奴
+ *
  * @param _
  * @param __
  * @param {{father_id:number,mother_id:number,shown:boolean}} extra_flag
@@ -546,6 +601,9 @@ handlers[ero_hooks.be_pregnant] = (_, __, extra_flag) => {
 };
 
 /**
+ * @author 雞雞
+ * @author 无名黑奴
+ *
  * @param _
  * @param {HookArg} hook
  * @param {{father_id:number,mother_id:number}} extra_flag
@@ -638,6 +696,8 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
 };
 
 /**
+ * @author 雞雞
+ *
  * @param _
  * @param {HookArg} hook
  * @param {{child_id:number}} extra_flag character id of the child
@@ -675,7 +735,11 @@ handlers[ero_hooks.have_baby] = async (_, hook, extra_flag) => {
   }
 };
 
-/** @param {number} chara_id */
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ */
 handlers[ero_hooks.shop_start] = async (chara_id) => {
   era.drawLine();
   const chara = get_chara_talk(chara_id),
@@ -729,6 +793,8 @@ handlers[ero_hooks.shop_start] = async (chara_id) => {
 };
 
 /**
+ * @author 无名黑奴
+ *
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {{hate_clear:number,mark_clear:number,pleasure_delta:number,sex_delta:number,skill:number,talent:number}} extra_flag
@@ -799,11 +865,11 @@ module.exports = async (chara_id, hook, extra_flag) => {
       hook,
       extra_flag,
     );
-    let handler_dict = {};
+    let handler_dict = handlers;
     if (!sys_check_awake(defender)) {
       handler_dict = sleep_handlers;
-    } else if (era.get('tflag:强奸') < 0) {
-      handler_dict = handlers;
+    } else if (era.get('tflag:强奸') >= 0) {
+      handler_dict = raping_handlers;
     }
     const aim_handler = handler_dict[hook.hook];
     if (

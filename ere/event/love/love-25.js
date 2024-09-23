@@ -1,3 +1,8 @@
+/**
+ * @file 曼城茶座 - 爱慕
+ *
+ * @author Necroz
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -675,10 +680,6 @@ handlers[99] = async (coffee, me, callname) => {
 };
 
 /**
- * 曼城茶座 - 爱慕
- *
- * @author Necroz
- *
  * @param _
  * @param __
  * @param {EventObject} event_object

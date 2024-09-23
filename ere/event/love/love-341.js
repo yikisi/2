@@ -1,3 +1,8 @@
+/**
+ * @file 高多芬柏布 - 爱慕
+ *
+ * @author フィンランド
+ */
 const {
   get,
   input,
@@ -176,10 +181,6 @@ handlers[50] = async (god, me, callname) => {
 };
 
 /**
- * 高多芬柏布 - 爱慕
- *
- * @author フィンランド
- *
  * @param _
  * @param __
  * @param {EventObject} event_object

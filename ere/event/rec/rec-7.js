@@ -1,14 +1,14 @@
+/**
+ * @file 黄金船 - 招募
+ *
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
 
 const event_hooks = require('#/data/event/event-hooks');
 const { yes } = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 
-/**
- * 黄金船的招募事件，id=7
- *
- * @author 雞雞
- */
 module.exports = {
   override: true,
   /**

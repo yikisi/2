@@ -1,3 +1,8 @@
+/**
+ * @file 鲁铎象征 - 爱慕
+ *
+ * @author 露娜俘虏
+ */
 const era = require('#/era-electron');
 
 const {
@@ -283,11 +288,6 @@ handlers[99] = async (luna) => {
   await sys_love_uma_in_event(17);
 };
 
-/**
- * 鲁铎象征 - 爱慕
- *
- * @author 露娜俘虏
- */
 module.exports = async (hook, _, event_object) => {
   if (hook !== event_hooks.week_end || !event_object) {
     throw new Error('unsupported hook!');

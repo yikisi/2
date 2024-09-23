@@ -1,3 +1,8 @@
+/**
+ * @file 爱丽数码 - 招募
+ *
+ * @author 片手虾好评发售中！
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -10,11 +15,6 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 爱丽数码的招募事件，id=19
- *
- * @author 片手虾好评发售中！
- */
 module.exports = {
   /**
    * @param {number} stage_id

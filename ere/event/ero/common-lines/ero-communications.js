@@ -1,3 +1,8 @@
+/**
+ * @file 调教地文 - 沟通系
+ *
+ * @author O口口口口口
+ */
 const era = require('#/era-electron');
 
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
@@ -8,10 +13,7 @@ const { log_7 } = require('#/utils/value-utils');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @author O口口口口口
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
- */
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
   handlers[ero_hooks.go_on] = async (attacker, defender) => {
     await era.printAndWait([

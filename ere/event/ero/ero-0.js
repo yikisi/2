@@ -1,3 +1,10 @@
+/**
+ * @file 玩家 - 调教
+ *
+ * @author 幽白書
+ * @author 雞雞
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
@@ -24,6 +31,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const handlers = {};
 
 /**
+ * @author 雞雞
+ *
  * @param _
  * @param {{shown:boolean,part:number}} extra_flag
  */
@@ -68,6 +77,8 @@ stop_ex_options[part_enum.mouth] = (chara_id, is_double_blow_job) => {
 
 /**
  * 只有醒着的主控才能寸止，所以这里必然是需要输出的
+ *
+ * @author 无名黑奴
  *
  * @param _
  * @param {{stop_success:boolean}} extra_flag 如果寸止的话是否成功
@@ -126,6 +137,9 @@ handlers[ero_hooks.orgasm_denial] = async (_, extra_flag) => {
 };
 
 /**
+ * @author 幽白書
+ * @author 雞雞
+ *
  * @param {HookArg} hook
  * @param {{father_id:number,mother_id:number}} extra_flag
  */
@@ -230,7 +244,9 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
         await era.printAndWait([
           '在猛烈的撞击，将 ',
           mother.get_colored_name(),
-          ` 操到几乎失去意识后，身后的${father.get_uma_sex_title()}才好不容易射了出来，用 `,
+          ' 操到几乎失去意识后，身后的',
+          father.get_uma_sex_title(),
+          '才好不容易射了出来，用 ',
           mother.get_colored_name(),
           ' 的脸擦了擦肉棒后直接转身离去',
         ]);
@@ -368,6 +384,9 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
 };
 
 /**
+ * @author 幽白書
+ * @author 雞雞
+ *
  * @param {HookArg} hook
  * @param {{child_id:number,father:CharaTalk}} extra_flag
  */
@@ -684,10 +703,6 @@ handlers[ero_hooks.shop_start] = () => {};
 handlers[ero_hooks.shop_end] = () => {};
 
 /**
- * @author 雞雞
- * @author 幽白書
- * @author 无名黑奴
- *
  * @param {HookArg} hook
  * @param {{shown:boolean}} extra_flag
  * @returns {Promise<*>}

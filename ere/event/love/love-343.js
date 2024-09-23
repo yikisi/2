@@ -1,17 +1,19 @@
+/**
+ * @file 佐岳五月 - 爱慕
+ *
+ * @author 无名黑奴（临时）
+ */
 const era = require('#/era-electron');
 
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
+
 /**
- * 佐岳五月 - 爱慕
- *
- * @author 无名黑奴（临时）
- *
  * @param _
  * @param __
  * @param {EventObject} event_object

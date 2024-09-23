@@ -1,3 +1,9 @@
+/**
+ * @file 日常地文 - 节日
+ *
+ * @author 雞雞
+ * @author 天马闪光蹄
+ */
 const era = require('#/era-electron');
 
 const print_event_name = require('#/event/snippets/print-event-name');

@@ -1,3 +1,8 @@
+/**
+ * @file 高多芬柏布 - 调教
+ *
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');

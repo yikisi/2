@@ -1,3 +1,8 @@
+/**
+ * @file 周日宁静 - 爱慕
+ *
+ * @author 黑衣剑士-星爆气流斩准备就绪
+ */
 const era = require('#/era-electron');
 
 const {
@@ -21,10 +26,6 @@ const {
 } = require('#/system/ero/sys-prepare-ero');
 
 /**
- * 周日宁静 - 爱慕
- *
- * @author 黑衣剑士-星爆气流斩准备就绪
- *
  * @param {number} hook
  * @param _
  * @param {EventObject} event_object

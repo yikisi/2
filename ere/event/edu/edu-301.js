@@ -1,3 +1,8 @@
+/**
+ * @file 骏川缰绳 - 育成
+ *
+ * @author 雞雞
+ */
 const {
   input,
   printAndWait,
@@ -61,8 +66,6 @@ handlers.shadow = async (tokino, me) => {
 };
 
 /**
- * 骏川缰绳 - 育成
- *
  * @param {HookArg} hook
  * @param _
  * @param {EventObject} event_object
