@@ -1,7 +1,7 @@
-# [EraUma v0.901](https://gitgud.io/umaera/erauma/-/releases/0.901)
+# [EraUma v0.99](https://gitgud.io/umaera/erauma/-/releases/0.901)
 _incoming_
 
-EraUma v0.901，适配 [EraElectron v2.2.0 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/permalink/latest) 版本
+EraUma v0.99，适配 [EraElectron v2.2.0 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/permalink/latest) 版本
 
 ## Added
 

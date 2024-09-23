@@ -184,9 +184,6 @@ module.exports = async (_, save_and_next_week, flags) => {
         await get_custom_basement(chara_list[1]).flatter(
           is_awake === 2 ? chara_list[2] : undefined,
         );
-        if (is_awake === 2) {
-          await get_custom_basement(chara_list[2]).flatter(chara_list[1]);
-        }
         chara_list
           .slice(1)
           .filter((_, i) => i < is_awake)
