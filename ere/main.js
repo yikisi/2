@@ -327,7 +327,11 @@ module.exports = async () => {
     ['特殊角色（临时）', '无名黑奴'],
   ];
   set_chara_ero_image();
-  let buffer;
+  let buffer,
+    version = era.get('gamebase').version / 1000;
+  if (version % 1 === 0) {
+    version = version.toFixed(1);
+  }
 
   while (flagTitle) {
     await era.clear();
@@ -339,7 +343,7 @@ module.exports = async () => {
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
-            content: `版本号：v${era.get('gamebase').version / 1000}`,
+            content: `版本号：v${version}`,
             type: 'text',
           },
         ],

@@ -329,8 +329,11 @@ module.exports = async () => {
           Math.min(23, count + 6) * 60,
           24 * 60 - 1,
         );
-        const owner = new BasementOwners().get(0),
+        const basement_owners = new BasementOwners(),
+          owners = basement_owners.get(),
+          owner = owners[0],
           owner_marks = new LifeEventMarks(owner);
+        basement_owners.clear();
         era.set('status:0:沉睡', 1);
         basement_queue.add_action(
           new BasementAction(0, my_life_marks.b_timer, action_type_enum.get_up),
@@ -361,17 +364,19 @@ module.exports = async () => {
             new BasementAction(owner, 17 * 60, action_type_enum.back_basement),
           );
         }
-        const rescue_chara = get_random_entry(
-          sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-            (e) =>
-              e > 0 &&
-              e !== owner &&
-              !common_no_action_check(e) &&
-              era.get(`love:${e}`) >= 75 &&
-              !era.get(`status:${e}:伤病`) &&
-              era.get(`base:${e}:压力`) < pressure_border.depression,
-          ),
-        );
+        const rescue_chara =
+          owners[1] ||
+          get_random_entry(
+            sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+              (e) =>
+                e > 0 &&
+                e !== owner &&
+                !common_no_action_check(e) &&
+                era.get(`love:${e}`) >= 75 &&
+                !era.get(`status:${e}:伤病`) &&
+                era.get(`base:${e}:压力`) < pressure_border.depression,
+            ),
+          );
         if (rescue_chara) {
           basement_queue.add_action(
             new BasementAction(

@@ -78,8 +78,7 @@ handlers[ero_hooks.prison] = (chara_id) => {
   }
   life_marks.b_cd = get_random_value(4, 8);
   era.set('flag:当前位置', location_enum.basement);
-  const basement_owners = new BasementOwners();
-  basement_owners.get(0) !== chara_id && basement_owners.push(chara_id);
+  new BasementOwners().push(chara_id);
 };
 
 /**
