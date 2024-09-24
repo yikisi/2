@@ -1,3 +1,8 @@
+/**
+ * @file 待兼福来 - 爱慕
+ *
+ * @author ALEX
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -832,11 +837,6 @@ handlers[99] = async (kitaru, me, callname) => {
   await sys_love_uma_in_event(56);
 };
 
-/**
- * 待兼福来 - 爱慕
- *
- * @author ALEX
- */
 module.exports = async (hook, _, event_object) => {
   if (handlers[event_object.arg]) {
     return await handlers[event_object.arg](

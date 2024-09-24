@@ -1,3 +1,8 @@
+/**
+ * @file 待兼福来 - 育成
+ *
+ * @author ALEX
+ */
 const event_hooks = require('#/data/event/event-hooks');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise>} */
@@ -48,10 +53,6 @@ handlers[
 ] = require('#/event/edu/edu-events-56/crazy-fan-end');
 
 /**
- * 待兼福来 - 育成
- *
- * @author Alex
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

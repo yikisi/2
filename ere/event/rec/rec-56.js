@@ -1,3 +1,8 @@
+/**
+ * @file 待兼福来 - 招募
+ *
+ * @author ALEX
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -10,11 +15,6 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 待兼福来的招募事件，id=56
- *
- * @author Alex
- */
 module.exports = {
   override: true,
   async run() {

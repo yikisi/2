@@ -44,10 +44,14 @@ module.exports = class extends CustomizedCheck {
       }
     } else if (edu_marks.all_round > 0) {
       if (--edu_marks.all_round === 0) {
-        add_event(
-          event_hooks.week_start,
-          new EventObject(this.id, cb_enum.edu).set_arg('all_round'),
-        );
+        if (get('cflag:0:位置') > 0) {
+          edu_marks.all_round = 1;
+        } else {
+          add_event(
+            event_hooks.week_start,
+            new EventObject(this.id, cb_enum.edu).set_arg('all_round'),
+          );
+        }
       }
     }
   }

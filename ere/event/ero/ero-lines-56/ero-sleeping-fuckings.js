@@ -5,7 +5,6 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /**
- * @author Alex
  * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} sleeping_handlers
  * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
  */

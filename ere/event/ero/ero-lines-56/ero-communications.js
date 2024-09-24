@@ -6,10 +6,7 @@ const { log_7 } = require('#/utils/value-utils');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @author Alex
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
- */
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
   handlers[ero_hooks.kiss] = async (attacker, defender, hook) => {
     if (defender.id !== 56) {

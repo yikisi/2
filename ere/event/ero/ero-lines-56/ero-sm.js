@@ -12,10 +12,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @author Alex
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
- */
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
   handlers[ero_hooks.ask_insult] = async (attacker, defender, hook) => {
     if (attacker.id !== 56) {

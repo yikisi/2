@@ -66,10 +66,7 @@ async function deep_blow_job_kitaru(attacker, defender, hook) {
   }
 }
 
-/**
- * @author Alex
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
- */
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
   handlers[ero_hooks.pet_ear] = async (attacker, defender, hook) => {
     if (defender.id !== 56) {

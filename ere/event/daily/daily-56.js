@@ -1,3 +1,8 @@
+/**
+ * @file 待兼福来 - 日常
+ *
+ * @author ALEX
+ */
 const event_hooks = require('#/data/event/event-hooks');
 
 const handlers = {};
@@ -74,11 +79,6 @@ handlers[
   event_hooks.celebration
 ] = require('#/event/daily/daily-events-56/celebration');
 
-/**
- * 待兼福来 - 日常
- *
- * @author Alex
- */
 module.exports = {
   /**
    * @param {HookArg} hook

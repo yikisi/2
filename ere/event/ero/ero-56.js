@@ -1,3 +1,8 @@
+/**
+ * @file 待兼福来 - 调教
+ *
+ * @author ALEX
+ */
 const era = require('#/era-electron');
 
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
@@ -702,11 +707,6 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
   }
 };
 
-/**
- * 待兼福来 - 调教
- *
- * @author Alex
- */
 module.exports = async (hook, extra_flag) => {
   if (!handlers[hook.hook]) {
     throw new Error();
