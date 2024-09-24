@@ -1,3 +1,8 @@
+/**
+ * @file 调教指令 - 睡奸爱抚系1
+ *
+ * @author O口口口口口
+ */
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
@@ -5,7 +10,6 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /**
- * @author O口口口口口
  * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
  * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} normal_handlers
  */

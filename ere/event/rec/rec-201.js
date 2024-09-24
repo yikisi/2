@@ -1,14 +1,15 @@
+/**
+ * @file 快乐米可 - 招募
+ *
+ * @author 无名黑奴（临时）
+ */
 const { get, printAndWait, set } = require('#/era-electron');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 快乐米可 - 招募
- *
- * @author 无名黑奴（临时）
- */
 module.exports = {
   async run() {
     const me = get_chara_talk(0),
@@ -37,5 +38,6 @@ module.exports = {
     );
     set('cflag:201:招募状态', recruit_flags.yes);
     set('flag:当前互动角色', 201);
+    new MeekEduMarks().all_round = 0;
   },
 };

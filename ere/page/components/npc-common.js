@@ -12,6 +12,7 @@ const {
   sys_check_awake,
   sys_get_move_cost,
 } = require('#/system/sys-calc-chara-param');
+const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const goto_sex = require('#/page/components/goto-sex');
 const print_juel_shop_page = require('#/page/page-juel-shop');
@@ -323,7 +324,10 @@ async function npc_common(
       sys_change_attr_and_print(0, '精力', -celebration_cost);
       sys_change_attr_and_print(chara.id, '精力', -50);
       era.drawLine();
-      await sys_call_daily_event(chara.id, event_hooks.celebration);
+      if (!(await sys_get_random_event(event_hooks.celebration, chara.id)())) {
+        era.drawLine();
+        await sys_call_daily_event(chara.id, event_hooks.celebration, {});
+      }
       break;
     case 7:
       await print_juel_shop_page(chara.id);

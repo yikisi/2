@@ -1,3 +1,8 @@
+/**
+ * @file 爱丽速子 - 招募
+ *
+ * @author 幽白書
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -5,18 +10,12 @@ const check_before_rec = require('#/event/rec/snippets/check-before-rec');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 爱丽速子的招募事件，id=32
- *
- * @author 幽白書
- */
 module.exports = {
   override: true,
   /**
@@ -174,7 +173,6 @@ module.exports = {
 
         new EventMarks(0).sub(event_hooks.recruit_start);
         era.set('cflag:32:招募状态', recruit_flags.yes);
-        new MyEduMarks().experiment = 0;
         era.set('callname:32:0', '训练员君');
         add_event(
           event_hooks.week_end,

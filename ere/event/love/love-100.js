@@ -1,3 +1,8 @@
+/**
+ * @file 奇锐骏  - 爱慕
+ *
+ * @author 夕阳红艺术团小组长-赤红彗星红桃爵士Q先生
+ */
 const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
@@ -803,10 +808,6 @@ handlers.half_life = async (acute, me, callname, event_object) => {
 };
 
 /**
- * 奇锐骏  - 爱慕
- *
- * @author 夕阳红艺术团小组长-赤红彗星红桃爵士Q先生
- *
  * @param _
  * @param __
  * @param {EventObject} event_object

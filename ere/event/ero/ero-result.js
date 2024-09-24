@@ -7,6 +7,8 @@ const {
   sys_punish_unfaithful,
 } = require('#/system/sys-calc-chara-others');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
@@ -172,26 +174,17 @@ handlers[ero_hooks.have_baby] = async (_, hook, extra_flag) => {
     // 性奴和孕袋没有命名权
     ret = get_random_name(mother_id || father_id);
   } else {
-    era.printMultiColumns([
-      {
-        accelerator: 0,
-        config: { width: 12, align: 'center' },
-        content: `让${mother_id ? '母亲' : '父亲'}起名`,
-        type: 'button',
-      },
-      {
-        accelerator: 100,
-        config: { width: 12, align: 'center' },
-        content: '亲自起名',
-        type: 'button',
-      },
-    ]);
-    ret = await era.input();
-    if (ret) {
+    if (
+      await select_yes_or_no(
+        '',
+        `让${mother_id ? '母亲' : '父亲'}起名`,
+        '亲自起名',
+      )
+    ) {
+      ret = get_random_name(mother_id || father_id);
+    } else {
       era.print('想给孩子起什么名字呢？');
       ret = await era.input();
-    } else {
-      ret = get_random_name(mother_id || father_id);
     }
   }
   era.set(

@@ -1,3 +1,8 @@
+/**
+ * @file 米浴 - 爱慕
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const {
@@ -396,10 +401,6 @@ handlers[99] = async (rice, me, callname, self_name) => {
 };
 
 /**
- * 米浴 - 爱慕
- *
- * @author 梦露
- *
  * @param {number} hook
  * @param _
  * @param {EventObject} event_object

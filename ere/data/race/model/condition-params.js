@@ -21,6 +21,7 @@ class ConditionParams {
   change_order_up_middle;
   compete_fight_count;
   corner;
+  corner_count;
   corner_random;
   course_distance;
   distance_diff_rate;

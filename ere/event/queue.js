@@ -75,6 +75,21 @@ module.exports = {
       return event_object;
     }
   },
+  /**
+   * get a random event from stage's queue
+   * @param {number} stage
+   * @param {number} [chara_id]
+   * @returns {EventObject}
+   */
+  get_chara_event_object(stage, chara_id) {
+    if (queue && queue[stage]) {
+      const index = queue[stage].findIndex((e) => e.chara_id === chara_id);
+      if (index >= 0) {
+        new EventMarks(chara_id).sub(stage);
+        return queue[stage].splice(index, 1)[0];
+      }
+    }
+  },
   /** 事件队列的初始化函数，必须在new game或者load game的时候调用 */
   init() {
     queue = era.get('flag:事件队列');

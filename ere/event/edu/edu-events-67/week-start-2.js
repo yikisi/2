@@ -159,7 +159,7 @@ module.exports = (handlers) => {
     );
     era.println();
     flags.wait = sys_like_chara(67, 0, 25);
-    era.set('flag:67:节日事件标记', 0);
+    era.set('cflag:67:节日事件标记', 0);
   };
 
   handlers[95 + 14] = async (daiya, me, flags) => {
@@ -359,7 +359,7 @@ module.exports = (handlers) => {
     );
     era.println();
     flags.wait = sys_like_chara(67, 0, 25);
-    era.set('flag:67:节日事件标记', 0);
+    era.set('cflag:67:节日事件标记', 0);
   };
 
   handlers[95 + 29] = async (daiya, me, flags, cb) => {
@@ -824,6 +824,6 @@ module.exports = (handlers) => {
     );
     era.println();
     flags.wait = sys_like_chara(67, 0, 25);
-    era.set('flag:67:节日事件标记', 0);
+    era.set('cflag:67:节日事件标记', 0);
   };
 };

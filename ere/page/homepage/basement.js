@@ -119,13 +119,10 @@ module.exports = async (_, save_and_next_week, flags) => {
   const chara_list = [
     0,
     ...sort_list(
-      basement_owners
-        .get()
-        .filter(
-          (e) =>
-            new LifeEventMarks(e).b_status !==
-            1 << basement_status_enum.outside,
-        ),
+      basement_owners.filter(
+        (e) =>
+          new LifeEventMarks(e).b_status !== 1 << basement_status_enum.outside,
+      ),
       (e, i) => (!sys_check_awake(e) << 1) + i,
       true,
     ),
@@ -187,9 +184,6 @@ module.exports = async (_, save_and_next_week, flags) => {
         await get_custom_basement(chara_list[1]).flatter(
           is_awake === 2 ? chara_list[2] : undefined,
         );
-        if (is_awake === 2) {
-          await get_custom_basement(chara_list[2]).flatter(chara_list[1]);
-        }
         chara_list
           .slice(1)
           .filter((_, i) => i < is_awake)
@@ -571,4 +565,5 @@ module.exports = async (_, save_and_next_week, flags) => {
       my_life_marks.b_status === 1 << basement_status_enum.escape
     );
   }
+  flags.after_select = true;
 };

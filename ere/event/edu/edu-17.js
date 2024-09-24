@@ -1,3 +1,8 @@
+/**
+ * @file 鲁铎象征 - 育成
+ *
+ * @author 露娜俘虏
+ */
 const era = require('#/era-electron');
 
 const { handle_debuff } = require('#/event/edu/edu-events-17/snippets');
@@ -533,9 +538,6 @@ handlers[event_hooks.out_church] = async (_, __, event_object) => {
 };
 
 /**
- * 鲁铎象征 - 育成
- * @author 露娜俘虏
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

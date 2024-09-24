@@ -43,6 +43,7 @@ function common_no_action_check(chara_id) {
 
 class CustomizedCheck {
   static like_chara;
+  static love_uma;
   static common_no_action_check = common_no_action_check;
 
   constructor(chara_id) {

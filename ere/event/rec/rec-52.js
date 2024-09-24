@@ -1,3 +1,8 @@
+/**
+ * @file 春乌拉拉 - 招募
+ *
+ * @author 99
+ */
 const era = require('#/era-electron');
 
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
@@ -19,11 +24,6 @@ const UraraLifeMarks = require('#/data/event/life-event-marks/life-event-marks-5
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_enum } = require('#/data/train-const');
 
-/**
- * 乌拉拉招募，id=52
- *
- * @author 99
- */
 module.exports = {
   override: true,
   async run() {

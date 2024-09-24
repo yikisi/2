@@ -226,7 +226,7 @@ async function page_custom() {
     era.set('flag:马娘身高', 0);
     new CharaTitles(0).push({ c: buff_colors[2], n: '萝莉控', s: true });
   } else if (era.get('callname:0:-1').indexOf('渡鸦') !== -1) {
-    era.set('flag:角色性别', 10);
+    era.set('flag:角色性别', 99);
     era.set('flag:游戏结束', 0);
     era.set('flag:彩蛋机制', 621);
     era.set('flag:极端行为限制', 3);

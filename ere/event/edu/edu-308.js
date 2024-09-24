@@ -1,3 +1,8 @@
+/**
+ * @file 光辉致意 - 育成
+ *
+ * @author 无名黑奴（临时）
+ */
 const {
   get,
   printAndWait,
@@ -15,11 +20,6 @@ const GrandLives = require('#/data/event/grand-lives');
 const { class_enum, track_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
-/**
- * 光辉致意 - 育成
- *
- * @author 无名黑奴（临时）
- */
 module.exports = async (hook, extra_flag, event_object) => {
   if (event_object?.arg !== 'report') {
     throw new Error();

@@ -1,3 +1,8 @@
+/**
+ * @file 摩耶重炮 - 育成
+ *
+ * @author 黑奴二号
+ */
 const era = require('#/era-electron');
 
 const {
@@ -736,10 +741,6 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
 };
 
 /**
- * 摩耶重炮的育成事件
- *
- * @author 黑奴二号
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

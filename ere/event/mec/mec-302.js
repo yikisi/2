@@ -38,4 +38,8 @@ module.exports = class extends CustomizedMec {
       },
     ];
   }
+
+  set_callname() {
+    set('callname:302:0', `${get('callname:0:-1')}君`);
+  }
 };

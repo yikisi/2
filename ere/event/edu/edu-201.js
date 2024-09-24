@@ -1,3 +1,8 @@
+/**
+ * @file 快乐米可 - 育成
+ *
+ * @author 雞雞
+ */
 const { printAndWait, println, waitAnyKey } = require('#/era-electron');
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
@@ -45,8 +50,6 @@ handlers.all_round = async (meek) => {
 };
 
 /**
- * 快乐米可 - 育成
- *
  * @param {HookArg} hook
  * @param _
  * @param {EventObject} event_object

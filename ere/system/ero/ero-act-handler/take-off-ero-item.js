@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -76,11 +78,11 @@ async function take_off_ero_item(chara) {
     { horizontalAlign: 'space-evenly' },
   );
   const used_item = item_list[await era.input()];
-  era.printMultiColumns([
-    used_item.part === '全身镜'
-      ? { content: '确定要撤除全身镜吗？', type: 'text' }
-      : {
-          content: [
+  if (
+    !(await select_yes_or_no(
+      used_item.part === '全身镜'
+        ? '确定要撤除全身镜吗？'
+        : [
             '确定要从 ',
             aim_chara.get_colored_name(),
             ' 的 ',
@@ -98,26 +100,10 @@ async function take_off_ero_item(chara) {
             },
             ' 吗？',
           ],
-          type: 'text',
-        },
-    {
-      accelerator: 0,
-      config: { align: 'center', width: 12 },
-      content: '确定',
-      type: 'button',
-    },
-    {
-      accelerator: 100,
-      config: {
-        align: 'center',
-        width: 12,
-      },
-      content: '容我想想',
-      type: 'button',
-    },
-  ]);
-  const tmp = await era.input();
-  if (tmp) {
+      '确定',
+      '容我想想',
+    ))
+  ) {
     era.print([
       get_chara_talk(0).get_colored_name(),
       ' 放弃了撤除 ',

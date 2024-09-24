@@ -1,3 +1,8 @@
+/**
+ * @file 大和赤骥 - 调教
+ *
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -12,6 +17,7 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 
 const handlers = {};
 
+/** @author 无名黑奴 */
 handlers[ero_hooks.ero_start] = async () => {
   if (
     sys_check_awake(0) &&
@@ -121,6 +127,7 @@ handlers[ero_hooks.ero_start] = async () => {
   }
 };
 
+/** @author 无名黑奴 */
 handlers[ero_hooks.ero_end] = async () => {
   if (era.get('tcvar:9:TS大和T')) {
     const daiwa = get_chara_talk(9),

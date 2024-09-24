@@ -1,3 +1,8 @@
+/**
+ * @file 周日宁静 - 日常
+ *
+ * @author 黑衣剑士-星爆气流斩准备就绪
+ */
 const era = require('#/era-electron');
 
 const {
@@ -929,11 +934,6 @@ handlers[
   event_hooks.celebration
 ] = require('#/event/daily/daily-events-400/celebration');
 
-/**
- * 周日宁静的日常事件，id=400
- *
- * @author 黑衣剑士-星爆气流斩准备就绪
- */
 module.exports = {
   /**
    * @param {HookArg} hook

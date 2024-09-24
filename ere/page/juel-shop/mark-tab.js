@@ -9,6 +9,7 @@ const {
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const {
   default_handler,
   get_mark_cols,
@@ -287,27 +288,13 @@ module.exports = async (
       juel_dict,
     );
     if (is_confirmed) {
-      era.printMultiColumns([
-        {
-          content:
-            '刻印淫纹以奴役对方是一种极不道德的行为，对社会评价极为不利！请确认是否继续？',
-          type: 'text',
-        },
-        {
-          config: { width: 12, align: 'center' },
-          accelerator: 0,
-          content: '确定',
-          type: 'button',
-        },
-        {
-          config: { width: 12, align: 'center' },
-          accelerator: 100,
-          content: '溜了溜了',
-          type: 'button',
-        },
-      ]);
-      const temp = await era.input();
-      if (temp === 0) {
+      if (
+        await select_yes_or_no(
+          '刻印淫纹以奴役对方是一种极不道德的行为，对社会评价极为不利！请确认是否继续？',
+          '确定',
+          '溜了溜了',
+        )
+      ) {
         if (ret === 6) {
           era.set(`mark:${chara_id}:欢愉`, 0);
           sex_level = era.set(`mark:${chara_id}:淫纹`, pleasure_level);

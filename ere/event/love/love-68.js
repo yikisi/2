@@ -1,3 +1,8 @@
+/**
+ * @file 北部玄驹 - 爱慕
+ *
+ * @author 小黑
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -21,11 +26,6 @@ const { part_enum } = require('#/data/ero/part-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 
-/**
- * 北部玄驹 - 爱慕
- *
- * @author 小黑
- */
 module.exports = async (hook, _, event_object) => {
   const love = era.get('love:68'),
     kita = get_chara_talk(68),

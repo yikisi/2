@@ -1,3 +1,8 @@
+/**
+ * @file 米浴 - 日常
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -425,11 +430,6 @@ handlers[event_hooks.out_station] = async (hook) => {
   }
 };
 
-/**
- * 米浴的日常事件，id=30
- *
- * @author 梦露
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

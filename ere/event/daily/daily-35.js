@@ -1,3 +1,8 @@
+/**
+ * @file 胜利奖券 - 日常
+ *
+ * @author 幽白書
+ */
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
@@ -47,9 +52,6 @@ handlers[event_hooks.good_morning] = () => {
   throw new Error();
 };
 
-/**
- * 胜利奖券 日常
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

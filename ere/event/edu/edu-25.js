@@ -1,3 +1,8 @@
+/**
+ * @file 曼城茶座 - 育成
+ *
+ * @author Necroz
+ */
 const era = require('#/era-electron');
 
 const {
@@ -597,10 +602,6 @@ handlers[event_hooks.crazy_fan_end] = async () => {
 };
 
 /**
- * 曼城茶座 - 育成
- *
- * @author Necroz
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

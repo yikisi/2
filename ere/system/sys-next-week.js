@@ -76,8 +76,11 @@ async function sys_next_week() {
     punish_level = era.get('flag:惩戒力度'),
     team_dict = {},
     your_race = era.get('cflag:0:种族');
-  let in_team_list = filter_chara('cflag', '招募状态', recruit_flags.yes);
-  in_team_list.shift();
+  let in_team_list = filter_chara(
+    'cflag',
+    '招募状态',
+    recruit_flags.yes,
+  ).filter((e) => e);
   let temp;
   era.set('status:0:沉睡', 1);
   era.set('status:0:熬夜', 0);
@@ -87,27 +90,35 @@ async function sys_next_week() {
   randomly_interact(in_team_list);
   // 极端事件判定
   if (check_pregnant_unprotect(0)) {
+    const basement_owners = new BasementOwners();
     /** @type {{chara_id:number,prison:boolean,[supporter]:number}[]} */
     let act_list = [];
-    let prepared_list =
-      (temp = era.get('flag:床伴')) &&
+    let prepared_list;
+    if (
+      (temp = era.get('flag:床伴')) > 0 &&
       era.get(`base:${temp}:体力`) &&
       era.get(`base:${temp}:精力`) &&
       sys_check_awake(temp)
-        ? [temp].filter(check_pregnant_unprotect)
-        : in_team_list.filter(
-            (chara_id) => chara_id !== temp && sys_check_awake(temp),
-          );
-    prepared_list.forEach((chara_id) => {
+    ) {
+      prepared_list = [temp];
+    } else if (era.get('flag:当前位置') === location_enum.basement) {
+      prepared_list = basement_owners.get();
+    } else {
+      prepared_list = in_team_list.filter(
+        (chara_id) => chara_id !== temp && sys_check_awake(chara_id),
+      );
+    }
+    prepared_list.filter(check_pregnant_unprotect).forEach((chara_id) => {
       if (
-        new BasementOwners().get(0) === chara_id ||
+        basement_owners.get(0) === chara_id ||
         get_custom_check(chara_id).is_prison()
       ) {
         act_list.push({
           chara_id,
           prison:
             (!era.get('item:透明棉被') || Math.random() < 0.5) &&
-            !new LifeEventMarks(chara_id).b_cd,
+            !new LifeEventMarks(chara_id).b_cd &&
+            era.get('flag:当前位置') !== location_enum.basement,
         });
       } else if (get_custom_check(chara_id).is_rape_in_sleeping()) {
         act_list.push({ chara_id, prison: false });
@@ -314,24 +325,24 @@ async function sys_next_week() {
           (1 + race + era.get(`status:${chara_id}:健康茶`)),
     );
     if (
-      !era.get(`status:${chara_id}:头风`) &&
+      !era.get(`status:${chara_id}:偏头痛`) &&
       drug_delta >= 100 + 20 * health_talent + 50 * race
     ) {
-      era.set(`status:${chara_id}:头风`, 1);
+      era.set(`status:${chara_id}:偏头痛`, 1);
       era.print([
         chara.get_colored_name(),
         ' 罹患了 ',
-        { color: buff_colors[0], content: '[头风]' },
+        { color: buff_colors[0], content: '[偏头痛]' },
         '……',
       ]);
       sys_change_pressure(chara_id, get_random_value(500, 1500));
-    } else if (era.get(`status:${chara_id}:头风`)) {
+    } else if (era.get(`status:${chara_id}:偏头痛`)) {
       if (drug_delta <= 80 + 20 * health_talent + 50 * race) {
-        era.set(`status:${chara_id}:头风`, 0);
+        era.set(`status:${chara_id}:偏头痛`, 0);
         era.print([
           chara.get_colored_name(),
           ' 的 ',
-          { color: buff_colors[0], content: '[头风]' },
+          { color: buff_colors[0], content: '[偏头痛]' },
           ' 痊愈了……',
         ]);
       } else {

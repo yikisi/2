@@ -1,3 +1,8 @@
+/**
+ * @file 黄金船 - 育成
+ *
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
 
 const {
@@ -719,10 +724,6 @@ handlers[event_hooks.out_church] = async (hook, __, event_object) => {
 };
 
 /**
- * 黄金船的育成事件
- *
- * @author 雞雞
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

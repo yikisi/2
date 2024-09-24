@@ -12,7 +12,6 @@ const GameGuides = require('#/event/game-guides');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const CharaTitles = require('#/data/chara-titles');
-const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -56,7 +55,6 @@ async function page_clinic() {
             handle() {
               era.set('callname:305:-2', '安心泽刺刺美');
               era.set('cflag:305:招募状态', recruit_flags.yes);
-              new MyEduMarks().trainer_race = 0;
               return era.printAndWait([
                 get_chara_talk(305).get_colored_name(),
                 ' 加入了队伍！',

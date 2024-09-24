@@ -1,3 +1,8 @@
+/**
+ * @file 达利阿拉伯 - 爱慕
+ *
+ * @author O口口口口口
+ */
 const {
   get,
   input,
@@ -159,10 +164,6 @@ handlers[50] = async (god, me, callname) => {
 };
 
 /**
- * 达利阿拉伯 - 爱慕
- *
- * @author O口口口口口
- *
  * @param _
  * @param __
  * @param {EventObject} event_object

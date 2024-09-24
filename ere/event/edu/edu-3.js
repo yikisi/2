@@ -1,3 +1,8 @@
+/**
+ * @file 东海帝王 - 育成
+ *
+ * @author 天马闪光蹄
+ */
 const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
@@ -713,10 +718,6 @@ handlers[
 ] = require('#/event/edu/edu-events-3/crazy-fan-end');
 
 /**
- * 东海帝王 - 育成
- *
- * @author 天马闪光蹄
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

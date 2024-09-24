@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100481,
   'YEAH☆VIVID TIME!',
-  '最终直线上身处前方，完成超越或是即将被超越时，速度会随兴致一起提升。',
+  '最终直线上身处前方，完成超越或是即将被超越时，速度会随兴致一起提升',
   10048,
   1,
   UmaSkill.rarity_enum.spe_r,

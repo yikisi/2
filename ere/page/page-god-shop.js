@@ -283,7 +283,7 @@ module.exports = async () => {
           if (
             (era.get(`status:${cur_id}:熬夜`) ||
               era.get(`status:${cur_id}:发胖`) ||
-              era.get(`status:${cur_id}:头风`) ||
+              era.get(`status:${cur_id}:偏头痛`) ||
               era.get(`status:${cur_id}:伤病`) ||
               era.get(`status:${cur_id}:疲惫`)) &&
             (await select_yes_or_no(`确定要恢复 ${aim.name} 的健康吗？`))
@@ -293,7 +293,7 @@ module.exports = async () => {
             era.set(`base:${cur_id}:压力`, 0);
             era.set(`status:${cur_id}:熬夜`, 0);
             era.set(`status:${cur_id}:发胖`, 0);
-            era.set(`status:${cur_id}:头风`, 0);
+            era.set(`status:${cur_id}:偏头痛`, 0);
             era.set(`status:${cur_id}:伤病`, 0);
             era.set(`status:${cur_id}:疲惫`, 0);
             sys_change_motivation(cur_id, 4) && (await era.waitAnyKey());

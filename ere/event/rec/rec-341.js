@@ -1,3 +1,8 @@
+/**
+ * @file 高多芬柏布 - 招募
+ *
+ * @author フィンランド
+ */
 const { get, printAndWait, set } = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
@@ -8,11 +13,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 高多芬柏布 - 招募
- *
- * @author フィンランド
- */
 module.exports = {
   async run() {
     const me = get_chara_talk(0),

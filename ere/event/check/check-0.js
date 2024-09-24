@@ -26,10 +26,14 @@ module.exports = class extends CustomizedCheck {
       ) {
         my_edu_marks.experiment = 0;
       } else if (--my_edu_marks.experiment === 0) {
-        add_event(
-          event_hooks.week_end,
-          new EventObject(0, cb_enum.edu).set_arg('experiment'),
-        );
+        if (get('cflag:0:位置') > 0) {
+          my_edu_marks.experiment = 1;
+        } else {
+          add_event(
+            event_hooks.week_end,
+            new EventObject(0, cb_enum.edu).set_arg('experiment'),
+          );
+        }
       }
     }
     if (my_edu_marks.custom > 0) {
@@ -47,10 +51,14 @@ module.exports = class extends CustomizedCheck {
       ) {
         my_edu_marks.trainer_race = 0;
       } else if (--my_edu_marks.trainer_race === 0) {
-        add_event(
-          event_hooks.week_start,
-          new EventObject(0, cb_enum.edu).set_arg('trainer_race'),
-        );
+        if (get('cflag:0:位置') > 0) {
+          my_edu_marks.trainer_race = 1;
+        } else {
+          add_event(
+            event_hooks.week_start,
+            new EventObject(0, cb_enum.edu).set_arg('trainer_race'),
+          );
+        }
       }
     }
     if (get('flag:当前马币') <= 0 && !my_edu_marks.bankruptcy) {
@@ -63,13 +71,17 @@ module.exports = class extends CustomizedCheck {
     }
     if (my_edu_marks.reject === 3) {
       my_edu_marks.reject++;
-      add_event(
-        event_hooks.week_start,
-        new EventObject(0, cb_enum.edu).set_arg('reject'),
-      );
+      if (get('cflag:0:位置') > 0) {
+        my_edu_marks.reject = 3;
+      } else {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(0, cb_enum.edu).set_arg('reject'),
+        );
+      }
     }
     if (my_edu_marks.work_over > 0 && --my_edu_marks.work_over === 0) {
-      if (Math.random() < 0.01) {
+      if (Math.random() < 0.01 && get('cflag:0:位置') > 0) {
         add_event(
           event_hooks.week_start,
           new EventObject(0, cb_enum.edu).set_arg('work_over'),
@@ -79,7 +91,7 @@ module.exports = class extends CustomizedCheck {
       }
     }
     if (my_edu_marks.sick > 0 && --my_edu_marks.sick === 0) {
-      if (Math.random() < 0.01) {
+      if (Math.random() < 0.01 && get('cflag:0:位置') > 0) {
         add_event(
           event_hooks.week_start,
           new EventObject(0, cb_enum.edu).set_arg('sick'),

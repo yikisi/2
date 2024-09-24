@@ -1,3 +1,9 @@
+/**
+ * @file 玩家 - 育成
+ *
+ * @author 雞雞
+ * @author 天马闪光蹄
+ */
 const {
   add,
   get,
@@ -344,8 +350,8 @@ handlers.trainer_race = async (me) => {
       '但顺利得让人背脊发凉啊……就像是自己被当成什么实验品一样……',
     );
     println();
-    sys_change_attr_and_print(0, '体力', get('maxbase:0:体力') * 0.25);
-    sys_change_attr_and_print(0, '精力', get('maxbase:0:精力') * 0.25);
+    sys_change_attr_and_print(0, '体力', -get('maxbase:0:体力') * 0.25);
+    sys_change_attr_and_print(0, '精力', -get('maxbase:0:精力') * 0.25);
     const item = get_random_entry([
       ...new Array(4).fill(0).map((e) => 700 + e),
       ...new Array(4).fill(0).map((e) => 705 + e),
@@ -437,8 +443,6 @@ handlers.sick = async (me) => {
 };
 
 /**
- * 玩家育成事件
- *
  * @param {HookArg} hook
  * @param _
  * @param {EventObject} event_object

@@ -1,3 +1,8 @@
+/**
+ * @file 摩耶重炮 - 日常
+ *
+ * @author 黑奴二号
+ */
 const era = require('#/era-electron');
 
 const {
@@ -11,6 +16,8 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_money } = require('#/system/sys-calc-flag');
+
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -32,11 +39,6 @@ function print_attr_change(chara_id, attr_name, val) {
   }
 }
 
-/**
- * 重炮的日常事件，id=24
- *
- * @author 黑奴二号
- */
 module.exports = {
   override: true, //override设为true会跳过默认的数值结算，反之则会套用默认的数值结算
   /**
@@ -738,23 +740,12 @@ module.exports = {
         }
         break;
       case event_hooks.school_atrium:
-        era.print('一起前往中庭做什么呢？');
-        era.printMultiColumns([
-          {
-            accelerator: 0,
-            config: { align: 'center', width: 12 },
-            content: '去看看枯树洞吧',
-            type: 'button',
-          },
-          {
-            accelerator: 100,
-            config: { align: 'center', width: 12 },
-            content: '去约会吧',
-            type: 'button',
-          },
-        ]);
         await maya.say_and_wait(
-          (await era.input()) === 0
+          (await select_yes_or_no(
+            '一起前往中庭做什么呢？',
+            '去看看枯树洞吧',
+            '去约会吧',
+          ))
             ? ['人家可是成熟的', maya.get_colored_name(), '，才，才不会哭的？']
             : ['去约会吧！人家要和 ', callname, ' 成为学园里最般配的情侣！'],
         );

@@ -1,3 +1,8 @@
+/**
+ * @file 北部玄驹 - 育成
+ *
+ * @author 小黑
+ */
 const era = require('#/era-electron');
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
@@ -577,11 +582,6 @@ handlers[event_hooks.out_start] = async function (_, __, event_object) {
 };
 
 /**
- *
- * 北部玄驹的育成事件
- *
- * @author 小黑
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

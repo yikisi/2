@@ -6,6 +6,7 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const select_target_in_storage = require('#/page/storage/select-target');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 /** @param {Record<string,function>} handlers */
 module.exports = (handlers) => {
@@ -16,9 +17,27 @@ module.exports = (handlers) => {
         (handlers[i + 810] = () => era.printAndWait('仅能在调教中使用')),
     );
 
+  handlers[825] = async () => {
+    if (await select_yes_or_no('要丢弃吗？')) {
+      await era.printAndWait('丢弃了【透明棉被】……');
+      await era.printAndWait('……但是在丢弃之前从里面翻出了几张纸币……');
+      era.set('item:透明棉被', 0);
+      era.add('flag:当前马币', get_random_value(10, 50));
+    }
+  };
+
   [830, 833, 834, 835, 838, 839, 840].forEach(
     (e) => (handlers[e] = () => era.printAndWait('仅能在调教中使用')),
   );
+
+  handlers[841] = async () => {
+    if (await select_yes_or_no('要丢弃吗？')) {
+      await era.printAndWait('丢弃了【马跳S家庭装】……');
+      await era.printAndWait('……然后因为乱丢化学制剂被处以100马币罚款');
+      era.set('item:马跳S家庭装', 0);
+      era.add('flag:当前马币', -100);
+    }
+  };
 
   handlers[836] = async () => {
     const ret = await select_target_in_storage(

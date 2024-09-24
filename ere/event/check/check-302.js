@@ -34,7 +34,7 @@ module.exports = class extends CustomizedCheck {
         new EventMarks(0).add(event_hooks.school_chairman);
         add_event(
           event_hooks.school_chairman,
-          new EventObject(302, cb_enum.edu).set_arg('annoyance1'),
+          new EventObject(302, cb_enum.edu).set_arg('annoyance2'),
         );
       }
     }

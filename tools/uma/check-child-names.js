@@ -19,7 +19,7 @@ for (const m in name_data) {
   }
   const find = list.filter((e) => lines.indexOf(e) !== -1);
   if (find.length) {
-    console.log(`\t${m} - ${find.join(', ')}`);
+    console.log(`\t${m} <-> ${find.join(', ')}`);
     flag = false;
   }
 }

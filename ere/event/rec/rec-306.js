@@ -1,3 +1,8 @@
+/**
+ * @file 㭴本理子 - 招募
+ *
+ * @author 无名黑奴（临时）
+ */
 const {
   add,
   get,
@@ -18,11 +23,6 @@ const GlasseEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-202
 const CoconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-203');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 㭴本理子 - 招募
- *
- * @author 无名黑奴（临时）
- */
 module.exports = {
   async run() {
     const riko = get_chara_talk(306),

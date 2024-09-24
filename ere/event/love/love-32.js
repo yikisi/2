@@ -1,3 +1,9 @@
+/**
+ * @file 爱丽速子 - 爱慕
+ *
+ * @author 幽白書
+ * @author 黑奴一号 无名黑奴（修订）
+ */
 const era = require('#/era-electron');
 
 const {
@@ -701,11 +707,6 @@ handlers[89] = async (tachyon, me, callname) => {
 };
 
 /**
- * 速子的爱慕事件，id=32
- *
- * @author 幽白書
- * @author 黑奴一号 无名黑奴（修订）
- *
  * @param _
  * @param __
  * @param {EventObject} event_object

@@ -1,3 +1,8 @@
+/**
+ * @file 卓芙 - 调教
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');

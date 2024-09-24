@@ -230,14 +230,14 @@ module.exports = (handlers) => {
 
   handlers[851] = async () => {
     const ret = await select_target_in_storage(851, (e) =>
-      era.get(`status:${e}:头风`),
+      era.get(`status:${e}:偏头痛`),
     );
     if (ret !== undefined) {
       await era.printAndWait([
         get_chara_talk(ret).get_colored_name(),
         ' 不再偏头痛了……',
       ]);
-      era.set(`status:${ret}:头风`, 0);
+      era.set(`status:${ret}:偏头痛`, 0);
       era.set(
         `base:${ret}:药物残留`,
         Math.floor(
@@ -341,14 +341,14 @@ module.exports = (handlers) => {
 
   handlers[856] = async () => {
     const ret = await select_target_in_storage(851, (e) =>
-      era.get(`status:${e}:头风`),
+      era.get(`status:${e}:偏头痛`),
     );
     if (ret !== undefined) {
       await era.printAndWait([
         get_chara_talk(ret).get_colored_name(),
         ' 暂时不偏头痛了……',
       ]);
-      era.set(`status:${ret}:头风`, 0);
+      era.set(`status:${ret}:偏头痛`, 0);
       era.add('item:布洛芬', -1);
       return true;
     }

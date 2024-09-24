@@ -1,3 +1,8 @@
+/**
+ * @file 黄金船 - 日常
+ *
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -585,11 +590,6 @@ handlers[event_hooks.load_talk] = () => {
   }
 };
 
-/**
- * 黄金船的日常事件，id=7
- *
- * @author 雞雞
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

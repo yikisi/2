@@ -1,3 +1,8 @@
+/**
+ * @file 春乌拉拉 - 日常
+ *
+ * @author 99
+ */
 const era = require('#/era-electron');
 
 const {
@@ -930,11 +935,6 @@ handlers[
   event_hooks.week_start
 ] = require('#/event/daily/daily-events-52/week-start');
 
-/**
- * 春乌拉拉 - 日常，id=52
- *
- * @author 99
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

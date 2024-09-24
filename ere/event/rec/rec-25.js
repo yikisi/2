@@ -1,3 +1,8 @@
+/**
+ * @file 曼城茶座-招募，id=25
+ *
+ * @author Necroz
+ */
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
@@ -7,17 +12,11 @@ const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 曼城茶座-招募，id=25
- *
- * @author Necroz
- */
 module.exports = {
   override: true,
   /** @param {number} stage */
@@ -682,7 +681,6 @@ module.exports = {
           '度过一段奇妙的时光了。',
         ]);
         era.set('cflag:25:招募状态', recruit_flags.yes);
-        new MyEduMarks().experiment = 0;
         era.set('flag:物色对象', 0);
         event_marks.sub(event_hooks.week_end);
         add_event(

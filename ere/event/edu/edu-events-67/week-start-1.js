@@ -403,7 +403,7 @@ module.exports = (handlers) => {
       era.println();
       flags.wait = get_attr_and_print_in_event(67, undefined, 30) || flags.wait;
     }
-    era.set('flag:67:节日事件标记', 0);
+    era.set('cflag:67:节日事件标记', 0);
   };
 
   handlers[47 + 29] = async (daiya, _, flags, cb) => {

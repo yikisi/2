@@ -1,3 +1,8 @@
+/**
+ * @file 佐岳五月 - 育成
+ *
+ * @author 无名黑奴（临时）
+ */
 const { printAndWait } = require('#/era-electron');
 
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -6,11 +11,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 
-/**
- * 佐岳五月 - 育成
- *
- * @author 无名黑奴（临时）
- */
 module.exports = async (hook, extra_flag, event_object) => {
   if (event_object?.arg !== 'welcome') {
     throw new Error();

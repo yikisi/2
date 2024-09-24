@@ -1,3 +1,8 @@
+/**
+ * @file 奇锐骏 - 招募
+ *
+ * @author 夕阳红艺术团小组长-赤红彗星红桃爵士Q先生
+ */
 const era = require('#/era-electron');
 
 const {
@@ -15,11 +20,6 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 奇锐骏的招募事件，id=100
- *
- * @author 夕阳红艺术团小组长-赤红彗星红桃爵士Q先生
- */
 module.exports = {
   override: true,
   /**

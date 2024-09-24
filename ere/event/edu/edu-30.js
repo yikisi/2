@@ -1,3 +1,8 @@
+/**
+ * @file 米浴 - 育成
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
@@ -825,10 +830,6 @@ handlers[event_hooks.race_start] = async (_, extra_flag) => {
 };
 
 /**
- * 米浴的育成事件
- *
- * @author 梦露
- *
  * @param {HookArg} hook
  * @param extra_flag
  * @param {EventObject} event_object

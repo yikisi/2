@@ -11,6 +11,7 @@ const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
+const status_desc = require('#/data/desc/status-desc.json');
 const { location_enum } = require('#/data/locations');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -376,6 +377,7 @@ module.exports = (handlers) => {
         {
           color: buff_colors[1],
           content: '[必行之事]',
+          title: status_desc['必行之事'],
         },
         ' 的觉悟！',
       ]);

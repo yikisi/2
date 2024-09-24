@@ -1,3 +1,8 @@
+/**
+ * @file 东海帝王 - 日常
+ *
+ * @author 天马闪光蹄
+ */
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
@@ -664,11 +669,6 @@ handlers[event_hooks.celebration] = async () => {
   era.set('cflag:3:节日事件标记', 0);
 };
 
-/**
- * 东海帝王的日常事件，角色id=3
- *
- * @author 天马闪光蹄
- */
 module.exports = {
   /**
    * @param {HookArg} hook

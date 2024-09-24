@@ -11,6 +11,7 @@ const {
 
 const { buff_colors } = require('#/data/color-const');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
+const betray_ending = require('#/event/edu/edu-events-32/force-bad-ending');
 
 /**
  * @param {CharaTalk} tachyon
@@ -41,6 +42,9 @@ module.exports = async () => {
   const me = get_chara_talk(0),
     t_call_c = sys_get_colored_callname(32, 25),
     tachyon = get_chara_talk(32);
+  if (era.get('flag:强制BE')) {
+    return await betray_ending(tachyon, me);
+  }
   await tachyon.say_and_wait('醒醒');
   await tachyon.say_and_wait('醒醒');
   await tachyon.say_and_wait('求求你……醒过来吧');

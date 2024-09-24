@@ -26,7 +26,7 @@ function sys_change_motivation(chara_id, val) {
   if (!chara_id || era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48) {
     return false;
   }
-  if (val > 0 && era.get(`status:${chara_id}:头风`)) {
+  if (val > 0 && era.get(`status:${chara_id}:偏头痛`)) {
     return false;
   }
   const delta_change = era.get(`talent:${chara_id}:情感活动`);
@@ -288,8 +288,9 @@ module.exports = {
           week: -1,
         },
       });
-    ret.curr = { race: ret.curr.race, week: ret.curr.week };
-    ret.last = { race: ret.last.race, week: ret.last.week };
+    Object.preventExtensions(ret);
+    Object.preventExtensions(ret.curr);
+    Object.preventExtensions(ret.last);
     return ret;
   },
 };

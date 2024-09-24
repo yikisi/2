@@ -1,3 +1,8 @@
+/**
+ * @file 桐生院葵 - 育成
+ *
+ * @author 无名黑奴（临时）
+ */
 const { get, printAndWait, println, waitAnyKey } = require('#/era-electron');
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
@@ -6,11 +11,6 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-/**
- * 桐生院葵 - 育成
- *
- * @author 无名黑奴（临时）
- */
 module.exports = async (hook, extra_flag, event_object) => {
   if (event_object?.arg !== 'fail') {
     throw new Error();

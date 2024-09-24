@@ -1,3 +1,8 @@
+/**
+ * @file 第一红宝石 - 日常
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const {
@@ -653,11 +658,6 @@ handlers[event_hooks.load_talk] = async () => {
   );
 };
 
-/**
- * 第一红宝石的日常事件，角色id=85
- *
- * @author 梦露
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

@@ -1,3 +1,8 @@
+/**
+ * @file 东海帝王 - 爱慕
+ *
+ * @author 天马闪光蹄
+ */
 const era = require('#/era-electron');
 
 const {
@@ -562,11 +567,6 @@ async function week_start_99(teio, me) {
   }
 }
 
-/**
- * 东海帝王 - 爱慕
- *
- * @author 天马闪光蹄
- */
 module.exports = async () => {
   const love = era.get(`love:3`),
     teio = get_chara_talk(3),

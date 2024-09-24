@@ -1,3 +1,8 @@
+/**
+ * @file 秋川弥生 - 育成
+ *
+ * @author 雞雞
+ */
 const {
   add,
   get,
@@ -90,8 +95,6 @@ handlers.annoyance2 = async (taste) => {
 };
 
 /**
- * 秋川弥生 - 育成
- *
  * @param {HookArg} hook
  * @param _
  * @param {EventObject} event_object

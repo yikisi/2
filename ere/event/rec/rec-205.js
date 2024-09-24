@@ -1,3 +1,8 @@
+/**
+ * @file 卓芙 - 招募
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const {
@@ -14,11 +19,6 @@ const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-/**
- * 金星公园 - 招募
- *
- * @author 梦露
- */
 module.exports = {
   override: true,
   /** @param {number} stage */

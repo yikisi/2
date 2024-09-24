@@ -1,3 +1,8 @@
+/**
+ * @file 优秀素质 - 日常
+ *
+ * @author 红红火火恍惚
+ */
 const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
@@ -576,11 +581,6 @@ handlers[event_hooks.load_talk] = async () => {
   }
 };
 
-/**
- * 优秀素质的日常事件，id=60
- *
- * @author 红红火火恍惚
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

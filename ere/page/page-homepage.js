@@ -269,7 +269,7 @@ module.exports = async () => {
           ' 被学园的救援队救出了地下室……',
         ]);
         const jpy = Math.ceil(era.get('flag:当前马币') / 2);
-        if (jpy) {
+        if (jpy > 0) {
           await era.printAndWait('……但是被扣除了一半存款作为上周误工的罚款。');
           era.add('flag:当前马币', -jpy);
         }
@@ -335,7 +335,6 @@ module.exports = async () => {
         basement_queue.add_action(
           new BasementAction(0, my_life_marks.b_timer, action_type_enum.get_up),
         );
-        my_life_marks.b_enhance = 1;
         owner_marks.b_s_level = Math.max(
           Math.floor(
             (era.get(`love:${owner}`) * (era.get('flag:极端行为限制') || 1) -
@@ -402,16 +401,15 @@ module.exports = async () => {
       era.drawLine();
       let hook = -1;
       if (flags.week_start) {
-        flags.week_start = false;
         if (chara_id) {
           hook = event_hooks.good_morning;
         }
       } else if (flags.after_select) {
-        flags.after_select = false;
         if (chara_id) {
           hook = event_hooks.select;
         }
       }
+      flags.week_start = flags.after_select = false;
       if (hook > 0) {
         await sys_call_daily_event(chara_id, hook);
       } else {

@@ -11,7 +11,11 @@ module.exports = class extends CustomizedMec {
   get_status() {
     const ret = [];
     if (era.get('status:37:荣耀德比')) {
-      ret.push({ color: buff_colors[1], content: '荣耀德比' });
+      ret.push({
+        color: buff_colors[1],
+        content: '荣耀德比',
+        title: '参赛时属性+50%',
+      });
     }
     if (era.get('status:37:必行之事')) {
       ret.push({ color: buff_colors[1], content: '必行之事' });

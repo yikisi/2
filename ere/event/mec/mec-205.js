@@ -6,7 +6,9 @@ const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedMec {
   set_callname() {
-    era.set('callname:205:0', '训练员');
+    if (!this.set_callname_from_src()) {
+      era.set('callname:205:0', '训练员');
+    }
   }
 
   set_foreign_debuff(before_race, loc) {

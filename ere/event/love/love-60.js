@@ -1,3 +1,8 @@
+/**
+ * @file 优秀素质 - 爱慕
+ *
+ * @author 红红火火恍惚
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -346,9 +351,9 @@ async function love_89(chara_talk) {
 }
 
 /**
- * 优秀素质 - 爱慕
- *
- * @author 红红火火恍惚
+ * @param {HookArg} hook
+ * @param _
+ * @param {EventObject} event_object
  */
 module.exports = async (hook, _, event_object) => {
   const love = era.get('love:60'),

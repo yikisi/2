@@ -245,6 +245,9 @@ function get_callname(_from, _to) {
   if (callname instanceof Array) {
     return get_random_entry(callname);
   }
+  if (callname === '-') {
+    return era.get(`static:${_to}:callname`);
+  }
   return callname;
 }
 
@@ -283,6 +286,7 @@ function print_change(chara_id, old_val, new_val, to_be_shown) {
 }
 
 CustomizedCheck.like_chara = like_chara;
+CustomizedCheck.love_uma = love_uma;
 
 module.exports = {
   sys_change_status_by_base(chara_id) {

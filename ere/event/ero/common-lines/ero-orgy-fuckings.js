@@ -1,3 +1,9 @@
+/**
+ * @file 调教地文 - 银趴性交系
+ *
+ * @author 雞雞
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
@@ -7,11 +13,9 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { penis_desc } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @author O口口口口口
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,{supporter:number})>} handlers
- */
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
+  /** @author 无名黑奴 */
   handlers[ero_hooks.ask_double_fuck] = async (
     attacker,
     defender,
@@ -64,6 +68,7 @@ module.exports = (handlers) => {
     }
   };
 
+  /** @author 雞雞 */
   handlers[ero_hooks.ask_double_penetration] = async (
     attacker,
     defender,
@@ -100,6 +105,7 @@ module.exports = (handlers) => {
     }
   };
 
+  /** @author 雞雞 */
   handlers[ero_hooks.ask_spit_roast] = handlers[
     ero_hooks.ask_spit_roast_anal_sex
   ] = async (attacker, defender, hook, extra_flag) => {
@@ -135,6 +141,7 @@ module.exports = (handlers) => {
     }
   };
 
+  /** @author 雞雞 */
   handlers[ero_hooks.fuck_69] = async (
     attacker,
     defender,
@@ -178,6 +185,7 @@ module.exports = (handlers) => {
   };
 
   // 银趴系：角色专用
+  /** @author 雞雞 */
   handlers[ero_hooks.double_fuck] = async (
     attacker,
     defender,
@@ -223,6 +231,7 @@ module.exports = (handlers) => {
     }
   };
 
+  /** @author 雞雞 */
   handlers[ero_hooks.double_penetration] = async (
     attacker,
     defender,
@@ -263,6 +272,7 @@ module.exports = (handlers) => {
     }
   };
 
+  /** @author 雞雞 */
   handlers[ero_hooks.spit_roast] = handlers[ero_hooks.spit_roast_anal_sex] =
     async (attacker, defender, hook, extra_flag) => {
       const supporter = get_chara_talk(extra_flag.supporter),

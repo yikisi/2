@@ -1,3 +1,8 @@
+/**
+ * @file 东海帝王 - 招募
+ *
+ * @author 天马闪光蹄
+ */
 const era = require('#/era-electron');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -5,11 +10,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 
-/**
- * 东海帝王的招募事件，id=3
- *
- * @author 天马闪光蹄
- */
 module.exports = {
   async run() {
     const teio_talk = get_chara_talk(3),

@@ -1,3 +1,8 @@
+/**
+ * @file 鲁铎象征 - 日常
+ *
+ * @author 露娜俘虏
+ */
 const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -512,11 +517,6 @@ handlers[event_hooks.load_talk] = async () => {
   }
 };
 
-/**
- * 鲁铎象征 - 日常
- *
- * @author 露娜俘虏
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

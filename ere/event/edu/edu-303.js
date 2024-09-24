@@ -1,3 +1,9 @@
+/**
+ * @file 乙名史悦子 - 育成
+ *
+ * @author 雞雞
+ * @author 无名黑奴
+ */
 const {
   get,
   printAndWait,
@@ -171,11 +177,6 @@ function print_character_statistics({ id, history }) {
   setAlign('left');
 }
 
-/**
- * 乙名史悦子 - 育成
- *
- * @author 无名黑奴（临时）
- */
 module.exports = async (hook, extra_flag, event_object) => {
   if (event_object?.arg !== 'reward') {
     throw new Error();

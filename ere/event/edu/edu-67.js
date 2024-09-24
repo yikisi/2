@@ -1,3 +1,10 @@
+/**
+ * @file 里见光钻 - 育成
+ *
+ * @author 某知名手游公司编剧
+ * @author 黑奴二号（改编）
+ * @author 无名黑奴（修订）
+ */
 const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
@@ -797,12 +804,6 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
 };
 
 /**
- * 里见光钻的育成事件
- *
- * @author cy
- * @author 黑奴二号（改编）
- * @author 无名黑奴（修订）
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

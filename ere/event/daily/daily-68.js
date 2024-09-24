@@ -1,4 +1,10 @@
-﻿const era = require('#/era-electron');
+﻿/**
+ * @file 北部玄驹 - 日常
+ *
+ * @author 小黑（原作）
+ * @author 黑奴一号 无名黑奴（改编）
+ */
+const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
@@ -892,13 +898,6 @@ handlers[
   event_hooks.celebration
 ] = require('#/event/daily/daily-events-68/celebration');
 
-/**
- * 北黑的日常事件，id=68
- *
- * @author 小黑（原作）
- * @author 黑奴一号（改编）
- * @author 无名黑奴（改编）
- */
 module.exports = {
   /**
    * @param {HookArg} hook

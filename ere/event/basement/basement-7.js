@@ -1,3 +1,8 @@
+/**
+ * @file 黄金船 - 地下室
+ *
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
 
 const CustomizedBase = require('#/event/basement/basement-common');
@@ -27,9 +32,7 @@ async function ask_release_common(gold_ship, me) {
   era.println();
 }
 
-/** 黄金船 - 地下室 */
 module.exports = class extends CustomizedBase {
-  /** @author 雞雞 */
   async ask_release_agree() {
     const gold_ship = get_chara_talk(7),
       me = get_chara_talk(0);
@@ -54,7 +57,6 @@ module.exports = class extends CustomizedBase {
     ]);
   }
 
-  /** @author 雞雞 */
   async ask_release_reject() {
     const gold_ship = get_chara_talk(7),
       me = get_chara_talk(0);
@@ -75,7 +77,6 @@ module.exports = class extends CustomizedBase {
     ]);
   }
 
-  /** @author 雞雞 */
   async ask_time(date, hours, minutes) {
     const gold_ship = get_chara_talk(7),
       me = get_chara_talk(0),
