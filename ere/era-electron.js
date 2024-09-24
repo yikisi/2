@@ -132,7 +132,7 @@ const era = {
      * @param {any} msg
      */
     debug(msg) {
-      era.logger.debug(msg);
+      return era.logger.debug(msg);
     },
     /**
      * to log something into program logs as error level
@@ -140,14 +140,14 @@ const era = {
      * @param {any} [stack]
      */
     error(msg, stack) {
-      era.logger.error(msg, stack);
+      return era.logger.error(msg, stack);
     },
     /**
      * to log something into program logs
      * @param {any} msg
      */
     info(msg) {
-      era.logger.info(msg);
+      return era.logger.info(msg);
     },
   },
   /**

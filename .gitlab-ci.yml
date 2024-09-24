@@ -46,7 +46,7 @@ pages:
     - mkdir public
     - VERSION=`cat csv/GameBase.csv | grep 'バージョン,'`
     - echo ${VERSION#*,} > public/RELEASE
-    - cat .ere-min-version >> public RELEASE
+    - cat .ere-min-version >> public/RELEASE
   artifacts:
     paths:
       - public
