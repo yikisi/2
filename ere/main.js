@@ -496,7 +496,15 @@ module.exports = async () => {
             '爱放箭的袁本初',
           ],
           [[{ color: get_chara_color(52), content: '春乌拉拉' }], '99'],
-          [[{ color: get_chara_color(56), content: '待兼福来' }], 'ALEX'],
+          [
+            [
+              {
+                color: get_chara_color(56),
+                content: era.get('static:56:name'),
+              },
+            ],
+            'ALEX',
+          ],
           [
             [{ color: get_chara_color(60), content: '优秀素质' }],
             '红红火火恍惚',

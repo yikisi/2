@@ -81,7 +81,7 @@ module.exports = async (_, __, event_object) => {
     );
     switch (await era.input()) {
       case 1:
-        a = false;
+        a = b = c = false;
         await era.printAndWait('嘟……嘟……');
         era.drawLine({ content: '几秒钟后' });
         break;
@@ -140,7 +140,7 @@ module.exports = async (_, __, event_object) => {
         ],
   );
 
-  const bonus_list = [201542];
+  const bonus_list = [];
   let str;
   a = b = c = true;
   do {
@@ -158,7 +158,7 @@ module.exports = async (_, __, event_object) => {
     );
     switch (await era.input()) {
       case 1:
-        a = false;
+        a = b = c = false;
         era.printButton('「喂？」', 1);
         era.printButton('「你好？」', 2);
         await era.input();
@@ -190,7 +190,7 @@ module.exports = async (_, __, event_object) => {
         era.println();
         await era.printAndWait('嘟……嘟……');
         await era.printAndWait('被挂断了……');
-        bonus_list.unshift(201222);
+        bonus_list.push(201542);
         break;
       case 2:
         a = b = c = false;
@@ -219,6 +219,7 @@ module.exports = async (_, __, event_object) => {
           kitaru.sex,
           '就像完全忘了这件事一样。',
         ]);
+        bonus_list.push(201222);
         break;
       case 3:
         c = false;

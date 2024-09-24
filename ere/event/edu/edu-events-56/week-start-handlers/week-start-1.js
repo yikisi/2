@@ -311,7 +311,9 @@ module.exports = (handlers) => {
       kitaru.get_siblings_sex_title(),
       '，年长的',
       kitaru.get_bigger_sibling_sex_title(),
-      '正握着年幼妹妹的手。',
+      '正握着年幼',
+      kitaru.get_smaller_sibling_sex_title(),
+      '的手。',
     ]);
     await era.printAndWait([
       '年纪稍小的那位 ',
@@ -469,7 +471,7 @@ module.exports = (handlers) => {
       '总是像电视里那些逃马一样把我甩开了好大好大的一段距离呢！',
     ]);
     era.printButton(
-      `「听起来你的',kitaru.get_bigger_sibling_sex_title(),'是位很优秀的赛${kitaru.get_uma_sex_title()}吧？」`,
+      `「听起来你的${kitaru.get_bigger_sibling_sex_title()}是位很优秀的赛${kitaru.get_uma_sex_title()}吧？」`,
       1,
     );
     await era.input();

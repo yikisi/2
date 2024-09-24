@@ -23,14 +23,14 @@ const { attr_enum } = require('#/data/train-const');
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 3;
-aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 3;
-aim_races[get_aim_race_index(race_enum.aoba_sho, 1)] = 3;
-aim_races[get_aim_race_index(race_enum.kobe_hai, 1)] = 3;
-aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 3;
-aim_races[get_aim_race_index(race_enum.kink_sho, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.aoba_sho, 1)] = 0b11;
+aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 0b11;
+aim_races[get_aim_race_index(race_enum.kobe_hai, 1)] = 0b11;
+aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 0b11;
+aim_races[get_aim_race_index(race_enum.kink_sho, 2)] = 0b11;
+aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 0b11;
 //aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 3; 暂时先不跑。
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 3;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 0b11;
 
 module.exports = class extends CustomizedCheck {
   check_after_punish(level) {
@@ -301,7 +301,7 @@ module.exports = class extends CustomizedCheck {
       races = new RaceHistory(56).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.aoba_sho, 1, 20)); // 入着即可
-    buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.kobe_hai, 1, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.kink_sho, 2, 1));

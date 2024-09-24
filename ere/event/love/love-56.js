@@ -752,7 +752,7 @@ handlers[99] = async (kitaru, me, callname) => {
   await era.input();
   era.println();
   await kitaru.say_and_wait(
-    ['所以，是的，', callname, ' 就是我的命定之人！'],
+    ['所以，是的，', me.get_colored_actual_name(), ' 就是我的命定之人！'],
     true,
   );
   era.println();
@@ -817,7 +817,11 @@ handlers[99] = async (kitaru, me, callname) => {
   await kitaru.say_and_wait('那个，白兴大人看到我得到了幸福，也会高兴的吧。');
   await kitaru.say_and_wait('应该吧……');
   await kitaru.say_and_wait('呜……只是头脑一热就这样了……');
-  await kitaru.say_and_wait(['不过，只有对 ', callname, '，才会这样哦！']);
+  await kitaru.say_and_wait([
+    '不过，只有对 ',
+    me.get_colored_actual_name(),
+    '，才会这样哦！',
+  ]);
   await kitaru.say_and_wait([
     '毕竟，',
     me.get_colored_actual_name(),

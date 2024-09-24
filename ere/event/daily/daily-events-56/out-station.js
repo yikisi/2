@@ -196,7 +196,7 @@ module.exports = async (hook) => {
               '是',
               '否',
             );
-            if (branch === 0) {
+            if (branch) {
               await kitaru.say_and_wait([callname, '，又想我换发型了吗？']);
               switch (era.get('cstr:56:后发')) {
                 case '长直发':
@@ -224,6 +224,9 @@ module.exports = async (hook) => {
                     '，粉颊边被香汗黏住了些发丝。',
                   ]);
               }
+              branch = 1;
+            } else {
+              branch = 2;
             }
           }
         } else {

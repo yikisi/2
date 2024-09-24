@@ -19,85 +19,91 @@ module.exports = async (hook) => {
   switch (temp) {
     case 0:
       if (Math.random() < 0.5) {
-        await kitaru.say_and_wait(
-          '喔喔喔！果然是大吉呢！一个玩偶上居然挂了这么多！',
-        );
-        await era.printAndWait([
-          '就在得意忘形的 ',
-          kitaru.get_colored_name(),
-          ' 要撞到夹娃娃机的时候，',
-          me.get_colored_name(),
-          ' 眼疾手快地拉住了',
-          kitaru.sex,
-          '。',
-        ]);
-        await kitaru.say_and_wait('欸嘿～抱歉！');
-        await era.printAndWait([
-          '看着 ',
-          kitaru.get_colored_name(),
-          ' 的样子，',
-          me.get_colored_name(),
-          ' 不禁笑了出来。',
-        ]);
+        message.push(async () => {
+          await kitaru.say_and_wait(
+            '喔喔喔！果然是大吉呢！一个玩偶上居然挂了这么多！',
+          );
+          await era.printAndWait([
+            '就在得意忘形的 ',
+            kitaru.get_colored_name(),
+            ' 要撞到夹娃娃机的时候，',
+            me.get_colored_name(),
+            ' 眼疾手快地拉住了',
+            kitaru.sex,
+            '。',
+          ]);
+          await kitaru.say_and_wait('欸嘿～抱歉！');
+          await era.printAndWait([
+            '看着 ',
+            kitaru.get_colored_name(),
+            ' 的样子，',
+            me.get_colored_name(),
+            ' 不禁笑了出来。',
+          ]);
+        });
       } else {
-        await kitaru.say_and_wait([
-          '唔！新出的格斗游戏吗？要试试双人对战吗，',
-          callname,
-          '？',
-        ]);
-        await era.printAndWait([
-          '在连着输了几个回合后，',
-          kitaru.get_colored_name(),
-          ' 如同未卜先知般的操作让 ',
-          me.get_colored_name(),
-          ' 不得不投降。',
-        ]);
-        await kitaru.say_and_wait('啊啦，多亏白兴大人的保佑呢！');
+        message.push(async () => {
+          await kitaru.say_and_wait([
+            '唔！新出的格斗游戏吗？要试试双人对战吗，',
+            callname,
+            '？',
+          ]);
+          await era.printAndWait([
+            '在连着输了几个回合后，',
+            kitaru.get_colored_name(),
+            ' 如同未卜先知般的操作让 ',
+            me.get_colored_name(),
+            ' 不得不投降。',
+          ]);
+          await kitaru.say_and_wait('啊啦，多亏白兴大人的保佑呢！');
+        });
       }
       break;
     case 1:
-      await kitaru.say_and_wait([callname, '，那边有抽奖欸！']);
-      if (love > 49 && kitaru.sex_code - 1) {
-        await era.printAndWait([
-          '无需多言，',
-          me.get_colored_name(),
-          ' 和 ',
-          kitaru.get_colored_name(),
-          ' 一起走到了抽奖摊位前。',
-        ]);
-        await kitaru.say_and_wait(['让 ', callname, ' 分我一点好运吧！']);
-        await era.printAndWait([
-          '而后温暖的感觉与弹性的触感一同传来，',
-          kitaru.get_colored_name(),
-          ' 抱住了 ',
-          me.get_colored_name(),
-          ' 的胳膊，一副不肯放开的样子。',
-        ]);
-        await kitaru.say_and_wait('欸嘿～！');
-        await era.printAndWait([
-          '仿佛没有察觉到自己的双乳已经和 ',
-          me.get_colored_name(),
-          ' 的手臂发生了挤压，',
-          kitaru.get_colored_name(),
-          ' 将手伸入了箱子中。',
-        ]);
-      } else {
-        await era.printAndWait([
-          '在 ',
-          kitaru.get_colored_name(),
-          ' 的强烈要求下，',
-          me.get_colored_name(),
-          ' 不得不和',
-          kitaru.sex,
-          '来到了摊位前。',
-        ]);
-        await kitaru.say_and_wait('啊啊啊！白兴大人保佑！');
-        await kitaru.say_and_wait('哈！');
-        await era.printAndWait([
-          kitaru.get_colored_name(),
-          ' 将手伸入了箱子中。',
-        ]);
-      }
+      message.push(async () => {
+        await kitaru.say_and_wait([callname, '，那边有抽奖欸！']);
+        if (love > 49 && kitaru.sex_code - 1) {
+          await era.printAndWait([
+            '无需多言，',
+            me.get_colored_name(),
+            ' 和 ',
+            kitaru.get_colored_name(),
+            ' 一起走到了抽奖摊位前。',
+          ]);
+          await kitaru.say_and_wait(['让 ', callname, ' 分我一点好运吧！']);
+          await era.printAndWait([
+            '而后温暖的感觉与弹性的触感一同传来，',
+            kitaru.get_colored_name(),
+            ' 抱住了 ',
+            me.get_colored_name(),
+            ' 的胳膊，一副不肯放开的样子。',
+          ]);
+          await kitaru.say_and_wait('欸嘿～！');
+          await era.printAndWait([
+            '仿佛没有察觉到自己的双乳已经和 ',
+            me.get_colored_name(),
+            ' 的手臂发生了挤压，',
+            kitaru.get_colored_name(),
+            ' 将手伸入了箱子中。',
+          ]);
+        } else {
+          await era.printAndWait([
+            '在 ',
+            kitaru.get_colored_name(),
+            ' 的强烈要求下，',
+            me.get_colored_name(),
+            ' 不得不和',
+            kitaru.sex,
+            '来到了摊位前。',
+          ]);
+          await kitaru.say_and_wait('啊啊啊！白兴大人保佑！');
+          await kitaru.say_and_wait('哈！');
+          await era.printAndWait([
+            kitaru.get_colored_name(),
+            ' 将手伸入了箱子中。',
+          ]);
+        }
+      });
       break;
     case 2:
       if (love > 49 && kitaru.sex_code - 1) {

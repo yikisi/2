@@ -89,7 +89,7 @@ module.exports = async () => {
         ' 不知道该说些什么。',
       ]);
   }
-  if (era.get('status:56:运势依赖') === 1 || era.get('status:56:稳定') !== 1) {
+  if (era.get('status:56:运势依赖')) {
     set_luck_result(luck);
   }
 };
