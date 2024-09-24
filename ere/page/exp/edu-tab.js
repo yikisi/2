@@ -19,7 +19,7 @@ const {
 
 const page_name = '育成情况';
 
-let skill_names = undefined;
+const skill_names = ['粤语', '英语', '法语'];
 
 module.exports = {
   /**
@@ -28,12 +28,6 @@ module.exports = {
    * @returns {{print():*[]}}
    */
   generate(chara, flags) {
-    if (!skill_names) {
-      skill_names = era
-        .get('ablentries')
-        .filter((e) => e[1] >= 15 && e[1] <= 17)
-        .map((e) => e[0]);
-    }
     const aim_list = [],
       attr_list = [
         {

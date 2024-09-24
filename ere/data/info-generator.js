@@ -160,28 +160,28 @@ function get_talent_bust_size(cup) {
  */
 function get_filtered_talents(sex, begin_talent_id) {
   switch (begin_talent_id) {
-    case 1000:
-      // 调教完成系
-      return new Array(7)
-        .fill(0)
-        .map((_, i) => 1000 + i)
-        .filter(
-          (talent_id) =>
-            (talent_id !== 1001 || sex - 1) &&
-            (talent_id !== 1003 || !sex) &&
-            (talent_id !== 1004 || sex - 1) &&
-            (talent_id !== 1006 || sex),
-        );
-    case 1010:
+    case 50:
       // 名器系
       return new Array(7)
         .fill(0)
-        .map((_, i) => i + 1010)
+        .map((_, i) => i + 50)
         .filter(
           (talent_id) =>
-            (talent_id !== 1011 || sex - 1) &&
-            (talent_id !== 1014 || sex) &&
-            (talent_id !== 1015 || sex - 1),
+            (talent_id !== 51 || sex !== 1) &&
+            (talent_id !== 54 || sex > 0) &&
+            (talent_id !== 55 || sex !== 1),
+        );
+    case 60:
+      // 调教完成系
+      return new Array(7)
+        .fill(0)
+        .map((_, i) => 60 + i)
+        .filter(
+          (talent_id) =>
+            (talent_id !== 61 || sex !== 1) &&
+            (talent_id !== 63 || sex === 0) &&
+            (talent_id !== 64 || sex !== 1) &&
+            (talent_id !== 66 || sex > 0),
         );
   }
 }
@@ -569,7 +569,14 @@ module.exports = {
   },
   get_talent: (chara_id) =>
     [
-      ...get_custom_mec(chara_id).get_talents(),
+      ...get_custom_mec(chara_id)
+        .get_talents()
+        .map((e) => {
+          if (e.title && !e.title.startsWith('[')) {
+            e.title = `[${e.content}]：${e.title}`;
+          }
+          return e;
+        }),
       ...(era.get(`cflag:${chara_id}:父方角色`) === 308 ||
       era.get(`cflag:${chara_id}:母方角色`) === 308
         ? [
@@ -589,7 +596,7 @@ module.exports = {
         .map((_, i) => {
           return {
             id: i,
-            val: era.get(`talent:${chara_id}:${i + 1070}`),
+            val: era.get(`talent:${chara_id}:${i}`),
           };
         })
         .filter((e) => e.val)
@@ -698,9 +705,15 @@ module.exports = {
         talent_list.push('隐形巨乳');
       }
     }
+    talent_list.push(...new Array(3).fill(0).map((_, i) => i + 40));
+    const ero = era.get(`talent:${chara_id}:工口意愿`);
+    if (ero) {
+      talent_list.push(ero > 0 ? '好色' : '性保守');
+    }
     talent_list.push(
-      ...get_filtered_talents(sex, 1010),
-      ...get_filtered_talents(sex, 1000)
+      ...new Array(4).fill(0).map((_, i) => i + 44),
+      ...get_filtered_talents(sex, 50),
+      ...get_filtered_talents(sex, 60)
         .map((id) => {
           return {
             id,
@@ -711,15 +724,6 @@ module.exports = {
         .map(
           (e) => trained_talent_names[era.get(`talentname:${e.id}`)][e.level],
         ),
-      ...new Array(3).fill(0).map((_, i) => 1050 + i),
-    );
-    const ero = era.get(`talent:${chara_id}:工口意愿`);
-    if (ero) {
-      talent_list.push(ero > 0 ? '好色' : '性保守');
-    }
-    talent_list.push(
-      ...new Array(4).fill(0).map((_, i) => 1054 + i),
-      ...new Array(8).fill(0).map((_, i) => 1060 + i),
     );
     return talent_list
       .map((e) => {

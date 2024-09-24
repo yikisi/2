@@ -538,7 +538,7 @@ async function page_ero(lover, skip_start_end) {
 
     const filters = new Array(7)
         .fill(0)
-        .map((_, i) => era.get(`flag:${950 + i}`)),
+        .map((_, i) => era.get(`flag:${60 + i}`)),
       left_columns = [],
       lost_mind = era.get('tcvar:0:失神'),
       love = get_love_info(curr_lover),

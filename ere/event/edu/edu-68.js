@@ -380,7 +380,7 @@ handlers[event_hooks.out_shopping] = async (_, __, event_object) => {
   era.println();
   get_attr_and_print_in_event(68, [0, 0, 0, 0, 10], 10) &&
     (await era.waitAnyKey());
-  era.set('flag:68:节日事件标记', 0);
+  era.set('cflag:68:节日事件标记', 0);
   return true;
 };
 

@@ -7,13 +7,13 @@ const { attr_background_colors } = require('#/data/const.json');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
- * @param {number} item
+ * @param {number|string} item
  * @param {function(number):boolean} filter_cb
  * @returns {Promise<number|undefined>}
  */
 async function select_target_in_storage(item, filter_cb) {
   const buffer = [],
-    item_name = era.get(`itemname:${item}`),
+    item_name = typeof item === 'string' ? item : era.get(`itemname:${item}`),
     team_list = sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
       filter_cb || (() => true),
     );

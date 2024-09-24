@@ -282,8 +282,8 @@ module.exports = async (_id) => {
       const talent_dict = { slave_run: 0 };
       new Array(7).fill(0).forEach((_, i) => {
         talent_dict.slave_run +=
-          (talent_dict[era.get(`talentname:${i + 1000}`)] = era.get(
-            `talent:${chara_id}:${i + 1000}`,
+          (talent_dict[era.get(`talentname:${i + 60}`)] = era.get(
+            `talent:${chara_id}:${i + 60}`,
           )) === 2;
       });
 

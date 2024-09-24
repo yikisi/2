@@ -55,10 +55,10 @@ function reset_chara(chara_id) {
         era.set(`juel:${chara_id}:蓝`, era.set(`juel:${chara_id}:白`, 0)),
       );
     }
-    Object.values(attr_names).forEach((v) =>
+    attr_names.forEach((v) =>
       era.set(`base:${chara_id}:${v}`, era.get(`cflag:${chara_id}:初始${v}`)),
     );
-    Object.values(attr_names).forEach((v) => {
+    attr_names.forEach((v) => {
       era.set(`abl:${chara_id}:${v}训练等级`, 1);
       era.set(`exp:${chara_id}:${v}训练经验`, 0);
     });
@@ -73,7 +73,7 @@ function reset_chara(chara_id) {
     new CharaGenes(chara_id).clear();
     new CharaAvailableGenes(chara_id).clear();
   } else {
-    Object.values(attr_names).forEach((v) => {
+    attr_names.forEach((v) => {
       era.set(
         `base:${chara_id}:${v}`,
         era.set(`cflag:${chara_id}:${v}`, get_random_value(25, 75)),

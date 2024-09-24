@@ -224,7 +224,7 @@ module.exports = async (src_chara) => {
           }
 
           // 0号角色初始化
-          Object.values(attr_names).forEach((v) =>
+          attr_names.forEach((v) =>
             era.add(`base:0:${v}`, get_random_value(0, 50)),
           );
           sys_fix_chara_base(0);

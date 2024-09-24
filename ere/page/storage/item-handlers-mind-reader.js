@@ -36,7 +36,7 @@ async function use_glasses(item) {
 
 /** @param {Record<string,function>} handlers */
 module.exports = (handlers) => {
-  handlers[800] = async () => {
+  handlers[25] = async () => {
     const amount = era.get('item:马语者');
     let to_use = 1,
       flag_use = true,
@@ -136,5 +136,5 @@ module.exports = (handlers) => {
 
   new Array(3)
     .fill(0)
-    .forEach((_, i) => (handlers[802 + i] = () => use_glasses(802 + i)));
+    .forEach((_, i) => (handlers[i + 27] = () => use_glasses(i + 27)));
 };

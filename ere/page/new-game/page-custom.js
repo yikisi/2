@@ -180,33 +180,33 @@ function random_chara() {
   }
   era.set('cflag:0:气性', get_random_value(-3, 3));
   era.set('cstr:0:毛色', get_random_entry(uma_hairs));
-  Object.values(attr_names).forEach((v) => era.set(`base:0:${v}`, 25));
-  era.add(`base:0:${get_random_value(10, 14)}`, 100);
+  attr_names.forEach((v) => era.set(`base:0:${v}`, 25));
+  era.add(`base:0:${get_random_entry(attr_names)}`, 100);
 }
 
 function random_talent() {
   era.get('talentkeys').forEach((e) => {
-    if ((e >= 1000 && e <= 1020) || e >= 1050) {
+    if (e >= 40 && e < 70) {
       era.set(`talent:0:${e}`, 0);
     }
   });
   gacha(
-    new Array(18).fill(0).map((_, i) => i + 1070),
+    new Array(18).fill(0).map((_, i) => i),
     5,
   ).forEach((e) => era.set(`talent:0:${e}`, 2 * get_random_value(0, 1) - 1));
   era.set(
     `talent:0:${get_random_entry(
-      get_filtered_talents(era.get('cflag:0:性别'), 1000),
-    )}`,
-    get_random_value(0, 1) || -4,
-  );
-  era.set(
-    `talent:0:${get_random_entry(
-      get_filtered_talents(era.get('cflag:0:性别'), 1010),
+      get_filtered_talents(era.get('cflag:0:性别'), 50),
     )}`,
     1,
   );
-  const temp = get_random_value(1050, 1057);
+  era.set(
+    `talent:0:${get_random_entry(
+      get_filtered_talents(era.get('cflag:0:性别'), 60),
+    )}`,
+    get_random_value(0, 1) || -4,
+  );
+  const temp = get_random_value(40, 47);
   era.set(
     `talent:0:${temp}`,
     1 - 2 * (temp === 1053 ? get_random_value(0, 1) : 0),
@@ -242,7 +242,7 @@ async function page_custom() {
   }
   CharaTalk.me = new CharaTalk(0);
   while (flag_custom) {
-    Object.values(attr_names).forEach((v) => era.set(`base:0:${v}`, 25));
+    attr_names.forEach((v) => era.set(`base:0:${v}`, 25));
     await era.clear();
     era.printMultiColumns([
       { type: 'divider' },
@@ -277,7 +277,7 @@ async function page_custom() {
       }
       era.set('cflag:0:气性', 0);
       era.set('cstr:0:毛色', uma_hairs[0]);
-      Object.values(attr_names).forEach((v) => era.add(`base:0:${v}`, 20));
+      attr_names.forEach((v) => era.add(`base:0:${v}`, 20));
       if (era.get('flag:彩蛋机制') === 179) {
         era.set('callname:0:-2', '豚鼠子');
       } else {
@@ -704,7 +704,7 @@ async function page_custom() {
 
       era.printMultiColumns(buffer);
       temp = await era.input();
-      era.add(`base:0:${temp + 9}`, 100);
+      era.add(`base:0:${temp + 4}`, 100);
 
       random_talent();
     }

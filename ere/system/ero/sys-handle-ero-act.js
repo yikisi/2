@@ -237,10 +237,10 @@ async function sys_handle_ero_act(command, filters, _shown) {
           return {
             accelerator: i,
             config: {
-              buttonType: era.get(`flag:${i + 950}`) ? 'warning' : 'info',
+              buttonType: era.get(`flag:${i + 70}`) ? 'warning' : 'info',
               width: 8,
             },
-            content: era.get(`flagname:${i + 950}`).toUpperCase(),
+            content: era.get(`flagname:${i + 70}`).toUpperCase(),
             type: 'button',
           };
         }),
@@ -251,7 +251,7 @@ async function sys_handle_ero_act(command, filters, _shown) {
       if (ret === 999) {
         option_flag = 0;
       } else {
-        era.set(`flag:${ret + 950}`, !era.get(`flag:${ret + 950}`));
+        era.set(`flag:${ret + 70}`, !era.get(`flag:${ret + 70}`));
       }
     }
   } else if (command === 901) {

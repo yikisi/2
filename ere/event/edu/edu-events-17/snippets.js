@@ -45,13 +45,11 @@ function transform(event_marks) {
   new Array(8)
     .fill(0)
     .forEach((_, i) =>
-      flip_params(`talent:17:${i + 1050}`, `talent:9017:${i + 1050}`),
+      flip_params(`talent:17:${i + 40}`, `talent:9017:${i + 40}`),
     );
   new Array(18)
     .fill(0)
-    .forEach((_, i) =>
-      flip_params(`talent:17:${i + 1070}`, `talent:9017:${i + 1070}`),
-    );
+    .forEach((_, i) => flip_params(`talent:17:${i}`, `talent:9017:${i}`));
 }
 
 module.exports = {

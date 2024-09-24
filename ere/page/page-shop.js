@@ -9,7 +9,7 @@ const shop_desc = require('#/data/desc/shop-desc.json');
 const { location_name } = require('#/data/locations');
 
 /** @param {({id:number,[limit]:boolean}|number)[]} item_list */
-module.exports = async (item_list) => {
+async function print_shop_page(item_list) {
   const item_keys = era.get('itemkeys'),
     off_index = era.get('flag:打折商品'),
     off = item_keys[off_index % item_keys.length],
@@ -331,4 +331,6 @@ module.exports = async (item_list) => {
   }
   era.set(`itemprice:${off}`, price_cache);
   return bought;
-};
+}
+
+module.exports = print_shop_page;
