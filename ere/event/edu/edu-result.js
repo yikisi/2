@@ -294,7 +294,6 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
         relation_change = args.like;
         pressure_change /= 2;
         hurt -= 1;
-        break;
     }
     if (era.get(`status:${chara_id}:练习X手`) !== change_buff) {
       era.set(`status:${chara_id}:练习X手`, change_buff);

@@ -288,8 +288,9 @@ module.exports = {
           week: -1,
         },
       });
-    ret.curr = { race: ret.curr.race, week: ret.curr.week };
-    ret.last = { race: ret.last.race, week: ret.last.week };
+    Object.preventExtensions(ret);
+    Object.preventExtensions(ret.curr);
+    Object.preventExtensions(ret.last);
     return ret;
   },
 };

@@ -34,7 +34,7 @@ module.exports = async (hook, _, event_object) => {
       await maya.say_and_wait(
         '体验到了很多全新的事物，感受到了很多全新的心情。',
       );
-      await maya.say_and_wait('所以…………');
+      await maya.say_and_wait('所以……');
       await maya.say_and_wait('在Maya长大之前，可要一直陪着人家哦？');
       break;
     case 49:
@@ -44,13 +44,13 @@ module.exports = async (hook, _, event_object) => {
       await maya.say_and_wait(
         `这就是传说中只有大人才能看的书籍吗？只要看了这个，是不是Maya也能成为大人呢？`,
       );
-      await maya.say_and_wait(`这是…………`);
-      await maya.say_and_wait(`啊哇哇哇哇哇………………`);
-      await maya.say_and_wait(`果…………果然，这种事情对Maya来说还是太早了！`);
+      await maya.say_and_wait(`这是……`);
+      await maya.say_and_wait(`啊哇哇哇哇哇……`);
+      await maya.say_and_wait(`果……果然，这种事情对Maya来说还是太早了！`);
       await maya.print_and_wait(
         `尽管看到一半就因为过于刺激而放弃了，但书中的内容仍然给 ${maya.name} 留下了深刻的印象。`,
       );
-      await maya.say_and_wait(`不过，如果是和 ${callname} 的话…………？`);
+      await maya.say_and_wait(`不过，如果是和 ${callname} 的话……？`);
       await maya.print_and_wait(
         `${maya.name} 是一个天才，无论是什么都能很快的学会————或许很快有人就要被迫意识到这一点了。`,
       );
@@ -166,7 +166,7 @@ module.exports = async (hook, _, event_object) => {
       );
       era.printButton('「『欲擒故纵作战』？」', 1);
       await era.input();
-      await maya.say_and_wait('…………糟糕！');
+      await maya.say_and_wait('……糟糕！');
       await maya.say_and_wait(
         '呜呜～～对啦！我想展现自己很受欢迎，让你焦急，催你主动说出想陪我去啦！',
       );

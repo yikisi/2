@@ -26,7 +26,7 @@ module.exports = class extends CustomizedCheck {
         get('cflag:10:招募状态') === recruit_flags.yes ||
         get('cflag:301:招募状态') === recruit_flags.yes
       ) {
-        life_marks.shadow = 10;
+        life_marks.shadow = 0;
       } else if (--life_marks.shadow === 0) {
         if (get('cflag:0:位置') > 0) {
           life_marks.shadow = 1;

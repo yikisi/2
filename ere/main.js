@@ -179,6 +179,15 @@ module.exports = async () => {
     [
       [
         {
+          color: get_chara_color(56),
+          content: era.get('static:56:name'),
+        },
+      ],
+      'ALEX',
+    ],
+    [
+      [
+        {
           color: get_chara_color(60),
           content: era.get('static:60:name'),
         },

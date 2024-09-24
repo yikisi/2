@@ -116,9 +116,11 @@ module.exports = (handlers) => {
       ' 的耳边说着绵绵情话……】',
     ]);
     hook.arg =
-      (!defender || era.get(`love:${defender}`) >= 50) &&
-      !era.get(`tcvar:${defender}:发情`) &&
-      Math.random() < Math.log(era.get(`abl:${attacker}:甜言蜜语`) + 2) / log_7;
+      (!defender.id || era.get(`love:${defender.id}`) >= 50) &&
+      !era.get(`tcvar:${defender.id}:发情`) &&
+      Math.random() <
+        Math.log(era.get(`abl:${attacker.id}:甜言蜜语`) + 2) / log_7;
+
     if (hook.arg) {
       await era.printAndWait([
         defender.get_colored_name(),

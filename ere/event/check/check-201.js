@@ -27,6 +27,7 @@ module.exports = class extends CustomizedCheck {
     const edu_weeks = get(`cflag:${this.id}:育成回合计时`),
       edu_marks = new MeekEduMarks();
     if (get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+      edu_marks.all_round = 0;
       if (edu_weeks < 3 * 48) {
         if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
           add_event(

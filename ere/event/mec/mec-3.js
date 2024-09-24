@@ -63,7 +63,8 @@ module.exports = class extends CustomizedMec {
           color: buff_colors[3],
           content: '腿伤！',
           fontWeight: 'bold',
-          key: '腿伤',
+          title:
+            '训练效果-20%，体力精力上限-200，消耗+10%，压力获取+10%，目标赛事一着以外-5声望，未入着+25%压力、-10声望',
         },
       ];
     }

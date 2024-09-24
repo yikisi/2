@@ -13,6 +13,7 @@ const VegaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-33');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -53,7 +54,10 @@ module.exports = class extends CustomizedCheck {
       if (get('cflag:33:招募状态') === recruit_flags.yes) {
         edu_marks.meteor = 0;
       } else if (--edu_marks.meteor === 0) {
-        if (get('cflag:0:位置') > 0) {
+        if (
+          get('cflag:0:位置') > 0 ||
+          get('flag:当前位置') === location_enum.basement
+        ) {
           edu_marks.meteor = 1;
         } else {
           add_event(

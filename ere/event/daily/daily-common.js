@@ -536,9 +536,9 @@ handlers[event_hooks.out_river] = async (chara_id, hook) => {
     get_chara_talk(0).get_colored_name(),
     ' 与 ',
     get_chara_talk(chara_id).get_colored_name(),
-    !hook.arg
-      ? ' 一起来到河边钓鱼，希望能钓到大丰收。'
-      : ' 一起来到河边散步，今天也是好心情呢。',
+    hook.arg
+      ? ' 一起来到河边散步，今天也是好心情呢。'
+      : ' 一起来到河边钓鱼，希望能钓到大丰收。',
   ]);
 };
 

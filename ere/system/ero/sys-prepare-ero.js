@@ -763,19 +763,21 @@ module.exports = {
       .filter((e) => !era.get(`tcvar:${e}:逃跑`));
   },
   init_ero,
-  set_palam_to_max(chara_id, part) {
-    if (
-      part_names[part] &&
-      era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`)
-    ) {
-      era.set(
-        `palam:${chara_id}:${part_names[part]}快感`,
-        Math.max(
-          era.get(`palam:${chara_id}:${part_names[part]}快感`),
-          era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`),
-        ),
-      );
-    }
+  set_palam_to_max(chara_id, ...parts) {
+    parts.forEach((part) => {
+      if (
+        part_names[part] &&
+        era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`)
+      ) {
+        era.set(
+          `palam:${chara_id}:${part_names[part]}快感`,
+          Math.max(
+            era.get(`palam:${chara_id}:${part_names[part]}快感`),
+            era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`),
+          ),
+        );
+      }
+    });
   },
   update_ero_status,
   update_juel_buff,
