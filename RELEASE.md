@@ -14,3 +14,4 @@ EraUma v1.0，适配 [EraElectron v2.2.1 (ginga)](https://gitgud.io/umaera/era-e
 ## Fixed
 
 * 修复了一次地下室可能会以多个主人开始，以及一次地下室出现多场救援事件的bug
+* 修复了金镇之光的固有技能「无二无三的唯一通路」未正确注册的问题

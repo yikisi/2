@@ -564,7 +564,19 @@ async function chara_skill() {
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
   buffer +=
-    'skills_dict[100039]=require("#/data/race/skill/skill-100039");skills_dict[900039]=require("#/data/race/skill/skill-900039");skills_dict[102041]=require("#/data/race/skill/skill-102041");skills_dict[902041]=require("#/data/race/skill/skill-902041");skills_dict[102051]=require("#/data/race/skill/skill-102051");skills_dict[902051]=require("#/data/race/skill/skill-902051");skills_dict[102061]=require("#/data/race/skill/skill-102061");skills_dict[902061]=require("#/data/race/skill/skill-902061");skills_dict[100601]=require("#/data/race/skill/skill-100601");skills_dict[900601]=require("#/data/race/skill/skill-900601");skills_dict[990011]=require("#/data/race/skill/skill-990011");skills_dict[990021]=require("#/data/race/skill/skill-990021");';
+    'skills_dict[100039]=require("#/data/race/skill/skill-100039");' +
+    'skills_dict[900039]=require("#/data/race/skill/skill-900039");' +
+    'skills_dict[100601]=require("#/data/race/skill/skill-100601");' +
+    'skills_dict[900601]=require("#/data/race/skill/skill-900601");' +
+    'skills_dict[101201]=require("#/data/race/skill/skill-101201");' +
+    'skills_dict[102041]=require("#/data/race/skill/skill-102041");' +
+    'skills_dict[902041]=require("#/data/race/skill/skill-902041");' +
+    'skills_dict[102051]=require("#/data/race/skill/skill-102051");' +
+    'skills_dict[902051]=require("#/data/race/skill/skill-902051");' +
+    'skills_dict[102061]=require("#/data/race/skill/skill-102061");' +
+    'skills_dict[902061]=require("#/data/race/skill/skill-902061");' +
+    'skills_dict[990011]=require("#/data/race/skill/skill-990011");' +
+    'skills_dict[990021]=require("#/data/race/skill/skill-990021");';
 
   const pt_dict = {};
   (await prisma.single_mode_skill_need_point.findMany()).forEach(

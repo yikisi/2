@@ -1333,6 +1333,7 @@ skills_dict[102061] = require('#/data/race/skill/skill-102061');
 skills_dict[902061] = require('#/data/race/skill/skill-902061');
 skills_dict[100601] = require('#/data/race/skill/skill-100601');
 skills_dict[900601] = require('#/data/race/skill/skill-900601');
+skills_dict[101201] = require('#/data/race/skill/skill-101201');
 skills_dict[990011] = require('#/data/race/skill/skill-990011');
 skills_dict[990021] = require('#/data/race/skill/skill-990021');
 skills_dict[100011] = require('#/data/race/skill/skill-100011');
