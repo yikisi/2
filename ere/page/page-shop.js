@@ -11,7 +11,7 @@ const { location_name } = require('#/data/locations');
 /** @param {({id:number,[limit]:boolean}|number)[]} item_list */
 module.exports = async (item_list) => {
   const item_keys = era.get('itemkeys'),
-    off_index = era.get('flag:打折商品'),
+    off_index = era.get('flag:随机种子'),
     off = item_keys[off_index % item_keys.length],
     price_cache = era.get(`itemprice:${off}`);
   era.set(

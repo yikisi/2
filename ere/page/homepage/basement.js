@@ -1,5 +1,3 @@
-const { createHash } = require('crypto');
-
 const era = require('#/era-electron');
 
 const sys_handle_prison_guides = require('#/system/basement/sys-handle-prison-guides');
@@ -87,14 +85,7 @@ module.exports = async (_, save_and_next_week, flags) => {
     basement_owners = new BasementOwners(),
     me = get_chara_talk(0);
   if (flags.week_start) {
-    const hash = createHash('md5');
-    hash.update(
-      era.get('callname:0:-1') +
-        era.get('flag:当前回合数') +
-        basement_owners.get(0),
-    );
-    my_life_marks.b_r_seed =
-      Number(`0x${hash.digest('hex').substring(0, 8)}`) % 233280;
+    my_life_marks.b_r_seed = (era.get('flag:随机种子') * 9301 + 49297) % 233280;
     flags.week_start = false;
   }
   if (my_life_marks.b_timer >= 7 * minutes_in_a_day) {

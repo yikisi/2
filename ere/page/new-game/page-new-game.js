@@ -278,6 +278,7 @@ module.exports = async (src_chara) => {
             new TokinoLifeMarks().shadow = get_random_value(5, 12);
           }
           new TasteLifeMarks().annoyance = get_random_value(13, 20);
+          era.set('flag:随机种子', get_random_value(0, 233280 - 1));
           return true;
         case 97:
           player_name = '';
