@@ -19,13 +19,6 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 module.exports = (handlers) => {
   handlers[ero_hooks.hair_fuck] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 用头发缠住 ',
-        defender.get_colored_name(),
-        ' 的肉棒……】',
-      ]);
       await attacker.say_and_wait('呜——');
       await attacker.print_and_wait([
         attacker.get_colored_name(),
@@ -43,13 +36,6 @@ module.exports = (handlers) => {
         ' 吞了口唾沫，主动抬头相迎，小心地用手指带起自己的头发，缠住了刺来的长枪，开始作业。',
       ]);
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 用手掌和头发揉搓着 ',
-        defender.get_colored_name(),
-        ' 的肉棒……】',
-      ]);
       await attacker.print_and_wait('沙沙……');
       await attacker.print_and_wait('手掌和头发反复揉搓着那东西。');
       await attacker.print_and_wait('这种触感……那东西……还在膨胀……');
@@ -62,13 +48,6 @@ module.exports = (handlers) => {
 
   handlers[ero_hooks.ask_hair_fuck] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 要求 ',
-        defender.get_colored_name(),
-        ' 用头发缠住肉棒……】',
-      ]);
       if (
         await ask_action(
           attacker.id,
@@ -169,13 +148,6 @@ module.exports = (handlers) => {
           ]);
       }
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 要求 ',
-        defender.get_colored_name(),
-        ' 用手掌和头发揉搓肉棒……】',
-      ]);
       switch (era.get(`cflag:${defender.id}:头发长度`)) {
         case 0:
           await attacker.print_and_wait(
@@ -221,13 +193,6 @@ module.exports = (handlers) => {
 
   handlers[ero_hooks.force_hair_fuck] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 强行用 ',
-        defender.get_colored_name(),
-        ' 的头发缠住肉棒……】',
-      ]);
       switch (era.get(`cflag:${defender.id}:头发长度`)) {
         case 0:
           await defender.say_and_wait('欸……唔！');
@@ -277,13 +242,6 @@ module.exports = (handlers) => {
           ]);
       }
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 强行用肉棒摩擦 ',
-        defender.get_colored_name(),
-        ' 的头发……】',
-      ]);
       switch (era.get(`cflag:${defender.id}:头发长度`)) {
         case 0:
           await attacker.print_and_wait([

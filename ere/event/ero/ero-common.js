@@ -49,7 +49,6 @@ const handlers = {},
   require('#/event/ero/common-lines/ero-pettings-2'),
   require('#/event/ero/common-lines/ero-pettings-3'),
   require('#/event/ero/common-lines/ero-pettings-4'),
-  require('#/event/ero/common-lines/ero-pettings-5'),
   require('#/event/ero/common-lines/ero-fuckings'),
   require('#/event/ero/common-lines/ero-items'),
   require('#/event/ero/common-lines/ero-sm'),
@@ -58,8 +57,8 @@ const handlers = {},
 ].forEach((f) => f(handlers));
 
 [
-  require('#/event/ero/common-lines/ero-sleeping-pettings-1'),
-  require('#/event/ero/common-lines/ero-sleeping-pettings-2'),
+  require('#/event/ero/common-lines/ero-sleeping-communications'),
+  require('#/event/ero/common-lines/ero-sleeping-pettings'),
   require('#/event/ero/common-lines/ero-sleeping-fuckings'),
   require('#/event/ero/common-lines/ero-items'),
 ].forEach((f) => f(sleep_handlers, handlers));
@@ -872,24 +871,13 @@ module.exports = async (chara_id, hook, extra_flag) => {
       handler_dict = raping_handlers;
     }
     const aim_handler = handler_dict[hook.hook];
-    if (
-      !aim_handler ||
-      (await aim_handler(
+    if (aim_handler) {
+      return await aim_handler(
         get_chara_talk(attacker),
         get_chara_talk(defender),
         hook,
         extra_flag,
-      ))
-    ) {
-      era.print([
-        '【',
-        get_chara_talk(attacker).get_colored_name(),
-        ' 对 ',
-        get_chara_talk(defender).get_colored_name(),
-        hook.arg ? ' ' : ' 继续 ',
-        ero_action_names[hook.hook],
-        '……】',
-      ]);
+      );
     }
   } else if (handlers[hook.hook]) {
     return await handlers[hook.hook](chara_id, hook, extra_flag);

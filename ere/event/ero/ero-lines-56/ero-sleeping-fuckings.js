@@ -1,5 +1,3 @@
-const era = require('#/era-electron');
-
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
@@ -17,22 +15,6 @@ module.exports = (sleeping_handlers, handlers) => {
     if (attacker.id !== 56) {
       throw new Error();
     }
-    if (!hook.arg) {
-      return await handlers[ero_hooks.stimulate_glans_by_virgin](
-        attacker,
-        defender,
-        hook,
-      );
-    }
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 用',
-      hook.hook === ero_hooks.stimulate_glans_by_virgin ? '小穴' : '屁穴',
-      '套弄着 ',
-      defender.get_colored_name(),
-      ' 的肉棒……】',
-    ]);
     if (hook.arg) {
       await attacker.print_and_wait(['哈啊……哈……']);
       await attacker.print_and_wait([
@@ -52,6 +34,12 @@ module.exports = (sleeping_handlers, handlers) => {
         sys_get_colored_callname(attacker.id, defender.id),
         ' 节奏的自己带来了几乎失去意识般的快感。',
       ]);
+    } else {
+      return await handlers[ero_hooks.stimulate_glans_by_virgin](
+        attacker,
+        defender,
+        hook,
+      );
     }
   };
 };

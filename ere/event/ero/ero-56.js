@@ -733,7 +733,6 @@ module.exports = async (hook, extra_flag) => {
       hook,
       extra_flag,
     );
-  } else {
-    return await handlers[hook.hook](hook, extra_flag);
   }
+  return await handlers[hook.hook](hook, extra_flag);
 };
