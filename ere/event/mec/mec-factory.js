@@ -12,6 +12,7 @@ const current = new Date().getTime();
 
 cons_dict[0] = require('#/event/mec/mec-0');
 cons_dict[3] = require('#/event/mec/mec-3');
+cons_dict[4] = require('#/event/mec/mec-4');
 cons_dict[6] = require('#/event/mec/mec-6');
 cons_dict[7] = require('#/event/mec/mec-7');
 cons_dict[12] = require('#/event/mec/mec-12');

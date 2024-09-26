@@ -1640,17 +1640,84 @@ module.exports = async function (event_object) {
     await era.printAndWait(
       `总觉得醒目飞鹰这么急躁的拉开两者之间的界限，并没有之前自己想象中那么简单。`,
     );
-    await me.say_and_wait(`醒目飞鹰也有自己的苦衷吧。`);
+    await me.say_and_wait(`醒目飞鹰也有自己的苦衷。`);
     await era.printAndWait(`光是意识到这一点，就已经是一种深层的安慰了。`);
     await era.printAndWait(
       `——哪怕这安全感并不真实，但不真实的安全感也是安全感。`,
     );
+    await era.printAndWait(`强迫自己认识到这一点。`);
     await me.say_and_wait(`接下来找机会好好和醒目飞鹰聊聊吧。`, true);
-    await era.printAndWait(
-      `心态重新调整过后，你将注意力重新集中在训练计划上。`,
-    );
+    await era.printAndWait(`你将注意力重新集中在训练计划上。`);
   } else if (edu_weeks === 95 + 18) {
-    await print_event_name(`合宿开始！`, falcon);
+    // 脑海之中闪现与训练员之间的过往
+    await print_event_name(`日常`, falcon);
+    await era.printAndWait(`被大幅的震动所惊醒。`);
+    await era.printAndWait(`尚且模糊的视线之中，隐隐约约有橙色的色块移动。`);
+    await era.printAndWait(`揉了揉发胀的双眼，想要将自身的注意力集中。`);
+    await era.printAndWait(`却与同样迷茫的少女对视。`);
+    await falcon.say_and_wait(`啊……`);
+    await era.printAndWait(`少女似乎也是刚刚醒来，疑惑于陌生的天花板。`);
+    await me.say_and_wait(`下午好，醒目飞鹰。`);
+    await era.printAndWait(
+      `似乎意识到了什么，瞬间放大的瞳孔以及刷的一下竖立起来的耳朵。`,
+    );
+    await falcon.say_and_wait(`——诶？诶！为什么我会在训练员先生的房间里？`);
+    await era.printAndWait(
+      `得益于两人之间的深厚羁绊，醒目飞鹰在疑惑之后没有向你发起攻击而是大声询问。`,
+    );
+    await me.say_and_wait(
+      `抱歉，虽然是我自作主张，已经将外宿许可证交给寮长确认过了。`,
+    );
+    await falcon.say_and_wait(`这样……训练员先生对飞鹰子……`);
+    await me.say_and_wait(`不对！我也开始跟不上飞鹰子跳脱的思路了。`);
+    await me.say_and_wait(
+      `因为我突然意识到未经许可就擅自离开特雷森去医院而被小报记者拍到的话，我会直接上花边新闻的头条。`,
+    );
+    await me.say_and_wait(`不论是我还是飞鹰子的名誉，恐怕都会受到严重的挫伤。`);
+    await me.say_and_wait(
+      `所以我在得到医生没有大碍需要好好休息的回复后，便以醒目飞鹰在巡回过程中因为过度劳累昏倒作为理由向理事长申请了外宿许可。`,
+    );
+    await me.say_and_wait(
+      `虽然是深夜，但手纲小姐能这么迅速的回复，实在是帮了大忙。`,
+    );
+    await me.say_and_wait(`说起来，飞鹰子现在觉得怎么样?`);
+    await era.printAndWait(`就这么默默听着你讲述的醒目飞鹰从床上站了起来。`);
+    await falcon.say_and_wait(`抱歉，给训练员先生添了这么大的麻烦。`);
+    await era.printAndWait(`然后转向你深深的鞠躬。`);
+    await me.say_and_wait(
+      `抱歉，如果我能多对醒目飞鹰信赖一点的话，飞鹰子也不会陷入这种境地。`,
+    );
+    await era.printAndWait(`脑海中闪过了醒目飞鹰悲伤的笑容。`);
+    await me.say_and_wait(
+      `如果我能抑制住心中焦虑的话，飞鹰子就不会受到这种折磨。`,
+    );
+    await era.printAndWait(`于是你也深深的低下了头。`);
+    await falcon.say_and_wait(
+      `诶！明明是飞鹰子犯下的错误，训练员先生没必要这样。`,
+    );
+    await era.printAndWait(`想要抬起头阻止你的醒目飞鹰与你的脑袋发生了碰撞。`);
+    await era.printAndWait(`你的鼻子似乎因为受到了重击而传来了酥麻感。`);
+    await falcon.say_and_wait(`啊，训练员先生。`);
+    await me.say_and_wait(`嗯？怎么了？`);
+    await era.printAndWait(
+      `你下意识的摸了摸鼻子，鲜红色的液体顺着鼻腔流入了嘴巴。`,
+    );
+    await era.printAndWait(
+      `……不知为何，苦涩的铁锈味却给予了你一种安心的感觉。`,
+    );
+    await falcon.say_and_wait(`训练员先生请坐下来！`);
+    await era.printAndWait(
+      `醒目飞鹰不容分说便让你坐在了床上，你将餐巾纸撕成两半后折叠堵住了正在流血的鼻孔。`,
+    );
+    await me.say_and_wait(`……哈哈哈。`);
+    await era.printAndWait(
+      `看着病人与看护者立场反转的一幕，实在忍不住笑了出来。`,
+    );
+    await era.printAndWait(
+      `尚未扎稳的餐巾纸因为震动而在空中划过了一道红色的丝线，下一刻，沾湿了你的训练员外套。`,
+    );
+    await falcon.say_and_wait(`诶诶诶！`);
+    await era.printAndWait(`如往日一般，手忙脚乱的日常再次启动。`);
   } else if (edu_weeks === 95 + 29) {
     if (era.get('flag:当前位置') === location_enum.beach) {
       if (era.get('cflag:46:位置') !== era.get('cflag:0:位置')) {

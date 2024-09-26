@@ -662,55 +662,102 @@ module.exports = async function () {
     const love = era.get('love:46');
     await print_event_name('前辈与后辈', falcon);
     await era.printAndWait(
-      `短暂的春季即将过去，夏天带着若有若无的气息敲开了世界的大门。`,
+      `正处于春与夏交织的季节，从天空照射下来的光线也多了一份炎热。`,
+    );
+    await era.printAndWait(`但对此刻的你来说，却正好处于不冷不热的舒适区间。`);
+    await era.printAndWait(
+      `……从事件的波浪之中奋力挣扎，才在告一段落后勉强幸存。`,
     );
     await era.printAndWait(
-      `相比于春天，多了一份热情与焦躁，褪去了青涩与懵懂。`,
+      `看着在商业街来来往往的行人们，总有一种不切实际的感觉。`,
     );
-    await falcon.say_and_wait(`久等了♪`);
+    await era.printAndWait(
+      `他们是不是也是和你一样在磨难之中挣扎后，同样勉力幸存下来的同道呢？`,
+    );
+    await era.printAndWait(
+      `虽然从上次的磨难中存活了下来，要是下一次却失败了呢？`,
+    );
+    await era.printAndWait(
+      `一旦失败的话，一切就全部归零了，没有一丝一毫是能留到那个地方（伊甸）的。`,
+    );
+    await era.printAndWait(`人们为什么不会害怕呢？`);
+    await era.printAndWait(
+      `不，因为在死的面前，人们才会意识到生的幸福实际是被赋予的一种特权。`,
+    );
+    await era.printAndWait(
+      `因为我们总有一天会无牵无挂的离开世界，所以才要加倍的珍惜活下来的每一天。`,
+    );
+    await falcon.say_and_wait(`训练员先生久等了♪`);
     await era.printAndWait(
       `换上了便装的${falcon.name}踩着小碎步出现在了${me.actual_name}的眼前。`,
     );
-    await falcon.say_and_wait(`接下来去哪里玩好呢？`);
     await era.printAndWait(
-      `因为是节假日的缘故，站在流动的人潮中心的你们显得有些格格不入。`,
+      `将头发自然的放下，若不是以其独特的发声，恐怕与人群之中来来往往的小马娘没有区别。`,
     );
-    await me.say_and_wait(`既然这样的话，就先去附近的百货大楼逛逛吧？`);
-    await falcon.say_and_wait(`......嗯。`);
-    await era.printAndWait(`话说上一次到商场购物是什么时候的事情来着了？`);
-    await falcon.say_and_wait(`那个甜品店看上去很有人气的样子？一起去看看吧！`);
     await era.printAndWait(
-      `被挂在外面的展示牌吸引的${falcon.name}拉着你的手来到了甜品店门口。`,
+      `虽说你打算将保管于你的缎带交还给醒目飞鹰，却以“还是放在训练员先生这边比较好哦，妈妈也同意了”的理由拒绝了。`,
+    );
+    await era.printAndWait(
+      `……虽说自己不是那种会对小马娘感兴趣的类型，但看向对方的时候，内心之中却涌现了一种难以言喻的感情。`,
+    );
+    await falcon.say_and_wait(`⭐`);
+    await era.printAndWait(
+      `对方丝毫没有意识到你对她的复杂感情，依然带着那份灿烂的笑容看着你。`,
+    );
+    await era.printAndWait(
+      `因为是节假日的缘故，站在十字路口的你们不时被奇怪的目光所打量着。`,
+    );
+    await me.say_and_wait(`先去附近的百货大楼逛逛吧！`);
+    await era.printAndWait(
+      `一直犹豫下去会把宝贵的休息时间全部浪费掉，你便伸手指向了有着巨大广告牌的大厦。`,
+    );
+    await falcon.say_and_wait(`诶！我记得那边新开了一家很有名气的甜品店！`);
+    await falcon.say_and_wait(`事不宜迟，现在就出发吧！`);
+    await era.printAndWait(`${falcon.name}拉着你的手走向了甜品店。`);
+    era.drawLine();
+    await era.printAndWait(
+      `从服务员处得到了菜单，看着琳琅满页的甜品照片，你有些犹豫。`,
     );
     await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}喜欢什么呢？`);
     era.printButton(`水果巴菲感觉就不错！`, 1);
     era.printButton(`有点想尝尝看巧克力口味的新品！`, 2);
     const ret1 = await era.input();
     if (ret1 === 1) {
-      await falcon.say_and_wait(`飞鹰子也很喜欢那种酸甜口感的巴菲呢？`);
-      await falcon.say_and_wait(`有点像是初恋般的感觉呢？`);
+      await falcon.say_and_wait(`飞鹰子也很喜欢那种酸甜口感的巴菲呢。`);
+      await falcon.say_and_wait(
+        `在口中释放出的寒冷与甜蜜气息，就像是和训练员先生第一次见面时的场景呢♪`,
+      );
     } else if (ret1 === 2) {
       await falcon.say_and_wait(`飞鹰子也想尝尝看这种口味的巧克力呢♪。`);
       await falcon.say_and_wait(`……⭐`);
+      await era.printAndWait(`……不知道为什么她偷偷捂着嘴笑了起来。`);
+      await era.printAndWait(`是思维跳跃到我不知道的维度了吗。`);
     }
-    await chara4_talk.say_and_wait(`下午好哦！没想到能在这里遇见飞鹰子呢。`);
-    await falcon.say_and_wait(`下午好⭐欸？难道是丸善前辈？`);
+    await chara4_talk.say_and_wait(`嗨！下午好！没想到能在这里遇见飞鹰子。`);
+    await falcon.say_and_wait(`下午好⭐丸善前辈！`);
     await era.printAndWait(`不远处独自一人品尝甜品的丸善斯基向你们搭话。`);
     await chara4_talk.say_and_wait(
-      `姐姐我听说了飞鹰子在泥地赛道之上大放异彩的事情呢。`,
+      `因为最近美眉我得知了最近泥地比赛很流行的样子。`,
     );
     await chara4_talk.say_and_wait(
-      `没想到现在的后辈比想象之中还要厉害，姐姐很开心哦。`,
-    );
-    await era.printAndWait(`看着对自己的肯定，${falcon.name}露出了笑容。`);
-    await falcon.say_and_wait(
-      `嗯！飞鹰子的话一定会让泥地赛道变得受欢迎起来的！`,
+      `所以为了追逐着潮流，美眉我便观看了正在泥地赛道上大放异彩的飞鹰子的比赛。`,
     );
     await chara4_talk.say_and_wait(
-      `接下来是打算参战帝王赏吧？姐姐的话也会到现场去加油的！`,
+      `因为之前选择了泥地的后辈们向美眉我请教过跑法的缘故而专门去看过比赛。`,
+    );
+    await chara4_talk.say_and_wait(
+      `不过像飞鹰子这样奋力闪耀的偶像，美眉我总有一种后辈不知什么时候就超过了前辈的复杂情感呢。`,
+    );
+    await me.say_and_wait(
+      `毕竟是飞鹰子，她在的话就一定会让泥地赛道变得更加受欢迎。`,
+    );
+    await falcon.say_and_wait(`……！`);
+    await chara4_talk.say_and_wait(
+      `说起来接下来是打算参战帝王赏吧？美眉我也会到现场去加油的！`,
     );
     await falcon.say_and_wait(`到时候一定会让丸善前辈看到后辈精彩的表现！`);
     await era.printAndWait(`露出笑容的丸善斯基将视线转向了你。`);
+    // todo
     if (
       era.get('cflag:4:招募状态') === recruit_flags.yes &&
       era.get('love:4') > 90
