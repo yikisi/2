@@ -362,6 +362,7 @@ module.exports = async () => {
           owner_marks.b_status = 1 << basement_status_enum.outside;
           basement_queue.add_action(
             new BasementAction(owner, 17 * 60, action_type_enum.back_basement),
+            true,
           );
         }
         const rescue_chara =
