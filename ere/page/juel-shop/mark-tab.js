@@ -21,6 +21,7 @@ const get_color = require('#/utils/gradient-color');
 
 const { mark_colors } = require('#/data/const.json');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const GetMarkParams = require('#/data/event/extra-flag/get-mark-params');
 
 /**
  * @param {number} chara_id
@@ -304,11 +305,11 @@ module.exports = async (
           sex_level = era.add(`mark:${chara_id}:淫纹`, 1);
           total_delta.sex_delta = (total_delta.sex_delta || 0) + 1;
         }
-        await call_ero_script(chara_id, ero_hooks.get_mark, {
-          level: sex_level,
-          name: '淫纹',
-          new: true,
-        });
+        await call_ero_script(
+          chara_id,
+          ero_hooks.get_mark,
+          new GetMarkParams(sex_level, '淫纹', true),
+        );
         era.add(`juel:${chara_id}:顺从`, -sex_mark_price);
         sys_change_fame(-100 * sex_level);
       }

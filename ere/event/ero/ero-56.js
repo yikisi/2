@@ -391,6 +391,10 @@ handlers[ero_hooks.orgasm] = async () => {
   await ero_common(56, new HookArg(ero_hooks.orgasm), {});
 };
 
+/**
+ * @param _
+ * @param {GetMarkParams} extra_flag
+ */
 handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
   if (!sys_check_awake(56)) {
     throw new Error();

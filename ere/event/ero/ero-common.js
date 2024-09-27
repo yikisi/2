@@ -256,95 +256,41 @@ handlers[ero_hooks.orgasm_denial] = async (chara_id, _, extra_flag) => {
  * @param {number} chara_id
  */
 handlers[ero_hooks.orgasm] = async (chara_id) => {
-  const chara = get_chara_talk(chara_id);
-  let multi_orgasm = undefined;
-  if (era.get(`nowex:${chara_id}:二重高潮`)) {
-    multi_orgasm = '二';
-  } else if (era.get(`nowex:${chara_id}:三重高潮`)) {
-    multi_orgasm = '三';
-  } else if (era.get(`nowex:${chara_id}:四重高潮`)) {
-    multi_orgasm = '四';
-  } else if (era.get(`nowex:${chara_id}:五重高潮`)) {
-    multi_orgasm = '五';
-  } else if (era.get(`nowex:${chara_id}:多重高潮`)) {
-    multi_orgasm = '多';
-  }
-  multi_orgasm &&
-    era.print([
-      chara.get_colored_name(),
-      ' 发生了',
-      { content: ` ${multi_orgasm}重高潮`, color: buff_colors[2] },
-      '！',
-    ]);
-  orgasm_check_list.forEach((part) => {
-    const part_name = part_names[part];
-    const times =
-      era.get(`nowex:${chara_id}:${part_name}高潮`) +
-      (era.get(`nowex:${chara_id}:无自觉${part_name}高潮`) || 0);
-    if (part === part_enum.breast) {
-      const nipple_times =
-        era.get(`nowex:${chara_id}:乳头高潮`) +
-        era.get(`nowex:${chara_id}:无自觉乳头高潮`);
-      times &&
-        era.print([
-          chara.get_colored_name(),
-          ' 的 ',
-          { content: '胸部', color: buff_colors[2] },
-          ' ',
-          {
-            content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
-            color: buff_colors[2],
-          },
-          '！',
-        ]);
-      nipple_times &&
-        era.print([
-          chara.get_colored_name(),
-          ' 的 ',
-          { content: '乳头', color: buff_colors[2] },
-          ' ',
-          {
-            content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
-            color: buff_colors[2],
-          },
-          '！',
-        ]);
-    } else if (times) {
-      let semen;
-      switch (part) {
-        case part_enum.sadism:
-        case part_enum.masochism:
-          era.print([
-            chara.get_colored_name(),
-            ' 因 ',
-            { content: part_name, color: buff_colors[2] },
-            ' ',
-            {
-              content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
-              color: buff_colors[2],
-            },
-            '！',
-          ]);
-          break;
-        case part_enum.penis:
-          semen = era.get(`nowex:${chara_id}:射精量`);
-          era.print([
-            chara.get_colored_name(),
-            ' ',
-            semen < 0 ? '在避孕套中' : '',
-            '射出了',
-            {
-              content: ` ${Math.abs(semen)}ml `,
-              color: buff_colors[2],
-            },
-            '精液！',
-          ]);
-          break;
-        default:
+  if (era.get(`nowex:${chara_id}:TotalEX`) > 0) {
+    const chara = get_chara_talk(chara_id);
+    let multi_orgasm = undefined;
+    if (era.get(`nowex:${chara_id}:二重高潮`)) {
+      multi_orgasm = '二';
+    } else if (era.get(`nowex:${chara_id}:三重高潮`)) {
+      multi_orgasm = '三';
+    } else if (era.get(`nowex:${chara_id}:四重高潮`)) {
+      multi_orgasm = '四';
+    } else if (era.get(`nowex:${chara_id}:五重高潮`)) {
+      multi_orgasm = '五';
+    } else if (era.get(`nowex:${chara_id}:多重高潮`)) {
+      multi_orgasm = '多';
+    }
+    multi_orgasm &&
+      era.print([
+        chara.get_colored_name(),
+        ' 发生了',
+        { content: ` ${multi_orgasm}重高潮`, color: buff_colors[2] },
+        '！',
+      ]);
+    orgasm_check_list.forEach((part) => {
+      const part_name = part_names[part];
+      const times =
+        era.get(`nowex:${chara_id}:${part_name}高潮`) +
+        (era.get(`nowex:${chara_id}:无自觉${part_name}高潮`) || 0);
+      if (part === part_enum.breast) {
+        const nipple_times =
+          era.get(`nowex:${chara_id}:乳头高潮`) +
+          era.get(`nowex:${chara_id}:无自觉乳头高潮`);
+        times &&
           era.print([
             chara.get_colored_name(),
             ' 的 ',
-            { content: part_name, color: buff_colors[2] },
+            { content: '胸部', color: buff_colors[2] },
             ' ',
             {
               content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
@@ -352,9 +298,65 @@ handlers[ero_hooks.orgasm] = async (chara_id) => {
             },
             '！',
           ]);
+        nipple_times &&
+          era.print([
+            chara.get_colored_name(),
+            ' 的 ',
+            { content: '乳头', color: buff_colors[2] },
+            ' ',
+            {
+              content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
+              color: buff_colors[2],
+            },
+            '！',
+          ]);
+      } else if (times) {
+        let semen;
+        switch (part) {
+          case part_enum.sadism:
+          case part_enum.masochism:
+            era.print([
+              chara.get_colored_name(),
+              ' 因 ',
+              { content: part_name, color: buff_colors[2] },
+              ' ',
+              {
+                content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
+                color: buff_colors[2],
+              },
+              '！',
+            ]);
+            break;
+          case part_enum.penis:
+            semen = era.get(`nowex:${chara_id}:射精量`);
+            era.print([
+              chara.get_colored_name(),
+              ' ',
+              semen < 0 ? '在避孕套中' : '',
+              '射出了',
+              {
+                content: ` ${Math.abs(semen)}ml `,
+                color: buff_colors[2],
+              },
+              '精液！',
+            ]);
+            break;
+          default:
+            era.print([
+              chara.get_colored_name(),
+              ' 的 ',
+              { content: part_name, color: buff_colors[2] },
+              ' ',
+              {
+                content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
+                color: buff_colors[2],
+              },
+              '！',
+            ]);
+        }
       }
-    }
-  });
+    });
+  }
 };
 
 /**
@@ -410,7 +412,7 @@ const sex_mark_desc = [
  *
  * @param {number} chara_id
  * @param _
- * @param {{level:number,name:string,new:boolean}} extra_flag
+ * @param {GetMarkParams} extra_flag
  */
 handlers[ero_hooks.get_mark] = async (chara_id, _, extra_flag) => {
   let message = '';

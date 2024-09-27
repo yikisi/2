@@ -86,6 +86,7 @@ async function next_turn() {
           part: e,
           stay: chara_id,
         });
+        era.println();
       }
     }
     let body_part;

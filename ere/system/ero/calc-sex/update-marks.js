@@ -8,6 +8,7 @@ const get_color = require('#/utils/gradient-color');
 
 const { mark_colors } = require('#/data/const.json');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const GetMarkParams = require('#/data/event/extra-flag/get-mark-params');
 
 const relation_by_mark = [100, 0, 200, -200, -200, -400];
 
@@ -31,11 +32,11 @@ async function update_marks(shown, ...ids) {
         count++;
         relation_change += relation_by_mark[i] * (new_level - mark_level);
         era.set(`mark:${chara_id}:${i}`, new_level);
-        await sys_call_ero_event(chara_id, ero_hooks.get_mark, {
-          level: new_level,
-          name: mark_name,
-          shown,
-        });
+        await sys_call_ero_event(
+          chara_id,
+          ero_hooks.get_mark,
+          new GetMarkParams(new_level, mark_name, false).set_shown(shown),
+        );
         shown &&
           (await era.printAndWait([
             { isBr: true },

@@ -87,8 +87,8 @@ async function update_orgasms(shown, ...ids) {
     if (check_erect(chara_id) && !era.get(`tcvar:${chara_id}:避孕套`)) {
       set_stain(chara_id, part_enum.penis, stain_enum.semen);
     }
+    await call_ero_script(chara_id, ero_hooks.orgasm, { shown });
     if (era.get(`nowex:${chara_id}:TotalEX`)) {
-      await call_ero_script(chara_id, ero_hooks.orgasm, { shown });
       era.set(`tcvar:${chara_id}:刚刚高潮`, true);
     }
     era.get(`nowex:${chara_id}:失贞标记`) &&
@@ -189,8 +189,14 @@ async function update_orgasms(shown, ...ids) {
     if (era.get(`tcvar:${chara_id}:不应期`)) {
       era.add(`tcvar:${chara_id}:不应期`, -1);
       // 射精之后如果进入不应期，拔出来
-      era.get(`nowex:${chara_id}:阴茎高潮`) &&
+      const touched_part = era.get(`tcvar:${chara_id}:阴茎接触部位`);
+      if (
+        era.get(`nowex:${chara_id}:阴茎高潮`) > 0 &&
+        (touched_part.part === part_enum.virgin ||
+          touched_part.part === part_enum.anal)
+      ) {
         clean_part_without_item(new EroParticipant(chara_id, part_enum.penis));
+      }
     }
     if (era.get(`tcvar:${chara_id}:阴道扩张`)) {
       era.add(`tcvar:${chara_id}:阴道扩张`, -1);
@@ -198,6 +204,7 @@ async function update_orgasms(shown, ...ids) {
     if (era.get(`tcvar:${chara_id}:肛门扩张`)) {
       era.add(`tcvar:${chara_id}:肛门扩张`, -1);
     }
+    shown !== false && era.println();
   }
   for (const chara_id of ids) {
     era.add(

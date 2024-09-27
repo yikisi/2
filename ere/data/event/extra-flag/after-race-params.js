@@ -1,4 +1,6 @@
-class AfterRaceParams {
+const ExtraFlagsParams = require('#/data/event/extra-flag/common');
+
+class AfterRaceParams extends ExtraFlagsParams {
   /**
    * @param {boolean} aim_race
    * @param {PseudoUma[]} contestants
@@ -9,6 +11,7 @@ class AfterRaceParams {
    * @param {number} st
    */
   constructor(aim_race, contestants, edu_weeks, pop, race, rank, st) {
+    super();
     this.aim_race = aim_race;
     this.contestants = contestants;
     this.edu_weeks = edu_weeks;
