@@ -77,6 +77,8 @@ module.exports = class extends CustomizedCheck {
     }
     if (edu_weeks < 3 * 48) {
       switch (edu_weeks) {
+        case 5: // 超究极武神极巨化以下略 · 巧克力慕斯蛋糕
+        case 47: // 赌局与爱与飞行
         case 47 + 1: // 新年的抱负
         case 47 + 6: // 世纪初最强拳人节
         case 95 + 1: // 新春的贺礼

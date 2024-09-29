@@ -328,18 +328,19 @@ handlers[ero_hooks.orgasm] = async (chara_id) => {
             ]);
             break;
           case part_enum.penis:
-            semen = era.get(`nowex:${chara_id}:射精量`);
-            era.print([
-              chara.get_colored_name(),
-              ' ',
-              semen < 0 ? '在避孕套中' : '',
-              '射出了',
-              {
-                content: ` ${Math.abs(semen)}ml `,
-                color: buff_colors[2],
-              },
-              '精液！',
-            ]);
+            if ((semen = era.get(`nowex:${chara_id}:射精量`)) !== 0) {
+              era.print([
+                chara.get_colored_name(),
+                ' ',
+                semen < 0 ? '在避孕套中' : '',
+                '射出了',
+                {
+                  content: ` ${Math.abs(semen)}ml `,
+                  color: buff_colors[2],
+                },
+                '精液！',
+              ]);
+            }
             break;
           default:
             era.print([

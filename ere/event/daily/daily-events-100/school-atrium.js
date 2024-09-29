@@ -4,6 +4,7 @@ const { date_common } = require('#/event/daily/daily-events-100/snippets');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 
 const AcuteEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-100');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const {
   get_chara_talk,
   say_by_passer_by_and_wait,
@@ -12,8 +13,41 @@ const {
 module.exports = async (hook) => {
   const acute = get_chara_talk(100),
     edu_marks = new AcuteEduMarks(),
-    me = get_chara_talk(0);
-  if (era.get('love:100') >= 90 && !edu_marks.kiss) {
+    me = get_chara_talk(0),
+    love = era.get('love:100');
+  if (love >= 50 && !edu_marks.possessive) {
+    await acute.print_and_wait(['又一次来到了枯树洞……']);
+    await acute.print_and_wait([
+      '想要在 ',
+      me.get_colored_actual_name(),
+      ' 的身上留下印迹。',
+    ]);
+    await acute.print_and_wait(['不仅仅是接吻，还有其他地方。']);
+    await acute.print_and_wait([
+      '耳垂、脸颊、下巴、脖颈、胸口……都想要留下我的印迹。',
+    ]);
+    await acute.print_and_wait([
+      '这就是所谓的占有欲吗？坦白的说，我并不明白。',
+    ]);
+    await acute.print_and_wait([
+      '想要向 ',
+      me.get_colored_actual_name(),
+      ' 的嘴唇靠近，想要鼻与唇的喘息的交错；左面的心脏砰砰跳动，一切都是让人难以忍耐。',
+    ]);
+    await acute.print_and_wait(['爱人之间的接吻……真是一项危险的行动。']);
+    await acute.print_and_wait([
+      '要是真的接上了吻，让自己的身体染上了对 ',
+      sys_get_colored_callname(0, 100),
+      ' 的瘾症的话，那时候……我会变得怎样呢？',
+    ]);
+    await acute.print_and_wait([
+      sys_get_colored_callname(0, 100),
+      '……会负起责任来吗？',
+    ]);
+    edu_marks.possessive = 1;
+    hook.arg = true;
+    return true;
+  } else if (love >= 90 && !edu_marks.kiss) {
     await date_common(acute, me);
     await era.printAndWait([
       '——感受到了来自 ',
@@ -47,7 +81,7 @@ module.exports = async (hook) => {
     await era.printAndWait('无论日夜轮转，春夏秋冬。');
     await era.printAndWait(['此后的人生，皆不在与', acute.sex, '分离。']);
     edu_marks.kiss = 1;
-    hook.arg = true;
+    hook.arg = false;
     return true;
   }
   hook.arg = !(await select_action_in_atrium());

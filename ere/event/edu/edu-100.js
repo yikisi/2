@@ -22,10 +22,10 @@ const handlers = {};
 const week_start_handlers = {};
 
 [
-  require('#/event/edu/edu-events-100/week-start-1'),
   require('#/event/edu/edu-events-100/week-start-2'),
   require('#/event/edu/edu-events-100/week-start-3'),
   require('#/event/edu/edu-events-100/week-start-4'),
+  require('#/event/edu/edu-events-100/week-start-5'),
 ].forEach((f) => f(week_start_handlers));
 
 handlers[event_hooks.week_start] = async (_, __, event_object) => {

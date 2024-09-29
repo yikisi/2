@@ -670,6 +670,8 @@ async function chara_skill() {
   execSync('npx eslint --fix ./ere/data/race/model ./ere/data/race/skill', {
     cwd: join(process.cwd(), '../..'),
   });
+
+  execSync('node parse-genes.js');
 }
 
 chara_skill().then();
