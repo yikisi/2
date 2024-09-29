@@ -27,9 +27,11 @@ const event_hooks = require('#/data/event/event-hooks');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
+const YandereList = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+const era = require('#/era-electron');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
@@ -52,6 +54,9 @@ handlers[308] = () =>
         handle() {
           set('callname:308:-2', '光辉致意');
           set('cflag:308:招募状态', recruit_flags.yes);
+          if (era.get('talent:308:病娇')) {
+            new YandereList().push(308, true);
+          }
           return printAndWait([
             get_chara_talk(308).get_colored_name(),
             ' 加入了队伍！',
@@ -68,6 +73,9 @@ handlers[343] = () =>
         handle() {
           set('callname:343:-2', '佐岳五月');
           set('cflag:343:招募状态', recruit_flags.yes);
+          if (era.get('talent:343:病娇')) {
+            new YandereList().push(343, true);
+          }
           return printAndWait([
             get_chara_talk(343).get_colored_name(),
             ' 加入了队伍！',

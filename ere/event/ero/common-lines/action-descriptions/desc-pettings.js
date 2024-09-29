@@ -524,7 +524,7 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.fuck_tit_and_month] = (attacker, defender, hook) => {
+  handlers[ero_hooks.fuck_tit_and_mouth] = (attacker, defender, hook) => {
     if (hook.arg) {
       return era.printAndWait([
         '【',

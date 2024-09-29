@@ -121,7 +121,7 @@ const ero_actions = {
   // 乳间抽插
   fuck_tit: 0,
   // 乳间抽插嘴唇
-  fuck_tit_and_month: 0,
+  fuck_tit_and_mouth: 0,
   // 乳交
   tit_job: 0,
   // 乳交同时口交

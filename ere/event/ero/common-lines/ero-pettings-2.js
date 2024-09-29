@@ -432,7 +432,7 @@ module.exports = (handlers) => {
     await handlers[ero_hooks.tit_and_blow_job](defender, attacker, hook);
   };
 
-  handlers[ero_hooks.fuck_tit_and_month] = async (attacker, defender, hook) => {
+  handlers[ero_hooks.fuck_tit_and_mouth] = async (attacker, defender, hook) => {
     if (hook.arg) {
       await defender.say_and_wait('什么……！？');
       await defender.print_and_wait(

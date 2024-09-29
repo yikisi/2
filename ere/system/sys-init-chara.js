@@ -332,15 +332,8 @@ module.exports = {
                     (era.get(`talent:${chara_id}:乳头类型`) === 2),
                 );
               }
+              era.set(`talent:${chara_id}:病娇`, 1);
           }
-        }
-        switch (era.get('flag:彩蛋机制')) {
-          case 179:
-          case 621:
-            era.set(`talent:${chara_id}:病娇`, 1);
-        }
-        if (era.get(`talent:${chara_id}:病娇`) > 0) {
-          new YandereList().push(chara_id, true);
         }
         const my_src_chara = era.get('cflag:0:模版角色');
         if (era.get(`relation:${chara_id}`)[my_src_chara]) {
@@ -388,6 +381,12 @@ module.exports = {
       era.get(`relation:${chara_id}:0`) +
       300 * sys_personal_achievement.get(chara_id);
     era.set(`relation:${chara_id}:0`, Math.min(relation, 600));
+    if (
+      era.get(`cflag:${chara_id}:种族`) &&
+      era.get(`talent:${chara_id}:病娇`)
+    ) {
+      new YandereList().push(chara_id, true);
+    }
   },
   reset_chara,
 };

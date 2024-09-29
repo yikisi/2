@@ -32,14 +32,14 @@ async function update_marks(shown, ...ids) {
         count++;
         relation_change += relation_by_mark[i] * (new_level - mark_level);
         era.set(`mark:${chara_id}:${i}`, new_level);
-        await sys_call_ero_event(
-          chara_id,
-          ero_hooks.get_mark,
-          new GetMarkParams(new_level, mark_name, false).set_shown(shown),
-        );
-        shown &&
-          (await era.printAndWait([
-            { isBr: true },
+        if (shown) {
+          era.println();
+          await sys_call_ero_event(
+            chara_id,
+            ero_hooks.get_mark,
+            new GetMarkParams(new_level, mark_name, false),
+          );
+          await era.printAndWait([
             get_chara_talk(chara_id).get_colored_name(),
             ' 获得了 ',
             {
@@ -51,7 +51,8 @@ async function update_marks(shown, ...ids) {
               ),
             },
             '！',
-          ]));
+          ]);
+        }
       }
       era.add(
         `ex:${chara_id}:${mark_name}获取`,

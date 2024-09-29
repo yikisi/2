@@ -15,11 +15,13 @@ module.exports = (handlers) => {
       ' 施为……】',
     ]);
 
-  handlers[ero_hooks.kiss] = (attacker, defender) =>
+  handlers[ero_hooks.kiss] = (attacker, defender, hook) =>
     era.printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 亲吻 ',
+      ' ',
+      hook.arg ? '' : '继续',
+      '亲吻 ',
       defender.get_colored_name(),
       ' 的嘴唇……】',
     ]);
