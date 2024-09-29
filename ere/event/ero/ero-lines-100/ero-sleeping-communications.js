@@ -4,8 +4,8 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
-  handlers[ero_hooks.kiss] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.kiss] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -20,8 +20,8 @@ module.exports = (handlers) => {
     );
   };
 
-  handlers[ero_hooks.french_kiss] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.french_kiss] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([

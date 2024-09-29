@@ -26,7 +26,7 @@ class LegendUmaFilter {
    * @returns {LegendUmaFilter}
    */
   set_image(image) {
-    this.iamge = image;
+    this.image = image;
     return this;
   }
 

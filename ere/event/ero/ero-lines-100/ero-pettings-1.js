@@ -574,8 +574,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.ask_blow_job] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.ask_blow_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     if (Math.random() < 0.5) {
@@ -622,8 +622,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.ask_deep_blow_job] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.ask_deep_blow_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await defender.print_and_wait([
@@ -647,8 +647,8 @@ module.exports = (handlers) => {
     await defender.print_and_wait(['……已经蓄势待发了。']);
   };
 
-  handlers[ero_hooks.force_blow_job] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.force_blow_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -709,12 +709,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.force_deep_blow_job] = async (
-    attacker,
-    defender,
-    hook,
-  ) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.force_deep_blow_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await defender.print_and_wait([
@@ -735,8 +731,8 @@ module.exports = (handlers) => {
     await defender.print_and_wait(['反而有一种……被使用的快感。']);
   };
 
-  handlers[ero_hooks.ask_hand_job] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.ask_hand_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -759,12 +755,8 @@ module.exports = (handlers) => {
     await attacker.print_and_wait(['媚眼如丝地望着向手中的「根器」……']);
   };
 
-  handlers[ero_hooks.ask_hand_and_blow_job] = async (
-    attacker,
-    defender,
-    hook,
-  ) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.ask_hand_and_blow_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await defender.print_and_wait(['吞咽着龙头，肉杆便变得一涨一涨。']);
@@ -782,8 +774,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.force_hand_job] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.force_hand_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -814,12 +806,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.force_hand_and_blow_job] = async (
-    attacker,
-    defender,
-    hook,
-  ) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.force_hand_and_blow_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([

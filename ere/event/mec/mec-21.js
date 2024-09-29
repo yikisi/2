@@ -1,8 +1,9 @@
 const era = require('#/era-electron');
 
+const CustomizedMec = require('#/event/mec/mec-common');
+
 const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
 const { race_enum } = require('#/data/race/race-const');
-const CustomizedMec = require('#/event/mec/mec-common');
 
 module.exports = class extends CustomizedMec {
   get_race_contestants(info) {
@@ -17,7 +18,7 @@ module.exports = class extends CustomizedMec {
                 e.adapt_ground[0] >= 6 &&
                 e.adapt_distance[2] >= 6 &&
                 e.adapt_style[1] >= 6,
-            ),
+            ).set_image('秋津帝王'),
           ];
         }
     }

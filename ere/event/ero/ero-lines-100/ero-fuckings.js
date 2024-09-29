@@ -59,10 +59,7 @@ module.exports = (handlers) => {
     handlers[ero_hooks.suspended_congress_anal_sex] =
     handlers[ero_hooks.ask_cowgirl_anal_sex] =
       async (attacker, defender, hook) => {
-        if (
-          defender.id !== 100 ||
-          (hook.arg && era.get('exp:100:肛交次数') > 0)
-        ) {
+        if (defender.id !== 100) {
           throw new Error();
         }
         if (hook.arg) {

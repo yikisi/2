@@ -5,8 +5,8 @@ const { get_breast_cup } = require('#/data/info-generator');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
-  handlers[ero_hooks.ask_tit_job] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.ask_tit_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     if (get_breast_cup(100, true) >= 'C') {
@@ -52,12 +52,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.ask_tit_and_blow_job] = async (
-    attacker,
-    defender,
-    hook,
-  ) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.ask_tit_and_blow_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait(['一面挤弄着乳肉，一面伸出着舌头，']);
@@ -73,8 +69,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.fuck_tit] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.fuck_tit] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     if (get_breast_cup(100, true) >= 'C') {
@@ -153,8 +149,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.fuck_tit_and_mouth] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.fuck_tit_and_mouth] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait(['提着乳头、抽插着胸部，仅仅如此还不够。']);
@@ -180,8 +176,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.suck_anal] = async (attacker, defender, hook) => {
-    if (attacker.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.suck_anal] = async (attacker, defender) => {
+    if (attacker.id !== 100) {
       throw new Error();
     }
     if (Math.random() < 0.5) {
@@ -248,8 +244,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.suck_nipple] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg || defender.sex_code === 1) {
+  handlers[ero_hooks.suck_nipple] = async (attacker, defender) => {
+    if (defender.id !== 100 || defender.sex_code === 1) {
       throw new Error();
     }
     if (Math.random() < 0.5) {
@@ -279,8 +275,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.bite_nipple] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg || defender.sex_code === 1) {
+  handlers[ero_hooks.bite_nipple] = async (attacker, defender) => {
+    if (defender.id !== 100 || defender.sex_code === 1) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -317,12 +313,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.ask_milk_and_hand_job] = async (
-    attacker,
-    defender,
-    hook,
-  ) => {
-    if (defender.id !== 100 || !hook.arg || defender.sex_code === 1) {
+  handlers[ero_hooks.ask_milk_and_hand_job] = async (attacker, defender) => {
+    if (defender.id !== 100 || defender.sex_code === 1) {
       throw new Error();
     }
     if (Math.random() < 0.5) {
@@ -365,8 +357,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.milk] = async (attacker, defender, hook) => {
-    if (attacker.id !== 100 || !hook.arg || attacker.sex_code === 1) {
+  handlers[ero_hooks.milk] = async (attacker, defender) => {
+    if (attacker.id !== 100 || attacker.sex_code === 1) {
       throw new Error();
     }
     if (Math.random() < 0.5) {
@@ -465,8 +457,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.sixty_nine] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.sixty_nine] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -493,8 +485,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.ask_hair_fuck] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.ask_hair_fuck] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -521,8 +513,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.force_hair_fuck] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.force_hair_fuck] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -566,12 +558,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.ask_armpit_intercourse] = async (
-    attacker,
-    defender,
-    hook,
-  ) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.ask_armpit_intercourse] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -591,12 +579,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.force_armpit_intercourse] = async (
-    attacker,
-    defender,
-    hook,
-  ) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.force_armpit_intercourse] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -615,8 +599,8 @@ module.exports = (handlers) => {
     await defender.say_and_wait(['啊，这股阳气，绝对是洗不掉的味道呢❤️～']);
   };
 
-  handlers[ero_hooks.ask_foot_job] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.ask_foot_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -636,8 +620,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.force_foot_job] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.force_foot_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -662,8 +646,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.ask_tail_job] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.ask_tail_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
@@ -691,8 +675,8 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.force_tail_job] = async (attacker, defender, hook) => {
-    if (defender.id !== 100 || !hook.arg) {
+  handlers[ero_hooks.force_tail_job] = async (attacker, defender) => {
+    if (defender.id !== 100) {
       throw new Error();
     }
     await attacker.print_and_wait([
