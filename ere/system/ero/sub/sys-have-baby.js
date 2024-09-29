@@ -44,10 +44,7 @@ async function sys_have_baby(mother_id) {
    * 随机赋予3项性格特质
    * @type {number[]}
    */
-  const chara_talents = [
-    ...new Array(18).fill(0).map((_, i) => i + 1070),
-    1090,
-  ];
+  const chara_talents = [...new Array(18).fill(0).map((_, i) => i), 20];
   chara_talents.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
   );
@@ -102,7 +99,7 @@ async function sys_have_baby(mother_id) {
 
   // 随机赋予1项名器特质
   const part_talent_count = get_random_value(0, 1);
-  const part_talents = get_filtered_talents(sex, 1010);
+  const part_talents = get_filtered_talents(sex, 50);
   part_talents.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
   );
@@ -115,9 +112,9 @@ async function sys_have_baby(mother_id) {
     xp_extended_count = get_random_value(0, 1);
   const talent_arr = [
     // 淫乱系
-    ...get_filtered_talents(sex, 1000),
+    ...get_filtered_talents(sex, 60),
     // xp系
-    ...new Array(8).fill(0).map((_, i) => i + 1050),
+    ...new Array(8).fill(0).map((_, i) => i + 40),
   ];
   talent_arr.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
@@ -162,8 +159,8 @@ async function sys_have_baby(mother_id) {
    */
   const semen_talents = new Array(8)
     .fill(0)
-    .map((_, i) => i + 1060)
-    .filter((talent_id) => talent_id !== 1061 || talent_id !== 1065 || sex - 1);
+    .map((_, i) => i + 70)
+    .filter((talent_id) => talent_id !== 71 || talent_id !== 75 || sex !== 1);
   semen_talents.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
   );

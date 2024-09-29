@@ -422,7 +422,7 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
             await kitaru.say_and_wait('唔唔！哈啊哈啊……');
             await era.printAndWait([
               kitaru.get_colored_name(),
-              '歪着头沉思了一会。',
+              ' 歪着头沉思了一会。',
             ]);
             await kitaru.say_and_wait('为什么……好舒服。');
           }
@@ -446,7 +446,7 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
             await era.printAndWait([
               '尽管因为激烈绝顶而颤抖不止，逐渐被快感支配的 ',
               kitaru.get_colored_name(),
-              ' 对',
+              ' 对 ',
               me.get_colored_name(),
               ' 发出了继续袭击的请求。',
             ]);
@@ -490,9 +490,9 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
           await kitaru.say_and_wait('咿啊～！');
           await era.printAndWait([
             kitaru.get_colored_name(),
-            '靠在了',
+            ' 靠在了 ',
             me.get_colored_name(),
-            '的身上，任凭摆布。',
+            ' 的身上，任凭摆布。',
           ]);
           await era.printAndWait('面泛春光，娇躯一颤一颤地跳动着。');
           break;
@@ -703,7 +703,7 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
           );
           await kitaru.say_and_wait('哈……哈……');
           await era.printAndWait([
-            '冒着粉光的眸子，呆滞地看着',
+            '冒着粉光的眸子，呆滞地看着 ',
             me.get_colored_name(),
             '。',
           ]);
