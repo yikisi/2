@@ -22,6 +22,7 @@ const handlers = {};
 const week_start_handlers = {};
 
 [
+  require('#/event/edu/edu-events-100/week-start-1'),
   require('#/event/edu/edu-events-100/week-start-2'),
   require('#/event/edu/edu-events-100/week-start-3'),
   require('#/event/edu/edu-events-100/week-start-4'),

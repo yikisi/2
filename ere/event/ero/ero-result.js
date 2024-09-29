@@ -163,15 +163,15 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
 handlers[ero_hooks.have_baby] = async (_, hook, extra_flag) => {
   const father_id = era.get(`cflag:${extra_flag.child_id}:父方角色`),
     mother_id = era.get(`cflag:${extra_flag.child_id}:母方角色`);
-  let ret;
+  let ret, random_param;
   // chara_id一定是母亲
   // 虽然不是很情愿，但是还是留一下吧，只有玩家是孩子父亲或者母亲的情况下才拥有命名决定权
   if ((mother_id && father_id) || hook.arg) {
     // 如果和玩家没关系，直接用母亲来命名
-    ret = get_random_name(mother_id);
+    random_param = mother_id;
   } else if (era.get('flag:惩戒力度') >= 2) {
     // 性奴和孕袋没有命名权
-    ret = get_random_name(mother_id || father_id);
+    random_param = mother_id || father_id;
   } else {
     if (
       await select_yes_or_no(
@@ -180,19 +180,39 @@ handlers[ero_hooks.have_baby] = async (_, hook, extra_flag) => {
         '亲自起名',
       )
     ) {
-      ret = get_random_name(mother_id || father_id);
+      random_param = mother_id || father_id;
     } else {
       era.print('想给孩子起什么名字呢？');
       ret = await era.input();
     }
   }
+  if (random_param) {
+    ret = get_random_name(random_param);
+  }
   era.set(
     `callname:${extra_flag.child_id}:-2`,
     era.set(`callname:${extra_flag.child_id}:-1`, ret),
   );
+  if (
+    random_param &&
+    ret.replace(/\d+$/, '').length !== ret.length &&
+    (await select_yes_or_no([
+      get_chara_talk(mother_id).get_colored_name(),
+      ' 的孩子起名为 ',
+      get_chara_talk(extra_flag.child_id).get_colored_name(),
+      '……',
+      { isBr: true },
+      '要重新取名吗？',
+    ]))
+  ) {
+    era.set(
+      `callname:${extra_flag.child_id}:-2`,
+      era.set(`callname:${extra_flag.child_id}:-1`, await era.input()),
+    );
+  }
   await era.printAndWait([
     get_chara_talk(mother_id).get_colored_name(),
-    ' 的孩子起名为 ',
+    ' 的孩子最终起名为 ',
     get_chara_talk(extra_flag.child_id).get_colored_name(),
     '！',
   ]);
