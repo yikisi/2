@@ -119,7 +119,7 @@ class CustomizedMec {
 
   /**
    * @param {RaceInfo} info
-   * @returns {{id:number,buff:number}[]}
+   * @returns {(LegendUmaSelector|LegendUmaFilter)[]}
    */
   // eslint-disable-next-line no-unused-vars
   get_race_contestants(info) {

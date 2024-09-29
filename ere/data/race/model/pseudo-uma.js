@@ -243,6 +243,9 @@ class PseudoUma {
   // 传奇对手标记
   legend = false;
 
+  /** 半身像 */
+  image = '';
+
   /**
    * @param {number} index_chara 角色编号
    * @param {string} name 名字
@@ -285,6 +288,11 @@ class PseudoUma {
 
   set_legend() {
     this.legend = true;
+    return this;
+  }
+
+  set_image(image) {
+    this.image = image;
     return this;
   }
 

@@ -1,5 +1,7 @@
 ﻿const era = require('#/era-electron');
 
+const { get_image } = require('#/system/sys-calc-image');
+
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { gacha, get_random_entry, sort_list } = require('#/utils/list-utils');
@@ -9,6 +11,8 @@ const { get_chara_color } = require('#/data/chara-colors');
 const recruit_flags = require('#/data/event/recruit-flags');
 const named_list = require('#/data/race/contestants/named.json');
 const passer_by_list = require('#/data/race/contestants/unnamed.json');
+const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
+const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
@@ -26,14 +30,38 @@ const passer_by_names = require('#/data/race/contestants/uma-mob.json').map(
   (e) => e['ChineseName'],
 );
 
-const named_level = [
-    Math.min(...named_list.map((e) => e.level)),
-    Math.max(...named_list.map((e) => e.level)),
-  ],
-  passer_by_level = [
-    Math.min(...passer_by_list.map((e) => e.level)),
-    Math.max(...passer_by_list.map((e) => e.level)),
-  ];
+const named_level = [named_list[0].level, named_list.at(-1).level],
+  passer_by_level = [passer_by_list[0].level, passer_by_list.at(-1).level];
+
+function select_data_from_contestants(legends, difficulty) {
+  if (legends.length > 0) {
+    let i = 0,
+      j = legends.length - 2;
+    if (legends[0].level >= difficulty) {
+      i = 0;
+    } else if (legends[j + 1].level <= difficulty) {
+      i = j + 1;
+    } else {
+      while (i < j - 1) {
+        const m = Math.floor((i + j) / 2);
+        if (
+          legends[m]?.level <= difficulty &&
+          legends[m + 1]?.level > difficulty
+        ) {
+          i = m;
+          break;
+        }
+        if (legends[m + 1]?.level <= difficulty) {
+          i = m;
+        } else {
+          j = m;
+        }
+      }
+    }
+    return legends[i];
+  }
+  return undefined;
+}
 
 /**
  * @param {number[]} adapts
@@ -57,7 +85,8 @@ function random_style(adapts) {
  */
 function sys_parse_for_race(team_chara, race, info, contestants) {
   const current = new Date().getTime();
-  let ret = [...team_chara];
+  let ret = [...team_chara],
+    unnamed_index = -1;
   info.has_legend = false;
   if (contestants) {
     ret.push(...contestants);
@@ -117,51 +146,56 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       get_custom_mec(id)
         .get_race_contestants(info)
         .forEach((c) => {
-          if (
-            !contestant_dict[c.id] &&
-            era.get(`cflag:${c.id}:招募状态`) !== recruit_flags.yes
-          ) {
-            const difficulty = named_difficulty[0] * c.buff,
-              legends = named_list.filter((e) => e.id === c.id);
-            if (legends.length > 0) {
-              let i = 0,
-                j = legends.length - 2;
-              if (legends[0].level >= difficulty) {
-                i = 0;
-              } else if (legends[j + 1].level <= difficulty) {
-                i = j + 1;
-              } else {
-                while (i < j - 1) {
-                  const m = Math.floor((i + j) / 2);
-                  if (
-                    legends[m]?.level <= difficulty &&
-                    legends[m + 1]?.level > difficulty
-                  ) {
-                    i = m;
-                    break;
-                  }
-                  if (legends[m + 1]?.level <= difficulty) {
-                    i = m;
-                  } else {
-                    j = m;
-                  }
-                }
+          const difficulty = named_difficulty[0] * c.buff;
+          if (c instanceof LegendUmaSelector) {
+            if (
+              !contestant_dict[c.id] &&
+              era.get(`cflag:${c.id}:招募状态`) !== recruit_flags.yes
+            ) {
+              const uma = select_data_from_contestants(
+                named_list.filter((e) => e.id === c.id),
+                difficulty,
+              );
+              if (uma) {
+                contestant_dict[c.id] = 1;
+                ret.push(
+                  new PseudoUma(
+                    uma.id,
+                    era.get(`static:${uma.id}:name`),
+                    get_chara_color(uma.id),
+                    get_random_value(...uma.motivation),
+                    uma.attrs,
+                    random_style(uma.adapt_style),
+                    uma.adapt_style,
+                    uma.adapt_distance,
+                    uma.adapt_ground,
+                    skill_sets[uma.skills].map((s) => skills_dict[s]),
+                  ).set_legend(),
+                );
+                legend_count--;
               }
-              contestant_dict[c.id] = 1;
-              const uma = legends[i];
+            }
+          } else if (c instanceof LegendUmaFilter) {
+            const uma = select_data_from_contestants(
+              passer_by_list.filter(c.filter),
+              difficulty,
+            );
+            if (uma) {
               ret.push(
                 new PseudoUma(
-                  uma.id,
-                  era.get(`static:${uma.id}:name`),
-                  get_chara_color(uma.id),
+                  unnamed_index--,
+                  c.name,
+                  get_chara_color(undefined),
                   get_random_value(...uma.motivation),
                   uma.attrs,
                   random_style(uma.adapt_style),
                   uma.adapt_style,
                   uma.adapt_distance,
                   uma.adapt_ground,
-                  skill_sets[uma.skills].map((s) => skills_dict[s]),
-                ).set_legend(),
+                  skill_sets[c.skills || uma.skills].map((s) => skills_dict[s]),
+                )
+                  .set_legend()
+                  .set_image(c.image),
               );
               legend_count--;
             }
@@ -327,7 +361,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       gacha(back_up_list, info.gates - ret.length).forEach((e, i) =>
         ret.push(
           new PseudoUma(
-            -1 - i,
+            unnamed_index--,
             names[i],
             get_chara_color(undefined),
             get_random_value(...e.motivation),
@@ -347,6 +381,15 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     info.has_legend = true;
   }
   const from_setting = era.get('flag:比赛难度');
+  ret.forEach(
+    (uma) =>
+      uma.index_chara > 0 &&
+      uma.set_image(
+        get_image(uma.index_chara)
+          .map((_i) => `${_i}_半身`)
+          .join('\t'),
+      ),
+  );
   ret.slice(team_chara.length).forEach((uma) => {
     uma.index_chara > 0 &&
       (uma.chara = era.get(`staticcflag:${uma.index_chara}:气性`));
