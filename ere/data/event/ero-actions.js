@@ -377,6 +377,8 @@ const ero_actions = {
   shop_start: 0,
   // 离开能力升级
   shop_end: 0,
+  // 被绿之后
+  after_betrayed: 0,
 };
 Object.keys(ero_actions).forEach((k, i) => (ero_actions[k] = i));
 

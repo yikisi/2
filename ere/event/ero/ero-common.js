@@ -855,6 +855,77 @@ handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
 };
 
 /**
+ * @author 雞雞
+ *
+ * @param {number} chara_id
+ */
+handlers[ero_hooks.after_betrayed] = async (chara_id) => {
+  const me = get_chara_talk(0),
+    chara = get_chara_talk(chara_id),
+    race = era.get(`cflag:${chara_id}:种族`),
+    like_betrayed = era.get(`talent:${chara_id}:绿帽癖`);
+  switch (era.add(`exp:${chara_id}:被绿次数`, 1)) {
+    case 1:
+      await era.printAndWait([
+        race ? chara.get_uma_sex_title() + '的鼻子十分灵敏，而 ' : '',
+        me.get_colored_name(),
+        ' 身上传来的淫臭味无时无刻不在向周遭宣布着自己刚才马儿跳过的事实。',
+        { isBr: true },
+        race ? '嗅到气味的 ' : '察觉此事 ',
+        chara.get_colored_name(),
+        ' 对 ',
+        me.get_colored_name(),
+        ' 的不忠产生了',
+        like_betrayed
+          ? '情欲'
+          : era.get(`cflag:${chara_id}:气性`) >= 0
+            ? '愤慨'
+            : '悲伤',
+        '的情绪……',
+      ]);
+      break;
+    case 2:
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 没有抵受住诱惑，再次背叛了 ',
+        chara.get_colored_name(),
+        '。',
+        { isBr: true },
+        '在一时性欲释放的背后，又有多少感情纠葛正在蔓延缠绕？',
+        { isBr: true },
+        race ? '嗅到气味的 ' : '察觉此事 ',
+        chara.get_colored_name(),
+        ' 对 ',
+        me.get_colored_name(),
+        ' 的不忠产生了',
+        like_betrayed
+          ? '情欲'
+          : era.get(`cflag:${chara_id}:气性`) >= 0
+            ? '愤慨'
+            : '悲伤',
+        '的情绪……',
+      ]);
+      break;
+    default:
+      if (like_betrayed) {
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 的不忠让 ',
+          chara.get_colored_name(),
+          ' 无比伤心的同时，又涌起了一股隐隐难言的兴奋……',
+        ]);
+      } else {
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 的不忠让 ',
+          chara.get_colored_name(),
+          ' 无比愤怒……',
+        ]);
+      }
+  }
+};
+
+/**
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {{[attacker]:number,[defender]:number,[shown]:boolean}} extra_flag

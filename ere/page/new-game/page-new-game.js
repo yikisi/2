@@ -270,6 +270,9 @@ module.exports = async (src_chara) => {
           if (src_chara !== 25 && src_chara !== 32) {
             my_marks.experiment = get_random_value(1, 24);
           }
+          if (src_chara !== 20) {
+            my_marks.fishing = 1;
+          }
           my_marks.custom = get_random_value(1, 12);
           my_marks.trainer_race = get_random_value(13, 36);
           my_marks.work_over = my_marks.sick = 24;

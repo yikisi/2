@@ -24,7 +24,10 @@ function get_juel_result(chara_id, juel_names, tmp) {
   if (self_protect) {
     buffer.push({
       content: [
-        self_protect.toLocaleString(),
+        {
+          color: palam_colors.notifications[0],
+          content: self_protect.toLocaleString(),
+        },
         ' 个自卫因子与其他因子相互抵消后：',
       ],
       type: 'text',

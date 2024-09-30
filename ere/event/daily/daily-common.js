@@ -531,7 +531,7 @@ handlers[event_hooks.school_rooftop] = (chara_id) =>
 
 /** @author 雞雞 */
 handlers[event_hooks.out_river] = async (chara_id, hook) => {
-  hook.arg = !!(await select_action_around_river());
+  hook.arg = (await select_action_around_river()) > 0;
   await era.printAndWait([
     get_chara_talk(0).get_colored_name(),
     ' 与 ',

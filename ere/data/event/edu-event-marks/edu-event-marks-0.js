@@ -17,6 +17,8 @@ class MyEduMarks extends EduEventMarks {
   work_over;
   // 生病
   sick;
+  // 钓鱼的心得
+  fishing;
 
   constructor() {
     super(0);

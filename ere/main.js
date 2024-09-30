@@ -302,9 +302,11 @@ module.exports = async () => {
       [
         '雞雞',
         { isDivider: true },
-        '无名黑奴',
-        { isDivider: true },
         '天马闪光蹄',
+        { isDivider: true },
+        '幽白書',
+        { isDivider: true },
+        '无名黑奴',
       ],
     ],
     [

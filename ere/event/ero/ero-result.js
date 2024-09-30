@@ -1,7 +1,10 @@
 const era = require('#/era-electron');
 
 const { add_juel } = require('#/system/ero/sys-calc-juel');
-const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_change_lust,
+  sys_change_pressure,
+} = require('#/system/sys-calc-base-cflag');
 const {
   sys_like_chara,
   sys_punish_unfaithful,
@@ -266,6 +269,47 @@ handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
       );
   }
   hook.arg && (await era.waitAnyKey());
+};
+
+/**
+ * @param {number} chara_id
+ * @param _
+ * @param {number[]} partners
+ * @returns {Promise<boolean>}
+ */
+handlers[ero_hooks.after_betrayed] = async (chara_id, _, { partners }) => {
+  const rape = era.get('tflag:强奸');
+  if (era.get(`talent:${chara_id}:绿帽癖`)) {
+    sys_change_pressure(
+      chara_id,
+      -get_random_value(500, 1000) * (1 + (rape > 0)),
+    );
+    let wait_flag = sys_like_chara(chara_id, 0, get_random_value(10, 20));
+    return partners.reduce(
+      (p, c) =>
+        sys_like_chara(
+          chara_id,
+          c,
+          get_random_name(20, 40) * (1 + (rape > 0)),
+        ) || p,
+      wait_flag,
+    );
+  }
+  sys_change_pressure(
+    chara_id,
+    get_random_value(2000, 4000) / (1 + (rape > 0)),
+  );
+  return sys_like_chara(
+    chara_id,
+    0,
+    -get_random_value(
+      100,
+      (200 +
+        8 * (era.get(`love:${chara_id}`) - 75) +
+        100 * era.get(`talent:${chara_id}:病娇`)) /
+        (1 + (rape > 0)),
+    ),
+  );
 };
 
 /**
