@@ -334,6 +334,9 @@ module.exports = async () => {
           owner = owners[0],
           owner_marks = new LifeEventMarks(owner);
         basement_owners.clear();
+        basement_owners.push(owner);
+        era.add('exp:0:监禁次数', 1);
+        era.add(`exp:${owner}:监禁次数`, 1);
         era.set('status:0:沉睡', 1);
         basement_queue.add_action(
           new BasementAction(0, my_life_marks.b_timer, action_type_enum.get_up),

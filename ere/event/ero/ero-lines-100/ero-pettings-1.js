@@ -475,10 +475,10 @@ module.exports = (handlers) => {
         '可现在，不论是在哪里，只要拽动一下尾巴，自己的屁股就会不自觉的翘起。',
       ]);
       if (defender.sex_code !== 1) {
-        await defender.say_and_wait([
-          '唔，我呀，好像变成了很便宜的女人了呐——',
+        await defender.say_and_wait(
+          ['唔，我呀，好像变成了很便宜的女人了呐——'],
           true,
-        ]);
+        );
         await defender.print_and_wait([
           '伴随着尾巴的疼痛而高高翘起的屁股左右晃动，迫不及待的下体也已垂涎欲滴。',
         ]);

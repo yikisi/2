@@ -40,7 +40,7 @@ module.exports = (handlers) => {
       '——那自然是 ',
       sys_get_colored_callname(0, 302),
       ' 与 ',
-      sys_get_colored_callname(0, 302),
+      sys_get_colored_callname(0, 301),
       ' 的命令了。',
     ]);
     await era.printAndWait([
@@ -187,7 +187,7 @@ module.exports = (handlers) => {
     ]);
     await me.say_and_wait(['力点、支点、作用点……']);
     await me.say_and_wait(['力点、支点、作用点……']);
-    await acute.say_and_wait(['……呐，', callname, '；你在念叨着什么咒语啊？']);
+    await acute.say_and_wait(['……呐，', callname, '，你在念叨着什么咒语啊？']);
     await era.printAndWait(['！？', acute.get_colored_name(), '！？']);
     await era.printAndWait([
       me.get_colored_name(),
@@ -197,7 +197,10 @@ module.exports = (handlers) => {
       me.get_colored_name(),
       ' 的身旁。',
     ]);
-    await me.say_and_wait([acute.get_colored_name(), '？你什么时候来的？']);
+    await me.say_and_wait([
+      sys_get_colored_callname(0, 100),
+      '？你什么时候来的？',
+    ]);
     await acute.say_and_wait([
       '……在 ',
       me.actual_name,
@@ -234,7 +237,7 @@ module.exports = (handlers) => {
       callname,
       ' 中邪了呢……',
     ]);
-    await era.printAndWait(['中邪？']);
+    await me.say_and_wait(['中邪？']);
     await acute.say_and_wait([
       '是啊，毕竟 ',
       callname,
@@ -276,12 +279,12 @@ module.exports = (handlers) => {
     await acute.say_and_wait([
       '呐，',
       callname,
-      '；按年龄来说，我可比你要小哦？',
+      '，按年龄来说，我可比你要小哦？',
     ]);
     await era.printAndWait([
-      '并不是生气，而只是温和得纠正；',
+      '并不是生气，而只是温和地纠正；',
       acute.get_colored_name(),
-      ' 只是在不紧不慢的说着。',
+      ' 只是在不紧不慢地说着。',
     ]);
     await era.printAndWait([
       '随后，',
@@ -401,7 +404,7 @@ module.exports = (handlers) => {
       '在不知是谁的提议下；休息室内的教职员们便围了起来，掏出了藏在抽屉夹层里的扑克牌。随即，教职员工办公室内充斥着欢乐的空气。',
     ]);
     await era.printAndWait([
-      '既然是大人了，那自然是要赌上些什么的。可不管堵上些什么，',
+      '既然是大人了，那自然是要赌上些什么的。可不管赌上些什么，',
       me.get_colored_name(),
       ' 都有绝对的自信，自己不可能输给任何人。',
     ]);

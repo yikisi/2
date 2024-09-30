@@ -1,14 +1,18 @@
 # [EraUma v1.0](https://gitgud.io/umaera/erauma/-/releases/1.0)
-_incoming_
+_2024/10/24_
 
 EraUma v1.0，适配 [EraElectron v2.2.1 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/permalink/latest) 版本
 
+因为变量经过重新排序，需要重开档
+
+1.0将是近期最后一个需要重开档的主要版本，以后的版本将实装存档转换以向前兼容
+
 ## Added
 
-* 追加实装了以下角色的部分调教口上
-  * 爱丽速子
+* 追加实装以下角色的加笔事件
   * 奇锐骏
-* 追加实装以下角色的部分加笔事件
+* 追加实装以下角色的部分调教口上
+  * 爱丽速子
   * 奇锐骏
 
 ## Changed
@@ -28,6 +32,7 @@ EraUma v1.0，适配 [EraElectron v2.2.1 (ginga)](https://gitgud.io/umaera/era-e
     * 玉藻十字mec脚本中对资深年宝冢纪念唤出秋津帝王（使用独立立绘）的处理
 * 优化了游戏中版本号的显示
 * 现在当孩子被自动取名为非后代产驹库中的名字时，玩家拥有一次改名的机会
+* 在性爱情况界面增加了监禁次数的显示
 
 ## Fixed
 

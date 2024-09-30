@@ -460,6 +460,8 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               await sys_call_ero_script(action.chara_id, ero_hooks.prison, {
                 shown: false,
               });
+              era.add(`exp:${action.chara_id}:监禁次数`, 1);
+              era.add('exp:0:监禁次数', 1);
               if (rescue_result_type !== 3) {
                 my_life_marks.b_now = my_life_marks.b_enhance = Math.max(
                   life_marks.b_s_level + get_random_value(-1, 1),
