@@ -678,134 +678,140 @@ handlers[event_hooks.back_school] = async (hook, extra_flag, event_object) => {
   ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，味道怎么样？`);
       era.printButton('「非常美味」', 1);
       await era.input();
-      await chara_talk.say_and_wait(`
-  真的吗!那${me.name}也来喂我吧？`);
-      await chara_talk.say_and_wait(`
- 啊~嗯`);
+      await chara_talk.say_and_wait(`  真的吗!那${me.name}也来喂我吧？`);
+      await chara_talk.say_and_wait(` 啊~嗯`);
       await era.printAndWait(`
   ${chara_talk.name}正催促着${me.name}的行动,双耳抖动得更加激烈了.`);
       era.printButton('「只能上了！」', 1);
       await era.input();
-      await era.printAndWait(`
-  ${me.name}努力平复心中的激动,从圣代里挖出一大勺，颤颤惊惊的放进了${
-    chara_talk.sex_code - 1 ? '她' : '他'
-  }的樱桃般的小嘴里.`);
-      await era.printAndWait(`
-  ${
-    chara_talk.sex_code - 1 ? '她' : '他'
-  }那明亮的,整齐的,珐琅质的牙齿似乎也带着一丝深情.`);
-      await chara_talk.say_and_wait(`
-  味道真不错⭐${
-    era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-  },接下来换我来喂${me.name}吧♪`);
-      await era.printAndWait(`
- 嘴角微微凹下的${chara_talk.sex_code - 1 ? '她' : '他'}，隐隐间带着一丝笑意.`);
-      await era.printAndWait(`
- 之后${me.name}和${chara_talk.sex_code - 1 ? '她' : '他'}默默无言,${
-   me.name
- }一勺我一勺地喂对方吃下了自己勺中的圣代.`);
-      await era.printAndWait(`
- 黄昏带来的淡淡忧伤感似乎也被${
-   chara_talk.sex_code - 1 ? '她' : '他'
- }的身影所冲淡.`);
-      await chara_talk.say_and_wait(`
-要一起去海边兜风吗，小塔好像也跃跃欲试呢♪`);
-      await era.printAndWait(`
- ${chara_talk.sex_code - 1 ? '她' : '他'}带着期待的目光看向了${me.name}.`);
+      await era.printAndWait(
+        `  ${me.name}努力平复心中的激动,从圣代里挖出一大勺，颤颤惊惊的放进了${chara_talk.sex_code - 1 ? '她' : '他'}的樱桃般的小嘴里.`,
+      );
+      await era.printAndWait(
+        `  ${chara_talk.sex_code - 1 ? '她' : '他'}那明亮的,整齐的,珐琅质的牙齿似乎也带着一丝深情.`,
+      );
+      await chara_talk.say_and_wait(
+        `  味道真不错⭐${
+          era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
+        },接下来换我来喂${me.name}吧♪`,
+      );
+      await era.printAndWait(
+        ` 嘴角微微凹下的${chara_talk.sex_code - 1 ? '她' : '他'}，隐隐间带着一丝笑意.`,
+      );
+      await era.printAndWait(
+        ` 之后${me.name}和${chara_talk.sex_code - 1 ? '她' : '他'}默默无言,${me.name}一勺我一勺地喂对方吃下了自己勺中的圣代.`,
+      );
+      await era.printAndWait(
+        ` 黄昏带来的淡淡忧伤感似乎也被${chara_talk.sex_code - 1 ? '她' : '他'}的身影所冲淡.`,
+      );
+      await chara_talk.say_and_wait(
+        `要一起去海边兜风吗，小塔好像也跃跃欲试呢♪`,
+      );
+      await era.printAndWait(
+        ` ${chara_talk.sex_code - 1 ? '她' : '他'}带着期待的目光看向了${me.name}.`,
+      );
       era.printButton('「出发吧」', 1);
       await era.input();
-      await era.printAndWait(`
-呵呵♪我就知道${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }会这么说。`);
-      await chara_talk.say_and_wait(`
- 那么,现在就出发吧！`);
-      await era.printAndWait(`
-沉默的店主默默将餐点与饮品收拾好后,细细打量着${me.name}`);
-      await era.printAndWait(`
-一炷香后,才向${me.name}点了点头，似乎是认可了${me.name}的样子.`);
-      await chara_talk.say_and_wait(`
- ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'},该出发了！`);
-      await era.printAndWait(`
- ${chara_talk.name}在门口轻声催促着${me.name}.`);
-      await era.printAndWait(`
-  ${me.name}从钱包中抽出马币准备付款时,店主略微摇了摇头,然后继续擦起了高脚杯.`);
+      await era.printAndWait(
+        `呵呵♪我就知道${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}会这么说。`,
+      );
+      await chara_talk.say_and_wait(` 那么,现在就出发吧！`);
+      await era.printAndWait(
+        `沉默的店主默默将餐点与饮品收拾好后,细细打量着${me.name}`,
+      );
+      await era.printAndWait(
+        `一炷香后,才向${me.name}点了点头，似乎是认可了${me.name}的样子.`,
+      );
+      await chara_talk.say_and_wait(
+        ` ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'},该出发了！`,
+      );
+      await era.printAndWait(` ${chara_talk.name}在门口轻声催促着${me.name}.`);
+      await era.printAndWait(
+        `  ${me.name}从钱包中抽出马币准备付款时,店主略微摇了摇头,然后继续擦起了高脚杯.`,
+      );
       era.printButton('「......谢谢」', 1);
       await era.input();
-      await era.printAndWait(`
-  然后${me.name}正准备离开时`);
-      await era.printAndWait(`
-  店主:这位客人,与${me.name}的小女友好好度过吧.`);
-      await era.printAndWait(`
-  带着磁性而厚重的声音从${me.name}的左侧传来,${me.name}愕然回头,发现店主严肃中带着一丝略微不可察觉的笑意看着${me.name}.`);
-      await era.printAndWait(`
-  店主:本店也要打烊了,客人还有什么事情吗？`);
-      await era.printAndWait(`
-  于是${me.name}头也不回地离开了这里，走向了${chara_talk.name}所在的门口.`);
-      await chara_talk.say_and_wait(`
-  ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'},怎么这么久啊，我带${
-    me.name
-  }出去吧,毕竟这里没有熟悉的人引导是很容易迷路的呦！`);
-      await era.printAndWait(`
-在七拐八拐后从商业街熙熙攘攘的人流之中窜出属实让${me.name}大感意外.没花多久坐上小塔后,${me.name}开始与${chara_talk.name}闲聊起来了.`);
-      await chara_talk.say_and_wait(`
-  哼哼♪${
-    era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
-  }我品味很不错吧,这可是我妈妈推荐的店哦！`);
+      await era.printAndWait(`  然后${me.name}正准备离开时`);
+      await era.printAndWait(`  店主:这位客人,与${me.name}的小女友好好度过吧.`);
+      await era.printAndWait(
+        `  带着磁性而厚重的声音从${me.name}的左侧传来,${me.name}愕然回头,发现店主严肃中带着一丝略微不可察觉的笑意看着${me.name}.`,
+      );
+      await era.printAndWait(`  店主:本店也要打烊了,客人还有什么事情吗？`);
+      await era.printAndWait(
+        `  于是${me.name}头也不回地离开了这里，走向了${chara_talk.name}所在的门口.`,
+      );
+      await chara_talk.say_and_wait(
+        `  ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'},怎么这么久啊，我带${me.name}出去吧,毕竟这里没有熟悉的人引导是很容易迷路的呦！`,
+      );
+      await era.printAndWait(
+        `在七拐八拐后从商业街熙熙攘攘的人流之中窜出属实让${me.name}大感意外.没花多久坐上小塔后,${me.name}开始与${chara_talk.name}闲聊起来了.`,
+      );
+      await chara_talk.say_and_wait(
+        `  哼哼♪${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我品味很不错吧,这可是我妈妈推荐的店哦！`,
+      );
       era.printButton('「那位店主年龄看上去蛮大了」', 1);
       await era.input();
-      await chara_talk.say_and_wait(`
-  因为他已经经营这家店铺三十年了,我小时候就和父母一起来这边喝咖啡吃甜点了.`);
-      await chara_talk.say_and_wait(`
-  虽然店主看起来很严厉，其实他是一个好人呢！`);
-      await era.printAndWait(`
-  就这样一问一答,进入了环山高速之后，车流便渐渐稀疏起来`);
-      await chara_talk.say_and_wait(`
-果然像这样子和训练员还有小塔一起兜风的感觉真是舒服啊，跟随着激烈的节拍，心情仿佛也一下子高涨了起来了！`);
-      await era.printAndWait(`
-${chara_talk.name}的耳朵伴随的激烈的节奏打起了节拍,${me.name}似乎稍微跟不上${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }的节奏了.`);
-      await era.printAndWait(`
- 在仿佛经过一个世纪才满满舒缓下来的激烈节奏后，伴随着小塔驶出高速车道，${me.name}总算舒了一口气。`);
-      await chara_talk.say_and_wait(`
-呵呵♪风的气息吹拂在脸上的感觉真是令人心潮澎湃，小塔也很高兴呢♪`);
-      await chara_talk.say_and_wait(`
-.......${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，${
-        me.name
-      }还好吗。`);
-      await era.printAndWait(`
-${chara_talk.name}放慢了车速，${me.name}的灵魂终于从三女神那回到了自己的身体里`);
-      await chara_talk.say_and_wait(`
-对不起，没有考虑到训练员的状态，作为${
-        era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
-      }我还真是失策.`);
-      await era.printAndWait(`
-${chara_talk.name}的两只耳朵耷拉了下来，带着愧疚和担心的复杂眼神射向了${me.name}`);
+      await chara_talk.say_and_wait(
+        `  因为他已经经营这家店铺三十年了,我小时候就和父母一起来这边喝咖啡吃甜点了.`,
+      );
+      await chara_talk.say_and_wait(
+        `  虽然店主看起来很严厉，其实他是一个好人呢！`,
+      );
+      await era.printAndWait(
+        `  就这样一问一答,进入了环山高速之后，车流便渐渐稀疏起来`,
+      );
+      await chara_talk.say_and_wait(
+        `果然像这样子和训练员还有小塔一起兜风的感觉真是舒服啊，跟随着激烈的节拍，心情仿佛也一下子高涨了起来了！`,
+      );
+      await era.printAndWait(
+        `${chara_talk.name}的耳朵伴随的激烈的节奏打起了节拍,${me.name}似乎稍微跟不上${chara_talk.sex_code - 1 ? '她' : '他'}的节奏了.`,
+      );
+      await era.printAndWait(
+        ` 在仿佛经过一个世纪才满满舒缓下来的激烈节奏后，伴随着小塔驶出高速车道，${me.name}总算舒了一口气。`,
+      );
+      await chara_talk.say_and_wait(
+        `呵呵♪风的气息吹拂在脸上的感觉真是令人心潮澎湃，小塔也很高兴呢♪`,
+      );
+      await chara_talk.say_and_wait(
+        `.......${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，${me.name}还好吗。`,
+      );
+      await era.printAndWait(
+        `${chara_talk.name}放慢了车速，${me.name}的灵魂终于从三女神那回到了自己的身体里`,
+      );
+      await chara_talk.say_and_wait(
+        `对不起，没有考虑到训练员的状态，作为${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我还真是失策.`,
+      );
+      await era.printAndWait(
+        `${chara_talk.name}的两只耳朵耷拉了下来，带着愧疚和担心的复杂眼神射向了${me.name}`,
+      );
       era.printButton('「没有这回事，能够感受到风的气息我也很开心」', 1);
       await era.input();
-      await era.printAndWait(`
-${chara_talk.name}的耳朵又立刻竖了起来，耳朵也开始随着车载音响播放的shoreline一抖一抖的打着节拍`);
-      await chara_talk.say_and_wait(`
-训练员真是个温柔的人呢，连${
-        era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
-      }我都觉得喜欢上${me.name}是个正确的决定呢♪`);
-      await chara_talk.say_and_wait(`
-不过话说回来，${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }每天都要负责这么多孩子，身体吃的消吗？`);
+      await era.printAndWait(
+        `${chara_talk.name}的耳朵又立刻竖了起来，耳朵也开始随着车载音响播放的shoreline一抖一抖的打着节拍`,
+      );
+      await chara_talk.say_and_wait(
+        `训练员真是个温柔的人呢，连${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我都觉得喜欢上${me.name}是个正确的决定呢♪`,
+      );
+      await chara_talk.say_and_wait(
+        `不过话说回来，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}每天都要负责这么多孩子，身体吃的消吗？`,
+      );
       era.printButton('「摇头」', 1);
       await era.input();
-      await chara_talk.say_and_wait(`
-嗯嗯，这样最好不过了，训练员也真是一个辛苦的职业啊.`);
-      await chara_talk.say_and_wait(`
-不过看着孩子们一点点褪去青涩的外壳逐渐成熟追逐着自己的梦想，我也有一种说不清的感动和愉悦的心情.`);
-      await chara_talk.say_and_wait(`
-或许训练员与${chara_talk.get_uma_sex_title()}之间的关系，也就是作为师傅与徒弟一样.`);
-      await chara_talk.say_and_wait(`
-看着孩子们从刚接触的陌生与打量走向亲密与信赖，然后在三年的目标结束之后.`);
-      await chara_talk.say_and_wait(`
-作为师傅的训练员与身为徒弟的${chara_talk.get_uma_sex_title()}积累了非常深厚的羁绊，这份羁绊又化作力量带来了奇迹,然后二人朝着更大的目标前进.`);
+      await chara_talk.say_and_wait(
+        `嗯嗯，这样最好不过了，训练员也真是一个辛苦的职业啊.`,
+      );
+      await chara_talk.say_and_wait(
+        `不过看着孩子们一点点褪去青涩的外壳逐渐成熟追逐着自己的梦想，我也有一种说不清的感动和愉悦的心情.`,
+      );
+      await chara_talk.say_and_wait(
+        `或许训练员与${chara_talk.get_uma_sex_title()}之间的关系，也就是作为师傅与徒弟一样.`,
+      );
+      await chara_talk.say_and_wait(
+        `看着孩子们从刚接触的陌生与打量走向亲密与信赖，然后在三年的目标结束之后.`,
+      );
+      await chara_talk.say_and_wait(
+        `作为师傅的训练员与身为徒弟的${chara_talk.get_uma_sex_title()}积累了非常深厚的羁绊，这份羁绊又化作力量带来了奇迹,然后二人朝着更大的目标前进.`,
+      );
       era.printButton(
         `「作为训练员,衷心祝愿自己所负责的${chara_talk.get_uma_sex_title()}能在追求目标的道路上一帆风顺」`,
         1,
@@ -814,9 +820,7 @@ ${chara_talk.name}的耳朵又立刻竖了起来，耳朵也开始随着车载�
       era.printButton('「除此之外，再向前一步就是三女神的宠爱了」', 1);
       await era.input();
       await chara_talk.say_and_wait(
-        `呵呵♪训练员真是给了我一个有趣的答复，作为${chara_talk.get_uma_sex_title()}我也希望能在这三年内能和${
-          era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-        }一起积累更多美好的回忆呢.`,
+        `呵呵♪训练员真是给了我一个有趣的答复，作为${chara_talk.get_uma_sex_title()}我也希望能在这三年内能和${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}一起积累更多美好的回忆呢.`,
       );
       await chara_talk.say_and_wait(
         ` 那么接下来也请多指教了,${era.get('cflag:0:性别') - 1 ? '训·练·员·酱' : '训·练·员·君'}♪`,
@@ -837,107 +841,113 @@ ${chara_talk.name}的耳朵又立刻竖了起来，耳朵也开始随着车载�
       era.println();
       era.println();
       era.println();
-      await era.printAndWait(`
-十分钟后`);
-      await chara_talk.say_and_wait(`
-到了哟，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}快醒一醒.`);
-      await era.printAndWait(`
-揉着还未睡醒的双眼，下意识地打了一个满足的呵欠,${me.name}试图从晕厥的感觉之中迅速恢复`);
-      await era.printAndWait(`
-波浪被礁石打碎成悉悉索索的浪花，随着涨潮之时大海带来的礼物，海星和贝壳在落潮之时又悄声无息的消失不见.`);
-      await era.printAndWait(`
-月亮在闪耀的星星们的簇拥下逐渐登上了高处.`);
-      await era.printAndWait(`
-此刻的大海在海浪的声音中显得更安静.`);
-      await era.printAndWait(`
-两人关上车门走向海滩，大海向恋人们展示着自己温柔的一面.`);
-      await era.printAndWait(`
-真安静呢，${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }也是这么想的吧。`);
-      await chara_talk.say_and_wait(`
-真安静呢，${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }也是这么想的吧。`);
-      await era.printAndWait(`
-${chara_talk.name}将脚上的高跟鞋脱了下来，赤足走向了海浪之中.`);
-      await chara_talk.say_and_wait(`
-${
-  era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-}也来感受一下海水的亲吻吧.`);
-      await era.printAndWait(`
-${me.name}在${chara_talk.name}的邀请下同样将鞋子脱下慢慢走向波浪`);
-      await era.printAndWait(`
-海水卷起一朵朵浪花,那些浪花像孩童一样嬉闹着涌向岸边，细细抚摸着柔软的沙滩,又恋恋不舍的退回`);
-      await era.printAndWait(`
-在永恒的抚摸之下,沙滩上划出了一条条银色的岸边,在月光的照耀下,似乎给大海镶上了闪闪发光的银框`);
-      await era.printAndWait(`
-大自然是最好的画家. `);
-      await era.printAndWait(`
-${chara_talk.name}左手提起自己的裙摆，身体自然的半转向${me.name}.月光给${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }披上了不可侵犯的神圣外衣,海浪拍打礁石激起水汽又带来了一丝朦胧的诱惑,永不停息的海浪又仿佛喻示着少女内心的波澜.`);
-      await era.printAndWait(`
-可能连${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }自己都没有意识到,在大自然那无形的画笔之下,自己成了这副镶嵌着银色相框油画的主角.`);
-      await chara_talk.say_and_wait(`
-月色真美呢，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}.`);
+      await era.printAndWait(`十分钟后`);
+      await chara_talk.say_and_wait(
+        `到了哟，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}快醒一醒.`,
+      );
+      await era.printAndWait(
+        `揉着还未睡醒的双眼，下意识地打了一个满足的呵欠,${me.name}试图从晕厥的感觉之中迅速恢复`,
+      );
+      await era.printAndWait(
+        `波浪被礁石打碎成悉悉索索的浪花，随着涨潮之时大海带来的礼物，海星和贝壳在落潮之时又悄声无息的消失不见.`,
+      );
+      await era.printAndWait(`月亮在闪耀的星星们的簇拥下逐渐登上了高处.`);
+      await era.printAndWait(`此刻的大海在海浪的声音中显得更安静.`);
+      await era.printAndWait(
+        `两人关上车门走向海滩，大海向恋人们展示着自己温柔的一面.`,
+      );
+      await era.printAndWait(
+        `真安静呢，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}也是这么想的吧。`,
+      );
+      await chara_talk.say_and_wait(
+        `真安静呢，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}也是这么想的吧。`,
+      );
+      await era.printAndWait(
+        `${chara_talk.name}将脚上的高跟鞋脱了下来，赤足走向了海浪之中.`,
+      );
+      await chara_talk.say_and_wait(
+        `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}也来感受一下海水的亲吻吧.`,
+      );
+      await era.printAndWait(
+        `${me.name}在${chara_talk.name}的邀请下同样将鞋子脱下慢慢走向波浪`,
+      );
+      await era.printAndWait(
+        `海水卷起一朵朵浪花,那些浪花像孩童一样嬉闹着涌向岸边，细细抚摸着柔软的沙滩,又恋恋不舍的退回`,
+      );
+      await era.printAndWait(
+        `在永恒的抚摸之下,沙滩上划出了一条条银色的岸边,在月光的照耀下,似乎给大海镶上了闪闪发光的银框`,
+      );
+      await era.printAndWait(`大自然是最好的画家. `);
+      await era.printAndWait(
+        `${chara_talk.name}左手提起自己的裙摆，身体自然的半转向${me.name}.月光给${
+          chara_talk.sex_code - 1 ? '她' : '他'
+        }披上了不可侵犯的神圣外衣,海浪拍打礁石激起水汽又带来了一丝朦胧的诱惑,永不停息的海浪又仿佛喻示着少女内心的波澜.`,
+      );
+      await era.printAndWait(
+        `可能连${
+          chara_talk.sex_code - 1 ? '她' : '他'
+        }自己都没有意识到,在大自然那无形的画笔之下,自己成了这副镶嵌着银色相框油画的主角.`,
+      );
+      await chara_talk.say_and_wait(
+        `月色真美呢，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}.`,
+      );
       era.printButton('「风也很温柔呢」', 1);
       await era.input();
-      await chara_talk.say_and_wait(`
-呵呵♪${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}可真会说话呢.`);
-      await era.printAndWait(`
-说话之间${me.name}轻轻搂住了${chara_talk.name}的腰，虽然${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }像触电一样颤抖了一下，不过似乎对${me.name}的行为也没有抵触的举动.`);
-      await chara_talk.say_and_wait(`
-${
-  era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-}没有想过未经同意突然抱住淑女会受到什么惩罚吗?`);
-      await era.printAndWait(`
-那双青色的瞳孔中蕴含着一种吸引力，当${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }凝视着${me.name}的时候，${me.name}的视线便很难移开，但却并不让人压抑。`);
-      await era.printAndWait(`
-如同变幻不定的风之妖姬一样,${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }是天空的光线、声音、海洋或者陆地的味道.`);
+      await chara_talk.say_and_wait(
+        `呵呵♪${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}可真会说话呢.`,
+      );
+      await era.printAndWait(
+        `说话之间${me.name}轻轻搂住了${chara_talk.name}的腰，虽然${
+          chara_talk.sex_code - 1 ? '她' : '他'
+        }像触电一样颤抖了一下，不过似乎对${me.name}的行为也没有抵触的举动.`,
+      );
+      await chara_talk.say_and_wait(
+        `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}没有想过未经同意突然抱住淑女会受到什么惩罚吗?`,
+      );
+      await era.printAndWait(
+        `那双青色的瞳孔中蕴含着一种吸引力，当${chara_talk.sex_code - 1 ? '她' : '他'}凝视着${me.name}的时候，${me.name}的视线便很难移开，但却并不让人压抑。`,
+      );
+      await era.printAndWait(
+        `如同变幻不定的风之妖姬一样,${chara_talk.sex_code - 1 ? '她' : '他'}是天空的光线、声音、海洋或者陆地的味道.`,
+      );
       era.printButton('「!?」', 1);
       await era.input();
-      await era.printAndWait(`
-${me.name}的嘴唇传来了温柔的感触.`);
-      await chara_talk.say_and_wait(`
-真是的,${
-        era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }一点也不坦率呢.这个时候不主动一点的话会让人焦躁不安的呦.`);
-      await era.printAndWait(`
-从一开始试探般的轻啄,到后来逐渐加快地节奏,最后以重重的深吻作为结尾.直到${me.name}呼吸不过来才依依不舍地分开.`);
-      await era.printAndWait(`
-两人的嘴唇之间拉出了一道银丝.${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }带着无限爱意而又温柔的表情看向了${me.name}.`);
-      await era.printAndWait(`
-${me.name}下意识地紧紧抱住了${chara_talk.sex_code - 1 ? '她' : '他'},${
-        chara_talk.sex_code - 1 ? '她' : '他'
-      }同样也轻抚着${me.name}的脸颊作为回应.`);
-      await era.printAndWait(`
-在冰凉的海水中,只有那如同灯塔般温暖的感觉停留了好久.`);
+      await era.printAndWait(`${me.name}的嘴唇传来了温柔的感触.`);
+      await chara_talk.say_and_wait(
+        `真是的,${
+          era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
+        }一点也不坦率呢.这个时候不主动一点的话会让人焦躁不安的呦.`,
+      );
+      await era.printAndWait(
+        `从一开始试探般的轻啄,到后来逐渐加快地节奏,最后以重重的深吻作为结尾.直到${me.name}呼吸不过来才依依不舍地分开.`,
+      );
+      await era.printAndWait(
+        `两人的嘴唇之间拉出了一道银丝.${
+          chara_talk.sex_code - 1 ? '她' : '他'
+        }带着无限爱意而又温柔的表情看向了${me.name}.`,
+      );
+      await era.printAndWait(
+        `${me.name}下意识地紧紧抱住了${chara_talk.sex_code - 1 ? '她' : '他'},${
+          chara_talk.sex_code - 1 ? '她' : '他'
+        }同样也轻抚着${me.name}的脸颊作为回应.`,
+      );
+      await era.printAndWait(
+        `在冰凉的海水中,只有那如同灯塔般温暖的感觉停留了好久.`,
+      );
       get_attr_and_print_in_event(4, [0, 0, 0, 0, 20], 0) &&
         (await era.waitAnyKey());
     } else {
       era.printButton('「非常抱歉我还有工作要去处理」', 1);
       await era.input();
-      await chara_talk.say_and_wait(`
-  ......这样吗，${
-    era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-  }.不过这样是没办法的事情呢.`);
-      await era.printAndWait(`
-  ${me.name}沉默着拿起公文包头也不回地离开了喫茶店，不过很快在七拐八拐的小道里迷路了.`);
-      await era.printAndWait(`
-  最后搭了好心大叔的顺风车${me.name}才勉强在门禁前赶回宿舍.`);
-      await era.printAndWait(`
-  (铛铛铛，${me.name}与大叔的友情值♂上升了！)`);
+      await chara_talk.say_and_wait(
+        `哎呀，既然这样的话那就快去处理吧，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，好好工作才能得到最终的报酬.`,
+      );
+      await era.printAndWait(
+        `  ${me.name}沉默着拿起公文包头也不回地离开了喫茶店，不过很快在七拐八拐的小道里迷路了.`,
+      );
+      await era.printAndWait(
+        `  最后搭了好心大叔的顺风车${me.name}才勉强在门禁前赶回宿舍.`,
+      );
       get_attr_and_print_in_event(4, [0, 0, 0, 20, 0], 0) &&
         (await era.waitAnyKey());
     }

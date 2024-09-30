@@ -261,7 +261,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + 18:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 5月第四周 前辈与后辈
+        // 5月第四周 闲暇日
         case 95 + 23:
           add_event(event_hooks.week_end, event_obj_special);
           break;
@@ -269,12 +269,12 @@ module.exports = class extends CustomizedCheck {
         case 95 + 29:
           add_event(event_hooks.week_start, event_obj_special);
           break;
+        // 8月第二周 庙会
+        case 95 + 30:
+          add_event(event_hooks.week_start, event_obj_special);
+          break;
         // 8月第四周 夏季合宿结束
         case 95 + 32:
-          add_event(event_hooks.week_end, event_obj_special);
-          break;
-        // 9月第一周 向日葵
-        case 95 + 33:
           add_event(event_hooks.week_end, event_obj_special);
           break;
         // 10月第一周 顶级偶像之路

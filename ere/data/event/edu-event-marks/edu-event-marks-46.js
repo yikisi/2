@@ -35,6 +35,8 @@ class FalconEduMarks extends EduEventMarks {
   after_recruit;
   // TE 偶像
   idol;
+  // GE 安可曲
+  encore;
 
   constructor() {
     super(46);
