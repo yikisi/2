@@ -335,6 +335,7 @@ handlers[74] = async (tachyon, me, callname) => {
 };
 
 handlers[89] = async (tachyon, me, callname) => {
+  await print_event_name('Now or Forever', tachyon);
   await tachyon.say_and_wait([callname, '～～']);
   await tachyon.say_and_wait([callname, '～～～？']);
   await tachyon.say_and_wait([callname, '！！']);
@@ -705,6 +706,8 @@ handlers[89] = async (tachyon, me, callname) => {
     era.set('cflag:32:爱慕暂拒', 89);
   }
 };
+
+handlers[99] = require('#/event/love/love-events-32/half-life');
 
 /**
  * @param _

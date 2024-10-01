@@ -134,7 +134,7 @@ module.exports = (handlers) => {
           await defender.say_and_wait('咕姆姆……噗、啪……咕哈……');
           await attacker.print_and_wait([
             sys_get_colored_callname(attacker.id, defender.id),
-            ' 如同猛兽进食般凶猛得吞咽着口中的巨物，一遍遍用自己的唾液在肉棒上标记着自己的记号。',
+            ' 如同猛兽进食般凶猛地吞咽着口中的巨物，一遍遍用自己的唾液在肉棒上标记着自己的记号。',
           ]);
           await attacker.print_and_wait([
             '伴随着一次又一次的吞咽，',
@@ -195,4 +195,88 @@ module.exports = (handlers) => {
       hook,
       extra_flag,
     );
+
+  handlers[ero_hooks.double_suck_nipple] = async (
+    attacker,
+    defender,
+    hook,
+    extra_flag,
+  ) => {
+    if (attacker.id !== 0 || defender.id !== 100 || defender.sex_code === 1) {
+      throw new Error();
+    }
+    const supporter = get_chara_talk(extra_flag.supporter),
+      message = [];
+    if (hook.arg) {
+      message.push(
+        async () => {
+          await defender.say_and_wait([
+            '哎嘿嘿……',
+            sys_get_colored_callname(defender.id, attacker.id),
+            ' 跟 ',
+            sys_get_colored_callname(defender.id, supporter.id),
+            ' 就像孩子一样呢～',
+          ]);
+          await attacker.print_and_wait([
+            '粉染的脸颊上，露出的依旧是温和的笑容。',
+          ]);
+          await attacker.print_and_wait([
+            '抚着 ',
+            sys_get_colored_callname(defender.id, attacker.id),
+            ' 与 ',
+            sys_get_colored_callname(defender.id, supporter.id),
+            ' 的头，奇锐骏满脸宠爱地望着眼前的孩子。',
+          ]);
+        },
+        async () => {
+          await attacker.print_and_wait([
+            '……兴许是吸吮粉嫩的乳首太过用力的缘故，',
+            sys_get_colored_callname(attacker.id, defender.id),
+            ' 嘟起了嘴、朝向我的脑袋上轻轻地敲了三下。',
+          ]);
+          await defender.say_and_wait([
+            '不要一个人喝完嘛……要给 ',
+            sys_get_colored_callname(defender.id, supporter.id),
+            ' 留一点才行哦。',
+          ]);
+          await attacker.print_and_wait('绯染的脸颊上，满载着粉色的爱意。');
+        },
+      );
+    } else {
+      message.push(
+        async () => {
+          await defender.say_and_wait([
+            '嗯～……不用那么心急的啦，我的胸部一直都在这里的哦～',
+          ]);
+          await attacker.print_and_wait([
+            '抚摸着眼前正吸吮自己乳首的二人，',
+            sys_get_colored_callname(attacker.id, defender.id),
+            ' 的眼神中闪过了一丝慈爱之心。',
+          ]);
+          await defender.say_and_wait([
+            '不过，别光顾着吸胸部哦？别忘了还有其他的事情要做呢～',
+          ]);
+          await attacker.print_and_wait(
+            '如是说着，伴随着手指的草弄，却不知是何人粉嫩的下身开始闪烁起晶莹的水花——',
+          );
+        },
+        async () => {
+          await defender.say_and_wait([
+            sys_get_colored_callname(defender.id, attacker.id),
+            ' 看起来喝的很美味的样子。太好了呢，',
+            sys_get_colored_callname(defender.id, supporter.id),
+            '～',
+          ]);
+          await attacker.print_and_wait([
+            '抚着胸前我的头，',
+            sys_get_colored_callname(supporter.id, defender.id),
+            ' 向 ',
+            sys_get_colored_callname(attacker.id, supporter.id),
+            ' 莞尔一笑。',
+          ]);
+        },
+      );
+    }
+    await get_random_entry(message)();
+  };
 };

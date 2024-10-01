@@ -50,6 +50,10 @@ class CustomizedCheck {
     this.id = chara_id;
   }
 
+  /** @param {number[]} partners */
+  // eslint-disable-next-line no-unused-vars
+  check_after_betrayed(partners) {}
+
   /** @param {number} level */
   // eslint-disable-next-line no-unused-vars
   check_after_punish(level) {}

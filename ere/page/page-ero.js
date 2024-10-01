@@ -18,6 +18,7 @@ const {
 } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -886,6 +887,7 @@ async function page_ero(lover, skip_start_end) {
         (punish_option || era.get(`talent:${e}:病娇`)),
     );
     for (const chara_id of punish_list) {
+      get_custom_check(chara_id).check_after_betrayed(partner_list);
       wait_flag =
         (await sys_call_ero_event(chara_id, ero_hooks.after_betrayed, {
           partners: partner_list,
