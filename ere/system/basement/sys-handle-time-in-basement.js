@@ -489,8 +489,9 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         let stamina_delta, time_delta;
         if (
           era.get(`status:${e}:马跳S`) ||
-          (era.get(`status:${e}:沉睡`) & 2) > 0
+          Math.abs(era.get(`status:${e}:沉睡`)) === 2
         ) {
+          stamina_delta = 0;
           time_delta = 1;
         } else if (era.get(`status:${e}:沉睡`)) {
           stamina_delta = 0.5;

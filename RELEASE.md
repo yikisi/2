@@ -14,6 +14,8 @@ EraUma v1.0，适配 [EraElectron v2.2.1 (ginga)](https://gitgud.io/umaera/era-e
 * 追加实装以下角色的部分调教口上
   * 爱丽速子
   * 奇锐骏
+* 追加实装以下角色的地下室口上
+  * 春乌拉拉
 * 追加实装了一些随机小事件
 
 ## Changed

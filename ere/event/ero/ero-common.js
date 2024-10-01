@@ -866,6 +866,7 @@ handlers[ero_hooks.after_betrayed] = async (chara_id) => {
     like_betrayed = era.get(`talent:${chara_id}:绿帽癖`);
   switch (era.add(`exp:${chara_id}:被绿次数`, 1)) {
     case 1:
+      era.drawLine();
       await era.printAndWait([
         race ? chara.get_uma_sex_title() + '的鼻子十分灵敏，而 ' : '',
         me.get_colored_name(),
@@ -885,6 +886,7 @@ handlers[ero_hooks.after_betrayed] = async (chara_id) => {
       ]);
       break;
     case 2:
+      era.drawLine();
       await era.printAndWait([
         me.get_colored_name(),
         ' 没有抵受住诱惑，再次背叛了 ',

@@ -176,6 +176,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
         await era.printAndWait([
           '打开门，映入眼帘的是身无寸缕的 ',
           chara.get_colored_name(),
+          '……',
         ]);
         era.printButton('「哦，要一起洗澡吗？」', 1);
         era.printButton('「不好意思打扰了！」', 2);
