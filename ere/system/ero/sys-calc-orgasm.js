@@ -86,6 +86,9 @@ async function sys_calc_orgasm(shown, ...ids) {
       const part = orgasm_check_list[i];
       const part_name = part_names[part];
       const { curr, max, old } = update_palam(chara_id, part, shown);
+      if (era.get(`tcvar:${chara_id}:高潮抑制`)) {
+        continue;
+      }
       let amount = 0,
         cum_flag = false;
       let touched_part = era.get(`tcvar:${chara_id}:${part_name}接触部位`),

@@ -413,8 +413,8 @@ module.exports = {
     ) {
       status_list.push({
         color: buff_colors[2],
-        content: '避孕套溶解剂！',
-        key: '避孕套溶解剂',
+        content: '避孕套溶解！',
+        key: '避孕套溶解',
       });
     }
     if (
@@ -431,11 +431,11 @@ module.exports = {
         key: '寸止',
       });
     }
-    const orgasm_stop = era.get(`tcvar:${chara_id}:高潮阻碍`);
+    const orgasm_stop = era.get(`tcvar:${chara_id}:高潮抑制`);
     if (orgasm_stop) {
       status_list.push({
         color: buff_colors[2],
-        content: '绝顶控制！',
+        content: `绝顶控制！(${orgasm_stop})`,
         key: '绝顶控制',
         opacity: orgasm_stop > 1 ? 1 : 0.5,
       });

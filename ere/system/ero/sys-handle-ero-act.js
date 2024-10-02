@@ -103,7 +103,14 @@ async function next_turn() {
       }
     });
   }
-  await check_orgasm(shown, ...chara_list_in_train);
+  await check_orgasm(
+    shown,
+    ...chara_list_in_train.map((chara_id) => {
+      era.get(`tcvar:${chara_id}:高潮抑制`) &&
+        era.add(`tcvar:${chara_id}:高潮抑制`, -1);
+      return chara_id;
+    }),
+  );
   shown && era.println();
   update_juels(shown, ...chara_list_in_train);
   shown && (await era.waitAnyKey());
