@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201231,
   '奇术师',
-  '在比赛终盘，使前方马娘的视野变得狭窄＜长距离＞',
+  '在比赛终盘，使前方马娘的视野变得狭窄',
   20123,
   2,
   UmaSkill.rarity_enum.gold,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   110,
   false,
   false,
+  [5],
+  [UmaSkill.ability_tag_enum.visible],
 );

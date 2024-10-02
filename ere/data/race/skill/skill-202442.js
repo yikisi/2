@@ -70,4 +70,10 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [],
+  [
+    UmaSkill.ability_tag_enum.speed,
+    UmaSkill.ability_tag_enum.power,
+    UmaSkill.ability_tag_enum.guts,
+  ],
 );

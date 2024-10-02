@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202742,
   '品行方正',
-  '位于最终弯道前的第三弯道时，若在队伍前方则稍微向前突进＜英里/中距离＞',
+  '位于最终弯道前的第三弯道时，若在队伍前方则稍微向前突进',
   20274,
   1,
   UmaSkill.rarity_enum.normal,
@@ -76,4 +76,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [3, 4],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

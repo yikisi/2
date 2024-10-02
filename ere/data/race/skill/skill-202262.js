@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202262,
   '光明的征兆',
-  '比赛接近终盘时，处于前方的话会稍微提升速度＜泥地＞',
+  '比赛接近终盘时，处于前方的话会稍微提升速度',
   20226,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

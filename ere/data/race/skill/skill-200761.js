@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200761,
   '火场怪力',
-  '在即将耗尽体力时，恢复元气，并且提升速度＜长距离＞',
+  '在即将耗尽体力时，恢复元气，并且提升速度',
   20076,
   2,
   UmaSkill.rarity_enum.gold,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [5],
+  [UmaSkill.ability_tag_enum.hpRate, UmaSkill.ability_tag_enum.currentSpeed],
 );

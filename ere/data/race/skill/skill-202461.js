@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202461,
   '绝影',
-  '最终直线在领头位置且后方1马身内有马娘时，速度极大提升＜逃马＞',
+  '最终直线在领头位置且后方1马身内有马娘时，速度极大提升',
   20246,
   2,
   UmaSkill.rarity_enum.gold,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [6],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

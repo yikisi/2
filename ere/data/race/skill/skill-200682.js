@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200682,
   '积极对策',
-  '比赛临近中盘时若身处前方，稍微更容易拉开差距＜英里＞',
+  '比赛临近中盘时若身处前方，稍微更容易拉开差距',
   20068,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [3],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

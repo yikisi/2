@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202522,
   '打破常理',
-  '在最终弯道前的第三弯道上位于后方时，稍微向前突进＜中距离/长距离＞',
+  '在最终弯道前的第三弯道上位于后方时，稍微向前突进',
   20252,
   1,
   UmaSkill.rarity_enum.normal,
@@ -76,4 +76,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [4, 5],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

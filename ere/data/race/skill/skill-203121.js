@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   203121,
   '强者的证明',
-  '比赛中段时若在前方，则提高速度＜先马・中距离＞',
+  '比赛中段时若在前方，则提高速度',
   20312,
   2,
   UmaSkill.rarity_enum.gold,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   170,
   false,
   false,
+  [4, 7],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

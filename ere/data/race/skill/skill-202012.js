@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202012,
   '热场好戏',
-  '比赛接近终盘时，处于前方的话速度会稍微加快＜长距离＞',
+  '比赛接近终盘时，处于前方的话速度会稍微加快',
   20201,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [5],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

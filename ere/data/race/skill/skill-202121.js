@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202121,
   '天地无畏',
-  '比赛后半程处于中间集团的话会提高速度，并且加速度也会稍微提高＜差马＞',
+  '比赛后半程处于中间集团的话会提高速度，并且加速度也会稍微提高',
   20212,
   2,
   UmaSkill.rarity_enum.gold,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.currentSpeed, UmaSkill.ability_tag_enum.accel],
 );

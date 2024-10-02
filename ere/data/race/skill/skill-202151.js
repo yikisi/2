@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202151,
   '勇往直前',
-  '在比赛中盘小幅消耗耐力，大幅提升速度＜差马＞',
+  '在比赛中盘小幅消耗耐力，大幅提升速度',
   20215,
   2,
   UmaSkill.rarity_enum.gold,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.hpRate, UmaSkill.ability_tag_enum.currentSpeed],
 );

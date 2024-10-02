@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201082,
   '速度猎手',
-  '比赛中盘在前方时，略微夺取后方马娘的速度＜英里＞',
+  '比赛中盘在前方时，略微夺取后方马娘的速度',
   20108,
   1,
   UmaSkill.rarity_enum.normal,
@@ -71,4 +71,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [3],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

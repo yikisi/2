@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202311,
   '目标是C位！',
-  '比赛终盘位于前方时，加速度提升＜泥地＞',
+  '比赛终盘位于前方时，加速度提升',
   20231,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.accel],
 );

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200631,
   '疾风怒涛',
-  '在比赛终盘位于后方时，最后冲刺阶段的中段，速度提升＜追马＞',
+  '在比赛终盘位于后方时，最后冲刺阶段的中段，速度提升',
   20063,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [9],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

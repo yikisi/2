@@ -82,4 +82,6 @@ module.exports = new UmaSkill(
   200,
   false,
   true,
+  [],
+  [UmaSkill.ability_tag_enum.accel],
 );

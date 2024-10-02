@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200632,
   '机能拔群',
-  '在比赛终盘位于后方时，最后冲刺阶段的中段，速度稍微提升＜追马＞',
+  '在比赛终盘位于后方时，最后冲刺阶段的中段，速度稍微提升',
   20063,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [9],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

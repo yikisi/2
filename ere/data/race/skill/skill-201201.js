@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201201,
   'VIP颜通行',
-  '想要赶超的愿望在心底涌现，不容易变得疲劳＜长距离＞',
+  '想要赶超的愿望在心底涌现，不容易变得疲劳',
   20120,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [5],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

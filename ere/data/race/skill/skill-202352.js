@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202352,
   '飞尘',
-  '比赛序盘自己保持领先时，使跟在后方的赛马娘速度少量下降＜泥地＞',
+  '比赛序盘自己保持领先时，使跟在后方的赛马娘速度少量下降',
   20235,
   1,
   UmaSkill.rarity_enum.normal,
@@ -75,4 +75,6 @@ module.exports = new UmaSkill(
   120,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

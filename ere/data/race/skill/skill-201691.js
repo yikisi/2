@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201691,
   '潜伏姿态',
-  '比赛临近中盘时，若位于中团以后的位置，恢复持久力＜差马＞',
+  '比赛临近中盘时，若位于中团以后的位置，恢复持久力',
   20169,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

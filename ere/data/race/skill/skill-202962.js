@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202962,
   '冲动',
-  '临近比赛终盘时，若位于中后方则速度稍微提升＜英里＞',
+  '临近比赛终盘时，若位于中后方则速度稍微提升',
   20296,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [3],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

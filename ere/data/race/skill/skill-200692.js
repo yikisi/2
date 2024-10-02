@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200692,
   '窥视展开',
-  '临近比赛中盘并位于后方时，略微不容易疲劳并使前方马娘速度稍微下降＜英里＞',
+  '临近比赛中盘并位于后方时，略微不容易疲劳并使前方马娘速度稍微下降',
   20069,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [3],
+  [UmaSkill.ability_tag_enum.hpRate, UmaSkill.ability_tag_enum.currentSpeed],
 );

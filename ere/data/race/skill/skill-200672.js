@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200672,
   '紧追不舍',
-  '比赛终盘位于后方时，略微容易冲刺＜短距离＞',
+  '比赛终盘位于后方时，略微容易冲刺',
   20067,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [2],
+  [UmaSkill.ability_tag_enum.currentSpeed, UmaSkill.ability_tag_enum.accel],
 );

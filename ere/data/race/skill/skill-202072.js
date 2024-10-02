@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202072,
   '我行我素',
-  '刚进入比赛中盘时若位于队伍中间会略微减慢速度稍微回复持久力＜长距离＞',
+  '刚进入比赛中盘时若位于队伍中间会略微减慢速度稍微回复持久力',
   20207,
   1,
   UmaSkill.rarity_enum.normal,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   170,
   false,
   false,
+  [5],
+  [UmaSkill.ability_tag_enum.hpRate, UmaSkill.ability_tag_enum.currentSpeed],
 );

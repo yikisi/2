@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201481,
   '放学后的专家',
-  '下坡的时不容易变得疲劳＜追马＞',
+  '下坡的时不容易变得疲劳',
   20148,
   2,
   UmaSkill.rarity_enum.gold,
@@ -71,4 +71,6 @@ module.exports = new UmaSkill(
   170,
   false,
   false,
+  [9],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

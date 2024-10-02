@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200762,
   '第二体力槽',
-  '在体力快要耗尽时略微恢复元气＜长距离＞',
+  '在体力快要耗尽时略微恢复元气',
   20076,
   1,
   UmaSkill.rarity_enum.normal,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [5],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

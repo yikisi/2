@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201011,
   '恼杀术',
-  '比赛序盘处于前方时令后方的赛马娘萎缩＜短距离＞',
+  '比赛序盘处于前方时令后方的赛马娘萎缩',
   20101,
   2,
   UmaSkill.rarity_enum.gold,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   170,
   false,
   false,
+  [2],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   203172,
   '擅长切换',
-  '比赛接近中盘时，稍微降低速度；之后在比赛终盘开始时小幅向前突进＜中距离＞',
+  '比赛接近中盘时，稍微降低速度；之后在比赛终盘开始时小幅向前突进',
   20317,
   1,
   UmaSkill.rarity_enum.normal,
@@ -72,4 +72,6 @@ module.exports = new UmaSkill(
   160,
   true,
   false,
+  [4],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200532,
   '先驱',
-  '比赛初期略微容易获得领先＜逃马＞',
+  '比赛初期略微容易获得领先',
   20053,
   1,
   UmaSkill.rarity_enum.normal,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   120,
   false,
   false,
+  [6],
+  [UmaSkill.ability_tag_enum.accel],
 );

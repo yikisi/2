@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   110,
   false,
   false,
+  [],
+  [UmaSkill.ability_tag_enum.power],
 );

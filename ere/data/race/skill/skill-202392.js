@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202392,
   '拼命',
-  '在比赛中盘一开始的地方消耗大量体力，使速度少量提升＜逃马＞',
+  '在比赛中盘一开始的地方消耗大量体力，使速度少量提升',
   20239,
   1,
   UmaSkill.rarity_enum.normal,
@@ -70,4 +70,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [6],
+  [UmaSkill.ability_tag_enum.hpRate, UmaSkill.ability_tag_enum.currentSpeed],
 );

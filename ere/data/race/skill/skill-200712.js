@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200712,
   '前途无量',
-  '比赛中盘在前方时，略微不容易疲劳＜中距离＞',
+  '比赛中盘在前方时，略微不容易疲劳',
   20071,
   1,
   UmaSkill.rarity_enum.normal,
@@ -71,4 +71,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [4],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

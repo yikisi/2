@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201152,
   '束缚',
-  '在比赛终盘位于后方时，略微降低前方赛马娘的速度＜中距离＞',
+  '在比赛终盘位于后方时，略微降低前方赛马娘的速度',
   20115,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [4],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

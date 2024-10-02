@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200991,
   'X计划',
-  '临近比赛终盘并在前方时，容易实现赶超＜短距离＞',
+  '临近比赛终盘并在前方时，容易实现赶超',
   20099,
   2,
   UmaSkill.rarity_enum.gold,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [2],
+  [UmaSkill.ability_tag_enum.accel],
 );

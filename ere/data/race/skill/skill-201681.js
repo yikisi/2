@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201681,
   '目标是最前列！',
-  '比赛终盘采取向前冲刺的姿势＜泥地＞',
+  '比赛终盘采取向前冲刺的姿势',
   20168,
   2,
   UmaSkill.rarity_enum.gold,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   140,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.laneMove, UmaSkill.ability_tag_enum.accel],
 );

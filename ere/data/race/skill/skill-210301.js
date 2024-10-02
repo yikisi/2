@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   210301,
   '爆烈焰光！',
-  '在比赛中盘速度提升；属性越平均，效果越好＜英里/中距离＞',
+  '在比赛中盘速度提升；属性越平均，效果越好',
   21030,
   2,
   UmaSkill.rarity_enum.gold,
@@ -72,4 +72,6 @@ module.exports = new UmaSkill(
   200,
   false,
   false,
+  [3, 4],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

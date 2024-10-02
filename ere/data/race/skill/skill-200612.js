@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200612,
   '外道准备',
-  '在最终弯道从外道赶超时，速度略微加快＜差马＞',
+  '在最终弯道从外道赶超时，速度略微加快',
   20061,
   1,
   UmaSkill.rarity_enum.normal,
@@ -75,4 +75,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

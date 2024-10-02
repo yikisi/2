@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200732,
   '誓不罢休',
-  '在最终弯道及往后被紧追不舍时，稍微提高速度并略微提高加速度＜中距离＞',
+  '在最终弯道及往后被紧追不舍时，稍微提高速度并略微提高加速度',
   20073,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [4],
+  [UmaSkill.ability_tag_enum.currentSpeed, UmaSkill.ability_tag_enum.accel],
 );

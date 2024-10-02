@@ -373,7 +373,7 @@ module.exports = async () => {
             era.add('exp:0:技能点数', -100);
             const generated_skills = skill_control
               .get()
-              .filter((e) => e.toString().startsWith('9'));
+              .filter((e) => skills_dict[e].is_generated);
             skill_control.clear();
             if (era.get('cflag:0:模版角色') > 0) {
               chara_skill_dict[era.get('cflag:0:模版角色')].forEach((s) =>

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201221,
   '耐力食取',
-  '比赛中盘处于后方的话会略微夺走前方的持久力＜长距离＞',
+  '比赛中盘处于后方的话会略微夺走前方的持久力',
   20122,
   2,
   UmaSkill.rarity_enum.gold,
@@ -71,4 +71,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [5],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

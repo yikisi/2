@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201141,
   '神赐步伐',
-  '左右移动不容易产生疲劳＜中距离＞',
+  '左右移动不容易产生疲劳',
   20114,
   2,
   UmaSkill.rarity_enum.gold,
@@ -76,4 +76,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [4],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

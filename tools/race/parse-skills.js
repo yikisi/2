@@ -424,6 +424,72 @@ function parse_condition(condition, is_pre) {
   }
 }
 
+/**
+ * @param {number[]} tags_list
+ * @param {string} condition
+ */
+function fill_adapt_tags(tags_list, condition) {
+  new Array(2)
+    .fill(0)
+    .map((_, i) => i)
+    .forEach((e) => {
+      if (condition.indexOf(`ground_type==${e + 1}`) !== -1) {
+        tags_list.push(e);
+      }
+    });
+  new Array(4)
+    .fill(0)
+    .map((_, i) => i)
+    .forEach((e) => {
+      if (condition.indexOf(`distance_type==${e + 1}`) !== -1) {
+        tags_list.push(e + 2);
+      }
+    });
+  new Array(4)
+    .fill(0)
+    .map((_, i) => i)
+    .forEach((e) => {
+      if (condition.indexOf(`running_style==${e + 1}`) !== -1) {
+        tags_list.push(e + 6);
+      }
+    });
+  return tags_list;
+}
+
+const ability_tag_enum_names = [];
+ability_tag_enum_names[UmaSkill.ability_type_enum.Speed] =
+  UmaSkill.ability_tag_enum.speed;
+ability_tag_enum_names[UmaSkill.ability_type_enum.Stamina] =
+  UmaSkill.ability_tag_enum.stamina;
+ability_tag_enum_names[UmaSkill.ability_type_enum.Power] =
+  UmaSkill.ability_tag_enum.power;
+ability_tag_enum_names[UmaSkill.ability_type_enum.Guts] =
+  UmaSkill.ability_tag_enum.guts;
+ability_tag_enum_names[UmaSkill.ability_type_enum.Wiz] =
+  UmaSkill.ability_tag_enum.wiz;
+ability_tag_enum_names[UmaSkill.ability_type_enum.StartDash] =
+  UmaSkill.ability_tag_enum.startDash;
+ability_tag_enum_names[UmaSkill.ability_type_enum.TemptationPer] =
+  UmaSkill.ability_tag_enum.tempPer;
+ability_tag_enum_names[UmaSkill.ability_type_enum.VisibleDistance] =
+  UmaSkill.ability_tag_enum.visible;
+ability_tag_enum_names[UmaSkill.ability_type_enum.CurrentSpeed] =
+  ability_tag_enum_names[
+    UmaSkill.ability_type_enum.CurrentSpeedWithNaturalDeceleration
+  ] =
+  ability_tag_enum_names[UmaSkill.ability_type_enum.TargetSpeed] =
+    UmaSkill.ability_tag_enum.currentSpeed;
+ability_tag_enum_names[UmaSkill.ability_type_enum.Accel] =
+  UmaSkill.ability_tag_enum.accel;
+ability_tag_enum_names[UmaSkill.ability_type_enum.HpRate] =
+  UmaSkill.ability_tag_enum.hpRate;
+ability_tag_enum_names[UmaSkill.ability_type_enum.HpDecRate] =
+  UmaSkill.ability_tag_enum.hpDec;
+ability_tag_enum_names[UmaSkill.ability_type_enum.TemptationEndTime] =
+  UmaSkill.ability_tag_enum.temp;
+ability_tag_enum_names[UmaSkill.ability_type_enum.LaneMoveSpeed] =
+  UmaSkill.ability_tag_enum.laneMove;
+
 function get_rarity(v) {
   if (!rarity_names[v]) {
     throw new Error(v);
@@ -646,7 +712,30 @@ async function chara_skill() {
     sbuffer += `${e.activate_lot},`;
     sbuffer += `${pt_dict[id] || 0},`;
     sbuffer += `${e.condition_2 !== '' && e.condition_2.indexOf('is_activate_other_skill_detail') !== -1},`;
-    sbuffer += `${id.toString().startsWith('9')}`;
+    sbuffer += `${id.toString().startsWith('9')},`;
+    sbuffer += `[${fill_adapt_tags(
+      fill_adapt_tags([], e.condition_1),
+      e.condition_2,
+    )
+      .filter((e, i, l) => i === l.indexOf(e))
+      .join(',')}],`;
+    sbuffer += `[${[
+      e.ability_type_1_1,
+      e.ability_type_1_2,
+      e.ability_type_1_3,
+      e.ability_type_2_1,
+      e.ability_type_2_2,
+      e.ability_type_2_3,
+    ]
+      .map((e) => [e, ability_tag_enum_names[e]])
+      .filter((e) => e[1] !== undefined)
+      .filter((e, i, l) => i === l.findIndex((entry) => entry[1] === e[1]))
+      .sort((a, b) => a[0] - b[0])
+      .map(
+        (e) =>
+          `UmaSkill.ability_tag_enum.${Object.keys(UmaSkill.ability_tag_enum)[e[1]]}`,
+      )
+      .join(',')}]`;
     writeFileSync(`../../ere/data/race/skill/skill-${id}.js`, `${sbuffer});`);
     fill_dict(e.precondition_1, c_dict, e);
     fill_dict(e.precondition_2, c_dict, e);

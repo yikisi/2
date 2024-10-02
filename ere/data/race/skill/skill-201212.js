@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201212,
   '追击',
-  '在比赛终盘完成超越时，速度稍微提升，并且加速力极少量提升＜长距离＞',
+  '在比赛终盘完成超越时，速度稍微提升，并且加速力极少量提升',
   20121,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [5],
+  [UmaSkill.ability_tag_enum.currentSpeed, UmaSkill.ability_tag_enum.accel],
 );

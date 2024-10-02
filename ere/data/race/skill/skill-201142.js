@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201142,
   '轻快步伐',
-  '左右移动略微不容易产生疲劳＜中距离＞',
+  '左右移动略微不容易产生疲劳',
   20114,
   1,
   UmaSkill.rarity_enum.normal,
@@ -76,4 +76,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [4],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

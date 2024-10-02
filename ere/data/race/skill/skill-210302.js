@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   210302,
   '燃魂',
-  '在比赛中盘速度稍微提升＜英里/中距离＞',
+  '在比赛中盘速度稍微提升',
   21030,
   1,
   UmaSkill.rarity_enum.normal,
@@ -72,4 +72,6 @@ module.exports = new UmaSkill(
   200,
   false,
   false,
+  [3, 4],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

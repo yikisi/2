@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201362,
   '重振旗鼓',
-  '比赛中盘位于后方时，加速度略微上升＜先马＞',
+  '比赛中盘位于后方时，加速度略微上升',
   20136,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   120,
   false,
   false,
+  [7],
+  [UmaSkill.ability_tag_enum.accel],
 );

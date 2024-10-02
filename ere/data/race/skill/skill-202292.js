@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202292,
   '清晰思考',
-  '若使用技能回复过体力，且比赛中盘一开始身处后方时速度稍微提升＜泥地＞',
+  '若使用技能回复过体力，且比赛中盘一开始身处后方时速度稍微提升',
   20229,
   1,
   UmaSkill.rarity_enum.normal,
@@ -75,4 +75,6 @@ module.exports = new UmaSkill(
   150,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

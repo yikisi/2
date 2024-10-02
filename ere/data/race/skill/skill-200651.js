@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200651,
   '短距涡轮',
-  '比赛终盘时，加速力提升＜短距离＞',
+  '比赛终盘时，加速力提升',
   20065,
   2,
   UmaSkill.rarity_enum.gold,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [2],
+  [UmaSkill.ability_tag_enum.accel],
 );

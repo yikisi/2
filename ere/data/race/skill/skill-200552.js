@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200552,
   '一逃到底',
-  '最终弯道略微容易保持领先＜逃马＞',
+  '最终弯道略微容易保持领先',
   20055,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [6],
+  [UmaSkill.ability_tag_enum.accel],
 );

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201001,
   '万事俱备！',
-  '在比赛中盘，准备好向终点进发＜短距离＞',
+  '在比赛中盘，准备好向终点进发',
   20100,
   2,
   UmaSkill.rarity_enum.gold,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   140,
   false,
   false,
+  [2],
+  [UmaSkill.ability_tag_enum.laneMove, UmaSkill.ability_tag_enum.accel],
 );

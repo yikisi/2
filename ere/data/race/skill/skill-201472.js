@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201472,
   '看穿',
-  '左右移动的时候能更好的把握状况，视野略微开阔＜追马＞',
+  '左右移动的时候能更好的把握状况，视野略微开阔',
   20147,
   1,
   UmaSkill.rarity_enum.normal,
@@ -72,4 +72,6 @@ module.exports = new UmaSkill(
   110,
   false,
   false,
+  [9],
+  [UmaSkill.ability_tag_enum.visible],
 );

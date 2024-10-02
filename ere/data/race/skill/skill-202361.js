@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202361,
   '大意就会败北',
-  '比赛后半时，使体力回复的赛马娘畏缩＜泥地＞',
+  '比赛后半时，使体力回复的赛马娘畏缩',
   20236,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

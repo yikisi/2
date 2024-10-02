@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202343,
   '玩泥巴○',
-  '变得擅长赛场状态为重或不良的比赛，速度稍微上升＜泥地＞',
+  '变得擅长赛场状态为重或不良的比赛，速度稍微上升',
   20234,
   1,
   UmaSkill.rarity_enum.normal,
@@ -72,4 +72,6 @@ module.exports = new UmaSkill(
   90,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.speed],
 );

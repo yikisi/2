@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200721,
   '杀手旋律',
-  '比赛中盘位于前列时，容易取得好位置＜中距离＞',
+  '比赛中盘位于前列时，容易取得好位置',
   20072,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [4],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

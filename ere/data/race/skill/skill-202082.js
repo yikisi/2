@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202082,
   '机不可失',
-  '比赛进入终盘时若位于中团后方，加速力稍微提升＜中距离＞',
+  '比赛进入终盘时若位于中团后方，加速力稍微提升',
   20208,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [4],
+  [UmaSkill.ability_tag_enum.accel],
 );

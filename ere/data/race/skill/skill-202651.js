@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202651,
   '云蒸龙变',
-  '速度和力量都十分强劲时，提升速度和力量＜英里/中距离＞',
+  '速度和力量都十分强劲时，提升速度和力量',
   20265,
   2,
   UmaSkill.rarity_enum.gold,
@@ -76,4 +76,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [3, 4],
+  [UmaSkill.ability_tag_enum.speed, UmaSkill.ability_tag_enum.power],
 );

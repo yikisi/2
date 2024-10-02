@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202421,
   '忘我之境',
-  '若经过最后冲刺却仍处于队伍中部靠后则会稍微消耗持久力提高加速度＜差马・长距离＞',
+  '若经过最后冲刺却仍处于队伍中部靠后则会稍微消耗持久力提高加速度',
   20242,
   2,
   UmaSkill.rarity_enum.gold,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [5, 8],
+  [UmaSkill.ability_tag_enum.hpRate, UmaSkill.ability_tag_enum.accel],
 );

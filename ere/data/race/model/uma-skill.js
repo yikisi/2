@@ -165,6 +165,53 @@ const target_type_enum = {
   ActivateHealSkill: 23,
 };
 
+const adapt_tag_names = [
+  '草地',
+  '泥地',
+  '短距离',
+  '英里赛',
+  '中距离',
+  '长距离',
+  '逃马',
+  '先马',
+  '差马',
+  '追马',
+];
+
+const ability_tag_enum = {
+  speed: 0,
+  stamina: 1,
+  power: 2,
+  guts: 3,
+  wiz: 4,
+  startDash: 5,
+  tempPer: 6,
+  visible: 6,
+  currentSpeed: 7,
+  accel: 8,
+  hpRate: 5,
+  hpDec: 6,
+  temp: 1,
+  laneMove: 1,
+};
+Object.keys(ability_tag_enum).forEach((k, i) => (ability_tag_enum[k] = i));
+
+const ability_tag_names = [];
+ability_tag_names[ability_tag_enum.speed] = '速度';
+ability_tag_names[ability_tag_enum.stamina] = '耐力';
+ability_tag_names[ability_tag_enum.power] = '力量';
+ability_tag_names[ability_tag_enum.guts] = '根性';
+ability_tag_names[ability_tag_enum.wiz] = '智力';
+ability_tag_names[ability_tag_enum.startDash] = '出闸';
+ability_tag_names[ability_tag_enum.tempPer] = '焦躁概率';
+ability_tag_names[ability_tag_enum.visible] = '视野';
+ability_tag_names[ability_tag_enum.currentSpeed] = '奔跑速度';
+ability_tag_names[ability_tag_enum.accel] = '加速度';
+ability_tag_names[ability_tag_enum.hpRate] = '体力恢复';
+ability_tag_names[ability_tag_enum.hpDec] = '体力降低';
+ability_tag_names[ability_tag_enum.temp] = '焦躁';
+ability_tag_names[ability_tag_enum.laneMove] = '突围';
+
 class UmaSkill {
   static skill_name_enum = skill_name_enum;
   static skill_border_enum = skill_border_enum;
@@ -173,6 +220,7 @@ class UmaSkill {
   static ability_type_enum = ability_type_enum;
   static ability_usage_enum = ability_usage_enum;
   static target_type_enum = target_type_enum;
+  static ability_tag_enum = ability_tag_enum;
 
   /**
    * @param {number} name
@@ -284,6 +332,16 @@ class UmaSkill {
    * @type {number}
    */
   price;
+  /**
+   * 适应性类型标签
+   * @type {number[]}
+   */
+  adapt_tags;
+  /**
+   * 技能效果标签
+   * @type {number[]}
+   */
+  ability_tags;
 
   /**
    * @param {number} id
@@ -310,6 +368,8 @@ class UmaSkill {
    * @param {number} price
    * @param {boolean} is_two_phase
    * @param {boolean} is_generated
+   * @param {number[]} adapt_tags
+   * @param {number[]} ability_tags
    */
   constructor(
     id,
@@ -336,6 +396,8 @@ class UmaSkill {
     price,
     is_two_phase,
     is_generated,
+    adapt_tags,
+    ability_tags,
   ) {
     this.id = id;
     this.name = name;
@@ -361,18 +423,30 @@ class UmaSkill {
     this.price = price;
     this.is_two_phase = is_two_phase;
     this.is_generated = is_generated;
+    this.adapt_tags = adapt_tags;
+    this.ability_tags = ability_tags;
   }
 
   get_colored_name() {
     const border_color = skill_border_colors[this.category & 0b111],
       name_color = skill_name_colors[this.category >> 3];
+    const title_list = [];
+    title_list.push(
+      this.adapt_tags.map((e) => adapt_tag_names[e]).join('＞＜'),
+    );
+    title_list.push(
+      this.ability_tags.map((e) => ability_tag_names[e]).join('＞＜'),
+    );
     return [
       { content: '【', color: border_color },
       {
         color: name_color,
         content: this.name,
         fontWeight: 'bold',
-        title: `[${this.name}]：${this.desc}`,
+        title: `[${this.name}]：${this.desc}\n${title_list
+          .map((e) => (e === '' ? e : `＜${e}＞`))
+          .filter((e) => e)
+          .join('\n')}`,
       },
       { content: '】', color: border_color },
     ];

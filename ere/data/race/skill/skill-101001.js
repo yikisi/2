@@ -80,4 +80,6 @@ module.exports = new UmaSkill(
   0,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

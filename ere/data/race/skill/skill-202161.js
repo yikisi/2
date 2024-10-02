@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [],
+  [UmaSkill.ability_tag_enum.wiz, UmaSkill.ability_tag_enum.tempPer],
 );

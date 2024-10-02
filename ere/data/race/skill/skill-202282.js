@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202282,
   '猛冲',
-  '最终的直线冲刺位于前方时，稍微提升速度＜泥地＞',
+  '最终的直线冲刺位于前方时，稍微提升速度',
   20228,
   1,
   UmaSkill.rarity_enum.normal,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );
