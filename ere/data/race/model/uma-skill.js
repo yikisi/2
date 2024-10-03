@@ -221,6 +221,7 @@ class UmaSkill {
   static ability_usage_enum = ability_usage_enum;
   static target_type_enum = target_type_enum;
   static ability_tag_enum = ability_tag_enum;
+  static ability_tag_names = ability_tag_names;
 
   /**
    * @param {number} name
