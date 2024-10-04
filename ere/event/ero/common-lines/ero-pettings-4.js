@@ -245,14 +245,20 @@ module.exports = (handlers) => {
       switch (era.get(`cflag:${defender.id}:头发长度`)) {
         case 0:
           await attacker.print_and_wait([
-            '纵横于胯下雌性的私密之处，',
+            '纵横于胯下 ',
+            sys_get_colored_callname(attacker.id, defender.id),
+            ' 的私密之处，',
             attacker.get_colored_name(),
             ' 的肉根明显更加兴奋了。',
           ]);
           await attacker.print_and_wait([
             '被 ',
             attacker.get_colored_name(),
-            ' 压在下方的那姑娘神情已难以辨别……羞红的脸和耳根倒可一窥她目前状态。',
+            ' 压在下方的 ',
+            sys_get_colored_callname(attacker.id, defender.id),
+            ' 神情已难以辨别……羞红的脸和耳根倒可一窥',
+            defender.sex,
+            '目前状态。',
           ]);
           await attacker.print_and_wait([
             attacker.get_colored_name(),

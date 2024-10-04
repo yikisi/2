@@ -4,7 +4,11 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { adaptability_names } = require('#/data/train-const');
 
-module.exports = (is_reset) => {
+/**
+ * @param {function(number,number?)} init_chara
+ * @param {boolean} [is_reset]
+ */
+module.exports = (init_chara, is_reset) => {
   if (!is_reset) {
     era.set(
       'callname:308:-2',

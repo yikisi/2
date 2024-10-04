@@ -87,14 +87,19 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.talk] = async (attacker, defender) => {
-    if (Math.random() < 0.5) {
-      await attacker.say_and_wait(
-        '马娘的耳朵表达情绪的方式，到底和那种动物比较像呢。',
-      );
+    if (
+      !era.get(`cflag:${attacker.id}:种族`) &&
+      era.get(`cflag:${defender.id}:种族`) &&
+      Math.random() < 0.5
+    ) {
+      await attacker.say_and_wait([
+        defender.get_uma_sex_title(),
+        '的耳朵表达情绪的方式，到底和那种动物比较像呢。',
+      ]);
       await attacker.print_and_wait('被不满地盯着看了。');
       await attacker.say_and_wait('……嘶……比如说，猫的耳朵如果发烫的话……');
       attacker.print('屁股被踢了。');
-    } else {
+    } else if (attacker.sex_code !== 1 || defender.sex_code !== 1) {
       await attacker.say_and_wait('以后要几个孩子比较好呢……');
       await attacker.print_and_wait([
         '看着对面 ',

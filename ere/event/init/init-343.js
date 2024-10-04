@@ -5,7 +5,11 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const { attr_names } = require('#/data/train-const');
 
-module.exports = (is_reset) => {
+/**
+ * @param {function(number,number?)} init_chara
+ * @param {boolean} [is_reset]
+ */
+module.exports = (init_chara, is_reset) => {
   if (!is_reset) {
     if (sys_personal_achievement.get(343)) {
       new MayLifeMarks().who_am_i = 2;

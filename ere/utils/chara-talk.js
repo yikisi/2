@@ -5,6 +5,9 @@ const { get_chara_color } = require('#/data/chara-colors');
 class CharaTalk {
   /** @type {CharaTalk} */
   static me;
+  /** @type {function(number,number?)} */
+  static init_chara;
+
   /** @type {number} */
   id;
   /** @type {string} */
@@ -65,7 +68,7 @@ class CharaTalk {
     this.id = id;
     this.name = era.get(`callname:${id}:-2`);
     if (this.name === '-') {
-      require('#/system/sys-init-chara').init_chara(id);
+      CharaTalk.init_chara(id);
       this.name = era.get(`callname:${id}:-2`);
     }
     this.actual_name = era.get(`callname:${id}:-1`);

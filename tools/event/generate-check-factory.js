@@ -79,3 +79,7 @@ writeFileSync('../../ere/event/check/check-factory.js', output);
 execSync('npx eslint --fix ./ere/event/check/check-factory.js', {
   cwd: join(process.cwd(), '../..'),
 });
+
+console.log(
+  `[generate-check-factory.js] registers ${check_scripts.length} check scripts`,
+);

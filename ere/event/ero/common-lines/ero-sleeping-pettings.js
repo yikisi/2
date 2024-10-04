@@ -38,6 +38,7 @@ module.exports = (handlers, normal_handlers) => {
 
   handlers[ero_hooks.pull_ear] = async (attacker, defender) => {
     const is_trainer =
+      attacker.id === 0 &&
       !era.get(`cflag:${attacker.id}:种族`) &&
       era.get(`cflag:${defender.id}:种族`);
     await attacker.print_and_wait('这样是不对的……');
@@ -55,6 +56,9 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.pet_breast] = async (attacker, defender, hook) => {
+    if (defender.sex_code === 1) {
+      return;
+    }
     if (hook.arg) {
       await attacker.print_and_wait(
         '不需要小心翼翼，因为面前随着呼吸而浅浅起伏着的欧派是没办法从这双手中逃走的。',
@@ -85,6 +89,9 @@ module.exports = (handlers, normal_handlers) => {
 
   handlers[ero_hooks.pet_nipple] = async (attacker, defender, hook) => {
     if (hook.arg) {
+      if (defender.sex_code === 1) {
+        return;
+      }
       await attacker.print_and_wait('嗯……是错觉吗……');
       await attacker.print_and_wait(
         '感觉乳头硬起来的速度，比起醒着的时候要更慢一些啊。',
@@ -104,7 +111,12 @@ module.exports = (handlers, normal_handlers) => {
         '笑得眯起了双眼。',
       ]);
     } else {
-      if (era.get(`cflag:${defender.id}:性别`) - 1) {
+      if (defender.sex_code === 1) {
+        await attacker.print_and_wait(
+          '眼前下流乳头的被连续不断的爱抚弄得硬邦邦的。',
+        );
+        await attacker.print_and_wait('这么僵硬地紧绷着身子，简直就是在说……');
+      } else {
         await attacker.print_and_wait('说不定能就这么挤出乳汁来……');
         await attacker.print_and_wait(
           '眼前被连续不断的爱抚弄得硬邦邦的下流乳头叫人忍不住这么想……',
@@ -112,11 +124,6 @@ module.exports = (handlers, normal_handlers) => {
         await attacker.print_and_wait(
           '而且这么僵硬地紧绷着身子，简直就是在说……',
         );
-      } else {
-        await attacker.print_and_wait(
-          '眼前下流乳头的被连续不断的爱抚弄得硬邦邦的。',
-        );
-        await attacker.print_and_wait('这么僵硬地紧绷着身子，简直就是在说……');
       }
       await defender.used_to_say_and_wait('这里是不能碰的敏感弱点！');
       await attacker.print_and_wait('真是可爱过头了ww');
@@ -275,13 +282,6 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.pet_tail] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 玩弄着沉睡的 ',
-      defender.get_colored_name(),
-      ' 馨香的尾巴……】',
-    ]);
     await attacker.print_and_wait('真是……不妙啊……');
     await attacker.print_and_wait([
       '不止在说眼前手感绝佳，满带着 ',
@@ -296,13 +296,6 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.pull_tail] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 拉扯着沉睡的 ',
-      defender.get_colored_name(),
-      ' 脆弱的尾巴……】',
-    ]);
     await normal_handlers[ero_hooks.pull_tail](attacker, defender, {
       arg: false,
     });
@@ -319,13 +312,6 @@ module.exports = (handlers, normal_handlers) => {
 
   handlers[ero_hooks.cunnilingus] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 将沉睡的 ',
-        defender.get_colored_name(),
-        ' 翕动的小豆豆含入口中……】',
-      ]);
       await attacker.print_and_wait([
         '因为没有理性的支配，面对着呼出热气的唇的凑近，无知无畏的 ',
         sys_get_colored_callname(attacker.id, defender.id),
@@ -343,41 +329,24 @@ module.exports = (handlers, normal_handlers) => {
         '，舌尖正一点点努力地前进着。',
       ]);
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 吮吸着 ',
-        defender.get_colored_name(),
-        ' 风流的小豆豆……】',
-      ]);
       await attacker.print_and_wait(
         '已经不太能回忆起一开始是怎样合拢成一条窄缝的清纯形状，被不断迎上来的舌舔得从里到外湿漉漉的穴，如今已向外翻开着地微微颤动……',
       );
       await attacker.print_and_wait(
-        '那双本来舒缓地在床上岔开的马娘足，完全不知该对股间的濡湿快感做出怎样的回应，只是颤抖着，紧紧环在了坏孩子的肩上。',
+        '那双本来舒缓地在床上岔开的足，完全不知该对股间的濡湿快感做出怎样的回应，只是颤抖着，紧紧环在了坏孩子的肩上。',
       );
     }
   };
 
   handlers[ero_hooks.blow_job] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 将沉睡的 ',
-        defender.get_colored_name(),
-        ' 耸立的肉棒含入口中……】',
-      ]);
       await attacker.print_and_wait('眼前的样子，可真是叫人罪恶感油然而生啊……');
       await attacker.say_and_wait([
         '哈……趁着 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 睡着的时候下手的我……真是……',
       ]);
-      if (
-        era.get(`cflag:${defender.id}:种族`) &&
-        era.get(`cflag:${defender.id}:性别`) - 1
-      ) {
+      if (era.get(`cflag:${defender.id}:种族`) && attacker.sex_code !== 1) {
         await attacker.print_and_wait([
           '马娘与肉棒，这几乎没存在交集的两个词，此刻却借由 ',
           attacker.get_colored_name(),
@@ -394,13 +363,6 @@ module.exports = (handlers, normal_handlers) => {
       );
       await attacker.print_and_wait('不过有些欲望却正因此才没法控制呀……');
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 舔舐着沉睡的 ',
-        defender.get_colored_name(),
-        ' 耸立的肉棒……】',
-      ]);
       await attacker.say_and_wait('呲溜呲溜～');
       await attacker.print_and_wait('不知不觉变得熟练一些了……');
       await attacker.print_and_wait(
@@ -417,13 +379,6 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.deep_blow_job] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 将沉睡的 ',
-      defender.get_colored_name(),
-      ' 耸立的肉棒深深含入口中……】',
-    ]);
     await attacker.say_and_wait('还想要，更深一点……');
     await attacker.print_and_wait([
       '贪心地呓语着，被索取快感的本能所支配的 ',
@@ -449,18 +404,8 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.force_blow_job] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 将肉棒插入 ',
-      defender.get_colored_name(),
-      ' 微张的小口中……】',
-    ]);
     await attacker.print_and_wait('眼前的样子，可真是叫人罪恶感油然而生啊……');
-    if (
-      era.get(`cflag:${defender.id}:种族`) &&
-      era.get(`cflag:${defender.id}:性别`) - 1
-    ) {
+    if (attacker.sex_code !== 1 && era.get(`cflag:${defender.id}:种族`)) {
       await attacker.print_and_wait(
         '马娘与肉棒，这几乎没存在交集的两个词，此刻却黏糊糊地连接在了一起……',
       );
@@ -475,13 +420,6 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.hand_job] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 用手掌抚弄着沉睡的 ',
-      defender.get_colored_name(),
-      ' 耸立的肉棒……】',
-    ]);
     await attacker.print_and_wait([
       '尽管睡着的 ',
       sys_get_colored_callname(attacker.id, defender.id),
@@ -506,13 +444,6 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.hand_and_blow_job] = async (attacker, defender, hook) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 手口并用地侍奉着沉睡的 ',
-      defender.get_colored_name(),
-      ' 耸立的肉棒……】',
-    ]);
     await normal_handlers[ero_hooks.hand_and_blow_job](
       attacker,
       defender,
@@ -541,6 +472,9 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.tit_job] = async (attacker, defender) => {
+    if (attacker.sex_code === 1) {
+      return;
+    }
     await attacker.print_and_wait(
       '明明没有听见这样的要求，却自顾自拉下上衣将欧派露出来了……',
     );
@@ -563,6 +497,9 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.tit_and_blow_job] = async (attacker, defender) => {
+    if (attacker.sex_code === 1) {
+      return;
+    }
     await attacker.print_and_wait([
       `只是让被夹在乳肉中的肉棒舒服地挺起还不足够吗……到底在平时是以一种怎样的目光看待着自己的${
         era.get(`cflag:${defender.id}:种族`) ? '担当' : '伙伴'
@@ -581,8 +518,13 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.suck_nipple] = async (attacker, defender) => {
+    if (defender.sex_code === 1) {
+      return;
+    }
     await attacker.print_and_wait([
-      '完全没有让有着樱桃颜色的漂亮乳头躲开逐渐凑过来的 ',
+      '完全没有让',
+      era.get(`talent:${defender.id}:乳头类型`) > 0 ? '粉' : '褐',
+      '色的漂亮乳头躲开逐渐凑过来的 ',
       attacker.get_colored_name(),
       ` 的本能，浅浅起伏着的${defender.get_teen_sex_title()}的柔软乖乖地被含入了坏家伙的嘴里。`,
     ]);
@@ -597,6 +539,9 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.bite_nipple] = async (attacker, defender) => {
+    if (defender.sex_code === 1) {
+      return;
+    }
     await attacker.print_and_wait([
       '在用齿间将硬邦邦的乳粒衔入口上的那一刻，面前仰面躺着的 ',
       sys_get_colored_callname(attacker.id, defender.id),

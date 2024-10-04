@@ -77,15 +77,20 @@ module.exports = (handlers) => {
         ],
         true,
       );
-      await defender.say_and_wait(
-        `啊……啊……原来是这么看待的啊，自家担当的双腿。`,
-        true,
-      );
+      if (!attacker.id && era.get(`cflag:${defender.id}:种族`)) {
+        await defender.say_and_wait(
+          `啊……啊……原来是这么看待的啊，自家担当的双腿。`,
+          true,
+        );
+      }
     }
     await handlers[ero_hooks.non_penetrative](defender, attacker, hook);
   };
 
   handlers[ero_hooks.sixty_nine] = async (attacker, defender, hook) => {
+    if (((attacker.sex_code > 0) ^ (defender.sex_code > 0)) === 0) {
+      return;
+    }
     if (hook.arg) {
       await era.printAndWait('黏黏糊糊的身体叠在了一起。');
       await era.printAndWait('唇抵上了穴，唇也抵上了肉棒。');
@@ -267,7 +272,7 @@ module.exports = (handlers) => {
         sys_get_colored_callname(attacker.id, defender.id),
         ' 却露出了一份有所预料的余裕表情。',
       ]);
-      await attacker.print_and_wait('原来…暴露的这么明显吗……');
+      await attacker.print_and_wait('原来……暴露的这么明显吗……');
     }
     await handlers[ero_hooks.foot_job](defender, attacker, hook);
   };
@@ -294,11 +299,13 @@ module.exports = (handlers) => {
         ' 都意料之外的灵敏程度，有着弯曲毛发的马尾巴缠上了肉棒。',
       ]);
       await defender.print_and_wait('以这个角度看见的屁股也别有风味。');
-      await defender.print_and_wait([
-        '隐约能嗅见的，长长的马尾巴不可避免沾染上的女孩子的味道，让 ',
-        defender.get_colored_name(),
-        ' 的肉棒前所未有的兴奋着。',
-      ]);
+      if (attacker.sex_code !== 1) {
+        await defender.print_and_wait([
+          '隐约能嗅见的，长长的马尾巴不可避免沾染上的女孩子的味道，让 ',
+          defender.get_colored_name(),
+          ' 的肉棒前所未有的兴奋着。',
+        ]);
+      }
       await attacker.say_and_wait('……');
       await defender.print_and_wait([
         '……而大约是感受到了这份暴涨的热度，背过身的 ',
@@ -312,9 +319,11 @@ module.exports = (handlers) => {
       );
       await defender.print_and_wait('比如这根肉棒喜欢的缠绕的力度。');
       await defender.print_and_wait('比如这根肉棒被搔到会发颤的位置。');
-      await defender.print_and_wait(
-        '比如，尾巴下的小穴是否也需要更多……更激烈的……',
-      );
+      if (attacker.sex_code !== 1) {
+        await defender.print_and_wait(
+          '比如，尾巴下的小穴是否也需要更多……更激烈的……',
+        );
+      }
     }
   };
 

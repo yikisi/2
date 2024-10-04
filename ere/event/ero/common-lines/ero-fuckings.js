@@ -506,7 +506,7 @@ module.exports = (handlers) => {
       await attacker.print_and_wait([
         '这么近距离地看着……看着身下 ',
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 精致的俏脸……不就只能意识到自己是个多么糟糕的家伙了嘛❤️',
+        ' 的脸……不就只能意识到自己是个多么糟糕的家伙了嘛❤️',
       ]);
       await attacker.print_and_wait([
         '自暴自弃地摇晃起身体，被背德感折服的 ',

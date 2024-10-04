@@ -18,40 +18,44 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 /** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
   handlers[ero_hooks.pet_ear] = async (attacker, defender, hook) => {
-    if (era.get(`cflag:${defender.id}:种族`)) {
-      if (hook.arg) {
-        await attacker.print_and_wait(
-          `${defender.get_uma_sex_title()}的耳朵，果然是会让人憧憬的东西啊，不论是将它视为作为肢体的延伸，作为表情的延伸，亦或是作为……敏感带的延伸……`,
-        );
-        await attacker.print_and_wait([
-          `只是用指尖蜻蜓点水似的轻柔触碰，`,
-          attacker.get_colored_name(),
-          ` 还没能细细感受那份按摩着指尖的细腻触感，那对尖尖长长的马耳朵便害羞地从 ${attacker.get_phy_sex_title()} 的指间溜走了。`,
-        ]);
-        await attacker.say_and_wait('…………');
-        await defender.say_and_wait('请……再来摸一次吧，这次不会逃走了。');
-        await attacker.print_and_wait([
-          '怀里的 ',
-          sys_get_colored_callname(attacker.id, defender.id),
-          '，现在脸很红。',
-        ]);
-      } else {
-        await attacker.print_and_wait('呼呼……');
-        await attacker.print_and_wait(
-          '掌中有了一对不会逃走的马耳朵，被细密的绒毛按摩着指腹…有种身与心都被疗愈了的感觉。',
-        );
-        await attacker.print_and_wait('这就是作为恋人的特权吗……');
-        await attacker.print_and_wait('不过，现在有点好奇那里的状态……');
-        await attacker.print_and_wait([
-          '仿佛由看不清的丝线连在一处，',
-          sys_get_colored_callname(attacker.id, defender.id),
-          ` 的双腿随着 ${attacker.get_phy_sex_title()} 被马耳朵黏住的手羞人地一颤一颤。`,
-        ]);
-      }
+    if (!era.get(`cflag:${defender.id}:种族`)) {
+      return;
+    }
+    if (hook.arg) {
+      await attacker.print_and_wait(
+        `${defender.get_uma_sex_title()}的耳朵，果然是会让人憧憬的东西啊，不论是将它视为作为肢体的延伸，作为表情的延伸，亦或是作为……敏感带的延伸……`,
+      );
+      await attacker.print_and_wait([
+        `只是用指尖蜻蜓点水似的轻柔触碰，`,
+        attacker.get_colored_name(),
+        ` 还没能细细感受那份按摩着指尖的细腻触感，那对尖尖长长的马耳朵便害羞地从 ${attacker.get_phy_sex_title()} 的指间溜走了。`,
+      ]);
+      await attacker.say_and_wait('…………');
+      await defender.say_and_wait('请……再来摸一次吧，这次不会逃走了。');
+      await attacker.print_and_wait([
+        '怀里的 ',
+        sys_get_colored_callname(attacker.id, defender.id),
+        '，现在脸很红。',
+      ]);
+    } else {
+      await attacker.print_and_wait('呼呼……');
+      await attacker.print_and_wait(
+        '掌中有了一对不会逃走的马耳朵，被细密的绒毛按摩着指腹…有种身与心都被疗愈了的感觉。',
+      );
+      await attacker.print_and_wait('这就是作为恋人的特权吗……');
+      await attacker.print_and_wait('不过，现在有点好奇那里的状态……');
+      await attacker.print_and_wait([
+        '仿佛由看不清的丝线连在一处，',
+        sys_get_colored_callname(attacker.id, defender.id),
+        ` 的双腿随着 ${attacker.get_phy_sex_title()} 被马耳朵黏住的手羞人地一颤一颤。`,
+      ]);
     }
   };
 
   handlers[ero_hooks.pull_ear] = async (attacker, defender) => {
+    if (!era.get(`cflag:${defender.id}:种族`)) {
+      return;
+    }
     await attacker.print_and_wait('这样是不对的……');
     await attacker.print_and_wait('……这不是作为恋人应当做的事……');
     await attacker.print_and_wait('……不过');
@@ -65,7 +69,11 @@ module.exports = (handlers) => {
 
   handlers[ero_hooks.pet_breast] = async (attacker, defender, hook) => {
     const touched = era.get(`tcvar:${defender.id}:阴道接触部位`);
-    if (touched.part === part_enum.penis && touched.owner === attacker.id) {
+    if (
+      touched.part === part_enum.penis &&
+      touched.owner === attacker.id &&
+      defender.sex_code !== 1
+    ) {
       await attacker.print_and_wait([
         '完全没有为 ',
         sys_get_colored_callname(attacker.id, defender.id),
@@ -81,9 +89,15 @@ module.exports = (handlers) => {
         ' 自己的柔软任性地变成唯独自己所中意的形状。',
       ]);
     } else if (hook.arg) {
-      await attacker.print_and_wait(
-        `${defender.get_teen_sex_title()}的柔软……此刻落进了自己的掌心。`,
-      );
+      if (defender.sex_code === 1) {
+        return;
+      }
+      await attacker.print_and_wait([
+        era.get(`cflag:${defender.id}:成长阶段`) < 5
+          ? defender.get_teen_sex_title()
+          : '诱人',
+        '的柔软……此刻落进了自己的掌心。',
+      ]);
       await attacker.print_and_wait(
         '无法忍耐的指尖自己便动了起来，迫不及待地想让眼前的软肉印上指纹，变成更符合自己的形状。',
       );
@@ -111,7 +125,13 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.pet_nipple] = async (attacker, defender, hook) => {
+    if (defender.id === 1) {
+      return;
+    }
     if (hook.arg) {
+      if (!era.get(`cflag:${defender.id}:种族`)) {
+        return;
+      }
       await attacker.print_and_wait('很烫……');
       await attacker.print_and_wait(
         '虽然只是嵌在白皙乳肉上小小的肉粒，却正散发着了不起的热度',
@@ -127,16 +147,10 @@ module.exports = (handlers) => {
       ]);
       await attacker.print_and_wait('啊，被用尾巴教训了。');
     } else {
-      if (era.get(`cflag:${defender.id}:性别`) - 1) {
-        await attacker.print_and_wait('说不定能就这么挤出乳汁来……');
-        await attacker.print_and_wait(
-          '眼前被连续不断的爱抚弄得硬邦邦的下流乳头叫人忍不住这么想……',
-        );
-      } else {
-        await attacker.print_and_wait(
-          '眼前下流乳头的被连续不断的爱抚弄得硬邦邦的。',
-        );
-      }
+      await attacker.print_and_wait('说不定能就这么挤出乳汁来……');
+      await attacker.print_and_wait(
+        '眼前被连续不断的爱抚弄得硬邦邦的下流乳头叫人忍不住这么想……',
+      );
       await defender.say_and_wait('呀——');
       await attacker.print_and_wait([
         '趁着 ',
@@ -152,7 +166,9 @@ module.exports = (handlers) => {
       await attacker.print_and_wait([
         '将 ',
         sys_get_colored_callname(attacker.id, defender.id),
-        ` 的双腿分开，这么直勾勾地盯着${defender.sex}赤裸的下身……`,
+        ' 的双腿分开，这么直勾勾地盯着',
+        defender.sex,
+        '赤裸的下身……',
       ]);
       await attacker.print_and_wait(
         '已经没有回头的机会了……但自己却反而因此振奋……',
@@ -189,6 +205,9 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.prepare_virgin] = async (attacker, defender) => {
+    if (!era.get(`cflag:${defender.id}:种族`)) {
+      return;
+    }
     await attacker.print_and_wait(
       `小心翼翼地探入两根手指，将敞露在自己面前，${defender.get_teen_sex_title()}合成一条细缝的窄窄肉穴翻弄开来。`,
     );
@@ -241,7 +260,9 @@ module.exports = (handlers) => {
     if (hook.arg) {
       await defender.say_and_wait('唔嗯——！？');
       await attacker.print_and_wait([
-        `虽然稍迟了一些，面前的屁股${defender.get_adult_sex_title()}很明显察觉到了来自这边的意图，被来自`,
+        '虽然稍迟了一些，面前的屁股',
+        defender.get_adult_sex_title(),
+        '很明显察觉到了来自这边的意图，被来自',
         attacker.get_colored_name(),
         '的手指暧昧地凑近过来，用叫身体恰到好处能警惕起来的粗糙质感，沿着那小巧的穴口绕着圈。',
       ]);
@@ -258,11 +279,9 @@ module.exports = (handlers) => {
         sys_get_colored_callname(defender.id, attacker.id),
         `……好像格外中意这种欲擒故纵的节奏……`,
       ]);
-      await defender.print_and_wait([
-        '没法坚持着紧绷身体，',
-        defender.get_colored_name(),
-        ' 那被暧昧的爱抚感融化的屁股小穴，已经悄悄地松弛下来，变成了能吞下什么都不奇怪的性爱穴。',
-      ]);
+      await defender.print_and_wait(
+        '没法坚持着紧绷身体，自己被暧昧的爱抚感融化的屁股小穴，已经悄悄地松弛下来，变成了能吞下什么都不奇怪的性爱穴。',
+      );
     }
   };
 
@@ -292,8 +311,11 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.pet_leg] = async (attacker, defender, hook) => {
+    if (defender.sex_code === 1) {
+      return;
+    }
     if (hook.arg) {
-      if (!attacker.id && era.get(`cflag:${defender.id}:种族`)) {
+      if (attacker.id === 0 && era.get(`cflag:${defender.id}:种族`)) {
         await attacker.print_and_wait(
           '作为训练员，将面前担当的双腿，用性的意味去观赏与抚摸……',
         );
@@ -578,7 +600,7 @@ module.exports = (handlers) => {
           }
           await attacker.say_and_wait('拜托了——');
           await defender.print_and_wait([
-            `面前的 `,
+            '面前的 ',
             sys_get_colored_callname(defender.id, attacker.id),
             ` 突然说出了叫人脸红的话。`,
           ]);

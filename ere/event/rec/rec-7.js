@@ -5,8 +5,9 @@
  */
 const era = require('#/era-electron');
 
+const chara_color = require('#/data/chara-colors').chara_colors[7];
 const event_hooks = require('#/data/event/event-hooks');
-const { yes } = require('#/data/event/recruit-flags');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 
 module.exports = {
@@ -16,8 +17,7 @@ module.exports = {
    * @returns {Promise<boolean>}
    */
   async run(stage_id) {
-    const chara_color = require('#/data/chara-colors').chara_colors[7],
-      chara_name = era.get('callname:7:-2'),
+    const chara_name = era.get('callname:7:-2'),
       your_name = era.get('callname:0:-2');
     if (stage_id === event_hooks.recruit) {
       await era.printAndWait(
@@ -84,7 +84,7 @@ module.exports = {
 
       era.println();
       await era.printAndWait(`成功被 ${chara_name} 招募了！`);
-      era.set(`cflag:7:招募状态`, yes);
+      era.set(`cflag:7:招募状态`, recruit_flags.yes);
       return true;
     }
     return false;

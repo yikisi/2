@@ -1,12 +1,10 @@
-cd tools/event
+cd tools/uma
+node check-chara-colors.js
+node check-child-names.js
+cd ../event
 node generate-basement-factory.js
 node generate-check-factory.js
 node generate-mec-factory.js
 cd ../..
-git add ere/event/basement
-git add ere/event/check
-git add ere/event/mec
+git add ere/event/basement ere/event/check ere/event/mec
 npm run lint
-cd tools/uma
-node check-chara-colors.js
-node check-child-names.js

@@ -1,5 +1,6 @@
 const { bonus_params, id2bonus } = require('#/data/race/race-attr-bonus');
 const { lane_params, slope_params } = require('#/data/race/race-params');
+const race_rewards = require('#/data/race/race-rewards');
 
 const race_enum = {
   // 出道战
@@ -524,5 +525,5 @@ console.log(
 module.exports = {
   race_enum,
   race_infos,
-  race_rewards: require('#/data/race/race-rewards'),
+  race_rewards,
 };

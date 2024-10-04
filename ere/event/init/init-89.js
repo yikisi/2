@@ -1,9 +1,13 @@
 const era = require('#/era-electron');
 
-module.exports = (is_reset) => {
+/**
+ * @param {function(number,number?)} init_chara
+ * @param {boolean} [is_reset]
+ */
+module.exports = (init_chara, is_reset) => {
   if (!is_reset) {
     if (era.get('flag:角色性别') === 1) {
-      require('#/system/sys-init-chara').init_chara(90);
+      init_chara(90);
       era.set('callname:0:90', '哥哥');
     }
   }

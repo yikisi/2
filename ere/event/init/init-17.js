@@ -1,8 +1,12 @@
 const era = require('#/era-electron');
 
-module.exports = (is_reset) => {
+/**
+ * @param {function(number,number?)} init_chara
+ * @param {boolean} [is_reset]
+ */
+module.exports = (init_chara, is_reset) => {
   if (!is_reset) {
-    require('#/system/sys-init-chara').init_chara(9017);
+    init_chara(9017);
     era.set('relation:17:0', 152);
     era.set('relation:9017:0', -95);
     era.set('callname:9017:3', '皇子');

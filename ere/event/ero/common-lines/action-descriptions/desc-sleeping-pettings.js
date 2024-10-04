@@ -103,6 +103,98 @@ module.exports = (handlers) => {
       ' 丰满的大腿……】',
     ]);
 
+  handlers[ero_hooks.pet_tail] = (attacker, defender) =>
+    era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 玩弄着沉睡的 ',
+      defender.get_colored_name(),
+      ' 馨香的尾巴……】',
+    ]);
+
+  handlers[ero_hooks.pull_tail] = (attacker, defender) =>
+    era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 拉扯着沉睡的 ',
+      defender.get_colored_name(),
+      ' 脆弱的尾巴……】',
+    ]);
+
+  handlers[ero_hooks.cunnilingus] = (attacker, defender, hook) => {
+    if (hook.arg) {
+      return era.printAndWait([
+        '【',
+        attacker.get_colored_name(),
+        ' 将沉睡的 ',
+        defender.get_colored_name(),
+        ' 翕动的小豆豆含入口中……】',
+      ]);
+    }
+    return era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 吮吸着 ',
+      defender.get_colored_name(),
+      ' 风流的小豆豆……】',
+    ]);
+  };
+
+  handlers[ero_hooks.force_deep_blow_job] = (attacker, defender) =>
+    era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 将肉棒插入 ',
+      defender.get_colored_name(),
+      ' 微张的小口中……】',
+    ]);
+
+  handlers[ero_hooks.blow_job] = (attacker, defender, hook) => {
+    if (hook.arg) {
+      return era.printAndWait([
+        '【',
+        attacker.get_colored_name(),
+        ' 将沉睡的 ',
+        defender.get_colored_name(),
+        ' 耸立的肉棒含入口中……】',
+      ]);
+    }
+    return era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 舔舐着沉睡的 ',
+      defender.get_colored_name(),
+      ' 耸立的肉棒……】',
+    ]);
+  };
+
+  handlers[ero_hooks.deep_blow_job] = (attacker, defender) =>
+    era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 将沉睡的 ',
+      defender.get_colored_name(),
+      ' 耸立的肉棒深深含入口中……】',
+    ]);
+
+  handlers[ero_hooks.hand_job] = (attacker, defender) =>
+    era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 用手掌抚弄着沉睡的 ',
+      defender.get_colored_name(),
+      ' 耸立的肉棒……】',
+    ]);
+
+  handlers[ero_hooks.hand_and_blow_job] = (attacker, defender) =>
+    era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 手口并用地侍奉着沉睡的 ',
+      defender.get_colored_name(),
+      ' 耸立的肉棒……】',
+    ]);
+
   handlers[ero_hooks.fuck_tit] = (attacker, defender) =>
     era.printAndWait([
       '【',
