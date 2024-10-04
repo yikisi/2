@@ -15,6 +15,18 @@ const { first_child_id, set_chara_ero_image } = require('#/data/other-const');
 
 const item_title_color = adaptability_colors.at(-1);
 
+/**
+ * @param {number} chara_id
+ * @param {string} [_suffix]
+ */
+function get_copyright_entry(chara_id, _suffix) {
+  const suffix = _suffix ? `（${_suffix}）` : '';
+  return {
+    color: get_chara_color(chara_id),
+    content: `${era.get(`static:${chara_id}:name`)}${suffix}`,
+  };
+}
+
 module.exports = async () => {
   let flagTitle = true;
   sys_personal_achievement.init();
@@ -77,130 +89,30 @@ module.exports = async () => {
     era.quit();
   }
   const line_copyrights = [
-    [
-      [{ color: get_chara_color(3), content: era.get('static:3:name') }],
-      '天马闪光蹄',
-    ],
-    [
-      [{ color: get_chara_color(7), content: era.get('static:7:name') }],
-      '雞雞',
-    ],
+    [[get_copyright_entry(3)], '天马闪光蹄'],
+    [[get_copyright_entry(7)], '雞雞'],
+    [[get_copyright_entry(17)], '露娜俘虏'],
+    [[get_copyright_entry(19)], '片手虾好评发售中！'],
+    [[get_copyright_entry(24)], '黑奴二号'],
+    [[get_copyright_entry(25)], 'Necroz'],
     [
       [
-        {
-          color: get_chara_color(17),
-          content: era.get('static:17:name'),
-        },
-      ],
-      '露娜俘虏',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(19),
-          content: era.get('static:19:name'),
-        },
-      ],
-      '片手虾好评发售中！',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(24),
-          content: era.get('static:24:name'),
-        },
-      ],
-      '黑奴二号',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(25),
-          content: era.get('static:25:name'),
-        },
-      ],
-      'Necroz',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(30),
-          content: era.get('static:30:name'),
-        },
+        get_copyright_entry(30),
         '、',
-        {
-          color: get_chara_color(85),
-          content: era.get('static:85:name'),
-        },
+        get_copyright_entry(85),
         '、',
-        {
-          color: get_chara_color(205),
-          content: era.get('static:205:name'),
-        },
+        get_copyright_entry(205),
       ],
       '梦露',
     ],
+    [[get_copyright_entry(32)], '幽白書'],
+    [[get_copyright_entry(35, '部分地下室')], '幽白書'],
+    [[get_copyright_entry(37)], '爱放箭的袁本初'],
+    [[get_copyright_entry(52)], '99'],
+    [[get_copyright_entry(56)], 'ALEX'],
+    [[get_copyright_entry(60)], '红红火火恍惚'],
     [
-      [
-        {
-          color: get_chara_color(32),
-          content: era.get('static:32:name'),
-        },
-      ],
-      '幽白書',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(35),
-          content: `${era.get('static:35:name')}（部分地下室）`,
-        },
-      ],
-      '幽白書',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(37),
-          content: era.get('static:37:name'),
-        },
-      ],
-      '爱放箭的袁本初',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(52),
-          content: era.get('static:52:name'),
-        },
-      ],
-      '99',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(56),
-          content: era.get('static:56:name'),
-        },
-      ],
-      'ALEX',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(60),
-          content: era.get('static:60:name'),
-        },
-      ],
-      '红红火火恍惚',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(67),
-          content: era.get('static:67:name'),
-        },
-      ],
+      [get_copyright_entry(67)],
       [
         '某知名手游公司编剧',
         { isDivider: true },
@@ -210,12 +122,7 @@ module.exports = async () => {
       ],
     ],
     [
-      [
-        {
-          color: get_chara_color(68),
-          content: era.get('static:68:name'),
-        },
-      ],
+      [get_copyright_entry(68)],
       [
         '小黑',
         { isDivider: true },
@@ -224,87 +131,18 @@ module.exports = async () => {
         '无名黑奴',
       ],
     ],
+    [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
+    [[get_copyright_entry(89, '地下室')], '無奈'],
+    [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
+    [[get_copyright_entry(119, '地下室')], '幽白書'],
     [
-      [
-        {
-          color: get_chara_color(86),
-          content: `${era.get('static:86:name')}（部分地下室）`,
-        },
-      ],
-      'イーウィヤ',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(89),
-          content: `${era.get('static:89:name')}（地下室）`,
-        },
-      ],
-      '無奈',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(100),
-          content: era.get('static:100:name'),
-        },
-      ],
-      '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(119),
-          content: `${era.get('static:119:name')}（地下室）`,
-        },
-      ],
-      '幽白書',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(303),
-          content: `${era.get('static:303:name')}（部分）`,
-        },
-      ],
+      [get_copyright_entry(303, '部分')],
       ['雞雞', { isDivider: true }, '幽白書'],
     ],
-    [
-      [
-        {
-          color: get_chara_color(340),
-          content: `${era.get('static:340:name')}（招募）`,
-        },
-      ],
-      'O口口口口口',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(341),
-          content: `${era.get('static:341:name')}（招募）`,
-        },
-      ],
-      'フィンランド',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(342),
-          content: `${era.get('static:342:name')}（招募）`,
-        },
-      ],
-      '黑衣剑士-星爆气流斩准备就绪',
-    ],
-    [
-      [
-        {
-          color: get_chara_color(400),
-          content: era.get('static:400:name'),
-        },
-      ],
-      '黑衣剑士-星爆气流斩准备就绪',
-    ],
+    [[get_copyright_entry(340, '招募')], 'O口口口口口'],
+    [[get_copyright_entry(341, '招募')], 'フィンランド'],
+    [[get_copyright_entry(342, '招募')], '黑衣剑士-星爆气流斩准备就绪'],
+    [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
     [
       ['招募、日常、爱慕地文', { isBr: true }, '教学、地下室教学'],
       ['雞雞', { isDivider: true }, '无名黑奴'],
