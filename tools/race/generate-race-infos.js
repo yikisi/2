@@ -24,7 +24,7 @@ let output =
   'const {\n' +
   '  lane_params,\n' +
   '  slope_params,\n' +
-  "} = require('#/data/race/race-params');\n\nconst race_enum = {\n// 出道战\nbegin_race: 0,\n";
+  "} = require('#/data/race/race-params');const race_rewards = require('#/data/race/race-rewards');\n\nconst race_enum = {\n// 出道战\nbegin_race: 0,\n";
 
 csv.forEach((e) => {
   output += `// ${e[5]}\n${e[1]}:0,\n`;
@@ -53,7 +53,7 @@ output +=
   '  e.lanes = lane_params[param_id];\n' +
   '  e.slopes = slope_params[param_id];\n' +
   '  e.phases = [Math.ceil(e.span*4/24),Math.ceil(e.span*16/24),Math.ceil(e.span*20/24)]\n' +
-  "});\n\nrace_infos[race_enum.begin_race] = require('#/data/race/race-begin-race')\n\nconsole.log('[race-const.js] race info init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nmodule.exports = {\nrace_enum,\nrace_infos,\nrace_rewards: require('#/data/race/race-rewards')};";
+  "});\n\nrace_infos[race_enum.begin_race] = require('#/data/race/race-begin-race')\n\nconsole.log('[race-const.js] race info init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nmodule.exports = {\nrace_enum,\nrace_infos,\nrace_rewards};";
 
 writeFileSync('../../ere/data/race/race-const.js', output);
 

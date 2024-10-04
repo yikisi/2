@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201701,
   '决死之心',
-  '在终盘的最终直线若处于好位置，则提升速度＜中距离＞',
+  '在终盘的最终直线若处于好位置，则提升速度',
   20170,
   2,
   UmaSkill.rarity_enum.gold,
@@ -75,4 +75,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [4],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

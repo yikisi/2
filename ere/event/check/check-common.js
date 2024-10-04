@@ -50,6 +50,10 @@ class CustomizedCheck {
     this.id = chara_id;
   }
 
+  /** @param {number[]} partners */
+  // eslint-disable-next-line no-unused-vars
+  check_after_betrayed(partners) {}
+
   /** @param {number} level */
   // eslint-disable-next-line no-unused-vars
   check_after_punish(level) {}
@@ -213,7 +217,8 @@ class CustomizedCheck {
     if (
       common_no_action_check(this.id) ||
       era.get('flag:当前位置') === location_enum.basement ||
-      era.get('cflag:0:位置') !== 0
+      era.get('cflag:0:位置') !== 0 ||
+      !era.get(`cflag:${this.id}:种族`)
     ) {
       return false;
     }

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202862,
   '紧急发动',
-  '起跑时加速度稍微提升＜短距离＞',
+  '起跑时加速度稍微提升',
   20286,
   1,
   UmaSkill.rarity_enum.normal,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   120,
   false,
   false,
+  [2],
+  [UmaSkill.ability_tag_enum.accel],
 );

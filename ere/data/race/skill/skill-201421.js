@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201421,
   '放松',
-  '比赛中盘位于中团以后时，恢复持久力＜差马＞',
+  '比赛中盘位于中团以后时，恢复持久力',
   20142,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

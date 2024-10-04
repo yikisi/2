@@ -27,6 +27,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-302');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
+const YandereList = require('#/data/event/yandere-list');
 const { get_celebration, get_relation_mark } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
@@ -243,6 +244,9 @@ async function page_chairman_office() {
                   chara.name = era.set('callname:302:-2', '秋川弥生');
                   await chara.say_and_wait('啊吧啊吧啊吧啊吧……');
                   era.set('cflag:302:招募状态', recruit_flags.yes);
+                  if (era.get('talent:302:病娇')) {
+                    new YandereList().push(302, true);
+                  }
                   await era.printAndWait([
                     '恭 喜！',
                     chara.get_colored_name(),

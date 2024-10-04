@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202471,
   '猛追',
-  '比赛后半段进行追赶时，速度提升＜先马/差马＞',
+  '比赛后半段进行追赶时，速度提升',
   20247,
   2,
   UmaSkill.rarity_enum.gold,
@@ -76,4 +76,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [7, 8],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

@@ -654,8 +654,8 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
   );
   ero_derive_check[ero_actions.ask_tit_and_blow_job] = true;
 
-  ero_action_names[ero_actions.fuck_tit_and_month] = '抽插乳夹口交';
-  ero_tagged_hooks[ero_actions.fuck_tit_and_month] = new EroHookTag(
+  ero_action_names[ero_actions.fuck_tit_and_mouth] = '抽插乳夹口交';
+  ero_tagged_hooks[ero_actions.fuck_tit_and_mouth] = new EroHookTag(
     [ero_action_tags.insert, ero_action_tags.pet],
     [
       ero_action_tags.breast,
@@ -663,7 +663,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       EroHookTag.tit_and_blow_job_check,
     ],
   );
-  ero_derive_check[ero_actions.fuck_tit_and_month] = true;
+  ero_derive_check[ero_actions.fuck_tit_and_mouth] = true;
 
   ero_action_names[ero_actions.tit_and_blow_job] = '乳夹口交';
   ero_tagged_hooks[ero_actions.tit_and_blow_job] = new EroHookTag(

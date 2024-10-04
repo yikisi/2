@@ -79,4 +79,6 @@ module.exports = new UmaSkill(
   200,
   false,
   true,
+  [5],
+  [UmaSkill.ability_tag_enum.hpRate, UmaSkill.ability_tag_enum.currentSpeed],
 );

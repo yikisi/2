@@ -510,7 +510,7 @@ module.exports = (handlers) => {
     );
   };
 
-  handlers[ero_hooks.fuck_tit_and_month] = (
+  handlers[ero_hooks.fuck_tit_and_mouth] = (
     attacker,
     defender,
     _,

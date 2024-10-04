@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202672,
   '雀跃',
-  '在刚进入比赛终盘时，若位于前方则稍微提升加速度＜英里＞',
+  '在刚进入比赛终盘时，若位于前方则稍微提升加速度',
   20267,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [3],
+  [UmaSkill.ability_tag_enum.accel],
 );

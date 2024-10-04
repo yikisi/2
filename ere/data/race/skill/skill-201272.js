@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201272,
   '领者的自尊心',
-  '在比赛序盘或中盘，稍微擅于超越和竞争＜逃马＞',
+  '在比赛序盘或中盘，稍微擅于超越和竞争',
   20127,
   1,
   UmaSkill.rarity_enum.normal,
@@ -78,4 +78,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [6],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

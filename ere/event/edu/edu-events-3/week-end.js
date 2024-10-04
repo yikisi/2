@@ -456,7 +456,7 @@ module.exports = async (_, __, event_object) => {
       get_skill_list(era.get('cflag:3:性别')).forEach((e) =>
         era.set(`abl:3:${e}`, Math.min(era.get(`abl:3:${e}`) + 1, 5)),
       );
-      get_filtered_talents(teio.sex_code, 1000)
+      get_filtered_talents(teio.sex_code, 60)
         .filter((talent_id) => era.get(`talent:3:${talent_id}`) < 1)
         .forEach((talent_id) => era.set(`talent:3:${talent_id}`, 1));
       touch_list

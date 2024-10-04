@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200701,
   '豪脚',
-  '比赛终盘位于后方时，赶超别人的能力会提升＜英里＞',
+  '比赛终盘位于后方时，赶超别人的能力会提升',
   20070,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [3],
+  [UmaSkill.ability_tag_enum.accel],
 );

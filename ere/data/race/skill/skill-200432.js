@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   140,
   false,
   false,
+  [],
+  [UmaSkill.ability_tag_enum.startDash],
 );

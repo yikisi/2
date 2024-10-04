@@ -129,9 +129,9 @@ module.exports = (handlers) => {
         supporter.get_colored_name(),
         ' 一起不断进攻着 ',
         attacker.get_colored_name(),
-        ' 的',
+        ' 的口穴和',
         part_name,
-        '和口穴，',
+        '……',
       ]);
       await era.printAndWait([
         '身下的快感与口中肉棒令人窒息的冲击感觉让 ',

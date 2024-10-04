@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201431,
   '大局观',
-  '比赛中盘时，观察力提高，视野变得宽阔＜差马＞',
+  '比赛中盘时，观察力提高，视野变得宽阔',
   20143,
   2,
   UmaSkill.rarity_enum.gold,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   120,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.visible],
 );

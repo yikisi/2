@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201542,
   '差马诀窍○',
-  '稍微容易占据有利位置＜差马＞',
+  '稍微容易占据有利位置',
   20154,
   1,
   UmaSkill.rarity_enum.normal,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   110,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.wiz, UmaSkill.ability_tag_enum.visible],
 );

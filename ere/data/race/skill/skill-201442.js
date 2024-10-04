@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201442,
   '锐利目光',
-  '在比赛终盘使其他的马娘略微产生动摇＜差马＞',
+  '在比赛终盘使其他的马娘略微产生动摇',
   20144,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

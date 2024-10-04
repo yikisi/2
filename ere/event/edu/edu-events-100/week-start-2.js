@@ -2,411 +2,752 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const {
+  get_chara_talk,
+  say_by_passer_by_and_wait,
+} = require('#/utils/chara-talk-factory');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean}):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
-  handlers[95 + 6] = async (acute, me, callname) => {
+  handlers[47 + 1] = async (acute, me, callname, flags) => {
     era.set('cflag:100:节日事件标记', 0);
-    await print_event_name('拳人节 · 特大号追加超量叠放无敌燃烧版', acute);
-    const digital = get_chara_talk(19);
-    const jordan = get_chara_talk(48);
-    const festa = get_chara_talk(49);
-    era.println();
+    await print_event_name('新年的抱负', acute);
     await era.printAndWait([
-      '春去秋来，今年已是与 ',
+      '元旦时分，与 ',
       acute.get_colored_name(),
-      ' 相遇的第三年了。',
+      ' 一同待在训练员室内，一面看着电视，一面等待着新年的到来。',
     ]);
-    await era.printAndWait(
-      '冬雪消融，春影仍在。掰弄手指掐算时日，情人节的日子又一次迫在眉睫。',
-    );
+    await acute.say_and_wait('呼呼呼～被炉里暖呼呼的呢～');
     await era.printAndWait([
-      '见识了去年的鸡飞蛋打、放飞理想后，今年，',
-      me.get_colored_name(),
-      ' 与 ',
+      '坐在被炉中的 ',
       acute.get_colored_name(),
-      ' 都各自成长了许多。',
+      '，一边撕着橘子上的白条，一边漫不经心的说着。',
     ]);
-    await era.printAndWait([
-      '正因如此，情人节当天的傍晚，结束了日常的训练以后。',
-      me.get_colored_name(),
-      ' 与 ',
-      acute.get_colored_name(),
-      ' 轻车熟路的来到了自己的休息室。',
-    ]);
-    await era.printAndWait('打开电源，坐在一起，各自将下身探入床炉之中——');
-    era.printButton('「呜啊～～～❤️」', 1);
-    await era.input();
-    await acute.say_and_wait('啊哈哈～真暖和呢❤️。');
-    await era.printAndWait([
-      '早已习惯了各自存在的 ',
-      me.get_colored_name(),
-      ' 和 ',
-      acute.get_colored_name(),
-      '，相互依偎着，坐在床炉之前。',
-    ]);
-    era.printButton(
-      '「一想到这一周结束了，就要把床炉收起来了什么的……感觉好遗憾啊。」',
-      1,
-    );
+    await acute.say_and_wait(['啊，对了。', callname, '～可以问一件事吗？']);
+    era.printButton('「嗯？怎么了吗？」', 1);
     await era.input();
     await acute.say_and_wait(
-      '呼呼呼……毕竟很快气温就要升上去了呢。如果不赶紧收其床炉的话，可是会生出痱子的哦？',
+      '其实啊……最近跟同龄人聊天的时候呢，感觉自己不太懂得如何跟年轻人交流呢。',
     );
-    era.printButton('「唉～～～就不能再晚一点收嘛？」', 1);
-    await era.input();
+    await acute.say_and_wait(
+      '喜欢的东西啊，经常散步的地点啊，还有最近喜欢听的音乐——什么的呢。感觉自己很多话题都跟现在的年轻人对不上呢。',
+    );
+    await acute.say_and_wait(
+      '所以说啊……等新年了之后呢。想要让自己在同龄人眼里发生翻天覆地的转变来着……',
+    );
     await acute.say_and_wait([
-      '不行哦？要是 ',
+      '因此呢，',
       callname,
-      ' 变成床炉废人的话，我可是也是会一起颓废的啦～',
+      '。你觉得，我该怎么做好呢？',
     ]);
-    era.printButton('「唔……拿自己来施压，这算使诈吧？」', 1);
-    await era.input();
-    await acute.say_and_wait(['吼吼吼……', callname, ' 哦，可不要怪我卑鄙——']);
-    era.printButton('「明明去年你还躲在里面睡着了来着……」', 1);
-    await era.input();
-    await acute.say_and_wait('阿拉啦……我可什么都听不见哦？');
-    await era.printAndWait(
-      '在冬雪尚未消融之季，刚刚结束训练回到休息室的二人。就这样相处于床炉之中，一面插科打诨、一面透发着各自的汗水。',
+    era.println();
+    era.printButton('「去努力学习年轻人的文化吧！」（根性+25）', 1);
+    era.printButton('「先把这些事丢在一边吧？」（耐力+20）', 2);
+    era.printButton(
+      '「想些更有趣的话题来吸引同龄人的注意成为同龄人的翘楚吧！」（技能点数+20）',
+      3,
     );
-    await acute.say_and_wait('嗯……不过呢，果然还是得先洗个澡呢。');
+    switch (await era.input()) {
+      case 1:
+        await acute.say_and_wait('学习年轻人的文化吗……原来如此呢。');
+        await acute.say_and_wait('那么首先，就用手机去查查看当下的流行。');
+        await acute.say_and_wait(
+          'D.A.N.G.X.I.A.D.E.L.I.U.X.U……打错字了，删除——',
+        );
+        await acute.say_and_wait('啊，不小心删多了……那就重来——');
+        await era.printAndWait(
+          '一面用食指敲击着手机，一面小声的念出打出的字母。',
+        );
+        await era.printAndWait('远远地望过去，实在是感觉怪可爱的。');
+        await acute.say_and_wait('D.A.N.G.X.I.A.D.E.L.I.U.X.I.N.G——回车');
+        await acute.say_and_wait('………………');
+        await acute.say_and_wait('唔噜？页面怎么没有动呢？');
+        await era.printAndWait([
+          '虽然不知道 ',
+          acute.get_colored_name(),
+          ' 对手机的操作。',
+        ]);
+        await era.printAndWait('但从一旁听来，看来是把回车错当做确认键了吧。');
+        await era.printAndWait([
+          '看来【学习年轻人文化】对 ',
+          acute.get_colored_name(),
+          ' 来说，仍是任重道远啊——',
+        ]);
+        flags.wait_flag = get_attr_and_print_in_event(100, [0, 0, 0, 25], 0);
+        break;
+      case 2:
+        await acute.say_and_wait('先把这些事丢在一边……吗？');
+        await acute.say_and_wait(
+          '嗯……说来也是呢。既然是新年的话——得要好好休息才是呢。',
+        );
+        await acute.say_and_wait(['那么——给，', callname, '。']);
+        await era.printAndWait([
+          '慢条斯理的 ',
+          acute.get_colored_name(),
+          '，将手中已去处了白条的橘子撇成了两半后，递了过来。',
+        ]);
+        await era.printAndWait('从中掰下一块，塞进嘴里——');
+        era.printButton('「——————————————」', 1);
+        await era.input();
+        await era.printAndWait('酸死了啊！！！！');
+        await era.printAndWait([
+          '一旁，看着 ',
+          me.get_colored_name(),
+          ' 因酸味而扭曲了面容的 ',
+          acute.get_colored_name(),
+          '，不由自主的笑出了声来。',
+        ]);
+        await era.printAndWait('在笑声之中，度过了一个酸味十足的新年——');
+        flags.wait_flag = get_attr_and_print_in_event(100, [0, 20], 0);
+        break;
+      case 3:
+        await acute.say_and_wait('成为同龄人的翘楚？');
+        await era.printAndWait([
+          acute.get_colored_name(),
+          ' 似乎有点没有听明白。',
+        ]);
+        await acute.say_and_wait(
+          '虽然不是很明白……但也就是说，是要努力寻找话题的意思吗？',
+        );
+        await acute.say_and_wait('努力的寻找话题……话题——');
+        await acute.say_and_wait(
+          '啊，想到了。新年节庆炖菜的制作方法——用这个当做话题的话，一定能把气氛变得融洽的……哎嘿嘿。',
+        );
+        await era.printAndWait([acute.get_colored_name(), ' 温和得笑着。']);
+        await era.printAndWait(
+          '而与此同时，厨房内的炖在炉前的美食，发出了欢腾的声音——',
+        );
+        flags.wait_flag = get_attr_and_print_in_event(100, undefined, 20);
+    }
+  };
+
+  handlers[47 + 6] = async (acute, me, callname, flags) => {
+    const a_call_j = sys_get_colored_callname(100, 48),
+      j_call_a = sys_get_colored_callname(48, 100),
+      jordan = get_chara_talk(48);
+    era.set('cflag:100:节日事件标记', 0);
+    await print_event_name('世纪初最强拳人节', acute);
     await era.printAndWait([
-      '一面如是说着，',
+      '春来秋去，自成为 ',
       acute.get_colored_name(),
-      ' 从床炉中挣脱，站起了身来。',
+      ' 的训练员以来，也已到了第二年。',
+    ]);
+    await era.printAndWait(
+      '元旦的氛围尚未离去，去年年末来商店街买东西时偶然蹩见的圣诞树又一次挂上了新的装饰，摆在商店街的入口。',
+    );
+    await era.printAndWait(
+      '在不远处眺望着圣诞树上的礼盒，正奇怪这到底是什么节日的装饰，掐着手指算了算时间，这才想起来，过几天就是情人节的日子了。',
+    );
+    await era.printAndWait([
+      '……嘛，是跟 ',
+      me.get_colored_name(),
+      ' 无关的节日。',
+    ]);
+    await era.printAndWait([
+      '对于生活在特雷森高墙中的 ',
+      me.get_colored_name(),
+      ' 而言，平日里的生活就是与前途无量的新人',
+      acute.get_uma_sex_title(),
+      '进行着日复一日不间断的训练，自然也没有充足的时间，在高墙外与同龄的异性谈酸酸甜甜的恋爱了。',
+    ]);
+    await era.printAndWait([
+      '虽然听说现在受欢迎的训练员偶尔也会在情人节收到担当',
+      acute.get_uma_sex_title(),
+      '的友情巧克力……',
+    ]);
+    await era.printAndWait([
+      '但不管怎么想，',
+      acute.get_colored_name(),
+      ' 都不像是那种会过情人节的年轻系',
+      acute.get_uma_sex_title(),
+      '啊——',
+    ]);
+    await era.printAndWait('………………');
+    await era.printAndWait('…………');
+    era.printButton('「嗯？」', 1);
+    await era.input();
+    await era.printAndWait([
+      '在商店街采购训练用品时，偶然间在商店街的入口看见了正巧经过的「',
+      acute.get_colored_name(),
+      '」与「',
+      jordan.get_colored_name(),
+      '」。',
+    ]);
+    await era.printAndWait('两人有说有笑的并排走在街上，也不知在聊些什么。');
+    await era.printAndWait('看方向，似乎是打算去「车站」附近——');
+    await era.printAndWait('…………要不跟上去看看吧？');
+    await era.printAndWait('不知为何，隐隐总有会发生什么预感的。');
+    await era.printAndWait(
+      '提着刚买的两斤特价鸡胸肉和蛋白粉，偷偷的跟在了自己的担当学生身后。',
+    );
+    await era.printAndWait('……');
+    await era.printAndWait([
+      '……是错觉吗？总感觉路边的警察看 ',
+      me.get_colored_name(),
+      ' 的眼神似乎有点不太正常。',
+    ]);
+    era.drawLine();
+    await jordan.say_and_wait([
+      '就是这个！',
+      j_call_a,
+      '——你看，完全玩不了嘛！',
+    ]);
+    await acute.say_and_wait('……『拳击机』？');
+    await acute.print_and_wait([
+      '车站边的游戏中心，',
+      acute.get_colored_name(),
+      ' 与 ',
+      jordan.get_colored_name(),
+      ' 两人正围着一台新的拳击机。',
+    ]);
+    await jordan.say_and_wait([
+      '对，就是这个游戏中心新推出的，新设了『',
+      acute.get_uma_sex_title(),
+      '』级别拳击机。',
+    ]);
+    await jordan.say_and_wait([
+      '只要能在『',
+      acute.get_uma_sex_title(),
+      '』级别里取得高分的话，就能够拿到奖品——',
+    ]);
+    await jordan.say_and_wait(
+      '但我之前来的时候打了好几次，不仅没有高分，而且数值都一动不动的——一定是坏掉了才会这样吧！',
+    );
+    await acute.say_and_wait('……『拳击机』？');
+    await acute.print_and_wait([
+      '摸着自己的侧脸，',
+      acute.get_colored_name(),
+      ' 打量起了眼前从未见过的机器。',
+    ]);
+    await jordan.say_and_wait('真是糟糕……我还想要奖品里的美甲套餐呢。');
+    await acute.say_and_wait(
+      '阿拉阿拉……原来是这样啊，所以你才这么不甘嘛，唔姆唔姆——',
+    );
+    await acute.say_and_wait([
+      a_call_j,
+      '，你可以再试一次吗？我在旁边帮你看看哦～',
+    ]);
+    await jordan.say_and_wait('没问题，这次可是要认真上了。你稍微走远一点哦。');
+    await jordan.say_and_wait('预备——');
+    await acute.print_and_wait('╲！砰～！╱');
+    await jordan.say_and_wait(
+      '——呼，你看！打完了，这排名动都不动，很明显是机器坏掉了嘛。',
+    );
+    await acute.say_and_wait('嗯……原来如此呢。');
+    await era.printAndWait([
+      '站在一旁的 ',
+      acute.get_colored_name(),
+      '，似乎看出了些许门道。',
+    ]);
+    await acute.say_and_wait(['接下来照我说的，再试一次吧，', a_call_j, '。']);
+    await acute.say_and_wait(
+      '首先呢，不要把拇指塞进拳头里，不然的话你会像刚才那样下意识保护指甲而用不上力。',
+    );
+    await acute.say_and_wait(
+      '接下来是你的站位，出拳时要把另一边的腿放在前面，然后再侧身——',
+    );
+    await jordan.say_and_wait('啊、阿勒？……是这样吗？');
+    await acute.say_and_wait(
+      '对、对……然后呢，膝盖放松、夹住腋窝。出拳时手臂和肩膀保持平行线，注意下半身的重心，创造出【黄金矩形】，然后呢——',
+    );
+    await acute.say_and_wait('然后用尽全力，打出去！……试试看吧？');
+    await jordan.say_and_wait([
+      '欸？唔……是这样吗？……真的可以吗，',
+      j_call_a,
+      '？',
     ]);
     await acute.say_and_wait([
-      '那我先去烧热水了哦，',
-      callname,
-      '。记得烧好了后早点来洗哦？',
+      '只管相信就好哦，',
+      a_call_j,
+      '。只要能摆出黄金矩形的姿势，就一定能做到的啦。',
     ]);
-    await era.printAndWait([
-      '虽然很想告知 ',
-      acute.get_colored_name(),
-      '，如今的科技进步已使得人们不再需要专门去进行烧洗澡水的工序。',
+    await jordan.say_and_wait('唔……尽然你这么说的话……预备——');
+    await era.printAndWait('╲！！！砰～！！！╱');
+    await era.printAndWait('*～叮～*');
+    await era.printAndWait('*～恭喜你已获得了奖品～*');
+    await jordan.say_and_wait('欸！？不是吧？真的出奖品了？');
+    await jordan.say_and_wait([
+      '我明明只是听了 ',
+      j_call_a,
+      ' 说的调整了一下姿势……而且现在手臂还有一种麻麻的感觉——',
     ]);
-    await era.printAndWait([
-      '但 ',
-      acute.get_colored_name(),
-      ' 似乎还是很钟爱这样的发言——当然，似乎也没有纠正',
-      acute.sex,
-      '的必要。',
-    ]);
-    era.printButton('「了解——一路顺风～」', 1);
-    await era.input();
-    await acute.say_and_wait('还有呢——巧克力放在冰箱里了，记得吃哦？');
-    era.printButton('「了解了解～放心吧，我知道啦。」', 1);
-    await era.input();
-    await era.printAndWait(
-      '漫不经心得挥手回应，或许这不太雅观，但对于安心的对象而言，总能暴露出自己最慵懒的一面。',
+    await jordan.say_and_wait([j_call_a, '，你也太厉害了吧！']);
+    await acute.say_and_wait(
+      '赫赫……可能是因为我对拳击啊，稍～微有那么一点点的经验吧？',
     );
-    await era.printAndWait([
-      acute.get_colored_name(),
-      ' 缓缓得走向了洗浴室，关上门、传出了咔哒的声响。',
-    ]);
-    await era.printAndWait('坐在床炉前，眼神不由自主得瞟向了洗浴室——');
-    await era.printAndWait('【咔哒、咔哒——】');
-    await era.printAndWait('【哗哗哗～～～～】');
-    await era.printAndWait('水声从门缝中传出……');
-    await me.say_and_wait('…………', true);
-    era.printButton('（真是一点防备都没有啊。）', 1);
-    await era.input();
-    await era.printAndWait('要不……去看看？');
-    await era.printAndWait(
-      '从床炉中艰难得爬出，以匍匐的姿态，行邪恶隐秘之事。',
+    await acute.say_and_wait(
+      '以前还在打拳的时候呢，曾经被人称为『右直拳的小锐』哦？',
     );
-    await era.printAndWait(
-      '穿越客厅，爬过客厅前的走廊，来到另一侧的洗浴室前。',
-    );
-    await era.printAndWait(
-      '滴答的水声，正从面前的门缝中传来。仅需轻轻一推，便能遥望山峰的光彩。',
-    );
-    await me.say_and_wait('当然，这可不是什么变态的行径。', true);
-    await me.say_and_wait(
-      ['只不过 ', acute.get_colored_name(), ' 每次洗澡，都会洗三十分钟。'],
+    await acute.say_and_wait(
+      '嘛……虽然再打败南O四天王后后来被改称为了『传奇』了呢。',
       true,
     );
-    await me.say_and_wait('要我等三十分钟的话，那句只能乖乖的等了。', true);
-    await me.say_and_wait(
+    await jordan.say_and_wait([
+      '唉～～～～！那 ',
+      j_call_a,
+      ' 来的话，肯定能拿到更多的奖品吧？',
+    ]);
+    await acute.say_and_wait('啊哈哈……这个嘛——');
+    await acute.print_and_wait('……老实说的话，其实并不想试试来着。');
+    await acute.print_and_wait(
+      '毕竟不打拳已经好多年了，自己早就已经找不回当初的巅峰状态了来着。',
+    );
+    await acute.print_and_wait(
+      '用这台机器测试的话，不管测试的结果如何，恐怕都会因找不回曾经巅峰时的感觉而遗憾吧？',
+    );
+    await acute.print_and_wait(
+      '伸出手来，正想要推脱——却恰好看到了墙上的奖品一栏。',
+    );
+    await acute.say_and_wait('咕噜姆……三等奖，巧克力慕斯特大蛋糕？', true);
+    await acute.say_and_wait(
+      ['说起来，情人节快要到了呢。', callname, ' 那边——'],
+      true,
+    );
+    await acute.say_and_wait('…………');
+    await acute.say_and_wait([
+      '唔，我明白了，那就来试试看吧。',
+      a_call_j,
+      '，往旁边站一点哦？',
+    ]);
+    await acute.print_and_wait([
+      '本应推脱的右手化为了拳头，这使 ',
+      acute.get_colored_name(),
+      ' 充满了决心。',
+    ]);
+    await jordan.say_and_wait('好耶！');
+    await acute.say_and_wait('咕噜姆……好好想一想过去的感觉。', true);
+    await acute.say_and_wait(
+      '回想起来……以前在埃及对战O奥的时候，自己的眼睛被对方遮住的时候，自己所挥出的一拳——',
+      true,
+    );
+    await acute.say_and_wait('立点支点作用点……立点支点作用点——哈！！！');
+    await era.printAndWait('╲╲╲！！！！！！！！砰！！！！！！！！╱╱╱');
+    await acute.print_and_wait([
+      '伴随着 ',
+      acute.get_colored_name(),
+      ' 的一击，四面飘起了不知从何而来的巨大烟尘。',
+    ]);
+    await era.printAndWait('*～叮～*');
+    await era.printAndWait(
+      '*～故障、故障、故障——请立刻联系工作人员进行处理～*',
+    );
+    await acute.say_and_wait('啊……阿拉？这是把机器给打坏了吗……');
+    await acute.say_and_wait('太久没有打拳，果然生疏了啊——');
+    await jordan.say_and_wait('………………不是吧。');
+    await acute.print_and_wait([
+      jordan.get_colored_name(),
+      ' 目瞪口呆得，望着被这仅仅一击就彻底形变的机器陷入了深深沉思。',
+    ]);
+    await acute.print_and_wait(
+      '很快，这座城市的地下拳术界，崭新的传说即将就此诞生——',
+    );
+    era.drawLine();
+    await acute.print_and_wait([
+      '是夜，推脱了游戏厅3000胡萝卜宝石一等奖的 ',
+      acute.get_colored_name(),
+      '，带着巧克力慕斯特大蛋糕来到了训练员室。',
+    ]);
+    await acute.print_and_wait(
+      '把蛋糕放在被炉上，躲在一旁的礼物盒中，特意关上了灯。',
+    );
+    await acute.say_and_wait(
+      ['听 ', a_call_j, ' 说的，年轻人喜欢的惊喜派对……应该就是这样吧？'],
+      true,
+    );
+    await acute.say_and_wait(
       [
-        '不过要等三十分钟的话，为什么不能在 ',
-        acute.get_colored_name(),
-        ' 所在的洗浴室门前等呢？',
+        '为此还特意穿上了 ',
+        a_call_j,
+        ' 穿的……决胜服？等 ',
+        callname,
+        ' 回来了之后呢，就跳出来，吓他一跳，什么的……',
       ],
       true,
     );
-    await me.say_and_wait(
-      '这段时间里，因为门没关紧，所以为了帮着关门而不小心看见洗浴室内的情况想必也是很合理的吧～',
+    await acute.say_and_wait(
+      '欸嘿嘿……仔细想想的话，还真不像是我会做的事情呢。',
       true,
     );
-    await me.say_and_wait('噢———！', true);
-    await era.printAndWait('却见那仙境之中，云雾缥缈。');
-    await era.printAndWait(
-      '银河水自天上而来，流双峰、过平湖、入浅葱，终归入那大江流。',
-    );
-    await era.printAndWait(
-      '自古仁者好乐山，白皙之谷、玉粉之峰，白雾飞云渡，唯有苦心人，敢登峰。',
-    );
-    await era.printAndWait(
-      '从来智者喜流水、灰丝发下银河流，滴答玉石化琼髓。唯有真缘人，可品度。',
-    );
-    await era.printAndWait(
-      '此间仙人景，唯得偷光人，平视业以佳、仰望欲更好。怎是一字好得了？',
-    );
-    await me.say_and_wait('NICE～～～～！', true);
-    era.printButton('（那么，靠近一点、再靠近一点……）', 1);
-    await era.input();
-    await era.printAndWait(
-      '然而，就在这时，却听嘎登一声，休息室的大门被打开了——',
-    );
-    const tokino = get_chara_talk(301);
-    await tokino.say_and_wait([me.actual_name, '在吗？这儿有一份你的快件……']);
-    await era.printAndWait([
-      '大门前，正趴在洗浴室门前的自己，被 ',
-      tokino.get_colored_name(),
-      ' 一览无余。',
-    ]);
-    await tokino.say_and_wait('………………');
-    await era.printAndWait('哗啦啦啦啦啦～');
-    await era.printAndWait('哗啦啦啦啦啦～');
-    era.printButton('「………………」', 1);
-    await era.input();
-    await me.say_and_wait([
-      '等等，',
-      sys_get_colored_callname(0, 301),
-      '，请听我解释。',
-    ]);
-    await me.say_and_wait('那什么，其实，我这是在……');
-    await me.say_and_wait('凿壁偷——');
-    await era.printAndWait('【啪！！！！！】');
-    await era.printAndWait('清澈而干脆的声音，响彻在整个特雷森之上——');
-    era.drawLine();
-    await era.printAndWait([
-      '三十分钟后，裹着浴袍的 ',
-      acute.get_colored_name(),
-      '，缓步从洗浴室里走出。',
-    ]);
-    await acute.say_and_wait([
-      '阿拉啦……',
+    await acute.print_and_wait([
+      '为什么要给 ',
       callname,
-      '，你坐在客厅里等了我三十分钟吗？真了不起呢——',
-    ]);
-    await acute.say_and_wait('不过……你右脸上的这个红印是？');
-    era.printButton('「……被蚊子咬的。」', 1);
-    await era.input();
-    await acute.say_and_wait('那鼻子上的青斑？');
-    era.printButton('「……被大号蚊子咬的。」', 1);
-    await era.input();
-    await acute.say_and_wait('那你头顶上的这个褐红色的液体……是？');
-    era.printButton('「……被特大号蚊子咬的。」', 1);
-    await era.input();
-    await acute.say_and_wait('哦……原来这个季节也有这么大个蚊子啊——');
-    await era.printAndWait([
-      '若有所思着的 ',
+      ' 这样的情人节惊喜呢？说实话 ',
       acute.get_colored_name(),
-      '，就这样优哉游哉的走到了冰箱边，取出了一件物品。',
+      ' 自己也不明白。',
     ]);
+    await acute.print_and_wait([
+      '只是在拳击机的奖品名单上，看到巧克力慕斯特大蛋糕的时候，脑海里不由自主的浮现出了给 ',
+      callname,
+      ' 一个惊喜的场景。',
+    ]);
+    await acute.print_and_wait([
+      '还记得第一次在天台上看见偷偷流泪的 ',
+      callname,
+      ' 的时候，还觉得',
+      me.sex,
+      '会是被异性抛弃了后躲起来一个人哭的小孩子呢。',
+    ]);
+    await acute.print_and_wait([
+      '结果一转眼，自己自成为 ',
+      callname,
+      ' 的担当',
+      acute.get_uma_sex_title(),
+      '以来，都已经过了整整一年了呢。',
+    ]);
+    await acute.say_and_wait('……一整年啊，时间过的可真快呢。', true);
     await acute.say_and_wait(
-      '那么……为了表扬今天也很听话、很努力，做了一个乖孩子的训练员。给，这是我昨天做的巧克力哦。',
+      [
+        '本以为，作为赛',
+        acute.get_uma_sex_title(),
+        '在特雷森学园，会进行很枯燥的训练呢……没想到意外的还不赖呢。',
+      ],
+      true,
     );
-    era.printButton('「……在说这些之前，先把衣服穿上可以吗？」', 1);
-    await era.input();
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 倒也不是没有品赏浴袍的余情，只不过是自己刚刚被 ',
-      tokino.get_colored_name(),
-      '点了「如果再多看一眼裸体就会七窍流血爆体而亡」的穴位。',
+    await acute.print_and_wait([
+      '闭上眼睛，脑海里渐渐浮现起了 ',
+      callname,
+      ' 的模样。',
     ]);
-    await era.printAndWait([
-      '出于自己的性命着想，还是让 ',
+    await acute.print_and_wait('懦弱、倒霉、患得患失，还隐隐有些小孩子气。');
+    await acute.print_and_wait('可却又温柔、善良、行动力强，意外的很有气概。');
+    await acute.print_and_wait('自己，就是与这样的人共度了一整年的时光。');
+    await acute.print_and_wait('而往后，还有两年的时间……');
+    await acute.print_and_wait(
+      '如果往后的两年，也会像这共同度过的一年这样，转瞬间便流逝了呢？',
+    );
+    await acute.say_and_wait('…………');
+    await acute.print_and_wait('不知为何，一想到这里，就不由得有些烦躁。');
+    await acute.print_and_wait(
+      '摇了摇头，告诉自己——「还有两年的时间呢，不用焦急。」',
+    );
+    await acute.print_and_wait([
+      '等 ',
+      callname,
+      ' 回来吧——等他回来，给他一个大大的惊喜——',
+    ]);
+    await acute.say_and_wait('可是——');
+    await acute.say_and_wait('——……');
+    await acute.say_and_wait('……');
+    await acute.print_and_wait('话停在嘴边，却说不出口。');
+    await acute.print_and_wait([
+      '不明白自己这股烦躁到底是什么的 ',
       acute.get_colored_name(),
-      ' 尽早的穿上衣服比较好——',
+      '，卷缩在黑暗的被炉之中。',
     ]);
-    await acute.say_and_wait(
-      '年末礼物？不、不是啦，今天不是情人节吗？是互相送巧克力的日子呢……',
-    );
+    await acute.print_and_wait('只有自己能听见，自己那砰砰不停的心跳。');
+    await acute.print_and_wait('………………');
+    await acute.print_and_wait('…………');
+    await acute.print_and_wait('……');
+    await acute.print_and_wait(['今天的 ', callname, '，回来得格外晚。']);
+    era.drawLine({ content: '特雷森外的警局' });
     era.printButton(
-      '「不……为什么突然像GalGame一样自顾自地推进话题了啊？而且哪有女主角身披浴袍送情人节巧克力的戏码啊？」',
+      `「警察先生，请你一定要相信我。我真的就只是担心自己担当的${acute.get_uma_sex_title()}，而在后面偷偷的跟着${acute.sex}而已。我真的不是尾行痴汉！」`,
       1,
     );
     await era.input();
-    await acute.say_and_wait(
-      '咕噜噜？怎么啦，是不喜欢巧克力吗？那这里还有果冻套装……',
-    );
-    era.printButton('「唔……倒也不是不喜欢——」', 1);
-    await era.input();
-    await era.printAndWait('……可恶，这已经算得上是诱惑了吧？');
-    await era.printAndWait(
-      '在训练员休息室里洗澡，还穿着浴袍在训练员身前晃动，这完全可以算作是「诱惑」了吧？',
-    );
-    await era.printAndWait([
-      '还是说是「那种」吗？「那种」？我愿意≠我同意之类的情况……',
+    await say_by_passer_by_and_wait('警察', [
+      '少来！别以为我不知道，现在的痴汉都对当下最火的赛',
+      acute.get_uma_sex_title(),
+      '们有性幻想。对外都宣称自己是特雷森的训练员。光这周，我就已经抓了八个自称训练员、三个自称老师、还有一个自称医学博士的尾行痴汉了。',
     ]);
+    era.printButton(
+      '「我跟他们真的不一样！我有正经的工作，也有伟大的理想——」',
+      1,
+    );
+    await era.input();
+    await say_by_passer_by_and_wait(
+      '警察',
+      '那又怎样？隔壁牢房还有两个说自己是要在除夕夜街头放飞理想的有志青年，实际上不还是无证经营烟花炮竹的小贩？',
+    );
+    era.printButton(
+      '「警察先生，我真的不是——算了，换一种说法吧。我求你放了我吧，警察同志，我跟你说——我在目白家有人。」',
+      1,
+    );
+    await era.input();
+    await say_by_passer_by_and_wait(
+      '警察',
+      '哈？你想威胁我？我长那么大了还没人敢威胁我——我还真就不怕了！你目白家有人是伐？我还真就告诉你，这件警察局——就是目白家开的！',
+    );
+    era.printButton(
+      '「……哈？目白家还真的连警局都扩建了业务啊？呜啊，不管是谁都好，快放我出去啊！我是冤枉的！！！」',
+      1,
+    );
+    await era.input();
+    era.drawLine();
+
+    const tokino = get_chara_talk(301);
     await era.printAndWait([
-      '可恶……如果不是因为一时鬼迷心窍被 ',
+      '后来，',
       tokino.get_colored_name(),
-      ' 点了穴道的话，',
+      ' 巡逻的时候路过了当地的派出所，听到了 ',
       me.get_colored_name(),
-      ' 现在必须立刻马上变身红色形态召唤无尽战神……',
+      ' 的救命声后，终于把 ',
+      me.get_colored_name(),
+      ' 救了出去。',
     ]);
-    await era.printAndWait('…………');
-    await era.printAndWait('算了，邪念什么的，还是先点到为止吧。');
-    era.printButton('「其实……我也有一样东西要送给你来着。」', 1);
-    await era.input();
-    await acute.say_and_wait('唔噜姆？');
-    await me.say_and_wait(
-      '去年的情人节，我也收到了你送的巧克力了不是吗？嘛，虽然是略带惊吓的形式就是了……',
-    );
-    await me.say_and_wait(
-      '本来的话呢，去年的白色情人节自己就应该回礼来着——只不过一直不知道该送些什么。',
-    );
-    await me.say_and_wait(
-      '虽然想过送巧克力来回礼……但你一向不喜欢甜食。可送别的东西，又好像不太适合这个节日……',
-    );
-    await me.say_and_wait(
-      '去年就是因为这个原因，外加上当时比较忙碌的比赛日程。所以就把回礼的事给耽搁了……',
-    );
-    await me.say_and_wait([
-      '所以今年，姑且提前准备好了礼物——那么，祝你节日快乐，',
+    await era.printAndWait([
+      '在听说自己是因为「尾随',
+      acute.get_uma_sex_title(),
+      '」而进的监狱后，被 ',
+      tokino.get_colored_name(),
+      ' 狠狠的白了一眼。',
+    ]);
+    await era.printAndWait([
+      '回来的路上拼命的向 ',
+      tokino.get_colored_name(),
+      ' 解释自己真的不是尾行痴汉。并出于诚意请',
+      acute.sex,
+      '来自己的休息室里吃宵夜。',
+    ]);
+    await era.printAndWait([
+      '结果在自己的房间里看到了巨大的巧克力慕斯蛋糕，和躺在一个巨大礼物盒里不知为何穿着格外暴露得圣诞老人（决胜）服的睡着了的 ',
       acute.get_colored_name(),
       '。',
     ]);
-    await era.printAndWait([
-      '说罢，',
-      me.get_colored_name(),
-      ' 将藏在窗帘后的一捧花束取出，赠与了 ',
-      acute.get_colored_name(),
-      '。',
-    ]);
-    await acute.say_and_wait('啊……');
-    await me.say_and_wait([
-      '啊哈哈……这是 ',
-      sys_get_colored_callname(0, 49),
-      ' 给我的建议啦。虽然跟情人节有点不太契合就是了……怎样，喜欢吗？',
-    ]);
-    await acute.say_and_wait('……');
-    era.printButton(`「……${acute.name}？」`, 1);
-    await era.input();
-    await acute.say_and_wait('……');
-    await era.printAndWait([
-      '不知为何，手捧着花束的 ',
-      acute.get_colored_name(),
-      ' 直接僵在了原地。',
-    ]);
-    await era.printAndWait(
-      '无论如何搭话，也没有太大的回应，就这样等了三十秒左右——',
-    );
-    await acute.say_and_wait('呜……哇……啊……啊啊啊啊啊！！！');
-    await acute.say_and_wait('不得了、不得了啦啊！！！！');
-    await era.printAndWait([
-      acute.get_colored_name(),
-      ' 手捧着花束，就这样直接冲出了休息室。',
-    ]);
-    await era.printAndWait('……当然，是穿着浴衣。');
-    era.drawLine({ content: '校舍' });
-    const a_call_j = sys_get_colored_callname(100, 48);
-    await acute.say_and_wait([a_call_j, '，', a_call_j, '，不得了啦啊！～']);
-    await jordan.say_and_wait([
-      '怎么啦，',
-      acute.get_colored_name(),
-      '——呜啊，你怎么穿着浴衣啊！？',
-    ]);
-    era.drawLine({ content: '中庭' });
-    const a_call_f = sys_get_colored_callname(100, 49);
-    await acute.say_and_wait([a_call_f, '，', a_call_f, '，不得了啦啊！～']);
-    await festa.say_and_wait([
-      '浴袍？……这个花束，是我推荐给 ',
-      sys_get_colored_callname(49, 0),
-      ' 当给 ',
-      acute.get_colored_name(),
-      ' 的情人节礼物……原来如此。看来传说中的拳术师，很快就要隐退了啊——',
-    ]);
-    era.drawLine({ content: '特雷森学园 · 楼道' });
-    const a_call_d = sys_get_colored_callname(100, 19);
-    await acute.say_and_wait([a_call_d, '，', a_call_d, '，不得了啦啊！～']);
-    await digital.say_and_wait([
-      '唉唉唉！？穿着浴袍在楼道里乱跑的 ',
-      acute.get_colored_name(),
-      '！？虽然这个也很尊！但这一幕难道说是！？',
-    ]);
-    era.drawLine({ content: '天台' });
-    await era.printAndWait('拖着残缺的身躯，终于在天台上追上了浴袍的倩影。');
-    await acute.say_and_wait([
-      callname[0],
-      '……',
-      callname,
-      '，我…我…该怎么做啊？我有点不知如何是好了。',
-    ]);
-    era.printButton('「总之……先回休息室换上衣服吧？」', 1);
-    await era.input();
-    await acute.say_and_wait(['哎嘿嘿……抱歉呢，', callname, '。']);
-    await acute.say_and_wait(
-      '只是啊，在收到这么漂亮的花之后啊，感觉自己的心里也暖和起来了呢……啊，啊，啊啊啊……',
-    );
-    era.printButton('「即便如此，也不是穿着浴袍在学园里狂奔的理由啦……」', 1);
-    await era.input();
-    await era.printAndWait('……呼，不过倒也还好。');
-    await era.printAndWait([
-      '毕竟看',
-      acute.sex,
-      '这幅样子，应该也不是不喜欢 ',
-      me.get_colored_name(),
-      ' 送的厉害，只是单纯因为收到了平时没收到的礼物，而受到了一点小小的震撼。',
-    ]);
-    await era.printAndWait([
-      '或许是因为给人的印象很朴素，所以应该没多少人送',
-      acute.sex,
-      '花吧？',
-    ]);
-    await acute.say_and_wait(['谢谢呢……', callname, '。']);
-    await acute.say_and_wait(
-      '没想到我竟然能收到这么漂亮的礼物呢，我会好好保管的。',
-    );
-    await acute.say_and_wait(
-      '嗯…那么相对的回应……唔，好像有点不太对呢。按理说的话，受到礼物后表示感谢是对的，但这次是送出了礼物后然后又收到的回礼的情况呢～',
-    );
-    await acute.say_and_wait(['唔……总之，太谢谢你了哦，', callname, '。']);
-    era.printButton('「啊哈哈……你喜欢就好呢。」', 1);
-    await era.input();
-    await era.printAndWait([
-      '天台之上，身穿浴袍的',
-      acute.sex,
-      '与头顶正冒着褐红色液体的 ',
-      me.get_colored_name(),
-      '，互相表达着谢意。',
-    ]);
-    await era.printAndWait([
-      '毫无疑问，这恐怕会将是 ',
-      me.get_colored_name(),
-      ' 人生当中 ',
-      me.get_colored_name(),
-      ' 印象最深的情人节了吧。',
-    ]);
-    await era.printAndWait([
-      '总感觉跟 ',
-      acute.get_colored_name(),
-      ' 待在一起的话，就经常会遇上这种意料之外的惊喜呢——',
-    ]);
-    era.drawLine({ content: '地下审讯室' });
-    await tokino.say_and_wait('最近收到学生举报。');
-    await tokino.say_and_wait([
-      '说 ',
-      acute.get_colored_name(),
-      ' 的训练员捧着花束向 ',
-      acute.get_colored_name(),
-      ' 求婚，然后强迫 ',
-      acute.get_colored_name(),
-      ' 穿着浴袍在校内狂奔以表示爱意。',
-    ]);
-    await tokino.say_and_wait(['有这回事吗，', me.actual_name, '训练员']);
+    await tokino.say_and_wait('………………');
     era.printButton('「………………」', 1);
     await era.input();
+    era.printButton('「我说我是被动的你信吗？」', 1);
+    await era.input();
+    era.drawLine();
+    await era.printAndWait('后来，被打了个全麻倒立插在了庭院里。');
+    await era.printAndWait('并被罚了三个月的薪水后了事。');
     await era.printAndWait([
+      '自那之后，',
+      get_chara_talk(302).get_colored_name(),
+      '、',
+      tokino.get_colored_name(),
+      '，',
+      acute.get_colored_name(),
+      ' 看 ',
       me.get_colored_name(),
-      ' 的肉身……已化为了，燃尽的灰——',
+      ' 的眼神都有些变化。',
     ]);
+    await era.printAndWait('希望是好的变化吧……哈哈。（望天）');
+    era.println();
+    flags.wait_flag = get_attr_and_print_in_event(
+      100,
+      [0, 0, 10],
+      30,
+      undefined,
+      true,
+    );
+    flags.wait_flag =
+      get_attr_and_print_in_event(0, [0, 0, 0, 1], 0, undefined, true) ||
+      flags.wait_flag;
+  };
+
+  handlers[95 + 1] = async (acute, me, callname, flags) => {
+    era.set('cflag:100:节日事件标记', 0);
+    await print_event_name('新春的贺礼', acute);
+    await era.printAndWait([
+      '第三年的春节，依旧是与 ',
+      acute.get_colored_name(),
+      ' 在休息室内一起度过的。',
+    ]);
+    await acute.say_and_wait([
+      '新年快乐哦，',
+      callname,
+      '～。我烤了很多年糕哦，要一起来吃吗？',
+    ]);
+    await era.printAndWait([
+      '轻车熟路的从厨房内端着托盘走出的 ',
+      acute.get_colored_name(),
+      '，看上去比 ',
+      me.get_colored_name(),
+      ' 更像是这间训练员休息室的主人。',
+    ]);
+    await era.printAndWait([
+      '而与端着托盘的 ',
+      acute.get_colored_name(),
+      ' 形成鲜明对比的，是自休息日以来几乎与被炉融为一体的懒散得自己。',
+    ]);
+    await era.printAndWait([
+      '……先说好，',
+      me.get_colored_name(),
+      ' 这可不是在偷懒，而是在充分利用自己的休息时间。',
+    ]);
+    await era.printAndWait([
+      '平常的日子，基本都被各种训练和比赛场地考察的日常所挤满了，哪怕少有的能够自由活动休息的时间，也主要是与 ',
+      acute.get_colored_name(),
+      ' 一起活动。',
+    ]);
+    await era.printAndWait([
+      '虽然跟 ',
+      acute.get_colored_name(),
+      ' 一起活动不算是疲惫的工作啦……但不管怎么说，因此而挤占了自己少有的休息时间也是事实。',
+    ]);
+    await era.printAndWait([
+      '工作日每天晚上结束训练回到家里时总是累得倒在床上就睡，第二天睡醒后就立刻与 ',
+      acute.get_colored_name(),
+      ' 进行训练，就这样日复一日的进行着好似永无止尽的训练。',
+    ]);
+    await era.printAndWait(
+      '即便是一周难得的休息日，一但看向洗衣机里那堆得犹如小山般高的散发着臭味的换洗衣物时和休息室里那乱七八糟得好似怎么做也做不完的家务，自己的心情就会伴随着只剩下四个小时浮于天空中的太阳般一同沉入阴影之中。',
+    );
+    await era.printAndWait([
+      '坦白的说，如果不是因为 ',
+      acute.get_colored_name(),
+      ' 会为自己置办三餐的话，搞不好自己连怎么吃饭都会忘掉了吧……',
+    ]);
+    await acute.say_and_wait([callname, '，张嘴，啊～～～']);
+    era.printButton('「啊——唔。」', 1);
+    await era.input();
+    await era.printAndWait([
+      '一口咬下 ',
+      acute.get_colored_name(),
+      ' 递来的烤年糕，炽热而甜蜜的味道瞬间于口中扩散。',
+    ]);
+    await acute.say_and_wait([
+      '姆姆～干得很好呢，',
+      callname,
+      '——接下来要自己吃了哦？',
+    ]);
+    await era.printAndWait([
+      '满脸宠溺之色的 ',
+      acute.get_colored_name(),
+      '，就这样将盛有年糕的碗筷递给了自己。',
+    ]);
+    await era.printAndWait('随后又站起身来，哼着欢快的小调，走向了阳台——');
+    await acute.say_and_wait('接下来是洗衣服～洗衣服～～～');
+    await era.printAndWait('………………');
+    await era.printAndWait('怎么有种莫名的负罪感？');
+    await era.printAndWait([
+      '让自己担当',
+      acute.get_uma_sex_title(),
+      '把自己打扫卫生洗衣服做饭，然后自己躺在被炉里插科打诨……',
+    ]);
+    await era.printAndWait('……嘶，这是不是有些猥琐啊？');
+    await era.printAndWait('不对，这也太猥琐了。');
+    await era.printAndWait('得做些什么才行——');
+    era.println();
+    era.printButton('「去帮厨吧！」（全属性+5）', 1);
+    era.printButton('「自己的衣服自己洗！」（技能点数+35）', 2);
+    era.printButton(`「给 ${acute.name} 揉揉肩吧！」（耐力+30）`, 3);
+    switch (await era.input()) {
+      case 1:
+        await era.printAndWait(
+          '虽然懒洋洋的感觉非常的幸福，但自己也不能沉迷于其中了。',
+        );
+        await era.printAndWait('——好，决定了！');
+        await era.printAndWait('站起身来，挺身走向了厨房。');
+        await era.printAndWait(
+          '至少今年的晚餐与过年吃的小菜，还是由自己来做吧。',
+        );
+        await era.printAndWait('那么首先，先把冰冻的饺子化开……');
+        await era.printAndWait('………………');
+        flags.wait_flag = get_attr_and_print_in_event(
+          100,
+          new Array(5).fill(5),
+          0,
+        );
+        break;
+      case 2:
+        await era.printAndWait([
+          '不管怎么说，也不能让 ',
+          acute.get_colored_name(),
+          ' 一个人把所有的家务活都做了。',
+        ]);
+        await era.printAndWait('站起身来，挺身走向了阳台。');
+        await acute.say_and_wait('嗅————');
+        await era.printAndWait('…………嗯？');
+        await era.printAndWait([
+          '意外看见了 ',
+          acute.get_colored_name(),
+          ' 正闻着自己昨天刚换下来的衬衫。',
+        ]);
+        era.printButton(`「额……${acute.name}？」`, 1);
+        await era.input();
+        await acute.say_and_wait(['啊……是 ', callname, ' 啊～']);
+        await era.printAndWait([
+          '就像是稀松平常般，',
+          acute.get_colored_name(),
+          ' 将捂在鼻子上的衬衫取了下来。',
+        ]);
+        await acute.say_and_wait(['有什么事吗，', callname, '？']);
+        era.printButton('「那个……我的衬衫怎么了吗？」', 1);
+        await era.input();
+        await acute.say_and_wait([
+          '啊……你说这个啊。我刚刚一时兴起所以闻了一下呢——很有男人味哦，',
+          callname,
+          '。',
+        ]);
+        era.printButton('「………………」', 1);
+        await era.input();
+        await era.printAndWait('…………');
+        await era.printAndWait([
+          '姑且把 ',
+          acute.get_colored_name(),
+          ' 赶出了天台。',
+        ]);
+        await era.printAndWait([
+          '洗衣机内的衣服咕噜咕噜得转，回想起刚刚 ',
+          acute.get_colored_name(),
+          ' 闻着衬衫的场景，不知为何心中有些荡漾。',
+        ]);
+        await era.printAndWait('………………');
+        await era.printAndWait('还是过会儿再回房间里好了。');
+        flags.wait_flag = get_attr_and_print_in_event(100, [], 35);
+        break;
+      case 3:
+        await era.printAndWait([
+          '在 ',
+          acute.get_colored_name(),
+          ' 洗完衣服回房间后，姑且把 ',
+          acute.get_colored_name(),
+          ' 请进了被炉里。',
+        ]);
+        await acute.say_and_wait(['咕噜姆？有什么事吗，', callname, '？']);
+        await era.printAndWait([
+          acute.get_colored_name(),
+          ' 抬起头，一脸不解的望向了此刻正站在其身后的自己。',
+        ]);
+        await era.printAndWait([
+          '然而就在此时，',
+          me.get_colored_name(),
+          ' 那罪恶的双手向 ',
+          acute.get_colored_name(),
+          ' 的身上探出——',
+        ]);
+        await era.printAndWait('——轻轻一捏。');
+        await acute.say_and_wait('啊？❤️');
+        await era.printAndWait([
+          '小手轻轻的揉捏，',
+          acute.get_colored_name(),
+          ' 的尾巴几乎转瞬间绷直。',
+        ]);
+        await era.printAndWait([
+          '……原来如此，这里是 ',
+          acute.get_colored_name(),
+          ' 的敏感带吗？',
+        ]);
+        await acute.say_and_wait(['那，那个❤️……', callname, '……你这是？']);
+        era.printButton(
+          `「不要动，${acute.name}。你都忙这么久了，我帮你按摩放松一下吧。」`,
+          1,
+        );
+        await era.input();
+        await acute.say_and_wait('但、但是那里……啊❤️～');
+        await era.printAndWait([
+          '稍稍一捏，求饶般的娇媚便从 ',
+          acute.get_colored_name(),
+          ' 的口中叫出。',
+        ]);
+        await era.printAndWait([
+          '每每一用力，',
+          acute.get_colored_name(),
+          ' 便会不由自主的嚷出这一个字的短语。',
+        ]);
+        await era.printAndWait('不知为何，有一种莫名的兴奋感与背德感。');
+        await era.printAndWait([
+          '就这样，在仅有两人的休息室内，与 ',
+          acute.get_colored_name(),
+          ' 按摩按了个爽。',
+        ]);
+        flags.wait_flag = get_attr_and_print_in_event(100, [0, 30], 0);
+    }
   };
 };

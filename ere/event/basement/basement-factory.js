@@ -12,6 +12,9 @@ const current = new Date().getTime();
 
 cons_dict[0] = require('#/event/basement/basement-0');
 cons_dict[7] = require('#/event/basement/basement-7');
+cons_dict[32] = require('#/event/basement/basement-32');
+cons_dict[52] = require('#/event/basement/basement-52');
+cons_dict[89] = require('#/event/basement/basement-89');
 cons_dict[119] = require('#/event/basement/basement-119');
 
 console.log(

@@ -17,7 +17,7 @@ module.exports = class extends CustomizedMec {
       {
         color: buff_colors[1],
         content: '[针炙名师]',
-        title: '[针炙名师]：加快队伍成员偏头痛和伤病恢复，且更不容易偏头痛',
+        title: '加快队伍成员偏头痛和伤病恢复，且更不容易偏头痛',
       },
     ];
   }

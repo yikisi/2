@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202661,
   '斗志昂扬',
-  '比赛终盘初段位于队伍中间时，向前突进＜中距离/长距离＞',
+  '比赛终盘初段位于队伍中间时，向前突进',
   20266,
   2,
   UmaSkill.rarity_enum.gold,
@@ -78,4 +78,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [4, 5],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

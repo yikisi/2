@@ -63,6 +63,10 @@ class BasementOwners {
   /** @param {number} chara_id */
   push(chara_id) {
     this.obj.push(chara_id);
+    this.obj = era.set(
+      'flag:地下室之主',
+      this.obj.filter((e, i, l) => i === l.indexOf(e)),
+    );
   }
 }
 

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202542,
   '威压',
-  '在最终弯道位于中间往后位置时，令前后各3名赛马娘的速度极小幅度下降，并稍微提高自己的速度＜差马＞',
+  '在最终弯道位于中间往后位置时，令前后各3名赛马娘的速度极小幅度下降，并稍微提高自己的速度',
   20254,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   190,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

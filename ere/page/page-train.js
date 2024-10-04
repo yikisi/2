@@ -15,6 +15,7 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const GameGuides = require('#/event/game-guides');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sort_list } = require('#/utils/list-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
@@ -30,6 +31,7 @@ const {
   get_trainer_train_buff,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { ability_tag_names } = require('#/data/race/model/uma-skill');
 const {
   chara_skill_dict,
   common_skills,
@@ -44,6 +46,102 @@ const {
 
 function get_discount(chara_id) {
   return Math.min(era.get(`cflag:${chara_id}:育成次数`) * 0.015, 0.1);
+}
+
+/**
+ * @param {number} chara_id
+ * @param {CharaSkills} skill_control
+ * @param {number} pt
+ * @param {number} discount
+ */
+function get_skill_buffer(chara_id, skill_control, pt, discount) {
+  const unused_group2level = {};
+  let available_skills = {},
+    got_skills = {};
+  common_skills.forEach((e) => (available_skills[e] = 1));
+  new CharaAvailableSkills(chara_id).get().forEach((e) => {
+    const s = skills_dict[e];
+    if (!unused_group2level[s.group_id]) {
+      unused_group2level[s.group_id] = s.group_level;
+    } else {
+      unused_group2level[s.group_id] = Math.min(
+        unused_group2level[s.group_id],
+        s.group_level,
+      );
+    }
+  });
+  available_skills = Object.keys(available_skills)
+    .map(Number)
+    .reduce((p, c) => {
+      (p[skills_dict[c].group_id] || (p[skills_dict[c].group_id] = [])).push(c);
+      return p;
+    }, {});
+  skill_control.get().forEach((s) => (got_skills[skills_dict[s].group_id] = s));
+  Object.keys(available_skills).forEach((k) => {
+    const learned_skill_level =
+      unused_group2level[skills_dict[available_skills[k][0]].group_id];
+    if (learned_skill_level) {
+      available_skills[k] = available_skills[k].filter(
+        (e) => skills_dict[e].group_level < learned_skill_level,
+      );
+    }
+    available_skills[k] = sort_list(
+      available_skills[k],
+      (e) => skills_dict[e].group_level,
+      true,
+    );
+    if (got_skills[k]) {
+      const sort_key = skills_dict[got_skills[k]].group_level;
+      available_skills[k] = available_skills[k]
+        .filter((e) => skills_dict[e].group_level >= sort_key)
+        .slice(0, 2);
+    } else {
+      available_skills[k] = available_skills[k].slice(0, 1);
+    }
+  });
+  got_skills = {};
+  skill_control.get().forEach((e) => (got_skills[e] = 1));
+  const buffer = [];
+  Object.values(available_skills).map((e) =>
+    e.forEach((s) => {
+      const skill = skills_dict[s];
+      const price = Math.floor(skill.price * (1 - discount));
+      buffer.push({
+        columns: [
+          {
+            config: { width: 15 },
+            content: skill.get_colored_name(),
+            type: 'text',
+          },
+          got_skills[s]
+            ? {
+                config: {
+                  align: 'right',
+                  width: 8,
+                },
+                content: '[已习得]',
+                type: 'text',
+              }
+            : {
+                config: {
+                  align: 'right',
+                  disabled: got_skills[s] || pt < price,
+                  showAcc: got_skills[s] !== 1,
+                  width: 8,
+                },
+                content: `${price} PT`,
+                type: 'button',
+              },
+        ],
+        config: { width: 8 },
+        id: s,
+      });
+    }),
+  );
+  return buffer.map((e, i) => {
+    e.columns[1].accelerator = i + 1;
+    return e;
+  });
 }
 
 module.exports = async () => {
@@ -373,7 +471,7 @@ module.exports = async () => {
             era.add('exp:0:技能点数', -100);
             const generated_skills = skill_control
               .get()
-              .filter((e) => e.toString().startsWith('9'));
+              .filter((e) => skills_dict[e].is_generated);
             skill_control.clear();
             if (era.get('cflag:0:模版角色') > 0) {
               chara_skill_dict[era.get('cflag:0:模版角色')].forEach((s) =>
@@ -383,114 +481,170 @@ module.exports = async () => {
             skill_control.add(...generated_skills);
           }
         } else {
+          let buffer = get_skill_buffer(chara_id, skill_control, pt, discount),
+            skill_filter = -1,
+            ground_filter = -1,
+            dis_filter = -1,
+            style_filter = -1,
+            ability_filter = -1,
+            enable_filter = false;
           while (flag_skill) {
-            era.drawLine({
-              content: `为 ${era.get(`callname:${chara_id}:-2`)} 选择技能`,
-            });
-            const unused_group2level = {};
-            let available_skills = {},
-              got_skills = {};
-            common_skills.forEach((e) => (available_skills[e] = 1));
-            new CharaAvailableSkills(chara_id).get().forEach((e) => {
-              const s = skills_dict[e];
-              if (!unused_group2level[s.group_id]) {
-                unused_group2level[s.group_id] = s.group_level;
-              } else {
-                unused_group2level[s.group_id] = Math.min(
-                  unused_group2level[s.group_id],
-                  s.group_level,
-                );
-              }
-            });
-            available_skills = Object.keys(available_skills)
-              .map(Number)
-              .reduce((p, c) => {
-                (
-                  p[skills_dict[c].group_id] ||
-                  (p[skills_dict[c].group_id] = [])
-                ).push(c);
-                return p;
-              }, {});
-            skill_control
-              .get()
-              .forEach((s) => (got_skills[skills_dict[s].group_id] = s));
-            Object.keys(available_skills).forEach((k) => {
-              const learned_skill_level =
-                unused_group2level[
-                  skills_dict[available_skills[k][0]].group_id
-                ];
-              if (learned_skill_level) {
-                available_skills[k] = available_skills[k].filter(
-                  (e) => skills_dict[e].group_level < learned_skill_level,
-                );
-              }
-              available_skills[k] = sort_list(
-                available_skills[k],
-                (e) => skills_dict[e].group_level,
-                true,
-              );
-              if (got_skills[k]) {
-                const sort_key = skills_dict[got_skills[k]].group_level;
-                available_skills[k] = available_skills[k]
-                  .filter((e) => skills_dict[e].group_level >= sort_key)
-                  .slice(0, 2);
-              } else {
-                available_skills[k] = available_skills[k].slice(0, 1);
-              }
-            });
-            got_skills = {};
-            skill_control.get().forEach((e) => (got_skills[e] = 1));
-            const buffer = [];
-            Object.values(available_skills).map((e) =>
-              e.forEach((s) => {
-                const skill = skills_dict[s];
-                const price = Math.floor(skill.price * (1 - discount));
-                buffer.push({
-                  columns: [
-                    {
-                      config: { width: 15 },
-                      content: skill.get_colored_name(),
-                      type: 'text',
-                    },
-                    got_skills[s]
-                      ? {
-                          config: {
-                            align: 'right',
-                            width: 8,
-                          },
-                          content: '[已习得]',
-                          type: 'text',
-                        }
-                      : {
-                          config: {
-                            align: 'right',
-                            disabled: got_skills[s] || pt < price,
-                            showAcc: got_skills[s] !== 1,
-                            width: 8,
-                          },
-                          content: `${price} PT`,
-                          type: 'button',
-                        },
-                  ],
-                  config: { width: 8 },
-                  id: s,
-                });
-              }),
-            );
+            /** @type {(function(UmaSkill):boolean)[]} */
+            const filters = [
+              (s) => skill_filter === -1 || s.category >> 3 === skill_filter,
+              (s) =>
+                ground_filter === -1 ||
+                s.adapt_tags.indexOf(ground_filter) !== -1,
+              (s) =>
+                dis_filter === -1 ||
+                s.adapt_tags.indexOf(dis_filter + 2) !== -1,
+              (s) =>
+                style_filter === -1 ||
+                s.adapt_tags.indexOf(style_filter + 6) !== -1,
+              (s) =>
+                ability_filter === -1 ||
+                s.ability_tags.indexOf(ability_filter) !== -1,
+            ];
             era.printInColRows(
-              ...buffer.map((e, i) => {
-                e.columns[1].accelerator = i + 1;
-                return e;
-              }),
+              [
+                {
+                  config: {
+                    content: `为 ${get_chara_talk(chara_id).get_full_name()} 选择技能`,
+                  },
+                  type: 'divider',
+                },
+              ],
+              ...buffer.filter(
+                (e) =>
+                  !enable_filter ||
+                  filters.reduce((p, c) => p && c(skills_dict[e.id]), true),
+              ),
+              [{ content: [{ isBr: true }], type: 'text' }],
+              ...(enable_filter
+                ? [
+                    [
+                      {
+                        config: { width: 3 },
+                        content: '技能类型',
+                        type: 'text',
+                      },
+                      ...['全部', '被动', '恢复', '增幅', '削弱'].map(
+                        (e, i) => ({
+                          accelerator: 900 + i,
+                          config: {
+                            buttonType:
+                              i === skill_filter + 1 ? 'warning' : 'info',
+                            width: 3,
+                          },
+                          content: e,
+                          type: 'button',
+                        }),
+                      ),
+                    ],
+                    [
+                      {
+                        config: { width: 3 },
+                        content: '场地类型',
+                        type: 'text',
+                      },
+                      ...['全部', ...adaptability_names.slice(0, 2)].map(
+                        (e, i) => ({
+                          accelerator: 910 + i,
+                          config: {
+                            buttonType:
+                              i === ground_filter + 1 ? 'warning' : 'info',
+                            width: 3,
+                          },
+                          content: e,
+                          type: 'button',
+                        }),
+                      ),
+                    ],
+                    [
+                      {
+                        config: { width: 3 },
+                        content: '距离类型',
+                        type: 'text',
+                      },
+                      ...['全部', ...adaptability_names.slice(2, 6)].map(
+                        (e, i) => ({
+                          accelerator: 920 + i,
+                          config: {
+                            buttonType:
+                              i === dis_filter + 1 ? 'warning' : 'info',
+                            width: 3,
+                          },
+                          content: e,
+                          type: 'button',
+                        }),
+                      ),
+                    ],
+                    [
+                      {
+                        config: { width: 3 },
+                        content: '策略类型',
+                        type: 'text',
+                      },
+                      ...['全部', ...adaptability_names.slice(6)].map(
+                        (e, i) => ({
+                          accelerator: 930 + i,
+                          config: {
+                            buttonType:
+                              i === style_filter + 1 ? 'warning' : 'info',
+                            width: 3,
+                          },
+                          content: e,
+                          type: 'button',
+                        }),
+                      ),
+                    ],
+                    [
+                      {
+                        config: { width: 3 },
+                        content: '效果类型',
+                        type: 'text',
+                      },
+                      ...['全部', ...ability_tag_names].map((e, i) => ({
+                        accelerator: 940 + i,
+                        config: {
+                          buttonType:
+                            i === ability_filter + 1 ? 'warning' : 'info',
+                          width: 3,
+                        },
+                        content: e,
+                        type: 'button',
+                      })),
+                    ],
+                  ]
+                : []),
               [
                 {
                   config: { width: 12 },
                   content: ['技能点数：', pt.toString()],
                   type: 'text',
                 },
+                ...(enable_filter
+                  ? [
+                      {
+                        accelerator: 997,
+                        config: { width: 3 },
+                        content: '重置',
+                        type: 'button',
+                      },
+                    ]
+                  : [{ config: { width: 3 }, content: [], type: 'text' }]),
+                {
+                  accelerator: 998,
+                  config: {
+                    buttonType: enable_filter ? 'warning' : 'info',
+                    width: 6,
+                  },
+                  content: enable_filter ? '打开筛选器' : '关闭筛选器',
+                  type: 'button',
+                },
                 {
                   accelerator: 999,
-                  config: { align: 'right', width: 12 },
+                  config: { width: 3 },
                   content: '结束',
                   type: 'button',
                 },
@@ -499,9 +653,28 @@ module.exports = async () => {
             const ret = await era.input({ useRule: false });
             if (ret === 999) {
               flag_skill = false;
+            } else if (ret === 998) {
+              enable_filter = !enable_filter;
+            } else if (ret === 997) {
+              ability_filter =
+                style_filter =
+                dis_filter =
+                ground_filter =
+                skill_filter =
+                  -1;
+            } else if (ret >= 940) {
+              ability_filter = ret - 941;
+            } else if (ret >= 930) {
+              style_filter = ret - 931;
+            } else if (ret >= 920) {
+              dis_filter = ret - 921;
+            } else if (ret >= 910) {
+              ground_filter = ret - 911;
+            } else if (ret >= 900) {
+              skill_filter = ret - 901;
             } else if (ret === 'irwinner') {
               pt = era.add(`exp:${chara_id}:技能点数`, 9999);
-              await era.clear();
+              buffer = get_skill_buffer(chara_id, skill_control, pt, discount);
             } else if (typeof ret === 'number' && buffer[ret - 1]) {
               const skill = skills_dict[buffer[ret - 1].id],
                 to_remove =
@@ -533,9 +706,15 @@ module.exports = async () => {
                   [skill.id],
                   skill_control,
                 ) && (await era.waitAnyKey());
-                await era.clear();
+                buffer = get_skill_buffer(
+                  chara_id,
+                  skill_control,
+                  pt,
+                  discount,
+                );
               }
             }
+            await era.clear();
             flag_skill &&= chara_id > 0 || skill_control.get().length < 9;
           }
         }

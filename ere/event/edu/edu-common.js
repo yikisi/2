@@ -2,11 +2,16 @@
  * @file 育成地文
  *
  * @author 雞雞
+ * @author 幽白書
  * @author 无名黑奴
  */
 const era = require('#/era-electron');
 
-const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
+const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
+const {
+  sys_change_lust,
+  sys_change_motivation,
+} = require('#/system/sys-calc-base-cflag');
 const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 
 const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
@@ -88,9 +93,6 @@ handlers[event_hooks.train] = async (chara_id, _, extra_flag) => {
 };
 
 /**
- * @author 雞雞
- * @author 无名黑奴
- *
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {TrainSuccessParams} extra_flag
@@ -134,30 +136,86 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
           hook.arg = false;
         }
       }
-    } else if (
-      !sys_check_remote(chara_id) &&
-      era.get(`love:${chara_id}`) >= 50 &&
-      era.get(`base:${chara_id}:性欲`) >= lust_border.itch &&
-      Math.random() <
-        (0.2 * era.get(`base:${chara_id}:性欲`)) / lust_border.want_sex
-    ) {
-      era.println();
-      await era.waitAnyKey();
-      await print_event_name('训练后的性欲高涨', chara);
-      await era.printAndWait([
-        '一天的训练结束后，',
-        chara.get_colored_name(),
-        ' 的样子好像有点奇怪……',
-      ]);
-      await era.printAndWait(
-        '面色潮红，在双腿间流下的不明液体与汗液混在一起，散发出一股淫靡的味道。',
-      );
-      era.printButton('「这也是训练员的义务……」', 1);
-      era.printButton('「总之先去医务室吧！」', 2);
-      if ((await era.input()) === 1) {
-        await quick_into_sex(chara_id);
-      } else {
-        sys_change_lust(chara_id, get_random_value(500, 1500));
+    } else if (!sys_check_remote(chara_id)) {
+      if (
+        era.get(`love:${chara_id}`) >= 50 &&
+        era.get(`base:${chara_id}:性欲`) >= lust_border.itch &&
+        Math.random() <
+          (0.2 * era.get(`base:${chara_id}:性欲`)) / lust_border.want_sex
+      ) {
+        era.println();
+        await era.waitAnyKey();
+        await print_event_name('训练后的性欲高涨', chara);
+        await era.printAndWait([
+          '一天的训练结束后，',
+          chara.get_colored_name(),
+          ' 的样子好像有点奇怪……',
+        ]);
+        await era.printAndWait(
+          '面色潮红，在双腿间流下的不明液体与汗液混在一起，散发出一股淫靡的味道。',
+        );
+        era.printButton('「这也是训练员的义务……」', 1);
+        era.printButton('「总之先去医务室吧！」', 2);
+        if ((await era.input()) === 1) {
+          await quick_into_sex(chara_id);
+        } else {
+          sys_change_lust(chara_id, get_random_value(500, 1500));
+        }
+      } else if (Math.random() < 0.1) {
+        const me = get_chara_talk(0);
+        era.println();
+        await era.waitAnyKey();
+        await print_event_name('淋浴间内', chara);
+        await era.printAndWait([
+          '嗯？',
+          chara.get_colored_name(),
+          ' 还没来吗？',
+        ]);
+        await era.printAndWait('正好，趁现在先沖个澡吧！');
+        era.println();
+        await era.printAndWait([
+          '打开门，映入眼帘的是身无寸缕的 ',
+          chara.get_colored_name(),
+          '……',
+        ]);
+        era.printButton('「哦，要一起洗澡吗？」', 1);
+        era.printButton('「不好意思打扰了！」', 2);
+        if ((await era.input()) === 1) {
+          if (
+            era.get(`love:${chara_id}`) >= 50 &&
+            get_sex_acceptable(chara_id)
+          ) {
+            await era.printAndWait('对方兴致盎然的答应了。');
+            await era.printAndWait([
+              me.get_couple_title(),
+              ' 互相给对方擦了背。',
+            ]);
+            await era.printAndWait([
+              '结束洗浴后，',
+              chara.sex,
+              '带着不甚满足的眼光看向 ',
+              me.get_colored_name(),
+              '……',
+            ]);
+            await quick_into_sex(chara_id);
+          } else {
+            await chara.say_and_wait('笨蛋，在想什么啊你！');
+            await era.printAndWait([me.get_colored_name(), ' 被赶了出去……']);
+            sys_change_motivation(chara_id, -1) && (await era.waitAnyKey());
+          }
+        } else {
+          await me.say_and_wait('不好意思打扰了！');
+          await era.printAndWait([
+            me.get_colored_name(),
+            ' 大喊一声跑了出去。',
+          ]);
+          await era.printAndWait([
+            '没过多久，冲好澡的 ',
+            chara.get_colored_name(),
+            ' 红着脸走了出来',
+          ]);
+          sys_change_lust(chara_id, get_random_value(500, 1500));
+        }
       }
     }
   }

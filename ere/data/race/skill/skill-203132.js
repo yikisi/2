@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   203132,
   '决胜一击',
-  '最终直线时若处于头马或于头马1马身之内，则小幅提高速度＜先马＞',
+  '最终直线时若处于头马或于头马1马身之内，则小幅提高速度',
   20313,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [7],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

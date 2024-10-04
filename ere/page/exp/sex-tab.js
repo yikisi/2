@@ -119,7 +119,8 @@ module.exports = {
         );
       } else {
         const sex_count = era.get(`exp:${chara.id}:性爱次数`),
-          sleep_count = era.get(`exp:${chara.id}:睡奸次数`);
+          sleep_count = era.get(`exp:${chara.id}:睡奸次数`),
+          prison_count = era.get(`exp:${chara.id}:监禁次数`);
         sex_info_list.push(
           {
             config: { content: '基本情况', position: 'left' },
@@ -150,6 +151,18 @@ module.exports = {
                             ' 次睡奸',
                           ]
                         : [],
+                      prison_count
+                        ? [
+                            '；对 ',
+                            CharaTalk.me.get_colored_name(),
+                            ' 实施过 ',
+                            {
+                              content: prison_count.toLocaleString(),
+                              color: attr_change_colors.down,
+                            },
+                            ' 次监禁',
+                          ]
+                        : [],
                     )
                   : [
                       '和其他角色共上过 ',
@@ -167,6 +180,16 @@ module.exports = {
                               color: palam_colors.notifications[1],
                             },
                             ' 次被睡奸',
+                          ]
+                        : [],
+                      prison_count
+                        ? [
+                            '；被监禁过 ',
+                            {
+                              content: prison_count.toLocaleString(),
+                              color: attr_change_colors.down,
+                            },
+                            ' 次',
                           ]
                         : [],
                     )

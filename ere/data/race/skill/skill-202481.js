@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202481,
   '怪物',
-  '临近终盘位于领头或是距离领头4马身以内时，在终盘提升加速度＜先马・长距离＞',
+  '临近终盘位于领头或是距离领头4马身以内时，在终盘提升加速度',
   20248,
   2,
   UmaSkill.rarity_enum.gold,
@@ -77,4 +77,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [5, 7],
+  [UmaSkill.ability_tag_enum.accel],
 );

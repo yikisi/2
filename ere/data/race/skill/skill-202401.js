@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202401,
   '电光石火',
-  '比赛终盘在后方准备超越时，提升加速度＜短距离/英里＞',
+  '比赛终盘在后方准备超越时，提升加速度',
   20240,
   2,
   UmaSkill.rarity_enum.gold,
@@ -78,4 +78,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [2, 3],
+  [UmaSkill.ability_tag_enum.accel],
 );

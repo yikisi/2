@@ -3,709 +3,334 @@
  *
  * @author 幽白書
  */
-const {
-  drawLine,
-  get,
-  getCharactersInTrain,
-  printAndWait,
-  println,
-  set,
-} = require('#/era-electron');
+const era = require('#/era-electron');
 
-const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
-const {
-  check_pregnant_unprotect,
-  get_expansion,
-  get_penis_size,
-} = require('#/system/ero/sys-calc-ero-status');
-const { set_stain } = require('#/system/ero/sys-calc-stain');
-const { set_palam_to_max } = require('#/system/ero/sys-prepare-ero');
 const {
   sys_get_callname,
   sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const print_event_name = require('#/event/snippets/print-event-name');
+const get_participants_and_first_action = require('#/event/ero/snippets/get-participants-and-first-action');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
-const { stain_enum } = require('#/data/ero/stain-const');
-const { ero_hooks } = require('#/data/event/ero-hooks');
-const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
-const { location_enum } = require('#/data/locations');
+const { ero_action_names, ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @type {Record<string,function>} */
 const handlers = {};
 
-handlers[ero_hooks.ero_start] = async () => {
-  const callname = sys_get_callname(32, 0),
-    life_marks = new TachyonLifeMarks(),
-    me = get_chara_talk(0),
-    tachyon = get_chara_talk(32);
+[
+  require('#/event/ero/ero-lines-32/ero-communications'),
+  require('#/event/ero/ero-lines-32/ero-pettings'),
+  require('#/event/ero/ero-lines-32/ero-fuckings'),
+  require('#/event/ero/ero-lines-32/ero-sm'),
+  require('#/event/ero/ero-lines-32/ero-items'),
+].forEach((f) => f(handlers));
+
+handlers[ero_hooks.ero_start] = require('#/event/ero/ero-lines-32/ero-start');
+
+handlers[ero_hooks.orgasm] = async () => {
+  const penis_touched_part = era.get('tcvar:0:阴茎接触部位');
   if (
-    sys_check_awake(0) &&
     sys_check_awake(32) &&
-    getCharactersInTrain().length === 2 &&
-    me.sex_code > 0 &&
-    tachyon.sex_code - 1 &&
-    check_pregnant_unprotect(0) &&
-    check_pregnant_unprotect(32) &&
-    get('love:32') >= 75 &&
-    life_marks.reward < 3 &&
-    get('cflag:32:位置') === location_enum.office
+    era.get('tflag:强奸') !== 0 &&
+    penis_touched_part.owner === 32
   ) {
-    life_marks.reward++;
-    await print_event_name('实验的报酬', tachyon);
-    switch (life_marks.reward) {
-      case 1:
-        await printAndWait('总算结束了……');
-        await printAndWait([me.get_colored_name(), ' 伸了个懒腰，忍不住感慨']);
-        await printAndWait([
-          '最近 ',
+    const tachyon = get_chara_talk(32),
+      me = get_chara_talk(0),
+      last_action = era.get('tflag:前回行动'),
+      other_action = era.get('tflag:对手行动'),
+      master = era.get('tflag:主导权');
+    if (
+      penis_touched_part.part === part_enum.mouth &&
+      era.get('nowex:0:阴茎高潮') > 0 &&
+      era.get('nowex:32:饮精量') > 0
+    ) {
+      if (
+        (master === 0 && last_action === ero_hooks.ask_tit_and_blow_job) ||
+        (master === 32 && other_action === ero_hooks.tit_and_blow_job)
+      ) {
+        await tachyon.say_and_wait('啾❤️咕啾❤️啾噜❤️');
+        era.println();
+        await era.printAndWait([
+          '射出的精液灌入了 ',
           tachyon.get_colored_name(),
-          ' 的实验越来越多，也越来越复杂及麻烦',
+          ' 的喉咙。',
         ]);
-        await printAndWait([
-          '虽说危险度没那么高，但加上训练员的本职工作后忙碌程度甚至让 ',
-          me.get_colored_name(),
-          ' 有些怀念那些危险的实验了',
-        ]);
-        println();
-        await tachyon.say_and_wait(['辛苦了，', callname, '……']);
-        await tachyon.say_and_wait('放心吧，之后会好好给你奖励的');
-        await printAndWait('\n奖励……？');
-        await printAndWait([
-          '虽然不知道具体是什么，但奖励这个词还是激励了疲累的 ',
-          me.get_colored_name(),
-        ]);
-        await printAndWait('\n在收拾完实验器材后');
-        println();
-        await tachyon.say_and_wait('那么……作为奖励，就让我来帮你处理一下吧');
-        await tachyon.say_and_wait('几天下来，积累的东西❤');
-        println();
-        await printAndWait('……欸？');
-        println();
-        await tachyon.say_and_wait('这种反应……难道，要拒绝吗？');
-        await tachyon.say_and_wait('明明，都是恋人了不是吗？');
-        println();
-        await printAndWait('送到眼前的肉，哪有不吃的道理！');
-        await printAndWait(
-          '再说……这几天由于实验的关系，确实也都没怎么发泄欲望……',
-        );
-        await printAndWait(
-          '这样的话，让自己的恋人来帮忙……应该也不是什么过分的事吧',
-        );
-        println();
-        await printAndWait([
-          '鬼使神差下，',
-          me.get_colored_name(),
-          ' 脱下了裤子',
-        ]);
-        println();
-        await tachyon.say_and_wait('嘶……');
-        println();
-        await printAndWait([
-          '虽然没有动画里甚至冒出蒸气那么夸张，但闷了一天的肉棒，依然散发出了足以挑逗起任何',
-          tachyon.get_uma_sex_title(),
-          '性欲的气味来',
-        ]);
-        await printAndWait([
+        await era.printAndWait([
+          '但过多的射精量仍然超过了 ',
           tachyon.get_colored_name(),
-          ' 紧紧盯着眼前的肉棒，移不开视线',
+          ' 一次所能喝下的量。',
         ]);
-        println();
-        await tachyon.say_and_wait('不行……忍不住了……❤');
-        println();
-        await printAndWait([
-          me.get_colored_name(),
-          ' 差点都忘记了，这几天由于实验导致欲望积累的，可不只 ',
-          me.get_colored_name(),
-          ' 一人而已',
-        ]);
-        await printAndWait([
-          '一直在身旁做着实验的 ',
+        await era.printAndWait([
+          '白色的精液从嘴角流淌落在乳房上，',
           tachyon.get_colored_name(),
-          ' 想必也是如此',
+          ' 慌忙单手捧起胸肉，将滴落的精液再度揽回口中。',
         ]);
-        await printAndWait('这么说来……比起奖励，果然只是找理由……');
-        println();
-        await printAndWait([
-          '想到这，',
-          me.get_colored_name(),
-          ' 的心中忍不住起了坏心眼',
-        ]);
-        await printAndWait([
-          '看见 ',
-          me.get_colored_name(),
-          ' 掏出肉棒后就不再动作的模样，',
-          tachyon.get_colored_name(),
-          ' 心急的看着 ',
-          me.get_colored_name(),
-        ]);
-        println();
-        await tachyon.say_and_wait([callname, '……再等什么呢，快点，进来']);
-        println();
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 撅起双唇，唇间的粉舌前后移动着，尝试勾起 ',
-          me.get_colored_name(),
-          ' 的情欲',
-        ]);
-        await printAndWait([
-          '但 ',
-          me.get_colored_name(),
-          ' 依然没有做出反应，明白了 ',
-          me.get_colored_name(),
-          ' 的意图的 ',
-          tachyon.get_colored_name(),
-          ' 露出了哀怨的神情',
-        ]);
-        println();
-        await tachyon.say_and_wait('……真过分');
-        println();
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 蹲在地上，仿佛恳求一般仰视着高高翘起的肉棒',
-        ]);
-        println();
+        era.println();
+        await tachyon.say_and_wait('啾❤️啾噜❤️');
+        await tachyon.say_and_wait('还有……');
         await tachyon.say_and_wait([
-          '求你了，',
-          callname,
-          '……让我啾啵啾啵的……好好品尝……',
-          callname,
-          ' 的肉棒……❤',
+          '这些可都是 ',
+          sys_get_callname(32, 0),
+          ' 重要的因子❤️不能浪费啊❤️',
         ]);
-        println();
-        await printAndWait([
-          '见到 ',
-          me.get_colored_name(),
-          ' 总算慢慢靠前了，',
+        era.println();
+        await era.printAndWait([
+          '才舔完自己身上的，',
           tachyon.get_colored_name(),
-          ' 猴急的将鼻子贴近了肉棒，深深的猛闻了几下',
+          ' 又盯上了还处在余韵中的肉棒。',
         ]);
-        await printAndWait('不老实的手咕啾咕啾的抠弄着蜜穴，发出呻吟');
-        await quick_make_love(
-          new EroParticipant(32, part_enum.hand),
-          new EroParticipant(32, part_enum.virgin),
-          false,
-        );
-        await printAndWait(
-          '在理性与感性都认可的这名雄性面前，身为雌性的自己只能跪在地上臣服',
-        );
-        println();
-        await tachyon.say_and_wait('嘶……哈……嘶……');
-        await tachyon.say_and_wait('肉棒……肉棒的味道');
-        await tachyon.say_and_wait([
-          '请……让我再多闻闻……',
-          callname,
-          ' 的……肉棒……',
-        ]);
-        await tachyon.say_and_wait('鼻腔里面……全都是……雄性的味道');
-        await quick_make_love(
-          new EroParticipant(0, part_enum.penis),
-          new EroParticipant(32, part_enum.body),
-          false,
-        );
-        await quick_make_love(
-          new EroParticipant(32, part_enum.hit),
-          new EroParticipant(32, part_enum.mouth, -0.5),
-          false,
-        );
-        println();
-        await printAndWait([me.get_colored_name(), ' 握着满是先走汁的肉棒']);
-        await printAndWait([
-          '恶作剧的来回磨蹭着不知何时已经跪在自己面前的 ',
-          tachyon.get_colored_name(),
-          ' 的鼻尖',
-        ]);
-        await printAndWait([
-          '仿佛在做标记般，将汁液和气味涂满了 ',
-          tachyon.get_colored_name(),
-          ' 的鼻子',
-        ]);
-        println();
-        await tachyon.say_and_wait(
-          '过分……要是……闻到这种味道……不就真的……回不去了……',
-        );
-        println();
-        await printAndWait('不喜欢的话，那就算了？');
-        await printAndWait([
-          me.get_colored_name(),
-          ' 作势要抽身而去，却看 ',
-          tachyon.get_colored_name(),
-          ' 亦步亦趋的跟随着，其中鼻子完全没离开过肉棒哪怕一厘米的距离',
-        ]);
-        println();
-        await tachyon.say_and_wait('光是味道……就要去了……');
-        println();
-        await printAndWait('仿佛担心又一次的恶作剧');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 反过来用鼻尖不停刮蹭着 ',
-          me.get_colored_name(),
-          ' 的龟头尖端',
-        ]);
-        await printAndWait('仿佛要牢记这股味道一般，用力嗅着肉棒的臭味');
-        println();
-        await tachyon.say_and_wait('不行……受不了了……');
-        await tachyon.say_and_wait('请让我含……求求，让我舔');
-        println();
-        await printAndWait('想要快一点舔到');
-        await printAndWait('想要获得被允许吸吮肉棒的资格');
-        await printAndWait('看着爱人的肉棒摆在自己眼前');
-        await printAndWait([
-          '享受着气味的 ',
-          tachyon.get_colored_name(),
-          ' 还是按耐不住，咽下口水',
-        ]);
-        println();
-        await tachyon.say_and_wait('咕啾');
-        await tachyon.say_and_wait('嗯啾噜噜噜……啾噜……啾咕……');
-        println();
-        await printAndWait([
-          '还没得到许可，',
-          tachyon.get_colored_name(),
-          ' 就已经吮吸起了肉棒',
-        ]);
-        await printAndWait([
-          me.get_colored_name(),
-          ' 也松了口气，要是再继续下去，忍不住的就要换成 ',
-          me.get_colored_name(),
-          ' 了',
-        ]);
-        await quick_make_love(
-          new EroParticipant(32, part_enum.mouth),
-          new EroParticipant(0, part_enum.penis),
-          false,
-        );
-        println();
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 大大张开嘴，一口气将肉棒吞至根部',
-        ]);
-        await printAndWait('不断上下吸弄，发出了下流的水声');
-        println();
-        await tachyon.say_and_wait('好吃……好美味……');
-        await tachyon.say_and_wait(['肉棒……', callname, ' 臭臭的肉棒❤❤']);
-        println();
-        await printAndWait(['从根部到龟头，完整的包覆吸吮']);
-        await printAndWait(
-          '像涂唇膏一般，想毫无保留的将肉棒的味道蹭在自己口中',
-        );
-        println();
-        await printAndWait('傍晚时分，大多数人已经回到家中或者宿舍的时间');
-        await printAndWait(
-          '实验室中，回荡着无比淫糜的水声，是故意发出的，还是已经拼命到没有功夫去在意声音了？',
-        );
-        await printAndWait([
-          '对 ',
-          me.get_colored_name(),
-          ' 的渴求，对肉棒的渴求，或许还有想要做出如此淫贱行为的背德感',
-        ]);
-        await printAndWait(
-          '一边服侍肉棒，一边摇晃的屁股也在不停摩擦着地板和手指，期望获得慰藉',
-        );
-        await printAndWait('但是……最美味的，果然还是口中的肉棒');
-        await printAndWait([
-          '带着爱意的服侍，无声的说明着 ',
-          tachyon.get_colored_name(),
-          ' 对眼前肉棒的痴迷',
-        ]);
-        await printAndWait([
-          '倘若让',
+        await era.printAndWait([
           tachyon.sex,
-          '现在发誓一辈子作为肉棒的奴隶而活，或许',
-          tachyon.sex,
-          '都会答应吧',
+          '用力吸吮了一口，将剩余的精液从竿内吸吮出来。',
         ]);
-        println();
-        await printAndWait([
-          '忽然，',
-          me.get_colored_name(),
-          ' 拍了拍 ',
+        era.println();
+        await tachyon.say_and_wait('这样……就干净了呢❤️');
+        era.println();
+        await era.printAndWait([
+          '将收集到的精液聚集在口中，给你看清后，',
           tachyon.get_colored_name(),
-          ' 的头',
+          ' 才慢悠悠的将白浆喝下。',
         ]);
-        await printAndWait(['听话的', tachyon.sex, '马上察觉到了意思']);
-        println();
-        await tachyon.say_and_wait(
-          '进来……请射进来……在我的嘴穴里……全部……喝下去❤❤',
+        await era.printAndWait([
+          '喉咙色情的上下滚动，仿佛要让 ',
+          me.get_colored_name(),
+          ' 看清吞咽的全过程一般。',
+        ]);
+        era.println();
+        await tachyon.say_and_wait('哈啊……又空了呢❤️不多射点，进来吗❤️');
+      } else if (
+        master === 0 &&
+        last_action === ero_hooks.force_deep_blow_job
+      ) {
+        await tachyon.say_and_wait('嗯呜呜呜❤️嗯唔❤️唔咕❤️');
+        era.println();
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 用力按住了 ',
+          tachyon.get_colored_name(),
+          ' 的头。',
+        ]);
+        await era.printAndWait([
+          '将龟头死死顶进 ',
+          tachyon.get_colored_name(),
+          ' 的喉咙深处开始射精。',
+        ]);
+        await era.printAndWait([
+          '直到射精结束 ',
+          me.get_colored_name(),
+          ' 也依然用肉棒堵着，好确保自己的精液深深浸入到 ',
+          tachyon.get_colored_name(),
+          ' 胃道的每个角落。',
+        ]);
+        era.println();
+        await era.printAndWait([
+          '似乎是因为缺氧，在肉棒抽出后 ',
+          tachyon.get_colored_name(),
+          ' 的表情看上去有些呆滞。',
+        ]);
+        await era.printAndWait(
+          '但依然下意识的将嘴边的白色浆液和弯曲毛发吞入口中……',
         );
-        set_palam_to_max(0, part_enum.penis);
-        set_palam_to_max(32, part_enum.mouth);
-        await quick_make_love(
-          new EroParticipant(32, part_enum.mouth),
-          new EroParticipant(0, part_enum.penis),
-          false,
-        );
-        println();
-        await printAndWait([
-          tachyon.sex,
-          '马上更贴近的含吮着 ',
-          me.get_colored_name(),
-          ' 的肉棒',
-        ]);
-        await printAndWait('终于，白浆在口中爆发');
-        println();
-        await tachyon.say_and_wait('啾……咕啾………噗哈');
-        await tachyon.say_and_wait('哈啊……哈……嗯……啾……');
-        println();
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 慢慢咀嚼着射在口中的精液',
-        ]);
-        await printAndWait('故意发出咕啾的咀嚼声后，将精液全部喝了下去');
-        await printAndWait('随即，为了使残留的精液能被一滴不剩的喝干');
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 又一次含住了垂下的肉棒，不停啜吸着，打扫肉棒',
-        ]);
-        await printAndWait([
-          '看见',
-          tachyon.sex,
-          '如此癡迷的模样，',
-          me.get_colored_name(),
-          ' 的下体不自觉的又硬了起来',
-        ]);
-        println();
-        await tachyon.say_and_wait(['下次实验还要拜托你哦，', callname, ' ']);
-        await tachyon.say_and_wait('……当然，还会有奖励的');
-        await tachyon.say_and_wait('你不会拒绝吧……亲爱的❤');
-        println();
-        await printAndWait([
-          '看着',
-          tachyon.sex,
-          '媚眼如丝的模样，',
-          me.get_colored_name(),
-          ' 选择再一次堵住那张不断对自己发号施令的小嘴',
-        ]);
-        break;
-      case 2:
-        set_stain(0, part_enum.penis, stain_enum.semen);
-        set_stain(32, part_enum.virgin, stain_enum.secretion);
-        if (get_expansion(get_penis_size(0), 32, part_enum.virgin) > 1) {
-          life_marks.reward--;
-          return;
+      } else if (
+        (master !== 0 || last_action !== ero_hooks.ask_deep_blow_job) &&
+        (master !== 32 || other_action !== ero_hooks.deep_blow_job)
+      ) {
+        await tachyon.say_and_wait('嗯……咕嘟……咕噜……');
+        era.println();
+        if (Math.random() < 0.5) {
+          await era.printAndWait('仿佛等这一刻等了许久。');
+          await era.printAndWait([
+            tachyon.get_colored_name(),
+            ' 一口接一口，欣喜的将射出的白浆全数喝了下去。',
+          ]);
+          era.println();
+          await tachyon.say_and_wait('噗哈……');
+          era.println();
+          await era.printAndWait('张开的口舌中，却还有一点白丝残留。');
+          await era.printAndWait([
+            '只见 ',
+            tachyon.get_colored_name(),
+            ' 就这么张着嘴，用舌头将口内的精液全数聚集在一起。',
+          ]);
+          await era.printAndWait('然后再次咽下。');
+          era.println();
+          await tachyon.say_and_wait('多谢款待❤️');
+        } else {
+          await era.printAndWait([
+            tachyon.get_colored_name(),
+            ' 在 ',
+            me.get_colored_name(),
+            ' 面前伸出舌头，展示着自己榨出的大量精液。',
+          ]);
+          await era.printAndWait([
+            '那总是自信自傲的脸庞，被白浊液体玷污的模样，煽动着 ',
+            me.get_colored_name(),
+            ' 内心的欲望。',
+          ]);
+          era.println();
+          await tachyon.say_and_wait([
+            '这就是，',
+            sys_get_callname(32, 0),
+            ' 的因子呢……要是用在实验的话……',
+          ]);
+          era.println();
+          await era.printAndWait('虽然这么说着，但在口中把玩了一会后……');
+          era.println();
+          await tachyon.say_and_wait('咕啾……咕啾……噗哈❤️');
+          era.println();
+          await era.printAndWait([
+            tachyon.get_colored_name(),
+            ' 对着 ',
+            me.get_colored_name(),
+            ' 张开了已经空无一物的小口。',
+          ]);
+          era.println();
+          await tachyon.say_and_wait(
+            '通通喝下去了呢……这样只好，再来一次了不是吗❤️',
+          );
         }
-        await tachyon.say_and_wait([callname, '～今天的实验也辛苦了']);
-        await tachyon.say_and_wait('那么……需要奖励吗❤️');
-        await me.say_and_wait('来吧');
-        println();
-        await printAndWait('滋啾滋啾');
-        await printAndWait('实验室裏满是下流的声响');
-        println();
-        await tachyon.say_and_wait([callname, '……', callname, '❤️']);
-        await tachyon.say_and_wait('快点……填满我的骚穴❤️');
+      }
+    } else if (
+      penis_touched_part.part === part_enum.breast &&
+      era.get('nowex:0:阴茎高潮') > 0
+    ) {
+      await tachyon.say_and_wait('好浓……❤️');
+      await tachyon.say_and_wait([
+        '全部都涂在脸上……满满的 ',
+        sys_get_colored_callname(32, 0),
+        ' 的味道❤️',
+      ]);
+      era.println();
+      await era.printAndWait('浓浓的浆液顺着脸庞流到胸部上。');
+      await era.printAndWait([
+        tachyon.get_colored_name(),
+        ' 先将脸庞上沾满的精液擦拭干净聚集在手上。',
+      ]);
+      await era.printAndWait('却好似不小心漏掉了胸部上的痕迹一般。');
+      await era.printAndWait([
+        '赤裸的乳肉上，满是 ',
+        me.get_colored_name(),
+        ' 射出的腥臭白浆。',
+      ]);
+      era.println();
+      await tachyon.say_and_wait('哎呀……居然忘了呢❤️');
+      era.println();
+      await era.printAndWait([
+        '看见 ',
+        me.get_colored_name(),
+        ' 的目光都被吸引在胸上。',
+      ]);
+      await era.printAndWait([
+        tachyon.get_colored_name(),
+        ' 才发出明显的，刻意且做作的惊呼。',
+      ]);
+      await era.printAndWait('将胸上的白浆层层抹去，放入口中。');
+      era.println();
+      await tachyon.say_and_wait('啾……啾噜❤️多谢款待❤️');
+      era.println();
+      await era.printAndWait([
+        tachyon.sex,
+        '吸了吸手指，张开嘴，露出已经干净的舌唇表示没有遗漏。',
+      ]);
+    } else if (
+      penis_touched_part.part === part_enum.clitoris &&
+      era.get('nowex:32:外阴高潮') + era.get('nowex:32:阴道高潮') > 0
+    ) {
+      await tachyon.say_and_wait('去了……要去了❤️');
+      await tachyon.say_and_wait([
+        '要变成 ',
+        sys_get_callname(32, 0),
+        ' 专属的小母狗了喔喔喔喔❤️',
+      ]);
+    } else if (
+      penis_touched_part.part === part_enum.virgin &&
+      era.get('nowex:0:阴茎高潮') > 0 &&
+      era.get('nowex:32:膣内精液') > 0 &&
+      !master
+    ) {
+      if (last_action === ero_hooks.missionary) {
+        await era.printAndWait([
+          '将总是占据主动的 ',
+          tachyon.get_colored_name(),
+          ' 压在身下进行侵犯的行为，使 ',
+          me.get_colored_name(),
+          ' 的射精欲望越发高涨。',
+        ]);
+        era.println();
+        await tachyon.say_and_wait('啊❤️啊嗯❤️豚鼠君❤️');
+        await tachyon.say_and_wait('小穴……小穴里面❤️好舒服❤️');
+        era.println();
+        await me.say_and_wait('要出来了……');
+        await era.printAndWait([me.get_colored_name(), ' 低吼一声']);
+        await era.printAndWait('嘟咕❤️嘟咕❤️咕咻噜噜❤️');
+        era.println();
+        await era.printAndWait(
+          '随着肉棒的拔出，射在腔内的浓郁白浆缓缓流了出来……',
+        );
+      } else if (
+        last_action === ero_hooks.doggy_style ||
+        last_action === ero_hooks.hug_standing
+      ) {
+        await tachyon.say_and_wait('哈啊……嗯啊……喔……呜喔喔喔喔❤️');
+        await tachyon.say_and_wait('像野兽一样被中出了喔喔喔喔❤️❤️❤️');
         await tachyon.say_and_wait(
-          '好好调教这个……在实验途中就开始不停流水的淫穴',
+          '要失去理智了❤️要变成脑袋里只有肉棒和精液的野兽了❤️❤️❤️',
         );
-        await quick_make_love(
-          new EroParticipant(0, part_enum.penis),
-          new EroParticipant(32, part_enum.virgin),
-          false,
+        era.println();
+        await era.printAndWait('安产体型的屁股，充分起到了缓冲的作用。');
+        await era.printAndWait('每当肉棒冲击子宫口，爱液便会喷涌而出。');
+        await era.printAndWait('整个小穴一阵一阵的刺激着肉棒。');
+        await era.printAndWait(
+          '不久后，龟头压着子宫口，将精液注入了子宫内部。',
         );
-        await printAndWait('肉棒插入前就已经完全湿透的小穴将肉棒紧紧包裹');
-        await printAndWait([
-          '每一下顶弄爱液都会飞溅而出，桌面和地板都染上了 ',
-          tachyon.get_colored_name(),
-          ' 的腥臭穴汁',
-        ]);
-        println();
-        await tachyon.say_and_wait('呜……好用力❤️');
-        await tachyon.say_and_wait('稍微…稍微慢一点……❤️');
-        await tachyon.say_and_wait('声音……啊嗯❤️');
-        println();
-        await printAndWait('都这样勾引了还希望自己能慢一点？');
-        await printAndWait([
-          me.get_colored_name(),
-          ' 用力拍打着 ',
-          tachyon.get_colored_name(),
-          ' 的屁股',
-        ]);
-        await quick_make_love(
-          new EroParticipant(0, part_enum.hit),
-          new EroParticipant(32, part_enum.anal),
-          false,
+        await era.printAndWait('biu～biu～biu～');
+        await era.printAndWait('漫长的播种看来还需要一些时间完结。');
+      }
+    } else if (
+      penis_touched_part.part === part_enum.anal &&
+      era.get('nowex:0:阴茎高潮') > 0 &&
+      era.get('nowex:32:肠内精液') > 0 &&
+      !master &&
+      last_action === ero_hooks.missionary_anal_sex
+    ) {
+      await tachyon.say_and_wait('去了……去了去了去了！');
+      await tachyon.say_and_wait('用肛门，用屁穴去了喔喔喔喔喔❤️');
+      if (tachyon.sex_code !== 1) {
+        era.println();
+        await era.printAndWait(
+          '被用力抽插了几下后，空荡的小穴涌出了一股又一股的潮水。',
         );
-        await printAndWait('不管不顾的加快了速度');
-        println();
-        await tachyon.say_and_wait([callname, '……', callname, '❤️']);
-        await tachyon.say_and_wait('啊❤️嗯啊❤️啊❤️啊啊❤️');
-        await tachyon.say_and_wait([callname, '……给我❤️给我更多❤️']);
-        println();
-        await printAndWait([
-          '渐入佳境后，腰甚至脱离了 ',
-          me.get_colored_name(),
-          ' 的掌控，自行加快了速度',
-        ]);
-        await printAndWait([
-          '如此主动的缠绕使 ',
-          me.get_colored_name(),
-          ' 的兴奋程度也更上层楼，渴望将眼前雌性的身体，任凭雄性本能操控着身体',
-        ]);
-        println();
-        await tachyon.say_and_wait(['好棒❤️', callname, ' 的肉棒❤️好厉害❤️']);
-        println();
-        await printAndWait('肉体碰撞的声音更加响亮');
-        await printAndWait('整个实验室中充斥着淫猥的气味及声音');
-        println();
-        await tachyon.say_and_wait('又……又更大了❤️');
-        await tachyon.say_and_wait([
-          '要射了吗……在，在里面出来❤️好想要……',
-          callname,
-          ' 的小宝宝❤️',
-        ]);
-        await tachyon.say_and_wait(['喜欢……最喜欢被 ', callname, ' 内射了❤️']);
-        await tachyon.say_and_wait([
-          '在小穴里面……尽情的出来……想生下 ',
-          callname,
-          ' 的孩子❤️想给 ',
-          callname,
-          ' 生一窝小豚鼠❤️',
-        ]);
-        println();
-        await printAndWait([
+        await era.printAndWait(
+          '无论是喷溅在自己身上的，还是从穴内缓缓流出的，都汇聚到了两人正连接着的器官，继续作为抽插的润滑剂以供使用。',
+        );
+        era.println();
+        await me.say_and_wait('真是方便的性处理用具啊，还自带润滑功能。');
+        await era.printAndWait([
           '听见 ',
-          tachyon.get_colored_name(),
-          ' 的话，',
           me.get_colored_name(),
-          ' 更不管不顾的加快加深',
-        ]);
-        await printAndWait([
-          '哪怕是',
-          tachyon.get_uma_sex_title(),
-          '的身体都只能娓娓配合着 ',
-          me.get_colored_name(),
-          ' 的动作来回',
-        ]);
-        await printAndWait([
-          me.get_colored_name(),
-          ' 捏住前面不停晃动的两点尖端，用力向下拉',
-        ]);
-        await quick_make_love(
-          new EroParticipant(0, part_enum.hand),
-          new EroParticipant(32, part_enum.breast),
-          false,
-        );
-        println();
-        await tachyon.say_and_wait('齁喔喔喔喔喔喔❤️');
-        await tachyon.say_and_wait('去，去了❤️要被扯着奶头去了❤️');
-        println();
-        await printAndWait('咚咕，嘟咕，咻噜噜噜❤️');
-        await printAndWait('最后，最深入的插抽了几下后，精关彻底放开');
-        await printAndWait([
-          '白浆灌满了 ',
+          ' 的玩笑话，',
           tachyon.get_colored_name(),
-          ' 的小穴',
+          ' 想用力的夹一下肉棒来表达不满，却发现完全脱力的身体连这点事都做不到，不仅如此，小穴在这样的挤压刺激下又浅浅的小高潮了一次。',
         ]);
-        await printAndWait([
-          '被白浆灌入的瞬间，',
-          tachyon.get_colored_name(),
-          ' 也全身痉挛着达到了巅峰',
-        ]);
-        println();
-        await tachyon.say_and_wait([
-          '好几天没能品尝到的……',
-          callname,
-          ' 的肉棒❤️欸嘿嘿❤️',
-        ]);
-        await tachyon.say_and_wait(['好棒……', callname, ' 的……好唔唔❤️']);
-        println();
-        await printAndWait([
-          '自以为已经结束的 ',
-          tachyon.get_colored_name(),
-          '，感叹的话才说到一半',
-        ]);
-        set_palam_to_max(0, part_enum.penis);
-        set_palam_to_max(32, part_enum.virgin);
-        await quick_make_love(
-          new EroParticipant(0, part_enum.penis),
-          new EroParticipant(32, part_enum.virgin),
-          false,
-        );
-        await printAndWait([
-          '便被 ',
-          me.get_colored_name(),
-          ' 的肉棒再度堵住了嘴',
-        ]);
-        println();
-        await tachyon.say_and_wait('啾……啾啾❤️');
-        println();
-        await printAndWait([
-          tachyon.get_colored_name(),
-          ' 顺从的帮 ',
-          me.get_colored_name(),
-          ' 清理着肉棒',
-        ]);
-        await quick_make_love(
-          new EroParticipant(32, part_enum.mouth),
-          new EroParticipant(0, part_enum.penis),
-          false,
-        );
-        await printAndWait([
-          '满是自己淫汁和 ',
-          callname,
-          ' 精液的肉棒，对 ',
-          tachyon.get_colored_name(),
-          ' 而言现在哪怕将 ',
-          callname,
-          ' 的便当摆在面前，',
-          tachyon.sex,
-          '大概都会优先选择肉棒',
-        ]);
-        println();
-        await tachyon.say_and_wait('下次实验……一样拜托你了❤️啾❤️啾啵❤️');
-        await tachyon.say_and_wait('唔！唔啾❤️啾噜❤️');
-        println();
-        await printAndWait([
-          '听见 ',
-          tachyon.get_colored_name(),
-          ' 变着法子说出的「下次再来做吧」，',
-          me.get_colored_name(),
-          ' 的肉棒又硬了起来',
-        ]);
-        await printAndWait([
-          '勾引的眼前',
-          tachyon.get_uma_sex_title(),
-          '再度露出雌性的表情',
-        ]);
-        break;
-      case 3:
-        set_stain(0, part_enum.penis, stain_enum.semen);
-        set_stain(32, part_enum.anal, stain_enum.anal);
-        if (get_expansion(get_penis_size(0), 32, part_enum.anal) > 1) {
-          life_marks.reward--;
-          return;
-        }
-        await tachyon.say_and_wait([callname, '～今天的实验也辛苦了']);
-        await tachyon.say_and_wait('那么……需要奖励吗❤️');
-        await me.say_and_wait('来吧');
-        await tachyon.print_and_wait('果然，不应该是这个洞口的吧？');
-        await tachyon.print_and_wait('明明下面的骚穴也痒的不行');
-        await tachyon.print_and_wait('为什么插的却是那种地方');
-        await tachyon.print_and_wait('而且还是这种……这种姿势');
-        println();
-        await quick_make_love(
-          new EroParticipant(0, part_enum.penis),
-          new EroParticipant(32, part_enum.anal),
-          false,
-        );
-        await tachyon.print_and_wait([
-          '紧紧的后穴，包裹着 ',
-          callname,
-          ' 的粗壮肉棒',
-        ]);
-        await tachyon.print_and_wait([
-          '比起小穴，皱折更多的菊穴在给予 ',
-          callname,
-          ' 更多快感的同时，也给自己带来了小穴两倍的快感',
-        ]);
-        await tachyon.print_and_wait(
-          '这点来讲，对于满足性欲的条件来说，或许确实比小穴更好用……但是……',
-        );
-        println();
-        await tachyon.say_and_wait(
-          '这种像小狗一样的姿势……再加上这个穴……这不就是真正的小狗吗❤️',
-          true,
-        );
-        println();
-        await tachyon.print_and_wait('但是……仔细想想似乎也不是不行❤️');
-        await tachyon.print_and_wait([callname, ' 是自己专属的 ', callname]);
-        await tachyon.print_and_wait([
-          tachyon.get_colored_name(),
-          ' 是 ',
-          callname,
-          ' 专属的小母狗',
-        ]);
-        await tachyon.print_and_wait(
-          '这么一想，自己的身体仿佛马上就无缝代入角色了一般，开始高兴的摇晃着尾巴，讨着主人欢心',
-        );
-        drawLine();
-        await printAndWait([
-          '好像感觉到了身下人的胡思乱想，',
-          me.get_colored_name(),
-          ' 拍了 ',
-          tachyon.get_colored_name(),
-          ' 的屁股提醒',
-          tachyon.sex,
-          '专心',
-        ]);
-        await quick_make_love(
-          new EroParticipant(0, part_enum.hand),
-          new EroParticipant(32, part_enum.anal),
-          false,
-        );
-        await printAndWait([
-          '但已经完全代入角色的 ',
-          tachyon.get_colored_name(),
-          ' 却更用力的摇晃起屁股，夹紧了自己的屁穴',
-        ]);
-        await printAndWait([
-          '突如其来的攻击，使得 ',
-          me.get_colored_name(),
-          ' 一时精关失守',
-        ]);
-        await printAndWait([
-          me.get_colored_name(),
-          ' 按住了 ',
-          tachyon.get_colored_name(),
-          ' 的腰，在屁穴里将积累了几天的精液全部排泄一空',
-        ]);
-        await printAndWait([
-          '胯下的 ',
-          tachyon.get_colored_name(),
-          ' 在这个时候，也仿佛想将自己的幸福传达给主人的母狗一般',
-        ]);
-        await printAndWait('欢快的排出小便表露自己此时的心情');
-        await printAndWait([
-          '然而 ',
-          me.get_colored_name(),
-          ' 还没来得及做出表示，就迎来了第二个重量级的冲击',
-        ]);
-        set_palam_to_max(0, part_enum.penis);
-        set_palam_to_max(32, part_enum.anal);
-        if (tachyon.sex_code === 0) {
-          set_palam_to_max(32, part_enum.clitoris);
-        }
-        await quick_make_love(
-          new EroParticipant(0, part_enum.penis),
-          new EroParticipant(32, part_enum.anal),
-          false,
-        );
-        println();
-        await tachyon.say_and_wait('汪……汪汪❤️');
-        await printAndWait([
-          '看见 ',
-          me.get_colored_name(),
-          ' 脸上迷惑的表情后，',
-          tachyon.get_colored_name(),
-          ' 才仿佛忽然回过神自己都做了什么',
-        ]);
-        await printAndWait('脸颊瞬间通红');
-        println();
-        await tachyon.say_and_wait([
-          callname,
-          '……不是，我……没有……不是你想的那样……',
-        ]);
-        println();
-        await printAndWait('虽然不知道发生了什么，但先装作无事发生吧');
+      }
     }
   }
 };
 
 /**
  * @param _
- * @param {{level:number,name:string,new:boolean}} extra_flag
+ * @param {GetMarkParams} extra_flag
  */
 handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
   if (!sys_check_awake(32) || extra_flag.name === '淫纹') {
     throw new Error();
   }
   const callname = sys_get_colored_callname(32, 0),
-    love = get('love:32'),
+    love = era.get('love:32'),
     tachyon = get_chara_talk(32);
   switch (extra_flag.name) {
     case '欢愉':
@@ -783,7 +408,7 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
               true,
             );
           }
-          await printAndWait([
+          await era.printAndWait([
             tachyon.get_colored_name(),
             ' 忽然疯狂的摇晃起头来',
           ]);
@@ -831,7 +456,7 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
           );
           await tachyon.say_and_wait('结束之后就恢复正常了……对……所以……', true);
           await tachyon.say_and_wait('请再……给我更多命令吧……❤️');
-          set('callname:32:0', [callname.content, '主人大人']);
+          era.set('callname:32:0', [callname.content, '主人大人']);
       }
       break;
     case '苦痛':
@@ -921,11 +546,11 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
             await tachyon.say_and_wait(['不要挑战我的极限，', callname, '。']);
           } else {
             await tachyon.say_and_wait([callname, '……？']);
-            await printAndWait([
+            await era.printAndWait([
               tachyon.get_colored_name(),
               ' 愣着神，就仿佛被自己最亲密信赖的人甩了一巴掌一般。',
             ]);
-            await printAndWait('比起愤怒，更多的是错愕和不敢置信。');
+            await era.printAndWait('比起愤怒，更多的是错愕和不敢置信。');
           }
           break;
         case 2:
@@ -946,13 +571,13 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
             await tachyon.say_and_wait(
               '不然的话……不然的话……我无法理解啊……为什么你要做出这种事来！',
             );
-            await printAndWait([
+            await era.printAndWait([
               tachyon.get_colored_name(),
               ' 万番悲痛的看着 ',
               get_chara_talk(0).get_colored_name(),
               '，心中满是不解和怀疑。',
             ]);
-            await printAndWait([
+            await era.printAndWait([
               '对 ',
               get_chara_talk(0).get_colored_name(),
               ' 的不解，对自己的怀疑。',
@@ -961,12 +586,12 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
           break;
         case 3:
           if (love < 50) {
-            await printAndWait([
+            await era.printAndWait([
               '瞬间，一股灼烧感通过 ',
               get_chara_talk(0).get_colored_name(),
               ' 的喉咙逆流而出。',
             ]);
-            await printAndWait([
+            await era.printAndWait([
               get_chara_talk(0).get_colored_name(),
               ' 忍不住咳了几声，并惊恐的发现地上的液体带有几缕血丝。',
             ]);
@@ -980,14 +605,14 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
             await tachyon.say_and_wait(
               '不过……我能保证就算当实验品，也绝对能让你生不如死。',
             );
-            await printAndWait([
+            await era.printAndWait([
               tachyon.get_colored_name(),
               ' 的眼中带着厌恶及憎恶的情绪。',
             ]);
           } else {
             await tachyon.say_and_wait('啊啊……够了。');
             await tachyon.say_and_wait('已经够了。');
-            await printAndWait('红色的百叶窗，彻底关上。');
+            await era.printAndWait('红色的百叶窗，彻底关上。');
           }
       }
   }
@@ -999,7 +624,23 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
  */
 module.exports = async (hook, extra_flag) => {
   if (!handlers[hook.hook]) {
-    throw new Error('unsupported hook!');
+    throw new Error();
+  }
+  if (ero_action_names[hook.hook]) {
+    const { attacker, defender } = get_participants_and_first_action(
+      32,
+      hook,
+      extra_flag,
+    );
+    if (era.get('tflag:强奸') >= 0 || !sys_check_awake(defender)) {
+      throw new Error();
+    }
+    return await handlers[hook.hook](
+      get_chara_talk(attacker),
+      get_chara_talk(defender),
+      hook,
+      extra_flag,
+    );
   }
   return await handlers[hook.hook](hook, extra_flag);
 };

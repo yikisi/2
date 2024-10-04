@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const names = require('#/data/child-names.json');
 
-module.exports = (chara_id) => {
+function get_child_name(chara_id) {
   let chara_name = era.get(`callname:${chara_id}:-1`);
   const index = era.get(`cflag:${chara_id}:后代命名索引`);
   era.add(`cflag:${chara_id}:后代命名索引`, 1);
@@ -12,6 +12,7 @@ module.exports = (chara_id) => {
   if (names[chara_name] && names[chara_name].length > index) {
     return names[chara_name][index];
   }
-  // TODO 上生成器
   return `${chara_name}${era.get(`exp:${chara_id}:生产次数`) + 1}`;
-};
+}
+
+module.exports = get_child_name;

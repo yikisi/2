@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -8,12 +9,10 @@ const { get_chara_color } = require('#/data/chara-colors');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 class GameGuides {
   /** @type {Record<string,1>} */
   obj;
-  a = 1;
 
   constructor() {
     this.obj = era.get('flag:新手教学') || era.set('flag:新手教学', {});

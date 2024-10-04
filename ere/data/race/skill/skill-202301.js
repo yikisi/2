@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202301,
   '优雅的沙浴',
-  '紧跟前方的赛马娘时，速度提升＜泥地＞',
+  '紧跟前方的赛马娘时，速度提升',
   20230,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

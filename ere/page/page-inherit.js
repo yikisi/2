@@ -16,6 +16,7 @@ const {
   waitAnyKey,
 } = require('#/era-electron');
 
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { get_image } = require('#/system/sys-calc-image');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
@@ -39,7 +40,6 @@ const {
   gene_type_enum,
 } = require('#/data/race/model/uma-gene');
 const { adaptability_names } = require('#/data/train-const');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 /**
  * @param {CharaGenes} genes

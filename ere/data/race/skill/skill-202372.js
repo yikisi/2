@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202372,
   '进攻的姿势',
-  '比赛中盘速度稍微提升＜先马＞',
+  '比赛中盘速度稍微提升',
   20237,
   1,
   UmaSkill.rarity_enum.normal,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [7],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

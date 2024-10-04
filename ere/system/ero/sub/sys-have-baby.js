@@ -8,12 +8,15 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { init_chara } = require('#/system/sys-init-chara');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
+const get_random_name = require('#/utils/naming');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
@@ -23,6 +26,60 @@ const { get_filtered_talents } = require('#/data/info-generator');
 const { gene_juel_names } = require('#/data/other-const');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 const { adaptability_names } = require('#/data/train-const');
+
+async function name_baby(child_id, father_id, mother_id) {
+  let ret, random_param;
+  // chara_id一定是母亲
+  // 虽然不是很情愿，但是还是留一下吧，只有玩家是孩子父亲或者母亲的情况下才拥有命名决定权
+  if (mother_id && father_id) {
+    // 如果和玩家没关系，直接用母亲来命名
+    random_param = mother_id;
+  } else if (era.get('flag:惩戒力度') >= 2) {
+    // 性奴和孕袋没有命名权
+    random_param = mother_id || father_id;
+  } else {
+    if (
+      await select_yes_or_no(
+        '',
+        `让${mother_id ? '母亲' : '父亲'}起名`,
+        '亲自起名',
+      )
+    ) {
+      random_param = mother_id || father_id;
+    } else {
+      era.print('想给孩子起什么名字呢？');
+      ret = await era.input();
+    }
+  }
+  if (random_param) {
+    ret = get_random_name(random_param);
+  }
+  era.set(`callname:${child_id}:-2`, era.set(`callname:${child_id}:-1`, ret));
+  if (
+    (!mother_id || !father_id) &&
+    random_param &&
+    ret.replace(/\d+$/, '').length !== ret.length &&
+    (await select_yes_or_no([
+      get_chara_talk(mother_id).get_colored_name(),
+      ' 的孩子起名为 ',
+      get_chara_talk(child_id).get_colored_name(),
+      '……',
+      { isBr: true },
+      '要重新取名吗？',
+    ]))
+  ) {
+    era.set(
+      `callname:${child_id}:-2`,
+      era.set(`callname:${child_id}:-1`, await era.input()),
+    );
+  }
+  await era.printAndWait([
+    get_chara_talk(mother_id).get_colored_name(),
+    ' 的孩子最终起名为 ',
+    get_chara_talk(child_id).get_colored_name(),
+    '！',
+  ]);
+}
 
 /** @param {number} mother_id */
 async function sys_have_baby(mother_id) {
@@ -44,10 +101,7 @@ async function sys_have_baby(mother_id) {
    * 随机赋予3项性格特质
    * @type {number[]}
    */
-  const chara_talents = [
-    ...new Array(18).fill(0).map((_, i) => i + 1070),
-    1090,
-  ];
+  const chara_talents = [...new Array(18).fill(0).map((_, i) => i), 20];
   chara_talents.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
   );
@@ -102,7 +156,7 @@ async function sys_have_baby(mother_id) {
 
   // 随机赋予1项名器特质
   const part_talent_count = get_random_value(0, 1);
-  const part_talents = get_filtered_talents(sex, 1010);
+  const part_talents = get_filtered_talents(sex, 50);
   part_talents.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
   );
@@ -115,9 +169,9 @@ async function sys_have_baby(mother_id) {
     xp_extended_count = get_random_value(0, 1);
   const talent_arr = [
     // 淫乱系
-    ...get_filtered_talents(sex, 1000),
+    ...get_filtered_talents(sex, 60),
     // xp系
-    ...new Array(8).fill(0).map((_, i) => i + 1050),
+    ...new Array(8).fill(0).map((_, i) => i + 40),
   ];
   talent_arr.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
@@ -162,8 +216,8 @@ async function sys_have_baby(mother_id) {
    */
   const semen_talents = new Array(8)
     .fill(0)
-    .map((_, i) => i + 1060)
-    .filter((talent_id) => talent_id !== 1061 || talent_id !== 1065 || sex - 1);
+    .map((_, i) => i + 70)
+    .filter((talent_id) => talent_id !== 71 || talent_id !== 75 || sex !== 1);
   semen_talents.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
   );
@@ -316,6 +370,7 @@ async function sys_have_baby(mother_id) {
     ero_hooks.have_baby,
     { child_id },
   );
+  await name_baby(child_id, father_id, mother_id);
 
   get_custom_mec(child_id).set_callname();
   const child = get_chara_talk(child_id),

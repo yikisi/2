@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201672,
   '安利',
-  '在比赛中盘进行名次争夺时速度略微上升＜泥地＞',
+  '在比赛中盘进行名次争夺时速度略微上升',
   20167,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

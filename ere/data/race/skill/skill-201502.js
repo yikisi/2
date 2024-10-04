@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201502,
   '策士',
-  '比赛终盘位于后方时，视野略微开阔＜追马＞',
+  '比赛终盘位于后方时，视野略微开阔',
   20150,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   110,
   false,
   false,
+  [9],
+  [UmaSkill.ability_tag_enum.visible],
 );

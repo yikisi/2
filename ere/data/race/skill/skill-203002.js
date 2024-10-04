@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   203002,
   '玩弄人心',
-  '若成功在比赛终盘的弯道追赶超越对手，则在短时间内稍微向前冲刺＜追马＞',
+  '若成功在比赛终盘的弯道追赶超越对手，则在短时间内稍微向前冲刺',
   20300,
   1,
   UmaSkill.rarity_enum.normal,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [9],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

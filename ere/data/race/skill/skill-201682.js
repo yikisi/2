@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201682,
   '前行',
-  '在赛程终盘略微冲刺调整姿态＜泥地＞',
+  '在赛程终盘略微冲刺调整姿态',
   20168,
   1,
   UmaSkill.rarity_enum.normal,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   140,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.laneMove, UmaSkill.ability_tag_enum.accel],
 );

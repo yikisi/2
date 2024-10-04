@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202381,
   '突破',
-  '比赛中盘位于后方时，速度提升，并选择更好的路线＜追马＞',
+  '比赛中盘位于后方时，速度提升，并选择更好的路线',
   20238,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [9],
+  [UmaSkill.ability_tag_enum.currentSpeed, UmaSkill.ability_tag_enum.laneMove],
 );

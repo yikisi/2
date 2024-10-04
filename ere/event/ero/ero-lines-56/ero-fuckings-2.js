@@ -20,15 +20,6 @@ module.exports = (handlers) => {
       throw new Error('unsupported hook!');
     }
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 插入自己的',
-        hook.hook === ero_hooks.ask_fuck ? '小穴' : '屁穴',
-        '……】',
-      ]);
       if (
         await ask_action(
           attacker.id,
@@ -40,7 +31,6 @@ module.exports = (handlers) => {
         await after_refusing_by_attacker(attacker, defender, hook);
         return;
       }
-
       await attacker.say_and_wait(['想……']);
       await attacker.say_and_wait(['欸！']);
       await attacker.print_and_wait([
@@ -62,15 +52,6 @@ module.exports = (handlers) => {
       ]);
       await attacker.say_and_wait(['为了今日份的大吉……请插进来吧。']);
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 继续抽插自己的',
-        hook.hook === ero_hooks.ask_fuck ? '小穴' : '屁穴',
-        '……】',
-      ]);
       await common_continue_fucking_kitaru(defender, attacker);
     }
   };
@@ -80,15 +61,6 @@ module.exports = (handlers) => {
       throw new Error('unsupported hook!');
     }
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 骑在 ',
-        defender.get_colored_name(),
-        ' 身上，以',
-        hook.hook === ero_hooks.cowgirl ? '小穴' : '屁穴',
-        '吞没肉棒……】',
-      ]);
       await attacker.print_and_wait([
         '双手放在 ',
         sys_get_colored_callname(defender.id, attacker.id),
@@ -109,15 +81,6 @@ module.exports = (handlers) => {
       await attacker.say_and_wait(['唔呃～好棒❤️！']);
       await attacker.print_and_wait(['失态的呻吟从张开的嘴中不断漏出。']);
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 骑在 ',
-        defender.get_colored_name(),
-        ' 身上，以自己的',
-        hook.hook === ero_hooks.cowgirl ? '小穴' : '屁穴',
-        '套弄着肉棒……】',
-      ]);
       await common_continue_fucking_kitaru(defender, attacker);
     }
   };
@@ -130,15 +93,6 @@ module.exports = (handlers) => {
     if (attacker.id !== 56) {
       throw new Error();
     }
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 用',
-      hook.hook === ero_hooks.stimulate_glans_by_virgin ? '小穴' : '屁穴',
-      '套弄着 ',
-      defender.get_colored_name(),
-      ' 的肉棒……】',
-    ]);
     if (hook.arg) {
       await attacker.print_and_wait([
         '总是让 ',
@@ -161,32 +115,30 @@ module.exports = (handlers) => {
         sys_get_colored_callname(attacker.id, defender.id),
         '。',
       ]);
+    } else if (era.get(`tcvar:${defender.id}:接近高潮`)) {
+      await attacker.print_and_wait(['不妙不妙不妙……']);
+      await attacker.print_and_wait([
+        '本来只是想试着配合上 ',
+        sys_get_colored_callname(attacker.id, defender.id),
+        ' 节奏的自己, 却颇为掉链子的忘了深处的穴肉会有多么的敏感。',
+      ]);
+      await attacker.print_and_wait([
+        '似乎是察觉到了缠绞力度的放松，抵在了子宫口前的龟头对准前方挺起的软肉开始了蛮横无礼的冲刺。',
+      ]);
+      await attacker.print_and_wait([
+        '方才还能时不时反攻几下肉棒的穴肉，被粗翘滚烫的肉棒完全碾开，粗大的龟头狠狠撞在了自己的子宫颈上。',
+      ]);
+      await attacker.print_and_wait(['去了……要去了……']);
     } else {
-      if (era.get(`tcvar:${defender.id}:接近高潮`)) {
-        await attacker.print_and_wait(['不妙不妙不妙……']);
-        await attacker.print_and_wait([
-          '本来只是想试着配合上 ',
-          sys_get_colored_callname(attacker.id, defender.id),
-          ' 节奏的自己, 却颇为掉链子的忘了深处的穴肉会有多么的敏感。',
-        ]);
-        await attacker.print_and_wait([
-          '似乎是察觉到了缠绞力度的放松，抵在了子宫口前的龟头对准前方挺起的软肉开始了蛮横无礼的冲刺。',
-        ]);
-        await attacker.print_and_wait([
-          '方才还能时不时反攻几下肉棒的穴肉，被粗翘滚烫的肉棒完全碾开，粗大的龟头狠狠撞在了自己的子宫颈上。',
-        ]);
-        await attacker.print_and_wait(['去了……要去了……']);
-      } else {
-        await attacker.print_and_wait(['深呼吸……深呼吸……']);
-        await attacker.print_and_wait([
-          '想要尽力配合, 但自己都不知道有没有完整的做完一次动作, 只要塞在体内的肉棒稍稍抽动一下，被快感塞满的大脑就会一片空白, 从嘴里咿咿呀呀的吐出下流的呻吟。',
-        ]);
-        await attacker.print_and_wait([
-          '不过, 听着噗嗤噗嗤的下流声响 , 黏糊糊的小穴应该有好好的服侍 ',
-          sys_get_colored_callname(attacker.id, defender.id),
-          ' 的肉棒吧.',
-        ]);
-      }
+      await attacker.print_and_wait(['深呼吸……深呼吸……']);
+      await attacker.print_and_wait([
+        '想要尽力配合, 但自己都不知道有没有完整的做完一次动作, 只要塞在体内的肉棒稍稍抽动一下，被快感塞满的大脑就会一片空白, 从嘴里咿咿呀呀的吐出下流的呻吟。',
+      ]);
+      await attacker.print_and_wait([
+        '不过, 听着噗嗤噗嗤的下流声响 , 黏糊糊的小穴应该有好好的服侍 ',
+        sys_get_colored_callname(attacker.id, defender.id),
+        ' 的肉棒吧.',
+      ]);
     }
   };
 
@@ -196,15 +148,6 @@ module.exports = (handlers) => {
     if (attacker.id !== 56) {
       throw new Error();
     }
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 请求 ',
-      defender.get_colored_name(),
-      ' 用肉棒刺激',
-      hook.hook === ero_hooks.ask_stimulate_g_spot ? 'G点' : '子宫',
-      '……】',
-    ]);
     if (hook.arg) {
       if (
         await ask_action(
@@ -242,22 +185,20 @@ module.exports = (handlers) => {
       await attacker.print_and_wait(
         `所以拜托了……在那之后，就算之后被白兴大人怪罪也无所谓了`,
       );
+    } else if (era.get(`tcvar:${defender.id}:接近高潮`)) {
+      await common_continue_fucking_kitaru(defender, attacker);
     } else {
-      if (era.get(`tcvar:${defender.id}:接近高潮`)) {
-        await common_continue_fucking_kitaru(defender, attacker);
-      } else {
-        await attacker.say_and_wait('慢，啊哈❤️，慢一点❤️～!');
-        await attacker.print_and_wait(
-          '尽管已经如此乞求了，肉棒依旧能用短促而精准地命中着自己的弱点，浑浊眼瞳在敏感带带来的快感下泛起几乎将橙色驱尽的粉红。',
-        );
-        await attacker.print_and_wait([
-          '被驯化的完美贴合 ',
-          sys_get_colored_callname(attacker.id, defender.id),
-          ' 形状的蜜穴，报恩般的而用柔和的收缩蠕动来取悦着 ',
-          sys_get_colored_callname(attacker.id, defender.id),
-          ' 那根为自己的身体带来无尽快感的火热肉杆。',
-        ]);
-      }
+      await attacker.say_and_wait('慢，啊哈❤️，慢一点❤️～!');
+      await attacker.print_and_wait(
+        '尽管已经如此乞求了，肉棒依旧能用短促而精准地命中着自己的弱点，浑浊眼瞳在敏感带带来的快感下泛起几乎将橙色驱尽的粉红。',
+      );
+      await attacker.print_and_wait([
+        '被驯化的完美贴合 ',
+        sys_get_colored_callname(attacker.id, defender.id),
+        ' 形状的蜜穴，报恩般的而用柔和的收缩蠕动来取悦着 ',
+        sys_get_colored_callname(attacker.id, defender.id),
+        ' 那根为自己的身体带来无尽快感的火热肉杆。',
+      ]);
     }
   };
 };

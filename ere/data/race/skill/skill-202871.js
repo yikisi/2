@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202871,
   '君临',
-  '在终盘的最终弯道处若位于中后方，提升加速度＜追马・中距离＞',
+  '在终盘的最终弯道处若位于中后方，提升加速度',
   20287,
   2,
   UmaSkill.rarity_enum.gold,
@@ -76,4 +76,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [4, 9],
+  [UmaSkill.ability_tag_enum.accel],
 );

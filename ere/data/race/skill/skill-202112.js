@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202112,
   '气势十足',
-  '在最终弯道处于后方位置的话则会略微提高速度＜英里＞',
+  '在最终弯道处于后方位置的话则会略微提高速度',
   20211,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [3],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

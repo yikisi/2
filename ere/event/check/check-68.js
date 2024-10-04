@@ -24,16 +24,16 @@ const aim_races = {};
 
 aim_races[race_enum.begin_race] = 2;
 
-aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = 2;
-aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 2;
 aim_races[get_aim_race_index(race_enum.stli_kin, 1)] = 2;
+aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = -2;
+aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = -2;
 aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 2;
 aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 2;
 
 aim_races[get_aim_race_index(race_enum.sank_hai, 2)] = 2;
 aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 2;
 aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 2;
-aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = -2;
 aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 2;
 aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
 

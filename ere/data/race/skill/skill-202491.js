@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202491,
   '超众的凌厉攻势',
-  '冲进终盘之前一直保持冷静在后方等待机会的话，在终盘一开始会提升加速度＜追马＞',
+  '冲进终盘之前一直保持冷静在后方等待机会的话，在终盘一开始会提升加速度',
   20249,
   2,
   UmaSkill.rarity_enum.gold,
@@ -76,4 +76,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [9],
+  [UmaSkill.ability_tag_enum.accel],
 );

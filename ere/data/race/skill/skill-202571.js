@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202571,
   '开拓未来的奇迹',
-  '比赛终盘加速力提升以创造更多的奇迹＜短距离＞',
+  '比赛终盘加速力提升以创造更多的奇迹',
   20257,
   1,
   UmaSkill.rarity_enum.gold,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   0,
   false,
   false,
+  [2],
+  [UmaSkill.ability_tag_enum.accel],
 );

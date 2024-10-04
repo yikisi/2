@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   50,
   false,
   false,
+  [],
+  [UmaSkill.ability_tag_enum.wiz],
 );

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201352,
   '营养补给',
-  '比赛中盘略微回复持久力＜先马＞',
+  '比赛中盘略微回复持久力',
   20135,
   1,
   UmaSkill.rarity_enum.normal,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [7],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

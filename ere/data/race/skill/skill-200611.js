@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200611,
   '升龙',
-  '在最终弯道从外道赶超时，速度加快＜差马＞',
+  '在最终弯道从外道赶超时，速度加快',
   20061,
   2,
   UmaSkill.rarity_enum.gold,
@@ -75,4 +75,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

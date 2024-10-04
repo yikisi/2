@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202882,
   '热血沸腾',
-  '最终直线处在第二名开外且与领头距离4马身以内时，速度少量提升＜追马＞',
+  '最终直线处在第二名开外且与领头距离4马身以内时，速度少量提升',
   20288,
   1,
   UmaSkill.rarity_enum.normal,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [9],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

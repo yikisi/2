@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201402,
   '努力之人',
-  '准备进行超越时，略微提升加速力＜差马＞',
+  '准备进行超越时，略微提升加速力',
   20140,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   120,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.accel],
 );

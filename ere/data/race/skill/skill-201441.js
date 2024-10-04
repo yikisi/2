@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201441,
   '睥睨八方',
-  '在比赛终盘使其他的马娘产生动摇＜差马＞',
+  '在比赛终盘使其他的马娘产生动摇',
   20144,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

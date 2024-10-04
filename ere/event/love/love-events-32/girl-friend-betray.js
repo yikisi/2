@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { be_common } = require('#/event/love/love-events-32/snippets');
+const be_common = require('#/event/love/love-events-32/girl-friend-be-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 /**

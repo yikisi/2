@@ -1,7 +1,5 @@
 const era = require('#/era-electron');
 
-const { get_image } = require('#/system/sys-calc-image');
-
 const date_indicator = require('#/page/components/date-indicator');
 const print_race_track_chart = require('#/page/race/race-track-chart');
 
@@ -139,9 +137,7 @@ async function preview_race(info, team_list, contestants, is_grand_live) {
       {
         columns: [
           {
-            names: get_image(cur_chara.index_chara)
-              .map((_i) => `${_i}_半身`)
-              .join('\t'),
+            names: cur_chara.image,
             type: 'image.whole',
           },
           {

@@ -1,5 +1,3 @@
-const era = require('#/era-electron');
-
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const {
@@ -19,13 +17,6 @@ module.exports = (handlers) => {
       throw new Error();
     }
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 辱骂自己……】',
-      ]);
       if (await ask_action(attacker.id)) {
         await (
           get_random_value(0, 1)
@@ -55,13 +46,6 @@ module.exports = (handlers) => {
         '似乎颇为受用的样子，之后要不要试试更恶劣一点的措辞呢？',
       ]);
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 继续辱骂自己……】',
-      ]);
       await attacker.print_and_wait([
         '耳边响着各种愈发恶劣的辱骂话语，但更令自己感到有些后怕的，反而是愈发敏感，愈发能从这种行为中感到快乐的自己。',
       ]);
@@ -82,13 +66,6 @@ module.exports = (handlers) => {
       throw new Error();
     }
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 拍打自己的臀部……】',
-      ]);
       if (await ask_action(attacker.id)) {
         await (
           get_random_value(0, 1)
@@ -115,13 +92,6 @@ module.exports = (handlers) => {
         ' 还未从酥麻感中恢复的手掌上轻轻蹭着，看来很喜欢呢。',
       ]);
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 继续拍打自己的臀部……】',
-      ]);
       await attacker.say_and_wait(['好疼……但是，好喜欢……'], true);
       await attacker.say_and_wait(['啪啪地打着自己的屁股。'], true);
       await attacker.say_and_wait(['偶尔又轻轻揉搓着几个来回。'], true);

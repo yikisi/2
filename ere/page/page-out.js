@@ -23,6 +23,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
 const recruit_flags = require('#/data/event/recruit-flags');
+const YandereList = require('#/data/event/yandere-list');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
@@ -264,6 +265,9 @@ async function out_page() {
                   handle() {
                     temp.chara.name = era.set('callname:301:-2', '骏川缰绳');
                     era.set('cflag:301:招募状态', recruit_flags.yes);
+                    if (era.get('talent:301:病娇')) {
+                      new YandereList().push(301, true);
+                    }
                     return era.printAndWait([
                       temp.chara.get_colored_name(),
                       ' 加入了队伍！',

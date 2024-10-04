@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200981,
   '压倒性领先',
-  '比赛中盘大幅度领跑时，容易保持领先＜短距离＞',
+  '比赛中盘大幅度领跑时，容易保持领先',
   20098,
   2,
   UmaSkill.rarity_enum.gold,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   170,
   false,
   false,
+  [2],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

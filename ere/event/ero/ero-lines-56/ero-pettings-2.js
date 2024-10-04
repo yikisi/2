@@ -1,5 +1,3 @@
-const era = require('#/era-electron');
-
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const {
@@ -13,24 +11,11 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
-  handlers[ero_hooks.hand_job] = async (
-    attacker,
-    defender,
-    hook,
-    extra_flag,
-  ) => {
+  handlers[ero_hooks.hand_job] = async (attacker, defender, hook) => {
     if (attacker.id !== 56) {
       throw new Error();
     }
     if (hook.arg) {
-      !extra_flag.skip_name &&
-        (await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 将 ',
-          defender.get_colored_name(),
-          ' 的肉棒握在手中……】',
-        ]));
       await attacker.say_and_wait([
         '那个，',
         sys_get_colored_callname(attacker.id, defender.id),
@@ -50,14 +35,6 @@ module.exports = (handlers) => {
         '被巫女侍奉着尽心的肉棒也滴出了更多的先走汁作为回应。',
       ]);
     } else {
-      !extra_flag.skip_name &&
-        (await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 撸动着 ',
-          defender.get_colored_name(),
-          ' 的肉棒……】',
-        ]));
       await attacker.print_and_wait([
         '用左手微微托起变得更加膨胀的肉竿，然后，在先前的服侍中已经变得黏糊糊的右手就直接罩上了变得晶莹的龟头。',
       ]);
@@ -83,13 +60,6 @@ module.exports = (handlers) => {
       throw new Error('unsupported hook!');
     }
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 将肉棒握在手心……】',
-      ]);
       if (
         await ask_action(
           attacker.id,
@@ -110,18 +80,8 @@ module.exports = (handlers) => {
       await defender.print_and_wait([
         '不用说话也能占卜的到了，伸手安慰着青筋跳动的肉棒，直到它慢慢变成能把自己小穴撑开塑造成下流难堪的形状的怪物模样。',
       ]);
-    } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 继续撸动肉棒……】',
-      ]);
     }
-    await handlers[ero_hooks.hand_job](defender, attacker, hook, {
-      skip_name: true,
-    });
+    await handlers[ero_hooks.hand_job](defender, attacker, hook);
   };
 
   handlers[ero_hooks.force_hand_job] = async (attacker, defender, hook) => {
@@ -129,13 +89,6 @@ module.exports = (handlers) => {
       throw new Error();
     }
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 强行将肉棒伸到 ',
-        defender.get_colored_name(),
-        ' 手中……】',
-      ]);
       await attacker.say_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
         '，摊开手',
@@ -152,38 +105,15 @@ module.exports = (handlers) => {
         sys_get_colored_callname(defender.id, attacker.id),
         ' 的肉棒在柔软的掌心上托起。',
       ]);
-    } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 强行用肉棒蹭着 ',
-        defender.get_colored_name(),
-        ' 的双手……】',
-      ]);
     }
-    await handlers[ero_hooks.hand_job](defender, attacker, hook, {
-      skip_name: true,
-    });
+    await handlers[ero_hooks.hand_job](defender, attacker, hook);
   };
 
-  handlers[ero_hooks.hand_and_blow_job] = async (
-    attacker,
-    defender,
-    hook,
-    extra_flag,
-  ) => {
+  handlers[ero_hooks.hand_and_blow_job] = async (attacker, defender, hook) => {
     if (attacker.id !== 56) {
       throw new Error('unsupported hook!');
     }
     if (hook.arg) {
-      !extra_flag.skip_name &&
-        (await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 一边抚摸一边亲吻着 ',
-          defender.get_colored_name(),
-          ' 的肉棒……】',
-        ]));
       await attacker.print_and_wait(['肉棒变得更大了呢……']);
       await attacker.print_and_wait([
         '还有那股能把自己弄的乱糟糟，令人自己上瘾的气味也是……',
@@ -200,14 +130,6 @@ module.exports = (handlers) => {
         ' 很喜欢这样呢。',
       ]);
     } else {
-      !extra_flag.skip_name &&
-        (await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 一边玩弄一边舔舐着 ',
-          defender.get_colored_name(),
-          ' 的肉棒……】',
-        ]));
       await attacker.say_and_wait(['呲溜呲溜——']);
       await defender.print_and_wait([
         '身下的 ',
@@ -229,13 +151,6 @@ module.exports = (handlers) => {
       throw new Error('unsupported hook!');
     }
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 一边抚摸肉棒一边含住龟头……】',
-      ]);
       if (
         await ask_action(
           attacker.id,
@@ -259,18 +174,8 @@ module.exports = (handlers) => {
       await defender.print_and_wait([
         '再用手调整了一下角度，然后像对待珍宝珠般用舌尖绕着龟头与冠状沟不断舔弄着。',
       ]);
-    } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 一边撸动肉棒一边吮吸龟头……】',
-      ]);
     }
-    await handlers[ero_hooks.hand_and_blow_job](defender, attacker, hook, {
-      skip_name: true,
-    });
+    await handlers[ero_hooks.hand_and_blow_job](defender, attacker, hook);
   };
 
   handlers[ero_hooks.force_hand_and_blow_job] = async (
@@ -282,13 +187,6 @@ module.exports = (handlers) => {
       throw new Error('unsupported hook!');
     }
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 强行将肉棒挤开 ',
-        defender.get_colored_name(),
-        ' 的双手伸到口前……】',
-      ]);
       await attacker.say_and_wait(['给我同时用手和嘴，做的到吧？']);
       await defender.print_and_wait([
         '仰视着正居高临下 ',
@@ -299,40 +197,15 @@ module.exports = (handlers) => {
         '呜，态度太恶劣了吧，暗自腹诽着，但抖M的自己已经开始小心地磨挲着肉棒上条条胀起的经络，同时用舌尖轻点起铃口。',
       ]);
       await defender.print_and_wait(['咕……当然，当然做的到。']);
-    } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 的肉棒一边击打着 ',
-        defender.get_colored_name(),
-        ' 的手一边搅弄着 ',
-        defender.get_colored_name(),
-        ' 的唇舌……】',
-      ]);
     }
-    await handlers[ero_hooks.hand_and_blow_job](defender, attacker, hook, {
-      skip_name: true,
-    });
+    await handlers[ero_hooks.hand_and_blow_job](defender, attacker, hook);
   };
 
-  handlers[ero_hooks.tit_job] = async (
-    attacker,
-    defender,
-    hook,
-    extra_flag,
-  ) => {
+  handlers[ero_hooks.tit_job] = async (attacker, defender, hook) => {
     if (attacker.id !== 56) {
       throw new Error();
     }
     if (hook.arg) {
-      !extra_flag.skip_name &&
-        (await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 夹起双乳将 ',
-          defender.get_colored_name(),
-          ' 的肉棒捧住……】',
-        ]));
       await defender.print_and_wait([
         '见着身前的担当把自己的肉棒整根塞入乳沟，然后尽力的挤压着那对平时隐藏在校服下硕大调皮的白兔。',
       ]);
@@ -346,14 +219,6 @@ module.exports = (handlers) => {
       ]);
       await defender.print_and_wait(['嘶……感觉更卖力了呢。']);
     } else {
-      !extra_flag.skip_name &&
-        (await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 上下挪动双乳摩擦着 ',
-          defender.get_colored_name(),
-          ' 的肉棒……】',
-        ]));
       await attacker.print_and_wait([
         '肉棒一跳一跳的，看来自己的侍奉是有效果的呢，不过，总是担心 ',
         defender.get_colored_name(),
@@ -376,13 +241,6 @@ module.exports = (handlers) => {
       throw new Error('unsupported hook!');
     }
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 用双乳夹住肉棒……】',
-      ]);
       if (
         await ask_action(
           attacker.id,
@@ -404,39 +262,15 @@ module.exports = (handlers) => {
         sys_get_colored_callname(attacker.id, defender.id),
         ' 就是这样善解人意的赛马娘。',
       ]);
-    } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 用双乳侍奉肉棒……】',
-      ]);
     }
-    await handlers[ero_hooks.tit_job](defender, attacker, hook, {
-      skip_name: true,
-    });
+    await handlers[ero_hooks.tit_job](defender, attacker, hook);
   };
 
-  handlers[ero_hooks.tit_and_blow_job] = async (
-    attacker,
-    defender,
-    hook,
-    extra_flag,
-  ) => {
+  handlers[ero_hooks.tit_and_blow_job] = async (attacker, defender, hook) => {
     if (attacker.id !== 56) {
       throw new Error();
     }
     if (hook.arg) {
-      !extra_flag.skip_name &&
-        (await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 一边用双乳摩擦 ',
-          defender.get_colored_name(),
-          ' 的肉棒，一边含住了龟头……】',
-        ]));
-
       await attacker.print_and_wait([
         ' 一上一下活动着腰肢，让晶莹的先走汁均匀的涂满了正夹着肉棒的柔嫩沟壑，又被乳沟和肉棒叠加在一起的温度蒸发，弄的脑袋也晕乎乎的。',
       ]);
@@ -448,14 +282,6 @@ module.exports = (handlers) => {
         '啊……怎么都算不上美味吧，但是……还是会多吞下去一点的。',
       ]);
     } else {
-      !extra_flag.skip_name &&
-        (await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 一边用双乳摩擦 ',
-          defender.get_colored_name(),
-          ' 的肉棒，一边吮吸着龟头……】',
-        ]));
       await attacker.say_and_wait(['吸溜吸溜……']);
       await attacker.print_and_wait([
         '滴落的咸腥液体没有浪费，被自己一滴不剩的吞入了腹中，而偶尔龟头从口中抽离时，粉舌也会伴随着跟上，在液体落入那对已经被弄的滑腻腻亮晶晶的欧派前赶着接住。',
@@ -475,13 +301,6 @@ module.exports = (handlers) => {
     hook,
   ) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 一边用乳房摩擦肉棒，一边亲吻龟头……】',
-      ]);
       if (
         await ask_action(
           attacker.id,
@@ -498,38 +317,13 @@ module.exports = (handlers) => {
         ' 从乳肉中冒出头的龟头有些没精打采的样子。',
       ]);
       await defender.print_and_wait('而且本人也很好懂地正合起掌拜托。');
-    } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 一边用乳房摩擦肉棒，一边吮吸龟头……】',
-      ]);
     }
-    await handlers[ero_hooks.tit_and_blow_job](defender, attacker, hook, {
-      skip_name: true,
-    });
+    await handlers[ero_hooks.tit_and_blow_job](defender, attacker, hook);
   };
 
-  handlers[ero_hooks.foot_job] = async (
-    attacker,
-    defender,
-    hook,
-    extra_flag,
-  ) => {
+  handlers[ero_hooks.foot_job] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      !extra_flag.skip_name &&
-        (await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 的双足踏上了 ',
-          defender.get_colored_name(),
-          ' 的肉棒……】',
-        ]));
-
       await attacker.say_and_wait([
-        ' ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' ～这样……感觉还行吗？',
       ]);
@@ -546,15 +340,6 @@ module.exports = (handlers) => {
         '赛马娘们珍视的双足，就这么为了做爱时的情趣，被轻易的使用着，让龟头前端粘粘的先走汁，更多地更快地被生产出来',
       ]);
     } else {
-      !extra_flag.skip_name &&
-        (await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 用双足踩踏着 ',
-          defender.get_colored_name(),
-          ' 的肉棒……】',
-        ]));
-
       await attacker.print_and_wait([
         '大概是擅长差马跑法的自己，平时在赛场上时也要随时分心关注身边对手的缘故吧？',
       ]);

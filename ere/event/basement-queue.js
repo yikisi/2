@@ -1,13 +1,20 @@
 const { get, set } = require('#/era-electron');
 
+const { action_type_enum } = require('#/data/basement-const');
 const BasementAction = require('#/data/event/basement-action');
 
 /** @type {BasementAction[]} */
 let queue;
 
 module.exports = {
-  /** @param {BasementAction} action */
-  add_action(action) {
+  /**
+   * @param {BasementAction} action
+   * @param {boolean} [from_init]
+   */
+  add_action(action, from_init) {
+    if (!from_init && action.type === action_type_enum.rescue) {
+      return;
+    }
     let index = queue.findIndex(
       (e, i, l) =>
         e.timer <= action.timer &&

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   210321,
   '我们奔跑的道路',
-  '最终冲刺时向前突进；体重越轻，效果越好＜短距离/英里＞',
+  '最终冲刺时向前突进；体重越轻，效果越好',
   21032,
   2,
   UmaSkill.rarity_enum.gold,
@@ -76,4 +76,6 @@ module.exports = new UmaSkill(
   200,
   false,
   false,
+  [2, 3],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

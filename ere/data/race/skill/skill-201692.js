@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201692,
   '安静的呼吸',
-  '比赛临近中盘时，若位于中团以后的位置，稍微恢复持久力＜差马＞',
+  '比赛临近中盘时，若位于中团以后的位置，稍微恢复持久力',
   20169,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

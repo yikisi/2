@@ -1,6 +1,7 @@
 /**
  * @file 地下室地文
  *
+ * @author 露娜俘虏
  * @author 无名黑奴
  */
 const era = require('#/era-electron');
@@ -101,6 +102,7 @@ class CustomizedBase {
   /**
    * 地下室的基础情报，显示在当前互动角色情报下面，说明角色当前的警戒度和独占力情况
    *
+   * @author 露娜俘虏
    * @author 无名黑奴
    *
    * @param {boolean} [can_strike]
@@ -741,6 +743,8 @@ class CustomizedBase {
     }
     await era.printAndWait('「咔哒」', { fontSize: '1.5rem' });
   }
+
+  handle_escape() {}
 }
 
 module.exports = CustomizedBase;

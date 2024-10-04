@@ -236,6 +236,15 @@ module.exports = async () => {
     [
       [
         {
+          color: get_chara_color(89),
+          content: `${era.get('static:89:name')}（地下室）`,
+        },
+      ],
+      '無奈',
+    ],
+    [
+      [
+        {
           color: get_chara_color(100),
           content: era.get('static:100:name'),
         },
@@ -296,15 +305,20 @@ module.exports = async () => {
       ],
       '黑衣剑士-星爆气流斩准备就绪',
     ],
-    ['招募、日常、爱慕地文', ['雞雞', { isDivider: true }, '无名黑奴']],
+    [
+      ['招募、日常、爱慕地文', { isBr: true }, '教学、地下室教学'],
+      ['雞雞', { isDivider: true }, '无名黑奴'],
+    ],
     [
       '育成地文',
       [
         '雞雞',
         { isDivider: true },
-        '无名黑奴',
-        { isDivider: true },
         '天马闪光蹄',
+        { isDivider: true },
+        '幽白書',
+        { isDivider: true },
+        '无名黑奴',
       ],
     ],
     [
@@ -321,13 +335,16 @@ module.exports = async () => {
         '幽白書',
       ],
     ],
-    ['地下室地文（临时）', '无名黑奴'],
-    ['教学口上', ['雞雞']],
+    ['地下室地文', ['露娜俘虏', { isDivider: true }, '无名黑奴']],
     ['随机事件', ['雞雞', { isDivider: true }, 'イーウィヤ']],
     ['特殊角色（临时）', '无名黑奴'],
   ];
   set_chara_ero_image();
-  let buffer;
+  let buffer,
+    version = era.get('gamebase').version / 1000;
+  if (version % 1 === 0) {
+    version = version.toFixed(1);
+  }
 
   while (flagTitle) {
     await era.clear();
@@ -339,7 +356,7 @@ module.exports = async () => {
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
-            content: `版本号：v${era.get('gamebase').version / 1000}`,
+            content: `版本号：v${version}`,
             type: 'text',
           },
         ],
@@ -733,8 +750,16 @@ module.exports = async () => {
           buffer.push([
             ...(a[0] instanceof Array
               ? a[0].map((e) => {
-                  e.fontSize = '1.125rem';
-                  return e;
+                  if (e instanceof Object) {
+                    e.color ||= item_title_color;
+                    e.fontSize = '1.125rem';
+                    return e;
+                  }
+                  return {
+                    color: item_title_color,
+                    fontSize: '1.125rem',
+                    content: e,
+                  };
                 })
               : [
                   {

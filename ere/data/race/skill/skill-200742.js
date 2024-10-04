@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200742,
   '深呼吸',
-  '在比赛中盘时重整呼吸，稍微不容易变得疲劳＜长距离＞',
+  '在比赛中盘时重整呼吸，稍微不容易变得疲劳',
   20074,
   1,
   UmaSkill.rarity_enum.normal,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [5],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

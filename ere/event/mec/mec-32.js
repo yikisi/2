@@ -27,21 +27,20 @@ module.exports = class extends CustomizedMec {
 
   get_status() {
     const edu_marks = new TachyonEduMarks(),
-      ret_list = [];
+      ret_list = [],
+      uma_sex = get('flag:角色性别') === 1 ? '马郎' : '马娘';
     if (edu_marks.uma_limit) {
       ret_list.push({
         color: buff_colors[1],
-        content: '马娘的极限',
-        title:
-          '马娘的极限，但不是赛马娘爱丽速子的极限；仅限比赛时，全属性极大幅度提升',
+        content: `${uma_sex}的极限`,
+        title: `${uma_sex}的极限，但不是赛${uma_sex}爱丽速子的极限；仅限比赛时，全属性极大幅度提升`,
       });
     }
     if (edu_marks.limited) {
       ret_list.push({
         color: buff_colors[1],
         content: '止步于极限的光子',
-        title:
-          '明亮、炙热、耀眼、但也就这样了：这就是赛马娘爱丽速子的极限；训练效果+50%',
+        title: `明亮、炙热、耀眼、但也就这样了：这就是赛${uma_sex}爱丽速子的极限；训练效果+50%`,
       });
     }
     return ret_list;

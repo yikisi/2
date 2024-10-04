@@ -37,7 +37,7 @@ module.exports = class extends CustomizedMec {
         color: buff_colors[1],
         content: '[爱]',
         fontWeight: title_check ? 'bold' : '',
-        title: `[爱]：队伍成员智力与技能点数训练效果+${title_check ? 100 : 50}%`,
+        title: `队伍成员智力与技能点数训练效果+${title_check ? 100 : 50}%`,
       },
     ];
   }

@@ -11,7 +11,7 @@ module.exports = new UmaSkill(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.cheat,
   ),
-  1000,
+  0,
   [() => true, () => true],
   [(args) => args.phase >= 2, () => false],
   [60, 0],
@@ -70,4 +70,6 @@ module.exports = new UmaSkill(
   9999,
   false,
   false,
+  [],
+  [UmaSkill.ability_tag_enum.currentSpeed, UmaSkill.ability_tag_enum.hpRate],
 );

@@ -5,6 +5,7 @@ const CustomizedMec = require('#/event/mec/mec-common');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
+const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
@@ -37,16 +38,16 @@ module.exports = class extends CustomizedMec {
     switch (era.get('flag:当前赛事')) {
       case race_enum.japa_cup:
         if (era.get('cflag:37:育成回合计时') < 96) {
-          return [1, 47].map((e) => ({ buff: 1.2, id: e }));
+          return [1, 47].map((e) => new LegendUmaSelector(e, 1.2));
         }
         break;
       case race_enum.arim_kin:
         if (era.get('cflag:37:育成回合计时') < 96) {
-          return [1, 5, 18, 47].map((e) => ({ buff: 1.1, id: e }));
+          return [1, 5, 18, 47].map((e) => new LegendUmaSelector(e, 1.1));
         }
         break;
       case race_enum.tenn_spr:
-        return [{ buff: 1.1, id: 25 }];
+        return [new LegendUmaSelector(25, 1.1)];
     }
     return super.get_race_contestants(info);
   }

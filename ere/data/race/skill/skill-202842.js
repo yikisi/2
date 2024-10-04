@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202842,
   '洗尘',
-  '比赛中盘位于前方时，略微回复体力＜泥地＞',
+  '比赛中盘位于前方时，略微回复体力',
   20284,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [1],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

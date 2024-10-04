@@ -37,7 +37,7 @@ module.exports = class extends CustomizedMec {
         color: buff_colors[1],
         content: '[信]',
         fontWeight: title_check ? 'bold' : '',
-        title: `[信]：队伍成员耐力与根性训练效果+${title_check ? 100 : 50}%`,
+        title: `队伍成员耐力与根性训练效果+${title_check ? 100 : 50}%`,
       },
     ];
   }

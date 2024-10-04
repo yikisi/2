@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const { log_7 } = require('#/utils/value-utils');
+const check_lure_success = require('#/event/ero/snippets/check-lure-success');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
@@ -12,13 +12,6 @@ module.exports = (handlers) => {
     if (defender.id !== 56) {
       throw new Error('unsupported hook!');
     }
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 亲吻 ',
-      defender.get_colored_name(),
-      ' 的嘴唇……】',
-    ]);
     if (hook.arg) {
       await defender.say_and_wait('唔……');
       await attacker.print_and_wait('近的可以清楚看到对面星星眼中泛着的水雾。');
@@ -69,13 +62,6 @@ module.exports = (handlers) => {
     if (defender.id !== 56) {
       throw new Error('unsupported hook!');
     }
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 对 ',
-      defender.get_colored_name(),
-      ' 法式湿吻……】',
-    ]);
     if (hook.arg) {
       await attacker.print_and_wait('自然不满足于浅尝辄止。');
       await attacker.print_and_wait([
@@ -133,13 +119,6 @@ module.exports = (handlers) => {
     if (defender.id !== 56) {
       throw new Error('unsupported hook!');
     }
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 和 ',
-      defender.get_colored_name(),
-      ' 闲话家常……】',
-    ]);
     if (Math.random() < 0.5) {
       await attacker.say_and_wait('福来算是犬系还是猫系的呢？');
       await defender.say_and_wait('欸！这个吗！');
@@ -165,13 +144,6 @@ module.exports = (handlers) => {
     if (defender.id !== 56) {
       throw new Error('unsupported hook!');
     }
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 在 ',
-      defender.get_colored_name(),
-      ' 的耳边说着绵绵情话……】',
-    ]);
     await attacker.say_and_wait([
       sys_get_colored_callname(attacker.id, defender.id),
       '。',
@@ -179,37 +151,29 @@ module.exports = (handlers) => {
     await attacker.print_and_wait(
       '轻轻的，对着那对细长的耳朵，唤着面前担当的名字。',
     );
-    await defender.say_and_wait([
-      '那……那个，',
-      sys_get_colored_callname(defender.id, attacker.id),
-      '。',
-    ]);
-    await attacker.print_and_wait([
-      sys_get_colored_callname(attacker.id, defender.id),
-      '攀住衣服下摆，像只狐狸一样贴在胸口，用充满期待的目光回应。',
-    ]);
-    await attacker.print_and_wait(['是该说些什么的时候吧？']);
-    if (defender.sex_code - 1) {
-      await attacker.print_and_wait([
-        '不过，还是很享受抱着 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 柔软身体的现在呀，大手不安分的在占卜少女的身上四处游走，无论是安产型的臀肉，平日束缚在衣服里的巨乳，还是那双匀称的到好处的双腿。',
+    hook.arg = check_lure_success(attacker.id, defender.id);
+    if (hook.arg || era.get(`tcvar:${defender.id}:发情`)) {
+      await defender.say_and_wait([
+        '那……那个，',
+        sys_get_colored_callname(defender.id, attacker.id),
+        '。',
       ]);
-    }
-    await attacker.print_and_wait([
-      '能看到 ',
-      sys_get_colored_callname(attacker.id, defender.id),
-      ' 的星星瞳，因为自己的动作闪烁着。',
-    ]);
-    hook.arg =
-      (!defender || era.get(`love:${defender.id}`) >= 50) &&
-      !era.get(`tcvar:${defender.id}:发情`) &&
-      Math.random() <
-        Math.log(era.get(`abl:${attacker.id}:甜言蜜语`) + 2) / log_7;
-    if (hook.arg) {
-      await era.printAndWait([
-        defender.get_colored_name(),
-        ' 变得兴奋起来了……',
+      await attacker.print_and_wait([
+        sys_get_colored_callname(attacker.id, defender.id),
+        '攀住衣服下摆，像只狐狸一样贴在胸口，用充满期待的目光回应。',
+      ]);
+      await attacker.print_and_wait(['是该说些什么的时候吧？']);
+      if (defender.sex_code - 1) {
+        await attacker.print_and_wait([
+          '不过，还是很享受抱着 ',
+          sys_get_colored_callname(attacker.id, defender.id),
+          ' 柔软身体的现在呀，大手不安分的在占卜少女的身上四处游走，无论是安产型的臀肉，平日束缚在衣服里的巨乳，还是那双匀称的到好处的双腿。',
+        ]);
+      }
+      await attacker.print_and_wait([
+        '能看到 ',
+        sys_get_colored_callname(attacker.id, defender.id),
+        ' 的星星瞳，因为自己的动作闪烁着。',
       ]);
     }
   };

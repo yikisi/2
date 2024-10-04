@@ -935,6 +935,10 @@ handlers[
   event_hooks.week_start
 ] = require('#/event/daily/daily-events-52/week-start');
 
+handlers[
+  event_hooks.basement_end
+] = require('#/event/daily/daily-events-52/basement-end');
+
 module.exports = {
   /**
    * @param {HookArg} stage_id

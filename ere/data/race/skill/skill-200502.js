@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   120,
   false,
   false,
+  [],
+  [UmaSkill.ability_tag_enum.laneMove],
 );

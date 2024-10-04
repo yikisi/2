@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200963,
   '紫电一闪',
-  '在直线上的速度加快＜短距离＞',
+  '在直线上的速度加快',
   20096,
   3,
   UmaSkill.rarity_enum.gold,
@@ -70,4 +70,6 @@ module.exports = new UmaSkill(
   150,
   false,
   false,
+  [2],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

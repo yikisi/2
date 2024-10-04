@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200752,
   '弯里横',
-  '在最终弯道处于内侧的话速度会略微上升＜长距离＞',
+  '在最终弯道处于内侧的话速度会略微上升',
   20075,
   1,
   UmaSkill.rarity_enum.normal,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [5],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

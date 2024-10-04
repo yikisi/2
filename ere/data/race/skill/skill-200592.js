@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200592,
   '向前取位',
-  '比赛中盘位于中团以后时，速度稍微提升＜差马＞',
+  '比赛中盘位于中团以后时，速度稍微提升',
   20059,
   1,
   UmaSkill.rarity_enum.normal,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [8],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

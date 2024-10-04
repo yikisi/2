@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   200641,
   '迫近的阴影',
-  '在最后冲刺阶段的直线上加速度提升＜追马＞',
+  '在最后冲刺阶段的直线上加速度提升',
   20064,
   2,
   UmaSkill.rarity_enum.gold,
@@ -71,4 +71,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [9],
+  [UmaSkill.ability_tag_enum.accel],
 );

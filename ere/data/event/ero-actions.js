@@ -121,7 +121,7 @@ const ero_actions = {
   // 乳间抽插
   fuck_tit: 0,
   // 乳间抽插嘴唇
-  fuck_tit_and_month: 0,
+  fuck_tit_and_mouth: 0,
   // 乳交
   tit_job: 0,
   // 乳交同时口交
@@ -377,6 +377,8 @@ const ero_actions = {
   shop_start: 0,
   // 离开能力升级
   shop_end: 0,
+  // 被绿之后
+  after_betrayed: 0,
 };
 Object.keys(ero_actions).forEach((k, i) => (ero_actions[k] = i));
 

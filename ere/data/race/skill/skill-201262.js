@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201262,
   '规避危险',
-  '在比赛序盘，稍微不容易被包围＜逃马＞',
+  '在比赛序盘，稍微不容易被包围',
   20126,
   1,
   UmaSkill.rarity_enum.normal,
@@ -76,4 +76,6 @@ module.exports = new UmaSkill(
   110,
   false,
   false,
+  [6],
+  [UmaSkill.ability_tag_enum.laneMove],
 );

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202191,
   '专心致志',
-  '没有起跑晚的话就会在中盘一开始时回复大量体力＜先马・长距离＞',
+  '没有起跑晚的话就会在中盘一开始时回复大量体力',
   20219,
   2,
   UmaSkill.rarity_enum.gold,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   170,
   false,
   false,
+  [5, 7],
+  [UmaSkill.ability_tag_enum.hpRate],
 );

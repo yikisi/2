@@ -3,778 +3,942 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const palace = require('#/event/snippets/palace');
-const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { get_random_value } = require('#/utils/value-utils');
+const {
+  get_chara_talk,
+  say_by_passer_by_and_wait,
+} = require('#/utils/chara-talk-factory');
 
 const AcuteEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-100');
-const AcuteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-100');
-const { location_enum } = require('#/data/locations');
+const RaceHistory = require('#/data/race/model/race-history');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean}):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
-  handlers.palace = async (acute, me, callname) => {
-    await palace(acute, me);
-    if (era.get('cflag:100:殿堂') === 2) {
-      era.drawLine();
-      const { ending } = new AcuteEduMarks();
-      era.set('flag:当前位置', location_enum.gate);
-      if (ending > 9) {
-        await print_event_name('誓言', acute);
-      } else {
-        await print_event_name('起点', acute);
-      }
-      era.set('flag:当前位置', location_enum.office);
-      await era.printAndWait([
-        '与 ',
-        acute.get_colored_name(),
-        ' 相识的第四年，三月，',
-      ]);
-      await era.printAndWait('气温虽然有所回升，但地面仍然湿冷。');
-      if (new AcuteEduMarks().ending > 9) {
-        await era.printAndWait([
-          '这是 ',
-          acute.get_colored_name(),
-          ' 步入殿堂后的第三天。',
-        ]);
-        await era.printAndWait([
-          '也是 ',
-          me.get_colored_name(),
-          ' 和 ',
-          acute.get_colored_name(),
-          ' 来到北海道度假的第一天。',
-        ]);
-        era.drawLine({ content: '北海道 民俗旅馆' });
-        await acute.say_and_wait('呜啊～我还是第一次看到活着的帝王蟹啊——');
-        await era.printAndWait([
-          '面对着桌前的盛宴，',
-          acute.get_colored_name(),
-          ' 由衷得发出着盛叹。',
-        ]);
-        await era.printAndWait([
-          '呵，得亏 ',
-          me.get_colored_name(),
-          ' 早有准备。',
-        ]);
-        await era.printAndWait([
-          '没错，早在度假度假开始之前。名为 ',
-          me.get_colored_actual_name(),
-          ' 的训练员，就已经熬夜彻读民俗旅馆的宣传手册，通篇背诵下了三千字的《北海道生存美食指南》——',
-        ]);
-        await me.say_and_wait([
-          '哼哼～',
-          acute.get_colored_name(),
-          '，你知道吗？其实帝王蟹，并不是一种螃蟹，而是一种寄居蟹——」',
-        ]);
-        await acute.say_and_wait('唔姆唔姆～');
-        await me.say_and_wait(
-          '而餐桌上人们常吃的帝王蟹啊，主要分为四种。而我们吃的，就是当地的特产花咲蟹——',
-        );
-        await acute.say_and_wait('咕噜咕噜～');
-        await me.say_and_wait(
-          '而要说花咲蟹的话，就不得不说她的三吃和六种说法——',
-        );
-        await acute.say_and_wait('哎嘿——啊哈哈～');
-        era.printButton(`……我说，${acute.name}。你有在听我说话吗？`, 1);
-        await era.input();
-        await acute.say_and_wait('有哦～');
-        await era.printAndWait([acute.sex, '一面说着，一面忙碌着手中的工作——']);
-        await acute.say_and_wait('你刚刚是在说，帝王蟹的四种写法对吧～');
-        await me.say_and_wait('完 · 全 · 不 · 是！');
-        await era.printAndWait(
-          '别把美食介绍说成像是某个哀怨可怜人的名言成吗？',
-        );
-        await acute.say_and_wait(
-          '啊哈哈～我是觉得手头上的活，还是挺有趣的啦。',
-        );
-        await era.printAndWait([
-          '循声望去，却见 ',
-          acute.get_colored_name(),
-          ' 的手中，持着一把金色的蟹剪。',
-        ]);
-        await era.printAndWait(
-          '沿着边缘剪开蟹腿的壳，然后在关节处环绕上一圈。这样就能够一面持着蟹爪，一面最大程度品味着蟹肉。',
-        );
-        await era.printAndWait(
-          '预订的这家民俗旅店里招待的帝王蟹，通常情况下都是处理好才端上来的。像这样让客人自行处理的蟹腿，还真是挺少见的。',
-        );
-        await me.say_and_wait('……不会是店大欺客吧？');
-        await acute.say_and_wait('是我自己要求的啦。');
-        await acute.say_and_wait(
-          '像是这样用小剪子一点点箭蟹壳的，让我有点怀念在老家学的手工课呢……',
-        );
-        await era.printAndWait(
-          '清澈的眼眸缓缓睁大、手持蟹剪的小手微微摆动。嘎吱嘎吱的声响，蟹壳的碎片残落在桌面之上。',
-        );
-        await era.printAndWait([
-          '未过多时，一根晶莹剔透的蟹肉棒，出现在了 ',
-          acute.get_colored_name(),
-          ' 的手中。',
-        ]);
-        await acute.say_and_wait(['呐，', callname, '。']);
-        await me.say_and_wait('嗯？');
-        await acute.say_and_wait('来，啊～');
-        await era.printAndWait([
-          '在如同母亲般的温柔声下，一根蟹肉棒已近在 ',
-          me.get_colored_name(),
-          ' 的脸前。',
-        ]);
-        await me.say_and_wait(['我说啊，', acute.get_colored_name(), '……']);
-        await acute.say_and_wait('啊～');
-        await me.say_and_wait('这里毕竟是公众场合……');
-        await acute.say_and_wait('啊～');
-        await me.say_and_wait('那什么，自己动手丰衣足食……');
-        await acute.say_and_wait('啊～');
-        await me.say_and_wait('……');
-        await era.printAndWait(
-          '——在不张口的话，这根蟹肉棒恐怕就要抵在我的鼻子上了！',
-        );
-        await era.printAndWait(
-          '张开口，朝向那硕大笔挺、散发着硕红光泽蟹肉棒，轻轻地咬下一口。',
-        );
-        await era.printAndWait(
-          '紧实的口感，滚热的汁液，还有独属于海洋生物所有的咸味，还有该说是真不愧是高级食材吗的高级感——',
-        );
-        await me.say_and_wait('唔……这个，真好吃哦。');
-        await me.say_and_wait([
-          '呐，',
-          acute.get_colored_name(),
-          '，你也来尝一口——',
-        ]);
-        await acute.say_and_wait('啊，等一会儿哦～');
-        await era.printAndWait(
-          '品味了不错的美食，正想要将手中的美食进行分享。',
-        );
-        await era.printAndWait([
-          '却发现一旁的 ',
-          acute.get_colored_name(),
-          '，却饶有兴趣的使用着蟹剪，摆弄着下一个蟹腿。',
-        ]);
-        era.printButton('「…………」', 1);
-        await era.input();
-        await era.printAndWait('看了看刚被塞进嘴里的蟹肉棒。');
-        await acute.say_and_wait('嗯哼哼～哼哼哼～');
-        await era.printAndWait([
-          '又看了看在吃饭时间却还在摆弄着手艺活的 ',
-          acute.get_colored_name(),
-          '。',
-        ]);
-        await era.printAndWait(
-          '一只手取下蟹肉棒，这使我一时充满了未知的决心。',
-        );
-        await me.say_and_wait(['呐，', acute.get_colored_name(), '。']);
-        await acute.say_and_wait(['怎么啦，', callname, '？']);
-        await me.say_and_wait('现在是吃饭时间对吧？');
-        await acute.say_and_wait('是啊。～');
-        await me.say_and_wait('所以说啊……');
-        await era.printAndWait([
-          '随后，一只手探在了',
-          acute.sex,
-          '的身前，阻断了 ',
-          acute.get_colored_name(),
-          ' 的手艺。',
-        ]);
-        await era.printAndWait([
-          '深色的眼眸一时间的闪烁，这只突然探入其胸前的世界的右手，显然吸引了',
-          acute.sex,
-          '的注意。',
-        ]);
-        await era.printAndWait([
-          '而随后，这只闯入的手，一如伊甸园中那蛇，勾住了 ',
-          acute.get_colored_name(),
-          ' 的下颚。',
-        ]);
-        await era.printAndWait('为之偏转，随后两眸相见。');
-        await era.printAndWait([
-          '或是被这突然的遭遇所吓住了，',
-          acute.get_colored_name(),
-          ' 也不反抗，只是呆愣在原地。洁白的脸颊，渐染上粉红的踪迹，真分不清是喜悦，还是烦情。',
-        ]);
-        await acute.say_and_wait(['那、那个……', callname, '……？']);
-        await era.printAndWait(
-          '这声音好似迟疑、好似惊异，七分的不解下，夹杂着三分的欣奇。',
-        );
-        await era.printAndWait(
-          '已然迈出的手指，不会撤离，微妙的眼神之中，燃烧着前进的雄心。',
-        );
-        await era.printAndWait('前哨的任务早已完成，接下来的内容，才是正戏。');
-        await me.say_and_wait(['呐，', acute.get_colored_name(), '～。']);
-        await acute.say_and_wait('嗯❤️……');
-        await me.say_and_wait('现在是吃饭的时间，对吧？');
-        await acute.say_and_wait('……嗯？');
-        await me.say_and_wait('所以说啊……');
-        await era.printAndWait('微笑的表情，反衬着大（蟹）肉棒的倒影。');
-        await era.printAndWait(
-          '掌握之间，是温和的面容，分寸之地，是凶恶的巨兽——',
-        );
-        await era.printAndWait('就是现在，孤独的勇士！');
-        await me.say_and_wait('给我好好吃吃蟹肉棒啊！！！！');
-        await era.printAndWait([
-          '硕大的长矛，在这一瞬之间，冲进了 ',
-          acute.get_colored_name(),
-          ' 的口中。',
-        ]);
-        await acute.say_and_wait('咕！？');
-        await acute.say_and_wait('唔、姆、噜……');
-        await acute.say_and_wait('…………');
-        await acute.say_and_wait('……❤️');
-        await era.printAndWait('——————');
-        await era.printAndWait('——不得不说，');
-        await era.printAndWait('这真是一场极好的宴会。');
-        era.drawLine();
-        await era.printAndWait([
-          '这是与 ',
-          acute.get_colored_name(),
-          ' 相识的第四年的第三月，',
-        ]);
-        await era.printAndWait([
-          '这是 ',
-          acute.get_colored_name(),
-          ' 步入殿堂后的第三天。',
-        ]);
-        await era.printAndWait([
-          '在理事长的慷慨解囊下，',
-          me.get_couple_title(),
-          ' 来到了北海道的一家民俗旅店度假。',
-        ]);
-        await era.printAndWait([
-          '……嘛，虽然在 ',
-          me.get_colored_name(),
-          ' 看来的话，这样的旅馆对于自己来说，实在有些太过奢侈了。',
-        ]);
-        await era.printAndWait('——夜已深了。');
-        await era.printAndWait('本想着泡个温泉后，早早的在被窝中进入梦乡。');
-        await era.printAndWait('可辗转反侧，却难以入眠。');
-        await era.printAndWait([
-          '掀开被子，望向窗外的明月，莫名的惆怅涌上了 ',
-          me.get_colored_name(),
-          ' 的心头。',
-        ]);
-        await era.printAndWait([
-          '回过头，望见着的是 ',
-          acute.get_colored_name(),
-          ' 安详的睡脸。',
-        ]);
-        await era.printAndWait('………………');
-        await era.printAndWait('趁着夜色，踮起脚尖，');
-        await era.printAndWait('轻轻地、轻轻地，拉开房门。');
-        await era.printAndWait('步入那无边的深夜。');
-        await era.printAndWait('………………');
-        await era.printAndWait('夜晚，总是漆黑。');
-        await era.printAndWait('漆黑的好似能吞没人的一切。');
-        await era.printAndWait('可淡淡的星与月，尚能留下萤火般的微光。');
-        await era.printAndWait(
-          '予以人暂得以偷生的方向，与足以继续向前的希望。',
-        );
-        await era.printAndWait('三月北海道的夜晚，四面依旧冷清。');
-        await era.printAndWait('但恰是这冷清，能激得人清醒。');
-        await era.printAndWait('宴会不错、床铺很软、暖气充足，');
-        await era.printAndWait('可这一切总像是浮华的虚影，梦幻泡影。');
-        await era.printAndWait('——是啊，自己还是太过软弱。');
-        await era.printAndWait('想要向前，那唯有更进一步「精进」——');
-        await acute.say_as_unknown_and_wait(['你还没睡啊，', callname, '。']);
-        await era.printAndWait('身后传来了早已熟悉的声音。');
-        await era.printAndWait('身体因冰冷而抖擞，可精神却因凄寒而彻清。');
-        era.printButton(`「我还以为你睡着了呢，${acute.name}。」`, 1);
-        await era.input();
-        await acute.say_and_wait('在你入睡之前，我一直都醒着哦。');
-        await era.printAndWait(
-          '身后略过一个身影，那是一颗留着深灰色长发的跳动之心。',
-        );
-        await era.printAndWait([
-          acute.sex,
-          '的步伐总比 ',
-          me.get_colored_name(),
-          ' 更快，于是更近于池塘、更近于明月。',
-        ]);
-        await acute.say_and_wait('我还以为，你会在今天的宴会上告诉我呢。');
-        await me.say_and_wait('……');
-        await me.say_and_wait('你是说……什么呢？');
-        await acute.say_and_wait('是去法国的事情哦，训练员桑。');
-        await acute.say_and_wait([
-          '你已经接受了法国赛',
-          acute.get_uma_sex_title(),
-          '届的邀请、去巴黎深造。然后三天之后，就会一个人坐上去巴黎的飞机，对吧？',
-        ]);
-        await me.say_and_wait('……');
-        await era.printAndWait([
-          acute.sex,
-          '说的，毫无疑问，是不加遮掩的事实。',
-        ]);
-        await acute.say_and_wait('……为什么，不肯告诉我呢？');
-        await era.printAndWait('深灰色的背影，述说着冷淡的词句。');
-        await me.say_and_wait([
-          '……我并不是想要瞒你，',
-          sys_get_colored_callname(0, 100),
-          '。」',
-        ]);
-        await me.say_and_wait('只是，不知道该如何告诉你而已。');
-        await me.say_and_wait([
-          '如果，要在赛',
-          acute.get_uma_sex_title(),
-          '届更进一步的话。现在的我，恐怕并没有真正的资格，站在你的身边吧。',
-        ]);
-        await me.say_and_wait('可我……想要真正有资格的，站在你的身边。');
-        await acute.say_and_wait('所以……你打算去巴黎，进修三年？');
-        await me.say_and_wait('……没错。');
-        await acute.say_and_wait('所以……你打算去巴黎，进修三年？');
-        await era.printAndWait('寒风之中，沉默的应语。');
-        await era.printAndWait('无可奈何的冷漠，独自坚持的无情。');
-        await era.printAndWait('明月之下，寒风微拂、林声依旧。');
-        await era.printAndWait('深灰色的背影，悄悄地昂头。');
-        await acute.say_and_wait(['……你知道『凯旋门赏』吗，', callname, '？']);
-        await me.say_and_wait('你说，法国赛马届的最高奖赛？');
-        await acute.say_and_wait([
-          '是呢，就是那个每年我们这边都会选出『最强',
-          acute.get_uma_sex_title(),
-          '』孤身过海、前往巴黎所参加的比赛呢。',
-        ]);
-        await acute.say_and_wait('虽然今年，可能没有这个机会了。');
-        await acute.say_and_wait('但是啊，如果是明年的话——');
-        await me.say_and_wait('……你是说？');
-        await acute.say_and_wait('我是说……');
-        await era.printAndWait('月光之下，深灰的身影回转，');
-        await era.printAndWait('凛然的身姿之下，燃烧着的是前进的雄心。');
-        await era.printAndWait(
-          '这是三分的迟疑、七分的惊奇，好似是一场遗憾，好似无上欣喜。',
-        );
-        await era.printAndWait(
-          '那是苏格拉底的麦穗，震耳欲隆，却又几近高尚者的温柔。',
-        );
-        await era.printAndWait([
-          '月光之下，星光璀璨，灰色的',
-          acute.get_teen_sex_title(),
-          '，许下了',
-          acute.sex,
-          '的诺言。',
-        ]);
-        await acute.say_and_wait('既然你要去巴黎的话，那么我也会跟过去。');
-        await acute.say_and_wait('再给我一年时间吧，训练员。');
-        await acute.say_and_wait('我一定会，把你追回来。');
-        await acute.say_and_wait([callname, '——']);
-        era.drawLine();
-        await era.printAndWait('北海道的故事，暂时告一段落。');
-        await era.printAndWait('而未来的故事，还有很长、很长——');
-      } else {
-        const tokino = get_chara_talk(301),
-          chairman = get_chara_talk(302);
-        await era.printAndWait([
-          '这是 ',
-          acute.get_colored_name(),
-          ' 步入殿堂后的第六天。',
-        ]);
-        await era.printAndWait([
-          '也是曾一度相濡以沫的 ',
-          me.get_colored_name(),
-          ' 和 ',
-          acute.get_colored_name(),
-          '，即将分离的第一年。',
-        ]);
-        era.drawLine({ content: '东京 国际机场' });
-        era.printButton('「送到这里就行了。」', 1);
-        await era.input();
-        await me.say_and_wait([
-          '谢谢你们一路陪我到这，',
-          sys_get_colored_callname(0, 302),
-          '，',
-          sys_get_colored_callname(0, 301),
-          '。',
-        ]);
-        await tokino.say_and_wait('啊哈哈——这么多年的，这么客气做什么。');
-        await chairman.say_and_wait([
-          '同 意！',
-          sys_get_colored_callname(302, 0),
-          '，早就是我们特雷森学园的家人了。',
-        ]);
-
-        await era.printAndWait([
-          '机场的登机口前，',
-          me.get_colored_name(),
-          ' 与 ',
-          tokino.get_colored_name(),
-          '、',
-          chairman.get_colored_name(),
-          '，做着最后的寒暄。',
-        ]);
-        await tokino.say_and_wait(
-          '不过啊……真没想到，你竟然真的接受了法国那边的邀请啊。',
-        );
-        await chairman.say_and_wait(
-          '惊讶！听到这个消息的时候，我震惊的萝卜都掉在地上了。',
-        );
-        await me.say_and_wait('哈哈……可能这样做确实不太像我的风格吧。');
-        await era.printAndWait([
-          '一手揉着后脑勺，面对着 ',
-          tokino.get_colored_name(),
-          ' 与 ',
-          chairman.get_colored_name(),
-          '，自己不由得尴尬的笑出了声。',
-        ]);
-        await me.say_and_wait('其实……我也是最近才下的决心。');
-        await me.say_and_wait([
-          '在成为 ',
-          acute.get_colored_name(),
-          ' 训练员的这三年里，我意识到了自己离真正优秀的训练员，还差的太远了。',
-        ]);
-        await me.say_and_wait(
-          '能够处变不惊的心理素质也好、能够准确把握宽严程度来设计的训练计划也好',
-        );
-        await me.say_and_wait(
-          '现在的我，离一位『优秀的训练员』，恐怕还差得很远吧。',
-        );
-        await tokino.say_and_wait(
-          '所以，你决定接受法国赛马届的邀约，去巴黎深研一段时间？',
-        );
-        await me.say_and_wait(
-          '是啊——不过就像你们知道的那个我一样。如果只靠我自己的话，是不可能有背井离乡胆量的。',
-        );
-        await me.say_and_wait([
-          '事实上……是 ',
-          acute.get_colored_name(),
-          '，帮助我下定的决心。',
-        ]);
-        await me.say_and_wait([
-          '即便我是如此无能且失格的训练员，',
-          acute.get_colored_name(),
-          ' 也依旧坚强着，凭借着自己的努力以及小小的运气，成功的步入殿堂之中了，不是吗？',
-        ]);
-        await me.say_and_wait('所以啊，我想——自己或许也应该努努力。');
-        await me.say_and_wait([
-          '我想……让自己真正有资格，作为一名训练员、站在 ',
-          acute.get_colored_name(),
-          ' 的身边。',
-        ]);
-        await tokino.say_and_wait('这样吗……');
-        await chairman.say_and_wait(
-          '无 悔！既然这是你做出的决定，那么我们当然会无条件支持你的。',
-        );
-        await tokino.say_and_wait([
-          '不过……',
-          acute.get_colored_name(),
-          ' ',
-          acute.sex,
-          '今天为什么没有来送行呢？',
-        ]);
-        await me.say_and_wait([
-          '这个吗……其实，去法国的事，其实我到现在还瞒着',
-          acute.sex,
-          '。',
-        ]);
-        await chairman.say_and_wait([
-          '惊 讶！？你现在还瞒着 ',
-          acute.get_colored_name(),
-          '！？',
-        ]);
-        await me.say_and_wait(['哈哈……其实，我有给', acute.sex, '留信。']);
-        await me.say_and_wait(['其实，我也不知道这样做是对还是错。']);
-        await me.say_and_wait([
-          '只不过如果真的要跟',
-          acute.sex,
-          '离开的话……果然，还是一个人偷偷地、像丧家犬一样溜走……要更好呢。',
-        ]);
-        await era.printAndWait('【嘣、嘣、嘣、嘣～】');
-        await era.printAndWait('【请前往巴黎的旅客请注意～】');
-        await era.printAndWait('【您乘坐的QR5201次航班现在开始登机～】');
-        await me.say_and_wait([
-          '看来时间已经到了——',
-          sys_get_colored_callname(0, 302),
-          '、',
-          sys_get_colored_callname(0, 301),
-          '。',
-        ]);
-        await tokino.say_and_wait(['一路顺风，', me.actual_name, '。']);
-        await chairman.say_and_wait('宏 图！学成后，记得早日归来！');
-        await me.say_and_wait('谢谢。那么——');
-        await me.say_and_wait('我们三年后见。');
-        await era.printAndWait('………………');
-        await era.printAndWait('平淡无奇的排队，了无生趣的检票。');
-        await era.printAndWait('从二楼登下电梯，走入大厅，');
-        await era.printAndWait('这一切说不上有趣，更不值一提。');
-        await era.printAndWait(
-          '恍惚间，有些口渴。习惯性的探出手，试图从挎包中取出解渴的萝卜干。',
-        );
-        await era.printAndWait([
-          '可翻找了一遍，这才想起来，其实，',
-          me.get_colored_name(),
-          ' 出门从没有备食物的习惯。',
-        ]);
-        await me.say_and_wait('……');
-        await me.say_and_wait('……哈哈——');
-        era.printButton(
-          '「我啊，到底是有多长的时间，没有一个人出远门了呢？」',
-          1,
-        );
-        await era.input();
-        await era.printAndWait('川急的人流中间，没有回应。');
-        await era.printAndWait('不由自主的抬起了头。回望向登机口。');
-        await era.printAndWait('那儿盆景依旧，来回着数个人影。');
-        await me.say_and_wait(
-          ['……要是 ', acute.get_colored_name(), ' 在那的话，该有多好啊？'],
-          true,
-        );
-        await era.printAndWait('脑海中不由得想到，');
-        await era.printAndWait('而随之，便是自己温和得自嘲。');
-        era.printButton('（事到如今……这是在想什么呢。）', 1);
-        await era.input();
-        era.printButton(
-          `（${me.actual_name} 啊，${me.actual_name}，你怎能如此的懦弱）`,
-          1,
-        );
-        await era.input();
-        await era.printAndWait('自嘲的苦笑，飘散于天际，随人海所吞没。');
-        await era.printAndWait('坚定好精神。');
-        await era.printAndWait([
-          me.get_colored_name(),
-          ' 踏出了「最初」的一步——',
-        ]);
-        era.drawLine();
-        await acute.print_and_wait('盆景之下，玻璃之旁。');
-        await acute.print_and_wait([
-          '一个',
-          acute.get_child_sex_title(),
-          '，静静地坐在这里。',
-        ]);
-        await acute.print_and_wait([
-          '人们常说',
-          acute.get_child_sex_title(),
-          '平静、温和，以至于有些老态龙钟。',
-        ]);
-        await acute.print_and_wait([
-          '其实，',
-          acute.get_child_sex_title(),
-          '并不像人们口中所说的那样，总是平静与温和。',
-        ]);
-        await acute.print_and_wait([
-          acute.sex,
-          '也如常人一般，会感到压力，感到难受，感到无处诉说的悲凉，感到撕心裂肺的痛苦。',
-        ]);
-        await acute.print_and_wait([
-          '只不过——',
-          acute.sex,
-          '并不喜欢将这些私密与人述说。',
-        ]);
-        await acute.print_and_wait([acute.sex, '更喜欢，一个人偷偷地藏起来。']);
-        await acute.print_and_wait('藏在一个「没有人发现」的地方。');
-        await acute.print_and_wait('在那里，轻轻地坐下来。');
-        await acute.print_and_wait('就像「一开始」那样——');
-        tokino.name = `头戴绿色帽子的${tokino.get_phy_sex_title()}`;
-        acute.name = acute.get_child_sex_title();
-        await tokino.say_and_wait(['——不去跟', me.sex, '告别吗？']);
-        await acute.print_and_wait([
-          '身旁，好心的',
-          acute.get_phy_sex_title(),
-          '，直立在',
-          acute.sex,
-          '的侧方。',
-        ]);
-        await acute.say_and_wait('不，不用……这样就好。');
-        await tokino.say_and_wait('是吗……');
-        await acute.print_and_wait([
-          '眺望向台下的人流，凝练出',
-          me.get_child_sex_title(),
-          '的背影。',
-        ]);
-        await acute.print_and_wait([
-          '不知怎得，',
-          acute.get_phy_sex_title(),
-          '不由自主的叹了声气。',
-        ]);
-        await tokino.say_and_wait('这家伙，真是个蠢蛋呢——');
-        await acute.say_and_wait(['你是说，', callname, ' 吗？」']);
-        await tokino.say_and_wait(['除了', me.sex, '以外，还能有谁呢？']);
-        await acute.print_and_wait([
-          '说罢，',
-          acute.get_phy_sex_title(),
-          '的帽子为之一抖，隐藏着的秘密呼之欲出。',
-        ]);
-        await acute.say_and_wait('难道，我就不是了吗？', true);
-        await acute.print_and_wait([
-          acute.get_child_sex_title(),
-          '将心中涌出的这句话，咽回到自己的口中。',
-        ]);
-        await acute.print_and_wait([
-          '毕竟，',
-          me.get_child_sex_title(),
-          '总是不擅长隐瞒。',
-        ]);
-        await acute.print_and_wait('不习于网络的空间，却又没有现实的余地。');
-        await acute.print_and_wait([
-          '来往的邮寄、NOK的劝诱，总是在送达特雷森后，经由',
-          acute.get_child_sex_title(),
-          '所转递。',
-        ]);
-        await acute.print_and_wait('——从一开始，二人之间就不存在任何的秘密。');
-        await tokino.say_and_wait('……现在还来得及哦？');
-        await acute.print_and_wait([
-          acute.get_phy_sex_title(),
-          '似乎有些担心。',
-        ]);
-        await tokino.say_and_wait('如果要见最后一面的话——');
-        await acute.say_and_wait('不用了。');
-        await acute.print_and_wait([
-          acute.get_child_sex_title(),
-          '坐在原地，斩钉截铁。',
-        ]);
-        await acute.print_and_wait([
-          '躁动的内心，总于使',
-          acute.sex,
-          '鼓足了勇气。',
-        ]);
-        await acute.print_and_wait([
-          '面向',
-          tokino.get_phy_sex_title(),
-          '，一向懦弱的',
-          acute.get_child_sex_title(),
-          '，终于吐露出了自己的心声——',
-        ]);
-        await acute.say_and_wait('笨蛋的话——这里，还有一个。');
-        await acute.print_and_wait([
-          '这一刻，步向殿堂的',
-          acute.get_child_sex_title(),
-        ]);
-        await acute.print_and_wait('第一次，拥有了「勇气」。');
-        era.drawLine();
-        acute.name = era.get('callname:100:-2');
-        await acute.print_and_wait('飞行的铁鸟，轰鸣得奏响。');
-        await acute.print_and_wait('而在铁穹中的人们，不曾听到它的离音。');
-        await acute.print_and_wait([
-          '望向天空的浮云，',
-          acute.get_colored_name(),
-          ' 拆封手中的信函。',
-        ]);
-        await acute.print_and_wait('里面，是粉色有些稍硬的卡纸。');
-        await acute.print_and_wait('上面写满了潦草的字迹。');
-        await me.say_and_wait([acute.get_colored_name(), '，敬启。']);
-        await me.say_and_wait(
-          '在你看到这封信的时候，我应该已经坐上了前往巴黎的飞机。',
-        );
-        await me.say_and_wait(
-          '请原谅我的不辞而别。因为我实在不知该以什么样的表情，去向你告知我的离开。',
-        );
-        await me.say_and_wait(
-          '作为你的训练员，我们一同经过了漫长而有趣的三年。',
-        );
-        await me.say_and_wait('这三年里，我们共同创造了许许多多的回忆。');
-        await me.say_and_wait('懦弱的我也在这段时间里，一度接受着你的帮助。');
-        await me.say_and_wait(
-          '许是出于幸运，又必然出于你无时无刻的努力，这三年的历练，终于使我们步入了殿堂。',
-        );
-        await me.say_and_wait('但也正因此，让我意识到——我还有太多需要学习。');
-        await me.say_and_wait(
-          '于是，我决定接受法国方面的邀请。到国外更为进步的赛马届进修学习。',
-        );
-        await me.say_and_wait(
-          '很遗憾，在进修的这三年里，我不再能担任你的训练员了。',
-        );
-        await me.say_and_wait(
-          '但如果可以——三年之后，若你仍在赛马届活动。请将那时你的担当训练员的职位，空余给在下。',
-        );
-        await me.say_and_wait(
-          '请原谅我的私心——但也因这份私心，这三年里，我将刻苦的努力。',
-        );
-        await me.say_and_wait('无论如何，我都将以你为目标。');
-        await me.say_and_wait('以作为真正能站在你身边的训练员，而为之努力。');
-        await me.say_and_wait('以上，即颂坤安。');
-        await me.say_and_wait(['——', me.get_colored_actual_name()]);
-        era.drawLine();
-        await acute.say_and_wait('……');
-        await acute.say_and_wait('我们啊——');
-        await acute.say_and_wait('——都是，不折不扣的，大蠢蛋呢。');
-        await acute.print_and_wait('浩瀚的天穹之下，唯剩下，两者的凛然。');
-      }
-    } else {
-      await palace_relation(acute, me);
-    }
-  };
-
-  handlers.leg = async (acute, me, callname, flags) => {
-    new AcuteLifeMarks().leg = get_random_value(6, 10);
-    await print_event_name(`在 ${acute.name} 的膝枕上`, acute);
-    await era.printAndWait('兴许是未能好好休息的缘故，今早总觉得睡眼惺忪。');
-    await era.printAndWait('真糟糕，马上就是训练的时间了；');
+  handlers[95 + 14] = async (acute, me, callname, flags) => {
+    era.set('cflag:100:节日事件标记', 0);
+    const princess = get_chara_talk(39);
+    const city = get_chara_talk(40);
+    const sirius = get_chara_talk(70);
+    const muteki = get_chara_talk(72);
+    await print_event_name('粉丝感谢祭', acute);
+    await era.printAndWait(
+      '粉丝感谢祭，这是一个邀请粉丝们前往特雷森游玩的运动祭典。',
+    );
     await era.printAndWait([
-      '作为一名成熟的训练员，可不能让 ',
-      me.get_colored_name(),
-      ' 看到懒散的这一面——',
+      '而 ',
+      acute.get_colored_name(),
+      ' 在这场活动中挑战的运动项目是——',
     ]);
-    await acute.say_and_wait([callname, '？']);
-    await me.say_and_wait('——！？');
-    await era.printAndWait('待喘息之际，已然出现身后。');
-    era.printButton(`「奇、${acute.name}！？何时来的？」`, 1);
+    await acute.say_and_wait(
+      '其实啊，我以前也有打过哦？嗯……我没记错的话，姿势应该是这样的——唔姆唔姆。',
+    );
+    await era.printAndWait([
+      '——传统项目「高尔夫」，真没想到',
+      acute.sex,
+      '以前竟然还玩过。',
+    ]);
+    await acute.say_and_wait([
+      '咕噜姆……话说啊，',
+      callname,
+      '。我要瞄准的球门——是在哪里呢？',
+    ]);
+    await era.printAndWait([
+      '……',
+      me.get_colored_name(),
+      ' 赌十个胡萝卜宝石，',
+      acute.get_colored_name(),
+      ' 肯定是把高尔夫当足球玩了。',
+    ]);
+    await era.printAndWait([
+      '也就是说，',
+      acute.get_colored_name(),
+      ' 果然不会打高尔夫。',
+    ]);
+    await era.printAndWait('于是，在这之后……');
+    await era.printAndWait('————');
+    await acute.say_and_wait('呼呼，果然还得是这个项目更适合我呢——拳击。');
+    await acute.say_and_wait(
+      '……咕噜姆？仔细一看的话，拳击两个字前面还写着其他的字呢——【花样拳击】？',
+    );
+    era.printButton('「啊，是拳击风格的体操赛吧。」', 1);
     await era.input();
-    await acute.say_and_wait([
-      '很早就来了哦？只是 ',
-      callname,
-      ' 看起来很累，所以一直没打扰哦～',
-    ]);
+    await era.printAndWait(
+      '并不需要真的对打，而是只需要摆出足够唬人的拳击姿势，表现出【动作的美感】与【持久力】然后交给评委打分的比赛——',
+    );
     await era.printAndWait([
-      '温和的话语下隐藏着无声的气息，身着红色运动服的',
-      acute.get_teen_sex_title(),
-      '随即坐在白百合花旁的阶梯。',
+      '……想想也是，都是打底有接近十万人左右粉丝的',
+      acute.get_uma_sex_title(),
+      '偶像。要是真在特雷森打起拳击的话，搞不好现场的粉丝能把特雷森直接变成全武行了吧。',
     ]);
     await acute.say_and_wait([
-      '离训练开始还有一段时间……来休息一下吧，',
+      '姆姆姆……真是可惜呢。明明 ',
       callname,
+      ' 很喜欢看女人打拳击呢——',
+    ]);
+    await me.say_and_wait([
+      '啊哈哈……',
+      acute.get_colored_name(),
+      '，这话千万别当着骏川',
+      acute.get_adult_sex_title(),
+      '的面说，我会死的。',
     ]);
     await era.printAndWait([
-      acute.sex,
-      '一面拍着膝上的天府之地，一面招舞着右手诱 ',
+      '……纠正一下，',
       me.get_colored_name(),
-      ' 堕入幸福之所。',
+      ' 可没有站在演讲台上用望远镜看一大群人在体育馆里打的血流满地的癖好。',
     ]);
     await era.printAndWait([
-      '……一开始，',
       me.get_colored_name(),
-      ' 是拒绝的。',
+      ' 只是喜欢看',
+      acute.get_uma_sex_title(),
+      '们互相揪头发撕指甲的模样而已。',
     ]);
-    await era.printAndWait('但那里真的很幸福……还散发着薄荷味的清香。');
+    await era.printAndWait('——仅此而已。');
+    await era.printAndWait(
+      '在为自己的怪癖开拓的同时，花样拳击的选手们已经开始了比赛——',
+    );
+    await era.printAndWait('…………');
+    await sirius.say_and_wait('哈，花样拳击吗。直接来几招赛法斗就可以了吧。');
     await era.printAndWait([
-      me.get_colored_name(),
-      '或许有意得在避开',
-      acute.sex,
-      '的视线，',
+      '一方，是精通法式防身术「赛法斗」的 ',
+      sirius.get_colored_name(),
+      '——',
+    ]);
+    await city.say_and_wait(
+      '曾经，为了健身美体的我，曾经在遥远的东方学习过一段时间的拳术。',
+    );
+    await city.say_and_wait('1，2……直拳、直拳、摆拳！');
+    await era.printAndWait([
+      '另一方，是既是学生也是模特的超级 ',
+      city.get_colored_name(),
+      '。',
+    ]);
+    await era.printAndWait('而裁判对这场大道之战给出的裁决是——');
+    await say_by_passer_by_and_wait('裁判', '到此为止了！两位，可以退下了。');
+    await acute.say_and_wait('都没能进决赛？这是为什么？');
+    await say_by_passer_by_and_wait(
+      '裁判',
+      '在【花样拳击】的比赛过程中，天狼星同学加入了踢腿的动作差点踢掉了我的墨镜。',
+    );
+    await say_by_passer_by_and_wait(
+      '裁判',
+      '而黄金城同学则是在【花样拳击】的比赛过程中，时不时在动作的间隙下望向镜头摆POSS像是在用嘲讽技一样。',
+    );
+    await city.say_and_wait(
+      '什！——一个不小心职业习惯就……看来这个运动项目也不简单啊。',
+    );
+    await era.printAndWait('……这是什么职业的职业习惯啊？');
+    await era.printAndWait('而与此同时，旁边的比赛发出了巨大的声响——');
+    await princess.say_and_wait('哈、哇、碴、阿——哒！');
+    await era.printAndWait('——pi～ke～peng～～～！——');
+    await say_by_passer_by_and_wait(
+      '裁判',
+      '川上公主失去资格！在比赛过程中飞起一脚直接把栏杆踹烂是不可以的违规行为啊！',
+    );
+    await era.printAndWait('…………');
+    await say_by_passer_by_and_wait(
+      '夹着头发的中年妇女粉丝',
+      '孩子他爸，看见了吗？',
+    );
+    await say_by_passer_by_and_wait(
+      '穿着病人服的中年男性粉丝',
+      '看到了，正宗佛O无影脚，咸的不行。',
+    );
+    await say_by_passer_by_and_wait('隔壁小米粥友的年轻粉丝', '咸脚？有多咸？');
+    await say_by_passer_by_and_wait('黑色高级刀疤脸刀疤脸粉丝', [
+      '北部家的',
+      acute.sex_code - 1 ? '女儿' : '儿子',
+      '？……呵，好一套通背拳。拳风都刮到车上了。',
+    ]);
+    await say_by_passer_by_and_wait(
+      '开车来的白衣看热闹粉丝',
+      '车？我车呢！？我放这那么大的车呢！？我新提的车啊！怎么就剩个后视镜了！？',
+    );
+    await say_by_passer_by_and_wait(
+      '叼着烟坐在新提的缺了后视镜车里的大头中年男粉丝',
+      [
+        '我算是看明白了，特雷森的',
+        acute.get_uma_sex_title(),
+        '，各个身怀绝技啊——',
+      ],
+    );
+    await era.printAndWait('…………');
+    await era.printAndWait(
+      '在不得不感慨世界之大无奇不有的特雷森花样拳击比赛场地上，',
+    );
+    await era.printAndWait('一边欣赏着各种人类未解之谜的比赛过程的同时，');
+    await era.printAndWait([
+      acute.get_colored_name(),
+      ' 平稳得一路取胜，终于来到了决赛的现场——',
+    ]);
+    await era.printAndWait('…………');
+    await muteki.say_and_wait([
+      sys_get_colored_callname(72, 100),
+      '，请多指教。',
+    ]);
+    await muteki.say_and_wait([
+      '能与传说中的拳术大师的',
+      acute.get_uma_sex_title(),
+      '过招，这实在令我非常的振奋。',
+    ]);
+    await acute.say_and_wait([
+      '哦哦哦～',
+      sys_get_colored_callname(100, 72),
+      '，请多指教了哦？你的站姿还是一如既往的耀眼呢～',
     ]);
     await era.printAndWait([
-      '但温暖的手掌已经附上了 ',
+      '面对着恭敬行礼的 ',
+      muteki.get_colored_name(),
+      '，',
+      acute.get_colored_name(),
+      '一如往常得散漫得回应——',
+    ]);
+    await era.printAndWait('……等会儿，传说中的拳术大师？那是什么？');
+    await muteki.say_and_wait('那么……八重古武术，烦请见教。');
+    await era.printAndWait([
+      '精通古武术的 ',
+      muteki.get_colored_name(),
+      '，又是一礼。',
+    ]);
+    await era.printAndWait(
+      '出拳的动作堪称是完美，呼吸的节奏也毫无破绽可言，就连裸露的腋下也清晰可见，再各个方面都堪称完美。',
+    );
+    await era.printAndWait([
+      '面对这样的敌人，',
+      acute.get_colored_name(),
+      ' 依旧是一副游刃有余的态度。',
+    ]);
+    await era.printAndWait('随着一声哨响，两人便开始了比赛——');
+    await era.printAndWait('…………');
+    await muteki.say_and_wait('嗯——哈！喝！');
+    await era.printAndWait([
+      '决赛的开场，是由 ',
+      muteki.get_colored_name(),
+      ' 的急迫突进。',
+    ]);
+    await era.printAndWait('激进的拳风、猛烈的突击，犹如暴风骤雨般的拳击。');
+    await era.printAndWait(
+      '每一拳都刚猛无敌，几乎舍弃了一切拳法的搏击套路，完全由力速兼具的正击来撕开对方的搏击方式。',
+    );
+    await say_by_passer_by_and_wait(
+      '扎着辫子的黝黑大汉',
+      '少O拳法！——毫无疑问的，这就是少O拳法！」',
+    );
+    era.printButton(
+      '（旁边这个黑不溜秋长得像是棕色倭瓜的解说员到底是从哪来的？）',
+      1,
+    );
+    await era.input();
+    await muteki.say_and_wait(
+      '啊！！一心不乱！只要能坚持到最后！只要在这赛场上站在最后，这场比赛就是我的胜利！！！',
+    );
+    await era.printAndWait([
+      '一击、两击、三击……',
+      muteki.get_colored_name(),
+      ' 持续不断的攻击还在继续下去。',
+    ]);
+    await era.printAndWait(
+      '从常理上来说的话，这样刚猛的攻击一定非常消耗精力的才对。',
+    );
+    await era.printAndWait([
+      '换言之，只要 ',
+      acute.get_colored_name(),
+      ' 撑到对方精疲力竭的时候就——',
+    ]);
+    await say_by_passer_by_and_wait('黝黑大汉', '不，没用的。');
+    era.printButton('「……唉？」', 1);
+    await era.input();
+    await era.printAndWait([
+      '身边的黝黑大汉，就像是会读心一般，否定了 ',
       me.get_colored_name(),
-      ' 的发梢。',
+      ' 心中所给出的观点。',
+    ]);
+    await say_by_passer_by_and_wait(
+      '黝黑大汉',
+      '仔细听，对方呼吸的节奏——没有一丝的紊乱！',
+    );
+    await me.say_and_wait('不，这谁听的出来啊！？', true);
+    await say_by_passer_by_and_wait(
+      '黝黑大汉',
+      '没错，这股特殊的呼吸节奏……是西O僧侣所使用的的特殊呼吸法。',
+    );
+    await say_by_passer_by_and_wait(
+      '黝黑大汉',
+      '为了克服高原反应，而通过调节自己的呼吸频率来使得氧气对自己身体的每一寸肌肉都得以最大程度的利用。',
+    );
+    await say_by_passer_by_and_wait(
+      '黝黑大汉',
+      '传说呼吸法的最强者，不仅能够使得肉体的年龄返老还童。就连身处于数倍重力影响下的拔数千米高的高原，都可以随心所欲的挥出至高至强的一拳——',
+    );
+    await me.say_and_wait('………………………………');
+    await me.say_and_wait('SO？');
+    await say_by_passer_by_and_wait('黝黑大汉', '你还不明白吗？');
+    await era.printAndWait([
+      '黝黑大汉一脸不可置信的望着 ',
+      me.get_colored_name(),
+      '。',
+    ]);
+    await era.printAndWait(
+      '……到底是谁给了他普通人也能拥有各种武术各种专业名词作为常识的自信啊？',
+    );
+    await say_by_passer_by_and_wait('黝黑大汉', [
+      '如果只是这 · 种 · 程 · 度的攻击频率，使用呼吸法的 ',
+      muteki.get_colored_name(),
+      '，就算再打上三天三夜也不会觉得累吧。',
+    ]);
+    era.printButton('「……嗯哼？」', 1);
+    await era.input();
+    await say_by_passer_by_and_wait('黝黑大汉', [
+      '……不，三天三夜也只是人☆类这种生物的极限而已——如果是赛',
+      acute.get_uma_sex_title(),
+      '的话，能够坚持的时间只会更久了吧。',
+    ]);
+    await say_by_passer_by_and_wait('黝黑大汉', [
+      '面对精通古武术的',
+      acute.get_uma_sex_title(),
+      ' ',
+      muteki.get_colored_name(),
+      '，传说中的拳术家的 ',
+      acute.get_colored_name(),
+      ' 到底该如何应对呢？',
+      acute.get_colored_name(),
+      ' 到底要用什么办法，才能突破 ',
+      muteki.get_colored_name(),
+      ' 的呼吸法连打呢？哈……如此精湛的场面，气功与拳功自O山大会的百年后最终决战……真是越来越令人期待了啊。',
+    ]);
+    await me.say_and_wait('…………');
+    era.printButton('（现在回去做晚饭还来得及吗？）', 1);
+    await era.input();
+    await era.printAndWait('…………');
+    await acute.say_and_wait('一…二…三…四！（*挥拳）');
+    await acute.say_and_wait(
+      [
+        '真不愧是 ',
+        sys_get_colored_callname(100, 72),
+        ' 啊……如此熟练得使用着呼吸法，在挥舞出了这么多次拳头后，就连汗都没有流下一滴——',
+      ],
+      true,
+    );
+    await acute.say_and_wait(
+      [
+        '想要在这种攻势下一直坚持下去非常的艰难——但不管怎么说，我可是拳击手父亲的',
+        acute.sex_code - 1 ? '女儿' : '儿子',
+        '！',
+      ],
+      true,
+    );
+    await acute.say_and_wait('二…二…三…四！（*挥拳）');
+    await era.printAndWait([
+      '即便实在对方的呼吸连打之下，凭借坚强毅力的 ',
+      acute.get_colored_name(),
+      '，在防守过程中依旧不落下风！',
     ]);
     await era.printAndWait([
-      '随后，轻吟的歌儿在 ',
-      me.get_colored_name(),
-      ' 耳边回荡——',
+      '而面对无论如何进攻都看不见破绽的 ',
+      acute.get_colored_name(),
+      '，',
+      muteki.get_colored_name(),
+      ' 的攻势开始变得愈发的轻躁——',
     ]);
-    switch (get_random_value(0, 3)) {
-      case 0:
-        await acute.say_and_wait('风来啦～雨来啦～雷公背着鼓来了～');
-        await acute.say_and_wait('你敲敲～我敲敲～敲得雷公弯了腰～');
-        await acute.say_and_wait('你砸砸～我砸砸～砸得雷公龇了牙～');
-        break;
-      case 1:
-        await acute.say_and_wait('大大大～小小小～');
-        await acute.say_and_wait('一二三四五六七～');
-        await acute.say_and_wait('大大大～小小小～');
-        await acute.say_and_wait('哆唻咪发嗦啦西～');
-        break;
-      case 2:
-        await acute.say_and_wait('想快点告诉你多想天天在一起～');
-        await acute.say_and_wait('研究十万个为什么的问题～');
-        await acute.say_and_wait('快点告诉你明白一些大道理～');
-        await acute.say_and_wait('朋友之间最看重是情谊～');
-        await acute.say_and_wait('我的心放在你那里～');
-        break;
-      case 3:
-        await acute.say_and_wait('月亮～在白莲花般的云朵里～穿行～');
-        await acute.say_and_wait('晚风吹来一阵阵快乐的歌声～');
+    await era.printAndWait([
+      '……继续下去的话，或许能等到 ',
+      muteki.get_colored_name(),
+      ' 露出破绽，随后一击制敌？',
+    ]);
+    await acute.say_and_wait(
+      '唔……可现在肉体已经到极限了——这样下去的话……',
+      true,
+    );
+    era.printButton(
+      `「加油啊！${acute.name}！肉已经炖在锅里了！等你赢了我们回去一起吃土豆炖肉！」`,
+      1,
+    );
+    await era.input();
+    await acute.say_and_wait(
+      [callname, '……', callname, ' 正在为我加油——'],
+      true,
+    );
+    await acute.say_and_wait(
+      ['呼——可不能让 ', callname, ' 看到我丢人的一面啊。'],
+      true,
+    );
+    await acute.say_and_wait(
+      '既然已经无法继续坚持下去的话……那么就把一切都堵在这一击……！',
+      true,
+    );
+    await acute.say_and_wait(
+      '呜啊啊！！！燃烧热血，直到最后一刻。接下吧，我的最后一击！！！',
+    );
+    await era.printAndWait([
+      '就在这一刻，',
+      acute.get_colored_name(),
+      ' 放弃了自己的守势。',
+    ]);
+    await era.printAndWait('脚后一撤，尾巴随之一抖——');
+    await era.printAndWait('一切都灌注在这一击之中！');
+    if (
+      new RaceHistory(100).get_values().filter((e) => e.rank === 1).length >= 5
+    ) {
+      await era.printAndWait([
+        acute.get_colored_name(),
+        '，传说中的拳术师，拼上一切的冠绝天下的柔拳。',
+      ]);
+      await era.printAndWait([
+        '就在那一瞬之间，绕过了 ',
+        muteki.get_colored_name(),
+        ' 刚绝天下的刚拳——直插入那满载肌肉的腹部！',
+      ]);
+      await era.printAndWait(['是的，', acute.sex, '远不如刚拳般刚烈。']);
+      await era.printAndWait(['是的，', acute.sex, '远不似刚拳般勇猛。']);
+      await era.printAndWait('是的，这柔软的一击并不能够取胜。');
+      await era.printAndWait(
+        '或许，宛如大树般坚韧，犹如柳叶般柔软的柔拳，注定了不似刚拳般耀眼。',
+      );
+      await era.printAndWait('但只有这一击，便足够了。');
+      await era.printAndWait('想要击败金刚不坏的刚勇——');
+      await era.printAndWait('只需这一击，便 · 足 · 够 · 了。');
+      await muteki.say_and_wait('啊！库——');
+      await muteki.say_and_wait('呼、呼吸的节奏！？', true);
+      await say_by_passer_by_and_wait('裁判', '逼、逼、逼——');
+      await say_by_passer_by_and_wait('黝黑大汉', '逼出来了！');
+      await era.printAndWait('是的，人们已经看出来了。');
+      await era.printAndWait([
+        '就在 ',
+        acute.get_colored_name(),
+        ' 的柔拳，击中 ',
+        muteki.get_colored_name(),
+        ' 腹部的那一刻。',
+      ]);
+      await era.printAndWait([
+        muteki.get_colored_name(),
+        ' 那近乎完美的呼吸法——便已出现了破绽！',
+      ]);
+      await muteki.say_and_wait('咕……破坏我的呼吸，这才是你的目的吗？', true);
+      await muteki.say_and_wait(
+        '瞄准我进攻停歇的节奏，寻找我呼吸的间隔。在我唤气的那一瞬间，朝向我的腹部刺出打断我节奏的柔拳——何等恐怖如斯的观察力。',
+        true,
+      );
+      await muteki.say_and_wait(
+        '传说中的拳法家、奇迹时代中的传奇，即便年岁的侵蚀已使你的拳术不似当年般充满魄劲。岁月所给予你的智慧与身为不屈者的坚毅，反而使得你得以跃入新的境界之中了吗——',
+        true,
+      );
+      await muteki.say_and_wait(
+        ['——', sys_get_colored_callname(72, 100), '！'],
+        true,
+      );
+      await acute.say_and_wait('哼……才不会给你喘息的机会呢！');
+      await acute.say_and_wait([
+        '看好了，',
+        muteki.get_colored_name(),
+        ' 同学——我的字典里，才没有『结束』这个词啦！！！',
+      ]);
+      await era.printAndWait('即便已经站不稳，');
+      await era.printAndWait('即便眼睛已经什么都看不见了，');
+      await era.printAndWait('即便腿犹如千斤般沉重的发颤。');
+      await era.printAndWait(
+        '但武术界传说的拳师——绝不会被区区这种程度的困难所阻！',
+      );
+      await era.printAndWait([
+        '或许，只需要短暂得喘息，',
+        muteki.get_colored_name(),
+        ' 便可以重新找回呼吸的节奏。',
+      ]);
+      await era.printAndWait(
+        '或许，只需要进攻的节奏稍缓，无敌的刚拳便可以重返无尽的攻势。',
+      );
+      await era.printAndWait([
+        '或许，对于新时代的翘楚——',
+        muteki.get_colored_name(),
+        ' 可以犯无数次的错误。而旧时代的传说——',
+        acute.get_colored_name(),
+        '，只要犯下了一次错误就将败下阵来。',
+      ]);
+      await era.printAndWait('——但是，那又怎样呢？');
+      await era.printAndWait('既然「犯了一次错误就将败下阵来」，那么——');
+      await era.printAndWait(
+        '【只 · 要 · 一 · 次 · 错 · 都 · 不 · 犯 · 不 · 就 · 好 · 了 · 吗？】',
+        {
+          color: acute.color,
+          fontSize: '2rem',
+        },
+      );
+      await era.printAndWait(
+        '暴雨梨花般的柔拳，永不停歇的柔拳，坚毅勇绝的柔拳——',
+      );
+      await acute.say_and_wait('我的柔拳，还远远没有结束呢！！！！');
+      era.drawLine();
+      await era.printAndWait('黄昏下的擂台之上，站立的胜者唯有一人。');
+      await say_by_passer_by_and_wait('裁判', '到此为止、胜负已分！');
+      await say_by_passer_by_and_wait(
+        '裁判',
+        '特雷森第83界天下第一花样拳击比赛，最终的胜者是——',
+      );
+      await say_by_passer_by_and_wait('裁判', [
+        acute.get_colored_name(),
+        ' 同学！',
+      ]);
+      await era.printAndWait([
+        '决赛的擂台上，双眼模糊的 ',
+        acute.get_colored_name(),
+        '，高高的举起了自己的右拳。',
+      ]);
+      await era.printAndWait('擂台下，雷鸣般的掌声为胜者带来了荣耀与喝彩。');
+      await say_by_passer_by_and_wait('黝黑大汉', '赢了、赢了！！！');
+      await say_by_passer_by_and_wait(
+        '黝黑大汉',
+        '即便岁月飞逝，传说中的拳术家之拳，早已不负当年的魄力。',
+      );
+      await say_by_passer_by_and_wait('黝黑大汉', [
+        '但是',
+        acute.sex,
+        '仍然战胜了自己、战胜了年岁的侵蚀，用至绝至速的柔拳，战胜了刚绝无敌的刚拳！',
+      ]);
+      await say_by_passer_by_and_wait('黝黑大汉', [
+        acute.get_colored_name(),
+        '！',
+        acute.get_colored_name(),
+        '！！！',
+        acute.sex,
+        '终于彻彻底底的站在了武术界的顶点！',
+      ]);
+      await say_by_passer_by_and_wait('黝黑大汉', [
+        acute.sex,
+        '战胜了时间！！！！！！',
+      ]);
+      await era.printAndWait('舞台下，兴奋的观众们激动的相拥。');
+      await era.printAndWait(
+        '泪水与感动盛满了整个会场。就连裁判也在偷偷得拭去感动的眼泪。',
+      );
+      await era.printAndWait('在这一刻——擂台之上的武者。');
+      await era.printAndWait('那高高举起的拳头，已成为武术界真正的永恒传说。');
+      era.drawLine();
+      await era.printAndWait([
+        '黄昏之际，人潮散去之时。背着已经没有力气的 ',
+        acute.get_colored_name(),
+        '，',
+        me.get_colored_name(),
+        ' 和 ',
+        acute.get_colored_name(),
+        ' 二人踏上了回家的道路。',
+      ]);
+      await acute.say_and_wait('欸嘿嘿……真没想到自己能赢呢。');
+      await era.printAndWait([
+        '倚在自己背上，即便浑身无力已经无法动弹了。',
+        acute.get_colored_name(),
+        ' 却仍旧温和而散漫地，汇报着今日的胜果。',
+      ]);
+      era.printButton(
+        '「哈哈……是呢，真是惊险呢。我跟那个像是窝瓜一样的大汉，在擂台下可是实实在在的捏了把汗呢。」',
+        1,
+      );
+      await era.input();
+      await acute.say_and_wait('唉～～～是吗～？');
+      await era.printAndWait([
+        '兴许是格外开心的原因，',
+        acute.get_colored_name(),
+        ' 的里难得出现了轻佻的语气。',
+      ]);
+      await acute.say_and_wait([
+        '可我记得——',
+        callname,
+        '，你应该对拳击没多大兴趣吧？',
+      ]);
+      era.printButton('「哈哈……那是另外一回事啦。」', 1);
+      await era.input();
+      await era.printAndWait([
+        '略显尴尬的笑出了两声。',
+        me.get_colored_name(),
+        ' 特意的偏着头将视线望向远处黄昏的太阳，好不跟身后这总能看穿 ',
+        me.get_colored_name(),
+        ' 心事的',
+        acute.get_uma_sex_title(),
+        '对上眼。',
+      ]);
+      era.printButton('「老实说……一开始，我确实对拳击没什么兴趣啦。」', 1);
+      await era.input();
+      await acute.say_and_wait('嗯～——听你这样说的话，现在是改观了吗？');
+      era.printButton('「是呢，改观了。」', 1);
+      await era.input();
+      await era.printAndWait('毫不犹豫的承认了这一点。');
+      await era.printAndWait([
+        '……',
+        me.get_colored_name(),
+        ' 得承认，最初的时候，确实是对拳击比赛有所偏见。',
+      ]);
+      await era.printAndWait(
+        '毕竟印象里，这种互相攻击的比赛，总会跟【野蛮】这两个字挂上钩吧。',
+      );
+      await era.printAndWait(
+        '但这内心深处所隐藏着的小小偏见，在这样一场感动的比赛之后，早已化作烟消云散。',
+      );
+      await era.printAndWait('擂台上那坚持不懈的身姿，还要那高高举起的右拳。');
+      await era.printAndWait('对于懦弱的自己，恐怕是此生难忘吧。');
+      await era.printAndWait('毕竟，那实在是太过【闪耀】了。');
+      await acute.say_and_wait('嗯～哼～……');
+      await era.printAndWait([
+        '趴在肩上的 ',
+        acute.get_colored_name(),
+        '，也不知道在想些什么。忽地哼起了欢快的小曲。',
+      ]);
+      await acute.say_and_wait(['呐，', callname, '。']);
+      await me.say_and_wait(['怎么啦，', acute.get_colored_name(), '？']);
+      await acute.say_and_wait(
+        '我是说啊——如果呢……如果，我要是输了的话呢。你要怎么办呢？',
+      );
+      era.printButton('「……输了吗？」', 1);
+      await era.input();
+      await era.printAndWait('皱起眉毛，这可真是一个刁钻古怪的问题。');
+      await era.printAndWait([acute.get_colored_name(), ' 会输吗？']);
+      await era.printAndWait('这个念头，对于自己而言确实一刻也没有出现过。');
+      await era.printAndWait(
+        '但既然这是一个问题的话——答案，总归是需要好好考虑一下的。',
+      );
+      era.printButton(
+        `「……就算是输了的话，也是不要紧的。这种事情，是不会击垮 ${acute.name} 的。」`,
+        1,
+      );
+      await era.input();
+      await acute.say_and_wait('……唔姆？为什么呢？');
+      await era.printAndWait([
+        acute.get_colored_name(),
+        ' 饶有兴致得问着——',
+        acute.sex,
+        '似乎对这个问题的答案格外有兴趣。',
+      ]);
+      era.printButton(
+        '「因为啊——就算是失败了。只要之后爬起来，不就可以了吗？」',
+        1,
+      );
+      await era.input();
+      await era.printAndWait([
+        '黄昏下，空无一人的中庭。背着 ',
+        acute.get_colored_name(),
+        ' 的 ',
+        me.get_colored_name(),
+        '，停在了枯树洞的旁边。',
+      ]);
+      await era.printAndWait('是啊，失败了。但那又怎么样呢？');
+      await era.printAndWait('只不过是【这次】失败了而已。');
+      await era.printAndWait('只要【下次】赢回来，就好了。');
+      await era.printAndWait([
+        '即便是【100】次的失败者，但只要能【赢回来】——',
+        acute.sex,
+        '就仍然会是最后的赢家。',
+      ]);
+      await era.printAndWait('这是一个非常浅显的道理。');
+      await era.printAndWait([
+        '——可与此同时，这也是 ',
+        acute.get_colored_name(),
+        ' 所教会 ',
+        me.get_colored_name(),
+        ' 的道理。',
+      ]);
+      await era.printAndWait([
+        '黄昏下，如同做了错事害怕被惩罚的少年，',
+        me.get_colored_name(),
+        ' 悄悄地回过头，想要探查长辈的「面色」。',
+      ]);
+      await era.printAndWait([
+        '可回过头去，却发现——原来 ',
+        acute.get_colored_name(),
+        ' 也在望着自己。',
+      ]);
+      await era.printAndWait(
+        '深色的眼眸、夹杂着清晨的「露珠」，闪烁着生命的光泽——',
+      );
+      await era.printAndWait('恍惚间，心脏砰砰得跳动。');
+      await acute.say_and_wait('……');
+      await acute.say_and_wait(['…………啊，那个，', callname, '。']);
+      await acute.say_and_wait('已经……可以放我下来咯？');
+      era.printButton('「啊——马、马上，我马上就放你下来——」', 1);
+      await era.input();
+      await era.printAndWait('忽然间的手忙脚乱。');
+      await era.printAndWait('犹如被长辈抓现行的调皮鬼一般。');
+      await era.printAndWait([
+        '蹲下身，',
+        acute.get_colored_name(),
+        ' 的脚尖轻轻得触碰到了地面。',
+      ]);
+      await era.printAndWait('咕噜噜——忽然间转了个圈。');
+      await era.printAndWait([
+        '回过身，却发现 ',
+        acute.get_colored_name(),
+        ' 背对着自己——看不见',
+        acute.sex,
+        '的脸。',
+      ]);
+      await acute.say_and_wait([
+        '……抱歉啦，',
+        callname,
+        '，其实我跟你撒了个慌。',
+      ]);
+      await era.printAndWait('燥热的心，砰砰地跳动。');
+      await acute.say_and_wait(
+        '其实啊……比赛之后呢。我还是有那么一点点的精力得啦……走回休息室，其实是没问题的。',
+      );
+      await era.printAndWait(
+        '明明是临近夜晚的黄昏，身体却如沸腾的岩浆般滚热。',
+      );
+      await acute.say_and_wait('所以说啊，那个……');
+      await era.printAndWait([
+        acute.sex,
+        '回过身，秀丽的长发随之一转。那挑染的白丝，如月光般动人——',
+      ]);
+      await acute.say_and_wait([
+        '虽然……你大概已经听我——或者是其他的',
+        acute.get_uma_sex_title(),
+        '，说过很多次了吧？',
+      ]);
+      await era.printAndWait('羞红的脸颊，散发着炽热的蒸汽。');
+      await acute.say_and_wait('但是，我果然是喜欢你的——训练员君。');
+      await era.printAndWait(
+        '黄昏之下，骄傲的神情与傲气的话语，回荡在这空无一人的中庭之间。',
+      );
+      await era.printAndWait([
+        acute.get_colored_name(),
+        ' 的脸早已羞红一片——可',
+        acute.sex,
+        '的眼神，却坚定得注视着自己。',
+      ]);
+      await era.printAndWait('……奇怪吗？');
+      await era.printAndWait('一点都不。');
+      await era.printAndWait('为什么呢？');
+      await era.printAndWait([
+        '因为这正是，那个自己所认识的 ',
+        acute.get_colored_name(),
+        '。',
+      ]);
+      await era.printAndWait('那个温和、勇敢，却又坚毅不屈，');
+      await era.printAndWait([
+        '在平静的外表下，燃烧着炽热之心的 ',
+        acute.get_colored_name(),
+        '。',
+      ]);
+      await me.say_and_wait('……');
+      await me.say_and_wait('…………');
+      await me.say_and_wait('………………哈哈。');
+      await era.printAndWait('没由头的笑出了声来。');
+      await era.printAndWait('……奇怪吗？');
+      await era.printAndWait('一点都不。');
+      await era.printAndWait('为什么呢？');
+      await era.printAndWait([
+        '因为这正是，那个 ',
+        acute.get_colored_name(),
+        ' 所认识的训练员。',
+      ]);
+      era.drawLine();
+      await era.printAndWait('黄昏下，二人无话。');
+      await era.printAndWait('小步走回了家（训练员休息室）。');
+      await era.printAndWait('炉灶前的土豆终于熟了。');
+      await era.printAndWait([
+        acute.get_colored_name(),
+        ' 将它盛出来，',
+        me.get_colored_name(),
+        ' 负责去碗。',
+      ]);
+      await era.printAndWait('配上牛肉，一起拌饭。');
+      await era.printAndWait('啊呜啊呜，吞进肚中。');
+      new AcuteEduMarks().ending++;
+    } else {
+      await say_by_passer_by_and_wait('裁判', '到此为止了！');
+      await say_by_passer_by_and_wait(
+        '裁判',
+        '特雷森第83界天下第一花样拳击比赛，最终的胜者是——',
+      );
+      await say_by_passer_by_and_wait('裁判', [
+        muteki.get_colored_name(),
+        ' 同学！',
+      ]);
+      await say_by_passer_by_and_wait('黝黑大汉', [
+        acute.get_colored_name(),
+        ' 同学的最后一击，直击腹部以打乱 ',
+        sys_get_colored_callname(100, 72),
+        ' 呼吸节奏的拳法可谓是奇迹之拳……',
+      ]);
+      await say_by_passer_by_and_wait(
+        '黝黑大汉',
+        '但真是可惜啊，最强的柔拳，仍然无法战争最强的刚拳——',
+      );
+      await say_by_passer_by_and_wait(
+        '黝黑大汉',
+        '如果早十年，那位传说中的拳师，身体的刚劲仍未散去之时。那冠绝的一击，应该就能终结这场比赛的吧。',
+      );
+      await say_by_passer_by_and_wait(
+        '黝黑大汉',
+        '唉……年岁。真是一切武术师的大敌啊。',
+      );
+      await era.printAndWait('擂台之下，负责解说的黝黑大汉，流下了他的泪水。');
+      await era.printAndWait('而另一边，在擂台之上——');
+      await acute.say_and_wait([
+        callname.substring(0, 1),
+        '……',
+        callname,
+        '……',
+      ]);
+      await era.printAndWait([
+        '擂台之上，汗水化作蒸汽鹏飞之刻，',
+        acute.get_colored_name(),
+        ' 的眼中充盈起了泪水。',
+      ]);
+      await acute.say_and_wait(
+        '呜～～～我已经……燃尽了呢。化作了……雪白色的灰——',
+      );
+      await era.printAndWait([
+        '失去了力气的 ',
+        acute.get_colored_name(),
+        '，无力的瘫倒在了擂台之上。',
+      ]);
+      await era.printAndWait('——而与此同时的，是观众们雷鸣般的掌声——');
+      await era.printAndWait([
+        '就这样，',
+        acute.get_colored_name(),
+        ' 在掌声之中走下了帷幕。',
+      ]);
+      await era.printAndWait('旧时代的传奇，终究要为新时代的传说所让步——');
+      era.drawLine();
+      await era.printAndWait([
+        '黄昏之际，人潮散去之时。背着已经没有力气的 ',
+        acute.get_colored_name(),
+        '，',
+        me.get_colored_name(),
+        ' 和 ',
+        acute.get_colored_name(),
+        ' 二人踏上了回家的道路。',
+      ]);
+      await acute.say_and_wait([
+        '唔～～让 ',
+        callname,
+        ' 看到了失败的一面了啊——',
+      ]);
+      await era.printAndWait([
+        '倚在自己背上，即便浑身无力已经无法动弹了。',
+        acute.get_colored_name(),
+        ' 仍旧嘟起小嘴，对今日的决赛念念不忘。',
+      ]);
+      era.printButton(
+        '「嘛——最后的那一击我和在场的观众都看到了哦？大家都很为你感动呢。」',
+        1,
+      );
+      await era.input();
+      await acute.say_and_wait('可是啊……输了还是输了啊。');
+      era.printButton('「哈哈……是啊，确实输了啊。」', 1);
+      await era.input();
+      await era.printAndWait('擂台上的胜负就是如此的无情。');
+      await era.printAndWait(
+        '有了赢家，就一定会有输家。胜者风光无限，而败者只能狼狈退场。',
+      );
+      await era.printAndWait(
+        '身体也好、状态也好、运气也好。如果不能在比赛场上发挥百分百的全力赢得胜利，那么即便再好看的训练成绩也没有意义吧。',
+      );
+      await era.printAndWait(
+        '这个世界本就是唯结果论的。擂台是这样，比赛也是这样。',
+      );
+      await era.printAndWait('……只不过——');
+      era.printButton('「既然现在输了，那就在下一场上赢回来吧。」', 1);
+      await era.input();
+      await acute.say_and_wait(['……', callname, '？']);
+      era.printButton(
+        '「所以说啊——即便现在输了，只要在下一把上赢回来就好。」',
+        1,
+      );
+      await era.input();
+      await era.printAndWait(
+        '即便这个世界是唯结果论的，但也不代表每个人只有【一次机会】。',
+      );
+      await era.printAndWait('是啊，失败了。但那又怎么样呢？');
+      await era.printAndWait('只不过是【这次】失败了而已。');
+      await era.printAndWait('只要【下次】赢回来，就好了。');
+      await era.printAndWait([
+        '即便是【100】次的失败者，但只要能【赢回来】——',
+        acute.sex,
+        '就仍然会是最后的赢家。',
+      ]);
+      await era.printAndWait([
+        '掂了掂身后的 ',
+        acute.get_colored_name(),
+        '，离家（训练员休息室）只剩下几步路了。',
+      ]);
+      await era.printAndWait([
+        '回过头望向 ',
+        acute.get_colored_name(),
+        '——却发现此刻 ',
+        acute.get_colored_name(),
+        ' 也在望着 ',
+        me.get_colored_name(),
+        '。',
+      ]);
+      await era.printAndWait([
+        '只不过，这一次 ',
+        acute.get_colored_name(),
+        ' 的眼神似乎与以往不同。',
+      ]);
+      await era.printAndWait('——该要如何用语言去形容呢？');
+      await era.printAndWait('不再散漫、不再温柔……');
+      await era.printAndWait(
+        '而是夹杂着惊奇的温和、相比于温柔却又更加的柔弱。',
+      );
+      await era.printAndWait(
+        '深色的眼眸、夹杂着清晨的「露珠」，闪烁着生命的光泽——',
+      );
+      await era.printAndWait([
+        '不知怎的，望着背上「初次所见」的「柔弱',
+        acute.get_teen_sex_title(),
+        '」，心脏便砰砰的跳动。',
+      ]);
+      await era.printAndWait(
+        '跳动、跳动——以至于一口赤红色的勇气，涌上了咽喉。',
+      );
+      era.printButton('「……哈哈。」', 1);
+      await era.input();
+      await era.printAndWait('不由得笑出了声来。');
+      await acute.say_and_wait('……你笑什么啦？');
+      era.printButton('「我笑……我笑我锅里炖着的肉。」', 1);
+      await era.input();
+      await era.printAndWait([
+        '说罢，',
+        me.get_colored_name(),
+        ' 回过头，眼前是黄昏下的走廊。',
+      ]);
+      await acute.say_and_wait('……这有什么好笑的啊。');
+      await era.printAndWait([
+        '嘟着嘴，宛若处子般的 ',
+        acute.get_colored_name(),
+        '，依靠在了肩上。',
+      ]);
+      era.drawLine();
+      await acute.print_and_wait('……其实，体力已经恢复了。');
+      await acute.print_and_wait([
+        '至少这么几步路，依靠身为',
+        acute.get_uma_sex_title(),
+        '的毅力，还是可以轻松地走过去的。',
+      ]);
+      await acute.print_and_wait('……但是。');
+      await acute.print_and_wait('但是……');
+      await acute.print_and_wait('既然就剩了这么几步路的话。');
+      await acute.print_and_wait([
+        '让 ',
+        callname,
+        ' 背着自己走一程……也是可以的吧？',
+      ]);
+      await acute.say_and_wait('………………');
+      await acute.say_and_wait('心中的，这种悸动……', true);
+      await acute.say_and_wait(['果然，我对 ', callname, '……他——）'], true);
+      era.drawLine();
+      await acute.print_and_wait('就这样，夹杂着咸味的粉丝感谢祭。');
+      await acute.print_and_wait('在晚上的一顿似乎有点太咸了的土豆炖肉之中，');
+      await acute.print_and_wait('画上了帷幕——');
+      era.println();
+      flags.wait_flag = get_attr_and_print_in_event(
+        100,
+        [],
+        25,
+        undefined,
+        true,
+      );
+      flags.wait_flag =
+        get_attr_and_print_in_event(0, [0, 0, 5, 10, 0], 0, undefined, true) ||
+        flags.wait_flag;
     }
-    await era.printAndWait('……………………');
-    await era.printAndWait('那并非是多么好听的歌谣，');
-    await era.printAndWait('硬要说的话，可能歌唱者还多少有些不着调。');
-    await era.printAndWait('但是……躺在膝枕之上，听着这样的歌谣，');
-    await era.printAndWait('总会感到由衷的安心——');
-    flags.wait_flag = get_attr_and_print_in_event(100, [0, 0, 0, 10, 0], 0);
   };
 };

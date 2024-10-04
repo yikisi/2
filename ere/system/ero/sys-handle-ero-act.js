@@ -86,6 +86,7 @@ async function next_turn() {
           part: e,
           stay: chara_id,
         });
+        era.println();
       }
     }
     let body_part;
@@ -102,7 +103,14 @@ async function next_turn() {
       }
     });
   }
-  await check_orgasm(shown, ...chara_list_in_train);
+  await check_orgasm(
+    shown,
+    ...chara_list_in_train.map((chara_id) => {
+      era.get(`tcvar:${chara_id}:高潮抑制`) &&
+        era.add(`tcvar:${chara_id}:高潮抑制`, -1);
+      return chara_id;
+    }),
+  );
   shown && era.println();
   update_juels(shown, ...chara_list_in_train);
   shown && (await era.waitAnyKey());
@@ -237,10 +245,10 @@ async function sys_handle_ero_act(command, filters, _shown) {
           return {
             accelerator: i,
             config: {
-              buttonType: era.get(`flag:${i + 950}`) ? 'warning' : 'info',
+              buttonType: era.get(`flag:${i + 70}`) ? 'warning' : 'info',
               width: 8,
             },
-            content: era.get(`flagname:${i + 950}`).toUpperCase(),
+            content: era.get(`flagname:${i + 70}`).toUpperCase(),
             type: 'button',
           };
         }),
@@ -251,7 +259,7 @@ async function sys_handle_ero_act(command, filters, _shown) {
       if (ret === 999) {
         option_flag = 0;
       } else {
-        era.set(`flag:${ret + 950}`, !era.get(`flag:${ret + 950}`));
+        era.set(`flag:${ret + 70}`, !era.get(`flag:${ret + 70}`));
       }
     }
   } else if (command === 901) {

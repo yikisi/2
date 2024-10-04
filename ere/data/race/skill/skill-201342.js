@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201342,
   '直滑降',
-  '下坡变得略微擅长＜先马＞',
+  '下坡变得略微擅长',
   20134,
   1,
   UmaSkill.rarity_enum.normal,
@@ -70,4 +70,6 @@ module.exports = new UmaSkill(
   120,
   false,
   false,
+  [7],
+  [UmaSkill.ability_tag_enum.accel],
 );

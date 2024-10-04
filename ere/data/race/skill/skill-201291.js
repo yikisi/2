@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201291,
   '再次燃烧',
-  '在比赛终盘小幅消耗持久力，提升加速度＜逃马＞',
+  '在比赛终盘小幅消耗持久力，提升加速度',
   20129,
   2,
   UmaSkill.rarity_enum.gold,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [6],
+  [UmaSkill.ability_tag_enum.hpRate, UmaSkill.ability_tag_enum.accel],
 );

@@ -160,7 +160,7 @@ async function week_start_74(teio, me) {
     await teio.say_and_wait('你可不准反悔哦，无敌的帝王大人也是会小心眼的！');
     era.println();
     const temp = get_random_entry(
-      get_filtered_talents(teio.sex_code, 1000).filter(
+      get_filtered_talents(teio.sex_code, 60).filter(
         (talent_id) => era.get(`talent:3:${talent_id}`) < 1,
       ),
     );
@@ -543,8 +543,8 @@ async function week_start_99(teio, me) {
     const temp = get_random_entry(
       new Array(8)
         .fill(0)
-        .map((_, i) => 1060 + i)
-        .filter((e) => (e !== 1061 && e !== 1065) || teio.sex_code - 1)
+        .map((_, i) => 70 + i)
+        .filter((e) => (e !== 71 && e !== 75) || teio.sex_code !== 1)
         .filter((e) => !era.get(`talent:3:${e}`)),
     );
     if (temp) {

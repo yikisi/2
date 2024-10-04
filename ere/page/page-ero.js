@@ -9,10 +9,7 @@ const check_ero_enabled = require('#/system/ero/sys-check-ero-action');
 const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
 const { get_characters_in_train } = require('#/system/ero/sys-prepare-ero');
 const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
-const {
-  sys_change_lust,
-  sys_change_pressure,
-} = require('#/system/sys-calc-base-cflag');
+const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const {
   sys_check_awake,
@@ -21,6 +18,7 @@ const {
 } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -520,7 +518,8 @@ function print_milking(type, size) {
  * @param {boolean} [skip_start_end]
  */
 async function page_ero(lover, skip_start_end) {
-  const in_basement = era.get('flag:当前位置') === location_enum.basement;
+  const in_basement = era.get('flag:当前位置') === location_enum.basement,
+    rape = era.get('tflag:强奸');
   let curr_lover =
       lover || era.get('tflag:当前对手') || era.get('flag:当前互动角色'),
     ero_flag = true;
@@ -538,12 +537,11 @@ async function page_ero(lover, skip_start_end) {
 
     const filters = new Array(7)
         .fill(0)
-        .map((_, i) => era.get(`flag:${950 + i}`)),
+        .map((_, i) => era.get(`flag:${60 + i}`)),
       left_columns = [],
       lost_mind = era.get('tcvar:0:失神'),
       love = get_love_info(curr_lover),
       marks = get_ero_marks(curr_lover),
-      rape = era.get('tflag:强奸'),
       relation = get_relation_info(curr_lover);
     left_columns.push(
       ...(era.get('flag:当前位置') === location_enum.basement
@@ -682,7 +680,7 @@ async function page_ero(lover, skip_start_end) {
     }
 
     const base_check =
-        era.get('tflag:强奸') === -1 &&
+        rape === -1 &&
         sys_check_awake(curr_lover) &&
         !era.get(`tcvar:${curr_lover}:脱力`) &&
         !era.get(`tcvar:${curr_lover}:失神`) &&
@@ -852,8 +850,9 @@ async function page_ero(lover, skip_start_end) {
   }
   era.drawLine();
   let wait_flag = false;
-  for (const chara_id of get_characters_in_train()) {
-    if (chara_id && sys_check_awake(chara_id)) {
+  const partner_list = get_characters_in_train().filter((e) => e);
+  for (const chara_id of partner_list) {
+    if (sys_check_awake(chara_id)) {
       let temp;
       if (!check_satisfied(chara_id)) {
         sys_change_lust(chara_id, lust_from_palam / 2);
@@ -871,45 +870,29 @@ async function page_ero(lover, skip_start_end) {
     }
   }
   if (!in_basement) {
-    const punish_option = era.get('flag:不忠惩罚'),
-      me = get_chara_talk(0);
+    const punish_option = era.get('flag:不忠惩罚');
     let temp_chara_list = era.getCharactersInTrain();
-    wait_flag = sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
-      .filter(
-        (e) =>
-          temp_chara_list.indexOf(e) === -1 &&
-          era.get(`love:${e}`) >= 75 &&
-          sys_check_awake(e) &&
-          era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
-          !era.get(`talent:${e}:绿帽癖`) &&
-          get_custom_mec(e).is_anger_for_unfaithful() &&
-          (punish_option || era.get(`talent:${e}:病娇`)),
-      )
-      .reduce((p, c) => {
-        era.print([
-          me.get_colored_name(),
-          ' 的不忠让 ',
-          get_chara_talk(c).get_colored_name(),
-          ' 无比愤怒……',
-        ]);
-        sys_change_pressure(
-          c,
-          get_random_value(2000, 4000) / (1 + (era.get('tflag:强奸') > 0)),
-        );
-        return (
-          sys_like_chara(
-            c,
-            0,
-            -get_random_value(
-              100,
-              (200 +
-                8 * (era.get(`love:${c}`) - 75) +
-                100 * era.get(`talent:${c}:病娇`)) /
-                (1 + (era.get('tflag:强奸') > 0)),
-            ),
-          ) || wait_flag
-        );
-      }, wait_flag);
+    const punish_list = sys_filter_chara(
+      'cflag',
+      '招募状态',
+      recruit_flags.yes,
+    ).filter(
+      (e) =>
+        temp_chara_list.indexOf(e) === -1 &&
+        era.get(`love:${e}`) >= 75 &&
+        sys_check_awake(e) &&
+        era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
+        !era.get(`talent:${e}:绿帽癖`) &&
+        get_custom_mec(e).is_anger_for_unfaithful() &&
+        (punish_option || era.get(`talent:${e}:病娇`)),
+    );
+    for (const chara_id of punish_list) {
+      get_custom_check(chara_id).check_after_betrayed(partner_list);
+      wait_flag =
+        (await sys_call_ero_event(chara_id, ero_hooks.after_betrayed, {
+          partners: partner_list,
+        })) || wait_flag;
+    }
   }
   const size = 200 + 300 * !era.get('item:乳汁处理装置');
   wait_flag = print_milking('人奶', size) || wait_flag;

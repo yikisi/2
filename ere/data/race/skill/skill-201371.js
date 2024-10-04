@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201371,
   '迷惑的干扰',
-  '比赛终盘位于前列时，使后面马娘的视野稍微变窄＜先马＞',
+  '比赛终盘位于前列时，使后面马娘的视野稍微变窄',
   20137,
   2,
   UmaSkill.rarity_enum.gold,
@@ -73,4 +73,6 @@ module.exports = new UmaSkill(
   110,
   false,
   false,
+  [7],
+  [UmaSkill.ability_tag_enum.visible],
 );

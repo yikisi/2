@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201122,
   '鹰眼',
-  '比赛初盘观察力提高，视野稍微开阔＜中距离＞',
+  '比赛初盘观察力提高，视野稍微开阔',
   20112,
   1,
   UmaSkill.rarity_enum.normal,
@@ -67,4 +67,6 @@ module.exports = new UmaSkill(
   110,
   false,
   false,
+  [4],
+  [UmaSkill.ability_tag_enum.visible],
 );

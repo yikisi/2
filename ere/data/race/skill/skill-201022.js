@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201022,
   '禁止抢先',
-  '比赛序盘处于后方的话，略微使前方的赛马娘焦躁和动作迟缓＜短距离＞',
+  '比赛序盘处于后方的话，略微使前方的赛马娘焦躁和动作迟缓',
   20102,
   1,
   UmaSkill.rarity_enum.normal,
@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   170,
   false,
   false,
+  [2],
+  [UmaSkill.ability_tag_enum.hpRate, UmaSkill.ability_tag_enum.accel],
 );

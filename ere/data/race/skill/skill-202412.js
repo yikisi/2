@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202412,
   '进取心',
-  '临近比赛终盘，若位于第2名以后且距离前方马娘2马身以内则速度会短暂略微提升＜先马＞',
+  '临近比赛终盘，若位于第2名以后且距离前方马娘2马身以内则速度会短暂略微提升',
   20241,
   1,
   UmaSkill.rarity_enum.normal,
@@ -75,4 +75,6 @@ module.exports = new UmaSkill(
   180,
   false,
   false,
+  [7],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

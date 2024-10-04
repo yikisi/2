@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202601,
   '闪光',
-  '比赛中触发了13次技能的话，向前突进＜中距离＞',
+  '比赛中触发了13次技能的话，向前突进',
   20260,
   2,
   UmaSkill.rarity_enum.gold,
@@ -70,4 +70,6 @@ module.exports = new UmaSkill(
   160,
   false,
   false,
+  [4],
+  [UmaSkill.ability_tag_enum.currentSpeed],
 );

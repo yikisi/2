@@ -74,4 +74,6 @@ module.exports = new UmaSkill(
   170,
   false,
   false,
+  [],
+  [UmaSkill.ability_tag_enum.hpRate],
 );
