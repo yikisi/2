@@ -17,7 +17,7 @@ module.exports = class extends CustomizedMec {
       {
         color: buff_colors[1],
         content: '[彻底管理主义]',
-        title: '[彻底管理主义]：训练员头衔训练效果加成上升一级',
+        title: '训练员头衔训练效果加成上升一级',
       },
     ];
   }

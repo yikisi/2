@@ -33,7 +33,7 @@ module.exports = class extends CustomizedMec {
       {
         color: buff_colors[1],
         content: '[私人助理]',
-        title: `[私人助理]：${get('callname:0:-1')} 的体力与精力消耗-10%`,
+        title: `${get('callname:0:-1')} 的体力与精力消耗-10%`,
       },
     ];
   }

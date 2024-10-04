@@ -743,6 +743,8 @@ class CustomizedBase {
     }
     await era.printAndWait('「咔哒」', { fontSize: '1.5rem' });
   }
+
+  handle_escape() {}
 }
 
 module.exports = CustomizedBase;

@@ -36,7 +36,7 @@ module.exports = class extends CustomizedMec {
         color: get_chara_color(52),
         content: `回响(${gad + dad})`,
         title:
-          `[回响(${gad + dad})]：？？？「若能相互理解，现实也能予以共鸣。」参赛时：` +
+          `？？？「若能相互理解，现实也能予以共鸣。」参赛时：` +
           [
             gad ? `草地适性上升 ${gad} 级` : '',
             dad ? `中&长距离适性上升 ${dad} 级` : '',
