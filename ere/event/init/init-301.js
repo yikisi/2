@@ -2,29 +2,29 @@ const era = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
+const CustomizedInit = require('#/event/init/customized-init');
+
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
 const { attr_names } = require('#/data/train-const');
 
-/**
- * @param {function(number,number?)} init_chara
- * @param {boolean} [is_reset]
- */
-module.exports = (init_chara, is_reset) => {
-  if (!is_reset) {
-    if (sys_personal_achievement.get(301)) {
-      new TokinoLifeMarks().who_am_i = 1;
-      era.set('callname:301:-1', '丰收时刻');
-      era.set('callname:301:-2', '骏川缰绳');
-    } else {
+module.exports = class extends CustomizedInit {
+  init(init_chara, is_reset) {
+    if (!is_reset) {
+      if (sys_personal_achievement.get(301)) {
+        new TokinoLifeMarks().who_am_i = 1;
+        era.set('callname:301:-1', '丰收时刻');
+        era.set('callname:301:-2', '骏川缰绳');
+      } else {
+        era.set(
+          'callname:301:-2',
+          `骏川${era.get('cflag:301:性别') === 1 ? '先生' : '小姐'}`,
+        );
+      }
       era.set(
-        'callname:301:-2',
-        `骏川${era.get('cflag:301:性别') === 1 ? '先生' : '小姐'}`,
+        'callname:301:305',
+        `安心泽${era.get('cflag:301:性别') === 1 ? '先生' : '小姐'}`,
       );
+      attr_names.forEach((e) => era.set(`base:301:${e}`, 1200));
     }
-    era.set(
-      'callname:301:305',
-      `安心泽${era.get('cflag:301:性别') === 1 ? '先生' : '小姐'}`,
-    );
-    attr_names.forEach((e) => era.set(`base:301:${e}`, 1200));
   }
 };

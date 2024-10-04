@@ -212,7 +212,7 @@ module.exports = {
         `但随后，${luna.sex}敏锐地意识到，自己并非身处梦境。`,
       );
       era.drawLine();
-      era.printButton('「露娜。真的是你吗？」', 1);
+      era.printButton('「露娜，真的是你吗？」', 1);
       era.printButton('「露娜，你就是鲁铎象征？！」', 2);
       await era.input();
       await era.printAndWait(

@@ -2,7 +2,6 @@
 
 const sys_change_hair = require('#/system/chara/sys-change-hair');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
-const get_aim_function = require('#/system/script/get-aim-function');
 const { sys_fix_chara_base } = require('#/system/sys-calc-base-cflag');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
@@ -27,6 +26,7 @@ const {
 const RaceHistory = require('#/data/race/model/race-history');
 const { chara_skill_dict } = require('#/data/race/skill/skill-const');
 const { attr_names } = require('#/data/train-const');
+const { get_custom_init } = require('#/event/init/init-factory');
 
 /**
  * @param {number} chara_id
@@ -138,15 +138,10 @@ function init_chara(chara_id, src_chara_id) {
         c: buff_colors[1],
       });
     }
-    reset_chara(chara_id);
+    reset_chara(chara_id, true);
 
-    try {
-      get_aim_function('init', chara_id, {}).func(init_chara);
-    } catch (e) {
-      if (e.message && !e.message.startsWith('unsupported')) {
-        console.log(e.stack);
-      }
-    }
+    get_custom_init(chara_id)(init_chara);
+
     get_custom_mec(chara_id).set_callname();
     get_custom_mec(chara_id).set_my_name();
     get_custom_mec(chara_id).init_love();
@@ -297,8 +292,9 @@ CharaTalk.init_chara = init_chara;
  * 只重置属性和技能点数，不重置性能力和性经历
  *
  * @param {number} chara_id
+ * @param {boolean} [from_init]
  */
-function reset_chara(chara_id) {
+function reset_chara(chara_id, from_init) {
   if (era.get(`cflag:${chara_id}:种族`)) {
     if (era.get(`cflag:${chara_id}:招募状态`) === yes) {
       if (
@@ -361,12 +357,8 @@ function reset_chara(chara_id) {
     era.set(`base:${chara_id}:精力`, max_time);
   }
 
-  try {
-    get_aim_function('init', chara_id, {}).func(init_chara, true);
-  } catch (e) {
-    if (e.message && !e.message.startsWith('unsupported')) {
-      console.log(e.stack);
-    }
+  if (!from_init) {
+    get_custom_init(chara_id)(init_chara, true);
   }
 }
 
