@@ -12,13 +12,11 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const ero_common = require('#/event/ero/ero-common');
 const get_participants_and_first_action = require('#/event/ero/snippets/get-participants-and-first-action');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { ero_action_names, ero_hooks } = require('#/data/event/ero-hooks');
-const HookArg = require('#/data/event/hook-arg');
 const { location_enum } = require('#/data/locations');
 
 const handlers = {},
@@ -388,7 +386,6 @@ handlers[ero_hooks.orgasm] = async () => {
         }
     }
   }
-  await ero_common(56, new HookArg(ero_hooks.orgasm), {});
 };
 
 /**

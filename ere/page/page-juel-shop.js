@@ -5,6 +5,8 @@ const {
   get_talent_price,
 } = require('#/system/ero/sys-get-juel-price');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
+const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const print_mark_tab = require('#/page/juel-shop/mark-tab');
@@ -17,6 +19,8 @@ const {
   print_price_and_confirm,
 } = require('#/page/juel-shop/snippets');
 
+const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const {
@@ -25,11 +29,58 @@ const {
   palam_colors,
 } = require('#/data/color-const');
 const { part_abbr } = require('#/data/ero/ero-alias.json');
-const { talent_button_names_and_check_dict } = require('#/data/ero/juel-const');
+const {
+  shop_result_type_enum,
+  talent_button_names_and_check_dict,
+} = require('#/data/ero/juel-const');
 const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { skill_desc, talent_desc } = require('#/data/ero/shop-desc.json');
 const { trained_talent_names } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+
+async function shop_result(chara_id, change, result_type) {
+  switch (result_type) {
+    case shop_result_type_enum.hate:
+      sys_like_chara(
+        chara_id,
+        0,
+        -10 * change * (1 + era.get(`mark:${chara_id}:反抗`)),
+      );
+      await add_juel_out_of_train(chara_id, '反感', 100 * change);
+      break;
+    case shop_result_type_enum.pleasure:
+      sys_like_chara(
+        chara_id,
+        0,
+        10 *
+          change *
+          (1 +
+            era.get(`mark:${chara_id}:淫纹`) +
+            era.get(`mark:${chara_id}:欢愉`)),
+      );
+      await add_juel_out_of_train(chara_id, '顺从', 100 * change);
+      sys_change_lust(chara_id, 100);
+      break;
+    case shop_result_type_enum.slave:
+      sys_like_chara(
+        chara_id,
+        0,
+        (-10 * change) / (era.get(`mark:${chara_id}:同心`) - 1),
+      );
+      await add_juel_out_of_train(chara_id, '羞耻', 100 * change);
+      sys_change_lust(chara_id, 50);
+      sys_like_chara(chara_id, 0, -50);
+      break;
+    case shop_result_type_enum.lover:
+      sys_like_chara(chara_id, 0, -50);
+      await add_juel_out_of_train(
+        chara_id,
+        ['羞耻', '反感'],
+        new Array(2).fill(100 * change),
+      );
+  }
+  result_type > 0 && (await era.waitAnyKey());
+}
 
 module.exports = async (_id) => {
   const total_delta = {};
@@ -723,5 +774,11 @@ module.exports = async (_id) => {
       }
     }
   }
-  await call_ero_script(chara_id, ero_hooks.shop_end, total_delta);
+  if (chara_id > 0) {
+    await shop_result(
+      chara_id,
+      (total_delta.skill || 0) + (total_delta.talent || 0),
+      await call_ero_script(chara_id, ero_hooks.shop_end, total_delta),
+    );
+  }
 };

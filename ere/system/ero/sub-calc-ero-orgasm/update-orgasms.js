@@ -1,7 +1,10 @@
 const era = require('#/era-electron');
 
 const { clean_part_without_item } = require('#/system/ero/sys-calc-ero-part');
-const { check_erect } = require('#/system/ero/sys-calc-ero-status');
+const {
+  check_erect,
+  orgasm_check_list,
+} = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { set_stain } = require('#/system/ero/sys-calc-stain');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
@@ -11,6 +14,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { log_max_wp } = require('#/utils/value-utils');
 
+const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const {
@@ -27,6 +31,109 @@ const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
 let ex_list = undefined;
+
+async function common_orgasm(chara_id) {
+  const chara = get_chara_talk(chara_id);
+  let multi_orgasm = undefined;
+  if (era.get(`nowex:${chara_id}:二重高潮`)) {
+    multi_orgasm = '二';
+  } else if (era.get(`nowex:${chara_id}:三重高潮`)) {
+    multi_orgasm = '三';
+  } else if (era.get(`nowex:${chara_id}:四重高潮`)) {
+    multi_orgasm = '四';
+  } else if (era.get(`nowex:${chara_id}:五重高潮`)) {
+    multi_orgasm = '五';
+  } else if (era.get(`nowex:${chara_id}:多重高潮`)) {
+    multi_orgasm = '多';
+  }
+  multi_orgasm &&
+    era.print([
+      chara.get_colored_name(),
+      ' 发生了',
+      { content: ` ${multi_orgasm}重高潮`, color: buff_colors[2] },
+      '！',
+    ]);
+  orgasm_check_list.forEach((part) => {
+    const part_name = part_names[part];
+    const times =
+      era.get(`nowex:${chara_id}:${part_name}高潮`) +
+      (era.get(`nowex:${chara_id}:无自觉${part_name}高潮`) || 0);
+    if (part === part_enum.breast) {
+      const nipple_times =
+        era.get(`nowex:${chara_id}:乳头高潮`) +
+        era.get(`nowex:${chara_id}:无自觉乳头高潮`);
+      times &&
+        era.print([
+          chara.get_colored_name(),
+          ' 的 ',
+          { content: '胸部', color: buff_colors[2] },
+          ' ',
+          {
+            content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
+            color: buff_colors[2],
+          },
+          '！',
+        ]);
+      nipple_times &&
+        era.print([
+          chara.get_colored_name(),
+          ' 的 ',
+          { content: '乳头', color: buff_colors[2] },
+          ' ',
+          {
+            content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
+            color: buff_colors[2],
+          },
+          '！',
+        ]);
+    } else if (times) {
+      let semen;
+      switch (part) {
+        case part_enum.sadism:
+        case part_enum.masochism:
+          era.print([
+            chara.get_colored_name(),
+            ' 因 ',
+            { content: part_name, color: buff_colors[2] },
+            ' ',
+            {
+              content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
+              color: buff_colors[2],
+            },
+            '！',
+          ]);
+          break;
+        case part_enum.penis:
+          if ((semen = era.get(`nowex:${chara_id}:射精量`)) !== 0) {
+            era.print([
+              chara.get_colored_name(),
+              ' ',
+              semen < 0 ? '在避孕套中' : '',
+              '射出了',
+              {
+                content: ` ${Math.abs(semen)}ml `,
+                color: buff_colors[2],
+              },
+              '精液！',
+            ]);
+          }
+          break;
+        default:
+          era.print([
+            chara.get_colored_name(),
+            ' 的 ',
+            { content: part_name, color: buff_colors[2] },
+            ' ',
+            {
+              content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
+              color: buff_colors[2],
+            },
+            '！',
+          ]);
+      }
+    }
+  });
+}
 
 /**
  * @param {boolean} shown
@@ -88,7 +195,10 @@ async function update_orgasms(shown, ...ids) {
       set_stain(chara_id, part_enum.penis, stain_enum.semen);
     }
     await call_ero_script(chara_id, ero_hooks.orgasm, { shown });
-    if (era.get(`nowex:${chara_id}:TotalEX`)) {
+    if (era.get(`nowex:${chara_id}:TotalEX`) > 0) {
+      if (shown !== false) {
+        await common_orgasm(chara_id);
+      }
       era.set(`tcvar:${chara_id}:刚刚高潮`, true);
     }
     era.get(`nowex:${chara_id}:失贞标记`) &&

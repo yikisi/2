@@ -1,21 +1,14 @@
 const era = require('#/era-electron');
 
 const { add_juel } = require('#/system/ero/sys-calc-juel');
-const {
-  sys_change_lust,
-  sys_change_pressure,
-} = require('#/system/sys-calc-base-cflag');
+const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
   sys_like_chara,
   sys_punish_unfaithful,
 } = require('#/system/sys-calc-chara-others');
 
-const select_yes_or_no = require('#/page/components/select-yes-or-no');
-
 const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_random_name = require('#/utils/naming');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -33,6 +26,7 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { location_enum } = require('#/data/locations');
 
 const current = new Date().getTime();
+
 /** @type {Record<string,function>} */
 const handlers = {};
 
@@ -156,119 +150,6 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
     mother_id || father_id,
     era.get(`love:${mother_id || father_id}`),
   );
-};
-
-/**
- * @param _
- * @param {HookArg} hook
- * @param {{child_id:number}} extra_flag
- */
-handlers[ero_hooks.have_baby] = async (_, hook, extra_flag) => {
-  const father_id = era.get(`cflag:${extra_flag.child_id}:父方角色`),
-    mother_id = era.get(`cflag:${extra_flag.child_id}:母方角色`);
-  let ret, random_param;
-  // chara_id一定是母亲
-  // 虽然不是很情愿，但是还是留一下吧，只有玩家是孩子父亲或者母亲的情况下才拥有命名决定权
-  if ((mother_id && father_id) || hook.arg) {
-    // 如果和玩家没关系，直接用母亲来命名
-    random_param = mother_id;
-  } else if (era.get('flag:惩戒力度') >= 2) {
-    // 性奴和孕袋没有命名权
-    random_param = mother_id || father_id;
-  } else {
-    if (
-      await select_yes_or_no(
-        '',
-        `让${mother_id ? '母亲' : '父亲'}起名`,
-        '亲自起名',
-      )
-    ) {
-      random_param = mother_id || father_id;
-    } else {
-      era.print('想给孩子起什么名字呢？');
-      ret = await era.input();
-    }
-  }
-  if (random_param) {
-    ret = get_random_name(random_param);
-  }
-  era.set(
-    `callname:${extra_flag.child_id}:-2`,
-    era.set(`callname:${extra_flag.child_id}:-1`, ret),
-  );
-  if (
-    random_param &&
-    ret.replace(/\d+$/, '').length !== ret.length &&
-    (await select_yes_or_no([
-      get_chara_talk(mother_id).get_colored_name(),
-      ' 的孩子起名为 ',
-      get_chara_talk(extra_flag.child_id).get_colored_name(),
-      '……',
-      { isBr: true },
-      '要重新取名吗？',
-    ]))
-  ) {
-    era.set(
-      `callname:${extra_flag.child_id}:-2`,
-      era.set(`callname:${extra_flag.child_id}:-1`, await era.input()),
-    );
-  }
-  await era.printAndWait([
-    get_chara_talk(mother_id).get_colored_name(),
-    ' 的孩子最终起名为 ',
-    get_chara_talk(extra_flag.child_id).get_colored_name(),
-    '！',
-  ]);
-  return ret;
-};
-
-handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
-  if (!chara_id) {
-    return;
-  }
-  const change =
-    Math.abs(extra_flag.skill || 0) + Math.abs(extra_flag.talent || 0);
-  switch (hook.arg) {
-    case 1:
-      sys_like_chara(
-        chara_id,
-        0,
-        -10 * change * (1 + era.get(`mark:${chara_id}:反抗`)),
-      );
-      await add_juel_out_of_train(chara_id, '反感', 100 * change);
-      break;
-    case 2:
-      sys_like_chara(
-        chara_id,
-        0,
-        10 *
-          change *
-          (1 +
-            era.get(`mark:${chara_id}:淫纹`) +
-            era.get(`mark:${chara_id}:欢愉`)),
-      );
-      await add_juel_out_of_train(chara_id, '顺从', 100 * change);
-      sys_change_lust(chara_id, 100);
-      break;
-    case 3:
-      sys_like_chara(
-        chara_id,
-        0,
-        (-10 * change) / (era.get(`mark:${chara_id}:同心`) - 1),
-      );
-      await add_juel_out_of_train(chara_id, '羞耻', 100 * change);
-      sys_change_lust(chara_id, 50);
-      sys_like_chara(chara_id, 0, -50);
-      break;
-    case 4:
-      sys_like_chara(chara_id, 0, -50);
-      await add_juel_out_of_train(
-        chara_id,
-        ['羞耻', '反感'],
-        new Array(2).fill(100 * change),
-      );
-  }
-  hook.arg && (await era.waitAnyKey());
 };
 
 /**
