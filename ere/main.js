@@ -82,6 +82,17 @@ module.exports = async () => {
       '天马闪光蹄',
     ],
     [
+      [
+        { color: get_chara_color(4), content: era.get('static:4:name') },
+        '、',
+        {
+          color: get_chara_color(46),
+          content: era.get('static:46:name'),
+        },
+      ],
+      '黑奴一号',
+    ],
+    [
       [{ color: get_chara_color(7), content: era.get('static:7:name') }],
       '雞雞',
     ],

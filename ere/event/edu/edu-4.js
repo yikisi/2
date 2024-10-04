@@ -1,3 +1,8 @@
+/**
+ * @file 丸善斯基 - 育成
+ *
+ * @author 黑奴一号
+ */
 const era = require('#/era-electron');
 
 const { add_event } = require('#/event/queue');
@@ -22,9 +27,10 @@ handlers[
   event_hooks.race_start
 ] = require('#/event/edu/edu-events-4/race-start');
 handlers[event_hooks.race_end] = require('#/event/edu/edu-events-4/race-end');
+
 /**
  * @param {HookArg} hook
- * @param {{train:number,stamina_ratio:number}} extra_flag
+ * @param {TrainSuccessParams} extra_flag
  */
 handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   const chara_talk = get_chara_talk(4);
@@ -94,7 +100,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
 
 /**
  * @param {HookArg} hook
- * @param {{fumble:boolean,train:number,stamina_ratio:number}} extra_flag
+ * @param {TrainFailParams} extra_flag
  */
 handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
   const chara_talk = get_chara_talk(4);
@@ -300,11 +306,6 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
     }
   }
 };
-
-/**
- * @param {HookArg} hook
- * @param {{train:number,stamina_ratio:number}} extra_flag
- */
 
 handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
   if (era.get('flag:当前互动角色') !== 4) {
@@ -1471,10 +1472,6 @@ handlers[event_hooks.crazy_fan_end] = async function () {
 };
 
 /**
- * 丸善斯基的育成事件
- *
- * @author 黑奴一号
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

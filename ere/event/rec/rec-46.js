@@ -1,20 +1,21 @@
+/**
+ * @file 醒目飞鹰 - 招募
+ *
+ * @author 黑奴一号
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { say_by_passer_by } = require('#/utils/chara-talk-factory');
 
 const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { say_by_passer_by } = require('#/utils/chara-talk-factory');
-/**
- * 醒目飞鹰 - -招募
- *
- * @author 黑奴一号
- */
+
 module.exports = {
   /**
    * @param {number} stage_id
@@ -58,7 +59,7 @@ module.exports = {
         await era.printAndWait(
           `究竟是自暴自弃的埋怨还是自嘲式的苦中作乐，亦或二者兼有。就算问${me.actual_name}自己，恐怕也没有准确回复。`,
         );
-        await era.printAndWait();
+        era.println();
         await say_by_passer_by(
           `怒气冲冲的人类教师`,
           `醒目飞鹰！这已经是你这个星期第三次未经许可擅自举办演唱会了！`,

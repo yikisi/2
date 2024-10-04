@@ -1,4 +1,9 @@
-﻿const era = require('#/era-electron');
+﻿/**
+ * @file 丸善斯基 - 日常
+ *
+ * @author 黑奴一号
+ */
+const era = require('#/era-electron');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
@@ -12,11 +17,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const chara_talk = get_chara_talk(4);
-/**
- * 丸善斯基的日常事件,id=4
- *
- * @author 黑奴一号
- */
+
 /** @type {Record<string,function(stage_id:HookArg,extra_flag:*):Promise<boolean>>} */
 const handlers = {};
 

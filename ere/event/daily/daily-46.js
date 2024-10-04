@@ -1,3 +1,8 @@
+/**
+ * @file 醒目飞鹰 - 日常
+ *
+ * @author 黑奴一号
+ */
 const era = require('#/era-electron');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
@@ -971,11 +976,6 @@ handlers[event_hooks.out_river] = async function (hook) {
   }
 };
 
-/**
- * 醒目飞鹰的日常事件,id=46
- *
- * @author 黑奴一号
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

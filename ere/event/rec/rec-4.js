@@ -1,3 +1,8 @@
+/**
+ * @file 丸善斯基 - 招募
+ *
+ * @author 黑奴一号
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -10,11 +15,6 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 丸善斯基的招募事件，id=4
- *
- * @author 黑奴一号
- */
 module.exports = {
   /**
    * @param {number} stage_id

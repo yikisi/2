@@ -1,3 +1,8 @@
+/**
+ * @file 醒目飞鹰 - 爱慕
+ *
+ * @author 黑奴一号
+ */
 const era = require('#/era-electron');
 
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
@@ -9,11 +14,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 
-/**
- * 醒目飞鹰 - 爱慕
- *
- * @author 黑奴一号
- */
 module.exports = async (hook) => {
   const me = get_chara_talk(0),
     chara_talk = new CharaTalk(46),

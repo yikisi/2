@@ -1,3 +1,8 @@
+/**
+ * @file 醒目飞鹰 - 育成
+ *
+ * @author 黑奴一号
+ */
 const era = require('#/era-electron');
 
 const { add_event } = require('#/event/queue');
@@ -27,9 +32,10 @@ handlers[
 ] = require('#/event/edu/edu-events-46/race-start');
 
 handlers[event_hooks.race_end] = require('#/event/edu/edu-events-46/race-end');
+
 /**
  * @param {HookArg} hook
- * @param {{train:number,stamina_ratio:number}} extra_flag
+ * @param {TrainSuccessParams} extra_flag
  */
 handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   const me = get_chara_talk(0),
@@ -120,187 +126,182 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   }
 };
 
-handlers[event_hooks.train_fail] =
-  /**
-   * @param {HookArg} hook
-   * @param {{train:number,stamina_ratio:number}} extra_flag
-   */
-  async (hook, extra_flag) => {
-    const me = get_chara_talk(0),
-      chara_talk = new CharaTalk(46);
-    extra_flag['args'] = extra_flag.fumble
-      ? fumble_result.fumble
-      : fumble_result.fail;
-    if (extra_flag.fumble) {
-      await print_event_name('严禁逞强！', chara_talk);
-      await chara_talk.say_and_wait(`训练员${me.get_adult_sex_title()}.......`);
-      await era.printAndWait(`飞鹰子在训练的时候不甚扭到了脚`);
-      await chara_talk.say_and_wait(`抱歉，飞鹰子太累了所以......`);
-      await era.printAndWait(`可能是接连不断的突击live大量消耗了飞鹰子的体力`);
-      era.printButton('「接下来的街头live需要暂时停止了。」', 1);
-      era.printButton('「试试看街头演出吧？」', 2);
-      hook.arg = (await era.input()) === 1;
-      if (hook.arg) {
+/**
+ * @param {HookArg} hook
+ * @param {TrainFailParams} extra_flag
+ */
+handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
+  const me = get_chara_talk(0),
+    chara_talk = new CharaTalk(46);
+  extra_flag['args'] = extra_flag.fumble
+    ? fumble_result.fumble
+    : fumble_result.fail;
+  if (extra_flag.fumble) {
+    await print_event_name('严禁逞强！', chara_talk);
+    await chara_talk.say_and_wait(`训练员${me.get_adult_sex_title()}.......`);
+    await era.printAndWait(`飞鹰子在训练的时候不甚扭到了脚`);
+    await chara_talk.say_and_wait(`抱歉，飞鹰子太累了所以......`);
+    await era.printAndWait(`可能是接连不断的突击live大量消耗了飞鹰子的体力`);
+    era.printButton('「接下来的街头live需要暂时停止了。」', 1);
+    era.printButton('「试试看街头演出吧？」', 2);
+    hook.arg = (await era.input()) === 1;
+    if (hook.arg) {
+      await chara_talk.say_and_wait(`呜~那些期待着飞鹰子的粉丝们该怎么办呢？`);
+      era.printButton(
+        '「就这样挺着受伤的腿强行表演的话，粉丝们也会担心的吧？」',
+        1,
+      );
+      await era.input();
+      await chara_talk.say_and_wait('.....看来只能这样稍微暂停一会了');
+      await chara_talk.say_and_wait(
+        '那么，为了打起精神来，一起在训练室看有马胜者舞台的表演吧！',
+      );
+      era.printButton('「注意受伤的部位不要用力。」', 1);
+      await era.input();
+      await chara_talk.say_and_wait(
+        `知道了！训练员${me.get_adult_sex_title()}可以抱着我吗？`,
+      );
+      era.printButton(`「嘿咻！」`, 1);
+      await era.input();
+      await chara_talk.say_and_wait(`呜哇，真的抱起来了`, true);
+      await chara_talk.say_and_wait(`身上有种很好闻的气味而且靠的好近`, true);
+      await era.printAndWait(`因为腿伤需要休息所以回到状态需要一点时间。`);
+      era.println();
+      hook.args = -1;
+    } else {
+      await era.printAndWait(
+        `如果能伴随着音乐的节拍，说不定能让飞鹰子好的快一点？`,
+      );
+      await era.printAndWait('想了一会后，决定还是试试。');
+      era.printButton(
+        '「如果心情愉悦的话伤口也会好的快一点，所以去开live吧！」',
+        1,
+      );
+      await era.input();
+      await chara_talk.say_and_wait(`诶，原来还有这种方法吗？飞鹰子会加油的！`);
+      if (Math.random() < extra_flag['args'].ratio.fail_again) {
+        await era.printAndWait(
+          `像以往一样，趁绿色恶魔被你缠住的时候，飞鹰子的例行演出又开始了。`,
+        );
         await chara_talk.say_and_wait(
-          `呜~那些期待着飞鹰子的粉丝们该怎么办呢？`,
+          `各位！看这边！飞鹰子的live现在就要开始了！`,
         );
-        era.printButton(
-          '「就这样挺着受伤的腿强行表演的话，粉丝们也会担心的吧？」',
-          1,
+        await era.printAndWait(
+          `在这边不停伴随着节奏的跳着舞蹈的飞鹰子，像是根本没有受过伤一样。`,
         );
-        await era.input();
-        await chara_talk.say_and_wait('.....看来只能这样稍微暂停一会了');
-        await chara_talk.say_and_wait(
-          '那么，为了打起精神来，一起在训练室看有马胜者舞台的表演吧！',
+        await chara_talk.say_and_wait(`太好了！总算吸引到几个粉丝了！`, true);
+        await era.printAndWait(
+          `因为大脑在思考的时候反应慢了一拍，不小心摔了一跤。`,
         );
-        era.printButton('「注意受伤的部位不要用力。」', 1);
-        await era.input();
-        await chara_talk.say_and_wait(
-          `知道了！训练员${me.get_adult_sex_title()}可以抱着我吗？`,
+        await chara_talk.say_and_wait(`呜，飞鹰子没关系的⭐`);
+        await era.printAndWait(
+          `等到你勉强摆脱手纲小姐时，飞鹰子的伤口好像恶化了。`,
         );
-        era.printButton(`「嘿咻！」`, 1);
-        await era.input();
-        await chara_talk.say_and_wait(`呜哇，真的抱起来了`, true);
-        await chara_talk.say_and_wait(`身上有种很好闻的气味而且靠的好近`, true);
-        await era.printAndWait(`因为腿伤需要休息所以回到状态需要一点时间。`);
-        era.println();
         hook.args = -1;
       } else {
+        await era.printAndWait(`演出的效果意外的好`);
+        await chara_talk.say_and_wait('大家！这边！都看过来！');
         await era.printAndWait(
-          `如果能伴随着音乐的节拍，说不定能让飞鹰子好的快一点？`,
+          `以平地作为舞台，取出随身携带的麦克风，飞鹰子的小小舞台就出现了。`,
         );
-        await era.printAndWait('想了一会后，决定还是试试。');
-        era.printButton(
-          '「如果心情愉悦的话伤口也会好的快一点，所以去开live吧！」',
-          1,
+        await chara_talk.say_and_wait(`♪`);
+        await era.printAndWait(
+          `慢慢的，从无人问津，到稀疏的人群，再到人们纷纷聚集在一起。`,
         );
+        await era.printAndWait(`河岸边的草地上聚满了人群。`);
+        era.printButton('「看来效果很好啊」', 1);
         await era.input();
-        await chara_talk.say_and_wait(
-          `诶，原来还有这种方法吗？飞鹰子会加油的！`,
+        await era.printAndWait(
+          `你也站在不时喝彩的人群之中，静静看着飞鹰子的演出。`,
         );
-        if (Math.random() < extra_flag['args'].ratio.fail_again) {
-          await era.printAndWait(
-            `像以往一样，趁绿色恶魔被你缠住的时候，飞鹰子的例行演出又开始了。`,
-          );
-          await chara_talk.say_and_wait(
-            `各位！看这边！飞鹰子的live现在就要开始了！`,
-          );
-          await era.printAndWait(
-            `在这边不停伴随着节奏的跳着舞蹈的飞鹰子，像是根本没有受过伤一样。`,
-          );
-          await chara_talk.say_and_wait(`太好了！总算吸引到几个粉丝了！`, true);
-          await era.printAndWait(
-            `因为大脑在思考的时候反应慢了一拍，不小心摔了一跤。`,
-          );
-          await chara_talk.say_and_wait(`呜，飞鹰子没关系的⭐`);
-          await era.printAndWait(
-            `等到你勉强摆脱手纲小姐时，飞鹰子的伤口好像恶化了。`,
-          );
-          hook.args = -1;
-        } else {
-          await era.printAndWait(`演出的效果意外的好`);
-          await chara_talk.say_and_wait('大家！这边！都看过来！');
-          await era.printAndWait(
-            `以平地作为舞台，取出随身携带的麦克风，飞鹰子的小小舞台就出现了。`,
-          );
-          await chara_talk.say_and_wait(`♪`);
-          await era.printAndWait(
-            `慢慢的，从无人问津，到稀疏的人群，再到人们纷纷聚集在一起。`,
-          );
-          await era.printAndWait(`河岸边的草地上聚满了人群。`);
-          era.printButton('「看来效果很好啊」', 1);
-          await era.input();
-          await era.printAndWait(
-            `你也站在不时喝彩的人群之中，静静看着飞鹰子的演出。`,
-          );
-          await era.printAndWait(
-            `演出作战看上去大获成功，${chara_talk.name}的伤口也恢复得更快了.`,
-          );
-          hook.args = 0;
-        }
-      }
-    } else {
-      await print_event_name('保重身体！', chara_talk);
-      await chara_talk.say_and_wait(`......训练员${me.get_adult_sex_title()}`);
-      await era.printAndWait(`飞鹰子`);
-      await era.printAndWait(
-        `校医「你是${chara_talk.sex} 的训练员吧，为什么${chara_talk.sex} 这么疲惫还要冒这份风险？」`,
-      );
-      await era.printAndWait(
-        `无言以对，玩家名只能默默地听着${chara_talk.sex} 的训斥。`,
-      );
-      await chara_talk.say_and_wait(`不对，是我自己要求的。`);
-      await era.printAndWait(`校医「你不知道受伤的话有可能会产生后遗症吗？」`);
-      await era.printAndWait(
-        `训练员手册上也记载了因为平时训练受伤留下后遗症的缘故不得不退役的案例。`,
-      );
-      await era.printAndWait(`尽管如此。`);
-      await me.say_and_wait(`抱歉，下次我会注意的。`);
-      await era.printAndWait(`校医「不要打扰病人休息」`);
-      await era.printAndWait(
-        `校医叹了口气，顺手关上了门，医务室里沉默的二人对视着。`,
-      );
-      era.printButton('「没关系的，飞鹰子就这样好好休息吧」', 1);
-      era.printButton('「......」', 2);
-      hook.arg = (await era.input()) === 1;
-      if (hook.arg) {
-        await chara_talk.say_and_wait(`......嗯，飞鹰子一定很快会好起来的。`);
-        await chara_talk.say_and_wait(
-          `飞鹰子有的时候也过于急躁了，所以不全是训练员${me.get_adult_sex_title()}的错哦。`,
+        await era.printAndWait(
+          `演出作战看上去大获成功，${chara_talk.name}的伤口也恢复得更快了.`,
         );
-        era.printButton('「谢谢你，飞鹰子」', 1);
-        await era.input();
-        await chara_talk.say_and_wait(
-          `嗯，训练员${me.get_adult_sex_title()}，可以把放在训练室中的杂志帮我拿过来吗？`,
-        );
-        await me.say_and_wait(`好的，飞鹰子也要好好休息。`);
-        await chara_talk.say_and_wait(`嗯。`);
-        await era.printAndWait(`轻轻关上了医务室的门，飞鹰子似乎已经睡下了。`);
-        hook.arg = 0;
-      } else {
-        if (Math.random() < extra_flag['args'].ratio.fail_again) {
-          await chara_talk.say_and_wait(`训练员${me.get_adult_sex_title()}。`);
-          await era.printAndWait(`飞鹰子抢在你之前打破了沉默。`);
-          await chara_talk.say_and_wait(`可以握着我的手吗？`);
-          await era.printAndWait(`飞鹰子的目光从天花板慢慢移向了窗外。`);
-          await chara_talk.say_and_wait(`与朋友们分开，也是在这个夕阳的时候。`);
-          await chara_talk.say_and_wait('好痛！');
-          await me.say_and_wait(`飞鹰子！`);
-          await chara_talk.say_and_wait(
-            `训练员${me.get_adult_sex_title()}，可以再稍微靠近一点吗？`,
-          );
-          await chara_talk.say_and_wait(
-            `已经与那么多朋友分开了，我不想在失去训练员${me.get_adult_sex_title()}了。`,
-          );
-          await era.printAndWait(
-            `紧紧抱住了哽咽着的飞鹰子，${me.actual_name}看着巨大的金黄色物体慢慢被地平线吞没。`,
-          );
-          await era.printAndWait(`漫长的黑夜要到了。`);
-          hook.arg = -1;
-        } else {
-          await chara_talk.say_and_wait(`训练员${me.get_adult_sex_title()}`);
-          await era.printAndWait(`飞鹰子呼唤着你的名字。`);
-          await era.printAndWait(
-            `不知为何，你紧紧握住了${chara_talk.sex} 的手。`,
-          );
-          await chara_talk.say_and_wait(
-            `我能感受到，训练员${me.get_adult_sex_title()}那温暖的大手`,
-          );
-          await chara_talk.say_and_wait(`感觉稍微好点了。`);
-          await me.say_and_wait(`我就在这里，哪里也不会去！`);
-          await chara_talk.say_and_wait(
-            `训练员${me.get_adult_sex_title()}，真温柔呢。`,
-          );
-          await era.printAndWait(`飞鹰子将大手放到了自己的脸庞`);
-          await chara_talk.say_and_wait(`就这样，好好休息一会吧。`);
-          await era.printAndWait(`没过多久，飞鹰子就这样睡着了。`);
-          await era.printAndWait(`悄悄关上房门后，你离开了医务室。`);
-          await era.printAndWait(`飞鹰子很快就恢复了活力。`);
-          hook.arg = 0;
-        }
+        hook.args = 0;
       }
     }
-  };
+  } else {
+    await print_event_name('保重身体！', chara_talk);
+    await chara_talk.say_and_wait(`......训练员${me.get_adult_sex_title()}`);
+    await era.printAndWait(`飞鹰子`);
+    await era.printAndWait(
+      `校医「你是${chara_talk.sex} 的训练员吧，为什么${chara_talk.sex} 这么疲惫还要冒这份风险？」`,
+    );
+    await era.printAndWait(
+      `无言以对，玩家名只能默默地听着${chara_talk.sex} 的训斥。`,
+    );
+    await chara_talk.say_and_wait(`不对，是我自己要求的。`);
+    await era.printAndWait(`校医「你不知道受伤的话有可能会产生后遗症吗？」`);
+    await era.printAndWait(
+      `训练员手册上也记载了因为平时训练受伤留下后遗症的缘故不得不退役的案例。`,
+    );
+    await era.printAndWait(`尽管如此。`);
+    await me.say_and_wait(`抱歉，下次我会注意的。`);
+    await era.printAndWait(`校医「不要打扰病人休息」`);
+    await era.printAndWait(
+      `校医叹了口气，顺手关上了门，医务室里沉默的二人对视着。`,
+    );
+    era.printButton('「没关系的，飞鹰子就这样好好休息吧」', 1);
+    era.printButton('「......」', 2);
+    hook.arg = (await era.input()) === 1;
+    if (hook.arg) {
+      await chara_talk.say_and_wait(`......嗯，飞鹰子一定很快会好起来的。`);
+      await chara_talk.say_and_wait(
+        `飞鹰子有的时候也过于急躁了，所以不全是训练员${me.get_adult_sex_title()}的错哦。`,
+      );
+      era.printButton('「谢谢你，飞鹰子」', 1);
+      await era.input();
+      await chara_talk.say_and_wait(
+        `嗯，训练员${me.get_adult_sex_title()}，可以把放在训练室中的杂志帮我拿过来吗？`,
+      );
+      await me.say_and_wait(`好的，飞鹰子也要好好休息。`);
+      await chara_talk.say_and_wait(`嗯。`);
+      await era.printAndWait(`轻轻关上了医务室的门，飞鹰子似乎已经睡下了。`);
+      hook.arg = 0;
+    } else {
+      if (Math.random() < extra_flag['args'].ratio.fail_again) {
+        await chara_talk.say_and_wait(`训练员${me.get_adult_sex_title()}。`);
+        await era.printAndWait(`飞鹰子抢在你之前打破了沉默。`);
+        await chara_talk.say_and_wait(`可以握着我的手吗？`);
+        await era.printAndWait(`飞鹰子的目光从天花板慢慢移向了窗外。`);
+        await chara_talk.say_and_wait(`与朋友们分开，也是在这个夕阳的时候。`);
+        await chara_talk.say_and_wait('好痛！');
+        await me.say_and_wait(`飞鹰子！`);
+        await chara_talk.say_and_wait(
+          `训练员${me.get_adult_sex_title()}，可以再稍微靠近一点吗？`,
+        );
+        await chara_talk.say_and_wait(
+          `已经与那么多朋友分开了，我不想在失去训练员${me.get_adult_sex_title()}了。`,
+        );
+        await era.printAndWait(
+          `紧紧抱住了哽咽着的飞鹰子，${me.actual_name}看着巨大的金黄色物体慢慢被地平线吞没。`,
+        );
+        await era.printAndWait(`漫长的黑夜要到了。`);
+        hook.arg = -1;
+      } else {
+        await chara_talk.say_and_wait(`训练员${me.get_adult_sex_title()}`);
+        await era.printAndWait(`飞鹰子呼唤着你的名字。`);
+        await era.printAndWait(
+          `不知为何，你紧紧握住了${chara_talk.sex} 的手。`,
+        );
+        await chara_talk.say_and_wait(
+          `我能感受到，训练员${me.get_adult_sex_title()}那温暖的大手`,
+        );
+        await chara_talk.say_and_wait(`感觉稍微好点了。`);
+        await me.say_and_wait(`我就在这里，哪里也不会去！`);
+        await chara_talk.say_and_wait(
+          `训练员${me.get_adult_sex_title()}，真温柔呢。`,
+        );
+        await era.printAndWait(`飞鹰子将大手放到了自己的脸庞`);
+        await chara_talk.say_and_wait(`就这样，好好休息一会吧。`);
+        await era.printAndWait(`没过多久，飞鹰子就这样睡着了。`);
+        await era.printAndWait(`悄悄关上房门后，你离开了医务室。`);
+        await era.printAndWait(`飞鹰子很快就恢复了活力。`);
+        hook.arg = 0;
+      }
+    }
+  }
+};
 
 handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
   if (era.get('flag:当前互动角色') !== 46) {
@@ -1099,11 +1100,8 @@ handlers[event_hooks.out_church] = async () => {
     await era.printAndWait(`之后，你的耳边传来了三女神的低语。`);
   }
 };
+
 /**
- * 醒目飞鹰 - 育成
- *
- * @author 黑奴一号
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

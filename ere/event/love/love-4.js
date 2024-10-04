@@ -1,3 +1,8 @@
+/**
+ * @file 丸善斯基 - 爱慕
+ *
+ * @author 黑奴一号
+ */
 const era = require('#/era-electron');
 
 const {
@@ -12,11 +17,6 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { add_event, cb_enum } = require('#/event/queue');
 
-/**
- * 丸善斯基 - 爱慕
- *
- * @author 黑奴一号
- */
 module.exports = async (hook) => {
   const me = get_chara_talk(0),
     chara_talk = get_chara_talk(4),
