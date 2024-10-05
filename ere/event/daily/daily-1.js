@@ -1,3 +1,8 @@
+/**
+ * @file 特别周 - 日常
+ *
+ * @author wwm
+ */
 const era = require('#/era-electron');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
@@ -322,11 +327,6 @@ handlers[event_hooks.load_talk] = async () => {
   }
 };
 
-/**
- * 特别周的日常事件，角色id=1
- *
- * @author wwm
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

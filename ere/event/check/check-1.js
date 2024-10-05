@@ -12,7 +12,6 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const SpeEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-1');
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -68,9 +67,11 @@ module.exports = class extends CustomizedCheck {
   check_next_week() {
     const edu_weeks = era.get('cflag:1:育成回合计时');
     if (edu_weeks < 3 * 48 + 4) {
-      const edu_marks = new EduEventMarks(1),
+      const edu_marks = new SpeEduMarks(),
         event_obj = new EventObject(1, cb_enum.edu),
-        event_obj_special = new EventObject(1, cb_enum.edu, true);
+        event_obj_special = new EventObject(1, cb_enum.edu, true).set_arg(
+          edu_weeks,
+        );
       check_and_add_event(
         edu_marks,
         edu_weeks,

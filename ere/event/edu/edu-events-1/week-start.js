@@ -4,7 +4,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-module.exports = async (hook, extra_flag) => {
+module.exports = async () => {
   const spe = get_chara_talk(1);
   const me = get_chara_talk(0);
   const mom = get_chara_talk(4);

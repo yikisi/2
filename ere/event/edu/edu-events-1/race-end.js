@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -9,7 +8,7 @@ const { race_enum } = require('#/data/race/race-const');
 
 /**
  * @param {HookArg} hook
- * @param {{race:number,rank:number,relation_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
   const spe = get_chara_talk(1);

@@ -1,4 +1,12 @@
+/**
+ * @file 特别周 - 育成
+ *
+ * @author wwm
+ */
 const era = require('#/era-electron');
+
+const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -11,20 +19,19 @@ const { attr_names, fumble_result } = require('#/data/train-const');
 
 const handlers = {};
 
-const { base_calc } = require('#/system/sys-calc-base-cflag');
-const { relation_calc } = require('#/system/sys_calc_chara_others');
-
 handlers[
   event_hooks.week_start
 ] = require('#/event/edu/edu-events-1/week-start');
+
 handlers[
   event_hooks.race_start
 ] = require('#/event/edu/edu-events-1/race-start');
+
 handlers[event_hooks.race_end] = require('#/event/edu/edu-events-1/race-end');
 
 /**
  * @param {HookArg} hook
- * @param {{train:number,stamina_ratio:number}} extra_flag
+ * @param {TrainSuccessParams} extra_flag
  */
 handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   const spe = get_chara_talk(1);
@@ -51,9 +58,13 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   }
 };
 
+/**
+ * @param {HookArg} hook
+ * @param {TrainFailParams} extra_flag
+ */
 handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
   const spe = get_chara_talk(1);
-  extra_flag['args'] = extra_flag.fumble
+  extra_flag.args = extra_flag.fumble
     ? fumble_result.fumble
     : fumble_result.fail;
   hook.arg = 0;
@@ -131,7 +142,7 @@ handlers[event_hooks.school_atrium] = async (hook, __, event_object) => {
       await era.printAndWait(
         '你并没有把这件小插曲放在心上，不过特别周的眉头似乎仍然紧紧皱着……',
       );
-      base_calc.sys_change_motivation(1, -1);
+      sys_change_motivation(1, -1);
       return false;
     } else {
       await era.printAndWait(
@@ -169,7 +180,7 @@ handlers[event_hooks.school_atrium] = async (hook, __, event_object) => {
           '即使嘴上这么严厉地说着，你还是将自己的便当分了一部分给特别周。',
         );
         await spe.say_and_wait('谢谢你，训练员……我以后一定不会胡乱消费了！');
-        relation_calc.sys_like_chara(1, 0, 10);
+        sys_like_chara(1, 0, 10);
         return false;
       } else {
         const cur_coin = era.get('flag:当前马币');
@@ -205,10 +216,6 @@ handlers[event_hooks.school_atrium] = async (hook, __, event_object) => {
 };
 
 /**
- * 特别周 - 育成
- *
- * @author wwm
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object
