@@ -514,9 +514,9 @@ module.exports = class extends CustomizedBase {
     await grand.say_and_wait([
       '最近……',
       sys_get_colored_callname(89, 90),
-      '和',
+      ' 和 ',
       sys_get_colored_callname(89, 91),
-      '似乎察觉到了什么，一直在劝我放弃。',
+      ' 似乎察觉到了什么，一直在劝我放弃。',
     ]);
     await grand.say_and_wait([
       '我知道',
