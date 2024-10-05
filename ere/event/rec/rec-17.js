@@ -6,7 +6,7 @@
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const check_before_rec = require('#/event/rec/snippets/check-before-rec');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const CharaTalk = require('#/utils/chara-talk');
 
@@ -15,11 +15,11 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = {
-  override: true,
-  async run(hook) {
-    if (hook === event_hooks.recruit) {
-      if (await check_before_rec(17)) {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
+    if (stage === event_hooks.recruit) {
+      if (await this.check_before_rec()) {
         return false;
       }
       era.set('callname:17:-1', era.set('callname:17:-2', '露娜'));
@@ -236,7 +236,7 @@ module.exports = {
         event_hooks.recruit_start,
         new EventObject(17, cb_enum.recruit),
       );
-    } else if (hook === event_hooks.recruit_start) {
+    } else if (stage === event_hooks.recruit_start) {
       const chara_17 = new CharaTalk(17);
       era.drawLine();
       await era.printAndWait(
@@ -310,5 +310,5 @@ module.exports = {
       new EventMarks(0).sub(event_hooks.recruit_start);
     }
     return true;
-  },
+  }
 };

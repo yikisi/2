@@ -8,7 +8,7 @@
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const check_before_rec = require('#/event/rec/snippets/check-before-rec');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -119,9 +119,9 @@ async function common_comments(me, daiya, other) {
   });
 }
 
-module.exports = {
-  override: true,
-  async run(stage_id) {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_obj) {
     const me = get_chara_talk(0),
       mcqueen = get_chara_talk(13),
       daiya = get_chara_talk(67),
@@ -129,8 +129,8 @@ module.exports = {
     const event_marks = new EventMarks(0);
     const event_object = new EventObject(67, cb_enum.recruit);
     let ret;
-    if (stage_id === event_hooks.recruit) {
-      if (await check_before_rec(67)) {
+    if (stage === event_hooks.recruit) {
+      if (await this.check_before_rec()) {
         return false;
       }
       await era.printAndWait(
@@ -319,7 +319,7 @@ module.exports = {
         }
         return false;
       }
-    } else if (stage_id === event_hooks.out_start) {
+    } else if (stage === event_hooks.out_start) {
       if (era.get('flag:当前互动角色')) {
         era.setVerticalAlign('middle');
         era.printInColRows(
@@ -475,5 +475,5 @@ module.exports = {
       }
       return true;
     }
-  },
+  }
 };

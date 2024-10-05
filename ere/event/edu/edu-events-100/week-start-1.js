@@ -527,7 +527,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '放弃自己的赃款来保持自己的名誉，还是让 ',
       tokino.get_colored_name(),
-      ' 曝光自己作弊的事，让赃款和名誉一起丢失。……',
+      ' 曝光自己作弊的事，让赃款和名誉一起丢失……',
       me.get_colored_name(),
       ' 想自己还没有疯魔到选后者的地步。',
     ]);

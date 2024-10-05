@@ -643,7 +643,7 @@ module.exports = (handlers) => {
       await daiya.say_and_wait('是～～♪');
       await palmer.say_and_wait('我要发球啰～！嘿──！');
       await era.printAndWait(
-        `纸气球被${daiya.sex}拍到了高空。……却迟迟都不落下来。`,
+        `纸气球被${daiya.sex}拍到了高空……却迟迟都不落下来。`,
       );
       await turbo.say_and_wait(
         '好──来吧来吧来吧来吧！来吧来吧…………还没要来吗────！？',

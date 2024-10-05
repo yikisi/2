@@ -230,7 +230,7 @@ module.exports = (handlers) => {
         sys_get_colored_callname(attacker.id, defender.id),
         ' 决胜服上的念珠般左右拧动着，享受着那个硬邦邦，带着回弹的触感.',
       ]);
-      await defender.say_and_wait(['……啊❤️～……嗯、呜～……呀❤️']);
+      await defender.say_and_wait(['……啊❤️～嗯、呜～呀❤️']);
       await attacker.print_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
         ' 就会因为 ',

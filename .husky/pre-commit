@@ -6,6 +6,7 @@ node generate-basement-factory.js
 node generate-check-factory.js
 node generate-init-factory.js
 node generate-mec-factory.js
+node generate-rec-factory.js
 cd ../..
-git add ere/event/basement ere/event/check ere/event/init ere/event/mec
+git add ere/event/basement ere/event/check ere/event/init ere/event/mec ere/event/rec
 npm run lint

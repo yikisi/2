@@ -71,7 +71,7 @@ module.exports = async (hook, _, event_object) => {
         `是的，这也是学园的宣传活动之一。询问一般大众希望看到哪套决胜服──`,
       );
       await ag.say_and_wait(
-        `而于『美丽梦想杯』登场的婚纱决胜服获得了第一名。……你是婚纱决胜服的主人，所以就决定麻烦你了。`,
+        `而于『美丽梦想杯』登场的婚纱决胜服获得了第一名……你是婚纱决胜服的主人，所以就决定麻烦你了。`,
       );
       await maya.say_and_wait(
         '哇！人家也很喜欢当时那套服装～！咦？对了？这样一来──',
@@ -124,7 +124,7 @@ module.exports = async (hook, _, event_object) => {
         `但是过了好几天${maya.sex}都迟迟未决定伴行者人选。正当 ${me.name} 想着究竟是怎么回事时……`,
       );
       await ag.say_and_wait(
-        `打扰了。我是来询问你的意见的。……你应该知道我想问什么吧？`,
+        `打扰了。我是来询问你的意见的……你应该知道我想问什么吧？`,
       );
       era.printButton('「是伴行者的事吧？」', 1);
       await era.input();
@@ -320,7 +320,7 @@ module.exports = async (hook, _, event_object) => {
       );
       if ((await era.input()) === 1) {
         await maya.say_and_wait('……！！');
-        await maya.say_and_wait('人、人家……被攻陷了。……人家被求婚了～～！');
+        await maya.say_and_wait('人、人家……被攻陷了……人家被求婚了～～！');
         era.printButton('「我还没求婚哦！？」', 1);
         await era.input();
         await maya.say_and_wait(

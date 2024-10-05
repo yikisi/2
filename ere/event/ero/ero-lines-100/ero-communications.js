@@ -283,7 +283,7 @@ module.exports = (handlers) => {
         '。',
       ]);
       await defender.say_and_wait('唔！……❤️');
-      await defender.say_and_wait('❤️～……');
+      await defender.say_and_wait('❤️～');
       await defender.say_and_wait([
         '……',
         sys_get_colored_callname(defender.id, attacker.id),
@@ -295,7 +295,7 @@ module.exports = (handlers) => {
         '如同被巨兽盯上的猎物一般，越是挣扎，越是令其兴奋。',
       );
       await defender.say_and_wait([
-        '哈❤️～……我会温柔些的哦，',
+        '哈❤️～我会温柔些的哦，',
         sys_get_colored_callname(defender.id, attacker.id),
         '。',
       ]);

@@ -421,7 +421,7 @@ module.exports = async (hook, _, event_object) => {
       await daiya.say_and_wait('这样呀……那我就点那些──');
       await mcqueen.say_and_wait('这里才没有那些菜色！黄金船还是快点回家吧！');
       await era.printAndWait(
-        '后来，里见光钻点了目白麦昆推荐的甜点。……这是考量了热量问题后的选择。',
+        '后来，里见光钻点了目白麦昆推荐的甜点……这是考量了热量问题后的选择。',
       );
       era.println();
       wait_flag = get_attr_and_print_in_event(
@@ -614,7 +614,7 @@ module.exports = async (hook, _, event_object) => {
     await daiya.say_and_wait('一起窥探未知的世界、一起发现新东西──');
     await daiya.say_and_wait('一起尝试新的体验，也一起寻找更开心的事情……');
     await daiya.say_and_wait(
-      '只是稍微回想一下就充满了很多美好的回忆。……然后我就明白了。',
+      '只是稍微回想一下就充满了很多美好的回忆……然后我就明白了。',
     );
     await daiya.say_and_wait('有训练员在身边的时候……所有的兴奋都是加倍的！');
     await daiya.say_and_wait(

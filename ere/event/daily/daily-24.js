@@ -82,7 +82,7 @@ module.exports = {
         } else if (era.get('status:24:熬夜')) {
           if (relation > 75) {
             talk_arr = [
-              '呼啊……今天为了做便当所以很早起。……耶嘿嘿，好好期待中午吧♪」',
+              '呼啊……今天为了做便当所以很早起……耶嘿嘿，好好期待中午吧♪」',
             ];
           } else {
             talk_arr = [

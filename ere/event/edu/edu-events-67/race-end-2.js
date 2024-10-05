@@ -30,7 +30,7 @@ module.exports = (handlers) => {
       );
       await say_by_passer_by_and_wait(
         '观众B',
-        `${daiya.sex}的实力就像是去年崛起的北部玄驹一样。……不对，甚至可以说是超越了……」`,
+        `${daiya.sex}的实力就像是去年崛起的北部玄驹一样……不对，甚至可以说是超越了……」`,
       );
       await say_by_passer_by_and_wait(
         '观众A',
@@ -68,7 +68,7 @@ module.exports = (handlers) => {
       ' 吧。',
     ]);
     await mcqueen.say_and_wait(`说不定……${daiya.sex}们的下一场比赛也会是呢。`);
-    await teio.say_and_wait('说不定喔～……是说，麦昆。');
+    await teio.say_and_wait('说不定喔～是说，麦昆。');
     await teio.say_and_wait('我现在觉得超～～～～想要跑步的！');
     await mcqueen.say_and_wait('哎呀，还真巧呢。我也是这么想的。');
     await teio.say_and_wait('那我们一起跑到车站吧！');
@@ -155,7 +155,7 @@ module.exports = (handlers) => {
       ' 来对决。',
     ]);
     await daiya.say_and_wait(
-      '全都被你看穿了呢。……嗯，这么看来，以后我自己做决定应该也没问题了。',
+      '全都被你看穿了呢……嗯，这么看来，以后我自己做决定应该也没问题了。',
     );
     era.printButton('「不行，还是要跟我商量一下吧！？」', 1);
     await era.input();
@@ -232,7 +232,7 @@ module.exports = (handlers) => {
       );
       await daiya.say_and_wait('……真不甘心……我明明都已经用尽全力了……');
       await daiya.say_and_wait(
-        '明明已经努力到超越自己的极限了。……却还是赢不了……',
+        '明明已经努力到超越自己的极限了……却还是赢不了……',
       );
       await kita.say_and_wait('小钻……');
       await daiya.say_and_wait('是我彻底输了……恭喜你达成连霸，小北。');
@@ -492,7 +492,7 @@ module.exports = (handlers) => {
     );
     await say_by_passer_by_and_wait(
       '观众A',
-      '就算全身沾满了泥土也依旧凛然坚定。……那样的姿态真的好美……」',
+      '就算全身沾满了泥土也依旧凛然坚定……那样的姿态真的好美……」',
     );
     await kita.say_and_wait('唔啊啊啊啊啊啊啊啊！！不甘心、不甘心、不甘心！！');
     await kita.say_and_wait('明明我的状态非常完美的说！');

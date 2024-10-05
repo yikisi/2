@@ -35,7 +35,7 @@ module.exports = (handlers) => {
       await attacker.print_and_wait('……啊哈哈，被发现了呢。');
     } else {
       await defender.say_and_wait([
-        '嗯❤️～……',
+        '嗯❤️～',
         sys_get_colored_callname(defender.id, attacker.id),
         ' 的手法，有点下流呢。',
       ]);
@@ -146,7 +146,7 @@ module.exports = (handlers) => {
       await attacker.print_and_wait('摩擦摩擦……');
       await attacker.print_and_wait('充血的乳首意外的滚烫。');
       await attacker.print_and_wait('指尖传来了不可思议的触感。');
-      await defender.say_and_wait('唔❤️……～');
+      await defender.say_and_wait('唔❤️');
       await attacker.print_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
         ' 咬着牙，忍耐着胸口传来的瘙痒。',

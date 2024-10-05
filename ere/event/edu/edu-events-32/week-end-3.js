@@ -745,7 +745,7 @@ module.exports = (handlers) => {
       await era.printAndWait('直到这时……');
       era.printButton(`「……可以了，${tachyon.sex}们都走了」`, 1);
       await era.input();
-      await tachyon.say_and_wait('哈啊～～………………');
+      await tachyon.say_and_wait('哈啊～～');
       era.println();
       await era.printAndWait([
         tachyon.get_colored_name(),

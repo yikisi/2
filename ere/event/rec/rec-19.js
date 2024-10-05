@@ -6,6 +6,7 @@
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -15,15 +16,15 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = {
-  /**
-   * @param {number} stage_id
-   * @returns {Promise<boolean>}
-   */
-  async run(stage_id) {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
+    if (await this.check_before_rec()) {
+      return;
+    }
     const digital = get_chara_talk(19),
       me = get_chara_talk(0);
-    if (stage_id === event_hooks.recruit) {
+    if (stage === event_hooks.recruit) {
       await print_event_name('是变态啊！是……是吗？（前篇）', digital);
       await era.printAndWait(
         `训练场，原本作为${digital.get_uma_sex_title()}平日训练的地点，今日却挤满了训练员，因为今天不仅只有${digital.get_uma_sex_title()}训练，还有一项重要的活动——选拔赛。`,
@@ -302,7 +303,8 @@ module.exports = {
       era.set('flag:物色对象', 0);
       new EventMarks(0).sub(event_hooks.recruit_start);
       era.set('callname:0:19', '数码');
+      await this.recruit_end();
       return true;
     }
-  },
+  }
 };

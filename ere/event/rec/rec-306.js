@@ -14,6 +14,7 @@ const {
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
+const CustomizedRecruit = require('#/event/rec/rec-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -23,8 +24,9 @@ const GlasseEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-202
 const CoconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-203');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = {
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const riko = get_chara_talk(306),
       me = get_chara_talk(0),
       glasse = get_chara_talk(202),
@@ -137,5 +139,6 @@ module.exports = {
     set('cflag:306:招募状态', recruit_flags.yes);
     new GlasseEduMarks().debuff = 0;
     new CoconEduMarks().debuff = 0;
-  },
+    await this.recruit_end();
+  }
 };

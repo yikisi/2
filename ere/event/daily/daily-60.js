@@ -492,7 +492,7 @@ handlers[event_hooks.celebration] = async () => {
         '把自己脸用辫子埋住的优秀素质被商店街的街坊们团团围住，',
       );
       await era.printAndWait(
-        `看来${nice_nature.sex}似乎会十分愉快的度过这个粉丝祭……。`,
+        `看来${nice_nature.sex}似乎会十分愉快的度过这个粉丝祭……`,
       );
       break;
     case 47:
@@ -500,7 +500,7 @@ handlers[event_hooks.celebration] = async () => {
       await nice_nature.say_and_wait('喂喂？是我哦？不是诈骗电话是本人哦？');
       await era.printAndWait('电话那头传来了熟悉的声音，正是优秀素质。');
       await nice_nature.say_and_wait(
-        '那个啊，能麻烦你来公园一趟吗？就现在。……嗯，等会见！',
+        '那个啊，能麻烦你来公园一趟吗？就现在……嗯，等会见！',
       );
       era.drawLine({ content: '⏰到了公园⏰' });
       await nice_nature.say_and_wait(

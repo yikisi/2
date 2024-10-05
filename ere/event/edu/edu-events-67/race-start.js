@@ -28,7 +28,7 @@ async function first_g1_event(daiya) {
   era.printButton('「是你的双亲打来为你加油吗？」', 1);
   await era.input();
   await daiya.say_and_wait(
-    '是的。……呵呵呵！父亲也跟训练员一样，一直担心我有没有遗漏什么东西。',
+    '是的……呵呵呵！父亲也跟训练员一样，一直担心我有没有遗漏什么东西。',
   );
   await daiya.say_and_wait(
     '每次到了比赛前，都是身边的人比我还要更紧张的感觉呢。',
@@ -619,7 +619,7 @@ module.exports = async (_, extra_flag) => {
       `是的，之前我一直觉得要跑得像『知名赛${daiya.get_uma_sex_title()}』是我的责任。`,
     );
     await daiya.say_and_wait(
-      '要跑得能够超越麦昆、甚至让大家觉得我可以进军国外。……这是我原本的想法。',
+      '要跑得能够超越麦昆、甚至让大家觉得我可以进军国外……这是我原本的想法。',
     );
     await daiya.say_and_wait('但这其实是不对的。');
     await daiya.say_and_wait('──我想让大家从我的身上感受到可能性。');

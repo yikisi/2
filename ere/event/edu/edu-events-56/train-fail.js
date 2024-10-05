@@ -319,7 +319,7 @@ module.exports = async (hook, extra_flag) => {
             kitaru.get_colored_name(),
             ' 想要发颤的脚腕，轻轻用力，发泄般地使用起这对足穴飞机杯。',
           ]);
-          await kitaru.say_and_wait(['哈～哈～……哈！']);
+          await kitaru.say_and_wait(['哈～哈～哈！']);
           await kitaru.say_and_wait(['去了❤️去了❤️咕……']);
           await era.printAndWait([
             '浓白粘稠的精液，以被 ',

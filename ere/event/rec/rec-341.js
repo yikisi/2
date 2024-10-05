@@ -7,14 +7,16 @@ const { get, printAndWait, set } = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const CustomizedRecruit = require('#/event/rec/rec-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = {
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const me = get_chara_talk(0),
       god = get_chara_talk(341);
     await print_event_name('流转变换，化为你所看见的模样', god);
@@ -59,5 +61,6 @@ module.exports = {
     set('flag:当前互动角色', 341);
     set('cflag:341:招募状态', recruit_flags.yes);
     set('cflag:341:育成回合计时', 'x');
-  },
+    await this.recruit_end();
+  }
 };

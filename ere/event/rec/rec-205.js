@@ -11,18 +11,18 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
+const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
-const print_event_name = require('#/event/snippets/print-event-name');
 
-module.exports = {
-  override: true,
-  /** @param {number} stage */
-  async run(stage) {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const chairman = get_chara_talk(302),
       me = get_chara_talk(0),
       vp = get_chara_talk(205);
@@ -505,5 +505,5 @@ module.exports = {
       era.set('flag:当前互动角色', 205);
     }
     return false;
-  },
+  }
 };

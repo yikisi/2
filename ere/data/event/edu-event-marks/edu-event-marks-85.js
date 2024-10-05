@@ -1,9 +1,6 @@
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 class RubyEduMarks extends EduEventMarks {
-  // 初招募
-  after_recruit;
-
   // 车站 - 逛商场
   station;
 

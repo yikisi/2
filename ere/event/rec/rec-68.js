@@ -6,6 +6,7 @@
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -13,8 +14,9 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = {
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const kita = get_chara_talk(68),
       me = get_chara_talk(0);
     await era.printAndWait(
@@ -271,5 +273,5 @@ module.exports = {
     } else {
       await era.printAndWait(`${me.name} 驱散心中的悸动，转身离开了训练场。`);
     }
-  },
+  }
 };

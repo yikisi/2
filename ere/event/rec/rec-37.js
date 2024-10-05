@@ -6,6 +6,7 @@
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -95,14 +96,8 @@ async function why_choose_me(me, flash, me_is_new) {
   await era.printAndWait(`${me.name} 点了点头。`);
 }
 
-module.exports = {
-  override: true,
-  /**
-   * @param {number} stage
-   * @param _
-   * @param {EventObject} event_object
-   */
-  async run(stage, _, event_object) {
+module.exports = class extends CustomizedRecruit {
+  async recruit(stage, event_object) {
     const event_marks = new EventMarks(0),
       flash = get_chara_talk(37),
       me = get_chara_talk(0);
@@ -782,11 +777,7 @@ module.exports = {
             event_marks.sub(event_hooks.recruit);
             era.set('cflag:37:招募状态', recruit_flags.yes);
             era.set('flag:物色对象', 0);
-            await era.printAndWait([
-              { isBr: true },
-              flash.get_colored_name(),
-              ' 加入了队伍！',
-            ]);
+            await this.recruit_end();
           } else {
             event_marks.sub(event_hooks.recruit);
             era.set('flag:物色对象', 0);
@@ -882,5 +873,5 @@ module.exports = {
       era.set('cflag:37:招募状态', -2);
       return true;
     }
-  },
+  }
 };

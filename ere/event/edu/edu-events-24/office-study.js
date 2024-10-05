@@ -142,7 +142,7 @@ module.exports = (handlers) => {
         maya.get_child_sex_title(),
         '』……！',
       ]);
-      await city.say_and_wait('嗯，不用在意我没关系。……好好加油吧。');
+      await city.say_and_wait('嗯，不用在意我没关系……好好加油吧。');
       await snow.say_and_wait('是的！好，我要加油～！');
       await era.printAndWait([
         '为了提升速度进行的折返跑，似乎对 ',

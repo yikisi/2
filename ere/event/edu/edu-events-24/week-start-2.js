@@ -616,7 +616,7 @@ module.exports = (handlers) => {
       await amazon.say_and_wait(
         '不过，这也是个好机会。你就仔细看好赢家的脸，把这份不甘化作动力吧。',
       );
-      await amazon.say_and_wait('我也是这么变强的。……嘿嘿。');
+      await amazon.say_and_wait('我也是这么变强的……嘿嘿。');
       await maya.say_and_wait('唔唔唔……为了变强……为了成长……！');
       await get_chara_talk(46).say_and_wait('大家～～！谢谢你们～～☆');
       await say_by_passer_by_and_wait('观众', '唔哦哦哦哦哦！！飞鹰子──！！');

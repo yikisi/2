@@ -7,6 +7,7 @@ const era = require('#/era-electron');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -15,20 +16,17 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = {
-  /**
-   * @param {number} hook
-   * @param {Record<string,any>} extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise<boolean>}
-   */
-  async run(hook, extra_flag, event_object) {
+module.exports = class extends CustomizedRecruit {
+  async recruit(stage, event_object) {
     const rice = get_chara_talk(30),
       me = get_chara_talk(0),
       callname = era.get('cflag:0:性别') === 1 ? '哥哥' : '姐姐',
       chara_self_name = era.get('callname:30:30');
-    switch (hook) {
+    switch (stage) {
       case event_hooks.recruit:
+        if (await this.check_before_rec()) {
+          return;
+        }
         era.print(
           `诶？那${
             rice.sex_code ? '小伙子' : '小姑娘'
@@ -226,7 +224,8 @@ module.exports = {
           event_hooks.week_start,
           new EventObject(30, cb_enum.edu).set_arg('beginning'),
         );
+        await this.recruit_end();
         return true;
     }
-  },
+  }
 };

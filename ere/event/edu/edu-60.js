@@ -411,7 +411,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       ret = await era.input();
       if (ret === 1) {
         await nature.say_and_wait(
-          '真是的……你等一下，我简单煮点东西。……虽然我不保证味道啦。',
+          '真是的……你等一下，我简单煮点东西……虽然我不保证味道啦。',
         );
         await era.printAndWait(
           `几分钟后，优秀素质端了${nature.sex}做的炒饭来给 ${me.name}。`,
@@ -532,7 +532,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       era.drawLine();
       await era.printAndWait('两队互不相让，比分保持0比0，战况渐渐白热化。');
       await nature.say_and_wait(
-        '哇，战况越来越激烈了～……不过，训练员看起来精疲力尽耶。',
+        '哇，战况越来越激烈了～不过，训练员看起来精疲力尽耶。',
       );
       await nature.say_and_wait(
         '不偏心地说，你已经很努力了，差不多该换人上场了吧。',
@@ -540,7 +540,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       era.printButton('「我还能继续！……」', 1);
       await era.input();
       await nature.say_and_wait(
-        '唉，真热血。……啊，我懂了。有我的照料，你就会努力下去吧。',
+        '唉，真热血……啊，我懂了。有我的照料，你就会努力下去吧。',
       );
       await nature.say_and_wait('我去拿喝的过来，请乖乖坐在这里喔～？');
       await nature.say_and_wait('真是的……我看看，执行委员会的帐篷在……');
@@ -779,7 +779,7 @@ handlers[event_hooks.back_school] = async (hook, _, event_object) => {
     );
     era.drawLine();
     await nice_nature.say_and_wait(
-      '哦哦，好有活力的海豚呢～……咦？噗哇！？等一下，水！有水──',
+      '哦哦，好有活力的海豚呢～咦？噗哇！？等一下，水！有水──',
     );
     await nice_nature.say_and_wait('嘎呀啊啊啊──！！？');
     await nice_nature.say_and_wait('可恶……那道水花太犯规了吧。');

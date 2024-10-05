@@ -591,7 +591,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '但是这次见识到的 ',
       brian.get_colored_name(),
-      ' 的表现，则以「破格的实力」凌驾了那些格言。……',
+      ' 的表现，则以「破格的实力」凌驾了那些格言……',
       maya.sex,
       '就是如此的强。',
     ]);

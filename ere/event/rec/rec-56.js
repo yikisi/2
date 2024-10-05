@@ -6,7 +6,7 @@
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const check_before_rec = require('#/event/rec/snippets/check-before-rec');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -15,13 +15,13 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = {
-  override: true,
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const me = get_chara_talk(0),
       kitaru = get_chara_talk(56);
     let temp = 0;
-    if (await check_before_rec(56)) {
+    if (await this.check_before_rec()) {
       return false;
     }
     await era.printAndWait([
@@ -501,5 +501,5 @@ module.exports = {
     }
     new EventMarks(0).sub(event_hooks.recruit_start);
     era.set('flag:物色对象', 0);
-  },
+  }
 };

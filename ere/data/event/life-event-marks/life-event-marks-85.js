@@ -1,6 +1,9 @@
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 class RubyLifeMarks extends LifeEventMarks {
+  // 初招募
+  after_recruit;
+
   love_75;
   love_90;
   love_100;

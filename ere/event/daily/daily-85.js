@@ -25,6 +25,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const RubyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-85');
 const event_hooks = require('#/data/event/event-hooks');
+const RubyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-85');
 
 /** @type {Record<string,function(HookArg,*)>} */
 const handlers = {};
@@ -37,7 +38,7 @@ handlers[event_hooks.select] = () => {
     era.print(
       `${ruby.name} 沉沉睡去，当然还是在 ${me.name} 这罪魁祸首的怀抱里。`,
     );
-  } else if ((temp = new RubyEduMarks()).after_recruit) {
+  } else if ((temp = new RubyLifeMarks()).after_recruit) {
     ruby.say('从今天开始，请多指教。');
     ruby.say('华丽、至上，始终绽放最耀眼的光芒。');
     ruby.say('我会把一族的玉条放在心里，只是勇往直前而已。');

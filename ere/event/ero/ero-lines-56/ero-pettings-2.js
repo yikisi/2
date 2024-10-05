@@ -210,7 +210,7 @@ module.exports = (handlers) => {
         '见着身前的担当把自己的肉棒整根塞入乳沟，然后尽力的挤压着那对平时隐藏在校服下硕大调皮的白兔。',
       ]);
       await attacker.say_and_wait([
-        '嗯～……嗯咻，呼、嗯～',
+        '嗯～嗯咻，呼、嗯～',
         defender.get_colored_name(),
         ' 感觉……还好吧？',
       ]);
