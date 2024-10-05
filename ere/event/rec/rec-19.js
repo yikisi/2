@@ -1,6 +1,12 @@
+/**
+ * @file 爱丽数码 - 招募
+ *
+ * @author 片手虾好评发售中！
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -10,20 +16,15 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 爱丽数码的招募事件，id=19
- *
- * @author 片手虾好评发售中！
- */
-module.exports = {
-  /**
-   * @param {number} stage_id
-   * @returns {Promise<boolean>}
-   */
-  async run(stage_id) {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
+    if (await this.check_before_rec()) {
+      return;
+    }
     const digital = get_chara_talk(19),
       me = get_chara_talk(0);
-    if (stage_id === event_hooks.recruit) {
+    if (stage === event_hooks.recruit) {
       await print_event_name('是变态啊！是……是吗？（前篇）', digital);
       await era.printAndWait(
         `训练场，原本作为${digital.get_uma_sex_title()}平日训练的地点，今日却挤满了训练员，因为今天不仅只有${digital.get_uma_sex_title()}训练，还有一项重要的活动——选拔赛。`,
@@ -31,13 +32,15 @@ module.exports = {
       await era.printAndWait(
         `具有天赋的${digital.get_uma_sex_title()}为了邂逅出色的训练员，自然要展现自己的实力，选拔赛自然是绝佳的选择。`,
       );
-      await era.printAndWait(
-        `作为训练员的 ${
-          me.name
-        }，自然也在关注正在飞驰的${digital.get_uma_sex_title()}，但偶然间，${
-          me.name
-        } 眼睛余光注意到了远处隐藏于看台阴影下的粉色身影。`,
-      );
+      await era.printAndWait([
+        '作为训练员的 ',
+        me.get_colored_name(),
+        '，自然也在关注正在飞驰的',
+        digital.get_uma_sex_title(),
+        '，但偶然间，',
+        me.get_colored_name(),
+        ' 眼睛余光注意到了远处隐藏于看台阴影下的粉色身影。',
+      ]);
       era.println();
       await me.say_and_wait(`嗯……${digital.get_uma_sex_title()}？`);
 
@@ -250,7 +253,7 @@ module.exports = {
       await era.printAndWait(`必可以活用于这次！`);
       await me.say_and_wait(`不做选择的觉悟！`);
       await era.printAndWait(
-        `是的，不做选择本身就是一种选择，但${digital.sex}所说的“不做选择”，可是要付出双倍的努力啊！`,
+        `是的，不做选择本身就是一种选择，但${digital.sex}所说的「不做选择」，可是要付出双倍的努力啊！`,
       );
       await digital.say_and_wait('诶？');
       await me.say_and_wait(
@@ -299,7 +302,9 @@ module.exports = {
       era.set('cflag:19:招募状态', recruit_flags.yes);
       era.set('flag:物色对象', 0);
       new EventMarks(0).sub(event_hooks.recruit_start);
+      era.set('callname:0:19', '数码');
+      await this.recruit_end();
       return true;
     }
-  },
+  }
 };

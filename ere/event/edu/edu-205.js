@@ -1,3 +1,9 @@
+/**
+ * @file 卓芙 - 育成
+ *
+ * @author 梦露
+ * @author 无名黑奴（改编）
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -22,7 +28,7 @@ const handlers = {};
 
 /**
  * @param _
- * @param {{race:number,rank:number,relation_change:number,attr_change:number[],pt_change:number,love_change:number}} extra_flag
+ * @param {RaceStartParams} extra_flag
  */
 handlers[event_hooks.race_start] = async (_, extra_flag) => {
   const edu_weeks = era.get('cflag:205:育成回合计时'),
@@ -30,7 +36,7 @@ handlers[event_hooks.race_start] = async (_, extra_flag) => {
     vp = get_chara_talk(205);
   let temp;
   if (extra_flag.race === race_enum.prix_lat && edu_weeks < 96) {
-    await print_event_name('就连“暴君”都能粉碎的……', vp);
+    await print_event_name('就连「暴君」都能粉碎的……', vp);
     await era.printAndWait(
       `${me.name} 清楚地记得接受 ${vp.name} 定下的胜负服样式时候的事情。`,
     );
@@ -76,7 +82,7 @@ handlers[event_hooks.race_start] = async (_, extra_flag) => {
     );
     era.printButton(`「等结束了再说。」`, 1);
     await era.input();
-    await era.printAndWait(`笑着说“是啊”的 ${vp.name} 没有任何窘迫的神色。`);
+    await era.printAndWait(`笑着说「是啊」的 ${vp.name} 没有任何窘迫的神色。`);
     await era.printAndWait(
       `在这个凯旋门赏的舞台前，${me.name} 才理解了${vp.sex}的特异才能。`,
     );
@@ -118,7 +124,7 @@ handlers[event_hooks.race_start] = async (_, extra_flag) => {
 
 /**
  * @param {HookArg} _
- * @param {{race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 handlers[event_hooks.race_end] = async (_, extra_flag) => {
   const edu_weeks = era.get('cflag:205:育成回合计时'),
@@ -472,7 +478,7 @@ handlers[
 handlers[event_hooks.week_end] = require('#/event/edu/edu-events-205/week-end');
 
 handlers[event_hooks.foreign_travel] = async (_, __, event_object) => {
-  if (event_object?.arg === 47 + 35) {
+  if (event_object?.arg === 47 + 36) {
     const me = get_chara_talk(0),
       montjeu = get_chara_talk(204),
       vp = get_chara_talk(205);
@@ -733,11 +739,6 @@ handlers[event_hooks.crazy_fan_end] = async () => {
 };
 
 /**
- * 金星公园的育成事件
- *
- * @author 梦露
- * @author 黑奴队长（改编）
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

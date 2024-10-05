@@ -122,7 +122,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 0);
       era.set('flag:极端行为限制', 0);
       era.set('flag:回合声望惩罚', 0);
-      era.set('flag:回合好感惩罚', 10);
+      era.set('flag:回合好感惩罚', 5);
       era.set('flag:回合爱慕惩罚', 0);
       era.set('flag:游戏结束', 0);
       era.set('flag:后代爱慕限制', 0);
@@ -137,6 +137,8 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 0);
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 0);
+      era.set('flag:性技自主学习', 0);
+      era.set('flag:马娘身高', 1);
       break;
     case 1:
       era.set('flag:训练难度', 0);
@@ -164,11 +166,13 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 1);
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 0);
+      era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
       break;
     case 2:
       era.set('flag:训练难度', -25);
       era.set('flag:训练加成', -25);
-      era.set('flag:比赛难度', 25);
+      era.set('flag:比赛难度', 10);
       era.set('flag:可能伤病', 1);
       era.set('flag:马娘初始好感', 75);
       era.set('flag:马娘初始爱慕', 25);
@@ -176,7 +180,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 50);
       era.set('flag:极端行为限制', 3);
       era.set('flag:回合声望惩罚', -1);
-      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合好感惩罚', -10);
       era.set('flag:回合爱慕惩罚', 0);
       era.set('flag:游戏结束', 1);
       era.set('flag:后代爱慕限制', 0);
@@ -191,11 +195,13 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 1);
       era.set('flag:不忠惩罚', 0);
       era.set('flag:读档对话', 1);
+      era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
       break;
     case 3:
       era.set('flag:训练难度', -25);
       era.set('flag:训练加成', -25);
-      era.set('flag:比赛难度', 25);
+      era.set('flag:比赛难度', 10);
       era.set('flag:可能伤病', 1);
       era.set('flag:马娘初始好感', -100);
       era.set('flag:马娘初始爱慕', 0);
@@ -203,7 +209,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 0);
       era.set('flag:极端行为限制', 1);
       era.set('flag:回合声望惩罚', -1);
-      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合好感惩罚', -10);
       era.set('flag:回合爱慕惩罚', 0);
       era.set('flag:游戏结束', 3);
       era.set('flag:后代爱慕限制', 0);
@@ -218,6 +224,8 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 1);
       era.set('flag:不忠惩罚', 0);
       era.set('flag:读档对话', 1);
+      era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
       break;
     case 4:
       era.set('flag:训练难度', 25);
@@ -230,7 +238,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 50);
       era.set('flag:极端行为限制', 3);
       era.set('flag:回合声望惩罚', -1);
-      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合好感惩罚', -10);
       era.set('flag:回合爱慕惩罚', 1);
       era.set('flag:游戏结束', 0);
       era.set('flag:后代爱慕限制', 1);
@@ -245,6 +253,8 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 0);
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 1);
+      era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
       break;
     case 5:
       era.set('flag:训练难度', 25);
@@ -257,7 +267,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 0);
       era.set('flag:极端行为限制', 0);
       era.set('flag:回合声望惩罚', 0);
-      era.set('flag:回合好感惩罚', 10);
+      era.set('flag:回合好感惩罚', 5);
       era.set('flag:回合爱慕惩罚', 0);
       era.set('flag:游戏结束', 0);
       era.set('flag:后代爱慕限制', 0);
@@ -272,6 +282,8 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 0);
       era.set('flag:不忠惩罚', 0);
       era.set('flag:读档对话', 0);
+      era.set('flag:性技自主学习', 0);
+      era.set('flag:马娘身高', 1);
       break;
     case 6:
       era.set('flag:训练难度', 25);
@@ -284,7 +296,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 50);
       era.set('flag:极端行为限制', 2);
       era.set('flag:回合声望惩罚', -1);
-      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合好感惩罚', -10);
       era.set('flag:回合爱慕惩罚', 1);
       era.set('flag:游戏结束', 0);
       era.set('flag:后代爱慕限制', 1);
@@ -299,6 +311,8 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 0);
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 1);
+      era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
       break;
     case 7:
       era.set('flag:训练难度', 25);
@@ -311,7 +325,7 @@ function set_from_theme(theme) {
       era.set('flag:爱慕上升加成', 50);
       era.set('flag:极端行为限制', 2);
       era.set('flag:回合声望惩罚', -1);
-      era.set('flag:回合好感惩罚', -25);
+      era.set('flag:回合好感惩罚', -10);
       era.set('flag:回合爱慕惩罚', 1);
       era.set('flag:游戏结束', 0);
       era.set('flag:后代爱慕限制', 1);
@@ -326,10 +340,8 @@ function set_from_theme(theme) {
       era.set('flag:压力获取', 0);
       era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 1);
-      break;
-    default:
-      theme = 10;
-      break;
+      era.set('flag:性技自主学习', 1);
+      era.set('flag:马娘身高', 1);
   }
 }
 
@@ -337,6 +349,7 @@ async function page_settings() {
   let flag_default = true,
     flag_setting = false;
   let theme;
+  era.set('flag:新手教学', Number(!era.get('global:新手教学')));
   set_from_theme((theme = 1));
 
   while (flag_default) {
@@ -358,10 +371,18 @@ async function page_settings() {
         },
       );
     });
-    buffer.push({
-      content: '\n* 初次游玩强烈建议从【地上神国】或【尘世间】模式开始游戏！',
-      type: 'text',
-    });
+    buffer.push(
+      {
+        accelerator: 98,
+        config: { buttonType: era.get('flag:新手教学') ? 'warning' : 'info' },
+        content: '显示新手教学',
+        type: 'button',
+      },
+      {
+        content: '\n* 初次游玩强烈建议从【地上神国】或【尘世间】模式开始游戏！',
+        type: 'text',
+      },
+    );
     buffer.push(
       {
         accelerator: 10,
@@ -383,6 +404,9 @@ async function page_settings() {
         flag_default = false;
         flag_setting = true;
         break;
+      case 98:
+        era.set('flag:新手教学', 1 - era.get('flag:新手教学'));
+        break;
       case 99:
         return true;
       default:
@@ -391,11 +415,12 @@ async function page_settings() {
     }
   }
 
-  let selected_setting = undefined;
+  await era.clear();
+  let selected_setting = undefined,
+    flag_print = true;
   while (flag_setting) {
-    await era.clear();
-
-    era.printMultiColumns([
+    const buffer = [];
+    buffer.push([
       { config: { content: '预设' }, type: 'divider' },
       ...difficulties.map((e, i) => {
         return {
@@ -410,7 +435,11 @@ async function page_settings() {
       }),
     ]);
     if (difficulties[theme]) {
-      era.print(difficulties[theme].d, { align: 'center' });
+      buffer[0].push({
+        config: { align: 'center' },
+        content: difficulties[theme].d,
+        type: 'text',
+      });
     }
 
     const options = [
@@ -436,7 +465,7 @@ async function page_settings() {
         options: [
           { l: '低', v: -25 },
           { l: '正常', v: 0 },
-          { l: '高', v: 25 },
+          { l: '高', v: 10 },
         ],
       },
       {
@@ -487,9 +516,9 @@ async function page_settings() {
         key: '游戏结束',
         options: [
           { l: '不散筵席', v: 0 },
-          { l: '粉丝袭击', v: 1 },
-          { l: '金钱奴隶', v: 2 },
-          { l: '情爱囹圄', v: 3 },
+          { l: '+粉丝袭击', v: 1 },
+          { l: '+金钱奴隶', v: 2 },
+          { l: '+情爱囹圄', v: 3 },
         ],
         tip: (v) =>
           [
@@ -530,10 +559,18 @@ async function page_settings() {
       {
         key: '角色性别',
         options: [
-          { l: '自然赋予', v: 0 },
-          { l: '全员扶她', v: 10 },
-          { l: '全员男性', v: 1 },
+          { l: '群芳环绕', v: 0 },
+          { l: '阳刚爆表', v: 1 },
+          { l: '阴阳并济', v: 10 },
+          { l: '现实投射', v: 99 },
         ],
+        tip: (v) =>
+          [
+            '被美女包围了！',
+            '挥洒着青春汗水的帅哥们……',
+            '各位女……女士？',
+            '耳饰的位置表示着什么呢？',
+          ][v],
       },
       {
         key: '马娘初始好感',
@@ -559,9 +596,9 @@ async function page_settings() {
         key: '回合好感惩罚',
         label: '好感的变化',
         options: [
-          { l: '愈久愈和', v: 10 },
+          { l: '愈久愈和', v: 5 },
           { l: '君子之交', v: 0 },
-          { l: '相看相厌', v: -25 },
+          { l: '相看相厌', v: -10 },
         ],
         tip: (v) =>
           [
@@ -644,6 +681,14 @@ async function page_settings() {
           ][v],
       },
       {
+        key: '性技自主学习',
+        label: '角色对性技的学习',
+        options: [
+          { l: '兴趣缺缺', v: 0 },
+          { l: '主动摸索', v: 1 },
+        ],
+      },
+      {
         key: '雷普抵抗',
         label: '角色的强奸抵抗',
         options: [
@@ -664,6 +709,25 @@ async function page_settings() {
             '孩子们对你只有孺慕之情……吗？',
           ][v],
       },
+      {
+        key: '马娘身高',
+        label: '马娘的身高',
+        options: [
+          { l: '这么矮的妈妈', v: 0 },
+          { l: '一般就好', v: 1 },
+          { l: '我想被支配！', v: 2 },
+        ],
+        tip: (v) =>
+          ['被萝莉环绕的天国……', '马娘身高将自然分布', '巨大马娘不可战胜！'][v],
+      },
+      {
+        key: '新手教学',
+        label: '引导教学',
+        options: [
+          { l: '我已完全掌握！', v: 0 },
+          { l: '第一次的时候显示一下吧', v: 1 },
+        ],
+      },
       // {
       //   label: '带玩具上场比赛',
       //   key: '道具影响',
@@ -678,18 +742,22 @@ async function page_settings() {
       //     ][v],
       // },
     ];
-    const buffer = [];
-    buffer.push({
-      config: {
-        content: `游戏选项`,
-      },
-      type: 'divider',
-    });
+    buffer.push(
+      [
+        {
+          config: {
+            content: `游戏选项`,
+          },
+          type: 'divider',
+        },
+      ],
+      [],
+    );
     let val_index;
     options.forEach((e, i) => {
       const val = era.get(`flag:${e.key}`);
       val_index = e.options.findIndex((o) => o.v === val);
-      buffer.push(
+      buffer.at(-1).push(
         {
           type: 'text',
           content: e.label || e.key,
@@ -708,7 +776,7 @@ async function page_settings() {
         }),
       );
       if (i < options.length - 1) {
-        buffer.push({
+        buffer.at(-1).push({
           config: { width: 20, offset: 4 },
           content:
             e.tip && (selected_setting === undefined || i === selected_setting)
@@ -718,7 +786,7 @@ async function page_settings() {
         });
       }
     });
-    buffer.push(
+    buffer.at(-1).push(
       {
         accelerator: 998,
         config: { align: 'right', offset: 4, width: 4 },
@@ -736,15 +804,20 @@ async function page_settings() {
       selected_setting === undefined ||
       selected_setting === options.length - 1
     ) {
-      buffer.push({
-        config: { width: 20, offset: 4 },
-        content: options.at(-1)['tip'] ? options.at(-1)['tip'](val_index) : '',
-        type: 'text',
-      });
+      buffer.push([
+        {
+          config: { width: 20, offset: 4 },
+          content: options.at(-1)['tip']
+            ? options.at(-1)['tip'](val_index)
+            : '',
+          type: 'text',
+        },
+      ]);
     }
-    era.printMultiColumns(buffer);
+    (flag_print ? era.printInColRows : era.replaceInColRows)(...buffer);
+    flag_print = false;
 
-    const ret = await era.input();
+    const ret = await era.input({ hideInput: true });
     switch (ret) {
       case 998:
         flag_setting = false;

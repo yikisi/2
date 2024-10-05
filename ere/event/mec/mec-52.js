@@ -5,9 +5,29 @@ const CustomizedMec = require('#/event/mec/mec-common');
 const { get_chara_color } = require('#/data/chara-colors');
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const { distance_enum, ground_enum } = require('#/data/race/model/race-info');
-const { race_infos } = require('#/data/race/race-const');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
+  get_race_finish_report(uma, race_id) {
+    if (
+      race_id === race_enum.arim_kin &&
+      era.get('cflag:52:育成回合计时') > 96
+    ) {
+      return [
+        {
+          color: uma.color,
+          content: '年终的中山，春之樱满开！有马纪念！站在荣誉舞台中央的是——',
+        },
+        uma.get_colored_name(),
+        {
+          color: uma.color,
+          content: '！！！',
+        },
+      ];
+    }
+    return super.get_race_finish_report(uma, race_id);
+  }
+
   get_status() {
     const { gad, dad } = new UraraEduMarks(),
       ret_list = [];
@@ -16,7 +36,7 @@ module.exports = class extends CustomizedMec {
         color: get_chara_color(52),
         content: `回响(${gad + dad})`,
         title:
-          `[回响(${gad + dad})]：？？？「若能相互理解，现实也能予以共鸣。」参赛时：` +
+          `？？？「若能相互理解，现实也能予以共鸣。」参赛时：` +
           [
             gad ? `草地适性上升 ${gad} 级` : '',
             dad ? `中&长距离适性上升 ${dad} 级` : '',
@@ -29,8 +49,12 @@ module.exports = class extends CustomizedMec {
   }
 
   set_callname() {
-    era.set('callname:52:0', '训练员');
+    if (!this.set_callname_from_src()) {
+      era.set('callname:52:0', '训练员');
+    }
   }
+
+  set_my_name() {}
 
   set_pseudo_uma(uma) {
     const { dad, fans, gad, sbuff } = new UraraEduMarks(),

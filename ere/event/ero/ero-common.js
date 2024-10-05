@@ -1,17 +1,28 @@
+/**
+ * @file 调教地文
+ *
+ * @author O口口口口口
+ * @author 雞雞
+ * @author 天马闪光蹄
+ * @author 黑衣剑士-星爆气流斩准备就绪
+ * @author 幽白書
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
-const {
-  get_penis_size,
-  orgasm_check_list,
-} = require('#/system/ero/sys-calc-ero-status');
+const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const common_pregnant_report_in_love = require('#/event/ero/snippets/common-pregnant-report-in-love');
+const get_participants_and_first_action = require('#/event/ero/snippets/get-participants-and-first-action');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
+const { shop_result_type_enum } = require('#/data/ero/juel-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
 const {
   breast_size,
@@ -19,27 +30,23 @@ const {
   pregnant_stage_enum,
   unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
-const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
-const {
-  ero_action_names,
-  ero_hooks,
-  ero_tagged_hooks,
-} = require('#/data/event/ero-hooks');
+const { ero_action_names, ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
-const { location_enum } = require('#/data/locations');
 
 const current = new Date().getTime();
 
 /** @type {Record<string,function>} */
 const handlers = {},
-  sleep_handlers = {};
+  sleep_handlers = {},
+  raping_handlers = {};
 
 [
   require('#/event/ero/common-lines/ero-communications'),
   require('#/event/ero/common-lines/ero-pettings-1'),
   require('#/event/ero/common-lines/ero-pettings-2'),
   require('#/event/ero/common-lines/ero-pettings-3'),
+  require('#/event/ero/common-lines/ero-pettings-4'),
   require('#/event/ero/common-lines/ero-fuckings'),
   require('#/event/ero/common-lines/ero-items'),
   require('#/event/ero/common-lines/ero-sm'),
@@ -48,10 +55,17 @@ const handlers = {},
 ].forEach((f) => f(handlers));
 
 [
-  require('#/event/ero/common-lines/ero-sleeping-pettings-1'),
-  require('#/event/ero/common-lines/ero-sleeping-pettings-2'),
+  require('#/event/ero/common-lines/ero-sleeping-communications'),
+  require('#/event/ero/common-lines/ero-sleeping-pettings'),
   require('#/event/ero/common-lines/ero-sleeping-fuckings'),
+  require('#/event/ero/common-lines/ero-items'),
 ].forEach((f) => f(sleep_handlers, handlers));
+
+[
+  require('#/event/ero/common-lines/ero-items'),
+  require('#/event/ero/common-lines/ero-orgy-pettings'),
+  require('#/event/ero/common-lines/ero-orgy-fuckings'),
+].forEach((f) => f(raping_handlers, handlers));
 
 console.log(
   '[ero-common.js] ero common handlers init done!',
@@ -60,6 +74,11 @@ console.log(
 );
 
 // 色色关联系
+/**
+ * @author 雞雞
+ *
+ * @param {number} chara_id
+ */
 handlers[ero_hooks.ero_start] = async (chara_id) => {
   let father_id;
   if (
@@ -80,6 +99,13 @@ handlers[ero_hooks.filter_in_rape] = () => (e) =>
   (e >= ero_hooks.missionary && e <= ero_hooks.ask_stimulate_womb) ||
   (e >= ero_hooks.ask_double_suck_nipple && e <= ero_hooks.spit_roast_anal_sex);
 
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ * @param _
+ * @param {{part:number}} extra_flag
+ */
 handlers[ero_hooks.become_erect] = (chara_id, _, extra_flag) => {
   if (extra_flag.part === part_enum.penis) {
     era.print([
@@ -98,6 +124,8 @@ handlers[ero_hooks.become_erect] = (chara_id, _, extra_flag) => {
 };
 
 /**
+ * @author 无名黑奴
+ *
  * @param {number} chara_id
  * @param _
  * @param {{part:number}} extra_flag
@@ -151,6 +179,8 @@ handlers[ero_hooks.wound] = (chara_id, _, extra_flag) =>
   );
 
 /**
+ * @author 无名黑奴
+ *
  * @param {number} chara_id
  * @param _
  * @param {{virgin:boolean}} extra_flag
@@ -163,117 +193,77 @@ handlers[ero_hooks.lose_virginity] = (chara_id, _, extra_flag) =>
     '！',
   ]);
 
-/** @param {number} chara_id */
-handlers[ero_hooks.orgasm] = async (chara_id) => {
-  const chara = get_chara_talk(chara_id);
-  let multi_orgasm = undefined;
-  if (era.get(`nowex:${chara_id}:二重高潮`)) {
-    multi_orgasm = '二';
-  } else if (era.get(`nowex:${chara_id}:三重高潮`)) {
-    multi_orgasm = '三';
-  } else if (era.get(`nowex:${chara_id}:四重高潮`)) {
-    multi_orgasm = '四';
-  } else if (era.get(`nowex:${chara_id}:五重高潮`)) {
-    multi_orgasm = '五';
-  } else if (era.get(`nowex:${chara_id}:多重高潮`)) {
-    multi_orgasm = '多';
-  }
-  multi_orgasm &&
-    era.print([
-      chara.get_colored_name(),
-      ' 发生了',
-      { content: ` ${multi_orgasm}重高潮`, color: buff_colors[2] },
-      '！',
-    ]);
-  orgasm_check_list.forEach((part) => {
-    const part_name = part_names[part];
-    const times =
-      era.get(`nowex:${chara_id}:${part_name}高潮`) +
-      (era.get(`nowex:${chara_id}:无自觉${part_name}高潮`) || 0);
-    if (part === part_enum.breast) {
-      const nipple_times =
-        era.get(`nowex:${chara_id}:乳头高潮`) +
-        era.get(`nowex:${chara_id}:无自觉乳头高潮`);
-      times &&
-        era.print([
-          chara.get_colored_name(),
-          ' 的 ',
-          { content: '胸部', color: buff_colors[2] },
-          ' ',
-          {
-            content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
-            color: buff_colors[2],
-          },
-          '！',
-        ]);
-      nipple_times &&
-        era.print([
-          chara.get_colored_name(),
-          ' 的 ',
-          { content: '乳头', color: buff_colors[2] },
-          ' ',
-          {
-            content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
-            color: buff_colors[2],
-          },
-          '！',
-        ]);
-    } else if (times) {
-      let semen;
-      switch (part) {
-        case part_enum.sadism:
-        case part_enum.masochism:
-          era.print([
-            chara.get_colored_name(),
-            ' 因 ',
-            { content: part_name, color: buff_colors[2] },
-            ' ',
-            {
-              content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
-              color: buff_colors[2],
-            },
-            '！',
-          ]);
-          break;
-        case part_enum.penis:
-          semen = era.get(`nowex:${chara_id}:射精量`);
-          era.print([
-            chara.get_colored_name(),
-            ' ',
-            semen < 0 ? '在避孕套中' : '',
-            '射出了',
-            {
-              content: ` ${Math.abs(semen)}ml `,
-              color: buff_colors[2],
-            },
-            '精液！',
-          ]);
-          break;
-        default:
-          era.print([
-            chara.get_colored_name(),
-            ' 的 ',
-            { content: part_name, color: buff_colors[2] },
-            ' ',
-            {
-              content: times > 1 ? `发生了 ${times} 重高潮` : '高潮了',
-              color: buff_colors[2],
-            },
-            '！',
-          ]);
-      }
+const optimized_part_names = {};
+optimized_part_names[part_enum.mouth] = '口穴';
+optimized_part_names[part_enum.virgin] = '小穴';
+optimized_part_names[part_enum.anal] = '屁穴';
+
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ * @param _
+ * @param {{stop_success:boolean}} extra_flag
+ */
+handlers[ero_hooks.orgasm_denial] = async (chara_id, _, extra_flag) => {
+  const me = get_chara_talk(0),
+    chara = get_chara_talk(chara_id),
+    touch = era.get(`tcvar:${chara_id}:阴茎接触部位`);
+  if (
+    touch.part === part_enum.mouth ||
+    touch.part === part_enum.virgin ||
+    touch.part === part_enum.anal
+  ) {
+    if (
+      await select_yes_or_no(
+        [chara.get_colored_name(), ' 的肉棒已经达到极限……'],
+        `以 ${optimized_part_names[touch.part]} 接纳`,
+        '避开精芒',
+      )
+    ) {
+      return 0;
     }
-  });
+    if (!extra_flag.stop_success) {
+      era.print([
+        me.get_colored_name(),
+        ' 在和 ',
+        chara.get_colored_name(),
+        ' 的竞速中失败了……',
+      ]);
+    } else {
+      era.print([
+        me.get_colored_name(),
+        ' 的 ',
+        optimized_part_names[touch.part],
+        ' 吐出了 ',
+        chara.get_colored_name(),
+        ' 蓄势待发的肉棒，温热的精液径直喷向了 ',
+        me.get_colored_name(),
+        ' 的 ',
+        touch.part === part_enum.mouth ? '俏脸' : '玉体',
+        '……',
+      ]);
+    }
+    return 2;
+  }
 };
 
-/** @param {number} chara_id */
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ */
 handlers[ero_hooks.zero_stamina] = (chara_id) =>
   era.print([
     get_chara_talk(chara_id).get_colored_name(),
     ' 因体力过分消耗陷入了昏迷……',
   ]);
 
-/** @param {number} chara_id */
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ */
 handlers[ero_hooks.lost_mind] = (chara_id) =>
   era.print([
     get_chara_talk(chara_id).get_colored_name(),
@@ -307,9 +297,11 @@ const sex_mark_desc = [
 ];
 
 /**
+ * @author 无名黑奴
+ *
  * @param {number} chara_id
  * @param _
- * @param {{level:number,name:string,new:boolean}} extra_flag
+ * @param {GetMarkParams} extra_flag
  */
 handlers[ero_hooks.get_mark] = async (chara_id, _, extra_flag) => {
   let message = '';
@@ -347,17 +339,9 @@ handlers[ero_hooks.get_mark] = async (chara_id, _, extra_flag) => {
   ]);
 };
 
-handlers[ero_hooks.prison] = (chara_id) => {
-  era.print([
-    get_chara_talk(chara_id).get_colored_name(),
-    ' 监禁了 ',
-    get_chara_talk(0).get_colored_name(),
-  ]);
-  era.set('flag:当前位置', location_enum.basement);
-  era.set('flag:地下室之主', chara_id);
-};
-
 /**
+ * @author 雞雞
+ *
  * @param _
  * @param __
  * @param {{father_id:number,mother_id:number,shown:boolean}} extra_flag
@@ -486,6 +470,8 @@ handlers[ero_hooks.cum_in_womb] = async (_, __, extra_flag) => {
 };
 
 /**
+ * @author 无名黑奴
+ *
  * @param _
  * @param __
  * @param {{father_id:number,mother_id:number,shown:boolean}} extra_flag
@@ -505,6 +491,9 @@ handlers[ero_hooks.be_pregnant] = (_, __, extra_flag) => {
 };
 
 /**
+ * @author 雞雞
+ * @author 无名黑奴
+ *
  * @param _
  * @param {HookArg} hook
  * @param {{father_id:number,mother_id:number}} extra_flag
@@ -597,6 +586,8 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
 };
 
 /**
+ * @author 雞雞
+ *
  * @param _
  * @param {HookArg} hook
  * @param {{child_id:number}} extra_flag character id of the child
@@ -634,7 +625,11 @@ handlers[ero_hooks.have_baby] = async (_, hook, extra_flag) => {
   }
 };
 
-/** @param {number} chara_id */
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ */
 handlers[ero_hooks.shop_start] = async (chara_id) => {
   era.drawLine();
   const chara = get_chara_talk(chara_id),
@@ -688,6 +683,8 @@ handlers[ero_hooks.shop_start] = async (chara_id) => {
 };
 
 /**
+ * @author 无名黑奴
+ *
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {{hate_clear:number,mark_clear:number,pleasure_delta:number,sex_delta:number,skill:number,talent:number}} extra_flag
@@ -711,7 +708,7 @@ handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
         me.get_colored_name(),
         ` 把${chara.sex}当作性玩具肆意摆弄的行为出言讥讽……`,
       ]);
-      hook.arg = 1;
+      return shop_result_type_enum.hate;
     } else if (
       era.get(`mark:${chara_id}:淫纹`) ||
       era.get(`mark:${chara_id}:欢愉`)
@@ -722,7 +719,7 @@ handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
         me.get_colored_name(),
         ' 一起享受欢愉……',
       ]);
-      hook.arg = 2;
+      return shop_result_type_enum.pleasure;
     } else if (era.get(`mark:${chara_id}:同心`) >= 2) {
       await era.printAndWait([
         chara.get_colored_name(),
@@ -730,7 +727,7 @@ handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
         me.get_colored_name(),
         ' 泫然欲涕，但意识总有一天会被身体潜移默化地改变……',
       ]);
-      hook.arg = 3;
+      return shop_result_type_enum.slave;
     } else {
       await era.printAndWait([
         chara.get_colored_name(),
@@ -740,8 +737,81 @@ handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
         me.get_colored_name(),
         ` 不满意${chara.sex}身体的事实感到悲伤……`,
       ]);
-      hook.arg = 4;
+      return shop_result_type_enum.lover;
     }
+  }
+};
+
+/**
+ * @author 雞雞
+ *
+ * @param {number} chara_id
+ */
+handlers[ero_hooks.after_betrayed] = async (chara_id) => {
+  const me = get_chara_talk(0),
+    chara = get_chara_talk(chara_id),
+    race = era.get(`cflag:${chara_id}:种族`),
+    like_betrayed = era.get(`talent:${chara_id}:绿帽癖`);
+  switch (era.add(`exp:${chara_id}:被绿次数`, 1)) {
+    case 1:
+      era.drawLine();
+      await era.printAndWait([
+        race ? chara.get_uma_sex_title() + '的鼻子十分灵敏，而 ' : '',
+        me.get_colored_name(),
+        ' 身上传来的淫臭味无时无刻不在向周遭宣布着自己刚才马儿跳过的事实。',
+        { isBr: true },
+        race ? '嗅到气味的 ' : '察觉此事 ',
+        chara.get_colored_name(),
+        ' 对 ',
+        me.get_colored_name(),
+        ' 的不忠产生了',
+        like_betrayed
+          ? '情欲'
+          : era.get(`cflag:${chara_id}:气性`) >= 0
+            ? '愤慨'
+            : '悲伤',
+        '的情绪……',
+      ]);
+      break;
+    case 2:
+      era.drawLine();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 没有抵受住诱惑，再次背叛了 ',
+        chara.get_colored_name(),
+        '。',
+        { isBr: true },
+        '在一时性欲释放的背后，又有多少感情纠葛正在蔓延缠绕？',
+        { isBr: true },
+        race ? '嗅到气味的 ' : '察觉此事 ',
+        chara.get_colored_name(),
+        ' 对 ',
+        me.get_colored_name(),
+        ' 的不忠产生了',
+        like_betrayed
+          ? '情欲'
+          : era.get(`cflag:${chara_id}:气性`) >= 0
+            ? '愤慨'
+            : '悲伤',
+        '的情绪……',
+      ]);
+      break;
+    default:
+      if (like_betrayed) {
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 的不忠让 ',
+          chara.get_colored_name(),
+          ' 无比伤心的同时，又涌起了一股隐隐难言的兴奋……',
+        ]);
+      } else {
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 的不忠让 ',
+          chara.get_colored_name(),
+          ' 无比愤怒……',
+        ]);
+      }
   }
 };
 
@@ -753,39 +823,25 @@ handlers[ero_hooks.shop_end] = async (chara_id, hook, extra_flag) => {
  */
 module.exports = async (chara_id, hook, extra_flag) => {
   if (ero_action_names[hook.hook]) {
-    const { attacker, defender } =
-      (ero_tagged_hooks[hook.hook] || default_tags).condition !==
-      condition_type.active
-        ? extra_flag
-        : era.get('tflag:主导权')
-          ? { attacker: chara_id, defender: 0 }
-          : { attacker: 0, defender: chara_id };
-    hook.arg = true;
-    if (attacker === era.get('tflag:主导权')) {
-      hook.arg = era.get('tflag:前回行动') !== hook.hook;
-    } else if (defender === era.get('tflag:前回对手')) {
-      hook.arg = era.get('tflag:对手行动') !== hook.hook;
+    const { attacker, defender } = get_participants_and_first_action(
+      chara_id,
+      hook,
+      extra_flag,
+    );
+    let handler_dict = handlers;
+    if (!sys_check_awake(defender)) {
+      handler_dict = sleep_handlers;
+    } else if (era.get('tflag:强奸') >= 0) {
+      handler_dict = raping_handlers;
     }
-    const aim_handler =
-      (sys_check_awake(defender) ? handlers : sleep_handlers)[hook.hook] ||
-      handlers[hook.hook];
+    const aim_handler = handler_dict[hook.hook];
     if (aim_handler) {
-      await aim_handler(
+      return await aim_handler(
         get_chara_talk(attacker),
         get_chara_talk(defender),
         hook,
         extra_flag,
       );
-    } else {
-      era.print([
-        '【',
-        get_chara_talk(attacker).get_colored_name(),
-        ' 对 ',
-        get_chara_talk(defender).get_colored_name(),
-        hook.arg ? ' ' : ' 继续 ',
-        ero_action_names[hook.hook],
-        '……】',
-      ]);
     }
   } else if (handlers[hook.hook]) {
     return await handlers[hook.hook](chara_id, hook, extra_flag);

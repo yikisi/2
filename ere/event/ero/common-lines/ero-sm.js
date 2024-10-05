@@ -1,3 +1,9 @@
+/**
+ * @file 调教地文 - 性虐系
+ *
+ * @author 黑衣剑士-星爆气流斩准备就绪
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const {
@@ -11,53 +17,52 @@ const {
   ask_action,
 } = require('#/event/ero/common-lines/snippets');
 
+const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @author 黑衣剑士-星爆气流斩准备就绪
- *
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
- */
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
+  /** @author 无名黑奴 */
+  handlers[ero_hooks.insult] = async (attacker, defender) => {
+    const talk_arr = [];
+    if (era.get('tflag:强奸') === attacker.id) {
+      talk_arr.push('人渣！强奸犯！去死吧！');
+    }
+    if (era.get(`talent:${attacker.id}:小恶魔`)) {
+      talk_arr.push('杂鱼～杂鱼～');
+    }
+    if (era.get(`talent:${attacker.id}:抖S`)) {
+      talk_arr.push(
+        `蠢货！废物${defender.get_sex_slave_title()}！欠操的变态！`,
+      );
+    }
+    if (talk_arr.length === 0) {
+      talk_arr.push(`就这么想被人辱骂吗，${defender.get_sex_slave_title()}？`);
+    }
+    await attacker.say_and_wait(get_random_entry(talk_arr));
+  };
+
+  /** @author 无名黑奴 */
   handlers[ero_hooks.ask_insult] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 辱骂自己……】',
-      ]);
       if (await ask_action(attacker.id)) {
         await (
           get_random_value(0, 1)
             ? after_refusing_by_attacker
             : after_refusing_by_defender
         )(attacker, defender, hook);
+        return;
       }
-    } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 继续辱骂自己……】',
-      ]);
     }
+    await handlers[ero_hooks.insult](defender, attacker, hook);
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.ask_hit_anal] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 拍打自己的臀部……】',
-      ]);
       if (await ask_action(attacker.id)) {
         await (
           get_random_value(0, 1)
@@ -65,26 +70,12 @@ module.exports = (handlers) => {
             : after_refusing_by_defender
         )(attacker, defender, hook);
       }
-    } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 继续拍打自己的臀部……】',
-      ]);
     }
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.ask_hit_breast] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 拍打自己的胸部……】',
-      ]);
       if (await ask_action(attacker.id)) {
         await (
           get_random_value(0, 1)
@@ -92,25 +83,11 @@ module.exports = (handlers) => {
             : after_refusing_by_defender
         )(attacker, defender, hook);
       }
-    } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 继续拍打自己的胸部……】',
-      ]);
     }
   };
 
+  /** @author 黑衣剑士-星爆气流斩准备就绪 */
   handlers[ero_hooks.hit_face_by_penis] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 用肉棒拍打 ',
-      defender.get_colored_name(),
-      ' 的脸颊……】',
-    ]);
     if (attacker.id) {
       await defender.print_and_wait([
         '被 ',
@@ -168,15 +145,9 @@ module.exports = (handlers) => {
     }
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.ask_hit_face] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 扇自己的耳光……】',
-      ]);
       if (await ask_action(attacker.id)) {
         await (
           get_random_value(0, 1)
@@ -184,30 +155,16 @@ module.exports = (handlers) => {
             : after_refusing_by_defender
         )(attacker, defender, hook);
       }
-    } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 再继续扇自己的耳光……】',
-      ]);
     }
   };
 
+  /** @author 无名黑奴 */
   handlers[ero_hooks.ask_virgin_foot_job] = async (
     attacker,
     defender,
     hook,
   ) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 践踏自己的阴部……】',
-      ]);
       if (
         await ask_action(
           attacker.id,
@@ -222,14 +179,6 @@ module.exports = (handlers) => {
             : after_refusing_by_defender
         )(attacker, defender, hook);
       }
-    } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ' 继续践踏自己的阴部……】',
-      ]);
     }
   };
 };

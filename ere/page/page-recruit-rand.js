@@ -1,13 +1,15 @@
 ﻿const era = require('#/era-electron');
 
+const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
 const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
-const call_recruit_event = require('#/system/script/sys-call-recruit');
 const { get_image } = require('#/system/sys-calc-image');
 const filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
-const check_team_limit = require('#/page/components/check-team-limit');
 const print_page_header = require('#/page/components/page-header');
+
+const GameGuides = require('#/event/game-guides');
+const { check_rec_script, get_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry } = require('#/utils/list-utils');
@@ -37,13 +39,14 @@ async function print_rec_page() {
   await era.clear();
   print_page_header();
   era.drawLine();
-  const vehicle = era.get('equip:0:单人载具');
+  const vehicle = era.get('flag:单人载具');
   era.print([
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了训练场……',
   ]);
+  await new GameGuides().recruit();
   flag_leave = await sys_get_random_event(event_hooks.recruit_start)();
-  const flag_limit = check_team_limit();
+  const flag_limit = sys_check_team_limit() >= 0;
   flag_recruit = !flag_leave;
 
   while (flag_recruit) {
@@ -68,7 +71,9 @@ async function print_rec_page() {
         buffer[0].push({
           content: [
             me.get_colored_name(),
-            ' 已经有一定数量的担当，其他马娘不会同意 ',
+            ' 已经有一定数量的担当，其他马',
+            era.get('flag:角色性别') === 1 ? '郎' : '娘',
+            '不会同意 ',
             me.get_colored_name(),
             ' 的招募了……',
             { isBr: true },
@@ -79,7 +84,9 @@ async function print_rec_page() {
       } else {
         buffer[0].push({
           content: [
-            '在训练场内见到了几位马娘，是谁吸引了 ',
+            '在训练场内见到了几位马',
+            era.get('flag:角色性别') === 1 ? '郎' : '娘',
+            '，是谁吸引了 ',
             me.get_colored_name(),
             ' 的注意力呢？',
             { isBr: true },
@@ -90,13 +97,6 @@ async function print_rec_page() {
       }
       buffer.push(
         ...today_list.map((chara_id) => {
-          let flag_script;
-          try {
-            require(`#/event/rec/rec-${chara_id}`);
-            flag_script = true;
-          } catch (_) {
-            flag_script = false;
-          }
           return {
             columns: [
               {
@@ -109,7 +109,7 @@ async function print_rec_page() {
                 accelerator: chara_id,
                 config: {
                   align: 'center',
-                  buttonType: flag_script ? 'danger' : 'warning',
+                  buttonType: check_rec_script(chara_id) ? 'danger' : 'warning',
                   disabled:
                     flag_limit || (cur_recruit && cur_recruit !== chara_id),
                 },
@@ -134,11 +134,15 @@ async function print_rec_page() {
       );
     } else {
       buffer[0].push({
-        content: '训练场没有引人注目的马娘……',
-        type: 'text',
         config: {
           align: 'center',
         },
+        content: [
+          '训练场没有引人注目的马',
+          era.get('flag:角色性别') === 1 ? '郎' : '娘',
+          '……',
+        ],
+        type: 'text',
       });
     }
     era.setHorizontalAlign('space-around');
@@ -160,7 +164,7 @@ async function print_rec_page() {
       ).filter((chara_id) => today_list.includes(chara_id) && !flag_limit);
       if (event_chara_list.length) {
         era.drawLine();
-        flag_leave = await call_recruit_event(
+        flag_leave = await get_custom_rec(
           get_random_entry(event_chara_list),
           event_hooks.recruit_end,
         );
@@ -169,7 +173,7 @@ async function print_rec_page() {
     } else {
       era.drawLine();
       // 普通招募事件
-      flag_leave = await call_recruit_event(ret, event_hooks.recruit);
+      flag_leave = await get_custom_rec(ret, event_hooks.recruit);
       // 正常招募却没招募，说明招募没成功
       flag_recruit = era.get(`cflag:${ret}:招募状态`) <= 0 && !flag_leave;
     }
@@ -183,6 +187,7 @@ async function print_rec_page() {
     await era.printAndWait([me.get_colored_name(), ' 离开了训练场……']);
     await sys_get_random_event(event_hooks.recruit_end)();
   }
+  await new GameGuides().recruit_end();
   era.set('flag:当前位置', location_enum.office);
 }
 

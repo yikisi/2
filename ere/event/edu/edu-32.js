@@ -1,15 +1,20 @@
+/**
+ * @file 爱丽速子 - 育成
+ *
+ * @author 幽白書
+ * @author 黑奴一号 无名黑奴（修订）
+ */
 const era = require('#/era-electron');
 
-const sys_call_check = require('#/system/script/sys-call-check');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const check_stages = require('#/data/event/check-stages');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const event_hooks = require('#/data/event/event-hooks');
+const { get_custom_check } = require('#/event/check/check-factory');
 
 /** @type {Record<string,function(HookArg,*,EventObject):Promise<*>>}*/
 const handlers = {};
@@ -39,6 +44,7 @@ const week_start_handlers = {};
   require('#/event/edu/edu-events-32/week-start-09'),
   require('#/event/edu/edu-events-32/week-start-10'),
   require('#/event/edu/edu-events-32/week-start-11'),
+  require('#/event/edu/edu-events-32/week-start-12'),
 ].forEach((f) => f(week_start_handlers));
 
 handlers[event_hooks.week_start] = async (_, __, event_object) => {
@@ -128,7 +134,7 @@ handlers[event_hooks.race_start] = async (_, { race }) => {
   }
 };
 
-/** @type {Record<string,function(CharaTalk,CharaTalk,string,{contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number},TachyonEduMarks,number,number):Promise<boolean|void>>} */
+/** @type {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams,TachyonEduMarks,number,number):Promise<boolean|void>>} */
 const race_end_handlers = {};
 
 [
@@ -139,7 +145,7 @@ const race_end_handlers = {};
 
 /**
  * @param {HookArg} _
- * @param {{contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 handlers[event_hooks.race_end] = async (_, extra_flag) => {
   const callname = sys_get_callname(32, 0),
@@ -167,7 +173,7 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
       era.get('love:32') >= 75 &&
       tachyon.sex_code - 1 &&
       me.sex_code > 0 &&
-      sys_call_check(32, check_stages.want_make_love) &&
+      get_custom_check(32).is_want_make_love() &&
       !edu_marks.race_sex
     ) {
       edu_marks.race_sex++;
@@ -325,11 +331,6 @@ handlers[
 ] = require('#/event/edu/edu-events-32/crazy-fan-end');
 
 /**
- * 速子的日常事件，id=32
- *
- * @author 幽白書
- * @author 黑奴一号 黑奴队长（修订）
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

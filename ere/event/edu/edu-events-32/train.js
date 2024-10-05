@@ -852,7 +852,7 @@ module.exports = async (_, { attr }) => {
           ),
         () =>
           tachyon.say_and_wait(
-            '方向发生错误了吗……为什么……明明体力充沛，却完全没有能够超越极限的自信……。',
+            '方向发生错误了吗……为什么……明明体力充沛，却完全没有能够超越极限的自信……',
           ),
         async () => {
           await tachyon.say_and_wait('……最近你提出的实验，越来越无趣了啊');
@@ -875,7 +875,7 @@ module.exports = async (_, { attr }) => {
           '累？没这回事，我有预感，这一次，这一次一定能够突破瓶颈……',
         );
       },
-      () => tachyon.say_and_wait('必须更快……咕……身体无法……动弹……。'),
+      () => tachyon.say_and_wait('必须更快……咕……身体无法……动弹……'),
       async () => {
         await tachyon.say_and_wait(
           '开什么玩笑……突破极限的首要条件就是抵达极限。',

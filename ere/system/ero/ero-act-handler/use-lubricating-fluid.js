@@ -5,6 +5,8 @@ const {
   get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const CharaTalk = require('#/utils/chara-talk');
 
 const { buff_colors } = require('#/data/color-const');
@@ -12,7 +14,6 @@ const { part_enum, part_names } = require('#/data/ero/part-const');
 
 /**
  * @param {CharaTalk} chara
- * @returns {Record<{part:number,user:number}>}
  */
 async function use_lubricating_fluid(chara) {
   era.printMultiColumns([
@@ -67,7 +68,6 @@ async function use_lubricating_fluid(chara) {
     era.print('没有需要润滑的部位……');
     return undefined;
   }
-  console.log(buffer);
   era.printMultiColumns(
     [
       {
@@ -86,9 +86,9 @@ async function use_lubricating_fluid(chara) {
     { horizontalAlign: 'space-evenly' },
   );
   const part = await era.input();
-  era.printMultiColumns([
-    {
-      content: [
+  if (
+    !(await select_yes_or_no(
+      [
         '要润滑 ',
         aim_chara.get_colored_name(),
         ' 的 ',
@@ -98,18 +98,10 @@ async function use_lubricating_fluid(chara) {
         },
         ' 吗？',
       ],
-      type: 'text',
-    },
-    ...['确定', '容我想想'].map((e, i) => {
-      return {
-        accelerator: 100 * i,
-        config: { align: 'center', width: 12 },
-        content: e,
-        type: 'button',
-      };
-    }),
-  ]);
-  if (await era.input()) {
+      '确定',
+      '容我想想',
+    ))
+  ) {
     era.print([
       CharaTalk.me.get_colored_name(),
       ' 放弃了使用 ',

@@ -1,10 +1,12 @@
 const era = require('#/era-electron');
 
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
+const { sys_check_race_ready } = require('#/system/sys-calc-chara-param');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
@@ -14,6 +16,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
  * @param _
@@ -267,7 +270,7 @@ module.exports = async (_, __, event_object) => {
       await era.printAndWait(
         `与审判罪人的神一样的眼睛不同，那里混入了某种程度的同情。`,
       );
-      await era.printAndWait(`那是对今后也要不断被“痛苦”欺凌的人的怜悯吗。`);
+      await era.printAndWait(`那是对今后也要不断被『痛苦』欺凌的人的怜悯吗。`);
       await montjeu.say_and_wait('我的职责到此为止。');
       era.printButton(`「……对不起。」`, 1);
       await era.input();
@@ -337,11 +340,9 @@ module.exports = async (_, __, event_object) => {
       era.printButton(`「还记得你选我的时候说的话吗？」`, 1);
       await era.input();
       await vp.say_and_wait(`……我好像说过很多话。`);
-      era.printButton(
-        `「你说『如果负责能连霸凯旋门赏的${vp.get_uma_sex_title()}的话，作为社会人的评价也会提高吧。』」`,
-        1,
+      await me.say_and_wait(
+        `你说『如果负责能连霸凯旋门赏的${vp.get_uma_sex_title()}的话，作为社会人的评价也会提高吧。』`,
       );
-      await era.input();
       await vp.say_and_wait(
         `那个……太不好意思了，如果可以的话，我希望你当没发生过，${me.actual_name}。`,
       );
@@ -371,7 +372,7 @@ module.exports = async (_, __, event_object) => {
         `从凯旋门赏这个拥有世界最高峰之称的比赛诞生之日开始。`,
       );
       await era.printAndWait(
-        `从接触到带着“我们”没有的可能性出生的“${vp.sex}们”的那天开始。`,
+        `从接触到带着『我们』没有的可能性出生的『${vp.sex}们』的那天开始。`,
       );
       await era.printAndWait(`作为一个人，${me.name} 是愿意的。`);
       era.printButton(`「${vp.name}，把我的灵魂烧焦吧。」（爱慕+5）`, 1);
@@ -406,6 +407,15 @@ module.exports = async (_, __, event_object) => {
       era.println();
       sys_love_uma(205, 5) && (await era.waitAnyKey());
       era.set('cflag:205:招募状态', recruit_flags.yes);
+      if (sys_check_race_ready(205)) {
+        sys_reg_race(205).curr = {
+          race: race_enum.prix_lat,
+          week:
+            era.get('flag:当前回合数') +
+            race_infos[race_enum.prix_lat].date -
+            33,
+        };
+      }
       break;
     case 95 + 42:
       temp = [0, 0];
@@ -744,7 +754,7 @@ module.exports = async (_, __, event_object) => {
           } 的背上轻拍。`,
         );
         await era.printAndWait(
-          `明明说了“abandonne放弃”，${vp.name} 却一点也不想离开。痛哭的${vp.sex}，反倒增强了力量。`,
+          `明明说了『abandonne放弃』，${vp.name} 却一点也不想离开。痛哭的${vp.sex}，反倒增强了力量。`,
         );
         await era.printAndWait(`也许这就是自作自受吧…………但是肋骨真的要断了。`);
         await vp.say_and_wait(`怎么样？`);
@@ -759,7 +769,7 @@ module.exports = async (_, __, event_object) => {
         await era.input();
         await era.printAndWait(`${vp.name} 就像一条得水的游鱼。`);
         await vp.say_and_wait(
-          `那就快点举行婚礼吧！订婚，还要买戒指……‘师傅’一定也会祝福我们的！`,
+          `那就快点举行婚礼吧！订婚，还要买戒指……『师傅』一定也会祝福我们的！`,
         );
         await vp.say_and_wait(
           `在法国做的话是教会吧？在日本也可以，穿着雪白的衣服在寺庙前对爱发誓！`,
@@ -786,7 +796,7 @@ module.exports = async (_, __, event_object) => {
           `我不是看了你的人种和容貌才爱上你的，而是爱上了你的心！`,
         );
         await vp.say_and_wait(
-          `亚洲人？所以呢，怎么了？我会对吵吵嚷嚷的人大声喊‘吵死了’！谁都不会妨碍我们！`,
+          `亚洲人？所以呢，怎么了？我会对吵吵嚷嚷的人大声喊『吵死了』！谁都不会妨碍我们！`,
         );
         await vp.say_and_wait(`不要随便决定我的价值！`);
         await vp.say_and_wait(

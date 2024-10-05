@@ -1,3 +1,8 @@
+/**
+ * @file 鲁铎象征 - 日常
+ *
+ * @author 露娜俘虏
+ */
 const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -89,6 +94,9 @@ handlers[event_hooks.good_morning] = function () {
 };
 
 handlers[event_hooks.talk] = async function () {
+  if (!sys_check_awake(17)) {
+    throw new Error();
+  }
   const talk_list = [],
     is_emperor = new LunaEduMarks().emperor;
   if (era.get('base:17:体力') < 0.4 * era.get('maxbase:17:体力')) {
@@ -107,7 +115,7 @@ handlers[event_hooks.talk] = async function () {
           talk_list.push('出征之时已至。', '让皇帝之名响彻云霄！');
         } else {
           talk_list.push(
-            '状态“极其”好，“激起”了训练的心潮！呼呼……',
+            '状态『极其』好，『激起』了训练的心潮！呼呼……',
             '我的状态比平时还要好，看来会有不错的表现。',
           );
         }
@@ -166,7 +174,7 @@ handlers[event_hooks.office_gift] = async function () {
   } else {
     talk_list.push(
       '我已经不是小孩子了……！嘿嘿，但谢谢你！',
-      '我们是有相同理想的“共犯”，完成目标前，我们都不能停下……抱歉，是不是有点太沉重了？',
+      '我们是有相同理想的『共犯』，完成目标前，我们都不能停下……抱歉，是不是有点太沉重了？',
     );
   }
   await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
@@ -277,7 +285,7 @@ handlers[event_hooks.school_rooftop] = async function () {
     talk_list.push('寻常的进食，能果腹即可。', '我对食物没有要求。');
   } else {
     talk_list.push(
-      '呵呵呵……没有姜的话，不就成了脱“姜”之马……呵呵呵呵！',
+      '呵呵呵……没有姜的话，不就成了脱『姜』之马……呵呵呵呵！',
       '其实我对口味的要求不高。但如果摆盘精致、气味宜人，更能让我食指大动。',
     );
   }
@@ -300,7 +308,7 @@ handlers[event_hooks.out_river] = async function (hook) {
     if (!hook.arg) {
       talk_list.push(
         '动心忍性，增益其所不能。钓鱼，是一门相当的学问呢。',
-        '就算钓上了鱼，也只能拍照纪念哦，这是学院的财产。',
+        '就算钓上了鱼，也只能拍照纪念哦，这是学园的财产。',
       );
     } else {
       talk_list.push(
@@ -392,7 +400,7 @@ handlers[event_hooks.out_church] = async function (hook) {
     `一年几次的祈福，足够${chara_talk.sex}保持足够的新鲜感。`,
   );
   await era.printAndWait(
-    `${CharaTalk.me.name} 站在 ${chara_talk.name} 身边，等待着${chara_talk.sex}抽出象征“幸运”的签。`,
+    `${CharaTalk.me.name} 站在 ${chara_talk.name} 身边，等待着${chara_talk.sex}抽出象征『幸运』的签。`,
   );
   era.println();
 
@@ -465,7 +473,7 @@ handlers[event_hooks.out_station] = async function (hook) {
       } else {
         talk_list.push(
           '要是做了噩梦的话就告诉我，我会帮你守夜的。',
-          '心情消沉时就来“赏枫”，让心情“防风”……呼呼，真是杰作。',
+          '心情消沉时就来『赏枫』，让心情『防风』……呼呼，真是杰作。',
         );
       }
       break;
@@ -509,11 +517,6 @@ handlers[event_hooks.load_talk] = async () => {
   }
 };
 
-/**
- * 鲁铎象征 - 日常
- *
- * @author 露娜俘虏
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

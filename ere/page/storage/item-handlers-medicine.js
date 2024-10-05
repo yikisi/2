@@ -6,6 +6,7 @@ const {
   sys_change_motivation,
   sys_change_weight,
 } = require('#/system/sys-calc-base-cflag');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const select_target_in_storage = require('#/page/storage/select-target');
@@ -19,7 +20,7 @@ const { attr_enum, pressure_border } = require('#/data/train-const');
 
 /** @param {Record<string,function>} handlers */
 module.exports = (handlers) => {
-  handlers[200] = async () => {
+  handlers[100] = async () => {
     const me = get_chara_talk(0);
     if (era.get('base:0:体力') < era.get('maxbase:0:体力')) {
       const ret = await select_yes_or_no('要吃【情人节巧克力】吗？');
@@ -38,9 +39,9 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[700] = async () => {
+  handlers[0] = async () => {
     const aim = await select_target_in_storage(
-      700,
+      '蔬菜汁',
       (chara_id) =>
         era.get(`maxbase:${chara_id}:体力`) >
           era.get(`base:${chara_id}:体力`) * 2 &&
@@ -55,16 +56,15 @@ module.exports = (handlers) => {
         ' 的 ',
         ...sys_change_attr_and_print(aim, '体力', val),
       ]);
-      sys_change_motivation(aim, era.get(`cflag:${aim}:干劲`) - 1) &&
-        (await era.waitAnyKey());
+      sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add('item:蔬菜汁', -1);
       return true;
     }
   };
 
-  handlers[701] = async () => {
+  handlers[1] = async () => {
     const aim = await select_target_in_storage(
-      701,
+      '强化青汁',
       (chara_id) =>
         era.get(`maxbase:${chara_id}:体力`) >
           era.get(`base:${chara_id}:体力`) &&
@@ -83,15 +83,15 @@ module.exports = (handlers) => {
         '，',
         ...sys_change_attr_and_print(aim, '体力', 2000),
       ]);
-      era.add(`base:${aim}:药物残留`, 10);
+      era.add(`base:${aim}:药物残留`, 5);
       era.add('item:强化青汁', -1);
       return true;
     }
   };
 
-  handlers[702] = async () => {
+  handlers[2] = async () => {
     const aim = await select_target_in_storage(
-      702,
+      '浓缩咖啡',
       (chara_id) =>
         era.get(`maxbase:${chara_id}:精力`) >
           era.get(`base:${chara_id}:精力`) * 2 &&
@@ -106,20 +106,20 @@ module.exports = (handlers) => {
         ' 的 ',
         ...sys_change_attr_and_print(aim, '精力', val),
       ]);
-      sys_change_motivation(aim, era.get(`cflag:${aim}:干劲`) - 1) &&
-        (await era.waitAnyKey());
+      sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add(`base:${aim}:药物残留`, 5);
       era.add('item:浓缩咖啡', -1);
       return true;
     }
   };
 
-  handlers[703] = async () => {
+  handlers[3] = async () => {
     const aim = await select_target_in_storage(
-      703,
+      '提神剂',
       (chara_id) =>
-        era.get(`maxbase:${chara_id}:精力`) >
-          era.get(`base:${chara_id}:精力`) &&
+        (era.get(`maxbase:${chara_id}:精力`) >
+          era.get(`base:${chara_id}:精力`) ||
+          !sys_check_awake(chara_id)) &&
         era.get(`base:${chara_id}:智力`) > 10,
     );
     if (aim !== undefined) {
@@ -135,53 +135,52 @@ module.exports = (handlers) => {
         '，',
         ...sys_change_attr_and_print(aim, '精力', 2000),
       ]);
+      if (!era.get(`base:${aim}:体力`) < 1) {
+        era.add(`base:${aim}:体力`, 1);
+      }
+      era.set(`status:${aim}:沉睡`, 0);
+      era.set(`status:${aim}:马跳S`, 0);
       era.add(`base:${aim}:药物残留`, 10);
       era.add('item:提神剂', -1);
       return true;
     }
   };
 
-  handlers[705] = async () => {
+  handlers[4] = async () => {
     const aim = await select_target_in_storage(
-      705,
+      '抗抑郁药',
       (chara_id) => era.get(`base:${chara_id}:压力`) >= pressure_border.unhappy,
     );
     if (undefined !== aim) {
       const aim_chara = get_chara_talk(aim);
       await era.printAndWait([aim_chara.get_colored_name(), ' 的压力降低了……']);
-      sys_change_motivation(
-        aim,
-        Math.max(era.get(`cflag:${aim}:干劲`) - 1, -2),
-      ) && (await era.waitAnyKey());
+      sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add(`base:${aim}:压力`, -2500);
       era.add(`base:${aim}:药物残留`, 40);
-      era.add('item:705', -1);
+      era.add('item:抗抑郁药', -1);
       return true;
     }
   };
 
-  handlers[706] = async () => {
+  handlers[5] = async () => {
     const aim = await select_target_in_storage(
-      706,
+      '镇静剂',
       (chara_id) => era.get(`base:${chara_id}:性欲`) >= lust_border.itch,
     );
     if (undefined !== aim) {
       const aim_chara = get_chara_talk(aim);
       await era.printAndWait([aim_chara.get_colored_name(), ' 的性欲降低了……']);
-      sys_change_motivation(
-        aim,
-        Math.max(era.get(`cflag:${aim}:干劲`) - 1, -2),
-      ) && (await era.waitAnyKey());
+      sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add(`base:${aim}:性欲`, -1500);
       era.add(`base:${aim}:药物残留`, 40);
-      era.add('item:706', -1);
+      era.add('item:镇静剂', -1);
       return true;
     }
   };
 
-  handlers[707] = async () => {
+  handlers[6] = async () => {
     const aim = await select_target_in_storage(
-      707,
+      '清心茶',
       (chara_id) =>
         era.get(`base:${chara_id}:压力`) >= pressure_border.unhappy ||
         era.get(`base:${chara_id}:性欲`) >= lust_border.itch,
@@ -191,14 +190,14 @@ module.exports = (handlers) => {
       await era.printAndWait([aim_chara.get_colored_name(), ' 变得更冷静了……']);
       era.add(`base:${aim}:压力`, -1200);
       era.add(`base:${aim}:性欲`, -800);
-      era.add('item:707', -1);
+      era.add('item:清心茶', -1);
       return true;
     }
   };
 
-  handlers[708] = async () => {
+  handlers[7] = async () => {
     const aim = await select_target_in_storage(
-      708,
+      '催情喷雾',
       (chara_id) =>
         chara_id > 0 && era.get(`base:${chara_id}:性欲`) < lust_border.max,
     );
@@ -207,13 +206,13 @@ module.exports = (handlers) => {
       await era.printAndWait([aim_chara.get_colored_name(), ' 变得有点兴奋……']);
       era.add(`base:${aim}:压力`, -500);
       era.add(`base:${aim}:性欲`, 2000);
-      era.add('item:708', -1);
+      era.add('item:催情喷雾', -1);
       return true;
     }
   };
 
-  handlers[850] = async () => {
-    const ret = await select_target_in_storage(850, (e) =>
+  handlers[10] = async () => {
+    const ret = await select_target_in_storage('速效减肥药', (e) =>
       era.get(`status:${e}:发胖`),
     );
     if (ret !== undefined) {
@@ -229,16 +228,16 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[851] = async () => {
-    const ret = await select_target_in_storage(851, (e) =>
-      era.get(`status:${e}:头风`),
+  handlers[11] = async () => {
+    const ret = await select_target_in_storage('头痛飞飞', (e) =>
+      era.get(`status:${e}:偏头痛`),
     );
     if (ret !== undefined) {
       await era.printAndWait([
         get_chara_talk(ret).get_colored_name(),
         ' 不再偏头痛了……',
       ]);
-      era.set(`status:${ret}:头风`, 0);
+      era.set(`status:${ret}:偏头痛`, 0);
       era.set(
         `base:${ret}:药物残留`,
         Math.floor(
@@ -254,9 +253,9 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[852] = async () => {
+  handlers[12] = async () => {
     const ret = await select_target_in_storage(
-      852,
+      '健康茶',
       (e) => !era.get(`status:${e}:健康茶`),
     );
     if (ret !== undefined) {
@@ -270,9 +269,9 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[853] = async () => {
+  handlers[13] = async () => {
     const ret = await select_target_in_storage(
-      853,
+      '讨厌药',
       (e) => e && !era.get(`status:${e}:讨厌药`),
     );
     if (ret !== undefined) {
@@ -294,9 +293,9 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[854] = async () => {
+  handlers[14] = async () => {
     const aim = await select_target_in_storage(
-      854,
+      '抑制药',
       (chara_id) =>
         chara_id &&
         era.get(`love:${chara_id}`) > 40 &&
@@ -325,8 +324,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[855] = async () => {
-    const ret = await select_target_in_storage(850, (e) =>
+  handlers[15] = async () => {
+    const ret = await select_target_in_storage('量子减肥药', (e) =>
       era.get(`status:${e}:发胖`),
     );
     if (ret !== undefined) {
@@ -340,24 +339,24 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[856] = async () => {
-    const ret = await select_target_in_storage(851, (e) =>
-      era.get(`status:${e}:头风`),
+  handlers[16] = async () => {
+    const ret = await select_target_in_storage('布洛芬', (e) =>
+      era.get(`status:${e}:偏头痛`),
     );
     if (ret !== undefined) {
       await era.printAndWait([
         get_chara_talk(ret).get_colored_name(),
         ' 暂时不偏头痛了……',
       ]);
-      era.set(`status:${ret}:头风`, 0);
+      era.set(`status:${ret}:偏头痛`, 0);
       era.add('item:布洛芬', -1);
       return true;
     }
   };
 
-  handlers[860] = async () => {
+  handlers[45] = async () => {
     const aim = await select_target_in_storage(
-      860,
+      '马奶',
       (chara_id) =>
         era.get(`base:${chara_id}:体力`) !==
         era.get(`maxbase:${chara_id}:体力`),
@@ -379,9 +378,9 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[861] = async () => {
+  handlers[46] = async () => {
     const ret = await select_target_in_storage(
-      861,
+      '人奶',
       (e) => era.get(`base:${e}:体力`) !== era.get(`maxbase:${e}:体力`),
     );
     if (ret !== undefined) {
@@ -401,9 +400,9 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[870] = async () => {
+  handlers[17] = async () => {
     const ret = await select_target_in_storage(
-      870,
+      '生毛膏',
       (e) => era.get(`talent:${e}:腋毛成长`) < 2,
     );
     if (ret !== undefined) {
@@ -423,8 +422,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[871] = async () => {
-    const ret = await select_target_in_storage(871, (e) =>
+  handlers[18] = async () => {
+    const ret = await select_target_in_storage('脱毛膏', (e) =>
       era.get(`talent:${e}:腋毛成长`),
     );
     if (ret !== undefined) {
@@ -447,9 +446,9 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[872] = async () => {
+  handlers[19] = async () => {
     const ret = await select_target_in_storage(
-      872,
+      '私处生发膏',
       (e) => era.get(`talent:${e}:阴毛成长`) < 2,
     );
     if (ret !== undefined) {
@@ -469,8 +468,8 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[873] = async () => {
-    const ret = await select_target_in_storage(873, (e) =>
+  handlers[20] = async () => {
+    const ret = await select_target_in_storage('私处脱毛膏', (e) =>
       era.get(`talent:${e}:阴毛成长`),
     );
     if (ret !== undefined) {

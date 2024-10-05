@@ -1,8 +1,14 @@
+/**
+ * @file 东海帝王 - 日常
+ *
+ * @author 天马闪光蹄
+ */
 const era = require('#/era-electron');
 
-const call_check_script = require('#/system/script/sys-call-check');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
@@ -15,7 +21,7 @@ const get_gradient_color = require('#/utils/gradient-color');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const check_stages = require('#/data/event/check-stages');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
@@ -23,9 +29,16 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const handlers = {};
 
 handlers[event_hooks.load_talk] = async () => {
+  const teio_life_marks = new LifeEventMarks(3),
+    my_life_marks = new LifeEventMarks(0);
   if (
-    era.get('cflag:3:妊娠回合计时') ||
-    (new LifeEventMarks(0).sperm === 3 && era.get('cflag:0:妊娠回合计时'))
+    (era.get('cflag:3:妊娠阶段') !== 1 << pregnant_stage_enum.no &&
+      !teio_life_marks.report) ||
+    (my_life_marks.sperm === 3 &&
+      era.get('cflag:0:妊娠阶段') !== 1 << pregnant_stage_enum.no &&
+      !my_life_marks.report) ||
+    era.get('exp:3:生产次数') > 0 ||
+    era.get('exp:3:孩子数量') > 0
   ) {
     const teio = get_chara_talk(3);
     await teio.say_and_wait('训练员……要抛弃这个孩子？为什么……');
@@ -55,12 +68,16 @@ handlers[event_hooks.load_talk] = async () => {
   }
 };
 
-handlers[event_hooks.select] = () =>
+handlers[event_hooks.select] = () => {
+  if (!sys_check_awake(3)) {
+    throw new Error();
+  }
   get_chara_talk(3).say(
     Math.random() < 0.5
       ? `唔～叫无敌的帝王大人有什么事吗？`
       : `哼哼，我随时都准备好了！`,
   );
+};
 
 handlers[event_hooks.good_morning] = () => {
   const teio_talk = get_chara_talk(3),
@@ -93,6 +110,9 @@ handlers[event_hooks.good_morning] = () => {
 };
 
 handlers[event_hooks.talk] = async () => {
+  if (!sys_check_awake(3)) {
+    throw new Error();
+  }
   const teio_talk = get_chara_talk(3),
     me = get_chara_talk(0);
   if (era.get('base:3:体力') < era.get('maxbase:3:体力') * 0.45) {
@@ -237,7 +257,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
       await era.printAndWait(
         `${me.name} 和 ${
           teio.name
-        } 一起来到了街机厅痛快玩了一段时间，临走前，${me.get_couple_title()} 决定去娃娃机“浪费”掉多余的币。`,
+        } 一起来到了街机厅痛快玩了一段时间，临走前，${me.get_couple_title()} 决定去娃娃机『浪费』掉多余的币。`,
       );
       await era.printAndWait(
         `不过话虽这么说，${me.get_couple_title()} 两个还是比较紧张地操纵着摇杆，再三思考后摁下按钮……`,
@@ -286,7 +306,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
         await era.printAndWait('嗯……那就像情侣一样一起去看吧。');
       } else if (Math.random() < 0.5) {
         await era.printAndWait(
-          `在帝王的强烈要求下，${me.name} 选了一部“有挑战性的恐怖刺激电影”。`,
+          `在帝王的强烈要求下，${me.name} 选了一部『有挑战性的恐怖刺激电影』。`,
         );
         await era.printAndWait(
           `果不其然，每到关键镜头，小${teio.get_uma_sex_title()}就受不住了，${
@@ -365,7 +385,7 @@ handlers[event_hooks.school_rooftop] = async () => {
   await era.printAndWait(
     `${
       get_chara_talk(0).name
-    }们 将食盒摊放在……“天花板”上？一起享受起了美好的午饭时间。`,
+    }们 将食盒摊放在……『天花板』上？一起享受起了美好的午饭时间。`,
   );
 };
 
@@ -442,7 +462,10 @@ handlers[event_hooks.office_game] = async () => {
 };
 
 handlers[event_hooks.good_night] = async (hook) => {
-  const check = call_check_script(3, check_stages.want_make_love),
+  if (!sys_check_awake(0) || !sys_check_awake(3)) {
+    throw new Error();
+  }
+  const check = get_custom_check(3).is_want_make_love(),
     me = get_chara_talk(0),
     teio = get_chara_talk(3);
   era.print(`繁忙的一天结束，${me.name} 把 ${teio.name} 送到学生宿舍门口。`);
@@ -513,7 +536,7 @@ handlers[event_hooks.good_night] = async (hook) => {
             me.get_colored_name(),
             ' 的意见在此时此地并不重要，',
             teio.get_colored_name(),
-            '只是单纯地通知一下 ',
+            ' 只是单纯地通知一下 ',
             me.get_colored_name(),
             ' 接下来会发生什么。',
           ]);
@@ -646,11 +669,6 @@ handlers[event_hooks.celebration] = async () => {
   era.set('cflag:3:节日事件标记', 0);
 };
 
-/**
- * 东海帝王的日常事件，角色id=3
- *
- * @author 天马闪光蹄
- */
 module.exports = {
   /**
    * @param {HookArg} hook

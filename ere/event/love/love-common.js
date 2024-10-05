@@ -1,3 +1,9 @@
+/**
+ * @file 爱慕地文
+ *
+ * @author 雞雞
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
@@ -11,11 +17,6 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const event_hooks = require('#/data/event/event-hooks');
 
-/**
- * 通用爱慕事件
- *
- * @author 雞雞
- */
 module.exports = async (chara_id, hook, extra_flag, event_object) => {
   if (chara_id) {
     const chara = get_chara_talk(chara_id),
@@ -109,12 +110,12 @@ module.exports = async (chara_id, hook, extra_flag, event_object) => {
       }
     } else if (hook === event_hooks.back_school) {
       if (love === 74) {
-        await print_event_name('冲动', chara);
         const cur_chara_id = era.get('flag:当前互动角色');
         if (cur_chara_id && cur_chara_id !== chara_id) {
           add_event(event_hooks.back_school, event_object);
           return;
         }
+        await print_event_name('冲动', chara);
         if (cur_chara_id) {
           await era.printAndWait([
             '回到训练室时，',

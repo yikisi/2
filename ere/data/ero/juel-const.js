@@ -1,7 +1,12 @@
 const { palam2juel } = require('#/data/ero/orgasm-const');
 
+const shop_result_type_enum = { hate: 0, pleasure: 0, slave: 0, lover: 0 };
+Object.keys(shop_result_type_enum).forEach(
+  (k, i) => (shop_result_type_enum[k] = i + 1),
+);
+
 module.exports = {
-  base_emotion_juel: 75 * palam2juel,
+  base_emotion_juel: 80 * palam2juel,
   base_juel_reward: 100 * palam2juel,
   base_skill_price: 500,
   mark_prices: [0, 1000, 2000, 3500],
@@ -16,6 +21,7 @@ module.exports = {
     '施虐快感',
     '受虐快感',
   ],
+  shop_result_type_enum,
   talent_button_names_and_check_dict: {
     poisoned: {
       down: '消除特性',

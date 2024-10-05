@@ -108,7 +108,7 @@ module.exports = async (hook, extra_flag) => {
     era.drawLine();
     await flash.say_and_wait('日本达比……荣进闪耀……评价……');
     await era.printAndWait(
-      `回到特雷森学院的高铁上，${your_name} 无意之中看见荣进闪耀拿出手机，在搜索栏中输入以上的三段词汇。`,
+      `回到特雷森学园的高铁上，${your_name} 无意之中看见荣进闪耀拿出手机，在搜索栏中输入以上的三段词汇。`,
     );
     era.printButton('「在搜索人们对你的看法吗？」', 1);
     await era.input();
@@ -182,7 +182,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `荣进闪耀的脸上露出灿烂的笑容，看得出来，此刻的${flash.sex}完全沉浸于胜利所带来的喜悦中。`,
     );
-    await era.printAndWait('“嘟嘟。”');
+    await era.printAndWait('「嘟嘟。」');
     await era.printAndWait(
       `然后非常巧妙的，手机提示音也在这个时候传入${flash.sex}的耳中。`,
     );
@@ -391,7 +391,11 @@ module.exports = async (hook, extra_flag) => {
     era.printButton('「等回去以后，一起来规划未来吧。」', 1);
     await era.input();
     await flash.say_and_wait('嗯！');
-  } else if (extra_flag.race === race_enum.tenn_sho && extra_flag.rank === 1) {
+  } else if (
+    extra_flag.race === race_enum.tenn_sho &&
+    extra_flag.rank === 1 &&
+    edu_weeks > 96
+  ) {
     await print_event_name('璀璨之秋 · 二', flash);
     const me = get_chara_talk(0);
     await say_by_passer_by_and_wait(
@@ -403,7 +407,7 @@ module.exports = async (hook, extra_flag) => {
       `观众`,
       `荣进闪耀！恭喜 ${your_name}！！！」`,
     );
-    await flash.say_and_wait('呼……Juhu!Geschafft！我做到了！');
+    await flash.say_and_wait('呼……Juhu! Geschafft! 我做到了！');
     await era.printAndWait(
       '闪耀着灿眼光芒的东京竞马场上，以夺目之姿第一个冲过终点线的荣进闪耀向着喧闹的观众席热烈挥手。',
     );

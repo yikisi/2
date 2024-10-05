@@ -14,6 +14,7 @@ const {
 const { part_enum, part_names } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 /**
  * @param {number} chara_id
@@ -38,8 +39,8 @@ function check_pregnant_unprotect(chara_id, _virgin_size) {
     // 人类只有未怀孕和安定期没保护
     return (
       (pregnant_stage & 0xa) > 0 ||
-      // 0周怀孕的情况
-      !era.get(`cflag:${chara_id}:妊娠回合计时`)
+      (pregnant_stage !== 1 << pregnant_stage_enum.no &&
+        era.get(`cflag:${chara_id}:妊娠回合计时`) < 4)
     );
   }
 }
@@ -228,7 +229,8 @@ module.exports = {
       3 * era.get(`status:${chara_id}:发情`) -
       (era.get(`talent:${chara_id}:乳头类型`) === 2) +
       (nipple || 0) +
-      Math.floor(era.get(`base:${chara_id}:体重偏差`) / 2000);
+      Math.floor(era.get(`base:${chara_id}:体重偏差`) / 2000) +
+      new LifeEventMarks(chara_id).breast_buff;
     // 母乳体质最小A
     if (
       chara_sex - 1 &&
@@ -300,7 +302,22 @@ module.exports = {
     }
     return coefficient;
   },
-  /** @param {number} chara_id */
+  /**
+   * @param {number} chara_id
+   * @returns {number}
+   */
+  get_hip_size(chara_id) {
+    return (
+      era.get(`cflag:${chara_id}:臀围`) +
+      5 * (era.get(`talent:${chara_id}:淫臀`) === 2) +
+      2 * era.get(`status:${chara_id}:发情`) +
+      Math.floor(era.get(`base:${chara_id}:体重偏差`) / 2000)
+    );
+  },
+  /**
+   * @param {number} chara_id
+   * @returns {number}
+   */
   get_nipple_buff(chara_id) {
     return (
       0.2 +
@@ -357,6 +374,17 @@ module.exports = {
     return ratio;
   },
   get_sex_acceptable,
+  /**
+   * @param {number} chara_id
+   * @returns {number}
+   */
+  get_waist_size(chara_id) {
+    return (
+      era.get(`cflag:${chara_id}:腰围`) +
+      new LifeEventMarks(chara_id).waist_buff +
+      Math.floor(era.get(`base:${chara_id}:体重偏差`) / 1000)
+    );
+  },
   /**
    * 结算顺序：先次要部位，再有快感联动的次要部位，再有分泌物部位，最后主要部位
    * 口腔身体施虐受虐是次要部位

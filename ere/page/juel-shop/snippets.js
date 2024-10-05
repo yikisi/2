@@ -5,6 +5,8 @@ const {
   get_talent_price,
 } = require('#/system/ero/sys-get-juel-price');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const CharaTalk = require('#/utils/chara-talk');
 const get_color = require('#/utils/gradient-color');
 
@@ -12,21 +14,6 @@ const { buff_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
 const { talent_button_names_and_check_dict } = require('#/data/ero/juel-const');
 const { trained_talent_names } = require('#/data/ero/status-const');
-
-/** @returns {Promise<boolean>} */
-async function print_confirm_and_return() {
-  era.printMultiColumns(
-    ['确定', '还是算了'].map((e, i) => {
-      return {
-        accelerator: i * 100,
-        config: { align: 'center', width: 12 },
-        content: e,
-        type: 'button',
-      };
-    }),
-  );
-  return !(await era.input());
-}
 
 module.exports = {
   /**
@@ -209,7 +196,6 @@ module.exports = {
       }
     });
   },
-  print_confirm_and_return,
   /**
    * @param {number} chara_id
    * @param {number} tab_pointer
@@ -303,6 +289,6 @@ module.exports = {
         width: 23,
       });
     });
-    return await print_confirm_and_return();
+    return await select_yes_or_no('', '确定', '还是算了');
   },
 };

@@ -3,9 +3,11 @@ const { chara_colors } = require('../../ere/data/chara-colors');
 let dict = {},
   flag = true;
 
+console.log('[check-chara-colors.js] color conflicts:');
+
 function a(k, v) {
   if (dict[k]) {
-    console.log(`Error! ${k} ${dict[k]} <-> ${v}`);
+    console.log(`\t${k} ${dict[k]} <-> ${v}`);
     flag = false;
   } else {
     dict[k] = v;
@@ -21,5 +23,7 @@ Object.entries(chara_colors).forEach((e) => {
 });
 
 if (flag) {
-  console.log('clear');
+  console.log('\tnothing');
+} else {
+  process.exit(1);
 }

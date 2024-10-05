@@ -115,10 +115,14 @@ function sys_get_move_cost(location, chara_id) {
     case location_enum.rooftop:
     case location_enum.gate:
     case location_enum.chairman:
+    case location_enum.god:
+    case location_enum.trainer:
+    case location_enum.visitor:
+    case location_enum.clinic:
       if (chara_id) {
         is_walk = true;
         speed = Math.min(speed, era.get(`base:${chara_id}:速度`));
-      } else if ((temp = era.get('equip:0:单人载具'))) {
+      } else if ((temp = era.get('flag:单人载具'))) {
         ratio = vehicle_influences[temp];
       } else {
         is_walk = true;
@@ -130,14 +134,14 @@ function sys_get_move_cost(location, chara_id) {
     case location_enum.station:
     case location_enum.mejiro:
       if (chara_id) {
-        if ((temp = era.get('equip:0:多人载具'))) {
+        if ((temp = era.get('flag:多人载具'))) {
           ratio = vehicle_influences[temp];
         } else {
           is_walk = true;
           speed = Math.min(speed, era.get(`base:${chara_id}:速度`));
         }
       } else if (
-        (temp = era.get('equip:0:多人载具') || era.get('equip:0:单人载具'))
+        (temp = era.get('flag:多人载具') || era.get('flag:单人载具'))
       ) {
         ratio = vehicle_influences[temp];
       } else {
@@ -168,15 +172,20 @@ module.exports = {
     );
   },
   sys_check_awake,
-  /** @param {number} chara_id */
+  /**
+   * @param {number} chara_id
+   * @returns {number} 0b1：普通迷雾，隐藏好感爱慕；0b10：病娇迷雾，隐藏好感
+   */
   sys_check_hide_relation_and_love(chara_id) {
+    const hide_talent = era.get(`talent:${chara_id}:捉摸不透`);
     return (
-      chara_id &&
-      (era.get(`talent:${chara_id}:捉摸不透`) ||
-        era.get(`talent:${chara_id}:坦率程度`) === -1) &&
-      (chara_id === 32 ||
-        (!era.get('status:0:马语者') && !era.get('status:0:好感度镜片'))) &&
-      era.get(`love:${chara_id}`) < 75
+      (chara_id &&
+        (era.get(`talent:${chara_id}:捉摸不透`) ||
+          era.get(`talent:${chara_id}:坦率程度`) === -1) &&
+        (chara_id === 32 ||
+          (!era.get('status:0:马语者') && !era.get('status:0:好感度镜片'))) &&
+        era.get(`love:${chara_id}`) < 75) +
+      0b10 * (hide_talent && era.get(`talent:${chara_id}:病娇`) === 2)
     );
   },
   /** @param {number} chara_id */
@@ -216,7 +225,7 @@ module.exports = {
       chara_id > 0 &&
       era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置') &&
       (race_infos[era.get('flag:当前赛事')].track >= track_enum.longchamp ||
-        era.get('cflag:0:位置') !== location_enum.office)
+        era.get('cflag:0:位置') !== 0)
     );
   },
   sys_check_train_enabled,

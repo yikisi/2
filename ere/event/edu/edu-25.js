@@ -1,3 +1,8 @@
+/**
+ * @file 曼城茶座 - 育成
+ *
+ * @author Necroz
+ */
 const era = require('#/era-electron');
 
 const {
@@ -275,7 +280,7 @@ handlers[event_hooks.out_church] = async (hook, _, event_object) => {
         me.get_couple_title(),
         ' 就又回到了普通的街道上。',
       ]);
-      wait_flag = get_attr_and_print_in_event(25, undefined, 25);
+      wait_flag = get_attr_and_print_in_event(25, undefined, 35);
   }
   if (sys_like_chara(25, 0, 25) || wait_flag) {
     await era.waitAnyKey();
@@ -459,7 +464,7 @@ handlers[event_hooks.race_start] = async (_, { race }) => {
   }
 };
 
-/** @type {Record<string,function(CharaTalk,CharaTalk,string,{base_change:Record<string,number>,contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number},TachyonEduMarks,number,number):Promise<boolean|void>>} */
+/** @type {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams):Promise<boolean|void>>} */
 const race_end_handlers = {};
 
 [
@@ -469,7 +474,7 @@ const race_end_handlers = {};
 
 /**
  * @param {HookArg} _
- * @param {{base_change:Record<string,number>,contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 handlers[event_hooks.race_end] = async (_, extra_flag) => {
   const callname = sys_get_callname(25, 0),
@@ -597,10 +602,6 @@ handlers[event_hooks.crazy_fan_end] = async () => {
 };
 
 /**
- * 曼城茶座 - 育成
- *
- * @author Necroz
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

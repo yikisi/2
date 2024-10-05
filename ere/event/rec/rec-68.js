@@ -1,21 +1,22 @@
+/**
+ * @file 北部玄驹 - 招募
+ *
+ * @author 小黑
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 北部玄驹的招募事件，id=68
- *
- * @author 小黑
- */
-module.exports = {
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const kita = get_chara_talk(68),
       me = get_chara_talk(0);
     await era.printAndWait(
@@ -32,7 +33,7 @@ module.exports = {
     );
     await era.printAndWait(`${me.name} 一边感叹着，一边前进着。`);
     await era.printAndWait(
-      `作为特雷森学园里为数众多的新人训练员之一，为仍然没有担当的赛${kita.get_uma_sex_title()}们进行照顾，几乎是学院里代代相承的传统。`,
+      `作为特雷森学园里为数众多的新人训练员之一，为仍然没有担当的赛${kita.get_uma_sex_title()}们进行照顾，几乎是学园里代代相承的传统。`,
     );
     await era.printAndWait(
       '但实际上做起来，就是压迫新人训练员劳动力的苦力活。',
@@ -265,10 +266,12 @@ module.exports = {
         `${me.name} 看着正午的阳光和 ${kita.name} 带着歉意的表情，因为同这样一个孩子签订了契约而感到安心。`,
       );
       era.set('cflag:68:招募状态', recruit_flags.yes);
-      new KitaEduMarks().beginning++;
-      add_event(event_hooks.week_end, new EventObject(68, cb_enum.edu));
+      add_event(
+        event_hooks.week_end,
+        new EventObject(68, cb_enum.edu).set_arg('beginning'),
+      );
     } else {
       await era.printAndWait(`${me.name} 驱散心中的悸动，转身离开了训练场。`);
     }
-  },
+  }
 };

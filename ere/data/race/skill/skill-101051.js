@@ -1,0 +1,85 @@
+const UmaSkill = require('#/data/race/model/uma-skill');
+
+module.exports = new UmaSkill(
+  101051,
+  '终达群星',
+  '在比赛中段左右处在中间集团，速度提升，若是中距离比赛，且至此为止发动过7次技能，则速度会大幅提高',
+  10105,
+  1,
+  UmaSkill.rarity_enum.spe_r,
+  18,
+  340,
+  [() => true, () => true],
+  [
+    (args) =>
+      args.distance_rate >= 50 &&
+      args.distance_rate <= 55 &&
+      args.order_rate >= 40 &&
+      args.order_rate <= 80 &&
+      args.distance_type === 3 &&
+      args.activate_count_all >= 7,
+    (args) =>
+      args.distance_rate >= 50 &&
+      args.distance_rate <= 55 &&
+      args.order_rate >= 40 &&
+      args.order_rate <= 80,
+  ],
+  [5, 5],
+  [500, 500],
+  [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+  ],
+  [
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+  ],
+  [
+    [0.45, 0, 0],
+    [0.35, 0, 0],
+  ],
+  [
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+  ],
+  [
+    [0, 0, 0],
+    [0, 0, 0],
+  ],
+  [1, 0],
+  [60, 0],
+  0,
+  0,
+  false,
+  false,
+  [4],
+  [UmaSkill.ability_tag_enum.currentSpeed],
+);

@@ -1,3 +1,8 @@
+/**
+ * @file 卓芙 - 调教
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -22,7 +27,7 @@ handlers[ero_hooks.ero_start] = async () => {
     era.get('love:205') < 50 &&
     era.get('mark:205:欢愉') >= 2 &&
     era.get('mark:205:同心') >= 2 &&
-    era.get('status:205:发情') &&
+    era.get('tcvar:205:发情') &&
     era.get('tflag:强奸') <= 0 &&
     vp.sex_code === 0
   ) {

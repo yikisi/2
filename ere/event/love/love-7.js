@@ -1,3 +1,8 @@
+/**
+ * @file 黄金船 - 爱慕
+ *
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
@@ -7,6 +12,7 @@ const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-lo
 const { add_event, cb_enum } = require('#/event/queue');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -18,6 +24,7 @@ const { buff_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const YandereList = require('#/data/event/yandere-list');
 
 /** @param {CharaTalk} gold_ship */
 async function love_49(gold_ship) {
@@ -449,9 +456,10 @@ async function golden_ship_attack() {
   await era.printAndWait(`${gold_ship.sex}是如此说的。`);
   era.printButton('「杀死与你生死相依的好兄弟……」', 1);
   era.printButton('「杀死愿意为你牺牲的女朋友……」', 2);
-  setTimeout(() => {
-    ret.length < 5 && era.printButton('「哪个都不选……！」', 3);
-  }, 10000);
+  setTimeout(
+    () => ret.length < 5 && era.printButton('「哪个都不选……！」', 3),
+    10000,
+  );
   ret.push(await era.input());
   era.println();
 
@@ -494,7 +502,7 @@ async function golden_ship_attack() {
     ],
     0,
   );
-  // TODO 获得【独占力】技能
+  get_skills_and_print_in_event(7, [201151]);
   sys_change_motivation(7, ret[4] === 3 ? 3 : -3);
   if (ret[3] === 1) {
     era.set('talent:7:喜欢责骂', 1);
@@ -517,6 +525,7 @@ async function golden_ship_attack() {
     ]);
   }
   if (ret[4] !== 3) {
+    new YandereList().push(7);
     era.set('talent:7:病娇', 1);
   }
   await era.waitAnyKey();
@@ -535,10 +544,6 @@ async function golden_ship_attack() {
 }
 
 /**
- * 黄金船 - 爱慕
- *
- * @author 雞雞
- *
  * @param {HookArg} hook
  * @param _
  * @param {EventObject} event_object

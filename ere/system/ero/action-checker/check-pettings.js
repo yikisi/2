@@ -299,7 +299,7 @@ module.exports = (handlers) => {
       ) -
     50;
 
-  handlers[ero_hooks.fuck_tit_and_month] = (chara_id) =>
+  handlers[ero_hooks.fuck_tit_and_mouth] = (chara_id) =>
     handlers[ero_hooks.ask_tit_and_blow_job](chara_id) + 10;
 
   handlers[ero_hooks.suck_anal] = (chara_id) =>

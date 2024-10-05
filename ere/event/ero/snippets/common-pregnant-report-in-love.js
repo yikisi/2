@@ -6,6 +6,9 @@ const { buff_colors } = require('#/data/color-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 
 /**
+ * @author 雞雞
+ * @author 无名黑奴
+ *
  * @param {CharaTalk} father
  * @param {CharaTalk} mother
  * @param {number} unexpected_pregnant
@@ -36,7 +39,7 @@ async function common_pregnant_report_in_love(
       ' 再三询问确认，还是得到了孩子是自己骨肉的回答。',
     ]);
     await era.printAndWait([
-      '但',
+      '但 ',
       father.get_colored_name(),
       ' 对此毫无印象……',
     ]);

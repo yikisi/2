@@ -15,14 +15,14 @@ module.exports = {
       }
       delta = Math.min(
         delta *
-          (1 - (era.get('cflag:303:招募状态') === recruit_flags.yes) * 0.2),
+          (1 - (era.get('cflag:303:招募状态') === recruit_flags.yes) * 0.1),
         -1,
       );
     } else {
       delta = Math.max(
         delta *
           (1 +
-            (era.get('cflag:303:招募状态') === recruit_flags.yes) * 0.2 +
+            (era.get('cflag:303:招募状态') === recruit_flags.yes) * 0.1 +
             era.get('global:声望加成') / 100),
         1,
       );
@@ -54,14 +54,5 @@ module.exports = {
     val = Math.floor(val);
     era.add('flag:当前马币', val);
     return val;
-  },
-  sys_push_crazy_fan(chara_id) {
-    if (era.get('flag:游戏结束') > 0) {
-      if (chara_id) {
-        era.get('flag:极端粉丝').push(chara_id);
-      } else {
-        console.log(new Error(`error! invalid crazy fan ${chara_id}`).stack);
-      }
-    }
   },
 };

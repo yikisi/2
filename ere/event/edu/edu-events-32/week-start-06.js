@@ -545,7 +545,7 @@ module.exports = (handlers) => {
           32,
           undefined,
           0,
-          JSON.parse(`{"体力":${era.get('base:32:体力') * 0.2}`),
+          JSON.parse(`{"体力":${era.get('maxbase:32:体力') * 0.2}}`),
         );
         break;
       case 2:

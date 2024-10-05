@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const {
+  get_filled_exp_str,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -59,7 +60,7 @@ module.exports = {
           masochism_exp = era.get(`cstr:${chara.id}:初次受虐经历`);
 
         if (sadism_exp) {
-          sm_exp_list.push(sadism_exp);
+          sm_exp_list.push(get_filled_exp_str(sadism_exp, chara.id));
         }
         if (abuse_count || hit_count) {
           sm_exp_list.push(
@@ -78,7 +79,7 @@ module.exports = {
         push_link_break(sm_exp_list);
 
         if (masochism_exp) {
-          sm_exp_list.push(masochism_exp);
+          sm_exp_list.push(get_filled_exp_str(masochism_exp, chara.id));
         }
         if (abused_count || be_hit_count) {
           sm_exp_list.push(

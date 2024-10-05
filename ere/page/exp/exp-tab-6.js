@@ -6,6 +6,7 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 
 const {
+  get_filled_exp_str,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -34,10 +35,9 @@ const virgin_semen_desc = [
 const virgin_color_desc = ['粉嫩可人', '红润泛紫', '深邃成熟'];
 
 module.exports = {
-  virgin: true,
   /**
    * @param {CharaTalk} chara
-   * @param {{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}} flags
+   * @param {{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean,true_mark_level:number}} flags
    * @returns {{print():*[]}}
    */
   generate: function (chara, flags) {
@@ -129,11 +129,13 @@ module.exports = {
           cummed_exp = era.get(`cstr:${chara.id}:初次被内射经历`),
           unknown_cummed_exp = era.get(`cstr:${chara.id}:无自觉初次被内射经历`);
         if (virgin_exp) {
-          virgin_exp_list.push(virgin_exp);
+          virgin_exp_list.push(get_filled_exp_str(virgin_exp, chara.id));
         }
         if (flags.show_all_exp || virgin_exp) {
           if (unknown_virgin_exp) {
-            virgin_exp_list.push(unknown_virgin_exp);
+            virgin_exp_list.push(
+              get_filled_exp_str(unknown_virgin_exp, chara.id),
+            );
           }
           if (virgin_touched_count || penis_sex_count) {
             virgin_exp_list.push(
@@ -152,11 +154,13 @@ module.exports = {
         push_link_break(virgin_exp_list);
 
         if (cummed_exp) {
-          virgin_exp_list.push(cummed_exp);
+          virgin_exp_list.push(get_filled_exp_str(cummed_exp, chara.id));
         }
         if (flags.show_all_exp || cummed_exp) {
           if (unknown_cummed_exp) {
-            virgin_exp_list.push(unknown_cummed_exp);
+            virgin_exp_list.push(
+              get_filled_exp_str(unknown_cummed_exp, chara.id),
+            );
           }
           if (clitoris_semen || virgin_semen) {
             virgin_exp_list.push(
@@ -225,10 +229,14 @@ module.exports = {
       pregnant_buffer = '初潮还没有来';
     } else if (era.get(`status:${chara.id}:经期`)) {
       pregnant_buffer = '月经来潮中';
+    } else if (pregnant_stage === 1 << pregnant_stage_enum.resume) {
+      pregnant_buffer = pregnant_stage_names[1 << pregnant_stage_enum.resume];
+      if (flags.mark_level) {
+        pregnant_buffer += ` (${pregnant_timer} 周)`;
+      }
     } else if (
       pregnant_stage === 1 << pregnant_stage_enum.no ||
-      (!pregnant_timer &&
-        ((!chara.id && flags.mark_level !== 3) || flags.mark_level <= 2))
+      (pregnant_timer < 4 && flags.true_mark_level <= 2)
     ) {
       if (
         chara.id &&
@@ -241,11 +249,12 @@ module.exports = {
           (era.get('flag:当前周') - era.get(`cflag:${chara.id}:月经周`) + 4) %
           4
         ) {
-          case 1:
-            pregnant_buffer = '新的卵子正在成长中 ';
-            break;
+          case 0:
           case 2:
             pregnant_buffer = '卵子正在等待受精❤️ ';
+            break;
+          case 1:
+            pregnant_buffer = '新的卵子正在成长中 ';
             break;
           case 3:
             pregnant_buffer = '卵子已经失活，等待排出体外 ';
@@ -253,23 +262,19 @@ module.exports = {
       } else {
         pregnant_buffer = pregnant_stage_names[1 << pregnant_stage_enum.no];
       }
-      if (flags.mark_level === 3) {
+      if (flags.true_mark_level === 3) {
         pregnant_buffer += `(怀孕率${(
           get_pregnant_ratio(chara.id) * 100
         ).toFixed(2)}%)`;
       }
     } else {
-      if (pregnant_stage === 1 << pregnant_stage_enum.resume) {
-        pregnant_buffer = pregnant_stage_names[1 << pregnant_stage_enum.resume];
+      if (flags.mark_level >= 2) {
+        pregnant_buffer = pregnant_stage_names[pregnant_stage];
+      } else if (pregnant_stage >> pregnant_stage_enum.fetal > 0) {
+        pregnant_buffer = '肚子已经大大地挺了起来';
       } else {
-        if (flags.mark_level >= 2) {
-          pregnant_buffer = pregnant_stage_names[pregnant_stage];
-        } else if (pregnant_stage >> pregnant_stage_enum.fetal > 0) {
-          pregnant_buffer = '肚子已经大大地挺了起来';
-        } else {
-          pregnant_buffer =
-            '腹部尚且没有迹象，无意间改变的生活习惯与体检报告却在昭示生命的新生';
-        }
+        pregnant_buffer =
+          '腹部尚且没有迹象，无意间改变的生活习惯与体检报告却在昭示生命的新生';
       }
       if (flags.mark_level) {
         pregnant_buffer += ` (${pregnant_timer} 周)`;
@@ -293,4 +298,5 @@ module.exports = {
     };
   },
   name: page_name,
+  virgin: true,
 };

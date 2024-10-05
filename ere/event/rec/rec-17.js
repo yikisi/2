@@ -1,7 +1,12 @@
+/**
+ * @file 鲁铎象征 - 招募
+ *
+ * @author 露娜俘虏
+ */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const check_before_rec = require('#/event/rec/snippets/check-before-rec');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const CharaTalk = require('#/utils/chara-talk');
 
@@ -10,16 +15,11 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 鲁铎象征 - 招募
- *
- * @author 露娜俘虏
- */
-module.exports = {
-  override: true,
-  async run(hook) {
-    if (hook === event_hooks.recruit) {
-      if (await check_before_rec(17)) {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
+    if (stage === event_hooks.recruit) {
+      if (await this.check_before_rec()) {
         return false;
       }
       era.set('callname:17:-1', era.set('callname:17:-2', '露娜'));
@@ -92,15 +92,15 @@ module.exports = {
       era.println();
 
       await era.printAndWait(
-        `走进学院，${CharaTalk.me.name} 发现行人相当稀少——或者说，大门紧闭。`,
+        `走进学园，${CharaTalk.me.name} 发现行人相当稀少——或者说，大门紧闭。`,
       );
       await era.printAndWait(
         `${CharaTalk.me.name} 意识到自己来的时间有点早……或许太早了，真应该和浴室搏斗一番。`,
       );
       await era.printAndWait(
-        `但难得有时间，就四处走走吧。${CharaTalk.me.name} 翻过了围墙，跳进了学院里。`,
+        `但难得有时间，就四处走走吧。${CharaTalk.me.name} 翻过了围墙，跳进了学园里。`,
       );
-      await era.printAndWait('学院静悄悄的。');
+      await era.printAndWait('学园静悄悄的。');
       await era.printAndWait(
         `${CharaTalk.me.name} 有些好奇地抬起头四处张望。平日里，恐怕不会有人在此时进入校舍区，而正常时间，特雷森总是热闹非凡。`,
       );
@@ -212,7 +212,7 @@ module.exports = {
         `但随后，${luna.sex}敏锐地意识到，自己并非身处梦境。`,
       );
       era.drawLine();
-      era.printButton('「露娜。真的是你吗？」', 1);
+      era.printButton('「露娜，真的是你吗？」', 1);
       era.printButton('「露娜，你就是鲁铎象征？！」', 2);
       await era.input();
       await era.printAndWait(
@@ -236,7 +236,7 @@ module.exports = {
         event_hooks.recruit_start,
         new EventObject(17, cb_enum.recruit),
       );
-    } else if (hook === event_hooks.recruit_start) {
+    } else if (stage === event_hooks.recruit_start) {
       const chara_17 = new CharaTalk(17);
       era.drawLine();
       await era.printAndWait(
@@ -257,7 +257,7 @@ module.exports = {
         `${chara_17.sex}显然非常兴奋，直接将信递到了 ${CharaTalk.me.name} 的手里。`,
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 讪讪笑着，接过了这“烫手山芋”。`,
+        `${CharaTalk.me.name} 讪讪笑着，接过了这『烫手山芋』。`,
       );
       await era.printAndWait(
         `任务完成，干事就风一样地跑开了。${CharaTalk.me.name} 打了个哈哈早退。`,
@@ -310,5 +310,5 @@ module.exports = {
       new EventMarks(0).sub(event_hooks.recruit_start);
     }
     return true;
-  },
+  }
 };

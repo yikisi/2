@@ -30,7 +30,7 @@ module.exports = async (hook, _, event_object) => {
     await era.printAndWait('里见光钻拿下首次G1胜利后的某天。走在街上时──');
     await say_by_passer_by_and_wait(
       '游戏厅的工作人员',
-      '每人可以免费挑战一次抽豪华奖品的机会！目前正在举办“里见光钻G1获胜纪念活动”喔──！！」',
+      '每人可以免费挑战一次抽豪华奖品的机会！目前正在举办『里见光钻G1获胜纪念活动』喔──！！」',
     );
     era.printButton('「里见光钻的活动！？」', 1);
     await era.input();
@@ -47,7 +47,7 @@ module.exports = async (hook, _, event_object) => {
       '为了纪念我在G1获胜，集团的相关设施都正在举办活动。',
     );
     await daiya.say_and_wait(
-      '“遇到喜事就要回馈顾客，把快乐分享给大家”，这是里见集团的经营方针。',
+      '『遇到喜事就要回馈顾客，把快乐分享给大家』，这是里见集团的经营方针。',
     );
     await daiya.say_and_wait('这件事情应该也已经得到学园那边的取可了的说……');
     await era.printAndWait(
@@ -78,13 +78,13 @@ module.exports = async (hook, _, event_object) => {
       daiya.get_colored_name(),
       '&',
       kita.get_colored_name(),
-      '「请给我们三人份的“光钻汉堡排”──！」',
+      '「请给我们三人份的『光钻汉堡排』──！」',
     ]);
     await era.printAndWait('家庭餐厅店员「是。请稍候。」');
     era.printButton('「竟然还有活动限定的菜色……」', 1);
     await era.input();
     await daiya.say_and_wait(
-      '呵呵呵，其实这个“光钻汉堡排”是还原母亲为我做的汉堡排喔。',
+      '呵呵呵，其实这个『光钻汉堡排』是还原母亲为我做的汉堡排喔。',
     );
     await daiya.say_and_wait(
       '……在我比赛的前一天，母亲她代替了主厨，自己亲手为我做了汉堡排。',
@@ -95,12 +95,12 @@ module.exports = async (hook, _, event_object) => {
     await daiya.say_and_wait(
       '无论工作多么忙碌。母亲都一定会亲自为我做帮我加油打气的汉堡排。',
     );
-    await kita.say_and_wait('所以才会叫做“光钻汉堡排”啊！');
+    await kita.say_and_wait('所以才会叫做『光钻汉堡排』啊！');
     await daiya.say_and_wait(
       '嗯，虽然吃起来的味道应该不会完全一样……但我也很期待呢♪',
     );
     await era.printAndWait(
-      '家庭餐厅店员「让您久等了。为您送上“光钻汉堡排”。」',
+      '家庭餐厅店员「让您久等了。为您送上『光钻汉堡排』。」',
     );
     await daiya.say_and_wait('哇啊，来了来了！我要开动了──！');
     await daiya.say_and_wait('嚼嚼…………嗯嗯！');
@@ -109,7 +109,7 @@ module.exports = async (hook, _, event_object) => {
     );
     await daiya.say_and_wait('……呵呵呵，一定是母亲她亲自监修的吧♪');
     await era.printAndWait(
-      '以家庭餐厅的菜色来说，“光钻汉堡排”的确是一道非常有手工感的料理。',
+      '以家庭餐厅的菜色来说，『光钻汉堡排』的确是一道非常有手工感的料理。',
     );
     await kita.say_and_wait(
       '都这样到处办盛大活动了，想必伯父跟伯母对小钻首次在G1获胜这件事很开心吧？',
@@ -182,7 +182,7 @@ module.exports = async (hook, _, event_object) => {
       `了解她的状况后，${me.name} 告诉${daiya.sex}目白莱恩等人正在担心${daiya.sex}的事情。`,
     );
     await daiya.say_and_wait(
-      '“哎呀，居然害她们担心了。不过我现在已经没事了。事情都已经处理得差不多了。”',
+      '『哎呀，居然害她们担心了。不过我现在已经没事了。事情都已经处理得差不多了。』',
     );
     era.printButton('「我还是觉得不放心，我去接你吧」', 1);
     await era.input();
@@ -356,7 +356,7 @@ module.exports = async (hook, _, event_object) => {
         '训练员，这件事就交给我吧。我负责去自动贩卖机买茶回来。',
       );
       await era.printAndWait(
-        `${me.name} 看着兴奋的里见光钻离开……心中开始对${daiya.sex}刚才所说的“跟一般贩卖机不太一样”这句话感到忧心。`,
+        `${me.name} 看着兴奋的里见光钻离开……心中开始对${daiya.sex}刚才所说的『跟一般贩卖机不太一样』这句话感到忧心。`,
       );
       await era.printAndWait(
         `还是跟去看看好了。正当 ${me.name} 打算追上${daiya.sex}的脚步时──`,
@@ -394,10 +394,10 @@ module.exports = async (hook, _, event_object) => {
     await daiya.say_and_wait('谢谢！我看看……！');
     await daiya.say_and_wait('好棒喔……！这间店里总共有129种的甜点可以点呢……！');
     await daiya.say_and_wait(
-      '……咦？“吃完全品项的客人还会得到特别荣誉……！？”这是……什么意思呀？',
+      '……咦？『吃完全品项的客人还会得到特别荣誉……！？』这是……什么意思呀？',
     );
     await mcqueen.say_and_wait(
-      '这、这是……我也只是听说的，据说是吃完全品项的人，会得到“大师”的称号吧。',
+      '这、这是……我也只是听说的，据说是吃完全品项的人，会得到『大师』的称号吧。',
     );
     await mcqueen.say_and_wait('听说至今都还没有人得到那个称号过……');
     await gold_ship.say_and_wait('没错──除了（减重中的）麦昆以外。');
@@ -421,7 +421,7 @@ module.exports = async (hook, _, event_object) => {
       await daiya.say_and_wait('这样呀……那我就点那些──');
       await mcqueen.say_and_wait('这里才没有那些菜色！黄金船还是快点回家吧！');
       await era.printAndWait(
-        '后来，里见光钻点了目白麦昆推荐的甜点。……这是考量了热量问题后的选择。',
+        '后来，里见光钻点了目白麦昆推荐的甜点……这是考量了热量问题后的选择。',
       );
       era.println();
       wait_flag = get_attr_and_print_in_event(
@@ -446,7 +446,7 @@ module.exports = async (hook, _, event_object) => {
         '是什么样的继承人啊！？唉，想不到我犯的过错居然连累到后辈……！',
       );
       await era.printAndWait(
-        `里见光钻摄取了非常庞大的热量。${daiya.sex}会就这样直接成为第二个“大师”吗……！？`,
+        `里见光钻摄取了非常庞大的热量。${daiya.sex}会就这样直接成为第二个『大师』吗……！？`,
       );
       era.add(`base:67:体重偏差`, 500);
       era.println();
@@ -522,7 +522,7 @@ module.exports = async (hook, _, event_object) => {
       '果蔬店的大叔「啊啊，也对……！经你这么一说，我确实是因为沮丧而消沉。」',
     );
     await daiya.say_and_wait(
-      '“不能败给魔咒！”、“不要放在心上，要开心过日子！”。',
+      '『不能败给魔咒！』、『不要放在心上，要开心过日子！』。',
     );
     await daiya.say_and_wait(
       '只要抱着这样的想法去叫卖的话，魔咒一定也立刻就破除掉了♪',
@@ -546,7 +546,7 @@ module.exports = async (hook, _, event_object) => {
         '啊，你该不会不相信吧？那我就再破除一个魔咒给你看！',
       );
       await era.printAndWait(
-        '果蔬店的大叔「如果是魔咒的事情的话，我这里还有呢！“生意好的时候，小黄瓜一定卖不完”是这样的一个魔咒！」',
+        '果蔬店的大叔「如果是魔咒的事情的话，我这里还有呢！『生意好的时候，小黄瓜一定卖不完』是这样的一个魔咒！」',
       );
       await kita.say_and_wait(
         '那我们去宣传吃小黄瓜的好处吧。像是……表演怎么做才会好吃的方法之类的？',
@@ -560,11 +560,11 @@ module.exports = async (hook, _, event_object) => {
     }
   } else if (edu_marks.heartbeat_excite === 1) {
     edu_marks.heartbeat_excite++;
-    await print_event_name('Heartbeat·Excite', daiya);
+    await print_event_name('Heartbeat · Excite', daiya);
     era.println();
     await era.printAndWait('外出时，里见光钻在一张超大海报前停下了脚步。');
     await daiya.say_and_wait(
-      '“游乐园史上最恐怖的云霄飞车──‘天堂’诞生……寻求勇敢的挑战者”？',
+      '『游乐园史上最恐怖的云霄飞车──天堂诞生……寻求勇敢的挑战者』？',
     );
     await daiya.say_and_wait(
       '会是高度很高……还是速度很快之类的吗？不知道会是怎样的云霄飞车呢……！',
@@ -577,10 +577,10 @@ module.exports = async (hook, _, event_object) => {
       '啊，就是那个！那个在很高的地方的轨道……就是传说中最恐怖的云霄飞车没错吧！？',
     );
     await era.printAndWait(
-      '那就是“天堂”……几乎贯穿云霄的高度，果然是如其名的规格！',
+      '那就是『天堂』……几乎贯穿云霄的高度，果然是如其名的规格！',
     );
     await era.printAndWait(
-      '行人A「天啊……感觉真的是去了一趟“天堂”……！完全没料到会是那样……」',
+      '行人A「天啊……感觉真的是去了一趟『天堂』……！完全没料到会是那样……」',
     );
     await era.printAndWait(
       '行人B「不行不行，我真的没办法……我连五代之前的祖先都看见了……！」',
@@ -614,7 +614,7 @@ module.exports = async (hook, _, event_object) => {
     await daiya.say_and_wait('一起窥探未知的世界、一起发现新东西──');
     await daiya.say_and_wait('一起尝试新的体验，也一起寻找更开心的事情……');
     await daiya.say_and_wait(
-      '只是稍微回想一下就充满了很多美好的回忆。……然后我就明白了。',
+      '只是稍微回想一下就充满了很多美好的回忆……然后我就明白了。',
     );
     await daiya.say_and_wait('有训练员在身边的时候……所有的兴奋都是加倍的！');
     await daiya.say_and_wait(
@@ -662,7 +662,7 @@ module.exports = async (hook, _, event_object) => {
       );
       await daiya.say_and_wait('旋转咖啡杯跟鬼屋……我们一起玩到最后一秒吧！');
       await daiya.say_and_wait('快呀，训练员！我们第一站要去鬼屋喔～');
-      await daiya.say_and_wait('我看看喔──最恐怖的鬼屋……“地狱”！');
+      await daiya.say_and_wait('我看看喔──最恐怖的鬼屋……『地狱』！');
       await era.printAndWait(
         `即使没有玩云霄飞车，${me.name} 还是和里见光钻一起度过了快乐的时光！`,
       );
@@ -671,7 +671,7 @@ module.exports = async (hook, _, event_object) => {
     }
   } else if (edu_weeks === 95 + 1) {
     await print_event_name('新年参拜', daiya);
-    await daiya.say_and_wait('新年快乐。欢迎来参加“新年派对”！');
+    await daiya.say_and_wait('新年快乐。欢迎来参加『新年派对』！');
     await era.printAndWait(
       `新年。受到里见光钻的邀约，${me.name} 来到里见集团举办的新年派对。`,
     );
@@ -689,7 +689,7 @@ module.exports = async (hook, _, event_object) => {
       '光钻的父亲「证明当初光钻的直觉果然没有错──之后的古马级赛事也要麻烦你了。」',
     );
     era.printButton(
-      `「好的。我一定会引导她成为“知名赛${daiya.get_uma_sex_title()}”」`,
+      `「好的。我一定会引导她成为『知名赛${daiya.get_uma_sex_title()}』」`,
       1,
     );
     await era.input();
@@ -727,7 +727,7 @@ module.exports = async (hook, _, event_object) => {
     );
     await daiya.say_and_wait('哪里，我还差得远呢。');
     await daiya.say_and_wait(
-      `我还在努力钻研身为“知名赛${daiya.get_uma_sex_title()}”应该要有的样子。`,
+      `我还在努力钻研身为『知名赛${daiya.get_uma_sex_title()}』应该要有的样子。`,
     );
     await era.printAndWait(
       `光钻的前训练员「成为了知名赛${daiya.get_uma_sex_title()}……就代表国外远征也会在计划范围内啰？」`,
@@ -879,12 +879,12 @@ module.exports = async (hook, _, event_object) => {
       await daiya.say_and_wait('嘿呀啊啊啊啊啊啊！喝！嘿呀！嘿！');
       await daiya.say_and_wait('呼────！我写得怎么样呢？训练员！');
       await era.printAndWait(
-        `于是，${daiya.sex}用非常优美的字体，写出了“成就宿愿”四个大字！`,
+        `于是，${daiya.sex}用非常优美的字体，写出了『成就宿愿』四个大字！`,
       );
       era.println();
       wait_flag = get_attr_and_print_in_event(67, undefined, 70);
     }
-    era.set('flag:67:节日事件标记', 0);
+    era.set('cflag:67:节日事件标记', 0);
   }
   wait_flag && (await era.waitAnyKey());
   return true;

@@ -134,7 +134,7 @@ module.exports = (handlers) => {
     await era.printAndWait([me.get_colored_name(), ' 点了点头作为回应']);
     await era.printAndWait('啊，难道说是担心钱的问题吗？');
     era.printButton(
-      '「毕竟这算出差，机票钱什么的学院会出，这方面不用担心」',
+      '「毕竟这算出差，机票钱什么的学园会出，这方面不用担心」',
       1,
     );
     await era.input();
@@ -776,7 +776,7 @@ module.exports = (handlers) => {
     await tachyon.print_and_wait([
       '……但从身上不适的感觉来看，八成又是日本杯那时的事吧',
     ]);
-    await tachyon.print_and_wait([t_call_c, '已经超越了极限']);
+    await tachyon.print_and_wait([t_call_c, ' 已经超越了极限']);
     await tachyon.print_and_wait(['超越了 ', tachyon.get_colored_name()]);
     await tachyon.print_and_wait([
       '所以……就算',

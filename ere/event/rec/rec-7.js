@@ -1,25 +1,23 @@
-const era = require('#/era-electron');
-
-const event_hooks = require('#/data/event/event-hooks');
-const { yes } = require('#/data/event/recruit-flags');
-const { get_trainer_title } = require('#/data/info-generator');
-
 /**
- * 黄金船的招募事件，id=7
+ * @file 黄金船 - 招募
  *
  * @author 雞雞
  */
-module.exports = {
-  override: true,
-  /**
-   * @param {number} stage_id
-   * @returns {Promise<boolean>}
-   */
-  async run(stage_id) {
-    const chara_color = require('#/data/chara-colors').chara_colors[7],
-      chara_name = era.get('callname:7:-2'),
+const era = require('#/era-electron');
+
+const CustomizedRecruit = require('#/event/rec/rec-common');
+
+const chara_color = require('#/data/chara-colors').chara_colors[7];
+const event_hooks = require('#/data/event/event-hooks');
+const recruit_flags = require('#/data/event/recruit-flags');
+const { get_trainer_title } = require('#/data/info-generator');
+
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
+    const chara_name = era.get('callname:7:-2'),
       your_name = era.get('callname:0:-2');
-    if (stage_id === event_hooks.recruit) {
+    if (stage === event_hooks.recruit) {
       await era.printAndWait(
         `这个早晨朗日清天，${your_name} 穿着一身凛然的训练员装束来到了训练场。`,
       );
@@ -45,7 +43,7 @@ module.exports = {
         `像这样的银色毛发，在分类中属于芦毛。${your_name} 翻阅公用平板电脑上的资料库，很快就通过毛色分类找到了这位学生的名字。`,
       );
 
-      era.printButton('（黄金……船。……什么嘛，明明是银色的。）', 1);
+      era.printButton('（黄金……船……什么嘛，明明是银色的。）', 1);
       await era.input();
       await era.printAndWait(
         `银色的 ${chara_name}，这个笑话让 ${your_name} 不禁笑了出声。`,
@@ -84,9 +82,9 @@ module.exports = {
 
       era.println();
       await era.printAndWait(`成功被 ${chara_name} 招募了！`);
-      era.set(`cflag:7:招募状态`, yes);
+      era.set(`cflag:7:招募状态`, recruit_flags.yes);
       return true;
     }
     return false;
-  },
+  }
 };

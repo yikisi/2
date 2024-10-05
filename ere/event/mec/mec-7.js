@@ -2,11 +2,34 @@ const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
+const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
+  get_race_contestants(info) {
+    switch (era.get('flag:当前赛事')) {
+      case race_enum.arim_kin:
+        if (era.get('cflag:7:育成回合计时') < 96) {
+          return [new LegendUmaSelector(37, 1.1)];
+        }
+        return [new LegendUmaSelector(37, 1.1), new LegendUmaSelector(48, 1.1)];
+      case race_enum.takz_kin:
+        if (era.get('cflag:7:育成回合计时') > 96) {
+          return [new LegendUmaSelector(48, 1.1)];
+        }
+        break;
+      case race_enum.tenn_sho:
+        if (era.get('cflag:7:育成回合计时') > 96) {
+          return [new LegendUmaSelector(48, 1.1)];
+        }
+    }
+    return super.get_race_contestants(info);
+  }
+
   set_callname() {
-    era.set('callname:7:0', '阿训');
+    if (!this.set_callname_from_src()) {
+      era.set('callname:7:0', '阿训');
+    }
   }
 
   get_race_cloth() {

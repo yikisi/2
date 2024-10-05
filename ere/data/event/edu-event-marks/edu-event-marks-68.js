@@ -3,7 +3,7 @@ const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 class KitaEduMarks extends EduEventMarks {
   // 北部玄驹登场
   beginning;
-  // 紧急开店·小北按摩！
+  // 紧急开店 · 小北按摩！
   kitasan_touch;
   // 温泉旅行券
   hot_spring;

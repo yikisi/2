@@ -19,9 +19,6 @@ const {
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { calc_pleasure } = require('#/system/ero/sys-calc-palam');
 const { merge_stain, set_stain } = require('#/system/ero/sys-calc-stain');
-const {
-  sys_get_colored_full_callname,
-} = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const {
@@ -71,22 +68,25 @@ function sys_do_sex(attacker, defender, item) {
           attacker_skill_part = '接吻';
           era.add(`exp:${attacker.id}:接吻次数`, 1);
           era.add(`exp:${defender.id}:接吻次数`, 1);
+          if (!attacker.id || !defender.id) {
+            era.add(`tcvar:${attacker.id || defender.id}:获得因子`, 1);
+          }
           if (!era.get(`cstr:${attacker.id}:初吻经历`)) {
             era.set(`cstr:${attacker.id}:初吻经历`, [
               `初吻在 ${date} 献给了 `,
-              sys_get_colored_full_callname(attacker.id, defender.id),
+              { c: defender.id },
             ]);
           }
           if (!era.get(`cstr:${defender.id}:初吻经历`)) {
             if (is_defender_awake) {
               era.set(`cstr:${defender.id}:初吻经历`, [
                 `初吻在 ${date} 献给了 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
               ]);
             } else if (!era.get(`cstr:${defender.id}:无自觉初吻经历`)) {
               era.set(`cstr:${defender.id}:无自觉初吻经历`, [
                 `实际上，初吻在 ${date} 就已被 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 夺走',
               ]);
             }
@@ -100,6 +100,9 @@ function sys_do_sex(attacker, defender, item) {
         case part_enum.virgin:
           era.add(`exp:${attacker.id}:口交次数`, 1);
           era.add(`exp:${defender.id}:阴部玩弄次数`, 1);
+          if (!attacker.id || !defender.id) {
+            era.add(`tcvar:${attacker.id || defender.id}:获得因子`, 1);
+          }
           update_blow_job_exp(date, attacker.id, defender.id);
           break;
         case part_enum.penis:
@@ -126,7 +129,7 @@ function sys_do_sex(attacker, defender, item) {
           era.add(`exp:${defender.id}:戳身体次数`, 1);
           if (!era.get(`cstr:${attacker.id}:初次乳交经历`)) {
             era.set(`cstr:${attacker.id}:初次乳交经历`, [
-              sys_get_colored_full_callname(attacker.id, defender.id),
+              { c: defender.id },
               ` 的肉棒会因为胸部兴奋，在 ${date} 学会了这一点`,
             ]);
           }
@@ -141,7 +144,8 @@ function sys_do_sex(attacker, defender, item) {
       // B罩杯以下有减成
       // 淫乳+5cm胸围，等效目标部位掌握+1
       attack_extra_bonus =
-        ((get_bust_size(attacker.id) - era.get(`cflag:${attacker.id}:下胸围`)) /
+        ((get_bust_size(attacker.id, true) -
+          era.get(`cflag:${attacker.id}:下胸围`)) /
           2.5 -
           6) /
         10;
@@ -165,13 +169,13 @@ function sys_do_sex(attacker, defender, item) {
               era.set(`cstr:${defender.id}:初次挤奶经历`, [
                 `在 ${date} 第一次`,
                 attacker.id !== defender.id ? '被 ' : ' ',
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 爱抚了乳头，立起来了',
               ]);
             } else if (!era.get(`cstr:${defender.id}:无自觉初次挤奶经历`)) {
               era.set(`cstr:${defender.id}:无自觉初次挤奶经历`, [
                 '实际上，那对胸部已经成为 ',
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ` 的玩物了，从 ${date} 开始`,
               ]);
             }
@@ -215,7 +219,7 @@ function sys_do_sex(attacker, defender, item) {
           if (!era.get(`cstr:${attacker.id}:初次足交经历`)) {
             era.set(`cstr:${attacker.id}:初次足交经历`, [
               `在 ${date} 第一次将 `,
-              sys_get_colored_full_callname(attacker.id, defender.id),
+              { c: defender.id },
               ' 的肉棒踩在了脚下',
             ]);
           }
@@ -237,7 +241,7 @@ function sys_do_sex(attacker, defender, item) {
           if (!era.get(`cstr:${attacker.id}:初次身交经历`)) {
             era.set(`cstr:${attacker.id}:初次身交经历`, [
               `${date}，是第一次用身体接纳 `,
-              sys_get_colored_full_callname(attacker.id, defender.id),
+              { c: defender.id },
               ' 肉棒和欲望的日子',
             ]);
           }
@@ -250,10 +254,13 @@ function sys_do_sex(attacker, defender, item) {
         case part_enum.mouth:
           era.add(`exp:${attacker.id}:阴部玩弄次数`, 1);
           era.add(`exp:${defender.id}:口交次数`, 1);
+          if (!attacker.id || !defender.id) {
+            era.add(`tcvar:${attacker.id || defender.id}:获得因子`, 1);
+          }
           if (!era.get(`cstr:${defender.id}:初次口交经历`)) {
             era.set(`cstr:${defender.id}:初次口交经历`, [
               `在 ${date} 被 `,
-              sys_get_colored_full_callname(defender.id, attacker.id),
+              { c: attacker.id },
               ' 教会了这张嘴的另一种用法',
             ]);
           }
@@ -273,6 +280,9 @@ function sys_do_sex(attacker, defender, item) {
         case part_enum.mouth:
           era.add(`exp:${attacker.id}:阴部玩弄次数`, 1);
           era.add(`exp:${defender.id}:口交次数`, 1);
+          if (!attacker.id || !defender.id) {
+            era.add(`tcvar:${attacker.id || defender.id}:获得因子`, 1);
+          }
           update_attacking_mouth_exp(date, defender.id, attacker.id);
           set_stain(attacker.id, attacker.part, stain_enum.saliva);
           break;
@@ -283,13 +293,13 @@ function sys_do_sex(attacker, defender, item) {
             if (is_defender_awake) {
               era.set(`cstr:${defender.id}:初次手交经历`, [
                 `手指，果然是最原始也最好用的取乐道具呀，被 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 `在 ${date} 教会了这一点`,
               ]);
             } else if (!era.get(`cstr:${defender.id}:无自觉初次手交经历`)) {
               era.set(`cstr:${defender.id}:无自觉初次手交经历`, [
                 `实际上，在 ${date} 的某一天，手指被 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 的爱液涂上了色情的气味',
               ]);
             }
@@ -309,12 +319,12 @@ function sys_do_sex(attacker, defender, item) {
           if (
             // 无自觉非处女算破处
             attacker_virgin_status === vp_status_enum.dont_know ||
-            // 真·处女算破处
+            // 真 · 处女算破处
             attacker_virgin_status === vp_status_enum.virgin
           ) {
             era.set(`cstr:${attacker.id}:破处经历`, [
               `在 ${date} ${is_defender_awake ? '' : '偷偷'}将处女献给了 `,
-              sys_get_colored_full_callname(attacker.id, defender.id),
+              { c: defender.id },
               ' ',
               penis_desc[get_penis_size(defender.id)],
               '的肉棒',
@@ -330,12 +340,12 @@ function sys_do_sex(attacker, defender, item) {
             if (
               // 无自觉非童贞算失童贞
               defender_virgin_status === vp_status_enum.dont_know ||
-              // 真·童贞算失童贞
+              // 真 · 童贞算失童贞
               defender_virgin_status === vp_status_enum.virgin
             ) {
               era.set(`cstr:${defender.id}:失去童贞经历`, [
                 `童贞在 ${date} 被 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 夺走了',
               ]);
             }
@@ -345,11 +355,11 @@ function sys_do_sex(attacker, defender, item) {
           } else {
             era.add(`exp:${attacker.id}:阴道睡奸`, 1);
             era.add(`exp:${defender.id}:阴茎被睡奸`, 1);
-            // 只有真·童贞才能在睡奸情况下失去童贞
+            // 只有真 · 童贞才能在睡奸情况下失去童贞
             if (defender_virgin_status === vp_status_enum.virgin) {
               era.set(`cstr:${defender.id}:无自觉失去童贞经历`, [
                 `实际上，已在 ${date} 被 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 夺走',
               ]);
               era.set(`talent:${defender.id}:童贞`, vp_status_enum.dont_know);
@@ -380,7 +390,7 @@ function sys_do_sex(attacker, defender, item) {
         if (!era.get(`cstr:${attacker.id}:初次肛交经历`)) {
           era.set(`cstr:${attacker.id}:初次肛交经历`, [
             `${date}，因 `,
-            sys_get_colored_full_callname(attacker.id, defender.id),
+            { c: defender.id },
             ' 初次领会了臀部的性意义',
           ]);
         }
@@ -388,7 +398,7 @@ function sys_do_sex(attacker, defender, item) {
         damage.attacker += 20 * era.get(`talent:${defender.id}:凶器`);
         damage = change_cost(defender.id, attacker.id, part_enum.anal, damage);
       }
-      attack_extra_buff += 2 * era.get(`talent:${attacker.id}:淫臀`);
+      attack_extra_buff += 2 * (era.get(`talent:${attacker.id}:淫臀`) === 2);
       break;
     case part_enum.penis:
       switch (defender_part) {
@@ -404,13 +414,13 @@ function sys_do_sex(attacker, defender, item) {
           if (!era.get(`cstr:${defender.id}:初次乳交经历`)) {
             if (is_defender_awake) {
               era.set(`cstr:${defender.id}:初次乳交经历`, [
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ` 的肉棒会因为胸部兴奋，在 ${date} 被教会了这一点`,
               ]);
             } else if (!era.get(`cstr:${defender.id}:无自觉初次乳交经历`)) {
               era.set(`cstr:${defender.id}:无自觉初次乳交经历`, [
                 `实际上，在 ${date} 之后，胸部已经适应侍弄 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 的肉棒了，虽然本人并不知情',
               ]);
             }
@@ -431,13 +441,13 @@ function sys_do_sex(attacker, defender, item) {
             if (is_defender_awake) {
               era.set(`cstr:${defender.id}:初次手交经历`, [
                 '手指，果然是最原始也最好用的取乐道具呀，被 ',
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ` 在 ${date} 教会了这一点`,
               ]);
             } else if (!era.get(`cstr:${defender.id}:无自觉初次手交经历`)) {
               era.set(`cstr:${defender.id}:无自觉初次手交经历`, [
                 `实际上，在 ${date} 的某一天，手指被 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 的爱液涂上了色情的气味',
               ]);
             }
@@ -449,13 +459,13 @@ function sys_do_sex(attacker, defender, item) {
             if (is_defender_awake) {
               era.set(`cstr:${defender.id}:初次足交经历`, [
                 `在 ${date}，第一次将 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 的肉棒踩在了脚下',
               ]);
             } else if (!era.get(`cstr:${defender.id}:无自觉初次足交经历`)) {
               era.set(`cstr:${defender.id}:无自觉初次足交经历`, [
                 '实际上，连足与趾都成了 ',
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ` 肉棒的玩物，在 ${date} 之后走路时会觉得寂寞吗`,
               ]);
             }
@@ -468,13 +478,13 @@ function sys_do_sex(attacker, defender, item) {
             if (is_defender_awake) {
               era.set(`cstr:${defender.id}:初次身交经历`, [
                 `${date}，是身体第一次被 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 的肉棒用欲望填满的日子',
               ]);
             } else if (!era.get(`cstr:${defender.id}:无自觉初次身交经历`)) {
               era.set(`cstr:${defender.id}:无自觉初次身交经历`, [
                 `实际上，从 ${date} 起，睡颜，娇喘，无防备的身体，都已成了 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 的肉棒套',
               ]);
             }
@@ -497,12 +507,12 @@ function sys_do_sex(attacker, defender, item) {
           if (
             // 无自觉非童贞算失童贞
             attacker_virgin_status === vp_status_enum.dont_know ||
-            // 真·童贞算失童贞
+            // 真 · 童贞算失童贞
             attacker_virgin_status === vp_status_enum.virgin
           ) {
             era.set(`cstr:${attacker.id}:失去童贞经历`, [
               `在 ${date} ${is_defender_awake ? '' : '偷偷'}将童贞交给了 `,
-              sys_get_colored_full_callname(attacker.id, defender.id),
+              { c: defender.id },
             ]);
             era.set(`talent:${attacker.id}:童贞`, vp_status_enum.no);
           }
@@ -520,7 +530,7 @@ function sys_do_sex(attacker, defender, item) {
             ) {
               era.set(`cstr:${defender.id}:破处经历`, [
                 `处女在 ${date} 被 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' ',
                 penis_desc[get_penis_size(attacker.id)],
                 '的肉棒夺走了',
@@ -532,11 +542,11 @@ function sys_do_sex(attacker, defender, item) {
           } else {
             era.add(`exp:${attacker.id}:阴茎睡奸`, 1);
             era.add(`exp:${defender.id}:阴道被睡奸`, 1);
-            // 只有真·处女才能在睡奸情况下破处
+            // 只有真 · 处女才能在睡奸情况下破处
             if (defender_virgin_status === vp_status_enum.virgin) {
               era.set(`cstr:${defender.id}:无自觉破处经历`, [
                 `实际上，已在 ${date} 被 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 夺走',
               ]);
               era.set(`talent:${defender.id}:处女`, vp_status_enum.dont_know);
@@ -571,13 +581,13 @@ function sys_do_sex(attacker, defender, item) {
             if (is_defender_awake) {
               era.set(`cstr:${defender.id}:初次肛交经历`, [
                 `${date}，初次被 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 教会了臀部的性意义',
               ]);
             } else if (!era.get(`cstr:${defender.id}:无自觉初次肛交经历`)) {
               era.set(`cstr:${defender.id}:无自觉初次肛交经历`, [
                 `实际上，在 ${date} 被 `,
-                sys_get_colored_full_callname(defender.id, attacker.id),
+                { c: attacker.id },
                 ' 玩弄过，大概回不去了吧',
               ]);
             }

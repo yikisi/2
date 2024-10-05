@@ -4,7 +4,7 @@ class TachyonEduMarks extends EduEventMarks {
   // 日常部分
   // 闲聊 - 喊着玩
   talk;
-  // 什么药·红茶？
+  // 什么药 · 红茶？
   black_tea;
   // 什么饮料
   drink;

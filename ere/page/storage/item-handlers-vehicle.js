@@ -5,15 +5,15 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { vehicle_names } = require('#/data/move-const');
 
 async function single_vehicle(item) {
-  const equipped = era.get('equip:0:单人载具');
-  const item_name = vehicle_names[item - 750 + 1];
-  if (equipped === item - 750 + 1) {
+  const equipped = era.get('flag:单人载具');
+  const item_name = vehicle_names[item - 60 + 1];
+  if (equipped === item - 60 + 1) {
     const ret = await select_yes_or_no(
       `现在正以 ${item_name} 作为单人载具！要解除装备吗？`,
     );
     if (ret) {
       await era.printAndWait(`取消装备了 ${item_name}……`);
-      era.set('equip:0:单人载具', 0);
+      era.set('flag:单人载具', 0);
     }
   } else {
     const ret = await select_yes_or_no(
@@ -23,21 +23,21 @@ async function single_vehicle(item) {
     );
     if (ret) {
       await era.printAndWait(`装备了 ${item_name} 作为单人载具……`);
-      era.set('equip:0:单人载具', item - 750 + 1);
+      era.set('flag:单人载具', item - 60 + 1);
     }
   }
 }
 
 async function multiple_vehicle(item) {
-  const equipped = era.get('equip:0:多人载具');
-  const item_name = vehicle_names[item - 750 + 1];
-  if (equipped === item - 750 + 1) {
+  const equipped = era.get('flag:多人载具');
+  const item_name = vehicle_names[item - 60 + 1];
+  if (equipped === item - 60 + 1) {
     const ret = await select_yes_or_no(
       `现在与他人外出时乘坐 ${item_name}！要解除装备吗？`,
     );
     if (ret) {
       await era.printAndWait(`取消装备了 ${item_name}……`);
-      era.set('equip:0:多人载具', 0);
+      era.set('flag:多人载具', 0);
     }
   } else {
     const ret = await select_yes_or_no(
@@ -47,7 +47,7 @@ async function multiple_vehicle(item) {
     );
     if (ret) {
       await era.printAndWait(`装备了 ${item_name} 作为多人载具……`);
-      era.set('equip:0:多人载具', item - 750 + 1);
+      era.set('flag:多人载具', item - 60 + 1);
     }
   }
 }
@@ -56,9 +56,9 @@ async function multiple_vehicle(item) {
 module.exports = (handlers) => {
   new Array(3)
     .fill(0)
-    .forEach((_, i) => (handlers[750 + i] = () => single_vehicle(750 + i)));
+    .forEach((_, i) => (handlers[i + 60] = () => single_vehicle(750 + i)));
 
   new Array(4)
     .fill(0)
-    .forEach((_, i) => (handlers[753 + i] = () => multiple_vehicle(753 + i)));
+    .forEach((_, i) => (handlers[i + 60] = () => multiple_vehicle(753 + i)));
 };

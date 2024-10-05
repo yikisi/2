@@ -1,3 +1,10 @@
+/**
+ * @file 里见光钻 - 育成
+ *
+ * @author 某知名手游公司编剧
+ * @author 黑奴二号（改编）
+ * @author 无名黑奴（修订）
+ */
 const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
@@ -41,7 +48,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
       '……那个，不好意思。我还是决定要做额外训练了，可以吗？',
     );
     era.printButton('「还是不要太过勉强……」', 1);
-    await era.waitAnyKey();
+    await era.input();
     await daiya.say_and_wait('……其实我昨天才刚看过小北比赛的影片──');
     await daiya.say_and_wait(
       '小北现在的表现真的变得越来越快，实力越来越坚强了……',
@@ -66,7 +73,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
         '留着明天再用吗……？唔唔，可是我没有自信自己一定忍得住……！',
       );
       era.printButton('「把斗志储蓄下来，最后再一次爆发吧」', 1);
-      await era.waitAnyKey();
+      await era.input();
       await daiya.say_and_wait(
         '……我明白了。那就这么说好了哦。明天一定要让我彻底训练……！',
       );
@@ -77,7 +84,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
         '这样的话，心里的那股冲动就会越来越高昂，明天一定就能非常地努力了！',
       );
       era.printButton('「那我们就一起看吧！」', 1);
-      await era.waitAnyKey();
+      await era.input();
       await daiya.say_and_wait('嗯♪');
       await era.printAndWait(
         '于是，在里见光钻热情的解说下，我们一起看完了以北部玄驹为重点的比赛影片。',
@@ -163,7 +170,7 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
           '可是，在我休养的时候，比赛中的其他对手们都会更加进步──',
         );
         era.printButton('「你一定能追过她们的」', 1);
-        await era.waitAnyKey();
+        await era.input();
         await daiya.say_and_wait('……我知道了。凡事都不能过于心急，对吧？');
         await daiya.say_and_wait(
           '虽然心情上会觉得很不甘心，但这份心情就等伤势复原后再用在训练上吧。',
@@ -217,7 +224,7 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
           '可是我几乎都不觉得痛了呀。只要小心一点就不会有问题的……！',
         );
         era.printButton('「还是在伤势恶化之前打消念头吧」', 1);
-        await era.waitAnyKey();
+        await era.input();
         await daiya.say_and_wait(
           '……说得也是呢。轻伤也是有可能不小心变成重伤的。',
         );
@@ -291,10 +298,10 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
   await print_event_name('抽奖试手气！', daiya);
   await era.printAndWait(`回程路上，${me.name} 和里见光钻经过商店街时──`);
   await era.printAndWait(
-    '商店街人员「看过来看过来，现正举办新春大抽奖～！特等奖可是“温泉旅游券”！」',
+    '商店街人员「看过来看过来，现正举办新春大抽奖～！特等奖可是『温泉旅游券』！」',
   );
   await era.printAndWait(
-    '商店街人员「一等奖是“特等胡萝卜汉堡排”，二等奖是“一整堆胡萝卜”，三等奖则是“一根胡萝卜”！」',
+    '商店街人员「一等奖是『特等胡萝卜汉堡排』，二等奖是『一整堆胡萝卜』，三等奖则是『一根胡萝卜』！」',
   );
   await era.printAndWait(
     '商店街人员「来喔来喔，是好玩的抽奖活动喔！任何人都可以来抽喔～！」',
@@ -323,9 +330,9 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
   const gacha = get_random_value(0, 9);
   if (gacha === 0) {
     await era.printAndWait(
-      '商店街人员「天啊！恭喜────！！抽到特等奖“温泉旅游券”了～～～～！！」',
+      '商店街人员「天啊！恭喜────！！抽到特等奖『温泉旅游券』了～～～～！！」',
     );
-    await era.printAndWait('获得了“温泉旅游券”。');
+    await era.printAndWait('获得了「温泉旅游券」。');
     await daiya.say_and_wait(
       '成……成功了～～！！特等奖！是特等奖喔，训练员！！',
     );
@@ -368,9 +375,9 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
     );
   } else if (gacha === 9) {
     await era.printAndWait(
-      '商店街人员「很可惜，没抽中！参加奖是“卫生纸”喔～」',
+      '商店街人员「很可惜，没抽中！参加奖是『卫生纸』喔～」',
     );
-    await era.printAndWait('获得了“卫生纸”。');
+    await era.printAndWait('获得了「卫生纸」。');
     await daiya.say_and_wait('…………没抽中吗…………？');
     await daiya.say_and_wait('…………一次。');
     await daiya.say_and_wait('我要再抽一次！');
@@ -405,9 +412,9 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
     );
   } else if (gacha === 1) {
     await era.printAndWait(
-      '商店街人员「恭喜抽到一等奖～！奖品是“特等胡萝卜汉堡排”！」',
+      '商店街人员「恭喜抽到一等奖～！奖品是『特等胡萝卜汉堡排』！」',
     );
-    await era.printAndWait('获得了“特等胡萝卜汉堡排”。');
+    await era.printAndWait('获得了「特等胡萝卜汉堡排」。');
     await daiya.say_and_wait('哎呀，胡萝卜汉堡排……！');
     await daiya.say_and_wait(
       '这个豪迈的造型还真是不错。在我家吃胡萝卜的时候都会是切好的，所以我一直很期待能体验到这样的外食经验呢♪',
@@ -448,8 +455,10 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       JSON.parse('{"体力":300}'),
     );
   } else if (gacha < 5) {
-    await era.printAndWait('商店街人员「二等奖～！！奖品是“一整堆胡萝卜”！」');
-    await era.printAndWait('获得了“一整堆胡萝卜”。');
+    await era.printAndWait(
+      '商店街人员「二等奖～！！奖品是『一整堆胡萝卜』！」',
+    );
+    await era.printAndWait('获得了「一整堆胡萝卜」。');
     await daiya.say_and_wait('哇啊～得到了好多的胡萝卜呀♪');
     await daiya.say_and_wait('训练员，你带回去吧。毕竟抽奖券是训练员的嘛。');
     era.printButton('「这么多我哪吃得完！」', 1);
@@ -479,7 +488,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       `因为这道料理新潮到让 ${me.name} 觉得不放心，所以 ${me.name} 提出要帮忙一起做。`,
     );
     await era.printAndWait(
-      `隔天──里见光钻向 ${me.name} 报告，栗东宿舍的大家非常喜欢“胡萝卜鲷鱼烧”的事情。`,
+      `隔天──里见光钻向 ${me.name} 报告，栗东宿舍的大家非常喜欢「胡萝卜鲷鱼烧」的事情。`,
     );
     era.println();
     wait_flag = sys_change_motivation(67, 1);
@@ -491,8 +500,8 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
         JSON.parse('{"体力":200}'),
       ) || wait_flag;
   } else {
-    await era.printAndWait('商店街人员「三等奖～！奖品是“一根胡萝卜”！」');
-    await era.printAndWait('获得了“一根胡萝卜”。');
+    await era.printAndWait('商店街人员「三等奖～！奖品是『一根胡萝卜』！」');
+    await era.printAndWait('获得了「一根胡萝卜」。');
     await daiya.say_and_wait('一根……真的很抱歉，训练员。枉费你宝贵的抽奖券……');
     await daiya.say_and_wait('应该是我的气势不够……');
     era.printButton('「那就吃这根胡萝卜补充精神吧！」', 1);
@@ -650,14 +659,14 @@ handlers[event_hooks.office_cook] = async (hook, extra_flag, event_object) => {
   edu_marks.banned_coffee++;
   await print_event_name('禁忌特调', daiya);
   await era.printAndWait(
-    '“想要学会怎么煮出好喝的咖啡”。曼城茶座答应了要帮里见光钻实现这个心愿。',
+    '「想要学会怎么煮出好喝的咖啡」。曼城茶座答应了要帮里见光钻实现这个心愿。',
   );
   await daiya.say_and_wait('今天要麻烦多多指教了！');
   era.printButton('「麻烦你了！」', 1);
   await era.input();
   await coffee.say_and_wait('是，请多指教……一起煮出好喝的咖啡吧。');
   await coffee.say_and_wait(
-    '咖啡会因出产的农园不同而味道不同。……品种跟生长环境也有很大的影响。',
+    '咖啡会因出产的农园不同而味道不同……品种跟生长环境也有很大的影响。',
   );
   await coffee.say_and_wait('找到自己喜欢的豆子也是乐趣之一……请试着选选看吧……');
   await daiya.say_and_wait('有这么多……！不知道该怎么选才好呢。');
@@ -708,7 +717,7 @@ handlers[event_hooks.office_cook] = async (hook, extra_flag, event_object) => {
   );
   await daiya.say_and_wait('咖啡……！');
   await coffee.say_and_wait(
-    '我想，这么做一定能诞生出很有趣的咖啡。……“朋友”……也是这么认为的。',
+    '我想，这么做一定能诞生出很有趣的咖啡……『朋友』……也是这么认为的。',
   );
   await daiya.say_and_wait('嘿嘿嘿，对吧！我自己也想像不到会是怎样的咖啡呢。');
   await daiya.say_and_wait(
@@ -795,12 +804,6 @@ handlers[event_hooks.race_end] = async (_, extra_flag) => {
 };
 
 /**
- * 里见光钻的育成事件
- *
- * @author cy
- * @author 黑奴二号（改编）
- * @author 黑奴队长（修订）
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

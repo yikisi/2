@@ -14,7 +14,7 @@ const {
 
 const { race_enum } = require('#/data/race/race-const');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,string,{contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number},TachyonEduMarks,number,number):Promise<boolean|void>>} handlers */
+/** @param {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams,TachyonEduMarks,number,number):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
   handlers[race_enum.sank_hai] = async (tachyon, me, callname, extra_flag) => {
     await print_event_name('未知因素', tachyon);
@@ -223,8 +223,8 @@ module.exports = (handlers) => {
       '了',
     ]);
     era.println();
-    await era.printAndWait(['闪烁如光的', tachyon.sex]);
-    await era.printAndWait(['漆黑如影的', coffee.sex]);
+    await era.printAndWait(['闪烁如光的', tachyon.get_colored_sex()]);
+    await era.printAndWait(['漆黑如影的', coffee.get_colored_sex()]);
     await era.printAndWait(['最开始就是如此简单的事']);
     era.println();
     await era.printAndWait('只是像孩子一样稚气的愿望');

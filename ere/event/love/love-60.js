@@ -1,3 +1,8 @@
+/**
+ * @file 优秀素质 - 爱慕
+ *
+ * @author 红红火火恍惚
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -53,7 +58,7 @@ async function love_49_week_start(chara_talk) {
     `在${chara_talk.sex}体内搅拌的手指加快了运动。每次都发出咕啾咕啾的淫猥的声音，${chara_talk.sex}也逐渐变得混乱了起来。`,
   );
   chara_talk.say(`我……我喜欢 ${callname}，最喜欢了！所以、更激烈一点吧！`);
-  chara_talk.say(`要去了，要去了，${callname}，我要去了……～～～～！！`);
+  chara_talk.say(`要去了，要去了，${callname}，我要去了～～～～！！`);
   await chara_talk.print_and_wait(
     `优秀素质仰起身子，腰抖个不停，喷出了潮水。潮水越过为了不弄脏床单而铺上的毛巾，将床单打了个浇湿。长时间的绝顶让${chara_talk.sex}浑身颤抖，在满足感的余韵中，${chara_talk.sex}沉沉的睡了过去。`,
   );
@@ -346,9 +351,9 @@ async function love_89(chara_talk) {
 }
 
 /**
- * 优秀素质 - 爱慕
- *
- * @author 红红火火恍惚
+ * @param {HookArg} hook
+ * @param _
+ * @param {EventObject} event_object
  */
 module.exports = async (hook, _, event_object) => {
   const love = era.get('love:60'),

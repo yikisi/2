@@ -2,14 +2,21 @@ const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
-const { buff_colors } = require('#/data/color-const');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const { buff_colors } = require('#/data/color-const');
+const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
+const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
   get_status() {
     const ret = [];
     if (era.get('status:37:荣耀德比')) {
-      ret.push({ color: buff_colors[1], content: '荣耀德比' });
+      ret.push({
+        color: buff_colors[1],
+        content: '荣耀德比',
+        title: '参赛时属性+50%',
+      });
     }
     if (era.get('status:37:必行之事')) {
       ret.push({ color: buff_colors[1], content: '必行之事' });
@@ -27,6 +34,24 @@ module.exports = class extends CustomizedMec {
     return -1 * era.get('status:37:虚弱');
   }
 
+  get_race_contestants(info) {
+    switch (era.get('flag:当前赛事')) {
+      case race_enum.japa_cup:
+        if (era.get('cflag:37:育成回合计时') < 96) {
+          return [1, 47].map((e) => new LegendUmaSelector(e, 1.2));
+        }
+        break;
+      case race_enum.arim_kin:
+        if (era.get('cflag:37:育成回合计时') < 96) {
+          return [1, 5, 18, 47].map((e) => new LegendUmaSelector(e, 1.1));
+        }
+        break;
+      case race_enum.tenn_spr:
+        return [new LegendUmaSelector(25, 1.1)];
+    }
+    return super.get_race_contestants(info);
+  }
+
   get_success_rate_buff() {
     return 5 * (era.get('status:37:必行之事') - era.get('status:37:分心'));
   }
@@ -37,7 +62,7 @@ module.exports = class extends CustomizedMec {
         `训练员${get_chara_talk(0).get_adult_sex_title()}`,
         get_chara_talk(0).sex_code - 1 ? 'Mein Lieben' : 'Mein Lieber',
       ]);
-    } else {
+    } else if (!this.set_callname_from_src()) {
       era.set(
         'callname:37:0',
         `训练员${get_chara_talk(0).get_adult_sex_title()}`,

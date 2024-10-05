@@ -58,18 +58,21 @@ module.exports = {
         if (era.get(`cflag:${chara_id}:招募状态`) !== recruit_flags.yes) {
           return [
             race_infos[era.get('flag:当前赛事')].race_class === class_enum.G1
-              ? ''
+              ? undefined
               : `${base}_运`,
             base,
             'default',
-          ];
+          ].filter((e) => e);
         }
         return get_custom_mec(chara_id).get_race_cloth();
       default:
         if (holiday === 5) {
           ret = [`${base}_婚`];
         } else if (holiday === 8 && era.get(`cflag:${chara_id}:殿堂`)) {
-          return [`${base}${era.get(`cstr:${chara_id}:决胜服`)}`, 'default'];
+          return [
+            `${base}${era.get(`cstr:${chara_id}:决胜服`) || ''}`,
+            'default',
+          ];
         } else if (holiday === 13) {
           ret = [`${base}_仆`, `${base}_应援`, `${base}_礼`, `${base}_游`];
         } else if (holiday === 47) {

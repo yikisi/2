@@ -174,6 +174,7 @@ module.exports = (handlers) => {
     handlers[ero_hooks.cowgirl] =
     handlers[ero_hooks.stimulate_glans_by_virgin] =
     handlers[ero_hooks.ask_stimulate_g_spot] =
+    handlers[ero_hooks.fucked_suspended_congress] =
       (chara_id) =>
         10 * era.get(`talent:${chara_id}:工口意愿`) +
         talent2acceptable[era.get(`talent:${chara_id}:早泄`)] +
@@ -196,6 +197,7 @@ module.exports = (handlers) => {
     handlers[ero_hooks.stimulate_glans_by_anal] =
     handlers[ero_hooks.ask_stimulate_large_intestine] =
     handlers[ero_hooks.ask_stimulate_womb] =
+    handlers[ero_hooks.fucked_suspended_congress_anal_sex] =
       (chara_id) =>
         10 * era.get(`talent:${chara_id}:工口意愿`) +
         talent2acceptable[era.get(`talent:${chara_id}:早泄`)] +

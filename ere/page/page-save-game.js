@@ -1,6 +1,7 @@
 ﻿const era = require('#/era-electron');
 
 const print_page_header = require('#/page/components/page-header');
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const CharaTalk = require('#/utils/chara-talk');
 
@@ -24,14 +25,14 @@ module.exports = async () => {
       const comm_desc = era.get(`global:saves:${ind}`);
       buffer.push({
         accelerator: ind,
-        config: { width: 22 },
+        config: { width: 20 },
         content: comm_desc || '空存档栏位',
         type: 'button',
       });
       if (comm_desc && !comm_desc.startsWith('(FILE LOST)')) {
         buffer.push({
           accelerator: ind + 100,
-          config: { width: 2 },
+          config: { align: 'right', width: 4 },
           content: '改名',
           type: 'button',
         });
@@ -53,25 +54,13 @@ module.exports = async () => {
         if (ret < 100) {
           const cur = era.get(`global:saves:${ret}`);
           if (cur && !cur.startsWith('(FILE LOST)')) {
-            era.printMultiColumns([
-              {
-                content: `要覆盖 ${ret} 号栏位的存档吗？`,
-                type: 'text',
-              },
-              {
-                accelerator: 0,
-                config: { align: 'center', width: 12 },
-                content: '是',
-                type: 'button',
-              },
-              {
-                accelerator: 100,
-                config: { align: 'center', width: 12 },
-                content: '否',
-                type: 'button',
-              },
-            ]);
-            if (await era.input()) {
+            if (
+              !(await select_yes_or_no(
+                `要覆盖 ${ret} 号栏位的存档吗？`,
+                '是',
+                '否',
+              ))
+            ) {
               break;
             }
           }
@@ -95,25 +84,13 @@ module.exports = async () => {
             );
             name = await era.input();
           } while (name && name.length > 50);
-          era.printMultiColumns([
-            {
-              content: `要将 ${ret - 100} 号栏位的存档改名为 [${name}] 吗？`,
-              type: 'text',
-            },
-            {
-              accelerator: 0,
-              config: { align: 'center', width: 12 },
-              content: '是',
-              type: 'button',
-            },
-            {
-              accelerator: 100,
-              config: { align: 'center', width: 12 },
-              content: '否',
-              type: 'button',
-            },
-          ]);
-          if ((await era.input()) === 0) {
+          if (
+            await select_yes_or_no(
+              `要将 ${ret - 100} 号栏位的存档改名为 [${name}] 吗？`,
+              '是',
+              '否',
+            )
+          ) {
             era.set(`global:saves:${ret - 100}`, name.toString());
             era.saveGlobal();
             msg_notification = `${ret - 100} 号栏位的存档改名成功`;

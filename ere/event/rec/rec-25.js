@@ -1,9 +1,15 @@
+/**
+ * @file 曼城茶座-招募，id=25
+ *
+ * @author Necroz
+ */
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -12,15 +18,9 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/**
- * 曼城茶座-招募，id=25
- *
- * @author Necroz
- */
-module.exports = {
-  override: true,
-  /** @param {number} stage */
-  async run(stage) {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const coffee = get_chara_talk(25),
       event_marks = new EventMarks(0),
       me = get_chara_talk(0);
@@ -688,5 +688,5 @@ module.exports = {
           new EventObject(25, cb_enum.edu).set_arg('beginning'),
         );
     }
-  },
+  }
 };

@@ -1,20 +1,26 @@
 const era = require('#/era-electron');
 
+const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
+const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const simulation_game_in_event = require('#/event/snippets/simulation-game-in-event');
 
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
 const status_desc = require('#/data/desc/status-desc.json');
+const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
-const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
+const { skill_sets, skills_dict } = require('#/data/race/skill/skill-const');
 
 /** @param {Record<string,function(CharaTalk,string,string,{wait:boolean},function):Promise<*>>} handlers */
 module.exports = (handlers) => {
@@ -53,8 +59,8 @@ module.exports = (handlers) => {
     await flash.say_and_wait(
       '因为在德国，我们认为猪能够带来幸运和财富。所以新年到来之际，会将以猪为原型的礼物赠送给亲朋好友，用作祝福。',
     );
-    era.printButton('「原来如此，那还真是很贵重的礼物啊。」', 1);
-    era.printButton(`「原来如此，所以这是猪啊。」`, 2);
+    era.printButton('「原来如此，那还真是很贵重的礼物啊。」（全属性+10）', 1);
+    era.printButton(`「原来如此，所以这是猪啊。」（技能点数+70）`, 2);
     const temp = await era.input();
     if (temp === 1) {
       await era.printAndWait(
@@ -245,6 +251,7 @@ module.exports = (handlers) => {
       `从那道目光中，${your_name} 读出了不屈的坚持与无论如何也要达成目的的执着。`,
     );
     era.printButton('「……好吧。如果到时候真的没有问题的话，那就去吧。」', 1);
+    await era.input();
     await era.printAndWait(`最终，${your_name} 轻叹一口气，选择了退让。`);
     era.println();
     era.print([
@@ -404,7 +411,7 @@ module.exports = (handlers) => {
     era.printButton('「是的，我希望你能和荣进闪耀进行模拟比赛。」', 1);
     await era.input();
     await era.printAndWait(
-      `特雷森学院学生会办公室内，『皇帝』${luna.name} 面露平和之色地看着 ${your_name}。`,
+      `特雷森学园学生会办公室内，『皇帝』${luna.name} 面露平和之色地看着 ${your_name}。`,
     );
     await luna.say_and_wait(
       `真是意外的请求啊。想要和我一起赛跑的${flash.get_uma_sex_title()}有很多，但需要我去赛跑的训练员可真是罕见呢。`,
@@ -514,7 +521,7 @@ module.exports = (handlers) => {
     await flash.say_and_wait('而且……我也很期待呢，与更强者的对决。');
     era.drawLine({ content: '约定日' });
     await era.printAndWait(
-      `${your_name} 和荣进闪耀一起前往特雷森学院的操场处。`,
+      `${your_name} 和荣进闪耀一起前往特雷森学园的操场处。`,
     );
     await mr_cb.say_and_wait('那么准备好的话就可以开始咯。');
     await flash.say_and_wait('好的，请多多指教，千明代表同学。');
@@ -534,8 +541,24 @@ module.exports = (handlers) => {
     await mr_cb.say_and_wait(
       '已经可以预料到会是一场很尽兴的比赛了，我可不会放水的哦。',
     );
-    era.drawLine();
-    // todo [转入闪耀与千明代表的一对一对决。赛道各项参数:等同于日本德比 千明代表:全属性1200 适性等同于游戏 技能:三冠之王（效果：对战时所有面板数据提升至3倍）]
+    await simulation_game_in_event(
+      sys_get_chara_pseudo(37),
+      [
+        new PseudoUma(
+          57,
+          '千明代表',
+          get_chara_color(57),
+          2,
+          new Array(5).fill(1200),
+          get_random_value(2, 3),
+          [0, 2, 6, 6],
+          [0, 5, 6, 6],
+          [6, 0],
+          skill_sets[1105703].map((e) => skills_dict[e]),
+        ).set_legend(),
+      ],
+      race_enum.toky_yus,
+    );
     await era.printAndWait(
       `千明代表是闪光系列赛中久负盛名的前辈。无论是实力还是经验，毫无疑问，作为三冠之王的${flash.sex}都全方面的超越了荣进闪耀。`,
     );

@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_get_item_status = require('#/system/chara/sys-get-item-status');
 const {
   check_erect,
   check_lubrication,
@@ -9,18 +10,17 @@ const {
 const {
   sys_check_hide_relation_and_love,
   sys_check_limit_relation_and_love,
-  sys_check_remote,
 } = require('#/system/sys-calc-chara-param');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const attr_score_table = require('#/data/attr-score-table.json');
-const { buff_colors, sex_colors } = require('#/data/color-const');
+const chara_score = require('#/data/chara-score-table.json');
+const { buff_colors } = require('#/data/color-const');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
-const { slavery_titles } = require('#/data/ero/sex-mark-const');
 const {
   penis_state,
   pregnant_stage_enum,
@@ -29,12 +29,7 @@ const {
   virgin_state,
 } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
-const LoveLimitStatus = require('#/data/love-limit-status');
-const {
-  attr_names,
-  pressure_border,
-  train_buff_info,
-} = require('#/data/train-const');
+const { attr_names } = require('#/data/train-const');
 
 const level_and_desc = {
   love: {
@@ -44,50 +39,50 @@ const level_and_desc = {
   honour: {
     border: [500, 1000, 2000, 5000],
     mark: ['新手', '老练', '中坚', '精英', '传奇'],
-    buff: [0, 1, 2, 3, 5],
+    buff: [0, 1, 2, 3, 5, 10, 15],
   },
   attr_score: [
     'G',
-    'G+',
+    'G+', // 100
     'F',
-    'F+',
+    'F+', // 200
     'E',
-    'E+',
+    'E+', // 300
     'D',
-    'D+',
+    'D+', // 400
     'C',
-    'C',
+    'C', // 500
     'C+',
-    'C+',
+    'C+', // 600
     'B',
-    'B',
+    'B', // 700
     'B+',
-    'B+',
+    'B+', // 800
     'A',
-    'A',
+    'A', // 900
     'A+',
-    'A+',
+    'A+', // 1000
     'S',
-    'S',
+    'S', // 1100
     'SS',
+    'SS', // 1200
     'SS',
-    'SS',
+    'UG', // 1300
     'UG',
-    'UG',
+    'UF', // 1400
     'UF',
-    'UF',
+    'UE', // 1500
     'UE',
-    'UE',
+    'UD', // 1600
     'UD',
-    'UD',
+    'UC', // 1700
     'UC',
-    'UC',
+    'UB', // 1800
     'UB',
-    'UB',
-    'UA',
+    'UA', // 1900
     'UA',
   ],
-  chara_score: require('#/data/chara-score-table.json'),
+  chara_score,
   relation: {
     border: [-100, 0, 75, 150, 225, 375, 525],
     mark: ['失望', '怀疑', '冷淡', '融洽', '热忱', '喜爱', '亲密', '不渝'],
@@ -130,7 +125,7 @@ function get_attr_score(attr) {
   if (attr > 1200) {
     return attr_score_table[1200];
   }
-  return attr_score_table[attr];
+  return attr_score_table[Math.floor(attr)];
 }
 
 /**
@@ -159,50 +154,34 @@ function get_talent_bust_size(cup) {
 }
 
 /**
- * @param {number} chara_id
- * @param {*[]} status_list
- */
-function get_item_status(chara_id, status_list) {
-  if (era.get(`status:${chara_id}:马跳Z`)) {
-    status_list.push({ color: buff_colors[2], content: '马跳Z' });
-  } else if (era.get(`status:${chara_id}:弗隆K`)) {
-    status_list.push({ color: buff_colors[2], content: '弗隆K' });
-  } else if (era.get(`status:${chara_id}:弗隆P`)) {
-    status_list.push({ color: buff_colors[2], content: '弗隆P' });
-  } else if (era.get(`status:${chara_id}:超马跳Z`)) {
-    status_list.push({ color: buff_colors[2], content: '超马跳Z' });
-  }
-}
-
-/**
  * @param {number} sex
  * @param {number} begin_talent_id
  * @returns {number[]}
  */
 function get_filtered_talents(sex, begin_talent_id) {
   switch (begin_talent_id) {
-    case 1000:
-      // 调教完成系
-      return new Array(7)
-        .fill(0)
-        .map((_, i) => 1000 + i)
-        .filter(
-          (talent_id) =>
-            (talent_id !== 1001 || sex - 1) &&
-            (talent_id !== 1003 || !sex) &&
-            (talent_id !== 1004 || sex - 1) &&
-            (talent_id !== 1006 || sex),
-        );
-    case 1010:
+    case 50:
       // 名器系
       return new Array(7)
         .fill(0)
-        .map((_, i) => i + 1010)
+        .map((_, i) => i + 50)
         .filter(
           (talent_id) =>
-            (talent_id !== 1011 || sex - 1) &&
-            (talent_id !== 1014 || sex) &&
-            (talent_id !== 1015 || sex - 1),
+            (talent_id !== 51 || sex !== 1) &&
+            (talent_id !== 54 || sex > 0) &&
+            (talent_id !== 55 || sex !== 1),
+        );
+    case 60:
+      // 调教完成系
+      return new Array(7)
+        .fill(0)
+        .map((_, i) => 60 + i)
+        .filter(
+          (talent_id) =>
+            (talent_id !== 61 || sex !== 1) &&
+            (talent_id !== 63 || sex === 0) &&
+            (talent_id !== 64 || sex !== 1) &&
+            (talent_id !== 66 || sex > 0),
         );
   }
 }
@@ -213,7 +192,7 @@ function get_filtered_talents(sex, begin_talent_id) {
  * @returns {string}
  */
 function get_love_mark(love, chara_id) {
-  if (sys_check_hide_relation_and_love(chara_id)) {
+  if ((sys_check_hide_relation_and_love(chara_id) & 0b1) > 0) {
     return '？';
   }
   let level = 0;
@@ -232,10 +211,11 @@ function get_love_mark(love, chara_id) {
  * @returns {string}
  */
 function get_relation_mark(relation, chara_id) {
-  if (sys_check_hide_relation_and_love(chara_id)) {
+  if (sys_check_hide_relation_and_love(chara_id) > 0) {
     return '？';
   }
-  const val = relation;
+  const val =
+    relation !== undefined ? relation : era.get(`relation:${chara_id}:0`);
   let level = 0;
   while (val > level_and_desc.relation.border[level]) {
     level++;
@@ -304,11 +284,11 @@ module.exports = {
     if (is_number) {
       return score;
     }
-    let scoreLevel = 0;
-    while (score >= level_and_desc.chara_score.border[scoreLevel]) {
-      scoreLevel++;
+    let score_level = 0;
+    while (score >= level_and_desc.chara_score.border[score_level]) {
+      score_level++;
     }
-    return level_and_desc.chara_score.mark[scoreLevel];
+    return level_and_desc.chara_score.mark[score_level];
   },
   /**
    * @param {number} chara_id
@@ -414,7 +394,7 @@ module.exports = {
     if (mark_level >= 2 && era.get(`status:${chara_id}:排卵期`)) {
       status_list.push({ color: buff_colors[2], content: '危险期' });
     }
-    get_item_status(chara_id, status_list);
+    sys_get_item_status(chara_id, status_list);
     if (era.get(`talent:${chara_id}:泌乳`)) {
       status_list.push({ color: buff_colors[2], content: '泌乳' });
     }
@@ -433,11 +413,14 @@ module.exports = {
     ) {
       status_list.push({
         color: buff_colors[2],
-        content: '避孕套溶解剂！',
-        key: '避孕套溶解剂',
+        content: '避孕套溶解！',
+        key: '避孕套溶解',
       });
     }
-    if (era.get(`status:${chara_id}:短效避孕药`)) {
+    if (
+      era.get(`status:${chara_id}:短效避孕药`) ||
+      era.get(`status:${chara_id}:长效避孕药`)
+    ) {
       status_list.push({ color: buff_colors[0], content: '避孕' });
     }
     const orgasm_denial = era.get(`ex:${chara_id}:寸止`);
@@ -448,18 +431,18 @@ module.exports = {
         key: '寸止',
       });
     }
-    const orgasm_stop = era.get(`tcvar:${chara_id}:高潮阻碍`);
+    const orgasm_stop = era.get(`tcvar:${chara_id}:高潮抑制`);
     if (orgasm_stop) {
       status_list.push({
         color: buff_colors[2],
-        content: '绝顶控制！',
+        content: `绝顶控制！(${orgasm_stop})`,
         key: '绝顶控制',
         opacity: orgasm_stop > 1 ? 1 : 0.5,
       });
     }
     if (
       era.get(`cflag:${chara_id}:妊娠阶段`) >> pregnant_stage_enum.embryo &&
-      (era.get(`cflag:${chara_id}:妊娠回合计时`) ||
+      (era.get(`cflag:${chara_id}:妊娠回合计时`) >= 4 ||
         (chara_id && mark_level >= 2))
     ) {
       status_list.push({
@@ -538,7 +521,7 @@ module.exports = {
     if (!chara_id) {
       return ['-'];
     }
-    if (sys_check_hide_relation_and_love(chara_id)) {
+    if ((sys_check_hide_relation_and_love(chara_id) & 0b1) > 0) {
       return ['？', '(?)'];
     }
     if (sys_check_limit_relation_and_love(chara_id)) {
@@ -573,7 +556,7 @@ module.exports = {
     if (!target) {
       target = 0;
     }
-    if (sys_check_hide_relation_and_love(chara_id)) {
+    if (sys_check_hide_relation_and_love(chara_id) > 0) {
       return ['？', '(?)'];
     }
     const relation = era.get(`relation:${chara_id}:${target}`);
@@ -584,233 +567,36 @@ module.exports = {
   get_skin(chara_id) {
     return skin_desc[era.get(`cflag:${chara_id}:肤色深度`) + 1];
   },
-  /**
-   * @param {number} chara_id
-   * @returns {{content:string,[color]:string,display:string,[opacity]:number}[]}
-   */
-  get_status(chara_id) {
-    const status_list = [];
-    const sex_equip = era.get(`equip:${chara_id}:淫纹奴役`);
-    if (era.get(`mark:${chara_id}:淫纹`) === 3) {
-      const obj = {
-        color: buff_colors[2],
-        content: slavery_titles[sex_equip],
-      };
-      if (!chara_id) {
-        obj.title = sex_equip
-          ? '[繁殖用母马] 现役孕袋，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱、生下孩子时获得声望，子代参赛声望奖励+100%'
-          : '[泄欲用母马] 现役性奴，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱时获得声望';
-      }
-      status_list.push(obj);
-    }
-    status_list.push(...get_custom_mec(chara_id).get_status());
-    era.get(`status:${chara_id}:生日`) &&
-      status_list.push({
-        color: buff_colors[1],
-        content: '生日！',
-        key: '生日',
-      });
-    era.get(`status:${chara_id}:领域`) &&
-      status_list.push({
-        color: buff_colors[1],
-        content: '领域！',
-        fontWeight: 'bold',
-        key: '领域',
-      });
-    era.get(`status:${chara_id}:健康茶`) &&
-      status_list.push({
-        color: buff_colors[1],
-        content: '健康茶',
-        fontWeight: 'bold',
-      });
-    if (sys_check_remote(chara_id)) {
-      status_list.push({
-        color: buff_colors[0],
-        content: '远程',
-      });
-    }
-    const pressure = era.get(`base:${chara_id}:压力`);
-    if (pressure === pressure_border.limit) {
-      status_list.push({
-        color: buff_colors[3],
-        content: '崩溃！',
-        key: '崩溃',
-      });
-    } else if (pressure >= pressure_border.depression) {
-      status_list.push({
-        color: buff_colors[3],
-        content: '抑郁！',
-        key: '抑郁',
-      });
-    } else if (pressure >= pressure_border.apprehension) {
-      status_list.push({ color: buff_colors[3], content: '忧虑' });
-    } else if (pressure >= pressure_border.unhappy) {
-      status_list.push({ color: buff_colors[3], content: '不快' });
-    }
-    const train_buff = era.get(`status:${chara_id}:练习X手`);
-    if (train_buff) {
-      status_list.push({
-        color: buff_colors[Number(train_buff > 0)],
-        content: train_buff_info[train_buff + 1],
-      });
-    }
-    if (
-      era.get(`status:${chara_id}:马跳S`) ||
-      era.get(`status:${chara_id}:沉睡`)
-    ) {
-      status_list.push({ color: buff_colors[0], content: '沉睡' });
-    } else {
-      if (era.get(`status:${chara_id}:熬夜`)) {
-        status_list.push({ color: buff_colors[0], content: '熬夜' });
-      }
-      if (era.get(`status:${chara_id}:摸鱼`)) {
-        status_list.push({ color: buff_colors[0], content: '摸鱼' });
-      }
-    }
-    const hurt = era.get(`status:${chara_id}:伤病`);
-    if (hurt) {
-      status_list.push({
-        color: buff_colors[3],
-        content: `伤病(${hurt})`,
-        key: '伤病',
-        opacity: hurt > 1 ? 1 : 0.5,
-      });
-    }
-    const tired = era.get(`status:${chara_id}:疲惫`);
-    if (tired) {
-      status_list.push({
-        color: buff_colors[0],
-        content: `疲惫(${tired})`,
-        key: '疲惫',
-        opacity: tired > 1 ? 1 : 0.5,
-      });
-    }
-    new Array(3).fill(0).forEach((_, i) => {
-      const status_id = 7 + i,
-        status_name = era.get(`statusname:${status_id}`),
-        num = era.get(`status:${chara_id}:${status_id}`);
-      if (num) {
-        status_list.push({
-          color: buff_colors[0],
-          content: `${status_name}(${num})`,
-          key: status_name,
-        });
-      }
-    });
-    if (era.get(`status:${chara_id}:发胖`)) {
-      status_list.push({ color: buff_colors[0], content: '发胖' });
-    }
-    if (era.get(`status:${chara_id}:头风`)) {
-      status_list.push({ color: buff_colors[0], content: '头风' });
-    }
-    if (era.get(`status:${chara_id}:发情`)) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '特别假期',
-      });
-    } else if (era.get(`status:${chara_id}:经期`)) {
-      status_list.push({ color: buff_colors[0], content: '经期' });
-    }
-    if (
-      era.get(`mark:${chara_id}:淫纹`) &&
-      era.get(`status:${chara_id}:排卵期`)
-    ) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '危险期',
-      });
-    }
-    const pregnant_status = era.get(`cflag:${chara_id}:妊娠阶段`);
-    if (pregnant_status === 1 << pregnant_stage_enum.resume) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '产后恢复',
-      });
-    } else if (pregnant_status >> pregnant_stage_enum.late > 0) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '临产',
-      });
-    } else if (era.get(`cflag:${chara_id}:妊娠回合计时`) > 0) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '有孕',
-      });
-    }
-    if (
-      era.get(`cflag:${chara_id}:性别`) - 1 &&
-      era.get(`cflag:${chara_id}:成长阶段`) >= 2 &&
-      era.get(`talent:${chara_id}:泌乳`) &&
-      (!chara_id ||
-        era.getCharactersInTrain().length > 0 ||
-        era.get('status:0:马语者') ||
-        era.get('status:0:透视镜片') ||
-        era.get(`exp:${chara_id}:性爱次数`) >
-          era.get(`exp:${chara_id}:睡奸次数`))
-    ) {
-      status_list.push({ color: buff_colors[2], content: '泌乳' });
-    }
-    const lust = era.get(`base:${chara_id}:性欲`);
-    if (lust >= lust_border.want_sex) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '焦躁！',
-        key: '焦躁',
-      });
-    } else if (lust >= lust_border.absent_mind) {
-      status_list.push({ color: buff_colors[2], content: '情动' });
-    } else if (lust >= lust_border.itch) {
-      status_list.push({ color: buff_colors[2], content: '不安' });
-    }
-    if (era.get(`status:${chara_id}:讨厌药`)) {
-      status_list.push({ color: sex_colors[0], content: '讨厌药' });
-    }
-    if (!new LoveLimitStatus(chara_id).is_empty()) {
-      status_list.push({ color: sex_colors[0], content: '抑制药' });
-    }
-    if (
-      era.get(`status:${chara_id}:爱意克制`) &&
-      era.get('status:0:好感度镜片')
-    ) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '克制！',
-        key: '爱意克制',
-      });
-    }
-    get_item_status(chara_id, status_list);
-    return status_list.map((e) => {
-      e.display = 'inline-block';
-      if (!e.title) {
-        let temp;
-        if ((temp = status_desc[e.key || e.content])) {
-          e.title = `[${e.content}]：${temp}`;
-        }
-        delete e.key;
-      }
-      e.content = `[${e.content}]`;
-      return e;
-    });
-  },
   get_talent: (chara_id) =>
     [
-      ...get_custom_mec(chara_id).get_talents(),
-      ...new Array(2)
-        .fill(0)
-        .map((_, i) => {
-          return {
-            id: i,
-            val: era.get(`talent:${chara_id}:${i + 1090}`),
-          };
-        })
-        .filter((e) => e.val)
-        .map((e) => era.get(`talentname:${e.id + 1090}`)),
+      ...get_custom_mec(chara_id)
+        .get_talents()
+        .map((e) => {
+          if (e.title && !e.title.startsWith('[')) {
+            e.title = `[${e.content}]：${e.title}`;
+          }
+          return e;
+        }),
+      ...(era.get(`cflag:${chara_id}:父方角色`) === 308 ||
+      era.get(`cflag:${chara_id}:母方角色`) === 308
+        ? [
+            {
+              color: buff_colors[1],
+              content: '[梦之继承者]',
+              key: '梦之继承者',
+            },
+          ]
+        : []),
+      ...(era.get(`talent:${chara_id}:捉摸不透`) ? ['捉摸不透'] : []),
+      ...(era.get(`talent:${chara_id}:病娇`) === 2
+        ? [{ color: buff_colors[3], content: '[病娇]', key: '病娇' }]
+        : []),
       ...new Array(18)
         .fill(0)
         .map((_, i) => {
           return {
             id: i,
-            val: era.get(`talent:${chara_id}:${i + 1070}`),
+            val: era.get(`talent:${chara_id}:${i}`),
           };
         })
         .filter((e) => e.val)
@@ -859,19 +645,10 @@ module.exports = {
       ret = 0;
     ret +=
       level_and_desc.honour.buff[
-        Math.max(
-          Math.min(
-            level +
-              [304, 306].reduce(
-                (p, a) =>
-                  p + (era.get(`cflag:${a}:招募状态`) === recruit_flags.yes),
-                0,
-              ),
-            level_and_desc.honour.buff.length - 1,
-          ),
-          0,
-        )
-      ];
+        level +
+          (era.get('cflag:304:招募状态') === recruit_flags.yes) +
+          (era.get('cflag:306:招募状态') === recruit_flags.yes)
+      ] ?? 0;
     if (relation > 525) {
       ret += 2.5;
     } else if (relation > 375) {
@@ -928,9 +705,15 @@ module.exports = {
         talent_list.push('隐形巨乳');
       }
     }
+    talent_list.push(...new Array(3).fill(0).map((_, i) => i + 40));
+    const ero = era.get(`talent:${chara_id}:工口意愿`);
+    if (ero) {
+      talent_list.push(ero > 0 ? '好色' : '性保守');
+    }
     talent_list.push(
-      ...get_filtered_talents(sex, 1010),
-      ...get_filtered_talents(sex, 1000)
+      ...new Array(4).fill(0).map((_, i) => i + 44),
+      ...get_filtered_talents(sex, 50),
+      ...get_filtered_talents(sex, 60)
         .map((id) => {
           return {
             id,
@@ -941,15 +724,6 @@ module.exports = {
         .map(
           (e) => trained_talent_names[era.get(`talentname:${e.id}`)][e.level],
         ),
-      ...new Array(3).fill(0).map((_, i) => 1050 + i),
-    );
-    const ero = era.get(`talent:${chara_id}:工口意愿`);
-    if (ero) {
-      talent_list.push(ero > 0 ? '好色' : '性保守');
-    }
-    talent_list.push(
-      ...new Array(4).fill(0).map((_, i) => 1054 + i),
-      ...new Array(8).fill(0).map((_, i) => 1060 + i),
     );
     return talent_list
       .map((e) => {

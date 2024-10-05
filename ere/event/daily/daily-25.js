@@ -1,9 +1,14 @@
+/**
+ * @file 曼城茶座 - 日常
+ *
+ * @author Necroz
+ */
 const era = require('#/era-electron');
 
-const call_check_script = require('#/system/script/sys-call-check');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
@@ -14,7 +19,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean|void>>} */
@@ -23,7 +27,7 @@ const handlers = {};
 handlers[event_hooks.select] = () => {
   const callname = sys_get_callname(25, 0),
     coffee = get_chara_talk(25);
-  if (era.get('status:25:沉睡')) {
+  if (!sys_check_awake(25)) {
     era.print([
       '……',
       coffee.get_colored_name(),
@@ -65,7 +69,7 @@ handlers[event_hooks.good_night] = async (hook) => {
     coffee = get_chara_talk(25),
     me = get_chara_talk(0);
   if (awake === 3) {
-    const check = call_check_script(25, check_stages.want_make_love);
+    const check = get_custom_check(25).is_want_make_love();
     if (check) {
       era.print([
         '今天的事项结束了，',
@@ -165,7 +169,7 @@ handlers[event_hooks.good_night] = async (hook) => {
 handlers[event_hooks.talk] = async () => {
   const callname = sys_get_callname(25, 0),
     coffee = get_chara_talk(25);
-  if (era.get('status:25:沉睡')) {
+  if (!sys_check_awake(25)) {
     await era.printAndWait([
       '……仔细地观察着睡梦中 ',
       coffee.get_colored_name(),
@@ -247,7 +251,7 @@ handlers[event_hooks.office_rest] = async () => {
   const callname = sys_get_callname(25, 0);
   await get_chara_talk(25).say_and_wait(
     Math.random() < 0.5
-      ? `${callname} 知道咖啡树的花语吗？那就是‘一起休息吧’，据说是从休息的时候会喝咖啡这种地方来的……`
+      ? `${callname} 知道咖啡树的花语吗？那就是『一起休息吧』，据说是从休息的时候会喝咖啡这种地方来的……`
       : `${callname}，你有感受过别人的心跳声吗？心脏弹奏出的声音，据说有诱人入眠的功效……那么，${callname}，现在请让我把耳朵贴在胸前吧……`,
   );
 };
@@ -338,9 +342,7 @@ handlers[event_hooks.out_river] = async (hook) => {
       ' 一起在河堤边散步……',
     ]);
     if (Math.random() < 0.5) {
-      await coffee.say_and_wait(
-        '……ねえ私に気つﾞいて，This is my love song ♪……',
-      );
+      await coffee.say_and_wait('……ねえ私に気つﾞいて，This is my love song♪……');
       await era.printAndWait([
         '听到了身边传来的小声哼唱，',
         coffee.get_colored_name(),
@@ -794,7 +796,7 @@ handlers[event_hooks.basement_end] = async () => {
   const coffee = get_chara_talk(25);
   await era.printAndWait([
     coffee.get_colored_name(),
-    ' 的训练员已经失踪好几天了。警方搜遍了学院的每一个角落，却依然没有发现任何线索。',
+    ' 的训练员已经失踪好几天了。警方搜遍了学园的每一个角落，却依然没有发现任何线索。',
   ]);
   await era.printAndWait([
     '作为其担当',
@@ -837,11 +839,6 @@ handlers[
   event_hooks.celebration
 ] = require('#/event/daily/daily-events-25/celebration');
 
-/**
- * 曼城茶座的日常事件，id=25
- *
- * @author Necroz
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

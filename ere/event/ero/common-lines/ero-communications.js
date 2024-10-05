@@ -1,26 +1,20 @@
+/**
+ * @file 调教地文 - 沟通系
+ *
+ * @author O口口口口口
+ */
 const era = require('#/era-electron');
 
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const { log_7 } = require('#/utils/value-utils');
+const check_lure_success = require('#/event/ero/snippets/check-lure-success');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @author O口口口口口
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
- */
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
   handlers[ero_hooks.kiss] = async (attacker, defender, hook) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 亲吻 ',
-      defender.get_colored_name(),
-      ' 的嘴唇……】',
-    ]);
     if (hook.arg) {
       await attacker.print_and_wait('这种时候果然会想做那个……');
       await attacker.print_and_wait([
@@ -49,13 +43,6 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.french_kiss] = async (attacker, defender, hook) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 对 ',
-      defender.get_colored_name(),
-      ' 法式湿吻……】',
-    ]);
     if (hook.arg) {
       await attacker.print_and_wait('不想只停在唇瓣之前。');
       await defender.say_and_wait('唔——？');
@@ -82,55 +69,37 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.relax] = async (attacker, _, hook) => {
-    if (
-      sys_check_awake(attacker.id) &&
-      !era.get(`tcvar:${attacker.id}:脱力`) &&
-      !era.get(`tcvar:${attacker.id}:失神`)
-    ) {
-      era.print(['【', attacker.get_colored_name(), ' 试着调整呼吸……】']);
-    } else {
-      hook.arg = false;
-      era.print(['【', attacker.get_colored_name(), ' 毫无反应……】']);
-    }
-  };
-
   handlers[ero_hooks.lure] = async (attacker, defender, hook) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 在 ',
-      defender.get_colored_name(),
-      ' 的耳边说着绵绵情话……】',
-    ]);
-    hook.arg =
-      (!defender || era.get(`love:${defender}`) >= 50) &&
-      !era.get(`tcvar:${defender}:发情`) &&
-      Math.random() < Math.log(era.get(`abl:${attacker}:甜言蜜语`) + 2) / log_7;
+    hook.arg = check_lure_success(attacker.id, defender.id);
     if (hook.arg) {
-      await era.printAndWait([
-        defender.get_colored_name(),
+      await attacker.print_and_wait([
+        sys_get_colored_callname(attacker.id, defender.id),
         ' 变得兴奋起来了……',
       ]);
+    } else if (era.get(`tcvar:${defender.id}:发情`)) {
+      await attacker.print_and_wait([
+        sys_get_colored_callname(attacker.id, defender.id),
+        ' 不能变得更兴奋了……',
+      ]);
+    } else {
+      await attacker.print_and_wait('但是好像不是很有效果……');
     }
   };
 
   handlers[ero_hooks.talk] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 和 ',
-      defender.get_colored_name(),
-      ' 闲话家常……】',
-    ]);
-    if (Math.random() < 0.5) {
-      await attacker.say_and_wait(
-        '马娘的耳朵表达情绪的方式，到底和那种动物比较像呢。',
-      );
+    if (
+      !era.get(`cflag:${attacker.id}:种族`) &&
+      era.get(`cflag:${defender.id}:种族`) &&
+      Math.random() < 0.5
+    ) {
+      await attacker.say_and_wait([
+        defender.get_uma_sex_title(),
+        '的耳朵表达情绪的方式，到底和那种动物比较像呢。',
+      ]);
       await attacker.print_and_wait('被不满地盯着看了。');
       await attacker.say_and_wait('……嘶……比如说，猫的耳朵如果发烫的话……');
       attacker.print('屁股被踢了。');
-    } else {
+    } else if (attacker.sex_code !== 1 || defender.sex_code !== 1) {
       await attacker.say_and_wait('以后要几个孩子比较好呢……');
       await attacker.print_and_wait([
         '看着对面 ',
@@ -143,33 +112,31 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.switch] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 将主导权交给 ',
-      defender.get_colored_name(),
-      '……】',
-    ]);
-    await defender.say_and_wait('诶……？');
-    await defender.print_and_wait([
-      '原本近在咫尺的恋人突然拉远了距离，被压在身下的 ',
-      defender.get_colored_name(),
-      ' 眨着眼没能及时反应过来。',
-    ]);
-    await defender.print_and_wait('然后，眼前便是天旋地转……');
-    await attacker.say_and_wait('现在，是你的时间了。');
-    await defender.print_and_wait([
-      '张开双手的 ',
-      sys_get_colored_callname(defender.id, attacker.id),
-      ' 露出鼓励的笑容。',
-    ]);
-    attacker.say('……想怎么做都可以哦。');
+    if (
+      defender.id ||
+      (!era.get(`tcvar:${defender.id}:脱力`) &&
+        !era.get(`tcvar:${defender.id}:失神`))
+    ) {
+      await defender.say_and_wait('诶……？');
+      await defender.print_and_wait([
+        '原本近在咫尺的恋人突然拉远了距离，被压在身下的 ',
+        defender.get_colored_name(),
+        ' 眨着眼没能及时反应过来。',
+      ]);
+      await defender.print_and_wait('然后，眼前便是天旋地转……');
+      await attacker.say_and_wait('现在，是你的时间了。');
+      await defender.print_and_wait([
+        '张开双手的 ',
+        sys_get_colored_callname(defender.id, attacker.id),
+        ' 露出鼓励的笑容。',
+      ]);
+      attacker.say('……想怎么做都可以哦。');
+    }
   };
 
   const resist_race_desc = ['你也不', undefined, '我才', '我也'];
 
   handlers[ero_hooks.resist] = async (attacker, defender, hook, extra_flag) => {
-    era.print(['【', attacker.get_colored_name(), ' 激烈反抗……】']);
     if (hook.arg) {
       await defender.say_and_wait('不要动会比较好哦。');
       await attacker.print_and_wait([
@@ -232,13 +199,6 @@ module.exports = (handlers) => {
 
   handlers[ero_hooks.gargle] = async (attacker, defender) => {
     await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 和 ',
-      defender.get_colored_name(),
-      ' 一起漱口……】',
-    ]);
-    await era.printAndWait([
       attacker.get_colored_name(),
       '/',
       defender.get_colored_name(),
@@ -267,13 +227,6 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.wipe_body] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 擦拭自己和 ',
-      defender.get_colored_name(),
-      ' 的身体……】',
-    ]);
     await defender.say_and_wait('还要……继续吗……❤️');
     await attacker.print_and_wait(
       '对面本应光洁的身体上如今遍布着暧昧的痕迹……是不是有点做过头了呢……',

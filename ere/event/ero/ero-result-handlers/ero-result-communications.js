@@ -24,6 +24,8 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @param {Record<string,function(number,number,HookArg,{check:number})>} handlers */
 module.exports = (handlers) => {
+  handlers[ero_hooks.go_on] = () => era.set('tflag:投降', 1);
+
   handlers[ero_hooks.kiss] = (attacker, defender, _, extra_flag) => {
     sys_do_sex(
       new EroParticipant(attacker, part_enum.mouth),

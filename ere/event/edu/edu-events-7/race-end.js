@@ -2,11 +2,11 @@ const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { gacha } = require('#/utils/list-utils');
-
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const print_event_name = require('#/event/snippets/print-event-name');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { gacha } = require('#/utils/list-utils');
 
 const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
@@ -93,21 +93,30 @@ module.exports = async (hook, extra_flag) => {
       extra_flag.relation_change = 0;
       extra_flag.love_change = 0;
 
-      era.printButton('「确实，真香啊……」', 1);
-      era.printButton('「但这还是陆上的比赛啊……」', 2);
+      era.printButton('「确实，真香啊……」（爱慕+5）', 1);
+      era.printButton('「但这还是陆上的比赛啊……」（好感+10）', 2);
       if ((await era.input()) === 1) {
         extra_flag.love_change += 5;
       } else {
         extra_flag.relation_change += 10;
       }
 
-      await era.printAndWait(
-        `${gold_ship.name} 把 ${me.name} 推到选手通道的墙壁，又背靠在 ${me.name} 身上。${gold_ship.sex}放松身体的力气，就像随时都会倒下一样，（玩家名）只好……`,
-      );
+      await era.printAndWait([
+        gold_ship.get_colored_name(),
+        ' 把 ',
+        me.get_colored_name(),
+        ' 推到选手通道的墙壁，又背靠在 ',
+        me.get_colored_name(),
+        ' 身上。',
+        gold_ship.sex,
+        '放松身体的力气，就像随时都会倒下一样，',
+        me.get_colored_name(),
+        ' 只好……',
+      ]);
       era.println();
 
-      era.printButton('（环抱黄金船的腰支撑）', 1);
-      era.printButton('（把肩膀借给黄金船支撑）', 2);
+      era.printButton('（环抱黄金船的腰支撑）（爱慕+5）', 1);
+      era.printButton('（把肩膀借给黄金船支撑）（好感+10）', 2);
       if ((await era.input()) === 1) {
         extra_flag.love_change += 5;
       } else {
@@ -252,7 +261,7 @@ module.exports = async (hook, extra_flag) => {
       era.println();
 
       await era.printAndWait(
-        `虽然还是没能知道『那位大人』到底是谁——但至少阿船对比赛的原动力又回来了！谢谢你，${era.get(
+        `虽然还是没能知道『那位大人」到底是谁——但至少阿船对比赛的原动力又回来了！谢谢你，${era.get(
           'callname:0:37',
         )}！`,
       );
@@ -447,8 +456,11 @@ module.exports = async (hook, extra_flag) => {
         await gold_ship.say_and_wait('尊嘟假嘟？那我岂不是超厉害的？');
         era.println();
 
-        era.printButton('「确实超厉害的。」', 1);
-        era.printButton('「厉害到可以名留青史！」', 2);
+        era.printButton('「确实超厉害的。」（力量+18、其他属性+3）', 1);
+        era.printButton(
+          '「厉害到可以名留青史！」（全属性+3、习得【出闸难】、技能点数+45 or 全属性+8、技能点数+75）',
+          2,
+        );
         const ret = await era.input();
         if (ret === 1) {
           extra_flag.attr_change = new Array(5).fill(3);
@@ -459,18 +471,15 @@ module.exports = async (hook, extra_flag) => {
           extra_flag.attr_change = new Array(5).fill(3);
           extra_flag.pt_change = 45;
           extra_flag.motivation_change = 1;
-          // TODO 出闸难
-          extra_flag.skill_change = [];
+          extra_flag.skill_change = [200433];
         } else {
           await gold_ship.say_and_wait(
             '啊～哈哈～果然本船我就是那种被称赞了就能好好发挥的孩子～',
           );
           await gold_ship.say_and_wait('以后也要记得多宠宠我哦～');
           extra_flag.attr_change = new Array(5).fill(8);
-          extra_flag.pt_change = 55;
+          extra_flag.pt_change = 75;
           extra_flag.motivation_change = 1;
-          // TODO 爱娇
-          extra_flag.skill_change = [];
         }
       } else {
         extra_flag.attr_change = new Array(5).fill(3);

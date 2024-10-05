@@ -7,6 +7,7 @@ const ero_action_tags = {
   foot: 0,
   hand: 0,
   height_check: 0,
+  imp: 0,
   insert: 0,
   m_abused: 0,
   m_hit: 0,
@@ -17,6 +18,7 @@ const ero_action_tags = {
   race: 0,
   sadism: 0,
   sex_check: 0,
+  super_sadism: 0,
   supporter_awake: 0,
   supporter_breast: 0,
   supporter_insert: 0,
@@ -29,6 +31,8 @@ const ero_action_tags = {
 Object.keys(ero_action_tags).forEach((e, i) => (ero_action_tags[e] = i));
 
 const ero_actions = {
+  // 放弃挣扎
+  go_on: 0,
   // 接吻
   kiss: 0,
   // 法式湿吻
@@ -117,7 +121,7 @@ const ero_actions = {
   // 乳间抽插
   fuck_tit: 0,
   // 乳间抽插嘴唇
-  fuck_tit_and_month: 0,
+  fuck_tit_and_mouth: 0,
   // 乳交
   tit_job: 0,
   // 乳交同时口交
@@ -193,6 +197,8 @@ const ero_actions = {
   hug_standing: 0,
   // 火车便当
   suspended_congress: 0,
+  // 火车便当
+  fucked_suspended_congress: 0,
   // 背对火车便当
   hug_suspended_congress: 0,
   // 要求女上位
@@ -215,6 +221,8 @@ const ero_actions = {
   hug_standing_anal_sex: 0,
   // 火车便当肛交
   suspended_congress_anal_sex: 0,
+  // 火车便当肛交
+  fucked_suspended_congress_anal_sex: 0,
   // 背对火车便当肛交
   hug_suspended_congress_anal_sex: 0,
   // 要求女上位肛交
@@ -369,6 +377,8 @@ const ero_actions = {
   shop_start: 0,
   // 离开能力升级
   shop_end: 0,
+  // 被绿之后
+  after_betrayed: 0,
 };
 Object.keys(ero_actions).forEach((k, i) => (ero_actions[k] = i));
 

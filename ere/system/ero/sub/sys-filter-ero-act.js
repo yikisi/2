@@ -97,15 +97,23 @@ function sys_filter_ero_act(attacker, defender, filters) {
     tag_checks[chara_id][ero_hook_tags.pet] = !filters[3];
     tag_checks[chara_id][ero_hook_tags.race] =
       era.get(`cflag:${chara_id}:种族`) > 0;
+    tag_checks[chara_id][ero_hook_tags.super_sadism] =
+      !attacker ||
+      (era.get('tflag:强奸') === attacker &&
+        get_sex_acceptable(chara_id) < 0) ||
+      era.get(`mark:${chara_id}:反抗`) >= 2 ||
+      era.get(`base:${chara_id}:压力`) >= 5000 ||
+      (era.get(`talent:${chara_id}:抖S`) > 0 &&
+        era.get(`talent:${chara_id}:反抗意愿`) === 1);
     tag_checks[chara_id][ero_hook_tags.sadism] =
-      !filters[2] &&
-      (!attacker ||
-        (era.get('tflag:强奸') === attacker &&
-          get_sex_acceptable(chara_id) < 0) ||
-        era.get(`talent:${chara_id}:抖S`) > 0 ||
-        era.get(`talent:${chara_id}:小恶魔`) > 0 ||
-        era.get(`mark:${chara_id}:反抗`) >= 2 ||
-        era.get(`base:${chara_id}:压力`) >= 5000);
+      tag_checks[chara_id][ero_hook_tags.super_sadism] ||
+      era.get(`talent:${chara_id}:抖S`) > 0;
+    tag_checks[chara_id][ero_hook_tags.imp] =
+      tag_checks[chara_id][ero_hook_tags.sadism] ||
+      era.get(`talent:${chara_id}:小恶魔`) > 0;
+    tag_checks[chara_id][ero_hook_tags.super_sadism] &&= !filters[2];
+    tag_checks[chara_id][ero_hook_tags.sadism] &&= !filters[2];
+    tag_checks[chara_id][ero_hook_tags.imp] &&= !filters[2];
     tag_checks[chara_id][ero_hook_tags.sex_check] =
       !filters[0] &&
       (get_penis_size(chara_id) > 0 || check_virgin_enabled(chara_id));
@@ -117,7 +125,7 @@ function sys_filter_ero_act(attacker, defender, filters) {
       (!attacker || check_lubrication(chara_id, part_enum.virgin));
   });
   tag_checks[attacker][ero_hook_tags.height_check] =
-    era.get(`cflag:${attacker}:身高`) > era.get(`cflag:${defender}:身高`);
+    era.get(`cflag:${attacker}:身高`) > era.get(`cflag:${defender}:身高`) + 20;
   const supporter = era.get('tflag:当前助手');
   const supporter_tag_checks = {};
   supporter_tag_checks[ero_hook_tags.supporter_awake] =

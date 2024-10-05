@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const sys_call_check = require('#/system/script/sys-call-check');
+const { get_custom_check } = require('#/event/check/check-factory');
 
 const { sort_list } = require('#/utils/list-utils');
 
@@ -11,7 +11,6 @@ const {
   money_color,
 } = require('#/data/color-const');
 const title_desc = require('#/data/desc/title-desc.json');
-const check_stages = require('#/data/event/check-stages');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -33,9 +32,8 @@ module.exports = {
           races.filter((e) => e.race !== race_enum.begin_race),
           (e) =>
             ((class_enum.Spe - race_infos[e.race].race_class) << 13) +
-            (e.rank << 8) +
+            ((20 - e.rank) << 8) +
             e.weeks,
-          false,
         );
       race_info_list.push({
         config: {
@@ -66,23 +64,30 @@ module.exports = {
       } else {
         race_info_list.push({ type: 'text', content: '未出走' });
       }
-      race_list.forEach((e) => {
-        race_info_list.push({
-          content: [
-            `${e.year} 年 `,
-            race_infos[e.race].get_colored_name_with_class(),
-            ` · 第 ${e.pop} 人气 · ${adaptability_names[6 + e.st]} · `,
-            {
-              content: `${e.rank} 着`,
-              color:
-                e.rank <= 5
-                  ? adaptability_colors.at(-1 - e.rank)
-                  : adaptability_colors[0],
-            },
-          ],
-          type: 'text',
-        });
-      });
+      const half_length = Math.ceil(race_list.length / 2);
+      for (let i = 0; i < half_length; ++i) {
+        [race_list[i], race_list[i + half_length]]
+          .filter((e) => e)
+          .forEach((e) =>
+            race_info_list.push({
+              config: { width: 12 },
+              content: [
+                `${e.year} 年 `,
+                race_infos[e.race].get_colored_name_with_class(),
+                ' · ',
+                {
+                  content: `${e.rank} 着`,
+                  color:
+                    e.rank <= class_enum.Spe
+                      ? adaptability_colors.at(-1 - e.rank)
+                      : adaptability_colors[0],
+                  title: `第 ${e.pop} 人气 · ${adaptability_names[6 + e.st]}`,
+                },
+              ],
+              type: 'text',
+            }),
+          );
+      }
       if (race_info_list.length === 1) {
         race_info_list.push({
           content: '还没有可称道的战绩……',
@@ -94,10 +99,7 @@ module.exports = {
         type: 'divider',
       });
       const titles = new CharaTitles(chara.id).get(),
-        personal_titles = sys_call_check(
-          chara.id,
-          check_stages.personal_titles,
-        );
+        personal_titles = get_custom_check(chara.id).get_personal_titles();
       if (personal_titles.length) {
         personal_titles.map((e) => {
           const check = titles.filter((t) => t.n === e).length > 0;
@@ -139,4 +141,5 @@ module.exports = {
     };
   },
   name: page_name,
+  uma: true,
 };

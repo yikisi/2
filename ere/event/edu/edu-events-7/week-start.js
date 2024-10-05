@@ -15,6 +15,7 @@ const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
+const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 /**
  * @param {HookArg} hook
@@ -22,10 +23,10 @@ const { attr_enum } = require('#/data/train-const');
  * @param {EventObject} event_object
  */
 module.exports = async (hook, _, event_object) => {
-  const edu_weeks = era.get('cflag:7:育成回合计时');
-  const gold_ship = get_chara_talk(7),
+  const event_arg = event_object?.arg,
+    gold_ship = get_chara_talk(7),
     me = get_chara_talk(0);
-  if (edu_weeks === 47 + 1) {
+  if (event_arg === 47 + 1) {
     await print_event_name(
       [{ color: chara_colors[1], content: '新年的抱负' }],
       gold_ship,
@@ -85,9 +86,9 @@ module.exports = async (hook, _, event_object) => {
     era.println();
 
     era.print('「说什么呢，我的意思是……」');
-    era.printButton('「努力锻炼长距离能力吧！」', 1);
-    era.printButton('「现在就来想想吧！」', 2);
-    era.printButton('「搞一波巨蛋巡回演唱会吧！」', 3);
+    era.printButton('「努力锻炼长距离能力吧！」（耐力+40）', 1);
+    era.printButton('「现在就来想想吧！」（智力+40）', 2);
+    era.printButton('「搞一波巨蛋巡回演唱会吧！」（技能点数+50）', 3);
     const ret = await era.input();
 
     if (ret === 1) {
@@ -137,10 +138,10 @@ module.exports = async (hook, _, event_object) => {
       );
       await era.printAndWait('所以赛跑呢？');
       era.println();
-      get_attr_and_print_in_event(7, undefined, 20) && (await era.waitAnyKey());
+      get_attr_and_print_in_event(7, undefined, 50) && (await era.waitAnyKey());
     }
     era.set('cflag:7:节日事件标记', 0);
-  } else if (edu_weeks === 47 + 29) {
+  } else if (event_arg === 47 + 29) {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:7:位置') !== era.get('cflag:0:位置')
@@ -232,7 +233,7 @@ module.exports = async (hook, _, event_object) => {
     const change_list = new Array(5).fill(3);
     gacha(Object.values(attr_enum), 3).forEach((e) => (change_list[e] = 8));
     get_attr_and_print_in_event(7, change_list, 45) && (await era.waitAnyKey());
-  } else if (edu_weeks === 47 + 41) {
+  } else if (event_arg === 47 + 41) {
     const opera = get_chara_talk(15);
     await print_event_name(
       [{ color: chara_colors[1], content: '目标巴黎时装周编' }],
@@ -288,7 +289,7 @@ module.exports = async (hook, _, event_object) => {
 
     get_attr_and_print_in_event(7, [0, 5, 0, 0, 0], 0) &&
       (await era.waitAnyKey());
-  } else if (edu_weeks === 95 + 3) {
+  } else if (event_arg === 95 + 3) {
     const winning_ticket = get_chara_talk(35);
     await print_event_name(
       [{ color: chara_colors[1], content: '目标社会人编' }],
@@ -342,7 +343,14 @@ module.exports = async (hook, _, event_object) => {
 
     get_attr_and_print_in_event(7, [0, 0, 0, 5, 0], 0) &&
       (await era.waitAnyKey());
-  } else if (edu_weeks === 95 + 29) {
+  } else if (event_arg === 95 + 29) {
+    if (
+      era.get('cflag:0:位置') !== location_enum.beach ||
+      era.get('cflag:7:位置') !== era.get('cflag:0:位置')
+    ) {
+      add_event(hook.hook, event_object);
+      return false;
+    }
     await print_event_name(
       [{ color: chara_colors[1], content: '夏季合宿' }],
       gold_ship,
@@ -444,7 +452,7 @@ module.exports = async (hook, _, event_object) => {
     era.println();
     sys_change_money(-5, 7);
     sys_like_chara(7, 0, 10, true, 5) && (await era.waitAnyKey());
-  } else if (edu_weeks === 144 && new GoldShipEduMarks().keywords === 4) {
+  } else if (event_arg === 'eden') {
     new GoldShipEduMarks().keywords++;
     const your_callname = era.get('callname:7:0');
     const taste = get_chara_talk(302);
@@ -524,15 +532,15 @@ module.exports = async (hook, _, event_object) => {
     await taste.say_and_wait('说明！所谓的『伊甸计划』就是……！');
     era.println();
     await era.printAndWait(
-      `原来，『伊甸计划』是为了让热情奔放但时常把心思放到其他地方的 ${gold_ship.name} 能专心地挑战闪耀系列赛而制定的计划。`,
+      `原来，「伊甸计划」是为了让热情奔放但时常把心思放到其他地方的 ${gold_ship.name} 能专心地挑战闪耀系列赛而制定的计划。`,
     );
     era.println();
     await era.printAndWait(
-      '通过『伊甸计划』，以各种线索和秘传之书来挑起黄金船的好奇心，从而达到计划目标。',
+      '通过「伊甸计划」，以各种线索和秘传之书来挑起黄金船的好奇心，从而达到计划目标。',
     );
     era.println();
     await era.printAndWait(
-      `对 ${taste.name} 而言，所谓的『伊甸园』就是赛马娘生涯中最重要的闪耀系列赛。`,
+      `对 ${taste.name} 而言，所谓的「伊甸园」就是赛马娘生涯中最重要的闪耀系列赛。`,
     );
     era.println();
     await taste.say_and_wait('就是这样！');
@@ -624,7 +632,33 @@ module.exports = async (hook, _, event_object) => {
       );
     }
     sys_like_chara(7, 0, 200) && (await era.waitAnyKey());
+  } else if (event_arg === 'carrot') {
+    await print_event_name('拔萝卜之鬼', gold_ship);
+    await era.printAndWait([
+      '在学校里被一头芦毛的诡异',
+      gold_ship.get_uma_sex_title(),
+      '拦住了。',
+    ]);
+    await gold_ship.say_and_wait(
+      '唏！那边那位训练员！要不要跟小金船一起到海边拔萝卜啊！',
+    );
+    await era.printAndWait(
+      '原来是问题儿童黄金船……而且海边哪有什么萝卜可以拔啊？',
+    );
+    era.printButton('「你要拔，那便拔！」（马币+20）', 1);
+    era.printButton('「总觉得有点可疑……」（体力+100）', 2);
+    if ((await era.input()) === 1) {
+      await era.printAndWait(
+        '竟然从沙滩里挖出来了散发着彩虹色光芒，而且看起来像是宝石的萝卜？！',
+      );
+      sys_change_money(20);
+    } else {
+      await era.printAndWait(
+        '得到了普通的萝卜……等下长在海边真的算普通吗！？总之先拿回去给午饭加餐了。',
+      );
+      sys_change_attr_and_print(0, '体力', 100);
+    }
   } else {
-    throw new Error('unsupported');
+    throw new Error();
   }
 };

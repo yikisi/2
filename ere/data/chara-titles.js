@@ -9,7 +9,12 @@ class CharaTitles {
   constructor(chara_id) {
     this.chara_id = chara_id;
     this.obj = era.get(`cstr:${chara_id}:称号`);
-    if (!(this.obj instanceof Array)) {
+    if (this.obj instanceof Array) {
+      this.obj = era.set(
+        `cstr:${chara_id}:称号`,
+        this.obj.filter((e) => e),
+      );
+    } else {
       this.obj = era.set(`cstr:${chara_id}:称号`, []);
     }
   }
@@ -26,7 +31,7 @@ class CharaTitles {
       (this.obj = era.set(
         `cstr:${this.chara_id}:称号`,
         distinct_list(this.obj, (e) => e.n),
-      )).length !== origin_length
+      )).length > origin_length
     );
   }
 
@@ -53,7 +58,7 @@ class CharaTitles {
           title:
             has_desc && title_desc[curr.n]
               ? `[${curr.n}]：${title_desc[curr.n]}`
-              : '',
+              : undefined,
         }
       : '';
   }

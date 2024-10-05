@@ -45,9 +45,9 @@ module.exports = {
   /** 对应部位扩张程度对快感提升的影响系数，膣肛 */
   expansion_coefficient,
   /** 身高对应的肛门容纳阴茎尺寸<br>下标0对应130cm，1对应140cm，以此类推<br>0=无 1=极短 2=短小 3=标准 4=傲人 5=马 */
-  height2anal_size: [0, 0, 0, 1, 1, 2],
+  height2anal_size: [0, 0, 0, 1, 1, 2, 2, 2, 3, 3],
   /** 身高对应的阴道容纳阴茎尺寸<br>下标0对应130cm，1对应140cm，以此类推<br>0=无 1=极短 2=短小 3=标准 4=傲人 5=马 */
-  height2virgin_size: [1, 2, 2, 3, 3, 4],
+  height2virgin_size: [1, 2, 2, 3, 3, 4, 4, 4, 5, 5],
   /** 对应部位润滑对快感提升的影响系数，胸膣肛 */
   lubrication_coefficient,
   talent2acceptable: {

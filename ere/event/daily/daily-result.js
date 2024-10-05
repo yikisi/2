@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_get_random_uma_god = require('#/system/chara/sys-get-random-uma-god');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
@@ -10,11 +11,14 @@ const {
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_money } = require('#/system/sys-calc-flag');
 
+const print_shop_page = require('#/page/page-shop');
+
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { attr_enum } = require('#/data/train-const');
@@ -48,7 +52,7 @@ function random_cost_in_action(chara_id, stamina, time) {
   }
 }
 
-/** @type {Record<string,function(number,HookArg,Record<string,*>):Promise<void>>} */
+/** @type {Record<string,function(number,HookArg,Record<string,any>):Promise<void>>} */
 const handlers = {};
 
 handlers[event_hooks.office_gift] = async (chara_id) => {
@@ -162,6 +166,7 @@ handlers[event_hooks.office_game] = async (chara_id) => {
       sys_like_chara(chara_id, 0, get_random_value(5, 10)) || wait_flag;
     wait_flag =
       (Math.random() < 0.25 && sys_change_motivation(chara_id, 1)) || wait_flag;
+    sys_change_pressure(chara_id, -get_random_value(100, 300));
   }
   wait_flag && (await era.waitAnyKey());
 };
@@ -174,9 +179,8 @@ handlers[event_hooks.good_night] = async (chara_id, hook) => {
     } else {
       sys_change_lust(chara_id, lust_from_palam);
       era.println();
-      if (sys_like_chara(chara_id, 0, -100)) {
-        await era.waitAnyKey();
-      }
+      sys_like_chara(chara_id, 0, -100) && (await era.waitAnyKey());
+      new MyEduMarks().reject++;
     }
   }
 };
@@ -252,38 +256,45 @@ handlers[event_hooks.out_river] = async (chara_id, hook, extra_flag) => {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.out_shopping] = async (chara_id, stage_id) => {
+handlers[event_hooks.out_shopping] = async (chara_id, hook) => {
   let wait_flag = false;
-  era.println();
-  if (stage_id.arg) {
-    // 街机厅和抽奖
-    // TODO 随机获得道具
-    random_cost_in_action(chara_id, [0, 100], [0, 100]);
-    wait_flag =
-      (chara_id && sys_like_chara(chara_id, 0, get_random_value(5, 10))) ||
-      wait_flag;
+  if (hook.arg === 2) {
+    await print_shop_page([
+      ...new Array(11).fill(0).map((_, i) => i + 70),
+      ...new Array(3).fill(0).map((_, i) => ({ id: i + 81, limit: true })),
+    ]);
+    random_cost_in_action(0, [0, 100], [0, 100]);
   } else {
-    // 卡拉OK和看电影
-    const temp = era.get(`cflag:${chara_id}:种族`)
-      ? sys_change_attr_and_print(
-          chara_id,
-          attr_enum.intelligence,
-          get_random_value(5, 10),
-        )
-      : [];
-    wait_flag =
-      (chara_id && sys_like_chara(chara_id, 0, get_random_value(10, 15))) ||
-      wait_flag;
-    print_attr_change(chara_id, temp);
-    wait_flag ||= temp.length > 0;
-    random_cost_in_action(chara_id, [0, 100], [200, 600]);
-    wait_flag =
-      (Math.random() < 0.5 &&
-        sys_change_motivation(chara_id, get_random_value(0, 2))) ||
-      wait_flag;
+    era.println();
+    if (hook.arg) {
+      // 街机厅和抽奖
+      random_cost_in_action(chara_id, [0, 100], [0, 100]);
+      wait_flag =
+        (chara_id && sys_like_chara(chara_id, 0, get_random_value(5, 10))) ||
+        wait_flag;
+    } else {
+      // 卡拉OK和看电影
+      const temp = era.get(`cflag:${chara_id}:种族`)
+        ? sys_change_attr_and_print(
+            chara_id,
+            attr_enum.intelligence,
+            get_random_value(5, 10),
+          )
+        : [];
+      wait_flag =
+        (chara_id && sys_like_chara(chara_id, 0, get_random_value(10, 15))) ||
+        wait_flag;
+      print_attr_change(chara_id, temp);
+      wait_flag ||= temp.length > 0;
+      random_cost_in_action(chara_id, [0, 100], [200, 600]);
+      wait_flag =
+        (Math.random() < 0.5 &&
+          sys_change_motivation(chara_id, get_random_value(0, 2))) ||
+        wait_flag;
+    }
+    sys_change_money(-10);
+    wait_flag && (await era.waitAnyKey());
   }
-  sys_change_money(-10);
-  wait_flag && (await era.waitAnyKey());
 };
 
 handlers[event_hooks.out_church] = async (chara_id) => {
@@ -300,7 +311,15 @@ handlers[event_hooks.out_church] = async (chara_id) => {
     era.set('status:0:练习X手', 0);
     era.print(`${CharaTalk.me.name} 的训练似乎更加顺利了……`);
   }
-  if (condition_chara || condition_me) {
+  if (
+    sys_like_chara(
+      sys_get_random_uma_god(),
+      0,
+      get_random_value(5, 10 + 10 * (chara_id > 0)),
+    ) ||
+    condition_chara ||
+    condition_me
+  ) {
     await era.waitAnyKey();
   }
 };
@@ -308,11 +327,11 @@ handlers[event_hooks.out_church] = async (chara_id) => {
 handlers[event_hooks.out_station] = async (chara_id, hook) => {
   let temp,
     wait_flag = false;
-  sys_change_money(-10);
   era.println();
   switch (hook.arg) {
     case 0:
       // 用餐
+      sys_change_money(-10);
       random_cost_in_action(chara_id, [0, 0], [0, 200]);
       sys_change_weight(0, get_random_value(20, 40, true));
       if (chara_id) {
@@ -330,12 +349,21 @@ handlers[event_hooks.out_station] = async (chara_id, hook) => {
       break;
     case 1:
       // 约会
+      sys_change_money(-10);
       wait_flag =
         sys_like_chara(chara_id, 0, get_random_value(10, 15)) || wait_flag;
       random_cost_in_action(chara_id, [100, 300], [0, 200]);
       break;
     case 2:
       // 购物
+      await print_shop_page(
+        new Array(7).fill(0).map((_, i) => {
+          return {
+            id: i + 60,
+            limit: true,
+          };
+        }),
+      );
       wait_flag =
         (chara_id && sys_like_chara(chara_id, 0, get_random_value(5, 10))) ||
         wait_flag;
@@ -360,7 +388,7 @@ handlers[event_hooks.celebration] = async (chara_id) => {
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {*} extra_flag
+ * @param {Record<string,any>} extra_flag
  */
 module.exports = async (chara_id, hook, extra_flag) => {
   if (handlers[hook.hook]) {

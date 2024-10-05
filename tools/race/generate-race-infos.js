@@ -23,9 +23,8 @@ let output =
   "const { bonus_params, id2bonus } = require('#/data/race/race-attr-bonus');\n" +
   'const {\n' +
   '  lane_params,\n' +
-  '  phase_params,\n' +
   '  slope_params,\n' +
-  "} = require('#/data/race/race-params');\n\nconst race_enum = {\n// 出道战\nbegin_race: 0,\n";
+  "} = require('#/data/race/race-params');const race_rewards = require('#/data/race/race-rewards');\n\nconst race_enum = {\n// 出道战\nbegin_race: 0,\n";
 
 csv.forEach((e) => {
   output += `// ${e[5]}\n${e[1]}:0,\n`;
@@ -50,11 +49,11 @@ csv.forEach((e) => {
 output +=
   '\nrace_infos.forEach((e) => {\n' +
   '  const param_id = e.param_id;\n' +
-  '  e.attr_bonus = bonus_params[id2bonus[param_id]];\n' +
+  '  e.attr_bonus = bonus_params[id2bonus[param_id]] || [];\n' +
   '  e.lanes = lane_params[param_id];\n' +
   '  e.slopes = slope_params[param_id];\n' +
-  '  e.phases = phase_params[e.span];\n' +
-  "});\n\nrace_infos[race_enum.begin_race] = require('#/data/race/race-begin-race')\n\nconsole.log('[race-const.js] race info init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nmodule.exports = {\nrace_enum,\nrace_infos,\nrace_rewards: require('#/data/race/race-rewards')};";
+  '  e.phases = [Math.ceil(e.span*4/24),Math.ceil(e.span*16/24),Math.ceil(e.span*20/24)]\n' +
+  "});\n\nrace_infos[race_enum.begin_race] = require('#/data/race/race-begin-race')\n\nconsole.log('[race-const.js] race info init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nmodule.exports = {\nrace_enum,\nrace_infos,\nrace_rewards};";
 
 writeFileSync('../../ere/data/race/race-const.js', output);
 
@@ -84,6 +83,9 @@ track_dict['坝上'] = 'bashang';
 track_dict['沙田'] = 'shatin';
 track_dict['尚蒂伊'] = 'chantilly';
 track_dict['圣克劳德'] = 'st_cloud';
+track_dict['丘吉尔园'] = 'kentucky';
+track_dict['宾利高'] = 'baltimore';
+track_dict['贝蒙园'] = 'new_york';
 
 const rotation_dict = {};
 rotation_dict['右'] = 'right';
@@ -133,7 +135,7 @@ csv.forEach((e) => {
   // 参赛人数
   output += `${e[16]},\n`;
   // 传奇人数
-  output += `${e[15] || 4},\n`;
+  output += `[${(e[15] || '').split(' ').join(',')}],\n`;
   // 年龄限制
   output += `RaceInfo.limit_enum.${getValueInDict(limit_dict, e[14], e)},\n`;
   // 时间

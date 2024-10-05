@@ -109,7 +109,11 @@ function random_attr(chara_line) {
 lines
   .map((e) => e.split(','))
   .forEach((chara_line) => {
-    if (chara_line.length === header.length && chara_line[cup_index]) {
+    if (
+      chara_line.length === header.length &&
+      chara_line[cup_index] &&
+      chara_line[breast_index]
+    ) {
       if (!chara_line[attr_start_index]) {
         random_attr(chara_line);
       }

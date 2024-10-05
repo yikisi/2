@@ -566,7 +566,7 @@ module.exports = (handlers) => {
     await tachyon.say_and_wait([
       '所以，我亲爱的 ',
       callname,
-      '……接下来的余·生，请让我们一起互相折磨下去吧？',
+      '……接下来的余 · 生，请让我们一起互相折磨下去吧？',
     ]);
   };
 };

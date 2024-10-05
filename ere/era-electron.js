@@ -28,6 +28,13 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   beginTrain(...charaId) {},
   /**
+   * check if a or some images are loaded
+   * @param name the name of the image
+   * @returns {boolean|boolean[]}
+   */
+  // eslint-disable-next-line no-unused-vars
+  checkImage(...name) {},
+  /**
    * clear printed lines
    * @param {number} [lineCount] how many lines to be cleared, leave undefined to clear all
    * @returns {Promise<number>} new line count
@@ -72,12 +79,17 @@ const era = {
   getAllCharacters() {},
   /**
    * get characters added in train
-   * @returns {array<number>} ids of characters in train
+   * @returns {number[]} ids of characters in train
    */
   getCharactersInTrain() {},
   /**
+   * get the number of current lines
+   * @returns {number} the number of current lines
+   */
+  getLineCount() {},
+  /**
    * wait for use's input, the engine will try to return number
-   * @param {{[disableBefore]: boolean, [rule]: string, [useRule]: boolean}} [config] config of input, like rule
+   * @param {{[disableBefore]:boolean,[rule]:string,[useRule]:boolean,[hideInput]:boolean}} [config] config of input, like rule
    * @returns {Promise<any>} a promise of the user input, please use await
    */
   // eslint-disable-next-line no-unused-vars
@@ -140,7 +152,7 @@ const era = {
   },
   /**
    * print some text
-   * @param {string|({[color]:string,content:string,[fontWeight]:string,[fontSize]:string,[url]:string}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
+   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
    * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line
    * @returns {number} line number of the printed
    */
@@ -148,7 +160,7 @@ const era = {
   print(content, config) {},
   /**
    * print some text and wait any key from user
-   * @param {string|({[color]:string,content:string,[fontWeight]:string,[fontSize]:string,[url]:string}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
+   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
    * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line   * @returns {Promise<number>} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
@@ -162,15 +174,6 @@ const era = {
    */
   // eslint-disable-next-line no-unused-vars
   printButton(content, accelerator, config) {},
-  /**
-   *
-   * @param content
-   * @param [config]
-   * @param [style]
-   * @returns {number} line number of the printed
-   */
-  // eslint-disable-next-line no-unused-vars
-  printDynamicText(content, config, style) {},
   /**
    * print images that must be declared in csv files in #/resources
    * @param {string} names REQUIRED image names
@@ -239,7 +242,7 @@ const era = {
   replaceInColRows(...columnObjects) {},
   /**
    * DANGER replace the line just printed with a new text line
-   * @param {string|({[color]:string,content:string,[fontWeight]:string,[fontSize]:string,[url]:string}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
+   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
    * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line
    * @returns {number} line number of the printed
    */
@@ -304,20 +307,18 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   setAlign(textAlign) {},
   /**
-   * set style of dynamic text
-   * @param lineNumber
-   * @param style
-   * @returns {void}
-   */
-  // eslint-disable-next-line no-unused-vars
-  setDynamicStyle(lineNumber, style) {},
-  /**
    * set default horizontal align of inColRows
    * @param {string} align REQUIRED the vertical align, start, end, center, space-around, space-between or space-evenly
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
   setHorizontalAlign(align) {},
+  /**
+   * @param {string} [maskName]
+   * @param {number} [opacity]
+   */
+  // eslint-disable-next-line no-unused-vars
+  setMask(maskName, opacity) {},
   /**
    * set default offset
    * @param {number} offset REQUIRED an integer between 0 and 23
@@ -353,6 +354,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
+  version: { sdk: '2.2.1', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
@@ -363,10 +365,14 @@ const era = {
 Object.keys(era).forEach((key) => {
   if (era[key] instanceof Function && key !== 'delay') {
     era[key] = (...args) => {
-      // eslint-disable-next-line no-undef
-      if (arguments.callee !== era[key]) {
-        return era[key](...args);
+      if (!era[key]._s) {
+        era.logger.error(
+          `unsupported api! please check the version of the engine! current version: sdk=${
+            era.version.sdk
+          }, engine=${era.version.engine}`,
+        );
       }
+      return era[key](...args);
     };
   }
 });

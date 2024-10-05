@@ -1,6 +1,7 @@
 const { class_enum } = require('#/data/race/model/race-info');
 
 const race_rewards = [];
+
 race_rewards[class_enum.G1] = {
   1: {
     attr: [10, 10],

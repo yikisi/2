@@ -1,3 +1,8 @@
+/**
+ * @file 调教指令 - 睡奸性交系
+ *
+ * @author O口口口口口
+ */
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
@@ -5,22 +10,12 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /**
- * @author O口口口口口
  * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
  * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} normal_handlers
  */
 module.exports = (handlers, normal_handlers) => {
   handlers[ero_hooks.missionary] = handlers[ero_hooks.missionary_anal_sex] =
     async (attacker, defender, hook) => {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 伏在沉睡的 ',
-        defender.get_colored_name(),
-        ` 身上，奸淫着${
-          hook.hook === ero_hooks.missionary ? '小穴' : '屁穴'
-        }……】`,
-      ]);
       await attacker.print_and_wait('或许这就是……最能感受彼此体温的姿势了吧。');
       await attacker.print_and_wait([
         '所谓的正常位，或叫做传教士位，如果从交缠的二人身前的方向望去的话，就像是 ',
@@ -47,16 +42,7 @@ module.exports = (handlers, normal_handlers) => {
     };
 
   handlers[ero_hooks.doggy_style] = handlers[ero_hooks.doggy_style_anal_sex] =
-    async (attacker, defender, hook) => {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 伏在俯卧着的 ',
-        defender.get_colored_name(),
-        ` 身上，奸淫着${
-          hook.hook === ero_hooks.doggy_style ? '小穴' : '屁穴'
-        }……】`,
-      ]);
+    async (attacker, defender) => {
       await attacker.print_and_wait('像小狗一样……');
       await attacker.print_and_wait(
         '那双腿……那双前脚掌紧绷着踮起，膝盖弯曲着将湿漉漉的腰跨高高顶起的双腿……',
@@ -81,13 +67,6 @@ module.exports = (handlers, normal_handlers) => {
     };
 
   handlers[ero_hooks.stimulate_g_spot] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 用肉棒刺激着沉睡的 ',
-      defender.get_colored_name(),
-      ' 深藏的G点……】',
-    ]);
     await attacker.print_and_wait('更深一些。');
     await attacker.print_and_wait([
       '因为并不会听见来自 ',
@@ -118,13 +97,6 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.stimulate_womb] = async (attacker, defender) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 用肉棒隔着屁穴刺激着沉睡的 ',
-      defender.get_colored_name(),
-      ' 敏感的子宫……】',
-    ]);
     await attacker.print_and_wait('不用肉棒就能让小穴变舒服的魔法。');
     await attacker.print_and_wait([
       attacker.get_colored_name(),
@@ -161,15 +133,6 @@ module.exports = (handlers, normal_handlers) => {
     defender,
     hook,
   ) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 骑在沉睡的 ',
-      defender.get_colored_name(),
-      ` 身上，以${
-        hook.hook === ero_hooks.cowgirl ? '小穴' : '屁穴'
-      }套弄着肉棒……】`,
-    ]);
     await attacker.print_and_wait('吞进去了……');
     await attacker.print_and_wait([
       '与平躺着的 ',
@@ -195,27 +158,20 @@ module.exports = (handlers, normal_handlers) => {
   handlers[ero_hooks.stimulate_glans_by_virgin] = handlers[
     ero_hooks.stimulate_glans_by_anal
   ] = async (attacker, defender, hook) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ` 以${
-        hook.hook === ero_hooks.stimulate_glans_by_virgin ? '小穴' : '屁穴'
-      }套弄着沉睡的 `,
-      defender.get_colored_name(),
-      ' 耸立的肉棒……】',
-    ]);
-    await normal_handlers[ero_hooks.stimulate_glans_by_virgin](
-      attacker,
-      defender,
-      { arg: 0xf },
-      { skip_name: true },
-    );
-    await attacker.print_and_wait([
-      '明明是骑在 ',
-      sys_get_colored_callname(attacker.id, defender.id),
-      ' 身上，在姿态上占据主动权的一方，',
-      attacker.get_colored_name(),
-      ' 此时的脸上却满是动摇的绯色。',
-    ]);
+    if (hook.arg) {
+      await normal_handlers[ero_hooks.stimulate_glans_by_virgin](
+        attacker,
+        defender,
+        hook,
+        { from_sleeping: true },
+      );
+      await attacker.print_and_wait([
+        '明明是骑在 ',
+        sys_get_colored_callname(attacker.id, defender.id),
+        ' 身上，在姿态上占据主动权的一方，',
+        attacker.get_colored_name(),
+        ' 此时的脸上却满是动摇的绯色。',
+      ]);
+    }
   };
 };

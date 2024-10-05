@@ -10,7 +10,7 @@ const lines = readFileSync('./uma-data.csv', 'utf-8')
   .filter((e) => e);
 lines.shift();
 
-console.log('Unusable names:');
+console.log('[check-child-names.js] Unusable names:');
 let flag = true;
 for (const m in name_data) {
   let list = name_data[m];
@@ -19,10 +19,12 @@ for (const m in name_data) {
   }
   const find = list.filter((e) => lines.indexOf(e) !== -1);
   if (find.length) {
-    console.log(`${m} - ${find.join(', ')}`);
+    console.log(`\t${m} <-> ${find.join(', ')}`);
     flag = false;
   }
 }
 if (flag) {
-  console.log('    nothing');
+  console.log('\tnothing');
+} else {
+  process.exit(1);
 }

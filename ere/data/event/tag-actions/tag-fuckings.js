@@ -77,6 +77,20 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
     [ero_action_tags.anal],
   );
 
+  ero_action_names[ero_actions.fucked_suspended_congress] = '逆火车便当';
+  ero_tagged_hooks[ero_actions.fucked_suspended_congress] = new EroHookTag(
+    [ero_action_tags.virgin, ero_action_tags.height_check],
+    [ero_action_tags.insert],
+  );
+
+  ero_action_names[ero_actions.fucked_suspended_congress_anal_sex] =
+    '逆火车便当肛交';
+  ero_tagged_hooks[ero_actions.fucked_suspended_congress_anal_sex] =
+    new EroHookTag(
+      [ero_action_tags.anal, ero_action_tags.height_check],
+      [ero_action_tags.insert],
+    );
+
   ero_action_names[ero_actions.hug_suspended_congress] = '背向火车便当';
   ero_tagged_hooks[ero_actions.hug_suspended_congress] =
     ero_tagged_hooks[ero_actions.suspended_congress];

@@ -517,7 +517,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         coffee.sex,
         '见到过飞身扑向彩虹的飞行鲸鱼，见到过有着宝石般绚丽翅膀的巨龙，也见到过那个日夜追逐、被',
         coffee.sex,
-        '称呼为“朋友”的存在。',
+        '称呼为「朋友」的存在。',
       ]);
       await coffee.print_and_wait([
         '那么今天，',

@@ -1,3 +1,8 @@
+/**
+ * @file 春乌拉拉 - 爱慕
+ *
+ * @author 99
+ */
 const era = require('#/era-electron');
 
 const {
@@ -101,9 +106,6 @@ handlers[101] = async (me, urara, in_urara, _, callname, chara_self_name) => {
 };
 
 /**
- * 春乌拉拉 - 爱慕
- * @author 99
- *
  * @param {HookArg} hook
  * @param _
  * @param {EventObject} event_object

@@ -45,13 +45,11 @@ function transform(event_marks) {
   new Array(8)
     .fill(0)
     .forEach((_, i) =>
-      flip_params(`talent:17:${i + 1050}`, `talent:9017:${i + 1050}`),
+      flip_params(`talent:17:${i + 40}`, `talent:9017:${i + 40}`),
     );
   new Array(18)
     .fill(0)
-    .forEach((_, i) =>
-      flip_params(`talent:17:${i + 1070}`, `talent:9017:${i + 1070}`),
-    );
+    .forEach((_, i) => flip_params(`talent:17:${i}`, `talent:9017:${i}`));
 }
 
 module.exports = {
@@ -88,7 +86,10 @@ module.exports = {
     ]);
     if (!event_marks.wax_and_wane) {
       event_marks.wax_and_wane++;
-      add_event(event_hooks.week_end, new EventObject(17, cb_enum.edu));
+      add_event(
+        event_hooks.week_end,
+        new EventObject(17, cb_enum.edu).set_arg('wax_and_wane'),
+      );
     }
     if (debuff >= 3 && !event_marks.a_stones_throw) {
       event_marks.a_stones_throw++;

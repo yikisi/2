@@ -1,3 +1,8 @@
+/**
+ * @file 荣进闪耀 - 育成
+ *
+ * @author 爱放箭的袁本初
+ */
 const era = require('#/era-electron');
 
 const {
@@ -36,30 +41,27 @@ const week_start_handlers = {};
 ].forEach((f) => f(week_start_handlers));
 
 handlers[event_hooks.week_start] = async (hook, _, event_object) => {
-  const edu_weeks = era.get('cflag:37:育成回合计时'),
-    flags = { wait: false };
-  if (!week_start_handlers[edu_weeks]) {
+  const flags = { wait: false };
+  if (!week_start_handlers[event_object?.arg]) {
     throw new Error();
   }
-  await week_start_handlers[edu_weeks](
+  await week_start_handlers[event_object.arg](
     get_chara_talk(37),
     get_chara_talk(0).name,
     sys_get_callname(37, 0),
     flags,
-    () => {
-      add_event(hook.hook, event_object);
-    },
+    () => add_event(hook.hook, event_object),
   );
   flags.wait && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.week_end] = async () => {
+handlers[event_hooks.week_end] = async (_, __, event_object) => {
   const callname = sys_get_callname(37, 0),
     flash = get_chara_talk(37),
-    edu_weeks = era.get('cflag:37:育成回合计时'),
+    event_arg = event_object?.arg,
     your_name = get_chara_talk(0).name;
   if (
-    edu_weeks === 47 + 32 &&
+    event_arg === 47 + 32 &&
     era.get('cflag:37:位置') === era.get('cflag:0:位置')
   ) {
     await print_event_name('交心之谈 · 二', flash);
@@ -304,16 +306,16 @@ handlers[event_hooks.week_end] = async () => {
     era.set('status:37:分心', 0);
     await era.printAndWait([
       flash.get_colored_name(),
-      '不再',
+      ' 不再 ',
       {
         color: buff_colors[0],
         content: '[分心]',
         title: status_desc['闪耀分心'],
       },
-      '了！',
+      ' 了！',
     ]);
   } else if (
-    edu_weeks === 95 + 32 &&
+    event_arg === 95 + 32 &&
     era.get('cflag:37:位置') === era.get('cflag:0:位置')
   ) {
     await print_event_name('未来之事 · 三', flash);
@@ -386,7 +388,7 @@ handlers[event_hooks.week_end] = async () => {
     era.printButton('「闪耀？」', 1);
     await era.input();
     await era.printAndWait(
-      `回到特雷森学院的车上，${your_name} 发现荣进闪耀的视线一直在盯着某个地方看。`,
+      `回到特雷森学园的车上，${your_name} 发现荣进闪耀的视线一直在盯着某个地方看。`,
     );
     await flash.say_and_wait('没什么，我只是在注视合宿场地。');
     era.printButton('「合宿场地？」', 1);
@@ -460,122 +462,120 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
     add_event(event_hooks.out_start, event_object);
     return;
   }
+  if (event_object?.arg !== 95 + 6) {
+    return false;
+  }
   const callname = sys_get_callname(37, 0),
-    edu_weeks = era.get('cflag:37:育成回合计时'),
     flash = get_chara_talk(37),
     your_name = get_chara_talk(0).name;
-  if (edu_weeks === 95 + 6) {
-    await print_event_name('遇见之花', flash);
-    await era.printAndWait(
-      `临近情人节，为了参观今年新推出的巧克力的款项，荣进闪耀邀请 ${your_name} 一起前往附近的甜品店。`,
-    );
-    await era.printAndWait('不过……');
-    await say_by_passer_by_and_wait(
-      `客人`,
-      `等一下，明明是我先来的——好痛，${your_name} 撞到我了！`,
-    );
-    await say_by_passer_by_and_wait(
-      '店员',
-      '想要购买『巧克力年轮蛋糕』的顾客请来这里排队。啊！这位客人，店内是不允许奔跑的。',
-    );
-    await flash.say_and_wait('还真是……一片混乱呢。');
-    await era.printAndWait('看着店内在四处嚷挤的人群，荣进闪耀皱紧眉头。');
-    await flash.say_and_wait(
-      '这样的话就没有办法仔细的调查展览柜里的甜品了，有点麻烦……',
-    );
-    era.printButton('「需要换一家店吗？」', 1);
-    await era.input();
-    await era.printAndWait(`见此，${your_name} 提议道。`);
-    await flash.say_and_wait(
-      '……毕竟情人节将至，恐怕别的地方的情况也跟这里差不多吧。',
-    );
-    await era.printAndWait('说到这里，荣进闪耀轻叹一口气。');
-    await flash.say_and_wait(
-      '嘛，不过想要的商品其实已经提前在网上购物成功了，所以即便没有办法在现场考察实际的情况也不是什么大的问题。',
-    );
-    await flash.say_and_wait('因此，现在就先回去吧。');
-    era.drawLine();
-    await flash.say_and_wait(
-      '其实，自从我来到日本之后，每年的情人节目睹这种人们因为送礼而产生争执的画面，都会觉得有些不可思议呢。',
-    );
-    await era.printAndWait('回到特雷森学院的路上，荣进闪耀突然发出一声感叹。');
-    era.printButton('「德国那边没有这样的习俗吗？」', 1);
-    await era.input();
-    await era.printAndWait(`见此，${your_name} 有些疑惑。`);
-    await flash.say_and_wait('准确来说是有的，但是比起巧克力，主流还是送花。');
-    await era.printAndWait(
-      `说着，荣进闪耀伸出一根手指，开始为 ${your_name} 科普。`,
-    );
-    await flash.say_and_wait(
-      '而且更进一步的讲，即便要赠礼，对象也不会是情侣之外的人。',
-    );
-    await flash.say_and_wait('也就是说，没有所谓的义理礼物。');
-    era.printButton('「原来如此。」', 1);
-    await era.input();
-    await era.printAndWait(
-      '换句话说，如果想要赠礼的话，那接受礼物的目标一定是十分重要的存在吧。',
-    );
-    await era.printAndWait(`${your_name} 了然地点了点头。`);
-    await flash.say_and_wait(
-      '以身边的人举例子的话，那就是每年情人节，我都能看到父亲送给母亲的玫瑰花束。',
-    );
-    await flash.say_and_wait('………');
-    await era.printAndWait('说到这里，不知道为什么，荣进闪耀突然陷入沉默。');
-    await era.printAndWait(
-      `${your_name} 似乎感觉${flash.sex}的目光在隐隐之间向 ${your_name} 这边看了一眼。`,
-    );
-    era.printButton('「怎么了？」', 1);
-    await era.input();
-    await flash.say_and_wait('……不，没什么。');
-    await era.printAndWait('再度开口的荣进闪耀轻轻摇头。');
-    await flash.say_and_wait('总而言之，德国那边是不会以告白为由赠送礼物的。');
-    await flash.say_and_wait('如果要这么做，那双方只会是更深层次的关系。');
-    await flash.say_and_wait(
-      '因此从这个角度来讲，反而是日本这边会有在情人节这天告白的习俗，更让我诧异。',
-    );
-    era.printButton('「大概是一个顺水推舟的借口吧？」', 1);
-    await era.input();
-    await era.printAndWait(
-      '告白是一个需要勇气的行为，以情人节告白这种传统节日中的传统习俗为由，来进行这类无论最终成败与否都会改变双方关系的行为，正好合适。',
-    );
-    await flash.say_and_wait('需要合适的理由来为真正的心意做掩护吗……');
-    await flash.say_and_wait('呵呵～～倒是很不错的主意呢。');
-    await era.printAndWait(
-      '如同受到某种启发一般，荣进闪耀若有所思地点了点头。',
-    );
-    await flash.say_and_wait(
-      `啊，看到学院的校门口。那么，由于接下来我还有事情需要去处理，所以先在此告别了，${callname}。`,
-    );
-    era.printButton('「路上小心。」', 1);
-    await era.input();
-    era.drawLine({ content: '情人节当天' });
-    await flash.say_and_wait(`早上好，${callname}。`);
-    await era.printAndWait(
-      `刚推开训练室的大门，${your_name} 便看到一朵娇艳欲滴的蓝色花朵，竖立在办公桌旁的花瓶上。`,
-    );
-    era.printButton('「这朵花是？」', 1);
-    await era.input();
-    await flash.say_and_wait('蓝色矢车菊，德国的国花。');
-    await era.printAndWait(`荣进闪耀微笑着为 ${your_name} 介绍。`);
-    await flash.say_and_wait(
-      '上次和您分别之后，回去的路上我仔细思索了一番。最终认为既然目前所在的国家是日本的话，那么在传统节日方面也要入乡随俗一点才好。',
-    );
-    era.printButton('「所以这就是你的情人节礼物吗？」', 1);
-    await era.input();
-    await flash.say_and_wait(
-      `是的，因为 ${callname} 您没有用鲜花作为装饰品的习惯，所以将此作为礼物一来可以改善您的周边环境，二来……`,
-    );
-    era.printButton('「二来？」', 1);
-    await era.input();
-    await flash.say_and_wait(
-      '二来在不经意间看到这朵鲜花时，说不定还会借此联想到那位赠送鲜花的人。',
-    );
-    await flash.say_and_wait('呵呵呵——');
-    await era.printAndWait('说完这些之后，荣进闪耀捂嘴轻笑，似乎显得很开心。');
-    era.set('cflag:37:节日事件标记', 0);
-    sys_like_chara(37, 0, 100) && (await era.waitAnyKey());
-    return true;
-  }
+  await print_event_name('遇见之花', flash);
+  await era.printAndWait(
+    `临近情人节，为了参观今年新推出的巧克力的款项，荣进闪耀邀请 ${your_name} 一起前往附近的甜品店。`,
+  );
+  await era.printAndWait('不过……');
+  await say_by_passer_by_and_wait(
+    `客人`,
+    `等一下，明明是我先来的——好痛，${your_name} 撞到我了！`,
+  );
+  await say_by_passer_by_and_wait(
+    '店员',
+    '想要购买『巧克力年轮蛋糕』的顾客请来这里排队。啊！这位客人，店内是不允许奔跑的。',
+  );
+  await flash.say_and_wait('还真是……一片混乱呢。');
+  await era.printAndWait('看着店内在四处嚷挤的人群，荣进闪耀皱紧眉头。');
+  await flash.say_and_wait(
+    '这样的话就没有办法仔细的调查展览柜里的甜品了，有点麻烦……',
+  );
+  era.printButton('「需要换一家店吗？」', 1);
+  await era.input();
+  await era.printAndWait(`见此，${your_name} 提议道。`);
+  await flash.say_and_wait(
+    '……毕竟情人节将至，恐怕别的地方的情况也跟这里差不多吧。',
+  );
+  await era.printAndWait('说到这里，荣进闪耀轻叹一口气。');
+  await flash.say_and_wait(
+    '嘛，不过想要的商品其实已经提前在网上购物成功了，所以即便没有办法在现场考察实际的情况也不是什么大的问题。',
+  );
+  await flash.say_and_wait('因此，现在就先回去吧。');
+  era.drawLine();
+  await flash.say_and_wait(
+    '其实，自从我来到日本之后，每年的情人节目睹这种人们因为送礼而产生争执的画面，都会觉得有些不可思议呢。',
+  );
+  await era.printAndWait('回到特雷森学园的路上，荣进闪耀突然发出一声感叹。');
+  era.printButton('「德国那边没有这样的习俗吗？」', 1);
+  await era.input();
+  await era.printAndWait(`见此，${your_name} 有些疑惑。`);
+  await flash.say_and_wait('准确来说是有的，但是比起巧克力，主流还是送花。');
+  await era.printAndWait(
+    `说着，荣进闪耀伸出一根手指，开始为 ${your_name} 科普。`,
+  );
+  await flash.say_and_wait(
+    '而且更进一步的讲，即便要赠礼，对象也不会是情侣之外的人。',
+  );
+  await flash.say_and_wait('也就是说，没有所谓的义理礼物。');
+  era.printButton('「原来如此。」', 1);
+  await era.input();
+  await era.printAndWait(
+    '换句话说，如果想要赠礼的话，那接受礼物的目标一定是十分重要的存在吧。',
+  );
+  await era.printAndWait(`${your_name} 了然地点了点头。`);
+  await flash.say_and_wait(
+    '以身边的人举例子的话，那就是每年情人节，我都能看到父亲送给母亲的玫瑰花束。',
+  );
+  await flash.say_and_wait('………');
+  await era.printAndWait('说到这里，不知道为什么，荣进闪耀突然陷入沉默。');
+  await era.printAndWait(
+    `${your_name} 似乎感觉${flash.sex}的目光在隐隐之间向 ${your_name} 这边看了一眼。`,
+  );
+  era.printButton('「怎么了？」', 1);
+  await era.input();
+  await flash.say_and_wait('……不，没什么。');
+  await era.printAndWait('再度开口的荣进闪耀轻轻摇头。');
+  await flash.say_and_wait('总而言之，德国那边是不会以告白为由赠送礼物的。');
+  await flash.say_and_wait('如果要这么做，那双方只会是更深层次的关系。');
+  await flash.say_and_wait(
+    '因此从这个角度来讲，反而是日本这边会有在情人节这天告白的习俗，更让我诧异。',
+  );
+  era.printButton('「大概是一个顺水推舟的借口吧？」', 1);
+  await era.input();
+  await era.printAndWait(
+    '告白是一个需要勇气的行为，以情人节告白这种传统节日中的传统习俗为由，来进行这类无论最终成败与否都会改变双方关系的行为，正好合适。',
+  );
+  await flash.say_and_wait('需要合适的理由来为真正的心意做掩护吗……');
+  await flash.say_and_wait('呵呵～～倒是很不错的主意呢。');
+  await era.printAndWait('如同受到某种启发一般，荣进闪耀若有所思地点了点头。');
+  await flash.say_and_wait(
+    `啊，看到学园的校门口。那么，由于接下来我还有事情需要去处理，所以先在此告别了，${callname}。`,
+  );
+  era.printButton('「路上小心。」', 1);
+  await era.input();
+  era.drawLine({ content: '情人节当天' });
+  await flash.say_and_wait(`早上好，${callname}。`);
+  await era.printAndWait(
+    `刚推开训练室的大门，${your_name} 便看到一朵娇艳欲滴的蓝色花朵，竖立在办公桌旁的花瓶上。`,
+  );
+  era.printButton('「这朵花是？」', 1);
+  await era.input();
+  await flash.say_and_wait('蓝色矢车菊，德国的国花。');
+  await era.printAndWait(`荣进闪耀微笑着为 ${your_name} 介绍。`);
+  await flash.say_and_wait(
+    '上次和您分别之后，回去的路上我仔细思索了一番。最终认为既然目前所在的国家是日本的话，那么在传统节日方面也要入乡随俗一点才好。',
+  );
+  era.printButton('「所以这就是你的情人节礼物吗？」', 1);
+  await era.input();
+  await flash.say_and_wait(
+    `是的，因为 ${callname} 您没有用鲜花作为装饰品的习惯，所以将此作为礼物一来可以改善您的周边环境，二来……`,
+  );
+  era.printButton('「二来？」', 1);
+  await era.input();
+  await flash.say_and_wait(
+    '二来在不经意间看到这朵鲜花时，说不定还会借此联想到那位赠送鲜花的人。',
+  );
+  await flash.say_and_wait('呵呵呵——');
+  await era.printAndWait('说完这些之后，荣进闪耀捂嘴轻笑，似乎显得很开心。');
+  era.set('cflag:37:节日事件标记', 0);
+  sys_like_chara(37, 0, 100) && (await era.waitAnyKey());
+  return true;
 };
 
 /**
@@ -729,6 +729,7 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
         `面对 ${your_name} 的提议，荣进闪耀的脸上浮现出犹豫之色。`,
       );
       era.printButton('「要是伤势恶化，情况就会变得更糟糕。」', 1);
+      await era.input();
       await era.printAndWait(`见此，${your_name} 轻叹一口气，说道。`);
       await flash.say_and_wait('……');
       await era.printAndWait(`很明显，${your_name} 的话提醒了面前人。`);
@@ -808,103 +809,102 @@ handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
 
 handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
   const flash = get_chara_talk(37);
+  if (event_object?.arg !== 'black_treasure') {
+    return;
+  }
   if (era.get('flag:当前互动角色') || !sys_check_awake(37)) {
     add_event(hook.hook, event_object);
     await era.printAndWait([
       flash.get_colored_name(),
-      '好像对这里很关注的样子……下次独自出行偶遇的时候问问吧',
+      ' 好像对这里很关注的样子……下次独自出行偶遇的时候问问吧',
     ]);
     await era.clear(1);
     return;
   }
   const callname = sys_get_callname(37, 0),
-    your_name = get_chara_talk(0).name,
-    edu_event_marks = new FlashEduMarks();
-  if (edu_event_marks.black_treasure === 1) {
-    edu_event_marks.black_treasure++;
-    new EventMarks(0).sub(event_hooks.out_shopping);
-    await print_event_name('漆黑珍宝', flash);
-    await era.printAndWait(
-      `独自在商场准备购买生活用品时，${your_name} 突然在附近看到了满脸闷闷不乐的荣进闪耀。`,
-    );
-    era.printButton('「怎么了？」', 1);
-    await era.input();
-    await era.printAndWait(`见此，${your_name} 好奇地询问道。`);
-    await flash.say_and_wait(`啊，${callname}。`);
-    await era.printAndWait(`听出声音的来源是 ${your_name}，荣进闪耀有些惊讶。`);
-    await flash.say_and_wait('不，没什么。');
-    await era.printAndWait(`然后下一秒，${flash.sex}又摇了摇头。`);
-    await flash.say_and_wait(
-      '只是我突然想念起在家乡吃到的料理，所以想要尝试在日本这边寻找到食材，进行复刻。',
-    );
-    await flash.say_and_wait('只是……');
-    await era.printAndWait('说到这里，荣进闪耀的脸上迅速闪过一丝纠结。');
-    era.printButton('「很贵吗？」', 1);
-    await era.input();
-    await era.printAndWait(
-      `而敏锐地捕捉到这一情况的 ${your_name}，似乎猜到了${flash.sex}情绪低落的原因。`,
-    );
-    await flash.say_and_wait('……嗯。');
-    await era.printAndWait(`闻言，${flash.sex}沉默片刻，随后缓缓点头。`);
-    await flash.say_and_wait(
-      '制作料理所需要用到的高端鱼子酱，在这边商场的价格，超过了我这个月可用的零花钱范畴。',
-    );
-    await flash.say_and_wait(
-      '虽然也可以使用其他更为便宜的品牌进行替代，但是这样做出来的成品就不是我最开始所怀念的那份味道了。',
-    );
-    await era.printAndWait(`话毕，${your_name} 看见${flash.sex}轻叹一口气。`);
-    await era.printAndWait(`面对此时满脸沮丧的荣进闪耀，${your_name} 决定——`);
-    era.printButton('「顺其自然」', 1);
-    if (era.get('flag:当前马币') > 50) {
-      era.printButton(`「借给${flash.sex}钱」`, 2);
-    }
-    const ret = await era.input();
-    if (ret === 1) {
-      await era.printAndWait(
-        `虽然 ${your_name} 的心中划过替面前人购买商品的打算，但仔细想来，以荣进闪耀的性格想必是不会答应这件事情的。`,
-      );
-      await era.printAndWait(
-        `于是最终，${your_name} 也只是看着${flash.sex}愁眉苦脸地离开商场。`,
-      );
-      era.println();
-      sys_change_motivation(37, -1) && (await era.waitAnyKey());
-    } else {
-      await era.printAndWait(
-        `虽然 ${your_name} 的心中划过替面前人购买商品的打算，但仔细想来，以荣进闪耀的性格想必是不会答应这件事情的。`,
-      );
-      await flash.say_and_wait('诶？');
-      await era.printAndWait('不过话虽如此，但也不是没有解决办法。');
-      await flash.say_and_wait(`${callname} 您的意思是……打算替我支付吗？`);
-      await era.printAndWait(`听到 ${your_name} 的提议，荣进闪耀愣了几秒。`);
-      await flash.say_and_wait('您的好意我心领了，但这种事情果然……');
-      await era.printAndWait(
-        `紧接着，反应过来的${flash.sex}猛然摇头，表情甚是抗拒。`,
-      );
-      era.printButton('「只是将你未来的零花钱提前透支而已。」', 1);
-      await era.input();
-      await era.printAndWait(
-        `见此，${your_name} 向荣进闪耀重申『借』和『请』的区别。`,
-      );
-      await era.printAndWait(
-        `${your_name} 相信比起单纯的受到他人馈赠，这种更为公平的形式${flash.sex}会较容易接受。`,
-      );
-      await flash.say_and_wait('唔……');
-      await era.printAndWait(
-        `果然，在听到 ${your_name} 的话后，${flash.sex}的脸上浮现出迟疑的表情。`,
-      );
-      await flash.say_and_wait('……我知道了。');
-      await era.printAndWait(
-        `最终，在经过再三思索之后，${flash.sex}点头，接受了 ${your_name} 的帮助。`,
-      );
-      await flash.say_and_wait('我会铭记您的这份恩情的。');
-      await era.printAndWait(`${flash.sex}郑重道。`);
-      await flash.say_and_wait('我保证。');
-      sys_change_money(-50);
-      sys_get_billings().push({ creditor: 0, repay: 25, timer: 2 });
-      era.add('flag:收支', 25);
-    }
-    return true;
+    your_name = get_chara_talk(0).name;
+  new EventMarks(0).sub(event_hooks.out_shopping);
+  await print_event_name('漆黑珍宝', flash);
+  await era.printAndWait(
+    `独自在商场准备购买生活用品时，${your_name} 突然在附近看到了满脸闷闷不乐的荣进闪耀。`,
+  );
+  era.printButton('「怎么了？」', 1);
+  await era.input();
+  await era.printAndWait(`见此，${your_name} 好奇地询问道。`);
+  await flash.say_and_wait(`啊，${callname}。`);
+  await era.printAndWait(`听出声音的来源是 ${your_name}，荣进闪耀有些惊讶。`);
+  await flash.say_and_wait('不，没什么。');
+  await era.printAndWait(`然后下一秒，${flash.sex}又摇了摇头。`);
+  await flash.say_and_wait(
+    '只是我突然想念起在家乡吃到的料理，所以想要尝试在日本这边寻找到食材，进行复刻。',
+  );
+  await flash.say_and_wait('只是……');
+  await era.printAndWait('说到这里，荣进闪耀的脸上迅速闪过一丝纠结。');
+  era.printButton('「很贵吗？」', 1);
+  await era.input();
+  await era.printAndWait(
+    `而敏锐地捕捉到这一情况的 ${your_name}，似乎猜到了${flash.sex}情绪低落的原因。`,
+  );
+  await flash.say_and_wait('……嗯。');
+  await era.printAndWait(`闻言，${flash.sex}沉默片刻，随后缓缓点头。`);
+  await flash.say_and_wait(
+    '制作料理所需要用到的高端鱼子酱，在这边商场的价格，超过了我这个月可用的零花钱范畴。',
+  );
+  await flash.say_and_wait(
+    '虽然也可以使用其他更为便宜的品牌进行替代，但是这样做出来的成品就不是我最开始所怀念的那份味道了。',
+  );
+  await era.printAndWait(`话毕，${your_name} 看见${flash.sex}轻叹一口气。`);
+  await era.printAndWait(`面对此时满脸沮丧的荣进闪耀，${your_name} 决定——`);
+  era.printButton('「顺其自然」', 1);
+  if (era.get('flag:当前马币') > 50) {
+    era.printButton(`「借给${flash.sex}钱」`, 2);
   }
+  const ret = await era.input();
+  if (ret === 1) {
+    await era.printAndWait(
+      `虽然 ${your_name} 的心中划过替面前人购买商品的打算，但仔细想来，以荣进闪耀的性格想必是不会答应这件事情的。`,
+    );
+    await era.printAndWait(
+      `于是最终，${your_name} 也只是看着${flash.sex}愁眉苦脸地离开商场。`,
+    );
+    era.println();
+    sys_change_motivation(37, -1) && (await era.waitAnyKey());
+  } else {
+    await era.printAndWait(
+      `虽然 ${your_name} 的心中划过替面前人购买商品的打算，但仔细想来，以荣进闪耀的性格想必是不会答应这件事情的。`,
+    );
+    await flash.say_and_wait('诶？');
+    await era.printAndWait('不过话虽如此，但也不是没有解决办法。');
+    await flash.say_and_wait(`${callname} 您的意思是……打算替我支付吗？`);
+    await era.printAndWait(`听到 ${your_name} 的提议，荣进闪耀愣了几秒。`);
+    await flash.say_and_wait('您的好意我心领了，但这种事情果然……');
+    await era.printAndWait(
+      `紧接着，反应过来的${flash.sex}猛然摇头，表情甚是抗拒。`,
+    );
+    era.printButton('「只是将你未来的零花钱提前透支而已。」', 1);
+    await era.input();
+    await era.printAndWait(
+      `见此，${your_name} 向荣进闪耀重申「借」和「请」的区别。`,
+    );
+    await era.printAndWait(
+      `${your_name} 相信比起单纯的受到他人馈赠，这种更为公平的形式${flash.sex}会较容易接受。`,
+    );
+    await flash.say_and_wait('唔……');
+    await era.printAndWait(
+      `果然，在听到 ${your_name} 的话后，${flash.sex}的脸上浮现出迟疑的表情。`,
+    );
+    await flash.say_and_wait('……我知道了。');
+    await era.printAndWait(
+      `最终，在经过再三思索之后，${flash.sex}点头，接受了 ${your_name} 的帮助。`,
+    );
+    await flash.say_and_wait('我会铭记您的这份恩情的。');
+    await era.printAndWait(`${flash.sex}郑重道。`);
+    await flash.say_and_wait('我保证。');
+    sys_change_money(-50);
+    sys_get_billings().push({ creditor: 0, repay: 25, timer: 2 });
+    era.add('flag:收支', 25);
+  }
+  return true;
 };
 
 handlers[
@@ -914,10 +914,6 @@ handlers[
 handlers[event_hooks.race_end] = require('#/event/edu/edu-events-37/race-end');
 
 /**
- * 荣进闪耀的育成事件
- *
- * @author 爱放箭的袁本初
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

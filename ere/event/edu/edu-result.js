@@ -14,6 +14,7 @@ const { gacha } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
@@ -32,7 +33,10 @@ function handle_rest_cost(chara_id) {
     Math.max(debuff - 1 - (Math.random() < debuff / 5), 0),
   );
   debuff = era.get(`status:${chara_id}:疲惫`);
-  era.set(`status:${chara_id}:疲惫`, Math.max(debuff - 1, 1));
+  era.set(
+    `status:${chara_id}:疲惫`,
+    Math.max(debuff - 1, Number(era.get(`status:${chara_id}:疲惫`) > 0)),
+  );
 }
 
 /** @param {number} chara_id */
@@ -54,10 +58,6 @@ function handle_travel_cost(chara_id) {
  * @param {string} lan_name
  */
 function learn_language(chara_id, lan_name) {
-  print_attr_change(
-    chara_id,
-    sys_change_attr_and_print(chara_id, '精力', -get_random_value(200, 400)),
-  );
   print_attr_change(
     chara_id,
     sys_change_attr_and_print(
@@ -128,7 +128,7 @@ function print_attr_change(chara_id, to_print) {
   return to_print.length > 0;
 }
 
-/** @type {Record<string,function(chara_id:number,hook:HookArg,extra_flag:*):Promise<*>>} */
+/** @type {Record<string,function(number,HookArg,*):Promise<*>>} */
 const handlers = {};
 
 handlers[event_hooks.foreign_rest] = async (chara_id) => {
@@ -145,6 +145,15 @@ handlers[event_hooks.foreign_rest] = async (chara_id) => {
  * @param {{lan:string}} extra_flag
  */
 handlers[event_hooks.foreign_study] = async (chara_id, hook, extra_flag) => {
+  print_attr_change(
+    0,
+    sys_change_attr_and_print(chara_id, '精力', -get_random_value(200, 400)),
+  );
+  chara_id &&
+    print_attr_change(
+      0,
+      sys_change_attr_and_print(chara_id, '精力', -get_random_value(200, 400)),
+    );
   if (hook.arg) {
     era.println();
     learn_language(chara_id, extra_flag.lan);
@@ -198,7 +207,7 @@ handlers[event_hooks.foreign_travel] = async (chara_id) => {
 /**
  * @param {number} chara_id
  * @param {HookArg} _
- * @param {{attr_change:number[],pt_change:number,skill_change:number[],motivation_change:number,relation_change:number,love_change:number,base_change:Record<string,number>}} extra_flag
+ * @param {RaceEventParams} extra_flag
  */
 handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
   chara_id,
@@ -206,15 +215,16 @@ handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
   extra_flag,
 ) => {
   era.println();
-  let wait_flag = false;
+  let wait_flag = get_attr_and_print_in_event(
+    chara_id,
+    extra_flag.attr_change,
+    extra_flag.pt_change,
+    extra_flag.base_change,
+    true,
+  );
   wait_flag =
-    get_attr_and_print_in_event(
-      chara_id,
-      extra_flag.attr_change,
-      extra_flag.pt_change,
-      extra_flag.base_change,
-      true,
-    ) || wait_flag;
+    get_skills_and_print_in_event(chara_id, extra_flag.skill_change) ||
+    wait_flag;
   wait_flag =
     sys_change_motivation(chara_id, extra_flag.motivation_change || 0) ||
     wait_flag;
@@ -234,7 +244,7 @@ handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {{args:*,fumble:boolean,train:number}} extra_flag
+ * @param {TrainFailParams} extra_flag
  */
 handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
   const args = extra_flag.args || fumble_result.fail;
@@ -284,7 +294,6 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
         relation_change = args.like;
         pressure_change /= 2;
         hurt -= 1;
-        break;
     }
     if (era.get(`status:${chara_id}:练习X手`) !== change_buff) {
       era.set(`status:${chara_id}:练习X手`, change_buff);
@@ -302,22 +311,27 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
   return { attr_change, relation_change, stamina };
 };
 
-handlers[event_hooks.train_success] = async (chara_id, hook) => {
+/**
+ * @param {number} chara_id
+ * @param {HookArg} hook
+ * @param {TrainSuccessParams} extra_flag
+ */
+handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
   sys_change_pressure(chara_id, -get_random_value(50, 100));
+  extra_flag.attr ||= 0;
+  extra_flag.relation_change ||= 0;
+  extra_flag.stamina ||= 0;
+  extra_flag.pt_change ||= 0;
   if (hook.arg === true) {
     sys_change_pressure(chara_id, -50);
-    return {
-      attr: 5,
-      relation_change: 5,
-      stamina: -50,
-    };
+    extra_flag.attr += 5;
+    extra_flag.relation_change += 5;
+    extra_flag.stamina -= 50;
   } else if (hook.arg === false) {
     sys_change_pressure(chara_id, 50);
-    return {
-      stamina: 50,
-    };
+    extra_flag.stamina += 50;
   }
-  return {};
+  return extra_flag;
 };
 
 /**

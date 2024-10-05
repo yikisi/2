@@ -453,7 +453,7 @@ module.exports = async (_, __, event_object) => {
           `那是${vp.sex}本来就有的天真烂漫的，能让周围也变得快乐的笑容。`,
         );
         await era.printAndWait(
-          `${vp.sex}脸上重新展露笑颜后，像发出“啪”的一声眨了眨眼。`,
+          `${vp.sex}脸上重新展露笑颜后，像发出『啪』的一声眨了眨眼。`,
         );
         await vp.say_and_wait(`——我的甜心。`);
         era.println();

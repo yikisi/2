@@ -15,7 +15,7 @@ class DaiyaEduMarks extends EduEventMarks {
   high_place;
   // 新鲜！
   fresh;
-  // Heartbeat·Excite
+  // Heartbeat · Excite
   heartbeat_excite;
   // 舞蹈练习
   dance_practice;

@@ -2,15 +2,15 @@ module.exports = {
   /**
    * @param {number} min
    * @param {number} max
-   * @param {boolean} [not_int]
+   * @param {boolean} [is_float]
    */
-  get_random_value(min, max, not_int) {
+  get_random_value(min, max, is_float) {
     if (min >= max) {
       return min;
     }
     const value = min + (max - min + 1) * Math.random();
-    if (not_int) {
-      return value;
+    if (is_float) {
+      return (value * (max - min)) / (max - min + 1);
     }
     return Math.floor(value);
   },
@@ -22,4 +22,5 @@ module.exports = {
   log_edu_weeks: Math.log(3 * 48 - 1),
   // ln1200，根性最大值的自然对数
   log_max_wp: Math.log(1200),
+  minutes_in_a_day: 24 * 60,
 };

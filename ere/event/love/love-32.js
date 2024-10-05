@@ -1,3 +1,9 @@
+/**
+ * @file 爱丽速子 - 爱慕
+ *
+ * @author 幽白書
+ * @author 黑奴一号 无名黑奴（修订）
+ */
 const era = require('#/era-electron');
 
 const {
@@ -308,7 +314,7 @@ handlers[74] = async (tachyon, me, callname) => {
     [
       '【警告，若选择此选项，与 ',
       tachyon.get_colored_name(),
-      ' 的关系将无法挽回！特雷森学院不会原谅抛弃担当的行为！】',
+      ' 的关系将无法挽回！特雷森学园不会原谅抛弃担当的行为！】',
     ],
     {
       color: buff_colors[3],
@@ -329,6 +335,7 @@ handlers[74] = async (tachyon, me, callname) => {
 };
 
 handlers[89] = async (tachyon, me, callname) => {
+  await print_event_name('Now or Forever', tachyon);
   await tachyon.say_and_wait([callname, '～～']);
   await tachyon.say_and_wait([callname, '～～～？']);
   await tachyon.say_and_wait([callname, '！！']);
@@ -696,16 +703,13 @@ handlers[89] = async (tachyon, me, callname) => {
       me.get_colored_name(),
       ' 摇了摇头，将内心的奇怪想法飘散，毫无犹豫的踏出了门外',
     ]);
-    era.set('cflag:32:爱慕暂拒', 1);
+    era.set('cflag:32:爱慕暂拒', 89);
   }
 };
 
+handlers[99] = require('#/event/love/love-events-32/half-life');
+
 /**
- * 速子的爱慕事件，id=32
- *
- * @author 幽白書
- * @author 黑奴一号 黑奴队长（修订）
- *
  * @param _
  * @param __
  * @param {EventObject} event_object

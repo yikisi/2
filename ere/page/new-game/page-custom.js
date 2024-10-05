@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_change_hair = require('#/system/chara/sys-change-hair');
+const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
@@ -11,13 +12,12 @@ const { buff_colors, sex_colors } = require('#/data/color-const');
 const { hair_colors, skin_colors } = require('#/data/const.json');
 const {
   chara_desc,
+  chara_full_desc,
   human_sex_title,
   penis_colors,
   penis_desc,
-  pregnant_stage_enum,
   skin_desc,
 } = require('#/data/ero/status-const');
-const { yes } = require('#/data/event/recruit-flags');
 const {
   get_breast_cup,
   get_filtered_talents,
@@ -28,15 +28,6 @@ const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');
 
 const body_hair_type = ['天生光滑', '普通类型', '生长快而硬'];
-const chara_full_desc = [
-  '训练、调教的效果稍微上升',
-  '参赛人数较多时能力会稍微下降',
-  '比赛中有低概率爆发 (能力大幅上升)，训练效果稍微上升',
-  '比赛中有概率爆发 (能力大幅上升)',
-  '比赛中有较高概率爆发 (能力大幅上升)',
-  '比赛中有高概率爆发 (能力大幅上升)；但是干劲影响更大',
-  '有强敌的比赛能力会大幅上升',
-];
 const characteristic_type = [
   '发色',
   '呆毛',
@@ -146,10 +137,18 @@ function set_height(height) {
 }
 
 function random_chara() {
-  if (era.get('flag:彩蛋机制') === 179) {
-    era.set('callname:0:-2', '豚鼠子');
-  } else {
-    era.set('callname:0:-2', '你');
+  switch (era.get('flag:彩蛋机制')) {
+    case 3:
+      era.set('callname:0:-2', '天马');
+      break;
+    case 179:
+      era.set('callname:0:-2', '豚鼠子');
+      break;
+    case 621:
+      era.set('callname:0:-2', '渡鸦');
+      break;
+    default:
+      era.set('callname:0:-2', '你');
   }
   CharaTalk.me = new CharaTalk(0);
   era.set('cstr:0:发色', get_random_entry(hair_color_names));
@@ -181,33 +180,33 @@ function random_chara() {
   }
   era.set('cflag:0:气性', get_random_value(-3, 3));
   era.set('cstr:0:毛色', get_random_entry(uma_hairs));
-  Object.values(attr_names).forEach((v) => era.set(`base:0:${v}`, 25));
-  era.add(`base:0:${get_random_value(10, 14)}`, 100);
+  attr_names.forEach((v) => era.set(`base:0:${v}`, 25));
+  era.add(`base:0:${get_random_entry(attr_names)}`, 100);
 }
 
 function random_talent() {
   era.get('talentkeys').forEach((e) => {
-    if ((e >= 1000 && e <= 1020) || e >= 1050) {
+    if (e >= 40 && e < 70) {
       era.set(`talent:0:${e}`, 0);
     }
   });
   gacha(
-    new Array(18).fill(0).map((_, i) => i + 1070),
+    new Array(18).fill(0).map((_, i) => i),
     5,
   ).forEach((e) => era.set(`talent:0:${e}`, 2 * get_random_value(0, 1) - 1));
   era.set(
     `talent:0:${get_random_entry(
-      get_filtered_talents(era.get('cflag:0:性别'), 1000),
-    )}`,
-    get_random_value(0, 1) || -4,
-  );
-  era.set(
-    `talent:0:${get_random_entry(
-      get_filtered_talents(era.get('cflag:0:性别'), 1010),
+      get_filtered_talents(era.get('cflag:0:性别'), 50),
     )}`,
     1,
   );
-  const temp = get_random_value(1050, 1057);
+  era.set(
+    `talent:0:${get_random_entry(
+      get_filtered_talents(era.get('cflag:0:性别'), 60),
+    )}`,
+    get_random_value(0, 1) || -4,
+  );
+  const temp = get_random_value(40, 47);
   era.set(
     `talent:0:${temp}`,
     1 - 2 * (temp === 1053 ? get_random_value(0, 1) : 0),
@@ -218,37 +217,32 @@ async function page_custom() {
   let buffer,
     flag_custom = true,
     temp;
-  era.set('cflag:0:阴道尺寸', era.get('cflag:0:性别') - 1 ? 1 : 0);
-  era.set('abl:0:速度训练等级', 1);
-  era.set('abl:0:耐力训练等级', 1);
-  era.set('abl:0:力量训练等级', 1);
-  era.set('abl:0:根性训练等级', 1);
-  era.set('abl:0:智力训练等级', 1);
-
-  era.set('base:0:性欲', 0);
-  era.set('base:0:压力', 0);
-  era.set('base:0:体重偏差', 0);
-  era.set('base:0:药物残留', 0);
-
-  era.set('cflag:0:种族', 0);
-  era.set('cflag:0:招募状态', yes);
-  era.set('cflag:0:父方角色', -1);
-  era.set('cflag:0:母方角色', -1);
-  era.set('cflag:0:妊娠阶段', 1 << pregnant_stage_enum.no);
-
-  era.set('talent:0:童贞', 1);
-  era.set('talent:0:处女', 1);
 
   if (era.get('callname:0:-1').indexOf('豚鼠子') !== -1) {
     era.set('flag:角色性别', 0);
     era.set('flag:彩蛋机制', 179);
+    era.set('flag:游戏结束', 0);
     era.set('flag:声望不足替换', 1);
-    era.set('flag:不忠惩罚', 0);
+    era.set('flag:马娘身高', 0);
     new CharaTitles(0).push({ c: buff_colors[2], n: '萝莉控', s: true });
+  } else if (era.get('callname:0:-1').indexOf('渡鸦') !== -1) {
+    era.set('flag:角色性别', 99);
+    era.set('flag:游戏结束', 0);
+    era.set('flag:彩蛋机制', 621);
+    era.set('flag:极端行为限制', 3);
+    era.set('flag:马娘身高', 2);
+    new CharaTitles(0).push({ c: buff_colors[2], n: '无法战胜', s: true });
+  } else if (
+    era.get('callname:0:-1').indexOf('天马闪光蹄') !== -1 &&
+    sys_personal_achievement.get(3)
+  ) {
+    era.set('flag:角色性别', 0);
+    era.set('flag:彩蛋机制', 3);
+    new CharaTitles(0).push({ c: buff_colors[2], n: '运动系爱好者', s: true });
   }
   CharaTalk.me = new CharaTalk(0);
   while (flag_custom) {
-    Object.values(attr_names).forEach((v) => era.set(`base:0:${v}`, 25));
+    attr_names.forEach((v) => era.set(`base:0:${v}`, 25));
     await era.clear();
     era.printMultiColumns([
       { type: 'divider' },
@@ -283,7 +277,7 @@ async function page_custom() {
       }
       era.set('cflag:0:气性', 0);
       era.set('cstr:0:毛色', uma_hairs[0]);
-      Object.values(attr_names).forEach((v) => era.set(`base:0:${v}`, 20));
+      attr_names.forEach((v) => era.add(`base:0:${v}`, 20));
       if (era.get('flag:彩蛋机制') === 179) {
         era.set('callname:0:-2', '豚鼠子');
       } else {
@@ -555,7 +549,7 @@ async function page_custom() {
         era.printMultiColumns([
           { type: 'divider' },
           {
-            content: '您希望您的“作案工具”有何种规模？\nPS：不是越大越好！',
+            content: '您希望您的「作案工具」有何种规模？\nPS：不是越大越好！',
             type: 'text',
           },
           { accelerator: 1, content: '所有人都能容纳的那种！', type: 'button' },
@@ -635,35 +629,47 @@ async function page_custom() {
 
       era.drawLine();
       era.print('那么就到称呼环节啦！');
-      if (era.get('flag:彩蛋机制') === 179) {
-        era.drawLine();
-        await era.printAndWait('哦哦，您取了一个很萝莉控的名字呢！');
-        era.set('callname:0:-2', '豚鼠子');
-      } else {
-        era.printInColRows([
-          { content: '希望旁白君如何称呼您呢？', type: 'text' },
-          { accelerator: 1, content: '你', type: 'button' },
-          { accelerator: 2, content: '主人公', type: 'button' },
-          { accelerator: 3, content: '自己决定！', type: 'button' },
-        ]);
-        temp = await era.input();
-        switch (temp) {
-          case 1:
-            era.set('callname:0:-2', '你');
-            break;
-          case 2:
-            era.set('callname:0:-2', '主人公');
-            break;
-          case 3:
-            era.print('希望旁白君如何称呼您呢？（6个字符以内）');
-            temp = '';
-            do {
-              if (temp) {
-                await era.printAndWait('太长了，请重新输入！');
-              }
-              temp = era.set('callname:0:-2', await era.input());
-            } while (temp.length > 6);
-        }
+      switch (era.get('flag:彩蛋机制')) {
+        case 3:
+          era.drawLine();
+          await era.printAndWait('哦哦，您取了一个很喜欢马蹄的名字呢！');
+          era.set('callname:0:-2', '天马');
+          break;
+        case 179:
+          era.drawLine();
+          await era.printAndWait('哦哦，您取了一个很萝莉控的名字呢！');
+          era.set('callname:0:-2', '豚鼠子');
+          break;
+        case 621:
+          era.drawLine();
+          await era.printAndWait('哦哦，您取了一个很想被欺负的名字呢！');
+          era.set('callname:0:-2', '渡鸦');
+          break;
+        default:
+          era.printInColRows([
+            { content: '希望旁白君如何称呼您呢？', type: 'text' },
+            { accelerator: 1, content: '你', type: 'button' },
+            { accelerator: 2, content: '主人公', type: 'button' },
+            { accelerator: 3, content: '自己决定！', type: 'button' },
+          ]);
+          temp = await era.input();
+          switch (temp) {
+            case 1:
+              era.set('callname:0:-2', '你');
+              break;
+            case 2:
+              era.set('callname:0:-2', '主人公');
+              break;
+            case 3:
+              era.print('希望旁白君如何称呼您呢？（6个字符以内）');
+              temp = '';
+              do {
+                if (temp) {
+                  await era.printAndWait('太长了，请重新输入！');
+                }
+                temp = era.set('callname:0:-2', await era.input());
+              } while (temp.length > 6);
+          }
       }
       CharaTalk.me = new CharaTalk(0);
       await era.printAndWait([
@@ -698,7 +704,7 @@ async function page_custom() {
 
       era.printMultiColumns(buffer);
       temp = await era.input();
-      era.add(`base:0:${temp + 9}`, 100);
+      era.add(`base:0:${temp + 4}`, 100);
 
       random_talent();
     }

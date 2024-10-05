@@ -20,7 +20,7 @@ const EventObject = require('#/data/event/event-object');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
- * @param {Record<string,function(CharaTalk,CharaTalk,string,{base_change:Record<string,number>,contestants:PseudoUma[],race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number,motivation_change:number},TachyonEduMarks,number,number):Promise<boolean|void>>} handlers
+ * @param {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams):Promise<boolean|void>>} handlers
  * @param {function():boolean} check_tachyon_plan_b
  */
 module.exports = (handlers, check_tachyon_plan_b) => {
@@ -191,7 +191,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       coffee.get_colored_name(),
       ' 维持现状继续准备挑战经典三冠路线是最好的选择，但……',
     ]);
-    if (sys_reg_race(32).curr === race_enum.hoch_sho) {
+    if (sys_reg_race(32).curr.race === race_enum.hoch_sho) {
       const t_call_c = sys_get_colored_callname(32, 25),
         tachyon = get_chara_talk(32);
       await tachyon.say_and_wait([

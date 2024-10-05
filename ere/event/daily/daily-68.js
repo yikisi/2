@@ -1,19 +1,23 @@
-﻿const era = require('#/era-electron');
+﻿/**
+ * @file 北部玄驹 - 日常
+ *
+ * @author 小黑（原作）
+ * @author 黑奴一号 无名黑奴（改编）
+ */
+const era = require('#/era-electron');
 
-const sys_call_check = require('#/system/script/sys-call-check');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
-
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const check_stages = require('#/data/event/check-stages');
 const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 
@@ -21,6 +25,9 @@ const event_hooks = require('#/data/event/event-hooks');
 const handlers = {};
 
 handlers[event_hooks.select] = () => {
+  if (!sys_check_awake(68)) {
+    throw new Error();
+  }
   const love = era.get('love:68'),
     kita = get_chara_talk(68),
     me = get_chara_talk(0),
@@ -700,15 +707,14 @@ handlers[event_hooks.out_river] = async (hook) => {
 };
 
 handlers[event_hooks.good_night] = async (hook) => {
-  const check = sys_call_check(68, check_stages.want_make_love),
+  if (!sys_check_awake(0) || !sys_check_awake(68)) {
+    throw new Error();
+  }
+  const check = get_custom_check(68).is_want_make_love(),
     me = get_chara_talk(0),
     kita = get_chara_talk(68);
   era.print(`繁忙的一天结束，${me.name} 将 ${kita.name} 送到学生宿舍门口……`);
-  if (
-    sys_check_awake(0) &&
-    sys_check_awake(68) &&
-    sys_call_check(68, check_stages.want_make_love)
-  ) {
+  if (check > 0) {
     era.print(
       `${me.name} 刚想和往常一样告别，但小北却一反常态地不让 ${me.name} 离开`,
     );
@@ -727,13 +733,25 @@ handlers[event_hooks.good_night] = async (hook) => {
     kita.say(
       `训练员${me.get_adult_sex_title()}，今天真是辛苦您了，明天我也会继续努力的。`,
     );
-    era.print(
-      `${kita.name} 深深地向 ${me.name} 的鞠了一躬，${me.name} 摸了摸小北的脑袋，在看到${kita.sex}走进宿舍后才转身离开。`,
-    );
+    era.print([
+      kita.get_colored_name(),
+      ' 深深地向 ',
+      me.get_colored_name(),
+      ' 鞠了一躬，',
+      me.get_colored_name(),
+      ' 摸了摸 ',
+      kita.get_colored_name(),
+      ' 的脑袋，在看到',
+      kita.sex,
+      '走进宿舍后才转身离开。',
+    ]);
   }
 };
 
 handlers[event_hooks.talk] = async () => {
+  if (!sys_check_awake(68)) {
+    throw new Error();
+  }
   const me = get_chara_talk(0);
   let talk_arr;
   switch (era.get('cflag:68:干劲')) {
@@ -863,7 +881,7 @@ handlers[event_hooks.slave_end] = async function () {
     `但同时，那也是 ${me.name} 最大的债主那无比愉快的，令 ${me.name} 倍感压力的笑容。`,
   );
   await kita.say_and_wait(
-    `唔嘿嘿～再过几个月大概就可以恢复正常生活，回到特雷森学院了。`,
+    `唔嘿嘿～再过几个月大概就可以恢复正常生活，回到特雷森学园了。`,
   );
   await kita.say_and_wait(
     `只是借债了这么点钱真是太好了呢，还在小北我稍微能处理的范畴内。`,
@@ -872,7 +890,7 @@ handlers[event_hooks.slave_end] = async function () {
     `但是以后要借债的话，只要找小北我借债就好了哦，毕竟其他的借债都很不正经啊。`,
   );
   await era.printAndWait(
-    `微笑着慢慢握住 ${me.name} 的手，“不求回报的”${kita.name}露出的表情，绝不是 ${me.name} 不付出任何代价就能迎来的Happy ending。`,
+    `微笑着慢慢握住 ${me.name} 的手，『不求回报的』${kita.name}露出的表情，绝不是 ${me.name} 不付出任何代价就能迎来的Happy ending。`,
   );
 };
 
@@ -880,13 +898,6 @@ handlers[
   event_hooks.celebration
 ] = require('#/event/daily/daily-events-68/celebration');
 
-/**
- * 北黑的日常事件，id=68
- *
- * @author 小黑（原作）
- * @author 黑奴一号（改编）
- * @author 黑奴队长（改编）
- */
 module.exports = {
   /**
    * @param {HookArg} hook

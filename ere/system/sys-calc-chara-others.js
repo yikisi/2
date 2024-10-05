@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const sys_call_check = require('#/system/script/sys-call-check');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_hide_relation_and_love,
@@ -9,13 +8,16 @@ const {
 } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const CustomizedCheck = require('#/event/check/check-common');
+const { get_custom_check } = require('#/event/check/check-factory');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { love_colors, relation_colors } = require('#/data/const.json');
-const check_stages = require('#/data/event/check-stages');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_love_border,
@@ -23,49 +25,49 @@ const {
   get_relation_mark,
 } = require('#/data/info-generator');
 const LimitLoveStatus = require('#/data/love-limit-status');
-const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 /**
  * @param {number} chara_id
  * @param {number} new_love
  */
 async function punish_unfaithful(chara_id, new_love) {
-  if (era.get('flag:不忠惩罚')) {
-    const me = get_chara_talk(0),
-      temp_chara_list = sys_filter_chara(
-        'cflag',
-        '招募状态',
-        recruit_flags.yes,
-      ).filter(
-        (e) =>
-          e > 0 &&
-          e !== chara_id &&
-          era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
-          era.get(`love:${e}`) >= 75 &&
-          !era.get(`talent:${e}:绿帽癖`),
-      );
-    for (const c_id of temp_chara_list) {
-      era.print([
-        me.get_colored_name(),
-        ' 的不忠让 ',
-        get_chara_talk(c_id).get_colored_name(),
-        ' 无比愤怒……',
-      ]);
-      sys_change_pressure(c_id, get_random_value(1000, 2000));
-      like_chara(
-        c_id,
-        0,
-        -get_random_value(
-          100,
-          200 +
-            8 * (new_love - 75) +
-            8 * (era.get(`love:${c_id}`) - 75) +
-            100 * era.get(`talent:${c_id}:病娇`),
-        ),
-      );
-    }
-    temp_chara_list.length && (await era.waitAnyKey());
+  const punish_option = era.get('flag:不忠惩罚'),
+    me = get_chara_talk(0),
+    temp_chara_list = sys_filter_chara(
+      'cflag',
+      '招募状态',
+      recruit_flags.yes,
+    ).filter(
+      (e) =>
+        e > 0 &&
+        e !== chara_id &&
+        era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
+        era.get(`love:${e}`) >= 75 &&
+        !era.get(`talent:${e}:绿帽癖`) &&
+        get_custom_mec(e).is_anger_for_unfaithful() &&
+        (punish_option || era.get(`talent:${chara_id}:病娇`)),
+    );
+  for (const c_id of temp_chara_list) {
+    era.print([
+      me.get_colored_name(),
+      ' 的不忠让 ',
+      get_chara_talk(c_id).get_colored_name(),
+      ' 无比愤怒……',
+    ]);
+    sys_change_pressure(c_id, get_random_value(1000, 2000));
+    like_chara(
+      c_id,
+      0,
+      -get_random_value(
+        100,
+        200 +
+          8 * (new_love - 75) +
+          8 * (era.get(`love:${c_id}`) - 75) +
+          100 * era.get(`talent:${c_id}:病娇`),
+      ),
+    );
   }
+  temp_chara_list.length && (await era.waitAnyKey());
 }
 
 /**
@@ -195,9 +197,9 @@ function love_uma(chara_id, val, to_be_shown) {
         100,
     );
     const force_limit = get_custom_mec(chara_id).get_love_limit(),
-      border = force_limit || get_love_border(chara_id),
+      border = force_limit || Math.max(get_love_border(chara_id), 50),
       love_limit = !era.get('flag:回合爱慕惩罚');
-    if ((love_limit || force_limit) && border > 25 && love + _val >= border) {
+    if ((love_limit || force_limit) && love + _val >= border) {
       _val = border - 1 - love;
     }
     if (love + _val > 100) {
@@ -218,14 +220,14 @@ function love_uma(chara_id, val, to_be_shown) {
         border >= 50 &&
         new_val === border - 1
       ) {
-        sys_check_hide_relation_and_love(chara_id) ||
+        (sys_check_hide_relation_and_love(chara_id) & 0b1) > 0 ||
           hide ||
           era.print([
             '和 ',
             get_chara_talk(chara_id).get_colored_name(),
             ' 的关系似乎可以更进一步了……',
           ]);
-        sys_call_check(chara_id, check_stages.love_event);
+        get_custom_check(chara_id).check_love_events();
       }
       return true;
     }
@@ -242,6 +244,9 @@ function get_callname(_from, _to) {
   const callname = era.get(`callname:${_from}:${_to}`);
   if (callname instanceof Array) {
     return get_random_entry(callname);
+  }
+  if (callname === '-') {
+    return era.get(`static:${_to}:callname`);
   }
   return callname;
 }
@@ -279,6 +284,9 @@ function print_change(chara_id, old_val, new_val, to_be_shown) {
     return true;
   }
 }
+
+CustomizedCheck.like_chara = like_chara;
+CustomizedCheck.love_uma = love_uma;
 
 module.exports = {
   sys_change_status_by_base(chara_id) {

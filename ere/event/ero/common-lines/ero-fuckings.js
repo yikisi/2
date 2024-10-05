@@ -1,3 +1,8 @@
+/**
+ * @file 调教地文 - 性交系
+ *
+ * @author O口口口口口
+ */
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
@@ -11,10 +16,7 @@ const {
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @author O口口口口口
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
- */
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
   /**
    * @param {CharaTalk} attacker
@@ -73,13 +75,6 @@ module.exports = (handlers) => {
   handlers[ero_hooks.missionary] = handlers[ero_hooks.missionary_anal_sex] =
     async (attacker, defender, hook) => {
       if (hook.arg) {
-        await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 以正常位插入了 ',
-          defender.get_colored_name(),
-          ` 的${hook.hook === ero_hooks.missionary ? '小穴' : '屁穴'}……】`,
-        ]);
         await defender.print_and_wait(
           '或许这就是……最能感受彼此体温的姿势了吧。',
         );
@@ -107,13 +102,6 @@ module.exports = (handlers) => {
         await defender.print_and_wait('好烫……好烫……');
         await defender.print_and_wait('……好烫❤️');
       } else {
-        await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 以正常位抽插着 ',
-          defender.get_colored_name(),
-          ` 的${hook.hook === ero_hooks.missionary ? '小穴' : '屁穴'}……】`,
-        ]);
         await continue_fucking_common(attacker, defender);
       }
     };
@@ -121,13 +109,6 @@ module.exports = (handlers) => {
   handlers[ero_hooks.doggy_style] = handlers[ero_hooks.doggy_style_anal_sex] =
     async (attacker, defender, hook) => {
       if (hook.arg) {
-        await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 以后背位插入了 ',
-          defender.get_colored_name(),
-          ` 的${hook.hook === ero_hooks.doggy_style ? '小穴' : '屁穴'}……】`,
-        ]);
         await attacker.print_and_wait('像小狗一样……');
         await attacker.print_and_wait(
           '那双腿……那双前脚掌紧绷着踮起，膝盖弯曲着将湿漉漉的腰跨高高顶起的双腿……',
@@ -147,13 +128,6 @@ module.exports = (handlers) => {
           await attacker.print_and_wait('简直像是在说什么冷笑话啊嘶。');
         }
       } else {
-        await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 以后背位抽插着 ',
-          defender.get_colored_name(),
-          ` 的${hook.hook === ero_hooks.doggy_style ? '小穴' : '屁穴'}……】`,
-        ]);
         await continue_fucking_common(attacker, defender);
       }
     };
@@ -164,15 +138,6 @@ module.exports = (handlers) => {
     hook,
   ) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 与 ',
-        defender.get_colored_name(),
-        ' 相对而坐，将肉棒插入了 ',
-        defender.get_colored_name(),
-        ` 的${hook.hook === ero_hooks.sitting ? '小穴' : '屁穴'}……】`,
-      ]);
       await defender.print_and_wait('比预想中还要令人害羞……');
       await defender.print_and_wait(
         `在${
@@ -191,15 +156,6 @@ module.exports = (handlers) => {
       );
       await defender.print_and_wait('难道说还没满足吗——');
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 和 ',
-        defender.get_colored_name(),
-        ` 相对而坐，肉棒抽插着${
-          hook.hook === ero_hooks.sitting ? '小穴' : '屁穴'
-        }……】`,
-      ]);
       await continue_fucking_common(attacker, defender);
     }
   };
@@ -207,15 +163,6 @@ module.exports = (handlers) => {
   handlers[ero_hooks.hug_sitting] = handlers[ero_hooks.hug_sitting_anal_sex] =
     async (attacker, defender, hook) => {
       if (hook.arg) {
-        await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 将背对着的 ',
-          defender.get_colored_name(),
-          ` 抱在怀里坐着，将肉棒插入了${
-            hook.hook === ero_hooks.hug_sitting ? '小穴' : '屁穴'
-          }……】`,
-        ]);
         await defender.print_and_wait('为了不被看着而选择的姿势。');
         await defender.print_and_wait('但是这不是还在被看着嘛——');
         await defender.print_and_wait([
@@ -234,15 +181,6 @@ module.exports = (handlers) => {
           await defender.print_and_wait('不妙❤️为什么偏偏被肉棒欺负的是那里……');
         }
       } else {
-        await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 怀抱着 ',
-          defender.get_colored_name(),
-          ` 坐着，肉棒抽插着${
-            hook.hook === ero_hooks.hug_sitting ? '小穴' : '屁穴'
-          }……】`,
-        ]);
         await continue_fucking_common(attacker, defender);
       }
     };
@@ -253,15 +191,6 @@ module.exports = (handlers) => {
     hook,
   ) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 和 ',
-        defender.get_colored_name(),
-        ` 面对面站着，将肉棒插入了${
-          hook.hook === ero_hooks.standing ? '小穴' : '屁穴'
-        }……】`,
-      ]);
       await attacker.print_and_wait(
         '好像能达到……比其他的姿势更接近子宫的位置。',
       );
@@ -286,13 +215,6 @@ module.exports = (handlers) => {
         '过近的距离，让二人每一次牵动小腹的深呼吸，都成了这场性爱的佐料。',
       );
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 面对面站着用肉棒抽插着 ',
-        defender.get_colored_name(),
-        ` 的${hook.hook === ero_hooks.standing ? '小穴' : '屁穴'}……】`,
-      ]);
       await continue_fucking_common(attacker, defender);
     }
   };
@@ -300,15 +222,6 @@ module.exports = (handlers) => {
   handlers[ero_hooks.hug_standing] = handlers[ero_hooks.hug_standing_anal_sex] =
     async (attacker, defender, hook) => {
       if (hook.arg) {
-        await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 站着将 ',
-          defender.get_colored_name(),
-          ` 揽在怀中，将肉棒插入${
-            hook.hook === ero_hooks.hug_standing ? '小穴' : '屁穴'
-          }……】`,
-        ]);
         await attacker.print_and_wait('腰很快就塌下去了。');
         await attacker.print_and_wait(
           `明明是${
@@ -332,15 +245,6 @@ module.exports = (handlers) => {
           );
         }
       } else {
-        await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 从身后用肉棒抽插着 ',
-          defender.get_colored_name(),
-          ` 的${hook.hook === ero_hooks.hug_standing ? '小穴' : '屁穴'}，`,
-          defender.get_colored_name(),
-          ' 以双手软软地撑着墙壁……】',
-        ]);
         await continue_fucking_common(attacker, defender);
       }
     };
@@ -349,22 +253,11 @@ module.exports = (handlers) => {
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
-   * @param {{skip_name:boolean}} extra_flag
    */
   handlers[ero_hooks.suspended_congress] = handlers[
     ero_hooks.suspended_congress_anal_sex
-  ] = async (attacker, defender, hook, extra_flag) => {
+  ] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      !extra_flag.skip_name &&
-        (await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 将 ',
-          defender.get_colored_name(),
-          ` 抬起架住，将肉棒插入了${
-            hook.hook === ero_hooks.suspended_congress ? '小穴' : '屁穴'
-          }……】`,
-        ]));
       await defender.print_and_wait('逃不掉……');
       await defender.print_and_wait('从进入这个姿势开始，就逃不掉了。');
       await defender.print_and_wait([
@@ -387,18 +280,17 @@ module.exports = (handlers) => {
       await defender.print_and_wait([
         '会沿着 ',
         sys_get_colored_callname(defender.id, attacker.id),
-        ' 的腰向下流吗…绝对…会的吧❤️',
+        ' 的腰向下流吗……绝对……会的吧❤️',
       ]);
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 的肉棒抽插着 ',
-        defender.get_colored_name(),
-        ` 的浮空${
-          hook.hook === ero_hooks.suspended_congress ? '小穴' : '屁穴'
-        }……】`,
-      ]);
+      await continue_fucking_common(attacker, defender);
+    }
+  };
+
+  handlers[ero_hooks.fucked_suspended_congress] = handlers[
+    ero_hooks.fucked_suspended_congress_anal_sex
+  ] = async (attacker, defender, hook) => {
+    if (!hook.arg) {
       await continue_fucking_common(attacker, defender);
     }
   };
@@ -407,18 +299,7 @@ module.exports = (handlers) => {
     ero_hooks.hug_suspended_congress_anal_sex
   ] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 将 ',
-        defender.get_colored_name(),
-        ` 背对着抬起架住，肉棒插入了${
-          hook.hook === ero_hooks.hug_suspended_congress ? '小穴' : '屁穴'
-        }……】`,
-      ]);
-      await handlers[ero_hooks.suspended_congress](attacker, defender, hook, {
-        skip_name: true,
-      });
+      await handlers[ero_hooks.suspended_congress](attacker, defender, hook);
       await defender.print_and_wait([
         '哈……偏偏现在还看不清 ',
         sys_get_colored_callname(defender.id, attacker.id),
@@ -433,15 +314,6 @@ module.exports = (handlers) => {
       ]);
       await defender.say_and_wait('哈……❤️');
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 的肉棒抽插着背对的 ',
-        defender.get_colored_name(),
-        ` 浮空的${
-          hook.hook === ero_hooks.hug_suspended_congress ? '小穴' : '屁穴'
-        }……】`,
-      ]);
       await continue_fucking_common(attacker, defender);
     }
   };
@@ -449,15 +321,6 @@ module.exports = (handlers) => {
   handlers[ero_hooks.ask_cowgirl] = handlers[ero_hooks.ask_cowgirl_anal_sex] =
     async (attacker, defender, hook) => {
       if (hook.arg) {
-        await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 请求 ',
-          defender.get_colored_name(),
-          ` 坐在身上，用${
-            hook.hook === ero_hooks.ask_cowgirl ? '小穴' : '屁穴'
-          }吞没肉棒……】`,
-        ]);
         if (
           await ask_action(
             attacker.id,
@@ -496,15 +359,6 @@ module.exports = (handlers) => {
           ' 的面前舞动起来……',
         ]);
       } else {
-        await era.printAndWait([
-          '【',
-          attacker.get_colored_name(),
-          ' 请求身上的 ',
-          defender.get_colored_name(),
-          ` 继续用${
-            hook.hook === ero_hooks.ask_cowgirl ? '小穴' : '屁穴'
-          }套弄肉棒……】`,
-        ]);
         await continue_fucking_common(attacker, defender);
       }
     };
@@ -513,23 +367,10 @@ module.exports = (handlers) => {
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
-   * @param {{skip_name:boolean}} extra_flag
    */
   handlers[ero_hooks.ask_stimulate_glans_by_virgin] = handlers[
     ero_hooks.ask_stimulate_glans_by_anal
-  ] = async (attacker, defender, hook, extra_flag) => {
-    !extra_flag.skip_name &&
-      (await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ` 用${
-          hook.hook === ero_hooks.ask_stimulate_glans_by_virgin
-            ? '小穴'
-            : '屁穴'
-        }套弄肉棒……】`,
-      ]));
+  ] = async (attacker, defender, hook) => {
     if (hook.arg) {
       if (
         await ask_action(
@@ -573,13 +414,6 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.stimulate_g_spot] = async (attacker, defender, hook) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 用肉棒戳弄着 ',
-      defender.get_colored_name(),
-      ' 的G点……】',
-    ]);
     if (hook.arg) {
       await attacker.print_and_wait('更深一些。');
       await defender.say_and_wait('牡蛎——');
@@ -604,13 +438,6 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.stimulate_womb] = async (attacker, defender, hook) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 用肉棒隔着屁穴戳弄着 ',
-      defender.get_colored_name(),
-      ' 的子宫……】',
-    ]);
     if (hook.arg) {
       await defender.print_and_wait('不用肉棒就能让小穴变舒服的魔法。');
       await defender.print_and_wait([
@@ -643,13 +470,6 @@ module.exports = (handlers) => {
     hook,
   ) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ` 插入自己的${hook.hook === ero_hooks.ask_fuck ? '小穴' : '屁穴'}……】`,
-      ]);
       if (
         await ask_action(
           attacker.id,
@@ -672,15 +492,6 @@ module.exports = (handlers) => {
       await attacker.say_and_wait('请，插进来……');
       await attacker.say_and_wait('把肉棒……插进来——');
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 请求 ',
-        defender.get_colored_name(),
-        ` 继续抽插自己的${
-          hook.hook === ero_hooks.ask_fuck ? '小穴' : '屁穴'
-        }……】`,
-      ]);
       await continue_fucking_common(defender, attacker);
     }
   };
@@ -691,20 +502,11 @@ module.exports = (handlers) => {
     hook,
   ) => {
     if (hook.arg) {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 骑在 ',
-        defender.get_colored_name(),
-        ` 身上，以${
-          hook.hook === ero_hooks.cowgirl ? '小穴' : '屁穴'
-        }吞没肉棒……】`,
-      ]);
       await attacker.print_and_wait('哈……');
       await attacker.print_and_wait([
         '这么近距离地看着……看着身下 ',
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 精致的俏脸……不就只能意识到自己是个多么糟糕的家伙了嘛❤️',
+        ' 的脸……不就只能意识到自己是个多么糟糕的家伙了嘛❤️',
       ]);
       await attacker.print_and_wait([
         '自暴自弃地摇晃起身体，被背德感折服的 ',
@@ -714,15 +516,6 @@ module.exports = (handlers) => {
         }含入的肉棒。`,
       ]);
     } else {
-      await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ' 骑在 ',
-        defender.get_colored_name(),
-        ` 身上，以自己的${
-          hook.hook === ero_hooks.cowgirl ? '小穴' : '屁穴'
-        }套弄着肉棒……】`,
-      ]);
       await continue_fucking_common(defender, attacker);
     }
   };
@@ -730,16 +523,6 @@ module.exports = (handlers) => {
   handlers[ero_hooks.stimulate_glans_by_virgin] = handlers[
     ero_hooks.stimulate_glans_by_anal
   ] = async (attacker, defender, hook, extra_flag) => {
-    !extra_flag.skip_name &&
-      (await era.printAndWait([
-        '【',
-        attacker.get_colored_name(),
-        ` 用${
-          hook.hook === ero_hooks.stimulate_glans_by_virgin ? '小穴' : '屁穴'
-        }套弄着 `,
-        defender.get_colored_name(),
-        ' 的肉棒……】',
-      ]));
     if (hook.arg) {
       await attacker.print_and_wait('说实话……仅仅只是现在这样感觉就要升天了……');
       await attacker.print_and_wait(
@@ -747,7 +530,7 @@ module.exports = (handlers) => {
           hook.hook === ero_hooks.stimulate_glans_by_virgin ? '小穴' : '屁穴'
         }现状也好，还是舒服得一塌糊涂的身体也好……`,
       );
-      if (hook.arg === 0xf) {
+      if (extra_flag.from_sleeping) {
         await attacker.print_and_wait([
           '而且，把 ',
           attacker.get_colored_name(),
@@ -781,15 +564,6 @@ module.exports = (handlers) => {
   handlers[ero_hooks.ask_stimulate_g_spot] = handlers[
     ero_hooks.ask_stimulate_womb
   ] = async (attacker, defender, hook) => {
-    await era.printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 请求 ',
-      defender.get_colored_name(),
-      ` 用肉棒刺激${
-        hook.hook === ero_hooks.ask_stimulate_g_spot ? 'G点' : '子宫'
-      }……】`,
-    ]);
     if (hook.arg) {
       if (
         await ask_action(

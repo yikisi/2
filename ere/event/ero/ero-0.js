@@ -1,3 +1,10 @@
+/**
+ * @file 玩家 - 调教
+ *
+ * @author 幽白書
+ * @author 雞雞
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
@@ -24,6 +31,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const handlers = {};
 
 /**
+ * @author 雞雞
+ *
  * @param _
  * @param {{shown:boolean,part:number}} extra_flag
  */
@@ -69,6 +78,8 @@ stop_ex_options[part_enum.mouth] = (chara_id, is_double_blow_job) => {
 /**
  * 只有醒着的主控才能寸止，所以这里必然是需要输出的
  *
+ * @author 无名黑奴
+ *
  * @param _
  * @param {{stop_success:boolean}} extra_flag 如果寸止的话是否成功
  */
@@ -79,10 +90,10 @@ handlers[ero_hooks.orgasm_denial] = async (_, extra_flag) => {
     is_double_blow_job =
       last_action === ero_hooks.ask_double_blow_job ||
       last_action === ero_hooks.double_blow_job;
-  era.print([me.get_colored_name(), ' 的肉棒已经达到极限……']);
 
-  era.printMultiColumns(
-    [
+  era.printMultiColumns([
+    { content: [me.get_colored_name(), ' 的肉棒已经达到极限……'], type: 'text' },
+    ...[
       '射了！',
       '再忍一下',
       !era.get('tcvar:0:避孕套') && stop_ex_options[touch.part]
@@ -90,15 +101,13 @@ handlers[ero_hooks.orgasm_denial] = async (_, extra_flag) => {
         : '',
     ]
       .filter((e) => e)
-      .map((e, i, l) => {
-        return {
-          accelerator: i,
-          config: { width: 24 / l.length, align: 'center' },
-          content: e,
-          type: 'button',
-        };
-      }),
-  );
+      .map((e, i, l) => ({
+        accelerator: i,
+        config: { align: 'center', width: 24 / l.length },
+        content: e,
+        type: 'button',
+      })),
+  ]);
   const ret = await era.input();
   if (ret) {
     // 寸止但没忍住
@@ -128,6 +137,9 @@ handlers[ero_hooks.orgasm_denial] = async (_, extra_flag) => {
 };
 
 /**
+ * @author 幽白書
+ * @author 雞雞
+ *
  * @param {HookArg} hook
  * @param {{father_id:number,mother_id:number}} extra_flag
  */
@@ -232,7 +244,9 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
         await era.printAndWait([
           '在猛烈的撞击，将 ',
           mother.get_colored_name(),
-          ` 操到几乎失去意识后，身后的${father.get_uma_sex_title()}才好不容易射了出来，用 `,
+          ' 操到几乎失去意识后，身后的',
+          father.get_uma_sex_title(),
+          '才好不容易射了出来，用 ',
           mother.get_colored_name(),
           ' 的脸擦了擦肉棒后直接转身离去',
         ]);
@@ -370,6 +384,9 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
 };
 
 /**
+ * @author 幽白書
+ * @author 雞雞
+ *
  * @param {HookArg} hook
  * @param {{child_id:number,father:CharaTalk}} extra_flag
  */
@@ -519,7 +536,7 @@ handlers[ero_hooks.have_baby] = async (hook, extra_flag) => {
 
           await era.printAndWait('\n忘却了孩子对周围行为的学习能力');
           await era.printAndWait(
-            `也忘却了孕袋所要服务的对象是无关身份的『全体${father.get_uma_sex_title()}』`,
+            `也忘却了孕袋所要服务的对象是无关身份的「全体${father.get_uma_sex_title()}」`,
           );
           await era.printAndWait(
             '没发现一旁的护士已经忍不住想要接受孕袋的口穴侍奉',
@@ -632,7 +649,7 @@ handlers[ero_hooks.have_baby] = async (hook, extra_flag) => {
           ]);
           await era.printAndWait('家庭生活……真是个好理由');
           await era.printAndWait(
-            '这样的话，就算在自己给孩子喂奶的同时将肉棒塞入自己口中，也可以以『补充营养』的名分一言带过吧',
+            '这样的话，就算在自己给孩子喂奶的同时将肉棒塞入自己口中，也可以以「补充营养」的名分一言带过吧',
           );
           await era.printAndWait([
             '作为丈夫的 ',
@@ -686,10 +703,6 @@ handlers[ero_hooks.shop_start] = () => {};
 handlers[ero_hooks.shop_end] = () => {};
 
 /**
- * @author 雞雞
- * @author 幽白書
- * @author 黑奴队长
- *
  * @param {HookArg} hook
  * @param {{shown:boolean}} extra_flag
  * @returns {Promise<*>}

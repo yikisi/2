@@ -1,0 +1,42 @@
+const cons_dict = {};
+
+const current = new Date().getTime();
+
+cons_dict[7] = require('#/event/init/init-7');
+cons_dict[17] = require('#/event/init/init-17');
+cons_dict[25] = require('#/event/init/init-25');
+cons_dict[32] = require('#/event/init/init-32');
+cons_dict[33] = require('#/event/init/init-33');
+cons_dict[37] = require('#/event/init/init-37');
+cons_dict[56] = require('#/event/init/init-56');
+cons_dict[60] = require('#/event/init/init-60');
+cons_dict[65] = require('#/event/init/init-65');
+cons_dict[86] = require('#/event/init/init-86');
+cons_dict[89] = require('#/event/init/init-89');
+cons_dict[204] = require('#/event/init/init-204');
+cons_dict[205] = require('#/event/init/init-205');
+cons_dict[206] = require('#/event/init/init-206');
+cons_dict[301] = require('#/event/init/init-301');
+cons_dict[302] = require('#/event/init/init-302');
+cons_dict[308] = require('#/event/init/init-308');
+cons_dict[343] = require('#/event/init/init-343');
+cons_dict[344] = require('#/event/init/init-344');
+
+console.log(
+  '[init-factory.js] constructor dictionary init done!',
+  (new Date().getTime() - current).toLocaleString(),
+  'ms',
+);
+
+module.exports = {
+  /**
+   * @param {number} chara_id
+   * @returns {function(function(number,number?),boolean?)}
+   */
+  get_custom_init(chara_id) {
+    if (cons_dict[chara_id]) {
+      return new cons_dict[chara_id]().init;
+    }
+    return () => {};
+  },
+};

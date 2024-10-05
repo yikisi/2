@@ -1,6 +1,10 @@
+/**
+ * @file 优秀素质 - 日常
+ *
+ * @author 红红火火恍惚
+ */
 const era = require('#/era-electron');
 
-const call_check_script = require('#/system/script/sys-call-check');
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
@@ -8,6 +12,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
@@ -18,13 +23,17 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const check_stages = require('#/data/event/check-stages');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean>>} */
 const handlers = {};
 
-handlers[event_hooks.select] = function () {
+handlers[event_hooks.select] = () => {
+  if (!sys_check_awake(60)) {
+    throw new Error();
+  }
   get_chara_talk(60).say(
     Math.random() < 0.5
       ? `怎么了怎么了？找 ${sys_get_callname(60, 60)} 有什么事吗？`
@@ -62,10 +71,13 @@ handlers[event_hooks.good_morning] = function () {
 };
 
 handlers[event_hooks.good_night] = async function (hook) {
+  if (!sys_check_awake(0) || !sys_check_awake(60)) {
+    throw new Error();
+  }
   const chara = get_chara_talk(60),
-    check = call_check_script(60, check_stages.want_make_love),
+    check = get_custom_check(60).is_want_make_love(),
     me = get_chara_talk(0);
-  if (sys_check_awake(0) && sys_check_awake(60) && check) {
+  if (check > 0) {
     era.print(`繁忙的一天结束，${me.name} 把 ${chara.name} 送到学生宿舍门口。`);
     era.print(
       `${me.name} 刚打算如往常一样挥手告别，却突然被优秀素质拽住了袖脚。`,
@@ -97,7 +109,7 @@ handlers[event_hooks.good_night] = async function (hook) {
         `优秀素质原本羞涩的脸上瞬间涌起了激动与喜悦，不等 ${me.name} 再次肯定，不由分说的便抱住了 ${me.name} 的手臂，并附在耳边轻声低语：`,
       );
       chara.say(
-        `今晚的训练，也请你多多指教咯？训·练·员·${me.get_adult_sex_title()} ❤️`,
+        `今晚的训练，也请你多多指教咯？训 · 练 · 员 · ${me.get_adult_sex_title()} ❤️`,
       );
       era.print(
         `就这样，${
@@ -136,6 +148,9 @@ handlers[event_hooks.good_night] = async function (hook) {
 };
 
 handlers[event_hooks.talk] = async function () {
+  if (!sys_check_awake(60)) {
+    throw new Error();
+  }
   const chara_self_name = sys_get_callname(60, 60),
     callname = sys_get_callname(60, 0);
   let talk_arr;
@@ -477,7 +492,7 @@ handlers[event_hooks.celebration] = async () => {
         '把自己脸用辫子埋住的优秀素质被商店街的街坊们团团围住，',
       );
       await era.printAndWait(
-        `看来${nice_nature.sex}似乎会十分愉快的度过这个粉丝祭……。`,
+        `看来${nice_nature.sex}似乎会十分愉快的度过这个粉丝祭……`,
       );
       break;
     case 47:
@@ -485,7 +500,7 @@ handlers[event_hooks.celebration] = async () => {
       await nice_nature.say_and_wait('喂喂？是我哦？不是诈骗电话是本人哦？');
       await era.printAndWait('电话那头传来了熟悉的声音，正是优秀素质。');
       await nice_nature.say_and_wait(
-        '那个啊，能麻烦你来公园一趟吗？就现在。……嗯，等会见！',
+        '那个啊，能麻烦你来公园一趟吗？就现在……嗯，等会见！',
       );
       era.drawLine({ content: '⏰到了公园⏰' });
       await nice_nature.say_and_wait(
@@ -524,7 +539,10 @@ handlers[event_hooks.celebration] = async () => {
 
 handlers[event_hooks.load_talk] = async () => {
   const nice_nature = get_chara_talk(60);
-  if (era.get('cflag:60:妊娠回合计时')) {
+  if (
+    era.get('cflag:60:妊娠阶段') >> pregnant_stage_enum.embryo &&
+    !new LifeEventMarks(60).report
+  ) {
     await nice_nature.say_and_wait(
       `啊哈，是吗，果然内恰小姐还是……但是等等，不行，${sys_get_callname(
         60,
@@ -563,11 +581,6 @@ handlers[event_hooks.load_talk] = async () => {
   }
 };
 
-/**
- * 优秀素质的日常事件，id=60
- *
- * @author 红红火火恍惚
- */
 module.exports = {
   /**
    * @param {HookArg} stage_id

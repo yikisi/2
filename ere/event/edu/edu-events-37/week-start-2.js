@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -10,7 +11,9 @@ const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
+const status_desc = require('#/data/desc/status-desc.json');
 const { location_enum } = require('#/data/locations');
+const { race_enum } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,string,string,{wait:boolean},function):Promise<*>>} handlers */
 module.exports = (handlers) => {
@@ -24,13 +27,13 @@ module.exports = (handlers) => {
     }
     await print_event_name('交心之谈 · 一', flash);
     await era.printAndWait(
-      '所谓合宿，是指特雷森学院为主导，以提高实力为目的，地点位于海边的夏季专属活动。',
+      '所谓合宿，是指特雷森学园为主导，以提高实力为目的，地点位于海边的夏季专属活动。',
     );
     await flash.say_and_wait(
       '这就是日本的大海啊，和德国那边，果然有不小的区别呢。',
     );
     await era.printAndWait(
-      '月初，从学院的专用公交上下车，望着面前满眼的蔚蓝，荣进闪耀赞叹道。',
+      '月初，从学园的专用公交上下车，望着面前满眼的蔚蓝，荣进闪耀赞叹道。',
     );
     era.printButton('「想去玩吗？」', 1);
     await era.input();
@@ -196,7 +199,7 @@ module.exports = (handlers) => {
     await fuji.say_and_wait(
       `因此，来大胆挑战吧。我在这里，等待着 ${your_name} 哦。`,
     );
-    await era.printAndWait('“哔。”');
+    await era.printAndWait('「哔。」');
     await era.printAndWait(
       '屏幕中的画面在富士奇石对摄像头伸手示意的这一刻定格。',
     );
@@ -230,7 +233,7 @@ module.exports = (handlers) => {
     await era.input();
     await flash.say_and_wait('嗯！');
     await era.printAndWait(`下一秒，${flash.sex}充满自信地回应道。`);
-    await era.printAndWait('“叮叮叮——”');
+    await era.printAndWait('「叮叮叮——」');
     await flash.say_and_wait('？');
     await era.printAndWait(
       `然后也就是在这时，代表联络的响铃突然自${flash.sex}的手机中响起。`,
@@ -288,8 +291,8 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `那么，为了让${flash.sex}在得到这枚盾徽的过程更加顺利，${your_name} 决定——`,
     );
-    era.printButton('「去神社祈福吧！」', 1);
-    era.printButton(`「需要更改未来的计划吗？」`, 2);
+    era.printButton('「去神社祈福吧！」（全属性+20）', 1);
+    era.printButton(`「需要更改未来的计划吗？」（获得【必行之事】状态）`, 2);
     const ret = await era.input();
     if (ret === 1) {
       await era.printAndWait(
@@ -374,6 +377,7 @@ module.exports = (handlers) => {
         {
           color: buff_colors[1],
           content: '[必行之事]',
+          title: status_desc['必行之事'],
         },
         ' 的觉悟！',
       ]);
@@ -384,6 +388,7 @@ module.exports = (handlers) => {
   };
 
   handlers[95 + 14] = async (flash) => {
+    era.set('cflag:37:节日事件标记', 0);
     const gold_ship = get_chara_talk(7);
     const festa = get_chara_talk(49);
     await print_event_name('粉丝感谢祭', flash);
@@ -408,7 +413,7 @@ module.exports = (handlers) => {
       '那么，哪一个组合会获得胜利呢，让我们拭目以待！',
     );
     await era.printAndWait(
-      '此时特雷森学院的操场内，主持人激情四射的话语成功调动起了场地的氛围，让拥挤的人群陷入喧闹。',
+      '此时特雷森学园的操场内，主持人激情四射的话语成功调动起了场地的氛围，让拥挤的人群陷入喧闹。',
     );
     await era.printAndWait('紧接着——');
     await gold_ship.say_and_wait('最终的赢家当然是本大爷啦！阿船命运的——');
@@ -450,7 +455,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       '也不知道有没有听见粉丝的这句回复，总之荣进闪耀牵起粉丝的手。',
     );
-    await say_by_passer_by_and_wait('荣进闪耀的粉丝', '公，公主抱！！！」');
+    await say_by_passer_by_and_wait('荣进闪耀的粉丝', '公，公主抱！！！');
     await era.printAndWait(
       `在一声惊呼之中，荣进闪耀抱起这位看起来有些怯懦的粉丝，向着前方已经与${flash.sex}拉开些许差距的二人奋起直追。`,
     );
@@ -486,8 +491,9 @@ module.exports = (handlers) => {
       `说什么也不可能像${flash.sex}那样荒谬地对待自己珍贵的粉丝啊。`,
     );
     await say_by_passer_by_and_wait('荣进闪耀的粉丝', '！！！！');
-    await era.printAndWait(
-      `荣进闪耀的粉丝','荣……荣进${flash.get_adult_sex_title()}，非常感谢您！`,
+    await say_by_passer_by_and_wait(
+      '荣进闪耀的粉丝',
+      `荣……荣进${flash.get_adult_sex_title()}，非常感谢您！`,
     );
     await flash.say_and_wait(
       '呵呵～是我应该这么说才对哦，感谢你愿意来与我一起参加这场比赛。',
@@ -603,6 +609,10 @@ module.exports = (handlers) => {
     era.println();
     sys_hurt_uma(37, 1);
     flags.wait = true;
+    const reg_race = sys_reg_race(37).curr;
+    if (reg_race.race === race_enum.takz_kin) {
+      reg_race.race = reg_race.week = -1;
+    }
   };
 
   handlers[95 + 29] = async (flash, your_name, callname, flags, cb) => {

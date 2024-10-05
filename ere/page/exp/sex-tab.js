@@ -1,6 +1,10 @@
 const era = require('#/era-electron');
 
-const { get_bust_size } = require('#/system/ero/sys-calc-ero-status');
+const {
+  get_bust_size,
+  get_hip_size,
+  get_waist_size,
+} = require('#/system/ero/sys-calc-ero-status');
 
 const CharaTalk = require('#/utils/chara-talk');
 const get_gradient_color = require('#/utils/gradient-color');
@@ -8,7 +12,12 @@ const get_gradient_color = require('#/utils/gradient-color');
 const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
 const { palam2juel } = require('#/data/ero/orgasm-const');
-const { growth_info, no_info, unknown_info } = require('#/data/exp-const');
+const {
+  abl_desc,
+  growth_info,
+  no_info,
+  unknown_info,
+} = require('#/data/exp-const');
 const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
 
 const page_name = '性爱情况';
@@ -56,9 +65,6 @@ module.exports = {
     } else if (!chara.id || flags.show_exp) {
       const in_train = era.get(`ex:${chara.id}:TotalEX`) !== undefined;
       if (in_train) {
-        const weight_delta = era.get(`base:${chara.id}:体重偏差`),
-          w_delta = Math.floor(weight_delta / 1000),
-          h_delta = Math.floor(weight_delta / 2000);
         sex_info_list.push(
           {
             config: { content: '身体尺寸', position: 'left' },
@@ -72,7 +78,7 @@ module.exports = {
               '体重：',
               era.get(`status:${chara.id}:发胖`)
                 ? '幸、幸福胖哦……'
-                : weight_delta >= 2000
+                : era.get(`base:${chara.id}:体重偏差`) >= 2000
                   ? '微增'
                   : '控制得当',
               chara.sex_code === 1
@@ -80,14 +86,9 @@ module.exports = {
                 : ` ｜ 三围：B${get_bust_size(
                     chara.id,
                     true,
-                  )} (${get_breast_cup(chara.id, true)} Cup) · W${
-                    era.get(`cflag:${chara.id}:腰围`) + w_delta
-                  } · H${
-                    era.get(`cflag:${chara.id}:臀围`) +
-                    5 * (era.get(`talent:${chara.id}:淫臀`) === 2) +
-                    2 * era.get(`status:${chara.id}:发情`) +
-                    h_delta
-                  }`,
+                  )} (${get_breast_cup(chara.id, true)} Cup) · W${get_waist_size(
+                    chara.id,
+                  )} · H${get_hip_size(chara.id)}`,
             ],
             type: 'text',
           },
@@ -118,7 +119,8 @@ module.exports = {
         );
       } else {
         const sex_count = era.get(`exp:${chara.id}:性爱次数`),
-          sleep_count = era.get(`exp:${chara.id}:睡奸次数`);
+          sleep_count = era.get(`exp:${chara.id}:睡奸次数`),
+          prison_count = era.get(`exp:${chara.id}:监禁次数`);
         sex_info_list.push(
           {
             config: { content: '基本情况', position: 'left' },
@@ -149,6 +151,18 @@ module.exports = {
                             ' 次睡奸',
                           ]
                         : [],
+                      prison_count
+                        ? [
+                            '；对 ',
+                            CharaTalk.me.get_colored_name(),
+                            ' 实施过 ',
+                            {
+                              content: prison_count.toLocaleString(),
+                              color: attr_change_colors.down,
+                            },
+                            ' 次监禁',
+                          ]
+                        : [],
                     )
                   : [
                       '和其他角色共上过 ',
@@ -166,6 +180,16 @@ module.exports = {
                               color: palam_colors.notifications[1],
                             },
                             ' 次被睡奸',
+                          ]
+                        : [],
+                      prison_count
+                        ? [
+                            '；被监禁过 ',
+                            {
+                              content: prison_count.toLocaleString(),
+                              color: attr_change_colors.down,
+                            },
+                            ' 次',
                           ]
                         : [],
                     )
@@ -229,6 +253,7 @@ module.exports = {
                 palam_colors.notifications[1],
                 level / 5,
               ),
+              title: (abl_desc[e] || abl_desc[e.substring(2)])[level],
             },
           ],
           type: 'text',

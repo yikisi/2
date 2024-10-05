@@ -1,21 +1,40 @@
+/**
+ * @file 育成地文
+ *
+ * @author 雞雞
+ * @author 幽白書
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
+
+const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
+const {
+  sys_change_lust,
+  sys_change_motivation,
+} = require('#/system/sys-calc-base-cflag');
+const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 
 const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
 const palace = require('#/event/snippets/palace');
+const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_name } = require('#/data/locations');
 const { attr_enum, fumble_result } = require('#/data/train-const');
-const palace_relation = require('#/event/snippets/palace-relation');
 
 /** @type {Record<string,function(number,HookArg,Record<string,*>,EventObject):Promise<*>>} */
 const handlers = {};
 
 /**
+ * @author 雞雞
+ *
  * @param {number} chara_id
  * @param _
  * @param {{attr:number}} extra_flag
@@ -76,48 +95,135 @@ handlers[event_hooks.train] = async (chara_id, _, extra_flag) => {
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {{train:number,stamina_ratio:number}} extra_flag
+ * @param {TrainSuccessParams} extra_flag
  */
 handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
-  const chara_talk = get_chara_talk(chara_id);
-  era.print([chara_talk.get_colored_name(), ' 的训练顺利结束了！']);
-  era.println();
-  if (
-    chara_id &&
-    !era.get(`status:${chara_id}:摸鱼`) &&
-    Math.random() < 0.2 * extra_flag.stamina_ratio
-  ) {
-    await era.waitAnyKey();
-    await print_event_name('热血的追加训练！', chara_talk);
-
-    await era.printAndWait([
-      chara_talk.get_colored_name(),
-      ' 似乎意犹未尽的样子，是想自主训练吗？',
-    ]);
-    ['许可！', '会超出计划的……'].forEach((e, i) => {
-      era.printButton(`「${e}」`, i + 1);
-    });
-    if ((await era.input()) === 1) {
-      await era.printAndWait([
-        get_chara_talk(0).get_colored_name(),
-        ' 默许了 ',
-        chara_talk.get_colored_name(),
-        ` 的自主训练，并称赞了${chara_talk.sex}的干劲`,
-      ]);
-      hook.arg = true;
-    } else {
-      await era.printAndWait([
-        get_chara_talk(0).get_colored_name(),
-        ' 出言禁止了 ',
-        chara_talk.get_colored_name(),
-        ' 的自主训练，并叮嘱要好好休息',
-      ]);
-      hook.arg = false;
+  const chara = get_chara_talk(chara_id);
+  era.print([chara.get_colored_name(), ' 的训练顺利结束了！']);
+  if (chara_id) {
+    if (
+      !era.get(`status:${chara_id}:摸鱼`) &&
+      Math.random() < 0.2 * extra_flag.stamina_ratio
+    ) {
+      if (sys_check_remote(chara_id)) {
+        hook.arg = true;
+      } else {
+        era.println();
+        await era.waitAnyKey();
+        await print_event_name('热血的追加训练！', chara);
+        await era.printAndWait([
+          chara.get_colored_name(),
+          ' 似乎意犹未尽的样子，是想自主训练吗？',
+        ]);
+        ['许可！', '会超出计划的……'].forEach((e, i) => {
+          era.printButton(`「${e}」`, i + 1);
+        });
+        if ((await era.input()) === 1) {
+          await era.printAndWait([
+            get_chara_talk(0).get_colored_name(),
+            ' 默许了 ',
+            chara.get_colored_name(),
+            ` 的自主训练，并称赞了${chara.sex}的干劲`,
+          ]);
+          hook.arg = true;
+        } else {
+          await era.printAndWait([
+            get_chara_talk(0).get_colored_name(),
+            ' 出言禁止了 ',
+            chara.get_colored_name(),
+            ' 的自主训练，并叮嘱要好好休息',
+          ]);
+          hook.arg = false;
+        }
+      }
+    } else if (!sys_check_remote(chara_id)) {
+      if (
+        era.get(`love:${chara_id}`) >= 50 &&
+        era.get(`base:${chara_id}:性欲`) >= lust_border.itch &&
+        Math.random() <
+          (0.2 * era.get(`base:${chara_id}:性欲`)) / lust_border.want_sex
+      ) {
+        era.println();
+        await era.waitAnyKey();
+        await print_event_name('训练后的性欲高涨', chara);
+        await era.printAndWait([
+          '一天的训练结束后，',
+          chara.get_colored_name(),
+          ' 的样子好像有点奇怪……',
+        ]);
+        await era.printAndWait(
+          '面色潮红，在双腿间流下的不明液体与汗液混在一起，散发出一股淫靡的味道。',
+        );
+        era.printButton('「这也是训练员的义务……」', 1);
+        era.printButton('「总之先去医务室吧！」', 2);
+        if ((await era.input()) === 1) {
+          await quick_into_sex(chara_id);
+        } else {
+          sys_change_lust(chara_id, get_random_value(500, 1500));
+        }
+      } else if (Math.random() < 0.1) {
+        const me = get_chara_talk(0);
+        era.println();
+        await era.waitAnyKey();
+        await print_event_name('淋浴间内', chara);
+        await era.printAndWait([
+          '嗯？',
+          chara.get_colored_name(),
+          ' 还没来吗？',
+        ]);
+        await era.printAndWait('正好，趁现在先沖个澡吧！');
+        era.println();
+        await era.printAndWait([
+          '打开门，映入眼帘的是身无寸缕的 ',
+          chara.get_colored_name(),
+          '……',
+        ]);
+        era.printButton('「哦，要一起洗澡吗？」', 1);
+        era.printButton('「不好意思打扰了！」', 2);
+        if ((await era.input()) === 1) {
+          if (
+            era.get(`love:${chara_id}`) >= 50 &&
+            get_sex_acceptable(chara_id)
+          ) {
+            await era.printAndWait('对方兴致盎然的答应了。');
+            await era.printAndWait([
+              me.get_couple_title(),
+              ' 互相给对方擦了背。',
+            ]);
+            await era.printAndWait([
+              '结束洗浴后，',
+              chara.sex,
+              '带着不甚满足的眼光看向 ',
+              me.get_colored_name(),
+              '……',
+            ]);
+            await quick_into_sex(chara_id);
+          } else {
+            await chara.say_and_wait('笨蛋，在想什么啊你！');
+            await era.printAndWait([me.get_colored_name(), ' 被赶了出去……']);
+            sys_change_motivation(chara_id, -1) && (await era.waitAnyKey());
+          }
+        } else {
+          await me.say_and_wait('不好意思打扰了！');
+          await era.printAndWait([
+            me.get_colored_name(),
+            ' 大喊一声跑了出去。',
+          ]);
+          await era.printAndWait([
+            '没过多久，冲好澡的 ',
+            chara.get_colored_name(),
+            ' 红着脸走了出来',
+          ]);
+          sys_change_lust(chara_id, get_random_value(500, 1500));
+        }
+      }
     }
   }
 };
 
 /**
+ * @author 雞雞
+ *
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {{args:*,fumble:boolean,train:number}} extra_flag
@@ -157,18 +263,35 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
   }
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.week_start] = async (chara_id) => {
   const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
-  if (edu_weeks !== 143 + 9 || era.get(`cflag:${chara_id}:可再次育成`)) {
-    return false;
-  }
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
-  await palace(chara, me);
-  await palace_relation(chara, me);
+  switch (edu_weeks) {
+    case 47 + 29:
+    case 95 + 29:
+      await print_event_name('夏季合宿', chara);
+      await era.printAndWait([
+        '说到夏天就是泳装与海滩，当然，',
+        chara.get_colored_name(),
+        ' 与 ',
+        me.get_colored_name(),
+        ' 来到海边休假的同时也没有落下训练。',
+      ]);
+      break;
+    case 143 + 9:
+      if (era.get(`cflag:${chara_id}:可再次育成`)) {
+        return;
+      }
+      await palace(chara, me);
+      await palace_relation(chara, me);
+  }
 };
 
 /**
+ * @author 雞雞
+ *
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {{lan:string}} extra_flag
@@ -199,6 +322,7 @@ handlers[event_hooks.foreign_study] = async (chara_id, hook, extra_flag) => {
   }
 };
 
+/** @author 无名黑奴 */
 handlers[event_hooks.foreign_rest] = async (chara_id) => {
   const chara = get_chara_talk(chara_id),
     chara_name = chara.get_colored_name(),
@@ -219,6 +343,7 @@ handlers[event_hooks.foreign_rest] = async (chara_id) => {
   ]);
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.foreign_train] = async (chara_id) => {
   const chara = get_chara_talk(chara_id),
     chara_name = chara.get_colored_name(),
@@ -239,6 +364,7 @@ handlers[event_hooks.foreign_train] = async (chara_id) => {
   ]);
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.foreign_travel] = async (chara_id) => {
   const me = get_chara_talk(0);
   await era.printAndWait([
@@ -257,44 +383,45 @@ handlers[event_hooks.foreign_travel] = async (chara_id) => {
 handlers[event_hooks.race_start] = async (chara_id) => {
   const chara_talk = get_chara_talk(chara_id);
   await print_event_name('竞赛之前', chara_talk);
-  era.printButton('「尽全力就好！」', 1);
-  era.printButton('「跑出自己的气势来！」', 2);
-  await era.input();
+  await get_chara_talk(0).say_and_wait(
+    Math.random() < 0.5 ? '尽全力就好！' : '跑出自己的气势来！',
+  );
 };
 
 /**
+ * @author 雞雞
+ *
  * @param {number} chara_id
  * @param _
- * @param {{race:number,rank:number,attr_change:number[],pt_change:number,skill_change:number[],motivation_change:number,relation_change:number,love_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 handlers[event_hooks.race_end] = async (chara_id, _, extra_flag) => {
   const chara_talk = get_chara_talk(chara_id);
   if (extra_flag.rank === 1) {
     await print_event_name('竞赛获胜', chara_talk);
-
-    era.printButton('「太棒了！」', 1);
-    era.printButton('「往更高的目标迈进吧！」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '太棒了！' : '往更高的目标迈进吧！',
+    );
   } else if (extra_flag.rank <= 5) {
     await print_event_name('竞赛上榜', chara_talk);
-
-    era.printButton('「今天的表现也很好！」', 1);
-    era.printButton('「绝对不能输给她们！」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '今天的表现也很好！' : '绝对不能输给她们！',
+    );
   } else if (extra_flag.rank <= 10) {
     await print_event_name('竞赛败北', chara_talk);
-
-    era.printButton('「下次表现一定更好！」', 1);
-    era.printButton('「沮丧也不是办法！」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '下次表现一定更好！' : '沮丧也不是办法！',
+    );
   } else {
     await print_event_name('下次不会输了！', chara_talk);
-
-    era.printButton('「总有一天绝对会赢！」', 1);
-    era.printButton('「你愿意就这样丢脸下去？」', 2);
+    await get_chara_talk(0).say_and_wait(
+      Math.random() < 0.5 ? '总有一天绝对会赢！' : '你愿意就这样丢脸下去？',
+    );
   }
-  await era.input();
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
-  console.log(chara_id);
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
   await era.printAndWait(
@@ -364,11 +491,6 @@ handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
 };
 
 /**
- * 通用育成事件
- *
- * @author 雞雞
- * @author 黑奴队长（改编）
- *
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {*} extra_flag

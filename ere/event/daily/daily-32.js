@@ -1,3 +1,9 @@
+/**
+ * @file 爱丽速子 - 日常
+ *
+ * @author 幽白書
+ * @author 黑奴一号 无名黑奴（修订）
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -170,7 +176,7 @@ handlers[event_hooks.office_cook] = async (hook) => {
             '，你也知道的，毕竟学园里出于安全考虑只能使用电磁炉之类的来做料理，',
           ]);
           await tachyon.say_and_wait(
-            '但……我不太擅长电磁炉，所以……这不是我的问题，是电磁炉难用的问题，如果换成炉气燥的话绝对不会是这样……',
+            '但……我不太擅长电磁炉，所以……这不是我的问题，是电磁炉难用的问题，如果换成燃气灶的话绝对不会是这样……',
           );
           await era.printAndWait([
             me.get_colored_name(),
@@ -835,12 +841,6 @@ handlers[
   event_hooks.slave_end
 ] = require('#/event/daily/daily-events-32/slave-end');
 
-/**
- * 速子的日常事件，id=32
- *
- * @author 幽白書
- * @author 黑奴一号 黑奴队长（修订）
- */
 module.exports = {
   /**
    * @param {HookArg} hook

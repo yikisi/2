@@ -319,6 +319,7 @@ module.exports = (handlers) => {
       ]);
 
       era.printButton('「乌拉拉，就算是这样也太……！」', 1);
+      await era.input();
 
       await urara.print_and_wait([
         '诶？',

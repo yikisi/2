@@ -64,5 +64,5 @@ module.exports = async () => {
     default:
       throw new Error();
   }
-  era.set('flag:68:节日事件标记', 0);
+  era.set('cflag:68:节日事件标记', 0);
 };

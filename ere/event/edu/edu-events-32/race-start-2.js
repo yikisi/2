@@ -30,7 +30,7 @@ module.exports = (handlers) => {
     relation,
     love,
   ) => {
-    await print_event_name('变量·群众感情的刺激', tachyon);
+    await print_event_name('变量 · 群众感情的刺激', tachyon);
     await era.printAndWait('大阪杯');
     await era.printAndWait('一年中，中长距离最初的一场G1赛事');
     await era.printAndWait([
@@ -276,7 +276,7 @@ module.exports = (handlers) => {
       callname,
       '？能麻烦你说清楚硬件是什么意思吗？',
     ]);
-    era.printButton('……不，什么也没有', 1);
+    era.printButton('「……不，什么也没有」', 1);
     await era.input();
     await era.printAndWait('在打闹中，比赛开始的时间也到了');
   };

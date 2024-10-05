@@ -1,3 +1,8 @@
+/**
+ * @file 黄金船 - 育成
+ *
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
 
 const {
@@ -17,13 +22,13 @@ const print_ero_page = require('#/page/page-ero');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const color_7 = require('#/data/chara-colors').chara_colors[7];
 const { lust_border } = require('#/data/ero/orgasm-const');
-const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
@@ -109,9 +114,8 @@ handlers[event_hooks.school_atrium] = async (
   }
   const gold_ship = get_chara_talk(7),
     me = get_chara_talk(0),
-    event_marks = new GoldShipEduMarks(),
-    edu_weeks = era.get('cflag:7:育成回合计时');
-  if (edu_weeks === 47 + 3) {
+    event_arg = event_object?.arg;
+  if (event_arg === 47 + 3) {
     await print_event_name(
       [{ color: color_7[1], content: '母亲比神还要强编' }],
       gold_ship,
@@ -147,7 +151,7 @@ handlers[event_hooks.school_atrium] = async (
     era.println();
 
     await era.printAndWait(
-      `经典三冠首战的皋月赏就快到了，还是不要想布丁吧……但 ${gold_ship.name} 还是自顾自地一溜烟冲出去寻找那个所谓的『伊甸园』了。`,
+      `经典三冠首战的皋月赏就快到了，还是不要想布丁吧……但 ${gold_ship.name} 还是自顾自地一溜烟冲出去寻找那个所谓的「伊甸园」了。`,
     );
     era.println();
 
@@ -187,7 +191,7 @@ handlers[event_hooks.school_atrium] = async (
 
     get_attr_and_print_in_event(7, new Array(5).fill(3), 45) &&
       (await era.waitAnyKey());
-  } else if (edu_weeks === 95 + 41) {
+  } else if (event_arg === 95 + 41) {
     const festa = get_chara_talk(49);
     await print_event_name(
       [{ color: color_7[1], content: '认真对决编' }],
@@ -245,15 +249,13 @@ handlers[event_hooks.school_atrium] = async (
     era.println();
 
     era.printButton('「哎唷，那不是旅程同学吗！」', 1);
-    if (
-      era.get('cflag:49:招募状态') === recruit_flags.yes &&
-      era.get('love:49') >= 50
-    ) {
-      era.printButton('爱抚二人腰间敏感的地方。', 2);
-    }
-    const ret = await era.input();
+    era.printButton('爱抚二人腰间敏感的地方。', 2, {
+      disabled:
+        era.get('cflag:49:招募状态') !== recruit_flags.yes ||
+        era.get('love:49') < 50,
+    });
 
-    if (ret === 1) {
+    if ((await era.input()) === 1) {
       await festa.say_and_wait('妈的，被看到了吗？！……你骗我！');
       await gold_ship.say_and_wait('好，是我赢了！！');
       await festa.say_and_wait(
@@ -278,14 +280,13 @@ handlers[event_hooks.school_atrium] = async (
         Math.max(era.get('base:49:性欲'), lust_border.itch),
       );
       begin_and_init_ero(0, 7, 49);
-      await print_ero_page(7);
+      await print_ero_page(7, true);
       await end_ero_and_show_result(true);
     }
 
     get_attr_and_print_in_event(7, [0, 0, 0, 5, 0], 0) &&
       (await era.waitAnyKey());
-  } else if (event_marks.heroine_red === 1) {
-    event_marks.heroine_red++;
+  } else if (event_arg === 'heroine_red') {
     await print_event_name(
       [{ color: color_7[1], content: '主角的红色！' }],
       gold_ship,
@@ -312,8 +313,8 @@ handlers[event_hooks.school_atrium] = async (
     await era.printAndWait(
       `虽然有所偏差，但 ${gold_ship.name} 说得倒没错……但要不要借这个机会教育教育一下呢？`,
     );
-    era.printButton('「世界上也有很多种红色。」', 1);
-    era.printButton('「要贯彻自己的信念！」', 2);
+    era.printButton('「世界上也有很多种红色。」（智力+20）', 1);
+    era.printButton('「要贯彻自己的信念！」（根性+20）', 2);
     const ret = await era.input();
     if (ret === 1) {
       await gold_ship.say_and_wait('你说世上也有香艳的红色和反派的红色？！');
@@ -343,8 +344,7 @@ handlers[event_hooks.school_atrium] = async (
       get_attr_and_print_in_event(7, [0, 0, 0, 20, 0], 0) &&
         (await era.waitAnyKey());
     }
-  } else if (event_marks.sudden_look_back === 1) {
-    event_marks.sudden_look_back++;
+  } else if (event_arg === 'sudden_look_back') {
     await print_event_name(
       [{ color: color_7[1], content: '阿船的突然追忆过去篇！' }],
       gold_ship,
@@ -404,8 +404,8 @@ handlers[event_hooks.school_atrium] = async (
     );
     era.println();
 
-    era.printButton('「试着重现当时的汤头吧？」', 1);
-    era.printButton('「到当时的地方再看看吧？」', 2);
+    era.printButton('「试着重现当时的汤头吧？」（耐力&智力+10）', 1);
+    era.printButton('「到当时的地方再看看吧？」（速度+20）', 2);
     const ret = await era.input();
 
     if (ret === 1) {
@@ -462,12 +462,10 @@ handlers[event_hooks.school_atrium] = async (
     era.println();
 
     if (ret === 1) {
-      // TODO 技能 『天赋异禀（切れ者）』
-      get_attr_and_print_in_event(7, [0, 10, 0, 0, 10], 0) &&
+      get_attr_and_print_in_event(7, [0, 10, 0, 0, 10], 50) &&
         (await era.waitAnyKey());
     } else {
-      // TODO 技能『天赋异禀（切れ者）』
-      get_attr_and_print_in_event(7, [20, 0, 0, 0, 0], 0) &&
+      get_attr_and_print_in_event(7, [20, 0, 0, 0, 0], 50) &&
         (await era.waitAnyKey());
     }
   }
@@ -477,6 +475,9 @@ handlers[event_hooks.school_atrium] = async (
 handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
   if (era.get('flag:当前互动角色') !== 7) {
     add_event(hook.hook, event_object);
+    return;
+  }
+  if (event_object?.arg !== 'golden_ship_date') {
     return;
   }
   const gold_ship = get_chara_talk(7),
@@ -509,8 +510,8 @@ handlers[event_hooks.out_start] = async (hook, extra_flag, event_object) => {
   era.println();
 
   await gold_ship.say_and_wait('呼～我也有点累了。之后要干嘛好？');
-  era.printButton('「我去买饮料吧。」', 1);
-  era.printButton('「延长赛！比到我赢为止！。」', 2);
+  era.printButton('「我去买饮料吧。」（耐力+20）', 1);
+  era.printButton('「延长赛！比到我赢为止！。」（力量+20）', 2);
   const ret = await era.input();
   if (ret === 1) {
     await era.printAndWait(
@@ -539,6 +540,9 @@ handlers[event_hooks.school_rooftop] = async (
 ) => {
   if (era.get('flag:当前互动角色') !== 7) {
     add_event(hook.hook, event_object);
+    return;
+  }
+  if (event_object?.arg !== 'shoubu') {
     return;
   }
   const gold_ship = get_chara_talk(7),
@@ -574,12 +578,11 @@ handlers[event_hooks.school_rooftop] = async (
   era.println();
   era.printButton(`${festa.name}「限定猜拳……！」`, 1);
   era.printButton(`${festa.name}「皇帝牌……！」`, 2);
-  if (
-    era.get('cflag:49:招募状态') === recruit_flags.yes &&
-    era.get('love:49') >= 50
-  ) {
-    era.printButton(`${festa.name}「……性爱♡」`, 3);
-  }
+  era.printButton(`${festa.name}「……性爱♡」`, 3, {
+    disabled:
+      era.get('cflag:49:招募状态') !== recruit_flags.yes ||
+      era.get('love:49') < 50,
+  });
   let ret = await era.input();
   if (ret === 3) {
     await era.printAndWait(
@@ -594,7 +597,7 @@ handlers[event_hooks.school_rooftop] = async (
       Math.max(era.get('base:49:性欲'), lust_border.absent_mind),
     );
     begin_and_init_ero(0, 7, 49);
-    await print_ero_page(49);
+    await print_ero_page(49, true);
     await end_ero_and_show_result(true);
   } else {
     await era.printAndWait(
@@ -610,8 +613,11 @@ handlers[event_hooks.school_rooftop] = async (
           : '他'
       }们的性格，等搞定之后午饭都要凉透了！怎么办，该阻止吗……？！`,
     );
-    era.printButton('「不，就由我来顶上吧！」', 1);
-    era.printButton('「加油啊……！」', 2);
+    era.printButton('「不，就由我来顶上吧！」（体力+100）', 1);
+    era.printButton(
+      '「加油啊……！」（习得【非根干距离○】、技能点数+60 or 技能点数+15）',
+      2,
+    );
     ret = await era.input();
     if (ret === 1) {
       await festa.say_and_wait('什么？没想到你竟然还挺勇的嘛……有趣！');
@@ -637,9 +643,9 @@ handlers[event_hooks.school_rooftop] = async (
         await era.printAndWait('但午休还是在不知不觉间过去了！');
         era.println();
 
+        get_skills_and_print_in_event(7, [200142]) && (await era.waitAnyKey());
         get_attr_and_print_in_event(7, undefined, 60) &&
           (await era.waitAnyKey());
-        // TODO 获得技能『非根干距离〇』
       } else {
         await era.printAndWait(
           `${gold_ship.name} 使出了浑身解数，但还是没赢过 ${festa.name}……`,
@@ -661,6 +667,9 @@ handlers[event_hooks.race_end] = require('#/event/edu/edu-events-7/race-end');
 handlers[event_hooks.out_church] = async (hook, __, event_object) => {
   if (era.get('flag:当前互动角色') !== 7) {
     add_event(hook.hook, event_object);
+    return;
+  }
+  if (event_object.arg !== 95 + 1) {
     return;
   }
   const gold_ship = get_chara_talk(7),
@@ -715,10 +724,6 @@ handlers[event_hooks.out_church] = async (hook, __, event_object) => {
 };
 
 /**
- * 黄金船的育成事件
- *
- * @author 雞雞
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

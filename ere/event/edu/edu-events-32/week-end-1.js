@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -16,7 +15,7 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},TachyonEduMarks,number,number,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
-  handlers.beginning = async (tachyon, me, callname, flags) => {
+  handlers.beginning = async (tachyon, me) => {
     await print_event_name('实验的开始', tachyon);
     await era.printAndWait([
       '这里是府中特雷森学园，今天 ',
@@ -176,7 +175,6 @@ module.exports = (handlers) => {
     if (era.get('cflag:25:招募状态') !== recruit_flags.yes) {
       era.set('callname:25:0', `豚鼠${me.get_adult_sex_title()}`);
     }
-    flags.wait_flag = get_attr_and_print_in_event(32, undefined, 120);
   };
 
   handlers[47 + 23] = async (tachyon, me, callname, flags) => {
@@ -916,105 +914,5 @@ module.exports = (handlers) => {
     edu_marks.glass_leg = 0;
     edu_marks.limited = 1;
     flags.wait_flag = get_attr_and_print_in_event(32, new Array(5).fill(10), 0);
-  };
-
-  handlers[47 + 47] = async (tachyon, me, callname) => {
-    const coffee = get_chara_talk(25),
-      t_call_c = sys_get_colored_callname(32, 25);
-    await print_event_name('黯淡的光辉', tachyon);
-    era.println();
-    await tachyon.say_and_wait(['话说，明天就是有马纪念了啊，', callname]);
-    era.println();
-    await era.printAndWait([
-      '在月下训练的 ',
-      tachyon.get_colored_name(),
-      ' 无意间向 ',
-      me.get_colored_name(),
-      ' 提起',
-    ]);
-    await era.printAndWait([
-      '自从菊花赏结束以来，',
-      me.get_couple_title(),
-      ' 便一直维持着这样在晚上进行训练及指导的关系',
-    ]);
-    await era.printAndWait([
-      '原本尴尬的对话，在两个月的接触沟通后也已经渐渐回到了以往的熟悉',
-    ]);
-    await era.printAndWait(
-      '虽然这样讲有些过分，但要说对现在的状态，自己是什么样的感受的话',
-    );
-    await era.printAndWait('那大概是享受吧');
-    await era.printAndWait([
-      '白天为了 ',
-      coffee.get_colored_name(),
-      ' 而努力，夜晚则帮助 ',
-      tachyon.get_colored_name(),
-      ' 恢复',
-    ]);
-    await era.printAndWait([
-      '虽然工作量比以前增加了，但与菊花赏前的 ',
-      me.get_colored_name(),
-      ' 相比，心情上的负担可以说每一天都在减轻',
-    ]);
-    await era.printAndWait([
-      '…………也因此，',
-      me.get_colored_name(),
-      ' 几乎忘了时间',
-    ]);
-    era.println();
-    if (sys_reg_race(25).curr.race === race_enum.arim_kin) {
-      await tachyon.say_and_wait([
-        '明天，就是 ',
-        t_call_c,
-        ' 今年的最后一场比赛了',
-      ]);
-    } else {
-      await tachyon.say_and_wait('明天，就是今年赛季的结束了');
-    }
-    era.println();
-    await era.printAndWait(['在有马纪念之后']);
-    await era.printAndWait([
-      '就是 ',
-      me.get_colored_name(),
-      ' 一直不敢去面对的，来年了',
-    ]);
-    era.println();
-    await tachyon.say_and_wait([
-      '明年……',
-      t_call_c,
-      ' 打算出走的比赛……我会尽全力一个不漏跟上的',
-    ]);
-    era.println();
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 看着',
-      tachyon.sex,
-      '的眼眸，里面是为了 ',
-      coffee.get_colored_name(),
-      ' 燃烧的觉悟和热情',
-    ]);
-    era.println();
-    await tachyon.say_and_wait('……所以，明年也请，多多指教了');
-    era.println();
-    await era.printAndWait('没有光芒');
-    await era.printAndWait([
-      '一直以来将 ',
-      me.get_colored_name(),
-      ' 双眼灼烧的，',
-      tachyon.get_colored_name(),
-      ' 眼中的光芒，已经黯淡的几乎看不出来了',
-    ]);
-    era.printButton('「明年也请……多多指教」', 1);
-    await era.input();
-    await era.printAndWait([
-      tachyon.get_colored_name(),
-      ' 将在有马纪念后马上召开记者会',
-    ]);
-    await era.printAndWait('宣布回归赛场的消息，也许会造成社会的轩然大波吧');
-    await era.printAndWait([
-      '但这些后续与现在的 ',
-      me.get_couple_title(),
-      ' 两人没有半点关系',
-    ]);
   };
 };

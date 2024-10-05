@@ -74,15 +74,15 @@ async function sys_rape_in_sleeping(chara_id, supporter) {
       ...(supporter
         ? [' 与 ', get_chara_talk(supporter).get_colored_name()]
         : []),
-      ' 伏在你身上！',
+      ' 伏在身上！',
     ]);
-    await page_ero(chara_id);
+    await page_ero(undefined, true);
     era.getCharactersInTrain().forEach((e) => era.add(`exp:${e}:睡奸次数`, -1));
     era.set('status:0:沉睡', 1);
   }
   await end_ero_and_show_result(wake_up);
   era.endTrain();
-  era.set('status:0:熬夜', 1);
+  era.set('status:0:熬夜', 1 - era.get('status:0:马跳S'));
   era.set(`status:${chara_id}:熬夜`, 1);
   sys_like_chara(chara_id, 0, 25, false);
   if (supporter) {

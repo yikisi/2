@@ -11,6 +11,7 @@ const { add_juel } = require('#/system/ero/sys-calc-juel');
 const add_attr_exp = require('#/event/ero/snippets/add-attr-exp');
 const add_juel_from_check = require('#/event/ero/snippets/add-juel-from-check');
 const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
+const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
@@ -509,7 +510,7 @@ module.exports = (handlers) => {
     );
   };
 
-  handlers[ero_hooks.fuck_tit_and_month] = (
+  handlers[ero_hooks.fuck_tit_and_mouth] = (
     attacker,
     defender,
     _,
@@ -701,6 +702,7 @@ module.exports = (handlers) => {
     _,
     extra_flag,
   ) => {
+    print_ero_gif('女上位素股');
     sys_do_sex(
       new EroParticipant(defender, part_enum.body, -0.4),
       new EroParticipant(attacker, part_enum.penis, -0.4),
@@ -719,6 +721,7 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.non_penetrative] = (attacker, defender, _, extra_flag) => {
+    print_ero_gif('女上位素股');
     sys_do_sex(
       new EroParticipant(attacker, part_enum.body, -0.4),
       new EroParticipant(defender, part_enum.penis, -0.4),

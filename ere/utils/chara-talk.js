@@ -5,6 +5,9 @@ const { get_chara_color } = require('#/data/chara-colors');
 class CharaTalk {
   /** @type {CharaTalk} */
   static me;
+  /** @type {function(number,number?)} */
+  static init_chara;
+
   /** @type {number} */
   id;
   /** @type {string} */
@@ -65,17 +68,11 @@ class CharaTalk {
     this.id = id;
     this.name = era.get(`callname:${id}:-2`);
     if (this.name === '-') {
-      require('#/system/sys-init-chara').init_chara(id);
+      CharaTalk.init_chara(id);
       this.name = era.get(`callname:${id}:-2`);
     }
     this.actual_name = era.get(`callname:${id}:-1`);
     this.color = color || get_chara_color(id);
-    if (!this.color) {
-      const id_color = this.id.toString(9).padStart(3, '0');
-      this.color = `#${[id_color[0], id_color[1], id_color[2]]
-        .map((e) => (0xff - Number(e) * 16).toString(16).padStart(2, '0'))
-        .join('')}`;
-    }
     this.sex_code = era.get(`cflag:${this.id}:性别`);
     this.sex = this.sex_code - 1 ? '她' : '他';
   }
@@ -101,6 +98,14 @@ class CharaTalk {
     return {
       color: this.color,
       content: this.get_full_name(),
+      fontWeight: 'bold',
+    };
+  }
+
+  get_colored_sex() {
+    return {
+      color: this.color,
+      content: this.sex,
       fontWeight: 'bold',
     };
   }
@@ -133,6 +138,12 @@ class CharaTalk {
 
   /** UMA角色的称呼 */
   get_uma_sex_title = () => (this.sex_code - 1 ? '马娘' : '马郎');
+
+  get_bigger_sibling_sex_title = () => (this.sex_code - 1 ? '姐姐' : '哥哥');
+
+  get_smaller_sibling_sex_title = () => (this.sex_code - 1 ? '妹妹' : '弟弟');
+
+  get_siblings_sex_title = () => (this.sex_code - 1 ? '姐妹' : '兄弟');
 
   /**
    * 事件从该角色视角展开时的旁白

@@ -9,6 +9,7 @@ const {
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const {
   default_handler,
   get_mark_cols,
@@ -20,6 +21,7 @@ const get_color = require('#/utils/gradient-color');
 
 const { mark_colors } = require('#/data/const.json');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const GetMarkParams = require('#/data/event/extra-flag/get-mark-params');
 
 /**
  * @param {number} chara_id
@@ -287,27 +289,13 @@ module.exports = async (
       juel_dict,
     );
     if (is_confirmed) {
-      era.printMultiColumns([
-        {
-          content:
-            '刻印淫纹以奴役对方是一种极不道德的行为，对社会评价极为不利！请确认是否继续？',
-          type: 'text',
-        },
-        {
-          config: { width: 12, align: 'center' },
-          accelerator: 0,
-          content: '确定',
-          type: 'button',
-        },
-        {
-          config: { width: 12, align: 'center' },
-          accelerator: 100,
-          content: '溜了溜了',
-          type: 'button',
-        },
-      ]);
-      const temp = await era.input();
-      if (temp === 0) {
+      if (
+        await select_yes_or_no(
+          '刻印淫纹以奴役对方是一种极不道德的行为，对社会评价极为不利！请确认是否继续？',
+          '确定',
+          '溜了溜了',
+        )
+      ) {
         if (ret === 6) {
           era.set(`mark:${chara_id}:欢愉`, 0);
           sex_level = era.set(`mark:${chara_id}:淫纹`, pleasure_level);
@@ -317,11 +305,11 @@ module.exports = async (
           sex_level = era.add(`mark:${chara_id}:淫纹`, 1);
           total_delta.sex_delta = (total_delta.sex_delta || 0) + 1;
         }
-        await call_ero_script(chara_id, ero_hooks.get_mark, {
-          level: sex_level,
-          name: '淫纹',
-          new: true,
-        });
+        await call_ero_script(
+          chara_id,
+          ero_hooks.get_mark,
+          new GetMarkParams(sex_level, '淫纹', true),
+        );
         era.add(`juel:${chara_id}:顺从`, -sex_mark_price);
         sys_change_fame(-100 * sex_level);
       }

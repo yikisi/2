@@ -1,18 +1,23 @@
+/**
+ * @file 东海帝王 - 招募
+ *
+ * @author 天马闪光蹄
+ */
 const era = require('#/era-electron');
+
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 
-/**
- * 东海帝王的招募事件，id=3
- *
- * @author 天马闪光蹄
- */
-
-module.exports = {
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
+    if (await this.check_before_rec()) {
+      return;
+    }
     const teio_talk = get_chara_talk(3),
       me = get_chara_talk(0);
     await era.printAndWait(
@@ -28,7 +33,7 @@ module.exports = {
     await era.printAndWait(
       `身为${get_trainer_title()}，${
         me.name
-      } 今天依然奔走在去往特雷森学院，帮助马娘实现梦想的道路上。`,
+      } 今天依然奔走在去往特雷森学园，帮助马娘实现梦想的道路上。`,
     );
     await era.printAndWait(
       `虽然工作绝对称不上轻松，但是不匪的物质收入（包揽食宿，以特殊的【马币】结算的高额工资）和精神财富（帮助${teio_talk.get_uma_sex_title()}学生们成长，进步，看到${
@@ -84,7 +89,7 @@ module.exports = {
     );
     await era.printAndWait('小女孩「帝王大人！能不能再跳一次呢？」');
     await era.printAndWait(
-      `显然，她是想看那位马娘翻身下树的潇洒模样。${me.name} 笑了笑，准备后退让下地方，或者今天能看到一个帅气的“super hero landing”也说不定。`,
+      `显然，她是想看那位马娘翻身下树的潇洒模样。${me.name} 笑了笑，准备后退让下地方，或者今天能看到一个帅气的『super hero landing』也说不定。`,
     );
     await era.printAndWait(
       `但奇怪的是，树上的${teio_talk.get_uma_sex_title()}却并没有呼应自己的小粉丝`,
@@ -127,9 +132,9 @@ module.exports = {
       `${me.name} 应声点头。${teio_talk.sex}开心地笑了，挺了挺身……`,
     );
     era.println();
-    era.printButton('马上跑到树下伸出双手接应', 1);
+    era.printButton('马上跑到树下伸出双手接应（爱慕+1）', 1);
     era.printButton(
-      `拾起刚刚被自己挡在内侧的，${teio_talk.get_uma_sex_title()}蹬下的凉鞋，放在树下`,
+      `拾起刚刚被自己挡在内侧的，${teio_talk.get_uma_sex_title()}蹬下的凉鞋，放在树下（好感+5）`,
       2,
     );
     const ret = await era.input();
@@ -177,16 +182,16 @@ module.exports = {
     await era.input();
 
     await teio_talk.say_and_wait(
-      '对啦！我的名字是东海帝王！是日后将成为传奇的赛马娘哦！正好今天下午我会跑一次比赛，训练员先生有空也请一定过来看看吧！我还赶时间，现在就先失陪了，下午学院见！',
+      '对啦！我的名字是东海帝王！是日后将成为传奇的赛马娘哦！正好今天下午我会跑一次比赛，训练员先生有空也请一定过来看看吧！我还赶时间，现在就先失陪了，下午学园见！',
     );
     era.println();
     await era.printAndWait(
       `说完，${teio_talk.sex}便一路小跑着离去了。${me.name} 望向${teio_talk.sex}的背影，笑着挥手告别。`,
     );
-    era.drawLine({ content: '下午，特雷森学院' });
+    era.drawLine({ content: '下午，特雷森学园' });
     await era.printAndWait('选拔赛 2000米', { align: 'center' });
     await era.printAndWait(
-      `学院的操场上已经围了不少的人。这次来的人意外地多啊，${me.name} 坐在一处相对僻静的地方，暗暗想到，他们是为了争夺某几位新人吗？`,
+      `学园的操场上已经围了不少的人。这次来的人意外地多啊，${me.name} 坐在一处相对僻静的地方，暗暗想到，他们是为了争夺某几位新人吗？`,
     );
     era.println();
     await era.printAndWait(
@@ -198,7 +203,7 @@ module.exports = {
     );
     era.println();
     await era.printAndWait(
-      `${teio_talk.sex}如此理所当然般宣告了自己的存在，赢取了胜利。${me.name} 看着屏幕上大大的“一着”，不由得微笑起来，起身向下走去。`,
+      `${teio_talk.sex}如此理所当然般宣告了自己的存在，赢取了胜利。${me.name} 看着屏幕上大大的『一着』，不由得微笑起来，起身向下走去。`,
     );
     era.println();
     await teio_talk.say_and_wait('唔……');
@@ -217,10 +222,9 @@ module.exports = {
     era.println();
     await era.printAndWait('要怎么办呢？');
     era.println();
-    era.printButton('「大声说出帝王的名字，要求成为担当」', 1);
-    era.printButton('「还是算了吧……」', 2);
-    const ret1 = await era.input();
-    if (ret1 === 1) {
+    era.printButton('大声说出帝王的名字，要求成为担当', 1);
+    era.printButton('还是算了吧……', 2);
+    if ((await era.input()) === 1) {
       await era.printAndWait(
         `${me.name} 听见自己大喊 ${teio_talk.name} 的名字，${
           teio_talk.sex
@@ -242,5 +246,5 @@ module.exports = {
         `这孩子……或许对自己不怎么适合，太有挑战性了也说不定。${me.name} 轻轻，但明确地摇了摇头，悄然退出了人群。`,
       );
     }
-  },
+  }
 };

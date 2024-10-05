@@ -1,7 +1,6 @@
 const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
-const sys_call_check = require('#/system/script/sys-call-check');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 const {
   sys_like_chara,
@@ -9,32 +8,92 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { init_chara } = require('#/system/sys-init-chara');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
+const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
+const get_random_name = require('#/utils/naming');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const check_stages = require('#/data/event/check-stages');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_filtered_talents } = require('#/data/info-generator');
+const { gene_juel_names } = require('#/data/other-const');
+const { gene_type_colors } = require('#/data/race/model/uma-gene');
 const { adaptability_names } = require('#/data/train-const');
+
+async function name_baby(child_id, father_id, mother_id) {
+  let ret, random_param;
+  // chara_id一定是母亲
+  // 虽然不是很情愿，但是还是留一下吧，只有玩家是孩子父亲或者母亲的情况下才拥有命名决定权
+  if (mother_id && father_id) {
+    // 如果和玩家没关系，直接用母亲来命名
+    random_param = mother_id;
+  } else if (era.get('flag:惩戒力度') >= 2) {
+    // 性奴和孕袋没有命名权
+    random_param = mother_id || father_id;
+  } else {
+    if (
+      await select_yes_or_no(
+        '',
+        `让${mother_id ? '母亲' : '父亲'}起名`,
+        '亲自起名',
+      )
+    ) {
+      random_param = mother_id || father_id;
+    } else {
+      era.print('想给孩子起什么名字呢？');
+      ret = await era.input();
+    }
+  }
+  if (random_param) {
+    ret = get_random_name(random_param);
+  }
+  era.set(`callname:${child_id}:-2`, era.set(`callname:${child_id}:-1`, ret));
+  if (
+    (!mother_id || !father_id) &&
+    random_param &&
+    ret.replace(/\d+$/, '').length !== ret.length &&
+    (await select_yes_or_no([
+      get_chara_talk(mother_id).get_colored_name(),
+      ' 的孩子起名为 ',
+      get_chara_talk(child_id).get_colored_name(),
+      '……',
+      { isBr: true },
+      '要重新取名吗？',
+    ]))
+  ) {
+    era.set(
+      `callname:${child_id}:-2`,
+      era.set(`callname:${child_id}:-1`, await era.input()),
+    );
+  }
+  await era.printAndWait([
+    get_chara_talk(mother_id).get_colored_name(),
+    ' 的孩子最终起名为 ',
+    get_chara_talk(child_id).get_colored_name(),
+    '！',
+  ]);
+}
 
 /** @param {number} mother_id */
 async function sys_have_baby(mother_id) {
   const mother_life_marks = new LifeEventMarks(mother_id),
     father_id = mother_life_marks.sperm,
     child_id = era.add('flag:新生儿ID', 1) - 1;
-  let src_chara_id;
-  if (mother_id) {
-    src_chara_id = era.get(`cflag:${mother_id}:模版角色`);
-    src_chara_id = src_chara_id !== -1 ? src_chara_id : mother_id;
-  } else {
-    src_chara_id = era.get(`cflag:${father_id}:模版角色`);
-    src_chara_id = src_chara_id !== -1 ? src_chara_id : father_id;
+  let src_chara_id = era.get(`cflag:${mother_id}:模版角色`);
+  if (src_chara_id === -1) {
+    if (mother_id) {
+      src_chara_id = mother_id;
+    } else {
+      src_chara_id = era.get(`cflag:${father_id}:模版角色`);
+      src_chara_id = src_chara_id !== -1 ? src_chara_id : father_id;
+    }
   }
 
   init_chara(child_id, src_chara_id);
@@ -42,10 +101,7 @@ async function sys_have_baby(mother_id) {
    * 随机赋予3项性格特质
    * @type {number[]}
    */
-  const chara_talents = [
-    ...new Array(18).fill(0).map((_, i) => i + 1070),
-    1090,
-  ];
+  const chara_talents = [...new Array(18).fill(0).map((_, i) => i), 20];
   chara_talents.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
   );
@@ -100,7 +156,7 @@ async function sys_have_baby(mother_id) {
 
   // 随机赋予1项名器特质
   const part_talent_count = get_random_value(0, 1);
-  const part_talents = get_filtered_talents(sex, 1010);
+  const part_talents = get_filtered_talents(sex, 50);
   part_talents.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
   );
@@ -113,9 +169,9 @@ async function sys_have_baby(mother_id) {
     xp_extended_count = get_random_value(0, 1);
   const talent_arr = [
     // 淫乱系
-    ...get_filtered_talents(sex, 1000),
+    ...get_filtered_talents(sex, 60),
     // xp系
-    ...new Array(8).fill(0).map((_, i) => i + 1050),
+    ...new Array(8).fill(0).map((_, i) => i + 40),
   ];
   talent_arr.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
@@ -160,8 +216,8 @@ async function sys_have_baby(mother_id) {
    */
   const semen_talents = new Array(8)
     .fill(0)
-    .map((_, i) => i + 1060)
-    .filter((talent_id) => talent_id !== 1061 || talent_id !== 1065 || sex - 1);
+    .map((_, i) => i + 70)
+    .filter((talent_id) => talent_id !== 71 || talent_id !== 75 || sex !== 1);
   semen_talents.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
   );
@@ -185,9 +241,10 @@ async function sys_have_baby(mother_id) {
     );
   }
 
-  let random_val = Math.random();
+  let random_val;
   adaptability_names.forEach((e) => {
     let val = era.get(`cflag:${child_id}:${e}适性`);
+    random_val = Math.random();
     if (random_val < 0.1) {
       val += random_val < 0.05 ? 1 : -1;
       if (val > 7) {
@@ -290,19 +347,30 @@ async function sys_have_baby(mother_id) {
       (await era.waitAnyKey());
   }
 
-  sys_call_check(child_id, check_stages.birth);
+  get_custom_check(child_id).check_birth();
   era.print([
     get_chara_talk(mother_id).get_colored_name(),
     ' 生下了一个依稀有着 ',
     get_chara_talk(father_id).get_colored_name(),
     ' 外貌的健康的孩子！',
   ]);
+  era.set(
+    `maxbase:${mother_id}:体力`,
+    Math.max(era.get(`maxbase:${mother_id}:体力`) - 400, 200),
+  );
+  era.add(`base:${mother_id}:体力`, 0);
+  era.set(
+    `maxbase:${mother_id}:精力`,
+    Math.max(era.get(`maxbase:${mother_id}:精力`) - 400, 200),
+  );
+  era.add(`base:${mother_id}:精力`, 0);
   await call_ero_script(
     // 如果是玩家生孩子，调用角色的口上
     mother_id || father_id,
     ero_hooks.have_baby,
     { child_id },
   );
+  await name_baby(child_id, father_id, mother_id);
 
   get_custom_mec(child_id).set_callname();
   const child = get_chara_talk(child_id),
@@ -320,14 +388,21 @@ async function sys_have_baby(mother_id) {
       child.get_colored_name(),
     ]);
   }
-  if (era.get(`cstr:${child_id}:毛色`)) {
-    era.set(`cstr:${child_id}:毛色`, era.get(`cstr:${mother_id}:毛色`));
+  if (!era.get(`cstr:${child_id}:毛色`)) {
+    era.set(
+      `cstr:${child_id}:毛色`,
+      era.get(`cstr:${mother_id}:毛色`) || era.get(`cstr:${father_id}:毛色`),
+    );
   }
   const child_life_marks = new LifeEventMarks(child_id);
   child_life_marks.unexpected_child = mother_life_marks.unexpected_pregnant;
   mother_life_marks.unexpected_pregnant = 0;
 
-  if (!father_id && era.get(`love:${mother_id}`) < 90) {
+  if (
+    !father_id &&
+    era.get(`love:${mother_id}`) < 90 &&
+    (mother_id < 340 || mother_id > 342)
+  ) {
     if (era.get(`mark:${mother_id}:同心`) >= 2) {
       sys_like_chara(mother_id, 0, 50);
       await add_juel_out_of_train(mother_id, '顺从', 200);
@@ -338,6 +413,32 @@ async function sys_have_baby(mother_id) {
     sys_like_chara(mother_id || father_id, 0, 100);
     await add_juel_out_of_train(mother_id || father_id, '顺从', 300);
   }
+  const juel_index = get_random_value(0, 2);
+  let juel_num = 0;
+  if (!father_id) {
+    juel_num = get_random_value(25, 75);
+  } else if (!mother_id) {
+    juel_num = get_random_value(75, 125);
+  }
+  if (juel_num > 0) {
+    era.add(`juel:0:${gene_juel_names[juel_index]}`, juel_num);
+    era.print([
+      get_chara_talk(0).get_colored_name(),
+      ' 获得了 ',
+      {
+        content: `${gene_juel_names[juel_index]} × ${juel_num}`,
+        color: gene_type_colors[juel_index],
+      },
+    ]);
+  }
+  new Array(3)
+    .fill(0)
+    .map((_, i) => 340 + i)
+    .filter((e) => e !== father_id && e !== mother_id)
+    .reduce(
+      (p, c) => sys_like_chara(c, 0, 50 * (1 + !mother_id)) || p,
+      false,
+    ) && (await era.waitAnyKey());
   await sys_punish_unfaithful(
     mother_id || father_id,
     era.get(`love:${mother_id || father_id}`),

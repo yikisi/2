@@ -9,6 +9,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { attr_change_colors, motivation_colors } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { location_enum } = require('#/data/locations');
 const {
   attr_enum,
@@ -25,7 +26,7 @@ function sys_change_motivation(chara_id, val) {
   if (!chara_id || era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48) {
     return false;
   }
-  if (val > 0 && era.get(`status:${chara_id}:头风`)) {
+  if (val > 0 && era.get(`status:${chara_id}:偏头痛`)) {
     return false;
   }
   const delta_change = era.get(`talent:${chara_id}:情感活动`);
@@ -110,8 +111,7 @@ module.exports = {
    * @returns {*[]}
    */
   sys_change_attr_and_print(chara_id, attr_id_or_name, change) {
-    let stat = Math.floor(change);
-    if (!stat) {
+    if (!change) {
       return [];
     }
     const attr_name =
@@ -122,51 +122,50 @@ module.exports = {
       max = era.get(`maxbase:${chara_id}:${attr_name}`),
       ret = [];
     if (typeof attr_id_or_name === 'string') {
-      if (stat < 0) {
+      if (change < 0) {
         let debuff =
           sys_get_debuff(chara_id) +
           (era.get('flag:当前位置') === location_enum.beach &&
             attr_id_or_name === '体力') *
             0.2;
-        stat = Math.floor(stat * (debuff > 10 ? 1 : debuff + 1));
+        change = Math.floor(change * (debuff > 10 ? 1 : debuff + 1));
         if (attr_id_or_name === '体力') {
           let lose_weight =
-            stat *
+            change *
             (1 -
               0.4 * era.get(`status:${chara_id}:发胖`) +
               era.get(`status:${chara_id}:健康茶`));
           era.add(`base:${chara_id}:体重偏差`, Math.ceil(lose_weight));
-          sys_change_pressure(chara_id, get_random_value(stat / 5, 0));
-          if (
-            -stat >= 500 ||
-            Math.random() < Math.pow(2, (-stat - 500) / 100)
-          ) {
-            era.add(
-              `base:${chara_id}:耐力`,
-              1 +
-                (era.get(`base:${chara_id}:体力`) <
-                  0.45 * era.get(`maxbase:${chara_id}:体力`)),
-            );
-          }
+          sys_change_pressure(chara_id, get_random_value(change / 5, 0));
+          era.add(
+            `base:${chara_id}:耐力`,
+            Math.min(-change / 500, 1) +
+              (era.get(`base:${chara_id}:体力`) <
+                0.45 * era.get(`maxbase:${chara_id}:体力`))
+              ? Math.random()
+              : 0,
+          );
         } else {
-          sys_change_lust(chara_id, get_random_value(stat, 0) / 4);
-          sys_change_pressure(chara_id, get_random_value(stat / 10, 0));
-          if (
-            -stat >= 500 ||
-            Math.random() < Math.pow(2, (-stat - 500) / 100)
-          ) {
-            era.add(
-              `base:${chara_id}:智力`,
-              1 +
-                (era.get(`base:${chara_id}:精力`) <
-                  0.5 * era.get(`maxbase:${chara_id}:精力`)),
-            );
-          }
+          sys_change_lust(chara_id, get_random_value(change, 0) / 4);
+          sys_change_pressure(chara_id, get_random_value(change / 10, 0));
+          era.add(
+            `base:${chara_id}:智力`,
+            Math.min(-change / 500) +
+              (era.get(`base:${chara_id}:精力`) <
+                0.5 * era.get(`maxbase:${chara_id}:精力`))
+              ? Math.random()
+              : 0,
+          );
         }
+      }
+      if (change > 0) {
+        change = Math.max(change, 1);
+      } else {
+        change = Math.min(change, -1);
       }
     } else if (
       chara_id &&
-      era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48
+      !(era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)
     ) {
       return [];
     } else if (
@@ -175,20 +174,21 @@ module.exports = {
     ) {
       return [];
     }
-    if (stat > max - val) {
-      stat = max - val;
+    if (change > max - val) {
+      change = max - val;
     }
-    if (stat + val < 0) {
-      stat = 0 - val;
+    if (change + val < 0) {
+      change = 0 - val;
     }
-    if (stat) {
-      era.add(`base:${chara_id}:${attr_name}`, stat);
+    if (change) {
+      era.add(`base:${chara_id}:${attr_name}`, change);
+      const stat = Math.floor(Math.abs(change));
       ret.push(
         {
           color: attr_colors[attr_name],
           content: attr_name,
         },
-        stat > 0
+        change > 0
           ? {
               color: attr_change_colors.up,
               content: ' 上升',
@@ -197,11 +197,13 @@ module.exports = {
               color: attr_change_colors.down,
               content: ' 下降',
             },
-        ' 了 ',
-        {
-          color: attr_colors[attr_name],
-          content: (stat > 0 ? stat : -stat).toLocaleString(),
-        },
+        ' 了',
+        stat >= 1
+          ? {
+              color: attr_colors[attr_name],
+              content: ` ${stat.toLocaleString()}`,
+            }
+          : '',
       );
     }
     return ret;
@@ -225,21 +227,31 @@ module.exports = {
     if (src_chara_id === -1) {
       src_chara_id = chara_id;
     }
-    const maxbase_buff = get_custom_mec(chara_id).get_maxbase_buff();
+    const maxbase_buff =
+      get_custom_mec(chara_id).get_maxbase_buff() -
+      (era.get(`cflag:${chara_id}:妊娠阶段`) ===
+        1 << pregnant_stage_enum.resume &&
+        (era.get(`cflag:${chara_id}:妊娠回合计时`) - 1) * 100);
     era.set(
       `maxbase:${chara_id}:体力`,
-      Math.floor(
-        era.get(`staticbase:${src_chara_id}:体力`) +
-          era.get(`base:${chara_id}:耐力`) / 2 +
-          maxbase_buff,
+      Math.max(
+        Math.floor(
+          era.get(`staticbase:${src_chara_id}:体力`) +
+            era.get(`base:${chara_id}:耐力`) / 2 +
+            maxbase_buff,
+        ),
+        200,
       ),
     );
     era.set(
       `maxbase:${chara_id}:精力`,
-      Math.floor(
-        era.get(`staticbase:${src_chara_id}:精力`) +
-          era.get(`base:${chara_id}:智力`) / 2 +
-          maxbase_buff,
+      Math.max(
+        Math.floor(
+          era.get(`staticbase:${src_chara_id}:精力`) +
+            era.get(`base:${chara_id}:智力`) / 2 +
+            maxbase_buff,
+        ),
+        200,
       ),
     );
   },
@@ -264,7 +276,7 @@ module.exports = {
   },
   /** @returns {{curr:{race:number,week:number},last:{race:number,week:number}}} */
   sys_reg_race(chara_id) {
-    return (
+    const ret =
       era.get(`cflag:${chara_id}:出走登记`) ||
       era.set(`cflag:${chara_id}:出走登记`, {
         curr: {
@@ -275,7 +287,10 @@ module.exports = {
           race: -1,
           week: -1,
         },
-      })
-    );
+      });
+    Object.preventExtensions(ret);
+    Object.preventExtensions(ret.curr);
+    Object.preventExtensions(ret.last);
+    return ret;
   },
 };

@@ -129,7 +129,9 @@ function randomly_interact(in_team_list) {
       era.set(`status:${chara_id}:熬夜`, 0);
       era.set(`status:${chara_id}:摸鱼`, 0);
     }
-    era.set(`cflag:${chara_id}:自主训练`, 1);
+    if (era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48) {
+      era.set(`cflag:${chara_id}:自主训练`, 1);
+    }
   }
 }
 

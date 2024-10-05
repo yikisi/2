@@ -1,6 +1,6 @@
-const crypto = require('crypto');
-
 const era = require('#/era-electron');
+
+const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const date_indicator = require('#/page/components/date-indicator');
 
@@ -9,16 +9,11 @@ const shop_desc = require('#/data/desc/shop-desc.json');
 const { location_name } = require('#/data/locations');
 
 /** @param {({id:number,[limit]:boolean}|number)[]} item_list */
-module.exports = async (item_list) => {
-  const hash = crypto.createHash('md5');
-  hash.update(era.get('callname:0:-1') + era.get('flag:当前回合数'));
+async function print_shop_page(item_list) {
   const item_keys = era.get('itemkeys'),
-    off_index = Number(
-      `0x${hash.digest('hex').substring(0, Math.max(Number(item_keys.length).toString(16).length, 1))}`,
-    ),
+    off_index = era.get('flag:随机种子'),
     off = item_keys[off_index % item_keys.length],
-    price_cache = era.get(`itemprice:${off}`),
-    in_list = item_list.filter((e) => e === off || e.id === off).length > 0;
+    price_cache = era.get(`itemprice:${off}`);
   era.set(
     `itemprice:${off}`,
     Math.max(Math.ceil(price_cache * ((off_index & 0x80) > 0 ? 0.5 : 0.7)), 1),
@@ -166,9 +161,9 @@ module.exports = async (item_list) => {
     });
     buffer.push({
       type: 'text',
-      content: '\n* 点击道具查看说明\n** 带“限”字样的商品只能拥有一件',
+      content: '\n* 点击道具查看说明\n** 带「限」字样的商品只能拥有一件',
     });
-    if (in_list) {
+    if (on_sell_list.findIndex((e) => e === off) !== -1) {
       buffer.push({
         type: 'text',
         content: [
@@ -314,10 +309,7 @@ module.exports = async (item_list) => {
           );
           break;
         case 6:
-          cur_coin = era.add(
-            'flag:当前马币',
-            -price[selected_item] * to_buy[selected_item],
-          );
+          sys_change_money(-price[selected_item] * to_buy[selected_item]);
           era.add(`item:${selected_item}`, to_buy[selected_item]);
           await era.printAndWait(
             `购买了 ${to_buy[selected_item]} 个 ${era
@@ -339,4 +331,6 @@ module.exports = async (item_list) => {
   }
   era.set(`itemprice:${off}`, price_cache);
   return bought;
-};
+}
+
+module.exports = print_shop_page;

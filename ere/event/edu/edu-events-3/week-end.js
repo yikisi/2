@@ -24,12 +24,17 @@ const {
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const { get_filtered_talents } = require('#/data/info-generator');
 
-module.exports = async function () {
+/**
+ * @param _
+ * @param __
+ * @param {EventObject} event_object
+ */
+module.exports = async (_, __, event_object) => {
   const teio = get_chara_talk(3),
     me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:3:育成回合计时'),
+    event_arg = event_object?.arg,
     event_marks = new TeioEduMarks();
-  if (edu_weeks === 95 + 17) {
+  if (event_arg === 95 + 17) {
     await print_event_name('依靠', teio);
     await era.printAndWait('雨夜，静寂无声。');
     await era.printAndWait(
@@ -263,7 +268,7 @@ module.exports = async function () {
       await era.printAndWait(`${me.name} 内心深处发出了满足的咆哮声。`);
       await era.printAndWait(`不过是一匹${teio.get_sex_slave_title()}而已。`);
       await era.printAndWait(
-        `此念一出，${me.name} 原本就所剩无几的“师长风度”更是不知所踪。`,
+        `此念一出，${me.name} 原本就所剩无几的「师长风度」更是不知所踪。`,
       );
       await era.printAndWait(
         `嘴唇随着一定节奏吸吮着，啜饮着肉与肉的窄缝之间涌出的液体。阵阵淫靡之音响起。浑身脱力，被 ${
@@ -426,7 +431,7 @@ module.exports = async function () {
         new EroParticipant(3, part_enum.breast),
         false,
       );
-      await print_ero_page(3);
+      await print_ero_page(3, true);
       end_ero_and_train();
 
       era.printButton('「抱歉」', 1);
@@ -451,7 +456,7 @@ module.exports = async function () {
       get_skill_list(era.get('cflag:3:性别')).forEach((e) =>
         era.set(`abl:3:${e}`, Math.min(era.get(`abl:3:${e}`) + 1, 5)),
       );
-      get_filtered_talents(teio.sex_code, 1000)
+      get_filtered_talents(teio.sex_code, 60)
         .filter((talent_id) => era.get(`talent:3:${talent_id}`) < 1)
         .forEach((talent_id) => era.set(`talent:3:${talent_id}`, 1));
       touch_list
@@ -464,7 +469,7 @@ module.exports = async function () {
         );
       sys_like_chara(3, 0, 12, true, 1) && (await era.waitAnyKey());
     }
-  } else if (edu_weeks === 143 + 5 && event_marks.good_end === 1) {
+  } else if (event_arg === 143 + 5 && event_marks.good_end === 1) {
     event_marks.good_end++;
     await print_event_name('柳暗花明', teio);
     await era.printAndWait(

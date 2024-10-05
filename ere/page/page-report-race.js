@@ -1,11 +1,18 @@
 const era = require('#/era-electron');
 
 const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_check_awake,
+  sys_check_race_ready,
+} = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
+
+const race_page = require('#/page/page-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
+const { location_enum } = require('#/data/locations');
 const { race_infos } = require('#/data/race/race-const');
 
 async function report_race_page() {
@@ -55,7 +62,7 @@ async function report_race_page() {
         ];
         (dict[round + 1] || []).forEach((race) => {
           columns.push({
-            config: { offset: 1, width: 22, align: 'center' },
+            config: { align: 'center', offset: 1, width: 22 },
             content: [
               get_chara_talk(race.id).get_colored_name(),
               ' ',
@@ -63,6 +70,17 @@ async function report_race_page() {
             ],
             type: 'text',
           });
+          if (cur_round === round) {
+            columns.push({
+              accelerator: race.id,
+              config: {
+                align: 'center',
+                disabled: !sys_check_race_ready(race.id) || !sys_check_awake(0),
+              },
+              content: '参加比赛',
+              type: 'button',
+            });
+          }
         });
         return {
           columns,
@@ -79,7 +97,16 @@ async function report_race_page() {
       },
     ],
   );
-  await era.input();
+  const ret = await era.input();
+  if (ret !== 999) {
+    const cur_loc = era.get('flag:当前位置'),
+      cur_chara = era.get('flag:当前互动角色');
+    era.set('flag:当前位置', location_enum.race);
+    era.set('flag:当前互动角色', ret);
+    await race_page(sys_reg_race(ret).curr.race);
+    era.set('flag:当前互动角色', cur_chara);
+    era.set('flag:当前位置', cur_loc);
+  }
 }
 
 module.exports = report_race_page;

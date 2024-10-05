@@ -10,6 +10,13 @@ const EroHookTag = require('#/data/event/ero-hook-tag');
  * @param {Record<string,boolean>} ero_derive_check
  */
 module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
+  ero_action_names[ero_actions.go_on] = '放弃挣扎';
+  ero_tagged_hooks[ero_actions.go_on] = new EroHookTag(
+    [(chara_id) => !chara_id],
+    [],
+    EroHookTag.condition_type.in_active,
+  );
+
   ero_action_names[ero_actions.kiss] = '接吻';
   ero_tagged_hooks[ero_actions.kiss] = new EroHookTag(
     [ero_action_tags.mouth],

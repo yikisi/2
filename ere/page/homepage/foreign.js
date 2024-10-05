@@ -30,6 +30,7 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
 const location2language = {};
+location2language[location_enum.new_york] = '英';
 location2language[location_enum.paris] = '法';
 location2language[location_enum.hongkong] = location2language[
   location_enum.guangzhou
@@ -99,7 +100,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       {
         accelerator: 999,
         config: {
-          buttonType: event_marks.get(event_hooks.week_end)
+          buttonType: event_marks.check(event_hooks.week_end)
             ? 'danger'
             : 'warning',
           width: 6,
@@ -170,7 +171,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       {
         accelerator: 205,
         config: {
-          buttonType: event_marks.get(event_hooks.foreign_travel)
+          buttonType: event_marks.check(event_hooks.foreign_travel)
             ? 'danger'
             : 'warning',
           disabled:
@@ -219,7 +220,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       },
       {
         accelerator: 403,
-        config: { width: 6 },
+        config: { disabled: !sys_check_awake(0), width: 6 },
         content: '持有物品',
         type: 'button',
       },
@@ -291,7 +292,10 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       sys_change_attr_and_print(0, '精力', -celebration_cost);
       sys_change_attr_and_print(chara_id, '精力', -50);
       era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.celebration, {});
+      if (!(await sys_get_random_event(event_hooks.celebration, chara_id)())) {
+        era.drawLine();
+        await sys_call_daily_event(chara_id, event_hooks.celebration, {});
+      }
       break;
     case 401:
       await print_exp_page();

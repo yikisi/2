@@ -1,3 +1,8 @@
+/**
+ * @file 春乌拉拉 - 日常
+ *
+ * @author 99
+ */
 const era = require('#/era-electron');
 
 const {
@@ -733,22 +738,25 @@ handlers[event_hooks.office_game] = async () => {
     });
   }
   if (love >= 75) {
-    talk_arr.push(async () => {
-      await urara.say_and_wait([
-        '打游戏要集中注意力哦……嘿！哈哈～',
-        callname,
-        '、',
-        callname,
-        '～好痒！乌拉拉知道错了～',
-      ]);
-      await era.printAndWait([
-        '面对一直用挠痒痒等盘外招进行骚扰的 ',
-        urara.get_colored_name(),
-        '，',
-        me.get_colored_name(),
-        ' 最终选择放下手柄和担当笑着滚成了一团。',
-      ]);
-    });
+    talk_arr.push(() =>
+      urara
+        .say_and_wait([
+          '打游戏要集中注意力哦……嘿！哈哈～',
+          callname,
+          '、',
+          callname,
+          '～好痒！乌拉拉知道错了～',
+        ])
+        .then(() =>
+          era.printAndWait([
+            '面对一直用挠痒痒等盘外招进行骚扰的 ',
+            urara.get_colored_name(),
+            '，',
+            me.get_colored_name(),
+            ' 最终选择放下手柄和担当笑着滚成了一团。',
+          ]),
+        ),
+    );
   }
   if (love === 100) {
     talk_arr.push(async () => {
@@ -783,59 +791,67 @@ handlers[event_hooks.load_talk] = async () => {
     if (era.get('relation:52:0') > 150 && new UraraEduMarks().loop < 2) {
       if (love >= 75) {
         talk_arr.push(
-          urara.say_and_wait([
-            callname,
-            '，下次再见时，请多抱抱',
-            pregnant > 1 ? '孩子们' : '这个孩子',
-            '吧！',
-          ]),
-          urara.say_and_wait(
-            '没关系的，乌拉拉会安慰好大家的，如果下次能再见的话，再一起——',
-          ),
+          () =>
+            urara.say_and_wait([
+              callname,
+              '，下次再见时，请多抱抱',
+              pregnant > 1 ? '孩子们' : '这个孩子',
+              '吧！',
+            ]),
+          () =>
+            urara.say_and_wait(
+              '没关系的，乌拉拉会安慰好大家的，如果下次能再见的话，再一起——',
+            ),
         );
       } else {
         talk_arr.push(
-          urara.say_and_wait([
-            '看来 ',
-            callname,
-            ' 和乌拉拉，都没能做好准备呢……对不起……',
-          ]),
-          urara.say_and_wait([
-            callname,
-            '，乌拉拉想留下',
-            pregnant > 1 ? '孩子们' : '这个孩子',
-            '，或者下次还能再见的话——',
-          ]),
+          () =>
+            urara.say_and_wait([
+              '看来 ',
+              callname,
+              ' 和乌拉拉，都没能做好准备呢……对不起……',
+            ]),
+          () =>
+            urara.say_and_wait([
+              callname,
+              '，乌拉拉想留下',
+              pregnant > 1 ? '孩子们' : '这个孩子',
+              '，或者下次还能再见的话——',
+            ]),
         );
       }
     } else if (love >= 75) {
       talk_arr.push(
-        urara.say_and_wait([
-          '我们还能见面对吧？',
-          pregnant > 1 ? '孩子们' : '这个孩子',
-          '也能……对不起，但是我们还能——',
-        ]),
-        urara.say_and_wait([
-          '不要抛弃',
-          pregnant > 1 ? '孩子们' : '这个孩子',
-          '！求你了，',
-          callname,
-          '！答应乌拉拉，至少让我们下次——',
-        ]),
+        () =>
+          urara.say_and_wait([
+            '我们还能见面对吧？',
+            pregnant > 1 ? '孩子们' : '这个孩子',
+            '也能……对不起，但是我们还能——',
+          ]),
+        () =>
+          urara.say_and_wait([
+            '不要抛弃',
+            pregnant > 1 ? '孩子们' : '这个孩子',
+            '！求你了，',
+            callname,
+            '！答应乌拉拉，至少让我们下次——',
+          ]),
       );
     } else {
       talk_arr.push(
-        urara.say_and_wait([
-          callname,
-          ' 对',
-          pregnant > 1 ? '孩子们' : '这个孩子',
-          '是什么样的感觉呢？乌拉拉还不想……',
-        ]),
-        urara.say_and_wait([
-          '只是被抛弃的话乌拉拉一个人也可以，但是',
-          pregnant > 1 ? '孩子们' : '这个孩子',
-          '也再也不见的话——',
-        ]),
+        () =>
+          urara.say_and_wait([
+            callname,
+            ' 对',
+            pregnant > 1 ? '孩子们' : '这个孩子',
+            '是什么样的感觉呢？乌拉拉还不想……',
+          ]),
+        () =>
+          urara.say_and_wait([
+            '只是被抛弃的话乌拉拉一个人也可以，但是',
+            pregnant > 1 ? '孩子们' : '这个孩子',
+            '也再也不见的话——',
+          ]),
       );
     }
     await get_random_entry(talk_arr)();
@@ -846,54 +862,62 @@ handlers[event_hooks.load_talk] = async () => {
     if (era.get('relation:52:0') > 150 && new UraraEduMarks().loop < 2) {
       if (love >= 75) {
         talk_arr.push(
-          urara.say_and_wait([
-            '乌拉拉还不想离开呢，所以 ',
-            callname,
-            '，下次也可以和乌拉拉在一起吗……',
-          ]),
-          urara.say_and_wait([
-            callname,
-            '，还能相遇的话，不管发生什么，一定可以再次喜欢上彼此吧——',
-          ]),
+          () =>
+            urara.say_and_wait([
+              '乌拉拉还不想离开呢，所以 ',
+              callname,
+              '，下次也可以和乌拉拉在一起吗……',
+            ]),
+          () =>
+            urara.say_and_wait([
+              callname,
+              '，还能相遇的话，不管发生什么，一定可以再次喜欢上彼此吧——',
+            ]),
         );
       } else {
         talk_arr.push(
-          urara.say_and_wait([
-            '不用担心我哦？乌拉拉愿意相信 ',
-            callname,
-            ' 的选择！所以——',
-          ]),
-          urara.say_and_wait([
-            '下次还能在一起的话，也能和 ',
-            callname,
-            ' 做上舒服的事就好了——',
-          ]),
+          () =>
+            urara.say_and_wait([
+              '不用担心我哦？乌拉拉愿意相信 ',
+              callname,
+              ' 的选择！所以——',
+            ]),
+          () =>
+            urara.say_and_wait([
+              '下次还能在一起的话，也能和 ',
+              callname,
+              ' 做上舒服的事就好了——',
+            ]),
         );
       }
     } else if (love >= 75) {
       talk_arr.push(
-        urara.say_and_wait([
-          callname,
-          ' 不是在抛弃乌拉拉对吧……对不起，不管发生什么，乌拉拉都不怪 ',
-          callname,
-          '……',
-        ]),
-        urara.say_and_wait(
-          '还是厌倦了，或者乌拉拉又做错了什么？对不起，乌拉拉还是……对不起……',
-        ),
+        () =>
+          urara.say_and_wait([
+            callname,
+            ' 不是在抛弃乌拉拉对吧……对不起，不管发生什么，乌拉拉都不怪 ',
+            callname,
+            '……',
+          ]),
+        () =>
+          urara.say_and_wait(
+            '还是厌倦了，或者乌拉拉又做错了什么？对不起，乌拉拉还是……对不起……',
+          ),
       );
     } else {
       talk_arr.push(
-        urara.say_and_wait([
-          callname,
-          ' 再见到上一个乌拉拉的时候，可以……对她好一点吗？',
-        ]),
-        urara.say_and_wait([
-          callname,
-          '，下次的话，还能和 ',
-          callname,
-          ' 一起……对不起，没什么……',
-        ]),
+        () =>
+          urara.say_and_wait([
+            callname,
+            ' 再见到上一个乌拉拉的时候，可以……对她好一点吗？',
+          ]),
+        () =>
+          urara.say_and_wait([
+            callname,
+            '，下次的话，还能和 ',
+            callname,
+            ' 一起……对不起，没什么……',
+          ]),
       );
     }
     await get_random_entry(talk_arr)();
@@ -911,11 +935,10 @@ handlers[
   event_hooks.week_start
 ] = require('#/event/daily/daily-events-52/week-start');
 
-/**
- * 春乌拉拉 - 日常，id=52
- *
- * @author 99
- */
+handlers[
+  event_hooks.basement_end
+] = require('#/event/daily/daily-events-52/basement-end');
+
 module.exports = {
   /**
    * @param {HookArg} stage_id

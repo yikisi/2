@@ -1,6 +1,11 @@
+/**
+ * @file 日常地文
+ *
+ * @author 雞雞
+ * @author 无名黑奴
+ */
 const era = require('#/era-electron');
 
-const call_check_script = require('#/system/script/sys-call-check');
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
@@ -10,6 +15,9 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_money } = require('#/system/sys-calc-flag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
+const { get_custom_check } = require('#/event/check/check-factory');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
@@ -21,7 +29,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 const { buff_colors, money_color } = require('#/data/color-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
-const check_stages = require('#/data/event/check-stages');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -30,6 +37,7 @@ const { location_name } = require('#/data/locations');
 /** @type {Record<string,function(number,HookArg,*):Promise<boolean|void>>} */
 const handlers = {};
 
+/** @author 雞雞 */
 handlers[event_hooks.select] = (chara_id) => {
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
@@ -119,65 +127,53 @@ handlers[event_hooks.select] = (chara_id) => {
   }
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.good_morning] = (chara_id) => {
+  const buffer = [
+    [' 竖起了大拇指。'],
+    [' 正在专心地阅读着什么。'],
+    [' 正在与同学们愉快地聊天。'],
+    [' 看起来吃撑了，肚子变得圆鼓鼓的。'],
+  ];
+  if (!(era.get('cflag:301:育成回合计时') <= 143 + 10)) {
+    buffer.push([
+      ' 正在接待处向 ',
+      sys_get_colored_callname(0, 301),
+      ' 查询着什么。',
+    ]);
+  }
   era.print([
     get_chara_talk(chara_id).get_colored_name(),
-    ...get_random_entry([
-      [' 竖起了大拇指。'],
-      [' 正在专心地阅读着什么。'],
-      [' 正在与同学们愉快地聊天。'],
-      [' 看起来吃撑了，肚子变得圆鼓鼓的。'],
-      [' 正在接待处向 ', sys_get_colored_callname(0, 301), ' 查询着什么。'],
-    ]),
+    ...get_random_entry(buffer),
   ]);
 };
 
+/**
+ * @author 雞雞
+ * @author 无名黑奴
+ */
 handlers[event_hooks.good_night] = async (chara_id, hook) => {
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0),
     awake = 2 * sys_check_awake(chara_id) + sys_check_awake(0);
   if (awake === 3) {
-    const check = call_check_script(chara_id, check_stages.want_make_love);
+    const check = get_custom_check(chara_id).is_want_make_love();
     if (check) {
-      era.print([
-        '繁忙的一天结束，',
-        me.get_colored_name(),
-        ' 把 ',
-        chara.get_colored_name(),
-        ' 送到学生宿舍门口，',
-        chara.get_colored_name(),
-        ' 扭扭捏捏地提出了一起睡觉的邀请……',
-      ]);
-      era.printMultiColumns(
-        ['答应', '拒绝'].map((e, i) => {
-          return {
-            accelerator: i * 100,
-            config: { align: 'center', width: 12 },
-            content: e,
-            type: 'button',
-          };
-        }),
-      );
-      if (await era.input()) {
-        if (check === 2) {
-          await era.printAndWait([
-            '哗，那 ',
-            chara.get_colored_name(),
-            ' 脸色一变，挟着 ',
+      if (
+        await select_yes_or_no(
+          [
+            '繁忙的一天结束，',
             me.get_colored_name(),
-            ` 强行向外走，定是要迫${chara.sex}的 `,
-            sys_get_colored_callname(chara_id, 0),
-            ' 跪地做星努力呀！',
-          ]);
-          hook.arg = 2;
-        } else {
-          await era.printAndWait([
+            ' 把 ',
             chara.get_colored_name(),
-            ' 失落地转身向学生宿舍走去……',
-          ]);
-          hook.arg = 0;
-        }
-      } else {
+            ' 送到学生宿舍门口，',
+            chara.get_colored_name(),
+            ' 扭扭捏捏地提出了一起睡觉的邀请……',
+          ],
+          '答应',
+          '拒绝',
+        )
+      ) {
         hook.arg = 1;
         await era.printAndWait([
           '在其他人温暖的目光中，脸色绯红的 ',
@@ -186,6 +182,23 @@ handlers[event_hooks.good_night] = async (chara_id, hook) => {
           me.get_colored_name(),
           ` 的手向${location_name[era.get('flag:当前位置')]}走去……`,
         ]);
+      } else if (check === 2) {
+        await era.printAndWait([
+          '哗，那 ',
+          chara.get_colored_name(),
+          ' 脸色一变，挟着 ',
+          me.get_colored_name(),
+          ` 强行向外走，定是要迫${chara.sex}的 `,
+          sys_get_colored_callname(chara_id, 0),
+          ' 跪地做星努力呀！',
+        ]);
+        hook.arg = 2;
+      } else {
+        await era.printAndWait([
+          chara.get_colored_name(),
+          ' 失落地转身向学生宿舍走去……',
+        ]);
+        hook.arg = 0;
       }
     } else {
       era.print([
@@ -214,6 +227,10 @@ handlers[event_hooks.good_night] = async (chara_id, hook) => {
   }
 };
 
+/**
+ * @author 雞雞
+ * @author 无名黑奴
+ */
 handlers[event_hooks.talk] = async (chara_id) => {
   const chara = get_chara_talk(chara_id);
   let talk_arr, father_id;
@@ -323,31 +340,43 @@ handlers[event_hooks.talk] = async (chara_id) => {
   }
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.office_gift] = async (chara_id) => {
   await era.printAndWait([
     get_chara_talk(chara_id).get_colored_name(),
-    ' 收到了你的礼物，感到十分的高兴。',
+    ' 收到了 ',
+    get_chara_talk(0).get_colored_name(),
+    ' 的礼物，感到十分的高兴。',
   ]);
 };
 
-handlers[event_hooks.office_cook] = (chara_id) =>
-  era.printAndWait([
-    get_chara_talk(0).get_colored_name(),
+/** @author 雞雞 */
+handlers[event_hooks.office_cook] = async (chara_id) => {
+  const me = get_chara_talk(0);
+  await era.printAndWait([
+    me.get_colored_name(),
     ' 与 ',
     get_chara_talk(chara_id).get_colored_name(),
-    ' 在训练员室里一起做饭，你们决定今天来点健康有机的胡萝卜。',
+    ' 在训练员室里一起做饭，',
+    me.get_couple_title(),
+    ' 决定今天来点健康有机的胡萝卜。',
   ]);
+};
 
+/** @author 雞雞 */
 handlers[event_hooks.office_study] = async (chara_id) => {
   const chara = get_chara_talk(chara_id);
   await era.printAndWait([
     get_chara_talk(0).get_colored_name(),
     ' 在训练员室里指导 ',
     chara.get_colored_name(),
-    ` 学习，成功指导${chara.sex}解开了不会的题目。`,
+    ' 学习，成功指导',
+    chara.sex,
+    '解开了不会的题目。',
   ]);
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.office_rest] = (chara_id) =>
   era.printAndWait([
     get_chara_talk(0).get_colored_name(),
@@ -356,6 +385,7 @@ handlers[event_hooks.office_rest] = (chara_id) =>
     ' 在训练员室里一起休息，二人脑子放空着度过了一段时间。',
   ]);
 
+/** @author 雞雞 */
 handlers[event_hooks.office_prepare] = async (chara_id) => {
   await era.printAndWait([
     get_chara_talk(0).get_colored_name(),
@@ -365,6 +395,7 @@ handlers[event_hooks.office_prepare] = async (chara_id) => {
   ]);
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.office_game] = (chara_id) =>
   era.printAndWait([
     get_chara_talk(0).get_colored_name(),
@@ -375,6 +406,11 @@ handlers[event_hooks.office_game] = (chara_id) =>
 
 const money_list = [0, 1500, 5000, 10000];
 
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ */
 handlers[event_hooks.borrow_money] = async (chara_id) => {
   const billing = sys_get_billings()[0];
   era.printInColRows(
@@ -418,41 +454,26 @@ handlers[event_hooks.borrow_money] = async (chara_id) => {
       const repay = Math.ceil(
         (amount * (1 + 0.0125 * (1 - love_buff) * time)) / time,
       );
-      era.printInColRows(
-        {
-          columns: [
+      if (
+        await select_yes_or_no(
+          [
+            '借款 ',
+            { content: amount.toLocaleString(), color: money_color },
+            ' 马币，此后 ',
+            { content: time.toLocaleString(), color: buff_colors[3] },
+            ' 周内每周还款 ',
+            { content: repay.toLocaleString(), color: money_color },
+            ' 马币，共 ',
             {
-              content: [
-                '借款 ',
-                { content: amount.toLocaleString(), color: money_color },
-                ' 马币，此后 ',
-                { content: time.toLocaleString(), color: buff_colors[3] },
-                ' 周内每周还款 ',
-                { content: repay.toLocaleString(), color: money_color },
-                ' 马币，共 ',
-                {
-                  content: (repay * time).toLocaleString(),
-                  color: money_color,
-                },
-                ' 马币，接受吗？',
-              ],
-              type: 'text',
+              content: (repay * time).toLocaleString(),
+              color: money_color,
             },
+            ' 马币，接受吗？',
           ],
-        },
-        {
-          columns: ['算了', '好吧'].map((e, i) => {
-            return {
-              accelerator: i * 100,
-              config: { align: 'center', width: 12 },
-              content: e,
-              type: 'button',
-            };
-          }),
-        },
-      );
-      const ret = await era.input();
-      if (ret) {
+          '算了',
+          '好吧',
+        )
+      ) {
         sys_change_money(amount);
         billing.creditor = chara_id;
         billing.repay = -repay;
@@ -471,6 +492,7 @@ handlers[event_hooks.borrow_money] = async (chara_id) => {
   }
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.school_atrium] = async (chara_id, hook) => {
   const me = get_chara_talk(0),
     chara = get_chara_talk(chara_id);
@@ -498,6 +520,7 @@ handlers[event_hooks.school_atrium] = async (chara_id, hook) => {
   );
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.school_rooftop] = (chara_id) =>
   era.printAndWait([
     get_chara_talk(0).get_colored_name(),
@@ -506,19 +529,20 @@ handlers[event_hooks.school_rooftop] = (chara_id) =>
     ' 一起来到天台吃便当，你们互相交换了便当盒里的美食。',
   ]);
 
+/** @author 雞雞 */
 handlers[event_hooks.out_river] = async (chara_id, hook) => {
-  const temp = await select_action_around_river();
-  hook.arg = !!temp;
+  hook.arg = (await select_action_around_river()) > 0;
   await era.printAndWait([
     get_chara_talk(0).get_colored_name(),
     ' 与 ',
     get_chara_talk(chara_id).get_colored_name(),
-    !temp
-      ? ' 一起来到河边钓鱼，希望能钓到大丰收。'
-      : ' 一起来到河边散步，今天也是好心情呢。',
+    hook.arg
+      ? ' 一起来到河边散步，今天也是好心情呢。'
+      : ' 一起来到河边钓鱼，希望能钓到大丰收。',
   ]);
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.out_shopping] = async (chara_id, hook) => {
   const temp = await select_action_in_shopping_street();
   hook.arg = temp <= 1;
@@ -544,6 +568,7 @@ handlers[event_hooks.out_shopping] = async (chara_id, hook) => {
   ]);
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.out_church] = async (chara_id) => {
   await era.printAndWait([
     get_chara_talk(0).get_colored_name(),
@@ -566,6 +591,7 @@ handlers[event_hooks.out_church] = async (chara_id) => {
   }
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.out_station] = async (chara_id, hook) => {
   hook.arg = await select_action_in_station(chara_id);
   let talk;
@@ -588,6 +614,8 @@ handlers[event_hooks.out_station] = async (chara_id, hook) => {
 };
 
 /**
+ * @author 雞雞
+ *
  * @param {number} chara_id
  * @param _
  * @param {{stage:number}} extra_flag
@@ -734,6 +762,7 @@ handlers[
   event_hooks.celebration
 ] = require('#/event/daily/common-lines/common-celebration');
 
+/** @author 雞雞 */
 handlers[event_hooks.slave_end] = async (chara_id) => {
   const me = get_chara_talk(0);
   await era.printAndWait(
@@ -783,6 +812,7 @@ handlers[event_hooks.slave_end] = async (chara_id) => {
   );
 };
 
+/** @author 雞雞 */
 handlers[event_hooks.basement_end] = async (chara_id) => {
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
@@ -841,7 +871,11 @@ handlers[event_hooks.basement_end] = async (chara_id) => {
   );
 };
 
-/** @param {number} chara_id */
+/**
+ * @author 无名黑奴
+ *
+ * @param {number} chara_id
+ */
 handlers[event_hooks.load_talk] = async (chara_id) => {
   let temp;
   switch (era.get(`cflag:${chara_id}:成长阶段`)) {
@@ -862,11 +896,6 @@ handlers[event_hooks.load_talk] = async (chara_id) => {
 };
 
 /**
- * 通用日常事件
- *
- * @author 雞雞
- * @author 黑奴队长
- *
  * @param {number} chara_id
  * @param {HookArg} hook
  * @param {*} extra_flag

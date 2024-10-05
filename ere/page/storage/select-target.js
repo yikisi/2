@@ -1,19 +1,19 @@
 const era = require('#/era-electron');
 
+const get_status = require('#/system/chara/sys-get-status');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { attr_background_colors } = require('#/data/const.json');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_status } = require('#/data/info-generator');
 
 /**
- * @param {number} item
+ * @param {number|string} item
  * @param {function(number):boolean} filter_cb
  * @returns {Promise<number|undefined>}
  */
 async function select_target_in_storage(item, filter_cb) {
   const buffer = [],
-    item_name = era.get(`itemname:${item}`),
+    item_name = typeof item === 'string' ? item : era.get(`itemname:${item}`),
     team_list = sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
       filter_cb || (() => true),
     );
@@ -41,7 +41,7 @@ async function select_target_in_storage(item, filter_cb) {
             height: 22,
             width: 4,
           },
-          inContent: `${stamina}/${max_stamina}`,
+          inContent: `${Math.floor(stamina)}/${max_stamina}`,
           percentage: (stamina * 100) / max_stamina,
           type: 'progress',
         },
@@ -52,7 +52,7 @@ async function select_target_in_storage(item, filter_cb) {
             height: 22,
             width: 4,
           },
-          inContent: `${time}/${max_time}`,
+          inContent: `${Math.floor(time)}/${max_time}`,
           type: 'progress',
           percentage: (time * 100) / max_time,
         },

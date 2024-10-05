@@ -9,6 +9,7 @@ const {
   sys_check_awake,
   sys_check_train_enabled,
 } = require('#/system/sys-calc-chara-param');
+const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const goto_sex = require('#/page/components/goto-sex');
 const select_target = require('#/page/components/select-target');
@@ -80,7 +81,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       {
         accelerator: 999,
         config: {
-          buttonType: event_marks.get(event_hooks.week_end)
+          buttonType: event_marks.check(event_hooks.week_end)
             ? 'danger'
             : 'warning',
           width: 6,
@@ -130,7 +131,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       },
       {
         accelerator: 403,
-        config: { width: 6 },
+        config: { disabled: !sys_check_awake(0), width: 6 },
         content: '持有物品',
         type: 'button',
       },
@@ -183,7 +184,10 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       sys_change_attr_and_print(0, '精力', -celebration_cost);
       sys_change_attr_and_print(chara_id, '精力', -50);
       era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.celebration, {});
+      if (!(await sys_get_random_event(event_hooks.celebration, chara_id)())) {
+        era.drawLine();
+        await sys_call_daily_event(chara_id, event_hooks.celebration, {});
+      }
       era.set('flag:当前位置', location_enum.beach);
       break;
     case 401:
@@ -201,6 +205,9 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       break;
     case 901:
       await print_load_page();
+      break;
+    case 990:
+      era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
       break;
     case 999:
       flags.week_start = true;

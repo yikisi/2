@@ -1,25 +1,28 @@
+/**
+ * @file 卓芙 - 招募
+ *
+ * @author 梦露
+ */
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+} = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
+const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
-const print_event_name = require('#/event/snippets/print-event-name');
 
-/**
- * 金星公园 - 招募
- *
- * @author 梦露
- */
-module.exports = {
-  override: true,
-  /** @param {number} stage */
-  async run(stage) {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const chairman = get_chara_talk(302),
       me = get_chara_talk(0),
       vp = get_chara_talk(205);
@@ -28,7 +31,7 @@ module.exports = {
         `某个休息日，${me.name} 同时收到了 ${sys_get_callname(
           0,
           302,
-        )} 与巴黎特雷森学院官方的联络邮件。`,
+        )} 与巴黎特雷森学园官方的联络邮件。`,
       );
       await era.printAndWait('虽然内容不尽相同，但都表达了一个意思：');
       if (era.get('flag:当前声望') >= 1000) {
@@ -37,7 +40,7 @@ module.exports = {
         );
       }
       await era.printAndWait(
-        `日前巴黎特雷森学院的院长就已经和 ${sys_get_callname(
+        `日前巴黎特雷森学园的院长就已经和 ${sys_get_callname(
           0,
           302,
         )} 有过一番洽谈，其结果是`,
@@ -45,11 +48,13 @@ module.exports = {
       await era.printAndWait(
         `不久后将会挑选一批优秀的法国幼驹前来中央交流，${me.name} 被选为责任人负责双方的接洽工作。`,
       );
-      await era.printAndWait(
-        `理事长的青梅竹马——${sys_get_callname(0, 343)} 会全程给予 ${
-          me.name
-        } 协助。`,
-      );
+      await era.printAndWait([
+        '理事长的青梅竹马——',
+        sys_get_colored_callname(0, 343),
+        ' 会全程给予 ',
+        me.get_colored_name(),
+        ' 协助。',
+      ]);
 
       await era.printAndWait('要动身前往巴黎吗？');
       era.printButton('是', 1);
@@ -81,7 +86,7 @@ module.exports = {
       );
       era.println();
       await era.printAndWait(
-        `终于，${me.name} 看到了巴黎特雷森学院接车点，几个遮阳伞并排立着。`,
+        `终于，${me.name} 看到了巴黎特雷森学园接车点，几个遮阳伞并排立着。`,
       );
       await era.printAndWait('过了约莫两个半小时，车子终于停了下来。');
       await era.printAndWait('到地方了，见面地点是校长室。');
@@ -142,7 +147,7 @@ module.exports = {
         `${sys_get_callname(
           0,
           302,
-        )}，虽说是看似普通的学院理事长，但考虑到这样的组织与才能还有眼力，绝对是独一无二的存在。`,
+        )}，虽说是看似普通的学园理事长，但考虑到这样的组织与才能还有眼力，绝对是独一无二的存在。`,
       );
       await era.printAndWait(
         `${me.name} 深深地叹了口气。和刚才安宁的感觉不同，用通俗易懂的力量，发出不愉快的那种。`,
@@ -500,5 +505,5 @@ module.exports = {
       era.set('flag:当前互动角色', 205);
     }
     return false;
-  },
+  }
 };

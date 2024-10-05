@@ -1,3 +1,8 @@
+/**
+ * @file 北部玄驹 - 育成
+ *
+ * @author 小黑
+ */
 const era = require('#/era-electron');
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
@@ -14,6 +19,7 @@ const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_enum, attr_names, fumble_result } = require('#/data/train-const');
 
+/** @type {Record<string,function(HookArg,*,EventObject):Promise>} */
 const handlers = {};
 
 handlers[
@@ -34,7 +40,7 @@ handlers[event_hooks.crazy_fan_end] = async () => {
       `以往活泼的${kita.get_teen_sex_title()}此时面色苍白，眼袋肉眼可见的红肿起来，似乎是哭过的样子。`,
     );
     await era.printAndWait(
-      `因为比赛失败的原因，愤怒的粉丝为此冲击了校园，希望把 ${me.name} 这个“罪魁祸首”处刑掉。`,
+      `因为比赛失败的原因，愤怒的粉丝为此冲击了校园，希望把 ${me.name} 这个「罪魁祸首」处刑掉。`,
     );
     await era.printAndWait(
       '虽然最后这件事莫名平静了下来，但是小北已经不能够继续在特雷森学园训练了。',
@@ -222,137 +228,129 @@ handlers[event_hooks.back_school] = async (_, __, event_object) => {
     add_event(event_hooks.back_school, event_object);
     return;
   }
-  const event_marks = new KitaEduMarks(),
+  const event_arg = event_object?.arg,
     kita = get_chara_talk(68),
     me = get_chara_talk(0);
-  if (event_marks.kitasan_touch === 1) {
-    event_marks.kitasan_touch++;
-    await print_event_name('紧急开店·小北按摩！', kita);
-
-    await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}！欢迎光临小北按摩店！`,
-    );
-    await era.printAndWait(
-      `推开训练员室的门，${me.name} 看到穿着和服的 ${kita.name} 正跪在门后，而身后的训练员室的桌子则被铺上了一块白布。`,
-    );
-    await era.printAndWait(
-      `这是在干什么啊……${
-        me.name
-      } 目瞪口呆的看着今天应该没有训练任务的${kita.get_teen_sex_title()}。`,
-    );
-    await kita.say_and_wait(
-      `嘿嘿嘿～为了感谢训练员${me.get_adult_sex_title()}对人家的照顾，也是您最近身体总是嘎吱嘎吱的响。`,
-    );
-    await kita.say_and_wait(
-      `所以……唔，是呢，今天的小北是为您提供临时按摩服务，让训练员${me.get_adult_sex_title()}放松身体的按摩${
-        kita.sex_code - 1 ? '女将' : '大将'
-      }小北哦！`,
-    );
-    await era.printAndWait(
-      '说着，小北将额头垂下紧紧贴地，三指并拢在额前，露出自己光滑而娇嫩的后背。',
-    );
-    await era.printAndWait(
-      `${
-        me.name
-      } 这时才注意到小北穿的是一件近似肚兜的露背服，只要附身就能看到${kita.get_uma_sex_title()}背后外溢的春光。`,
-    );
-    era.printButton('「不不不这再怎么说也不对劲吧……」', 1);
-    era.printButton('「那么就麻烦小北了」', 2);
-    const ret = await era.input();
-    if (ret === 1) {
-      await era.printAndWait(
-        `${me.name} 后腿几步想要逃离，可是嘎嘣的一声脆响和脊椎的感觉让 ${me.name} 痛苦的垂下腰。`,
-      );
-      await era.printAndWait(
-        `……不行了，只能接受小北的服务了……不然就算小北不放过 ${me.name}，这老腰也不会放过的……`,
-      );
-      await era.printAndWait(`${me.name} 重新转过身，踉跄着向小北走去。`);
-      era.drawLine();
-      await era.printAndWait(
-        '尽管身体各处传来了嘎吱嘎吱的声响，但除了偶尔的疼痛之外只有舒服的感觉。',
-      );
-      await era.printAndWait(
-        `疲惫的身体在小北的手指下变得轻松起来，那温柔而有力的按摩仿佛将身体都治愈了，不愧是小北……带着这样的感想，昏昏欲睡的 ${me.name} 就这么睡了过去。`,
-      );
-    } else {
-      await era.printAndWait(
-        `${kita.name} 对着训练员露出温婉的微笑，仿佛母狗般四足跪爬着引导 ${me.name} 脱下衣服，趴在拼接而成的桌子上。`,
-      );
-      await era.printAndWait(
-        `这孩子到底是和谁学的啊……？${
-          me.name
-        } 露出疑惑的表情，感受着${kita.get_teen_sex_title()}起身骑跨在 ${
-          me.name
-        } 后背上。`,
-      );
-      await era.printAndWait(
-        `在等待了半分钟后，${kita.name} 纤细有力的手指在 ${me.name} 背后摁压起紧绷的地方。`,
-      );
-      await kita.say_and_wait(
-        `训练员${me.get_adult_sex_title()}的身体，好紧绷呢……您和${kita.get_uma_sex_title()}不一样，身体要好好的修养哦。`,
-      );
-      await era.printAndWait(
-        '尽管身体各处传来了嘎吱嘎吱的声响，但除了偶尔的疼痛之外只有舒服的感觉。',
-      );
-      await era.printAndWait(
-        `疲惫的身体在小北的手指下变得轻松起来，那温柔而有力的按摩仿佛将身体都治愈了，不愧是小北……带着这样的感想，昏昏欲睡的 ${me.name} 就这么睡了过去。`,
-      );
-    }
-    era.println();
-    sys_like_chara(68, 0, 100) && (await era.waitAnyKey());
+  if (event_arg !== 'kitasan_touch') {
+    return;
   }
+  await print_event_name('紧急开店 · 小北按摩！', kita);
+  await kita.say_and_wait(
+    `训练员${me.get_adult_sex_title()}！欢迎光临小北按摩店！`,
+  );
+  await era.printAndWait(
+    `推开训练员室的门，${me.name} 看到穿着和服的 ${kita.name} 正跪在门后，而身后的训练员室的桌子则被铺上了一块白布。`,
+  );
+  await era.printAndWait(
+    `这是在干什么啊……${
+      me.name
+    } 目瞪口呆的看着今天应该没有训练任务的${kita.get_teen_sex_title()}。`,
+  );
+  await kita.say_and_wait(
+    `嘿嘿嘿～为了感谢训练员${me.get_adult_sex_title()}对人家的照顾，也是您最近身体总是嘎吱嘎吱的响。`,
+  );
+  await kita.say_and_wait(
+    `所以……唔，是呢，今天的小北是为您提供临时按摩服务，让训练员${me.get_adult_sex_title()}放松身体的按摩${
+      kita.sex_code - 1 ? '女将' : '大将'
+    }小北哦！`,
+  );
+  await era.printAndWait(
+    '说着，小北将额头垂下紧紧贴地，三指并拢在额前，露出自己光滑而娇嫩的后背。',
+  );
+  await era.printAndWait(
+    `${
+      me.name
+    } 这时才注意到小北穿的是一件近似肚兜的露背服，只要附身就能看到${kita.get_uma_sex_title()}背后外溢的春光。`,
+  );
+  era.printButton('「不不不这再怎么说也不对劲吧……」', 1);
+  era.printButton('「那么就麻烦小北了」', 2);
+  const ret = await era.input();
+  if (ret === 1) {
+    await era.printAndWait(
+      `${me.name} 后腿几步想要逃离，可是嘎嘣的一声脆响和脊椎的感觉让 ${me.name} 痛苦的垂下腰。`,
+    );
+    await era.printAndWait(
+      `……不行了，只能接受小北的服务了……不然就算小北不放过 ${me.name}，这老腰也不会放过的……`,
+    );
+    await era.printAndWait(`${me.name} 重新转过身，踉跄着向小北走去。`);
+    era.drawLine();
+    await era.printAndWait(
+      '尽管身体各处传来了嘎吱嘎吱的声响，但除了偶尔的疼痛之外只有舒服的感觉。',
+    );
+    await era.printAndWait(
+      `疲惫的身体在小北的手指下变得轻松起来，那温柔而有力的按摩仿佛将身体都治愈了，不愧是小北……带着这样的感想，昏昏欲睡的 ${me.name} 就这么睡了过去。`,
+    );
+  } else {
+    await era.printAndWait(
+      `${kita.name} 对着训练员露出温婉的微笑，仿佛母狗般四足跪爬着引导 ${me.name} 脱下衣服，趴在拼接而成的桌子上。`,
+    );
+    await era.printAndWait(
+      `这孩子到底是和谁学的啊……？${
+        me.name
+      } 露出疑惑的表情，感受着${kita.get_teen_sex_title()}起身骑跨在 ${
+        me.name
+      } 后背上。`,
+    );
+    await era.printAndWait(
+      `在等待了半分钟后，${kita.name} 纤细有力的手指在 ${me.name} 背后摁压起紧绷的地方。`,
+    );
+    await kita.say_and_wait(
+      `训练员${me.get_adult_sex_title()}的身体，好紧绷呢……您和${kita.get_uma_sex_title()}不一样，身体要好好的修养哦。`,
+    );
+    await era.printAndWait(
+      '尽管身体各处传来了嘎吱嘎吱的声响，但除了偶尔的疼痛之外只有舒服的感觉。',
+    );
+    await era.printAndWait(
+      `疲惫的身体在小北的手指下变得轻松起来，那温柔而有力的按摩仿佛将身体都治愈了，不愧是小北……带着这样的感想，昏昏欲睡的 ${me.name} 就这么睡了过去。`,
+    );
+  }
+  era.println();
+  sys_like_chara(68, 0, 100) && (await era.waitAnyKey());
 };
 
-/**
- * @param {HookArg} hook
- * @param __
- * @param {EventObject} event_object
- */
 handlers[event_hooks.school_atrium] = async (hook, __, event_object) => {
   if (era.get('flag:当前互动角色') !== 68) {
     add_event(hook.hook, event_object);
     return;
   }
   const kita = get_chara_talk(68),
-    me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:68:育成回合计时');
-  if (edu_weeks === 42) {
-    await print_event_name('悠闲的午后时光', kita);
-    await era.printAndWait(
-      `在没有课也没有训练计划的某个下午，${me.name} 在食堂旁的侧门处找到了小北。`,
-    );
-    await kita.say_and_wait(`啊～训练员${me.get_adult_sex_title()}中午好。`);
-    await era.printAndWait(
-      `小北搬着两箱罐装汽水，尾巴左摇右晃的向这边打了个招呼。`,
-    );
-    await era.printAndWait(
-      `${
-        me.name
-      } 看到在${kita.get_teen_sex_title()}背后，食堂原本关闭的侧门正被木棍撑住，而七八箱汽水在旁边堆成了小山……这是在干什么啊。`,
-    );
-    await kita.say_and_wait(
-      '啊，这个是食堂小卖部的阿姨搬汽水扭到了腰，所以我想帮她把箱子都搬进去。',
-    );
-    await kita.say_and_wait(
-      `诶嘿嘿……被训练员${me.get_adult_sex_title()}看到了其他的样子，有点害羞呢……`,
-    );
-    await era.printAndWait(
-      `看着 ${me.name} 惊讶的样子，${kita.name}害羞的嘿嘿笑着用箱子挡住了脸。`,
-    );
-    await kita.say_and_wait(
-      `先不和训练员${me.get_adult_sex_title()}说了，我接着搬箱子了哦。`,
-    );
-    await era.printAndWait(
-      `这么说着，小北将几个箱子叠在一块，稳稳当当地顺着侧门走了进去。`,
-    );
-    await era.printAndWait(
-      `${me.name} 看着小北娇小而结实的背影，心里若有所思。`,
-    );
-    era.println();
-    get_attr_and_print_in_event(68, [0, 0, 0, 0, 5], 0) &&
-      (await era.waitAnyKey());
-    return true;
+    me = get_chara_talk(0);
+  if (event_object?.arg !== 42) {
+    return false;
   }
+  await print_event_name('悠闲的午后时光', kita);
+  await era.printAndWait(
+    `在没有课也没有训练计划的某个下午，${me.name} 在食堂旁的侧门处找到了小北。`,
+  );
+  await kita.say_and_wait(`啊～训练员${me.get_adult_sex_title()}中午好。`);
+  await era.printAndWait(
+    `小北搬着两箱罐装汽水，尾巴左摇右晃的向这边打了个招呼。`,
+  );
+  await era.printAndWait(
+    `${
+      me.name
+    } 看到在${kita.get_teen_sex_title()}背后，食堂原本关闭的侧门正被木棍撑住，而七八箱汽水在旁边堆成了小山……这是在干什么啊。`,
+  );
+  await kita.say_and_wait(
+    '啊，这个是食堂小卖部的阿姨搬汽水扭到了腰，所以我想帮她把箱子都搬进去。',
+  );
+  await kita.say_and_wait(
+    `诶嘿嘿……被训练员${me.get_adult_sex_title()}看到了其他的样子，有点害羞呢……`,
+  );
+  await era.printAndWait(
+    `看着 ${me.name} 惊讶的样子，${kita.name}害羞的嘿嘿笑着用箱子挡住了脸。`,
+  );
+  await kita.say_and_wait(
+    `先不和训练员${me.get_adult_sex_title()}说了，我接着搬箱子了哦。`,
+  );
+  await era.printAndWait(
+    `这么说着，小北将几个箱子叠在一块，稳稳当当地顺着侧门走了进去。`,
+  );
+  await era.printAndWait(`${me.name} 看着小北娇小而结实的背影，心里若有所思。`);
+  era.println();
+  get_attr_and_print_in_event(68, [0, 0, 0, 0, 5], 0) &&
+    (await era.waitAnyKey());
+  return true;
 };
 
 handlers[event_hooks.out_shopping] = async (_, __, event_object) => {
@@ -361,29 +359,29 @@ handlers[event_hooks.out_shopping] = async (_, __, event_object) => {
     return;
   }
   const kita = get_chara_talk(68),
-    me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:68:育成回合计时');
-  if (edu_weeks === 95 + 14) {
-    await print_event_name('粉丝感谢祭！', kita);
-    await era.printAndWait(
-      `为了感谢粉丝们的支持，${me.name} 和小北在商店街的餐厅里举报了感谢服务。`,
-    );
-    await era.printAndWait(
-      `站在用箱子堆叠起来的桌子后，小北握着麦克风，用欢快的嗓音唱着特雷森音头。`,
-    );
-    await kita.say_and_wait(`晃来晃去、飘来飘去、翩翩起舞花浴衣～`);
-    await era.printAndWait(
-      `摇晃着手欢快的唱着音头，${me.name} 坐在台后默默观赏着，这除 ${me.name} 之外没有任何人能够看到的身影。`,
-    );
-    await era.printAndWait(
-      `在小北帮助过的大家的支持下，这次感谢祭就这么落入了尾声。`,
-    );
-    era.println();
-    get_attr_and_print_in_event(68, [0, 0, 0, 0, 10], 10) &&
-      (await era.waitAnyKey());
-    era.set('flag:68:节日事件标记', 0);
-    return true;
+    me = get_chara_talk(0);
+  if (event_object?.arg !== 95 + 14) {
+    return;
   }
+  await print_event_name('粉丝感谢祭！', kita);
+  await era.printAndWait(
+    `为了感谢粉丝们的支持，${me.name} 和小北在商店街的餐厅里举报了感谢服务。`,
+  );
+  await era.printAndWait(
+    `站在用箱子堆叠起来的桌子后，小北握着麦克风，用欢快的嗓音唱着特雷森音头。`,
+  );
+  await kita.say_and_wait(`晃来晃去、飘来飘去、翩翩起舞花浴衣～`);
+  await era.printAndWait(
+    `摇晃着手欢快的唱着音头，${me.name} 坐在台后默默观赏着，这除 ${me.name} 之外没有任何人能够看到的身影。`,
+  );
+  await era.printAndWait(
+    `在小北帮助过的大家的支持下，这次感谢祭就这么落入了尾声。`,
+  );
+  era.println();
+  get_attr_and_print_in_event(68, [0, 0, 0, 0, 10], 10) &&
+    (await era.waitAnyKey());
+  era.set('cflag:68:节日事件标记', 0);
+  return true;
 };
 
 /**
@@ -392,6 +390,9 @@ handlers[event_hooks.out_shopping] = async (_, __, event_object) => {
  * @param {EventObject} event_object
  */
 handlers[event_hooks.out_church] = async (_, __, event_object) => {
+  if (event_object?.arg === 47 + 1) {
+    return;
+  }
   if (era.get('flag:当前互动角色') !== 68) {
     add_event(event_hooks.out_church, event_object);
     return;
@@ -469,9 +470,8 @@ handlers[event_hooks.out_start] = async function (_, __, event_object) {
   }
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:68:育成回合计时'),
-    event_marks = new KitaEduMarks();
-  if (edu_weeks === 95 + 1) {
+    event_arg = event_object?.arg;
+  if (event_arg === 95 + 1) {
     await print_event_name('新年拜访', kita);
     await era.printAndWait('众弟子「师父，新年快乐！！！」');
     await era.printAndWait(
@@ -502,8 +502,7 @@ handlers[event_hooks.out_start] = async function (_, __, event_object) {
       35,
       JSON.parse('{"体力":300}'),
     ) && (await era.waitAnyKey());
-  } else if (event_marks.hot_spring_event === 1) {
-    event_marks.hot_spring_event++;
+  } else if (event_arg === 'hot_spring_event') {
     await print_event_name('温泉旅行', kita);
     await era.printAndWait(`${me.name} 在训练员室里整理着文件……`);
     await kita.say_and_wait(
@@ -576,16 +575,13 @@ handlers[event_hooks.out_start] = async function (_, __, event_object) {
     );
     era.println();
     sys_like_chara(68, 0, 50) && (await era.waitAnyKey());
+  } else {
+    return false;
   }
   return true;
 };
 
 /**
- *
- * 北部玄驹的育成事件
- *
- * @author 小黑
- *
  * @param {HookArg} hook
  * @param {*} extra_flag
  * @param {EventObject} event_object

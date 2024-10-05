@@ -1,3 +1,8 @@
+/**
+ * @file 北部玄驹 - 爱慕
+ *
+ * @author 小黑
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -21,11 +26,6 @@ const { part_enum } = require('#/data/ero/part-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 
-/**
- * 北部玄驹 - 爱慕
- *
- * @author 小黑
- */
 module.exports = async (hook, _, event_object) => {
   const love = era.get('love:68'),
     kita = get_chara_talk(68),
@@ -184,9 +184,6 @@ module.exports = async (hook, _, event_object) => {
     await era.printAndWait(
       `少女的脖颈被训练员用力掐住，让 ${kita.name} 只能仰起后背，如同死鱼般痉挛着前后摇晃起屁股，迎来今天的第一次高潮。`,
     );
-    await era.printAndWait(
-      `或许今天这样就可以了吧，${me.name} 抱着喘息着的少女将其平放在床上，思索着沾满少女味道的自己该怎么向骏川小姐解释。`,
-    );
     begin_and_init_ero(0, 68);
     const part = kita.sex_code - 1 ? '阴道' : '阴茎';
     era.set(`palam:68:${part}快感`, era.get(`tcvar:68:${part}快感上限`));
@@ -196,8 +193,11 @@ module.exports = async (hook, _, event_object) => {
       new EroParticipant(68, part_enum.body),
       false,
     );
-    await print_ero_page(68);
+    await print_ero_page(68, true);
     await end_ero_and_show_result(true);
+    await era.printAndWait(
+      `或许今天这样就可以了吧，${me.name} 抱着喘息着的少女将其平放在床上，思索着沾满少女味道的自己该怎么向骏川小姐解释。`,
+    );
     era.println();
     await add_juel_out_of_train(68, '顺从', 100);
     await era.waitAnyKey();

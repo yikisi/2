@@ -17,9 +17,9 @@ const rotation_enum = {
   straight: 0,
 };
 const rotation_names = {};
-rotation_names[rotation_enum.left] = '左';
-rotation_names[rotation_enum.right] = '右';
-rotation_names[rotation_enum.straight] = '直';
+rotation_names[rotation_enum.left] = '逆时针';
+rotation_names[rotation_enum.right] = '顺时针';
+rotation_names[rotation_enum.straight] = '直线';
 
 //年龄限制：两岁/三岁/三岁以上/四岁以上
 const limit_enum = {
@@ -32,6 +32,9 @@ const limit_enum = {
   // 100
   post4: 0b100,
 };
+
+const weather_enum = { sunny: 0, cloudy: 1, rain: 2, snow: 3 };
+const weather_names = ['晴', '阴', '雨', '雪'];
 
 const mess_enum = { well: 0, semi: 1, heavy: 2, bad: 3 };
 
@@ -70,10 +73,16 @@ const track_enum = {
   chantilly: 33001,
   // 圣克劳德
   st_cloud: 33002,
-  // 红山军
+  // 红山
   bashang: 86000,
   // 沙田（香港）
   shatin: 85200,
+  // 丘吉尔园
+  kentucky: 55500,
+  // 宾利高
+  baltimore: 55501,
+  // 贝蒙园
+  new_york: 55501,
 };
 Object.keys(track_enum).forEach((e, i) => (track_enum[e] = i));
 
@@ -97,6 +106,9 @@ track_names[track_enum.st_cloud] = '圣克劳德';
 track_names[track_enum.chantilly] = '尚蒂伊';
 track_names[track_enum.bashang] = '从化';
 track_names[track_enum.shatin] = '沙田';
+track_names[track_enum.kentucky] = '丘吉尔园';
+track_names[track_enum.baltimore] = '宾利高';
+track_names[track_enum.new_york] = '贝蒙园';
 
 /**
  * G1比赛赏金 现实对游戏赏金折算 1w日元:1马币
@@ -123,17 +135,29 @@ class RaceSlope {
 }
 
 class RaceLane {
+  /** @type {number} */
+  corner;
   /**
    * @param {number} start
    * @param {number} end
-   * @param {boolean} isCurve
+   * @param {number} index
+   * @param {boolean} is_curve
    * @param {boolean} isLast
    */
-  constructor(start, end, isCurve, isLast) {
+  constructor(start, end, index, is_curve, isLast) {
     this.start = start;
     this.end = end;
-    this.is_curve = isCurve;
+    this.index = index;
+    this.is_curve = is_curve;
     this.is_last = isLast;
+  }
+
+  get_abbr() {
+    return `${this.is_last ? '终' : this.index}${this.is_curve ? '弯' : '直'}`;
+  }
+
+  get_name() {
+    return `${this.is_last ? '最终' : `第 ${this.index} `}${this.is_curve ? '弯道' : '直线'}`;
   }
 }
 
@@ -147,7 +171,10 @@ module.exports = class RaceInfo {
   static rotation_names = rotation_names;
   static track_enum = track_enum;
   static track_names = track_names;
+  static weather_enum = weather_enum;
+  static weather_names = weather_names;
   static mess_enum = mess_enum;
+  static mess_names = ['良', '稍重', '重', '不良'];
   static limit_enum = limit_enum;
   static prize_ratios = [1, 0.5, 0.3, 0.2, 0.1];
   static relation_rewards = [50, 100, 200, 400];
@@ -184,7 +211,7 @@ module.exports = class RaceInfo {
   span;
   /**
    * 距离是否是400的倍数
-   * @type {boolean}
+   * @type {number}
    */
   span400;
   /**
@@ -203,10 +230,10 @@ module.exports = class RaceInfo {
    */
   gates;
   /**
-   * 传奇人数
-   * @type {number}
+   * 史实冠军
+   * @type {number[]}
    */
-  legend_count;
+  legends;
   /**
    * 育成时间限制（年）
    * @type {number}
@@ -242,7 +269,22 @@ module.exports = class RaceInfo {
    */
   phases;
   // 场地状态
-  mess = mess_enum.well;
+  mess;
+  // 天气
+  weather;
+  // 是否有传奇对手
+  has_legend;
+  // 额外属性
+  extra_attr = 0;
+  loc_mind_diff = {
+    // 逃, 大逃
+    nige_speed_up_other: [0, 0],
+    nige_over_take: [0, 0],
+    nige_speed_up_nige: [0, 0],
+    // 先、差、追
+    other_lower: [0, 0, 0],
+    other_upper: [0, 0, 0],
+  };
 
   /**
    * @param {string} name_en
@@ -254,7 +296,7 @@ module.exports = class RaceInfo {
    * @param {number} distance
    * @param {number} rotation
    * @param {number} gates
-   * @param {number} legend_count
+   * @param {number[]} legends
    * @param {number} limit
    * @param {number} date
    * @param {number} prize
@@ -270,7 +312,7 @@ module.exports = class RaceInfo {
     distance,
     rotation,
     gates,
-    legend_count,
+    legends,
     limit,
     date,
     prize,
@@ -282,11 +324,11 @@ module.exports = class RaceInfo {
     this.track = track;
     this.ground = ground;
     this.span = span;
-    this.span400 = !(span % 400);
+    this.span400 = Number(!(span % 400));
     this.distance = distance;
     this.rotation = rotation;
     this.gates = gates;
-    this.legend_count = legend_count;
+    this.legends = legends;
     this.limit = limit;
     this.date = date;
     this.prize =

@@ -10,8 +10,6 @@ const hooks = {
   celebration: 0,
   // 粉丝袭击结局
   crazy_fan_end: 0,
-  // 殿堂
-  edu_end: 0,
   // 声望不足结局时角色的对话
   end_talk: 0,
   // 远征 - 调养
@@ -54,8 +52,6 @@ const hooks = {
   out_start: 0,
   // 前往车站
   out_station: 0,
-  // 比赛
-  race: 0,
   // 比赛结束
   race_end: 0,
   // 比赛开始
@@ -66,10 +62,22 @@ const hooks = {
   recruit_end: 0,
   // 招募开始
   recruit_start: 0,
+  // 注册比赛
+  register_race: 0,
   // 前往中庭
   school_atrium: 0,
+  // 前往理事长办公室
+  school_chairman: 0,
+  // 前往保健室
+  school_clinic: 0,
+  // 前往三女神像
+  school_god: 0,
   // 前往天台
   school_rooftop: 0,
+  // 前往训练员办公室
+  school_trainer_office: 0,
+  // 前往访客接待室
+  school_visitors: 0,
   // 选择互动角色
   select: 0,
   // 金钱奴隶结局
@@ -88,5 +96,19 @@ const hooks = {
   week_start: 0,
 };
 Object.keys(hooks).forEach((k, i) => (hooks[k] = i));
+
+hooks.no_yandere_punish = {};
+hooks.no_yandere_punish[hooks.basement_end] = 1;
+hooks.no_yandere_punish[hooks.crazy_fan_end] = 1;
+hooks.no_yandere_punish[hooks.borrow_money] = 1;
+hooks.no_yandere_punish[hooks.good_morning] = 1;
+hooks.no_yandere_punish[hooks.growth] = 1;
+hooks.no_yandere_punish[hooks.load_talk] = 1;
+hooks.no_yandere_punish[hooks.register_race] = 1;
+hooks.no_yandere_punish[hooks.select] = 1;
+hooks.no_yandere_punish[hooks.slave_end] = 1;
+hooks.no_yandere_punish[hooks.train] = 1;
+hooks.no_yandere_punish[hooks.train_fail] = 1;
+hooks.no_yandere_punish[hooks.train_success] = 1;
 
 module.exports = hooks;

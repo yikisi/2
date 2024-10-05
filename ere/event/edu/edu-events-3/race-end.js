@@ -97,7 +97,7 @@ module.exports = async (_, extra_flag) => {
     await era.printAndWait(
       `手指在${teio.get_uma_sex_title()}最重要的腿部上摩挲，所有信息都从触觉中反馈而来——训练员的技术。果不其然，可以确认一个事实。被 ${
         me.name
-      } 的担当称作是“帝王舞步”的特殊跑法，尽管能基于${
+      } 的担当称作是「帝王舞步」的特殊跑法，尽管能基于${
         teio.sex
       }特殊的腿部构造最大限度发挥实力，但机遇与风险并存，${
         teio.sex

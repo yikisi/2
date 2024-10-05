@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_like_chara,
+} = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -16,14 +19,13 @@ const { location_enum } = require('#/data/locations');
  * @param _
  * @param {EventObject} event_object
  */
-module.exports = async function (hook, _, event_object) {
+module.exports = async (hook, _, event_object) => {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:68:育成回合计时'),
+    event_arg = event_object?.arg,
     event_marks = new KitaEduMarks();
   let wait_flag = false;
-  if (event_marks.beginning === 1) {
-    event_marks.beginning++;
+  if (event_arg === 'beginning') {
     await print_event_name(
       `不过是平平无常的${kita.get_teen_sex_title()}`,
       kita,
@@ -109,7 +111,7 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [5, 0, 5, 0, 0], 0) || wait_flag;
-  } else if (edu_weeks === 38) {
+  } else if (event_arg === 38) {
     const nature = get_chara_talk(60);
     await print_event_name('优秀素质 登场', kita);
     await era.printAndWait('十月后半的某一天上午。');
@@ -159,8 +161,7 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [0, 0, 0, 10, 0], 0) || wait_flag;
-  } else if (edu_weeks === 47 + 10 && event_marks.classical_valentine === 1) {
-    event_marks.classical_valentine++;
+  } else if (event_arg === 47 + 10) {
     await print_event_name('没有恶意的小小恶作剧 ', kita);
     await era.printAndWait(
       `白色情人节，${me.name} 一大早便在草场跑道上等着${kita.name}。`,
@@ -207,7 +208,7 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(`那就不需要太在意了呢～`);
     era.println();
     wait_flag = sys_like_chara(68, 0, 5, true, 1) || wait_flag;
-  } else if (edu_weeks === 47 + 7) {
+  } else if (event_arg === 47 + 7) {
     await print_event_name('家人是很重要的', kita);
     await era.printAndWait(
       `某一天上午，${me.name} 同 ${kita.name} 一起待在训练员室里。`,
@@ -241,7 +242,7 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [0, 0, 5, 0, 0], 0) || wait_flag;
-  } else if (edu_weeks === 47 + 11) {
+  } else if (event_arg === 47 + 11) {
     await print_event_name('稳健的支持与皋月阴云', kita);
     const teio = get_chara_talk(3);
     await kita.say_and_wait(
@@ -284,7 +285,7 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [3, 3, 3, 3, 3], 20) || wait_flag;
-  } else if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
+  } else if (event_arg === 47 + 29 || event_arg === 95 + 29) {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:68:位置') !== era.get('cflag:0:位置')
@@ -294,7 +295,7 @@ module.exports = async function (hook, _, event_object) {
     }
     await print_event_name('夏季合宿', kita);
     await era.printAndWait(
-      `对于年轻的小赛${kita.get_uma_sex_title()}们来说，中央学院每年八月的夏季合宿，是${
+      `对于年轻的小赛${kita.get_uma_sex_title()}们来说，中央学园每年八月的夏季合宿，是${
         kita.sex
       }们仅次于几次假期最为期待的日子。`,
     );
@@ -325,7 +326,7 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [0, 0, 10, 10, 0], 0) || wait_flag;
-  } else if (edu_weeks === 47 + 48) {
+  } else if (event_arg === 47 + 48) {
     await print_event_name('圣诞夜的晚餐', kita);
     await era.printAndWait(
       `圣诞节的特雷森，就如同过去的十几年那样一如既往的吵闹。`,
@@ -348,15 +349,21 @@ module.exports = async function (hook, _, event_object) {
     await era.printAndWait(
       `抱着一大盘食物坐在空出的椅子上，${kita.name} 露出不好意思的表情，将可乐递给了 ${me.name}。`,
     );
-    await kita.say_and_wait(
-      `${me.name} 喝着可乐环顾四周，零星也能看到几个同样在大吃特吃的孩子，看来对年轻人来说这么点上一大盘食物也不是什么奇怪的事……`,
-    );
-    await era.printAndWait(
-      `${me.name} 将视线收回，${kita.name}正在 ${me.name} 面前小口小口地吃着薯条，明明只是普通的庶民食物却吃得不亦乐乎。`,
-    );
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 喝着可乐环顾四周，零星也能看到几个同样在大吃特吃的孩子，看来对年轻人来说这么点上一大盘食物也不是什么奇怪的事……',
+    ]);
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 将视线收回，',
+      kita.get_colored_name(),
+      ' 正在 ',
+      me.get_colored_name(),
+      ' 面前小口小口地吃着薯条，明明只是普通的庶民食物却吃得不亦乐乎。',
+    ]);
     era.println();
-    era.printButton(`「感觉小北是很适合吃薯条的孩子呢。」`, 1);
-    era.printButton(`「感觉小北是很适合吃汉堡的孩子呢。」`, 2);
+    era.printButton('「感觉小北是很适合吃薯条的孩子呢。」', 1);
+    era.printButton('「感觉小北是很适合吃汉堡的孩子呢。」', 2);
     const ret = await era.input();
     if (ret === 1) {
       await kita.say_and_wait(`诶？很适合吃薯条是指？`);
@@ -418,14 +425,14 @@ module.exports = async function (hook, _, event_object) {
         `嘟着嘴咔嚓咔嚓地薯条，${kita.name} 仿佛是威胁一样地说着话。`,
       );
       era.println();
-      era.printButton(`对不起是我不好……请小北大人饶了我吧……`, 1);
+      era.printButton(`「对不起是我不好……请小北大人饶了我吧……」`, 1);
       await era.input();
       await era.printAndWait(`哼～`);
       await era.printAndWait(
         `上下抖动着耳朵的 ${kita.name} 侧过身去，闭着眼摸索着薯条塞进嘴里。`,
       );
       await kita.say_and_wait(
-        `唔唔唔……居然这么说人家，小北我真是对训练员${me.get_adult_sex_title()}太失望了。`,
+        `唔唔唔……居然这么说人家，小北我真是对 ${sys_get_callname(68, 0)} 太失望了。`,
       );
       await era.printAndWait(
         `所言极是……不如说这么瞎说了还没发大火已经是小北宽容大量了……`,
@@ -447,8 +454,8 @@ module.exports = async function (hook, _, event_object) {
       era.println();
       wait_flag = sys_like_chara(68, 0, 10, true, 2) || wait_flag;
     }
-    era.set('flag:68:节日事件标记', 0);
-  } else if (edu_weeks === 95 + 1) {
+    era.set('cflag:68:节日事件标记', 0);
+  } else if (event_arg === 95 + 1) {
     await print_event_name('小北的熟人？', kita);
     await era.printAndWait('一年的时光转瞬即逝，很快就到了新年伊始。');
     await era.printAndWait(
@@ -515,8 +522,8 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag =
       get_attr_and_print_in_event(68, [10, 10, 10, 10, 10], 0) || wait_flag;
-    era.set('flag:68:节日事件标记', 0);
-  } else if (edu_weeks === 95 + 6) {
+    era.set('cflag:68:节日事件标记', 0);
+  } else if (event_arg === 95 + 6) {
     await print_event_name('略微有些破碎的甜酒味', kita);
     await era.printAndWait(
       `在资深年的情人节这天，和 ${kita.name} 相约在训练员室里见面。`,
@@ -560,7 +567,7 @@ module.exports = async function (hook, _, event_object) {
     era.println();
     wait_flag = sys_like_chara(68, 0, 100) || wait_flag;
     event_marks.senior_valentine++;
-    era.set('flag:68:节日事件标记', 0);
+    era.set('cflag:68:节日事件标记', 0);
   } else {
     throw new Error('unsupported!');
   }

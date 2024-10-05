@@ -6,20 +6,26 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const event_hooks = require('#/data/event/event-hooks');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+/**
+ * @param {HookArg} hook
+ * @param extra_flag
+ * @param {EventObject} event_object
+ */
 module.exports = async (hook, extra_flag, event_object) => {
   if (era.get('flag:当前互动角色') !== 60) {
     add_event(event_hooks.school_atrium, event_object);
     return;
   }
   const chara_talk = get_chara_talk(60),
-    edu_weeks = era.get('cflag:60:育成回合计时'),
+    event_arg = event_object?.arg,
     me = get_chara_talk(0);
-  if (edu_weeks === 47 + 33) {
+  if (event_arg === 47 + 33) {
     await print_event_name('下定决心努力前行！', chara_talk);
 
     await era.printAndWait(
@@ -77,7 +83,7 @@ module.exports = async (hook, extra_flag, event_object) => {
     await era.input();
     await era.printAndWait(`${me.name}本来是要鼓励自己的，却不小心脱口而出。`);
     await chara_talk.say_and_wait(
-      '噗，呵呵呵……啊哈哈哈！讨厌啦！别一副“完蛋了”的表情嘛。',
+      '噗，呵呵呵……啊哈哈哈！讨厌啦！别一副『完蛋了』的表情嘛。',
     );
     await chara_talk.say_and_wait('呼……嗯，你说得对，加油吧。');
     await chara_talk.say_and_wait('既然没办法逃避，就只能勇往直前。');
@@ -99,17 +105,17 @@ module.exports = async (hook, extra_flag, event_object) => {
     await era.input();
     await chara_talk.say_and_wait('啊哈哈哈哈！');
     era.println();
+    get_skills_and_print_in_event(60, [200512]);
     get_attr_and_print_in_event(60, [20, 20, 0, 0, 0], 0);
     await era.waitAnyKey();
-    // TODO 末脚+2
-  } else if (edu_weeks === 47 + 42) {
+  } else if (event_arg === 47 + 42) {
     await print_event_name('王座的背后', chara_talk);
 
     const teio_talk = get_chara_talk(3);
     const maya_talk = get_chara_talk(24);
     const luna_talk = get_chara_talk(17);
     await era.printAndWait(
-      `在 ${me.name} 和优秀素质为了准备下个目标“有马纪念”，持续进行训练的某一天……`,
+      `在 ${me.name} 和优秀素质为了准备下个目标「有马纪念」，持续进行训练的某一天……`,
     );
     await chara_talk.say_and_wait(
       `仰卧推举结束～${era.get('callname:60:0')}，我可以稍微休息一下吗？`,
@@ -200,7 +206,7 @@ module.exports = async (hook, extra_flag, event_object) => {
     );
     await chara_talk.say_and_wait('不过……其实我错了。帝王跟我都是一样的。');
     await chara_talk.say_and_wait(
-      `${teio_talk.sex}也可能再怎么努力都跑不赢、也会受伤。……而且${teio_talk.sex}也知道其中的痛苦之处。`,
+      `${teio_talk.sex}也可能再怎么努力都跑不赢、也会受伤……而且${teio_talk.sex}也知道其中的痛苦之处。`,
     );
     await chara_talk.say_and_wait(
       `${teio_talk.sex}跟我不一样的是……遇到打击之后的反应。能靠着自己重新站起来，就是${teio_talk.sex}的坚强之处。`,
@@ -231,7 +237,7 @@ module.exports = async (hook, extra_flag, event_object) => {
     era.println();
     get_attr_and_print_in_event(60, [0, 0, 0, 0, 5], 0);
     await era.waitAnyKey();
-  } else if (edu_weeks === 95 + 42) {
+  } else if (event_arg === 95 + 42) {
     await print_event_name('闪闪发光', chara_talk);
 
     await era.printAndWait(
@@ -253,7 +259,7 @@ module.exports = async (hook, extra_flag, event_object) => {
       `话要说回天皇赏（秋）结束后，${me.name} 和优秀素质在回程的路途上碰到了东海帝王，`,
     );
     await era.printAndWait(
-      `并得知了${chara_talk.sex}也要出战今年的有马纪念。不过在氛围的推动下，优秀素质做出了”我一定会在有马纪念上战胜你“的宣言——`,
+      `并得知了${chara_talk.sex}也要出战今年的有马纪念。不过在氛围的推动下，优秀素质做出了「我一定会在有马纪念上战胜你」的宣言——`,
     );
     await chara_talk.say_and_wait(
       '我这路人也太得意忘形了吧！！真是受不了……笨蛋────！！',
@@ -309,7 +315,7 @@ module.exports = async (hook, extra_flag, event_object) => {
       '要是在这里输了，感觉就连过去的我都会一起被否定。',
     );
     await chara_talk.say_and_wait(
-      '“我还没认真起来”、“我还有成长空间”、“这不是我的所有实力”……',
+      '『我还没认真起来』、『我还有成长空间』、『这不是我的所有实力』……',
     );
     await chara_talk.say_and_wait(
       '我之前一直像这样拼命保护着自己。但是那种借口……现在已经不管用了啊。',
@@ -318,7 +324,7 @@ module.exports = async (hook, extra_flag, event_object) => {
     await era.input();
     await chara_talk.say_and_wait('……！是啊，我很认真！');
     await chara_talk.say_and_wait(
-      '我都这么认真了，要是输了……又会变回“表现很好，但不是最棒”的自己。',
+      '我都这么认真了，要是输了……又会变回『表现很好，但不是最棒』的自己。',
     );
     await chara_talk.say_and_wait('我好害怕。真的好害怕……');
     era.printButton('「别担心，你不会输的」', 1);
@@ -348,7 +354,7 @@ module.exports = async (hook, extra_flag, event_object) => {
     await chara_talk.say_and_wait(
       `${temp
         .slice(0, 4)
-        .map((e) => `“${race_infos[e].name_zh}”`)
+        .map((e) => `『${race_infos[e].name_zh}』`)
         .join('、')}……除此之外还有好多……`,
     );
     await era.printAndWait('……你为我做了这么多啊……');
@@ -366,7 +372,7 @@ module.exports = async (hook, extra_flag, event_object) => {
     );
     await chara_talk.say_and_wait('……嗯，我明白你的意思了。虽然我早就想到了……');
     await chara_talk.say_and_wait('唉……嗯，抱歉啊。我可能有点太慌张了。');
-    await chara_talk.say_and_wait('大声宣布“我会赢”，真的是件很可怕的事呢。');
+    await chara_talk.say_and_wait('大声宣布『我会赢』，真的是件很可怕的事呢。');
     await chara_talk.say_and_wait(
       `……原来帝王${chara_talk.sex}一直都在对抗这种压力啊。`,
     );
