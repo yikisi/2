@@ -246,7 +246,7 @@ module.exports = (handlers) => {
       message.push(
         async () => {
           await defender.say_and_wait([
-            '嗯～……不用那么心急的啦，我的胸部一直都在这里的哦～',
+            '嗯～不用那么心急的啦，我的胸部一直都在这里的哦～',
           ]);
           await attacker.print_and_wait([
             '抚摸着眼前正吸吮自己乳首的二人，',

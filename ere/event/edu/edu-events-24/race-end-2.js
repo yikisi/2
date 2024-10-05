@@ -251,7 +251,7 @@ module.exports = (handlers) => {
       1,
     );
     await era.input();
-    await maya.say_and_wait('嗯，必须再比一次才行。……虽然我不清楚为什么。');
+    await maya.say_and_wait('嗯，必须再比一次才行……虽然我不清楚为什么。');
     await maya.say_and_wait('而且这次有种预感，觉得要赶快才行……');
     await amazon.say_and_wait([
       '唔！',
@@ -338,7 +338,7 @@ module.exports = (handlers) => {
       race_infos[race_enum.arim_kin].get_colored_name(),
       '』为目标，同时也要能和',
       maya.sex,
-      '所期望的强敌较量。……以此方向去安排G1的参赛计划的话──',
+      '所期望的强敌较量……以此方向去安排G1的参赛计划的话──',
     ]);
     await era.printAndWait(
       '夏季跟秋季至少各得要参加一场比赛。看是接近有马的中长距离，或是中距离的G1。',

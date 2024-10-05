@@ -370,7 +370,7 @@ module.exports = async (hook, extra_flag) => {
       '像镀上去的金色、边角歪掉的感觉之类的。这些……不全都很像我吗？',
     );
     await nice_nature.say_and_wait(
-      '总觉得有股亲近感？之类的。……嗯，所以呢，也就是说。──谢谢你。',
+      '总觉得有股亲近感？之类的……嗯，所以呢，也就是说。──谢谢你。',
     );
     await nice_nature.say_and_wait('……我很期待下一个奖杯你会做得更～好喔。');
     era.printButton('「下一个！？」', 1);
@@ -411,7 +411,7 @@ module.exports = async (hook, extra_flag) => {
       `当作庆祝素质${nice_nature.sex_code === 1 ? '' : '小姐'}的活跃表现♪`,
     );
     await nice_nature.say_and_wait(
-      `……虽然现在可以这样得意忘形，但要是帝王也有参赛，可能就不会这么顺利了。……帝王${nice_nature.sex}没事吧？不知道伤势有多严重。`,
+      `……虽然现在可以这样得意忘形，但要是帝王也有参赛，可能就不会这么顺利了……帝王${nice_nature.sex}没事吧？不知道伤势有多严重。`,
     );
     era.printButton(`「${nice_nature.sex}一定没问题的」`, 1);
     await era.input();
@@ -567,7 +567,7 @@ module.exports = async (hook, extra_flag) => {
       '不能再这样下去了。现在不能光喊着要赢过帝王。',
     );
     await era.printAndWait(
-      `看来借着参加各世代选手互相竞争的『有马纪念』，让${nice_nature.sex}的视野更加宽广了。……这是成长的证明！`,
+      `看来借着参加各世代选手互相竞争的『有马纪念』，让${nice_nature.sex}的视野更加宽广了……这是成长的证明！`,
     );
     await nice_nature.say_and_wait('我得更加了解自己周遭的选手才行……！');
     await sex_with_nice_nature(extra_flag);
@@ -789,7 +789,7 @@ module.exports = async (hook, extra_flag) => {
       '虽然我很常无法回应大家的期待，但你们仍旧很单纯地支持我。',
     );
     await nice_nature.say_and_wait(
-      '托大家的福，今天我才能来到这里。……虽然也经历了不少挫折啦！',
+      '托大家的福，今天我才能来到这里……虽然也经历了不少挫折啦！',
     );
     await nice_nature.say_and_wait('……我可以说句任性的话吗？');
     await nice_nature.say_and_wait('那个……真希望大家以后也能继续支持我呢──');

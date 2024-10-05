@@ -6,30 +6,31 @@
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const check_before_rec = require('#/event/rec/snippets/check-before-rec');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
-const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = {
-  override: true,
-  async run(stage_id) {
-    const chara = new CharaTalk(24);
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
+    const chara = get_chara_talk(24),
+      me = get_chara_talk(0);
     const sex = era.get('cflag:24:性别') - 1 ? '她' : '他';
     let maya_1;
     const event_marks = new EventMarks(0);
-    switch (stage_id) {
+    switch (stage) {
       case event_hooks.recruit:
         if (era.get(`cflag:24:招募状态`) === recruit_flags.no) {
-          if (await check_before_rec(24)) {
+          if (await this.check_before_rec()) {
             return false;
           }
           await era.printAndWait(
-            `今天是为了看清并发掘未来有望的实力赛马娘们的选拔比赛的日子，会遇见怎样的赛马娘呢？${CharaTalk.me.name} 一边兴奋着一边来到了比赛现场——`,
+            `今天是为了看清并发掘未来有望的实力赛马娘们的选拔比赛的日子，会遇见怎样的赛马娘呢？${me.name} 一边兴奋着一边来到了比赛现场——`,
           );
           await chara.say_and_wait(
             '亚达亚达亚达————！Maya也想出场比賽！让我出场嘛！！',
@@ -45,7 +46,7 @@ module.exports = {
           );
           await chara.say_and_wait('哼哼，才不会让你抓到～！……哇啊！？');
           await era.printAndWait(
-            `${CharaTalk.me.name} 撞上了想要乱窜的 ${chara.name}，慌慌张张地接住了${sex}。与少女柔软的身躯亲密接触带给了 ${CharaTalk.me.name} 前所未有的强烈冲击————虽然可能是物理上的。`,
+            `${me.name} 撞上了想要乱窜的 ${chara.name}，慌慌张张地接住了${sex}。与少女柔软的身躯亲密接触带给了 ${me.name} 前所未有的强烈冲击————虽然可能是物理上的。`,
           );
           await chara.say_and_wait('啊哇哇哇，对不起——！没事吧！？」');
           era.printButton('「我可是特雷森的训练员，这点小伤算什么！」', 1); //无意义的玩梗选项
@@ -65,7 +66,7 @@ module.exports = {
               `三倍于人类的速度，三倍于人类的握力，三倍于人类的体重，加起来便远远超过人类的10倍甚至9倍！`,
             );
             await era.printAndWait(
-              `如此强劲，如此霸道的冲击，${CharaTalk.me.name} 又如何抵挡了？又怎么可能抵挡了！`,
+              `如此强劲，如此霸道的冲击，${me.name} 又如何抵挡了？又怎么可能抵挡了！`,
             );
             if (
               era.get(`base:0:耐力`) >
@@ -73,10 +74,10 @@ module.exports = {
             ) {
               //进行一个玩家耐力对重炮力量的检定，过了有额外属性奖励，不影响剧情
               await era.printAndWait(
-                `但 ${CharaTalk.me.name} 就是可以抵挡！因为 ${CharaTalk.me.name} TMD就是这么强！`,
+                `但 ${me.name} 就是可以抵挡！因为 ${me.name} TMD就是这么强！`,
               );
               await era.printAndWait(
-                `如此一个小小的马娘，又怎么能伤到 ${CharaTalk.me.name} 分毫了？`,
+                `如此一个小小的马娘，又怎么能伤到 ${me.name} 分毫了？`,
               );
               era.add(`base:0:力量`, 10);
               era.printButton('「因为保护马娘是我的使命！」', 1);
@@ -85,11 +86,9 @@ module.exports = {
               era.printButton('「所以说，不要停下来啊……」', 1); //bgm小苍兰
               await era.input();
               await era.printAndWait(
-                `${sex}的速度还真是快啊……这是 ${CharaTalk.me.name} 最后的想法`,
+                `${sex}的速度还真是快啊……这是 ${me.name} 最后的想法`,
               );
-              await era.printAndWait(
-                `${CharaTalk.me.name} 的眼前一黑，便失去了意识……`,
-              );
+              await era.printAndWait(`${me.name} 的眼前一黑，便失去了意识……`);
               era.set('cflag:24:随机招募', 0);
               event_marks.add(event_hooks.recruit_start);
               add_event(
@@ -112,13 +111,13 @@ module.exports = {
           if (maya_1 === 1) {
             await era.printAndWait(`成年人的崩溃，往往只是在一瞬间……`);
             await era.printAndWait(
-              `一成不变的枯燥生活，高强度的工作，初来乍到的不安，早就把 ${CharaTalk.me.name} 的精神状态逼到了边缘。`,
+              `一成不变的枯燥生活，高强度的工作，初来乍到的不安，早就把 ${me.name} 的精神状态逼到了边缘。`,
             );
             await era.printAndWait(
-              `而现在工作人员的职场霸凌就是这骆驼上的最后一根稻草，一想到将来自己会像这样每天都被人呼来喝去干各种杂活，沦为清洁工都不如的小角色，最后被一脚踢开，绝望瞬间充满了${CharaTalk.me.name}的内心。`,
+              `而现在工作人员的职场霸凌就是这骆驼上的最后一根稻草，一想到将来自己会像这样每天都被人呼来喝去干各种杂活，沦为清洁工都不如的小角色，最后被一脚踢开，绝望瞬间充满了${me.name}的内心。`,
             );
             await era.printAndWait(
-              `${CharaTalk.me.name} 蜷曲在地上，哭的活像个几十岁的孩子。`,
+              `${me.name} 蜷曲在地上，哭的活像个几十岁的孩子。`,
             );
             await chara.say_and_wait('诶……？');
             await era.printAndWait(
@@ -140,10 +139,10 @@ module.exports = {
             );
             await chara.say_and_wait('好啦，好啦，不要再哭啦……');
             await era.printAndWait(
-              `少女稍显笨拙的将 ${CharaTalk.me.name} 抱进怀中，即使是尚未发育完全的胸部，也足够温暖和柔软。`,
+              `少女稍显笨拙的将 ${me.name} 抱进怀中，即使是尚未发育完全的胸部，也足够温暖和柔软。`,
             );
             await era.printAndWait(
-              `在马娘身上所散发出的淡淡香气包围下，${CharaTalk.me.name} 感到异常的安心。`,
+              `在马娘身上所散发出的淡淡香气包围下，${me.name} 感到异常的安心。`,
             );
             era.printButton('「妈妈……」', 1);
             await era.input();
@@ -151,7 +150,7 @@ module.exports = {
               '妈妈在这里哦～好孩子～好孩子……嘿嘿，总感觉这样有种变成大人的感觉呢～',
             );
             await era.printAndWait(
-              `在 ${chara.name} 的安慰下，${CharaTalk.me.name} 的精神终于得到了放松，意识也渐渐涣散……`,
+              `在 ${chara.name} 的安慰下，${me.name} 的精神终于得到了放松，意识也渐渐涣散……`,
             );
           } else {
             await chara.say_and_wait(
@@ -168,7 +167,7 @@ module.exports = {
               '喂喂一至少和Maya聊聊天嘛！有没有什么有趣的话题？',
             );
             await era.printAndWait(
-              `正当 ${CharaTalk.me.name} 苦恼的时候，${chara.name} 突然看向了比赛场的方向，轻轻地开口了。`,
+              `正当 ${me.name} 苦恼的时候，${chara.name} 突然看向了比赛场的方向，轻轻地开口了。`,
             );
             await chara.say_and_wait('嗯？现在第二位的那个人——');
             await era.printAndWait(
@@ -202,7 +201,7 @@ module.exports = {
               `虽然还不能将其完美地转化成言语，但是已经完全解读了比赛的展开的 ${chara.name}。`,
             );
             await era.printAndWait(
-              `${sex}展现给${CharaTalk.me.name}的才能的一角，深深留在了${CharaTalk.me.name}的心里……`,
+              `${sex}展现给${me.name}的才能的一角，深深留在了${me.name}的心里……`,
             );
           }
           era.set('cflag:24:随机招募', 0);
@@ -273,7 +272,7 @@ module.exports = {
                 `我是说所有人都是懒狗，但是有的懒狗就认清了这一点。`,
               );
               await era.printAndWait(
-                `话虽这么说，作为一个训练员，${CharaTalk.me.name} 还是不能放着${sex}不管。`,
+                `话虽这么说，作为一个训练员，${me.name} 还是不能放着${sex}不管。`,
               );
             } else {
               await chara.say_and_wait('哇！吓……吓我一跳。');
@@ -321,7 +320,7 @@ module.exports = {
         break;
       case event_hooks.recruit_start:
         await era.printAndWait(
-          `${chara.name} 给 ${CharaTalk.me.name} 留下了深刻的印象。为了能再一次见到${sex}，${CharaTalk.me.name} 在校内到处寻找着……`,
+          `${chara.name} 给 ${me.name} 留下了深刻的印象。为了能再一次见到${sex}，${me.name} 在校内到处寻找着……`,
         );
         await chara.say_and_wait('诶，奇怪？你，难道说是――');
         await chara.say_and_wait(
@@ -333,18 +332,18 @@ module.exports = {
           '诶，找Maya吗？哇啊……这样有点————有点大人的感觉～！！呀～～～♪',
         );
         await chara.say_and_wait(
-          `但是但是，Maya现在有急事呢。${CharaTalk.me.name} 是想跟你聊聊天，嗯……`,
+          `但是但是，Maya现在有急事呢。${me.name} 是想跟你聊聊天，嗯……`,
         );
         await chara.say_and_wait('啊，对了！你也一起来就好了！');
         await chara.say_and_wait('决定了————！那样的话就，Take Off……————！！');
         await era.printAndWait(
-          `于是 ${CharaTalk.me.name} 就这样被${sex}莫名其妙的拉到了赛场上……`,
+          `于是 ${me.name} 就这样被${sex}莫名其妙的拉到了赛场上……`,
         );
         await chara.say_and_wait(
           '这样啊，在那里也可以咻地——冲出去。Maya，都还不知道……！',
         );
         await chara.say_and_wait(
-          '果然，成熟马娘们的比赛，真令人兴奋不已啊～……！！',
+          '果然，成熟马娘们的比赛，真令人兴奋不已啊～！！',
         );
         await era.printAndWait(
           `${chara.name}，始终两眼放光地盯着一流马娘们激烈角逐的比赛……`,
@@ -364,7 +363,7 @@ module.exports = {
           '所以说啊，Maya也想变成那样！想参加令人兴奋不已的比赛，然后变得闪闪发光！',
         );
         await chara.say_and_wait(
-          '哈～，真好啊。闪耀系列赛……Maya也想快点在那里跑啊～……！',
+          '哈～，真好啊。闪耀系列赛……Maya也想快点在那里跑啊～！',
         );
         await era.printAndWait(
           `教官A「啊！${chara.name} 同学！你怎么又翘掉了训练！」`,
@@ -397,7 +396,7 @@ module.exports = {
           `毕竟比赛是用来发挥训练成果的地方，这点也不是不能理解……`,
         );
         await era.printAndWait(
-          `但 ${CharaTalk.me.name} 的脑海中浮现出 ${chara.name} 渴望着想参加比赛的样子……能不能为${sex}做点什么……？`,
+          `但 ${me.name} 的脑海中浮现出 ${chara.name} 渴望着想参加比赛的样子……能不能为${sex}做点什么……？`,
         );
         event_marks.sub(event_hooks.recruit_start);
         era.set('cflag:24:随机招募', 1);
@@ -414,7 +413,7 @@ module.exports = {
           return false;
         }
         await era.printAndWait(
-          `${CharaTalk.me.name} 想起了还有和 ${chara.name} 的约定。`,
+          `${me.name} 想起了还有和 ${chara.name} 的约定。`,
         ); // 每次前往车站都会触发，除非你选3，真不想招的话为什么要点呢.jpg
         await era.printAndWait(`要去赴约吗？`);
         era.printButton('去吧', 1);
@@ -456,7 +455,7 @@ module.exports = {
             '快快，不赶快点的话一天就要结束了！那我们走咯，Take Off——————！',
           );
           await era.printAndWait(
-            `然后，${CharaTalk.me.name}被 ${chara.name} 以惊人的气势带着在街上到处逛……`,
+            `然后，${me.name}被 ${chara.name} 以惊人的气势带着在街上到处逛……`,
           );
           await chara.say_and_wait(
             '快看快看，那件T恤超级可爱～！啊，那个是果汁摊吗！？有没有卖胡萝卜汁呢——！？',
@@ -466,7 +465,7 @@ module.exports = {
           );
           await chara.say_and_wait('快点快点，不可以发呆哦！要好好跟上Maya哦♪');
           await chara.say_and_wait(
-            '要看哪个呢——！？嗯——，全都很有趣的样子～……呃，啊呀！？',
+            '要看哪个呢——！？嗯——，全都很有趣的样子～呃，啊呀！？',
           );
           await chara.say_and_wait(
             '啊哇哇哇，预、预告片的屏幕上，出现了接吻镜头……！看到了啊～！！呜呜，脸好烫……！',
@@ -478,13 +477,13 @@ module.exports = {
             '冰淇淋，要点几球比较好呢？1球？2球？3球！？就点3球吧！呐，决定了！！',
           );
           await chara.say_and_wait(
-            '点哪个好呢～。草莓的看起来挺好吃……还有香草的～，巧克力曲奇的和～……',
+            '点哪个好呢～。草莓的看起来挺好吃……还有香草的～，巧克力曲奇的和～',
           );
           await chara.say_and_wait(
             '诶，芝士蛋糕味的是期间限定！？……呐呐，果然还是点4球吧～！！',
           );
           await era.printAndWait(
-            `${CharaTalk.me.name}一整天都这样被 ${chara.name} 拉着逛……`,
+            `${me.name}一整天都这样被 ${chara.name} 拉着逛……`,
           );
           await chara.say_and_wait('啊啊～，好高兴啊——！！');
           await chara.say_and_wait(
@@ -520,11 +519,10 @@ module.exports = {
           event_marks.sub(event_hooks.out_station);
           era.set('flag:物色对象', 0);
           era.set(`cflag:24:招募状态`, recruit_flags.yes);
-          era.println();
-          await era.printAndWait(`${chara.name} 加入了队伍！`);
+          await this.recruit_end();
           return true;
         }
     }
     return false;
-  },
+  }
 };

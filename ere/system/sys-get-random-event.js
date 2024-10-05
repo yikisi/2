@@ -3,11 +3,13 @@ const {
   get_chara_event_object,
   get_random_event_object,
 } = require('#/event/queue');
+const { get_custom_rec } = require('#/event/rec/rec-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 
 const cb_dict = {};
-cb_dict[cb_enum.recruit] = require('#/system/script/sys-call-recruit');
+cb_dict[cb_enum.recruit] = (chara_id, stage, extra_flag, event_object) =>
+  get_custom_rec(chara_id, stage, event_object);
 cb_dict[cb_enum.daily] = require('#/system/script/sys-call-daily-script');
 cb_dict[cb_enum.edu] = require('#/system/script/sys-call-edu-script');
 cb_dict[cb_enum.love] = require('#/system/script/sys-call-love-script');
@@ -16,7 +18,7 @@ cb_dict[cb_enum.love] = require('#/system/script/sys-call-love-script');
  * get a random or character's specified event from stage's queue
  * @param {number} stage
  * @param {boolean|number} [random_or_chara_id]
- * @returns {undefined|function(*?):Promise<*>}
+ * @returns {undefined|function(*?):Promise}
  */
 function sys_get_random_event(stage, random_or_chara_id) {
   const event_object = (
@@ -25,8 +27,8 @@ function sys_get_random_event(stage, random_or_chara_id) {
       : get_random_event_object
   )(stage, random_or_chara_id);
   if (event_object && cb_dict[event_object.type]) {
-    return async (extra_flag) =>
-      await cb_dict[event_object.type](
+    return (extra_flag) =>
+      cb_dict[event_object.type](
         event_object.chara_id,
         stage,
         extra_flag,

@@ -6,13 +6,14 @@
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const RubyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-85');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
+const RubyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-85');
 const { yes } = require('#/data/event/recruit-flags');
 const { get_breast_cup } = require('#/data/info-generator');
 
@@ -172,7 +173,7 @@ handlers[event_hooks.recruit] = async () => {
   return true;
 };
 
-handlers[event_hooks.out_start] = async (extra_flag, event_object) => {
+handlers[event_hooks.out_start] = async (event_object) => {
   if (era.get('flag:当前互动角色')) {
     add_event(event_hooks.out_start, event_object);
     return false;
@@ -531,7 +532,7 @@ handlers[event_hooks.out_start] = async (extra_flag, event_object) => {
   return true;
 };
 
-handlers[event_hooks.week_end] = async (extra_flag, event_object) => {
+handlers[event_hooks.week_end] = async (event_object) => {
   const me = get_chara_talk(0),
     ruby = get_chara_talk(85);
   era.print(
@@ -586,7 +587,7 @@ handlers[event_hooks.week_end] = async (extra_flag, event_object) => {
   add_event(event_hooks.week_start, event_object);
 };
 
-handlers[event_hooks.week_start] = async function () {
+handlers[event_hooks.week_start] = async () => {
   const me = get_chara_talk(0),
     ruby = get_chara_talk(85);
   await era.printAndWait(
@@ -656,22 +657,16 @@ handlers[event_hooks.week_start] = async function () {
   await era.printAndWait([ruby.get_colored_name(), ' 轻笑着跑开了。']);
   era.set('callname:0:85', '露比');
 
-  new RubyEduMarks().after_recruit = 1;
+  new RubyLifeMarks().after_recruit = 1;
   era.set('cflag:85:招募状态', yes);
   era.set('flag:物色对象', 0);
 };
 
-module.exports = {
-  /**
-   * @param {number} stage_id
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise<boolean>}
-   */
-  async run(stage_id, extra_flag, event_object) {
-    if (handlers[stage_id]) {
-      return await handlers[stage_id](extra_flag, event_object);
+module.exports = class extends CustomizedRecruit {
+  async recruit(stage, event_object) {
+    if (handlers[stage]) {
+      return await handlers[stage](event_object);
     }
     return false;
-  },
+  }
 };

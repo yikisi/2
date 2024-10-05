@@ -1,6 +1,3 @@
-const GlasseEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-202');
-const CoconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-203');
-const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get,
   input,
@@ -8,12 +5,19 @@ const {
   printMultiColumns,
   set,
 } = require('#/era-electron');
-const { cb_enum } = require('#/event/queue');
+
 const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
-const sys_call_recruit = require('#/system/script/sys-call-recruit');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
+
+const { cb_enum } = require('#/event/queue');
+const { get_custom_rec } = require('#/event/rec/rec-factory');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
+
+const GlasseEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-202');
+const CoconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-203');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
  * @param {CharaTalk} chara
@@ -107,8 +111,8 @@ function get_riko_button(chara, me) {
                 ['带领', glasse.sex, '们多多地取得重赏胜利吧……'],
                 true,
               );
-              await sys_call_recruit(202, cb_enum.recruit);
-              await sys_call_recruit(203, cb_enum.recruit);
+              await get_custom_rec(202, cb_enum.recruit);
+              await get_custom_rec(203, cb_enum.recruit);
               new GlasseEduMarks().debuff = 20;
               new CoconEduMarks().debuff = 20;
               set('cflag:306:招募状态', [0, 0]);
@@ -133,8 +137,8 @@ function get_riko_button(chara, me) {
                 chara.sex,
                 '们得偿所愿？',
               ]);
-              await sys_call_recruit(202, cb_enum.recruit);
-              await sys_call_recruit(203, cb_enum.recruit);
+              await get_custom_rec(202, cb_enum.recruit);
+              await get_custom_rec(203, cb_enum.recruit);
               set('cflag:306:招募状态', [0, 0]);
               set('flag:当前互动角色', get_random_entry([202, 203]));
             },

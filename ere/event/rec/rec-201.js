@@ -5,13 +5,16 @@
  */
 const { get, printAndWait, set } = require('#/era-electron');
 
+const CustomizedRecruit = require('#/event/rec/rec-common');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = {
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const me = get_chara_talk(0),
       meek = get_chara_talk(201);
     if (get('cflag:201:育成次数') === 0) {
@@ -39,5 +42,6 @@ module.exports = {
     set('cflag:201:招募状态', recruit_flags.yes);
     set('flag:当前互动角色', 201);
     new MeekEduMarks().all_round = 0;
-  },
+    await this.recruit_end();
+  }
 };

@@ -12,7 +12,6 @@ const {
 } = require('#/era-electron');
 
 const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
-const sys_call_recruit = require('#/system/script/sys-call-recruit');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -26,6 +25,7 @@ const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
 
 const { cb_enum } = require('#/event/queue');
+const { get_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -76,7 +76,7 @@ handlers[304] = (chara, me) => {
       disabled: get('flag:当前月') > 3 || sys_check_team_limit() > -1,
       handle: () => {
         set('cflag:304:招募状态', -2);
-        return sys_call_recruit(201, cb_enum.recruit).then(() => {
+        return get_custom_rec(201, cb_enum.recruit).then(() => {
           if (get('cflag:201:育成次数') === 0) {
             new MeekEduMarks().debuff = 40;
           }

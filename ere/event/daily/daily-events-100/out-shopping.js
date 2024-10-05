@@ -103,7 +103,7 @@ module.exports = async (hook) => {
           acute.get_colored_name(),
           ' 之前一直在隐藏自己的实力……',
         ]);
-        await acute.say_and_wait('唔～……唔——！');
+        await acute.say_and_wait('唔～唔——！');
         await era.printAndWait([
           '一只手抚着自己丰臀的 ',
           acute.get_colored_name(),

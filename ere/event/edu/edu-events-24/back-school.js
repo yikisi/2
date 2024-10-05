@@ -432,7 +432,7 @@ module.exports = (handlers) => {
         sys_get_colored_callname(5, 24),
         ' ',
         maya.sex,
-        '好奇心很旺盛嘛。……所以在很多方面都让人担心。',
+        '好奇心很旺盛嘛……所以在很多方面都让人担心。',
       ]);
       await maya.say_and_wait([callname, '！快点快点～！不然餐厅就要关了！']);
       await fuji.say_and_wait('呵呵。一定要玩得开心哦。');

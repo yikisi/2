@@ -11,7 +11,7 @@ const {
   setHorizontalAlign,
 } = require('#/era-electron');
 
-const sys_call_recruit = require('#/system/script/sys-call-recruit');
+const { get_custom_rec } = require('#/event/rec/rec-factory');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { get_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
@@ -42,7 +42,7 @@ handlers[303] = () =>
     : {
         name: '给予更多许可（招募）',
         handle() {
-          return sys_call_recruit(303, event_hooks.recruit);
+          return get_custom_rec(303, event_hooks.recruit);
         },
       };
 

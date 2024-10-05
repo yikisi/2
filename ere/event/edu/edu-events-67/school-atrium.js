@@ -194,7 +194,7 @@ module.exports = async (hook, _, event_object) => {
         '呵呵呵，选得好！那么里见，首先要用药物来强化身体。一口气吞下去吧。',
       );
       await era.printAndWait(
-        `爱丽速子准备把颜色诡异的药给拿出来。……令 ${me.name} 不禁觉得有点危险。`,
+        `爱丽速子准备把颜色诡异的药给拿出来……令 ${me.name} 不禁觉得有点危险。`,
       );
       await kita.say_and_wait('真是夸张的颜色……小钻你真的要喝吗？');
       era.printButton('「还是算了吧！」', 1);
@@ -220,7 +220,7 @@ module.exports = async (hook, _, event_object) => {
         '你、你很有一套嘛……！魔法少女 · 光钻！现在开始你就正式是『魔法少女☆Sweepy5』的团员了♪',
       );
       await era.printAndWait(
-        `东商变革等人离开后，${me.name} 走向里见光钻。……${me.name} 很在意${daiya.sex}刚才喝下辣椒素的事情。`,
+        `东商变革等人离开后，${me.name} 走向里见光钻……${me.name} 很在意${daiya.sex}刚才喝下辣椒素的事情。`,
       );
       era.printButton('「你刚才……不觉得辣吗？」', 1);
       await era.input();

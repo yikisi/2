@@ -222,7 +222,7 @@ module.exports = (handlers) => {
         true,
       );
       await maya.say_and_wait('而且感觉……比平常还……帅……', true);
-      await maya.say_and_wait('……呼哇。………………呼哇哇。', true);
+      await maya.say_and_wait('……呼哇……呼哇哇。', true);
       era.printButton('「摩耶重炮？」', 1);
       await era.input();
       await maya.say_and_wait('……啊～～不行了────！！');
@@ -450,7 +450,7 @@ module.exports = (handlers) => {
         '经过一番努力总算把蛋糕做好了，不过稍微有点焦掉……',
       );
       await maya.say_and_wait(['哇～！', callname, ' 送我蛋糕～♪']);
-      await maya.say_and_wait('我吃我吃。……………………啊唔！');
+      await maya.say_and_wait('我吃我吃……啊唔！');
       await maya.say_and_wait('有、有一点苦，不过这就是大人的味道吧♪');
       era.printButton('「只是烧焦而已！不用吃没关系！」', 1);
       await era.input();

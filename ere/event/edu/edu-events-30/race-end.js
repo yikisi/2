@@ -123,7 +123,7 @@ module.exports = (handlers) => {
       callname,
       ' 一直都是这么相信着 ',
       self_name,
-      ' 啊。……',
+      ' 啊……',
     ]);
     await rice.say_and_wait('我知道了。就这么做吧。');
     await rice.say_and_wait(

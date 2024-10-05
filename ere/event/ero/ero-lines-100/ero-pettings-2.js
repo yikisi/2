@@ -235,7 +235,7 @@ module.exports = (handlers) => {
         ' 的「潜力」了。',
       ]);
 
-      await defender.say_and_wait(['嗯……呜呜，噗露露、咕·～……']);
+      await defender.say_and_wait(['嗯……呜呜，噗露露、咕·～']);
       await attacker.print_and_wait([
         '趴在我的身后，',
         sys_get_colored_callname(attacker.id, defender.id),
@@ -469,7 +469,7 @@ module.exports = (handlers) => {
     await attacker.print_and_wait([
       '两块肉体重叠在了一起，伸出舌头进行着各自的比拼。',
     ]);
-    await defender.say_and_wait(['咕噗噗❤️～……才不会输……咕噗❤️～']);
+    await defender.say_and_wait(['咕噗噗❤️～才不会输……咕噗❤️～']);
     await attacker.print_and_wait([
       '明明已经泛滥成了一片，',
       sys_get_colored_callname(attacker.id, defender.id),

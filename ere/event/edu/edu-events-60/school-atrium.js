@@ -206,7 +206,7 @@ module.exports = async (hook, extra_flag, event_object) => {
     );
     await chara_talk.say_and_wait('不过……其实我错了。帝王跟我都是一样的。');
     await chara_talk.say_and_wait(
-      `${teio_talk.sex}也可能再怎么努力都跑不赢、也会受伤。……而且${teio_talk.sex}也知道其中的痛苦之处。`,
+      `${teio_talk.sex}也可能再怎么努力都跑不赢、也会受伤……而且${teio_talk.sex}也知道其中的痛苦之处。`,
     );
     await chara_talk.say_and_wait(
       `${teio_talk.sex}跟我不一样的是……遇到打击之后的反应。能靠着自己重新站起来，就是${teio_talk.sex}的坚强之处。`,

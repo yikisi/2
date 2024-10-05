@@ -11,14 +11,16 @@ const {
   set,
 } = require('#/era-electron');
 
+const CustomizedRecruit = require('#/event/rec/rec-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = {
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const me = get_chara_talk(0),
       god = get_chara_talk(342);
     await print_event_name('与你相遇的奇迹', god);
@@ -68,5 +70,6 @@ module.exports = {
     set('flag:当前互动角色', 342);
     set('cflag:342:招募状态', recruit_flags.yes);
     set('cflag:342:育成回合计时', 'x');
-  },
+    await this.recruit_end();
+  }
 };

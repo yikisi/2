@@ -8,6 +8,7 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -16,8 +17,9 @@ const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 
-module.exports = {
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const silence = get_chara_talk(400),
       me = get_chara_talk(0);
     await era.printAndWait([
@@ -315,5 +317,5 @@ module.exports = {
       event_hooks.week_end,
       new EventObject(400, cb_enum.edu).set_arg('beginning'),
     );
-  },
+  }
 };

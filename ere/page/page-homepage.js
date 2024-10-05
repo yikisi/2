@@ -253,6 +253,9 @@ module.exports = async () => {
     const my_life_marks = new LifeEventMarks(0);
     if (flags.week_start) {
       let count = 0;
+      if (cur_location === location_enum.basement) {
+        era.set('flag:当前位置', location_enum.office);
+      }
       print_page_header();
       if (await check_game_over()) {
         return;
@@ -325,6 +328,9 @@ module.exports = async () => {
         return;
       }
       if (cur_location === location_enum.basement) {
+        era.set('flag:当前位置', location_enum.basement);
+        await era.clear();
+        await print_page_header();
         my_life_marks.b_timer = get_random_value(
           Math.min(23, count + 6) * 60,
           24 * 60 - 1,

@@ -176,7 +176,7 @@ module.exports = (handlers) => {
         ' 有关单脚平衡的舞蹈技巧来。',
       ]);
     } else if (era.get(`tcvar:${defender.id}:接近高潮`)) {
-      await defender.say_and_wait(['哈～……嗯哈～❤️']);
+      await defender.say_and_wait(['哈～嗯哈～❤️']);
       await attacker.print_and_wait([
         '双眼失焦的 ',
         sys_get_colored_callname(attacker.id, defender.id),

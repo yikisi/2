@@ -5,12 +5,14 @@
  */
 const { printAndWait } = require('#/era-electron');
 
+const CustomizedRecruit = require('#/event/rec/rec-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-module.exports = {
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const hello = get_chara_talk(308),
       me = get_chara_talk(0);
     await print_event_name('大舞台的光辉', hello);
@@ -27,5 +29,5 @@ module.exports = {
       hello.sex,
       '谈谈吧。',
     ]);
-  },
+  }
 };

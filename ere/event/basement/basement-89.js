@@ -794,7 +794,7 @@ module.exports = class extends CustomizedBase {
         grand.get_colored_name(),
         ' 在 ',
         me.get_colored_name(),
-        ' 的怀中，不断地重复着『我愿意』，哭了很长一段时间。',
+        ' 的怀中，不断地重复着「我愿意」，哭了很长一段时间。',
       ]);
       await era.printAndWait([
         '冷静下来后，',

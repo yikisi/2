@@ -87,7 +87,7 @@ module.exports = (handlers) => {
       ]);
       await maya.say_and_wait('唔！那两个人该不会是……');
       await amazon.say_and_wait(
-        '哈！想不到今年也能和你较量呢。……已经把脖子洗干净等着了吗？',
+        '哈！想不到今年也能和你较量呢……已经把脖子洗干净等着了吗？',
       );
       await brian.say_and_wait('……');
       await brian.say_and_wait([

@@ -11,7 +11,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const check_before_rec = require('#/event/rec/snippets/check-before-rec');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -20,18 +20,12 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-module.exports = {
-  override: true,
-  /**
-   * @param {number} stage
-   * @param _
-   * @param {EventObject} event_object
-   */
-  async run(stage, _, event_object) {
+module.exports = class extends CustomizedRecruit {
+  async recruit(stage, event_object) {
     const acute = get_chara_talk(100),
       me = get_chara_talk(0);
     if (stage === event_hooks.recruit) {
-      if (await check_before_rec(100)) {
+      if (await this.check_before_rec()) {
         return false;
       }
       await me.say_and_wait(
@@ -327,5 +321,5 @@ module.exports = {
       ]);
       return true;
     }
-  },
+  }
 };

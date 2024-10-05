@@ -164,7 +164,7 @@ module.exports = async (hook, _, event_object) => {
       '哎呀，意思是在尝试新的挑战吗？感觉很有趣呢！我也可以参加吗？',
     );
     await festa.say_and_wait(
-      '哈哈，真是个好奇心旺盛的大小姐呢。……好啊，你想要挑哪一包？选吧。',
+      '哈哈，真是个好奇心旺盛的大小姐呢……好啊，你想要挑哪一包？选吧。',
     );
     await daiya.say_and_wait('我想想喔，训练员觉得哪一包比较好？');
     era.printButton('「包装漂亮的」', 1);

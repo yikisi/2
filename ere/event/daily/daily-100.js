@@ -373,7 +373,7 @@ handlers[event_hooks.out_river] = async (hook, extra_flag) => {
       ' 相约去河边钓鱼……',
     ]);
     if (Math.random() < 0.5) {
-      await acute.say_and_wait('哎呀哎呀，天气真好呢～……');
+      await acute.say_and_wait('哎呀哎呀，天气真好呢～');
       await era.printAndWait([
         '手持着鱼竿的 ',
         acute.get_colored_name(),
@@ -503,7 +503,7 @@ handlers[event_hooks.out_station] = async (hook) => {
           acute.get_colored_name(),
           ' 一同在车站前品尝了热气腾腾的油豆腐……',
         ]);
-        await acute.say_and_wait('呼、呼……啊呜～嗯呜～……嗯呜呜❤️～');
+        await acute.say_and_wait('呼、呼……啊呜～嗯呜～嗯呜呜❤️～');
         await era.printAndWait('一面吹着油豆腐的热气，一面小口小口的咀嚼。');
         await era.printAndWait([
           '蒸腾的热气从 ',

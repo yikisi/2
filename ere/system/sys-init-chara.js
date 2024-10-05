@@ -140,8 +140,6 @@ function init_chara(chara_id, src_chara_id) {
     }
     reset_chara(chara_id, true);
 
-    get_custom_init(chara_id)(init_chara);
-
     get_custom_mec(chara_id).set_callname();
     get_custom_mec(chara_id).set_my_name();
     get_custom_mec(chara_id).init_love();
@@ -357,9 +355,7 @@ function reset_chara(chara_id, from_init) {
     era.set(`base:${chara_id}:精力`, max_time);
   }
 
-  if (!from_init) {
-    get_custom_init(chara_id)(init_chara, true);
-  }
+  get_custom_init(chara_id)(init_chara, !from_init);
 }
 
 module.exports = {

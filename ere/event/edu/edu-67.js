@@ -666,7 +666,7 @@ handlers[event_hooks.office_cook] = async (hook, extra_flag, event_object) => {
   await era.input();
   await coffee.say_and_wait('是，请多指教……一起煮出好喝的咖啡吧。');
   await coffee.say_and_wait(
-    '咖啡会因出产的农园不同而味道不同。……品种跟生长环境也有很大的影响。',
+    '咖啡会因出产的农园不同而味道不同……品种跟生长环境也有很大的影响。',
   );
   await coffee.say_and_wait('找到自己喜欢的豆子也是乐趣之一……请试着选选看吧……');
   await daiya.say_and_wait('有这么多……！不知道该怎么选才好呢。');
@@ -717,7 +717,7 @@ handlers[event_hooks.office_cook] = async (hook, extra_flag, event_object) => {
   );
   await daiya.say_and_wait('咖啡……！');
   await coffee.say_and_wait(
-    '我想，这么做一定能诞生出很有趣的咖啡。……『朋友』……也是这么认为的。',
+    '我想，这么做一定能诞生出很有趣的咖啡……『朋友』……也是这么认为的。',
   );
   await daiya.say_and_wait('嘿嘿嘿，对吧！我自己也想像不到会是怎样的咖啡呢。');
   await daiya.say_and_wait(

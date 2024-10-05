@@ -575,7 +575,7 @@ module.exports = (handlers) => {
       await era.printAndWait('擂台上那坚持不懈的身姿，还要那高高举起的右拳。');
       await era.printAndWait('对于懦弱的自己，恐怕是此生难忘吧。');
       await era.printAndWait('毕竟，那实在是太过【闪耀】了。');
-      await acute.say_and_wait('嗯～哼～……');
+      await acute.say_and_wait('嗯～哼～');
       await era.printAndWait([
         '趴在肩上的 ',
         acute.get_colored_name(),

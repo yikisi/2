@@ -31,6 +31,7 @@ const YandereList = require('#/data/event/yandere-list');
 const { get_celebration, get_relation_mark } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+const { check_rec_script } = require('#/event/rec/rec-factory');
 
 async function page_chairman_office() {
   let flag_page = true,
@@ -178,13 +179,7 @@ async function page_chairman_office() {
                     temp_list
                       .map((chara_id) => {
                         const color = get_chara_color(chara_id);
-                        let flag_script;
-                        try {
-                          require(`#/event/rec/rec-${chara_id}`);
-                          flag_script = true;
-                        } catch (_) {
-                          flag_script = false;
-                        }
+                        const flag_script = check_rec_script(chara_id);
                         return {
                           accelerator: chara_id,
                           config: {

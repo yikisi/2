@@ -5,13 +5,19 @@
  */
 const era = require('#/era-electron');
 
+const CustomizedRecruit = require('#/event/rec/rec-common');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 
-module.exports = {
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
+    if (await this.check_before_rec()) {
+      return;
+    }
     const teio_talk = get_chara_talk(3),
       me = get_chara_talk(0);
     await era.printAndWait(
@@ -240,5 +246,5 @@ module.exports = {
         `这孩子……或许对自己不怎么适合，太有挑战性了也说不定。${me.name} 轻轻，但明确地摇了摇头，悄然退出了人群。`,
       );
     }
-  },
+  }
 };

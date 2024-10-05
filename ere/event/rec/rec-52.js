@@ -13,6 +13,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -24,9 +25,9 @@ const UraraLifeMarks = require('#/data/event/life-event-marks/life-event-marks-5
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_enum } = require('#/data/train-const');
 
-module.exports = {
-  override: true,
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const life_marks = new UraraLifeMarks(),
       me = get_chara_talk(0),
       me_callname = sys_get_callname(52, 0),
@@ -564,5 +565,5 @@ module.exports = {
       event_hooks.week_end,
       new EventObject(52, cb_enum.edu).set_arg('after_begin'),
     );
-  },
+  }
 };

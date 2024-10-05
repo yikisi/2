@@ -13,6 +13,7 @@ const {
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
+const CustomizedRecruit = require('#/event/rec/rec-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -24,8 +25,9 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
 
-module.exports = {
-  async run() {
+module.exports = class extends CustomizedRecruit {
+  // eslint-disable-next-line no-unused-vars
+  async recruit(stage, event_object) {
     const aoi = get_chara_talk(304),
       me = get_chara_talk(0),
       meek = get_chara_talk(201);
@@ -154,5 +156,6 @@ module.exports = {
     set('callname:304:-2', '桐生院葵');
     set('cflag:304:招募状态', recruit_flags.yes);
     new MeekEduMarks().debuff = 0;
-  },
+    await this.recruit_end();
+  }
 };

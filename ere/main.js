@@ -6,6 +6,8 @@ const new_game = require('#/page/new-game/page-new-game');
 const homepage = require('#/page/page-homepage');
 const load_game = require('#/page/page-load-game');
 
+const { check_rec_script } = require('#/event/rec/rec-factory');
+
 const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -291,13 +293,6 @@ module.exports = async () => {
                 type: 'button',
               },
               ...achievements.map((e) => {
-                let flag_script;
-                try {
-                  require(`#/event/rec/rec-${e}`);
-                  flag_script = true;
-                } catch (_) {
-                  flag_script = false;
-                }
                 return {
                   accelerator: e,
                   config: {
@@ -307,7 +302,7 @@ module.exports = async () => {
                     width: 6,
                   },
                   content: `${era.get(`static:${e}:name`)}${
-                    flag_script ? '*' : ''
+                    check_rec_script(e) ? '*' : ''
                   }`,
                   type: 'button',
                 };

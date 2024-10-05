@@ -85,7 +85,7 @@ module.exports = (handlers) => {
           await defender.say_and_wait([
             '嗯？我在干什么？唔……我听说这样的姿势，能让 ',
             sys_get_colored_callname(defender.id, attacker.id),
-            ' 更兴奋来着呢……～',
+            ' 更兴奋来着呢～',
           ]);
           await attacker.print_and_wait([
             '一面说着，',
@@ -440,7 +440,7 @@ module.exports = (handlers) => {
         sys_get_colored_callname(attacker.id, defender.id),
         '，在无路可退的情况下，也显出了放荡的神情。',
       ]);
-      await defender.say_and_wait(['哈❤️～唔❤️～……不要看我这幅表情啦。']);
+      await defender.say_and_wait(['哈❤️～唔❤️～不要看我这幅表情啦。']);
       await attacker.print_and_wait([
         '明明说的是不想被看到自己的表情，捂住的却是自己的眼睛。',
       ]);
@@ -575,7 +575,7 @@ module.exports = (handlers) => {
         '子了吧」。',
       ]);
       await defender.say_and_wait([
-        '啊❤️～……',
+        '啊❤️～',
         sys_get_colored_callname(defender.id, attacker.id),
         '，不要看我的表情。',
       ]);
