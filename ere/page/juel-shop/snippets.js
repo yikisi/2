@@ -88,7 +88,7 @@ module.exports = {
             ).filter((e) => e[1] > juel_dict[e[0]]).length > 0,
           width: 2,
         },
-        content: '升',
+        content: '↑',
         type: 'button',
       },
       {
@@ -101,7 +101,7 @@ module.exports = {
             ).length > 0,
           width: 2,
         },
-        content: '降',
+        content: '↓',
         type: 'button',
       },
     ];

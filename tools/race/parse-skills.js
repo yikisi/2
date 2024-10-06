@@ -761,6 +761,8 @@ async function chara_skill() {
   });
 
   execSync('node parse-genes.js');
+
+  execSync('node parse-contestants.js');
 }
 
 chara_skill().then();

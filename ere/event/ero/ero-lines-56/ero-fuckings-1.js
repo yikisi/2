@@ -391,7 +391,7 @@ module.exports = (handlers) => {
       ]);
       await defender.print_and_wait(['没想到自己会这么淫乱啊。']);
       await defender.print_and_wait([
-        '一刻也不想等待，发颤的腰部便“咚”的落了下来，微笑地俯视着身下的 ',
+        '一刻也不想等待，发颤的腰部便「咚」的落了下来，微笑地俯视着身下的 ',
         sys_get_colored_callname(defender.id, attacker.id),
         '，心领神会地用腰部做起祭礼的动作，让黏糊糊的穴肉带领着肉棒把小穴探了个遍。',
       ]);

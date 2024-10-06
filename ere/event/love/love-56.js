@@ -421,7 +421,7 @@ handlers.tell_me = async (kitaru, me, callname, event_object) => {
     ' 的住址。',
   ]);
   await era.printAndWait([
-    '在那之后，不只是开运道具，而是单纯为了请教训练计划，或是要求出去玩，甚至只是因为‘今天是大吉’这样虚无缥缈理由而来找 ',
+    '在那之后，不只是开运道具，而是单纯为了请教训练计划，或是要求出去玩，甚至只是因为「今天是大吉」这样虚无缥缈理由而来找 ',
     me.get_colored_name(),
     '。',
   ]);
