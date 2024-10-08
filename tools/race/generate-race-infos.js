@@ -156,3 +156,5 @@ csv.forEach((e) => {
 execSync('npx eslint --fix ./ere/data/race', {
   cwd: join(process.cwd(), '../..'),
 });
+
+execSync('node generate-race-params.js');

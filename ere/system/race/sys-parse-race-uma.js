@@ -9,13 +9,13 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const recruit_flags = require('#/data/event/recruit-flags');
+const race2legends = require('#/data/race/contestants/legends');
 const named_list = require('#/data/race/contestants/named.json');
 const passer_by_list = require('#/data/race/contestants/unnamed.json');
 const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceInfo = require('#/data/race/model/race-info');
-const { race_enum } = require('#/data/race/race-const');
 const {
   max_extra_attr,
   mod_motivation_coefficients,
@@ -206,16 +206,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     if (legend_count > 0) {
       //接着填过往冠军幻影
       //当然排除掉玩家自己出赛的
-      let legends_history;
-      try {
-        legends_history = require(
-          `#/data/race/${Object.keys(RaceInfo.class_enum)[
-            info.race_class
-          ].toLowerCase()}/legends/${Object.keys(race_enum)[race].replace('_', '-')}`,
-        );
-      } catch (_) {
-        legends_history = [];
-      }
+      const legends_history = race2legends[race] || {};
       const list_history = legends.filter(
         (e) =>
           !contestant_dict[e] &&
