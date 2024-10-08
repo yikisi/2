@@ -1,5 +1,5 @@
 const { execSync } = require('child_process');
-const { readdirSync, statSync, writeFileSync } = require('fs');
+const { readdirSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
 const relative_path = '../../ere/event/check';
@@ -7,7 +7,7 @@ const relative_path = '../../ere/event/check';
 const check_scripts = readdirSync(relative_path)
   .filter(
     (e) =>
-      !statSync(join(relative_path, e)).isDirectory() &&
+      e.endsWith('.js') &&
       !e.endsWith('common.js') &&
       !e.endsWith('factory.js'),
   )

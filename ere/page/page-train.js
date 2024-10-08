@@ -44,6 +44,8 @@ const {
   time_cost,
 } = require('#/data/train-const');
 
+const skill_limit = 15;
+
 function get_discount(chara_id) {
   return Math.min(era.get(`cflag:${chara_id}:育成次数`) * 0.015, 0.1);
 }
@@ -390,14 +392,15 @@ module.exports = async () => {
                   chara_id === 0 &&
                   skill_control
                     .get()
-                    .filter((e) => !e.toString().startsWith('9')).length >= 9 &&
+                    .filter((e) => !skills_dict[e].is_generated).length >=
+                    skill_limit &&
                   pt < 100,
                 width: 4,
               },
               content:
                 chara_id === 0 &&
-                skill_control.get().filter((e) => !e.toString().startsWith('9'))
-                  .length >= 9
+                skill_control.get().filter((e) => !skills_dict[e].is_generated)
+                  .length >= skill_limit
                   ? '重置技能'
                   : '学习技能',
               type: 'button',
@@ -464,8 +467,8 @@ module.exports = async () => {
       case 103:
         if (
           chara_id === 0 &&
-          skill_control.get().filter((e) => !e.toString().startsWith('9'))
-            .length >= 9
+          skill_control.get().filter((e) => !skills_dict[e].is_generated)
+            .length >= skill_limit
         ) {
           if (await select_yes_or_no('要使用 100 点技能点数重置技能吗？')) {
             era.add('exp:0:技能点数', -100);
@@ -715,7 +718,8 @@ module.exports = async () => {
               }
             }
             await era.clear();
-            flag_skill &&= chara_id > 0 || skill_control.get().length < 9;
+            flag_skill &&=
+              chara_id > 0 || skill_control.get().length < skill_limit;
           }
         }
         break;

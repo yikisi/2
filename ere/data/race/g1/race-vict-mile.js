@@ -10,7 +10,7 @@ module.exports = new RaceInfo(
   RaceInfo.distance_enum.mile,
   RaceInfo.rotation_enum.left,
   18,
-  [],
+  [8, 90, 114],
   RaceInfo.limit_enum.post4,
   19,
   3250,
