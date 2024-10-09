@@ -59,6 +59,24 @@ module.exports = (handlers) => {
       '……】',
     ]);
 
+  handlers[ero_hooks.ask_cunnilingus_with_fucking] = (
+    attacker,
+    defender,
+    hook,
+    extra_flag,
+  ) =>
+    era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 请求 ',
+      get_chara_talk(extra_flag.supporter).get_colored_name(),
+      ' 在自己',
+      hook.arg ? '插入' : '抽插',
+      ' ',
+      defender.get_colored_name(),
+      ' 时舔舐她风流的小豆豆……】',
+    ]);
+
   handlers[ero_hooks.fuck_69] = (attacker, defender, hook, extra_flag) => {
     if (hook.arg) {
       return era.printAndWait([

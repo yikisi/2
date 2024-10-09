@@ -6,51 +6,95 @@ const EroHookTag = require('#/data/event/ero-hook-tag');
  * @param {EroHookTag[]} ero_tagged_hooks
  */
 module.exports = (ero_action_names, ero_tagged_hooks) => {
+  ero_action_names[ero_actions.ask_supporter_prepare_virgin] = '请求张开小穴';
+  ero_tagged_hooks[ero_actions.ask_supporter_prepare_virgin] = new EroHookTag(
+    [(chara_id) => !chara_id],
+    [ero_action_tags.virgin, ero_action_tags.supporter_awake],
+  );
+
   ero_action_names[ero_actions.ask_double_suck_nipple] = '请求双人吮乳';
   ero_tagged_hooks[ero_actions.ask_double_suck_nipple] = new EroHookTag(
     [ero_action_tags.nipple],
-    [ero_action_tags.awake, ero_action_tags.supporter_awake],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.mouth,
+      ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_mouth,
+    ],
   );
 
   ero_action_names[ero_actions.double_suck_nipple] = '双人吮乳';
   ero_tagged_hooks[ero_actions.double_suck_nipple] = new EroHookTag(
-    [ero_action_tags.supporter_awake],
+    [
+      ero_action_tags.mouth,
+      ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_mouth,
+    ],
     [ero_action_tags.nipple],
   );
 
   ero_action_names[ero_actions.ask_double_blow_job] = '请求双人口交';
   ero_tagged_hooks[ero_actions.ask_double_blow_job] = new EroHookTag(
     [ero_action_tags.penis, (chara_id) => !chara_id],
-    [ero_action_tags.awake, ero_action_tags.supporter_awake],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.mouth,
+      ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_mouth,
+    ],
   );
 
   ero_action_names[ero_actions.double_blow_job] = '双人口交';
   ero_tagged_hooks[ero_actions.double_blow_job] = new EroHookTag(
-    [ero_action_tags.supporter_awake, (chara_id) => chara_id],
+    [
+      ero_action_tags.mouth,
+      ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_mouth,
+      (chara_id) => chara_id,
+    ],
     [ero_action_tags.penis],
   );
 
   ero_action_names[ero_actions.ask_double_cunnilingus] = '请求双人舐阴';
   ero_tagged_hooks[ero_actions.ask_double_cunnilingus] = new EroHookTag(
     [ero_action_tags.clitoris, (chara_id) => !chara_id],
-    [ero_action_tags.awake, ero_action_tags.supporter_awake],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.mouth,
+      ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_mouth,
+    ],
   );
 
   ero_action_names[ero_actions.double_cunnilingus] = '双人舐阴';
   ero_tagged_hooks[ero_actions.double_cunnilingus] = new EroHookTag(
-    [ero_action_tags.supporter_awake, (chara_id) => chara_id],
+    [
+      (chara_id) => chara_id,
+      ero_action_tags.mouth,
+      ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_mouth,
+    ],
     [ero_action_tags.clitoris],
   );
 
   ero_action_names[ero_actions.ask_double_suck_virgin] = '请求双人舌交';
   ero_tagged_hooks[ero_actions.ask_double_suck_virgin] = new EroHookTag(
     [ero_action_tags.virgin, (chara_id) => !chara_id],
-    [ero_action_tags.awake, ero_action_tags.supporter_awake],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.mouth,
+      ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_mouth,
+    ],
   );
 
   ero_action_names[ero_actions.double_suck_virgin] = '双人舌交';
   ero_tagged_hooks[ero_actions.double_suck_virgin] = new EroHookTag(
-    [ero_action_tags.supporter_awake],
+    [
+      ero_action_tags.mouth,
+      ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_mouth,
+    ],
     [ero_action_tags.virgin],
   );
 
@@ -120,13 +164,26 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
     ],
   );
 
+  ero_action_names[ero_actions.ask_cunnilingus_with_fucking] = '请求插入时舐阴';
+  ero_tagged_hooks[ero_actions.ask_cunnilingus_with_fucking] = new EroHookTag(
+    [ero_action_tags.insert],
+    [
+      ero_action_tags.clitoris,
+      ero_action_tags.virgin,
+      ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_mouth,
+    ],
+  );
+
   ero_action_names[ero_actions.fuck_69] = '双人六九插入';
   ero_tagged_hooks[ero_actions.fuck_69] = new EroHookTag(
     [ero_action_tags.insert],
     [
       ero_action_tags.awake,
+      ero_action_tags.mouth,
       ero_action_tags.sex_check,
       ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_mouth,
       ero_action_tags.supporter_sex_check,
     ],
   );

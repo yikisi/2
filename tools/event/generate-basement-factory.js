@@ -3,7 +3,12 @@ const { readdirSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
 const base_scripts = readdirSync('../../ere/event/basement')
-  .filter((e) => !e.endsWith('common.js') && !e.endsWith('factory.js'))
+  .filter(
+    (e) =>
+      e.endsWith('.js') &&
+      !e.endsWith('common.js') &&
+      !e.endsWith('factory.js'),
+  )
   .map((e) => e.substring(9).replace(/\.js$/, ''))
   .sort((a, b) => {
     const num_a = Number(a),

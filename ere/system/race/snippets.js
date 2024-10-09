@@ -1,10 +1,11 @@
 const { logger } = require('#/era-electron');
 
+const { get_random_value } = require('#/utils/value-utils');
+
 const { ability_usage_enum } = require('#/data/race/model/uma-skill');
 const { frame_rate } = require('#/data/race/race-sim-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names } = require('#/data/train-const');
-const { get_random_value } = require('#/utils/value-utils');
 
 const fron_cols = 4,
   progress_width = 24 - 10 - 2 * fron_cols - 1,
@@ -16,8 +17,9 @@ const fron_cols = 4,
  * @param {number} [timer]
  */
 function get_event_record(message, timer_record, timer) {
-  const _content = message instanceof Array ? message : [message],
-    count = _content.reduce((p, c) => p + (c['content'] || c).length, 0);
+  const _content = message instanceof Array ? message : [message];
+  let count = 0;
+  _content.forEach((c) => (count += (c['content'] || c).length));
   return {
     config: { align: 'left' },
     content: [
@@ -383,9 +385,13 @@ module.exports = {
           skill.data.ability_values[i][j] *
           Math.min(uma.race.conditionParams.activate_count_all * 0.01, 0.15);
         break;
-      case ability_usage_enum.MultiplyBaseSpeed:
+      case ability_usage_enum.MultiplyBaseSpeedForAcc:
         skill.values[i][j] =
           skill.data.ability_values[i][j] + uma.base.accBuffFromWiz;
+        break;
+      case ability_usage_enum.MultiplyBaseSpeed:
+        skill.values[i][j] =
+          skill.data.ability_values[i][j] + uma.base.spdBuffFromWiz;
         break;
       case ability_usage_enum.Direct:
       case ability_usage_enum.Unknown:

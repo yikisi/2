@@ -7,15 +7,21 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { gacha, get_random_entry, sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const passer_by_names = require('#/data/race/contestants/uma-mob.json').map(
+  (e) => e['ChineseName'],
+);
+const calc_attr_score = require('#/data/calc-attr-score');
 const { get_chara_color } = require('#/data/chara-colors');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { get_chara_rank } = require('#/data/info-generator');
+const race2legends = require('#/data/race/contestants/legends');
+const legends_list = require('#/data/race/contestants/legends.json');
 const named_list = require('#/data/race/contestants/named.json');
 const passer_by_list = require('#/data/race/contestants/unnamed.json');
 const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceInfo = require('#/data/race/model/race-info');
-const { race_enum } = require('#/data/race/race-const');
 const {
   max_extra_attr,
   mod_motivation_coefficients,
@@ -25,10 +31,6 @@ const {
 } = require('#/data/race/race-sim-const.js');
 const { skill_sets, skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
-
-const passer_by_names = require('#/data/race/contestants/uma-mob.json').map(
-  (e) => e['ChineseName'],
-);
 
 const named_level = [named_list[0].level, named_list.at(-1).level],
   passer_by_level = [passer_by_list[0].level, passer_by_list.at(-1).level];
@@ -96,7 +98,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
         ...team_chara.map((e) =>
           e.index_chara === 0
             ? 144
-            : era.get(`cflag:${e.index_chara}:育成回合计时`),
+            : era.get(`cflag:${e.index_chara}:育成回合计时`) + 1,
         ),
       ),
       named_difficulty = [
@@ -203,19 +205,44 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
         }),
     );
 
+    if (
+      legend_count > 0 &&
+      edu_phase === 144 &&
+      info.race_class === RaceInfo.class_enum.G1 &&
+      era.get('flag:比赛难度') > 0
+    ) {
+      const legend = get_random_entry(
+        legends_list.filter(
+          (e) =>
+            e.adapt_ground[info.ground] >= 4 &&
+            e.adapt_distance[info.distance] >= 4,
+        ),
+      );
+      if (legend) {
+        legend_count--;
+        ret.push(
+          new PseudoUma(
+            legend.id,
+            legend.name,
+            get_chara_color(legend.id),
+            get_random_value(...legend.motivation),
+            legend.attrs,
+            random_style(legend.adapt_style),
+            legend.adapt_style,
+            legend.adapt_distance,
+            legend.adapt_ground,
+            skill_sets[legend.skills].map((s) => skills_dict[s]),
+          )
+            .set_legend()
+            .set_image(legend.image),
+        );
+      }
+    }
+
     if (legend_count > 0) {
       //接着填过往冠军幻影
       //当然排除掉玩家自己出赛的
-      let legends_history;
-      try {
-        legends_history = require(
-          `#/data/race/${Object.keys(RaceInfo.class_enum)[
-            info.race_class
-          ].toLowerCase()}/legends/${Object.keys(race_enum)[race].replace('_', '-')}`,
-        );
-      } catch (_) {
-        legends_history = [];
-      }
+      const legends_history = race2legends[race] || {};
       const list_history = legends.filter(
         (e) =>
           !contestant_dict[e] &&
@@ -381,15 +408,15 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     info.has_legend = true;
   }
   const from_setting = era.get('flag:比赛难度');
-  ret.forEach(
-    (uma) =>
-      uma.index_chara > 0 &&
+  ret.forEach((uma) => {
+    if (uma.index_chara >= 0 && !uma.image) {
       uma.set_image(
         get_image(uma.index_chara)
           .map((_i) => `${_i}_半身`)
           .join('\t'),
-      ),
-  );
+      );
+    }
+  });
   ret.slice(team_chara.length).forEach((uma) => {
     uma.index_chara > 0 &&
       (uma.chara = era.get(`staticcflag:${uma.index_chara}:气性`));
@@ -437,36 +464,20 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
   // 看台砍掉了：随机对面或者同侧
   // 比赛时间：随机白天或晚上
   const straight_front_type = (Math.random() < 0.5) + 1,
-    day_time = 4 * (Math.random() < 0.5),
     corner_count = info.lanes.filter((e) => e.is_curve).length;
   ret.forEach((uma) => {
     uma.attrs = uma.attrs.map(Math.ceil);
-    let motivation_coefficient = (mod_motivation_coefficients[uma.chara] ||
-      mod_motivation_coefficients.default)[uma.motivation + 2];
-    switch (uma.chara) {
-      case -2:
-        motivation_coefficient -= 0.01 * (info.gates >= 15);
-        break;
-      case 1:
-        motivation_coefficient += 0.01;
-        break;
-      case 2:
-        motivation_coefficient += info.has_legend * 0.01;
-        break;
-      case 3:
-        motivation_coefficient +=
-          info.has_legend * 0.02 - !info.has_legend * 0.01;
-    }
+    uma.score_rank = get_chara_rank(
+      uma.attrs.reduce((p, c) => p + calc_attr_score(c), 0) +
+        uma.list_skill.reduce((p, c) => p + c.data.grade_value, 0),
+    );
 
     uma.race.conditionParams.always = 1;
-    uma.race.conditionParams.base_speed =
-      uma.attrs[attr_enum.speed] * motivation_coefficient;
-    uma.race.conditionParams.base_stamina =
-      uma.attrs[attr_enum.endurance] * motivation_coefficient;
-    uma.race.conditionParams.base_power =
-      uma.attrs[attr_enum.strength] * motivation_coefficient;
-    uma.race.conditionParams.base_wiz =
-      uma.attrs[attr_enum.intelligence] * motivation_coefficient;
+    uma.race.conditionParams.base_speed = uma.attrs[attr_enum.speed];
+    uma.race.conditionParams.base_stamina = uma.attrs[attr_enum.endurance];
+    uma.race.conditionParams.base_power = uma.attrs[attr_enum.strength];
+    uma.race.conditionParams.base_guts = uma.attrs[attr_enum.toughness];
+    uma.race.conditionParams.base_wiz = uma.attrs[attr_enum.intelligence];
     uma.race.conditionParams.corner_count = corner_count;
     uma.race.conditionParams.course_distance = info.span;
     uma.race.conditionParams.distance_type = info.distance + 1;
@@ -500,7 +511,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       (uma.race.conditionParams.running_style_count_same * 100) / ret.length;
     uma.race.conditionParams.straight_front_type = straight_front_type;
     uma.race.conditionParams.season = season;
-    uma.race.conditionParams.time = day_time;
+    uma.race.conditionParams.time = info.daytime;
     uma.race.conditionParams.track_id = info.track;
     uma.race.conditionParams.weather = info.weather + 1;
   });

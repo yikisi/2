@@ -1,4 +1,3 @@
-const update_marks = require('#/system/ero/calc-sex/update-marks');
 const { add_juel, update_juels } = require('#/system/ero/sys-calc-juel');
 const {
   begin_and_init_ero,
@@ -20,7 +19,6 @@ async function add_juel_out_of_train(chara_id, keys, nums) {
     add_juel(chara_id, key_list[i], num_list[i] * palam2juel);
   }
   update_juels(true, chara_id);
-  await update_marks(true, chara_id);
   end_ero_and_train(true);
 }
 

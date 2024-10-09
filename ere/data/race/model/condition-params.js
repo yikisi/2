@@ -3,12 +3,15 @@ class ConditionParams {
   activate_count_all;
   activate_count_end_after;
   activate_count_heal;
+  activate_count_later_half;
   activate_count_middle;
   activate_count_start;
   all_corner_random;
   always;
+  base_guts;
   base_power;
   base_speed;
+  base_wiz;
   bashin_diff_behind;
   bashin_diff_infront;
   behind_near_lane_time;
@@ -43,6 +46,7 @@ class ConditionParams {
   is_basis_distance;
   is_behind_in;
   is_dirtgrade;
+  is_exist_skill_id;
   is_finalcorner;
   is_finalcorner_laterhalf;
   is_finalcorner_random;
@@ -58,6 +62,7 @@ class ConditionParams {
   lane_type;
   last_straight_random;
   lastspurt;
+  motivation;
   near_count;
   near_infront_count;
   order;
@@ -72,6 +77,7 @@ class ConditionParams {
   phase;
   phase_corner_random;
   phase_firsthalf_random;
+  phase_firstquarter;
   phase_firstquarter_random;
   phase_laterhalf_random;
   phase_random;
@@ -91,6 +97,7 @@ class ConditionParams {
   running_style_temptation_opponent_count_nige;
   running_style_temptation_opponent_count_oikomi;
   running_style_temptation_opponent_count_sashi;
+  running_style_temptation_opponent_count_senko;
   same_skill_horse_count;
   season;
   slope;

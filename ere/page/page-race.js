@@ -50,6 +50,7 @@ const RaceEndParams = require('#/data/event/extra-flag/race-end-params');
 const RaceStartParams = require('#/data/event/extra-flag/race-start-params');
 const GrandLives = require('#/data/event/grand-lives');
 const { get_trainer_level } = require('#/data/info-generator');
+const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const {
@@ -404,6 +405,13 @@ async function race_page(race) {
   let fame_reward;
   if (best_rank === 1) {
     fame_reward = race_rewards[info.race_class][1].fame;
+    if (
+      contestants.findIndex((e) => e.legend && e.name.startsWith('传奇')) !== -1
+    ) {
+      gene_juel_names.forEach((e) =>
+        era.add(`juel:0:${e}`, 300 + 200 * (mvp_id === 0)),
+      );
+    }
   } else if (best_rank <= 5) {
     fame_reward = race_rewards[info.race_class][5].fame;
   } else if (best_rank <= 10) {

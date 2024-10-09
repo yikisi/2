@@ -82,26 +82,26 @@ module.exports = {
         accelerator: accelerator + 100,
         config: {
           disabled:
-            level === 5 ||
+            level >= 5 ||
             Object.entries(
               get_skill_price(chara_id, skill_name, level + 1),
             ).filter((e) => e[1] > juel_dict[e[0]]).length > 0,
           width: 2,
         },
-        content: '升',
+        content: '↑',
         type: 'button',
       },
       {
         accelerator: accelerator + 200,
         config: {
           disabled:
-            level === 0 ||
+            level <= 0 ||
             Object.entries(get_skill_price(chara_id, skill_name, level)).filter(
               (e) => e[1] > juel_dict[e[0]],
             ).length > 0,
           width: 2,
         },
-        content: '降',
+        content: '↓',
         type: 'button',
       },
     ];

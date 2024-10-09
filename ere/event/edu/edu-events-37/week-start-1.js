@@ -466,9 +466,13 @@ module.exports = (handlers) => {
     await luna.say_and_wait('一道……自由的风。');
     era.drawLine();
     const mr_cb = get_chara_talk(57);
-    await era.printAndWait(
-      `在那之后，${your_name} 根据 ${mr_cb.name} 的指示，来到了刚刚结束重赏级比赛的竞马场。`,
-    );
+    await era.printAndWait([
+      '在那之后，',
+      your_name,
+      ' 根据 ',
+      luna.get_colored_name(),
+      ' 的指示，来到了刚刚结束重赏级比赛的竞马场。',
+    ]);
     await era.printAndWait(`在那里，${your_name} 遇到了……`);
     await mr_cb.say_as_unknown_and_wait(
       '哈～今天的比赛真是太棒了。这么自由的氛围，我都快压抑不住自己的内心了。',

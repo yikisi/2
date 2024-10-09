@@ -118,6 +118,13 @@ async function page_race_result(contestants, info, race_id) {
   }
   await show_result(interval);
   let flag_charts = 1;
+  if (
+    contestants.find((e) => !e.legend && e.rank.curr === 1)?.index_chara >= 0
+  ) {
+    era.setMask('滤镜_强敌击退');
+    await era.waitAnyKey();
+    era.setMask();
+  }
   flag_result && (await era.waitAnyKey());
   const labels = new Array(result.statistics.loc[0].data.length)
       .fill(0)

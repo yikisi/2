@@ -288,10 +288,10 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
         get_event_record(
           [
             '比赛开始，',
-            max.get_colored_name(),
+            min.get_colored_name(),
             ' 首先跑出！其他马娘紧随其后，最后是',
             Math.random() < 0.5 ? '出闸慢了的 ' : '落后了的 ',
-            min.get_colored_name(),
+            max.get_colored_name(),
             '！',
           ],
           '0.0"',

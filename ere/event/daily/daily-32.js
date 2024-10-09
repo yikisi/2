@@ -6,7 +6,11 @@
  */
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+} = require('#/system/sys-calc-chara-others');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
@@ -41,8 +45,38 @@ handlers[event_hooks.week_start] = async (_, extra_flag, event_object) => {
   }
 };
 
+function common_escape(tachyon, life_marks) {
+  tachyon.say(['真是神奇啊，', sys_get_colored_callname(32, 0), '']);
+  tachyon.say([
+    '明明，在地下室的时候你的眼眸几乎接近于暗淡无光……现在，却再度绽放出那种将人吸入的光辉了。',
+  ]);
+  tachyon.say([
+    '『我的眼睛如果有任何特别之处，那必然是反射自速子的光芒』？……呵呵，',
+    sys_get_colored_callname(32, 0),
+    '，难得见你这么伶牙俐齿啊……',
+  ]);
+  tachyon.say(['那么……若是我的眼眸再度染上尘埃，就请你再一次为我将其抹去吧。']);
+  life_marks.b_escape = 0;
+}
+
+handlers[event_hooks.select] = () => {
+  const life_marks = new TachyonLifeMarks();
+  if (new TachyonEduMarks().plan_b && life_marks.b_escape) {
+    life_marks.b_escape = 0;
+    throw new Error();
+  }
+  if (!sys_check_awake(32) || !sys_check_awake(0) || !life_marks.b_escape) {
+    throw new Error();
+  }
+  common_escape(get_chara_talk(32), life_marks);
+};
+
 handlers[event_hooks.good_morning] = () => {
-  const tachyon = get_chara_talk(32);
+  const tachyon = get_chara_talk(32),
+    life_marks = new TachyonLifeMarks();
+  if (life_marks.b_escape) {
+    return common_escape(get_chara_talk(32), life_marks);
+  }
   tachyon.say(
     '你来了啊，那就顺便把门口那三袋垃圾丢了吧……帮助实验？需要你的时候自然会叫你。',
   );

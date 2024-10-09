@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const CustomizedMec = require('#/event/mec/mec-common');
 
 const { buff_colors } = require('#/data/color-const');
+const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { distance_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -13,6 +14,10 @@ module.exports = class extends CustomizedMec {
 
   get_maxbase_buff() {
     return -200 * era.get('status:3:腿伤');
+  }
+
+  get_pressure_buff() {
+    return 0.1 * era.get('status:3:腿伤');
   }
 
   get_race_cloth() {
@@ -27,8 +32,24 @@ module.exports = class extends CustomizedMec {
     return ['帝王2'];
   }
 
-  get_pressure_buff() {
-    return 0.1 * era.get('status:3:腿伤');
+  get_race_contestants(info) {
+    switch (era.get('flag:当前赛事')) {
+      case race_enum.tenn_spr:
+        return [new LegendUmaSelector(13, 1.2)];
+      case race_enum.tenn_sho:
+        if (era.get('cflag:3:育成回合计时') > 96) {
+          return [64, 65].map((e) => new LegendUmaSelector(e, 1.1));
+        }
+        break;
+      case race_enum.arim_kin:
+        if (era.get('cflag:3:育成回合计时') > 96) {
+          return [
+            new LegendUmaSelector(23, 1.2),
+            ...[35, 60, 64].map((e) => new LegendUmaSelector(e, 1.1)),
+          ];
+        }
+    }
+    return super.get_race_contestants(info);
   }
 
   get_race_finish_report(uma, race_id) {

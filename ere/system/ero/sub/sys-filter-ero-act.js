@@ -133,6 +133,8 @@ function sys_filter_ero_act(attacker, defender, filters) {
     sys_check_awake(supporter) &&
     !era.get(`tcvar:${supporter}:脱力`) &&
     !era.get(`tcvar:${supporter}:失神`);
+  supporter_tag_checks[ero_hook_tags.supporter_mouth] =
+    supporter > 0 && era.get(`tequip:${supporter}:口腔`) === -1;
   supporter_tag_checks[ero_hook_tags.supporter_breast] =
     supporter > 0 &&
     era.get(`cflag:${supporter}:性别`) - 1 &&

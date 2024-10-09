@@ -42,7 +42,7 @@ attr_names.forEach((e, i) => {
 });
 
 skill_list
-  .filter((e) => e.startsWith('skill-90') || e.startsWith('skill-91'))
+  .filter((e) => e.startsWith('skill-90') || e.startsWith('skill-910031'))
   .forEach((e) => {
     const f = readFileSync(join(skill_path, e)).toString(),
       skill_id = e.substring(6, 12),

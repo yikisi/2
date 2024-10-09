@@ -20,6 +20,7 @@ const ero_action_tags = {
   sex_check: 0,
   super_sadism: 0,
   supporter_awake: 0,
+  supporter_mouth: 0,
   supporter_breast: 0,
   supporter_insert: 0,
   supporter_sex_check: 0,
@@ -281,6 +282,8 @@ const ero_actions = {
   // 要求阴道足交
   ask_virgin_foot_job: 0,
 
+  // 要求张开小穴
+  ask_supporter_prepare_virgin: 0,
   // 要求双人吮乳
   ask_double_suck_nipple: 0,
   // 双人吮乳
@@ -301,6 +304,8 @@ const ero_actions = {
   ask_double_tit_job: 0,
   // 双人乳交
   double_tit_job: 0,
+  // 要求插入时舐阴
+  ask_cunnilingus_with_fucking: 0,
   // 双人69插入
   fuck_69: 0,
   // 要求双人轮流插入
