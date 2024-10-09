@@ -1,4 +1,7 @@
-cd tools/event
+cd tools/uma
+node check-chara-colors.js
+node check-child-names.js
+cd ../event
 node generate-basement-factory.js
 node generate-check-factory.js
 node generate-init-factory.js
