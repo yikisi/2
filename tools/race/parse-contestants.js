@@ -101,7 +101,7 @@ async function task() {
   }
   contestants.named.forEach((e) => {
     for (let i = 0; i < e.attrs.length; ++i) {
-      e.attrs[i] = Math.floor(e.attrs[i] * 0.8);
+      e.attrs[i] = Math.ceil(e.attrs[i] * 0.8);
     }
   });
   [...contestants.named, ...contestants.unnamed].forEach((e) => {
@@ -244,7 +244,7 @@ async function task() {
     },
   ].map((e) => {
     for (let i = 0; i < e.attrs.length; ++i) {
-      e.attrs[i] = Math.floor(e.attrs[i] / 1.1);
+      e.attrs[i] = Math.ceil(e.attrs[i] / 1.1);
     }
     return e;
   });

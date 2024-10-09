@@ -408,15 +408,15 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     info.has_legend = true;
   }
   const from_setting = era.get('flag:比赛难度');
-  ret.forEach(
-    (uma) =>
-      uma.index_chara >= 0 &&
+  ret.forEach((uma) => {
+    if (uma.index_chara >= 0 && !uma.image) {
       uma.set_image(
         get_image(uma.index_chara)
           .map((_i) => `${_i}_半身`)
           .join('\t'),
-      ),
-  );
+      );
+    }
+  });
   ret.slice(team_chara.length).forEach((uma) => {
     uma.index_chara > 0 &&
       (uma.chara = era.get(`staticcflag:${uma.index_chara}:气性`));
