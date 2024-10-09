@@ -46,6 +46,13 @@ function sys_prepare_race(list_chara, team_list, race_info) {
       }
     }
   });
+  if (
+    list_chara.findIndex((uma) =>
+      uma.list_skill.findIndex((s) => s.data.id === 201632),
+    ) !== 1
+  ) {
+    skill_counts[201631] = 5;
+  }
 
   const corners = [],
     down_slopes = race_info.slopes.filter((e) => e.slope < 0),
@@ -92,6 +99,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     uma.race.conditionParams.activate_count_all = 0;
     uma.race.conditionParams.activate_count_end_after = 0;
     uma.race.conditionParams.activate_count_heal = 0;
+    uma.race.conditionParams.activate_count_later_half = 0;
     uma.race.conditionParams.activate_count_middle = 0;
     uma.race.conditionParams.activate_count_start = 0;
     uma.race.conditionParams.behind_near_lane_time = 0;
@@ -103,6 +111,8 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     uma.race.conditionParams.change_order_up_middle = 0;
     uma.race.conditionParams.infront_near_lane_time = 0;
     uma.race.conditionParams.is_lastspurt = 0;
+    uma.race.conditionParams.is_exist_skill_id =
+      skill_counts[201631] > 0 ? 201631 : 0;
     uma.race.conditionParams.is_other_character_activate_advantage_skill = 0;
     uma.race.conditionParams.is_temptation = 0;
     uma.race.conditionParams.is_used_skill_id = [];
@@ -115,6 +125,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     uma.race.conditionParams.overtake_target_no_order_up_time = 0;
     uma.race.conditionParams.overtake_target_time = 0;
     uma.race.conditionParams.phase = 0;
+    uma.race.conditionParams.phase_firstquarter = 0;
     uma.race.conditionParams.running_style = uma.style + 1;
     uma.race.conditionParams.running_style_count_nige_otherself =
       running_style_counts[0] - (uma.style === 0);
@@ -260,7 +271,22 @@ function sys_prepare_race(list_chara, team_list, race_info) {
       );
     }
 
-    uma.base.accBuffFromWiz = (uma.attrs[attr_enum.intelligence] * 0.01) / 300;
+    if (uma.attrs[attr_enum.intelligence] >= 2000) {
+      uma.base.accBuffFromWiz = 0.2;
+    } else if (uma.attrs[attr_enum.intelligence] >= 1900) {
+      uma.base.accBuffFromWiz = 0.15;
+    } else if (uma.attrs[attr_enum.intelligence] >= 1800) {
+      uma.base.accBuffFromWiz = 0.1;
+    } else if (uma.attrs[attr_enum.intelligence] >= 1700) {
+      uma.base.accBuffFromWiz = 0.05;
+    }
+    if (uma.attrs[attr_enum.intelligence] >= 1600) {
+      uma.base.spdBuffFromWiz = 0.15;
+    } else if (uma.attrs[attr_enum.intelligence] >= 1400) {
+      uma.base.spdBuffFromWiz = 0.1;
+    } else {
+      uma.base.spdBuffFromWiz = 0.05;
+    }
 
     // 由基础智力决定技能触发率 最低20%
     uma.probs.skill =
@@ -350,6 +376,13 @@ function sys_prepare_race(list_chara, team_list, race_info) {
                 break;
               case ability_type_enum.VisibleDistance:
                 uma.race.visible_dis += skill.data.ability_values[i][j];
+                break;
+              case ability_type_enum.AllAttrIncrease:
+                uma.attrs = uma.attrs.map(
+                  (attr) => (attr += skill.data.ability_types[i][j]),
+                );
+                break;
+              case ability_type_enum.Connect:
             }
           }
           uma.base.greenCount++;

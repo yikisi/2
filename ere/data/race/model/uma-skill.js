@@ -79,11 +79,14 @@ const ability_type_enum = {
   PushPer: 30,
   // 加速度
   Accel: 31,
+  // 全属性增加
+  AllAttrIncrease: 32,
   // 目标道路
   TargetLane: 35,
   // 随机触发技能
   ActivateRandomNormalAndRareSkill: 36,
   ActivateRandomRareSkill: 37,
+  Connect: 41,
   // 育成继承活动使用
   ChallengeMatchBonusXXX: 50,
 };
@@ -119,8 +122,10 @@ const ability_usage_enum = {
   // 中盘竞争时间计算倍率，2、4、6倍率分别+1，最高4
   MultiplyBlockedSideMaxContinueTimePhaseMiddleRun1: 20,
   MultiplyBlockedSideMaxContinueTimePhaseMiddleRun2: 21,
-  // 根据速度决定倍率
-  MultiplyBaseSpeed: 22,
+  // 根据速度决定加成 - 加速度
+  MultiplyBaseSpeedForAcc: 22,
+  // 根据速度决定加成 - 速度
+  MultiplyBaseSpeed: 23,
   MultiplyForeignAdaptability: 24,
   MultiplyUAFWins: 26,
   MultiplyCookingPt: 27,
@@ -187,10 +192,10 @@ const ability_tag_enum = {
   startDash: 5,
   tempPer: 6,
   visible: 6,
+  targetSpeed: 7,
   currentSpeed: 7,
   accel: 8,
   hpRate: 5,
-  hpDec: 6,
   temp: 1,
   laneMove: 1,
 };
@@ -205,10 +210,10 @@ ability_tag_names[ability_tag_enum.wiz] = '智力';
 ability_tag_names[ability_tag_enum.startDash] = '出闸';
 ability_tag_names[ability_tag_enum.tempPer] = '焦躁概率';
 ability_tag_names[ability_tag_enum.visible] = '视野';
-ability_tag_names[ability_tag_enum.currentSpeed] = '奔跑速度';
+ability_tag_names[ability_tag_enum.targetSpeed] = '目标速度';
+ability_tag_names[ability_tag_enum.currentSpeed] = '即时速度';
 ability_tag_names[ability_tag_enum.accel] = '加速度';
 ability_tag_names[ability_tag_enum.hpRate] = '体力恢复';
-ability_tag_names[ability_tag_enum.hpDec] = '体力降低';
 ability_tag_names[ability_tag_enum.temp] = '焦躁';
 ability_tag_names[ability_tag_enum.laneMove] = '突围';
 

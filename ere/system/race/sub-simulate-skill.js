@@ -137,6 +137,12 @@ function sub_simulate_skill(
     ) {
       uma.race.conditionParams.phase++;
     }
+    if (
+      uma.race.location >= (race_info.span * 16) / 24 &&
+      uma.race.location < (race_info.span * 17) / 24
+    ) {
+      uma.race.conditionParams.phase_firstquarter = 2;
+    }
     if (uma.race.temptation > 0) {
       uma.race.temptation--;
       if (
@@ -860,6 +866,9 @@ function sub_simulate_skill(
             case 2:
             case 3:
               uma.race.conditionParams.activate_count_end_after++;
+          }
+          if (uma.race.location >= race_info.span / 2) {
+            uma.race.conditionParams.activate_count_later_half++;
           }
           uma.race.conditionParams.activate_count_all++;
           break;

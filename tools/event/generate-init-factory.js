@@ -3,7 +3,10 @@ const { readdirSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
 const init_scripts = readdirSync('../../ere/event/init')
-  .filter((e) => e.startsWith('init') && !e.endsWith('factory.js'))
+  .filter(
+    (e) =>
+      e.startsWith('init') && e.endsWith('.js') && !e.endsWith('factory.js'),
+  )
   .map((e) => e.substring(5).replace(/\.js$/, ''))
   .sort((a, b) => {
     const num_a = Number(a),

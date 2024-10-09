@@ -571,7 +571,7 @@ async function print_inherit_page() {
         ]);
       }
     } else if (ret === available_genes.get_values().length + 2) {
-      const pt = juels.reduce((p, c) => p + c, 0);
+      const pt = 2 * juels.reduce((p, c) => p + c, 0);
       if (await select_yes_or_no(`将剩余因子转换成 ${pt} 点技能点数吗？`)) {
         add(`exp:${selected_id}:技能点数`, pt);
         gene_juel_names.forEach((e) => set(`juel:${selected_id}:${e}`, 0));

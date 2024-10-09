@@ -43,7 +43,7 @@ function randomly_interact(in_team_list) {
       );
       const changes = {
           attr_change: new Array(5).fill(0),
-          pt_change: 2,
+          pt_change: 0,
         },
         train_attr =
           stamina_ratio >= fail_sta_border.other

@@ -704,7 +704,7 @@ handlers[ero_hooks.shop_end] = () => {};
 
 /**
  * @param {HookArg} hook
- * @param {{shown:boolean}} extra_flag
+ * @param {Record<string,*>} extra_flag
  * @returns {Promise<*>}
  */
 module.exports = async (hook, extra_flag) => {

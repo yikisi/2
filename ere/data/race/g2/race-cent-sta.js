@@ -1,18 +1,1 @@
-const RaceInfo = require('#/data/race/model/race-info');
-
-module.exports = new RaceInfo(
-  'Centaur Stakes',
-  '人马锦标',
-  RaceInfo.class_enum.G2,
-  RaceInfo.track_enum.hanshin,
-  RaceInfo.ground_enum.grass,
-  1200,
-  RaceInfo.distance_enum.short,
-  RaceInfo.rotation_enum.right,
-  16,
-  [],
-  RaceInfo.limit_enum.post3,
-  34,
-  1475,
-  10901,
-);
+const RaceInfo = require('#/data/race/model/race-info');module.exports = new RaceInfo(  'Centaur Stakes',  '人马锦标',  RaceInfo.class_enum.G2,  RaceInfo.track_enum.hanshin,  RaceInfo.ground_enum.grass,  1200,  RaceInfo.distance_enum.short,  RaceInfo.rotation_enum.right,  16,  [54, 95],  RaceInfo.limit_enum.post3,  34,  0,  1475,  10901,);

@@ -78,7 +78,7 @@ async function preview_race(info, team_list, contestants, is_grand_live) {
   const race_header = [
     {
       config: { align: 'center' },
-      content: date_indicator(),
+      content: [...date_indicator(), ' ', info.daytime ? '夜' : '昼'],
       type: 'text',
     },
     {
@@ -157,6 +157,13 @@ async function preview_race(info, team_list, contestants, is_grand_live) {
           {
             config: { align: 'center' },
             content: [
+              {
+                color:
+                  adaptability_colors[get_rank_level(cur_chara.score_rank)],
+                content: cur_chara.score_rank,
+                fontWeight: 'bold',
+              },
+              { isDivider: true },
               '干劲：',
               {
                 color: motivation_colors[cur_chara.motivation + 2],

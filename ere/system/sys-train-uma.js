@@ -100,7 +100,7 @@ function get_success_base_reward(
 
   base_inc *= (100 + train_buff) / 100;
 
-  changes.pt_change = 1;
+  changes.pt_change = 2;
   switch (attr) {
     case attr_enum.speed:
       //速度训练：速度+少量力量
@@ -129,7 +129,7 @@ function get_success_base_reward(
       changes.attr_change[attr_enum.intelligence] = base_inc;
       changes.attr_change[attr_enum.speed] = base_inc / 2;
       train_cost.stamina = -train_cost.stamina / 4;
-      changes.pt_change = 2;
+      changes.pt_change = 6;
   }
   if (era.get(`cflag:${chara_id}:气性`) === -1) {
     changes.attr_change = changes.attr_change.map((e) => e + (e > 0));

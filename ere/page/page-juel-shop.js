@@ -274,7 +274,7 @@ module.exports = async (_id) => {
       era.printMultiColumns(buffer);
 
       era.print(
-        '\n* 点击能力名显示说明，或者点击升/降升级或降级能力\n' +
+        '\n* 点击能力名显示说明，或者点击↑/↓升级或降级能力\n' +
           `** 角色身体部位的调教因子不足所需时，${me.name} 可以以两倍的因子补足差额`,
       );
       print_footer(chara_id, page_pointer.tab);

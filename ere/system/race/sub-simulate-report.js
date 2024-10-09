@@ -343,7 +343,9 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
           case race_event_enum.temp_end:
           case race_event_enum.temp_continue:
           case race_event_enum.lost_stamina:
-            ret_list.push(...get_random_entry(other_handlers[entry.e])(name));
+            if (name) {
+              ret_list.push(...get_random_entry(other_handlers[entry.e])(name));
+            }
             break;
           default:
             ret_list.push(

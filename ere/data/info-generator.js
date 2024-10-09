@@ -14,7 +14,7 @@ const {
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
-const attr_score_table = require('#/data/attr-score-table.json');
+const calc_attr_score = require('#/data/calc-attr-score');
 const chara_score = require('#/data/chara-score-table.json');
 const { buff_colors } = require('#/data/color-const');
 const status_desc = require('#/data/desc/status-desc.json');
@@ -115,20 +115,6 @@ const breast_talent_names = ['贫乳', '', '巨乳', '爆乳'];
 const title_desc = ['训练员', '马娘', '性奴', '孕袋'];
 
 /**
- * @param {number} attr
- * @returns {number}
- */
-function get_attr_score(attr) {
-  if (attr < 0) {
-    return 0;
-  }
-  if (attr > 1200) {
-    return attr_score_table[1200];
-  }
-  return attr_score_table[Math.floor(attr)];
-}
-
-/**
  *
  * @param {number} chara_id
  * @param {boolean} [show_true_bust]
@@ -151,6 +137,18 @@ function get_breast_cup(chara_id, show_true_bust) {
 function get_talent_bust_size(cup) {
   const cup_char = cup.charCodeAt(0);
   return Math.min(cup_char - 45 && Math.floor((cup_char - 66) / 2), 2);
+}
+
+/**
+ * @param {number} score
+ * @returns {string}
+ */
+function get_chara_rank(score) {
+  let score_level = 0;
+  while (score >= level_and_desc.chara_score.border[score_level]) {
+    score_level++;
+  }
+  return level_and_desc.chara_score.mark[score_level];
 }
 
 /**
@@ -270,6 +268,7 @@ module.exports = {
         return '';
     }
   },
+  get_chara_rank,
   /**
    * @param {number} chara_id
    * @param {boolean} [is_number]
@@ -278,17 +277,13 @@ module.exports = {
   get_chara_score(chara_id, is_number) {
     let score = era.get(`exp:${chara_id}:技能评价分`);
     score += attr_names.reduce(
-      (s, e) => s + get_attr_score(era.get(`base:${chara_id}:${e}`)),
+      (s, e) => s + calc_attr_score(era.get(`base:${chara_id}:${e}`)),
       0,
     );
     if (is_number) {
       return score;
     }
-    let score_level = 0;
-    while (score >= level_and_desc.chara_score.border[score_level]) {
-      score_level++;
-    }
-    return level_and_desc.chara_score.mark[score_level];
+    return get_chara_rank(score);
   },
   /**
    * @param {number} chara_id

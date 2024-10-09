@@ -15,6 +15,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
+const ero_scripts_0 = require('#/event/ero/ero-0');
 const common_pregnant_report_in_love = require('#/event/ero/snippets/common-pregnant-report-in-love');
 const get_participants_and_first_action = require('#/event/ero/snippets/get-participants-and-first-action');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -504,7 +505,7 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
   extra_flag,
 ) => {
   if (!extra_flag.mother_id) {
-    return await require('#/event/ero/ero-0')(hook, extra_flag);
+    return await ero_scripts_0(hook, extra_flag);
   }
   const father = get_chara_talk(extra_flag.father_id),
     mother = get_chara_talk(extra_flag.mother_id),
@@ -598,7 +599,7 @@ handlers[ero_hooks.have_baby] = async (_, hook, extra_flag) => {
     ),
     mother = get_chara_talk(era.get(`cflag:${extra_flag.child_id}:母方角色`));
   if (!mother.id) {
-    return await require('#/event/ero/ero-0')(hook, {
+    return await ero_scripts_0(hook, {
       child_id: extra_flag.child_id,
       father,
     });

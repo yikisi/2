@@ -198,10 +198,12 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
               '……',
             ]);
             await quick_into_sex(chara_id);
+            extra_flag.relation_change = 5;
           } else {
             await chara.say_and_wait('笨蛋，在想什么啊你！');
             await era.printAndWait([me.get_colored_name(), ' 被赶了出去……']);
             sys_change_motivation(chara_id, -1) && (await era.waitAnyKey());
+            extra_flag.relation_change = -5;
           }
         } else {
           await me.say_and_wait('不好意思打扰了！');

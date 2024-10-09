@@ -85,5 +85,5 @@ module.exports = new UmaSkill(
   false,
   true,
   [2, 3],
-  [UmaSkill.ability_tag_enum.currentSpeed],
+  [UmaSkill.ability_tag_enum.targetSpeed],
 );
