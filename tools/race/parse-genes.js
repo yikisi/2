@@ -63,7 +63,7 @@ skill_list
 
 writeFileSync(
   join(gene_path, 'gene-300000.js'),
-  "const UmaGene = require('#/data/race/model/uma-gene');\n\nmodule.exports = new UmaGene(300000,UmaGene.gene_rarity_enum.n,'殿堂马娘的灵魂','技能点数+400',UmaGene.gene_type_enum.skill,-1,100,400)",
+  "const UmaGene = require('#/data/race/model/uma-gene');\n\nmodule.exports = new UmaGene(300000,UmaGene.gene_rarity_enum.n,'殿堂马娘的灵魂','技能点数+600',UmaGene.gene_type_enum.skill,-1,100,600)",
 );
 output += 'gene_dict[300000] = require("#/data/race/gene/gene-300000.js")';
 
@@ -71,7 +71,3 @@ writeFileSync(
   join(gene_path, 'gene-const.js'),
   `${output}\nmodule.exports = {gene_dict};`,
 );
-
-execSync('npx eslint --fix ./ere/data/race/gene', {
-  cwd: join(process.cwd(), '../..'),
-});

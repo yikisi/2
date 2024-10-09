@@ -81,10 +81,6 @@ module.exports = {
 
 writeFileSync('../../ere/event/mec/mec-factory.js', output);
 
-execSync('npx eslint --fix ./ere/event/mec/mec-factory.js', {
-  cwd: join(process.cwd(), '../..'),
-});
-
 console.log(
   `[generate-mec-factory.js] registers ${mec_scripts.length} mechanism scripts`,
 );

@@ -90,10 +90,6 @@ module.exports = {
 
 writeFileSync('../../ere/event/rec/rec-factory.js', output);
 
-execSync('npx eslint --fix ./ere/event/rec/rec-factory.js', {
-  cwd: join(process.cwd(), '../..'),
-});
-
 console.log(
   `[generate-rec-factory.js] registers ${rec_scripts.length} recruit scripts`,
 );

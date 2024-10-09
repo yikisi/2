@@ -8,4 +8,5 @@ node generate-init-factory.js
 node generate-mec-factory.js
 node generate-rec-factory.js
 cd ../..
-git add ere/event/basement ere/event/check ere/event/init ere/event/mec ere/event/rec
+npx eslint --fix ere/event/basement/basement-factory.js ere/event/check/check-factory.js ere/event/init/init-factory.js ere/event/mec/mec-factory.js ere/event/rec/rec-factory.js
+git add ere/event/basement/basement-factory.js ere/event/check/check-factory.js ere/event/init/init-factory.js ere/event/mec/mec-factory.js ere/event/rec/rec-factory.js
