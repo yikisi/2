@@ -14,6 +14,22 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @param {Record<string,function(number,number,HookArg,{supporter:number})>} handlers */
 module.exports = (handlers) => {
+  handlers[ero_hooks.ask_supporter_prepare_virgin] = (
+    attacker,
+    defender,
+    _,
+    extra_flag,
+  ) => {
+    sys_do_sex(
+      new EroParticipant(extra_flag.supporter, part_enum.hand),
+      new EroParticipant(defender, part_enum.virgin, 0.1),
+    );
+    era.add(
+      `tcvar:${defender}:阴道扩张`,
+      1 + !era.get(`tcvar:${defender}:阴道扩张`),
+    );
+  };
+
   handlers[ero_hooks.ask_double_suck_nipple] = (
     attacker,
     defender,
@@ -219,6 +235,22 @@ module.exports = (handlers) => {
     sys_do_sex(
       new EroParticipant(attacker, part_enum.breast, -0.5),
       new EroParticipant(defender, part_enum.penis, -0.5),
+    );
+  };
+
+  handlers[ero_hooks.ask_cunnilingus_with_fucking] = (
+    attacker,
+    defender,
+    _,
+    extra_flag,
+  ) => {
+    sys_do_sex(
+      new EroParticipant(attacker, part_enum.penis),
+      new EroParticipant(defender, part_enum.virgin),
+    );
+    sys_do_sex(
+      new EroParticipant(extra_flag.supporter, part_enum.mouth),
+      new EroParticipant(defender, part_enum.clitoris),
     );
   };
 
