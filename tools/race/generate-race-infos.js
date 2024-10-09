@@ -142,6 +142,7 @@ csv.forEach((e) => {
   output += `${
     (Number(e[2].replace(/.$/, '')) - 1) * 4 + Number(e[3].replace(/.$/, ''))
   },\n`;
+  output += `${e[18]},\n`;
   // 赏金
   output += `${Number(e[17].replace(/\s*$/, '')) / 4},\n`;
   // 参数号

@@ -242,7 +242,7 @@ module.exports = class extends CustomizedBase {
 
     await grand.say_and_wait(['……', callname, '，对不起……']);
     await grand.say_and_wait([
-      '我也不喜欢这样，我也想做个好孩子，让喜欢上我。',
+      '我也不喜欢这样，我也想做个好孩子，让你喜欢上我。',
     ]);
     await grand.say_and_wait([
       '看到你痛苦的表情……我也会很难过，就像现在这样。',
@@ -252,18 +252,16 @@ module.exports = class extends CustomizedBase {
     await era.printAndWait([
       '一片模糊中，',
       me.get_colored_name(),
-      ' 对上了帽沿下那双满是罪恶感的眼睛。',
+      ' 对上了那双满载愧疚的眼眸。',
     ]);
     era.println();
 
     await grand.say_and_wait([
-      '我知道，',
+      '一定是因为',
       callname,
-      ' 一定有很多事情需要负起责任，所以才想离开这里……',
+      ' 有很多事情要负起责任……',
     ]);
-    await grand.say_and_wait([
-      '所以说，让我来帮你暂时忘掉那些让你痛苦的事情吧——',
-    ]);
+    await grand.say_and_wait(['让我……帮你忘掉那些痛苦的事情吧——']);
     era.println();
 
     await era.printAndWait([
@@ -296,7 +294,7 @@ module.exports = class extends CustomizedBase {
 
       era.print(['肌肤发泡般的恶寒传遍全身，从脖子到后背都被冷汗打湿。']);
       era.print([
-        '从通道另一端传来的声音微弱的几乎听不到，但其中的意思却强烈地传递过来。',
+        '从通道另一端传来的声音微弱的几乎听不到，其中的意思却强烈地传递过来。',
       ]);
       era.print([
         '步步逼近的',
@@ -317,11 +315,11 @@ module.exports = class extends CustomizedBase {
         era.print([
           '被逼退回门内的 ',
           me.get_colored_name(),
-          '，近在咫尺的爱马，一股不好的预感在心中弥漫开来。',
+          '，近在咫尺的爱马，不好的预感在心中弥漫开来。',
         ]);
         era.println();
 
-        grand.say(['对我来说，', callname, ' 才是最重要的，是我的一切。']);
+        grand.say(['对我来说，', callname, ' 才是最重要的，是我的一切……']);
       } else {
         grand.say([callname, '……你打算用这种话来糊弄我吗……']);
         era.println();
@@ -329,7 +327,7 @@ module.exports = class extends CustomizedBase {
         era.print([
           '被逼退回门内的 ',
           me.get_colored_name(),
-          '，近在咫尺的爱马，一股不好的预感在心中弥漫开来。',
+          '，近在咫尺的爱马，不好的预感在心中弥漫开来。',
         ]);
         era.println();
 
@@ -358,7 +356,7 @@ module.exports = class extends CustomizedBase {
       era.print([
         '无次数尝试中 ',
         me.get_colored_name(),
-        ' 早已尝惯失败，但留下的碎片毫无疑问将成为试图逃离的证据。',
+        ' 早已尝惯失败，但留下的碎片无疑将成为试图逃离的证据。',
       ]);
       era.println();
 
@@ -379,7 +377,7 @@ module.exports = class extends CustomizedBase {
       era.println();
 
       era.print([
-        '微弱又毫无起伏的声音定住了 ',
+        '微弱且毫无起伏的声音定住了 ',
         me.get_colored_name(),
         ' 的动作，宣告一时兴起的越狱游戏到此结束。',
       ]);
@@ -396,10 +394,8 @@ module.exports = class extends CustomizedBase {
       ]);
       era.println();
 
-      grand.say([
-        '都是我的错……一定是因为我的爱还不够，才会让你产生离开的想法。',
-      ]);
-      grand.say(['所以说，必须让 ', callname, ' 更多的感受到我的心意才可以……']);
+      grand.say(['都是我的错……我的爱还不够，才让你产生了离开的想法。']);
+      grand.say(['……必须让 ', callname, ' 感受到我的心意……']);
     }
   }
 
@@ -418,11 +414,13 @@ module.exports = class extends CustomizedBase {
         await era.printAndWait([
           '拒绝过后，',
           grand.get_teen_sex_title(),
-          '立刻露出了满是罪恶感的表情。',
+          '用力地攥紧了',
+          grand.sex,
+          '的海军帽。',
         ]);
         era.println();
 
-        await grand.say_and_wait(['再给我一点时间……好吗……', callname, '……']);
+        await grand.say_and_wait(['再给我一点时间……求求你……', callname, '……']);
         await grand.say_and_wait(['给我一个……让你重新喜欢上我的机会……']);
         era.println();
 
@@ -446,19 +444,23 @@ module.exports = class extends CustomizedBase {
         await grand.say_and_wait(['不行——']);
         era.println();
 
-        await era.printAndWait(['离开的请求换来的是斩钉截铁的拒绝。']);
+        await era.printAndWait(['离开的请求换来的是细若蚊声的拒绝。']);
         await era.printAndWait([
           '但拒绝过后，',
           grand.get_teen_sex_title(),
-          '立刻露出了满是罪恶感的表情。',
+          '的眼眶渐渐泛红。',
         ]);
         era.println();
 
-        await grand.say_and_wait(['我知道，都是我的错……']);
         await grand.say_and_wait([
-          '但是，如果放你离开的话，我可能就再也见不到 ',
+          '像这样把',
           callname,
-          ' 了！',
+          '监禁在这里……你一定很恨我吧……',
+        ]);
+        await grand.say_and_wait([
+          '但是……如果放你离开的话，我可能就再也见不到 ',
+          callname,
+          ' 了……！',
         ]);
         era.println();
 
@@ -470,13 +472,17 @@ module.exports = class extends CustomizedBase {
           me.get_colored_name(),
           ' 的胸口。',
         ]);
-        await era.printAndWait(['比起撒娇，力量更多传达着束缚的意味。']);
+        await era.printAndWait([
+          '温暖的液体浸湿了衬衣，清晰传达着',
+          grand.sex,
+          '的心意。',
+        ]);
         era.println();
 
         await grand.say_and_wait([
-          '那样不行……如果连远远看着你都不被允许的话，我不知道自己会变成什么样子……',
+          '那样不行……如果连远远看着都不被允许，我不知道自己会变成什么样子……',
         ]);
-        await grand.say_and_wait(['所以说……求你了，', callname, '……']);
+        await grand.say_and_wait(['……求你了，', callname, '……不要走……']);
         era.println();
 
         await era.printAndWait([
@@ -510,10 +516,8 @@ module.exports = class extends CustomizedBase {
       ]);
       era.println();
 
-      await grand.say_and_wait(['我知道，', callname, ' 是个很聪明的人……']);
-      await grand.say_and_wait([
-        '如果离开这里……就一定不会再出现在我的视线之中了。',
-      ]);
+      await grand.say_and_wait(['我知道，', callname, ' 很聪明……']);
+      await grand.say_and_wait(['离开这里后……就很难再找到你了。']);
       era.println();
 
       await era.printAndWait([
@@ -527,10 +531,8 @@ module.exports = class extends CustomizedBase {
       await era.printAndWait(['比起撒娇，力量更多传达着束缚的意味。']);
       era.println();
 
-      await grand.say_and_wait(['这一次，不会再让你离开我的视线了。']);
-      await grand.say_and_wait([
-        '……为了独占你，我也不知道自己会做出什么事情。',
-      ]);
+      await grand.say_and_wait(['这一次，不会让你离开我的视线了。']);
+      await grand.say_and_wait(['……为了独占你，我不知道自己会做出什么事情。']);
     }
   }
 
@@ -550,7 +552,7 @@ module.exports = class extends CustomizedBase {
       me = get_chara_talk(0),
       callname = sys_get_colored_callname(89, 0);
     new GrandLifeMarks().b_strike = 1;
-    await grand.say_and_wait(['嘿咻…嘿咻……']);
+    await grand.say_and_wait(['嘿咻……嘿咻……']);
     era.println();
 
     await era.printAndWait([
@@ -571,9 +573,9 @@ module.exports = class extends CustomizedBase {
     era.println();
 
     await grand.say_and_wait([
-      '像这样为 ',
+      '为 ',
       callname,
-      ' 铺床，总觉得我们…像那个…家、家人一样呢…诶嘿嘿。',
+      ' 铺床，总觉得……像那个……家、家人一样……诶嘿嘿。',
     ]);
     era.println();
 
@@ -581,9 +583,9 @@ module.exports = class extends CustomizedBase {
     era.println();
 
     await grand.say_and_wait([
-      '我经常会一个人想象…想象我和 ',
+      '我经常一个人想象……我和 ',
       callname,
-      ' 未来成为家人的样子。',
+      ' 成为家人的样子。',
     ]);
     era.println();
 
@@ -591,13 +593,21 @@ module.exports = class extends CustomizedBase {
     era.println();
 
     await grand.say_and_wait([
-      '不过从我监禁 ',
+      '不过从监禁 ',
       callname,
-      ' 的那一刻起，想象就不可能成为现实了吧…',
+      ' 的那一刻起，想象就不可能成为现实了吧……',
     ]);
-    await grand.say_and_wait(['那个， ', callname, ' …我准备了料理——']);
+    await grand.say_and_wait(['那个，', callname, '……我准备了料理——']);
+    era.println();
     await me.say_and_wait(['——小心！！']);
-    await grand.say_and_wait(['——啊！', callname, ' ！']);
+    era.println();
+    await grand.say_and_wait([
+      '——啊！',
+      callname.content[0],
+      '、',
+      callname,
+      '！',
+    ]);
     era.println();
 
     await era.printAndWait([
@@ -612,7 +622,7 @@ module.exports = class extends CustomizedBase {
       grand.sex,
       '被砸在衣柜下面的 ',
       me.get_colored_name(),
-      '，渐渐沉入了自己的意识深处。',
+      '，却莫名感觉松了一口气。',
     ]);
   }
 
@@ -620,7 +630,7 @@ module.exports = class extends CustomizedBase {
     const grand = get_chara_talk(89),
       me = get_chara_talk(0),
       callname = sys_get_colored_callname(89, 0);
-    await grand.say_and_wait([callname, '，我回…']);
+    await grand.say_and_wait([callname, '，我回……']);
     await grand.say_and_wait(['诶——唔唔！']);
     era.println();
 
@@ -658,6 +668,7 @@ module.exports = class extends CustomizedBase {
       grand.get_child_sex_title(),
       '的身体不会造成伤害的办法。',
     ]);
+    era.println();
 
     await me.say_and_wait(['好好休息一下吧。']);
     era.println();
@@ -690,6 +701,12 @@ module.exports = class extends CustomizedBase {
       me = get_chara_talk(0),
       callname = sys_get_colored_callname(89, 0);
     if (era.get('exp:89:监禁次数') === 1) {
+      era.print([
+        me.get_colored_name(),
+        ' 猛地睁开眼，熟悉的天花板意味着担心的事情已经成为现实。',
+      ]);
+      era.println();
+
       grand.say(['啊，', callname, '，你醒了。']);
       grand.say(['为什么……一副做错了事情的表情呢？']);
       era.println();
@@ -705,13 +722,13 @@ module.exports = class extends CustomizedBase {
       grand.say([
         '我并不是想要责怪 ',
         callname,
-        ' ，会变成这样……全都是我的错。',
+        '，会变成这样……全都是我的错。',
       ]);
-      grand.say(['一直以来，我太依赖 ', callname, ' 了……总是忍不住向你撒娇……']);
+      grand.say(['一直以来，是我太依赖 ', callname, ' 了……总是向你撒娇……']);
       grand.say([
         '因为不忍心看到最喜欢的 ',
         callname,
-        ' 伤心的模样……所以一直在逃避。',
+        ' 伤心的模样……一直在逃避。',
       ]);
       era.println();
 
@@ -722,14 +739,21 @@ module.exports = class extends CustomizedBase {
       ]);
       era.println();
 
-      grand.say(['但是这一次……无论内心有多么痛苦，我都要努力，都要加油。']);
+      grand.say(['但这一次……无论内心多么痛苦，我都要努力，都要加油。']);
       grand.say(['不再依赖别人，不再哭泣，不再逃避。']);
-      grand.say(['你的身体，气味，还有你的体温，我也一样喜欢。']);
-      grand.say([callname, ' ，我爱你。']);
+      grand.say(['你的身体，气味，你的体温，我也一样喜欢。']);
+      grand.say([callname, '，我爱你。']);
     } else {
-      grand.say(['啊……！太好了， ', callname, ' ！你醒了！']);
+      era.print([
+        '冰冷的环境唤醒了沉睡的意识，',
+        me.get_colored_name(),
+        ' 的眼中模糊的映出了陌生的天花板。',
+      ]);
+      era.print(['为寻找一丝熟悉感而游移的目光，捕捉到了一个小小的白色身影。']);
+      era.println();
+      grand.say(['啊……！太好了，', callname, '！你醒了！']);
       grand.say(['……身体……有什么不舒服的地方吗？']);
-      grand.say(['因、因为不知道要用多少力气才好……被打晕过去，一定很痛吧……']);
+      grand.say(['因、因为不知道要用多少力气……被打晕过去，一定很痛吧……']);
       grand.say(['……这里是？']);
       era.println();
 
@@ -741,14 +765,14 @@ module.exports = class extends CustomizedBase {
         grand.get_colored_name(),
         ' 相撞。',
       ]);
-      era.print(['那双粘稠无光的蓝眸中，分明渗透出了深深的歉意。']);
+      era.print(['那双粘稠无光的蓝眸中，渗透出深深的歉意。']);
       era.println();
 
       grand.say(['对不起……我不能告诉 ', callname, '。']);
       grand.say([
         '……但、但是！我只是想和 ',
         callname,
-        ' 说说话，不会做出伤害你的事情的……！',
+        ' 说说话，不会伤害你的……！',
       ]);
       grand.say(['所以说……', callname, '，请你待在这里，哪里都不要去。']);
     }

@@ -120,6 +120,7 @@ class PseudoUma {
   // 各个需重复使用的计算基底
   base = {
     accBuffFromWiz: 0,
+    spdBuffFromWiz: 0,
     acceleration: 0,
     attr_err: 0,
     // 五项属性方差
@@ -245,6 +246,8 @@ class PseudoUma {
 
   /** 半身像 */
   image = '';
+
+  score_rank = 'G';
 
   /**
    * @param {number} index_chara 角色编号

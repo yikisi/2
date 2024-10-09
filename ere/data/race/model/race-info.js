@@ -272,6 +272,8 @@ module.exports = class RaceInfo {
   mess;
   // 天气
   weather;
+  // 白天或夜晚
+  daytime;
   // 是否有传奇对手
   has_legend;
   // 额外属性
@@ -299,6 +301,7 @@ module.exports = class RaceInfo {
    * @param {number[]} legends
    * @param {number} limit
    * @param {number} date
+   * @param {number} daytime
    * @param {number} prize
    * @param {number} param_id
    */
@@ -315,6 +318,7 @@ module.exports = class RaceInfo {
     legends,
     limit,
     date,
+    daytime,
     prize,
     param_id,
   ) {
@@ -331,6 +335,7 @@ module.exports = class RaceInfo {
     this.legends = legends;
     this.limit = limit;
     this.date = date;
+    this.daytime = daytime;
     this.prize =
       prize *
       (this.race_class === class_enum.G1 ? prize_ratio.G1 : prize_ratio.others);

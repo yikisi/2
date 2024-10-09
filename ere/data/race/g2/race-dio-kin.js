@@ -13,6 +13,7 @@ module.exports = new RaceInfo(
   [],
   RaceInfo.limit_enum.post4,
   11,
+  4,
   1000,
   11404,
 );

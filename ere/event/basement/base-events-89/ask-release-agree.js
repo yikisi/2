@@ -41,9 +41,7 @@ async function ask_release_agree() {
         callname,
         ' 了。',
       ]);
-      await grand.say_and_wait([
-        '『永远』什么的……对我来说真的非常……非常有魅力。',
-      ]);
+      await grand.say_and_wait(['『永远』什么的……真的非常……非常有魅力。']);
       era.println();
 
       await era.printAndWait([grand.get_colored_name(), ' 苦笑着。']);
@@ -54,9 +52,7 @@ async function ask_release_agree() {
       ]);
       era.println();
 
-      await grand.say_and_wait([
-        '不过……我果然还是不舍得离开这个充满我们之间回忆的地方。',
-      ]);
+      await grand.say_and_wait(['不过……我还是不舍得离开这个充满回忆的地方。']);
     } else {
       await grand.say_and_wait([
         '最近……',
@@ -68,9 +64,9 @@ async function ask_release_agree() {
       await grand.say_and_wait([
         '我知道',
         grand.sex,
-        '们是为了我好，但这也说明这里已经不安全了……',
+        '们是为了我好，但也说明这里已经不安全了……',
       ]);
-      await grand.say_and_wait(['想必再过不久，救援队就会发现这里吧。']);
+      await grand.say_and_wait(['再过不久，救援队就会发现这里吧。']);
       era.println();
 
       await era.printAndWait([grand.get_colored_name(), ' 苦笑着。']);
@@ -82,18 +78,18 @@ async function ask_release_agree() {
       era.println();
 
       await grand.say_and_wait([
-        '但是，我并不是因为这个才放 ',
+        '我……并不是因为这个才放 ',
         callname,
         ' 离开的。',
       ]);
     }
     await grand.say_and_wait([
-      '我本来打算……就算只能得到一点点的爱也好，哪怕要抛弃一切……我都不打算再放开你的手。',
+      '本来打算……就算只能得到一点点爱，哪怕要抛弃一切……都不会再放开你的手。',
     ]);
     await grand.say_and_wait([
-      '就算可能要亲手弄坏 ',
+      '就算要亲手弄坏 ',
       callname,
-      '，我也不想离开你的身边。',
+      '，也不想离开你的身边。',
     ]);
     era.println();
 
@@ -112,14 +108,14 @@ async function ask_release_agree() {
     era.println();
 
     await grand.say_and_wait([
-      '但是……这段时间，我总是回忆起和 ',
+      '……这段时间，我总是回忆起和 ',
       callname,
       ' 一起经历过的……各种各样的事情。',
     ]);
     await grand.say_and_wait([
       '现在我明白了……比起把 ',
       callname,
-      ' 强行绑在我的视线之内——',
+      ' 绑在我的视线内——',
     ]);
     await grand.say_and_wait(['我最喜欢的，是 ', callname, ' 的笑容。']);
     era.println();
@@ -138,10 +134,10 @@ async function ask_release_agree() {
     era.println();
 
     await grand.say_and_wait([
-      '如果这样做，还给你自由……你还有可能重新喜欢上我吗……？',
+      '如果这样做，还给你自由……你还会重新喜欢上我吗……？',
     ]);
     await grand.say_and_wait([
-      '……什么的，我明明知道，这种事情是不可能的，但还是忍不住抱有期待……',
+      '……什么的，明明知道，这种事情是不可能的，却忍不住抱有期待……',
     ]);
     era.println();
 
@@ -154,13 +150,9 @@ async function ask_release_agree() {
     era.println();
 
     if (another) {
-      await grand.say_and_wait([
-        '快走吧，',
-        callname,
-        '……趁着其他人还没有回来。',
-      ]);
+      await grand.say_and_wait(['快走吧，', callname, '……趁其他人没有回来。']);
       await grand.say_and_wait(['不用担心我也可以……我……我不会有事的。']);
-      await grand.say_and_wait(['而且我这种人，根本就不值得你担心……']);
+      await grand.say_and_wait(['而且我这种人，根本不值得你担心……']);
       era.println();
 
       await era.printAndWait([
@@ -303,7 +295,7 @@ async function ask_release_agree() {
       await grand.say_and_wait([
         '而且 ',
         callname,
-        ' 无缘无故消失了这么久……大家一定已经——',
+        ' 消失了这么久……大家一定已经——',
       ]);
       era.println();
 
@@ -405,7 +397,7 @@ async function ask_release_agree() {
 
     await grand.say_and_wait(['嗯……我相信 ', callname, '。']);
     await grand.say_and_wait([
-      '但这一次……我也不会再让 ',
+      '但这一次……我不会再让 ',
       callname,
       ' 离开我的视线了。',
     ]);

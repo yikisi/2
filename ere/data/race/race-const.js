@@ -243,6 +243,8 @@ const race_enum = {
   prix_lat: 0,
   // 天狼星锦标
   siri_sta: 0,
+  // 英里冠军赛南部杯
+  mile_nbuh: 0,
   // 沙特阿拉伯皇家杯
   saud_cup: 0,
   // 府中皇冠锦标
@@ -457,6 +459,7 @@ race_infos[race_enum.all_com] = require('#/data/race/g2/race-all-com');
 race_infos[race_enum.sprt_sta] = require('#/data/race/g1/race-sprt-sta');
 race_infos[race_enum.prix_lat] = require('#/data/race/g1/race-prix-lat');
 race_infos[race_enum.siri_sta] = require('#/data/race/g3/race-siri-sta');
+race_infos[race_enum.mile_nbuh] = require('#/data/race/g1/race-mile-nbuh');
 race_infos[race_enum.saud_cup] = require('#/data/race/g3/race-saud-cup');
 race_infos[race_enum.fuch_sta] = require('#/data/race/g2/race-fuch-sta');
 race_infos[race_enum.main_oka] = require('#/data/race/g2/race-main-oka');

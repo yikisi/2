@@ -696,7 +696,7 @@ module.exports = async () => {
                   ...skill.get_colored_name(),
                   '吗？',
                   ...(to_remove
-                    ? ['将遗忘', ...to_remove.get_colored_name(), '。']
+                    ? ['将取代', ...to_remove.get_colored_name(), '。']
                     : []),
                 ])
               ) {

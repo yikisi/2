@@ -13,6 +13,7 @@ module.exports = new RaceInfo(
   [14, 42],
   RaceInfo.limit_enum.exact3,
   17,
+  0,
   3250,
   10602,
 );
