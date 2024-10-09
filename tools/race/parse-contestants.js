@@ -163,7 +163,7 @@ async function task() {
       skills: 9060101,
       id: 60,
       image: '内恰_春_半身',
-      name: '传奇内恰',
+      name: '传奇素质',
     },
     {
       attrs: [1760, 1105, 1598, 1316, 1215],
