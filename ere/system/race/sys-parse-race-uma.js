@@ -214,8 +214,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       const legend = get_random_entry(
         legends_list.filter(
           (e) =>
-            e.adapt_ground[info.ground] >= 5 &&
-            e.adapt_distance[info.distance] >= 5,
+            e.adapt_ground[info.ground] >= 4 &&
+            e.adapt_distance[info.distance] >= 4,
         ),
       );
       if (legend) {

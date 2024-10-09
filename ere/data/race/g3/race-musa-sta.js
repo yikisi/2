@@ -1,19 +1,1 @@
-const RaceInfo = require('#/data/race/model/race-info');
-
-module.exports = new RaceInfo(
-  'Musashino Stakes',
-  '武藏野锦标',
-  RaceInfo.class_enum.G3,
-  RaceInfo.track_enum.tokyo,
-  RaceInfo.ground_enum.mud,
-  1600,
-  RaceInfo.distance_enum.mile,
-  RaceInfo.rotation_enum.left,
-  16,
-  [],
-  RaceInfo.limit_enum.post3,
-  42,
-  0,
-  1000,
-  10611,
-);
+const RaceInfo = require('#/data/race/model/race-info');module.exports = new RaceInfo(  'Musashino Stakes',  '武藏野锦标',  RaceInfo.class_enum.G3,  RaceInfo.track_enum.tokyo,  RaceInfo.ground_enum.mud,  1600,  RaceInfo.distance_enum.mile,  RaceInfo.rotation_enum.left,  16,  [100],  RaceInfo.limit_enum.post3,  42,  0,  1000,  10611,);
