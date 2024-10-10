@@ -552,6 +552,11 @@ module.exports = async () => {
                 content: "Trainers' Legend G 译文仓库",
                 url: 'https://github.com/MinamiChiwa/Trainers-Legend-G-TRANS',
               },
+              '、',
+              {
+                content: '赛马娘中文Wiki',
+                url: 'https://wiki.biligame.com/umamusume/%E9%A6%96%E9%A1%B5',
+              },
             ],
             type: 'text',
           },
