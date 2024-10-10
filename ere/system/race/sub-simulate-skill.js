@@ -683,6 +683,9 @@ function sub_simulate_skill(
                   case target_type_enum.Self:
                     skill.aims[i][j] = [uma];
                     break;
+                  case target_type_enum.All:
+                    skill.aims[i][j] = list_in_race.filter((e) => e !== uma);
+                    break;
                   case target_type_enum.Visible:
                     skill.aims[i][j] = list_in_race.filter(
                       (e) =>
