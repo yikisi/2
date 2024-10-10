@@ -108,8 +108,8 @@ const ability_usage_enum = {
   MultiplySingleModeWinCount: 10,
   // 终弯超过人数
   MultiplyOvertakeCount: 11,
-  // 粉丝数决定倍率：20k、50k、100k、160k，分别为0.8、0.9、1.0、1.1、1.2
   MultiplyFanCount: 12,
+  MultiplyFanCount2: 25,
   MultiplyMaximumRawStatus: 13,
   // 发动绿技能数量决定倍率：3、5、6，分别+1，最高3
   MultiplyActivateSpecificTagSkillCount: 14,
@@ -129,7 +129,6 @@ const ability_usage_enum = {
   MultiplyForeignAdaptability: 24,
   MultiplyUAFWins: 26,
   MultiplyCookingPt: 27,
-  Unknown: 25,
 };
 
 const target_type_enum = {

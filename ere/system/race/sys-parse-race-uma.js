@@ -462,11 +462,11 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
   );
 
   // 看台砍掉了：随机对面或者同侧
-  // 比赛时间：随机白天或晚上
   const straight_front_type = (Math.random() < 0.5) + 1,
     corner_count = info.lanes.filter((e) => e.is_curve).length;
   ret.forEach((uma) => {
     uma.attrs = uma.attrs.map(Math.ceil);
+    uma.base.max_raw_status = Math.max(...uma.attrs);
     uma.score_rank = get_chara_rank(
       uma.attrs.reduce((p, c) => p + calc_attr_score(c), 0) +
         uma.list_skill.reduce((p, c) => p + c.data.grade_value, 0),
