@@ -31,13 +31,18 @@ module.exports = async () => {
     await era.clear();
     print_page_header();
 
-    era.drawLine();
-    msg_notification && era.print(msg_notification, { align: 'center' });
-
-    era.drawLine();
-    era.print('要从哪个栏位读取？');
-
     const buffer = [];
+    if (msg_notification) {
+      buffer.push(
+        { type: 'divider' },
+        {
+          config: { align: 'center' },
+          content: msg_notification,
+          type: 'text',
+        },
+      );
+    }
+    buffer.push({ config: { content: '要从哪个栏位读取？' }, type: 'divider' });
     new Array(11).fill(0).forEach((_, e) => {
       let comm_desc = era.get(`global:saves:${e}`);
       const enabled = comm_desc && !comm_desc.startsWith('(FILE LOST)');

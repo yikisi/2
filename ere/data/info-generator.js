@@ -558,6 +558,16 @@ module.exports = {
     return [get_relation_mark(relation, chara_id), `(${relation})`];
   },
   get_relation_mark,
+  get_save_name() {
+    const prefix =
+      era.get('flag:存档名') ||
+      `${era.get('callname:0:-1')} - ${era.get('flag:当前年')} 年 ${era.get(
+        'flag:当前月',
+      )} 月 第 ${era.get('flag:当前周')} 周`;
+    return `${prefix} (${new Date().toLocaleString('zh-CN', {
+      timeZone: 'Asia/Shanghai',
+    })})`;
+  },
   /** @param {number} chara_id */
   get_skin(chara_id) {
     return skin_desc[era.get(`cflag:${chara_id}:肤色深度`) + 1];
