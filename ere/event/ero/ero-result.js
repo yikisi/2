@@ -73,6 +73,7 @@ handlers[ero_hooks.prison] = (chara_id) => {
         100,
     );
   }
+  era.set(`status:${chara_id}:爱意克制`, 0);
   life_marks.b_cd = get_random_value(4, 8);
   era.set('flag:当前位置', location_enum.basement);
   new BasementOwners().push(chara_id);

@@ -152,6 +152,17 @@ async function sys_auto_rape(shown) {
       get_random_entry(chara_list_in_train),
     );
   }
+  if (
+    era.get(`status:0:沉睡`) &&
+    !era.get('status:0:马跳S') &&
+    era.get(`status:${master}:爱意克制`)
+  ) {
+    await sys_call_ero_event(master, ero_hooks.use_medicine, {
+      item: medicine_enum.uma_s,
+      user: 0,
+    });
+    return;
+  }
   if ((temp = era.get('flag:惩戒力度')) >= 2) {
     let ret_flag = false;
     if (!get_penis_size(master)) {

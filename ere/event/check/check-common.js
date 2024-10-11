@@ -233,7 +233,8 @@ class CustomizedCheck {
       (delta > 0) *
       (0.05 +
         // 地下室限制最大倍率3倍，3*100-0=300，好感在0以下必然地下室
-        (delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)) -
+        (delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)) +
+        0.2 * era.get(`status:${this.id}:爱意克制`) -
         0.25 * get_action_debuff(this.id));
     switch (era.get('flag:惩戒力度')) {
       case 2:
@@ -248,7 +249,9 @@ class CustomizedCheck {
         ratio
       }=${delta > 0}(开关)*(0.05(基础)+${
         delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)
-      }(好感爱慕)-${0.25 * get_action_debuff(this.id)}(行动debuff))`,
+      }(好感爱慕)+${
+        0.1 * era.get(`status:${this.id}:爱意克制`)
+      }(爱意克制)-${0.25 * get_action_debuff(this.id)}(行动debuff))`,
     );
     return ratio >= 1 || dice < ratio;
   }
@@ -265,6 +268,7 @@ class CustomizedCheck {
     let delta = love * raping_limit - relation;
     if (
       (punish_level <= 1 &&
+        !era.get(`status:${this.id}:爱意克制`) &&
         (era.get('flag:当前位置') === location_enum.basement ||
           !raping_limit ||
           love < 50 ||
@@ -281,7 +285,8 @@ class CustomizedCheck {
       Math.pow(2, era.get(`base:${this.id}:性欲`) / 2000 - 5) *
         (0.7 + 0.1 * era.get(`mark:${this.id}:欢愉`)) +
       0.05 * era.get(`talent:${this.id}:工口意愿`) +
-      0.5 * era.get('item:透明棉被') -
+      0.5 * era.get('item:透明棉被') +
+      0.2 * era.get(`status:${this.id}:爱意克制`) -
       0.5 * get_action_debuff(this.id);
     if (punish_level >= 2) {
       ratio += 0.3;
@@ -296,7 +301,9 @@ class CustomizedCheck {
       era.get(`base:${this.id}:性欲`) / 2000 - 5,
     )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
       0.05 * era.get(`talent:${this.id}:工口意愿`)
-    }(好色)+${0.5 * era.get('item:透明棉被')}(透明棉被)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
+    }(好色)+${0.5 * era.get('item:透明棉被')}(透明棉被)+${
+      0.2 * era.get(`status:${this.id}:爱意克制`)
+    }(爱意克制)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
     );
     return ratio >= 1 || dice < ratio;
   }
@@ -333,15 +340,21 @@ class CustomizedCheck {
       }(好色)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
     );
     if (ratio >= 1 || dice < ratio) {
-      return (
-        1 +
-        (era.get(`talent:${this.id}:反抗意愿`) >= 0 &&
-          (dice < 0.05 ||
-            era.get('flag:惩戒力度') >= 2 ||
-            era.get(`base:${this.id}:性欲`) >= lust_border.want_sex ||
-            era.get(`base:${this.id}:压力`) >= pressure_border.apprehension ||
-            era.get(`talent:${this.id}:病娇`) === 2))
-      );
+      const great_success =
+        era.get(`talent:${this.id}:反抗意愿`) >= 0 &&
+        (dice < 0.05 ||
+          era.get('flag:惩戒力度') >= 2 ||
+          era.get(`base:${this.id}:性欲`) >= lust_border.want_sex ||
+          era.get(`base:${this.id}:压力`) >= pressure_border.apprehension ||
+          era.get(`talent:${this.id}:病娇`) === 2);
+      if (era.get(`status:${this.id}:爱意克制`)) {
+        if (!great_success) {
+          return 0;
+        }
+        era.set(`status:${this.id}:爱意克制`, 0);
+        return 2;
+      }
+      return 1 + great_success;
     }
     return 0;
   }

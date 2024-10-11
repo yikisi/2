@@ -236,7 +236,6 @@ function update_juel_buff(...ids) {
         (pleasure_level + Math.max(pain_level, shame_level) + slave_level) / 5 -
         hate_level / 20 -
         is_raping +
-        love_buff / 2 +
         !chara_id / 2,
     );
     set_juel_buff(
@@ -571,12 +570,12 @@ function end_ero(skip_juels, log_juels, ids) {
     sys_change_attr_and_print(
       chara_id,
       attr_enum.speed,
-      era.get(`ex:${chara_id}:速度获取`) / get_random_value(12, 18),
+      era.get(`ex:${chara_id}:速度获取`) / get_random_value(4, 6),
     );
     sys_change_attr_and_print(
       chara_id,
       attr_enum.strength,
-      era.get(`ex:${chara_id}:力量获取`) / get_random_value(12, 18),
+      era.get(`ex:${chara_id}:力量获取`) / get_random_value(4, 6),
     );
     sys_change_attr_and_print(
       chara_id,

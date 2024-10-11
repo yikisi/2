@@ -181,6 +181,9 @@ handlers[event_hooks.good_night] = async (chara_id, hook) => {
       era.println();
       sys_like_chara(chara_id, 0, -100) && (await era.waitAnyKey());
       new MyEduMarks().reject++;
+      if (era.get(`love:${chara_id}`) < 75 && Math.random() < 0.01) {
+        era.set(`status:${chara_id}:爱意克制`, 1);
+      }
     }
   }
 };

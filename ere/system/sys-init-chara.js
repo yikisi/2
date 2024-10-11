@@ -4,6 +4,7 @@ const sys_change_hair = require('#/system/chara/sys-change-hair');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 const { sys_fix_chara_base } = require('#/system/sys-calc-base-cflag');
 
+const { get_custom_init } = require('#/event/init/init-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const CharaTalk = require('#/utils/chara-talk');
@@ -26,7 +27,6 @@ const {
 const RaceHistory = require('#/data/race/model/race-history');
 const { chara_skill_dict } = require('#/data/race/skill/skill-const');
 const { attr_names } = require('#/data/train-const');
-const { get_custom_init } = require('#/event/init/init-factory');
 
 /**
  * @param {number} chara_id
@@ -379,6 +379,9 @@ module.exports = {
       era.get(`talent:${chara_id}:病娇`)
     ) {
       new YandereList().push(chara_id, true);
+      if (era.get(`love:${chara_id}`) >= 50) {
+        era.set(`status:${chara_id}:爱意克制`, 1);
+      }
     }
   },
   reset_chara,
