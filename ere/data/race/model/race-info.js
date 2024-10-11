@@ -69,6 +69,8 @@ const track_enum = {
   morioka: 10105,
   // 隆尚
   longchamp: 10201,
+  // 圣安妮塔公园
+  santa_anita: 10202,
   // 尚蒂伊
   chantilly: 33001,
   // 圣克劳德
@@ -102,6 +104,7 @@ track_names[track_enum.kawasaki] = '川崎';
 track_names[track_enum.funabashi] = '船桥';
 track_names[track_enum.morioka] = '盛冈';
 track_names[track_enum.longchamp] = '隆尚';
+track_names[track_enum.santa_anita] = '圣安妮塔公园';
 track_names[track_enum.st_cloud] = '圣克劳德';
 track_names[track_enum.chantilly] = '尚蒂伊';
 track_names[track_enum.bashang] = '从化';

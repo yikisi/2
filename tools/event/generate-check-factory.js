@@ -1,6 +1,4 @@
-const { execSync } = require('child_process');
 const { readdirSync, writeFileSync } = require('fs');
-const { join } = require('path');
 
 const relative_path = '../../ere/event/check';
 

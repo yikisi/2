@@ -1,6 +1,4 @@
-const { execSync } = require('child_process');
 const { readdirSync, writeFileSync } = require('fs');
-const { join } = require('path');
 
 const mec_scripts = readdirSync('../../ere/event/mec')
   .filter(

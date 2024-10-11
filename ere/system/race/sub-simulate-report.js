@@ -66,10 +66,10 @@ const top_handlers = [
 const other_handlers = {};
 
 other_handlers[race_event_enum.lost_stamina] = [
-  (names) => [names, '，失速！'],
-  (names) => [names, ' 的步伐踉跄了起来，已经无法维持速度了！'],
-  (names) => [names, ' 速度变慢了！'],
-  (names) => [names, ' 到极限了吗！？'],
+  (names) => [...names, '，失速！'],
+  (names) => [...names, ' 的步伐踉跄了起来，已经无法维持速度了！'],
+  (names) => [...names, ' 速度变慢了！'],
+  (names) => [...names, ' 到极限了吗！？'],
 ];
 other_handlers[race_event_enum.loc_mind_nige_ex] = [
   (names) => ['逃马怎容他马在前！冲啊，', ...names, '！'],
@@ -309,8 +309,12 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
         entry.p
           .filter((e, i, l) => l.findIndex((v) => v.u === e.u) === i)
           .slice(0, 2)
-          .forEach((e) => name.push(' 与 ', e.u.get_colored_name()));
-        name.shift();
+          .forEach((e, i) => {
+            if (i > 0) {
+              name.push(' 与 ');
+            }
+            name.push(e.u.get_colored_name());
+          });
         switch (entry.e) {
           case race_event_enum.final_push:
             if (final_push_pop !== undefined) {
@@ -343,9 +347,7 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
           case race_event_enum.temp_end:
           case race_event_enum.temp_continue:
           case race_event_enum.lost_stamina:
-            if (name) {
-              ret_list.push(...get_random_entry(other_handlers[entry.e])(name));
-            }
+            ret_list.push(...get_random_entry(other_handlers[entry.e])(name));
             break;
           default:
             ret_list.push(

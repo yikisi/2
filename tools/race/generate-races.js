@@ -86,6 +86,7 @@ track_dict['圣克劳德'] = 'st_cloud';
 track_dict['丘吉尔园'] = 'kentucky';
 track_dict['宾利高'] = 'baltimore';
 track_dict['贝蒙园'] = 'new_york';
+track_dict['圣安妮塔公园'] = 'santa_anita';
 
 const rotation_dict = {};
 rotation_dict['右'] = 'right';

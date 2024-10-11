@@ -1109,6 +1109,16 @@ module.exports = {
       new RaceLane(1762, 2066, 4, true, true),
       new RaceLane(2066, 2400, 3, false, true),
     ],
+    55503: [
+      new RaceLane(0, 170, 4, true, false),
+      new RaceLane(170, 710, 1, false, false),
+      new RaceLane(710, 865, 1, true, false),
+      new RaceLane(865, 1020, 2, true, false),
+      new RaceLane(1020, 1426, 2, false, false),
+      new RaceLane(1426, 1576, 3, true, false),
+      new RaceLane(1576, 1726, 4, true, true),
+      new RaceLane(1726, 2000, 3, false, true),
+    ],
   },
   slope_params: {
     10101: [],
@@ -1419,5 +1429,6 @@ module.exports = {
     55500: [],
     55501: [],
     55502: [],
+    55503: [],
   },
 };
