@@ -9,6 +9,14 @@ const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { mess_enum, weather_enum } = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
 
+/**
+ * @param {number} [wins]
+ * @returns {number}
+ */
+function get_attr_buff(wins) {
+  return Math.min((wins || new SSEduMarks().wins) * 0.5, 20);
+}
+
 module.exports = class extends CustomizedMec {
   get_race_contestants(info) {
     if (era.get('flag:当前赛事') === race_enum.tenn_spr) {
@@ -20,7 +28,7 @@ module.exports = class extends CustomizedMec {
   }
 
   get_relation_buff() {
-    return Math.min(new SSEduMarks().wins * 2, 30);
+    return Math.min(new SSEduMarks().wins, 30);
   }
 
   get_status() {
@@ -30,7 +38,7 @@ module.exports = class extends CustomizedMec {
       ret_list.push({
         color: get_chara_color(this.id),
         content: `胜利的承诺(${wins})`,
-        title: `[胜利的承诺(${wins})]：参赛时属性+${this.get_relation_buff()}%，好感获取+${3 * wins}%，效果随连胜次数增强`,
+        title: `[胜利的承诺(${wins})]：参赛时属性+${get_attr_buff()}%，好感获取+${this.get_relation_buff()}%，效果随连胜次数增强`,
       });
     }
     return ret_list;
@@ -53,7 +61,7 @@ module.exports = class extends CustomizedMec {
     const { wins } = new SSEduMarks();
     if (wins > 0) {
       uma.attr_buffs.forEach((l) =>
-        l.push(`+${this.get_relation_buff()}%[胜利的承诺]`),
+        l.push(`+${get_attr_buff(wins)}%[胜利的承诺]`),
       );
     }
   }

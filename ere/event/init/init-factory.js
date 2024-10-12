@@ -16,6 +16,7 @@ cons_dict[89] = require('#/event/init/init-89');
 cons_dict[204] = require('#/event/init/init-204');
 cons_dict[205] = require('#/event/init/init-205');
 cons_dict[206] = require('#/event/init/init-206');
+cons_dict[207] = require('#/event/init/init-207');
 cons_dict[301] = require('#/event/init/init-301');
 cons_dict[302] = require('#/event/init/init-302');
 cons_dict[308] = require('#/event/init/init-308');

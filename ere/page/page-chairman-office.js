@@ -186,11 +186,13 @@ async function page_chairman_office() {
                             align: 'center',
                             buttonType: '',
                             color,
-                            width: 6,
+                            width: 4,
                           },
-                          content: `${era.get(`static:${chara_id}:name`)}${
-                            flag_script ? '*' : ''
-                          }${star_premium_draw.chara === chara_id ? ' [已指名]' : ''}`,
+                          content:
+                            era.get(`static:${chara_id}:name`) +
+                            (star_premium_draw.chara === chara_id
+                              ? ' [已指名]'
+                              : ''),
                           priority: flag_script,
                           type: 'button',
                         };

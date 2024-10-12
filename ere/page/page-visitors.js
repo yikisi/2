@@ -36,6 +36,24 @@ const era = require('#/era-electron');
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
 
+handlers[207] = () =>
+  get('cflag:207:招募状态') === recruit_flags.yes || get('love:207') < 25
+    ? {}
+    : {
+        name: '「一起努力吧！」（招募）',
+        handle() {
+          set('callname:207:-2', '索侬艾尔菲');
+          set('cflag:207:招募状态', recruit_flags.yes);
+          if (get('talent:207:病娇')) {
+            new YandereList().push(207, true);
+          }
+          return printAndWait([
+            get_chara_talk(207).get_colored_name(),
+            ' 加入了队伍！',
+          ]);
+        },
+      };
+
 handlers[303] = () =>
   get('cflag:303:招募状态') === recruit_flags.yes
     ? {}
@@ -54,7 +72,7 @@ handlers[308] = () =>
         handle() {
           set('callname:308:-2', '光辉致意');
           set('cflag:308:招募状态', recruit_flags.yes);
-          if (era.get('talent:308:病娇')) {
+          if (get('talent:308:病娇')) {
             new YandereList().push(308, true);
           }
           return printAndWait([
@@ -73,11 +91,26 @@ handlers[343] = () =>
         handle() {
           set('callname:343:-2', '佐岳五月');
           set('cflag:343:招募状态', recruit_flags.yes);
-          if (era.get('talent:343:病娇')) {
+          if (get('talent:343:病娇')) {
             new YandereList().push(343, true);
           }
           return printAndWait([
             get_chara_talk(343).get_colored_name(),
+            ' 加入了队伍！',
+          ]);
+        },
+      };
+
+handlers[344] = () =>
+  get('cflag:344:招募状态') === recruit_flags.yes || get('love:344') < 25
+    ? {}
+    : {
+        name: '「一起努力吧！」（招募）',
+        handle() {
+          era.set('callname:344:-2', '都留歧凉花');
+          era.set('cflag:344:招募状态', recruit_flags.yes);
+          return era.printAndWait([
+            get_chara_talk(344).get_colored_name(),
             ' 加入了队伍！',
           ]);
         },
