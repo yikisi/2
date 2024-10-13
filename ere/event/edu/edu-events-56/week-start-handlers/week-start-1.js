@@ -19,6 +19,9 @@ const luck_ways = ['塔罗', '灵摆', '卦象', '星象', '数字命理', '骰�
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FukukitaruEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
   handlers.fortune_week = async (kitaru) => {
+    if (!era.get('status:56:运势依赖')) {
+      return;
+    }
     await print_event_name('吉凶占卜', kitaru);
     //random 0-3
     let luck;

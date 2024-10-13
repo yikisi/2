@@ -282,7 +282,7 @@ module.exports = async (src_chara) => {
           }
           new TasteLifeMarks().annoyance = get_random_value(13, 20);
           era.set('flag:随机种子', get_random_value(0, 233280 - 1));
-          era.set('flag:存档名', 1);
+          era.set('flag:存档名', 0);
           return true;
         case 97:
           player_name = '';

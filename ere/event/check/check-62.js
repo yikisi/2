@@ -12,18 +12,6 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
-const aim_races = {};
-aim_races[race_enum.begin_race] = 4;
-aim_races[get_aim_race_index(race_enum.hope_sta, 0)] = -4;
-aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.diam_sta, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
-
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
     const event_marks = new TanhuizaEduMarks(),
@@ -58,15 +46,21 @@ module.exports = class extends CustomizedCheck {
     return titles;
   }
 
-  check_next_week() {
-    const event_marks = new TanhuizaEduMarks();
-    if (event_marks.abandon_japa_cup) {
+  get_aim_races() {
+    const aim_races = {};
+    aim_races[race_enum.begin_race] = 4;
+    aim_races[get_aim_race_index(race_enum.hope_sta, 0)] = -4;
+    aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = 4;
+    aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 4;
+    aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 4;
+    aim_races[get_aim_race_index(race_enum.diam_sta, 2)] = 4;
+    aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 4;
+    aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
+    aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 4;
+    aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
+    if (new TanhuizaEduMarks().abandon_japa_cup) {
       aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 0;
     }
-    super.check_next_week();
-  }
-
-  get_aim_races() {
     return aim_races;
   }
 
@@ -74,7 +68,6 @@ module.exports = class extends CustomizedCheck {
     const buffer = [],
       races = new RaceHistory(this.id).get();
     const event_marks = new TanhuizaEduMarks();
-    event_marks.aim_goal ||= 0;
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push({
       check: Math.min(event_marks.aim_goal, 1),

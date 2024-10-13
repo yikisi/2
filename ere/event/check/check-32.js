@@ -444,10 +444,6 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
-  get_personal_titles() {
-    return ['超光速公主'];
-  }
-
   // eslint-disable-next-line no-unused-vars
   is_aim_race(race, edu_weeks, rank) {
     const { plan_b } = new TachyonEduMarks();

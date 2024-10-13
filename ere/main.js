@@ -12,6 +12,7 @@ const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { adaptability_colors } = require('#/data/color-const');
+const title_desc = require('#/data/desc/title-desc.json');
 const notes = require('#/data/notes.json');
 const { first_child_id, set_chara_ero_image } = require('#/data/other-const');
 
@@ -364,6 +365,10 @@ module.exports = async () => {
             .get('chara')
             .filter((e) => e && e < first_child_id)
             .map((e) => {
+              const title = era.get(`staticcstr:${e}:称号`),
+                desc =
+                  title_desc[title] ||
+                  '在一次育成周期内赢取了六次以上的G1比赛胜利';
               return {
                 config: {
                   align: 'center',
@@ -375,11 +380,17 @@ module.exports = async () => {
                       era.get(`static:${e}:name`),
                       '：',
                       {
-                        content: era.get(`staticcstr:${e}:称号`),
+                        content: title,
                         fontWeight: 'bold',
+                        title: `${title}：${desc}`,
                       },
                     ]
-                  : '？？？',
+                  : [
+                      {
+                        content: '？？？',
+                        title: `${era.get(`static:${e}:name`)}：${era.get(`staticcstr:${e}:称号`)}\n${desc}`,
+                      },
+                    ],
                 type: 'text',
               };
             }),
