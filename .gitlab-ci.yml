@@ -28,11 +28,15 @@ build:
     - cp -r ../ere ./$GAME_ALL_DIR/game/
     - cp -r ../csv ./$GAME_ALL_DIR/game/
     - cp -r ../res ./$GAME_ALL_DIR/game/
+    - cd ./$GAME_ALL_DIR/game/ere
+    - FILE_LIST=`find $PWD | xargs ls -d | grep json`
+    - NEW_LIST=(`echo $FILE_LIST | tr '\n' ' '` )
+    - for var in ${NEW_LIST[@]}; do jq -c '.' $var > ${var}.new; mv ${var}.new $var; done
+    - cd -
     - '[ -f ./$GAME_ALL_ZIP ] && rm ./$GAME_ALL_ZIP'
     - 7zz a -pera $GAME_ALL_ZIP ./$GAME_ALL_DIR
     - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${GAME_ALL_ZIP} "${GAME_ZIP_URL}"'
-    - cd ..
-    - '[ -f base.zip ] && rm base.zip'
+    - cd ./$GAME_ALL_DIR/game/
     - zip -r base.zip ./ere ./csv RELEASE.md CHANGELOG.md
     - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./base.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip"'
 
