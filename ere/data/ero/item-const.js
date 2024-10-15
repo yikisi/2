@@ -59,28 +59,30 @@ item_actions[item_enum.milk_pump] = '装上';
 item_actions[item_enum.artificial_virgin] = '套上';
 
 const medicine_enum = {
-  // 马跳Z
-  uma_z: 0,
-  // 马跳S
-  uma_s: 0,
-  // 超马跳Z
-  super_z: 0,
-  // 弗隆K
-  fron_k: 0,
-  // 弗隆P
-  fron_p: 0,
+  // 长效避孕药
+  anti_p_l: 0,
+  // 短效避孕药
+  anti_p_s: 0,
   // 母乳药剂
   drug_m: 0,
   // 促排卵药
   drug_p: 0,
-  // 短效避孕药
-  anti_p_s: 0,
-  // 长效避孕药
-  anti_p_l: 0,
+  // 弗隆K
+  fron_k: 0,
+  // 弗隆P
+  fron_p: 0,
   // 人奶
   milk_h: 0,
   // 马奶
   milk_u: 0,
+  // 高潮阻断剂
+  stop_o: 0,
+  // 超马跳Z
+  super_z: 0,
+  // 马跳S
+  uma_s: 0,
+  // 马跳Z
+  uma_z: 0,
 };
 Object.keys(medicine_enum).forEach((e, i) => (medicine_enum[e] = i));
 
@@ -96,6 +98,7 @@ medicine_names[medicine_enum.anti_p_s] = '短效避孕药';
 medicine_names[medicine_enum.anti_p_l] = '长效避孕药';
 medicine_names[medicine_enum.milk_h] = '人奶';
 medicine_names[medicine_enum.milk_u] = '马奶';
+medicine_names[medicine_enum.stop_o] = '高潮阻断药';
 
 module.exports = {
   /**

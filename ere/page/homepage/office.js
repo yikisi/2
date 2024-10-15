@@ -811,6 +811,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
           ...new Array(3).fill(0).map((_, i) => i + 27),
           ...new Array(12).fill(0).map((_, i) => i + 30),
           { id: 42, limit: true },
+          43,
         ]);
       era.set('flag:当前互动角色', 0);
       if (era.get('cflag:0:模版角色') !== 32) {

@@ -233,7 +233,9 @@ function update_juel_buff(...ids) {
           era.get(`talent:${chara_id}:情感活动`)) *
           3) /
           10 +
-        (pleasure_level + Math.max(pain_level, shame_level) + slave_level) / 5 -
+        pleasure_level / 10 +
+        Math.max(pain_level, shame_level) / 20 +
+        slave_level / 5 -
         hate_level / 20 -
         is_raping +
         !chara_id / 2,

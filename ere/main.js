@@ -93,7 +93,19 @@ module.exports = async () => {
   }
   const line_copyrights = [
     [[get_copyright_entry(3)], '天马闪光蹄'],
+    // [[get_copyright_entry(4), '、', get_copyright_entry(46)], '黑奴一号'],
     [[get_copyright_entry(7)], '雞雞'],
+    // [
+    //   [
+    //     get_copyright_entry(6),
+    //     '、',
+    //     get_copyright_entry(7),
+    //     '、',
+    //     get_copyright_entry(21),
+    //   ],
+    //   '雞雞',
+    // ],
+    // [[get_copyright_entry(13)], '伊兰'],
     [[get_copyright_entry(17)], '露娜俘虏'],
     [[get_copyright_entry(19)], '片手虾好评发售中！'],
     [[get_copyright_entry(24)], '黑奴二号'],
@@ -114,6 +126,7 @@ module.exports = async () => {
     [[get_copyright_entry(52)], '99'],
     [[get_copyright_entry(56)], 'ALEX'],
     [[get_copyright_entry(60)], '红红火火恍惚'],
+    // [[get_copyright_entry(64)], 'KUN'],
     [
       [get_copyright_entry(67)],
       [
@@ -134,8 +147,10 @@ module.exports = async () => {
         '无名黑奴',
       ],
     ],
+    // [[get_copyright_entry(71)], '洛洛'],
     [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
     [[get_copyright_entry(89, '地下室')], '無奈'],
+    // [[get_copyright_entry(89)], '無奈'],
     [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
     [[get_copyright_entry(119, '地下室')], '幽白書'],
     [
