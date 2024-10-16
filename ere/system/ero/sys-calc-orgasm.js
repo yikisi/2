@@ -604,6 +604,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                   life_marks.unexpected_pregnant =
                     sys_check_awake(chara_id) - sys_check_awake(other_id);
                   era.set(`status:${other_id}:排卵期`, 0);
+                  era.set(`status:${other_id}:经期`, 0);
                   await call_ero_script(
                     other_id || chara_id,
                     ero_hooks.be_pregnant,

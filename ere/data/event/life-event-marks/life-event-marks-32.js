@@ -19,6 +19,10 @@ class TachyonLifeMarks extends LifeEventMarks {
   reward;
   // 学园通知・药物散播
   drug_notice;
+  // 被茶座绿次数
+  betrayed;
+  // 绿帽癖速子
+  ntr_mark;
 
   constructor() {
     super(32);

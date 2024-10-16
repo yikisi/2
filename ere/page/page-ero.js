@@ -537,7 +537,7 @@ async function page_ero(lover, skip_start_end) {
 
     const filters = new Array(7)
         .fill(0)
-        .map((_, i) => era.get(`flag:${60 + i}`)),
+        .map((_, i) => era.get(`flag:${70 + i}`)),
       left_columns = [],
       lost_mind = era.get('tcvar:0:失神'),
       love = get_love_info(curr_lover),
@@ -882,7 +882,6 @@ async function page_ero(lover, skip_start_end) {
         era.get(`love:${e}`) >= 75 &&
         sys_check_awake(e) &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
-        !era.get(`talent:${e}:绿帽癖`) &&
         get_custom_mec(e).is_anger_for_unfaithful() &&
         (punish_option || era.get(`talent:${e}:病娇`)),
     );

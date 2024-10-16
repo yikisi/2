@@ -46,7 +46,7 @@ const icon2skill_color = {
   ),
   10016: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.spe,
+    UmaSkill.skill_border_enum.evol,
   ),
   10021: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.buff,

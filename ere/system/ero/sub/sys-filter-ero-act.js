@@ -34,7 +34,7 @@ function check_tags(
   chara_id,
   other_id,
 ) {
-  const ret_list = tags.map((tag) => {
+  const fail_index = tags.findIndex((tag) => {
     let ret;
     if (typeof tag === 'number') {
       ret = chara_tags_check[tag] === false || common_tags_check[tag] === false;
@@ -43,7 +43,7 @@ function check_tags(
     }
     return ret;
   });
-  return ret_list.filter((e) => e).length === 0;
+  return fail_index === -1;
 }
 
 /**

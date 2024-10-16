@@ -9,7 +9,6 @@ const {
 
 const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
 
-const get_random_name = require('#/utils/naming');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { base_emotion_juel } = require('#/data/ero/juel-const');
@@ -172,7 +171,7 @@ handlers[ero_hooks.after_betrayed] = async (chara_id, _, { partners }) => {
         sys_like_chara(
           chara_id,
           c,
-          get_random_name(20, 40) * (1 + (rape > 0)),
+          get_random_value(20, 40) * (1 + (rape > 0)),
         ) || p,
       wait_flag,
     );

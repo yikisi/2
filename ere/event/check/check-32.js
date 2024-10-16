@@ -58,6 +58,26 @@ function get_coffee_aim_entry(coffee, entry) {
 }
 
 module.exports = class extends CustomizedCheck {
+  check_after_betrayed(partners) {
+    if (
+      new TachyonEduMarks().plan_b &&
+      partners.indexOf(25) !== -1 &&
+      era.get('cflag:0:性别') > 0 &&
+      era.get('cflag:32:性别') !== 1
+    ) {
+      const life_marks = new TachyonLifeMarks();
+      if (life_marks.ntr_mark < 3) {
+        life_marks.betrayed++;
+        if (life_marks.ntr_mark === 0 && life_marks.betrayed >= 5) {
+          life_marks.ntr_mark = 1;
+        } else if (life_marks.ntr_mark === 2 && life_marks.betrayed >= 10) {
+          life_marks.ntr_mark = 3;
+          life_marks.betrayed = 0;
+        }
+      }
+    }
+  }
+
   check_and_get_titles(aim_check) {
     const races = new RaceHistory(32).get(),
       titles = [];

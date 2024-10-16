@@ -143,7 +143,7 @@ async function use_ero_medicine(chara) {
         e.e ||= e.e === undefined;
         return e;
       });
-  if (!item_list.filter((e) => e.e).length) {
+  if (item_list.findIndex((e) => e.e) === -1) {
     await era.printAndWait(
       aim_id
         ? ['没有可以喂给 ', aim_chara.get_colored_name(), ' 的药物……']

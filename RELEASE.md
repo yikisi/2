@@ -11,6 +11,7 @@ EraUma v1.0，适配 [EraElectron v2.2.1 (ginga)](https://gitgud.io/umaera/era-e
 
 * 追加实装以下角色的加笔事件
   * 爱丽速子
+    * 包括PlanB路线中与茶座关联的调教事件
   * 奇锐骏
 * 追加实装以下角色的部分调教口上
   * 爱丽速子

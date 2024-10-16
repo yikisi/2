@@ -16,7 +16,7 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const calc_attr_score = require('#/data/calc-attr-score');
 const chara_score = require('#/data/chara-score-table.json');
-const { buff_colors } = require('#/data/color-const');
+const { buff_colors, el_success_color } = require('#/data/color-const');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
 const { lust_border } = require('#/data/ero/orgasm-const');
@@ -710,6 +710,13 @@ module.exports = {
         talent_list.push('隐形巨乳');
       }
     }
+    if (era.get(`talent:${chara_id}:绿帽癖`)) {
+      talent_list.push({
+        color: el_success_color,
+        content: '[绿帽癖]',
+        display: 'inline-block',
+      });
+    }
     talent_list.push(...new Array(3).fill(0).map((_, i) => i + 40));
     const ero = era.get(`talent:${chara_id}:工口意愿`);
     if (ero) {
@@ -741,11 +748,14 @@ module.exports = {
       })
       .filter((e) => e)
       .map((e) => {
-        const print_obj = {
-          color: buff_colors[2],
-          content: `[${e}]`,
-          display: 'inline-block',
-        };
+        const print_obj =
+          e instanceof Object
+            ? e
+            : {
+                color: buff_colors[2],
+                content: `[${e}]`,
+              };
+        print_obj.display = 'inline-block';
         if (talent_desc[e]) {
           print_obj.title = `[${e}]：${talent_desc[e]}`;
         }

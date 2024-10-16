@@ -241,8 +241,7 @@ module.exports = class extends CustomizedCheck {
       }
       if (!event_marks.famous_in_famous && edu_weeks >= 96) {
         if (
-          new CharaTitles(3).get().filter((e) => e.n.endsWith('三冠')).length >
-          0
+          new CharaTitles(3).get().findIndex((e) => e.n.endsWith('三冠')) !== -1
         ) {
           event_marks.famous_in_famous++;
           add_event(event_hooks.out_start, event_obj);

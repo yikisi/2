@@ -121,9 +121,13 @@ async function game_over(again) {
               width: 12,
             });
             await era.printAndWait(
-              `？？？「${CharaTalk.me.actual_name}……怠惰，傲慢${
-                era.get('flag:变态行为') ? '，色欲' : ''
-              }，今天……你获得了新生。」`,
+              [
+                '？？？「',
+                CharaTalk.me.get_colored_name(),
+                '……怠惰，傲慢',
+                era.get('flag:变态行为') ? '，色欲' : '',
+                '……今天……你获得了新生。」',
+              ],
               {
                 offset: 6,
                 width: 12,
