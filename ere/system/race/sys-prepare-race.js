@@ -91,6 +91,45 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     }
   }
 
+  // 位置意识
+  // 逃
+  race_info.loc_mind_diff.nige_speed_up_nige[0] = Math.max(
+    loc_mind_base_diff,
+    4.5,
+  );
+  race_info.loc_mind_diff.nige_speed_up_other[0] = Math.max(
+    5 * loc_mind_base_diff,
+    12.5,
+  );
+  race_info.loc_mind_diff.nige_over_take[0] = Math.max(
+    3 * loc_mind_base_diff,
+    10,
+  );
+
+  // 大逃
+  race_info.loc_mind_diff.nige_speed_up_nige[1] = Math.max(
+    6 * loc_mind_base_diff,
+    17.5,
+  );
+  race_info.loc_mind_diff.nige_speed_up_other[1] =
+    race_info.loc_mind_diff.nige_speed_up_nige[1];
+  race_info.loc_mind_diff.nige_over_take[1] = Math.max(
+    8 * loc_mind_base_diff,
+    27.5,
+  );
+
+  // 先
+  race_info.loc_mind_diff.other_lower[0] = 3;
+  race_info.loc_mind_diff.other_upper[0] = 5 * loc_mind_base_diff;
+
+  // 差
+  race_info.loc_mind_diff.other_lower[1] = 6.5 * loc_mind_base_diff;
+  race_info.loc_mind_diff.other_upper[1] = 7 * loc_mind_base_diff;
+
+  // 追
+  race_info.loc_mind_diff.other_lower[2] = 7.5 * loc_mind_base_diff;
+  race_info.loc_mind_diff.other_upper[2] = 8 * loc_mind_base_diff;
+
   const team_total_attrs = new Array(5).fill(0);
   const half_attr_border = max_attr - 2 * race_info.extra_attr;
 
@@ -485,44 +524,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     // 由智力决定最终冲刺计划的选择概率
     uma.probs.planRush = 0.15 + 0.0005 * uma.attrs[attr_enum.intelligence];
 
-    // 位置意识
-    // 逃
-    race_info.loc_mind_diff.nige_speed_up_nige[0] = Math.max(
-      loc_mind_base_diff,
-      4.5,
-    );
-    race_info.loc_mind_diff.nige_speed_up_other[0] = Math.max(
-      5 * loc_mind_base_diff,
-      12.5,
-    );
-    race_info.loc_mind_diff.nige_over_take[0] = Math.max(
-      3 * loc_mind_base_diff,
-      10,
-    );
-
-    // 大逃
-    race_info.loc_mind_diff.nige_speed_up_nige[1] = Math.max(
-      6 * loc_mind_base_diff,
-      17.5,
-    );
-    race_info.loc_mind_diff.nige_speed_up_other[1] =
-      race_info.loc_mind_diff.nige_speed_up_nige[1];
-    race_info.loc_mind_diff.nige_over_take[1] = Math.max(
-      8 * loc_mind_base_diff,
-      27.5,
-    );
-
-    // 先
-    race_info.loc_mind_diff.other_lower[0] = 3;
-    race_info.loc_mind_diff.other_upper[0] = 5 * loc_mind_base_diff;
-
-    // 差
-    race_info.loc_mind_diff.other_lower[1] = 6.5 * loc_mind_base_diff;
-    race_info.loc_mind_diff.other_upper[1] = 7 * loc_mind_base_diff;
-
-    // 追
-    race_info.loc_mind_diff.other_lower[2] = 7.5 * loc_mind_base_diff;
-    race_info.loc_mind_diff.other_upper[2] = 8 * loc_mind_base_diff;
+    uma.base.loc_mind_style = uma.style;
 
     if (uma.base.loc_mind_style > 0) {
       reset_loc_mind_other_diff(uma, race_info);

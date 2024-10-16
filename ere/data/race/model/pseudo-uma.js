@@ -280,7 +280,7 @@ class PseudoUma {
     this.color = color;
     this.motivation = motivation;
     this.attrs = attrs;
-    this.style = this.base.loc_mind_style = style;
+    this.style = style;
     this.adapt_style_list = adapt_style_list;
     this.adapt_distance_list = adapt_distance_list;
     this.adapt_ground_list = adapt_ground_list;
