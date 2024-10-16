@@ -5,6 +5,7 @@
   final_push: 0,
   compete_fight: 0,
   blocked: 0,
+  temp_wrong_style: 0,
   loc_mind_nige_ex: 0,
   loc_mind_other_ex: 0,
   temptation: 0,
@@ -44,7 +45,7 @@ module.exports = {
   mod_velocity_style: [
     [1.063, 0.97, 0.96],
     [1, 0.984, 0.964],
-    [0.978, 0.99, 0.972],
+    [0.984, 0.99, 0.972],
     [0.938, 0.996, 0.988],
     [0.931, 1, 1],
   ],

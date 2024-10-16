@@ -97,9 +97,8 @@ handlers[event_hooks.office_cook] = async (chara_id) => {
 
 handlers[event_hooks.office_study] = async (chara_id) => {
   era.println();
-  let wait_flag = false;
   random_cost_in_action(chara_id, [0, 0], [100, 300]);
-  wait_flag ||= print_attr_change(
+  print_attr_change(
     chara_id,
     sys_change_attr_and_print(
       chara_id,
@@ -107,8 +106,12 @@ handlers[event_hooks.office_study] = async (chara_id) => {
       get_random_value(5, 10),
     ),
   );
-  wait_flag = sys_like_chara(chara_id, 0, get_random_value(5, 10)) || wait_flag;
-  wait_flag && (await era.waitAnyKey());
+  sys_like_chara(chara_id, 0, get_random_value(5, 10));
+  await era.printAndWait([
+    get_chara_talk(chara_id).get_colored_name(),
+    ' 获得了 4 点技能点数！',
+  ]);
+  era.add(`exp:${chara_id}:技能点数`, 4);
 };
 
 handlers[event_hooks.office_rest] = async (chara_id) => {
@@ -145,16 +148,21 @@ handlers[event_hooks.office_prepare] = async (chara_id) => {
   era.println();
   sys_change_money(-20);
   random_cost_in_action(chara_id, [0, 0], [100, 300]);
-  let to_print = sys_change_attr_and_print(
+  print_attr_change(
     chara_id,
-    attr_enum.intelligence,
-    get_random_value(5, 10),
+    sys_change_attr_and_print(
+      chara_id,
+      attr_enum.intelligence,
+      get_random_value(5, 10),
+    ),
   );
-  let wait_flag = to_print.length > 0;
-  wait_flag =
-    sys_change_motivation(chara_id, get_random_value(0, 1)) || wait_flag;
-  print_attr_change(chara_id, to_print);
-  wait_flag && (await era.waitAnyKey());
+  Math.random() < 0.75 + era.get('flag:训练难度') / 100 &&
+    sys_change_motivation(chara_id, 1);
+  await era.printAndWait([
+    get_chara_talk(chara_id).get_colored_name(),
+    ' 获得了 10 点技能点数！',
+  ]);
+  era.add(`exp:${chara_id}:技能点数`, 10);
 };
 
 handlers[event_hooks.office_game] = async (chara_id) => {
@@ -165,7 +173,9 @@ handlers[event_hooks.office_game] = async (chara_id) => {
     wait_flag =
       sys_like_chara(chara_id, 0, get_random_value(5, 10)) || wait_flag;
     wait_flag =
-      (Math.random() < 0.25 && sys_change_motivation(chara_id, 1)) || wait_flag;
+      (Math.random() < 0.5 + era.get('flag:训练难度') / 100 &&
+        sys_change_motivation(chara_id, 1)) ||
+      wait_flag;
     sys_change_pressure(chara_id, -get_random_value(100, 300));
   }
   wait_flag && (await era.waitAnyKey());
@@ -198,8 +208,8 @@ handlers[event_hooks.school_atrium] = async (chara_id, hook) => {
     era.println();
     let wait_flag = sys_like_chara(chara_id, 0, get_random_value(5, 10));
     wait_flag =
-      (Math.random() < 0.25 &&
-        sys_change_motivation(chara_id, get_random_value(0, 1))) ||
+      (Math.random() < 0.5 + era.get('flag:训练难度') / 100 &&
+        sys_change_motivation(chara_id, 1)) ||
       wait_flag;
     wait_flag && (await era.waitAnyKey());
   }
@@ -290,9 +300,10 @@ handlers[event_hooks.out_shopping] = async (chara_id, hook) => {
       print_attr_change(chara_id, temp);
       wait_flag ||= temp.length > 0;
       random_cost_in_action(chara_id, [0, 100], [200, 600]);
+      const dice = Math.random();
       wait_flag =
-        (Math.random() < 0.5 &&
-          sys_change_motivation(chara_id, get_random_value(0, 2))) ||
+        (dice < 0.75 + era.get('flag:训练难度') / 100 &&
+          sys_change_motivation(chara_id, 1 + (dice < 0.25))) ||
         wait_flag;
     }
     sys_change_money(-10);

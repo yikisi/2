@@ -126,6 +126,10 @@ other_handlers[race_event_enum.temp_continue] = [
   (names) => [...names, ' 深陷焦躁无法自拔！'],
   (names) => ['冷静下来啊 ', ...names, '！小心错失时机！'],
 ];
+other_handlers[race_event_enum.temp_wrong_style] = [
+  (names) => [...names, ' 似乎改变了跑法！'],
+  (names) => [...names, ' 怎么在拼命前冲！'],
+];
 
 /** @type {(function(PseudoUma,PseudoUma))[]} */
 let top_list;
@@ -347,6 +351,7 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
           case race_event_enum.temp_end:
           case race_event_enum.temp_continue:
           case race_event_enum.lost_stamina:
+          case race_event_enum.temp_wrong_style:
             ret_list.push(...get_random_entry(other_handlers[entry.e])(name));
             break;
           default:
