@@ -9,13 +9,6 @@ class YandereList {
     this.obj = get('flag:病娇列表') || set('flag:病娇列表', []);
   }
 
-  clean() {
-    this.obj = set(
-      'flag:病娇列表',
-      (this.obj || []).filter((e) => e),
-    );
-  }
-
   /**
    * @param {number} chara_id
    * @param {boolean} [in_init]
