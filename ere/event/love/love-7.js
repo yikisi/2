@@ -526,7 +526,6 @@ async function golden_ship_attack() {
   }
   if (ret[4] !== 3) {
     new YandereList().push(7);
-    era.set('talent:7:病娇', 1);
   }
   await era.waitAnyKey();
   if (ret[1] === 2) {

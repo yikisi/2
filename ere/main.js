@@ -105,6 +105,7 @@ module.exports = async () => {
     //   ],
     //   '雞雞',
     // ],
+    [[get_copyright_entry(13, '地下室')], '伊兰'],
     // [[get_copyright_entry(13)], '伊兰'],
     [[get_copyright_entry(17)], '露娜俘虏'],
     [[get_copyright_entry(19)], '片手虾好评发售中！'],
@@ -126,6 +127,7 @@ module.exports = async () => {
     [[get_copyright_entry(52)], '99'],
     [[get_copyright_entry(56)], 'ALEX'],
     [[get_copyright_entry(60)], '红红火火恍惚'],
+    [[get_copyright_entry(64, '地下室')], 'KUN'],
     // [[get_copyright_entry(64)], 'KUN'],
     [
       [get_copyright_entry(67)],

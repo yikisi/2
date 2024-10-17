@@ -102,7 +102,7 @@ module.exports = {
         personal_titles = get_custom_check(chara.id).get_personal_titles();
       if (personal_titles.length) {
         personal_titles.map((e) => {
-          const check = titles.findIndex((t) => t.n === e) !== 0;
+          const check = titles.findIndex((t) => t.n === e) !== -1;
           race_info_list.push(
             {
               config: { color: chara.color, width: 4 },
