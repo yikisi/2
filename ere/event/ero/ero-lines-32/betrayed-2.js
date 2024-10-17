@@ -20,8 +20,6 @@ const { buff_colors } = require('#/data/color-const');
 const item_desc = require('#/data/desc/shop-desc.json');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
-const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 /** @param {TachyonLifeMarks} tachyon_marks */
 async function tachyon_betrayed_2(tachyon_marks) {
@@ -792,15 +790,6 @@ async function tachyon_betrayed_2(tachyon_marks) {
       new EroParticipant(25, part_enum.foot),
       false,
     );
-    const coffee_marks = new LifeEventMarks(25);
-    coffee_marks.report = 1;
-    coffee_marks.sperm = 0;
-    tachyon_marks.unexpected_pregnant = 0;
-    era.add('exp:0:授种次数', 1);
-    era.set('cflag:25:妊娠阶段', 1 << pregnant_stage_enum.embryo);
-    era.set('cflag:25:妊娠回合计时', 0);
-    era.set('status:25:排卵期', 0);
-    era.set('status:25:经期', 0);
     era.set('talent:32:绿帽癖', 1);
   }
 }
