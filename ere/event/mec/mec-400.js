@@ -14,7 +14,7 @@ const { race_enum } = require('#/data/race/race-const');
  * @returns {number}
  */
 function get_attr_buff(wins) {
-  return Math.min((wins || new SSEduMarks().wins) * 0.5, 20);
+  return Math.min(wins || new SSEduMarks().wins, 25);
 }
 
 module.exports = class extends CustomizedMec {

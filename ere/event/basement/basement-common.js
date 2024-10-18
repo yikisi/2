@@ -523,9 +523,9 @@ class CustomizedBase {
     } else {
       await era.printAndWait([me.get_colored_name(), ' 被一阵打斗声吵醒。']);
       await era.printAndWait([
-        '地下室一片狼藉，但 ',
+        '地下室一片狼藉，但全须全尾的 ',
         owner.get_colored_name(),
-        ' 仍然全须全尾，正朝 ',
+        ' 仍然朝 ',
         me.get_colored_name(),
         ' 微笑着……',
       ]);
