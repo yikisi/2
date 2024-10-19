@@ -34,7 +34,7 @@ const handlers = {
       await coffee.say_and_wait([
         '反正已经没有被 ',
         c_call_m,
-        ' 宠爱的价值了，就干脆作为无机物的台子存在吧',
+        ' 宠爱的价值了，就干脆作为无机物的台子存在吧。',
       ]);
     }
   },

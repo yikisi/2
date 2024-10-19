@@ -356,13 +356,10 @@ module.exports = async (_, save_and_next_week, flags) => {
             win =
               get_random_value(0, 100) <
                 100 * sys_get_strength_ratio_in_fight(0, chara_id) && win;
-            win = true;
             if (win) {
               await get_custom_basement(chara_id).battle_success();
             } else {
               await get_custom_basement(chara_id).battle_fail();
-            }
-            if (!win) {
               break;
             }
           }

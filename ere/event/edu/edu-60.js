@@ -6,11 +6,13 @@
 const era = require('#/era-electron');
 
 const {
-  sys_change_attr_and_print,
   sys_change_lust,
   sys_change_motivation,
 } = require('#/system/sys-calc-base-cflag');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_colored_callname,
+  sys_like_chara,
+} = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -28,11 +30,12 @@ const { location_enum } = require('#/data/locations');
 const handlers = {};
 
 handlers[event_hooks.week_start] = async (hook, _, event_object) => {
-  const chara_talk = get_chara_talk(60),
-    event_arg = event_object?.arg;
+  const nice_nature = get_chara_talk(60),
+    event_arg = event_object?.arg,
+    callname = sys_get_colored_callname(60, 0);
   if (event_arg === 47 + 1 || event_arg === 95 + 1) {
-    await print_event_name('新年', chara_talk);
-    await chara_talk.say_and_wait(
+    await print_event_name('新年', nice_nature);
+    await nice_nature.say_and_wait(
       `${era.get('callname:60:0')}，不写点新年题词吗？`,
     );
     await era.printAndWait('优秀素质一边说着，一边递来毛笔和纸。');
@@ -47,47 +50,43 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
     }
     const ret = await era.input();
     if (ret === 1) {
-      await chara_talk.say_and_wait(
+      await nice_nature.say_and_wait(
         `健康啊……看来 ${era.get(
           'callname:60:0',
         )} 也到这个年纪了呢腰酸背痛什么的很烦人对吧？${era.get(
           'callname:60:60',
         )} 懂的——`,
       );
-      await chara_talk.say_and_wait(
-        `嗯？不是写给自己的？那是……？诶？！我？不、那个……${era.get(
-          'callname:60:0',
-        )}，比起自己更关注我啊……呜！说这种话就太犯规了！${era.get(
-          'callname:60:0',
-        )} 也是我也是，都要快快乐乐的度过这新的一年啊！`,
-      );
-      const to_print = sys_change_attr_and_print(60, '体力', 300);
-      if (to_print) {
-        era.println();
-        await era.printAndWait([
-          chara_talk.get_colored_name(),
-          ' 的 ',
-          ...to_print,
-        ]);
-      }
+      await nice_nature.say_and_wait([
+        '嗯？不是写给自己的？那是……？诶？！我？不、那个……',
+        callname,
+        '，比起自己更关注我啊……呜！说这种话就太犯规了！',
+        callname,
+        ' 也是我也是，都要健健康康地度过这新的一年啊！',
+      ]);
+      get_attr_and_print_in_event(
+        60,
+        undefined,
+        0,
+        JSON.parse('{"体力":300}'),
+      ) && (await era.waitAnyKey());
     } else if (ret === 2) {
-      await chara_talk.say_and_wait(
-        `变强啊～${era.get(
-          'callname:60:0',
-        )}，意外的热血呢？还是说心理年龄比看上去的要……哈哈哈，开个玩笑……`,
-      );
-      await chara_talk.say_and_wait(
-        `嗯？不是写给自己的？那是……？诶？！我？不、那个……${era.get(
-          'callname:60:0',
-        )}，比起自己更关注我啊……呜！说这种话就太犯规了！${era.get(
-          'callname:60:0',
-        )} 也是我也是，都要快快乐乐的度过这新的一年啊！`,
-      );
-      era.println();
-      get_attr_and_print_in_event(60, new Array(5).fill(10), 0);
-      await era.waitAnyKey();
+      await nice_nature.say_and_wait([
+        '变强啊～',
+        callname,
+        '，意外地热血呢？还是说心理年龄比看上去的要……哈哈哈，开个玩笑……',
+      ]);
+      await nice_nature.say_and_wait([
+        '嗯？不是写给自己的？那是……？诶？！我？不、那个……',
+        callname,
+        '，比起自己更关注我啊……呜！说这种话就太犯规了！',
+        callname,
+        ' 也是我也是，都要快快乐乐地度过这新的一年啊！',
+      ]);
+      get_attr_and_print_in_event(60, new Array(5).fill(10), 0) &&
+        (await era.waitAnyKey());
     } else if (ret === 4) {
-      await chara_talk.say_and_wait(
+      await nice_nature.say_and_wait(
         `多、多子么？${era.get(
           'callname:60:0',
         )} 也真是的，一大早就开始说这么大胆的话题……不过要是 ${era.get(
@@ -99,23 +98,22 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
       );
       await quick_into_sex(60);
     } else {
-      await chara_talk.say_and_wait(
-        `多才吗？确实呢，有更多才能的人也更会招${chara_talk.get_child_sex_title()}子喜欢对吧，${era.get(
+      await nice_nature.say_and_wait(
+        `多才吗？确实呢，有更多才能的人也更会招${nice_nature.get_child_sex_title()}子喜欢对吧，${era.get(
           'callname:60:0',
         )} 也到这个年龄了呢，也是时候该考虑考虑自己的${
-          chara_talk.sex
+          nice_nature.sex
         }了……虽然这话由我说挺奇怪呢，哈哈哈哈……`,
       );
-      await chara_talk.say_and_wait(
-        `嗯？不是写给自己的？那是……？诶？！我？不、那个……${era.get(
-          'callname:60:0',
-        )}，比起自己更关注我啊……呜！说这种话就太犯规了！${era.get(
-          'callname:60:0',
-        )} 也是我也是，都要快快乐乐的度过这新的一年啊！`,
-      );
-      era.println();
-      get_attr_and_print_in_event(60, undefined, 70);
-      await era.waitAnyKey();
+      await nice_nature.say_and_wait([
+        '嗯？不是写给自己的？那是……？诶？！我？不、那个……',
+        callname,
+        '，比起自己更关注我啊……呜！说这种话就太犯规了！',
+        callname,
+        ' 也是我也是，都要快快乐乐地度过这新的一年啊！',
+      ]);
+      get_attr_and_print_in_event(60, undefined, 70) &&
+        (await era.waitAnyKey());
     }
     era.set('cflag:60:节日事件标记', 0);
   } else if (event_arg === 47 + 29) {
@@ -126,42 +124,42 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
       add_event(hook.hook, event_object);
       return false;
     }
-    await print_event_name('夏季合宿', chara_talk);
+    await print_event_name('夏季合宿', nice_nature);
     await era.printAndWait(
       '从今天开始「夏季集训」──为了提升实力的强化训练即将展开。',
     );
-    await chara_talk.say_and_wait('好热……');
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait('好热……');
+    await nice_nature.say_and_wait(
       '太阳公公真是有精神。对于活在阴影里的我来说太过耀眼了……',
     );
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait(
       '害我瞬间就开始担心自己能不能平安撑到最后了。',
     );
     era.printButton('「还得参加「小仓纪念」，非加油不可啊」', 1);
     await era.input();
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait(
       '不是啦，问题就在这啊。竟然要在集训中途去比赛，行程也太丰富了。',
     );
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait(
       '这里离小仓又那么远，交通时间会让训练量减少……',
     );
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait(
       '我会被原本就远在天边的那些选手们狠狠甩开的──',
     );
     era.printButton('「那我们一路冲刺到小仓吧！」', 1);
     await era.input();
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait(
       '啊，不错耶不错耶！跑过去还可以当作训练，一石二鸟。',
     );
-    await chara_talk.say_and_wait(
+    await nice_nature.say_and_wait(
       '反正再远也不过1000公里左右吧？好的好的，轻轻松松──',
     );
-    await chara_talk.say_and_wait('哪有可能这样说啊──不要突然出馊主意啊。');
-    await chara_talk.say_and_wait('我看你这个训练员其实很期待吧……');
+    await nice_nature.say_and_wait('哪有可能这样说啊──不要突然出馊主意啊。');
+    await nice_nature.say_and_wait('我看你这个训练员其实很期待吧……');
     await era.printAndWait(
       `于是${get_chara_talk(0).name}与优秀素质的热血夏季集训就这么开始了。`,
     );
-    await chara_talk.say_and_wait('啊，还请适度热血就好，那麻烦多指教咯──');
+    await nice_nature.say_and_wait('啊，还请适度热血就好，那麻烦多指教咯──');
     era.println();
     get_attr_and_print_in_event(
       60,
@@ -177,15 +175,15 @@ handlers[event_hooks.week_start] = async (hook, _, event_object) => {
       add_event(hook.hook, event_object);
       return false;
     }
-    await print_event_name('夏季合宿', chara_talk);
+    await print_event_name('夏季合宿', nice_nature);
     await era.printAndWait(
       '又到了集训的季节。优秀素质不同于去年，展现了积极的态度。',
     );
     await era.printAndWait(
       '为了迎接「天皇赏（秋）」……以及之后即将挑战的「有马纪念」──',
     );
-    await chara_talk.say_and_wait('天皇赏秋么……');
-    await era.printAndWait(`${chara_talk.sex}开始了正视自己的热血夏天！`);
+    await nice_nature.say_and_wait('天皇赏秋么……');
+    await era.printAndWait(`${nice_nature.sex}开始了正视自己的热血夏天！`);
     era.println();
     get_attr_and_print_in_event(
       60,

@@ -115,7 +115,7 @@ module.exports = class extends CustomizedBase {
     const callname = sys_get_callname(52, 0),
       urara = get_chara_talk(52);
     await urara.say_and_wait([
-      `诶？啊，稍等一下……现在的时间是 ${hours % 12 || 12} 点${minutes ? ` ${minutes}` : '整'}。`,
+      `诶？啊，稍等一下……现在的时间是 ${hours % 12 || 12} 点${minutes ? ` ${minutes} 分` : '整'}。`,
     ]);
     await urara.say_and_wait([
       callname,

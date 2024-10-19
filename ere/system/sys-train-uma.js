@@ -100,7 +100,7 @@ function get_success_base_reward(
 
   base_inc *= (100 + train_buff) / 100;
 
-  changes.pt_change = 2;
+  changes.pt_change = 4;
   switch (attr) {
     case attr_enum.speed:
       //速度训练：速度+少量力量
@@ -129,11 +129,13 @@ function get_success_base_reward(
       changes.attr_change[attr_enum.intelligence] = base_inc;
       changes.attr_change[attr_enum.speed] = base_inc / 2;
       train_cost.stamina = -train_cost.stamina / 4;
-      changes.pt_change = 6;
+      changes.pt_change = 8;
   }
   if (era.get(`cflag:${chara_id}:气性`) === -1) {
     changes.attr_change = changes.attr_change.map((e) => e + (e > 0));
   }
+  changes.pt_change +=
+    1.25 * (era.get(`abl:${chara_id}:${attr_names[attr]}训练等级`) - 1);
   if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
     changes.pt_change = Math.floor(
       changes.pt_change * (1 + 0.5 * (1 + new GodolphinLifeMarks().buff)),
