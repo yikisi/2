@@ -297,7 +297,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               get_custom_basement(basement_owners.get(0)).welcome();
               owner_marks.b_start = 0;
             } else if (my_life_marks.b_start) {
-              get_custom_basement(0).welcome();
+              get_custom_basement(basement_owners.get(0)).first_time();
             } else {
               get_custom_basement(action.chara_id).get_up();
               print_handler && print_handler();

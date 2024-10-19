@@ -17,7 +17,7 @@ const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
 
-const GameGuides = require('#/event/game-guides');
+const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -31,7 +31,6 @@ const YandereList = require('#/data/event/yandere-list');
 const { get_celebration, get_relation_mark } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
-const { check_rec_script } = require('#/event/rec/rec-factory');
 
 async function page_chairman_office() {
   let flag_page = true,
@@ -45,7 +44,6 @@ async function page_chairman_office() {
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了理事长办公室……',
   ]);
-  await new GameGuides().school_chairman();
   const loc_characters = new LocCharacters(),
     celebration = get_celebration(),
     chara = get_chara_talk(loc_characters.get(location_enum.chairman)[0]),

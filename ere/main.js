@@ -686,6 +686,8 @@ module.exports = async () => {
           '提交bug',
           { isDivider: true },
           '科比 · 布莱恩特',
+          { isDivider: true },
+          'Mr.E.',
         ]);
         await era.printAndWait('社区管理', {
           color: item_title_color,

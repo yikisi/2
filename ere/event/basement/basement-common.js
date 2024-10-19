@@ -72,6 +72,20 @@ class CustomizedBase {
   }
 
   /**
+   * 初入地下室的欢迎 - 无人版本
+   *
+   * @author 无名黑奴
+   */
+  first_time() {
+    era.print([
+      '不知过了多久，',
+      get_chara_talk(0).get_colored_name(),
+      ' 在一张简单的小床上悠悠醒转……',
+    ]);
+    era.print('眼前是陌生的天花板……');
+  }
+
+  /**
    * 初入地下室的欢迎
    *
    * @author 无名黑奴

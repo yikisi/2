@@ -7,8 +7,6 @@ const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
 
-const GameGuides = require('#/event/game-guides');
-
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const CharaTitles = require('#/data/chara-titles');
@@ -30,7 +28,6 @@ async function page_clinic() {
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了保健室……',
   ]);
-  await new GameGuides().school_clinic();
   const loc_chara = new LocCharacters(),
     celebration = get_celebration(),
     chara = get_chara_talk(loc_chara.get(location_enum.clinic)[0]),
