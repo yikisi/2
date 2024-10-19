@@ -243,7 +243,10 @@ class PseudoUma {
     // 下坡时进入状态的概率
     down: 0,
   };
-  // 传奇对手标记
+  /**
+   * 传奇对手标记
+   * @type {boolean|number}
+   */
   legend = false;
 
   /** 半身像 */
@@ -291,8 +294,12 @@ class PseudoUma {
     this.pop = new Array(4);
   }
 
-  set_legend() {
-    this.legend = true;
+  /**
+   * @param {number} [_legend]
+   * @returns {PseudoUma}
+   */
+  set_legend(_legend) {
+    this.legend = _legend || true;
     return this;
   }
 

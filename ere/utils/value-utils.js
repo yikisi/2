@@ -10,7 +10,7 @@ module.exports = {
     }
     const value = min + (max - min + 1) * Math.random();
     if (is_float) {
-      return (value * (max - min)) / (max - min + 1);
+      return min + ((value - min) * (max - min)) / (max - min + 1);
     }
     return Math.floor(value);
   },

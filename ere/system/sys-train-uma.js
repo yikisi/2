@@ -137,10 +137,10 @@ function get_success_base_reward(
   changes.pt_change +=
     1.25 * (era.get(`abl:${chara_id}:${attr_names[attr]}训练等级`) - 1);
   if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
-    changes.pt_change = Math.floor(
-      changes.pt_change * (1 + 0.5 * (1 + new GodolphinLifeMarks().buff)),
-    );
+    changes.pt_change =
+      changes.pt_change * (1 + 0.5 * (1 + new GodolphinLifeMarks().buff));
   }
+  changes.pt_change = Math.floor(changes.pt_change);
 }
 
 module.exports = {

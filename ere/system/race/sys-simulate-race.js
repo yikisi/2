@@ -348,10 +348,10 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
           uma.race.velocityReal + uma.race.acceleration / frame_rate,
           uma.base.velocityMin,
         );
-        uma.race.location += (uma.race.velocityReal + temp) / 30;
+        uma.race.location += (uma.race.velocityReal + temp) / (2 * frame_rate);
         uma.race.staminaCost =
           ((20 / 144) *
-            Math.pow(uma.race.velocityReal - uma.base.velocityIdeal + 12, 2) *
+            (uma.race.velocityReal - uma.base.velocityIdeal + 12) ** 2 *
             mod_stamina_cost_mess) /
           frame_rate;
       }
@@ -729,7 +729,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
           uma.base.velocityMin,
         );
         if (uma.race.velocityReal > uma.race.velocityIdeal) {
-          if (uma.race.loc_mind === 2 && uma.style > 0) {
+          if (uma.race.loc_mind === 2 && uma.base.loc_mind_style > 0) {
             uma.race.acceleration = race_de_acc[3];
           } else {
             uma.race.acceleration =

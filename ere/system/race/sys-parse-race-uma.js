@@ -233,7 +233,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
             legend.adapt_ground,
             skill_sets[legend.skills].map((s) => skills_dict[s]),
           )
-            .set_legend()
+            .set_legend(2)
             .set_image(legend.image),
         );
       }

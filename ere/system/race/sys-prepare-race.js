@@ -448,7 +448,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     // 01234：大逃、逃先差追
     const style_index =
       uma.style +
-      (uma.race.conditionParams.is_used_skill_id.indexOf(202051) !== -1);
+      (uma.race.conditionParams.is_used_skill_id.indexOf(202051) === -1);
     //调取当前跑法在赛中各阶段的目标速度及加速度倍率
     uma.factorPhase.vStyle = mod_velocity_style[style_index];
     uma.factorPhase.aStyle = mod_acceleration_style[style_index];

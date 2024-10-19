@@ -214,7 +214,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
           await era.printAndWait([
             '没过多久，冲好澡的 ',
             chara.get_colored_name(),
-            ' 红着脸走了出来',
+            ' 红着脸走了出来。',
           ]);
           sys_change_lust(chara_id, get_random_value(500, 1500));
         }

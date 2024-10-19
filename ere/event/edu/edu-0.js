@@ -282,7 +282,7 @@ handlers.experiment = async (me) => {
     wait_flag = sys_like_chara(32, 0, get_random_value(5, 15)) || wait_flag;
   } else {
     const coffee = get_chara_talk(25);
-    await coffee.say_as_unknown_and_wait('呦西呦西呦西呦西——');
+    await get_chara_talk(400).say_as_unknown_and_wait('呦西呦西呦西呦西——');
     await coffee.say_as_unknown_and_wait('嗯……？');
     await printAndWait(
       `好像有看见窗外有${coffee.get_uma_sex_title()}的影子掠过？怎么可能～这里可不是一楼啊。`,
