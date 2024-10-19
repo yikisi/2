@@ -1,8 +1,9 @@
 const era = require('#/era-electron');
 
+const { get_custom_basement } = require('#/event/basement/basement-factory');
+
 const BasementOwners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
-const { get_custom_basement } = require('#/event/basement/basement-factory');
 
 /** @param {boolean} [clear_chara] */
 function sys_handle_escape_basement(clear_chara) {

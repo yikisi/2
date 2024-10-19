@@ -14,8 +14,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const PamaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-64');
 
 module.exports = class extends CustomizedBase {
-  // eslint-disable-next-line no-unused-vars
-  async ask_time(date, hours, minutes) {
+  async ask_time() {
     const me = get_chara_talk(0),
       pama = get_chara_talk(this.id);
     await era.printAndWait([
@@ -430,36 +429,38 @@ module.exports = class extends CustomizedBase {
     const callname = sys_get_colored_callname(this.id, 0),
       me = get_chara_talk(0),
       pama = get_chara_talk(this.id);
-    era.print([
-      me.get_colored_name(),
-      ' 睡醒的时候，却发现自己处在一个冰冷的封闭空间里。',
-    ]);
-    era.print(['左右看着周围，结果看见了一个熟悉的笑脸。']);
-    pama.say([callname, '～过得怎么样～']);
-    pama.say('这可是为了你特别准备的哦，惊喜吧？');
-
-    era.print([
-      '阴暗的小房间里，没有睡好的 ',
-      me.get_colored_name(),
-      ' 捂着头坐了起来。',
-    ]);
-    era.print([
-      '空无一人的空间里，除了 ',
-      me.get_colored_name(),
-      ' 自己以外似乎再没有其他人。',
-    ]);
-    era.print([
-      '正当 ',
-      me.get_colored_name(),
-      ' 准备下床走两步的时候，却听见了一个熟悉的声音。',
-    ]);
-    pama.say([callname, '～我回来啦～']);
-    era.print([
-      '从转角探出脸的 ',
-      pama.get_colored_name(),
-      '，微笑着看向 ',
-      me.get_colored_name(),
-      '。',
-    ]);
+    if (Math.random() < 0.5) {
+      era.print([
+        me.get_colored_name(),
+        ' 睡醒的时候，却发现自己处在一个冰冷的封闭空间里。',
+      ]);
+      era.print(['左右看着周围，结果看见了一个熟悉的笑脸。']);
+      pama.say([callname, '～过得怎么样～']);
+      pama.say('这可是为了你特别准备的哦，惊喜吧？');
+    } else {
+      era.print([
+        '阴暗的小房间里，没有睡好的 ',
+        me.get_colored_name(),
+        ' 捂着头坐了起来。',
+      ]);
+      era.print([
+        '空无一人的空间里，除了 ',
+        me.get_colored_name(),
+        ' 自己以外似乎再没有其他人。',
+      ]);
+      era.print([
+        '正当 ',
+        me.get_colored_name(),
+        ' 准备下床走两步的时候，却听见了一个熟悉的声音。',
+      ]);
+      pama.say([callname, '～我回来啦～']);
+      era.print([
+        '从转角探出脸的 ',
+        pama.get_colored_name(),
+        '，微笑着看向 ',
+        me.get_colored_name(),
+        '。',
+      ]);
+    }
   }
 };
