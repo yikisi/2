@@ -1576,13 +1576,35 @@ module.exports = async function (hook, _, event_object) {
     await chara19_talk.say_and_wait(`……作为指挥者，只能说勉勉强强的及格。`);
     await chara19_talk.say_and_wait(`世界观尚处幼稚，价值观也不过平庸。`);
     await chara19_talk.say_and_wait(`唯一踩线的一点，只是坚定的愿景罢了。`);
-    await chara19_talk.say_and_wait(`……`);
-    await era.printAndWait(`皇帝第一次正视着你。`);
-    await chara19_talk.say_and_wait(`如果只有赢家通吃的话，那么`);
-    await chara19_talk.say_and_wait(
-      `那些追求着胜利的${chara_talk.get_uma_sex_title()}们，在残酷的竞争之中，又得到了什么呢？`,
+    await chara19_talk.say_and_wait(`……不过，这不是今晚的重点。`);
+    await era.printAndWait(`皇帝带着名为微笑的面具看着你。`);
+    await chara19_talk.say_and_wait(`你喜欢看电影吗？`);
+    await era.printAndWait(`突然抛出这个问题的皇帝让你有些疑惑。`);
+    await me.say_and_wait(`……`);
+    await era.printAndWait(
+      `正当你思索如何体面回答之时，皇帝自顾自的说了下去。`,
     );
-    await chara19_talk.say_and_wait(`回去好好想想吧。`);
+    await chara19_talk.say_and_wait(
+      `让我们想象这样一个场景，如果两名训练员恰好选择了同一场西部电影，看到了这样一幕：保安官与牛仔正在决斗，枪响过后，一人死去，一人活了下来，而作为观众的两人神态却各不相同——`,
+    );
+    await era.printAndWait(`皇帝故意将尾句拖长，等待着你的回复。`);
+    await me.say_and_wait(`他们应该是代入到了电影中不同的角色，与角色同悲欢。`);
+    await chara19_talk.say_and_wait(
+      `尽管死去的追捕牛仔的高尚警官，而活下来的却是在通缉中的罪犯？`,
+    );
+    await me.say_and_wait(
+      `……恐怕是代入罪犯的训练员为了不破坏自己的审美愉悦，而在潜意识中清除了所有的瑕疵。`,
+    );
+    await me.say_and_wait(
+      `……而另外一人不认可作为主角的罪犯，所以对牛仔的缺陷忍无可忍。`,
+    );
+    await chara19_talk.say_and_wait(`精彩的论述，你比我想象中还要优秀。`);
+    await era.printAndWait(`皇帝鼓起了掌。`);
+    await chara19_talk.say_and_wait(`那么，你对真正的丸善斯基了解又有多少？`);
+    await chara19_talk.say_and_wait(
+      `你怎么知道自己不是代入到了牛仔的……所谓观众呢？`,
+    );
+    await chara19_talk.say_and_wait(`辛苦了。`);
     await era.printAndWait(`皇帝站了起来，看向了远处的训练场。`);
     await era.printAndWait(
       `草场上努力训练的${chara_talk.get_uma_sex_title()}们传出着喊声响彻了特雷森。`,

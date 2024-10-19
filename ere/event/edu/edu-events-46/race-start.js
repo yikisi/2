@@ -23,10 +23,11 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `作为赛${falcon.get_uma_sex_title()}的${falcon.name}，生涯将从此开始。`,
     );
-    era.printButton(`跟平时一样，把赛场看成平时的训练场就好了`, 1);
+    era.printButton(`把赛场想象成舞台就好了`, 1);
     await era.input();
     await era.printAndWait(`而且。`);
-    await me.say_and_wait(`我相信飞鹰子一定会胜利的！`);
+    await me.say_and_wait(`我相信飞鹰子一定会胜利！`);
+    await era.printAndWait(`不是安慰，而是对这段时间训练成果的确信。`);
     await falcon.say_and_wait(
       `嗯！训练员${me.get_adult_sex_title()}就在观众席上好好看着飞鹰子精彩的表现吧！`,
     );

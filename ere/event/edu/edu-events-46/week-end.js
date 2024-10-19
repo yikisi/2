@@ -26,6 +26,7 @@ module.exports = async function () {
     // 人是一种很容易寂寞的生物，在曲终人散之后，从亢奋的精神慢慢退回，然后只剩下疲惫
     // 一般人眼中的乐观，仅仅只是将四处收集而来的瓦片聚拢起来，然后拼凑起来的乐观，因此，面对较大的危险就会四分五裂
     // 因此，不过只是装作乐观的悲观者罢了
+    // 然而，悲观往往是对自身所做成就的忽视，如果将看向未来的视野收回到自身不足5米的可操纵区域，反而会得到继续下去的动力
     await print_event_name(`喊声隆隆的沙地赛`, falcon);
     // 训练员遵守约定带醒目飞鹰看沙地赛
     await era.printAndWait(`地方沙地赛场\n`);
@@ -837,9 +838,7 @@ module.exports = async function () {
   } else if (edu_weeks === 95 + 32) {
     await print_event_name('夏季合宿结束', falcon);
     await era.printAndWait(`${falcon.name}的第三年夏季合宿结束了。`);
-    await falcon.say_and_wait(
-      `和训练员${me.get_adult_sex_title()}一起在沙滩上散步的感觉比想象中还要好呢♪`,
-    );
+    await falcon.say_and_wait(`向着顶级偶像的道路♪`);
     await era.printAndWait(
       `与往年不同的是，合宿结束的时候，${falcon.name}决定与${me.actual_name}一起在沙滩上散步。`,
     );
