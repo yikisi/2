@@ -27,6 +27,7 @@ const {
   get_relation_info,
   get_train_time,
 } = require('#/data/info-generator');
+const { location_enum } = require('#/data/locations');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
 
 /**
@@ -124,20 +125,22 @@ function cur_chara_component(chara_id, type, location_npc) {
     if (get_custom_mec(chara_id).is_able_to_show_growth()) {
       name_columns.push(` (${growth_stage[Math.min(growth, 2)]})`);
     }
-    if (in_train) {
-      name_columns.push(
-        ' 干劲',
-        {
-          color: motivation_colors[motivation + 2],
-          content: motivation_names[motivation + 2],
-        },
-        ' ',
-        get_train_time(chara_id).substring(0, 3),
-      );
-    } else if (race && !out_of_train && (growth === 2 || growth === 3)) {
-      name_columns.push(' 待入学');
+    if (era.get('flag:当前位置') !== location_enum.basement) {
+      if (in_train) {
+        name_columns.push(
+          ' 干劲',
+          {
+            color: motivation_colors[motivation + 2],
+            content: motivation_names[motivation + 2],
+          },
+          ' ',
+          get_train_time(chara_id).substring(0, 3),
+        );
+      } else if (race && !out_of_train && (growth === 2 || growth === 3)) {
+        name_columns.push(' 待入学');
+      }
+      name_columns.push(...race_indicator(chara_id));
     }
-    name_columns.push(...race_indicator(chara_id));
     location_npc &&
       (temp = new CharaTitles(location_npc).get_colored_curr_title());
     era.setVerticalAlign('middle');

@@ -175,7 +175,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           .slice(1)
           .filter((_, i) => i < is_awake)
           .forEach((e) => {
-            sys_like_chara(e, 0, get_random_value(5, 10), false);
+            sys_like_chara(e, 0, get_random_value(10, 20), false);
             const life_marks = new LifeEventMarks(e),
               relation = era.get(`relation:${e}:0`);
             if (
@@ -204,10 +204,9 @@ module.exports = async (_, save_and_next_week, flags) => {
         if (
           get_random_value(0, 100) <
           (100 -
+            10 * era.get('flag:极端行为限制') -
             50 * (era.get('base:0:体力') / era.get('maxbase:0:体力') < 0.3)) /
-            (my_life_marks.b_now +
-              !!my_life_marks.b_now * era.get('flag:极端行为限制') +
-              1)
+            Math.max(my_life_marks.b_now + !!my_life_marks.b_now + 1, 2)
         ) {
           my_life_marks.b_now--;
           if (my_life_marks.b_now < 0) {
@@ -274,7 +273,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           );
           my_life_marks.b_food_medicine = 0;
         }
-        my_life_marks.b_food_buff = 2.5;
+        my_life_marks.b_food_buff = 3.5;
         basement_queue.add_action(
           new BasementAction(
             0,
@@ -366,10 +365,10 @@ module.exports = async (_, save_and_next_week, flags) => {
           if (win) {
             if (
               get_random_value(0, 100) <
-              (100 + era.get('base:0:速度') / 20) /
-                (my_life_marks.b_now +
-                  !!my_life_marks.b_now * era.get('flag:极端行为限制') +
-                  1)
+              (100 +
+                era.get('base:0:速度') / 20 -
+                10 * era.get('flag:极端行为限制')) /
+                Math.max(my_life_marks.b_now + !!my_life_marks.b_now + 1, 2)
             ) {
               beat_list.forEach(
                 (e) => (new LifeEventMarks(e).b_escape = escape_enum.beat),
@@ -431,30 +430,18 @@ module.exports = async (_, save_and_next_week, flags) => {
         n: '请求释放',
       });
     }
-    action_list.push(
-      {
-        async h() {
-          action_time = get_random_value(1, 5);
-          await get_custom_basement(chara_list[1]).ask_time(
-            my_life_marks.b_timer / minutes_in_a_day + 1,
-            Math.floor((my_life_marks.b_timer % minutes_in_a_day) / 60),
-            my_life_marks.b_timer % 60,
-          );
-        },
-        n: '询问时间',
+    action_list.push({
+      async h() {
+        action_time = get_random_value(1, 5);
+        await get_custom_basement(chara_list[1]).ask_time(
+          my_life_marks.b_timer / minutes_in_a_day + 1,
+          Math.floor((my_life_marks.b_timer % minutes_in_a_day) / 60),
+          my_life_marks.b_timer % 60,
+        );
       },
-      // {
-      //   h() {},
-      //   n: '任其施为 (放弃)',
-      // },
-    );
+      n: '询问时间',
+    });
   }
-  // else {
-  //   action_list.push({
-  //     h() {},
-  //     n: '听天由命 (放弃)',
-  //   });
-  // }
   era.printInColRows(
     [
       { type: 'divider' },
