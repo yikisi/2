@@ -23,7 +23,7 @@ async function ask_release_agree() {
       me.get_colored_name(),
       ' 离开这里的请求后，',
       grand.get_colored_name(),
-      ' 迟疑了很久，最后缓缓点了点头。',
+      ' 迟疑许久，最后缓缓点头。',
     ]);
     era.println();
 
@@ -64,9 +64,9 @@ async function ask_release_agree() {
       await grand.say_and_wait([
         '我知道',
         grand.sex,
-        '们是为了我好，但也说明这里已经不安全了……',
+        '们是为了我好，但也说明……这里已经不安全了……',
       ]);
-      await grand.say_and_wait(['再过不久，救援队就会发现这里吧。']);
+      await grand.say_and_wait(['再过不久，救援队……应该会发现这里吧。']);
       era.println();
 
       await era.printAndWait([grand.get_colored_name(), ' 苦笑着。']);
@@ -78,13 +78,13 @@ async function ask_release_agree() {
       era.println();
 
       await grand.say_and_wait([
-        '我……并不是因为这个才放 ',
+        '但是……我……并不是因为这个才放 ',
         callname,
         ' 离开的。',
       ]);
     }
     await grand.say_and_wait([
-      '本来打算……就算只能得到一点点爱，哪怕要抛弃一切……都不会再放开你的手。',
+      '本来想着……就算只能得到一点点爱，哪怕要抛弃一切……都不会再放开你的手。',
     ]);
     await grand.say_and_wait([
       '就算要亲手弄坏 ',
@@ -108,15 +108,11 @@ async function ask_release_agree() {
     era.println();
 
     await grand.say_and_wait([
-      '……这段时间，我总是回忆起和 ',
+      '……但是……这段时间，我总是回忆起和 ',
       callname,
       ' 一起经历过的……各种各样的事情。',
     ]);
-    await grand.say_and_wait([
-      '现在我明白了……比起把 ',
-      callname,
-      ' 绑在我的视线内——',
-    ]);
+    await grand.say_and_wait(['原来……比起把 ', callname, ' 绑在我的视线内——']);
     await grand.say_and_wait(['我最喜欢的，是 ', callname, ' 的笑容。']);
     era.println();
 
@@ -182,7 +178,7 @@ async function ask_release_agree() {
     era.printButton('独自离开', 1);
     era.printButton(`邀请${grand.sex}一起离开`, 2, {
       disabled:
-        era.get('relation:89:0') < 200 || !new GrandLifeMarks().b_flatter < 3,
+        era.get('relation:89:0') < 200 || new GrandLifeMarks().b_flatter < 3,
     });
 
     if ((await era.input()) === 1) {
