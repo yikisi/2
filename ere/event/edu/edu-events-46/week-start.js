@@ -21,11 +21,12 @@ module.exports = async function (event_object) {
     event_marks.start++;
     // 颤抖的双手 意象 梦中的故事 人物 交涉 细微的动作 脸庞 天空的变化 色彩 草原
     await print_event_name(`First！偶像的第一步`, falcon);
-    era.printButton(`最后一圈！`, 1);
+    await era.printAndWait(`训练场\n`);
+    era.printButton(`坚持住！最后一圈！`, 1);
     await era.input();
     await falcon.say_and_wait(`……哈啊啊啊！`);
     await era.printAndWait(
-      `在经历一周的训练后，你与醒目飞鹰之间的磨合也踏上了正轨。`,
+      `在最后的转弯处以恐怖的气势溅起一地沙尘的醒目飞鹰冲过了终点线。`,
     );
     await me.say_and_wait(`辛苦了！`);
     await era.printAndWait(
