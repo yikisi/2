@@ -532,7 +532,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       await coffee.say_and_wait(['你是……']);
       era.println();
       await coffee.print_and_wait([
-        '听到了询问声，来客转过头来， ',
+        '听到了询问声，来客转过头来，',
         coffee.get_colored_name(),
         ' 看到的是一个仿佛照镜子般、与自己一模一样的',
         coffee.get_uma_sex_title(),

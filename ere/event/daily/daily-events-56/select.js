@@ -17,7 +17,7 @@ module.exports = () => {
           callname,
           ' 就是我命中注定的人呢！占卜和我的心都是这么说的！',
         ]),
-      () => kitaru.say(['我完全信任 ', callname, '！ 毕竟是命中注定的人嘛！']),
+      () => kitaru.say(['我完全信任 ', callname, '！毕竟是命中注定的人嘛！']),
     );
   } else {
     message.push(

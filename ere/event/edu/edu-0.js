@@ -398,7 +398,7 @@ handlers.reject = async (me) => {
     me.get_colored_name(),
     ' 尝试探查一番后发现，自己竟然在不知不觉间被当成了负心渣',
     me.get_phy_sex_title()[0],
-    '？ ！',
+    '？！',
   ]);
   printButton('「我不是，我没有！」', 1);
   await input();

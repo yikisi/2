@@ -334,13 +334,6 @@ function sys_prepare_race(list_chara, team_list, race_info) {
         : Math.max(1 - 45 / uma.attrs[attr_enum.intelligence], 0.2)) +
       0.01 * (uma.chara === 0);
 
-    // 位置意识概率
-    uma.probs.loc_mind =
-      ((15 + 5 * (uma.style === 0)) *
-        Math.log(uma.attrs[attr_enum.intelligence] / 10)) /
-      Math.log(10) /
-      100;
-
     //计算比赛偏重属性对速度属性的增幅
     if (race_info.attr_bonus.length > 0) {
       uma.attrs[attr_enum.speed] *=
@@ -429,6 +422,13 @@ function sys_prepare_race(list_chara, team_list, race_info) {
         }
       }
     });
+
+    // 位置意识概率
+    uma.probs.loc_mind =
+      ((15 + 5 * (uma.style === 0)) *
+        Math.log(uma.attrs[attr_enum.intelligence] / 10)) /
+      Math.log(10) /
+      100;
 
     // 焦躁计算
     temptation_prob += Math.pow(

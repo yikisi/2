@@ -406,7 +406,7 @@ class CustomizedBase {
       get_chara_talk(this.id).get_colored_name(),
       ' 挑逗着 ',
       get_chara_talk(0).get_colored_name(),
-      ' ……',
+      '……',
     ]);
   }
 

@@ -325,7 +325,7 @@ module.exports = (handlers) => {
     if (hook.arg) {
       await attacker.say_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
-        ' ～这样……感觉还行吗？',
+        '～这样……感觉还行吗？',
       ]);
       await defender.print_and_wait([
         '眯起的橙色眼眸绽着些许狡黠，那双能跑出优秀末脚的双足踏在了 ',

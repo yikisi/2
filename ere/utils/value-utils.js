@@ -8,11 +8,11 @@ module.exports = {
     if (min >= max) {
       return min;
     }
-    const value = min + (max - min + 1) * Math.random();
+    const dice = Math.random();
     if (is_float) {
-      return min + ((value - min) * (max - min)) / (max - min + 1);
+      return min + (max - min) * dice;
     }
-    return Math.floor(value);
+    return Math.floor(min + (max - min + 1) * dice);
   },
   // ln601的两倍
   log_600m2: Math.log(600 + 1) * 2,
