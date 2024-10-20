@@ -229,31 +229,43 @@ class CustomizedCheck {
     if (!prison_limit || love < 50 || delta < 0) {
       return false;
     }
-    let ratio =
-      (delta > 0) *
-      (0.05 +
-        // 地下室限制最大倍率3倍，3*100-0=300，好感在0以下必然地下室
-        (delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)) +
-        0.2 * era.get(`status:${this.id}:爱意克制`) -
-        0.25 * get_action_debuff(this.id));
+    let percentage;
+    if (relation < 0) {
+      // 好感在0以下必然地下室
+      percentage = 1;
+    } else {
+      percentage =
+        (delta > 0) *
+        (0.05 +
+          // 地下室限制最大倍率3倍，3*100-0=300
+          (delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)) +
+          0.2 * era.get(`status:${this.id}:爱意克制`) -
+          0.25 * get_action_debuff(this.id));
+    }
     switch (era.get('flag:惩戒力度')) {
       case 2:
-        ratio /= 10;
+        percentage /= 10;
         break;
       case 3:
-        ratio /= 20;
+        percentage /= 20;
     }
     const dice = Math.random();
-    era.logger.debug(
-      `角色 ${this.id} 地下室：${(ratio * 100).toFixed(2)}% 掷骰：${dice} 计算：${
-        ratio
-      }=${delta > 0}(开关)*(0.05(基础)+${
-        delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)
-      }(好感爱慕)+${
-        0.1 * era.get(`status:${this.id}:爱意克制`)
-      }(爱意克制)-${0.25 * get_action_debuff(this.id)}(行动debuff))`,
-    );
-    return ratio >= 1 || dice < ratio;
+    if (relation < 0) {
+      era.logger.debug(
+        `角色 ${this.id} 地下室：${(percentage * 100).toFixed(2)}% 掷骰：${dice} 计算：1=(好感低于0)`,
+      );
+    } else {
+      era.logger.debug(
+        `角色 ${this.id} 地下室：${(percentage * 100).toFixed(2)}% 掷骰：${dice} 计算：${
+          percentage
+        }=${delta > 0}(开关)*(0.05(基础)+${
+          delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)
+        }(好感爱慕)+${
+          0.1 * era.get(`status:${this.id}:爱意克制`)
+        }(爱意克制)-${0.25 * get_action_debuff(this.id)}(行动debuff))`,
+      );
+    }
+    return percentage >= 1 || dice < percentage;
   }
 
   /** @returns {boolean} */

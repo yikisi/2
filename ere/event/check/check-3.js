@@ -25,6 +25,7 @@ const { buff_colors } = require('#/data/color-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const TeioLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -69,6 +70,46 @@ module.exports = class extends CustomizedCheck {
     } else if (extra_flag.race === race_enum.toky_yus) {
       sys_hurt_uma(3, 3);
     }
+  }
+
+  check_and_get_titles(aim_check) {
+    const event_marks = new TeioEduMarks(),
+      races = new RaceHistory(3).get(),
+      titles = [];
+    let normal_title_check =
+      check_aim_race(races, race_enum.sats_sho, 1, 1) &&
+      check_aim_race(races, race_enum.toky_yus, 1, 1) &&
+      check_aim_race(races, race_enum.arim_kin, 2, 1);
+    const perfect_title_check =
+        normal_title_check &&
+        !event_marks.perfect_check &&
+        check_aim_race(races, race_enum.kiku_sho, 1, 1),
+      unyielding_title_check =
+        normal_title_check &&
+        check_aim_race(races, race_enum.japa_cup, 2, 1) &&
+        era.get('status:3:腿伤');
+    normal_title_check &&= !event_marks.normal_check;
+    const c = get_chara_color(3);
+    if (unyielding_title_check) {
+      titles.push({
+        c,
+        n: '不屈帝王',
+      });
+      aim_check && sys_personal_achievement.set(3, 1);
+    }
+    perfect_title_check &&
+      titles.push({
+        c,
+        n: '无瑕帝王',
+      });
+    normal_title_check &&
+      titles.push({
+        c,
+        n: '帝王',
+      });
+    event_marks.perfect_check = 0;
+    event_marks.normal_check = 0;
+    return titles;
   }
 
   check_love_events() {
@@ -271,6 +312,13 @@ module.exports = class extends CustomizedCheck {
     return super.check_palace_and_get_aims();
   }
 
+  is_prison() {
+    if (new TeioLifeMarks().release_agree) {
+      return false;
+    }
+    return super.is_prison();
+  }
+
   get_edu_aims() {
     const buffer = [],
       races = new RaceHistory(3).get();
@@ -287,46 +335,6 @@ module.exports = class extends CustomizedCheck {
     buffer.push(check_aim_and_get_entry(races, race_enum.japa_cup, 2, 2));
     buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
     return buffer;
-  }
-
-  check_and_get_titles(aim_check) {
-    const event_marks = new TeioEduMarks(),
-      races = new RaceHistory(3).get(),
-      titles = [];
-    let normal_title_check =
-      check_aim_race(races, race_enum.sats_sho, 1, 1) &&
-      check_aim_race(races, race_enum.toky_yus, 1, 1) &&
-      check_aim_race(races, race_enum.arim_kin, 2, 1);
-    const perfect_title_check =
-        normal_title_check &&
-        !event_marks.perfect_check &&
-        check_aim_race(races, race_enum.kiku_sho, 1, 1),
-      unyielding_title_check =
-        normal_title_check &&
-        check_aim_race(races, race_enum.japa_cup, 2, 1) &&
-        era.get('status:3:腿伤');
-    normal_title_check &&= !event_marks.normal_check;
-    const c = get_chara_color(3);
-    if (unyielding_title_check) {
-      titles.push({
-        c,
-        n: '不屈帝王',
-      });
-      aim_check && sys_personal_achievement.set(3, 1);
-    }
-    perfect_title_check &&
-      titles.push({
-        c,
-        n: '无瑕帝王',
-      });
-    normal_title_check &&
-      titles.push({
-        c,
-        n: '帝王',
-      });
-    event_marks.perfect_check = 0;
-    event_marks.normal_check = 0;
-    return titles;
   }
 
   get_aim_races() {
