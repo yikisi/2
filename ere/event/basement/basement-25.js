@@ -11,6 +11,7 @@ const CustomizedBase = require('#/event/basement/basement-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { lust_border } = require('#/data/ero/orgasm-const');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const CoffeeLifeMarks = require('#/data/event/life-event-marks/life-event-marks-25');
 
@@ -278,6 +279,12 @@ module.exports = class extends CustomizedBase {
     await era.printAndWait(['……', me.get_colored_name(), ' 只好暂时放弃。']);
     era.println();
     await coffee.say_and_wait([callname, '，发泄完了的话……该轮到我了……']);
+    if (era.get('base:25:性欲') < lust_border.absent_mind) {
+      era.add(
+        'base:25:性欲',
+        lust_border.absent_mind - era.get('base:25:性欲'),
+      );
+    }
   }
 
   async battle_success() {

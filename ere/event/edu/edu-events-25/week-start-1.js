@@ -566,7 +566,7 @@ module.exports = (handlers) => {
     era.printButton('「能问一下你的理由吗？」', 1);
     await era.input();
     await coffee.say_and_wait('其实……并不是我的意愿。但是朋友一直这么要求……');
-    await coffee.say_and_wait('要我『去跑这一趟『，如果不去跑的话……');
+    await coffee.say_and_wait('要我『去跑这一趟』，如果不去跑的话……');
     await era.printAndWait([
       '不去跑的话？',
       me.get_colored_name(),
