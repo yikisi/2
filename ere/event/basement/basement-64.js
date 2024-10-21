@@ -11,7 +11,7 @@ const CustomizedBase = require('#/event/basement/basement-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const PamaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-64');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 module.exports = class extends CustomizedBase {
   async ask_time() {
@@ -107,7 +107,7 @@ module.exports = class extends CustomizedBase {
 
   back_basement() {
     const callname = sys_get_colored_callname(this.id, 0),
-      life_marks = new PamaLifeMarks(),
+      life_marks = new LifeEventMarks(this.id),
       pama = get_chara_talk(this.id);
     if (life_marks.b_start) {
       if (era.get('base:0:体力') < 100) {
@@ -220,8 +220,7 @@ module.exports = class extends CustomizedBase {
     }
     const me = get_chara_talk(0),
       pama = get_chara_talk(this.id);
-    era.logger.info(new PamaLifeMarks().b_s_level);
-    switch (new PamaLifeMarks().b_s_level) {
+    switch (new LifeEventMarks(this.id).b_s_level) {
       case 1:
         return [
           pama.get_colored_name(),

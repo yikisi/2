@@ -8,14 +8,14 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 const event_hooks = require('#/data/event/event-hooks');
-const PamaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-64');
 
 /** @type {Record<string,function(HookArg,*):Promise>} */
 const handlers = {};
 
 handlers[event_hooks.select] = handlers[event_hooks.good_morning] = () => {
-  const life_marks = new PamaLifeMarks(64);
+  const life_marks = new PamaEduMarks();
   if (sys_check_awake(64) && sys_check_awake(0) && life_marks.b_escape) {
     const pama = get_chara_talk(64),
       callname = sys_get_colored_callname(64, 0);
