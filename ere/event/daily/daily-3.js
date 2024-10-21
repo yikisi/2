@@ -723,6 +723,58 @@ handlers[event_hooks.celebration] = async () => {
         await quick_into_sex(3);
       }
       break;
+    case 39:
+      await print_event_name('万圣节', teio);
+      await era.printAndWait([
+        '整理完今天的工作，收拾好办公室，',
+        me.get_colored_name(),
+        ' 歇了歇脚，等待着学院的钟声。',
+      ]);
+      await era.printAndWait('今天，有事会发生。');
+      await era.printAndWait([me.get_colored_name(), ' 等待注定的命运。']);
+      era.println();
+      await era.printAndWait('「咚——，砰砰砰，咚——」');
+      await era.printAndWait([
+        '奇异的敲门声传来，',
+        me.get_colored_name(),
+        ' 屏住呼吸，闪到门后，顺势拉开房门——',
+      ]);
+      era.println();
+      await era.printAndWait('一团血红闪进。');
+      era.println();
+      await era.printAndWait([me.get_colored_name(), ' 悄无声息，扑了上去。']);
+      era.println();
+      await teio.say_and_wait('哇！');
+      era.println();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 的偷袭并没有得手，',
+        teio.sex,
+        '及时转身，刚好和 ',
+        me.get_colored_name(),
+        ' 撞了个满怀。',
+      ]);
+      era.println();
+      await teio.say_and_wait('别想吓到帝王大人！');
+      era.println();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 的担当双手叉腰，一身小红帽打扮，一手提着篮子，一手过来抓 ',
+        me.get_colored_name(),
+        '。',
+      ]);
+      era.println();
+      await teio.say_and_wait('坏大人快来陪我！');
+      era.println();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 连声应是，按 ',
+        me.get_couple_title(),
+        ' 约定好的陪',
+        teio.sex,
+        '出门了……',
+      ]);
+      break;
     case 47:
       await print_event_name('圣诞节', teio);
       await teio.say_and_wait(
