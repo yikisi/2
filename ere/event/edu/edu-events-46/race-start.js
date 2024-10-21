@@ -15,14 +15,11 @@ module.exports = async (hook, extra_flag) => {
     me = get_chara_talk(0),
     edu_weeks = era.get('cflag:46:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
-    await print_event_name(`准备阶段！`, falcon);
+    await print_event_name(`首次试镜！`, falcon);
     await era.printAndWait(
       `站在全身镜前的${falcon.name}最后调整了一遍自己的姿势。`,
     );
     await falcon.say_and_wait(`加油！${falcon.name}！`);
-    await era.printAndWait(
-      `作为赛${falcon.get_uma_sex_title()}的${falcon.name}，生涯将从此开始。`,
-    );
     era.printButton(`把赛场想象成舞台就好了`, 1);
     await era.input();
     await era.printAndWait(`而且。`);
@@ -37,7 +34,7 @@ module.exports = async (hook, extra_flag) => {
     await falcon.say_and_wait(
       `闪耀的${falcon.get_uma_sex_title()}偶像——${falcon.name}！`,
     );
-    await falcon.say_and_wait(`现在出发！`);
+    await falcon.say_and_wait(`飞鹰子，加油！`);
     await era.printAndWait(`${falcon.name}走向了赛场。`);
   } else if (extra_flag.race === race_enum.sats_sho && edu_weeks < 95) {
     await print_event_name(`飞鹰子！加油！`, falcon);

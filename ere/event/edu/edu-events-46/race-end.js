@@ -22,49 +22,39 @@ module.exports = async (hook, extra_flag) => {
   ) {
     await print_event_name('出道战后・冉冉升起的新星', chara_talk);
     await chara_talk.say_and_wait(
-      `训练员${me.get_adult_sex_title()}！飞鹰子跑的怎么样？`,
+      `训练员${me.get_adult_sex_title()}！飞鹰子在赛场上的表现怎么样？`,
     );
-    era.printButton(`非常漂亮的胜利！`, 1);
+    era.printButton(`不小心看入迷了！`, 1);
     await era.input();
-    await chara_talk.say_and_wait(`真的吗？那真是太好了！`);
+    await chara_talk.say_and_wait(`真的吗？太好了！`);
     await era.printAndWait(
-      `帮着飞鹰子按摩腿部已经发麻的肌肉，${me.actual_name}的笑容终于按捺不住了。`,
+      `帮着飞鹰子按摩腿部已经发麻的肌肉，从${me.actual_name}的脸上抑制不住的笑容来看，她很满足。`,
     );
-    await chara_talk.say_and_wait(
-      `训练员${me.get_adult_sex_title()}笑得像花痴一样！`,
-    );
-    await era.printAndWait(`毫不留情的犀利吐槽让你强行收敛住笑容。`);
-    era.printButton(
-      `抱歉，看到飞鹰子的梦想踏出了最重要的一步，不知不觉就想出来了`,
-      1,
-    );
-    await era.input();
-    await chara_talk.say_and_wait(
-      `呵呵~训练员${me.get_adult_sex_title()}真是的。`,
-    );
-    await chara_talk.say_and_wait(
-      `那么！接下来的演出，训练员${me.get_adult_sex_title()}也要仔细看着哦！`,
-    );
+    await chara_talk.say_and_wait(`好好期待飞鹰子接下来的表演吧！`);
     await era.printAndWait(
       `做完最后一个按摩之后，${chara_talk.name}换上了设计好的决胜服。`,
     );
     era.printButton(`飞鹰子加油！`, 1);
     await era.input();
     await me.say_and_wait(
-      `一定要让他们看见泥地${chara_talk.get_uma_sex_title()}的气势！`,
+      `一定要让他们看见泥地${chara_talk.get_uma_sex_title()}的气势哦！`,
     );
     await chara_talk.say_and_wait(`嗯！接下来就是飞鹰子的主场了！`);
     era.drawLine({ content: '胜者舞台' });
+    await chara_talk.say_and_wait(`这就是胜者舞台吗？`, true);
+    await era.printAndWait(
+      `跟随着工作人员的指引，按照之前确定好的队形站在升降机上。`,
+    );
+    await era.printAndWait(
+      `在排列队形时还会有稀稀疏疏的声音，到了站定时能听到的却只剩下微弱的呼吸声了。`,
+    );
     await chara_talk.say_and_wait(
       `${chara_talk.name}的梦想将从这里启程！`,
       true,
     );
+    await era.printAndWait(`随着震动声响起，演出即将开始。`);
     await chara_talk.say_and_wait(
-      `为了能够让更多像我这样的${chara_talk.get_uma_sex_title()}也能有勇气踏出这一步，所以`,
-      true,
-    );
-    await chara_talk.say_and_wait(
-      `这就是最强大的${chara_talk.get_uma_sex_title()}偶像——${
+      `这就是最闪耀的${chara_talk.get_uma_sex_title()}偶像——${
         chara_talk.name
       }呦⭐`,
       true,
