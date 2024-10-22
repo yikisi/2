@@ -98,7 +98,8 @@ handlers[event_hooks.train] = async (chara_id, _, extra_flag) => {
  * @param {TrainSuccessParams} extra_flag
  */
 handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
-  const chara = get_chara_talk(chara_id);
+  const chara = get_chara_talk(chara_id),
+    me = get_chara_talk(0);
   era.print([chara.get_colored_name(), ' 的训练顺利结束了！']);
   if (chara_id) {
     if (
@@ -120,7 +121,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
         });
         if ((await era.input()) === 1) {
           await era.printAndWait([
-            get_chara_talk(0).get_colored_name(),
+            me.get_colored_name(),
             ' 默许了 ',
             chara.get_colored_name(),
             ` 的自主训练，并称赞了${chara.sex}的干劲`,
@@ -128,7 +129,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
           hook.arg = true;
         } else {
           await era.printAndWait([
-            get_chara_talk(0).get_colored_name(),
+            me.get_colored_name(),
             ' 出言禁止了 ',
             chara.get_colored_name(),
             ' 的自主训练，并叮嘱要好好休息',
@@ -161,8 +162,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
         } else {
           sys_change_lust(chara_id, get_random_value(500, 1500));
         }
-      } else if (Math.random() < 0.1) {
-        const me = get_chara_talk(0);
+      } else if (Math.random() < 0.05) {
         era.println();
         await era.waitAnyKey();
         await print_event_name('淋浴间内', chara);

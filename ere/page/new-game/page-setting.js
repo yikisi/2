@@ -193,7 +193,7 @@ function set_from_theme(theme) {
       era.set('flag:道具影响', -25);
       era.set('flag:声望不足替换', 1);
       era.set('flag:压力获取', 1);
-      era.set('flag:不忠惩罚', 0);
+      era.set('flag:不忠惩罚', 1);
       era.set('flag:读档对话', 1);
       era.set('flag:性技自主学习', 1);
       era.set('flag:马娘身高', 1);

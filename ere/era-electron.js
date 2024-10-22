@@ -151,6 +151,15 @@ const era = {
     },
   },
   /**
+   * show a notification
+   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontWeight]:string}|{isBr:true}|string)[]} content content of the notification
+   * @param {string} [title] title of the notification
+   * @param {'primary'|'success'|'warning'|'danger'|'info'} [type] type of the notification, see the enum
+   * @param {number} [duration] duration of the notification, microsecond
+   */
+  // eslint-disable-next-line no-unused-vars
+  notify(content, title, type, duration) {},
+  /**
    * print some text
    * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
    * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line
@@ -354,7 +363,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '2.2.1', engine: undefined },
+  version: { sdk: '3.0.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
