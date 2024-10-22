@@ -17,7 +17,7 @@ const anal_semen_desc = [
   '直肠就会幸福地躁动起来',
 ];
 
-const page_name = '肉体情报 【臀】';
+const page_name = '肉体情报【臀】';
 
 module.exports = {
   /**

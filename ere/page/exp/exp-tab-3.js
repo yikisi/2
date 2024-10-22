@@ -18,7 +18,7 @@ const body_semen_desc = [
   '肌肤就会幸福地躁动起来',
 ];
 
-const page_name = '肉体情报 【身】';
+const page_name = '肉体情报【身】';
 
 module.exports = {
   /**

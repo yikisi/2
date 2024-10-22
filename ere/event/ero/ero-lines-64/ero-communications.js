@@ -10,7 +10,7 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 /** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
   handlers[ero_hooks.kiss] = async (attacker, defender, hook) => {
-    if (defender.id !== 64 || !hook.arg) {
+    if (defender.id !== 64 || !hook.arg || defender.sex_code === 1) {
       throw new Error();
     }
     const edu_marks = new PamaEduMarks();
@@ -57,27 +57,24 @@ module.exports = (handlers) => {
         sys_get_colored_callname(defender.id, attacker.id),
         '……可以再来一次吗？',
       ]);
-    } else if (era.get('love:64') >= 50 && defender.sex_code !== 1) {
-      await attacker.print_and_wait([
-        '将赤裸的 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 拥入怀中，娇小的肩幅和臂膀令你无法将',
-        defender.sex,
-        '与赛场上的英姿联系起来。',
-      ]);
-      await attacker.print_and_wait([
-        '只是对视片刻，',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 便迫不及待地迎出嘴唇，勾上肩膀与你相吻。',
-      ]);
-      await defender.say_and_wait(['唔……']);
-      await attacker.print_and_wait([
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 那对炽热的双乳贴在前胸，房间里只剩下唇舌互相吸吮的声音。',
-      ]);
-    } else {
-      throw new Error();
     }
+    await attacker.print_and_wait([
+      '将赤裸的 ',
+      sys_get_colored_callname(attacker.id, defender.id),
+      ' 拥入怀中，娇小的肩幅和臂膀令你无法将',
+      defender.sex,
+      '与赛场上的英姿联系起来。',
+    ]);
+    await attacker.print_and_wait([
+      '只是对视片刻，',
+      sys_get_colored_callname(attacker.id, defender.id),
+      ' 便迫不及待地迎出嘴唇，勾上肩膀与你相吻。',
+    ]);
+    await defender.say_and_wait(['唔……']);
+    await attacker.print_and_wait([
+      sys_get_colored_callname(attacker.id, defender.id),
+      ' 那对炽热的双乳贴在前胸，房间里只剩下唇舌互相吸吮的声音。',
+    ]);
   };
 
   handlers[ero_hooks.kiss] = async (attacker, defender, hook) => {

@@ -67,6 +67,9 @@ handlers[ero_hooks.get_mark] = async (_, extra_flag) => {
 };
 
 handlers[ero_hooks.orgasm] = async () => {
+  if (era.get('love:64') < 50) {
+    return;
+  }
   const callname = sys_get_colored_callname(64, 0),
     pama = get_chara_talk(64),
     me = get_chara_talk(0),
@@ -347,7 +350,11 @@ module.exports = async (hook, extra_flag) => {
       hook,
       extra_flag,
     );
-    if (era.get('tflag:强奸') >= 0 || !sys_check_awake(defender)) {
+    if (
+      era.get('tflag:强奸') >= 0 ||
+      !sys_check_awake(defender) ||
+      era.get('love:64') < 50
+    ) {
       throw new Error();
     }
     return await handlers[hook.hook](
