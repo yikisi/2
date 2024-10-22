@@ -37,23 +37,18 @@ module.exports = async (hook, extra_flag) => {
     await falcon.say_and_wait(`飞鹰子，加油！`);
     await era.printAndWait(`${falcon.name}走向了赛场。`);
   } else if (extra_flag.race === race_enum.sats_sho && edu_weeks < 95) {
-    await print_event_name(`飞鹰子！加油！`, falcon);
+    await print_event_name(`闪耀在皋月赏的飞鹰子`, falcon);
     await era.printAndWait(`在新闻发布会上向记者宣布参加皋月赏后。`);
     await era.printAndWait(
-      `虽然也有对于${falcon.name}是否能在非适应性的赛场上获胜的疑虑，不过更多的还是对草泥二刀流的期待。`,
+      `虽然也有对于${falcon.name}是否能在非适应性的赛场上获胜的疑虑，不过更多的还是活跃在沙地的醒目飞鹰会展示出什么样的活力的期待。`,
     );
     await era.printAndWait(`准备室中`);
     await falcon.say_and_wait(`哼哼♪这样的话飞鹰子就准备完成了！`);
-    await era.printAndWait(`在等身镜前再次确认了一遍决胜服，`);
-    await falcon.say_and_wait(`接下来的话就拜托你了哦？`);
-    await era.printAndWait(`对着镜子中的自己鞠躬的${falcon.name}。`);
-    era.printButton(`准备好了吗？飞鹰子。`, 1);
+    await era.printAndWait(`醒目飞鹰在等身镜前再次确认了一遍决胜服，`);
+    await falcon.say_and_wait(`训练员先生觉得怎么样？`);
+    era.printButton(`真是耀眼！`, 1);
     await era.input();
-    await falcon.say_and_wait(`马上就过来！`);
-    await era.printAndWait(
-      `镜中的自己向着外界的${falcon.name}投去了期待的目光。`,
-    );
-    await era.printAndWait(`随后${me.actual_name}关上了准备室的门。`);
+    await falcon.say_and_wait(`就这样把所有粉丝的目光全部~夺过来！`);
   } else if (extra_flag.race === race_enum.japa_dir && edu_weeks < 95) {
     await print_event_name(`莫名的焦躁感`, falcon);
     await era.printAndWait(`准备室中`);

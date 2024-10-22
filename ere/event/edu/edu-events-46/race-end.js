@@ -12,6 +12,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
  */
 module.exports = async (hook, extra_flag) => {
   const chara_talk = new CharaTalk(46),
+    chara2_talk = get_chara_talk(2),
     chara4_talk = get_chara_talk(4),
     me = get_chara_talk(0),
     edu_weeks = era.get('cflag:46:育成回合计时');
@@ -63,25 +64,83 @@ module.exports = async (hook, extra_flag) => {
   } else if (
     extra_flag.race === race_enum.sats_sho &&
     edu_weeks < 95 &&
+    extra_flag.rank === 1
+  ) {
+    await print_event_name('皋月赏后・闪耀的大舞台', chara_talk);
+    await chara_talk.say_and_wait(`真的吗……`);
+    await chara_talk.say_and_wait(`飞鹰子，飞鹰子居然胜利了！`);
+    await era.printAndWait(`你看着计分板上的成绩，醒目飞鹰确实是第一。`);
+    await chara_talk.say_and_wait(`太好了！训练员先生！`);
+    era.printButton(`赶快去准备胜者舞台吧！`, 1);
+    await era.input();
+    await chara_talk.say_and_wait(`是！`);
+    era.drawLine({ content: '胜者舞台结束后' });
+    await me.say_and_wait(`辛苦了。`);
+    await era.printAndWait(`你走上前进迎接着实现了愿望的醒目飞鹰。`);
+    await era.printAndWait(
+      `浑身湿透的醒目飞鹰尽管疲惫不堪，但那双眼睛也散发着光芒。`,
+    );
+    await me.say_and_wait(`皋月赏的舞台怎么样？`);
+    await chara_talk.say_and_wait(`比想象之中还要疲惫呢。`);
+    await era.printAndWait(`你从行李箱中取出毛巾擦拭着醒目飞鹰的汗水。`);
+    await chara_talk.say_and_wait(
+      `飞鹰子从来没有在这么多人的舞台之上演出过，特别是站在比奔跑过的舞台还要大上两倍的地方。`,
+    );
+    await chara_talk.say_and_wait(
+      `在那么多观众的注视下，飞鹰子总有一种无所不能感觉呢。所以为了报答这份期待，飞鹰子比在赛场上还要努力的展示着闪耀的自己呢。`,
+    );
+    await era.printAndWait(
+      `从醒目飞鹰的身上传来了一阵甜蜜的气息，让你有些头晕目眩。`,
+    );
+    await chara_talk.say_and_wait(`训练员先生，飞鹰子想对你说`);
+    await chara2_talk.say_and_wait(`打扰了。`);
+    await era.printAndWait(`无声铃鹿打开了休息室的大门。`);
+    await chara2_talk.say_and_wait(`欸？我是不是应该等下再过来。`);
+    await era.printAndWait(
+      `刚才的气氛随着第三者的闯入而打破，无声铃鹿有些手足无措的站在原地。`,
+    );
+    await me.say_and_wait(`不，谢谢你铃鹿小姐。`);
+    await me.say_and_wait(`之前的草地特训真是帮了大忙。`);
+    await era.printAndWait(`你由衷的向她表示感谢。`);
+    await chara_talk.say_and_wait(
+      `谢谢你，小铃鹿，飞鹰子能取得胜利真是多亏了你⭐`,
+    );
+    await chara2_talk.say_and_wait(`小……小铃鹿？`);
+    await era.printAndWait(`不知何时，醒目飞鹰回到了之前的模式。`);
+    await me.say_and_wait(
+      `作为这次比赛胜利的大功臣，铃鹿小姐可否和我们一起庆祝获胜？`,
+    );
+    await era.printAndWait(`将之前的暧昧气氛抛掷脑后，你向无声铃鹿提出建议。`);
+    await chara2_talk.say_and_wait(
+      `……既然训练员先生都说到这份上了，非常感谢。`,
+    );
+    await era.printAndWait(`随后一行人在附近有名的西餐厅享受着胜利的滋味。`);
+  } else if (
+    extra_flag.race === race_enum.sats_sho &&
+    edu_weeks < 95 &&
     extra_flag.rank > 1
   ) {
-    await print_event_name('皋月赏后・憧憬的舞台', chara_talk);
+    await print_event_name('皋月赏后・憧憬的大舞台中央', chara_talk);
     await era.printAndWait(`休息室中`);
     era.printButton(`演出辛苦了，飞鹰子。`, 1);
     await era.input();
     await era.printAndWait(
       `虽然没能在皋月赏中获胜，但${chara_talk.name}却很满足的样子。`,
     );
-    await chara_talk.say_and_wait(`皋月赏的舞台比想象中还要大呢？`);
+    await chara_talk.say_and_wait(`皋月赏的舞台比想象中还要大呢……`);
     await chara_talk.say_and_wait(
-      `如果训练员${me.get_adult_sex_title()}也能站在舞台上看一下就好了呢。`,
+      `比平时登上的舞台还要大两倍，耀眼的闪光灯，满眼全部都是注视着我们的观众。`,
     );
-    await era.printAndWait(
-      `笨蛋我怎么上的去呢？就这样轻轻敲了敲飞鹰子的小脑袋。`,
+    await chara_talk.say_and_wait(
+      `不过，最耀眼的还是舞台最中间的位置吧……下一次，飞鹰子一定会登上去的！`,
     );
+    await chara_talk.say_and_wait(`飞鹰子加油！`);
+    await me.say_and_wait(`笨蛋，皋月赏是限定第二年的赛马娘才能参加的比赛！`);
+    await era.printAndWait(`你轻轻敲了敲醒目飞鹰的小脑袋。`);
     await chara_talk.say_and_wait(`欸嘿⭐`);
     await era.printAndWait(`吐着舌头的${chara_talk.name}显得意外可爱。`);
-    await me.say_and_wait(`咳咳！接下来的话飞鹰子要好好准备泥地德比了`);
+    await me.say_and_wait(`真是可爱。`, true);
+    await me.say_and_wait(`咳咳！接下来的话飞鹰子要好好准备泥地德比了。`);
     await chara_talk.say_and_wait(`好⭐`);
     await me.say_and_wait(`不过偶像演出也不能松懈！`);
     await chara_talk.say_and_wait(`是⭐`);
@@ -91,7 +150,7 @@ module.exports = async (hook, extra_flag) => {
         chara_talk.name
       }⭐下次一定要让大家看着我闪耀的样子！`,
     );
-    await era.printAndWait(`高昂的精神将沉闷的空气一扫而空。`);
+    await era.printAndWait(`醒目飞鹰以活力的声音作为回复。`);
     await era.printAndWait(`${me.actual_name}开始期待着接下来的比赛了。`);
   } else if (
     extra_flag.race === race_enum.japa_dir &&

@@ -209,6 +209,10 @@ module.exports = class extends CustomizedCheck {
         case 47 + 29:
           add_event(event_hooks.week_start, event_obj_special);
           break;
+        // 8月第二周 庙会
+        case 47 + 30:
+          add_event(event_hooks.week_start, event_obj_special);
+          break;
         // 8月第四周 夏季合宿 结束
         case 47 + 32:
           add_event(event_hooks.week_end, event_obj_special);
