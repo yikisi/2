@@ -245,7 +245,7 @@ class PseudoUma {
   };
   /**
    * 传奇对手标记
-   * @type {boolean|number}
+   * @type {boolean|2}
    */
   legend = false;
 

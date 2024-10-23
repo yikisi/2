@@ -131,6 +131,9 @@ other_handlers[race_event_enum.temp_wrong_style] = [
   (names) => [...names, ' 怎么在拼命前冲！'],
 ];
 
+const event_enum_length = Object.keys(race_event_enum).length;
+const report_count = 2;
+
 /** @type {(function(PseudoUma,PseudoUma))[]} */
 let top_list;
 
@@ -141,14 +144,32 @@ let order_start = 0,
 let final_push_pop = undefined;
 
 /**
- * @param {{[a]:PseudoUma,e:number,[u]:PseudoUma,[l]:RaceLane,[s]:number,[c]:number}[][]} events
+ * @typedef ReportEvent
+ * @property {PseudoUma} [a]
+ * @property {number} e
+ * @property {PseudoUma} [u]
+ * @property {RaceLane} [l]
+ * @property {number} [s]
+ * @property {number} [c]
+ * @property {number} [t]
+ */
+/**
+ * @typedef ReportEventGroup
+ * @property {number} e
+ * @property {ReportEvent[]} p
+ * @property {number} t
+ */
+/**
+ * @param {ReportEvent[][]} events
  * @param {PseudoUma[]} in_race_list
  * @param {RaceInfo} info
  * @param {number} race_id
  */
 function sub_simulate_report(events, in_race_list, info, race_id) {
-  const dict = {},
-    report_list = [];
+  /** @type {Record<string,ReportEventGroup>} */
+  const dict = {};
+  /** @type {ReportEventGroup[]} */
+  let report_list = [];
   events.forEach((l, i) =>
     l.forEach((e) =>
       (dict[e.e] || (dict[e.e] = { e: e.e, p: [], t: i })).p.push({
@@ -157,17 +178,29 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
       }),
     ),
   );
-  let report_count = 2,
-    loc_change = [];
+  let loc_change = [];
   if (dict[race_event_enum.loc_change]) {
     loc_change = dict[race_event_enum.loc_change].p;
     delete dict[race_event_enum.loc_change];
   }
-  Object.values(race_event_enum).forEach((e) => {
-    if (dict[e] && report_count-- > 0) {
-      report_list.push(dict[e]);
-    }
-  });
+  if (dict[race_event_enum.finish]) {
+    report_list.push(dict[race_event_enum.finish]);
+  } else {
+    report_list = sort_list(
+      Object.values(dict),
+      (entry) =>
+        event_enum_length -
+        entry.e +
+        event_enum_length *
+          (entry.p.findIndex(
+            (e) => e.u?.index_chara >= 0 || e.u?.legend >= 0,
+          ) !==
+            -1) +
+        event_enum_length *
+          (entry.p.findIndex((e) => e.u?.index_chara >= 0 && !e.u?.legend) !==
+            -1),
+    ).slice(0, report_count);
+  }
   if (go_in) {
     let ret_list = [];
     if (loc_change.length > 0) {

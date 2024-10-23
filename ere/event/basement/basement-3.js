@@ -287,6 +287,7 @@ module.exports = class extends CustomizedBase {
   async battle_prison() {
     const me = get_chara_talk(0),
       teio = get_chara_talk(3);
+    await after_battle_common(teio, me);
     await era.printAndWait([
       '提示音响起，咔哒一声，门再度反锁。',
       me.get_colored_name(),
