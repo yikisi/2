@@ -26,7 +26,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const { buff_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
-const { location_name } = require('#/data/locations');
+const { location_enum, location_name } = require('#/data/locations');
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
 /** @type {Record<string,function(number,HookArg,Record<string,*>,EventObject):Promise<*>>} */
@@ -100,6 +100,7 @@ handlers[event_hooks.train] = async (chara_id, _, extra_flag) => {
 handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
   const chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
+  const cur_location = era.get('flag:当前位置');
   era.print([chara.get_colored_name(), ' 的训练顺利结束了！']);
   if (chara_id) {
     if (
@@ -158,7 +159,9 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
         era.printButton('「这也是训练员的义务……」', 1);
         era.printButton('「总之先去医务室吧！」', 2);
         if ((await era.input()) === 1) {
+          era.set('flag:当前位置', location_enum.restroom);
           await quick_into_sex(chara_id);
+          era.set('flag:当前位置', cur_location);
         } else {
           sys_change_lust(chara_id, get_random_value(500, 1500));
         }
@@ -197,7 +200,9 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
               me.get_colored_name(),
               '……',
             ]);
+            era.set('flag:当前位置', location_enum.restroom);
             await quick_into_sex(chara_id);
+            era.set('flag:当前位置', cur_location);
             extra_flag.relation_change = 5;
           } else {
             await chara.say_and_wait('笨蛋，在想什么啊你！');

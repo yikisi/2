@@ -221,10 +221,12 @@ module.exports = {
    * @returns {boolean}
    */
   sys_check_remote(chara_id) {
+    const cur_race = era.get('flag:当前赛事');
     return (
       chara_id > 0 &&
       era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置') &&
-      (race_infos[era.get('flag:当前赛事')].track >= track_enum.longchamp ||
+      (!cur_race ||
+        race_infos[cur_race].track >= track_enum.longchamp ||
         era.get('cflag:0:位置') !== 0)
     );
   },

@@ -33,6 +33,7 @@ const {
  * @param {boolean} [between_weeks]
  */
 function get_train_bonus(chara_id, attr, between_weeks) {
+  const chara_loc = era.get(`cflag:${chara_id}:位置`);
   let train_buff =
     era.get(`cflag:${chara_id}:${attr_names[attr]}加成`) +
     era.get('flag:训练加成') +
@@ -43,6 +44,9 @@ function get_train_bonus(chara_id, attr, between_weeks) {
     (era.get(`cflag:${chara_id}:气性`) === -3) -
     0.004 * era.get(`base:${chara_id}:压力`) +
     get_custom_mec(chara_id).get_train_buff();
+  if (chara_loc > 0 && chara_loc !== location_enum.beach) {
+    train_buff -= 25;
+  }
   switch (attr) {
     case attr_enum.speed:
     case attr_enum.strength:
@@ -86,48 +90,38 @@ function get_success_base_reward(
   changes,
   between_weeks,
 ) {
-  let base_inc =
-    (era.get(`cflag:${chara_id}:位置`) === location_enum.beach
-      ? 5
-      : train_level) *
-      5 +
-    get_random_value(0, 5);
+  let base_inc = train_level * 5 + get_random_value(0, 5);
 
-  const train_buff = get_train_bonus(chara_id, attr, between_weeks);
-  era.logger.debug(
-    `角色 ${chara_id} 训练效果：${base_inc} +${train_buff.toFixed(2)}%`,
-  );
+  const train_buff =
+    get_train_bonus(chara_id, attr, between_weeks) +
+    10 * (era.get(`cflag:${chara_id}:位置`) === location_enum.beach);
 
   base_inc *= (100 + train_buff) / 100;
 
   changes.pt_change = 4;
   switch (attr) {
     case attr_enum.speed:
-      //速度训练：速度+少量力量
       changes.attr_change[attr_enum.speed] = base_inc;
-      changes.attr_change[attr_enum.strength] = base_inc / 2;
+      changes.attr_change[attr_enum.strength] = base_inc / 3;
       break;
     case attr_enum.endurance:
-      //耐力训练：耐力+少量根性
-      changes.attr_change[attr_enum.endurance] = base_inc;
-      changes.attr_change[attr_enum.toughness] = base_inc / 2;
+      changes.attr_change[attr_enum.endurance] = (base_inc * 4) / 5;
+      changes.attr_change[attr_enum.toughness] = (base_inc * 3) / 5;
+      train_cost.stamina *= 1.1;
       break;
     case attr_enum.strength:
-      //力量训练：力量+少量耐力
-      changes.attr_change[attr_enum.strength] = base_inc;
-      changes.attr_change[attr_enum.endurance] = base_inc / 2;
+      changes.attr_change[attr_enum.strength] = (base_inc * 4) / 5;
+      changes.attr_change[attr_enum.endurance] = (base_inc * 2) / 5;
       break;
     case attr_enum.toughness:
-      //根性训练：根性+微量速度+微量力量 消耗体力略多约一成
       changes.attr_change[attr_enum.toughness] = base_inc;
       changes.attr_change[attr_enum.speed] = base_inc / 4;
       changes.attr_change[attr_enum.strength] = base_inc / 4;
       train_cost.stamina *= 1.1;
       break;
     case attr_enum.intelligence:
-      //智力训练：智力+少量速度+少量体力回复 不扣体力
-      changes.attr_change[attr_enum.intelligence] = base_inc;
-      changes.attr_change[attr_enum.speed] = base_inc / 2;
+      changes.attr_change[attr_enum.intelligence] = (base_inc * 4) / 5;
+      changes.attr_change[attr_enum.speed] = base_inc / 3;
       train_cost.stamina = -train_cost.stamina / 4;
       changes.pt_change = 8;
   }
@@ -154,14 +148,17 @@ module.exports = {
    */
   async train_uma(chara_id, attr, extra_buff) {
     era.set(`cflag:${chara_id}:自主训练`, 0);
-    const buffer = [];
-
-    const changes = { attr_change: new Array(5).fill(0), pt_change: 0 };
+    const buffer = [],
+      changes = { attr_change: new Array(5).fill(0), pt_change: 0 },
+      train_level =
+        era.get(`cflag:${chara_id}:位置`) === location_enum.beach
+          ? 5
+          : era.get(`abl:${chara_id}:${attr_names[attr]}训练等级`) || 1,
+      train_cost = {
+        stamina: -time_cost[train_level - 1] * get_random_value(0.9, 1.2, true),
+        time: -time_cost[train_level - 1],
+      };
     let relation_change = era.get(`status:${chara_id}:摸鱼`) ? -10 : 0;
-    const train_cost = {
-      stamina: -time_cost.uma * (0.9 + Math.random() * 0.3), // -400*[0.9,1.2]
-      time: -time_cost.uma,
-    };
 
     const stamina_ratio =
         era.get(`base:${chara_id}:体力`) / era.get(`maxbase:${chara_id}:体力`),
@@ -175,8 +172,6 @@ module.exports = {
 
     if (flag_success) {
       // 训练成功时的处理（成功才扣体力）
-      const train_level =
-        era.get(`abl:${chara_id}:${attr_names[attr]}训练等级`) || 1;
       get_success_base_reward(
         chara_id,
         attr,
@@ -212,7 +207,7 @@ module.exports = {
       if (
         train_level < 5 &&
         exp >= 800 &&
-        exp >= train_level * 1600 + get_random_value(-400, 400)
+        exp >= train_level * 800 + get_random_value(0, 800)
       ) {
         era.add(`abl:${chara_id}:${attr_names[attr]}训练等级`, 1);
         era.set(`exp:${chara_id}:${attr_names[attr]}训练经验`, 0);
@@ -247,12 +242,12 @@ module.exports = {
     }
 
     // 无论成功与否都会扣去精力（=时间）
-    if (chara_id) {
+    if (chara_id > 0) {
       // 训自己不额外消耗时间
       era.print([
         CharaTalk.me.get_colored_name(),
         ' 的 ',
-        ...sys_change_attr_and_print(0, '精力', -time_cost.player),
+        ...sys_change_attr_and_print(0, '精力', train_cost.time / 2),
       ]);
     }
     const chara_talk = get_chara_talk(chara_id);
@@ -271,7 +266,7 @@ module.exports = {
     );
     sys_like_chara(chara_id, 0, relation_change);
 
-    //结算数值变动
+    // 结算数值变动
     changes.attr_change
       .map(
         (stat) =>
