@@ -938,6 +938,8 @@ module.exports = async function () {
     await era.printAndWait(`在解释了之前的那一幕后。`);
     await falcon.say_and_wait(`不过是偶像的日常罢了。`);
     await era.printAndWait(`面带笑容的醒目飞鹰语气没有任何变化。`);
+  } else if (edu_weeks === 95 + 38) {
+    await print_event_name(`天空、大地以及生活在这里的我们`, falcon);
   } else if (edu_weeks === 95 + 40) {
     await print_event_name(`天空、大地以及生活在这里的我们`, falcon);
     await era.printAndWait(`公园\n`);
