@@ -84,7 +84,7 @@ async function use_ero_item(chara) {
       e.e = e.e ? e.e() : true;
       return e;
     });
-  if (!item_list.filter((e) => e.e).length) {
+  if (item_list.findIndex((e) => e.e) === -1) {
     await era.printAndWait('暂时没有可用的性玩具……');
     return undefined;
   }

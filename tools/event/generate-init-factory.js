@@ -1,6 +1,4 @@
-const { execSync } = require('child_process');
 const { readdirSync, writeFileSync } = require('fs');
-const { join } = require('path');
 
 const init_scripts = readdirSync('../../ere/event/init')
   .filter(
@@ -59,10 +57,6 @@ module.exports = {
 `;
 
 writeFileSync('../../ere/event/init/init-factory.js', output);
-
-execSync('npx eslint --fix ./ere/event/init/init-factory.js', {
-  cwd: join(process.cwd(), '../..'),
-});
 
 console.log(
   `[generate-init-factory.js] registers ${init_scripts.length} init scripts`,

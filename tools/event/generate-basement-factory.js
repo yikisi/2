@@ -1,6 +1,4 @@
-const { execSync } = require('child_process');
 const { readdirSync, writeFileSync } = require('fs');
-const { join } = require('path');
 
 const base_scripts = readdirSync('../../ere/event/basement')
   .filter(
@@ -73,10 +71,6 @@ module.exports = {
 `;
 
 writeFileSync('../../ere/event/basement/basement-factory.js', output);
-
-execSync('npx eslint --fix ./ere/event/basement/basement-factory.js', {
-  cwd: join(process.cwd(), '../..'),
-});
 
 console.log(
   `[generate-basement-factory.js] registers ${base_scripts.length} basement scripts`,

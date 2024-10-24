@@ -243,8 +243,8 @@ module.exports = async (src_chara) => {
           basement_queue.init();
 
           [
-            201, 202, 203, 204, 205, 206, 301, 302, 303, 304, 305, 306, 308,
-            340, 341, 342, 343,
+            201, 202, 203, 204, 205, 206, 207, 301, 302, 303, 304, 305, 306,
+            308, 340, 341, 342, 343, 344,
           ].forEach((e) => init_chara(e));
           switch (era.get('flag:彩蛋机制')) {
             case 179:
@@ -282,6 +282,7 @@ module.exports = async (src_chara) => {
           }
           new TasteLifeMarks().annoyance = get_random_value(13, 20);
           era.set('flag:随机种子', get_random_value(0, 233280 - 1));
+          era.set('flag:存档名', 0);
           return true;
         case 97:
           player_name = '';

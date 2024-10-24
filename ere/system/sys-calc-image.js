@@ -22,6 +22,7 @@ module.exports = {
     let ret = [];
     switch (era.get('flag:当前位置')) {
       case location_enum.beach_train:
+      case location_enum.playground:
         if (era.get(`cflag:${chara_id}:位置`) === location_enum.beach) {
           ret = [`${base}_泳`, `${base}_运`];
         } else {
@@ -42,9 +43,6 @@ module.exports = {
           ret = [`${base}_夏私`];
         }
         ret.push(`${base}_私`, `${base}_夏`);
-        break;
-      case location_enum.playground:
-        ret = [`${base}_运`];
         break;
       case location_enum.gate:
         if (holiday === 0) {

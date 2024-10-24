@@ -2,6 +2,7 @@
  * @file 爱丽速子 - 调教
  *
  * @author 幽白書
+ * @author Necroz
  */
 const era = require('#/era-electron');
 

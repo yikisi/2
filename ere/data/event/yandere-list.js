@@ -9,19 +9,16 @@ class YandereList {
     this.obj = get('flag:病娇列表') || set('flag:病娇列表', []);
   }
 
-  clean() {
-    this.obj = set(
-      'flag:病娇列表',
-      (this.obj || []).filter((e) => e),
-    );
-  }
-
   /**
    * @param {number} chara_id
    * @param {boolean} [in_init]
    */
   push(chara_id, in_init) {
     if (in_init || !get(`talent:${chara_id}:病娇`)) {
+      set(`talent:${chara_id}:病娇`, 1);
+      if (in_init && get(`love:${chara_id}`) >= 50) {
+        set(`status:${chara_id}:爱意克制`, 1);
+      }
       this.obj.push(chara_id);
       this.obj = set(
         'flag:病娇列表',

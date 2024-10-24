@@ -11,7 +11,7 @@ const { join_list } = require('#/utils/list-utils');
 const { sex_slave_title } = require('#/data/ero/status-const');
 const { growth_info, unknown_info } = require('#/data/exp-const');
 
-const page_name = '肉体情报 【虐】';
+const page_name = '肉体情报【虐】';
 
 const sm_talent_desc = ['', '责骂', '击打', '凌辱'];
 

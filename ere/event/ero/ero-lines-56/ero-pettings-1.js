@@ -214,11 +214,11 @@ module.exports = (handlers) => {
       await attacker.print_and_wait([
         '自己担当的声音逐渐变得高昂起来, 脸上也露出了因为快感过载的痴态',
       ]);
-      await attacker.print_and_wait(['那么再拉扯一下呢 ?']);
+      await attacker.print_and_wait(['那么再拉扯一下呢？']);
       await defender.say_and_wait([
         '结果 ',
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 触电般的仰起头来 , 支支吾吾地靠在了自己的身上',
+        ' 触电般的仰起头来，支支吾吾地靠在了自己的身上',
       ]);
     } else {
       await defender.say_and_wait(['……呀啊～❤️']);
@@ -235,7 +235,7 @@ module.exports = (handlers) => {
         sys_get_colored_callname(attacker.id, defender.id),
         ' 就会因为 ',
         attacker.get_colored_name(),
-        ' 的动作而扭动着身体 , 如同念着祷词般从口中吐出有节奏的快乐呻吟',
+        ' 的动作而扭动着身体，如同念着祷词般从口中吐出有节奏的快乐呻吟',
       ]);
     }
   };
@@ -342,7 +342,7 @@ module.exports = (handlers) => {
         if (is_asking) {
           await defender.say_and_wait(['知道啦，知道啦。']);
           await attacker.print_and_wait(['有些心不在蔫的吞下了肉棒，']);
-          await defender.say_and_wait([' ……咕哇、咕噜、啾、呜！']);
+          await defender.say_and_wait(['……咕哇、咕噜、啾、呜！']);
           await attacker.print_and_wait([
             '看来是没做好准备，试着吐出肉棒的 ',
             sys_get_colored_callname(attacker.id, defender.id),

@@ -417,8 +417,6 @@ module.exports = async () => {
     if (debuff[1] >= 0.5) {
       debuff[1] = 1000;
     }
-    const player_cost = time_cost.player * (1 + debuff[0]),
-      uma_cost = time_cost.uma * (1 + debuff[1]);
     const beach_level =
       (era.get(`cflag:${chara_id}:位置`) === location_enum.beach) * 5;
 
@@ -426,15 +424,16 @@ module.exports = async () => {
     era.printMultiColumns(
       attr_names.map((e, i) => {
         const train_level =
-          beach_level || era.get(`abl:${chara_id}:${e}训练等级`);
+            beach_level || era.get(`abl:${chara_id}:${e}训练等级`),
+          train_cost = time_cost[train_level - 1] * (1 + debuff[0]);
         return {
           accelerator: 200 + i,
           config: {
             width: 4,
             disabled:
               !race ||
-              player_time < player_cost ||
-              chara_time < uma_cost ||
+              player_time < train_cost / 2 ||
+              chara_time < train_cost ||
               chara_stamina === 0 ||
               !train_enabled,
           },

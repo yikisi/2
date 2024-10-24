@@ -21,6 +21,7 @@ const get_gradient_color = require('#/utils/gradient-color');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { escape_enum } = require('#/data/basement-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -69,10 +70,38 @@ handlers[event_hooks.load_talk] = async () => {
 };
 
 handlers[event_hooks.select] = () => {
-  if (!sys_check_awake(3)) {
+  if (!sys_check_awake(0) || !sys_check_awake(3)) {
     throw new Error();
   }
-  get_chara_talk(3).say(
+  const life_marks = new LifeEventMarks(3),
+    teio = get_chara_talk(3);
+  if (life_marks.b_escape) {
+    switch (life_marks.b_escape) {
+      case escape_enum.sneak:
+        if (era.get('status:3:腿伤')) {
+          teio.say('训练员……啊啊。');
+        } else {
+          teio.say([
+            sys_get_colored_callname(3, 0),
+            '，似乎比我从前还要淘气呢。',
+          ]);
+        }
+        break;
+      case escape_enum.beat:
+      case escape_enum.strike:
+        if (era.get('status:3:腿伤')) {
+          teio.say('我又辜负了你……和这一切。');
+          era.print([teio.sex, '紧闭双眼，攥紧双拳，掌心红的像是要滴出血来。']);
+        } else {
+          teio.say('啊，我……');
+          teio.say('对不起，训练员。');
+          era.print([teio.sex, '似乎变得听话了许多。']);
+        }
+    }
+    life_marks.b_escape = 0;
+    return;
+  }
+  teio.say(
     Math.random() < 0.5
       ? `唔～叫无敌的帝王大人有什么事吗？`
       : `哼哼，我随时都准备好了！`,
@@ -80,32 +109,72 @@ handlers[event_hooks.select] = () => {
 };
 
 handlers[event_hooks.good_morning] = () => {
-  const teio_talk = get_chara_talk(3),
+  const life_marks = new LifeEventMarks(3),
+    me = get_chara_talk(0),
+    teio = get_chara_talk(3),
     temp = get_random_value(0, 4);
+  if (life_marks.b_escape) {
+    switch (life_marks.b_escape) {
+      case escape_enum.sneak:
+        if (era.get('status:3:腿伤')) {
+          teio.say('这样啊……哈。');
+        } else {
+          teio.say('帝王大人的训练员……哈哈。');
+        }
+        break;
+      case escape_enum.beat:
+        teio.say('真的……对不起。');
+        era.print([
+          teio.sex,
+          '低头弯腰，并在之后用言行最大限度地表明了自己的歉意。',
+        ]);
+        era.print([
+          me.get_colored_name(),
+          ' 接受了。但 ',
+          me.get_colored_name(),
+          ' 感觉自家担当最近有些沉迷于体能训练……',
+        ]);
+        break;
+      case escape_enum.strike:
+        teio.say('真的……对不起。');
+        era.print([
+          teio.sex,
+          '低头弯腰，并在之后用言行最大限度地表明了自己的歉意。',
+        ]);
+        era.print([
+          me.get_colored_name(),
+          ' 接受了。但 ',
+          me.get_colored_name(),
+          ' 总感觉最近在暗处有一双眼睛在一直盯着自己……',
+        ]);
+    }
+    life_marks.b_escape = 0;
+    return;
+  }
   let talk_arr;
   if (temp === 0) {
     era.print([
-      teio_talk.get_colored_name(),
-      ` 貌似正在跟其他${teio_talk.get_uma_sex_title()}聊天，听到`,
-      get_chara_talk(0).get_colored_name(),
-      `叫${teio_talk.sex}的名字，便结束了对话飞奔过来。`,
+      teio.get_colored_name(),
+      ` 貌似正在跟其他${teio.get_uma_sex_title()}聊天，听到`,
+      me.get_colored_name(),
+      `叫${teio.sex}的名字，便结束了对话飞奔过来。`,
     ]);
   } else if (temp === 1) {
     era.print([
-      teio_talk.get_colored_name(),
+      teio.get_colored_name(),
       {
-        color: teio_talk.color,
+        color: teio.color,
         content: '「啊……早上好啊训练员，什么，我昨天才没有熬夜啦」',
       },
       '（打呵欠）',
     ]);
   } else {
     talk_arr = [
-      `今天的训练……有这些吗！我会好好完成的！`,
+      '今天的训练……有这些吗！我会好好完成的！',
       `欸，这么快就要开始了吗！`,
       `蜂蜜喝太多了……有点不好受啊。`,
     ];
-    teio_talk.say(get_random_entry(talk_arr));
+    teio.say(get_random_entry(talk_arr));
   }
 };
 
@@ -653,6 +722,58 @@ handlers[event_hooks.celebration] = async () => {
         );
         await quick_into_sex(3);
       }
+      break;
+    case 39:
+      await print_event_name('万圣节', teio);
+      await era.printAndWait([
+        '整理完今天的工作，收拾好办公室，',
+        me.get_colored_name(),
+        ' 歇了歇脚，等待着学院的钟声。',
+      ]);
+      await era.printAndWait('今天，有事会发生。');
+      await era.printAndWait([me.get_colored_name(), ' 等待注定的命运。']);
+      era.println();
+      await era.printAndWait('「咚——，砰砰砰，咚——」');
+      await era.printAndWait([
+        '奇异的敲门声传来，',
+        me.get_colored_name(),
+        ' 屏住呼吸，闪到门后，顺势拉开房门——',
+      ]);
+      era.println();
+      await era.printAndWait('一团血红闪进。');
+      era.println();
+      await era.printAndWait([me.get_colored_name(), ' 悄无声息，扑了上去。']);
+      era.println();
+      await teio.say_and_wait('哇！');
+      era.println();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 的偷袭并没有得手，',
+        teio.sex,
+        '及时转身，刚好和 ',
+        me.get_colored_name(),
+        ' 撞了个满怀。',
+      ]);
+      era.println();
+      await teio.say_and_wait('别想吓到帝王大人！');
+      era.println();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 的担当双手叉腰，一身小红帽打扮，一手提着篮子，一手过来抓 ',
+        me.get_colored_name(),
+        '。',
+      ]);
+      era.println();
+      await teio.say_and_wait('坏大人快来陪我！');
+      era.println();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 连声应是，按 ',
+        me.get_couple_title(),
+        ' 约定好的陪',
+        teio.sex,
+        '出门了……',
+      ]);
       break;
     case 47:
       await print_event_name('圣诞节', teio);

@@ -105,7 +105,7 @@ module.exports = {
               [
                 '走吧，',
                 callname,
-                '！ 今天也要起飞去寻找令人期待、闪闪发亮的事情哦！',
+                '！今天也要起飞去寻找令人期待、闪闪发亮的事情哦！',
               ],
             ];
           }
@@ -468,7 +468,7 @@ module.exports = {
                 await maya.say_and_wait([
                   '我会把这些玩偶当成 ',
                   callname,
-                  ' ，每天抱紧紧的！',
+                  '，每天抱紧紧的！',
                 ]);
                 await era.printAndWait([
                   maya.get_colored_name(),
@@ -493,9 +493,9 @@ module.exports = {
                 '咦～好可爱～♪这个不会太成熟吗？可是有点反差会不会更可爱啊？',
               );
               await maya.say_and_wait([
-                '这种时候…… ',
+                '这种时候……',
                 callname,
-                ' ！陪Maya一起伤脑筋吧～！',
+                '！陪Maya一起伤脑筋吧～！',
               ]);
               await maya.say_and_wait('现在正在打折♪我要买很多可爱的衣服～♪');
               await maya.say_and_wait(
@@ -508,9 +508,9 @@ module.exports = {
                 '而这件是可爱却又具有机动性，服饰店的姐姐说这件的实用性超猛！',
               );
               await maya.say_and_wait([
-                '呐， ',
+                '呐，',
                 callname,
-                ' ！你觉得哪件比较适合Maya～？',
+                '！你觉得哪件比较适合Maya～？',
               ]);
               era.printButton('「有最新技巧的穿搭！」', 1);
               era.printButton('「具机动性的实用穿搭！」', 2);
@@ -530,9 +530,9 @@ module.exports = {
                 );
                 await maya.say_and_wait('就决定是这件了！好──去买吧♪');
                 await maya.say_and_wait([
-                  '好啦， ',
+                  '好啦，',
                   callname,
-                  ' ，出发！今天的约会可还没有结束哦？',
+                  '，出发！今天的约会可还没有结束哦？',
                 ]);
               }
             } else {
@@ -549,9 +549,9 @@ module.exports = {
                 '还是要选Maya个人推荐必买的『超甜甜巧克力』呢？',
               );
               await maya.say_and_wait([
-                '唔唔～选不出来啦～ ',
+                '唔唔～选不出来啦～',
                 callname,
-                ' ，你来帮人家选吧！',
+                '，你来帮人家选吧！',
               ]);
               era.printButton('「挑战新口味！」', 1);
               era.printButton('「必买的最棒！」', 2);
@@ -572,12 +572,12 @@ module.exports = {
                   '毕竟要是吃到不喜欢的会很失望嘛！好──那我就决定选这个了！',
                 );
                 await maya.say_and_wait([
-                  '我们一起分着吃吧！ ',
+                  '我们一起分着吃吧！',
                   callname,
-                  ' ，啊————',
+                  '，啊————',
                 ]);
                 await era.printAndWait([
-                  '和名字相同， ',
+                  '和名字相同，',
                   maya.get_colored_name(),
                   ' 挑选的巧克力非常的甜。',
                 ]);
@@ -598,9 +598,9 @@ module.exports = {
         switch (await era.input()) {
           case 1: //吃饭
             await maya.say_and_wait([
-              '约会，约会☆ ',
+              '约会，约会🌟',
               callname,
-              ' ，我们要去哪♪',
+              '，我们要去哪🎵',
             ]);
             switch (get_random_value(0, 2)) {
               case 0:
@@ -617,7 +617,7 @@ module.exports = {
                 ]);
                 break;
               case 1:
-                await maya.say_and_wait([callname, ' ，来喂我吃嘛！啊……']);
+                await maya.say_and_wait([callname, '，来喂我吃嘛！啊……']);
                 await era.printAndWait([
                   '和 ',
                   maya.get_colored_name(),
@@ -676,13 +676,13 @@ module.exports = {
               await maya.say_and_wait('哇……今天街上的人好多……');
               await maya.say_and_wait([
                 callname,
-                ' ，为了避免走散，我们来牵手吧！',
+                '，为了避免走散，我们来牵手吧！',
               ]);
               await maya.say_and_wait(
                 '嘿嘿……像这样牵手一起散步，有没有情侣的感觉呢♪',
               );
               await era.printAndWait([
-                '虽然在旁人看来，或许更像成人在带孩子吧……但无论如何， ',
+                '虽然在旁人看来，或许更像成人在带孩子吧……但无论如何，',
                 maya.get_colored_name(),
                 ' 开心就好。',
               ]);
@@ -703,7 +703,7 @@ module.exports = {
                 callname,
                 ' ',
                 callname,
-                ' ！刚才你看到了吗！',
+                '！刚才你看到了吗！',
               ]);
               await maya.say_and_wait('是飞机耶！还是Maya的爸爸驾驶的！');
               await maya.say_and_wait('总有一天Maya也要在蓝天上翱翔☆');
@@ -711,7 +711,7 @@ module.exports = {
               await era.printAndWait([
                 '不知是不是偶然，似乎正好碰到了 ',
                 maya.get_colored_name(),
-                ' 的父亲出演的动作片， ',
+                ' 的父亲出演的动作片，',
                 maya.get_colored_name(),
                 ' 非常开心。',
               ]);

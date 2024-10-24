@@ -121,6 +121,7 @@ module.exports = {
           part_enum.body,
           part_enum.masochism,
         );
+        era.set(`nowex:${c_id}:颜射`, 1);
       });
   },
   /**

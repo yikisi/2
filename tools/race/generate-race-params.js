@@ -102,10 +102,3 @@ output +=
   '  ],}';
 
 writeFileSync('../../ere/data/race/race-attr-bonus.js', output);
-
-execSync(
-  'npx eslint --fix ./ere/data/race/race-attr-bonus.js ./ere/data/race/race-params.js',
-  {
-    cwd: join(process.cwd(), '../..'),
-  },
-);

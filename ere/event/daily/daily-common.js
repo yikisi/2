@@ -2,11 +2,15 @@
  * @file 日常地文
  *
  * @author 雞雞
+ * @author KUN
  * @author 无名黑奴
  */
 const era = require('#/era-electron');
 
-const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_change_lust,
+  sys_get_billings,
+} = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_get_colored_callname,
@@ -23,6 +27,7 @@ const select_action_in_atrium = require('#/event/daily/snippets/select-action-in
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -520,14 +525,97 @@ handlers[event_hooks.school_atrium] = async (chara_id, hook) => {
   );
 };
 
-/** @author 雞雞 */
-handlers[event_hooks.school_rooftop] = (chara_id) =>
-  era.printAndWait([
-    get_chara_talk(0).get_colored_name(),
+handlers[event_hooks.school_rooftop] = async (chara_id) => {
+  const chara = get_chara_talk(chara_id),
+    me = get_chara_talk(0);
+  if (
+    (era.get(`talent:${chara_id}:情感活动`) === 1 ||
+      era.get(`talent:${chara_id}:自信程度`) === 1) &&
+    era.get(`love:${chara_id}`) >= 75 &&
+    Math.random() < 0.05 + era.get(`base:${chara_id}:性欲`) / 20000
+  ) {
+    /** @author KUN */
+    await print_event_name('奇怪的午饭', chara);
+    await era.printAndWait([
+      '到了午餐时间，',
+      me.get_colored_name(),
+      ' 和 ',
+      chara.get_colored_name(),
+      ' 不约而同的来到了天台。',
+    ]);
+    await era.printAndWait([
+      '不知为何，今天 ',
+      chara.get_colored_name(),
+      ' 带来的饭盒格外的丰盛',
+    ]);
+    era.println();
+    await chara.say_and_wait([
+      sys_get_colored_callname(chara_id, 0),
+      '，来试试看味道怎么样吧。',
+    ]);
+    await chara.say_and_wait('这可是得意之作哦～');
+    era.println();
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 把眼前的饭盒接过来，毫无顾虑的拿起了餐具。',
+    ]);
+    await era.printAndWait(['美美的享受了几口之后，身体却逐渐温热了起来……']);
+    era.println();
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 有点奇怪的转头看向身边的 ',
+      chara.get_colored_name(),
+      '，才发现也同样面对潮红。',
+    ]);
+    await era.printAndWait([
+      '正当 ',
+      me.get_colored_name(),
+      ' 想要问什么的时候，却被强行吻住嘴唇打断了话语。',
+    ]);
+    era.println();
+    await era.printAndWait(['直到松开的时候，嘴边还拉出了一道长长的银丝。']);
+    era.printButton('「这下不得不做了……」', 1);
+    era.printButton('「我可是正人君子！鋼の意志发动！」', 2);
+    era.set('status:0:马跳Z', 1);
+    era.set(`status:${chara_id}:马跳Z`, 1);
+    if ((await era.input()) === 1) {
+      await era.printAndWait([
+        '明明是在天台，',
+        me.get_colored_name(),
+        ' 和 ',
+        chara.get_colored_name(),
+        ' 却在不断的渴求着对方。',
+      ]);
+      await era.printAndWait([
+        '但一想到这还是午休时间，',
+        me.get_colored_name(),
+        ' 便没有继续想其他的事情，伸手抓住了 ',
+        chara.get_colored_name(),
+        ' 的肩膀……',
+      ]);
+      await quick_into_sex(chara_id);
+    } else {
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 猛的摇摇头唤回了坚定的意志，立刻收起了手上的饭盒。',
+      ]);
+      await era.printAndWait([
+        '当着 ',
+        chara.get_colored_name(),
+        ' 的面站起身，如同逃跑似的离开了天台……',
+      ]);
+      sys_change_lust(chara_id, 1500);
+    }
+    return;
+  }
+  /** @author 雞雞 */
+  await era.printAndWait([
+    me.get_colored_name(),
     ' 与 ',
-    get_chara_talk(chara_id).get_colored_name(),
+    chara.get_colored_name(),
     ' 一起来到天台吃便当，你们互相交换了便当盒里的美食。',
   ]);
+};
 
 /** @author 雞雞 */
 handlers[event_hooks.out_river] = async (chara_id, hook) => {

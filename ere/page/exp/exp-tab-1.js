@@ -17,7 +17,7 @@ const drunk_semen_desc = [
   '喉咙就会幸福地躁动起来',
 ];
 
-const page_name = '肉体情报 【口】';
+const page_name = '肉体情报【口】';
 
 module.exports = {
   /**

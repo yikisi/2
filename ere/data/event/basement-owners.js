@@ -8,13 +8,6 @@ class BasementOwners {
     this.obj = era.get('flag:地下室之主') || era.set('flag:地下室之主', []);
   }
 
-  clean() {
-    this.obj = era.set(
-      'flag:地下室之主',
-      this.obj.filter((e) => e),
-    );
-  }
-
   clear() {
     this.obj = era.set('flag:地下室之主', []);
   }

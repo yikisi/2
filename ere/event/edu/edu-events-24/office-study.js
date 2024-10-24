@@ -318,7 +318,7 @@ module.exports = (handlers) => {
   };
 
   handlers.maya_takeoff = async (maya, me, callname, flags) => {
-    await print_event_name('摩耶重炮 · 起飞☆', maya);
+    await print_event_name('摩耶重炮 · 起飞🌟', maya);
     await era.printAndWait([maya.get_colored_name(), ' 的决胜服终于送来了。']);
     await era.printAndWait([
       '因为',

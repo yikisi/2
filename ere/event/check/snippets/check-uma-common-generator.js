@@ -23,7 +23,7 @@ module.exports = (
 ) => {
   class A extends CustomizedCheck {
     check_after_race(extra_flag) {
-      after_race_cb(extra_flag);
+      after_race_cb.bind(this)(extra_flag);
     }
 
     check_and_get_titles(aim_check) {
@@ -32,7 +32,9 @@ module.exports = (
       }
       const races = new RaceHistory(this.id),
         titles = [];
-      if (title_check_cb(races.get(), races.get_values(), aim_check)) {
+      if (
+        title_check_cb.bind(this)(races.get(), races.get_values(), aim_check)
+      ) {
         titles.push({
           c: get_chara_color(this.id),
           n: this.get_personal_titles()[0],
@@ -51,7 +53,7 @@ module.exports = (
     get_edu_aims() {
       const buffer = [],
         races = new RaceHistory(this.id).get();
-      fill_edu_aims_cb(buffer, races);
+      fill_edu_aims_cb.bind(this)(buffer, races);
       return buffer;
     }
 

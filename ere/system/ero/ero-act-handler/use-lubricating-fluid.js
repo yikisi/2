@@ -64,7 +64,7 @@ async function use_lubricating_fluid(chara) {
         e.e = !check_lubrication(aim_id, e.p);
         return e;
       });
-  if (!buffer.filter((e) => e.e).length) {
+  if (buffer.findIndex((e) => e.e) === -1) {
     era.print('没有需要润滑的部位……');
     return undefined;
   }

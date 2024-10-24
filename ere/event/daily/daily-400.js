@@ -532,7 +532,7 @@ handlers[event_hooks.out_river] = async function (hook) {
           silence.get_colored_name(),
           ' 默默的走在河边，不时回头看向走在身后的',
           me.get_colored_name(),
-          ' ，似乎在思考着什么。',
+          '，似乎在思考着什么。',
         ]),
     );
     if (era.get('love:400') >= 75) {

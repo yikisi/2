@@ -8081,5 +8081,67 @@
       }
     ],
     "slopes": []
+  },
+  {
+    "id": 55503,
+    "lane": [
+      {
+        "end": 170,
+        "length": 170,
+        "name": "4弯",
+        "start": 0,
+        "type": "弯道"
+      },
+      {
+        "end": 710,
+        "length": 540,
+        "name": "1直",
+        "start": 170,
+        "type": "直线"
+      },
+      {
+        "end": 865,
+        "length": 155,
+        "name": "1弯",
+        "start": 710,
+        "type": "弯道"
+      },
+      {
+        "end": 1020,
+        "length": 155,
+        "name": "2弯",
+        "start": 865,
+        "type": "弯道"
+      },
+      {
+        "end": 1426,
+        "length": 406,
+        "name": "2直",
+        "start": 1020,
+        "type": "直线"
+      },
+      {
+        "end": 1576,
+        "length": 150,
+        "name": "3弯",
+        "start": 1426,
+        "type": "弯道"
+      },
+      {
+        "end": 1726,
+        "length": 150,
+        "name": "终弯",
+        "start": 1576,
+        "type": "弯道"
+      },
+      {
+        "end": 2000,
+        "length": 274,
+        "name": "终直",
+        "start": 1726,
+        "type": "直线"
+      }
+    ],
+    "slopes": []
   }
 ]

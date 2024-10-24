@@ -810,8 +810,7 @@ module.exports = (handlers) => {
     if (
       race_history
         .get_values()
-        .filter((e) => race_infos[e.race].race_class <= class_enum.G3).length >
-      0
+        .findIndex((e) => race_infos[e.race].race_class <= class_enum.G3) !== -1
     ) {
       await era.printAndWait([
         '要说为什么来了，主要还是像以前说好的那样，带 ',

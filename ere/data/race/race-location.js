@@ -7,6 +7,7 @@ const track2location = {};
 track2location[track_enum.kentucky] =
   track2location[track_enum.baltimore] =
   track2location[track_enum.new_york] =
+  track2location[track_enum.santa_anita] =
     { con: '美', lan: '英', loc: location_enum.new_york };
 track2location[track_enum.longchamp] =
   track2location[track_enum.chantilly] =

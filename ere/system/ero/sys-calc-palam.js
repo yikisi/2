@@ -41,11 +41,13 @@ function add_palam(chara_id, part, _attack) {
   // 欲求不满+25%快感累积
   // 发情+25%快感累积
   // 余韵+20%快感累积
+  // 高潮抑制-10%快感累积
   let coff =
     1 +
     0.25 * (era.get(`base:${chara_id}:性欲`) >= lust_border.want_sex) +
     0.25 * era.get(`tcvar:${chara_id}:发情`) +
-    0.2 * (era.get(`tcvar:${chara_id}:余韵`) > 0);
+    0.2 * (era.get(`tcvar:${chara_id}:余韵`) > 0) -
+    0.1 * (era.get(`tcvar:${chara_id}:高潮抑制`) > 0);
   if (part === part_enum.penis) {
     // 不应期内阴茎快感提升-90%
     if (era.get(`tcvar:${chara_id}:不应期`)) {

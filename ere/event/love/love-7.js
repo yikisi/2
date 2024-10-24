@@ -458,7 +458,7 @@ async function golden_ship_attack() {
   era.printButton('「杀死愿意为你牺牲的女朋友……」', 2);
   setTimeout(
     () => ret.length < 5 && era.printButton('「哪个都不选……！」', 3),
-    10000,
+    100,
   );
   ret.push(await era.input());
   era.println();
@@ -526,7 +526,6 @@ async function golden_ship_attack() {
   }
   if (ret[4] !== 3) {
     new YandereList().push(7);
-    era.set('talent:7:病娇', 1);
   }
   await era.waitAnyKey();
   if (ret[1] === 2) {

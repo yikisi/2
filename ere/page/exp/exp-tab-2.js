@@ -15,7 +15,7 @@ const { get_breast_cup } = require('#/data/info-generator');
 
 const nipple_type = ['粉色小草莓', '深色小樱桃', '幽深火山湖'];
 
-const page_name = '肉体情报 【胸】';
+const page_name = '肉体情报【胸】';
 
 module.exports = {
   /**

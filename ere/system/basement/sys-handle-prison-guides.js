@@ -109,6 +109,18 @@ async function sys_handle_prison_guides() {
     },
     {
       async h() {
+        await say_by_passer_by_and_wait('兵法有言', '凡战者，以正合，以奇胜。');
+        await era.printAndWait(
+          '如果对力量足够自信，正面反抗总是有效的手段，特别是在机关被解除殆尽的时候。',
+        );
+        await era.printAndWait(
+          '但是一旦没能解除机关，让主人有机会回过神来，下场也是可以想象的……',
+        );
+      },
+      n: '正面反抗',
+    },
+    {
+      async h() {
         await say_by_passer_by_and_wait('兵法有言', '上兵伐谋，其次伐交。');
         await era.printAndWait([
           '若然地下室主人已然在 ',

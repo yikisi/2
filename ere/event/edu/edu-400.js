@@ -228,7 +228,6 @@ week_end_handlers[47 + 24] = async (ss, me, callname, flags, event_object) => {
   );
   if ((await era.input()) === 1) {
     new YandereList().push(400);
-    era.set('talent:400:病娇', 1);
     await ss.say_and_wait('嗯……不要松开我的手，求求你了……');
     await era.printAndWait([
       ss.sex,

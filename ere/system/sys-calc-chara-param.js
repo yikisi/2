@@ -177,15 +177,16 @@ module.exports = {
    * @returns {number} 0b1：普通迷雾，隐藏好感爱慕；0b10：病娇迷雾，隐藏好感
    */
   sys_check_hide_relation_and_love(chara_id) {
-    const hide_talent = era.get(`talent:${chara_id}:捉摸不透`);
+    const hide_talent = era.get(`talent:${chara_id}:捉摸不透`),
+      advanced_info = era.get('status:0:马语者');
     return (
+      !advanced_info &&
       (chara_id &&
         (era.get(`talent:${chara_id}:捉摸不透`) ||
           era.get(`talent:${chara_id}:坦率程度`) === -1) &&
-        (chara_id === 32 ||
-          (!era.get('status:0:马语者') && !era.get('status:0:好感度镜片'))) &&
+        (chara_id === 32 || !era.get('status:0:好感度镜片')) &&
         era.get(`love:${chara_id}`) < 75) +
-      0b10 * (hide_talent && era.get(`talent:${chara_id}:病娇`) === 2)
+        0b10 * (hide_talent && era.get(`talent:${chara_id}:病娇`) === 2)
     );
   },
   /** @param {number} chara_id */
@@ -194,8 +195,8 @@ module.exports = {
       chara_id &&
       era.get(`status:${chara_id}:爱意克制`) &&
       era.get(`love:${chara_id}`) &&
-      (chara_id === 32 ||
-        (!era.get('status:0:马语者') && !era.get('status:0:好感度镜片')))
+      !era.get('status:0:马语者') &&
+      (chara_id === 32 || !era.get('status:0:好感度镜片'))
     );
   },
   /**
@@ -221,10 +222,12 @@ module.exports = {
    * @returns {boolean}
    */
   sys_check_remote(chara_id) {
+    const cur_race = era.get('flag:当前赛事');
     return (
       chara_id > 0 &&
       era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置') &&
-      (race_infos[era.get('flag:当前赛事')].track >= track_enum.longchamp ||
+      (!cur_race ||
+        race_infos[cur_race].track >= track_enum.longchamp ||
         era.get('cflag:0:位置') !== 0)
     );
   },

@@ -12,6 +12,7 @@ const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { adaptability_colors } = require('#/data/color-const');
+const title_desc = require('#/data/desc/title-desc.json');
 const notes = require('#/data/notes.json');
 const { first_child_id, set_chara_ero_image } = require('#/data/other-const');
 
@@ -94,6 +95,18 @@ module.exports = async () => {
     [[get_copyright_entry(3)], '天马闪光蹄'],
     [[get_copyright_entry(4), '、', get_copyright_entry(46)], '黑奴一号'],
     [[get_copyright_entry(7)], '雞雞'],
+    // [
+    //   [
+    //     get_copyright_entry(6),
+    //     '、',
+    //     get_copyright_entry(7),
+    //     '、',
+    //     get_copyright_entry(21),
+    //   ],
+    //   '雞雞',
+    // ],
+    [[get_copyright_entry(13, '地下室')], '伊兰'],
+    // [[get_copyright_entry(13)], '伊兰'],
     [[get_copyright_entry(17)], '露娜俘虏'],
     [[get_copyright_entry(19)], '片手虾好评发售中！'],
     [[get_copyright_entry(24)], '黑奴二号'],
@@ -115,6 +128,11 @@ module.exports = async () => {
     [[get_copyright_entry(56)], 'ALEX'],
     [[get_copyright_entry(60)], '红红火火恍惚'],
     [
+      [get_copyright_entry(64, '地下室、调教')],
+      ['KUN', { isDivider: true }, 'Bottle'],
+    ],
+    // [[get_copyright_entry(64)], 'KUN'],
+    [
       [get_copyright_entry(67)],
       [
         '某知名手游公司编剧',
@@ -134,8 +152,10 @@ module.exports = async () => {
         '无名黑奴',
       ],
     ],
+    // [[get_copyright_entry(71)], '洛洛'],
     [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
     [[get_copyright_entry(89, '地下室')], '無奈'],
+    // [[get_copyright_entry(89)], '無奈'],
     [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
     [[get_copyright_entry(119, '地下室')], '幽白書'],
     [
@@ -365,6 +385,10 @@ module.exports = async () => {
             .get('chara')
             .filter((e) => e && e < first_child_id)
             .map((e) => {
+              const title = era.get(`staticcstr:${e}:称号`),
+                desc =
+                  title_desc[title] ||
+                  '在一次育成周期内赢取了六次以上的G1比赛胜利';
               return {
                 config: {
                   align: 'center',
@@ -376,11 +400,17 @@ module.exports = async () => {
                       era.get(`static:${e}:name`),
                       '：',
                       {
-                        content: era.get(`staticcstr:${e}:称号`),
+                        content: title,
                         fontWeight: 'bold',
+                        title: `${title}：${desc}`,
                       },
                     ]
-                  : '？？？',
+                  : [
+                      {
+                        content: '？？？',
+                        title: `${era.get(`static:${e}:name`)}：${era.get(`staticcstr:${e}:称号`)}\n${desc}`,
+                      },
+                    ],
                 type: 'text',
               };
             }),
@@ -553,6 +583,11 @@ module.exports = async () => {
                 content: "Trainers' Legend G 译文仓库",
                 url: 'https://github.com/MinamiChiwa/Trainers-Legend-G-TRANS',
               },
+              '、',
+              {
+                content: '赛马娘中文Wiki',
+                url: 'https://wiki.biligame.com/umamusume/%E9%A6%96%E9%A1%B5',
+              },
             ],
             type: 'text',
           },
@@ -654,6 +689,8 @@ module.exports = async () => {
           '提交bug',
           { isDivider: true },
           '科比 · 布莱恩特',
+          { isDivider: true },
+          'Mr.E.',
         ]);
         await era.printAndWait('社区管理', {
           color: item_title_color,

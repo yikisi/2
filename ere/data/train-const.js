@@ -75,9 +75,6 @@ module.exports = {
     limit: 10000,
     unhappy: 2500,
   },
-  time_cost: {
-    player: 200,
-    uma: 400,
-  },
+  time_cost: [320, 352, 368, 400, 416],
   train_buff_info: ['疏于训练', '', '精于训练', '极擅训练'],
 };

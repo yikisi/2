@@ -346,7 +346,8 @@ handlers[event_hooks.out_shopping] = async (hook) => {
   const kita = get_chara_talk(68),
     me = get_chara_talk(0),
     love = era.get('love:68'),
-    buffer = [];
+    buffer = [],
+    edu_marks = new KitaEduMarks();
   let temp;
   hook.arg = await select_action_in_shopping_street();
   switch (hook.arg) {
@@ -396,14 +397,14 @@ handlers[event_hooks.out_shopping] = async (hook) => {
       await era.printAndWait(
         `与 ${kita.name} 一同参加了商店街组织的抽奖活动……`,
       );
-      switch (get_random_value(0, 4)) {
+      switch (get_random_value(0, 3 + !edu_marks.hot_spring)) {
         case 0:
           await kita.say_and_wait(
             `路过的花山组的大哥送我的抽奖券……能抽到什么呢？`,
           );
           await era.printAndWait(`咕噜咕噜咕噜咕噜……`);
           await era.printAndWait(`biu～`);
-          await era.printAndWait(`获得了商店街的奖品：[普通的纸巾]！`);
+          await era.printAndWait(`获得了商店街的奖品：【普通的纸巾】！`);
           await kita.say_and_wait(`啊呜，是纸巾啊，作为奖品也是不错的选择呢……`);
           await kita.say_and_wait(
             `果然还是要以弄坏转盘，甚至转怪桌子的气势转么……`,
@@ -416,7 +417,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
           );
           await era.printAndWait(`咕噜咕噜咕噜咕噜……`);
           await era.printAndWait(`biu～`);
-          await era.printAndWait(`获得了商店街的奖品：[胡萝卜]！`);
+          await era.printAndWait(`获得了商店街的奖品：【胡萝卜】！`);
           await kita.say_and_wait(
             `呜……只有一根胡萝卜么？太便宜以至于有点不甘心呢……`,
           );
@@ -433,7 +434,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
           );
           await era.printAndWait(`咕噜咕噜咕噜咕噜……`);
           await era.printAndWait(`biu～`);
-          await era.printAndWait(`获得了商店街的奖品：[一筐胡萝卜]！`);
+          await era.printAndWait(`获得了商店街的奖品：【一筐胡萝卜】！`);
           await kita.say_and_wait(`好，好多！分量都够一两顿饭了诶！`);
           await era.printAndWait(
             `看着绕起胡萝卜山转着圈，决定把胡萝卜分给大家的${kita.name}，${
@@ -447,7 +448,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
           );
           await era.printAndWait(`咕噜咕噜咕噜咕噜……`);
           await era.printAndWait(`biu～`);
-          await era.printAndWait(`获得了商店街的奖品：[特等胡萝卜汉堡排]！`);
+          await era.printAndWait(`获得了商店街的奖品：【特等胡萝卜汉堡排】！`);
           await kita.say_and_wait(
             `好豪迈的料理啊！而且分量也好大！快有一口大锅那么大了啊！`,
           );
@@ -461,7 +462,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
           );
           await era.printAndWait(`咕噜咕噜咕噜咕噜……`);
           await era.printAndWait(`biu～`);
-          await era.printAndWait(`获得了商店街的奖品：[温泉旅行券]！`);
+          await era.printAndWait(`获得了商店街的奖品：【温泉旅行券】！`);
           await kita.say_and_wait(`好耶！特等奖！是特等奖哦训练员！哈哈哈哈！`);
           await kita.say_and_wait(
             `啊，但是这个是商店街的大家友情赠送的啊……抽到这么好的东西真的好么？`,
@@ -469,12 +470,7 @@ handlers[event_hooks.out_shopping] = async (hook) => {
           await era.printAndWait(
             `在商店街的大家微笑着的宽慰中，${kita.name} 有些不好意思地把温泉旅行券收下了。`,
           );
-          {
-            const event_marks = new KitaEduMarks();
-            if (!event_marks.hot_spring) {
-              event_marks.hot_spring++;
-            }
-          }
+          edu_marks.hot_spring = 1;
       }
       break;
     case 2:

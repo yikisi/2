@@ -19,7 +19,7 @@ const {
 } = require('#/data/ero/status-const');
 const { growth_info, unknown_info } = require('#/data/exp-const');
 
-const page_name = '肉体情报 【茎】';
+const page_name = '肉体情报【茎】';
 
 module.exports = {
   /**

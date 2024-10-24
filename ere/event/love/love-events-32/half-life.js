@@ -173,7 +173,7 @@ module.exports = async (tachyon, me, callname) => {
   ]);
   era.println();
 
-  await tachyon.say_and_wait([callname, ' ？在想什么呢？']);
+  await tachyon.say_and_wait([callname, '？在想什么呢？']);
 
   era.printButton('「没什么……」', 1);
   era.printButton('「只是觉得这样的话，速子好孤独啊……」', 2);

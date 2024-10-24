@@ -46,6 +46,7 @@ const BasementOwners = require('#/data/event/basement-owners');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { get_save_name } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
@@ -71,14 +72,7 @@ async function next_week() {
  * @param {number} rest_loc
  */
 async function save_and_next_week(chara_id, cur_loc, rest_loc) {
-  await era.saveData(
-    0,
-    `${get_chara_talk(0).actual_name} 于 ${new Date().toLocaleString('zh-CN', {
-      timeZone: 'Asia/Shanghai',
-    })} 保存的进度 (${era.get('flag:当前年')} 年 ${era.get(
-      'flag:当前月',
-    )} 月 第 ${era.get('flag:当前周')} 周) (自动存档)`,
-  );
+  await era.saveData(0, `${get_save_name()} (自动存档)`);
   era.drawLine();
   era.set('flag:当前互动角色', 0);
   era.set('flag:当前位置', rest_loc);
@@ -222,14 +216,7 @@ handlers[location_enum.office] = require('#/page/homepage/office');
 const basement_handlers = {};
 
 basement_handlers[location_enum.basement] = async () => {
-  await era.saveData(
-    0,
-    `${get_chara_talk(0).actual_name} 于 ${new Date().toLocaleString('zh-CN', {
-      timeZone: 'Asia/Shanghai',
-    })} 保存的进度 (${era.get('flag:当前年')} 年 ${era.get(
-      'flag:当前月',
-    )} 月 第 ${era.get('flag:当前周')} 周) (自动存档)`,
-  );
+  await era.saveData(0, `${get_save_name()} (自动存档)`);
   era.set('flag:当前互动角色', 0);
   await next_week();
 };

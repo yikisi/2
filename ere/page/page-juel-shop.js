@@ -522,7 +522,7 @@ module.exports = async (_id) => {
                   milk_talent !== 2 ||
                   Object.entries(
                     get_talent_price(chara_id, '母乳体质', 2),
-                  ).filter((e) => e[1] > juel_dict[e[0]]).length > 0,
+                  ).findIndex((e) => e[1] > juel_dict[e[0]]) !== -1,
               },
               content: '获取特性',
               type: 'button',
@@ -534,7 +534,7 @@ module.exports = async (_id) => {
                   milk_talent !== 3 ||
                   Object.entries(
                     get_talent_price(chara_id, '母乳体质', 1),
-                  ).filter((e) => e[1] > juel_dict[e[0]]).length > 0,
+                  ).findIndex((e) => e[1] > juel_dict[e[0]]) !== -1,
               },
               content: '消除特性',
               type: 'button',
@@ -560,7 +560,7 @@ module.exports = async (_id) => {
                   nipple_size === 2 ||
                   Object.entries(
                     get_talent_price(chara_id, '凹陷乳头', 2),
-                  ).filter((e) => e[1] > juel_dict[e[0]]).length > 0,
+                  ).findIndex((e) => e[1] > juel_dict[e[0]]) !== -1,
               },
               content: '获取特性',
               type: 'button',
@@ -572,7 +572,7 @@ module.exports = async (_id) => {
                   nipple_size !== 2 ||
                   Object.entries(
                     get_talent_price(chara_id, '凹陷乳头', 1),
-                  ).filter((e) => e[1] > juel_dict[e[0]]).length > 0,
+                  ).findIndex((e) => e[1] > juel_dict[e[0]]) !== -1,
               },
               content: '消除特性',
               type: 'button',

@@ -7,7 +7,7 @@ module.exports = new UmaSkill(
   10980121,
   1,
   UmaSkill.rarity_enum.evol,
-  2,
+  3,
   508,
   [() => true, () => true],
   [

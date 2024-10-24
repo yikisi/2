@@ -65,12 +65,12 @@ function sys_get_chara_pseudo(chara_id) {
     time_ratio =
       era.get(`base:${chara_id}:精力`) / era.get(`maxbase:${chara_id}:精力`);
   if (stamina_ratio < 0.3) {
-    uma.attr_buffs.slice(0, 3).forEach((l) => l.push('-50%[体力底下]'));
+    uma.attr_buffs.slice(0, 3).forEach((l) => l.push('-50%[体力低下]'));
   } else if (stamina_ratio < 0.5) {
     uma.attr_buffs.slice(0, 3).forEach((l) => l.push('-20%[体力不足]'));
   }
   if (time_ratio < 0.3) {
-    uma.attr_buffs.slice(3).forEach((l) => l.push('-50%[精力底下]'));
+    uma.attr_buffs.slice(3).forEach((l) => l.push('-50%[精力低下]'));
   } else if (time_ratio < 0.5) {
     uma.attr_buffs.slice(3).forEach((l) => l.push('-20%[精力不足]'));
   }

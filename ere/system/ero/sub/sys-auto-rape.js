@@ -152,6 +152,18 @@ async function sys_auto_rape(shown) {
       get_random_entry(chara_list_in_train),
     );
   }
+  if (
+    era.get(`status:0:沉睡`) &&
+    !era.get('status:0:马跳S') &&
+    era.get(`status:${master}:爱意克制`)
+  ) {
+    await sys_call_ero_event(master, ero_hooks.use_medicine, {
+      item: medicine_enum.uma_s,
+      user: 0,
+      shown,
+    });
+    return;
+  }
   if ((temp = era.get('flag:惩戒力度')) >= 2) {
     let ret_flag = false;
     if (!get_penis_size(master)) {
@@ -355,8 +367,8 @@ async function sys_auto_rape(shown) {
     filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
-        tags.attacker_tags.filter((t) => poison_list.master[t]).length > 0 &&
-        tags.defender_tags.filter((t) => poison_list.lover[t]).length > 0
+        tags.attacker_tags.findIndex((t) => poison_list.master[t]) !== -1 &&
+        tags.defender_tags.findIndex((t) => poison_list.lover[t]) !== -1
       );
     });
   }
@@ -364,9 +376,8 @@ async function sys_auto_rape(shown) {
     temp = (e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
-        !tags.attacker_tags.filter((t) => sensitive_list.master[t]).length >
-          0 ||
-        !tags.defender_tags.filter((t) => sensitive_list.lover[t]).length > 0
+        tags.attacker_tags.findIndex((t) => sensitive_list.master[t]) === -1 ||
+        tags.defender_tags.findIndex((t) => sensitive_list.lover[t]) === -1
       );
     };
     filters.push((e) => second_filter(e) && temp(e), temp);
@@ -375,8 +386,8 @@ async function sys_auto_rape(shown) {
     temp = (e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
-        tags.attacker_tags.filter((t) => white_list[t]).length > 0 ||
-        tags.defender_tags.filter((t) => week_list[t]).length > 0
+        tags.attacker_tags.findIndex((t) => white_list[t]) !== -1 ||
+        tags.defender_tags.findIndex((t) => week_list[t]) !== -1
       );
     };
     filters.push((e) => second_filter(e) && temp(e), second_filter, temp);
@@ -386,7 +397,7 @@ async function sys_auto_rape(shown) {
   if (Object.keys(black_list).length) {
     filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
-      return !tags.attacker_tags.filter((t) => black_list[t]).length > 0;
+      return tags.attacker_tags.findIndex((t) => black_list[t]) === -1;
     });
   }
   const random_list = sys_filter_ero_act(master, 0, [

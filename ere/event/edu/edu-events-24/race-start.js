@@ -282,7 +282,7 @@ module.exports = (handlers) => {
       race_infos[race_enum.tenn_spr].get_colored_name(),
       '！』『闪耀的会是巨星 ',
       brian.get_colored_name(),
-      ' ，还是新星 ',
+      '，还是新星 ',
       maya.get_colored_name(),
       ' 呢！』',
     ]);

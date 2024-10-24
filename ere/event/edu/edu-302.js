@@ -64,6 +64,7 @@ handlers.annoyance1 = async (taste) => {
   } else {
     await printAndWait('似乎没什么特别的。');
   }
+  return true;
 };
 
 /** @author 雞雞 */
@@ -92,6 +93,7 @@ handlers.annoyance2 = async (taste) => {
   } else {
     await printAndWait('似乎没什么特别的……所以理事长平常都在干什么？');
   }
+  return true;
 };
 
 /**

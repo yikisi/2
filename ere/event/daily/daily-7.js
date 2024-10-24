@@ -94,6 +94,7 @@ handlers[event_hooks.good_morning] = () => {
           { color: chara_colors[1], content: '『下次』可得更努力点哦。' },
         ]);
     }
+    life_marks.b_escape = 0;
   } else if (era.get('base:7:体力') < 0.45 * era.get('maxbase:7:体力')) {
     gold_ship.say(
       Math.random() < 0.5

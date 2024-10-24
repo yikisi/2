@@ -53,5 +53,4 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     buffer.push(check_aim_and_get_entry(races, race_enum.tenn_sho, 2, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.hk_vas, 2, 1));
   },
-  ['黑翠千里行'],
 );

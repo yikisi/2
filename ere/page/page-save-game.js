@@ -3,7 +3,7 @@
 const print_page_header = require('#/page/components/page-header');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const CharaTalk = require('#/utils/chara-talk');
+const { get_save_name } = require('#/data/info-generator');
 
 module.exports = async () => {
   let flag_save_game = true;
@@ -13,13 +13,18 @@ module.exports = async () => {
     await era.clear();
     print_page_header();
 
-    era.drawLine();
-    msg_notification && era.print(msg_notification, { align: 'center' });
-
-    era.drawLine();
-    era.print('要保存至哪个栏位？');
-
     const buffer = [];
+    if (msg_notification) {
+      buffer.push(
+        { type: 'divider' },
+        {
+          config: { align: 'center' },
+          content: msg_notification,
+          type: 'text',
+        },
+      );
+    }
+    buffer.push({ config: { content: '要保存至哪个栏位？' }, type: 'divider' });
     new Array(10).fill(0).forEach((_, e) => {
       const ind = e + 1;
       const comm_desc = era.get(`global:saves:${ind}`);
@@ -38,15 +43,65 @@ module.exports = async () => {
         });
       }
     });
+    buffer.push(
+      { type: 'divider' },
+      {
+        accelerator: 97,
+        config: { width: 8 },
+        content: '为这个故事命名',
+        type: 'button',
+      },
+      {
+        accelerator: 98,
+        config: { disabled: !era.get('flag:存档名'), width: 8 },
+        content: '取消这个故事的命名',
+        type: 'button',
+      },
+      {
+        accelerator: 99,
+        config: { align: 'right', width: 8 },
+        content: '返回上一级',
+        type: 'button',
+      },
+    );
     era.printMultiColumns(buffer);
 
-    era.drawLine();
-    era.printButton('返回上一级', 99, { align: 'right' });
-
     let ret = await era.input();
-    let comment;
 
     switch (ret) {
+      case 97:
+        ret = '';
+        do {
+          era.print(
+            `${
+              ret ? '名字太长了！' : ''
+            }请输入新的存档命名：（最长不超过20个字符）`,
+          );
+          ret = await era.input();
+        } while (ret && ret.length > 50);
+        if (
+          await select_yes_or_no(
+            `要将这个故事${era.get('flag:存档名') ? '改名' : '取名'}为 [${ret}] 吗？`,
+            '是',
+            '否',
+          )
+        ) {
+          era.set('flag:存档名', ret);
+          msg_notification = `为这个故事取名为 [${ret}]……`;
+        }
+        break;
+      case 98:
+        if (
+          await select_yes_or_no(
+            `要取消这个故事的命名 [${era.get('flag:存档名')}] 吗？`,
+            '是',
+            '否',
+          )
+        ) {
+          era.set('flag:存档名', '');
+          msg_notification = '取消了存档的命名，下次保存将使用默认名……';
+        }
+        break;
       case 99:
         flag_save_game = false;
         break;
@@ -64,14 +119,8 @@ module.exports = async () => {
               break;
             }
           }
-          comment = `${CharaTalk.me.actual_name} 于 ${new Date().toLocaleString(
-            'zh-CN',
-            { timeZone: 'Asia/Shanghai' },
-          )} 保存的进度 (${era.get('flag:当前年')} 年 ${era.get(
-            'flag:当前月',
-          )} 月 第 ${era.get('flag:当前周')} 周)`;
 
-          if (await era.saveData(ret, comment)) {
+          if (await era.saveData(ret, get_save_name())) {
             msg_notification = `已成功保存至 ${ret} 号栏位`;
           }
         } else {

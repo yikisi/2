@@ -190,10 +190,11 @@ function random_talent() {
       era.set(`talent:0:${e}`, 0);
     }
   });
-  gacha(
-    new Array(18).fill(0).map((_, i) => i),
-    5,
-  ).forEach((e) => era.set(`talent:0:${e}`, 2 * get_random_value(0, 1) - 1));
+  const chara_talents = new Array(18).fill(0).map((_, i) => i);
+  chara_talents.forEach((talent_id) => era.set(`talent:0:${talent_id}`, 0));
+  gacha(chara_talents, 5).forEach((e) =>
+    era.set(`talent:0:${e}`, 2 * get_random_value(0, 1) - 1),
+  );
   era.set(
     `talent:0:${get_random_entry(
       get_filtered_talents(era.get('cflag:0:性别'), 50),
@@ -209,7 +210,7 @@ function random_talent() {
   const temp = get_random_value(40, 47);
   era.set(
     `talent:0:${temp}`,
-    1 - 2 * (temp === 1053 ? get_random_value(0, 1) : 0),
+    1 - 2 * (temp === 43 ? get_random_value(0, 1) : 0),
   );
 }
 

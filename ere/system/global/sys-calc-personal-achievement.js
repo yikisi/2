@@ -1,5 +1,8 @@
 const era = require('#/era-electron');
 
+const { get_chara_color } = require('#/data/chara-colors');
+const title_desc = require('#/data/desc/title-desc.json');
+
 /** @type {Record<string,number>} */
 let global_object = {};
 
@@ -16,6 +19,31 @@ const sys_personal_achievement = {
    * @param {number} _val
    */
   set(chara_id, _val) {
+    if (!global_object[chara_id] && _val) {
+      const color = get_chara_color(chara_id),
+        title = era.get(`staticcstr:${chara_id}:称号`);
+      era.notify(
+        [
+          {
+            color,
+            content: era.get(`static:${chara_id}:name`),
+            fontSize: '1rem',
+          },
+          '：',
+          {
+            color,
+            content: title,
+            fontSize: '1rem',
+            fontWeight: 'bold',
+          },
+          { isBr: true },
+          title_desc[title] || '在一次育成周期内赢取了六次以上的G1比赛胜利',
+        ],
+        '获得新成就！',
+        'success',
+        50000,
+      );
+    }
     return (global_object[chara_id] = _val);
   },
   init() {

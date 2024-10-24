@@ -429,8 +429,8 @@ module.exports = async (
     if (
       era
         .getAddedCharacters()
-        .filter((e) => e > 0 && e !== 52 && era.get(`love:${e}`) >= 75).length >
-      0
+        .findIndex((e) => e > 0 && e !== 52 && era.get(`love:${e}`) >= 75) !==
+      -1
     ) {
       await urara.say_and_wait(
         '不过训练员，走夜路真的很黑呢，不要只送别人回家哦？',

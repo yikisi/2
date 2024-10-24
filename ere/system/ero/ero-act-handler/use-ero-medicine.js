@@ -26,7 +26,8 @@ async function use_ero_medicine(chara) {
     fron_k = era.get(`item:${medicine_names[medicine_enum.fron_k]}`),
     fron_p = era.get(`item:${medicine_names[medicine_enum.fron_p]}`),
     milk_h = era.get(`item:${medicine_names[medicine_enum.milk_h]}`),
-    milk_u = era.get(`item:${medicine_names[medicine_enum.milk_u]}`);
+    milk_u = era.get(`item:${medicine_names[medicine_enum.milk_u]}`),
+    stop_o = era.get(`item:${medicine_names[medicine_enum.stop_o]}`);
   if (
     !uma_z &&
     !uma_s &&
@@ -38,7 +39,8 @@ async function use_ero_medicine(chara) {
     !fron_k &&
     !fron_p &&
     !milk_h &&
-    !milk_u
+    !milk_u &&
+    !stop_o
   ) {
     era.print('暂时没有可用的药物……');
     return undefined;
@@ -131,13 +133,17 @@ async function use_ero_medicine(chara) {
         e: sex_check && !p_status,
         n: anti_p_l,
       },
+      {
+        a: medicine_enum.stop_o,
+        n: stop_o,
+      },
     ]
       .filter((e) => e.n > 0)
       .map((e) => {
         e.e ||= e.e === undefined;
         return e;
       });
-  if (!item_list.filter((e) => e.e).length) {
+  if (item_list.findIndex((e) => e.e) === -1) {
     await era.printAndWait(
       aim_id
         ? ['没有可以喂给 ', aim_chara.get_colored_name(), ' 的药物……']
