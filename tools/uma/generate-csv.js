@@ -102,8 +102,7 @@ function random_attr(chara_line) {
     }
   }
 
-  // 这类马娘统一给称号未实装
-  chara_line[title_index] = chara_line[title_index] || '未 实 装';
+  chara_line[title_index] = chara_line[title_index] || '幻觉马娘';
 }
 
 lines

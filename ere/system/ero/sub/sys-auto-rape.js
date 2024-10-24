@@ -160,6 +160,7 @@ async function sys_auto_rape(shown) {
     await sys_call_ero_event(master, ero_hooks.use_medicine, {
       item: medicine_enum.uma_s,
       user: 0,
+      shown,
     });
     return;
   }

@@ -458,7 +458,7 @@ async function golden_ship_attack() {
   era.printButton('「杀死愿意为你牺牲的女朋友……」', 2);
   setTimeout(
     () => ret.length < 5 && era.printButton('「哪个都不选……！」', 3),
-    10000,
+    100,
   );
   ret.push(await era.input());
   era.println();

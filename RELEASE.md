@@ -1,7 +1,7 @@
-# [EraUma v1.0](https://gitgud.io/umaera/erauma/-/releases/1.0)
+# [EraUma v1.0 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.0)
 _2024/10/24_
 
-EraUma v1.0，适配 [EraElectron v3.0.0 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/3.0.0) 版本
+EraUma v1.0，适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.0.0) 版本
 
 因为变量经过重新排序，需要重开档
 
@@ -48,6 +48,7 @@ EraUma v1.0，适配 [EraElectron v3.0.0 (ginga)](https://gitgud.io/umaera/era-e
   * 一片【高潮阻断药】可使服用者获得5回合【高潮抑制】状态
   * 【高潮抑制】状态生效期间服用者不会高潮，同时减少10%快感获取
 * 新增成就提醒：现在在解锁新角色成就时，会在界面右上角显示成就已解锁的通知
+* 新增曼城茶座的调教立绘
 
 ## Changed
 
@@ -126,6 +127,9 @@ EraUma v1.0，适配 [EraElectron v3.0.0 (ginga)](https://gitgud.io/umaera/era-e
     * 海外训练时全训练效果减少25%
     * 夏合宿训练时全训练效果+10%
   * 现在远程指导参加夏合宿的角色时角色也会穿上泳装了（如果她有的话）
+* 调整了部分显示更多情报道具的效果
+  * 【好感度镜片】仍然对爱丽速子失效
+  * 【马语者】可对爱丽速子及同时具有【病娇】（第二阶段）和【捉摸不透】特性的角色生效
 
 ## Fixed
 

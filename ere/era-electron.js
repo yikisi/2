@@ -46,7 +46,7 @@ const era = {
    * @param delay time to delay, ms
    * @return {Promise<unknown>}
    */
-  async delay(delay) {
+  delay(delay) {
     return new Promise((resolve) => setTimeout(() => resolve(), delay));
   },
   /**
@@ -178,7 +178,7 @@ const era = {
    * print a button
    * @param {string} content REQUIRED the text of the button
    * @param {number} accelerator REQUIRED the accelerator key of the button used in the input
-   * @param {{[align]:'left'|'center'|'right',[badge]:'dot'|string,[buttonType]:'primary'|'success'|'warning'|'danger'|'info'|'',[disabled]:boolean,[disableWarning]:boolean,[inTextAlign]:'left'|'center'|'right',[isButton]:boolean,[offset]:number,[showAcc]:boolean,[width]:number}} [config] config of the printed button
+   * @param {{[align]:'left'|'center'|'right',[badge]:'dot'|string,[buttonType]:'primary'|'success'|'warning'|'danger'|'info'|'',[disabled]:boolean,[disableWarning]:boolean,[flush]:boolean,[inTextAlign]:'left'|'center'|'right',[isButton]:boolean,[offset]:number,[showAcc]:boolean,[width]:number}} [config] config of the printed button
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
