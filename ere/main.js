@@ -92,6 +92,7 @@ module.exports = async () => {
     era.quit();
   }
   const line_copyrights = [
+    [[get_copyright_entry(1)], 'wwm'],
     [[get_copyright_entry(3)], '天马闪光蹄'],
     // [[get_copyright_entry(4), '、', get_copyright_entry(46)], '黑奴一号'],
     [[get_copyright_entry(7)], '雞雞'],
