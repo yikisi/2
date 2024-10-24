@@ -112,10 +112,15 @@ function sub_simulate_skill(
           ]
             .filter((e) => e)
             .join(' '),
-          percentage:
-            100 -
-            ((top_location_in_race - uma.race.location) * 100) /
-              contestants_length,
+          percentage: Math.min(
+            Math.max(
+              100 -
+                ((top_location_in_race - uma.race.location) * 100) /
+                  contestants_length,
+              0,
+            ),
+            100,
+          ),
           type: 'progress',
         },
       ),
@@ -682,6 +687,9 @@ function sub_simulate_skill(
                     break;
                   case target_type_enum.Self:
                     skill.aims[i][j] = [uma];
+                    break;
+                  case target_type_enum.All:
+                    skill.aims[i][j] = list_in_race.filter((e) => e !== uma);
                     break;
                   case target_type_enum.Visible:
                     skill.aims[i][j] = list_in_race.filter(

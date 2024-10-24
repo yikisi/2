@@ -384,7 +384,7 @@ async function check_new_activities(cur_round, in_team_list) {
           // 和主控到达一定关系会跟着去
           ((!temp &&
             (era.get(`cflag:${chara_id}:殿堂`) || !race) &&
-            era.get(`love:${chara_id}`) >= 75) ||
+            era.get(`love:${chara_id}`) >= 80) ||
             // 或者就是小孩跟着妈妈移动
             (era.get(`cflag:${chara_id}:成长阶段`) < 2 &&
               era.get(`cflag:${era.get(`cflag:${chara_id}:母方角色`)}:位置`) ===
@@ -483,6 +483,25 @@ async function check_new_activities(cur_round, in_team_list) {
       ? 343
       : 0,
   ]);
+
+  const uaf_list = [];
+  if (
+    era.get('cflag:207:招募状态') === recruit_flags.yes ||
+    era.get('cflag:344:招募状态') === recruit_flags.yes ||
+    Math.random() < 0.2
+  ) {
+    uaf_list.push(207, 344);
+  }
+
+  loc_visitors
+    .get(location_enum.visitor)
+    .push(
+      ...uaf_list.filter(
+        (e) =>
+          !(era.get(`cflag:${e}:育成回合计时`) < 3 * 48) &&
+          sys_check_npc_working(e),
+      ),
+    );
 }
 
 module.exports = check_new_activities;

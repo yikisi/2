@@ -17,11 +17,12 @@ async function flatter() {
     no_escape_check =
       era.get('exp:89:监禁次数') === 1 && life_marks.b_find_escape === 0;
   if (life_marks.b_strike) {
+    life_marks.b_strike = 0;
     await grand.say_and_wait(['……包、包扎好了，柜子……没想到会倒下。']);
     await grand.say_and_wait([
       '呐，',
       callname,
-      '……为什么要救我？明明什么都不做就可以离开这里……',
+      '……为什么要保护我呢？明明什么都不做就可以离开这里……',
     ]);
     era.println();
 
@@ -75,26 +76,26 @@ async function flatter() {
     ]);
     era.println();
 
-    await grand.say_and_wait(['只有我们的房间……总觉得……好怀念。']);
+    await grand.say_and_wait(['只有两个人的房间……总觉得……好怀念啊。']);
     era.println();
 
     await era.printAndWait(['穿透了时间的语调，蕴含的是不容忽视的寂寞。']);
     era.println();
 
-    await grand.say_and_wait(['我……以为我们的日常会一直持续下去。']);
+    await grand.say_and_wait(['我一直以为……我们之间的日常会持续下去。']);
     await grand.say_and_wait([
       '从什么时候开始呢……',
       callname,
-      ' 的身边……出现了我以外的人。',
+      ' 的身边……出现了其他孩子。',
     ]);
     await grand.say_and_wait([
-      '因为嫉妒……我对你做出了无法原谅的事情，我们的关系，已经回不去了吧……',
+      '因为嫉妒……我做出了无法原谅的事情，我们的关系，已经回不到过去了吧……',
     ]);
     life_marks.b_flatter++;
   } else if (
     no_escape_check &&
     life_marks.b_flatter === 1 &&
-    life_marks.b_ask_release >= 4
+    life_marks.b_ask_release === 4
   ) {
     await grand.say_and_wait([
       '其实……我也后悔过，如果不把 ',
@@ -111,18 +112,18 @@ async function flatter() {
     era.println();
 
     await grand.say_and_wait([
-      '剥夺你的自由，把你关在这里。你肯定会讨厌这样的我……',
+      '剥夺你的自由，把你关在这里。我知道你肯定会讨厌这样的我……',
     ]);
     await grand.say_and_wait([
-      '但是……如果什么都不做，你可能永远都不会回来看我了……！',
+      '但是我也知道……如果什么都不做，你可能永远都不会回来看我了……！',
     ]);
-    await grand.say_and_wait(['求你了……', callname, '……为了让我能安心一点……']);
+    await grand.say_and_wait(['求你了……', callname, '……让我留在你的身边……']);
     life_marks.b_flatter++;
   } else if (no_escape_check && life_marks.b_flatter === 2) {
     await grand.say_and_wait(['呐、', callname, '……笑一笑啊……']);
-    await grand.say_and_wait(['看着你一天比一天憔悴……那种事情……我不要……']);
+    await grand.say_and_wait(['像这样……看着你一天比一天憔悴……我会受不了的……']);
     await grand.say_and_wait([
-      '像以前那样、摸摸我的头……告诉我你喜欢我的优点啊……',
+      '再像以前那样、摸摸我的头……告诉我你喜欢我的优点啊……',
     ]);
     era.println();
 
@@ -134,22 +135,20 @@ async function flatter() {
     ]);
     era.println();
 
-    await grand.say_and_wait(['不是的……不是这样……我想要的……不是这样的你……']);
-    await grand.say_and_wait(['……早知道……事情会变成这样……呜……呜呜……呜呜……']);
+    await grand.say_and_wait(['不是的……不是这样的……我想要的……不是这样的你……']);
+    await grand.say_and_wait(['……早知道……事情、会变成这样……呜……呜呜……呜呜……']);
     life_marks.b_flatter++;
   } else {
-    await grand.say_and_wait(['……', callname, '，很想离开这里呢……']);
-    await grand.say_and_wait(['到底怎么做……才能留下你呢……？']);
+    await grand.say_and_wait([
+      '……',
+      callname,
+      '，没必要勉强自己和我说话也可以的……',
+    ]);
+    await grand.say_and_wait(['现在……到底该怎么做……才能留下你呢……？']);
     era.println();
 
     await era.printAndWait([
-      grand.get_colored_name(),
-      ' 自顾自说着，将 ',
-      me.get_colored_name(),
-      ' 推倒在床上。',
-    ]);
-    await era.printAndWait([
-      '曾经努力维系的大人的尊严，与衣物一同被撕得粉碎。',
+      '曾经努力维系的大人的尊严，与身体一同被轻易地推倒。',
     ]);
     era.println();
 

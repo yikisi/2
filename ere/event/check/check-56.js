@@ -16,6 +16,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const KitaruEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -132,6 +133,9 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
+    if (era.get('cflag:56:招募状态') !== recruit_flags.yes) {
+      return;
+    }
     const edu_weeks = era.get('cflag:56:育成回合计时'),
       event_obj_special = new EventObject(56, cb_enum.edu, true).set_arg(
         edu_weeks,

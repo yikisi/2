@@ -73,6 +73,10 @@ class CustomizedMec {
     return 0;
   }
 
+  get_pregnant_ratio() {
+    return 0;
+  }
+
   get_pressure_buff() {
     return 0;
   }

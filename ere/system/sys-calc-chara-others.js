@@ -215,6 +215,14 @@ function love_uma(chara_id, val, to_be_shown) {
       }
       print_change(chara_id, love, printed_new_val, !hide && to_be_shown);
       if (
+        love < 50 &&
+        new_val >= 50 &&
+        era.get(`cflag:${chara_id}:种族`) &&
+        era.get(`talent:${chara_id}:病娇`)
+      ) {
+        era.set(`status:${chara_id}:爱意克制`, 1);
+      }
+      if (
         !era.get(`cflag:${chara_id}:爱慕暂拒`) &&
         love_limit &&
         border >= 50 &&
@@ -325,16 +333,29 @@ module.exports = {
    */
   async sys_love_uma_in_event(chara_id) {
     const new_val = era.add(`love:${chara_id}`, 1);
-    era.println();
-    print_change(chara_id, new_val - 1, new_val);
-    era.set(`cflag:${chara_id}:爱慕暂拒`, 0);
-    await get_chara_talk(0).say_and_wait('已经不能回头了……', true);
     if (
       typeof era.get(`callname:${chara_id}:0`) === 'string' &&
       era.get(`callname:${chara_id}:0`).startsWith('训练员')
     ) {
       get_custom_mec(chara_id).set_callname();
     }
+    if (
+      new_val === 50 &&
+      era.get(`cflag:${chara_id}:种族`) &&
+      era.get(`talent:${chara_id}:病娇`)
+    ) {
+      era.set(`status:${chara_id}:爱意克制`, 1);
+    }
+    if (
+      sys_check_hide_relation_and_love(chara_id) ||
+      sys_check_limit_relation_and_love(chara_id)
+    ) {
+      return false;
+    }
+    era.println();
+    print_change(chara_id, new_val - 1, new_val);
+    era.set(`cflag:${chara_id}:爱慕暂拒`, 0);
+    await get_chara_talk(0).say_and_wait('已经不能回头了……', true);
     new_val >= 75 && (await punish_unfaithful(chara_id, new_val));
     return true;
   },

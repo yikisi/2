@@ -350,9 +350,14 @@ module.exports = {
     ) {
       return 0;
     }
+    let ratio = get_custom_mec(chara_id).get_pregnant_ratio();
+    if (ratio > 0) {
+      return ratio;
+    }
     // 生够了锁5%
     // 怀孕基础概率1%，排卵期+50%，发情期+25%，弗隆P+20%
-    let ratio = 0.05;
+    ratio = 0.05;
+
     if (!chara_id || era.get(`exp:${chara_id}:生产次数`) < baby_limit) {
       ratio +=
         0.5 * era.get(`status:${chara_id}:排卵期`) +

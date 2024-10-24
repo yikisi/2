@@ -35,7 +35,7 @@ module.exports = new UmaSkill(
   ],
   [
     [
-      UmaSkill.ability_usage_enum.Unknown,
+      UmaSkill.ability_usage_enum.MultiplyFanCount2,
       UmaSkill.ability_usage_enum.Direct,
       UmaSkill.ability_usage_enum.Direct,
     ],

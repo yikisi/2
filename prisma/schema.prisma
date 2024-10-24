@@ -933,16 +933,17 @@ model chara_motion_act {
 }
 
 model chara_motion_set {
-  id                    Int    @id @default(autoincrement())
-  body_motion           String
-  body_motion_type      Int
-  body_motion_play_type Int
-  face_type             String
-  cheek                 Int
-  eye_default           Int
-  ear_motion            String
-  tail_motion           String
-  tail_motion_type      Int
+  id                       Int    @id @default(autoincrement())
+  body_motion              String
+  body_motion_type         Int
+  body_motion_path_segment Int
+  body_motion_play_type    Int
+  face_type                String
+  cheek                    Int
+  eye_default              Int
+  ear_motion               String
+  tail_motion              String
+  tail_motion_type         Int
 }
 
 model chara_story_data {
@@ -1682,6 +1683,7 @@ model gacha_data {
   type                                Int
   paid_gacha_button_type              Int
   card_type                           Int
+  force_exchange                      Int
   daily_pay_cost                      Int
   disp_order                          Int
   only_once_flag                      Int
@@ -3855,6 +3857,7 @@ model single_mode_chara_program {
   chara_id        Int
   program_group   Int
   program_group_2 Int
+  base_id         Int
 
   @@index([chara_id], map: "single_mode_chara_program_0_chara_id")
 }
@@ -4656,6 +4659,9 @@ model single_mode_story_data {
   gallery_list_id        Int
   available_gallery_key  Int
   past_race_id           Int
+  past_race_id_2         Int
+  past_race_id_3         Int
+  past_race_id_4         Int
   force_use_race_dress   Int
   event_category         Int
 
@@ -6745,4 +6751,88 @@ model single_mode_race_limit_reward {
   reward_limit  Int
   start_date    Int
   end_date      Int
+}
+
+model single_mode_09_board {
+  id Int @id @default(autoincrement())
+}
+
+model single_mode_09_chip {
+  id          Int @id @default(autoincrement())
+  schedule_id Int
+  type        Int
+  board_id    Int
+
+  @@index([board_id], map: "single_mode_09_chip_0_board_id")
+}
+
+model single_mode_09_chip_effect {
+  id              Int @id @default(autoincrement())
+  chip_id         Int
+  point           Int
+  group_id        Int
+  effect_category Int
+  effect_type     Int
+  effect_value_1  Int
+  effect_value_2  Int
+  effect_value_3  Int
+  effect_value_4  Int
+
+  @@index([chip_id], map: "single_mode_09_chip_effect_0_chip_id")
+}
+
+model single_mode_09_learning_bonus {
+  id          Int @id @default(autoincrement())
+  point_min   Int
+  point_max   Int
+  base_value  Int
+  bonus_value Int
+}
+
+model single_mode_09_link_effect {
+  id             Int @id @default(autoincrement())
+  chara_id       Int
+  effect_type    Int
+  effect_value_1 Int
+  effect_value_2 Int
+  effect_value_3 Int
+  effect_value_4 Int
+
+  @@index([chara_id], map: "single_mode_09_link_effect_0_chara_id")
+}
+
+model single_mode_09_progress_rate {
+  id           Int @id @default(autoincrement())
+  progress_min Int
+  progress_max Int
+  result_type  Int
+}
+
+model single_mode_09_schedule {
+  id        Int @id @default(autoincrement())
+  turn_num  Int
+  target_pt Int
+  stock_num Int
+  dress_id  Int
+}
+
+model single_mode_09_training_boost {
+  id           Int @id @default(autoincrement())
+  boost_set_id Int
+  level_min    Int
+  level_max    Int
+  add_value    Int
+
+  @@index([boost_set_id], map: "single_mode_09_training_boost_0_boost_set_id")
+}
+
+model single_mode_training_bg_chara {
+  id            Int @id @default(autoincrement())
+  scenario_id   Int
+  command_id    Int
+  command_level Int
+  cut_id        Int
+
+  @@index([command_id, command_level], map: "single_mode_training_bg_chara_0_command_id_1_command_level")
+  @@index([scenario_id], map: "single_mode_training_bg_chara_0_scenario_id")
 }

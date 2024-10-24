@@ -60,6 +60,7 @@ race2fans_reward[race_enum.toky_der] = 7000;
 race2fans_reward[race_enum.hane_hai] = 7000;
 race2fans_reward[race_enum.jbc_lad] = 6100;
 race2fans_reward[race_enum.zeni_you] = 6200;
+race2fans_reward[race_enum.mile_nbh] = 6000;
 
 race2fans_reward[race_enum.prix_dia] = 28000;
 race2fans_reward[race_enum.prix_lat] = 32000;
@@ -71,6 +72,7 @@ race2fans_reward[race_enum.hk_vas] = 25000;
 race2fans_reward[race_enum.kent_der] = 31000;
 race2fans_reward[race_enum.prea_sta] = 31000;
 race2fans_reward[race_enum.belm_sta] = 31000;
+race2fans_reward[race_enum.usa_oks] = 20000;
 
 Object.values(race_enum)
   .filter(

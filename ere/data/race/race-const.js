@@ -244,7 +244,7 @@ const race_enum = {
   // 天狼星锦标
   siri_sta: 0,
   // 英里冠军赛南部杯
-  mile_nbuh: 0,
+  mile_nbh: 0,
   // 沙特阿拉伯皇家杯
   saud_cup: 0,
   // 府中皇冠锦标
@@ -331,6 +331,8 @@ const race_enum = {
   toky_dai: 0,
   // 有马纪念
   arim_kin: 0,
+  // 美国橡树大赛
+  usa_oks: 0,
   // 阪神杯
   hans_cup: 0,
 };
@@ -459,7 +461,7 @@ race_infos[race_enum.all_com] = require('#/data/race/g2/race-all-com');
 race_infos[race_enum.sprt_sta] = require('#/data/race/g1/race-sprt-sta');
 race_infos[race_enum.prix_lat] = require('#/data/race/g1/race-prix-lat');
 race_infos[race_enum.siri_sta] = require('#/data/race/g3/race-siri-sta');
-race_infos[race_enum.mile_nbuh] = require('#/data/race/g1/race-mile-nbuh');
+race_infos[race_enum.mile_nbh] = require('#/data/race/g1/race-mile-nbh');
 race_infos[race_enum.saud_cup] = require('#/data/race/g3/race-saud-cup');
 race_infos[race_enum.fuch_sta] = require('#/data/race/g2/race-fuch-sta');
 race_infos[race_enum.main_oka] = require('#/data/race/g2/race-main-oka');
@@ -503,6 +505,7 @@ race_infos[race_enum.turq_sta] = require('#/data/race/g3/race-turq-sta');
 race_infos[race_enum.hope_sta] = require('#/data/race/g1/race-hope-sta');
 race_infos[race_enum.toky_dai] = require('#/data/race/g1/race-toky-dai');
 race_infos[race_enum.arim_kin] = require('#/data/race/g1/race-arim-kin');
+race_infos[race_enum.usa_oks] = require('#/data/race/g1/race-usa-oks');
 race_infos[race_enum.hans_cup] = require('#/data/race/g2/race-hans-cup');
 
 race_infos.forEach((e) => {

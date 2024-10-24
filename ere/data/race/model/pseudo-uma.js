@@ -122,8 +122,10 @@ class PseudoUma {
     accBuffFromWiz: 0,
     spdBuffFromWiz: 0,
     acceleration: 0,
-    attr_err: 0,
     // 五项属性方差
+    attr_err: 0,
+    // 最大基础属性
+    max_raw_status: 0,
     change_order_finalcorner: 0,
     // 训练员声望
     fame: 0,
@@ -241,7 +243,10 @@ class PseudoUma {
     // 下坡时进入状态的概率
     down: 0,
   };
-  // 传奇对手标记
+  /**
+   * 传奇对手标记
+   * @type {boolean|2}
+   */
   legend = false;
 
   /** 半身像 */
@@ -278,7 +283,7 @@ class PseudoUma {
     this.color = color;
     this.motivation = motivation;
     this.attrs = attrs;
-    this.style = this.base.loc_mind_style = style;
+    this.style = style;
     this.adapt_style_list = adapt_style_list;
     this.adapt_distance_list = adapt_distance_list;
     this.adapt_ground_list = adapt_ground_list;
@@ -289,8 +294,12 @@ class PseudoUma {
     this.pop = new Array(4);
   }
 
-  set_legend() {
-    this.legend = true;
+  /**
+   * @param {number} [_legend]
+   * @returns {PseudoUma}
+   */
+  set_legend(_legend) {
+    this.legend = _legend || true;
     return this;
   }
 

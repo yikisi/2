@@ -101,7 +101,7 @@ module.exports = class extends CustomizedBase {
       await gold_ship.say_and_wait([
         {
           color: chara_colors[1],
-          content: `现在是～～${hours % 12 || 12} 点${minutes ? ` ${minutes}` : '整'}～～`,
+          content: `现在是～～${CustomizedBase.get_cur_time(hours, minutes, true)}～～`,
         },
       ]);
     }

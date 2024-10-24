@@ -45,6 +45,29 @@ const { motivation_names, out_of_train_type } = require('#/data/train-const');
 
 /**
  * @param {number} chara_id
+ * @param {number} race
+ * @param {number} palace
+ * @param {boolean} in_train
+ * @returns {string}
+ */
+function get_edu_stage(chara_id, race, palace, in_train) {
+  if (!chara_id || !race) {
+    return '-';
+  }
+  if (palace) {
+    return out_of_train_type[palace - 1];
+  }
+  if (in_train) {
+    return get_train_time(chara_id).substring(0, 3);
+  }
+  if (era.get(`cflag:${chara_id}:可再次育成`)) {
+    return '-';
+  }
+  return '待入学';
+}
+
+/**
+ * @param {number} chara_id
  * @param {number} type
  */
 function get_suffix(chara_id, type) {
@@ -130,16 +153,7 @@ function get_suffix(chara_id, type) {
       },
       {
         config: { align: 'center', width: 2 },
-        content:
-          chara_id && race
-            ? palace
-              ? out_of_train_type[palace - 1]
-              : in_train
-                ? get_train_time(chara_id).substring(0, 3)
-                : era.get(`cflag:${chara_id}:可再次育成`)
-                  ? '-'
-                  : '待入学'
-            : '-',
+        content: get_edu_stage(chara_id, race, palace, in_train),
         type: 'text',
       },
     );

@@ -58,8 +58,31 @@ const love_desc = [
   ];
 
 class CustomizedBase {
+  /**
+   * @param {number} hours
+   * @param {number} minutes
+   * @param {boolean} [base_12]
+   */
+  static get_cur_time(hours, minutes, base_12) {
+    return `${base_12 ? hours % 12 || 12 : hours} 点${minutes ? ` ${minutes} 分` : '整'}`;
+  }
+
   constructor(chara_id) {
     this.id = chara_id;
+  }
+
+  /**
+   * 初入地下室的欢迎 - 无人版本
+   *
+   * @author 无名黑奴
+   */
+  first_time() {
+    era.print([
+      '不知过了多久，',
+      get_chara_talk(0).get_colored_name(),
+      ' 在一张简单的小床上悠悠醒转……',
+    ]);
+    era.print('眼前是陌生的天花板……');
   }
 
   /**
@@ -383,7 +406,7 @@ class CustomizedBase {
       get_chara_talk(this.id).get_colored_name(),
       ' 挑逗着 ',
       get_chara_talk(0).get_colored_name(),
-      ' ……',
+      '……',
     ]);
   }
 
@@ -523,9 +546,9 @@ class CustomizedBase {
     } else {
       await era.printAndWait([me.get_colored_name(), ' 被一阵打斗声吵醒。']);
       await era.printAndWait([
-        '地下室一片狼藉，但 ',
+        '地下室一片狼藉，但全须全尾的 ',
         owner.get_colored_name(),
-        ' 仍然全须全尾，正朝 ',
+        ' 仍然朝 ',
         me.get_colored_name(),
         ' 微笑着……',
       ]);

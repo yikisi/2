@@ -741,7 +741,10 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 303:
       sys_handle_action(sys_get_move_cost(location_enum.clinic));
-      if (!(await sys_get_random_event(event_hooks.school_clinic)())) {
+      if (
+        !(await new GameGuides().school_clinic()) &&
+        !(await sys_get_random_event(event_hooks.school_clinic)())
+      ) {
         await page_clinic();
       }
       break;
@@ -788,7 +791,10 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 307:
       sys_handle_action(sys_get_move_cost(location_enum.chairman));
-      if (!(await sys_get_random_event(event_hooks.school_chairman)())) {
+      if (
+        !(await new GameGuides().school_chairman()) &&
+        !(await sys_get_random_event(event_hooks.school_chairman)())
+      ) {
         await page_chairman_office();
       }
       break;
@@ -811,6 +817,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
           ...new Array(3).fill(0).map((_, i) => i + 27),
           ...new Array(12).fill(0).map((_, i) => i + 30),
           { id: 42, limit: true },
+          43,
         ]);
       era.set('flag:当前互动角色', 0);
       if (era.get('cflag:0:模版角色') !== 32) {

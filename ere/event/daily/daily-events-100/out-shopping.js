@@ -265,7 +265,7 @@ module.exports = async (hook) => {
             acute.get_colored_name(),
             ' 其实知道斗魂注入鞭（S用）的正确用法后从而「大放异彩」的即辛辣又热血还夹杂着桃色肥臀的故事，则是后来的事了——',
           ]);
-          era.add('item:斗魂注入鞭（S用）', 1);
+          era.set('item:斗魂注入鞭（S用）', 1);
       }
       break;
     case 2:

@@ -70,7 +70,21 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[47 + 32] = async (kitaru, me, callname, flags) => {
+  handlers[47 + 32] = async (
+    kitaru,
+    me,
+    callname,
+    flags,
+    edu_marks,
+    event_object,
+  ) => {
+    if (
+      era.get('cflag:0:位置') !== location_enum.beach ||
+      era.get('cflag:56:位置') !== era.get('cflag:0:位置')
+    ) {
+      add_event(event_hooks.week_start, event_object);
+      return;
+    }
     await print_event_name('坠入凡间的星', kitaru);
     await era.printAndWait([
       '今天，是 ',
@@ -262,7 +276,7 @@ module.exports = (handlers) => {
           attr_change = attr_change.map((e) => e + 1);
         }
       }
-      if (era.get('tflag:回合') !== undefined) {
+      if (era.get('tcvar:0:0') !== undefined) {
         end_ero_and_train();
       }
     }

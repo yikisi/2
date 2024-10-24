@@ -209,7 +209,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
       sys_like_chara(
         e,
         0,
-        is_rape ? get_random_value(50, 75) : get_random_value(75, 125),
+        is_rape ? get_random_value(20, 40) : get_random_value(40, 60),
         false,
       );
     }
@@ -297,7 +297,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               get_custom_basement(basement_owners.get(0)).welcome();
               owner_marks.b_start = 0;
             } else if (my_life_marks.b_start) {
-              get_custom_basement(0).welcome();
+              get_custom_basement(basement_owners.get(0)).first_time();
             } else {
               get_custom_basement(action.chara_id).get_up();
               print_handler && print_handler();
@@ -567,7 +567,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               action_type_enum.digestive_end,
             ),
           );
-          life_marks.b_food_buff = 2.5;
+          life_marks.b_food_buff = 3.5;
         } else if (
           era.get(`base:${e}:精力`) / era.get(`maxbase:${e}:精力`) <
           0.3

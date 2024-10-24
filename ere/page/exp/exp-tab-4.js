@@ -123,14 +123,14 @@ module.exports = {
         return [
           {
             type: 'divider',
-            config: { content: '身体情报 【手】', position: 'left' },
+            config: { content: '身体情报【手】', position: 'left' },
           },
           ...hand_exp_list.map((e) => {
             return { content: e, type: 'text' };
           }),
           {
             type: 'divider',
-            config: { content: '身体情报 【足】', position: 'left' },
+            config: { content: '身体情报【足】', position: 'left' },
           },
           ...foot_exp_list.map((e) => {
             return { content: e, type: 'text' };
@@ -139,5 +139,5 @@ module.exports = {
       },
     };
   },
-  name: '肉体情报 【手足】',
+  name: '肉体情报【手足】',
 };

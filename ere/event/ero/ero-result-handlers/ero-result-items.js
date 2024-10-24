@@ -130,6 +130,12 @@ module.exports = (handlers) => {
         era.add(`nowex:${extra_flag.user}:精力消耗`, -200);
         sys_change_lust(extra_flag.user, 800);
         set_stain(extra_flag.user, part_enum.mouth, stain_enum.milk);
+        break;
+      case medicine_enum.stop_o:
+        era.add(
+          `tcvar:${extra_flag.user}:高潮抑制`,
+          5 + !era.get(`tcvar:${extra_flag.user}:高潮抑制`),
+        );
     }
     if (temp) {
       update_temp_base(extra_flag.user, temp);

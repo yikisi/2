@@ -6,8 +6,11 @@
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const ask_release_agree = require('#/event/basement/base-events-89/ask-release-agree');
+const back_basement = require('#/event/basement/base-events-89/back-basement');
+const find_escape = require('#/event/basement/base-events-89/find-escape');
 const flatter = require('#/event/basement/base-events-89/flatter');
 const CustomizedBase = require('#/event/basement/basement-common');
 
@@ -16,115 +19,156 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const GrandLifeMarks = require('#/data/event/life-event-marks/life-event-marks-89');
 
 module.exports = class extends CustomizedBase {
-  flatter = flatter;
+  ask_release_agree = ask_release_agree;
 
-  async battle_fail() {
+  async ask_release_reject() {
     const callname = sys_get_colored_callname(89, 0),
       grand = get_chara_talk(89),
       me = get_chara_talk(0),
       life_marks = new GrandLifeMarks();
-    if (++life_marks.b_battle >= 10 && !life_marks.b_battle_fail) {
-      life_marks.b_battle_fail = 1;
-    }
-    if (life_marks.b_battle <= 3) {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 用铁丝划开自己的袖口，从衬衣的夹层中取出了满满一包药粉。',
-      ]);
+    if (era.get('exp:89:监禁次数') === 1 && life_marks.b_ask_release < 4) {
+      if (++life_marks.b_ask_release <= 3) {
+        await grand.say_and_wait(['不行——']);
+        era.println();
+
+        await era.printAndWait(['离开的请求换来的是难以诉说的拒绝。']);
+        await era.printAndWait([
+          '拒绝过后，欲言又止的',
+          grand.get_teen_sex_title(),
+          '低下了头。',
+        ]);
+        era.println();
+
+        await grand.say_and_wait(['再给我一点时间……拜托了……', callname, '……']);
+        await grand.say_and_wait(['给我一个……让你重新喜欢上我的机会……']);
+        era.println();
+
+        await era.printAndWait([
+          grand.get_colored_name(),
+          ' 说着抱住了 ',
+          me.get_colored_name(),
+          '，将脸埋在 ',
+          me.get_colored_name(),
+          ' 的胸口。',
+        ]);
+        await era.printAndWait(['比起撒娇，力量更多传达着束缚的意味。']);
+        await era.printAndWait([
+          '不知道该作何反应的 ',
+          me.get_colored_name(),
+          '，静静地等待着小',
+          grand.get_uma_sex_title(),
+          '心满意足的那一刻。',
+        ]);
+      } else {
+        await grand.say_and_wait(['不行——']);
+        era.println();
+
+        await era.printAndWait(['离开的请求换来的是细若蚊声的拒绝。']);
+        await era.printAndWait([
+          '但拒绝过后，',
+          grand.get_teen_sex_title(),
+          '的眼眶渐渐泛红。',
+        ]);
+        era.println();
+
+        await grand.say_and_wait([
+          '像这样把',
+          callname,
+          '监禁在这里…你一定很恨我吧……',
+        ]);
+        await grand.say_and_wait([
+          '但是，如果放你离开，我可能就再也见不到 ',
+          callname,
+          ' 了啊……！',
+        ]);
+        era.println();
+
+        await era.printAndWait([
+          grand.get_colored_name(),
+          ' 说着抱住了 ',
+          me.get_colored_name(),
+          '，将脸埋在 ',
+          me.get_colored_name(),
+          ' 的胸口。',
+        ]);
+        await era.printAndWait([
+          '温暖的液体浸湿衬衣，清晰传达',
+          grand.sex,
+          '的心意。',
+        ]);
+        era.println();
+
+        await grand.say_and_wait([
+          '那样不行…如果连远远看着都不被允许，我不知道自己会变成什么样子……',
+        ]);
+        await grand.say_and_wait(['……求你了，', callname, '……不要丢下我……']);
+        era.println();
+
+        await era.printAndWait([
+          '被 ',
+          grand.get_colored_name(),
+          ' 哭着挽留，但 ',
+          me.get_colored_name(),
+          ' 知道事情从来就没有过商量的余地。',
+        ]);
+        await era.printAndWait([
+          '于是 ',
+          me.get_colored_name(),
+          ' 也回抱着',
+          grand.sex,
+          '，直到',
+          grand.sex,
+          '恢复冷静。',
+        ]);
+      }
     } else {
+      await grand.say_and_wait(['不行。']);
+      era.println();
+
+      await era.printAndWait(['离开的请求换来了斩钉截铁的拒绝。']);
       await era.printAndWait([
+        '看到',
+        grand.get_teen_sex_title(),
+        '不容争辩的表情，',
         me.get_colored_name(),
-        ' 把手伸进莫名多出一个大洞的袖口，从衬衣的夹层中取出了一小包药粉。',
+        ' 知道能做的事情已经非常有限了。',
       ]);
+      era.println();
+
+      await grand.say_and_wait(['我知道，', callname, ' 之后肯定会提高警惕……']);
+      await grand.say_and_wait(['离开这里后……就很难再找到你了。']);
+      era.println();
+
+      await era.printAndWait([
+        grand.get_colored_name(),
+        ' 说着抱住了 ',
+        me.get_colored_name(),
+        '，将脸埋在 ',
+        me.get_colored_name(),
+        ' 的胸口。',
+      ]);
+      await era.printAndWait(['比起撒娇，力量更多传达着束缚的意味。']);
+      era.println();
+
+      await grand.say_and_wait(['这一次，不会让你离开我的视线了。']);
+      await grand.say_and_wait(['……为了独占你，我不知道自己会做出什么事情。']);
     }
-    await era.printAndWait([
-      '在训练员会议上发放的「对',
-      grand.get_uma_sex_title(),
-      '用安眠药」样品，没想到真的有用到的一天。',
-    ]);
-    await era.printAndWait([
-      '讲师说这个药还能让',
-      grand.get_uma_sex_title(),
-      '失去施暴时的记忆，便于回到正常的搭档关系。',
-    ]);
-    await era.printAndWait([
-      '一边感叹着「真是个伟大的发明」，一边确认 ',
-      grand.get_colored_name(),
-      ' 寻找餐具的背影，',
-      me.get_colored_name(),
-      ' 偷偷将药粉混入料理之中。',
-    ]);
-    era.println();
+  }
 
-    if (Math.random() < 0.1) {
-      await me.say_and_wait(['啊……啊嚏！！']);
-      era.println();
-
-      await era.printAndWait([
-        '然而就在 ',
-        me.get_colored_name(),
-        ' 拿出药粉的同时，一根 ',
-        grand.get_colored_name(),
-        ' 的毛发飘过你的鼻尖。',
-      ]);
-      await era.printAndWait([
-        '刚刚吸鼻涕的时候不小心吸进去了一点……但还好这是「对',
-        grand.get_uma_sex_title(),
-        '用……」',
-      ]);
-    } else if (era.get('relation:89:0') >= 100) {
-      await grand.say_and_wait(['那个……我、我来喂 ', callname, ' 吧。']);
-      await grand.say_and_wait(['啊——啊～']);
-      era.println();
-
-      await era.printAndWait([
-        '将食物递到 ',
-        me.get_colored_name(),
-        ' 嘴边的 ',
-        grand.get_colored_name(),
-        '，虽然是意料之外的事态，但无伤大雅。',
-      ]);
-      await era.printAndWait([
-        '一想到这是「对',
-        grand.get_uma_sex_title(),
-        '用」的特效药，',
-        me.get_colored_name(),
-        ' 没有拒绝，而是顺从地张开了嘴巴。',
-      ]);
-    } else {
-      await grand.say_and_wait(['我、我开动了……']);
-      await me.say_and_wait(['我开动了。']);
-      era.println();
-
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 一边构思着让 ',
-        grand.get_colored_name(),
-        ' 失去行动能力后的计划，一边将一勺料理送入口中。',
-      ]);
-    }
-    era.println();
-
-    await me.say_and_wait(['……？']);
-    await grand.say_and_wait(['诶……？', callname, '……？']);
-    era.println();
-
-    await era.printAndWait(['被吸入般的睡意席卷而来，思绪一步坠入深海。']);
-    await era.printAndWait([
-      '难道「对',
-      grand.get_uma_sex_title(),
-      '用」指的是「药效强到对',
-      grand.get_uma_sex_title(),
-      '也能生效」吗……？',
-    ]);
-    await era.printAndWait([
-      '在内心问候着发明这种药品的人，',
-      me.get_colored_name(),
-      ' 瘫软的倒在 ',
-      grand.get_colored_name(),
-      ' 的怀中，无法抵抗地沉入了梦乡。',
+  async ask_time(date, hours, minutes) {
+    const callname = sys_get_colored_callname(89, 0),
+      grand = get_chara_talk(89);
+    await grand.say_and_wait('……！我……我现在就看……那、那个……');
+    await grand.say_and_wait([
+      '现在是',
+      CustomizedBase.get_cur_time(hours, minutes),
+      '……打乱了 ',
+      callname,
+      ' 的计划吧……对不起……',
     ]);
   }
+
+  back_basement = back_basement;
 
   async battle_escape() {
     const callname = sys_get_colored_callname(89, 0),
@@ -209,6 +253,114 @@ module.exports = class extends CustomizedBase {
     ]);
   }
 
+  async battle_fail() {
+    const callname = sys_get_colored_callname(89, 0),
+      grand = get_chara_talk(89),
+      me = get_chara_talk(0),
+      life_marks = new GrandLifeMarks();
+    if (++life_marks.b_battle >= 10 && !life_marks.b_battle_fail) {
+      life_marks.b_battle_fail = 1;
+    }
+    if (life_marks.b_battle <= 3) {
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 用铁丝划开自己的袖口，从衬衣的夹层中取出满满一包药粉。',
+      ]);
+    } else {
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 把手伸进莫名多出一个大洞的袖口，从衬衣的夹层中取出一小包药粉。',
+      ]);
+    }
+    await era.printAndWait([
+      '在训练员会议上发放的「对',
+      grand.get_uma_sex_title(),
+      '用安眠药」样品，没想到真的有用到的一天。',
+    ]);
+    await era.printAndWait([
+      '讲师说这个药可以让',
+      grand.get_uma_sex_title(),
+      '失去施暴时的记忆，以便回到正常的搭档关系。',
+    ]);
+    await era.printAndWait([
+      '一边感叹「真是个伟大的发明」，一边确认 ',
+      grand.get_colored_name(),
+      ' 寻找餐具的背影，',
+      me.get_colored_name(),
+      ' 偷偷将药粉混入料理之中。',
+    ]);
+    era.println();
+
+    if (Math.random() < 0.1) {
+      await me.say_and_wait(['啊……啊嚏！！']);
+      era.println();
+
+      await era.printAndWait([
+        '然而就在 ',
+        me.get_colored_name(),
+        ' 拿出药粉的同时，一根 ',
+        grand.get_colored_name(),
+        ' 的毛发飘过你的鼻尖。',
+      ]);
+      await era.printAndWait([
+        '刚刚不小心吸进去了一点……但还好这是「对……',
+        grand.get_uma_sex_title(),
+        '用……安……眠……」',
+      ]);
+    } else if (era.get('relation:89:0') >= 100) {
+      await grand.say_and_wait(['那个……我、我来喂 ', callname, ' 吧。']);
+      await grand.say_and_wait(['啊——啊～']);
+      era.println();
+
+      await era.printAndWait([
+        '将食物递到 ',
+        me.get_colored_name(),
+        ' 嘴边的 ',
+        grand.get_colored_name(),
+        '，虽然是意料之外的事态，但无伤大雅。',
+      ]);
+      await era.printAndWait([
+        '一想到这是「对',
+        grand.get_uma_sex_title(),
+        '用」的特效药，',
+        me.get_colored_name(),
+        ' 没有拒绝，而是顺从地张开了嘴巴。',
+      ]);
+    } else {
+      await grand.say_and_wait(['我、我开动了……']);
+      await me.say_and_wait(['我开动了。']);
+      era.println();
+
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 一边构思着让 ',
+        grand.get_colored_name(),
+        ' 失去行动能力后的计划，一边将一勺料理送入口中。',
+      ]);
+    }
+    era.println();
+
+    await me.say_and_wait(['……？']);
+    await grand.say_and_wait(['诶……？', callname, '……？']);
+    era.println();
+
+    await era.printAndWait(['被吸入般的睡意袭来，思绪一步坠入深海。']);
+    await era.printAndWait([
+      '难道「对',
+      grand.get_uma_sex_title(),
+      '用」指的是「药效强到对',
+      grand.get_uma_sex_title(),
+      '也能生效」吗……？',
+    ]);
+    await era.printAndWait([
+      '在内心问候着发明这种药品的人，',
+      me.get_colored_name(),
+      ' 瘫软的倒在 ',
+      grand.get_colored_name(),
+      ' 的怀中，无法抵抗地沉入了梦乡。',
+    ]);
+  }
+
   async battle_prison() {
     const callname = sys_get_colored_callname(89, 0),
       grand = get_chara_talk(89),
@@ -225,6 +377,8 @@ module.exports = class extends CustomizedBase {
     await era.printAndWait([
       '尽管称之为安眠药，但持续时间其实很短，效果在五分钟左右就会消失。',
     ]);
+    era.println();
+
     await era.printAndWait([
       me.get_colored_name(),
       ' 连忙凑近锁孔，然而直到手中的铁丝弯曲到极限，铁门依旧不为所动。',
@@ -242,7 +396,7 @@ module.exports = class extends CustomizedBase {
 
     await grand.say_and_wait(['……', callname, '，对不起……']);
     await grand.say_and_wait([
-      '我也不喜欢这样，我也想做个好孩子，让你喜欢上我。',
+      '我也不喜欢这样……我也想做个好孩子，让你喜欢上我。',
     ]);
     await grand.say_and_wait([
       '看到你痛苦的表情……我也会很难过，就像现在这样。',
@@ -259,9 +413,9 @@ module.exports = class extends CustomizedBase {
     await grand.say_and_wait([
       '一定是因为',
       callname,
-      ' 有很多事情要负起责任……',
+      ' 有很多事情……想要负起责任……',
     ]);
-    await grand.say_and_wait(['让我……帮你忘掉那些痛苦的事情吧——']);
+    await grand.say_and_wait(['让我……帮你忘掉那些痛苦的事情吧————']);
     era.println();
 
     await era.printAndWait([
@@ -272,268 +426,99 @@ module.exports = class extends CustomizedBase {
     ]);
   }
 
-  find_escape(out_of_prison, s_level_up, is_back) {
-    const grand = get_chara_talk(89),
-      me = get_chara_talk(0),
-      callname = sys_get_colored_callname(89, 0);
-    new GrandLifeMarks().b_find_escape = 1;
-    if (is_back && out_of_prison) {
-      era.print(['在一次不经意的尝试中，铁丝似乎触动了锁内的某个部分。']);
-      era.print([
-        me.get_colored_name(),
-        ' 握紧铁丝，用力一转，只感觉锁体内部传来了一阵顺畅的转动感。',
-      ]);
-      era.print([
-        me.get_colored_name(),
-        ' 在心中欢呼着推开铁门，来到了一条狭窄的通道，只要穿过这——',
-      ]);
-      era.println();
+  find_escape = find_escape;
 
-      grand.say(['……', me.get_colored_name(), ' 要去哪里？']);
-      era.println();
+  first_time() {
+    const me = get_chara_talk(0);
+    era.print([
+      '拍门声与求救声在狭小的空间中回响，得到冰冷的触感与沉默作为回应。',
+    ]);
+    era.print([
+      '在这暗室中待得越久，时间概念愈发模糊，只留无数疑问盘旋于脑海。',
+    ]);
+    era.println();
 
-      era.print(['肌肤发泡般的恶寒传遍全身，从脖子到后背都被冷汗打湿。']);
-      era.print([
-        '从通道另一端传来的声音微弱的几乎听不到，其中的意思却强烈地传递过来。',
-      ]);
-      era.print([
-        '步步逼近的',
-        grand.get_uma_sex_title(),
-        '并非在问 ',
-        me.get_colored_name(),
-        '，只是在了解一切的基础上进行『确认』而已。',
-      ]);
-      era.println();
+    me.say(['咳咳……咳咳咳……']);
+    era.println();
 
-      me.say(['这、这也是为了 ', sys_get_colored_callname(0, 89), '……']);
-      era.println();
-
-      if (era.get('exp:89:监禁次数') === 1) {
-        grand.say(['如果你是真心为了我好……就不要用这句话来回答我啊。']);
-        era.println();
-
-        era.print([
-          '被逼退回门内的 ',
-          me.get_colored_name(),
-          '，近在咫尺的爱马，不好的预感在心中弥漫开来。',
-        ]);
-        era.println();
-
-        grand.say(['对我来说，', callname, ' 才是最重要的，是我的一切……']);
-      } else {
-        grand.say([callname, '……你打算用这种话来糊弄我吗……']);
-        era.println();
-
-        era.print([
-          '被逼退回门内的 ',
-          me.get_colored_name(),
-          '，近在咫尺的爱马，不好的预感在心中弥漫开来。',
-        ]);
-        era.println();
-
-        grand.say([
-          '我……虽然不像 ',
-          sys_get_colored_callname(89, 91),
-          ' 那样聪明，但也不是会被轻易欺骗的傻瓜。',
-        ]);
-      }
-      era.println();
-
-      era.print(['咔哒——锁芯转动的冰冷声音在寂静的房间里回荡。']);
-      era.print([
-        '在这个不会再与外界产生任何接触的地方，',
-        me.get_colored_name(),
-        ' 认命般闭上了眼睛。',
-      ]);
-    } else {
-      era.print(['咔嚓，咔嚓——']);
-      era.println();
-
-      me.say(['啧……']);
-      era.println();
-
-      era.print(['好不容易找到的一根铁丝断在了锁芯里。']);
-      era.print([
-        '无次数尝试中 ',
-        me.get_colored_name(),
-        ' 早已尝惯失败，但留下的碎片无疑将成为试图逃离的证据。',
-      ]);
-      era.println();
-
-      me.say(['这个……拔不出来啊……！']);
-      era.println();
-
-      era.print(['是什么时候开始出错了呢？']);
-      era.print(['到底为什么会走到这一步呢？']);
-      era.print([
-        '脑海中，小',
-        grand.get_uma_sex_title(),
-        '那天使般的笑容如幻影般浮现。',
-      ]);
-      era.print(['如果可以的话，真想回到刚刚相遇的那一天……']);
-      era.println();
-
-      grand.say(['……', callname, '？']);
-      era.println();
-
-      era.print([
-        '微弱且毫无起伏的声音定住了 ',
-        me.get_colored_name(),
-        ' 的动作，宣告一时兴起的越狱游戏到此结束。',
-      ]);
-      era.println();
-
-      grand.say(['没关系的，', callname, '……']);
-      era.println();
-
-      era.print([
-        me.get_colored_name(),
-        ' 甚至不敢回头确认',
-        grand.get_child_sex_title(),
-        '的神情，只是任凭自己被拖回床笫之上。',
-      ]);
-      era.println();
-
-      grand.say(['都是我的错……我的爱还不够，才让你产生了离开的想法。']);
-      grand.say(['……必须让 ', callname, ' 感受到我的心意……']);
-    }
+    era.print([
+      '抑制住用嗓过度的咳嗽声，',
+      me.get_colored_name(),
+      ' 希望尽量保持冷静。',
+    ]);
+    era.print(['假设是受人绑架，正面冲突恐怕无法避免。']);
+    era.print(['或许现在需要整理思绪，稍作休息。']);
   }
 
-  ask_release_agree = ask_release_agree;
+  flatter = flatter;
 
-  async ask_release_reject() {
-    const callname = sys_get_colored_callname(89, 0),
-      grand = get_chara_talk(89),
-      me = get_chara_talk(0);
-    if (era.get('exp:89:监禁次数') === 1) {
-      if (++new GrandLifeMarks().b_ask_release <= 3) {
-        await grand.say_and_wait(['不行——']);
-        era.println();
-
-        await era.printAndWait(['离开的请求换来的是欲言又止的拒绝。']);
-        await era.printAndWait([
-          '拒绝过后，',
-          grand.get_teen_sex_title(),
-          '用力地攥紧了',
-          grand.sex,
-          '的海军帽。',
-        ]);
-        era.println();
-
-        await grand.say_and_wait(['再给我一点时间……求求你……', callname, '……']);
-        await grand.say_and_wait(['给我一个……让你重新喜欢上我的机会……']);
-        era.println();
-
-        await era.printAndWait([
-          grand.get_colored_name(),
-          ' 说着抱住了 ',
-          me.get_colored_name(),
-          '，将脸埋在 ',
-          me.get_colored_name(),
-          ' 的胸口。',
-        ]);
-        await era.printAndWait(['比起撒娇，力量更多传达着束缚的意味。']);
-        await era.printAndWait([
-          '不知道该作何反应的 ',
-          me.get_colored_name(),
-          '，静静地等待着小',
-          grand.get_uma_sex_title(),
-          '心满意足的那一刻。',
-        ]);
+  get_basement_info(can_strike) {
+    const grand = get_chara_talk(89),
+      me = get_chara_talk(0),
+      ret = [];
+    if (can_strike) {
+      ret.push(
+        grand.get_colored_name(),
+        ' 带着料理刚刚回到这里，餐桌正是为偷袭准备的陷阱……',
+      );
+    } else if (sys_check_awake(this.id)) {
+      const relation = era.get(`relation:${this.id}:0`),
+        love = era.get(`love:${this.id}`),
+        relation_check = relation >= (era.get('flag:极端行为限制') || 1) * love,
+        { b_s_level } = new GrandLifeMarks();
+      if (love >= 85) {
+        if (relation_check) {
+          ret.push(
+            grand.get_colored_name(),
+            ' 溢满愧疚的双眼时而望向 ',
+            me.get_colored_name(),
+            '；',
+          );
+        } else if (relation >= 0) {
+          ret.push(
+            grand.get_colored_name(),
+            ' 双手紧绞在一起，指关节因用力而泛白；',
+          );
+        } else {
+          ret.push(
+            grand.get_colored_name(),
+            ' 空洞的双眼紧随 ',
+            me.get_colored_name(),
+            ' 的每个动作；',
+          );
+        }
+      } else if (relation_check) {
+        ret.push(grand.get_colored_name(), ' 的不自觉地捏紧了裙摆；');
       } else {
-        await grand.say_and_wait(['不行——']);
-        era.println();
-
-        await era.printAndWait(['离开的请求换来的是细若蚊声的拒绝。']);
-        await era.printAndWait([
-          '但拒绝过后，',
-          grand.get_teen_sex_title(),
-          '的眼眶渐渐泛红。',
-        ]);
-        era.println();
-
-        await grand.say_and_wait([
-          '像这样把',
-          callname,
-          '监禁在这里……你一定很恨我吧……',
-        ]);
-        await grand.say_and_wait([
-          '但是……如果放你离开的话，我可能就再也见不到 ',
-          callname,
-          ' 了……！',
-        ]);
-        era.println();
-
-        await era.printAndWait([
-          grand.get_colored_name(),
-          ' 说着抱住了 ',
-          me.get_colored_name(),
-          '，将脸埋在 ',
-          me.get_colored_name(),
-          ' 的胸口。',
-        ]);
-        await era.printAndWait([
-          '温暖的液体浸湿了衬衣，清晰传达着',
-          grand.sex,
-          '的心意。',
-        ]);
-        era.println();
-
-        await grand.say_and_wait([
-          '那样不行……如果连远远看着都不被允许，我不知道自己会变成什么样子……',
-        ]);
-        await grand.say_and_wait(['……求你了，', callname, '……不要走……']);
-        era.println();
-
-        await era.printAndWait([
-          '被 ',
-          grand.get_colored_name(),
-          ' 哭着挽留，但 ',
-          me.get_colored_name(),
-          ' 知道事情从来就没有过商量的余地。',
-        ]);
-        await era.printAndWait([
-          '于是 ',
-          me.get_colored_name(),
-          ' 也回抱着',
-          grand.sex,
-          '，直到',
-          grand.sex,
-          '恢复冷静。',
-        ]);
+        ret.push(grand.get_colored_name(), ' 静静地坐在房间的角落；');
+      }
+      if (b_s_level >= 4) {
+        ret.push('愧疚与怀疑间，后者更据上风。');
+      } else if (b_s_level === 3) {
+        ret.push('回忆成为了', grand.sex, '没有做出过激行为的理由。');
+      } else {
+        ret.push('挣扎于 ', me.get_colored_name(), ' 的幸福与独占欲之间。');
       }
     } else {
-      await grand.say_and_wait(['不行。']);
-      era.println();
-
-      await era.printAndWait(['离开的请求换来了斩钉截铁的拒绝。']);
-      await era.printAndWait([
-        '看到',
-        grand.get_teen_sex_title(),
-        '不容争辩的表情，',
-        me.get_colored_name(),
-        ' 知道能做的事情已经非常有限了。',
-      ]);
-      era.println();
-
-      await grand.say_and_wait(['我知道，', callname, ' 很聪明……']);
-      await grand.say_and_wait(['离开这里后……就很难再找到你了。']);
-      era.println();
-
-      await era.printAndWait([
+      ret.push(
         grand.get_colored_name(),
-        ' 说着抱住了 ',
-        me.get_colored_name(),
-        '，将脸埋在 ',
-        me.get_colored_name(),
-        ' 的胸口。',
-      ]);
-      await era.printAndWait(['比起撒娇，力量更多传达着束缚的意味。']);
-      era.println();
-
-      await grand.say_and_wait(['这一次，不会让你离开我的视线了。']);
-      await grand.say_and_wait(['……为了独占你，我不知道自己会做出什么事情。']);
+        ' 抱着枕头睡在小床的一角，短发间布满了细密的汗珠。',
+      );
     }
+    return ret;
+  }
+
+  get_up() {
+    const grand = get_chara_talk(this.id),
+      me = get_chara_talk(0);
+    era.print([
+      grand.get_colored_name(),
+      ' 呼喊着 ',
+      me.get_colored_name(),
+      ' 的名字于梦中惊醒，徬徨失措地搜寻着 ',
+      me.get_colored_name(),
+      ' 的身影。',
+    ]);
   }
 
   handle_escape() {
@@ -545,6 +530,32 @@ module.exports = class extends CustomizedBase {
       life_marks.b_strike =
       life_marks.b_battle_fail =
         0;
+  }
+
+  out() {
+    const callname = sys_get_colored_callname(this.id, 0),
+      grand = get_chara_talk(this.id);
+    grand.say(['唔嗯……？好像……要到上课的时间了……']);
+    era.println();
+
+    era.print([
+      '打了个哈欠，手机屏幕的荧光映出了',
+      grand.get_teen_sex_title(),
+      '疲惫而苍白的面容。',
+    ]);
+    era.print([
+      '对',
+      grand.sex,
+      '来说，想必无论心理还是生理上，都承受着相当大的压力吧。',
+    ]);
+    era.println();
+
+    grand.say(['啊……谢谢你……还愿意关心我……', callname, '。']);
+    grand.say([
+      '不过……如果能让 ',
+      callname,
+      ' 回心转意……这种程度……我没关系的……',
+    ]);
   }
 
   async strike_fail() {
@@ -622,7 +633,7 @@ module.exports = class extends CustomizedBase {
       grand.sex,
       '被砸在衣柜下面的 ',
       me.get_colored_name(),
-      '，却莫名感觉松了一口气。',
+      '，却莫名松了一口气。',
     ]);
   }
 
@@ -702,6 +713,38 @@ module.exports = class extends CustomizedBase {
       callname = sys_get_colored_callname(89, 0);
     if (era.get('exp:89:监禁次数') === 1) {
       era.print([
+        '冰冷的环境唤醒了沉睡的意识，',
+        me.get_colored_name(),
+        ' 的眼中模糊的映出了陌生的天花板。',
+      ]);
+      era.print(['为寻找一丝熟悉感而游移的目光，捕捉到了一个小小的白色身影。']);
+      era.println();
+      grand.say(['啊……！太好了，', callname, '！你醒了！']);
+      grand.say(['……身体……有什么不舒服的地方吗？']);
+      grand.say(['因、因为不知道要用多少力气……被打晕过去，一定很痛吧……']);
+      grand.say(['……这里是？']);
+      era.println();
+
+      era.print(['片刻的沉默。']);
+      era.print([
+        '在茫然无措间，',
+        me.get_colored_name(),
+        ' 的目光与 ',
+        grand.get_colored_name(),
+        ' 相撞。',
+      ]);
+      era.print(['粘稠无光的蓝眸中，渗透出深深的歉意。']);
+      era.println();
+
+      grand.say(['对不起……我不能告诉 ', callname, '。']);
+      grand.say([
+        '……但、但是！我只是想和 ',
+        callname,
+        ' 说说话，不会伤害你的……！',
+      ]);
+      grand.say(['所以说……', callname, '，请你待在这里，哪里都不要去。']);
+    } else {
+      era.print([
         me.get_colored_name(),
         ' 猛地睁开眼，熟悉的天花板意味着担心的事情已经成为现实。',
       ]);
@@ -743,38 +786,6 @@ module.exports = class extends CustomizedBase {
       grand.say(['不再依赖别人，不再哭泣，不再逃避。']);
       grand.say(['你的身体，气味，你的体温，我也一样喜欢。']);
       grand.say([callname, '，我爱你。']);
-    } else {
-      era.print([
-        '冰冷的环境唤醒了沉睡的意识，',
-        me.get_colored_name(),
-        ' 的眼中模糊的映出了陌生的天花板。',
-      ]);
-      era.print(['为寻找一丝熟悉感而游移的目光，捕捉到了一个小小的白色身影。']);
-      era.println();
-      grand.say(['啊……！太好了，', callname, '！你醒了！']);
-      grand.say(['……身体……有什么不舒服的地方吗？']);
-      grand.say(['因、因为不知道要用多少力气……被打晕过去，一定很痛吧……']);
-      grand.say(['……这里是？']);
-      era.println();
-
-      era.print(['片刻的沉默。']);
-      era.print([
-        '在茫然无措间，',
-        me.get_colored_name(),
-        ' 的目光与 ',
-        grand.get_colored_name(),
-        ' 相撞。',
-      ]);
-      era.print(['那双粘稠无光的蓝眸中，渗透出深深的歉意。']);
-      era.println();
-
-      grand.say(['对不起……我不能告诉 ', callname, '。']);
-      grand.say([
-        '……但、但是！我只是想和 ',
-        callname,
-        ' 说说话，不会伤害你的……！',
-      ]);
-      grand.say(['所以说……', callname, '，请你待在这里，哪里都不要去。']);
     }
   }
 };

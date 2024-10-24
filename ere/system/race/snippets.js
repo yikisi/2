@@ -394,7 +394,6 @@ module.exports = {
           skill.data.ability_values[i][j] + uma.base.spdBuffFromWiz;
         break;
       case ability_usage_enum.Direct:
-      case ability_usage_enum.Unknown:
         skill.values[i][j] = skill.data.ability_values[i][j];
         break;
       case ability_usage_enum.MultiplyTeamTotalSpeed:
@@ -421,8 +420,29 @@ module.exports = {
         skill.values[i][j] *= skill.data.ability_values[i][j];
         break;
       case ability_usage_enum.MultiplyFanCount:
+      case ability_usage_enum.MultiplyFanCount2:
         skill.values[i][j] =
-          (1 + uma.base.fame * 0.05) * skill.data.ability_values[i][j];
+          (1 +
+            uma.base.fame *
+              (0.05 +
+                0.01 *
+                  (skill.data.ability_value_usages[i][j] -
+                    ability_usage_enum.MultiplyFanCount))) *
+          skill.data.ability_values[i][j];
+        break;
+      case ability_usage_enum.MultiplyMaximumRawStatus:
+        if (uma.base.max_raw_status >= 1100) {
+          skill.values[i][j] = 1.2;
+        } else if (uma.base.max_raw_status >= 1000) {
+          skill.values[i][j] = 1.1;
+        } else if (uma.base.max_raw_status >= 800) {
+          skill.values[i][j] = 1;
+        } else if (uma.base.max_raw_status >= 600) {
+          skill.values[i][j] = 0.9;
+        } else {
+          skill.values[i][j] = 0.8;
+        }
+        skill.values[i][j] *= skill.data.ability_values[i][j];
         break;
       case ability_usage_enum.MultiplyForeignAdaptability:
         skill.values[i][j] =

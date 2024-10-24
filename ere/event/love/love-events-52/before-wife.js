@@ -437,8 +437,8 @@ module.exports = async (
     if (
       era
         .getAddedCharacters()
-        .filter((e) => e > 0 && e !== 52 && era.get(`love:${e}`) >= 75).length >
-      0
+        .findIndex((e) => e > 0 && e !== 52 && era.get(`love:${e}`) >= 75) !==
+      -1
     ) {
       era.println();
       await urara.say_and_wait([

@@ -1,1 +1,19 @@
-const RaceInfo = require('#/data/race/model/race-info');module.exports = new RaceInfo(  'Keeneland Cup',  '基兰杯',  RaceInfo.class_enum.G3,  RaceInfo.track_enum.sapporo,  RaceInfo.ground_enum.grass,  1200,  RaceInfo.distance_enum.short,  RaceInfo.rotation_enum.right,  16,  [38],  RaceInfo.limit_enum.post3,  32,  0,  1075,  10101,);
+const RaceInfo = require('#/data/race/model/race-info');
+
+module.exports = new RaceInfo(
+  'Keeneland Cup',
+  '基兰杯',
+  RaceInfo.class_enum.G3,
+  RaceInfo.track_enum.sapporo,
+  RaceInfo.ground_enum.grass,
+  1200,
+  RaceInfo.distance_enum.short,
+  RaceInfo.rotation_enum.right,
+  16,
+  [38],
+  RaceInfo.limit_enum.post3,
+  32,
+  0,
+  1075,
+  10101,
+);

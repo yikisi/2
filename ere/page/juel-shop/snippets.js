@@ -85,7 +85,7 @@ module.exports = {
             level >= 5 ||
             Object.entries(
               get_skill_price(chara_id, skill_name, level + 1),
-            ).filter((e) => e[1] > juel_dict[e[0]]).length > 0,
+            ).findIndex((e) => e[1] > juel_dict[e[0]]) !== -1,
           width: 2,
         },
         content: '↑',
@@ -154,7 +154,7 @@ module.exports = {
                 talent_name,
                 talent_bnc.up_delta[level],
               ),
-            ).filter((e) => e[1] > juel_dict[e[0]]).length > 0 ||
+            ).findIndex((e) => e[1] > juel_dict[e[0]]) !== -1 ||
             check_metric < (talent_bnc.metrics[level] || 0) ||
             (accelerator < 7 && level === 1 && talent_dict.slave_run > 0),
           width: 4,
@@ -173,7 +173,7 @@ module.exports = {
                 talent_name,
                 talent_bnc.down_delta[level],
               ),
-            ).filter((e) => e[1] > juel_dict[e[0]]).length > 0,
+            ).findIndex((e) => e[1] > juel_dict[e[0]]) !== -1,
           width: 4,
         },
         content: talent_bnc.down,

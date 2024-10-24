@@ -23,7 +23,7 @@ const {
 } = require('#/data/ero/status-const');
 const { growth_info, unknown_info } = require('#/data/exp-const');
 
-const page_name = '肉体情报 【女阴】';
+const page_name = '肉体情报【女阴】';
 
 const virgin_semen_desc = [
   '',

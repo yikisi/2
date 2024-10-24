@@ -12,7 +12,10 @@ const { get_success_base_reward } = require('#/system/sys-train-uma');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
 
+const { attr_colors } = require('#/data/const.json');
+const { location_enum } = require('#/data/locations');
 const {
   attr_enum,
   attr_names,
@@ -33,82 +36,104 @@ function randomly_interact(in_team_list) {
       sys_check_train_enabled(chara_id) &&
       era.get(`cflag:${chara_id}:自主训练`) &&
       !era.get(`status:${chara_id}:摸鱼`) &&
-      stamina_ratio >= fail_sta_border.intelligence &&
-      time >= time_cost.uma * (1 + debuff)
+      stamina_ratio >= fail_sta_border.intelligence
     ) {
+      const in_beach =
+        era.get(`cflag:${chara_id}:位置`) === location_enum.beach;
       const train_need_attrs = Object.values(attr_enum).filter(
         (attr) =>
           era.get(`base:${chara_id}:${attr_names[attr]}`) <=
-          era.get(`maxbase:${chara_id}:${attr_names[attr]}`),
+            era.get(`maxbase:${chara_id}:${attr_names[attr]}`) &&
+          time >=
+            time_cost[
+              (in_beach
+                ? 5
+                : era.get(`abl:${chara_id}:${attr_names[attr]}训练等级`) || 1) -
+                1
+            ],
       );
-      const changes = {
-          attr_change: new Array(5).fill(0),
-          pt_change: 0,
-        },
-        train_attr =
-          stamina_ratio >= fail_sta_border.other
-            ? get_random_entry(
-                train_need_attrs.filter(
-                  (attr) => attr !== attr_enum.intelligence,
-                ),
-              )
-            : attr_enum.intelligence,
-        train_cost = {
-          stamina: -time_cost.uma * (0.9 + Math.random() * 0.3), // -400*[0.9,1.2]
-          time: -time_cost.uma,
-        },
-        cost_result = [
-          sys_change_attr_and_print(chara_id, '体力', train_cost.stamina),
-          sys_change_attr_and_print(chara_id, '精力', train_cost.time),
-        ];
-      era.add(
-        `exp:${chara_id}:${attr_names[train_attr]}训练经验`,
-        100 + era.get(`cflag:${chara_id}:${attr_names[train_attr]}加成`),
-      );
-      get_success_base_reward(
-        chara_id,
-        train_attr,
-        era.get(`abl:${chara_id}:${attr_names[train_attr]}训练等级`),
-        train_cost,
-        changes,
-        true,
-      );
-      era.printMultiColumns([
-        {
-          content: [
-            get_chara_talk(chara_id).get_colored_name(),
-            ' 进行了自主训练……',
-          ],
-          type: 'text',
-        },
-        ...cost_result.map((e) => {
-          return {
-            content: e,
-            config: { offset: 1, width: 23 },
+      if (train_need_attrs.length > 0) {
+        const changes = {
+            attr_change: new Array(5).fill(0),
+            pt_change: 0,
+          },
+          train_attr =
+            stamina_ratio >= fail_sta_border.other
+              ? get_random_entry(
+                  train_need_attrs.filter(
+                    (attr) => attr !== attr_enum.intelligence,
+                  ),
+                )
+              : attr_enum.intelligence,
+          train_level = in_beach
+            ? 5
+            : era.get(`abl:${chara_id}:${attr_names[train_attr]}训练等级 `) ||
+              1,
+          base_time_cost = time_cost[train_level - 1],
+          train_cost = {
+            stamina: -base_time_cost * get_random_value(0.9, 1.2, true),
+            time: -base_time_cost,
+          },
+          cost_result = [
+            sys_change_attr_and_print(chara_id, '体力', train_cost.stamina),
+            sys_change_attr_and_print(chara_id, '精力', train_cost.time),
+          ];
+        era.add(
+          `exp:${chara_id}:${attr_names[train_attr]}训练经验`,
+          100 + era.get(`cflag:${chara_id}:${attr_names[train_attr]}加成`),
+        );
+        get_success_base_reward(
+          chara_id,
+          train_attr,
+          train_level,
+          train_cost,
+          changes,
+          true,
+        );
+        era.printMultiColumns([
+          {
+            content: [
+              get_chara_talk(chara_id).get_colored_name(),
+              ' 进行了 ',
+              {
+                content: attr_names[train_attr],
+                color: attr_colors[attr_names[train_attr]],
+              },
+              ' 方面的自主训练……',
+            ],
             type: 'text',
-          };
-        }),
-        ...changes.attr_change
-          .map((stat, attr) => sys_change_attr_and_print(chara_id, attr, stat))
-          .filter((e) => e.length)
-          .map((e) => {
+          },
+          ...cost_result.map((e) => {
             return {
               content: e,
               config: { offset: 1, width: 23 },
               type: 'text',
             };
           }),
-        {
-          content: [
-            { content: `获得了 ${changes.pt_change} 点技能点数` },
-            { isBr: true },
-            { isBr: true },
-          ],
-          config: { offset: 1, width: 23 },
-          type: 'text',
-        },
-      ]);
-      era.add(`exp:${chara_id}:技能点数`, changes.pt_change);
+          ...changes.attr_change
+            .map((stat, attr) =>
+              sys_change_attr_and_print(chara_id, attr, stat),
+            )
+            .filter((e) => e.length)
+            .map((e) => {
+              return {
+                content: e,
+                config: { offset: 1, width: 23 },
+                type: 'text',
+              };
+            }),
+          {
+            content: [
+              { content: `获得了 ${changes.pt_change} 点技能点数` },
+              { isBr: true },
+              { isBr: true },
+            ],
+            config: { offset: 1, width: 23 },
+            type: 'text',
+          },
+        ]);
+        era.add(`exp:${chara_id}:技能点数`, changes.pt_change);
+      }
     }
     if (
       era.get(`cflag:${chara_id}:种族`) &&

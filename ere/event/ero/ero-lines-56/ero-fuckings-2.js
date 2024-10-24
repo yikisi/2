@@ -135,7 +135,7 @@ module.exports = (handlers) => {
         '想要尽力配合, 但自己都不知道有没有完整的做完一次动作, 只要塞在体内的肉棒稍稍抽动一下，被快感塞满的大脑就会一片空白, 从嘴里咿咿呀呀的吐出下流的呻吟。',
       ]);
       await attacker.print_and_wait([
-        '不过, 听着噗嗤噗嗤的下流声响 , 黏糊糊的小穴应该有好好的服侍 ',
+        '不过，听着噗嗤噗嗤的下流声响，黏糊糊的小穴应该有好好的服侍 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 的肉棒吧.',
       ]);

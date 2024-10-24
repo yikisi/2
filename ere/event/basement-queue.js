@@ -47,9 +47,7 @@ module.exports = {
   init() {
     queue = set(
       'flag:地下室行动',
-      (get('flag:地下室行动') || [])
-        .filter((e) => e)
-        .map(BasementAction.create_from_object),
+      (get('flag:地下室行动') || []).map(BasementAction.create_from_object),
     );
   },
 };

@@ -46,7 +46,7 @@ const icon2skill_color = {
   ),
   10016: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.spe,
+    UmaSkill.skill_border_enum.evol,
   ),
   10021: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.buff,
@@ -812,13 +812,20 @@ async function chara_skill() {
   );
   console.log('条件参数', Object.keys(c_dict).length, '个');
 
-  execSync('npx eslint --fix ./ere/data/race/model ./ere/data/race/skill', {
+  execSync('npx eslint --fix ./ere/data/race/skill', {
     cwd: join(process.cwd(), '../..'),
   });
 
   execSync('node parse-genes.js');
 
   execSync('node parse-contestants.js');
+
+  execSync(
+    'npx eslint --fix ./ere/data/race/model/condition-params.js ./ere/data/race/gene',
+    {
+      cwd: join(process.cwd(), '../..'),
+    },
+  );
 }
 
 chara_skill().then();

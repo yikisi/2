@@ -37,7 +37,11 @@ const { location_enum } = require('#/data/locations');
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,EventObject):Promise>} */
 const handlers = {};
 
-handlers[25] = async (kitaru, me, callname) => {
+handlers[25] = async (kitaru, me, callname, event_object) => {
+  if (era.get('flag:当前互动角色') && era.get('flag:当前互动角色') !== 56) {
+    add_event(event_hooks.out_start, event_object);
+    return;
+  }
   await print_event_name(`恋心初动`, kitaru);
   await era.printAndWait([
     '某个假日，',

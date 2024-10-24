@@ -1,6 +1,4 @@
-const { execSync } = require('child_process');
 const { readdirSync, writeFileSync } = require('fs');
-const { join } = require('path');
 
 const rec_scripts = readdirSync('../../ere/event/rec')
   .filter(
@@ -89,10 +87,6 @@ module.exports = {
 `;
 
 writeFileSync('../../ere/event/rec/rec-factory.js', output);
-
-execSync('npx eslint --fix ./ere/event/rec/rec-factory.js', {
-  cwd: join(process.cwd(), '../..'),
-});
 
 console.log(
   `[generate-rec-factory.js] registers ${rec_scripts.length} recruit scripts`,

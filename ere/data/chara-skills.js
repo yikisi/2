@@ -8,9 +8,8 @@ class CharaSkills {
 
   constructor(chara_id) {
     this.id = chara_id;
-    this.obj = (
-      get(`skill:${this.id}:习得技能`) || set(`skill:${this.id}:习得技能`, [])
-    ).filter((e) => e);
+    this.obj =
+      get(`skill:${this.id}:习得技能`) || set(`skill:${this.id}:习得技能`, []);
   }
 
   /**

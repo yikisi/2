@@ -5,7 +5,10 @@
  */
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+} = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_custom_check } = require('#/event/check/check-factory');
@@ -20,39 +23,59 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
+const CoffeeLifeMarks = require('#/data/event/life-event-marks/life-event-marks-25');
 
 /** @type {Record<string,function(HookArg,*):Promise<boolean|void>>} */
 const handlers = {};
 
+/**
+ * @param {CharaTalk} coffee
+ * @param callname
+ * @param {CoffeeLifeMarks} life_marks
+ */
+function escape_basement_common(coffee, callname, life_marks) {
+  coffee.say([callname, '……休息得如何？']);
+  coffee.say('……虽然你擅自逃出去了，我也不会对你做什么的……');
+  life_marks.b_escape = 0;
+}
+
 handlers[event_hooks.select] = () => {
-  const callname = sys_get_callname(25, 0),
-    coffee = get_chara_talk(25);
+  const callname = sys_get_colored_callname(25, 0),
+    coffee = get_chara_talk(25),
+    life_marks = new CoffeeLifeMarks();
   if (!sys_check_awake(25)) {
     era.print([
       '……',
       coffee.get_colored_name(),
       ' 现在睡得很沉，眼睫毛一抖一抖的，是在做什么梦吗？',
     ]);
+  } else if (life_marks.b_escape > 0) {
+    escape_basement_common(coffee, callname, life_marks);
   } else {
     const talk_arr = [
-      `${callname}，我在这里。`,
+      [callname, '，我在这里。'],
       '……嗯，就像平常那样。',
-      `今天也……麻烦 ${callname} 了。`,
+      ['今天也……麻烦 ', callname, ' 了。'],
     ];
     coffee.say(get_random_entry(talk_arr));
   }
 };
 
 handlers[event_hooks.good_morning] = () => {
-  const talk_arr = [];
-  if (era.get('base:25:体力') < era.get('maxbase:25:体力') * 0.45) {
-    talk_arr.push(
+  const buffer = [],
+    callname = sys_get_colored_callname(25, 0),
+    coffee = get_chara_talk(25),
+    life_marks = new CoffeeLifeMarks();
+  if (life_marks.b_escape > 0) {
+    escape_basement_common(coffee, callname, life_marks);
+  } else if (era.get('base:25:体力') < era.get('maxbase:25:体力') * 0.45) {
+    buffer.push(
       '我好像……不太能勉强自己了……',
       '请给我一些时间……让我喝杯咖啡。',
       '脚好重……就像是扎根了一样……',
     );
   } else {
-    talk_arr.push(
+    buffer.push(
       '为了……追上那孩子。',
       '为了抓住星星，或许我能飞到天上去……！',
       '要追逐的影子……我已经看清了。',
@@ -60,7 +83,7 @@ handlers[event_hooks.good_morning] = () => {
       '龙有翅膀，而我有咖啡……呵呵。',
     );
   }
-  get_chara_talk(25).say(get_random_entry(talk_arr));
+  coffee.say(get_random_entry(buffer));
 };
 
 handlers[event_hooks.good_night] = async (hook) => {

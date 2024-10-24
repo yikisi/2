@@ -1,1 +1,19 @@
-const RaceInfo = require('#/data/race/model/race-info');module.exports = new RaceInfo(  'Toyota Sho Chukyo Kinen',  '中京纪念',  RaceInfo.class_enum.G3,  RaceInfo.track_enum.chukyo,  RaceInfo.ground_enum.grass,  1600,  RaceInfo.distance_enum.mile,  RaceInfo.rotation_enum.right,  16,  [],  RaceInfo.limit_enum.post3,  28,  0,  1025,  10703,);
+const RaceInfo = require('#/data/race/model/race-info');
+
+module.exports = new RaceInfo(
+  'Toyota Sho Chukyo Kinen',
+  '中京纪念',
+  RaceInfo.class_enum.G3,
+  RaceInfo.track_enum.chukyo,
+  RaceInfo.ground_enum.grass,
+  1600,
+  RaceInfo.distance_enum.mile,
+  RaceInfo.rotation_enum.right,
+  16,
+  [],
+  RaceInfo.limit_enum.post3,
+  28,
+  0,
+  1025,
+  10703,
+);

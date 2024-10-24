@@ -66,10 +66,10 @@ const top_handlers = [
 const other_handlers = {};
 
 other_handlers[race_event_enum.lost_stamina] = [
-  (names) => [names, '，失速！'],
-  (names) => [names, ' 的步伐踉跄了起来，已经无法维持速度了！'],
-  (names) => [names, ' 速度变慢了！'],
-  (names) => [names, ' 到极限了吗！？'],
+  (names) => [...names, '，失速！'],
+  (names) => [...names, ' 的步伐踉跄了起来，已经无法维持速度了！'],
+  (names) => [...names, ' 速度变慢了！'],
+  (names) => [...names, ' 到极限了吗！？'],
 ];
 other_handlers[race_event_enum.loc_mind_nige_ex] = [
   (names) => ['逃马怎容他马在前！冲啊，', ...names, '！'],
@@ -126,6 +126,13 @@ other_handlers[race_event_enum.temp_continue] = [
   (names) => [...names, ' 深陷焦躁无法自拔！'],
   (names) => ['冷静下来啊 ', ...names, '！小心错失时机！'],
 ];
+other_handlers[race_event_enum.temp_wrong_style] = [
+  (names) => [...names, ' 似乎改变了跑法！'],
+  (names) => [...names, ' 怎么在拼命前冲！'],
+];
+
+const event_enum_length = Object.keys(race_event_enum).length;
+const report_count = 2;
 
 /** @type {(function(PseudoUma,PseudoUma))[]} */
 let top_list;
@@ -137,14 +144,32 @@ let order_start = 0,
 let final_push_pop = undefined;
 
 /**
- * @param {{[a]:PseudoUma,e:number,[u]:PseudoUma,[l]:RaceLane,[s]:number,[c]:number}[][]} events
+ * @typedef ReportEvent
+ * @property {PseudoUma} [a]
+ * @property {number} e
+ * @property {PseudoUma} [u]
+ * @property {RaceLane} [l]
+ * @property {number} [s]
+ * @property {number} [c]
+ * @property {number} [t]
+ */
+/**
+ * @typedef ReportEventGroup
+ * @property {number} e
+ * @property {ReportEvent[]} p
+ * @property {number} t
+ */
+/**
+ * @param {ReportEvent[][]} events
  * @param {PseudoUma[]} in_race_list
  * @param {RaceInfo} info
  * @param {number} race_id
  */
 function sub_simulate_report(events, in_race_list, info, race_id) {
-  const dict = {},
-    report_list = [];
+  /** @type {Record<string,ReportEventGroup>} */
+  const dict = {};
+  /** @type {ReportEventGroup[]} */
+  let report_list = [];
   events.forEach((l, i) =>
     l.forEach((e) =>
       (dict[e.e] || (dict[e.e] = { e: e.e, p: [], t: i })).p.push({
@@ -153,17 +178,29 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
       }),
     ),
   );
-  let report_count = 2,
-    loc_change = [];
+  let loc_change = [];
   if (dict[race_event_enum.loc_change]) {
     loc_change = dict[race_event_enum.loc_change].p;
     delete dict[race_event_enum.loc_change];
   }
-  Object.values(race_event_enum).forEach((e) => {
-    if (dict[e] && report_count-- > 0) {
-      report_list.push(dict[e]);
-    }
-  });
+  if (dict[race_event_enum.finish]) {
+    report_list.push(dict[race_event_enum.finish]);
+  } else {
+    report_list = sort_list(
+      Object.values(dict),
+      (entry) =>
+        event_enum_length -
+        entry.e +
+        event_enum_length *
+          (entry.p.findIndex(
+            (e) => e.u?.index_chara >= 0 || e.u?.legend >= 0,
+          ) !==
+            -1) +
+        event_enum_length *
+          (entry.p.findIndex((e) => e.u?.index_chara >= 0 && !e.u?.legend) !==
+            -1),
+    ).slice(0, report_count);
+  }
   if (go_in) {
     let ret_list = [];
     if (loc_change.length > 0) {
@@ -309,8 +346,12 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
         entry.p
           .filter((e, i, l) => l.findIndex((v) => v.u === e.u) === i)
           .slice(0, 2)
-          .forEach((e) => name.push(' 与 ', e.u.get_colored_name()));
-        name.shift();
+          .forEach((e, i) => {
+            if (i > 0) {
+              name.push(' 与 ');
+            }
+            name.push(e.u.get_colored_name());
+          });
         switch (entry.e) {
           case race_event_enum.final_push:
             if (final_push_pop !== undefined) {
@@ -343,9 +384,8 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
           case race_event_enum.temp_end:
           case race_event_enum.temp_continue:
           case race_event_enum.lost_stamina:
-            if (name) {
-              ret_list.push(...get_random_entry(other_handlers[entry.e])(name));
-            }
+          case race_event_enum.temp_wrong_style:
+            ret_list.push(...get_random_entry(other_handlers[entry.e])(name));
             break;
           default:
             ret_list.push(

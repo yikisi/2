@@ -315,7 +315,7 @@ module.exports = async () => {
       teio,
     );
 
-    await era.printAndWait('Do you want to play this a strange game again ?', {
+    await era.printAndWait('Do you want to play this a strange game again?', {
       align: 'center',
       isParagraph: true,
     });

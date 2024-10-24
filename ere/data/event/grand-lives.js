@@ -8,13 +8,6 @@ class GrandLives {
     this.obj = get('flag:大舞台') || set('flag:大舞台', [{}]);
   }
 
-  clean() {
-    this.obj = set(
-      'flag:大舞台',
-      this.obj.filter((e) => e),
-    );
-  }
-
   /** @type {number[]} l */
   add(l) {
     if (this.obj.length === 0) {

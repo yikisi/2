@@ -56,7 +56,7 @@ module.exports = async (_, __, event_object) => {
       ]);
       await era.printAndWait([
         taste.get_colored_name(),
-        ' 「啪」地把折扇打开，遮住了流转的眼波……',
+        '「啪」地把折扇打开，遮住了流转的眼波……',
       ]);
       life_marks.who_am_i = 2;
       break;

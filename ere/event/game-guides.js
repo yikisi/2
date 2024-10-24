@@ -396,6 +396,7 @@ class GameGuides {
         .sub(event_hooks.school_chairman)
         .add(event_hooks.school_visitors);
       this.obj[this.school_visitors.name] = 1;
+      return true;
     }
   }
 
@@ -419,6 +420,7 @@ class GameGuides {
         .sub(event_hooks.school_clinic)
         .add(event_hooks.school_god);
       this.obj[this.school_god.name] = 1;
+      return true;
     }
   }
 

@@ -125,7 +125,7 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.pet_nipple] = async (attacker, defender, hook) => {
-    if (defender.id === 1) {
+    if (defender.sex_code === 1) {
       return;
     }
     if (hook.arg) {
