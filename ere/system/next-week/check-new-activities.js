@@ -109,7 +109,7 @@ async function check_new_activities(cur_round, in_team_list) {
       ]);
     }
   });
-  const event_weeks = (cur_round - 1) % 48,
+  const event_weeks = (cur_round - 1) % 48 || 48,
     curr_race_list = {};
   foreign_race_list.forEach((r) => {
     const { date, track } = race_infos[r];
