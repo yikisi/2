@@ -58,10 +58,16 @@ module.exports = async (hook, _, event_object) => {
     era.println();
 
     await era.printAndWait(`${me.name} 看着笑嘻嘻的担当，如此回复到——`);
-    era.printButton('「我觉得应该先哈——地这样，然后侂阿——」', 1);
-    era.printButton('「舞就是武……就是修炼以臻极境！」', 2);
     era.printButton(
-      `「我想我们可以通过这种训练控制身体的协调性，唔，试一试改变重心位置以造成瞬间的加速度用于冲线刹那？」`,
+      '「我觉得应该先哈——地这样，然后侂阿——」（力量&根性+20，技能点数+15）',
+      1,
+    );
+    era.printButton(
+      '「舞就是武……就是修炼以臻极境！」（速度+30，技能点数+15，体力+200）',
+      2,
+    );
+    era.printButton(
+      `「我想我们可以通过这种训练控制身体的协调性，唔，试一试改变重心位置以造成瞬间的加速度用于冲线刹那？」（速度+15，耐力+20，智力+30，技能点数+30）`,
       3,
     );
     const ret = await era.input();
@@ -70,12 +76,8 @@ module.exports = async (hook, _, event_object) => {
         get_attr_and_print_in_event(3, [0, 0, 20, 20, 0], 15) || wait_flag;
     } else if (ret === 2) {
       wait_flag =
-        get_attr_and_print_in_event(
-          3,
-          [30, 0, 0, 0, 0],
-          15,
-          JSON.parse('{"体力":200}'),
-        ) || wait_flag;
+        get_attr_and_print_in_event(3, [30], 15, JSON.parse('{"体力":200}')) ||
+        wait_flag;
     } else {
       wait_flag =
         get_attr_and_print_in_event(3, [15, 20, 0, 0, 30], 30) || wait_flag;
@@ -104,8 +106,8 @@ module.exports = async (hook, _, event_object) => {
 
     await teio.say_and_wait('一起来吧，训练员！');
     await era.printAndWait(`${me.name} 决定——`);
-    era.printButton('点头', 1);
-    era.printButton('「不，还是守规矩吧」', 2);
+    era.printButton('点头（耐力+15）', 1);
+    era.printButton('「不，还是守规矩吧」（根性+15）', 2);
     const ret = await era.input();
     if (ret === 1) {
       await era.printAndWait(
@@ -113,9 +115,7 @@ module.exports = async (hook, _, event_object) => {
       );
       await era.printAndWait('——如果没有被工作人员发现并教育的话就更好了。');
       era.println();
-      wait_flag =
-        get_attr_and_print_in_event(3, [0, 20, 0, 0, 0], 0) || wait_flag;
-      wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
+      wait_flag = get_attr_and_print_in_event(3, [0, 15], 0) || wait_flag;
     } else {
       await era.printAndWait(
         `小${teio.get_uma_sex_title()}看上去有点失望，不过还是退回到 ${
@@ -123,9 +123,9 @@ module.exports = async (hook, _, event_object) => {
         } 身边，与 ${me.name} 并肩同行在正路上走了。`,
       );
       era.println();
-      wait_flag =
-        get_attr_and_print_in_event(3, [0, 0, 0, 15, 0], 0) || wait_flag;
+      wait_flag = get_attr_and_print_in_event(3, [0, 0, 0, 15], 0) || wait_flag;
     }
+    wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
   } else if (event_arg === 'famous_in_famous') {
     await print_event_name('名人中的名人', teio);
 
@@ -254,23 +254,28 @@ module.exports = async (hook, _, event_object) => {
     era.println();
 
     await teio.say_and_wait(
-      `抱歉大家，我们还有事先行一步，感谢大家对我们的厚爱和支持，让我们等到赛场上再见吧。训—练—员—，跟帝王${teio.get_adult_sex_title()}出发吧？`,
+      `抱歉大家，我们还有事先行一步，感谢大家对我们的厚爱和支持，让我们等到赛场上再见吧。训～练～员～跟帝王${teio.get_adult_sex_title()}出发吧？`,
     );
     era.println();
 
     era.print(`${me.name} 顿感有些哭笑不得，只好回复——`);
-    era.printButton('「侍于无敌的帝王大人身旁，是在下的使命」', 1);
-    era.printButton('「竭尽所能，我的女士」', 2);
+    era.printButton('「侍于无敌的帝王大人身旁，是在下的使命」（智力+30）', 1);
+    era.printButton(
+      `「竭尽所能，我的${teio.get_adult_sex_title()}」（随机三项属性+15）`,
+      2,
+    );
     const ret = await era.input();
     if (ret === 1) {
       wait_flag =
         get_attr_and_print_in_event(3, [0, 0, 0, 0, 30], 10) || wait_flag;
-      wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
     } else {
       const attr_change = new Array(5).fill(0);
       gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] += 15));
       wait_flag = get_attr_and_print_in_event(3, attr_change, 10) || wait_flag;
     }
+    wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
+  } else {
+    return false;
   }
   wait_flag && (await era.waitAnyKey());
   return true;

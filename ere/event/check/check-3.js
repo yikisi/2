@@ -285,7 +285,10 @@ module.exports = class extends CustomizedCheck {
           new CharaTitles(3).get().findIndex((e) => e.n.endsWith('三冠')) !== -1
         ) {
           event_marks.famous_in_famous++;
-          add_event(event_hooks.out_start, event_obj);
+          add_event(
+            event_hooks.out_start,
+            event_obj.copy().set_arg('famous_in_famous'),
+          );
         } else {
           event_marks.famous_in_famous = -1;
         }

@@ -69,11 +69,13 @@ module.exports = async (_, __, event_object) => {
     era.println();
 
     era.print(`${me.name}——`);
-    era.printButton('「没错，就保持这股气势吧！」', 1);
-    era.printButton('「嗯，让我们一起努力，迈向胜利！」', 2);
-    era.printButton('「唔……按照你的目标，我们似乎得调整一下」', 3);
-    const ret = await era.input();
-    switch (ret) {
+    era.printButton('「没错，就保持这股气势吧！」（根性+20）', 1);
+    era.printButton('「嗯，让我们一起努力，迈向胜利！」（耐力+20）', 2);
+    era.printButton(
+      '「唔……按照你的目标，我们似乎得调整一下」（技能点数+20）',
+      3,
+    );
+    switch (await era.input()) {
       case 1:
         wait_flag =
           get_attr_and_print_in_event(3, [0, 0, 0, 20, 0], 0) || wait_flag;
