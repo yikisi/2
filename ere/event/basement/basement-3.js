@@ -13,6 +13,7 @@ const CustomizedBase = require('#/event/basement/basement-common');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const TeioLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3');
 const recruit_flags = require('#/data/event/recruit-flags');
 
@@ -335,7 +336,9 @@ module.exports = class extends CustomizedBase {
       me.get_colored_name(),
       ' 睁开双眼，打算用最简单也是最直接的办法——正面击败这位将 ',
       me.get_colored_name(),
-      ' 幽禁在此的小王。',
+      ' 幽禁在此的',
+      { color: get_chara_color(3), content: '帝王' },
+      '。',
     ]);
     await era.printAndWait([
       me.get_colored_name(),
