@@ -223,7 +223,7 @@ async function select_target(type) {
       ),
       (chara_id) => {
         return (
-          (era.get(`cflag:${chara_id}:成长阶段`) << 17) +
+          (Math.min(era.get(`cflag:${chara_id}:成长阶段`), 4) << 17) +
           (era.get(`love:${chara_id}`) << 10) +
           era.get(`relation:${chara_id}:0`)
         );

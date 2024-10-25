@@ -23,6 +23,8 @@ const print_save_page = require('#/page/page-save-game');
 const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
 
+const { get_custom_check } = require('#/event/check/check-factory');
+
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { get_celebration } = require('#/data/info-generator');
@@ -41,6 +43,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
     growth_stage = era.get(`cflag:${chara_id}:成长阶段`),
     not_in_same_loc =
       era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置'),
+    personal_action = get_custom_check(chara_id).get_personal_action(),
     registered_race = sys_reg_race(chara_id).curr;
   era.drawLine();
   era.printInColRows(
@@ -100,7 +103,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       },
       chara_id && era.get(`cflag:${chara_id}:节日事件标记`)
         ? {
-            accelerator: 209,
+            accelerator: 202,
             config: {
               buttonType: 'danger',
               disabled:
@@ -112,6 +115,14 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
               width: 6,
             },
             content: `一起庆祝 ${celebration}`,
+            type: 'button',
+          }
+        : { content: '', type: 'text' },
+      personal_action.name
+        ? {
+            accelerator: 203,
+            config: { width: 6 },
+            content: personal_action.name,
             type: 'button',
           }
         : { content: '', type: 'text' },
@@ -179,7 +190,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       era.drawLine();
       await sys_call_daily_event(chara_id, event_hooks.talk);
       break;
-    case 209:
+    case 202:
       era.set('flag:当前位置', location_enum.beach_market);
       sys_change_attr_and_print(0, '精力', -celebration_cost);
       sys_change_attr_and_print(chara_id, '精力', -50);
@@ -189,6 +200,11 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
         await sys_call_daily_event(chara_id, event_hooks.celebration, {});
       }
       era.set('flag:当前位置', location_enum.beach);
+      break;
+    case 203:
+      era.drawLine();
+      await personal_action.handle();
+      await era.waitAnyKey();
       break;
     case 401:
       await print_exp_page();

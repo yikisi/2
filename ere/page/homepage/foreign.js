@@ -24,6 +24,8 @@ const print_save_page = require('#/page/page-save-game');
 const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
 
+const { get_custom_check } = require('#/event/check/check-factory');
+
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { get_celebration } = require('#/data/info-generator');
@@ -48,6 +50,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
     cur_weeks = era.get('flag:当前回合数'),
     event_marks = new EventMarks(chara_id),
     registered_race = sys_reg_race(chara_id).curr,
+    personal_action = get_custom_check(chara_id).get_personal_action(),
     player_base = {
       stamina: era.get('base:0:体力'),
       time: era.get('base:0:精力'),
@@ -204,6 +207,14 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             type: 'button',
           }
         : { content: '', type: 'text' },
+      personal_action.name
+        ? {
+            accelerator: 207,
+            config: { width: 6 },
+            content: personal_action.name,
+            type: 'button',
+          }
+        : { content: '', type: 'text' },
     ],
     [
       {
@@ -296,6 +307,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         era.drawLine();
         await sys_call_daily_event(chara_id, event_hooks.celebration, {});
       }
+      break;
+    case 207:
+      era.drawLine();
+      await personal_action.handle();
+      await era.waitAnyKey();
       break;
     case 401:
       await print_exp_page();
