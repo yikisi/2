@@ -5,6 +5,8 @@ EraUma v1.001，适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/e
 
 ## Added
 
+* 新增育成目标预览功能，现在在招募界面可以预览该角色的育成目标
+
 ## Changed
 
 * 现在黄金船的随机事件【突击！黄金船的超级残酷二选一测验！～你能存活下来吗？～】中某个选项能够正确地在等待10秒后出现了
