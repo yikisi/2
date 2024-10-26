@@ -379,7 +379,7 @@ module.exports = async (hook, _, event_object) => {
     await era.printAndWait('「好啦好啦，开个玩笑——」');
     await era.printAndWait('「我们去吃冰吧，吃冰！把体温降下来！」');
 
-    era.printButton('「行，我去买吧。」（马币-5，好感度+10，爱慕+5）', 1);
+    era.printButton('「行，我去买吧。」（马币-5，好感+10，爱慕+5）', 1);
     await era.input();
 
     await era.printAndWait(

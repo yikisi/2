@@ -53,11 +53,18 @@ module.exports = class extends CustomizedCheck {
     }
     if (era.get(`status:${this.id}:腿伤`)) {
       if (extra_flag.rank > 1) {
-        sys_change_fame(-5);
-      }
-      if (extra_flag.rank > 5) {
-        sys_change_fame(-5);
-        sys_change_pressure(this.id, 2000);
+        if (
+          extra_flag.race === race_enum.japa_cup ||
+          extra_flag.race === race_enum.arim_kin
+        ) {
+          era.set('flag:强制BE', this.id);
+        } else {
+          sys_change_fame(-5);
+          if (extra_flag.rank > 5) {
+            sys_change_fame(-5);
+            sys_change_pressure(this.id, 2000);
+          }
+        }
       }
     } else if (
       era.get(`cflag:${this.id}:育成回合计时`) >= 96 &&

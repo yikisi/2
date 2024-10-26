@@ -5,6 +5,11 @@
  */
 const era = require('#/era-electron');
 
+const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
+const {
+  begin_and_init_ero,
+  end_ero_and_train,
+} = require('#/system/ero/sys-prepare-ero');
 const {
   sys_get_callname,
   sys_love_uma_in_event,
@@ -19,11 +24,6 @@ const CharaTitles = require('#/data/chara-titles');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
-const {
-  begin_and_init_ero,
-  end_ero_and_train,
-} = require('#/system/ero/sys-prepare-ero');
 
 /**
  * @param {number} hook
