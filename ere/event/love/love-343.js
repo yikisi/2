@@ -78,7 +78,7 @@ module.exports = async (_, __, event_object) => {
     ]);
     await era.printAndWait([
       may.sex,
-      ' 说自己的真名是 ',
+      '说自己的真名是 ',
       may.get_colored_actual_name(),
       '，并为隐藏身份至今向 ',
       me.get_colored_name(),
@@ -90,7 +90,7 @@ module.exports = async (_, __, event_object) => {
   await era.printAndWait([
     '末了，',
     may.sex,
-    ' 向 ',
+    '向 ',
     me.get_colored_name(),
     ' 举杯致意。',
   ]);

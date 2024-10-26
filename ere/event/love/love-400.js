@@ -458,9 +458,9 @@ module.exports = async (hook, _, event_object) => {
     await silence.say_and_wait([
       '被单都有点湿了，但是……好像……好点了，明明在成为三冠',
       silence.get_uma_sex_title(),
-      '之前，都不应该有这种念头才对的。但是……忘不了 ',
+      '之前，都不应该有这种念头才对的。但是……忘不了',
       me.sex,
-      ' 啊。',
+      '啊。',
     ]);
     await silence.say_and_wait(
       '不行……这个时候，已经到了这种时候，为了我们的愿望，我绝对不能有任何的分心……',

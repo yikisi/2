@@ -52,7 +52,7 @@ module.exports = async (hook, extra_flag, event_object) => {
       me.get_colored_name(),
       ' 有所发现的话，',
       aoi.sex,
-      ' 希望 ',
+      '希望 ',
       me.get_colored_name(),
       ' 再给 ',
       meek.get_colored_name(),

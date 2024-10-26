@@ -667,7 +667,7 @@ module.exports = async (hook, { fumble, train }) => {
       await train_fail_common(tachyon, me);
       await tachyon.print_and_wait('……不能啊');
       await tachyon.print_and_wait('已经不能回头了');
-      await tachyon.print_and_wait([me.sex, ' 的支持，让我走到了这一步']);
+      await tachyon.print_and_wait([me.sex, '的支持，让我走到了这一步']);
       await tachyon.print_and_wait('要是自己现在抽身，那可真是天大的笑话了');
       await tachyon.print_and_wait('为了相信我的人……再坚持下去吧');
     } else if (sys_reg_race(32).curr.race === race_enum.toky_yus) {

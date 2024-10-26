@@ -466,9 +466,9 @@ module.exports = (handlers) => {
     await urara.print_and_wait([
       '与 ',
       callname,
-      ' 告别并目送着 ',
+      ' 告别并目送着',
       me.sex,
-      ' 离开自己的视线后，我转身走进了休息室。',
+      '离开自己的视线后，我转身走进了休息室。',
     ]);
     if (era.get('relation:52:0') > 150) {
       await urara.print_and_wait([

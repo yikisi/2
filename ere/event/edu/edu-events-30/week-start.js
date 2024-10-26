@@ -843,9 +843,9 @@ module.exports = (handlers) => {
     await rice.say_and_wait(['但是，', self_name, ' 现在已经不是一个人了。']);
     await rice.say_and_wait([
       self_name,
-      ' 现在能站在这里，也是因为 ',
+      ' 现在能站在这里，也是因为',
       me.sex,
-      ' 的关系',
+      '的关系',
     ]);
     await rice.say_and_wait([
       '给了 ',

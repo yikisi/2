@@ -321,7 +321,7 @@ module.exports = (handlers) => {
     await me.print_and_wait([
       '一面说着，',
       acute.sex,
-      ' 轻手熟路的从水池旁「变」出了一根牙刷。',
+      '轻手熟路的从水池旁「变」出了一根牙刷。',
     ]);
     await acute.say_and_wait([
       '呐，要我来帮 ',

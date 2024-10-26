@@ -327,7 +327,7 @@ module.exports = (handlers) => {
           maya.get_colored_name(),
           ' 这么厉害。一瞬间还以为',
           maya.sex,
-          ' 会赢过',
+          '会赢过',
           brian.get_colored_name(),
           '。',
         ]);

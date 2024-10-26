@@ -19,9 +19,9 @@ module.exports = (handlers) => {
       '（您）',
     ]);
     await in_urara.say_as_unknown_and_wait([
-      '只是有些时候，就算能将身体挡在 ',
+      '只是有些时候，就算能将身体挡在',
       urara.sex,
-      ' 的前面，您又要怎么修补受伤的内心呢？',
+      '的前面，您又要怎么修补受伤的内心呢？',
     ]);
     era.drawLine();
     await era.printAndWait([

@@ -820,7 +820,7 @@ module.exports = (handlers) => {
       tachyon.get_colored_name(),
       ' 是无法满足的',
     ]);
-    await tachyon.print_and_wait(['是 ', me.sex, ' 的光，温暖了自己']);
+    await tachyon.print_and_wait(['是', me.sex, '的光，温暖了自己']);
     await tachyon.print_and_wait('让自己产生了希望，对比赛的渴望');
     await tachyon.print_and_wait('所以请不要……不要把属于自己的光夺走');
     era.println();
