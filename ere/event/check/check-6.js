@@ -29,8 +29,8 @@ module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
     const edu_marks = new OguriEduMarks();
     if (
-      get('cflag:6:育成回合计时') >= 96 &&
-      get('cflag:6:育成回合计时') <= 95 + 24 &&
+      get(`cflag:${this.id}:育成回合计时`) >= 96 &&
+      get(`cflag:${this.id}:育成回合计时`) <= 95 + 24 &&
       race_infos[extra_flag.race].race_class === class_enum.G1 &&
       extra_flag.rank <= 3 &&
       edu_marks.aim_check < 2
@@ -40,7 +40,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const race_history = new RaceHistory(7),
+    const race_history = new RaceHistory(this.id),
       races = race_history.get(),
       race_list = race_history.get_values(),
       titles = [];

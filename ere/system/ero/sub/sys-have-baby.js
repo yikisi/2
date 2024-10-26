@@ -205,7 +205,7 @@ async function sys_have_baby(mother_id) {
     ).forEach((talent_id) =>
       era.set(
         `talent:${child_id}:${talent_id}`,
-        talent_id <= 1006 ? (Math.random() > 0.5) * 5 - 4 : 1,
+        talent_id >= 60 ? (Math.random() > 0.5) * 5 - 4 : 1,
       ),
     );
 

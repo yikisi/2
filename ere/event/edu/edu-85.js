@@ -554,9 +554,9 @@ out_church_handlers[95 + 1] = async (ruby, me, r_call_m, m_call_r, flags) => {
       ]);
       await ruby.say_and_wait('吵闹过头了。');
       await era.printAndWait([
-        '得到了 ',
+        '得到了',
         ruby.sex_code === 1 ? '少爷' : '大小姐',
-        ' 笑着给出的不留情面的评价。',
+        '笑着给出的不留情面的评价。',
       ]);
   }
   era.println();
