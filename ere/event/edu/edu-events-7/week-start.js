@@ -642,9 +642,11 @@ module.exports = async (hook, _, event_object) => {
     await gold_ship.say_and_wait(
       '唏！那边那位训练员！要不要跟小金船一起到海边拔萝卜啊！',
     );
-    await era.printAndWait(
-      '原来是问题儿童黄金船……而且海边哪有什么萝卜可以拔啊？',
-    );
+    await era.printAndWait([
+      '原来是问题儿童 ',
+      gold_ship.get_colored_name(),
+      '……而且海边哪有什么萝卜可以拔啊？',
+    ]);
     era.printButton('「你要拔，那便拔！」（马币+20）', 1);
     era.printButton('「总觉得有点可疑……」（体力+100）', 2);
     if ((await era.input()) === 1) {
