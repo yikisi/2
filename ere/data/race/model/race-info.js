@@ -113,17 +113,6 @@ track_names[track_enum.kentucky] = '丘吉尔园';
 track_names[track_enum.baltimore] = '宾利高';
 track_names[track_enum.new_york] = '贝蒙园';
 
-/**
- * G1比赛赏金 现实对游戏赏金折算 1w日元:1马币
- * 其他比赛 折算 1w:2马币
- * 这样折算的话 顶流G2的价值已经几乎约等于便宜G1了
- * 可以考虑扣成1.75左右？
- */
-const prize_ratio = {
-  G1: 0.75,
-  others: 1.25,
-};
-
 class RaceSlope {
   /**
    * @param {number} start
@@ -339,9 +328,7 @@ module.exports = class RaceInfo {
     this.limit = limit;
     this.date = date;
     this.daytime = daytime;
-    this.prize =
-      prize *
-      (this.race_class === class_enum.G1 ? prize_ratio.G1 : prize_ratio.others);
+    this.prize = prize;
     this.param_id = param_id;
   }
 

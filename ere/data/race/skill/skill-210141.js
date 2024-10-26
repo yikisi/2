@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   210141,
   '比赛之精髓・心',
-  '干劲是好调或绝好调时，少量提升耐力、根性、智力',
+  '干劲是较佳或极佳时，少量提升耐力、根性、智力',
   21014,
   1,
   UmaSkill.rarity_enum.normal,
