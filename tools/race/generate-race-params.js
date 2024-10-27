@@ -1,6 +1,5 @@
-const { execSync } = require('child_process');
 const { writeFileSync } = require('fs');
-const { join, resolve } = require('path');
+const { resolve } = require('path');
 
 /** @type {{id:number,lane:{type:string,start:number,length:number,end:number,name:string}[],slopes:{type:string,start:number,length:number,end:number,slope:number}[]}[]} */
 const data = require('./CourseParams.json');

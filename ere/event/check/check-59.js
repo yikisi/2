@@ -18,6 +18,8 @@ aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.fuch_sta, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.eliz_cup, 2)] = 4;
 
+aim_races[get_aim_race_index(race_enum.eliz_cup, 1)] = -4;
+
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
   (races) =>
@@ -26,31 +28,31 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
       race_enum.hans_fil,
       0,
       1,
-      (e) => e.pop === 1 && e.st === 2,
+      (e) => e.pop === 1 && e.st === 3,
     ) &&
     check_aim_race(
       races,
       race_enum.oka_sho,
       1,
       1,
-      (e) => e.pop === 1 && e.st === 2,
+      (e) => e.pop === 1 && e.st === 3,
     ) &&
     check_aim_race(
       races,
       race_enum.yush_him,
       1,
       1,
-      (e) => e.pop === 1 && e.st === 2,
+      (e) => e.pop === 1 && e.st === 3,
     ) &&
     check_aim_race(
       races,
       race_enum.shuk_sho,
       1,
       1,
-      (e) => e.pop === 1 && e.st === 2,
+      (e) => e.pop === 1 && e.st === 3,
     ) &&
     check_aim_race(races, race_enum.eliz_cup, 1, 1) &&
-    check_aim_race(races, race_enum.mile_cha, 2, 1),
+    check_aim_race(races, race_enum.eliz_cup, 2, 1),
   aim_races,
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));

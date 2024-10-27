@@ -173,7 +173,7 @@ module.exports = async (chara_id) => {
         if (era.get(`love:${chara.id}`) >= 50) {
           await era.printAndWait([
             chara.sex,
-            ' 很快同意了，',
+            '很快同意了，',
             me.get_couple_title(),
             ' 暂时卸下成年社畜的担子，好好痛快地玩了一天……',
           ]);

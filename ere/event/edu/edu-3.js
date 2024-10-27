@@ -247,17 +247,21 @@ handlers[event_hooks.office_prepare] = async (hook, _, event_object) => {
     `我……虽然我知道这个问题很蠢，但我还是想听到 ${me.name} 亲口告诉我……我们现在做的这些，真的有用吗？`,
   );
 
+  era.printButton('低下头去（耐力&根性&智力+15）', 1);
   era.printButton(
-    `${
-      me.name
-    } 低下头去，不愿或者不敢搭话，只顾对${teio.get_uma_sex_title()}的腿部进行护理`,
-    1,
+    '「我们的信念一定会得到回应。」（速度&力量+15，好感+5，干劲上升）',
+    2,
   );
-  era.printButton('「我们的信念一定会得到回应。」', 2);
   const ret = await era.input(),
     time_change = get_random_value(0, 50);
   era.println();
   if (ret === 1) {
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 低下头去，不愿或者不敢搭话，只顾对',
+      teio.get_uma_sex_title(),
+      '的腿部进行护理',
+    ]);
     wait_flag =
       get_attr_and_print_in_event(
         3,
@@ -269,12 +273,12 @@ handlers[event_hooks.office_prepare] = async (hook, _, event_object) => {
     wait_flag =
       get_attr_and_print_in_event(
         3,
-        [15, 0, 15, 0, 0],
+        [15, 0, 15],
         0,
         JSON.parse(`{"精力":${time_change}}`),
       ) || wait_flag;
-    wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
     wait_flag = sys_change_motivation(3, 1) || wait_flag;
+    wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
   }
   wait_flag && (await era.waitAnyKey());
   return true;
@@ -334,15 +338,18 @@ handlers[event_hooks.school_rooftop] = async (hook, _, event_object) => {
   era.println();
 
   era.print(`${me.name} 回答道——`);
-  era.printButton('「我一直都会是你的助力」', 1);
-  era.printButton('「祝成功，等到圆梦之后，我们再回到这里聚一下吧」', 2);
-  const ret = await era.input();
-  if (ret === 1) {
+  era.printButton(
+    '「我一直都会是你的助力」（速度&耐力&智力+20，体力+200，爱慕+1）',
+    1,
+  );
+  era.printButton(
+    '「祝成功，等到圆梦之后，我们再回到这里聚一下吧」（速度+15，力量&根性+20，好感+5）',
+    2,
+  );
+  if ((await era.input()) === 1) {
     await era.printAndWait(
       `${teio.get_teen_sex_title()}躬身，冲 ${me.name} 灿烂一笑。`,
     );
-    era.println();
-    wait_flag = sys_love_uma(3, 1) || wait_flag;
     wait_flag =
       get_attr_and_print_in_event(
         3,
@@ -350,12 +357,12 @@ handlers[event_hooks.school_rooftop] = async (hook, _, event_object) => {
         0,
         JSON.parse('{"体力":200}'),
       ) || wait_flag;
+    wait_flag = sys_love_uma(3, 1) || wait_flag;
   } else {
     await teio.say_and_wait('又是一个约定，记好了哦～');
-    era.println();
-    wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
     wait_flag =
       get_attr_and_print_in_event(3, [15, 0, 20, 20, 0], 0) || wait_flag;
+    wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
   }
   wait_flag && (await era.waitAnyKey());
   return true;
@@ -403,17 +410,16 @@ handlers[event_hooks.office_rest] = async (hook, _, event_object) => {
   era.println();
 
   era.print(`${me.name} 接下来要怎样对${teio.sex}呢——`);
-  era.printButton('缓慢地，从发根轻柔地往下抚摸，直至尾稍末端', 1);
-  era.printButton(`因为太累……不知不觉中 ${me.name} 和${teio.sex}都睡着了。`, 2);
+  era.printButton(
+    '缓慢地，从发根轻柔地往下抚摸，直至尾稍末端（技能点数+30，体力+50～100，好感+5）',
+    1,
+  );
+  era.printButton(
+    `因为太累……不知不觉中 ${me.name} 和${teio.sex}都睡着了。（耐力&根性+20）`,
+    2,
+  );
   if (era.get('love:3') >= 50) {
-    era.printButton(
-      ` ${me.name} 起了坏心眼，先挠了挠${
-        teio.sex
-      }的耳根和尻里（控制尾巴的内侧无毛处），小${teio.get_uma_sex_title()}浑身颤抖时 ${
-        me.name
-      } 又改变了策略，用按摩手法捏遍${teio.sex}的全身……`,
-      3,
-    );
+    era.printButton('坏心思的恶作剧（速度&力量&智力+20，爱慕+1）', 3);
   }
   const ret = await era.input();
   const time_change = get_random_value(0, 50);
@@ -421,8 +427,6 @@ handlers[event_hooks.office_rest] = async (hook, _, event_object) => {
     await era.printAndWait(
       `${me.name} 五指并作掌，用刚好的力度从头到尾顺了一遍毛，掌间传来一阵松软，让 ${me.name} 的心情也愉快了起来。`,
     );
-    era.println();
-    wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
     wait_flag =
       get_attr_and_print_in_event(
         3,
@@ -432,8 +436,8 @@ handlers[event_hooks.office_rest] = async (hook, _, event_object) => {
           `{"体力":${get_random_value(50, 100)},"精力":${time_change}}`,
         ),
       ) || wait_flag;
+    wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
   } else if (ret === 2) {
-    era.println();
     wait_flag =
       get_attr_and_print_in_event(
         3,
@@ -442,8 +446,18 @@ handlers[event_hooks.office_rest] = async (hook, _, event_object) => {
         JSON.parse(`{"精力":${time_change}}`),
       ) || wait_flag;
   } else {
-    era.println();
-    wait_flag = sys_love_uma(3, 1) || wait_flag;
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 起了坏心眼，先挠了挠',
+      teio.sex,
+      '的耳根和尻里（控制尾巴的内侧无毛处），小',
+      teio.get_uma_sex_title(),
+      '浑身颤抖时 ',
+      me.get_colored_name(),
+      ' 又改变了策略，用按摩手法捏遍',
+      teio.sex,
+      '的全身……',
+    ]);
     wait_flag =
       get_attr_and_print_in_event(
         3,
@@ -451,6 +465,7 @@ handlers[event_hooks.office_rest] = async (hook, _, event_object) => {
         0,
         JSON.parse(`{"精力":${time_change}}`),
       ) || wait_flag;
+    wait_flag = sys_love_uma(3, 1) || wait_flag;
   }
   wait_flag && (await era.waitAnyKey());
   return true;
@@ -513,11 +528,11 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
     );
 
     await era.printAndWait(`${me.name} 会——`);
-    era.printButton('再买一杯', 1);
-    era.printButton('「其实我比较喜欢喝无糖无味的茶水……」', 2);
+    era.printButton('再买一杯（智力+20，好感+5）', 1);
+    era.printButton('「其实我比较喜欢喝无糖无味的茶水……」（耐力&根性+15）', 2);
     if (love > 50) {
       era.printButton(
-        `接过${teio.sex}手中的杯子，用上面的吸管品尝完后再还给${teio.sex}`,
+        `接过${teio.sex}手中的杯子，用上面的吸管品尝完后再还给${teio.sex}（速度&力量+15，体力+150，爱慕+1）`,
         3,
       );
     }
@@ -528,15 +543,13 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
           teio.sex
         }的头，转身去给自己买了一杯。举起蜂蜜特饮放在唇边，指间残留着的${teio.get_uma_sex_title()}发香和甜美的蜂蜜味道混在一起，让人陶醉……`,
       );
-      era.println();
-      wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
       wait_flag =
         get_attr_and_print_in_event(3, [0, 0, 0, 0, 20], 0) || wait_flag;
+      wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
     } else if (ret === 2) {
       await era.printAndWait(
         `${me.name} 略显尴尬地清了清嗓子，婉言拒绝了自家担当的邀请。${teio.sex}眯起眼睛，似乎笑得更愉快了。`,
       );
-      era.println();
       wait_flag =
         get_attr_and_print_in_event(3, [0, 15, 0, 15, 0], 0) || wait_flag;
     } else {
@@ -558,8 +571,6 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
       await era.printAndWait(
         `继续行走之前，${me.name} 注意到${teio.sex}似乎刻意规避 ${me.name} 的视线，小心地又用吸管喝了几口饮料……`,
       );
-      era.println();
-      wait_flag = sys_love_uma(3, 1) || wait_flag;
       wait_flag =
         get_attr_and_print_in_event(
           3,
@@ -567,6 +578,7 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
           0,
           JSON.parse('{"体力":150}'),
         ) || wait_flag;
+      wait_flag = sys_love_uma(3, 1) || wait_flag;
     }
   } else if (event_object?.arg === 'uma_shopping') {
     await print_event_name(`${teio.get_uma_sex_title()}的……血拼！`, teio);
@@ -587,14 +599,15 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
     await era.printAndWait(
       ` ${me.name} 仰天长啸，算是认了命，催动双腿向声音来源处靠拢——`,
     );
-    era.printButton('拼命跟上帝王的节奏', 1);
     era.printButton(
-      '按照事先划好的路线，先一步到达目标位置，等待帝王出现，装好东西后再来一轮',
+      '拼命跟上帝王的节奏（速度&力量&根性+20，体力+200，好感+10）',
+      1,
+    );
+    era.printButton(
+      '按照事先划好的路线，先一步到达目标位置，等待帝王出现，装好东西后再来一轮（耐力+20，智力+30，好感+5）',
       2,
     );
-    const ret = await era.input();
-    if (ret === 1) {
-      wait_flag = sys_like_chara(3, 0, 10) || wait_flag;
+    if ((await era.input()) === 1) {
       wait_flag =
         get_attr_and_print_in_event(
           3,
@@ -602,10 +615,11 @@ handlers[event_hooks.out_shopping] = async (hook, _, event_object) => {
           0,
           JSON.parse('{"体力":200}'),
         ) || wait_flag;
+      wait_flag = sys_like_chara(3, 0, 10) || wait_flag;
     } else {
-      wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
       wait_flag =
         get_attr_and_print_in_event(3, [0, 20, 0, 0, 30], 0) || wait_flag;
+      wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
     }
   }
   wait_flag && (await era.waitAnyKey());

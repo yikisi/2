@@ -88,7 +88,7 @@ class GameGuides {
       if (save_check) {
         era.println();
 
-        await era.printAndWait([tokino.sex, ' 眯起了双眼，继续说道。']);
+        await era.printAndWait([tokino.sex, '眯起了双眼，继续说道。']);
         era.println();
 
         await tokino.say_and_wait('不过，您的经验丰富，一定能如鱼得水吧。');

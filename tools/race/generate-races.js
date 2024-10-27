@@ -145,7 +145,9 @@ csv.forEach((e) => {
   },\n`;
   output += `${e[18]},\n`;
   // 赏金
-  output += `${Number(e[17].replace(/\s*$/, '')) / 4},\n`;
+  output += `${Math.floor(
+    (Number(e[17].replace(/\s*$/, '')) * (e[8] === 'G1' ? 0.75 : 1.25)) / 4,
+  )},\n`;
   // 参数号
   output += `${e[0]},\n`;
   output += ');';

@@ -41,7 +41,7 @@ handlers[74] = async (tachyon, me, callname) => {
     tachyon.get_colored_name(),
     ' 的实验室，',
     tachyon.sex,
-    ' 一如既往的接过便当然后递给 ',
+    '一如既往的接过便当然后递给 ',
     me.get_colored_name(),
     ' 今天的药水，',
   ]);

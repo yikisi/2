@@ -272,7 +272,10 @@ module.exports = (handlers) => {
   handlers[13] = async () => {
     const ret = await select_target_in_storage(
       '讨厌药',
-      (e) => e && !era.get(`status:${e}:讨厌药`),
+      (id) =>
+        id &&
+        !era.get(`status:${id}:讨厌药`) &&
+        new LimitLoveStatus(id).is_empty(),
     );
     if (ret !== undefined) {
       const chara = get_chara_talk(ret);
@@ -294,13 +297,23 @@ module.exports = (handlers) => {
   };
 
   handlers[14] = async () => {
-    const aim = await select_target_in_storage(
-      '抑制药',
-      (chara_id) =>
-        chara_id &&
-        era.get(`love:${chara_id}`) > 40 &&
-        new LimitLoveStatus(chara_id).is_empty(),
-    );
+    const love_setting = era.get('flag:回合爱慕惩罚');
+    const aim = await select_target_in_storage('抑制药', (id) => {
+      const love = era.get(`love:${id}`),
+        reject = era.get(`cflag:${id}:爱慕暂拒`);
+      return (
+        id &&
+        love > 40 &&
+        (love_setting ||
+          (love !== 49 && love !== 74 && love !== 89 && love !== 99) ||
+          reject === 49 ||
+          reject === 74 ||
+          reject === 89 ||
+          reject === 99) &&
+        !era.get(`status:${id}:讨厌药`) &&
+        new LimitLoveStatus(id).is_empty()
+      );
+    });
     if (aim !== undefined) {
       const chara = get_chara_talk(aim);
       await era.printAndWait([

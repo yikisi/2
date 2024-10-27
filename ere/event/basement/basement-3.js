@@ -13,6 +13,7 @@ const CustomizedBase = require('#/event/basement/basement-common');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const TeioLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3');
 const recruit_flags = require('#/data/event/recruit-flags');
 
@@ -267,7 +268,6 @@ module.exports = class extends CustomizedBase {
       me = get_chara_talk(0),
       teio = get_chara_talk(3);
     await this.battle_success();
-    era.println();
     if (era.get('status:3:腿伤')) {
       await teio.say_and_wait([callname, '？对，对不起！但，不要再离开我了……']);
       await era.printAndWait([]);
@@ -333,14 +333,17 @@ module.exports = class extends CustomizedBase {
       me.get_colored_name(),
       '对现在的情形思来想去，脑中模拟了各种状况和计划，总觉得不行或已经被证明过无用。',
       me.get_colored_name(),
-      ' 睁开双眼，打算用最简单也是最直接的办法——正面击败这位将 ',
+      ' 睁开双眼，打算用最简单也是最直接的办法——正面击败那位将 ',
       me.get_colored_name(),
-      ' 幽禁在此的小王。',
+      ' 幽禁于此的',
+      { color: get_chara_color(3), content: '帝王' },
+      '。',
     ]);
     await era.printAndWait([
       me.get_colored_name(),
       '回想起在训练员生涯中向担当提出过的各种用肌肉发力的法门，深吸一口气，准备再次亲身实践。',
     ]);
+    era.println();
   }
 
   find_escape(out_of_prison, s_level_up, is_back) {

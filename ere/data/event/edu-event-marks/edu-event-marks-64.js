@@ -1,6 +1,8 @@
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 class PamaEduMarks extends EduEventMarks {
+  // 育成目标检查 - 经典年6月2周前重赏优胜次数
+  aim_check;
   // 依存心
   half_life;
 

@@ -327,9 +327,9 @@ module.exports = (handlers) => {
         ' 拉起一处丝袜，「啪」的松手。',
       ]);
       await era.printAndWait([
-        '又惊又羞的 ',
+        '又惊又羞的',
         ruby.sex_code === 1 ? '小少爷' : '大小姐',
-        ' 咬着下唇瞪着 ',
+        '咬着下唇瞪着 ',
         me.get_colored_name(),
         '，就在 ',
         me.get_colored_name(),

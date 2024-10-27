@@ -223,7 +223,7 @@ week_end_handlers[47 + 24] = async (ss, me, callname, flags, event_object) => {
   ]);
   era.printButton('「我哪里都不去，我在这里陪着你」（好感+50，干劲+1……）', 1);
   era.printButton(
-    '「我现在就去给你找条毛巾擦一下，等会就回来」（好感度+20，干劲-1）',
+    '「我现在就去给你找条毛巾擦一下，等会就回来」（好感+20，干劲-1）',
     2,
   );
   if ((await era.input()) === 1) {

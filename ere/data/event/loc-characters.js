@@ -8,22 +8,12 @@ class LocCharacters {
     this.obj = get('flag:NPC位置') || set('flag:NPC位置', {});
   }
 
-  clean() {
-    Object.keys(this.obj).forEach((e) => {
-      if (this.obj[e] instanceof Array) {
-        this.obj[e] = this.obj[e].filter((v) => v);
-      } else {
-        delete this.obj[e];
-      }
-    });
-  }
-
   /**
    * @param {number} loc
    * @returns {number[]}
    */
   get(loc) {
-    return (this.obj[loc] = this.obj[loc] || []);
+    return (this.obj[loc] ||= []);
   }
 
   /**

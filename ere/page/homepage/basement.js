@@ -161,12 +161,13 @@ module.exports = async (_, save_and_next_week, flags) => {
         action_time = get_random_value(30, 60);
         my_life_marks.b_time_buff = -1;
         await era.printAndWait([
+          '【',
           me.get_colored_name(),
           ' 尝试讨好',
           ...(is_awake === 2
             ? [get_chara_talk(chara_list[1]).sex, '们']
             : [' ', get_chara_talk(chara_list[1]).get_colored_name()]),
-          '……',
+          '……】',
         ]);
         await get_custom_basement(chara_list[1]).flatter(
           is_awake === 2 ? chara_list[2] : undefined,

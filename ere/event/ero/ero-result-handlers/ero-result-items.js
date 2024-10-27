@@ -86,7 +86,10 @@ module.exports = (handlers) => {
         clean_part(new EroParticipant(extra_flag.user, part_enum.clitoris));
         era.set(
           `palam:${extra_flag.user}:阴茎快感`,
-          era.get(`palam:${extra_flag.user}:外阴快感`),
+          Math.max(
+            era.get(`palam:${extra_flag.user}:阴茎快感`),
+            era.get(`palam:${extra_flag.user}:外阴快感`),
+          ),
         );
         era.set(`palam:${extra_flag.user}:外阴快感`, 0);
         era.set(

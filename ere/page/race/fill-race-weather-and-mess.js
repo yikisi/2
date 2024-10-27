@@ -56,6 +56,7 @@ function fill_race_weather_and_mess(race, chara, _info) {
         [],
         info.limit,
         0,
+        0,
         info.prize,
         aim_info.param_id,
       );

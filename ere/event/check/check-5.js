@@ -1,5 +1,6 @@
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
+const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const check_aim_race = require('#/event/snippets/check-aim-race');
@@ -8,7 +9,6 @@ const { get_chara_color } = require('#/data/chara-colors');
 const FujikiEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-5');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
-const CustomizedCheck = require('#/event/check/check-common');
 
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {

@@ -8,6 +8,7 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const print_page_header = require('#/page/components/page-header');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const GameGuides = require('#/event/game-guides');
 const { check_rec_script, get_custom_rec } = require('#/event/rec/rec-factory');
 
@@ -116,6 +117,12 @@ async function print_rec_page() {
                 content: era.get(`callname:${chara_id}:-1`),
                 type: 'button',
               },
+              {
+                accelerator: chara_id + 500,
+                config: { align: 'center' },
+                content: '育成目标预览',
+                type: 'button',
+              },
             ],
             config: { width: 4 },
           };
@@ -170,6 +177,34 @@ async function print_rec_page() {
         );
       }
       flag_recruit = false;
+    } else if (ret > 500) {
+      era.printMultiColumns(
+        [
+          {
+            config: {
+              content: `${era.get(`static:${ret - 500}:name`)} 的育成目标`,
+              position: 'left',
+            },
+            type: 'divider',
+          },
+          ...get_custom_check(ret - 500)
+            .get_edu_aims()
+            .map((e) => {
+              const g1 = e.content.indexOf('G1') !== -1,
+                champion = e.content.indexOf('1着') !== -1;
+              return {
+                config: {
+                  color: champion ? el_danger_color : undefined,
+                  fontWeight: g1 || champion ? 'bold' : 'normal',
+                },
+                content: e.content,
+                type: 'text',
+              };
+            }),
+        ],
+        { width: 12 },
+      );
+      await era.waitAnyKey();
     } else {
       era.drawLine();
       // 普通招募事件

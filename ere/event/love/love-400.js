@@ -5,6 +5,11 @@
  */
 const era = require('#/era-electron');
 
+const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
+const {
+  begin_and_init_ero,
+  end_ero_and_train,
+} = require('#/system/ero/sys-prepare-ero');
 const {
   sys_get_callname,
   sys_love_uma_in_event,
@@ -19,11 +24,6 @@ const CharaTitles = require('#/data/chara-titles');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
-const {
-  begin_and_init_ero,
-  end_ero_and_train,
-} = require('#/system/ero/sys-prepare-ero');
 
 /**
  * @param {number} hook
@@ -458,9 +458,9 @@ module.exports = async (hook, _, event_object) => {
     await silence.say_and_wait([
       '被单都有点湿了，但是……好像……好点了，明明在成为三冠',
       silence.get_uma_sex_title(),
-      '之前，都不应该有这种念头才对的。但是……忘不了 ',
+      '之前，都不应该有这种念头才对的。但是……忘不了',
       me.sex,
-      ' 啊。',
+      '啊。',
     ]);
     await silence.say_and_wait(
       '不行……这个时候，已经到了这种时候，为了我们的愿望，我绝对不能有任何的分心……',

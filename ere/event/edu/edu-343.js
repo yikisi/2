@@ -35,7 +35,7 @@ module.exports = async (hook, extra_flag, event_object) => {
       me.get_colored_name(),
       ' 认出',
       may.sex,
-      ' 是之前认识的 ',
+      '是之前认识的 ',
       may.get_colored_name(),
       '。',
     ]);

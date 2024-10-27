@@ -87,7 +87,7 @@ async function check_race_events(race, info, team_contestants) {
           me.get_colored_name(),
           ' 认出',
           etsuko.sex,
-          ' 正是每年负责URA颁奖的 ',
+          '正是每年负责URA颁奖的 ',
           etsuko.get_colored_name(),
           '。',
         ]);

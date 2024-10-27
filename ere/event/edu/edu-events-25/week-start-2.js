@@ -210,7 +210,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         coffee.get_colored_name(),
         ' 震惊到了，',
         coffee.sex,
-        ' 可从来没听说过这件事。',
+        '可从来没听说过这件事。',
       ]);
       await tachyon.say_and_wait([
         '科学家可从来不会做无谓的事情，参加 ',

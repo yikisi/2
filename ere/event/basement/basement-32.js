@@ -121,7 +121,7 @@ module.exports = class extends CustomizedBase {
     if (new TachyonEduMarks().plan_b || !new TachyonLifeMarks().b_start) {
       return super.back_basement();
     }
-    super.welcome();
+    this.welcome();
   }
 
   async battle_prison() {
@@ -165,7 +165,7 @@ module.exports = class extends CustomizedBase {
     if (new TachyonEduMarks().plan_b || !new TachyonLifeMarks().b_start) {
       return super.get_up();
     }
-    super.welcome();
+    this.welcome();
   }
 
   async strike_fail() {

@@ -454,12 +454,32 @@ async function golden_ship_attack() {
   era.println();
 
   await era.printAndWait(`${gold_ship.sex}是如此说的。`);
-  era.printButton('「杀死与你生死相依的好兄弟……」', 1);
-  era.printButton('「杀死愿意为你牺牲的女朋友……」', 2);
-  setTimeout(
-    () => ret.length < 5 && era.printButton('「哪个都不选……！」', 3),
-    100,
-  );
+  const buffer = [
+    {
+      accelerator: 1,
+      config: { disableWarning: true },
+      content: '「杀死与你生死相依的好兄弟……」',
+      type: 'button',
+    },
+    {
+      accelerator: 2,
+      config: { disableWarning: true },
+      content: '「杀死愿意为你牺牲的女朋友……」',
+      type: 'button',
+    },
+  ];
+  era.printInColRows(buffer);
+  setTimeout(() => {
+    if (ret.length < 5) {
+      buffer.push({
+        accelerator: 3,
+        config: { disableWarning: true },
+        content: '「哪个都不选……！」',
+        type: 'button',
+      });
+    }
+    era.replaceInColRows(buffer);
+  }, 10000);
   ret.push(await era.input());
   era.println();
 
@@ -481,9 +501,10 @@ async function golden_ship_attack() {
       '说起来要吃巧克力吗？放心，没加料，味道也很正常哦。',
     );
     era.println();
-    await era.printAndWait(
-      '你们在训练员室欢声笑语的风景，相信在将来也不会消失。',
-    );
+    await era.printAndWait([
+      me.get_couple_title(),
+      ' 在训练员室欢声笑语的风景，相信在将来也不会消失。',
+    ]);
   } else {
     era.println();
     await era.printAndWait(

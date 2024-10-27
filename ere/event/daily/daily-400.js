@@ -384,7 +384,7 @@ handlers[event_hooks.school_atrium] = async (hook) => {
       );
       await era.printAndWait([
         silence.sex,
-        ' 对着大大的枯树洞喊道，喊完了之后有些不好意思的看着 ',
+        '对着大大的枯树洞喊道，喊完了之后有些不好意思的看着 ',
         me.get_colored_name(),
         '。',
       ]);

@@ -130,9 +130,12 @@ function sys_handle_palace(chara_id) {
       adapt_list,
       aim_count / aim_check.length,
     ),
-    score_times = Math.pow(2, get_chara_score(chara_id, true) / 10000) / 2;
-  era.set(`juel:${chara_id}:粉`, Math.floor(pink * score_times));
-  era.set(`juel:${chara_id}:蓝`, Math.floor(blue * score_times));
+    score_times = Math.max(
+      2 ** ((get_chara_score(chara_id, true) - 20000) / 20000),
+      1,
+    );
+  era.set(`juel:${chara_id}:粉`, Math.floor(Math.min(pink * score_times, 200)));
+  era.set(`juel:${chara_id}:蓝`, Math.floor(Math.min(blue * score_times, 268)));
   era.set(`juel:${chara_id}:白`, Math.floor(white * score_times));
   const genes = new CharaAvailableGenes(chara_id);
   genes.clear();

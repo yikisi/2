@@ -283,9 +283,9 @@ module.exports = async (hook, __, event_object) => {
     era.println();
 
     era.print(`${me.name} 你马上接道——`);
-    era.printButton('「嗯……蛮孩子气的」', 1);
-    era.printButton('「可爱……」', 2);
-    era.printButton('「很帅气啊，帝王！」', 3);
+    era.printButton('「嗯……蛮孩子气的」（体力+150）', 1);
+    era.printButton('「可爱……」（速度+20）', 2);
+    era.printButton('「很帅气啊，帝王！」（力量+20）', 3);
     const ret = await era.input();
     if (ret === 1) {
       await teio.say_and_wait('唔嗯～我才不是小孩了！');
@@ -311,16 +311,14 @@ module.exports = async (hook, __, event_object) => {
         ` ${me.name} 的担当叮咛一声，脸仿佛红了起来，${me.name} 顿时也感觉不好意思再看${teio.sex}，两人就这样默默的走了下去。`,
       );
       era.println();
-      wait_flag =
-        get_attr_and_print_in_event(3, [20, 0, 0, 0, 0], 0) || wait_flag;
+      wait_flag = get_attr_and_print_in_event(3, [20], 0) || wait_flag;
     } else {
       await teio.say_and_wait(`那还用说！${me.name} 果然明白帝王大人的帅气！`);
       await era.printAndWait(
         `${teio.sex}看起来好像很开心。${me.name} 不禁也笑起来，跟${teio.sex}一起走了一会。`,
       );
       era.println();
-      wait_flag =
-        get_attr_and_print_in_event(3, [0, 0, 20, 0, 0], 0) || wait_flag;
+      wait_flag = get_attr_and_print_in_event(3, [0, 0, 20], 0) || wait_flag;
     }
   } else if (event_arg === 'the_days_together') {
     await print_event_name('与你一同前行的日子', teio);
@@ -357,9 +355,12 @@ module.exports = async (hook, __, event_object) => {
     );
     era.println();
 
-    era.printButton('「今后也请多指教」', 1);
+    era.printButton('「今后也请多指教」（好感+10，全属性+5）', 1);
     if (love > 90) {
-      era.printButton('「我想，不，我会永远陪伴在你身边」', 2);
+      era.printButton(
+        '「我想，不，我会永远陪伴在你身边」（爱慕+1，干劲上升，随机两项属性+10）',
+        2,
+      );
     }
     const ret = await era.input();
     if (ret === 1) {
