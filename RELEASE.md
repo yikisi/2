@@ -1,5 +1,5 @@
 # [EraUma v1.001 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.001)
-_incoming_
+_2024/10/27_
 
 适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.0.0) 版本
 
@@ -39,3 +39,4 @@ _incoming_
 * 修复了奇锐骏初始化脚本运行时报错的问题
 * 修复了小栗帽的专属称号【偶像赛马娘】无法获取的问题
 * 修复了周日宁静育成事件【深夜的暴风雨】无法正确触发的问题
+* 修复了多旺达的专属称号【圣剑】无法获取的问题
