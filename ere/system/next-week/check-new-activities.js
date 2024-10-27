@@ -70,27 +70,25 @@ async function check_new_activities(cur_round, in_team_list) {
       '，马娘们也许有什么活动需要你关注哦',
     ]);
     era.set('cflag:0:节日事件标记', 0);
-    in_team_list.forEach((chara_id) =>
+    in_team_list.forEach((id) =>
       era.set(
-        `cflag:${chara_id}:节日事件标记`,
-        !era.get(`cflag:${chara_id}:种族`) ||
-          era.get(`cflag:${chara_id}:育成回合计时`) > 47 ||
-          era.get(`love:${chara_id}`) >= 60,
+        `cflag:${id}:节日事件标记`,
+        !era.get(`cflag:${id}:种族`) ||
+          era.get(`cflag:${id}:育成回合计时`) > 47 ||
+          era.get(`love:${id}`) >= 60,
       ),
     );
     if (celebration === '庙会') {
-      in_team_list.forEach((chara_id) =>
+      in_team_list.forEach((id) =>
         era.set(
-          `cflag:${chara_id}:节日事件标记`,
-          era.get(`cflag:${chara_id}:节日事件标记`) &&
-            era.get(`cflag:${chara_id}:位置`) === location_enum.beach,
+          `cflag:${id}:节日事件标记`,
+          era.get(`cflag:${id}:节日事件标记`) &&
+            era.get(`cflag:${id}:位置`) === location_enum.beach,
         ),
       );
     }
   } else {
-    in_team_list.forEach((chara_id) =>
-      era.set(`cflag:${chara_id}:节日事件标记`, 0),
-    );
+    in_team_list.forEach((id) => era.set(`cflag:${id}:节日事件标记`, 0));
   }
   if (
     era.get('flag:当前马币') > 0 &&
@@ -98,25 +96,34 @@ async function check_new_activities(cur_round, in_team_list) {
   ) {
     era.print([get_chara_talk(0).get_colored_name(), ' 即将破产！']);
   }
-  [0, ...in_team_list].forEach((chara_id) => {
-    const registered_race = sys_reg_race(chara_id).curr;
+  /** @type {Record<string,{no_hurt:boolean,no_preg:boolean}>} */
+  const in_team_status_dict = {};
+  [0, ...in_team_list].forEach((id) => {
+    const registered_race = sys_reg_race(id).curr;
     if (registered_race.week === cur_round) {
       era.print([
         '本周有 ',
-        get_chara_talk(chara_id).get_colored_name(),
+        get_chara_talk(id).get_colored_name(),
         ' 报名参加的 ',
         race_infos[registered_race.race].get_colored_name_with_class(),
       ]);
     }
+    in_team_status_dict[id] = {
+      no_hurt: !era.get(`status:${id}:伤病`),
+      no_preg:
+        check_pregnant_unprotect(id) &&
+        era.get(`cflag:${id}:妊娠回合计时`) <
+          (era.get(`equip:${id}:淫纹奴役`) === slavery_enum.pregnant ? 30 : 33),
+    };
   });
-  const event_weeks = (cur_round - 1) % 48,
+  const event_weeks = (cur_round - 1) % 48 || 48,
     curr_race_list = {};
-  foreign_race_list.forEach((r) => {
-    const { date, track } = race_infos[r];
+  foreign_race_list.forEach((race) => {
+    const { date, track } = race_infos[race];
     if (event_weeks === date - expedition_weeks) {
-      curr_race_list[`${track}_1`] = [r, true];
+      curr_race_list[`${track}_1`] = [race, true];
     } else if (event_weeks === date) {
-      curr_race_list[`${track}_0`] = [r, false];
+      curr_race_list[`${track}_0`] = [race, false];
     }
   });
   for (const entry of Object.values(curr_race_list)) {
@@ -133,37 +140,23 @@ async function check_new_activities(cur_round, in_team_list) {
           : info.get_colored_name_with_class();
     if (entry[1]) {
       // 远征开始
-      let foreign_list = in_team_list
-        .filter((e) => {
-          return (
-            race_infos[sys_reg_race(e).curr.race]?.track ===
-            race_infos[race].track
-          );
-        })
-        .map((e) => {
-          return {
-            hurt: era.get(`status:${e}:伤病`),
-            id: e,
-            pregnant: era.get(`cflag:${e}:妊娠回合计时`),
-          };
-        });
+      let foreign_list = in_team_list.filter((e) => {
+        return (
+          race_infos[sys_reg_race(e).curr.race]?.track ===
+          race_infos[race].track
+        );
+      });
       const punish_list = [];
-      foreign_list = foreign_list
-        .filter((e) => {
-          if (
-            e.pregnant <
-              33 -
-                3 *
-                  (era.get(`equip:${e.id}:淫纹奴役`) ===
-                    slavery_enum.pregnant) &&
-            !e.hurt
-          ) {
-            return true;
-          }
-          punish_list.push(e.id);
-          return false;
-        })
-        .map((e) => e.id);
+      foreign_list = foreign_list.filter((id) => {
+        if (
+          in_team_status_dict[id].no_preg &&
+          in_team_status_dict[id].no_hurt
+        ) {
+          return true;
+        }
+        punish_list.push(id);
+        return false;
+      });
       era.print([race_colored_name, ' 即将举办，参赛选手们要踏上远征之路了……']);
       if (
         (era.get('cflag:343:招募状态') !== recruit_flags.yes ||
@@ -182,10 +175,10 @@ async function check_new_activities(cur_round, in_team_list) {
             ],
             type: 'text',
           },
-          ...foreign_list.map((chara_id) => {
-            const chara = get_chara_talk(chara_id);
-            handle_foreign_debuff(chara_id, location.lan, location.loc, true);
-            sys_change_pressure(chara_id, get_random_value(2000, 3000));
+          ...foreign_list.map((id) => {
+            const chara = get_chara_talk(id);
+            handle_foreign_debuff(id, location.lan, location.loc, true);
+            sys_change_pressure(id, get_random_value(2000, 3000));
             return {
               config: { align: 'center', width: 3 },
               content: [chara.get_colored_name()],
@@ -227,9 +220,7 @@ async function check_new_activities(cur_round, in_team_list) {
       if (!temp) {
         handle_foreign_debuff(0, location.lan, location.loc, false);
         era.set('flag:当前位置', location.loc);
-        foreign_list.forEach((chara_id) =>
-          sys_change_pressure(chara_id, -1000),
-        );
+        foreign_list.forEach((id) => sys_change_pressure(id, -1000));
         foreign_list.push(0);
         if (
           foreign_list.indexOf(343) === -1 &&
@@ -258,22 +249,20 @@ async function check_new_activities(cur_round, in_team_list) {
         ]);
         sys_change_fame(-25 - 25 * punish_list.length);
       }
-      foreign_list.forEach((chara_id) =>
-        era.set(`cflag:${chara_id}:位置`, location.loc),
-      );
+      foreign_list.forEach((id) => era.set(`cflag:${id}:位置`, location.loc));
       if (era.get('cflag:343:招募状态') === recruit_flags.yes) {
-        foreign_list.forEach((chara_id) => {
+        foreign_list.forEach((id) => {
           era.set(
-            `status:${chara_id}:语言不通`,
-            Math.ceil(era.get(`status:${chara_id}:语言不通`) / 2),
+            `status:${id}:语言不通`,
+            Math.ceil(era.get(`status:${id}:语言不通`) / 2),
           );
           era.set(
-            `status:${chara_id}:水土不服`,
-            Math.ceil(era.get(`status:${chara_id}:水土不服`) / 2),
+            `status:${id}:水土不服`,
+            Math.ceil(era.get(`status:${id}:水土不服`) / 2),
           );
           era.set(
-            `status:${chara_id}:客场作战`,
-            Math.ceil(era.get(`status:${chara_id}:客场作战`) / 2),
+            `status:${id}:客场作战`,
+            Math.ceil(era.get(`status:${id}:客场作战`) / 2),
           );
         });
       }
@@ -285,15 +274,15 @@ async function check_new_activities(cur_round, in_team_list) {
           : ['远征 ', race_colored_name, ' 的人员']),
         '回到特雷森了……',
       ]);
-      in_team_list.forEach((chara_id) => {
-        if (era.get(`cflag:${chara_id}:位置`) === location.loc) {
-          sys_change_attr_and_print(chara_id, '体力', -100);
-          sys_change_attr_and_print(chara_id, '精力', -600);
-          era.set(`status:${chara_id}:语言不通`, 0);
-          era.set(`status:${chara_id}:水土不服`, 0);
-          era.set(`status:${chara_id}:客场作战`, 0);
-          sys_change_tired(chara_id, 1);
-          era.set(`cflag:${chara_id}:位置`, 0);
+      in_team_list.forEach((id) => {
+        if (era.get(`cflag:${id}:位置`) === location.loc) {
+          sys_change_attr_and_print(id, '体力', -100);
+          sys_change_attr_and_print(id, '精力', -600);
+          era.set(`status:${id}:语言不通`, 0);
+          era.set(`status:${id}:水土不服`, 0);
+          era.set(`status:${id}:客场作战`, 0);
+          sys_change_tired(id, 1);
+          era.set(`cflag:${id}:位置`, 0);
         }
       });
       if (era.get('cflag:0:位置') === location.loc) {
@@ -313,16 +302,15 @@ async function check_new_activities(cur_round, in_team_list) {
   }
   if (event_weeks === 29 - 1) {
     // 夏合宿
-    const beach_group = in_team_list.filter((chara_id) => {
-      const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
+    const beach_group = in_team_list.filter((id) => {
+      const edu_weeks = era.get(`cflag:${id}:育成回合计时`);
       const flag =
-        era.get(`cflag:${chara_id}:成长阶段`) >= 2 &&
-        !era.get(`status:${chara_id}:伤病`) &&
-        // 未处于孕期保护的可以夏合宿
-        check_pregnant_unprotect(chara_id) &&
+        era.get(`cflag:${id}:成长阶段`) >= 2 &&
+        in_team_status_dict[id].no_hurt &&
+        in_team_status_dict[id].no_preg &&
         edu_weeks < 3 * 48 &&
         edu_weeks > 48;
-      flag && era.set(`cflag:${chara_id}:位置`, location_enum.beach);
+      flag && era.set(`cflag:${id}:位置`, location_enum.beach);
       return flag;
     });
     era.print('一年一度的夏合宿从本周开始……');
@@ -351,7 +339,7 @@ async function check_new_activities(cur_round, in_team_list) {
     let temp =
       // 地下室就只能错过夏合宿了
       era.get('flag:当前位置') === location_enum.basement ||
-      !check_pregnant_unprotect(0) ||
+      !in_team_status_dict[0].no_preg ||
       // 要么队伍里有人要参加夏合宿，要么就是自己参加夏合宿
       (!beach_group.length && !era.get('cflag:0:种族'));
     // 条件允许，弹选项让玩家选参加不参加
@@ -375,21 +363,21 @@ async function check_new_activities(cur_round, in_team_list) {
     if (!temp) {
       era.set('cflag:0:位置', era.set('flag:当前位置', location_enum.beach));
     }
-    const follow_group = in_team_list.filter((chara_id) => {
-      const race = era.get(`cflag:${chara_id}:种族`),
+    const follow_group = in_team_list.filter((id) => {
+      const race = era.get(`cflag:${id}:种族`),
         flag =
-          era.get(`cflag:${chara_id}:位置`) !== location_enum.beach &&
-          !era.get(`status:${chara_id}:伤病`) &&
-          check_pregnant_unprotect(chara_id) &&
+          era.get(`cflag:${id}:位置`) !== location_enum.beach &&
+          in_team_status_dict[id].no_hurt &&
+          in_team_status_dict[id].no_preg &&
           // 和主控到达一定关系会跟着去
           ((!temp &&
-            (era.get(`cflag:${chara_id}:殿堂`) || !race) &&
-            era.get(`love:${chara_id}`) >= 80) ||
+            (era.get(`cflag:${id}:殿堂`) || !race) &&
+            era.get(`love:${id}`) >= 80) ||
             // 或者就是小孩跟着妈妈移动
-            (era.get(`cflag:${chara_id}:成长阶段`) < 2 &&
-              era.get(`cflag:${era.get(`cflag:${chara_id}:母方角色`)}:位置`) ===
+            (era.get(`cflag:${id}:成长阶段`) < 2 &&
+              era.get(`cflag:${era.get(`cflag:${id}:母方角色`)}:位置`) ===
                 location_enum.beach));
-      flag && era.set(`cflag:${chara_id}:位置`, location_enum.beach);
+      flag && era.set(`cflag:${id}:位置`, location_enum.beach);
       return flag;
     });
     if (!temp) {
@@ -398,10 +386,10 @@ async function check_new_activities(cur_round, in_team_list) {
     if (follow_group.length) {
       era.printMultiColumns([
         { content: '今年以下人员会跟随参加夏合宿：', type: 'text' },
-        ...follow_group.map((chara_id) => {
-          const chara = get_chara_talk(chara_id);
-          sys_change_attr_and_print(chara_id, '体力', -10);
-          sys_change_attr_and_print(chara_id, '精力', -400);
+        ...follow_group.map((id) => {
+          const chara = get_chara_talk(id);
+          sys_change_attr_and_print(id, '体力', -10);
+          sys_change_attr_and_print(id, '精力', -400);
           return {
             config: { align: 'center', width: 3 },
             content: [chara.get_colored_name()],
@@ -416,11 +404,11 @@ async function check_new_activities(cur_round, in_team_list) {
       era.get('cflag:0:位置') ? '' : '前往夏合宿的人员',
       '回到特雷森了……',
     ]);
-    in_team_list.forEach((chara_id) => {
-      if (era.get(`cflag:${chara_id}:位置`)) {
-        sys_change_attr_and_print(chara_id, '体力', -10);
-        sys_change_attr_and_print(chara_id, '精力', -400);
-        era.set(`cflag:${chara_id}:位置`, 0);
+    in_team_list.forEach((id) => {
+      if (era.get(`cflag:${id}:位置`)) {
+        sys_change_attr_and_print(id, '体力', -10);
+        sys_change_attr_and_print(id, '精力', -400);
+        era.set(`cflag:${id}:位置`, 0);
       }
     });
     if (era.get('cflag:0:位置')) {

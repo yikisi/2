@@ -360,9 +360,9 @@ handlers[event_hooks.out_shopping] = async (hook) => {
           await digital.say_and_wait([
             '抽到了胡萝卜！带回去给 ',
             sys_get_colored_callname(19, 32),
-            ' 吧，希望 ',
+            ' 吧，希望',
             digital.sex,
-            ' 能正常一下自己的饮食啊，这样会整坏身体的！不行不行！',
+            '能正常一下自己的饮食啊，这样会整坏身体的！不行不行！',
           ]);
           break;
         case 1:

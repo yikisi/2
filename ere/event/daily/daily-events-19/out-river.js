@@ -240,8 +240,8 @@ module.exports = async (hook) => {
           sys_get_callname(20, 0),
           ' 居然还会吃醋的吗？该吃醋的是我吧？',
         ]);
-        era.printButton('妥协（青云天空好感度+40）', 1);
-        era.printButton('该说正事了（爱丽数码好感度+40）', 2);
+        era.printButton('妥协（青云天空好感+40）', 1);
+        era.printButton('该说正事了（爱丽数码好感+40）', 2);
         if ((await era.input()) === 1) {
           await me.say_and_wait('好好好，既然如此，那么下次我就和你来钓鱼。');
           await era.printAndWait('姑且算先敷衍过去再说吧。');

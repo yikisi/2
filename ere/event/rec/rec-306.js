@@ -85,7 +85,7 @@ module.exports = class extends CustomizedRecruit {
         ]);
         await printAndWait([
           riko.sex,
-          ' 作为代理理事长，对 ',
+          '作为代理理事长，对 ',
           me.get_colored_name(),
           ' 做出的处罚只是一个开始。',
         ]);

@@ -105,12 +105,12 @@ module.exports = {
           const check = titles.findIndex((t) => t.n === e) !== -1;
           race_info_list.push(
             {
-              config: { color: chara.color, width: 4 },
+              config: { color: chara.color, width: 5 },
               content: e,
               type: 'text',
             },
             {
-              config: { width: 20, color: check ? attr_change_colors.up : '' },
+              config: { width: 19, color: check ? attr_change_colors.up : '' },
               content: check
                 ? '已获得 ✔'
                 : title_desc[e] || '在一次育成周期内赢取了六次以上的G1比赛胜利',

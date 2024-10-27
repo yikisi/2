@@ -123,7 +123,8 @@ module.exports = class extends CustomizedCheck {
   get_personal_action() {
     if (
       era.get('cflag:17:育成回合计时') < 48 * 3 - 1 &&
-      era.get('cflag:17:位置') === era.get('cflag:0:位置')
+      era.get('cflag:17:位置') === 0 &&
+      era.get('cflag:0:位置') === 0
     ) {
       return {
         name: '日月交替',

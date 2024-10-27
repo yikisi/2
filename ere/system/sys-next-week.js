@@ -959,6 +959,9 @@ async function sys_next_week() {
       'flag:当前互动角色',
       (era.get(`cflag:${temp}:招募状态`) === recruit_flags.yes && temp) ||
         get_random_entry(
+          in_team_list.filter((e) => sys_reg_race(e).curr.week === cur_round),
+        ) ||
+        get_random_entry(
           in_team_list.filter(
             (e) =>
               era.get(`cflag:${e}:育成回合计时`) < 3 * 48 &&

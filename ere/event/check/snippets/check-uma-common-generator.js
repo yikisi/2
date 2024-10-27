@@ -6,6 +6,7 @@ const { get_chara_color } = require('#/data/chara-colors');
 const RaceHistory = require('#/data/race/model/race-history');
 
 /**
+ * 如果想用this.id，记得不能用箭头函数，惨痛教训……
  *
  * @param {function(AfterRaceParams)} after_race_cb
  * @param {(function(Record<string,RaceResult>,RaceResult[],boolean):boolean)|undefined} title_check_cb
@@ -23,7 +24,7 @@ module.exports = (
 ) => {
   class A extends CustomizedCheck {
     check_after_race(extra_flag) {
-      after_race_cb.bind(this)(extra_flag);
+      after_race_cb.call(this, extra_flag);
     }
 
     check_and_get_titles(aim_check) {
@@ -33,7 +34,7 @@ module.exports = (
       const races = new RaceHistory(this.id),
         titles = [];
       if (
-        title_check_cb.bind(this)(races.get(), races.get_values(), aim_check)
+        title_check_cb.call(this, races.get(), races.get_values(), aim_check)
       ) {
         titles.push({
           c: get_chara_color(this.id),
@@ -53,7 +54,7 @@ module.exports = (
     get_edu_aims() {
       const buffer = [],
         races = new RaceHistory(this.id).get();
-      fill_edu_aims_cb.bind(this)(buffer, races);
+      fill_edu_aims_cb.call(this, buffer, races);
       return buffer;
     }
 

@@ -72,9 +72,9 @@ module.exports = class extends CustomizedRecruit {
           ' 不禁感叹。',
         ]);
         await era.printAndWait([
-          '虽然身形娇小，但会被 ',
+          '虽然身形娇小，但会被',
           rice.sex,
-          ' 四周环绕的霸气吸引。',
+          '四周环绕的霸气吸引。',
         ]);
         era.drawLine();
         era.print('结果频繁遇到红灯，回特雷森学园的时候，天已经完全黑了。');

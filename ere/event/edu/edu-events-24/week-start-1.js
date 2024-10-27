@@ -397,9 +397,9 @@ module.exports = (handlers) => {
           me.get_colored_name(),
           ' 打从心底祈祷，希望 ',
           maya.get_colored_name(),
-          ' 之后能够实现 ',
+          ' 之后能够实现',
           maya.sex,
-          ' 真正的梦想。',
+          '真正的梦想。',
         ]);
         flags.wait_flag = get_attr_and_print_in_event(24, [], 40);
     }

@@ -126,7 +126,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + 1: // 与周日宁静一起前往神社
           add_event(event_hooks.out_church, event_obj_special);
           break;
-        case 47 + 31: // 深夜的暴风雨
+        case 47 + 24: // 深夜的暴风雨
           add_event(event_hooks.week_end, event_obj_special);
       }
       check_and_register_aim_race(400, aim_races, edu_weeks);

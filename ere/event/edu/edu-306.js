@@ -88,7 +88,7 @@ const handlers = {
       me.get_colored_name(),
       ' 认出',
       riko.sex,
-      ' 是学园的代理理事长 ',
+      '是学园的代理理事长 ',
       riko.get_colored_actual_name(),
       '，赶紧问好。',
     ]);
@@ -100,7 +100,7 @@ const handlers = {
     ]);
     await printAndWait([
       riko.sex,
-      ' 告诉 ',
+      '告诉 ',
       me.get_colored_name(),
       ' 不远处的训练员办公室是所有训练员公用的，',
       me.get_colored_name(),

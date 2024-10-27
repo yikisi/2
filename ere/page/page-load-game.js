@@ -12,7 +12,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
 const event_hooks = require('#/data/event/event-hooks');
-const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
@@ -88,7 +87,6 @@ module.exports = async () => {
             chara_colors[0] =
               src_chara > 0 ? get_chara_color(src_chara) : '#ffffff';
             CharaTalk.me = new CharaTalk(0);
-            new LocCharacters().clean();
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;

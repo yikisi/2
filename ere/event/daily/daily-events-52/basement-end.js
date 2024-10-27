@@ -163,7 +163,7 @@ module.exports = async () => {
   await era.printAndWait([
     '或许曾经名为 ',
     me.actual_name,
-    ' 的 ',
+    ' 的',
     me.sex,
     '，喜欢过很多人、很多个',
     urara.get_uma_sex_title(),

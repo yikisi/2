@@ -340,7 +340,7 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait([
       '只不过，',
       kitaru.sex,
-      ' 的表情，看起来却有些苦恼，暗淡无光的星星瞳似乎正在搜寻着观众席上可能出现的某人，看来',
+      '的表情，看起来却有些苦恼，暗淡无光的星星瞳似乎正在搜寻着观众席上可能出现的某人，看来',
       kitaru.sex,
       '并没有发现被人群堵在角落的 ',
       me.get_colored_name(),

@@ -218,7 +218,18 @@ handlers[49] = async (kitaru, me, callname) => {
 handlers[74] = async (kitaru, me, callname, event_object) => {
   await print_event_name('热恋', kitaru);
   if (kitaru.sex_code === 1 || me.sex_code !== 1) {
-    if (await select_yes_or_no('升级关系', '暂不升级')) {
+    if (
+      await select_yes_or_no(
+        [
+          kitaru.get_colored_name(),
+          ' 向 ',
+          me.get_colored_name(),
+          ' 表白了……要接受吗？',
+        ],
+        '接受（升级关系）',
+        '拒绝（暂不升级）',
+      )
+    ) {
       await sys_love_uma_in_event(56);
     } else {
       era.set('cflag:56:爱慕暂拒', 74);

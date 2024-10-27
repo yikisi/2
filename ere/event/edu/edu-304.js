@@ -22,7 +22,7 @@ module.exports = async (hook, extra_flag, event_object) => {
   await printAndWait([meek.get_colored_name(), ' 的育成结束了。']);
   await printAndWait([
     me.get_colored_name(),
-    ' 并没有和 ',
+    ' 并没有和',
     meek.sex,
     '取得显著的成绩。',
   ]);
@@ -52,7 +52,7 @@ module.exports = async (hook, extra_flag, event_object) => {
       me.get_colored_name(),
       ' 有所发现的话，',
       aoi.sex,
-      ' 希望 ',
+      '希望 ',
       me.get_colored_name(),
       ' 再给 ',
       meek.get_colored_name(),
