@@ -1,4 +1,3 @@
-const { execSync } = require('child_process');
 const { readFileSync, readdirSync, writeFileSync } = require('node:fs');
 const { join, resolve } = require('node:path');
 
@@ -49,7 +48,7 @@ skill_list
       skill_name = f
         .split('\n')[4]
         .substring(3)
-        .replace(/['"],$/, '');
+        .replace(/['"],\s*$/, '');
     writeFileSync(
       join(gene_path, `gene-${skill_id}.js`),
       `const UmaGene = require('#/data/race/model/uma-gene');\n\nmodule.exports = new UmaGene(${

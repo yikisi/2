@@ -464,6 +464,14 @@ module.exports = {
           skill.values[i][j] *= 1 + ((4000 - uma.base.weight) * 0.2) / 4000;
         }
         break;
+      case ability_usage_enum.MultiplyResearchLv:
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (uma.base.research_lv >= 15) {
+          skill.values[i][j] *= 1.2;
+        } else if (uma.base.research_lv >= 10) {
+          skill.values[i][j] *= 1.1;
+        }
+        break;
       default:
         skill.values[i][j] = skill.data.ability_values[i][j];
         logger.debug(
