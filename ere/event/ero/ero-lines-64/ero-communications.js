@@ -77,7 +77,7 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers[ero_hooks.kiss] = async (attacker, defender, hook) => {
+  handlers[ero_hooks.lure] = async (attacker, defender, hook) => {
     if (defender.id !== 64) {
       throw new Error();
     }
