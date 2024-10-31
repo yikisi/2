@@ -158,7 +158,7 @@ module.exports = async (hook, extra_flag) => {
     extra_flag.rank === 1
   ) {
     await print_event_name('泥地德比后・满足的尽兴', chara_talk);
-    await era.printAndWait(`休息室中`);
+    await era.printAndWait(`休息室\n`);
     await chara_talk.say_and_wait(
       `训练员${me.get_adult_sex_title()}看到飞鹰子在舞台上的表现了吗⭐`,
     );

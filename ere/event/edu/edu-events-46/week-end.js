@@ -645,16 +645,18 @@ module.exports = async function () {
     await falcon.say_and_wait(
       `抱歉……连粉丝一号的幸福都无法保证，作为偶像真是失格了呢……`,
     );
+    await falcon.say_and_wait(`……对不起。`);
     await era.printAndWait(
-      `大概是终于承受不住压力，平日里绝不会表达出来的话语就这么宣泄而出。`,
+      `在奋力吐出积压于心头的痛苦后，醒目飞鹰直挺挺的倒在了地上。`,
     );
     await era.printAndWait(
       `虽然心中已有猜测，直到她亲口说出为止自己才能确认，醒目飞鹰心底真正希望的是什么。`,
     );
     await era.printAndWait(`对不起，发生了这种事情。`);
-    await era.printAndWait(
-      `将少女轻轻背起，确认着这份重量，那就是与她一同前行的重量。`,
-    );
+    era.printButton(`轻轻背起醒目飞鹰`, 1);
+    await era.input();
+    await era.printAndWait(`你将少女轻轻背起，确认着与她一同前行的重量。`);
+    await era.printAndWait(`来时的道路比想象中还要漫长。`);
   } else if (edu_weeks === 95 + 23) {
     const love = era.get('love:46');
     await print_event_name('闲暇日', falcon);
@@ -881,7 +883,10 @@ module.exports = async function () {
     await era.printAndWait(`身旁的少女露出了释然的表情，她已经觉悟了。`);
     era.printButton(`请让我作为你身边最近的人见证这一切。`, 1);
     await era.input();
-    await era.printAndWait(`醒目飞鹰笑了起来，一直笑到眼泪都流了出来。`);
+    await falcon.say_and_wait(`呵呵呵。`);
+    await era.printAndWait(`醒目飞鹰突然笑了起来，一直笑到眼泪都流了出来。`);
+    era.printButton(`飞鹰子？`, 1);
+    await era.input();
     await era.printAndWait(`然后紧紧的抱住了你。`);
     await falcon.say_and_wait(`谢谢你，训练员先生。`);
     await era.printAndWait(`醒目飞鹰不再孤单了。`);
@@ -915,7 +920,7 @@ module.exports = async function () {
     await era.printAndWait(
       `虽然体格与身高的变得几乎看不出来，过往的神态却依稀可见。`,
     );
-    await me.say_and_wait(`你也迎来本格化了啊。`);
+    await me.say_and_wait(`你也迎来本格化了呢。`);
     await say_by_passer_by(
       `马娘`,
       `不愧是训练员先生！一开始还有点担心训练员先生认不出来呢，看来是我想多了。`,
@@ -934,12 +939,67 @@ module.exports = async function () {
     );
     await falcon.say_and_wait(`训练员先生！`);
     await say_by_passer_by(`马娘`, `是飞鹰子前辈！`);
-    await era.printAndWait(`像是看到了救星一样，马娘向着醒目飞鹰的方向望去。`);
     await era.printAndWait(`在解释了之前的那一幕后。`);
     await falcon.say_and_wait(`不过是偶像的日常罢了。`);
     await era.printAndWait(`面带笑容的醒目飞鹰语气没有任何变化。`);
   } else if (edu_weeks === 95 + 38) {
-    await print_event_name(`天空、大地以及生活在这里的我们`, falcon);
+    await print_event_name(`橡树`, falcon);
+    era.drawLine();
+    await me.say_and_wait(`马娘偶像？`);
+    await me.say_and_wait(`马娘偶像的概念似乎有些笼统啊。`);
+    await me.say_and_wait(
+      `如果是积极参与比赛，并且闪闪发光的话，所有在赛场上奔驰的马娘都是一样的。`,
+    );
+    await me.say_and_wait(`作为马娘偶像的特殊之处又在哪里呢？`);
+    era.drawLine();
+    falcon.print(`第一次训练的时候，训练员先生向我提出了这个问题。`);
+    falcon.print(`……当时是怎么回答的？`);
+    falcon.print(`只是随口敷衍过去了吧。`);
+    await falcon.say_and_wait(`……`);
+    falcon.print(`即使是现在，我也给不出正确的答案。`);
+    falcon.print(
+      `想要，想要借着青春期特有的敏感与细腻交织而成的可爱作为卖点。`,
+    );
+    falcon.print(
+      `就这样与粉丝一同成长，最后作为见证者与被见证者敲开顶级偶像的殿堂大门。`,
+    );
+    falcon.print(`不管在河岸下作为志愿者清理垃圾，还是辛苦的突击演出。`);
+    falcon.print(`通过贯彻贴近生活的偶像这一概念，向粉丝们传递出自己的成长。`);
+    falcon.print(`将痛苦与失意悄然藏起，带上作为万众期待的偶像这一面具。`);
+    falcon.print(`……过程也没有想象中那么辛苦。`);
+    falcon.print(`在草地之上的表演，同样也是一种训练。`);
+    falcon.print(`回忆着电视上、舞蹈老师、访谈杂志上学到的经验。`);
+    falcon.print(`节拍接着节拍，动作接着动作,一刻接着一刻。`);
+    falcon.print(`直到将表演锻炼成像是与生俱来的天赋为止。`);
+    falcon.print(`一舞已毕。`);
+    falcon.print(`睁开双眼然后迎接无人的草地。`);
+    falcon.print(`睁开双眼然后迎接一人的草地。`);
+    falcon.print(`睁开双眼然后迎接数人的草地。`);
+    falcon.print(`睁开双眼然后迎接盛大的舞台。\n`);
+    falcon.print(`曾经作为知识的东西融化成了本能，本能又凝结出了新的知识。`);
+    falcon.print(
+      `不断进行着融化与凝结的这条直到生命尽头的河流，在外者看来，就像是璀璨的钻石一样。`,
+    );
+    falcon.print(`请收下我的心吧，训练员先生。`);
+    falcon.print(`像天上的星星一样闪耀，像火山中的岩浆一样炽热的钻石之心。`);
+    falcon.print(`纵使已经被名为负罪感的高墙所隔阂。`);
+    falcon.print(`粉丝袭击的源头是天平的失衡，是无视了粉丝愿望的偶像末路。`);
+    falcon.print(`是会随着偶像的不断成长，不断施加压力的恶意。`);
+    falcon.print(
+      `再继续下去，迟早有一天会因为承受不住这份巨大的压力而像被高温加热后的岩石一样，遇到微小的契机，便会轰然炸开。`,
+    );
+    falcon.print(`或许不断选择错误的我明白的唯一正确的事情。`);
+    falcon.print(`啊啊，如果时间再多一点就好了。`);
+    falcon.print(`如果能给我更多的时间的话，我就能处理好这一团乱麻。`);
+    falcon.print(`然而这是不可能的事。`);
+    falcon.print(`只要还在逃避必需完成的义务，未来就不会到来。`);
+    falcon.print(
+      `既然选择了偶像的道路，无论如何都要回应来自粉丝的依赖与祈祷。`,
+    );
+    falcon.print(`作为偶像尽忠职守到最后一刻。`);
+    falcon.print(`所以，不能再逃避下去了。`);
+    falcon.print(`……啊啊……脑海之中又浮现出了训练员先生的模样。`);
+    falcon.print(`明明不能逃避。`);
   } else if (edu_weeks === 95 + 40) {
     await print_event_name(`天空、大地以及生活在这里的我们`, falcon);
     await era.printAndWait(`公园\n`);

@@ -55,9 +55,8 @@ module.exports = async function (event_object) {
     await me.say_and_wait(`马娘偶像的概念似乎有些笼统啊。`);
     await me.say_and_wait(
       `如果是积极参与比赛，并且闪闪发光的话，所有在赛场上奔驰的马娘都是一样的。`,
-      true,
     );
-    await me.say_and_wait(`作为马娘偶像的特殊之处又在哪里呢？`, true);
+    await me.say_and_wait(`作为马娘偶像的特殊之处又在哪里呢？`);
     await era.printAndWait(
       `身体稍微冷却下来后，你将矿泉水递给了${falcon.sex}。`,
     );
@@ -2086,7 +2085,7 @@ module.exports = async function (event_object) {
     );
     await me.say_and_wait(`果然还是在观众席上才是最棒的选择。`, true);
     await era.printAndWait(
-      `虽然醒目飞鹰略显顾虑的样子，不过还是默许了你的选择。`,
+      `听到了你想要在观众席上观看醒目飞鹰表演的意愿时，醒目飞鹰似乎有什么想说的话，但当你想要询问时却被敷衍过去了。`,
     );
     await era.printAndWait(
       `尽管如此，每当歌曲结束后，在与粉丝互动的视线交互中，一股若有若无的视线一直紧紧看着你。`,
@@ -2094,7 +2093,7 @@ module.exports = async function (event_object) {
     await me.say_and_wait(`……`, true);
     await era.printAndWait(`总觉得有些寂寞。`);
     await era.printAndWait(
-      `倒不是说醒目飞鹰的表演一般，青涩的原石在岁月的雕琢下已经露出了璀璨的钻石。`,
+      `倒不是说醒目飞鹰的表演一般，青涩的原石在经历的雕琢下已经露出了璀璨的钻石。`,
     );
     await era.printAndWait(
       `仅仅只是有些，有一点怀念遇到醒目飞鹰时纯粹的模样。`,
@@ -2173,7 +2172,8 @@ module.exports = async function (event_object) {
     await me.say_and_wait(
       `是的，能做到飞鹰子说的这些，已经算是合格的训练员了。`,
     );
-    await me.say_and_wait(`……不过，距离优秀的训练员还有一段距离。`);
+    await me.say_and_wait(`……不过，距离更闪耀的训练员还有一段距离。`);
+    await falcon.say_and_wait(`……就像飞鹰子追求的偶像一样吧。`);
     await me.say_and_wait(`除了意识到上述所说的职责，我们更关心失败了怎么办。`);
     await me.say_and_wait(
       `除了水平与天赋同样高到让人仰望的传奇训练员，或者运气好到能让其他人嫉妒的天选之子，剩余的凡人都会面对这个严肃的课题。`,
@@ -2182,6 +2182,7 @@ module.exports = async function (event_object) {
       `成功的时候或许因为胜利的事实而不违背自己的承诺，而失败的时候，我们又该如何面对向她们夸下海口的自己呢？`,
     );
     await me.say_and_wait(`尽管我们已经尽了最大的努力，仅仅只是运气不好罢了。`);
+    await falcon.say_and_wait(`这样吗……`);
     await me.say_and_wait(`虽然很遗憾，不过我们必须承担失败带来的后果。`);
     await me.say_and_wait(
       `最轻的可能只是预期收益降低，自身受到外界质疑，更严重的可能会被迫辞职，甚至有生命风险。`,
