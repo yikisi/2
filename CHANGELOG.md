@@ -54,7 +54,9 @@ EraUma v1.0，适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era
     * 包括PlanB路线中与茶座关联的调教事件
   * 奇锐骏
 * 追加实装以下角色的部分调教口上
+  * 东海帝王
   * 爱丽速子
+  * 目白善信
   * 奇锐骏
 * 追加实装以下角色的地下室口上
   * 东海帝王
