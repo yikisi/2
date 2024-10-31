@@ -19,3 +19,6 @@ _incoming_
 * 调整了爱丽速子的育成目标演出效果（PlanB）
 
 ## Fixed
+
+* 现在被动技能的触发能够正确增加技能条件中的activate_count_all（比赛全程技能发动计数）、activate_count_start（比赛初期技能发动计数）了
+  * 关系到【打好基础】、【闪光】等技能的判定条件

@@ -418,7 +418,8 @@ function sys_prepare_race(list_chara, team_list, race_info) {
             }
           }
           uma.base.greenCount++;
-          break;
+          uma.race.conditionParams.activate_count_all++;
+          uma.race.conditionParams.activate_count_start++;
         }
       }
     });
