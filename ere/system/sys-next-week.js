@@ -644,7 +644,7 @@ async function sys_next_week() {
           `cflag:${chara_id}:妊娠阶段`,
           1 << pregnant_stage_enum.fetal,
         );
-        20 === timer && (life_marks.waist_buff = 15);
+        timer >= 20 && (life_marks.waist_buff = 15);
       } else if (timer < 36) {
         // 28-35周孕晚期，开始泌乳
         sys_change_pressure(chara_id, get_random_value(50, 150));
@@ -657,7 +657,7 @@ async function sys_next_week() {
           era.add(`cflag:${chara_id}:胸围`, 1);
           life_marks.breast_buff = 3;
         }
-        30 === timer && (life_marks.waist_buff = 30);
+        timer >= 30 && (life_marks.waist_buff = 30);
       } else {
         sys_change_pressure(chara_id, get_random_value(100, 200));
         // 37周以后概率生，最晚42周
@@ -666,13 +666,14 @@ async function sys_next_week() {
           `cflag:${chara_id}:妊娠阶段`,
           1 << pregnant_stage_enum.pre_birth,
         );
-        if (timer === 36) {
+        if (timer >= 36) {
           if (era.get(`talent:${chara_id}:泌乳`) === 1) {
             life_marks.breast_buff = 5;
           }
-          // 头胎在临产期+1cm臀围
-          !pregnant_times && era.add(`cflag:${chara_id}:臀围`, 1);
-          life_marks.waist_buff = 40;
+          if (life_marks.waist_buff < 40) {
+            !pregnant_times && era.add(`cflag:${chara_id}:臀围`, 1);
+            life_marks.waist_buff = 40;
+          }
         }
         // 孩子只能在中央特雷森出生
         // 不然会涉及好几个回合的产妇无法移动问题！
@@ -688,7 +689,10 @@ async function sys_next_week() {
             `cflag:${chara_id}:妊娠阶段`,
             1 << pregnant_stage_enum.resume,
           );
-          era.set(`cflag:${chara_id}:妊娠回合计时`, 4);
+          era.set(
+            `cflag:${chara_id}:妊娠回合计时`,
+            era.get(`cflag:${chara_id}:种族`) ? 4 : 12,
+          );
           // 一年即48周内会泌乳
           // 本回合会马上进行判定，所以+1
           era.get(`talent:${chara_id}:泌乳`) === 1 &&
