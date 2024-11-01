@@ -71,7 +71,14 @@ function sys_change_lust(chara_id, _val) {
   era.add(
     `base:${chara_id}:性欲`,
     _val > 0
-      ? Math.ceil(_val * (1 + 0.2 * era.get(`talent:${chara_id}:淫乱`)))
+      ? Math.ceil(
+          _val *
+            (1 +
+              0.2 * era.get(`talent:${chara_id}:淫乱`) +
+              0.5 * era.get(`status:${chara_id}:发情`) +
+              0.1 * era.get(`status:${chara_id}:排卵期`) +
+              0.05 * era.get(`status:${chara_id}:经期`)),
+        )
       : Math.ceil(_val),
   );
 }
