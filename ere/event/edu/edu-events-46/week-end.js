@@ -943,7 +943,7 @@ module.exports = async function () {
     await falcon.say_and_wait(`不过是偶像的日常罢了。`);
     await era.printAndWait(`面带笑容的醒目飞鹰语气没有任何变化。`);
   } else if (edu_weeks === 95 + 38) {
-    await print_event_name(`橡树`, falcon);
+    await print_event_name(`铭记的镜子`, falcon);
     era.drawLine();
     await me.say_and_wait(`马娘偶像？`);
     await me.say_and_wait(`马娘偶像的概念似乎有些笼统啊。`);
@@ -980,8 +980,20 @@ module.exports = async function () {
     falcon.print(
       `不断进行着融化与凝结的这条直到生命尽头的河流，在外者看来，就像是璀璨的钻石一样。`,
     );
-    falcon.print(`请收下我的心吧，训练员先生。`);
-    falcon.print(`像天上的星星一样闪耀，像火山中的岩浆一样炽热的钻石之心。`);
+    era.drawLine();
+    await falcon.say_and_wait(`育马场经典赛马上就要开始了。`);
+    await falcon.say_and_wait(`……训练员先生。`);
+    await falcon.say_and_wait(
+      `如果能再给飞鹰子一点时间的话，飞鹰子一定可以早点察觉到。`,
+    );
+    await falcon.say_and_wait(`不对！训练员先生一定不会喜欢现在的飞鹰子！`);
+    await falcon.say_and_wait(
+      `训练员先生期待的飞鹰子一定是那个永远充满活力，一直向前的完美偶像！`,
+    );
+    await falcon.say_and_wait(
+      `所以无论赛场还是舞台之上，飞鹰子都要一直闪耀下去，直到夺去所有人的目光为止！`,
+    );
+    era.drawLine();
     falcon.print(`纵使已经被名为负罪感的高墙所隔阂。`);
     falcon.print(`粉丝袭击的源头是天平的失衡，是无视了粉丝愿望的偶像末路。`);
     falcon.print(`是会随着偶像的不断成长，不断施加压力的恶意。`);
@@ -1000,6 +1012,7 @@ module.exports = async function () {
     falcon.print(`所以，不能再逃避下去了。`);
     falcon.print(`……啊啊……脑海之中又浮现出了训练员先生的模样。`);
     falcon.print(`明明不能逃避。`);
+    falcon.print(`纵使泪流满面。`);
   } else if (edu_weeks === 95 + 40) {
     await print_event_name(`天空、大地以及生活在这里的我们`, falcon);
     await era.printAndWait(`公园\n`);
@@ -1065,7 +1078,7 @@ module.exports = async function () {
     );
     await me.say_and_wait(`原来是这样啊，毕竟是蛋糕——`);
     await falcon.say_and_wait(`不对！这是飞鹰子自己想出来的！`);
-    await era.printAndWait(`声音突然变大的飞鹰子让周围的人视线都看了过来。`);
+    await era.printAndWait(`飞鹰子突然变大的声音引得路人纷纷侧目。`);
     await falcon.say_and_wait(`啊，对不起。突然之间激动起来了。`);
     await falcon.say_and_wait(`这样子可不像飞鹰子呢⭐哈哈哈。`);
     await era.printAndWait(`意识到了什么，飞鹰子低着头脸红得几乎滴出水来。`);

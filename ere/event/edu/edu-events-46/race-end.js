@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const print_event_name = require('#/event/snippets/print-event-name');
+const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const { race_enum } = require('#/data/race/race-const');
 const CharaTalk = require('#/utils/chara-talk');
@@ -399,40 +400,50 @@ module.exports = async (hook, extra_flag) => {
     extra_flag.rank === 1
   ) {
     await print_event_name('育马场经典赛后・再次起跑！', chara_talk);
-    await era.printAndWait(`粉丝们「飞鹰子！飞鹰子！噢噢噢噢噢噢噢噢！」`);
-    await era.printAndWait(`冲过终点的一瞬间,全场的粉丝们都在欢呼。`);
-    await me.say_and_wait(`飞鹰子，辛苦了。`);
-    await era.printAndWait(`将毛巾递给了${chara_talk.name}。`);
-    await chara_talk.say_and_wait(`非常感谢！`);
+    await say_by_passer_by(`粉丝们`, `飞鹰子！飞鹰子！唔噢噢噢噢噢噢噢！`);
     await era.printAndWait(
-      `从更衣室里出来后的${chara_talk.name}穿上了你叠在座椅上的备用决胜服。`,
+      `冲过终点的一瞬间,全场的观众都为沙地冉冉升起的明星喝彩。`,
     );
-    await me.say_and_wait(`接下来的胜者舞台加油！`);
-    await chara_talk.say_and_wait(`嗯！飞鹰子不会辜负粉丝们的期待的！`);
-    await chara_talk.say_and_wait(`那么，差不多该出发了！`);
+    await me.say_and_wait(`飞鹰子比想象中还要闪耀呢。`);
+    await chara_talk.say_and_wait(
+      `非常感谢你的支持，接下来也要多多支持飞鹰子哦！`,
+    );
+    await me.say_and_wait(`嗯——接下来是胜者舞台吧。`);
+    await era.printAndWait(`你将今年的育马场赛事制作的CD放入录像机之中。`);
     await era.printAndWait(
-      `将准备好的矿泉水一饮而尽后，${chara_talk.name}走向了胜者舞台。`,
+      `虽然没能到现场亲眼见证醒目飞鹰冲线的瞬间,不过通过当事人绘声绘色的描述着当时的情景,也能多少弥补遗憾。`,
     );
+    await chara_talk.say_and_wait(`接下来就是飞鹰子强烈推荐的胜者舞台时间⭐`);
+    await era.printAndWait(`录像带中的${chara_talk.name}独自走向了胜者舞台。`);
     era.drawLine({ content: '胜者舞台结束后' });
-    await chara_talk.say_and_wait(`呼~现在的话就只剩下东京大赏了。`);
+    await chara_talk.say_and_wait(`今年的目标就只剩下东京大赏了。`);
     await era.printAndWait(
       `飞鹰子的表演比想象之中还要精彩，粉丝们排山倒海般的气浪几乎将舞台掀翻。`,
     );
+    await era.printAndWait(`尽管比起在现场观看缺少了临场感,不过你也很满足了。`);
     await me.say_and_wait(`距离顶级偶像的话现在只剩一步之遥了哦？`);
-    await me.say_and_wait(`飞鹰子实际上已经是顶级偶像了。`, true);
-    await era.printAndWait(
-      `作为泥地偶像在沙地上驰骋，即是作为前辈也是作为后辈。`,
-    );
-    await me.say_and_wait(`那么，回去之后好好休息吧。`);
+    await chara_talk.say_and_wait(`离顶级偶像还差得远呢。`);
+    await me.say_and_wait(`虽是这么说。`);
+    await era.printAndWait(`你将录像暂停后,重新看向醒目飞鹰。`);
+    await me.say_and_wait(`飞鹰子比想象中还要坚强呢。`);
+    await chara_talk.say_and_wait(`……飞鹰子没有想象中这么坚强哦?`);
+    await me.say_and_wait(`为了今年压轴的东京大赏，现在还是好好休息吧。`);
     await me.say_and_wait(`毕竟飞鹰子。`);
+    await era.printAndWait(`一旁的醒目飞鹰传出了均匀的呼吸声。`);
     await era.printAndWait(
-      `不知不觉间在座位上睡着的${chara_talk.name}额外的可爱。`,
+      `这段时间的准备一直都是醒目飞鹰独自完成的缘故，积累下来的疲惫也终于到极限了吧。`,
     );
-    await me.say_and_wait(`现在的话，就让${chara_talk.sex}稍微睡一会吧。`);
+    await me.say_and_wait(
+      `现在的话，就让${chara_talk.sex}稍微睡一会吧。`,
+      true,
+    );
+    await me.say_and_wait(`谢谢你，醒目飞鹰。`);
     await era.printAndWait(
-      `尽可能不惊动${chara_talk.name}，慢慢将${chara_talk.sex}背到背上。`,
+      `轻轻将醒目飞鹰放在柔软的沙发上，然后将身上的训练员服披在她身上。`,
     );
-    await era.printAndWait(`在回去的路上，飞鹰子的睡脸额外的可爱。`);
+    await era.printAndWait(
+      `或许是因为摆动的幅度过大，醒目飞鹰的耳朵动了动，身体也换了更加舒服的姿势。`,
+    );
   } else if (
     extra_flag.race === race_enum.cham_cup &&
     edu_weeks > 95 &&
