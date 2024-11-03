@@ -510,7 +510,11 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`这就是 ${kita.name}，黑色的祭典。`);
     extra_flag.attr_change.fill(3);
     extra_flag.pt_change = 15;
-  } else if (extra_flag.race === race_enum.tenn_sho && extra_flag.rank === 1) {
+  } else if (
+    extra_flag.race === race_enum.tenn_sho &&
+    extra_flag.rank === 1 &&
+    edu_weeks > 96
+  ) {
     await print_event_name('泥地之后就是花道', kita);
     await kita.print_and_wait(`赢了，胜利了，夺下了这场比赛。`);
     await kita.print_and_wait(

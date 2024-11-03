@@ -76,6 +76,6 @@ release:
     ref: '$CI_COMMIT_SHA'
     assets:
       links:
-        - name: '[解压即玩包] $GAME_ALL_ZIP'
+        - name: '[解压即玩包] $GAME_ALL_ZIP (解压密码：era)'
           url: '${GAME_ZIP_URL}'
           link_type: package
