@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const sys_get_status = require('#/system/chara/sys-get-status');
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
@@ -147,7 +148,8 @@ async function reg_race_page() {
       registered_race,
     ),
     base_disabled_check = check_register_disabled(chara_id, in_foreign),
-    grand_lives = new GrandLives();
+    grand_lives = new GrandLives(),
+    status_list = sys_get_status(chara_id);
 
   while (flag_race_reg) {
     await era.clear();
@@ -156,7 +158,13 @@ async function reg_race_page() {
         { type: 'divider' },
         {
           config: { align: 'center' },
-          content: ['为 ', chara.get_colored_name(), ' 报名下一场比赛'],
+          content: [
+            '为 ',
+            chara.get_colored_name(),
+            ' 报名下一场比赛',
+            { isBr: true },
+            ...status_list,
+          ],
           type: 'text',
         },
       ],
