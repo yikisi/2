@@ -1,11 +1,16 @@
 const CharaTalk = require('#/utils/chara-talk');
 
-const chara_talk_dict = { 17: true, 9017: true };
-Object.keys(chara_talk_dict).forEach(
-  (e) =>
-    (chara_talk_dict[e] = require(
-      `#/utils/chara-talk-extended/chara-talk-${e}`,
-    )),
+const cons_dict = {};
+
+const current = new Date().getTime();
+
+cons_dict[17] = require('#/utils/chara-talk-extended/chara-talk-17');
+cons_dict[9017] = require('#/utils/chara-talk-extended/chara-talk-9017');
+
+console.log(
+  '[chara-talk-factory.js] constructor dictionary init done!',
+  (new Date().getTime() - current).toLocaleString(),
+  'ms',
 );
 
 module.exports = {
@@ -18,8 +23,8 @@ module.exports = {
     if (!chara_id) {
       return CharaTalk.me;
     }
-    if (chara_talk_dict[chara_id]) {
-      return new chara_talk_dict[chara_id](chara_id, color);
+    if (cons_dict[chara_id]) {
+      return new cons_dict[chara_id](chara_id, color);
     }
     return new CharaTalk(chara_id, color);
   },
