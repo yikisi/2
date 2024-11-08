@@ -33,7 +33,7 @@ module.exports = class extends CustomizedRecruit {
         );
         await say_by_passer_by(
           `马娘`,
-          `抱歉，不是说您的水平问题，只是我稍微有点担心呢，不好意思。`,
+          `——啊，其实训练员先生真的很厉害，只是我稍微有点担心呢，不好意思。`,
         );
         era.printButton(`我这边才是唐突了。祝你接下来遇到更好的训练员。`, 1);
         await era.input();

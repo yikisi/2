@@ -970,7 +970,7 @@ module.exports = async function (event_object) {
       await era.printAndWait(`……似乎还是在生气的样子？`);
       await me.say_and_wait(`接下来醒目飞鹰似乎要很辛苦了。`, true);
       await era.printAndWait(`醒目飞鹰带着求助的目光看向了你。`);
-      await me.say_and_wait(`（移开视线）`);
+      await me.say_and_wait(`（移开视线）`, true);
       await era.printAndWait(`之后的草地特训一直持续到了宵禁才结束。`);
     }
   } else if (edu_weeks === 47 + 12) {

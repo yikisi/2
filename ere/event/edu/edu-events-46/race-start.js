@@ -67,7 +67,7 @@ module.exports = async (hook, extra_flag) => {
       1,
     );
     await era.input();
-    await falcon.say_and_wait(`❤`);
+    await falcon.say_and_wait(`⭐`);
     await era.printAndWait(`醒目飞鹰眨了眨眼，然后关上了准备室的大门。`);
   } else if (extra_flag.race === race_enum.japa_dir && edu_weeks < 95) {
     await print_event_name(`莫名的焦躁感`, falcon);

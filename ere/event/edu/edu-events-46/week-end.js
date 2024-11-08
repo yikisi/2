@@ -657,6 +657,7 @@ module.exports = async function () {
     await era.input();
     await era.printAndWait(`你将少女轻轻背起，确认着与她一同前行的重量。`);
     await era.printAndWait(`来时的道路比想象中还要漫长。`);
+    await era.printAndWait(`——但对醒目飞鹰来说，或许是人生中最重要的成年礼。`);
   } else if (edu_weeks === 95 + 23) {
     const love = era.get('love:46');
     await print_event_name('闲暇日', falcon);
@@ -1001,7 +1002,7 @@ module.exports = async function () {
       `再继续下去，迟早有一天会因为承受不住这份巨大的压力而像被高温加热后的岩石一样，遇到微小的契机，便会轰然炸开。`,
     );
     falcon.print(`或许不断选择错误的我明白的唯一正确的事情。`);
-    falcon.print(`啊啊，如果时间再多一点就好了。`);
+    falcon.print(`——啊啊，如果时间再多一点就好了。`);
     falcon.print(`如果能给我更多的时间的话，我就能处理好这一团乱麻。`);
     falcon.print(`然而这是不可能的事。`);
     falcon.print(`只要还在逃避必需完成的义务，未来就不会到来。`);
@@ -1010,6 +1011,37 @@ module.exports = async function () {
     );
     falcon.print(`作为偶像尽忠职守到最后一刻。`);
     falcon.print(`所以，不能再逃避下去了。`);
+    falcon.print(`第一次看沙地比赛时，我记得`);
+    era.printButton(`追赶的马娘超越了领头的马娘`, 1);
+    era.printButton(`领头的马娘踏出了关键的一步`, 2);
+    // 醒目飞鹰潜意识中选择的是逃避，若真结局则
+    const ret1 = await era.input();
+    if (ret1 === 1) {
+      falcon.print(`——没错，追赶的马娘超越了领头的马娘。`);
+      falcon.print(`沙地的马娘们所要面对的环境更加恶劣。`);
+      falcon.print(`拼尽全力，放空一切，为了超越前方的目标。`);
+      falcon.print(`尽管如此，这还不够。`);
+      falcon.print(`若不在一开始就抢到优势位置，败者将承受沙土的考验。`);
+      falcon.print(
+        `决胜服被沙地弄脏，姣好的面容被沙土覆盖。不管从什么角度来看，都称不上是闪耀的姿态。`,
+      );
+      falcon.print(`眼睛被浸入的沙子深深刺痛，急促的呼吸被沙土打乱节奏。`);
+      falcon.print(`没有思考的充裕，连自身的存在都忘记，就这么超越对方。`);
+      falcon.print(`这就是竞争的意义。`);
+    } else {
+      falcon.print(`领头的马娘踏出了关键的一步。`);
+      falcon.print(
+        `好像是去年，小铃鹿教导草地赛的时候，不会交给其他人的风景……好像是这个来着？`,
+      );
+      falcon.print(`领先的风景吗……有些怀念呢。`);
+      falcon.print(`在全国巡演时，与地方马娘之间的比赛。`);
+      falcon.print(`比起草地赛事，还是沙地赛的印象更加深刻。`);
+      falcon.print(`……`);
+      falcon.print(`除了皋月赏。`);
+      falcon.print(
+        `随着歌曲节奏变换的光线，台下的荧光棒随着节奏变换的光线组成的海洋，远远望去就像是层次分明的潮汐。`,
+      );
+    }
     falcon.print(`……啊啊……脑海之中又浮现出了训练员先生的模样。`);
     falcon.print(`明明不能逃避。`);
     falcon.print(`纵使泪流满面。`);
@@ -1021,9 +1053,7 @@ module.exports = async function () {
       `转眼之间秋天已经过去一半了，一路上的行人也纷纷穿起了外套。`,
     );
     await me.say_and_wait(`飞鹰子不觉得冷吗？`);
-    await era.printAndWait(
-      `看着蹦蹦跳跳地在前方带路的飞鹰子，你实在忍不住好奇的向她询问。`,
-    );
+    await era.printAndWait(`看着比的飞鹰子，你实在忍不住好奇的向她询问。`);
     await falcon.say_and_wait(`飞鹰子不觉得冷哦？`);
     await era.printAndWait(`说起来也是，毕竟马娘比起人类体温更高一点。`);
     await me.say_and_wait(`真是有点羡慕飞鹰子呢。`);

@@ -180,7 +180,7 @@ module.exports = class extends CustomizedCheck {
         case 30:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 9月第二周 努力减肥的飞鹰子！
+        // 9月第二周 向着闪耀大舞台不停歇的前进！
         case 34:
           add_event(event_hooks.week_end, event_obj_special);
           break;
@@ -237,7 +237,7 @@ module.exports = class extends CustomizedCheck {
         case 47 + 48:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 资深年1月第一周 新年
+        // 资深年1月第一周 新年 edu_46 1042行
         case 95 + 1:
           add_event(event_hooks.week_start, event_obj_special);
           break;
