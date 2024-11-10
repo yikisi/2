@@ -8,7 +8,7 @@ const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-
 const { attr_names } = require('#/data/train-const');
 
 module.exports = class extends CustomizedInit {
-  init(init_chara, is_reset) {
+  init(is_reset) {
     if (!is_reset) {
       if (sys_personal_achievement.get(301)) {
         new TokinoLifeMarks().who_am_i = 1;

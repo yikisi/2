@@ -137,7 +137,7 @@ handlers[event_hooks.race_end] = require('#/event/edu/edu-events-68/race-end');
 
 /**
  * @param {HookArg} hook
- * @param {{train:number,stamina_ratio:number}} extra_flag
+ * @param {TrainSuccessParams} extra_flag
  */
 handlers[event_hooks.train_success] = async (hook, extra_flag) => {
   const kita = get_chara_talk(68),
@@ -166,7 +166,7 @@ handlers[event_hooks.train_success] = async (hook, extra_flag) => {
 
 /**
  * @param {HookArg} hook
- * @param {{args:*,fumble:boolean,train:number}} extra_flag
+ * @param {TrainFailParams} extra_flag
  */
 handlers[event_hooks.train_fail] = async (hook, extra_flag) => {
   const kita = get_chara_talk(68),

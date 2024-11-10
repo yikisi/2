@@ -22,7 +22,7 @@ async function flatter() {
     await grand.say_and_wait([
       '呐，',
       callname,
-      '……为什么要保护我呢？明明什么都不做就可以离开这里……',
+      '……为什么要保护我呢？明明什么都不做就好了……',
     ]);
     era.println();
 
@@ -76,20 +76,24 @@ async function flatter() {
     ]);
     era.println();
 
-    await grand.say_and_wait(['只有两个人的房间……总觉得……好怀念啊。']);
+    await grand.say_and_wait([
+      '只有我们两个人的房间…不知道为什么，总觉得……好怀念啊。',
+    ]);
     era.println();
 
     await era.printAndWait(['穿透了时间的语调，蕴含的是不容忽视的寂寞。']);
     era.println();
 
-    await grand.say_and_wait(['我一直以为……我们之间的日常会持续下去。']);
     await grand.say_and_wait([
-      '从什么时候开始呢……',
-      callname,
-      ' 的身边……出现了其他孩子。',
+      '以前我一直以为，我们两人之间的日常会一直持续下去。',
     ]);
     await grand.say_and_wait([
-      '因为嫉妒……我做出了无法原谅的事情，我们的关系，已经回不到过去了吧……',
+      '是从什么时候开始呢……',
+      callname,
+      ' 的身边……出现了除我以外的人。',
+    ]);
+    await grand.say_and_wait([
+      '因为嫉妒……我对你做出了无法原谅的事情……我们的关系，已经无论如何都回不到过去了吧……',
     ]);
     life_marks.b_flatter++;
   } else if (
@@ -115,7 +119,7 @@ async function flatter() {
       '剥夺你的自由，把你关在这里。我知道你肯定会讨厌这样的我……',
     ]);
     await grand.say_and_wait([
-      '但是我也知道……如果什么都不做，你可能永远都不会回来看我了……！',
+      '但是，我也知道……如果什么都不做，你可能永远都不会回来看我了……！',
     ]);
     await grand.say_and_wait(['求你了……', callname, '……让我留在你的身边……']);
     life_marks.b_flatter++;

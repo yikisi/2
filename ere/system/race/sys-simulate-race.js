@@ -236,7 +236,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
       uma.race.conditionParams.activate_count_start++;
     });
     statistics.skill[uma.index_race].data.push(
-      uma.race.conditionParams.activate_count_start,
+      uma.race.conditionParams.activate_count_all,
     );
     if (start_delay[uma.index_race] < 1 / frame_rate) {
       uma.race.acceleration = start_acc;

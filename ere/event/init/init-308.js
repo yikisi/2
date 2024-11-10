@@ -7,7 +7,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const { adaptability_names } = require('#/data/train-const');
 
 module.exports = class extends CustomizedInit {
-  init(init_chara, is_reset) {
+  init(is_reset) {
     if (!is_reset) {
       era.set(
         'callname:308:-2',

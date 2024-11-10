@@ -490,6 +490,14 @@ async function check_new_activities(cur_round, in_team_list) {
           sys_check_npc_working(e),
       ),
     );
+
+  if (
+    !(era.get('cflag:345:育成回合计时') < 3 * 48) &&
+    sys_check_npc_working(345) &&
+    Math.random() < 0.5
+  ) {
+    loc_visitors.get(location_enum.visitor).push(345);
+  }
 }
 
 module.exports = check_new_activities;

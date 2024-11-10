@@ -118,6 +118,10 @@ function sys_get_chara_pseudo(chara_id) {
   temp = uma.attrs.reduce((p, c) => p + c, 0) / 5;
   uma.base.attr_err = uma.attrs.reduce((p, c) => p + (c - temp) ** 2, 0) / 5;
   uma.base.weight = era.get(`base:${chara_id}:体重偏差`);
+  uma.base.research_lv = attr_names.reduce(
+    (p, c) => p + era.get(`abl:${chara_id}:${c}训练等级`),
+    0,
+  );
   uma.base.fame = get_trainer_level();
   return uma;
 }

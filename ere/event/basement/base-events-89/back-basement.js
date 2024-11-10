@@ -12,13 +12,17 @@ function back_basement() {
     life_marks = new GrandLifeMarks(),
     me = get_chara_talk(0);
   if (life_marks.b_start) {
-    era.print(['正这样想时，门锁处突然传来『咔哒』一声。']);
+    era.print([
+      '正当 ',
+      me.get_colored_name(),
+      ' 寻找反抗手段时，门锁处突然传来『咔哒』一声。',
+    ]);
     era.println();
 
     grand.say([callname, '……你醒了……']);
     era.println();
 
-    era.print(['出现在门口的身影，远非想象中的凶恶歹徒。']);
+    era.print(['然而出现在门口的身影，远非想象中的凶恶歹徒。']);
     era.print([
       '小',
       grand.get_uma_sex_title(),
@@ -38,7 +42,7 @@ function back_basement() {
       grand.get_teen_sex_title(),
       '向 ',
       me.get_colored_name(),
-      ' 的后脑伸出颤颤巍巍的小手，悬停片刻，却转而压下了帽檐。',
+      ' 的后脑伸出颤颤巍巍的小手，悬停片刻，却转而压下帽檐。',
     ]);
     era.println();
 
@@ -76,11 +80,7 @@ function back_basement() {
 
     grand.say(['……', callname, ' 被监禁在这里，我却一个人享用肉包……什么的。']);
     grand.say(['想到这里……总觉得……什么都吃不下去。']);
-    grand.say([
-      '不用在意我也可以的……只要 ',
-      callname,
-      ' 吃得开心……我就满足了……',
-    ]);
+    grand.say(['不用在意我也可以的……只要 ', callname, ' 开心……我就满足了……']);
   } else {
     era.print([
       '隐约听到外面的雨声，',

@@ -646,8 +646,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     });
   });
   sort_list(ret, (uma) => uma.pop[0]).forEach((uma, rank, list) => {
-    uma.pop[0] = rank + 1;
-    uma.race.conditionParams.popularity = rank + 1;
+    uma.race.conditionParams.popularity = uma.pop[0] = rank + 1;
     uma.race.conditionParams.running_style_equal_popularity_one = Number(
       uma.style === list[0].style,
     );
