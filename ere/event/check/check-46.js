@@ -197,9 +197,10 @@ module.exports = class extends CustomizedCheck {
         case 47 + 6:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 3月第四周 目标！皋月赏！
+        // 3月第四周 开幕 目标！皋月赏！闭幕 早已知晓的恋心
         case 47 + 12:
           add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_end, event_obj_special);
           break;
         // 6月第一周 训练室的花
         case 47 + 21:

@@ -209,6 +209,165 @@ module.exports = async function () {
     await me.say_and_wait(`一起努力吧！`);
     await falcon.say_and_wait(`好！接下来的话也请多多指教了！训练员君⭐`);
     await me.say_and_wait(`我也是，请多指教了，飞鹰子。`);
+  } else if (edu_weeks === 47 + 12) {
+    // 默认皋月赏结束
+    // 演出结束之后，回到学校时发现缎带掉了一根，急忙寻找，离宵禁很近，抉择
+    // 到失去地点，没找到，绝望时，被匆匆赶来的小马娘捡到，被询问与训练员之间的感情
+    // 醒目飞鹰突然意识到了自己对训练员的感情可能导致偶像事业的重创
+    // 陷入不安之中
+    await print_event_name(`早已察觉的恋心`, falcon);
+    await era.printAndWait(`宿舍\n`);
+    await falcon.say_and_wait(`训练员先生，谢谢你送飞鹰子回宿舍！`);
+    await era.printAndWait(
+      `目送着离去的身影渐渐消失在视野尽头，醒目飞鹰也准备回到宿舍中。`,
+    );
+    await era.printAndWait(
+      `因为参加比赛的缘故，同时也要满足一直支持醒目飞鹰的愿望，为了在这两者之间保持平衡，你努力说服了醒目飞鹰在参加比赛这个星期减少突击演出的时间。`,
+    );
+    await era.printAndWait(
+      `为了珍惜宝贵的演出时间，醒目飞鹰比以往更加努力的闪耀着。`,
+    );
+    await falcon.say_and_wait(`……训练员先生。`);
+    falcon.print(`目送训练员先生离去的身影，不知不觉已经成为了每天的日课。`);
+    falcon.print(
+      `为了站在最大舞台的愿望，同时也要为了一直支持飞鹰子的粉丝，飞鹰子每天都得很充实。`,
+    );
+    falcon.print(
+      `啊，虽然有时候演出结束时，两腿瘫软到几乎不想动的情况也越来越多了。`,
+    );
+    falcon.print(
+      `是偶像修行的程度还太浅的缘故吧，看来飞鹰子离顶级偶像还有很长的路要走呢。`,
+    );
+    falcon.print(`不能让粉丝们看到飞鹰子消极的一面，既然这样的话。`);
+    falcon.print(`嗯——下一次要不要穿决胜服进行演出呢。`);
+    falcon.print(
+      `支持飞鹰子的大家们有很多想要亲眼看飞鹰子穿决胜服的演出的样子，呢。`,
+    );
+    falcon.print(
+      `因为比赛开始时恰好是工作日的缘故所以没能亲自观看吗……大家都过着很辛苦的生活呢。`,
+    );
+    falcon.print(`决定了！飞鹰子才要以最闪耀的姿态带给大家幸福！`);
+    falcon.print(`令人安心的手势！夺去目光的舞步！以及钻石般亮晶晶的决胜服！`);
+    falcon.print(`啊——说起来发型可能也要调整。`);
+    era.printButton(`欸？`, 1);
+    await era.input();
+    await era.printAndWait(
+      `用发髻固定的头发像是终于解放了一样，固定住马尾的皮筋绷断了。`,
+    );
+    falcon.print(`终于到极限了吗？`);
+    await era.printAndWait(
+      `像是自言自语一样的醒目飞鹰下意识的抚摸着刘海处的缎带。`,
+    );
+    falcon.print(`一二……三呢？`);
+    falcon.print(`心中泛起一丝不安，我将缎带取下一遍又一遍徒劳的数着。`);
+    await falcon.say_and_wait(`得赶快顺着回来的道路去找。`, true);
+    falcon.print(`那是对我最重要的，温柔的母亲亲手制作的决胜服。`);
+    await falcon.say_and_wait(`可是时间。`, true);
+    falcon.print(`时针与分针的夹角看上去连水果巴菲上的草莓都塞不下。`);
+    falcon.print(`如果是打破宵禁的话，之后会被手纲小姐说教的吧。`);
+    falcon.print(`如果事先和奇石同学说一声的话，应该可以通融一下吧？`);
+    await falcon.say_and_wait(`飞鹰子！加油！`);
+    await era.printAndWait(`然而身体已经先大脑一步迈出去了。`);
+    falcon.print(`啊啊，总是这样。`);
+    falcon.print(
+      `扑哧扑哧闪着光环的天使飞鹰子叹息着，一旁的恶魔飞鹰子兴高采烈的加油喝彩。`,
+    );
+    await falcon.say_and_wait(
+      `全力以赴的面对现在的困境，后果什么的就交给明天的飞鹰子处理！`,
+    );
+    await era.printAndWait(
+      `确定了前进的方向后，醒目飞鹰不错过任何一处角落的全速前进。`,
+    );
+    era.drawLine();
+    falcon.print(
+      `特雷森门口，沿着商业街的小道，直到目的地河边草地，一路上都没有缎带的样子。`,
+    );
+    falcon.print(`就像是缎带长出了翅膀扑哧扑哧飞走了一样。`);
+    falcon.print(`啊啊，亲爱的缎带小姐，希望你在伊甸园的生活一直顺利。`);
+    falcon.print(`将胡乱的思绪甩开，飞鹰子重新意识到了一件事。`);
+    await falcon.say_and_wait(`离宵禁已经过去半个小时了吧！怎么办！`);
+    falcon.print(`恐怕得知情况的特雷森现在正焦急地寻找着飞鹰子吧。`);
+    falcon.print(`不甘心，就这么两手空空的回去，实在是不甘心。`);
+    await falcon.say_and_wait(
+      `不对，如果从积极的方面考虑的话，直到第二天早晨为止，飞鹰子有充足的时间寻找缎带了！`,
+      true,
+    );
+    falcon.print(`焦躁的内心也追歼平复下来了，就这样回忆有可能落下的地方。`);
+    falcon.print(`演出开始前，缎带完好无缺的呆在额头上。`);
+    falcon.print(
+      `安可时为了兼顾最左和最右侧的观众，想起了之前看过的热门偶像帅气的旋转后实现了视线的翻转。`,
+    );
+    falcon.print(`或许就是那个时候不小心掉下来的吧。`);
+    falcon.print(`如果是被哪位观众捡起来的话，那飞鹰子找到的希望就比较小了。`);
+    falcon.print(`唔——如果平时没有在数学课打瞌睡的话。`);
+    await say_by_passer_by(`？？？`, `那边的是飞鹰子姐姐吗？`);
+    await falcon.say_and_wait(`咦咦咦咦？`);
+    await era.printAndWait(
+      `醒目飞鹰被突如其来的声音吓到心脏停了一拍，尾巴上的毛发也变得僵硬。`,
+    );
+    await era.printAndWait(
+      `深夜时分从小径传来的稚嫩童声，以及朝着河边缓缓逼近的黑影。`,
+    );
+    await falcon.say_and_wait(
+      `难道这就是训练员说过的专门吃不听话马娘的马娘杀手吗？`,
+      true,
+    );
+    await falcon.say_and_wait(`飞鹰子，飞鹰子不好吃啊啊啊！`);
+    await say_by_passer_by(`小马娘`, `欸？`);
+    await era.printAndWait(`澎！`);
+    await era.printAndWait(`黑影旁的绿化树轰然倒下。`);
+    await say_by_passer_by(`小马娘`, `果然是飞鹰子姐姐！`);
+    await era.printAndWait(`丝毫没被吓到的小马娘兴奋的凑上前来。`);
+    era.drawLine();
+    falcon.print(
+      `小心翼翼将缎带收进口袋之中，看着眼前为了归还缎带而偷偷离开的少女。`,
+    );
+    falcon.print(`失而复得的安慰感转瞬又被自责所覆盖。`);
+    falcon.print(`如果没有为了缎带逃了宵禁的话，飞鹰子恐怕会。`);
+    falcon.print(
+      `看着眼前期待着表扬的少女，至少飞鹰子会负起责任好好把你送回去的。`,
+    );
+    await era.printAndWait(`醒目飞鹰蹲下身体，努力保证自己的视线与少女平行。`);
+    await falcon.say_and_wait(
+      `谢谢你，飞鹰子一定会为了大家努力成为马娘偶像的。`,
+    );
+    falcon.print(`学着训练员先生抚摸的手法，尽可能温柔的笑着。`);
+    await falcon.say_and_wait(`抱歉，飞鹰子还是太不成熟了。`, true);
+    falcon.print(
+      `看着眼前期待着表扬的少女，至少飞鹰子会负起责任好好把你送回去的。`,
+    );
+    await falcon.say_and_wait(`接下来让飞鹰子带你回去吧。`);
+    await say_by_passer_by(`小马娘`, `欸？真的吗！飞鹰子姐姐要送我回去了！`);
+    await falcon.say_and_wait(
+      `眼前的少女为了自己冒险得到的超乎想象的报酬而雀跃着。`,
+    );
+    await falcon.say_and_wait(`一起前往最闪耀的舞台吧！`);
+    falcon.print(`将破损的缎带小心收起，轻轻牵起少女的小手。`);
+    era.drawLine();
+    await say_by_passer_by(`小马娘`, `谢谢你送我回家！`);
+    await era.printAndWait(`在住宅的大门前，小马娘向醒目飞鹰道谢。`);
+    await falcon.say_and_wait(`不，我这边才是。`);
+    falcon.print(`苦笑着做出了回礼。`);
+    await falcon.say_and_wait(
+      `就像在路上说好的一样，不要像今晚一样偷偷出来了！这是和飞鹰子之间的约定呦？`,
+    );
+    await say_by_passer_by(`小马娘`, `知道了！`);
+    await era.printAndWait(
+      `正准备从虚掩的大门进入的马娘像是想到了什么一样，回过头看向了醒目飞鹰。`,
+    );
+    await say_by_passer_by(`小马娘`, `说起来，飞鹰子姐姐旁边的大哥哥是谁？`);
+    await say_by_passer_by(`小马娘`, `是飞鹰子的男朋友吗？`);
+    falcon.print(`不，不是这种关系。`);
+    falcon.print(`正打算这么反驳时，却怎么也说不出口。`);
+    falcon.print(`像是不小心把鸡蛋整个吞下一样，话语卡在了喉咙之中。`);
+    await say_by_passer_by(`小马娘`, `明天我也会看飞鹰子姐姐的表演的！`);
+    falcon.print(`大门在眼前缓缓关上了。`);
+    falcon.print(`啊啊，其实我一直都知道。`);
+    falcon.print(`只是自己不知道该怎么办才好。`);
+    falcon.print(`今晚比想象中还要难熬啊。`);
+    await era.printAndWait(
+      `第二天，小马娘一家向特雷森表达了对醒目飞鹰送偷跑出门的小马娘回家的感谢，为此训练员被手纲小姐狠狠的批评了。`,
+    );
   } else if (edu_weeks === 47 + 21) {
     await print_event_name(`训练室的花`, falcon);
     era.printButton(`终于结束了。`, 1);
