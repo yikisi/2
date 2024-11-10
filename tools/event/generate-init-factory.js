@@ -45,13 +45,13 @@ console.log(
 module.exports = {
   /**
    * @param {number} chara_id
-   * @returns {function(function(number,number?),boolean?)}
+   * @returns {function(boolean?)}
    */
   get_custom_init(chara_id) {
     if (cons_dict[chara_id]) {
       return new cons_dict[chara_id]().init;
     }
-    return ()=>{};
+    return () => {};
   },
 };
 `;
