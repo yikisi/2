@@ -1,4 +1,4 @@
-# [EraUma v1.01 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.001)
+# [EraUma v1.01 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.01)
 _2024/11/11_
 
 适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.0.0) 版本
