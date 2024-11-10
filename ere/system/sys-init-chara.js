@@ -4,6 +4,7 @@ const sys_change_hair = require('#/system/chara/sys-change-hair');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 const { sys_fix_chara_base } = require('#/system/sys-calc-base-cflag');
 
+const CustomizedInit = require('#/event/init/customized-init');
 const { get_custom_init } = require('#/event/init/init-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
@@ -267,6 +268,7 @@ function init_chara(chara_id, src_chara_id) {
 }
 
 CharaTalk.init_chara = init_chara;
+CustomizedInit.init_chara = init_chara;
 
 /**
  * 重置角色状态
@@ -338,7 +340,7 @@ function reset_chara(chara_id, from_init) {
     era.set(`base:${chara_id}:精力`, max_time);
   }
 
-  get_custom_init(chara_id)(init_chara, !from_init);
+  get_custom_init(chara_id)(!from_init);
 }
 
 module.exports = {
