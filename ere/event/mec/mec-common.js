@@ -73,6 +73,15 @@ class CustomizedMec {
     return 0;
   }
 
+  /**
+   * @param {number} part
+   * @returns {number}
+   */
+  // eslint-disable-next-line no-unused-vars
+  get_palam_limit_buff(part) {
+    return 0;
+  }
+
   get_pregnant_ratio() {
     return 0;
   }

@@ -144,6 +144,8 @@ class PseudoUma {
     velocityMin: 0,
     // 体重
     weight: 4000,
+    // 训练等级和
+    research_lv: 0,
     // 胜场数
     winCount: 0,
   };

@@ -146,7 +146,8 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const edu_marks = new TachyonEduMarks(),
+    const cur_round = era.get('flag:当前回合数'),
+      edu_marks = new TachyonEduMarks(),
       life_marks = new TachyonLifeMarks();
     if (era.get('cflag:32:招募状态') === recruit_flags.yes) {
       const daily_event_object = new EventObject(32, cb_enum.daily),
@@ -168,7 +169,7 @@ module.exports = class extends CustomizedCheck {
         era.get('cflag:0:位置') === era.get('cflag:32:位置')
       ) {
         if (relation <= 225) {
-          (temp = era.get('flag:当前回合数') - life_marks.l_cook) > 1 &&
+          (temp = cur_round - life_marks.l_cook) > 1 &&
             temp <= 4 &&
             add_event(
               event_hooks.week_start,
@@ -177,7 +178,7 @@ module.exports = class extends CustomizedCheck {
                 .set_arg(`cook${Number(life_marks.cook >= 5)}${temp - 1}`),
             );
         } else if (life_marks.cook >= 10) {
-          (temp = era.get('flag:当前回合数') - life_marks.l_cook) > 1 &&
+          (temp = cur_round - life_marks.l_cook) > 1 &&
             add_event(
               event_hooks.week_start,
               daily_event_object.copy().set_arg(`cook2${temp - 1}`),
@@ -212,10 +213,11 @@ module.exports = class extends CustomizedCheck {
     if (edu_weeks < 3 * 48) {
       edu_marks.train_stop = 0;
       edu_marks.train_fail = Math.min(edu_marks.train_fail, 2);
-      const event_obj = new EventObject(32, cb_enum.edu);
-      const event_obj_special = new EventObject(32, cb_enum.edu, true).set_arg(
-        edu_weeks,
-      );
+      const event_obj = new EventObject(32, cb_enum.edu),
+        event_obj_special = new EventObject(32, cb_enum.edu, true).set_arg(
+          edu_weeks,
+        ),
+        year_begin = cur_round - (cur_round % 48);
       if (
         Math.random() < 0.2 &&
         era.get('cflag:32:位置') === location_enum.office &&
@@ -230,7 +232,6 @@ module.exports = class extends CustomizedCheck {
         case 47 + 5: // 中期报告提交
         case 47 + 25: // A or B
         case 47 + 31: // 夏日的数据采集 or 月光
-        case 95 + 1: // 第二次年度审核报告 or 下定决心的新年
         case 95 + 6: // 情人节
         case 95 + 14: // 粉丝感谢祭
         case 95 + 31: // 他人的可能性 or 再度闪耀的光子
@@ -280,6 +281,15 @@ module.exports = class extends CustomizedCheck {
             add_event(event_hooks.week_end, event_obj_special);
           }
           break;
+        case 95 + 1: // 第二次年度审核报告 or 下定决心的新年
+          add_event(event_hooks.week_start, event_obj_special);
+          if (edu_marks.plan_b) {
+            sys_reg_race(32).curr = {
+              race: race_enum.tenn_spr,
+              week: year_begin + race_infos[race_enum.tenn_spr].date,
+            };
+          }
+          break;
         case 95 + 3: // 抽奖与代偿剂效应
           add_event(event_hooks.out_shopping, event_obj_special);
           break;
@@ -287,10 +297,15 @@ module.exports = class extends CustomizedCheck {
           if (edu_marks.plan_b) {
             sys_reg_race(32).curr = {
               race: race_enum.tenn_spr,
-              week:
-                era.get('flag:当前回合数') +
-                race_infos[race_enum.tenn_spr].date -
-                5,
+              week: year_begin + race_infos[race_enum.tenn_spr].date,
+            };
+          }
+          break;
+        case 95 + race_infos[race_enum.tenn_spr].date:
+          if (edu_marks.plan_b) {
+            sys_reg_race(32).curr = {
+              race: race_enum.tenn_spr,
+              week: year_begin + race_infos[race_enum.tenn_spr].date,
             };
           }
           break;
@@ -299,14 +314,28 @@ module.exports = class extends CustomizedCheck {
             add_event(event_hooks.week_end, event_obj_special);
           }
           break;
+        case 95 + 19:
+        case 95 + race_infos[race_enum.takz_kin].date:
+          if (edu_marks.plan_b) {
+            sys_reg_race(32).curr = {
+              race: race_enum.takz_kin,
+              week: year_begin + race_infos[race_enum.takz_kin].date,
+            };
+          }
+          break;
+        case 95 + race_infos[race_enum.takz_kin].date + 1:
+          if (edu_marks.plan_b) {
+            sys_reg_race(32).curr = {
+              race: race_enum.prix_lat,
+              week: year_begin + race_infos[race_enum.prix_lat].date,
+            };
+          }
+          break;
         case 95 + 29: // 短暂歇息
           if (edu_marks.plan_b) {
             sys_reg_race(32).curr = {
               race: race_enum.prix_lat,
-              week:
-                era.get('flag:当前回合数') +
-                race_infos[race_enum.prix_lat].date -
-                29,
+              week: year_begin + race_infos[race_enum.prix_lat].date,
             };
           }
           add_event(event_hooks.week_start, event_obj_special);
@@ -401,13 +430,9 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
+      { plan_b } = new TachyonEduMarks(),
       races = new RaceHistory(32).get();
-    buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-    buffer.push(check_aim_and_get_entry(races, race_enum.hope_sta, 0, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 1));
-    if (new TachyonEduMarks().plan_b) {
+    if (plan_b) {
       const coffee = get_chara_talk(25).get_colored_name(),
         coffee_races = new RaceHistory(25).get();
       buffer.push(
@@ -434,15 +459,12 @@ module.exports = class extends CustomizedCheck {
           check_aim_and_get_entry(coffee_races, race_enum.tenn_spr, 2, 3),
         ),
       );
-      buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
       buffer.push(
         get_coffee_aim_entry(
           coffee,
           check_aim_and_get_entry(coffee_races, race_enum.takz_kin, 2, 3),
         ),
       );
-      buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 1));
-      buffer.push(check_aim_and_get_entry(races, race_enum.prix_lat, 2, 1));
       buffer.push(
         get_coffee_aim_entry(
           coffee,
@@ -455,6 +477,21 @@ module.exports = class extends CustomizedCheck {
           check_aim_and_get_entry(coffee_races, race_enum.arim_kin, 2, 1),
         ),
       );
+    }
+    buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+    buffer.push(check_aim_and_get_entry(races, race_enum.hope_sta, 0, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 1));
+    if (plan_b) {
+      const edu_weeks = era.get('cflag:32:育成回合计时');
+      if (edu_weeks >= 95 + 1) {
+        buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
+      }
+      if (edu_weeks >= 95 + 19) {
+        buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 1));
+        buffer.push(check_aim_and_get_entry(races, race_enum.prix_lat, 2, 1));
+      }
     } else {
       buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
       buffer.push(check_aim_and_get_entry(races, race_enum.sank_hai, 2, 2));

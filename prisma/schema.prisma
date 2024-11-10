@@ -6836,3 +6836,12 @@ model single_mode_training_bg_chara {
   @@index([command_id, command_level], map: "single_mode_training_bg_chara_0_command_id_1_command_level")
   @@index([scenario_id], map: "single_mode_training_bg_chara_0_scenario_id")
 }
+
+model room_match_training_rank {
+  id         Int    @id @default(autoincrement())
+  rank       Int
+  rule_line  Int
+  start_date String
+
+  @@index([rank], map: "room_match_training_rank_0_rank")
+}

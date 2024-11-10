@@ -129,6 +129,7 @@ const ability_usage_enum = {
   MultiplyForeignAdaptability: 24,
   MultiplyUAFWins: 26,
   MultiplyCookingPt: 27,
+  MultiplyResearchLv: 28,
 };
 
 const target_type_enum = {

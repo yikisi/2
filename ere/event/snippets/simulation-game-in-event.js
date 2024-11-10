@@ -38,6 +38,7 @@ async function simulation_game_in_event(
         reference.limit,
         0,
         0,
+        0,
         reference.param_id,
       ),
     ),

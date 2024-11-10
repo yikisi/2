@@ -128,7 +128,7 @@ function find_escape(out_of_prison, s_level_up, is_back) {
     era.println();
 
     grand.say(['都是我的错…没有照顾好 ', callname, '，让你产生了离开的想法。']);
-    grand.say(['…必须让 ', callname, ' 更多感受我的心意…']);
+    grand.say(['……必须让 ', callname, ' 感受到我的心意…']);
   }
 }
 

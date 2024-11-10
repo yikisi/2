@@ -20,6 +20,8 @@ const {
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -66,6 +68,7 @@ function update_ero_status(...ids) {
     ) {
       base_buff -= 1;
     }
+    const chara_mec = get_custom_mec(chara_id);
     pleasure_list.forEach((part) => {
       let limit = base_buff;
       const talent_name = part_talents[part];
@@ -81,9 +84,10 @@ function update_ero_status(...ids) {
       } else if (talent_name) {
         limit -= Math.floor(2.5 * era.get(`talent:${chara_id}:${talent_name}`));
       }
-      limit = (base_limit * (10 + Math.max(limit, -9))) / 10;
+      limit = (base_limit * (10 + limit)) / 10;
       const random_range = Math.min(limit / 10, 100);
       limit += get_random_value(-random_range, random_range);
+      limit = Math.max(limit + chara_mec.get_palam_limit_buff(part), 100);
       era.set(`tcvar:${chara_id}:${part_names[part]}快感上限`, limit);
     });
     if (

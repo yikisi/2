@@ -116,6 +116,24 @@ handlers[344] = () =>
         },
       };
 
+handlers[345] = () =>
+  get('cflag:344:招募状态') === recruit_flags.yes || get('love:345') < 25
+    ? {}
+    : {
+        name: '「一起努力吧！」（招募）',
+        handle() {
+          era.set('callname:345:-2', '砂糖灯');
+          era.set('cflag:345:招募状态', recruit_flags.yes);
+          if (get('talent:345:病娇')) {
+            new YandereList().push(345, true);
+          }
+          return era.printAndWait([
+            get_chara_talk(345).get_colored_name(),
+            ' 加入了队伍！',
+          ]);
+        },
+      };
+
 async function page_visitors() {
   let flag_page = true,
     flag_visitor = true;

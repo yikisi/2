@@ -12,7 +12,10 @@ const {
   sys_change_status_by_base,
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
-const { sys_check_remote } = require('#/system/sys-calc-chara-param');
+const {
+  sys_check_awake,
+  sys_check_remote,
+} = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 const { init_chara } = require('#/system/sys-init-chara');
@@ -76,11 +79,12 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   era.drawLine();
   era.set('flag:当前互动角色', 0);
   era.set('flag:当前位置', rest_loc);
-  if (chara_id && !sys_check_remote(chara_id) && !era.get('flag:床伴')) {
+  let lover = era.get('flag:床伴');
+  lover = era.set('flag:床伴', Number(sys_check_awake(0) && lover));
+  if (chara_id && !sys_check_remote(chara_id) && !lover) {
     await sys_call_daily_event(chara_id, event_hooks.good_night);
   }
-  let continue_flag = true,
-    temp;
+  let continue_flag = true;
   if (era.get('flag:当前位置') !== location_enum.basement) {
     start_machine_gun(event_hooks.week_end);
     while (
@@ -92,27 +96,31 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
     }
     stop_machine_gun(event_hooks.week_end);
   }
-  if ((temp = era.get('flag:床伴'))) {
-    era.set(`cflag:${temp}:自主训练`, 0);
-    const life_marks = new LifeEventMarks(temp);
-    begin_and_init_ero(0, temp);
+  if (lover > 0) {
+    era.set(`cflag:${lover}:自主训练`, 0);
+    const life_marks = new LifeEventMarks(lover);
+    begin_and_init_ero(0, lover);
     if (life_marks.marital_rape) {
-      era.set('tflag:强奸', temp);
-      era.set('tflag:主导权', temp);
+      era.set('tflag:强奸', lover);
+      era.set('tflag:主导权', lover);
     }
     const sex_3p = get_random_entry(
       sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
         .map((e) => {
           return {
             id: e,
-            check: e && get_custom_check(e).is_want_make_love(),
+            check:
+              e > 0 &&
+              e !== lover &&
+              sys_check_awake(e) &&
+              get_custom_check(e).is_want_make_love(),
           };
         })
         .filter(
           (e) =>
             e.check &&
-            era.get(`relation:${temp}:${e.id}`) > 375 &&
-            era.get(`relation:${e.id}:${temp}`) > 75,
+            era.get(`relation:${lover}:${e.id}`) > 375 &&
+            era.get(`relation:${e.id}:${lover}`) > 75,
         ),
     );
     if (sex_3p) {
@@ -134,20 +142,20 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
         wait_flag =
           sys_like_chara(sex_3p.id, 0, get_random_value(50, 150)) || wait_flag;
         wait_flag =
-          sys_like_chara(sex_3p.id, temp, get_random_value(50, 150)) ||
+          sys_like_chara(sex_3p.id, lover, get_random_value(50, 150)) ||
           wait_flag;
         wait_flag =
           sys_like_chara(
-            temp,
+            lover,
             0,
-            -get_random_value(25, 75 + 25 * era.get(`talent:${temp}:病娇`)),
+            -get_random_value(25, 75 + 25 * era.get(`talent:${lover}:病娇`)),
           ) || wait_flag;
         era.set(`cflag:${sex_3p.id}:自主训练`, 0);
       } else if (sex_3p.check === 2) {
         await era.printAndWait([
           chara.get_colored_name(),
           ' 征得 ',
-          get_chara_talk(temp).get_colored_name(),
+          get_chara_talk(lover).get_colored_name(),
           ' 的同意后，华丽地无视了 ',
           get_chara_talk(0).get_colored_name(),
           ' 的抗议……',
@@ -156,15 +164,15 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
         era.println();
         wait_flag =
           sys_like_chara(
-            temp,
+            lover,
             sex_3p.id,
-            -get_random_value(0, 25 * era.get(`talent:${temp}:病娇`)),
+            -get_random_value(0, 25 * era.get(`talent:${lover}:病娇`)),
           ) || wait_flag;
         wait_flag =
           sys_like_chara(
-            temp,
+            lover,
             0,
-            -get_random_value(50, 100 + 25 * era.get(`talent:${temp}:病娇`)),
+            -get_random_value(50, 100 + 25 * era.get(`talent:${lover}:病娇`)),
           ) || wait_flag;
         era.set(`cflag:${sex_3p.id}:自主训练`, 0);
       } else {
@@ -181,14 +189,14 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
           ) || wait_flag;
         wait_flag =
           sys_like_chara(
-            temp,
+            lover,
             0,
-            get_random_value(50, 100 + 25 * era.get(`talent:${temp}:病娇`)),
+            get_random_value(50, 100 + 25 * era.get(`talent:${lover}:病娇`)),
           ) || wait_flag;
       }
       wait_flag && (await era.waitAnyKey());
     }
-    await print_ero_page(temp);
+    await print_ero_page(lover);
     await end_ero_and_show_result(true);
     life_marks.marital_rape = 0;
   }

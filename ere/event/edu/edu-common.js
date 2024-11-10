@@ -138,15 +138,17 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
           hook.arg = false;
         }
       }
-    } else if (!sys_check_remote(chara_id)) {
+    } else if (
+      !sys_check_remote(chara_id) &&
+      extra_flag.attr !== attr_enum.intelligence
+    ) {
       if (
         era.get(`love:${chara_id}`) >= 50 &&
         era.get(`base:${chara_id}:性欲`) >= lust_border.itch &&
         Math.random() <
           (0.2 * era.get(`base:${chara_id}:性欲`)) / lust_border.want_sex
       ) {
-        era.println();
-        await era.waitAnyKey();
+        await era.printAndWait('');
         await print_event_name('训练后的性欲高涨', chara);
         await era.printAndWait([
           '一天的训练结束后，',
@@ -166,8 +168,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
           sys_change_lust(chara_id, get_random_value(500, 1500));
         }
       } else if (Math.random() < 0.05) {
-        era.println();
-        await era.waitAnyKey();
+        await era.printAndWait('');
         await print_event_name('淋浴间内', chara);
         await era.printAndWait([
           '嗯？',
