@@ -677,7 +677,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
       }
       // 阻挡
       if (
-        uma.race.conditionParams.phase >= 1 &&
+        uma.race.location >= 150 &&
         uma.race.conditionParams.blocked_front &&
         Math.random() >=
           (uma.race.strength * get_random_value(0.6, 0.8, true)) /
