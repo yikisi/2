@@ -676,13 +676,16 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
         uma.race.loc_mind = 0;
       }
       // 阻挡
-      if (
+      const block_percent =
         uma.race.location >= 150 &&
         uma.race.conditionParams.blocked_front &&
-        Math.random() >=
-          (uma.race.strength * get_random_value(0.6, 0.8, true)) /
-            l[i - 1].race.strength +
-            uma.race.lane_move_buff
+        (uma.race.strength * get_random_value(0.6, 0.8, true)) /
+          l[i - 1].race.strength +
+          uma.race.lane_move_buff;
+      if (
+        block_percent > 0 &&
+        block_percent < 1 &&
+        Math.random() >= block_percent
       ) {
         if (
           (uma.race.velocityReal - l[i - 1].race.velocityReal) / frame_rate >
