@@ -7,13 +7,14 @@ const filter_chara = require('#/system/sys-filter-chara');
 
 const print_page_header = require('#/page/components/page-header');
 
+const { get_custom_check } = require('#/event/check/check-factory');
+
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_custom_check } = require('#/event/check/check-factory');
 
 /**
  * load game
@@ -89,18 +90,22 @@ module.exports = async () => {
               src_chara > 0 ? get_chara_color(src_chara) : '#ffffff';
             CharaTalk.me = new CharaTalk(0);
             // 向前兼容
-            // 称号【刚毅贵妇人】bug
-            if (
-              era.get('version') <= 1010 &&
-              era.get('cflag:116:招募状态') === recruit_flags.yes &&
-              era.get('cflag:116:育成回合计时') >= 3 * 48
-            ) {
-              const donna_check = get_custom_check(116);
-              donna_check.check_and_get_titles(
-                donna_check
-                  .get_edu_aims()
-                  .reduce((p, c) => p && c.check === 1, true),
-              );
+            // 大拓太阳神育成目标错误、贵妇人称号bug
+            if (era.get('version') <= 1010) {
+              [65, 116]
+                .filter(
+                  (id) =>
+                    era.get(`cflag:${id}:招募状态`) === recruit_flags.yes &&
+                    era.get(`cflag:${id}:育成回合计时`) >= 3 * 48,
+                )
+                .forEach((id) => {
+                  const check = get_custom_check(id);
+                  check.check_and_get_titles(
+                    check
+                      .get_edu_aims()
+                      .reduce((p, c) => p && c.check === 1, true),
+                  );
+                });
             }
             return true;
           } else {
