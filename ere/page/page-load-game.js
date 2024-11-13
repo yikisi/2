@@ -2,6 +2,7 @@
 
 const basement_queue = require('#/event/basement-queue');
 const event_queue = require('#/event/queue');
+const sys_add_titles = require('#/system/chara/sys-add-titles');
 const call_daily_script = require('#/system/script/sys-call-daily-script');
 const filter_chara = require('#/system/sys-filter-chara');
 
@@ -100,10 +101,13 @@ module.exports = async () => {
                 )
                 .forEach((id) => {
                   const check = get_custom_check(id);
-                  check.check_and_get_titles(
-                    check
-                      .get_edu_aims()
-                      .reduce((p, c) => p && c.check === 1, true),
+                  sys_add_titles(
+                    id,
+                    ...check.check_and_get_titles(
+                      check
+                        .get_edu_aims()
+                        .reduce((p, c) => p && c.check === 1, true),
+                    ),
                   );
                 });
             }
