@@ -152,11 +152,11 @@ async function sys_have_baby(mother_id) {
     `talent:${child_id}:捉摸不透`,
     Number(era.get(`talent:${child_id}:捉摸不透`) > 0),
   );
-  const sex = era.get(`cflag:${child_id}:性别`);
+  const child_sex = era.get(`cflag:${child_id}:性别`);
 
   // 随机赋予1项名器特质
   const part_talent_count = get_random_value(0, 1);
-  const part_talents = get_filtered_talents(sex, 50);
+  const part_talents = get_filtered_talents(child_sex, 50);
   part_talents.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
   );
@@ -169,7 +169,7 @@ async function sys_have_baby(mother_id) {
     xp_extended_count = get_random_value(0, 1);
   const talent_arr = [
     // 淫乱系
-    ...get_filtered_talents(sex, 60),
+    ...get_filtered_talents(child_sex, 60),
     // xp系
     ...new Array(8).fill(0).map((_, i) => i + 40),
   ];
@@ -217,7 +217,9 @@ async function sys_have_baby(mother_id) {
   const semen_talents = new Array(8)
     .fill(0)
     .map((_, i) => i + 70)
-    .filter((talent_id) => talent_id !== 71 || talent_id !== 75 || sex !== 1);
+    .filter(
+      (talent_id) => talent_id !== 71 || talent_id !== 75 || child_sex !== 1,
+    );
   semen_talents.forEach((talent_id) =>
     era.set(`talent:${child_id}:${talent_id}`, 0),
   );
@@ -226,7 +228,7 @@ async function sys_have_baby(mother_id) {
       era.set(`talent:${child_id}:${talent_id}`, 1),
     );
 
-  if (sex - 1) {
+  if (child_sex - 1) {
     if (era.get(`talent:${mother_id}:泌乳`) > 1) {
       era.set(
         `talent:${child_id}:泌乳`,
@@ -265,7 +267,7 @@ async function sys_have_baby(mother_id) {
           era.get(`cflag:${child_id}:身高`)) -
         1,
     );
-  sex - 1 &&
+  child_sex - 1 &&
     (random_val = Math.random()) < 0.1 &&
     era.add(`cflag:${child_id}:胸围`, random_val < 0.5 ? 1 : -1);
   (random_val = Math.random()) < 0.1 &&
@@ -281,28 +283,23 @@ async function sys_have_baby(mother_id) {
     birth_day = 7 * cur_week + Math.floor(7 * Math.random()) - 6,
     date = `${era.get('flag:当前年')} 年 ${cur_month} 月 ${birth_day} 日`;
 
-  const parent_key =
-    (Math.min(father_id, mother_id) << 10) + Math.max(father_id, mother_id);
-  era.getAddedCharacters().forEach((chara_id) => {
-    const f_id = era.get(`cflag:${chara_id}:父方角色`),
-      m_id = era.get(`cflag:${chara_id}:母方角色`);
-    if (
-      f_id >= 0 &&
-      m_id >= 0 &&
-      (Math.min(f_id, m_id) << 10) + Math.max(f_id, m_id) === parent_key
-    ) {
-      era.set(`relation:${child_id}:${chara_id}`, 200);
+  era
+    .getAddedCharacters()
+    .filter(
+      (id) =>
+        id !== child_id &&
+        (era.get(`cflag:${id}:母方角色`) || era.get(`cflag:${id}:父方角色`)) ===
+          (mother_id || father_id),
+    )
+    .forEach((id) => {
+      era.set(`relation:${child_id}:${id}`, 300);
+      era.set(`relation:${id}:${child_id}`, 300);
       era.set(
-        `callname:${child_id}:${chara_id}`,
-        era.get(`cflag:${chara_id}:性别`) - 1 ? '姐姐' : '哥哥',
+        `callname:${child_id}:${id}`,
+        era.get(`cflag:${id}:性别`) === 1 ? '哥哥' : '姐姐',
       );
-      era.set(`relation:${chara_id}:${child_id}`, 200);
-      era.set(
-        `callname:${chara_id}:${child_id}`,
-        era.get(`cflag:${child_id}:性别`) - 1 ? '妹妹' : '弟弟',
-      );
-    }
-  });
+      era.set(`callname:${id}:${child_id}`, child_sex === 1 ? '弟弟' : '妹妹');
+    });
   era.set(`cflag:${child_id}:父方角色`, father_id);
   era.set(`cflag:${child_id}:母方角色`, mother_id);
   era.set(`cflag:${child_id}:出生月份`, cur_month);
@@ -327,7 +324,7 @@ async function sys_have_baby(mother_id) {
     `callname:${father_id}:${child_id}`,
     era.set(
       `callname:${mother_id}:${child_id}`,
-      era.get(`cflag:${child_id}:性别`) - 1 ? '女儿' : '儿子',
+      child_sex === 1 ? '儿子' : '女儿',
     ),
   );
   era.set(
@@ -374,17 +371,17 @@ async function sys_have_baby(mother_id) {
 
   get_custom_mec(child_id).set_callname();
   const child = get_chara_talk(child_id),
-    child_sex = child.sex_code === 1 ? '长子' : '长女';
+    child_callname = child.sex_code === 1 ? '长子' : '长女';
   if (!era.get(`cstr:${father_id}:长子女经历`)) {
     era.set(`cstr:${father_id}:长子女经历`, [
-      `${child_sex} `,
+      `${child_callname} `,
       child.get_colored_name(),
       ` 出生于 ${date}`,
     ]);
   }
   if (!era.get(`cstr:${mother_id}:长子女经历`)) {
     era.set(`cstr:${mother_id}:长子女经历`, [
-      `在 ${date} 生下了 ${child_sex} `,
+      `在 ${date} 生下了 ${child_callname} `,
       child.get_colored_name(),
     ]);
   }

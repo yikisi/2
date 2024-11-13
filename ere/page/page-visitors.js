@@ -117,7 +117,7 @@ handlers[344] = () =>
       };
 
 handlers[345] = () =>
-  get('cflag:344:招募状态') === recruit_flags.yes || get('love:345') < 25
+  get('cflag:345:招募状态') === recruit_flags.yes || get('love:345') < 25
     ? {}
     : {
         name: '「一起努力吧！」（招募）',

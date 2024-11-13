@@ -40,7 +40,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     buffer.push(check_aim_and_get_entry(races, race_enum.mile_cha, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.takm_kin, 2, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.mile_cup, 2, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.yush_him, 2, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.yasu_kin, 2, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.mile_cha, 2, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 20));
   },

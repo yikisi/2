@@ -136,7 +136,10 @@ function sys_handle_palace(chara_id) {
     );
   era.set(`juel:${chara_id}:粉`, Math.floor(Math.min(pink * score_times, 200)));
   era.set(`juel:${chara_id}:蓝`, Math.floor(Math.min(blue * score_times, 268)));
-  era.set(`juel:${chara_id}:白`, Math.floor(white * score_times));
+  era.set(
+    `juel:${chara_id}:白`,
+    Math.floor(Math.min(white * score_times, 256)),
+  );
   const genes = new CharaAvailableGenes(chara_id);
   genes.clear();
   adapt_list.forEach((e, i) => {
