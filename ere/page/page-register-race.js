@@ -374,6 +374,7 @@ async function reg_race_page() {
         registered_race,
       );
       base_disabled_check = check_register_disabled(chara_id, in_foreign);
+      status_list = sys_get_status(chara_id);
     } else {
       if (registered_race.race === ret) {
         registered_race.race = registered_race.week = -1;

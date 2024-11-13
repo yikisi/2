@@ -777,7 +777,11 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.body),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(defender, '痛苦', base_emotion_juel * (1 - extra_flag.check / 50));
+    add_juel_from_check(
+      defender,
+      '痛苦',
+      base_emotion_juel * (1 - extra_flag.check / 50),
+    );
     add_juel_from_check(
       defender,
       '羞耻',

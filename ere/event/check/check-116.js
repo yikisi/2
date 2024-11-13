@@ -42,7 +42,7 @@ module.exports = class extends CustomizedCheck {
     if (
       new DonnaEduMarks().title_check &&
       check_aim_race(races, race_enum.oka_sho, 1, 1) &&
-      check_aim_race(races, race_enum.shuk_sho, 2, 1) &&
+      check_aim_race(races, race_enum.shuk_sho, 1, 1) &&
       check_aim_race(races, race_enum.japa_cup, 1, 1) &&
       check_aim_race(races, race_enum.japa_cup, 2, 1) &&
       get('base:116:力量') >= 1200
