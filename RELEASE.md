@@ -1,9 +1,7 @@
 # [EraUma v1.011 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.011)
-_incoming_
+_2024/11/13_
 
 适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.0.0) 版本
-
-## Added
 
 ## Changed
 
@@ -17,3 +15,4 @@ _incoming_
 * 修复了强制发交可能导致获得负数的痛苦因子的问题
 * 修复了贵妇人专属称号【刚毅贵妇人】无法正确获得的问题
 * 修复了大拓太阳神育成目标的错误
+* 修复了砂糖灯无法招募的bug

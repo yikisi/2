@@ -745,66 +745,71 @@ async function chara_skill() {
   });
 
   skill_data.forEach((e) => {
-    const id = e.id;
-    buffer += `skills_dict[${id}]=require('#/data/race/skill/skill-${id}');`;
-    let sbuffer =
-      "const UmaSkill = require('#/data/race/model/uma-skill');\n\nmodule.exports = new UmaSkill(";
-    if (e.category === undefined) {
-      console.log('\tmissed! ', e.icon_id, ' from skill ', e.id);
-    }
-    // console.log(e.id);
-    sbuffer += `${id},`;
-    sbuffer += `"${e.name}",`;
-    sbuffer += `"${skill_text[id][48]}",`;
-    sbuffer += `${e.group_id},`;
-    sbuffer += `${e.group_level},`;
-    sbuffer += `${get_rarity(e.rarity)},`;
-    sbuffer += `${e.category},`;
-    sbuffer += `${e.grade_value},`;
-    sbuffer += `[${parse_condition(e.precondition_1, true)},${parse_condition(e.precondition_2, true)}],`;
-    sbuffer += `[${parse_condition(e.condition_1)},${parse_condition(e.condition_2)}],`;
-    sbuffer += `[${e.float_ability_time_1 / 10000},${e.float_ability_time_2 / 10000}],`;
-    sbuffer += `[${e.float_cooldown_time_1 / 10000},${e.float_cooldown_time_2 / 10000}],`;
-    sbuffer += `[${get_ability_time_usage(e.ability_time_usage_1)},${get_ability_time_usage(e.ability_time_usage_2)}],`;
-    sbuffer += `[[${get_ability_type(e.ability_type_1_1)},${get_ability_type(e.ability_type_1_2)},${get_ability_type(e.ability_type_1_3)}],[${get_ability_type(e.ability_type_2_1)},${get_ability_type(e.ability_type_2_2)},${get_ability_type(e.ability_type_2_3)}]],`;
-    sbuffer += `[[${get_ability_usage(e.ability_value_usage_1_1)},${get_ability_usage(e.ability_value_usage_1_2)},${get_ability_usage(e.ability_value_usage_1_3)}],[${get_ability_usage(e.ability_value_usage_2_1)},${get_ability_usage(e.ability_value_usage_2_2)},${get_ability_usage(e.ability_value_usage_2_3)}]],`;
-    sbuffer += `[[${e.float_ability_value_1_1 / 10000},${e.float_ability_value_1_2 / 10000},${e.float_ability_value_1_3 / 10000}],[${e.float_ability_value_2_1 / 10000},${e.float_ability_value_2_2 / 10000},${e.float_ability_value_2_3 / 10000}]],`;
-    sbuffer += `[[${get_target_type(e.target_type_1_1)},${get_target_type(e.target_type_1_2)},${get_target_type(e.target_type_1_3)}],[${get_target_type(e.target_type_2_1)},${get_target_type(e.target_type_2_2)},${get_target_type(e.target_type_2_3)}]],`;
-    sbuffer += `[[${e.target_value_1_1},${e.target_value_1_2},${e.target_value_1_3}],[${e.target_value_2_1},${e.target_value_2_2},${e.target_value_2_3}]],`;
-    sbuffer += `[${e.popularity_add_param_1},${e.popularity_add_param_2}],`;
-    sbuffer += `[${e.popularity_add_value_1},${e.popularity_add_value_2}],`;
-    sbuffer += `${e.activate_lot},`;
-    sbuffer += `${pt_dict[id] || 0},`;
-    sbuffer += `${e.condition_2 !== '' && e.condition_2.indexOf('is_activate_other_skill_detail') !== -1},`;
-    sbuffer += `${id.toString().startsWith('9')},`;
-    sbuffer += `[${fill_adapt_tags(
-      fill_adapt_tags([], e.condition_1),
-      e.condition_2,
-    )
-      .filter((e, i, l) => i === l.indexOf(e))
-      .join(',')}],`;
-    sbuffer += `[${[
-      e.ability_type_1_1,
-      e.ability_type_1_2,
-      e.ability_type_1_3,
-      e.ability_type_2_1,
-      e.ability_type_2_2,
-      e.ability_type_2_3,
-    ]
-      .map((e) => [e, ability_tag_enum_names[e]])
-      .filter((e) => e[1] !== undefined)
-      .filter((e, i, l) => i === l.findIndex((entry) => entry[1] === e[1]))
-      .sort((a, b) => a[0] - b[0])
-      .map(
-        (e) =>
-          `UmaSkill.ability_tag_enum.${Object.keys(UmaSkill.ability_tag_enum)[e[1]]}`,
+    try {
+      const id = e.id;
+      buffer += `skills_dict[${id}]=require('#/data/race/skill/skill-${id}');`;
+      let sbuffer =
+        "const UmaSkill = require('#/data/race/model/uma-skill');\n\nmodule.exports = new UmaSkill(";
+      if (e.category === undefined) {
+        console.log('\tmissed! ', e.icon_id, ' from skill ', e.id);
+      }
+      // console.log(e.id);
+      sbuffer += `${id},`;
+      sbuffer += `"${e.name}",`;
+      sbuffer += `"${skill_text[id][48]}",`;
+      sbuffer += `${e.group_id},`;
+      sbuffer += `${e.group_level},`;
+      sbuffer += `${get_rarity(e.rarity)},`;
+      sbuffer += `${e.category},`;
+      sbuffer += `${e.grade_value},`;
+      sbuffer += `[${parse_condition(e.precondition_1, true)},${parse_condition(e.precondition_2, true)}],`;
+      sbuffer += `[${parse_condition(e.condition_1)},${parse_condition(e.condition_2)}],`;
+      sbuffer += `[${e.float_ability_time_1 / 10000},${e.float_ability_time_2 / 10000}],`;
+      sbuffer += `[${e.float_cooldown_time_1 / 10000},${e.float_cooldown_time_2 / 10000}],`;
+      sbuffer += `[${get_ability_time_usage(e.ability_time_usage_1)},${get_ability_time_usage(e.ability_time_usage_2)}],`;
+      sbuffer += `[[${get_ability_type(e.ability_type_1_1)},${get_ability_type(e.ability_type_1_2)},${get_ability_type(e.ability_type_1_3)}],[${get_ability_type(e.ability_type_2_1)},${get_ability_type(e.ability_type_2_2)},${get_ability_type(e.ability_type_2_3)}]],`;
+      sbuffer += `[[${get_ability_usage(e.ability_value_usage_1_1)},${get_ability_usage(e.ability_value_usage_1_2)},${get_ability_usage(e.ability_value_usage_1_3)}],[${get_ability_usage(e.ability_value_usage_2_1)},${get_ability_usage(e.ability_value_usage_2_2)},${get_ability_usage(e.ability_value_usage_2_3)}]],`;
+      sbuffer += `[[${e.float_ability_value_1_1 / 10000},${e.float_ability_value_1_2 / 10000},${e.float_ability_value_1_3 / 10000}],[${e.float_ability_value_2_1 / 10000},${e.float_ability_value_2_2 / 10000},${e.float_ability_value_2_3 / 10000}]],`;
+      sbuffer += `[[${get_target_type(e.target_type_1_1)},${get_target_type(e.target_type_1_2)},${get_target_type(e.target_type_1_3)}],[${get_target_type(e.target_type_2_1)},${get_target_type(e.target_type_2_2)},${get_target_type(e.target_type_2_3)}]],`;
+      sbuffer += `[[${e.target_value_1_1},${e.target_value_1_2},${e.target_value_1_3}],[${e.target_value_2_1},${e.target_value_2_2},${e.target_value_2_3}]],`;
+      sbuffer += `[${e.popularity_add_param_1},${e.popularity_add_param_2}],`;
+      sbuffer += `[${e.popularity_add_value_1},${e.popularity_add_value_2}],`;
+      sbuffer += `${e.activate_lot},`;
+      sbuffer += `${pt_dict[id] || 0},`;
+      sbuffer += `${e.condition_2 !== '' && e.condition_2.indexOf('is_activate_other_skill_detail') !== -1},`;
+      sbuffer += `${id.toString().startsWith('9')},`;
+      sbuffer += `[${fill_adapt_tags(
+        fill_adapt_tags([], e.condition_1),
+        e.condition_2,
       )
-      .join(',')}]`;
-    writeFileSync(`../../ere/data/race/skill/skill-${id}.js`, `${sbuffer});`);
-    fill_dict(e.precondition_1, c_dict, e);
-    fill_dict(e.precondition_2, c_dict, e);
-    fill_dict(e.condition_1, c_dict, e);
-    fill_dict(e.condition_2, c_dict, e);
+        .filter((e, i, l) => i === l.indexOf(e))
+        .join(',')}],`;
+      sbuffer += `[${[
+        e.ability_type_1_1,
+        e.ability_type_1_2,
+        e.ability_type_1_3,
+        e.ability_type_2_1,
+        e.ability_type_2_2,
+        e.ability_type_2_3,
+      ]
+        .map((e) => [e, ability_tag_enum_names[e]])
+        .filter((e) => e[1] !== undefined)
+        .filter((e, i, l) => i === l.findIndex((entry) => entry[1] === e[1]))
+        .sort((a, b) => a[0] - b[0])
+        .map(
+          (e) =>
+            `UmaSkill.ability_tag_enum.${Object.keys(UmaSkill.ability_tag_enum)[e[1]]}`,
+        )
+        .join(',')}]`;
+      writeFileSync(`../../ere/data/race/skill/skill-${id}.js`, `${sbuffer});`);
+      fill_dict(e.precondition_1, c_dict, e);
+      fill_dict(e.precondition_2, c_dict, e);
+      fill_dict(e.condition_1, c_dict, e);
+      fill_dict(e.condition_2, c_dict, e);
+    } catch (err) {
+      console.error(e.id, e.name, err.message, err.stack);
+      process.exit(1);
+    }
   });
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
