@@ -155,9 +155,9 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
   if (love >= 90) {
     await common_pregnant_report_in_love(father, mother, unexpected_pregnant);
   } else {
-    const is_p_slave = era.get('flag:惩戒力度') === 3;
-    await print_event_name(is_p_slave ? '职责' : '意外', mother);
-    if (era.get('mark:0:淫纹') === 3) {
+    const is_p_slave = era.get('flag:惩戒力度');
+    await print_event_name(is_p_slave === 3 ? '职责' : '意外', mother);
+    if (is_p_slave >= 2) {
       await era.printAndWait([
         mother.get_colored_name(),
         ' 盯着 ',
@@ -178,7 +178,7 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
         '，又一次在洗手台上吐了出来。',
       ]);
     }
-    if (is_p_slave) {
+    if (is_p_slave === 3) {
       hook.override = true;
       await era.printAndWait([
         '对这个打乱步调的小生命，',
@@ -352,6 +352,13 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
         mother.get_colored_name(),
         ' 为之胆寒……',
       ]);
+      if (mother.sex_code > 0) {
+        await era.printAndWait([
+          '……而且明明 ',
+          mother.get_colored_name(),
+          ' 可以成为父亲的……',
+        ]);
+      }
     } else {
       await era.printAndWait([
         '在短暂的慌乱后，',

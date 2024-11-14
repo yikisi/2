@@ -504,7 +504,7 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
   hook,
   extra_flag,
 ) => {
-  if (!extra_flag.mother_id) {
+  if (extra_flag.mother_id === 0) {
     return await ero_scripts_0(hook, extra_flag);
   }
   const father = get_chara_talk(extra_flag.father_id),
@@ -542,7 +542,33 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
         ' 有这个可能……',
       ]);
     }
-    if (era.get(`mark:${mother.id}:同心`) >= 2) {
+    if (unexpected_pregnant === unexpected_pregnant_enum.father_sleep) {
+      await era.printAndWait([
+        '之后，',
+        mother.get_colored_name(),
+        ' 小心翼翼地向 ',
+        father.get_colored_name(),
+        ' 说出了怀孕的事。',
+      ]);
+      await era.printAndWait([
+        father.get_colored_name(),
+        ' 再三询问确认，还是得到了孩子是自己骨肉的回答。',
+      ]);
+      await era.printAndWait([
+        '尽管 ',
+        father.get_colored_name(),
+        ' 对此毫无印象，但仍然在 ',
+        mother.get_colored_name(),
+        ' 的眼泪中选择负起父亲的责任……',
+      ]);
+      if (father.id === 0 && era.get(`cflag:${father.id}:阴道尺寸`) > 0) {
+        await era.printAndWait([
+          '……虽然 ',
+          father.get_colored_name(),
+          ' 其实也有点想成为母亲……',
+        ]);
+      }
+    } else if (era.get(`mark:${mother.id}:同心`) >= 2) {
       await era.printAndWait([
         '之后，',
         mother.get_colored_name(),
@@ -607,7 +633,17 @@ handlers[ero_hooks.have_baby] = async (_, hook, extra_flag) => {
   if (era.get(`love:${mother.id || father.id}`) < 90) {
     era.drawLine();
     await print_event_name('新生命', mother);
-    if (era.get(`mark:${mother.id}:同心`) >= 2) {
+    if (
+      new LifeEventMarks(mother.id).unexpected_pregnant ===
+      unexpected_pregnant_enum.father_sleep
+    ) {
+      await era.printAndWait([
+        mother.get_colored_name(),
+        ' 闪闪缩缩地看向 ',
+        father.get_colored_name(),
+        '，似乎是不知道应该怎么面对孩子的父亲。',
+      ]);
+    } else if (era.get(`mark:${mother.id}:同心`) >= 2) {
       await era.printAndWait([
         mother.get_colored_name(),
         ' 闪闪缩缩地看向 ',
