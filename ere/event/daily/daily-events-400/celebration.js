@@ -7,13 +7,6 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 module.exports = async () => {
-  if (
-    (era.get('flag:当前回合数') - 1) % 48 !== 29 ||
-    era.get('cflag:400:育成回合计时') < 96 ||
-    era.get('love:400') < 75
-  ) {
-    throw new Error();
-  }
   const ss = get_chara_talk(400),
     callname = sys_get_callname(400, 0),
     me = get_chara_talk(0);

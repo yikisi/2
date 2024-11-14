@@ -1,12 +1,14 @@
 const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
-const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const { get_custom_check } = require('#/event/check/check-factory');
+const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
 
@@ -21,8 +23,6 @@ const CrazyFans = require('#/data/event/crazy-fans');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
-const select_yes_or_no = require('#/page/components/select-yes-or-no');
-
 const basement_saying_arr = [
   '九尺二间陋室里，红唇依竹共恩情。——高杉晋作',
   '每一个被束缚的奴隶都可以靠着他自己的手脱掉锁链。——莎士比亚',
@@ -40,10 +40,7 @@ async function game_over(again) {
     temp;
   if (game_over === 3 && era.get('flag:当前位置') === location_enum.basement) {
     era.drawLine();
-    await sys_call_daily_event(
-      basement_owners.get(0),
-      event_hooks.basement_end,
-    );
+    await run_custom_daily(basement_owners.get(0), event_hooks.basement_end);
     saying_arr = basement_saying_arr;
   } else if (
     game_over >= 2 &&
@@ -51,7 +48,7 @@ async function game_over(again) {
     (temp = sys_get_billings()[0]).creditor
   ) {
     era.drawLine();
-    await sys_call_daily_event(temp.creditor, event_hooks.slave_end);
+    await run_custom_daily(temp.creditor, event_hooks.slave_end);
     saying_arr = [
       '九尺二间陋室里，红唇依竹共恩情。——高杉晋作',
       '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗杰斯',
@@ -401,7 +398,7 @@ async function game_over(again) {
               '呱我不要看',
             )
           ) {
-            await sys_call_daily_event(
+            await run_custom_daily(
               basement_owners.get(0),
               event_hooks.basement_end,
             );
@@ -480,8 +477,7 @@ async function game_over(again) {
         '招募状态',
         recruit_flags.yes,
       )) {
-        chara_id &&
-          (await sys_call_daily_event(chara_id, event_hooks.end_talk));
+        chara_id && (await run_custom_daily(chara_id, event_hooks.end_talk));
       }
     }
     return true;

@@ -48,7 +48,6 @@ rec_scripts.forEach(
 );
 
 output += `
-
 console.log(
   '[rec-factory.js] constructor dictionary init done!',
   (new Date().getTime() - current).toLocaleString(),
@@ -69,12 +68,12 @@ module.exports = {
    * @param {EventObject} [event_object]
    * @returns {Promise<boolean|void>}
    */
-  get_custom_rec(chara_id, stage, event_object) {
+  run_custom_rec(chara_id, stage, event_object) {
     if (!obj_dict[chara_id]) {
       obj_dict[chara_id] = new (cons_dict[chara_id] || common_cons)(chara_id);
     }
     return obj_dict[chara_id].recruit(stage, event_object).then((r) => {
-      if (get(\`cflag:$\{chara_id}:招募状态\`) === recruit_flags.yes) {
+      if (get(\`cflag:\${chara_id}:招募状态\`) === recruit_flags.yes) {
         return obj_dict[chara_id]
           .recruit_result()
           .then(() => punish_by_yandere(chara_id, stage))
@@ -82,7 +81,7 @@ module.exports = {
       }
       return r;
     });
-  }
+  },
 };
 `;
 

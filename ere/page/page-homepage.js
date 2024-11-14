@@ -6,7 +6,6 @@ const {
   end_ero_and_show_result,
   init_ero,
 } = require('#/system/ero/sys-prepare-ero');
-const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
   sys_change_status_by_base,
@@ -29,6 +28,7 @@ const print_ero_page = require('#/page/page-ero');
 const basement_queue = require('#/event/basement-queue');
 const { common_no_action_check } = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
+const { run_custom_daily } = require('#/event/daily/daily-factory');
 const GameGuides = require('#/event/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 
@@ -82,7 +82,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   let lover = era.get('flag:床伴');
   lover = era.set('flag:床伴', Number(sys_check_awake(0) && lover));
   if (chara_id && !sys_check_remote(chara_id) && !lover) {
-    await sys_call_daily_event(chara_id, event_hooks.good_night);
+    await run_custom_daily(chara_id, event_hooks.good_night);
   }
   let continue_flag = true;
   if (era.get('flag:当前位置') !== location_enum.basement) {
@@ -421,7 +421,7 @@ module.exports = async () => {
       }
       flags.week_start = flags.after_select = false;
       if (hook > 0) {
-        await sys_call_daily_event(chara_id, hook);
+        await run_custom_daily(chara_id, hook);
       } else {
         const note_list = [...notes.common];
         sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(

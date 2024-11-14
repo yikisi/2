@@ -1,10 +1,11 @@
 const era = require('#/era-electron');
 
-const call_daily_script = require('#/system/script/sys-call-daily-script');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const print_curr_chara = require('#/page/components/cur-chara-info');
 const print_page_header = require('#/page/components/page-header');
+
+const { run_custom_daily } = require('#/event/daily/daily-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -36,7 +37,7 @@ module.exports = async (location) => {
       { isBr: true },
       { isBr: true },
     ]);
-    await call_daily_script(chara_id, hook);
+    await run_custom_daily(chara_id, hook);
     era.drawLine();
     await era.printAndWait('返回训练室了……');
     await sys_get_random_event(event_hooks.back_school)({ loc: location });

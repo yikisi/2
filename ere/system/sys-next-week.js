@@ -9,7 +9,6 @@ const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
 const check_new_activities = require('#/system/next-week/check-new-activities');
 const morning_sex = require('#/system/next-week/morning-sex');
 const randomly_interact = require('#/system/next-week/randomly-interact');
-const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const call_ero_script = require('#/system/script/sys-call-ero-script');
 const {
   sys_change_lust,
@@ -30,6 +29,7 @@ const sys_handle_palace = require('#/system/sys-handle-palace');
 const { reset_chara } = require('#/system/sys-init-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { remove_special_events } = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
@@ -579,11 +579,11 @@ async function sys_next_week() {
           if (era.get(`talent:${chara_id}:乳头类型`) !== 2) {
             era.set(`talent:${chara_id}:乳头类型`, get_random_value(0, 1));
           }
-          await sys_call_daily_event(chara_id, event_hooks.growth, {
+          await run_custom_daily(chara_id, event_hooks.growth, {
             stage: 0,
           });
         } else if (growth_stage === 2) {
-          await sys_call_daily_event(chara_id, event_hooks.growth, {
+          await run_custom_daily(chara_id, event_hooks.growth, {
             stage: 1,
           });
         }
@@ -595,7 +595,7 @@ async function sys_next_week() {
       era.get(`cflag:${chara_id}:育成回合计时`) === 'x'
     ) {
       reset_chara(chara_id);
-      await sys_call_daily_event(chara_id, event_hooks.growth, { stage: 2 });
+      await run_custom_daily(chara_id, event_hooks.growth, { stage: 2 });
     }
 
     const is_pregnant_slave =
@@ -744,7 +744,7 @@ async function sys_next_week() {
 
     let special_month = era.get(`status:${chara_id}:发情`),
       special_body = era.get(`status:${chara_id}:排卵期`);
-    if (growth_stage === 4 && race && !is_always_special) {
+    if (growth_stage >= 4 && race && !is_always_special) {
       // 发情期为出生月的下一个月
       const _special_month = (birth_month % 12) + 1;
       // 第二年开始计算发情期，限定本格期，发情期内无经期
