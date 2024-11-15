@@ -290,11 +290,15 @@ module.exports = class extends CustomizedCheck {
         case 95 + 38:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        // 12月第三周 紧张
+        // 10月第四周 天空、大地以及生活在这里的我们
         case 95 + 40:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        // 10月第四周 天空、大地以及生活在这里的我们
+        // 12月第一周 莫桑石
+        case 95 + 45:
+          add_event(event_hooks.week_end, event_obj_special);
+          break;
+        // 12月第四周 无法回应的恋情
         case 95 + 47:
           add_event(event_hooks.week_end, event_obj_special);
           break;

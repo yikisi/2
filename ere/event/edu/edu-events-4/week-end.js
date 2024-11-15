@@ -28,6 +28,7 @@ module.exports = async function (hook, _, event_object) {
   if (event_marks.beginning === 1) {
     event_marks.beginning++;
     // 从丸善斯基登场开始 风数值为1 最终结局与风数值 例：TE=20 GE = 17-19 其余均为NE
+    // 尽管竞争将造成极大的损耗，但你不想去看看那里的风景吗？
     await print_event_name(`序章·${chara_talk.name}登场`, chara_talk);
     await era.printAndWait(`草场上`);
     await chara_talk.say_and_wait(

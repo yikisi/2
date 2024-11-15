@@ -207,7 +207,7 @@ module.exports = async function () {
     await era.input();
     await falcon.say_and_wait(`嗯！目标是C位！这个是绝对不会让给其他人的！`);
     await me.say_and_wait(`一起努力吧！`);
-    await falcon.say_and_wait(`好！接下来的话也请多多指教了！训练员君⭐`);
+    await falcon.say_and_wait(`好！接下来的话也请多多指教了！训练员先生⭐`);
     await me.say_and_wait(`我也是，请多指教了，飞鹰子。`);
   } else if (edu_weeks === 47 + 12) {
     // 默认皋月赏结束
@@ -1171,9 +1171,9 @@ module.exports = async function () {
     falcon.print(`作为偶像尽忠职守到最后一刻。`);
     falcon.print(`所以，不能再逃避下去了。`);
     falcon.print(`第一次看沙地比赛时，我记得`);
-    era.printButton(`追赶的马娘超越了领头的马娘`, 1);
-    era.printButton(`领头的马娘踏出了关键的一步`, 2);
-    // 醒目飞鹰潜意识中选择的是逃避，若真结局则
+    era.printButton(`追赶的马娘超越了领头的马娘`, 1); //恋心超越责任
+    era.printButton(`领头的马娘踏出了关键的一步`, 2); //责任压倒恋心
+    // te为2选项 ge为1选项
     const ret1 = await era.input();
     if (ret1 === 1) {
       falcon.print(`——没错，追赶的马娘超越了领头的马娘。`);
@@ -1339,8 +1339,60 @@ module.exports = async function () {
     await era.input();
     await falcon.say_and_wait(`诶嘿嘿⭐`);
     await era.printAndWait(`之后的谈话便在湖泊染上第一缕金色的光辉后结束了。`);
+  } else if (edu_weeks === 95 + 45) {
+    await print_event_name(`莫桑石`, falcon);
+    // 纵使失约，纵使内心陷入疯狂，
+    // 既然作为偶像就要认真回应粉丝的期待
+    await era.printAndWait(
+      `送走训练员先生后，醒目飞鹰独自坐在训练室的沙发上。`,
+    );
+    await era.printAndWait(`将天真无邪的面具摘下，享受着宁静的瞬间。`);
+    await falcon.say_and_wait(`……`);
+    await era.printAndWait(`特雷森的夜晚比想象中还要安静。`);
+    await falcon.say_and_wait(`说起来`);
+    falcon.print(`等到东京大赏结束之后，与训练员先生之间的契约就结束了。`);
+    falcon.print(
+      `虽然根据情形可以向理事长申请续约，但不知为什么，总是提不起干劲。`,
+    );
+    falcon.print(`缺了什么，有什么地方自己还没有察觉到的。`);
+    falcon.print(`从胸口传来的刺痛感迫使着我寻找这一答案。`);
+    await falcon.say_and_wait(`今天的月亮，比想象中还要美呢。`);
+    falcon.print(`从训练室窗户透过的仿佛轻轻触碰就会撕碎的朦胧月光。`);
+    falcon.print(
+      `视野顺着白色丝绸的延展的方向落下，幻想的尽头是冰冷的黑色固体。`,
+    );
+    falcon.print(`……因为使用过于频繁而提前完成了使命的麦克风先生吗。`);
+    await falcon.say_and_wait(`你也完成了自己的使命呢。`);
+    falcon.print(`黑色固体默不作声的看着自己。`);
+    await falcon.say_and_wait(`啊啊，真是的。`);
+    falcon.print(`为什么要用这么悲伤的眼神看着我。`);
+    await falcon.say_and_wait(`……是啊，飞鹰子已经什么都没有了。`);
+    await falcon.say_and_wait(`想要握住两件互不相容的事物，最后却全部失去了。`);
+    await falcon.say_and_wait(
+      `为了调整与粉丝之间的关系，将对训练员先生的恋心深深埋在心底。`,
+    );
+    await falcon.say_and_wait(
+      `尽管如此，对一直支持飞鹰子的粉丝大家们，存在裂纹的钻石无论如何都无法比拟之前的光彩。`,
+    );
+    falcon.print(`我认真的回答着麦克风先生的问题。`);
+    falcon.print(
+      `纵使期望最后以无法承受的代价实现，我也想站在舞台之上，亲眼见证那个瞬间的诞生。`,
+    );
+    await falcon.say_and_wait(
+      `飞鹰子从始至终都是为了追求闪耀的瞬间才踏上的偶像之路。`,
+    );
+    falcon.print(`尽管这份最初的渴望已经大半。`);
+    falcon.print(`并非为了什么人，仅仅只是为了实现自己的心愿。`);
+    falcon.print(
+      `作为马娘偶像的自己，要向一路支持自己的粉丝们献上最满意的画卷。`,
+    );
+    falcon.print(`所以，就这么出发吧！`);
+    falcon.print(`纵使泥地大赛只有草地十分之一的支持度。`);
+    falcon.print(`飞鹰子也会让它比钻石更加闪耀，火彩更加惊艳！`);
+    falcon.print(`堵上飞鹰子身为马娘偶像的觉悟！`);
+    falcon.print(`就这么一口气闪耀到终点！`);
   } else if (edu_weeks === 95 + 47) {
-    await print_event_name(`迷茫少女`, falcon);
+    await print_event_name(`无法回应的恋情`, falcon);
     await era.printAndWait(
       `下周就是预定好的东京大赏了，将整理好的文件放到原先的位置后。`,
     );
