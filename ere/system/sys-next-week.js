@@ -83,6 +83,9 @@ async function sys_next_week() {
   era.set('status:0:沉睡', 1);
   era.set('status:0:熬夜', 0);
   era.set('status:0:摸鱼', 0);
+  era.set('cflag:0:子宫内精液', 0);
+  era.set('cflag:0:肠道内精液', 0);
+  era.set('cflag:0:腹中精液', 0);
   era.get('status:0:马语者') && era.add('status:0:马语者', -1);
 
   randomly_interact(in_team_list);
@@ -347,9 +350,11 @@ async function sys_next_week() {
         sys_change_pressure(chara_id, drug_delta * 4);
       }
     }
-    era.set(`cflag:${chara_id}:子宫内精液`, 0);
-    era.set(`cflag:${chara_id}:肠道内精液`, 0);
-    era.set(`cflag:${chara_id}:腹中精液`, 0);
+    if (chara_id > 0) {
+      era.set(`cflag:${chara_id}:子宫内精液`, 0);
+      era.set(`cflag:${chara_id}:肠道内精液`, 0);
+      era.set(`cflag:${chara_id}:腹中精液`, 0);
+    }
     era.set(`status:${chara_id}:马跳Z`, 0);
     if (
       era.get(`cflag:${chara_id}:阴茎尺寸`) &&

@@ -79,8 +79,8 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   era.drawLine();
   era.set('flag:当前互动角色', 0);
   era.set('flag:当前位置', rest_loc);
-  let lover = era.get('flag:床伴');
-  lover = era.set('flag:床伴', Number(sys_check_awake(0) && lover));
+  let lover = Number(sys_check_awake(0) && era.get('flag:床伴'));
+  era.set('flag:床伴', lover);
   if (chara_id && !sys_check_remote(chara_id) && !lover) {
     await sys_call_daily_event(chara_id, event_hooks.good_night);
   }
@@ -96,7 +96,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
     }
     stop_machine_gun(event_hooks.week_end);
   }
-  if (lover > 0) {
+  if ((lover = era.get('flag:床伴')) > 0) {
     era.set(`cflag:${lover}:自主训练`, 0);
     const life_marks = new LifeEventMarks(lover);
     begin_and_init_ero(0, lover);
