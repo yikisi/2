@@ -423,7 +423,7 @@ async function sys_have_baby(mother_id) {
       get_chara_talk(0).get_colored_name(),
       ' 获得了 ',
       {
-        content: `${gene_juel_names[juel_index]} × ${juel_num}`,
+        content: `${gene_juel_names[juel_index]}因子 × ${juel_num}`,
         color: gene_type_colors[juel_index],
       },
     ]);

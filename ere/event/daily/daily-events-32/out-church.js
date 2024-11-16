@@ -9,7 +9,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 
-module.exports = async () => {
+module.exports = async function () {
   const buffer = [],
     callname = sys_get_callname(32, 0),
     edu_marks = new TachyonEduMarks(),

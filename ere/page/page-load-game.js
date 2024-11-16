@@ -3,12 +3,12 @@
 const basement_queue = require('#/event/basement-queue');
 const event_queue = require('#/event/queue');
 const sys_add_titles = require('#/system/chara/sys-add-titles');
-const call_daily_script = require('#/system/script/sys-call-daily-script');
 const filter_chara = require('#/system/sys-filter-chara');
 
 const print_page_header = require('#/page/components/page-header');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { run_custom_daily } = require('#/event/daily/daily-factory');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -73,7 +73,7 @@ module.exports = async () => {
       default:
         if (ret < 100) {
           if (era.get('flag:读档对话')) {
-            await call_daily_script(
+            await run_custom_daily(
               get_random_entry(
                 filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
                   (e) => e,

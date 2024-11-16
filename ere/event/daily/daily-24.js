@@ -19,6 +19,8 @@ const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
+const CustomizedDaily = require('#/event/daily/daily-common');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
@@ -39,18 +41,12 @@ function print_attr_change(chara_id, attr_name, val) {
   }
 }
 
-module.exports = {
-  override: true, //override设为true会跳过默认的数值结算，反之则会套用默认的数值结算
-  /**
-   * @param {HookArg} stage_id
-   * @param {any} extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise<boolean>}
-   */
-  async run(stage_id, extra_flag, event_object) {
+module.exports = class extends CustomizedDaily {
+  async run(hook, extra_flag, event_object) {
     if (event_object) {
-      throw new Error();
+      return;
     }
+    hook.override = true;
     const callname = sys_get_callname(24, 0),
       maya = get_chara_talk(24),
       me = get_chara_talk(0),
@@ -58,7 +54,7 @@ module.exports = {
       motivation = era.get('cflag:24:干劲'); //干劲（影响谈话）
     let talk_arr,
       wait_flag = false;
-    switch (stage_id.hook) {
+    switch (hook.hook) {
       case event_hooks.good_morning: //早安问候
         if (era.get('base:24:体力') === era.get('maxbase:24:体力')) {
           if (relation > 75) {
@@ -114,7 +110,7 @@ module.exports = {
         break;
       case event_hooks.talk: //谈话
         if (!sys_check_awake(24)) {
-          throw new Error();
+          return await super.talk();
         }
         switch (motivation) {
           case -2:
@@ -758,9 +754,9 @@ module.exports = {
         ]);
         break;
       default:
-        throw new Error();
+        return super.run(hook, extra_flag, event_object);
     }
     wait_flag && (await era.waitAnyKey());
     return false;
-  },
+  }
 };

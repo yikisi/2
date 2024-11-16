@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const {
   sys_change_attr_and_print,
   sys_get_billings,
@@ -41,6 +40,7 @@ const page_visitors = require('#/page/page-visitors');
 
 const { common_no_action_check } = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
+const { run_custom_daily } = require('#/event/daily/daily-factory');
 const GameGuides = require('#/event/game-guides');
 const { shop_end, shop_start } = require('#/event/shop/tachyon-shop');
 
@@ -643,19 +643,19 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.office_study)())) {
         era.drawLine();
-        await sys_call_daily_event(chara_id, event_hooks.office_study);
+        await run_custom_daily(chara_id, event_hooks.office_study);
       }
       break;
     case 202:
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.office_prepare)())) {
         era.drawLine();
-        await sys_call_daily_event(chara_id, event_hooks.office_prepare);
+        await run_custom_daily(chara_id, event_hooks.office_prepare);
       }
       break;
     case 203:
       era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.talk);
+      await run_custom_daily(chara_id, event_hooks.talk);
       break;
     case 204:
       era.drawLine();
@@ -665,27 +665,27 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         ' 送上了一份小礼物……',
       ]);
       era.println();
-      await sys_call_daily_event(chara_id, event_hooks.office_gift);
+      await run_custom_daily(chara_id, event_hooks.office_gift);
       break;
     case 205:
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.office_cook)())) {
         era.drawLine();
-        await sys_call_daily_event(chara_id, event_hooks.office_cook);
+        await run_custom_daily(chara_id, event_hooks.office_cook);
       }
       break;
     case 206:
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.office_rest)())) {
         era.drawLine();
-        await sys_call_daily_event(chara_id, event_hooks.office_rest);
+        await run_custom_daily(chara_id, event_hooks.office_rest);
       }
       break;
     case 207:
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.office_game)())) {
         era.drawLine();
-        await sys_call_daily_event(chara_id, event_hooks.office_game);
+        await run_custom_daily(chara_id, event_hooks.office_game);
       }
       break;
     case 208:
@@ -693,7 +693,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 209:
       era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.borrow_money);
+      await run_custom_daily(chara_id, event_hooks.borrow_money);
       break;
     case 210:
       sys_change_attr_and_print(0, '精力', -celebration_cost);
@@ -701,7 +701,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.celebration, chara_id)())) {
         era.drawLine();
-        await sys_call_daily_event(chara_id, event_hooks.celebration, {});
+        await run_custom_daily(chara_id, event_hooks.celebration, {});
       }
       break;
     case 211:

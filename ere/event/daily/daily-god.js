@@ -9,21 +9,18 @@ const {
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
+const CustomizedDaily = require('#/event/daily/daily-common');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { money_color } = require('#/data/color-const');
-const event_hooks = require('#/data/event/event-hooks');
 
-/**
- * @param {number} god_id
- */
-module.exports = (god_id) => {
-  const handlers = {};
+class DailyGod extends CustomizedDaily {
+  // eslint-disable-next-line no-unused-vars
+  growth(stage) {}
 
-  handlers[event_hooks.growth] = () => {};
-
-  handlers[event_hooks.borrow_money] = async () => {
-    const god = get_chara_talk(god_id),
+  async borrow_money() {
+    const god = get_chara_talk(this.id),
       me = get_chara_talk(0),
       fame = get('flag:当前声望');
     if (get('flag:当前声望') < 50) {
@@ -61,16 +58,9 @@ module.exports = (god_id) => {
       ]);
       add('flag:当前声望', -50 * ret);
       add('flag:当前马币', 400 * ret);
-      sys_like_chara(god_id, 0, 25 * ret) && (await waitAnyKey());
+      sys_like_chara(this.id, 0, 25 * ret) && (await waitAnyKey());
     }
-  };
+  }
+}
 
-  return {
-    async run(hook) {
-      if (!handlers[hook.hook]) {
-        throw new Error();
-      }
-      return await handlers[hook.hook]();
-    },
-  };
-};
+module.exports = DailyGod;

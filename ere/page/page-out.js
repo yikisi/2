@@ -1,7 +1,6 @@
 const era = require('#/era-electron');
 
 const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
-const call_daily_event = require('#/system/script/sys-call-daily-script');
 const { sys_handle_action } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_act_disabled,
@@ -13,6 +12,7 @@ const print_chara_info = require('#/page/components/cur-chara-info');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 
+const { run_custom_daily } = require('#/event/daily/daily-factory');
 const GameGuides = require('#/event/game-guides');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -246,7 +246,7 @@ async function out_page() {
                   );
                   era.set('flag:当前位置', positions[aim - 1].l);
                   if (!(await sys_get_random_event(positions[aim - 1].s)())) {
-                    await call_daily_event(301, positions[aim - 1].s);
+                    await run_custom_daily(301, positions[aim - 1].s);
                   }
                   era.set('flag:当前位置', location_enum.gate);
                 }
@@ -323,7 +323,7 @@ async function out_page() {
         );
         era.set('flag:当前位置', positions[aim - 1].l);
         if (!(await sys_get_random_event(positions[aim - 1].s)())) {
-          await call_daily_event(chara_id, positions[aim - 1].s);
+          await run_custom_daily(chara_id, positions[aim - 1].s);
         }
         era.set('flag:当前位置', location_enum.gate);
     }

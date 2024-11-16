@@ -242,33 +242,33 @@ module.exports = async (hook) => {
           await tachyon.say_and_wait([
             '每次乳头被 ',
             callname,
-            ' 捏一下就会高潮好不甘心❤',
+            ' 捏一下就会高潮好不甘心❤️',
           ]);
           await tachyon.say_and_wait([
             '小穴杂鱼到 ',
             callname,
-            ' 随便摸一下就出水好不甘心❤',
+            ' 随便摸一下就出水好不甘心❤️',
           ]);
           await tachyon.say_and_wait([
             '只要闻到 ',
             callname,
-            ' 的味道脑袋里就会变成只剩做爱的痴女好不甘心❤',
+            ' 的味道脑袋里就会变成只剩做爱的痴女好不甘心❤️',
           ]);
           await tachyon.say_and_wait([
             '只要含住肉棒就会想要变成 ',
             callname,
-            ' 一辈子的飞机杯好不甘心❤',
+            ' 一辈子的飞机杯好不甘心❤️',
           ]);
           await tachyon.say_and_wait([
             '明明被命令了忍住但每次 ',
             callname,
-            ' 射精时总是忍不住吞下去导致被惩罚好不甘心❤',
+            ' 射精时总是忍不住吞下去导致被惩罚好不甘心❤️',
           ]);
           await tachyon.say_and_wait(
-            '每次做爱都要靠药，结果还是战胜不了肉棒大人好不甘心❤',
+            '每次做爱都要靠药，结果还是战胜不了肉棒大人好不甘心❤️',
           );
           await tachyon.say_and_wait(
-            '每次都没有让肉棒大人满足自己就先去了好不甘心❤',
+            '每次都没有让肉棒大人满足自己就先去了好不甘心❤️',
           );
           await era.printAndWait([
             '每次喊完 ',
@@ -301,7 +301,7 @@ module.exports = async (hook) => {
           me.get_colored_name(),
           ' 有些按耐不住自己的情欲了。',
         ]);
-        await tachyon.say_and_wait([callname, '……咿❤']);
+        await tachyon.say_and_wait([callname, '……咿❤️']);
         await era.printAndWait([
           me.get_colored_name(),
           ' 拍上了',
@@ -315,7 +315,7 @@ module.exports = async (hook) => {
         await tachyon.say_and_wait([
           '……',
           callname,
-          '，这里回音……很大的❤……回去，回去再做，好吗❤',
+          '，这里回音……很大的❤️……回去，回去再做，好吗❤️',
         ]);
         await era.printAndWait([
           me.get_colored_name(),
@@ -327,10 +327,10 @@ module.exports = async (hook) => {
           tachyon.sex,
           '连忙按住自己的嘴，却还是有声音忍不住发了出来。',
         ]);
-        await tachyon.say_and_wait('呜咿咿❤❤❤');
-        await tachyon.say_and_wait('唔……❤');
-        await tachyon.say_and_wait('呜呜……❤');
-        await tachyon.say_and_wait('等，不能戳进去喔喔喔喔❤❤❤');
+        await tachyon.say_and_wait('呜咿咿❤️❤️❤️');
+        await tachyon.say_and_wait('唔……❤️');
+        await tachyon.say_and_wait('呜呜……❤️');
+        await tachyon.say_and_wait('等，不能戳进去喔喔喔喔❤️❤️❤️');
         await era.printAndWait([
           '最后，',
           me.get_colored_name(),
@@ -367,10 +367,10 @@ module.exports = async (hook) => {
         await tachyon.say_and_wait([
           '唔……',
           callname,
-          ' ❤……在人家用来发泄情绪的树洞前做这种事……要是被人听到怎么办❤',
+          ' ❤️……在人家用来发泄情绪的树洞前做这种事……要是被人听到怎么办❤️',
         ]);
         await tachyon.say_and_wait('发泄性欲也是发泄？');
-        await tachyon.say_and_wait('真是❤……要是被人发现我可不管❤');
+        await tachyon.say_and_wait('真是❤️……要是被人发现我可不管❤️');
       });
     }
   }

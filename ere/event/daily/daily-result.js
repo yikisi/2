@@ -258,7 +258,7 @@ handlers[event_hooks.out_river] = async (chara_id, hook, extra_flag) => {
   } else {
     era.println();
     // 钓鱼
-    const got_jpy = extra_flag?.jpy || get_random_value(0, 5);
+    const got_jpy = extra_flag?.jpy ?? get_random_value(0, 5);
     wait_flag ||= got_jpy > 0;
     got_jpy && era.print(`钓到的鱼卖出了 ${got_jpy} 马币……`);
     sys_change_money(got_jpy);
@@ -311,15 +311,15 @@ handlers[event_hooks.out_shopping] = async (chara_id, hook) => {
   }
 };
 
-handlers[event_hooks.out_church] = async (chara_id) => {
-  const condition_chara = chara_id && era.get(`status:${chara_id}:练习X手`) < 0;
+handlers[event_hooks.out_church] = async (id) => {
+  const condition_chara = id && era.get(`status:${id}:练习X手`) < 0;
   const condition_me = era.get('status:0:练习X手') < 0;
   if (condition_chara || condition_me) {
     era.println();
   }
   if (condition_chara) {
-    era.set(`status:${chara_id}:练习X手`, 0);
-    era.print(`${era.get(`callname:${chara_id}:-2`)} 的训练似乎更加顺利了……`);
+    era.set(`status:${id}:练习X手`, 0);
+    era.print(`${era.get(`callname:${id}:-2`)} 的训练似乎更加顺利了……`);
   }
   if (condition_me) {
     era.set('status:0:练习X手', 0);
@@ -329,7 +329,7 @@ handlers[event_hooks.out_church] = async (chara_id) => {
     sys_like_chara(
       sys_get_random_uma_god(),
       0,
-      get_random_value(5, 10 + 10 * (chara_id > 0)),
+      get_random_value(5, 10 + 10 * (id > 0)),
     ) ||
     condition_chara ||
     condition_me

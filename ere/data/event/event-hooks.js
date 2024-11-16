@@ -97,6 +97,8 @@ const hooks = {
 };
 Object.keys(hooks).forEach((k, i) => (hooks[k] = i));
 
+hooks.keys = Object.keys(hooks);
+
 hooks.no_yandere_punish = {};
 hooks.no_yandere_punish[hooks.basement_end] = 1;
 hooks.no_yandere_punish[hooks.crazy_fan_end] = 1;

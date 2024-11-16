@@ -1,16 +1,17 @@
+const { run_custom_daily } = require('#/event/daily/daily-factory');
 const {
   cb_enum,
   get_chara_event_object,
   get_random_event_object,
 } = require('#/event/queue');
-const { get_custom_rec } = require('#/event/rec/rec-factory');
+const { run_custom_rec } = require('#/event/rec/rec-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 
 const cb_dict = {};
 cb_dict[cb_enum.recruit] = (chara_id, stage, extra_flag, event_object) =>
-  get_custom_rec(chara_id, stage, event_object);
-cb_dict[cb_enum.daily] = require('#/system/script/sys-call-daily-script');
+  run_custom_rec(chara_id, stage, event_object);
+cb_dict[cb_enum.daily] = run_custom_daily;
 cb_dict[cb_enum.edu] = require('#/system/script/sys-call-edu-script');
 cb_dict[cb_enum.love] = require('#/system/script/sys-call-love-script');
 

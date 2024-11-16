@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
   sys_change_attr_and_print,
@@ -25,6 +24,7 @@ const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { run_custom_daily } = require('#/event/daily/daily-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
@@ -276,7 +276,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 201:
       era.drawLine();
-      await sys_call_daily_event(chara_id, event_hooks.talk);
+      await run_custom_daily(chara_id, event_hooks.talk);
       break;
     case 202:
       era.drawLine();
@@ -305,7 +305,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.celebration, chara_id)())) {
         era.drawLine();
-        await sys_call_daily_event(chara_id, event_hooks.celebration, {});
+        await run_custom_daily(chara_id, event_hooks.celebration, {});
       }
       break;
     case 207:

@@ -11,7 +11,7 @@ const {
 
 const { buff_colors } = require('#/data/color-const');
 
-module.exports = async () => {
+module.exports = async function () {
   const callname = sys_get_callname(32, 0),
     me = get_chara_talk(0),
     tachyon = get_chara_talk(32);

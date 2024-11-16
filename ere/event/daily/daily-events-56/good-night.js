@@ -1,7 +1,6 @@
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 
@@ -10,9 +9,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 /** @param {HookArg} hook */
 module.exports = async (hook) => {
-  if (!sys_check_awake(0) || !sys_check_awake(56)) {
-    throw new Error();
-  }
   const kitaru = get_chara_talk(56),
     me = get_chara_talk(0),
     callname = sys_get_callname(56, 0);

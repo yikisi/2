@@ -12,9 +12,9 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_celebration } = require('#/data/info-generator');
 
-/** @param {number} chara_id */
-module.exports = async (chara_id) => {
-  const chara = get_chara_talk(chara_id),
+module.exports = async function () {
+  console.log(this);
+  const chara = get_chara_talk(this.id),
     me = get_chara_talk(0),
     weeks = (era.get('flag:当前回合数') - 1) % 48;
   await print_event_name(get_celebration(), chara);
