@@ -2,7 +2,7 @@ const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
   'Tokyo Sports Hai Nisai Stakes',
-  '东京体育杯2岁锦标',
+  '东京体育杯少年锦标',
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.tokyo,
   RaceInfo.ground_enum.grass,

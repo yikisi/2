@@ -203,15 +203,17 @@ async function page_chairman_office() {
                         [[], []],
                       )
                       .forEach((l) => {
-                        temp.push({
-                          config: {
-                            content: l[0].priority
-                              ? '使用专属口上的角色'
-                              : '使用地文的角色',
-                          },
-                          type: 'divider',
-                        });
-                        temp.push(...l);
+                        if (l.length > 0) {
+                          temp.push({
+                            config: {
+                              content: l[0].priority
+                                ? '使用专属口上的角色'
+                                : '使用地文的角色',
+                            },
+                            type: 'divider',
+                          });
+                          temp.push(...l);
+                        }
                       });
                     era.printMultiColumns(temp);
                     temp = await era.input();

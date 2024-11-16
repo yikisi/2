@@ -4,7 +4,7 @@ module.exports = new RaceInfo(
   'Kyoto Kinen',
   '京都纪念',
   RaceInfo.class_enum.G2,
-  RaceInfo.track_enum.hanshin,
+  RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,
   2200,
   RaceInfo.distance_enum.medium,
@@ -15,5 +15,5 @@ module.exports = new RaceInfo(
   6,
   0,
   1937,
-  10906,
+  10808,
 );

@@ -4,7 +4,7 @@ module.exports = new RaceInfo(
   'Swan Stakes',
   '天鹅锦标',
   RaceInfo.class_enum.G2,
-  RaceInfo.track_enum.hanshin,
+  RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,
   1400,
   RaceInfo.distance_enum.short,
@@ -15,5 +15,5 @@ module.exports = new RaceInfo(
   40,
   0,
   1875,
-  10902,
+  10803,
 );

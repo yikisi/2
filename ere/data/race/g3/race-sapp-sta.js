@@ -2,7 +2,7 @@ const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
   'Sapporo Nisai Stakes',
-  '札幌2岁锦标',
+  '札幌少年锦标',
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.sapporo,
   RaceInfo.ground_enum.grass,
