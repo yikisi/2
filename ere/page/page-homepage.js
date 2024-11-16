@@ -44,6 +44,7 @@ const {
   basement_status_enum,
 } = require('#/data/basement-const');
 const { buff_colors } = require('#/data/color-const');
+const { lust_border } = require('#/data/ero/orgasm-const');
 const BasementAction = require('#/data/event/basement-action');
 const BasementOwners = require('#/data/event/basement-owners');
 const event_hooks = require('#/data/event/event-hooks');
@@ -104,26 +105,29 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
       era.set('tflag:强奸', lover);
       era.set('tflag:主导权', lover);
     }
-    const sex_3p = get_random_entry(
-      sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
-        .map((e) => {
-          return {
-            id: e,
-            check:
-              e > 0 &&
-              e !== lover &&
-              sys_check_awake(e) &&
-              get_custom_check(e).is_want_make_love(),
-          };
-        })
-        .filter(
-          (e) =>
-            e.check &&
-            era.get(`relation:${lover}:${e.id}`) > 375 &&
-            era.get(`relation:${e.id}:${lover}`) > 75,
-        ),
-    );
-    if (sex_3p) {
+    const sex_3p =
+      era.get(`talent:${lover}:病娇`) !== 2
+        ? get_random_entry(
+            sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
+              .map((e) => {
+                return {
+                  id: e,
+                  check:
+                    e > 0 &&
+                    e !== lover &&
+                    sys_check_awake(e) &&
+                    get_custom_check(e).is_want_make_love(),
+                };
+              })
+              .filter(
+                (e) =>
+                  e.check &&
+                  (era.get(`relation:${e.id}:${lover}`) > 225 ||
+                    era.get(`base:${e.id}:性欲`) >= lust_border.absent_mind),
+              ),
+          )
+        : undefined;
+    if (sex_3p !== undefined) {
       era.drawLine();
       const chara = get_chara_talk(sex_3p.id);
       era.print([chara.get_colored_name(), ' 面色绯红地想要加入……接受吗？']);
@@ -150,8 +154,22 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
             0,
             -get_random_value(25, 75 + 25 * era.get(`talent:${lover}:病娇`)),
           ) || wait_flag;
+        if (
+          era.get(`relation:${lover}:${chara.id}`) <= 375 ||
+          era.get(`talent:${lover}:病娇`)
+        ) {
+          wait_flag =
+            sys_like_chara(
+              lover,
+              chara.id,
+              -get_random_value(75, 100 + 25 * era.get(`talent:${lover}:病娇`)),
+            ) || wait_flag;
+        }
         era.set(`cflag:${sex_3p.id}:自主训练`, 0);
-      } else if (sex_3p.check === 2) {
+      } else if (
+        sex_3p.check === 2 &&
+        era.get(`relation:${lover}:${chara.id}`) > 375
+      ) {
         await era.printAndWait([
           chara.get_colored_name(),
           ' 征得 ',
