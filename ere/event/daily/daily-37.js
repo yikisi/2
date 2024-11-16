@@ -355,7 +355,8 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  async school_rooftop() {
+  // eslint-disable-next-line no-unused-vars
+  async school_rooftop(hook) {
     const flash = get_chara_talk(37);
     const callname = sys_get_callname(37, 0);
     await era.printAndWait(

@@ -11,7 +11,11 @@ const {
   sys_change_lust,
   sys_get_billings,
 } = require('#/system/sys-calc-base-cflag');
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_colored_callname,
+  sys_like_chara,
+  sys_love_uma,
+} = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_money } = require('#/system/sys-calc-flag');
 
@@ -389,23 +393,138 @@ class CustomizedDaily {
 
   /**
    * @author 雞雞
+   * @author KUN
    *
    * @param {HookArg} hook
    * @param {{[jpy]:number}} extra_flag
    * @returns {Promise}
    */
   async out_river(hook, extra_flag) {
+    const chara = get_chara_talk(this.id),
+      me = get_chara_talk(0);
     hook.arg = (await select_action_around_river()) > 0;
-    await era.printAndWait([
-      get_chara_talk(0).get_colored_name(),
-      ' 与 ',
-      get_chara_talk(this.id).get_colored_name(),
-      hook.arg
-        ? ' 一起来到河边散步，今天也是好心情呢。'
-        : ' 一起来到河边钓鱼，希望能钓到大丰收。',
-    ]);
-    if (!hook.arg) {
+    if (hook.arg) {
+      if (
+        era.get(`love:${this.id}`) >= 50 &&
+        (era.get(`talent:${this.id}:自信程度`) === 1 ||
+          era.get(`talent:${this.id}:情感活动`) === 1 ||
+          era.get(`talent:${this.id}:羞耻忍耐`) === 1 ||
+          era.get(`talent:${this.id}:恐惧感受`) === 1 ||
+          era.get(`talent:${this.id}:未来期望`) === 1) &&
+        Math.random() < era.get(`love:${this.id}`) / 1000
+      ) {
+        hook.override = true;
+        /** @author KUN */
+        await print_event_name('河堤漫步时光', chara);
+        await era.printAndWait([
+          '在河堤边上休闲的度过了一段时间之后，',
+          me.get_colored_name(),
+          ' 和 ',
+          chara.get_colored_name(),
+          ' 踏上了返程。',
+        ]);
+        await era.printAndWait('温柔的风吹过了两个人的脸，很是惬意。');
+        era.printButton('「该回去了呢，」', 1);
+        era.printButton('「时间有点晚了。」', 2);
+        await era.input();
+        await era.printAndWait([
+          '在 ',
+          me.get_colored_name(),
+          ' 说话的同时，身旁的 ',
+          chara.get_colored_name(),
+          ' 偷偷把视线转了过来，默默把肩膀靠在一起。',
+        ]);
+        era.println();
+        await era.printAndWait('一同慢悠悠的走在路上，一路上都看不见多少人。');
+        await chara.say_and_wait('很安静呢……');
+        await era.printAndWait([
+          '似乎察觉到了什么的 ',
+          chara.get_colored_name(),
+          '，放缓了脚步。',
+        ]);
+        era.println();
+        await era.printAndWait([
+          '发现身旁的 ',
+          chara.get_colored_name(),
+          ' 停下了脚步时，',
+          me.get_colored_name(),
+          ' 也停住脚步回头看过去。',
+        ]);
+        era.printButton('「怎么了？」', 1);
+        await era.input();
+        await chara.say_and_wait('可以，稍微合上眼睛一会吗？');
+        await era.printAndWait([
+          '听着摸不着头脑的要求，',
+          me.get_colored_name(),
+          ' 稍微愣了一下，但还是合上了眼睛。',
+        ]);
+        era.println();
+        await era.printAndWait('风声在耳边吹过，清凉中却夹杂了一丝热风。');
+        await era.printAndWait([
+          '即使不睁眼，',
+          me.get_colored_name(),
+          ' 也能猜到发生了什么。',
+        ]);
+        await era.printAndWait('双臂环过身体，脸上感受到了一点温热的湿润感。');
+        era.println();
+        await chara.say_and_wait('……好啦，我们回去吧。');
+        await era.printAndWait([
+          '再次睁开眼的时候，',
+          chara.get_colored_name(),
+          ' 已经安静地站在 ',
+          me.get_colored_name(),
+          ' 的面前了。',
+        ]);
+        await era.printAndWait(
+          '虽然脸上还带着一点微红色，但却是微笑着后退了两步。',
+        );
+        era.printButton('「回去吧。」（好感+10）', 1);
+        era.printButton('「或许……可以晚点再回去……」（爱慕+1）', 2);
+        if ((await era.input()) === 1) {
+          await era.printAndWait([
+            chara.get_colored_name(),
+            ' 抓住了 ',
+            me.get_colored_name(),
+            ' 温暖的手，安心的走在路上。',
+          ]);
+          await me.say_and_wait('刚才的触感，到底是什么呢……', true);
+          era.println();
+          sys_like_chara(this.id, 0, 10) && (await era.waitAnyKey());
+        } else {
+          await chara.say_and_wait('晚点……');
+          await chara.say_and_wait('也就是……');
+          await era.printAndWait([
+            '面对眼前红着脸的 ',
+            chara.get_colored_name(),
+            '，',
+            me.get_colored_name(),
+            ' 只是笑了笑。',
+          ]);
+          await era.printAndWait([
+            '今天，就带着 ',
+            chara.get_colored_name(),
+            ' 再玩一会吧。',
+          ]);
+          era.println();
+          sys_love_uma(this.id, 1) && (await era.waitAnyKey());
+        }
+        return;
+      }
+      /** @author 雞雞 */
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 与 ',
+        chara.get_colored_name(),
+        ' 一起来到河边散步，今天也是好心情呢。',
+      ]);
+    } else {
       extra_flag.jpy = get_random_value(0, 5);
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 与 ',
+        chara.get_colored_name(),
+        ' 一起来到河边钓鱼，希望能钓到大丰收。',
+      ]);
     }
   }
 
@@ -499,7 +618,8 @@ class CustomizedDaily {
     );
   }
 
-  async school_rooftop() {
+  /** @param {HookArg} hook */
+  async school_rooftop(hook) {
     const chara = get_chara_talk(this.id),
       me = get_chara_talk(0);
     if (
@@ -580,6 +700,7 @@ class CustomizedDaily {
         ]);
         sys_change_lust(this.id, 1500);
       }
+      hook.override = true;
       return;
     }
     /** @author 雞雞 */

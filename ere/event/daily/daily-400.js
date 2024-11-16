@@ -433,7 +433,8 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  async school_rooftop() {
+  // eslint-disable-next-line no-unused-vars
+  async school_rooftop(hook) {
     const silence = get_chara_talk(400),
       me = get_chara_talk(0);
     await era.printAndWait([

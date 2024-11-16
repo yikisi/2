@@ -402,7 +402,8 @@ module.exports = class extends CustomizedDaily {
     return await tachyon_school_atrium(hook);
   }
 
-  async school_rooftop() {
+  // eslint-disable-next-line no-unused-vars
+  async school_rooftop(hook) {
     const buffer = [],
       callname = sys_get_callname(32, 0),
       edu_marks = new TachyonEduMarks(),

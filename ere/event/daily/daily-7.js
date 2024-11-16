@@ -227,7 +227,8 @@ module.exports = class extends CustomizedDaily {
     await gold_ship.say_and_wait(get_random_entry(buffer));
   }
 
-  async school_rooftop() {
+  // eslint-disable-next-line no-unused-vars
+  async school_rooftop(hook) {
     const gold_ship = get_chara_talk(7);
     await era.printAndWait(`与 ${gold_ship.name} 一起吃了便当……`);
     await gold_ship.say_and_wait(

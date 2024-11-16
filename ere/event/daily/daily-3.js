@@ -694,7 +694,8 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  async school_rooftop() {
+  // eslint-disable-next-line no-unused-vars
+  async school_rooftop(hook) {
     await get_chara_talk(3).say_and_wait('到这里吃饭意外地有感觉呢！');
     await era.printAndWait([
       get_chara_talk(0).get_couple_title(),

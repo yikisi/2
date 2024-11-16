@@ -257,7 +257,8 @@ module.exports = class extends CustomizedDaily {
     );
   }
 
-  async school_rooftop() {
+  // eslint-disable-next-line no-unused-vars
+  async school_rooftop(hook) {
     await get_chara_talk(60).say_and_wait(
       `锵锵！是 ${sys_get_callname(
         60,
