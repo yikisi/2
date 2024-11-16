@@ -28,11 +28,11 @@ const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors, money_color } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_name } = require('#/data/locations');
-const { get_random_value } = require('#/utils/value-utils');
 
 const money_list = [0, 1500, 5000, 10000];
 

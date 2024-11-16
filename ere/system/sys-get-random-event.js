@@ -11,8 +11,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const cb_dict = {};
 cb_dict[cb_enum.recruit] = (chara_id, stage, extra_flag, event_object) =>
   run_custom_rec(chara_id, stage, event_object);
-cb_dict[cb_enum.daily] = (chara_id, stage, extra_flag, event_object) =>
-  run_custom_daily(chara_id, stage, extra_flag, event_object);
+cb_dict[cb_enum.daily] = run_custom_daily;
 cb_dict[cb_enum.edu] = require('#/system/script/sys-call-edu-script');
 cb_dict[cb_enum.love] = require('#/system/script/sys-call-love-script');
 

@@ -93,14 +93,14 @@ module.exports = async () => {
   }
   const line_copyrights = [
     [[get_copyright_entry(3)], '天马闪光蹄'],
-    // [[get_copyright_entry(4), '、', get_copyright_entry(46)], '黑奴一号'],
+    // [[get_copyright_entry(4), { isDivider: true }, get_copyright_entry(46)], '黑奴一号'],
     [[get_copyright_entry(7)], '雞雞'],
     // [
     //   [
     //     get_copyright_entry(6),
-    //     '、',
+    //     { isDivider: true },
     //     get_copyright_entry(7),
-    //     '、',
+    //     { isDivider: true },
     //     get_copyright_entry(21),
     //   ],
     //   '雞雞',
@@ -114,9 +114,9 @@ module.exports = async () => {
     [
       [
         get_copyright_entry(30),
-        '、',
+        { isDivider: true },
         get_copyright_entry(85),
-        '、',
+        { isDivider: true },
         get_copyright_entry(205),
       ],
       '梦露',
@@ -167,8 +167,20 @@ module.exports = async () => {
     [[get_copyright_entry(342, '招募')], '黑衣剑士-星爆气流斩准备就绪'],
     [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
     [
-      ['招募、日常、爱慕地文', { isBr: true }, '教学、地下室教学'],
+      [
+        '招募地文',
+        { isDivider: true },
+        '爱慕地文',
+        { isBr: true },
+        '新手教学',
+        { isDivider: true },
+        '地下室教学',
+      ],
       ['雞雞', { isDivider: true }, '无名黑奴'],
+    ],
+    [
+      ['日常地文'],
+      ['雞雞', { isDivider: true }, 'KUN', { isDivider: true }, '无名黑奴'],
     ],
     [
       '育成地文',
