@@ -4,7 +4,7 @@ module.exports = new RaceInfo(
   'Queen Elizabeth II Cup',
   '伊丽莎白二世女皇杯',
   RaceInfo.class_enum.G1,
-  RaceInfo.track_enum.hanshin,
+  RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,
   2200,
   RaceInfo.distance_enum.medium,
@@ -15,5 +15,5 @@ module.exports = new RaceInfo(
   42,
   0,
   2437,
-  10906,
+  10808,
 );

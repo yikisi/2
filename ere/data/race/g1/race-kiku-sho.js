@@ -4,7 +4,7 @@ module.exports = new RaceInfo(
   'Kikuka Sho',
   '菊花赏',
   RaceInfo.class_enum.G1,
-  RaceInfo.track_enum.hanshin,
+  RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,
   3000,
   RaceInfo.distance_enum.long,
@@ -15,5 +15,5 @@ module.exports = new RaceInfo(
   40,
   0,
   3375,
-  10909,
+  10810,
 );

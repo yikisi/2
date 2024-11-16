@@ -4,7 +4,7 @@ module.exports = new RaceInfo(
   'Mile Championship',
   '英里冠军赛',
   RaceInfo.class_enum.G1,
-  RaceInfo.track_enum.hanshin,
+  RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,
   1600,
   RaceInfo.distance_enum.mile,
@@ -15,5 +15,5 @@ module.exports = new RaceInfo(
   43,
   0,
   3375,
-  10903,
+  10805,
 );

@@ -4,7 +4,7 @@ module.exports = new RaceInfo(
   'Shuka Sho',
   '秋华赏',
   RaceInfo.class_enum.G1,
-  RaceInfo.track_enum.hanshin,
+  RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,
   2000,
   RaceInfo.distance_enum.medium,
@@ -15,5 +15,5 @@ module.exports = new RaceInfo(
   39,
   0,
   2062,
-  10905,
+  10807,
 );
