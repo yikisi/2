@@ -76,7 +76,7 @@ module.exports = {
         } else if (holiday === 47) {
           ret = [`${base}_圣诞`];
         }
-        if (era.get(`cflag:${chara_id}:殿堂`)) {
+        if (!(era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)) {
           ret.push(`${base}_私`);
         }
         ret.push(`${base}_${era.get('flag:季节') ? '夏' : '冬'}`);

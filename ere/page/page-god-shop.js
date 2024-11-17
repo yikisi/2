@@ -1,7 +1,7 @@
 /**
  * 三女神祈祷 - 系统提示
  *
- * @author UNAUTHORIZED
+ * @author 阿格尼斯数码公司
  */
 const era = require('#/era-electron');
 

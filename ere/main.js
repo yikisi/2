@@ -158,6 +158,7 @@ module.exports = async () => {
     // [[get_copyright_entry(89)], '無奈'],
     [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
     [[get_copyright_entry(119, '地下室')], '幽白書'],
+    [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
     [
       [get_copyright_entry(303, '部分')],
       ['雞雞', { isDivider: true }, '幽白書'],
@@ -165,7 +166,6 @@ module.exports = async () => {
     [[get_copyright_entry(340, '招募')], 'O口口口口口'],
     [[get_copyright_entry(341, '招募')], 'フィンランド'],
     [[get_copyright_entry(342, '招募')], '黑衣剑士-星爆气流斩准备就绪'],
-    [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
     [
       [
         '招募地文',
@@ -180,7 +180,15 @@ module.exports = async () => {
     ],
     [
       ['日常地文'],
-      ['雞雞', { isDivider: true }, 'KUN', { isDivider: true }, '无名黑奴'],
+      [
+        '雞雞',
+        { isDivider: true },
+        'KUN',
+        { isDivider: true },
+        '阿格尼斯数码公司',
+        { isDivider: true },
+        '无名黑奴',
+      ],
     ],
     [
       '育成地文',
