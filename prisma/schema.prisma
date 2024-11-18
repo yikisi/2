@@ -1002,20 +1002,21 @@ model character_system_lottery {
 }
 
 model character_system_text {
-  character_id        Int
-  voice_id            Int
-  text                String
-  cue_sheet           String
-  cue_id              Int
-  motion_set          Int
-  scene               Int
-  use_gallery         Int
-  card_id             Int
-  lip_sync_data       String
-  gender              Int
-  motion_second_set   Int
-  motion_second_start Int
-  start_date          Int
+  character_id                Int
+  voice_id                    Int
+  text                        String
+  cue_sheet                   String
+  cue_id                      Int
+  motion_set                  Int
+  scene                       Int
+  use_gallery                 Int
+  card_id                     Int
+  lip_sync_data               String
+  gender                      Int
+  motion_second_set           Int
+  motion_second_start         Int
+  gallery_key_usage_condition Int
+  start_date                  Int
 
   @@id([character_id, voice_id])
   @@index([character_id], map: "character_system_text_0_character_id")
@@ -6844,4 +6845,18 @@ model room_match_training_rank {
   start_date String
 
   @@index([rank], map: "room_match_training_rank_0_rank")
+}
+
+model subscription_effect {
+  id              Int @id @default(autoincrement())
+  target_type     Int
+  effect_type_1   Int
+  effect_value_1  Int
+  user_show       Int
+  image_icon_id   Int
+  transition_type Int
+  start_time      Int
+  end_time        Int
+
+  @@index([target_type], map: "subscription_effect_0_target_type")
 }

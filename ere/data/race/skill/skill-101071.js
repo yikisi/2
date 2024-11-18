@@ -2,7 +2,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101071,
-  '满天星斗',
+  'Billions of stars',
   '在终盘的最终直线位于领头时速度少量提升，并根据进入终盘前取得的领先距离提供额外速度',
   10107,
   1,

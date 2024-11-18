@@ -2,7 +2,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900431,
-  '噔！咚！！砰！！！',
+  'Ding Dong Boo',
   '名次争夺时，速度提高一点；若是身处泥地比赛，加速度会稍微上升',
   90043,
   1,

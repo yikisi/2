@@ -2,7 +2,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100821,
-  '闪亮跑道',
+  'Shining Runway',
   '在最终弯道位于好位置时，短时间内速度提升，若是英里比赛，则效果时间增加',
   10082,
   1,
