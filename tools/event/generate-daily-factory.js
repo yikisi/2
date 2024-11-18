@@ -68,10 +68,10 @@ module.exports = {
   /**
    * @param {number} chara_id
    * @param {number} stage
-   * @param {*} extra_flag
-   * @param {EventObject} event_object
+   * @param {*} [extra_flag]
+   * @param {EventObject} [event_object]
    */
-  async run(chara_id, stage, extra_flag, event_object) {
+  async run_custom_daily(chara_id, stage, extra_flag, event_object) {
     if (!obj_dict[chara_id]) {
       const script_name =
         chara_id >= first_child_id ? get(\`callname:\${chara_id}:-2\`) : chara_id;

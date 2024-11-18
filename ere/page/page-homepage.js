@@ -116,15 +116,12 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
                     e > 0 &&
                     e !== lover &&
                     sys_check_awake(e) &&
+                    (era.get(`relation:${e}:${lover}`) > 225 ||
+                      era.get(`base:${e}:性欲`) >= lust_border.absent_mind) &&
                     get_custom_check(e).is_want_make_love(),
                 };
               })
-              .filter(
-                (e) =>
-                  e.check &&
-                  (era.get(`relation:${e.id}:${lover}`) > 225 ||
-                    era.get(`base:${e.id}:性欲`) >= lust_border.absent_mind),
-              ),
+              .filter((e) => e.check),
           )
         : undefined;
     if (sex_3p !== undefined) {
