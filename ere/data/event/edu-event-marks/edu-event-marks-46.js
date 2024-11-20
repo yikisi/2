@@ -33,8 +33,8 @@ class FalconEduMarks extends EduEventMarks {
   race_count;
   // 招募标记
   after_recruit;
-  // TE 偶像
-  idol;
+  // TE 顶级马娘偶像
+  top_idol;
   // GE 安可曲
   encore;
 

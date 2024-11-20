@@ -1392,7 +1392,7 @@ module.exports = async function () {
     falcon.print(`堵上飞鹰子身为马娘偶像的觉悟！`);
     falcon.print(`就这么一口气闪耀到终点！`);
   } else if (edu_weeks === 95 + 47) {
-    await print_event_name(`无法回应的恋情`, falcon);
+    await print_event_name(`醒目飞鹰的决定`, falcon);
     await era.printAndWait(`你与醒目飞鹰紧张的准备着下周将要准备的东京大赏。`);
     await era.printAndWait(`与醒目飞鹰之间签订的契约，已经快满三年了。`);
     await me.say_and_wait(`接下来就是毕业典礼了吗？`);

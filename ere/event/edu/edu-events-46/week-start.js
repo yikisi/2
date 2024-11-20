@@ -2559,6 +2559,14 @@ module.exports = async function (event_object) {
     await me.say_and_wait(`这样就可以了。`);
     await era.printAndWait(`good end·kiss on my deity`);
     era.drawLine({ content: 'THE END' });
+  }
+  //TODO TE与GE结局事件处理
+  else if (edu_weeks === 143 + 1 && new FalconEduMarks().top_idol === 1) {
+    event_marks.top_idol++;
+    await print_event_name(`顶级马娘偶像`, falcon);
+  } else if (edu_weeks === 143 + 1 && new FalconEduMarks().encore === 1) {
+    event_marks.encore++;
+    await print_event_name(`压抑不住的恋心`, falcon);
   } else if (edu_weeks === 143 + 1 && new FalconEduMarks().idol_road === 1) {
     event_marks.idol_road++;
     await print_event_name(`依然闪耀的偶像`, falcon);

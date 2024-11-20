@@ -483,51 +483,65 @@ module.exports = async (hook, extra_flag) => {
     );
     await me.say_and_wait(`怎么了？`);
     await chara_talk.say_and_wait(`什么都没有哦⭐`);
-    await era.printAndWait(`少女捂着嘴偷笑着跑回了宿舍中。`);
+    await era.printAndWait(`少女捂着嘴偷笑着跑走了。`);
   } else if (
     extra_flag.race === race_enum.toky_dai &&
     edu_weeks > 95 &&
     extra_flag.rank === 1
   ) {
+    //（恋心高于责任）东京大赏结束，前往胜者舞台的间隙期间，醒目飞鹰再次认识了自己（我对自己所做的决定毫无后悔，如果重新在做选择的话，我也会选择这条道路）
+    //（责任大于恋心）东京大赏结束，前往胜者舞台的间隙期间，醒目飞鹰再次认识了自己（我对自己所做的决定毫无后悔，如果重新在做选择的话，我也会选择这条道路）
     await print_event_name(
-      ['东京大赏典后・顶级偶像——', chara_talk.get_colored_name()],
+      ['东京大赏典后・胜者舞台前的决定', chara_talk.get_colored_name()],
       chara_talk,
     );
-    await chara_talk.print_and_wait(`偶像是什么？`);
-    await chara_talk.print_and_wait(
-      `是在舞台之中挥洒着汗水，追逐着闪耀的刹那？`,
+    // 渴望最终得到满足，内心不再孤独，恐惧随着信仰的坚定而消散,坚强蜕变为了觉悟
+    chara_talk.print(`这一刻终于到来了。`);
+    chara_talk.print(
+      `三年前的自己所憧憬的聚集了万千粉丝目光的最闪耀舞台，尽管与自己设想的轨道再无交汇的可能。`,
     );
-    await chara_talk.print_and_wait(
-      `还是背负着粉丝们的期待，拼尽全力朝着闪耀的方向前行？`,
+    chara_talk.print(`最终还是实现了。`);
+    chara_talk.print(
+      `面对艰难的目标最终实现的那一刻，一般人应该会激动到语无伦次，或者屏住呼吸直到最后彻底达成之后如释重负的吐出那口气为止。`,
     );
-    await chara_talk.print_and_wait(`冲线的瞬间，我得到的答案是`);
-    await chara_talk.print_and_wait(`从内心之中静默燃烧的火焰`);
+    chara_talk.print(`但此刻的自己却出乎意料的平静。`);
+    chara_talk.print(
+      `为了这一刻调整的面部表情、手的动作、身体姿态、发音，都是最自然的形态。`,
+    );
+    chara_talk.print(`尽管内心之中还是存在着一种无法形容的感情。`);
+    chara_talk.print(
+      `如果要形容那种感觉的话，就像还是在电视前，一边憧憬着电视上的著名偶像，一边刻意的模仿着偶像舞步姿态时的那个小马娘一样。`,
+    );
+    chara_talk.print(`——直到刚才还在脑海之中徘徊的噪音，不知不觉就消失了。`);
+    // 恋心大于责任
+    chara_talk.print(
+      `我对自己所做的决定毫无后悔，如果重新在做选择的话，我也会选择这条道路`,
+    );
+    chara_talk.print(`如果有什么真正要说的话，`);
+    chara_talk.print(`与训练员先生一起的日子，我很满足。`);
+    chara_talk.print(`谢谢你，训练员先生，`);
+    //责任大于恋心
+    chara_talk.print(
+      `为了逃避责任而寻求着自我麻痹，只会被内心的自我步步诘问，最后在放大了1000倍的敏感状态下，陷入烈火与寒冷的双重痛苦之中`,
+    );
+    chara_talk.print(
+      `在此增幅之下，哪怕是微不足道的羽毛般的压力，也会彻底摧毁一个人。`,
+    );
+    chara_talk.print(
+      `直面自己被赋予的责任，固然是一种压力，而从自己所处的责任面前逃避，只会陷入另一种痛苦之中。`,
+    );
+    chara_talk.print(`这就是我的感悟。`);
+    chara_talk.print(`所以。`);
+    await chara_talk.say_and_wait(
+      `为了粉丝们的大家，飞鹰子要毫无遗憾的献上最后一曲！`,
+    );
     era.drawLine();
     await era.printAndWait(
-      `取得了胜利的${chara_talk.name}，在舞台之上露出的美丽笑容。`,
+      `从无人问津的路边偶像，到泥地的顶级偶像，以三年的跨度来说，也过于迅速了。`,
     );
-    await era.printAndWait(
-      `作为后辈的${chara_talk.get_uma_sex_title()}们站在人群之中对着${
-        chara_talk.sex
-      }下定了前进的决心。`,
-    );
-    await era.printAndWait(
-      `然而在作为偶像的背影之后，你也知道，${chara_talk.sex}只是一个普普通通的少女罢了。`,
-    );
-    await era.printAndWait(
-      `与其他${chara_talk.get_uma_sex_title()}一样，喜欢可爱的东西，期待着爱情的到来，希翼着美好的未来。`,
-    );
-    await era.printAndWait(
-      `少女啊，希望你能向天空中的雄鹰一样，在泥地的道路上不断振翅飞翔。`,
-    );
-    await chara_talk.say_and_wait(
-      `训练员${me.get_adult_sex_title()}，你在想什么呢？`,
-    );
-    await era.printAndWait(`看着身边的少女，不禁对未来也产生了期待的样子。`);
-    await me.say_and_wait(`接下来的梦之杯，希望也能看到飞鹰子闪耀的背影。`);
-    await chara_talk.say_and_wait(
-      `嗯！训练员${me.get_adult_sex_title()}就好好看着吧！`,
-    );
-    await era.printAndWait(`向你飞扑过来的少女露出了幸福的笑容。`);
+    await era.printAndWait(`就像是与她第一次见面时，从窗户上一跃而下的身影。`);
+    await era.printAndWait(`那一刻的她比起大地，更接近天空。`);
+    await era.printAndWait(`或许这才是自己下定决心与她签约的原因吧。`);
+    await era.printAndWait(`被闪光灯汇聚的焦点，便是名为醒目飞鹰的顶级偶像。`);
   }
 };

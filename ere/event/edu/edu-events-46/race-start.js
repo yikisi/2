@@ -254,7 +254,7 @@ module.exports = async (hook, extra_flag) => {
     await falcon.say_and_wait(`接下来要好好看着飞鹰子闪耀的样子！`);
     await era.printAndWait(`尚显稚嫩的偶像走向了赛场。`);
   } else if (extra_flag.race === race_enum.cham_cup && edu_weeks > 95) {
-    await print_event_name(`冠军杯·第二步！`, falcon);
+    await print_event_name(`冠军杯·泥泞的顶级偶像！`, falcon);
     await era.printAndWait(`其二，冠军杯开始了。`);
     await era.printAndWait(`经过经典赛的准备之后，接下来面对的是冠军杯。`);
     await era.printAndWait(
@@ -271,7 +271,9 @@ module.exports = async (hook, extra_flag) => {
       `在震耳欲聋的欢呼声之中，${falcon.name}走上了赛场。`,
     );
   } else if (extra_flag.race === race_enum.toky_dai && edu_weeks > 95) {
-    await print_event_name(`东京大赏典·final`, falcon);
+    //（恋心高于责任）东京大赏结束，前往胜者舞台的间隙期间，醒目飞鹰再次认识了自己（我对自己所做的决定毫无后悔，如果重新在做选择的话，我也会选择这条道路）
+    //（责任大于恋心）东京大赏结束，前往胜者舞台的间隙期间，醒目飞鹰再次认识了自己（我对自己所做的决定毫无后悔，如果重新在做选择的话，我也会选择这条道路）
+    await print_event_name(`东京大赏典·the biggest stage`, falcon);
     falcon.print(`这一天的到来，比想象之中还要快。`);
     falcon.print(`辛苦的汗水，努力的价值，都将在这一刻显露出来。`);
     falcon.print(
