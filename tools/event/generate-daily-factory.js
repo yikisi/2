@@ -31,7 +31,8 @@ const base_scripts = readdirSync('../../ere/event/daily')
 
 let output = `const { get } = require('#/era-electron');
 
-const common_cons = require('#/event/daily/daily-common');
+const DailyChild = require('#/event/daily/daily-child');
+const CustomizedDaily = require('#/event/daily/daily-common');
 const daily_result = require('#/event/daily/daily-result');
 const script_dict = require('#/event/script-dict.json');
 const punish_by_yandere = require('#/event/snippets/punish-by-yandere');
@@ -73,11 +74,13 @@ module.exports = {
    */
   async run_custom_daily(chara_id, stage, extra_flag, event_object) {
     if (!obj_dict[chara_id]) {
-      const script_name =
-        chara_id >= first_child_id ? get(\`callname:\${chara_id}:-2\`) : chara_id;
+      const { n: script_name, c: cons } =
+        chara_id >= first_child_id
+          ? { n: get(\`callname:\${chara_id}:-2\`), c: DailyChild }
+          : { n: chara_id, c: CustomizedDaily };
       obj_dict[chara_id] = new (cons_dict[
         script_dict[script_name] || script_name
-      ] || common_cons)(chara_id);
+      ] || cons)(chara_id);
     }
     const hook = new HookArg(stage),
       _extra = extra_flag || {};
