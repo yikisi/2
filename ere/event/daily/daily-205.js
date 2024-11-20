@@ -22,7 +22,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_random_value } = require('#/utils/value-utils');
 
 module.exports = class extends CustomizedDaily {
   select() {
@@ -187,7 +186,7 @@ module.exports = class extends CustomizedDaily {
     );
   }
 
-  async out_river(hook, extra_flag) {
+  async out_river(hook) {
     if ((hook.arg = (await select_action_around_river()) > 0)) {
       await get_chara_talk(205).say_and_wait(
         get_random_entry([
@@ -196,7 +195,6 @@ module.exports = class extends CustomizedDaily {
         ]),
       );
     } else {
-      extra_flag.jpy = get_random_value(0, 5);
       await get_chara_talk(205).say_and_wait(
         get_random_entry([
           `钓不上来啦……哼，谢 ${get_chara_talk(0).actual_name} 爷打赏小女。`,

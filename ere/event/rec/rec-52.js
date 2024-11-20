@@ -26,8 +26,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_enum } = require('#/data/train-const');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit() {
     const life_marks = new UraraLifeMarks(),
       me = get_chara_talk(0),
       me_callname = sys_get_callname(52, 0),

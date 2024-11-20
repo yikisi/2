@@ -538,7 +538,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  async out_river(hook, extra_flag) {
+  async out_river(hook) {
     const teio = get_chara_talk(3),
       me = get_chara_talk(0);
     if ((hook.arg = (await select_action_around_river()) > 0)) {
@@ -554,7 +554,6 @@ module.exports = class extends CustomizedDaily {
       await era.printAndWait(
         `就是可惜这么撒欢估计会把鱼赶跑，${me.name} 无奈地叹了口气，坐在${teio.sex}的身旁开始做钓鱼准备。`,
       );
-      extra_flag.jpy = get_random_value(0, 5);
     }
   }
 
@@ -694,8 +693,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async school_rooftop(hook) {
+  async school_rooftop() {
     await get_chara_talk(3).say_and_wait('到这里吃饭意外地有感觉呢！');
     await era.printAndWait([
       get_chara_talk(0).get_couple_title(),

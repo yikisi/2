@@ -26,8 +26,7 @@ const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit() {
     const aoi = get_chara_talk(304),
       me = get_chara_talk(0),
       meek = get_chara_talk(201);

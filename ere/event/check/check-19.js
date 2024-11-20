@@ -187,8 +187,7 @@ module.exports = class extends CustomizedCheck {
     return ['我推的马娘'];
   }
 
-  // eslint-disable-next-line no-unused-vars
-  is_aim_race(race, edu_weeks, rank) {
+  is_aim_race(race, edu_weeks) {
     switch (race) {
       case race_enum.mile_cha:
         if (

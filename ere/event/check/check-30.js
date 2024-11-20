@@ -160,8 +160,7 @@ module.exports = class extends CustomizedCheck {
     return ['永恒碧蓝'];
   }
 
-  // eslint-disable-next-line no-unused-vars
-  is_aim_race(race, edu_weeks, rank) {
+  is_aim_race(race, edu_weeks) {
     if (
       race === race_enum.tenn_sho &&
       !check_aim_race(new RaceHistory(30).get(), race_enum.tenn_sho, 1, 1)

@@ -12,8 +12,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { yes } = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit() {
     const chara = get_chara_talk(60),
       me = get_chara_talk(0);
     await era.printAndWait(`？？？「……以及本场选拔赛的第三名是……优秀素质！」`);

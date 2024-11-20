@@ -16,6 +16,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -25,10 +26,18 @@ class DailyChild extends CustomizedDaily {
     let temp;
     switch (era.get(`cflag:${this.id}:成长阶段`)) {
       case 0:
-        temp = era.get(`cflag:${this.id}:父方角色`) ? '麻麻' : '叭叭';
-        await get_chara_talk(this.id).say_and_wait(
-          `呜呜哇哇哇——${temp}——我要${temp}——`,
-        );
+        temp = {
+          color: get_chara_color(0),
+          content: era.get(`cflag:${this.id}:父方角色`) ? '麻麻' : '叭叭',
+          fontWeight: 'bold',
+        };
+        await get_chara_talk(this.id).say_and_wait([
+          '呜呜哇哇哇——',
+          temp,
+          '——我要 ',
+          temp,
+          '——',
+        ]);
         break;
       case 1:
         await get_chara_talk(this.id).say_and_wait([
@@ -297,14 +306,18 @@ class DailyChild extends CustomizedDaily {
     if (sys_check_awake(this.id)) {
       if (growth === 0) {
         await chara.say_and_wait([
-          father_id === 0 ? '叭叭' : '麻麻',
+          {
+            color: get_chara_color(0),
+            content: father_id === 0 ? '叭叭' : '麻麻',
+            fontWeight: 'bold',
+          },
           '……！我是 ',
           chara.get_colored_name(),
           ' 哦！',
         ]);
       } else if (growth === 1) {
         await chara.say_and_wait([
-          father_id === 0 ? '爸爸' : '妈妈',
+          sys_get_colored_callname(this.id, 0),
           '！我饿了！',
         ]);
       } else if (growth === 2) {
@@ -325,7 +338,7 @@ class DailyChild extends CustomizedDaily {
           temp.push('下面变大了……');
         }
         await chara.say_and_wait([
-          father_id === 0 ? '爸爸' : '妈妈',
+          sys_get_colored_callname(this.id, 0),
           '我的身体感觉有点不对劲……那个，',
           get_random_entry(temp),
         ]);
@@ -335,7 +348,7 @@ class DailyChild extends CustomizedDaily {
       ) {
         chara.say([
           '哈啊……哈啊……',
-          father_id === 0 ? '爸爸' : '妈妈',
+          sys_get_colored_callname(this.id, 0),
           '……我好热啊……这就是发情期……？',
         ]);
         await era.printAndWait([

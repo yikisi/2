@@ -24,8 +24,7 @@ aim_races[get_aim_race_index(race_enum.main_oka, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 4;
 
 module.exports = class extends CustomizedCheck {
-  // eslint-disable-next-line no-unused-vars
-  check_after_race(extra_flag) {
+  check_after_race() {
     const event_marks = new ArdanEduMarks();
     if (era.get('cflag:71:干劲') !== 2) {
       event_marks.motivation_count++;

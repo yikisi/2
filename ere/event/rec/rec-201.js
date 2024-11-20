@@ -13,8 +13,7 @@ const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201')
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit() {
     const me = get_chara_talk(0),
       meek = get_chara_talk(201);
     if (get('cflag:201:育成次数') === 0) {

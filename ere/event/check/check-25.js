@@ -190,8 +190,7 @@ module.exports = class extends CustomizedCheck {
     return ['漆黑幻影'];
   }
 
-  // eslint-disable-next-line no-unused-vars
-  is_aim_race(race, edu_weeks, rank) {
+  is_aim_race(race, edu_weeks) {
     if (new CoffeeEduMarks().toky_yus && race === race_enum.toky_yus) {
       return 0;
     }

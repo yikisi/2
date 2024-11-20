@@ -15,7 +15,6 @@ const select_action_in_station = require('#/event/daily/snippets/select-action-i
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
 
 const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const { escape_enum } = require('#/data/basement-const');
@@ -227,8 +226,7 @@ module.exports = class extends CustomizedDaily {
     await gold_ship.say_and_wait(get_random_entry(buffer));
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async school_rooftop(hook) {
+  async school_rooftop() {
     const gold_ship = get_chara_talk(7);
     await era.printAndWait(`与 ${gold_ship.name} 一起吃了便当……`);
     await gold_ship.say_and_wait(
@@ -422,7 +420,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  async out_river(hook, extra_flag) {
+  async out_river(hook) {
     const gold_ship = get_chara_talk(7);
     let talk_arr;
     hook.arg = (await select_action_around_river()) > 0;
@@ -441,7 +439,6 @@ module.exports = class extends CustomizedDaily {
         },
       ];
     } else {
-      extra_flag.jpy = get_random_value(0, 5);
       await era.printAndWait(`与 ${gold_ship.name} 一同去钓鱼了……`);
       talk_arr = [
         {

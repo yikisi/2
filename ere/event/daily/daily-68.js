@@ -662,7 +662,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  async out_river(hook, extra_flag) {
+  async out_river(hook) {
     const me = get_chara_talk(0),
       kita = get_chara_talk(68);
 
@@ -690,7 +690,6 @@ module.exports = class extends CustomizedDaily {
           );
       }
     } else {
-      extra_flag.jpy = get_random_value(0, 5);
       await era.printAndWait(`和 ${kita.name} 相约去钓鱼……`);
       switch (get_random_value(0, 2)) {
         case 0:
@@ -861,8 +860,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async week_start(hook, extra_flag, event_object) {
+  async week_start() {
     const kita = get_chara_talk(68),
       me = get_chara_talk(0),
       punish_level = era.get('flag:惩戒力度');

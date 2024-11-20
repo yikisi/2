@@ -343,8 +343,7 @@ module.exports = class extends CustomizedBase {
     coffee.say(['请不要做奇怪的事……我会很困惑的……']);
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async flatter(supporter) {
+  async flatter() {
     const coffee = get_chara_talk(this.id),
       me = get_chara_talk(0);
     if (Math.random() < 0.5) {

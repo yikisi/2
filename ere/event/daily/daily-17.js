@@ -285,8 +285,7 @@ module.exports = class extends CustomizedDaily {
     await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async school_rooftop(hook) {
+  async school_rooftop() {
     const talk_list = [];
     if (new LunaEduMarks().emperor) {
       talk_list.push('寻常的进食，能果腹即可。', '我对食物没有要求。');

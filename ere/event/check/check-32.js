@@ -501,8 +501,7 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
-  // eslint-disable-next-line no-unused-vars
-  is_aim_race(race, edu_weeks, rank) {
+  is_aim_race(race, edu_weeks) {
     const { plan_b } = new TachyonEduMarks();
     return aim_races[plan_b][`${edu_weeks}_${race}`] || aim_races[plan_b][race];
   }
