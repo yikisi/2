@@ -28,10 +28,6 @@ class CustomizedMec {
     return true;
   }
 
-  is_able_to_show_growth() {
-    return era.get(`cflag:${this.id}:种族`) > 0;
-  }
-
   is_anger_for_unfaithful() {
     return true;
   }

@@ -5,7 +5,8 @@ const mec_scripts = readdirSync('../../ere/event/mec')
     (e) =>
       e.endsWith('.js') &&
       !e.endsWith('common.js') &&
-      !e.endsWith('factory.js'),
+      !e.endsWith('factory.js') &&
+      !e.endsWith('npc.js'),
   )
   .map((e) => e.substring(4).replace(/\.js$/, ''))
   .sort((a, b) => {
@@ -50,6 +51,9 @@ cons_dict[201] =
   cons_dict[202] =
   cons_dict[203] =
     require('#/event/mec/mec-npc-uma-common');
+cons_dict[207] =
+  cons_dict[345] =
+    require('#/event/mec/mec-npc');
 
 console.log(
   '[mec-factory.js] constructor dictionary init done!',

@@ -43,7 +43,6 @@ cons_dict[121] = require('#/event/mec/mec-121');
 cons_dict[204] = require('#/event/mec/mec-204');
 cons_dict[205] = require('#/event/mec/mec-205');
 cons_dict[206] = require('#/event/mec/mec-206');
-cons_dict[207] = require('#/event/mec/mec-207');
 cons_dict[301] = require('#/event/mec/mec-301');
 cons_dict[302] = require('#/event/mec/mec-302');
 cons_dict[303] = require('#/event/mec/mec-303');
@@ -63,6 +62,7 @@ cons_dict[201] =
   cons_dict[202] =
   cons_dict[203] =
     require('#/event/mec/mec-npc-uma-common');
+cons_dict[207] = cons_dict[345] = require('#/event/mec/mec-npc');
 
 console.log(
   '[mec-factory.js] constructor dictionary init done!',

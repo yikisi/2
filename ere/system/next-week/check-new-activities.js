@@ -494,7 +494,9 @@ async function check_new_activities(cur_round, in_team_list) {
   if (
     !(era.get('cflag:345:育成回合计时') < 3 * 48) &&
     sys_check_npc_working(345) &&
-    Math.random() < 0.5
+    (era.get('cflag:345:招募状态') === recruit_flags.yes ||
+      era.get('love:345') >= 30 ||
+      Math.random() < 0.5)
   ) {
     loc_visitors.get(location_enum.visitor).push(345);
   }
