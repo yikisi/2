@@ -100,15 +100,15 @@ module.exports = {
       min_entry = _list[0],
       max_val = max_entry.orderBy,
       min_val = min_entry.orderBy;
-    for (let i = 1; i < _list.length; ++i) {
-      if (_list[i].orderBy > max_val) {
-        max_entry = _list[i];
+    _list.forEach((e) => {
+      if (e.orderBy > max_val) {
+        max_entry = e;
         max_val = max_entry.orderBy;
-      } else if (_list[i].orderBy < min_val) {
-        min_entry = _list[i];
+      } else if (e.orderBy < min_val) {
+        min_entry = e;
         min_val = min_entry.orderBy;
       }
-    }
+    });
     return { max: max_entry.val, min: min_entry.val };
   },
   get_random_entry,
