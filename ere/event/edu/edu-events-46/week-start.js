@@ -2564,9 +2564,86 @@ module.exports = async function (event_object) {
   else if (edu_weeks === 143 + 1 && new FalconEduMarks().top_idol === 1) {
     event_marks.top_idol++;
     await print_event_name(`顶级马娘偶像`, falcon);
+    await era.printAndWait(`某人犯下了无法原谅的过错。`);
+    await era.printAndWait(`应当完成的约定最后超时。`);
+    await era.printAndWait(
+      `在撕毁约定前，它尽力挣扎过，悲叹，痛苦，想要就此了断，却因为还有未尽之事而停止。`,
+    );
+    await era.printAndWait(
+      `于是心中的怨恨无处发泄，来自良心的诘问仿佛随时在耳旁低语的炸弹发出的滴答声。`,
+    );
+    await era.printAndWait(`于是选择了逃避。`);
+    await era.printAndWait(`为了逃避痛苦，将自己沉溺于酒精之中。`);
+    await era.printAndWait(`渴望酒精能浸润这份从内心发出的谴责。`);
+    await era.printAndWait(`然而，内心的另一个声音告诉它，已经结束了。`);
+    await era.printAndWait(
+      `坐过站的乘客无法回到上一站，无论如何都无法实现这份约定。`,
+    );
+    await era.printAndWait(
+      `因为自己的傲慢，对自己预估的过于乐观，它陷入了惨痛的代价。`,
+    );
+    await era.printAndWait(`连自己都有些好奇，为什么最后还要完成这份约定。`);
+    await era.printAndWait(`比起空虚，拥有一份痛苦反而是一件奢侈的享受了。`);
+    await era.printAndWait(`所以`);
+    era.drawLine();
+    await era.printAndWait(
+      `与醒目飞鹰在文件上的契约就此结束，而你与醒目飞鹰三年来同甘共苦留下的羁绊却仿佛触手可及的水中之月。`,
+    );
+
+    await era.printAndWait(`如今的醒目飞鹰已经是货真价实的顶级偶像。`);
+    await era.printAndWait(
+      `暂且不论关注沙地的观众，即使是在那些只关注草地的观众之中，醒目飞鹰已经与飞驰于草地的传奇们共同在这个时代留下了深刻的一笔。`,
+    );
+    await era.printAndWait(`然而，仅仅是全国的顶级偶像，醒目飞鹰依然不满足。`);
+    await era.printAndWait(
+      `渴望成为全世界，甚至是全宇宙的马娘偶像，醒目飞鹰如今依然还在奔跑着。`,
+    );
+    await era.printAndWait(`候机厅\n`);
+    await falcon.say_and_wait(`接下来的海外远征也请多多支持飞鹰子！`);
+    await say_by_passer_by(`粉丝们`, `噢噢噢噢！飞鹰子！飞鹰子！`);
+    await era.printAndWait(
+      `为了在世界范围内打响作为顶级马娘偶像的醒目飞鹰，向着迪拜世界杯笔直的前进。`,
+    );
+    await falcon.say_and_wait(`训练员先生比想象中还要慢呢。`);
+    await era.printAndWait(`醒目飞鹰带着一丝撒娇的语气向你轻声抱怨着。`);
+    await era.printAndWait(
+      `在醒目飞鹰的强烈推荐下，作为原醒目飞鹰训练员的你依然将作为醒目飞鹰的专属训练员而行动。`,
+    );
+    era.printButton(`因为一些事情耽搁了，抱歉。`, 1);
+    await era.input();
+    await era.printAndWait(
+      `很多人好奇作为教导了开创泥地新时代马娘的你，究竟做了什么。`,
+    );
+    await era.printAndWait(`自己的意愿？马娘的要求？还是，什么都没想？`);
+    await era.printAndWait(
+      `作为上述问题的回复，你将这三年教导醒目飞鹰的训练笔记复印后交到了理事长办公室,这份经由你整理的心血将在重新排版后将作为目光转向沙地的马娘们的发行。`,
+    );
+    await era.printAndWait(
+      `你从口袋中掏出手机扫了一眼，距离起飞时间还有30分钟。`,
+    );
+    await falcon.say_and_wait(
+      `不知道国外的赛马场是什么样的呢？飞鹰子的心跳的一直平静不下来！`,
+    );
+    era.printButton(`是比国内更加闪耀的大舞台。`, 1);
+    await era.input();
+    await era.printAndWait(`与国内相反，海外在沙地赛事上的关注度更高。`);
+    await era.printAndWait(
+      `这也就意味着醒目飞鹰将要作为挑战者与那些更有潜力，更加年轻，更加专注于沙地赛事的马娘们竞争。`,
+    );
+    await falcon.say_and_wait(`飞鹰子要用自己的双脚亲身体会胜者舞台的重量！`);
+    await era.printAndWait(
+      `——就像是第一次报名参加G1赛事后，与醒目飞鹰兴奋的讨论着胜者舞台时。`,
+    );
+    era.printButton(
+      `迪拜世界杯的胜者舞台一定会是迄今为止最庞大、最闪耀的地方！`,
+      1,
+    );
+    await era.input();
+    await era.printAndWait(`这一切才刚刚开始。`);
   } else if (edu_weeks === 143 + 1 && new FalconEduMarks().encore === 1) {
     event_marks.encore++;
     await print_event_name(`压抑不住的恋心`, falcon);
+    await era.printAndWait(`。`);
   } else if (edu_weeks === 143 + 1 && new FalconEduMarks().idol_road === 1) {
     event_marks.idol_road++;
     await print_event_name(`依然闪耀的偶像`, falcon);
