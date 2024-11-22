@@ -242,7 +242,7 @@ async function page_chairman_office() {
                   await chara.say_and_wait('啊吧啊吧啊吧啊吧……');
                   era.set('cflag:302:招募状态', recruit_flags.yes);
                   if (era.get('talent:302:病娇')) {
-                    new YandereList().push(302, true);
+                    new YandereList().push(302);
                   }
                   await era.printAndWait([
                     '恭 喜！',

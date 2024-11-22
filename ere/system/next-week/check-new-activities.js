@@ -24,6 +24,7 @@ const {
 const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
+const YandereList = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { expedition_weeks } = require('#/data/move-const');
@@ -500,6 +501,9 @@ async function check_new_activities(cur_round, in_team_list) {
   ) {
     loc_visitors.get(location_enum.visitor).push(345);
   }
+  new YandereList().set(
+    in_team_list.filter((e) => era.get(`talent:${e}:病娇`) > 0),
+  );
 }
 
 module.exports = check_new_activities;

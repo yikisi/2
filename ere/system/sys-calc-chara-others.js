@@ -332,6 +332,9 @@ module.exports = {
    * @returns {Promise<boolean>}
    */
   async sys_love_uma_in_event(chara_id) {
+    if (era.get('flag:回合爱慕惩罚')) {
+      return false;
+    }
     const new_val = era.add(`love:${chara_id}`, 1);
     if (
       typeof era.get(`callname:${chara_id}:0`) === 'string' &&

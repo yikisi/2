@@ -363,7 +363,7 @@ module.exports = {
       era.get(`cflag:${chara_id}:种族`) &&
       era.get(`talent:${chara_id}:病娇`)
     ) {
-      new YandereList().push(chara_id, true);
+      new YandereList().push(chara_id);
     }
   },
   reset_chara,

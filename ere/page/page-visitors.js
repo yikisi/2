@@ -45,7 +45,7 @@ handlers[207] = () =>
           set('callname:207:-2', '索侬艾尔菲');
           set('cflag:207:招募状态', recruit_flags.yes);
           if (get('talent:207:病娇')) {
-            new YandereList().push(207, true);
+            new YandereList().push(207);
           }
           return printAndWait([
             get_chara_talk(207).get_colored_name(),
@@ -73,7 +73,7 @@ handlers[308] = () =>
           set('callname:308:-2', '光辉致意');
           set('cflag:308:招募状态', recruit_flags.yes);
           if (get('talent:308:病娇')) {
-            new YandereList().push(308, true);
+            new YandereList().push(308);
           }
           return printAndWait([
             get_chara_talk(308).get_colored_name(),
@@ -92,7 +92,7 @@ handlers[343] = () =>
           set('callname:343:-2', '佐岳五月');
           set('cflag:343:招募状态', recruit_flags.yes);
           if (get('talent:343:病娇')) {
-            new YandereList().push(343, true);
+            new YandereList().push(343);
           }
           return printAndWait([
             get_chara_talk(343).get_colored_name(),
@@ -125,7 +125,7 @@ handlers[345] = () =>
           era.set('callname:345:-2', '砂糖灯');
           era.set('cflag:345:招募状态', recruit_flags.yes);
           if (get('talent:345:病娇')) {
-            new YandereList().push(345, true);
+            new YandereList().push(345);
           }
           return era.printAndWait([
             get_chara_talk(345).get_colored_name(),
