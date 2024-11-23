@@ -307,8 +307,7 @@ module.exports = class extends CustomizedDaily {
 
   school_atrium = acute_school_atrium;
 
-  // eslint-disable-next-line no-unused-vars
-  async school_rooftop(hook) {
+  async school_rooftop() {
     const acute = get_chara_talk(100),
       me = get_chara_talk(0);
     await era.printAndWait([

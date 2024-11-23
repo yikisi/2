@@ -11,8 +11,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit() {
     const may = get_chara_talk(343),
       me = get_chara_talk(0);
     await print_event_name('凯旋门之梦', may);

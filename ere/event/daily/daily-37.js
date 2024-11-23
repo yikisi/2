@@ -355,8 +355,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async school_rooftop(hook) {
+  async school_rooftop() {
     const flash = get_chara_talk(37);
     const callname = sys_get_callname(37, 0);
     await era.printAndWait(
@@ -381,7 +380,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  async out_river(hook, extra_flag) {
+  async out_river(hook) {
     const callname = sys_get_callname(37, 0),
       flash = get_chara_talk(37);
     hook.arg = (await select_action_around_river()) > 0;
@@ -410,7 +409,6 @@ module.exports = class extends CustomizedDaily {
         flash.get_colored_name(),
         ' 一起来到河边钓鱼。',
       ]);
-      extra_flag.jpy = get_random_value(0, 5);
       if (Math.random() < 0.5) {
         await flash.say_and_wait('能够随心所欲的钓鱼，是种很美妙的体验呢。');
         await flash.say_and_wait('诶，为什么突然这么说？');

@@ -120,8 +120,7 @@ async function common_comments(me, daiya, other) {
 }
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_obj) {
+  async recruit(stage) {
     const me = get_chara_talk(0),
       mcqueen = get_chara_talk(13),
       daiya = get_chara_talk(67),

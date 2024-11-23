@@ -451,8 +451,7 @@ module.exports = class extends CustomizedBase {
     new TeioLifeMarks().b_start = 0;
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async flatter(supporter) {
+  async flatter() {
     const callname = sys_get_colored_callname(this.id, 0),
       me = get_chara_talk(0),
       teio = get_chara_talk(this.id);

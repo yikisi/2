@@ -50,10 +50,10 @@ module.exports = class extends CustomizedCheck {
       check_aim_race(races, race_enum.arim_kin, 2, 1)
     ) {
       titles.push({
-        c: get_chara_color(400),
+        c: get_chara_color(this.id),
         n: this.get_personal_titles()[0],
       });
-      aim_check && sys_personal_achievement.set(400, 1);
+      aim_check && sys_personal_achievement.set(this.id, 1);
     }
     return titles;
   }

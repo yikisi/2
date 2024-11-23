@@ -165,7 +165,12 @@ module.exports = class extends CustomizedCheck {
     const ret = aim_races[`${edu_weeks}_${race}`] || aim_races[race];
     if (!ret && era.get('flag:当前赛事') > 0) {
       const event_marks = new LunaEduMarks();
-      if (rank <= 5 && rank > 1 && !event_marks.faith_collapse) {
+      if (
+        rank !== undefined &&
+        rank <= 5 &&
+        rank > 1 &&
+        !event_marks.faith_collapse
+      ) {
         return 2;
       } else if (
         event_marks.emperor &&

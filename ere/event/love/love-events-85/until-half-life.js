@@ -7,19 +7,26 @@ const {
   end_ero_and_train,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
-const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_love_uma_in_event,
+} = require('#/system/sys-calc-chara-others');
 
 const print_ero_page = require('#/page/page-ero');
 
+const Love85UntilWife = require('#/event/love/love-events-85/until-wife');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,string,string)>} handlers */
-module.exports = (handlers) => {
-  handlers[99] = async (ruby, me, r_call_m, m_call_r) => {
+module.exports = class extends Love85UntilWife {
+  async 99(ruby, me, callname, stage, extra_flag, event_object) {
+    if (ruby.sex_code !== 0 || me.sex_code === 0) {
+      return super[99](ruby, me, callname, stage, extra_flag, event_object);
+    }
+    const m_call_r = sys_get_callname(0, this.id);
     await print_event_name('依存', ruby);
     await ruby.say_and_wait('好寂寞。');
     await era.printAndWait([
@@ -312,9 +319,14 @@ module.exports = (handlers) => {
       ]);
     }
     await sys_love_uma_in_event(85);
-  };
+  }
 
-  handlers.clinic = async (ruby, me, r_call_m) => {
+  /**
+   * @param {CharaTalk} ruby
+   * @param {CharaTalk} me
+   * @param {string} r_call_m
+   */
+  async clinic(ruby, me, r_call_m) {
     await print_event_name('保健室', ruby);
     await ruby.say_and_wait([
       r_call_m,
@@ -469,9 +481,13 @@ module.exports = (handlers) => {
     );
     end_ero_and_train();
     return true;
-  };
+  }
 
-  handlers.loli_wife = async (ruby, me) => {
+  /**
+   * @param {CharaTalk} ruby
+   * @param {CharaTalk} me
+   */
+  async loli_wife(ruby, me) {
     await print_event_name('萝莉幼妻', ruby);
     await era.printAndWait([
       ruby.get_colored_name(),
@@ -546,9 +562,15 @@ module.exports = (handlers) => {
     );
     await print_ero_page(85);
     await end_ero_and_show_result();
-  };
+  }
 
-  handlers.milking = async (ruby, me, r_call_m, m_call_r) => {
+  /**
+   * @param {CharaTalk} ruby
+   * @param {CharaTalk} me
+   * @param {string} r_call_m
+   */
+  async milking(ruby, me, r_call_m) {
+    const m_call_r = sys_get_callname(0, this.id);
     await print_event_name('授乳', ruby);
     await ruby.say_and_wait('因为今天错穿了以前的胸罩，被勒紧得很辛苦。');
     await era.printAndWait([
@@ -688,5 +710,5 @@ module.exports = (handlers) => {
     );
     end_ero_and_train();
     return true;
-  };
+  }
 };

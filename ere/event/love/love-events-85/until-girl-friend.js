@@ -8,10 +8,14 @@ const {
   set_palam_to_max,
   update_ero_status,
 } = require('#/system/ero/sys-prepare-ero');
-const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_love_uma_in_event,
+} = require('#/system/sys-calc-chara-others');
 
 const print_ero_page = require('#/page/page-ero');
 
+const Love85UtilFuckBuddy = require('#/event/love/love-events-85/until-fuck-buddy');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk-factory');
@@ -33,9 +37,12 @@ async function say_by_mother(_content) {
   );
 }
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,string,string)>} handlers */
-module.exports = (handlers) => {
-  handlers[74] = async (ruby, me, r_call_m, m_call_r) => {
+module.exports = class extends Love85UtilFuckBuddy {
+  async 74(ruby, me, callname, stage, extra_flag, event_object) {
+    if (ruby.sex_code !== 0 || me.sex_code === 0) {
+      return super[74](ruby, me, callname, stage, extra_flag, event_object);
+    }
+    const m_call_r = sys_get_callname(0, this.id);
     await print_event_name('母亲的消息', ruby);
     await ruby.print_and_wait([
       '那是某个休息日发生的故事，',
@@ -78,7 +85,7 @@ module.exports = (handlers) => {
       '突然，',
       ruby.get_colored_name(),
       ' 想起了 ',
-      r_call_m,
+      callname,
       ' 的脸。',
     ]);
     await ruby.print_and_wait(
@@ -86,13 +93,13 @@ module.exports = (handlers) => {
     );
     await ruby.print_and_wait([
       '为了让自己这块原石绽放出最耀眼的光辉，不断磨炼的重要的 ',
-      r_call_m,
+      callname,
       '……',
     ]);
-    await ruby.print_and_wait(['心爱的 ', r_call_m, '。']);
+    await ruby.print_and_wait(['心爱的 ', callname, '。']);
     await ruby.print_and_wait([
       '和 ',
-      r_call_m,
+      callname,
       ' 一起度过的时间，已经成为了 ',
       ruby.get_colored_name(),
       ' 最珍贵的回忆。',
@@ -101,7 +108,7 @@ module.exports = (handlers) => {
       '如果有选择的自由，',
       ruby.get_colored_name(),
       ' 想和 ',
-      r_call_m,
+      callname,
       ' 在一起。',
     ]);
     await ruby.print_and_wait('但是，这种玷污家族名声的行为是绝对不被允许的。');
@@ -109,7 +116,7 @@ module.exports = (handlers) => {
       '然后，回过神来的时候，',
       ruby.get_colored_name(),
       ' 已经来到了 ',
-      r_call_m,
+      callname,
       ' 身边。',
     ]);
     era.drawLine();
@@ -433,7 +440,7 @@ module.exports = (handlers) => {
         me.get_colored_name(),
         ' 的层层肉环，顶到了守护秘密花园的子宫口。',
       ]);
-      await ruby.say_and_wait(['终于……和 ', r_call_m, '……好幸福，呜呼……']);
+      await ruby.say_and_wait(['终于……和 ', callname, '……好幸福，呜呼……']);
       await era.printAndWait([
         '心灵上的满足无法掩过开苞的剧痛，',
         ruby.get_colored_name(),
@@ -517,7 +524,7 @@ module.exports = (handlers) => {
         me.get_colored_name(),
         ' 带来触电般的酥麻感。',
       ]);
-      await ruby.say_and_wait([r_call_m, '，对我幻灭了吗？']);
+      await ruby.say_and_wait([callname, '，对我幻灭了吗？']);
       await era.printAndWait([
         '哪怕是 ',
         me.get_colored_name(),
@@ -578,7 +585,7 @@ module.exports = (handlers) => {
     );
     await era.input();
     await ruby.say_and_wait([
-      r_call_m,
+      callname,
       '……谢谢。听你这么说，我的心变轻松了一些……',
     ]);
     era.drawLine();
@@ -596,7 +603,7 @@ module.exports = (handlers) => {
     ]);
     era.printButton('「初次见面，红宝石女士。」', 1);
     await era.input();
-    await ruby.say_and_wait(['为什么，', r_call_m, ' 会在这里……？']);
+    await ruby.say_and_wait(['为什么，', callname, ' 会在这里……？']);
     await say_by_mother('真是感慨啊，露比。这个场景实在是似曾相识。');
     await era.printAndWait([
       '母亲好像注意到了 ',
@@ -634,9 +641,13 @@ module.exports = (handlers) => {
     );
     await era.input();
     await sys_love_uma_in_event(85);
-  };
+  }
 
-  handlers.date = async (ruby, me) => {
+  /**
+   * @param {CharaTalk} ruby
+   * @param {CharaTalk} me
+   */
+  async date(ruby, me) {
     await print_event_name('约会', ruby);
     await era.printAndWait('管家「打扰了，训练员大人。」');
     await era.printAndWait([
@@ -855,5 +866,5 @@ module.exports = (handlers) => {
     );
     end_ero_and_train();
     return true;
-  };
+  }
 };

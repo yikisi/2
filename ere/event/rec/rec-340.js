@@ -15,8 +15,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit() {
     const god = get_chara_talk(340),
       me = get_chara_talk(0);
     await print_event_name('不再只是……「目光」', god);

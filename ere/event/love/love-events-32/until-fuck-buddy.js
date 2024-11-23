@@ -6,15 +6,20 @@ const {
   sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
+const CustomizedLove = require('#/event/love/love-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,string):Promise<*>>} handlers */
-module.exports = (handlers) => {
-  handlers[25] = async (tachyon, me, callname) => {
+module.exports = class extends CustomizedLove {
+  /**
+   * @param {CharaTalk} tachyon
+   * @param {CharaTalk} me
+   * @param {string} callname
+   */
+  async 25(tachyon, me, callname) {
     await print_event_name(
       `「爱丽速子」？「${tachyon.get_uma_sex_title()}A」？`,
       tachyon,
@@ -335,9 +340,9 @@ module.exports = (handlers) => {
     }
     era.println();
     await tachyon.say_and_wait(['快点回来吧，', callname, '……']);
-  };
+  }
 
-  handlers[49] = async (tachyon, me, callname) => {
+  async 49(tachyon, me, callname) {
     await tachyon.say_and_wait(callname);
     era.println();
     await tachyon.print_and_wait([
@@ -710,5 +715,5 @@ module.exports = (handlers) => {
       ]);
       era.set('cflag:32:爱慕暂拒', 49);
     }
-  };
+  }
 };

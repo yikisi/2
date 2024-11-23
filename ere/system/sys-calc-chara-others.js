@@ -181,66 +181,68 @@ function like_chara(target, aim, val, to_be_shown, extra_love) {
 function love_uma(chara_id, val, to_be_shown) {
   const love = era.get(`love:${chara_id}`);
   if (
-    val &&
-    (love ||
-      era.get('flag:后代爱慕限制') ||
-      era.get(`cflag:${chara_id}:父方角色`) < 0) &&
-    !era.get(`status:${chara_id}:讨厌药`) &&
-    new LimitLoveStatus(chara_id).is_empty()
+    chara_id === 0 ||
+    val === 0 ||
+    (love === 0 &&
+      !era.get('flag:后代爱慕限制') &&
+      era.get(`cflag:${chara_id}:父方角色`) >= 0) ||
+    era.get(`status:${chara_id}:讨厌药`) > 0 ||
+    !new LimitLoveStatus(chara_id).is_empty()
   ) {
-    let _val = Math.floor(
-      (val *
-        (100 +
-          era.get('flag:爱慕上升加成') +
-          50 * era.get(`status:${chara_id}:爱意克制`) +
-          get_custom_mec(chara_id).get_love_buff())) /
-        100,
-    );
-    const force_limit = get_custom_mec(chara_id).get_love_limit(),
-      border = force_limit || Math.max(get_love_border(chara_id), 50),
-      love_limit = !era.get('flag:回合爱慕惩罚');
-    if ((love_limit || force_limit) && love + _val >= border) {
-      _val = border - 1 - love;
-    }
-    if (love + _val > 100) {
-      _val = 100 - love;
-    }
-    if (_val) {
-      let new_val = era.add(`love:${chara_id}`, _val);
-      let printed_new_val = new_val;
-      let hide = sys_check_limit_relation_and_love(chara_id);
-      if (hide && love < 24) {
-        hide = false;
-        printed_new_val = Math.min(printed_new_val, 24);
-      }
-      print_change(chara_id, love, printed_new_val, !hide && to_be_shown);
-      if (
-        love < 50 &&
-        new_val >= 50 &&
-        era.get(`cflag:${chara_id}:种族`) &&
-        era.get(`talent:${chara_id}:病娇`)
-      ) {
-        era.set(`status:${chara_id}:爱意克制`, 1);
-      }
-      if (
-        !era.get(`cflag:${chara_id}:爱慕暂拒`) &&
-        love_limit &&
-        border >= 50 &&
-        new_val === border - 1
-      ) {
-        (sys_check_hide_relation_and_love(chara_id) & 0b1) > 0 ||
-          hide ||
-          era.print([
-            '和 ',
-            get_chara_talk(chara_id).get_colored_name(),
-            ' 的关系似乎可以更进一步了……',
-          ]);
-        get_custom_check(chara_id).check_love_events();
-      }
-      return true;
-    }
+    return false;
   }
-  return false;
+  let _val = Math.floor(
+    (val *
+      (100 +
+        era.get('flag:爱慕上升加成') +
+        50 * era.get(`status:${chara_id}:爱意克制`) +
+        get_custom_mec(chara_id).get_love_buff())) /
+      100,
+  );
+  const force_limit = get_custom_mec(chara_id).get_love_limit(),
+    border = force_limit || Math.max(get_love_border(chara_id), 50),
+    love_limit = !era.get('flag:回合爱慕惩罚');
+  if ((love_limit || force_limit) && love + _val >= border) {
+    _val = border - 1 - love;
+  }
+  if (love + _val > 100) {
+    _val = 100 - love;
+  }
+  if (_val === 0) {
+    return false;
+  }
+  let new_val = era.add(`love:${chara_id}`, _val);
+  let printed_new_val = new_val;
+  let hide = sys_check_limit_relation_and_love(chara_id);
+  if (hide && love < 24) {
+    hide = false;
+    printed_new_val = Math.min(printed_new_val, 24);
+  }
+  print_change(chara_id, love, printed_new_val, !hide && to_be_shown);
+  if (
+    love < 50 &&
+    new_val >= 50 &&
+    era.get(`cflag:${chara_id}:种族`) &&
+    era.get(`talent:${chara_id}:病娇`)
+  ) {
+    era.set(`status:${chara_id}:爱意克制`, 1);
+  }
+  if (
+    !era.get(`cflag:${chara_id}:爱慕暂拒`) &&
+    love_limit &&
+    border >= 50 &&
+    new_val === border - 1
+  ) {
+    (sys_check_hide_relation_and_love(chara_id) & 0b1) > 0 ||
+      hide ||
+      era.print([
+        '和 ',
+        get_chara_talk(chara_id).get_colored_name(),
+        ' 的关系似乎可以更进一步了……',
+      ]);
+    get_custom_check(chara_id).check_love_events();
+  }
+  return true;
 }
 
 /**
@@ -332,7 +334,7 @@ module.exports = {
    * @returns {Promise<boolean>}
    */
   async sys_love_uma_in_event(chara_id) {
-    if (era.get('flag:回合爱慕惩罚')) {
+    if (era.get('flag:回合爱慕惩罚') || chara_id === 0) {
       return false;
     }
     const new_val = era.add(`love:${chara_id}`, 1);

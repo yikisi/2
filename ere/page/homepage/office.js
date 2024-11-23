@@ -569,6 +569,18 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       },
       {
         accelerator: 402,
+        config: { disabled: !sys_check_awake(0), width: 6 },
+        content: '持有物品',
+        type: 'button',
+      },
+      {
+        accelerator: 403,
+        config: { width: 6 },
+        content: '出走情报',
+        type: 'button',
+      },
+      {
+        accelerator: 501,
         config: {
           buttonType: office_activity_filter ? 'warning' : 'info',
 
@@ -578,24 +590,12 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         type: 'button',
       },
       {
-        accelerator: 403,
+        accelerator: 502,
         config: {
           buttonType: out_activity_filter ? 'warning' : 'info',
           width: 6,
         },
         content: `筛除外出活动 [${out_activity_filter ? '开' : '关'}]`,
-        type: 'button',
-      },
-      {
-        accelerator: 404,
-        config: { width: 6 },
-        content: '出走情报',
-        type: 'button',
-      },
-      {
-        accelerator: 405,
-        config: { disabled: !sys_check_awake(0), width: 6 },
-        content: '持有物品',
         type: 'button',
       },
       {
@@ -842,17 +842,17 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       await print_exp_page();
       break;
     case 402:
-      era.set('flag:筛除训练室活动', !era.get('flag:筛除训练室活动'));
+      await print_storage_page();
       break;
     case 403:
-      era.set('flag:筛除外出活动', !era.get('flag:筛除外出活动'));
-      break;
-    case 404:
     case 991:
       await report_race_page();
       break;
-    case 405:
-      await print_storage_page();
+    case 501:
+      era.set('flag:筛除训练室活动', !era.get('flag:筛除训练室活动'));
+      break;
+    case 502:
+      era.set('flag:筛除外出活动', !era.get('flag:筛除外出活动'));
       break;
     case 900:
       await print_save_page();

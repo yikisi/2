@@ -16,9 +16,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { money_color } = require('#/data/color-const');
 
 class DailyGod extends CustomizedDaily {
-  // eslint-disable-next-line no-unused-vars
-  growth(stage) {}
-
   async borrow_money() {
     const god = get_chara_talk(this.id),
       me = get_chara_talk(0),

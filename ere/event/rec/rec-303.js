@@ -14,8 +14,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit(stage) {
     const etsuko = get_chara_talk(303),
       me = get_chara_talk(0);
     if (stage === event_hooks.week_start) {

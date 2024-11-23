@@ -433,8 +433,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async school_rooftop(hook) {
+  async school_rooftop() {
     const silence = get_chara_talk(400),
       me = get_chara_talk(0);
     await era.printAndWait([
@@ -477,7 +476,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  async out_river(hook, extra_flag) {
+  async out_river(hook) {
     const silence = get_chara_talk(400),
       me = get_chara_talk(0);
     hook.arg = (await select_action_around_river()) > 0;
@@ -517,7 +516,6 @@ module.exports = class extends CustomizedDaily {
       }
       await get_random_entry(buffer)();
     } else {
-      extra_flag.jpy = get_random_value(0, 5);
       await era.printAndWait([
         '和 ',
         silence.get_colored_name(),

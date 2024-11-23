@@ -25,8 +25,7 @@ const CoconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-203'
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit() {
     const riko = get_chara_talk(306),
       me = get_chara_talk(0),
       glasse = get_chara_talk(202),

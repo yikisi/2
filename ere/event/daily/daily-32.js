@@ -12,6 +12,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const CustomizedDaily = require('#/event/daily/daily-common');
 const tachyon_out_church = require('#/event/daily/daily-events-32/out-church');
 const tachyon_out_station = require('#/event/daily/daily-events-32/out-station');
 const tachyon_school_atrium = require('#/event/daily/daily-events-32/school-atrium');
@@ -22,11 +23,9 @@ const select_action_in_shopping_street = require('#/event/daily/snippets/select-
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
 
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
-const CustomizedDaily = require('#/event/daily/daily-common');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,number,number)>} */
 const week_start_handlers = {};
@@ -402,8 +401,7 @@ module.exports = class extends CustomizedDaily {
     return await tachyon_school_atrium(hook);
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async school_rooftop(hook) {
+  async school_rooftop() {
     const buffer = [],
       callname = sys_get_callname(32, 0),
       edu_marks = new TachyonEduMarks(),
@@ -646,7 +644,7 @@ module.exports = class extends CustomizedDaily {
     await get_random_entry(buffer)();
   }
 
-  async out_river(hook, extra_flag) {
+  async out_river(hook) {
     const buffer = [],
       callname = sys_get_callname(32, 0),
       me = get_chara_talk(0),
@@ -662,7 +660,6 @@ module.exports = class extends CustomizedDaily {
             '，我说要是这些鱼要是『不小心』喝了水里的『不明物质』死了浮上来，这应该也能算我钓到的吧？不行吗？',
           ]),
       );
-      extra_flag.jpy = get_random_value(0, 5);
     } else {
       buffer.push(async () => {
         await tachyon.say_and_wait([

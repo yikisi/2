@@ -342,8 +342,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async school_rooftop(hook) {
+  async school_rooftop() {
     const ruby = get_chara_talk(85);
     const buffer = [
       () =>
@@ -373,12 +372,11 @@ module.exports = class extends CustomizedDaily {
     await get_random_entry(buffer)();
   }
 
-  async out_river(hook, extra_flag) {
+  async out_river(hook) {
     const buffer = [],
       ruby = get_chara_talk(85);
     hook.arg = (await select_action_around_river(85)) > 0;
     if (hook.arg) {
-      extra_flag.jpy = get_random_value(0, 5);
       buffer.push(() =>
         ruby.say_and_wait('即使路途遥远，这条河也会前往那波澜壮阔的大海。'),
       );

@@ -6,17 +6,24 @@ const {
   end_ero_and_train,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
-const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_love_uma_in_event,
+} = require('#/system/sys-calc-chara-others');
 
+const Love85AfterGirlFriend = require('#/event/love/love-events-85/after-girl-friend');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,string,string)>} handlers */
-module.exports = (handlers) => {
-  handlers[89] = async (ruby, me, r_call_m, m_call_r) => {
+module.exports = class extends Love85AfterGirlFriend {
+  async 89(ruby, me, callname, stage, extra_flag, event_object) {
+    if (ruby.sex_code !== 0 || me.sex_code === 0) {
+      return super[89](ruby, me, callname, stage, extra_flag, event_object);
+    }
+    const m_call_r = sys_get_callname(0, this.id);
     await print_event_name('佳偶', ruby);
     await era.printAndWait([
       '某一天，',
@@ -200,9 +207,14 @@ module.exports = (handlers) => {
       case 3:
         era.set('flag:强制BE', 85);
     }
-  };
+  }
 
-  handlers.kiss = async (ruby, me, r_call_m) => {
+  /**
+   * @param {CharaTalk} ruby
+   * @param {CharaTalk} me
+   * @param {string} r_call_m
+   */
+  async kiss(ruby, me, r_call_m) {
     await print_event_name('训练员室接吻', ruby);
     await era.printAndWait([
       me.get_colored_name(),
@@ -298,9 +310,13 @@ module.exports = (handlers) => {
     );
     end_ero_and_train();
     return true;
-  };
+  }
 
-  handlers.jade = async (ruby, me) => {
+  /**
+   * @param {CharaTalk} ruby
+   * @param {CharaTalk} me
+   */
+  async jade(ruby, me) {
     await print_event_name('玉石店', ruby);
     await era.printAndWait('一般饰品店更多的是卖女孩子的装饰物。');
     await era.printAndWait('两人走进一家店，里面的布置让人眼前一亮。');
@@ -387,9 +403,14 @@ module.exports = (handlers) => {
       ]);
     }
     return true;
-  };
+  }
 
-  handlers.dance = async (ruby, me, r_call_m, m_call_r) => {
+  /**
+   * @param {CharaTalk} ruby
+   * @param {CharaTalk} me
+   */
+  async dance(ruby, me) {
+    const m_call_r = sys_get_callname(0, this.id);
     await print_event_name('舞蹈室', ruby);
     await era.printAndWait(
       '临近正午的日光明亮炙人，打在地上氤氲出烦闷的热气。',
@@ -547,9 +568,14 @@ module.exports = (handlers) => {
     );
     end_ero_and_train();
     return true;
-  };
+  }
 
-  handlers.take_shower = async (ruby, me, r_call_m) => {
+  /**
+   * @param {CharaTalk} ruby
+   * @param {CharaTalk} me
+   * @param {string} r_call_m
+   */
+  async take_shower(ruby, me, r_call_m) {
     await print_event_name('美人出浴', ruby);
     await era.printAndWait([
       '深夜回家，',
@@ -635,5 +661,5 @@ module.exports = (handlers) => {
       false,
     );
     end_ero_and_train();
-  };
+  }
 };

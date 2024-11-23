@@ -89,14 +89,12 @@ class CustomizedCheck {
   check_birth() {}
 
   check_love_events() {
-    if (this.id) {
-      add_event(
-        event_hooks.week_end,
-        new EventObject(this.id, cb_enum.love).set_arg(
-          era.get(`love:${this.id}`),
-        ),
-      );
-    }
+    add_event(
+      event_hooks.week_end,
+      new EventObject(this.id, cb_enum.love).set_arg([
+        era.get(`love:${this.id}`),
+      ]),
+    );
   }
 
   check_next_week() {

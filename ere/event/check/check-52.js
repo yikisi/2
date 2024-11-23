@@ -190,13 +190,17 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_love_events() {
-    if (era.get('love:52') === 99) {
+    const love = era.get('love:52');
+    if (love === 99) {
       add_event(
         event_hooks.week_start,
-        new EventObject(52, cb_enum.love).set_arg(99),
+        new EventObject(52, cb_enum.love).set_arg([love]),
       );
     } else {
-      add_event(event_hooks.week_end, new EventObject(52, cb_enum.love));
+      add_event(
+        event_hooks.week_end,
+        new EventObject(52, cb_enum.love).set_arg([love]),
+      );
     }
   }
 

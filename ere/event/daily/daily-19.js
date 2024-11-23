@@ -303,8 +303,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async school_rooftop(hook) {
+  async school_rooftop() {
     const digital = get_chara_talk(19);
     switch (get_random_value(0, 2)) {
       case 0:
@@ -324,8 +323,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  out_river(hook, extra_flag) {
+  out_river(hook) {
     return digital_river(hook);
   }
 

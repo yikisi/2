@@ -25,7 +25,7 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 module.exports = (handlers) => {
   handlers.beginning = async (rice, me, callname, self_name) => {
     await print_event_name('育成开始', rice);
-    await rice.print_and_wait('训练场');
+    era.drawLine({ content: '训练场' });
     await rice.say_and_wait('离训练的时间还有一点点……');
     await rice.say_and_wait('……稍微跑一下吧。');
     await rice.say_and_wait([

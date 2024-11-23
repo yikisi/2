@@ -754,6 +754,7 @@ module.exports = class extends CustomizedDaily {
         ]);
         break;
       default:
+        hook.override = false;
         return super.run(hook, extra_flag, event_object);
     }
     wait_flag && (await era.waitAnyKey());
