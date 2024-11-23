@@ -6,16 +6,23 @@ const {
   end_ero_and_train,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_like_chara,
+} = require('#/system/sys-calc-chara-others');
 
+const Love85UtilGirlFriend = require('#/event/love/love-events-85/until-girl-friend');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,string,string)>} handlers */
-module.exports = (handlers) => {
-  handlers.delicious = async (ruby, me) => {
+module.exports = class extends Love85UtilGirlFriend {
+  /**
+   * @param {CharaTalk} ruby
+   * @param {CharaTalk} me
+   */
+  async delicious(ruby, me) {
     await print_event_name('美食', ruby);
     await era.printAndWait([
       '不止怎的，',
@@ -313,9 +320,13 @@ module.exports = (handlers) => {
     );
     end_ero_and_train();
     return true;
-  };
+  }
 
-  handlers.dessert = async (ruby, me) => {
+  /**
+   * @param {CharaTalk} ruby
+   * @param {CharaTalk} me
+   */
+  async dessert(ruby, me) {
     await print_event_name('餐后甜点', ruby);
     await era.printAndWait([
       '用餐后，',
@@ -417,9 +428,14 @@ module.exports = (handlers) => {
     );
     end_ero_and_train();
     return true;
-  };
+  }
 
-  handlers.non_penetration = async (ruby, me, r_call_m, m_call_r) => {
+  /**
+   * @param {CharaTalk} ruby
+   * @param {CharaTalk} me
+   */
+  async non_penetration(ruby, me) {
+    const m_call_r = sys_get_callname(0, this.id);
     await print_event_name('一起洗澡', ruby);
     let _relation = 0,
       _love = 0;
@@ -798,5 +814,5 @@ module.exports = (handlers) => {
     end_ero_and_train();
     era.println();
     sys_like_chara(85, 0, _relation, true, _love) && (await era.waitAnyKey());
-  };
+  }
 };

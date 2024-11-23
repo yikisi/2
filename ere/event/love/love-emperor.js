@@ -4,11 +4,11 @@
  */
 const { add_event } = require('#/event/queue');
 
-const event_hooks = require('#/data/event/event-hooks');
+const CustomizedLove = require('#/event/love/love-common');
 
-module.exports = async (hook, _, event_object) => {
-  if (event_object) {
+module.exports = class extends CustomizedLove {
+  async run(stage, extra_flag, event_object) {
     event_object.chara_id = 17;
-    add_event(event_hooks.week_end, event_object);
+    add_event(stage, event_object);
   }
 };

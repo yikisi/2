@@ -13,7 +13,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_celebration } = require('#/data/info-generator');
 
 module.exports = async function () {
-  console.log(this);
   const chara = get_chara_talk(this.id),
     me = get_chara_talk(0),
     weeks = (era.get('flag:当前回合数') - 1) % 48;

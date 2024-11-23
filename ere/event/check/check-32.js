@@ -137,7 +137,7 @@ module.exports = class extends CustomizedCheck {
 
   check_love_events() {
     const love = era.get('love:32'),
-      love_event = new EventObject(32, cb_enum.love).set_arg(love);
+      love_event = new EventObject(32, cb_enum.love).set_arg([love]);
     if (love === 74) {
       add_event(event_hooks.week_start, love_event);
     } else {

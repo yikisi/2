@@ -88,7 +88,7 @@ module.exports = class extends CustomizedCheck {
 
   check_love_events() {
     const love = era.get('love:25');
-    const event_object = new EventObject(25, cb_enum.love).set_arg(love);
+    const event_object = new EventObject(25, cb_enum.love).set_arg([love]);
     switch (love) {
       case 49:
       case 89:

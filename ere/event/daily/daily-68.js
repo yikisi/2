@@ -20,7 +20,10 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+} = require('#/system/sys-calc-chara-others');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,string):Promise>} */
 const celebration_handlers = {};
@@ -118,42 +121,89 @@ module.exports = class extends CustomizedDaily {
         ],
         [
           [
-            `虽然不像帝王${kita.get_adult_sex_title()}那么强，不过我会努力变强证明自己的！`,
+            [
+              '虽然不像 ',
+              sys_get_colored_callname(this.id, 3),
+              ' 那么强，不过我会努力变强证明自己的！',
+            ],
           ],
         ],
         [
           [
-            `为了迎接比赛这样的大日子，训练员${me.get_adult_sex_title()}，请尽情地训练我，让我得到独属于我的武器吧。`,
+            [
+              '为了迎接比赛这样的大日子，',
+              sys_get_colored_callname(this.id, 0),
+              '，请尽情地训练我，让我得到独属于我的武器吧。',
+            ],
           ],
         ],
         [
           [
-            `最近，小钻${kita.sex}总是拉着我去吃各种奇妙的料理呢，比如菠菜咖喱啊，巧克力火锅啊……`,
+            [
+              '最近，',
+              sys_get_colored_callname(this.id, 67),
+              kita.sex,
+              ' 总是拉着我去吃各种奇妙的料理呢，比如菠菜咖喱啊，巧克力火锅啊……',
+            ],
             '……虽然都是很有趣的料理，不过小钻带我去的店是不是有点奇怪过头了？',
           ],
-          `${kita.name} 捂着微微发胖的肚子，露出了疑惑的表情。`,
-        ],
-        [
-          ['东商变革同学最近似乎学会了炼金术的样子，真是厉害啊～'],
-          `${kita.name} 笑眯眯地和你说着身边发生的趣事。`,
+          [kita.get_colored_name(), ' 捂着微微发胖的肚子，露出了疑惑的表情。'],
         ],
         [
           [
-            `训练员${me.get_adult_sex_title()}最近似乎运气不太好的样子？这种时候，就要找可靠的小林历奇前辈改运了哦！`,
+            [
+              sys_get_colored_callname(this.id, 44),
+              ' 最近似乎学会了炼金术的样子，真是厉害啊～',
+            ],
           ],
-          `一边自说自话着，${kita.name} 咻嗒嗒地跑走了。`,
+          [
+            kita.get_colored_name(),
+            ' 笑眯眯地和 ',
+            me.get_colored_name(),
+            ' 说着身边发生的趣事。',
+          ],
         ],
         [
           [
-            `帝王${kita.get_adult_sex_title()}似乎在看着我的训练呢，好，那么我也要努力不能输！`,
+            [
+              sys_get_colored_callname(this.id, 0),
+              ' 最近似乎运气不太好的样子？这种时候，就要找可靠的 ',
+              sys_get_colored_callname(this.id, 98),
+              ' 改运了哦！',
+            ],
           ],
-          `燃起信念的 ${kita.name}，开始认真的准备起今天的训练了。`,
+          ['一边自说自话着，', kita.get_colored_name(), ' 咻嗒嗒地跑走了。'],
         ],
         [
           [
-            `最近，骏川${kita.get_adult_sex_title()}似乎在买新的护发剂的样子呢，训练员${me.get_adult_sex_title()}有好好护理头发么？`,
+            [
+              sys_get_colored_callname(this.id, 3),
+              ' 似乎在看着我的训练呢，好，那么我也要努力不能输！',
+            ],
           ],
-          `一边揉搓着你的头发，${kita.name} 露出了太阳般炽热的笑容。`,
+          [
+            '燃起信念的 ',
+            kita.get_colored_name(),
+            '，开始认真的准备起今天的训练了。',
+          ],
+        ],
+        [
+          [
+            [
+              '最近，',
+              sys_get_colored_callname(this.id, 301),
+              ' 似乎在买新的护发剂的样子呢，',
+              sys_get_colored_callname(this.id, 0),
+              ' 有好好护理头发么？',
+            ],
+          ],
+          [
+            '一边揉搓着 ',
+            me.get_colored_name(),
+            ' 的头发，',
+            kita.get_colored_name(),
+            ' 露出了太阳般炽热的笑容。',
+          ],
         ],
       ];
     if (love >= 90) {
@@ -203,7 +253,7 @@ module.exports = class extends CustomizedDaily {
         [
           [
             '最近，桐生院训练员似乎在苦恼钢之意志没有人愿意学这件事呢。',
-            '而且不知为何小钻也一脸认真的赞同了，这是为什么啊？',
+            '而且不知为何小钻也一脸认真地赞同了，这是为什么啊？',
           ],
         ],
         [

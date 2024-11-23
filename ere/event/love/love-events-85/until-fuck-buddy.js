@@ -6,12 +6,15 @@ const {
 } = require('#/system/ero/sys-prepare-ero');
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
+const CustomizedLove = require('#/event/love/love-common');
 const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,string,string)>} handlers */
-module.exports = (handlers) => {
-  handlers[49] = async (ruby, me, r_call_m) => {
+module.exports = class extends CustomizedLove {
+  async 49(ruby, me, callname, stage, extra_flag, event_object) {
+    if (ruby.sex_code !== 0 || me.sex_code === 0) {
+      return super[49](ruby, me, callname, stage, extra_flag, event_object);
+    }
     await print_event_name('爱欲', ruby);
     await ruby.print_and_wait(
       '夜幕已经降临，那令人悸动的心爱之物仍没有从脑海里退出。',
@@ -31,7 +34,7 @@ module.exports = (handlers) => {
     await ruby.print_and_wait([
       ruby.get_colored_name(),
       ' 清楚，这本该是为了让 ',
-      r_call_m,
+      callname,
       ' 进入体内的润滑剂。',
     ]);
     await ruby.print_and_wait([
@@ -40,21 +43,21 @@ module.exports = (handlers) => {
     ]);
     await ruby.print_and_wait([
       '——身体、心灵，都被 ',
-      r_call_m,
+      callname,
       ' 训练着，改变了。',
     ]);
-    await ruby.say_and_wait(['为什么，只是想着 ', r_call_m, '，就……']);
+    await ruby.say_and_wait(['为什么，只是想着 ', callname, '，就……']);
     await ruby.print_and_wait([
       ruby.get_colored_name(),
       ' 仰起脑袋，想象着 ',
-      r_call_m,
+      callname,
       ' 那庞然大物近在咫尺。',
     ]);
     await ruby.say_and_wait('这么粗……这么大……而且味道好重！');
     await ruby.print_and_wait('美丽的大眼睛中似乎真的有那根擎天柱存在。');
     await ruby.print_and_wait([
       '身为马娘，身为华丽一族，想象着自己被 ',
-      r_call_m,
+      callname,
       ' 推倒在地干得欲仙欲死。',
     ]);
     await ruby.say_and_wait('啊……');
@@ -70,7 +73,7 @@ module.exports = (handlers) => {
     await ruby.print_and_wait('把那击碎了自己坚强的生殖器，用香舌细致地舔着。');
     await ruby.print_and_wait([
       '因为侍奉 ',
-      r_call_m,
+      callname,
       ' 雄伟的肉棒，是 ',
       ruby.get_colored_name(),
       ' 此刻最重要的使命。',
@@ -88,7 +91,7 @@ module.exports = (handlers) => {
       ruby.get_colored_name(),
       ' 理解了自己也是女性。',
     ]);
-    await ruby.say_and_wait(['啊！……想要，', r_call_m, ' 和我的婴儿……啊啊……']);
+    await ruby.say_and_wait(['啊！……想要，', callname, ' 和我的婴儿……啊啊……']);
     await ruby.print_and_wait('头脑模糊，理性逐渐丧失。');
     await ruby.print_and_wait(
       '阴唇因为阴道内的压力被张开，与绝顶不太一样，阴道口因为奇妙的快感张开，浅薄的高潮无法停止。',
@@ -98,19 +101,19 @@ module.exports = (handlers) => {
       '手指停不下来，',
       ruby.get_colored_name(),
       ' 想被 ',
-      r_call_m,
+      callname,
       ' 粗暴对待。想象着 ',
-      r_call_m,
+      callname,
       ' 强壮的雄性生殖器。坚挺的肉杆，形状姣好的龟头。',
     ]);
     await ruby.print_and_wait([
       '被 ',
-      r_call_m,
+      callname,
       ' 插入的话，肯定会被强行撑开阴道。',
     ]);
     await ruby.print_and_wait([
       '被 ',
-      r_call_m,
+      callname,
       ' 顶到最里面，精子的射出口死死顶住小宝宝的房间。',
     ]);
     era.println();
@@ -134,7 +137,7 @@ module.exports = (handlers) => {
       ' 似乎做了一个梦。',
     ]);
     await era.printAndWait(
-      '梦里隐隐听到了一丝女性的呻吟声传来，是那么得缥缈。',
+      '梦里隐隐听到了一丝女性的呻吟声传来，是那么的缥缈。',
     );
     await era.printAndWait([
       me.get_colored_name(),
@@ -144,5 +147,5 @@ module.exports = (handlers) => {
     begin_and_init_ero(85);
     await masturbate(85);
     end_ero_and_train();
-  };
+  }
 };

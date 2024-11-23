@@ -578,7 +578,10 @@ module.exports = {
         .get_talents()
         .map((e) => {
           if (e.title && !e.title.startsWith('[')) {
-            e.title = `[${e.content}]：${e.title}`;
+            e.title =
+              (e.content.startsWith('[') ? e.content : `[${e.content}]`) +
+              '：' +
+              e.title;
           }
           return e;
         }),

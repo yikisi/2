@@ -15,85 +15,94 @@ const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
 const print_ero_page = require('#/page/page-ero');
 
-const { add_event, cb_enum } = require('#/event/queue');
+const CustomizedLove = require('#/event/love/love-common');
+const { add_event } = require('#/event/queue');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
-
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const event_hooks = require('#/data/event/event-hooks');
-const EventObject = require('#/data/event/event-object');
 
-module.exports = async (hook, _, event_object) => {
-  const love = era.get('love:68'),
-    kita = get_chara_talk(68),
-    me = get_chara_talk(0);
-  if (hook === event_hooks.week_end) {
-    if (love === 49) {
-      await print_event_name('爱欲', kita);
-      await kita.say_and_wait('啊……嗯呜……呜呜呜……');
-      await era.printAndWait(
-        `身体变得燥热的 ${kita.name}，在床上玩弄着自己到达了高潮。`,
+async function common_love_kita() {
+  begin_and_init_ero(68);
+  await masturbate(68);
+  end_ero_and_train();
+  await sys_love_uma_in_event(68);
+}
+
+module.exports = class extends CustomizedLove {
+  async 49(kita) {
+    await print_event_name('爱欲', kita);
+    await kita.say_and_wait('啊……嗯呜……呜呜呜……');
+    await era.printAndWait([
+      '身体变得燥热的 ',
+      kita.get_colored_name(),
+      '，在床上玩弄着自己到达了高潮。',
+    ]);
+    await common_love_kita();
+  }
+
+  async 74(kita, me, callname) {
+    await print_event_name('热烈', kita);
+    await kita.say_and_wait(['嗯……', callname, '……', callname, '……啊啊……']);
+    await era.printAndWait([
+      '在被子里低语着 ',
+      me.get_colored_name(),
+      ' 的名字，',
+      kita.get_colored_name(),
+      ' 咬着嘴唇高潮了。',
+    ]);
+    await common_love_kita();
+  }
+
+  async 89(kita, me, callname, stage, extra_flag, event_object) {
+    await print_event_name('情意', kita);
+    await kita.say_and_wait([
+      '呜……呜呜……',
+      callname,
+      '，',
+      callname,
+      ' 呜哦哦哦哦～',
+    ]);
+    await era.printAndWait([
+      kita.get_colored_name(),
+      ' 努力揉搓着敏感的地方，满是味道的浓郁性汁狠狠地喷在了被子里。',
+    ]);
+    if (kita.sex_code !== 1) {
+      add_event(event_hooks.out_shopping, event_object.set_arg('m_kita'));
+      add_event(
+        event_hooks.out_station,
+        event_object.copy().set_arg('nyotaimori'),
       );
-    } else if (love === 74) {
-      await print_event_name('热烈', kita);
-      await kita.say_and_wait(
-        `嗯……训练员${me.get_adult_sex_title()}……训练员……${me.get_adult_sex_title()}……啊啊……`,
-      );
-      await era.printAndWait(
-        `在被子里低语着 ${me.name} 的名字，${kita.name} 咬着嘴唇高潮了。`,
-      );
-    } else if (love === 89) {
-      await print_event_name('情意', kita);
-      await kita.say_and_wait(
-        `呜……呜呜……训练员${me.get_adult_sex_title()}，训练员${me.get_adult_sex_title()}呜哦哦哦哦～`,
-      );
-      await era.printAndWait(
-        `${kita.name} 努力揉搓着敏感的地方，满是味道的浓郁性汁狠狠地喷在了被子里。`,
-      );
-      if (kita.sex_code !== 1) {
-        const love_obj = new EventObject(68, cb_enum.love);
-        add_event(event_hooks.out_shopping, love_obj);
-        add_event(event_hooks.out_station, love_obj);
-      }
-    } else {
-      throw new Error('unsupported');
     }
-    begin_and_init_ero(68);
-    if (kita.sex_code - 1) {
-      era.set('palam:68:阴道快感', era.get('tcvar:68:阴道快感上限'));
-      await quick_make_love(
-        new EroParticipant(68, part_enum.hand),
-        new EroParticipant(68, part_enum.virgin),
-        false,
-      );
-    } else {
-      era.set('palam:68:阴茎快感', era.get('tcvar:68:阴茎快感上限'));
-      await quick_make_love(
-        new EroParticipant(68, part_enum.hand),
-        new EroParticipant(68, part_enum.penis),
-        false,
-      );
-    }
-    end_ero_and_train();
-    await sys_love_uma_in_event(68);
-  } else if (hook === event_hooks.out_station) {
+    await common_love_kita();
+  }
+
+  /**
+   * @param {CharaTalk} kita
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {number} stage
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async m_kita(kita, me, callname, stage, extra_flag, event_object) {
     if (era.get('flag:当前互动角色') !== 68) {
-      add_event(hook, event_object);
+      add_event(stage, event_object);
       return false;
     } else if (
       !era.get('status:68:发情') ||
       era.get('exp:68:受虐高潮次数') < 10
     ) {
-      await get_chara_talk(0).say_as_unknown_and_wait([
+      await me.say_as_unknown_and_wait([
         '多欺负几次 ',
-        get_chara_talk(68).get_colored_name(),
+        kita.get_colored_name(),
         '，趁她发情期的时候来车站，或许会有意想不到的事件发生哦！',
       ]);
       await era.clear(1);
-      add_event(hook, event_object);
+      add_event(stage, event_object);
       return false;
     }
     await print_event_name('喜欢被欺负的小北', kita);
@@ -202,18 +211,28 @@ module.exports = async (hook, _, event_object) => {
     await add_juel_out_of_train(68, '顺从', 100);
     await era.waitAnyKey();
     return true;
-  } else if (hook === event_hooks.out_shopping) {
+  }
+
+  /**
+   * @param {CharaTalk} kita
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {number} stage
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async nyotaimori(kita, me, callname, stage, extra_flag, event_object) {
     if (era.get('flag:当前互动角色') !== 68) {
-      add_event(hook, event_object);
+      add_event(stage, event_object);
       return false;
     } else if (era.get('exp:68:受虐高潮次数') < 10) {
-      await get_chara_talk(0).say_as_unknown_and_wait([
+      await me.say_as_unknown_and_wait([
         '多欺负几次 ',
-        get_chara_talk(68).get_colored_name(),
+        kita.get_colored_name(),
         ' 再来商店街，或许会有意想不到的事件发生哦！',
       ]);
       await era.clear(1);
-      add_event(hook, event_object);
+      add_event(stage, event_object);
       return false;
     }
     await print_event_name('「简单」就餐', kita);
@@ -375,7 +394,5 @@ module.exports = async (hook, _, event_object) => {
     );
     await era.waitAnyKey();
     return true;
-  } else {
-    throw new Error('unsupported!');
   }
 };
