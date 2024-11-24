@@ -153,10 +153,14 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait(
         '被连衣裙包裹着的南半球，两条连接脖子颈环的丝带，就像是快绷断了一样。',
       );
-      era.get('cflag:0:性别') === 1 &&
-        (await era.printAndWait(
-          `孤男寡女，${vp.sex}倒也不怕 ${me.name} 做出什么出格的事情。`,
-        ));
+      me.sex_code === 1 &&
+        (await era.printAndWait([
+          '孤男寡女，',
+          vp.sex,
+          '倒也不怕 ',
+          me.get_colored_name(),
+          ' 做出什么出格的事情。',
+        ]));
       await era.printAndWait([
         me.get_colored_name(),
         ` 看着眼前的${vp.get_teen_sex_title()}，眼边还因为要见 `,

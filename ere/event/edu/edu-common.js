@@ -224,7 +224,7 @@ handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
  *
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {{args:*,fumble:boolean,train:number}} extra_flag
+ * @param {TrainFailParams} extra_flag
  */
 handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
   await print_fail_info_in_train(chara_id, extra_flag.train, extra_flag.fumble);
@@ -491,7 +491,7 @@ handlers[event_hooks.crazy_fan_end] = async (chara_id) => {
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
- * @param {*} extra_flag
+ * @param extra_flag
  * @param {EventObject} event_object
  * @returns {Promise<*>}
  */

@@ -85,14 +85,14 @@ handlers[ero_hooks.ero_start] = async (chara_id) => {
   if (
     era.get(`status:${chara_id}:发情`) &&
     era.get('flag:惩戒力度') === 3 &&
-    (!(father_id = era.get(`cflag:${chara_id}:父方角色`)) ||
-      !era.get(`cflag:${chara_id}:母方角色`))
+    ((father_id = era.get(`cflag:${chara_id}:父方角色`)) === 0 ||
+      era.get(`cflag:${chara_id}:母方角色`) === 0)
   ) {
-    await get_chara_talk(chara_id).say_and_wait(
-      `哈啊……哈啊……不知道为什么看到${
-        !father_id ? '爸爸' : '妈妈'
-      }的时候，下面就觉得好热好难受……已经……忍不住了！`,
-    );
+    await get_chara_talk(chara_id).say_and_wait([
+      '哈啊……哈啊……不知道为什么看到',
+      father_id === 0 ? '爸爸' : '妈妈',
+      '的时候，下面就觉得好热好难受……已经……忍不住了！',
+    ]);
   }
 };
 
@@ -111,7 +111,9 @@ handlers[ero_hooks.become_erect] = (chara_id, _, extra_flag) => {
   if (extra_flag.part === part_enum.penis) {
     era.print([
       get_chara_talk(chara_id).get_colored_name(),
-      ` ${penis_desc[get_penis_size(chara_id)]} 的肉棒勃起了！`,
+      ' ',
+      penis_desc[get_penis_size(chara_id)],
+      ' 的肉棒勃起了！',
     ]);
   } else if (extra_flag.part === part_enum.breast) {
     let cup = get_breast_cup(chara_id);
@@ -119,7 +121,9 @@ handlers[ero_hooks.become_erect] = (chara_id, _, extra_flag) => {
     era.print([
       '深色的小樱桃在 ',
       get_chara_talk(chara_id).get_colored_name(),
-      ` 两只 ${breast_size[cup]} 的乳房顶端探出了头……`,
+      ' 两只 ',
+      breast_size[cup],
+      ' 的乳房顶端探出了头……',
     ]);
   }
 };

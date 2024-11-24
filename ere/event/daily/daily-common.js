@@ -864,12 +864,14 @@ class CustomizedDaily {
    * @param {EventObject} event_object
    */
   async run(hook, extra_flag, event_object) {
-    return await this[event_hooks.keys[hook.hook]].call(
-      this,
-      hook,
-      extra_flag,
-      event_object,
-    );
+    if (this[event_hooks.keys[hook.hook]] !== undefined) {
+      return await this[event_hooks.keys[hook.hook]].call(
+        this,
+        hook,
+        extra_flag,
+        event_object,
+      );
+    }
   }
 }
 

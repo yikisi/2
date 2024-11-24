@@ -16,6 +16,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { cb_enum } = require('#/event/queue');
 
 /**
  * load game
@@ -92,7 +93,8 @@ module.exports = async () => {
             CharaTalk.me = new CharaTalk(0);
             // 向前兼容
             // 大拓太阳神育成目标错误、贵妇人称号bug
-            if (era.get('version') <= 1010) {
+            const version = era.get('version');
+            if (version <= 1010) {
               [65, 116]
                 .filter(
                   (id) =>
@@ -110,6 +112,28 @@ module.exports = async () => {
                     ),
                   );
                 });
+            }
+            if (version <= 1011) {
+              /** @type {Record<string,EventObject[]>} */
+              const e_queue = era.get('flag:事件队列');
+              Object.values(e_queue).forEach((l) =>
+                l.forEach((e) => {
+                  if (e.type === cb_enum.love) {
+                    if (e.arg === undefined) {
+                      era.arg = [era.get(`love:${e.chara_id}`)];
+                    } else if (
+                      e.arg === 49 ||
+                      e.arg === 74 ||
+                      e.arg === 89 ||
+                      e.arg === 99
+                    ) {
+                      e.arg = [e.arg];
+                    } else if (e.chara_id === 205 && e.arg === 'lust') {
+                      e.arg = [49, 'lust'];
+                    }
+                  }
+                }),
+              );
             }
             return true;
           } else {
