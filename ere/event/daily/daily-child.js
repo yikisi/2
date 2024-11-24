@@ -49,7 +49,7 @@ class DailyChild extends CustomizedDaily {
     }
   }
 
-  async growth(_, extra_flag) {
+  async growth(stage) {
     const child = get_chara_talk(this.id),
       father = get_chara_talk(era.get(`cflag:${this.id}:父方角色`)),
       mother = get_chara_talk(era.get(`cflag:${this.id}:母方角色`)),
@@ -57,7 +57,7 @@ class DailyChild extends CustomizedDaily {
       stockholm = era.get(`mark:${mother.id || father.id}:同心`),
       is_pregnant_slave = !mother.id && era.get('flag:惩戒力度') === 3;
     era.drawLine();
-    if (extra_flag.stage === 0) {
+    if (stage === 0) {
       // 育儿
       await print_event_name('成长', child);
       if (love >= 90) {
@@ -144,7 +144,7 @@ class DailyChild extends CustomizedDaily {
           }
         }
       }
-    } else if (extra_flag.stage === 1) {
+    } else if (stage === 1) {
       // 本格化
       await print_event_name('本格化', child);
       new LifeEventMarks(this.id).unexpected_child = 0;
@@ -179,7 +179,7 @@ class DailyChild extends CustomizedDaily {
           ]);
         }
       }
-    } else if (extra_flag.stage === 2) {
+    } else if (stage === 2) {
       // 入学
       await print_event_name('入学', child);
       if (love >= 90) {

@@ -29,7 +29,7 @@ const sys_handle_palace = require('#/system/sys-handle-palace');
 const { reset_chara } = require('#/system/sys-init-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const { run_custom_daily } = require('#/event/daily/daily-factory');
+const { get_custom_daily } = require('#/event/daily/daily-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { remove_special_events } = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
@@ -53,7 +53,6 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const BasementOwners = require('#/data/event/basement-owners');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const event_hooks = require('#/data/event/event-hooks');
 const GrandLives = require('#/data/event/grand-lives');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -584,13 +583,9 @@ async function sys_next_week() {
           if (era.get(`talent:${chara_id}:乳头类型`) !== 2) {
             era.set(`talent:${chara_id}:乳头类型`, get_random_value(0, 1));
           }
-          await run_custom_daily(chara_id, event_hooks.growth, {
-            stage: 0,
-          });
+          await get_custom_daily(chara_id).growth(0);
         } else if (growth_stage === 2) {
-          await run_custom_daily(chara_id, event_hooks.growth, {
-            stage: 1,
-          });
+          await get_custom_daily(chara_id).growth(1);
         }
       }
     }
@@ -600,7 +595,7 @@ async function sys_next_week() {
       era.get(`cflag:${chara_id}:育成回合计时`) === 'x'
     ) {
       reset_chara(chara_id);
-      await run_custom_daily(chara_id, event_hooks.growth, { stage: 2 });
+      await get_custom_daily(chara_id).growth(2);
     }
 
     const is_pregnant_slave =

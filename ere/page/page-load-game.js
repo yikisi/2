@@ -8,13 +8,12 @@ const filter_chara = require('#/system/sys-filter-chara');
 const print_page_header = require('#/page/components/page-header');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const { run_custom_daily } = require('#/event/daily/daily-factory');
+const { get_custom_daily } = require('#/event/daily/daily-factory');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
-const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { cb_enum } = require('#/event/queue');
 
@@ -74,14 +73,13 @@ module.exports = async () => {
       default:
         if (ret < 100) {
           if (era.get('flag:读档对话')) {
-            await run_custom_daily(
+            await get_custom_daily(
               get_random_entry(
                 filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
                   (e) => e,
                 ),
               ),
-              event_hooks.load_talk,
-            );
+            ).load_talk();
           }
           if (await era.loadData(ret)) {
             flag_load_game = false;

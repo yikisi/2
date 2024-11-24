@@ -183,7 +183,7 @@ handlers[event_hooks.office_game] = async (chara_id) => {
 
 handlers[event_hooks.good_night] = async (chara_id, hook) => {
   if (hook.arg !== undefined) {
-    if (hook.arg) {
+    if (hook.arg > 0) {
       era.set('flag:床伴', chara_id);
       hook.arg === 2 && (new LifeEventMarks(chara_id).marital_rape = 1);
     } else {
