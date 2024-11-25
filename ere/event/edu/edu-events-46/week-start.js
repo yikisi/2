@@ -2577,7 +2577,7 @@ module.exports = async function (event_object) {
     await era.printAndWait(`渴望酒精能浸润这份从内心发出的谴责。`);
     await era.printAndWait(`然而，内心的另一个声音告诉它，已经结束了。`);
     await era.printAndWait(
-      `坐过站的乘客无法回到上一站，无论如何都无法实现这份约定。`,
+      `只购买了单程票的乘客无法回到上一站，无论如何都无法实现这份约定。`,
     );
     await era.printAndWait(
       `因为自己的傲慢，对自己预估的过于乐观，它陷入了惨痛的代价。`,
@@ -2589,7 +2589,6 @@ module.exports = async function (event_object) {
     await era.printAndWait(
       `与醒目飞鹰在文件上的契约就此结束，而你与醒目飞鹰三年来同甘共苦留下的羁绊却仿佛触手可及的水中之月。`,
     );
-
     await era.printAndWait(`如今的醒目飞鹰已经是货真价实的顶级偶像。`);
     await era.printAndWait(
       `暂且不论关注沙地的观众，即使是在那些只关注草地的观众之中，醒目飞鹰已经与飞驰于草地的传奇们共同在这个时代留下了深刻的一笔。`,
@@ -2612,9 +2611,9 @@ module.exports = async function (event_object) {
     era.printButton(`因为一些事情耽搁了，抱歉。`, 1);
     await era.input();
     await era.printAndWait(
-      `很多人好奇作为教导了开创泥地新时代马娘的你，究竟做了什么。`,
+      `很多人好奇作为教导了开创泥地新时代马娘的你究竟做了什么。`,
     );
-    await era.printAndWait(`自己的意愿？马娘的要求？还是，什么都没想？`);
+    await era.printAndWait(`自己的意愿？马娘的要求？还是高超的能力？`);
     await era.printAndWait(
       `作为上述问题的回复，你将这三年教导醒目飞鹰的训练笔记复印后交到了理事长办公室,这份经由你整理的心血将在重新排版后将作为目光转向沙地的马娘们的发行。`,
     );
@@ -2640,10 +2639,54 @@ module.exports = async function (event_object) {
     );
     await era.input();
     await era.printAndWait(`这一切才刚刚开始。`);
+    await era.printAndWait(
+      `仅仅因为对受欢迎的偶像这一憧憬踏入偶像之路，自己所选的道路反过来塑造了自己。`,
+    );
+    await era.printAndWait(
+      `被重塑过的自己，回顾自己最初的理想，会发现虽然自己看上去是在实践这条道路，但实际上重塑过的理想却与最初的理想并不一样。`,
+    );
+    await era.printAndWait(`——尽管写下来是同样的字，但那不是一回事。`);
+    await era.printAndWait(
+      `人因为个人私欲而选择道路，而道路反过来最后塑造了自己。`,
+    );
+    await era.printAndWait(
+      `衷心希望各位玩家能在这个世界以自己的决定选择道路，然后幸福的活下去。`,
+    );
+    await era.printAndWait(`TRUE END  Top Uma idol 。`);
   } else if (edu_weeks === 143 + 1 && new FalconEduMarks().encore === 1) {
     event_marks.encore++;
     await print_event_name(`压抑不住的恋心`, falcon);
-    await era.printAndWait(`。`);
+    await era.printAndWait(`天空，大地，晴朗的天空。`);
+    await era.printAndWait(
+      `与训练员先生一起观看的沙地比赛,为了答谢提供场地的恩惠打扫的草地。`,
+    );
+    await era.printAndWait(
+      `因为心中不安的情感而在深夜所播出的电话,也就是那时候才意识到的自己的恋心。`,
+    );
+    await era.printAndWait(`乌云，小雨，逐渐昏暗的天空。`);
+    await era.printAndWait(
+      `对职责的不安，与训练员先生一起观看的烟火大会，为了偶像事业而奋斗的疲惫日子。`,
+    );
+    await era.printAndWait(`大雨，狂风，迷乱的内心。`);
+    await era.printAndWait(
+      `与训练员先生之间的争吵，沉默逐渐增多的时刻，向着粉丝诉说爱意的偶像无法面对所爱之人。`,
+    );
+    await era.printAndWait(
+      `粉丝袭击，倒在血泊之中的训练员先生，充满遗憾的东京大赏。`,
+    );
+    await era.printAndWait(`分开的岔道，落下的沙漏，抉择之时。`);
+    await era.printAndWait(
+      `再一次的烟火大会，向着顶级偶像道路前进的日夜，被后辈憧憬时卡顿的自己。`,
+    );
+    await era.printAndWait(
+      `与训练员先生的公园野餐，热情逐渐消减，超越的马娘。`,
+    );
+    await era.printAndWait(
+      `就算回到过去，告诉那个尚未遇到训练员先生的自己，恐怕也不会相信吧。`,
+    );
+    await era.printAndWait(
+      `渐离渐远的岔道，如果当时的自己选择了那条道路又会怎么样呢？`,
+    );
   } else if (edu_weeks === 143 + 1 && new FalconEduMarks().idol_road === 1) {
     event_marks.idol_road++;
     await print_event_name(`依然闪耀的偶像`, falcon);
