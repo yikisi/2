@@ -3,8 +3,6 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const palace = require('#/event/snippets/palace');
-const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -16,8 +14,9 @@ const { location_enum } = require('#/data/locations');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean}):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
-  handlers.palace = async (acute, me, callname) => {
-    await palace(acute, me);
+  /** @this CustomizedEdu */
+  handlers.palace = async function (acute, me, callname) {
+    await this.common_palace(acute, me);
     if (era.get('cflag:100:殿堂') === 2) {
       era.drawLine();
       const { ending } = new AcuteEduMarks();
@@ -686,7 +685,7 @@ module.exports = (handlers) => {
         await acute.print_and_wait('浩瀚的天穹之下，唯剩下，两者的凛然。');
       }
     } else {
-      await palace_relation(acute, me);
+      await this.common_palace_relation(acute, me);
     }
   };
 

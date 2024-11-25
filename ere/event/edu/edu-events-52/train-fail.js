@@ -4,19 +4,19 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
 /**
+ * @param {CharaTalk} urara
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {HookArg} hook
- * @param {{args:*,fumble:boolean,train:number}} extra_flag
+ * @param {TrainFailParams} extra_flag
  */
-module.exports = async (hook, extra_flag) => {
+module.exports = async (urara, me, callname, hook, extra_flag) => {
   extra_flag.args = extra_flag.fumble
     ? fumble_result.fumble
     : fumble_result.fail;
-  const urara = get_chara_talk(52);
   switch (extra_flag.train) {
     case attr_enum.speed:
       await urara.say_and_wait('诶？为什么这里会……？动不了了……');
@@ -39,8 +39,6 @@ module.exports = async (hook, extra_flag) => {
   }
   era.println();
   if (extra_flag.train !== attr_enum.intelligence) {
-    const me = get_chara_talk(0),
-      callname = sys_get_callname(52, 0);
     if (extra_flag.fumble) {
       await print_event_name('严禁逞强！', urara);
       await era.printAndWait([

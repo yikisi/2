@@ -1,32 +1,26 @@
 const era = require('#/era-electron');
 
-const {
-  sys_get_callname,
-  sys_get_colored_callname,
-} = require('#/system/sys-calc-chara-others');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const {
-  get_chara_talk,
-  say_by_passer_by_and_wait,
-} = require('#/utils/chara-talk-factory');
+const { say_by_passer_by_and_wait } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
+ * @param {CharaTalk} tachyon
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {HookArg} hook
  * @param {number} stamina_ratio
  */
-module.exports = async (hook, { stamina_ratio }) => {
+module.exports = async (tachyon, me, callname, hook, stamina_ratio) => {
   const buffer = [],
-    callname = sys_get_callname(32, 0),
-    me = get_chara_talk(0),
     love = era.get('love:32'),
-    relation = era.get('relation:32:0'),
-    tachyon = get_chara_talk(32);
+    relation = era.get('relation:32:0');
   era.print([tachyon.get_colored_name(), ' 的训练顺利结束了！']);
   era.println();
   if (

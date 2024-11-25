@@ -5,10 +5,10 @@ const {
   end_ero_and_show_result,
   update_ero_status,
 } = require('#/system/ero/sys-prepare-ero');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const print_ero_page = require('#/page/page-ero');
 
+const { common_future } = require('#/event/edu/edu-events-32/snippets');
 const { add_event } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -19,24 +19,22 @@ const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32
 const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
-const { common_future } = require('#/event/edu/edu-events-32/snippets');
 
 /**
+ * @param {CharaTalk} tachyon
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {HookArg} hook
- * @param _
  * @param {EventObject} event_object
  */
-module.exports = async (hook, _, event_object) => {
+module.exports = async (tachyon, me, callname, hook, event_object) => {
   if (era.get('flag:当前互动角色') !== 32) {
     add_event(hook.hook, event_object);
     return;
   }
-  const callname = sys_get_callname(32, 0),
-    coffee = get_chara_talk(25),
+  const coffee = get_chara_talk(25),
     edu_marks = new TachyonEduMarks(),
-    love = era.get('love:32'),
-    me = get_chara_talk(0),
-    tachyon = get_chara_talk(32);
+    love = era.get('love:32');
   if (edu_marks.plan_b) {
     await print_event_name('其他的可能性', tachyon);
   } else {

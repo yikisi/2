@@ -5,12 +5,14 @@ const {
   begin_and_init_ero,
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
+const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_get_colored_callname,
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
+const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -20,9 +22,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
-const { attr_enum } = require('#/data/train-const');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
-const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 
 /**
  * @param {CharaTalk} tachyon
@@ -285,14 +284,7 @@ async function incomplete_combustion(tachyon, me, callname, edu_marks) {
   }
 }
 
-/**
- * @param _
- * @param {number} attr
- */
-module.exports = async (_, { attr }) => {
-  if (attr === attr_enum.intelligence) {
-    throw new Error();
-  }
+module.exports = async () => {
   const buffer = [],
     callname = sys_get_callname(32, 0),
     edu_marks = new TachyonEduMarks(),

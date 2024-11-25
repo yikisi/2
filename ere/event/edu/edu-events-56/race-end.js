@@ -1,11 +1,7 @@
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
-
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const FukuEventMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
 const { location_enum } = require('#/data/locations');
@@ -20,14 +16,13 @@ const race_end_handlers = {};
 ].forEach((f) => f(race_end_handlers));
 
 /**
- * @param _
+ * @param {CharaTalk} kitaru
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {RaceEndParams} extra_flag
  */
-module.exports = async (_, extra_flag) => {
-  const callname = sys_get_callname(56, 0),
-    kitaru = get_chara_talk(56),
-    me = get_chara_talk(0),
-    edu_marks = new FukuEventMarks(),
+module.exports = async (kitaru, me, callname, extra_flag) => {
+  const edu_marks = new FukuEventMarks(),
     edu_weeks = era.get('cflag:56:育成回合计时');
   if (
     !race_end_handlers[extra_flag.race] ||

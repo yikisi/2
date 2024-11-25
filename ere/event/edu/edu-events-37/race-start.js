@@ -1,24 +1,30 @@
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
-const { race_enum } = require('#/data/race/race-const');
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 
+const { race_enum } = require('#/data/race/race-const');
+
 /**
- * @param {HookArg} _
- * @param {{race:number,rank:number}} extra_flag
+ * @param {CharaTalk} flash
+ * @param {CharaTalk} me
+ * @param {string} callname
+ * @param {HookArg} hook
+ * @param {RaceStartParams} extra_flag
+ * @param {function} super_race_start
  */
-module.exports = async (_, extra_flag) => {
-  const callname = sys_get_callname(37, 0),
-    edu_weeks = era.get('cflag:37:育成回合计时'),
-    flash = get_chara_talk(37),
-    your_name = get_chara_talk(0).name;
+module.exports = async function (
+  flash,
+  me,
+  callname,
+  hook,
+  extra_flag,
+  super_race_start,
+) {
+  const edu_weeks = era.get('cflag:37:育成回合计时'),
+    your_name = me.name;
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name('万事之始 · 一', flash);
     await era.printAndWait('终于到了荣进闪耀出道的时候。');
@@ -613,6 +619,6 @@ module.exports = async (_, extra_flag) => {
       `而正如答应好的一样，${your_name} 相信，这种两人之间的守候，在未来的日子里，还会持续许久许久。`,
     );
   } else {
-    throw new Error();
+    return await super_race_start(flash, me, callname, hook, extra_flag);
   }
 };

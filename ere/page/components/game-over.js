@@ -1,7 +1,6 @@
 const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
-const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
@@ -9,6 +8,7 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
+const { get_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
 
@@ -20,7 +20,6 @@ const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const BasementOwners = require('#/data/event/basement-owners');
 const CrazyFans = require('#/data/event/crazy-fans');
-const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
@@ -59,7 +58,7 @@ async function game_over(again) {
     ];
   } else if ((temp = new CrazyFans().get()) && game_over) {
     era.drawLine();
-    await sys_call_edu_event(temp, event_hooks.crazy_fan_end);
+    await get_custom_edu(temp).crazy_fan_end();
     saying_arr = [
       '日蚀当先，万物无光。——丹尼斯・奥凯利',
       '杜鹃不鸣则杀之。——织田信长',

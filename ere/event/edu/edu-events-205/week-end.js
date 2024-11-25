@@ -19,14 +19,12 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
- * @param _
- * @param __
+ * @param {CharaTalk} vp
+ * @param {CharaTalk} me
  * @param {EventObject} event_object
  */
-module.exports = async (_, __, event_object) => {
-  const me = get_chara_talk(0),
-    montjeu = get_chara_talk(204),
-    vp = get_chara_talk(205);
+module.exports = async (vp, me, event_object) => {
+  const montjeu = get_chara_talk(204);
   let temp;
   switch (event_object?.arg) {
     case 47 + 33:

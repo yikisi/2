@@ -628,7 +628,7 @@ handlers[ero_hooks.have_baby] = async (_, hook, extra_flag) => {
       era.get(`cflag:${extra_flag.child_id}:父方角色`),
     ),
     mother = get_chara_talk(era.get(`cflag:${extra_flag.child_id}:母方角色`));
-  if (!mother.id) {
+  if (mother.id === 0) {
     return await ero_scripts_0(hook, {
       child_id: extra_flag.child_id,
       father,

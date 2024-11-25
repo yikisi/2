@@ -1,10 +1,10 @@
 ﻿const era = require('#/era-electron');
 
-const call_edu_script = require('#/system/script/sys-call-edu-script');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_get_succ_rate } = require('#/system/sys-calc-chara-param');
 
+const { get_custom_edu, run_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const CharaTalk = require('#/utils/chara-talk');
@@ -165,7 +165,7 @@ module.exports = {
       success_rate = sys_get_succ_rate(chara_id, attr, extra_buff);
     const flag_success = Math.random() * 100 < success_rate;
 
-    if (await call_edu_script(chara_id, event_hooks.train, { attr })) {
+    if (await get_custom_edu(chara_id).train(attr)) {
       return;
     }
     era.println();
@@ -182,7 +182,7 @@ module.exports = {
       );
 
       /** @type {TrainSuccessParams} */
-      const ret = await call_edu_script(
+      const ret = await run_custom_edu(
         chara_id,
         event_hooks.train_success,
         new TrainSuccessParams(
@@ -225,7 +225,7 @@ module.exports = {
         case attr_enum.intelligence:
           train_cost.stamina = -train_cost.stamina / 10;
       }
-      const ret = await call_edu_script(
+      const ret = await run_custom_edu(
         chara_id,
         event_hooks.train_fail,
         new TrainFailParams(

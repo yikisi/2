@@ -6,8 +6,6 @@ const {
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
-const palace = require('#/event/snippets/palace');
-const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -19,14 +17,13 @@ const { location_enum } = require('#/data/locations');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
- * @param _
- * @param __
+ * @this CustomizedEdu
+ * @param {CharaTalk} vp
+ * @param {CharaTalk} me
  * @param {EventObject} event_object
  */
-module.exports = async (_, __, event_object) => {
-  const me = get_chara_talk(0),
-    montjeu = get_chara_talk(204),
-    vp = get_chara_talk(205);
+module.exports = async function (vp, me, event_object) {
+  const montjeu = get_chara_talk(204);
   let temp,
     wait_flag = false;
   switch (event_object?.arg) {
@@ -239,7 +236,7 @@ module.exports = async (_, __, event_object) => {
       );
       break;
     case 143 + 9:
-      await palace(vp, me);
+      await this.common_palace(vp, me);
       if (era.get('love:205') >= 50) {
         era.drawLine();
         era.set('flag:当前位置', location_enum.gate);
@@ -459,7 +456,7 @@ module.exports = async (_, __, event_object) => {
         era.println();
         wait_flag = temp === 2 && sys_love_uma(205, 1);
       } else {
-        await palace_relation(vp, me);
+        await this.common_palace_relation(vp, me);
       }
   }
   wait_flag && (await era.waitAnyKey());

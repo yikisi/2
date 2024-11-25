@@ -5,8 +5,6 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { add_event } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const palace = require('#/event/snippets/palace');
-const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const {
@@ -609,8 +607,9 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers.palace = async (digital, me) => {
-    await palace(digital, me);
+  /** @this CustomizedEdu */
+  handlers.palace = async function (digital, me) {
+    await this.common_palace(digital, me);
     const races = new RaceHistory(19).get();
     if (
       check_aim_race(races, race_enum.hyac_sta, 1, 1) &&
@@ -664,7 +663,7 @@ module.exports = (handlers) => {
         '，现在仍在奔跑中。',
       ]);
     } else {
-      await palace_relation(digital, me);
+      await this.common_palace_relation(digital, me);
     }
   };
 };

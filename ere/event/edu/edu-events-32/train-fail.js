@@ -1,15 +1,10 @@
 const era = require('#/era-electron');
 
 const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
-const {
-  sys_get_callname,
-  sys_get_colored_callname,
-} = require('#/system/sys-calc-chara-others');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
@@ -62,22 +57,23 @@ async function train_fail_common2(tachyon, me) {
 }
 
 /**
+ * @this CustomizedEdu
+ * @param {CharaTalk} tachyon
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {HookArg} hook
  * @param {boolean} fumble
  * @param {number} train
  */
-module.exports = async (hook, { fumble, train }) => {
+module.exports = async function (tachyon, me, callname, hook, fumble, train) {
   if (train === attr_enum.intelligence) {
-    await print_fail_info_in_train(32, train, fumble);
+    await this.print_fail_info_in_train(train, fumble);
     return;
   }
   const args = fumble ? fumble_result.fumble : fumble_result.fail,
-    callname = sys_get_callname(32, 0),
     edu_marks = new TachyonEduMarks(),
-    me = get_chara_talk(0),
     love = era.get('love:32'),
-    relation = era.get('relation:32:0'),
-    tachyon = get_chara_talk(32);
+    relation = era.get('relation:32:0');
   await print_event_name('重整&再出发', tachyon);
   await era.printAndWait([
     me.get_colored_name(),
