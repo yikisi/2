@@ -42,28 +42,46 @@ race_rewards[class_enum.G2] = race_rewards[class_enum.G3] = {
     pt: [40, 50],
   },
 };
-race_rewards[class_enum.OP] =
-  race_rewards[class_enum['Pre-OP']] =
-  race_rewards[class_enum.Spe] =
-    {
-      1: {
-        attr: [5, 5],
-        fame: 10,
-        pt: [40, 40],
-      },
-      10: {
-        attr: [0, 0],
-        fame: -20,
-        pt: [15, 15],
-      },
-      20: {
-        fame: -50,
-      },
-      5: {
-        attr: [2, 4],
-        fame: 0,
-        pt: [25, 40],
-      },
-    };
+race_rewards[class_enum.OP] = race_rewards[class_enum['Pre-OP']] = {
+  1: {
+    attr: [5, 5],
+    fame: 10,
+    pt: [40, 40],
+  },
+  10: {
+    attr: [0, 0],
+    fame: -20,
+    pt: [15, 15],
+  },
+  20: {
+    fame: -50,
+  },
+  5: {
+    attr: [2, 4],
+    fame: 0,
+    pt: [25, 40],
+  },
+};
+
+race_rewards[class_enum.Spe] = {
+  1: {
+    attr: [5, 5],
+    fame: 10,
+    pt: [40, 40],
+  },
+  10: {
+    attr: [0, 0],
+    fame: 0,
+    pt: [15, 15],
+  },
+  20: {
+    fame: 0,
+  },
+  5: {
+    attr: [2, 4],
+    fame: 0,
+    pt: [25, 40],
+  },
+};
 
 module.exports = race_rewards;
