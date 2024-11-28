@@ -379,7 +379,10 @@ async function sys_next_week() {
     era.get(`status:${chara_id}:长效避孕药`) &&
       era.add(`status:${chara_id}:长效避孕药`, -1);
     era.get(`status:${chara_id}:疲惫`) &&
-      era.add(`status:${chara_id}:疲惫`, -1);
+      era.set(
+        `status:${chara_id}:疲惫`,
+        Math.max(era.get(`status:${chara_id}:疲惫`) - (1 + health_buff), 0),
+      );
     era.get(`status:${chara_id}:伤病`) &&
       era.set(
         `status:${chara_id}:伤病`,

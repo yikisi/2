@@ -8,7 +8,7 @@ module.exports = class extends MecNpc {
       {
         color: buff_colors[1],
         content: '[针炙名师]',
-        title: '加快队伍成员偏头痛和伤病恢复，且更不容易偏头痛',
+        title: '加快队伍成员偏头痛、伤病和疲惫恢复，且更不容易偏头痛',
       },
     ];
   }
