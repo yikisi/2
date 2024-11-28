@@ -321,6 +321,22 @@ module.exports = class extends CustomizedCheck {
     if (
       check_aim_race(races, race_enum.jbc_cls, 2, 1) &&
       check_aim_race(races, race_enum.cham_cup, 2, 1) &&
+      check_aim_race(races, race_enum.toky_dai, 2, 1) &&
+      check_aim_race(races, race_enum.teio_sho, 2, 1)
+    ) {
+      new FalconEduMarks().top_idol++;
+      add_event(event_hooks.week_start, new EventObject(46, cb_enum.edu));
+    } else if (
+      check_aim_race(races, race_enum.jbc_cls, 2, 1) &&
+      check_aim_race(races, race_enum.cham_cup, 2, 1) &&
+      check_aim_race(races, race_enum.toky_dai, 2, 1) &&
+      check_aim_race(races, race_enum.teio_sho, 2, 2)
+    ) {
+      new FalconEduMarks().encore++;
+      add_event(event_hooks.week_start, new EventObject(46, cb_enum.edu));
+    } else if (
+      check_aim_race(races, race_enum.jbc_cls, 2, 1) &&
+      check_aim_race(races, race_enum.cham_cup, 2, 1) &&
       check_aim_race(races, race_enum.toky_dai, 2, 1)
     ) {
       new FalconEduMarks().sweet_dream++;

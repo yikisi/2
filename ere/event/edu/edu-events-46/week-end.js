@@ -1591,12 +1591,13 @@ module.exports = async function () {
       `……就是这样，纵使失约，纵使内心陷入疯狂，既然作为偶像就要认真回应粉丝的期待`,
     );
     await me.say_and_wait(`我明白了……无论如何我都会支持飞鹰子做出的决定。`);
-    await me.say_and_wait(`那我呢？`, true);
     await era.printAndWait(
       `你的视野似乎能突破自己的范围，从眼前的少女转到了俯瞰着整个画面，像是机械一样按照制定好的规则熟练的进行着对话。`,
     );
+    await era.printAndWait(`尽管如此，你依然尊重她的决定。`);
     await me.say_and_wait(`晚安`);
     await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}晚安。`);
+    await era.printAndWait(`等到中断的思绪再次恢复时，忽然发现自己已经在。`);
     await era.printAndWait(`像是从遥远的地方一样传来的微弱声音。`);
     await me.say_and_wait(`不，怎么会。`);
     await me.say_and_wait(

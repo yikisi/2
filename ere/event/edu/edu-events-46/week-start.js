@@ -2652,10 +2652,14 @@ module.exports = async function (event_object) {
     await era.printAndWait(
       `衷心希望各位玩家能在这个世界以自己的决定选择道路，然后幸福的活下去。`,
     );
+    era.println();
     await era.printAndWait(`TRUE END  Top Uma idol 。`);
+    era.println();
+    await era.printAndWait(`THANK FOR YOUR WATCHING!`);
   } else if (edu_weeks === 143 + 1 && new FalconEduMarks().encore === 1) {
     event_marks.encore++;
     await print_event_name(`压抑不住的恋心`, falcon);
+
     await era.printAndWait(`天空，大地，晴朗的天空。`);
     await era.printAndWait(
       `与训练员先生一起观看的沙地比赛,为了答谢提供场地的恩惠打扫的草地。`,
@@ -2687,6 +2691,73 @@ module.exports = async function (event_object) {
     await era.printAndWait(
       `渐离渐远的岔道，如果当时的自己选择了那条道路又会怎么样呢？`,
     );
+    await era.printAndWait(`真在意真在意。`);
+    await era.printAndWait(`心情也忽上忽下左转右转头晕目眩。`);
+    await era.printAndWait(`心跳也突然加速。`);
+    await era.printAndWait(`不可以不可以，飞鹰子可是完美偶像。`);
+    await era.printAndWait(`像这样拐弯抹角不是飞鹰子的风格。`);
+    await era.printAndWait(`令人无法忘怀的，在黄昏时举行的沙地大赛。`);
+    await era.printAndWait(`无法形容的，那甜到拉丝的美好回忆。`);
+    await era.printAndWait(`露出的笑容，肯定的申请，没有错，。`);
+    era.println();
+    // 在特雷森学院的最后一个夜晚
+    await falcon.say_and_wait(`感谢大家一直支持着飞鹰子！`);
+    await say_by_passer_by(`粉丝们`, `飞鹰子！飞鹰子！飞鹰子！`);
+    await era.printAndWait(
+      `与昨天近乎相同的场景，要说实在不同的地方，就只剩下了似乎要将全身解数绽放的少女。`,
+    );
+    await era.printAndWait(
+      `这次的演出比之前要长的很多。从傍晚开始的演出一直跳到了第二天5点。`,
+    );
+    await falcon.say_and_wait(`接下来也请多多支持飞鹰子！`);
+    await era.printAndWait(
+      `送别最后一位还在场地坚持的粉丝后，现场只剩下了你和醒目飞鹰两人。`,
+    );
+    await falcon.say_and_wait(`这样就没有遗憾了。`);
+    await era.printAndWait(
+      `目送着最后一名粉丝的背景渐渐消失在地平线之后，醒目飞鹰吐出了满足的叹息。`,
+    );
+    await era.printAndWait(
+      `在泥地取得极其优秀成果的醒目飞鹰，将目标放在了海外远征上。`,
+    );
+    await era.printAndWait(`——准备冲击迪拜世界杯。`);
+    await era.printAndWait(
+      `行李已经先一步寄到了接下来所居住的地方，如果不是醒目飞鹰坚持的话，不——如果是醒目飞鹰的话确实会这么做。`,
+    );
+    await era.printAndWait(`现在距离登机只有不到3小时。`);
+    era.printButton(`飞鹰子——`, 1);
+    await era.input();
+    await era.printAndWait(`少女带着满足的表情睡着了。`);
+    await era.printAndWait(
+      `能够坚持下来，恐怕是为了与过去做出诀别而拼命做出的举动。`,
+    );
+    await era.printAndWait(
+      `对于神经紧绷的她来说，就这样陷入梦境之海，也是幸福的事情吧。`,
+    );
+    await era.printAndWait(
+      `将她调整到更加舒适的姿势后，你向着机场的方向出发。`,
+    );
+    await era.printAndWait(`东边的天空渐渐泛起了淡淡的橙色。`);
+    await era.printAndWait(`这片草地在不久之后的未来，又会有新的马娘出没吧。`);
+    await falcon.say_and_wait(`这样就好了。`);
+    await era.printAndWait(`醒目飞鹰半梦半醒的咕噜噜附和着。`);
+    await era.printAndWait(
+      `天空渐渐泛白，与醒目飞鹰初次相遇时的天空一摸一样。`,
+    );
+    await era.printAndWait(
+      `或许是因为过于困倦的原因，眼前平坦的道路却像是训练场中的沙地一样。`,
+    );
+    await era.printAndWait(
+      `既然是沙子，就应该睁大眼睛仔细看清前方的道路才对。`,
+    );
+    await era.printAndWait(`冲线，然后面对着观众席挥手。`);
+    await era.printAndWait(`——然后两人的视线碰撞。`);
+    await falcon.say_and_wait(`训练员先生，我喜欢你。`);
+    await era.printAndWait(`在湛蓝的天空之下，两人的道路才刚刚开始。`);
+    era.println();
+    await era.printAndWait(`GOOD END 安可曲。`);
+    era.println();
+    await era.printAndWait(`THANK FOR YOUR WATCHING!`);
   } else if (edu_weeks === 143 + 1 && new FalconEduMarks().idol_road === 1) {
     event_marks.idol_road++;
     await print_event_name(`依然闪耀的偶像`, falcon);
