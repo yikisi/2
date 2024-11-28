@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   203351,
   '勇猛果敢',
-  'レース中盤に中団以降にいると\n持久力を少し使って速度をすごく上げる\n＜マイル＞',
+  '比赛中盘时位于队伍中后方则消耗少许耐力大幅提升速度',
   20335,
   2,
   UmaSkill.rarity_enum.gold,

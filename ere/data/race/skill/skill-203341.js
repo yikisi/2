@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203341,
-  '追跡者',
-  'レース中盤に中団以降にいると\n速度が上がる＜追込・中距離＞',
+  '追踪者',
+  '比赛中盘时位于队伍中后方则提高速度',
   20334,
   2,
   UmaSkill.rarity_enum.gold,

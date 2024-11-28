@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203352,
-  'ハイピッチ',
-  'レース中盤に中団以降にいると\n持久力を少し使って速度を少し上げる\n＜マイル＞',
+  '小步快跑',
+  '比赛中盘时位于队伍中后方则消耗少许耐力小幅提升速度',
   20335,
   1,
   UmaSkill.rarity_enum.normal,

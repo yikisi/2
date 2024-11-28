@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203362,
-  '一歩ずつ前へ',
-  'レース中盤に中団以降にいると\n速度がわずかに上がる',
+  '稳步迈进',
+  '比赛中盘时位于队伍中后方则略微提高速度',
   20336,
   1,
   UmaSkill.rarity_enum.normal,

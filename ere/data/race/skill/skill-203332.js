@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   203332,
   '预先准备',
-  '刚进入比赛中盘时若位于队伍中间及以后则略微提高速度',
+  '比赛中盘时位于队伍中后方则略微提高速度',
   20333,
   1,
   UmaSkill.rarity_enum.normal,

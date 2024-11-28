@@ -2,8 +2,8 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203342,
-  '這い寄る足音',
-  'レース中盤に中団以降にいると\n速度がわずかに上がる＜追込・中距離＞',
+  '悄然接近的足音',
+  '比赛中盘时位于队伍中后方则略微提高速度',
   20334,
   1,
   UmaSkill.rarity_enum.normal,
