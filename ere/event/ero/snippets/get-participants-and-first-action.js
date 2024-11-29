@@ -22,6 +22,8 @@ function get_participants_and_first_action(chara_id, hook, extra_flag) {
     hook.arg = get('tflag:前回行动') !== hook.hook;
   } else if (attacker === get('tflag:前回对手')) {
     hook.arg = get('tflag:对手行动') !== hook.hook;
+  } else {
+    hook.arg = true;
   }
   return { attacker, defender };
 }

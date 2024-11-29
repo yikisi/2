@@ -8,6 +8,11 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const {
+  stimulate_glans_by_hole_1,
+  stimulate_glans_by_hole_2,
+  suspended_congress,
+} = require('#/event/ero/common-lines/ero-snippets');
+const {
   after_refusing_by_attacker,
   after_refusing_by_defender,
   ask_action,
@@ -16,62 +21,59 @@ const {
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
+/**
+ * @param {CharaTalk} attacker
+ * @param {CharaTalk} defender
+ */
+async function continue_fucking_common(attacker, defender) {
+  if (era.get(`tcvar:${defender.id}:接近高潮`)) {
+    await defender.say_and_wait('哦哦哦哦哦哦————❤️');
+    await defender.print_and_wait([
+      defender.get_colored_name(),
+      ' 的身体破廉耻的在 ',
+      sys_get_colored_callname(defender.id, attacker.id),
+      ' 面前痉挛般的激烈扭动着，将湿漉漉身体上挂着的温热晶莹水滴抖的遍地都是。',
+    ]);
+    await defender.print_and_wait(
+      '但本人此刻却完全没有余裕去在意这些繁文缛节，黏糊糊的发丝卷成一绺歪垂在额前，小腹内传出躁动的砰砰跃动声，即使里面没有肉棒或是手指或是坏心眼的舌，在翕动着的小穴也能如藕般拉出绵长银丝，向外呼出热腾腾的蒸汽。',
+    );
+    await defender.say_and_wait('要去了……快要……去了……', true);
+    await defender.say_and_wait('快点……快点……快点去啊❤️', true);
+    await defender.print_and_wait([
+      '先是无力，随后又是不情不愿得再次绷紧，连自己都不知道这具身体为什么要做出这样的动作，被 ',
+      sys_get_colored_callname(defender.id, attacker.id),
+      ' 逼迫玩弄到这种程度的身体大约只受着野性的支使。',
+    ]);
+    await defender.print_and_wait('会怎么样去呢，会什么时候被弄到去呢');
+    await defender.print_and_wait(
+      '一片空白的脑袋在停转又重启之后，变成了只能思考这种事情的废柴大脑。',
+    );
+    await defender.say_and_wait('——❤️');
+    await defender.say_and_wait('……要……要来了吗❤️', true);
+  } else {
+    await defender.say_and_wait('哈……');
+    await defender.print_and_wait(
+      '本以为只是一次普通的呼吸，却从喉咙里挤出来让自己都吓了一跳的妖艳声音……❤️',
+    );
+    await defender.print_and_wait('有在好好享受着啊……身体……');
+    await defender.print_and_wait('害羞……？抵抗……？');
+    await defender.print_and_wait(
+      '那种感情不知道什么时候起就已经随着漏出的呻吟声溜走了，现在……变得诚实的自己想要更多……更多更多❤️',
+    );
+    await defender.print_and_wait([
+      '想更多地紧贴上 ',
+      attacker.get_colored_name(),
+      ' 的身体感受那份温度，想更多的，被 ',
+      sys_get_colored_callname(defender.id, attacker.id),
+      ' 教会更多下流的事情，想让这湿漉漉的发热身体能干脆地被玩弄成没法见人的害羞样子……',
+    ]);
+    await defender.say_and_wait('……哈……因为没办法保证能说服之后的自己……', true);
+    await defender.say_and_wait('……所以，请好好地……抓紧时间❤️', true);
+  }
+}
+
 /** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
-  /**
-   * @param {CharaTalk} attacker
-   * @param {CharaTalk} defender
-   */
-  async function continue_fucking_common(attacker, defender) {
-    if (era.get(`tcvar:${defender.id}:接近高潮`)) {
-      await defender.say_and_wait('哦哦哦哦哦哦————❤️');
-      await defender.print_and_wait([
-        defender.get_colored_name(),
-        ' 的身体破廉耻的在 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 面前痉挛般的激烈扭动着，将湿漉漉身体上挂着的温热晶莹水滴抖的遍地都是。',
-      ]);
-      await defender.print_and_wait(
-        '但本人此刻却完全没有余裕去在意这些繁文缛节，黏糊糊的发丝卷成一绺歪垂在额前，小腹内传出躁动的砰砰跃动声，即使里面没有肉棒或是手指或是坏心眼的舌，在翕动着的小穴也能如藕般拉出绵长银丝，向外呼出热腾腾的蒸汽。',
-      );
-      await defender.say_and_wait('要去了……快要……去了……', true);
-      await defender.say_and_wait('快点……快点……快点去啊❤️', true);
-      await defender.print_and_wait([
-        '先是无力，随后又是不情不愿得再次绷紧，连自己都不知道这具身体为什么要做出这样的动作，被 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 逼迫玩弄到这种程度的身体大约只受着野性的支使。',
-      ]);
-      await defender.print_and_wait('会怎么样去呢，会什么时候被弄到去呢');
-      await defender.print_and_wait(
-        '一片空白的脑袋在停转又重启之后，变成了只能思考这种事情的废柴大脑。',
-      );
-      await defender.say_and_wait('——❤️');
-      await defender.say_and_wait('……要……要来了吗❤️', true);
-    } else {
-      await defender.say_and_wait('哈……');
-      await defender.print_and_wait(
-        '本以为只是一次普通的呼吸，却从喉咙里挤出来让自己都吓了一跳的妖艳声音……❤️',
-      );
-      await defender.print_and_wait('有在好好享受着啊……身体……');
-      await defender.print_and_wait('害羞……？抵抗……？');
-      await defender.print_and_wait(
-        '那种感情不知道什么时候起就已经随着漏出的呻吟声溜走了，现在……变得诚实的自己想要更多……更多更多❤️',
-      );
-      await defender.print_and_wait([
-        '想更多地紧贴上 ',
-        attacker.get_colored_name(),
-        ' 的身体感受那份温度，想更多的，被 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 教会更多下流的事情，想让这湿漉漉的发热身体能干脆地被玩弄成没法见人的害羞样子……',
-      ]);
-      await defender.say_and_wait(
-        '……哈……因为没办法保证能说服之后的自己……',
-        true,
-      );
-      await defender.say_and_wait('……所以，请好好地……抓紧时间❤️', true);
-    }
-  }
-
   handlers[ero_hooks.missionary] = handlers[ero_hooks.missionary_anal_sex] =
     async (attacker, defender, hook) => {
       if (hook.arg) {
@@ -258,30 +260,7 @@ module.exports = (handlers) => {
     ero_hooks.suspended_congress_anal_sex
   ] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await defender.print_and_wait('逃不掉……');
-      await defender.print_and_wait('从进入这个姿势开始，就逃不掉了。');
-      await defender.print_and_wait([
-        '身体被高高抬起，由 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 托着屁股架在肉棒上。',
-      ]);
-      if (hook.hook === ero_hooks.suspended_congress_anal_sex) {
-        await defender.print_and_wait(
-          '羞涩的屁股穴被强硬地做成肉棒套……但还不止这样……',
-        );
-      }
-      await defender.print_and_wait([
-        '从 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 腰侧岔开的双腿只有是否环住腰这一点点自由。而为了不让身体完全落在肉棒上，双手更是只有紧搂着 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 这一个选择。',
-      ]);
-      await defender.print_and_wait([
-        '会沿着 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 的腰向下流吗……绝对……会的吧❤️',
-      ]);
+      await suspended_congress(attacker, defender, hook);
     } else {
       await continue_fucking_common(attacker, defender);
     }
@@ -299,7 +278,7 @@ module.exports = (handlers) => {
     ero_hooks.hug_suspended_congress_anal_sex
   ] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await handlers[ero_hooks.suspended_congress](attacker, defender, hook);
+      await suspended_congress(attacker, defender, hook);
       await defender.print_and_wait([
         '哈……偏偏现在还看不清 ',
         sys_get_colored_callname(defender.id, attacker.id),
@@ -522,40 +501,16 @@ module.exports = (handlers) => {
 
   handlers[ero_hooks.stimulate_glans_by_virgin] = handlers[
     ero_hooks.stimulate_glans_by_anal
-  ] = async (attacker, defender, hook, extra_flag) => {
+  ] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await attacker.print_and_wait('说实话……仅仅只是现在这样感觉就要升天了……');
-      await attacker.print_and_wait(
-        `乱七八糟的……不论是被奸着的${
-          hook.hook === ero_hooks.stimulate_glans_by_virgin ? '小穴' : '屁穴'
-        }现状也好，还是舒服得一塌糊涂的身体也好……`,
-      );
-      if (extra_flag.from_sleeping) {
-        await attacker.print_and_wait([
-          '而且，把 ',
-          attacker.get_colored_name(),
-          ' 弄成这样的，甚至还只是 ',
-          sys_get_colored_callname(attacker.id, defender.id),
-          ' 睡得懵懵懂懂的肉棒吗❤️',
-        ]);
-      } else {
-        await attacker.print_and_wait([
-          '而更加乱七八糟的…是好像还能做些什么的 ',
-          attacker.get_colored_name(),
-          ' 自己……',
-        ]);
-      }
-      await attacker.print_and_wait('哈……不止是高声喊牡蛎，而是深吸气的话……');
+      await stimulate_glans_by_hole_1(attacker, defender, hook);
       await attacker.print_and_wait([
-        '「啾」的一声缩紧了，虽然一秒钟都没能坚持到身体就痉挛着瘫软下去，但那一瞬间，',
+        '而更加乱七八糟的……是好像还能做些什么的 ',
         attacker.get_colored_name(),
-        ` 的${
-          hook.hook === ero_hooks.stimulate_glans_by_virgin ? '小穴' : '屁穴'
-        }深情地吻上了 `,
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 的龟头。',
+        ' 自己……',
       ]);
-      await attacker.print_and_wait('哈……龟头一跳一跳的，应该是很高兴吧……');
+      await attacker.print_and_wait('哈……不止是高声喊牡蛎，而是深吸气的话……');
+      await stimulate_glans_by_hole_2(attacker, defender, hook);
     } else {
       await continue_fucking_common(defender, attacker);
     }

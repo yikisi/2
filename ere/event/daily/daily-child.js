@@ -268,6 +268,7 @@ class DailyChild extends CustomizedDaily {
               chara.get_colored_name(),
               ' 总会骄傲地提到 ',
               get_chara_talk(temp).get_colored_name(),
+              '。',
             ],
             [
               chara.get_colored_name(),

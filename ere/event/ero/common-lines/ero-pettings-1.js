@@ -8,6 +8,13 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const {
+  blow_job,
+  continue_cunnilingus,
+  pet_leg,
+  pet_tail,
+  suck_virgin,
+} = require('#/event/ero/common-lines/ero-snippets');
+const {
   after_refusing_by_defender,
   ask_action,
 } = require('#/event/ero/common-lines/snippets');
@@ -314,34 +321,7 @@ module.exports = (handlers) => {
     if (defender.sex_code === 1) {
       return;
     }
-    if (hook.arg) {
-      if (attacker.id === 0 && era.get(`cflag:${defender.id}:种族`)) {
-        await attacker.print_and_wait(
-          '作为训练员，将面前担当的双腿，用性的意味去观赏与抚摸……',
-        );
-        await attacker.print_and_wait(
-          '只是把现在正在做的事，用克制的语言去描述，叫人身体发凉的背德感就已经随着寒战传遍了全身。',
-        );
-        await attacker.print_and_wait(
-          '明明训练后为了确认状态，偶尔也会有上手抚摸的亲热动作吧……',
-        );
-        await attacker.print_and_wait(
-          '但是很神奇的，现在脑袋里完全没法将这双腿与「比赛」联系在一起',
-        );
-      }
-      await attacker.print_and_wait('现在的自己满脑袋想的都是……');
-      await attacker.print_and_wait('被这双腿交错着缠上腰的话，一定感觉很棒。');
-    } else {
-      await attacker.print_and_wait('柔软而有弹性。');
-      await attacker.print_and_wait('曲线优雅而纤长。');
-      await attacker.print_and_wait(
-        '有着能因为手指的爱抚而发起抖的绝佳敏感度。',
-      );
-      if (era.get(`cflag:${defender.id}:种族`)) {
-        await attacker.print_and_wait('真浪费啊……');
-        await attacker.print_and_wait('这样的双腿只是为了比赛而存在什么的……');
-      }
-    }
+    await pet_leg(attacker, defender, hook);
   };
 
   handlers[ero_hooks.pet_tail] = async (attacker, defender) => {
@@ -371,15 +351,7 @@ module.exports = (handlers) => {
         `在了解了，可以通过拽弄尾巴让面前的${defender.get_uma_sex_title()}变得温顺而听话后，从小腹内顶起的热气变得更加难以阻挡了。`,
       );
     } else {
-      await defender.say_and_wait('唔——');
-      await attacker.print_and_wait(
-        '只是稍稍地多用上一点力，屁股就会抬起来，但这时候松手的话，就会连腰都塌下去……',
-      );
-      await attacker.print_and_wait([
-        `喂喂……真的知道自己正在${attacker.get_phy_sex_title()}的面前表演着怎样的动作吗，可怜的 `,
-        sys_get_colored_callname(attacker.id, defender.id),
-        '？',
-      ]);
+      await pet_tail(attacker, defender);
     }
   };
 
@@ -404,15 +376,7 @@ module.exports = (handlers) => {
         '总不会是因为这粒正被舌舔得更加湿漉漉的小豆豆的关系吧。',
       );
     } else {
-      await attacker.print_and_wait('用舌尖拨弄。');
-      await attacker.print_and_wait('用吮吸使其立起。');
-      await attacker.print_and_wait('轻轻地向它吹气。');
-      await attacker.print_and_wait('稍微有些苦恼啊……');
-      await attacker.print_and_wait([
-        '不论用哪种方式对面前的阴蒂，怎样刺激都能让面前的 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 一致地在欢愉中颤抖的话，不就没办法知道更中意哪一种了嘛。',
-      ]);
+      await continue_cunnilingus(attacker, defender);
     }
   };
 
@@ -473,33 +437,11 @@ module.exports = (handlers) => {
           '总不会是因为这粒正被舌舔得更加湿漉漉的小豆豆的关系吧。',
         );
       } else {
-        await handlers[ero_hooks.cunnilingus](defender, attacker, hook);
+        await continue_cunnilingus(defender, attacker);
       }
     };
 
-  handlers[ero_hooks.suck_virgin] = async (attacker, defender, hook) => {
-    if (hook.arg) {
-      await attacker.print_and_wait(
-        '让人心跳加速的气味……从舌尖融化到全身的酸甜腥味……',
-      );
-      await attacker.print_and_wait(
-        '在如今这以舌舐阴的暧昧连接姿势中，到底是哪一方先来了的呢……',
-      );
-      await attacker.print_and_wait('柔软与柔软间的对抗。');
-      await attacker.print_and_wait(
-        '如吹口哨的唇形般在穴道中被迫卷起向前缓缓前探的舌，与应对着温热的撩拨生涩地蠕动着对抗的穴……',
-      );
-      await attacker.print_and_wait('哪一边都有着不能轻易退缩的理由……');
-    } else {
-      await attacker.print_and_wait('差不多可以做些别的事了。');
-      await attacker.print_and_wait(
-        '已经不太能回忆起一开始是怎样合拢成一条窄缝的清纯形状，被不断迎上来的舌舔得从里到外湿漉漉的穴，如今已向外翻开着地微微颤动……',
-      );
-      await attacker.print_and_wait(
-        '而那双本来紧紧夹在坏孩子腰间的双腿，也不知在哪一番后松解开来，只留下如芭蕾般高高踮起的足尖形状。',
-      );
-    }
-  };
+  handlers[ero_hooks.suck_virgin] = suck_virgin;
 
   handlers[ero_hooks.ask_suck_virgin] = handlers[ero_hooks.force_suck_virgin] =
     async (attacker, defender, hook) => {
@@ -528,7 +470,6 @@ module.exports = (handlers) => {
             '强硬地被压下了头，惊呼着想张开的唇随即迎上了张扬的小穴。',
           );
         }
-        await handlers[ero_hooks.suck_virgin](defender, attacker, hook);
       } else {
         if (is_asking) {
           await defender.print_and_wait(
@@ -543,44 +484,11 @@ module.exports = (handlers) => {
             ` 吐出口畅快的气。`,
           ]);
         }
-        await handlers[ero_hooks.suck_virgin](defender, attacker, hook);
       }
+      await suck_virgin(defender, attacker, hook);
     };
 
-  handlers[ero_hooks.blow_job] = async (attacker, defender, hook) => {
-    if (hook.arg) {
-      await defender.say_and_wait(
-        '眼前的样子，可真是叫人罪恶感油然而生啊……',
-        true,
-      );
-      if (
-        era.get(`cflag:${attacker.id}:种族`) &&
-        era.get(`cflag:${attacker.id}:性别`) - 1
-      ) {
-        await attacker.print_and_wait(
-          '马娘与肉棒，这几乎没存在交集的两个词，此刻却黏糊糊地连接在了一起……',
-        );
-      }
-      await attacker.print_and_wait(
-        `自己的双唇被肉棒强硬地挤开，在理应用来获取养分的位置，被那硬邦邦挺立起的不妙家伙占为己有，正恣意地散发着叫身体变得奇怪的下流气味。`,
-      );
-      await attacker.print_and_wait('蹲俯下的身体，开始颤抖起来了……为什么呢……');
-      await attacker.print_and_wait('这样的事，果然有点奇怪……？');
-    } else {
-      await attacker.say_and_wait('呲溜呲溜～～');
-      await attacker.print_and_wait('不知不觉变得熟练一些了……');
-      await attacker.print_and_wait(
-        '头仰起一些的话，就能把眼前的肉棒含入的更多……',
-      );
-      await attacker.print_and_wait(
-        '用被压扁的舌头从侧面轻轻舔舐的话，就会舒服地颤动起来。',
-      );
-      await attacker.print_and_wait('如果活用起唇瓣的话……吸……');
-      await attacker.print_and_wait(
-        '咳咳……浓厚涌进来的羞人味道会让脑袋变得晕乎乎的……',
-      );
-    }
-  };
+  handlers[ero_hooks.blow_job] = blow_job;
 
   handlers[ero_hooks.ask_blow_job] = handlers[ero_hooks.force_blow_job] =
     async (attacker, defender, hook) => {
@@ -614,7 +522,6 @@ module.exports = (handlers) => {
           );
           await defender.say_and_wait('唔……');
         }
-        await handlers[ero_hooks.blow_job](defender, attacker, hook);
       } else {
         if (is_asking) {
           await defender.print_and_wait('同样的要求一遍又一遍的说也太犯规了……');
@@ -622,7 +529,7 @@ module.exports = (handlers) => {
           await defender.say_and_wait('哈……', true);
           await defender.say_and_wait('还要……继续嘛……', true);
         }
-        await handlers[ero_hooks.blow_job](defender, attacker, hook);
       }
+      await blow_job(defender, attacker, hook);
     };
 };

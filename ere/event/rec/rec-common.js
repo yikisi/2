@@ -22,7 +22,10 @@ class CustomizedRecruit {
     this.id = chara_id;
   }
 
-  /** @returns {Promise<boolean|void>} */
+  /**
+   * @protected
+   * @returns {Promise<boolean|void>}
+   */
   async check_before_rec() {
     const chara = get_chara_talk(this.id);
     if (
@@ -73,6 +76,7 @@ class CustomizedRecruit {
     await this.recruit_result();
   }
 
+  /** @protected */
   async recruit_end() {
     await era.printAndWait([
       { isBr: true },

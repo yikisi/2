@@ -737,7 +737,7 @@ async function page_ero(lover, skip_start_end) {
       filtered_ero_actions.map((e) => {
         const check_val = check_ero_enabled(curr_lover, curr_supporter, e);
         if (isNaN(check_val)) {
-          era.logger.debug(`${Object.keys(ero_hooks)[e]} ${check_val}`);
+          era.logger.debug(`${ero_hooks.keys[e]} ${check_val}`);
         }
         const action_disabled =
           lost_mind > 0 ||

@@ -8,6 +8,12 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const {
+  armpit_intercourse,
+  foot_job,
+  non_penetrative,
+  tail_job,
+} = require('#/event/ero/common-lines/ero-snippets');
+const {
   after_refusing_by_attacker,
   after_refusing_by_defender,
   ask_action,
@@ -18,39 +24,7 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
 module.exports = (handlers) => {
-  handlers[ero_hooks.non_penetrative] = async (attacker, defender, hook) => {
-    if (hook.arg) {
-      await defender.print_and_wait('真的插进去了。');
-      await defender.print_and_wait([
-        '把肉棒……插入 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 合拢的大腿肉之间。',
-      ]);
-      await defender.print_and_wait('很柔软，很温润，很棒，很棒，很棒……');
-      await defender.print_and_wait('微微交错的双腿是在害羞吧……');
-      await defender.print_and_wait(
-        '不只是柔软，作为平时的成果，肉棒正被结实地支撑着。',
-      );
-      await defender.print_and_wait([
-        '像是发情的猴子一样，',
-        defender.get_colored_name(),
-        ' 的肉棒狂热地在 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 的股间前后蹭弄着。',
-      ]);
-    } else {
-      await defender.print_and_wait('变得滑溜溜亮晶晶的。');
-      await defender.print_and_wait('变得有些熟练。');
-      await defender.print_and_wait('变得无法乖乖忍耐。');
-      await defender.print_and_wait('变得……有些寂寞了吗……');
-      await attacker.say_and_wait([
-        sys_get_colored_callname(attacker.id, defender.id),
-        '……',
-      ]);
-      await defender.print_and_wait('眼神也……湿漉漉的……');
-      await defender.print_and_wait('双腿被这么使用果然会变成这样啊。');
-    }
-  };
+  handlers[ero_hooks.non_penetrative] = non_penetrative;
 
   handlers[ero_hooks.ask_non_penetrative] = async (
     attacker,
@@ -84,7 +58,7 @@ module.exports = (handlers) => {
         );
       }
     }
-    await handlers[ero_hooks.non_penetrative](defender, attacker, hook);
+    await non_penetrative(defender, attacker, hook);
   };
 
   handlers[ero_hooks.sixty_nine] = async (attacker, defender, hook) => {
@@ -129,44 +103,7 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[ero_hooks.armpit_intercourse] = async (attacker, defender, hook) => {
-    if (hook.arg) {
-      await defender.print_and_wait('差劲。');
-      await defender.print_and_wait([
-        '能从面前高抬起手的 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 那害羞摇晃着的屁股中读出这样的抱怨。',
-      ]);
-      await defender.print_and_wait('不过这也是没办法的事。');
-      await attacker.say_and_wait('唔——');
-      await defender.print_and_wait([
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 的腋下，正被肉棒硕大的龟头清洗着。',
-      ]);
-      await defender.print_and_wait(
-        '冒着热气的腋肉随着抽插泛出些绯色，似乎真变成了与性相关的色情器官……',
-      );
-      await defender.print_and_wait([
-        '并没能完全将这视为理所应当的事，',
-        defender.get_colored_name(),
-        ' 的动作带着几分犹豫……',
-      ]);
-      await defender.print_and_wait([
-        '……犹豫地用肉棒磨蹭抽插着正背对着自己的 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 的腋下穴……',
-      ]);
-    } else {
-      await attacker.print_and_wait('感觉……变得有些奇怪……');
-      await attacker.print_and_wait('腋下，原来是用来做这种事的器官吗……');
-      await attacker.print_and_wait('而且，原来能体会到这样的触感嘛……');
-      await attacker.print_and_wait([
-        '似乎被肉棒的侵染确实地改变着什么，满面绯红的 ',
-        attacker.get_colored_name(),
-        ' 不安地侍奉着已呲溜呲溜驾轻就熟的肉棒先生。',
-      ]);
-    }
-  };
+  handlers[ero_hooks.armpit_intercourse] = armpit_intercourse;
 
   handlers[ero_hooks.ask_armpit_intercourse] = async (
     attacker,
@@ -195,7 +132,7 @@ module.exports = (handlers) => {
       await attacker.say_and_wait('请让我用肉棒蹭蹭腋下吧！');
       await defender.say_and_wait('……');
     }
-    await handlers[ero_hooks.armpit_intercourse](defender, attacker, hook);
+    await armpit_intercourse(defender, attacker, hook);
   };
 
   handlers[ero_hooks.force_armpit_intercourse] = async (
@@ -211,47 +148,10 @@ module.exports = (handlers) => {
       ]);
       await attacker.print_and_wait('大概不会是什么好话吧……');
     }
-    await handlers[ero_hooks.armpit_intercourse](defender, attacker, hook);
+    await armpit_intercourse(defender, attacker, hook);
   };
 
-  handlers[ero_hooks.foot_job] = async (attacker, defender, hook) => {
-    if (hook.arg) {
-      await defender.print_and_wait('会露出笑容的吧。');
-      await defender.print_and_wait([
-        '当 ',
-        attacker.get_colored_name(),
-        ' 用那双赛场上飞驰的双足踏上眼前的肉棒，发现那根坏家伙正兴奋地反而将足底托起时，肯定会露出笑容的吧。',
-      ]);
-      await defender.print_and_wait(
-        '看见下流东西时厌恶而轻蔑的笑……对性癖奇怪的恋人露出的饶有兴致的包容的笑……天真无邪仅是对此感到有趣而笑……',
-      );
-      await defender.print_and_wait([
-        '面前的 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 属于哪一种呢…总之是能让肉棒更加兴奋起来的那一种吧。',
-      ]);
-    } else {
-      await defender.print_and_wait('大概是察觉到了。');
-      await defender.print_and_wait(
-        '正侵犯着自己足底的这根肉棒不是脆弱的东西。',
-      );
-      await defender.print_and_wait([
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 踩踏肉棒的动作变得自然了许多。',
-      ]);
-      await defender.print_and_wait([
-        '仿佛将 ',
-        defender.get_colored_name(),
-        ' 的肉棒踩在足底是什么与生俱来的天赋般。',
-      ]);
-      await defender.print_and_wait('嘶……');
-      await defender.print_and_wait([
-        '只是单纯地联想，',
-        defender.get_colored_name(),
-        ' 便又感到小腹热起来了。',
-      ]);
-    }
-  };
+  handlers[ero_hooks.foot_job] = foot_job;
 
   handlers[ero_hooks.ask_foot_job] = async (attacker, defender, hook) => {
     if (hook.arg) {
@@ -274,7 +174,7 @@ module.exports = (handlers) => {
       ]);
       await attacker.print_and_wait('原来……暴露的这么明显吗……');
     }
-    await handlers[ero_hooks.foot_job](defender, attacker, hook);
+    await foot_job(defender, attacker, hook);
   };
 
   handlers[ero_hooks.force_foot_job] = async (attacker, defender, hook) => {
@@ -287,45 +187,10 @@ module.exports = (handlers) => {
       );
       await attacker.print_and_wait('啊……看过来了……');
     }
-    await handlers[ero_hooks.foot_job](defender, attacker, hook);
+    await foot_job(defender, attacker, hook);
   };
 
-  handlers[ero_hooks.tail_job] = async (attacker, defender, hook) => {
-    if (hook.arg) {
-      await defender.print_and_wait('灵活……');
-      await defender.print_and_wait([
-        '以提出要求的 ',
-        defender.get_colored_name(),
-        ' 都意料之外的灵敏程度，有着弯曲毛发的马尾巴缠上了肉棒。',
-      ]);
-      await defender.print_and_wait('以这个角度看见的屁股也别有风味。');
-      if (attacker.sex_code !== 1) {
-        await defender.print_and_wait([
-          '隐约能嗅见的，长长的马尾巴不可避免沾染上的女孩子的味道，让 ',
-          defender.get_colored_name(),
-          ' 的肉棒前所未有的兴奋着。',
-        ]);
-      }
-      await attacker.say_and_wait('……');
-      await defender.print_and_wait([
-        '……而大约是感受到了这份暴涨的热度，背过身的 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 连泛红的耳朵的动作都变得可爱起来。',
-      ]);
-    } else {
-      await defender.print_and_wait('动作正变得粗暴……或者说是熟练。');
-      await defender.print_and_wait(
-        '毕竟尾巴在被淫靡的汁液刷得黏糊糊之后，总能从这让毛发亮晶晶的保养品中领会到什么的。',
-      );
-      await defender.print_and_wait('比如这根肉棒喜欢的缠绕的力度。');
-      await defender.print_and_wait('比如这根肉棒被搔到会发颤的位置。');
-      if (attacker.sex_code !== 1) {
-        await defender.print_and_wait(
-          '比如，尾巴下的小穴是否也需要更多……更激烈的……',
-        );
-      }
-    }
-  };
+  handlers[ero_hooks.tail_job] = tail_job;
 
   handlers[ero_hooks.ask_tail_job] = async (attacker, defender, hook) => {
     if (hook.arg) {
@@ -355,7 +220,7 @@ module.exports = (handlers) => {
         '。',
       ]);
     }
-    await handlers[ero_hooks.tail_job](defender, attacker, hook);
+    await tail_job(defender, attacker, hook);
   };
 
   handlers[ero_hooks.force_tail_job] = async (attacker, defender, hook) => {
@@ -369,6 +234,6 @@ module.exports = (handlers) => {
         ' 这次表现得意外的顺从。',
       ]);
     }
-    await handlers[ero_hooks.tail_job](defender, attacker, hook);
+    await tail_job(defender, attacker, hook);
   };
 };

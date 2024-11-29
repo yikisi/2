@@ -312,6 +312,7 @@ class CustomizedLove {
     }
   }
 
+  /** @protected */
   async common_result() {
     if (!era.get('flag:回合爱慕惩罚')) {
       const love = era.get(`love:${this.id}`);

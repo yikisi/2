@@ -7,13 +7,16 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const {
+  hand_and_blow_job,
+  pet_leg,
+  pet_tail,
+} = require('#/event/ero/common-lines/ero-snippets');
+
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} normal_handlers
- */
-module.exports = (handlers, normal_handlers) => {
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
+module.exports = (handlers) => {
   handlers[ero_hooks.pet_ear] = async (attacker, defender, hook) => {
     if (hook.arg) {
       await attacker.print_and_wait('真好啊……');
@@ -275,7 +278,10 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.pet_leg] = async (attacker, defender, hook) => {
-    await normal_handlers[ero_hooks.pet_leg](attacker, defender, hook);
+    if (defender.sex_code === 1) {
+      return;
+    }
+    await pet_leg(attacker, defender, hook);
     if (hook.arg) {
       await attacker.print_and_wait('哈……幸好现在睡着了呢。');
     }
@@ -296,9 +302,7 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.pull_tail] = async (attacker, defender) => {
-    await normal_handlers[ero_hooks.pull_tail](attacker, defender, {
-      arg: false,
-    });
+    await pet_tail(attacker, defender);
     await attacker.print_and_wait('但同时却也微妙的有些失落感。');
     await attacker.print_and_wait('因为……');
     await attacker.say_and_wait(
@@ -444,11 +448,7 @@ module.exports = (handlers, normal_handlers) => {
   };
 
   handlers[ero_hooks.hand_and_blow_job] = async (attacker, defender, hook) => {
-    await normal_handlers[ero_hooks.hand_and_blow_job](
-      attacker,
-      defender,
-      hook,
-    );
+    await hand_and_blow_job(attacker, defender, hook);
     if (hook.arg) {
       await attacker.print_and_wait('完全变成在偷吃什么的色情家伙了……');
     }

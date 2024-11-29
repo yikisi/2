@@ -13,7 +13,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { ero_action_names, ero_hooks } = require('#/data/event/ero-hooks');
 
-/** @type {Record<string,function(chara_id:number,hook:HookArg,extra_flag:*):Promise<*>>} */
+/** @type {Record<string,function(number,HookArg,*):Promise<*>>} */
 const handlers = {};
 
 [

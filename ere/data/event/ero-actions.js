@@ -387,6 +387,8 @@ const ero_actions = {
 };
 Object.keys(ero_actions).forEach((k, i) => (ero_actions[k] = i));
 
+ero_actions.keys = Object.keys(ero_actions);
+
 module.exports = {
   ero_action_tags,
   ero_actions,

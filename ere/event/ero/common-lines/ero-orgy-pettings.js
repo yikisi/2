@@ -25,7 +25,9 @@ module.exports = (handlers) => {
     if (hook.arg) {
       await era.printAndWait([
         attacker.get_colored_name(),
-        ` 叉开腿，${penis_desc[get_penis_size(attacker.id)]} 的肉棒昂然挺立，`,
+        ' 叉开腿，',
+        penis_desc[get_penis_size(attacker.id)],
+        ' 的肉棒昂然挺立，',
         defender.get_colored_name(),
         ' 和 ',
         supporter.get_colored_name(),

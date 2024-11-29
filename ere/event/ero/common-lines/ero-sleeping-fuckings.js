@@ -7,13 +7,15 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const {
+  stimulate_glans_by_hole_1,
+  stimulate_glans_by_hole_2,
+} = require('#/event/ero/common-lines/ero-snippets');
+
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-/**
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers
- * @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} normal_handlers
- */
-module.exports = (handlers, normal_handlers) => {
+/** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*)>} handlers */
+module.exports = (handlers) => {
   handlers[ero_hooks.missionary] = handlers[ero_hooks.missionary_anal_sex] =
     async (attacker, defender, hook) => {
       await attacker.print_and_wait('或许这就是……最能感受彼此体温的姿势了吧。');
@@ -159,12 +161,16 @@ module.exports = (handlers, normal_handlers) => {
     ero_hooks.stimulate_glans_by_anal
   ] = async (attacker, defender, hook) => {
     if (hook.arg) {
-      await normal_handlers[ero_hooks.stimulate_glans_by_virgin](
-        attacker,
-        defender,
-        hook,
-        { from_sleeping: true },
-      );
+      await stimulate_glans_by_hole_1(attacker, defender, hook);
+      await attacker.print_and_wait([
+        '而且，把 ',
+        attacker.get_colored_name(),
+        ' 弄成这样的，甚至还只是 ',
+        sys_get_colored_callname(attacker.id, defender.id),
+        ' 睡得懵懵懂懂的肉棒吗❤️',
+      ]);
+      await attacker.print_and_wait('哈……深吸气的话……');
+      await stimulate_glans_by_hole_2(attacker, defender, hook);
       await attacker.print_and_wait([
         '明明是骑在 ',
         sys_get_colored_callname(attacker.id, defender.id),

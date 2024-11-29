@@ -856,6 +856,47 @@ handlers[ero_hooks.after_betrayed] = async (chara_id) => {
   }
 };
 
+// class CustomizedEro {
+//   /** @param {number} chara_id */
+//   constructor(chara_id) {
+//     this.id = chara_id;
+//   }
+//
+//   /**
+//    * @param {CharaTalk} attacker
+//    * @param {CharaTalk} defender
+//    * @param {HookArg} hook
+//    * @param extra_flag
+//    */
+//   async handle_normal(attacker, defender, hook, extra_flag) {}
+//
+//   /**
+//    * @param {CharaTalk} attacker
+//    * @param {CharaTalk} defender
+//    * @param {HookArg} hook
+//    * @param extra_flag
+//    */
+//   async handle_sleep(attacker, defender, hook, extra_flag) {}
+//
+//   /**
+//    * @param {CharaTalk} attacker
+//    * @param {CharaTalk} defender
+//    * @param {HookArg} hook
+//    * @param extra_flag
+//    */
+//   async handle_rape(attacker, defender, hook, extra_flag) {}
+//
+//   /**
+//    * @param {HookArg} hook
+//    * @param extra_flag
+//    */
+//   async run(hook, extra_flag) {
+//     if (this[ero_hooks.keys[hook.hook]] !== undefined) {
+//       return await this[ero_hooks.keys[hook.hook]].call(this, hook, extra_flag);
+//     }
+//   }
+// }
+
 /**
  * @param {number} chara_id
  * @param {HookArg} hook

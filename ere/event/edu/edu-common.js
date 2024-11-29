@@ -78,6 +78,7 @@ class CustomizedEdu {
   /**
    * @author 雞雞
    *
+   * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    */
@@ -163,6 +164,7 @@ class CustomizedEdu {
   /**
    * @author 雞雞
    *
+   * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    */
@@ -292,6 +294,7 @@ class CustomizedEdu {
   }
 
   /**
+   * @protected
    * @param {CharaTalk} chara
    * @returns {{content:string}}
    */
@@ -304,6 +307,7 @@ class CustomizedEdu {
   }
 
   /**
+   * @protected
    * @param {CharaTalk} chara
    * @returns {{count:{g1:number,g2:number,g3:number},check:number,buffer:*[]}}
    */
@@ -586,6 +590,7 @@ class CustomizedEdu {
   async out_station(chara, me, callname, hook, extra_flag, event_object) {}
 
   /**
+   * @protected
    * @param {number} attr
    * @param {boolean} is_fumble
    */
@@ -937,7 +942,7 @@ class CustomizedEdu {
         if (CustomizedEdu.common_event_count === 0) {
           return;
         }
-        CustomizedEdu.common_event_count = 0;
+        CustomizedEdu.common_event_count--;
         await print_event_name('夏季合宿', chara);
         await era.printAndWait([
           '说到夏天就是泳装与海滩，当然，',
