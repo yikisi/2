@@ -48,13 +48,12 @@ item_actions[item_enum.butt_plug] = '塞上';
 item_actions[item_enum.clamps] = '夹上';
 item_actions[item_enum.dildo] = '插入';
 item_actions[item_enum.gag] = '戴上';
-item_actions[item_enum.love_eggs] = {};
-item_actions[item_enum.love_eggs][part_enum.breast] = item_actions[
-  item_enum.love_eggs
-][part_enum.clitoris] = '贴上';
-item_actions[item_enum.love_eggs][part_enum.virgin] = item_actions[
-  item_enum.love_eggs
-][part_enum.anal] = '塞入';
+item_actions[item_enum.love_eggs] = {
+  [part_enum.anal]: '塞入',
+  [part_enum.breast]: '贴上',
+  [part_enum.clitoris]: '贴上',
+  [part_enum.virgin]: '塞入',
+};
 item_actions[item_enum.milk_pump] = '装上';
 item_actions[item_enum.artificial_virgin] = '套上';
 

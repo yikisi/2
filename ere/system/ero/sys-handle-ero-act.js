@@ -28,12 +28,13 @@ const {
 const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const { print_chara_info } = require('#/page/page-exp');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { print_chara_info } = require('#/page/page-exp');
-
+const EroParticipant = require('#/data/ero/ero-participant');
 const { tequip_parts } = require('#/data/ero/item-const');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { lust_palam_border } = require('#/data/ero/orgasm-const');
@@ -47,6 +48,7 @@ const {
 const { stain_enum } = require('#/data/ero/stain-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
+const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 
 let shown = true;
 
@@ -79,14 +81,18 @@ async function next_turn() {
     for (const e of tequip_parts.slice(0, 6)) {
       if (era.get(`tequip:${chara_id}:${part_touch[e]}`) !== -1) {
         const tmp_part = era.get(`tcvar:${chara_id}:${part_touch[e]}接触部位`);
-        await sys_call_ero_event(chara_id, ero_hooks.use_item, {
-          item: tmp_part.item,
-          shown,
-          owner: tmp_part.owner,
-          part: e,
-          stay: chara_id,
-        });
-        era.println();
+        if (tmp_part.item === undefined) {
+          clean_part(new EroParticipant(chara_id, e));
+        } else {
+          await sys_call_ero_event(chara_id, ero_hooks.use_item, {
+            item: tmp_part.item,
+            shown,
+            owner: tmp_part.owner,
+            part: e,
+            stay: chara_id,
+          });
+          era.println();
+        }
       }
     }
     let body_part;
