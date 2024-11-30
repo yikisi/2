@@ -9,7 +9,6 @@ const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
 const check_new_activities = require('#/system/next-week/check-new-activities');
 const morning_sex = require('#/system/next-week/morning-sex');
 const randomly_interact = require('#/system/next-week/randomly-interact');
-const call_ero_script = require('#/system/script/sys-call-ero-script');
 const {
   sys_change_lust,
   sys_change_motivation,
@@ -30,6 +29,7 @@ const { reset_chara } = require('#/system/sys-init-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
+const { run_custom_ero } = require('#/event/ero/ero-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { remove_special_events } = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
@@ -42,13 +42,13 @@ const CharaAvailableSkills = require('#/data/chara-available-skills');
 const CharaSkills = require('#/data/chara-skills');
 const { buff_colors, money_color } = require('#/data/color-const');
 const { trainer_salary } = require('#/data/const.json');
+const { slavery_enum } = require('#/data/ero/mark-const');
 const {
   baby_limit,
   birth_percent,
   lust_border,
 } = require('#/data/ero/orgasm-const');
 const { part_enum, part_talents } = require('#/data/ero/part-const');
-const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const BasementOwners = require('#/data/event/basement-owners');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
@@ -168,7 +168,7 @@ async function sys_next_week() {
     }
     for (const act of final_act_list) {
       if (act.prison) {
-        await call_ero_script(act.chara_id, ero_hooks.prison);
+        await run_custom_ero(act.chara_id, ero_hooks.prison);
       } else {
         await sys_rape_in_sleeping(act.chara_id, act.supporter);
       }
@@ -627,7 +627,7 @@ async function sys_next_week() {
         );
         life_marks.report = 0;
         const father_id = life_marks.sperm;
-        await call_ero_script(
+        await run_custom_ero(
           chara_id || father_id,
           ero_hooks.report_pregnant_between_weeks,
           {

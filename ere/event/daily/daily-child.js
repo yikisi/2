@@ -258,13 +258,18 @@ class DailyChild extends CustomizedDaily {
             ),
           );
         }
+        const uma_sex_title = era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
         era.print(
           get_random_entry([
             [
               chara.get_colored_name(),
-              ' 在认真地翻阅着赛马娘相关的知识书籍，当问起 ',
+              ' 在认真地翻阅着赛',
+              uma_sex_title,
+              '相关的知识书籍，当问起 ',
               chara.get_colored_name(),
-              ' 最喜欢的赛马娘时，',
+              ' 最喜欢的赛',
+              uma_sex_title,
+              '时，',
               chara.get_colored_name(),
               ' 总会骄傲地提到 ',
               get_chara_talk(temp).get_colored_name(),

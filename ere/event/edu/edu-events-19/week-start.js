@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -609,7 +610,7 @@ module.exports = (handlers) => {
 
   /** @this CustomizedEdu */
   handlers.palace = async function (digital, me) {
-    await this.common_palace(digital, me);
+    await CustomizedEdu.common_palace(digital, me);
     const races = new RaceHistory(19).get();
     if (
       check_aim_race(races, race_enum.hyac_sta, 1, 1) &&
@@ -663,7 +664,7 @@ module.exports = (handlers) => {
         '，现在仍在奔跑中。',
       ]);
     } else {
-      await this.common_palace_relation(digital, me);
+      await CustomizedEdu.common_palace_relation(digital, me);
     }
   };
 };

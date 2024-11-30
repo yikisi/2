@@ -1,7 +1,6 @@
 const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
-const call_ero_script = require('#/system/script/sys-call-ero-script');
 const {
   sys_like_chara,
   sys_punish_unfaithful,
@@ -11,6 +10,7 @@ const { init_chara } = require('#/system/sys-init-chara');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { get_custom_ero } = require('#/event/ero/ero-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
@@ -20,7 +20,6 @@ const get_random_name = require('#/utils/naming');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_filtered_talents } = require('#/data/info-generator');
 const { gene_juel_names } = require('#/data/other-const');
@@ -344,11 +343,13 @@ async function sys_have_baby(mother_id) {
       (await era.waitAnyKey());
   }
 
+  const father = get_chara_talk(father_id),
+    mother = get_chara_talk(mother_id);
   get_custom_check(child_id).check_birth();
   era.print([
-    get_chara_talk(mother_id).get_colored_name(),
+    mother.get_colored_name(),
     ' 生下了一个依稀有着 ',
-    get_chara_talk(father_id).get_colored_name(),
+    father.get_colored_name(),
     ' 外貌的健康的孩子！',
   ]);
   era.set(
@@ -361,11 +362,10 @@ async function sys_have_baby(mother_id) {
     Math.max(era.get(`maxbase:${mother_id}:精力`) - 400, 200),
   );
   era.add(`base:${mother_id}:精力`, 0);
-  await call_ero_script(
-    // 如果是玩家生孩子，调用角色的口上
-    mother_id || father_id,
-    ero_hooks.have_baby,
-    { child_id },
+  await get_custom_ero(mother_id || father_id).have_baby(
+    father,
+    mother,
+    child_id,
   );
   await name_baby(child_id, father_id, mother_id);
 

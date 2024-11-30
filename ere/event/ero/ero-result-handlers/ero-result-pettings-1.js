@@ -702,7 +702,7 @@ module.exports = (handlers) => {
     _,
     extra_flag,
   ) => {
-    print_ero_gif('女上位素股');
+    print_ero_gif('女上位素股', extra_flag.shown);
     sys_do_sex(
       new EroParticipant(defender, part_enum.body, -0.4),
       new EroParticipant(attacker, part_enum.penis, -0.4),
@@ -721,7 +721,7 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.non_penetrative] = (attacker, defender, _, extra_flag) => {
-    print_ero_gif('女上位素股');
+    print_ero_gif('女上位素股', extra_flag.shown);
     sys_do_sex(
       new EroParticipant(attacker, part_enum.body, -0.4),
       new EroParticipant(defender, part_enum.penis, -0.4),

@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_random_entry } = require('#/utils/list-utils');
@@ -67,7 +68,7 @@ async function train_fail_common2(tachyon, me) {
  */
 module.exports = async function (tachyon, me, callname, hook, fumble, train) {
   if (train === attr_enum.intelligence) {
-    await this.print_fail_info_in_train(train, fumble);
+    await CustomizedEdu.common_result(train, fumble);
     return;
   }
   const args = fumble ? fumble_result.fumble : fumble_result.fail,

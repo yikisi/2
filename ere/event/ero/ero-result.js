@@ -98,7 +98,7 @@ handlers[ero_hooks.cum_in_womb] = async (_, __, extra_flag) => {
           last_action === ero_hooks.sitting ||
           last_action === ero_hooks.suspended_congress))
     ) {
-      print_ero_gif('女上位射精');
+      print_ero_gif('女上位射精', extra_flag.shown);
     }
   }
 };

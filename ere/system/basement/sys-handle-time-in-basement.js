@@ -9,7 +9,6 @@ const {
   begin_and_init_ero,
   end_ero_and_show_result,
 } = require('#/system/ero/sys-prepare-ero');
-const sys_call_ero_script = require('#/system/script/sys-call-ero-script');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
@@ -23,6 +22,7 @@ const page_ero = require('#/page/page-ero');
 const basement_queue = require('#/event/basement-queue');
 const { get_custom_basement } = require('#/event/basement/basement-factory');
 const { get_custom_check } = require('#/event/check/check-factory');
+const { run_custom_ero } = require('#/event/ero/ero-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { log_max_wp, minutes_in_a_day } = require('#/utils/value-utils');
@@ -457,7 +457,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               );
               life_marks.b_status = 1 << basement_status_enum.idle;
               life_marks.b_escape = 0;
-              await sys_call_ero_script(action.chara_id, ero_hooks.prison, {
+              await run_custom_ero(action.chara_id, ero_hooks.prison, {
                 shown: false,
               });
               era.add(`exp:${action.chara_id}:监禁次数`, 1);

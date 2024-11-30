@@ -25,14 +25,15 @@ const {
   get_characters_in_train,
   update_juel_buff,
 } = require('#/system/ero/sys-prepare-ero');
-const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+
+const { print_chara_info } = require('#/page/page-exp');
+
+const { run_custom_ero } = require('#/event/ero/ero-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
-
-const { print_chara_info } = require('#/page/page-exp');
 
 const { tequip_parts } = require('#/data/ero/item-const');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
@@ -79,7 +80,7 @@ async function next_turn() {
     for (const e of tequip_parts.slice(0, 6)) {
       if (era.get(`tequip:${chara_id}:${part_touch[e]}`) !== -1) {
         const tmp_part = era.get(`tcvar:${chara_id}:${part_touch[e]}接触部位`);
-        await sys_call_ero_event(chara_id, ero_hooks.use_item, {
+        await run_custom_ero(chara_id, ero_hooks.use_item, {
           item: tmp_part.item,
           shown,
           owner: tmp_part.owner,
@@ -164,7 +165,7 @@ async function sys_handle_ero_act(command, filters, _shown) {
       const to_use_lubricating_fluid = await use_lubricating_fluid(chara);
       if (to_use_lubricating_fluid) {
         to_use_lubricating_fluid.check = check;
-        await sys_call_ero_event(
+        await run_custom_ero(
           cur_lover,
           ero_hooks.use_lubricating_fluid,
           to_use_lubricating_fluid,
@@ -176,7 +177,7 @@ async function sys_handle_ero_act(command, filters, _shown) {
       const to_use_medicine = await use_ero_medicine(chara);
       if (to_use_medicine) {
         to_use_medicine.check = check;
-        await sys_call_ero_event(
+        await run_custom_ero(
           cur_lover,
           ero_hooks.use_medicine,
           to_use_medicine,
@@ -188,20 +189,20 @@ async function sys_handle_ero_act(command, filters, _shown) {
       const to_use_item = await use_ero_item(chara);
       if (to_use_item) {
         to_use_item.check = check;
-        await sys_call_ero_event(cur_lover, ero_hooks.use_item, to_use_item);
+        await run_custom_ero(cur_lover, ero_hooks.use_item, to_use_item);
       } else {
         action_success = false;
       }
     } else if (command === ero_hooks.take_off_item) {
       const used_item = await take_off_ero_item(chara);
       if (used_item) {
-        await sys_call_ero_event(cur_lover, ero_hooks.take_off_item, used_item);
+        await run_custom_ero(cur_lover, ero_hooks.take_off_item, used_item);
       } else {
         action_success = false;
       }
     } else if (command === ero_hooks.ask_use_item) {
       const random_item = use_item_by_character();
-      await sys_call_ero_event(cur_lover, ero_hooks.ask_use_item, {
+      await run_custom_ero(cur_lover, ero_hooks.ask_use_item, {
         item: get_random_entry(random_item.items),
         part: random_item.part,
         attacker: 0,
@@ -211,14 +212,14 @@ async function sys_handle_ero_act(command, filters, _shown) {
       (ero_tagged_hooks[command] || default_tags).condition !==
       condition_type.active
     ) {
-      await sys_call_ero_event(cur_lover, command, {
+      await run_custom_ero(cur_lover, command, {
         attacker: 0,
         check,
         defender: cur_lover,
         shown,
       });
     } else {
-      await sys_call_ero_event(cur_lover, command, {
+      await run_custom_ero(cur_lover, command, {
         check,
         shown,
         supporter,

@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
@@ -16,7 +17,7 @@ const { location_enum } = require('#/data/locations');
 module.exports = (handlers) => {
   /** @this CustomizedEdu */
   handlers.palace = async function (acute, me, callname) {
-    await this.common_palace(acute, me);
+    await CustomizedEdu.common_palace(acute, me);
     if (era.get('cflag:100:殿堂') === 2) {
       era.drawLine();
       const { ending } = new AcuteEduMarks();
@@ -685,7 +686,7 @@ module.exports = (handlers) => {
         await acute.print_and_wait('浩瀚的天穹之下，唯剩下，两者的凛然。');
       }
     } else {
-      await this.common_palace_relation(acute, me);
+      await CustomizedEdu.common_palace_relation(acute, me);
     }
   };
 

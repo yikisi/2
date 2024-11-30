@@ -6,6 +6,8 @@ node generate-basement-factory.js
 node generate-chara-talk-factory.js
 node generate-check-factory.js
 node generate-daily-factory.js
+node generate-edu-factory.js
+node generate-ero-factory.js
 node generate-love-factory.js
 node generate-init-factory.js
 node generate-mec-factory.js

@@ -6,6 +6,7 @@ const {
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -236,7 +237,7 @@ module.exports = async function (vp, me, event_object) {
       );
       break;
     case 143 + 9:
-      await this.common_palace(vp, me);
+      await CustomizedEdu.common_palace(vp, me);
       if (era.get('love:205') >= 50) {
         era.drawLine();
         era.set('flag:当前位置', location_enum.gate);
@@ -456,7 +457,7 @@ module.exports = async function (vp, me, event_object) {
         era.println();
         wait_flag = temp === 2 && sys_love_uma(205, 1);
       } else {
-        await this.common_palace_relation(vp, me);
+        await CustomizedEdu.common_palace_relation(vp, me);
       }
   }
   wait_flag && (await era.waitAnyKey());

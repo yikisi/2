@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const Edu17UntilRaceStart = require('#/event/edu/edu-events-17/race-start');
 const {
   handle_debuff,
@@ -46,8 +47,8 @@ module.exports = class extends Edu17UntilRaceStart {
         );
       } else if (edu_weeks === 143 + 9 && !era.get('cflag:17:可再次育成')) {
         const chara = luna === 17 ? luna_talk : emperor_talk;
-        await this.common_palace(chara, me);
-        await this.common_palace_relation(chara, me);
+        await CustomizedEdu.common_palace(chara, me);
+        await CustomizedEdu.common_palace_relation(chara, me);
         era.println();
         await chara.say_and_wait(
           event_marks.good_end === 2

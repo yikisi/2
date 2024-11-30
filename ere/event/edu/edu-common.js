@@ -46,44 +46,14 @@ const { attr_enum, fumble_result } = require('#/data/train-const');
 class CustomizedEdu {
   static common_event_count = 0;
 
-  /** @param {number} chara_id */
-  constructor(chara_id) {
-    this.id = chara_id;
-  }
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async back_school(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async celebration(chara, me, callname, hook, extra_flag, event_object) {}
-
   /**
    * @author 雞雞
    *
-   * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    */
-  async common_palace(chara, me) {
-    const { check, count, buffer } = this.get_palace_info(chara),
+  static async common_palace(chara, me) {
+    const { check, count, buffer } = CustomizedEdu.get_palace_info(chara),
       titles = new CharaTitles(chara.id).get();
     if (
       check >= 6 ||
@@ -164,11 +134,10 @@ class CustomizedEdu {
   /**
    * @author 雞雞
    *
-   * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    */
-  async common_palace_relation(chara, me) {
+  static async common_palace_relation(chara, me) {
     const love = era.get(`love:${chara.id}`);
     if (love >= 50 || era.get(`relation:${chara.id}:0`) > 0) {
       era.drawLine();
@@ -220,6 +189,129 @@ class CustomizedEdu {
       }
     }
   }
+
+  /**
+   * @param {CharaTalk} chara
+   * @returns {{content:string}}
+   */
+  static get_chara_name(chara) {
+    const name = chara.get_colored_name();
+    if (chara.id === 0) {
+      name.content = '自己';
+    }
+    return name;
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @returns {{count:{g1:number,g2:number,g3:number},check:number,buffer:*[]}}
+   */
+  static get_palace_info(chara) {
+    const races = new RaceHistory(chara.id).get_entries(),
+      main_races = [],
+      ret_buffer = [];
+    let total_prize = 0,
+      champions = 0,
+      check = 0,
+      g1_count = 0,
+      g2_count = 0,
+      g3_count = 0;
+    races
+      .sort(
+        (a, b) =>
+          race_infos[a.race].race_class - race_infos[b.race].race_class ||
+          b.weeks - a.weeks,
+      )
+      .forEach((e) => {
+        const info = race_infos[e.race];
+        if (e.rank === 1) {
+          champions++;
+          e.race !== race_enum.begin_race && main_races.push(e.race);
+          check += info.race_class === RaceInfo.class_enum.G1;
+        }
+        if (e.rank <= 5) {
+          g1_count += (info.race_class === RaceInfo.class_enum.G1) / e.rank;
+          g2_count += (info.race_class === RaceInfo.class_enum.G2) / e.rank;
+          g3_count += (info.race_class === RaceInfo.class_enum.G3) / e.rank;
+          total_prize += info.prize * RaceInfo.prize_ratios[e.rank - 1];
+        }
+      });
+    ret_buffer.push([
+      chara.get_colored_name(),
+      '，生涯 ',
+      {
+        content: races.length.toLocaleString(),
+        color: buff_colors[1],
+        fontWeight: 'bold',
+      },
+      ' 战 ',
+      {
+        content: champions,
+        color: champions ? buff_colors[1] : '',
+        fontWeight: 'bold',
+      },
+      ' 胜，总赏金达到 ',
+      { color: money_color, content: Math.floor(total_prize).toLocaleString() },
+      ' 马币',
+    ]);
+    if (main_races.length) {
+      ret_buffer.push([
+        '主胜鞍：',
+        ...main_races.slice(0, 5).map((e, i) => {
+          const ret = race_infos[e].get_colored_name_with_class();
+          i > 0 && (ret.content = ' ' + ret.content);
+          return ret;
+        }),
+        main_races.length > 5 ? '……' : '',
+      ]);
+    }
+    return {
+      buffer: ret_buffer,
+      check,
+      count: {
+        g1: g1_count,
+        g2: g2_count,
+        g3: g3_count,
+      },
+    };
+  }
+
+  /**
+   * @param {number} attr
+   * @param {boolean} is_fumble
+   */
+  static async print_fail_info_in_train(attr, is_fumble) {
+    await print_fail_info_in_train(attr, is_fumble);
+  }
+
+  /** @param {number} chara_id */
+  constructor(chara_id) {
+    this.id = chara_id;
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   * @returns {Promise}
+   */
+  // eslint-disable-next-line no-unused-vars
+  async back_school(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   * @returns {Promise}
+   */
+  // eslint-disable-next-line no-unused-vars
+  async celebration(chara, me, callname, hook, extra_flag, event_object) {}
 
   /** @author 雞雞 */
   async crazy_fan_end() {
@@ -294,94 +386,6 @@ class CustomizedEdu {
   }
 
   /**
-   * @protected
-   * @param {CharaTalk} chara
-   * @returns {{content:string}}
-   */
-  get_chara_name(chara) {
-    const name = chara.get_colored_name();
-    if (chara.id === 0) {
-      name.content = '自己';
-    }
-    return name;
-  }
-
-  /**
-   * @protected
-   * @param {CharaTalk} chara
-   * @returns {{count:{g1:number,g2:number,g3:number},check:number,buffer:*[]}}
-   */
-  get_palace_info(chara) {
-    const races = new RaceHistory(chara.id).get_entries(),
-      main_races = [],
-      ret_buffer = [];
-    let total_prize = 0,
-      champions = 0,
-      check = 0,
-      g1_count = 0,
-      g2_count = 0,
-      g3_count = 0;
-    races
-      .sort(
-        (a, b) =>
-          race_infos[a.race].race_class - race_infos[b.race].race_class ||
-          b.weeks - a.weeks,
-      )
-      .forEach((e) => {
-        const info = race_infos[e.race];
-        if (e.rank === 1) {
-          champions++;
-          e.race !== race_enum.begin_race && main_races.push(e.race);
-          check += info.race_class === RaceInfo.class_enum.G1;
-        }
-        if (e.rank <= 5) {
-          g1_count += (info.race_class === RaceInfo.class_enum.G1) / e.rank;
-          g2_count += (info.race_class === RaceInfo.class_enum.G2) / e.rank;
-          g3_count += (info.race_class === RaceInfo.class_enum.G3) / e.rank;
-          total_prize += info.prize * RaceInfo.prize_ratios[e.rank - 1];
-        }
-      });
-    ret_buffer.push([
-      chara.get_colored_name(),
-      '，生涯 ',
-      {
-        content: races.length.toLocaleString(),
-        color: buff_colors[1],
-        fontWeight: 'bold',
-      },
-      ' 战 ',
-      {
-        content: champions,
-        color: champions ? buff_colors[1] : '',
-        fontWeight: 'bold',
-      },
-      ' 胜，总赏金达到 ',
-      { color: money_color, content: Math.floor(total_prize).toLocaleString() },
-      ' 马币',
-    ]);
-    if (main_races.length) {
-      ret_buffer.push([
-        '主胜鞍：',
-        ...main_races.slice(0, 5).map((e, i) => {
-          const ret = race_infos[e].get_colored_name_with_class();
-          i > 0 && (ret.content = ' ' + ret.content);
-          return ret;
-        }),
-        main_races.length > 5 ? '……' : '',
-      ]);
-    }
-    return {
-      buffer: ret_buffer,
-      check,
-      count: {
-        g1: g1_count,
-        g2: g2_count,
-        g3: g3_count,
-      },
-    };
-  }
-
-  /**
    * @author 雞雞
    *
    * @param {CharaTalk} chara
@@ -390,7 +394,7 @@ class CustomizedEdu {
    */
   // eslint-disable-next-line no-unused-vars
   async foreign_rest(chara, me, callname) {
-    const chara_name = this.get_chara_name(chara);
+    const chara_name = CustomizedEdu.get_chara_name(chara);
     await era.printAndWait([
       '为了恢复状态，',
       me.get_colored_name(),
@@ -414,7 +418,7 @@ class CustomizedEdu {
    * @param {{lan:string}} extra_flag
    */
   async foreign_study(chara, me, callname, hook, extra_flag) {
-    const chara_name = this.get_chara_name(chara);
+    const chara_name = CustomizedEdu.get_chara_name(chara);
     await era.printAndWait([
       '为了能进行基本的外语交流，',
       me.get_colored_name(),
@@ -443,7 +447,7 @@ class CustomizedEdu {
    */
   // eslint-disable-next-line no-unused-vars
   async foreign_train(chara, me, callname) {
-    const chara_name = this.get_chara_name(chara);
+    const chara_name = CustomizedEdu.get_chara_name(chara);
     await era.printAndWait([
       '为了习惯当地赛场，',
       me.get_colored_name(),
@@ -590,15 +594,6 @@ class CustomizedEdu {
   async out_station(chara, me, callname, hook, extra_flag, event_object) {}
 
   /**
-   * @protected
-   * @param {number} attr
-   * @param {boolean} is_fumble
-   */
-  async print_fail_info_in_train(attr, is_fumble) {
-    await print_fail_info_in_train(attr, is_fumble);
-  }
-
-  /**
    * @author 雞雞
    *
    * @param {CharaTalk} chara
@@ -742,7 +737,10 @@ class CustomizedEdu {
    * @param {TrainFailParams} extra_flag
    */
   async train_fail(chara, me, callname, hook, extra_flag) {
-    await this.print_fail_info_in_train(extra_flag.train, extra_flag.fumble);
+    await CustomizedEdu.print_fail_info_in_train(
+      extra_flag.train,
+      extra_flag.fumble,
+    );
     const chara_talk = get_chara_talk(this.id);
     era.println();
     extra_flag.args = extra_flag.fumble
@@ -956,8 +954,8 @@ class CustomizedEdu {
         if (era.get(`cflag:${this.id}:可再次育成`)) {
           return;
         }
-        await this.common_palace(chara, me);
-        await this.common_palace_relation(chara, me);
+        await CustomizedEdu.common_palace(chara, me);
+        await CustomizedEdu.common_palace_relation(chara, me);
     }
   }
 

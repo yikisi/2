@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -19,7 +20,7 @@ module.exports = (handlers) => {
     love,
     edu_marks,
   ) {
-    await this.common_palace(tachyon, me);
+    await CustomizedEdu.common_palace(tachyon, me);
     if (era.get('item:用途不明的眼镜')) {
       era.drawLine();
       const coffee = get_chara_talk(25);
@@ -734,7 +735,7 @@ module.exports = (handlers) => {
         era.set('flag:当前位置', location_enum.office);
       }
     } else {
-      await this.common_palace_relation(tachyon, me);
+      await CustomizedEdu.common_palace_relation(tachyon, me);
     }
   };
 };

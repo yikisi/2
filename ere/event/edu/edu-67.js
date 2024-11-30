@@ -9,6 +9,7 @@ const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const Edu67UntilSchoolAtrium = require('#/event/edu/edu-events-67/school-atrium');
 const daiya_week_end = require('#/event/edu/edu-events-67/week-end');
 const { add_event } = require('#/event/queue');
@@ -637,7 +638,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
     extra_flag['args'] = extra_flag.fumble
       ? fumble_result.fumble
       : fumble_result.fail;
-    await this.print_fail_info_in_train(extra_flag.train, extra_flag.fumble);
+    await CustomizedEdu.common_result(extra_flag.train, extra_flag.fumble);
     if (extra_flag.train !== attr_enum.intelligence) {
       if (extra_flag.fumble) {
         await print_event_name('严禁逞强！', daiya);

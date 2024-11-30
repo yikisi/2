@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const Edu3UntilWeekEnd = require('#/event/edu/edu-events-3/week-end');
 const { add_event, cb_enum } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -461,8 +462,8 @@ module.exports = class extends Edu3UntilWeekEnd {
         sys_change_money(300);
       }
     } else if (event_arg === 143 + 9 && !era.get('cflag:3:可再次育成')) {
-      await this.common_palace(teio, me);
-      await this.common_palace_relation(teio, me);
+      await CustomizedEdu.common_palace(teio, me);
+      await CustomizedEdu.common_palace_relation(teio, me);
       era.println();
       await teio.say_and_wait(
         event_marks.give_up

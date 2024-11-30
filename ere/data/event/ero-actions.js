@@ -366,8 +366,6 @@ const ero_actions = {
   lost_mind: 0,
   // 获取刻印
   get_mark: 0,
-  // 早安
-  good_morning: 0,
   // 监禁
   prison: 0,
   // 内射

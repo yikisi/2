@@ -22,7 +22,7 @@ const {
   adaptability_colors,
   celebration_color,
 } = require('#/data/color-const');
-const { slavery_enum } = require('#/data/ero/sex-mark-const');
+const { slavery_enum } = require('#/data/ero/mark-const');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const YandereList = require('#/data/event/yandere-list');

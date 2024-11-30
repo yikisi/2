@@ -51,7 +51,7 @@ module.exports = async () => {
           await era.printAndWait([
             '最近 ',
             tachyon.get_colored_name(),
-            ' 的实验越来越多，也越来越复杂及麻烦',
+            ' 的实验越来越多，也越来越复杂及麻烦。',
           ]);
           await era.printAndWait([
             '虽说危险度没那么高，但加上训练员的本职工作后忙碌程度甚至让 ',

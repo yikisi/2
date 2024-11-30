@@ -18,7 +18,7 @@ const { attr_enum } = require('#/data/train-const');
 module.exports = (handlers) => {
   handlers[ero_hooks.missionary] = (attacker, defender, hook, extra_flag) => {
     if (hook.arg) {
-      print_ero_gif('正常位插入');
+      print_ero_gif('正常位插入', extra_flag.shown);
     }
     sys_do_sex(
       new EroParticipant(attacker, part_enum.penis),
@@ -40,7 +40,7 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.sitting] = (attacker, defender, hook, extra_flag) => {
-    print_ero_gif(hook.arg ? '女上位插入' : '女上位重复');
+    print_ero_gif(hook.arg ? '女上位插入' : '女上位重复', extra_flag.shown);
     sys_do_sex(
       new EroParticipant(attacker, part_enum.penis),
       new EroParticipant(defender, part_enum.virgin),
@@ -87,7 +87,7 @@ module.exports = (handlers) => {
     hook,
     extra_flag,
   ) => {
-    print_ero_gif(hook.arg ? '女上位插入' : '女上位重复');
+    print_ero_gif(hook.arg ? '女上位插入' : '女上位重复', extra_flag.shown);
     sys_do_sex(
       new EroParticipant(attacker, part_enum.penis, 0.2),
       new EroParticipant(defender, part_enum.virgin, 0.8),
@@ -132,7 +132,7 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.ask_cowgirl] = (attacker, defender, hook, extra_flag) => {
-    print_ero_gif(hook.arg ? '女上位插入' : '女上位重复');
+    print_ero_gif(hook.arg ? '女上位插入' : '女上位重复', extra_flag.shown);
     sys_do_sex(
       new EroParticipant(defender, part_enum.virgin),
       new EroParticipant(attacker, part_enum.penis),
@@ -148,7 +148,7 @@ module.exports = (handlers) => {
     _,
     extra_flag,
   ) => {
-    print_ero_gif('女上位重复');
+    print_ero_gif('女上位重复', extra_flag.shown);
     sys_do_sex(
       new EroParticipant(defender, part_enum.virgin, 0.2),
       new EroParticipant(attacker, part_enum.penis, 0.5),
@@ -229,7 +229,7 @@ module.exports = (handlers) => {
 
   handlers[ero_hooks.ask_fuck] = (attacker, defender, hook, extra_flag) => {
     if (hook.arg) {
-      print_ero_gif('正常位插入');
+      print_ero_gif('正常位插入', extra_flag.shown);
     }
     sys_do_sex(
       new EroParticipant(defender, part_enum.penis),
@@ -242,7 +242,7 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.cowgirl] = (attacker, defender, hook, extra_flag) => {
-    print_ero_gif(hook.arg ? '女上位插入' : '女上位重复');
+    print_ero_gif(hook.arg ? '女上位插入' : '女上位重复', extra_flag.shown);
     sys_do_sex(
       new EroParticipant(attacker, part_enum.virgin),
       new EroParticipant(defender, part_enum.penis),
@@ -259,7 +259,7 @@ module.exports = (handlers) => {
     _,
     extra_flag,
   ) => {
-    print_ero_gif('女上位重复');
+    print_ero_gif('女上位重复', extra_flag.shown);
     sys_do_sex(
       new EroParticipant(attacker, part_enum.virgin, 0.2),
       new EroParticipant(defender, part_enum.penis, 0.5),

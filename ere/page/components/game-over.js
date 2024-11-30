@@ -16,7 +16,7 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const { slavery_enum } = require('#/data/ero/sex-mark-const');
+const { slavery_enum } = require('#/data/ero/mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const BasementOwners = require('#/data/event/basement-owners');
 const CrazyFans = require('#/data/event/crazy-fans');
