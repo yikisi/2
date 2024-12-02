@@ -15,10 +15,6 @@ module.exports = async () => {
   const callname = sys_get_callname(56, 0),
     kitaru = get_chara_talk(56),
     me = get_chara_talk(0);
-
-  if (!era.get('flag:强制BE')) {
-    throw new Error();
-  }
   await me.say_and_wait('又输了？');
   await era.printAndWait([
     '已经不记得是第几次安慰失败后的 ',

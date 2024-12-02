@@ -9,8 +9,9 @@ const {
   get_sex_acceptable,
 } = require('#/system/ero/sys-calc-ero-status');
 const { get_characters_in_train } = require('#/system/ero/sys-prepare-ero');
-const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+
+const { get_custom_ero, run_custom_ero } = require('#/event/ero/ero-factory');
 
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
@@ -97,7 +98,7 @@ async function sys_auto_rape(shown) {
       !era.get(`tcvar:${e}:失神`),
   );
   if (check_satisfied(master)) {
-    await sys_call_ero_event(master, ero_hooks.switch, {
+    await run_custom_ero(master, ero_hooks.switch, {
       attacker: master,
       defender: 0,
       shown,
@@ -126,7 +127,7 @@ async function sys_auto_rape(shown) {
       })
       .filter((e) => e.item !== -1);
     if (tequip_list.length) {
-      await sys_call_ero_event(
+      await run_custom_ero(
         master,
         ero_hooks.take_off_item,
         get_random_entry(tequip_list),
@@ -136,7 +137,7 @@ async function sys_auto_rape(shown) {
     }
   }
   if (check_want_to_escape(master)) {
-    await sys_call_ero_event(master, ero_hooks.relax, {
+    await run_custom_ero(master, ero_hooks.relax, {
       attacker: master,
       defender: 0,
       shown,
@@ -157,7 +158,7 @@ async function sys_auto_rape(shown) {
     !era.get('status:0:马跳S') &&
     era.get(`status:${master}:爱意克制`)
   ) {
-    await sys_call_ero_event(master, ero_hooks.use_medicine, {
+    await run_custom_ero(master, ero_hooks.use_medicine, {
       item: medicine_enum.uma_s,
       user: 0,
       shown,
@@ -167,7 +168,7 @@ async function sys_auto_rape(shown) {
   if ((temp = era.get('flag:惩戒力度')) >= 2) {
     let ret_flag = false;
     if (!get_penis_size(master)) {
-      await sys_call_ero_event(master, ero_hooks.use_medicine, {
+      await run_custom_ero(master, ero_hooks.use_medicine, {
         item:
           temp === 3
             ? medicine_enum.fron_p
@@ -179,7 +180,7 @@ async function sys_auto_rape(shown) {
     }
     if (cur_supporter && !get_penis_size(cur_supporter)) {
       ret_flag && shown && era.println();
-      await sys_call_ero_event(cur_supporter, ero_hooks.use_medicine, {
+      await run_custom_ero(cur_supporter, ero_hooks.use_medicine, {
         item:
           temp === 3
             ? medicine_enum.fron_p
@@ -361,7 +362,7 @@ async function sys_auto_rape(shown) {
       ? (e) => e >= ero_hooks.double_fuck && e <= ero_hooks.spit_roast_anal_sex
       : (e) => e >= ero_hooks.missionary && e <= ero_hooks.stimulate_womb;
   } else {
-    second_filter = await sys_call_ero_event(master, ero_hooks.filter_in_rape);
+    second_filter = await get_custom_ero(master).filter_in_rape();
   }
   if (Object.keys(poison_list.master).length) {
     filters.push((e) => {
@@ -454,7 +455,7 @@ async function sys_auto_rape(shown) {
             !era.get(`status:${master}:长效避孕药`) &&
             !era.get(`status:${master}:短效避孕药`)
           ) {
-            await sys_call_ero_event(master, ero_hooks.use_medicine, {
+            await run_custom_ero(master, ero_hooks.use_medicine, {
               item: medicine_enum.anti_p_s,
               user: master,
               shown,
@@ -470,7 +471,7 @@ async function sys_auto_rape(shown) {
         case 0b00011: // 经期x恋人x性保守
         case 0b01000: // 非经期x炮友x普通
           if (!era.get('tcvar:0:避孕套')) {
-            await sys_call_ero_event(master, ero_hooks.other_condom, {
+            await run_custom_ero(master, ero_hooks.other_condom, {
               shown,
             });
             era.set('tflag:前回行动', ero_hooks.other_condom);
@@ -483,7 +484,7 @@ async function sys_auto_rape(shown) {
             era.get(`status:${master}:排卵期`) &&
             !era.get('tcvar:0:避孕套')
           ) {
-            await sys_call_ero_event(master, ero_hooks.other_condom, {
+            await run_custom_ero(master, ero_hooks.other_condom, {
               shown,
             });
             era.set('tflag:前回行动', ero_hooks.other_condom);
@@ -497,7 +498,7 @@ async function sys_auto_rape(shown) {
             !era.get(`status:${master}:长效避孕药`) &&
             !era.get(`status:${master}:短效避孕药`)
           ) {
-            await sys_call_ero_event(master, ero_hooks.use_medicine, {
+            await run_custom_ero(master, ero_hooks.use_medicine, {
               item: medicine_enum.anti_p_s,
               user: master,
               shown,
@@ -529,7 +530,7 @@ async function sys_auto_rape(shown) {
         (love >= 75 && love < 90 && !era.get('status:0:经期'))) &&
       !era.get(`tcvar:${master}:避孕套`)
     ) {
-      await sys_call_ero_event(master, ero_hooks.condom, {
+      await run_custom_ero(master, ero_hooks.condom, {
         shown,
       });
       era.set('tflag:前回行动', ero_hooks.condom);
@@ -539,7 +540,7 @@ async function sys_auto_rape(shown) {
   }
   if (action === ero_hooks.use_item) {
     const random_item = use_item_by_character();
-    await sys_call_ero_event(master, ero_hooks.use_item, {
+    await run_custom_ero(master, ero_hooks.use_item, {
       item: get_random_entry(random_item.items),
       part: random_item.part,
       shown,
@@ -548,13 +549,13 @@ async function sys_auto_rape(shown) {
     (ero_tagged_hooks[action] || default_tags).condition !==
     condition_type.active
   ) {
-    await sys_call_ero_event(master, action, {
+    await run_custom_ero(master, action, {
       attacker: master,
       defender: 0,
       shown,
     });
   } else {
-    await sys_call_ero_event(master, action, {
+    await run_custom_ero(master, action, {
       supporter: cur_supporter,
       shown,
     });

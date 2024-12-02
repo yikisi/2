@@ -7,7 +7,6 @@ const get_status = require('#/system/chara/sys-get-status');
 const sys_check_titles_after_race = require('#/system/race/sys-check-titles-after-race');
 const sys_parse_for_race = require('#/system/race/sys-parse-race-uma');
 const sys_prepare_race = require('#/system/race/sys-prepare-race');
-const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
@@ -28,6 +27,7 @@ const preview_race = require('#/page/race/preview-race');
 const select_contestants = require('#/page/race/select-contestants');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { run_custom_edu } = require('#/event/edu/edu-factory');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
@@ -233,7 +233,7 @@ async function race_page(race) {
       start_count = 0;
     } else {
       era.drawLine();
-      await sys_call_edu_event(
+      await run_custom_edu(
         ret,
         event_hooks.race_start,
         new RaceStartParams(race),
@@ -382,7 +382,7 @@ async function race_page(race) {
       end_count = 0;
     } else {
       era.drawLine();
-      await sys_call_edu_event(
+      await run_custom_edu(
         ret,
         event_hooks.race_end,
         new RaceEndParams(

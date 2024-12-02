@@ -40,7 +40,10 @@ const page_visitors = require('#/page/page-visitors');
 
 const { common_no_action_check } = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
-const { run_custom_daily } = require('#/event/daily/daily-factory');
+const {
+  get_custom_daily,
+  run_custom_daily,
+} = require('#/event/daily/daily-factory');
 const GameGuides = require('#/event/game-guides');
 const { shop_end, shop_start } = require('#/event/shop/tachyon-shop');
 
@@ -655,7 +658,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 203:
       era.drawLine();
-      await run_custom_daily(chara_id, event_hooks.talk);
+      await get_custom_daily(chara_id).talk();
       break;
     case 204:
       era.drawLine();
@@ -693,7 +696,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       break;
     case 209:
       era.drawLine();
-      await run_custom_daily(chara_id, event_hooks.borrow_money);
+      await get_custom_daily(chara_id).borrow_money();
       break;
     case 210:
       sys_change_attr_and_print(0, '精力', -celebration_cost);

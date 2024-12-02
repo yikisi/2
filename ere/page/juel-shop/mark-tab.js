@@ -6,7 +6,6 @@ const {
   begin_and_init_ero,
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
-const call_ero_script = require('#/system/script/sys-call-ero-script');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
@@ -17,11 +16,12 @@ const {
   print_price_and_confirm,
 } = require('#/page/juel-shop/snippets');
 
+const { get_custom_ero } = require('#/event/ero/ero-factory');
+
 const get_color = require('#/utils/gradient-color');
 
 const { mark_colors } = require('#/data/const.json');
-const { ero_hooks } = require('#/data/event/ero-hooks');
-const GetMarkParams = require('#/data/event/extra-flag/get-mark-params');
+const { mark_enum } = require('#/data/ero/mark-const');
 
 /**
  * @param {number} chara_id
@@ -305,11 +305,7 @@ module.exports = async (
           sex_level = era.add(`mark:${chara_id}:淫纹`, 1);
           total_delta.sex_delta = (total_delta.sex_delta || 0) + 1;
         }
-        await call_ero_script(
-          chara_id,
-          ero_hooks.get_mark,
-          new GetMarkParams(sex_level, '淫纹', true),
-        );
+        await get_custom_ero(chara_id).get_mark(sex_level, mark_enum.ero, true);
         era.add(`juel:${chara_id}:顺从`, -sex_mark_price);
         sys_change_fame(-100 * sex_level);
       }

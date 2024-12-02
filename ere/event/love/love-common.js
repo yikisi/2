@@ -312,6 +312,7 @@ class CustomizedLove {
     }
   }
 
+  /** @protected */
   async common_result() {
     if (!era.get('flag:回合爱慕惩罚')) {
       const love = era.get(`love:${this.id}`);
@@ -338,15 +339,17 @@ class CustomizedLove {
     if (event_object.arg instanceof Array) {
       handler = this[event_object.arg[0]];
     }
-    return await handler.call(
-      this,
-      get_chara_talk(this.id),
-      get_chara_talk(0),
-      sys_get_callname(this.id, 0),
-      stage,
-      extra_flag,
-      event_object,
-    );
+    if (handler !== undefined) {
+      return await handler.call(
+        this,
+        get_chara_talk(this.id),
+        get_chara_talk(0),
+        sys_get_callname(this.id, 0),
+        stage,
+        extra_flag,
+        event_object,
+      );
+    }
   }
 }
 

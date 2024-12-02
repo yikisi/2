@@ -1,20 +1,14 @@
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 /**
- * @param _
- * @param __
+ * @param {CharaTalk} kitaru
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {EventObject} event_object
  */
-module.exports = async (_, __, event_object) => {
-  const callname = sys_get_callname(56, 0),
-    kitaru = get_chara_talk(56),
-    me = get_chara_talk(0);
+module.exports = async (kitaru, me, callname, event_object) => {
   if (event_object?.arg !== 143 + 1) {
     return;
   }

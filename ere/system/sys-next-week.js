@@ -9,7 +9,6 @@ const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
 const check_new_activities = require('#/system/next-week/check-new-activities');
 const morning_sex = require('#/system/next-week/morning-sex');
 const randomly_interact = require('#/system/next-week/randomly-interact');
-const call_ero_script = require('#/system/script/sys-call-ero-script');
 const {
   sys_change_lust,
   sys_change_motivation,
@@ -29,7 +28,8 @@ const sys_handle_palace = require('#/system/sys-handle-palace');
 const { reset_chara } = require('#/system/sys-init-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const { run_custom_daily } = require('#/event/daily/daily-factory');
+const { get_custom_daily } = require('#/event/daily/daily-factory');
+const { run_custom_ero } = require('#/event/ero/ero-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { remove_special_events } = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
@@ -42,18 +42,17 @@ const CharaAvailableSkills = require('#/data/chara-available-skills');
 const CharaSkills = require('#/data/chara-skills');
 const { buff_colors, money_color } = require('#/data/color-const');
 const { trainer_salary } = require('#/data/const.json');
+const { slavery_enum } = require('#/data/ero/mark-const');
 const {
   baby_limit,
   birth_percent,
   lust_border,
 } = require('#/data/ero/orgasm-const');
 const { part_enum, part_talents } = require('#/data/ero/part-const');
-const { slavery_enum } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const BasementOwners = require('#/data/event/basement-owners');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const event_hooks = require('#/data/event/event-hooks');
 const GrandLives = require('#/data/event/grand-lives');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -169,7 +168,7 @@ async function sys_next_week() {
     }
     for (const act of final_act_list) {
       if (act.prison) {
-        await call_ero_script(act.chara_id, ero_hooks.prison);
+        await run_custom_ero(act.chara_id, ero_hooks.prison);
       } else {
         await sys_rape_in_sleeping(act.chara_id, act.supporter);
       }
@@ -587,13 +586,9 @@ async function sys_next_week() {
           if (era.get(`talent:${chara_id}:乳头类型`) !== 2) {
             era.set(`talent:${chara_id}:乳头类型`, get_random_value(0, 1));
           }
-          await run_custom_daily(chara_id, event_hooks.growth, {
-            stage: 0,
-          });
+          await get_custom_daily(chara_id).growth(0);
         } else if (growth_stage === 2) {
-          await run_custom_daily(chara_id, event_hooks.growth, {
-            stage: 1,
-          });
+          await get_custom_daily(chara_id).growth(1);
         }
       }
     }
@@ -603,7 +598,7 @@ async function sys_next_week() {
       era.get(`cflag:${chara_id}:育成回合计时`) === 'x'
     ) {
       reset_chara(chara_id);
-      await run_custom_daily(chara_id, event_hooks.growth, { stage: 2 });
+      await get_custom_daily(chara_id).growth(2);
     }
 
     const is_pregnant_slave =
@@ -635,7 +630,7 @@ async function sys_next_week() {
         );
         life_marks.report = 0;
         const father_id = life_marks.sperm;
-        await call_ero_script(
+        await run_custom_ero(
           chara_id || father_id,
           ero_hooks.report_pregnant_between_weeks,
           {

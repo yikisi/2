@@ -366,8 +366,6 @@ const ero_actions = {
   lost_mind: 0,
   // 获取刻印
   get_mark: 0,
-  // 早安
-  good_morning: 0,
   // 监禁
   prison: 0,
   // 内射
@@ -386,6 +384,8 @@ const ero_actions = {
   after_betrayed: 0,
 };
 Object.keys(ero_actions).forEach((k, i) => (ero_actions[k] = i));
+
+ero_actions.keys = Object.keys(ero_actions);
 
 module.exports = {
   ero_action_tags,

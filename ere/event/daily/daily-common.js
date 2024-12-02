@@ -32,6 +32,7 @@ const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors, money_color } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
@@ -44,6 +45,7 @@ class CustomizedDaily {
     this.id = chara_id;
   }
 
+  /** @author 雞雞 */
   async basement_end() {
     const chara = get_chara_talk(this.id),
       me = get_chara_talk(0);
@@ -190,6 +192,8 @@ class CustomizedDaily {
     return await common_celebration.call(this);
   }
 
+  async end_talk() {}
+
   /** @author 雞雞 */
   good_morning() {
     const buffer = [
@@ -291,12 +295,9 @@ class CustomizedDaily {
     }
   }
 
-  /**
-   * @param {HookArg} hook
-   * @param {{stage:number}} extra_flag
-   */
+  /** @param {0|1|2} stage */
   // eslint-disable-next-line no-unused-vars
-  async growth(hook, extra_flag) {}
+  async growth(stage) {}
 
   async load_talk() {}
 
@@ -398,7 +399,6 @@ class CustomizedDaily {
    * @param {{[jpy]:number}} extra_flag
    * @returns {Promise}
    */
-  // eslint-disable-next-line no-unused-vars
   async out_river(hook, extra_flag) {
     const chara = get_chara_talk(this.id),
       me = get_chara_talk(0);
@@ -524,6 +524,7 @@ class CustomizedDaily {
         chara.get_colored_name(),
         ' 一起来到河边钓鱼，希望能钓到大丰收。',
       ]);
+      extra_flag.jpy = get_random_value(0, 5);
     }
   }
 
@@ -864,12 +865,14 @@ class CustomizedDaily {
    * @param {EventObject} event_object
    */
   async run(hook, extra_flag, event_object) {
-    return await this[event_hooks.keys[hook.hook]].call(
-      this,
-      hook,
-      extra_flag,
-      event_object,
-    );
+    if (this[event_hooks.keys[hook.hook]] !== undefined) {
+      return await this[event_hooks.keys[hook.hook]].call(
+        this,
+        hook,
+        extra_flag,
+        event_object,
+      );
+    }
   }
 }
 

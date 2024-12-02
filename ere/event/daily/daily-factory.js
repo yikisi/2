@@ -50,7 +50,25 @@ console.log(
   'ms',
 );
 
+/**
+ * @param {number} chara_id
+ * @returns {CustomizedDaily}
+ */
+function get_custom_daily(chara_id) {
+  if (!obj_dict[chara_id]) {
+    const { n: script_name, c: cons } =
+      chara_id >= first_child_id
+        ? { n: get(`callname:${chara_id}:-2`), c: DailyChild }
+        : { n: chara_id, c: CustomizedDaily };
+    obj_dict[chara_id] = new (cons_dict[
+      script_dict[script_name] || script_name
+    ] || cons)(chara_id);
+  }
+  return obj_dict[chara_id];
+}
+
 module.exports = {
+  get_custom_daily,
   /**
    * @param {number} chara_id
    * @param {number} stage
@@ -58,18 +76,9 @@ module.exports = {
    * @param {EventObject} [event_object]
    */
   async run_custom_daily(chara_id, stage, extra_flag, event_object) {
-    if (!obj_dict[chara_id]) {
-      const { n: script_name, c: cons } =
-        chara_id >= first_child_id
-          ? { n: get(`callname:${chara_id}:-2`), c: DailyChild }
-          : { n: chara_id, c: CustomizedDaily };
-      obj_dict[chara_id] = new (cons_dict[
-        script_dict[script_name] || script_name
-      ] || cons)(chara_id);
-    }
     const hook = new HookArg(stage),
       _extra = extra_flag || {};
-    let ret = await obj_dict[chara_id].run(hook, _extra, event_object);
+    let ret = await get_custom_daily(chara_id).run(hook, _extra, event_object);
     if (!hook.override) {
       ret = (await daily_result(chara_id, hook, _extra)) || ret;
     }

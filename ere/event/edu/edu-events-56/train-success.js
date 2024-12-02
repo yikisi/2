@@ -2,16 +2,13 @@ const era = require('#/era-electron');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const FukuEventMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
 
 /**
- * @param _
+ * @param {CharaTalk} kitaru
  * @param {TrainSuccessParams} extra_flag
  */
-module.exports = async (_, extra_flag) => {
-  const kitaru = get_chara_talk(56);
+module.exports = async (kitaru, extra_flag) => {
   const edu_marks = new FukuEventMarks();
 
   era.print([kitaru.get_colored_name(), ' 的训练顺利结束了！']);

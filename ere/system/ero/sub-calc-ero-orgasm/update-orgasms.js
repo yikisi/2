@@ -7,7 +7,6 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { set_stain } = require('#/system/ero/sys-calc-stain');
-const call_ero_script = require('#/system/script/sys-call-ero-script');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
@@ -29,6 +28,9 @@ const {
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+
+/** @type {function(number,number,*?):Promise} */
+let run_custom_ero;
 
 let ex_list = undefined;
 
@@ -194,7 +196,7 @@ async function update_orgasms(shown, ...ids) {
     if (check_erect(chara_id) && !era.get(`tcvar:${chara_id}:避孕套`)) {
       set_stain(chara_id, part_enum.penis, stain_enum.semen);
     }
-    await call_ero_script(chara_id, ero_hooks.orgasm, { shown });
+    await run_custom_ero(chara_id, ero_hooks.orgasm, { shown });
     if (era.get(`nowex:${chara_id}:TotalEX`) > 0) {
       if (shown !== false) {
         await common_orgasm(chara_id);
@@ -202,33 +204,33 @@ async function update_orgasms(shown, ...ids) {
       era.set(`tcvar:${chara_id}:刚刚高潮`, true);
     }
     era.get(`nowex:${chara_id}:失贞标记`) &&
-      (await call_ero_script(chara_id, ero_hooks.lose_virginity, {
+      (await run_custom_ero(chara_id, ero_hooks.lose_virginity, {
         shown,
       }));
     era.get(`nowex:${chara_id}:破处标记`) &&
-      (await call_ero_script(chara_id, ero_hooks.lose_virginity, {
+      (await run_custom_ero(chara_id, ero_hooks.lose_virginity, {
         shown,
         virgin: true,
       }));
     if (era.get(`nowex:${chara_id}:阴道撕裂`)) {
-      await call_ero_script(chara_id, ero_hooks.wound, {
+      await run_custom_ero(chara_id, ero_hooks.wound, {
         part: part_enum.virgin,
         shown,
       });
     } else if (era.get(`ex:${chara_id}:阴道撕裂`)) {
-      await call_ero_script(chara_id, ero_hooks.wound, {
+      await run_custom_ero(chara_id, ero_hooks.wound, {
         continue: true,
         part: part_enum.virgin,
         shown,
       });
     }
     if (era.get(`nowex:${chara_id}:肛门撕裂`)) {
-      await call_ero_script(chara_id, ero_hooks.wound, {
+      await run_custom_ero(chara_id, ero_hooks.wound, {
         part: part_enum.anal,
         shown,
       });
     } else if (era.get(`ex:${chara_id}:肛门撕裂`)) {
-      await call_ero_script(chara_id, ero_hooks.wound, {
+      await run_custom_ero(chara_id, ero_hooks.wound, {
         continue: true,
         part: part_enum.anal,
         shown,
@@ -243,42 +245,42 @@ async function update_orgasms(shown, ...ids) {
           era.get(`ex:${chara_id}:肛门撕裂`)),
     );
     if (era.get(`nowex:${chara_id}:勃起`)) {
-      await call_ero_script(chara_id, ero_hooks.become_erect, {
+      await run_custom_ero(chara_id, ero_hooks.become_erect, {
         shown,
         part: part_enum.penis,
       });
     }
     era.get(`nowex:${chara_id}:乳突`) &&
-      (await call_ero_script(chara_id, ero_hooks.become_erect, {
+      (await run_custom_ero(chara_id, ero_hooks.become_erect, {
         shown,
         part: part_enum.breast,
       }));
     if (era.get(`nowex:${chara_id}:喷奶量`)) {
-      await call_ero_script(chara_id, ero_hooks.become_lubrication, {
+      await run_custom_ero(chara_id, ero_hooks.become_lubrication, {
         shown,
         part: part_enum.breast,
       });
       era.set(`ex:${chara_id}:喷奶阻碍`, 0);
     }
     era.get(`nowex:${chara_id}:阴道润滑`) &&
-      (await call_ero_script(chara_id, ero_hooks.become_lubrication, {
+      (await run_custom_ero(chara_id, ero_hooks.become_lubrication, {
         shown,
         part: part_enum.virgin,
       }));
     era.get(`nowex:${chara_id}:肛门润滑`) &&
-      (await call_ero_script(chara_id, ero_hooks.become_lubrication, {
+      (await run_custom_ero(chara_id, ero_hooks.become_lubrication, {
         shown,
         part: part_enum.anal,
       }));
     era.get(`nowex:${chara_id}:脱力`) &&
-      (await call_ero_script(chara_id, ero_hooks.zero_stamina, { shown }));
+      (await run_custom_ero(chara_id, ero_hooks.zero_stamina, { shown }));
     if (lost_mind) {
       // 失神时间与根性相关，最少1回合
       era.set(
         `tcvar:${chara_id}:失神`,
         Math.ceil((max_absent_mind_time - 1) * (1 - wp_ratio)) + 1,
       );
-      await call_ero_script(chara_id, ero_hooks.lost_mind, { shown });
+      await run_custom_ero(chara_id, ero_hooks.lost_mind, { shown });
     } else if (lost_mind_timer) {
       // 失神状态每回合衰减
       era.add(`tcvar:${chara_id}:失神`, -1);
@@ -378,5 +380,6 @@ async function update_orgasms(shown, ...ids) {
     });
   }
 }
+update_orgasms.init = (_handler) => (run_custom_ero = _handler);
 
 module.exports = update_orgasms;

@@ -303,6 +303,10 @@ module.exports = {
     !era.get(`base:${chara_id}:体力`) && era.set(`status:${chara_id}:沉睡`, 1);
   },
   sys_get_callname: get_callname,
+  /**
+   * @param {number} _from
+   * @param {number} _to
+   */
   sys_get_colored_callname(_from, _to) {
     return {
       color: get_chara_talk(_to < 0 ? _from : _to).color,

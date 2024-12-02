@@ -12,6 +12,7 @@ const {
 } = require('#/system/sys-calc-base-cflag');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -21,7 +22,7 @@ const {
   adaptability_colors,
   celebration_color,
 } = require('#/data/color-const');
-const { slavery_enum } = require('#/data/ero/sex-mark-const');
+const { slavery_enum } = require('#/data/ero/mark-const');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const YandereList = require('#/data/event/yandere-list');
@@ -302,6 +303,7 @@ async function check_new_activities(cur_round, in_team_list) {
     }
   }
   if (event_weeks === 29 - 1) {
+    CustomizedEdu.common_event_count = 1;
     // 夏合宿
     const beach_group = in_team_list.filter((id) => {
       const edu_weeks = era.get(`cflag:${id}:育成回合计时`);

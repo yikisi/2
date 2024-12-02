@@ -23,7 +23,6 @@ function flip_params(p1, p2) {
 /** @param {LunaEduMarks} event_marks */
 function transform(event_marks) {
   event_marks.emperor = 1 - event_marks.emperor;
-
   flip_params('cflag:17:干劲', 'cflag:9017:干劲');
   flip_params('status:17:自毁', 'status:9017:自毁');
   flip_params('status:17:迷恋', 'status:9017:迷恋');

@@ -33,7 +33,6 @@ const {
   rollback_penis_stain,
   set_stain,
 } = require('#/system/ero/sys-calc-stain');
-const call_ero_script = require('#/system/script/sys-call-ero-script');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
@@ -66,6 +65,11 @@ const { breast_size, pregnant_stage_enum } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
+
+/** @type {function(number):CustomizedEro} */
+let get_custom_ero;
+/** @type {function(number,number,*?):Promise} */
+let run_custom_ero;
 
 /**
  * @param {boolean} shown
@@ -197,13 +201,8 @@ async function sys_calc_orgasm(shown, ...ids) {
                     0.5 * era.get(`talent:${chara_id}:早泄`);
               }
               if (stop_success !== undefined) {
-                const ret = await call_ero_script(
-                  chara_id,
-                  ero_hooks.orgasm_denial,
-                  {
-                    stop_success,
-                  },
-                );
+                const ret =
+                  await get_custom_ero(chara_id).orgasm_denial(stop_success);
                 // 选择射或者没忍住就直接射了
                 cum_flag = !ret || !stop_success;
                 if (!cum_flag) {
@@ -574,7 +573,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                     ]);
                   }
                 }
-                await call_ero_script(
+                await run_custom_ero(
                   other_id || chara_id,
                   ero_hooks.cum_in_womb,
                   { father_id: chara_id, mother_id: other_id, shown },
@@ -605,7 +604,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                     sys_check_awake(chara_id) - sys_check_awake(other_id);
                   era.set(`status:${other_id}:排卵期`, 0);
                   era.set(`status:${other_id}:经期`, 0);
-                  await call_ero_script(
+                  await run_custom_ero(
                     other_id || chara_id,
                     ero_hooks.be_pregnant,
                     { father_id: chara_id, mother_id: other_id, shown },
@@ -756,5 +755,10 @@ async function sys_calc_orgasm(shown, ...ids) {
   shown && era.println();
   await update_orgasms(shown, ...ids);
 }
+
+sys_calc_orgasm.init = (...handlers) => {
+  get_custom_ero = handlers[0];
+  run_custom_ero = handlers[1];
+};
 
 module.exports = sys_calc_orgasm;

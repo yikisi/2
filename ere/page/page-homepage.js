@@ -6,7 +6,6 @@ const {
   end_ero_and_show_result,
   init_ero,
 } = require('#/system/ero/sys-prepare-ero');
-const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
   sys_change_status_by_base,
   sys_like_chara,
@@ -29,6 +28,7 @@ const basement_queue = require('#/event/basement-queue');
 const { common_no_action_check } = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { run_custom_daily } = require('#/event/daily/daily-factory');
+const { get_custom_edu } = require('#/event/edu/edu-factory');
 const GameGuides = require('#/event/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 
@@ -312,7 +312,7 @@ module.exports = async () => {
       if (force_be) {
         await era.clear();
         era.drawLine();
-        await sys_call_edu_event(force_be, event_hooks.crazy_fan_end);
+        await get_custom_edu(force_be).crazy_fan_end();
         era.print('GAME OVER', {
           align: 'center',
           color: buff_colors[3],

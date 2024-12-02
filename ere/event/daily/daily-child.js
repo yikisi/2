@@ -49,7 +49,7 @@ class DailyChild extends CustomizedDaily {
     }
   }
 
-  async growth(_, extra_flag) {
+  async growth(stage) {
     const child = get_chara_talk(this.id),
       father = get_chara_talk(era.get(`cflag:${this.id}:父方角色`)),
       mother = get_chara_talk(era.get(`cflag:${this.id}:母方角色`)),
@@ -57,7 +57,7 @@ class DailyChild extends CustomizedDaily {
       stockholm = era.get(`mark:${mother.id || father.id}:同心`),
       is_pregnant_slave = !mother.id && era.get('flag:惩戒力度') === 3;
     era.drawLine();
-    if (extra_flag.stage === 0) {
+    if (stage === 0) {
       // 育儿
       await print_event_name('成长', child);
       if (love >= 90) {
@@ -144,7 +144,7 @@ class DailyChild extends CustomizedDaily {
           }
         }
       }
-    } else if (extra_flag.stage === 1) {
+    } else if (stage === 1) {
       // 本格化
       await print_event_name('本格化', child);
       new LifeEventMarks(this.id).unexpected_child = 0;
@@ -179,7 +179,7 @@ class DailyChild extends CustomizedDaily {
           ]);
         }
       }
-    } else if (extra_flag.stage === 2) {
+    } else if (stage === 2) {
       // 入学
       await print_event_name('入学', child);
       if (love >= 90) {
@@ -258,16 +258,22 @@ class DailyChild extends CustomizedDaily {
             ),
           );
         }
+        const uma_sex_title = era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
         era.print(
           get_random_entry([
             [
               chara.get_colored_name(),
-              ' 在认真地翻阅着赛马娘相关的知识书籍，当问起 ',
+              ' 在认真地翻阅着赛',
+              uma_sex_title,
+              '相关的知识书籍，当问起 ',
               chara.get_colored_name(),
-              ' 最喜欢的赛马娘时，',
+              ' 最喜欢的赛',
+              uma_sex_title,
+              '时，',
               chara.get_colored_name(),
               ' 总会骄傲地提到 ',
               get_chara_talk(temp).get_colored_name(),
+              '。',
             ],
             [
               chara.get_colored_name(),
@@ -303,66 +309,65 @@ class DailyChild extends CustomizedDaily {
     const chara = get_chara_talk(this.id),
       father_id = era.get(`cflag:${this.id}:父方角色`),
       growth = era.get(`cflag:${this.id}:成长阶段`);
-    if (sys_check_awake(this.id)) {
-      if (growth === 0) {
-        await chara.say_and_wait([
-          {
-            color: get_chara_color(0),
-            content: father_id === 0 ? '叭叭' : '麻麻',
-            fontWeight: 'bold',
-          },
-          '……！我是 ',
-          chara.get_colored_name(),
-          ' 哦！',
-        ]);
-      } else if (growth === 1) {
-        await chara.say_and_wait([
-          sys_get_colored_callname(this.id, 0),
-          '！我饿了！',
-        ]);
-      } else if (growth === 2) {
-        const temp = [];
-        if (era.get(`talent:${this.id}:腋毛成长`)) {
-          temp.push('腋下长出毛了……');
-        }
-        if (era.get(`talent:${this.id}:阴毛成长`)) {
-          temp.push('下面长出毛了……');
-        }
-        if (chara.sex_code !== 1) {
-          temp.push('胸部变大了……');
-          if (era.get(`talent:${this.id}:泌乳`)) {
-            temp.push('流出白白的东西了……');
-          }
-        }
-        if (chara.sex_code > 0) {
-          temp.push('下面变大了……');
-        }
-        await chara.say_and_wait([
-          sys_get_colored_callname(this.id, 0),
-          '我的身体感觉有点不对劲……那个，',
-          get_random_entry(temp),
-        ]);
-      } else if (
-        era.get(`status:${this.id}:发情`) &&
-        (father_id === 0 || era.get(`cflag:${this.id}:母方角色`) === 0)
-      ) {
-        chara.say([
-          '哈啊……哈啊……',
-          sys_get_colored_callname(this.id, 0),
-          '……我好热啊……这就是发情期……？',
-        ]);
-        await era.printAndWait([
-          '之后，',
-          get_chara_talk(0).get_colored_name(),
-          ' 连忙去给 ',
-          chara.get_colored_name(),
-          ' 买来发情抑制剂。',
-        ]);
-      } else {
-        return await super.talk();
-      }
-    } else {
+    if (!sys_check_awake(this.id)) {
       return await super.talk();
+    }
+    if (growth === 0) {
+      await chara.say_and_wait([
+        {
+          color: get_chara_color(0),
+          content: father_id === 0 ? '叭叭' : '麻麻',
+          fontWeight: 'bold',
+        },
+        '……！我是 ',
+        chara.get_colored_name(),
+        ' 哦！',
+      ]);
+    } else if (growth === 1) {
+      await chara.say_and_wait([
+        sys_get_colored_callname(this.id, 0),
+        '！我饿了！',
+      ]);
+    } else if (growth === 2) {
+      const temp = [];
+      if (era.get(`talent:${this.id}:腋毛成长`)) {
+        temp.push('腋下长出毛了……');
+      }
+      if (era.get(`talent:${this.id}:阴毛成长`)) {
+        temp.push('下面长出毛了……');
+      }
+      if (chara.sex_code !== 1) {
+        temp.push('胸部变大了……');
+        if (era.get(`talent:${this.id}:泌乳`)) {
+          temp.push('流出白白的东西了……');
+        }
+      }
+      if (chara.sex_code > 0) {
+        temp.push('下面变大了……');
+      }
+      await chara.say_and_wait([
+        sys_get_colored_callname(this.id, 0),
+        '我的身体感觉有点不对劲……那个，',
+        get_random_entry(temp),
+      ]);
+    } else if (
+      era.get(`status:${this.id}:发情`) &&
+      (father_id === 0 || era.get(`cflag:${this.id}:母方角色`) === 0)
+    ) {
+      chara.say([
+        '哈啊……哈啊……',
+        sys_get_colored_callname(this.id, 0),
+        '……我好热啊……这就是发情期……？',
+      ]);
+      await era.printAndWait([
+        '之后，',
+        get_chara_talk(0).get_colored_name(),
+        ' 连忙去给 ',
+        chara.get_colored_name(),
+        ' 买来发情抑制剂。',
+      ]);
+    } else {
+      await super.talk();
     }
   }
 }
