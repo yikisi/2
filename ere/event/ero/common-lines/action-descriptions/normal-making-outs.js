@@ -166,7 +166,7 @@ module.exports = (handlers) => {
       return era.printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' 强行将小豆豆压在 ',
+        ' 将小豆豆压在 ',
         defender.get_colored_name(),
         ' 的脸上……】',
       ]);
@@ -223,7 +223,7 @@ module.exports = (handlers) => {
       return era.printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' 强行将小穴压在 ',
+        ' 将小穴压在 ',
         defender.get_colored_name(),
         ' 的嘴唇上……】',
       ]);
@@ -280,7 +280,7 @@ module.exports = (handlers) => {
       return era.printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' 强行将肉棒插入 ',
+        ' 将肉棒插入 ',
         defender.get_colored_name(),
         ' 的嘴唇……】',
       ]);
@@ -288,7 +288,7 @@ module.exports = (handlers) => {
     return era.printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 强行用肉棒搅弄 ',
+      ' 用肉棒搅弄 ',
       defender.get_colored_name(),
       ' 的唇舌……】',
     ]);
@@ -299,7 +299,7 @@ module.exports = (handlers) => {
       return era.printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' 强行将肉棒插入 ',
+        ' 将肉棒插入 ',
         defender.get_colored_name(),
         ' 的喉咙深处……】',
       ]);
@@ -307,7 +307,7 @@ module.exports = (handlers) => {
     return era.printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 强行在 ',
+      ' 在 ',
       defender.get_colored_name(),
       ' 喉咙深处搅弄着……】',
     ]);
@@ -394,7 +394,7 @@ module.exports = (handlers) => {
       return era.printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' 强行将肉棒伸到 ',
+        ' 将肉棒伸到 ',
         defender.get_colored_name(),
         ' 手中……】',
       ]);
@@ -402,7 +402,7 @@ module.exports = (handlers) => {
     return era.printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 强行用肉棒蹭着 ',
+      ' 用肉棒蹭着 ',
       defender.get_colored_name(),
       ' 的双手……】',
     ]);
@@ -413,7 +413,7 @@ module.exports = (handlers) => {
       return era.printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' 强行将肉棒挤开 ',
+        ' 将肉棒挤开 ',
         defender.get_colored_name(),
         ' 的双手插入口中……】',
       ]);
@@ -506,11 +506,11 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.fuck_tit] = (attacker, defender, hook) => {
-    if (hook.arg) {
+    if (hook.arg && defender.sex_code !== 1) {
       return era.printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' 强行将 ',
+        ' 将 ',
         defender.get_colored_name(),
         ' 的乳房聚拢，夹住了肉棒……】',
       ]);
@@ -518,7 +518,7 @@ module.exports = (handlers) => {
     return era.printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 强行用肉棒摩擦着 ',
+      ' 用肉棒摩擦着 ',
       defender.get_colored_name(),
       ' 的胸部……】',
     ]);
@@ -529,7 +529,7 @@ module.exports = (handlers) => {
       return era.printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' 强行将肉棒穿过 ',
+        ' 将肉棒穿过 ',
         defender.get_colored_name(),
         ' 的双乳插入嘴唇中……】',
       ]);
@@ -537,7 +537,7 @@ module.exports = (handlers) => {
     return era.printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 强行用肉棒摩擦着 ',
+      ' 用肉棒摩擦着 ',
       defender.get_colored_name(),
       ' 的双乳，并搅弄着 ',
       defender.get_colored_name(),
@@ -745,7 +745,7 @@ module.exports = (handlers) => {
       return era.printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' 强行用 ',
+        ' 用 ',
         defender.get_colored_name(),
         ' 的头发缠住肉棒……】',
       ]);
@@ -753,7 +753,7 @@ module.exports = (handlers) => {
     return era.printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 强行用肉棒摩擦 ',
+      ' 用肉棒摩擦 ',
       defender.get_colored_name(),
       ' 的头发……】',
     ]);
@@ -830,7 +830,7 @@ module.exports = (handlers) => {
     era.printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 强行拉过 ',
+      ' 拉过 ',
       defender.get_colored_name(),
       ' 的双足抚弄肉棒……】',
     ]);
@@ -867,7 +867,7 @@ module.exports = (handlers) => {
     era.printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 强行拉过 ',
+      ' 拉过 ',
       defender.get_colored_name(),
       ' 的尾巴缠弄着肉棒……】',
     ]);

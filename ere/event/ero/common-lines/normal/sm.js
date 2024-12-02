@@ -34,7 +34,7 @@ class EroNormalSm extends EroSm {
   // eslint-disable-next-line no-unused-vars
   async insult(attacker, defender, hook) {
     const talk_arr = [];
-    if (era.get('tflag:强奸') === attacker.id) {
+    if (era.get('tflag:强奸') === defender.id) {
       talk_arr.push('人渣！强奸犯！去死吧！');
     }
     if (era.get(`talent:${attacker.id}:小恶魔`)) {

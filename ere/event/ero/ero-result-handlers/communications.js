@@ -21,6 +21,7 @@ const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { part_enum, part_touch } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 /** @param {Record<string,function(number,number,HookArg,{check:number})>} handlers */
 module.exports = (handlers) => {
@@ -75,7 +76,14 @@ module.exports = (handlers) => {
 
   handlers[ero_hooks.talk] = (attacker, defender) => {
     era.add(`nowex:${attacker}:精力消耗`, 10);
-    add_juel(defender, '顺从', base_emotion_juel / 4);
+    if (attacker === 0 && sys_check_awake(defender)) {
+      if (era.get('tflag:强奸') !== attacker) {
+        sys_like_chara(defender, 0, 2);
+      } else {
+        add_juel(defender, '恐惧', base_emotion_juel / 5);
+      }
+    }
+    add_juel(defender, '顺从', base_emotion_juel / 5);
   };
 
   handlers[ero_hooks.switch] = (_, defender) => {

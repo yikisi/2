@@ -75,28 +75,29 @@ console.log(
   'ms',
 );
 
-/** @type {Record<string,function(CharaTalk,CharaTalk,HookArg,*):Promise>} */
-const handlers = {};
-/** @type {Record<string,function(CharaTalk,CharaTalk,HookArg,*):Promise>} */
-const sleeping_handlers = {};
+/** @type {Record<string,Record<string,function(CharaTalk,CharaTalk,HookArg,*):Promise>>} */
+const describers = { c: {}, r: {}, s: {} };
 
 current = new Date().getTime();
 
 [
-  require('#/event/ero/common-lines/action-descriptions/desc-communications'),
-  require('#/event/ero/common-lines/action-descriptions/desc-pettings'),
-  require('#/event/ero/common-lines/action-descriptions/desc-fuckings'),
-  require('#/event/ero/common-lines/action-descriptions/desc-orgy-fuckings'),
-  require('#/event/ero/common-lines/action-descriptions/desc-orgy-pettings'),
-  require('#/event/ero/common-lines/action-descriptions/desc-sm'),
-  require('#/event/ero/common-lines/action-descriptions/desc-items'),
-].forEach((f) => f(handlers));
+  require('#/event/ero/common-lines/action-descriptions/normal-communications'),
+  require('#/event/ero/common-lines/action-descriptions/normal-making-outs'),
+  require('#/event/ero/common-lines/action-descriptions/normal-fucking'),
+  require('#/event/ero/common-lines/action-descriptions/normal-orgy'),
+  require('#/event/ero/common-lines/action-descriptions/normal-sm'),
+  require('#/event/ero/common-lines/action-descriptions/normal-items'),
+].forEach((f) => f(describers.c));
 
 [
-  require('#/event/ero/common-lines/action-descriptions/desc-sleeping-communications'),
-  require('#/event/ero/common-lines/action-descriptions/desc-sleeping-communications'),
-  require('#/event/ero/common-lines/action-descriptions/desc-sleeping-fuckings'),
-].forEach((f) => f(sleeping_handlers));
+  require('#/event/ero/common-lines/action-descriptions/sleep-communications'),
+  require('#/event/ero/common-lines/action-descriptions/sleep-making-outs'),
+  require('#/event/ero/common-lines/action-descriptions/sleep-fucking'),
+].forEach((f) => f(describers.s));
+
+[
+  require('#/event/ero/common-lines/action-descriptions/rape-communications'),
+].forEach((f) => f(describers.r));
 
 console.log(
   '[ero-factory.js] ero common description handlers init done!',
@@ -149,15 +150,30 @@ async function run_custom_ero(chara_id, action, extra_flag) {
         hook.arg = true;
       }
       const attacker = get_chara_talk(_a),
-        defender = get_chara_talk(_d);
+        defender = get_chara_talk(_d),
+        raper = get('tflag:强奸');
       if (!sys_check_awake(_d)) {
-        await sleeping_handlers[action](attacker, defender, hook, extra_flag);
+        await (describers.s[action] || describers.c[action])(
+          attacker,
+          defender,
+          hook,
+          extra_flag,
+        );
         ret = await handler.sleep.run(attacker, defender, hook, extra_flag);
-      } else if (get('tflag:强奸') >= 0) {
-        await handlers[action](attacker, defender, hook, extra_flag);
+      } else if (raper >= 0) {
+        if (raper === _a) {
+          await (describers.r[action] || describers.c[action])(
+            attacker,
+            defender,
+            hook,
+            extra_flag,
+          );
+        } else {
+          await describers.c[action](attacker, defender, hook, extra_flag);
+        }
         ret = await handler.rape.run(attacker, defender, hook, extra_flag);
       } else {
-        await handlers[action](attacker, defender, hook, extra_flag);
+        await describers.c[action](attacker, defender, hook, extra_flag);
         ret = await handler.normal.run(attacker, defender, hook, extra_flag);
       }
     } else {

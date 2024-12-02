@@ -30,13 +30,13 @@ const current = new Date().getTime();
 const handlers = {};
 
 [
-  require('#/event/ero/ero-result-handlers/ero-result-communications'),
-  require('#/event/ero/ero-result-handlers/ero-result-pettings-1'),
-  require('#/event/ero/ero-result-handlers/ero-result-pettings-2'),
-  require('#/event/ero/ero-result-handlers/ero-result-fuckings'),
-  require('#/event/ero/ero-result-handlers/ero-result-sm'),
-  require('#/event/ero/ero-result-handlers/ero-result-orgy'),
-  require('#/event/ero/ero-result-handlers/ero-result-items'),
+  require('#/event/ero/ero-result-handlers/communications'),
+  require('#/event/ero/ero-result-handlers/making-outs-1'),
+  require('#/event/ero/ero-result-handlers/making-outs-2'),
+  require('#/event/ero/ero-result-handlers/fucking'),
+  require('#/event/ero/ero-result-handlers/sm'),
+  require('#/event/ero/ero-result-handlers/orgy'),
+  require('#/event/ero/ero-result-handlers/items'),
 ].forEach((f) => f(handlers));
 
 console.log(
