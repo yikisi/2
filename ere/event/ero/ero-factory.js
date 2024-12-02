@@ -59,18 +59,20 @@ current = new Date().getTime();
 
 [
   require('#/event/ero/common-lines/action-descriptions/desc-communications'),
-  require('#/event/ero/common-lines/action-descriptions/desc-pettings'),
-  require('#/event/ero/common-lines/action-descriptions/desc-fuckings'),
-  require('#/event/ero/common-lines/action-descriptions/desc-orgy-fuckings'),
-  require('#/event/ero/common-lines/action-descriptions/desc-orgy-pettings'),
+  require('#/event/ero/common-lines/action-descriptions/desc-making-outs'),
+  require('#/event/ero/common-lines/action-descriptions/desc-fucking'),
+  require('#/event/ero/common-lines/action-descriptions/desc-orgy'),
   require('#/event/ero/common-lines/action-descriptions/desc-sm'),
   require('#/event/ero/common-lines/action-descriptions/desc-items'),
 ].forEach((f) => f(handlers));
 
 [
   require('#/event/ero/common-lines/action-descriptions/desc-sleeping-communications'),
-  require('#/event/ero/common-lines/action-descriptions/desc-sleeping-communications'),
+  require('#/event/ero/common-lines/action-descriptions/desc-sleeping-making-outs'),
   require('#/event/ero/common-lines/action-descriptions/desc-sleeping-fuckings'),
+  require('#/event/ero/common-lines/action-descriptions/desc-orgy'),
+  require('#/event/ero/common-lines/action-descriptions/desc-sm'),
+  require('#/event/ero/common-lines/action-descriptions/desc-items'),
 ].forEach((f) => f(sleeping_handlers));
 
 console.log(
