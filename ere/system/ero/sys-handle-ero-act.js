@@ -12,6 +12,7 @@ const use_lubricating_fluid = require('#/system/ero/ero-act-handler/use-lubricat
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const sys_auto_rape = require('#/system/ero/sub/sys-auto-rape');
 const sys_auto_react = require('#/system/ero/sub/sys-auto-react');
+const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 const {
   check_want_to_escape,
   get_penis_size,
@@ -49,7 +50,6 @@ const {
 const { stain_enum } = require('#/data/ero/stain-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
-const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 
 let shown = true;
 
