@@ -252,10 +252,6 @@ function init_chara(chara_id, src_chara_id) {
         era.get(`callname:${my_src_chara}:${chara_id}`),
       );
     }
-    era.set(
-      `cflag:${chara_id}:可再次育成`,
-      Number(era.get(`cflag:${chara_id}:可再次育成`) > 0 && my_src_chara <= 0),
-    );
   } else {
     era.set(`talent:${chara_id}:病娇`, 0);
   }

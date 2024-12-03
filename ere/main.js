@@ -27,6 +27,7 @@ function get_copyright_entry(chara_id, _suffix) {
   return {
     color: get_chara_color(chara_id),
     content: `${era.get(`static:${chara_id}:name`)}${suffix}`,
+    fontWeight: 'bold',
   };
 }
 
@@ -357,29 +358,15 @@ module.exports = async () => {
                   '** 只有完成了个人成就的角色才能进行扮演',
                   { isBr: true },
                   '*** ',
-                  {
-                    color: get_chara_color(201),
-                    content: '快乐米可',
-                    fontWeight: 'bold',
-                  },
+                  get_copyright_entry(201),
                   '、',
-                  {
-                    color: get_chara_color(204),
-                    content: '望族',
-                    fontWeight: 'bold',
-                  },
+                  get_copyright_entry(204),
                   '、',
-                  {
-                    color: get_chara_color(301),
-                    content: '骏川缰绳',
-                    fontWeight: 'bold',
-                  },
+                  get_copyright_entry(301),
                   '、',
-                  {
-                    color: get_chara_color(304),
-                    content: '桐生院葵',
-                    fontWeight: 'bold',
-                  },
+                  get_copyright_entry(304),
+                  '、',
+                  get_copyright_entry(400),
                   ' 等特殊角色无法扮演',
                 ],
                 type: 'text',
