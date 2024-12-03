@@ -180,7 +180,7 @@ module.exports = async () => {
       ['雞雞', { isDivider: true }, '无名黑奴'],
     ],
     [
-      ['日常地文'],
+      ['日常地文', { isDivider: true }, '随机事件'],
       [
         '雞雞',
         { isDivider: true },
@@ -188,6 +188,8 @@ module.exports = async () => {
         { isDivider: true },
         '阿格尼斯数码公司',
         { isDivider: true },
+        'イーウィヤ',
+        { isBr: true },
         '无名黑奴',
       ],
     ],

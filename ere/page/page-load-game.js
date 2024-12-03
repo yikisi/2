@@ -132,6 +132,15 @@ module.exports = async () => {
                   }
                 }),
               );
+              era.getAddedCharacters().forEach((e) => {
+                if (
+                  era.get(`cflag:${e}:种族`) &&
+                  era.get(`cflag:${e}:成长阶段`) === 5 &&
+                  !era.get(`cflag:${e}:可再次育成`)
+                ) {
+                  era.set(`cflag:${e}:可再次育成`, 1);
+                }
+              });
             }
             return true;
           } else {
