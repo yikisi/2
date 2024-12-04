@@ -161,11 +161,12 @@ const era = {
   notify(content, title, type, duration) {},
   /**
    * play the music that must be declared in csv files in directory res
-   * @param {string} names REQUIRED music name, the engine will play the first available music in the array
+   * @param {string[]|string} names REQUIRED music name, the engine will play the first available music in the array
+   * @param {boolean} [loop] if the music is played in loop
    * @returns {boolean} if the playing succeeds
    */
   // eslint-disable-next-line no-unused-vars
-  playMusic(...names) {},
+  playMusic(names, loop) {},
   /**
    * print some text
    * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
@@ -374,7 +375,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '3.0.2', engine: undefined },
+  version: { sdk: '3.1.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
