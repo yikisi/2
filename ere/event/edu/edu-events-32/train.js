@@ -76,7 +76,7 @@ async function incomplete_combustion(tachyon, me, callname, edu_marks) {
     ' 真的能够狠下心来吗？',
   ]);
   era.printButton('「……继续吧」（顺从因子+100）', 1);
-  era.printButton('「……休息吧」（干劲上升一阶段）', 2);
+  era.printButton('「……休息吧」（干劲上升）', 2);
   if ((await era.input()) === 1) {
     await era.printAndWait([
       '为了 ',

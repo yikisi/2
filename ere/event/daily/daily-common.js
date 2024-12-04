@@ -23,9 +23,9 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const common_celebration = require('#/event/daily/common-lines/common-celebration');
+const common_out_shopping = require('#/event/daily/common-lines/out-shopping');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
-const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
@@ -411,7 +411,7 @@ class CustomizedDaily {
           era.get(`talent:${this.id}:羞耻忍耐`) === 1 ||
           era.get(`talent:${this.id}:恐惧感受`) === 1 ||
           era.get(`talent:${this.id}:未来期望`) === 1) &&
-        Math.random() < era.get(`love:${this.id}`) / 1000
+        Math.random() < era.get(`love:${this.id}`) / 2000
       ) {
         hook.override = true;
         /** @author KUN */
@@ -534,29 +534,12 @@ class CustomizedDaily {
    * @param {HookArg} hook
    */
   async out_shopping(hook) {
-    const temp = await select_action_in_shopping_street();
-    hook.arg = temp <= 1;
-    let talk;
-    switch (temp) {
-      case 0:
-        talk = '街机厅，祈祷夹娃娃机不要松开爪子。';
-        break;
-      case 1:
-        talk = '抽奖，会抽到好东西吗？';
-        break;
-      case 2:
-        talk = '卡拉OK，山顶的朋友嗨起来！';
-        break;
-      case 3:
-        talk = '看电影，最近有什么好电影吗？';
-    }
-    await era.printAndWait([
-      get_chara_talk(0).get_colored_name(),
-      ' 与 ',
-      get_chara_talk(this.id).get_colored_name(),
-      ' 一起来到商店街',
-      talk,
-    ]);
+    await common_out_shopping.call(
+      this,
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      hook,
+    );
   }
 
   /**

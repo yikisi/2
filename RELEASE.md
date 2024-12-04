@@ -1,12 +1,13 @@
-# [EraUma v1.012 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.012)
+# [EraUma v1.1 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.012)
 _incoming_
 
-适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.0.0) 版本
+适配 [EraElectron v3.1.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.1.0) 版本，以套用EraElectron的安全性更新
 
 ## Added
 
 * 追加实装了以下地文事件
   * 【河堤漫步时光】 
+  * 【这电影对吗？】
 * 追加实装了三女神像祈祷相关的系统级地文
 * 安心泽刺刺美学会了一项新技能：当她在队伍中时，可以加快队伍成员疲惫的恢复速度了
 
