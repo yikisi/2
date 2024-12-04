@@ -421,7 +421,7 @@ module.exports = (handlers) => {
     return era.printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 的肉棒一边击打着 ',
+      ' 的肉棒一边拍打着 ',
       defender.get_colored_name(),
       ' 的手一边搅弄着 ',
       defender.get_colored_name(),
@@ -830,9 +830,9 @@ module.exports = (handlers) => {
     era.printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 拉过 ',
+      ' 用肉棒戳弄着 ',
       defender.get_colored_name(),
-      ' 的双足抚弄肉棒……】',
+      ' 的双足……】',
     ]);
 
   handlers[ero_hooks.foot_job] = (attacker, defender, hook) => {

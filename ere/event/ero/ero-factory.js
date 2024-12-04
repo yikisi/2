@@ -72,6 +72,7 @@ current = new Date().getTime();
 
 [
   require('#/event/ero/common-lines/action-descriptions/rape-communications'),
+  require('#/event/ero/common-lines/action-descriptions/rape-making-outs'),
 ].forEach((f) => f(describers.r));
 
 console.log(
