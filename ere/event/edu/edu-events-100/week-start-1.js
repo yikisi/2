@@ -749,9 +749,7 @@ module.exports = (handlers) => {
     ]);
     await acute.say_and_wait([callname, '，要先照顾好自己才行哦。']);
     await era.printAndWait([
-      '解开了 ',
-      me.get_colored_name(),
-      ' 的棕黑色的围巾，',
+      '解开了自己的棕黑色的围巾，',
       acute.get_colored_name(),
       ' 将其挂在了 ',
       me.get_colored_name(),
