@@ -739,6 +739,7 @@ module.exports = {
         .map(
           (e) => trained_talent_names[era.get(`talentname:${e.id}`)][e.level],
         ),
+      ...new Array(8).fill(0).map((_, i) => i + 70),
     );
     return talent_list
       .map((e) => {
