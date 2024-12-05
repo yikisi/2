@@ -21,6 +21,7 @@ const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
+const ICustomizedEdu = require('#/event/edu/snippets/edu-interface');
 const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
@@ -43,7 +44,7 @@ const {
 } = require('#/data/race/race-const');
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
-class CustomizedEdu {
+class CustomizedEdu extends ICustomizedEdu {
   static common_event_count = 0;
 
   /**
@@ -284,35 +285,6 @@ class CustomizedEdu {
     await print_fail_info_in_train(attr, is_fumble);
   }
 
-  /** @param {number} chara_id */
-  constructor(chara_id) {
-    this.id = chara_id;
-  }
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async back_school(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async celebration(chara, me, callname, hook, extra_flag, event_object) {}
-
   /** @author 雞雞 */
   async crazy_fan_end() {
     const chara = get_chara_talk(this.id),
@@ -486,114 +458,6 @@ class CustomizedEdu {
   }
 
   /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async office_cook(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async office_game(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async office_prepare(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async office_rest(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async office_study(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async out_church(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async out_shopping(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async out_start(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async out_station(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
    * @author 雞雞
    *
    * @param {CharaTalk} chara
@@ -643,30 +507,6 @@ class CustomizedEdu {
       Math.random() < 0.5 ? '尽全力就好！' : '跑出自己的气势来！',
     );
   }
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async school_atrium(chara, me, callname, hook, extra_flag, event_object) {}
-
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async school_rooftop(chara, me, callname, hook, extra_flag, event_object) {}
 
   /**
    * @author 雞雞
