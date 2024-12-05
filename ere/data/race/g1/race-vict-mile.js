@@ -1,19 +1,1 @@
-const RaceInfo = require('#/data/race/model/race-info');
-
-module.exports = new RaceInfo(
-  'Victoria Mile',
-  '维多利亚英里赛',
-  RaceInfo.class_enum.G1,
-  RaceInfo.track_enum.tokyo,
-  RaceInfo.ground_enum.grass,
-  1600,
-  RaceInfo.distance_enum.mile,
-  RaceInfo.rotation_enum.left,
-  18,
-  [8, 90, 114],
-  RaceInfo.limit_enum.post4,
-  19,
-  0,
-  2437,
-  10602,
-);
+const RaceInfo = require('#/data/race/model/race-info');module.exports = new RaceInfo(  'Victoria Mile',  '维多利亚英里赛',  RaceInfo.class_enum.G1,  RaceInfo.track_enum.tokyo,  RaceInfo.ground_enum.grass,  1600,  RaceInfo.distance_enum.mile,  RaceInfo.rotation_enum.left,  18,  [8, 90, 114],  RaceInfo.limit_enum.post4,  19,  0,  2437,  10602,);

@@ -578,7 +578,10 @@ module.exports = {
         .get_talents()
         .map((e) => {
           if (e.title && !e.title.startsWith('[')) {
-            e.title = `[${e.content}]：${e.title}`;
+            e.title =
+              (e.content.startsWith('[') ? e.content : `[${e.content}]`) +
+              '：' +
+              e.title;
           }
           return e;
         }),
@@ -736,6 +739,7 @@ module.exports = {
         .map(
           (e) => trained_talent_names[era.get(`talentname:${e.id}`)][e.level],
         ),
+      ...new Array(8).fill(0).map((_, i) => i + 70),
     );
     return talent_list
       .map((e) => {

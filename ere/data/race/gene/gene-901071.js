@@ -3,8 +3,8 @@ const UmaGene = require('#/data/race/model/uma-gene');
 module.exports = new UmaGene(
   901071,
   UmaGene.gene_rarity_enum.sr,
-  '「满天星斗」之回响',
-  '习得「满天星斗」',
+  '「Billions of stars」之回响',
+  '习得「Billions of stars」\n在终盘的最终直线位于领头时速度略微提升',
   UmaGene.gene_type_enum.skill,
   -1,
   100,

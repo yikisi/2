@@ -211,15 +211,15 @@ const race_enum = {
   kita_kin: 0,
   // 小仓纪念
   koku_kin: 0,
-  // 新潟2岁锦标
+  // 新潟少年锦标
   niig_sta: 0,
   // 札幌纪念
   sapp_kin: 0,
   // 基兰杯
   keen_cup: 0,
-  // 小仓2岁锦标
+  // 小仓少年锦标
   koku_sta: 0,
-  // 札幌2岁锦标
+  // 札幌少年锦标
   sapp_sta: 0,
   // 新潟纪念
   niig_kin: 0,
@@ -265,7 +265,7 @@ const race_enum = {
   tenn_sho: 0,
   // 天鹅锦标
   swan_sta: 0,
-  // 京王杯2岁锦标
+  // 京王杯少年锦标
   keio_sta: 0,
   // 幻想锦标
   fant_sta: 0,
@@ -281,7 +281,7 @@ const race_enum = {
   miya_sta: 0,
   // 和谐锦标
   chn_frt: 0,
-  // 每日杯2岁锦标
+  // 每日杯少年锦标
   dail_sta: 0,
   // 伊丽莎白二世女皇杯
   eliz_cup: 0,
@@ -289,11 +289,11 @@ const race_enum = {
   musa_sta: 0,
   // 福岛纪念
   fuku_kin: 0,
-  // 东京体育杯2岁锦标
+  // 东京体育杯少年锦标
   toky_sta: 0,
   // 英里冠军赛
   mile_cha: 0,
-  // 京都2岁锦标
+  // 京都少年锦标
   kyot_sta: 0,
   // 日本杯
   japa_cup: 0,

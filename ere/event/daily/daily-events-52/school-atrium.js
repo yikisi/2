@@ -24,7 +24,7 @@ module.exports = async (hook) => {
     love = era.get('love:52'),
     me = get_chara_talk(0),
     urara = get_chara_talk(52);
-  hook.arg = !(await select_action_in_atrium());
+  hook.arg = (await select_action_in_atrium()) === 0;
   let random_range;
   if (hook.arg) {
     if (!edu_marks.time_cap && love === 100) {

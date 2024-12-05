@@ -19,9 +19,50 @@ const recruit_flags = require('#/data/event/recruit-flags');
 /** @param {HookArg} hook */
 module.exports = async (hook) => {
   const digital = get_chara_talk(19);
-  const ret = await select_action_around_river(19);
-  hook.arg = !!ret;
-  if (ret === 0) {
+  hook.arg = (await select_action_around_river(19)) > 0;
+  if (hook.arg) {
+    switch (get_random_value(0, 3)) {
+      case 0:
+        await digital.say_and_wait([
+          sys_get_colored_callname(19, 46),
+          '，是 ',
+          sys_get_colored_callname(19, 46),
+          ' 啊！我务必要过去那边！',
+        ]);
+        break;
+      case 1:
+        await digital.say_and_wait([
+          '发现了 ',
+          get_chara_talk(9).get_colored_name(),
+          ' 和 ',
+          get_chara_talk(8).get_colored_name(),
+          '！',
+          digital.sex,
+          '们在那边是在干什么～呢！',
+        ]);
+        break;
+      case 2:
+        await digital.say_and_wait([
+          '哇！',
+          sys_get_colored_callname(19, 58),
+          ' 摔倒了，要去拉一下……站起来了！呜哦，真是勤勉……',
+        ]);
+        break;
+      case 3:
+        await era.printAndWait(
+          `在河边散步对于${digital.name}来说是一种朝圣行为，`,
+        );
+        await era.printAndWait(
+          `因为各个角落，都能发现赛${digital.get_uma_sex_title()}，`,
+        );
+        await era.printAndWait(
+          `正在练习歌唱的小${digital.get_uma_sex_title()}偶像，正在适应泥地的小努力家。`,
+        );
+        await era.printAndWait(
+          `比较幸运的是这次${digital.sex}并没有尊得失魂。`,
+        );
+    }
+  } else {
     const edu_marks = new AgEduMarks(),
       me = get_chara_talk(0);
     if (!edu_marks.catch_fish) {
@@ -584,48 +625,6 @@ module.exports = async (hook) => {
             `别介意！胜负乃兵家常事，大侠请重新来过吧……空军也像抽卡不出的概率一样啦！`,
           );
       }
-    }
-  } else {
-    switch (get_random_value(0, 3)) {
-      case 0:
-        await digital.say_and_wait([
-          sys_get_colored_callname(19, 46),
-          '，是 ',
-          sys_get_colored_callname(19, 46),
-          ' 啊！我务必要过去那边！',
-        ]);
-        break;
-      case 1:
-        await digital.say_and_wait([
-          '发现了 ',
-          get_chara_talk(9).get_colored_name(),
-          ' 和 ',
-          get_chara_talk(8).get_colored_name(),
-          '！',
-          digital.sex,
-          '们在那边是在干什么～呢！',
-        ]);
-        break;
-      case 2:
-        await digital.say_and_wait([
-          '哇！',
-          sys_get_colored_callname(19, 58),
-          ' 摔倒了，要去拉一下……站起来了！呜哦，真是勤勉……',
-        ]);
-        break;
-      case 3:
-        await era.printAndWait(
-          `在河边散步对于${digital.name}来说是一种朝圣行为，`,
-        );
-        await era.printAndWait(
-          `因为各个角落，都能发现赛${digital.get_uma_sex_title()}，`,
-        );
-        await era.printAndWait(
-          `正在练习歌唱的小${digital.get_uma_sex_title()}偶像，正在适应泥地的小努力家。`,
-        );
-        await era.printAndWait(
-          `比较幸运的是这次${digital.sex}并没有尊得失魂。`,
-        );
     }
   }
 };

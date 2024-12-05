@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 
 const EroParticipant = require('#/data/ero/ero-participant');
-const { item_enum } = require('#/data/ero/item-const');
+const { item_enum, item_names } = require('#/data/ero/item-const');
 const { part_enum, part_touch } = require('#/data/ero/part-const');
 
 /**
@@ -21,28 +21,19 @@ function remove_item(chara_id, part_or_item_name) {
       if (touched_part.owner === 0) {
         switch (touched_part.item) {
           case item_enum.anal_beads:
-            era.add('item:拉珠', 1);
-            break;
           case item_enum.butt_plug:
-            era.add('item:肛塞', 1);
+          case item_enum.dildo:
+          case item_enum.gag:
+          case item_enum.milk_pump:
+          case item_enum.artificial_virgin:
+            era.add(`item:${item_names[touched_part.item]}`, 1);
             break;
           case item_enum.clamps:
-            era.add('item:夹子', 1 + (part_or_item_name === part_enum.breast));
-            break;
-          case item_enum.dildo:
-            era.add('item:伪器', 1);
-            break;
-          case item_enum.gag:
-            era.add('item:口球', 1);
-            break;
           case item_enum.love_eggs:
-            era.add('item:跳蛋', 1 + (part_or_item_name === part_enum.breast));
-            break;
-          case item_enum.milk_pump:
-            era.add('item:榨乳器', 1);
-            break;
-          case item_enum.artificial_virgin:
-            era.add('item:飞机杯', 1);
+            era.add(
+              `item:${item_names[touched_part.item]}`,
+              1 + (part_or_item_name === part_enum.breast),
+            );
         }
       }
     }

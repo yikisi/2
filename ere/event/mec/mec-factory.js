@@ -37,6 +37,7 @@ cons_dict[67] = require('#/event/mec/mec-67');
 cons_dict[68] = require('#/event/mec/mec-68');
 cons_dict[74] = require('#/event/mec/mec-74');
 cons_dict[80] = require('#/event/mec/mec-80');
+cons_dict[85] = require('#/event/mec/mec-85');
 cons_dict[86] = require('#/event/mec/mec-86');
 cons_dict[91] = require('#/event/mec/mec-91');
 cons_dict[100] = require('#/event/mec/mec-100');
@@ -44,7 +45,6 @@ cons_dict[121] = require('#/event/mec/mec-121');
 cons_dict[204] = require('#/event/mec/mec-204');
 cons_dict[205] = require('#/event/mec/mec-205');
 cons_dict[206] = require('#/event/mec/mec-206');
-cons_dict[207] = require('#/event/mec/mec-207');
 cons_dict[301] = require('#/event/mec/mec-301');
 cons_dict[302] = require('#/event/mec/mec-302');
 cons_dict[303] = require('#/event/mec/mec-303');
@@ -59,11 +59,11 @@ cons_dict[343] = require('#/event/mec/mec-343');
 cons_dict[344] = require('#/event/mec/mec-344');
 cons_dict[400] = require('#/event/mec/mec-400');
 cons_dict['av-sister'] = require('#/event/mec/mec-av-sister');
-
 cons_dict[201] =
   cons_dict[202] =
   cons_dict[203] =
     require('#/event/mec/mec-npc-uma-common');
+cons_dict[207] = cons_dict[345] = require('#/event/mec/mec-npc');
 
 console.log(
   '[mec-factory.js] constructor dictionary init done!',

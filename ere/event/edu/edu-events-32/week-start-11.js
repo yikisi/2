@@ -1,28 +1,29 @@
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-
-const palace = require('#/event/snippets/palace');
-const palace_relation = require('#/event/snippets/palace-relation');
+const CustomizedEdu = require('#/event/edu/edu-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { adaptability_colors } = require('#/data/color-const');
-const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const { location_enum } = require('#/data/locations');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},number,number,TachyonEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
-  handlers.palace = async () => {
-    const edu_marks = new TachyonEduMarks(),
-      me = get_chara_talk(0),
-      tachyon = get_chara_talk(32);
-    await palace(tachyon, me);
+  /** @this CustomizedEdu */
+  handlers.palace = async function (
+    tachyon,
+    me,
+    callname,
+    flags,
+    relation,
+    love,
+    edu_marks,
+  ) {
+    await CustomizedEdu.common_palace(tachyon, me);
     if (era.get('item:用途不明的眼镜')) {
       era.drawLine();
-      const callname = sys_get_callname(32, 0),
-        coffee = get_chara_talk(25);
+      const coffee = get_chara_talk(25);
       await era.printAndWait([
         '与 ',
         tachyon.get_colored_name(),
@@ -734,7 +735,7 @@ module.exports = (handlers) => {
         era.set('flag:当前位置', location_enum.office);
       }
     } else {
-      await palace_relation(tachyon, me);
+      await CustomizedEdu.common_palace_relation(tachyon, me);
     }
   };
 };

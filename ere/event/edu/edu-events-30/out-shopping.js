@@ -15,11 +15,12 @@ const event_hooks = require('#/data/event/event-hooks');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
- * @param _
- * @param __
+ * @param {CharaTalk} rice
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {EventObject} event_object
  */
-module.exports = async (_, __, event_object) => {
+module.exports = async (rice, me, callname, event_object) => {
   if (era.get('flag:当前互动角色') !== 30) {
     add_event(event_hooks.out_shopping, event_object);
     return;
@@ -27,10 +28,7 @@ module.exports = async (_, __, event_object) => {
   if (event_object.arg !== 95 + 21) {
     return;
   }
-  const callname = sys_get_callname(30, 0),
-    me = get_chara_talk(0),
-    rice = get_chara_talk(30),
-    self_name = sys_get_callname(30, 30),
+  const self_name = sys_get_callname(30, 30),
     tokino = get_chara_talk(301);
   await print_event_name('万有一失', rice);
   await era.printAndWait([

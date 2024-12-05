@@ -1,10 +1,11 @@
 const era = require('#/era-electron');
 
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
-
-/** @param {string} name */
-function print_ero_gif(name) {
-  sys_check_awake(0) &&
+/**
+ * @param {string} name
+ * @param {boolean|undefined} shown
+ */
+function print_ero_gif(name, shown) {
+  shown !== false &&
     era.printWholeImage(name, {
       width: 8,
     });

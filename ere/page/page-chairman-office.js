@@ -203,15 +203,17 @@ async function page_chairman_office() {
                         [[], []],
                       )
                       .forEach((l) => {
-                        temp.push({
-                          config: {
-                            content: l[0].priority
-                              ? '使用专属口上的角色'
-                              : '使用地文的角色',
-                          },
-                          type: 'divider',
-                        });
-                        temp.push(...l);
+                        if (l.length > 0) {
+                          temp.push({
+                            config: {
+                              content: l[0].priority
+                                ? '使用专属口上的角色'
+                                : '使用地文的角色',
+                            },
+                            type: 'divider',
+                          });
+                          temp.push(...l);
+                        }
                       });
                     era.printMultiColumns(temp);
                     temp = await era.input();
@@ -240,7 +242,7 @@ async function page_chairman_office() {
                   await chara.say_and_wait('啊吧啊吧啊吧啊吧……');
                   era.set('cflag:302:招募状态', recruit_flags.yes);
                   if (era.get('talent:302:病娇')) {
-                    new YandereList().push(302, true);
+                    new YandereList().push(302);
                   }
                   await era.printAndWait([
                     '恭 喜！',

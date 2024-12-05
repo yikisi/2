@@ -1,33 +1,26 @@
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-
 const typing = require('#/event/edu/edu-events-56/snippets/typing');
 const { add_event } = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
-const event_hooks = require('#/data/event/event-hooks');
-
 /**
- * @param _
- * @param __
+ * @param {CharaTalk} kitaru
+ * @param {CharaTalk} me
+ * @param {string} callname
+ * @param {HookArg} hook
  * @param {EventObject} event_object
  */
-module.exports = async (_, __, event_object) => {
+module.exports = async (kitaru, me, callname, hook, event_object) => {
   if (era.get('flag:当前互动角色') !== 56) {
-    add_event(event_hooks.out_start, event_object);
+    add_event(hook.hook, event_object);
     return;
   }
   if (event_object?.arg !== 'hot_line') {
     return;
   }
-  const kitaru = get_chara_talk(56),
-    me = get_chara_talk(0),
-    love = era.get('love:56'),
-    callname = sys_get_callname(56, 0);
+  const love = era.get('love:56');
   await print_event_name('热线电话', kitaru);
   await era.printAndWait([
     '被兴冲冲的 ',

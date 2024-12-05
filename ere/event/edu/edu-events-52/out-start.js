@@ -1,25 +1,22 @@
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-
 const { add_event } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
-
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 
 /**
+ * @param {CharaTalk} urara
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {HookArg} hook
- * @param _
  * @param {EventObject} event_object
  */
-module.exports = async (hook, _, event_object) => {
+module.exports = async (urara, me, callname, hook, event_object) => {
   if (event_object.arg !== 'all_like') {
     return false;
   }
-  const urara = get_chara_talk(52);
   if (era.get('flag:当前互动角色') > 0) {
     await era.printAndWait([
       '听说 ',
@@ -30,8 +27,6 @@ module.exports = async (hook, _, event_object) => {
     return false;
   }
   new EventMarks(0).sub(event_hooks.out_start);
-  const callname = sys_get_callname(52, 0),
-    me = get_chara_talk(0);
   await print_event_name('人见人爱', urara);
   await era.printAndWait([
     '结束了今天的工作后，',

@@ -7,7 +7,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 /** @param {HookArg} hook */
 module.exports = async (hook) => {
-  hook.arg = !(await select_action_in_atrium(56));
+  hook.arg = (await select_action_in_atrium(56)) === 0;
   const kitaru = get_chara_talk(56),
     me = get_chara_talk(0),
     edu_weeks = era.get('cflag:56:育成回合计时'),

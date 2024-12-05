@@ -1,4 +1,23 @@
 # Changelog
+## [EraUma v1.011 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.011)
+_2024/11/13_
+
+适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.0.0) 版本
+
+### Changed
+
+* 比赛平衡性调整：现在比赛开始150m以后就会开始发生阻挡，以使比赛初期的突围技能变得有用
+* 现在同一对父母所生的异父异母的亲兄弟/姐妹也会有同辈的亲缘关系了
+
+### Fixed
+
+* 修复了登记出走界面角色状态指示器不会跟随选中的角色而变的问题了
+* 修复了智力训练仍然能触发【淋浴间内】的问题，并将触发概率从5%下调为2%
+* 修复了强制发交可能导致获得负数的痛苦因子的问题
+* 修复了贵妇人专属称号【刚毅贵妇人】无法正确获得的问题
+* 修复了大拓太阳神育成目标的错误
+* 修复了砂糖灯无法招募的bug
+
 ## [EraUma v1.01 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.01)
 _2024/11/11_
 
@@ -102,8 +121,9 @@ EraUma v1.0，适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era
   * 高尚骏逸
 * 追加实装了以下随机小事件
   * 【钓鱼的心得】
-  * 【淋浴间内】
   * 不忠惩罚事件
+* 追加实装了以下地文事件
+  * 【淋浴间内】
   * 【奇怪的午饭】
 * 追加实装以下角色部分赛事的固定强敌
   * 东海帝王

@@ -6,11 +6,10 @@ const {
   sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const palace = require('#/event/snippets/palace');
-const palace_relation = require('#/event/snippets/palace-relation');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const {
@@ -484,8 +483,9 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     ]);
   };
 
-  handlers.palace = async (coffee, me, callname) => {
-    await palace(coffee, me);
+  /** @this CustomizedEdu */
+  handlers.palace = async function (coffee, me, callname) {
+    await CustomizedEdu.common_palace(coffee, me);
     const races = new RaceHistory(25).get();
     if (
       check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
@@ -652,7 +652,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         '——我不会去寻找什么乐园，因为……我已经在最幸福的地方了。',
       );
     } else {
-      await palace_relation(coffee, me);
+      await CustomizedEdu.common_palace_relation(coffee, me);
     }
   };
 };

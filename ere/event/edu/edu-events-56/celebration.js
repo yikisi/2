@@ -9,13 +9,10 @@ const {
   end_ero_and_train,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const print_event_name = require('#/event/snippets/print-event-name');
-
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
@@ -91,22 +88,21 @@ async function cristmas_common(kitaru, me, callname) {
 }
 
 /**
+ * @param {CharaTalk} kitaru
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {HookArg} hook
- * @param __
  * @param {EventObject} event_object
  */
-module.exports = async (hook, __, event_object) => {
+module.exports = async (kitaru, me, callname, hook, event_object) => {
   if (era.get('flag:当前互动角色') !== 56) {
     add_event(hook.hook, event_object);
     return;
   }
   if (event_object?.arg !== 143) {
-    throw new Error();
+    return;
   }
-  const kitaru = get_chara_talk(56),
-    me = get_chara_talk(0),
-    callname = sys_get_callname(56, 0),
-    edu_marks = new FukukitaruEduMarks();
+  const edu_marks = new FukukitaruEduMarks();
   // 圣诞节 差分，分为有马纪念胜利与未胜利
   era.set('cflag:56:节日事件标记', 0);
   if (

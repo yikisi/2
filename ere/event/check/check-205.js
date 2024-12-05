@@ -160,8 +160,7 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
-  // eslint-disable-next-line no-unused-vars
-  is_aim_race(race, edu_weeks, rank) {
+  is_aim_race(race, edu_weeks) {
     if (race === race_enum.japa_cup) {
       return new TreveEduMarks().japa_cup;
     }

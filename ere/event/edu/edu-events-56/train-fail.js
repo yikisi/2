@@ -1,31 +1,24 @@
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const { buff_colors } = require('#/data/color-const');
 const KitaruEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
-const { attr_enum, fumble_result } = require('#/data/train-const');
+const { fumble_result } = require('#/data/train-const');
 
 /**
+ * @param {CharaTalk} kitaru
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {HookArg} hook
  * @param {TrainFailParams} extra_flag
  */
-module.exports = async (hook, extra_flag) => {
-  if (extra_flag.train === attr_enum.intelligence) {
-    throw new Error();
-  }
-  extra_flag['args'] = extra_flag.fumble
+module.exports = async (kitaru, me, callname, hook, extra_flag) => {
+  extra_flag.args = extra_flag.fumble
     ? fumble_result.fumble
     : fumble_result.fail;
-  const callname = sys_get_callname(56, 0),
-    kitaru = get_chara_talk(56),
-    me = get_chara_talk(0),
-    edu_marks = new KitaruEduMarks();
+  const edu_marks = new KitaruEduMarks();
 
   if (
     me.sex_code > 0 &&

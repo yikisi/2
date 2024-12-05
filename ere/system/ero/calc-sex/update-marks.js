@@ -1,16 +1,17 @@
 const era = require('#/era-electron');
 
-const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 
 const { mark_colors } = require('#/data/const.json');
-const { ero_hooks } = require('#/data/event/ero-hooks');
-const GetMarkParams = require('#/data/event/extra-flag/get-mark-params');
+const { mark_enum } = require('#/data/ero/mark-const');
 
 const relation_by_mark = [100, 0, 200, -200, -200, -400];
+
+/** @type {function(number):CustomizedEro} */
+let get_custom_ero;
 
 /**
  * @param {boolean} shown
@@ -21,7 +22,7 @@ async function update_marks(shown, ...ids) {
   const me_in_sex = ids.indexOf(0) !== -1;
   for (const chara_id of ids) {
     let relation_change = 0;
-    for (let i = 0; i <= 5; ++i) {
+    for (let i of Object.values(mark_enum)) {
       const mark_name = era.get(`markname:${i}`),
         mark_level = era.get(`mark:${chara_id}:${i}`),
         new_level = Math.min(
@@ -34,11 +35,7 @@ async function update_marks(shown, ...ids) {
         era.set(`mark:${chara_id}:${i}`, new_level);
         if (shown) {
           era.println();
-          await sys_call_ero_event(
-            chara_id,
-            ero_hooks.get_mark,
-            new GetMarkParams(new_level, mark_name, false),
-          );
+          await get_custom_ero(chara_id).get_mark(new_level, i, false);
           await era.printAndWait([
             get_chara_talk(chara_id).get_colored_name(),
             ' 获得了 ',
@@ -70,5 +67,7 @@ async function update_marks(shown, ...ids) {
   }
   return count;
 }
+
+update_marks.init = (_handler) => (get_custom_ero = _handler);
 
 module.exports = update_marks;

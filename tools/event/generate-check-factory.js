@@ -7,7 +7,8 @@ const check_scripts = readdirSync(relative_path)
     (e) =>
       e.endsWith('.js') &&
       !e.endsWith('common.js') &&
-      !e.endsWith('factory.js'),
+      !e.endsWith('factory.js') &&
+      !e.endsWith('god.js'),
   )
   .map((e) => e.substring(6).replace(/\.js$/, ''))
   .sort((a, b) => {
@@ -47,7 +48,11 @@ check_scripts.forEach(
     (output += `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/check/check-${e}');\n`),
 );
 
-output += `
+output += `cons_dict[340] =
+  cons_dict[341] =
+  cons_dict[342] =
+    require('#/event/check/check-god');
+
 console.log(
   '[check-factory.js] constructor dictionary init done!',
   (new Date().getTime() - current).toLocaleString(),

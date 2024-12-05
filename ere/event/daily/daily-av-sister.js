@@ -9,52 +9,32 @@
  */
 const era = require('#/era-electron');
 
-const event_hooks = require('#/data/event/event-hooks');
-
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
-const CharaTalk = require('#/utils/chara-talk');
 
-/** @type {Record<string,function(HookArg,*):Promise<boolean>>} */
-const handler_dict = {};
+const DailyChild = require('#/event/daily/daily-child');
 
-/**
- * @param _
- * @param {{chara_id:number}} extra_flag
- */
-handler_dict[event_hooks.select] = function (_, extra_flag) {
-  if (
-    !sys_check_awake(0) ||
-    !sys_check_awake(extra_flag.chara_id) ||
-    era.get(`cflag:${extra_flag.chara_id}:成长阶段`) < 1
-  ) {
-    throw new Error('unsupported!');
-  }
-  const father = era.get(`cflag:${extra_flag.chara_id}:父方角色`),
-    mother = era.get(`cflag:${extra_flag.chara_id}:母方角色`);
-  if (father && mother) {
-    throw new Error('unsupported!');
-  }
-  new CharaTalk(extra_flag.chara_id).say(
-    `今天也请多关照啦，${
-      era.get('cflag:0:性别') - 1 ? '姐姐' : '哥哥'
-    }……啊，应该是这个，${father ? '妈妈' : '爸爸'}～❤`,
-  );
-};
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-module.exports = {
-  /**
-   * @param {HookArg} hook
-   * @param {any} [extra_flag]
-   * @param {EventObject} [event_object]
-   * @returns {Promise<boolean>}
-   */
-  async run(hook, extra_flag, event_object) {
-    if (event_object) {
-      throw new Error('unsupported hook!');
+module.exports = class extends DailyChild {
+  select() {
+    if (
+      !sys_check_awake(0) ||
+      !sys_check_awake(this.id) ||
+      era.get(`cflag:${this.id}:成长阶段`) < 1
+    ) {
+      return super.select();
     }
-    if (!handler_dict[hook.hook]) {
-      throw new Error('unsupported hook!');
+    const father = era.get(`cflag:${this.id}:父方角色`),
+      mother = era.get(`cflag:${this.id}:母方角色`);
+    if (father && mother) {
+      return super.select();
     }
-    return !!(await handler_dict[hook.hook](hook, extra_flag));
-  },
+    get_chara_talk(this.id).say([
+      '今天也请多关照啦，',
+      era.get('cflag:0:性别') - 1 ? '姐姐' : '哥哥',
+      '……啊，应该是这个，',
+      father ? '妈妈' : '爸爸',
+      '～❤️',
+    ]);
+  }
 };

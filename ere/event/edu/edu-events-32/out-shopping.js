@@ -1,20 +1,14 @@
 const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
-const {
-  sys_get_callname,
-  sys_get_colored_callname,
-} = require('#/system/sys-calc-chara-others');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const hot_spring_ticket = require('#/event/edu/edu-events-32/out-shopping-hot-spring');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const {
-  get_chara_talk,
-  say_by_passer_by_and_wait,
-} = require('#/utils/chara-talk-factory');
+const { say_by_passer_by_and_wait } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
@@ -52,13 +46,17 @@ async function common(tachyon, me) {
   ]);
 }
 
-module.exports = async (hook, _, event_object) => {
+/**
+ * @param {CharaTalk} tachyon
+ * @param {CharaTalk} me
+ * @param {string} callname
+ * @param {HookArg} hook
+ * @param {EventObject} event_object
+ */
+module.exports = async (tachyon, me, callname, hook, event_object) => {
   if (era.get('flag:当前互动角色') !== 32) {
     add_event(hook.hook, event_object);
   }
-  const callname = sys_get_callname(32, 0),
-    me = get_chara_talk(0),
-    tachyon = get_chara_talk(32);
   await print_event_name('抽奖与代偿剂效应', tachyon);
   await tachyon.say_and_wait('真是……没想到居然会那么容易爆炸');
   await tachyon.say_and_wait([

@@ -7,8 +7,8 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { buff_colors, sex_colors } = require('#/data/color-const');
 const status_desc = require('#/data/desc/status-desc.json');
+const { slavery_titles } = require('#/data/ero/mark-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
-const { slavery_titles } = require('#/data/ero/sex-mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const DarleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-340');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');

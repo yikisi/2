@@ -13,8 +13,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit(stage) {
     const chara_name = era.get('callname:7:-2'),
       your_name = era.get('callname:0:-2');
     if (stage === event_hooks.recruit) {

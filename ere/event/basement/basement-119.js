@@ -306,8 +306,7 @@ module.exports = class extends CustomizedBase {
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async flatter(supporter) {
+  async flatter() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0),
       m_call_d = sys_get_colored_callname(0, this.id),

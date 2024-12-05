@@ -306,8 +306,7 @@ module.exports = class extends CustomizedBase {
     ]);
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async flatter(supporter) {
+  async flatter() {
     const callname = sys_get_callname(52, 0),
       urara = get_chara_talk(52),
       me = get_chara_talk(0);

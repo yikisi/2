@@ -46,8 +46,7 @@ module.exports = class extends CustomizedMec {
     set('callname:342:0', '训练员');
   }
 
-  // eslint-disable-next-line no-unused-vars
-  set_foreign_debuff(before_race, loc) {}
+  set_foreign_debuff() {}
 
   set_my_sex() {
     return get('flag:角色性别') === 99 ? 10 : set('cflag:342:性别', 0);

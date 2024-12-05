@@ -10,7 +10,7 @@ const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 const { cb_enum } = require('#/event/queue');
-const { get_custom_rec } = require('#/event/rec/rec-factory');
+const { run_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -111,8 +111,8 @@ function get_riko_button(chara, me) {
                 ['带领', glasse.sex, '们多多地取得重赏胜利吧……'],
                 true,
               );
-              await get_custom_rec(202, cb_enum.recruit);
-              await get_custom_rec(203, cb_enum.recruit);
+              await run_custom_rec(202, cb_enum.recruit);
+              await run_custom_rec(203, cb_enum.recruit);
               new GlasseEduMarks().debuff = 20;
               new CoconEduMarks().debuff = 20;
               set('cflag:306:招募状态', [0, 0]);
@@ -137,8 +137,8 @@ function get_riko_button(chara, me) {
                 chara.sex,
                 '们得偿所愿？',
               ]);
-              await get_custom_rec(202, cb_enum.recruit);
-              await get_custom_rec(203, cb_enum.recruit);
+              await run_custom_rec(202, cb_enum.recruit);
+              await run_custom_rec(203, cb_enum.recruit);
               set('cflag:306:招募状态', [0, 0]);
               set('flag:当前互动角色', get_random_entry([202, 203]));
             },

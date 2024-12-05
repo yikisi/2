@@ -1,7 +1,6 @@
 const era = require('#/era-electron');
 
 const get_status = require('#/system/chara/sys-get-status');
-const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
 const {
   sys_change_attr_and_print,
   sys_handle_action,
@@ -18,6 +17,7 @@ const goto_sex = require('#/page/components/goto-sex');
 const print_juel_shop_page = require('#/page/page-juel-shop');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { run_custom_daily } = require('#/event/daily/daily-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
@@ -294,7 +294,7 @@ async function npc_common(
         ' 送上了一份小礼物……',
       ]);
       era.println();
-      await sys_call_daily_event(chara.id, event_hooks.office_gift);
+      await run_custom_daily(chara.id, event_hooks.office_gift);
       break;
     case 4:
       temp = era.get('flag:当前互动角色');
@@ -326,7 +326,7 @@ async function npc_common(
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.celebration, chara.id)())) {
         era.drawLine();
-        await sys_call_daily_event(chara.id, event_hooks.celebration, {});
+        await run_custom_daily(chara.id, event_hooks.celebration, {});
       }
       break;
     case 7:

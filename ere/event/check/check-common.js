@@ -89,14 +89,12 @@ class CustomizedCheck {
   check_birth() {}
 
   check_love_events() {
-    if (this.id) {
-      add_event(
-        event_hooks.week_end,
-        new EventObject(this.id, cb_enum.love).set_arg(
-          era.get(`love:${this.id}`),
-        ),
-      );
-    }
+    add_event(
+      event_hooks.week_end,
+      new EventObject(this.id, cb_enum.love).set_arg([
+        era.get(`love:${this.id}`),
+      ]),
+    );
   }
 
   check_next_week() {
@@ -163,9 +161,11 @@ class CustomizedCheck {
       const info = race_infos[e.race];
       if (info.race_class === class_enum.G1) {
         g1_count += e.rank <= 5;
-      } else if (info.race_class === class_enum.G2) {
+      }
+      if (info.race_class <= class_enum.G2) {
         g2_count += e.rank <= 3;
-      } else if (e.race !== race_enum.begin_race) {
+      }
+      if (e.race !== race_enum.begin_race) {
         other_count += e.rank === 1;
       }
     });
@@ -177,14 +177,12 @@ class CustomizedCheck {
     buffer.push({
       check: Math.min(g2_count, 3) - 2,
       color: g2_count >= 3 ? attr_change_colors.up : attr_change_colors.down,
-      content: `三场G2比赛 前三名 ${g2_count}/3 ${g2_count >= 3 ? '✔' : '✘'}`,
+      content: `三场G2以上比赛 前三名 ${g2_count}/3 ${g2_count >= 3 ? '✔' : '✘'}`,
     });
     buffer.push({
       check: Math.min(other_count, 5) - 4,
       color: other_count >= 5 ? attr_change_colors.up : attr_change_colors.down,
-      content: `五场G3、OP、PreOP比赛 1着 ${other_count}/5 ${
-        other_count >= 5 ? '✔' : '✘'
-      }`,
+      content: `五场比赛 1着 ${other_count}/5 ${other_count >= 5 ? '✔' : '✘'}`,
     });
     return buffer;
   }

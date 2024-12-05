@@ -6,8 +6,6 @@ const {
   end_ero_and_show_result,
   init_ero,
 } = require('#/system/ero/sys-prepare-ero');
-const sys_call_daily_event = require('#/system/script/sys-call-daily-script');
-const sys_call_edu_event = require('#/system/script/sys-call-edu-script');
 const {
   sys_change_status_by_base,
   sys_like_chara,
@@ -29,6 +27,8 @@ const print_ero_page = require('#/page/page-ero');
 const basement_queue = require('#/event/basement-queue');
 const { common_no_action_check } = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
+const { run_custom_daily } = require('#/event/daily/daily-factory');
+const { get_custom_edu } = require('#/event/edu/edu-factory');
 const GameGuides = require('#/event/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 
@@ -44,6 +44,7 @@ const {
   basement_status_enum,
 } = require('#/data/basement-const');
 const { buff_colors } = require('#/data/color-const');
+const { lust_border } = require('#/data/ero/orgasm-const');
 const BasementAction = require('#/data/event/basement-action');
 const BasementOwners = require('#/data/event/basement-owners');
 const event_hooks = require('#/data/event/event-hooks');
@@ -79,10 +80,10 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   era.drawLine();
   era.set('flag:当前互动角色', 0);
   era.set('flag:当前位置', rest_loc);
-  let lover = era.get('flag:床伴');
-  lover = era.set('flag:床伴', Number(sys_check_awake(0) && lover));
+  let lover = Number(sys_check_awake(0) && era.get('flag:床伴'));
+  era.set('flag:床伴', lover);
   if (chara_id && !sys_check_remote(chara_id) && !lover) {
-    await sys_call_daily_event(chara_id, event_hooks.good_night);
+    await run_custom_daily(chara_id, event_hooks.good_night);
   }
   let continue_flag = true;
   if (era.get('flag:当前位置') !== location_enum.basement) {
@@ -96,7 +97,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
     }
     stop_machine_gun(event_hooks.week_end);
   }
-  if (lover > 0) {
+  if ((lover = era.get('flag:床伴')) > 0) {
     era.set(`cflag:${lover}:自主训练`, 0);
     const life_marks = new LifeEventMarks(lover);
     begin_and_init_ero(0, lover);
@@ -104,26 +105,26 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
       era.set('tflag:强奸', lover);
       era.set('tflag:主导权', lover);
     }
-    const sex_3p = get_random_entry(
-      sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
-        .map((e) => {
-          return {
-            id: e,
-            check:
-              e > 0 &&
-              e !== lover &&
-              sys_check_awake(e) &&
-              get_custom_check(e).is_want_make_love(),
-          };
-        })
-        .filter(
-          (e) =>
-            e.check &&
-            era.get(`relation:${lover}:${e.id}`) > 375 &&
-            era.get(`relation:${e.id}:${lover}`) > 75,
-        ),
-    );
-    if (sex_3p) {
+    const sex_3p =
+      era.get(`talent:${lover}:病娇`) !== 2
+        ? get_random_entry(
+            sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
+              .map((e) => {
+                return {
+                  id: e,
+                  check:
+                    e > 0 &&
+                    e !== lover &&
+                    sys_check_awake(e) &&
+                    (era.get(`relation:${e}:${lover}`) > 225 ||
+                      era.get(`base:${e}:性欲`) >= lust_border.absent_mind) &&
+                    get_custom_check(e).is_want_make_love(),
+                };
+              })
+              .filter((e) => e.check),
+          )
+        : undefined;
+    if (sex_3p !== undefined) {
       era.drawLine();
       const chara = get_chara_talk(sex_3p.id);
       era.print([chara.get_colored_name(), ' 面色绯红地想要加入……接受吗？']);
@@ -150,8 +151,22 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
             0,
             -get_random_value(25, 75 + 25 * era.get(`talent:${lover}:病娇`)),
           ) || wait_flag;
+        if (
+          era.get(`relation:${lover}:${chara.id}`) <= 375 ||
+          era.get(`talent:${lover}:病娇`)
+        ) {
+          wait_flag =
+            sys_like_chara(
+              lover,
+              chara.id,
+              -get_random_value(75, 100 + 25 * era.get(`talent:${lover}:病娇`)),
+            ) || wait_flag;
+        }
         era.set(`cflag:${sex_3p.id}:自主训练`, 0);
-      } else if (sex_3p.check === 2) {
+      } else if (
+        sex_3p.check === 2 &&
+        era.get(`relation:${lover}:${chara.id}`) > 375
+      ) {
         await era.printAndWait([
           chara.get_colored_name(),
           ' 征得 ',
@@ -297,7 +312,7 @@ module.exports = async () => {
       if (force_be) {
         await era.clear();
         era.drawLine();
-        await sys_call_edu_event(force_be, event_hooks.crazy_fan_end);
+        await get_custom_edu(force_be).crazy_fan_end();
         era.print('GAME OVER', {
           align: 'center',
           color: buff_colors[3],
@@ -421,7 +436,7 @@ module.exports = async () => {
       }
       flags.week_start = flags.after_select = false;
       if (hook > 0) {
-        await sys_call_daily_event(chara_id, hook);
+        await run_custom_daily(chara_id, hook);
       } else {
         const note_list = [...notes.common];
         sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(

@@ -19,13 +19,16 @@ aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 4;
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
-  (races) =>
-    check_aim_race(races, race_enum.oka_sho, 1, 1) &&
-    check_aim_race(races, race_enum.yush_him, 1, 1) &&
-    check_aim_race(races, race_enum.shuk_sho, 1, 1) &&
-    (check_aim_race(races, race_enum.japa_cup, 1, 1) ||
-      check_aim_race(races, race_enum.japa_cup, 2, 1)) &&
-    get('base:110:速度') >= 1200,
+  function (races) {
+    return (
+      check_aim_race(races, race_enum.oka_sho, 1, 1) &&
+      check_aim_race(races, race_enum.yush_him, 1, 1) &&
+      check_aim_race(races, race_enum.shuk_sho, 1, 1) &&
+      (check_aim_race(races, race_enum.japa_cup, 1, 1) ||
+        check_aim_race(races, race_enum.japa_cup, 2, 1)) &&
+      get(`base:${this.id}:速度`) >= 1200
+    );
+  },
   aim_races,
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));

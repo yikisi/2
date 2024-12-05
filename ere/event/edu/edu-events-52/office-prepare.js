@@ -2,20 +2,14 @@ const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 
-const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const event_hooks = require('#/data/event/event-hooks');
 const { attr_enum } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},EventObject):Promise<*>>} handlers */
 module.exports = (handlers) => {
-  handlers.fans_letr = async (urara, me, callname, flags, event_object) => {
-    if (era.get('flag:当前互动角色') !== 52) {
-      add_event(event_hooks.office_prepare, event_object);
-      return true;
-    }
+  handlers.fans_letr = async (urara, me, callname, flags) => {
     await print_event_name('粉丝来信', urara);
     await era.printAndWait([
       urara.get_colored_name(),
@@ -55,11 +49,7 @@ module.exports = (handlers) => {
     flags.wait_flag = sys_change_motivation(52, 1) || flags.wait_flag;
   };
 
-  handlers.race_clothe = async (urara, me, callname, flags, event_object) => {
-    if (era.get('flag:当前互动角色') !== 52) {
-      add_event(event_hooks.office_prepare, event_object);
-      return true;
-    }
+  handlers.race_clothe = async (urara, me, callname, flags) => {
     await print_event_name('关于决胜服', urara);
     await era.printAndWait([
       '今天，',

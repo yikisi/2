@@ -25,7 +25,7 @@ const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
 
 const { cb_enum } = require('#/event/queue');
-const { get_custom_rec } = require('#/event/rec/rec-factory');
+const { run_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -76,7 +76,7 @@ handlers[304] = (chara, me) => {
       disabled: get('flag:当前月') > 3 || sys_check_team_limit() > -1,
       handle: () => {
         set('cflag:304:招募状态', -2);
-        return get_custom_rec(201, cb_enum.recruit).then(() => {
+        return run_custom_rec(201, cb_enum.recruit).then(() => {
           if (get('cflag:201:育成次数') === 0) {
             new MeekEduMarks().debuff = 40;
           }

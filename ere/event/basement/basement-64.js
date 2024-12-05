@@ -287,8 +287,7 @@ module.exports = class extends CustomizedBase {
     pama.say(['你明白的吧，', callname, '？']);
   }
 
-  // eslint-disable-next-line no-unused-vars
-  async flatter(supporter) {
+  async flatter() {
     const callname = sys_get_colored_callname(this.id, 0),
       me = get_chara_talk(0),
       pama = get_chara_talk(64),

@@ -12,7 +12,7 @@ const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 
 /** @param {HookArg} hook */
-module.exports = async (hook) => {
+module.exports = async function (hook) {
   const buffer = [],
     callname = sys_get_callname(32, 0),
     edu_marks = new TachyonEduMarks(),

@@ -19,8 +19,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit() {
     const me = get_chara_talk(0),
       god = get_chara_talk(342);
     await print_event_name('与你相遇的奇迹', god);

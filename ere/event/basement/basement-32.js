@@ -140,8 +140,7 @@ module.exports = class extends CustomizedBase {
     ]);
   }
 
-  // eslint-disable-next-line no-unused-vars
-  find_escape(out_of_prison, s_level_up, is_back) {
+  find_escape() {
     const me = get_chara_talk(0),
       tachyon = get_chara_talk(32);
     tachyon.say(['想出去吗？']);
