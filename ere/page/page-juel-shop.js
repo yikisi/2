@@ -4,7 +4,6 @@ const {
   get_skill_price,
   get_talent_price,
 } = require('#/system/ero/sys-get-juel-price');
-const call_ero_script = require('#/system/script/sys-call-ero-script');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
@@ -19,6 +18,7 @@ const {
   print_price_and_confirm,
 } = require('#/page/juel-shop/snippets');
 
+const { get_custom_ero } = require('#/event/ero/ero-factory');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -36,7 +36,6 @@ const {
 const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { skill_desc, talent_desc } = require('#/data/ero/shop-desc.json');
 const { trained_talent_names } = require('#/data/ero/status-const');
-const { ero_hooks } = require('#/data/event/ero-hooks');
 
 async function shop_result(chara_id, change, result_type) {
   switch (result_type) {
@@ -85,7 +84,7 @@ async function shop_result(chara_id, change, result_type) {
 module.exports = async (_id) => {
   const total_delta = {};
   const chara_id = _id || era.get('flag:当前互动角色');
-  await call_ero_script(chara_id, ero_hooks.shop_start);
+  await get_custom_ero(chara_id).shop_start();
   const chara_sex = era.get(`cflag:${chara_id}:性别`),
     chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
@@ -720,7 +719,9 @@ module.exports = async (_id) => {
         chara.get_colored_name(),
         ' 的',
         { content: ' 10,000 ', color: buff_colors[2] },
-        { content: `个部位因子与顺从因子，可以转换为 ${me.name} 的` },
+        '个部位因子与顺从因子，可以转换为 ',
+        me.get_colored_name(),
+        ' 的',
         { content: ' 10 ', color: buff_colors[2] },
         '个因子',
         { isBr: true },
@@ -728,11 +729,11 @@ module.exports = async (_id) => {
         chara.get_colored_name(),
         ' 的',
         { content: ' 10,000 ', color: buff_colors[2] },
-        {
-          content: `个痛苦、恐惧、羞耻因子，可以转换为 ${me.name} 的`,
-        },
+        '个痛苦、恐惧、羞耻因子，可以转换为 ',
+        me.get_colored_name(),
+        ' 的',
         { content: ' 1 ', color: buff_colors[2] },
-        '个因子',
+        '个顺从因子',
       ]);
       print_footer(chara_id, page_pointer.tab);
       const ret = await era.input();
@@ -778,7 +779,7 @@ module.exports = async (_id) => {
     await shop_result(
       chara_id,
       (total_delta.skill || 0) + (total_delta.talent || 0),
-      await call_ero_script(chara_id, ero_hooks.shop_end, total_delta),
+      await get_custom_ero(chara_id).shop_end(total_delta),
     );
   }
 };

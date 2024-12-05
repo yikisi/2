@@ -10,7 +10,7 @@ const print_page_header = require('#/page/components/page-header');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const GameGuides = require('#/event/game-guides');
-const { check_rec_script, get_custom_rec } = require('#/event/rec/rec-factory');
+const { check_rec_script, run_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry } = require('#/utils/list-utils');
@@ -171,7 +171,7 @@ async function print_rec_page() {
       ).filter((chara_id) => today_list.includes(chara_id) && !flag_limit);
       if (event_chara_list.length) {
         era.drawLine();
-        flag_leave = await get_custom_rec(
+        flag_leave = await run_custom_rec(
           get_random_entry(event_chara_list),
           event_hooks.recruit_end,
         );
@@ -208,7 +208,7 @@ async function print_rec_page() {
     } else {
       era.drawLine();
       // 普通招募事件
-      flag_leave = await get_custom_rec(ret, event_hooks.recruit);
+      flag_leave = await run_custom_rec(ret, event_hooks.recruit);
       // 正常招募却没招募，说明招募没成功
       flag_recruit = era.get(`cflag:${ret}:招募状态`) <= 0 && !flag_leave;
     }

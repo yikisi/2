@@ -247,8 +247,8 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
   await era.printAndWait('终于，这个彷佛有一世纪之久的吻结束了');
   await era.printAndWait([
     '分开的 ',
-    me.get_colored_name(),
-    ' 们不停的喘着气，',
+    me.get_couple_title(),
+    ' 不停地喘着气，',
     me.get_colored_name(),
     ' 一边喘着一边想冲上前帮 ',
     tachyon.get_colored_name(),

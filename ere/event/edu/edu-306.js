@@ -13,11 +13,18 @@ const {
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const handlers = {
+module.exports = class extends CustomizedEdu {
+  /**
+   * @author 无名黑奴
+   *
+   * @param {CharaTalk} riko
+   * @param {CharaTalk} me
+   */
   async fail(riko, me) {
     await print_event_name('失败', riko);
     const glasse = get_chara_talk(202),
@@ -74,7 +81,14 @@ const handlers = {
     println();
     sys_like_chara(306, 0, -200 - 100 * get('cflag:202:育成次数')) &&
       (await waitAnyKey());
-  },
+  }
+
+  /**
+   * @author 无名黑奴
+   *
+   * @param {CharaTalk} riko
+   * @param {CharaTalk} me
+   */
   async welcome(riko, me) {
     await print_event_name('欢迎', riko);
     await printAndWait([
@@ -131,15 +145,5 @@ const handlers = {
     println();
     sys_like_chara(306, 0, -25) && (await waitAnyKey());
     set('flag:初见办公室', 1);
-  },
-};
-
-module.exports = async (hook, extra_flag, event_object) => {
-  if (!handlers[event_object?.arg]) {
-    throw new Error();
   }
-  return await handlers[event_object.arg](
-    get_chara_talk(306),
-    get_chara_talk(0),
-  );
 };

@@ -7,6 +7,9 @@ const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
+  check_pregnant_unprotect,
+} = require('#/system/ero/sys-calc-ero-status');
+const {
   begin_and_init_ero,
   end_ero_and_train,
   set_palam_to_max,
@@ -16,704 +19,455 @@ const {
   sys_love_uma_in_event,
 } = require('#/system/sys-calc-chara-others');
 
-const { add_event, cb_enum } = require('#/event/queue');
-const print_event_name = require('#/event/snippets/print-event-name');
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const Love205UtilWife = require('#/event/love/love-events-205/util-wife');
+const print_event_name = require('#/event/snippets/print-event-name');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
-const { vp_status_enum } = require('#/data/ero/status-const');
-const event_hooks = require('#/data/event/event-hooks');
-const EventObject = require('#/data/event/event-object');
-const { get_breast_cup } = require('#/data/info-generator');
 
-/** @type {Record<string,function(CharaTalk,CharaTalk):Promise<*>>} */
-const handlers = {};
-
-handlers[49] = async (vp, me) => {
-  await print_event_name('Un amour à taire（隐藏的恋情）', vp);
-  await vp.print_and_wait([
-    '某天夜里，',
-    vp.get_colored_name(),
-    ' 在宿舍想起了与 ',
-    me.get_colored_name(),
-    ' 在法国一起听过的一首歌。',
-  ]);
-  for (const c of [
-    '过往指引着我们前进，让我们更加清醒理智。',
-    '猜忌是多么的危险致命，而情感却如此不堪一击。',
-    '管它希望满怀，还是听天由命。',
-    '一切自有天意，不如随遇而安。',
-    '离合悲欢是我们共同的记忆。',
-    '爱情比我们想象得更加牢固。',
-    '在我身边的时候，你都做些什么？',
-    '时光披上神秘的色彩。',
-    '轻柔的晚风缓缓拂过。',
-    '爱情比我们想象得更加牢固。',
-    '或者快乐地生活在笼子里。',
-    '若没有我们，他们的选择有什么关系？',
-    '爱比我们强大得多……',
-    '人们认为这可能足够了，为了更爱而这么说。',
-    '但这一定是我们的爱，比我们强大得多。',
-    '有了我们在一起的通行证，我相信这可能足够了。',
-    '我们应该清醒地说，这一切都是我们的错。',
-    '爱比我们强大得多……',
-  ]) {
-    await era.printAndWait(`🎵${c}🎵`, { align: 'center', color: vp.color });
-  }
-  era.printButton(
-    `「我，是这么简单的法兰西${vp.get_child_sex_title()}啊……」（升级关系）`,
-    1,
-  );
-  era.printButton('「别胡思乱想了，再不睡要被师傅说的。」（暂停升级）', 2);
-  const ret = await era.input();
-  if (ret === 1) {
-    era.println();
-    if (
-      vp.sex_code === 0 &&
-      (era.get('talent:205:处女') === vp_status_enum.yes ||
-        era.get('talent:205:处女') === vp_status_enum.dont_know) &&
-      era.get('cflag:0:性别') > 0
-    ) {
-      add_event(
-        event_hooks.week_end,
-        new EventObject(205, cb_enum.love).set_arg('lust'),
+module.exports = class extends Love205UtilWife {
+  async 99(vp, me) {
+    await print_event_name("Ensemble, c'est tout（只要在一起）", vp);
+    if (vp.sex_code !== 1 && me.sex_code > 0 && check_pregnant_unprotect(205)) {
+      begin_and_init_ero(0, 205);
+      await era.printAndWait([
+        '来到情人宾馆，',
+        me.get_colored_name(),
+        ' 把 ',
+        vp.get_colored_name(),
+        ' 推倒在床上，嘴唇重叠起来。',
+      ]);
+      await quick_make_love(
+        new EroParticipant(0, part_enum.mouth),
+        new EroParticipant(205, part_enum.mouth),
+        false,
       );
-    } else {
-      await sys_love_uma_in_event(205);
+      await era.printAndWait([
+        '舌头被缠住，',
+        me.get_colored_name(),
+        ' 把唾液灌进去。',
+        vp.get_colored_name(),
+        ' 渐渐接受了，开始自己寻求。',
+      ]);
+      await era.printAndWait('混合的唾液从嘴边滴下也不介意，继续接吻。');
+      await era.printAndWait([
+        '之后 ',
+        me.get_colored_name(),
+        ' 吸住了 ',
+        vp.get_colored_name(),
+        ' 的脖颈，留下红色的痕迹，好像是要加上所有的标记。',
+      ]);
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 的手触摸着 ',
+        vp.get_colored_name(),
+        ' 的胸口，隔着胸罩揉捏。',
+      ]);
+      await era.printAndWait([
+        vp.get_colored_name(),
+        ' 因为突然的刺激而发出声音，',
+        me.get_colored_name(),
+        ' 同时扯住了两个乳头。',
+      ]);
+      await quick_make_love(
+        new EroParticipant(0, part_enum.hand),
+        new EroParticipant(205, part_enum.breast),
+        false,
+      );
+      await vp.say_and_wait('呀啊啊！');
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 接着把手伸进裙子里，抚摸大腿后，探进内裤。',
+      ]);
+      await era.printAndWait([
+        '缝隙一被 ',
+        me.get_colored_name(),
+        ' 滑过，',
+        vp.get_colored_name(),
+        ' 的身体就发抖了。',
+      ]);
+      await vp.say_and_wait('快摸……');
+      await era.printAndWait([
+        '正如她希望的那样，',
+        me.get_colored_name(),
+        ' 的手指碰到了阴核。',
+      ]);
+      await quick_make_love(
+        new EroParticipant(0, part_enum.hand),
+        new EroParticipant(
+          205,
+          vp.sex_code ? part_enum.virgin : part_enum.clitoris,
+        ),
+        false,
+      );
+      await era.printAndWait('包皮被剥掉，敏感的部分被温柔地爱抚了。');
+      await vp.say_and_wait('啊……哈啊……嗯！');
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 的另一只手又伸进 ',
+        vp.get_colored_name(),
+        ' 的胸口，在乳晕周围抚摸着。',
+      ]);
+      await quick_make_love(
+        new EroParticipant(0, part_enum.hand),
+        new EroParticipant(205, part_enum.breast),
+        false,
+      );
+      await era.printAndWait('以指尖画圆，一点一点地朝着中心走去。');
+      await era.printAndWait(
+        '终于到达乳头后，用大拇指和食指轻轻地按下，滚动，或者竖起指甲。',
+      );
+      await vp.say_and_wait('等、那里！');
+      await era.printAndWait('明明是喜欢的。');
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 继续进攻，直到 ',
+        vp.get_colored_name(),
+        ' 头脑模糊到什么也无法思考。',
+      ]);
+      await era.printAndWait([
+        '然后，回过神来，',
+        vp.get_colored_name(),
+        ' 自己张开了大腿。',
+      ]);
+      await era.printAndWait([me.get_colored_name(), ' 满意地把内裤脱下。']);
+      await era.printAndWait([
+        '也许是期待之后的事情吧，',
+        vp.get_colored_name(),
+        ' 的子宫一直躁动着。',
+      ]);
+      await era.printAndWait([
+        '当 ',
+        me.get_colored_name(),
+        ' 脱下裤子，露出已经勃起的那个时，',
+        vp.get_colored_name(),
+        ' 轻轻地高潮了。',
+      ]);
+      await era.printAndWait('即使害怕，也不会逃跑。');
+      if (check_pregnant_unprotect(205) && !era.get(`status:205:经期`)) {
+        if (await select_yes_or_no('要避孕吗？', '是', '生中出！')) {
+          era.set('status:205:短效避孕药', 1);
+        }
+      }
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 抓着自己的阳具，靠近 ',
+        vp.get_colored_name(),
+        ' 的阴道口，慢慢地插入了。',
+      ]);
+      await era.printAndWait(
+        '龟头部分进入后，爱液成为润滑油，让整根肉棒一下子插到了里面。',
+      );
+      set_palam_to_max(205, part_enum.virgin);
+      await quick_make_love(
+        new EroParticipant(0, part_enum.penis),
+        new EroParticipant(205, part_enum.virgin),
+        false,
+      );
+      await vp.say_and_wait('啊啊啊啊！不行！！');
+      await era.printAndWait([
+        '确认被吞到根部附近，',
+        me.get_colored_name(),
+        ' 开始动了。',
+      ]);
+      await vp.say_and_wait('啊！啊！好激烈……');
+      await era.printAndWait([
+        '每次打到腰上都会响起啪的一声，阴道壁被擦过，',
+        vp.get_colored_name(),
+        ' 只能在快感中喘息。',
+      ]);
+      await era.printAndWait(`随着肉棒的动作，${vp.sex}的身体上下移动。`);
+      await era.printAndWait([
+        '表情管理也已经崩坏，但 ',
+        vp.get_colored_name(),
+        ' 已经不在意了。',
+      ]);
+      await vp.say_and_wait('去了！去了！啊啊啊！！');
+      await era.printAndWait([
+        '在 ',
+        me.get_colored_name(),
+        ' 的冲刺下，二人同时迎来了顶峰，温热的因子填满了 ',
+        vp.get_colored_name(),
+        ' 沉下的子宫。',
+      ]);
+      set_palam_to_max(0, part_enum.penis);
+      await quick_make_love(
+        new EroParticipant(0, part_enum.penis),
+        new EroParticipant(205, part_enum.virgin),
+        false,
+      );
+      await era.printAndWait([
+        '射精持续了很久，在这期间，',
+        vp.get_colored_name(),
+        ' 的子宫一直被龟头亲吻着灌入精液。',
+      ]);
+      await era.printAndWait([
+        '不久全部射出来后，',
+        me.get_colored_name(),
+        ' 拔出肉棒。与此同时，白浊逆流而出。',
+      ]);
+      await era.printAndWait([
+        vp.get_colored_name(),
+        ' 看着自己的肚子，',
+        me.get_colored_name(),
+        ' 又压到了她身上。',
+      ]);
+      await era.printAndWait('嘴唇重叠，舌头缠绕。');
+      await quick_make_love(
+        new EroParticipant(0, part_enum.mouth),
+        new EroParticipant(205, part_enum.mouth),
+        false,
+      );
+      await era.printAndWait([
+        '持续热吻了一会儿后，',
+        me.get_colored_name(),
+        ' 把重新恢复精神的那东西顶了过去。',
+      ]);
+      await quick_make_love(
+        new EroParticipant(0, part_enum.penis),
+        new EroParticipant(205, part_enum.virgin),
+        false,
+      );
+      await vp.say_and_wait('啊，不行的……');
+      await era.printAndWait([
+        '没有什么不行的，',
+        me.get_colored_name(),
+        ' 再次开始活塞运动。',
+      ]);
+      await era.printAndWait([
+        '被 ',
+        me.get_colored_name(),
+        ' 强行侵犯的 ',
+        vp.get_colored_name(),
+        ' 拼命抵抗，但是使不上力气。',
+      ]);
+      await era.printAndWait([
+        '阴道内的抽插变得激烈，嘴巴也被 ',
+        me.get_colored_name(),
+        ' 的舌头蹂躏。',
+      ]);
+      await era.printAndWait([
+        vp.get_colored_name(),
+        ' 紧紧抱住 ',
+        me.get_colored_name(),
+        ' 的后背，把身体交给快乐。',
+      ]);
+      await vp.say_and_wait('真是……我变成什么样都可以吗……');
+      await era.printAndWait([
+        '看着这样的 ',
+        vp.get_colored_name(),
+        '，',
+        me.get_colored_name(),
+        ' 露出了满意的笑容。',
+      ]);
+      await era.printAndWait([
+        vp.get_colored_name(),
+        ' 双脚抱住 ',
+        me.get_colored_name(),
+        ' 的后背，不让 ',
+        me.get_colored_name(),
+        ' 逃跑。',
+      ]);
+      await vp.say_and_wait('嗯！射出来，全部给我。');
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 在龟头紧贴子宫口的状态下吐出精子。',
+      ]);
+      set_palam_to_max(0, part_enum.penis);
+      await quick_make_love(
+        new EroParticipant(0, part_enum.penis),
+        new EroParticipant(205, part_enum.virgin),
+        false,
+      );
+      await vp.say_and_wait('齁哦……啊……');
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 的射精还在持续，每次脉动时 ',
+        vp.get_colored_name(),
+        ' 的身体都会跟着痉挛。',
+      ]);
+      await era.printAndWait([
+        '让人感觉是 ',
+        vp.get_colored_name(),
+        ' 小小的子宫会破裂的量，终于释放结束了。',
+      ]);
+      await era.printAndWait([me.get_colored_name(), ' 把肉棒慢慢地拔出。']);
+      await vp.say_and_wait('能让我再去一次吗……');
+      await era.printAndWait([
+        '这样说的 ',
+        vp.get_colored_name(),
+        '，把脸蹭到 ',
+        me.get_colored_name(),
+        ' 的肉棒上。',
+      ]);
+      await era.printAndWait('就这样伸出舌头，把龟头含在嘴里。');
+      await era.printAndWait('就连尿道里剩下的东西也被吸取干净。');
+      await quick_make_love(
+        new EroParticipant(205, part_enum.mouth),
+        new EroParticipant(0, part_enum.penis),
+        false,
+      );
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 的肉棒再次漂亮地勃起了，被 ',
+        vp.get_colored_name(),
+        ' 挪到了自己的私处。',
+      ]);
+      await vp.say_and_wait('这次从后面……');
+      await era.printAndWait('匍匐而行，变成了后入的姿势。');
+      await vp.say_and_wait('啊！这个不行，戳到的地方不对啊……');
+      await era.printAndWait('阴道内的每一块褶皱都被摩擦。');
+      await quick_make_love(
+        new EroParticipant(0, part_enum.penis),
+        new EroParticipant(205, part_enum.virgin),
+        false,
+      );
+      await era.printAndWait([
+        '由于 ',
+        me.get_colored_name(),
+        ' 过于激烈的动作，',
+        vp.get_colored_name(),
+        ' 手臂的姿势崩溃，变成了突出臀部的样子。',
+      ]);
+      era.printButton(
+        `「${sys_get_callname(0, 205)} 的小穴很舒服，紧紧的棒极了。」`,
+        1,
+      );
+      await era.input();
+      await era.printAndWait([
+        '腰撞上去的时候，',
+        vp.get_colored_name(),
+        ' 的身体就会发抖。',
+      ]);
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 像攻打腹部一样顺着阴道壁往上推。',
+      ]);
+      await era.printAndWait([
+        '被戳到G点的 ',
+        vp.get_colored_name(),
+        ' 感觉全身都被通了电。',
+      ]);
+      await vp.say_and_wait('那里！不行……又要来了！');
+      await vp.say_and_wait('去了！射给我！射在我里面吧。');
+      await era.printAndWait([
+        '高潮的同时被 ',
+        me.get_colored_name(),
+        ' 中出，注入热乎的因子汁。',
+      ]);
+      era.drawLine();
+      await era.printAndWait([
+        '稍憩片刻，说要给 ',
+        me.get_colored_name(),
+        ' 个惊喜的 ',
+        vp.get_colored_name(),
+        ' 小跑进了一旁的更衣室。',
+      ]);
+      await era.printAndWait([
+        '过了一会儿，',
+        vp.get_colored_name(),
+        ' 的小脑袋从更衣室的门缝里弹了出来。',
+      ]);
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 能看出她一脸不安的表情，一手用力撑着门沿。',
+      ]);
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 伸手抓住 ',
+        vp.get_colored_name(),
+        ' 捂住嘴的小手，抓过来反剪到了身后。',
+      ]);
+      await era.printAndWait([
+        '在小手离开嘴巴的一瞬间，',
+        vp.get_colored_name(),
+        ' 吐出舌头喘着热气的小嘴暴露无遗。',
+      ]);
+      await era.printAndWait([
+        '或许是害怕自己控制不住会发出声音，',
+        vp.get_colored_name(),
+        ' 急忙咬住下唇。',
+      ]);
+      await era.printAndWait([
+        vp.get_colored_name(),
+        ' 拍了拍 ',
+        me.get_colored_name(),
+        ' 的手。',
+      ]);
+      await era.printAndWait([
+        '等 ',
+        me.get_colored_name(),
+        ' 放开她后，',
+        vp.get_colored_name(),
+        ' 就像母狗一样双手撑在地上，脖子上有一条无比显眼的黑色皮质项圈。',
+      ]);
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 猛地一拉狗链，让 ',
+        vp.get_colored_name(),
+        ' 的整个上半身被迫昂起。',
+      ]);
+      await era.printAndWait([
+        '窒息不仅让 ',
+        vp.get_colored_name(),
+        ' 双颊通红，双手绝望地扣弄着项圈，徒劳地想要解开，也让她快感的刺激直线上升。',
+      ]);
+      set_palam_to_max(0, part_enum.sadism);
+      set_palam_to_max(205, part_enum.masochism);
+      await quick_make_love(
+        new EroParticipant(0, part_enum.hit),
+        new EroParticipant(205, part_enum.body),
+        false,
+      );
+      await era.printAndWait([
+        vp.get_colored_name(),
+        ' 双腿颤抖着，淫液裹挟着精液一股股地泄出，顺着大腿将胯间完全濡湿……',
+      ]);
+      await era.printAndWait([
+        '施虐癖得到了满足的 ',
+        me.get_colored_name(),
+        ' 松开了狗链，精疲力尽的 ',
+        vp.get_colored_name(),
+        ' 跪在了地上，大口喘息着。',
+      ]);
+      await era.printAndWait([
+        vp.get_colored_name(),
+        ' 在 ',
+        me.get_colored_name(),
+        ' 的命令下，小脸贴到地板上，冲着 ',
+        me.get_colored_name(),
+        ' 撅高了屁股，用双指掰开两瓣红肿的阴唇，向 ',
+        me.get_colored_name(),
+        ' 展示自己刚刚被内射过的小穴。',
+      ]);
+      await era.printAndWait([
+        '精液一点点滑落到地板上，',
+        me.get_colored_name(),
+        ' 十分满意。',
+      ]);
+      era.printButton('「聪明的狗狗一定知道接下来该怎么做吧。」', 1);
+      await era.input();
+      await vp.say_and_wait('请在我的飞机杯蜜穴里注入您高贵的精液吧❤️～');
+      await era.printAndWait([
+        '伴随着啄食般的亲吻，',
+        me.get_colored_name(),
+        ' 的肉棒再次开始了对爱马的侵犯。',
+      ]);
+      await quick_make_love(
+        new EroParticipant(0, part_enum.mouth),
+        new EroParticipant(205, part_enum.mouth),
+        false,
+      );
+      await quick_make_love(
+        new EroParticipant(0, part_enum.penis),
+        new EroParticipant(205, part_enum.virgin),
+        false,
+      );
+      end_ero_and_train();
+      era.println();
     }
-  } else {
-    era.set('cflag:205:爱慕暂拒', 49);
-  }
-};
-
-handlers.lust = async (vp, me) => {
-  await print_event_name('La fée（爱上凡人的仙女）', vp);
-  await era.printAndWait([
-    '清风吹拂，扬起 ',
-    vp.get_colored_name(),
-    ` 的金丝荡漾，${vp.sex}的肌肤晃若明雪。`,
-  ]);
-  await era.printAndWait('湛蓝的眼眸嫣然动人，却又透着几分灵动。');
-  await era.printAndWait('饱嫩润闪的唇瓣，呈现出一种近似透明的美妍。');
-  await era.printAndWait('容貌有种超越年龄的媚气，一眼便能让人沉醉。');
-  await era.printAndWait(
-    '色泽迷人的短金发，被两个低发髻扎着，闪出精致的亮泽。',
-  );
-  await era.printAndWait(
-    '少女套着白丝的大腿纤细腴润，踏着法式的学生皮鞋，极富女子元气。',
-  );
-  await era.printAndWait('但眉宇间宛若修造的容颜，绝非寻常人家可近。');
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 对 ',
-    me.get_colored_name(),
-    ' 微笑，似乎并没有因为 ',
-    me.get_colored_name(),
-    ' 的无礼而生气。',
-  ]);
-  await era.printAndWait(
-    `${vp.sex}穿着连衣裙，肩带在领口处交叉，连着脖子上白色的蕾丝领圈。`,
-  );
-  await era.printAndWait('上半身总体是白色的衣服，裹着她的双乳。');
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 的腰也很纤细，系了一条蓝色的皮革腰带。',
-  ]);
-  await era.printAndWait('而腰以下，就是蓝色裙子。');
-  await era.printAndWait('群面是宝石一般觉得蓝色，这是上层。');
-  await era.printAndWait('下层还有一层衬裙，是白色的，同样是蕾丝、花边。');
-  await era.printAndWait('裙子不长，只到大腿的中间。');
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 的腿很纤细，腿上是一双洁白的过膝袜——半透明的。',
-  ]);
-  await era.printAndWait('袜子和裙子之间的腿，也格外诱人。');
-  await era.printAndWait('在右腿处，还有一个白色的腿环。');
-  await era.printAndWait(
-    '脚上则穿着一双蓝色的鞋子，几条白色的绑带系在了脚腕处，还打了一个蝴蝶结。',
-  );
-  era.printButton('「你真漂亮。」', 1);
-  await era.input();
-  await vp.say_and_wait('谢谢夸奖。');
-  era.printButton('「不过法国的金发碧眼好多……」', 1);
-  await era.input();
-  await vp.say_and_wait('我不好看吗？快看我，快看我！');
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 凑上前来，俯下上半身，仰起头。',
-  ]);
-  await era.printAndWait([
-    me.get_colored_name(),
-    ' 和 ',
-    vp.get_colored_name(),
-    ' 的鼻尖，相隔一寸不到的距离。',
-  ]);
-  await era.printAndWait([
-    '低下头，这个视角恰好可以看到 ',
-    vp.get_colored_name(),
-    ' 的双乳。',
-  ]);
-  get_breast_cup(205) < 'D' &&
-    (await era.printAndWait(`${vp.sex}的乳房不大，粗看是BC之间的小乳鸽。`));
-  await era.printAndWait(`但是现在${vp.sex}向前俯身，那观感就不一样了。`);
-  await era.printAndWait(
-    '被连衣裙包裹着的南半球，两条连接脖子颈环的丝带，就像是快绷断了一样。',
-  );
-  era.get('cflag:0:性别') === 1 &&
-    (await era.printAndWait(
-      `孤男寡女，${vp.sex}倒也不怕 ${me.name} 做出什么出格的事情。`,
-    ));
-  await era.printAndWait([
-    me.get_colored_name(),
-    ` 看着眼前的${vp.get_teen_sex_title()}，眼边还因为要见 `,
-    me.get_colored_name(),
-    ' 特地抹了胭脂，很可爱。',
-  ]);
-  await era.printAndWait([
-    '美中不足的是，穿着连衣裙的 ',
-    vp.get_colored_name(),
-    '，并不能露出肚脐。',
-  ]);
-  await era.printAndWait('但是上帝在关上一道门的同时，又开启了一扇窗。');
-  await era.printAndWait(['——', vp.get_colored_name(), ' 的衣服没有袖子。']);
-  era.printButton('「能让我摸摸你的咯吱窝吗？」', 1);
-  await era.input();
-  await vp.say_and_wait('Non，Trousseur de jupons。');
-  era.printButton('「我听不懂，那我摸了。」', 1);
-  await era.input();
-  await era.printAndWait([
-    me.get_colored_name(),
-    ' 以迅雷不及掩耳之势，双手袭击了 ',
-    vp.get_colored_name(),
-    ' 的双腋。',
-  ]);
-  await vp.say_and_wait('啊！哈哈哈……');
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 双手快速落下，夹紧了腋肢。',
-  ]);
-  await era.printAndWait([
-    '把 ',
-    me.get_colored_name(),
-    ' 的手指夹得紧紧的，然后笑起来。',
-  ]);
-  await era.printAndWait('时而仰着头，时而又想俯下身。');
-  await era.printAndWait('小马驹的腋下格外细嫩，像是新制成的豆腐。');
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 被 ',
-    me.get_colored_name(),
-    ' 弄得进退维谷，往左、往右都不是办法，两腋被拿捏得死死的。',
-  ]);
-  await era.printAndWait([
-    '背已经靠着墙壁，往前则是 ',
-    me.get_colored_name(),
-    ' 这个罪魁祸首的怀抱。',
-  ]);
-  await vp.say_and_wait([
-    `${sys_get_callname(205, 0)}，不要……哈哈哈……够，够了啦！`,
-  ]);
-  await vp.say_and_wait([
-    '我，求求您了……哈哈哈哈……',
-    vp.get_colored_name(),
-    ' 求你了',
-  ]);
-  await era.printAndWait([
-    me.get_colored_name(),
-    ' 的行为愈发猖狂，直到 ',
-    vp.get_colored_name(),
-    ' 大笑到因为自己的唾液呛到。',
-  ]);
-  await era.printAndWait([
-    me.get_colored_name(),
-    ' 放过了侧过头咳嗽了两声的 ',
-    vp.get_colored_name(),
-    '。',
-  ]);
-  era.printButton('「怎么想到带腿环的？」', 1);
-  await era.input();
-  await vp.say_and_wait('嗯？漂亮。');
-  era.printButton('「你知不知道，这是什么意思？」', 1);
-  await era.input();
-  await vp.say_and_wait('不知道。');
-  await era.printAndWait('她轻轻地摇头，短发都飘舞起来。');
-  era.printButton('「这是勾引男人的意思。」', 1);
-  era.printButton(
-    '「有些地方，妓女脱光衣服跟男人上床，之后数钱就夹在腿环里。」',
-    2,
-  );
-  await era.input();
-  await vp.say_and_wait('那、那我取下来吧……');
-  era.printButton('「以后在别人面前不许戴。」', 1);
-  era.printButton('「在我面前必须戴上。」', 2);
-  await era.input();
-  await vp.say_and_wait('可以，不过为什么呀？');
-  era.printButton('「在我眼里，你是一个小骚货，一个salope。」', 1);
-  era.printButton('「人前活泼可爱的公主，半夜和男人勾搭在一起……」', 2);
-  let ret = await era.input();
-  await vp.say_and_wait(
-    ret === 1 ? '呜……你别骂我……' : '不是，又不是我主动的……',
-  );
-  era.print(['面对哽咽欲泣的小洋马，', me.get_colored_name(), '……']);
-  era.printButton('揉胸', 1);
-  era.printButton('摸腿', 2);
-  ret = await era.input();
-  begin_and_init_ero(0, 205);
-  if (ret === 1) {
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 让 ',
-      vp.get_colored_name(),
-      ' 脱掉鞋子爬上床，双腿张开到恰好处跪好。',
-    ]);
-    await era.printAndWait([
-      `${vp.get_teen_sex_title()}丝滑地坐了下来，蓝色的裙摆摊开成一个小圆。`,
-    ]);
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 来到 ',
-      vp.get_colored_name(),
-      ' 的身后，光洁的后背很是漂亮。',
-    ]);
-    await era.printAndWait(['双手用力地握着，撑在身体两侧。']);
-    await era.printAndWait([
-      '本格化了的 ',
-      vp.get_colored_name(),
-      ' 没有反抗，任由 ',
-      me.get_colored_name(),
-      ' 摆布。',
-    ]);
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 抓住 ',
-      vp.get_colored_name(),
-      ' 的双乳，像掂量菜品一样。',
-    ]);
-    await era.printAndWait([
-      '然后是错乱地揉捏，手法大概是『轻拢慢捻抹复挑』。',
-    ]);
-    await era.printAndWait([
-      vp.get_colored_name(),
-      ' 不用低头，也知道自己的双乳露了出来。',
-    ]);
-    await era.printAndWait(['画圈圈、拨动、按压……']);
-    await era.printAndWait([
-      vp.get_colored_name(),
-      ' 一边感受着乳晕处源源不断的快感，一边保持自己的姿势。',
-    ]);
-    await era.printAndWait([
-      `${vp.sex}这才发现，自己已经抬手向后抱住了 `,
-      me.get_colored_name(),
-      ' 的头，姿势像是在投降。',
-    ]);
-    await era.printAndWait([
-      '而 ',
-      me.get_colored_name(),
-      '，咧嘴笑着，很是坏心眼的样子。',
-    ]);
-    await vp.say_and_wait('不要……');
-    await era.printAndWait([
-      vp.get_colored_name(),
-      ' 轻声呻吟着，双目已经浮现出爱慕的样子。',
-    ]);
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 轻轻一碰，',
-      vp.get_colored_name(),
-      ' 就觉得爽劲冲到了后脑勺。',
-    ]);
-    era.printButton('「来，挺胸，收腹。」', 1);
-    await era.input();
-    await era.printAndWait([
-      ' ',
-      vp.get_colored_name(),
-      ' 顺着 ',
-      me.get_colored_name(),
-      ' 的手，按部就班地调整姿势。',
-    ]);
-    await era.printAndWait(`呼吸了一下后，${vp.sex}的腹部又小了一圈。`);
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 摸着 ',
-      vp.get_colored_name(),
-      ' 的腰肢，确认皮带的位置，轻轻拉动。',
-    ]);
-    await era.printAndWait(['*咔哒咔哒*']);
-    await era.printAndWait(`白色的皮带缩进，直到重新贴紧${vp.sex}的腰腹。`);
-    await vp.say_and_wait('好紧……');
-    era.printButton('「紧一点才挺拔嘛。」', 1);
-    await era.input();
-    await era.printAndWait([
-      vp.get_colored_name(),
-      ' 被束着腰，似乎乳房都更挺拔了。',
-    ]);
-    await era.printAndWait([
-      me.get_colored_name(),
-      ` 从后面抱住${vp.sex}，双手交叉，握住一对白兔。`,
-    ]);
-    era.printButton('「真水灵。」', 1);
-    era.printButton(`「${vp.name}还是第一次被这样肆无忌惮地揉胸吧。」`, 2);
-    ret = await era.input();
-    await vp.say_and_wait(ret === 1 ? '这是什么形容词啊！' : '……嗯。');
-    await era.printAndWait([
-      '挺起的双乳，被 ',
-      me.get_colored_name(),
-      ' 抓成各种模样。',
-    ]);
-    await era.printAndWait('软软的，像水气球一样。');
-    await quick_make_love(
-      new EroParticipant(0, part_enum.hand),
-      new EroParticipant(205, part_enum.breast),
-      false,
-    );
-  } else {
-    era.printButton('「你这还不够，有勒肉才更淑女。」', 1);
-    await era.input();
-    await vp.say_and_wait('勒肉？');
-    await era.printAndWait([
-      '不等 ',
-      vp.get_colored_name(),
-      ' 反应过来，',
-      me.get_colored_name(),
-      ' 拉动她腿环上的皮带扣。',
-    ]);
-    await vp.say_and_wait('腿……不可以……');
-    await era.printAndWait([
-      '刚刚袭击腋下的时候，',
-      me.get_colored_name(),
-      ' 就发现她怕痒。',
-    ]);
-    await era.printAndWait('现在也是双腿发抖，身体跟着一阵战栗。');
-    await vp.say_and_wait('快停下！');
-    await vp.say_and_wait(`${sys_get_callname(205, 0)}……你快停下呀，笨蛋！`);
-    era.printButton(
-      `「${sys_get_callname(0, 205)}骂人都这么温柔吗？真是好相处呢。」`,
-      1,
-    );
-    await era.input();
-    await vp.say_and_wait('不要摸大腿内侧呀！快停下啦……');
-    await era.printAndWait([
-      vp.get_colored_name(),
-      ' 咬着下唇，晃得美乳上上下下。',
-    ]);
-    await quick_make_love(
-      new EroParticipant(0, part_enum.hand),
-      new EroParticipant(205, part_enum.body),
-      false,
-    );
-  }
-  era.printButton('「我要你说我喜欢听的话。」', 1);
-  era.printButton('「说点好话看看？」', 2);
-  await era.input();
-  await vp.say_and_wait('……');
-  await vp.say_and_wait(
-    `${sys_get_callname(205, 0)}……${me.actual_name}……喜欢……`,
-  );
-  await vp.say_and_wait(`我好羡慕${sys_get_callname(205, 0)}的担当……`);
-  await vp.say_and_wait(`${vp.name} 看到 ${me.actual_name} 就腿软……`);
-  era.printButton('「不够好听。」', 1);
-  era.printButton('「你自己呢？」', 2);
-  ret = await era.input();
-  if (ret === 1) {
-    await vp.say_and_wait('啊啊啊啊……');
-    await vp.say_and_wait(`${me.actual_name} 是万众瞩目的训练员！`);
-    await vp.say_and_wait(`${vp.name} 甘愿拜倒在 ${me.actual_name} 脚下……`);
-  } else {
-    await vp.say_and_wait(`${vp.name}，${vp.name} 自己是大笨蛋！`);
-    await vp.say_and_wait(
-      `我……看到 ${sys_get_callname(205, 0)} 就发情，脑袋里全是浆糊……`,
-    );
-  }
-  era.printButton(`「想看 ${sys_get_callname(0, 205)} 尿尿的地方。」`, 1);
-  await era.input();
-  await vp.say_and_wait('变态！');
-  era.printButton('「谁是变态？」', 1);
-  await era.input();
-  await era.printAndWait([vp.get_colored_name(), ' 满脸委屈地噘着嘴。']);
-  await vp.say_and_wait(`${vp.name} 是变态。`);
-  era.drawLine();
-  await era.printAndWait(['脱下内裤，', vp.get_colored_name(), ' 躺在床上。']);
-  await era.printAndWait([
-    '按照 ',
-    me.get_colored_name(),
-    ' 的要求，双腿放到了身旁，膝盖折叠。',
-  ]);
-  await era.printAndWait(
-    '脚后跟又紧贴着大腿根部，脚掌完全绷直来让她不能放松。',
-  );
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 的私处，正门户大开，对着 ',
-    me.get_colored_name(),
-    '。',
-  ]);
-  await era.printAndWait(
-    '鲍鱼似的私处，稀疏的金毛掩盖下，粉嫩的双唇随着呼吸开合。',
-  );
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 主动把手垫在了枕头下，不做抵抗。',
-  ]);
-  await era.printAndWait([
-    me.get_colored_name(),
-    ' 埋下头，隔着十几厘米，就能闻到马娘『发春期』的气息。',
-  ]);
-  await era.printAndWait('淡淡的，有点腥臭，有点少女的芳香。');
-  await era.printAndWait('两瓣大阴唇之间的缝隙里，是更加水嫩的小阴唇。');
-  await era.printAndWait('薄薄的边缘，近距离打量下很是诱人。');
-  await vp.say_and_wait('啊……不要……');
-  await era.printAndWait('她快速呼吸，喘不过气来。');
-  era.printButton(`有节奏地舔 ${vp.name} 的阴唇。`, 1);
-  await era.input();
-  await era.printAndWait([
-    '淡淡的咸味在 ',
-    me.get_colored_name(),
-    ' 的舌尖蔓延，但是这样还不够。',
-  ]);
-  era.printButton(`拨开${vp.name}的阴唇。`, 1);
-  await era.input();
-  await vp.say_and_wait('不要……');
-  await era.printAndWait([
-    '在 ',
-    me.get_colored_name(),
-    ' 面前的，是更加红润的嫩肉。',
-  ]);
-  await era.printAndWait('上面还沾了一层水，看上去美妙至极。');
-  await vp.say_and_wait(`我还是……处……${me.actual_name}，还是……`);
-  era.printButton('「好的，我现在先不动」', 1);
-  await era.input();
-  await vp.say_and_wait('嗯。');
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 的小阴唇，完全被 ',
-    me.get_colored_name(),
-    ' 的舌头推着。',
-  ]);
-  await era.printAndWait([
-    ' ',
-    me.get_colored_name(),
-    ' 接着一口吻住阴唇包被之下那鼓起的肉核，然后用力吮吸起来。',
-  ]);
-  await era.printAndWait([
-    '这下子，整块皮肉都被吸进了 ',
-    me.get_colored_name(),
-    ' 的双唇之间。',
-  ]);
-  await era.printAndWait('肉核更是无处可逃，圆圆地鼓了起来。');
-  await vp.say_and_wait('不行了……别吸啊啊啊啊啊……');
-  await vp.say_and_wait('小宝宝，还不能给你生……');
-  await era.printAndWait([
-    '三番五次的吮吸，让 ',
-    vp.get_colored_name(),
-    ' 满头大汗。',
-  ]);
-  await era.printAndWait([
-    '这个时候 ',
-    me.get_colored_name(),
-    ' 又一而再再而三地扫过她的穴口。',
-  ]);
-  await era.printAndWait('触而不入的紧张感让少女欲仙欲死。');
-  await vp.say_and_wait('不要……不要……');
-  await vp.say_and_wait('快停下来……');
-  await vp.say_and_wait('要丢了……去了！');
-  await vp.say_and_wait('明天我还要见师傅……');
-  await era.printAndWait([vp.get_colored_name(), ' 语无伦次地说着，直到。']);
-  await era.printAndWait('——淡白的琼浆从嫩穴口流出，接着的几缕则是直接溅出。');
-  await era.printAndWait('她抽出枕头下的手，捂着自己的脸。');
-  await vp.say_and_wait(`${sys_get_callname(205, 0)} 讨厌！`);
-  era.printButton('「我也快忍不住了，你先起来。」', 1);
-  await era.input();
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 懒散地爬起身，看到一根肉棒已经勃起。',
-  ]);
-  era.printButton('「刚刚看了你的，你也看看我的吧。」', 1);
-  await era.input();
-  await vp.say_and_wait('有什么好看的。');
-  era.drawLine();
-  await vp.say_and_wait(
-    `……对不起，${me.actual_name} 的肉棒……好、好大，好粗，${vp.name}，喜欢……`,
-  );
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 爬到地上跪下，地上铺了地毯，也不会磕脚。',
-  ]);
-  await vp.say_and_wait('有点臭……');
-  await era.printAndWait([vp.get_colored_name(), ' 如是评价。']);
-  era.printButton('「喜欢吗？」', 1);
-  await era.input();
-  await era.printAndWait([vp.get_colored_name(), ' 默不作声。']);
-  era.printButton('「看样子是喜欢咯。」', 1);
-  await era.input();
-  await vp.say_and_wait('才没有！');
-  await era.printAndWait([
-    '话刚说完，',
-    me.get_colored_name(),
-    ' 就把肉棒直顶她的鼻子。',
-  ]);
-  await era.printAndWait(['——准确来说，是人中穴，嘴唇上方的沟壑。']);
-  await era.printAndWait(['龟头完全挡住了她两个鼻孔的气路。']);
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 每一次吸气，都不得不品尝 ',
-    me.get_colored_name(),
-    ' 的味道。',
-  ]);
-  era.printButton('「听你师傅说你唱歌很好听。」', 1);
-  await era.input();
-  await vp.say_and_wait('唱歌？');
-  era.printButton('「就巴黎特雷森的校歌吧。」', 1);
-  await era.input();
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 就这样跪在地上，鼻子被肉棒顶住，还要唱校歌。',
-  ]);
-  await era.printAndWait([
-    '好不容易唱完后，',
-    me.get_colored_name(),
-    ' 的雄臭味，已经完全进入了她的鼻腔。',
-  ]);
-  await era.printAndWait([
-    me.get_colored_name(),
-    ' 俯身看着 ',
-    vp.get_colored_name(),
-    '。',
-  ]);
-  await era.printAndWait('双颊白皙，吹弹可破。');
-  await era.printAndWait('眼睛是宝蓝色的，眼角还化了妆，在夜色下嫣然动人。');
-  await era.printAndWait('一头华丽的金色短发，真是货真价实的公主。');
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 被 ',
-    me.get_colored_name(),
-    ' 看得不好意思，无奈地伸出舌头。',
-  ]);
-  await era.printAndWait([
-    '她的舌头远比 ',
-    me.get_colored_name(),
-    ' 更尖、更细，软软的，一下舔到了 ',
-    me.get_colored_name(),
-    ' 的马眼。',
-  ]);
-  await era.printAndWait([
-    '一番舔舐后，',
-    vp.get_colored_name(),
-    ' 发现 ',
-    me.get_colored_name(),
-    ' 没有动静，就含住龟头，然后吮吸。',
-  ]);
-  await era.printAndWait('腥臭味在她嘴里扩散，一直钻到牙齿缝里。');
-  await era.printAndWait([
-    '每一次吮吸，都让 ',
-    vp.get_colored_name(),
-    ' 羞愧不已。',
-  ]);
-  await era.printAndWait([
-    '按捺不住的 ',
-    me.get_colored_name(),
-    '，双手抱着 ',
-    vp.get_colored_name(),
-    ' 的头，对着她的嘴抽插起来。',
-  ]);
-  await vp.say_and_wait('不要……', true);
-  await vp.say_and_wait('好难受……', true);
-  await vp.say_and_wait(
-    '臭！好恶心。顶到上颚了！舌根，受不了……想吐……好想吐',
-    true,
-  );
-  await era.printAndWait([
-    '每一次用力挺入，',
-    me.get_colored_name(),
-    ' 都把龟头顶到她口腔的最深处。',
-  ]);
-  await era.printAndWait(['——软腭和舌根之间。']);
-  await era.printAndWait([
-    '舌根处的凸起，让 ',
-    me.get_colored_name(),
-    ' 的龟头更加快乐。',
-  ]);
-  await era.printAndWait([
-    '可惜 ',
-    vp.get_colored_name(),
-    ' 在这口交中，只能屈辱地忍受。',
-  ]);
-  era.printButton('忍不住了。', 1);
-  era.printButton('射进嘴里。', 2);
-  await era.input();
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 察觉到了嘴里阳具的颤抖，想说话，却又说不出来。',
-  ]);
-  await era.printAndWait(
-    '舌根被顶住，一股股温热而腥臭的液体直接射在了最深处。',
-  );
-  await era.printAndWait('黏糊糊的，似乎要把她的喉咙给缝住。');
-  await era.printAndWait([
-    vp.get_colored_name(),
-    ' 本能地翻起白眼，等 ',
-    me.get_colored_name(),
-    ' 肉棒拔出，几滴精液还落到了地毯上。',
-  ]);
-  await era.printAndWait([vp.get_colored_name(), ' 捂着嘴，快速爬起来。']);
-  await era.printAndWait('几点精液已经从嘴角溢出，玷污了她白色的丝质手套。');
-  await vp.say_and_wait('咕……嗯嗯，唔。');
-  await era.printAndWait([vp.get_colored_name(), ' 低着头，喉咙滚动着']);
-  await era.printAndWait([
-    '白色的精液从嘴里被一点点地咽下，比被 ',
-    me.get_colored_name(),
-    ' 口爆时更加恶心。',
-  ]);
-  await era.printAndWait('她那整整齐齐的白洁牙齿，也一一沾上了精液。');
-  await era.printAndWait('一些精液还粘着上齿和下齿，在她的嘴里拉丝。');
-  await vp.say_and_wait('哈啊……gros nigaud！');
-  era.printButton('「真对不起。」', 1);
-  await era.input();
-  await quick_make_love(
-    new EroParticipant(0, part_enum.abuse),
-    new EroParticipant(205, part_enum.masochism),
-    false,
-  );
-  set_palam_to_max(205, part_enum.clitoris);
-  await quick_make_love(
-    new EroParticipant(0, part_enum.mouth),
-    new EroParticipant(205, part_enum.virgin),
-    false,
-  );
-  set_palam_to_max(0, part_enum.penis);
-  await quick_make_love(
-    new EroParticipant(205, part_enum.mouth),
-    new EroParticipant(0, part_enum.penis),
-    false,
-  );
-  end_ero_and_train();
-  era.println();
-  await sys_love_uma_in_event(205);
-};
-
-handlers[74] = require('#/event/love/love-events-205/girl-friend');
-
-handlers[89] = require('#/event/love/love-events-205/wife');
-
-handlers[99] = require('#/event/love/love-events-205/half-life');
-
-/**
- * @param _
- * @param __
- * @param {EventObject} event_object
- */
-module.exports = async (_, __, event_object) => {
-  const me = get_chara_talk(0),
-    vp = get_chara_talk(205);
-  if (event_object && handlers[event_object.arg]) {
-    await handlers[event_object.arg](vp, me);
-  } else {
-    const love = era.get('love:205');
-    if (handlers[love]) {
-      await handlers[love](vp, me);
-    } else {
-      throw new Error();
-    }
+    await sys_love_uma_in_event(205);
   }
 };

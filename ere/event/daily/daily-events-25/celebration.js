@@ -16,11 +16,6 @@ const {
 
 /** @param {HookArg} hook */
 module.exports = async (hook) => {
-  const edu_weeks = era.get('cflag:25:育成回合计时'),
-    weeks = (era.get('flag:当前回合数') - 1) % 48;
-  if (weeks !== 13 || edu_weeks < 96) {
-    throw new Error();
-  }
   hook.override = true;
   const callname = sys_get_callname(25, 0),
     coffee = get_chara_talk(25),

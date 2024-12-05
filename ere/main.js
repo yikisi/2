@@ -27,6 +27,7 @@ function get_copyright_entry(chara_id, _suffix) {
   return {
     color: get_chara_color(chara_id),
     content: `${era.get(`static:${chara_id}:name`)}${suffix}`,
+    fontWeight: 'bold',
   };
 }
 
@@ -94,14 +95,14 @@ module.exports = async () => {
   const line_copyrights = [
     [[get_copyright_entry(1)], 'wwm'],
     [[get_copyright_entry(3)], '天马闪光蹄'],
-    // [[get_copyright_entry(4), '、', get_copyright_entry(46)], '黑奴一号'],
+    // [[get_copyright_entry(4), { isDivider: true }, get_copyright_entry(46)], '黑奴一号'],
     [[get_copyright_entry(7)], '雞雞'],
     // [
     //   [
     //     get_copyright_entry(6),
-    //     '、',
+    //     { isDivider: true },
     //     get_copyright_entry(7),
-    //     '、',
+    //     { isDivider: true },
     //     get_copyright_entry(21),
     //   ],
     //   '雞雞',
@@ -115,9 +116,9 @@ module.exports = async () => {
     [
       [
         get_copyright_entry(30),
-        '、',
+        { isDivider: true },
         get_copyright_entry(85),
-        '、',
+        { isDivider: true },
         get_copyright_entry(205),
       ],
       '梦露',
@@ -159,6 +160,7 @@ module.exports = async () => {
     // [[get_copyright_entry(89)], '無奈'],
     [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
     [[get_copyright_entry(119, '地下室')], '幽白書'],
+    [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
     [
       [get_copyright_entry(303, '部分')],
       ['雞雞', { isDivider: true }, '幽白書'],
@@ -166,10 +168,31 @@ module.exports = async () => {
     [[get_copyright_entry(340, '招募')], 'O口口口口口'],
     [[get_copyright_entry(341, '招募')], 'フィンランド'],
     [[get_copyright_entry(342, '招募')], '黑衣剑士-星爆气流斩准备就绪'],
-    [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
     [
-      ['招募、日常、爱慕地文', { isBr: true }, '教学、地下室教学'],
+      [
+        '招募地文',
+        { isDivider: true },
+        '爱慕地文',
+        { isBr: true },
+        '新手教学',
+        { isDivider: true },
+        '地下室教学',
+      ],
       ['雞雞', { isDivider: true }, '无名黑奴'],
+    ],
+    [
+      ['日常地文', { isDivider: true }, '随机事件'],
+      [
+        '雞雞',
+        { isDivider: true },
+        'KUN',
+        { isDivider: true },
+        '阿格尼斯数码公司',
+        { isDivider: true },
+        'イーウィヤ',
+        { isBr: true },
+        '无名黑奴',
+      ],
     ],
     [
       '育成地文',
@@ -338,29 +361,15 @@ module.exports = async () => {
                   '** 只有完成了个人成就的角色才能进行扮演',
                   { isBr: true },
                   '*** ',
-                  {
-                    color: get_chara_color(201),
-                    content: '快乐米可',
-                    fontWeight: 'bold',
-                  },
+                  get_copyright_entry(201),
                   '、',
-                  {
-                    color: get_chara_color(204),
-                    content: '望族',
-                    fontWeight: 'bold',
-                  },
+                  get_copyright_entry(204),
                   '、',
-                  {
-                    color: get_chara_color(301),
-                    content: '骏川缰绳',
-                    fontWeight: 'bold',
-                  },
+                  get_copyright_entry(301),
                   '、',
-                  {
-                    color: get_chara_color(304),
-                    content: '桐生院葵',
-                    fontWeight: 'bold',
-                  },
+                  get_copyright_entry(304),
+                  '、',
+                  get_copyright_entry(400),
                   ' 等特殊角色无法扮演',
                 ],
                 type: 'text',
@@ -387,9 +396,13 @@ module.exports = async () => {
             .filter((e) => e && e < first_child_id)
             .map((e) => {
               const title = era.get(`staticcstr:${e}:称号`),
-                desc =
+                desc = (
                   title_desc[title] ||
-                  '在一次育成周期内赢取了六次以上的G1比赛胜利';
+                  '在一次育成周期内赢取了六次以上的G1比赛胜利'
+                ).replace(
+                  '在一次育成周期内',
+                  '在一次育成周期内完成了所有育成目标；同时，',
+                );
               return {
                 config: {
                   align: 'center',

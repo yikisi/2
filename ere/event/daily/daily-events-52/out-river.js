@@ -229,7 +229,7 @@ module.exports = async (hook, extra_flag) => {
       ' 又开始本能的思考起来。',
     ]);
     era.println();
-    if ((extra_flag.jpy = get_random_value(0, 5))) {
+    if ((extra_flag.jpy = get_random_value(0, 5)) > 0) {
       await urara.say_and_wait([callname, '！乌拉拉这次又抓到了！']);
       await era.printAndWait([
         '水桶随着时间的推移被逐渐装满，',

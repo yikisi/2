@@ -108,6 +108,7 @@ cons_dict[107] = require('#/event/check/check-107');
 cons_dict[108] = require('#/event/check/check-108');
 cons_dict[109] = require('#/event/check/check-109');
 cons_dict[110] = require('#/event/check/check-110');
+cons_dict[111] = require('#/event/check/check-111');
 cons_dict[116] = require('#/event/check/check-116');
 cons_dict[119] = require('#/event/check/check-119');
 cons_dict[120] = require('#/event/check/check-120');
@@ -125,12 +126,13 @@ cons_dict[303] = require('#/event/check/check-303');
 cons_dict[304] = require('#/event/check/check-304');
 cons_dict[306] = require('#/event/check/check-306');
 cons_dict[308] = require('#/event/check/check-308');
-cons_dict[340] = require('#/event/check/check-340');
-cons_dict[341] = require('#/event/check/check-341');
-cons_dict[342] = require('#/event/check/check-342');
 cons_dict[343] = require('#/event/check/check-343');
 cons_dict[400] = require('#/event/check/check-400');
 cons_dict['emperor'] = require('#/event/check/check-emperor');
+cons_dict[340] =
+  cons_dict[341] =
+  cons_dict[342] =
+    require('#/event/check/check-god');
 
 console.log(
   '[check-factory.js] constructor dictionary init done!',

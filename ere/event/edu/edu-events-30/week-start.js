@@ -6,9 +6,9 @@ const {
   sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const palace = require('#/event/snippets/palace');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
@@ -25,7 +25,7 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 module.exports = (handlers) => {
   handlers.beginning = async (rice, me, callname, self_name) => {
     await print_event_name('育成开始', rice);
-    await rice.print_and_wait('训练场');
+    era.drawLine({ content: '训练场' });
     await rice.say_and_wait('离训练的时间还有一点点……');
     await rice.say_and_wait('……稍微跑一下吧。');
     await rice.say_and_wait([
@@ -751,8 +751,9 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers.palace = async (rice, me, callname, self_name) => {
-    await palace(rice, me);
+  /** @this CustomizedEdu */
+  handlers.palace = async function (rice, me, callname, self_name) {
+    await CustomizedEdu.common_palace(rice, me);
     era.drawLine();
     era.set('flag:当前位置', location_enum.gate);
     await print_event_name('从前从前，在某个地方……', rice);

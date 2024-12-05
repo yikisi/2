@@ -284,20 +284,26 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
         list_chara,
         (e) => start_delay[e.index_race],
       );
-      buffer.report.unshift(
-        get_event_record(
-          [
-            '比赛开始，',
-            min.get_colored_name(),
-            ' 首先跑出！其他马娘紧随其后，最后是',
-            Math.random() < 0.5 ? '出闸慢了的 ' : '落后了的 ',
-            max.get_colored_name(),
-            '！',
-          ],
-          '0.0"',
-          0,
-        ),
-      );
+      if (max === min) {
+        buffer.report.unshift(
+          get_event_record('比赛开始，所有马娘平排出闸！', '0.0"', 0),
+        );
+      } else {
+        buffer.report.unshift(
+          get_event_record(
+            [
+              '比赛开始，',
+              min.get_colored_name(),
+              ' 首先跑出！其他马娘紧随其后，最后是',
+              Math.random() < 0.5 ? '出闸慢了的 ' : '落后了的 ',
+              max.get_colored_name(),
+              '！',
+            ],
+            '0.0"',
+            0,
+          ),
+        );
+      }
     }
   }
 

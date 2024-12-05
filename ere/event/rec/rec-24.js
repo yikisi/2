@@ -16,8 +16,7 @@ const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit(stage) {
     const chara = get_chara_talk(24),
       me = get_chara_talk(0);
     const sex = era.get('cflag:24:性别') - 1 ? '她' : '他';
@@ -214,7 +213,6 @@ module.exports = class extends CustomizedRecruit {
         } else {
           era.set(`cflag:24:随机招募`, 0); //三阶段把随机招募设为0
           if (era.get(`cflag:24:招募状态`) === -3) {
-            era.set('flag:物色对象', 24);
             await chara.say_and_wait('呀吼——♪最近经常遇到你啊。');
             await chara.say_and_wait(
               '现在啊，我正在看下面赛场上的模拟赛。毕竟Maya又参不了赛——。',
@@ -401,6 +399,7 @@ module.exports = class extends CustomizedRecruit {
         event_marks.sub(event_hooks.recruit_start);
         era.set('cflag:24:随机招募', 1);
         era.set('cflag:24:招募状态', -3);
+        era.set('flag:物色对象', 24);
         return true;
       case event_hooks.out_station:
         if (era.get('flag:当前互动角色')) {

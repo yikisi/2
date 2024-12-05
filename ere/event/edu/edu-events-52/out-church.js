@@ -1,9 +1,6 @@
 const era = require('#/era-electron');
 
-const {
-  sys_get_callname,
-  sys_like_chara,
-} = require('#/system/sys-calc-chara-others');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -16,19 +13,18 @@ const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52')
 const { attr_enum } = require('#/data/train-const');
 
 /**
+ * @param {CharaTalk} urara
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {HookArg} hook
- * @param _
  * @param {EventObject} event_object
  */
-module.exports = async (hook, _, event_object) => {
+module.exports = async (urara, me, callname, hook, event_object) => {
   if (era.get('flag:当前互动角色') !== 52) {
     add_event(hook.hook, event_object);
     return false;
   }
-  const callname = sys_get_callname(52, 0),
-    in_urara = get_chara_talk(52, chara_colors[1]),
-    me = get_chara_talk(0),
-    urara = get_chara_talk(52);
+  const in_urara = get_chara_talk(52, chara_colors[1]);
   await print_event_name('新年参拜', urara);
   era.set('cflag:52:节日事件标记', 0);
   await in_urara.say_as_unknown_and_wait(

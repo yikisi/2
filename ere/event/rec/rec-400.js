@@ -18,8 +18,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit() {
     const silence = get_chara_talk(400),
       me = get_chara_talk(0);
     await era.printAndWait([

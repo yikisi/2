@@ -48,11 +48,11 @@ module.exports = () => {
       silence.say([
         '是 ',
         {
-          content: '骏川小姐',
+          content: '骏川' + (era.get('flag:角色性别') === 1 ? '先生' : '小姐'),
           color: get_chara_color(301),
           fontWeight: 'bold',
         },
-        '啊……',
+        ' 啊……',
         silence.sex,
         '是一个很强……不，没什么，忘了吧。',
       ]);

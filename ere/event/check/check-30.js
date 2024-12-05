@@ -50,10 +50,10 @@ module.exports = class extends CustomizedCheck {
       check_aim_race(races, race_enum.takz_kin, 2, 1)
     ) {
       titles.push({
-        c: get_chara_color(30),
+        c: get_chara_color(this.id),
         n: this.get_personal_titles()[0],
       });
-      aim_check && sys_personal_achievement.set(30, 1);
+      aim_check && sys_personal_achievement.set(this.id, 1);
     }
     return titles;
   }
@@ -160,8 +160,7 @@ module.exports = class extends CustomizedCheck {
     return ['永恒碧蓝'];
   }
 
-  // eslint-disable-next-line no-unused-vars
-  is_aim_race(race, edu_weeks, rank) {
+  is_aim_race(race, edu_weeks) {
     if (
       race === race_enum.tenn_sho &&
       !check_aim_race(new RaceHistory(30).get(), race_enum.tenn_sho, 1, 1)

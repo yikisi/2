@@ -17,14 +17,13 @@ const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
-    if (await this.check_before_rec()) {
-      return;
-    }
+  async recruit(stage) {
     const digital = get_chara_talk(19),
       me = get_chara_talk(0);
     if (stage === event_hooks.recruit) {
+      if (await this.check_before_rec()) {
+        return;
+      }
       await print_event_name('是变态啊！是……是吗？（前篇）', digital);
       await era.printAndWait(
         `训练场，原本作为${digital.get_uma_sex_title()}平日训练的地点，今日却挤满了训练员，因为今天不仅只有${digital.get_uma_sex_title()}训练，还有一项重要的活动——选拔赛。`,

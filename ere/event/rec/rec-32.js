@@ -17,8 +17,7 @@ const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit(stage) {
     const me = get_chara_talk(0),
       tachyon = get_chara_talk(32);
 

@@ -60,10 +60,11 @@ module.exports = {
   /**
    * @param {number} chara_id
    * @param {number} stage
+   * @param _
    * @param {EventObject} [event_object]
    * @returns {Promise<boolean|void>}
    */
-  get_custom_rec(chara_id, stage, event_object) {
+  run_custom_rec(chara_id, stage, _, event_object) {
     if (!obj_dict[chara_id]) {
       obj_dict[chara_id] = new (cons_dict[chara_id] || common_cons)(chara_id);
     }

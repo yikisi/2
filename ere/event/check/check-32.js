@@ -137,7 +137,7 @@ module.exports = class extends CustomizedCheck {
 
   check_love_events() {
     const love = era.get('love:32'),
-      love_event = new EventObject(32, cb_enum.love).set_arg(love);
+      love_event = new EventObject(32, cb_enum.love).set_arg([love]);
     if (love === 74) {
       add_event(event_hooks.week_start, love_event);
     } else {
@@ -501,8 +501,7 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
-  // eslint-disable-next-line no-unused-vars
-  is_aim_race(race, edu_weeks, rank) {
+  is_aim_race(race, edu_weeks) {
     const { plan_b } = new TachyonEduMarks();
     return aim_races[plan_b][`${edu_weeks}_${race}`] || aim_races[plan_b][race];
   }

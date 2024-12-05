@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_like_chara,
@@ -18,15 +17,6 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
 module.exports = async () => {
-  const edu_weeks = era.get('cflag:52:育成回合计时'),
-    weeks = (era.get('flag:当前回合数') - 1) % 48;
-  if (
-    weeks !== 47 ||
-    edu_weeks !== 47 + 48 ||
-    sys_reg_race(52).curr.race !== -1
-  ) {
-    throw new Error();
-  }
   const callname = sys_get_callname(52, 0),
     in_urara = get_chara_talk(52, chara_colors[52][1]),
     me = get_chara_talk(0),

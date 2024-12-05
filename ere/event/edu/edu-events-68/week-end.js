@@ -15,7 +15,6 @@ const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
@@ -26,14 +25,13 @@ const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
 
 /**
+ * @param {CharaTalk} kita
+ * @param {CharaTalk} me
  * @param {HookArg} hook
- * @param __
  * @param {EventObject} event_object
  */
-module.exports = async (hook, __, event_object) => {
-  const kita = get_chara_talk(68),
-    me = get_chara_talk(0),
-    event_arg = event_object?.arg,
+module.exports = async (kita, me, hook, event_object) => {
+  const event_arg = event_object?.arg,
     event_marks = new KitaEduMarks();
   let wait_flag = false;
   if (event_arg === 'beginning') {

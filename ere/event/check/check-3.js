@@ -121,7 +121,7 @@ module.exports = class extends CustomizedCheck {
 
   check_love_events() {
     const love = era.get(`love:${this.id}`),
-      love_event = new EventObject(3, cb_enum.love);
+      love_event = new EventObject(3, cb_enum.love).set_arg([love]);
     switch (love) {
       case 49:
       case 89:

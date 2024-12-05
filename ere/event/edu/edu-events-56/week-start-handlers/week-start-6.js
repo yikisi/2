@@ -2,8 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const palace = require('#/event/snippets/palace');
-const palace_relation = require('#/event/snippets/palace-relation');
+const CustomizedEdu = require('#/event/edu/edu-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -247,8 +246,9 @@ module.exports = (handlers) => {
     ]);
   };
 
-  handlers.palace = async (kitaru, me, callname, flags, edu_marks) => {
-    await palace(kitaru, me);
+  /** @this CustomizedEdu */
+  handlers.palace = async function (kitaru, me, callname, flags, edu_marks) {
+    await CustomizedEdu.common_palace(kitaru, me);
     if (
       edu_marks.good_end === 1 &&
       era.get('love:56') >= 75 &&
@@ -381,7 +381,7 @@ module.exports = (handlers) => {
       await era.printAndWait([kitaru.sex, '抬起头来，瞳中星光闪烁。']);
       await kitaru.say_and_wait('我的爱人。');
     } else {
-      await palace_relation(kitaru, me);
+      await CustomizedEdu.common_palace_relation(kitaru, me);
     }
   };
 };

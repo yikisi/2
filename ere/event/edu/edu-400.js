@@ -7,11 +7,11 @@ const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
-  sys_get_callname,
   sys_get_colored_callname,
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -22,29 +22,10 @@ const event_hooks = require('#/data/event/event-hooks');
 const YandereList = require('#/data/event/yandere-list');
 const { location_enum } = require('#/data/locations');
 
-/** @type {Record<string,function(HookArg,*,EventObject):Promise>} */
-const handlers = {};
-
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},cb:function)>} */
 const week_start_handlers = {};
 
 require('#/event/edu/edu-events-400/week-start')(week_start_handlers);
-
-handlers[event_hooks.week_start] = async (hook, _, event_object) => {
-  if (!week_start_handlers[event_object?.arg]) {
-    throw new Error();
-  }
-  const flags = { wait_flag: false },
-    ret = await week_start_handlers[event_object.arg](
-      get_chara_talk(400),
-      get_chara_talk(0),
-      sys_get_callname(400, 0),
-      flags,
-      () => add_event(hook.hook, event_object),
-    );
-  flags.wait_flag && (await era.waitAnyKey());
-  return ret;
-};
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},EventObject)>} */
 const week_end_handlers = {};
@@ -389,22 +370,6 @@ week_end_handlers[47 + 24] = async (ss, me, callname, flags, event_object) => {
   }
 };
 
-handlers[event_hooks.week_end] = async (hook, _, event_object) => {
-  if (!week_end_handlers[event_object?.arg]) {
-    throw new Error();
-  }
-  const flags = { wait_flag: false },
-    ret = await week_end_handlers[event_object.arg](
-      get_chara_talk(400),
-      get_chara_talk(0),
-      sys_get_callname(400, 0),
-      flags,
-      event_object,
-    );
-  flags.wait_flag && (await era.waitAnyKey());
-  return ret;
-};
-
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean})>} */
 const out_church_handlers = {};
 
@@ -598,272 +563,293 @@ out_church_handlers[95 + 1] = async (ss, me, callname, flags) => {
   flags.wait_flag = sys_like_chara(400, 0, 20) || flags.wait_flag;
 };
 
-handlers[event_hooks.out_church] = async (_, __, event_object) => {
-  if (!out_church_handlers[event_object?.arg]) {
-    throw new Error();
-  }
-  const flags = { wait_flag: false };
-  await out_church_handlers[event_object.arg](
-    get_chara_talk(400),
-    get_chara_talk(0),
-    sys_get_callname(400, 0),
-    flags,
-  );
-  flags.wait_flag && (await era.waitAnyKey());
-  return true;
-};
-
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams)>} */
 const race_end_handlers = {};
 
 require('#/event/edu/edu-events-400/race-end')(race_end_handlers);
 
-/**
- * @param {HookArg} hook
- * @param {RaceEndParams} extra_flag
- */
-handlers[event_hooks.race_end] = async (hook, extra_flag) => {
-  const ss = get_chara_talk(400),
-    me = get_chara_talk(0),
-    callname = sys_get_callname(400, 0);
-  if (
-    !race_end_handlers[extra_flag.race] ||
-    (await race_end_handlers[extra_flag.race](ss, me, callname, extra_flag))
-  ) {
-    if (extra_flag.rank === 1) {
-      await print_event_name('竞赛获胜！', ss);
-      await ss.say_and_wait('唔，我赢了哦，看着赛场上我的表现感觉怎么样？');
-      await me.say_and_wait(
-        Math.random() < 0.5
-          ? '轻轻松松，我们回去准备下一场比赛吧'
-          : '感觉并没有什么难度，不过接下来的训练还请不要掉以轻心',
-      );
-    } else if (extra_flag.rank <= 5) {
-      await print_event_name('竞赛上榜!', ss);
-      await ss.say_and_wait(
-        '说实话有些遗憾呢，是哪里出了问题呢？等会一起回去复盘吧。',
-      );
-      await me.say_and_wait(
-        Math.random() < 0.5
-          ? '虽然没有达到预期，但是已经做的非常好了'
-          : '不想输的话下次就要做到更好才行',
-      );
-    } else if (extra_flag.rank <= 10) {
-      await print_event_name('竞赛失败！', ss);
-      await ss.say_and_wait([
-        callname,
-        '，我们该转换思路了哦，不然的话要是继续输下去的话，可就麻烦了呢。',
-      ]);
-      await me.say_and_wait(
-        Math.random() < 0.5
-          ? '你说得对，或许我们都应该转换一下思路，下次会更好的'
-          : '虽然表现不尽如人意，但是在这里给自己施加压力可不是什么好办法',
-      );
-    } else {
-      throw new Error();
+module.exports = class extends CustomizedEdu {
+  async office_cook(ss, me, callname, hook, extra_flag, event_object) {
+    if (era.get('flag:当前互动角色') !== 400) {
+      add_event(hook.hook, event_object);
+      return;
     }
-  }
-};
-
-handlers[event_hooks.office_cook] = async (hook, __, event_object) => {
-  if (era.get('flag:当前互动角色') !== 400) {
-    add_event(hook.hook, event_object);
-    return;
-  }
-  if (event_object?.arg !== 'sugar_or_milk') {
-    return;
-  }
-  const ss = get_chara_talk(400),
-    me = get_chara_talk(0);
-  await print_event_name('咖啡的味道要怎么样比较好呢？', ss);
-  await ss.say_and_wait('咖啡要加糖还是加奶？或者什么都不加？');
-  era.printButton('「什么？」', 1);
-  await era.input();
-  await ss.say_and_wait([
-    '就是说你的咖啡要加糖还是奶啦？我和 ',
-    sys_get_colored_callname(400, 25),
-    ' ',
-    ss.sex,
-    '学了一下怎么泡咖啡，现在让你试一下，要点什么？',
-  ]);
-  era.printButton('「果然还是要多加点方糖吧。」（耐力+20）', 1);
-  era.printButton('「或许加点奶会很不错。」（智力+20）', 2);
-  const ret = await era.input();
-  await ss.say_and_wait('这样吗？那就来尝尝看吧？我泡的咖啡怎么样？');
-  await era.printAndWait([
-    '咖啡的口感和甜度都非常棒，完全不像是新人第一次泡咖啡的成品，看到 ',
-    me.get_colored_name(),
-    ' 的表情，',
-    ss.get_colored_name(),
-    ' 愉快的勾起了嘴角。',
-  ]);
-  await ss.say_and_wait(
-    '好喝的话，下次我就继续端给你品鉴了，要是有哪里不太行的话，要记得及时说哦。',
-  );
-  await era.printAndWait([
-    '就这样 ',
-    ss.get_colored_name(),
-    ' 垄断了休息室里面的饮料供应。',
-  ]);
-  get_attr_and_print_in_event(400, ret === 1 ? [0, 20] : [0, 0, 0, 0, 20], 0) &&
-    (await era.waitAnyKey());
-  return true;
-};
-
-handlers[event_hooks.office_game] = async (hook, __, event_object) => {
-  if (era.get('flag:当前互动角色') !== 400) {
-    add_event(hook.hook, event_object);
-    return;
-  }
-  if (event_object?.arg !== 'play_dice') {
-    return;
-  }
-  const ss = get_chara_talk(400),
-    me = get_chara_talk(0),
-    callname = sys_get_callname(400, 0);
-  let wait_flag;
-  await print_event_name('要来试试运气吗？', ss);
-  await era.printAndWait([
-    ss.get_colored_name(),
-    ' 拿出了一副扑克牌，对着 ',
-    me.get_colored_name(),
-    ' 挥了挥手。',
-  ]);
-  await ss.say_and_wait([
-    callname,
-    '，来玩抽鬼牌怎么样？毕竟现在可是休息时间哦。',
-  ]);
-  await era.printAndWait([
-    '抽鬼牌的进度非常快，很快 ',
-    ss.get_colored_name(),
-    ' 的手中就只剩下两张牌了。',
-  ]);
-  await ss.say_and_wait(['哼哼哼，', callname, ' 可得好好的抉择一下呢。']);
-  era.printButton('抽左边的牌（耐力&智力+10）', 1);
-  era.printButton('抽右边的牌（速度+10，技能点数+20）', 2);
-  if ((await era.input()) === 1) {
+    if (event_object?.arg !== 'sugar_or_milk') {
+      return;
+    }
+    await print_event_name('咖啡的味道要怎么样比较好呢？', ss);
+    await ss.say_and_wait('咖啡要加糖还是加奶？或者什么都不加？');
+    era.printButton('「什么？」', 1);
+    await era.input();
+    await ss.say_and_wait([
+      '就是说你的咖啡要加糖还是奶啦？我和 ',
+      sys_get_colored_callname(400, 25),
+      ' ',
+      ss.sex,
+      '学了一下怎么泡咖啡，现在让你试一下，要点什么？',
+    ]);
+    era.printButton('「果然还是要多加点方糖吧。」（耐力+20）', 1);
+    era.printButton('「或许加点奶会很不错。」（智力+20）', 2);
+    const ret = await era.input();
+    await ss.say_and_wait('这样吗？那就来尝尝看吧？我泡的咖啡怎么样？');
+    await era.printAndWait([
+      '咖啡的口感和甜度都非常棒，完全不像是新人第一次泡咖啡的成品，看到 ',
+      me.get_colored_name(),
+      ' 的表情，',
+      ss.get_colored_name(),
+      ' 愉快的勾起了嘴角。',
+    ]);
     await ss.say_and_wait(
-      '看起来还是我比较好运呢，这下拖雷纳可是输给你的担当了呢，作为代价，给我带饭怎么样？',
+      '好喝的话，下次我就继续端给你品鉴了，要是有哪里不太行的话，要记得及时说哦。',
     );
     await era.printAndWait([
-      '最后去食堂替 ',
+      '就这样 ',
       ss.get_colored_name(),
-      ' 带了',
-      ss.sex,
-      '喜欢吃的饭菜和零食。',
+      ' 垄断了休息室里面的饮料供应。',
     ]);
-    wait_flag = get_attr_and_print_in_event(400, [0, 10, 0, 0, 10], 0);
-  } else {
+    get_attr_and_print_in_event(
+      400,
+      ret === 1 ? [0, 20] : [0, 0, 0, 0, 20],
+      0,
+    ) && (await era.waitAnyKey());
+    return true;
+  }
+
+  async office_game(ss, me, callname, hook, extra_flag, event_object) {
+    if (era.get('flag:当前互动角色') !== 400) {
+      add_event(hook.hook, event_object);
+      return;
+    }
+    if (event_object?.arg !== 'play_dice') {
+      return;
+    }
+    let wait_flag;
+    await print_event_name('要来试试运气吗？', ss);
+    await era.printAndWait([
+      ss.get_colored_name(),
+      ' 拿出了一副扑克牌，对着 ',
+      me.get_colored_name(),
+      ' 挥了挥手。',
+    ]);
     await ss.say_and_wait([
-      '诶，居然是 ',
       callname,
-      ' 比较厉害呢……这样的话，',
+      '，来玩抽鬼牌怎么样？毕竟现在可是休息时间哦。',
+    ]);
+    await era.printAndWait([
+      '抽鬼牌的进度非常快，很快 ',
+      ss.get_colored_name(),
+      ' 的手中就只剩下两张牌了。',
+    ]);
+    await ss.say_and_wait(['哼哼哼，', callname, ' 可得好好的抉择一下呢。']);
+    era.printButton('抽左边的牌（耐力&智力+10）', 1);
+    era.printButton('抽右边的牌（速度+10，技能点数+20）', 2);
+    if ((await era.input()) === 1) {
+      await ss.say_and_wait(
+        '看起来还是我比较好运呢，这下拖雷纳可是输给你的担当了呢，作为代价，给我带饭怎么样？',
+      );
+      await era.printAndWait([
+        '最后去食堂替 ',
+        ss.get_colored_name(),
+        ' 带了',
+        ss.sex,
+        '喜欢吃的饭菜和零食。',
+      ]);
+      wait_flag = get_attr_and_print_in_event(400, [0, 10, 0, 0, 10], 0);
+    } else {
+      await ss.say_and_wait([
+        '诶，居然是 ',
+        callname,
+        ' 比较厉害呢……这样的话，',
+        callname,
+        ' 中午想吃什么？我去给您带饭吧，顺带帮我计时怎么样？',
+      ]);
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 爽快的答应了',
+        ss.sex,
+        '，然后',
+        ss.sex,
+        '就遇上了排的长长的队伍，等了很久才满脸无奈的提着饭盒回来了。',
+      ]);
+      wait_flag = get_attr_and_print_in_event(400, [10], 20);
+    }
+    wait_flag && (await era.waitAnyKey());
+    return true;
+  }
+
+  async out_church(ss, me, callname, hook, extra_flag, event_object) {
+    if (era.get('flag:当前互动角色') !== 400) {
+      add_event(hook.hook, event_object);
+      return;
+    }
+    if (out_church_handlers[event_object?.arg]) {
+      const flags = { wait_flag: false };
+      await out_church_handlers[event_object.arg](ss, me, callname, flags);
+      flags.wait_flag && (await era.waitAnyKey());
+      return true;
+    }
+  }
+
+  async race_end(ss, me, callname, hook, extra_flag) {
+    if (
+      !race_end_handlers[extra_flag.race] ||
+      (await race_end_handlers[extra_flag.race](ss, me, callname, extra_flag))
+    ) {
+      if (extra_flag.rank === 1) {
+        await print_event_name('竞赛获胜！', ss);
+        await ss.say_and_wait('唔，我赢了哦，看着赛场上我的表现感觉怎么样？');
+        await me.say_and_wait(
+          Math.random() < 0.5
+            ? '轻轻松松，我们回去准备下一场比赛吧'
+            : '感觉并没有什么难度，不过接下来的训练还请不要掉以轻心',
+        );
+      } else if (extra_flag.rank <= 5) {
+        await print_event_name('竞赛上榜!', ss);
+        await ss.say_and_wait(
+          '说实话有些遗憾呢，是哪里出了问题呢？等会一起回去复盘吧。',
+        );
+        await me.say_and_wait(
+          Math.random() < 0.5
+            ? '虽然没有达到预期，但是已经做的非常好了'
+            : '不想输的话下次就要做到更好才行',
+        );
+      } else if (extra_flag.rank <= 10) {
+        await print_event_name('竞赛失败！', ss);
+        await ss.say_and_wait([
+          callname,
+          '，我们该转换思路了哦，不然的话要是继续输下去的话，可就麻烦了呢。',
+        ]);
+        await me.say_and_wait(
+          Math.random() < 0.5
+            ? '你说得对，或许我们都应该转换一下思路，下次会更好的'
+            : '虽然表现不尽如人意，但是在这里给自己施加压力可不是什么好办法',
+        );
+      } else {
+        return await super.race_end(ss, me, callname, hook, extra_flag);
+      }
+    }
+  }
+
+  async school_atrium(ss, me, callname, hook, extra_flag, event_object) {
+    const cur_chara = era.get('flag:当前互动角色');
+    if (cur_chara > 0 && cur_chara !== 400) {
+      add_event(event_hooks.school_atrium, event_object);
+      return;
+    }
+    if (event_object?.arg !== 'enjoy_cat') {
+      return;
+    }
+    await print_event_name('尝试和猫咪相处', ss);
+    await era.printAndWait([
+      ss.get_colored_name(),
+      ' 等在树丛的旁边，似乎在苦恼着什么事情。',
+    ]);
+    await ss.say_and_wait([
       callname,
-      ' 中午想吃什么？我去给您带饭吧，顺带帮我计时怎么样？',
+      '！！刚刚好，过来帮我一下吧？这里有只小猫躲在里面，我怕等会下雨的话把它淋湿生病就不好了！',
     ]);
+    era.printButton('「果然还是要先用食物引诱吧。」（根性&智力+10）', 1);
+    era.printButton('「先下手为强，把猫咪抓住。」（耐力&力量+10）', 2);
+    const ret = await era.input();
+    if (ret === 1) {
+      await era.printAndWait([
+        ss.get_colored_name(),
+        ' 听完之后点点头，然后在 ',
+        me.get_colored_name(),
+        ' 无奈的眼神之下试图用面包将小猫咪引诱出来，',
+      ]);
+      await era.printAndWait(['但是很明显', ss.sex, '的做法几乎没有效果。']);
+      await me.say_and_wait('让我试试吧，我刚刚好带了点食材。');
+      await era.printAndWait([
+        '一根火腿肠被放到了树丛的前方，小猫咪警觉的探出了脑袋，看到两个人类就瞬间缩了回去，但是似乎是饥饿战胜了理智，它还是忍不住跑出来咬住了火腿肠，然后落到了 ',
+        ss.get_colored_name(),
+        ' 的手中。',
+      ]);
+    } else {
+      await ss.say_and_wait('说的也对，这个时候就应该发挥我的长处了。');
+      await era.printAndWait([
+        ss.get_colored_name(),
+        ' 伸了个懒腰，眼神锐利了起来，慢慢的拨开树丛，看到了那只非常警惕，似乎已经有些炸毛的小猫咪。',
+      ]);
+      await ss.say_and_wait('看起来很警觉呢……不过只要这样的话。');
+      await era.printAndWait([
+        ss.sex,
+        '飞快的伸手捏住了小猫的后颈，一瞬间刚刚还在试图威胁 ',
+        ss.get_colored_name(),
+        ' 的小猫瞬间安分了下来，',
+      ]);
+      await era.printAndWait([
+        '乖乖的被提起来落到了 ',
+        ss.get_colored_name(),
+        ' 的手中。',
+      ]);
+    }
     await era.printAndWait([
-      me.get_colored_name(),
-      ' 爽快的答应了',
-      ss.sex,
-      '，然后',
-      ss.sex,
-      '就遇上了排的长长的队伍，等了很久才满脸无奈的提着饭盒回来了。',
+      '在抓住了小猫咪之后，',
+      ss.get_colored_name(),
+      ' 将它带到了休息室附近，然后看着窗外的大雨露出了笑容。',
     ]);
-    wait_flag = get_attr_and_print_in_event(400, [10], 20);
+    await ss.say_and_wait('要是被大雨淋湿透的话，你可就糟糕了呢，小家伙。');
+    await era.printAndWait([
+      '小猫埋头在猫粮之中，无暇顾及 ',
+      ss.get_colored_name(),
+      ' 的话语。',
+    ]);
+    await ss.say_and_wait('等会就把你送去宠物医院看看……');
+    await era.printAndWait(
+      '然后这只小猫就顺手被做了驱虫和绝育，回到特雷森的时候已经是一脸的生无可恋',
+    );
+    get_attr_and_print_in_event(
+      400,
+      ret === 1 ? [0, 0, 0, 10, 10] : [0, 10, 10],
+      0,
+    ) && (await era.waitAnyKey());
+    return true;
   }
-  wait_flag && (await era.waitAnyKey());
-  return true;
-};
 
-handlers[event_hooks.school_atrium] = async (_, __, event_object) => {
-  const cur_chara_id = era.get('flag:当前互动角色');
-  if (cur_chara_id > 0 && cur_chara_id !== 400) {
-    add_event(event_hooks.school_atrium, event_object);
-    return;
+  async week_end(ss, me, callname, hook, extra_flag, event_object) {
+    if (!week_end_handlers[event_object?.arg]) {
+      return await super.week_end(
+        ss,
+        me,
+        callname,
+        hook,
+        extra_flag,
+        event_object,
+      );
+    }
+    const flags = { wait_flag: false },
+      ret = await week_end_handlers[event_object.arg](
+        ss,
+        me,
+        callname,
+        flags,
+        event_object,
+      );
+    flags.wait_flag && (await era.waitAnyKey());
+    return ret;
   }
-  if (event_object?.arg !== 'enjoy_cat') {
-    return;
-  }
-  const ss = get_chara_talk(400),
-    me = get_chara_talk(0),
-    callname = sys_get_callname(400, 0);
-  await print_event_name('尝试和猫咪相处', ss);
-  await era.printAndWait([
-    ss.get_colored_name(),
-    ' 等在树丛的旁边，似乎在苦恼着什么事情。',
-  ]);
-  await ss.say_and_wait([
-    callname,
-    '！！刚刚好，过来帮我一下吧？这里有只小猫躲在里面，我怕等会下雨的话把它淋湿生病就不好了！',
-  ]);
-  era.printButton('「果然还是要先用食物引诱吧。」（根性&智力+10）', 1);
-  era.printButton('「先下手为强，把猫咪抓住。」（耐力&力量+10）', 2);
-  const ret = await era.input();
-  if (ret === 1) {
-    await era.printAndWait([
-      ss.get_colored_name(),
-      ' 听完之后点点头，然后在 ',
-      me.get_colored_name(),
-      ' 无奈的眼神之下试图用面包将小猫咪引诱出来，',
-    ]);
-    await era.printAndWait(['但是很明显', ss.sex, '的做法几乎没有效果。']);
-    await me.say_and_wait('让我试试吧，我刚刚好带了点食材。');
-    await era.printAndWait([
-      '一根火腿肠被放到了树丛的前方，小猫咪警觉的探出了脑袋，看到两个人类就瞬间缩了回去，但是似乎是饥饿战胜了理智，它还是忍不住跑出来咬住了火腿肠，然后落到了 ',
-      ss.get_colored_name(),
-      ' 的手中。',
-    ]);
-  } else {
-    await ss.say_and_wait('说的也对，这个时候就应该发挥我的长处了。');
-    await era.printAndWait([
-      ss.get_colored_name(),
-      ' 伸了个懒腰，眼神锐利了起来，慢慢的拨开树丛，看到了那只非常警惕，似乎已经有些炸毛的小猫咪。',
-    ]);
-    await ss.say_and_wait('看起来很警觉呢……不过只要这样的话。');
-    await era.printAndWait([
-      ss.sex,
-      '飞快的伸手捏住了小猫的后颈，一瞬间刚刚还在试图威胁 ',
-      ss.get_colored_name(),
-      ' 的小猫瞬间安分了下来，',
-    ]);
-    await era.printAndWait([
-      '乖乖的被提起来落到了 ',
-      ss.get_colored_name(),
-      ' 的手中。',
-    ]);
-  }
-  await era.printAndWait([
-    '在抓住了小猫咪之后，',
-    ss.get_colored_name(),
-    ' 将它带到了休息室附近，然后看着窗外的大雨露出了笑容。',
-  ]);
-  await ss.say_and_wait('要是被大雨淋湿透的话，你可就糟糕了呢，小家伙。');
-  await era.printAndWait([
-    '小猫埋头在猫粮之中，无暇顾及 ',
-    ss.get_colored_name(),
-    ' 的话语。',
-  ]);
-  await ss.say_and_wait('等会就把你送去宠物医院看看……');
-  await era.printAndWait(
-    '然后这只小猫就顺手被做了驱虫和绝育，回到特雷森的时候已经是一脸的生无可恋',
-  );
-  get_attr_and_print_in_event(
-    400,
-    ret === 1 ? [0, 0, 0, 10, 10] : [0, 10, 10],
-    0,
-  ) && (await era.waitAnyKey());
-  return true;
-};
 
-/**
- * @param {HookArg} hook
- * @param {*} extra_flag
- * @param {EventObject} event_object
- * @returns {Promise<*>}
- */
-module.exports = async (hook, extra_flag, event_object) => {
-  if (!handlers[hook.hook]) {
-    throw new Error('unsupported stage!');
+  async week_start(ss, me, callname, hook, extra_flag, event_object) {
+    if (!week_start_handlers[event_object?.arg]) {
+      return await super.week_start(
+        ss,
+        me,
+        callname,
+        hook,
+        extra_flag,
+        event_object,
+      );
+    }
+    const flags = { wait_flag: false },
+      ret = await week_start_handlers[event_object.arg](
+        ss,
+        me,
+        callname,
+        flags,
+        () => add_event(hook.hook, event_object),
+      );
+    flags.wait_flag && (await era.waitAnyKey());
+    return ret;
   }
-  return await handlers[hook.hook](hook, extra_flag, event_object);
 };

@@ -5,18 +5,12 @@ const {
   begin_and_init_ero,
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
-const {
-  sys_get_callname,
-  sys_get_colored_callname,
-} = require('#/system/sys-calc-chara-others');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const {
-  get_chara_talk,
-  say_by_passer_by_and_wait,
-} = require('#/utils/chara-talk-factory');
+const { say_by_passer_by_and_wait } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
@@ -698,14 +692,13 @@ handlers[race_enum.arim_kin] = async (kitaru, me, callname, edu_weeks) => {
 };
 
 /**
- * @param _
+ * @param {CharaTalk} kitaru
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {RaceStartParams} extra_flag
  */
-module.exports = async (_, extra_flag) => {
-  const callname = sys_get_callname(56, 0),
-    kitaru = get_chara_talk(56),
-    me = get_chara_talk(0),
-    edu_marks = new FukuEventMarks(),
+module.exports = async (kitaru, me, callname, extra_flag) => {
+  const edu_marks = new FukuEventMarks(),
     edu_weeks = era.get('cflag:56:育成回合计时');
   if (
     !handlers[extra_flag.race] ||

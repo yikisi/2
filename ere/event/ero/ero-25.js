@@ -1,6 +1,7 @@
 /**
  * @file 曼城茶座 - 调教
  *
+ * @author Necroz
  * @author 幽白書
  */
 const era = require('#/era-electron');
@@ -8,17 +9,16 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const CustomizedEro = require('#/event/ero/ero-common');
 const tachyon_betrayed_1 = require('#/event/ero/ero-lines-32/betrayed-1');
 const tachyon_betrayed_2 = require('#/event/ero/ero-lines-32/betrayed-2');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { ero_hooks } = require('#/data/event/ero-hooks');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 
-/** @type {Record<string,function>} */
-const handlers = {
-  async [ero_hooks.ero_start]() {
+module.exports = class extends CustomizedEro {
+  async ero_start() {
     if (
       sys_check_awake(25) &&
       sys_check_awake(0) &&
@@ -37,8 +37,9 @@ const handlers = {
         ' 宠爱的价值了，就干脆作为无机物的台子存在吧。',
       ]);
     }
-  },
-  async [ero_hooks.ero_end]() {
+  }
+
+  async ero_end() {
     if (
       sys_check_awake(25) &&
       sys_check_awake(32) &&
@@ -58,16 +59,5 @@ const handlers = {
         await tachyon_betrayed_2(life_marks);
       }
     }
-  },
-};
-
-/**
- * @param {HookArg} hook
- * @param extra_flag
- */
-module.exports = async (hook, extra_flag) => {
-  if (!handlers[hook.hook]) {
-    throw new Error();
   }
-  return await handlers[hook.hook](hook, extra_flag);
 };

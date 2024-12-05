@@ -252,10 +252,6 @@ function init_chara(chara_id, src_chara_id) {
         era.get(`callname:${my_src_chara}:${chara_id}`),
       );
     }
-    era.set(
-      `cflag:${chara_id}:可再次育成`,
-      Number(era.get(`cflag:${chara_id}:可再次育成`) > 0 && my_src_chara <= 0),
-    );
   } else {
     era.set(`talent:${chara_id}:病娇`, 0);
   }
@@ -363,7 +359,7 @@ module.exports = {
       era.get(`cflag:${chara_id}:种族`) &&
       era.get(`talent:${chara_id}:病娇`)
     ) {
-      new YandereList().push(chara_id, true);
+      new YandereList().push(chara_id);
     }
   },
   reset_chara,

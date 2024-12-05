@@ -5,8 +5,6 @@ const { get_image } = require('#/system/sys-calc-image');
 
 const race_indicator = require('#/page/components/race-indicator');
 
-const { get_custom_mec } = require('#/event/mec/mec-factory');
-
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
@@ -37,7 +35,7 @@ const { motivation_names, out_of_train_type } = require('#/data/train-const');
  */
 function cur_chara_component(chara_id, type, location_npc) {
   let temp;
-  if (!chara_id) {
+  if (chara_id === 0) {
     if (location_npc) {
       const relation = get_relation_info(location_npc),
         love = get_love_info(location_npc),
@@ -122,9 +120,7 @@ function cur_chara_component(chara_id, type, location_npc) {
     if (out_of_train) {
       name_columns.push(` [${out_of_train_type[out_of_train - 1]}]`);
     }
-    if (get_custom_mec(chara_id).is_able_to_show_growth()) {
-      name_columns.push(` (${growth_stage[Math.min(growth, 2)]})`);
-    }
+    name_columns.push(` (${growth_stage[Math.min(growth, 2)]})`);
     if (era.get('flag:当前位置') !== location_enum.basement) {
       if (in_train) {
         name_columns.push(

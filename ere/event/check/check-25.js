@@ -88,7 +88,7 @@ module.exports = class extends CustomizedCheck {
 
   check_love_events() {
     const love = era.get('love:25');
-    const event_object = new EventObject(25, cb_enum.love).set_arg(love);
+    const event_object = new EventObject(25, cb_enum.love).set_arg([love]);
     switch (love) {
       case 49:
       case 89:
@@ -190,8 +190,7 @@ module.exports = class extends CustomizedCheck {
     return ['漆黑幻影'];
   }
 
-  // eslint-disable-next-line no-unused-vars
-  is_aim_race(race, edu_weeks, rank) {
+  is_aim_race(race, edu_weeks) {
     if (new CoffeeEduMarks().toky_yus && race === race_enum.toky_yus) {
       return 0;
     }

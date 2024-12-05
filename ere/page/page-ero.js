@@ -8,7 +8,6 @@ const {
 const check_ero_enabled = require('#/system/ero/sys-check-ero-action');
 const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
 const { get_characters_in_train } = require('#/system/ero/sys-prepare-ero');
-const sys_call_ero_event = require('#/system/script/sys-call-ero-script');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const {
@@ -19,6 +18,7 @@ const {
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { get_custom_ero, run_custom_ero } = require('#/event/ero/ero-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -526,7 +526,7 @@ async function page_ero(lover, skip_start_end) {
   era.set('tflag:当前对手', curr_lover);
   if (!skip_start_end) {
     era.drawLine();
-    await sys_call_ero_event(curr_lover, ero_hooks.ero_start);
+    await get_custom_ero(curr_lover).ero_start();
   }
 
   while (ero_flag) {
@@ -737,7 +737,7 @@ async function page_ero(lover, skip_start_end) {
       filtered_ero_actions.map((e) => {
         const check_val = check_ero_enabled(curr_lover, curr_supporter, e);
         if (isNaN(check_val)) {
-          era.logger.debug(`${Object.keys(ero_hooks)[e]} ${check_val}`);
+          era.logger.debug(`${ero_hooks.keys[e]} ${check_val}`);
         }
         const action_disabled =
           lost_mind > 0 ||
@@ -846,7 +846,7 @@ async function page_ero(lover, skip_start_end) {
   await era.printAndWait('性事结束了……');
   if (!skip_start_end) {
     era.println();
-    await sys_call_ero_event(curr_lover, ero_hooks.ero_end);
+    await get_custom_ero(curr_lover).ero_end();
   }
   era.drawLine();
   let wait_flag = false;
@@ -882,13 +882,13 @@ async function page_ero(lover, skip_start_end) {
         era.get(`love:${e}`) >= 75 &&
         sys_check_awake(e) &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
-        get_custom_mec(e).is_anger_for_unfaithful() &&
+        get_custom_mec(e).is_anger_for_unfaithful(partner_list) &&
         (punish_option || era.get(`talent:${e}:病娇`)),
     );
     for (const chara_id of punish_list) {
       get_custom_check(chara_id).check_after_betrayed(partner_list);
       wait_flag =
-        (await sys_call_ero_event(chara_id, ero_hooks.after_betrayed, {
+        (await run_custom_ero(chara_id, ero_hooks.after_betrayed, {
           partners: partner_list,
         })) || wait_flag;
     }

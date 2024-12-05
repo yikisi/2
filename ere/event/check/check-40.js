@@ -21,15 +21,19 @@ aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 4;
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
-  () => {
-    if (get('cflag:40:干劲') !== 2) {
+  function () {
+    if (get(`cflag:${this.id}:干劲`) !== 2) {
       new CityEduMarks().title_check = 1;
     }
   },
-  (races) =>
-    check_aim_race(races, race_enum.hans_fil, 0, 1) &&
-    attr_names.findIndex((e) => get(`abl:40:${e}训练等级`) < 3) === -1 &&
-    !new CityEduMarks().title_check,
+  function (races) {
+    return (
+      check_aim_race(races, race_enum.hans_fil, 0, 1) &&
+      attr_names.findIndex((e) => get(`abl:${this.id}:${e}训练等级`) < 3) ===
+        -1 &&
+      !new CityEduMarks().title_check
+    );
+  },
   aim_races,
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));

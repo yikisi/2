@@ -160,6 +160,14 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   notify(content, title, type, duration) {},
   /**
+   * play the music that must be declared in csv files in directory res
+   * @param {string[]|string} names REQUIRED music name, the engine will play the first available music in the array
+   * @param {boolean} [loop] if the music is played in loop
+   * @returns {boolean} if the playing succeeds
+   */
+  // eslint-disable-next-line no-unused-vars
+  playMusic(names, loop) {},
+  /**
    * print some text
    * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
    * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line
@@ -178,13 +186,13 @@ const era = {
    * print a button
    * @param {string} content REQUIRED the text of the button
    * @param {number} accelerator REQUIRED the accelerator key of the button used in the input
-   * @param {{[align]:'left'|'center'|'right',[badge]:'dot'|string,[buttonType]:'primary'|'success'|'warning'|'danger'|'info'|'',[disabled]:boolean,[disableWarning]:boolean,[inTextAlign]:'left'|'center'|'right',[isButton]:boolean,[offset]:number,[showAcc]:boolean,[width]:number}} [config] config of the printed button
+   * @param {{[align]:'left'|'center'|'right',[badge]:'dot'|string,[buttonType]:'primary'|'success'|'warning'|'danger'|'info'|'',[disabled]:boolean,[disableWarning]:boolean,[flush]:boolean,[inTextAlign]:'left'|'center'|'right',[isButton]:boolean,[offset]:number,[showAcc]:boolean,[width]:number}} [config] config of the printed button
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
   printButton(content, accelerator, config) {},
   /**
-   * print images that must be declared in csv files in #/resources
+   * print images that must be declared in csv files in directory res
    * @param {string} names REQUIRED image names
    * @returns {number} line number of the printed
    */
@@ -280,6 +288,8 @@ const era = {
    * @returns {void}
    */
   resetGlobal() {},
+  /** resume the music in playing */
+  resumeMusic() {},
   /**
    * remove a data file
    * @param {number} savIndex REQUIRED the index of the save file
@@ -358,12 +368,14 @@ const era = {
    */
   // eslint-disable-next-line no-unused-vars
   setWidth(width) {},
+  /** pause the music in the playing */
+  stopMusic() {},
   /**
    * toggle debug status
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '3.0.0', engine: undefined },
+  version: { sdk: '3.1.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await

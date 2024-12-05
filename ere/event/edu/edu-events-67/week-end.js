@@ -16,14 +16,13 @@ const { location_enum } = require('#/data/locations');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /**
+ * @param {CharaTalk} daiya
+ * @param {CharaTalk} me
  * @param {HookArg} hook
- * @param _
  * @param {EventObject} event_object
  */
-module.exports = async (hook, _, event_object) => {
-  const daiya = get_chara_talk(67),
-    edu_weeks = era.get('cflag:67:育成回合计时'),
-    me = get_chara_talk(0),
+module.exports = async (daiya, me, hook, event_object) => {
+  const edu_weeks = era.get('cflag:67:育成回合计时'),
     races = era.get('cflag:67:育成成绩');
   let wait_flag = false;
   if (edu_weeks === 47 + 32) {

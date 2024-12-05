@@ -156,7 +156,7 @@ function sys_filter_ero_act(attacker, defender, filters) {
   const is_master = attacker === era.get('tflag:主导权');
   return ero_actions.filter((e) => {
     const tags = ero_tagged_hooks[e] || EroHookTag.default_tags;
-    const hook_name = Object.keys(ero_hooks)[e];
+    const hook_name = ero_hooks.keys[e];
     return (
       (tags.condition === EroHookTag.condition_type.no ||
         (is_master && tags.condition === EroHookTag.condition_type.active) ||

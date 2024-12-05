@@ -36,13 +36,10 @@ async function common(tachyon, me) {
 }
 
 module.exports = async () => {
-  if (era.get('love:32') < 75) {
-    throw new Error();
-  }
   const me = get_chara_talk(0),
     t_call_c = sys_get_colored_callname(32, 25),
     tachyon = get_chara_talk(32);
-  if (era.get('flag:强制BE')) {
+  if (era.get('flag:强制BE') === 32) {
     return await betray_ending(tachyon, me);
   }
   await tachyon.say_and_wait('醒醒');
