@@ -9,7 +9,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /**
  * @param {HookArg} hook
- * @param {{race:number,rank:number,relation_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
   const falcon = new CharaTalk(46),

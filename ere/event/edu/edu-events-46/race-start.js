@@ -9,7 +9,7 @@ const { race_enum } = require('#/data/race/race-const');
 const CharaTalk = require('#/utils/chara-talk');
 /**
  * @param {HookArg} hook
- * @param {{race:number,rank:number,relation_change:number}} extra_flag
+ * @param {RaceStartParams} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
   const falcon = new CharaTalk(46),

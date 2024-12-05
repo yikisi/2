@@ -13,7 +13,7 @@ const { location_enum } = require('#/data/locations');
 
 module.exports = async function (event_object) {
   const me = get_chara_talk(0),
-    chara2_talk = get_chara_talk(2),
+    suzuka = get_chara_talk(2),
     falcon = get_chara_talk(46),
     event_marks = new FalconEduMarks(),
     edu_weeks = era.get('cflag:46:育成回合计时');
@@ -923,7 +923,7 @@ module.exports = async function (event_object) {
     );
     await era.printAndWait(`正当你在温暖的训练室思考着接下来的赛事时。`);
     await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}我回来了！`);
-    await chara2_talk.say_and_wait(`打扰了。`);
+    await suzuka.say_and_wait(`打扰了。`);
     await era.printAndWait(`训练室迎来了两位访客。`);
     await me.say_and_wait(`今天的飞鹰子依然活力四射呢。`);
     await falcon.say_and_wait(`嗯！毕竟活力与可爱正是马娘偶像的不同之处呢。`);
@@ -935,7 +935,7 @@ module.exports = async function (event_object) {
     await era.printAndWait(`你取出两个塑料杯，泡上了便利店中购买的红茶。`);
     await falcon.say_and_wait(`嗯——飞鹰子希望能参加皋月赏。`);
     await me.say_and_wait(`什么？`);
-    await chara2_talk.say_and_wait(`欸？`);
+    await suzuka.say_and_wait(`欸？`);
     await era.printAndWait(
       `不只是你表达了惊讶的情感，一旁的无声铃鹿似乎也被有些吃惊。`,
     );
@@ -945,7 +945,7 @@ module.exports = async function (event_object) {
     );
     await me.say_and_wait(`......?`);
     await me.say_and_wait(`所以把铃鹿小姐请过来是为了？`);
-    await chara2_talk.say_and_wait(
+    await suzuka.say_and_wait(
       `我记得飞鹰同学在泥地赛道活跃，为什么想要参加草地呢？`,
     );
     await era.printAndWait(`无声铃鹿先你一步向${falcon.name}提出问题。`);
@@ -960,42 +960,40 @@ module.exports = async function (event_object) {
     await era.printAndWait(
       `如果是为了${falcon.name}的顶级偶像之路，接下来的训练可能要修改一下了。`,
     );
-    await chara2_talk.say_and_wait(
+    await suzuka.say_and_wait(
       `原来如此，所以希望我能传授一些在草地方面的技巧吗？`,
     );
     await falcon.say_and_wait(`飞鹰子决定在皋月赏期间作为沙地的无声铃鹿活跃`);
-    await chara2_talk.say_and_wait(`……欸？`);
+    await suzuka.say_and_wait(`……欸？`);
     await era.printAndWait(
       `不只是无声铃鹿，你也对${falcon.name}的脱线有些头疼。`,
     );
-    await chara2_talk.say_and_wait(
-      `飞鹰同学，请不要顶着别人的称号做奇怪的事情！`,
-    );
+    await suzuka.say_and_wait(`飞鹰同学，请不要顶着别人的称号做奇怪的事情！`);
     await era.printAndWait(`无声铃鹿有些生气了\n`);
     era.printButton(`抱歉，之后我会对飞鹰子好好说教的。`, 1);
     era.printButton(`可以传授一些有关草地的技巧吗？`, 2);
     const ret1 = await era.input();
     if (ret1 === 1) {
-      await chara2_talk.say_and_wait(`不，不是什么很严重的事情。`);
-      await chara2_talk.say_and_wait(
+      await suzuka.say_and_wait(`不，不是什么很严重的事情。`);
+      await suzuka.say_and_wait(
         `作为逃马姐妹的成员，跟上飞鹰同学的思路很困难，不过飞鹰同学不是会拿别人的声誉作为坏事的人。`,
       );
-      await chara2_talk.say_and_wait(
+      await suzuka.say_and_wait(
         `训练员${me.get_adult_sex_title()}不用这么在意。`,
       );
       await era.printAndWait(`无声铃鹿似乎以为你要严厉批评${falcon.name}。`);
       await me.say_and_wait(`失礼了。`);
       await era.printAndWait(`你又重新坐在座位上。`);
-      await chara2_talk.say_and_wait(
+      await suzuka.say_and_wait(
         `虽然不能借给飞鹰同学我的称号，不过草地方面的技巧我会好好告诉你的。`,
       );
       await era.printAndWait(
         `之后的三小时里，你们通过无声铃鹿了解到了有关草地的知识。`,
       );
     } else {
-      await chara2_talk.say_and_wait(`如果是这样的话，当然可以。`);
+      await suzuka.say_and_wait(`如果是这样的话，当然可以。`);
       await era.printAndWait(`无声铃鹿似乎不在生气了？`);
-      await chara2_talk.say_and_wait(
+      await suzuka.say_and_wait(
         `不过前方的风景我是不会让给其他人的！这点还请飞鹰同学记在心底。`,
       );
       await falcon.say_and_wait(`咦咦？小铃鹿生气起来好可怕！`);

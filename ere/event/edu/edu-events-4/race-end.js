@@ -11,7 +11,7 @@ const { race_enum } = require('#/data/race/race-const');
 
 /**
  * @param {HookArg} hook
- * @param {{race:number,rank:number,relation_change:number}} extra_flag
+ * @param {RaceEndParams} extra_flag
  */
 module.exports = async (hook, extra_flag) => {
   const event_marks = new MaEduMarks(),
@@ -1282,6 +1282,6 @@ module.exports = async (hook, extra_flag) => {
       );
     }
   } else {
-    throw new Error();
+    return true;
   }
 };

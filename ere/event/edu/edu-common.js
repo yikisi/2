@@ -567,6 +567,18 @@ class CustomizedEdu {
    * @returns {Promise}
    */
   // eslint-disable-next-line no-unused-vars
+  async out_river(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   * @returns {Promise}
+   */
+  // eslint-disable-next-line no-unused-vars
   async out_shopping(chara, me, callname, hook, extra_flag, event_object) {}
 
   /**

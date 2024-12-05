@@ -59,7 +59,9 @@ module.exports = class extends CustomizedCheck {
     const edu_weeks = era.get('cflag:4:育成回合计时');
     const event_marks = new MaEduMarks(4);
     const event_obj = new EventObject(4, cb_enum.edu);
-    const event_obj_special = new EventObject(4, cb_enum.edu, true);
+    const event_obj_special = new EventObject(4, cb_enum.edu, true).set_arg(
+      edu_weeks,
+    );
     if (edu_weeks < 3 * 48) {
       if (edu_weeks >= 20) {
         check_and_add_event(
@@ -309,11 +311,12 @@ module.exports = class extends CustomizedCheck {
           }
           break;
       }
-    } else if (edu_weeks === 143 + 5 && event_marks.girls_dream === 1) {
-      add_event(event_hooks.week_start, event_obj);
-    } else if (edu_weeks === 143 + 5 && event_marks.gentle_wind === 1) {
-      add_event(event_hooks.week_start, event_obj);
-    } else if (edu_weeks === 143 + 5 && event_marks.fall_heaven === 1) {
+    } else if (
+      edu_weeks === 143 + 5 &&
+      (event_marks.girls_dream === 1 ||
+        event_marks.gentle_wind === 1 ||
+        event_marks.fall_heaven === 1)
+    ) {
       add_event(event_hooks.week_start, event_obj);
     }
   }

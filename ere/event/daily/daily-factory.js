@@ -18,6 +18,7 @@ const current = new Date().getTime();
 
 cons_dict[0] = require('#/event/daily/daily-0');
 cons_dict[3] = require('#/event/daily/daily-3');
+cons_dict[4] = require('#/event/daily/daily-4');
 cons_dict[7] = require('#/event/daily/daily-7');
 cons_dict[17] = require('#/event/daily/daily-17');
 cons_dict[19] = require('#/event/daily/daily-19');
@@ -27,6 +28,7 @@ cons_dict[30] = require('#/event/daily/daily-30');
 cons_dict[32] = require('#/event/daily/daily-32');
 cons_dict[35] = require('#/event/daily/daily-35');
 cons_dict[37] = require('#/event/daily/daily-37');
+cons_dict[46] = require('#/event/daily/daily-46');
 cons_dict[52] = require('#/event/daily/daily-52');
 cons_dict[56] = require('#/event/daily/daily-56');
 cons_dict[60] = require('#/event/daily/daily-60');
