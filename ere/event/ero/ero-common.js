@@ -788,9 +788,11 @@ class CustomizedEro {
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
+   * @param {HookArg} hook
+   * @param {{partners:number[]}} extra_flag
    */
   // eslint-disable-next-line no-unused-vars
-  async after_betrayed(chara, me, callname) {
+  async after_betrayed(chara, me, callname, hook, extra_flag) {
     const race = era.get(`cflag:${this.id}:种族`),
       like_betrayed = era.get(`talent:${this.id}:绿帽癖`);
     switch (era.add(`exp:${this.id}:被绿次数`, 1)) {
