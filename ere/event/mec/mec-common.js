@@ -28,7 +28,9 @@ class CustomizedMec {
     return true;
   }
 
-  is_anger_for_unfaithful() {
+  /** @param {number[]} partners */
+  // eslint-disable-next-line no-unused-vars
+  is_anger_for_unfaithful(partners) {
     return true;
   }
 

@@ -44,7 +44,7 @@ async function punish_unfaithful(chara_id, new_love) {
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
         era.get(`love:${e}`) >= 75 &&
         !era.get(`talent:${e}:绿帽癖`) &&
-        get_custom_mec(e).is_anger_for_unfaithful() &&
+        get_custom_mec(e).is_anger_for_unfaithful([chara_id]) &&
         (punish_option || era.get(`talent:${chara_id}:病娇`)),
     );
   for (const c_id of temp_chara_list) {

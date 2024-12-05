@@ -882,7 +882,7 @@ async function page_ero(lover, skip_start_end) {
         era.get(`love:${e}`) >= 75 &&
         sys_check_awake(e) &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
-        get_custom_mec(e).is_anger_for_unfaithful() &&
+        get_custom_mec(e).is_anger_for_unfaithful(partner_list) &&
         (punish_option || era.get(`talent:${e}:病娇`)),
     );
     for (const chara_id of punish_list) {
