@@ -27,10 +27,10 @@ module.exports = async function () {
     // 一般人眼中的乐观，仅仅只是将四处收集而来的瓦片聚拢起来，然后拼凑起来的乐观，因此，面对较大的危险就会四分五裂
     // 因此，不过只是装作乐观的悲观者罢了
     // 然而，悲观往往是对自身所做成就的忽视，如果将看向未来的视野收回到自身不足5米的可操纵区域，反而会得到继续下去的动力
+    // 过大的期待会造成止步不前，最终会被借口所埋没，良心也因此蒙尘，最后欠下一个又一个谎言的债务
     await print_event_name(`喊声隆隆的沙地赛`, falcon);
     // 训练员遵守约定带${falcon.name}看沙地赛
-    await era.printAndWait(`某地的正在举行的沙地赛事\n`);
-    await era.printAndWait(`此刻的赛马场却如烧红的烙铁一样炽热。`);
+    await era.printAndWait(`某处的沙地赛\n`);
     await say_by_passer_by(
       `解说`,
       `比赛已经进入最终阶段！二号选手与四号选手从马群之中脱颖而出，开始了最后的角逐！`,
@@ -39,29 +39,33 @@ module.exports = async function () {
     await era.printAndWait(
       `雪花从天空悄然落到肩头，然后化为了潮湿的水汽，被激情所点燃的观众们将注意力集中于角逐胜利的${falcon.get_uma_sex_title()}之中。`,
     );
-    await say_by_passer_by(`赛${falcon.get_uma_sex_title()}们`, `哈啊啊啊啊！`);
-    await era.printAndWait(`在沙地上追逐梦想的少女们。`);
+    await era.printAndWait(
+      `此刻的赛马场像是烧红的烙铁浸入水中所散发的蒸汽一样。`,
+    );
+    await say_by_passer_by(`赛${falcon.get_uma_sex_title()}`, `哈啊啊啊啊！`);
+    await era.printAndWait(`两名马娘将马群远远抛开，决胜时刻即将到来。`);
     await say_by_passer_by(
       `解说`,
-      `两人之间的距离在不断缩短！五马身！三马身！一马身！就差一点！`,
+      `两人之间毫不相让，距离终点还有200米！100米！50米！最终的胜利者究竟花落谁家！`,
     );
     await era.printAndWait(
-      `追赶的${falcon.get_uma_sex_title()}与前方的${falcon.get_uma_sex_title()}并肩做好了超越的架势，而后迈出了关键一步，随后胜负已分。`,
+      `追赶的${falcon.get_uma_sex_title()}与前方的${falcon.get_uma_sex_title()}并肩做好了超越的架势，而后——`,
     );
+    await falcon.say_and_wait(`这就是训练员先生想让我看到的画面吗？`);
     await era.printAndWait(`观众席爆发出了雷鸣般的喝彩声。`);
     await era.printAndWait(
       `取得胜利的${falcon.get_uma_sex_title()}，不顾浑身被沙土所覆盖，将混合着汗水与泪水的笑脸献给了观众们。\n\n`,
     );
     await era.printAndWait(
-      `在胜者舞台上的${falcon.get_uma_sex_title()}们热烈地回应着在下面一直支持着她们的观众们。`,
+      `场地的聚光灯集中照射在胜者的那位身上，其他马娘宛如众星拱月，将胜利的果实衬托得如此甜美诱人。`,
     );
     await era.printAndWait(
-      `从喉咙之中挤出的不甘呐喊、喉咙嘶哑也要触及到的那片心意。`,
+      `激动的喜悦也好，失败的不甘也罢，从喉咙之中挤出的不甘呐喊、喉咙嘶哑也要触及到的那片天空。`,
     );
     await era.printAndWait(
-      `即使是寒冷的夜晚，这份炽热的情感也切实传到了心中。`,
+      `即使是寒冷的夜晚，这份炽热的情感也切实传到了在场的每一位观众心中。`,
     );
-    await falcon.say_and_wait(`哇啊啊啊——沙地赛，比我想象之中还要热闹呢。`);
+    await falcon.say_and_wait(`哇啊啊——沙地赛，比我想象之中还要热闹呢。`);
     await falcon.say_and_wait(
       `在舞台最中央的${falcon.get_uma_sex_title()}，观众们的注意力全部集中在这里……`,
     );

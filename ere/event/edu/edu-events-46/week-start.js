@@ -27,7 +27,11 @@ module.exports = async function (event_object) {
     await era.input();
     await falcon.say_and_wait(`……哈啊啊啊！`);
     await era.printAndWait(
-      `在最后的转弯处以恐怖的气势溅起一地沙尘的${falcon.name}冲过了终点线。`,
+      `${falcon.name}身体向前倾斜，努力克服着地面的阻力，脚下的大地传来沉闷的震动感。`,
+    );
+    await falcon.say_and_wait(`……`);
+    await era.printAndWait(
+      `咬紧了牙关，努力维持着速度的${falcon.name}冲过了沙地上鲜明的白线。`,
     );
     await me.say_and_wait(`辛苦了！`);
     await era.printAndWait(
@@ -41,7 +45,7 @@ module.exports = async function (event_object) {
       `训练员${me.get_adult_sex_title()}⭐，这次比上次进步了吗？`,
     );
     await era.printAndWait(
-      `你掏出计时器，确认着上面的时间，然后轻轻的点了头。得到肯定回答的少女如释重负，步伐也变得轻快了许多。`,
+      `你掏出计时器，确认着上面的时间，然后看向了最后冲刺时留下的深深的痕迹，最后轻轻的点了头。得到肯定回答的少女似乎忍耐不住激动的心情，走在了你的前面。`,
     );
     await falcon.say_and_wait(`太好了⭐，这样就可以朝着马娘偶像的道路前行了！`);
     await me.say_and_wait(`马娘偶像？`);
@@ -49,17 +53,12 @@ module.exports = async function (event_object) {
       `${falcon.name}之前确实提到过马娘偶像的这个概念，不过，自己不太确定马娘偶像究竟是什么。`,
     );
     await falcon.say_and_wait(
-      `马娘偶像是飞鹰子创建的概念，是积极参与比赛，在比赛与之后的舞台上闪闪发光的存在！`,
+      `马娘偶像是飞鹰子创建的概念，是亮闪闪的亲民偶像，与粉丝们一同成长并见证陪伴并给予对方爱与希望的存在！`,
     );
     await me.say_and_wait(`有点像是突出个人魅力的偶像艺人？`);
-    await me.say_and_wait(`马娘偶像的概念似乎有些笼统啊。`);
-    await me.say_and_wait(
-      `如果是积极参与比赛，并且闪闪发光的话，所有在赛场上奔驰的马娘都是一样的。`,
-    );
-    await me.say_and_wait(`作为马娘偶像的特殊之处又在哪里呢？`);
-    await era.printAndWait(
-      `身体稍微冷却下来后，你将矿泉水递给了${falcon.sex}。`,
-    );
+    await era.printAndWait(`马娘偶像的概念似乎与演艺界的新人偶像相似。`);
+    await me.say_and_wait(`作为马娘偶像的特殊之处又在哪里呢？`, true);
+    await era.printAndWait(`，你将矿泉水递给了${falcon.sex}。`);
     await me.say_and_wait(`先把这份概念记在记事本上吧。`, true);
     await falcon.say_and_wait(`我想让观众席上的大家一直看到飞鹰子闪耀的样子！`);
     await era.printAndWait(`以领放为策略的跑法正符合${falcon.name}的要求。`);

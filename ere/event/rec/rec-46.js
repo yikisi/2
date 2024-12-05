@@ -232,95 +232,130 @@ module.exports = class extends CustomizedRecruit {
           add_event(event_hooks.out_river, event_object);
           return false;
         }
+        // 定义：1代表积极 2代表消极
+        // 节拍 1
         await era.printAndWait(`你跟着海报的指引来到了河岸边。`);
-        await era.printAndWait(`不远处的少女，在高架桥的承托下显得额外渺小。`);
+        // 场景应为积极
+        await era.printAndWait(
+          `随着太阳逐渐西沉，天空的颜色也从明亮的蔚蓝慢慢荡漾到橙黄，云朵也被夕阳染成了金红色。`,
+        );
         await falcon.say_and_wait(`~~~♪`);
-        await era.printAndWait(`在灯光的照耀下的她却额外闪耀。`);
+        // 通过行走暗示时间从下午到黄昏
+        await era.printAndWait(
+          `高架桥投下的阴影覆盖了桥下的区域，形成了大片的暗区，只有在黄昏之时，才会有一丝丝的光线洒在桥下的草地上。`,
+        );
+        await era.printAndWait(
+          `而被橙黄色的天空所渲染的少女，就在河边的草地，她的舞台上举行着演出。`,
+        );
+        // 节拍 1
         await falcon.say_and_wait(`~~~♪谢谢大家！`);
+        // 对比 空无一人的草地
         await era.printAndWait(`少女娴熟的面对着空地鞠躬。`);
-        await era.printAndWait(`——像举行一场仪式一样。`);
+        await era.printAndWait(`——尽管如此，少女的脸上依然带着笑容。`);
+        // 节拍 2
         await era.printAndWait(`啪啪啪啪。`);
+        await era.printAndWait(`少女似乎无动于衷。`);
+        await era.printAndWait(`——不过，你总感觉有股若有若无的视线感。`);
         await era.printAndWait(
-          `挥洒的汗水，露出的可爱笑容，就这样无人欣赏默默凋零，实在不可原谅。`,
+          `但即使如此，除了耳朵微微颤动以外，少女继续着自己的表演。`,
         );
-        await era.printAndWait(
-          `但即使如此，除了耳朵微微颤动以外，少女不为作动。`,
-        );
-        await era.printAndWait(`连拂去额头上汗珠的闲暇都没有，下一场开始了。`);
         era.drawLine();
-        await falcon.say_and_wait(`——呼⭐今天是飞鹰子最满意的演出了。`);
+        await falcon.say_and_wait(`——呼⭐今天的飞鹰子状态绝佳！`);
         await era.printAndWait(
-          `为了驱散寒风而更加用力的鼓掌，大脑也随之振奋起来。`,
+          `马娘站在左右路灯发出光线的交界处，就像是在模仿着被探照灯照射的舞台一样。`,
         );
+        await era.printAndWait(`或许，这就是她的舞台吧。`);
+        await era.printAndWait(`孤独的偶像吗。`);
         await falcon.say_and_wait(`飞鹰子的粉丝一号先生⭐`);
-        await era.printAndWait(
-          `等到思绪重新回到现实之中，小小的脑袋凑了过来。`,
-        );
+        await era.printAndWait(`正准备转身离开的你被叫住了。`);
         era.printButton(`……粉丝一号？`, 1);
         await era.input();
-        await era.printAndWait(`原来不是偶像为了招揽粉丝的话术吗。`);
+        await era.printAndWait(
+          `沐浴在光线之下的少女以一种活跃到几乎是亢奋的声音向你宣布到。`,
+        );
         await falcon.say_and_wait(
           `因为粉丝一号先生是第一个听完飞鹰子整场演唱会的人⭐`,
         );
+        era.println();
         await era.printAndWait(
-          `稍稍回忆了一下，虽然从中途也有两三人围观，但看完全场的只有你一人。`,
+          `……你稍稍回忆了一下，虽然从中途也有两三人围观，但都在最后一幕前离开了。`,
+        );
+        await era.printAndWait(
+          `换句话说，自己是唯一一个从开头一直看到结束的观众。`,
+        );
+        await era.printAndWait(
+          `能在1月的寒风中坚持2小时，被称为粉丝也是确切的说法吧。`,
         );
         await falcon.say_and_wait(
           `粉丝一号先生有什么愿望吗？只要是飞鹰子的能力范围内，飞鹰子都会实现的⭐`,
         );
-        await era.printAndWait(`稍稍想了一下。`);
+        await era.printAndWait(`你稍稍想了一下。`);
         era.printButton(`可以在沙地选拔赛上见到飞鹰子吗？`, 1);
         await era.input();
         await era.printAndWait(
           `似乎是始料未及的回复，${falcon.name}露出了尴尬的神情。`,
         );
-        await falcon.say_and_wait(`……飞鹰子的粉丝一号先生是训练员吗？`);
-        era.printButton(`作为训练员，我很好奇这个问题。`, 1);
+        await falcon.say_and_wait(`……飞鹰子正在寻找合适的训练员哦？`);
+        era.printButton(`既然这样，不如和我签订契约吧。`, 1);
         await era.input();
-        await falcon.say_and_wait(`窥探偶像的秘密可不是合格的粉丝哦？`);
-        era.printButton(`这个是作为粉丝的请求。`, 1);
+        await falcon.say_and_wait(`诶？`);
+        await falcon.say_and_wait(`太好了！`);
+        await era.printAndWait(`醒目飞鹰似乎在用自己的方式庆祝。`);
+        await falcon.say_and_wait(`飞鹰子的粉丝一号同时还是一名训练员！`);
+        await falcon.say_and_wait(
+          `既然这样就让训练员先生看到飞鹰子在草地上的潜力吧！`,
+        );
+        await era.printAndWait(`越说越激动的醒目飞鹰情不自禁的握住了你的手。`);
+        era.printButton(`我希望能在泥地上看到你的身影。`, 1);
+        await era.input();
+        await falcon.say_and_wait(`诶……`);
+        await era.printAndWait(`醒目飞鹰僵在原地。`);
+        era.printButton(`我希望能在泥地看到醒目飞鹰的身影。`, 1);
         await era.input();
         await era.printAndWait(
           `时间像是凝固了一样，你紧紧的盯着${falcon.name}试图逃跑的双眼。`,
         );
+        era.println();
         await falcon.say_and_wait(`……毕竟是飞鹰子第一个粉丝的请求呢。`);
+        await era.printAndWait(
+          `像是过去了一个世纪一般的漫长时间，醒目飞鹰最终做出了答复。`,
+        );
         await era.printAndWait(
           `不再回避你的视线，堂堂正正注视着你的${falcon.name}。`,
         );
         await falcon.say_and_wait(
-          `因为飞鹰子觉得只有在草地上奔跑才能登上最大最闪亮的舞台！`,
+          `飞鹰子觉得只有在草地上奔跑才能登上最大最闪亮的舞台！`,
         );
         await falcon.say_and_wait(
           `而且泥地和草地之间的人气，相差了三四倍不止！`,
         );
-        await era.printAndWait(`${falcon.name}认真的回答你的问题。`);
-        await era.printAndWait(`明明渴望的目标近在咫尺，但这道门是关闭着的。`);
-        era.printButton(`那么就试着作为泥地偶像而努力吧！`, 1);
+        await falcon.say_and_wait(
+          `虽然飞鹰子不擅长草地，但是努力一定会产生结果`,
+        );
+        era.printButton(
+          `飞鹰子没有想过作为泥地偶像开创属于自己的马娘偶像时代吗?`,
+          1,
+        );
         await era.input();
-        await era.printAndWait(`那就把紧闭的窗户砸烂，从窗户离开。`);
-        await falcon.say_and_wait(`诶？飞鹰子不是说过了吗？泥地的——`);
+        await falcon.say_and_wait(`咦咦咦——`);
         await me.say_and_wait(
-          `如果飞鹰子在泥地上不断取胜，那么关注泥地赛事的人也会不断增加。`,
+          `泥地的粉丝们也期待着能指引着他们的马娘诞生，不如说这是泥地的大家所期盼的事情。`,
         );
         await me.say_and_wait(
-          `如果把泥地的关注度提到和草地一样，不，甚至比草地人气还要高的话。`,
+          `——泥地的大家们可是憋着一口气，想要看到明星马娘的诞生！`,
         );
-        await me.say_and_wait(
-          `——飞鹰子就能站在最大最闪耀的舞台之上了吗？而且，那可是${falcon.name}一手创建的，谁也没有见过的最闪耀的舞台！`,
-        );
+        await era.printAndWait(`深吸一口气，看来距离说服醒目飞鹰就差一步了。`);
+        era.printButton(`醒目飞鹰不想站在最闪耀的舞台之上吗。`, 1);
+        await era.input();
         await falcon.say_and_wait(`……飞鹰子的……最闪耀的舞台吗？`);
-        era.printButton(`这是作为一号粉丝的请求！`, 1);
         await era.input();
         await me.say_and_wait(
           `偶像不就是为了回应粉丝们的期待而将不可能化作可能的明日之星，对吧？`,
         );
         await era.printAndWait(
-          `似乎是想象到了站在最大的舞台之上，${falcon.name}明显出现了动摇。`,
+          `掌控着节奏像弹起的米粒沿着太刀的轨迹被精准的一分为二一样，你向${falcon.name}伸出了手。`,
         );
-        await me.say_and_wait(`不久之后会有一场泥地的比赛，一起去看吧？`);
-        await era.printAndWait(
-          `像弹起的米粒沿着剑的轨迹被精准的一分为二一样，你向${falcon.name}伸出了手。`,
-        );
+        await me.say_and_wait(`为了共同的理想出发吧。`);
         await falcon.say_and_wait(
           `接下来请多指教了，训练员……不！飞鹰子的粉丝一号先生⭐`,
         );
