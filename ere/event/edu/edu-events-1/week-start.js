@@ -4,9 +4,25 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-module.exports = async () => {
-  const spe = get_chara_talk(1);
-  const me = get_chara_talk(0);
+/**
+ * @this CustomizedEdu
+ * @param {CharaTalk} spe
+ * @param {CharaTalk} me
+ * @param {string} callname
+ * @param {HookArg} hook
+ * @param extra_flag
+ * @param {EventObject} event_object
+ * @param {function} super_week_start
+ */
+module.exports = async function (
+  spe,
+  me,
+  callname,
+  hook,
+  extra_flag,
+  event_object,
+  super_week_start,
+) {
   const mom = get_chara_talk(4);
   mom.name = '特别周妈妈';
   let edu_weeks = era.get('cflag:1:育成回合计时');
@@ -184,15 +200,25 @@ module.exports = async () => {
     await mom.say_and_wait('特别周妈妈：“那就祝你们一路顺风，再见了！');
   } else if (edu_weeks === 47 + 29) {
     await print_event_name('夏季合宿开始', spe);
-    //todo
+    // TODO
   } else if (edu_weeks === 95 + 29) {
     await print_event_name('夏季合宿开始（第二次）', spe);
-    //todo
+    // TODO
   } else if (edu_weeks === 47 + 48 || edu_weeks === 95 + 48) {
     await print_event_name('圣诞节', spe);
-    //todo
+    // TODO
   } else if (edu_weeks === 95 + 6) {
     await print_event_name('情人节', spe);
-    //todo
+    // TODO
+  } else {
+    await super_week_start.call(
+      this,
+      spe,
+      me,
+      callname,
+      hook,
+      extra_flag,
+      event_object,
+    );
   }
 };

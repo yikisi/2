@@ -2,17 +2,25 @@ const era = require('#/era-electron');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const { race_enum } = require('#/data/race/race-const');
 
 /**
+ * @this CustomizedEdu
+ * @param {CharaTalk} spe
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {HookArg} hook
  * @param {RaceEndParams} extra_flag
+ * @param {function} super_race_end
  */
-module.exports = async (hook, extra_flag) => {
-  const spe = get_chara_talk(1);
-  const me = get_chara_talk(0);
+module.exports = async function (
+  spe,
+  me,
+  callname,
+  hook,
+  extra_flag,
+  super_race_end,
+) {
   let edu_weeks = era.get('cflag:1:育成回合计时');
   if (
     extra_flag.race === race_enum.begin_race &&
@@ -113,6 +121,6 @@ module.exports = async (hook, extra_flag) => {
       '听到你的回答，缩在你怀里的特别周哭得更厉害了，也笑得更开心了。',
     );
   } else {
-    throw new Error();
+    await super_race_end.call(this, spe, me, callname, hook, extra_flag);
   }
 };

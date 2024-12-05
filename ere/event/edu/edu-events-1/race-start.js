@@ -2,18 +2,26 @@ const era = require('#/era-electron');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const { race_enum } = require('#/data/race/race-const');
 
 /**
+ * @this CustomizedEdu
+ * @param {CharaTalk} spe
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {HookArg} hook
  * @param {RaceStartParams} extra_flag
+ * @param {function} super_race_start
  */
-module.exports = async (hook, extra_flag) => {
+module.exports = async function (
+  spe,
+  me,
+  callname,
+  hook,
+  extra_flag,
+  super_race_start,
+) {
   let edu_weeks = era.get('cflag:1:育成回合计时');
-  const spe = get_chara_talk(1);
-  const me = get_chara_talk(0);
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name('冲向出道赛', spe);
     await era.printAndWait(
@@ -70,5 +78,7 @@ module.exports = async (hook, extra_flag) => {
   } else if (extra_flag.race === race_enum.arim_kin && edu_weeks < 95) {
     await print_event_name('冲向有马纪念', spe);
     //todo
+  } else {
+    await super_race_start.call(this, spe, me, callname, hook, extra_flag);
   }
 };

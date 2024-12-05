@@ -13,6 +13,7 @@ const love_dict = {};
 
 const current = new Date().getTime();
 
+cons_dict[1] = require('#/event/love/love-1');
 cons_dict[3] = require('#/event/love/love-3');
 cons_dict[7] = require('#/event/love/love-7');
 cons_dict[17] = require('#/event/love/love-17');

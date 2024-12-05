@@ -75,7 +75,7 @@ module.exports = class extends CustomizedCheck {
       check_and_add_event(
         edu_marks,
         edu_weeks,
-        'borrow_money',
+        'gambling',
         event_hooks.school_atrium,
         event_obj,
       );
