@@ -48,6 +48,7 @@ async function punish_unfaithful(chara_id, new_love) {
         (punish_option || era.get(`talent:${chara_id}:病娇`)),
     );
   for (const c_id of temp_chara_list) {
+    get_custom_check(c_id).check_after_betrayed([chara_id]);
     era.print([
       me.get_colored_name(),
       ' 的不忠让 ',
