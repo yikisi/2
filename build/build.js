@@ -10,7 +10,7 @@ renameSync(
   resolve('./ere/era-electron.js.backup'),
 );
 copyFileSync(
-  resolve('./build/era-electron.js'),
+  resolve('./build/sdk.js'),
   resolve('./ere/era-electron.js'),
 );
 

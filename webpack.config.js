@@ -1,20 +1,26 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 
+const out_type = 'self';
+
 module.exports = {
   context: resolve(__dirname, 'ere/'),
   entry: {
     era: {
       import: './era-electron.js',
-      library: { name: '_era', type: 'self' },
+      library: { name: '_era', type: out_type },
     },
     main: {
       dependOn: 'era',
       import: './main.js',
       library: {
         name: 'game',
-        type: 'self',
+        type: out_type,
       },
+    },
+    static: {
+      import: '../build/static.json',
+      library: { name: 'static', type: out_type },
     },
   },
   mode: 'production',
