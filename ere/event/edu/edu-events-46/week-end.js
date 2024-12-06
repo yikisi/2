@@ -37,22 +37,25 @@ module.exports = async function () {
     );
     await say_by_passer_by(`观众`, `唔噢噢噢噢噢噢噢！`);
     await era.printAndWait(
-      `雪花从天空悄然落到肩头，然后化为了潮湿的水汽，被激情所点燃的观众们将注意力集中于角逐胜利的${falcon.get_uma_sex_title()}之中。`,
-    );
-    await era.printAndWait(
-      `此刻的赛马场像是烧红的烙铁浸入水中所散发的蒸汽一样。`,
+      `雪花从天空悄然落到肩头，然后化为了潮湿的水汽，看台上的观众们裹着厚厚的围巾与大衣，手中挥舞着旗帜和彩带，此起彼伏的加油助威声打破了冬日的宁静。`,
     );
     await say_by_passer_by(`赛${falcon.get_uma_sex_title()}`, `哈啊啊啊啊！`);
-    await era.printAndWait(`两名马娘将马群远远抛开，决胜时刻即将到来。`);
+    await era.printAndWait(
+      `两名马娘在前半段的比赛中一直位于先头阵营，但并未真正与马群拉开差距。直到最后的冲刺阶段才骤然加速，将马群逐渐甩在后面。`,
+    );
+    await era.printAndWait(
+      `观众席上的尽然有序的加油助威声被戏剧性的场面划破而杂乱无章。`,
+    );
     await say_by_passer_by(
       `解说`,
-      `两人之间毫不相让，距离终点还有200米！100米！50米！最终的胜利者究竟花落谁家！`,
+      `两人之间毫不相让，距离终点还有200米！100米！50米！最后的胜利者是——`,
     );
+    await era.printAndWait(`时间在此凝固。`);
     await era.printAndWait(
       `追赶的${falcon.get_uma_sex_title()}与前方的${falcon.get_uma_sex_title()}并肩做好了超越的架势，而后——`,
     );
     await falcon.say_and_wait(`这就是训练员先生想让我看到的画面吗？`);
-    await era.printAndWait(`观众席爆发出了雷鸣般的喝彩声。`);
+    await era.printAndWait(`凝固的时间再次移动。`);
     await era.printAndWait(
       `取得胜利的${falcon.get_uma_sex_title()}，不顾浑身被沙土所覆盖，将混合着汗水与泪水的笑脸献给了观众们。\n\n`,
     );
@@ -68,19 +71,21 @@ module.exports = async function () {
     await falcon.say_and_wait(`哇啊啊——沙地赛，比我想象之中还要热闹呢。`);
     await falcon.say_and_wait(
       `在舞台最中央的${falcon.get_uma_sex_title()}，观众们的注意力全部集中在这里……`,
+      true,
     );
-    await falcon.say_and_wait(`如果飞鹰子也能站在这里的话。`);
+    await falcon.say_and_wait(`如果飞鹰子也能站在这里的话。`, true);
     await falcon.say_and_wait(`飞鹰子……飞鹰子感动得都要哭出来了！`);
     await era.printAndWait(`从出口处离开的${falcon.name}诉说着心中的感受。`);
-    await me.say_and_wait(`无论是草地还是沙地，为此付出的爱都是相同的。`);
-    await era.printAndWait(
-      `你也被沙地赛场的热烈气氛所震撼，沉默片刻后说出了自己的感想。`,
+    await falcon.say_and_wait(
+      `没想到沙地赛比想象中还要精彩，观众们的热情，还有马娘们为此付出的爱，与选择草地的马娘们都是一样的！`,
     );
     await falcon.say_and_wait(`飞鹰子决定了！`);
-    await era.printAndWait(`一旁的少女突然站在原地挥起了拳头。`);
-    await falcon.say_and_wait(`飞鹰子要让沙地变得和草地一样受欢迎！`);
+    await era.printAndWait(`被热情点燃的少女认真的看向你。`);
+    await falcon.say_and_wait(
+      `飞鹰子要以沙地赛为起点，顺着这条赛道一气不停的直直冲向顶级马娘偶像的终点！`,
+    );
     await era.printAndWait(
-      `向着星星大声说出了自己的愿望的少女，泥地偶像之路才刚刚开始。`,
+      `吵闹声引得周围的游客纷纷侧目，而醒目飞鹰的泥地偶像之路才刚刚开始。`,
     );
     new FalconEduMarks().start++;
     add_event(event_hooks.week_start, new EventObject(46, cb_enum.edu));
