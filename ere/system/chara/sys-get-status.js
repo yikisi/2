@@ -211,7 +211,8 @@ function sys_get_status(chara_id) {
   }
   if (
     era.get(`status:${chara_id}:爱意克制`) &&
-    (era.get('status:0:好感度镜片') || era.get('status:0:马语者'))
+    ((chara_id !== 32 && era.get('status:0:好感度镜片')) ||
+      era.get('status:0:马语者'))
   ) {
     status_list.push({
       color: buff_colors[2],

@@ -224,7 +224,7 @@ function love_uma(chara_id, val, to_be_shown) {
     love < 50 &&
     new_val >= 50 &&
     era.get(`cflag:${chara_id}:种族`) &&
-    era.get(`talent:${chara_id}:病娇`)
+    era.get(`talent:${chara_id}:病娇`) === 1
   ) {
     era.set(`status:${chara_id}:爱意克制`, 1);
   }
@@ -352,7 +352,7 @@ module.exports = {
     if (
       new_val === 50 &&
       era.get(`cflag:${chara_id}:种族`) &&
-      era.get(`talent:${chara_id}:病娇`)
+      era.get(`talent:${chara_id}:病娇`) === 1
     ) {
       era.set(`status:${chara_id}:爱意克制`, 1);
     }
