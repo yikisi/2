@@ -21,7 +21,11 @@ module.exports = class extends CustomizedMec {
       return super.set_callname();
     }
     if (!this.set_callname_from_src()) {
-      set('callname:32:0', '豚鼠君');
+      if (get('mark:32:同心') === 3) {
+        set('callname:32:0', '豚鼠君');
+      } else {
+        set('callname:32:0', ['豚鼠君', '主人大人']);
+      }
     }
   }
 

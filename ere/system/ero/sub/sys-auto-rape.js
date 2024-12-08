@@ -201,6 +201,7 @@ async function sys_auto_rape(shown) {
     white_list = {},
     black_list = {},
     week_list = {};
+  get_custom_ero(master).set_preference(white_list, week_list);
   (era.get(`tcvar:${master}:接近高潮`) || []).forEach((p) =>
     want_list_entry_getter[p].forEach((k) => (want_list[k] = true)),
   );
@@ -356,14 +357,14 @@ async function sys_auto_rape(shown) {
   if (!era.get('tflag:强奸') && get_sex_acceptable(master) < 0) {
     filters.push((e) => e === ero_hooks.insult || e === ero_hooks.hit_face);
   }
-  let second_filter;
-  if (era.get('flag:惩戒力度') >= 2) {
-    second_filter = chara_list_in_train.length
-      ? (e) => e >= ero_hooks.double_fuck && e <= ero_hooks.spit_roast_anal_sex
-      : (e) => e >= ero_hooks.missionary && e <= ero_hooks.stimulate_womb;
-  } else {
-    second_filter = await get_custom_ero(master).filter_in_rape();
+  if (chara_list_in_train.length > 0) {
+    filters.push(
+      (e) => e >= ero_hooks.double_fuck && e <= ero_hooks.spit_roast_anal_sex,
+      (e) =>
+        e >= ero_hooks.ask_supporter_prepare_virgin && e <= ero_hooks.fuck_69,
+    );
   }
+  const second_filter = get_custom_ero(master).filter_in_rape();
   if (Object.keys(poison_list.master).length) {
     filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;

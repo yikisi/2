@@ -1,9 +1,6 @@
 const era = require('#/era-electron');
 
-const {
-  check_satisfied,
-  check_want_to_escape,
-} = require('#/system/ero/sys-calc-ero-status');
+const { check_satisfied } = require('#/system/ero/sys-calc-ero-status');
 const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
 const {
   begin_and_init_ero,
@@ -44,7 +41,7 @@ async function sys_rape_in_sleeping(chara_id, supporter) {
     await sys_handle_ero_act(ero_hooks.relax, default_my_filter, debug);
     action_count++;
     if (
-      check_want_to_escape(chara_id) ||
+      era.get(`tcvar:${chara_id}:逃跑`) ||
       (check_satisfied(chara_id) &&
         (!supporter || check_satisfied(supporter))) ||
       (wake_up =
