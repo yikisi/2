@@ -13,13 +13,36 @@ const GameGuides = require('#/event/game-guides');
 const { check_rec_script, run_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { gacha, get_random_entry } = require('#/utils/list-utils');
+const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
 
-const { el_danger_color } = require('#/data/color-const');
+const CharaAvailableSkills = require('#/data/chara-available-skills');
+const CharaSkills = require('#/data/chara-skills');
+const { adaptability_colors, el_danger_color } = require('#/data/color-const');
+const { attr_colors } = require('#/data/const.json');
+const { hair_colors, skin_colors } = require('#/data/const.json');
+const {
+  chara_desc,
+  chara_full_desc,
+  sex_title,
+} = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
+const {
+  get_adaptability_rank,
+  get_breast_cup,
+  get_skin,
+  get_talent,
+  get_xp,
+} = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+const { skills_dict } = require('#/data/race/skill/skill-const');
+const { adaptability_names, attr_names } = require('#/data/train-const');
+const {
+  get_bust_size,
+  get_hip_size,
+  get_waist_size,
+} = require('#/system/ero/sys-calc-ero-status');
 
 async function print_rec_page() {
   era.set('flag:当前位置', location_enum.playground);
@@ -114,13 +137,19 @@ async function print_rec_page() {
                   disabled:
                     flag_limit || (cur_recruit && cur_recruit !== chara_id),
                 },
-                content: era.get(`callname:${chara_id}:-1`),
+                content: era.get(`static:${chara_id}:name`),
                 type: 'button',
               },
               {
-                accelerator: chara_id + 500,
+                accelerator: chara_id + 1000,
                 config: { align: 'center' },
-                content: '育成目标预览',
+                content: '个人情报预览',
+                type: 'button',
+              },
+              {
+                accelerator: chara_id + 2000,
+                config: { align: 'center' },
+                content: '育成情报预览',
                 type: 'button',
               },
             ],
@@ -177,17 +206,284 @@ async function print_rec_page() {
         );
       }
       flag_recruit = false;
-    } else if (ret > 500) {
+    } else if (ret > 1000 && ret <= 2000) {
+      const selected = ret - 1000,
+        name = era.get(`static:${selected}:name`),
+        body_hair_color = era.get(`cstr:${selected}:毛色`),
+        hair_color = era.get(`cstr:${selected}:发色`),
+        skin = get_skin(selected),
+        characteristic = era.get(`cflag:${selected}:气性`),
+        sex_code = era.get(`cflag:${selected}:性别`),
+        talent_list = [];
+      let hair = era.get(`cstr:${selected}:呆毛`);
+      hair = join_list(
+        [
+          hair ? `${hair}呆毛` : '',
+          era.get(`cstr:${selected}:前发`),
+          era.get(`cstr:${selected}:中发`),
+          era.get(`cstr:${selected}:后发`),
+        ],
+        '+',
+      );
+      let temp = get_talent(selected);
+      if (temp.length > 0) {
+        talent_list.push(
+          {
+            config: { width: 2 },
+            content: '性格',
+            type: 'text',
+          },
+          {
+            config: { width: 22 },
+            content: temp,
+            type: 'text',
+          },
+        );
+      }
+      temp = get_xp(selected);
+      if (temp.length > 0) {
+        talent_list.push(
+          {
+            config: { width: 2 },
+            content: '其他',
+            type: 'text',
+          },
+          {
+            config: { width: 22 },
+            content: temp,
+            type: 'text',
+          },
+        );
+      }
       era.printMultiColumns(
         [
           {
             config: {
-              content: `${era.get(`static:${ret - 500}:name`)} 的育成目标`,
+              content: `${name} 的个人情报`,
               position: 'left',
             },
             type: 'divider',
           },
-          ...get_custom_check(ret - 500)
+          {
+            content: [
+              '肤色',
+              { color: skin_colors[skin], content: skin },
+              ' 的 ',
+              {
+                color:
+                  hair_colors[hair_color][3] ||
+                  `hsl(${hair_colors[hair_color][0]}deg ${hair_colors[hair_color][1]}% ${hair_colors[hair_color][2]}%)`,
+                content: `${hair_color}发`,
+              },
+              {
+                color:
+                  hair_colors[body_hair_color][3] ||
+                  `hsl(${hair_colors[body_hair_color][0]}deg ${hair_colors[body_hair_color][1]}% ${hair_colors[body_hair_color][2]}%)`,
+                content: `${body_hair_color}毛`,
+              },
+              ' ',
+              {
+                content: chara_desc[characteristic + 3],
+                title: `${chara_desc[characteristic + 3]}：${chara_full_desc[characteristic + 3]}`,
+              },
+              ' ',
+              sex_title[sex_code],
+            ],
+            type: 'text',
+          },
+          { content: ['发型：', hair], type: 'text' },
+          {
+            content: [
+              '出生于 ',
+              era.get(`cflag:${selected}:出生月份`),
+              ' 月 ',
+              era.get(`cflag:${selected}:出生日期`),
+              ' 日',
+            ],
+            type: 'text',
+          },
+          {
+            config: {
+              content: `${name} 的身体尺寸`,
+              position: 'left',
+            },
+            type: 'divider',
+          },
+          {
+            content: [
+              '身高：',
+              era.get(`cflag:${selected}:身高`).toString(),
+              'cm ｜ 体重：控制得当',
+            ],
+            type: 'text',
+          },
+          ...(sex_code !== 1 &&
+          (era.get('status:0:透视镜片') || era.get('status:0:马语者'))
+            ? [
+                {
+                  content: [
+                    '三围：B',
+                    get_bust_size(selected, true).toString(),
+                    ' (',
+                    get_breast_cup(selected, true).toString(),
+                    ' Cup) · W',
+                    get_waist_size(selected).toString(),
+                    ' · H',
+                    get_hip_size(selected).toString(),
+                  ],
+                  type: 'text',
+                },
+              ]
+            : []),
+          {
+            config: {
+              content: `${name} 的性格特征`,
+              position: 'left',
+            },
+            type: 'divider',
+          },
+          ...talent_list,
+        ],
+        { width: 18 },
+      );
+      await era.waitAnyKey();
+    } else if (ret > 2000) {
+      const selected = ret - 2000,
+        name = era.get(`static:${selected}:name`),
+        skill_list = new CharaSkills(selected).get().map((e) => ({
+          config: { width: 6 },
+          content: skills_dict[e].get_colored_name(),
+          type: 'text',
+        })),
+        available_list = new CharaAvailableSkills(selected).get().map((e) => ({
+          config: { width: 6 },
+          content: skills_dict[e].get_colored_name(),
+          type: 'text',
+        })),
+        skill_buffer = [];
+      skill_buffer.push({
+        config: { width: 4 },
+        content: '初始：',
+        type: 'text',
+      });
+      if (skill_list.length > 0) {
+        skill_buffer.push(
+          ...skill_list.slice(0, 3),
+          {
+            config: { width: 4 },
+            content: [],
+            type: 'text',
+          },
+          skill_list[3],
+        );
+      } else {
+        skill_buffer.push({
+          config: { width: 6 },
+          content: '技能点数+680',
+          type: 'text',
+        });
+      }
+      skill_buffer.push({ content: [], type: 'text' });
+      if (available_list.length > 0) {
+        skill_buffer.push(
+          {
+            config: { width: 4 },
+            content: '经典年解锁：',
+            type: 'text',
+          },
+          ...available_list.slice(0, 2),
+          { content: [], type: 'text' },
+          {
+            config: { width: 4 },
+            content: '资深年解锁：',
+            type: 'text',
+          },
+          ...available_list.slice(2),
+        );
+      } else {
+        skill_buffer.push(
+          {
+            config: { width: 4 },
+            content: '经典年解锁：',
+            type: 'text',
+          },
+          {
+            config: { width: 6 },
+            content: '技能点数+400',
+            type: 'text',
+          },
+          { content: [], type: 'text' },
+          {
+            config: { width: 4 },
+            content: '资深年解锁：',
+            type: 'text',
+          },
+          {
+            config: { width: 6 },
+            content: '技能点数+400',
+            type: 'text',
+          },
+        );
+      }
+      era.printMultiColumns(
+        [
+          {
+            config: {
+              content: `${name} 的训练加成`,
+              position: 'left',
+            },
+            type: 'divider',
+          },
+          ...attr_names
+            .map((e) => ({
+              n: e,
+              v: era.get(`staticcflag:${selected}:${e}加成`),
+            }))
+            .filter((e) => e.v > 0)
+            .map((e) => ({
+              config: { width: 4, color: attr_colors[e.n] },
+              content: [e.n, '：+', e.v.toString(), '%'],
+              type: 'text',
+            })),
+          {
+            config: {
+              content: `${name} 的比赛适应`,
+              position: 'left',
+            },
+            type: 'divider',
+          },
+          ...adaptability_names.map((e) => {
+            const adapt = era.get(`cflag:${selected}:${e}适性`);
+            return {
+              config: { width: 4 },
+              content: [
+                e,
+                '：',
+                {
+                  color: adaptability_colors[adapt],
+                  content: get_adaptability_rank(adapt),
+                  fontWeight: 'bold',
+                },
+              ],
+              type: 'text',
+            };
+          }),
+          {
+            config: {
+              content: `${name} 的比赛技巧`,
+              position: 'left',
+            },
+            type: 'divider',
+          },
+          ...skill_buffer,
+          {
+            config: {
+              content: `${name} 的育成目标`,
+              position: 'left',
+            },
+            type: 'divider',
+          },
+          ...get_custom_check(selected)
             .get_edu_aims()
             .map((e) => {
               const g1 = e.content.indexOf('G1') !== -1,
@@ -202,7 +498,7 @@ async function print_rec_page() {
               };
             }),
         ],
-        { width: 12 },
+        { width: 18 },
       );
       await era.waitAnyKey();
     } else {

@@ -59,7 +59,7 @@ module.exports = {
   /**
    * @param {number} chara_id
    * @param {number} stage
-   * @param _
+   * @param [_]
    * @param {EventObject} [event_object]
    * @returns {Promise<boolean|void>}
    */

@@ -128,8 +128,7 @@ module.exports = {
       right_intro_list.push(
         '身高：',
         era.get(`cflag:${chara.id}:身高`).toString(),
-        'cm ｜ ',
-        '体重：',
+        'cm ｜ 体重：',
       );
       if (era.get(`status:${chara.id}:发胖`)) {
         right_intro_list.push('幸、幸福胖哦……');

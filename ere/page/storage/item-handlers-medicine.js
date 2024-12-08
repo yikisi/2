@@ -311,6 +311,7 @@ module.exports = (handlers) => {
           reject === 89 ||
           reject === 99) &&
         !era.get(`status:${id}:讨厌药`) &&
+        !era.get(`status:${id}:爱意克制`) &&
         new LimitLoveStatus(id).is_empty()
       );
     });

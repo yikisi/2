@@ -572,9 +572,9 @@ module.exports = {
   get_skin(chara_id) {
     return skin_desc[era.get(`cflag:${chara_id}:肤色深度`) + 1];
   },
-  get_talent: (chara_id) =>
-    [
-      ...get_custom_mec(chara_id)
+  get_talent: (chara_id) => {
+    const yandere = era.get(`talent:${chara_id}:病娇`),
+      ret = get_custom_mec(chara_id)
         .get_talents()
         .map((e) => {
           if (e.title && !e.title.startsWith('[')) {
@@ -584,21 +584,29 @@ module.exports = {
               e.title;
           }
           return e;
-        }),
-      ...(era.get(`cflag:${chara_id}:父方角色`) === 308 ||
+        });
+    if (
+      era.get(`cflag:${chara_id}:父方角色`) === 308 ||
       era.get(`cflag:${chara_id}:母方角色`) === 308
-        ? [
-            {
-              color: buff_colors[1],
-              content: '[梦之继承者]',
-              key: '梦之继承者',
-            },
-          ]
-        : []),
-      ...(era.get(`talent:${chara_id}:捉摸不透`) ? ['捉摸不透'] : []),
-      ...(era.get(`talent:${chara_id}:病娇`) === 2
-        ? [{ color: buff_colors[3], content: '[病娇]', key: '病娇' }]
-        : []),
+    ) {
+      ret.push({
+        color: buff_colors[1],
+        content: '[梦之继承者]',
+        key: '梦之继承者',
+      });
+    }
+    if (yandere === 2 || (yandere > 0 && era.get('status:0:马语者'))) {
+      ret.push({
+        color: buff_colors[3],
+        content: '[病娇]',
+        key: '病娇',
+        opacity: yandere / 2,
+      });
+    }
+    if (era.get(`talent:${chara_id}:捉摸不透`)) {
+      ret.push('捉摸不透');
+    }
+    ret.push(
       ...new Array(18)
         .fill(0)
         .map((_, i) => {
@@ -609,7 +617,8 @@ module.exports = {
         })
         .filter((e) => e.val)
         .map((e) => talent_names[e.id][(e.val + 1) / 2]),
-    ].map((e) => {
+    );
+    return ret.map((e) => {
       const { print_obj, key } =
         e instanceof Object
           ? { print_obj: e, key: e.key }
@@ -624,7 +633,8 @@ module.exports = {
         print_obj.title = `[${key}]：${talent_desc[key]}`;
       }
       return print_obj;
-    }),
+    });
+  },
   get_talent_bust_size,
   /** @param {number} chara_id */
   get_train_time(chara_id) {

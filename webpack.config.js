@@ -28,6 +28,7 @@ module.exports = {
     path: resolve(__dirname, 'dist/'),
     filename: '[name].bundle.js',
   },
+  performance: { hints: false },
   plugins: [new webpack.ids.HashedModuleIdsPlugin({})],
   resolve: {
     alias: { '#': resolve(__dirname, 'ere/') },
