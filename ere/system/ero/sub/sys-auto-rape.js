@@ -55,7 +55,12 @@ function get_random_act(master, act_list, last_action, ...filters) {
       break;
     }
   }
-  era.logger.debug(filtered_list.map((e) => ero_action_names[e]));
+  era.logger.debug(
+    'source: ' +
+      act_list.map((e) => ero_action_names[e]).join(',') +
+      '\n\tfiltered: ' +
+      filtered_list.map((e) => ero_action_names[e]).join(','),
+  );
   return ret;
 }
 
@@ -263,8 +268,7 @@ async function sys_auto_rape(shown) {
   }
   if (
     (temp = era.get(`talent:${master}:淫乳`)) === 2 ||
-    era.get(`talent:${master}:妖乳`) ||
-    era.get(`talent:${master}:乳房尺寸`) > 0
+    era.get(`talent:${master}:妖乳`)
   ) {
     white_list[ero_hook_tags.breast] = true;
     white_list[ero_hook_tags.nipple] = true;
@@ -273,6 +277,10 @@ async function sys_auto_rape(shown) {
     black_list[ero_hook_tags.breast] = true;
     black_list[ero_hook_tags.nipple] = true;
     black_list[ero_hook_tags.touched_nipple] = true;
+  } else if (era.get(`talent:${master}:乳房尺寸`) > 0) {
+    white_list[ero_hook_tags.breast] = true;
+    white_list[ero_hook_tags.nipple] = true;
+    white_list[ero_hook_tags.touched_nipple] = true;
   }
   if ((temp = era.get(`talent:${master}:淫身`)) === 2) {
     white_list[ero_hook_tags.body] = true;
@@ -319,9 +327,10 @@ async function sys_auto_rape(shown) {
     black_list[ero_hook_tags.anal] = true;
   }
   if (
-    era.get(`talent:${master}:抖S`) ||
-    era.get(`talent:${master}:小恶魔`) ||
-    era.get(`talent:${master}:反抗意愿`) > 0
+    Object.keys(week_list).length === 0 &&
+    (era.get(`talent:${master}:抖S`) ||
+      era.get(`talent:${master}:小恶魔`) ||
+      era.get(`talent:${master}:反抗意愿`) > 0)
   ) {
     if (era.get('talent:0:淫口') > 0) {
       week_list[ero_hook_tags.mouth] = week_list[ero_hook_tags.tongue] = true;
@@ -392,10 +401,9 @@ async function sys_auto_rape(shown) {
         tags.defender_tags.findIndex((t) => week_list[t]) !== -1
       );
     };
-    filters.push((e) => second_filter(e) && temp(e), second_filter, temp);
-  } else {
-    filters.push(second_filter);
+    filters.push((e) => second_filter(e) && temp(e), temp);
   }
+  filters.push(second_filter);
   if (Object.keys(black_list).length) {
     filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;

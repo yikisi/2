@@ -125,8 +125,6 @@ module.exports = class extends CustomizedEro {
       await era.printAndWait(
         '从脖子传来的她的气味和比之前更强烈的甜香搔着鼻腔……',
       );
-      await me.say_and_wait('好热……', true);
-      await me.say_and_wait('好热…………', true);
     }
   }
 

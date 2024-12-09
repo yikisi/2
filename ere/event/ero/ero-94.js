@@ -6,7 +6,7 @@ const { ero_hook_tags, ero_hooks } = require('#/data/event/ero-hooks');
 
 module.exports = class extends CustomizedEro {
   set_preference(attacker_parts, defender_parts) {
-    defender_parts[ero_hook_tags.mouth] = 1;
+    defender_parts[ero_hook_tags.tongue] = 1;
   }
 
   filter_in_rape() {
@@ -15,7 +15,8 @@ module.exports = class extends CustomizedEro {
         e === ero_hooks.force_blow_job ||
         e === ero_hooks.force_deep_blow_job ||
         e === ero_hooks.force_hand_and_blow_job ||
-        e === ero_hooks.fuck_tit_and_mouth;
+        e === ero_hooks.fuck_tit_and_mouth ||
+        e === ero_hooks.sixty_nine;
     }
     return super.filter_in_rape();
   }

@@ -107,7 +107,8 @@ function sys_filter_ero_act(attacker, defender, filters) {
         era.get(`talent:${chara_id}:反抗意愿`) === 1);
     tag_checks[chara_id][ero_hook_tags.sadism] =
       tag_checks[chara_id][ero_hook_tags.super_sadism] ||
-      era.get(`talent:${chara_id}:抖S`) > 0;
+      era.get(`talent:${chara_id}:抖S`) > 0 ||
+      era.get(`talent:${chara_id}:反抗意愿`) === 1;
     tag_checks[chara_id][ero_hook_tags.imp] =
       tag_checks[chara_id][ero_hook_tags.sadism] ||
       era.get(`talent:${chara_id}:小恶魔`) > 0;
