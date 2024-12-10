@@ -61,11 +61,14 @@ module.exports = class extends CustomizedCheck {
         }
       }
     }
-    if (get('flag:当前马币') <= 0 && !my_edu_marks.bankruptcy) {
-      add_event(
-        event_hooks.week_start,
-        new EventObject(0, cb_enum.edu).set_arg('bankruptcy'),
-      );
+    if (get('flag:当前马币') <= 0) {
+      if (!my_edu_marks.bankruptcy) {
+        my_edu_marks.bankruptcy = 1;
+        add_event(
+          event_hooks.week_start,
+          new EventObject(0, cb_enum.edu).set_arg('bankruptcy'),
+        );
+      }
     } else {
       my_edu_marks.bankruptcy = 0;
     }

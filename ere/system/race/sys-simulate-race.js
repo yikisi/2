@@ -684,20 +684,14 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
         uma.race.loc_mind = 0;
       }
       // 阻挡计算
-      let temp;
       const block_percent =
         uma.race.location >= 150 &&
         uma.race.conditionParams.blocked_front &&
-        (uma.race.strength * (temp = get_random_value(0.6, 0.8, true))) /
+        (uma.race.strength * get_random_value(0.7, 0.8, true)) /
           l[i - 1].race.strength +
           uma.race.lane_move_buff;
       if (block_percent > 0 && block_percent < 1) {
         total_blocked++;
-        logger.debug(
-          `突围！${uma.name} -> ${l[i - 1].name}：${block_percent.toFixed(
-            4,
-          )}%=(${uma.race.strength}(突围者力量)*${temp}(随机概率))/${l[i - 1].race.strength}(阻挡者力量)+${uma.race.lane_move_buff.toFixed(4)}(突围加成)`,
-        );
         if (Math.random() >= block_percent) {
           total_failed++;
           if (

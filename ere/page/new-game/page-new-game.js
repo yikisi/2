@@ -248,8 +248,8 @@ module.exports = async (src_chara) => {
           ].forEach((e) => init_chara(e));
           switch (era.get('flag:彩蛋机制')) {
             case 179:
-              // 初始卡池：速茶穴
-              [9, 25, 32, 36, 94].forEach(
+              // 初始卡池：富赤速茶宫穴
+              [5, 9, 25, 32, 36, 94].forEach(
                 (e) => src_chara !== e && init_chara(e),
               );
               era.set('flag:当前声望', 5000);
