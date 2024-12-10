@@ -2239,16 +2239,6 @@ model item_group {
   @@index([group_id], map: "item_group_0_group_id")
 }
 
-model item_place {
-  id               Int
-  transition_type  Int
-  transition_value Int
-  start_date       Int
-
-  @@unique([id, transition_type, transition_value], map: "sqlite_autoindex_item_place_1")
-  @@index([id], map: "item_place_0_id")
-}
-
 model jukebox_comment {
   id              Int @id @default(autoincrement())
   comment_id      Int
@@ -2740,6 +2730,7 @@ model mini_bg {
   grid_offset_y String
   dress_id      Int
   position      String
+  env_id        Int
 
   @@index([scene_type], map: "mini_bg_0_scene_type")
 }
@@ -4745,21 +4736,22 @@ model single_mode_top_bg_chara {
 }
 
 model single_mode_training {
-  id              Int @id @default(autoincrement())
-  command_id      Int
-  base_command_id Int
-  command_level   Int
-  command_type    Int
-  cutin_file_id   Int
-  max_chara_num   Int
-  failure_rate    Int
-  menu_bg_id      Int
-  menu_bg_sub_id  Int
-  motion_set      Int
-  sabori_type     Int
-  dress_type      Int
-  dress_id        Int
-  group_id        Int
+  id                 Int @id @default(autoincrement())
+  command_id         Int
+  base_command_id    Int
+  command_level      Int
+  command_type       Int
+  cutin_file_id      Int
+  max_chara_num      Int
+  voice_trigger_type Int
+  failure_rate       Int
+  menu_bg_id         Int
+  menu_bg_sub_id     Int
+  motion_set         Int
+  sabori_type        Int
+  dress_type         Int
+  dress_id           Int
+  group_id           Int
 
   @@unique([command_id, command_level], map: "single_mode_training_0_command_id_1_command_level")
   @@index([cutin_file_id], map: "single_mode_training_0_cutin_file_id")
@@ -6650,6 +6642,8 @@ model jobs_genre {
   mini_bg_id_1 Int
   mini_bg_id_2 Int
   mini_bg_id_3 Int
+  mini_bg_id_4 Int
+  mini_bg_id_5 Int
 }
 
 model jobs_place {
@@ -6662,16 +6656,6 @@ model jobs_point_limit {
   jobs_story_event_point_limit         Int
   jobs_story_event_roulette_coin_limit Int
   jobs_training_challenge_coin_limit   Int
-}
-
-model jobs_random_drop_reward {
-  id            Int @id @default(autoincrement())
-  group_id      Int
-  item_category Int
-  item_id       Int
-  item_num      Int
-
-  @@index([group_id], map: "jobs_random_drop_reward_0_group_id")
 }
 
 model jobs_reward {
@@ -6731,8 +6715,11 @@ model jobs_reward {
   campaign_walking_gauge_up               Int
   training_challenge_reward_coin          Int
   training_report_pt                      Int
+  limited_schedule_id                     Int
+  limited_max_count                       Int
 
   @@index([place_id], map: "jobs_reward_0_place_id")
+  @@index([limited_schedule_id], map: "jobs_reward_0_limited_schedule_id")
 }
 
 model jobs_reward_sort_disp_order {
@@ -6859,4 +6846,11 @@ model subscription_effect {
   end_time        Int
 
   @@index([target_type], map: "subscription_effect_0_target_type")
+}
+
+model jobs_limited_schedule {
+  id          Int @id @default(autoincrement())
+  start_date  Int
+  ending_date Int
+  end_date    Int
 }
