@@ -36,21 +36,20 @@ module.exports = {
         },
         ...(flags.in_growth
           ? [{ content: growth_info, type: 'text' }]
-          : attr_names.map((e) => {
-              const num = era.get(`base:${chara.id}:${e}`);
-              return {
-                config: { width: 4, color: attr_colors[e] },
-                content: [
-                  e,
-                  '：',
-                  {
-                    content: Math.floor(num).toLocaleString(),
-                    fontWeight: 'bold',
-                  },
-                ],
-                type: 'text',
-              };
-            })),
+          : attr_names.map((e) => ({
+              config: { width: 4, color: attr_colors[e] },
+              content: [
+                e,
+                '：',
+                {
+                  content: Math.floor(
+                    era.get(`base:${chara.id}:${e}`),
+                  ).toLocaleString(),
+                  fontWeight: 'bold',
+                },
+              ],
+              type: 'text',
+            }))),
       ];
     if (era.get(`cflag:${chara.id}:种族`)) {
       if (
@@ -106,7 +105,7 @@ module.exports = {
           ...adaptability_names.map((e) => {
             const adapt = era.get(`cflag:${chara.id}:${e}适性`);
             return {
-              config: { width: 3 },
+              config: { width: 4 },
               content: [
                 e,
                 '：',

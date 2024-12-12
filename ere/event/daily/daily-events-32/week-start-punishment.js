@@ -13,6 +13,7 @@ const {
   sys_get_colored_callname,
 } = require('#/system/sys-calc-chara-others');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_random_entry } = require('#/utils/list-utils');
@@ -483,6 +484,7 @@ module.exports = (handlers) => {
       );
     }
     end_ero_and_train();
+    get_custom_mec(32).set_callname();
   };
 
   handlers.p3 = async (tachyon, me, _, love) => {
@@ -876,10 +878,8 @@ module.exports = (handlers) => {
         `在 ${me.name} 张开嘴的瞬间，就被${tachyon.sex}用下体的巨根堵住了想要吐出的一切事物包括话语。`,
       );
       era.println();
-
       await tachyon.say_and_wait('这几天忙着实验，我自己都还没用呢。');
       era.println();
-
       await era.printAndWait(
         `满是骚臭甚至还带有尿味的巨根堵上了 ${me.name} 的喉咙。`,
       );
@@ -888,19 +888,16 @@ module.exports = (handlers) => {
       );
       await era.printAndWait('不带感情，纯粹为了性欲的处理而使用。');
       era.println();
-
       await tachyon.say_and_wait(
         '呼，出来了出来了，接好啊，不然等会……算了，反正弄脏了地板处理的也是你。',
       );
       era.println();
-
       era.set('palam:32:阴茎快感', era.get('tcvar:32:阴茎快感上限'));
       await quick_make_love(
         new EroParticipant(32, part_enum.penis),
         new EroParticipant(0, part_enum.mouth),
         false,
       );
-
       await era.printAndWait(
         `速子毫不客气的灌满了 ${me.name} 的嘴，接着没有多做停留就回到了实验室继续今天的研究。`,
       );
@@ -993,5 +990,6 @@ module.exports = (handlers) => {
       }
     }
     end_ero_and_train();
+    get_custom_mec(32).set_callname();
   };
 };

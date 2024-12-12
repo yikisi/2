@@ -340,14 +340,6 @@ const ero_actions = {
   // 要求使用道具
   ask_use_item: 0,
 
-  // 调教开始
-  ero_start: 0,
-  // 调教结束
-  ero_end: 0,
-  // 马娘主动指令筛选器
-  filter_in_rape: 0,
-  // 下一回合
-  next_round: 0,
   // 勃起
   become_erect: 0,
   // 湿润
@@ -356,16 +348,12 @@ const ero_actions = {
   wound: 0,
   // 破处
   lose_virginity: 0,
-  // 寸止
-  orgasm_denial: 0,
   // 高潮
   orgasm: 0,
   // 脱力
   zero_stamina: 0,
   // 失神
   lost_mind: 0,
-  // 获取刻印
-  get_mark: 0,
   // 监禁
   prison: 0,
   // 内射
@@ -374,12 +362,6 @@ const ero_actions = {
   be_pregnant: 0,
   // 怀孕播报
   report_pregnant_between_weeks: 0,
-  // 孩子出生
-  have_baby: 0,
-  // 进入能力升级
-  shop_start: 0,
-  // 离开能力升级
-  shop_end: 0,
   // 被绿之后
   after_betrayed: 0,
 };

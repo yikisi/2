@@ -95,19 +95,46 @@ class CustomizedEro {
     }
   }
 
-  async ero_start() {}
+  /**
+   * 调教开始
+   *
+   * @param {function(number,boolean[],boolean=):Promise<boolean>} handle_ero_act
+   */
+  // eslint-disable-next-line no-unused-vars
+  async ero_start(handle_ero_act) {}
 
-  async ero_end() {}
+  /**
+   * 调教结束
+   *
+   * @param {function(number,boolean[],boolean=):Promise<boolean>} handle_ero_act
+   */
+  // eslint-disable-next-line no-unused-vars
+  async ero_end(handle_ero_act) {}
 
-  /** @returns {function(number): boolean} */
+  /**
+   * 设置马娘偏好部位
+   *
+   * @param {Record<string,1>} attacker_parts
+   * @param {Record<string,1>} defender_parts
+   */
+  // eslint-disable-next-line no-unused-vars
+  set_preference(attacker_parts, defender_parts) {}
+
+  /**
+   * 马娘主动指令筛选器
+   *
+   * @returns {function(number): boolean}
+   */
   filter_in_rape() {
+    if (era.get('flag:惩戒力度') >= 2) {
+      return (e) => e >= ero_hooks.missionary && e <= ero_hooks.stimulate_womb;
+    }
     return (e) =>
-      (e >= ero_hooks.missionary && e <= ero_hooks.ask_stimulate_womb) ||
-      (e >= ero_hooks.ask_double_suck_nipple &&
-        e <= ero_hooks.spit_roast_anal_sex);
+      e >= ero_hooks.missionary && e <= ero_hooks.ask_stimulate_womb;
   }
 
-  next_round() {}
+  /** 下一回合：呻吟口上？ */
+  async next_round() {}
 
   /**
    * @author 无名黑奴
@@ -299,6 +326,8 @@ class CustomizedEro {
   }
 
   /**
+   * 获取刻印
+   *
    * @author 无名黑奴
    *
    * @param {number} level
@@ -629,6 +658,8 @@ class CustomizedEro {
   }
 
   /**
+   * 孩子出生
+   *
    * @author 雞雞
    *
    * @param {CharaTalk} father
@@ -671,7 +702,11 @@ class CustomizedEro {
     }
   }
 
-  /** @author 无名黑奴 */
+  /**
+   * 进入能力升级
+   *
+   * @author 无名黑奴
+   */
   async shop_start() {
     const chara = get_chara_talk(this.id),
       me = get_chara_talk(0);
@@ -725,6 +760,8 @@ class CustomizedEro {
   }
 
   /**
+   * 离开能力升级
+   *
    * @author 无名黑奴
    *
    * @param {{hate_clear:number,mark_clear:number,pleasure_delta:number,sex_delta:number,skill:number,talent:number}} extra_flag

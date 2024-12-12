@@ -374,7 +374,6 @@ module.exports = class extends CustomizedEdu {
 
   /** @author 雞雞 */
   async bankruptcy(me) {
-    new MyEduMarks().bankruptcy = 1;
     await print_event_name('破产', me);
     await printAndWait([
       '游手好闲不好好工作？抑或时运实在不站在 ',

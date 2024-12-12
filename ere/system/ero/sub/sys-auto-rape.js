@@ -55,7 +55,12 @@ function get_random_act(master, act_list, last_action, ...filters) {
       break;
     }
   }
-  era.logger.debug(filtered_list.map((e) => ero_action_names[e]));
+  era.logger.debug(
+    'source: ' +
+      act_list.map((e) => ero_action_names[e]).join(',') +
+      '\n\tfiltered: ' +
+      filtered_list.map((e) => ero_action_names[e]).join(','),
+  );
   return ret;
 }
 
@@ -201,6 +206,7 @@ async function sys_auto_rape(shown) {
     white_list = {},
     black_list = {},
     week_list = {};
+  get_custom_ero(master).set_preference(white_list, week_list);
   (era.get(`tcvar:${master}:接近高潮`) || []).forEach((p) =>
     want_list_entry_getter[p].forEach((k) => (want_list[k] = true)),
   );
@@ -262,8 +268,7 @@ async function sys_auto_rape(shown) {
   }
   if (
     (temp = era.get(`talent:${master}:淫乳`)) === 2 ||
-    era.get(`talent:${master}:妖乳`) ||
-    era.get(`talent:${master}:乳房尺寸`) > 0
+    era.get(`talent:${master}:妖乳`)
   ) {
     white_list[ero_hook_tags.breast] = true;
     white_list[ero_hook_tags.nipple] = true;
@@ -272,6 +277,10 @@ async function sys_auto_rape(shown) {
     black_list[ero_hook_tags.breast] = true;
     black_list[ero_hook_tags.nipple] = true;
     black_list[ero_hook_tags.touched_nipple] = true;
+  } else if (era.get(`talent:${master}:乳房尺寸`) > 0) {
+    white_list[ero_hook_tags.breast] = true;
+    white_list[ero_hook_tags.nipple] = true;
+    white_list[ero_hook_tags.touched_nipple] = true;
   }
   if ((temp = era.get(`talent:${master}:淫身`)) === 2) {
     white_list[ero_hook_tags.body] = true;
@@ -318,9 +327,10 @@ async function sys_auto_rape(shown) {
     black_list[ero_hook_tags.anal] = true;
   }
   if (
-    era.get(`talent:${master}:抖S`) ||
-    era.get(`talent:${master}:小恶魔`) ||
-    era.get(`talent:${master}:反抗意愿`) > 0
+    Object.keys(week_list).length === 0 &&
+    (era.get(`talent:${master}:抖S`) ||
+      era.get(`talent:${master}:小恶魔`) ||
+      era.get(`talent:${master}:反抗意愿`) > 0)
   ) {
     if (era.get('talent:0:淫口') > 0) {
       week_list[ero_hook_tags.mouth] = week_list[ero_hook_tags.tongue] = true;
@@ -356,14 +366,14 @@ async function sys_auto_rape(shown) {
   if (!era.get('tflag:强奸') && get_sex_acceptable(master) < 0) {
     filters.push((e) => e === ero_hooks.insult || e === ero_hooks.hit_face);
   }
-  let second_filter;
-  if (era.get('flag:惩戒力度') >= 2) {
-    second_filter = chara_list_in_train.length
-      ? (e) => e >= ero_hooks.double_fuck && e <= ero_hooks.spit_roast_anal_sex
-      : (e) => e >= ero_hooks.missionary && e <= ero_hooks.stimulate_womb;
-  } else {
-    second_filter = await get_custom_ero(master).filter_in_rape();
+  if (chara_list_in_train.length > 0) {
+    filters.push(
+      (e) => e >= ero_hooks.double_fuck && e <= ero_hooks.spit_roast_anal_sex,
+      (e) =>
+        e >= ero_hooks.ask_supporter_prepare_virgin && e <= ero_hooks.fuck_69,
+    );
   }
+  const second_filter = get_custom_ero(master).filter_in_rape();
   if (Object.keys(poison_list.master).length) {
     filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
@@ -391,10 +401,9 @@ async function sys_auto_rape(shown) {
         tags.defender_tags.findIndex((t) => week_list[t]) !== -1
       );
     };
-    filters.push((e) => second_filter(e) && temp(e), second_filter, temp);
-  } else {
-    filters.push(second_filter);
+    filters.push((e) => second_filter(e) && temp(e), temp);
   }
+  filters.push(second_filter);
   if (Object.keys(black_list).length) {
     filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;

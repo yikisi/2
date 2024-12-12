@@ -103,7 +103,6 @@ module.exports = {
    * @param {HookArg} hook
    */
   async stimulate_glans_by_hole_2(attacker, defender, hook) {
-    await attacker.print_and_wait('哈……不止是高声喊牡蛎，而是深吸气的话……');
     await attacker.print_and_wait([
       '「啾」的一声缩紧了，虽然一秒钟都没能坚持到身体就痉挛着瘫软下去，但那一瞬间，',
       attacker.get_colored_name(),

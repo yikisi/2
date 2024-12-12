@@ -611,6 +611,7 @@ class CustomizedDaily {
       era.get(`love:${this.id}`) >= 75 &&
       Math.random() < 0.05 + era.get(`base:${this.id}:性欲`) / 20000
     ) {
+      hook.override = true;
       /** @author KUN */
       await print_event_name('奇怪的午饭', chara);
       await era.printAndWait([
@@ -683,7 +684,6 @@ class CustomizedDaily {
         ]);
         sys_change_lust(this.id, 1500);
       }
-      hook.override = true;
       return;
     }
     /** @author 雞雞 */
@@ -743,7 +743,9 @@ class CustomizedDaily {
     await era.printAndWait(
       [
         me.get_colored_name(),
-        ' 的借款，在如雪球一般的利滚利下终于超越了你所能承受之重。',
+        ' 的借款，在如雪球一般的利滚利下终于超越了 ',
+        me.get_colored_name(),
+        ' 所能承受之重。',
       ],
       {
         offset: 6,
@@ -758,7 +760,7 @@ class CustomizedDaily {
       },
     );
     await era.printAndWait(
-      ['因成为金钱的奴隶，', me.get_colored_name(), ' 迎来了结局……'],
+      ['因被金钱关系所囚，', me.get_colored_name(), ' 迎来了结局……'],
       {
         offset: 6,
         width: 12,

@@ -25,11 +25,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 const { get_random_value } = require('#/utils/value-utils');
 
-const {
-  buff_colors,
-  palam_colors,
-  skill_colors,
-} = require('#/data/color-const');
+const { buff_colors, palam_colors } = require('#/data/color-const');
 const {
   attr_background_colors,
   hair_colors,
@@ -101,7 +97,7 @@ function get_ero_marks(chara_id) {
     }
   });
   if (era.get(`talent:${chara_id}:钢之意志`)) {
-    status_list.push({ color: skill_colors[1], content: '[钢]' });
+    status_list.push({ color: '#98ccfa', content: '[钢]' });
   }
   return status_list.map((e) => {
     e.display = 'inline-block';
@@ -526,7 +522,7 @@ async function page_ero(lover, skip_start_end) {
   era.set('tflag:当前对手', curr_lover);
   if (!skip_start_end) {
     era.drawLine();
-    await get_custom_ero(curr_lover).ero_start();
+    await get_custom_ero(curr_lover).ero_start(sys_handle_ero_act);
   }
 
   while (ero_flag) {
@@ -846,7 +842,7 @@ async function page_ero(lover, skip_start_end) {
   await era.printAndWait('性事结束了……');
   if (!skip_start_end) {
     era.println();
-    await get_custom_ero(curr_lover).ero_end();
+    await get_custom_ero(curr_lover).ero_end(sys_handle_ero_act);
   }
   era.drawLine();
   let wait_flag = false;

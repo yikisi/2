@@ -15,6 +15,7 @@ const tachyon_betrayed_2 = require('#/event/ero/ero-lines-32/betrayed-2');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { ero_hooks } = require('#/data/event/ero-hooks');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 
 module.exports = class extends CustomizedEro {
@@ -59,5 +60,12 @@ module.exports = class extends CustomizedEro {
         await tachyon_betrayed_2(life_marks);
       }
     }
+  }
+
+  filter_in_rape() {
+    if (era.get('flag:惩戒力度') >= 2) {
+      return (e) => e === ero_hooks.bite_nipple || super.filter_in_rape()(e);
+    }
+    return super.filter_in_rape();
   }
 };

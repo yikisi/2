@@ -195,8 +195,7 @@ module.exports = {
       chara_id &&
       era.get(`status:${chara_id}:爱意克制`) &&
       era.get(`love:${chara_id}`) &&
-      !era.get('status:0:马语者') &&
-      (chara_id === 32 || !era.get('status:0:好感度镜片'))
+      !era.get('status:0:马语者')
     );
   },
   /**
