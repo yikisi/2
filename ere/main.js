@@ -190,6 +190,8 @@ module.exports = async () => {
         { isDivider: true },
         'イーウィヤ',
         { isBr: true },
+        '念来过倒要你',
+        { isDivider: true },
         '无名黑奴',
       ],
     ],

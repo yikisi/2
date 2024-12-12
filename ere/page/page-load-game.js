@@ -1,21 +1,22 @@
 ﻿const era = require('#/era-electron');
 
-const basement_queue = require('#/event/basement-queue');
-const event_queue = require('#/event/queue');
 const sys_add_titles = require('#/system/chara/sys-add-titles');
 const filter_chara = require('#/system/sys-filter-chara');
 
 const print_page_header = require('#/page/components/page-header');
 
+const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
+const event_queue = require('#/event/queue');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { cb_enum } = require('#/event/queue');
 
 /**
  * load game
@@ -92,7 +93,7 @@ module.exports = async () => {
             // 向前兼容
             // 大拓太阳神育成目标错误、贵妇人称号bug
             const version = era.get('version');
-            if (version <= 1010) {
+            if (version < 1011) {
               [65, 116]
                 .filter(
                   (id) =>
@@ -111,12 +112,11 @@ module.exports = async () => {
                   );
                 });
             }
-            if (version <= 1011) {
-              /** @type {Record<string,EventObject[]>} */
-              const e_queue = era.get('flag:事件队列');
+            if (version < 1100) {
+              const e_queue = event_queue.get();
               Object.values(e_queue).forEach((l) =>
                 l.forEach((e) => {
-                  if (e.type === cb_enum.love) {
+                  if (e.type === event_queue.cb_enum.love) {
                     if (e.arg === undefined) {
                       era.arg = [era.get(`love:${e.chara_id}`)];
                     } else if (
@@ -141,6 +141,7 @@ module.exports = async () => {
                   era.set(`cflag:${e}:可再次育成`, 1);
                 }
               });
+              new MyEduMarks().strange_day = get_random_value(4, 8);
             }
             if (!era.get('flag:回合爱慕惩罚')) {
               // 爱慕事件修复

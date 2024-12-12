@@ -124,10 +124,7 @@ async function out_page() {
 
   await era.clear();
   print_page_header();
-  const tokino_check =
-    chara_id !== 301 &&
-    !(era.get('cflag:301:育成回合计时') < 3 * 48) &&
-    sys_check_npc_working(301);
+  const tokino_check = chara_id !== 301 && sys_check_npc_working(301);
   print_chara_info(chara_id, chara_info_type.out, tokino_check && 301);
   era.drawLine();
   if (!(await sys_get_random_event(event_hooks.out_start)())) {
