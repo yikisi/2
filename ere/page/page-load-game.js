@@ -142,6 +142,30 @@ module.exports = async () => {
                 }
               });
             }
+            if (!era.get('flag:回合爱慕惩罚')) {
+              // 爱慕事件修复
+              const events = event_queue.get(),
+                dict = {};
+              Object.values(events).forEach((l) =>
+                l.forEach((e) => {
+                  if (
+                    e.arg instanceof Array &&
+                    (e[0] === 49 || e[0] === 74 || e[0] === 89 || e[0] === 99)
+                  ) {
+                    dict[e.chara_id] = e[0];
+                  }
+                }),
+              );
+              era.getAddedCharacters().forEach((chara_id) => {
+                const love = era.get(`love:${chara_id}`);
+                if (
+                  !dict[chara_id] &&
+                  (love === 49 || love === 74 || love === 89 || love === 99)
+                ) {
+                  get_custom_check(chara_id).check_love_events();
+                }
+              });
+            }
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;
