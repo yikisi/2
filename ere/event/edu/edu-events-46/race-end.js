@@ -23,25 +23,38 @@ module.exports = async (hook, extra_flag) => {
     extra_flag.rank === 1
   ) {
     await print_event_name('出道战后・冉冉升起的新星', falcon);
+    await say_by_passer_by(`解说`, `胜利者是——醒目飞鹰！`);
+    await era.printAndWait(
+      `正如醒目飞鹰向粉丝们所宣布的那样，从比赛的开始便牢牢的吸引了所有观众的目光。`,
+    );
+    await era.printAndWait(`就这么保持着与其他马娘之间的距离一直到最后。`);
     await falcon.say_and_wait(
-      `训练员${me.get_adult_sex_title()}！飞鹰子在赛场上的表现怎么样？`,
+      `训练员${me.get_adult_sex_title()}！训练员${me.get_adult_sex_title()}！看到飞鹰子在赛场上的表现了吗？`,
     );
     era.printButton(`不小心看入迷了！`, 1);
     await era.input();
-    await falcon.say_and_wait(`真的吗？太好了！`);
+    await falcon.say_and_wait(`真的吗？太好了⭐`);
     await era.printAndWait(
-      `帮着飞鹰子按摩腿部已经发麻的肌肉，从${me.actual_name}的脸上抑制不住的笑容来看，她很满足。`,
+      `从赛场上下来的醒目飞鹰稍作休息后又重新恢复了活力。`,
+    );
+    await era.printAndWait(
+      `帮着飞鹰子按摩腿部已经发麻的肌肉，${me.actual_name}的脸上抑制不住的笑容来。`,
+    );
+    await falcon.say_and_wait(
+      `——就这样飞鹰子快要坚持不住的时候，听到了来自观众席上的应援声，然后飞鹰子不知从哪里来的力气，就这么一口气冲到了底！`,
+    );
+    await era.printAndWait(
+      `从赛场上下来的醒目飞鹰，打算趁演出尚未开始的空隙向观众席的各位推销自己每日进行的突击演出，但最后还是被你给劝说下来了。`,
     );
     await falcon.say_and_wait(`好好期待飞鹰子接下来的表演吧！`);
     await era.printAndWait(
-      `做完最后一个按摩之后，${falcon.name}换上了设计好的决胜服。`,
+      `最后的按摩结束后，${falcon.name}为了确认新的感觉而踮起了脚尖。`,
     );
-    era.printButton(`飞鹰子加油！`, 1);
+    era.printButton(`一定要让他们看见泥地偶像的气势哦！`, 1);
     await era.input();
-    await me.say_and_wait(
-      `一定要让他们看见泥地${falcon.get_uma_sex_title()}的气势哦！`,
+    await falcon.say_and_wait(
+      `就这样将所有观众的心在飞鹰子的主场中全~部夺过来♪因为飞鹰子是世界上最闪耀的马娘偶像呦⭐`,
     );
-    await falcon.say_and_wait(`嗯！接下来就是飞鹰子的主场了！`);
     era.drawLine({ content: '胜者舞台' });
     await falcon.say_and_wait(`这就是胜者舞台吗？`, true);
     await era.printAndWait(
@@ -51,12 +64,18 @@ module.exports = async (hook, extra_flag) => {
       `在排列队形时还会有稀稀疏疏的声音，到了站定时能听到的却只剩下微弱的呼吸声了。`,
     );
     await falcon.say_and_wait(`${falcon.name}的梦想将从这里启程！`, true);
-    await era.printAndWait(`随着震动声响起，演出即将开始。`);
-    await falcon.say_and_wait(
-      `这就是最闪耀的${falcon.get_uma_sex_title()}偶像——${falcon.name}呦⭐`,
-      true,
+    await era.printAndWait(
+      `一阵强烈的震动传来，随后醒目飞鹰感受到了一股向下的力量传来，接下来就是正式演出了。`,
     );
-    await era.printAndWait(`舞台中央，飞鹰子成为了众人的焦点。`);
+    await era.printAndWait(
+      `虽然在心底告诉自己没有什么可怕的，但额头还有手心还是被汗液打湿。`,
+    );
+    await era.printAndWait(
+      `探照灯已经按照名次顺序点亮了舞台，时间也因等待着少女们而渐渐停止。`,
+    );
+    await era.printAndWait(
+      `随后，少女踏出了第一步，于是凝滞的时间也开始缓缓转动。`,
+    );
   } else if (
     extra_flag.race === race_enum.sats_sho &&
     edu_weeks < 95 &&

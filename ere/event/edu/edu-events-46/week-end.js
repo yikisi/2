@@ -19,7 +19,39 @@ module.exports = async function () {
     event_marks = new FalconEduMarks(),
     edu_weeks = era.get('cflag:46:育成回合计时');
   let wait_flag = false;
-  if (event_marks.beginning === 1) {
+  if (event_marks.fight_idol === 1) {
+    event_marks.fight_idol++;
+    await print_event_name(`偶像的奋斗！`, falcon);
+    await era.printAndWait(
+      `出道战之后，因为${falcon.name}奋战的结果，飞鹰子作为泥地冉冉升起的新星吸引了许多粉丝。`,
+    );
+    await falcon.say_and_wait(
+      `哇啊……飞鹰子在马推上的粉丝数一口气突破到四位数了呢⭐`,
+    );
+    era.printButton(`飞鹰子已经是展露头角的偶像了！`, 1);
+    await era.input();
+    await falcon.say_and_wait(`飞鹰子并没有这么厉害啦……`);
+    await falcon.say_and_wait(
+      `飞鹰子只是希望能站在更大的舞台之上，面对为了飞鹰子前来的粉丝们献上歌曲！`,
+    );
+    await falcon.say_and_wait(
+      `……以顶级${falcon.get_uma_sex_title()}偶像的身份⭐`,
+    );
+    era.printButton(`接下来向着顶级偶像的道路一口气前进吧！`, 1);
+    await era.input();
+    await falcon.say_and_wait(
+      `......训练员${me.get_adult_sex_title()}也帮助了我很多呢，把刚才飞鹰子说的话忘了吧⭐`,
+    );
+    await era.printAndWait(`不知想到了什么，偷偷捂着嘴笑着的飞鹰子。`);
+    await me.say_and_wait(`那么，接下来的计划是？`);
+    await falcon.say_and_wait(`嗯——首先在全国各地进行巡演提高泥地的人气！`);
+    await me.say_and_wait(`辗转于各个地方赛场吗？`);
+    await me.say_and_wait(`接下来就以地方赛的优胜为目标积累粉丝吧！`);
+    await falcon.say_and_wait(`是！`);
+    await falcon.say_and_wait(`飞鹰子已经迫不及待出发……`);
+    await me.say_and_wait(`等一下！`);
+    await falcon.say_and_wait(`知道了！`);
+  } else if (event_marks.beginning === 1) {
     event_marks.beginning++;
     // 对于偶像活动相当热枕，但对于比赛有点强迫自己上去，可能是对失败未来的恐惧
     // 主体 ：奋力向前，逆流而上 飞鹰子与训练员旅游时闲聊得出的结论
@@ -90,38 +122,6 @@ module.exports = async function () {
     new FalconEduMarks().start++;
     add_event(event_hooks.week_start, new EventObject(46, cb_enum.edu));
     wait_flag = get_attr_and_print_in_event(46, undefined, 120) || wait_flag;
-  } else if (event_marks.fight_idol === 1) {
-    event_marks.fight_idol++;
-    await print_event_name(`偶像的奋斗！`, falcon);
-    await era.printAndWait(
-      `出道战之后，因为${falcon.name}奋战的结果，飞鹰子作为泥地冉冉升起的新星吸引了许多粉丝。`,
-    );
-    await falcon.say_and_wait(
-      `哇啊……飞鹰子在马推上的粉丝数一口气突破到四位数了呢⭐`,
-    );
-    era.printButton(`飞鹰子已经是展露头角的偶像了！`, 1);
-    await era.input();
-    await falcon.say_and_wait(`飞鹰子并没有这么厉害啦……`);
-    await falcon.say_and_wait(
-      `飞鹰子只是希望能站在更大的舞台之上，面对为了飞鹰子前来的粉丝们献上歌曲！`,
-    );
-    await falcon.say_and_wait(
-      `……以顶级${falcon.get_uma_sex_title()}偶像的身份⭐`,
-    );
-    era.printButton(`接下来向着顶级偶像的道路一口气前进吧！`, 1);
-    await era.input();
-    await falcon.say_and_wait(
-      `......训练员${me.get_adult_sex_title()}也帮助了我很多呢，把刚才飞鹰子说的话忘了吧⭐`,
-    );
-    await era.printAndWait(`不知想到了什么，偷偷捂着嘴笑着的飞鹰子。`);
-    await me.say_and_wait(`那么，接下来的计划是？`);
-    await falcon.say_and_wait(`嗯——首先在全国各地进行巡演提高泥地的人气！`);
-    await me.say_and_wait(`辗转于各个地方赛场吗？`);
-    await me.say_and_wait(`接下来就以地方赛的优胜为目标积累粉丝吧！`);
-    await falcon.say_and_wait(`是！`);
-    await falcon.say_and_wait(`飞鹰子已经迫不及待出发……`);
-    await me.say_and_wait(`等一下！`);
-    await falcon.say_and_wait(`知道了！`);
   } else if (edu_weeks === 34) {
     await print_event_name(`向着闪耀大舞台不停歇的前进！`, falcon);
     await falcon.say_and_wait(`……呼⭐谢谢大家！`);

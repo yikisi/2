@@ -17,36 +17,53 @@ module.exports = async (hook, extra_flag) => {
     edu_weeks = era.get('cflag:46:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name(`首次试镜！`, falcon);
-    await falcon.say_and_wait(`缎带……ok！背后的号码牌……无误！`);
-    await falcon.say_and_wait(`就这么将观众席的目光全部吸引过来！`);
-    await era.printAndWait(`站在等身镜前的${falcon.name}尾巴激动的摆动着。`);
+    await era.printAndWait(`河边草地\n`);
     await falcon.say_and_wait(
-      `这就是飞鹰子的出道战……飞鹰子一定会胜利的！`,
+      `目标是！Top idol的马娘偶像——醒目飞鹰，现在要正式出道了⭐`,
+    );
+    await say_by_passer_by(`粉丝们`, `飞鹰子终于要出道了吗！`);
+    await falcon.say_and_wait(
+      `没错！为了这一天飞鹰子一直在努力！虽然飞鹰子也想让大家稍微忍耐一下……`,
+    );
+    await falcon.say_and_wait(`因为飞鹰子也和大家一样激动到直冲云霄的地步了♪`);
+    await say_by_passer_by(`粉丝们`, `就趁着这种气势一直向前冲吧！`);
+    await falcon.say_and_wait(
+      `飞鹰子会从比赛开始一直闪耀到演出结束的呦⭐……好兴奋啊！真是不可思议的感觉，心跳不停的dokidoki回应着我……`,
+    );
+    await falcon.say_and_wait(`约好了哟，各位请在观众席上观看飞鹰子的演出⭐`);
+    await say_by_passer_by(`粉丝们`, `飞鹰子！飞鹰子！`);
+    await era.printAndWait(`\n准备室\n`);
+    await falcon.say_and_wait(`缎带……ok！背后的号码牌……无误！`);
+    await era.printAndWait(
+      `站在等身镜前的${falcon.name}反复检查着自己的模样。`,
+    );
+    await falcon.say_and_wait(
+      `为了一直支持自己的大家……飞鹰子一定会赢的！`,
       true,
     );
     await falcon.say_and_wait(`飞鹰子！加油！`);
-    await era.printAndWait(
-      `${falcon.name}将握紧了拳头的右手高高举起给自己打气。`,
-    );
+    await era.printAndWait(`${falcon.name}将握紧了拳头的右手高高举起。`);
     era.printButton(`把赛场想象成舞台就好了`, 1);
     await era.input();
     await era.printAndWait(
       `在一旁等待着的你看着初次参与出道战的${falcon.name}。`,
     );
-    await era.printAndWait(`而且。`);
     await me.say_and_wait(`我相信飞鹰子一定会胜利！`);
-    await era.printAndWait(`不是安慰，而是对这段时间训练成果的确信。`);
+    await falcon.say_and_wait(`训练员先生也是！`);
+    await era.printAndWait(`你感受到醒目飞鹰双手的微微颤动。`);
     await falcon.say_and_wait(
-      `嗯！训练员${me.get_adult_sex_title()}就在观众席上好好看着飞鹰子精彩的表现吧！`,
+      `粉丝们的大家会坐在哪里等待着飞鹰子呢♪闪耀着的飞鹰子一定会把胜利带给大家⭐`,
     );
+    await era.printAndWait(`不是安慰，而是醒目飞鹰对这段时间训练成果的确信。`);
     await falcon.say_and_wait(
-      `……为了训练员${me.get_adult_sex_title()}，飞鹰子也不能输！`,
+      `训练员${me.get_adult_sex_title()}就在观众席上好好看着飞鹰子精彩的表现吧♪`,
+    );
+    await falcon.say_and_wait(`……而且，飞鹰子还有一个不能输的理由！`, true);
+    // 与训练员无关，仅仅只是无法承担恐惧的结果
+    await falcon.say_and_wait(
+      `消沉的想法就此打住！飞鹰子的顶级偶像之路就从这里起步！`,
       true,
     );
-    await era.printAndWait(
-      `少女将心中的思绪悄悄藏起，注意力重新集中在了比赛上。`,
-    );
-    await falcon.say_and_wait(`飞鹰子的顶级偶像之路就从这里起步！`);
     await falcon.say_and_wait(
       `闪耀的${falcon.get_uma_sex_title()}偶像——${falcon.name}！接下来会让观众席上所有人眼睛不眨的注视着飞鹰子！`,
     );
