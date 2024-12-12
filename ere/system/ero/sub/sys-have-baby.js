@@ -305,10 +305,11 @@ async function sys_have_baby(mother_id) {
   era.set(`cflag:${child_id}:出生日期`, birth_day);
   era.set(`cflag:${child_id}:育成回合计时`, 'x');
   // 和玩家相关的新生儿自动进队
-  era.set(`cflag:${child_id}:招募状态`, Number(!(father_id && mother_id)));
   // 无关的会在招募池子里
-  era.set(`cflag:${child_id}:随机招募`, Number(father_id && mother_id));
-
+  era.set(
+    `cflag:${child_id}:招募状态`,
+    1 - era.set(`cflag:${child_id}:随机招募`, Number(father_id && mother_id)),
+  );
   era.set(
     `relation:${child_id}:${mother_id}`,
     era.set(`relation:${child_id}:${father_id}`, 400),

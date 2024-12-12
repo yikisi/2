@@ -56,6 +56,7 @@ pages:
     - VERSION=`cat csv/GameBase.csv | grep 'バージョン,'`
     - echo ${VERSION#*,} > public/RELEASE
     - cat .ere-min-version >> public/RELEASE
+    - echo "<meta http-equiv=\"refresh\" content=\"3; url= $GAME_ZIP_URL\">" > public/index.html
   artifacts:
     paths:
       - public

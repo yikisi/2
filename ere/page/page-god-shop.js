@@ -545,14 +545,14 @@ module.exports = async () => {
                 case 5:
                   temp =
                     get_random_entry(
-                      attr_names
-                        .map((e, i) => [e, i])
+                      new Array(5)
+                        .fill(0)
+                        .map((_, i) => i)
                         .filter(
                           (e) =>
-                            era.get(`base:0:${e[0]}`) <
-                            era.get(`maxbase:0:${e[0]}`),
-                        )
-                        .map((e) => e[1]),
+                            era.get(`base:0:${attr_names[e]}`) <
+                            era.get(`maxbase:0:${attr_names[e]}`),
+                        ),
                     ) + 10;
                   await era.printAndWait([
                     '脑海里冒出担当赛',

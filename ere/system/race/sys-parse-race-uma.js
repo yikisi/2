@@ -7,9 +7,6 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { gacha, get_random_entry, sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const passer_by_names = require('#/data/race/contestants/uma-mob.json').map(
-  (e) => e['ChineseName'],
-);
 const calc_attr_score = require('#/data/calc-attr-score');
 const { get_chara_color } = require('#/data/chara-colors');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -17,6 +14,7 @@ const { get_chara_rank } = require('#/data/info-generator');
 const race2legends = require('#/data/race/contestants/legends');
 const legends_list = require('#/data/race/contestants/legends.json');
 const named_list = require('#/data/race/contestants/named.json');
+const passer_by_names = require('#/data/race/contestants/uma-mob.json');
 const passer_by_list = require('#/data/race/contestants/unnamed.json');
 const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');

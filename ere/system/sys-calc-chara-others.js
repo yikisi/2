@@ -48,6 +48,7 @@ async function punish_unfaithful(chara_id, new_love) {
         (punish_option || era.get(`talent:${chara_id}:病娇`)),
     );
   for (const c_id of temp_chara_list) {
+    get_custom_check(c_id).check_after_betrayed([chara_id]);
     era.print([
       me.get_colored_name(),
       ' 的不忠让 ',
@@ -223,7 +224,7 @@ function love_uma(chara_id, val, to_be_shown) {
     love < 50 &&
     new_val >= 50 &&
     era.get(`cflag:${chara_id}:种族`) &&
-    era.get(`talent:${chara_id}:病娇`)
+    era.get(`talent:${chara_id}:病娇`) === 1
   ) {
     era.set(`status:${chara_id}:爱意克制`, 1);
   }
@@ -351,7 +352,7 @@ module.exports = {
     if (
       new_val === 50 &&
       era.get(`cflag:${chara_id}:种族`) &&
-      era.get(`talent:${chara_id}:病娇`)
+      era.get(`talent:${chara_id}:病娇`) === 1
     ) {
       era.set(`status:${chara_id}:爱意克制`, 1);
     }

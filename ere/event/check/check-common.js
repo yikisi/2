@@ -237,7 +237,7 @@ class CustomizedCheck {
         (0.05 +
           // 地下室限制最大倍率3倍，3*100-0=300
           (delta >= 300 ? 1 : Math.pow(2, delta / 30 - 10)) +
-          0.2 * era.get(`status:${this.id}:爱意克制`) -
+          0.1 * era.get(`status:${this.id}:爱意克制`) -
           0.25 * get_action_debuff(this.id));
     }
     switch (era.get('flag:惩戒力度')) {

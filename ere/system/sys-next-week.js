@@ -543,7 +543,7 @@ async function sys_next_week() {
     if (chara_id) {
       const relation_punish =
         (removed_specials[chara_id] || 0) +
-        (era.get(`love:${chara_id}`) >= 50) *
+        (era.get(`love:${chara_id}`) >= 60) *
           era.get(`cflag:${chara_id}:节日事件标记`);
       if (relation_punish) {
         era.print([

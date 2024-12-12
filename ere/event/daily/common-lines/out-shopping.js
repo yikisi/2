@@ -37,6 +37,7 @@ module.exports = async function (chara, me, hook) {
     Math.random() < era.get(`love:${this.id}`) / 2000
   ) {
     hook.override = true;
+    /** @author KUN */
     await print_event_name('这电影对吗？', chara);
     await era.printAndWait([
       '原本想要和 ',

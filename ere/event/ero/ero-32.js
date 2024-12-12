@@ -26,6 +26,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { mark_enum } = require('#/data/ero/mark-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 class TachyonNormalLines extends NormalCommandLines {
   constructor(root) {
@@ -489,7 +490,7 @@ module.exports = class extends CustomizedEro {
               true,
             );
             await tachyon.say_and_wait('请再……给我更多命令吧……❤️');
-            era.set('callname:32:0', [callname.content, '主人大人']);
+            get_custom_mec(32).set_callname();
         }
         break;
       case mark_enum.pain:

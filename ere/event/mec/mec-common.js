@@ -198,6 +198,9 @@ class CustomizedMec {
     return 0;
   }
 
+  /** @returns {string} */
+  get_xp_desc() {}
+
   set_callname_from_src() {
     const my_src_chara = era.get('cflag:0:模版角色');
     if (my_src_chara > 0 && era.get(`callname:${this.id}`)[my_src_chara]) {
