@@ -2,18 +2,18 @@ const { writeFileSync } = require('fs');
 
 const mob = require('./uma-mob.json');
 
-const passerbys = [],
+const passer_bys = [],
   blood = {};
 
 mob.forEach((e) => {
   if (e['Bloodline']) {
     blood[e['Bloodline']] = e['ChineseName'];
   } else {
-    passerbys.push(e['ChineseName']);
+    passer_bys.push(e['ChineseName']);
   }
 });
 
 writeFileSync(
   '../../ere/data/race/contestants/uma-mob.json',
-  JSON.stringify(passerbys),
+  JSON.stringify(passer_bys),
 );
