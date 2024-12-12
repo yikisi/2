@@ -563,7 +563,7 @@ module.exports = class extends CustomizedEdu {
       drawLine({ content: '解释了好一会' });
       await tachyon.say_and_wait('(//▽//)');
       await tachyon.say_and_wait('～(￣▽￣～)~');
-      await target.say_and_wait([
+      await printAndWait([
         '最后，让 ',
         me.get_colored_name(),
         ' 记录了感觉，并给了解药与赔偿。',
