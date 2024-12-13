@@ -351,31 +351,23 @@ async function print_rec_page() {
       const selected = ret - 2000,
         name = era.get(`static:${selected}:name`),
         skill_list = new CharaSkills(selected).get().map((e) => ({
-          config: { width: 6 },
+          config: { width: 5 },
           content: skills_dict[e].get_colored_name(),
           type: 'text',
         })),
         available_list = new CharaAvailableSkills(selected).get().map((e) => ({
-          config: { width: 6 },
+          config: { width: 5 },
           content: skills_dict[e].get_colored_name(),
           type: 'text',
         })),
         skill_buffer = [];
       skill_buffer.push({
-        config: { width: 4 },
+        config: { width: 3 },
         content: '初始：',
         type: 'text',
       });
       if (skill_list.length > 0) {
-        skill_buffer.push(
-          ...skill_list.slice(0, 3),
-          {
-            config: { width: 4 },
-            content: [],
-            type: 'text',
-          },
-          skill_list[3],
-        );
+        skill_buffer.push(...skill_list);
       } else {
         skill_buffer.push({
           config: { width: 6 },
@@ -387,14 +379,14 @@ async function print_rec_page() {
       if (available_list.length > 0) {
         skill_buffer.push(
           {
-            config: { width: 4 },
+            config: { width: 3 },
             content: '经典年解锁：',
             type: 'text',
           },
           ...available_list.slice(0, 2),
           { content: [], type: 'text' },
           {
-            config: { width: 4 },
+            config: { width: 3 },
             content: '资深年解锁：',
             type: 'text',
           },
@@ -403,7 +395,7 @@ async function print_rec_page() {
       } else {
         skill_buffer.push(
           {
-            config: { width: 4 },
+            config: { width: 3 },
             content: '经典年解锁：',
             type: 'text',
           },
@@ -414,7 +406,7 @@ async function print_rec_page() {
           },
           { content: [], type: 'text' },
           {
-            config: { width: 4 },
+            config: { width: 3 },
             content: '资深年解锁：',
             type: 'text',
           },
@@ -425,6 +417,22 @@ async function print_rec_page() {
           },
         );
       }
+      const adapt_info = [];
+      adaptability_names.forEach((e) => {
+        const adapt = era.get(`cflag:${selected}:${e}适性`);
+        adapt_info.push(
+          { config: { width: 2 }, content: [e, '：'], type: 'text' },
+          {
+            config: {
+              color: adaptability_colors[adapt],
+              fontWeight: 'bold',
+              width: 2,
+            },
+            content: get_adaptability_rank(adapt),
+            type: 'text',
+          },
+        );
+      });
       era.printMultiColumns(
         [
           {
@@ -452,22 +460,7 @@ async function print_rec_page() {
             },
             type: 'divider',
           },
-          ...adaptability_names.map((e) => {
-            const adapt = era.get(`cflag:${selected}:${e}适性`);
-            return {
-              config: { width: 4 },
-              content: [
-                e,
-                '：',
-                {
-                  color: adaptability_colors[adapt],
-                  content: get_adaptability_rank(adapt),
-                  fontWeight: 'bold',
-                },
-              ],
-              type: 'text',
-            };
-          }),
+          ...adapt_info,
           {
             config: {
               content: `${name} 的比赛技巧`,
@@ -498,7 +491,7 @@ async function print_rec_page() {
               };
             }),
         ],
-        { width: 18 },
+        { width: 20 },
       );
       await era.waitAnyKey();
     } else {
