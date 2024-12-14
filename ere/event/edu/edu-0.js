@@ -595,7 +595,7 @@ module.exports = class extends CustomizedEdu {
       ...new Array(8).fill(0).map((_, i) => i),
       ...new Array(7).fill(0).map((_, i) => i + 10),
     ]);
-    print(['得到了道具：[', get(`itemname:${item}`), ']！']);
+    await printAndWait(['得到了道具：[', get(`itemname:${item}`), ']！']);
     add(`item:${item}`, 1);
   }
 };
