@@ -1,18 +1,9 @@
-const { copyFileSync, readFileSync, renameSync, writeFileSync } = require('fs');
+const { readFileSync, writeFileSync } = require('fs');
 const { resolve } = require('path');
 
 const webpack = require('webpack');
 
 const config = require('../webpack.config');
-
-renameSync(
-  resolve('./ere/era-electron.js'),
-  resolve('./ere/era-electron.js.backup'),
-);
-copyFileSync(
-  resolve('./build/sdk.js'),
-  resolve('./ere/era-electron.js'),
-);
 
 webpack(config, (err, stats) => {
   if (err || stats.hasErrors()) {
@@ -29,10 +20,6 @@ webpack(config, (err, stats) => {
     writeFileSync(
       resolve('./dist/main.bundle.js'),
       content.replace(/\w\("7OW8"\)/g, '_era'),
-    );
-    renameSync(
-      resolve('./ere/era-electron.js.backup'),
-      resolve('./ere/era-electron.js'),
     );
   }
 });
