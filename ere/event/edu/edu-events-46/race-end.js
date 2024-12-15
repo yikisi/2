@@ -74,8 +74,9 @@ module.exports = async (hook, extra_flag) => {
       `探照灯已经按照名次顺序点亮了舞台，时间也因等待着少女们而渐渐停止。`,
     );
     await era.printAndWait(
-      `随后，少女踏出了第一步，于是凝滞的时间也开始缓缓转动。`,
+      `朝思暮想的舞台就在眼前，排练过的舞步在脑海中闪过无数次，因为紧张而大脑几近空白，但凝滞的时间已经缓缓转动，现在就是前进的时刻了。`,
     );
+    await era.printAndWait(`于是醒目飞鹰完成了自己的第一次胜者舞台。`);
   } else if (
     extra_flag.race === race_enum.sats_sho &&
     edu_weeks < 95 &&
@@ -83,38 +84,52 @@ module.exports = async (hook, extra_flag) => {
   ) {
     await print_event_name('皋月赏后・闪耀的大舞台', falcon);
     await falcon.say_and_wait(`真的吗……`);
-    await falcon.say_and_wait(`飞鹰子，飞鹰子居然胜利了！`);
-    await era.printAndWait(`你看着计分板上的成绩，${falcon.name}确实是第一。`);
-    await falcon.say_and_wait(`太好了！训练员先生！`);
-    era.printButton(`赶快去准备胜者舞台吧！`, 1);
+    await falcon.say_and_wait(`醒目飞鹰……飞鹰子居然真的赢了！Lucky！Victory⭐`);
+    await era.printAndWait(
+      `你也死死的盯着记分板上的字符，生怕眼前的事实就像是一场梦一样，就这么带着不真实的感觉醒来，可醒来的话也会是一场好梦吧。`,
+    );
+    await era.printAndWait(
+      `然而醒目飞鹰的名次没有因为你的动作而有任何改变，就像是使苹果从树上落下的重力一样令人安心。`,
+    );
+    await falcon.say_and_wait(`不会是梦吧！训练员先生！`);
+    await era.printAndWait(`醒目飞鹰也没从这种狂喜之中回复过来`);
+    era.printButton(`接下来就是醒目飞鹰梦寐以求的……草地的舞台！`, 1);
     await era.input();
+    await era.printAndWait(`你发出了连自己听到后都有些吃惊的尖锐与颤抖声。`);
     await falcon.say_and_wait(`是！`);
+    await era.printAndWait(
+      `醒目飞鹰终于反应过来，飞快的做着决胜舞台时所需的准备。`,
+    );
+    await era.printAndWait(`你靠在座位上，久久不能回神。`);
     era.drawLine({ content: '胜者舞台结束后' });
     await me.say_and_wait(`辛苦了。`);
-    await era.printAndWait(`你走上前进迎接着实现了愿望的${falcon.name}。`);
     await era.printAndWait(
-      `浑身湿透的${falcon.name}尽管疲惫不堪，但那双眼睛也散发着光芒。`,
+      `你将准备好的毛巾递给了正散发着蒸汽的${falcon.name}。`,
+    );
+    await era.printAndWait(
+      `浑身湿透的${falcon.name}尽管疲惫不堪，但她的双眼却散发着光芒。`,
     );
     await me.say_and_wait(`皋月赏的舞台怎么样？`);
-    await falcon.say_and_wait(`比想象之中还要疲惫呢。`);
-    await era.printAndWait(`你从行李箱中取出毛巾擦拭着${falcon.name}的汗水。`);
+    await falcon.say_and_wait(`比想象之中还要旷阔，比想象中还要闪耀！`);
     await falcon.say_and_wait(
-      `飞鹰子从来没有在这么多人的舞台之上演出过，特别是站在比奔跑过的舞台还要大上两倍的地方。`,
-    );
-    await falcon.say_and_wait(
-      `在那么多观众的注视下，飞鹰子总有一种无所不能感觉呢。所以为了报答这份期待，飞鹰子比在赛场上还要努力的展示着闪耀的自己呢。`,
+      `而且，飞鹰子从来没有在这么多人的舞台之上演出过，特别是站在比奔跑过的舞台还要大上两倍的地方。`,
     );
     await era.printAndWait(
-      `从${falcon.name}的身上传来了一阵甜蜜的气息，让你有些头晕目眩。`,
+      `一边用毛巾擦拭着头发上黏着的汗水，一边望着你的醒目飞鹰。`,
     );
-    await falcon.say_and_wait(`训练员先生，飞鹰子想对你说`);
+    await falcon.say_and_wait(
+      `在那么多观众的注视下，飞鹰子就像是充满了力量一样……如果训练员先生也能体会到飞鹰子所说的那种万众瞩目的感觉，那么就会明白飞鹰子说的是什么了。`,
+    );
+    await era.printAndWait(
+      `醒目飞鹰略有遗憾的停下了手中的动作，眼睛似乎在望着什么，又像是回忆着美好事物时无意识摩擦着毛巾。`,
+    );
     await chara2_talk.say_and_wait(`打扰了。`);
     await era.printAndWait(`无声铃鹿打开了休息室的大门。`);
     await chara2_talk.say_and_wait(`欸？我是不是应该等下再过来。`);
     await era.printAndWait(
-      `刚才的气氛随着第三者的闯入而打破，无声铃鹿有些手足无措的站在原地。`,
+      `醒目飞鹰下意识的动作停了下来，而无声铃鹿看向了你，似乎在等待着你的下一句话。`,
     );
-    await me.say_and_wait(`不，谢谢你铃鹿小姐。`);
+    await me.say_and_wait(`没有，不如说是来得正好。谢谢你铃鹿小姐。`);
     await me.say_and_wait(`之前的草地特训真是帮了大忙。`);
     await era.printAndWait(`你由衷的向她表示感谢。`);
     await falcon.say_and_wait(`谢谢你，小铃鹿，飞鹰子能取得胜利真是多亏了你⭐`);

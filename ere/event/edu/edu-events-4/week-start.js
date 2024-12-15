@@ -22,6 +22,7 @@ module.exports = async function (hook, event_object) {
   const me = get_chara_talk(0),
     zensky = get_chara_talk(4),
     digital = get_chara_talk(19),
+    falcon = get_chara_talk(46),
     event_marks = new MaEduMarks(),
     callname = sys_get_callname(4, 0),
     edu_weeks = era.get('cflag:4:育成回合计时');
@@ -1201,7 +1202,7 @@ module.exports = async function (hook, event_object) {
       await zensky.say_and_wait(`街头演出吗？听上去像是飞鹰同学会干的事情呢。`);
       await zensky.say_and_wait(`说不定意外的会很有趣呢！`);
       await era.printAndWait(
-        `向醒目飞鹰请教了如何突击演出，以及如何在手纲${
+        `向${falcon.name}请教了如何突击演出，以及如何在手纲${
           me.sex_code === 1 ? '先生' : '小姐'
         }的追捕下迅速逃脱的技巧。`,
       );
@@ -2660,6 +2661,82 @@ module.exports = async function (hook, event_object) {
     await era.input();
     await era.printAndWait(`两人的手紧紧牵在了一起。`);
     await zensky.say_and_wait(`今后也要像这样一直在我身边哦？`);
+    await era.printAndWait(`丸善斯基望了你一眼。`);
+    await era.printAndWait(`你从牵着手的姿势转到了略微强硬的拉着对方前进。`);
+    await era.printAndWait(
+      `没有预想之中的抱怨，你只是感到从手掌传来的力度越来越大，就像是被老虎钳狠狠夹住一样。`,
+    );
+    await era.printAndWait(
+      `感到吃痛的你下意识望向了造成痛苦的根源，而丸善斯基露出了狡黠的笑容。`,
+    );
+    await era.printAndWait(`将作为大人的矜持彻底抛开，像小孩子一样胡闹玩耍。`);
+    await era.printAndWait(`意识到这样下去一定会输的你，加快了脚步。`);
+    await era.printAndWait(
+      `丸善斯基的眼神之中吐露出的‘想要跟现役的赛马娘比赛跑步，你还要差了一百年呢’，以及因此故作充裕的将你的手放开，准备以优雅的脚步将你超越。`,
+    );
+    await era.printAndWait(
+      `——但你轻轻环住了她的腰肢，带着充满爱意的眼神直直的盯着对方看去。`,
+    );
+    await zensky.say_and_wait(`诶？训练员……训练员君，旁边还有人。`);
+    await era.printAndWait(
+      `周围的人虽然注意到了你们的亲密举动，但只当是热恋中的情侣所做的调情，偶尔也有认出了双方的游客，在注意到了什么之后便加快了脚步离开。`,
+    );
+    await era.printAndWait(`一时之间，周围只剩下了你们两人。`);
+    await zensky.say_and_wait(
+      `哎呀哎呀，就像是少女漫画之中的跑出来的故事呢，训练员君已经不是那种16-17岁正处于青春期的小朋友了哦？`,
+    );
+    await era.printAndWait(
+      `在这种暧昧的气氛中处于劣势的丸善斯基正试图重新占据主动权。`,
+    );
+    era.printButton(`「小孩又如何呢？」`, 1);
+    await era.input();
+    await era.printAndWait(
+      `于是你轻轻在她的额头上轻啄一下，带着一种无法形容的畅快感看着对方，活像是抢到了玩具那副洋洋自得的神情。`,
+    );
+    await zensky.say_and_wait(
+      `——是啊，既然训练员君说出这种话来，想必已经做好了觉悟吧。`,
+    );
+    await era.printAndWait(
+      `占了便宜正准备就此抽身的你突然重心不稳，坏绕着丸善斯基的手也随之一松。`,
+    );
+    await era.printAndWait(
+      `随后便感觉到左耳所传来的甘甜的吐息声以及随之而来传导到全身的电流感。`,
+    );
+    await zensky.say_and_wait(`——`);
+    await era.printAndWait(
+      `虽然还是平时的那种熟悉感，但在你听来却带着一缕恼怒与得意感。`,
+    );
+    await era.printAndWait(
+      `丸善斯基的手指在你的胸口轻轻划过，修长的指甲恰到好处的既没有划破肌肤，你的身体因为恐惧与兴奋而微微颤抖。`,
+    );
+    era.printButton(`「接下来还有烟火晚会吧？如果不赶快过去的话，」`, 1);
+    await era.input();
+    await era.printAndWait(`‘还不够’，丸善斯基的手指依然没有停止动作。`);
+    era.printButton(
+      `「我想为了弥补去年的遗憾与丸善斯基一同拥有这段美好的回忆！」`,
+      1,
+    );
+    await era.input();
+    await era.printAndWait(`丸善斯基终于停止了再进一步的动作。`);
+    await zensky.say_and_wait(`——抱歉了，姐姐我也是失态了呢。`);
+    await era.printAndWait(
+      `语气中没有一丝忏悔感，脸上却露出了只有充分享受了比赛后才会有的满足感。`,
+    );
+    await zensky.say_and_wait(
+      `一想到接下来要和训练员君所共同创造出的回忆以及在此之上所获得的更加强烈的满足感，姐姐我是不是有些贪得无厌了呢？`,
+    );
+    await zensky.say_and_wait(
+      `嗯——消极的情绪可是NG的！接下来的每分每秒留下令人深刻的回忆，对生命都是一种可耻的浪费！`,
+    );
+    await era.printAndWait(
+      `祭典上传来的祭典音乐顺着风的载体传达到了你们耳边。`,
+    );
+    await era.printAndWait(`在天空中绽放的艳红色花朵预示着祭典最后的开始。`);
+    await era.printAndWait(`然后丸善斯基挽住了你的胳膊。`);
+    await era.printAndWait(`随后两人加快了脚步。`);
+    await era.printAndWait(
+      `最后你与丸善斯基享受着这份恋人之间独有的，无法衡量的氛围。`,
+    );
     event_marks.wind++;
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||

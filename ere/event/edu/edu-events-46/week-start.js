@@ -585,25 +585,24 @@ module.exports = async function (event_object) {
     await era.printAndWait(
       `按照计划踏踏实实进行训练的${falcon.name}现在已经颇具成效。`,
     );
-    await era.printAndWait(`月初便是出道战了\n`);
+    await era.printAndWait(`接下来的出道战，醒目飞鹰已经准备万全了。`);
     await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}？`);
     await era.printAndWait(
-      `正当你像往常一样陪伴着${falcon.name}走在回到特雷森的道路时。`,
+      `就像往常一样陪伴着${falcon.name}走在回到特雷森的道路时，醒目飞鹰突然望着你。`,
     );
-    await era.printAndWait(`突然开口的${falcon.name}叫住了你。`);
     await era.printAndWait(`临近比赛，会有所忧虑也是在所难免的吧。`);
+    await era.printAndWait(`这也是正常的事情。`);
     await falcon.say_and_wait(`说起来，这是飞鹰子第一次亮相呢。`);
-    await era.printAndWait(
-      `说起来${falcon.name}正是以马娘偶像为目标不断前进。`,
-    );
+    await era.printAndWait(`${falcon.name}正是以马娘偶像为目标直直的出发。`);
     await falcon.say_and_wait(
-      `虽然在踏上马娘偶像这条道路时兴奋得一晚没睡，但随着撕下来的日历一天天的过去，飞鹰子直到现在才算有实感。`,
+      `虽然在踏上马娘偶像这条道路时兴奋得一晚没睡，但随着撕下来的日历一天天的过去，飞鹰子现在也稍微有些……`,
     );
     await falcon.say_and_wait(`……心情稍微有些复杂呢。`);
-    era.printButton(`……这样吗。`, 1);
+    era.printButton(`这样吗。`, 1);
     await era.input();
-    await era.printAndWait(`接下来的道路漫长也艰辛，所幸时间站在我们这边。`);
-    await era.printAndWait(`有些东西还是要她自己想明白才行。`);
+    await era.printAndWait(
+      `就跟追着自己的尾巴转着圈圈的小猫不小心撞到了纸箱子发出的啪嗒声。`,
+    );
     await era.printAndWait(`思索片刻后，你告诉她。`);
     await me.say_and_wait(`与飞鹰子一起在训练场挥洒的汗水，不会作假。`);
     await me.say_and_wait(`接下来就是我们闪耀的时刻了！`);
