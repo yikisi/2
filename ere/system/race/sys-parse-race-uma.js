@@ -88,7 +88,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
   let ret = [...team_chara],
     unnamed_index = -1;
   info.has_legend = false;
-  if (contestants) {
+  if (contestants instanceof Array) {
     ret.push(...contestants);
   } else {
     const legends = info.legends,
