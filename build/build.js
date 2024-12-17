@@ -26,11 +26,5 @@ webpack(config, (err, stats) => {
       resolve('./dist/main.bundle.js'),
       content.replace(/\w\("7OW8"\)/g, '_era'),
     );
-    if (existsSync(resolve('./build/resources.json'))) {
-      copyFileSync(
-        resolve('./build/resources.json'),
-        resolve('./dist/resources.json'),
-      );
-    }
   }
 });
