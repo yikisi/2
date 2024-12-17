@@ -1,7 +1,9 @@
 # [EraUma v1.1 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.012)
 _incoming_
 
-适配 [EraElectron v3.1.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.1.0) 版本，以套用EraElectron的安全性更新
+适配 [EraElectron v3.2.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.2.0) 及以上版本，以套用EraElectron的安全性更新
+
+因为引擎API改动，不再支持3.1.1及以下的版本！
 
 ## Added
 

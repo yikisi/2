@@ -175,9 +175,9 @@ module.exports = async () => {
           (era.get(`global:saves:${ret - 100}`) &&
             era.get(`global:saves:${ret - 100}`).startsWith('(FILE LOST)') &&
             !era.set(`global:saves:${ret - 100}`, '')) ||
-          era.rmData(ret - 100)
+          (await era.rmData(ret - 100))
         ) {
-          era.saveGlobal();
+          await era.saveGlobal();
           msg_notification = `成功删除 ${ret - 100} 号栏位的存档`;
         }
         break;
