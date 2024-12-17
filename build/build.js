@@ -1,9 +1,14 @@
-const { readFileSync, writeFileSync } = require('fs');
+const { copyFileSync, existsSync, readFileSync, writeFileSync } = require('fs');
 const { resolve } = require('path');
 
 const webpack = require('webpack');
 
 const config = require('../webpack.config');
+
+if (!existsSync('./build/static.json')) {
+  console.error('Build failed: no static.json!');
+  process.exit(1);
+}
 
 webpack(config, (err, stats) => {
   if (err || stats.hasErrors()) {
@@ -21,5 +26,11 @@ webpack(config, (err, stats) => {
       resolve('./dist/main.bundle.js'),
       content.replace(/\w\("7OW8"\)/g, '_era'),
     );
+    if (existsSync(resolve('./build/resources.json'))) {
+      copyFileSync(
+        resolve('./build/resources.json'),
+        resolve('./dist/resources.json'),
+      );
+    }
   }
 });
