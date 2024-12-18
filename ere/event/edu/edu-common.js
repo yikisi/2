@@ -278,11 +278,12 @@ class CustomizedEdu extends ICustomizedEdu {
   }
 
   /**
+   * @param {CharaTalk} chara
    * @param {number} attr
    * @param {boolean} is_fumble
    */
-  static async print_fail_info_in_train(attr, is_fumble) {
-    await print_fail_info_in_train(attr, is_fumble);
+  static async print_fail_info_in_train(chara, attr, is_fumble) {
+    await print_fail_info_in_train(chara, attr, is_fumble);
   }
 
   /** @author 雞雞 */
@@ -578,6 +579,7 @@ class CustomizedEdu extends ICustomizedEdu {
    */
   async train_fail(chara, me, callname, hook, extra_flag) {
     await CustomizedEdu.print_fail_info_in_train(
+      chara,
       extra_flag.train,
       extra_flag.fumble,
     );

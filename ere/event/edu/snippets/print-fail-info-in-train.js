@@ -1,16 +1,15 @@
 const era = require('#/era-electron');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { attr_enum } = require('#/data/train-const');
 
 /**
+ * @param {CharaTalk} chara
  * @param {number} attr
  * @param {boolean} is_fumble
  */
-async function print_fail_info_in_train(attr, is_fumble) {
-  const chara = get_chara_talk(this.id);
+async function print_fail_info_in_train(chara, attr, is_fumble) {
   if (attr === attr_enum.intelligence) {
     await era.printAndWait([
       '不好！',
