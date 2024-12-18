@@ -17,6 +17,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { cb_enum } = require('#/event/queue');
 
 /**
  * load game
@@ -150,10 +151,11 @@ module.exports = async () => {
               Object.values(events).forEach((l) =>
                 l.forEach((e) => {
                   if (
+                    e.type === cb_enum.love &&
                     e.arg instanceof Array &&
                     (e[0] === 49 || e[0] === 74 || e[0] === 89 || e[0] === 99)
                   ) {
-                    dict[e.chara_id] = e[0];
+                    dict[e.chara_id] = 1;
                   }
                 }),
               );
@@ -161,9 +163,10 @@ module.exports = async () => {
                 const love = era.get(`love:${chara_id}`);
                 if (
                   !dict[chara_id] &&
-                  (love === 49 || love === 74 || love === 89 || love === 99)
+                  (love === 49 || love === 74 || love === 89 || love === 99) &&
+                  !era.get(`cflag:${chara_id}:爱慕暂拒`)
                 ) {
-                  get_custom_check(chara_id).check_love_events();
+                  era.set(`cflag:${chara_id}:爱慕暂拒`, love);
                 }
               });
             }
