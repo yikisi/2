@@ -1,7 +1,8 @@
 ﻿{
   "system": {
     "_replace": true,
-    "hideUserInput": false
+    "hideUserInput": false,
+    "saveCompressedData": true
   },
   "window": {
     "autoMax": false,

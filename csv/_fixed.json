@@ -4,7 +4,6 @@
     "extendedCharaTables": [
       "Skill",
       "Status"
-    ],
-    "saveCompressedData": true
+    ]
   }
 }
