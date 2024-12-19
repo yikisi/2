@@ -54,6 +54,7 @@ build:
     - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./resources.zip "${RES_URL}"'
 
 android:
+  stage: build
   tags:
     - shell
   script:
@@ -62,8 +63,8 @@ android:
     - '[ -f ./$GAME_BUNDLE_ZIP ] && rm ./$GAME_BUNDLE_ZIP'
     - npm run webpack
     - ls -la ./dist
-    - mv ./dist ./$GAME_BUNDLE_DIR
-    - find ./$GAME_BUNDLE_DIR -name "*.csv" | xargs rm
+    - - npx babel ./dist --out-dir ./${GAME_BUNDLE_DIR} --config-file ./babel.config.json --keep-file-extension --copy-files
+    - find ./$GAME_BUNDLE_DIR -name "*.csv" | xargs -r rm
     - 'zip -rP era ./${GAME_BUNDLE_ZIP} ./${GAME_BUNDLE_DIR}'
     - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./${GAME_BUNDLE_ZIP} "${GAME_BUNDLE_URL}"'
 
