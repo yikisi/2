@@ -10,13 +10,12 @@ const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
 
+const item_title_color =
+  require('#/data/color-const').adaptability_colors.at(-1);
 const { get_chara_color } = require('#/data/chara-colors');
-const { adaptability_colors } = require('#/data/color-const');
 const title_desc = require('#/data/desc/title-desc.json');
 const notes = require('#/data/notes.json');
 const { first_child_id, set_chara_ero_image } = require('#/data/other-const');
-
-const item_title_color = adaptability_colors.at(-1);
 
 /**
  * @param {number} chara_id

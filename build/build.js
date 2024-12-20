@@ -21,10 +21,10 @@ webpack(config, (err, stats) => {
         colors: true,
       }),
     );
-    const content = readFileSync(resolve('./dist/main.bundle.js'), 'utf-8');
+    const mainPath = resolve('./dist/main.bundle.js');
     writeFileSync(
-      resolve('./dist/main.bundle.js'),
-      content.replace(/\w\("7OW8"\)/g, '_era'),
+      mainPath,
+      readFileSync(mainPath, 'utf-8').replace(/\w\("La5K"\)/g, '_era'),
     );
   }
 });
