@@ -26,5 +26,6 @@ webpack(config, (err, stats) => {
       mainPath,
       readFileSync(mainPath, 'utf-8').replace(/\w\("La5K"\)/g, '_era'),
     );
+    copyFileSync(resolve('./build/static.json'), resolve('./dist/static.json'));
   }
 });

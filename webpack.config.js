@@ -18,10 +18,6 @@ module.exports = {
         type: out_type,
       },
     },
-    static: {
-      import: '../build/static.json',
-      library: { name: 'static', type: out_type },
-    },
   },
   mode: 'production',
   module: {
