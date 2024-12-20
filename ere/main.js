@@ -562,53 +562,28 @@ module.exports = async () => {
           },
         ]);
         await era.waitAnyKey();
-        era.printMultiColumns([
-          {
-            config: {
-              color: item_title_color,
-              fontSize: '1.25rem',
-              isParagraph: true,
-              offset: 3,
-              width: 9,
+        await era.printAndWait('技能翻译参考', {
+          align: 'center',
+          color: item_title_color,
+          fontSize: '1.25rem',
+          isParagraph: true,
+        });
+        await era.printAndWait(
+          [
+            {
+              content: "Trainers' Legend G 译文仓库",
+              url: 'https://github.com/MinamiChiwa/Trainers-Legend-G-TRANS',
             },
-            content: '技能翻译参考',
-            type: 'text',
-          },
-          {
-            config: {
-              color: item_title_color,
-              fontSize: '1.25rem',
-              isParagraph: true,
-              width: 9,
+            '、',
+            {
+              content: '赛马娘中文Wiki',
+              url: 'https://wiki.biligame.com/umamusume/%E9%A6%96%E9%A1%B5',
             },
-            content: '安卓移植',
-            type: 'text',
-          },
-        ]);
-        await era.waitAnyKey();
-        era.printMultiColumns([
+          ],
           {
-            config: { offset: 3, width: 9 },
-            content: [
-              {
-                content: "Trainers' Legend G 译文仓库",
-                url: 'https://github.com/MinamiChiwa/Trainers-Legend-G-TRANS',
-              },
-              '、',
-              {
-                content: '赛马娘中文Wiki',
-                url: 'https://wiki.biligame.com/umamusume/%E9%A6%96%E9%A1%B5',
-              },
-            ],
-            type: 'text',
+            align: 'center',
           },
-          {
-            config: { width: 9 },
-            content: '星尘之路',
-            type: 'text',
-          },
-        ]);
-        await era.waitAnyKey();
+        );
         await era.printAndWait(
           [
             {
