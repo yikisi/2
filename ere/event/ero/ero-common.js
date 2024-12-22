@@ -832,7 +832,7 @@ class CustomizedEro {
   async after_betrayed(chara, me, callname, hook, extra_flag) {
     const race = era.get(`cflag:${this.id}:种族`),
       like_betrayed = era.get(`talent:${this.id}:绿帽癖`);
-    switch (era.add(`exp:${this.id}:被绿次数`, 1)) {
+    switch (era.get(`exp:${this.id}:被绿次数`) + 1) {
       case 1:
         era.drawLine();
         await era.printAndWait([
