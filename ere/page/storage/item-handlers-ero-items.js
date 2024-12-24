@@ -8,7 +8,7 @@ const select_target_in_storage = require('#/page/storage/select-target');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-/** @param {Record<string,function>} handlers */
+/** @param {Record<string,function(number):Promise>} handlers */
 module.exports = (handlers) => {
   new Array(13)
     .fill(0)
@@ -38,9 +38,9 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[37] = async () => {
+  handlers[37] = async (item_id) => {
     const ret = await select_target_in_storage(
-      '母乳药剂',
+      item_id,
       (e) => !era.get(`talent:${e}:泌乳`),
     );
     if (ret !== undefined) {

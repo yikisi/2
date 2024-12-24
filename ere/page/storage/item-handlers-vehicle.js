@@ -52,7 +52,7 @@ async function multiple_vehicle(item) {
   }
 }
 
-/** @param {Record<string,function>} handlers */
+/** @param {Record<string,function(number):Promise>} handlers */
 module.exports = (handlers) => {
   new Array(3)
     .fill(0)

@@ -34,7 +34,7 @@ async function use_glasses(item) {
   }
 }
 
-/** @param {Record<string,function>} handlers */
+/** @param {Record<string,function(number):Promise>} handlers */
 module.exports = (handlers) => {
   handlers[25] = async () => {
     const amount = era.get('item:马语者');
