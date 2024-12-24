@@ -509,7 +509,7 @@ function print_milking(type, size) {
       );
     }
     if (got_me > 0) {
-      buffer.push([
+      buffer.push(
         '（其中 ',
         {
           color: palam_colors.notifications[1],
@@ -519,7 +519,7 @@ function print_milking(type, size) {
         ' 瓶来自于 ',
         get_chara_talk(0).get_colored_name(),
         '）',
-      ]);
+      );
     }
     buffer.push('！');
     era.print(buffer);

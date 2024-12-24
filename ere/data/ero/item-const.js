@@ -107,7 +107,7 @@ module.exports = {
    */
   get_item_action(item, part) {
     let ret = item_actions[item];
-    if ({} instanceof Object) {
+    if (ret instanceof Object) {
       ret = ret[part];
     }
     return ret;
