@@ -3,6 +3,7 @@
  *
  * @author 雞雞
  * @author 天马闪光蹄
+ * @author イーウィヤ
  */
 const {
   add,
@@ -187,7 +188,7 @@ module.exports = class extends CustomizedEdu {
     set('flag:初见重复育成', 2);
   }
 
-  /** @author 雞雞 */
+  /** @author イーウィヤ */
   async god_coin(me) {
     const cur_weeks = get('flag:当前回合数'),
       next_year = Math.floor((cur_weeks + 47) / 48) * 48;
@@ -243,7 +244,7 @@ module.exports = class extends CustomizedEdu {
     }
   }
 
-  /** @author 雞雞 */
+  /** @author イーウィヤ */
   async experiment(me) {
     new MyEduMarks().experiment = get_random_value(36, 60);
     await print_event_name('废旧理科教室探险', me);

@@ -183,14 +183,18 @@ module.exports = async () => {
       [
         '雞雞',
         { isDivider: true },
-        'KUN',
+        'イーウィヤ',
         { isDivider: true },
+        '幽白書',
+        { isDivider: true },
+        'KUN',
+        { isBr: true },
         '阿格尼斯数码公司',
         { isDivider: true },
-        'イーウィヤ',
-        { isBr: true },
         '念来过倒要你',
         { isDivider: true },
+        'Mr.E.',
+        { isBr: true },
         '无名黑奴',
       ],
     ],
@@ -221,7 +225,6 @@ module.exports = async () => {
       ],
     ],
     ['地下室地文', ['露娜俘虏', { isDivider: true }, '无名黑奴']],
-    ['随机事件', ['雞雞', { isDivider: true }, 'イーウィヤ']],
     ['特殊角色（临时）', '无名黑奴'],
   ];
   set_chara_ero_image();
@@ -675,8 +678,6 @@ module.exports = async () => {
           '提交bug',
           { isDivider: true },
           '科比 · 布莱恩特',
-          { isDivider: true },
-          'Mr.E.',
         ]);
         await era.printAndWait('社区管理', {
           color: item_title_color,

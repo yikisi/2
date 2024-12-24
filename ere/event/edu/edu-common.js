@@ -695,7 +695,7 @@ class CustomizedEdu extends ICustomizedEdu {
           sys_change_lust(this.id, get_random_value(500, 1500));
         }
       } else if (Math.random() < 0.02) {
-        /** @author 雞雞 */
+        /** @author 幽白書 */
         await era.waitAnyKey();
         await print_event_name('淋浴间内', chara);
         await era.printAndWait([
