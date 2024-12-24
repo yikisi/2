@@ -11,10 +11,16 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const select_target_in_storage = require('#/page/storage/select-target');
 
+const { add_event, cb_enum } = require('#/event/queue');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { money_color, palam_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 const LimitLoveStatus = require('#/data/love-limit-status');
 const { attr_enum, pressure_border } = require('#/data/train-const');
 
@@ -368,48 +374,155 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[45] = async () => {
-    const aim = await select_target_in_storage(
-      '马奶',
-      (chara_id) =>
-        era.get(`base:${chara_id}:体力`) !==
-        era.get(`maxbase:${chara_id}:体力`),
-    );
+  handlers[45] = handlers[46] = async (item_id) => {
+    const item_name = era.get(`itemname:${item_id}`),
+      aim = await select_target_in_storage(
+        item_name,
+        (chara_id) =>
+          era.get(`base:${chara_id}:体力`) !==
+          era.get(`maxbase:${chara_id}:体力`),
+      );
     if (aim !== undefined) {
       const chara = get_chara_talk(aim);
       await era.printAndWait([
         chara.id ? '给 ' : '',
         chara.get_colored_name(),
-        ' 服用了【马奶】……',
+        ' 服用了【',
+        item_name,
+        '】……',
         { isBr: true },
         chara.get_colored_name(),
         ' 的 ',
-        ...sys_change_attr_and_print(aim, '体力', 400),
+        ...sys_change_attr_and_print(aim, '体力', item_id === 45 ? 400 : 150),
       ]);
-      sys_change_lust(aim, 800);
-      era.add('item:马奶', -1);
+      sys_change_lust(aim, item_id === 45 ? 800 : 300);
+      era.add(`item:${item_name}`, -1);
       return true;
     }
   };
 
-  handlers[46] = async () => {
-    const ret = await select_target_in_storage(
-      '人奶',
-      (e) => era.get(`base:${e}:体力`) !== era.get(`maxbase:${e}:体力`),
-    );
-    if (ret !== undefined) {
-      const chara = get_chara_talk(ret);
+  handlers[47] = handlers[48] = async (item_id) => {
+    const item_name = era.get(`itemname:${item_id}`),
+      total = era.get(`item:${item_id}`);
+    let to_sell = 1,
+      flag_sell = true,
+      flag_print = true;
+    while (flag_sell) {
+      era.setAlign('center');
+      (flag_print ? era.printInColRows : era.replaceInColRows)(
+        [
+          {
+            config: { align: 'left' },
+            content: `请选择要售出的【${item_name}】数量`,
+            type: 'text',
+          },
+        ],
+        [
+          {
+            accelerator: 2,
+            config: { disabled: to_sell < 2, width: 2 },
+            content: '-10',
+            type: 'button',
+          },
+          {
+            accelerator: 4,
+            config: { disabled: to_sell === 0, width: 2 },
+            content: '-1',
+            type: 'button',
+          },
+          { config: { width: 2 }, content: to_sell, type: 'text' },
+          {
+            accelerator: 6,
+            config: { disabled: to_sell === total, width: 2 },
+            content: '+1',
+            type: 'button',
+          },
+          {
+            accelerator: 8,
+            config: { disabled: to_sell === total, width: 2 },
+            content: '+10',
+            type: 'button',
+          },
+          { content: [], type: 'text' },
+          {
+            accelerator: 5,
+            config: { width: 3 },
+            content: '确定',
+            type: 'button',
+          },
+          {
+            accelerator: 0,
+            config: { width: 3 },
+            content: '取消',
+            type: 'button',
+          },
+        ],
+      );
+      era.setAlign('left');
+      switch (await era.input({ hideInput: true })) {
+        case 2:
+          to_sell = Math.max(to_sell - 10, 0);
+          break;
+        case 4:
+          to_sell--;
+          break;
+        case 6:
+          to_sell++;
+          break;
+        case 8:
+          to_sell = Math.min(to_sell + 10, total);
+          break;
+        case 5:
+          flag_sell = false;
+          break;
+        case 0:
+          return;
+      }
+      flag_print = false;
+    }
+    await era.clear(1);
+    if (
+      to_sell > 0 &&
+      (await select_yes_or_no([
+        '要通过暗网售出 ',
+        {
+          color: palam_colors.notifications[1],
+          content: to_sell.toString(),
+          fontWeight: 'bold',
+        },
+        ' 瓶【',
+        item_name,
+        '】吗？',
+      ]))
+    ) {
+      const money = to_sell * era.get(`itemprice:${item_id}`);
       await era.printAndWait([
-        chara.id ? '给 ' : '',
-        chara.get_colored_name(),
-        ' 服用了【人奶】……',
-        { isBr: true },
-        chara.get_colored_name(),
-        ' 的 ',
-        ...sys_change_attr_and_print(ret, '体力', 150),
+        '售出了 ',
+        {
+          color: palam_colors.notifications[1],
+          content: to_sell.toString(),
+          fontWeight: 'bold',
+        },
+        ' 瓶【',
+        item_name,
+        '】，获得了 ',
+        {
+          color: money_color,
+          content: money.toLocaleString(),
+          fontWeight: 'bold',
+        },
+        ' 马币……',
       ]);
-      sys_change_lust(ret, 300);
-      era.add('item:人奶', -1);
+      const my_marks = new MyEduMarks();
+      if (my_marks.sell_milk === 0) {
+        my_marks.sell_milk = 1;
+        add_event(
+          event_hooks.week_start,
+          new EventObject(0, cb_enum.edu).set_arg('breakfast'),
+        );
+      }
+      era.add(`item:${item_id}`, -to_sell);
+      era.add('flag:当前马币', money);
       return true;
     }
   };

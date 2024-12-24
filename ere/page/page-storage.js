@@ -78,7 +78,7 @@ module.exports = async () => {
         era.println();
       }
       if (handlers[ret]) {
-        (await handlers[ret]()) && (buffer = get_item_list());
+        (await handlers[ret](ret)) && (buffer = get_item_list());
       } else {
         await era.waitAnyKey();
       }

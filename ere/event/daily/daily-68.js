@@ -142,10 +142,15 @@ module.exports = class extends CustomizedDaily {
             [
               '最近，',
               sys_get_colored_callname(this.id, 67),
+              ' ',
               kita.sex,
-              ' 总是拉着我去吃各种奇妙的料理呢，比如菠菜咖喱啊，巧克力火锅啊……',
+              '总是拉着我去吃各种奇妙的料理呢，比如菠菜咖喱啊，巧克力火锅啊……',
             ],
-            '……虽然都是很有趣的料理，不过小钻带我去的店是不是有点奇怪过头了？',
+            [
+              '……虽然都是很有趣的料理，不过 ',
+              sys_get_colored_callname(this.id, 67),
+              ' 带我去的店是不是有点奇怪过头了？',
+            ],
           ],
           [kita.get_colored_name(), ' 捂着微微发胖的肚子，露出了疑惑的表情。'],
         ],

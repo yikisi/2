@@ -47,9 +47,9 @@ module.exports = (handlers) => {
       (flag_print ? era.printInColRows : era.replaceInColRows)(
         [
           {
+            config: { align: 'left' },
             content: '请选择要使用的马语者点数卡数量',
             type: 'text',
-            config: { align: 'left' },
           },
         ],
         [
@@ -78,7 +78,7 @@ module.exports = (handlers) => {
             content: '+10',
             type: 'button',
           },
-          { content: '', type: 'text' },
+          { content: [], type: 'text' },
           {
             accelerator: 5,
             config: { width: 3 },

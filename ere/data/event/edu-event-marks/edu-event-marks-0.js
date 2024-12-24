@@ -21,6 +21,8 @@ class MyEduMarks extends EduEventMarks {
   fishing;
   // 可笑しい日（奇怪的一天）
   strange_day;
+  // 卖奶
+  sell_milk;
 
   constructor() {
     super(0);

@@ -454,7 +454,9 @@ async function sys_calc_orgasm(shown, ...ids) {
             );
           } else if (touched_part.item === item_enum.milk_pump) {
             era.add(
-              `tflag:${era.get(`cflag:${chara_id}:种族`) ? '马' : '人'}奶产量`,
+              `tflag:${era.get(`cflag:${chara_id}:种族`) ? '马' : '人'}奶${
+                chara_id === 0 ? '可卖' : '产量'
+              }`,
               amount,
             );
           }
