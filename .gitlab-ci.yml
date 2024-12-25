@@ -107,4 +107,3 @@ release:
           link_type: package
         - name: '[通用资源包] resources.zip (解压后放到游戏文件夹下，需要在游戏设置中启用资源，密码：era)'
           url: '${RES_URL}'
-          link_type: package
