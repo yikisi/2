@@ -60,7 +60,23 @@ module.exports = {
         const out_of_train = era.get(`cflag:${chara.id}:殿堂`),
           train_time = get_train_time(chara.id),
           chara_score = get_chara_score(chara.id),
-          chara_level = get_rank_level(chara_score);
+          chara_level = get_rank_level(chara_score),
+          adapt_info = [];
+        adaptability_names.forEach((e) => {
+          const adapt = era.get(`cflag:${chara.id}:${e}适性`);
+          adapt_info.push(
+            { config: { width: 3 }, content: [e, '：'], type: 'text' },
+            {
+              config: {
+                color: adaptability_colors[adapt],
+                fontWeight: 'bold',
+                width: 1,
+              },
+              content: get_adaptability_rank(adapt),
+              type: 'text',
+            },
+          );
+        });
         aim_list.push(
           {
             config: { content: '育成情况', position: 'left' },
@@ -102,22 +118,7 @@ module.exports = {
             config: { content: '比赛适应', position: 'left' },
             type: 'divider',
           },
-          ...adaptability_names.map((e) => {
-            const adapt = era.get(`cflag:${chara.id}:${e}适性`);
-            return {
-              config: { width: 4 },
-              content: [
-                e,
-                '：',
-                {
-                  color: adaptability_colors[adapt],
-                  content: get_adaptability_rank(adapt),
-                  fontWeight: 'bold',
-                },
-              ],
-              type: 'text',
-            };
-          }),
+          ...adapt_info,
         );
         if (chara.id) {
           const aims = get_custom_check(chara.id).get_edu_aims(),

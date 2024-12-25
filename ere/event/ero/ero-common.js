@@ -34,7 +34,12 @@ const {
   pregnant_stage_enum,
   unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
-const { ero_hooks } = require('#/data/event/ero-hooks');
+const { default_tags } = require('#/data/event/ero-hook-tag');
+const {
+  ero_hook_tags,
+  ero_hooks,
+  ero_tagged_hooks,
+} = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
 
@@ -126,6 +131,16 @@ class CustomizedEro {
    * @returns {function(number): boolean}
    */
   filter_in_rape() {
+    if (era.get(`tcvar:${this.id}:孕袋卖奶`)) {
+      return (e) =>
+        (ero_tagged_hooks[e] || default_tags).attacker_tags.findIndex(
+          (t) =>
+            t === ero_hook_tags.super_sadism ||
+            t === ero_hook_tags.sadism ||
+            t === ero_hook_tags.imp ||
+            t === ero_hook_tags.insert,
+        ) !== -1;
+    }
     if (era.get('flag:惩戒力度') >= 2) {
       return (e) => e >= ero_hooks.missionary && e <= ero_hooks.stimulate_womb;
     }
@@ -832,7 +847,7 @@ class CustomizedEro {
   async after_betrayed(chara, me, callname, hook, extra_flag) {
     const race = era.get(`cflag:${this.id}:种族`),
       like_betrayed = era.get(`talent:${this.id}:绿帽癖`);
-    switch (era.add(`exp:${this.id}:被绿次数`, 1)) {
+    switch (era.get(`exp:${this.id}:被绿次数`) + 1) {
       case 1:
         era.drawLine();
         await era.printAndWait([

@@ -330,7 +330,8 @@ async function sys_auto_rape(shown) {
     Object.keys(week_list).length === 0 &&
     (era.get(`talent:${master}:抖S`) ||
       era.get(`talent:${master}:小恶魔`) ||
-      era.get(`talent:${master}:反抗意愿`) > 0)
+      era.get(`talent:${master}:反抗意愿`) > 0 ||
+      era.get('tflag:强奸') === master)
   ) {
     if (era.get('talent:0:淫口') > 0) {
       week_list[ero_hook_tags.mouth] = week_list[ero_hook_tags.tongue] = true;

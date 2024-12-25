@@ -7,7 +7,6 @@ const { sys_get_succ_rate } = require('#/system/sys-calc-chara-param');
 const { get_custom_edu, run_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -128,8 +127,7 @@ function get_success_base_reward(
   if (era.get(`cflag:${chara_id}:气性`) === -1) {
     changes.attr_change = changes.attr_change.map((e) => e + (e > 0));
   }
-  changes.pt_change +=
-    1.25 * (era.get(`abl:${chara_id}:${attr_names[attr]}训练等级`) - 1);
+  changes.pt_change += 1.25 * (train_level - 1);
   if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
     changes.pt_change =
       changes.pt_change * (1 + 0.5 * (1 + new GodolphinLifeMarks().buff));
@@ -241,16 +239,17 @@ module.exports = {
       }
     }
 
+    const chara_talk = get_chara_talk(chara_id),
+      me = chara_id === 0 ? chara_talk : get_chara_talk(0);
     // 无论成功与否都会扣去精力（=时间）
     if (chara_id > 0) {
       // 训自己不额外消耗时间
       era.print([
-        CharaTalk.me.get_colored_name(),
+        me.get_colored_name(),
         ' 的 ',
         ...sys_change_attr_and_print(0, '精力', train_cost.time / 2),
       ]);
     }
-    const chara_talk = get_chara_talk(chara_id);
     let to_print = [
       sys_change_attr_and_print(chara_id, '体力', train_cost.stamina),
       sys_change_attr_and_print(chara_id, '精力', train_cost.time),

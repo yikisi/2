@@ -136,7 +136,7 @@ function get_breast_cup(chara_id, show_true_bust) {
 /** @param {string} cup */
 function get_talent_bust_size(cup) {
   const cup_char = cup.charCodeAt(0);
-  return Math.min(cup_char - 45 && Math.floor((cup_char - 66) / 2), 2);
+  return Math.min(cup_char > 45 && Math.floor((cup_char - 66) / 2), 2);
 }
 
 /**
@@ -686,7 +686,7 @@ module.exports = {
         get_breast_cup(chara_id, show_all_body),
       ),
       talent_list = [];
-    if (breast_talent) {
+    if (breast_talent_names[breast_talent + 1]) {
       talent_list.push(breast_talent_names[breast_talent + 1]);
     }
     if (

@@ -29,14 +29,14 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.asah_sta, 0, 5));
+    buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));
-    buffer.push(check_aim_and_get_entry(races, race_enum.japa_cup, 1, 5));
+    buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 1));
-    buffer.push(check_aim_and_get_entry(races, race_enum.main_oka, 2, 1));
-    buffer.push(check_aim_and_get_entry(races, race_enum.main_oka, 2, 1));
-    buffer.push(check_aim_and_get_entry(races, race_enum.main_oka, 2, 1));
+    buffer.push(check_aim_and_get_entry(races, race_enum.hans_dai, 2, 1));
+    buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 1));
+    buffer.push(check_aim_and_get_entry(races, race_enum.tenn_sho, 2, 1));
+    buffer.push(check_aim_and_get_entry(races, race_enum.japa_cup, 2, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
   },
 );

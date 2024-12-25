@@ -101,7 +101,6 @@ function page_header(enable_race_info) {
       race_characters = sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
         .map((e) => {
           const ret = sys_reg_race(e).curr;
-          ret.id = e;
           return {
             id: e,
             race: ret.race,

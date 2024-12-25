@@ -160,6 +160,7 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
  */
 handlers[ero_hooks.after_betrayed] = async (chara_id, _, { partners }) => {
   const rape = era.get('tflag:强奸');
+  era.add(`exp:${chara_id}:被绿次数`, 1);
   if (era.get(`talent:${chara_id}:绿帽癖`)) {
     sys_change_pressure(
       chara_id,

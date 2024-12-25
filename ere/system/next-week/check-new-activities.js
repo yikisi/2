@@ -440,33 +440,19 @@ async function check_new_activities(cur_round, in_team_list) {
   const loc_visitors = new LocCharacters();
   loc_visitors.set(location_enum.chairman, [chairman]);
   loc_visitors.set(location_enum.trainer, [
-    !(era.get('cflag:304:育成回合计时') < 3 * 48) && sys_check_npc_working(304)
-      ? 304
-      : 0,
-    !(era.get('cflag:306:育成回合计时') < 3 * 48) &&
-    chairman !== 306 &&
-    sys_check_npc_working(306)
-      ? 306
-      : 0,
+    sys_check_npc_working(304) ? 304 : 0,
+    chairman !== 306 && sys_check_npc_working(306) ? 306 : 0,
   ]);
   loc_visitors.set(location_enum.clinic, [
-    !(era.get('cflag:305:育成回合计时') < 3 * 48) && sys_check_npc_working(305)
-      ? 305
-      : 0,
+    sys_check_npc_working(305) ? 305 : 0,
   ]);
   loc_visitors.set(location_enum.visitor, [
-    !(era.get('cflag:303:育成回合计时') < 3 * 48) &&
-    era.get('love:303') >= 25 &&
-    sys_check_npc_working(303)
-      ? 303
-      : 0,
-    !(era.get('cflag:308:育成回合计时') < 3 * 48) &&
+    era.get('love:303') >= 25 && sys_check_npc_working(303) ? 303 : 0,
     era.get('flag:当前回合数') > 40 &&
     (era.get('love:308') >= 25 || era.get('flag:当前回合数') % 48 === 40) &&
     sys_check_npc_working(308)
       ? 308
       : 0,
-    !(era.get('cflag:343:育成回合计时') < 3 * 48) &&
     !era.get('cflag:343:位置') &&
     era.get('flag:当前回合数') > 12 &&
     era.get('love:343') >= 40 &&
@@ -495,7 +481,6 @@ async function check_new_activities(cur_round, in_team_list) {
     );
 
   if (
-    !(era.get('cflag:345:育成回合计时') < 3 * 48) &&
     sys_check_npc_working(345) &&
     (era.get('cflag:345:招募状态') === recruit_flags.yes ||
       era.get('love:345') >= 30 ||

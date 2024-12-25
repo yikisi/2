@@ -479,10 +479,13 @@ function get_chara_info(chara_id) {
  * @returns {boolean}
  */
 function print_milking(type, size) {
-  const milk = era.get(`tflag:${type}产量`);
+  const my_milk = era.get(`tflag:${type}可卖`),
+    milk = era.get(`tflag:${type}产量`) + my_milk;
   if (milk > 0) {
-    const got = Math.floor(milk / size);
-    era.print([
+    const got = Math.floor(milk / size),
+      got_me = Math.floor(my_milk / size),
+      buffer = [];
+    buffer.push(
       '用榨乳器收集到了 ',
       {
         color: palam_colors.notifications[1],
@@ -491,20 +494,37 @@ function print_milking(type, size) {
       },
       ' ',
       type,
-      ...(got > 0
-        ? [
-            '，灌装处理后获得了 ',
-            {
-              color: palam_colors.notifications[1],
-              content: got.toString(),
-              fontWeight: 'bold',
-            },
-            ` 瓶【${type}】`,
-          ]
-        : []),
-      '！',
-    ]);
-    era.add(`item:${type}`, got);
+    );
+    if (got > 0) {
+      buffer.push(
+        '，灌装处理后获得了 ',
+        {
+          color: palam_colors.notifications[1],
+          content: got.toString(),
+          fontWeight: 'bold',
+        },
+        ' 瓶【',
+        type,
+        '】',
+      );
+    }
+    if (got_me > 0) {
+      buffer.push(
+        '（其中 ',
+        {
+          color: palam_colors.notifications[1],
+          content: got_me.toString(),
+          fontWeight: 'bold',
+        },
+        ' 瓶来自于 ',
+        get_chara_talk(0).get_colored_name(),
+        '）',
+      );
+    }
+    buffer.push('！');
+    era.print(buffer);
+    era.add(`item:${type}`, got - got_me);
+    era.add(`item:鲜榨${type}`, got_me);
     return true;
   }
 }

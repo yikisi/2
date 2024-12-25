@@ -16,11 +16,11 @@ const { say_by_passer_by_and_wait } = require('#/utils/chara-talk-factory');
 const { location_enum } = require('#/data/locations');
 
 /**
+ * @this {CustomizedDaily}
  * @param {CharaTalk} chara
  * @param {CharaTalk} me
  * @param {HookArg} hook
  */
-
 module.exports = async function (chara, me, hook) {
   const temp = await select_action_in_shopping_street();
   if (

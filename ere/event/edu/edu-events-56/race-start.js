@@ -553,11 +553,11 @@ handlers[race_enum.takz_kin] = async (kitaru, me, callname, edu_weeks) => {
   await kitaru.say_and_wait('我会跑出一场最棒的比赛给大家看！');
   era.printButton('「已经没事了？」', 1);
   await era.input();
-  await kitaru.say_and_wait(
+  await kitaru.say_and_wait([
     '是的！之前我只是背着',
     kitaru.get_bigger_sibling_sex_title(),
     '的愿望，靠着大大小小的开运道具前行。',
-  );
+  ]);
   await kitaru.say_and_wait(
     '但现在的我，还背负着许多粉丝的愿望！比之前强太多了！',
   );
@@ -679,11 +679,11 @@ handlers[race_enum.arim_kin] = async (kitaru, me, callname, edu_weeks) => {
   );
   await kitaru.print_and_wait('把自己投射在我身上，为我加油的粉丝们！');
   await kitaru.print_and_wait('同期的伙伴！');
-  await kitaru.print_and_wait(
+  await kitaru.print_and_wait([
     '过世的',
     kitaru.get_bigger_sibling_sex_title(),
     '！',
-  );
+  ]);
   await kitaru.print_and_wait(['还有一直拼命培育我的 ', callname, '！']);
   await kitaru.print_and_wait('我今天不会向神明祈祷。');
   await kitaru.print_and_wait('今天——');

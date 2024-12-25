@@ -47,7 +47,7 @@ item_actions[item_enum.anal_beads] = '塞入';
 item_actions[item_enum.butt_plug] = '塞上';
 item_actions[item_enum.clamps] = '夹上';
 item_actions[item_enum.dildo] = '插入';
-item_actions[item_enum.gag] = '戴上';
+item_actions[item_enum.gag] = '塞上';
 item_actions[item_enum.love_eggs] = {
   [part_enum.anal]: '塞入',
   [part_enum.breast]: '贴上',
@@ -107,7 +107,7 @@ module.exports = {
    */
   get_item_action(item, part) {
     let ret = item_actions[item];
-    if ({} instanceof Object) {
+    if (ret instanceof Object) {
       ret = ret[part];
     }
     return ret;

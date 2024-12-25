@@ -9,6 +9,7 @@ const maternity_leave =
 
 function sys_check_npc_working(chara_id) {
   return (
+    !(get(`cflag:${chara_id}:育成回合计时`) < 3 * 48) &&
     sys_check_awake(chara_id) &&
     (get(`cflag:${chara_id}:妊娠阶段`) & maternity_leave) === 0
   );

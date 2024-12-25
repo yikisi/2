@@ -1,18 +1,14 @@
-const { copyFileSync, readFileSync, renameSync, writeFileSync } = require('fs');
+const { copyFileSync, existsSync, readFileSync, writeFileSync } = require('fs');
 const { resolve } = require('path');
 
 const webpack = require('webpack');
 
 const config = require('../webpack.config');
 
-renameSync(
-  resolve('./ere/era-electron.js'),
-  resolve('./ere/era-electron.js.backup'),
-);
-copyFileSync(
-  resolve('./build/sdk.js'),
-  resolve('./ere/era-electron.js'),
-);
+if (!existsSync('./build/static.json')) {
+  console.error('Build failed: no static.json!');
+  process.exit(1);
+}
 
 webpack(config, (err, stats) => {
   if (err || stats.hasErrors()) {
@@ -25,14 +21,11 @@ webpack(config, (err, stats) => {
         colors: true,
       }),
     );
-    const content = readFileSync(resolve('./dist/main.bundle.js'), 'utf-8');
+    const mainPath = resolve('./dist/main.bundle.js');
     writeFileSync(
-      resolve('./dist/main.bundle.js'),
-      content.replace(/\w\("7OW8"\)/g, '_era'),
+      mainPath,
+      readFileSync(mainPath, 'utf-8').replace(/\w\("La5K"\)/g, '_era'),
     );
-    renameSync(
-      resolve('./ere/era-electron.js.backup'),
-      resolve('./ere/era-electron.js'),
-    );
+    copyFileSync(resolve('./build/static.json'), resolve('./dist/static.json'));
   }
 });

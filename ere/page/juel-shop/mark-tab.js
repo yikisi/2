@@ -305,7 +305,11 @@ module.exports = async (
           sex_level = era.add(`mark:${chara_id}:淫纹`, 1);
           total_delta.sex_delta = (total_delta.sex_delta || 0) + 1;
         }
-        await get_custom_ero(chara_id).get_mark(sex_level, mark_enum.ero, true);
+        await get_custom_ero(chara_id).get_mark(
+          sex_level,
+          mark_enum.ero,
+          ret === 6,
+        );
         era.add(`juel:${chara_id}:顺从`, -sex_mark_price);
         sys_change_fame(-100 * sex_level);
       }

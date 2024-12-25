@@ -173,11 +173,15 @@ module.exports = {
         new EroParticipant(supporter_id, part_enum.mouth),
       );
     }
+    const heal_ratio = era.get(`cflag:${chara_id}:种族`) ? 2 : 10;
     [other_id.toString(), supporter_id]
       .filter((e) => e)
       .forEach((c_id, i) => {
         era.add(`exp:${c_id}:吸奶量`, milk_list[i]);
         era.add(`nowex:${c_id}:吸奶量`, milk_list[i]);
+        const heal = milk_list[i] / heal_ratio;
+        era.add(`nowex:${c_id}:体力消耗`, -heal);
+        era.add(`base:${c_id}:性欲`, heal);
         if (c_id === '0') {
           era.add(`tcvar:${chara_id}:获得因子`, milk_list[i] / 10);
         } else if (!chara_id) {

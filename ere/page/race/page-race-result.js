@@ -112,11 +112,12 @@ async function page_race_result(contestants, info, race_id) {
     case 3:
       interval = 250 / 15;
   }
-  if (interval) {
+  if (interval > 0) {
     await era.clear();
-    era.input().then(() => (flag_result = false));
+    show_result(interval).then();
+    await era.input();
+    flag_result = false;
   }
-  await show_result(interval);
   let flag_charts = 1;
   if (
     contestants.findIndex((e) => e.legend === 2) !== -1 &&
