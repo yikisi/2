@@ -5,6 +5,7 @@
  * @author 天马闪光蹄
  * @author イーウィヤ
  * @author 幽白書
+ * @author Mr.E.
  */
 const {
   add,
@@ -39,7 +40,7 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 const { reset_chara } = require('#/system/sys-init-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const CustomizedEdu = require('#/event/edu/edu-common');
+const MyPrivacyEvents = require('#/event/edu/edu-events-0/privacy');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -53,7 +54,7 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
-module.exports = class extends CustomizedEdu {
+module.exports = class extends MyPrivacyEvents {
   /**
    * @author 天马闪光蹄
    *
@@ -695,5 +696,6 @@ module.exports = class extends CustomizedEdu {
     set('flag:当前互动角色', chara_id);
     println();
     sys_love_uma(chara_id, 1) && (await waitAnyKey());
+    add_event(hook.hook, event_object.set_arg('privacy_1'));
   }
 };

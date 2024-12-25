@@ -44,12 +44,13 @@ build:
     - 7zz a -pera $GAME_ALL_ZIP ./$GAME_ALL_DIR
     - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${GAME_ALL_ZIP} "${GAME_ZIP_URL}"'
     - cd ./$GAME_ALL_DIR/game/
-    - zip -r base.zip ./ere ./csv RELEASE.md CHANGELOG.md
+    - '[ -f ./base.zip ] && rm ./base.zip'
     - VERSION=`cat csv/GameBase.csv | grep 'バージョン,'`
-    - '[ $MIN_VERSION != ${VERSION#*,} ] && curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./base.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip"'
-    - '[ -d ./res ] && rm -rf ./res'
-    - cp -r ../res ./res
+    - '[ $MIN_VERSION != ${VERSION#*,} ] && zip -r base.zip ./ere ./csv RELEASE.md CHANGELOG.md'
+    - '[ -f ./base.zip ] && curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./base.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip"'
+    - cd ../../..
     - 'echo "使用时请在游戏设置中将【启用资源】设置项打开！" > 资源包注意事项.txt'
+    - '[ -f ./resources.zip ] && rm ./resources.zip'
     - 'zip -rP era ./resources.zip ./res 资源包注意事项.txt'
     - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./resources.zip "${RES_URL}"'
 
@@ -63,6 +64,7 @@ android:
     - '[ -f ./$GAME_BUNDLE_ZIP ] && rm ./$GAME_BUNDLE_ZIP'
     - npm run webpack
     - ls -la ./dist
+    - mv ./dist ./$GAME_BUNDLE_DIR
     - 'zip -rP era ./${GAME_BUNDLE_ZIP} ./${GAME_BUNDLE_DIR}'
     - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./${GAME_BUNDLE_ZIP} "${GAME_BUNDLE_URL}"'
 

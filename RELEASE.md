@@ -1,5 +1,5 @@
-# [EraUma v1.1 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.012)
-_incoming_
+# [EraUma v1.1 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.1)
+_2024/12/25_
 
 适配 [EraElectron v3.2.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.2.0) 及以上版本，以套用EraElectron的安全性更新
 
@@ -7,13 +7,14 @@ _incoming_
 
 ## Added
 
-* 追加实装了以下地文事件
+* 追加实装了以下地文事件（链）
   * 【河堤漫步时光】 
   * 【这电影对吗？】
   * 【隔日清晨之义务履行】
+  * 【「早餐」】
+  * 【个人隐私安全】
 * 追加实装了以下随机小事件
   * 【可笑しい日（奇怪的一天）】
-  * 【「早餐」】
 * 追加实装了三女神像祈祷相关的系统级地文
 * 安心泽刺刺美学会了一项新技能：当她在队伍中时，可以加快队伍成员疲惫的恢复速度了
 * 在招募界面添加更多情报的预览功能

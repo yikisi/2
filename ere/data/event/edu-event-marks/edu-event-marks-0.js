@@ -23,6 +23,8 @@ class MyEduMarks extends EduEventMarks {
   strange_day;
   // 卖奶
   sell_milk;
+  // 卖奶的买家
+  milk_buyer;
 
   constructor() {
     super(0);
