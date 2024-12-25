@@ -9,21 +9,15 @@ module.exports = {
     if (!_val) {
       return 0;
     }
+    const has_etsuko = era.get('cflag:303:招募状态') === recruit_flags.yes;
     if (delta < 0) {
       if (era.get('flag:惩戒力度') === 3) {
         return 0;
       }
-      delta = Math.min(
-        delta *
-          (1 - (era.get('cflag:303:招募状态') === recruit_flags.yes) * 0.1),
-        -1,
-      );
+      delta = Math.min(delta * (1 - has_etsuko * 0.1), -1);
     } else {
       delta = Math.max(
-        delta *
-          (1 +
-            (era.get('cflag:303:招募状态') === recruit_flags.yes) * 0.1 +
-            era.get('global:声望加成') / 100),
+        delta * (1 + has_etsuko * 0.1 + era.get('global:声望加成') / 100),
         1,
       );
     }

@@ -18,12 +18,31 @@ module.exports = {
         type: out_type,
       },
     },
-    static: {
-      import: '../build/static.json',
-      library: { name: 'static', type: out_type },
-    },
   },
   mode: 'production',
+  module: {
+    rules: [
+      {
+        exclude: /node_modules/,
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  modules: false,
+                  targets: { chrome: '60' },
+                  useBuiltIns: false,
+                },
+              ],
+            ],
+          },
+        },
+      },
+    ],
+  },
   output: {
     path: resolve(__dirname, 'dist/'),
     filename: '[name].bundle.js',

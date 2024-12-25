@@ -41,12 +41,12 @@ async function simulation_game_in_event(
         0,
         reference.param_id,
       ),
-    ),
-    contestants = sys_parse_for_race([chara], 0, info, _contestants);
+    );
   info.lanes = reference.lanes;
   info.slopes = reference.slopes;
   info.phases = reference.phases;
   info.attr_bonus = reference.attr_bonus;
+  const contestants = sys_parse_for_race([chara], 0, info, _contestants);
   await preview_race(info, [chara], contestants);
   sys_prepare_race(contestants, [chara], info);
   await page_race_result(contestants, info);

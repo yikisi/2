@@ -12,6 +12,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_celebration } = require('#/data/info-generator');
 
+/** @this {CustomizedDaily} */
 module.exports = async function () {
   const chara = get_chara_talk(this.id),
     me = get_chara_talk(0),

@@ -411,6 +411,9 @@ module.exports = class extends CustomizedEro {
       love = era.get('love:56');
     switch (type) {
       case mark_enum.pleasure:
+        if (kitaru.sex_code === 1) {
+          return await super.get_mark(level, type, _new);
+        }
         switch (level) {
           case 1:
             if (love >= 75) {
@@ -677,8 +680,8 @@ module.exports = class extends CustomizedEro {
             }
         }
         break;
-      case '淫纹':
-        if (!_new) {
+      case mark_enum.ero:
+        if ((level >= 2 && _new) || kitaru.sex_code === 1) {
           return await super.get_mark(level, type, _new);
         }
         switch (level) {

@@ -20,13 +20,13 @@ const TachyonNormalCommunications = require('#/event/ero/ero-lines-32/normal-com
 const TachyonNormalFucking = require('#/event/ero/ero-lines-32/normal-fucking');
 const TachyonNormalMakingOuts = require('#/event/ero/ero-lines-32/normal-making-outs');
 const TachyonNormalSm = require('#/event/ero/ero-lines-32/normal-sm');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { mark_enum } = require('#/data/ero/mark-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 class TachyonNormalLines extends NormalCommandLines {
   constructor(root) {

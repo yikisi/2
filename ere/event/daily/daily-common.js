@@ -166,8 +166,8 @@ class CustomizedDaily {
               },
               ' 马币，接受吗？',
             ],
-            '算了',
             '好吧',
+            '算了',
           )
         ) {
           sys_change_money(amount);

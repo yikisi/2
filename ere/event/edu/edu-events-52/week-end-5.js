@@ -606,7 +606,7 @@ module.exports = (handlers) => {
       const attr_cache = attr_names.map((e) => era.get(`base:52:${e}`)),
         motivation_cache = era.get('cflag:52:干劲');
       await era.loadData(52);
-      era.loadGlobal();
+      await era.loadGlobal();
       queue_init();
       CharaTalk.me = new CharaTalk(0);
       attr_cache.forEach((e, i) => era.set(`base:52:${attr_names[i]}`, e));

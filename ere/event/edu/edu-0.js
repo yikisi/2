@@ -3,10 +3,15 @@
  *
  * @author 雞雞
  * @author 天马闪光蹄
+ * @author イーウィヤ
+ * @author 幽白書
+ * @author Mr.E.
  */
 const {
   add,
+  drawLine,
   get,
+  getAddedCharacters,
   input,
   print,
   printAndWait,
@@ -18,16 +23,25 @@ const {
   waitAnyKey,
 } = require('#/era-electron');
 
+const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
 const check_team_limit = require('#/system/chara/sys-check-team-limit');
 const sys_get_random_uma_god = require('#/system/chara/sys-get-random-uma-god');
-const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const {
+  sys_change_attr_and_print,
+  sys_change_lust,
+} = require('#/system/sys-calc-base-cflag');
+const {
+  sys_like_chara,
+  sys_love_uma,
+} = require('#/system/sys-calc-chara-others');
+const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const { reset_chara } = require('#/system/sys-init-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const CustomizedEdu = require('#/event/edu/edu-common');
+const MyPrivacyEvents = require('#/event/edu/edu-events-0/privacy');
+const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
@@ -38,9 +52,14 @@ const { get_random_value } = require('#/utils/value-utils');
 const { get_chara_color } = require('#/data/chara-colors');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { location_enum } = require('#/data/locations');
 
-module.exports = class extends CustomizedEdu {
-  /** @author 天马闪光蹄 */
+module.exports = class extends MyPrivacyEvents {
+  /**
+   * @author 天马闪光蹄
+   *
+   * @param {CharaTalk} me
+   */
   async second_chance(me) {
     const team_limit = -check_team_limit();
     let second_list = sys_filter_chara(
@@ -185,7 +204,11 @@ module.exports = class extends CustomizedEdu {
     set('flag:初见重复育成', 2);
   }
 
-  /** @author 雞雞 */
+  /**
+   * @author イーウィヤ
+   *
+   * @param {CharaTalk} me
+   */
   async god_coin(me) {
     const cur_weeks = get('flag:当前回合数'),
       next_year = Math.floor((cur_weeks + 47) / 48) * 48;
@@ -241,7 +264,11 @@ module.exports = class extends CustomizedEdu {
     }
   }
 
-  /** @author 雞雞 */
+  /**
+   * @author イーウィヤ
+   *
+   * @param {CharaTalk} me
+   */
   async experiment(me) {
     new MyEduMarks().experiment = get_random_value(36, 60);
     await print_event_name('废旧理科教室探险', me);
@@ -299,7 +326,11 @@ module.exports = class extends CustomizedEdu {
     wait_flag && (await waitAnyKey());
   }
 
-  /** @author 雞雞 */
+  /**
+   * @author 雞雞
+   *
+   * @param {CharaTalk} me
+   */
   async custom(me) {
     new MyEduMarks().custom = get_random_value(24, 48);
     await print_event_name('习惯成自然', me);
@@ -328,7 +359,11 @@ module.exports = class extends CustomizedEdu {
     }
   }
 
-  /** @author 雞雞 */
+  /**
+   * @author 雞雞
+   *
+   * @param {CharaTalk} me
+   */
   async trainer_race(me) {
     new MyEduMarks().trainer_race = get_random_value(24, 48);
     await print_event_name('随风飘扬的海报', me);
@@ -372,7 +407,11 @@ module.exports = class extends CustomizedEdu {
     }
   }
 
-  /** @author 雞雞 */
+  /**
+   * @author 雞雞
+   *
+   * @param {CharaTalk} me
+   */
   async bankruptcy(me) {
     await print_event_name('破产', me);
     await printAndWait([
@@ -391,7 +430,11 @@ module.exports = class extends CustomizedEdu {
     await input();
   }
 
-  /** @author 雞雞 */
+  /**
+   * @author 雞雞
+   *
+   * @param {CharaTalk} me
+   */
   async reject(me) {
     await print_event_name('污蔑，都是污蔑！', me);
     await printAndWait('不知何故，最近在校园走路的时候总会引来窃窃私语。');
@@ -406,7 +449,11 @@ module.exports = class extends CustomizedEdu {
     sys_change_fame(-20);
   }
 
-  /** @author 雞雞 */
+  /**
+   * @author 雞雞
+   *
+   * @param {CharaTalk} me
+   */
   async work_over(me) {
     new MyEduMarks().work_over = get_random_value(12, 36);
     await print_event_name('人生无常之加班', me);
@@ -423,7 +470,11 @@ module.exports = class extends CustomizedEdu {
       (await waitAnyKey());
   }
 
-  /** @author 雞雞 */
+  /**
+   * @author 雞雞
+   *
+   * @param {CharaTalk} me
+   */
   async sick(me) {
     new MyEduMarks().sick = get_random_value(36, 60);
     await print_event_name('人生无常之生病', me);
@@ -444,5 +495,207 @@ module.exports = class extends CustomizedEdu {
     } else {
       sys_like_chara(305, 0, get_random_value(0, 10)) && (await waitAnyKey());
     }
+  }
+
+  /**
+   * @author 念来过倒要你
+   *
+   * @param {CharaTalk} me
+   */
+  async strange_day(me) {
+    const tachyon = get_chara_talk(32),
+      target =
+        get('cflag:32:招募状态') === recruit_flags.yes
+          ? tachyon
+          : get_chara_talk(
+              get_random_entry(
+                sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+                  (e) => e > 0 && e !== 32,
+                ),
+              ),
+            );
+    await print_event_name('可笑しい日（奇怪的一天）', me);
+    await printAndWait([
+      '早上，',
+      me.get_colored_name(),
+      ' 感觉有些不太对劲，但仍然打算迎接美满的一天。',
+    ]);
+    await me.say_and_wait('(ง •̀_•́)ง');
+    await printAndWait([
+      me.get_colored_name(),
+      ' 没有在意那么多，在洗漱完毕后出门了。',
+    ]);
+    println();
+    if (sys_check_npc_working(301)) {
+      const tokino = get_chara_talk(301);
+      await tokino.say_and_wait('Y(^_^)Y');
+      await printAndWait([tokino.sex, '还是一如既往在校门口欢迎每一个人。']);
+      println();
+    }
+    await me.say_and_wait('……？', true);
+    await me.say_and_wait('눈_눈');
+    await printAndWait([
+      me.get_colored_name(),
+      ' 感觉有点怪异，却无法说出来。',
+    ]);
+    println();
+    if (target.id !== 58) {
+      const dotou = get_chara_talk(58);
+      await dotou.say_and_wait('(๑•́ωก̀๑)');
+      await printAndWait([dotou.sex, '怎么又哭了？']);
+      println();
+    }
+    if (target.id !== 24) {
+      await get_chara_talk(24).say_and_wait('(~0~)');
+      await printAndWait('这位小祖宗又熬夜了吧。');
+      println();
+    }
+    if (target.id !== 20) {
+      await get_chara_talk(20).say_and_wait('<(*ΦωΦ*)>');
+      await printAndWait('……这都是什么表情。');
+      println();
+    }
+    await me.say_and_wait('……！', true);
+    await me.say_and_wait('(#ﾟДﾟ)');
+    await printAndWait([
+      me.get_colored_name(),
+      ' 终于注意到，这一路上都没听到一句话，反而是一些颜文字浮现在脑中。',
+    ]);
+    await me.say_and_wait('……', true);
+    await me.say_and_wait('(#`皿´)');
+    println();
+    if (target.id !== 32) {
+      await printAndWait('脑海中浮现某一只天天穿实验服的奸商。');
+      await me.say_and_wait('(‡▼益▼)');
+      await printAndWait([
+        '又是',
+        tachyon.sex,
+        '做的实验么，',
+        me.get_colored_name(),
+        ' 打算动身去找',
+        tachyon.sex,
+        '。',
+      ]);
+      println();
+      await target.say_and_wait('(｢･ω･)｢嘿');
+      printButton('「(｢･ω･)｢嘿」', 1);
+      printButton('「ヾ(＾。^*)」', 2);
+      await input();
+      await target.say_and_wait('( •᷄ὤ•᷅)？');
+      await printAndWait([
+        '看样子好像没有理解 ',
+        me.get_colored_name(),
+        ' 在干什么。',
+      ]);
+      await printAndWait([target.get_colored_name(), ' 伸出了手。']);
+      await target.say_and_wait('(⁄ ⁄•⁄ω⁄•⁄ ⁄)');
+      printButton(`向${target.sex}解释现在的状态。`, 1);
+      await input();
+      await me.say_and_wait('(´ﾟωﾟ｀)');
+      await me.say_and_wait('⁽⁽◝( •௰• )◜⁾⁾');
+      await me.say_and_wait('₍₍◞( •௰• )◟₎₎');
+      await printAndWait('手舞足蹈了一会。');
+      await me.say_and_wait('╮（╯＿╰）╭');
+      println();
+      await target.say_and_wait('【•】_【•】');
+      await target.say_and_wait('(ノ=Д=)ノ┻━┻');
+      println();
+      await printAndWait([
+        '过了一时半会，',
+        target.sex,
+        '终于理解了意思，于是陪 ',
+        me.get_colored_name(),
+        ' 一起去了。',
+      ]);
+      drawLine();
+      await printAndWait(['很快到了', tachyon.sex, '的实验室。']);
+      await tachyon.say_and_wait('(¦3[▓▓]');
+      await me.say_and_wait('(ノಠ∩ಠ)ノ彡(o°o)');
+      await tachyon.say_and_wait('Σ(っ °Д °;)っ');
+      await target.say_and_wait('(ಡωಡ)');
+      drawLine({ content: '解释了好一会' });
+      await tachyon.say_and_wait('(//▽//)');
+      await tachyon.say_and_wait('～(￣▽￣～)~');
+      await printAndWait([
+        '最后，让 ',
+        me.get_colored_name(),
+        ' 记录了感觉，并给了解药与赔偿。',
+      ]);
+    } else {
+      await printAndWait([
+        me.get_colored_name(),
+        ' 想起了那天天搞实验的爱马。',
+      ]);
+      await me.say_and_wait('(๑•ี_เ•ี๑)');
+      drawLine();
+      await printAndWait([
+        me.get_colored_name(),
+        ' 轻车熟路的找到',
+        tachyon.sex,
+        '的实验室。',
+      ]);
+      await tachyon.say_and_wait('⊙▽⊙');
+      await me.say_and_wait('(^_^)');
+      await tachyon.say_and_wait('Σ(っ °Д °;)っ');
+      await printAndWait('爱马TV，堂堂开播！');
+      await tachyon.say_as_unknown_and_wait('嗷(∩∀°╭嗷∀∀嗷∀∀°)嗷嗷');
+      drawLine({ content: '（感谢汤姆老师的配音）' });
+      await tachyon.say_and_wait('≥﹏≤');
+      await me.say_and_wait('╮（﹀＿﹀）╭');
+    }
+    println();
+    const item = get_random_entry([
+      ...new Array(8).fill(0).map((_, i) => i),
+      ...new Array(7).fill(0).map((_, i) => i + 10),
+    ]);
+    await printAndWait(['得到了道具：[', get(`itemname:${item}`), ']！']);
+    add(`item:${item}`, 1);
+  }
+
+  /**
+   * @author 幽白書
+   *
+   * @param {CharaTalk} me
+   * @param _me
+   * @param _call
+   * @param {HookArg} hook
+   * @param _extra
+   * @param {EventObject} event_object
+   */
+  async breakfast(me, _me, _call, hook, _extra, event_object) {
+    const chara_id = get_random_entry(
+      getAddedCharacters().filter(
+        (e) =>
+          e > 0 &&
+          get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
+          get(`love:${e}`) >= 50 &&
+          !sys_check_remote(e),
+      ),
+    );
+    if (!chara_id || get('flag:当前位置') !== location_enum.office) {
+      add_event(hook.hook, event_object);
+      return;
+    }
+    const chara = get_chara_talk(chara_id);
+    await print_event_name('「早餐」', chara);
+    await printAndWait([
+      '一进入训练员室，',
+      me.get_colored_name(),
+      ' 看见 ',
+      chara.get_colored_name(),
+      ' 刚吃完早餐，正在喝牛奶的样子。',
+    ]);
+    await printAndWait(['那瓶奶的包装……好像有些眼熟……']);
+    await printAndWait([
+      '还有，',
+      chara.get_colored_name(),
+      ' 的眼神不知为何有些奇怪……',
+    ]);
+    await printAndWait(['……一定是错觉吧。']);
+    sys_change_lust(chara_id, (get('cflag:0:种族') ? 800 : 300) * 2);
+    set('flag:当前互动角色', chara_id);
+    println();
+    sys_love_uma(chara_id, 1) && (await waitAnyKey());
+    add_event(hook.hook, event_object.set_arg('privacy_1'));
   }
 };

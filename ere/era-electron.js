@@ -109,9 +109,9 @@ const era = {
   async loadData(savIndex) {},
   /**
    * load global variables from save file
-   * @returns {boolean} if the loading succeeds
+   * @returns {Promise<boolean>} if the loading succeeds
    */
-  loadGlobal() {},
+  async loadGlobal() {},
   /**
    * to log something into program logs
    * @param {any} msg
@@ -285,18 +285,18 @@ const era = {
   resetData() {},
   /**
    * reset global variables
-   * @returns {void}
+   * @returns {Promise<boolean>}
    */
-  resetGlobal() {},
+  async resetGlobal() {},
   /** resume the music in playing */
   resumeMusic() {},
   /**
    * remove a data file
    * @param {number} savIndex REQUIRED the index of the save file
-   * @returns {boolean} if the removing succeeds
+   * @returns {Promise<boolean>} if the removing succeeds
    */
   // eslint-disable-next-line no-unused-vars
-  rmData(savIndex) {},
+  async rmData(savIndex) {},
   /**
    * save data into a save file
    * @param {number} savIndex REQUIRED the index of the save file
@@ -307,9 +307,9 @@ const era = {
   async saveData(savIndex, comment) {},
   /**
    * save global variables into save file
-   * @returns {boolean} if the saving succeeds
+   * @returns {Promise<boolean>} if the saving succeeds
    */
-  saveGlobal() {},
+  async saveGlobal() {},
   /**
    * set a variable by name
    * @param {string} varName REQUIRED the name of variable, String, like 'callname:1:2'
@@ -375,7 +375,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '3.1.0', engine: undefined },
+  version: { sdk: '3.2.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await

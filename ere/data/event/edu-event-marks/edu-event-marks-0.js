@@ -19,6 +19,12 @@ class MyEduMarks extends EduEventMarks {
   sick;
   // 钓鱼的心得
   fishing;
+  // 可笑しい日（奇怪的一天）
+  strange_day;
+  // 卖奶
+  sell_milk;
+  // 卖奶的买家
+  milk_buyer;
 
   constructor() {
     super(0);

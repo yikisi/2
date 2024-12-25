@@ -10,13 +10,12 @@ const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
 
+const item_title_color =
+  require('#/data/color-const').adaptability_colors.at(-1);
 const { get_chara_color } = require('#/data/chara-colors');
-const { adaptability_colors } = require('#/data/color-const');
 const title_desc = require('#/data/desc/title-desc.json');
 const notes = require('#/data/notes.json');
 const { first_child_id, set_chara_ero_image } = require('#/data/other-const');
-
-const item_title_color = adaptability_colors.at(-1);
 
 /**
  * @param {number} chara_id
@@ -185,11 +184,17 @@ module.exports = async () => {
       [
         '雞雞',
         { isDivider: true },
-        'KUN',
+        'イーウィヤ',
         { isDivider: true },
+        '幽白書',
+        { isDivider: true },
+        'KUN',
+        { isBr: true },
         '阿格尼斯数码公司',
         { isDivider: true },
-        'イーウィヤ',
+        '念来过倒要你',
+        { isDivider: true },
+        'Mr.E.',
         { isBr: true },
         '无名黑奴',
       ],
@@ -221,7 +226,6 @@ module.exports = async () => {
       ],
     ],
     ['地下室地文', ['露娜俘虏', { isDivider: true }, '无名黑奴']],
-    ['随机事件', ['雞雞', { isDivider: true }, 'イーウィヤ']],
     ['特殊角色（临时）', '无名黑奴'],
   ];
   set_chara_ero_image();
@@ -562,53 +566,28 @@ module.exports = async () => {
           },
         ]);
         await era.waitAnyKey();
-        era.printMultiColumns([
-          {
-            config: {
-              color: item_title_color,
-              fontSize: '1.25rem',
-              isParagraph: true,
-              offset: 3,
-              width: 9,
+        await era.printAndWait('技能翻译参考', {
+          align: 'center',
+          color: item_title_color,
+          fontSize: '1.25rem',
+          isParagraph: true,
+        });
+        await era.printAndWait(
+          [
+            {
+              content: "Trainers' Legend G 译文仓库",
+              url: 'https://github.com/MinamiChiwa/Trainers-Legend-G-TRANS',
             },
-            content: '技能翻译参考',
-            type: 'text',
-          },
-          {
-            config: {
-              color: item_title_color,
-              fontSize: '1.25rem',
-              isParagraph: true,
-              width: 9,
+            '、',
+            {
+              content: '赛马娘中文Wiki',
+              url: 'https://wiki.biligame.com/umamusume/%E9%A6%96%E9%A1%B5',
             },
-            content: '安卓移植',
-            type: 'text',
-          },
-        ]);
-        await era.waitAnyKey();
-        era.printMultiColumns([
+          ],
           {
-            config: { offset: 3, width: 9 },
-            content: [
-              {
-                content: "Trainers' Legend G 译文仓库",
-                url: 'https://github.com/MinamiChiwa/Trainers-Legend-G-TRANS',
-              },
-              '、',
-              {
-                content: '赛马娘中文Wiki',
-                url: 'https://wiki.biligame.com/umamusume/%E9%A6%96%E9%A1%B5',
-              },
-            ],
-            type: 'text',
+            align: 'center',
           },
-          {
-            config: { width: 9 },
-            content: '星尘之路',
-            type: 'text',
-          },
-        ]);
-        await era.waitAnyKey();
+        );
         await era.printAndWait(
           [
             {
@@ -700,8 +679,6 @@ module.exports = async () => {
           '提交bug',
           { isDivider: true },
           '科比 · 布莱恩特',
-          { isDivider: true },
-          'Mr.E.',
         ]);
         await era.printAndWait('社区管理', {
           color: item_title_color,

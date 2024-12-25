@@ -1,5 +1,7 @@
 const { get } = require('#/era-electron');
 
+const sys_filter_chara = require('#/system/sys-filter-chara');
+
 const CustomizedCheck = require('#/event/check/check-common');
 const { add_event, cb_enum } = require('#/event/queue');
 
@@ -7,6 +9,7 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedCheck {
   check_next_week() {
@@ -101,6 +104,20 @@ module.exports = class extends CustomizedCheck {
         );
       } else {
         my_edu_marks.sick = 1;
+      }
+    }
+    if (my_edu_marks.strange_day > 0 && --my_edu_marks.strange_day === 0) {
+      if (
+        get('cflag:0:位置') === 0 &&
+        get('flag:当前位置') !== location_enum.basement &&
+        sys_filter_chara('cflag', '招募状态', recruit_flags.yes).length > 1
+      ) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(0, cb_enum.edu).set_arg('strange_day'),
+        );
+      } else {
+        my_edu_marks.strange_day = 1;
       }
     }
     if (get('flag:当前回合数') % 48 === 9 && get('flag:初见重复育成') > 0) {

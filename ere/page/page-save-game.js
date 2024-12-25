@@ -141,7 +141,7 @@ module.exports = async () => {
             )
           ) {
             era.set(`global:saves:${ret - 100}`, name.toString());
-            era.saveGlobal();
+            await era.saveGlobal();
             msg_notification = `${ret - 100} 号栏位的存档改名成功`;
           } else {
             msg_notification = `放弃了给 ${ret - 100} 号栏位的存档改名`;

@@ -2,6 +2,7 @@
  * @file 玩家 - 日常
  *
  * @author 雞雞
+ * @author 幽白書
  * @author 无名黑奴（改编）
  */
 const era = require('#/era-electron');
@@ -68,6 +69,7 @@ module.exports = class extends CustomizedDaily {
         if (era.get('cflag:20:招募状态') === recruit_flags.yes) {
           my_marks.fishing = 0;
         } else if (Math.random() < 0.2) {
+          /** @author 幽白書 */
           my_marks.fishing = 0;
           const sky = get_chara_talk(20);
           await print_event_name('钓鱼的心得', sky);

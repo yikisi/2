@@ -172,10 +172,11 @@ function random_chara() {
       era.set('cflag:0:出生日期', Math.min(era.get('cflag:0:出生日期'), 28));
   }
   set_height(get_random_value(150, 200));
-  if (era.get('cflag:0:性别')) {
+  const my_sex = era.get('cflag:0:性别');
+  if (my_sex > 0) {
     era.set('cflag:0:阴茎尺寸', get_random_value(1, 5));
   }
-  if (era.get('cflag:0:性别') - 1) {
+  if (my_sex !== 1) {
     set_bust_size(get_random_value(1, 5));
   }
   era.set('cflag:0:气性', get_random_value(-3, 3));
@@ -195,16 +196,10 @@ function random_talent() {
   gacha(chara_talents, 5).forEach((e) =>
     era.set(`talent:0:${e}`, 2 * get_random_value(0, 1) - 1),
   );
+  const my_sex = era.get('cflag:0:性别');
+  era.set(`talent:0:${get_random_entry(get_filtered_talents(my_sex, 50))}`, 1);
   era.set(
-    `talent:0:${get_random_entry(
-      get_filtered_talents(era.get('cflag:0:性别'), 50),
-    )}`,
-    1,
-  );
-  era.set(
-    `talent:0:${get_random_entry(
-      get_filtered_talents(era.get('cflag:0:性别'), 60),
-    )}`,
+    `talent:0:${get_random_entry(get_filtered_talents(my_sex, 60))}`,
     get_random_value(0, 1) || -4,
   );
   const temp = get_random_value(40, 47);
@@ -212,6 +207,13 @@ function random_talent() {
     `talent:0:${temp}`,
     1 - 2 * (temp === 43 ? get_random_value(0, 1) : 0),
   );
+  if (my_sex === 1) {
+    era.set('talent:0:乳头类型', 0);
+    era.set('talent:0:泌乳', 0);
+  } else {
+    era.set('talent:0:乳头类型', get_random_value(0, 2));
+    era.set('talent:0:泌乳', 3 * (Math.random() > 0.75));
+  }
 }
 
 async function page_custom() {

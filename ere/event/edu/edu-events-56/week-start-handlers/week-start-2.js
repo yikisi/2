@@ -899,11 +899,11 @@ module.exports = (handlers) => {
     await era.input();
     await kitaru.say_and_wait('嗯……');
     await kitaru.say_and_wait('占卜不出结果呢……');
-    await kitaru.say_and_wait(
+    await kitaru.say_and_wait([
       '不过这是和我',
       kitaru.get_bigger_sibling_sex_title(),
       '的约定！我一定会实现的！',
-    );
+    ]);
     await kitaru.say_and_wait(['我用拉勾仪式向', kitaru.sex, '保证过的！']);
     if (check_aim_race(new RaceHistory(56).get(), race_enum.toky_yus, 1, 20)) {
       await era.printAndWait([

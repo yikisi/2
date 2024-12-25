@@ -266,7 +266,8 @@ module.exports = {
     if (height2virgin_size[height_coefficient] === undefined) {
       return 0;
     }
-    let table, abt;
+    let table,
+      abt = era.get(`tcvar:${other_id}:发情`) > 0;
     if (part === part_enum.virgin) {
       table = height2virgin_size;
       // 耐性不会导致扩张能力下降
@@ -275,7 +276,7 @@ module.exports = {
         Math.floor((era.get(`abl:${other_id}:阴道耐性`) + 1) / 2) +
         Math.min(era.get(`exp:${other_id}:生产次数`), 2) +
         2 * (era.get(`talent:${other_id}:淫壶`) === 2) +
-        (era.get(`tcvar:${other_id}:阴道扩张`) ||
+        (era.get(`tcvar:${other_id}:阴道扩张`) > 0 ||
           era.get(`tcvar:${other_id}:阴道接触部位`).part === part_enum.penis);
     } else if (part === part_enum.anal) {
       table = height2anal_size;
@@ -284,7 +285,7 @@ module.exports = {
       abt =
         Math.floor((era.get(`abl:${other_id}:肛门耐性`) + 1) / 2) +
         2 * (era.get(`talent:${other_id}:淫臀`) === 2) +
-        (era.get(`tcvar:${other_id}:肛门扩张`) ||
+        (era.get(`tcvar:${other_id}:肛门扩张`) > 0 ||
           era.get(`tcvar:${other_id}:肛门接触部位`).part === part_enum.penis);
     } else {
       return 0;
