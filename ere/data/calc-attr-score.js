@@ -12,6 +12,9 @@ const ovk = [
 ];
 
 function calc_attr_score(attr) {
+  if (attr > 2000) {
+    attr = 2000;
+  }
   let oval = attr - 1200;
   if (attr > 1200) {
     attr = 1200;
