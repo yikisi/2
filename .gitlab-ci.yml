@@ -9,7 +9,6 @@ variables:
   GAME_BUNDLE_DIR: 'erauma-${CI_COMMIT_TAG}'
   GAME_BUNDLE_ZIP: 'era-bundle-${CI_COMMIT_TAG}.zip'
   GAME_BUNDLE_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/bundle/${CI_COMMIT_TAG}/era-bundle-${CI_COMMIT_TAG}.zip'
-  RES_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/resources/${CI_COMMIT_TAG}/resources.zip'
   CALL_SIGN: 'kuuga'
 
 build:
@@ -20,6 +19,7 @@ build:
     NODE_OPTIONS: "--openssl-legacy-provider"
   script:
     - MIN_VERSION=`cat .ere-min-version`
+    - RES_VERSION=`cat .res-min-version`
     - git submodule update --init
     - cd engine
     - git lfs pull
@@ -46,13 +46,14 @@ build:
     - cd ./$GAME_ALL_DIR/game/
     - '[ -f ./base.zip ] && rm ./base.zip'
     - VERSION=`cat csv/GameBase.csv | grep 'バージョン,'`
-    - '[ $MIN_VERSION != ${VERSION#*,} ] && zip -r base.zip ./ere ./csv RELEASE.md CHANGELOG.md'
+    - 'VERSION=${VERSION#*,}'
+    - '[ $MIN_VERSION != $VERSION ] && zip -r base.zip ./ere ./csv RELEASE.md CHANGELOG.md'
     - '[ -f ./base.zip ] && curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./base.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip"'
     - cd ../../..
-    - 'echo "使用时请在游戏设置中将【启用资源】设置项打开！" > 资源包注意事项.txt'
     - '[ -f ./resources.zip ] && rm ./resources.zip'
-    - 'zip -rP era ./resources.zip ./res 资源包注意事项.txt'
-    - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./resources.zip "${RES_URL}"'
+    - 'echo "使用时请在游戏设置中将【启用资源】设置项打开！" > 资源包注意事项.txt'
+    - '[ $RES_VERSION == $VERSION ] && zip -rP era ./resources.zip ./res 资源包注意事项.txt'
+    - '[ -f ./resources.zip ] && curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./resources.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/resources/${CI_COMMIT_TAG}/resources.zip"'
 
 android:
   stage: build
@@ -79,6 +80,8 @@ pages:
     - echo ${VERSION#*,} > public/RELEASE
     - cat .ere-min-version >> public/RELEASE
     - echo "<meta http-equiv=\"refresh\" content=\"3; url= $GAME_ZIP_URL\">" > public/index.html
+    - cp tools/generate-res-link.js generate-res-link.js
+    - 'node generate-res-link.js ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/resources/_VERSION_/resources.zip'
   artifacts:
     paths:
       - public
@@ -100,10 +103,10 @@ release:
     assets:
       links:
         - name: '[解压即玩包] $GAME_ALL_ZIP (解压密码：era)'
-          url: '${GAME_ZIP_URL}'
+          url: 'https://umaera.gitgud.site/erauma/index.html'
           link_type: package
         - name: '[安卓引擎用] $GAME_BUNDLE_ZIP (解压密码：era)'
           url: '${GAME_BUNDLE_URL}'
           link_type: package
         - name: '[通用资源包] resources.zip (解压后放到游戏文件夹下，需要在游戏设置中启用资源，密码：era)'
-          url: '${RES_URL}'
+          url: 'https://umaera.gitgud.site/erauma/res.html'
