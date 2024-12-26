@@ -793,9 +793,7 @@ class CustomizedEdu extends ICustomizedEdu {
         ]);
         break;
       case 143 + 9:
-        if (era.get(`cflag:${this.id}:可再次育成`)) {
-          return;
-        }
+      case 'palace':
         await CustomizedEdu.common_palace(chara, me);
         await CustomizedEdu.common_palace_relation(chara, me);
     }

@@ -68,7 +68,7 @@ async function train_fail_common2(tachyon, me) {
  */
 module.exports = async function (tachyon, me, callname, hook, fumble, train) {
   if (train === attr_enum.intelligence) {
-    await CustomizedEdu.common_result(train, fumble);
+    await CustomizedEdu.print_fail_info_in_train(tachyon, train, fumble);
     return;
   }
   const args = fumble ? fumble_result.fumble : fumble_result.fail,

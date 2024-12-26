@@ -283,7 +283,11 @@ module.exports = class extends CustomizedEdu {
   }
 
   async train_fail(kita, me, callname, hook, extra_flag) {
-    await CustomizedEdu.common_result(extra_flag.train, extra_flag.fumble);
+    await CustomizedEdu.print_fail_info_in_train(
+      kita,
+      extra_flag.train,
+      extra_flag.fumble,
+    );
     if (extra_flag.train !== attr_enum.intelligence) {
       extra_flag['args'] = extra_flag.fumble
         ? fumble_result.fumble

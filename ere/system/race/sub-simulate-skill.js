@@ -101,7 +101,7 @@ function sub_simulate_skill(
             uma.race.location === top_location_in_race
               ? '头马'
               : `${(uma.race.location - top_location_in_race).toFixed(1)}m`,
-            `(${Math.round(uma.race.location).toLocaleString()}m`,
+            '(',
             cur_lane.get_abbr(),
             uma.race.slope > 0
               ? '上坡'

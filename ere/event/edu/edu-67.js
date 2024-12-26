@@ -638,7 +638,11 @@ module.exports = class extends Edu67UntilSchoolAtrium {
     extra_flag['args'] = extra_flag.fumble
       ? fumble_result.fumble
       : fumble_result.fail;
-    await CustomizedEdu.common_result(extra_flag.train, extra_flag.fumble);
+    await CustomizedEdu.print_fail_info_in_train(
+      daiya,
+      extra_flag.train,
+      extra_flag.fumble,
+    );
     if (extra_flag.train !== attr_enum.intelligence) {
       if (extra_flag.fumble) {
         await print_event_name('严禁逞强！', daiya);
