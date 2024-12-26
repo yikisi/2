@@ -377,7 +377,7 @@ module.exports = (handlers) => {
   handlers[45] = handlers[46] = async (item_id) => {
     const item_name = era.get(`itemname:${item_id}`),
       aim = await select_target_in_storage(
-        item_name,
+        item_id,
         (chara_id) =>
           era.get(`base:${chara_id}:体力`) !==
           era.get(`maxbase:${chara_id}:体力`),
