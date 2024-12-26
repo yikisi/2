@@ -137,12 +137,23 @@ module.exports = async () => {
                 if (
                   era.get(`cflag:${e}:种族`) &&
                   era.get(`cflag:${e}:成长阶段`) === 5 &&
+                  !(era.get(`cflag:${e}:育成回合计时`) < 3 * 48) &&
                   !era.get(`cflag:${e}:可再次育成`)
                 ) {
                   era.set(`cflag:${e}:可再次育成`, 1);
                 }
+                if (era.get(`cflag:${e}:育成回合计时`) < 3 * 48) {
+                  era.set(`cflag:${e}:可再次育成`, 0);
+                }
               });
               new MyEduMarks().strange_day = get_random_value(4, 8);
+            }
+            if (version < 1101) {
+              era.getAddedCharacters().forEach((e) => {
+                if (era.get(`cflag:${e}:育成回合计时`) < 143 + 9) {
+                  era.set(`cflag:${e}:可再次育成`, 0);
+                }
+              });
             }
             if (!era.get('flag:回合爱慕惩罚')) {
               // 爱慕事件修复

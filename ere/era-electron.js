@@ -89,7 +89,7 @@ const era = {
   getLineCount() {},
   /**
    * wait for use's input, the engine will try to return number
-   * @param {{[disableBefore]:boolean,[rule]:string,[useRule]:boolean,[hideInput]:boolean}} [config] config of input, like rule
+   * @param {{[disableBefore]:boolean,[hideInput]:boolean,[rule]:string,[show]:boolean,[useRule]:boolean}} [config] config of input, like rule
    * @returns {Promise<any>} a promise of the user input, please use await
    */
   // eslint-disable-next-line no-unused-vars
@@ -375,7 +375,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '3.2.0', engine: undefined },
+  version: { sdk: '3.2.1', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
