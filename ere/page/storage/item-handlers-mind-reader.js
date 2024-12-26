@@ -136,5 +136,5 @@ module.exports = (handlers) => {
 
   new Array(3)
     .fill(0)
-    .forEach((_, i) => (handlers[i + 27] = () => use_glasses(i + 27)));
+    .forEach((_, i) => (handlers[i + 27] = (item_id) => use_glasses(item_id)));
 };

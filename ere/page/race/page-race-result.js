@@ -114,9 +114,8 @@ async function page_race_result(contestants, info, race_id) {
   }
   if (interval > 0) {
     await era.clear();
-    show_result(interval).then();
-    await era.input();
-    flag_result = false;
+    era.input({ show: false }).then(() => (flag_result = false));
+    await show_result(interval);
   }
   let flag_charts = 1;
   if (
