@@ -138,6 +138,8 @@ function generate_gene_buttons(
                     get(`cflag:${chara_id}:${gene.type_value}适性`) === 7) ||
                   (gene.type === gene_type_enum.base &&
                     get(`maxbase:${chara_id}:${gene.type_value}`) === 2000) ||
+                  (gene.type === gene_type_enum.skill &&
+                    genes.get_count(e.id) > 0) ||
                   (!chara_id && genes.count() > 15),
                 width: 6,
               },

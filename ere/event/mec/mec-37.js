@@ -9,23 +9,25 @@ const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
-  get_status() {
+  get_status(show_train_buff) {
     const ret = [];
-    if (era.get('status:37:荣耀德比')) {
-      ret.push({
-        color: buff_colors[1],
-        content: '荣耀德比',
-        title: '参赛时属性+50%',
-      });
-    }
-    if (era.get('status:37:必行之事')) {
-      ret.push({ color: buff_colors[1], content: '必行之事' });
-    }
-    if (era.get('status:37:虚弱')) {
-      ret.push({ color: buff_colors[0], content: '虚弱', key: '闪耀虚弱' });
-    }
-    if (era.get('status:37:分心')) {
-      ret.push({ color: buff_colors[0], content: '分心', key: '闪耀分心' });
+    if (show_train_buff) {
+      if (era.get('status:37:荣耀德比')) {
+        ret.push({
+          color: buff_colors[1],
+          content: '荣耀德比',
+          title: '参赛时属性+50%',
+        });
+      }
+      if (era.get('status:37:必行之事')) {
+        ret.push({ color: buff_colors[1], content: '必行之事' });
+      }
+      if (era.get('status:37:虚弱')) {
+        ret.push({ color: buff_colors[0], content: '虚弱', key: '闪耀虚弱' });
+      }
+      if (era.get('status:37:分心')) {
+        ret.push({ color: buff_colors[0], content: '分心', key: '闪耀分心' });
+      }
     }
     return ret;
   }

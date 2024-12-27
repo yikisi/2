@@ -23,8 +23,11 @@ const { pressure_border, train_buff_info } = require('#/data/train-const');
  */
 
 function sys_get_status(chara_id) {
-  const status_list = [];
-  const sex_equip = era.get(`equip:${chara_id}:淫纹奴役`);
+  const status_list = [],
+    sex_equip = era.get(`equip:${chara_id}:淫纹奴役`),
+    show_train_buff =
+      era.get(`cflag:${chara_id}:种族`) &&
+      (chara_id === 0 || era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48);
   if (era.get(`mark:${chara_id}:淫纹`) === 3) {
     const obj = {
       color: buff_colors[2],
@@ -40,7 +43,7 @@ function sys_get_status(chara_id) {
   }
   status_list.push(
     ...get_custom_mec(chara_id)
-      .get_status()
+      .get_status(show_train_buff)
       .map((e) => {
         if (e.title && !e.title.startsWith('[')) {
           e.title = `[${e.content}]：${e.title}`;
@@ -89,12 +92,42 @@ function sys_get_status(chara_id) {
   } else if (pressure >= pressure_border.unhappy) {
     status_list.push({ color: buff_colors[3], content: '不快' });
   }
-  const train_buff = era.get(`status:${chara_id}:练习X手`);
-  if (train_buff) {
-    status_list.push({
-      color: buff_colors[Number(train_buff > 0)],
-      content: train_buff_info[train_buff + 1],
-    });
+  if (show_train_buff) {
+    const train_buff = era.get(`status:${chara_id}:练习X手`);
+    if (train_buff) {
+      status_list.push({
+        color: buff_colors[Number(train_buff > 0)],
+        content: train_buff_info[train_buff + 1],
+      });
+    }
+    let check;
+    if (era.get('cflag:340:招募状态') === recruit_flags.yes) {
+      check = new DarleyLifeMarks().buff;
+      status_list.push({
+        color: buff_colors[1],
+        content: '女神之望',
+        fontWeight: check ? 'bold' : '',
+        title: `[女神之望]：速度与力量训练效果+${50 * (1 + check)}%`,
+      });
+    }
+    if (era.get('cflag:341:招募状态') === recruit_flags.yes) {
+      check = new GodolphinLifeMarks().buff;
+      status_list.push({
+        color: buff_colors[1],
+        content: '女神之爱',
+        fontWeight: check ? 'bold' : '',
+        title: `[女神之爱]：智力与技能点数训练效果+${50 * (1 + check)}%`,
+      });
+    }
+    if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
+      check = new ByerleyLifeMarks().buff;
+      status_list.push({
+        color: buff_colors[1],
+        content: '女神之信',
+        fontWeight: check ? 'bold' : '',
+        title: `[女神之信]：耐力与根性训练效果+${50 * (1 + check)}%`,
+      });
+    }
   }
   if (
     era.get(`status:${chara_id}:马跳S`) ||
@@ -219,36 +252,6 @@ function sys_get_status(chara_id) {
       content: '克制！',
       key: '爱意克制',
     });
-  }
-  if (era.get(`cflag:${chara_id}:种族`)) {
-    let check;
-    if (era.get('cflag:340:招募状态') === recruit_flags.yes) {
-      check = new DarleyLifeMarks().buff;
-      status_list.push({
-        color: buff_colors[1],
-        content: '女神之望',
-        fontWeight: check ? 'bold' : '',
-        title: `[女神之望]：速度与力量训练效果+${50 * (1 + check)}%`,
-      });
-    }
-    if (era.get('cflag:341:招募状态') === recruit_flags.yes) {
-      check = new GodolphinLifeMarks().buff;
-      status_list.push({
-        color: buff_colors[1],
-        content: '女神之爱',
-        fontWeight: check ? 'bold' : '',
-        title: `[女神之爱]：智力与技能点数训练效果+${50 * (1 + check)}%`,
-      });
-    }
-    if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
-      check = new ByerleyLifeMarks().buff;
-      status_list.push({
-        color: buff_colors[1],
-        content: '女神之信',
-        fontWeight: check ? 'bold' : '',
-        title: `[女神之信]：耐力与根性训练效果+${50 * (1 + check)}%`,
-      });
-    }
   }
   sys_get_item_status(chara_id, status_list);
   return status_list.map((e) => {
