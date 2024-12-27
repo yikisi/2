@@ -10,3 +10,5 @@ _incoming_
 ## Changed
 
 ## Fixed
+
+* 修复了一回合内可以反复参加同一场赛事的错误
