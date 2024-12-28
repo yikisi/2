@@ -10,7 +10,6 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const EroMakingOuts = require('#/event/ero/common-lines/interface/ero-making-outs');
 
 const { stain_enum } = require('#/data/ero/stain-const');
-
 const virgin_color_desc = ['粉嫩可人', '红润泛紫', '深邃成熟'];
 const skin_color_desc = ['象牙白', '白皙', '红润', '浅褐色'];
 
@@ -120,24 +119,8 @@ async function common_deep_blow_job(attacker, defender, hook) {
     await defender.say_and_wait(['咕呃～']);
     await attacker.print_and_wait(['方才满是牢骚的小嘴现在只能做吮吸的动作。']);
   } else {
-    await defender.print_and_wait([
-      '一根、两根……鼻子完全没入浓郁的森林中，雄性的气味夹杂着浓郁的腥臭。',
-    ]);
-    await defender.print_and_wait([
-      '却被自己的鼻腔一点一点熟悉，与已经伸入到喉咙的肉棒交融在一起。',
-    ]);
-    await defender.print_and_wait([
-      '奋力想把肉棒从喉中反吐出来，但 ',
-      sys_get_colored_callname(defender.id, attacker.id),
-      ' 的手掌已经牢牢控制住了自己的脑袋，按着自己的双耳。',
-    ]);
-    await defender.say_and_wait(['咕～']);
-    await defender.print_and_wait([
-      '脖颈上，不断起伏的食管响动着液体流入胃中的淫靡声。',
-    ]);
+    await deep_blow_job_common(attacker, defender, hook);
   }
-  era.println();
-  await deep_blow_job_common(attacker, defender, hook);
 }
 
 /**
