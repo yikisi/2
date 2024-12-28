@@ -183,9 +183,10 @@ async function print_chara_info(_id, chara_list, _page) {
 }
 
 async function page_exp() {
-  let exp_flag = true;
+  let exp_flag = true,
+    page = { curr: 1 };
   while (exp_flag) {
-    const selected = await print_select_tar_page(chara_into_type.info);
+    const selected = await print_select_tar_page(page, chara_into_type.info);
     if (selected === undefined) {
       exp_flag = false;
       continue;

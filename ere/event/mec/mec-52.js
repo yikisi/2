@@ -28,22 +28,24 @@ module.exports = class extends CustomizedMec {
     return super.get_race_finish_report(uma, race_id);
   }
 
-  get_status() {
-    const { gad, dad } = new UraraEduMarks(),
-      ret_list = [];
-    if (gad || dad) {
-      ret_list.push({
-        color: get_chara_color(52),
-        content: `回响(${gad + dad})`,
-        title:
-          `？？？「若能相互理解，现实也能予以共鸣。」参赛时：` +
-          [
-            gad ? `草地适性上升 ${gad} 级` : '',
-            dad ? `中&长距离适性上升 ${dad} 级` : '',
-          ]
-            .filter((e) => e)
-            .join('，'),
-      });
+  get_status(show_train_buff) {
+    const ret_list = [];
+    if (show_train_buff) {
+      const { gad, dad } = new UraraEduMarks();
+      if (gad || dad) {
+        ret_list.push({
+          color: get_chara_color(52),
+          content: `回响(${gad + dad})`,
+          title:
+            `？？？「若能相互理解，现实也能予以共鸣。」参赛时：` +
+            [
+              gad ? `草地适性上升 ${gad} 级` : '',
+              dad ? `中&长距离适性上升 ${dad} 级` : '',
+            ]
+              .filter((e) => e)
+              .join('，'),
+        });
+      }
     }
     return ret_list;
   }

@@ -258,14 +258,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
           offset: 1,
           width: progress_width,
         },
-        inContent: [
-          '出闸 (',
-          lane.get_abbr(),
-          slope > 0 ? '上坡' : slope < 0 ? '下坡' : undefined,
-          ')',
-        ]
-          .filter((e) => e)
-          .join(' '),
+        inContent: uma.race.conditionParams.is_badstart ? '出迟！' : '出闸！',
         percentage: 0,
         type: 'progress',
       }),
@@ -351,11 +344,13 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
         uma.race.velocityReal = uma.base.velocityMin;
         start_delay[uma.index_race] = 0;
       } else {
-        const temp = uma.race.velocityReal;
-        uma.race.velocityReal = Math.max(
-          uma.race.velocityReal + uma.race.acceleration / frame_rate,
-          uma.base.velocityMin,
-        );
+        const temp = (uma.race.velocityReal = Math.min(
+          Math.max(
+            uma.race.velocityReal + uma.race.acceleration / frame_rate,
+            uma.base.velocityMin,
+          ),
+          30,
+        ));
         uma.race.location += (uma.race.velocityReal + temp) / (2 * frame_rate);
         uma.race.staminaCost =
           ((20 / 144) *

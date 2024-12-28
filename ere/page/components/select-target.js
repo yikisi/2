@@ -199,7 +199,7 @@ function get_suffix(chara_id, type) {
   return ret;
 }
 
-async function select_target(type) {
+async function select_target(page, type) {
   let list_team = filter_chara('cflag', '招募状态', recruit_flags.yes);
 
   if (type === chara_info_type.train) {
@@ -232,9 +232,9 @@ async function select_target(type) {
   }
 
   const max_page = Math.ceil(list_team.length / 10);
-  let cur_page = 1,
-    select_flag = true,
+  let select_flag = true,
     ret;
+  page ||= { curr: 1 };
   while (select_flag) {
     await era.clear();
     print_page_header();
@@ -326,7 +326,7 @@ async function select_target(type) {
           type: 'text',
         },
       );
-      const cur_list = list_team.slice((cur_page - 1) * 10, cur_page * 10);
+      const cur_list = list_team.slice((page.curr - 1) * 10, page.curr * 10);
       cur_list.forEach((chara_id) => {
         const chara = get_chara_talk(chara_id),
           titles = new CharaTitles(chara_id),
@@ -393,18 +393,18 @@ async function select_target(type) {
       buffer.push(
         {
           accelerator: 996,
-          config: { disabled: cur_page === 1, width: 4 },
+          config: { disabled: page.curr === 1, width: 4 },
           content: '上一页',
           type: 'button',
         },
         {
           config: { width: 4 },
-          content: `第 ${cur_page} 页 / 共 ${max_page} 页`,
+          content: `第 ${page.curr} 页 / 共 ${max_page} 页`,
           type: 'text',
         },
         {
           accelerator: 997,
-          config: { disabled: cur_page === max_page, width: 8 },
+          config: { disabled: page.curr === max_page, width: 8 },
           content: '下一页',
           type: 'button',
         },
@@ -438,9 +438,9 @@ async function select_target(type) {
     ret = await era.input();
 
     if (ret === 996) {
-      cur_page--;
+      page.curr--;
     } else if (ret === 997) {
-      cur_page++;
+      page.curr++;
     } else if (ret === 998) {
       ret = 0;
       select_flag = false;

@@ -45,12 +45,12 @@ function get_juel_result(chara_id, juel_names, tmp) {
           type: 'text',
         },
         {
-          config: { align: 'right', width: 4 },
+          config: { align: 'right', width: 5 },
           content: `${(val - got).toLocaleString()} (具有) +`,
           type: 'text',
         },
         {
-          config: { align: 'right', width: 4 },
+          config: { align: 'right', width: 5 },
           content: [
             {
               color: palam_colors.notifications[1],
@@ -61,7 +61,7 @@ function get_juel_result(chara_id, juel_names, tmp) {
           type: 'text',
         },
         {
-          config: { align: 'right', width: 4 },
+          config: { align: 'right', width: 5 },
           content: [
             {
               color: palam_colors.notifications[0],
@@ -72,7 +72,7 @@ function get_juel_result(chara_id, juel_names, tmp) {
           type: 'text',
         },
         {
-          config: { align: 'right', width: 4 },
+          config: { align: 'right', width: 5 },
           content: [
             {
               color: palam_colors.notifications[1],
@@ -83,7 +83,6 @@ function get_juel_result(chara_id, juel_names, tmp) {
           ],
           type: 'text',
         },
-        { config: { width: 4 }, content: '', type: 'text' },
       );
     }
   });
@@ -97,12 +96,12 @@ function get_juel_result(chara_id, juel_names, tmp) {
         type: 'text',
       },
       {
-        config: { align: 'right', width: 4 },
+        config: { align: 'right', width: 5 },
         content: `${(val - got + self_protect).toLocaleString()} (具有) +`,
         type: 'text',
       },
       {
-        config: { align: 'right', width: 4 },
+        config: { align: 'right', width: 5 },
         content: [
           {
             color: palam_colors.notifications[1],
@@ -113,7 +112,7 @@ function get_juel_result(chara_id, juel_names, tmp) {
         type: 'text',
       },
       {
-        config: { align: 'right', width: 4 },
+        config: { align: 'right', width: 5 },
         content: [
           {
             color: palam_colors.notifications[0],
@@ -124,7 +123,7 @@ function get_juel_result(chara_id, juel_names, tmp) {
         type: 'text',
       },
       {
-        config: { align: 'right', width: 4 },
+        config: { align: 'right', width: 5 },
         content: [
           {
             color: palam_colors.notifications[1],
@@ -133,11 +132,6 @@ function get_juel_result(chara_id, juel_names, tmp) {
           },
           ' (总计)',
         ],
-        type: 'text',
-      },
-      {
-        config: { width: 4 },
-        content: [],
         type: 'text',
       },
     );
@@ -154,12 +148,12 @@ function get_juel_result(chara_id, juel_names, tmp) {
             type: 'text',
           },
           {
-            config: { align: 'right', width: 4 },
+            config: { align: 'right', width: 5 },
             content: `${(val - got).toLocaleString()} (具有) + `,
             type: 'text',
           },
           {
-            config: { align: 'right', width: 8 },
+            config: { align: 'right', width: 10 },
             content: [
               {
                 color: palam_colors.notifications[1],
@@ -170,7 +164,7 @@ function get_juel_result(chara_id, juel_names, tmp) {
             type: 'text',
           },
           {
-            config: { align: 'right', width: 4 },
+            config: { align: 'right', width: 5 },
             content: [
               {
                 color: palam_colors.notifications[1],
@@ -179,11 +173,6 @@ function get_juel_result(chara_id, juel_names, tmp) {
               },
               ' (总计)',
             ],
-            type: 'text',
-          },
-          {
-            config: { width: 4 },
-            content: [],
             type: 'text',
           },
         );

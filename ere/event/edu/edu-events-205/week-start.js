@@ -238,7 +238,9 @@ module.exports = async function (vp, me, event_object) {
       break;
     case 143 + 9:
       await CustomizedEdu.common_palace(vp, me);
-      if (era.get('love:205') >= 50) {
+      if (era.get('love:205') < 50) {
+        await CustomizedEdu.common_palace_relation(vp, me);
+      } else {
         era.drawLine();
         era.set('flag:当前位置', location_enum.gate);
         await print_event_name(`${vp.sex}即是成真的美梦`, vp);
@@ -456,8 +458,6 @@ module.exports = async function (vp, me, event_object) {
         await vp.say_and_wait(`——我的甜心。`);
         era.println();
         wait_flag = temp === 2 && sys_love_uma(205, 1);
-      } else {
-        await CustomizedEdu.common_palace_relation(vp, me);
       }
   }
   wait_flag && (await era.waitAnyKey());

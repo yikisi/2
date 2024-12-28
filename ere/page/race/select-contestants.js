@@ -15,12 +15,14 @@ async function select_contestants(race) {
   if (race === race_enum.begin_race) {
     return [era.get('flag:当前互动角色')];
   }
-  const contestants = sys_filter_chara(
-    'cflag',
-    '招募状态',
-    recruit_flags.yes,
-  ).filter(
-    (e) => sys_reg_race(e).curr.race === race && sys_check_race_ready(e),
+  const registered_list = sys_filter_chara(
+      'cflag',
+      '招募状态',
+      recruit_flags.yes,
+    ).filter((e) => sys_reg_race(e).curr.race === race),
+    contestants = registered_list.filter((e) => sys_check_race_ready(e));
+  sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+    (e) => sys_reg_race(e).curr.race === race,
   );
   let ret = contestants;
   if (contestants.length > 1) {
@@ -77,14 +79,11 @@ async function select_contestants(race) {
         dict[select] = !dict[select];
       }
     }
+    registered_list.forEach(
+      (e) => !dict[e] && (sys_reg_race(e).curr = { race: -1, week: -1 }),
+    );
     ret = Object.entries(dict)
-      .filter((e) => {
-        if (e[1]) {
-          return true;
-        } else {
-          sys_reg_race(e[0]).curr = { race: -1, week: -1 };
-        }
-      })
+      .filter((e) => e[1])
       .map((e) => Number(e[0]));
   }
   return ret;

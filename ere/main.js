@@ -223,6 +223,8 @@ module.exports = async () => {
         '黑衣剑士-星爆气流斩准备就绪',
         { isDivider: true },
         '幽白書',
+        { isBr: true },
+        'ALEX',
       ],
     ],
     ['地下室地文', ['露娜俘虏', { isDivider: true }, '无名黑奴']],

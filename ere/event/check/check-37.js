@@ -124,7 +124,10 @@ module.exports = class extends CustomizedCheck {
     } else if (edu_weeks === 143 + 1) {
       era.set('status:37:必行之事', 0);
     } else if (edu_weeks === 143 + 9) {
-      add_event(event_hooks.week_start, new EventObject(37, cb_enum.edu));
+      add_event(
+        event_hooks.week_start,
+        new EventObject(37, cb_enum.edu).set_arg('palace'),
+      );
     }
   }
 

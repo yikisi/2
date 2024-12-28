@@ -235,6 +235,7 @@ module.exports = class extends Edu17UntilWeekStart {
       await handle_debuff(event_marks, luna);
       hook.override = true;
       extra_flag.pt_change = 5;
+      return extra_flag;
     } else if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
       era.println();
       await print_event_name('额外的自主训练', chara_talk);

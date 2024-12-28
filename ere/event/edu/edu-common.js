@@ -622,6 +622,7 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {string} callname
    * @param {HookArg} hook
    * @param {TrainSuccessParams} extra_flag
+   * @returns {Promise<TrainSuccessParams|void>}
    */
   async train_success(chara, me, callname, hook, extra_flag) {
     const cur_location = era.get('flag:当前位置');

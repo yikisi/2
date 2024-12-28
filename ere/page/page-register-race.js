@@ -13,6 +13,7 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { adaptability_colors, el_danger_color } = require('#/data/color-const');
 const GrandLives = require('#/data/event/grand-lives');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -254,13 +255,21 @@ async function reg_race_page() {
                         distance,
                         '(',
                         adaptability_dict[distance],
-                        ')',
+                        ') ',
+                        ...team_list
+                          .filter((en) => sys_reg_race(en).curr.race === e)
+                          .map((en) => ({
+                            color: get_chara_color(en),
+                            content: '𖨆',
+                            fontWeight: 'bold',
+                          })),
                         registered_race.race === e ? ' ' : '',
                       ]),
                   registered_race.race === e
                     ? {
                         color: el_danger_color,
                         content: '[▲已登记]',
+                        display: 'inline-block',
                         fontWeight: 'bold',
                       }
                     : '',
@@ -336,7 +345,7 @@ async function reg_race_page() {
             buttonType: !flag_hide_adaptability ? 'warning' : 'info',
             width: 6,
           },
-          content: `显示比赛适性 [${!flag_hide_adaptability ? '开' : '关'}]`,
+          content: `显示更多信息 [${!flag_hide_adaptability ? '开' : '关'}]`,
           type: 'button',
         },
         {

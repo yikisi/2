@@ -1,10 +1,10 @@
 const EroCommandLines = require('#/event/ero/common-lines/ero-command-lines');
-const EroCommunications = require('#/event/ero/common-lines/interface/ero-communications');
-const EroFucking = require('#/event/ero/common-lines/interface/ero-fucking');
-const EroMakingOuts = require('#/event/ero/common-lines/interface/ero-making-outs');
 const EroNormalItems = require('#/event/ero/common-lines/normal/items');
 const EroNormalOrgy = require('#/event/ero/common-lines/normal/orgy');
 const EroNormalSm = require('#/event/ero/common-lines/normal/sm');
+const EroRapeCommunications = require('#/event/ero/common-lines/rape/communications');
+const EroRapeFucking = require('#/event/ero/common-lines/rape/fucking');
+const EroRapeMakingOuts = require('#/event/ero/common-lines/rape/making-outs');
 
 class RapeCommandLines extends EroCommandLines {
   /**
@@ -20,13 +20,13 @@ class RapeCommandLines extends EroCommandLines {
   constructor(root, exclude) {
     super(root);
     if (!exclude?.communications) {
-      this.communications = new EroCommunications(this);
+      this.communications = new EroRapeCommunications(this);
     }
     if (!exclude?.making_outs) {
-      this.making_outs = new EroMakingOuts(this);
+      this.making_outs = new EroRapeMakingOuts(this);
     }
     if (!exclude?.fucking) {
-      this.fucking = new EroFucking(this);
+      this.fucking = new EroRapeFucking(this);
     }
     if (!exclude?.sm) {
       this.sm = new EroNormalSm(this);

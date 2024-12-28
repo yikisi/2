@@ -24,7 +24,14 @@ const { part_enum } = require('#/data/ero/part-const');
 module.exports = class extends Love85UntilWife {
   async 99(ruby, me, callname, stage, extra_flag, event_object) {
     if (ruby.sex_code !== 0 || me.sex_code === 0) {
-      return super[99](ruby, me, callname, stage, extra_flag, event_object);
+      return await super[99](
+        ruby,
+        me,
+        callname,
+        stage,
+        extra_flag,
+        event_object,
+      );
     }
     const m_call_r = sys_get_callname(0, this.id);
     await print_event_name('依存', ruby);
