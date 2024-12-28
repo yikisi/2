@@ -117,7 +117,7 @@ async function common_deep_blow_job(attacker, defender, hook) {
     await attacker.print_and_wait([
       '整个嘴巴的空间被完全征用，形成一个近乎真空的口穴。',
     ]);
-    await attacker.say_and_wait(['咕呃～']);
+    await defender.say_and_wait(['咕呃～']);
     await attacker.print_and_wait(['方才满是牢骚的小嘴现在只能做吮吸的动作。']);
   } else {
     await defender.print_and_wait([
@@ -127,9 +127,9 @@ async function common_deep_blow_job(attacker, defender, hook) {
       '却被自己的鼻腔一点一点熟悉，与已经伸入到喉咙的肉棒交融在一起。',
     ]);
     await defender.print_and_wait([
-      '奋力想把肉棒从喉中反吐出来，但',
+      '奋力想把肉棒从喉中反吐出来，但 ',
       sys_get_colored_callname(defender.id, attacker.id),
-      '的手掌已经牢牢控制住了自己的脑袋，按着自己的双耳。',
+      ' 的手掌已经牢牢控制住了自己的脑袋，按着自己的双耳。',
     ]);
     await defender.say_and_wait(['咕～']);
     await defender.print_and_wait([
