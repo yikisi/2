@@ -718,9 +718,9 @@ module.exports = class extends CustomizedDaily {
             await acute.say_and_wait('❤️——————');
             await era.printAndWait('深邃的眼眸中，散射出了桃红的色泽。');
             await era.printAndWait([
-              '这是名为',
-              acute.get_teen_sex_title(),
-              '的猛兽所发出的「进食」信号。',
+              '这是名为 ',
+              acute.get_colored_actual_name(),
+              ' 的猛兽所发出的「进食」信号。',
             ]);
             await era.printAndWait('………………');
             await era.printAndWait('看来今天夜里，注定了是一场殊死的决斗了。');

@@ -71,9 +71,9 @@ async function deep_blow_job_common(attacker, defender, hook) {
 async function common_hand_job(attacker, defender, hook) {
   if (hook.arg) {
     await attacker.print_and_wait([
-      '权力也好，武力也罢，总之是让名叫',
-      sys_get_colored_callname(attacker.id, defender.id),
-      '的',
+      '权力也好，武力也罢，总之是让名叫 ',
+      defender.get_colored_actual_name(),
+      ' 的',
       era.get(`cflag:${defender.id}:种族`) ? '马耳朵' : '',
       defender.get_phy_sex_title(),
       '意识到了现在只能配合自己的事实。',
@@ -194,11 +194,11 @@ async function common_tit_job(attacker, defender, hook) {
 async function tit_and_blow_job(attacker, defender, hook) {
   if (hook.arg) {
     await attacker.print_and_wait([
-      '故意挺腰，让从乳肉间探出来的龟头戳在的唇上，',
+      '故意挺腰，让从乳肉间探出来的龟头戳在的唇上，向 ',
       sys_get_colored_callname(attacker.id, defender.id),
       ' 示意现在是该张嘴的时候了。',
     ]);
-    await attacker.say_and_wait(['唔……']);
+    await defender.say_and_wait(['唔……']);
     await attacker.print_and_wait([
       sys_get_colored_callname(attacker.id, defender.id),
       ' 却只是紧皱着眉头，抿住嘴唇露出了一幅微微呲着牙的表情，就是不愿意张嘴。',
