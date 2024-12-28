@@ -438,6 +438,16 @@ class CustomizedEro {
             mother.get_colored_name(),
             ' 沉溺在快感之中……',
           ]);
+        } else if (era.get('tflag:强奸') !== mother.id) {
+          await era.printAndWait([
+            mother.get_colored_name(),
+            ' 在屈辱中感受到了身为 ',
+            {
+              content: era.get(`cflag:${mother.id}:性别`) ? '扶她' : '女性',
+              color: buff_colors[2],
+            },
+            ' 的极乐……',
+          ]);
         } else {
           await era.printAndWait([
             mother.get_colored_name(),
@@ -512,7 +522,9 @@ class CustomizedEro {
         } else {
           await era.printAndWait([
             mother.get_colored_name(),
-            ' 欣喜地品尝着身为 ',
+            era.get('tflag:强奸') !== mother.id
+              ? ' 在屈辱中感受到了身为 '
+              : ' 欣喜地品尝着身为 ',
             {
               content: era.get(`cflag:${mother.id}:性别`) ? '扶她' : '女性',
               color: buff_colors[2],

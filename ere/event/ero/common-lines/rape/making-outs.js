@@ -21,7 +21,6 @@ const skin_color_desc = ['象牙白', '白皙', '红润', '浅褐色'];
  */
 async function deep_blow_job_common(attacker, defender, hook) {
   if (hook.arg) {
-    era.println();
     await defender.say_and_wait(['呜～好热～喘不上气～'], true);
     await defender.print_and_wait(['耳畔只能听见快速且粗重地水声。']);
     await defender.print_and_wait([
@@ -43,7 +42,6 @@ async function deep_blow_job_common(attacker, defender, hook) {
       '只是为了让自己能够吞下眼前强奸犯卵袋中的浓精做好准备。',
     ]);
   } else {
-    era.println();
     await defender.say_and_wait(['——咕唔！？']);
     await defender.print_and_wait(['深埋在喉咙之中的肉棒让自己无法低头。']);
     await defender.print_and_wait([
@@ -138,6 +136,7 @@ async function common_deep_blow_job(attacker, defender, hook) {
       '脖颈上，不断起伏的食管响动着液体流入胃中的淫靡声。',
     ]);
   }
+  era.println();
   await deep_blow_job_common(attacker, defender, hook);
 }
 

@@ -19,7 +19,6 @@ const skin_color_desc = ['象牙白', '白皙', '红润', '浅褐色'];
  */
 async function continue_fucking_common(attacker, defender) {
   if (era.get(`tcvar:${defender.id}:接近高潮`)) {
-    era.println();
     await defender.say_and_wait('快……哈啊❤️……停下来……');
     await defender.print_and_wait([
       '鼓胀的肉茎正毫无绅士风度的在自己体内抽插，甚至能清楚的感受到紧贴着肉褶跳动的充血青筋。',
@@ -40,52 +39,48 @@ async function continue_fucking_common(attacker, defender) {
       '想要反抗，但是脸上失去控制的表情也好，吐出的娇媚喘息也好，绷直的纤细足趾也好，都说明了身体已经毫无余裕的事实。',
     ]);
   } else {
-    const message = [];
-
-    message.push(() => {
-      era.println();
-      defender.say_and_wait('哦咕呜呜！！');
-      attacker.print_and_wait([
-        '粗硕的肉茎毫不留情地抽插着 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 的雌穴，让她发出淫叫的同时，漂亮的瞳孔也一阵翻白。',
-      ]);
-      attacker.print_and_wait([
-        '火热粗壮的肉棒在小穴里抽插搅弄，让龟头顶在膣道肉壁上，再用翘起的肉冠一路磨蹭着媚肉直直顶上花心……',
-      ]);
-      attacker.print_and_wait([
-        '全力冲刺的龟首在爱液的润湿下沉重地吻在了娇嫩的子宫颈口，甚至连平坦的小腹上都浮现出龟冠的模糊形状。',
-      ]);
-      defender.say_and_wait(['哦！等……慢……一点！求你……']);
-      attacker.print_and_wait([
-        '被快感充盈的大脑中只能产生破碎的话语，一同溢出的还有从嘴角流下透亮的液滴。',
-      ]);
-    });
-
-    message.push(() => {
-      era.println();
-      defender.print_and_wait([
-        '像是布娃娃一样任人摆布，或是听话的性爱机器一样被把玩便发出淫声。',
-      ]);
-      defender.print_and_wait([
-        skin_color_desc[era.get(`cflag:${defender.id}:肤色深度`)],
-        ' 的躯体颤抖，扭捏。',
-      ]);
-      defender.say_and_wait(['呜，呜啊……']);
-      defender.print_and_wait([
-        '明明身体最需要的就是挣脱 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 的力量，却在快感的驱使下将仅剩的力量用于蜷缩脚趾。',
-      ]);
-      defender.print_and_wait([
-        '被强暴被侵犯的感觉和被爱抚被玩弄的快感，正将自己的双腿双脚乃至全身逐渐拉低到了一摊追求快乐的雌肉的水准。',
-      ]);
-      defender.say_and_wait(['哈啊！']);
-      defender.print_and_wait(['听见自己发出了毫无廉耻的呻吟声。']);
-    });
+    const message = [
+      () => {
+        defender.say_and_wait('哦咕呜呜！！');
+        attacker.print_and_wait([
+          '粗硕的肉茎毫不留情地抽插着 ',
+          sys_get_colored_callname(attacker.id, defender.id),
+          ' 的雌穴，让她发出淫叫的同时，漂亮的瞳孔也一阵翻白。',
+        ]);
+        attacker.print_and_wait([
+          '火热粗壮的肉棒在小穴里抽插搅弄，让龟头顶在膣道肉壁上，再用翘起的肉冠一路磨蹭着媚肉直直顶上花心……',
+        ]);
+        attacker.print_and_wait([
+          '全力冲刺的龟首在爱液的润湿下沉重地吻在了娇嫩的子宫颈口，甚至连平坦的小腹上都浮现出龟冠的模糊形状。',
+        ]);
+        defender.say_and_wait(['哦！等……慢……一点！求你……']);
+        attacker.print_and_wait([
+          '被快感充盈的大脑中只能产生破碎的话语，一同溢出的还有从嘴角流下透亮的液滴。',
+        ]);
+      },
+      () => {
+        defender.print_and_wait([
+          '像是布娃娃一样任人摆布，或是听话的性爱机器一样被把玩便发出淫声。',
+        ]);
+        defender.print_and_wait([
+          skin_color_desc[era.get(`cflag:${defender.id}:肤色深度`)],
+          ' 的躯体颤抖，扭捏。',
+        ]);
+        defender.say_and_wait(['呜，呜啊……']);
+        defender.print_and_wait([
+          '明明身体最需要的就是挣脱 ',
+          sys_get_colored_callname(defender.id, attacker.id),
+          ' 的力量，却在快感的驱使下将仅剩的力量用于蜷缩脚趾。',
+        ]);
+        defender.print_and_wait([
+          '被强暴被侵犯的感觉和被爱抚被玩弄的快感，正将自己的双腿双脚乃至全身逐渐拉低到了一摊追求快乐的雌肉的水准。',
+        ]);
+        defender.say_and_wait(['哈啊！']);
+        defender.print_and_wait(['听见自己发出了毫无廉耻的呻吟声。']);
+      },
+    ];
     if (era.get(`cflag:${defender.id}:种族`)) {
       message.push(() => {
-        era.println();
         defender.say_and_wait('嗯啊啊……不要……停下来……求你……呜……');
         defender.print_and_wait([
           '尽管嘴里还娇呼着不要，可紧绷的膣肉已经开始柔软的拥抱起入侵者，让肉棒能插入到更深的位置。',
