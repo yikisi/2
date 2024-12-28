@@ -186,7 +186,7 @@ async function page_exp() {
   let exp_flag = true,
     page = { curr: 1 };
   while (exp_flag) {
-    const selected = await print_select_tar_page(page, chara_into_type.info);
+    const selected = await print_select_tar_page(chara_into_type.info, page);
     if (selected === undefined) {
       exp_flag = false;
       continue;

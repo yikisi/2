@@ -199,7 +199,7 @@ function get_suffix(chara_id, type) {
   return ret;
 }
 
-async function select_target(page, type) {
+async function select_target(type, page) {
   let list_team = filter_chara('cflag', '招募状态', recruit_flags.yes);
 
   if (type === chara_info_type.train) {
