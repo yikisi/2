@@ -258,14 +258,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
           offset: 1,
           width: progress_width,
         },
-        inContent: [
-          '出闸 (',
-          lane.get_abbr(),
-          slope > 0 ? '上坡' : slope < 0 ? '下坡' : undefined,
-          ')',
-        ]
-          .filter((e) => e)
-          .join(' '),
+        inContent: uma.race.conditionParams.is_badstart ? '出迟！' : '出闸！',
         percentage: 0,
         type: 'progress',
       }),

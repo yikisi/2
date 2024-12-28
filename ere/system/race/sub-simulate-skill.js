@@ -109,6 +109,7 @@ function sub_simulate_skill(
                 ? '下坡'
                 : undefined,
             uma.race.conditionParams.blocked_front ? '阻挡！' : '',
+            uma.race.temptation > 0 ? '焦躁！' : '',
             ')',
           ]
             .filter((e) => e)
