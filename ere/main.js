@@ -222,7 +222,7 @@ module.exports = async () => {
         '黑衣剑士-星爆气流斩准备就绪',
         { isDivider: true },
         '幽白書',
-        { isDivider: true },
+        { isBr: true },
         'ALEX',
       ],
     ],
