@@ -652,7 +652,7 @@ async function end_ero_and_show_result(shown) {
       get_chara_talk(301).say_as_unknown('以下报上这次马儿跳的结果简报～');
       const reporter = get_chara_talk(306);
       if (Math.random() < 0.01) {
-        await reporter.say_as_unknown_and_wait('不……不喜欢……的话……');
+        await reporter.as_unknown_and_wait('不……不喜欢……的话……');
         await get_chara_talk(203).say_as_unknown_and_wait('训练员～');
         await get_chara_talk(202).say_as_unknown_and_wait(
           '加油！训练员～加油！',
