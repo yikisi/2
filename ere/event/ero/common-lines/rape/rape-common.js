@@ -4,7 +4,7 @@ const EroNormalOrgy = require('#/event/ero/common-lines/normal/orgy');
 const EroNormalSm = require('#/event/ero/common-lines/normal/sm');
 const EroRapeCommunications = require('#/event/ero/common-lines/rape/communications');
 const EroRapeFucking = require('#/event/ero/common-lines/rape/fucking');
-const EroRapeMakingOuts = require('#/event/ero/common-lines/rape/making-outs-final');
+const EroRapeMakingOuts = require('#/event/ero/common-lines/rape/making-outs');
 
 class RapeCommandLines extends EroCommandLines {
   /**
