@@ -1,3 +1,5 @@
+const { get } = require('#/era-electron');
+
 const EroCommandLines = require('#/event/ero/common-lines/ero-command-lines');
 const EroNormalItems = require('#/event/ero/common-lines/normal/items');
 const EroNormalOrgy = require('#/event/ero/common-lines/normal/orgy');
@@ -37,6 +39,22 @@ class RapeCommandLines extends EroCommandLines {
     if (!exclude?.items) {
       this.items = new EroNormalItems(this);
     }
+  }
+
+  /**
+   * @param {CharaTalk} attacker
+   * @param {CharaTalk} defender
+   * @param {HookArg} hook
+   * @param extra_flag
+   */
+  async run(attacker, defender, hook, extra_flag) {
+    return await super.run(
+      attacker,
+      defender,
+      hook,
+      extra_flag,
+      attacker.id === get('tflag:强奸'),
+    );
   }
 }
 

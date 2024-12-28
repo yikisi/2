@@ -8,8 +8,10 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const EroMakingOuts = require('#/event/ero/common-lines/interface/ero-making-outs');
+const EroRapedMakingOuts = require('#/event/ero/common-lines/rape/raped-making-outs');
 
 const { stain_enum } = require('#/data/ero/stain-const');
+
 const virgin_color_desc = ['粉嫩可人', '红润泛紫', '深邃成熟'];
 const skin_color_desc = ['象牙白', '白皙', '红润', '浅褐色'];
 
@@ -214,6 +216,19 @@ async function tit_and_blow_job(attacker, defender, hook) {
 }
 
 class EroRapeMakingOuts extends EroMakingOuts {
+  /** @type {EroMakingOuts} */
+  raped;
+
+  constructor(root) {
+    super(root);
+    this.raped = new EroRapedMakingOuts(root);
+  }
+
+  /** @param {boolean} is_raper */
+  get_this(is_raper) {
+    return is_raper ? this : this.raped;
+  }
+
   /** @author ALEX */
   async pet_ear(attacker, defender, hook) {
     if (!era.get(`cflag:${defender.id}:种族`)) {

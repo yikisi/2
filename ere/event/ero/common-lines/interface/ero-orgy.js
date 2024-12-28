@@ -1,16 +1,10 @@
+const EroLinesCommon = require('#/event/ero/common-lines/interface/ero-lines-common');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
-class EroOrgy {
-  /** @type {EroCommandLines} */
-  root;
-
-  /** @param {EroCommandLines} root */
-  constructor(root) {
-    this.root = root;
-  }
-
+class EroOrgy extends EroLinesCommon {
   /**
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender

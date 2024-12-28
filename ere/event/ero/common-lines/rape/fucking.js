@@ -8,6 +8,7 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const EroFucking = require('#/event/ero/common-lines/interface/ero-fucking');
+const EroRapedFucking = require('#/event/ero/common-lines/rape/raped-fucking');
 
 const { get_random_entry } = require('#/utils/list-utils');
 
@@ -378,6 +379,19 @@ async function common_ask_cowgirl(attacker, defender, hook) {
 }
 
 class EroRapeFucking extends EroFucking {
+  /** @type {EroFucking} */
+  raped;
+
+  constructor(root) {
+    super(root);
+    this.raped = new EroRapedFucking(root);
+  }
+
+  /** @param {boolean} is_raper */
+  get_this(is_raper) {
+    return is_raper ? this : this.raped;
+  }
+
   /** @author ALEX */
   async missionary(attacker, defender, hook) {
     await common_missionary(attacker, defender, hook);
