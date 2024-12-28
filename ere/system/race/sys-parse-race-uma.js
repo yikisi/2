@@ -112,9 +112,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
           1,
         0,
       ];
-    info.extra_attr = Math.floor(
-      (max_extra_attr * (144 - edu_phase)) / (144 - 24),
-    );
+    info.extra_attr = (max_extra_attr * (144 - edu_phase)) / (144 - 24);
     const contestant_dict = {};
     team_chara.forEach((e) => (contestant_dict[e.index_chara] = 1));
     contestant_dict[era.get('cflag:0:模版角色')] = 1;

@@ -31,15 +31,17 @@ module.exports = class extends CustomizedMec {
     return Math.min(new SSEduMarks().wins, 30);
   }
 
-  get_status() {
-    const { wins } = new SSEduMarks(),
-      ret_list = [];
-    if (wins) {
-      ret_list.push({
-        color: get_chara_color(this.id),
-        content: `胜利的承诺(${wins})`,
-        title: `[胜利的承诺(${wins})]：参赛时属性+${get_attr_buff()}%，好感获取+${this.get_relation_buff()}%，效果随连胜次数增强`,
-      });
+  get_status(show_train_buff) {
+    const ret_list = [];
+    if (show_train_buff) {
+      const { wins } = new SSEduMarks();
+      if (wins) {
+        ret_list.push({
+          color: get_chara_color(this.id),
+          content: `胜利的承诺(${wins})`,
+          title: `[胜利的承诺(${wins})]：参赛时属性+${get_attr_buff()}%，好感获取+${this.get_relation_buff()}%，效果随连胜次数增强`,
+        });
+      }
     }
     return ret_list;
   }

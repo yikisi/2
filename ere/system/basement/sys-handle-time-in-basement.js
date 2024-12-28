@@ -630,7 +630,8 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               if (
                 !fixing &&
                 !fix_character &&
-                get_custom_check(e).is_want_make_love() > 0
+                get_custom_check(e).is_want_make_love() > 0 &&
+                era.get(`base:${e}:体力`) > 100
               ) {
                 rape_character = e;
               } else {
@@ -671,6 +672,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
           (e) =>
             e !== rape_character &&
             sys_check_awake(e) &&
+            era.get(`base:${e}:体力`) > 100 &&
             new LifeEventMarks(e).b_status !==
               1 << basement_status_enum.outside,
         ),

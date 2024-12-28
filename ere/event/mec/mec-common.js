@@ -180,8 +180,12 @@ class CustomizedMec {
     return 0;
   }
 
-  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]} */
-  get_status() {
+  /**
+   * @param {boolean} show_train_buff - if shows the train buff
+   * @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]}
+   */
+  // eslint-disable-next-line no-unused-vars
+  get_status(show_train_buff) {
     return [];
   }
 

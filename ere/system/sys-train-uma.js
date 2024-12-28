@@ -89,7 +89,7 @@ function get_success_base_reward(
   changes,
   between_weeks,
 ) {
-  let base_inc = train_level * 5 + get_random_value(0, 5);
+  let base_inc = train_level * 2 + get_random_value(3, 8);
 
   const train_buff =
     get_train_bonus(chara_id, attr, between_weeks) +

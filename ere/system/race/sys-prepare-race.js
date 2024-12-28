@@ -130,8 +130,8 @@ function sys_prepare_race(list_chara, team_list, race_info) {
   race_info.loc_mind_diff.other_lower[2] = 7.5 * loc_mind_base_diff;
   race_info.loc_mind_diff.other_upper[2] = 8 * loc_mind_base_diff;
 
-  const team_total_attrs = new Array(5).fill(0);
-  const half_attr_border = max_attr - 2 * race_info.extra_attr;
+  const team_total_attrs = new Array(5).fill(0),
+    half_attr_border = max_attr - 2 * race_info.extra_attr;
 
   for (const uma of list_chara) {
     uma.base.skill_count = uma.list_skill.length;
@@ -297,10 +297,10 @@ function sys_prepare_race(list_chara, team_list, race_info) {
 
     // 计算基础属性值（属性值加干劲修正）
     Object.values(attr_enum).forEach((v) => {
+      uma.attrs[v] *= motivation_coefficient;
       if (uma.attrs[v] > half_attr_border) {
         uma.attrs[v] = half_attr_border + (uma.attrs[v] - half_attr_border) / 2;
       }
-      uma.attrs[v] *= motivation_coefficient;
     });
 
     if (team_list.indexOf(uma) !== -1) {
@@ -365,7 +365,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     uma.attrs[attr_enum.intelligence] *=
       mod_attr_intelligence_adapt_style[uma.adapts.style];
 
-    let temptation_prob = -0.01 * (uma.chara === 0);
+    let temptation_prob = -(uma.chara === 0);
     // 计算整个比赛生效的被动属性加成技能
     // 筛除结算完毕的常时被动 只留触发技能给比赛模拟
     uma.list_skill = uma.list_skill.filter((skill) => {
@@ -411,7 +411,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
                 break;
               case ability_type_enum.AllAttrIncrease:
                 uma.attrs = uma.attrs.map(
-                  (attr) => (attr += skill.data.ability_types[i][j]),
+                  (attr) => attr + skill.data.ability_types[i][j],
                 );
                 break;
               case ability_type_enum.Connect:
@@ -433,8 +433,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
 
     // 焦躁计算
     temptation_prob += Math.pow(
-      (6.5 * Math.log(10)) /
-        Math.log(0.1 * uma.attrs[attr_enum.intelligence] + 1),
+      (6.5 * Math.log(10)) / Math.log(0.1 * uma.attrs[attr_enum.toughness] + 1),
       2,
     );
     if (100 * Math.random() < temptation_prob) {
@@ -442,6 +441,8 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     } else {
       uma.base.temptationSpan = 50000;
     }
+
+    // 计算育成加值后
     uma.attrs = uma.attrs.map((e) =>
       Math.min(Math.max(e + race_info.extra_attr, 1), max_attr),
     );

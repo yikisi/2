@@ -40,7 +40,14 @@ async function say_by_mother(_content) {
 module.exports = class extends Love85UtilFuckBuddy {
   async 74(ruby, me, callname, stage, extra_flag, event_object) {
     if (ruby.sex_code !== 0 || me.sex_code === 0) {
-      return super[74](ruby, me, callname, stage, extra_flag, event_object);
+      return await super[74](
+        ruby,
+        me,
+        callname,
+        stage,
+        extra_flag,
+        event_object,
+      );
     }
     const m_call_r = sys_get_callname(0, this.id);
     await print_event_name('母亲的消息', ruby);
