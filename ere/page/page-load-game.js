@@ -155,7 +155,7 @@ module.exports = async () => {
                 }
               });
             }
-            if (!era.get('flag:回合爱慕惩罚')) {
+            if (version < 1111 && !era.get('flag:回合爱慕惩罚')) {
               // 爱慕事件修复
               const events = event_queue.get(),
                 dict = {};
@@ -175,7 +175,7 @@ module.exports = async () => {
                 if (
                   !dict[chara_id] &&
                   (love === 49 || love === 74 || love === 89 || love === 99) &&
-                  !era.get(`cflag:${chara_id}:爱慕暂拒`)
+                  era.get(`cflag:${chara_id}:爱慕暂拒`) !== love
                 ) {
                   era.set(`cflag:${chara_id}:爱慕暂拒`, love);
                 }

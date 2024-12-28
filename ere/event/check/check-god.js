@@ -39,8 +39,6 @@ module.exports = class extends CustomizedCheck {
         event_hooks.week_end,
         new EventObject(this.id, cb_enum.love).set_arg([love]),
       );
-    } else {
-      era.set(`cflag:${this.id}:爱慕暂拒`, love);
     }
   }
 
