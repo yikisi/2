@@ -1,5 +1,5 @@
 # [EraUma v1.11 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.11)
-_incoming_
+_2024/12/28_
 
 适配 [EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.2.1) 及以上版本
 
@@ -31,6 +31,7 @@ _incoming_
       * 干劲加成：干劲一般为100%，每上升/下降一阶段+-2%
       * 技能加成：技能【自制力】-3%
       * 气性加成：普通气性-1%
+* 优化了马跳结果播报界面
 
 ## Fixed
 
