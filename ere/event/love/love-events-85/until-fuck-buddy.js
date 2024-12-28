@@ -13,7 +13,14 @@ const print_event_name = require('#/event/snippets/print-event-name');
 module.exports = class extends CustomizedLove {
   async 49(ruby, me, callname, stage, extra_flag, event_object) {
     if (ruby.sex_code !== 0 || me.sex_code === 0) {
-      return super[49](ruby, me, callname, stage, extra_flag, event_object);
+      return await super[49](
+        ruby,
+        me,
+        callname,
+        stage,
+        extra_flag,
+        event_object,
+      );
     }
     await print_event_name('爱欲', ruby);
     await ruby.print_and_wait(
