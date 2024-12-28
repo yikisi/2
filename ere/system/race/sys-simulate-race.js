@@ -344,11 +344,13 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
         uma.race.velocityReal = uma.base.velocityMin;
         start_delay[uma.index_race] = 0;
       } else {
-        const temp = uma.race.velocityReal;
-        uma.race.velocityReal = Math.max(
-          uma.race.velocityReal + uma.race.acceleration / frame_rate,
-          uma.base.velocityMin,
-        );
+        const temp = (uma.race.velocityReal = Math.min(
+          Math.max(
+            uma.race.velocityReal + uma.race.acceleration / frame_rate,
+            uma.base.velocityMin,
+          ),
+          30,
+        ));
         uma.race.location += (uma.race.velocityReal + temp) / (2 * frame_rate);
         uma.race.staminaCost =
           ((20 / 144) *
