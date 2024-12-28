@@ -229,9 +229,9 @@ function love_uma(chara_id, val, to_be_shown) {
     era.set(`status:${chara_id}:爱意克制`, 1);
   }
   if (
-    !era.get(`cflag:${chara_id}:爱慕暂拒`) &&
     love_limit &&
-    (new_val === 49 || new_val === 74 || new_val === 89 || new_val === 99)
+    (new_val === 49 || new_val === 74 || new_val === 89 || new_val === 99) &&
+    era.get(`cflag:${chara_id}:爱慕暂拒`) !== new_val
   ) {
     (sys_check_hide_relation_and_love(chara_id) & 0b1) > 0 ||
       hide ||
