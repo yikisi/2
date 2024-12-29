@@ -11,7 +11,6 @@ const { get_image } = require('#/system/sys-calc-image');
 const { join_list } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
-const { hair_colors } = require('#/data/const.json');
 const {
   chara_desc,
   chara_full_desc,
@@ -21,6 +20,7 @@ const {
 const { growth_info } = require('#/data/exp-const');
 const {
   get_breast_cup,
+  get_hair_color,
   get_skin,
   get_skin_color,
   get_talent,
@@ -80,16 +80,12 @@ module.exports = {
       { color: get_skin_color(chara.id), content: get_skin(chara.id) },
       ' 的 ',
       {
-        color:
-          hair_colors[hair_color][3] ||
-          `hsl(${hair_colors[hair_color][0]}deg ${hair_colors[hair_color][1]}% ${hair_colors[hair_color][2]}%)`,
+        color: get_hair_color(hair_color),
         content: `${hair_color}发`,
       },
       race
         ? {
-            color:
-              hair_colors[body_hair_color][3] ||
-              `hsl(${hair_colors[body_hair_color][0]}deg ${hair_colors[body_hair_color][1]}% ${hair_colors[body_hair_color][2]}%)`,
+            color: get_hair_color(body_hair_color),
             content: `${body_hair_color}毛`,
           }
         : '',

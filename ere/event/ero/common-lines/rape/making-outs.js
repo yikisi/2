@@ -10,6 +10,7 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const EroMakingOuts = require('#/event/ero/common-lines/interface/ero-making-outs');
 const EroRapedMakingOuts = require('#/event/ero/common-lines/rape/raped-making-outs');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { get_skin_color } = require('#/data/info-generator');
 
@@ -269,13 +270,19 @@ class EroRapeMakingOuts extends EroMakingOuts {
     if (!era.get(`cflag:${defender.id}:种族`)) {
       return;
     }
+    const hair_color = era.get(`cflag:${defender.id}:发色`);
     await attacker.print_and_wait([
       '已经在先前的抚摸中预热到差不多的',
-      era.get(`cstr:${defender.id}:发色`),
-      '色马耳朵，正相当不情愿的贴在头发上试图躲避进一步的侵犯。',
+      {
+        color: get_chara_color(hair_color),
+        content: `${hair_color}色`,
+      },
+      '马耳朵，正相当不情愿的贴在头发上试图躲避进一步的侵犯。',
     ]);
     await attacker.print_and_wait([
-      '不过还是被轻松的抓住了，而后毫不犹豫的肆意拉扯起来，让眼前的赛马娘支支吾吾地吐出了求饶的话语。',
+      '不过还是被轻松的抓住了，而后毫不犹豫的肆意拉扯起来，让眼前的赛',
+      defender.get_uma_sex_title(),
+      '支支吾吾地吐出了求饶的话语。',
     ]);
     await attacker.print_and_wait([
       '因为这粗鲁的玩弄而本能地痉挛抖动起来的耳尖，泛着充血的可爱粉红。',
@@ -389,11 +396,25 @@ class EroRapeMakingOuts extends EroMakingOuts {
         '的小穴。',
       ]);
       await defender.say_and_wait(['咿……不……不要啊……混蛋！']);
+      const body_hair_color = era.get(`cflag:${defender.id}:毛色`),
+        hair_color = era.get(`cflag:${defender.id}:发色`);
       await attacker.print_and_wait([
         '螓首后仰，',
-        era.get(`cstr:${defender.id}:毛色`),
-        '毛的',
-        era.get(`cflag:${defender.id}:种族`) ? '马娘' : '雌性',
+        ...(era.get(`cflag:${defender.id}:种族`)
+          ? [
+              {
+                color: get_chara_color(body_hair_color),
+                content: `${body_hair_color}毛`,
+              },
+              '马娘',
+            ]
+          : [
+              {
+                color: get_chara_color(hair_color),
+                content: `${hair_color}发`,
+              },
+              '雌性',
+            ]),
         '像是中了箭天鹅般吟出了痛苦中夹着愉悦的甜美悲鸣。',
       ]);
     } else {
@@ -523,10 +544,14 @@ class EroRapeMakingOuts extends EroMakingOuts {
       await attacker.print_and_wait([
         '轻轻咬着牙关，身体都微微发抖，却只是勾起了自己的施虐欲。',
       ]);
+      const body_hair_color = era.get(`cflag:${defender.id}:毛色`);
       await attacker.print_and_wait([
         '更过分的缠住',
-        era.get(`cstr:${defender.id}:毛色`),
-        '色的尾巴轻轻勾动。',
+        {
+          color: get_chara_color(body_hair_color),
+          content: `${body_hair_color}色`,
+        },
+        '的尾巴轻轻勾动。',
       ]);
     }
   }

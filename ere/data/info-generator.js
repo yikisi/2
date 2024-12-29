@@ -21,6 +21,7 @@ const {
   el_success_color,
   skin_colors,
 } = require('#/data/color-const');
+const { hair_colors } = require('#/data/const.json');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
 const { lust_border } = require('#/data/ero/orgasm-const');
@@ -579,6 +580,13 @@ module.exports = {
   /** @param {number} chara_id */
   get_skin_color(chara_id) {
     return skin_colors[era.get(`cflag:${chara_id}:肤色深度`) + 1];
+  },
+  /** @param {string} hair_color */
+  get_hair_color(hair_color) {
+    return (
+      hair_colors[hair_color][3] ||
+      `hsl(${hair_colors[hair_color][0]}deg ${hair_colors[hair_color][1]}% ${hair_colors[hair_color][2]}%)`
+    );
   },
   get_talent: (chara_id) => {
     const yandere = era.get(`talent:${chara_id}:病娇`),

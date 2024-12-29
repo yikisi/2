@@ -9,7 +9,6 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors, sex_colors, skin_colors } = require('#/data/color-const');
-const { hair_colors } = require('#/data/const.json');
 const {
   chara_desc,
   chara_full_desc,
@@ -21,6 +20,7 @@ const {
 const {
   get_breast_cup,
   get_filtered_talents,
+  get_hair_color,
   get_talent,
   get_xp,
 } = require('#/data/info-generator');
@@ -70,9 +70,7 @@ const hair_content_cb = [
   (p) => {
     const hair = hair_color_names[p];
     return {
-      color:
-        hair_colors[hair][3] ||
-        `hsl(${hair_colors[hair][0]}deg ${hair_colors[hair][1]}% ${hair_colors[hair][2]}%)`,
+      color: get_hair_color(hair),
       content: hair,
     };
   },
@@ -619,9 +617,7 @@ async function page_custom() {
             config: { width: 23 },
             content: [
               {
-                color:
-                  hair_colors[e][3] ||
-                  `hsl(${hair_colors[e][0]}deg ${hair_colors[e][1]}% ${hair_colors[e][2]}%)`,
+                color: get_hair_color(e),
                 content: `${e}毛`,
               },
             ],
@@ -754,9 +750,7 @@ async function page_custom() {
             ),
             ' | 发色：',
             {
-              color:
-                hair_colors[hair_color][3] ||
-                `hsl(${hair_colors[hair_color][0]}deg ${hair_colors[hair_color][1]}% ${hair_colors[hair_color][2]}%)`,
+              color: get_hair_color(hair_color),
               content: hair_color,
             },
             { isBr: true },
@@ -778,9 +772,7 @@ async function page_custom() {
             { isBr: true },
             '如果马娘化，认为自己将是 ',
             {
-              color:
-                hair_colors[uma_hair_color][3] ||
-                `hsl(${hair_colors[uma_hair_color][0]}deg ${hair_colors[uma_hair_color][1]}% ${hair_colors[uma_hair_color][2]}%)`,
+              color: get_hair_color(uma_hair_color),
               content: `${uma_hair_color}毛 `,
             },
             {

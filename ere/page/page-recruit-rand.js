@@ -19,7 +19,6 @@ const CharaAvailableSkills = require('#/data/chara-available-skills');
 const CharaSkills = require('#/data/chara-skills');
 const { adaptability_colors, el_danger_color } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
-const { hair_colors } = require('#/data/const.json');
 const {
   chara_desc,
   chara_full_desc,
@@ -30,6 +29,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_adaptability_rank,
   get_breast_cup,
+  get_hair_color,
   get_skin,
   get_skin_color,
   get_talent,
@@ -270,15 +270,11 @@ async function print_rec_page() {
               { color: get_skin_color(selected), content: get_skin(selected) },
               ' 的 ',
               {
-                color:
-                  hair_colors[hair_color][3] ||
-                  `hsl(${hair_colors[hair_color][0]}deg ${hair_colors[hair_color][1]}% ${hair_colors[hair_color][2]}%)`,
+                color: get_hair_color(hair_color),
                 content: `${hair_color}发`,
               },
               {
-                color:
-                  hair_colors[body_hair_color][3] ||
-                  `hsl(${hair_colors[body_hair_color][0]}deg ${hair_colors[body_hair_color][1]}% ${hair_colors[body_hair_color][2]}%)`,
+                color: get_hair_color(body_hair_color),
                 content: `${body_hair_color}毛`,
               },
               ' ',
