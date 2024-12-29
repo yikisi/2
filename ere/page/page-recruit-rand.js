@@ -19,7 +19,7 @@ const CharaAvailableSkills = require('#/data/chara-available-skills');
 const CharaSkills = require('#/data/chara-skills');
 const { adaptability_colors, el_danger_color } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
-const { hair_colors, skin_colors } = require('#/data/const.json');
+const { hair_colors } = require('#/data/const.json');
 const {
   chara_desc,
   chara_full_desc,
@@ -31,6 +31,7 @@ const {
   get_adaptability_rank,
   get_breast_cup,
   get_skin,
+  get_skin_color,
   get_talent,
   get_xp,
 } = require('#/data/info-generator');
@@ -211,7 +212,6 @@ async function print_rec_page() {
         name = era.get(`static:${selected}:name`),
         body_hair_color = era.get(`cstr:${selected}:毛色`),
         hair_color = era.get(`cstr:${selected}:发色`),
-        skin = get_skin(selected),
         characteristic = era.get(`cflag:${selected}:气性`),
         sex_code = era.get(`cflag:${selected}:性别`),
         talent_list = [];
@@ -267,7 +267,7 @@ async function print_rec_page() {
           {
             content: [
               '肤色',
-              { color: skin_colors[skin], content: skin },
+              { color: get_skin_color(selected), content: get_skin(selected) },
               ' 的 ',
               {
                 color:

@@ -8,8 +8,8 @@ const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
-const { buff_colors, sex_colors } = require('#/data/color-const');
-const { hair_colors, skin_colors } = require('#/data/const.json');
+const { buff_colors, sex_colors, skin_colors } = require('#/data/color-const');
+const { hair_colors } = require('#/data/const.json');
 const {
   chara_desc,
   chara_full_desc,
@@ -79,13 +79,10 @@ const hair_content_cb = [
   (p) => top_hairs[p],
   (p) => front_hairs[p],
   (p) => back_hairs[p],
-  (p) => {
-    const skin = skin_desc[p + 1];
-    return {
-      color: skin_colors[skin],
-      content: skin,
-    };
-  },
+  (p) => ({
+    color: skin_colors[p + 1],
+    content: skin_desc[p + 1],
+  }),
   (p) => body_hair_type[p],
   (p) => body_hair_type[p],
   (p) => {
@@ -765,7 +762,7 @@ async function page_custom() {
             { isBr: true },
             '肤色：',
             {
-              color: skin_colors[skin_desc[era.get('cflag:0:肤色深度') + 1]],
+              color: skin_colors[era.get('cflag:0:肤色深度') + 1],
               content: skin_desc[era.get('cflag:0:肤色深度') + 1],
             },
             ` | 腋毛：${body_hair_type[era.get('talent:0:腋毛成长')]} | 阴毛：${

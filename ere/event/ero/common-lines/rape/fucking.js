@@ -10,6 +10,7 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const EroFucking = require('#/event/ero/common-lines/interface/ero-fucking');
 const EroRapedFucking = require('#/event/ero/common-lines/rape/raped-fucking');
 
+const { get_skin_color } = require('#/data/info-generator');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const skin_color_desc = ['象牙白', '白皙', '红润', '浅褐色'];
@@ -64,8 +65,12 @@ async function continue_fucking_common(attacker, defender) {
           '像是布娃娃一样任人摆布，或是听话的性爱机器一样被把玩便发出淫声。',
         ]);
         defender.print_and_wait([
-          skin_color_desc[era.get(`cflag:${defender.id}:肤色深度`)],
-          ' 的躯体颤抖，扭捏。',
+          {
+            color: get_skin_color(defender.id),
+            content:
+              skin_color_desc[era.get(`cflag:${defender.id}:肤色深度`) + 1],
+          },
+          '的躯体颤抖，扭捏。',
         ]);
         defender.say_and_wait(['呜，呜啊……']);
         defender.print_and_wait([

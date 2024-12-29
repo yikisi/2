@@ -1,3 +1,4 @@
+/** @author O口口口口口 */
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');

@@ -11,6 +11,7 @@ const EroMakingOuts = require('#/event/ero/common-lines/interface/ero-making-out
 const EroRapedMakingOuts = require('#/event/ero/common-lines/rape/raped-making-outs');
 
 const { stain_enum } = require('#/data/ero/stain-const');
+const { get_skin_color } = require('#/data/info-generator');
 
 const virgin_color_desc = ['粉嫩可人', '红润泛紫', '深邃成熟'];
 const skin_color_desc = ['象牙白', '白皙', '红润', '浅褐色'];
@@ -458,14 +459,18 @@ class EroRapeMakingOuts extends EroMakingOuts {
     if (hook.arg) {
       await attacker.print_and_wait([
         '既不是以触诊，也不是以什么恋人的身份，而是违背了对方意愿的把玩着眼前',
-        era.get(`cflag:${defender.id}:种族`)
-          ? defender.get_uma_sex_title()
-          : '',
+        (era.get(`cflag:${defender.id}:种族`)
+          ? defender.get_uma_sex_title
+          : defender.get_phy_sex_title)(),
         '的大腿。',
       ]);
       await attacker.print_and_wait([
         '有着',
-        skin_color_desc[era.get(`cflag:${defender.id}:肤色深度`)],
+        {
+          color: get_skin_color(defender.id),
+          content:
+            skin_color_desc[era.get(`cflag:${defender.id}:肤色深度`) + 1],
+        },
         '的皮肤和恰到好处的肉感。',
       ]);
       await attacker.print_and_wait([

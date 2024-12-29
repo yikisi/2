@@ -16,7 +16,11 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const calc_attr_score = require('#/data/calc-attr-score');
 const chara_score = require('#/data/chara-score-table.json');
-const { buff_colors, el_success_color } = require('#/data/color-const');
+const {
+  buff_colors,
+  el_success_color,
+  skin_colors,
+} = require('#/data/color-const');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
 const { lust_border } = require('#/data/ero/orgasm-const');
@@ -571,6 +575,10 @@ module.exports = {
   /** @param {number} chara_id */
   get_skin(chara_id) {
     return skin_desc[era.get(`cflag:${chara_id}:肤色深度`) + 1];
+  },
+  /** @param {number} chara_id */
+  get_skin_color(chara_id) {
+    return skin_colors[era.get(`cflag:${chara_id}:肤色深度`) + 1];
   },
   get_talent: (chara_id) => {
     const yandere = era.get(`talent:${chara_id}:病娇`),
