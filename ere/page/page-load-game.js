@@ -16,6 +16,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
+const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { cb_enum } = require('#/event/queue');
 
@@ -155,31 +156,41 @@ module.exports = async () => {
                 }
               });
             }
-            if (version < 1111 && !era.get('flag:回合爱慕惩罚')) {
-              // 爱慕事件修复
-              const events = event_queue.get(),
-                dict = {};
-              Object.values(events).forEach((l) =>
-                l.forEach((e) => {
+            if (version < 1111) {
+              if (era.get('cflag:0:模版角色') !== 32) {
+                new TachyonLifeMarks().drug_notice =
+                  Math.max(48 - era.get('flag:当前回合数'), 0) +
+                  get_random_value(1, 25);
+              }
+              if (!era.get('flag:回合爱慕惩罚')) {
+                // 爱慕事件修复
+                const events = event_queue.get(),
+                  dict = {};
+                Object.values(events).forEach((l) =>
+                  l.forEach((e) => {
+                    if (
+                      e.type === cb_enum.love &&
+                      e.arg instanceof Array &&
+                      (e[0] === 49 || e[0] === 74 || e[0] === 89 || e[0] === 99)
+                    ) {
+                      dict[e.chara_id] = 1;
+                    }
+                  }),
+                );
+                era.getAddedCharacters().forEach((chara_id) => {
+                  const love = era.get(`love:${chara_id}`);
                   if (
-                    e.type === cb_enum.love &&
-                    e.arg instanceof Array &&
-                    (e[0] === 49 || e[0] === 74 || e[0] === 89 || e[0] === 99)
+                    !dict[chara_id] &&
+                    (love === 49 ||
+                      love === 74 ||
+                      love === 89 ||
+                      love === 99) &&
+                    era.get(`cflag:${chara_id}:爱慕暂拒`) !== love
                   ) {
-                    dict[e.chara_id] = 1;
+                    era.set(`cflag:${chara_id}:爱慕暂拒`, love);
                   }
-                }),
-              );
-              era.getAddedCharacters().forEach((chara_id) => {
-                const love = era.get(`love:${chara_id}`);
-                if (
-                  !dict[chara_id] &&
-                  (love === 49 || love === 74 || love === 89 || love === 99) &&
-                  era.get(`cflag:${chara_id}:爱慕暂拒`) !== love
-                ) {
-                  era.set(`cflag:${chara_id}:爱慕暂拒`, love);
-                }
-              });
+                });
+              }
             }
             return true;
           } else {
