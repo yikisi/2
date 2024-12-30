@@ -668,7 +668,7 @@ async function chara_skill() {
   const skill_data = await find_many_skills({
     id: { in: Object.keys(skill_dict).map(Number) },
   });
-  const translate_dict = require('./text_data.json');
+  const translate_dict = require('../../common/skill/text_data.json');
   const enable_translate = true;
   const skill_text = (
     await prisma.text_data.findMany({

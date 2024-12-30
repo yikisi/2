@@ -1,6 +1,6 @@
 const { existsSync, readFileSync, writeFileSync } = require('fs');
 
-const lines = readFileSync('./uma-data.csv', 'utf-8')
+const lines = readFileSync('../../common/uma/uma-data.csv', 'utf-8')
   .replace(/^\ufeff/, '')
   .split('\n')
   .filter((e) => e);

@@ -1,6 +1,6 @@
 const { writeFileSync } = require('fs');
 
-const mob = require('./uma-mob.json');
+const mob = require('../../common/uma/uma-mob.json');
 
 const passer_bys = [],
   blood = {};
