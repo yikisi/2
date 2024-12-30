@@ -9,6 +9,7 @@ const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const event_queue = require('#/event/queue');
+const { cb_enum } = require('#/event/queue');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -19,7 +20,6 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { first_child_id } = require('#/data/other-const');
-const { cb_enum } = require('#/event/queue');
 
 /**
  * load game
