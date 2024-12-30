@@ -117,7 +117,7 @@ async function sys_next_week() {
           chara_id,
           prison:
             (!era.get('item:透明棉被') || Math.random() < 0.5) &&
-            !new LifeEventMarks(chara_id).b_cd &&
+            !LifeEventMarks.get_marks(chara_id).b_cd &&
             era.get('flag:当前位置') !== location_enum.basement,
         });
       } else if (get_custom_check(chara_id).is_rape_in_sleeping()) {
@@ -186,7 +186,7 @@ async function sys_next_week() {
       auto_update_ero_skills(chara_id);
     }
     if (era.get(`talent:${chara_id}:病娇`) === 2) {
-      const life_event_marks = new LifeEventMarks(chara_id);
+      const life_event_marks = LifeEventMarks.get_marks(chara_id);
       if (era.get(`relation:${chara_id}:0`) > 525) {
         if (--life_event_marks.yandere === 0) {
           era.set(`talent:${chara_id}:病娇`, 1);
@@ -606,7 +606,7 @@ async function sys_next_week() {
       is_always_special = is_pregnant_slave;
 
     let pregnant_stage = era.get(`cflag:${chara_id}:妊娠阶段`);
-    const life_marks = new LifeEventMarks(chara_id);
+    const life_marks = LifeEventMarks.get_marks(chara_id);
     life_marks.b_cd && life_marks.b_cd--;
     if (pregnant_stage >> pregnant_stage_enum.embryo) {
       sys_change_lust(chara_id, lust_border.itch / 40);
@@ -619,7 +619,7 @@ async function sys_next_week() {
         `base:${chara_id}:体重偏差`,
         get_random_value(50 + timer * 5, 150 + timer * 10),
       );
-      const life_marks = new LifeEventMarks(chara_id);
+      const life_marks = LifeEventMarks.get_marks(chara_id);
       if (
         life_marks.report &&
         (era.get(`mark:${chara_id}:淫纹`) === 3 || timer >= 4)
@@ -899,7 +899,7 @@ async function sys_next_week() {
           40,
       );
     }
-    const edu_marks = new EduEventMarks(chara_id);
+    const edu_marks = EduEventMarks.get_marks(chara_id);
     edu_marks._r_e_check = 2;
     get_custom_check(chara_id).check_next_week();
     edu_marks._r_e_check = 0;

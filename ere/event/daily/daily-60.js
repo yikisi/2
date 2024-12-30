@@ -544,7 +544,7 @@ module.exports = class extends CustomizedDaily {
     const nice_nature = get_chara_talk(60);
     if (
       era.get('cflag:60:妊娠阶段') >> pregnant_stage_enum.embryo &&
-      !new LifeEventMarks(60).report
+      !LifeEventMarks.get_marks(60).report
     ) {
       await nice_nature.say_and_wait(
         `啊哈，是吗，果然内恰小姐还是……但是等等，不行，${sys_get_callname(

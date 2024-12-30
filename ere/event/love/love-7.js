@@ -486,8 +486,8 @@ module.exports = class extends CustomizedLove {
           content: '「哪个都不选……！」',
           type: 'button',
         });
+        era.replaceInColRows(buffer);
       }
-      era.replaceInColRows(buffer);
     }, 10000);
     ret.push(await era.input());
     era.println();

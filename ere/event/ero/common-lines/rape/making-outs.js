@@ -8,8 +8,11 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const EroMakingOuts = require('#/event/ero/common-lines/interface/ero-making-outs');
+const EroRapedMakingOuts = require('#/event/ero/common-lines/rape/raped-making-outs');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { stain_enum } = require('#/data/ero/stain-const');
+const { get_skin_color } = require('#/data/info-generator');
 
 const virgin_color_desc = ['粉嫩可人', '红润泛紫', '深邃成熟'];
 const skin_color_desc = ['象牙白', '白皙', '红润', '浅褐色'];
@@ -71,9 +74,9 @@ async function deep_blow_job_common(attacker, defender, hook) {
 async function common_hand_job(attacker, defender, hook) {
   if (hook.arg) {
     await attacker.print_and_wait([
-      '权力也好，武力也罢，总之是让名叫',
-      sys_get_colored_callname(attacker.id, defender.id),
-      '的',
+      '权力也好，武力也罢，总之是让名叫 ',
+      defender.get_colored_actual_name(),
+      ' 的',
       era.get(`cflag:${defender.id}:种族`) ? '马耳朵' : '',
       defender.get_phy_sex_title(),
       '意识到了现在只能配合自己的事实。',
@@ -117,27 +120,11 @@ async function common_deep_blow_job(attacker, defender, hook) {
     await attacker.print_and_wait([
       '整个嘴巴的空间被完全征用，形成一个近乎真空的口穴。',
     ]);
-    await attacker.say_and_wait(['咕呃～']);
+    await defender.say_and_wait(['咕呃～']);
     await attacker.print_and_wait(['方才满是牢骚的小嘴现在只能做吮吸的动作。']);
   } else {
-    await defender.print_and_wait([
-      '一根、两根……鼻子完全没入浓郁的森林中，雄性的气味夹杂着浓郁的腥臭。',
-    ]);
-    await defender.print_and_wait([
-      '却被自己的鼻腔一点一点熟悉，与已经伸入到喉咙的肉棒交融在一起。',
-    ]);
-    await defender.print_and_wait([
-      '奋力想把肉棒从喉中反吐出来，但',
-      sys_get_colored_callname(defender.id, attacker.id),
-      '的手掌已经牢牢控制住了自己的脑袋，按着自己的双耳。',
-    ]);
-    await defender.say_and_wait(['咕～']);
-    await defender.print_and_wait([
-      '脖颈上，不断起伏的食管响动着液体流入胃中的淫靡声。',
-    ]);
+    await deep_blow_job_common(attacker, defender, hook);
   }
-  era.println();
-  await deep_blow_job_common(attacker, defender, hook);
 }
 
 /**
@@ -194,11 +181,11 @@ async function common_tit_job(attacker, defender, hook) {
 async function tit_and_blow_job(attacker, defender, hook) {
   if (hook.arg) {
     await attacker.print_and_wait([
-      '故意挺腰，让从乳肉间探出来的龟头戳在的唇上，',
+      '故意挺腰，让从乳肉间探出来的龟头戳在的唇上，向 ',
       sys_get_colored_callname(attacker.id, defender.id),
       ' 示意现在是该张嘴的时候了。',
     ]);
-    await attacker.say_and_wait(['唔……']);
+    await defender.say_and_wait(['唔……']);
     await attacker.print_and_wait([
       sys_get_colored_callname(attacker.id, defender.id),
       ' 却只是紧皱着眉头，抿住嘴唇露出了一幅微微呲着牙的表情，就是不愿意张嘴。',
@@ -231,6 +218,19 @@ async function tit_and_blow_job(attacker, defender, hook) {
 }
 
 class EroRapeMakingOuts extends EroMakingOuts {
+  /** @type {EroMakingOuts} */
+  raped;
+
+  constructor(root) {
+    super(root);
+    this.raped = new EroRapedMakingOuts(root);
+  }
+
+  /** @param {boolean} is_raper */
+  get_this(is_raper) {
+    return is_raper ? this : this.raped;
+  }
+
   /** @author ALEX */
   async pet_ear(attacker, defender, hook) {
     if (!era.get(`cflag:${defender.id}:种族`)) {
@@ -270,13 +270,19 @@ class EroRapeMakingOuts extends EroMakingOuts {
     if (!era.get(`cflag:${defender.id}:种族`)) {
       return;
     }
+    const hair_color = era.get(`cflag:${defender.id}:发色`);
     await attacker.print_and_wait([
       '已经在先前的抚摸中预热到差不多的',
-      era.get(`cstr:${defender.id}:发色`),
-      '色马耳朵，正相当不情愿的贴在头发上试图躲避进一步的侵犯。',
+      {
+        color: get_chara_color(hair_color),
+        content: `${hair_color}色`,
+      },
+      '马耳朵，正相当不情愿的贴在头发上试图躲避进一步的侵犯。',
     ]);
     await attacker.print_and_wait([
-      '不过还是被轻松的抓住了，而后毫不犹豫的肆意拉扯起来，让眼前的赛马娘支支吾吾地吐出了求饶的话语。',
+      '不过还是被轻松的抓住了，而后毫不犹豫的肆意拉扯起来，让眼前的赛',
+      defender.get_uma_sex_title(),
+      '支支吾吾地吐出了求饶的话语。',
     ]);
     await attacker.print_and_wait([
       '因为这粗鲁的玩弄而本能地痉挛抖动起来的耳尖，泛着充血的可爱粉红。',
@@ -390,11 +396,25 @@ class EroRapeMakingOuts extends EroMakingOuts {
         '的小穴。',
       ]);
       await defender.say_and_wait(['咿……不……不要啊……混蛋！']);
+      const body_hair_color = era.get(`cflag:${defender.id}:毛色`),
+        hair_color = era.get(`cflag:${defender.id}:发色`);
       await attacker.print_and_wait([
         '螓首后仰，',
-        era.get(`cstr:${defender.id}:毛色`),
-        '毛的',
-        era.get(`cflag:${defender.id}:种族`) ? '马娘' : '雌性',
+        ...(era.get(`cflag:${defender.id}:种族`)
+          ? [
+              {
+                color: get_chara_color(body_hair_color),
+                content: `${body_hair_color}毛`,
+              },
+              '马娘',
+            ]
+          : [
+              {
+                color: get_chara_color(hair_color),
+                content: `${hair_color}发`,
+              },
+              '雌性',
+            ]),
         '像是中了箭天鹅般吟出了痛苦中夹着愉悦的甜美悲鸣。',
       ]);
     } else {
@@ -460,14 +480,18 @@ class EroRapeMakingOuts extends EroMakingOuts {
     if (hook.arg) {
       await attacker.print_and_wait([
         '既不是以触诊，也不是以什么恋人的身份，而是违背了对方意愿的把玩着眼前',
-        era.get(`cflag:${defender.id}:种族`)
-          ? defender.get_uma_sex_title()
-          : '',
+        (era.get(`cflag:${defender.id}:种族`)
+          ? defender.get_uma_sex_title
+          : defender.get_phy_sex_title)(),
         '的大腿。',
       ]);
       await attacker.print_and_wait([
         '有着',
-        skin_color_desc[era.get(`cflag:${defender.id}:肤色深度`)],
+        {
+          color: get_skin_color(defender.id),
+          content:
+            skin_color_desc[era.get(`cflag:${defender.id}:肤色深度`) + 1],
+        },
         '的皮肤和恰到好处的肉感。',
       ]);
       await attacker.print_and_wait([
@@ -520,10 +544,14 @@ class EroRapeMakingOuts extends EroMakingOuts {
       await attacker.print_and_wait([
         '轻轻咬着牙关，身体都微微发抖，却只是勾起了自己的施虐欲。',
       ]);
+      const body_hair_color = era.get(`cflag:${defender.id}:毛色`);
       await attacker.print_and_wait([
         '更过分的缠住',
-        era.get(`cstr:${defender.id}:毛色`),
-        '色的尾巴轻轻勾动。',
+        {
+          color: get_chara_color(body_hair_color),
+          content: `${body_hair_color}色`,
+        },
+        '的尾巴轻轻勾动。',
       ]);
     }
   }

@@ -63,7 +63,7 @@ function get_random_value(min, max, is_float) {
   if (min >= max) {
     return min;
   }
-  const life_marks = new LifeEventMarks(0);
+  const life_marks = LifeEventMarks.get_marks(0);
   life_marks.b_r_seed = (life_marks.b_r_seed * 9301 + 49297) % 233280;
   const value = min + ((max - min + 1) * life_marks.b_r_seed) / 233280;
   if (is_float) {
@@ -80,7 +80,7 @@ sys_handle_time_in_basement.init(get_random_value);
  * @param {{after_select:boolean,homepage:boolean,week_start:boolean}} flags
  */
 module.exports = async (_, save_and_next_week, flags) => {
-  const my_life_marks = new LifeEventMarks(0),
+  const my_life_marks = LifeEventMarks.get_marks(0),
     basement_info = [],
     basement_owners = new BasementOwners(),
     me = get_chara_talk(0);
@@ -108,7 +108,8 @@ module.exports = async (_, save_and_next_week, flags) => {
     ...sort_list(
       basement_owners.filter(
         (e) =>
-          new LifeEventMarks(e).b_status !== 1 << basement_status_enum.outside,
+          LifeEventMarks.get_marks(e).b_status !==
+          1 << basement_status_enum.outside,
       ),
       (e, i) => (!sys_check_awake(e) << 1) + i,
       true,
@@ -122,7 +123,7 @@ module.exports = async (_, save_and_next_week, flags) => {
   if (chara_list.length > 1) {
     if (
       chara_list.length === 2 &&
-      new LifeEventMarks(chara_list[1]).b_status ===
+      LifeEventMarks.get_marks(chara_list[1]).b_status ===
         1 << basement_status_enum.just_back
     ) {
       strike = true;
@@ -177,7 +178,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           .filter((_, i) => i < is_awake)
           .forEach((e) => {
             sys_like_chara(e, 0, get_random_value(10, 20), false);
-            const life_marks = new LifeEventMarks(e),
+            const life_marks = LifeEventMarks.get_marks(e),
               relation = era.get(`relation:${e}:0`);
             if (
               relation > 0 &&
@@ -310,7 +311,8 @@ module.exports = async (_, save_and_next_week, flags) => {
               (sys_get_strength_ratio_in_fight(0, chara_list[1]) +
                 sys_get_intelligence_ratio_in_fight(0, chara_list[1]))
           ) {
-            new LifeEventMarks(chara_list[1]).b_escape = escape_enum.strike;
+            LifeEventMarks.get_marks(chara_list[1]).b_escape =
+              escape_enum.strike;
             await get_custom_basement(chara_list[1]).strike_success();
             my_life_marks.b_status = 1 << basement_status_enum.escape;
             my_life_marks.b_now = -1;
@@ -322,7 +324,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             my_life_marks.b_enhance = Math.min(
               my_life_marks.b_enhance +
                 basement_owners.get().reduce((p, c) => {
-                  const life_marks = new LifeEventMarks(c);
+                  const life_marks = LifeEventMarks.get_marks(c);
                   life_marks.b_s_level = Math.min(5, life_marks.b_s_level + 2);
                   return (
                     p + (get_random_value(0, 100) < life_marks.b_s_level * 40)
@@ -372,7 +374,8 @@ module.exports = async (_, save_and_next_week, flags) => {
                 Math.max(my_life_marks.b_now + !!my_life_marks.b_now + 1, 2)
             ) {
               beat_list.forEach(
-                (e) => (new LifeEventMarks(e).b_escape = escape_enum.beat),
+                (e) =>
+                  (LifeEventMarks.get_marks(e).b_escape = escape_enum.beat),
               );
               await get_custom_basement(beat_list[0]).battle_escape();
               my_life_marks.b_status = 1 << basement_status_enum.escape;
@@ -386,7 +389,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             my_life_marks.b_enhance = Math.min(
               my_life_marks.b_enhance +
                 basement_owners.get().reduce((p, c) => {
-                  const life_marks = new LifeEventMarks(c);
+                  const life_marks = LifeEventMarks.get_marks(c);
                   life_marks.b_s_level = Math.min(
                     5,
                     life_marks.b_s_level + 1 + (chara_list.indexOf(c) !== -1),
@@ -421,7 +424,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           ) {
             await get_custom_basement(chara_list[1]).ask_release_agree();
             my_life_marks.b_now = -1;
-            new LifeEventMarks(chara_list[1]).b_escape = -1;
+            LifeEventMarks.get_marks(chara_list[1]).b_escape = -1;
             my_life_marks.b_status = 1 << basement_status_enum.escape;
           } else {
             await get_custom_basement(chara_list[1]).ask_release_reject();

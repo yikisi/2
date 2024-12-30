@@ -19,7 +19,7 @@ const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const { yes } = require('#/data/event/recruit-flags');
+const recruit_flags = require('#/data/event/recruit-flags');
 const YandereList = require('#/data/event/yandere-list');
 const {
   get_breast_cup,
@@ -274,8 +274,8 @@ CustomizedInit.init_chara = init_chara;
  * @param {boolean} [from_init]
  */
 function reset_chara(chara_id, from_init) {
-  if (era.get(`cflag:${chara_id}:种族`)) {
-    if (era.get(`cflag:${chara_id}:招募状态`) === yes) {
+  if (era.get(`cflag:${chara_id}:种族`) > 0) {
+    if (era.get(`cflag:${chara_id}:招募状态`) === recruit_flags.yes) {
       if (
         era.get('flag:当前月') <= 3 &&
         (era.get(`cflag:${chara_id}:育成回合计时`) === 'x' ||
@@ -294,6 +294,8 @@ function reset_chara(chara_id, from_init) {
         `juel:${chara_id}:粉`,
         era.set(`juel:${chara_id}:蓝`, era.set(`juel:${chara_id}:白`, 0)),
       );
+    } else if (!from_init) {
+      era.set(`cflag:${chara_id}:育成回合计时`, 4800);
     }
     attr_names.forEach((v) =>
       era.set(`base:${chara_id}:${v}`, era.get(`cflag:${chara_id}:初始${v}`)),

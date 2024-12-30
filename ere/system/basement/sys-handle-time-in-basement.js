@@ -86,14 +86,14 @@ function handle_prison_again(my_marks, owner_marks, owner_id, is_back) {
     }
     if (my_marks.b_now < 0) {
       new BasementOwners().for_each((e) => {
-        new LifeEventMarks(e).b_escape = 0;
+        LifeEventMarks.get_marks(e).b_escape = 0;
         sys_like_chara(e, 0, -50 - 30 * (e === owner_id), false);
         sys_change_pressure(e, get_random_value(100, 500));
       });
       my_marks.b_now = 1;
     } else {
       new BasementOwners().for_each((e) => {
-        new LifeEventMarks(e).b_escape = 0;
+        LifeEventMarks.get_marks(e).b_escape = 0;
         sys_like_chara(e, 0, -20 - 30 * (e === owner_id), false);
         sys_change_pressure(e, get_random_value(100, 500));
       });
@@ -115,7 +115,7 @@ function handle_prison_again(my_marks, owner_marks, owner_id, is_back) {
 async function handle_rape(part_list, my_life_marks, is_rape) {
   const cache = {};
   part_list.forEach((e) => {
-    new LifeEventMarks(e).b_status = 1 << basement_status_enum.sex;
+    LifeEventMarks.get_marks(e).b_status = 1 << basement_status_enum.sex;
     if (e) {
       cache[e] = era.get(`relation:${e}:0`);
     }
@@ -129,7 +129,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
     .filter((a) => a.type === action_type_enum.digestive_end)
     .forEach((a) => {
       sys_change_attr_and_print(a.chara_id, '体力', get_random_value(100, 200));
-      new LifeEventMarks(a.chara_id).b_food_buff = 0;
+      LifeEventMarks.get_marks(a.chara_id).b_food_buff = 0;
     });
   begin_and_init_ero(...part_list);
   if (is_rape) {
@@ -213,7 +213,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
         false,
       );
     }
-    const life_marks = new LifeEventMarks(e),
+    const life_marks = LifeEventMarks.get_marks(e),
       relation = era.get(`relation:${e}:0`);
     if (
       !is_rape &&
@@ -238,8 +238,8 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
  */
 async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
   new BasementOwners().for_each((e) => {
-    if ((new LifeEventMarks(e).b_status & basement_just_status) > 0) {
-      new LifeEventMarks(e).b_status = 1 << basement_status_enum.idle;
+    if ((LifeEventMarks.get_marks(e).b_status & basement_just_status) > 0) {
+      LifeEventMarks.get_marks(e).b_status = 1 << basement_status_enum.idle;
     }
   });
   let new_timer,
@@ -248,7 +248,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
   era.drawLine();
   const actions = basement_queue.get_action();
   for (const action of actions) {
-    const life_marks = new LifeEventMarks(action.chara_id);
+    const life_marks = LifeEventMarks.get_marks(action.chara_id);
     new_timer = action.timer;
     switch (action.type) {
       case action_type_enum.action_end:
@@ -284,7 +284,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         }
         if (!action.chara_id || sys_check_awake(0)) {
           wait_flag = 1;
-          const owner_marks = new LifeEventMarks(basement_owners.get(0));
+          const owner_marks = LifeEventMarks.get_marks(basement_owners.get(0));
           if (
             (life_marks.b_start || owner_marks.b_start) &&
             !print_handler &&
@@ -364,7 +364,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
       case action_type_enum.rescue:
         if (my_life_marks.b_now >= 0) {
           const owner = basement_owners.get(0),
-            life_marks_o = new LifeEventMarks(owner),
+            life_marks_o = LifeEventMarks.get_marks(owner),
             relation_check =
               (era.get('flag:极端行为限制') || 1) *
                 era.get(`love:${action.chara_id}`) -
@@ -484,7 +484,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
     let fix_character = 0,
       rape_character = 0;
     [0, ...basement_owners.get()].forEach((e) => {
-      const life_marks = new LifeEventMarks(e);
+      const life_marks = LifeEventMarks.get_marks(e);
       if (delta > 0 && (life_marks.b_status & basement_no_cost_status) === 0) {
         let stamina_delta, time_delta;
         if (
@@ -599,7 +599,8 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         } else {
           const fixing = basement_owners.count(
             (e) =>
-              new LifeEventMarks(e).b_status === 1 << basement_status_enum.fix,
+              LifeEventMarks.get_marks(e).b_status ===
+              1 << basement_status_enum.fix,
           );
           if (
             !fixing &&
@@ -663,7 +664,9 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
       rape_character &&
       !fix_character &&
       !basement_owners.count(
-        (e) => new LifeEventMarks(e).b_status === 1 << basement_status_enum.fix,
+        (e) =>
+          LifeEventMarks.get_marks(e).b_status ===
+          1 << basement_status_enum.fix,
       )
     ) {
       const part_list = [
@@ -673,7 +676,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             e !== rape_character &&
             sys_check_awake(e) &&
             era.get(`base:${e}:体力`) > 100 &&
-            new LifeEventMarks(e).b_status !==
+            LifeEventMarks.get_marks(e).b_status !==
               1 << basement_status_enum.outside,
         ),
       ];
@@ -683,7 +686,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
       await handle_rape([0, ...part_list], my_life_marks, true);
     } else {
       if (fix_character) {
-        new LifeEventMarks(fix_character).b_status =
+        LifeEventMarks.get_marks(fix_character).b_status =
           1 << basement_status_enum.fix;
         basement_queue.add_action(
           new BasementAction(
@@ -704,7 +707,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         }
       }
       out_characters.forEach((e) => {
-        const life_marks = new LifeEventMarks(e);
+        const life_marks = LifeEventMarks.get_marks(e);
         life_marks.b_status = 1 << basement_status_enum.outside;
         if (sys_check_awake(0)) {
           wait_flag = 1;

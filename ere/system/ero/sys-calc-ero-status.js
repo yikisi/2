@@ -230,7 +230,7 @@ module.exports = {
       (era.get(`talent:${chara_id}:乳头类型`) === 2) +
       (nipple || 0) +
       Math.floor(era.get(`base:${chara_id}:体重偏差`) / 2000) +
-      new LifeEventMarks(chara_id).breast_buff;
+      LifeEventMarks.get_marks(chara_id).breast_buff;
     // 母乳体质最小A
     if (
       chara_sex - 1 &&
@@ -387,7 +387,7 @@ module.exports = {
   get_waist_size(chara_id) {
     return (
       era.get(`cflag:${chara_id}:腰围`) +
-      new LifeEventMarks(chara_id).waist_buff +
+      LifeEventMarks.get_marks(chara_id).waist_buff +
       Math.floor(era.get(`base:${chara_id}:体重偏差`) / 1000)
     );
   },

@@ -107,7 +107,7 @@ module.exports = class extends CustomizedBase {
 
   back_basement() {
     const callname = sys_get_colored_callname(this.id, 0),
-      life_marks = new LifeEventMarks(this.id),
+      life_marks = LifeEventMarks.get_marks(this.id),
       pama = get_chara_talk(this.id);
     if (life_marks.b_start) {
       if (era.get('base:0:体力') < 100) {
@@ -220,7 +220,7 @@ module.exports = class extends CustomizedBase {
     }
     const me = get_chara_talk(0),
       pama = get_chara_talk(this.id);
-    switch (new LifeEventMarks(this.id).b_s_level) {
+    switch (LifeEventMarks.get_marks(this.id).b_s_level) {
       case 1:
         return [
           pama.get_colored_name(),

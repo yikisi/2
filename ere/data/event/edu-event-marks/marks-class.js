@@ -5,11 +5,22 @@ class EduEventMarks extends PersonalEventMarks {
   // 随机事件检查
   _r_e_check;
 
-  /** @param {number} chara_id */
+  /**
+   * @param {number} chara_id
+   * @returns {EduEventMarks}
+   */
+  static get_marks(chara_id) {
+    const ret = new EduEventMarks(chara_id);
+    PersonalEventMarks.register_marks(ret);
+    return ret;
+  }
+
+  /**
+   * @protected
+   * @param {number} chara_id
+   */
   constructor(chara_id) {
     super(chara_id, '育成用变量');
-    if (this.constructor.toString().startsWith('class EduEventMarks'))
-      PersonalEventMarks.register_marks(this);
   }
 }
 

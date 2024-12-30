@@ -62,7 +62,7 @@ handlers[ero_hooks.become_lubrication] = (chara_id, _, extra_flag) => {
 };
 
 handlers[ero_hooks.prison] = (chara_id) => {
-  const life_marks = new LifeEventMarks(chara_id);
+  const life_marks = LifeEventMarks.get_marks(chara_id);
   if (era.get(`talent:${chara_id}:病娇`) === 1) {
     era.set(`talent:${chara_id}:病娇`, 2);
     life_marks.yandere = get_random_value(
@@ -115,7 +115,8 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
 ) => {
   const { father_id, mother_id } = extra_flag,
     love = era.get(`love:${mother_id || father_id}`),
-    unexpected_pregnant = new LifeEventMarks(mother_id).unexpected_pregnant;
+    unexpected_pregnant =
+      LifeEventMarks.get_marks(mother_id).unexpected_pregnant;
   era.println();
   let wait_flag;
   if (mother_id) {

@@ -725,7 +725,7 @@ module.exports = class extends CustomizedDaily {
     const flash = get_chara_talk(37);
     if (
       (era.get('cflag:37:妊娠阶段') !== 1 << pregnant_stage_enum.no &&
-        !new LifeEventMarks(37).report) ||
+        !LifeEventMarks.get_marks(37).report) ||
       era.get(`exp:37:生产次数`) > 0
     ) {
       await flash.say_and_wait('是吗……你最终还是做出了这样的选择啊。');

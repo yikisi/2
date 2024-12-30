@@ -8,8 +8,9 @@ const { get, printAndWait } = require('#/era-electron');
 const LoveGod = require('#/event/love/snippets/love-god');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { skin_colors } = require('#/data/const.json');
-const { get_skin } = require('#/data/info-generator');
+const { skin_colors } = require('#/data/color-const');
+const { skin_desc } = require('#/data/ero/status-const');
+const { get_skin, get_skin_color } = require('#/data/info-generator');
 
 module.exports = class extends LoveGod {
   /** @param {number} chara_id */
@@ -55,7 +56,7 @@ module.exports = class extends LoveGod {
       '这也是梦的一环吗…以一个出奇淡漠的视角，',
       me.get_colored_name(),
       ' 看着自己的房间里多出了一只红色头发、肤色',
-      { color: skin_colors['麦黄'], content: '麦黄' },
+      { color: skin_colors.at(-1), content: skin_desc.at(-1) },
       '的马娘，看着',
       god.get_colored_sex(),
       '像雌豹一样将床上的 ',
@@ -86,9 +87,9 @@ module.exports = class extends LoveGod {
       ...(get('cflag:0:肤色深度') === get('cflag:340:肤色深度')
         ? ['褐肤的女神屈从在了那与自己有着相同的肤色的孩子之下。']
         : [
-            { color: skin_colors['麦黄'], content: '麦黄' },
+            { color: skin_colors.at(-1), content: skin_desc.at(-1) },
             '被',
-            { color: skin_colors[get_skin(0)], content: get_skin(0) },
+            { color: get_skin_color(0), content: get_skin(0) },
             '压倒',
           ]),
     ]);

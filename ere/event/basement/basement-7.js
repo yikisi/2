@@ -80,7 +80,7 @@ module.exports = class extends CustomizedBase {
   async ask_time(date, hours, minutes) {
     const gold_ship = get_chara_talk(7),
       me = get_chara_talk(0),
-      life_marks = new LifeEventMarks(this.id);
+      life_marks = LifeEventMarks.get_marks(this.id);
     await era.printAndWait([
       me.get_colored_name(),
       ' 向 ',

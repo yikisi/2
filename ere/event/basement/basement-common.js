@@ -93,7 +93,7 @@ class CustomizedBase {
   welcome() {
     const me = get_chara_talk(0),
       chara = get_chara_talk(this.id);
-    if (new LifeEventMarks(0).b_start) {
+    if (LifeEventMarks.get_marks(0).b_start) {
       era.print([
         '不知过了多久，',
         me.get_colored_name(),
@@ -139,7 +139,7 @@ class CustomizedBase {
         ' 刚刚回到这里，也许是一个偷袭的好机会……',
       ];
     } else if (sys_check_awake(this.id)) {
-      const life_marks = new LifeEventMarks(this.id),
+      const life_marks = LifeEventMarks.get_marks(this.id),
         relation = era.get(`relation:${this.id}:0`),
         love = era.get(`love:${this.id}`);
       let love_level =
@@ -163,7 +163,8 @@ class CustomizedBase {
           return e;
         }),
         '……',
-        new LifeEventMarks(this.id).b_status === 1 << basement_status_enum.fix
+        LifeEventMarks.get_marks(this.id).b_status ===
+        1 << basement_status_enum.fix
           ? '正在加固地下室……'
           : '',
       ];
@@ -324,7 +325,7 @@ class CustomizedBase {
    */
   get_up() {
     const chara = get_chara_talk(this.id),
-      life_marks = new LifeEventMarks(this.id);
+      life_marks = LifeEventMarks.get_marks(this.id);
     if (life_marks.b_start) {
       era.print([
         '在酣眠过后，这间地下室的主人——',
@@ -346,7 +347,7 @@ class CustomizedBase {
    */
   back_basement() {
     const chara = get_chara_talk(this.id),
-      life_marks = new LifeEventMarks(this.id);
+      life_marks = LifeEventMarks.get_marks(this.id);
     if (life_marks.b_start) {
       era.print([
         '在漫长的等待后，这间地下室的主人——',

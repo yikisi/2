@@ -4,7 +4,7 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
-const { buff_colors } = require('#/data/color-const');
+const { get_chara_color } = require('#/data/chara-colors');
 const DarleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-340');
 const recruit_flags = require('#/data/event/recruit-flags');
 
@@ -34,7 +34,7 @@ module.exports = class extends CustomizedMec {
     const title_check = new DarleyLifeMarks().buff;
     return [
       {
-        color: buff_colors[1],
+        color: get_chara_color(this.id),
         content: '[望]',
         fontWeight: title_check ? 'bold' : '',
         title: `队伍成员速度与力量训练效果+${title_check ? 100 : 50}%`,
