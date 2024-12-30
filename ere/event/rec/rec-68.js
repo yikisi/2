@@ -73,13 +73,19 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `那微微带着汗味的体味让人安心，但身为教师的责任让 ${me.name} 旋即清醒了过来。`,
     );
-    await era.printAndWait(
-      `在 ${me.name} 身后，留着黑色短发的${kita.get_child_sex_title()}对 ${
-        me.name
-      } 露出笑容，将 ${me.name} 心里残存不多的怨念驱散的无影无踪。`,
-    );
+    await era.printAndWait([
+      '在 ',
+      me.get_colored_name(),
+      ' 身后，留着黑色短发的',
+      kita.get_child_sex_title(),
+      '对 ',
+      me.get_colored_name(),
+      ' 露出笑容，将 ',
+      me.get_colored_name(),
+      ' 心里残存不多的怨念驱散的无影无踪。',
+    ]);
     await kita.say_and_wait(
-      `这位训练员，没事吧？需要小北我带 ${me.name} 去保健室休息一下么？`,
+      '这位训练员，没事吧？需要小北我带你去保健室休息一下么？',
     );
     await era.printAndWait(
       `赛${kita.get_uma_sex_title()}一只手抱起箱子，用另一只手摸了摸 ${
