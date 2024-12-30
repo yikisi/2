@@ -18,6 +18,7 @@ const { chara_colors, get_chara_color } = require('#/data/chara-colors');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { first_child_id } = require('#/data/other-const');
 const { cb_enum } = require('#/event/queue');
 
 /**
@@ -191,6 +192,17 @@ module.exports = async () => {
                   }
                 });
               }
+              era
+                .getAddedCharacters()
+                .filter((e) => e >= first_child_id)
+                .forEach((e) => {
+                  if (era.get(`cflag:${e}:父方角色`) < 0) {
+                    era.set(`cflag:${e}:父方角色`, 0);
+                  }
+                  if (era.get(`cflag:${e}:母方角色`) < 0) {
+                    era.set(`cflag:${e}:母方角色`, 0);
+                  }
+                });
             }
             return true;
           } else {
