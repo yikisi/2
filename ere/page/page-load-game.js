@@ -226,6 +226,10 @@ module.exports = async () => {
                   }
                 });
             }
+            if (version < 1112) {
+              era.set('callname:304:306', '㭴本代理');
+              era.set('callname:304:305', '安心泽老师');
+            }
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;
