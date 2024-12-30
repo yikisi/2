@@ -194,13 +194,35 @@ module.exports = async () => {
               }
               era
                 .getAddedCharacters()
-                .filter((e) => e >= first_child_id)
+                .filter((e) => e >= first_child_id && e < 1000)
                 .forEach((e) => {
-                  if (era.get(`cflag:${e}:父方角色`) < 0) {
-                    era.set(`cflag:${e}:父方角色`, 0);
+                  let father_id = era.get(`cflag:${e}:父方角色`),
+                    mother_id = era.get(`cflag:${e}:母方角色`);
+                  const clean_errors = () => {
+                    const relation_obj = era.get(`relation:${e}`);
+                    relation_obj[0] = Math.max(relation_obj[0] || 0, 400);
+                    delete relation_obj[undefined];
+                    delete relation_obj[null];
+                    const callname_obj = era.get(`callname:${e}`);
+                    delete callname_obj[undefined];
+                    delete callname_obj[null];
+                  };
+                  if (!(father_id > 0)) {
+                    father_id = era.set(`cflag:${e}:父方角色`, 0);
+                    era.set(`callname:${e}:0`, '爸爸');
+                    clean_errors();
                   }
-                  if (era.get(`cflag:${e}:母方角色`) < 0) {
-                    era.set(`cflag:${e}:母方角色`, 0);
+                  if (!(mother_id > 0)) {
+                    mother_id = era.set(`cflag:${e}:母方角色`, 0);
+                    era.set(`callname:${e}:0`, '妈妈');
+                    clean_errors();
+                  }
+                  if (era.get(`cflag:${e}:招募状态`) !== recruit_flags.yes) {
+                    if (father_id === 0 || mother_id === 0) {
+                      era.set(`cflag:${e}:招募状态`, recruit_flags.yes);
+                    } else {
+                      era.set(`cflag:${e}:随机招募`, 1);
+                    }
                   }
                 });
             }

@@ -24,7 +24,7 @@ module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
     const ret = super.check_and_get_titles(aim_check);
     if (aim_check && ret.length > 0) {
-      new LifeEventMarks(this.id).set('buff', 1);
+      LifeEventMarks.get_marks(this.id).set('buff', 1);
     }
     return ret;
   }
@@ -43,7 +43,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const life_marks = new LifeEventMarks(this.id);
+    const life_marks = LifeEventMarks.get_marks(this.id);
     if (era.get(`love:${this.id}`) >= 50 && !life_marks.get('love')) {
       add_event(
         event_hooks.week_end,

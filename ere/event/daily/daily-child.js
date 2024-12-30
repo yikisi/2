@@ -68,7 +68,7 @@ class DailyChild extends CustomizedDaily {
           ' 一起愉快地和孩子玩，三人度过了一段快乐的亲子时光。',
         ]);
         if (
-          new LifeEventMarks(this.id).unexpected_child ===
+          LifeEventMarks.get_marks(this.id).unexpected_child ===
           unexpected_pregnant_enum.father_sleep
         ) {
           await era.printAndWait([
@@ -80,7 +80,7 @@ class DailyChild extends CustomizedDaily {
         }
       } else {
         if (
-          new LifeEventMarks(this.id).unexpected_child ===
+          LifeEventMarks.get_marks(this.id).unexpected_child ===
           unexpected_pregnant_enum.father_sleep
         ) {
           await era.printAndWait([
@@ -147,7 +147,7 @@ class DailyChild extends CustomizedDaily {
     } else if (stage === 1) {
       // 本格化
       await print_event_name('本格化', child);
-      new LifeEventMarks(this.id).unexpected_child = 0;
+      LifeEventMarks.get_marks(this.id).unexpected_child = 0;
       if (love >= 90) {
         await era.printAndWait([
           mother.get_colored_name(),

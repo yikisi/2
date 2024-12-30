@@ -185,7 +185,7 @@ handlers[event_hooks.good_night] = async (chara_id, hook) => {
   if (hook.arg !== undefined) {
     if (hook.arg > 0) {
       era.set('flag:床伴', chara_id);
-      hook.arg === 2 && (new LifeEventMarks(chara_id).marital_rape = 1);
+      hook.arg === 2 && (LifeEventMarks.get_marks(chara_id).marital_rape = 1);
     } else {
       sys_change_lust(chara_id, lust_from_palam);
       era.println();

@@ -23,7 +23,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
     pregnant_check =
       era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.embryo &&
       era.get('cflag:0:妊娠回合计时') === 0 &&
-      new LifeEventMarks(0).sperm > 0;
+      LifeEventMarks.get_marks(0).sperm > 0;
   let hentai_flag = false;
   team_list.forEach(({ index_chara: id }) => {
     new_title_dict[id] = [];
