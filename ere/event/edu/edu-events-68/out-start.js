@@ -1,12 +1,19 @@
 const era = require('#/era-electron');
 
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+  sys_like_chara,
+} = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
+
 /**
+ * @this CustomizedEdu
  * @param {CharaTalk} kita
  * @param {CharaTalk} me
  * @param {HookArg} hook
@@ -61,11 +68,13 @@ module.exports = async (kita, me, hook, event_object) => {
     await era.printAndWait(
       `突然闯进训练员室的小北，这么大声向 ${me.name} 询问道。`,
     );
-    await era.printAndWait(
-      `怎么突然开始说这个了？${
-        me.name
-      } 略带诧异地看着面前的${kita.get_teen_sex_title()}。`,
-    );
+    await era.printAndWait([
+      '怎么突然开始说这个了？',
+      me.get_colored_name(),
+      ' 略带诧异地看着面前的',
+      kita.get_teen_sex_title(),
+      '。',
+    ]);
     era.println();
     era.printButton('「嗯，有好好努力了哦。」', 1);
     await era.input();
@@ -82,15 +91,36 @@ module.exports = async (kita, me, hook, event_object) => {
         me.name
       } 的肩膀让 ${me.name} 无法动弹。`,
     );
-    await kita.say_and_wait(
-      `所以训练员${me.get_adult_sex_title()}，我们就用之前的温泉券去温泉吧！`,
-    );
-    era.println();
-    era.printButton('「可以去！小北你松手，我们这就去！所以松手哇！」', 1);
-    await era.input();
-    await era.printAndWait(
-      `一边这么说着，${me.name} 慌忙从抽屉里找出放好的温泉券在小北面前摇晃了起来。`,
-    );
+    if (new KitaEduMarks().hot_spring) {
+      await kita.say_and_wait([
+        '所以 ',
+        sys_get_colored_callname(68, 0),
+        '，我们就用之前的温泉券去温泉吧！',
+      ]);
+      era.println();
+      era.printButton(
+        `「可以去！${sys_get_callname(0, 68)}你松手，我们这就去！所以松手哇！」`,
+        1,
+      );
+      await era.input();
+      await era.printAndWait([
+        '一边这么说着，',
+        me.get_colored_name(),
+        ' 慌忙从抽屉里找出放好的温泉券在 ',
+        kita.get_colored_name(),
+        ' 面前摇晃了起来。',
+      ]);
+    } else {
+      await kita.say_and_wait([
+        '所以 ',
+        sys_get_colored_callname(68, 0),
+        '，我们就去温泉吧！',
+      ]);
+      await era.printAndWait([
+        kita.get_colored_name(),
+        ' 一边说一边亮出了一张温泉券，上面隐约印着一个以「北」开头的词……',
+      ]);
+    }
     era.drawLine({ content: '温泉旅馆' });
     await era.printAndWait(
       `为了防止过于想要奖励的小北做出什么出格的事，${me.name} 和小北一起来到了温泉旅馆。`,

@@ -78,15 +78,6 @@ module.exports = class extends CustomizedCheck {
     const event_marks = new KitaEduMarks(),
       event_obj = new EventObject(68, cb_enum.edu),
       edu_weeks = era.get('cflag:68:育成回合计时');
-    if (event_marks.hot_spring && edu_weeks > 95 + 24) {
-      check_and_add_event(
-        event_marks,
-        edu_weeks,
-        'hot_spring_event',
-        event_hooks.out_start,
-        event_obj,
-      );
-    }
     if (edu_weeks < 3 * 48) {
       const event_obj_special = new EventObject(68, cb_enum.edu, true).set_arg(
         edu_weeks,
@@ -165,7 +156,11 @@ module.exports = class extends CustomizedCheck {
     } else {
       add_event(
         event_hooks.week_end,
-        new EventObject(68, cb_enum.edu).set_arg(144),
+        new EventObject(68, cb_enum.edu, true).set_arg(144),
+      );
+      add_event(
+        event_hooks.out_start,
+        new EventObject(68, cb_enum.edu, true).set_arg('hot_spring_event'),
       );
     }
     return super.check_palace_and_get_aims();
