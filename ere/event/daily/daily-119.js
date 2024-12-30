@@ -15,7 +15,7 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 module.exports = class extends CustomizedDaily {
   /** @author 幽白書 */
   select() {
-    const life_marks = new LifeEventMarks(119);
+    const life_marks = LifeEventMarks.get_marks(119);
     if (!sys_check_awake(119) || !sys_check_awake(0) || !life_marks.b_escape) {
       return super.select();
     }
@@ -32,7 +32,7 @@ module.exports = class extends CustomizedDaily {
 
   /** @author 幽白書 */
   good_morning() {
-    const life_marks = new LifeEventMarks(119);
+    const life_marks = LifeEventMarks.get_marks(119);
     if (!life_marks.b_escape) {
       return super.good_morning();
     }

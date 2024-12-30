@@ -4,7 +4,7 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 
 const MecNpc = require('#/event/mec/mec-npc');
 
-const { buff_colors } = require('#/data/color-const');
+const { get_chara_color } = require('#/data/chara-colors');
 
 module.exports = class extends MecNpc {
   init_love() {
@@ -20,7 +20,7 @@ module.exports = class extends MecNpc {
   get_talents() {
     return [
       {
-        color: buff_colors[1],
+        color: get_chara_color(this.id),
         content: '[梦之追逐者]',
         title: '队伍成员海外远征的负面影响降低',
       },

@@ -133,7 +133,9 @@ module.exports = class extends CustomizedEro {
    */
   async report_pregnant_between_weeks(father, mother, callname, hook) {
     const love = era.get(`love:${mother.id || father.id}`),
-      unexpected_pregnant = new LifeEventMarks(mother.id).unexpected_pregnant;
+      unexpected_pregnant = LifeEventMarks.get_marks(
+        mother.id,
+      ).unexpected_pregnant;
     era.drawLine();
     if (love >= 90) {
       await common_pregnant_report_in_love(father, mother, unexpected_pregnant);
@@ -391,7 +393,7 @@ module.exports = class extends CustomizedEro {
       await era.printAndWait([mother.get_colored_name(), ' 抱起了孩子——']);
       if (is_slave) {
         if (
-          new LifeEventMarks(0).unexpected_pregnant ===
+          LifeEventMarks.get_marks(0).unexpected_pregnant ===
           unexpected_pregnant_enum.mother_sleep
         ) {
           era.printButton('慈爱地轻抚', 1);

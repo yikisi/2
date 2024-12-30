@@ -82,7 +82,7 @@ async function name_baby(child_id, father_id, mother_id) {
 
 /** @param {number} mother_id */
 async function sys_have_baby(mother_id) {
-  const mother_life_marks = new LifeEventMarks(mother_id),
+  const mother_life_marks = LifeEventMarks.get_marks(mother_id),
     father_id = mother_life_marks.sperm,
     child_id = era.add('flag:新生儿ID', 1) - 1;
   let src_chara_id = era.get(`cflag:${mother_id}:模版角色`);
@@ -308,7 +308,11 @@ async function sys_have_baby(mother_id) {
   // 无关的会在招募池子里
   era.set(
     `cflag:${child_id}:招募状态`,
-    1 - era.set(`cflag:${child_id}:随机招募`, Number(father_id && mother_id)),
+    1 -
+      era.set(
+        `cflag:${child_id}:随机招募`,
+        Number(father_id > 0 && mother_id > 0),
+      ),
   );
   era.set(
     `relation:${child_id}:${mother_id}`,
@@ -392,7 +396,7 @@ async function sys_have_baby(mother_id) {
       era.get(`cstr:${mother_id}:毛色`) || era.get(`cstr:${father_id}:毛色`),
     );
   }
-  const child_life_marks = new LifeEventMarks(child_id);
+  const child_life_marks = LifeEventMarks.get_marks(child_id);
   child_life_marks.unexpected_child = mother_life_marks.unexpected_pregnant;
   mother_life_marks.unexpected_pregnant = 0;
 

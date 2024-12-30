@@ -6,8 +6,22 @@
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const EroCommunications = require('#/event/ero/common-lines/interface/ero-communications');
+const EroRapedCommunications = require('#/event/ero/common-lines/rape/raped-communications');
 
 class EroRapeCommunications extends EroCommunications {
+  /** @type {EroCommunications} */
+  raped;
+
+  constructor(root) {
+    super(root);
+    this.raped = new EroRapedCommunications(root);
+  }
+
+  /** @param {boolean} is_raper */
+  get_this(is_raper) {
+    return is_raper ? this : this.raped;
+  }
+
   /** @author ALEX */
   async kiss(attacker, defender, hook) {
     if (hook.arg) {

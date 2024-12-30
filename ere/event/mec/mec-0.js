@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
@@ -64,14 +65,14 @@ module.exports = class extends CustomizedMec {
     }
     if (era.get('cflag:301:招募状态') === recruit_flags.yes) {
       ret_list.push({
-        color: buff_colors[1],
+        color: get_chara_color(301),
         content: '骏川的协助',
         title: '体力与精力消耗-10%',
       });
     }
     if (era.get('cflag:303:招募状态') === recruit_flags.yes) {
       ret_list.push({
-        color: buff_colors[1],
+        color: get_chara_color(303),
         content: '彻底取材',
         title: '声望获取+10%，声望下降-10%',
       });

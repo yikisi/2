@@ -132,7 +132,7 @@ module.exports = async () => {
   const cur_id = era.get('flag:当前互动角色'),
     aim = get_chara_talk(cur_id),
     me = cur_id ? get_chara_talk(0) : aim,
-    life_marks = god_id ? new LifeEventMarks(god_id) : undefined,
+    life_marks = god_id ? LifeEventMarks.get_marks(god_id) : undefined,
     common_uma_sex_title = era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
   while (flag_god > 0) {
     await era.clear();

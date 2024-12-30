@@ -130,7 +130,7 @@ module.exports = class extends CustomizedBase {
   back_basement() {
     const dj = get_chara_talk(this.id),
       callname = sys_get_callname(this.id, 0),
-      life_marks = new LifeEventMarks(this.id);
+      life_marks = LifeEventMarks.get_marks(this.id);
     dj.say([callname, '，我回来了。']);
     if (life_marks.b_start) {
       dj.say(['……啊，', callname, ' 醒了吗？']);
@@ -393,7 +393,7 @@ module.exports = class extends CustomizedBase {
   get_up() {
     const dj = get_chara_talk(this.id),
       callname = sys_get_callname(this.id, 0),
-      life_marks = new LifeEventMarks(this.id);
+      life_marks = LifeEventMarks.get_marks(this.id);
     era.print([dj.get_colored_name(), ' 醒了过来……']);
     if (life_marks.b_start) {
       era.println();

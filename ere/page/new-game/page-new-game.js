@@ -27,6 +27,7 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
 const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-302');
+const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const { yes } = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { first_child_id } = require('#/data/other-const');
@@ -267,8 +268,11 @@ module.exports = async (src_chara) => {
 
           await sys_next_week();
           my_marks.god = get_random_value(13, 40);
-          if (src_chara !== 25 && src_chara !== 32) {
-            my_marks.experiment = get_random_value(1, 24);
+          if (src_chara !== 32) {
+            new TachyonLifeMarks().drug_notice = get_random_value(24, 48);
+            if (src_chara !== 25) {
+              my_marks.experiment = get_random_value(1, 24);
+            }
           }
           if (src_chara !== 20) {
             my_marks.fishing = 1;

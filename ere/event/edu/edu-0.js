@@ -587,7 +587,12 @@ module.exports = class extends MyPrivacyEvents {
         me.get_colored_name(),
         ' 在干什么。',
       ]);
-      await printAndWait([target.get_colored_name(), ' 伸出了手。']);
+      await printAndWait([
+        me.get_colored_name(),
+        ' 向 ',
+        target.get_colored_name(),
+        ' 伸出了手。',
+      ]);
       await target.say_and_wait('(⁄ ⁄•⁄ω⁄•⁄ ⁄)');
       printButton(`向${target.sex}解释现在的状态。`, 1);
       await input();

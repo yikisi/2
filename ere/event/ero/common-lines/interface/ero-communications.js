@@ -2,12 +2,11 @@ const era = require('#/era-electron');
 
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 
+const EroLinesCommon = require('#/event/ero/common-lines/interface/ero-lines-common');
+
 const { log_7 } = require('#/utils/value-utils');
 
-class EroCommunications {
-  /** @type {EroCommandLines} */
-  root;
-
+class EroCommunications extends EroLinesCommon {
   /**
    * @param {number} attacker
    * @param {number} defender
@@ -28,11 +27,6 @@ class EroCommunications {
     const ratio = sys_get_strength_ratio_in_fight(attacker, defender);
     era.logger.debug(`角色 ${attacker} 逆推概率：${(ratio * 100).toFixed(2)}%`);
     return ratio >= 1 || (ratio > 0 && Math.random() < ratio);
-  }
-
-  /** @param {EroCommandLines} root */
-  constructor(root) {
-    this.root = root;
   }
 
   /**

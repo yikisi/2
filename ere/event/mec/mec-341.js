@@ -4,7 +4,7 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
-const { buff_colors } = require('#/data/color-const');
+const { get_chara_color } = require('#/data/chara-colors');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 const recruit_flags = require('#/data/event/recruit-flags');
 
@@ -34,7 +34,7 @@ module.exports = class extends CustomizedMec {
     const title_check = new GodolphinLifeMarks().buff;
     return [
       {
-        color: buff_colors[1],
+        color: get_chara_color(this.id),
         content: '[爱]',
         fontWeight: title_check ? 'bold' : '',
         title: `队伍成员智力与技能点数训练效果+${title_check ? 100 : 50}%`,

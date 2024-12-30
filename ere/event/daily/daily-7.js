@@ -23,7 +23,7 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 module.exports = class extends CustomizedDaily {
   good_morning() {
     const gold_ship = get_chara_talk(7),
-      life_marks = new LifeEventMarks(7);
+      life_marks = LifeEventMarks.get_marks(7);
     if (life_marks.b_escape) {
       switch (life_marks.b_escape) {
         case escape_enum.sneak:
@@ -246,7 +246,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   select() {
-    const life_marks = new LifeEventMarks(7);
+    const life_marks = LifeEventMarks.get_marks(7);
     if (sys_check_awake(7)) {
       const gold_ship = get_chara_talk(7),
         me = get_chara_talk(0);

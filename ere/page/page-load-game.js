@@ -9,6 +9,7 @@ const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const event_queue = require('#/event/queue');
+const { cb_enum } = require('#/event/queue');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -16,8 +17,9 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
+const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { cb_enum } = require('#/event/queue');
+const { first_child_id } = require('#/data/other-const');
 
 /**
  * load game
@@ -155,31 +157,74 @@ module.exports = async () => {
                 }
               });
             }
-            if (!era.get('flag:回合爱慕惩罚')) {
-              // 爱慕事件修复
-              const events = event_queue.get(),
-                dict = {};
-              Object.values(events).forEach((l) =>
-                l.forEach((e) => {
+            if (version < 1111) {
+              if (era.get('cflag:0:模版角色') !== 32) {
+                new TachyonLifeMarks().drug_notice =
+                  Math.max(48 - era.get('flag:当前回合数'), 0) +
+                  get_random_value(1, 25);
+              }
+              if (!era.get('flag:回合爱慕惩罚')) {
+                // 爱慕事件修复
+                const events = event_queue.get(),
+                  dict = {};
+                Object.values(events).forEach((l) =>
+                  l.forEach((e) => {
+                    if (
+                      e.type === cb_enum.love &&
+                      e.arg instanceof Array &&
+                      (e[0] === 49 || e[0] === 74 || e[0] === 89 || e[0] === 99)
+                    ) {
+                      dict[e.chara_id] = 1;
+                    }
+                  }),
+                );
+                era.getAddedCharacters().forEach((chara_id) => {
+                  const love = era.get(`love:${chara_id}`);
                   if (
-                    e.type === cb_enum.love &&
-                    e.arg instanceof Array &&
-                    (e[0] === 49 || e[0] === 74 || e[0] === 89 || e[0] === 99)
+                    !dict[chara_id] &&
+                    (love === 49 ||
+                      love === 74 ||
+                      love === 89 ||
+                      love === 99) &&
+                    era.get(`cflag:${chara_id}:爱慕暂拒`) !== love
                   ) {
-                    dict[e.chara_id] = 1;
+                    era.set(`cflag:${chara_id}:爱慕暂拒`, love);
                   }
-                }),
-              );
-              era.getAddedCharacters().forEach((chara_id) => {
-                const love = era.get(`love:${chara_id}`);
-                if (
-                  !dict[chara_id] &&
-                  (love === 49 || love === 74 || love === 89 || love === 99) &&
-                  !era.get(`cflag:${chara_id}:爱慕暂拒`)
-                ) {
-                  era.set(`cflag:${chara_id}:爱慕暂拒`, love);
-                }
-              });
+                });
+              }
+              era
+                .getAddedCharacters()
+                .filter((e) => e >= first_child_id && e < 1000)
+                .forEach((e) => {
+                  let father_id = era.get(`cflag:${e}:父方角色`),
+                    mother_id = era.get(`cflag:${e}:母方角色`);
+                  const clean_errors = () => {
+                    const relation_obj = era.get(`relation:${e}`);
+                    relation_obj[0] = Math.max(relation_obj[0] || 0, 400);
+                    delete relation_obj[undefined];
+                    delete relation_obj[null];
+                    const callname_obj = era.get(`callname:${e}`);
+                    delete callname_obj[undefined];
+                    delete callname_obj[null];
+                  };
+                  if (!(father_id > 0)) {
+                    father_id = era.set(`cflag:${e}:父方角色`, 0);
+                    era.set(`callname:${e}:0`, '爸爸');
+                    clean_errors();
+                  }
+                  if (!(mother_id > 0)) {
+                    mother_id = era.set(`cflag:${e}:母方角色`, 0);
+                    era.set(`callname:${e}:0`, '妈妈');
+                    clean_errors();
+                  }
+                  if (era.get(`cflag:${e}:招募状态`) !== recruit_flags.yes) {
+                    if (father_id === 0 || mother_id === 0) {
+                      era.set(`cflag:${e}:招募状态`, recruit_flags.yes);
+                    } else {
+                      era.set(`cflag:${e}:随机招募`, 1);
+                    }
+                  }
+                });
             }
             return true;
           } else {

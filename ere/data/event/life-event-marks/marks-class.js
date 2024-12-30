@@ -46,11 +46,22 @@ class LifeEventMarks extends PersonalEventMarks {
   // 地下室 - 初见
   b_start;
 
-  /** @param {number} chara_id */
+  /**
+   * @param {number} chara_id
+   * @returns {LifeEventMarks}
+   */
+  static get_marks(chara_id) {
+    const ret = new LifeEventMarks(chara_id);
+    PersonalEventMarks.register_marks(ret);
+    return ret;
+  }
+
+  /**
+   * @protected
+   * @param {number} chara_id
+   */
   constructor(chara_id) {
     super(chara_id, '扩展变量');
-    if (this.constructor.toString().startsWith('class LifeEventMarks'))
-      PersonalEventMarks.register_marks(this);
   }
 }
 

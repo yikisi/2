@@ -1,12 +1,6 @@
-class EroItems {
-  /** @type {EroCommandLines} */
-  root;
+const EroLinesCommon = require('#/event/ero/common-lines/interface/ero-lines-common');
 
-  /** @param {EroCommandLines} root */
-  constructor(root) {
-    this.root = root;
-  }
-
+class EroItems extends EroLinesCommon {
   /**
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender

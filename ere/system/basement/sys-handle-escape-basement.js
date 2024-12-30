@@ -10,12 +10,12 @@ function sys_handle_escape_basement(clear_chara) {
   const basement_owners = new BasementOwners();
   if (clear_chara !== false) {
     const release_chara = basement_owners.filter(
-      (e) => new LifeEventMarks(e).b_escape === -1,
+      (e) => LifeEventMarks.get_marks(e).b_escape === -1,
     )[0];
     era.set('flag:当前互动角色', release_chara || 0);
   }
   [0, ...basement_owners.get()].forEach((e) => {
-    const life_marks = new LifeEventMarks(e);
+    const life_marks = LifeEventMarks.get_marks(e);
     life_marks.b_timer =
       life_marks.b_enhance =
       life_marks.b_now =

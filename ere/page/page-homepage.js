@@ -99,7 +99,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
   }
   if ((lover = era.get('flag:床伴')) > 0) {
     era.set(`cflag:${lover}:自主训练`, 0);
-    const life_marks = new LifeEventMarks(lover);
+    const life_marks = LifeEventMarks.get_marks(lover);
     begin_and_init_ero(0, lover);
     if (life_marks.marital_rape) {
       era.set('tflag:强奸', lover);
@@ -260,7 +260,7 @@ module.exports = async () => {
       cur_location = location_enum.office;
     }
 
-    const my_life_marks = new LifeEventMarks(0);
+    const my_life_marks = LifeEventMarks.get_marks(0);
     if (flags.week_start) {
       let count = 0;
       if (cur_location === location_enum.basement) {
@@ -348,7 +348,7 @@ module.exports = async () => {
         const basement_owners = new BasementOwners(),
           owners = basement_owners.get(),
           owner = owners[0],
-          owner_marks = new LifeEventMarks(owner);
+          owner_marks = LifeEventMarks.get_marks(owner);
         basement_owners.clear();
         basement_owners.push(owner);
         era.add('exp:0:监禁次数', 1);

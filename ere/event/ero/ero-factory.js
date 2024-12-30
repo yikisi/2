@@ -139,13 +139,17 @@ async function run_custom_ero(chara_id, action, extra_flag) {
           extra_flag,
         );
         ret = await handler.sleep.run(attacker, defender, hook, extra_flag);
-      } else if (raper >= 0 && raper === _a) {
-        await (describers.r[action] || describers.c[action])(
-          attacker,
-          defender,
-          hook,
-          extra_flag,
-        );
+      } else if (raper >= 0) {
+        if (raper === _a) {
+          await (describers.r[action] || describers.c[action])(
+            attacker,
+            defender,
+            hook,
+            extra_flag,
+          );
+        } else {
+          await describers.c[action](attacker, defender, hook, extra_flag);
+        }
         ret = await handler.rape.run(attacker, defender, hook, extra_flag);
       } else {
         await describers.c[action](attacker, defender, hook, extra_flag);

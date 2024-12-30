@@ -31,10 +31,12 @@ async function sys_auto_react(shown) {
       false,
       false,
     ]);
-    const resist_ratio =
-      era.get(`status:${lover}:超马跳Z`) ||
-      era.get('tcvar:0:失神') ||
-      0.25 * Math.max(era.get('flag:惩戒力度') - 1, 0) +
+    let resist_ratio = 0;
+    if (era.get(`status:${lover}:超马跳Z`) || era.get('tcvar:0:失神')) {
+      resist_ratio = 1;
+    } else if (era.get('flag:雷普抵抗')) {
+      resist_ratio =
+        0.25 * Math.max(era.get('flag:惩戒力度') - 1, 0) +
         0.2 * !era.get('tflag:强奸') -
         0.05 * era.get(`mark:${lover}:同心`) -
         0.1 * era.get(`mark:${lover}:苦痛`) +
@@ -47,6 +49,7 @@ async function sys_auto_react(shown) {
             era.get(`talent:${lover}:喜欢痛苦`)) +
         Math.pow(2, era.get(`base:${lover}:性欲`) / 1000 - 10) +
         (era.get(`base:${lover}:压力`) * 3) / 40000;
+    }
     era.logger.debug(`角色 ${lover} 反抗：${(resist_ratio * 100).toFixed(2)}%`);
     if (
       resist_ratio >= 1 ||

@@ -582,7 +582,9 @@ class CustomizedEro {
     const father = get_chara_talk(extra_flag.father_id),
       mother = get_chara_talk(extra_flag.mother_id),
       love = era.get(`love:${mother.id || father.id}`),
-      unexpected_pregnant = new LifeEventMarks(mother.id).unexpected_pregnant;
+      unexpected_pregnant = LifeEventMarks.get_marks(
+        mother.id,
+      ).unexpected_pregnant;
     era.drawLine();
     if (love >= 90) {
       await common_pregnant_report_in_love(father, mother, unexpected_pregnant);
@@ -701,7 +703,7 @@ class CustomizedEro {
       era.drawLine();
       await print_event_name('新生命', mother);
       if (
-        new LifeEventMarks(mother.id).unexpected_pregnant ===
+        LifeEventMarks.get_marks(mother.id).unexpected_pregnant ===
         unexpected_pregnant_enum.father_sleep
       ) {
         await era.printAndWait([

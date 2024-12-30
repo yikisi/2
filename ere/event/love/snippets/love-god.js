@@ -63,7 +63,7 @@ class LoveGod extends CustomizedLove {
    */
   // eslint-disable-next-line no-unused-vars
   async 49(god, me) {
-    new LifeEventMarks(this.id).set('love', 1);
+    LifeEventMarks.get_marks(this.id).set('love', 1);
     if (get(`love:${this.id}`) === 49) {
       await sys_love_uma_in_event(this.id);
     }
@@ -145,7 +145,7 @@ class LoveGod extends CustomizedLove {
           ' 生下了 长女 ',
           god.get_colored_name(),
         ]);
-        new LifeEventMarks(god.id).add('love');
+        LifeEventMarks.get_marks(god.id).add('love');
         break;
       case 1:
         await this.fuck_me(god, me);
@@ -171,7 +171,7 @@ class LoveGod extends CustomizedLove {
           set(`cflag:${god.id}:阴茎尺寸`, 0);
         }
         set(`cflag:${god.id}:招募状态`, recruit_flags.yes);
-        new LifeEventMarks(god.id).add('love');
+        LifeEventMarks.get_marks(god.id).add('love');
         set(`cflag:${god.id}:父方角色`, god.id);
         set(`cflag:${god.id}:母方角色`, 0);
         add(`exp:${god.id}:孩子数量`, 1);
@@ -190,7 +190,7 @@ class LoveGod extends CustomizedLove {
             god.get_colored_name(),
           ]);
         }
-        temp = new LifeEventMarks(0);
+        temp = LifeEventMarks.get_marks(0);
         temp.waist_buff = 8;
         set('cflag:0:妊娠阶段', 1 << pregnant_stage_enum.resume);
         set('cflag:0:妊娠回合计时', 4 + 1);
@@ -203,7 +203,7 @@ class LoveGod extends CustomizedLove {
         break;
       case 2:
         await this.reject(god, me);
-        new LifeEventMarks(god.id).sub('love');
+        LifeEventMarks.get_marks(god.id).sub('love');
     }
     if (selected < 2) {
       await this.after_fuck(god, me);

@@ -127,7 +127,7 @@ module.exports = class extends CustomizedBase {
   }
 
   back_basement() {
-    if (!new LifeEventMarks(this.id).b_start) {
+    if (!LifeEventMarks.get_marks(this.id).b_start) {
       return super.back_basement();
     }
     const callname = sys_get_callname(52, 0),
@@ -351,7 +351,7 @@ module.exports = class extends CustomizedBase {
   }
 
   get_up() {
-    if (!new LifeEventMarks(this.id).b_start) {
+    if (!LifeEventMarks.get_marks(this.id).b_start) {
       return super.get_up();
     }
     const callname = sys_get_callname(52, 0),

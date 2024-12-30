@@ -196,7 +196,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   good_morning() {
-    const life_marks = new LifeEventMarks(3),
+    const life_marks = LifeEventMarks.get_marks(3),
       me = get_chara_talk(0),
       teio = get_chara_talk(3),
       temp = get_random_value(0, 4);
@@ -363,8 +363,8 @@ module.exports = class extends CustomizedDaily {
   }
 
   async load_talk() {
-    const teio_marks = new LifeEventMarks(3),
-      my_marks = new LifeEventMarks(0);
+    const teio_marks = LifeEventMarks.get_marks(3),
+      my_marks = LifeEventMarks.get_marks(0);
     if (
       (era.get('cflag:3:妊娠阶段') !== 1 << pregnant_stage_enum.no &&
         !teio_marks.report) ||
@@ -705,7 +705,7 @@ module.exports = class extends CustomizedDaily {
     if (!sys_check_awake(0) || !sys_check_awake(3)) {
       return super.select();
     }
-    const life_marks = new LifeEventMarks(3),
+    const life_marks = LifeEventMarks.get_marks(3),
       teio = get_chara_talk(3);
     if (life_marks.b_escape) {
       switch (life_marks.b_escape) {

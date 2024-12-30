@@ -404,7 +404,7 @@ module.exports = class extends Love85UtilFuckBuddy {
         '腔道内细密繁多的肉皱子无规则地蠕动，随着插入一圈圈收绞、聚隆成环。',
       );
       await era.printAndWait([
-        '龟头被一层层得研磨，无与伦比的挤压榨取感几乎让 ',
+        '龟头被一层层地研磨，无与伦比的挤压榨取感几乎让 ',
         me.get_colored_name(),
         ' 一泻千里。',
       ]);

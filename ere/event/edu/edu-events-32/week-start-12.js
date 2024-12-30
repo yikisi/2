@@ -335,9 +335,17 @@ module.exports = (handlers) => {
                     Math.min(era.get(`talent:${e}:练习X手`) + 1, 2),
                   ),
                 );
+              await era.printAndWait([
+                { isBr: true },
+                '队伍成员的训练更顺利了……',
+              ]);
               break;
             case 1:
               in_team_list.forEach((e) => era.set(`status:${e}:健康茶`, 1));
+              await era.printAndWait([
+                { isBr: true },
+                '队伍成员本周的减肥会更有效果……',
+              ]);
               break;
             case 2:
               in_team_list.forEach(
@@ -345,11 +353,19 @@ module.exports = (handlers) => {
                   era.get(`talent:${e}:泌乳`) === 0 &&
                   era.set(`talent:${e}:泌乳`, 2),
               );
+              await era.printAndWait([
+                { isBr: true },
+                '队伍成员都开始流出母乳了……',
+              ]);
               break;
             case 3:
               in_team_list.forEach((e) =>
                 sys_change_lust(e, get_random_value(500, 1500)),
               );
+              await era.printAndWait([
+                { isBr: true },
+                '队伍成员的性欲上升了……',
+              ]);
           }
           tachyon_flag = 0;
           break;
