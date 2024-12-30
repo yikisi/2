@@ -20,6 +20,7 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { first_child_id } = require('#/data/other-const');
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 
 /**
  * load game
@@ -229,6 +230,9 @@ module.exports = async () => {
             if (version < 1120) {
               era.set('callname:304:306', '㭴本代理');
               era.set('callname:304:305', '安心泽老师');
+              const my_reg = sys_reg_race(0);
+              my_reg.last.race = my_reg.curr.race;
+              my_reg.last.week = my_reg.curr.week;
             }
             return true;
           } else {
