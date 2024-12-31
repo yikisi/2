@@ -8,6 +8,8 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const { get_custom_check } = require('#/event/check/check-factory');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
@@ -25,7 +27,6 @@ const { get_random_value } = require('#/utils/value-utils');
 const { escape_enum } = require('#/data/basement-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
-const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 module.exports = class extends CustomizedDaily {
   async celebration() {
@@ -292,10 +293,19 @@ module.exports = class extends CustomizedDaily {
         }更大胆了，先 ${me.name} 一步开口道`,
       );
       teio.say('那个，我做好了外宿申请，所以今天……');
-      era.print(
-        `声音逐渐微弱下去，血液涌上脸颊，${me.name} 看到${teio.sex}这副模样实在忍不住了，决定——`,
-      );
-      if ((await select_yes_or_no([])) === false) {
+      if (
+        (await select_yes_or_no(
+          [
+            '声音逐渐微弱下去，血液涌上脸颊，',
+            me.get_colored_name(),
+            ' 看到',
+            teio.sex,
+            '这副模样实在忍不住了，决定——',
+          ],
+          '接受',
+          '拒绝',
+        )) === false
+      ) {
         if (check === 2) {
           if (era.get('status:3:腿伤')) {
             await teio.say_and_wait('唔……这样啊。');
