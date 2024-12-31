@@ -108,8 +108,20 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.cunnilingus] = '舐阴';
   ero_tagged_hooks[ero_actions.cunnilingus] = new EroHookTag(
-    [ero_action_tags.mouth, ero_action_tags.pet],
+    [
+      ero_action_tags.mouth,
+      ero_action_tags.pet,
+      (chara_id, other_id) => {
+        const touch = era.get(`tcvar:${chara_id}:口腔接触部位`);
+        return (
+          era.get('tflag:主导权') === chara_id ||
+          touch === -1 ||
+          (touch.owner === other_id && touch.part === part_enum.clitoris)
+        );
+      },
+    ],
     [ero_action_tags.clitoris],
+    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.ask_cunnilingus] = '请求舐阴';

@@ -238,8 +238,12 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
  */
 async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
   new BasementOwners().for_each((e) => {
-    if ((LifeEventMarks.get_marks(e).b_status & basement_just_status) > 0) {
-      LifeEventMarks.get_marks(e).b_status = 1 << basement_status_enum.idle;
+    const life_marks = LifeEventMarks.get_marks(e);
+    if (
+      life_marks.b_status === 0 ||
+      (life_marks.b_status & basement_just_status) > 0
+    ) {
+      life_marks.b_status = 1 << basement_status_enum.idle;
     }
   });
   let new_timer,
