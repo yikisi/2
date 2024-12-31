@@ -98,7 +98,7 @@ module.exports = class extends CustomizedEdu {
       ]);
       println();
       sys_change_attr_and_print(0, '精力', -50);
-      sys_like_chara(302, 0, get_random_value(10, 20)) && (await waitAnyKey());
+      sys_like_chara(302, 0, get_random_value(40, 60)) && (await waitAnyKey());
     } else {
       await printAndWait('似乎没什么特别的……所以理事长平常都在干什么？');
     }

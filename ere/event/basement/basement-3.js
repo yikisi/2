@@ -23,7 +23,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
  */
 async function ask_release_common(teio, me) {
   era.printButton('「已经玩够了吧，帝王。该放我出去了。」', 1);
-  era.printButton('「帝王大人……我知道了，请让我走吧。」', 1);
+  era.printButton('「帝王大人……我知道了，请让我走吧。」', 2);
   await era.input();
 
   await teio.say_and_wait('……哈。');
