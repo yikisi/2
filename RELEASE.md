@@ -3,9 +3,10 @@ _incoming_
 
 适配 [EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.2.1) 及以上版本
 
-本版本未更新图片资源，不需要下载资源包
-
 ## Added
+
+* 追加实装了以下随机小事件
+    * 【可笑しい日（奇怪的一天）2】
 
 ## Changed
 

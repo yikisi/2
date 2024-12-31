@@ -164,7 +164,7 @@ module.exports = class extends CustomizedCheck {
       life_marks.talk = 0;
       // 做饭检查
       if (
-        life_marks.cook &&
+        life_marks.cook > 0 &&
         era.get('cflag:32:位置') === location_enum.office &&
         era.get('cflag:0:位置') === era.get('cflag:32:位置')
       ) {

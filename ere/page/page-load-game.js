@@ -1,6 +1,7 @@
 ﻿const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const filter_chara = require('#/system/sys-filter-chara');
 
 const print_page_header = require('#/page/components/page-header');
@@ -9,7 +10,7 @@ const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const event_queue = require('#/event/queue');
-const { cb_enum } = require('#/event/queue');
+const { add_event, cb_enum } = require('#/event/queue');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -17,10 +18,11 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { first_child_id } = require('#/data/other-const');
-const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 
 /**
  * load game
@@ -233,6 +235,19 @@ module.exports = async () => {
               const my_reg = sys_reg_race(0);
               my_reg.last.race = my_reg.curr.race;
               my_reg.last.week = my_reg.curr.week;
+              if (era.get('cflag:0:模版角色') === 32) {
+                new MyEduMarks().strange_day = 0;
+              } else if (
+                new MyEduMarks().strange_day === 0 &&
+                (event_queue.get()[event_hooks.week_start] || []).findIndex(
+                  (e) => e.arg === 'strange_day',
+                ) === -1
+              ) {
+                add_event(
+                  event_hooks.week_start,
+                  new EventObject(0, cb_enum.edu).set_arg('strange_day2'),
+                );
+              }
             }
             return true;
           } else {
