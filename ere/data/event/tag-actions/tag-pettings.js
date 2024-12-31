@@ -109,6 +109,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
   ero_action_names[ero_actions.cunnilingus] = '舐阴';
   ero_tagged_hooks[ero_actions.cunnilingus] = new EroHookTag(
     [
+      ero_action_tags.awake,
       ero_action_tags.mouth,
       ero_action_tags.pet,
       (chara_id, other_id) => {
