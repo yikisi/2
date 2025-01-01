@@ -89,7 +89,7 @@ const era = {
   getLineCount() {},
   /**
    * wait for use's input, the engine will try to return number
-   * @param {{[disableBefore]:boolean,[hideInput]:boolean,[rule]:string,[show]:boolean,[useRule]:boolean}} [config] config of input, like rule
+   * @param {{[disableBefore]:boolean,[rule]:string,[useRule]:boolean,[hideInput]:boolean,[show]:boolean}} [config] config of input, like rule
    * @returns {Promise<any>} a promise of the user input, please use await
    */
   // eslint-disable-next-line no-unused-vars
@@ -162,11 +162,14 @@ const era = {
   /**
    * play the music that must be declared in csv files in directory res
    * @param {string[]|string} names REQUIRED music name, the engine will play the first available music in the array
-   * @param {boolean} [loop] if the music is played in loop
+   * @param {{}} [config]
+   * @param {boolean} config.[loop] if the music is played in loop
+   * @param {boolean} config.[fade] if the music needs fade-in and fade-out
+   * @param {number} config.[fadeInternal] the internal of fade-in and fade-out, microsecond, default 200ms
    * @returns {boolean} if the playing succeeds
    */
   // eslint-disable-next-line no-unused-vars
-  playMusic(names, loop) {},
+  playMusic(names, config) {},
   /**
    * print some text
    * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
@@ -375,7 +378,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '3.2.1', engine: undefined },
+  version: { sdk: '3.3.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
