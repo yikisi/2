@@ -179,6 +179,9 @@ async function common_tit_job(attacker, defender, hook) {
  * @param {HookArg} hook
  */
 async function tit_and_blow_job(attacker, defender, hook) {
+  if (defender.sex_code === 1) {
+    return;
+  }
   if (hook.arg) {
     await attacker.print_and_wait([
       '故意挺腰，让从乳肉间探出来的龟头戳在的唇上，向 ',
@@ -260,7 +263,7 @@ class EroRapeMakingOuts extends EroMakingOuts {
         '敏感的根部与内侧忽然被指尖戳弄着，耳朵因为受惊而下意识的绷直。',
       ]);
       await defender.print_and_wait([
-        '报复般地让竖起的马耳朵打在对方侧脸上发出了‘啪’的声响，却只是惹得这家伙发出了一阵笑声。',
+        '报复般地让竖起的马耳朵打在对方侧脸上发出了「啪」的声响，却只是惹得这家伙发出了一阵笑声。',
       ]);
     }
   }
@@ -291,10 +294,10 @@ class EroRapeMakingOuts extends EroMakingOuts {
 
   /** @author ALEX */
   async pet_breast(attacker, defender, hook) {
+    if (defender.sex_code === 1) {
+      return;
+    }
     if (hook.arg) {
-      if (defender.sex_code === 1) {
-        return;
-      }
       await attacker.print_and_wait([
         '伸手托住了弹软如布丁般微微颤动的乳肉，轻轻按压，用掌心感受着面前的',
         era.get(`cflag:${defender.id}:种族`) ? '母马' : '雌性',
@@ -524,6 +527,9 @@ class EroRapeMakingOuts extends EroMakingOuts {
 
   /** @author ALEX */
   async pet_tail(attacker, defender, hook) {
+    if (defender.sex_code === 1) {
+      return;
+    }
     if (hook.arg) {
       await attacker.print_and_wait([
         '空闲下来的手顺着后背向下摸去，才刚刚碰到尾巴根部的位置，全身绷紧的 ',
@@ -558,6 +564,9 @@ class EroRapeMakingOuts extends EroMakingOuts {
 
   /** @author ALEX */
   async pull_tail(attacker, defender) {
+    if (defender.sex_code === 1) {
+      return;
+    }
     await defender.say_and_wait('咿～❤️');
     await defender.print_and_wait(['从尾尖到尾根，而后是席卷全身的奇妙感觉。']);
     await defender.print_and_wait([
@@ -630,6 +639,9 @@ class EroRapeMakingOuts extends EroMakingOuts {
 
   /** @author ALEX */
   async ask_blow_job(attacker, defender, hook) {
+    if (defender.sex_code === 1) {
+      return;
+    }
     if (hook.arg) {
       await defender.print_and_wait([
         '将伸到嘴边的腥臭龟头含入口中，因犹豫而缓慢的将舌头贴上棒身。',

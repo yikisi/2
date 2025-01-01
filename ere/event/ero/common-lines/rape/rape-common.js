@@ -48,15 +48,13 @@ class RapeCommandLines extends EroCommandLines {
    * @param extra_flag
    */
   async run(attacker, defender, hook, extra_flag) {
-    if (defender.sex_code !== 1) {
-      return await super.run(
-        attacker,
-        defender,
-        hook,
-        extra_flag,
-        attacker.id === get('tflag:强奸'),
-      );
-    }
+    return await super.run(
+      attacker,
+      defender,
+      hook,
+      extra_flag,
+      attacker.id === get('tflag:强奸'),
+    );
   }
 }
 
