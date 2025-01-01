@@ -51,7 +51,8 @@ module.exports = {
    * @param {number} semen
    * @param {number} other_id
    * @param {number} supporter_id
-   */ update_breast_exp(chara_id, semen, other_id, supporter_id) {
+   */
+  update_breast_exp(chara_id, semen, other_id, supporter_id) {
     const semen_list = [];
     if (supporter_id) {
       semen_list.push(Math.ceil(semen / 2));
@@ -173,7 +174,7 @@ module.exports = {
         new EroParticipant(supporter_id, part_enum.mouth),
       );
     }
-    const heal_ratio = era.get(`cflag:${chara_id}:种族`) ? 2 : 10;
+    const heal_ratio = era.get(`cflag:${chara_id}:种族`) ? 5 : 10;
     [other_id.toString(), supporter_id]
       .filter((e) => e)
       .forEach((c_id, i) => {
