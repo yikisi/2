@@ -11,6 +11,7 @@ const { get_image } = require('#/system/sys-calc-image');
 const { join_list } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
+const { clothe_names, race_clothe_list } = require('#/data/clothe-const.json');
 const {
   chara_desc,
   chara_full_desc,
@@ -30,7 +31,6 @@ const {
   back_hairs,
   check_chara_ero_image,
   front_hairs,
-  race_clothe_list,
   top_hairs,
 } = require('#/data/other-const');
 
@@ -229,6 +229,10 @@ module.exports = {
         config: { width: 8 },
         content: '决胜服',
         type: 'button',
+      });
+      image_list = image_list.map((e) => {
+        e.n = (clothe_names[chara.id] || {})[e.s] || e.n;
+        return e;
       });
     }
     if (action_buffer.length > 0) {
@@ -440,17 +444,22 @@ module.exports = {
           era.setHorizontalAlign('start');
           const ret = await era.input();
           if (ret === 98) {
+            const name = clothe_names[chara.id][''];
             await era.printAndWait([
               '现在 ',
               chara.get_colored_name(),
-              ' 在参赛时会按照场合和节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服。',
+              ' 在参赛时会按照场合和节庆决定着装，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [',
+              name,
+              ']。',
             ]);
             era.set(`cstr:${chara.id}:决胜服`, 0);
           } else if (ret !== 99) {
             await era.printAndWait([
               '现在 ',
               chara.get_colored_name(),
-              ` 在参赛时、URA颁奖典礼与结束育成后的殿堂周将身着 ${image_list[ret - 1].n}。`,
+              ' 在参赛时、URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [',
+              image_list[ret - 1].n,
+              ']。',
             ]);
             era.set(`cstr:${chara.id}:决胜服`, image_list[ret - 1].s);
           }
