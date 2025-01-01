@@ -214,25 +214,31 @@ module.exports = {
         type: 'button',
       });
     }
-    const image_prefix = era.get(`cstr:${chara.id}:头像`);
-    let image_list;
+    const image_prefix = era.get(`cstr:${chara.id}:头像`),
+      suffix = era.get(`cstr:${chara.id}:决胜服`);
+    let image_list,
+      src_chara = era.get('cflag:0:模版角色');
+    if (src_chara < 0) {
+      src_chara = chara.id;
+    }
     if (
       era.get(`cflag:${chara.id}:种族`) &&
-      (chara.id || era.get('cflag:0:模版角色') > 0) &&
+      src_chara > 0 &&
       (image_list = race_clothe_list.filter((e) =>
         era.checkImage(`${image_prefix}${e.s}`),
       )).length > 1 &&
-      era.get(`cstr:${chara.id}:决胜服`) !== -1
+      suffix !== -1
     ) {
+      image_list = image_list.map((e) => {
+        e.n = (clothe_names[src_chara] || {})[e.s] || e.n;
+        return e;
+      });
+      const curr = image_list.find((e) => e.s === suffix);
       action_buffer.push({
         accelerator: 101,
         config: { width: 8 },
-        content: '决胜服',
+        content: `决胜服${curr ? ` (${curr.n})` : ''}`,
         type: 'button',
-      });
-      image_list = image_list.map((e) => {
-        e.n = (clothe_names[chara.id] || {})[e.s] || e.n;
-        return e;
       });
     }
     if (action_buffer.length > 0) {
@@ -387,7 +393,7 @@ module.exports = {
             title_list[selected].s = true;
           }
         } else {
-          const suffix = era.get(`cstr:${chara.id}:决胜服`);
+          const curr = image_list.find((e) => e.s === suffix);
           era.setHorizontalAlign('space-evenly');
           era.printInColRows(
             [
@@ -398,8 +404,8 @@ module.exports = {
                   chara.get_colored_name(),
                   ' 在参赛时',
                   suffix === 0
-                    ? '按照节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着默认决胜服'
-                    : `穿着 ${image_list.find((e) => e.s === suffix).n}`,
+                    ? `按照节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [${clothe_names[src_chara]['']}]`
+                    : `穿着决胜服 [${curr.n}]`,
                   '。',
                   { isBr: true },
                   '要更换吗？',
@@ -444,12 +450,11 @@ module.exports = {
           era.setHorizontalAlign('start');
           const ret = await era.input();
           if (ret === 98) {
-            const name = clothe_names[chara.id][''];
             await era.printAndWait([
               '现在 ',
               chara.get_colored_name(),
               ' 在参赛时会按照场合和节庆决定着装，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [',
-              name,
+              clothe_names[src_chara][''],
               ']。',
             ]);
             era.set(`cstr:${chara.id}:决胜服`, 0);
