@@ -217,7 +217,7 @@ module.exports = {
     const image_prefix = era.get(`cstr:${chara.id}:头像`),
       suffix = era.get(`cstr:${chara.id}:决胜服`);
     let image_list,
-      src_chara = era.get('cflag:0:模版角色');
+      src_chara = era.get(`cflag:${chara.id}:模版角色`);
     if (src_chara < 0) {
       src_chara = chara.id;
     }
