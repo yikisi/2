@@ -135,6 +135,8 @@ module.exports = class extends CustomizedBase {
     if (life_marks.b_start) {
       dj.say(['……啊，', callname, ' 醒了吗？']);
       dj.say('总之，我回来了。嗯……啾……咕啾……');
+      era.add('exp:0:接吻次数', 1);
+      era.add('exp:119:接吻次数', 1);
       dj.say('我在做什么？只是回家时的仪式而已。');
       dj.say('地下室？不，家指的，当然是您了……我最亲爱的，肉体与灵魂的归属❤️');
     }
@@ -143,7 +145,6 @@ module.exports = class extends CustomizedBase {
   async battle_escape() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0);
-    era.drawLine();
     await era.printAndWait('解开了。');
     await era.printAndWait([
       '最后一层锁……看着熟悉的钥匙孔形状，',
@@ -196,14 +197,12 @@ module.exports = class extends CustomizedBase {
       dj.sex,
       '待的地方……',
     ]);
-    era.drawLine();
   }
 
   async battle_prison() {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0),
       callname = sys_get_callname(this.id, 0);
-    era.drawLine();
     await era.printAndWait('前面的机关都解开了。');
     await era.printAndWait([
       '最后一层锁……看着熟悉的钥匙孔形状，',
@@ -245,7 +244,6 @@ module.exports = class extends CustomizedBase {
       dj.get_colored_name(),
       ' 的头饰在地下室昏暗的灯光下闪烁着银色的光芒……',
     ]);
-    era.drawLine();
   }
 
   async battle_success() {}
@@ -255,7 +253,6 @@ module.exports = class extends CustomizedBase {
       me = get_chara_talk(0),
       callname = sys_get_callname(this.id, 0);
     if (!out_of_prison) {
-      era.drawLine();
       if (is_back) {
         dj.say('哎呀……');
         dj.say([callname, '……您尝试打开这个锁了吗？']);
@@ -302,7 +299,8 @@ module.exports = class extends CustomizedBase {
         dj.get_colored_name(),
         ' 带回了床旁……',
       ]);
-      era.drawLine();
+    } else {
+      super.find_escape(out_of_prison, s_level_up, is_back);
     }
   }
 
@@ -311,7 +309,6 @@ module.exports = class extends CustomizedBase {
       me = get_chara_talk(0),
       m_call_d = sys_get_colored_callname(0, this.id),
       d_call_m = sys_get_colored_callname(this.id, 0);
-    era.println();
     if (Math.random() < 0.5) {
       await me.say_and_wait([
         '对不起，',
@@ -408,7 +405,6 @@ module.exports = class extends CustomizedBase {
   out() {
     const dj = get_chara_talk(this.id),
       callname = sys_get_callname(this.id, 0);
-    era.drawLine();
     era.print([dj.get_colored_name(), ' 还有其他的事要做，即将离开……']);
     era.println();
     dj.say(['对不起，', callname, '……我必须先离开了。']);
@@ -418,13 +414,11 @@ module.exports = class extends CustomizedBase {
     dj.say(
       '真是个烂好人呐……不过，不用了，因为您只需要待在这里，作为我唯一的『归处』，就已经是帮我最大的忙了。',
     );
-    era.drawLine();
   }
 
   start_fixing() {
     const dj = get_chara_talk(this.id),
       callname = sys_get_callname(this.id, 0);
-    era.drawLine();
     dj.say(['啊，', callname, '，可以帮我个忙吗？']);
     if (era.get('cflag:0:身高') > era.get('cflag:119:身高')) {
       dj.say(
@@ -435,7 +429,6 @@ module.exports = class extends CustomizedBase {
     dj.say('在做什么？只是在给门上新的锁而已……感谢您的帮助。');
     era.println();
     era.print(['……早知道就不帮', dj.sex, '了……']);
-    era.drawLine();
   }
 
   async strike_fail() {
@@ -503,7 +496,6 @@ module.exports = class extends CustomizedBase {
     const dj = get_chara_talk(this.id),
       me = get_chara_talk(0),
       callname = sys_get_callname(this.id, 0);
-    era.drawLine();
     era.print([me.get_colored_name(), ' 悠悠醒转……']);
     era.println();
     dj.say(['睡得还舒服吗，', callname, '？']);
@@ -513,6 +505,5 @@ module.exports = class extends CustomizedBase {
     );
     dj.say('不是啊……但，对我来说，就是这样的哦。');
     dj.say('只有有您在的地方，才是我的归处。');
-    era.drawLine();
   }
 };

@@ -695,7 +695,6 @@ module.exports = class extends CustomizedDaily {
             ]);
             if (Math.random() < 0.5) {
               await maya.say_and_wait([
-                ' ',
                 callname,
                 ' ',
                 callname,

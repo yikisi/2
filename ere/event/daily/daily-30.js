@@ -256,7 +256,6 @@ module.exports = class extends CustomizedDaily {
     return get_chara_talk(30).say_and_wait(
       Math.random() < 0.5
         ? [
-            ' ',
             callname,
             '，那个……膝枕……哇啊啊，是 ',
             sys_get_callname(30, 30),
@@ -331,7 +330,7 @@ module.exports = class extends CustomizedDaily {
         await rice.say_and_wait('呜啊啊啊！禁渔区钓上来这么多鱼，真的对不起！');
         extra_flag.jpy = 10;
       } else {
-        await rice.say_and_wait([' ', callname, '，现在是禁渔期哦？']);
+        await rice.say_and_wait([callname, '，现在是禁渔期哦？']);
         await rice.say_and_wait('欸……一人一杆一线一钩？改善生态环境？欸欸欸？');
       }
     } else {

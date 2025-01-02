@@ -98,12 +98,15 @@ function handle_prison_again(my_marks, owner_marks, owner_id, is_back) {
         sys_change_pressure(e, get_random_value(100, 500));
       });
     }
-    return () =>
+    return () => {
+      era.drawLine();
       get_custom_basement(owner_id).find_escape(
         out_of_prison,
         s_level_up,
         is_back,
       );
+      era.drawLine();
+    };
   }
 }
 
@@ -298,7 +301,9 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               owner_marks.b_status !== 1 << basement_status_enum.outside &&
               sys_check_awake(basement_owners.get(0))
             ) {
+              era.drawLine();
               get_custom_basement(basement_owners.get(0)).welcome();
+              era.drawLine();
               owner_marks.b_start = 0;
             } else if (my_life_marks.b_start) {
               get_custom_basement(basement_owners.get(0)).first_time();
@@ -707,7 +712,9 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         );
         if (sys_check_awake(0)) {
           wait_flag = 1;
+          era.drawLine();
           get_custom_basement(fix_character).start_fixing();
+          era.drawLine();
         }
       }
       out_characters.forEach((e) => {
@@ -715,7 +722,9 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         life_marks.b_status = 1 << basement_status_enum.outside;
         if (sys_check_awake(0)) {
           wait_flag = 1;
+          era.drawLine();
           get_custom_basement(e).out();
+          era.drawLine();
         }
         if (get_random_value(0, 100) < (life_marks.b_s_level - 2) * 20) {
           my_life_marks.b_food_medicine = 1;

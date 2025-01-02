@@ -200,7 +200,6 @@ module.exports = class extends CustomizedBase {
       me = get_chara_talk(0),
       callname = sys_get_callname(52, 0);
     await era.printAndWait([
-      ' ',
       me.get_colored_name(),
       ' 意外顺利的摆脱了 ',
       urara.get_colored_name(),

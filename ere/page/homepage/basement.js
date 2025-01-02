@@ -366,6 +366,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             }
           }
           if (win) {
+            era.drawLine();
             if (
               get_random_value(0, 100) <
               (100 +
@@ -384,6 +385,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             } else {
               await get_custom_basement(beat_list[0]).battle_prison();
             }
+            era.drawLine();
           }
           if (my_life_marks.b_now >= 0) {
             my_life_marks.b_enhance = Math.min(
