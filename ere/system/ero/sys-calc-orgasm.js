@@ -697,7 +697,7 @@ async function sys_calc_orgasm(shown, ...ids) {
         '羞耻',
         base_orgasm_juel_reward * orgasm_count * multi_part_reward,
       );
-      sys_change_lust(chara_id, -minus_lust * multi_part_reward);
+      sys_change_lust(chara_id, -minus_lust * orgasm_count * multi_part_reward);
       // 每多一重高潮，体力和精力消耗+10%，50%封顶
       // 根性降低体力和精力消耗，降低比率为系数*log根性/log最大根性，目前最大根性暂定为1200
       // 余韵增加10%的体力精力消耗
