@@ -17,6 +17,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
+const CharaTitles = require('#/data/chara-titles');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -247,6 +248,16 @@ module.exports = async () => {
                   event_hooks.week_start,
                   new EventObject(0, cb_enum.edu).set_arg('strange_day2'),
                 );
+              }
+              if (era.get('cflag:56:招募状态') === recruit_flags.yes) {
+                const title_name =
+                    get_custom_check(56).get_personal_titles()[0],
+                  personal_title = new CharaTitles(56)
+                    .get()
+                    .find((e) => e.n === title_name);
+                if (personal_title !== undefined) {
+                  personal_title.c = get_chara_color(56);
+                }
               }
             }
             return true;
