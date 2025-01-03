@@ -63,7 +63,7 @@ const {
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const LoveLimitStatus = require('#/data/love-limit-status');
-const { gene_juel_names } = require('#/data/other-const');
+const { gene_juel_names, max_chara_id } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { pressure_border } = require('#/data/train-const');
 
@@ -124,14 +124,17 @@ async function sys_next_week() {
         act_list.push({ chara_id, prison: false });
       }
     });
-    let tmp;
+    let tmp = era.get('cflag:0:模版角色');
     if (
       !act_list.length &&
       punish_level >= 2 &&
       get_custom_check(
         (tmp = get_random_entry(
           filter_chara('cflag', '招募状态', recruit_flags.no).filter(
-            (e) => era.get(`cflag:${e}:成长阶段`) >= 2,
+            (e) =>
+              e !== tmp &&
+              e < max_chara_id &&
+              era.get(`cflag:${e}:成长阶段`) >= 2,
           ),
         )),
       ).is_rape_in_sleeping()

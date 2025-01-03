@@ -21,6 +21,7 @@ module.exports = {
     return chara_has_ero_image[chara_id];
   },
   first_child_id: 500,
+  max_chara_id: 1000,
   front_hairs: ['厚刘海', '齐刘海', '侧分', '排气口', '中分'],
   gene_juel_names: ['粉', '蓝', '白'],
   set_chara_ero_image() {

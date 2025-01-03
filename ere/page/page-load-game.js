@@ -22,7 +22,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { first_child_id } = require('#/data/other-const');
+const { first_child_id, max_chara_id } = require('#/data/other-const');
 
 /**
  * load game
@@ -197,7 +197,7 @@ module.exports = async () => {
               }
               era
                 .getAddedCharacters()
-                .filter((e) => e >= first_child_id && e < 1000)
+                .filter((e) => e >= first_child_id && e < max_chara_id)
                 .forEach((e) => {
                   let father_id = era.get(`cflag:${e}:父方角色`),
                     mother_id = era.get(`cflag:${e}:母方角色`);
