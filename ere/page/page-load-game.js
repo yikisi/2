@@ -259,6 +259,15 @@ module.exports = async () => {
                   personal_title.c = get_chara_color(56);
                 }
               }
+              if (era.get('cflag:88:招募状态') === recruit_flags.yes) {
+                const personal_title = new CharaTitles(56)
+                  .get()
+                  .find((e) => e.n === '黑翠千里行');
+                if (personal_title !== undefined) {
+                  personal_title.n =
+                    get_custom_check(88).get_personal_titles()[0];
+                }
+              }
             }
             return true;
           } else {
