@@ -350,8 +350,8 @@ async function common_hug_suspended_congress(attacker, defender, hook) {
       sys_get_colored_callname(attacker.id, defender.id),
       ' 整个人像是挂在自己身上一般。',
     ]);
-    const body_hair_color = era.get(`cflag:${defender.id}:毛色`),
-      hair_color = era.get(`cflag:${defender.id}:发色`);
+    const body_hair_color = era.get(`cstr:${defender.id}:毛色`),
+      hair_color = era.get(`cstr:${defender.id}:发色`);
     await attacker.print_and_wait([
       '好处就是，肉棒能借助重力直直的顶入',
       ...(era.get(`cflag:${defender.id}:种族`)

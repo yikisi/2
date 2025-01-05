@@ -273,7 +273,7 @@ class EroRapeMakingOuts extends EroMakingOuts {
     if (!era.get(`cflag:${defender.id}:种族`)) {
       return;
     }
-    const hair_color = era.get(`cflag:${defender.id}:发色`);
+    const hair_color = era.get(`cstr:${defender.id}:发色`);
     await attacker.print_and_wait([
       '已经在先前的抚摸中预热到差不多的',
       {
@@ -399,8 +399,8 @@ class EroRapeMakingOuts extends EroMakingOuts {
         '的小穴。',
       ]);
       await defender.say_and_wait(['咿……不……不要啊……混蛋！']);
-      const body_hair_color = era.get(`cflag:${defender.id}:毛色`),
-        hair_color = era.get(`cflag:${defender.id}:发色`);
+      const body_hair_color = era.get(`cstr:${defender.id}:毛色`),
+        hair_color = era.get(`cstr:${defender.id}:发色`);
       await attacker.print_and_wait([
         '螓首后仰，',
         ...(era.get(`cflag:${defender.id}:种族`)
@@ -550,7 +550,7 @@ class EroRapeMakingOuts extends EroMakingOuts {
       await attacker.print_and_wait([
         '轻轻咬着牙关，身体都微微发抖，却只是勾起了自己的施虐欲。',
       ]);
-      const body_hair_color = era.get(`cflag:${defender.id}:毛色`);
+      const body_hair_color = era.get(`cstr:${defender.id}:毛色`);
       await attacker.print_and_wait([
         '更过分的缠住',
         {
