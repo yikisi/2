@@ -886,7 +886,7 @@ async function page_ero(lover, skip_start_end) {
     }
   }
   if (!in_basement) {
-    const punish_option = era.get('flag:不忠惩罚');
+    const punish_option = era.get('flag:不忠惩罚') === 1;
     let temp_chara_list = era.getCharactersInTrain();
     const punish_list = sys_filter_chara(
       'cflag',
@@ -899,7 +899,7 @@ async function page_ero(lover, skip_start_end) {
         sys_check_awake(e) &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
         get_custom_mec(e).is_anger_for_unfaithful(partner_list) &&
-        (punish_option || era.get(`talent:${e}:病娇`)),
+        (punish_option || era.get(`talent:${e}:病娇`) > 0),
     );
     for (const chara_id of punish_list) {
       get_custom_check(chara_id).check_after_betrayed(partner_list);
