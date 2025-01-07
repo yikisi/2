@@ -131,7 +131,11 @@ async function page_race_result(contestants, info, race_id) {
   const labels = new Array(result.statistics.loc[0].data.length)
       .fill(0)
       .map((_, i) => get_timer_record(i)),
-    speed_min = (22 - info.span / 1000) * 0.85;
+    speed_min = (22 - info.span / 1000) * 0.85,
+    on_board_list = sort_list(contestants, (e) => e.rank.curr, true).slice(
+      0,
+      5,
+    );
   while (flag_charts > 0) {
     await era.clear();
     era.setAlign('center');
@@ -183,62 +187,60 @@ async function page_race_result(contestants, info, race_id) {
             ],
             config: { width: 6, offset: 9 },
           },
-          ...sort_list(contestants, (e) => e.rank.curr, true)
-            .slice(0, 5)
-            .map((uma, i, l) => {
-              return {
-                columns: [
-                  {
-                    config: { align: 'center', width: 3 },
-                    content: ranks[i],
-                    type: 'text',
+          ...on_board_list.map((uma, i, l) => {
+            return {
+              columns: [
+                {
+                  config: { align: 'center', width: 3 },
+                  content: ranks[i],
+                  type: 'text',
+                },
+                {
+                  config: {
+                    align: 'center',
+                    width: 4,
                   },
-                  {
-                    config: {
-                      align: 'center',
-                      width: 4,
+                  content: [
+                    { color: buff_colors[1], content: '[' },
+                    {
+                      color: uma.color,
+                      content: (uma.index_race + 1).toString(),
+                      fontWeight: 'bold',
                     },
-                    content: [
-                      { color: buff_colors[1], content: '[' },
-                      {
-                        color: uma.color,
-                        content: (uma.index_race + 1).toString(),
-                        fontWeight: 'bold',
-                      },
-                      { color: buff_colors[1], content: ']' },
-                    ],
-                    type: 'text',
+                    { color: buff_colors[1], content: ']' },
+                  ],
+                  type: 'text',
+                },
+                {
+                  config: { offset: 1, width: 16 },
+                  content: ['(', uma.get_colored_name(), ')'],
+                  type: 'text',
+                },
+                {
+                  config: {
+                    offset: 8,
+                    width: 12,
                   },
-                  {
-                    config: { offset: 1, width: 16 },
-                    content: ['(', uma.get_colored_name(), ')'],
-                    type: 'text',
-                  },
-                  {
-                    config: {
-                      offset: 8,
-                      width: 12,
-                    },
-                    content:
-                      i < l.length - 1
-                        ? [
-                            '|- [',
-                            {
-                              color: buff_colors[1],
-                              content: get_bashin_desc(
-                                uma.race.conditionParams.bashin_diff_behind,
-                              ),
-                              fontWeight: 'bold',
-                            },
-                            ']',
-                          ]
-                        : [],
-                    type: 'text',
-                  },
-                ],
-                config: { width: 6, offset: 10 },
-              };
-            }),
+                  content:
+                    i < l.length - 1
+                      ? [
+                          '|- [',
+                          {
+                            color: buff_colors[1],
+                            content: get_bashin_desc(
+                              uma.race.conditionParams.bashin_diff_behind,
+                            ),
+                            fontWeight: 'bold',
+                          },
+                          ']',
+                        ]
+                      : [],
+                  type: 'text',
+                },
+              ],
+              config: { width: 6, offset: 10 },
+            };
+          }),
           {
             columns: [{ type: 'divider' }],
             config: { width: 6, offset: 9 },
