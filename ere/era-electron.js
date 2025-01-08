@@ -156,12 +156,6 @@ const era = {
    */
   async loadGlobal() {},
   /**
-   * to log something into program logs
-   * @param {any} msg
-   */
-  // eslint-disable-next-line no-unused-vars
-  log(msg) {},
-  /**
    * to log save data and global data into program logs
    */
   logData() {},
