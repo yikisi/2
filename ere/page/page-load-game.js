@@ -230,7 +230,7 @@ module.exports = async () => {
                   }
                 });
             }
-            if (version < 1120) {
+            if (version < 1200) {
               era.set('callname:304:306', '㭴本代理');
               era.set('callname:304:305', '安心泽老师');
               const my_reg = sys_reg_race(0);

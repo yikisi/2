@@ -1,3 +1,37 @@
+/**
+ * @typedef PrintedSpan
+ * @type {Object}
+ * @property {string} [color]
+ * @property {string} content
+ * @property {string} [fontSize]
+ * @property {string} [fontStyle]
+ * @property {string} [fontWeight]
+ * @property {string} [url]
+ */
+/**
+ * @typedef InColObject
+ * @type {Object}
+ * @property {'button'|'divider'|'image'|'image.whole'|'progress'|'text'} type
+ * @property {Object} [config]
+ * @property ...
+ */
+/**
+ * @typedef InColConfig
+ * @type {Object}
+ * @property {number} [gutter]
+ * @property {'start'|'center'|'end'|'space-between'|'space-around'|'space-evenly'} [horizontalAlign]
+ * @property {number} [offset]
+ * @property {'top'|'middle'|'bottom'} [verticalAlign]
+ * @property {number} [width]
+ * @see https://element-plus.org/zh-CN/component/layout.html
+ */
+/**
+ * @typedef ColumnObject
+ * @type {Object}
+ * @property {InColObject[]} columns
+ * @property {InColConfig} [config]
+ */
+
 const era = {
   /**
    * DANGER add a variable by name
@@ -51,7 +85,11 @@ const era = {
   },
   /**
    * draw a divider to separate lines. the divider is also a line
-   * @param {{[content]: string, [position]: 'left'|'center'|'right', [isSolid]: boolean, [width]: number}} [config] config of the line
+   * @param [config] config of the line
+   * @param {string} config.[content] content of the divider
+   * @param {'left'|'center'|'right'} config.[position] position of the divider
+   * @param {boolean} config.[isSolid] if the divider is solid
+   * @param {number} config.[width] width of the divider
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
@@ -89,7 +127,12 @@ const era = {
   getLineCount() {},
   /**
    * wait for use's input, the engine will try to return number
-   * @param {{[disableBefore]:boolean,[rule]:string,[useRule]:boolean,[hideInput]:boolean,[show]:boolean}} [config] config of input, like rule
+   * @param [config] config of input, like rule
+   * @param {boolean} config.[disableBefore] if disable before buttons
+   * @param {string} config.[rule] the regex string of the rule
+   * @param {boolean} config.[useRule] if use the rule
+   * @param {boolean} config.[hideInput] if hide the input content
+   * @param {boolean} config.[show] (for Android) if show the input element when using buttons
    * @returns {Promise<any>} a promise of the user input, please use await
    */
   // eslint-disable-next-line no-unused-vars
@@ -127,11 +170,25 @@ const era = {
    */
   logStatic() {},
   logger: {
+    assert(checkVal, aimVal) {
+      if (checkVal !== aimVal && era.version.engine === undefined) {
+        console.log(
+          '[ASSERT]',
+          new Error(`assert failed! aim val: ${aimVal}, got val: ${checkVal}`)
+            .stack,
+        );
+        return;
+      }
+      return era.logger.assert(checkVal, aimVal);
+    },
     /**
      * to log something into program logs as debug level
      * @param {any} msg
      */
     debug(msg) {
+      if (era.version.engine === undefined) {
+        return;
+      }
       return era.logger.debug(msg);
     },
     /**
@@ -140,6 +197,10 @@ const era = {
      * @param {any} [stack]
      */
     error(msg, stack) {
+      if (era.version.engine === undefined) {
+        console.log('[ERROR]', msg, stack);
+        return;
+      }
       return era.logger.error(msg, stack);
     },
     /**
@@ -147,6 +208,10 @@ const era = {
      * @param {any} msg
      */
     info(msg) {
+      if (era.version.engine === undefined) {
+        console.log('[INFO]', msg);
+        return;
+      }
       return era.logger.info(msg);
     },
   },
@@ -172,16 +237,29 @@ const era = {
   playMusic(names, config) {},
   /**
    * print some text
-   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
-   * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line
-   * @returns {number} line number of the printed
+   * @param {string|(PrintedSpan|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
+   * @param [config] config of the printed line
+   * @param {'left'|'center'|'right'} config.[align] align of the line, 'left' in default
+   * @param {string} config.[color] color of the line, '#ffffff' in default
+   * @param {string} config.[fontSize] font size of the line, '1rem' in default
+   * @param {boolean} config.[isParagraph] if the line is in a paragraph, false in default
+   * @param {number} config.[offset] offset of the line, 0-23, 0 in default
+   * @param {number} config.[width] width of the line, 1-24, 24 in default
+   * @returns {number} line number of the printed line
    */
   // eslint-disable-next-line no-unused-vars
   print(content, config) {},
   /**
    * print some text and wait any key from user
    * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
-   * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line   * @returns {Promise<number>} line number of the printed
+   * @param [config] config of the printed line
+   * @param {'left'|'center'|'right'} config.[align] align of the line, 'left' in default
+   * @param {string} config.[color] color of the line, '#ffffff' in default
+   * @param {string} config.[fontSize] font size of the line, '1rem' in default
+   * @param {boolean} config.[isParagraph] if the line is in a paragraph, false in default
+   * @param {number} config.[offset] offset of the line, 0-23, 0 in default
+   * @param {number} config.[width] width of the line, 1-24, 24 in default
+   * @returns {Promise<number>} line number of the printed line
    */
   // eslint-disable-next-line no-unused-vars
   async printAndWait(content, config) {},
@@ -189,7 +267,17 @@ const era = {
    * print a button
    * @param {string} content REQUIRED the text of the button
    * @param {number} accelerator REQUIRED the accelerator key of the button used in the input
-   * @param {{[align]:'left'|'center'|'right',[badge]:'dot'|string,[buttonType]:'primary'|'success'|'warning'|'danger'|'info'|'',[disabled]:boolean,[disableWarning]:boolean,[flush]:boolean,[inTextAlign]:'left'|'center'|'right',[isButton]:boolean,[offset]:number,[showAcc]:boolean,[width]:number}} [config] config of the printed button
+   * @param [config] config of the printed button
+   * @param {'left'|'center'|'right'} config.[align] align of the button, 'left' in default
+   * @param {'dot'|string} config.[badge] badge of the button if isButton is true
+   * @param {'primary'|'success'|'warning'|'danger'|'info'|''} config.[buttonType] type of the button in element-plus, 'warning' in default when isButton is false
+   * @param {boolean} config.[disabled] if the button is disabled, false in default
+   * @param {boolean} config.[disableWarning] if disable warning when accelerator has been set, false in default
+   * @param {'left'|'center'|'right'} config.[inTextAlign] align of the text in the button, 'center' in default
+   * @param {boolean} config.[isButton] if the button is a button, otherwise is a link
+   * @param {number} config.[offset] offset of the button, 0-23, 0 in default
+   * @param {boolean} config.[showAcc] if show the accelerator, false in default on PC, and is always true on Android
+   * @param {number} config.[width] width of the button, 1-24, 1 in default
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
@@ -202,24 +290,27 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   printImage(...names) {},
   /**
-   *
-   * @param {...{columns: [{type: 'button'|'divider'|'image'|'image.whole'|'progress'|'text', [config]: {}}], [config]: {}}|[{type: 'button'|'divider'|'image'|'image.whole'|'progress'|'text', [config]: {}}]} columnObjects
+   * @param {...ColumnObject|InColObject[]} columnObjects
    * @returns {number} line number of the printed
+   * @see print
+   * @see printButton
+   * @see printImage
+   * @see printProgress
    */
   // eslint-disable-next-line no-unused-vars
   printInColRows(...columnObjects) {},
   /**
    * print a line chart by chart.js
    * <br/> see: chart.js, chartjs-plugin-annotation, vue-chartjs
-   * <br/> note: options.scales.x.ticks.callback and options.scales.y.ticks.callback cannot be serialized, uses options.scales.x.ticks.step and options.scales.y.ticks.step to replace them
+   * <br/> note: options.scales.x.ticks.callback and options.scales.y.ticks.callback is the argument array used to create Function
    * @param {*} config
    */
   // eslint-disable-next-line no-unused-vars
   printLineChart(config) {},
   /**
    * print multiple columns into a row, excluding inputs
-   * @param {{type:'button'|'divider'|'image'|'image.whole'|'progress'|'text',[config]:{}}[]} columnObjects the array of settings of columns, like print, printButton, printImage and printProgress
-   * @param {{[gutter]:number,[horizontalAlign]:'start'|'center'|'end'|'space-between'|'space-around'|'space-evenly',[offset]:number,[verticalAlign]:'top'|'middle'|'bottom',[width]:number}} [config] config of the row
+   * @param {InColObject[]} columnObjects the array of settings of columns, like print, printButton, printImage and printProgress
+   * @param {InColConfig} [config] config of the row
    * @returns {number} line number of the printed
    * @see print
    * @see printButton
@@ -233,7 +324,14 @@ const era = {
    * @param {number} percentage REQUIRED the percentage of the progress bar, float, 0-100
    * @param {string} inContent REQUIRED the text shown in the progress bar
    * @param {string} outContent REQUIRED the text shown next to the progress bar
-   * @param {{[align]: 'left'|'center'|'right', [barWidth]: number, [color]: string, [fontColor]: string, [height]: number, [offset]: number, [width]: number}} [config] config of the printed progress
+   * @param [config] config of the printed progress
+   * @param {'left'|'center'|'right'} config.[align] align of the text shown next to the progress bar, 'left' in default
+   * @param {number} config.[barWidth] width of the progress bar, 0-24, 24 in default
+   * @param {string} config.[color] color of the progress bar
+   * @param {string} config.[fontColor] color of the font in the progress bar
+   * @param {number} config.[height] height of the progress bar, 6-30(px), 24(px) in default
+   * @param {number} config.[offset] offset of the progress, 0-23, 0 in default
+   * @param {number} config.[width] width of the progress, 1-24, 24 in default
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
@@ -241,13 +339,16 @@ const era = {
   /**
    * print the whole image
    * @param {string} name REQUIRED
-   * @param {{[fit]: 'fill'|'contain'|'cover'|'none'|'scale-down'|'unset', [offset]: number, [textAlign]: 'left'|'center'|'right', [width]: number}} [config]
+   * @param [config]
+   * @param {'fill'|'contain'|'cover'|'none'|'scale-down'|'unset'} config.[fit] fit of the image
+   * @param {number} config.[offset] offset of the whole image, 0-23, 0 in default
+   * @param {number} config.[width] width of the whole image, 1-24, 24 in default
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
   printWholeImage(name, config) {},
   /**
-   * print a line break, if just used to print enter at the end of a line, please use print('***\n') to replace
+   * print a line break, if just used to print enter at the end of a line, please use print('*** \n') to replace
    * @returns {number} line number of the printed
    */
   println() {},
@@ -255,15 +356,21 @@ const era = {
   quit() {},
   /**
    * DANGER replace the line just printed with a new in-col-row line
-   * @param {...{columns: [{type: 'button'|'divider'|'image'|'image.whole'|'progress'|'text', [config]: {}}], [config]: {}}|[{type: 'button'|'divider'|'image'|'image.whole'|'progress'|'text', [config]: {}}]} columnObjects
+   * @param {...ColumnObject|InColObject[]} columnObjects
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
   replaceInColRows(...columnObjects) {},
   /**
    * DANGER replace the line just printed with a new text line
-   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
-   * @param {{[align]:'left'|'center'|'right',[color]:string,[fontSize]:string,[isList]:boolean,[isParagraph]:boolean,[offset]:number,[width]:number}} [config] config of the printed line
+   * @param {string|(PrintedSpan|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
+   * @param [config] config of the printed line
+   * @param {'left'|'center'|'right'} config.[align] align of the line, 'left' in default
+   * @param {string} config.[color] color of the line, '#ffffff' in default
+   * @param {string} config.[fontSize] font size of the line, '1rem' in default
+   * @param {boolean} config.[isParagraph] if the line is in a paragraph, false in default
+   * @param {number} config.[offset] offset of the line, 0-23, 0 in default
+   * @param {number} config.[width] width of the line, 1-24, 24 in default
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
