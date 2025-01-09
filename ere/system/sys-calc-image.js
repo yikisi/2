@@ -1,10 +1,11 @@
 const era = require('#/era-electron');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
-const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 module.exports = {
   /**
@@ -83,5 +84,9 @@ module.exports = {
     }
     ret.push(base, 'default');
     return ret;
+  },
+  switch_image() {
+    const image_type = era.get('flag:立绘类型');
+    era.set('flag:立绘类型', (image_type + 1) % 3);
   },
 };

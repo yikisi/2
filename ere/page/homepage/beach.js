@@ -8,6 +8,7 @@ const {
   sys_check_awake,
   sys_check_train_enabled,
 } = require('#/system/sys-calc-chara-param');
+const { switch_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const goto_sex = require('#/page/components/goto-sex');
@@ -223,7 +224,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
       await print_load_page();
       break;
     case 990:
-      era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
+      switch_image();
       break;
     case 999:
       flags.week_start = true;

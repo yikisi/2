@@ -5,6 +5,7 @@ const {
   sys_get_debuff,
   sys_get_succ_rate,
 } = require('#/system/sys-calc-chara-param');
+const { switch_image } = require('#/system/sys-calc-image');
 const { get_train_bonus, train_uma } = require('#/system/sys-train-uma');
 
 const print_curr_chara_info = require('#/page/components/cur-chara-info');
@@ -770,7 +771,7 @@ module.exports = async () => {
         }
         break;
       case 990:
-        era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
+        switch_image();
         break;
       case 999:
         flag_train = false;

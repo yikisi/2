@@ -408,7 +408,11 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     if (uma.index_chara >= 0 && !uma.image) {
       uma.set_image(
         get_image(uma.index_chara)
-          .map((_i) => `${_i}_半身`)
+          .map((_i) =>
+            era.get('flag:立绘类型') === 2
+              ? `${_i}_gif\t${_i}_半身`
+              : `${_i}_半身`,
+          )
           .join('\t'),
       );
     }
