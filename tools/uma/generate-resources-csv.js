@@ -30,11 +30,15 @@ const chara_lines = lines.map((e) => {
 function check_and_add_to_csv(file_name, img_name, img_regex) {
   const icon = `chr_icon_${img_regex}_01.png`;
   const stand = `chara_stand_${img_regex}.png`;
+  const gif = `chara_stand_${img_regex}.gif`;
   if (existsSync(`../../res/${file_name}/${icon}`)) {
     buffer[file_name] += `${img_name},${icon},0,0,200,219\n`;
   }
   if (existsSync(`../../res/${file_name}/${stand}`)) {
     buffer[file_name] += `${img_name}_半身,${stand},0,0,512,512\n`;
+  }
+  if (existsSync(`../../res/${file_name}/${gif}`)) {
+    buffer[file_name] += `${img_name}_gif,${gif},0,0,512,512\n`;
   }
 }
 
