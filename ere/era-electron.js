@@ -89,6 +89,7 @@ const era = {
    * @param {string} config.[content] content of the divider
    * @param {'left'|'center'|'right'} config.[position] position of the divider
    * @param {boolean} config.[isSolid] if the divider is solid
+   * @param {number} config.[offset] offset of the divider
    * @param {number} config.[width] width of the divider
    * @returns {number} line number of the printed
    */
@@ -213,7 +214,7 @@ const era = {
    * show a notification
    * @param {string|({[color]:string,content:string,[fontSize]:string,[fontWeight]:string}|{isBr:true}|string)[]} content content of the notification
    * @param {string} [title] title of the notification
-   * @param {'primary'|'success'|'warning'|'danger'|'info'} [type] type of the notification, see the enum
+   * @param {'success'|'info'|'warning'|'error'|''} [type] type of the notification, see the enum
    * @param {number} [duration] duration of the notification, microsecond
    */
   // eslint-disable-next-line no-unused-vars
@@ -265,6 +266,7 @@ const era = {
    * @param {'left'|'center'|'right'} config.[align] align of the button, 'left' in default
    * @param {'dot'|string} config.[badge] badge of the button if isButton is true
    * @param {'primary'|'success'|'warning'|'danger'|'info'|''} config.[buttonType] type of the button in element-plus, 'warning' in default when isButton is false
+   * @param {string} config.[color] color of the button, isButton must be false
    * @param {boolean} config.[disabled] if the button is disabled, false in default
    * @param {boolean} config.[disableWarning] if disable warning when accelerator has been set, false in default
    * @param {'left'|'center'|'right'} config.[inTextAlign] align of the text in the button, 'center' in default
@@ -297,7 +299,8 @@ const era = {
    * print a line chart by chart.js
    * <br/> see: chart.js, chartjs-plugin-annotation, vue-chartjs
    * <br/> note: options.scales.x.ticks.callback and options.scales.y.ticks.callback is the argument array used to create Function
-   * @param {*} config
+   * @returns {number} line number of the printed
+   * @returns {boolean}
    */
   // eslint-disable-next-line no-unused-vars
   printLineChart(config) {},
@@ -456,7 +459,10 @@ const era = {
    */
   // eslint-disable-next-line no-unused-vars
   setTitle(title) {},
-  /** print an empty block and make the following lines shown in the bottom */
+  /**
+   * print an empty block and make the following lines shown in the bottom
+   * @returns {number} line number of the printed
+   */
   setToBottom() {},
   /**
    * set default vertical align of inColRows
