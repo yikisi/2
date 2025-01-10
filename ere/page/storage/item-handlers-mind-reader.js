@@ -121,6 +121,7 @@ module.exports = (handlers) => {
       }
     }
     if (to_use > 0) {
+      await era.clear(1);
       if (await select_yes_or_no(['要使用 ', to_use, ' 张马语者点数卡吗？'])) {
         const timer = era.add('status:0:马语者', to_use);
         era.add('item:马语者', -to_use);
