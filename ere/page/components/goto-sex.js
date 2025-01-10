@@ -15,6 +15,7 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const print_ero_page = require('#/page/page-ero');
 
 const GameGuides = require('#/event/game-guides');
@@ -23,7 +24,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { location_enum } = require('#/data/locations');
-const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 async function select_medicine() {
   const item_list = ['超马跳Z', '马跳S']

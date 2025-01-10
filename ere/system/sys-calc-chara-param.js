@@ -64,7 +64,7 @@ function sys_get_debuff(chara_id) {
     ret = 1000;
   } else if (
     // 恢复期和孕晚期之后不许训
-    (pregnant_stage & 0x31) >
+    (pregnant_stage & 0x110001) >
     0
   ) {
     ret = 0.5;

@@ -144,9 +144,9 @@ async function common_tit_job(attacker, defender, hook) {
     ]);
     await defender.say_and_wait(['肉棒，唔，在胸部里面……❤️']);
     await attacker.print_and_wait([
-      '无意识间张嘴吐出了让人醉心的淫语后，或许是被胸前的火热触感烫到了，发着呆的',
+      '无意识间张嘴吐出了让人醉心的淫语后，或许是被胸前的火热触感烫到了，发着呆的 ',
       sys_get_colored_callname(attacker.id, defender.id),
-      '总算是回过神来了，试图用自己的双手推开肉棒。',
+      ' 总算是回过神来了，试图用自己的双手推开肉棒。',
     ]);
     await attacker.print_and_wait([
       '于是索性握住她的手，强迫着她托住自己的乳肉。',
