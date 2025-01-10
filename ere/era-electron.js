@@ -299,8 +299,8 @@ const era = {
    * print a line chart by chart.js
    * <br/> see: chart.js, chartjs-plugin-annotation, vue-chartjs
    * <br/> note: options.scales.x.ticks.callback and options.scales.y.ticks.callback is the argument array used to create Function
+   * @param {*} config
    * @returns {number} line number of the printed
-   * @returns {boolean}
    */
   // eslint-disable-next-line no-unused-vars
   printLineChart(config) {},
