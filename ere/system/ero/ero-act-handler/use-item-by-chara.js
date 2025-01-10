@@ -11,7 +11,10 @@ const { vp_status_enum } = require('#/data/ero/status-const');
 /** @returns {{items:number[],part:number}} */
 function use_item_by_character() {
   if (era.get('talent:0:泌乳') > 0 && era.get('tequip:0:胸部') === -1) {
-    return { items: [item_enum.milk_pump], part: part_enum.breast };
+    if (era.get('talent:0:乳头类型') !== 2 || era.get('tcvar:0:乳突')) {
+      return { items: [item_enum.milk_pump], part: part_enum.breast };
+    }
+    return { items: [item_enum.electric_stunner], part: part_enum.breast };
   }
   const part_item_list = [
     { items: [item_enum.gag], part: part_enum.mouth },
