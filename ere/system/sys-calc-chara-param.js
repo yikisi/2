@@ -64,7 +64,7 @@ function sys_get_debuff(chara_id) {
     ret = 1000;
   } else if (
     // 恢复期和孕晚期之后不许训
-    (pregnant_stage & 0x110001) >
+    (pregnant_stage & 0b110001) >
     0
   ) {
     ret = 0.5;
@@ -75,7 +75,7 @@ function sys_get_debuff(chara_id) {
     era.get(`status:${chara_id}:弗隆P`) ||
     lust >= lust_border.want_sex ||
     // 安定期惩罚一般
-    (pregnant_stage & 0x8) > 0
+    (pregnant_stage & 0b1000) > 0
   ) {
     ret = 0.2;
   } else if (
@@ -84,7 +84,7 @@ function sys_get_debuff(chara_id) {
     era.get(`status:${chara_id}:发胖`) ||
     lust >= lust_border.absent_mind ||
     // 孕早期惩罚较小
-    (pregnant_stage & 0x4) > 0
+    (pregnant_stage & 0b100) > 0
   ) {
     ret = 0.1;
   }

@@ -236,7 +236,7 @@ async function reg_race_page() {
                     ? ` (${track2location[race_infos[e].track].con})`
                     : '') +
                   (is_grand_live ? ' 🎤' : '') +
-                  ((is_aim_race & 0x3) > 0 ? ' *' : ''),
+                  ((is_aim_race & 0b11) > 0 ? ' *' : ''),
                 type: 'button',
               },
               {

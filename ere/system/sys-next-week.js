@@ -755,7 +755,7 @@ async function sys_next_week() {
       const _special_month = (birth_month % 12) + 1;
       // 第二年开始计算发情期，限定本格期，发情期内无经期
       // 安定期继续发情
-      if (cur_month === _special_month && (pregnant_stage & 0xa) > 0) {
+      if (cur_month === _special_month && (pregnant_stage & 0b1010) > 0) {
         if (!era.get(`status:${chara_id}:发情`)) {
           special_month = era.set(`status:${chara_id}:发情`, 1);
         }
