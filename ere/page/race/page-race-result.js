@@ -10,7 +10,7 @@ const sys_sim_race = require('#/system/race/sys-simulate-race');
 const { sort_list } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const { track_names } = require('#/data/race/model/race-info');
+const { class_enum, track_names } = require('#/data/race/model/race-info');
 
 const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'],
   default_options = {
@@ -60,17 +60,33 @@ async function page_race_result(contestants, info, race_id) {
 
   let flag_result = true;
 
+  const audio_list = [
+    `音效_比赛_${info.name_zh}`,
+    `音效_比赛_${Object.keys(class_enum)[Math.min(info.race_class, 3)]}`,
+  ];
+
   /**
    * @param {number} interval
    */
   async function show_result(interval) {
     era.setAlign('center');
     let index = 0,
-      timer = 0;
+      timer = 0,
+      last_index = result.dynamic_table.findIndex(
+        (e) => e[1].columns[4].inContent.indexOf('终直') !== -1,
+      );
+
+    era.playMusic(audio_list);
 
     while (flag_result && index < result.dynamic_table.length) {
       let report_count = max_records_num,
         skill_count = max_records_num;
+      if (--last_index === 0) {
+        era.playMusic(
+          audio_list.map((e) => `${e}_终`),
+          { fade: true, fadeInternal: 100 },
+        );
+      }
       (index ? era.replaceInColRows : era.printInColRows)(
         ...result.dynamic_table[index],
         [{ content: [{ isBr: true }], type: 'text' }],
@@ -97,6 +113,30 @@ async function page_race_result(contestants, info, race_id) {
       index++;
       timer = add_timer(timer);
     }
+    let report_count = max_records_num,
+      skill_count = max_records_num;
+    era.replaceInColRows(
+      ...result.dynamic_table.at(-1),
+      [{ content: [{ isBr: true }], type: 'text' }],
+      {
+        columns: result.buffer.report.filter(
+          (e) =>
+            timer >= e.timer &&
+            timer < e.timer + report_record_time_window &&
+            report_count-- > 0,
+        ),
+        config: { width: 16 },
+      },
+      {
+        columns: result.buffer.skill.filter(
+          (e) =>
+            timer >= e.timer &&
+            timer < e.timer + skill_record_time_window &&
+            skill_count-- > 0,
+        ),
+        config: { width: 8 },
+      },
+    );
   }
   let interval = 0;
   switch (await era.input()) {
@@ -114,20 +154,28 @@ async function page_race_result(contestants, info, race_id) {
   }
   if (interval > 0) {
     await era.clear();
-    era.input({ show: false }).then(() => (flag_result = false));
+    era
+      .input({ show: false, hideInput: true })
+      .then(() => (flag_result = false));
     await show_result(interval);
   }
   let flag_charts = 1;
   if (
     contestants.findIndex((e) => e.legend === 2) !== -1 &&
-    contestants.find((e) => !e.legend && e.rank.curr === 1)?.index_chara >= 0 &&
-    era.checkImage('滤镜_强敌击退')
+    contestants.find((e) => !e.legend && e.rank.curr === 1)?.index_chara >= 0
   ) {
     era.setMask('滤镜_强敌击退');
+    era.playMusic('音效_强敌击退');
     await era.waitAnyKey();
     era.setMask();
   }
-  flag_result && (await era.waitAnyKey());
+  await era.waitAnyKey();
+  const mvp = Math.min(
+    ...contestants
+      .filter((e) => e.index_chara >= 0 && !e.legend)
+      .map((e) => e.rank.curr),
+  );
+  era.playMusic(`音效_结果_${mvp === 1 ? '1着' : mvp <= 5 ? '入着' : '失败'}`);
   const labels = new Array(result.statistics.loc[0].data.length)
       .fill(0)
       .map((_, i) => get_timer_record(i)),
@@ -349,6 +397,7 @@ async function page_race_result(contestants, info, race_id) {
     }
     flag_charts = flag_charts !== 99 && (await era.input());
   }
+  era.stopMusic();
 }
 
 module.exports = page_race_result;
