@@ -655,7 +655,7 @@ module.exports = class extends MyPrivacyEvents {
         me.get_colored_name(),
         ' 看了一眼大门，思索着要不要换一个。',
       ]);
-      await say_by_passer_by_and_wait('门', '不关我的事。');
+      await say_by_passer_by_and_wait('门', '不关 我事。');
       await me.say_and_wait('……现在连装都不装一下？', true);
     }
     println();
@@ -773,7 +773,7 @@ module.exports = class extends MyPrivacyEvents {
     await printAndWait([
       me.get_colored_name(),
       ' 来到了 ',
-      target.get_colored_name(),
+      tachyon.get_colored_name(),
       ' 的实验室。',
     ]);
     if (is_tachyon_in_team) {
