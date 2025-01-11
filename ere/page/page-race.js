@@ -161,16 +161,19 @@ async function race_page(race) {
     }
   });
   wait_flag && (await era.waitAnyKey());
-  era.playMusic([
-    `音效_亮相圈_${info.name_zh}`,
-    `音效_亮相圈_${
-      info.race_class === RaceInfo.class_enum.G1
-        ? 'g1'
-        : info.race_class >= RaceInfo.class_enum['Pre-OP']
-          ? '出道战'
-          : '非g1'
-    }`,
-  ]);
+  era.playMusic(
+    [
+      `音效_亮相圈_${info.name_zh}`,
+      `音效_亮相圈_${
+        info.race_class === RaceInfo.class_enum.G1
+          ? 'g1'
+          : info.race_class >= RaceInfo.class_enum['Pre-OP']
+            ? '出道战'
+            : '非g1'
+      }`,
+    ],
+    { loop: true },
+  );
   await preview_race(info, team_list, contestants, is_grand_live);
   const race_start = {},
     race_end = {};

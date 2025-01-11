@@ -73,7 +73,7 @@ async function page_race_result(contestants, info, race_id) {
     let index = 0,
       timer = 0,
       last_index = result.dynamic_table.findIndex(
-        (e) => e[1].columns[4].inContent.indexOf('终直') !== -1,
+        (e) => e[0][2].percentage > 1600 / 24,
       ),
       curr_line = era.getLineCount();
 
