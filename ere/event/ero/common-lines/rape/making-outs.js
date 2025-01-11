@@ -144,9 +144,9 @@ async function common_tit_job(attacker, defender, hook) {
     ]);
     await defender.say_and_wait(['肉棒，唔，在胸部里面……❤️']);
     await attacker.print_and_wait([
-      '无意识间张嘴吐出了让人醉心的淫语后，或许是被胸前的火热触感烫到了，发着呆的',
+      '无意识间张嘴吐出了让人醉心的淫语后，或许是被胸前的火热触感烫到了，发着呆的 ',
       sys_get_colored_callname(attacker.id, defender.id),
-      '总算是回过神来了，试图用自己的双手推开肉棒。',
+      ' 总算是回过神来了，试图用自己的双手推开肉棒。',
     ]);
     await attacker.print_and_wait([
       '于是索性握住她的手，强迫着她托住自己的乳肉。',
@@ -179,6 +179,9 @@ async function common_tit_job(attacker, defender, hook) {
  * @param {HookArg} hook
  */
 async function tit_and_blow_job(attacker, defender, hook) {
+  if (defender.sex_code === 1) {
+    return;
+  }
   if (hook.arg) {
     await attacker.print_and_wait([
       '故意挺腰，让从乳肉间探出来的龟头戳在的唇上，向 ',
@@ -260,7 +263,7 @@ class EroRapeMakingOuts extends EroMakingOuts {
         '敏感的根部与内侧忽然被指尖戳弄着，耳朵因为受惊而下意识的绷直。',
       ]);
       await defender.print_and_wait([
-        '报复般地让竖起的马耳朵打在对方侧脸上发出了‘啪’的声响，却只是惹得这家伙发出了一阵笑声。',
+        '报复般地让竖起的马耳朵打在对方侧脸上发出了「啪」的声响，却只是惹得这家伙发出了一阵笑声。',
       ]);
     }
   }
@@ -270,7 +273,7 @@ class EroRapeMakingOuts extends EroMakingOuts {
     if (!era.get(`cflag:${defender.id}:种族`)) {
       return;
     }
-    const hair_color = era.get(`cflag:${defender.id}:发色`);
+    const hair_color = era.get(`cstr:${defender.id}:发色`);
     await attacker.print_and_wait([
       '已经在先前的抚摸中预热到差不多的',
       {
@@ -291,10 +294,10 @@ class EroRapeMakingOuts extends EroMakingOuts {
 
   /** @author ALEX */
   async pet_breast(attacker, defender, hook) {
+    if (defender.sex_code === 1) {
+      return;
+    }
     if (hook.arg) {
-      if (defender.sex_code === 1) {
-        return;
-      }
       await attacker.print_and_wait([
         '伸手托住了弹软如布丁般微微颤动的乳肉，轻轻按压，用掌心感受着面前的',
         era.get(`cflag:${defender.id}:种族`) ? '母马' : '雌性',
@@ -396,8 +399,8 @@ class EroRapeMakingOuts extends EroMakingOuts {
         '的小穴。',
       ]);
       await defender.say_and_wait(['咿……不……不要啊……混蛋！']);
-      const body_hair_color = era.get(`cflag:${defender.id}:毛色`),
-        hair_color = era.get(`cflag:${defender.id}:发色`);
+      const body_hair_color = era.get(`cstr:${defender.id}:毛色`),
+        hair_color = era.get(`cstr:${defender.id}:发色`);
       await attacker.print_and_wait([
         '螓首后仰，',
         ...(era.get(`cflag:${defender.id}:种族`)
@@ -524,6 +527,9 @@ class EroRapeMakingOuts extends EroMakingOuts {
 
   /** @author ALEX */
   async pet_tail(attacker, defender, hook) {
+    if (defender.sex_code === 1) {
+      return;
+    }
     if (hook.arg) {
       await attacker.print_and_wait([
         '空闲下来的手顺着后背向下摸去，才刚刚碰到尾巴根部的位置，全身绷紧的 ',
@@ -544,7 +550,7 @@ class EroRapeMakingOuts extends EroMakingOuts {
       await attacker.print_and_wait([
         '轻轻咬着牙关，身体都微微发抖，却只是勾起了自己的施虐欲。',
       ]);
-      const body_hair_color = era.get(`cflag:${defender.id}:毛色`);
+      const body_hair_color = era.get(`cstr:${defender.id}:毛色`);
       await attacker.print_and_wait([
         '更过分的缠住',
         {
@@ -558,6 +564,9 @@ class EroRapeMakingOuts extends EroMakingOuts {
 
   /** @author ALEX */
   async pull_tail(attacker, defender) {
+    if (defender.sex_code === 1) {
+      return;
+    }
     await defender.say_and_wait('咿～❤️');
     await defender.print_and_wait(['从尾尖到尾根，而后是席卷全身的奇妙感觉。']);
     await defender.print_and_wait([
@@ -630,6 +639,9 @@ class EroRapeMakingOuts extends EroMakingOuts {
 
   /** @author ALEX */
   async ask_blow_job(attacker, defender, hook) {
+    if (defender.sex_code === 1) {
+      return;
+    }
     if (hook.arg) {
       await defender.print_and_wait([
         '将伸到嘴边的腥臭龟头含入口中，因犹豫而缓慢的将舌头贴上棒身。',

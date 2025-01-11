@@ -7,7 +7,7 @@ new Array(26).fill(0).forEach((_, i) => {
   cup_dict[String.fromCharCode(65 + i)] = 10 + Math.ceil(2.5 * i);
 });
 
-const lines = readFileSync('./uma-data.csv', 'utf-8')
+const lines = readFileSync('../../common/uma/uma-data.csv', 'utf-8')
     .replace(/^\uFEFF/, '')
     .split('\n')
     .filter((e) => e)

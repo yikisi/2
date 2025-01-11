@@ -69,7 +69,7 @@ module.exports = class extends CustomizedEdu {
       ' 的面前。',
     ]);
     await ruby.say_and_wait('哎呀……');
-    await era.printAndWait([' ', ruby.get_colored_name(), ' 发出短暂的悲鸣。']);
+    await era.printAndWait([ruby.get_colored_name(), ' 发出短暂的悲鸣。']);
     await era.printAndWait('他的巨根有力地耸立着。');
     await era.printAndWait('其姿态无愧是雄性的象征。');
     await era.printAndWait([

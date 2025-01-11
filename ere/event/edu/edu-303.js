@@ -197,7 +197,7 @@ module.exports = class extends CustomizedEdu {
         !check_pregnant_unprotect(303),
       report = etsuko_check
         ? (args) => say_by_passer_by('主持人', args)
-        : (args) => etsuko.say_and_wait(args),
+        : etsuko.say_and_wait,
       year = get('flag:当前年') - 1;
     let fame_reward = 0;
     await print_event_name('URA颁奖典礼', etsuko);

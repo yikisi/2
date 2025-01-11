@@ -12,11 +12,12 @@ aim_races[get_aim_race_index(race_enum.oka_sho, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.yush_him, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.shio_sta, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.shuk_sho, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.eliz_cup, 1)] = -4;
 aim_races[get_aim_race_index(race_enum.naka_kin, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.vict_mile, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 4;
+
+aim_races[get_aim_race_index(race_enum.eliz_cup, 2)] = -4;
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   (extra_flag) => {

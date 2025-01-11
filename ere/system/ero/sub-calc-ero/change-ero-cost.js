@@ -6,7 +6,7 @@ const {
   get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
-const { check_stain, set_stain } = require('#/system/ero/sys-calc-stain');
+const { set_stain } = require('#/system/ero/sys-calc-stain');
 
 const {
   expansion_coefficient,
@@ -38,19 +38,19 @@ function change_ero_cost(penis_owner, hole_owner, body_part, damage) {
       body_part,
     );
     if (
-      !check_stain(hole_owner, body_part, stain_enum.wound) &&
+      era.get(`ex:${hole_owner}:${part_names[body_part]}撕裂`) === 0 &&
       (expansion > 1 || (!lubrication && Math.random() < wound_percentage))
     ) {
       // 扩张后仍然过大，撕裂
       set_stain(hole_owner, body_part, stain_enum.wound);
       const pain = base_emotion_juel * Math.max(expansion * 2 - 1, 1);
-      add_juel(hole_owner, '痛苦', pain);
-      add_juel(penis_owner, '痛苦', pain * 0.6);
+      add_juel(hole_owner, '痛苦', pain * (0.3 * expansion + 0.4));
+      add_juel(penis_owner, '痛苦', pain * (0.2 * expansion + 0.1));
       era.set(`nowex:${hole_owner}:${part_names[body_part]}撕裂`, 1);
-    } else if (era.get(`ex:${hole_owner}:${part_names[body_part]}撕裂`)) {
+    } else if (era.get(`ex:${hole_owner}:${part_names[body_part]}撕裂`) > 0) {
       const pain = base_emotion_juel * Math.max(expansion * 2, 1);
-      add_juel(hole_owner, '痛苦', pain * 1.1);
-      add_juel(penis_owner, '痛苦', pain * 0.5);
+      add_juel(hole_owner, '痛苦', pain * (0.2 * expansion + 0.7));
+      add_juel(penis_owner, '痛苦', pain * (0.1 * expansion + 0.1));
     }
     if (expansion > 1) {
       expansion = 1 - expansion;

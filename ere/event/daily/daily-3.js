@@ -8,6 +8,8 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const { get_custom_check } = require('#/event/check/check-factory');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
@@ -291,20 +293,19 @@ module.exports = class extends CustomizedDaily {
         }更大胆了，先 ${me.name} 一步开口道`,
       );
       teio.say('那个，我做好了外宿申请，所以今天……');
-      era.print(
-        `声音逐渐微弱下去，血液涌上脸颊，${me.name} 看到${teio.sex}这副模样实在忍不住了，决定——`,
-      );
-      era.printMultiColumns(
-        ['答应', '拒绝'].map((e, i) => {
-          return {
-            accelerator: i * 100,
-            config: { with: 12 },
-            content: e,
-            type: 'button',
-          };
-        }),
-      );
-      if (await era.input()) {
+      if (
+        (await select_yes_or_no(
+          [
+            '声音逐渐微弱下去，血液涌上脸颊，',
+            me.get_colored_name(),
+            ' 看到',
+            teio.sex,
+            '这副模样实在忍不住了，决定——',
+          ],
+          '接受',
+          '拒绝',
+        )) === false
+      ) {
         if (check === 2) {
           if (era.get('status:3:腿伤')) {
             await teio.say_and_wait('唔……这样啊。');
@@ -336,7 +337,7 @@ module.exports = class extends CustomizedDaily {
             );
             await era.printAndWait([
               me.get_colored_name(),
-              ' 还没来的及发布或强调任何事情，就被发挥体能优势的',
+              ' 还没来得及发布或强调任何事情，就被发挥体能优势的',
               teio.get_uma_sex_title(),
               '带着如一阵风般强行移动了……或许 ',
               me.get_colored_name(),

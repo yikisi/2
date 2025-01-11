@@ -459,63 +459,27 @@ async function sys_auto_rape(shown) {
         (relation << 1) + // 0b00000 0b00010 0b00100
         (era.get(`status:${master}:经期`) ||
           era.get(`cflag:${master}:妊娠阶段`) !== 1 << pregnant_stage_enum.no); // 0b00000 0b00001
+      /** @type {0|1|2} 0 - 不避孕，1 - 戴套，2 - 吃药 */
+      let anti_p_type = 0;
       switch (relation) {
         case 0b01010: // 非经期x恋人x普通
-          if (
-            !era.get(`status:${master}:长效避孕药`) &&
-            !era.get(`status:${master}:短效避孕药`)
-          ) {
-            await run_custom_ero(master, ero_hooks.use_medicine, {
-              item: medicine_enum.anti_p_s,
-              user: master,
-              shown,
-            });
-            era.set('tflag:前回行动', ero_hooks.use_medicine);
-            era.set('tflag:前回助手', cur_supporter);
-            return;
-          }
+          anti_p_type = 2;
           break;
         case 0b00000: // 非经期x炮友x性保守
         case 0b00001: // 经期x炮友x性保守
         case 0b00010: // 非经期x恋人x性保守
         case 0b00011: // 经期x恋人x性保守
         case 0b01000: // 非经期x炮友x普通
-          if (!era.get('tcvar:0:避孕套')) {
-            await run_custom_ero(master, ero_hooks.other_condom, {
-              shown,
-            });
-            era.set('tflag:前回行动', ero_hooks.other_condom);
-            era.set('tflag:前回助手', cur_supporter);
-            return;
-          }
+          anti_p_type = 1;
           break;
         case 0b10000: // 非经期x炮友x好色
-          if (
-            era.get(`status:${master}:排卵期`) &&
-            !era.get('tcvar:0:避孕套')
-          ) {
-            await run_custom_ero(master, ero_hooks.other_condom, {
-              shown,
-            });
-            era.set('tflag:前回行动', ero_hooks.other_condom);
-            era.set('tflag:前回助手', cur_supporter);
-            return;
+          if (era.get(`status:${master}:排卵期`)) {
+            anti_p_type = 1;
           }
           break;
         case 0b10010: // 非经期x恋人x好色
-          if (
-            era.get(`status:${master}:排卵期`) &&
-            !era.get(`status:${master}:长效避孕药`) &&
-            !era.get(`status:${master}:短效避孕药`)
-          ) {
-            await run_custom_ero(master, ero_hooks.use_medicine, {
-              item: medicine_enum.anti_p_s,
-              user: master,
-              shown,
-            });
-            era.set('tflag:前回行动', ero_hooks.use_medicine);
-            era.set('tflag:前回助手', cur_supporter);
-            return;
+          if (era.get(`status:${master}:排卵期`)) {
+            anti_p_type = 2;
           }
           break;
         case 0b00100: // 非经期x未婚x性保守
@@ -528,6 +492,35 @@ async function sys_auto_rape(shown) {
         case 0b10011: // 经期x恋人x好色
         case 0b10100: // 非经期x未婚x好色
         case 0b10101: // 经期x未婚x好色
+      }
+      if (anti_p_type > 0) {
+        if (era.get(`talent:${master}:榨精成瘾`) > 0) {
+          anti_p_type = 2;
+        } else if (era.get(`talent:${master}:子宫敏感`) > 0) {
+          anti_p_type = 1;
+        }
+        if (anti_p_type === 1 && !era.get('tcvar:0:避孕套')) {
+          await run_custom_ero(master, ero_hooks.other_condom, {
+            shown,
+          });
+          era.set('tflag:前回行动', ero_hooks.other_condom);
+        } else if (
+          !era.get(`status:${master}:长效避孕药`) &&
+          !era.get(`status:${master}:短效避孕药`)
+        ) {
+          await run_custom_ero(master, ero_hooks.use_medicine, {
+            item: medicine_enum.anti_p_s,
+            user: master,
+            shown,
+          });
+          era.set('tflag:前回行动', ero_hooks.use_medicine);
+        } else {
+          anti_p_type = 0;
+        }
+      }
+      if (anti_p_type > 0) {
+        era.set('tflag:前回助手', cur_supporter);
+        return;
       }
     } else if (
       ero_tagged_hooks[action].attacker_tags.indexOf(ero_hook_tags.insert) !==

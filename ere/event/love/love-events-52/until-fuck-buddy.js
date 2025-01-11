@@ -205,7 +205,6 @@ module.exports = class extends CustomizedLove {
         '十只手指努力地探索着身体的每一个淫靡的角落，不断地从粉嫩的幼穴中拉出粘稠的银丝。',
       );
       await era.printAndWait([
-        '',
         urara.get_teen_sex_title(),
         '的淫水正源源不断地滴落，在光洁的地板上留下一滩充满背德欲望的小小水洼。',
       ]);

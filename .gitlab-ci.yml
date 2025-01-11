@@ -18,6 +18,7 @@ build:
   variables:
     NODE_OPTIONS: "--openssl-legacy-provider"
   script:
+    - git lfs pull
     - MIN_VERSION=`cat .ere-min-version`
     - RES_VERSION=`cat .res-min-version`
     - git submodule update --init

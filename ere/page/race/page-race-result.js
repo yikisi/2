@@ -10,7 +10,7 @@ const sys_sim_race = require('#/system/race/sys-simulate-race');
 const { sort_list } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const { track_names } = require('#/data/race/model/race-info');
+const { class_enum, track_names } = require('#/data/race/model/race-info');
 
 const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'],
   default_options = {
@@ -60,18 +60,35 @@ async function page_race_result(contestants, info, race_id) {
 
   let flag_result = true;
 
+  const audio_list = [
+    `音效_比赛_${info.name_zh}`,
+    `音效_比赛_${Object.keys(class_enum)[Math.min(info.race_class, 3)]}`,
+  ];
+
   /**
    * @param {number} interval
    */
   async function show_result(interval) {
     era.setAlign('center');
     let index = 0,
-      timer = 0;
+      timer = 0,
+      last_index = result.dynamic_table.findIndex(
+        (e) => e[1].columns[4].inContent.indexOf('终直') !== -1,
+      ),
+      curr_line = era.getLineCount();
+
+    era.playMusic(audio_list);
 
     while (flag_result && index < result.dynamic_table.length) {
       let report_count = max_records_num,
         skill_count = max_records_num;
-      (index ? era.replaceInColRows : era.printInColRows)(
+      if (--last_index === 0) {
+        era.playMusic(
+          audio_list.map((e) => `${e}_终`),
+          { fade: true, fadeInternal: 100 },
+        );
+      }
+      curr_line = (index ? era.replaceInColRows : era.printInColRows)(
         ...result.dynamic_table[index],
         [{ content: [{ isBr: true }], type: 'text' }],
         {
@@ -97,6 +114,15 @@ async function page_race_result(contestants, info, race_id) {
       index++;
       timer = add_timer(timer);
     }
+    await era.clear(era.getLineCount() - curr_line);
+    era.replaceInColRows(
+      ...result.dynamic_table.at(-1),
+      [{ content: [{ isBr: true }], type: 'text' }],
+      {
+        columns: [result.buffer.report[0]],
+        config: { width: 16 },
+      },
+    );
   }
   let interval = 0;
   switch (await era.input()) {
@@ -123,14 +149,25 @@ async function page_race_result(contestants, info, race_id) {
     contestants.find((e) => !e.legend && e.rank.curr === 1)?.index_chara >= 0
   ) {
     era.setMask('滤镜_强敌击退');
+    era.playMusic('音效_强敌击退');
     await era.waitAnyKey();
     era.setMask();
   }
-  flag_result && (await era.waitAnyKey());
+  await era.waitAnyKey();
+  const mvp = Math.min(
+    ...contestants
+      .filter((e) => e.index_chara >= 0 && !e.legend)
+      .map((e) => e.rank.curr),
+  );
+  era.playMusic(`音效_结果_${mvp === 1 ? '1着' : mvp <= 5 ? '入着' : '失败'}`);
   const labels = new Array(result.statistics.loc[0].data.length)
       .fill(0)
       .map((_, i) => get_timer_record(i)),
-    speed_min = (22 - info.span / 1000) * 0.85;
+    speed_min = (22 - info.span / 1000) * 0.85,
+    on_board_list = sort_list(contestants, (e) => e.rank.curr, true).slice(
+      0,
+      5,
+    );
   while (flag_charts > 0) {
     await era.clear();
     era.setAlign('center');
@@ -182,62 +219,60 @@ async function page_race_result(contestants, info, race_id) {
             ],
             config: { width: 6, offset: 9 },
           },
-          ...sort_list(contestants, (e) => e.rank.curr, true)
-            .slice(0, 5)
-            .map((uma, i, l) => {
-              return {
-                columns: [
-                  {
-                    config: { align: 'center', width: 3 },
-                    content: ranks[i],
-                    type: 'text',
+          ...on_board_list.map((uma, i, l) => {
+            return {
+              columns: [
+                {
+                  config: { align: 'center', width: 3 },
+                  content: ranks[i],
+                  type: 'text',
+                },
+                {
+                  config: {
+                    align: 'center',
+                    width: 4,
                   },
-                  {
-                    config: {
-                      align: 'center',
-                      width: 4,
+                  content: [
+                    { color: buff_colors[1], content: '[' },
+                    {
+                      color: uma.color,
+                      content: (uma.index_race + 1).toString(),
+                      fontWeight: 'bold',
                     },
-                    content: [
-                      { color: buff_colors[1], content: '[' },
-                      {
-                        color: uma.color,
-                        content: (uma.index_race + 1).toString(),
-                        fontWeight: 'bold',
-                      },
-                      { color: buff_colors[1], content: ']' },
-                    ],
-                    type: 'text',
+                    { color: buff_colors[1], content: ']' },
+                  ],
+                  type: 'text',
+                },
+                {
+                  config: { offset: 1, width: 16 },
+                  content: ['(', uma.get_colored_name(), ')'],
+                  type: 'text',
+                },
+                {
+                  config: {
+                    offset: 8,
+                    width: 12,
                   },
-                  {
-                    config: { offset: 1, width: 16 },
-                    content: ['(', uma.get_colored_name(), ')'],
-                    type: 'text',
-                  },
-                  {
-                    config: {
-                      offset: 8,
-                      width: 12,
-                    },
-                    content:
-                      i < l.length - 1
-                        ? [
-                            '|- [',
-                            {
-                              color: buff_colors[1],
-                              content: get_bashin_desc(
-                                uma.race.conditionParams.bashin_diff_behind,
-                              ),
-                              fontWeight: 'bold',
-                            },
-                            ']',
-                          ]
-                        : [],
-                    type: 'text',
-                  },
-                ],
-                config: { width: 6, offset: 10 },
-              };
-            }),
+                  content:
+                    i < l.length - 1
+                      ? [
+                          '|- [',
+                          {
+                            color: buff_colors[1],
+                            content: get_bashin_desc(
+                              uma.race.conditionParams.bashin_diff_behind,
+                            ),
+                            fontWeight: 'bold',
+                          },
+                          ']',
+                        ]
+                      : [],
+                  type: 'text',
+                },
+              ],
+              config: { width: 6, offset: 10 },
+            };
+          }),
           {
             columns: [{ type: 'divider' }],
             config: { width: 6, offset: 9 },
@@ -346,6 +381,7 @@ async function page_race_result(contestants, info, race_id) {
     }
     flag_charts = flag_charts !== 99 && (await era.input());
   }
+  era.stopMusic();
 }
 
 module.exports = page_race_result;

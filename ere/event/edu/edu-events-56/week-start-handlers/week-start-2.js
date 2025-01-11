@@ -174,7 +174,7 @@ module.exports = (handlers) => {
       me.get_colored_name(),
       ' 的胸口都湿了一大片。',
     ]);
-    await era.printAndWait(['']);
+    era.println();
     await era.printAndWait([
       '寂寥无人的神社中，',
       me.get_colored_name(),

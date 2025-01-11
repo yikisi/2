@@ -426,10 +426,22 @@ module.exports = class extends Edu85CrazyFanEnd {
       ' 打开笔记本确认事项时，一张有点眼熟的东西飘到了地上。',
     ]);
     await era.printAndWait('捡起一看，是温泉旅行券。');
-    if (new RubyEduMarks().hot_spring) {
-      await ruby.say_and_wait(
-        '是刚迈入古典级，去商店街参加的那次抽奖抽到的吧。',
-      );
+    const edu_marks = new RubyEduMarks();
+    if (edu_marks.hot_spring > 0) {
+      const date = Math.floor((edu_marks.hot_spring - 96) / 4);
+      await ruby.say_and_wait([
+        '是',
+        date < 2
+          ? '刚迈入资深年'
+          : date < 5
+            ? '去年春天'
+            : date < 9
+              ? '去年夏天'
+              : date < 11
+                ? '去年秋天'
+                : '上个月',
+        '，去商店街参加的那次抽奖抽到的吧。',
+      ]);
       await era.printAndWait([
         '那时候，',
         me.get_colored_name(),

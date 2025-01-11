@@ -244,7 +244,6 @@ module.exports = class extends Love52AfterWife {
       ' 的选择。',
     ]);
     await era.printAndWait([
-      '',
       urara.get_teen_sex_title(),
       '一直等待着最喜欢的 ',
       callname,
@@ -372,14 +371,12 @@ module.exports = class extends Love52AfterWife {
       sys_like_chara(52, 0, 10) && (await era.waitAnyKey());
     } else {
       await urara.say_and_wait([
-        ' ',
         callname,
         ' 也有 ',
         callname,
         ' 的考虑，乌拉拉明白的！不过以后要多陪陪乌拉拉哦？',
       ]);
       await era.printAndWait([
-        ' ',
         urara.get_colored_name(),
         ' 笑着推开了 ',
         me.get_colored_name(),

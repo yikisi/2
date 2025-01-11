@@ -475,7 +475,12 @@ module.exports = class extends CustomizedDaily {
         await era.printAndWait(
           `与 ${kita.name} 一同参加了商店街组织的抽奖活动……`,
         );
-        switch (get_random_value(0, 3 + !edu_marks.hot_spring)) {
+        switch (
+          get_random_value(
+            0,
+            3 + !edu_marks.hot_spring && era.get('cflag:68:育成回合计时') < 144,
+          )
+        ) {
           case 0:
             await kita.say_and_wait(
               `路过的花山组的大哥送我的抽奖券……能抽到什么呢？`,
@@ -492,9 +497,10 @@ module.exports = class extends CustomizedDaily {
             await era.printAndWait(`${kita.name} 接过了纸巾，失落的垂头丧气。`);
             break;
           case 1:
-            await kita.say_and_wait(
-              `小钻在商店街购物后送给我的抽奖券，让我试试看吧！`,
-            );
+            await kita.say_and_wait([
+              sys_get_colored_callname(68, 67),
+              ' 在商店街购物后送给我的抽奖券，让我试试看吧！',
+            ]);
             await era.printAndWait(`咕噜咕噜咕噜咕噜……`);
             await era.printAndWait(`biu～`);
             await era.printAndWait(`获得了商店街的奖品：【胡萝卜】！`);
@@ -523,9 +529,11 @@ module.exports = class extends CustomizedDaily {
             );
             break;
           case 3:
-            await kita.say_and_wait(
-              `诶嘿嘿，是变革同学买了餐巾纸后送我的抽奖券，会抽到什么东西呢？`,
-            );
+            await kita.say_and_wait([
+              '诶嘿嘿，是 ',
+              sys_get_colored_callname(68, 44),
+              ' 买了餐巾纸后送我的抽奖券，会抽到什么东西呢？',
+            ]);
             await era.printAndWait(`咕噜咕噜咕噜咕噜……`);
             await era.printAndWait(`biu～`);
             await era.printAndWait(

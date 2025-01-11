@@ -12,6 +12,7 @@ const {
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+const { switch_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const print_curr_chara = require('#/page/components/cur-chara-info');
@@ -247,7 +248,7 @@ module.exports = async () => {
         }
         flag_god = 0;
       } else if (temp === 990) {
-        era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
+        switch_image();
       } else {
         flag_god = 2;
         era.print(

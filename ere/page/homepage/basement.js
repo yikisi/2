@@ -10,6 +10,7 @@ const {
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+const { switch_image } = require('#/system/sys-calc-image');
 
 const print_cur_chara_info = require('#/page/components/cur-chara-info');
 const page_header = require('#/page/components/page-header');
@@ -366,6 +367,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             }
           }
           if (win) {
+            era.drawLine();
             if (
               get_random_value(0, 100) <
               (100 +
@@ -384,6 +386,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             } else {
               await get_custom_basement(beat_list[0]).battle_prison();
             }
+            era.drawLine();
           }
           if (my_life_marks.b_now >= 0) {
             my_life_marks.b_enhance = Math.min(
@@ -514,7 +517,7 @@ module.exports = async (_, save_and_next_week, flags) => {
       await print_load_page();
       break;
     case 990:
-      era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
+      switch_image();
       break;
     default:
       era.drawLine();

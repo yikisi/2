@@ -63,7 +63,7 @@ const {
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const LoveLimitStatus = require('#/data/love-limit-status');
-const { gene_juel_names } = require('#/data/other-const');
+const { gene_juel_names, max_chara_id } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { pressure_border } = require('#/data/train-const');
 
@@ -71,7 +71,7 @@ async function sys_next_week() {
   const health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes,
     me = get_chara_talk(0),
     punish_level = era.get('flag:惩戒力度'),
-    team_dict = {},
+    team_dict = { 0: 1 },
     your_race = era.get('cflag:0:种族');
   let in_team_list = filter_chara(
     'cflag',
@@ -124,14 +124,17 @@ async function sys_next_week() {
         act_list.push({ chara_id, prison: false });
       }
     });
-    let tmp;
+    let tmp = era.get('cflag:0:模版角色');
     if (
       !act_list.length &&
       punish_level >= 2 &&
       get_custom_check(
         (tmp = get_random_entry(
           filter_chara('cflag', '招募状态', recruit_flags.no).filter(
-            (e) => era.get(`cflag:${e}:成长阶段`) >= 2,
+            (e) =>
+              e !== tmp &&
+              e < max_chara_id &&
+              era.get(`cflag:${e}:成长阶段`) >= 2,
           ),
         )),
       ).is_rape_in_sleeping()
@@ -423,59 +426,59 @@ async function sys_next_week() {
       registered_race.last.race = registered_race.curr.race;
       registered_race.last.week = registered_race.curr.week;
 
-      stay_up > 0 && sys_change_pressure(chara_id, 100 + 200 * stay_up);
-      out_race_list.at(-1) === chara_id &&
-        sys_change_pressure(chara_id, get_random_value(1000, 2000));
-      let motivation_change = 0,
-        status_hate = era.get(`status:${chara_id}:讨厌药`);
-      status_hate && (status_hate = era.add(`status:${chara_id}:讨厌药`, -1));
-      const status_limit = new LoveLimitStatus(chara_id);
-      if (
-        !status_limit.is_empty() &&
-        cur_round > status_limit.limit &&
-        Math.random() > Math.pow(2, status_limit.limit - cur_round) + 0.5
-      ) {
-        era.set(`love:${chara_id}`, status_limit.cache);
-        const limit_delta = cur_round - status_limit.limit;
-        status_limit.clear();
-        await era.printAndWait([
-          '下给 ',
-          chara.get_colored_name(),
-          ` 的抑制药失效了……${chara.sex}对 `,
-          me.get_colored_name(),
-          ' 的恋心汹涌而来',
-        ]);
-        sys_love_uma(chara_id, limit_delta * 2 + 8, true) &&
-          (await era.waitAnyKey());
-        sys_change_lust(
-          chara_id,
-          limit_delta * 100 + get_random_value(800, 1800),
-        );
-      }
-      if (era.get(`cflag:${chara_id}:成长阶段`) >= 2) {
+      let motivation_change = 0;
+      if (chara_id > 0) {
+        stay_up > 0 && sys_change_pressure(chara_id, 100 + 200 * stay_up);
+        out_race_list.at(-1) === chara_id &&
+          sys_change_pressure(chara_id, get_random_value(1000, 2000));
+        let status_hate = era.get(`status:${chara_id}:讨厌药`);
+        status_hate && (status_hate = era.add(`status:${chara_id}:讨厌药`, -1));
+        const status_limit = new LoveLimitStatus(chara_id);
         if (
-          (temp = era.get('flag:回合好感惩罚')) ||
-          era.get(`status:${chara_id}:讨厌药`)
+          !status_limit.is_empty() &&
+          cur_round > status_limit.limit &&
+          Math.random() > Math.pow(2, status_limit.limit - cur_round) + 0.5
         ) {
-          sys_like_chara(
+          era.set(`love:${chara_id}`, status_limit.cache);
+          const limit_delta = cur_round - status_limit.limit;
+          status_limit.clear();
+          await era.printAndWait([
+            '下给 ',
+            chara.get_colored_name(),
+            ` 的抑制药失效了……${chara.sex}对 `,
+            me.get_colored_name(),
+            ' 的恋心汹涌而来',
+          ]);
+          sys_love_uma(chara_id, limit_delta * 2 + 8, true) &&
+            (await era.waitAnyKey());
+          sys_change_lust(
             chara_id,
-            0,
-            temp - (era.get(`status:${chara_id}:讨厌药`) > 0) * 50,
-            false,
+            limit_delta * 100 + get_random_value(800, 1800),
           );
         }
-        if ((temp = era.get('flag:回合爱慕惩罚'))) {
-          sys_love_uma(
-            chara_id,
-            (1 - (era.get(`status:${chara_id}:讨厌药`) > 0)) *
-              (1 - !new LoveLimitStatus(chara_id).is_empty()) *
-              temp,
-            false,
-          );
+        if (era.get(`cflag:${chara_id}:成长阶段`) >= 2) {
+          if (
+            (temp = era.get('flag:回合好感惩罚')) ||
+            era.get(`status:${chara_id}:讨厌药`)
+          ) {
+            sys_like_chara(
+              chara_id,
+              0,
+              temp - (era.get(`status:${chara_id}:讨厌药`) > 0) * 50,
+              false,
+            );
+          }
+          if ((temp = era.get('flag:回合爱慕惩罚'))) {
+            sys_love_uma(
+              chara_id,
+              (1 - (era.get(`status:${chara_id}:讨厌药`) > 0)) *
+                (1 - !new LoveLimitStatus(chara_id).is_empty()) *
+                temp,
+              false,
+            );
+          }
         }
-      }
-      // 殿堂计算
-      if (chara_id) {
+        // 殿堂计算
         const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
         if (edu_weeks === 3 * 48) {
           sys_handle_palace(chara_id);
@@ -752,7 +755,7 @@ async function sys_next_week() {
       const _special_month = (birth_month % 12) + 1;
       // 第二年开始计算发情期，限定本格期，发情期内无经期
       // 安定期继续发情
-      if (cur_month === _special_month && (pregnant_stage & 0xa) > 0) {
+      if (cur_month === _special_month && (pregnant_stage & 0b1010) > 0) {
         if (!era.get(`status:${chara_id}:发情`)) {
           special_month = era.set(`status:${chara_id}:发情`, 1);
         }
@@ -986,7 +989,6 @@ async function sys_next_week() {
         0,
     );
   }
-
   await morning_sex();
   era.set('flag:床伴', 0);
   era.set('flag:随机种子', (era.get('flag:随机种子') * 9301 + 49297) % 233280);

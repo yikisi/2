@@ -10,9 +10,9 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const KitaruEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -123,7 +123,7 @@ module.exports = class extends CustomizedCheck {
       }
       if (new KitaruEduMarks().best_g2_count >= 15 && count >= 3) {
         ret.push({
-          c: get_chara_talk(this.id),
+          c: get_chara_color(this.id),
           n: this.get_personal_titles()[0],
         });
         aim_check && sys_personal_achievement.set(this.id, 1);

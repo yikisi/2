@@ -20,7 +20,7 @@ class VariationRapeFucking extends EroRapeFucking {
       '有着不错柔韧性与平衡的舞者，正在自己面前展示着躯体。',
     );
     await attacker.print_and_wait([
-      '仅让足尖点地，大腿内侧肌肉拉伸,右腿再慢慢抬到水平位置。',
+      '仅让足尖点地，大腿内侧肌肉拉伸，右腿再慢慢抬到水平位置。',
     ]);
     await attacker.print_and_wait([
       '尽力做着侧抬腿姿势的 ',
@@ -31,7 +31,7 @@ class VariationRapeFucking extends EroRapeFucking {
       era.get(`cflag:${defender.id}:阴毛`) >= 1 ? '被阴毛遮掩' : '光洁可爱',
       '的小穴正随着紧绷的动作一开一合。',
     ]);
-    await defender.say_and_wait('满意了吧……人渣!');
+    await defender.say_and_wait('满意了吧……人渣！');
     await attacker.print_and_wait([
       '看来还没到极限，于是自觉伸手纠正动作，将保持在水平高度的右腿慢慢托起，直到垂直朝上与左腿保持在一条直线。',
     ]);

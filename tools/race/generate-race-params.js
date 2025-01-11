@@ -2,7 +2,7 @@ const { writeFileSync } = require('fs');
 const { resolve } = require('path');
 
 /** @type {{id:number,lane:{type:string,start:number,length:number,end:number,name:string}[],slopes:{type:string,start:number,length:number,end:number,slope:number}[]}[]} */
-const data = require('./CourseParams.json');
+const data = require('../../common/race/CourseParams.json');
 
 let output =
     "const { RaceLane, RaceSlope } = require('#/data/race/model/race-info');\n\nmodule.exports = {\n",
@@ -75,7 +75,7 @@ output += `lane_params: {${lane_output}},\nslope_params: {${slope_output}}};`;
 writeFileSync(resolve('../../ere/data/race/race-params.js'), output);
 
 /** @type {{id:number,status_id:number}[]} */
-const status_data = require('./Course2StatusId.json');
+const status_data = require('../../common/race/Course2StatusId.json');
 
 output =
   "const { attr_enum } = require('#/data/train-const');\n\nmodule.exports = {id2bonus: {\n";

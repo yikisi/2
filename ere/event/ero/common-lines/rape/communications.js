@@ -24,6 +24,9 @@ class EroRapeCommunications extends EroCommunications {
 
   /** @author ALEX */
   async kiss(attacker, defender, hook) {
+    if (defender.sex_code === 1) {
+      return;
+    }
     if (hook.arg) {
       await defender.print_and_wait([
         '漂亮的瞳孔因惊恐而扩散，被 ',
@@ -55,6 +58,9 @@ class EroRapeCommunications extends EroCommunications {
 
   /** @author ALEX */
   async french_kiss(attacker, defender, hook) {
+    if (defender.sex_code === 1) {
+      return;
+    }
     if (hook.arg) {
       await defender.say_and_wait('哈啊……');
       await defender.print_and_wait([

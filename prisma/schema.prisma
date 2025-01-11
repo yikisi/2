@@ -2490,6 +2490,7 @@ model login_bonus_data {
 
   @@index([group_id], map: "login_bonus_data_0_group_id")
   @@index([type], map: "login_bonus_data_0_type")
+  @@index([bg_id], map: "login_bonus_data_0_bg_id")
 }
 
 model login_bonus_detail {

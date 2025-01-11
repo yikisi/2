@@ -408,8 +408,9 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_shopping(hook) {
-    const ruby = get_chara_talk(85);
-    const temp = await select_action_in_shopping_street();
+    const ruby = get_chara_talk(85),
+      temp = await select_action_in_shopping_street(),
+      edu_marks = new RubyEduMarks();
     hook.arg = temp <= 1;
     switch (temp) {
       case 0:
@@ -425,7 +426,11 @@ module.exports = class extends CustomizedDaily {
         break;
       case 1:
         switch (
-          get_random_value(0, 1 + (era.get('cflag:85:育成回合计时') >= 96))
+          get_random_value(
+            0,
+            1 +
+              !edu_marks.hot_spring * (era.get('cflag:85:育成回合计时') >= 96),
+          )
         ) {
           case 0:
             await ruby.say_and_wait(
@@ -439,7 +444,7 @@ module.exports = class extends CustomizedDaily {
             break;
           case 2:
             await ruby.say_and_wait('抽到了温泉旅行券');
-            new RubyEduMarks().hot_spring = 1;
+            new RubyEduMarks().hot_spring = era.get('cflag:85:育成回合计时');
         }
         break;
       case 2:

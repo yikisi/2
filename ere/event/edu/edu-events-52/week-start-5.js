@@ -429,7 +429,7 @@ module.exports = (handlers) => {
         ' 还没回来，乌拉拉先泡一下好了——！',
       ]);
       await era.printAndWait([
-        '还没来的及睁开眼睛，撞飞良好气氛的小',
+        '还没来得及睁开眼睛，撞飞良好气氛的小',
         urara.get_uma_sex_title(),
         '便在池边一跃而起，在激荡的水花中扎进了池中。',
       ]);
