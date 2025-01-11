@@ -74,7 +74,8 @@ async function page_race_result(contestants, info, race_id) {
       timer = 0,
       last_index = result.dynamic_table.findIndex(
         (e) => e[1].columns[4].inContent.indexOf('终直') !== -1,
-      );
+      ),
+      curr_line = era.getLineCount();
 
     era.playMusic(audio_list);
 
@@ -87,7 +88,7 @@ async function page_race_result(contestants, info, race_id) {
           { fade: true, fadeInternal: 100 },
         );
       }
-      (index ? era.replaceInColRows : era.printInColRows)(
+      curr_line = (index ? era.replaceInColRows : era.printInColRows)(
         ...result.dynamic_table[index],
         [{ content: [{ isBr: true }], type: 'text' }],
         {
@@ -113,28 +114,13 @@ async function page_race_result(contestants, info, race_id) {
       index++;
       timer = add_timer(timer);
     }
-    let report_count = max_records_num,
-      skill_count = max_records_num;
+    await era.clear(era.getLineCount() - curr_line);
     era.replaceInColRows(
       ...result.dynamic_table.at(-1),
       [{ content: [{ isBr: true }], type: 'text' }],
       {
-        columns: result.buffer.report.filter(
-          (e) =>
-            timer >= e.timer &&
-            timer < e.timer + report_record_time_window &&
-            report_count-- > 0,
-        ),
+        columns: [result.buffer.report[0]],
         config: { width: 16 },
-      },
-      {
-        columns: result.buffer.skill.filter(
-          (e) =>
-            timer >= e.timer &&
-            timer < e.timer + skill_record_time_window &&
-            skill_count-- > 0,
-        ),
-        config: { width: 8 },
       },
     );
   }
@@ -154,9 +140,7 @@ async function page_race_result(contestants, info, race_id) {
   }
   if (interval > 0) {
     await era.clear();
-    era
-      .input({ show: false, hideInput: true })
-      .then(() => (flag_result = false));
+    era.input({ show: false }).then(() => (flag_result = false));
     await show_result(interval);
   }
   let flag_charts = 1;
