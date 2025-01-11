@@ -125,12 +125,14 @@ module.exports = (handlers) => {
       case medicine_enum.milk_h:
         era.add(`nowex:${extra_flag.user}:体力消耗`, -150);
         era.add(`nowex:${extra_flag.user}:精力消耗`, -100);
+        era.add(`exp:${extra_flag.user}:吸奶量`, 200);
         sys_change_lust(extra_flag.user, 300);
         set_stain(extra_flag.user, part_enum.mouth, stain_enum.milk);
         break;
       case medicine_enum.milk_u:
         era.add(`nowex:${extra_flag.user}:体力消耗`, -400);
         era.add(`nowex:${extra_flag.user}:精力消耗`, -200);
+        era.add(`exp:${extra_flag.user}:吸奶量`, 200);
         sys_change_lust(extra_flag.user, 800);
         set_stain(extra_flag.user, part_enum.mouth, stain_enum.milk);
         break;

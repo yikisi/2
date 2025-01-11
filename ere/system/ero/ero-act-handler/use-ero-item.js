@@ -266,7 +266,7 @@ async function use_ero_item(chara) {
                       content: part_names4item[part] || part_names[part],
                     },
                   ]
-                : ['']),
+                : []),
               ' 使用 ',
               { color: buff_colors[2], content: item_names[item] },
               ' 吗？',

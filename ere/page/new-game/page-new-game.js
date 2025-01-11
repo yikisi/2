@@ -59,7 +59,7 @@ module.exports = async (src_chara) => {
     );
     new CharaAvailableSkills(0).clear();
     era.set('callname:0:-2', '你');
-    era.set('cstr:0:决胜服', '');
+    era.set('cstr:0:决胜服', 0);
   }
   const my_marks = new MyEduMarks();
 
@@ -270,6 +270,7 @@ module.exports = async (src_chara) => {
           my_marks.god = get_random_value(13, 40);
           if (src_chara !== 32) {
             new TachyonLifeMarks().drug_notice = get_random_value(24, 48);
+            my_marks.strange_day = get_random_value(24, 48);
             if (src_chara !== 25) {
               my_marks.experiment = get_random_value(1, 24);
             }
@@ -280,7 +281,6 @@ module.exports = async (src_chara) => {
           my_marks.custom = get_random_value(1, 12);
           my_marks.trainer_race = get_random_value(13, 36);
           my_marks.work_over = my_marks.sick = 24;
-          my_marks.strange_day = get_random_value(24, 48);
           new MeekEduMarks().all_round = get_random_value(5, 12);
           if (src_chara !== 10) {
             new TokinoLifeMarks().shadow = get_random_value(5, 12);

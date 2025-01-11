@@ -16,7 +16,7 @@ async function print_shop_page(item_list) {
     price_cache = era.get(`itemprice:${off}`);
   era.set(
     `itemprice:${off}`,
-    Math.max(Math.ceil(price_cache * ((off_index & 0x80) > 0 ? 0.5 : 0.7)), 1),
+    Math.max(Math.ceil(price_cache * (off_index >> 7 > 0 ? 0.5 : 0.7)), 1),
   );
   let flag_shop = true,
     bought = 0;
@@ -175,7 +175,7 @@ async function print_shop_page(item_list) {
           },
           ' ',
           {
-            content: (off_index & 0x80) > 0 ? '50%off' : '30%off',
+            content: off_index >> 7 > 0 ? '50%off' : '30%off',
             color: attr_change_colors.up,
           },
           '！',

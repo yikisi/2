@@ -15,6 +15,7 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const print_ero_page = require('#/page/page-ero');
 
 const GameGuides = require('#/event/game-guides');
@@ -216,14 +217,26 @@ async function goto_sex(chara_id, sex_loc) {
       } else {
         era.set('flag:当前位置', sex_loc);
       }
-      let is_rape = false;
+      let is_rape = 0;
       switch (ret) {
         case 2:
-          is_rape = true;
-          await era.printAndWait([
-            chara.get_colored_name(),
-            ' 会意地装出了即将被强暴的惊恐神情……',
-          ]);
+          if (
+            await select_yes_or_no('', `粗暴对待${chara.sex}`, '请粗暴对待我')
+          ) {
+            is_rape = 1;
+            await era.printAndWait([
+              chara.get_colored_name(),
+              ' 会意地装出了即将被强暴的惊恐神情……',
+            ]);
+          } else {
+            is_rape = 2;
+            await era.printAndWait([
+              me.get_colored_name(),
+              ' 露出惊恐柔弱的申请，激发了 ',
+              chara.get_colored_name(),
+              ' 的凶性……',
+            ]);
+          }
           break;
         case 3:
           if (await ask_drink_medicine(chara)) {
@@ -231,11 +244,13 @@ async function goto_sex(chara_id, sex_loc) {
           }
       }
       begin_and_init_ero(0, chara_id);
-      if (is_rape) {
+      if (is_rape === 1) {
         era.set('tflag:强奸', 0);
         update_juel_buff(chara_id);
+      } else if (is_rape === 2) {
+        era.set('tflag:强奸', chara_id);
       }
-      if (era.get(`status:${chara_id}:超马跳Z`)) {
+      if (era.get(`status:${chara_id}:超马跳Z`) || is_rape === 2) {
         era.set('tflag:主导权', chara_id);
       }
       await print_ero_page(chara_id);

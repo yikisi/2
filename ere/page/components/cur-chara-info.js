@@ -140,7 +140,7 @@ function cur_chara_component(chara_id, type, location_npc) {
     location_npc &&
       (temp = new CharaTitles(location_npc).get_colored_curr_title());
     era.setVerticalAlign('middle');
-    const image_switch = era.get('flag:显示半身像'),
+    const image_switch = era.get('flag:立绘类型'),
       status_list = get_status(chara_id);
     era.printInColRows(
       {
@@ -168,7 +168,16 @@ function cur_chara_component(chara_id, type, location_npc) {
           {
             config: { width: 21 },
             names: get_image(chara_id)
-              .map((e) => `${e}${image_switch ? '_半身' : ''}`)
+              .map((e) => {
+                switch (image_switch) {
+                  case 0:
+                    return e;
+                  case 1:
+                    return `${e}_半身`;
+                  case 2:
+                    return `${e}_gif\t${e}_半身`;
+                }
+              })
               .join('\t'),
             type: 'image.whole',
           },
@@ -183,7 +192,7 @@ function cur_chara_component(chara_id, type, location_npc) {
             ? {
                 accelerator: 990,
                 config: { showAcc: false },
-                content: `显示${image_switch ? '头像' : '半身像'}`,
+                content: '切换立绘',
                 type: 'button',
               }
             : { content: '\n', type: 'text' },

@@ -90,7 +90,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
     start_machine_gun(event_hooks.week_end);
     while (
       continue_flag &&
-      (random_event = sys_get_random_event(event_hooks.week_end))
+      (random_event = sys_get_random_event(event_hooks.week_end)) !== undefined
     ) {
       era.drawLine();
       continue_flag = !(await random_event(chara_id));

@@ -1,6 +1,7 @@
 ﻿const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
+const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const filter_chara = require('#/system/sys-filter-chara');
 
 const print_page_header = require('#/page/components/page-header');
@@ -9,17 +10,20 @@ const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const event_queue = require('#/event/queue');
-const { cb_enum } = require('#/event/queue');
+const { add_event, cb_enum } = require('#/event/queue');
 
 const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
+const CharaTitles = require('#/data/chara-titles');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { first_child_id } = require('#/data/other-const');
+const { first_child_id, max_chara_id } = require('#/data/other-const');
 
 /**
  * load game
@@ -194,7 +198,7 @@ module.exports = async () => {
               }
               era
                 .getAddedCharacters()
-                .filter((e) => e >= first_child_id && e < 1000)
+                .filter((e) => e >= first_child_id && e < max_chara_id)
                 .forEach((e) => {
                   let father_id = era.get(`cflag:${e}:父方角色`),
                     mother_id = era.get(`cflag:${e}:母方角色`);
@@ -225,6 +229,45 @@ module.exports = async () => {
                     }
                   }
                 });
+            }
+            if (version < 1200) {
+              era.set('callname:304:306', '㭴本代理');
+              era.set('callname:304:305', '安心泽老师');
+              const my_reg = sys_reg_race(0);
+              my_reg.last.race = my_reg.curr.race;
+              my_reg.last.week = my_reg.curr.week;
+              if (era.get('cflag:0:模版角色') === 32) {
+                new MyEduMarks().strange_day = 0;
+              } else if (
+                new MyEduMarks().strange_day === 0 &&
+                (event_queue.get()[event_hooks.week_start] || []).findIndex(
+                  (e) => e.arg === 'strange_day',
+                ) === -1
+              ) {
+                add_event(
+                  event_hooks.week_start,
+                  new EventObject(0, cb_enum.edu).set_arg('strange_day2'),
+                );
+              }
+              if (era.get('cflag:56:招募状态') === recruit_flags.yes) {
+                const title_name =
+                    get_custom_check(56).get_personal_titles()[0],
+                  personal_title = new CharaTitles(56)
+                    .get()
+                    .find((e) => e.n === title_name);
+                if (personal_title !== undefined) {
+                  personal_title.c = get_chara_color(56);
+                }
+              }
+              if (era.get('cflag:88:招募状态') === recruit_flags.yes) {
+                const personal_title = new CharaTitles(56)
+                  .get()
+                  .find((e) => e.n === '黑翠千里行');
+                if (personal_title !== undefined) {
+                  personal_title.n =
+                    get_custom_check(88).get_personal_titles()[0];
+                }
+              }
             }
             return true;
           } else {

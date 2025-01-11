@@ -395,6 +395,7 @@ module.exports = (handlers) => {
         ' 的 ',
         ...sys_change_attr_and_print(aim, '体力', item_id === 45 ? 400 : 150),
       ]);
+      era.add(`exp:${aim}:吸奶量`, 200);
       sys_change_lust(aim, item_id === 45 ? 800 : 300);
       era.add(`item:${item_name}`, -1);
       return true;

@@ -123,7 +123,10 @@ async function common_doggy_style(attacker, defender, hook) {
       '在那之上，被支撑起的是……像小狗一样不自觉地摇晃着的屁股。',
     );
     await attacker.print_and_wait([
-      `被以煽情的姿态骑在身下的马耳朵${defender.get_adult_sex_title()}，身体的发颤根本停不下来，让人看见后便不禁想舔润干裂的嘴唇。作为肉棒的媚药，让身后低喘的 `,
+      '被以煽情的姿态骑在身下的',
+      era.get(`cflag:${defender.id}:种族`) ? '马耳朵' : '',
+      defender.get_adult_sex_title(),
+      '，身体的发颤根本停不下来，让人看见后便不禁想舔润干裂的嘴唇。作为肉棒的媚药，让身后低喘的 ',
       attacker.get_colored_name(),
       ' 简直要将蛋也塞进去。',
     ]);

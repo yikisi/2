@@ -2,7 +2,7 @@ const { execSync } = require('child_process');
 const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
-let csv = readFileSync('./races.csv', 'utf-8');
+let csv = readFileSync('../../common/race/races.csv', 'utf-8');
 csv = csv
   .replace(/^\ufeff/, '')
   .split('\n')

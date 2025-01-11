@@ -116,12 +116,12 @@ module.exports = class extends CustomizedBase {
         ' 兴奋得都快要哭了出来，立马向门外走去。',
       ]);
       await era.printAndWait(['三步并作两步，转过一个个拐角……']);
-      await era.printAndWait(['咦……']);
-      await era.printAndWait(['楼梯，是不是有点太长了？']);
+      await me.say_and_wait(['咦……'], true);
+      await me.say_and_wait(['楼梯，是不是有点太长了？'], true);
       era.println();
 
       await era.printAndWait(['逃离地下室的兴奋劲一过，头脑渐渐冷静了下来。']);
-      await era.printAndWait(['——我……到底在楼梯间待了多久？']);
+      await me.say_and_wait(['我……到底在楼梯间待了多久？'], true);
       await era.printAndWait([
         '伴随着这个念头，',
         me.get_colored_name(),

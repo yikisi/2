@@ -5,6 +5,7 @@ const {
   sys_get_debuff,
   sys_get_succ_rate,
 } = require('#/system/sys-calc-chara-param');
+const { switch_image } = require('#/system/sys-calc-image');
 const { get_train_bonus, train_uma } = require('#/system/sys-train-uma');
 
 const print_curr_chara_info = require('#/page/components/cur-chara-info');
@@ -489,7 +490,9 @@ module.exports = async () => {
             dis_filter = -1,
             style_filter = -1,
             ability_filter = -1,
-            enable_filter = false;
+            enable_filter = false,
+            page = 1,
+            skill_page_size;
           while (flag_skill) {
             /** @type {(function(UmaSkill):boolean)[]} */
             const filters = [
@@ -507,6 +510,19 @@ module.exports = async () => {
                 ability_filter === -1 ||
                 s.ability_tags.indexOf(ability_filter) !== -1,
             ];
+            skill_page_size = enable_filter ? 66 : 84;
+            const filtered_buffer = buffer.filter(
+                (e) =>
+                  !enable_filter ||
+                  filters.reduce((p, c) => p && c(skills_dict[e.id]), true),
+              ),
+              max_page = Math.max(
+                Math.ceil(filtered_buffer.length / skill_page_size),
+                1,
+              );
+            if (page > max_page) {
+              page = max_page;
+            }
             era.printInColRows(
               [
                 {
@@ -516,11 +532,39 @@ module.exports = async () => {
                   type: 'divider',
                 },
               ],
-              ...buffer.filter(
-                (e) =>
-                  !enable_filter ||
-                  filters.reduce((p, c) => p && c(skills_dict[e.id]), true),
+              ...filtered_buffer.slice(
+                (page - 1) * skill_page_size,
+                page * skill_page_size,
               ),
+              max_page === 1
+                ? []
+                : [
+                    {
+                      accelerator: 900,
+                      config: {
+                        align: 'left',
+                        disabled: page === 1,
+                        width: 4,
+                      },
+                      content: '上一页',
+                      type: 'button',
+                    },
+                    {
+                      config: { align: 'center', width: 6 },
+                      content: `第 ${page} 页 / 共 ${max_page} 页`,
+                      type: 'text',
+                    },
+                    {
+                      accelerator: 901,
+                      config: {
+                        align: 'right',
+                        disabled: page === max_page,
+                        width: 4,
+                      },
+                      content: '下一页',
+                      type: 'button',
+                    },
+                  ],
               [{ content: [{ isBr: true }], type: 'text' }],
               ...(enable_filter
                 ? [
@@ -532,7 +576,7 @@ module.exports = async () => {
                       },
                       ...['全部', '被动', '恢复', '增幅', '削弱'].map(
                         (e, i) => ({
-                          accelerator: 900 + i,
+                          accelerator: 930 + i,
                           config: {
                             buttonType:
                               i === skill_filter + 1 ? 'warning' : 'info',
@@ -551,7 +595,7 @@ module.exports = async () => {
                       },
                       ...['全部', ...adaptability_names.slice(0, 2)].map(
                         (e, i) => ({
-                          accelerator: 910 + i,
+                          accelerator: 940 + i,
                           config: {
                             buttonType:
                               i === ground_filter + 1 ? 'warning' : 'info',
@@ -570,7 +614,7 @@ module.exports = async () => {
                       },
                       ...['全部', ...adaptability_names.slice(2, 6)].map(
                         (e, i) => ({
-                          accelerator: 920 + i,
+                          accelerator: 950 + i,
                           config: {
                             buttonType:
                               i === dis_filter + 1 ? 'warning' : 'info',
@@ -589,7 +633,7 @@ module.exports = async () => {
                       },
                       ...['全部', ...adaptability_names.slice(6)].map(
                         (e, i) => ({
-                          accelerator: 930 + i,
+                          accelerator: 960 + i,
                           config: {
                             buttonType:
                               i === style_filter + 1 ? 'warning' : 'info',
@@ -607,7 +651,7 @@ module.exports = async () => {
                         type: 'text',
                       },
                       ...['全部', ...ability_tag_names].map((e, i) => ({
-                        accelerator: 940 + i,
+                        accelerator: 970 + i,
                         config: {
                           buttonType:
                             i === ability_filter + 1 ? 'warning' : 'info',
@@ -664,16 +708,20 @@ module.exports = async () => {
                 ground_filter =
                 skill_filter =
                   -1;
+            } else if (ret >= 970) {
+              ability_filter = ret - 971;
+            } else if (ret >= 960) {
+              style_filter = ret - 961;
+            } else if (ret >= 950) {
+              dis_filter = ret - 951;
             } else if (ret >= 940) {
-              ability_filter = ret - 941;
+              ground_filter = ret - 941;
             } else if (ret >= 930) {
-              style_filter = ret - 931;
-            } else if (ret >= 920) {
-              dis_filter = ret - 921;
-            } else if (ret >= 910) {
-              ground_filter = ret - 911;
-            } else if (ret >= 900) {
-              skill_filter = ret - 901;
+              skill_filter = ret - 931;
+            } else if (ret === 901) {
+              page++;
+            } else if (ret === 900) {
+              page--;
             } else if (ret === 'irwinner') {
               pt = era.add(`exp:${chara_id}:技能点数`, 9999);
               buffer = get_skill_buffer(chara_id, skill_control, pt, discount);
@@ -723,7 +771,7 @@ module.exports = async () => {
         }
         break;
       case 990:
-        era.set('flag:显示半身像', 1 - era.get('flag:显示半身像'));
+        switch_image();
         break;
       case 999:
         flag_train = false;

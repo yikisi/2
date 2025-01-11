@@ -327,7 +327,6 @@ module.exports = class extends CustomizedLove {
         era.printButton('「来，挺胸，收腹。」', 1);
         await era.input();
         await era.printAndWait([
-          ' ',
           vp.get_colored_name(),
           ' 顺着 ',
           me.get_colored_name(),
@@ -498,7 +497,6 @@ module.exports = class extends CustomizedLove {
         ' 的舌头推着。',
       ]);
       await era.printAndWait([
-        ' ',
         me.get_colored_name(),
         ' 接着一口吻住阴唇包被之下那鼓起的肉核，然后用力吮吸起来。',
       ]);

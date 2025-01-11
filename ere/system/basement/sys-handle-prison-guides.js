@@ -142,7 +142,7 @@ async function sys_handle_prison_guides() {
           '绑架到这个地下室来了。',
           { isBr: true },
           '在这个不见天日的地方甚至',
-          { content: '【无法精确感受到体感时间】', fontWeight: 'bold' },
+          { content: '【无法精确感受到时间】', fontWeight: 'bold' },
           '，接下来的日子恐怕会很难熬。',
           { isBr: true },
           '有什么需要帮助的？',

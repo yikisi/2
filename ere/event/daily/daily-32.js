@@ -96,7 +96,7 @@ module.exports = class extends CustomizedDaily {
   async office_cook(hook) {
     const life_marks = new TachyonLifeMarks(),
       tachyon = get_chara_talk(32);
-    if (era.get('relation:32:0') <= 150 && !life_marks.cook) {
+    if (era.get('relation:32:0') <= 150 && life_marks.cook === 0) {
       hook.override = true;
       await tachyon.say_and_wait('要做饭给我吃？难以入口的东西我拒绝');
       await era.printAndWait('真是挑剔的食客啊……看来需要再精进一下厨艺再说了');

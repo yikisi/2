@@ -365,10 +365,11 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
       }
     });
 
+    const finished_count = list_finished.length;
     list_in_race = sort_list(list_in_race, (uma) => uma.race.location).filter(
       (uma, i, l) => {
         uma.rank.last = uma.rank.curr;
-        uma.rank.curr = list_finished.length + i + 1;
+        uma.rank.curr = finished_count + i + 1;
         uma.race.conditionParams.bashin_diff_infront =
           (i === 0 ? 50 : l[i - 1].race.location - uma.race.location) / 2.5;
         uma.race.conditionParams.blocked_front = Number(

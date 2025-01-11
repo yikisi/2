@@ -3,7 +3,7 @@ const { readFileSync } = require('fs');
 const name_data = require('../../ere/data/child-names.json');
 const mob_names = require('../../ere/data/race/contestants/uma-mob.json');
 
-const lines = readFileSync('./uma-data.csv', 'utf-8')
+const lines = readFileSync('../../common/uma/uma-data.csv', 'utf-8')
   .replace(/^\uFEFF/, '')
   .split('\n')
   .filter((e) => e)

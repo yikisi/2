@@ -40,9 +40,10 @@ module.exports = async () => {
       era.get('cflag:32:位置') === 0
     ) {
       life_marks.reward++;
-      await print_event_name('实验的报酬', tachyon);
       switch (life_marks.reward) {
         case 1:
+          set_stain(0, part_enum.penis, stain_enum.semen);
+          set_stain(32, part_enum.virgin, stain_enum.secretion);
           await era.printAndWait('总算结束了……');
           await era.printAndWait([
             me.get_colored_name(),
@@ -374,12 +375,13 @@ module.exports = async () => {
           ]);
           break;
         case 2:
-          set_stain(0, part_enum.penis, stain_enum.semen);
-          set_stain(32, part_enum.virgin, stain_enum.secretion);
           if (get_expansion(get_penis_size(0), 32, part_enum.virgin) > 1) {
             life_marks.reward--;
             return;
           }
+          set_stain(0, part_enum.penis, stain_enum.semen);
+          set_stain(32, part_enum.virgin, stain_enum.secretion);
+          await print_event_name('实验的报酬', tachyon);
           await tachyon.say_and_wait([callname, '～今天的实验也辛苦了']);
           await tachyon.say_and_wait('那么……需要奖励吗❤️');
           await me.say_and_wait('来吧');
@@ -570,12 +572,13 @@ module.exports = async () => {
           ]);
           break;
         case 3:
-          set_stain(0, part_enum.penis, stain_enum.semen);
-          set_stain(32, part_enum.anal, stain_enum.anal);
           if (get_expansion(get_penis_size(0), 32, part_enum.anal) > 1) {
             life_marks.reward--;
             return;
           }
+          set_stain(0, part_enum.penis, stain_enum.semen);
+          set_stain(32, part_enum.anal, stain_enum.anal);
+          await print_event_name('实验的报酬', tachyon);
           await tachyon.say_and_wait([callname, '～今天的实验也辛苦了']);
           await tachyon.say_and_wait('那么……需要奖励吗❤️');
           await me.say_and_wait('来吧');

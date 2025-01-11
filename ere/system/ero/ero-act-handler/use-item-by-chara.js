@@ -10,38 +10,41 @@ const { vp_status_enum } = require('#/data/ero/status-const');
 
 /** @returns {{items:number[],part:number}} */
 function use_item_by_character() {
+  if (era.get('talent:0:泌乳') > 0 && era.get('tequip:0:胸部') === -1) {
+    if (era.get('talent:0:乳头类型') !== 2 || era.get('tcvar:0:乳突')) {
+      return { items: [item_enum.milk_pump], part: part_enum.breast };
+    }
+    return { items: [item_enum.electric_stunner], part: part_enum.breast };
+  }
   const part_item_list = [
-    { part: part_enum.mouth, items: [item_enum.gag] },
+    { items: [item_enum.gag], part: part_enum.mouth },
     {
-      part: part_enum.breast,
-      items:
-        era.get('talent:0:泌乳') === 3
-          ? [item_enum.milk_pump]
-          : [item_enum.clamps, item_enum.love_eggs],
-    },
-    {
-      part: part_enum.penis,
-      items: [item_enum.artificial_virgin, item_enum.electric_stunner],
-    },
-    {
-      part: part_enum.clitoris,
       items: [item_enum.clamps, item_enum.love_eggs],
+      part: part_enum.breast,
     },
     {
-      part: part_enum.virgin,
+      items: [item_enum.artificial_virgin, item_enum.electric_stunner],
+      part: part_enum.penis,
+    },
+    {
+      items: [item_enum.clamps, item_enum.love_eggs],
+      part: part_enum.clitoris,
+    },
+    {
       items:
         era.get('talent:0:处女') === vp_status_enum.no
           ? [item_enum.love_eggs]
           : [item_enum.love_eggs, item_enum.dildo],
+      part: part_enum.virgin,
     },
     {
-      part: part_enum.anal,
       items: [
         item_enum.love_eggs,
         item_enum.dildo,
         item_enum.butt_plug,
         item_enum.anal_beads,
       ],
+      part: part_enum.anal,
     },
     { part: 99, items: [item_enum.collar] },
     { part: 99, items: [item_enum.blindfold] },
@@ -56,7 +59,7 @@ function use_item_by_character() {
   if (era.get('tflag:全身镜')) {
     part_item_list[7].items = [];
   } else if (part_item_list[7].items.length) {
-    part_item_list.push({ part: 99, items: [item_enum.mirror] });
+    part_item_list.push({ items: [item_enum.mirror], part: 99 });
   }
   const virgin_size = era.get('cflag:0:阴道尺寸');
   if (virgin_size) {

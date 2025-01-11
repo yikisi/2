@@ -1,4 +1,24 @@
 # Changelog
+## [EraUma v1.111 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.111)
+_2024/12/30_
+
+适配 PC版引擎[EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.2.1) 与 安卓版引擎[ere.app v1.0.1 (lipiah)](https://gitgud.io/umaera/ere-app/-/releases/1.0.1) 及以上版本
+
+### Changed
+
+* 优化了强奸地文文本
+* 优化了特殊角色的专属特性与这些角色赋予其他角色的状态的显示效果
+* 现在游戏设置【角色的强奸抵抗】选择【一推就倒】的情况下，角色将不会在调教中抢夺主导权（除非TA服用了超马跳Z或玩家处于失神状态）
+
+### Fixed
+
+* 修复了训练界面的互动角色选择列表显示不正常的错误
+* 修复了黄金船爱慕事件【突击！黄金船的超级残酷二选一测验！～你能存活下来吗？～】中延迟选项的显示错误
+* 修复了三女神爱慕卡在74无法升级到下一阶段的问题
+* 修复了某些少见的情况下因【爱慕暂拒】变量取值错误导致无法触发爱慕事件的错误
+* 修复了随机小事件【学园通知・药物散播】无法触发的错误
+* 修复了工具类PersonalEventMarks的子类在webpack后工作不正常的问题及其衍生错误
+
 ## [EraUma v1.11 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.11)
 _2024/12/28_
 

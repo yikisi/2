@@ -31,7 +31,7 @@ const LimitLoveStatus = require('#/data/love-limit-status');
  * @param {number} new_love
  */
 async function punish_unfaithful(chara_id, new_love) {
-  const punish_option = era.get('flag:不忠惩罚'),
+  const punish_option = era.get('flag:不忠惩罚') === 1,
     me = get_chara_talk(0),
     temp_chara_list = sys_filter_chara(
       'cflag',
@@ -43,9 +43,9 @@ async function punish_unfaithful(chara_id, new_love) {
         e !== chara_id &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
         era.get(`love:${e}`) >= 75 &&
-        !era.get(`talent:${e}:绿帽癖`) &&
+        era.get(`talent:${e}:绿帽癖`) === 0 &&
         get_custom_mec(e).is_anger_for_unfaithful([chara_id]) &&
-        (punish_option || era.get(`talent:${chara_id}:病娇`)),
+        (punish_option || era.get(`talent:${e}:病娇`) > 0),
     );
   for (const c_id of temp_chara_list) {
     get_custom_check(c_id).check_after_betrayed([chara_id]);

@@ -74,6 +74,19 @@ function sys_get_chara_pseudo(chara_id) {
   } else if (time_ratio < 0.5) {
     uma.attr_buffs.slice(3).forEach((l) => l.push('-20%[精力不足]'));
   }
+  switch (era.get(`cflag:${chara_id}:妊娠阶段`)) {
+    // 早期
+    case 0b100:
+      uma.attr_buffs.forEach((l) => l.push('-5%[孕早期]'));
+      break;
+    // 安定
+    case 0b1000:
+      uma.attr_buffs.forEach((l) => l.push('+5%[安定期]'));
+      break;
+    // 晚期
+    case 0b10000:
+      uma.attr_buffs.forEach((l) => l.push('-10%[孕晚期]'));
+  }
   get_custom_mec(uma.index_chara).set_pseudo_uma(uma);
   uma.attr_buffs = uma.attr_buffs.map((l, i) => {
     const buffs = l.map((e) => {
