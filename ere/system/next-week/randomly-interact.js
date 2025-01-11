@@ -123,15 +123,12 @@ function randomly_interact(in_team_list) {
               };
             }),
           {
-            content: [
-              { content: `获得了 ${changes.pt_change} 点技能点数` },
-              { isBr: true },
-              { isBr: true },
-            ],
+            content: [{ content: `获得了 ${changes.pt_change} 点技能点数` }],
             config: { offset: 1, width: 23 },
             type: 'text',
           },
         ]);
+        era.println();
         era.add(`exp:${chara_id}:技能点数`, changes.pt_change);
       }
     }

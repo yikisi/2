@@ -1,9 +1,1 @@
-﻿{
-  "system": {
-    "collapseBlankLines": true,
-    "extendedCharaTables": [
-      "Skill",
-      "Status"
-    ]
-  }
-}
+﻿{"system":{"collapseBlankLines":true,"extendedCharaTables":["Skill","Status"]}}

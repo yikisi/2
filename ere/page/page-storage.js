@@ -73,7 +73,8 @@ module.exports = async () => {
       era.print(name);
       const desc = shop_desc[shop_desc[name]] || shop_desc[name];
       if (desc) {
-        era.print(`\n${desc}\n`);
+        era.println();
+        era.print(desc);
       } else {
         era.println();
       }

@@ -1,7 +1,7 @@
 # [EraUma v1.2 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.111)
-_incoming_
+_2025/1/11_
 
-适配 [EraElectron v3.3.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.3.0) 及以上版本
+适配 [EraElectron v3.3.2 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.3.0) 及以上版本
 
 ## Added
 
@@ -12,6 +12,7 @@ _incoming_
   * 为配合新的立绘资源，【显示半身像/显示头像】按钮重做为了【切换立绘】
   * 可以通过点击【切换立绘】按钮使角色在头像、半身像、动态立绘中切换
   * 没有动态立绘的角色在动态立绘下会显示半身像
+  * 使用【切换立绘】设置角色显示动态立绘也会影响比赛预览和事件唱名中的角色立绘
 
 ## Changed
 

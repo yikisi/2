@@ -522,6 +522,7 @@ function print_milking(type, size) {
       );
     }
     buffer.push('！');
+    era.println();
     era.print(buffer);
     era.add(`item:${type}`, got - got_me);
     era.add(`item:鲜榨${type}`, got_me);
@@ -859,6 +860,7 @@ async function page_ero(lover, skip_start_end) {
         !era.get(`tcvar:${master}:脱力`) && !era.get(`tcvar:${master}:逃跑`);
     }
   }
+  era.println();
   await era.printAndWait('性事结束了……');
   if (!skip_start_end) {
     era.println();

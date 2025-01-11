@@ -1,12 +1,1 @@
-﻿{
-  "system": {
-    "_replace": true,
-    "hideUserInput": false,
-    "saveCompressedData": true
-  },
-  "window": {
-    "autoMax": false,
-    "height": 916,
-    "width": 1000
-  }
-}
+﻿{"system":{"_replace":true,"hideUserInput":false,"saveCompressedData":true},"window":{"autoMax":false,"height":916,"width":1000}}

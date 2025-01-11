@@ -648,6 +648,7 @@ async function end_ero_and_show_result(shown) {
       let result_flag = true,
         page = 0,
         chara_index = 0;
+      era.println();
       get_chara_talk(302).say_as_unknown('发 表！高潮播报～♫');
       get_chara_talk(301).say_as_unknown('以下报上这次马儿跳的结果简报～');
       const reporter = get_chara_talk(306);
