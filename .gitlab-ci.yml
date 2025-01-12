@@ -20,7 +20,6 @@ build:
   script:
     - git lfs pull
     - MIN_VERSION=`cat .ere-min-version`
-    - RES_VERSION=`cat .res-min-version`
     - git submodule update --init
     - cd engine
     - git lfs pull
@@ -50,11 +49,6 @@ build:
     - 'VERSION=${VERSION#*,}'
     - '[ $MIN_VERSION != $VERSION ] && zip -r base.zip ./ere ./csv RELEASE.md CHANGELOG.md'
     - '[ -f ./base.zip ] && curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./base.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip"'
-    - cd ../../..
-    - '[ -f ./resources.zip ] && rm ./resources.zip'
-    - 'echo "使用时请在游戏设置中将【启用资源】设置项打开！" > 资源包注意事项.txt'
-    - '[ $RES_VERSION == $VERSION ] && zip -rP era ./resources.zip ./res 资源包注意事项.txt'
-    - '[ -f ./resources.zip ] && curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./resources.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/resources/${CI_COMMIT_TAG}/resources.zip"'
     - echo done
 
 android:
@@ -82,8 +76,6 @@ pages:
     - echo ${VERSION#*,} > public/RELEASE
     - cat .ere-min-version >> public/RELEASE
     - echo "<meta http-equiv=\"refresh\" content=\"3; url= $GAME_ZIP_URL\">" > public/index.html
-    - cp tools/generate-res-link.js generate-res-link.js
-    - 'node generate-res-link.js ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/resources/_VERSION_/resources.zip'
   artifacts:
     paths:
       - public
@@ -110,5 +102,5 @@ release:
         - name: '[安卓引擎用] $GAME_BUNDLE_ZIP (解压密码：era)'
           url: '${GAME_BUNDLE_URL}'
           link_type: package
-        - name: '[通用资源包] resources.zip (解压后放到游戏文件夹下，需要在游戏设置中启用资源，密码：era)'
-          url: 'https://umaera.gitgud.site/erauma/res.html'
+        - name: '[通用资源包] erauma-master.zip (解压后将res文件夹放到游戏文件夹下，需要在游戏设置中启用资源)'
+          url: 'https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res'
