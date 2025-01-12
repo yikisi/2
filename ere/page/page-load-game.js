@@ -1,7 +1,10 @@
 ﻿const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
-const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_get_billings,
+  sys_reg_race,
+} = require('#/system/sys-calc-base-cflag');
 const filter_chara = require('#/system/sys-filter-chara');
 
 const print_page_header = require('#/page/components/page-header');
@@ -18,11 +21,13 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
+const { trainer_salary } = require('#/data/const.json');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { get_trainer_title } = require('#/data/info-generator');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
 
 /**
@@ -267,6 +272,23 @@ module.exports = async () => {
                   personal_title.n =
                     get_custom_check(88).get_personal_titles()[0];
                 }
+              }
+            }
+            if (version <= 1201) {
+              if (
+                era.get('cflag:0:种族') === 0 &&
+                era.get('flag:当前周') === 4
+              ) {
+                const billings = sys_get_billings(),
+                  cur_month = era.get('flag:当前月'),
+                  salary =
+                    trainer_salary[get_trainer_title().substring(0, 2)] *
+                    (1 + (cur_month === 12));
+                billings.push({
+                  creditor: cur_month === 12 ? -1 : 0,
+                  repay: salary,
+                  timer: 1,
+                });
               }
             }
             return true;
