@@ -131,8 +131,9 @@ async function sys_handle_prison_guides() {
       n: '请求释放',
     },
   ];
+  const lines = era.getLineCount();
   while (flag) {
-    const lines = era.printMultiColumns([
+    era.printMultiColumns([
       { type: 'divider' },
       {
         content: [

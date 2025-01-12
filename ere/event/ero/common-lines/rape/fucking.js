@@ -302,7 +302,7 @@ async function common_hug_sitting(attacker, defender, hook) {
       era.get(`cflag:${defender.id}:种族`) ? '立起来的马耳朵' : '的耳朵 ',
       '询问着。',
     ]);
-    await defender.say_and_wait('人渣！变态训练员！');
+    await defender.say_and_wait('人渣！变态！');
     await defender.say_and_wait('嗯啊啊❤️……');
     await attacker.print_and_wait([
       '断断续续的反驳被娇媚的淫叫所阻断，',
