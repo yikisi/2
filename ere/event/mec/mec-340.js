@@ -35,7 +35,7 @@ module.exports = class extends CustomizedMec {
     return [
       {
         color: get_chara_color(this.id),
-        content: '[望]',
+        content: '望',
         fontWeight: title_check ? 'bold' : '',
         title: `队伍成员速度与力量训练效果+${title_check ? 100 : 50}%`,
       },

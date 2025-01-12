@@ -7,7 +7,7 @@ module.exports = class extends MecNpc {
     return [
       {
         color: get_chara_color(this.id),
-        content: '[彻底管理主义]',
+        content: '彻底管理主义',
         title: '训练员头衔训练效果加成上升一级',
       },
     ];

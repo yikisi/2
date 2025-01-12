@@ -182,7 +182,7 @@ class CustomizedMec {
 
   /**
    * @param {boolean} show_train_buff - if shows the train buff
-   * @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]}
+   * @returns {({[color]:string,content:string,[fontWeight]:string,[title]:string})[]}
    */
   // eslint-disable-next-line no-unused-vars
   get_status(show_train_buff) {
@@ -193,7 +193,7 @@ class CustomizedMec {
     return 0;
   }
 
-  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]} */
+  /** @returns {({[color]:string,content:string,[fontWeight]:string,[title]:string})[]} */
   get_talents() {
     return [];
   }
