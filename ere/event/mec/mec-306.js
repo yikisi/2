@@ -1,3 +1,5 @@
+const { get } = require('#/era-electron');
+
 const MecNpc = require('#/event/mec/mec-npc');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -7,8 +9,8 @@ module.exports = class extends MecNpc {
     return [
       {
         color: get_chara_color(this.id),
-        content: '彻底管理主义',
-        title: '训练员头衔训练效果加成上升一级',
+        content: get(`staticcstr:${this.id}:称号`),
+        title: '训练员头衔对训练成功率与效果加成上升一级',
       },
     ];
   }

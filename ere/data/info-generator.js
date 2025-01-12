@@ -654,11 +654,13 @@ module.exports = {
     return `${title_level}${title_desc[era.get('flag:惩戒力度')]}`;
   },
   get_trainer_train_buff(chara_id) {
-    const relation = chara_id ? era.get(`relation:${chara_id}:0`) : 225;
-    if (relation <= -100) {
-      return -5;
-    } else if (relation < 0) {
-      return -2.5;
+    const relation = chara_id > 0 ? era.get(`relation:${chara_id}:0`) : 225;
+    if (chara_id > 0) {
+      if (relation <= -100) {
+        return -5;
+      } else if (relation < 0) {
+        return -2.5;
+      }
     }
     let level = get_trainer_level(),
       ret = 0;
@@ -668,12 +670,14 @@ module.exports = {
           (era.get('cflag:304:招募状态') === recruit_flags.yes) +
           (era.get('cflag:306:招募状态') === recruit_flags.yes)
       ] ?? 0;
-    if (relation > 525) {
-      ret += 2.5;
-    } else if (relation > 375) {
-      ret += 1;
-    } else if (relation < 225) {
-      ret *= relation / 225;
+    if (chara_id > 0) {
+      if (relation > 525) {
+        ret += 2.5;
+      } else if (relation > 375) {
+        ret += 1;
+      } else if (relation < 225) {
+        ret *= relation / 225;
+      }
     }
     return ret;
   },

@@ -550,7 +550,7 @@ async function race_page(race) {
       sys_like_chara(308, 0, 20 + (best_rank <= 5 ? fame_reward : 0)) ||
       wait_flag;
   }
-  const prize_ratio = 0.04 * get_trainer_level() + 0.04,
+  const prize_ratio = 0.04 * get_trainer_level() + 0.04 || 0.04,
     total_prize = sys_change_money(
       team_list
         .map((uma) => {

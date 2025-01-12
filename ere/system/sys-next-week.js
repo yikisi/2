@@ -214,50 +214,40 @@ async function sys_next_week() {
       !your_race *
       trainer_salary[get_trainer_title().substring(0, 2)] *
       (1 + (cur_month === 12));
-  let money = era.get('flag:当前马币');
-  era.set('flag:收支', (cur_week === 4) * salary);
-  era.set(
-    'flag:账单',
-    sys_get_billings()
-      .map((e) => {
-        if (!e) {
-          return undefined;
+  const billings = sys_get_billings()
+    .map((e, i) => {
+      if (e.timer > 0) {
+        const money = sys_change_money(e.repay, -1);
+        if (i > 0 && e.creditor === 0) {
+          // 人类训练员有工资拿；马娘训练员？自己跑比赛去！
+          era.print([
+            '收到了学园发放的训练员工资 ',
+            { color: money_color, content: money.toLocaleString() },
+            ' 马币',
+          ]);
         }
-        if (e.timer) {
-          money = sys_change_money(e.repay);
-          e.timer--;
-        }
-        if (e.timer) {
-          era.add('flag:收支', e.repay);
-        }
-        return e;
-      })
-      .filter((e, i) => !i || (e && e.timer)),
-  );
+        e.timer--;
+      }
+      return e;
+    })
+    .filter((e, i) => i === 0 || e.timer > 0);
+  if (cur_week === 4) {
+    billings.push({
+      creditor: cur_month === 12 ? -1 : 0,
+      repay: salary,
+      timer: 1,
+    });
+  }
+  era.set('flag:账单', billings);
   if (cur_week === 5) {
     cur_week = 1;
     cur_month++;
-    // 人类训练员有工资拿
-    // 马娘训练员？自己跑比赛去！
-    if (salary) {
-      era.print([
-        '收到了学园发放的训练员工资 ',
-        { color: money_color, content: salary.toLocaleString() },
-        ' 马币',
-        { isBr: true },
-        { isBr: true },
-      ]);
-      money = sys_change_money(salary);
-    }
     // 季节判定只在换月的时候考虑
     if (cur_month === 5) {
       era.set('flag:季节', 1);
     } else if (cur_month === 11) {
       era.set('flag:季节', 0);
     }
-  }
-  if (money < 0) {
-    sys_change_money(money * 0.05);
   }
   if (cur_month === 13) {
     cur_month = 1;
