@@ -151,17 +151,11 @@ function sys_get_status(chara_id) {
       opacity: tired > 1 ? 1 : 0.5,
     });
   }
-  if (hurt + tired > 0 && era.get('cflag:305:招募状态') === recruit_flags.yes) {
-    status_list.push({
-      color: get_chara_color(305),
-      content: '针灸疗养',
-    });
-  }
   new Array(3).fill(0).forEach((_, i) => {
     const status_id = 7 + i,
       status_name = era.get(`statusname:${status_id}`),
       num = era.get(`status:${chara_id}:${status_id}`);
-    if (num) {
+    if (num > 0) {
       status_list.push({
         color: buff_colors[0],
         content: `${status_name}(${num})`,
@@ -169,23 +163,33 @@ function sys_get_status(chara_id) {
       });
     }
   });
-  if (era.get(`status:${chara_id}:发胖`)) {
+  if (era.get(`status:${chara_id}:发胖`) > 0) {
     status_list.push({ color: buff_colors[0], content: '发胖' });
   }
-  if (era.get(`status:${chara_id}:偏头痛`)) {
+  const headache = era.get(`status:${chara_id}:偏头痛`);
+  if (headache > 0) {
     status_list.push({ color: buff_colors[0], content: '偏头痛' });
   }
-  if (era.get(`status:${chara_id}:发情`)) {
+  if (
+    hurt + tired + headache > 0 &&
+    era.get('cflag:305:招募状态') === recruit_flags.yes
+  ) {
+    status_list.push({
+      color: get_chara_color(305),
+      content: '针灸疗养',
+    });
+  }
+  if (era.get(`status:${chara_id}:发情`) > 0) {
     status_list.push({
       color: buff_colors[2],
       content: '特别假期',
     });
-  } else if (era.get(`status:${chara_id}:经期`)) {
+  } else if (era.get(`status:${chara_id}:经期`) > 0) {
     status_list.push({ color: buff_colors[0], content: '经期' });
   }
   if (
-    era.get(`mark:${chara_id}:淫纹`) &&
-    era.get(`status:${chara_id}:排卵期`)
+    era.get(`mark:${chara_id}:淫纹`) > 0 &&
+    era.get(`status:${chara_id}:排卵期`) > 0
   ) {
     status_list.push({
       color: buff_colors[2],
