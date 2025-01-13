@@ -10,7 +10,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedMec {
   init_love() {
-    if (sys_personal_achievement.get(340)) {
+    if (sys_personal_achievement.get(this.id)) {
       set('love:340', 50);
     }
   }

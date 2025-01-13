@@ -64,7 +64,7 @@ function get_custom_daily(chara_id) {
       script_dict[script_name] || script_name
     ] || cons)(chara_id);
   }
-  return obj_dict[chara_id];
+  return obj_dict[chara_id].get_this();
 }
 
 module.exports = {

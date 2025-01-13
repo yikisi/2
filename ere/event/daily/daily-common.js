@@ -45,6 +45,10 @@ class CustomizedDaily {
     this.id = chara_id;
   }
 
+  get_this() {
+    return this;
+  }
+
   /** @author 雞雞 */
   async basement_end() {
     const chara = get_chara_talk(this.id),

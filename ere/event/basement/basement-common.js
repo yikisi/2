@@ -71,6 +71,10 @@ class CustomizedBase {
     this.id = chara_id;
   }
 
+  get_this() {
+    return this;
+  }
+
   /**
    * 初入地下室的欢迎 - 无人版本
    *
