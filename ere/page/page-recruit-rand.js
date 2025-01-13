@@ -280,7 +280,7 @@ async function print_rec_page() {
               ' ',
               {
                 content: chara_desc[characteristic + 3],
-                title: `${chara_desc[characteristic + 3]}：${chara_full_desc[characteristic + 3]}`,
+                title: `[${chara_desc[characteristic + 3]}]：${chara_full_desc[characteristic + 3]}。`,
               },
               ' ',
               sex_title[sex_code],
