@@ -68,6 +68,7 @@
  * @property {string} [fontSize]
  * @property {string} [fontStyle]
  * @property {string} [fontWeight]
+ * @property {string} [title]
  * @property {string} [url]
  */
 /**
@@ -424,11 +425,6 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   replaceText(content, config) {},
   /**
-   * reset all variables except global variables
-   * @returns {boolean}
-   */
-  resetAllExceptGlobal() {},
-  /**
    * reset the data of a character
    * @param {number | number[]} charaId REQUIRED id of the character defined in chara*.csv
    *     <br>if it is an array, is means reset the character charaId[0] with the data of the character charaId[1]
@@ -548,10 +544,11 @@ Object.keys(era).forEach((key) => {
   if (era[key] instanceof Function && key !== 'delay') {
     era[key] = (...args) => {
       if (!era[key]._s) {
-        era.logger.error(
+        return era.logger.error(
           `unsupported api! please check the version of the engine! current version: sdk=${
             era.version.sdk
           }, engine=${era.version.engine}`,
+          new Error().stack,
         );
       }
       return era[key](...args);
