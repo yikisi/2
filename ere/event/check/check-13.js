@@ -16,7 +16,7 @@ aim_races[race_enum.begin_race] = 4;
 aim_races[get_aim_race_index(race_enum.kobe_hai, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 4;
+aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
 
 module.exports = class extends CustomizedCheck {

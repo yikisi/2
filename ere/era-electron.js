@@ -1,22 +1,113 @@
 /**
+ * type of the param 'config' in era.printButton
+ * @typedef ButtonConfig
+ * @property {'left'|'center'|'right'} [align] align of the button, 'left' in default
+ * @property {'dot'|string} [badge] badge of the button if isButton is true
+ * @property {'primary'|'success'|'warning'|'danger'|'info'|''} [buttonType] type of the button in element-plus, 'warning' in default when isButton is false
+ * @property {string} [color] color of the button, isButton must be false
+ * @property {boolean} [disabled] if the button is disabled, false in default
+ * @property {boolean} [disableWarning] if disable warning when accelerator has been set, false in default
+ * @property {'left'|'center'|'right'} [inTextAlign] align of the text in the button, 'center' in default
+ * @property {boolean} [isButton] if the button is a button, otherwise is a link
+ * @property {number} [offset] offset of the button, 0-23, 0 in default
+ * @property {boolean} [showAcc] if show the accelerator, false in default on PC, and is always true on Android
+ * @property {number} [width] width of the button, 1-24, 1 in default
+ */
+/**
+ * @typedef ButtonObject
+ * @property {number} accelerator the accelerator key of the button used in the input
+ * @property {ButtonConfig} [config] config of the printed button
+ * @property {string} content the text of the button
+ * @property {'button'} type
+ */
+/**
+ * type of the param 'config' in era.drawLine
+ * @typedef DividerConfig
+ * @property {string} [content] content of the divider
+ * @property {'left'|'center'|'right'} [position] position of the divider
+ * @property {boolean} [isSolid] if the divider is solid
+ * @property {number} [offset] offset of the divider
+ * @property {number} [width] width of the divider
+ */
+/**
+ * @typedef DividerObject
+ * @property {DividerConfig} [config] config of the line
+ * @property {'divider'} type
+ */
+/**
+ * @typedef ImageObject
+ * @property {string|string[]} names
+ * @property {'image'} type
+ */
+/**
+ * type of the param 'config' in era.printProgress
+ * @typedef ProgressConfig
+ * @property {'left'|'center'|'right'} [align] align of the text shown next to the progress bar, 'left' in default
+ * @property {number} [barWidth] width of the progress bar, 0-24, 24 in default
+ * @property {string} [color] color of the progress bar
+ * @property {string} [fontColor] color of the font in the progress bar
+ * @property {number} [height] height of the progress bar, 6-30(px), 24(px) in default
+ * @property {number} [offset] offset of the progress, 0-23, 0 in default
+ * @property {number} [width] width of the progress, 1-24, 24 in default
+ */
+/**
+ * @typedef ProgressObject
+ * @property {ProgressConfig} [config] config of the printed progress
+ * @property {string} inContent the text shown in the progress bar
+ * @property {string} outContent the text shown next to the progress bar
+ * @property {number} percentage the percentage of the progress bar, float, 0-100
+ * @property {'progress'} type
+ */
+/**
+ * printed span used in the param 'content' in era.print, era.printAndWait and era.replaceText
  * @typedef PrintedSpan
  * @type {Object}
  * @property {string} [color]
  * @property {string} content
+ * @property {string} [display]
  * @property {string} [fontSize]
  * @property {string} [fontStyle]
  * @property {string} [fontWeight]
  * @property {string} [url]
  */
 /**
- * @typedef InColObject
- * @type {Object}
- * @property {'button'|'divider'|'image'|'image.whole'|'progress'|'text'} type
- * @property {Object} [config]
- * @property ...
+ * type of the param 'config' in era.print, era.printAndWait and era.replaceText
+ * @typedef TextConfig
+ * @property {'left'|'center'|'right'} [align] align of the line, 'left' in default
+ * @property {string} [color] color of the line, '#ffffff' in default
+ * @property {string} [fontSize] font size of the line, '1rem' in default
+ * @property {boolean} [isParagraph] if the line is in a paragraph, false in default
+ * @property {number} [offset] offset of the line, 0-23, 0 in default
+ * @property {number} [width] width of the line, 1-24, 24 in default
  */
 /**
- * @typedef InColConfig
+ * @typedef {string|(PrintedSpan|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} TextContent
+ */
+/**
+ * @typedef TextObject
+ * @property {TextConfig} [config] config of the printed line
+ * @property {TextContent} content
+ * @property {'text'} type
+ */
+/**
+ * type of the param 'config' in era.printWholeImage
+ * @typedef WholeImageConfig
+ * @property {'fill'|'contain'|'cover'|'none'|'scale-down'|'unset'} [fit] fit of the image
+ * @property {number} [offset] offset of the whole image, 0-23, 0 in default
+ * @property {number} [width] width of the whole image, 1-24, 24 in default
+ */
+/**
+ * @typedef WholeImageObject
+ * @property {WholeImageConfig} [config]
+ * @property {string|string[]} name
+ * @property {'image.whole'} type
+ */
+
+/**
+ * @typedef {ButtonObject|DividerObject|ImageObject|ProgressObject|TextObject|WholeImageObject} GridObject
+ */
+/**
+ * @typedef ColumnConfig
  * @type {Object}
  * @property {number} [gutter]
  * @property {'start'|'center'|'end'|'space-between'|'space-around'|'space-evenly'} [horizontalAlign]
@@ -28,8 +119,8 @@
 /**
  * @typedef ColumnObject
  * @type {Object}
- * @property {InColObject[]} columns
- * @property {InColConfig} [config]
+ * @property {GridObject[]} columns
+ * @property {ColumnConfig} [config]
  */
 
 const era = {
@@ -85,12 +176,7 @@ const era = {
   },
   /**
    * draw a divider to separate lines. the divider is also a line
-   * @param [config] config of the line
-   * @param {string} config.[content] content of the divider
-   * @param {'left'|'center'|'right'} config.[position] position of the divider
-   * @param {boolean} config.[isSolid] if the divider is solid
-   * @param {number} config.[offset] offset of the divider
-   * @param {number} config.[width] width of the divider
+   * @param {DividerConfig} [config] config of the line
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
@@ -232,28 +318,16 @@ const era = {
   playMusic(names, config) {},
   /**
    * print some text
-   * @param {string|(PrintedSpan|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
-   * @param [config] config of the printed line
-   * @param {'left'|'center'|'right'} config.[align] align of the line, 'left' in default
-   * @param {string} config.[color] color of the line, '#ffffff' in default
-   * @param {string} config.[fontSize] font size of the line, '1rem' in default
-   * @param {boolean} config.[isParagraph] if the line is in a paragraph, false in default
-   * @param {number} config.[offset] offset of the line, 0-23, 0 in default
-   * @param {number} config.[width] width of the line, 1-24, 24 in default
+   * @param {TextContent} content REQUIRED the text to be printed
+   * @param {TextConfig} [config] config of the printed line
    * @returns {number} line number of the printed line
    */
   // eslint-disable-next-line no-unused-vars
   print(content, config) {},
   /**
    * print some text and wait any key from user
-   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontStyle]:string,[fontWeight]:string,[url]:string}|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
-   * @param [config] config of the printed line
-   * @param {'left'|'center'|'right'} config.[align] align of the line, 'left' in default
-   * @param {string} config.[color] color of the line, '#ffffff' in default
-   * @param {string} config.[fontSize] font size of the line, '1rem' in default
-   * @param {boolean} config.[isParagraph] if the line is in a paragraph, false in default
-   * @param {number} config.[offset] offset of the line, 0-23, 0 in default
-   * @param {number} config.[width] width of the line, 1-24, 24 in default
+   * @param {TextContent} content REQUIRED the text to be printed
+   * @param {TextConfig} [config] config of the printed line
    * @returns {Promise<number>} line number of the printed line
    */
   // eslint-disable-next-line no-unused-vars
@@ -262,18 +336,7 @@ const era = {
    * print a button
    * @param {string} content REQUIRED the text of the button
    * @param {number} accelerator REQUIRED the accelerator key of the button used in the input
-   * @param [config] config of the printed button
-   * @param {'left'|'center'|'right'} config.[align] align of the button, 'left' in default
-   * @param {'dot'|string} config.[badge] badge of the button if isButton is true
-   * @param {'primary'|'success'|'warning'|'danger'|'info'|''} config.[buttonType] type of the button in element-plus, 'warning' in default when isButton is false
-   * @param {string} config.[color] color of the button, isButton must be false
-   * @param {boolean} config.[disabled] if the button is disabled, false in default
-   * @param {boolean} config.[disableWarning] if disable warning when accelerator has been set, false in default
-   * @param {'left'|'center'|'right'} config.[inTextAlign] align of the text in the button, 'center' in default
-   * @param {boolean} config.[isButton] if the button is a button, otherwise is a link
-   * @param {number} config.[offset] offset of the button, 0-23, 0 in default
-   * @param {boolean} config.[showAcc] if show the accelerator, false in default on PC, and is always true on Android
-   * @param {number} config.[width] width of the button, 1-24, 1 in default
+   * @param {ButtonConfig} [config] config of the printed button
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
@@ -286,7 +349,7 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   printImage(...names) {},
   /**
-   * @param {...ColumnObject|InColObject[]} columnObjects
+   * @param {...ColumnObject|GridObject[]} columnObjects
    * @returns {number} line number of the printed
    * @see print
    * @see printButton
@@ -306,8 +369,8 @@ const era = {
   printLineChart(config) {},
   /**
    * print multiple columns into a row, excluding inputs
-   * @param {InColObject[]} columnObjects the array of settings of columns, like print, printButton, printImage and printProgress
-   * @param {InColConfig} [config] config of the row
+   * @param {GridObject[]} columnObjects the array of settings of columns, like print, printButton, printImage and printProgress
+   * @param {ColumnConfig} [config] config of the row
    * @returns {number} line number of the printed
    * @see print
    * @see printButton
@@ -321,14 +384,7 @@ const era = {
    * @param {number} percentage REQUIRED the percentage of the progress bar, float, 0-100
    * @param {string} inContent REQUIRED the text shown in the progress bar
    * @param {string} outContent REQUIRED the text shown next to the progress bar
-   * @param [config] config of the printed progress
-   * @param {'left'|'center'|'right'} config.[align] align of the text shown next to the progress bar, 'left' in default
-   * @param {number} config.[barWidth] width of the progress bar, 0-24, 24 in default
-   * @param {string} config.[color] color of the progress bar
-   * @param {string} config.[fontColor] color of the font in the progress bar
-   * @param {number} config.[height] height of the progress bar, 6-30(px), 24(px) in default
-   * @param {number} config.[offset] offset of the progress, 0-23, 0 in default
-   * @param {number} config.[width] width of the progress, 1-24, 24 in default
+   * @param {ProgressConfig} [config] config of the printed progress
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
@@ -336,10 +392,7 @@ const era = {
   /**
    * print the whole image
    * @param {string} name REQUIRED
-   * @param [config]
-   * @param {'fill'|'contain'|'cover'|'none'|'scale-down'|'unset'} config.[fit] fit of the image
-   * @param {number} config.[offset] offset of the whole image, 0-23, 0 in default
-   * @param {number} config.[width] width of the whole image, 1-24, 24 in default
+   * @param {WholeImageConfig} [config]
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
@@ -353,21 +406,15 @@ const era = {
   quit() {},
   /**
    * DANGER replace the line just printed with a new in-col-row line
-   * @param {...ColumnObject|InColObject[]} columnObjects
+   * @param {...ColumnObject|GridObject[]} columnObjects
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
   replaceInColRows(...columnObjects) {},
   /**
    * DANGER replace the line just printed with a new text line
-   * @param {string|(PrintedSpan|{isBr:boolean}|{isDivider:boolean}|string)[]} content REQUIRED the text to be printed
-   * @param [config] config of the printed line
-   * @param {'left'|'center'|'right'} config.[align] align of the line, 'left' in default
-   * @param {string} config.[color] color of the line, '#ffffff' in default
-   * @param {string} config.[fontSize] font size of the line, '1rem' in default
-   * @param {boolean} config.[isParagraph] if the line is in a paragraph, false in default
-   * @param {number} config.[offset] offset of the line, 0-23, 0 in default
-   * @param {number} config.[width] width of the line, 1-24, 24 in default
+   * @param {TextContent} content REQUIRED the text to be printed
+   * @param {TextConfig} [config] config of the printed line
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
