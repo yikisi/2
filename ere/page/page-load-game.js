@@ -30,6 +30,24 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
 
+function check_titles(...ids) {
+  ids
+    .filter(
+      (id) =>
+        era.get(`cflag:${id}:招募状态`) === recruit_flags.yes &&
+        era.get(`cflag:${id}:育成回合计时`) >= 3 * 48,
+    )
+    .forEach((id) => {
+      const check = get_custom_check(id);
+      sys_add_titles(
+        id,
+        ...check.check_and_get_titles(
+          check.get_edu_aims().reduce((p, c) => p && c.check === 1, true),
+        ),
+      );
+    });
+}
+
 /**
  * load game
  * @return {Promise<boolean>} if true, tell main.js to call homepage
@@ -106,23 +124,7 @@ module.exports = async () => {
             // 大拓太阳神育成目标错误、贵妇人称号bug
             const version = era.get('version');
             if (version < 1011) {
-              [65, 116]
-                .filter(
-                  (id) =>
-                    era.get(`cflag:${id}:招募状态`) === recruit_flags.yes &&
-                    era.get(`cflag:${id}:育成回合计时`) >= 3 * 48,
-                )
-                .forEach((id) => {
-                  const check = get_custom_check(id);
-                  sys_add_titles(
-                    id,
-                    ...check.check_and_get_titles(
-                      check
-                        .get_edu_aims()
-                        .reduce((p, c) => p && c.check === 1, true),
-                    ),
-                  );
-                });
+              check_titles(65, 116);
             }
             if (version < 1100) {
               const e_queue = event_queue.get();
@@ -289,6 +291,7 @@ module.exports = async () => {
                   repay: salary,
                   timer: 1,
                 });
+                check_titles(66);
               }
             }
             return true;

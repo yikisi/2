@@ -351,10 +351,12 @@ const era = {
   /**
    * @param {...ColumnObject|GridObject[]} columnObjects
    * @returns {number} line number of the printed
+   * @see drawLine
    * @see print
    * @see printButton
    * @see printImage
    * @see printProgress
+   * @see printWholeImage
    */
   // eslint-disable-next-line no-unused-vars
   printInColRows(...columnObjects) {},
@@ -372,10 +374,12 @@ const era = {
    * @param {GridObject[]} columnObjects the array of settings of columns, like print, printButton, printImage and printProgress
    * @param {ColumnConfig} [config] config of the row
    * @returns {number} line number of the printed
+   * @see drawLine
    * @see print
    * @see printButton
    * @see printImage
    * @see printProgress
+   * @see printWholeImage
    */
   // eslint-disable-next-line no-unused-vars
   printMultiColumns(columnObjects, config) {},

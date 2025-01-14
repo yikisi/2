@@ -30,7 +30,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     }
   },
   (races) =>
-    check_aim_race(races, race_enum.asah_sta, 2, 1, (e) => e.st === 0) &&
+    check_aim_race(races, race_enum.arim_kin, 2, 1, (e) => e.st === 0) &&
     era.get('base:66:速度') >= 1200,
   aim_races,
   (buffer, races) => {
