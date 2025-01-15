@@ -543,6 +543,12 @@ const era = {
 Object.keys(era).forEach((key) => {
   if (era[key] instanceof Function && key !== 'delay') {
     era[key] = (...args) => {
+      if (era.version.engine === undefined) {
+        return console.log(
+          '[ERROR] apis has not been injected!',
+          new Error().stack.split('\n')[2],
+        );
+      }
       if (!era[key]._s) {
         return era.logger.error(
           `unsupported api! please check the version of the engine! current version: sdk=${
