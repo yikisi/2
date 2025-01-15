@@ -16,10 +16,10 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
-const zensky = get_chara_talk(4);
 
 module.exports = class extends CustomizedDaily {
   select() {
+    const zensky = get_chara_talk(4);
     let temp;
     const love = era.get('love:4'),
       buffer = [];
@@ -191,6 +191,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   good_morning() {
+    const zensky = get_chara_talk(4);
     const love = era.get('love:4'),
       buffer = [];
     if (era.get('base:4:体力') < era.get('maxbase:4:体力') / 3) {
@@ -270,6 +271,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async talk() {
+    const zensky = get_chara_talk(4);
     let talk_arr;
     switch (era.get('cflag:4:干劲')) {
       case -2:
@@ -355,6 +357,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_gift() {
+    const zensky = get_chara_talk(4);
     const talk_arr = [
       `这个玩偶是送给我的吗?${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}谢谢你.`,
       `是我最喜欢的椰汁饮料呢,谢谢你${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}`,
@@ -371,6 +374,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_cook() {
+    const zensky = get_chara_talk(4);
     const talk_arr = [
       '好怀念的味道,那我就不客气咯?',
       `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}就乖乖坐在这里看着我做饭吧……欸?希望能和我一起做饭吗?`,
@@ -387,6 +391,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_study() {
+    const zensky = get_chara_talk(4);
     const talk_arr = [
       '如果要参加各种竞赛的话,掌握各种跑法也是很重要的呢……干脆试下甩尾跑法吧？',
       '比起受人引导的位置,像这样一口气冲线的感觉让人欲罢不能呢♪',
@@ -403,6 +408,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_rest() {
+    const zensky = get_chara_talk(4);
     const talk_arr = [
       `既然是难得的放松时间, ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}要不要一起看看最新的潮流期刊呢`,
       `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}辛苦了呢,诶,不好意思下意识的就摸了摸你的头`,
@@ -418,6 +424,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_prepare() {
+    const zensky = get_chara_talk(4);
     const talk_arr = [
       '不让后辈们看到我精彩的表现的话可不行呢',
       `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}就在副驾驶位好好感受风的舞蹈吧`,
@@ -432,6 +439,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_game() {
+    const zensky = get_chara_talk(4);
     const talk_arr = [
       `${
         era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
@@ -448,6 +456,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_church() {
+    const zensky = get_chara_talk(4);
     const love = era.get('love:4'),
       chara340_talk = get_chara_talk(340),
       chara341_talk = get_chara_talk(341),
@@ -559,6 +568,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_shopping(hook) {
+    const zensky = get_chara_talk(4);
     const love = era.get('love:4');
     const buffer = [];
     let temp;
@@ -687,6 +697,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_station(hook) {
+    const zensky = get_chara_talk(4);
     const me = get_chara_talk(0);
     hook.arg = await select_action_in_station(4);
     switch (hook.arg) {
@@ -743,6 +754,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_river(hook) {
+    const zensky = get_chara_talk(4);
     hook.arg = (await select_action_around_river()) > 0;
     if (hook.arg) {
       switch (get_random_value(0, 1)) {
@@ -774,6 +786,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async school_atrium(hook) {
+    const zensky = get_chara_talk(4);
     hook.arg = (await select_action_in_atrium()) === 0;
     if (hook.arg) {
       switch (get_random_value(0, 1)) {
@@ -807,11 +820,11 @@ module.exports = class extends CustomizedDaily {
   }
 
   async school_rooftop() {
-    const chara_talk = get_chara_talk(4);
+    const zensky = get_chara_talk(4);
     if (Math.random() < 0.5) {
-      await chara_talk.say_and_wait(`在天台吃便当的话心也变得像风一样自由了`);
+      await zensky.say_and_wait(`在天台吃便当的话心也变得像风一样自由了`);
     } else {
-      await chara_talk.say_and_wait(
+      await zensky.say_and_wait(
         `就这样放空大脑想象着自己化为了和煦的春风在柔和的阳光之下翩翩起舞,心情也变得雀跃起来了呢`,
       );
     }

@@ -5,6 +5,8 @@
  */
 const era = require('#/era-electron');
 
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
 const CustomizedDaily = require('#/event/daily/daily-common');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
@@ -17,11 +19,10 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-const falcon = get_chara_talk(46);
 
 module.exports = class extends CustomizedDaily {
   select() {
+    const falcon = get_chara_talk(46);
     let temp;
     const love = era.get('love:46'),
       me = get_chara_talk(0),
@@ -132,6 +133,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   good_morning() {
+    const falcon = get_chara_talk(46);
     const love = era.get('love:46'),
       me = get_chara_talk(0),
       buffer = [];
@@ -216,6 +218,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async talk() {
+    const falcon = get_chara_talk(46);
     let talk_arr;
     const me = get_chara_talk(0);
     switch (era.get('cflag:46:干劲')) {
@@ -295,6 +298,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_gift() {
+    const falcon = get_chara_talk(46);
     const me = get_chara_talk(0),
       talk_arr = [
         `这个是给飞鹰子的吗？非常感谢！`,
@@ -316,6 +320,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_cook() {
+    const falcon = get_chara_talk(46);
     const me = get_chara_talk(0),
       talk_arr = [
         '比起按照食谱上做饭的话，飞鹰子也想尝试其他的手法呢。虽然经常失败就是了……',
@@ -337,6 +342,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_study() {
+    const falcon = get_chara_talk(46);
     const me = get_chara_talk(0),
       talk_arr = [
         '呜呜,飞鹰子不太擅长看书，考试都是靠闪耀同学提供的重点笔记前一天突击低空飘过的',
@@ -357,6 +363,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_rest() {
+    const falcon = get_chara_talk(46);
     const me = get_chara_talk(0),
       talk_arr = [
         `作为偶像休息也是很重要的！所以训练员${me.get_adult_sex_title()}也要适当放松一会！`,
@@ -379,6 +386,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_prepare() {
+    const falcon = get_chara_talk(46);
     const me = get_chara_talk(0),
       talk_arr = [
         `发型OK，决胜服OK,马蹄铁的形状也没有问题！一切都准备好了！`,
@@ -400,6 +408,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_game() {
+    const falcon = get_chara_talk(46);
     const me = get_chara_talk(0),
       talk_arr = [
         `飞鹰子不太擅长游戏呢……不过，音游类例外⭐`,
@@ -424,6 +433,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async school_atrium(hook) {
+    const falcon = get_chara_talk(46);
     const me = get_chara_talk(0);
     hook.arg = (await select_action_in_atrium()) === 0;
     if (hook.arg) {
@@ -479,6 +489,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_church() {
+    const falcon = get_chara_talk(46);
     const love = era.get('love:46'),
       me = get_chara_talk(0),
       chara340_talk = get_chara_talk(340),
@@ -654,6 +665,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_shopping(hook) {
+    const falcon = get_chara_talk(46);
     const me = get_chara_talk(0),
       love = era.get('love:46');
     const buffer = [];
@@ -903,6 +915,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_station(hook) {
+    const falcon = get_chara_talk(46);
     const me = get_chara_talk(0);
     hook.arg = await select_action_in_station(4);
     switch (Math.floor(Math.random() * 3)) {
@@ -973,6 +986,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_river(hook) {
+    const falcon = get_chara_talk(46);
     hook.arg = (await select_action_around_river()) > 0;
     if (hook.arg) {
       switch (get_random_value(0, 2)) {
