@@ -195,12 +195,12 @@ const era = {
   get(varName) {},
   /**
    * get all added characters
-   * @returns {array<number>} the list of added characters' ids
+   * @returns {number[]} the list of added characters' ids
    */
   getAddedCharacters() {},
   /**
    * get all characters
-   * @returns {array<number>} the list of all characters' ids
+   * @returns {number[]} the list of all characters' ids
    */
   getAllCharacters() {},
   /**
@@ -543,7 +543,7 @@ const era = {
 Object.keys(era).forEach((key) => {
   if (era[key] instanceof Function && key !== 'delay') {
     era[key] = (...args) => {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === 'undefined') {
         return console.log(
           '[ERROR] apis has not been injected!',
           new Error().stack.split('\n')[2],

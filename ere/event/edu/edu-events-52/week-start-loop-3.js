@@ -835,7 +835,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   await era.printAndWait([
     '这是「',
     urara.get_colored_actual_name(),
-    '的祈愿」，也是「所有人的祈愿」——',
+    ' 的祈愿」，也是「所有人的祈愿」——',
   ]);
   await era.printAndWait([
     urara.get_colored_name(),
