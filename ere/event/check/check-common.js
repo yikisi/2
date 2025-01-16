@@ -272,7 +272,7 @@ class CustomizedCheck {
 
   /** @returns {boolean} */
   is_rape_in_sleeping() {
-    if (common_no_action_check(this.id)) {
+    if (common_no_action_check(this.id) || check_want_to_escape(this.id)) {
       return false;
     }
     const love = era.get(`love:${this.id}`),
@@ -281,13 +281,12 @@ class CustomizedCheck {
       relation = era.get(`relation:${this.id}:0`) || 0;
     let delta = love * raping_limit - relation;
     if (
-      (punish_level <= 1 &&
-        !era.get(`status:${this.id}:爱意克制`) &&
-        (era.get('flag:当前位置') === location_enum.basement ||
-          !raping_limit ||
-          love < 50 ||
-          delta < 0)) ||
-      check_want_to_escape(this.id)
+      punish_level <= 1 &&
+      !era.get(`status:${this.id}:爱意克制`) &&
+      (era.get('flag:当前位置') === location_enum.basement ||
+        !raping_limit ||
+        love < 50 ||
+        delta < 0)
     ) {
       return false;
     }
