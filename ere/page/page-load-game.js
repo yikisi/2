@@ -6,20 +6,19 @@ const {
   sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const filter_chara = require('#/system/sys-filter-chara');
+const sys_load_game = require('#/system/sys-load-game');
 
 const print_page_header = require('#/page/components/page-header');
 
-const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const event_queue = require('#/event/queue');
 const { add_event, cb_enum } = require('#/event/queue');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { chara_colors, get_chara_color } = require('#/data/chara-colors');
+const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const { trainer_salary } = require('#/data/const.json');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
@@ -114,12 +113,7 @@ module.exports = async () => {
           }
           if (await era.loadData(ret)) {
             flag_load_game = false;
-            event_queue.init();
-            basement_queue.init();
-            const src_chara = era.get('cflag:0:模版角色');
-            chara_colors[0] =
-              src_chara > 0 ? get_chara_color(src_chara) : '#ffffff';
-            CharaTalk.me = new CharaTalk(0);
+            sys_load_game();
             // 向前兼容
             // 大拓太阳神育成目标错误、贵妇人称号bug
             const version = era.get('version');
