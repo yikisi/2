@@ -224,10 +224,10 @@ module.exports = {
     if (era.get(`cflag:${chara.id}:种族`) && src_chara > 0 && suffix !== -1) {
       image_list = race_clothe_list
         .filter((e) => era.checkImage(`${image_prefix}${e.s}`))
-        .map((e) => {
-          e.n = (clothe_names[src_chara] || {})[e.s] || e.n;
-          return e;
-        });
+        .map((e) => ({
+          n: (clothe_names[src_chara] || {})[e.s] || e.n,
+          s: e.s,
+        }));
       if (image_list.length > 1) {
         const curr = image_list.find((e) => e.s === suffix);
         action_buffer.push({
@@ -236,7 +236,7 @@ module.exports = {
           content: curr ? `决胜服 (${curr.n})` : '决胜服',
           type: 'button',
         });
-      } else {
+      } else if (image_list.length > 0 && image_list[0].n !== '决胜服') {
         action_buffer.push({
           config: { width: 8 },
           content: `决胜服：${image_list[0].n}`,
