@@ -287,6 +287,13 @@ module.exports = async () => {
                 });
                 check_titles(66);
               }
+              if (
+                era.get('cflag:67:招募状态') === recruit_flags.yes &&
+                era.get('cflag:67:育成回合计时') > 143 + 9 &&
+                era.get('cflag:67:可再次育成') === 0
+              ) {
+                era.set('cflag:67:可再次育成', 1);
+              }
             }
             return true;
           } else {
