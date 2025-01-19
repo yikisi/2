@@ -12,8 +12,7 @@ const print_page_header = require('#/page/components/page-header');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
-const event_queue = require('#/event/queue');
-const { add_event, cb_enum } = require('#/event/queue');
+const { add_event, cb_enum, get: get_queue } = require('#/event/queue');
 
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
@@ -121,10 +120,10 @@ module.exports = async () => {
               check_titles(65, 116);
             }
             if (version < 1100) {
-              const e_queue = event_queue.get();
+              const e_queue = get_queue();
               Object.values(e_queue).forEach((l) =>
                 l.forEach((e) => {
-                  if (e.type === event_queue.cb_enum.love) {
+                  if (e.type === cb_enum.love) {
                     if (e.arg === undefined) {
                       era.arg = [era.get(`love:${e.chara_id}`)];
                     } else if (
@@ -170,7 +169,7 @@ module.exports = async () => {
               }
               if (!era.get('flag:回合爱慕惩罚')) {
                 // 爱慕事件修复
-                const events = event_queue.get(),
+                const events = get_queue(),
                   dict = {};
                 Object.values(events).forEach((l) =>
                   l.forEach((e) => {
@@ -241,7 +240,7 @@ module.exports = async () => {
                 new MyEduMarks().strange_day = 0;
               } else if (
                 new MyEduMarks().strange_day === 0 &&
-                (event_queue.get()[event_hooks.week_start] || []).findIndex(
+                (get_queue()[event_hooks.week_start] || []).findIndex(
                   (e) => e.arg === 'strange_day',
                 ) === -1
               ) {
