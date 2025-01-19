@@ -178,7 +178,6 @@ class CustomizedDaily {
           billing.creditor = this.id;
           billing.repay = -repay;
           billing.timer = time;
-          era.add('flag:收支', -repay);
           await era.printAndWait([
             get_chara_talk(0).get_colored_name(),
             ' 向 ',

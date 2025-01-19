@@ -63,7 +63,6 @@ module.exports = class extends CustomizedEdu {
         .filter((e) => get(`cflag:${e}:育成回合计时`) < 3 * 48)
         .forEach((e) => add(`exp:${e}:技能点数`, 10));
       sys_get_billings().push({ creditor: 302, repay: -10, timer: 4 });
-      add('flag:收支', -10);
       println();
       sys_like_chara(302, 0, get_random_value(10, 20)) && (await waitAnyKey());
     } else {

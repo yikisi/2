@@ -8,6 +8,7 @@ const {
 const {
   sys_change_attr_and_print,
   sys_change_pressure,
+  sys_get_billings,
   sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
@@ -94,7 +95,9 @@ async function check_new_activities(cur_round, in_team_list) {
   }
   if (
     era.get('flag:当前马币') > 0 &&
-    era.get('flag:当前马币') + era.get('flag:收支') <= 0
+    era.get('flag:当前马币') +
+      sys_get_billings().reduce((p, c) => p + c.repay, 0) <=
+      0
   ) {
     era.print([get_chara_talk(0).get_colored_name(), ' 即将破产！']);
   }

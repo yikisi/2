@@ -279,13 +279,14 @@ module.exports = async () => {
                   salary =
                     trainer_salary[get_trainer_title().substring(0, 2)] *
                     (1 + (cur_month === 12));
+                era.set('flag:18', 0);
                 billings.push({
                   creditor: cur_month === 12 ? -1 : 0,
                   repay: salary,
                   timer: 1,
                 });
-                check_titles(66);
               }
+              check_titles(66);
               if (
                 era.get('cflag:67:招募状态') === recruit_flags.yes &&
                 era.get('cflag:67:育成回合计时') > 143 + 9 &&
