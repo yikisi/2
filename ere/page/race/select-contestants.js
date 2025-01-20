@@ -79,9 +79,11 @@ async function select_contestants(race) {
         dict[select] = !dict[select];
       }
     }
-    registered_list.forEach(
-      (e) => !dict[e] && (sys_reg_race(e).curr = { race: -1, week: -1 }),
-    );
+    registered_list.forEach((e) => {
+      if (!dict[e]) {
+        sys_reg_race(e).curr = { race: -1, week: -1 };
+      }
+    });
     ret = Object.entries(dict)
       .filter((e) => e[1])
       .map((e) => Number(e[0]));
