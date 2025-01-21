@@ -243,14 +243,6 @@ const era = {
    * @returns {Promise<boolean>} if the loading succeeds
    */
   async loadGlobal() {},
-  /**
-   * to log save data and global data into program logs
-   */
-  logData() {},
-  /**
-   * to log static data and field name data (from .csv) into program logs
-   */
-  logStatic() {},
   logger: {
     assert(checkVal, aimVal) {
       if (checkVal !== aimVal && era.version.engine === undefined) {

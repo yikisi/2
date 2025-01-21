@@ -44,7 +44,7 @@ module.exports = {
       Object.entries(era.get(`relation:${chara.id}`)).forEach((e) => {
         const mark = get_relation_mark(e[1], chara.id),
           target = Number(e[0]);
-        if (target !== my_src_chara) {
+        if (target !== my_src_chara && target < 1000) {
           relation_info_list.push({
             config: { width: 8 },
             content: [
