@@ -21,20 +21,18 @@ async function select_contestants(race) {
       recruit_flags.yes,
     ).filter((e) => sys_reg_race(e).curr.race === race),
     contestants = registered_list.filter((e) => sys_check_race_ready(e));
-  sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-    (e) => sys_reg_race(e).curr.race === race,
-  );
+  const dict = {};
   let ret = contestants;
+  ret.forEach((e) => (dict[e] = true));
   if (contestants.length > 1) {
-    let flag_select_contestants = true;
-    const dict = {};
-    ret.forEach((e) => (dict[e] = true));
+    const cur_line = era.getLineCount();
     let contestant_count = contestants.length,
-      flag_print = true;
-    while (flag_select_contestants) {
-      (flag_print ? era.printInColRows : era.replaceInColRows)(
+      flag = true;
+    while (flag) {
+      await era.clear(era.getLineCount() - cur_line);
+      era.drawLine();
+      era.printInColRows(
         [
-          { type: 'divider' },
           {
             content: [
               '下列队伍成员登记出走了 ',
@@ -70,24 +68,23 @@ async function select_contestants(race) {
           },
         ],
       );
-      flag_print = false;
-      const select = await era.input({ hideInput: true });
+      const select = await era.input();
       if (select === 1000) {
-        flag_select_contestants = false;
+        flag = false;
       } else {
         dict[select] ? contestant_count-- : contestant_count++;
         dict[select] = !dict[select];
       }
     }
-    registered_list.forEach((e) => {
-      if (!dict[e]) {
-        sys_reg_race(e).curr = { race: -1, week: -1 };
-      }
-    });
     ret = Object.entries(dict)
       .filter((e) => e[1])
       .map((e) => Number(e[0]));
   }
+  registered_list.forEach((e) => {
+    if (!dict[e]) {
+      sys_reg_race(e).curr = { race: -1, week: -1 };
+    }
+  });
   return ret;
 }
 
