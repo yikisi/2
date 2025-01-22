@@ -265,7 +265,7 @@ module.exports = class extends MyPrivacyEvents {
           {
             accelerator: 1,
             config: { align: 'center', showAcc: false, width: 2 },
-            content: '窗户',
+            content: '窗',
             type: 'button',
           },
           {
@@ -349,16 +349,16 @@ module.exports = class extends MyPrivacyEvents {
           },
         ],
         [
-          { config: { width: 3 }, content: '墙墙墙墙墙', type: 'text' },
+          { config: { width: 3 }, content: '墙墙墙墙', type: 'text' },
           {
             accelerator: 6,
             config: { align: 'center', showAcc: false, width: 2 },
-            content: '大门',
+            content: '大 门',
             type: 'button',
           },
           {
             config: { align: 'right', width: 3 },
-            content: '墙墙墙墙墙',
+            content: '墙墙墙墙',
             type: 'text',
           },
         ],
