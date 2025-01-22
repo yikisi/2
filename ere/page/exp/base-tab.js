@@ -396,80 +396,108 @@ module.exports = {
             title_list[selected].s = true;
           }
         } else {
-          const curr = image_list.find((e) => e.s === suffix);
-          era.setHorizontalAlign('space-evenly');
-          era.printInColRows(
-            [
-              { type: 'divider' },
-              {
-                content: [
-                  '现在 ',
-                  chara.get_colored_name(),
-                  ' 在参赛时',
-                  suffix === 0
-                    ? `按照节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [${clothe_names[src_chara]['']}]`
-                    : `穿着决胜服 [${curr.n}]`,
-                  '。',
-                  { isBr: true },
-                  '要更换吗？',
-                ],
-                type: 'text',
-              },
-            ],
-            ...image_list.map((e, i) => ({
-              columns: [
-                { names: `${image_prefix}${e.s}_半身`, type: 'image.whole' },
+          const curr = image_list.find((e) => e.s === suffix),
+            cur_line = era.getLineCount();
+          let flag = true,
+            gif = era.checkImage(`${image_prefix}${image_list[0].s}_gif`)
+              ? 0
+              : 2;
+          while (flag) {
+            await era.clear(era.getLineCount() - cur_line);
+            era.setHorizontalAlign('space-evenly');
+            era.printInColRows(
+              [
+                { type: 'divider' },
                 {
-                  accelerator: i + 1,
+                  content: [
+                    '现在 ',
+                    chara.get_colored_name(),
+                    ' 在参赛时',
+                    suffix === 0
+                      ? `按照节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [${clothe_names[src_chara]['']}]`
+                      : `穿着决胜服 [${curr.n}]`,
+                    '。',
+                    { isBr: true },
+                    '要更换吗？',
+                  ],
+                  type: 'text',
+                },
+              ],
+              ...image_list.map((e, i) => ({
+                columns: [
+                  {
+                    names:
+                      gif === 1
+                        ? `${image_prefix}${e.s}_gif\t${image_prefix}${e.s}_半身`
+                        : `${image_prefix}${e.s}_半身`,
+                    type: 'image.whole',
+                  },
+                  {
+                    accelerator: i + 1,
+                    config: {
+                      align: 'center',
+                      disabled: suffix === e.s,
+                    },
+                    content: e.n,
+                    type: 'button',
+                  },
+                ],
+                config: { width: 6 },
+              })),
+              [
+                {
+                  accelerator: 97,
                   config: {
                     align: 'center',
-                    disabled: suffix === e.s,
+                    disabled: gif === 2,
+                    width: 8,
                   },
-                  content: e.n,
+                  content: '切换立绘',
+                  type: 'button',
+                },
+                {
+                  accelerator: 98,
+                  config: {
+                    align: 'center',
+                    disabled: suffix === 0,
+                    width: 8,
+                  },
+                  content: '即时选择',
+                  type: 'button',
+                },
+                {
+                  accelerator: 99,
+                  config: { align: 'center', width: 8 },
+                  content: '保持不变',
                   type: 'button',
                 },
               ],
-              config: { width: 6 },
-            })),
-            [
-              {
-                accelerator: 98,
-                config: {
-                  align: 'center',
-                  disabled: suffix === 0,
-                  width: 12,
-                },
-                content: '即时选择',
-                type: 'button',
-              },
-              {
-                accelerator: 99,
-                config: { align: 'center', width: 12 },
-                content: '保持不变',
-                type: 'button',
-              },
-            ],
-          );
-          era.setHorizontalAlign('start');
-          const ret = await era.input();
-          if (ret === 98) {
-            await era.printAndWait([
-              '现在 ',
-              chara.get_colored_name(),
-              ' 在参赛时会按照场合和节庆决定着装，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [',
-              clothe_names[src_chara][''],
-              ']。',
-            ]);
-            era.set(`cstr:${chara.id}:决胜服`, 0);
-          } else if (ret !== 99) {
-            await era.printAndWait([
-              '现在 ',
-              chara.get_colored_name(),
-              ' 在参赛时、URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [',
-              image_list[ret - 1].n,
-              ']。',
-            ]);
-            era.set(`cstr:${chara.id}:决胜服`, image_list[ret - 1].s);
+            );
+            era.setHorizontalAlign('start');
+            const ret = await era.input();
+            if (ret === 97) {
+              gif = 1 - gif;
+              continue;
+            } else if (ret === 98) {
+              await era.printAndWait([
+                '现在 ',
+                chara.get_colored_name(),
+                ' 在参赛时会按照场合和节庆决定着装，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [',
+                clothe_names[src_chara][''],
+                ']。',
+              ]);
+              era.set(`cstr:${chara.id}:决胜服`, 0);
+            } else if (ret !== 99) {
+              await era.printAndWait([
+                '现在 ',
+                chara.get_colored_name(),
+                ' 在参赛时、URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [',
+                image_list[ret - 1].n,
+                ']。',
+              ]);
+              era.set(`cstr:${chara.id}:决胜服`, image_list[ret - 1].s);
+            }
+            flag = false;
           }
         }
       },
