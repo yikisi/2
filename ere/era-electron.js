@@ -183,7 +183,7 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   drawLine(config) {},
   /**
-   * end training and destroy temporary data
+   * end training, add gotjewel table into jewel table, and destroy temporary data
    */
   endTrain() {},
   /**
@@ -289,6 +289,10 @@ const era = {
       return era.logger.info(msg);
     },
   },
+  /**
+   * add delta table into param table, nowex table into ex table, and clean source, delta and nowex table
+   */
+  nextTurnInTrain() {},
   /**
    * show a notification
    * @param {string|({[color]:string,content:string,[fontSize]:string,[fontWeight]:string}|{isBr:true}|string)[]} content content of the notification
