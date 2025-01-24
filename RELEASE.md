@@ -1,7 +1,7 @@
-# [EraUma v1.210 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.210)
+# [EraUma v1.21 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.210)
 _incoming_
 
-适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.4.0) 及以上版本
+适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.4.0) 与 安卓版引擎 [ere.app v1.0.6 (lipiah)](https://gitgud.io/umaera/ere-app/-/releases/1.0.6) 及以上版本
 
 ## Added
 
