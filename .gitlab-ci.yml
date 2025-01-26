@@ -7,7 +7,7 @@ variables:
   GAME_ALL_ZIP: 'era-uma-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
   GAME_ZIP_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/erauma/${CI_COMMIT_TAG}/era-uma-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
   GAME_BUNDLE_DIR: 'erauma-${CI_COMMIT_TAG}'
-  GAME_BUNDLE_ZIP: 'era-bundle-${CI_COMMIT_TAG}.zip'
+  GAME_BUNDLE_ZIP: 'erauma-bundle-${CI_COMMIT_TAG}.zip'
   GAME_BUNDLE_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/bundle/${CI_COMMIT_TAG}/era-bundle-${CI_COMMIT_TAG}.zip'
   CALL_SIGN: 'kuuga'
 
