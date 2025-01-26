@@ -34,5 +34,5 @@
     "prepare": "husky",
     "webpack": "node build/build.js"
   },
-  "version": "1210"
+  "version": "1211"
 }
