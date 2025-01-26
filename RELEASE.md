@@ -1,7 +1,7 @@
 # [EraUma v1.21 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.210)
-_incoming_
+_2024/1/26_
 
-适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.4.0) 与 安卓版引擎 [ere.app v1.0.6 (lipiah)](https://gitgud.io/umaera/ere-app/-/releases/1.0.6) 及以上版本
+适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.4.0) 及以上版本
 
 ## Added
 
@@ -14,6 +14,7 @@ _incoming_
 * 【好感度镜片】和【马语者】将不再在地下室内生效
   * 绑架者现在会将你的眼镜和手机留在你的家中，从地下室离开后就可以取回
 * 现在有动态决胜服立绘的角色在选择决胜服界面可以切换静态和动态立绘显示
+* 下调了安心泽刺刺美的特性【针炙名师】的效果，现在每周结束时50%概率额外消除一层角色的【疲惫】和【伤病】状态（每个角色的每个状态额外判定）
 
 ## Fixed
 

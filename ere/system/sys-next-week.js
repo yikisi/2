@@ -373,12 +373,20 @@ async function sys_next_week() {
     era.get(`status:${chara_id}:疲惫`) &&
       era.set(
         `status:${chara_id}:疲惫`,
-        Math.max(era.get(`status:${chara_id}:疲惫`) - (1 + health_buff), 0),
+        Math.max(
+          era.get(`status:${chara_id}:疲惫`) -
+            (1 + (health_buff && Math.random() < 0.5 ? 1 : 0)),
+          0,
+        ),
       );
     era.get(`status:${chara_id}:伤病`) &&
       era.set(
         `status:${chara_id}:伤病`,
-        Math.max(era.get(`status:${chara_id}:伤病`) - (1 + health_buff), 0),
+        Math.max(
+          era.get(`status:${chara_id}:伤病`) -
+            (1 + (health_buff && Math.random() < 0.5 ? 1 : 0)),
+          0,
+        ),
       );
     era.set(`status:${chara_id}:健康茶`, 0);
     // 药物泌乳只维持一回合
