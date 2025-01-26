@@ -302,6 +302,19 @@ module.exports = async () => {
                 era.set('cflag:85:育成回合计时', 'x');
               }
             }
+            if (version <= 1210) {
+              const keys = era.get('cstrkeys').filter((k) => k !== 12);
+              era
+                .getAddedCharacters()
+                .forEach((id) =>
+                  keys.forEach((k) =>
+                    era.set(
+                      `cstr:${id}:${k}`,
+                      era.get(`cstr:${id}:${k}`) || '',
+                    ),
+                  ),
+                );
+            }
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;

@@ -43,6 +43,11 @@ function init_chara(chara_id, src_chara_id) {
   ) {
     return;
   }
+  era
+    .get('cstrkeys')
+    .forEach((k) =>
+      era.set(`cstr:${chara_id}:${k}`, era.get(`cstr:${chara_id}:${k}`) || ''),
+    );
   if (src_chara_id) {
     era.set(`cflag:${chara_id}:模版角色`, src_chara_id);
     era.set(`cflag:${chara_id}:种族`, 1);
