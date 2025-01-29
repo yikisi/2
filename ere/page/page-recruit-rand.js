@@ -50,17 +50,26 @@ async function print_rec_page() {
   const me = get_chara_talk(0);
   let event_chara_list, flag_recruit, flag_leave;
 
-  const team_list = filter_chara('cflag', '招募状态', recruit_flags.yes);
+  const team_list = filter_chara('cflag', '招募状态', recruit_flags.yes),
+    stay_list = [
+      sys_get_star_premium_draw().chara,
+      era.get('flag:物色对象'),
+    ].filter((e) => e);
   let today_list = gacha(
     filter_chara('cflag', '随机招募', 1).filter(
       (v) => !team_list.includes(v) && era.get(`cflag:${v}:成长阶段`) >= 2,
     ),
     5,
   );
-  today_list.push(sys_get_star_premium_draw().chara);
-  today_list = today_list
-    .filter((e, i, l) => e && l.indexOf(e) === i)
-    .sort((a, b) => a - b);
+  today_list.push(...stay_list);
+  today_list = today_list.filter((e, i, l) => e && l.indexOf(e) === i);
+  if (today_list.length > 6) {
+    today_list.splice(
+      today_list.findIndex((e) => stay_list.indexOf(e) === -1),
+      1,
+    );
+  }
+  today_list = today_list.sort((a, b) => a - b);
   await era.clear();
   print_page_header();
   era.drawLine();
