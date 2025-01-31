@@ -1,5 +1,5 @@
 const { execSync } = require('child_process');
-const { writeFileSync } = require('node:fs');
+const { writeFileSync } = require('fs');
 const { join } = require('path');
 
 const { PrismaClient } = require('@prisma/client');
