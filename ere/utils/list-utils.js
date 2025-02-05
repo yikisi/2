@@ -84,11 +84,11 @@ module.exports = {
    * @template T
    * @param {T[]} list
    * @param {(T)=>number} order_by
-   * @returns {T}
+   * @returns {{max:T,min:T}}
    */
   get_extremum_entry(list, order_by) {
     if (list.length <= 1) {
-      return list[0];
+      return { max: list[0], min: list[0] };
     }
     const _list = list.map((v) => {
       return {
