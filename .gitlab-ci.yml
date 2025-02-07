@@ -44,8 +44,8 @@ build:
     - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${GAME_ALL_ZIP} "${GAME_ZIP_URL}"'
     - cd ./$GAME_ALL_DIR/game/
     - '[ -f ./base.zip ] && rm ./base.zip'
-    - VERSION=`cat csv/GameBase.csv | grep 'バージョン,'`
-    - 'VERSION=${VERSION#*,}'
+    - VERSION=`cat csv/GameBase.csv | grep '^バージョン,'`
+    - VERSION=`echo $VERSION | cut -d',' -f2`
     - '[ $MIN_VERSION != $VERSION ] && zip -r base.zip ./ere ./csv RELEASE.md CHANGELOG.md'
     - '[ -f ./base.zip ] && curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./base.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip"'
     - echo done
@@ -71,8 +71,8 @@ pages:
   script:
     - rm -rf public
     - mkdir public
-    - VERSION=`cat csv/GameBase.csv | grep 'バージョン,'`
-    - echo ${VERSION#*,} > public/RELEASE
+    - VERSION=`cat csv/GameBase.csv | grep '^バージョン,'`
+    - echo $VERSION | cut -d',' -f2 > public/RELEASE
     - cat .ere-min-version >> public/RELEASE
     - echo "<meta http-equiv=\"refresh\" content=\"3; url= $GAME_ZIP_URL\">" > public/index.html
   artifacts:
