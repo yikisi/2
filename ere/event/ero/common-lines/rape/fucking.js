@@ -480,8 +480,8 @@ class EroRapeFucking extends EroFucking {
       await defender.say_and_wait('咕哦哦哦齁哦哦哦哦————❤️❤️❤️');
       await attacker.print_and_wait([
         '就像是在验证猜想般的，名叫 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 自觉地抬起脑袋发出高亢的浪叫，屁股也配合着抽插翘了起来，让肉棒得以更多的碰到敏感点。',
+        defender.get_colored_name(),
+        ' 的女性自觉地抬起脑袋发出高亢的浪叫，屁股也配合着抽插翘了起来，让肉棒得以更多的碰到敏感点。',
       ]);
       await attacker.print_and_wait([
         '美眸半开半闭，所剩不多的理智和自尊随爱液一并排出体外。',
