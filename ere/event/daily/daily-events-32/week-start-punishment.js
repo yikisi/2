@@ -289,7 +289,7 @@ module.exports = (handlers) => {
       era.println();
 
       await tachyon.say_and_wait('身为性奴的能力……完全不及格啊。');
-      await tachyon.say_and_wait('还得好好加以调教才行……。');
+      await tachyon.say_and_wait('还得好好加以调教才行……');
       era.println();
 
       await era.printAndWait(

@@ -433,7 +433,7 @@ async function tachyon_betrayed_2(tachyon_marks) {
     await tachyon.print_and_wait(['绝对，不会是其中的任何一个吧。']);
     era.println();
 
-    await coffee.say_and_wait([c_call_m, '……', c_call_m, '……。']);
+    await coffee.say_and_wait([c_call_m, '……', c_call_m, '……']);
     era.println();
 
     await tachyon.print_and_wait([t_call_c, ' 骑上了', me.sex, '的身体。']);
@@ -453,7 +453,7 @@ async function tachyon_betrayed_2(tachyon_marks) {
     await tachyon.print_and_wait(['被妓女都不如的存在按在身下骑的模样。']);
     era.println();
 
-    await coffee.say_and_wait(['呐……', c_call_m, '……不，训练员君……。']);
+    await coffee.say_and_wait(['呐……', c_call_m, '……不，训练员君……']);
     era.println();
 
     await tachyon.print_and_wait(['忽然，', t_call_c, ' 的声音变得无比妩媚。']);
@@ -534,7 +534,7 @@ async function tachyon_betrayed_2(tachyon_marks) {
     era.println();
 
     await coffee.say_and_wait(['唔……忽然……忽然这么用力……❤️。']);
-    await coffee.say_and_wait(['呐……', c_call_m, '……里面……在里面……。']);
+    await coffee.say_and_wait(['呐……', c_call_m, '……里面……在里面……']);
     await coffee.say_and_wait([
       c_call_t,
       ' 不愿意的，我都会让您做……',
@@ -600,7 +600,7 @@ async function tachyon_betrayed_2(tachyon_marks) {
     await tachyon.print_and_wait(['那么……就算我……']);
     era.println();
 
-    await coffee.say_and_wait(['啾……啾……。']);
+    await coffee.say_and_wait(['啾……啾……']);
     era.println();
 
     await tachyon.print_and_wait(['不是肉杆。']);
