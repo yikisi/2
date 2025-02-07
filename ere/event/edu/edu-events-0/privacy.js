@@ -103,6 +103,8 @@ module.exports = class extends CustomizedEdu {
           ' 马币的货款……',
         ]);
       }
+      set('item:鲜榨马奶', 0);
+      set('item:鲜榨人奶', 0);
       add_event(hook.hook, event_object.set_arg('privacy_2_1'));
     } else {
       await printAndWait([
@@ -232,6 +234,8 @@ module.exports = class extends CustomizedEdu {
           ' 马币的货款……',
         ]);
       }
+      set('item:鲜榨马奶', 0);
+      set('item:鲜榨人奶', 0);
       add_event(hook.hook, event_object.set_arg('privacy_2_1'));
     } else {
       await printAndWait(
