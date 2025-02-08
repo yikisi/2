@@ -1,6 +1,5 @@
 /**
  * @file 曼城茶座 - 调教
- *
  * @author Necroz
  * @author 幽白書
  */

@@ -1,6 +1,5 @@
 /**
  * @file 优秀素质 - 日常
- *
  * @author 红红火火恍惚
  */
 const era = require('#/era-electron');

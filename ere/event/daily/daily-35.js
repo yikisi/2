@@ -1,6 +1,5 @@
 /**
  * @file 胜利奖券 - 日常
- *
  * @author 幽白書
  */
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');

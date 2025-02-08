@@ -26,7 +26,6 @@ class CharaTalk {
 
   /**
    * 输出一句路人的台词
-   *
    * @param {string} name
    * @param {string|({content:string,[color]:string}|string)[]} _content
    * @param {boolean} [mental]
@@ -50,7 +49,6 @@ class CharaTalk {
 
   /**
    * 输出一句路人的台词并等待
-   *
    * @param {string} name
    * @param {string|({content:string,[color]:string}|string)[]} _content
    * @param {boolean} [mental]
@@ -147,7 +145,6 @@ class CharaTalk {
 
   /**
    * 事件从该角色视角展开时的旁白
-   *
    * @param {string|({content:string,[color]:string}|string)[]} _content
    */
   print(_content) {
@@ -156,7 +153,6 @@ class CharaTalk {
 
   /**
    * 事件从该角色视角展开时的旁白，在输出后会等待玩家按任意键的版本
-   *
    * @param {string|({content:string,[color]:string}|string)[]} content
    * @returns {Promise<void>}
    */
@@ -167,7 +163,6 @@ class CharaTalk {
 
   /**
    * 输出一句该角色的台词
-   *
    * @param {string|({content:string,[color]:string}|string)[]} _content
    * @param {boolean} [mental]
    */
@@ -187,7 +182,6 @@ class CharaTalk {
 
   /**
    * 输出一句该角色的台词，在输出后会等待玩家按任意键的版本
-   *
    * @param {string|({content:string,[color]:string}|string)[]} _content
    * @param {boolean} [mental]
    */
@@ -198,7 +192,6 @@ class CharaTalk {
 
   /**
    * 以未知名输出一句该角色的台词
-   *
    * @param {string|({content:string,[color]:string}|string)[]} _content
    */
   say_as_unknown(_content) {
@@ -221,7 +214,6 @@ class CharaTalk {
 
   /**
    * 以未知名输出一句该角色的台词并等待
-   *
    * @param {string|({content:string,[color]:string}|string)[]} _content
    */
   async say_as_unknown_and_wait(_content) {
@@ -237,7 +229,6 @@ class CharaTalk {
 
   /**
    * 输出一句该角色在回忆中的台词
-   *
    * @param {string|({content:string,[color]:string}|string)[]} _content
    * @param {boolean} [is_unknown]
    */
@@ -262,7 +253,6 @@ class CharaTalk {
 
   /**
    * 输出一句该角色在回忆中的台词，在输出后会等待玩家按任意键的版本
-   *
    * @param {string|({content:string,[color]:string}|string)[]} content
    * @param {boolean} [is_unknown]
    */

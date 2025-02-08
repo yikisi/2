@@ -7,7 +7,6 @@ const RaceHistory = require('#/data/race/model/race-history');
 
 /**
  * 如果想用this.id，记得不能用箭头函数，惨痛教训……
- *
  * @param {function(AfterRaceParams)} after_race_cb
  * @param {(function(Record<string,RaceResult>,RaceResult[],boolean):boolean)|undefined} title_check_cb
  * @param {Record<string,number>} aim_races

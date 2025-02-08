@@ -46,7 +46,6 @@ const { location_enum } = require('#/data/locations');
 module.exports = class extends CustomizedEdu {
   /**
    * @author Mr.E.
-   *
    * @param {CharaTalk} me
    * @param _me
    * @param _call
@@ -121,7 +120,6 @@ module.exports = class extends CustomizedEdu {
 
   /**
    * @author Mr.E.
-   *
    * @param {CharaTalk} me
    * @param _me
    * @param _call
@@ -178,7 +176,6 @@ module.exports = class extends CustomizedEdu {
 
   /**
    * @author Mr.E.
-   *
    * @param {CharaTalk} me
    * @param _me
    * @param _call
@@ -251,7 +248,6 @@ module.exports = class extends CustomizedEdu {
 
   /**
    * @author Mr.E.
-   *
    * @param {CharaTalk} me
    * @param _me
    * @param _call

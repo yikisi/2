@@ -1,6 +1,5 @@
 /**
  * @file 调教地文 - 银趴系
- *
  * @author 雞雞
  * @author 无名黑奴
  */
@@ -102,7 +101,6 @@ async function common_spit_roast(attacker, defender, supporter, hook) {
 class EroNormalOrgy extends EroOrgy {
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {CharaTalk} supporter
@@ -137,7 +135,6 @@ class EroNormalOrgy extends EroOrgy {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {CharaTalk} supporter
@@ -191,7 +188,6 @@ class EroNormalOrgy extends EroOrgy {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {CharaTalk} supporter
@@ -229,7 +225,6 @@ class EroNormalOrgy extends EroOrgy {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {CharaTalk} supporter
@@ -241,7 +236,6 @@ class EroNormalOrgy extends EroOrgy {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {CharaTalk} supporter
@@ -253,7 +247,6 @@ class EroNormalOrgy extends EroOrgy {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {CharaTalk} supporter
@@ -297,7 +290,6 @@ class EroNormalOrgy extends EroOrgy {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {CharaTalk} supporter
@@ -344,7 +336,6 @@ class EroNormalOrgy extends EroOrgy {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {CharaTalk} supporter
@@ -386,7 +377,6 @@ class EroNormalOrgy extends EroOrgy {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {CharaTalk} supporter
@@ -398,7 +388,6 @@ class EroNormalOrgy extends EroOrgy {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {CharaTalk} supporter

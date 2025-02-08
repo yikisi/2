@@ -73,7 +73,7 @@ function get_train_bonus(chara_id, attr, between_weeks) {
 }
 
 /**
- *
+ * 计算训练的基础奖励
  * @param {number} chara_id
  * @param {number} attr
  * @param {number} train_level

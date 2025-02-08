@@ -1,6 +1,5 @@
 /**
  * @file 日常地文
- *
  * @author 雞雞
  * @author KUN
  * @author 无名黑奴
@@ -397,7 +396,6 @@ class CustomizedDaily {
   /**
    * @author 雞雞
    * @author KUN
-   *
    * @param {HookArg} hook
    * @param {{[jpy]:number}} extra_flag
    * @returns {Promise}
@@ -533,7 +531,6 @@ class CustomizedDaily {
 
   /**
    * @author 雞雞
-   *
    * @param {HookArg} hook
    */
   async out_shopping(hook) {
@@ -547,7 +544,6 @@ class CustomizedDaily {
 
   /**
    * @author 雞雞
-   *
    * @param {HookArg} hook
    */
   async out_station(hook) {
@@ -574,7 +570,6 @@ class CustomizedDaily {
 
   /**
    * @author 雞雞
-   *
    * @param {HookArg} hook
    */
   async school_atrium(hook) {

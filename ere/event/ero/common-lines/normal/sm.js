@@ -1,6 +1,5 @@
 /**
  * @file 调教地文 - 性虐系
- *
  * @author 黑衣剑士-星爆气流斩准备就绪
  * @author 无名黑奴
  */
@@ -26,7 +25,6 @@ const { part_enum } = require('#/data/ero/part-const');
 class EroNormalSm extends EroSm {
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -53,7 +51,6 @@ class EroNormalSm extends EroSm {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -74,7 +71,6 @@ class EroNormalSm extends EroSm {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -93,7 +89,6 @@ class EroNormalSm extends EroSm {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -112,7 +107,6 @@ class EroNormalSm extends EroSm {
 
   /**
    * @author 黑衣剑士-星爆气流斩准备就绪
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -178,7 +172,6 @@ class EroNormalSm extends EroSm {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -197,7 +190,6 @@ class EroNormalSm extends EroSm {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

@@ -120,7 +120,6 @@ const breast_talent_names = ['贫乳', '', '巨乳', '爆乳'];
 const title_desc = ['训练员', '马娘', '性奴', '孕袋'];
 
 /**
- *
  * @param {number} chara_id
  * @param {boolean} [show_true_bust]
  * @returns {string}

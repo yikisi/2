@@ -39,7 +39,6 @@ module.exports = (handlers) => {
     50;
 
   /**
-   *
    * @param {string|string[]} talent_names
    * @param {[number,number,number|undefined,function(number):number]|[number,number,number|undefined,function(number):number][]} counter_params
    * @param {string} [ex_name]

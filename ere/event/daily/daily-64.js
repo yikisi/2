@@ -1,6 +1,5 @@
 /**
  * @file 目白善信 - 日常
- *
  * @author KUN
  */
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');

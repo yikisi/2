@@ -1,6 +1,5 @@
 /**
  * @file 目白善信 - 调教
- *
  * @author Bottle
  * @author KUN
  */

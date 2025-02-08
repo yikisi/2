@@ -40,7 +40,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
 module.exports = class extends MyPrivacyEvents {
   /**
    * @author 念来过倒要你
-   *
    * @param {CharaTalk} me
    * @param _me
    * @param _call
@@ -208,7 +207,6 @@ module.exports = class extends MyPrivacyEvents {
 
   /**
    * @author 念来过倒要你
-   *
    * @param {CharaTalk} me
    * @param _me
    * @param _call

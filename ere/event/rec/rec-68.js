@@ -1,6 +1,5 @@
 /**
  * @file 北部玄驹 - 招募
- *
  * @author 小黑
  */
 const era = require('#/era-electron');

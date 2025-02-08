@@ -1,6 +1,5 @@
 /**
  * @file 米浴 - 招募
- *
  * @author 梦露
  */
 const era = require('#/era-electron');

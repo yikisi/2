@@ -1,6 +1,5 @@
 /**
  * @file 调教指令 - 睡奸爱抚系
- *
  * @author O口口口口口
  */
 const era = require('#/era-electron');
@@ -17,7 +16,6 @@ const EroMakingOuts = require('#/event/ero/common-lines/interface/ero-making-out
 class EroSleepMakingOuts extends EroMakingOuts {
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -46,7 +44,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -73,7 +70,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -112,7 +108,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -162,7 +157,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -206,7 +200,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -228,7 +221,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -248,7 +240,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -286,7 +277,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -316,7 +306,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -347,7 +336,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -364,7 +352,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -388,7 +375,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -409,7 +395,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -444,7 +429,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -491,7 +475,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -524,7 +507,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -549,7 +531,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -581,7 +562,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -595,7 +575,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -623,7 +602,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -656,7 +634,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -685,7 +662,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -714,7 +690,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -751,7 +726,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -787,7 +761,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -828,7 +801,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -849,7 +821,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

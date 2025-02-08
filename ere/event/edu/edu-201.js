@@ -1,6 +1,5 @@
 /**
  * @file 快乐米可 - 育成
- *
  * @author イーウィヤ
  */
 const { printAndWait, println, waitAnyKey } = require('#/era-electron');
@@ -18,7 +17,6 @@ const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201')
 module.exports = class extends CustomizedEdu {
   /**
    * @author イーウィヤ
-   *
    * @param {CharaTalk} meek
    */
   async all_round(meek) {

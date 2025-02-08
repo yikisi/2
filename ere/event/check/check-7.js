@@ -22,7 +22,6 @@ const { race_enum } = require('#/data/race/race-const');
  * 重要比赛的映射表<br>
  * key有两种形式，育成周数_比赛ID，或者比赛ID<br>
  * value是两位二进制，最低位是赛前事件指示，最高位是赛后事件指示
- *
  * @type {Record<string,number>}
  */
 const aim_races = {};

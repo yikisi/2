@@ -1,6 +1,5 @@
 /**
  * @file 秋川弥生 - 育成
- *
  * @author 雞雞
  */
 const {
@@ -33,7 +32,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
 module.exports = class extends CustomizedEdu {
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} taste
    */
   async annoyance1(taste) {
@@ -73,7 +71,6 @@ module.exports = class extends CustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} taste
    */
   async annoyance2(taste) {

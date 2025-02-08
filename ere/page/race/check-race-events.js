@@ -1,6 +1,5 @@
 /**
  * @file 特殊赛后事件口上
- *
  * @author 幽白書
  * @author 无名黑奴（临时）
  */
@@ -66,7 +65,6 @@ async function check_race_events(race, info, team_contestants) {
   if (get('flag:初见URA颁奖') < 2) {
     /**
      * 乙名史悦子 - 初见
-     *
      * @author 无名黑奴
      */
     handler = async () => {
@@ -121,7 +119,6 @@ async function check_race_events(race, info, team_contestants) {
     new EtsukoLifeMarks().rape = 1;
     /**
      * 乙名史悦子 - 孕袋
-     *
      * @author 幽白書
      */
     handler = async () => {

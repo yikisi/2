@@ -1,6 +1,5 @@
 /**
  * @file 㭴本理子 - 育成
- *
  * @author 无名黑奴（临时）
  */
 const {
@@ -21,7 +20,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 module.exports = class extends CustomizedEdu {
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} riko
    * @param {CharaTalk} me
    */
@@ -85,7 +83,6 @@ module.exports = class extends CustomizedEdu {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} riko
    * @param {CharaTalk} me
    */

@@ -1,6 +1,5 @@
 /**
  * @file 地下室地文
- *
  * @author 露娜俘虏
  * @author 无名黑奴
  */
@@ -77,7 +76,6 @@ class CustomizedBase {
 
   /**
    * 初入地下室的欢迎 - 无人版本
-   *
    * @author 无名黑奴
    */
   first_time() {
@@ -91,7 +89,6 @@ class CustomizedBase {
 
   /**
    * 初入地下室的欢迎
-   *
    * @author 无名黑奴
    */
   welcome() {
@@ -128,10 +125,8 @@ class CustomizedBase {
 
   /**
    * 地下室的基础情报，显示在当前互动角色情报下面，说明角色当前的警戒度和独占力情况
-   *
    * @author 露娜俘虏
    * @author 无名黑奴
-   *
    * @param {boolean} [can_strike]
    */
   get_basement_info(can_strike) {
@@ -183,9 +178,7 @@ class CustomizedBase {
 
   /**
    * 讨好角色后的反应
-   *
    * @author 无名黑奴
-   *
    * @param {number} [supporter]
    */
   // eslint-disable-next-line no-unused-vars
@@ -193,7 +186,6 @@ class CustomizedBase {
 
   /**
    * 趁角色刚回到地下室偷袭成功
-   *
    * @author 无名黑奴
    */
   async strike_success() {
@@ -205,7 +197,6 @@ class CustomizedBase {
 
   /**
    * 趁角色刚回到地下室偷袭失败，被打晕了
-   *
    * @author 无名黑奴
    */
   async strike_fail() {
@@ -217,7 +208,6 @@ class CustomizedBase {
 
   /**
    * 正面击败角色，但还不知道能不能解除机关
-   *
    * @author 无名黑奴
    */
   async battle_success() {
@@ -231,7 +221,6 @@ class CustomizedBase {
 
   /**
    * 没能正面击败角色，直接就被打晕了
-   *
    * @author 无名黑奴
    */
   async battle_fail() {
@@ -245,7 +234,6 @@ class CustomizedBase {
 
   /**
    * 正面击败角色后当面成功解除机关
-   *
    * @author 无名黑奴
    */
   async battle_escape() {
@@ -257,7 +245,6 @@ class CustomizedBase {
 
   /**
    * 正面击败角色后解除机关失败，没跑出去又被打晕了
-   *
    * @author 无名黑奴
    */
   async battle_prison() {
@@ -274,9 +261,7 @@ class CustomizedBase {
 
   /**
    * 角色回到地下室/醒来发现玩家在逃离地下室
-   *
    * @author 无名黑奴
-   *
    * @param {boolean} out_of_prison
    * @param {boolean} s_level_up
    * @param {boolean} [is_back]
@@ -315,7 +300,6 @@ class CustomizedBase {
 
   /**
    * 加固地下室
-   *
    * @author 无名黑奴
    */
   fix_prison() {
@@ -324,7 +308,6 @@ class CustomizedBase {
 
   /**
    * 从沉睡中清醒
-   *
    * @author 无名黑奴
    */
   get_up() {
@@ -346,7 +329,6 @@ class CustomizedBase {
 
   /**
    * 回到地下室
-   *
    * @author 无名黑奴
    */
   back_basement() {
@@ -367,7 +349,6 @@ class CustomizedBase {
 
   /**
    * 因精力不足而昏睡
-   *
    * @author 无名黑奴
    */
   deep_sleep() {
@@ -379,7 +360,6 @@ class CustomizedBase {
 
   /**
    * 进食
-   *
    * @author 无名黑奴
    */
   eat_something() {
@@ -391,7 +371,6 @@ class CustomizedBase {
 
   /**
    * 因精力不足而主动选择睡眠
-   *
    * @author 无名黑奴
    */
   sleep() {
@@ -403,7 +382,6 @@ class CustomizedBase {
 
   /**
    * 角色主动调情
-   *
    * @author 无名黑奴
    */
   lure() {
@@ -417,7 +395,6 @@ class CustomizedBase {
 
   /**
    * 选择雷普玩家
-   *
    * @author 无名黑奴
    */
   async rape(supporter) {
@@ -443,7 +420,6 @@ class CustomizedBase {
 
   /**
    * 开始加固地下室
-   *
    * @author 无名黑奴
    */
   start_fixing() {
@@ -455,7 +431,6 @@ class CustomizedBase {
 
   /**
    * 刚刚离开
-   *
    * @author 无名黑奴
    */
   out() {
@@ -464,7 +439,6 @@ class CustomizedBase {
 
   /**
    * 请求对方释放，对方同意
-   *
    * @author 无名黑奴
    */
   async ask_release_agree() {
@@ -486,7 +460,6 @@ class CustomizedBase {
 
   /**
    * 请求对方释放，对方拒绝
-   *
    * @author 无名黑奴
    */
   async ask_release_reject() {
@@ -502,7 +475,6 @@ class CustomizedBase {
 
   /**
    * 询问时间
-   *
    * @author 无名黑奴
    */
   // eslint-disable-next-line no-unused-vars
@@ -520,9 +492,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 失败
-   *
    * @author 无名黑奴
-   *
    * @param {number} owner_id
    */
   async rescue_fail(owner_id) {
@@ -562,9 +532,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 趁主人不在时救援成功
-   *
    * @author 无名黑奴
-   *
    * @param {number} owner_id
    */
   async rescue_sneak_success(owner_id) {
@@ -597,9 +565,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 趁主人不在时救援成功，但是将玩家关到自己的地下室
-   *
    * @author 无名黑奴
-   *
    * @param {number} owner_id
    */
   async rescue_sneak_prison(owner_id) {
@@ -642,9 +608,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 和玩家关系不睦，因此同流合污
-   *
    * @author 无名黑奴
-   *
    * @param {number} owner_id
    */
   async rescue_join(owner_id) {
@@ -687,9 +651,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 正面击败主人，救援成功
-   *
    * @author 无名黑奴
-   *
    * @param {number} owner_id
    */
   async rescue_battle_success(owner_id) {
@@ -730,9 +692,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 正面击败主人，但是把玩家关到自己的地下室
-   *
    * @author 无名黑奴
-   *
    * @param {number} owner_id
    */
   async rescue_battle_prison(owner_id) {

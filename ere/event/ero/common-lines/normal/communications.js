@@ -1,6 +1,5 @@
 /**
  * @file 调教地文 - 沟通系
- *
  * @author O口口口口口
  */
 const era = require('#/era-electron');
@@ -14,7 +13,6 @@ const resist_race_desc = ['你也不', undefined, '我才', '我也'];
 class EroNormalCommunications extends EroCommunications {
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -49,7 +47,6 @@ class EroNormalCommunications extends EroCommunications {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -83,7 +80,6 @@ class EroNormalCommunications extends EroCommunications {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -110,7 +106,6 @@ class EroNormalCommunications extends EroCommunications {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -143,7 +138,6 @@ class EroNormalCommunications extends EroCommunications {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    */
@@ -172,7 +166,6 @@ class EroNormalCommunications extends EroCommunications {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -244,7 +237,6 @@ class EroNormalCommunications extends EroCommunications {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -281,7 +273,6 @@ class EroNormalCommunications extends EroCommunications {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

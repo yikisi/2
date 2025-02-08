@@ -1,6 +1,5 @@
 /**
  * @file 绿帽癖速子 - Aromatic Hydrocarbon Poisoning（芳香烃中毒）
- *
  * @author 幽白書
  */
 const era = require('#/era-electron');

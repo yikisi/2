@@ -1,6 +1,5 @@
 /**
  * @file 第一红宝石 - 招募
- *
  * @author 梦露
  */
 const era = require('#/era-electron');

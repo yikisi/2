@@ -1,6 +1,5 @@
 /**
  * @file 骏川缰绳 - 育成
- *
  * @author 雞雞
  */
 const {
@@ -24,7 +23,6 @@ const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-
 module.exports = class extends CustomizedEdu {
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} tokino
    * @param {CharaTalk} me
    */

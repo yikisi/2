@@ -274,7 +274,6 @@ CustomizedInit.init_chara = init_chara;
 /**
  * 重置角色状态
  * 只重置属性和技能点数，不重置性能力和性经历
- *
  * @param {number} chara_id
  * @param {boolean} [from_init]
  */

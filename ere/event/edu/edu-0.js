@@ -1,6 +1,5 @@
 /**
  * @file 玩家 - 育成
- *
  * @author 雞雞
  * @author 天马闪光蹄
  * @author イーウィヤ
@@ -55,7 +54,6 @@ const { location_enum } = require('#/data/locations');
 module.exports = class extends StrangeDayEvents {
   /**
    * @author 天马闪光蹄
-   *
    * @param {CharaTalk} me
    */
   async second_chance(me) {
@@ -204,7 +202,6 @@ module.exports = class extends StrangeDayEvents {
 
   /**
    * @author イーウィヤ
-   *
    * @param {CharaTalk} me
    */
   async god_coin(me) {
@@ -264,7 +261,6 @@ module.exports = class extends StrangeDayEvents {
 
   /**
    * @author イーウィヤ
-   *
    * @param {CharaTalk} me
    */
   async experiment(me) {
@@ -326,7 +322,6 @@ module.exports = class extends StrangeDayEvents {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} me
    */
   async custom(me) {
@@ -359,7 +354,6 @@ module.exports = class extends StrangeDayEvents {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} me
    */
   async trainer_race(me) {
@@ -407,7 +401,6 @@ module.exports = class extends StrangeDayEvents {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} me
    */
   async bankruptcy(me) {
@@ -430,7 +423,6 @@ module.exports = class extends StrangeDayEvents {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} me
    */
   async reject(me) {
@@ -449,7 +441,6 @@ module.exports = class extends StrangeDayEvents {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} me
    */
   async work_over(me) {
@@ -470,7 +461,6 @@ module.exports = class extends StrangeDayEvents {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} me
    */
   async sick(me) {
@@ -497,7 +487,6 @@ module.exports = class extends StrangeDayEvents {
 
   /**
    * @author 幽白書
-   *
    * @param {CharaTalk} me
    * @param _me
    * @param _call
