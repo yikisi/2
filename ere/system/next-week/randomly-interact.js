@@ -151,7 +151,8 @@ function randomly_interact(in_team_list) {
       era.set(`status:${chara_id}:熬夜`, 0);
       era.set(`status:${chara_id}:摸鱼`, 0);
     }
-    if (era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48) {
+    // 育成结束的那周不再自主训练
+    if (era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 - 1) {
       era.set(`cflag:${chara_id}:自主训练`, 1);
     }
   }

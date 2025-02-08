@@ -218,7 +218,7 @@ async function sys_next_week() {
     .map((e, i) => {
       if (e.timer > 0) {
         const money = sys_change_money(e.repay, -1);
-        if (i > 0 && e.creditor === 0) {
+        if (i > 0 && e.creditor === 0 && money > 0) {
           // 人类训练员有工资拿；马娘训练员？自己跑比赛去！
           era.print([
             '收到了学园发放的训练员工资 ',
