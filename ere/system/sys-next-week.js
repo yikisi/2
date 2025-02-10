@@ -349,7 +349,6 @@ async function sys_next_week() {
     }
     era.set(`status:${chara_id}:马跳Z`, 0);
     if (
-      era.get(`cflag:${chara_id}:阴茎尺寸`) &&
       era.get(`cflag:${chara_id}:阴茎尺寸`) < 4 &&
       Math.random() <
         0.05 * era.get(`status:${chara_id}:弗隆K`) +
@@ -360,6 +359,10 @@ async function sys_next_week() {
         `abl:${chara_id}:阴茎耐性`,
         Math.max(era.get(`abl:${chara_id}:阴茎耐性`) - 2, 0),
       );
+      if (era.get(`cflag:${chara_id}:性别`) === 0) {
+        era.set(`cflag:${chara_id}:性别`, 10);
+        era.print([chara.get_colored_name(), ' 的阴核长成了一根肉棒！']);
+      }
     }
     era.set(`status:${chara_id}:弗隆K`, 0);
     era.set(`status:${chara_id}:弗隆P`, 0);
