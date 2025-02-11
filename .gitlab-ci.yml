@@ -6,6 +6,7 @@ variables:
   GAME_ALL_DIR: 'erauma-with-engine-${CI_COMMIT_TAG}'
   GAME_ALL_ZIP: 'era-uma-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
   GAME_ZIP_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/erauma/${CI_COMMIT_TAG}/era-uma-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
+  BASE_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip'
   GAME_BUNDLE_DIR: 'erauma-${CI_COMMIT_TAG}'
   GAME_BUNDLE_ZIP: 'erauma-bundle-${CI_COMMIT_TAG}.zip'
   GAME_BUNDLE_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/bundle/${CI_COMMIT_TAG}/era-bundle-${CI_COMMIT_TAG}.zip'
@@ -18,37 +19,8 @@ build:
   variables:
     NODE_OPTIONS: "--openssl-legacy-provider"
   script:
-    - MIN_VERSION=`cat .ere-min-version`
-    - git submodule update --init
-    - cd engine
-    - git lfs pull
     - npm install
-    - npm run win:pack
-    - echo $GAME_ALL_DIR
-    - '[ -d $GAME_ALL_DIR ] && rm -rf ./$GAME_ALL_DIR'
-    - mkdir ./$GAME_ALL_DIR
-    - mv dist_electron/win-unpacked/* $GAME_ALL_DIR/
-    - mkdir $GAME_ALL_DIR/game
-    - cp ../CHANGELOG.md ./$GAME_ALL_DIR/game/
-    - cp ../RELEASE.md ./$GAME_ALL_DIR/game/
-    - cp -r ../ere ./$GAME_ALL_DIR/game/
-    - cp -r ../csv ./$GAME_ALL_DIR/game/
-    - cd ./$GAME_ALL_DIR/game/ere
-    - FILE_LIST=`find $PWD | xargs ls -d | grep json`
-    - NEW_LIST=(`echo $FILE_LIST | tr '\n' ' '` )
-    - for var in ${NEW_LIST[@]}; do jq -c '.' $var > ${var}.new; mv ${var}.new $var; done
-    - cd -
-    - echo $GAME_ALL_ZIP
-    - '[ -f ./$GAME_ALL_ZIP ] && rm ./$GAME_ALL_ZIP'
-    - 7zz a -pera $GAME_ALL_ZIP ./$GAME_ALL_DIR
-    - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${GAME_ALL_ZIP} "${GAME_ZIP_URL}"'
-    - cd ./$GAME_ALL_DIR/game/
-    - '[ -f ./base.zip ] && rm ./base.zip'
-    - VERSION=`cat csv/GameBase.csv | grep '^バージョン,'`
-    - VERSION=`echo $VERSION | cut -d',' -f2`
-    - '[ $MIN_VERSION != $VERSION ] && zip -r base.zip ./ere ./csv RELEASE.md CHANGELOG.md'
-    - '[ -f ./base.zip ] && curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./base.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip"'
-    - echo done
+    - node ci/build.js
 
 android:
   stage: build
@@ -56,25 +28,14 @@ android:
     - shell
   script:
     - npm install
-    - '[ -d ./$GAME_BUNDLE_DIR ] && rm -rf ./$GAME_BUNDLE_DIR'
-    - '[ -f ./$GAME_BUNDLE_ZIP ] && rm ./$GAME_BUNDLE_ZIP'
-    - npm run webpack
-    - ls -la ./dist
-    - mv ./dist ./$GAME_BUNDLE_DIR
-    - 'zip -rP era ./${GAME_BUNDLE_ZIP} ./${GAME_BUNDLE_DIR}'
-    - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./${GAME_BUNDLE_ZIP} "${GAME_BUNDLE_URL}"'
+    - node ci/android.js
 
 pages:
   stage: deploy
   tags:
     - shell
   script:
-    - rm -rf public
-    - mkdir public
-    - VERSION=`cat csv/GameBase.csv | grep '^バージョン,'`
-    - echo $VERSION | cut -d',' -f2 > public/RELEASE
-    - cat .ere-min-version >> public/RELEASE
-    - echo "<meta http-equiv=\"refresh\" content=\"3; url= $GAME_ZIP_URL\">" > public/index.html
+    - node ci/pages.js
   artifacts:
     paths:
       - public
