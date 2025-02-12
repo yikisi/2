@@ -247,7 +247,7 @@ module.exports = async () => {
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
-            content: `版本号：v${version}`,
+            content: `版本号：v${version} (kuuga)`,
             type: 'text',
           },
         ],

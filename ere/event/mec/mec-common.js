@@ -194,6 +194,17 @@ class CustomizedMec {
     return 0;
   }
 
+  /**
+   * 照看其他角色自主训练时的额外加成
+   * @param {number} chara_id 被照看者的ID
+   * @param {number} attr 训练项目
+   * @returns {number}
+   */
+  // eslint-disable-next-line no-unused-vars
+  get_take_care_buff(chara_id, attr) {
+    return 0;
+  }
+
   /** @returns {({[color]:string,content:string,[fontWeight]:string,[title]:string})[]} */
   get_talents() {
     return [];

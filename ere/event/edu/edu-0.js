@@ -62,7 +62,9 @@ module.exports = class extends StrangeDayEvents {
       'cflag',
       '招募状态',
       recruit_flags.yes,
-    ).filter((e) => get(`cflag:${e}:可再次育成`) > 0);
+    ).filter(
+      (e) => get(`cflag:${e}:种族`) > 0 && get(`cflag:${e}:可再次育成`) > 0,
+    );
     if (second_list.length === 0 || team_limit <= 0) {
       return;
     }
@@ -123,7 +125,7 @@ module.exports = class extends StrangeDayEvents {
               config: {
                 align: 'center',
                 buttonType: second_dict[e] ? 'warning' : 'info',
-                disabled: get(`cflag:${e}:被继承`),
+                disabled: get(`cflag:${e}:被继承`) > 0,
                 width: 8,
               },
               content: `${get(`callname:${e}:-1`)}${get(`cflag:${e}:被继承`) ? ' (已被继承)' : ''}`,

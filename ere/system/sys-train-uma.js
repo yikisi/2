@@ -29,7 +29,7 @@ const {
 /**
  * @param {number} chara_id
  * @param {number} attr
- * @param {boolean} [between_weeks]
+ * @param {{teach_chara:number}} [between_weeks]
  */
 function get_train_bonus(chara_id, attr, between_weeks) {
   const chara_loc = era.get(`cflag:${chara_id}:位置`);
@@ -64,7 +64,7 @@ function get_train_bonus(chara_id, attr, between_weeks) {
         train_buff += 50 * (1 + new ByerleyLifeMarks().buff);
       }
   }
-  if (!between_weeks) {
+  if (!between_weeks || between_weeks.teach_chara > 0) {
     train_buff +=
       10 * era.get(`talent:${chara_id}:训练`) +
       get_trainer_train_buff(chara_id);
@@ -79,7 +79,7 @@ function get_train_bonus(chara_id, attr, between_weeks) {
  * @param {number} train_level
  * @param {{stamina:number,time:number}} train_cost
  * @param {{attr_change:number[],pt_change:number}} changes
- * @param {boolean} [between_weeks]
+ * @param {{teach_chara:number}} [between_weeks]
  */
 function get_success_base_reward(
   chara_id,
@@ -91,9 +91,22 @@ function get_success_base_reward(
 ) {
   let base_inc = train_level * 2 + get_random_value(3, 8);
 
-  const train_buff =
+  let train_buff =
     get_train_bonus(chara_id, attr, between_weeks) +
     10 * (era.get(`cflag:${chara_id}:位置`) === location_enum.beach);
+  if (between_weeks !== undefined && between_weeks.teach_chara > 0) {
+    train_buff +=
+      Math.max(
+        era.get(`cflag:${between_weeks.teach_chara}:${attr_names[attr]}加成`) ||
+          0,
+        0,
+      ) +
+      get_custom_mec(between_weeks.teach_chara).get_take_care_buff(
+        chara_id,
+        attr,
+      ) +
+      50;
+  }
 
   base_inc *= (100 + train_buff) / 100;
 
@@ -176,7 +189,9 @@ module.exports = {
         train_level,
         train_cost,
         changes,
-        era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置'),
+        era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置')
+          ? { teach_chara: 0 }
+          : undefined,
       );
 
       /** @type {TrainSuccessParams} */

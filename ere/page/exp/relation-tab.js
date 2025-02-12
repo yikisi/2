@@ -66,6 +66,28 @@ module.exports = {
         type: 'text',
       });
     }
+    const teach_chara = era.get(`cflag:${chara.id}:照看`);
+    if (teach_chara > 0) {
+      if (era.get(`cflag:${chara.id}:可再次育成`) > 0) {
+        relation_info_list.push({
+          content: [
+            '照看 ',
+            get_chara_talk(teach_chara).get_colored_name(),
+            ' 中……',
+          ],
+          type: 'text',
+        });
+      } else if (era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48) {
+        relation_info_list.push({
+          content: [
+            '被 ',
+            get_chara_talk(teach_chara).get_colored_name(),
+            ' 照看中……',
+          ],
+          type: 'text',
+        });
+      }
+    }
 
     const father_id = era.get(`cflag:${chara.id}:父方角色`),
       mother_id = era.get(`cflag:${chara.id}:母方角色`);

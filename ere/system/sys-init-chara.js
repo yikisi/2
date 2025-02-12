@@ -292,6 +292,11 @@ function reset_chara(chara_id, from_init) {
         era.set(`cflag:${chara_id}:继承方1`, 0);
         era.set(`cflag:${chara_id}:继承方2`, 0);
         era.set(`cflag:${chara_id}:可再次育成`, 0);
+        const teach_chara = era.get(`cflag:${chara_id}:照看`);
+        if (teach_chara > 0) {
+          era.set(`cflag:${teach_chara}:照看`, 0);
+          era.set(`cflag:${chara_id}:照看`, 0);
+        }
       }
       era.set(`cflag:${chara_id}:腋毛`, 0);
       era.set(

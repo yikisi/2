@@ -315,6 +315,13 @@ module.exports = async () => {
                   ),
                 );
             }
+            if (version <= 1211) {
+              era.getAddedCharacters().forEach((id) => {
+                if (id > 0 && era.get(`cflag:${id}:种族`) === 0) {
+                  era.set(`cflag:${id}:可再次育成`, 1);
+                }
+              });
+            }
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;

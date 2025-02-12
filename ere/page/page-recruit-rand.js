@@ -1,6 +1,11 @@
 ﻿const era = require('#/era-electron');
 
 const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
+const {
+  get_bust_size,
+  get_hip_size,
+  get_waist_size,
+} = require('#/system/ero/sys-calc-ero-status');
 const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
 const { get_image } = require('#/system/sys-calc-image');
 const filter_chara = require('#/system/sys-filter-chara');
@@ -39,11 +44,6 @@ const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names, attr_names } = require('#/data/train-const');
-const {
-  get_bust_size,
-  get_hip_size,
-  get_waist_size,
-} = require('#/system/ero/sys-calc-ero-status');
 
 async function print_rec_page() {
   era.set('flag:当前位置', location_enum.playground);
@@ -54,7 +54,7 @@ async function print_rec_page() {
     stay_list = [
       sys_get_star_premium_draw().chara,
       era.get('flag:物色对象'),
-    ].filter((e) => e);
+    ].filter((e) => e > 0);
   let today_list = gacha(
     filter_chara('cflag', '随机招募', 1).filter(
       (v) => !team_list.includes(v) && era.get(`cflag:${v}:成长阶段`) >= 2,
@@ -87,8 +87,8 @@ async function print_rec_page() {
     const buffer = [];
     buffer.push([{ type: 'divider' }]);
     const cur_recruit = era.get('flag:物色对象');
-    today_list = today_list.filter((chara_id) =>
-      era.get(`cflag:${chara_id}:随机招募`),
+    today_list = today_list.filter(
+      (chara_id) => era.get(`cflag:${chara_id}:随机招募`) > 0,
     );
     if (today_list.length) {
       if (cur_recruit && today_list.indexOf(cur_recruit) === -1) {

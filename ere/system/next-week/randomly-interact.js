@@ -22,6 +22,7 @@ const {
   fail_sta_border,
   time_cost,
 } = require('#/data/train-const');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 /** @param {number[]} in_team_list */
 function randomly_interact(in_team_list) {
@@ -82,25 +83,39 @@ function randomly_interact(in_team_list) {
           `exp:${chara_id}:${attr_names[train_attr]}训练经验`,
           100 + era.get(`cflag:${chara_id}:${attr_names[train_attr]}加成`),
         );
+        const teach_chara = era.get(`cflag:${chara_id}:照看`);
         get_success_base_reward(
           chara_id,
           train_attr,
           train_level,
           train_cost,
           changes,
-          true,
+          { teach_chara },
         );
         era.printMultiColumns([
           {
-            content: [
-              get_chara_talk(chara_id).get_colored_name(),
-              ' 进行了 ',
-              {
-                content: attr_names[train_attr],
-                color: attr_colors[attr_names[train_attr]],
-              },
-              ' 方面的自主训练……',
-            ],
+            content: teach_chara
+              ? [
+                  '在 ',
+                  get_chara_talk(teach_chara).get_colored_name(),
+                  ' 的照看下，',
+                  get_chara_talk(chara_id).get_colored_name(),
+                  ' 进行了 ',
+                  {
+                    content: attr_names[train_attr],
+                    color: attr_colors[attr_names[train_attr]],
+                  },
+                  ' 训练……',
+                ]
+              : [
+                  get_chara_talk(chara_id).get_colored_name(),
+                  ' 进行了 ',
+                  {
+                    content: attr_names[train_attr],
+                    color: attr_colors[attr_names[train_attr]],
+                  },
+                  ' 方面的自主训练……',
+                ],
             type: 'text',
           },
           ...cost_result.map((e) => {
@@ -128,6 +143,10 @@ function randomly_interact(in_team_list) {
             type: 'text',
           },
         ]);
+        if (teach_chara > 0) {
+          sys_like_chara(chara_id, teach_chara, get_random_value(15, 25));
+          sys_like_chara(teach_chara, chara_id, get_random_value(5, 15));
+        }
         era.println();
         era.add(`exp:${chara_id}:技能点数`, changes.pt_change);
       }

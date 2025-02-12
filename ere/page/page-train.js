@@ -211,7 +211,7 @@ module.exports = async () => {
         },
       );
       attr_names.forEach((k, index) => {
-        let buff = get_train_bonus(chara_id, index, !extra_buff);
+        let buff = get_train_bonus(chara_id, index);
         if (index === attr_enum.speed && era.get(`status:${chara_id}:发胖`)) {
           buff = -100;
         }

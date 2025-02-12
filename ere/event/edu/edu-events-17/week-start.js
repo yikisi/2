@@ -45,7 +45,7 @@ module.exports = class extends Edu17UntilRaceStart {
           event_marks,
           !era.get(`status:${luna}:神经衰弱`) && era.get(`love:${luna}`) >= 90,
         );
-      } else if (edu_weeks === 143 + 9 && !era.get('cflag:17:可再次育成')) {
+      } else if (edu_weeks === 143 + 9) {
         const chara = luna === 17 ? luna_talk : emperor_talk;
         await CustomizedEdu.common_palace(chara, me);
         await CustomizedEdu.common_palace_relation(chara, me);
