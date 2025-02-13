@@ -16,7 +16,7 @@ module.exports = class extends MecNpc {
       {
         color: get_chara_color(this.id),
         content: '彻底取材',
-        title: '声望获取+10%，声望下降-10%',
+        title: '声望获取+10%，声望下降-10%。',
       },
     ];
   }

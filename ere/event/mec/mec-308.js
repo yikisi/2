@@ -22,7 +22,7 @@ module.exports = class extends MecNpc {
       {
         color: get_chara_color(this.id),
         content: '梦之开拓者',
-        title: '参加大舞台赛事时声望奖励+100%',
+        title: '参加大舞台赛事时声望奖励+100%。',
       },
     ];
   }

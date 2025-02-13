@@ -27,7 +27,7 @@ module.exports = class extends MecNpc {
       {
         color: get_chara_color(this.id),
         content: '私人助理',
-        title: `自身体力与精力消耗+10%，使 ${get('callname:0:-1')} 的体力与精力消耗-10%`,
+        title: `自身体力与精力消耗+10%，使 ${get('callname:0:-1')} 的体力与精力消耗-10%。`,
       },
     ];
   }

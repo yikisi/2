@@ -17,7 +17,7 @@ module.exports = class extends MecNpc {
       {
         color: get_chara_color(this.id),
         content: get(`staticcstr:${this.id}:称号`),
-        title: '训练员头衔对训练成功率与效果加成上升一级，照看时训练效果+50%',
+        title: '训练员头衔对训练成功率与效果加成上升一级，照看时训练效果+50%。',
       },
     ];
   }
