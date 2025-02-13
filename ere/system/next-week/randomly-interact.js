@@ -84,6 +84,29 @@ function randomly_interact(in_team_list) {
           100 + era.get(`cflag:${chara_id}:${attr_names[train_attr]}加成`),
         );
         const teach_chara = era.get(`cflag:${chara_id}:照看`);
+        if (teach_chara > 0) {
+          const level = era.get(
+            `abl:${chara_id}:${attr_names[train_attr]}训练等级`,
+          );
+          let exp = era.add(
+            `exp:${chara_id}:${attr_names[train_attr]}训练经验`,
+            Math.max(
+              era.get(`cflag:${teach_chara}:${attr_names[train_attr]}加成`) / 2,
+              0,
+            ),
+          );
+          if (
+            level < 5 &&
+            exp >= 800 &&
+            exp >= level * 800 + get_random_value(0, 800)
+          ) {
+            era.add(`abl:${chara_id}:${attr_names[train_attr]}训练等级`, 1);
+            era.set(`exp:${chara_id}:${attr_names[train_attr]}训练经验`, 0);
+            cost_result.unshift([
+              `${attr_names[train_attr]}训练 变得更擅长了！`,
+            ]);
+          }
+        }
         get_success_base_reward(
           chara_id,
           train_attr,

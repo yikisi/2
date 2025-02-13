@@ -1,5 +1,7 @@
-const chara_skill_dict = {},
-  skills_dict = {};
+/** @type {Record<string,number[]>} */
+const chara_skill_dict = {};
+/** @type {Record<string,UmaSkill>} */
+const skills_dict = {};
 
 chara_skill_dict[204] = [
   102041, 201702, 200722, 201611, 201701, 200721, 201612, 200491,

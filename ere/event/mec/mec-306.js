@@ -5,7 +5,10 @@ const MecNpc = require('#/event/mec/mec-npc');
 const { get_chara_color } = require('#/data/chara-colors');
 
 module.exports = class extends MecNpc {
-  get_take_care_buff() {
+  get_take_care_buff(chara_id) {
+    if (chara_id === 202 || chara_id === 203) {
+      return 70;
+    }
     return 50;
   }
 
