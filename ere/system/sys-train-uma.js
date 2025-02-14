@@ -145,7 +145,11 @@ function get_success_base_reward(
     changes.pt_change =
       changes.pt_change * (1 + 0.5 * (1 + new GodolphinLifeMarks().buff));
   }
-  if (between_weeks.teach_chara > 0 && train_buff > 0) {
+  if (
+    between_weeks !== undefined &&
+    between_weeks.teach_chara > 0 &&
+    train_buff > 0
+  ) {
     changes.pt_change *= (100 + train_buff / 2) / 100;
   }
   changes.pt_change = Math.floor(changes.pt_change);
