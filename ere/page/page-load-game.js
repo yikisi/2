@@ -321,6 +321,21 @@ module.exports = async () => {
                   era.set(`cflag:${id}:可再次育成`, 1);
                 }
               });
+              if (
+                era.get('cflag:204:随机招募') === 1 &&
+                era.get('cflag:204:招募状态') !== recruit_flags.yes
+              ) {
+                era.set('cflag:204:招募状态', -1);
+                era.set('cflag:204:随机招募', 0);
+              }
+              if (
+                era.get('cflag:204:可再次育成') > 0 &&
+                era.get('jewel:204:白') === 0
+              ) {
+                era.set('jewel:204:粉', 100);
+                era.set('jewel:204:白', 100);
+                era.set('jewel:204:蓝', 100);
+              }
             }
             return true;
           } else {

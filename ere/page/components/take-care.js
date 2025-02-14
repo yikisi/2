@@ -60,6 +60,12 @@ async function take_care(chara) {
   } else if (ret === 998) {
     era.set(`cflag:${curr}:照看`, 0);
     era.set(`cflag:${chara.id}:照看`, 0);
+    await era.printAndWait([
+      chara.get_colored_name(),
+      ' 不再照看 ',
+      get_chara_talk(curr).get_colored_name(),
+      ' 了……',
+    ]);
   } else {
     await era.printAndWait([
       chara.get_colored_name(),

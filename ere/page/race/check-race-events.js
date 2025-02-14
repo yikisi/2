@@ -46,13 +46,16 @@ async function check_race_events(race, info, team_contestants) {
   const may_life_marks = new MayLifeMarks();
   let handler = undefined;
   if (team_contestants.findIndex((e) => e.rank.curr === 1) !== -1) {
-    if (race === race_enum.prix_lat) {
-      get('cflag:204:随机招募') <= 0 && add('cflag:204:随机招募', -1);
-    }
-    if (race === race_enum.prix_lat || race === race_enum.prix_dia) {
-      [205, 206].forEach(
-        (e) => !get(`cflag:${e}:随机招募`) && add(`cflag:${e}:随机招募`, -1),
-      );
+    switch (race) {
+      case race_enum.prix_lat:
+        if (get('cflag:204:招募状态') === 0 && get('cflag:204:随机招募') <= 0) {
+          add('cflag:204:随机招募', -1);
+        }
+      // eslint-disable-next-line no-fallthrough
+      case race_enum.prix_dia:
+        [205, 206].forEach(
+          (e) => !get(`cflag:${e}:随机招募`) && add(`cflag:${e}:随机招募`, -1),
+        );
     }
   }
   if (

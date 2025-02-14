@@ -1,10 +1,10 @@
 const era = require('#/era-electron');
 
-const CustomizedMec = require('#/event/mec/mec-common');
+const MecNpc = require('#/event/mec/mec-npc');
 
 const { location_enum } = require('#/data/locations');
 
-module.exports = class extends CustomizedMec {
+module.exports = class extends MecNpc {
   set_foreign_debuff(before_race, loc) {
     if (loc !== location_enum.paris) {
       return super.set_foreign_debuff(before_race, loc);

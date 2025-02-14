@@ -463,6 +463,9 @@ async function check_new_activities(cur_round, in_team_list) {
       ? 343
       : 0,
   ]);
+  if (era.get('cflag:204:招募状态') !== 0 && sys_check_npc_working(204)) {
+    loc_visitors.get(location_enum.visitor).push(204);
+  }
 
   const uaf_list = [];
   if (
