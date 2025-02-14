@@ -81,6 +81,7 @@ cons_dict[69] = require('#/event/check/check-69');
 cons_dict[70] = require('#/event/check/check-70');
 cons_dict[71] = require('#/event/check/check-71');
 cons_dict[72] = require('#/event/check/check-72');
+cons_dict[73] = require('#/event/check/check-73');
 cons_dict[74] = require('#/event/check/check-74');
 cons_dict[76] = require('#/event/check/check-76');
 cons_dict[77] = require('#/event/check/check-77');

@@ -255,7 +255,11 @@ async function task() {
 
   writeFileSync(
     '../../ere/data/race/contestants/unnamed.json',
-    JSON.stringify(contestants.unnamed.sort((a, b) => a.level - b.level)),
+    JSON.stringify(
+      contestants.unnamed.sort((a, b) => a.level - b.level),
+      undefined,
+      2,
+    ),
   );
   writeFileSync(
     '../../ere/data/race/contestants/named.json',
@@ -263,11 +267,13 @@ async function task() {
       contestants.named.sort(
         (a, b) => a.id * 20000 + a.level - b.id * 20000 - b.level,
       ),
+      undefined,
+      2,
     ),
   );
   writeFileSync(
     '../../ere/data/race/contestants/legends.json',
-    JSON.stringify(legends),
+    JSON.stringify(legends, undefined, 2),
   );
 }
 
