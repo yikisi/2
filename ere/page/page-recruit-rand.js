@@ -21,9 +21,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
+const { get_chara_color } = require('#/data/chara-colors');
 const CharaSkills = require('#/data/chara-skills');
 const { adaptability_colors, el_danger_color } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
+const title_desc = require('#/data/desc/title-desc.json');
 const {
   chara_desc,
   chara_full_desc,
@@ -495,6 +497,23 @@ async function print_rec_page() {
                 type: 'text',
               };
             }),
+          {
+            config: {
+              content: `${name} 的专属称号`,
+              position: 'left',
+            },
+            type: 'divider',
+          },
+          ...get_custom_check(selected)
+            .get_personal_titles()
+            .map((e) => ({
+              content: [
+                { content: e, color: get_chara_color(selected) },
+                '：',
+                title_desc[e] || '在一次育成周期内赢取了六次以上的G1比赛胜利',
+              ],
+              type: 'text',
+            })),
         ],
         { width: 20 },
       );
