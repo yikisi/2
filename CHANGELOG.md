@@ -1,6 +1,8 @@
 # Changelog
 ## [EraUma v1.3 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.3)
-_2025/1/16_
+_2025/2/16_
+
+适配 [EraElectron v3.5.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.5.0) 与 [ere.app v1.0.6 (lipiah)](https://gitgud.io/umaera/ere-app/-/releases/1.0.6) 及以上版本
 
 ### Added
 

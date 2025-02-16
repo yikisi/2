@@ -1,5 +1,5 @@
 # [EraUma v1.3 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.3)
-_2025/1/16_
+_2025/2/16_
 
 ## Added
 
