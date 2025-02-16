@@ -37,6 +37,7 @@ async function use_glasses(item) {
 /** @param {Record<string,function(number):Promise>} handlers */
 module.exports = (handlers) => {
   handlers[25] = async () => {
+    const cur_line = era.getLineCount();
     let to_use = 1,
       flag_use = true,
       flag_print = true,
@@ -121,7 +122,7 @@ module.exports = (handlers) => {
       }
     }
     if (to_use > 0) {
-      await era.clear(1);
+      await era.clear(era.getLineCount() - cur_line);
       if (await select_yes_or_no(['要使用 ', to_use, ' 张马语者点数卡吗？'])) {
         const timer = era.add('status:0:马语者', to_use);
         era.add('item:马语者', -to_use);
@@ -133,6 +134,7 @@ module.exports = (handlers) => {
         return true;
       }
     } else if (timer > 0) {
+      await era.clear(era.getLineCount() - cur_line);
       await get_chara_talk(0).say_as_unknown_and_wait(
         `您的会员身份将在 ${timer} 周后过期。`,
       );

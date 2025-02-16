@@ -85,6 +85,6 @@ module.exports = {
           : chara_id,
       class_const =
         cons_dict[script_dict[script_name] || script_name] || common_cons;
-    return (obj_dict[chara_id] = new class_const(chara_id));
+    return (obj_dict[chara_id] = new class_const(chara_id)).get_this();
   },
 };

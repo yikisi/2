@@ -1,6 +1,5 @@
 /**
  * @file 绿帽癖速子 - Aromatic Hydrocarbon Addiction（芳香烃成瘾）
- *
  * @author 幽白書
  */
 const era = require('#/era-electron');

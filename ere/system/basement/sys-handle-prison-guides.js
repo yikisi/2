@@ -1,6 +1,5 @@
 /**
  * @file 地下室教学
- *
  * @author 雞雞
  * @author 无名黑奴
  */
@@ -131,8 +130,9 @@ async function sys_handle_prison_guides() {
       n: '请求释放',
     },
   ];
+  const lines = era.getLineCount();
   while (flag) {
-    const lines = era.printMultiColumns([
+    era.printMultiColumns([
       { type: 'divider' },
       {
         content: [

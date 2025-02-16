@@ -18,6 +18,7 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 const goto_sex = require('#/page/components/goto-sex');
 const select_target = require('#/page/components/select-target');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
+const take_care = require('#/page/components/take-care');
 const { generate_race_button } = require('#/page/homepage/snippets');
 const page_chairman_office = require('#/page/page-chairman-office');
 const page_clinic = require('#/page/page-clinic');
@@ -256,12 +257,29 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             content: `${chara_id ? '一起' : ''}打游戏`,
             type: 'button',
           },
+          era.get(`cflag:${chara_id}:可再次育成`) > 0
+            ? {
+                accelerator: 208,
+                config: {
+                  disabled:
+                    !sys_check_awake(chara_id) ||
+                    !sys_check_awake(0) ||
+                    era.get(`relation:${chara_id}:0`) < 76,
+                  width: 6,
+                },
+                content:
+                  era.get(`cflag:${chara_id}:照看`) > 0
+                    ? '切换照看角色'
+                    : '请求照看',
+                type: 'button',
+              }
+            : undefined,
           !chara_id ||
           (growth_stage > 1 &&
             era.get(`exp:${chara_id}:性爱次数`) >
               era.get(`exp:${chara_id}:睡奸次数`))
             ? {
-                accelerator: 208,
+                accelerator: 209,
                 config: {
                   width: 6,
                 },
@@ -274,7 +292,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
           !sys_get_billings()[0].creditor &&
           growth_stage >= 2
             ? {
-                accelerator: 209,
+                accelerator: 210,
                 config: {
                   disabled:
                     !chara_id ||
@@ -289,7 +307,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             : undefined,
           chara_id && era.get(`cflag:${chara_id}:节日事件标记`)
             ? {
-                accelerator: 210,
+                accelerator: 211,
                 config: {
                   buttonType: 'danger',
                   disabled:
@@ -304,30 +322,31 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 type: 'button',
               }
             : undefined,
-          personal_action.name
+          personal_action.name !== undefined
             ? {
-                accelerator: 211,
+                accelerator: 212,
                 config: { width: 6 },
                 content: personal_action.name,
                 type: 'button',
               }
             : undefined,
-          is_love_rejected && is_love_rejected === era.get(`love:${chara_id}`)
+          is_love_rejected > 0 &&
+          is_love_rejected === era.get(`love:${chara_id}`)
             ? {
-                accelerator: 212,
+                accelerator: 213,
                 config: { disabled: not_in_same_loc, width: 6 },
                 content: '重新触发爱慕事件',
                 type: 'button',
               }
             : undefined,
-          chara_id &&
+          chara_id > 0 &&
           !common_no_action_check(chara_id) &&
           new BasementOwners().is_empty() &&
           era.get('flag:惩戒力度') >= 2 &&
           !era.get(`status:${chara_id}:伤病`) &&
           era.get(`base:${chara_id}:压力`) < pressure_border.depression
             ? {
-                accelerator: 213,
+                accelerator: 214,
                 config: {
                   disabled:
                     !chara_id ||
@@ -693,13 +712,17 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       }
       break;
     case 208:
-      await print_juel_shop_page();
+      era.drawLine();
+      await take_care(get_chara_talk(chara_id));
       break;
     case 209:
+      await print_juel_shop_page();
+      break;
+    case 210:
       era.drawLine();
       await get_custom_daily(chara_id).borrow_money();
       break;
-    case 210:
+    case 211:
       sys_change_attr_and_print(0, '精力', -celebration_cost);
       sys_change_attr_and_print(chara_id, '精力', -50);
       era.drawLine();
@@ -708,12 +731,12 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         await run_custom_daily(chara_id, event_hooks.celebration, {});
       }
       break;
-    case 211:
+    case 212:
       era.drawLine();
       await personal_action.handle();
       await era.waitAnyKey();
       break;
-    case 212:
+    case 213:
       era.drawLine();
       era.set(`cflag:${chara_id}:爱慕暂拒`, 0);
       get_custom_check(chara_id).check_love_events();
@@ -722,7 +745,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         { content: ' 似乎决定重新审视你们之间的关系……' },
       ]);
       break;
-    case 213:
+    case 214:
       era.drawLine();
       new BasementOwners().push(chara_id);
       await era.printAndWait([

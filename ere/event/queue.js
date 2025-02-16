@@ -14,6 +14,21 @@ const temp_queue = {};
 const cb_enum = { daily: 0, edu: 0, recruit: 0, love: 0 };
 Object.keys(cb_enum).forEach((k, i) => (cb_enum[k] = i));
 
+/** 事件队列的初始化函数，必须在new game或者load game的时候调用 */
+function init() {
+  queue = era.get('flag:事件队列');
+  if (!queue) {
+    queue = era.set('flag:事件队列', {});
+  }
+  for (const key of Object.keys(queue)) {
+    if (queue[key].length === 0) {
+      delete queue[key];
+    } else {
+      queue[key] = queue[key].map(create_from_object);
+    }
+  }
+}
+
 /**
  * @param {function(EventObject):boolean} condition
  * @returns {Record<string,number>}
@@ -49,7 +64,7 @@ module.exports = {
       return;
     }
     if (!queue) {
-      this.init();
+      init();
     }
     if (!queue[stage]) {
       queue[stage] = [];
@@ -93,20 +108,7 @@ module.exports = {
       return event_object;
     }
   },
-  /** 事件队列的初始化函数，必须在new game或者load game的时候调用 */
-  init() {
-    queue = era.get('flag:事件队列');
-    if (!queue) {
-      queue = era.set('flag:事件队列', {});
-    }
-    for (const key of Object.keys(queue)) {
-      if (queue[key].length === 0) {
-        delete queue[key];
-      } else {
-        queue[key] = queue[key].map(create_from_object);
-      }
-    }
-  },
+  init,
   /**
    * 删除某角色的所有育成事件
    * @param {number} chara_id

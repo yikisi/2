@@ -1,6 +1,5 @@
 /**
  * @file 目白高峰 - 日常
- *
  * @author イーウィヤ
  */
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');

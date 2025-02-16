@@ -1,6 +1,5 @@
 /**
  * @file 东海帝王 - 地下室
- *
  * @author 天马闪光蹄
  */
 const era = require('#/era-electron');

@@ -54,13 +54,13 @@ function get_edu_stage(chara_id, race, palace, in_train) {
   if (!chara_id || !race) {
     return '-';
   }
-  if (palace) {
+  if (palace > 1) {
     return out_of_train_type[palace - 1];
   }
   if (in_train) {
     return get_train_time(chara_id).substring(0, 3);
   }
-  if (era.get(`cflag:${chara_id}:可再次育成`)) {
+  if (era.get(`cflag:${chara_id}:可再次育成`) > 0) {
     return '-';
   }
   return '待入学';

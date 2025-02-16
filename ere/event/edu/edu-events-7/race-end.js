@@ -13,6 +13,7 @@ const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { race_enum } = require('#/data/race/race-const');
+const { skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
 
 module.exports = class extends CustomizedEdu {
@@ -458,13 +459,18 @@ module.exports = class extends CustomizedEdu {
           await gold_ship.say_and_wait('尊嘟假嘟？那我岂不是超厉害的？');
           era.println();
 
-          era.printButton('「确实超厉害的。」（力量+18、其他属性+3）', 1);
-          era.printButton(
-            '「厉害到可以名留青史！」（全属性+3、习得【出闸难】、技能点数+45 or 全属性+8、技能点数+75）',
-            2,
+          era.printButton('「确实超厉害的。」', 1);
+          era.print('（力量+18、其他属性+3）', { offset: 1, width: 23 });
+          era.printButton('「厉害到可以名留青史！」', 2);
+          era.print(
+            [
+              '（全属性+3、习得 ',
+              skills_dict[200433].get_colored_name(),
+              '、技能点数+45 or 全属性+8、技能点数+75）',
+            ],
+            { offset: 1, width: 23 },
           );
-          const ret = await era.input();
-          if (ret === 1) {
+          if ((await era.input()) === 1) {
             extra_flag.attr_change = new Array(5).fill(3);
             extra_flag.attr_change[attr_enum.strength] += 15;
             extra_flag.pt_change = 45;

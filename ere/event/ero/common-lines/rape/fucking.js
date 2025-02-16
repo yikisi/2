@@ -1,6 +1,5 @@
 /**
  * @file 调教指令 - 强奸性交系
- *
  * @author ALEX
  */
 const era = require('#/era-electron');
@@ -302,7 +301,7 @@ async function common_hug_sitting(attacker, defender, hook) {
       era.get(`cflag:${defender.id}:种族`) ? '立起来的马耳朵' : '的耳朵 ',
       '询问着。',
     ]);
-    await defender.say_and_wait('人渣！变态训练员！');
+    await defender.say_and_wait('人渣！变态！');
     await defender.say_and_wait('嗯啊啊❤️……');
     await attacker.print_and_wait([
       '断断续续的反驳被娇媚的淫叫所阻断，',
@@ -480,8 +479,8 @@ class EroRapeFucking extends EroFucking {
       await defender.say_and_wait('咕哦哦哦齁哦哦哦哦————❤️❤️❤️');
       await attacker.print_and_wait([
         '就像是在验证猜想般的，名叫 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 自觉地抬起脑袋发出高亢的浪叫，屁股也配合着抽插翘了起来，让肉棒得以更多的碰到敏感点。',
+        defender.get_colored_name(),
+        ' 的女性自觉地抬起脑袋发出高亢的浪叫，屁股也配合着抽插翘了起来，让肉棒得以更多的碰到敏感点。',
       ]);
       await attacker.print_and_wait([
         '美眸半开半闭，所剩不多的理智和自尊随爱液一并排出体外。',

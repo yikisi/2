@@ -1,6 +1,5 @@
 /**
  * @file 待兼福来 - 调教
- *
  * @author ALEX
  */
 const era = require('#/era-electron');

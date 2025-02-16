@@ -298,6 +298,9 @@
       "": "四白流星的猛袭",
       "_应援": "黑将Zen"
     },
+    "73": {
+      "": "志向，高远，坚定"
+    },
     "74": {
       "": "Brunissage・Line",
       "_圣诞": "星辰般澄澈的Snow Lolita"
@@ -310,7 +313,11 @@
       "_圣诞": "Celestial Road"
     },
     "78": {
-      "": "Fluttertail Spirit"
+      "": "Fluttertail Spirit",
+      "_仆": "Sugar Wind"
+    },
+    "79": {
+      "": "衣锦还乡的瑞星"
     },
     "80": {
       "": "ZOKU-ZOKU GIZMO"
@@ -333,7 +340,8 @@
       "": "Onyx・Line"
     },
     "87": {
-      "": "Flare"
+      "": "Flare",
+      "_仆": "永恒的砂糖点心"
     },
     "88": {
       "": "黑翠千里行"

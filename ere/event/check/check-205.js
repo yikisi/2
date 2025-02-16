@@ -50,7 +50,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    if (era.get('cflag:205:招募状态')) {
+    if (era.get('cflag:205:招募状态') !== 0) {
       const edu_weeks = era.get('cflag:205:育成回合计时');
       const race_history = new RaceHistory(205).get();
       if (edu_weeks < 3 * 48) {
@@ -129,9 +129,11 @@ module.exports = class extends CustomizedCheck {
       era.get('flag:当前声望') >= 1000
     ) {
       era.set('cflag:205:随机招募', 1);
-      era.print(
-        '据说有一名优秀的法国幼驹已经准备来到中央交流，也许可以在训练场遇到……',
-      );
+      era.print([
+        '据说有 ',
+        { color: get_chara_color(this.id), content: '一名优秀的法国幼驹' },
+        ' 已经准备来到中央交流，也许可以在训练场遇到……',
+      ]);
     }
   }
 

@@ -231,8 +231,9 @@ module.exports = async () => {
     ['特殊角色（临时）', '无名黑奴'],
   ];
   set_chara_ero_image();
+  const gameBase = era.get('gamebase');
   let buffer,
-    version = era.get('gamebase').version / 1000;
+    version = gameBase.version / 1000;
   if (version % 1 === 0) {
     version = version.toFixed(1);
   }
@@ -247,7 +248,7 @@ module.exports = async () => {
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
-            content: `版本号：v${version}`,
+            content: `版本号：v${version} (kuuga)`,
             type: 'text',
           },
         ],
@@ -301,7 +302,7 @@ module.exports = async () => {
           content: [
             {
               content: 'EraUma游戏发布页',
-              url: 'https://gitgud.io/umaera/erauma/-/releases/permalink/latest',
+              url: gameBase.site,
             },
             { isBr: true },
             {
@@ -705,6 +706,10 @@ module.exports = async () => {
           'odakasuya',
           { isDivider: true },
           'hsyzg1626',
+          { isDivider: true },
+          'WindyWhisper',
+          { isDivider: true },
+          'wtmkks',
         ]);
         await era.printAndWait('特别鸣谢（笑）', {
           color: item_title_color,

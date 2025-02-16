@@ -1,6 +1,5 @@
 /**
  * @file 佐岳五月 - 招募
- *
  * @author 无名黑奴（临时）
  */
 const { printAndWait } = require('#/era-electron');

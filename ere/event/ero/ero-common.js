@@ -1,6 +1,5 @@
 /**
  * @file 调教地文
- *
  * @author O口口口口口
  * @author 雞雞
  * @author 天马闪光蹄
@@ -102,7 +101,6 @@ class CustomizedEro {
 
   /**
    * 调教开始
-   *
    * @param {function(number,boolean[],boolean=):Promise<boolean>} handle_ero_act
    */
   // eslint-disable-next-line no-unused-vars
@@ -110,7 +108,6 @@ class CustomizedEro {
 
   /**
    * 调教结束
-   *
    * @param {function(number,boolean[],boolean=):Promise<boolean>} handle_ero_act
    */
   // eslint-disable-next-line no-unused-vars
@@ -118,7 +115,6 @@ class CustomizedEro {
 
   /**
    * 设置马娘偏好部位
-   *
    * @param {Record<string,1>} attacker_parts
    * @param {Record<string,1>} defender_parts
    */
@@ -127,7 +123,6 @@ class CustomizedEro {
 
   /**
    * 马娘主动指令筛选器
-   *
    * @returns {function(number): boolean}
    */
   filter_in_rape() {
@@ -153,7 +148,6 @@ class CustomizedEro {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -183,7 +177,6 @@ class CustomizedEro {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -214,7 +207,6 @@ class CustomizedEro {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -244,7 +236,6 @@ class CustomizedEro {
   }
 
   /** @author 无名黑奴
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -262,7 +253,6 @@ class CustomizedEro {
 
   /**
    * @author 无名黑奴
-   *
    * @param {boolean} stop_success 如果寸止的话是否成功
    */
   async orgasm_denial(stop_success) {
@@ -318,7 +308,6 @@ class CustomizedEro {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -330,7 +319,6 @@ class CustomizedEro {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -342,9 +330,7 @@ class CustomizedEro {
 
   /**
    * 获取刻印
-   *
    * @author 无名黑奴
-   *
    * @param {number} level
    * @param {number} type
    * @param {boolean} _new
@@ -394,7 +380,6 @@ class CustomizedEro {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -538,7 +523,6 @@ class CustomizedEro {
 
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -562,7 +546,6 @@ class CustomizedEro {
   /**
    * @author 雞雞
    * @author 无名黑奴
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -688,9 +671,7 @@ class CustomizedEro {
 
   /**
    * 孩子出生
-   *
    * @author 雞雞
-   *
    * @param {CharaTalk} father
    * @param {CharaTalk} mother
    * @param {number} child
@@ -733,7 +714,6 @@ class CustomizedEro {
 
   /**
    * 进入能力升级
-   *
    * @author 无名黑奴
    */
   async shop_start() {
@@ -790,9 +770,7 @@ class CustomizedEro {
 
   /**
    * 离开能力升级
-   *
    * @author 无名黑奴
-   *
    * @param {{hate_clear:number,mark_clear:number,pleasure_delta:number,sex_delta:number,skill:number,talent:number}} extra_flag
    */
   async shop_end(extra_flag) {
@@ -850,7 +828,6 @@ class CustomizedEro {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname

@@ -1,6 +1,5 @@
 /**
  * @file 爱慕地文
- *
  * @author 雞雞
  * @author 无名黑奴
  */
@@ -24,6 +23,10 @@ class CustomizedLove {
   /** @param {number} chara_id */
   constructor(chara_id) {
     this.id = chara_id;
+  }
+
+  get_this() {
+    return this;
   }
 
   /**

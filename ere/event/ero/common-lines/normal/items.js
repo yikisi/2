@@ -1,6 +1,5 @@
 /**
  * @file 调教地文 - 道具系
- *
  * @author 无名黑奴
  */
 const era = require('#/era-electron');
@@ -15,7 +14,6 @@ const { medicine_enum } = require('#/data/ero/item-const');
 class EroNormalItems extends EroItems {
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

@@ -8,7 +8,6 @@ const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 /**
  * @author 雞雞
  * @author 无名黑奴
- *
  * @param {CharaTalk} father
  * @param {CharaTalk} mother
  * @param {number} unexpected_pregnant

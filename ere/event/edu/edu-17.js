@@ -1,6 +1,5 @@
 /**
  * @file 鲁铎象征 - 育成
- *
  * @author 露娜俘虏
  */
 const era = require('#/era-electron');

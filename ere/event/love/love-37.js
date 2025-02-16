@@ -1,6 +1,5 @@
 /**
  * @file 荣进闪耀 - 爱慕
- *
  * @author 爱放箭的袁本初
  */
 const era = require('#/era-electron');

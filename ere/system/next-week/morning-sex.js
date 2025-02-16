@@ -1,6 +1,5 @@
 /**
  * @file H事件之隔日清晨系列
- *
  * @author 雞雞
  * @author 无名黑奴
  */
@@ -38,7 +37,6 @@ const { location_enum } = require('#/data/locations');
 
 /**
  * @author 雞雞
- *
  * @param {CharaTalk} chara
  * @param {CharaTalk} me
  */
@@ -125,6 +123,7 @@ async function blowjob(chara, me) {
 }
 
 /**
+ * @author 无名黑奴
  * @param {CharaTalk} chara
  * @param {CharaTalk} me
  */
@@ -286,7 +285,6 @@ async function morning_sex() {
 
 /**
  * @author 雞雞
- *
  * @param {CharaTalk} chara
  * @param {CharaTalk} me
  */

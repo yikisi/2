@@ -1,6 +1,5 @@
 /**
  * @file 秋川弥生 - 育成
- *
  * @author 雞雞
  */
 const {
@@ -33,7 +32,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
 module.exports = class extends CustomizedEdu {
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} taste
    */
   async annoyance1(taste) {
@@ -62,8 +60,7 @@ module.exports = class extends CustomizedEdu {
       sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
         .filter((e) => get(`cflag:${e}:育成回合计时`) < 3 * 48)
         .forEach((e) => add(`exp:${e}:技能点数`, 10));
-      sys_get_billings().push({ creditor: 0, repay: -10, timer: 4 });
-      add('flag:收支', -10);
+      sys_get_billings().push({ creditor: 302, repay: -10, timer: 4 });
       println();
       sys_like_chara(302, 0, get_random_value(10, 20)) && (await waitAnyKey());
     } else {
@@ -74,7 +71,6 @@ module.exports = class extends CustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} taste
    */
   async annoyance2(taste) {
@@ -88,7 +84,10 @@ module.exports = class extends CustomizedEdu {
       taste.get_colored_actual_name(),
       ' 的猫咪失踪了！因为猫咪不见而陷入消沉的理事长，连带让特雷森的运作效率也大大降低！',
     ]);
-    printButton('「总动员所有人力，务必找到小猫！」（精力-50，好感+10）', 1);
+    printButton(
+      '「总动员所有人力，务必找到小猫！」（精力-50，好感+40～60）',
+      1,
+    );
     printButton('「所以呢？」', 2);
     if ((await input()) === 1) {
       await printAndWait([

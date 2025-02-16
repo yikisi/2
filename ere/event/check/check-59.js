@@ -28,28 +28,28 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
       race_enum.hans_fil,
       0,
       1,
-      (e) => e.pop === 1 && e.st === 3,
+      (e) => e.pop === 1 && e.st === 2,
     ) &&
     check_aim_race(
       races,
       race_enum.oka_sho,
       1,
       1,
-      (e) => e.pop === 1 && e.st === 3,
+      (e) => e.pop === 1 && e.st === 2,
     ) &&
     check_aim_race(
       races,
       race_enum.yush_him,
       1,
       1,
-      (e) => e.pop === 1 && e.st === 3,
+      (e) => e.pop === 1 && e.st === 2,
     ) &&
     check_aim_race(
       races,
       race_enum.shuk_sho,
       1,
       1,
-      (e) => e.pop === 1 && e.st === 3,
+      (e) => e.pop === 1 && e.st === 2,
     ) &&
     check_aim_race(races, race_enum.eliz_cup, 1, 1) &&
     check_aim_race(races, race_enum.eliz_cup, 2, 1),

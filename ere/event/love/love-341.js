@@ -1,6 +1,5 @@
 /**
  * @file 高多芬柏布 - 爱慕
- *
  * @author フィンランド
  */
 const { input, printAndWait, printButton } = require('#/era-electron');

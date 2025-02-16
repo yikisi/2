@@ -39,7 +39,7 @@ module.exports = class extends CustomizedMec {
         ret_list.push({
           color: get_chara_color(this.id),
           content: `胜利的承诺(${wins})`,
-          title: `[胜利的承诺(${wins})]：参赛时属性+${get_attr_buff()}%，好感获取+${this.get_relation_buff()}%，效果随连胜次数增强`,
+          title: `参赛时属性+${get_attr_buff()}%，好感获取+${this.get_relation_buff()}%，效果随连胜次数增强`,
         });
       }
     }

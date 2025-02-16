@@ -289,7 +289,7 @@ module.exports = (handlers) => {
       era.println();
 
       await tachyon.say_and_wait('身为性奴的能力……完全不及格啊。');
-      await tachyon.say_and_wait('还得好好加以调教才行……。');
+      await tachyon.say_and_wait('还得好好加以调教才行……');
       era.println();
 
       await era.printAndWait(
@@ -690,7 +690,7 @@ module.exports = (handlers) => {
       era.println();
 
       await era.printAndWait(
-        `速子摸着 ${me.name} 的菊穴，这几天把这边日到红肿的主要原因就是神宫的肉柱，倘若真的一切都要合理的话，在这种没有任何生产意义的穴里射出应该是最不符合逻辑的行为了吧，但这三天里${tachyon.sex}不停耕耘的样子却让 ${me.name} 完全不敢问出口，当然也没机会问出就是了。`,
+        `速子摸着 ${me.name} 的菊穴，这几天把这边肏到红肿的主要原因就是神宫的肉柱，倘若真的一切都要合理的话，在这种没有任何生产意义的穴里射出应该是最不符合逻辑的行为了吧，但这三天里${tachyon.sex}不停耕耘的样子却让 ${me.name} 完全不敢问出口，当然也没机会问出就是了。`,
       );
       era.println();
     }

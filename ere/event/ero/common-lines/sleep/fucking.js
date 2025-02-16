@@ -1,6 +1,5 @@
 /**
  * @file 调教指令 - 睡奸性交系
- *
  * @author O口口口口口
  */
 const era = require('#/era-electron');
@@ -132,7 +131,6 @@ async function stimulate_glans_by_hole(attacker, defender, hook) {
 class EroSleepFucking extends EroFucking {
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -143,7 +141,6 @@ class EroSleepFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -154,7 +151,6 @@ class EroSleepFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -166,7 +162,6 @@ class EroSleepFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -178,7 +173,6 @@ class EroSleepFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -216,7 +210,6 @@ class EroSleepFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -256,7 +249,6 @@ class EroSleepFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -267,7 +259,6 @@ class EroSleepFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -278,7 +269,6 @@ class EroSleepFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -289,7 +279,6 @@ class EroSleepFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

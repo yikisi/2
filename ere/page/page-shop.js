@@ -106,7 +106,7 @@ async function print_shop_page(item_list) {
         },
         {
           type: 'text',
-          config: { align: 'center', width: 1 },
+          config: { align: 'center', width: 2 },
           content: `× ${to_buy[id]}`,
         },
         {
@@ -141,7 +141,7 @@ async function print_shop_page(item_list) {
               to_buy[id] === max_count ||
               limit[id],
             showAcc: !flag_hide_acc,
-            width: 4,
+            width: 3,
           },
           content: '最大',
           type: 'button',

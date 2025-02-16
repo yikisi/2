@@ -2,13 +2,12 @@ const era = require('#/era-electron');
 
 const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const sys_load_game = require('#/system/sys-load-game');
 
-const { add_event, init: queue_init } = require('#/event/queue');
+const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
-
-const CharaTalk = require('#/utils/chara-talk');
 
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
@@ -605,10 +604,9 @@ module.exports = (handlers) => {
     if (edu_marks.loop > 0) {
       const attr_cache = attr_names.map((e) => era.get(`base:52:${e}`)),
         motivation_cache = era.get('cflag:52:干劲');
-      await era.loadData(52);
-      await era.loadGlobal();
-      queue_init();
-      CharaTalk.me = new CharaTalk(0);
+      if (await era.loadData(52)) {
+        sys_load_game();
+      }
       attr_cache.forEach((e, i) => era.set(`base:52:${attr_names[i]}`, e));
       era.set('cflag:52:干劲', motivation_cache);
       new UraraEduMarks().loop--;

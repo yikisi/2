@@ -168,9 +168,17 @@ function sys_handle_palace(chara_id) {
     .filter((e) => e < 200000)
     .forEach((e) => genes.add(e + 800000));
   const gene_a = era.get(`cflag:${chara_id}:继承方1`);
-  if (gene_a) {
+  if (gene_a > 0) {
     era.set(`cflag:${gene_a}:被继承`, 0);
     era.set(`cflag:${era.get(`cflag:${chara_id}:继承方2`)}:被继承`, 0);
+  }
+  const teach_chara = era.get(`cflag:${chara_id}:照看`);
+  if (teach_chara > 0) {
+    const teach_chara = era.get(`cflag:${chara_id}:照看`);
+    if (teach_chara > 0) {
+      era.set(`cflag:${teach_chara}:照看`, 0);
+      era.set(`cflag:${chara_id}:照看`, 0);
+    }
   }
   if (get_chara_score(chara_id).charAt(0) >= 'S') {
     era.set(

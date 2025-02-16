@@ -81,10 +81,12 @@ cons_dict[69] = require('#/event/check/check-69');
 cons_dict[70] = require('#/event/check/check-70');
 cons_dict[71] = require('#/event/check/check-71');
 cons_dict[72] = require('#/event/check/check-72');
+cons_dict[73] = require('#/event/check/check-73');
 cons_dict[74] = require('#/event/check/check-74');
 cons_dict[76] = require('#/event/check/check-76');
 cons_dict[77] = require('#/event/check/check-77');
 cons_dict[78] = require('#/event/check/check-78');
+cons_dict[79] = require('#/event/check/check-79');
 cons_dict[80] = require('#/event/check/check-80');
 cons_dict[82] = require('#/event/check/check-82');
 cons_dict[83] = require('#/event/check/check-83');
@@ -154,6 +156,6 @@ module.exports = {
         chara_id >= first_child_id ? get(`callname:${chara_id}:-2`) : chara_id,
       class_cons =
         cons_dict[script_dict[script_name] || script_name] || common_cons;
-    return (obj_dict[chara_id] = new class_cons(chara_id));
+    return (obj_dict[chara_id] = new class_cons(chara_id)).get_this();
   },
 };

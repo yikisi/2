@@ -1,6 +1,5 @@
 /**
  * @file 达利阿拉伯 - 调教
- *
  * @author 无名黑奴
  */
 const era = require('#/era-electron');

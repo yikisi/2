@@ -185,7 +185,6 @@ module.exports = {
   /**
    * 检查角色是否能进行阴道性行为<br>
    * 必须有阴道&未经期&未处于孕期保护
-   *
    * @param chara_id
    * @returns {boolean}
    */
@@ -397,7 +396,6 @@ module.exports = {
    * 外阴与阴道、肛门与阴茎有等额快感联动
    * 胸部肛门有分泌物
    * 阴茎阴道是主要部位
-   *
    * @type {number[]}
    */
   orgasm_check_list: [

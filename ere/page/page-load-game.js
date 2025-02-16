@@ -1,29 +1,50 @@
 ﻿const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
-const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_get_billings,
+  sys_reg_race,
+} = require('#/system/sys-calc-base-cflag');
 const filter_chara = require('#/system/sys-filter-chara');
+const sys_load_game = require('#/system/sys-load-game');
 
 const print_page_header = require('#/page/components/page-header');
 
-const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
-const event_queue = require('#/event/queue');
-const { add_event, cb_enum } = require('#/event/queue');
+const { add_event, cb_enum, get: get_queue } = require('#/event/queue');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { chara_colors, get_chara_color } = require('#/data/chara-colors');
+const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
+const { trainer_salary } = require('#/data/const.json');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { get_trainer_title } = require('#/data/info-generator');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
+
+function check_titles(...ids) {
+  ids
+    .filter(
+      (id) =>
+        era.get(`cflag:${id}:招募状态`) === recruit_flags.yes &&
+        era.get(`cflag:${id}:育成回合计时`) >= 3 * 48,
+    )
+    .forEach((id) => {
+      const check = get_custom_check(id);
+      sys_add_titles(
+        id,
+        ...check.check_and_get_titles(
+          check.get_edu_aims().reduce((p, c) => p && c.check === 1, true),
+        ),
+      );
+    });
+}
 
 /**
  * load game
@@ -91,39 +112,18 @@ module.exports = async () => {
           }
           if (await era.loadData(ret)) {
             flag_load_game = false;
-            event_queue.init();
-            basement_queue.init();
-            const src_chara = era.get('cflag:0:模版角色');
-            chara_colors[0] =
-              src_chara > 0 ? get_chara_color(src_chara) : '#ffffff';
-            CharaTalk.me = new CharaTalk(0);
+            sys_load_game();
             // 向前兼容
             // 大拓太阳神育成目标错误、贵妇人称号bug
             const version = era.get('version');
             if (version < 1011) {
-              [65, 116]
-                .filter(
-                  (id) =>
-                    era.get(`cflag:${id}:招募状态`) === recruit_flags.yes &&
-                    era.get(`cflag:${id}:育成回合计时`) >= 3 * 48,
-                )
-                .forEach((id) => {
-                  const check = get_custom_check(id);
-                  sys_add_titles(
-                    id,
-                    ...check.check_and_get_titles(
-                      check
-                        .get_edu_aims()
-                        .reduce((p, c) => p && c.check === 1, true),
-                    ),
-                  );
-                });
+              check_titles(65, 116);
             }
             if (version < 1100) {
-              const e_queue = event_queue.get();
+              const e_queue = get_queue();
               Object.values(e_queue).forEach((l) =>
                 l.forEach((e) => {
-                  if (e.type === event_queue.cb_enum.love) {
+                  if (e.type === cb_enum.love) {
                     if (e.arg === undefined) {
                       era.arg = [era.get(`love:${e.chara_id}`)];
                     } else if (
@@ -169,7 +169,7 @@ module.exports = async () => {
               }
               if (!era.get('flag:回合爱慕惩罚')) {
                 // 爱慕事件修复
-                const events = event_queue.get(),
+                const events = get_queue(),
                   dict = {};
                 Object.values(events).forEach((l) =>
                   l.forEach((e) => {
@@ -240,7 +240,7 @@ module.exports = async () => {
                 new MyEduMarks().strange_day = 0;
               } else if (
                 new MyEduMarks().strange_day === 0 &&
-                (event_queue.get()[event_hooks.week_start] || []).findIndex(
+                (get_queue()[event_hooks.week_start] || []).findIndex(
                   (e) => e.arg === 'strange_day',
                 ) === -1
               ) {
@@ -267,6 +267,74 @@ module.exports = async () => {
                   personal_title.n =
                     get_custom_check(88).get_personal_titles()[0];
                 }
+              }
+            }
+            if (version <= 1201) {
+              if (
+                era.get('cflag:0:种族') === 0 &&
+                era.get('flag:当前周') === 4
+              ) {
+                const billings = sys_get_billings(),
+                  cur_month = era.get('flag:当前月'),
+                  salary =
+                    trainer_salary[get_trainer_title().substring(0, 2)] *
+                    (1 + (cur_month === 12));
+                era.set('flag:18', 0);
+                billings.push({
+                  creditor: cur_month === 12 ? -1 : 0,
+                  repay: salary,
+                  timer: 1,
+                });
+              }
+              check_titles(66);
+              if (
+                era.get('cflag:67:招募状态') === recruit_flags.yes &&
+                era.get('cflag:67:育成回合计时') > 143 + 9 &&
+                era.get('cflag:67:可再次育成') === 0
+              ) {
+                era.set('cflag:67:可再次育成', 1);
+              }
+              if (
+                era.get('cflag:85:招募状态') === recruit_flags.yes &&
+                era.get('cflag:85:育成回合计时') > 143 + 9 &&
+                era.get('cflag:85:可再次育成') === 0
+              ) {
+                era.set('cflag:85:育成回合计时', 'x');
+              }
+            }
+            if (version <= 1210) {
+              const keys = era.get('cstrkeys').filter((k) => k !== 12);
+              era
+                .getAddedCharacters()
+                .forEach((id) =>
+                  keys.forEach((k) =>
+                    era.set(
+                      `cstr:${id}:${k}`,
+                      era.get(`cstr:${id}:${k}`) || '',
+                    ),
+                  ),
+                );
+            }
+            if (version <= 1211) {
+              era.getAddedCharacters().forEach((id) => {
+                if (id > 0 && era.get(`cflag:${id}:种族`) === 0) {
+                  era.set(`cflag:${id}:可再次育成`, 1);
+                }
+              });
+              if (
+                era.get('cflag:204:随机招募') === 1 &&
+                era.get('cflag:204:招募状态') !== recruit_flags.yes
+              ) {
+                era.set('cflag:204:招募状态', -1);
+                era.set('cflag:204:随机招募', 0);
+              }
+              if (
+                era.get('cflag:204:可再次育成') > 0 &&
+                era.get('jewel:204:白') === 0
+              ) {
+                era.set('jewel:204:粉', 100);
+                era.set('jewel:204:白', 100);
+                era.set('jewel:204:蓝', 100);
               }
             }
             return true;

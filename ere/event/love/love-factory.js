@@ -60,7 +60,9 @@ module.exports = {
         script_dict[script_name] || script_name
       ] || CustomizedLove)(chara_id);
     }
-    const ret = await love_dict[chara_id].run(stage, extra_flag, event_object);
+    const ret = await love_dict[chara_id]
+      .get_this()
+      .run(stage, extra_flag, event_object);
     await punish_by_yandere(chara_id, stage);
     return ret;
   },

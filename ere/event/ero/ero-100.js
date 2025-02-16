@@ -1,6 +1,5 @@
 /**
  * @file 奇锐骏 - 调教
- *
  * @author 夕阳红艺术团小组长-赤红彗星红桃爵士Q先生
  */
 const NormalCommandLines = require('#/event/ero/common-lines/normal/normal-common');

@@ -1,6 +1,5 @@
 /**
  * @file 摩耶重炮 - 日常
- *
  * @author 黑奴二号
  */
 const era = require('#/era-electron');

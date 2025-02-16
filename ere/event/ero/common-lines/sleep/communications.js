@@ -1,6 +1,5 @@
 /**
  * @file 调教指令 - 睡奸沟通系
- *
  * @author O口口口口口
  */
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
@@ -10,7 +9,6 @@ const EroCommunications = require('#/event/ero/common-lines/interface/ero-commun
 class EroSleepCommunications extends EroCommunications {
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -41,7 +39,6 @@ class EroSleepCommunications extends EroCommunications {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

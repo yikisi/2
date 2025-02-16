@@ -1,5 +1,5 @@
 const { execSync } = require('child_process');
-const { writeFileSync } = require('node:fs');
+const { writeFileSync } = require('fs');
 const { join } = require('path');
 
 const { PrismaClient } = require('@prisma/client');
@@ -595,7 +595,8 @@ async function chara_skill() {
   dict[206] = [102061, 203002, 202872, 202022, 203001, 202871, 202021, 200511];
   Object.values(dict).forEach((e) => e.forEach((s) => (skill_dict[s] = 1)));
   console.log('角色卡技能', Object.keys(skill_dict).length);
-  let buffer = 'const chara_skill_dict={},skills_dict = {};\n\n',
+  let buffer =
+      '/** @type {Record<string,number[]>} */\nconst chara_skill_dict={};\n/** @type {Record<string,UmaSkill>} */\nconst skills_dict = {};\n\n',
     buffer_common_skills = [
       202051, 200791, 200801, 200811, 200821, 990011, 990021,
     ];

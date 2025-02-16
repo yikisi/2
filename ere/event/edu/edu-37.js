@@ -1,6 +1,5 @@
 /**
  * @file 荣进闪耀 - 育成
- *
  * @author 爱放箭的袁本初
  */
 const era = require('#/era-electron');
@@ -130,8 +129,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(`${flash.sex}郑重道。`);
       await flash.say_and_wait('我保证。');
       sys_change_money(-50);
-      sys_get_billings().push({ creditor: 0, repay: 25, timer: 2 });
-      era.add('flag:收支', 25);
+      sys_get_billings().push({ creditor: 37, repay: 25, timer: 2 });
     }
     return true;
   }
