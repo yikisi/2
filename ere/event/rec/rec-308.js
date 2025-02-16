@@ -1,6 +1,5 @@
 /**
  * @file 光辉致意 - 招募
- *
  * @author 无名黑奴（临时）
  */
 const { printAndWait } = require('#/era-electron');

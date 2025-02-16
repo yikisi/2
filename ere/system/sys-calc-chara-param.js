@@ -178,13 +178,15 @@ module.exports = {
    */
   sys_check_hide_relation_and_love(chara_id) {
     const hide_talent = era.get(`talent:${chara_id}:捉摸不透`),
-      advanced_info = era.get('status:0:马语者');
+      not_in_basement = era.get('flag:当前位置') !== location_enum.basement,
+      advanced_info = not_in_basement && era.get('status:0:马语者') > 0,
+      glasses = not_in_basement && era.get('status:0:好感度镜片') > 0;
     return (
       !advanced_info &&
       (chara_id &&
         (era.get(`talent:${chara_id}:捉摸不透`) ||
           era.get(`talent:${chara_id}:坦率程度`) === -1) &&
-        (chara_id === 32 || !era.get('status:0:好感度镜片')) &&
+        (chara_id === 32 || !glasses) &&
         era.get(`love:${chara_id}`) < 75) +
         0b10 * (hide_talent && era.get(`talent:${chara_id}:病娇`) === 2)
     );

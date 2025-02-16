@@ -26,7 +26,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const CharaAvailableGenes = require('#/data/chara-available-genes');
-
 const { item_enum } = require('#/data/ero/item-const');
 const {
   base_limit,
@@ -595,7 +594,7 @@ function end_ero(skip_juels, log_juels, ids) {
         juels = gene_juel_names.map((e) =>
           era.get(`tcvar:${chara_id}:${e}因子`),
         );
-      if (got) {
+      if (got > 0) {
         if (got < juels.reduce((p, c) => p + c, 0)) {
           juels = juels.map((e, i, l) => {
             const val = get_random_value(
@@ -621,6 +620,9 @@ function end_ero(skip_juels, log_juels, ids) {
   if (!log_juels) {
     tmp = undefined;
   }
+  era
+    .get('paramkeys')
+    .forEach((v) => ids.forEach((id) => era.set(`gotjewel:${id}:${v}`, 0)));
 }
 
 /** @param {boolean} [skip_juels] */

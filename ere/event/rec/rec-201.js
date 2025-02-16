@@ -1,6 +1,5 @@
 /**
  * @file 快乐米可 - 招募
- *
  * @author 无名黑奴（临时）
  */
 const { get, printAndWait, set } = require('#/era-electron');

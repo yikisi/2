@@ -1,6 +1,5 @@
 /**
  * @file 黄金船 - 调教
- *
  * @author 雞雞
  */
 const era = require('#/era-electron');

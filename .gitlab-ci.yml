@@ -6,8 +6,9 @@ variables:
   GAME_ALL_DIR: 'erauma-with-engine-${CI_COMMIT_TAG}'
   GAME_ALL_ZIP: 'era-uma-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
   GAME_ZIP_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/erauma/${CI_COMMIT_TAG}/era-uma-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
+  BASE_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip'
   GAME_BUNDLE_DIR: 'erauma-${CI_COMMIT_TAG}'
-  GAME_BUNDLE_ZIP: 'era-bundle-${CI_COMMIT_TAG}.zip'
+  GAME_BUNDLE_ZIP: 'erauma-bundle-${CI_COMMIT_TAG}.zip'
   GAME_BUNDLE_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/bundle/${CI_COMMIT_TAG}/era-bundle-${CI_COMMIT_TAG}.zip'
   CALL_SIGN: 'kuuga'
 
@@ -18,44 +19,8 @@ build:
   variables:
     NODE_OPTIONS: "--openssl-legacy-provider"
   script:
-    - git lfs pull
-    - MIN_VERSION=`cat .ere-min-version`
-    - RES_VERSION=`cat .res-min-version`
-    - git submodule update --init
-    - cd engine
-    - git lfs pull
     - npm install
-    - npm run win:pack
-    - echo $GAME_ALL_DIR
-    - '[ -d $GAME_ALL_DIR ] && rm -rf ./$GAME_ALL_DIR'
-    - mkdir ./$GAME_ALL_DIR
-    - mv dist_electron/win-unpacked/* $GAME_ALL_DIR/
-    - mkdir $GAME_ALL_DIR/game
-    - cp ../CHANGELOG.md ./$GAME_ALL_DIR/game/
-    - cp ../RELEASE.md ./$GAME_ALL_DIR/game/
-    - cp -r ../ere ./$GAME_ALL_DIR/game/
-    - cp -r ../csv ./$GAME_ALL_DIR/game/
-    - cd ./$GAME_ALL_DIR/game/ere
-    - FILE_LIST=`find $PWD | xargs ls -d | grep json`
-    - NEW_LIST=(`echo $FILE_LIST | tr '\n' ' '` )
-    - for var in ${NEW_LIST[@]}; do jq -c '.' $var > ${var}.new; mv ${var}.new $var; done
-    - cd -
-    - echo $GAME_ALL_ZIP
-    - '[ -f ./$GAME_ALL_ZIP ] && rm ./$GAME_ALL_ZIP'
-    - 7zz a -pera $GAME_ALL_ZIP ./$GAME_ALL_DIR
-    - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ${GAME_ALL_ZIP} "${GAME_ZIP_URL}"'
-    - cd ./$GAME_ALL_DIR/game/
-    - '[ -f ./base.zip ] && rm ./base.zip'
-    - VERSION=`cat csv/GameBase.csv | grep 'バージョン,'`
-    - 'VERSION=${VERSION#*,}'
-    - '[ $MIN_VERSION != $VERSION ] && zip -r base.zip ./ere ./csv RELEASE.md CHANGELOG.md'
-    - '[ -f ./base.zip ] && curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./base.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip"'
-    - cd ../../..
-    - '[ -f ./resources.zip ] && rm ./resources.zip'
-    - 'echo "使用时请在游戏设置中将【启用资源】设置项打开！" > 资源包注意事项.txt'
-    - '[ $RES_VERSION == $VERSION ] && zip -rP era ./resources.zip ./res 资源包注意事项.txt'
-    - '[ -f ./resources.zip ] && curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./resources.zip "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/resources/${CI_COMMIT_TAG}/resources.zip"'
-    - echo done
+    - node ci/build.js
 
 android:
   stage: build
@@ -63,27 +28,14 @@ android:
     - shell
   script:
     - npm install
-    - '[ -d ./$GAME_BUNDLE_DIR ] && rm -rf ./$GAME_BUNDLE_DIR'
-    - '[ -f ./$GAME_BUNDLE_ZIP ] && rm ./$GAME_BUNDLE_ZIP'
-    - npm run webpack
-    - ls -la ./dist
-    - mv ./dist ./$GAME_BUNDLE_DIR
-    - 'zip -rP era ./${GAME_BUNDLE_ZIP} ./${GAME_BUNDLE_DIR}'
-    - 'curl --fail-with-body --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./${GAME_BUNDLE_ZIP} "${GAME_BUNDLE_URL}"'
+    - node ci/android.js
 
 pages:
   stage: deploy
   tags:
     - shell
   script:
-    - rm -rf public
-    - mkdir public
-    - VERSION=`cat csv/GameBase.csv | grep 'バージョン,'`
-    - echo ${VERSION#*,} > public/RELEASE
-    - cat .ere-min-version >> public/RELEASE
-    - echo "<meta http-equiv=\"refresh\" content=\"3; url= $GAME_ZIP_URL\">" > public/index.html
-    - cp tools/generate-res-link.js generate-res-link.js
-    - 'node generate-res-link.js ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/resources/_VERSION_/resources.zip'
+    - node ci/pages.js
   artifacts:
     paths:
       - public
@@ -104,11 +56,11 @@ release:
     ref: '$CI_COMMIT_SHA'
     assets:
       links:
-        - name: '[解压即玩包] $GAME_ALL_ZIP (解压密码：era)'
+        - name: '[Win10绿色版] $GAME_ALL_ZIP (解压密码：era)'
           url: 'https://umaera.gitgud.site/erauma/index.html'
           link_type: package
-        - name: '[安卓引擎用] $GAME_BUNDLE_ZIP (解压密码：era)'
+        - name: '[安卓游戏包] $GAME_BUNDLE_ZIP (解压密码：era)'
           url: '${GAME_BUNDLE_URL}'
           link_type: package
-        - name: '[通用资源包] resources.zip (解压后放到游戏文件夹下，需要在游戏设置中启用资源，密码：era)'
-          url: 'https://umaera.gitgud.site/erauma/res.html'
+        - name: '[通用资源包] erauma-master-res.zip (解压后将res文件夹放到游戏文件夹下，需要在游戏设置中启用资源)'
+          url: 'https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res'

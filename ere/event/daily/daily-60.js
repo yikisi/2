@@ -1,6 +1,5 @@
 /**
  * @file 优秀素质 - 日常
- *
  * @author 红红火火恍惚
  */
 const era = require('#/era-electron');
@@ -550,16 +549,16 @@ module.exports = class extends CustomizedDaily {
         `啊哈，是吗，果然内恰小姐还是……但是等等，不行，${sys_get_callname(
           60,
           0,
-        )}，我们的孩子，至少，至少给我们的孩子一个名字吧`,
+        )}，我们的孩子，至少，至少给我们的孩子一个名字吧……`,
       );
       await nice_nature.say_and_wait(
-        '这孩子没有爸爸也无所谓，我能一个人养大，但至少，求求你，一个名字',
+        '这孩子没有爸爸也无所谓，我能一个人养大，但至少，求求你，一个名字……',
       );
       await nice_nature.say_and_wait(
         `『花月自然』？『优雅素质』？类似的，名字，这是内恰小姐麻烦你的最后一件事，${sys_get_callname(
           60,
           0,
-        )}，给我一个名字吧`,
+        )}，给我一个名字吧……`,
       );
       await era.printAndWait(
         [

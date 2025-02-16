@@ -61,7 +61,6 @@ async function select_medicine() {
 }
 
 /**
- *
  * @param {CharaTalk} chara
  * @returns {Promise<boolean>} if don't use
  */

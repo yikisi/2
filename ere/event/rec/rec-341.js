@@ -1,6 +1,5 @@
 /**
  * @file 高多芬柏布 - 招募
- *
  * @author フィンランド
  */
 const { get, printAndWait, set } = require('#/era-electron');

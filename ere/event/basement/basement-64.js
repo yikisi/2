@@ -1,6 +1,5 @@
 /**
  * @file 目白善信 - 地下室
- *
  * @author KUN
  */
 const era = require('#/era-electron');

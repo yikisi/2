@@ -1,6 +1,5 @@
 /**
  * @file 日常地文
- *
  * @author 雞雞
  * @author KUN
  * @author 无名黑奴
@@ -43,6 +42,10 @@ const money_list = [0, 1500, 5000, 10000];
 class CustomizedDaily {
   constructor(chara_id) {
     this.id = chara_id;
+  }
+
+  get_this() {
+    return this;
   }
 
   /** @author 雞雞 */
@@ -174,7 +177,6 @@ class CustomizedDaily {
           billing.creditor = this.id;
           billing.repay = -repay;
           billing.timer = time;
-          era.add('flag:收支', -repay);
           await era.printAndWait([
             get_chara_talk(0).get_colored_name(),
             ' 向 ',
@@ -394,7 +396,6 @@ class CustomizedDaily {
   /**
    * @author 雞雞
    * @author KUN
-   *
    * @param {HookArg} hook
    * @param {{[jpy]:number}} extra_flag
    * @returns {Promise}
@@ -530,7 +531,6 @@ class CustomizedDaily {
 
   /**
    * @author 雞雞
-   *
    * @param {HookArg} hook
    */
   async out_shopping(hook) {
@@ -544,7 +544,6 @@ class CustomizedDaily {
 
   /**
    * @author 雞雞
-   *
    * @param {HookArg} hook
    */
   async out_station(hook) {
@@ -571,7 +570,6 @@ class CustomizedDaily {
 
   /**
    * @author 雞雞
-   *
    * @param {HookArg} hook
    */
   async school_atrium(hook) {

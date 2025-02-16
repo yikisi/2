@@ -4,6 +4,7 @@ const CustomizedMec = require('#/event/mec/mec-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
@@ -14,19 +15,31 @@ module.exports = class extends CustomizedMec {
     if (show_train_buff) {
       if (era.get('status:37:荣耀德比')) {
         ret.push({
-          color: buff_colors[1],
+          color: get_chara_color(this.id),
           content: '荣耀德比',
           title: '参赛时属性+50%',
         });
       }
       if (era.get('status:37:必行之事')) {
-        ret.push({ color: buff_colors[1], content: '必行之事' });
+        ret.push({
+          color: get_chara_color(this.id),
+          content: '必行之事',
+          title: '训练成功率+5%。',
+        });
       }
       if (era.get('status:37:虚弱')) {
-        ret.push({ color: buff_colors[0], content: '虚弱', key: '闪耀虚弱' });
+        ret.push({
+          color: buff_colors[0],
+          content: '虚弱',
+          title: '干劲上限下降一阶段。',
+        });
       }
       if (era.get('status:37:分心')) {
-        ret.push({ color: buff_colors[0], content: '分心', key: '闪耀分心' });
+        ret.push({
+          color: buff_colors[0],
+          content: '分心',
+          title: '训练成功率-5%。',
+        });
       }
     }
     return ret;

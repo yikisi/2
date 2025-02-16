@@ -14,6 +14,7 @@ const {
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const goto_sex = require('#/page/components/goto-sex');
+const take_care = require('#/page/components/take-care');
 const print_juel_shop_page = require('#/page/page-juel-shop');
 
 const { get_custom_check } = require('#/event/check/check-factory');
@@ -228,14 +229,26 @@ async function npc_common(
             }
           : undefined,
         era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes &&
+        era.get(`cflag:${chara.id}:可再次育成`) > 0
+          ? {
+              accelerator: 7,
+              config: { disabled: era.get(`relation:${chara.id}:0`) < 76 },
+              content:
+                era.get(`cflag:${chara.id}:照看`) > 0
+                  ? '切换照看角色'
+                  : '请求照看',
+              type: 'button',
+            }
+          : undefined,
+        era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes &&
         era.get(`exp:${chara.id}:性爱次数`) >
           era.get(`exp:${chara.id}:睡奸次数`)
-          ? { accelerator: 7, content: '提升对方性爱能力', type: 'button' }
+          ? { accelerator: 8, content: '提升对方性爱能力', type: 'button' }
           : undefined,
         era.get(`cflag:${chara.id}:爱慕暂拒`) &&
         era.get(`cflag:${chara.id}:爱慕暂拒`) === era.get(`love:${chara.id}`)
           ? {
-              accelerator: 8,
+              accelerator: 9,
               content: '重新触发爱慕事件',
               type: 'button',
             }
@@ -330,9 +343,12 @@ async function npc_common(
       }
       break;
     case 7:
-      await print_juel_shop_page(chara.id);
+      await take_care(chara);
       break;
     case 8:
+      await print_juel_shop_page(chara.id);
+      break;
+    case 9:
       era.set(`cflag:${chara.id}:爱慕暂拒`, 0);
       get_custom_check(chara.id).check_love_events();
       await era.printAndWait([

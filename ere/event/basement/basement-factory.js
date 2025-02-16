@@ -39,6 +39,6 @@ module.exports = {
         chara_id >= first_child_id ? get(`callname:${chara_id}:-2`) : chara_id,
       class_cons =
         cons_dict[script_dict[script_name] || script_name] || common_basement;
-    return (obj_dict[chara_id] = new class_cons(chara_id));
+    return (obj_dict[chara_id] = new class_cons(chara_id)).get_this();
   },
 };

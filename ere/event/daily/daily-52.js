@@ -1,6 +1,5 @@
 /**
  * @file 春乌拉拉 - 日常
- *
  * @author 99
  */
 const era = require('#/era-electron');

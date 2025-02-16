@@ -1,6 +1,5 @@
 /**
  * @file 第一红宝石 - 爱慕
- *
  * @author 梦露
  */
 const era = require('#/era-electron');

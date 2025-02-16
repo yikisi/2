@@ -1,7 +1,10 @@
 ﻿const era = require('#/era-electron');
 
 const get_status = require('#/system/chara/sys-get-status');
-const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_get_billings,
+  sys_reg_race,
+} = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const date_indicator = require('#/page/components/date-indicator');
@@ -12,7 +15,12 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { celebration_color, money_color } = require('#/data/color-const');
 const { attr_background_colors, trainer_colors } = require('#/data/const.json');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_celebration, get_trainer_title } = require('#/data/info-generator');
+const {
+  get_celebration,
+  get_trainer_level,
+  get_trainer_title,
+  get_trainer_train_buff,
+} = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { race_infos } = require('#/data/race/race-const');
 
@@ -97,7 +105,6 @@ function page_header(enable_race_info) {
       cur_coin = era.get('flag:当前马币'),
       cur_fame = era.get('flag:当前声望'),
       cur_rounds = era.get('flag:当前回合数'),
-      money_change = era.get('flag:收支'),
       race_characters = sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
         .map((e) => {
           const ret = sys_reg_race(e).curr;
@@ -109,7 +116,35 @@ function page_header(enable_race_info) {
         })
         .filter((e) => e.week === cur_rounds),
       title_level = get_trainer_title(),
-      trainer_title_color = trainer_colors[title_level.substring(0, 2)];
+      trainer_title_color = trainer_colors[title_level.substring(0, 2)],
+      trainer_buff = get_trainer_train_buff(),
+      money_buff = era.get('global:金钱加成'),
+      rec_trainers = [304, 306]
+        .filter((e) => era.get(`cflag:${e}:招募状态`) === recruit_flags.yes)
+        .map((e) => `[${era.get(`staticcstr:${e}:称号`)}]`)
+        .join('+');
+    let billings = '月账单：',
+      money_change = 0;
+    sys_get_billings().forEach((e, i) => {
+      if (e.repay !== 0 && e.timer > 0) {
+        let delta = e.repay;
+        if (delta > 0) {
+          delta = Math.floor((e.repay * (100 + money_buff)) / 100);
+        }
+        money_change += delta;
+        billings += `\n${delta > 0 ? '+' : ''}${delta}`;
+        switch (e.creditor) {
+          case -1:
+            billings += ' (月工资+年终奖)';
+            break;
+          case 0:
+            billings += ' (月工资)';
+            break;
+          default:
+            billings += ` (${era.get(`callname:${e.creditor}:-2`)}${i === 0 ? ' · 主要' : ''}${e.timer > 0 ? ` 余${e.timer}周` : ''})`;
+        }
+      }
+    });
     era.printInColRows(
       [{ type: 'divider' }],
       {
@@ -149,6 +184,7 @@ function page_header(enable_race_info) {
                 color: trainer_title_color,
                 content: title_level,
                 fontWeight: 'bold',
+                title: `[${title_level}]：${trainer_buff > 0 ? `指导训练时成功率与效果加成+${trainer_buff}%${rec_trainers.length > 0 ? ` (↑${rec_trainers})` : ''}，` : ''}担当赏金${4 * get_trainer_level() + 4}%分成。`,
               },
               ')',
               ...race_indicator(0),
@@ -163,18 +199,16 @@ function page_header(enable_race_info) {
                 content: cur_coin.toLocaleString(),
                 fontWeight: 'bold',
               },
+              money_change !== 0 ? ' ' : '',
               {
                 color: money_change > 0 ? 'palegreen' : 'orangered',
-                content: money_change
-                  ? ` (${money_change > 0 ? '+' : ''}${(money_change
-                      ? Math.floor(
-                          money_change * (1 + era.get('global:金钱加成') / 100),
-                        )
-                      : money_change
-                    ).toLocaleString()})`
-                  : '',
+                content:
+                  money_change !== 0
+                    ? `(${money_change > 0 ? '+' : ''}${money_change.toLocaleString()})`
+                    : '',
                 fontWeight: 'bold',
                 opacity: 0.5,
+                title: billings,
               },
               ' 马币',
             ],

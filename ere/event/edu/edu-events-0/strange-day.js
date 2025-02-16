@@ -40,7 +40,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
 module.exports = class extends MyPrivacyEvents {
   /**
    * @author 念来过倒要你
-   *
    * @param {CharaTalk} me
    * @param _me
    * @param _call
@@ -208,7 +207,6 @@ module.exports = class extends MyPrivacyEvents {
 
   /**
    * @author 念来过倒要你
-   *
    * @param {CharaTalk} me
    * @param _me
    * @param _call
@@ -265,7 +263,7 @@ module.exports = class extends MyPrivacyEvents {
           {
             accelerator: 1,
             config: { align: 'center', showAcc: false, width: 2 },
-            content: '窗户',
+            content: '窗',
             type: 'button',
           },
           {
@@ -349,16 +347,16 @@ module.exports = class extends MyPrivacyEvents {
           },
         ],
         [
-          { config: { width: 3 }, content: '墙墙墙墙墙', type: 'text' },
+          { config: { width: 3 }, content: '墙墙墙墙', type: 'text' },
           {
             accelerator: 6,
             config: { align: 'center', showAcc: false, width: 2 },
-            content: '大门',
+            content: '大 门',
             type: 'button',
           },
           {
             config: { align: 'right', width: 3 },
-            content: '墙墙墙墙墙',
+            content: '墙墙墙墙',
             type: 'text',
           },
         ],
@@ -655,7 +653,7 @@ module.exports = class extends MyPrivacyEvents {
         me.get_colored_name(),
         ' 看了一眼大门，思索着要不要换一个。',
       ]);
-      await say_by_passer_by_and_wait('门', '不关我的事。');
+      await say_by_passer_by_and_wait('门', '不关 我事。');
       await me.say_and_wait('……现在连装都不装一下？', true);
     }
     println();
@@ -773,7 +771,7 @@ module.exports = class extends MyPrivacyEvents {
     await printAndWait([
       me.get_colored_name(),
       ' 来到了 ',
-      target.get_colored_name(),
+      tachyon.get_colored_name(),
       ' 的实验室。',
     ]);
     if (is_tachyon_in_team) {

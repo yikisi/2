@@ -1,6 +1,5 @@
 /**
  * @file 卓芙 - 日常
- *
  * @author 梦露
  */
 const era = require('#/era-electron');

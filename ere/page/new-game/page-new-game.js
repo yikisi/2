@@ -36,7 +36,6 @@ const { attr_names } = require('#/data/train-const');
 
 /**
  * start a new game, set data
- *
  * @param {number} src_chara
  * @return {Promise<boolean|undefined>} if true, call main.js to call homepage
  */

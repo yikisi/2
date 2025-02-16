@@ -32,7 +32,7 @@ module.exports = class extends CustomizedMec {
     const ret_list = [];
     if (show_train_buff) {
       const { gad, dad } = new UraraEduMarks();
-      if (gad || dad) {
+      if (gad + dad > 0) {
         ret_list.push({
           color: get_chara_color(52),
           content: `回响(${gad + dad})`,

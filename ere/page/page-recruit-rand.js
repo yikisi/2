@@ -1,6 +1,11 @@
 ﻿const era = require('#/era-electron');
 
 const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
+const {
+  get_bust_size,
+  get_hip_size,
+  get_waist_size,
+} = require('#/system/ero/sys-calc-ero-status');
 const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
 const { get_image } = require('#/system/sys-calc-image');
 const filter_chara = require('#/system/sys-filter-chara');
@@ -16,9 +21,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
+const { get_chara_color } = require('#/data/chara-colors');
 const CharaSkills = require('#/data/chara-skills');
 const { adaptability_colors, el_danger_color } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
+const title_desc = require('#/data/desc/title-desc.json');
 const {
   chara_desc,
   chara_full_desc,
@@ -39,28 +46,32 @@ const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names, attr_names } = require('#/data/train-const');
-const {
-  get_bust_size,
-  get_hip_size,
-  get_waist_size,
-} = require('#/system/ero/sys-calc-ero-status');
 
 async function print_rec_page() {
   era.set('flag:当前位置', location_enum.playground);
   const me = get_chara_talk(0);
   let event_chara_list, flag_recruit, flag_leave;
 
-  const team_list = filter_chara('cflag', '招募状态', recruit_flags.yes);
+  const team_list = filter_chara('cflag', '招募状态', recruit_flags.yes),
+    stay_list = [
+      sys_get_star_premium_draw().chara,
+      era.get('flag:物色对象'),
+    ].filter((e) => e > 0);
   let today_list = gacha(
     filter_chara('cflag', '随机招募', 1).filter(
       (v) => !team_list.includes(v) && era.get(`cflag:${v}:成长阶段`) >= 2,
     ),
     5,
   );
-  today_list.push(sys_get_star_premium_draw().chara);
-  today_list = today_list
-    .filter((e, i, l) => e && l.indexOf(e) === i)
-    .sort((a, b) => a - b);
+  today_list.push(...stay_list);
+  today_list = today_list.filter((e, i, l) => e && l.indexOf(e) === i);
+  if (today_list.length > 6) {
+    today_list.splice(
+      today_list.findIndex((e) => stay_list.indexOf(e) === -1),
+      1,
+    );
+  }
+  today_list = today_list.sort((a, b) => a - b);
   await era.clear();
   print_page_header();
   era.drawLine();
@@ -78,8 +89,8 @@ async function print_rec_page() {
     const buffer = [];
     buffer.push([{ type: 'divider' }]);
     const cur_recruit = era.get('flag:物色对象');
-    today_list = today_list.filter((chara_id) =>
-      era.get(`cflag:${chara_id}:随机招募`),
+    today_list = today_list.filter(
+      (chara_id) => era.get(`cflag:${chara_id}:随机招募`) > 0,
     );
     if (today_list.length) {
       if (cur_recruit && today_list.indexOf(cur_recruit) === -1) {
@@ -280,7 +291,7 @@ async function print_rec_page() {
               ' ',
               {
                 content: chara_desc[characteristic + 3],
-                title: `${chara_desc[characteristic + 3]}：${chara_full_desc[characteristic + 3]}`,
+                title: `[${chara_desc[characteristic + 3]}]：${chara_full_desc[characteristic + 3]}。`,
               },
               ' ',
               sex_title[sex_code],
@@ -486,6 +497,23 @@ async function print_rec_page() {
                 type: 'text',
               };
             }),
+          {
+            config: {
+              content: `${name} 的专属称号`,
+              position: 'left',
+            },
+            type: 'divider',
+          },
+          ...get_custom_check(selected)
+            .get_personal_titles()
+            .map((e) => ({
+              content: [
+                { content: e, color: get_chara_color(selected) },
+                '：',
+                title_desc[e] || '在一次育成周期内赢取了六次以上的G1比赛胜利',
+              ],
+              type: 'text',
+            })),
         ],
         { width: 20 },
       );

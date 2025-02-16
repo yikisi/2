@@ -1,6 +1,5 @@
 /**
  * @file 调教地文 - 爱抚系3
- *
  * @author 天马闪光蹄
  * @author O口口口口口
  */
@@ -187,7 +186,6 @@ async function tail_job(attacker, defender, hook) {
 class EroNormalMakingOuts extends EroNormalMakingOuts2 {
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -198,7 +196,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -236,7 +233,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -285,7 +281,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -296,7 +291,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -329,7 +323,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -348,7 +341,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -359,7 +351,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -390,7 +381,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -410,7 +400,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -421,7 +410,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -459,7 +447,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -480,7 +467,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author 天马闪光蹄
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -516,7 +502,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author 天马闪光蹄
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -668,7 +653,6 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
 
   /**
    * @author 天马闪光蹄
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

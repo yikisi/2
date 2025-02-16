@@ -1,6 +1,5 @@
 /**
  * @file 特殊赛后事件口上
- *
  * @author 幽白書
  * @author 无名黑奴（临时）
  */
@@ -47,13 +46,16 @@ async function check_race_events(race, info, team_contestants) {
   const may_life_marks = new MayLifeMarks();
   let handler = undefined;
   if (team_contestants.findIndex((e) => e.rank.curr === 1) !== -1) {
-    if (race === race_enum.prix_lat) {
-      get('cflag:204:随机招募') <= 0 && add('cflag:204:随机招募', -1);
-    }
-    if (race === race_enum.prix_lat || race === race_enum.prix_dia) {
-      [205, 206].forEach(
-        (e) => !get(`cflag:${e}:随机招募`) && add(`cflag:${e}:随机招募`, -1),
-      );
+    switch (race) {
+      case race_enum.prix_lat:
+        if (get('cflag:204:招募状态') === 0 && get('cflag:204:随机招募') <= 0) {
+          add('cflag:204:随机招募', -1);
+        }
+      // eslint-disable-next-line no-fallthrough
+      case race_enum.prix_dia:
+        [205, 206].forEach(
+          (e) => !get(`cflag:${e}:随机招募`) && add(`cflag:${e}:随机招募`, -1),
+        );
     }
   }
   if (
@@ -66,7 +68,6 @@ async function check_race_events(race, info, team_contestants) {
   if (get('flag:初见URA颁奖') < 2) {
     /**
      * 乙名史悦子 - 初见
-     *
      * @author 无名黑奴
      */
     handler = async () => {
@@ -121,7 +122,6 @@ async function check_race_events(race, info, team_contestants) {
     new EtsukoLifeMarks().rape = 1;
     /**
      * 乙名史悦子 - 孕袋
-     *
      * @author 幽白書
      */
     handler = async () => {

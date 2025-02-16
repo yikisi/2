@@ -11,14 +11,14 @@ const {
   setHorizontalAlign,
 } = require('#/era-electron');
 
-const { run_custom_rec } = require('#/event/rec/rec-factory');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
-const { get_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
+
+const { run_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -31,10 +31,26 @@ const YandereList = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
-const era = require('#/era-electron');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
+
+handlers[204] = () =>
+  get('cflag:204:招募状态') === recruit_flags.yes
+    ? {}
+    : {
+        name: '「请来帮助我吧！」（招募）',
+        handle() {
+          set('cflag:204:招募状态', recruit_flags.yes);
+          if (get('talent:204:病娇')) {
+            new YandereList().push(204);
+          }
+          return printAndWait([
+            get_chara_talk(204).get_colored_name(),
+            ' 加入了队伍！',
+          ]);
+        },
+      };
 
 handlers[207] = () =>
   get('cflag:207:招募状态') === recruit_flags.yes || get('love:207') < 25
@@ -107,9 +123,9 @@ handlers[344] = () =>
     : {
         name: '「一起努力吧！」（招募）',
         handle() {
-          era.set('callname:344:-2', '都留歧凉花');
-          era.set('cflag:344:招募状态', recruit_flags.yes);
-          return era.printAndWait([
+          set('callname:344:-2', '都留歧凉花');
+          set('cflag:344:招募状态', recruit_flags.yes);
+          return printAndWait([
             get_chara_talk(344).get_colored_name(),
             ' 加入了队伍！',
           ]);
@@ -122,12 +138,12 @@ handlers[345] = () =>
     : {
         name: '「一起努力吧！」（招募）',
         handle() {
-          era.set('callname:345:-2', '砂糖灯');
-          era.set('cflag:345:招募状态', recruit_flags.yes);
+          set('callname:345:-2', '砂糖灯');
+          set('cflag:345:招募状态', recruit_flags.yes);
           if (get('talent:345:病娇')) {
             new YandereList().push(345);
           }
-          return era.printAndWait([
+          return printAndWait([
             get_chara_talk(345).get_colored_name(),
             ' 加入了队伍！',
           ]);
@@ -160,9 +176,7 @@ async function page_visitors() {
         ...visitor_list.map((e) => ({
           columns: [
             {
-              names: get_image(e)
-                .map((e) => `${e}_半身`)
-                .join('\t'),
+              names: `${get(`cstr:${e}:头像`)}_半身`,
               type: 'image.whole',
             },
             {

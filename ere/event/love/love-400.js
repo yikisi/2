@@ -1,6 +1,5 @@
 /**
  * @file 周日宁静 - 爱慕
- *
  * @author 黑衣剑士-星爆气流斩准备就绪
  */
 const era = require('#/era-electron');

@@ -1,0 +1,87 @@
+const UmaSkill = require('#/data/race/model/uma-skill');
+
+module.exports = new UmaSkill(
+  100791,
+  '『船桥最强！』',
+  '比赛中盘若在前方竞争，则比赛后半段短时间内速度提升；若是大井、川崎或者船桥赛场，则变为速度持续提升',
+  10079,
+  1,
+  UmaSkill.rarity_enum.spe_r,
+  18,
+  340,
+  [
+    (args) =>
+      args.phase === 1 &&
+      args.order_rate <= 50 &&
+      args.blocked_side_continuetime >= 2,
+    (args) =>
+      args.phase === 1 &&
+      args.order_rate <= 50 &&
+      args.blocked_side_continuetime >= 2,
+  ],
+  [
+    (args) =>
+      (args.distance_rate >= 50 && args.track_id === 10101) ||
+      (args.distance_rate >= 50 && args.track_id === 10103) ||
+      (args.distance_rate >= 50 && args.track_id === 10104),
+    (args) => args.distance_rate >= 50,
+  ],
+  [6, 4],
+  [500, 500],
+  [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+  ],
+  [
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+  ],
+  [
+    [0.35, 0, 0],
+    [0.35, 0, 0],
+  ],
+  [
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+  ],
+  [
+    [0, 0, 0],
+    [0, 0, 0],
+  ],
+  [1, 0],
+  [60, 0],
+  0,
+  0,
+  false,
+  false,
+  [],
+  [UmaSkill.ability_tag_enum.targetSpeed],
+);

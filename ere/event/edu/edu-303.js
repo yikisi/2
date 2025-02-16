@@ -1,6 +1,5 @@
 /**
  * @file 乙名史悦子 - 育成
- *
  * @author 雞雞
  * @author 无名黑奴
  */
@@ -182,7 +181,6 @@ module.exports = class extends CustomizedEdu {
   /**
    * @author 雞雞
    * @author 无名黑奴
-   *
    * @param {CharaTalk} etsuko
    * @param {CharaTalk} me
    */

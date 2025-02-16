@@ -24,7 +24,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     const wins_lists = [];
     let wins_list = [];
     race_list.forEach((e) => {
-      if (race_infos[e].race_class <= class_enum.G3) {
+      if (race_infos[e.race].race_class <= class_enum.G3) {
         if (e.rank === 1) {
           wins_list.push(e.race);
         } else {
@@ -35,7 +35,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
         }
       }
     });
-    if (wins_list.length !== 0) {
+    if (wins_list.length > 0) {
       wins_lists.push(wins_list);
     }
     for (const _l of wins_lists) {

@@ -90,7 +90,7 @@ async function sys_calc_orgasm(shown, ...ids) {
       const part = orgasm_check_list[i];
       const part_name = part_names[part];
       const { curr, max, old } = update_palam(chara_id, part, shown);
-      if (era.get(`tcvar:${chara_id}:高潮抑制`)) {
+      if (era.get(`tcvar:${chara_id}:高潮抑制`) > 0) {
         continue;
       }
       let amount = 0,
@@ -128,11 +128,12 @@ async function sys_calc_orgasm(shown, ...ids) {
           }
           Object.assign(tmp_cost, orgasm_cost.body);
           // 分泌液计算
-          if (part === part_enum.clitoris) {
-            if (era.get(`talent:${chara_id}:漏尿`)) {
-              era.set(`nowex:${chara_id}:放尿`, 1);
-            }
-          } else if (part === part_enum.breast) {
+          // if (part === part_enum.clitoris) {
+          //   if (era.get(`talent:${chara_id}:漏尿`) > 0) {
+          //     era.set(`nowex:${chara_id}:放尿`, 1);
+          //   }
+          // } else
+          if (part === part_enum.breast) {
             if (
               era.get(`talent:${chara_id}:乳头类型`) === 2 &&
               !era.get(`tcvar:${chara_id}:乳突`)
@@ -142,7 +143,7 @@ async function sys_calc_orgasm(shown, ...ids) {
             }
             if (
               era.get(`cflag:${chara_id}:性别`) - 1 &&
-              era.get(`talent:${chara_id}:泌乳`)
+              era.get(`talent:${chara_id}:泌乳`) > 0
             ) {
               // 余韵额外流20%
               amount = check_nipple_clamps(
@@ -229,10 +230,9 @@ async function sys_calc_orgasm(shown, ...ids) {
                 }
               }
             }
-
             if (cum_flag) {
               const stop_turn = era.get(`ex:${chara_id}:寸止`);
-              if (stop_turn) {
+              if (stop_turn > 0) {
                 // 寸止每多一个回合，体力消耗+10%
                 tmp_cost.stamina *= 1 + damage_from_stop * stop_turn;
                 era.set(`ex:${chara_id}:寸止`, 0);
@@ -272,9 +272,9 @@ async function sys_calc_orgasm(shown, ...ids) {
             set_stain(chara_id, part_enum.virgin, stain_enum.secretion);
             amount = 1;
             // 阴道高潮也会漏尿
-            if (era.get(`talent:${chara_id}:漏尿`)) {
-              era.set(`nowex:${chara_id}:放尿`, 1);
-            }
+            // if (era.get(`talent:${chara_id}:漏尿`)) {
+            //   era.set(`nowex:${chara_id}:放尿`, 1);
+            // }
           }
         }
         if (cum_flag) {
@@ -284,7 +284,10 @@ async function sys_calc_orgasm(shown, ...ids) {
           // 专门针对寸止的情况
           // 寸止时不计算高潮次数
           // 不管肉棒高潮了几次，只射一次精
-          era.add(`exp:${chara_id}:${part_name}高潮次数`, times);
+          era.add(
+            `exp:${chara_id}:${part_name}高潮次数`,
+            part === part_enum.penis ? 1 : times,
+          );
           orgasm_count += times;
           limited_count += part === part_enum.penis ? 1 : times;
           if (i < orgasm_check_list.length - 2) {
@@ -317,13 +320,13 @@ async function sys_calc_orgasm(shown, ...ids) {
         // 否则按照阈值计算分泌液
         // 淫系列特性使分泌液阈值减半
         if (part === part_enum.breast) {
-          if (era.get(`cflag:${chara_id}:性别`) - 1) {
+          if (era.get(`cflag:${chara_id}:性别`) !== 1) {
             const border =
               (max * palam_border.breast) /
               (1 +
                 0.5 * era.get(`talent:${chara_id}:淫乳`) +
                 0.5 * era.get(`tcvar:${chara_id}:发情`));
-            if (curr >= border || era.get(`ex:${chara_id}:喷奶阻碍`)) {
+            if (curr >= border || era.get(`ex:${chara_id}:喷奶阻碍`) > 0) {
               if (
                 era.get(`talent:${chara_id}:乳头类型`) === 2 &&
                 !era.get(`tcvar:${chara_id}:乳突`)
@@ -331,7 +334,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                 era.set(`tcvar:${chara_id}:乳突`, 1);
                 era.set(`nowex:${chara_id}:乳突`, 1);
               }
-              if (era.get(`talent:${chara_id}:泌乳`)) {
+              if (era.get(`talent:${chara_id}:泌乳`) > 0) {
                 amount = check_nipple_clamps(
                   chara_id,
                   (get_random_value(...secretion_amount.breast) *
@@ -383,7 +386,7 @@ async function sys_calc_orgasm(shown, ...ids) {
         last_supporter = era.get('tflag:前回助手');
       // 分泌之后进行接触部位的污渍判定
       // 以及增加对方经历
-      if (amount) {
+      if (amount > 0) {
         if (part === part_enum.penis) {
           if (
             (last_action === ero_hooks.ask_double_fuck ||
@@ -415,10 +418,10 @@ async function sys_calc_orgasm(shown, ...ids) {
                 ] *
                 (2 + 1 * (era.get(`tcvar:${chara_id}:余韵`) > 0))),
           );
-          if (nipple_orgasm_times) {
+          if (nipple_orgasm_times > 0) {
             if (
-              era.get(`status:${chara_id}:马跳S`) ||
-              era.get(`status:${chara_id}:沉睡`)
+              era.get(`status:${chara_id}:马跳S`) > 0 ||
+              era.get(`status:${chara_id}:沉睡`) > 0
             ) {
               // 昏睡时计算无自觉高潮
               era.add(`nowex:${chara_id}:无自觉乳头高潮`, nipple_orgasm_times);
@@ -426,6 +429,7 @@ async function sys_calc_orgasm(shown, ...ids) {
               // 清醒时计算普通高潮
               era.add(`nowex:${chara_id}:乳头高潮`, nipple_orgasm_times);
             }
+            limited_count += nipple_orgasm_times;
             orgasm_count += nipple_orgasm_times;
             tmp = Math.ceil(tmp / (7 - Math.min(nipple_orgasm_times, 6)));
             amount = era.add(`nowex:${chara_id}:喷奶量`, tmp);
@@ -640,13 +644,13 @@ async function sys_calc_orgasm(shown, ...ids) {
                   other_part === 100 ? last_supporter : 0,
                 );
               }
-            } else if (era.get(`tcvar:${chara_id}:避孕套`)) {
+            } else if (era.get(`tcvar:${chara_id}:避孕套`) > 0) {
               era.set(
                 `nowex:${chara_id}:射精量`,
                 -era.get(`nowex:${chara_id}:射精量`),
               );
             }
-            if (era.get(`tcvar:${chara_id}:避孕套`)) {
+            if (era.get(`tcvar:${chara_id}:避孕套`) > 0) {
               era.set(`tcvar:${chara_id}:避孕套`, 0);
               rollback_penis_stain(chara_id);
               set_stain(chara_id, part_enum.penis, stain_enum.semen);
@@ -671,11 +675,11 @@ async function sys_calc_orgasm(shown, ...ids) {
       }
     }
     // 只有在总快感不为零的情况下计算高潮
-    if (orgasm_count) {
+    if (orgasm_count > 0) {
       orgasm_count = Math.min(orgasm_count, 6);
+      era.set(`nowex:${chara_id}:TotalEX`, limited_count);
       limited_count = Math.min(limited_count, 6);
       era.add(`tcvar:${chara_id}:余韵`, 1 + Math.ceil((orgasm_count + 1) / 2));
-      era.set(`nowex:${chara_id}:TotalEX`, limited_count);
       if (limited_count > 1) {
         era.set(
           `nowex:${chara_id}:${

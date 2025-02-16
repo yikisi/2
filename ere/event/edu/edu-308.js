@@ -1,6 +1,5 @@
 /**
  * @file 光辉致意 - 育成
- *
  * @author 无名黑奴（临时）
  */
 const {
@@ -23,7 +22,6 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 module.exports = class extends CustomizedEdu {
   /**
    * @author 无名黑奴
-   *
    * @param {CharaTalk} hello
    * @param {CharaTalk} me
    */

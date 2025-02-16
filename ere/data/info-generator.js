@@ -120,7 +120,6 @@ const breast_talent_names = ['贫乳', '', '巨乳', '爆乳'];
 const title_desc = ['训练员', '马娘', '性奴', '孕袋'];
 
 /**
- *
  * @param {number} chara_id
  * @param {boolean} [show_true_bust]
  * @returns {string}
@@ -590,37 +589,25 @@ module.exports = {
   },
   get_talent: (chara_id) => {
     const yandere = era.get(`talent:${chara_id}:病娇`),
-      ret = get_custom_mec(chara_id)
-        .get_talents()
-        .map((e) => {
-          if (e.title && !e.title.startsWith('[')) {
-            e.title =
-              (e.content.startsWith('[') ? e.content : `[${e.content}]`) +
-              '：' +
-              e.title;
-          }
-          return e;
-        });
+      ret = get_custom_mec(chara_id).get_talents();
     if (
       era.get(`cflag:${chara_id}:父方角色`) === 308 ||
       era.get(`cflag:${chara_id}:母方角色`) === 308
     ) {
       ret.push({
         color: buff_colors[1],
-        content: '[梦之继承者]',
-        key: '梦之继承者',
+        content: '梦之继承者',
       });
     }
     if (yandere === 2 || (yandere > 0 && era.get('status:0:马语者'))) {
       ret.push({
         color: buff_colors[3],
-        content: '[病娇]',
-        key: '病娇',
+        content: '病娇',
         opacity: yandere / 2,
       });
     }
     if (era.get(`talent:${chara_id}:捉摸不透`)) {
-      ret.push('捉摸不透');
+      ret.push({ content: '捉摸不透' });
     }
     ret.push(
       ...new Array(18)
@@ -632,23 +619,20 @@ module.exports = {
           };
         })
         .filter((e) => e.val)
-        .map((e) => talent_names[e.id][(e.val + 1) / 2]),
+        .map((e) => ({
+          content: talent_names[e.id][(e.val + 1) / 2],
+        })),
     );
     return ret.map((e) => {
-      const { print_obj, key } =
-        e instanceof Object
-          ? { print_obj: e, key: e.key }
-          : {
-              print_obj: {
-                content: `[${e}]`,
-                display: 'inline-block',
-              },
-              key: e,
-            };
-      if (talent_desc[key]) {
-        print_obj.title = `[${key}]：${talent_desc[key]}`;
+      if (e.title === undefined) {
+        e.title = talent_desc[e.content];
       }
-      return print_obj;
+      e.content = `[${e.content}]`;
+      if (e.title !== undefined) {
+        e.title = `${e.content}：${e.title}`;
+      }
+      e.display = 'inline-block';
+      return e;
     });
   },
   get_talent_bust_size,
@@ -669,11 +653,13 @@ module.exports = {
     return `${title_level}${title_desc[era.get('flag:惩戒力度')]}`;
   },
   get_trainer_train_buff(chara_id) {
-    const relation = chara_id ? era.get(`relation:${chara_id}:0`) : 225;
-    if (relation <= -100) {
-      return -5;
-    } else if (relation < 0) {
-      return -2.5;
+    const relation = chara_id > 0 ? era.get(`relation:${chara_id}:0`) : 225;
+    if (chara_id > 0) {
+      if (relation <= -100) {
+        return -5;
+      } else if (relation < 0) {
+        return -2.5;
+      }
     }
     let level = get_trainer_level(),
       ret = 0;
@@ -683,12 +669,14 @@ module.exports = {
           (era.get('cflag:304:招募状态') === recruit_flags.yes) +
           (era.get('cflag:306:招募状态') === recruit_flags.yes)
       ] ?? 0;
-    if (relation > 525) {
-      ret += 2.5;
-    } else if (relation > 375) {
-      ret += 1;
-    } else if (relation < 225) {
-      ret *= relation / 225;
+    if (chara_id > 0) {
+      if (relation > 525) {
+        ret += 2.5;
+      } else if (relation > 375) {
+        ret += 1;
+      } else if (relation < 225) {
+        ret *= relation / 225;
+      }
     }
     return ret;
   },

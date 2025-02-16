@@ -1,6 +1,5 @@
 /**
  * @file 育成地文
- *
  * @author 雞雞
  * @author 幽白書
  * @author 无名黑奴
@@ -49,7 +48,6 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    */
@@ -134,7 +132,6 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    */
@@ -360,7 +357,6 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -383,7 +379,6 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -413,7 +408,6 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -436,7 +430,6 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -460,7 +453,6 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -494,7 +486,6 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -511,7 +502,6 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {number} attr
    * @returns {Promise}
    */
@@ -570,7 +560,6 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -767,7 +756,6 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   *
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname

@@ -1,6 +1,5 @@
 /**
  * @file 曼城茶座 - 调教
- *
  * @author Necroz
  * @author 幽白書
  */
@@ -25,7 +24,7 @@ module.exports = class extends CustomizedEro {
       sys_check_awake(0) &&
       era.getCharactersInTrain().indexOf(25) !== -1 &&
       era.getCharactersInTrain().indexOf(32) !== -1 &&
-      era.get('talent:32:绿帽癖')
+      era.get('talent:32:绿帽癖') > 0
     ) {
       const coffee = get_chara_talk(25),
         c_call_m = sys_get_colored_callname(25, 0),

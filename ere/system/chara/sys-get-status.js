@@ -22,47 +22,37 @@ const { pressure_border, train_buff_info } = require('#/data/train-const');
  * @param {number} chara_id
  * @returns {{content:string,[color]:string,display:string,[opacity]:number}[]}
  */
-
 function sys_get_status(chara_id) {
   const status_list = [],
-    sex_equip = era.get(`equip:${chara_id}:淫纹奴役`),
     show_train_buff =
       era.get(`cflag:${chara_id}:种族`) &&
       (chara_id === 0 || era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48);
   if (era.get(`mark:${chara_id}:淫纹`) === 3) {
-    const obj = {
-      color: buff_colors[2],
-      content: slavery_titles[sex_equip],
-      fontWeight: 'bold',
-    };
-    if (!chara_id) {
+    const sex_equip = era.get(`equip:${chara_id}:淫纹奴役`),
+      obj = {
+        color: buff_colors[2],
+        content: slavery_titles[sex_equip],
+        fontWeight: 'bold',
+      };
+    if (chara_id === 0) {
       obj.title = sex_equip
-        ? '[繁殖用母马]：现役孕袋，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱、生下孩子时获得声望，子代参赛声望奖励+100%'
-        : '[泄欲用母马]：现役性奴，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱时获得声望';
+        ? '现役孕袋，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱、生下孩子时获得声望，子代参赛声望奖励+100%。'
+        : '现役性奴，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱时获得声望。';
     }
     status_list.push(obj);
   }
-  status_list.push(
-    ...get_custom_mec(chara_id)
-      .get_status(show_train_buff)
-      .map((e) => {
-        if (e.title && !e.title.startsWith('[')) {
-          e.title = `[${e.content}]：${e.title}`;
-        }
-        return e;
-      }),
-  );
+  status_list.push(...get_custom_mec(chara_id).get_status(show_train_buff));
   era.get(`status:${chara_id}:生日`) &&
     status_list.push({
       color: buff_colors[1],
       content: '生日！',
-      key: '生日',
+      title: status_desc['生日'],
     });
   era.get(`status:${chara_id}:领域`) &&
     status_list.push({
       color: buff_colors[1],
       content: '领域！',
-      key: '领域',
+      title: status_desc['领域'],
     });
   era.get(`status:${chara_id}:健康茶`) &&
     status_list.push({
@@ -80,13 +70,13 @@ function sys_get_status(chara_id) {
     status_list.push({
       color: buff_colors[3],
       content: '崩溃！',
-      key: '崩溃',
+      title: status_desc['崩溃'],
     });
   } else if (pressure >= pressure_border.depression) {
     status_list.push({
       color: buff_colors[3],
       content: '抑郁！',
-      key: '抑郁',
+      title: status_desc['抑郁'],
     });
   } else if (pressure >= pressure_border.apprehension) {
     status_list.push({ color: buff_colors[3], content: '忧虑' });
@@ -101,7 +91,7 @@ function sys_get_status(chara_id) {
         color: get_chara_color(340),
         content: '女神之望',
         fontWeight: check ? 'bold' : '',
-        title: `[女神之望]：速度与力量训练效果+${check}%`,
+        title: `速度与力量训练效果+${check}%。`,
       });
     }
     if (era.get('cflag:341:招募状态') === recruit_flags.yes) {
@@ -110,7 +100,7 @@ function sys_get_status(chara_id) {
         color: get_chara_color(341),
         content: '女神之爱',
         fontWeight: check ? 'bold' : '',
-        title: `[女神之爱]：智力与技能点数训练效果+${check}%`,
+        title: `智力与技能点数训练效果+${check}%。`,
       });
     }
     if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
@@ -119,7 +109,7 @@ function sys_get_status(chara_id) {
         color: get_chara_color(342),
         content: '女神之信',
         fontWeight: check ? 'bold' : '',
-        title: `[女神之信]：耐力与根性训练效果+${check}%`,
+        title: `耐力与根性训练效果+${check}%。`,
       });
     }
     const train_buff = era.get(`status:${chara_id}:练习X手`);
@@ -148,7 +138,7 @@ function sys_get_status(chara_id) {
     status_list.push({
       color: buff_colors[3],
       content: `伤病(${hurt})`,
-      key: '伤病',
+      title: status_desc['伤病'],
       opacity: hurt > 1 ? 1 : 0.5,
     });
   }
@@ -157,7 +147,7 @@ function sys_get_status(chara_id) {
     status_list.push({
       color: buff_colors[0],
       content: `疲惫(${tired})`,
-      key: '疲惫',
+      title: status_desc['疲惫'],
       opacity: tired > 1 ? 1 : 0.5,
     });
   }
@@ -165,31 +155,41 @@ function sys_get_status(chara_id) {
     const status_id = 7 + i,
       status_name = era.get(`statusname:${status_id}`),
       num = era.get(`status:${chara_id}:${status_id}`);
-    if (num) {
+    if (num > 0) {
       status_list.push({
         color: buff_colors[0],
         content: `${status_name}(${num})`,
-        key: status_name,
+        title: status_desc[status_name],
       });
     }
   });
-  if (era.get(`status:${chara_id}:发胖`)) {
+  if (era.get(`status:${chara_id}:发胖`) > 0) {
     status_list.push({ color: buff_colors[0], content: '发胖' });
   }
-  if (era.get(`status:${chara_id}:偏头痛`)) {
+  const headache = era.get(`status:${chara_id}:偏头痛`);
+  if (headache > 0) {
     status_list.push({ color: buff_colors[0], content: '偏头痛' });
   }
-  if (era.get(`status:${chara_id}:发情`)) {
+  if (
+    hurt + tired + headache > 0 &&
+    era.get('cflag:305:招募状态') === recruit_flags.yes
+  ) {
+    status_list.push({
+      color: get_chara_color(305),
+      content: '针灸疗养',
+    });
+  }
+  if (era.get(`status:${chara_id}:发情`) > 0) {
     status_list.push({
       color: buff_colors[2],
       content: '特别假期',
     });
-  } else if (era.get(`status:${chara_id}:经期`)) {
+  } else if (era.get(`status:${chara_id}:经期`) > 0) {
     status_list.push({ color: buff_colors[0], content: '经期' });
   }
   if (
-    era.get(`mark:${chara_id}:淫纹`) &&
-    era.get(`status:${chara_id}:排卵期`)
+    era.get(`mark:${chara_id}:淫纹`) > 0 &&
+    era.get(`status:${chara_id}:排卵期`) > 0
   ) {
     status_list.push({
       color: buff_colors[2],
@@ -214,13 +214,13 @@ function sys_get_status(chara_id) {
     });
   }
   if (
-    era.get(`cflag:${chara_id}:性别`) - 1 &&
+    era.get(`cflag:${chara_id}:性别`) !== 1 &&
     era.get(`cflag:${chara_id}:成长阶段`) >= 2 &&
-    era.get(`talent:${chara_id}:泌乳`) &&
-    (!chara_id ||
+    era.get(`talent:${chara_id}:泌乳`) > 0 &&
+    (chara_id === 0 ||
       era.getCharactersInTrain().length > 0 ||
-      era.get('status:0:马语者') ||
-      era.get('status:0:透视镜片') ||
+      era.get('status:0:马语者') > 0 ||
+      era.get('status:0:透视镜片') > 0 ||
       era.get(`exp:${chara_id}:性爱次数`) > era.get(`exp:${chara_id}:睡奸次数`))
   ) {
     status_list.push({ color: buff_colors[2], content: '泌乳' });
@@ -230,7 +230,7 @@ function sys_get_status(chara_id) {
     status_list.push({
       color: buff_colors[2],
       content: '焦躁！',
-      key: '焦躁',
+      title: status_desc['焦躁'],
     });
   } else if (lust >= lust_border.absent_mind) {
     status_list.push({ color: buff_colors[2], content: '情动' });
@@ -251,20 +251,19 @@ function sys_get_status(chara_id) {
     status_list.push({
       color: buff_colors[2],
       content: '克制！',
-      key: '爱意克制',
+      title: status_desc['爱意克制'],
     });
   }
   sys_get_item_status(chara_id, status_list);
   return status_list.map((e) => {
-    e.display = 'inline-block';
-    if (!e.title) {
-      let temp;
-      if ((temp = status_desc[e.key || e.content])) {
-        e.title = `[${e.content}]：${temp}`;
-      }
-      delete e.key;
+    if (e.title === undefined) {
+      e.title = status_desc[e.content];
     }
     e.content = `[${e.content}]`;
+    if (e.title !== undefined) {
+      e.title = `${e.content}：${e.title}`;
+    }
+    e.display = 'inline-block';
     return e;
   });
 }

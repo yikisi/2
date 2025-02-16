@@ -10,7 +10,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedMec {
   init_love() {
-    if (sys_personal_achievement.get(340)) {
+    if (sys_personal_achievement.get(this.id)) {
       set('love:340', 50);
     }
   }
@@ -35,9 +35,9 @@ module.exports = class extends CustomizedMec {
     return [
       {
         color: get_chara_color(this.id),
-        content: '[望]',
+        content: '望',
         fontWeight: title_check ? 'bold' : '',
-        title: `队伍成员速度与力量训练效果+${title_check ? 100 : 50}%`,
+        title: `队伍成员速度与力量训练效果+${title_check ? 100 : 50}%。`,
       },
     ];
   }

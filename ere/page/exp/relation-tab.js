@@ -44,7 +44,7 @@ module.exports = {
       Object.entries(era.get(`relation:${chara.id}`)).forEach((e) => {
         const mark = get_relation_mark(e[1], chara.id),
           target = Number(e[0]);
-        if (target !== my_src_chara) {
+        if (target !== my_src_chara && target < 1000) {
           relation_info_list.push({
             config: { width: 8 },
             content: [
@@ -65,6 +65,28 @@ module.exports = {
         content: chara.id ? '没有在意的角色……' : '——',
         type: 'text',
       });
+    }
+    const teach_chara = era.get(`cflag:${chara.id}:照看`);
+    if (teach_chara > 0) {
+      if (era.get(`cflag:${chara.id}:可再次育成`) > 0) {
+        relation_info_list.push({
+          content: [
+            '照看 ',
+            get_chara_talk(teach_chara).get_colored_name(),
+            ' 中……',
+          ],
+          type: 'text',
+        });
+      } else if (era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48) {
+        relation_info_list.push({
+          content: [
+            '被 ',
+            get_chara_talk(teach_chara).get_colored_name(),
+            ' 照看中……',
+          ],
+          type: 'text',
+        });
+      }
     }
 
     const father_id = era.get(`cflag:${chara.id}:父方角色`),

@@ -10,11 +10,12 @@ const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 class CustomizedMec {
-  /** @type {number} */
-  id;
-
   constructor(chara_id) {
     this.id = chara_id;
+  }
+
+  get_this() {
+    return this;
   }
 
   init_love() {
@@ -182,7 +183,7 @@ class CustomizedMec {
 
   /**
    * @param {boolean} show_train_buff - if shows the train buff
-   * @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]}
+   * @returns {({[color]:string,content:string,[fontWeight]:string,[title]:string})[]}
    */
   // eslint-disable-next-line no-unused-vars
   get_status(show_train_buff) {
@@ -193,7 +194,18 @@ class CustomizedMec {
     return 0;
   }
 
-  /** @returns {({[color]:string,content:string,[fontWeight]:string,[key]:string,[title]:string}|string)[]} */
+  /**
+   * 照看其他角色自主训练时的额外加成
+   * @param {number} chara_id 被照看者的ID
+   * @param {number} attr 训练项目
+   * @returns {number}
+   */
+  // eslint-disable-next-line no-unused-vars
+  get_take_care_buff(chara_id, attr) {
+    return 0;
+  }
+
+  /** @returns {({[color]:string,content:string,[fontWeight]:string,[title]:string})[]} */
   get_talents() {
     return [];
   }

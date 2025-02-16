@@ -1,6 +1,5 @@
 /**
  * @file 曼城茶座 - 日常
- *
  * @author Necroz
  */
 const era = require('#/era-electron');

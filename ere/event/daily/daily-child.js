@@ -1,6 +1,5 @@
 /**
  * @file 日常地文 - 孩子
- *
  * @author 雞雞
  * @author 无名黑奴
  */
@@ -347,7 +346,7 @@ class DailyChild extends CustomizedDaily {
       }
       await chara.say_and_wait([
         sys_get_colored_callname(this.id, 0),
-        '我的身体感觉有点不对劲……那个，',
+        '……我的身体感觉有点不对劲……那个，',
         get_random_entry(temp),
       ]);
     } else if (

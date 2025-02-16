@@ -461,7 +461,7 @@ module.exports = class extends Edu3UntilWeekEnd {
         sys_change_fame(10);
         sys_change_money(300);
       }
-    } else if (event_arg === 143 + 9 && !era.get('cflag:3:可再次育成')) {
+    } else if (event_arg === 143 + 9) {
       await CustomizedEdu.common_palace(teio, me);
       await CustomizedEdu.common_palace_relation(teio, me);
       era.println();

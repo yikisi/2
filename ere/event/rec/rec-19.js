@@ -1,6 +1,5 @@
 /**
  * @file 爱丽数码 - 招募
- *
  * @author 片手虾好评发售中！
  */
 const era = require('#/era-electron');

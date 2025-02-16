@@ -1,6 +1,5 @@
 /**
  * @file 达利阿拉伯 - 招募
- *
  * @author O口口口口口
  */
 const { printAndWait, println, set } = require('#/era-electron');

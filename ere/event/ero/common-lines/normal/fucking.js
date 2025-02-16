@@ -1,6 +1,5 @@
 /**
  * @file 调教地文 - 性交系
- *
  * @author O口口口口口
  */
 const era = require('#/era-electron');
@@ -545,7 +544,6 @@ async function common_ask_stimulate_hole(attacker, defender, hook) {
 class EroNormalFucking extends EroFucking {
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -556,7 +554,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -567,7 +564,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -578,7 +574,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -589,7 +584,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -600,7 +594,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -611,7 +604,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -622,7 +614,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -633,7 +624,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -644,7 +634,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -655,7 +644,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -666,7 +654,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -677,7 +664,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -692,7 +678,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -707,7 +692,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -720,7 +704,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -733,7 +716,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -744,7 +726,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -755,7 +736,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -766,7 +746,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -777,7 +756,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -788,7 +766,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -799,7 +776,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -830,7 +806,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -864,7 +839,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -875,7 +849,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -886,7 +859,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -897,7 +869,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -908,7 +879,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -919,7 +889,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -930,7 +899,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -941,7 +909,6 @@ class EroNormalFucking extends EroFucking {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

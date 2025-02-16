@@ -1,6 +1,5 @@
 /**
  * @file 调教地文 - 爱抚系2
- *
  * @author O口口口口口
  */
 const era = require('#/era-electron');
@@ -308,7 +307,6 @@ async function tit_job(attacker, defender, hook) {
 module.exports = class extends EroNormalMakingOuts1 {
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -348,7 +346,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -401,7 +398,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -426,7 +422,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -437,7 +432,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -469,7 +463,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -492,7 +485,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -503,7 +495,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -529,7 +520,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -546,7 +536,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -557,7 +546,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -592,7 +580,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -614,7 +601,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -625,7 +611,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -654,7 +639,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -671,7 +655,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -686,7 +669,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -701,7 +683,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -727,7 +708,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -742,7 +722,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -767,7 +746,6 @@ module.exports = class extends EroNormalMakingOuts1 {
 
   /**
    * @author O口口口口口
-   *
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

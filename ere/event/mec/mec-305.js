@@ -7,8 +7,8 @@ module.exports = class extends MecNpc {
     return [
       {
         color: get_chara_color(this.id),
-        content: '[针炙名师]',
-        title: '加快队伍成员偏头痛、伤病和疲惫恢复，且更不容易偏头痛',
+        content: '针炙名师',
+        title: '加快队伍成员偏头痛、伤病和疲惫恢复，且更不容易偏头痛。',
       },
     ];
   }

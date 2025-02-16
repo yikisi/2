@@ -4,6 +4,10 @@ class ICustomizedEdu {
     this.id = chara_id;
   }
 
+  get_this() {
+    return this;
+  }
+
   /**
    * @param {CharaTalk} chara
    * @param {CharaTalk} me

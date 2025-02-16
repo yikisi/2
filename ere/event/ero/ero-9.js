@@ -1,6 +1,5 @@
 /**
  * @file 大和赤骥 - 调教
- *
  * @author 无名黑奴
  */
 const era = require('#/era-electron');

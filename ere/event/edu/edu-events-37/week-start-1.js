@@ -517,7 +517,7 @@ module.exports = (handlers) => {
 
   handlers[47 + 18] = async (flash, your_name) => {
     const mr_cb = get_chara_talk(57);
-    await print_event_name('经验之谈 · 三 ', flash);
+    await print_event_name('经验之谈 · 三', flash);
     await flash.say_and_wait(`三冠赛${flash.get_uma_sex_title()}啊……`);
     await flash.say_and_wait(
       '不，我并不害怕。就像您说的那样，这是一个难得的机会，我必须要去把握住。',
@@ -545,8 +545,9 @@ module.exports = (handlers) => {
     await mr_cb.say_and_wait(
       '已经可以预料到会是一场很尽兴的比赛了，我可不会放水的哦。',
     );
+    const pseudo = sys_get_chara_pseudo(37);
     await simulation_game_in_event(
-      sys_get_chara_pseudo(37),
+      pseudo,
       [
         new PseudoUma(
           57,
@@ -563,20 +564,58 @@ module.exports = (handlers) => {
       ],
       race_enum.toky_yus,
     );
-    await era.printAndWait(
-      `千明代表是闪光系列赛中久负盛名的前辈。无论是实力还是经验，毫无疑问，作为三冠之王的${flash.sex}都全方面的超越了荣进闪耀。`,
-    );
-    await era.printAndWait(
-      `因此，后者的落败从一开始便在 ${your_name} 的意料之中。`,
-    );
-    await flash.say_and_wait('呼……是我输了呢。');
-    era.printButton('「辛苦了。」', 1);
-    await era.input();
-    await era.printAndWait(
-      `不过话虽如此，但是在比赛的中途被千明代表超越之后，荣进闪耀的那份锲而不舍，直到最终的结果出来之前都在不懈追逐，意图想将胜利重新握于自己手中的坚韧精神也令 ${your_name} 颇为动容。`,
-    );
-    await mr_cb.say_and_wait('哈哈哈。');
-    await era.printAndWait(`也许，可能还不只是 ${your_name}。`);
+    await era.printAndWait([
+      mr_cb.get_colored_name(),
+      ' 是赛',
+      flash.get_uma_sex_title(),
+      '这一职业中久负盛名的前辈。无论是实力还是经验，毫无疑问，作为三冠之王的',
+      flash.sex,
+      '都全方面的超越了 ',
+      flash.get_colored_name(),
+      '。',
+    ]);
+    if (pseudo.rank.curr === 1) {
+      await era.printAndWait(
+        '话虽如此，但比赛的胜利，从来都不只取决于这些浮于表面的因素。',
+      );
+      await flash.say_and_wait('呼……我……赢了？');
+      era.printButton('「干得漂亮！」', 1);
+      await era.input();
+      await era.printAndWait([
+        '在比赛的过程中，',
+        flash.get_colored_name(),
+        ' 展现出了相当强烈的求胜欲望，即便途中被 ',
+        mr_cb.get_colored_name(),
+        ' 逼近，缠斗甚至超越数次，',
+        flash.sex,
+        '也仍锲而不舍地重新组织攻势，最终正是这份坚韧的精神改写了看似无望的结果，将胜利掌握在手中。',
+      ]);
+      await mr_cb.say_and_wait('哈哈哈哈，真的太有意思了。');
+      await era.printAndWait([
+        mr_cb.get_colored_name(),
+        ' 哈哈大笑，虽然尝到败果，但',
+        mr_cb.sex,
+        '却显得比之前更为兴奋。',
+      ]);
+    } else {
+      await era.printAndWait(
+        `因此，后者的落败从一开始便在 ${your_name} 的意料之中。`,
+      );
+      await flash.say_and_wait('呼……是我输了呢。');
+      era.printButton('「辛苦了。」', 1);
+      await era.input();
+      await era.printAndWait([
+        '不过话虽如此，但是在比赛的中途被 ',
+        mr_cb.get_colored_name(),
+        ' 超越之后，',
+        flash.get_colored_name(),
+        ' 的那份锲而不舍，直到最终的结果出来之前都在不懈追逐，意图想将胜利重新握于自己手中的坚韧精神也令 ',
+        your_name,
+        ' 颇为动容。',
+      ]);
+      await mr_cb.say_and_wait('哈哈哈。');
+      await era.printAndWait(`甚至，可能还不只是 ${your_name}。`);
+    }
     await mr_cb.say_and_wait('这份求胜的欲望，还真是强烈啊。');
     await mr_cb.say_and_wait(
       `连我都感受到了……果然，荣进闪耀，你让我很开心哦。`,

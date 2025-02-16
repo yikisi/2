@@ -1,6 +1,5 @@
 /**
  * @file 调教指令 - 强奸沟通系
- *
  * @author ALEX
  */
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
