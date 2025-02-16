@@ -1,6 +1,6 @@
 const { mkdirSync, readFileSync, rmSync, writeFileSync } = require('fs');
 
-rmSync('public', { force: true });
+rmSync('public', { force: true, recursive: true });
 mkdirSync('public');
 
 const min_version = readFileSync('.ere-min-version', 'utf-8')

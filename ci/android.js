@@ -45,7 +45,7 @@ webpack(config, (err, stats) => {
     // zip 格式基本上被大部分手机支持
     const game_dir = resolve(process.env.GAME_BUNDLE_DIR),
       bundle_zip = resolve(process.env.GAME_BUNDLE_ZIP);
-    rmSync(game_dir, { recursive: true, force: true });
+    rmSync(game_dir, { force: true, recursive: true });
     renameSync('./dist', game_dir);
     rmSync(bundle_zip, { force: true });
     const zip_file = archiver('zip-encrypted', {
