@@ -79,7 +79,7 @@ function get_train_bonus(chara_id, attr, between_weeks) {
  * @param {number} train_level
  * @param {{stamina:number,time:number}} train_cost
  * @param {{attr_change:number[],pt_change:number}} changes
- * @param {{teach_chara:number}} [between_weeks]
+ * @param {{[buff]:number,[teach_chara]:number}} [between_weeks]
  */
 function get_success_base_reward(
   chara_id,
@@ -94,18 +94,24 @@ function get_success_base_reward(
   let train_buff =
     get_train_bonus(chara_id, attr, between_weeks) +
     10 * (era.get(`cflag:${chara_id}:位置`) === location_enum.beach);
-  if (between_weeks !== undefined && between_weeks.teach_chara > 0) {
-    train_buff +=
-      Math.max(
-        era.get(`cflag:${between_weeks.teach_chara}:${attr_names[attr]}加成`) ||
+  if (between_weeks !== undefined) {
+    if (between_weeks.teach_chara > 0) {
+      train_buff +=
+        Math.max(
+          era.get(
+            `cflag:${between_weeks.teach_chara}:${attr_names[attr]}加成`,
+          ) || 0,
           0,
-        0,
-      ) +
-      get_custom_mec(between_weeks.teach_chara).get_take_care_buff(
-        chara_id,
-        attr,
-      ) +
-      50;
+        ) +
+        get_custom_mec(between_weeks.teach_chara).get_take_care_buff(
+          chara_id,
+          attr,
+        ) +
+        50;
+    }
+    if (between_weeks.buff !== undefined) {
+      train_buff += between_weeks.buff;
+    }
   }
 
   base_inc *= (100 + train_buff) / 100;
