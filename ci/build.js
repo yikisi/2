@@ -26,8 +26,8 @@ execSync('git lfs pull', { cwd: engine_path });
 execSync('npm install', { cwd: engine_path });
 execSync('npm run win:pack', { cwd: engine_path });
 
-rmSync(game_dir, { force: true });
-renameSync(join(engine_path, 'win-unpacked'), game_dir);
+rmSync(game_dir, { force: true, recursive: true });
+renameSync(join(engine_path, 'dist_electron', 'win-unpacked'), game_dir);
 mkdirSync(join(game_dir, 'game'));
 ['ere', 'csv', 'CHANGELOG.md', 'RELEASE.md'].forEach((d) =>
   copySync(join(work_dir, d), join(game_dir, 'game', d)),
@@ -47,7 +47,7 @@ function clean_json(p) {
   });
 }
 
-clean_json(join(game_dir, 'ere'));
+clean_json(join(game_dir, 'game', 'ere'));
 rmSync(game_zip, { force: true });
 switch (os.platform()) {
   case 'linux':
