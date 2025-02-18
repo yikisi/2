@@ -335,6 +335,14 @@ const race_enum = {
   usa_oks: 0,
   // 阪神杯
   hans_cup: 0,
+  // 迪拜世界杯
+  duba_cup: 0,
+  // 迪拜金莎轩锦标
+  duba_sha: 0,
+  // 迪拜司马经典赛
+  duba_cls: 0,
+  // 迪拜草地大赛
+  duba_tur: 0,
 };
 Object.keys(race_enum).forEach((e, i) => (race_enum[e] = i));
 
@@ -507,6 +515,10 @@ race_infos[race_enum.toky_dai] = require('#/data/race/g1/race-toky-dai');
 race_infos[race_enum.arim_kin] = require('#/data/race/g1/race-arim-kin');
 race_infos[race_enum.usa_oks] = require('#/data/race/g1/race-usa-oks');
 race_infos[race_enum.hans_cup] = require('#/data/race/g2/race-hans-cup');
+race_infos[race_enum.duba_cup] = require('#/data/race/g1/race-duba-cup');
+race_infos[race_enum.duba_sha] = require('#/data/race/g1/race-duba-sha');
+race_infos[race_enum.duba_cls] = require('#/data/race/g1/race-duba-cls');
+race_infos[race_enum.duba_tur] = require('#/data/race/g1/race-duba-tur');
 
 race_infos.forEach((e) => {
   const param_id = e.param_id;

@@ -37,6 +37,19 @@ const {
   track2location,
 } = require('#/data/race/race-location');
 
+const track2race = {
+  [track_enum.meydan]: {
+    color: adaptability_colors.at(-2 - class_enum.G1),
+    content: '迪拜世界杯赛马日',
+    fontWeight: 'bold',
+  },
+  [track_enum.shatin]: {
+    color: adaptability_colors.at(-2 - class_enum.G1),
+    content: '香港国际赛事',
+    fontWeight: 'bold',
+  },
+};
+
 /**
  * @param {number} chara_id
  * @param {string} language
@@ -136,13 +149,7 @@ async function check_new_activities(cur_round, in_team_list) {
       info = race_infos[race],
       location = track2location[info.track],
       race_colored_name =
-        info.track === track_enum.shatin
-          ? {
-              color: adaptability_colors.at(-2 - class_enum.G1),
-              content: '香港国际赛事',
-              fontWeight: 'bold',
-            }
-          : info.get_colored_name_with_class();
+        track2race[info.track] || info.get_colored_name_with_class();
     if (entry[1]) {
       // 远征开始
       let foreign_list = in_team_list.filter((e) => {

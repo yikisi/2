@@ -61,6 +61,8 @@ const location_enum = {
   trainer: 0,
   // 访客接待室
   visitor: 0,
+  // 迪拜
+  dubai: 0,
 };
 Object.keys(location_enum).forEach((k, i) => (location_enum[k] = i));
 
@@ -96,6 +98,7 @@ location_name[location_enum.god] = '三女神像';
 location_name[location_enum.trainer] = '训练员办公室';
 location_name[location_enum.visitor] = '访客接待室';
 location_name[location_enum.clinic] = '保健室';
+location_name[location_enum.dubai] = '保健室';
 
 module.exports = {
   location_enum,
