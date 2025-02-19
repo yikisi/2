@@ -5,7 +5,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const { ability_usage_enum } = require('#/data/race/model/uma-skill');
 const { frame_rate } = require('#/data/race/race-sim-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
-const { adaptability_names } = require('#/data/train-const');
+const { adaptability_names, attr_enum } = require('#/data/train-const');
 
 const fron_cols = 4,
   progress_width = 24 - 10 - 2 * fron_cols - 1,
@@ -327,6 +327,7 @@ module.exports = {
    * @param {PseudoUma} uma
    */
   simulate_ability_usage(skill, i, j, uma) {
+    let temp;
     switch (skill.data.ability_value_usages[i][j]) {
       case ability_usage_enum.MultiplySkillNum:
         skill.values[i][j] =
@@ -386,12 +387,26 @@ module.exports = {
           Math.min(uma.race.conditionParams.activate_count_all * 0.01, 0.15);
         break;
       case ability_usage_enum.MultiplyBaseSpeedForAcc:
-        skill.values[i][j] =
-          skill.data.ability_values[i][j] + uma.base.accBuffFromWiz;
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (uma.attrs[attr_enum.intelligence] >= 2000) {
+          skill.values[i][j] += 0.2;
+        } else if (uma.attrs[attr_enum.intelligence] >= 1900) {
+          skill.values[i][j] += 0.15;
+        } else if (uma.attrs[attr_enum.intelligence] >= 1800) {
+          skill.values[i][j] += 0.1;
+        } else if (uma.attrs[attr_enum.intelligence] >= 1700) {
+          skill.values[i][j] += 0.05;
+        }
         break;
       case ability_usage_enum.MultiplyBaseSpeed:
-        skill.values[i][j] =
-          skill.data.ability_values[i][j] + uma.base.spdBuffFromWiz;
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (uma.attrs[attr_enum.intelligence] >= 1600) {
+          skill.values[i][j] += 0.15;
+        } else if (uma.attrs[attr_enum.intelligence] >= 1400) {
+          skill.values[i][j] += 0.1;
+        } else {
+          skill.values[i][j] += 0.05;
+        }
         break;
       case ability_usage_enum.Direct:
         skill.values[i][j] = skill.data.ability_values[i][j];
@@ -431,13 +446,14 @@ module.exports = {
           skill.data.ability_values[i][j];
         break;
       case ability_usage_enum.MultiplyMaximumRawStatus:
-        if (uma.base.max_raw_status >= 1100) {
+        temp = Math.max(...uma.attrs);
+        if (temp >= 1100) {
           skill.values[i][j] = 1.2;
-        } else if (uma.base.max_raw_status >= 1000) {
+        } else if (temp >= 1000) {
           skill.values[i][j] = 1.1;
-        } else if (uma.base.max_raw_status >= 800) {
+        } else if (temp >= 800) {
           skill.values[i][j] = 1;
-        } else if (uma.base.max_raw_status >= 600) {
+        } else if (temp >= 600) {
           skill.values[i][j] = 0.9;
         } else {
           skill.values[i][j] = 0.8;

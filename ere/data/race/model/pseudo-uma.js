@@ -119,13 +119,9 @@ class PseudoUma {
   tempPop;
   // 各个需重复使用的计算基底
   base = {
-    accBuffFromWiz: 0,
-    spdBuffFromWiz: 0,
     acceleration: 0,
     // 五项属性方差
     attr_err: 0,
-    // 最大基础属性
-    max_raw_status: 0,
     change_order_finalcorner: 0,
     // 训练员声望
     fame: 0,

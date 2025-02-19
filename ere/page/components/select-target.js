@@ -392,63 +392,71 @@ async function select_target(type, page) {
     if (max_page > 1) {
       buffer.push(
         {
-          accelerator: 996,
-          config: { disabled: page.curr === 1, width: 4 },
+          accelerator: 1096,
+          config: { disabled: page.curr === 1, width: 3 },
           content: '上一页',
           type: 'button',
         },
         {
-          config: { width: 4 },
+          config: { align: 'center', width: 4 },
           content: `第 ${page.curr} 页 / 共 ${max_page} 页`,
           type: 'text',
         },
         {
-          accelerator: 997,
-          config: { disabled: page.curr === max_page, width: 8 },
+          accelerator: 1097,
+          config: {
+            align: 'right',
+            disabled: page.curr === max_page,
+            width: 3,
+          },
           content: '下一页',
           type: 'button',
         },
+        { config: { width: 8 }, content: [], type: 'text' },
       );
     }
     if (type === chara_info_type.info) {
       buffer.push({
-        accelerator: 999,
-        config: { align: 'right', width: 8 },
-        content: '返回上一级',
+        accelerator: 1099,
+        config: { align: 'right', width: 6 },
+        content: '返回',
         type: 'button',
       });
     } else {
       buffer.push(
         {
-          accelerator: 998,
-          config: { align: 'right', width: 4 },
-          content: '清空互动角色',
+          accelerator: 1098,
+          config: { align: 'right', width: 3 },
+          content: '清空互动',
           type: 'button',
         },
         {
-          accelerator: 999,
-          config: { align: 'right', width: 4 },
-          content: '返回上一级',
+          accelerator: 1099,
+          config: { align: 'right', width: 3 },
+          content: '返回',
           type: 'button',
         },
       );
     }
     era.printMultiColumns(buffer, { horizontalAlign: 'end' });
 
-    ret = await era.input();
-
-    if (ret === 996) {
-      page.curr--;
-    } else if (ret === 997) {
-      page.curr++;
-    } else if (ret === 998) {
-      ret = 0;
-      select_flag = false;
-    } else if (ret === 999) {
-      ret = undefined;
-      select_flag = false;
-    } else {
-      select_flag = false;
+    switch ((ret = await era.input())) {
+      case 1096:
+        page.curr--;
+        break;
+      case 1097:
+        page.curr++;
+        break;
+      case 1098:
+        ret = 0;
+        select_flag = false;
+        break;
+      case 1099:
+        ret = undefined;
+        select_flag = false;
+        break;
+      default:
+        select_flag = false;
     }
   }
   return ret;

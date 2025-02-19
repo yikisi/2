@@ -466,7 +466,6 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     corner_count = info.lanes.filter((e) => e.is_curve).length;
   ret.forEach((uma) => {
     uma.attrs = uma.attrs.map(Math.ceil);
-    uma.base.max_raw_status = Math.max(...uma.attrs);
     uma.score_rank = get_chara_rank(
       uma.attrs.reduce((p, c) => p + calc_attr_score(c), 0) +
         uma.list_skill.reduce((p, c) => p + c.data.grade_value, 0),
