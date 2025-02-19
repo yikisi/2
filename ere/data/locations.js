@@ -98,7 +98,7 @@ location_name[location_enum.god] = '三女神像';
 location_name[location_enum.trainer] = '训练员办公室';
 location_name[location_enum.visitor] = '访客接待室';
 location_name[location_enum.clinic] = '保健室';
-location_name[location_enum.dubai] = '保健室';
+location_name[location_enum.dubai] = '迪拜';
 
 module.exports = {
   location_enum,
