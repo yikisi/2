@@ -209,7 +209,7 @@ function get_suffix(chara_id, type) {
  * @returns {number[]}
  */
 function sort_team_by_id(team) {
-  return sort_list(team, (e) => e, false);
+  return sort_list(team, (e) => e, true);
 }
 
 /**
@@ -458,6 +458,10 @@ async function select_target(type, page) {
           sorters.fill(0);
           sorters[ret - 1000] = new_sort;
           if (new_sort !== 0) {
+            const has_me = list_team[0] === 0;
+            if (has_me) {
+              list_team.shift();
+            }
             switch (ret) {
               case 1000:
                 list_team = sort_list(
@@ -578,6 +582,9 @@ async function select_target(type, page) {
                     era.get(`cflag:${id}:育成次数`) * 1000 * new_sort + id,
                   true,
                 );
+            }
+            if (has_me) {
+              list_team.unshift(0);
             }
           } else {
             list_team = sort_func(list_team);
