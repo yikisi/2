@@ -39,7 +39,7 @@ module.exports = class extends CustomizedCheck {
     const edu_marks = new AgEduMarks();
     if (
       extra_flag.edu_weeks >= 96 &&
-      extra_flag.edu_weeks < 95 + 24 &&
+      extra_flag.edu_weeks <= 95 + 24 &&
       extra_flag.rank <= 3 &&
       race_infos[extra_flag.race].race_class === class_enum.G1 &&
       edu_marks.yuusha_fight < 3
