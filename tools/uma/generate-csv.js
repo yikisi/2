@@ -111,7 +111,8 @@ lines
     if (
       chara_line.length === header.length &&
       chara_line[cup_index] &&
-      chara_line[breast_index]
+      chara_line[breast_index] &&
+      chara_line[file_name_index]
     ) {
       if (!chara_line[attr_start_index]) {
         random_attr(chara_line);
