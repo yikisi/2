@@ -37,7 +37,7 @@ function sys_handle_escape_basement(clear_chara) {
     era.set(`status:${e}:沉睡`, 0);
     era.set(`status:${e}:马跳S`, 0);
   });
-  era.set('flag:地下室冷却', get_random_value(4, 8));
+  era.set('flag:地下室冷却', get_random_value(2, 6));
   basement_owners.clear();
 }
 
