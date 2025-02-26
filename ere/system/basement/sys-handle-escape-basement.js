@@ -2,6 +2,8 @@ const era = require('#/era-electron');
 
 const { get_custom_basement } = require('#/event/basement/basement-factory');
 
+const { get_random_value } = require('#/utils/value-utils');
+
 const BasementOwners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
@@ -35,6 +37,7 @@ function sys_handle_escape_basement(clear_chara) {
     era.set(`status:${e}:沉睡`, 0);
     era.set(`status:${e}:马跳S`, 0);
   });
+  era.set('flag:地下室冷却', get_random_value(4, 8));
   basement_owners.clear();
 }
 

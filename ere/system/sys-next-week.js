@@ -86,6 +86,8 @@ async function sys_next_week() {
   era.set('cflag:0:肠道内精液', 0);
   era.set('cflag:0:腹中精液', 0);
   era.get('status:0:马语者') && era.add('status:0:马语者', -1);
+  const basement_cd =
+    era.get('flag:地下室冷却') > 0 && era.add('flag:地下室冷却', -1) > 0;
 
   randomly_interact(in_team_list);
   // 极端事件判定
@@ -117,7 +119,7 @@ async function sys_next_week() {
           chara_id,
           prison:
             (!era.get('item:透明棉被') || Math.random() < 0.5) &&
-            !LifeEventMarks.get_marks(chara_id).b_cd &&
+            !basement_cd &&
             era.get('flag:当前位置') !== location_enum.basement,
         });
       } else if (get_custom_check(chara_id).is_rape_in_sleeping()) {
@@ -611,7 +613,6 @@ async function sys_next_week() {
 
     let pregnant_stage = era.get(`cflag:${chara_id}:妊娠阶段`);
     const life_marks = LifeEventMarks.get_marks(chara_id);
-    life_marks.b_cd && life_marks.b_cd--;
     if (pregnant_stage >> pregnant_stage_enum.embryo) {
       sys_change_lust(chara_id, lust_border.itch / 40);
       const timer = era.add(
