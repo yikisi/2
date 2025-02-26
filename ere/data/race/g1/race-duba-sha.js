@@ -1,19 +1,1 @@
-const RaceInfo = require('#/data/race/model/race-info');
-
-module.exports = new RaceInfo(
-  'Dubai Golden Shaheen',
-  '迪拜金莎轩锦标',
-  RaceInfo.class_enum.G1,
-  RaceInfo.track_enum.meydan,
-  RaceInfo.ground_enum.mud,
-  1200,
-  RaceInfo.distance_enum.short,
-  RaceInfo.rotation_enum.right,
-  15,
-  [],
-  RaceInfo.limit_enum.post4,
-  13,
-  0,
-  3750,
-  97102,
-);
+const RaceInfo = require('#/data/race/model/race-info');module.exports = new RaceInfo(  'Dubai Golden Shaheen',  '迪拜金莎轩锦标',  RaceInfo.class_enum.G1,  RaceInfo.track_enum.meydan,  RaceInfo.ground_enum.mud,  1200,  RaceInfo.distance_enum.short,  RaceInfo.rotation_enum.right,  15,  [],  RaceInfo.limit_enum.post4,  13,  0,  3750,  97102,);
