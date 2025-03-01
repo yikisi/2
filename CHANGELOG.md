@@ -2,7 +2,7 @@
 ## [EraUma v1.3 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.3)
 _2025/2/16_
 
-适配 [EraElectron v3.5.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.5.0) 与 [ere.app v1.0.6 (lipiah)](https://gitgud.io/umaera/ere-app/-/releases/1.0.6) 及以上版本
+适配 [EraElectron v3.5.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.5.0) 与 [ere.app v1.0.6 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.6) 及以上版本
 
 ### Added
 
@@ -63,7 +63,7 @@ _2025/2/16_
 ## [EraUma v1.211 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.211)
 _2024/1/26_
 
-适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.4.0) 及以上版本
+适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.4.0) 及以上版本
 
 ### Fixed
 
@@ -72,7 +72,7 @@ _2024/1/26_
 # [EraUma v1.21 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.21)
 _2024/1/26_
 
-适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.4.0) 及以上版本
+适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.4.0) 及以上版本
 
 ### Added
 
@@ -103,7 +103,7 @@ _2024/1/26_
 ## [EraUma v1.201 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.201)
 _2025/1/11_
 
-适配 [EraElectron v3.3.2 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.3.2) 及以上版本
+适配 [EraElectron v3.3.2 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.3.2) 及以上版本
 
 ### Fixed
 
@@ -112,7 +112,7 @@ _2025/1/11_
 ## [EraUma v1.2 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.2)
 _2025/1/11_
 
-适配 [EraElectron v3.3.2 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.3.2) 及以上版本
+适配 [EraElectron v3.3.2 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.3.2) 及以上版本
 
 ### Added
 
@@ -147,7 +147,7 @@ _2025/1/11_
 ## [EraUma v1.111 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.111)
 _2024/12/30_
 
-适配 PC版引擎[EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.2.1) 与 安卓版引擎[ere.app v1.0.1 (lipiah)](https://gitgud.io/umaera/ere-app/-/releases/1.0.1) 及以上版本
+适配 PC版引擎[EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.1) 与 安卓版引擎[ere.app v1.0.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.1) 及以上版本
 
 ### Changed
 
@@ -167,7 +167,7 @@ _2024/12/30_
 ## [EraUma v1.11 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.11)
 _2024/12/28_
 
-适配 [EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.2.1) 及以上版本
+适配 [EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.1) 及以上版本
 
 ### Added
 
@@ -213,7 +213,7 @@ _2024/12/28_
 ## [EraUma v1.101 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.101)
 _2024/12/26_
 
-适配 [EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.2.1) 及以上版本
+适配 [EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.1) 及以上版本
 
 ### Fixed
 
@@ -226,7 +226,7 @@ _2024/12/26_
 ## [EraUma v1.1 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.1)
 _2024/12/25_
 
-适配 [EraElectron v3.2.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.2.0) 及以上版本，以套用EraElectron的安全性更新
+适配 [EraElectron v3.2.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.0) 及以上版本，以套用EraElectron的安全性更新
 
 因为引擎API改动，不再支持3.1.1及以下的版本！
 
@@ -328,7 +328,7 @@ _2024/12/25_
 ## [EraUma v1.011 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.011)
 _2024/11/13_
 
-适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.0.0) 版本
+适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.0.0) 版本
 
 ### Changed
 
@@ -347,7 +347,7 @@ _2024/11/13_
 ## [EraUma v1.01 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.01)
 _2024/11/11_
 
-适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.0.0) 版本
+适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.0.0) 版本
 
 ### Added
 
@@ -381,7 +381,7 @@ _2024/11/11_
 ## [EraUma v1.001 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.001)
 _2024/10/27_
 
-适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.0.0) 版本
+适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.0.0) 版本
 
 ### Added
 
@@ -424,7 +424,7 @@ _2024/10/27_
 ## [EraUma v1.0 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.0)
 _2024/10/24_
 
-EraUma v1.0，适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era-electron/-/releases/3.0.0) 版本
+EraUma v1.0，适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.0.0) 版本
 
 ### Added
 
@@ -568,7 +568,7 @@ EraUma v1.0，适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/era
 ## [EraUma v0.99](https://gitgud.io/umaera/erauma/-/releases/0.99)
 _2024/9/24_
 
-EraUma v0.99，适配 [EraElectron v2.2.0 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/2.2.0) 版本
+EraUma v0.99，适配 [EraElectron v2.2.0 (ginga)](https://gitgud.io/umaera/engine/era-electron/-/releases/2.2.0) 版本
 
 ### Added
 
@@ -606,7 +606,7 @@ EraUma v0.99，适配 [EraElectron v2.2.0 (ginga)](https://gitgud.io/umaera/era-
 ## [EraUma v0.9](https://gitgud.io/umaera/erauma/-/releases/0.9)
 _2024/9/15_
 
-EraUma v0.9，适配 [EraElectron v2.1.1 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/2.1.1) 版本
+EraUma v0.9，适配 [EraElectron v2.1.1 (ginga)](https://gitgud.io/umaera/engine/era-electron/-/releases/2.1.1) 版本
 
 因为变量位置变化，需要重开档
 
@@ -780,7 +780,7 @@ EraUma v0.9，适配 [EraElectron v2.1.1 (ginga)](https://gitgud.io/umaera/era-e
 ## [EraUma v0.808](https://gitgud.io/umaera/erauma/-/releases/0.808)
 _2024/8/30_
 
-适配 [EraElectron v2.1.0 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/2.1.0) 版本
+适配 [EraElectron v2.1.0 (ginga)](https://gitgud.io/umaera/engine/era-electron/-/releases/2.1.0) 版本
 
 该版本引擎启用了最小更新功能，但在大版本发布时还请下载全量更新以更新美术资源（最小更新只更新静态数据csv和程序集ere文件夹，不更新美术资源res文件夹）
 
@@ -865,7 +865,7 @@ _2024/8/3_
 ## [EraUma v0.803](https://gitgud.io/umaera/erauma/-/releases/0.803)
 _2024/7/30_
 
-EraUma v0.803，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/2.0.1) 版本
+EraUma v0.803，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/engine/era-electron/-/releases/2.0.1) 版本
 
 ### Changed
 
@@ -907,7 +907,7 @@ _2024/7/28_
 
 _2024/7/27_
 
-EraUma v0.8，适配 [EraElectron v2.0.0 (ginga)](https://gitgud.io/umaera/era-electron/-/releases/v2.0.0) 版本
+EraUma v0.8，适配 [EraElectron v2.0.0 (ginga)](https://gitgud.io/umaera/engine/era-electron/-/releases/v2.0.0) 版本
 
 ### Added
 
@@ -1076,7 +1076,7 @@ EraUma v0.8，适配 [EraElectron v2.0.0 (ginga)](https://gitgud.io/umaera/era-e
 
 _2024/6/30_
 
-EraUma v0.7，适配 [EraElectron v1.3.0 (zero)](https://gitgud.io/umaera/era-electron/-/releases/v1.3.0) 版本
+EraUma v0.7，适配 [EraElectron v1.3.0 (zero)](https://gitgud.io/umaera/engine/era-electron/-/releases/v1.3.0) 版本
 
 因为变量变化，需要重开档
 
@@ -1155,7 +1155,7 @@ EraUma v0.7，适配 [EraElectron v1.3.0 (zero)](https://gitgud.io/umaera/era-el
 
 _2024/6/1_
 
-EraUma v0.6，适配 [EraElectron v1.2.3 (zero)](https://gitgud.io/umaera/era-electron/-/releases/v1.2.3) 版本
+EraUma v0.6，适配 [EraElectron v1.2.3 (zero)](https://gitgud.io/umaera/engine/era-electron/-/releases/v1.2.3) 版本
 
 ### Added
 
@@ -1259,7 +1259,7 @@ EraUma v0.591，EraUma v0.59的bug修复版，兼容v0.59版本的存档
 
 _2024/5/4_
 
-EraUma v0.59，适配 [EraElectron v1.2.2 (zero)](https://gitgud.io/umaera/era-electron/-/releases/v1.2.2) 版本
+EraUma v0.59，适配 [EraElectron v1.2.2 (zero)](https://gitgud.io/umaera/engine/era-electron/-/releases/v1.2.2) 版本
 
 ### Added
 
@@ -1353,7 +1353,7 @@ v0.5的bug修复版，可以和v0.5的资源包一起使用，兼容v0.5的存�
 ## [EraUma v0.5](https://gitgud.io/umaera/erauma/-/releases/v0.5)
 _2024/2/29_
 
-EraUma v0.5，适配 [EraElectron v1.1.0 (zero)](https://gitgud.io/umaera/era-electron/-/releases/v1.1.1) 版本
+EraUma v0.5，适配 [EraElectron v1.1.0 (zero)](https://gitgud.io/umaera/engine/era-electron/-/releases/v1.1.1) 版本
 
 自v0.5版本起将采用era游戏的内置版本号，低于最低支持版本生成的存档将无法打开并伴随警告
 
@@ -1386,7 +1386,7 @@ EraUma v0.5，适配 [EraElectron v1.1.0 (zero)](https://gitgud.io/umaera/era-el
 ## [EraUma v0.4.8](https://gitgud.io/umaera/erauma/-/releases/v0.4.8)
 _2024/2/15_
 
-因为某资源网站莫名其妙给安排了个0.4.7版本（莫非是把压缩包后缀名的.7z理解成.7了？），该版本只能叫0.4.8了，适配ere引擎的[v1.0.2-mebius版本](https://gitgud.io/umaera/era-electron/-/releases/v1.0.2-mebius)
+因为某资源网站莫名其妙给安排了个0.4.7版本（莫非是把压缩包后缀名的.7z理解成.7了？），该版本只能叫0.4.8了，适配ere引擎的[v1.0.2-mebius版本](https://gitgud.io/umaera/engine/era-electron/-/releases/v1.0.2-mebius)
 
 ### Added
 * 新增远征系统以及与之相关的数个状态和技能

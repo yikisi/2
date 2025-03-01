@@ -25,7 +25,7 @@ EraUma将保持内源，ERE引擎将保持开源；请各位开发者以internal
 > * Win7：下载 [Win10绿色版](https://umaera.gitgud.site/erauma/index.html)，以及 [EraElectron相应的发布版](https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest)，然后把绿色版压缩包中的game文件夹放到Win7引擎压缩包解压出的文件夹中（和引擎的exe文件同级），需要显示图片的额外下载 [资源包](https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res)；
 > * Mac：下载 [Win10绿色版](https://umaera.gitgud.site/erauma/index.html)，取其中的 game 文件夹并改名，然后下载 [EraElectron相应的发布版](https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest)（注意芯片类型），安装 .dmg 后打开引擎，然后打开到Win10绿色版中的 game 文件夹，需要显示图片的额外下载 [资源包](https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res)；
 > * Linux：……用Linux的仁兄装个node.js自己构建吧，npm run electron:build，然后下载 [Win10绿色版](https://umaera.gitgud.site/erauma/index.html) 取用其中的 game 文件夹，打开引擎后打开 game 文件夹就行，需要显示图片的额外下载 [资源包](https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res)；
-> * 安卓：下载 [安卓游戏包](https://gitgud.io/umaera/erauma/-/releases/permalink/latest) 和 [安卓版引擎](https://gitgud.io/umaera/engine/ere-app/-/releases/permalink/latest)，**使用方法看 [说明](https://gitgud.io/umaera/ere-app/-/releases/permalink/latest) 不用看下面的内容**，需要显示图片的额外下载 [资源包](https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res)。
+> * 安卓：下载 [安卓游戏包](https://gitgud.io/umaera/erauma/-/releases/permalink/latest) 和 [安卓版引擎](https://gitgud.io/umaera/engine/ere-app/-/releases/permalink/latest)，**使用方法看 [说明](https://gitgud.io/umaera/engine/ere-app/-/releases/permalink/latest) 不用看下面的内容**，需要显示图片的额外下载 [资源包](https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res)。
 
 EraUma发布采取分包制，即游戏本体包+游戏资源包拆分打包方式，使用时需要解压到同一个文件夹，才能通过[ERE引擎](https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest)启动
 
