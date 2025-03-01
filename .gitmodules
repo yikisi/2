@@ -1,6 +1,6 @@
 [submodule "engine"]
 	path = engine
-	url = https://gitgud.io/umaera/era-electron.git
+	url = https://gitgud.io/umaera/engine/era-electron.git
 [submodule "common"]
 	path = common
 	url = https://gitgud.io/umaera/data/uma-common.git
