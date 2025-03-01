@@ -3,4 +3,4 @@
 	url = https://gitgud.io/umaera/era-electron.git
 [submodule "common"]
 	path = common
-	url = https://gitgud.io/umaera/uma-common.git
+	url = https://gitgud.io/umaera/data/uma-common.git
