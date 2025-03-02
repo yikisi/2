@@ -313,7 +313,6 @@ async function check_new_activities(cur_round, in_team_list) {
     }
   }
   if (event_weeks === 29 - 1) {
-    CustomizedEdu.common_event_count = 1;
     // 夏合宿
     const beach_group = in_team_list.filter((id) => {
       const edu_weeks = era.get(`cflag:${id}:育成回合计时`);
@@ -395,6 +394,9 @@ async function check_new_activities(cur_round, in_team_list) {
     });
     if (!temp) {
       follow_group.unshift(0);
+      CustomizedEdu.common_event_count = 1;
+    } else {
+      CustomizedEdu.common_event_count = 0;
     }
     if (follow_group.length) {
       era.printMultiColumns([

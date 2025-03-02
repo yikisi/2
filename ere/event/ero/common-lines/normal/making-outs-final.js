@@ -71,7 +71,9 @@ async function foot_job(attacker, defender, hook) {
     await defender.print_and_wait([
       '当 ',
       attacker.get_colored_name(),
-      ' 用那双赛场上飞驰的双足踏上眼前的肉棒，发现那根坏家伙正兴奋地反而将足底托起时，肯定会露出笑容的吧。',
+      ' ',
+      era.get(`cflag:${defender.id}:种族`) > 0 ? '用那双赛场上飞驰的双足' : '',
+      '踏上眼前的肉棒，发现那根坏家伙正兴奋地反而将足底托起时，肯定会露出笑容的吧。',
     ]);
     await defender.print_and_wait(
       '看见下流东西时厌恶而轻蔑的笑……对性癖奇怪的恋人露出的饶有兴致的包容的笑……天真无邪仅是对此感到有趣而笑……',
