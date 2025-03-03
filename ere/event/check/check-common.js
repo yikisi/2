@@ -27,8 +27,7 @@ const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { pressure_border } = require('#/data/train-const');
 
-const aim_races = {};
-aim_races[race_enum.begin_race] = 4;
+const aim_races = { [race_enum.begin_race]: 4 };
 
 function common_no_action_check(chara_id) {
   return (

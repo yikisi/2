@@ -28,6 +28,7 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
+const { init_chara } = require('#/system/sys-init-chara');
 
 function check_titles(...ids) {
   ids
@@ -348,6 +349,12 @@ module.exports = async () => {
                   life_marks.set('b_cd', 0);
                 }
               });
+            }
+            if (version <= 1310) {
+              init_chara(345);
+              init_chara(346);
+              init_chara(347);
+              init_chara(348);
             }
             return true;
           } else {

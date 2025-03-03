@@ -35,22 +35,25 @@ const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
 
-handlers[204] = () =>
-  get('cflag:204:招募状态') === recruit_flags.yes
-    ? {}
-    : {
-        name: '「请来帮助我吧！」（招募）',
-        handle() {
-          set('cflag:204:招募状态', recruit_flags.yes);
-          if (get('talent:204:病娇')) {
-            new YandereList().push(204);
-          }
-          return printAndWait([
-            get_chara_talk(204).get_colored_name(),
-            ' 加入了队伍！',
-          ]);
-        },
-      };
+[204, 346, 347, 348].forEach(
+  (e) =>
+    (handlers[e] = () =>
+      get(`cflag:${e}:招募状态`) === recruit_flags.yes
+        ? {}
+        : {
+            name: '「请来帮助我吧！」（招募）',
+            handle() {
+              set(`cflag:${e}:招募状态`, recruit_flags.yes);
+              if (get(`talent:${e}:病娇`)) {
+                new YandereList().push(e);
+              }
+              return printAndWait([
+                get_chara_talk(e).get_colored_name(),
+                ' 加入了队伍！',
+              ]);
+            },
+          }),
+);
 
 handlers[207] = () =>
   get('cflag:207:招募状态') === recruit_flags.yes || get('love:207') < 25

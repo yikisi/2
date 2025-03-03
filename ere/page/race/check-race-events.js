@@ -35,7 +35,22 @@ const EtsukoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { class_enum, track_names } = require('#/data/race/model/race-info');
-const { race_enum, race_infos } = require('#/data/race/race-const');
+const { race_enum } = require('#/data/race/race-const');
+
+const rec_list = {};
+[race_enum.prix_lat].forEach((e) => (rec_list[e] ||= []).push(204));
+[race_enum.prix_dia, race_enum.prix_lat].forEach((e) =>
+  (rec_list[e] ||= []).push(205, 206),
+);
+[race_enum.sats_sho, race_enum.nhk_cup, race_enum.takz_kin].forEach((e) =>
+  (rec_list[e] ||= []).push(346),
+);
+[race_enum.sats_sho, race_enum.toky_yus, race_enum.kiku_sho].forEach((e) =>
+  (rec_list[e] ||= []).push(346),
+);
+[race_enum.tenn_spr, race_enum.arim_kin, race_enum.takz_kin].forEach((e) =>
+  (rec_list[e] ||= []).push(346),
+);
 
 /**
  * @param {number} race
@@ -46,20 +61,12 @@ async function check_race_events(race, info, team_contestants) {
   const may_life_marks = new MayLifeMarks();
   let handler = undefined;
   if (team_contestants.findIndex((e) => e.rank.curr === 1) !== -1) {
-    switch (race) {
-      case race_enum.prix_lat:
-        if (get('cflag:204:招募状态') === 0 && get('cflag:204:随机招募') <= 0) {
-          add('cflag:204:随机招募', -1);
-        }
-      // eslint-disable-next-line no-fallthrough
-      case race_enum.prix_dia:
-        [205, 206].forEach(
-          (e) => !get(`cflag:${e}:随机招募`) && add(`cflag:${e}:随机招募`, -1),
-        );
-    }
+    (rec_list[race] || []).forEach(
+      (e) => !get(`cflag:${e}:随机招募`) && add(`cflag:${e}:随机招募`, -1),
+    );
   }
   if (
-    info === race_infos[race_enum.prix_lat] &&
+    race === race_enum.prix_lat &&
     team_contestants.findIndex((e) => e.rank.curr === 1) !== -1 &&
     !may_life_marks.who_am_i
   ) {

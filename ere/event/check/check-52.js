@@ -461,8 +461,8 @@ module.exports = class extends CustomizedCheck {
     }
     buffer.push({
       check: 1,
-      color: attr_change_colors.up,
-      content: `粉丝数 ${fans.toLocaleString()}`,
+      color: undefined,
+      content: `粉丝数：${fans.toLocaleString()}`,
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push({

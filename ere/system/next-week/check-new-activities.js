@@ -17,6 +17,7 @@ const CustomizedEdu = require('#/event/edu/edu-common');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const {
@@ -472,9 +473,11 @@ async function check_new_activities(cur_round, in_team_list) {
       ? 343
       : 0,
   ]);
-  if (era.get('cflag:204:招募状态') !== 0 && sys_check_npc_working(204)) {
-    loc_visitors.get(location_enum.visitor).push(204);
-  }
+  [204, 346, 347, 348].forEach((e) => {
+    if (era.get(`cflag:${e}:招募状态`) !== 0 && sys_check_npc_working(e)) {
+      loc_visitors.get(location_enum.visitor).push(e);
+    }
+  });
 
   const uaf_list = [];
   if (
@@ -503,6 +506,10 @@ async function check_new_activities(cur_round, in_team_list) {
   ) {
     loc_visitors.get(location_enum.visitor).push(345);
   }
+  loc_visitors.set(
+    location_enum.visitor,
+    sort_list(loc_visitors.get(location_enum.visitor), (e) => e, true),
+  );
   new YandereList().set(
     in_team_list.filter((e) => era.get(`talent:${e}:病娇`) > 0),
   );
