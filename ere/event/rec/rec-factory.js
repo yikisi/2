@@ -28,6 +28,7 @@ cons_dict[67] = require('#/event/rec/rec-67');
 cons_dict[68] = require('#/event/rec/rec-68');
 cons_dict[85] = require('#/event/rec/rec-85');
 cons_dict[100] = require('#/event/rec/rec-100');
+cons_dict[116] = require('#/event/rec/rec-116');
 cons_dict[201] = require('#/event/rec/rec-201');
 cons_dict[202] = require('#/event/rec/rec-202');
 cons_dict[203] = require('#/event/rec/rec-203');
