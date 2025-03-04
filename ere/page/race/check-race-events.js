@@ -42,14 +42,17 @@ const rec_list = {};
 [race_enum.prix_dia, race_enum.prix_lat].forEach((e) =>
   (rec_list[e] ||= []).push(205, 206),
 );
-[race_enum.sats_sho, race_enum.nhk_cup, race_enum.takz_kin].forEach((e) =>
-  (rec_list[e] ||= []).push(346),
-);
 [race_enum.sats_sho, race_enum.toky_yus, race_enum.kiku_sho].forEach((e) =>
   (rec_list[e] ||= []).push(346),
 );
-[race_enum.tenn_spr, race_enum.arim_kin, race_enum.takz_kin].forEach((e) =>
-  (rec_list[e] ||= []).push(346),
+[
+  race_enum.tenn_spr,
+  race_enum.takz_kin,
+  race_enum.prix_lat,
+  race_enum.arim_kin,
+].forEach((e) => (rec_list[e] ||= []).push(347));
+[race_enum.sats_sho, race_enum.takz_kin, race_enum.arim_kin].forEach((e) =>
+  (rec_list[e] ||= []).push(348),
 );
 
 /**
