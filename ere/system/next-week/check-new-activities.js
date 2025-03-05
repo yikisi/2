@@ -25,6 +25,7 @@ const {
   celebration_color,
 } = require('#/data/color-const');
 const { slavery_enum } = require('#/data/ero/mark-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const YandereList = require('#/data/event/yandere-list');
@@ -513,6 +514,8 @@ async function check_new_activities(cur_round, in_team_list) {
   new YandereList().set(
     in_team_list.filter((e) => era.get(`talent:${e}:病娇`) > 0),
   );
+
+  new MyEduMarks().we_are_one = 0;
 }
 
 module.exports = check_new_activities;

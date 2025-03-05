@@ -25,6 +25,8 @@ class MyEduMarks extends EduEventMarks {
   sell_milk;
   // 卖奶的买家
   milk_buyer;
+  // 「」心「」体
+  we_are_one;
 
   constructor() {
     super(0);

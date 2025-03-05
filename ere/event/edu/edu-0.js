@@ -26,6 +26,8 @@ const sys_get_random_uma_god = require('#/system/chara/sys-get-random-uma-god');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
+  sys_change_motivation,
+  sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const {
   sys_like_chara,
@@ -43,7 +45,7 @@ const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { get_random_entry } = require('#/utils/list-utils');
+const { get_extremum_entry, get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -52,6 +54,10 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
 module.exports = class extends StrangeDayEvents {
+  static event_triggers = {
+    we_are_one: 1,
+  };
+
   /**
    * @author 天马闪光蹄
    * @param {CharaTalk} me
@@ -531,5 +537,117 @@ module.exports = class extends StrangeDayEvents {
     println();
     sys_love_uma(chara_id, 1) && (await waitAnyKey());
     add_event(hook.hook, event_object.set_arg('privacy_1'));
+  }
+
+  /**
+   * @author Mr.E.
+   * @param {CharaTalk} me
+   */
+  async wind_welcome(me) {
+    await print_event_name(['风来访'], me);
+    const god_id = sys_get_random_uma_god();
+    await printAndWait([
+      me.get_colored_name(),
+      ' 感受到一股微风吹过身侧，带着操场青草的清香。',
+    ]);
+    const in_team_list = sys_filter_chara(
+        'cflag',
+        '招募状态',
+        recruit_flags.yes,
+      ),
+      cur_week = get('flag:当前回合数');
+    printButton('「今天真是个好天气啊」（担当干劲+1）', 1);
+    printButton('「希望今天的比赛也顺利」（？？？好感+50）', 2, {
+      disabled:
+        !god_id ||
+        in_team_list.findIndex(
+          (e) => sys_reg_race(e).curr.week === cur_week,
+        ) === -1,
+    });
+    if ((await input()) === 1) {
+      for (const c of in_team_list) {
+        if (get(`cflag:${c}:种族`) > 0) {
+          sys_change_motivation(c, 1) && (await waitAnyKey());
+        }
+      }
+    } else {
+      sys_like_chara(god_id, 0, 50) && (await waitAnyKey());
+    }
+  }
+
+  /**
+   * @author Mr.E.
+   * @param {CharaTalk} me
+   */
+  async chocolate(me) {
+    await print_event_name(['巧克力！'], me);
+    await printAndWait(['情人节，可惜工作没有休假。']);
+    await printAndWait([
+      '训练员这工作有时候还得防备一些「别有用心」的对象，刷到马推还有一堆人在散发着恋爱的酸臭。',
+    ]);
+    printButton(
+      '「一点风声罢了，今天也是为担当燃烧身体的一天」（体力精力+50）',
+      1,
+    );
+    printButton('「闲着也是闲着，不如发个推凑个热闹」', 2);
+    if ((await input()) === 1) {
+      get_attr_and_print_in_event(
+        0,
+        undefined,
+        0,
+        JSON.parse('{"体力":50,"精力":50}'),
+      ) && (await waitAnyKey());
+    } else {
+      const p_love =
+          get('cflag:36:招募状态') === recruit_flags.yes ? get('love:36') : -1,
+        t_love =
+          get('cflag:80:招募状态') === recruit_flags.yes ? get('love:80') : -1,
+        l_love =
+          get('cflag:119:招募状态') === recruit_flags.yes
+            ? get('love:119')
+            : -1,
+        max = get_extremum_entry(
+          [
+            [36, p_love],
+            [80, t_love],
+            [119, l_love],
+          ],
+          (e) => e[1],
+        );
+      if (max.max[1] === -1) {
+        await printAndWait(['「打开冰箱发现最浪漫的果然是浓缩咖啡」']);
+        await printAndWait('随手编辑了一条推文，用小号发出去。');
+      } else if (max.max[1] < 60) {
+        await printAndWait([
+          '「今天也是努力工作的一天，什么？都情人节了？刚准备下单巧克力发现通讯列表是空的！」',
+        ]);
+        await printAndWait('随手编辑了一条推文，用小号发出去。');
+        println();
+        await printAndWait([
+          '第二天收到了匿名寄来的包裹，拆开一看原来是一块精装巧克力',
+        ]);
+        println();
+        await printAndWait(['真是奇怪，会是谁寄的呢……']);
+        sys_like_chara(max.max[0], 0, 20) && (await waitAnyKey());
+      } else {
+        await printAndWait([
+          '「本命巧克力迷路第N年，在便利店买了根青汁味百奇自我应援」',
+        ]);
+        await printAndWait('随手编辑了一条推文，用小号发出去。');
+        println();
+        await printAndWait([
+          '第二天收到了匿名寄来的包裹，拆开一看原来是巧克力，感觉是很',
+          max.max[0] === 119
+            ? '华贵的'
+            : max.max[0] === 80
+              ? '很像吧唧的'
+              : '精致小巧的',
+          '巧克力',
+        ]);
+        println();
+        await printAndWait(['真是奇怪，会是谁寄的呢……']);
+        sys_change_lust(max.max[0], 2000);
+      }
+    }
   }
 };
