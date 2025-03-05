@@ -390,7 +390,9 @@ async function know_me(donna, me) {
   new EventMarks(0).sub(event_hooks.week_end);
   era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
   era.set('flag:物色对象', 0);
-  era.set('flag:当前月', 3);
+  if (era.get('flag:当前月') > 3) {
+    era.set(`cflag:${this.id}:育成回合计时`, 'x');
+  }
 }
 
 module.exports = know_me;
