@@ -180,6 +180,7 @@ module.exports = class extends CustomizedDaily {
     }
     await era.printAndWait([me.get_colored_name(), ` 独自来到商店街${talk}`]);
     const my_marks = new MyEduMarks();
+    /** @author Mr.E. */
     if (my_marks.kamen_rider === 1 && Math.random() < 0.05) {
       my_marks.kamen_rider = 0;
       await print_event_name(['假面（？）骑士！'], me);

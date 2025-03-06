@@ -383,11 +383,12 @@ class CustomizedDaily {
     if (dice < 0.5) {
       await era.printAndWait([
         '抽到了',
-        '吉利',
+        dice < 0.05 ? '大吉' : '吉利',
         '的签文！此行让 ',
         me.get_couple_title(),
         ' 感觉很高兴。',
       ]);
+      /** @author Mr.E. */
       if (dice < 0.0001 && era.get('flag:强奸抵抗') === 1) {
         await era.printAndWait([
           '署名是未知的',
