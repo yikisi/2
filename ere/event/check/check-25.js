@@ -18,6 +18,7 @@ const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
+const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
 
 const aim_races = {};
 
@@ -119,6 +120,13 @@ module.exports = class extends CustomizedCheck {
     if (edu_weeks < 3 * 48) {
       const event_obj_special = new EventObject(25, cb_enum.edu, true).set_arg(
         edu_weeks,
+      );
+      check_and_add_event(
+        new CoffeeEduMarks(),
+        edu_weeks,
+        'scared',
+        event_hooks.week_end,
+        new EventObject(25, cb_enum.edu),
       );
       switch (edu_weeks) {
         case 28: // 灵障

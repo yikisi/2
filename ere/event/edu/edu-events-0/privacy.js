@@ -1,3 +1,7 @@
+/**
+ * @file 系列事件 - 个人隐私安全
+ * @author Mr.E.
+ */
 const {
   get,
   getAddedCharacters,
@@ -45,7 +49,6 @@ const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedEdu {
   /**
-   * @author Mr.E.
    * @param {CharaTalk} me
    * @param _me
    * @param _call
@@ -119,7 +122,6 @@ module.exports = class extends CustomizedEdu {
   }
 
   /**
-   * @author Mr.E.
    * @param {CharaTalk} me
    * @param _me
    * @param _call
@@ -175,7 +177,6 @@ module.exports = class extends CustomizedEdu {
   }
 
   /**
-   * @author Mr.E.
    * @param {CharaTalk} me
    * @param _me
    * @param _call
@@ -247,7 +248,6 @@ module.exports = class extends CustomizedEdu {
   }
 
   /**
-   * @author Mr.E.
    * @param {CharaTalk} me
    * @param _me
    * @param _call

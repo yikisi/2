@@ -492,10 +492,10 @@ async function check_race_events(race, info, team_contestants) {
       sys_like_chara(303, 0, 200) && (await waitAnyKey());
     };
   } else if (
+    get(`cflag:${mvp}:性别`) !== 1 &&
     best === 1 &&
     get(`love:${mvp}`) >= 75 &&
-    !my_edu_marks.we_are_one &&
-    get(`cflag:${mvp}:性别`) !== 1
+    !my_edu_marks.we_are_one
   ) {
     /** @author Mr.E. */
     handler = async () => {

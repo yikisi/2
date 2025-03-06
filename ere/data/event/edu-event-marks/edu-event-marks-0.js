@@ -27,6 +27,10 @@ class MyEduMarks extends EduEventMarks {
   milk_buyer;
   // 「」心「」体
   we_are_one;
+  // 欢乐周末开始啦！
+  nice_weekend;
+  // 假面（？）骑士！
+  kamen_rider;
 
   constructor() {
     super(0);

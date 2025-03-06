@@ -142,5 +142,17 @@ module.exports = class extends CustomizedCheck {
         new EventObject(0, cb_enum.edu).set_arg('chocolate'),
       );
     }
+    if (get('flag:当前回合数') % 48 === 47) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(0, cb_enum.edu).set_arg('sakura_regret'),
+      );
+    }
+    if (my_edu_marks.nice_weekend > 1 && --my_edu_marks.nice_weekend === 1) {
+      add_event(
+        event_hooks.week_end,
+        new EventObject(0, cb_enum.edu).set_arg('nice_weekend'),
+      );
+    }
   }
 };

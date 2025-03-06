@@ -80,16 +80,15 @@ async function sys_next_week() {
   ).filter((e) => e);
   let temp;
   era.set('status:0:沉睡', 1);
-  era.set('status:0:熬夜', 0);
-  era.set('status:0:摸鱼', 0);
+  era.set('status:0:熬夜', era.set('status:0:摸鱼', 0));
   era.set('cflag:0:子宫内精液', 0);
   era.set('cflag:0:肠道内精液', 0);
   era.set('cflag:0:腹中精液', 0);
   era.get('status:0:马语者') && era.add('status:0:马语者', -1);
+  era.get('flag:强奸抵抗') === '' && era.set('flag:强奸抵抗', 1);
+  randomly_interact(in_team_list);
   const basement_cd =
     era.get('flag:地下室冷却') > 0 && era.add('flag:地下室冷却', -1) > 0;
-
-  randomly_interact(in_team_list);
   // 极端事件判定
   if (check_pregnant_unprotect(0)) {
     const basement_owners = new BasementOwners();
