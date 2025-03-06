@@ -44,6 +44,7 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const EtsukoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-303');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { location_enum } = require('#/data/locations');
 const { class_enum, track_names } = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -493,7 +494,8 @@ async function check_race_events(race, info, team_contestants) {
   } else if (
     best === 1 &&
     get(`love:${mvp}`) >= 75 &&
-    !my_edu_marks.we_are_one
+    !my_edu_marks.we_are_one &&
+    get(`cflag:${mvp}:性别`) !== 1
   ) {
     /** @author Mr.E. */
     handler = async () => {
@@ -506,7 +508,7 @@ async function check_race_events(race, info, team_contestants) {
         chara.get_colored_name(),
         ' 带着头上的洗澡巾在沙发上起身，笑眯眯地看着 ',
         me.get_colored_name(),
-        ' ',
+        '。',
       ]);
       println();
       await chara.say_and_wait([
@@ -576,8 +578,15 @@ async function check_race_events(race, info, team_contestants) {
           );
           set('tflag:主导权', chara.id);
         }
+        const location = get('flag:当前位置');
+        if (get('cflag:0:位置') > 0) {
+          set('flag:当前位置', location_enum.hotel);
+        } else {
+          set('flag:当前位置', location_enum.restroom);
+        }
         await page_ero(chara.id, true);
         await end_ero_and_show_result(true);
+        set('flag:当前位置', location);
       }
     };
   }
