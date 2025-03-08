@@ -209,7 +209,7 @@ module.exports = class extends CustomizedRecruit {
         `每个${digital.get_uma_sex_title()}酱都有每一边的好啊！每一个都很尊啊！`,
       );
       await digital.say_and_wait(
-        `这是我不能结受的！所以我抛弃了觉悟，都不选啦！`,
+        `这是我不能接受的！所以我抛弃了觉悟，都不选啦！`,
       );
       await digital.say_and_wait(`啊哈哈哈哈！`);
       await era.printAndWait(

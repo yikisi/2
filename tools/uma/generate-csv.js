@@ -1,5 +1,7 @@
 const { readFileSync, writeFileSync } = require('fs');
 
+const named_contestants = require('../../ere/data/race/contestants/named.json');
+
 const cup_dict = {
   AA: 5,
 };
@@ -26,13 +28,17 @@ const cup_index = header.findIndex((e) => e === '角色Flag|下胸围'),
   buff_start_index = header.findIndex((e) => e === '角色Flag|速度加成'),
   adapt_start_index = header.findIndex((e) => e === '角色Flag|草地适性'),
   title_index = header.findIndex((e) => e === '角色Str|称号'),
-  race_index = header.findIndex((e) => e === '角色Flag|种族');
+  race_index = header.findIndex((e) => e === '角色Flag|种族'),
+  id_index = header.findIndex((e) => e === '角色编号');
 
 function random_int(min, max) {
   return min + Math.floor((max + 1 - min) * Math.random());
 }
 
 function random_attr(chara_line) {
+  const id = Number(chara_line[id_index]),
+    contestant = named_contestants.find((e) => e.id === id);
+
   // 生成随机属性
   let sum_attr = 550;
   chara_line[attr_start_index] = random_int(84, 137);
@@ -76,28 +82,46 @@ function random_attr(chara_line) {
   chara_line[buff_start_index + 4] = sum_buff;
 
   if (!chara_line[adapt_start_index]) {
-    // 生成随机适性，每类有一个保底B，其他在A～G之中随机
-    chara_line[random_int(adapt_start_index, adapt_start_index + 1)] =
-      String.fromCharCode(65 + random_int(0, 1));
-    for (let i = adapt_start_index; i <= adapt_start_index + 1; ++i) {
-      if (!chara_line[i]) {
-        chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+    if (contestant !== undefined) {
+      for (let i = 0; i < 2; ++i) {
+        chara_line[adapt_start_index + i] = String.fromCharCode(
+          65 + 6 - contestant.adapt_ground[i],
+        );
       }
-    }
-
-    chara_line[random_int(adapt_start_index + 2, adapt_start_index + 5)] =
-      String.fromCharCode(65 + random_int(0, 1));
-    for (let i = adapt_start_index + 2; i <= adapt_start_index + 5; ++i) {
-      if (!chara_line[i]) {
-        chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+      for (let i = 0; i < 4; ++i) {
+        chara_line[adapt_start_index + 2 + i] = String.fromCharCode(
+          65 + 6 - contestant.adapt_distance[i],
+        );
       }
-    }
+      for (let i = 0; i < 4; ++i) {
+        chara_line[adapt_start_index + 6 + i] = String.fromCharCode(
+          65 + 6 - contestant.adapt_style[i],
+        );
+      }
+    } else {
+      // 生成随机适性，每类有一个保底B，其他在A～G之中随机
+      chara_line[random_int(adapt_start_index, adapt_start_index + 1)] =
+        String.fromCharCode(65 + random_int(0, 1));
+      for (let i = adapt_start_index; i <= adapt_start_index + 1; ++i) {
+        if (!chara_line[i]) {
+          chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+        }
+      }
 
-    chara_line[random_int(adapt_start_index + 6, adapt_start_index + 9)] =
-      String.fromCharCode(65 + random_int(0, 1));
-    for (let i = adapt_start_index + 6; i <= adapt_start_index + 9; ++i) {
-      if (!chara_line[i]) {
-        chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+      chara_line[random_int(adapt_start_index + 2, adapt_start_index + 5)] =
+        String.fromCharCode(65 + random_int(0, 1));
+      for (let i = adapt_start_index + 2; i <= adapt_start_index + 5; ++i) {
+        if (!chara_line[i]) {
+          chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+        }
+      }
+
+      chara_line[random_int(adapt_start_index + 6, adapt_start_index + 9)] =
+        String.fromCharCode(65 + random_int(0, 1));
+      for (let i = adapt_start_index + 6; i <= adapt_start_index + 9; ++i) {
+        if (!chara_line[i]) {
+          chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+        }
       }
     }
   }
@@ -140,7 +164,10 @@ lines
           } else if (i === cup_index) {
             col_value = breast_down;
           } else if (i >= adapt_start_index && i <= adapt_start_index + 9) {
-            col_value = 'G'.charCodeAt(0) - col_value.charCodeAt(0);
+            col_value = Math.min(
+              'G'.charCodeAt(0) - col_value.charCodeAt(0),
+              6,
+            );
           }
           buffer += `${header[i].replace('|', ',')},${col_value}\n`;
         }
