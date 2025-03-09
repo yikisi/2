@@ -36,9 +36,7 @@ function random_int(min, max) {
 }
 
 function random_attr(chara_line) {
-  const id = Number(chara_line[id_index]),
-    contestant = named_contestants.find((e) => e.id === id);
-
+  const id = Number(chara_line[id_index]);
   // 生成随机属性
   let sum_attr = 550;
   chara_line[attr_start_index] = random_int(84, 137);
@@ -82,22 +80,29 @@ function random_attr(chara_line) {
   chara_line[buff_start_index + 4] = sum_buff;
 
   if (!chara_line[adapt_start_index]) {
-    if (contestant !== undefined) {
+    let contestant;
+    if (
+      (contestant = named_contestants.find((e) => e.id === id)) !== undefined
+    ) {
       for (let i = 0; i < 2; ++i) {
         chara_line[adapt_start_index + i] = String.fromCharCode(
-          65 + 6 - contestant.adapt_ground[i],
+          65 + 6 - Math.min(contestant.adapt_ground[i], 6),
         );
       }
       for (let i = 0; i < 4; ++i) {
         chara_line[adapt_start_index + 2 + i] = String.fromCharCode(
-          65 + 6 - contestant.adapt_distance[i],
+          65 + 6 - Math.min(contestant.adapt_distance[i], 6),
         );
       }
       for (let i = 0; i < 4; ++i) {
         chara_line[adapt_start_index + 6 + i] = String.fromCharCode(
-          65 + 6 - contestant.adapt_style[i],
+          65 + 6 - Math.min(contestant.adapt_style[i], 6),
         );
       }
+      console.log(
+        id,
+        chara_line.slice(adapt_start_index, adapt_start_index + 10),
+      );
     } else {
       // 生成随机适性，每类有一个保底B，其他在A～G之中随机
       chara_line[random_int(adapt_start_index, adapt_start_index + 1)] =
@@ -164,10 +169,7 @@ lines
           } else if (i === cup_index) {
             col_value = breast_down;
           } else if (i >= adapt_start_index && i <= adapt_start_index + 9) {
-            col_value = Math.min(
-              'G'.charCodeAt(0) - col_value.charCodeAt(0),
-              6,
-            );
+            col_value = 'G'.charCodeAt(0) - col_value.charCodeAt(0);
           }
           buffer += `${header[i].replace('|', ',')},${col_value}\n`;
         }

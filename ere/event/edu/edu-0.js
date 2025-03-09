@@ -743,7 +743,7 @@ module.exports = class extends StrangeDayEvents {
           println();
           printButton('太累了吗？还是继续休息吧（不去看异样）', 1);
           printButton('睡麻了吗？稍微活动一下吧（看一下异样）', 2);
-          if (await input()) {
+          if ((await input()) === 1) {
             await printAndWait([
               me.get_colored_name(),
               ' 昏昏沉沉的，在 ',
@@ -818,7 +818,7 @@ module.exports = class extends StrangeDayEvents {
               me.get_colored_name(),
               ' 吃甜品来感谢 ',
               me.get_colored_name(),
-              ' （获得[浓缩咖啡]×5）',
+              '。（获得[浓缩咖啡]×5）',
             ]);
             add('item:浓缩咖啡', 5);
           }

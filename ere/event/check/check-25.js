@@ -122,7 +122,7 @@ module.exports = class extends CustomizedCheck {
         edu_weeks,
       );
       check_and_add_event(
-        new CoffeeEduMarks(),
+        edu_marks,
         edu_weeks,
         'scared',
         event_hooks.week_end,
