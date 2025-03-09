@@ -1,6 +1,7 @@
 /**
  * @file 特殊赛后事件口上
  * @author 幽白書
+ * @author Mr.E.
  * @author 无名黑奴（临时）
  */
 const {
@@ -8,6 +9,7 @@ const {
   drawLine,
   get,
   input,
+  print,
   printAndWait,
   printButton,
   println,
@@ -19,10 +21,17 @@ const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const {
   begin_and_init_ero,
+  end_ero_and_show_result,
   end_ero_and_train,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_get_colored_callname,
+  sys_like_chara,
+} = require('#/system/sys-calc-chara-others');
+
+const page_ero = require('#/page/page-ero');
 
 const print_event_name = require('#/event/snippets/print-event-name');
 
@@ -31,9 +40,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const EtsukoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-303');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { location_enum } = require('#/data/locations');
 const { class_enum, track_names } = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -63,16 +74,15 @@ const rec_list = {};
 async function check_race_events(race, info, team_contestants) {
   const may_life_marks = new MayLifeMarks();
   let handler = undefined;
-  if (team_contestants.findIndex((e) => e.rank.curr === 1) !== -1) {
+  const best = Math.min(...team_contestants.map((e) => e.rank.curr)),
+    mvp = team_contestants.find((e) => e.rank.curr === best).index_chara,
+    my_edu_marks = new MyEduMarks();
+  if (best === 1) {
     (rec_list[race] || []).forEach(
       (e) => !get(`cflag:${e}:随机招募`) && add(`cflag:${e}:随机招募`, -1),
     );
   }
-  if (
-    race === race_enum.prix_lat &&
-    team_contestants.findIndex((e) => e.rank.curr === 1) !== -1 &&
-    !may_life_marks.who_am_i
-  ) {
+  if (race === race_enum.prix_lat && best === 1 && !may_life_marks.who_am_i) {
     may_life_marks.who_am_i = 1;
   }
   if (get('flag:初见URA颁奖') < 2) {
@@ -126,7 +136,7 @@ async function check_race_events(race, info, team_contestants) {
     get('cflag:303:招募状态') === recruit_flags.yes &&
     get('cflag:0:妊娠阶段') >> pregnant_stage_enum.fetal > 0 &&
     team_contestants.findIndex((e) => e.index_chara === 0) === -1 &&
-    Math.min(...team_contestants.map((e) => e.rank.curr)) === 1 &&
+    best === 1 &&
     info.race_class <= class_enum.G3
   ) {
     new EtsukoLifeMarks().rape = 1;
@@ -137,9 +147,7 @@ async function check_race_events(race, info, team_contestants) {
     handler = async () => {
       const etsuko = get_chara_talk(303),
         me = get_chara_talk(0),
-        champion = get_chara_talk(
-          team_contestants.find((e) => e.rank.curr === 1).index_chara,
-        );
+        champion = get_chara_talk(mvp);
       if (get_penis_size(303) === 0) {
         set(`status:303:弗隆${Math.random() < 0.5 ? 'K' : 'P'}`, 1);
       }
@@ -482,6 +490,104 @@ async function check_race_events(race, info, team_contestants) {
       println();
       sys_like_chara(champion.id, 0, 50) && (await waitAnyKey());
       sys_like_chara(303, 0, 200) && (await waitAnyKey());
+    };
+  } else if (
+    get(`cflag:${mvp}:性别`) !== 1 &&
+    best === 1 &&
+    get(`love:${mvp}`) >= 75 &&
+    !my_edu_marks.we_are_one
+  ) {
+    /** @author Mr.E. */
+    handler = async () => {
+      my_edu_marks.we_are_one = 1;
+      const chara = get_chara_talk(mvp),
+        me = get_chara_talk(0);
+      await print_event_name(['「」心「」体'], chara);
+      await printAndWait([
+        '回到训练室，',
+        chara.get_colored_name(),
+        ' 带着头上的洗澡巾在沙发上起身，笑眯眯地看着 ',
+        me.get_colored_name(),
+        '。',
+      ]);
+      println();
+      await chara.say_and_wait([
+        '今天我的发挥也很不错吧，',
+        sys_get_colored_callname(chara.id, 0),
+        ' 是不是要～好好奖励奖励我？',
+      ]);
+      printButton('「今天真是辛苦你了，好好休息，我们出去玩一圈吧！」', 1);
+      print('（干劲-1，好感+50）');
+      printButton('「那，你想要什么奖励？」', 2);
+      if ((await input()) === 1) {
+        sys_change_motivation(chara.id, -1) && (await waitAnyKey());
+        sys_like_chara(chara.id, 0, 50) && (await waitAnyKey());
+      } else {
+        await printAndWait(['下意识的反问调笑，却等到了意料之外的回答']);
+        println();
+        await chara.say_and_wait([
+          '我想成为 ',
+          sys_get_colored_callname(chara.id, 0),
+          ' 的『新娘子』，怎么样？」',
+        ]);
+        println();
+        await printAndWait([
+          '眼前的马娘笑嘻嘻的，一边说着一边又把 ',
+          me.get_colored_name(),
+          ' 的手往',
+          chara.sex,
+          '的身上放',
+        ]);
+        println();
+        await chara.say_and_wait([
+          '我们是一心同体的关系，对吧？这个时候一定是一样的想法对吧？反正不管 ',
+          me.get_colored_name(),
+          ' 怎么说，我已经忍不了啦！！！',
+        ]);
+        println();
+        await printAndWait([
+          '她用尾巴反锁上了门，一把抱住 ',
+          me.get_colored_name(),
+          ' 冲向边上的沙发上',
+        ]);
+        println();
+        await chara.say_and_wait(['扯下我的「头纱」，像对待妻子一样对我吧～']);
+        println();
+        await printAndWait([
+          '在 ',
+          me.get_colored_name(),
+          ' 意识过来的时候，一切都来不及了',
+        ]);
+        println();
+        printButton('「冷静一下，我想我们还有别的事情要做……」', 1);
+        printButton(
+          '粗暴地扯下被当做头纱的浴巾，是时候让她知道谁才是床上的霸主了',
+          2,
+        );
+        begin_and_init_ero(0, chara.id);
+        if ((await input()) === 1) {
+          await printAndWait([
+            '听到 ',
+            me.get_colored_name(),
+            ' 拒绝，只见抱着 ',
+            me.get_colored_name(),
+            ' 的马娘依旧是那副笑脸。',
+          ]);
+          await chara.say_and_wait(
+            '不想要？看来我们的默契还不够啊，我知道了，只要一直做，做到一心同体就没问题了吧？',
+          );
+          set('tflag:主导权', chara.id);
+        }
+        const location = get('flag:当前位置');
+        if (get('cflag:0:位置') > 0) {
+          set('flag:当前位置', location_enum.hotel);
+        } else {
+          set('flag:当前位置', location_enum.restroom);
+        }
+        await page_ero(chara.id, true);
+        await end_ero_and_show_result(true);
+        set('flag:当前位置', location);
+      }
     };
   }
   if (handler) {

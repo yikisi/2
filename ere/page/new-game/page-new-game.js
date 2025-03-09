@@ -280,6 +280,7 @@ module.exports = async (src_chara) => {
           my_marks.custom = get_random_value(1, 12);
           my_marks.trainer_race = get_random_value(13, 36);
           my_marks.work_over = my_marks.sick = 24;
+          my_marks.kamen_rider = 1;
           new MeekEduMarks().all_round = get_random_value(5, 12);
           if (src_chara !== 10) {
             new TokinoLifeMarks().shadow = get_random_value(5, 12);

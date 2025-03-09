@@ -131,7 +131,7 @@ function set_from_theme(theme) {
       era.set('flag:道具价格', -50);
       era.set('flag:宝珠消耗量', -50);
       era.set('flag:因子消耗量', -50);
-      era.set('flag:雷普抵抗', 1);
+      era.set('flag:强奸抵抗', 1);
       era.set('flag:道具影响', -25);
       era.set('flag:声望不足替换', 0);
       era.set('flag:压力获取', 0);
@@ -160,7 +160,7 @@ function set_from_theme(theme) {
       era.set('flag:道具价格', 0);
       era.set('flag:宝珠消耗量', 0);
       era.set('flag:因子消耗量', 0);
-      era.set('flag:雷普抵抗', 1);
+      era.set('flag:强奸抵抗', 1);
       era.set('flag:道具影响', -25);
       era.set('flag:声望不足替换', 0);
       era.set('flag:压力获取', 1);
@@ -189,7 +189,7 @@ function set_from_theme(theme) {
       era.set('flag:道具价格', 100);
       era.set('flag:宝珠消耗量', 100);
       era.set('flag:因子消耗量', 100);
-      era.set('flag:雷普抵抗', 1);
+      era.set('flag:强奸抵抗', 1);
       era.set('flag:道具影响', -25);
       era.set('flag:声望不足替换', 1);
       era.set('flag:压力获取', 1);
@@ -218,7 +218,7 @@ function set_from_theme(theme) {
       era.set('flag:道具价格', 100);
       era.set('flag:宝珠消耗量', 100);
       era.set('flag:因子消耗量', 100);
-      era.set('flag:雷普抵抗', 1);
+      era.set('flag:强奸抵抗', 1);
       era.set('flag:道具影响', -25);
       era.set('flag:声望不足替换', 1);
       era.set('flag:压力获取', 1);
@@ -247,7 +247,7 @@ function set_from_theme(theme) {
       era.set('flag:道具价格', 0);
       era.set('flag:宝珠消耗量', 0);
       era.set('flag:因子消耗量', 0);
-      era.set('flag:雷普抵抗', 1);
+      era.set('flag:强奸抵抗', 1);
       era.set('flag:道具影响', -25);
       era.set('flag:声望不足替换', 0);
       era.set('flag:压力获取', 0);
@@ -276,7 +276,7 @@ function set_from_theme(theme) {
       era.set('flag:道具价格', 0);
       era.set('flag:宝珠消耗量', -50);
       era.set('flag:因子消耗量', 0);
-      era.set('flag:雷普抵抗', 0);
+      era.set('flag:强奸抵抗', 0);
       era.set('flag:道具影响', 0);
       era.set('flag:声望不足替换', 0);
       era.set('flag:压力获取', 0);
@@ -305,7 +305,7 @@ function set_from_theme(theme) {
       era.set('flag:道具价格', 0);
       era.set('flag:宝珠消耗量', 0);
       era.set('flag:因子消耗量', 0);
-      era.set('flag:雷普抵抗', 1);
+      era.set('flag:强奸抵抗', 1);
       era.set('flag:道具影响', -25);
       era.set('flag:声望不足替换', 1);
       era.set('flag:压力获取', 0);
@@ -334,7 +334,7 @@ function set_from_theme(theme) {
       era.set('flag:道具价格', 0);
       era.set('flag:宝珠消耗量', 0);
       era.set('flag:因子消耗量', 0);
-      era.set('flag:雷普抵抗', 1);
+      era.set('flag:强奸抵抗', 1);
       era.set('flag:道具影响', -25);
       era.set('flag:声望不足替换', 1);
       era.set('flag:压力获取', 0);
@@ -689,7 +689,7 @@ async function page_settings() {
         ],
       },
       {
-        key: '雷普抵抗',
+        key: '强奸抵抗',
         label: '角色的强奸抵抗',
         options: [
           { l: '一推就倒', v: 0 },

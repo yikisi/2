@@ -355,6 +355,7 @@ module.exports = async () => {
               init_chara(346);
               init_chara(347);
               init_chara(348);
+              new MyEduMarks().kamen_rider = 1;
             }
             return true;
           } else {

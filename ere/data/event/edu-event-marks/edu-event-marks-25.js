@@ -7,6 +7,8 @@ class CoffeeEduMarks extends EduEventMarks {
   toky_yus;
   // 其他结局
   horse;
+  // 怕黑
+  scared;
 
   constructor() {
     super(25);

@@ -368,7 +368,7 @@ async function goto_sex(chara_id, sex_loc) {
             ),
           );
           if (
-            !era.get('flag:雷普抵抗') ||
+            !era.get('flag:强奸抵抗') ||
             sys_get_strength_ratio_in_fight(0, chara_id) >
               (dice = Math.random())
           ) {
@@ -408,7 +408,7 @@ async function goto_sex(chara_id, sex_loc) {
           );
           era.add(`item:${ret}`, -1);
           if (
-            !era.get('flag:雷普抵抗') ||
+            !era.get('flag:强奸抵抗') ||
             sys_get_intelligence_ratio_in_fight(0, chara_id) >
               (dice = Math.random())
           ) {
