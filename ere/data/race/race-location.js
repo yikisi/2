@@ -23,6 +23,11 @@ track2location[track_enum.shatin] = {
   lan: '粤',
   loc: location_enum.hongkong,
 };
+track2location[track_enum.meydan] = {
+  con: '阿',
+  lan: '英',
+  loc: location_enum.dubai,
+};
 
 module.exports = {
   foreign_race_list: Object.values(race_enum).filter(

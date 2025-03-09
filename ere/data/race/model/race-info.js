@@ -85,6 +85,8 @@ const track_enum = {
   baltimore: 55501,
   // 贝蒙园
   new_york: 55501,
+  // 迈丹
+  meydan: 97101,
 };
 Object.keys(track_enum).forEach((e, i) => (track_enum[e] = i));
 
@@ -112,6 +114,7 @@ track_names[track_enum.shatin] = '沙田';
 track_names[track_enum.kentucky] = '丘吉尔园';
 track_names[track_enum.baltimore] = '宾利高';
 track_names[track_enum.new_york] = '贝蒙园';
+track_names[track_enum.meydan] = '迈丹';
 
 class RaceSlope {
   /**

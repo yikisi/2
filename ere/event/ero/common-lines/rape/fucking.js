@@ -9,8 +9,9 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const EroFucking = require('#/event/ero/common-lines/interface/ero-fucking');
 const EroRapedFucking = require('#/event/ero/common-lines/rape/raped-fucking');
 
-const { get_hair_color, get_skin_color } = require('#/data/info-generator');
 const { get_random_entry } = require('#/utils/list-utils');
+
+const { get_hair_color, get_skin_color } = require('#/data/info-generator');
 
 const skin_color_desc = ['象牙白', '白皙', '红润', '浅褐色'];
 
@@ -113,19 +114,23 @@ async function continue_fucking_common(attacker, defender) {
  */
 async function common_missionary(attacker, defender, hook) {
   if (hook.arg) {
-    const body_hair_color = era.get(`cstr:${defender.id}:毛色`);
     await defender.say_and_wait('人渣！离我远点，滚啊！');
     await defender.print_and_wait([
       '试着抬起脚踢出，却被轻易的抓住了脚腕朝上抬起。',
     ]);
-    await defender.print_and_wait([
-      '迫使自己露出了被',
-      {
-        color: get_hair_color(body_hair_color),
-        content: `${body_hair_color}毛`,
-      },
-      '尾巴遮住的雌穴。',
-    ]);
+    if (era.get(`cflag:${defender.id}:种族`) > 0) {
+      const body_hair_color = era.get(`cstr:${defender.id}:毛色`);
+      await defender.print_and_wait([
+        '迫使自己露出了被',
+        {
+          color: get_hair_color(body_hair_color),
+          content: `${body_hair_color}毛`,
+        },
+        '尾巴遮住的雌穴。',
+      ]);
+    } else {
+      await defender.print_and_wait('迫使自己露出了下流的雌穴。');
+    }
     await defender.print_and_wait([
       '并在一起的手腕也被面前这家伙扣住，让自己意识到现在已经彻底无法反抗。',
     ]);
@@ -196,19 +201,20 @@ async function common_hug_standing(attacker, defender, hook) {
     ]);
     await defender.say_and_wait(['咕呜❤️！']);
     const body_hair_color = era.get(`cstr:${defender.id}:毛色`);
-    await defender.print_and_wait([
-      '这种姿势，这种能让肉茎完全贯穿着自己的小穴的姿势，',
-      ...(era.get(`cflag:${defender.id}:种族`)
-        ? [
-            '对于赛马娘来说实在是太犯规了啊！连',
-            {
-              color: get_hair_color(body_hair_color),
-              content: `${body_hair_color}色`,
-            },
-            '的马尾巴也被当成鞭子一样抓着抽在自己的臀瓣上。',
-          ]
-        : ['实在是太犯规了啊！']),
-    ]);
+    if (era.get(`cflag:${defender.id}:种族`) > 0) {
+      await defender.print_and_wait([
+        '这种姿势，这种能让肉茎完全贯穿着自己的小穴的姿势，对于赛马娘来说实在是太犯规了啊！连',
+        {
+          color: get_hair_color(body_hair_color),
+          content: `${body_hair_color}色`,
+        },
+        '的马尾巴也被当成鞭子一样抓着抽在自己的臀瓣上。',
+      ]);
+    } else {
+      await defender.print_and_wait(
+        '这种姿势，这种能让肉茎完全贯穿着自己的小穴的姿势，实在是太犯规了啊！',
+      );
+    }
     await defender.print_and_wait([
       '上半身立即在这撞击之下瘫软下来，仅仅只靠着被拉住的双手在苦苦支持着。',
     ]);
@@ -351,25 +357,25 @@ async function common_hug_suspended_congress(attacker, defender, hook) {
     ]);
     const body_hair_color = era.get(`cstr:${defender.id}:毛色`),
       hair_color = era.get(`cstr:${defender.id}:发色`);
-    await attacker.print_and_wait([
-      '好处就是，肉棒能借助重力直直的顶入',
-      ...(era.get(`cflag:${defender.id}:种族`)
-        ? [
-            {
-              color: get_hair_color(body_hair_color),
-              content: `${body_hair_color}毛`,
-            },
-            '马娘',
-          ]
-        : [
-            {
-              color: get_hair_color(hair_color),
-              content: `${hair_color}发`,
-            },
-            '女性',
-          ]),
-      '，的深处，让双方的性器紧密相连。',
-    ]);
+    if (era.get(`cflag:${defender.id}:种族`) > 0) {
+      await attacker.print_and_wait([
+        '好处就是，肉棒能借助重力直直的顶入',
+        {
+          color: get_hair_color(body_hair_color),
+          content: `${body_hair_color}毛`,
+        },
+        '马娘的深处，让双方的性器紧密相连。',
+      ]);
+    } else {
+      await attacker.print_and_wait([
+        '好处就是，肉棒能借助重力直直的顶入',
+        {
+          color: get_hair_color(hair_color),
+          content: `${hair_color}发`,
+        },
+        '女性的深处，让双方的性器紧密相连。',
+      ]);
+    }
     await defender.say_and_wait('会掉下去！……绝对会掉下去的！');
     await attacker.print_and_wait([
       '在失重和下身强烈快感的共同冲击下，身前几乎失去判断能力 ',

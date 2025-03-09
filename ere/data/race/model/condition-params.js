@@ -11,6 +11,7 @@ class ConditionParams {
   base_guts;
   base_power;
   base_speed;
+  base_stamina;
   base_wiz;
   bashin_diff_behind;
   bashin_diff_infront;

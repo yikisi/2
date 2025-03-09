@@ -309,7 +309,7 @@ module.exports = async () => {
             { isBr: true },
             {
               content: 'EraElectron引擎发布页',
-              url: 'https://gitgud.io/umaera/era-electron/-/releases/permalink/latest',
+              url: 'https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest',
             },
             { isBr: true },
             {

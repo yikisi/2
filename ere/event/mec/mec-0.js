@@ -34,6 +34,14 @@ module.exports = class extends CustomizedMec {
           '现役马娘，但是只能参加资深年比赛；没有工资，参赛时赏金分成+400%。',
       });
     }
+    if (!era.get('flag:强奸抵抗')) {
+      ret_list.push({
+        color: buff_colors[2],
+        content: '恶行易施',
+        title:
+          '「Dirty Deeds Done Dirt Cheap……」去强奸吧，去蹂躏吧，去征服吧！',
+      });
+    }
     if (era.get('status:0:马语者')) {
       ret_list.push({
         color: buff_colors[2],

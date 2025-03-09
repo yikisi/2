@@ -371,19 +371,66 @@ class CustomizedDaily {
 
   /** @author 雞雞 */
   async out_church() {
-    const me = get_chara_talk(0);
+    const chara = get_chara_talk(this.id),
+      me = get_chara_talk(0);
     await era.printAndWait([
       me.get_colored_name(),
       ' 与 ',
-      get_chara_talk(this.id).get_colored_name(),
+      chara.get_colored_name(),
       ' 一起来到神社祈福。',
     ]);
-    if (Math.random() < 0.5) {
+    const dice = Math.random();
+    if (dice < 0.5) {
       await era.printAndWait([
-        '抽到了吉利的签文！此行让 ',
+        '抽到了',
+        dice < 0.05 ? '大吉' : '吉利',
+        '的签文！此行让 ',
         me.get_couple_title(),
         ' 感觉很高兴。',
       ]);
+      /** @author Mr.E. */
+      if (dice < 0.0001 && era.get('flag:强奸抵抗') === 1) {
+        await era.printAndWait([
+          '署名是未知的',
+          chara.get_uma_sex_title(),
+          '文本施法素材！',
+        ]);
+        era.set('flag:强奸抵抗', '');
+      } else if (dice < 0.01) {
+        await era.printAndWait([
+          '眼前突然幻视到一扇彩色的闸门，心情突然好了起来',
+        ]);
+        const item = get_random_entry([0, 1, 2, 3, 12]);
+        era.add(`item:${item}`, 1);
+        await era.printAndWait([
+          '获得了 [',
+          era.get(`itemname:${item}`),
+          ']！',
+        ]);
+      } else if (dice < 0.02) {
+        await era.printAndWait([
+          '一阵风吹过，被吹倒在 ',
+          chara.get_colored_name(),
+          ' 的身上了？！',
+        ]);
+        era.println();
+        sys_like_chara(this.id, 0, 20) && (await era.waitAnyKey());
+      } else if (dice < 0.03 && chara.sex_code !== 1) {
+        await era.printAndWait([
+          '一阵风吹过，旁边 ',
+          chara.get_colored_name(),
+          ' 的裙子居然被吹了起来？！',
+        ]);
+        sys_change_lust(this.id, 1500);
+      } else if (dice < 0.05) {
+        await era.printAndWait(['一阵风吹过，居然是马币？！']);
+        await era.printAndWait([
+          '获得了 ',
+          { color: money_color, content: '150' },
+          ' 马币！',
+        ]);
+        era.add('flag:当前马币', 150);
+      }
     } else {
       await era.printAndWait([
         '抽到了不吉的签文！此行让 ',

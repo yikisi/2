@@ -18,19 +18,21 @@ const { copySync } = require('fs-extra');
 
 const work_dir = resolve('.'),
   engine_path = join(work_dir, 'engine'),
-  game_dir = join(engine_path, process.env.GAME_ALL_DIR),
-  game_zip = join(engine_path, process.env.GAME_ALL_ZIP);
+  game_all_dir = join(engine_path, process.env.GAME_ALL_DIR),
+  game_all_zip = join(engine_path, process.env.GAME_ALL_ZIP),
+  game_dir = join(game_all_dir, process.env.GAME_DIR),
+  game_zip = join(game_all_dir, process.env.GAME_ZIP);
 
 execSync('git submodule update --init');
 execSync('git lfs pull', { cwd: engine_path });
 execSync('npm install', { cwd: engine_path });
 execSync('npm run win:pack', { cwd: engine_path });
 
-rmSync(game_dir, { force: true, recursive: true });
-renameSync(join(engine_path, 'dist_electron', 'win-unpacked'), game_dir);
-mkdirSync(join(game_dir, 'game'));
+rmSync(game_all_dir, { force: true, recursive: true });
+renameSync(join(engine_path, 'dist_electron', 'win-unpacked'), game_all_dir);
+mkdirSync(join(game_all_dir, 'game'));
 ['ere', 'csv', 'CHANGELOG.md', 'RELEASE.md'].forEach((d) =>
-  copySync(join(work_dir, d), join(game_dir, 'game', d)),
+  copySync(join(work_dir, d), join(game_all_dir, 'game', d)),
 );
 
 function clean_json(p) {
@@ -47,8 +49,8 @@ function clean_json(p) {
   });
 }
 
-clean_json(join(game_dir, 'game', 'ere'));
-rmSync(game_zip, { force: true });
+clean_json(join(game_all_dir, 'game', 'ere'));
+rmSync(game_all_zip, { force: true });
 switch (os.platform()) {
   case 'linux':
   case 'darwin':
@@ -56,9 +58,23 @@ switch (os.platform()) {
     break;
   case 'win32':
 }
-execSync(`${path7za} a -pera ${game_zip} ${game_dir}`);
+execSync(`${path7za} a -pera ${game_all_zip} ${game_all_dir}`);
 execSync(
-  `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${game_zip} "${process.env.GAME_ZIP_URL}"`,
+  `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${game_all_zip} "${process.env.GAME_ZIP_URL}"`,
+);
+
+rmSync(game_dir, { force: true, recursive: true });
+copySync(join(game_all_dir, 'game'), game_dir);
+rmSync(game_zip, { force: true });
+
+execSync(`${path7za} a -pera ${process.env.GAME_ZIP} ${process.env.GAME_DIR}`, {
+  cwd: game_all_dir,
+});
+execSync(
+  `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${game_zip} "${process.env.GAME_URL}"`,
+  {
+    cwd: game_all_dir,
+  },
 );
 
 // 检查是否要生成最小更新用的基础包
@@ -74,12 +90,12 @@ const game_version = readFileSync(join(work_dir, 'csv/GameBase.csv'), 'utf-8')
   .substring(6)
   .replace(/\s+$/, '');
 if (min_version !== game_version) {
-  const base_zip = join(game_dir, 'game', 'base.zip');
+  const base_zip = join(game_all_dir, 'game', 'base.zip');
   rmSync(base_zip, { force: true });
   const zip_stream = new zip.Stream();
   // 基础包里只需要一个静态数据文件夹（这里是csv）和游戏脚本集（ere）
-  zip_stream.addEntry(join(game_dir, 'game', 'csv'));
-  zip_stream.addEntry(join(game_dir, 'game', 'ere'));
+  zip_stream.addEntry(join(game_all_dir, 'game', 'csv'));
+  zip_stream.addEntry(join(game_all_dir, 'game', 'ere'));
   const write_stream = createWriteStream(base_zip);
   zip_stream.pipe(write_stream);
   write_stream.on('finish', () =>

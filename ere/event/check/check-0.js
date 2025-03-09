@@ -13,7 +13,8 @@ const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedCheck {
   check_next_week() {
-    const my_edu_marks = new MyEduMarks();
+    const my_edu_marks = new MyEduMarks(),
+      in_team_list = sys_filter_chara('cflag', '招募状态', recruit_flags.yes);
     if (my_edu_marks.god > 0) {
       if (--my_edu_marks.god === 0) {
         add_event(
@@ -124,6 +125,33 @@ module.exports = class extends CustomizedCheck {
       add_event(
         event_hooks.week_end,
         new EventObject(0, cb_enum.edu).set_arg('second_chance'),
+      );
+    }
+    if (Math.random() < 0.005) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(0, cb_enum.edu).set_arg('wind_welcome'),
+      );
+    }
+    if (
+      get('flag:当前回合数') % 48 === 6 &&
+      in_team_list.findIndex((e) => e > 0 && get(`love:${e}`) >= 75) === -1
+    ) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(0, cb_enum.edu).set_arg('chocolate'),
+      );
+    }
+    if (get('flag:当前回合数') % 48 === 47) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(0, cb_enum.edu).set_arg('sakura_regret'),
+      );
+    }
+    if (my_edu_marks.nice_weekend > 1 && --my_edu_marks.nice_weekend === 1) {
+      add_event(
+        event_hooks.week_end,
+        new EventObject(0, cb_enum.edu).set_arg('nice_weekend'),
       );
     }
   }

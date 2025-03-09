@@ -1,5 +1,7 @@
 const { readFileSync, writeFileSync } = require('fs');
 
+const named_contestants = require('../../ere/data/race/contestants/named.json');
+
 const cup_dict = {
   AA: 5,
 };
@@ -26,13 +28,15 @@ const cup_index = header.findIndex((e) => e === '角色Flag|下胸围'),
   buff_start_index = header.findIndex((e) => e === '角色Flag|速度加成'),
   adapt_start_index = header.findIndex((e) => e === '角色Flag|草地适性'),
   title_index = header.findIndex((e) => e === '角色Str|称号'),
-  race_index = header.findIndex((e) => e === '角色Flag|种族');
+  race_index = header.findIndex((e) => e === '角色Flag|种族'),
+  id_index = header.findIndex((e) => e === '角色编号');
 
 function random_int(min, max) {
   return min + Math.floor((max + 1 - min) * Math.random());
 }
 
 function random_attr(chara_line) {
+  const id = Number(chara_line[id_index]);
   // 生成随机属性
   let sum_attr = 550;
   chara_line[attr_start_index] = random_int(84, 137);
@@ -76,28 +80,53 @@ function random_attr(chara_line) {
   chara_line[buff_start_index + 4] = sum_buff;
 
   if (!chara_line[adapt_start_index]) {
-    // 生成随机适性，每类有一个保底B，其他在A～G之中随机
-    chara_line[random_int(adapt_start_index, adapt_start_index + 1)] =
-      String.fromCharCode(65 + random_int(0, 1));
-    for (let i = adapt_start_index; i <= adapt_start_index + 1; ++i) {
-      if (!chara_line[i]) {
-        chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+    let contestant;
+    if (
+      (contestant = named_contestants.find((e) => e.id === id)) !== undefined
+    ) {
+      for (let i = 0; i < 2; ++i) {
+        chara_line[adapt_start_index + i] = String.fromCharCode(
+          65 + 6 - Math.min(contestant.adapt_ground[i], 6),
+        );
       }
-    }
-
-    chara_line[random_int(adapt_start_index + 2, adapt_start_index + 5)] =
-      String.fromCharCode(65 + random_int(0, 1));
-    for (let i = adapt_start_index + 2; i <= adapt_start_index + 5; ++i) {
-      if (!chara_line[i]) {
-        chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+      for (let i = 0; i < 4; ++i) {
+        chara_line[adapt_start_index + 2 + i] = String.fromCharCode(
+          65 + 6 - Math.min(contestant.adapt_distance[i], 6),
+        );
       }
-    }
+      for (let i = 0; i < 4; ++i) {
+        chara_line[adapt_start_index + 6 + i] = String.fromCharCode(
+          65 + 6 - Math.min(contestant.adapt_style[i], 6),
+        );
+      }
+      console.log(
+        id,
+        chara_line.slice(adapt_start_index, adapt_start_index + 10),
+      );
+    } else {
+      // 生成随机适性，每类有一个保底B，其他在A～G之中随机
+      chara_line[random_int(adapt_start_index, adapt_start_index + 1)] =
+        String.fromCharCode(65 + random_int(0, 1));
+      for (let i = adapt_start_index; i <= adapt_start_index + 1; ++i) {
+        if (!chara_line[i]) {
+          chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+        }
+      }
 
-    chara_line[random_int(adapt_start_index + 6, adapt_start_index + 9)] =
-      String.fromCharCode(65 + random_int(0, 1));
-    for (let i = adapt_start_index + 6; i <= adapt_start_index + 9; ++i) {
-      if (!chara_line[i]) {
-        chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+      chara_line[random_int(adapt_start_index + 2, adapt_start_index + 5)] =
+        String.fromCharCode(65 + random_int(0, 1));
+      for (let i = adapt_start_index + 2; i <= adapt_start_index + 5; ++i) {
+        if (!chara_line[i]) {
+          chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+        }
+      }
+
+      chara_line[random_int(adapt_start_index + 6, adapt_start_index + 9)] =
+        String.fromCharCode(65 + random_int(0, 1));
+      for (let i = adapt_start_index + 6; i <= adapt_start_index + 9; ++i) {
+        if (!chara_line[i]) {
+          chara_line[i] = String.fromCharCode(65 + random_int(0, 6));
+        }
       }
     }
   }
@@ -111,7 +140,8 @@ lines
     if (
       chara_line.length === header.length &&
       chara_line[cup_index] &&
-      chara_line[breast_index]
+      chara_line[breast_index] &&
+      chara_line[file_name_index]
     ) {
       if (!chara_line[attr_start_index]) {
         random_attr(chara_line);

@@ -43,6 +43,8 @@ const {
 const RaceHistory = require('#/data/race/model/race-history');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
 
+const arrows = { '-1': '▼', 0: '', 1: '▲' };
+
 /**
  * @param {number} chara_id
  * @param {number} race
@@ -76,13 +78,14 @@ function get_suffix(chara_id, type) {
     const chara_score = get_chara_score(chara_id),
       motivation = era.get(`cflag:${chara_id}:干劲`),
       chara_level = get_rank_level(chara_score),
-      races = new RaceHistory(chara_id).get_values();
+      races = new RaceHistory(chara_id).get_values(),
+      wins = races.filter((e) => e.rank === 1).length;
     ret.push(
       {
         config: {
           align: 'center',
           color: adaptability_colors[chara_level],
-          width: 1,
+          width: 2,
           fontWeight: 'bold',
         },
         content: chara_score,
@@ -98,12 +101,15 @@ function get_suffix(chara_id, type) {
         type: 'text',
       },
       {
-        config: { align: 'center', width: 3 },
+        config: { align: 'center', width: 2 },
         content:
           races.length > 0
-            ? `${races.length} 战 ${
-                races.filter((e) => e.rank === 1).length
-              } 胜`
+            ? [
+                {
+                  content: `${wins}/${races.length}`,
+                  title: `${races.length} 战 ${wins} 胜`,
+                },
+              ]
             : '未出走',
         type: 'text',
       },
@@ -113,7 +119,7 @@ function get_suffix(chara_id, type) {
         type: 'text',
       },
       {
-        config: { align: 'center', width: 1 },
+        config: { align: 'center', width: 2 },
         content: chara_id
           ? `${era.get(`cflag:${chara_id}:育成次数`) + 1}`
           : '-',
@@ -147,7 +153,7 @@ function get_suffix(chara_id, type) {
         type: 'text',
       },
       {
-        config: { align: 'center', color: love_colors[love], width: 1 },
+        config: { align: 'center', color: love_colors[love], width: 2 },
         content: love,
         type: 'text',
       },
@@ -163,7 +169,6 @@ function get_suffix(chara_id, type) {
       config: {
         color: attr_background_colors['体力'],
         height: 22,
-        offset: 1,
         width: 3,
         barWidth: 20,
       },
@@ -199,39 +204,76 @@ function get_suffix(chara_id, type) {
   return ret;
 }
 
+/**
+ * @param {number[]} team
+ * @returns {number[]}
+ */
+function sort_team_by_id(team) {
+  return sort_list(team, (e) => e, true);
+}
+
+/**
+ * @param {number[]} team
+ * @returns {number[]}
+ */
+function sort_team_by_train(team) {
+  return sort_list(
+    team,
+    (chara_id) => {
+      return (
+        (era.get(`cflag:${chara_id}:育成回合计时`) << 15) +
+        get_chara_score(chara_id, true)
+      );
+    },
+    false,
+  );
+}
+
+/**
+ * @param {number[]} team
+ * @returns {number[]}
+ */
+function sort_team_by_all(team) {
+  return sort_list(team, (chara_id) => {
+    return (
+      (Math.min(era.get(`cflag:${chara_id}:成长阶段`), 4) << 17) +
+      (era.get(`love:${chara_id}`) << 10) +
+      era.get(`relation:${chara_id}:0`)
+    );
+  });
+}
+
 async function select_target(type, page) {
+  let sort_func = sort_team_by_id;
   let list_team = filter_chara('cflag', '招募状态', recruit_flags.yes);
 
   if (type === chara_info_type.train) {
-    list_team = sort_list(
-      list_team.filter((chara_id) => sys_check_train_enabled(chara_id)),
-      (chara_id) => {
-        return (
-          (era.get(`cflag:${chara_id}:育成回合计时`) << 15) +
-          get_chara_score(chara_id, true)
-        );
-      },
-      false,
+    list_team = list_team.filter((chara_id) =>
+      sys_check_train_enabled(chara_id),
     );
+    list_team = (sort_func = sort_team_by_train)(list_team);
   } else if (type !== chara_info_type.info) {
-    list_team = sort_list(
-      list_team.filter(
-        (e) =>
-          e &&
-          (get_custom_mec(e).is_able_to_be_selected() ||
-            (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) > 0),
-      ),
-      (chara_id) => {
-        return (
-          (Math.min(era.get(`cflag:${chara_id}:成长阶段`), 4) << 17) +
-          (era.get(`love:${chara_id}`) << 10) +
-          era.get(`relation:${chara_id}:0`)
-        );
-      },
+    list_team = list_team.filter(
+      (e) =>
+        e &&
+        (get_custom_mec(e).is_able_to_be_selected() ||
+          (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) > 0),
     );
+    list_team = (sort_func = sort_team_by_all)(list_team);
   }
 
-  const max_page = Math.ceil(list_team.length / 10);
+  const max_page = Math.ceil(list_team.length / 10),
+    sorters = new Array(11).fill(0);
+
+  function get_button(accelerator, content, width) {
+    return {
+      accelerator,
+      config: { align: 'center', showAcc: false, width },
+      content: `${content}${arrows[sorters[accelerator - 1000]]}`,
+      type: 'button',
+    };
+  }
+
   let select_flag = true,
     ret;
   page ||= { curr: 1 };
@@ -259,73 +301,22 @@ async function select_target(type, page) {
       );
       if (type === chara_info_type.train) {
         buffer.push(
-          {
-            config: { align: 'center', width: 1 },
-            content: '评价',
-            type: 'text',
-          },
-          {
-            config: { align: 'center', width: 2 },
-            content: '干劲',
-            type: 'text',
-          },
-          {
-            config: { align: 'center', width: 3 },
-            content: '战绩',
-            type: 'text',
-          },
-          {
-            config: { align: 'center', width: 2 },
-            content: '育成',
-            type: 'text',
-          },
-          {
-            config: { align: 'center', width: 1 },
-            content: '周目',
-            type: 'text',
-          },
+          get_button(1007, '评价', 2),
+          get_button(1008, '干劲', 2),
+          get_button(1009, '战绩', 2),
+          get_button(1004, '育成', 2),
+          get_button(1010, '周目', 2),
         );
       } else {
         buffer.push(
-          {
-            config: { align: 'center', width: 2 },
-            content: '性别',
-            type: 'text',
-          },
-          {
-            config: { align: 'center', width: 2 },
-            content: '年龄',
-            type: 'text',
-          },
-          {
-            config: { align: 'center', width: 2 },
-            content: '好感',
-            type: 'text',
-          },
-          {
-            config: { align: 'center', width: 1 },
-            content: '爱慕',
-            type: 'text',
-          },
-          {
-            config: { align: 'center', width: 2 },
-            content: '育成',
-            type: 'text',
-          },
+          get_button(1000, '性别', 2),
+          get_button(1001, '年龄', 2),
+          get_button(1002, '好感', 2),
+          get_button(1003, '爱慕', 2),
+          get_button(1004, '育成', 2),
         );
       }
-      buffer.push(
-        {
-          config: { align: 'center', offset: 1, width: 3 },
-          content: '体力',
-          type: 'text',
-        },
-        {
-          config: { align: 'center', width: 3 },
-          content: '精力',
-          type: 'text',
-        },
-      );
+      buffer.push(get_button(1005, '体力', 3), get_button(1006, '精力', 3));
       const cur_list = list_team.slice((page.curr - 1) * 10, page.curr * 10);
       cur_list.forEach((chara_id) => {
         const chara = get_chara_talk(chara_id),
@@ -373,7 +364,6 @@ async function select_target(type, page) {
         type: 'text',
       });
     }
-
     if (type === undefined) {
       buffer.push(
         { type: 'divider' },
@@ -387,24 +377,27 @@ async function select_target(type, page) {
         },
       );
     }
-
     buffer.push({ type: 'divider' });
     if (max_page > 1) {
       buffer.push(
         {
-          accelerator: 996,
-          config: { disabled: page.curr === 1, width: 4 },
+          accelerator: 1096,
+          config: { disabled: page.curr === 1, width: 3 },
           content: '上一页',
           type: 'button',
         },
         {
-          config: { width: 4 },
+          config: { align: 'center', width: 4 },
           content: `第 ${page.curr} 页 / 共 ${max_page} 页`,
           type: 'text',
         },
         {
-          accelerator: 997,
-          config: { disabled: page.curr === max_page, width: 8 },
+          accelerator: 1097,
+          config: {
+            align: 'right',
+            disabled: page.curr === max_page,
+            width: 3,
+          },
           content: '下一页',
           type: 'button',
         },
@@ -412,43 +405,193 @@ async function select_target(type, page) {
     }
     if (type === chara_info_type.info) {
       buffer.push({
-        accelerator: 999,
-        config: { align: 'right', width: 8 },
-        content: '返回上一级',
+        accelerator: 1099,
+        config: { align: 'right', width: 14 },
+        content: '返回',
         type: 'button',
       });
     } else {
       buffer.push(
         {
-          accelerator: 998,
-          config: { align: 'right', width: 4 },
-          content: '清空互动角色',
+          accelerator: 1098,
+          config: { align: 'right', width: 11 },
+          content: '清空互动',
           type: 'button',
         },
         {
-          accelerator: 999,
-          config: { align: 'right', width: 4 },
-          content: '返回上一级',
+          accelerator: 1099,
+          config: { align: 'right', width: 3 },
+          content: '返回',
           type: 'button',
         },
       );
     }
     era.printMultiColumns(buffer, { horizontalAlign: 'end' });
-
-    ret = await era.input();
-
-    if (ret === 996) {
-      page.curr--;
-    } else if (ret === 997) {
-      page.curr++;
-    } else if (ret === 998) {
-      ret = 0;
-      select_flag = false;
-    } else if (ret === 999) {
-      ret = undefined;
-      select_flag = false;
-    } else {
-      select_flag = false;
+    switch ((ret = await era.input())) {
+      case 1096:
+        page.curr--;
+        break;
+      case 1097:
+        page.curr++;
+        break;
+      case 1098:
+        ret = 0;
+        select_flag = false;
+        break;
+      case 1099:
+        ret = undefined;
+        select_flag = false;
+        break;
+      default:
+        if (ret >= 1000) {
+          let new_sort = sorters[ret - 1000];
+          switch (new_sort) {
+            case 0:
+              new_sort = -1;
+              break;
+            case -1:
+              new_sort = 1;
+              break;
+            case 1:
+              new_sort = 0;
+          }
+          sorters.fill(0);
+          sorters[ret - 1000] = new_sort;
+          if (new_sort !== 0) {
+            const has_me = list_team[0] === 0;
+            if (has_me) {
+              list_team.shift();
+            }
+            switch (ret) {
+              case 1000:
+                list_team = sort_list(
+                  list_team,
+                  (id) => era.get(`cflag:${id}:性别`) * 1000 * new_sort + id,
+                  true,
+                );
+                break;
+              case 1001:
+                list_team = sort_list(
+                  list_team,
+                  (id) =>
+                    era.get(`cflag:${id}:成长阶段`) * 1000 * new_sort + id,
+                  true,
+                );
+                break;
+              case 1002:
+                list_team = sort_list(
+                  list_team,
+                  (id) => {
+                    let relation = get_relation_info(id)[1];
+                    relation = relation.substring(1, relation.length - 1);
+                    if (relation === '?') {
+                      relation = new_sort * 601;
+                    } else {
+                      relation = Number(relation);
+                    }
+                    return relation * 1000 * new_sort + id;
+                  },
+                  true,
+                );
+                break;
+              case 1003:
+                list_team = sort_list(
+                  list_team,
+                  (id) => {
+                    let love = get_love_info(id)[1];
+                    love = love.substring(1, love.length - 1);
+                    if (love === '?') {
+                      love = new_sort * 101;
+                    } else {
+                      love = Number(love);
+                    }
+                    return love * 1000 * new_sort + id;
+                  },
+                  true,
+                );
+                break;
+              case 1004:
+                list_team = sort_list(
+                  list_team,
+                  (id) => {
+                    let edu_times = era.get(`cflag:${id}:育成回合计时`),
+                      palace = era.get(`cflag:${id}:殿堂`);
+                    if (edu_times < 3 * 48) {
+                      if (new_sort === 1) {
+                        edu_times = 144 - edu_times;
+                      }
+                    } else {
+                      edu_times = 144;
+                    }
+                    if (palace > 0) {
+                      if (new_sort === 1) {
+                        palace = 3 - palace;
+                      }
+                    } else {
+                      palace = 3;
+                    }
+                    return edu_times * 10000 + palace * 1000 + id;
+                  },
+                  true,
+                );
+                break;
+              case 1005:
+                list_team = sort_list(
+                  list_team,
+                  (id) => era.get(`base:${id}:体力`) * 1000 * new_sort + id,
+                  true,
+                );
+                break;
+              case 1006:
+                list_team = sort_list(
+                  list_team,
+                  (id) => era.get(`base:${id}:精力`) * 1000 * new_sort + id,
+                  true,
+                );
+                break;
+              case 1007:
+                list_team = sort_list(
+                  list_team,
+                  (id) => get_chara_score(id, true) * 1000 * new_sort + id,
+                  true,
+                );
+                break;
+              case 1008:
+                list_team = sort_list(
+                  list_team,
+                  (id) => era.get(`cflag:${id}:干劲`) * 1000 * new_sort + id,
+                  true,
+                );
+                break;
+              case 1009:
+                list_team = sort_list(
+                  list_team,
+                  (id) =>
+                    new RaceHistory(id).get_values().filter((e) => e.rank === 1)
+                      .length *
+                      1000 *
+                      new_sort +
+                    id,
+                  true,
+                );
+                break;
+              case 1010:
+                list_team = sort_list(
+                  list_team,
+                  (id) =>
+                    era.get(`cflag:${id}:育成次数`) * 1000 * new_sort + id,
+                  true,
+                );
+            }
+            if (has_me) {
+              list_team.unshift(0);
+            }
+          } else {
+            list_team = sort_func(list_team);
+          }
+        } else {
+          select_flag = false;
+        }
     }
   }
   return ret;

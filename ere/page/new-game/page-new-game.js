@@ -244,7 +244,7 @@ module.exports = async (src_chara) => {
 
           [
             201, 202, 203, 204, 205, 206, 207, 301, 302, 303, 304, 305, 306,
-            308, 340, 341, 342, 343, 344, 345,
+            308, 340, 341, 342, 343, 344, 345, 346, 347, 348,
           ].forEach((e) => init_chara(e));
           switch (era.get('flag:彩蛋机制')) {
             case 179:
@@ -280,6 +280,7 @@ module.exports = async (src_chara) => {
           my_marks.custom = get_random_value(1, 12);
           my_marks.trainer_race = get_random_value(13, 36);
           my_marks.work_over = my_marks.sick = 24;
+          my_marks.kamen_rider = 1;
           new MeekEduMarks().all_round = get_random_value(5, 12);
           if (src_chara !== 10) {
             new TokinoLifeMarks().shadow = get_random_value(5, 12);

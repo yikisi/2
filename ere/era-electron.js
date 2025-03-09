@@ -10,7 +10,8 @@
  * @property {'left'|'center'|'right'} [inTextAlign] align of the text in the button, 'center' in default
  * @property {boolean} [isButton] if the button is a button, otherwise is a link
  * @property {number} [offset] offset of the button, 0-23, 0 in default
- * @property {boolean} [showAcc] if show the accelerator, false in default on PC, and is always true on Android
+ * @property {boolean} [showAcc] if show the accelerator, true in default on PC, and is always false on Android
+ * @property {string} [title] tooltip of the button
  * @property {number} [width] width of the button, 1-24, 1 in default
  */
 /**
@@ -93,7 +94,7 @@
 /**
  * type of the param 'config' in era.printWholeImage
  * @typedef WholeImageConfig
- * @property {'fill'|'contain'|'cover'|'none'|'scale-down'|'unset'} [fit] fit of the image
+ * @property {'fill'|'contain'|'cover'|'none'|'scale-down'} [fit] fit of the image
  * @property {number} [offset] offset of the whole image, 0-23, 0 in default
  * @property {number} [width] width of the whole image, 1-24, 24 in default
  */
@@ -183,7 +184,7 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   drawLine(config) {},
   /**
-   * end training and destroy temporary data
+   * end training, add gotjewel table into jewel table, and destroy temporary data
    */
   endTrain() {},
   /**
@@ -243,14 +244,6 @@ const era = {
    * @returns {Promise<boolean>} if the loading succeeds
    */
   async loadGlobal() {},
-  /**
-   * to log save data and global data into program logs
-   */
-  logData() {},
-  /**
-   * to log static data and field name data (from .csv) into program logs
-   */
-  logStatic() {},
   logger: {
     assert(checkVal, aimVal) {
       if (checkVal !== aimVal && era.version.engine === undefined) {
@@ -298,6 +291,10 @@ const era = {
     },
   },
   /**
+   * add delta table into param table, nowex table into ex table, and clean source, delta and nowex table
+   */
+  nextTurnInTrain() {},
+  /**
    * show a notification
    * @param {string|({[color]:string,content:string,[fontSize]:string,[fontWeight]:string}|{isBr:true}|string)[]} content content of the notification
    * @param {string} [title] title of the notification
@@ -309,7 +306,7 @@ const era = {
   /**
    * play the music that must be declared in csv files in directory res
    * @param {string[]|string} names REQUIRED music name, the engine will play the first available music in the array
-   * @param {{}} [config]
+   * @param [config]
    * @param {boolean} config.[loop] if the music is played in loop
    * @param {boolean} config.[fade] if the music needs fade-in and fade-out
    * @param {number} config.[fadeInternal] the internal of fade-in and fade-out, microsecond, default 200ms
@@ -396,7 +393,7 @@ const era = {
   printProgress(percentage, inContent, outContent, config) {},
   /**
    * print the whole image
-   * @param {string} name REQUIRED
+   * @param {string|string[]} name REQUIRED
    * @param {WholeImageConfig} [config]
    * @returns {number} line number of the printed
    */
@@ -532,7 +529,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '3.3.0', engine: undefined },
+  version: { sdk: '3.5.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
@@ -545,7 +542,7 @@ Object.keys(era).forEach((key) => {
     era[key] = (...args) => {
       if (era.version.engine === undefined) {
         return console.log(
-          '[ERROR] apis has not been injected!\n',
+          '[ERROR] apis has not been injected!',
           new Error().stack.split('\n').slice(2).join('\n'),
         );
       }
@@ -554,7 +551,7 @@ Object.keys(era).forEach((key) => {
           `unsupported api! please check the version of the engine! current version: sdk=${
             era.version.sdk
           }, engine=${era.version.engine}`,
-          new Error().stack,
+          new Error().stack.split('\n').slice(2).join('\n'),
         );
       }
       return era[key](...args);

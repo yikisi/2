@@ -229,7 +229,8 @@ async function npc_common(
             }
           : undefined,
         era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes &&
-        era.get(`cflag:${chara.id}:可再次育成`) > 0
+        (era.get(`cflag:${chara.id}:可再次育成`) > 0 ||
+          !era.get(`cflag:${chara.id}:种族`))
           ? {
               accelerator: 7,
               config: { disabled: era.get(`relation:${chara.id}:0`) < 76 },
