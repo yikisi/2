@@ -99,7 +99,7 @@ function update_ero_status(...ids) {
     const estrus = era.set(
       `tcvar:${chara_id}:发情`,
       era.get(`tcvar:${chara_id}:发情`) ||
-        !era.get('flag:雷普抵抗') ||
+        !era.get('flag:强奸抵抗') ||
         era.get(`base:${chara_id}:性欲`) >= lust_border.absent_mind ||
         era.get(`status:${chara_id}:发情`) ||
         era.get(`status:${chara_id}:马跳Z`) ||

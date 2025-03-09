@@ -34,7 +34,7 @@ async function sys_auto_react(shown) {
     let resist_ratio = 0;
     if (era.get(`status:${lover}:超马跳Z`) || era.get('tcvar:0:失神')) {
       resist_ratio = 1;
-    } else if (era.get('flag:雷普抵抗')) {
+    } else if (era.get('flag:强奸抵抗') > 0) {
       resist_ratio =
         0.25 * Math.max(era.get('flag:惩戒力度') - 1, 0) +
         0.2 * !era.get('tflag:强奸') -

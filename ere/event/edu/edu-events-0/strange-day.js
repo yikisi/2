@@ -1,3 +1,7 @@
+/**
+ * @file 系列事件 - 奇怪的一天
+ * @author 念来过倒要你
+ */
 const {
   add,
   clear,
@@ -39,7 +43,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends MyPrivacyEvents {
   /**
-   * @author 念来过倒要你
    * @param {CharaTalk} me
    * @param _me
    * @param _call
@@ -206,7 +209,6 @@ module.exports = class extends MyPrivacyEvents {
   }
 
   /**
-   * @author 念来过倒要你
    * @param {CharaTalk} me
    * @param _me
    * @param _call

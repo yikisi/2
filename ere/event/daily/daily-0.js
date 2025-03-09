@@ -6,7 +6,12 @@
  */
 const era = require('#/era-electron');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const {
+  sys_change_lust,
+  sys_change_motivation,
+} = require('#/system/sys-calc-base-cflag');
+const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
+const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const CustomizedDaily = require('#/event/daily/daily-common');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
@@ -14,6 +19,7 @@ const select_action_in_shopping_street = require('#/event/daily/snippets/select-
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
@@ -21,22 +27,22 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 
 module.exports = class extends CustomizedDaily {
-  office_cook() {
-    return era.printAndWait([
+  async office_cook() {
+    await era.printAndWait([
       get_chara_talk(0).get_colored_name(),
       ' 独自在训练员室里做饭，偶尔奖励自己一些油炸食品吧。',
     ]);
   }
 
-  office_game() {
-    return era.printAndWait([
+  async office_game() {
+    await era.printAndWait([
       get_chara_talk(0).get_colored_name(),
       ' 独自在训练员室里打游戏，希望不会被领导发现。',
     ]);
   }
 
-  office_rest() {
-    return era.printAndWait([
+  async office_rest() {
+    await era.printAndWait([
       get_chara_talk(0).get_colored_name(),
       ' 独自在训练员室里休息，脑子放空着度过了一段时间。',
     ]);
@@ -151,7 +157,8 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_shopping(hook) {
-    const temp = await select_action_in_shopping_street();
+    const me = get_chara_talk(0),
+      temp = await select_action_in_shopping_street();
     hook.arg = temp <= 1;
     let talk;
     switch (temp) {
@@ -171,10 +178,80 @@ module.exports = class extends CustomizedDaily {
         hook.arg = 2;
         talk = '，径直走向了那家不起眼的粉红的小店……';
     }
-    await era.printAndWait([
-      get_chara_talk(0).get_colored_name(),
-      ` 独自来到商店街${talk}`,
-    ]);
+    await era.printAndWait([me.get_colored_name(), ` 独自来到商店街${talk}`]);
+    const my_marks = new MyEduMarks();
+    /** @author Mr.E. */
+    if (my_marks.kamen_rider === 1 && Math.random() < 0.05) {
+      my_marks.kamen_rider = 0;
+      await print_event_name(['假面（？）骑士！'], me);
+      await era.printAndWait(['路过商店街的时候，发现有个商家正在做活动：']);
+      await era.printAndWait(['「扮演假面骑士送温暖～」']);
+      await era.printAndWait([
+        '店家解释道，这是为了给一些小朋友们送去温暖办的活动，只不过虽然衣服足够，人手却不够了。',
+      ]);
+      await era.printAndWait(['他们希望这样能让孩子们的生活更加丰富。']);
+      await era.printAndWait(['如果参加的话，还能试穿合适的假面骑士套装。']);
+      era.printButton('「还有时间，就来参加一下吧。」', 1);
+      era.printButton('「算了算了，这种热闹的活动不适合我。」', 2);
+      if ((await era.input()) === 1) {
+        await era.printAndWait([
+          '店家感谢了 ',
+          me.get_colored_name(),
+          ' 的付出，把 ',
+          me.get_colored_name(),
+          ' 领到换衣间，让 ',
+          me.get_colored_name(),
+          ' 自行选择一身衣服——',
+        ]);
+        era.printButton('「胡萝卜侠！」（声望+15）', 1);
+        era.printButton('「魔法少女（蒙面怪人款）！」（马币+25）', 2);
+        era.printButton(
+          '「？？？一副有些奇怪的道具」（声望+20，部分担当干劲+1）',
+          3,
+          {
+            disabled:
+              new Array(14)
+                .fill(0)
+                .map((_, i) => 70 + i)
+                .findIndex((e) => era.get(`item:${e}`) > 0) === -1,
+          },
+        );
+        switch (await era.input()) {
+          case 1:
+            await era.printAndWait([
+              '效果大受好评！似乎还看到一些眼熟的学生了？！',
+            ]);
+            sys_change_fame(15);
+            break;
+          case 2:
+            await era.printAndWait(['效果大受好评！虽然这身衣服很难穿上去……']);
+            sys_change_money(25);
+            break;
+          case 3:
+            await era.printAndWait([
+              '紧身衣和几片奇怪的布料在店员的帮助下穿了上去，那个看上去像是内裤一样的布料居然只是把面部盖住？！',
+            ]);
+            await era.printAndWait([
+              '虽然作为店家的吉祥物效果很好，但是总感觉好像失去了点什么……',
+            ]);
+            sys_change_fame(20);
+            sys_filter_chara('cflag', '招募状态', recruit_flags.yes).reduce(
+              (p, c) => {
+                if (
+                  c > 0 &&
+                  era.get(`cflag:${c}:种族`) > 0 &&
+                  era.get(`love:${c}`) >= 50
+                ) {
+                  sys_change_lust(c, 1000);
+                  return p || sys_change_motivation(c, 1);
+                }
+                return p;
+              },
+              false,
+            ) && (await era.waitAnyKey());
+        }
+      }
+    }
   }
 
   async school_atrium(hook) {
@@ -185,8 +262,8 @@ module.exports = class extends CustomizedDaily {
     ]);
   }
 
-  school_rooftop() {
-    return era.printAndWait([
+  async school_rooftop() {
+    await era.printAndWait([
       get_chara_talk(0).get_colored_name(),
       ' 独自来到天台，想着要不要无视「无烟校园」的警示牌来根烟。',
     ]);

@@ -74,6 +74,11 @@ race2fans_reward[race_enum.prea_sta] = 31000;
 race2fans_reward[race_enum.belm_sta] = 31000;
 race2fans_reward[race_enum.usa_oks] = 20000;
 
+race2fans_reward[race_enum.duba_cup] = 27000;
+race2fans_reward[race_enum.duba_sha] = 27000;
+race2fans_reward[race_enum.duba_cls] = 27000;
+race2fans_reward[race_enum.duba_tur] = 27000;
+
 Object.values(race_enum)
   .filter(
     (e) =>
@@ -461,8 +466,8 @@ module.exports = class extends CustomizedCheck {
     }
     buffer.push({
       check: 1,
-      color: attr_change_colors.up,
-      content: `粉丝数 ${fans.toLocaleString()}`,
+      color: undefined,
+      content: `粉丝数：${fans.toLocaleString()}`,
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push({

@@ -451,9 +451,11 @@ module.exports = async () => {
     let flag_skill = true;
     switch (ret) {
       case 100:
-        chara_id = era.set(
-          'flag:当前互动角色',
-          await select_target_chara(chara_info_type.train),
+        index = train_list.indexOf(
+          (chara_id = era.set(
+            'flag:当前互动角色',
+            await select_target_chara(chara_info_type.train),
+          )),
         );
         skill_control = new CharaSkills(chara_id);
         discount = get_discount(chara_id);
@@ -766,7 +768,9 @@ module.exports = async () => {
             }
             await era.clear();
             flag_skill &&=
-              chara_id > 0 || skill_control.get().length < skill_limit;
+              chara_id > 0 ||
+              skill_control.get().filter((e) => !skills_dict[e].is_generated)
+                .length < skill_limit;
           }
         }
         break;
@@ -779,7 +783,6 @@ module.exports = async () => {
       default:
         era.drawLine();
         await train_uma(chara_id, ret - 200, extra_buff);
-        break;
     }
   }
 };

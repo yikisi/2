@@ -171,7 +171,7 @@ function randomly_interact(in_team_list) {
     const list = self_list[train].reduce(
       (p, c) => {
         if (p.at(-1).length > 0) {
-          if (p.at(-1).length === 5 || Math.random() > 0.3) {
+          if (p.at(-1).length === 5) {
             p.push([]);
           }
         }

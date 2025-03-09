@@ -81,7 +81,9 @@ async function select_contestants(race) {
       .map((e) => Number(e[0]));
   }
   registered_list.forEach((e) => {
-    if (!dict[e]) {
+    if (dict[e]) {
+      era.set(`cflag:${e}:自主训练`, 0);
+    } else {
       sys_reg_race(e).curr = { race: -1, week: -1 };
     }
   });

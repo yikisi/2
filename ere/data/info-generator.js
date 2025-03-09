@@ -582,10 +582,11 @@ module.exports = {
   },
   /** @param {string} hair_color */
   get_hair_color(hair_color) {
-    return (
-      hair_colors[hair_color][3] ||
-      `hsl(${hair_colors[hair_color][0]}deg ${hair_colors[hair_color][1]}% ${hair_colors[hair_color][2]}%)`
-    );
+    const colors = hair_colors[hair_color];
+    if (!colors) {
+      return undefined;
+    }
+    return colors[3] || `hsl(${colors[0]}deg ${colors[1]}% ${colors[2]}%)`;
   },
   get_talent: (chara_id) => {
     const yandere = era.get(`talent:${chara_id}:病娇`),

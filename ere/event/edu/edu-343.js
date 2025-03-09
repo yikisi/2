@@ -2,9 +2,10 @@
  * @file 佐岳五月 - 育成
  * @author 无名黑奴（临时）
  */
-const { printAndWait } = require('#/era-electron');
+const { get, printAndWait } = require('#/era-electron');
 
 const CustomizedEdu = require('#/event/edu/edu-common');
+const { add_event } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -16,8 +17,16 @@ module.exports = class extends CustomizedEdu {
    * @author 无名黑奴
    * @param {CharaTalk} may
    * @param {CharaTalk} me
+   * @param _
+   * @param {HookArg} hook
+   * @param __
+   * @param {EventObject} event_object
    */
-  async welcome(may, me) {
+  async welcome(may, me, _, hook, __, event_object) {
+    if (get('cflag:0:位置') > 0) {
+      add_event(hook.hook, event_object);
+      return;
+    }
     const chairman = get_chara_talk(302);
     await print_event_name('凯旋门计划', may);
     await printAndWait([

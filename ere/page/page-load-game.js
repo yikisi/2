@@ -24,9 +24,11 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
+const { init_chara } = require('#/system/sys-init-chara');
 
 function check_titles(...ids) {
   ids
@@ -336,6 +338,24 @@ module.exports = async () => {
                 era.set('jewel:204:白', 100);
                 era.set('jewel:204:蓝', 100);
               }
+            }
+            if (version <= 1300) {
+              let basement_cd = era.get('flag:地下室冷却') || 0;
+              era.getAddedCharacters().forEach((id) => {
+                const life_marks = LifeEventMarks.get_marks(id);
+                const b_cd = life_marks.get('b_cd');
+                if (b_cd > 0) {
+                  era.set('flag:地下室冷却', Math.max(b_cd, basement_cd));
+                  life_marks.set('b_cd', 0);
+                }
+              });
+            }
+            if (version <= 1310) {
+              init_chara(345);
+              init_chara(346);
+              init_chara(347);
+              init_chara(348);
+              new MyEduMarks().kamen_rider = 1;
             }
             return true;
           } else {

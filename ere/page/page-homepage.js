@@ -232,6 +232,7 @@ handlers[location_enum.guangzhou] =
   handlers[location_enum.hongkong] =
   handlers[location_enum.paris] =
   handlers[location_enum.new_york] =
+  handlers[location_enum.dubai] =
     require('#/page/homepage/foreign');
 handlers[location_enum.office] = require('#/page/homepage/office');
 

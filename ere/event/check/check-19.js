@@ -3,16 +3,18 @@ const era = require('#/era-electron');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 
+const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const CustomizedCheck = require('#/event/check/check-common');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { attr_change_colors } = require('#/data/color-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const AgEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-19');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -39,7 +41,7 @@ module.exports = class extends CustomizedCheck {
     const edu_marks = new AgEduMarks();
     if (
       extra_flag.edu_weeks >= 96 &&
-      extra_flag.edu_weeks < 95 + 24 &&
+      extra_flag.edu_weeks <= 95 + 24 &&
       extra_flag.rank <= 3 &&
       race_infos[extra_flag.race].race_class === class_enum.G1 &&
       edu_marks.yuusha_fight < 3
@@ -156,6 +158,14 @@ module.exports = class extends CustomizedCheck {
         new EventObject(19, cb_enum.edu).set_arg('palace'),
       );
     }
+  }
+
+  check_palace_and_get_aims() {
+    const my_marks = new MyEduMarks();
+    if (my_marks.nice_weekend === 0) {
+      my_marks.nice_weekend = get_random_value(2, 4) + 1;
+    }
+    return super.check_palace_and_get_aims();
   }
 
   get_aim_races() {

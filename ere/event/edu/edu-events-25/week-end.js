@@ -4,6 +4,7 @@ const {
   sys_get_callname,
   sys_get_colored_callname,
   sys_like_chara,
+  sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
@@ -11,8 +12,10 @@ const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { gacha } = require('#/utils/list-utils');
+const { gacha, get_random_entry } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
 
+const { chara_colors } = require('#/data/chara-colors');
 const CoffeeEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-25');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
@@ -398,5 +401,113 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       true,
     );
     flags.wait_flag = sys_like_chara(25, 0, 20, true, 3) || flags.wait_flag;
+  };
+
+  /**
+   * @this CustomizedEdu
+   * @author Mr.E.
+   */
+  handlers.scared = async function (coffee, me, callname) {
+    await print_event_name(['怕黑'], coffee);
+    await era.printAndWait([
+      '深夜，一片漆黑，校园里似乎有哭声，好像是个孩子？',
+    ]);
+    era.println();
+    era.printButton('还是赶紧回宿舍吧……', 1);
+    era.printButton('得赶紧过去，希望没出什么大问题……', 2);
+    if ((await era.input()) === 1) {
+      era.println();
+      for (let i = 0; i < 5; ++i) {
+        await era.delay(1000);
+        era.replaceText(new Array(i + 1).fill('…').join(''));
+      }
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 再次寻找着离开这里的路，但四处伸手不见五指，怎么也无法走出去。',
+      ]);
+      era.println();
+      const random_colors = Object.values(chara_colors).map((e) =>
+        e instanceof Array ? e[0] : e,
+      );
+      const buffer = [];
+      buffer.push({ content: '？？？', fontWeight: 'bold' });
+      const content = '我讨厌讨厌';
+      for (let i = 0; i < content.length; ++i) {
+        buffer.push({
+          content: content[i],
+          color: get_random_entry(random_colors),
+        });
+      }
+      buffer.push('你！');
+      await era.printAndWait(buffer);
+      era.println();
+      await me.say_and_wait(['啊！']);
+      era.println();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 猛地坐起来，看了看四周。',
+      ]);
+      era.println();
+      await me.say_and_wait(['原来是……梦？']);
+      era.println();
+      await era.printAndWait([
+        '枕在 ',
+        coffee.get_colored_name(),
+        ' 的腿上，',
+        coffee.get_colored_name(),
+        ' 正在给 ',
+        me.get_colored_name(),
+        ' 按摩。',
+      ]);
+      era.println();
+      await coffee.say_and_wait([
+        '没关系，',
+        callname,
+        '，已经结束了，那孩子只是比较孤单而已。',
+      ]);
+      era.println();
+      await era.printAndWait([
+        '为了怕吵到 ',
+        me.get_colored_name(),
+        '，',
+        coffee.get_colored_name(),
+        ' 的声音更加柔和，低沉',
+      ]);
+      era.println();
+      await coffee.say_and_wait(['以后不用害怕这种事了，我会一直陪在您身边的']);
+      get_attr_and_print_in_event(
+        0,
+        undefined,
+        0,
+        JSON.parse(`{"精力":${era.get('maxbase:0:精力') * 0.3}}`),
+      ) && (await era.waitAnyKey());
+      sys_love_uma(25, get_random_value(1, 5)) && (await era.waitAnyKey());
+    } else {
+      await era.printAndWait([
+        '不知道为什么，在 ',
+        me.get_colored_name(),
+        ' 提起精神寻找孩子的时候， ',
+        me.get_colored_name(),
+        ' 的速度越来越快，越来越快，带着亮光的宿舍门离 ',
+        me.get_colored_name(),
+        ' 也越来越近，脑海中的哭声反而越来越小',
+      ]);
+      era.println();
+      await me.say_and_wait(['真是累了一天啊，赶紧休息吧。']);
+      era.println();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 一边这样想，一边打开了宿舍的门。',
+      ]);
+      era.println();
+      await me.say_and_wait(['我是不是忘了点什么？']);
+      era.println();
+      await era.printAndWait([
+        '带着疑惑，',
+        me.get_colored_name(),
+        ' 沉沉睡去。',
+      ]);
+      get_attr_and_print_in_event(0, [20], 0) && (await era.waitAnyKey());
+    }
   };
 };

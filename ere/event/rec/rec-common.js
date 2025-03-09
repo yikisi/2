@@ -72,7 +72,6 @@ class CustomizedRecruit {
     ]);
     era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
     await this.recruit_end();
-    await this.recruit_result();
   }
 
   /** @protected */

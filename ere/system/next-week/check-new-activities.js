@@ -17,6 +17,7 @@ const CustomizedEdu = require('#/event/edu/edu-common');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const {
@@ -24,6 +25,7 @@ const {
   celebration_color,
 } = require('#/data/color-const');
 const { slavery_enum } = require('#/data/ero/mark-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const YandereList = require('#/data/event/yandere-list');
@@ -36,6 +38,19 @@ const {
   foreign_race_list,
   track2location,
 } = require('#/data/race/race-location');
+
+const track2race = {
+  [track_enum.meydan]: {
+    color: adaptability_colors.at(-2 - class_enum.G1),
+    content: '迪拜世界杯赛马日',
+    fontWeight: 'bold',
+  },
+  [track_enum.shatin]: {
+    color: adaptability_colors.at(-2 - class_enum.G1),
+    content: '香港国际赛事',
+    fontWeight: 'bold',
+  },
+};
 
 /**
  * @param {number} chara_id
@@ -136,13 +151,7 @@ async function check_new_activities(cur_round, in_team_list) {
       info = race_infos[race],
       location = track2location[info.track],
       race_colored_name =
-        info.track === track_enum.shatin
-          ? {
-              color: adaptability_colors.at(-2 - class_enum.G1),
-              content: '香港国际赛事',
-              fontWeight: 'bold',
-            }
-          : info.get_colored_name_with_class();
+        track2race[info.track] || info.get_colored_name_with_class();
     if (entry[1]) {
       // 远征开始
       let foreign_list = in_team_list.filter((e) => {
@@ -306,7 +315,6 @@ async function check_new_activities(cur_round, in_team_list) {
     }
   }
   if (event_weeks === 29 - 1) {
-    CustomizedEdu.common_event_count = 1;
     // 夏合宿
     const beach_group = in_team_list.filter((id) => {
       const edu_weeks = era.get(`cflag:${id}:育成回合计时`);
@@ -388,6 +396,9 @@ async function check_new_activities(cur_round, in_team_list) {
     });
     if (!temp) {
       follow_group.unshift(0);
+      CustomizedEdu.common_event_count = 1;
+    } else {
+      CustomizedEdu.common_event_count = 0;
     }
     if (follow_group.length) {
       era.printMultiColumns([
@@ -463,9 +474,11 @@ async function check_new_activities(cur_round, in_team_list) {
       ? 343
       : 0,
   ]);
-  if (era.get('cflag:204:招募状态') !== 0 && sys_check_npc_working(204)) {
-    loc_visitors.get(location_enum.visitor).push(204);
-  }
+  [204, 346, 347, 348].forEach((e) => {
+    if (era.get(`cflag:${e}:招募状态`) !== 0 && sys_check_npc_working(e)) {
+      loc_visitors.get(location_enum.visitor).push(e);
+    }
+  });
 
   const uaf_list = [];
   if (
@@ -494,9 +507,15 @@ async function check_new_activities(cur_round, in_team_list) {
   ) {
     loc_visitors.get(location_enum.visitor).push(345);
   }
+  loc_visitors.set(
+    location_enum.visitor,
+    sort_list(loc_visitors.get(location_enum.visitor), (e) => e, true),
+  );
   new YandereList().set(
     in_team_list.filter((e) => era.get(`talent:${e}:病娇`) > 0),
   );
+
+  new MyEduMarks().we_are_one = 0;
 }
 
 module.exports = check_new_activities;

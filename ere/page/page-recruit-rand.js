@@ -7,6 +7,7 @@ const {
   get_waist_size,
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
+const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 const { get_image } = require('#/system/sys-calc-image');
 const filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
@@ -23,7 +24,11 @@ const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaSkills = require('#/data/chara-skills');
-const { adaptability_colors, el_danger_color } = require('#/data/color-const');
+const {
+  adaptability_colors,
+  attr_change_colors,
+  el_danger_color,
+} = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
 const title_desc = require('#/data/desc/title-desc.json');
 const {
@@ -514,6 +519,21 @@ async function print_rec_page() {
               ],
               type: 'text',
             })),
+          {
+            content: [
+              '专属成就：',
+              {
+                color: get_chara_color(selected),
+                fontWeight: 'bold',
+                content: era.get(`staticcstr:${selected}:称号`),
+              },
+              ' ',
+              sys_personal_achievement.get(selected) > 0
+                ? { color: attr_change_colors.up, content: '✔' }
+                : { color: attr_change_colors.down, content: '✘' },
+            ],
+            type: 'text',
+          },
         ],
         { width: 20 },
       );

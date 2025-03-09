@@ -310,23 +310,6 @@ function sys_prepare_race(list_chara, team_list, race_info) {
       );
     }
 
-    if (uma.attrs[attr_enum.intelligence] >= 2000) {
-      uma.base.accBuffFromWiz = 0.2;
-    } else if (uma.attrs[attr_enum.intelligence] >= 1900) {
-      uma.base.accBuffFromWiz = 0.15;
-    } else if (uma.attrs[attr_enum.intelligence] >= 1800) {
-      uma.base.accBuffFromWiz = 0.1;
-    } else if (uma.attrs[attr_enum.intelligence] >= 1700) {
-      uma.base.accBuffFromWiz = 0.05;
-    }
-    if (uma.attrs[attr_enum.intelligence] >= 1600) {
-      uma.base.spdBuffFromWiz = 0.15;
-    } else if (uma.attrs[attr_enum.intelligence] >= 1400) {
-      uma.base.spdBuffFromWiz = 0.1;
-    } else {
-      uma.base.spdBuffFromWiz = 0.05;
-    }
-
     // 由基础智力决定技能触发率 最低20%
     uma.probs.skill =
       (uma.attrs[attr_enum.intelligence] < 56.25

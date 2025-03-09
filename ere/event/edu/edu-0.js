@@ -23,15 +23,22 @@ const {
 
 const check_team_limit = require('#/system/chara/sys-check-team-limit');
 const sys_get_random_uma_god = require('#/system/chara/sys-get-random-uma-god');
+const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
+  sys_change_motivation,
+  sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const {
+  sys_get_colored_callname,
   sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
-const { sys_check_remote } = require('#/system/sys-calc-chara-param');
+const {
+  sys_check_awake,
+  sys_check_remote,
+} = require('#/system/sys-calc-chara-param');
 const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const { reset_chara } = require('#/system/sys-init-chara');
@@ -41,9 +48,10 @@ const StrangeDayEvents = require('#/event/edu/edu-events-0/strange-day');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { get_random_entry } = require('#/utils/list-utils');
+const { get_extremum_entry, get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -531,5 +539,291 @@ module.exports = class extends StrangeDayEvents {
     println();
     sys_love_uma(chara_id, 1) && (await waitAnyKey());
     add_event(hook.hook, event_object.set_arg('privacy_1'));
+  }
+
+  /**
+   * @author Mr.E.
+   * @param {CharaTalk} me
+   */
+  async wind_welcome(me) {
+    await print_event_name(['风来访'], me);
+    const god_id = sys_get_random_uma_god();
+    await printAndWait([
+      me.get_colored_name(),
+      ' 感受到一股微风吹过身侧，带着操场青草的清香。',
+    ]);
+    const in_team_list = sys_filter_chara(
+        'cflag',
+        '招募状态',
+        recruit_flags.yes,
+      ),
+      cur_week = get('flag:当前回合数');
+    printButton('「今天真是个好天气啊」（担当干劲+1）', 1);
+    printButton('「希望今天的比赛也顺利」（？？？好感+50）', 2, {
+      disabled:
+        !god_id ||
+        in_team_list.findIndex(
+          (e) => sys_reg_race(e).curr.week === cur_week,
+        ) === -1,
+    });
+    if ((await input()) === 1) {
+      for (const c of in_team_list) {
+        if (get(`cflag:${c}:种族`) > 0) {
+          sys_change_motivation(c, 1) && (await waitAnyKey());
+        }
+      }
+    } else {
+      sys_like_chara(god_id, 0, 50) && (await waitAnyKey());
+    }
+  }
+
+  /**
+   * @author Mr.E.
+   * @param {CharaTalk} me
+   */
+  async chocolate(me) {
+    await print_event_name(['巧克力！'], me);
+    await printAndWait(['情人节，可惜工作没有休假。']);
+    await printAndWait([
+      '训练员这工作有时候还得防备一些「别有用心」的对象，刷到马推还有一堆人在散发着恋爱的酸臭。',
+    ]);
+    printButton(
+      '「一点风声罢了，今天也是为担当燃烧身体的一天」（体力精力+50）',
+      1,
+    );
+    printButton('「闲着也是闲着，不如发个推凑个热闹」', 2);
+    if ((await input()) === 1) {
+      get_attr_and_print_in_event(
+        0,
+        undefined,
+        0,
+        JSON.parse('{"体力":50,"精力":50}'),
+      ) && (await waitAnyKey());
+    } else {
+      const p_love =
+          get('cflag:36:招募状态') === recruit_flags.yes ? get('love:36') : -1,
+        t_love =
+          get('cflag:80:招募状态') === recruit_flags.yes ? get('love:80') : -1,
+        l_love =
+          get('cflag:119:招募状态') === recruit_flags.yes
+            ? get('love:119')
+            : -1,
+        max = get_extremum_entry(
+          [
+            [36, p_love],
+            [80, t_love],
+            [119, l_love],
+          ],
+          (e) => e[1],
+        );
+      if (max.max[1] === -1) {
+        await printAndWait(['「打开冰箱发现最浪漫的果然是浓缩咖啡」']);
+        await printAndWait('随手编辑了一条推文，用小号发出去。');
+      } else if (max.max[1] < 60) {
+        await printAndWait([
+          '「今天也是努力工作的一天，什么？都情人节了？刚准备下单巧克力发现通讯列表是空的！」',
+        ]);
+        await printAndWait('随手编辑了一条推文，用小号发出去。');
+        println();
+        await printAndWait([
+          '第二天收到了匿名寄来的包裹，拆开一看原来是一块精装巧克力',
+        ]);
+        println();
+        await printAndWait(['真是奇怪，会是谁寄的呢……']);
+        sys_like_chara(max.max[0], 0, 20) && (await waitAnyKey());
+      } else {
+        await printAndWait([
+          '「本命巧克力迷路第N年，在便利店买了根青汁味百奇自我应援」',
+        ]);
+        await printAndWait('随手编辑了一条推文，用小号发出去。');
+        println();
+        await printAndWait([
+          '第二天收到了匿名寄来的包裹，拆开一看原来是巧克力，感觉是很',
+          max.max[0] === 119
+            ? '华贵的'
+            : max.max[0] === 80
+              ? '很像吧唧的'
+              : '精致小巧的',
+          '巧克力',
+        ]);
+        println();
+        await printAndWait(['真是奇怪，会是谁寄的呢……']);
+        sys_change_lust(max.max[0], 2000);
+      }
+    }
+  }
+
+  /** @author Mr.E. */
+  async sakura_regret() {
+    const chara_id = get_random_entry(
+      sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+        (e) =>
+          e > 0 && get(`cflag:${e}:爱慕暂拒`) === 74 && e !== 25 && e !== 400,
+      ),
+    );
+    if (chara_id !== undefined) {
+      const chara = get_chara_talk(chara_id);
+      await print_event_name('樱花的遗憾', chara);
+      await printAndWait([
+        '夜晚，在床上的 ',
+        chara.get_colored_name(),
+        ' 用被子把自己藏起来',
+      ]);
+      println();
+      await chara.say_and_wait([
+        sys_get_colored_callname(chara.id, 0),
+        '，为什么……就不愿意接受我的爱呢……',
+      ]);
+      println();
+      await chara.say_and_wait(['明明那些美好的记忆，都是我们一起创造的……']);
+      println();
+      await chara.say_and_wait(['真是……孤独啊……']);
+      println();
+      await printAndWait(['在', chara.sex, '没注意到的地方，枕头悄悄的湿了。']);
+      println();
+      sys_change_motivation(chara.id, -2) && (await waitAnyKey());
+    }
+  }
+
+  /**
+   * @author Mr.E.
+   * @param {CharaTalk} me
+   */
+  async nice_weekend(me) {
+    const my_marks = new MyEduMarks(),
+      chara_id = get_random_entry(
+        [19, 59].filter(
+          (e) => get(`cflag:${e}:殿堂`) > 0 && sys_check_awake(e),
+        ),
+      );
+    if (chara_id !== undefined && get('cflag:0:位置') === 0) {
+      const chara = get_chara_talk(chara_id);
+      my_marks.nice_weekend = 0;
+      await print_event_name(['欢乐周末开始啦！'], chara);
+      await printAndWait([
+        chara.get_colored_name(),
+        ' 因为同人作品的死线将至，邀请 ',
+        me.get_colored_name(),
+        ' 周末去',
+        chara.sex,
+        '的工作室里赶稿',
+      ]);
+      printButton('为了不影响训练，这也是必要的（同意）', 1);
+      printButton('假期就是假期，加班是不可能的！（拒绝）', 2);
+      if ((await input()) === 1) {
+        await printAndWait([
+          '身为社畜，对死线的厌恶早就刻在了骨子里；作为训练员，帮助担当也责无旁贷！',
+        ]);
+        await printAndWait([
+          '终于，在周日即将结束的时候，',
+          me.get_couple_title(),
+          ' 完成了这本作品。',
+        ]);
+        const love = get(`love:${chara.id}`),
+          relation = get(`relation:${chara.id}:0`);
+        if (love >= 50 && love * (get('flag:极端行为限制') || 1) >= relation) {
+          await printAndWait([
+            me.get_colored_name(),
+            ' 记不清是什么时候睡着的了，只记得担当带着 ',
+            me.get_colored_name(),
+            ' 开始工作，也许是 ',
+            me.get_colored_name(),
+            ' 实在不擅长这方面的东西，也许是 ',
+            me.get_colored_name(),
+            ' 实在是太累了。总之，在 ',
+            me.get_colored_name(),
+            ' 睡醒之后，已经是周一的凌晨了，身上还不断传来劳累过度的酸痛。',
+          ]);
+          println();
+          await printAndWait([
+            '突然，',
+            me.get_colored_name(),
+            ' 感觉身上好像沉重很多',
+          ]);
+          println();
+          printButton('太累了吗？还是继续休息吧（不去看异样）', 1);
+          printButton('睡麻了吗？稍微活动一下吧（看一下异样）', 2);
+          if ((await input()) === 1) {
+            await printAndWait([
+              me.get_colored_name(),
+              ' 昏昏沉沉的，在 ',
+              chara.get_colored_name(),
+              ' 的工作室里醒来，对方已经给 ',
+              me.get_colored_name(),
+              ' 准备好了晚饭，可惜 ',
+              me.get_colored_name(),
+              ' 还是感觉干劲不足……',
+            ]);
+            get_attr_and_print_in_event(
+              0,
+              undefined,
+              0,
+              JSON.parse(
+                `{"体力":-${get('maxbase:0:体力') * 0.2},"精力":-${get('maxbase:0:精力') * 0.2}}`,
+              ),
+            ) && (await waitAnyKey());
+            set('status:0:马跳S', 1);
+            await sys_rape_in_sleeping(chara.id);
+            set('status:0:马跳S', 0);
+          } else {
+            await printAndWait([
+              me.get_colored_name(),
+              ' 活动了一下身体，发现原来是 ',
+              chara.get_colored_name(),
+              ' 趴在 ',
+              me.get_colored_name(),
+              ' 的身侧。',
+            ]);
+            await printAndWait([
+              '裸 着 趴 在 ',
+              me.get_colored_name(),
+              ' 的 身 侧',
+            ]);
+            await printAndWait([
+              me.get_colored_name(),
+              ' 本来还想说些什么，但是听到了眼前一黑腰上一酸的话',
+            ]);
+            await chara.say_and_wait([
+              sys_get_colored_callname(chara.id, 0),
+              '已经醒了？那我们就开始第二轮吧❤️～',
+            ]);
+            set('base:0:体力', Math.floor(get('base:0:体力') / 2));
+            set('base:0:精力', Math.floor(get('base:0:精力') / 2));
+            set(
+              `base:${chara.id}:体力`,
+              Math.floor(get(`base:${chara.id}:体力`) / 2),
+            );
+            set(
+              `base:${chara.id}:精力`,
+              Math.floor(get(`base:${chara.id}:精力`) / 2),
+            );
+            await quick_into_sex(chara.id);
+          }
+        } else {
+          if (love >= 50) {
+            await printAndWait([
+              '作品内容是训练员与',
+              chara.get_uma_sex_title(),
+              '的甜蜜日常，大受好评！就是不知道为什么训练员的脸好像有点……和 ',
+              me.get_colored_name(),
+              ' 相似？（马币+150）',
+            ]);
+            add('flag:当前马币', 150);
+          }
+          if (relation >= 550) {
+            await printAndWait([
+              '贩售结束之后，',
+              chara.get_colored_name(),
+              ' 想要请 ',
+              me.get_colored_name(),
+              ' 吃甜品来感谢 ',
+              me.get_colored_name(),
+              '。（获得[浓缩咖啡]×5）',
+            ]);
+            add('item:浓缩咖啡', 5);
+          }
+        }
+      }
+    }
   }
 };
