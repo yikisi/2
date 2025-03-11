@@ -4645,7 +4645,7 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 1310,
+      "version": 1320,
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",
@@ -27584,6 +27584,26 @@
       "posY": 0,
       "type": 0
     },
+    "旺紫": {
+      "path": "res/race/chr_icon_1130_113001_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "旺紫_半身": {
+      "path": "res/race/chara_stand_1130_113001.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "欢呼": {
       "path": "res/race/chr_icon_1131_113101_01.png",
       "x": 0,
@@ -27596,6 +27616,66 @@
     },
     "欢呼_半身": {
       "path": "res/race/chara_stand_1131_113101.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "唯爱": {
+      "path": "res/race/chr_icon_1132_113201_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "唯爱_半身": {
+      "path": "res/race/chara_stand_1132_113201.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "创世": {
+      "path": "res/race/chr_icon_1133_113301_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "创世_半身": {
+      "path": "res/race/chara_stand_1133_113301.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "金花": {
+      "path": "res/race/chr_icon_1134_113401_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "金花_半身": {
+      "path": "res/race/chara_stand_1134_113401.png",
       "x": 0,
       "y": 0,
       "width": 512,
@@ -30544,6 +30624,66 @@
       "posY": 0,
       "type": 0
     },
+    "唯爱_运": {
+      "path": "res/sportswear/chr_icon_1132_000001_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "唯爱_运_半身": {
+      "path": "res/sportswear/chara_stand_1132_000001.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "创世_运": {
+      "path": "res/sportswear/chr_icon_1133_000001_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "创世_运_半身": {
+      "path": "res/sportswear/chara_stand_1133_000001.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "金花_运": {
+      "path": "res/sportswear/chr_icon_1134_000001_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "金花_运_半身": {
+      "path": "res/sportswear/chara_stand_1134_000001.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "白马_运": {
       "path": "res/sportswear/chr_icon_2001_000001_01.png",
       "x": 0,
@@ -32984,6 +33124,16 @@
       "posY": 0,
       "type": 0
     },
+    "欢呼_夏": {
+      "path": "res/uniform-summer/chr_icon_1131_000002_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "欢呼_夏_半身": {
       "path": "res/uniform-summer/chara_stand_1131_000002.png",
       "x": 0,
@@ -35296,6 +35446,26 @@
     },
     "吹波_冬_半身": {
       "path": "res/uniform-winter/chara_stand_1124_000005.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_冬": {
+      "path": "res/uniform-winter/chr_icon_1131_000005_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_冬_半身": {
+      "path": "res/uniform-winter/chara_stand_1131_000005.png",
       "x": 0,
       "y": 0,
       "width": 512,
