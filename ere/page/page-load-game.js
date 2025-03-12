@@ -357,6 +357,14 @@ module.exports = async () => {
               init_chara(348);
               new MyEduMarks().kamen_rider = 1;
             }
+            if (version <= 1311) {
+              era.getAddedCharacters().forEach((e) => {
+                const titles = era.get(`cstr:${e}:称号`);
+                if (titles instanceof Array) {
+                  titles.forEach((t) => t.s === false && delete t.s);
+                }
+              });
+            }
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;
