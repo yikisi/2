@@ -33,18 +33,17 @@ const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
  * @returns {{accelerator:number,config:{buttonType:string,disabled:boolean|*,width:number},content:string,type:string}[]}
  */
 function get_position_buttons(positions, event_marks) {
-  return positions.map((e, i) => {
-    return {
-      accelerator: i + 1,
-      config: {
-        buttonType: event_marks.check(e.s) ? 'danger' : 'warning',
-        disabled: e.d,
-        width: 4,
-      },
-      content: e.n,
-      type: 'button',
-    };
-  });
+  return positions.map((e, i) => ({
+    accelerator: i + 1,
+    config: {
+      buttonType: event_marks.check(e.s) ? 'danger' : 'warning',
+      disabled: e.d,
+      title: e.t,
+      width: 4,
+    },
+    content: e.n,
+    type: 'button',
+  }));
 }
 
 /**
@@ -104,6 +103,7 @@ function get_positions(chara_id, player_base, chara_base) {
       l: location_enum.mejiro,
       n: '目白城',
       s: event_hooks.out_mejiro,
+      t: '暂未实装',
     },
   ];
 }
