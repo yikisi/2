@@ -233,6 +233,11 @@ const era = {
   isDebug() {},
   isEra: true,
   /**
+   * (android) check if is landscape
+   * @returns {Promise<boolean>} if is landscape; always true on PC
+   */
+  async isLandscape() {},
+  /**
    * load a save file
    * @param {number} savIndex REQUIRED the index of the save file
    * @returns {Promise<boolean>} if the loading succeeds
@@ -529,7 +534,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '3.5.0', engine: undefined },
+  version: { sdk: '3.6.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
