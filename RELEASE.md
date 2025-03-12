@@ -1,6 +1,11 @@
 # [EraUma v1.32 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.32)
 _2025/3/10_
 
+## Added
+
+* 追加实装了以下地文事件
+  * 【孕袋职责之惩戒】
+
 ## Changed
 
 * 现在玩家生下通过睡奸孕育的孩子时会获得更多的好感度和顺从因子奖励

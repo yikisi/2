@@ -7,7 +7,6 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
 const check_new_activities = require('#/system/next-week/check-new-activities');
-const morning_sex = require('#/system/next-week/morning-sex');
 const randomly_interact = require('#/system/next-week/randomly-interact');
 const reset_status = require('#/system/next-week/reset-status');
 const {
@@ -26,6 +25,8 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const { run_custom_ero } = require('#/event/ero/ero-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
+const morning_sex = require('#/event/others/morning-sex');
+const punish_pregnant_slave = require('#/event/others/punish-pregnant-slave');
 const { remove_special_events } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -193,6 +194,8 @@ async function sys_next_week() {
       }
     }
   });
+
+  await punish_pregnant_slave();
 
   // 新回合开始
   let cur_year = era.get('flag:当前年'),

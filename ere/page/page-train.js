@@ -13,7 +13,7 @@ const print_page_header = require('#/page/components/page-header');
 const select_target_chara = require('#/page/components/select-target');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const GameGuides = require('#/event/game-guides');
+const GameGuides = require('#/event/others/game-guides');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');

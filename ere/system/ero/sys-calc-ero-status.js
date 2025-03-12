@@ -342,7 +342,7 @@ module.exports = {
       // 已怀孕or恢复期、经期不会怀孕
       (era.get(`cflag:${chara_id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no &&
         (era.get(`cflag:${chara_id}:妊娠回合计时`) ||
-          (chara_id && era.get(`mark:${chara_id}:淫纹`) >= 2))) ||
+          (chara_id > 0 && era.get(`mark:${chara_id}:淫纹`) >= 2))) ||
       era.get(`status:${chara_id}:经期`) ||
       (other_id !== undefined &&
         !era.get(`cflag:${other_id}:性别`) &&

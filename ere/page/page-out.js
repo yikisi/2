@@ -13,7 +13,7 @@ const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 
 const { run_custom_daily } = require('#/event/daily/daily-factory');
-const GameGuides = require('#/event/game-guides');
+const GameGuides = require('#/event/others/game-guides');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
