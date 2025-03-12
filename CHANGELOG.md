@@ -2,6 +2,8 @@
 ## [EraUma v1.31 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.31)
 _2025/3/9_
 
+适配 [EraElectron v3.6.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.6.0) 与 [ere.app v1.0.8 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.8) 及以上版本
+
 ### Added
 
 * 追加实装了以下随机小事件
