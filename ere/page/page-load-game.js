@@ -296,13 +296,6 @@ module.exports = async () => {
               ) {
                 era.set('cflag:67:可再次育成', 1);
               }
-              if (
-                era.get('cflag:85:招募状态') === recruit_flags.yes &&
-                era.get('cflag:85:育成回合计时') > 143 + 9 &&
-                era.get('cflag:85:可再次育成') === 0
-              ) {
-                era.set('cflag:85:育成回合计时', 'x');
-              }
             }
             if (version <= 1210) {
               const keys = era.get('cstrkeys').filter((k) => k !== 12);
@@ -356,6 +349,23 @@ module.exports = async () => {
               init_chara(347);
               init_chara(348);
               new MyEduMarks().kamen_rider = 1;
+            }
+            if (version <= 1311) {
+              era.getAddedCharacters().forEach((e) => {
+                const titles = era.get(`cstr:${e}:称号`);
+                if (titles instanceof Array) {
+                  titles.forEach((t) => t.s === false && delete t.s);
+                }
+                if (
+                  e < 1000 &&
+                  era.get(`cflag:${e}:种族`) > 0 &&
+                  era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
+                  era.get(`cflag:${e}:育成回合计时`) > 143 + 9 &&
+                  era.get(`cflag:${e}:可再次育成`) === 0
+                ) {
+                  era.set(`cflag:${e}:育成回合计时`, 'x');
+                }
+              });
             }
             return true;
           } else {

@@ -15,7 +15,7 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 const print_page_header = require('#/page/components/page-header');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const GameGuides = require('#/event/game-guides');
+const GameGuides = require('#/event/others/game-guides');
 const { check_rec_script, run_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');

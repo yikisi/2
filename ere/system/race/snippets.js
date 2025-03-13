@@ -53,7 +53,6 @@ function reset_loc_mind_other_diff(uma, race_info) {
 }
 
 module.exports = {
-  reset_loc_mind_other_diff,
   /**
    * @param {number} timer
    * @returns {number}
@@ -319,6 +318,7 @@ module.exports = {
     }
   },
   progress_width,
+  reset_loc_mind_other_diff,
   screen_size: 8,
   /**
    * @param {RaceSkill} skill
@@ -482,9 +482,9 @@ module.exports = {
         break;
       case ability_usage_enum.MultiplyResearchLv:
         skill.values[i][j] = skill.data.ability_values[i][j];
-        if (uma.base.research_lv >= 15) {
+        if (uma.base.research_lv >= 20) {
           skill.values[i][j] *= 1.2;
-        } else if (uma.base.research_lv >= 10) {
+        } else if (uma.base.research_lv >= 15) {
           skill.values[i][j] *= 1.1;
         }
         break;
