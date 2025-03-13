@@ -8,8 +8,8 @@ const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const GameGuides = require('#/event/game-guides');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
+const GameGuides = require('#/event/others/game-guides');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 

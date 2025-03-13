@@ -78,9 +78,11 @@ async function check_race_events(race, info, team_contestants) {
     mvp = team_contestants.find((e) => e.rank.curr === best).index_chara,
     my_edu_marks = new MyEduMarks();
   if (best === 1) {
-    (rec_list[race] || []).forEach(
-      (e) => !get(`cflag:${e}:随机招募`) && add(`cflag:${e}:随机招募`, -1),
-    );
+    (rec_list[race] || []).forEach((e) => {
+      if (!get(`cflag:${e}:招募状态`) && !get(`cflag:${e}:随机招募`)) {
+        add(`cflag:${e}:随机招募`, -1);
+      }
+    });
   }
   if (race === race_enum.prix_lat && best === 1 && !may_life_marks.who_am_i) {
     may_life_marks.who_am_i = 1;

@@ -31,6 +31,10 @@ class MyEduMarks extends EduEventMarks {
   nice_weekend;
   // 假面（？）骑士！
   kamen_rider;
+  // 孕袋未怀孕时间
+  not_pregnant;
+  // 孕袋惩戒次数
+  p_slave_punish;
 
   constructor() {
     super(0);

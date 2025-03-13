@@ -84,6 +84,9 @@ class CustomizedRecruit {
   }
 
   async recruit_result() {
+    if (era.get('flag:当前月') > 3) {
+      era.set(`cflag:${this.id}:育成回合计时`, 'x');
+    }
     recruit_chara(this.id);
     const temp = sys_get_star_premium_draw();
     if (temp.chara === this.id) {
