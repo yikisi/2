@@ -9,7 +9,7 @@ const print_set_page = require('#/page/new-game/page-setting');
 
 const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
-const GameGuides = require('#/event/game-guides');
+const GameGuides = require('#/event/others/game-guides');
 const event_queue = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 

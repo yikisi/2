@@ -388,11 +388,11 @@ module.exports = {
         } else if (command !== 101) {
           const selected = command - 31;
           if (selected === -1) {
-            title_list.forEach((e) => (e.s = false));
+            title_list.forEach((e) => delete e.s);
           } else if (title_list[selected].s) {
-            title_list[selected].s = false;
+            delete title_list[selected].s;
           } else {
-            title_list.forEach((e) => (e.s = false));
+            title_list.forEach((e) => delete e.s);
             title_list[selected].s = true;
           }
         } else {

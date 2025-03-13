@@ -29,7 +29,7 @@ const { common_no_action_check } = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { get_custom_edu } = require('#/event/edu/edu-factory');
-const GameGuides = require('#/event/game-guides');
+const GameGuides = require('#/event/others/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 
 const {

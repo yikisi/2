@@ -20,6 +20,7 @@ const get_random_name = require('#/utils/naming');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_filtered_talents } = require('#/data/info-generator');
 const { gene_juel_names } = require('#/data/other-const');
@@ -412,8 +413,17 @@ async function sys_have_baby(mother_id) {
       await add_juel_out_of_train(mother_id, '顺从', 50);
     }
   } else if (!father_id || !mother_id) {
-    sys_like_chara(mother_id || father_id, 0, 100);
-    await add_juel_out_of_train(mother_id || father_id, '顺从', 300);
+    if (
+      !mother_id &&
+      child_life_marks.unexpected_child ===
+        unexpected_pregnant_enum.mother_sleep
+    ) {
+      sys_like_chara(mother_id || father_id, 0, 200);
+      await add_juel_out_of_train(mother_id || father_id, '顺从', 400);
+    } else {
+      sys_like_chara(mother_id || father_id, 0, 100);
+      await add_juel_out_of_train(mother_id || father_id, '顺从', 200);
+    }
   }
   const juel_index = get_random_value(0, 2);
   let juel_num = 0;

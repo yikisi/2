@@ -46,7 +46,7 @@ const {
   get_custom_daily,
   run_custom_daily,
 } = require('#/event/daily/daily-factory');
-const GameGuides = require('#/event/game-guides');
+const GameGuides = require('#/event/others/game-guides');
 const { shop_end, shop_start } = require('#/event/shop/tachyon-shop');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');

@@ -35,4 +35,7 @@ for (let i = 1001; i < 2000; ++i) {
   }
 }
 
-writeFileSync('../../ere/data/clothe-const.json', `${JSON.stringify(output)}`);
+writeFileSync(
+  '../../ere/data/clothe-const.json',
+  `${JSON.stringify(output, undefined, 2)}`,
+);

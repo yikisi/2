@@ -659,9 +659,6 @@ handlers[event_hooks.week_start] = async () => {
   new RubyLifeMarks().after_recruit = 1;
   era.set('cflag:85:招募状态', yes);
   era.set('flag:物色对象', 0);
-  if (era.get('flag:当前月') > 3) {
-    era.set('cflag:85:育成回合计时', 'x');
-  }
 };
 
 module.exports = class extends CustomizedRecruit {
