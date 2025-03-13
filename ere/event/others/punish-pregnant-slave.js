@@ -5,7 +5,6 @@
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
-const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
   begin_and_init_ero,
   end_ero_and_train,
@@ -21,11 +20,13 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
-const { item_enum, item_names } = require('#/data/ero/item-const');
+const { item_enum } = require('#/data/ero/item-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
+const { ero_hooks } = require('#/data/event/ero-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { run_custom_ero } = require('#/event/ero/ero-factory');
 
 async function punish_pregnant_slave() {
   const me = get_chara_talk(0),
@@ -37,6 +38,8 @@ async function punish_pregnant_slave() {
       my_marks.not_pregnant = 0;
     }
     if (my_marks.not_pregnant >= get_random_value(1, 3)) {
+      const cache = era.get('status:0:马跳S');
+      era.set('status:0:马跳S', 1);
       const uma_sex_title = era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
       era.drawLine();
       await print_event_name(
@@ -231,16 +234,20 @@ async function punish_pregnant_slave() {
           }
         });
         begin_and_init_ero(0, ...rape_list);
-
-        sys_do_sex(
-          new EroParticipant(302, part_enum.item),
-          new EroParticipant(0, part_enum.mouth),
-          item_enum.gag,
-        );
-        era.set(
-          `tequip:0:${item_names[item_enum.blindfold]}`,
-          item_enum.blindfold,
-        );
+        await run_custom_ero(0, ero_hooks.use_item, {
+          item: item_enum.gag,
+          part: part_enum.mouth,
+          attacker: 302,
+          defender: 0,
+          shown: false,
+        });
+        await run_custom_ero(0, ero_hooks.use_item, {
+          item: item_enum.blindfold,
+          part: 99,
+          attacker: 301,
+          defender: 0,
+          shown: false,
+        });
         set_palam_to_max(0, part_enum.virgin);
         while (era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.no) {
           rape_list = sort_list(rape_list, Math.random);
@@ -450,15 +457,20 @@ async function punish_pregnant_slave() {
             }
           });
           begin_and_init_ero(0, ...rape_list);
-          sys_do_sex(
-            new EroParticipant(get_random_entry(rape_list), part_enum.item),
-            new EroParticipant(0, part_enum.mouth),
-            item_enum.gag,
-          );
-          era.set(
-            `tequip:0:${item_names[item_enum.blindfold]}`,
-            item_enum.blindfold,
-          );
+          await run_custom_ero(0, ero_hooks.use_item, {
+            item: item_enum.gag,
+            part: part_enum.mouth,
+            attacker: get_random_entry(rape_list),
+            defender: 0,
+            shown: false,
+          });
+          await run_custom_ero(0, ero_hooks.use_item, {
+            item: item_enum.blindfold,
+            part: 99,
+            attacker: get_random_entry(rape_list),
+            defender: 0,
+            shown: false,
+          });
           set_palam_to_max(0, part_enum.virgin);
           while (era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.no) {
             rape_list = sort_list(rape_list, Math.random);
@@ -474,6 +486,8 @@ async function punish_pregnant_slave() {
           end_ero_and_train();
         }
       }
+      era.set('status:0:马跳S', cache);
+      era.drawLine();
     }
   }
 }
