@@ -357,6 +357,7 @@ module.exports = async () => {
                   titles.forEach((t) => t.s === false && delete t.s);
                 }
                 if (
+                  e > 0 &&
                   e < 1000 &&
                   era.get(`cflag:${e}:种族`) > 0 &&
                   era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
@@ -366,6 +367,13 @@ module.exports = async () => {
                   era.set(`cflag:${e}:育成回合计时`, 'x');
                 }
               });
+            }
+            if (version <= 1320) {
+              era.set('cflag:0:成长阶段', 5);
+              era.set(
+                'cflag:0:育成回合计时',
+                4800 + era.get('flag:当前回合数'),
+              );
             }
             return true;
           } else {

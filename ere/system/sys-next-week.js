@@ -321,6 +321,8 @@ async function sys_next_week() {
       }
     }
     if (
+      chara_id > 0 &&
+      chara_id < 1000 &&
       growth_stage >= 2 &&
       cur_month < 4 &&
       era.get(`cflag:${chara_id}:育成回合计时`) === 'x'
