@@ -1,10 +1,11 @@
-# [EraUma v1.321 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.321)
-_2025/3/14_
+# [EraUma v1.322 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.322)
+_incoming_
+
+## Added
 
 ## Changed
 
-* 为迪拜世界杯比赛日的泥地比赛补充了赛道坡度信息
-
 ## Fixed
 
-* 修复了因向前兼容错误导致的角色扮演模式的玩家被错误重置育成状态的错误
+* 修复了远程指导参赛也会错误触发事件【「」心「」体】的错误
+* 修复了待兼福来聊天口上的错误

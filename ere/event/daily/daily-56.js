@@ -46,7 +46,12 @@ module.exports = class extends CustomizedDaily {
     await kitaru_good_night(hook);
   }
 
-  talk = kitaru_talk;
+  async talk() {
+    if (!sys_check_awake(56)) {
+      return await super.talk();
+    }
+    await kitaru_talk();
+  }
 
   office_gift = kitaru_office_gift;
 

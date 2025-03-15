@@ -30,6 +30,7 @@ const {
   sys_get_colored_callname,
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
+const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 
 const page_ero = require('#/page/page-ero');
 
@@ -495,6 +496,8 @@ async function check_race_events(race, info, team_contestants) {
     };
   } else if (
     get(`cflag:${mvp}:性别`) !== 1 &&
+    mvp > 0 &&
+    !sys_check_remote(mvp) &&
     best === 1 &&
     get(`love:${mvp}`) >= 75 &&
     !my_edu_marks.we_are_one
