@@ -1,4 +1,4 @@
-const { existsSync, readFileSync, writeFileSync } = require('fs');
+const { existsSync,  writeFileSync } = require('fs');
 const { resolve } = require('path');
 
 const webpack = require('webpack');
@@ -22,11 +22,6 @@ webpack(config, (err, stats) => {
         chunks: false,
         colors: true,
       }),
-    );
-    const mainPath = resolve('./dist/main.bundle.js');
-    writeFileSync(
-      mainPath,
-      readFileSync(mainPath, 'utf-8').replace(/\w\("La5K"\)/g, '_era'),
     );
     writeFileSync(resolve('./dist/static.json'), JSON.stringify(staticData));
   }

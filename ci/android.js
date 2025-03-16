@@ -2,7 +2,6 @@ const { execSync } = require('child_process');
 const {
   createWriteStream,
   existsSync,
-  readFileSync,
   renameSync,
   rmSync,
   writeFileSync,
@@ -34,11 +33,6 @@ webpack(config, (err, stats) => {
         chunks: false,
         colors: true,
       }),
-    );
-    const mainPath = resolve('./dist/main.bundle.js');
-    writeFileSync(
-      mainPath,
-      readFileSync(mainPath, 'utf-8').replace(/\w\("La5K"\)/g, '_era'),
     );
     writeFileSync(resolve('./dist/static.json'), JSON.stringify(staticData));
     // 将打包后的脚本压缩成 zip 文件然后上传
