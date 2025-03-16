@@ -1,11 +1,5 @@
 const { execSync } = require('child_process');
-const {
-  createWriteStream,
-  existsSync,
-  renameSync,
-  rmSync,
-  writeFileSync,
-} = require('fs');
+const { createWriteStream, renameSync, rmSync } = require('fs');
 const { resolve } = require('path');
 
 const archiver = require('archiver');
@@ -13,13 +7,6 @@ const webpack = require('webpack');
 archiver.registerFormat('zip-encrypted', require('archiver-zip-encrypted'));
 
 const config = require('../webpack.config');
-
-if (!existsSync('./build/static.json')) {
-  console.error('Build failed: no static.json!');
-  process.exit(1);
-}
-
-const staticData = require('../build/static.json');
 
 rmSync('./dist', { force: true });
 
@@ -34,7 +21,6 @@ webpack(config, (err, stats) => {
         colors: true,
       }),
     );
-    writeFileSync(resolve('./dist/static.json'), JSON.stringify(staticData));
     // 将打包后的脚本压缩成 zip 文件然后上传
     // zip 格式基本上被大部分手机支持
     const game_dir = resolve(process.env.GAME_BUNDLE_DIR),

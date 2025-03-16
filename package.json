@@ -11,6 +11,7 @@
     "archiver-zip-encrypted": "^2.0.0",
     "babel-loader": "^9.2.1",
     "compressing": "^1.10.1",
+    "ere-webpack-plugin": "git+https://gitgud.io/umaera/engine/ere-webpack-plugin.git",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.3",
@@ -37,7 +38,7 @@
     "db:pull": "prisma db pull",
     "lint": "lint-staged",
     "prepare": "husky",
-    "webpack": "node build/build.js"
+    "webpack": "webpack"
   },
   "version": "1321"
 }

@@ -1,4 +1,6 @@
 const { resolve } = require('path');
+
+const EreWebpackPlugin = require('ere-webpack-plugin');
 const webpack = require('webpack');
 
 const out_type = 'self';
@@ -48,7 +50,7 @@ module.exports = {
     filename: '[name].bundle.js',
   },
   performance: { hints: false },
-  plugins: [new webpack.ids.HashedModuleIdsPlugin({})],
+  plugins: [new EreWebpackPlugin(), new webpack.ids.HashedModuleIdsPlugin({})],
   resolve: {
     alias: { '#': resolve(__dirname, 'ere/') },
   },
