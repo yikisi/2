@@ -19,6 +19,7 @@
     "eslint-plugin-sort-requires-by-path": "^1.0.2",
     "fs-extra": "^11.3.0",
     "husky": "^9.1.7",
+    "kojo-loader": "git+https://gitgud.io/umaera/engine/kojo-loader.git",
     "lint-staged": "^15.4.3",
     "prettier": "^3.5.0",
     "prisma": "^5.22.0",

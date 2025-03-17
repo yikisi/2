@@ -6,6 +6,7 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const CustomizedDaily = require('#/event/daily/daily-common');
+const lines = require('#/event/daily/daily-events-119/daily-119.kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -32,16 +33,20 @@ module.exports = class extends CustomizedDaily {
   /** @author 幽白書 */
   good_morning() {
     const life_marks = LifeEventMarks.get_marks(119);
-    if (!life_marks.b_escape) {
-      return super.good_morning();
-    }
     const callname = sys_get_callname(119, 0),
       dj = get_chara_talk(119);
-    dj.say(['怎么了，', callname, '？']);
-    dj.say(
-      '脸色，不是很好呢……难道说，太久没接触到外界，对环境反而感到害怕了吗？',
-    );
-    dj.say('不怕，不怕……只要依偎在我身旁……就没什么好怕的了……');
-    life_marks.b_escape = 0;
+    if (life_marks.b_escape) {
+      dj.say(['怎么了，', callname, '？']);
+      dj.say(
+        '脸色，不是很好呢……难道说，太久没接触到外界，对环境反而感到害怕了吗？',
+      );
+      dj.say('不怕，不怕……只要依偎在我身旁……就没什么好怕的了……');
+      life_marks.b_escape = 0;
+    } else {
+      const dict = {};
+      dict['你'] = get_chara_talk(0).name;
+      dict['称呼'] = callname;
+      lines['good_morning'](dict);
+    }
   }
 };

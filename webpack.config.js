@@ -1,7 +1,6 @@
 const { resolve } = require('path');
 
 const EreWebpackPlugin = require('ere-webpack-plugin');
-const webpack = require('webpack');
 
 const out_type = 'self';
 
@@ -43,6 +42,17 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.kojo$/,
+        use: [
+          {
+            loader: require.resolve('kojo-loader'),
+            options: {
+              sdkPath: '#/era-electron',
+            },
+          },
+        ],
+      },
     ],
   },
   output: {
@@ -50,7 +60,7 @@ module.exports = {
     filename: '[name].bundle.js',
   },
   performance: { hints: false },
-  plugins: [new EreWebpackPlugin(), new webpack.ids.HashedModuleIdsPlugin({})],
+  plugins: [new EreWebpackPlugin()],
   resolve: {
     alias: { '#': resolve(__dirname, 'ere/') },
   },
