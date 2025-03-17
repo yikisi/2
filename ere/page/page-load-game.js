@@ -6,10 +6,12 @@ const {
   sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const filter_chara = require('#/system/sys-filter-chara');
+const { init_chara } = require('#/system/sys-init-chara');
 const sys_load_game = require('#/system/sys-load-game');
 
 const print_page_header = require('#/page/components/page-header');
 
+const { clean_actions } = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const { add_event, cb_enum, get: get_queue } = require('#/event/queue');
@@ -17,9 +19,11 @@ const { add_event, cb_enum, get: get_queue } = require('#/event/queue');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { action_type_enum } = require('#/data/basement-const');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const { trainer_salary } = require('#/data/const.json');
+const BasementOwners = require('#/data/event/basement-owners');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -27,8 +31,8 @@ const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
+const { location_enum } = require('#/data/locations');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
-const { init_chara } = require('#/system/sys-init-chara');
 
 function check_titles(...ids) {
   ids
@@ -374,6 +378,22 @@ module.exports = async () => {
                 'cflag:0:育成回合计时',
                 4800 + era.get('flag:当前回合数'),
               );
+            }
+            if (version <= 1321) {
+              if (era.get('flag:当前位置') === location_enum.basement) {
+                const owners = new BasementOwners().get();
+                clean_actions(
+                  (a, i, l) =>
+                    (a.chara_id !== 0 &&
+                      owners.findIndex((e) => e === a.chara_id) === -1 &&
+                      a.type !== action_type_enum.rescue) ||
+                    l.findIndex(
+                      (e) => e.chara_id === a.chara_id && e.type === a.type,
+                    ) < i,
+                );
+              } else {
+                clean_actions(() => true);
+              }
             }
             return true;
           } else {
