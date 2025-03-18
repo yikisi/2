@@ -496,11 +496,12 @@ async function check_race_events(race, info, team_contestants) {
     };
   } else if (
     get(`cflag:${mvp}:性别`) !== 1 &&
+    !my_edu_marks.we_are_one &&
     mvp > 0 &&
     !sys_check_remote(mvp) &&
     best === 1 &&
     get(`love:${mvp}`) >= 75 &&
-    !my_edu_marks.we_are_one
+    Math.random() * 100 < 20 + (get(`base:${mvp}:性欲`) * 16) / 1000
   ) {
     /** @author Mr.E. */
     handler = async () => {

@@ -515,7 +515,9 @@ async function check_new_activities(cur_round, in_team_list) {
     in_team_list.filter((e) => era.get(`talent:${e}:病娇`) > 0),
   );
 
-  new MyEduMarks().we_are_one = 0;
+  if (era.get('flag:当前周') === 1) {
+    new MyEduMarks().we_are_one = 0;
+  }
 }
 
 module.exports = check_new_activities;
