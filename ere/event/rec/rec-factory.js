@@ -13,6 +13,7 @@ const obj_dict = {};
 const current = new Date().getTime();
 
 cons_dict[3] = require('#/event/rec/rec-3');
+cons_dict[6] = require('#/event/rec/rec-6');
 cons_dict[7] = require('#/event/rec/rec-7');
 cons_dict[17] = require('#/event/rec/rec-17');
 cons_dict[19] = require('#/event/rec/rec-19');
