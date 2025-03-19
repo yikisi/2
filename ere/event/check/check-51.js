@@ -13,7 +13,7 @@ aim_races[get_aim_race_index(race_enum.yush_him, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.sprt_sta, 1)] = 4;
 
 aim_races[get_aim_race_index(race_enum.takm_kin, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.mile_cha, 2)] = 4;
+aim_races[get_aim_race_index(race_enum.mile_cup, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.yasu_kin, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.sprt_sta, 2)] = 4;
 
@@ -32,7 +32,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     buffer.push(check_aim_and_get_entry(races, race_enum.yush_him, 1, 20));
     buffer.push(check_aim_and_get_entry(races, race_enum.sprt_sta, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.takm_kin, 2, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.mile_cha, 2, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.mile_cup, 2, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.yasu_kin, 2, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.sprt_sta, 2, 1));
   },
