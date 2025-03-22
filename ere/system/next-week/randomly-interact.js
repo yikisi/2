@@ -66,9 +66,7 @@ function randomly_interact(in_team_list) {
                 )
               : attr_enum.intelligence,
           level =
-            in_beach && train !== attr_enum.intelligence
-              ? 5
-              : era.get(`abl:${chara_id}:${attr_names[train]}训练等级 `) || 1;
+            in_beach ? 5 : era.get(`abl:${chara_id}:${attr_names[train]}训练等级 `) || 1;
         if (teach_chara > 0) {
           take_care_list.push({
             chara: get_chara_talk(chara_id),

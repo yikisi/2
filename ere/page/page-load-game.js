@@ -394,6 +394,13 @@ module.exports = async () => {
               } else {
                 clean_actions(() => true);
               }
+              era.getAddedCharacters().forEach((e) => 
+                attr_names.forEach((a) => {
+                  if (era.get(`abl:${e}:${a}训练等级`) > 5) {
+                    era.set(`abl:${e}:${a}训练等级`, 5);
+                  }
+                }),
+              );
             }
             return true;
           } else {

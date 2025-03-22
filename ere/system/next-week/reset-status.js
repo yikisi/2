@@ -280,6 +280,7 @@ async function reset_status(
             attr_names.forEach((e) => {
               const level = era.get(`abl:${chara_id}:${e}训练等级`);
               if (level < 5) {
+                era.set(`exp:${chara_id}:${e}训练经验`, 0);
                 era.print([
                   get_chara_talk(chara_id).get_colored_name(),
                   ' 的 ',
