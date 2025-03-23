@@ -1,7 +1,12 @@
 # [EraUma v1.33 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.33)
-_incoming_
+_2025/3/23_
+
+适配 [EraElectron v4.0.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.0.1) 与 [ere.app v1.0.9 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.9) 及以上版本
 
 ## Added
+
+* 增加对 .kojo 文件的支持
+  * 实装 daily-119.kojo（梦之旅早安口上的 .kojo 文件）作为部分示例
 
 ## Changed
 

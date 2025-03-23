@@ -12,6 +12,7 @@ const {
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 const sys_handle_palace = require('#/system/sys-handle-palace');
+const { update_train_level } = require('#/system/sys-train-uma');
 
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
@@ -27,7 +28,6 @@ const LoveLimitStatus = require('#/data/love-limit-status');
 const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { attr_names } = require('#/data/train-const');
-const { update_train_level } = require('#/system/sys-train-uma');
 
 /**
  * @param {number[]} characters

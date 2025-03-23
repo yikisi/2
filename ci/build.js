@@ -23,7 +23,7 @@ const work_dir = resolve('.'),
   game_dir = join(game_all_dir, process.env.GAME_DIR),
   game_zip = join(game_all_dir, process.env.GAME_ZIP);
 
-execSync('git submodule update --init');
+execSync('git submodule update --init', { cwd: engine_path });
 execSync('git lfs pull', { cwd: engine_path });
 execSync('npm install', { cwd: engine_path });
 execSync('npm run win:pack', { cwd: engine_path });
