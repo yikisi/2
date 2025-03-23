@@ -161,6 +161,20 @@ function get_success_base_reward(
   changes.pt_change = Math.floor(changes.pt_change);
 }
 
+/**
+ * @param {number} id
+ * @param {string} train
+ * @returns {boolean}
+ */
+function update_train_level(id, train) {
+  if (era.get(`abl:${id}:${train}训练等级`) < 5) {
+    era.add(`abl:${id}:${train}训练等级`, 1);
+    era.set(`exp:${id}:${train}训练经验`, 0);
+    return true;
+  }
+  return false;
+}
+
 module.exports = {
   get_success_base_reward,
   get_train_bonus,
@@ -231,12 +245,10 @@ module.exports = {
         100 + era.get(`cflag:${chara_id}:${attr_names[attr]}加成`),
       );
       if (
-        train_level < 5 &&
         exp >= 800 &&
-        exp >= train_level * 800 + get_random_value(0, 800)
+        exp >= train_level * 800 + get_random_value(0, 800) &&
+        update_train_level(chara_id, attr_names[attr])
       ) {
-        era.add(`abl:${chara_id}:${attr_names[attr]}训练等级`, 1);
-        era.set(`exp:${chara_id}:${attr_names[attr]}训练经验`, 0);
         buffer.push({
           config: { offset: 1, width: 23 },
           content: `${attr_names[attr]}训练 变得更擅长了！`,
@@ -352,4 +364,5 @@ module.exports = {
     }
     await era.waitAnyKey();
   },
+  update_train_level,
 };

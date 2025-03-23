@@ -27,6 +27,7 @@ const LoveLimitStatus = require('#/data/love-limit-status');
 const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { attr_names } = require('#/data/train-const');
+const { update_train_level } = require('#/system/sys-train-uma');
 
 /**
  * @param {number[]} characters
@@ -278,16 +279,10 @@ async function reset_status(
               get_skills_and_print_in_event(chara_id, to_get, skill_control);
             }
             attr_names.forEach((e) => {
-              const level = era.get(`abl:${chara_id}:${e}训练等级`);
-              if (level < 5) {
-                era.set(`exp:${chara_id}:${e}训练经验`, 0);
+              if (update_train_level(chara_id, e)) {
                 era.print([
                   get_chara_talk(chara_id).get_colored_name(),
-                  ' 的 ',
-                  { content: `${e}训练设施` },
-                  ' 等级提高到了 Lv.',
-                  era.add(`abl:${chara_id}:${e}训练等级`, 1).toString(),
-                  '！',
+                  ` 的 ${e}训练 变得更擅长了！`,
                 ]);
               }
             });
