@@ -5,8 +5,8 @@
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const lines = require('#/event/daily/daily-119.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
-const lines = require('#/event/daily/daily-events-119/daily-119.kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 

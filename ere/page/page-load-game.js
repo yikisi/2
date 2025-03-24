@@ -33,6 +33,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
+const { attr_names } = require('#/data/train-const');
 
 function check_titles(...ids) {
   ids
@@ -394,6 +395,16 @@ module.exports = async () => {
               } else {
                 clean_actions(() => true);
               }
+              era.getAddedCharacters().forEach((e) =>
+                attr_names.forEach((a) => {
+                  if (era.get(`abl:${e}:${a}训练等级`) > 5) {
+                    era.set(`abl:${e}:${a}训练等级`, 5);
+                  }
+                }),
+              );
+            }
+            if (version <= 1330) {
+              // TODO
             }
             return true;
           } else {

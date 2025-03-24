@@ -9,7 +9,10 @@ const {
   sys_check_train_enabled,
   sys_get_debuff,
 } = require('#/system/sys-calc-chara-param');
-const { get_success_base_reward } = require('#/system/sys-train-uma');
+const {
+  get_success_base_reward,
+  update_train_level,
+} = require('#/system/sys-train-uma');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -65,10 +68,9 @@ function randomly_interact(in_team_list) {
                   ),
                 )
               : attr_enum.intelligence,
-          level =
-            in_beach && train !== attr_enum.intelligence
-              ? 5
-              : era.get(`abl:${chara_id}:${attr_names[train]}训练等级 `) || 1;
+          level = in_beach
+            ? 5
+            : era.get(`abl:${chara_id}:${attr_names[train]}训练等级 `) || 1;
         if (teach_chara > 0) {
           take_care_list.push({
             chara: get_chara_talk(chara_id),
@@ -113,9 +115,11 @@ function randomly_interact(in_team_list) {
           0,
         ),
       );
-      if (exp >= 800 && exp >= e.level * 800 + get_random_value(0, 800)) {
-        era.add(`abl:${e.chara.id}:${attr_names[e.train]}训练等级`, 1);
-        era.set(`exp:${e.chara.id}:${attr_names[e.train]}训练经验`, 0);
+      if (
+        exp >= 800 &&
+        exp >= e.level * 800 + get_random_value(0, 800) &&
+        update_train_level(e.chara_id, attr_names[e.train])
+      ) {
         cost_result.unshift([`${attr_names[e.train]}训练 变得更擅长了！`]);
       }
     }

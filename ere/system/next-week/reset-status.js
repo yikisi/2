@@ -12,6 +12,7 @@ const {
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 const sys_handle_palace = require('#/system/sys-handle-palace');
+const { update_train_level } = require('#/system/sys-train-uma');
 
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
@@ -278,15 +279,10 @@ async function reset_status(
               get_skills_and_print_in_event(chara_id, to_get, skill_control);
             }
             attr_names.forEach((e) => {
-              const level = era.get(`abl:${chara_id}:${e}训练等级`);
-              if (level < 5) {
+              if (update_train_level(chara_id, e)) {
                 era.print([
                   get_chara_talk(chara_id).get_colored_name(),
-                  ' 的 ',
-                  { content: `${e}训练设施` },
-                  ' 等级提高到了 Lv.',
-                  era.add(`abl:${chara_id}:${e}训练等级`, 1).toString(),
-                  '！',
+                  ` 的 ${e}训练 变得更擅长了！`,
                 ]);
               }
             });

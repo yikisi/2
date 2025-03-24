@@ -12,6 +12,7 @@ const {
 } = require('#/system/ero/sys-prepare-ero');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { run_custom_ero } = require('#/event/ero/ero-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -26,7 +27,6 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { run_custom_ero } = require('#/event/ero/ero-factory');
 
 async function punish_pregnant_slave() {
   const me = get_chara_talk(0),
@@ -37,6 +37,7 @@ async function punish_pregnant_slave() {
     } else {
       my_marks.not_pregnant = 0;
     }
+    const src_chara = era.get('cflag:0:模版角色');
     if (my_marks.not_pregnant >= get_random_value(1, 3)) {
       const cache = era.get('status:0:马跳S');
       era.set('status:0:马跳S', 1);
@@ -222,6 +223,7 @@ async function punish_pregnant_slave() {
             sys_filter_chara('cflag', '招募状态', recruit_flags.no).filter(
               (e) =>
                 ((e > 0 && e < 200) || (e >= 301 && e <= 306) || e === 400) &&
+                e !== src_chara &&
                 era.get(`cflag:${e}:成长阶段`) >= 2 &&
                 era.get(`cflag:${e}:种族`) > 0,
             ),
@@ -281,6 +283,7 @@ async function punish_pregnant_slave() {
           ).filter(
             (e) =>
               ((e > 0 && e < 200) || e === 400) &&
+              e !== src_chara &&
               era.get(`cflag:${e}:成长阶段`) >= 2 &&
               era.get(`cflag:${e}:种族`) > 0,
           );
