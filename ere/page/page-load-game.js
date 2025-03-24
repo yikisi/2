@@ -403,6 +403,9 @@ module.exports = async () => {
                 }),
               );
             }
+            if (version <= 1330) {
+              // TODO
+            }
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;

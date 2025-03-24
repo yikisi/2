@@ -129,11 +129,31 @@ function like_chara(target, aim, val, to_be_shown, extra_love) {
   if (era.get(`status:${target}:生日`)) {
     _val *= 2;
   }
+  let shield = 0;
   if (relation + _val > 600) {
+    shield = relation + _val - 600;
     _val = 600 - relation;
-  }
-  if (relation + _val < -200) {
+  } else if (relation + _val < -200) {
     _val = -200 - relation;
+  }
+  let temp = Math.floor(era.get(`cflag:${target}:好感盾`));
+  if (shield > 0) {
+    const love = era.get(`love:${target}`);
+    if (love > 50) {
+      shield *= (love - 50) / 50;
+    }
+    while (shield >= temp) {
+      shield -= temp;
+      temp = Math.floor(era.add(`cflag:${target}:好感盾`, 1));
+    }
+    era.add(`cflag:${target}:好感盾`, shield / temp);
+  } else if (_val < 0) {
+    temp += _val;
+    if (temp >= 0) {
+      era.set(`cflag:${target}:好感盾`, temp);
+    } else {
+      _val = Math.ceil(temp);
+    }
   }
   love_flag = Math.max(love_flag, extra_love || 0);
   let print_flag = false;
