@@ -87,7 +87,9 @@ module.exports = {
   async run_custom_edu(chara_id, stage, extra_flag, event_object) {
     const hook = new HookArg(stage),
       _extra = extra_flag || {};
-    let ret = await get_custom_edu(chara_id).get_this().run(hook, _extra, event_object);
+    let ret = await get_custom_edu(chara_id)
+      .get_this()
+      .run(hook, _extra, event_object);
     if (!hook.override) {
       ret = (await edu_result(chara_id, hook, _extra)) || ret;
     }
