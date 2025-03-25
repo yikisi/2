@@ -1,23 +1,3 @@
-爱欲口上:
-  - color: %代表色%
-    content:
-  - fontWeight: bold
-    content: 小栗帽
-  - 「%称呼%……%称呼%……！」
-  -
-  - 小栗帽一边轻声地叫出%你%的名字一边激烈地揉搓着自己的%第二性征%，在肉欲的快乐下达到了让%她%不禁翻起白眼的高潮。
-  -
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 小栗帽
-      - 「哈啊、哈啊……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 小栗帽
-      - 「我真差劲……」
-
 思慕口上:
   - 小栗帽 在夕阳下的训练场看着或前辈或后辈的%马娘%在努力训练。
   - %她%看到那些%马娘%与训练员兴高采烈地交流着，但没有一个像自己一样带着不纯的目光。
@@ -37,6 +17,27 @@
   -
   - acc: 1
     content: 「既然如此，就这样继续沉沦下去吧……」（升级关系）
+    lines:
+      - divider: true
+      - 深夜。
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 小栗帽
+          - 「%玩家名%……%玩家名%……！」
+      -
+      - 小栗帽一边轻声地叫出%你%的名字一边激烈地揉搓着自己的%第二性征%，在肉欲的快乐下达到了让%她%不禁翻起白眼的高潮。
+      -
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 小栗帽
+          - 「哈啊、哈啊……」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 小栗帽
+          - 「我真差劲……」
   - acc: 2
     content: 「不能再这样下去了……」（暂不升级）
 
