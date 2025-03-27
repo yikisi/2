@@ -404,7 +404,12 @@ module.exports = async () => {
               );
             }
             if (version <= 1330) {
-              // TODO
+              if (
+                era.get('cflag:0:模版角色') > 0 &&
+                era.get('flag:惩戒力度') === 0
+              ) {
+                era.set('flag:声望不足替换', 0);
+              }
             }
             return true;
           } else {

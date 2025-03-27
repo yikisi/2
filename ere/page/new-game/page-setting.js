@@ -343,6 +343,9 @@ function set_from_theme(theme) {
       era.set('flag:性技自主学习', 1);
       era.set('flag:马娘身高', 1);
   }
+  if (era.get('cflag:0:模版角色') > 0) {
+    era.set('flag:声望不足替换', 0);
+  }
 }
 
 async function page_settings() {
@@ -544,6 +547,7 @@ async function page_settings() {
           ][v],
       },
       {
+        disabled: era.get('cflag:0:模版角色') > 0,
         key: '声望不足替换',
         label: '身败名裂时',
         options: [
@@ -767,6 +771,7 @@ async function page_settings() {
           return {
             accelerator: 100 + i * 10 + j,
             config: {
+              disabled: !!e.disabled,
               buttonType: val === o.v ? 'warning' : 'info',
               width: 4,
             },
