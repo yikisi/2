@@ -239,6 +239,31 @@ module.exports = async () => {
     version = version.toFixed(1);
   }
 
+  const date = new Date(),
+    real_month = date.getMonth() + 1,
+    real_date = date.getDate();
+  const birthday = [];
+  era.getAllCharacters().forEach((e) => {
+    if (
+      e > 0 &&
+      e < 1000 &&
+      era.get(`staticcflag:${e}:种族`) > 0 &&
+      era.get(`staticcflag:${e}:出生月份`) === real_month &&
+      era.get(`staticcflag:${e}:出生日期`) === real_date
+    ) {
+      if (birthday.length > 0) {
+        birthday.push('，');
+      }
+      birthday.push({
+        color: get_chara_color(e),
+        content: era.get(`static:${e}:name`),
+        fontWeight: 'bold',
+      });
+    }
+  });
+  const b_index = birthday.findLastIndex((e) => e === '，');
+  birthday[b_index] = ' 和 ';
+
   while (flagTitle) {
     await era.clear();
     era.setAlign('center');
@@ -249,23 +274,27 @@ module.exports = async () => {
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
-            content: `版本号：v${version} (kuuga)`,
+            content: [
+              `版本号：v${version} (kuuga)`,
+              { isBr: true },
+              '雞雞',
+              { isDivider: true },
+              '无名路人',
+              { isDivider: true },
+              '无名黑奴',
+            ],
             type: 'text',
           },
         ],
         config: { offset: 6, verticalAlign: 'middle', width: 12 },
       },
+      birthday.length > 0
+        ? [
+            { type: 'divider' },
+            { type: 'text', content: ['今天是 ', ...birthday, ' 的诞生日'] },
+          ]
+        : [],
       [
-        {
-          content: [
-            '雞雞',
-            { isDivider: true },
-            '无名路人',
-            { isDivider: true },
-            '无名黑奴',
-          ],
-          type: 'text',
-        },
         { type: 'divider' },
         {
           accelerator: 1,
