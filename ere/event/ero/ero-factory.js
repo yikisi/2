@@ -40,6 +40,7 @@ cons_dict[64] = require('#/event/ero/ero-64');
 cons_dict[94] = require('#/event/ero/ero-94');
 cons_dict[100] = require('#/event/ero/ero-100');
 cons_dict[117] = require('#/event/ero/ero-117');
+cons_dict[134] = require('#/event/ero/ero-134');
 cons_dict[205] = require('#/event/ero/ero-205');
 cons_dict[340] = require('#/event/ero/ero-340');
 cons_dict[341] = require('#/event/ero/ero-341');
