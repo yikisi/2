@@ -92,9 +92,11 @@ module.exports = class extends CustomizedCheck {
     const edu_weeks = era.get('cflag:46:育成回合计时');
     if (edu_weeks < 3 * 48) {
       const love = era.get('love:46');
-      const event_marks = new FalconEduMarks(46);
+      const event_marks = new FalconEduMarks();
       const event_obj = new EventObject(46, cb_enum.edu);
-      const event_obj_special = new EventObject(46, cb_enum.edu, true);
+      const event_obj_special = new EventObject(46, cb_enum.edu, true).set_arg(
+        edu_weeks,
+      );
       // 思路
       // 第一高潮幕(前期) 薰衣草(夏季)——为了摆脱某种“我已经过时、即将被埋葬”的恐惧。大量追赶新潮头试图击退自己的生存恐惧。
       // 第一高潮幕(中期) 水仙(冬季)——粉丝袭击事件 偶像崇拜必要素材已经足够

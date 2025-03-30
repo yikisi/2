@@ -1,10 +1,7 @@
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 class FalconEduMarks extends EduEventMarks {
-  //请叫我飞鹰子
-  beginning;
-  //训练开始
-  start;
+  //日常部分
   //喜欢甜食的飞鹰子
   idol_ice_cream;
   //期末大作战
@@ -19,6 +16,15 @@ class FalconEduMarks extends EduEventMarks {
   rooftop_idol;
   //带着青草气息的马娘们
   petrichor_girl;
+
+  //育成部分
+  //请叫我飞鹰子
+  beginning;
+  // First！偶像的第一步
+  next_beginning;
+  //训练开始
+  start;
+
   //偶像之路
   fight_idol;
   //幸运四叶草
@@ -42,7 +48,6 @@ class FalconEduMarks extends EduEventMarks {
   constructor() {
     super(46);
     EduEventMarks.register_marks(this);
-    console.log(this.beginning);
   }
 }
 
