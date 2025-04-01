@@ -41,5 +41,5 @@
     "prepare": "husky",
     "webpack": "webpack"
   },
-  "version": "1331"
+  "version": "1340"
 }

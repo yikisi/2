@@ -39,18 +39,62 @@ async function task() {
       skills: e.skill_set_id,
     };
     skill_set_dict[tmp.skills] = [];
-    if (e.mob_id) {
+    if (e.mob_id > 0) {
       contestants.unnamed.push(tmp);
     } else {
       tmp.id = e.chara_id % 1000;
       if (e.chara_id > 9000) {
-        return;
+        if (e.chara_id <= 9042) {
+          return;
+        }
+        tmp.id += 300;
       } else if (e.chara_id > 2000) {
         tmp.id += 200;
       }
       contestants.named.push(tmp);
     }
   });
+  // (await prisma.ultimate_race_npc.findMany()).forEach((e) => {
+  //   const tmp = {
+  //     adapt_distance: [
+  //       e.proper_distance_short,
+  //       e.proper_distance_mile,
+  //       e.proper_distance_middle,
+  //       e.proper_distance_long,
+  //     ].map((e) => e - 1),
+  //     adapt_ground: [e.proper_ground_turf, e.proper_ground_dirt].map(
+  //       (e) => e - 1,
+  //     ),
+  //     adapt_style: [
+  //       e.proper_running_style_nige,
+  //       e.proper_running_style_senko,
+  //       e.proper_running_style_sashi,
+  //       e.proper_running_style_oikomi,
+  //     ].map((e) => e - 1),
+  //     attrs: [e.speed, e.stamina, e.pow, e.guts, e.wiz],
+  //     motivation: [e.motivation_min || 1, e.motivation_max || 5].map(
+  //       (e) => e - 3,
+  //     ),
+  //   };
+  //   skill_set_dict[e.skill_set_id_1] = [];
+  //   skill_set_dict[e.skill_set_id_2] = [];
+  //   if (e.mob_id > 0) {
+  //     contestants.unnamed.push({ ...tmp, skills: e.skill_set_id_1 });
+  //     contestants.unnamed.push({ ...tmp, skills: e.skill_set_id_2 });
+  //   } else {
+  //     tmp.id = e.chara_id % 1000;
+  //     if (e.chara_id > 9000) {
+  //       if (e.chara_id <= 9042) {
+  //         return;
+  //       }
+  //       tmp.id += 300;
+  //     } else if (e.chara_id > 2000) {
+  //       tmp.id += 200;
+  //     }
+  //     contestants.named.push({ ...tmp, skills: e.skill_set_id_1 });
+  //     contestants.named.push({ ...tmp, skills: e.skill_set_id_2 });
+  //   }
+  // });
   contestants.named.push(
     {
       attrs: [1062, 569, 696, 357, 556],

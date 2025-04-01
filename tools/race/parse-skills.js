@@ -612,17 +612,21 @@ async function chara_skill() {
     buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
   }
   buffer += '\n\nconst skill_sets = {0:[],\n';
+  const skill_sets = [
+    ...(await prisma.daily_race_npc.findMany()),
+    ...(await prisma.legend_race_npc.findMany()),
+    ...(await prisma.single_mode_npc.findMany()),
+  ]
+    .filter((e) => e.chara_id < 9000)
+    .map((e) => e.skill_set_id);
+  // (await prisma.ultimate_race_npc.findMany()).forEach((e) =>
+  //   skill_sets.push(e.skill_set_id_1, e.skill_set_id_2),
+  // );
   (
     await prisma.skill_set.findMany({
       where: {
         id: {
-          in: [
-            ...(await prisma.daily_race_npc.findMany()),
-            ...(await prisma.legend_race_npc.findMany()),
-            ...(await prisma.single_mode_npc.findMany()),
-          ]
-            .filter((e) => e.chara_id < 9000)
-            .map((e) => e.skill_set_id),
+          in: skill_sets,
         },
       },
     })

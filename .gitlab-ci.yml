@@ -45,7 +45,7 @@ pages:
 
 release:
   stage: deploy
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  image: registry.gitlab.com/gitlab-org/release-cli:v0.23.0
   needs:
     - job: build
   tags:

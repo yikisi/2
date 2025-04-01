@@ -63729,6 +63729,38 @@
       6
     ],
     "attrs": [
+      432,
+      388,
+      464,
+      343,
+      390
+    ],
+    "motivation": [
+      -2,
+      2
+    ],
+    "skills": 32108440,
+    "id": 84,
+    "level": 3892
+  },
+  {
+    "adapt_distance": [
+      1,
+      6,
+      6,
+      1
+    ],
+    "adapt_ground": [
+      6,
+      1
+    ],
+    "adapt_style": [
+      0,
+      3,
+      5,
+      6
+    ],
+    "attrs": [
       515,
       463,
       552,
@@ -67521,6 +67553,38 @@
   },
   {
     "adapt_distance": [
+      2,
+      5,
+      6,
+      3
+    ],
+    "adapt_ground": [
+      6,
+      1
+    ],
+    "adapt_style": [
+      0,
+      6,
+      5,
+      3
+    ],
+    "attrs": [
+      475,
+      444,
+      523,
+      421,
+      444
+    ],
+    "motivation": [
+      -2,
+      2
+    ],
+    "skills": 32109240,
+    "id": 92,
+    "level": 4649
+  },
+  {
+    "adapt_distance": [
       6,
       5,
       0,
@@ -67838,6 +67902,38 @@
     "skills": 1109401,
     "id": 94,
     "level": 3031
+  },
+  {
+    "adapt_distance": [
+      0,
+      4,
+      6,
+      5
+    ],
+    "adapt_ground": [
+      6,
+      0
+    ],
+    "adapt_style": [
+      0,
+      3,
+      6,
+      5
+    ],
+    "attrs": [
+      449,
+      423,
+      468,
+      372,
+      402
+    ],
+    "motivation": [
+      -2,
+      2
+    ],
+    "skills": 32109440,
+    "id": 94,
+    "level": 4134
   },
   {
     "adapt_distance": [
@@ -68350,6 +68446,38 @@
     "skills": 1109601,
     "id": 96,
     "level": 3027
+  },
+  {
+    "adapt_distance": [
+      0,
+      5,
+      6,
+      4
+    ],
+    "adapt_ground": [
+      6,
+      0
+    ],
+    "adapt_style": [
+      0,
+      3,
+      6,
+      1
+    ],
+    "attrs": [
+      479,
+      415,
+      473,
+      456,
+      387
+    ],
+    "motivation": [
+      -2,
+      2
+    ],
+    "skills": 32109640,
+    "id": 96,
+    "level": 4389
   },
   {
     "adapt_distance": [
@@ -79870,5 +79998,101 @@
     "skills": 1300003,
     "id": 206,
     "level": 11586
+  },
+  {
+    "adapt_distance": [
+      0,
+      6,
+      6,
+      6
+    ],
+    "adapt_ground": [
+      6,
+      0
+    ],
+    "adapt_style": [
+      0,
+      6,
+      0,
+      0
+    ],
+    "attrs": [
+      192,
+      167,
+      197,
+      152,
+      184
+    ],
+    "motivation": [
+      2,
+      2
+    ],
+    "skills": 1201001,
+    "id": 346,
+    "level": 3206
+  },
+  {
+    "adapt_distance": [
+      6,
+      6,
+      6,
+      6
+    ],
+    "adapt_ground": [
+      6,
+      4
+    ],
+    "adapt_style": [
+      1,
+      4,
+      6,
+      0
+    ],
+    "attrs": [
+      171,
+      188,
+      180,
+      164,
+      195
+    ],
+    "motivation": [
+      2,
+      2
+    ],
+    "skills": 1201002,
+    "id": 347,
+    "level": 3046
+  },
+  {
+    "adapt_distance": [
+      6,
+      6,
+      6,
+      5
+    ],
+    "adapt_ground": [
+      6,
+      6
+    ],
+    "adapt_style": [
+      1,
+      6,
+      0,
+      0
+    ],
+    "attrs": [
+      179,
+      148,
+      199,
+      176,
+      179
+    ],
+    "motivation": [
+      2,
+      2
+    ],
+    "skills": 1201003,
+    "id": 348,
+    "level": 3070
   }
 ]
