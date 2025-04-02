@@ -24,9 +24,7 @@ const {
   max_extra_attr,
   mod_motivation_coefficients,
 } = require('#/data/race/race-sim-const');
-const {
-  mod_acceleration_adapt_ground,
-} = require('#/data/race/race-sim-const.js');
+const { mod_acceleration_adapt_ground } = require('#/data/race/race-sim-const');
 const { skill_sets, skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
 
@@ -170,6 +168,13 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
                     skill_sets[uma.skills].map((s) => skills_dict[s]),
                   ).set_legend(),
                 );
+                if (c.dress !== undefined) {
+                  ret
+                    .at(-1)
+                    .set_image(
+                      `${era.get(`staticcstr:${c.id}:头像`)}${c.dress}_半身`,
+                    );
+                }
                 legend_count--;
               }
             }
@@ -276,7 +281,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
                 e.level <= named_difficulty + 400,
             ),
           );
-          if (uma) {
+          if (uma !== undefined) {
             ret.push(
               new PseudoUma(
                 uma.id,
@@ -291,6 +296,13 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
                 skill_sets[uma.skills].map((s) => skills_dict[s]),
               ).set_legend(),
             );
+            if (uma.dress !== undefined) {
+              ret
+                .at(-1)
+                .set_image(
+                  `${era.get(`staticcstr:${uma.id}:头像`)}${uma.dress}_半身`,
+                );
+            }
           }
         }
         if (uma) {
@@ -344,6 +356,13 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
             skill_sets[uma.skills].map((s) => skills_dict[s]),
           ).set_legend(),
         );
+        if (uma.dress !== undefined) {
+          ret
+            .at(-1)
+            .set_image(
+              `${era.get(`staticcstr:${uma.id}:头像`)}${uma.dress}_半身`,
+            );
+        }
       });
     }
 

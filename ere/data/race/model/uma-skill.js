@@ -38,6 +38,7 @@ const ability_time_usage_enum = {
   top_distance: 2,
   stamina: 3,
   order_change: 4,
+  blocked_side_continuetime: 5,
 };
 
 const ability_type_enum = {
@@ -149,7 +150,7 @@ const target_type_enum = {
   SelfInfront: 9,
   // 后方所有
   SelfBehind: 10,
-  // TeamMember: 11,
+  TeamMember: 11,
   // Near: 12,
   // SelfAndBlockFront: 13,
   // BlockSide: 14,

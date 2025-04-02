@@ -82,6 +82,7 @@ class ConditionParams {
   phase_firstquarter_random;
   phase_laterhalf_random;
   phase_random;
+  phase_straight_random;
   popularity;
   post_number;
   random_lot;
