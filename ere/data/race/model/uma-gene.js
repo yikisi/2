@@ -3,10 +3,21 @@ Object.keys(gene_type_enum).forEach((e, i) => (gene_type_enum[e] = i));
 
 const gene_type_colors = ['#ffd0d0', '#a0f0f6', '#ffffff'];
 
+const gene_types = [];
+gene_types[gene_type_enum.adapt] = '适性';
+gene_types[gene_type_enum.base] = '属性';
+gene_types[gene_type_enum.skill] = '技巧';
+
 const gene_rarity_enum = { n: 0, r: 0, sr: 0, ssr: 0 };
 Object.keys(gene_rarity_enum).forEach((e, i) => (gene_rarity_enum[e] = i));
 
 const gene_rarity_colors = ['#c6c5c5', '#83d86a', '#ff82a8', '#eeb93f'];
+
+const gene_rarities = [];
+gene_rarities[gene_rarity_enum.n] = '普通';
+gene_rarities[gene_rarity_enum.r] = '稀有';
+gene_rarities[gene_rarity_enum.sr] = '史诗';
+gene_rarities[gene_rarity_enum.ssr] = '传奇';
 
 class UmaGene {
   static gene_type_enum = gene_type_enum;
@@ -59,7 +70,7 @@ class UmaGene {
         color: gene_type_colors[this.type],
         content: this.name,
         fontWeight: 'bold',
-        title: `[${this.name}]：${this.desc}`,
+        title: `【${this.name}】（${gene_types[this.type]} · ${gene_rarities[this.rarity]}）\n${this.desc}`,
       },
       { content: '】', color: border_color },
     ];

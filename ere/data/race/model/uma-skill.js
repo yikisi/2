@@ -7,6 +7,12 @@ const skill_name_colors = [
   '#ff9e9d',
   '#ce7cff',
 ];
+const skill_name_types = [];
+skill_name_types[skill_name_enum.buff] = '常时';
+skill_name_types[skill_name_enum.heal] = '恢复';
+skill_name_types[skill_name_enum.speed] = '加速';
+skill_name_types[skill_name_enum.control] = '控制';
+skill_name_types[skill_name_enum.debuff] = '劣势';
 
 const skill_border_enum = { normal: 0, advanced: 0, spe: 0, evol: 0, cheat: 0 };
 Object.keys(skill_border_enum).forEach((k, i) => (skill_border_enum[k] = i));
@@ -17,6 +23,12 @@ const skill_border_colors = [
   '#ee82ee',
   '#ff7373',
 ];
+const skill_border_types = [];
+skill_border_types[skill_border_enum.normal] = '普通';
+skill_border_types[skill_border_enum.advanced] = '传说';
+skill_border_types[skill_border_enum.spe] = '独有';
+skill_border_types[skill_border_enum.evol] = '进化';
+skill_border_types[skill_border_enum.cheat] = 'ＧＭ';
 
 const rarity_enum = {
   // 普通技能
@@ -450,7 +462,9 @@ class UmaSkill {
         color: name_color,
         content: this.name,
         fontWeight: 'bold',
-        title: `[${this.name}]：${this.desc}\n${title_list
+        title: `【${this.name}】（${skill_name_types[this.category >> 3]} · ${
+          skill_border_types[this.category & 0b111]
+        }）\n${this.desc}\n${title_list
           .map((e) => (e === '' ? e : `＜${e}＞`))
           .filter((e) => e)
           .join('\n')}`,

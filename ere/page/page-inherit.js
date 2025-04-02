@@ -48,7 +48,6 @@ const { adaptability_names } = require('#/data/train-const');
  * @param {number[]} juels
  * @param {number} all_juels
  * @param {number} chara_id
- * @returns {[[{type: string, config: {content: string}},{type: string, config: {width: number}, content: string},{type: string, config: {width: number, align: string}, content: string},{type: string, config: {width: number, align: string}, content: string},{type: string, config: {width: number, align: string}, content: string},null,null,null,null],...{columns: [{type: string, config: {width: number}, content: *},{type: string, config: {width: number, align: string}, content},{type: string, config: {width: number, align: string}, content: *},{type: string, config: {color: *, width: number, align: string}, content: string},{accelerator, type: string, config: {width: number, disabled, align: string}, content: string}], config: {width: number}}[],{columns: [{type: string, config: {width: number}, content: *},{type: string, config: {width: number, align: string}, content: string},{type: string, config: {width: number, align: string}, content: string},{type: string, config: {color: *, width: number, align: string}, content: string},{accelerator: number, type: string, config: {width: number, disabled: boolean, align: string}, content: string}], config: {width: number}}]}
  */
 function generate_gene_buttons(
   genes,
