@@ -168,11 +168,11 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
                     skill_sets[uma.skills].map((s) => skills_dict[s]),
                   ).set_legend(),
                 );
-                if (c.dress !== undefined) {
+                if (uma.dress !== undefined) {
                   ret
                     .at(-1)
                     .set_image(
-                      `${era.get(`staticcstr:${c.id}:头像`)}${c.dress}_半身`,
+                      `${era.get(`staticcstr:${uma.id}:头像`)}${uma.dress}_半身`,
                     );
                 }
                 legend_count--;
