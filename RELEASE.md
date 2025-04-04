@@ -1,7 +1,7 @@
 # [EraUma v1.34 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.34)
-_incoming_
+_2025/4/4_
 
-适配 [EraElectron v4.0.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.0.1) 与 [ere.app v1.0.9 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.9) 及以上版本
+适配 [EraElectron v4.0.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.0.2) 与 [ere.app v1.0.9 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.9) 及以上版本
 
 ## Added
 
@@ -21,5 +21,3 @@ _incoming_
 * 现在角色扮演模式下将禁用【黑暗交易】选项
   * 已被惩戒的角色扮演存档不受影响
 * 现在具名强敌将套用其立绘设定
-
-## Fixed
