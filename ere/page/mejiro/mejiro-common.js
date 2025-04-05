@@ -21,21 +21,29 @@ class MejiroCity {
    * @returns {{s:number,d:boolean,l:number,n:string}[]}
    */
   get_positions(chara_id, player_base, chara_base) {
-    let m_disabled = sys_check_act_disabled(
-        sys_get_move_cost(location_enum.station, chara_id),
-        player_base,
-        chara_base,
-      ),
-      m_title = '';
-    if (m_disabled) {
-      m_title = '体力精力不足';
-    }
-    if (era.get(`love:${chara_id}`) < 75) {
+    let m_disabled, m_title;
+    if (chara_base === undefined) {
       m_disabled = true;
-      if (m_title) {
-        m_title += '；';
+      m_title = '目白城不欢迎独身的旅客……';
+    } else {
+      if (
+        (m_disabled = sys_check_act_disabled(
+          sys_get_move_cost(location_enum.station, chara_id),
+          player_base,
+          chara_base,
+        ))
+      ) {
+        m_title = '体力精力不足';
+      } else {
+        m_title = '';
       }
-      m_title += '关系并未达到如此程度……';
+      if (era.get(`love:${chara_id}`) < 75) {
+        m_disabled = true;
+        if (m_title) {
+          m_title += '；';
+        }
+        m_title += '关系并未达到如此程度……';
+      }
     }
     return [
       {
