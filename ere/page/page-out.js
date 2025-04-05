@@ -2,15 +2,13 @@ const era = require('#/era-electron');
 
 const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
 const { sys_handle_action } = require('#/system/sys-calc-base-cflag');
-const {
-  sys_check_act_disabled,
-  sys_get_move_cost,
-} = require('#/system/sys-calc-chara-param');
+const { sys_get_move_cost } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const print_chara_info = require('#/page/components/cur-chara-info');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
+const select_mejiro_city = require('#/page/mejiro/select-mejiro');
 
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 const GameGuides = require('#/event/others/game-guides');
@@ -28,7 +26,7 @@ const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
 /**
- * @param {{s:number,d:boolean,l:number,n:string}[]} positions
+ * @param {{s:number,d:boolean,l:number,n:string,[t]:string}[]} positions
  * @param {EventMarks} event_marks
  * @returns {{accelerator:number,config:{buttonType:string,disabled:boolean|*,width:number},content:string,type:string}[]}
  */
@@ -44,68 +42,6 @@ function get_position_buttons(positions, event_marks) {
     content: e.n,
     type: 'button',
   }));
-}
-
-/**
- * @param {number} chara_id
- * @param {{stamina:number,time:number}} player_base
- * @param {{stamina:number,time:number}} chara_base
- * @returns {{s:number,d:boolean,l:number,n:string}[]}
- */
-function get_positions(chara_id, player_base, chara_base) {
-  return [
-    {
-      d: sys_check_act_disabled(
-        sys_get_move_cost(location_enum.river, chara_id),
-        player_base,
-        chara_base,
-      ),
-      l: location_enum.river,
-      n: '河堤',
-      s: event_hooks.out_river,
-    },
-    {
-      d:
-        era.get('flag:当前马币') < 10 ||
-        sys_check_act_disabled(
-          sys_get_move_cost(location_enum.shopping, chara_id),
-          player_base,
-          chara_base,
-        ),
-      l: location_enum.shopping,
-      n: '商店街',
-      s: event_hooks.out_shopping,
-    },
-    {
-      d: sys_check_act_disabled(
-        sys_get_move_cost(location_enum.church, chara_id),
-        player_base,
-        chara_base,
-      ),
-      l: location_enum.church,
-      n: '神社',
-      s: event_hooks.out_church,
-    },
-    {
-      d:
-        era.get('flag:当前马币') < 10 ||
-        sys_check_act_disabled(
-          sys_get_move_cost(location_enum.station, chara_id),
-          player_base,
-          chara_base,
-        ),
-      l: location_enum.station,
-      n: '车站',
-      s: event_hooks.out_station,
-    },
-    {
-      d: true,
-      l: location_enum.mejiro,
-      n: '目白城',
-      s: event_hooks.out_mejiro,
-      t: '暂未实装',
-    },
-  ];
 }
 
 async function out_page() {
@@ -129,7 +65,11 @@ async function out_page() {
   era.drawLine();
   if (!(await sys_get_random_event(event_hooks.out_start)())) {
     const event_marks = new EventMarks(chara_id);
-    let positions = get_positions(chara_id, player_base, chara_base);
+    let positions = select_mejiro_city().get_positions(
+      chara_id,
+      player_base,
+      chara_base,
+    );
     vehicle = !chara_id && era.get('flag:单人载具');
     era.drawLine();
     if (vehicle) {
@@ -195,7 +135,7 @@ async function out_page() {
             },
             {
               async handle() {
-                const positions = get_positions(
+                const positions = select_mejiro_city().get_positions(
                   301,
                   {
                     stamina: era.get('base:0:体力'),

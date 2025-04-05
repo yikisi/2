@@ -162,12 +162,13 @@ module.exports = {
    * @param {{stamina:number,time:number}} cost
    * @param {{stamina:number,time:number}} player_base
    * @param {{stamina:number,time:number}} [chara_base]
+   * @return {boolean}
    */
   sys_check_act_disabled(cost, player_base, chara_base) {
     return (
       player_base.stamina < cost.stamina ||
       player_base.time < cost.time ||
-      (chara_base &&
+      (chara_base !== undefined &&
         (chara_base.stamina < cost.stamina || chara_base.time < cost.time))
     );
   },
