@@ -9,12 +9,8 @@ const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 
 class MejiroCity {
-  constructor() {
-    era.get('flag:目白城变量') || era.set('flag:目白城变量', {});
-  }
-
   /** @returns {Record<string,any>} */
-  get obj() {
+  get var() {
     return era.get('flag:目白城变量');
   }
 

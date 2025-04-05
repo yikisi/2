@@ -6,7 +6,7 @@ class CallOfMejiro extends MejiroCity {
    * @returns {number}
    */
   get called() {
-    return this.obj.called || 0;
+    return this.var.called || 0;
   }
 
   /**
@@ -15,9 +15,9 @@ class CallOfMejiro extends MejiroCity {
    */
   set called(v) {
     if (!v) {
-      delete this.obj.called;
+      delete this.var.called;
     } else {
-      this.obj.called = v;
+      this.var.called = v;
     }
   }
 
@@ -26,7 +26,7 @@ class CallOfMejiro extends MejiroCity {
    * @returns {number}
    */
   get san() {
-    return this.obj.san || 0;
+    return this.var.san || 0;
   }
 
   /**
@@ -35,9 +35,9 @@ class CallOfMejiro extends MejiroCity {
    */
   set san(v) {
     if (!v) {
-      delete this.obj.san;
+      delete this.var.san;
     } else {
-      this.obj.san = v;
+      this.var.san = v;
     }
   }
 }

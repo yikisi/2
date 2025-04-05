@@ -5,6 +5,7 @@ const m_call = new (require('#/page/mejiro/call-of-mejiro'))();
 
 /** @returns {MejiroCity} */
 function select_mejiro_city() {
+  era.get('flag:目白城变量') || era.set('flag:目白城变量', {});
   if (era.get('flag:目白城风格') > 0) {
     return m_call;
   }
