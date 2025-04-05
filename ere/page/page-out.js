@@ -182,7 +182,11 @@ async function out_page() {
                     301,
                   );
                   era.set('flag:当前位置', positions[aim - 1].l);
-                  if (!(await sys_get_random_event(positions[aim - 1].s)())) {
+                  if (positions[aim - 1].l === location_enum.mejiro) {
+                    await select_mejiro_city().page(chara_id);
+                  } else if (
+                    !(await sys_get_random_event(positions[aim - 1].s)())
+                  ) {
                     await run_custom_daily(301, positions[aim - 1].s);
                   }
                   era.set('flag:当前位置', location_enum.gate);
@@ -259,7 +263,9 @@ async function out_page() {
           chara_id,
         );
         era.set('flag:当前位置', positions[aim - 1].l);
-        if (!(await sys_get_random_event(positions[aim - 1].s)())) {
+        if (positions[aim - 1].l === location_enum.mejiro) {
+          await select_mejiro_city().page(chara_id);
+        } else if (!(await sys_get_random_event(positions[aim - 1].s)())) {
           await run_custom_daily(chara_id, positions[aim - 1].s);
         }
         era.set('flag:当前位置', location_enum.gate);

@@ -1,4 +1,10 @@
+const era = require('#/era-electron');
+
 const MejiroCity = require('#/page/mejiro/mejiro-common');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const { location_enum } = require('#/data/locations');
 
 class CallOfMejiro extends MejiroCity {
   /**
@@ -38,6 +44,47 @@ class CallOfMejiro extends MejiroCity {
       delete this.var.san;
     } else {
       this.var.san = v;
+    }
+  }
+
+  get_positions(chara_id, player_base, chara_base) {
+    const ret = super.get_positions(chara_id, player_base, chara_base);
+    const mejiro_button = ret.find((e) => e.l === location_enum.mejiro);
+    era.logger.info(`${this.called}'s san=${this.san}`);
+    if (this.called > 0) {
+      if (this.called === chara_id) {
+        if (this.san === 0) {
+          ret.forEach((e) => {
+            if (e !== mejiro_button) {
+              e.d = true;
+              e.t = '麦吉罗在呼唤……';
+            }
+          });
+        }
+      } else {
+        mejiro_button.d = true;
+        if (mejiro_button.t || (mejiro_button.t = '')) {
+          mejiro_button.t += '\n';
+        }
+        mejiro_button.t += '麦吉罗并未呼唤此人……';
+      }
+    }
+    return ret;
+  }
+
+  async page(chara_id) {
+    await era.printAndWait([get_chara_talk(chara_id).get_colored_name()]);
+  }
+
+  async next_week() {
+    if (era.get('item:「恩宠」') > 0) {
+      era.add('item:「恩宠」', -1);
+    }
+    if (this.called > 0 && this.san > 0 && --this.san === 0) {
+      await era.printAndWait([
+        get_chara_talk(this.called).get_colored_name(),
+        ' 从耳边的低语中听到了麦吉罗的呼唤……',
+      ]);
     }
   }
 }

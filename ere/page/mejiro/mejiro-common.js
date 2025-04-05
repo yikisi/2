@@ -15,13 +15,14 @@ class MejiroCity {
   }
 
   /**
+   * 修改外出口上
    * @param {number} chara_id
    * @param {{stamina:number,time:number}} player_base
    * @param {{stamina:number,time:number}} chara_base
-   * @returns {{s:number,d:boolean,l:number,n:string}[]}
+   * @returns {{s:number,d:boolean,l:number,n:string,[t]:string}[]}
    */
   get_positions(chara_id, player_base, chara_base) {
-    let m_disabled = false,
+    let m_disabled,
       m_title = [];
     if (chara_base === undefined) {
       m_disabled = true;
@@ -103,6 +104,16 @@ class MejiroCity {
       },
     ];
   }
+
+  /**
+   * 目白城本体
+   * @param {number} chara_id 同行者
+   */
+  // eslint-disable-next-line no-unused-vars
+  async page(chara_id) {}
+
+  /** 过回合的处理内容 */
+  async next_week() {}
 }
 
 module.exports = MejiroCity;
