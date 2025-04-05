@@ -378,7 +378,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 sys_check_act_disabled(
                   sys_get_move_cost(location_enum.playground),
                   player_base,
-                ),
+                ) > 0,
               width: 6,
             },
             content: '前往训练场 (招募)',
@@ -397,7 +397,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 sys_check_act_disabled(
                   sys_get_move_cost(location_enum.trainer),
                   player_base,
-                ) ||
+                ) > 0 ||
                 loc_chara.get(location_enum.trainer).length === 0,
               width: 6,
             },
@@ -419,7 +419,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 sys_check_act_disabled(
                   sys_get_move_cost(location_enum.clinic),
                   player_base,
-                ) ||
+                ) > 0 ||
                 loc_chara.get(location_enum.clinic).length === 0,
               width: 6,
             },
@@ -444,7 +444,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   sys_get_move_cost(location_enum.god),
                   player_base,
                   chara_base,
-                ) ||
+                ) > 0 ||
                 not_in_same_loc,
               width: 6,
             },
@@ -469,7 +469,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   sys_get_move_cost(location_enum.atrium, chara_id),
                   player_base,
                   chara_base,
-                ) ||
+                ) > 0 ||
                 not_in_same_loc,
               width: 6,
             },
@@ -494,7 +494,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   sys_get_move_cost(location_enum.rooftop, chara_id),
                   player_base,
                   chara_base,
-                ) ||
+                ) > 0 ||
                 not_in_same_loc,
               width: 6,
             },
@@ -514,7 +514,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 sys_check_act_disabled(
                   sys_get_move_cost(location_enum.chairman),
                   player_base,
-                ) ||
+                ) > 0 ||
                 loc_chara.get(location_enum.chairman).length === 0,
               width: 6,
             },
@@ -534,7 +534,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 sys_check_act_disabled(
                   sys_get_move_cost(location_enum.visitor),
                   player_base,
-                ) ||
+                ) > 0 ||
                 (loc_chara.get(location_enum.visitor).length === 0 &&
                   !my_event_marks.check(event_hooks.school_visitors)),
               width: 6,
@@ -574,7 +574,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   sys_get_move_cost(location_enum.gate, chara_id),
                   player_base,
                   chara_base,
-                ) ||
+                ) > 0 ||
                 not_in_same_loc,
               width: 6,
             },

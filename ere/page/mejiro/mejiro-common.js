@@ -21,37 +21,40 @@ class MejiroCity {
    * @returns {{s:number,d:boolean,l:number,n:string}[]}
    */
   get_positions(chara_id, player_base, chara_base) {
-    let m_disabled, m_title;
+    let m_disabled = false,
+      m_title = [];
     if (chara_base === undefined) {
       m_disabled = true;
-      m_title = '目白城不欢迎独身的旅客……';
+      m_title.push('目白城不欢迎独身的旅客……');
     } else {
       if (
         (m_disabled = sys_check_act_disabled(
           sys_get_move_cost(location_enum.station, chara_id),
           player_base,
           chara_base,
-        ))
+        )) > 0
       ) {
-        m_title = '体力精力不足';
-      } else {
-        m_title = '';
+        if ((m_disabled & 0b1) > 0 || (m_disabled & 0b100) > 0) {
+          m_title.push('体力不足');
+        }
+        if ((m_disabled & 0b10) > 0 || (m_disabled & 0b1000) > 0) {
+          m_title.push('精力不足');
+        }
+        m_disabled = true;
       }
       if (era.get(`love:${chara_id}`) < 75) {
         m_disabled = true;
-        if (m_title) {
-          m_title += '；';
-        }
-        m_title += '关系并未达到如此程度……';
+        m_title.push('关系并未达到如此程度……');
       }
     }
     return [
       {
-        d: sys_check_act_disabled(
-          sys_get_move_cost(location_enum.river, chara_id),
-          player_base,
-          chara_base,
-        ),
+        d:
+          sys_check_act_disabled(
+            sys_get_move_cost(location_enum.river, chara_id),
+            player_base,
+            chara_base,
+          ) > 0,
         l: location_enum.river,
         n: '河堤',
         s: event_hooks.out_river,
@@ -63,17 +66,18 @@ class MejiroCity {
             sys_get_move_cost(location_enum.shopping, chara_id),
             player_base,
             chara_base,
-          ),
+          ) > 0,
         l: location_enum.shopping,
         n: '商店街',
         s: event_hooks.out_shopping,
       },
       {
-        d: sys_check_act_disabled(
-          sys_get_move_cost(location_enum.church, chara_id),
-          player_base,
-          chara_base,
-        ),
+        d:
+          sys_check_act_disabled(
+            sys_get_move_cost(location_enum.church, chara_id),
+            player_base,
+            chara_base,
+          ) > 0,
         l: location_enum.church,
         n: '神社',
         s: event_hooks.out_church,
@@ -85,7 +89,7 @@ class MejiroCity {
             sys_get_move_cost(location_enum.station, chara_id),
             player_base,
             chara_base,
-          ),
+          ) > 0,
         l: location_enum.station,
         n: '车站',
         s: event_hooks.out_station,
@@ -95,7 +99,7 @@ class MejiroCity {
         l: location_enum.mejiro,
         n: '目白城',
         s: event_hooks.out_mejiro,
-        t: m_title,
+        t: m_title.length > 0 ? m_title.join('\n') : undefined,
       },
     ];
   }
