@@ -101,7 +101,7 @@
 /**
  * @typedef WholeImageObject
  * @property {WholeImageConfig} [config]
- * @property {string|string[]} name
+ * @property {string|string[]} names
  * @property {'image.whole'} type
  */
 
@@ -398,12 +398,12 @@ const era = {
   printProgress(percentage, inContent, outContent, config) {},
   /**
    * print the whole image
-   * @param {string|string[]} name REQUIRED
+   * @param {string|string[]} names REQUIRED
    * @param {WholeImageConfig} [config]
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
-  printWholeImage(name, config) {},
+  printWholeImage(names, config) {},
   /**
    * print a line break, if just used to print enter at the end of a line, please use print('*** \n') to replace
    * @returns {number} line number of the printed
