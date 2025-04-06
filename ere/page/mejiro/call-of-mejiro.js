@@ -73,12 +73,55 @@ class CallOfMejiro extends MejiroCity {
   }
 
   async page(chara_id) {
-    await era.printAndWait([get_chara_talk(chara_id).get_colored_name()]);
+    const chara = get_chara_talk(chara_id);
+    if (era.get('item:「恩宠」') === 0) {
+      await this.misty(chara, get_chara_talk(0));
+    } else {
+      await this.city(chara, get_chara_talk(0));
+    }
+  }
+
+  /**
+   * 外场：正常的目白城，消耗恩宠购买服务
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   */
+  async city(chara, me) {
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 和 ',
+      chara.get_colored_name(),
+      ' 站在干净的街道上。',
+    ]);
+    await era.printAndWait('明媚的阳光下，出双入对的人们穿行在大街小巷。');
+  }
+
+  /**
+   * 内场：迷雾笼罩的目白城，需要逃离
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   */
+  async misty(chara, me) {
+    let temp,
+      difficulty = 1;
+    if ((temp = era.get('item:「亏欠」')) > 0) {
+      difficulty += Math.min(Math.floor(Math.log(temp + 9) / Math.log(10)), 5);
+      era.set('item:「亏欠」', 0);
+    }
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 和 ',
+      chara.get_colored_name(),
+      ' 身处迷雾笼罩的街道……',
+    ]);
+    era.logger.debug(`亏欠=${temp} 难度=${difficulty}`);
   }
 
   async next_week() {
     if (era.get('item:「恩宠」') > 0) {
-      era.add('item:「恩宠」', -1);
+      if (era.add('item:「恩宠」', -1)) {
+        await era.printAndWait('目白城再次为迷雾笼罩……');
+      }
     }
     if (this.called > 0 && this.san > 0 && --this.san === 0) {
       await era.printAndWait([
