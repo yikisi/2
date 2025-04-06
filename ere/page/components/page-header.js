@@ -1,6 +1,5 @@
 ﻿const era = require('#/era-electron');
 
-const get_status = require('#/system/chara/sys-get-status');
 const {
   sys_get_billings,
   sys_reg_race,
@@ -25,7 +24,6 @@ const { location_name } = require('#/data/locations');
 const { race_infos } = require('#/data/race/race-const');
 
 function get_progress_bar() {
-  const status_list = get_status(0);
   return [
     {
       config: { width: 2 },
@@ -56,16 +54,6 @@ function get_progress_bar() {
       inContent: `${Math.floor(era.get(`base:0:精力`))}/${era.get(`maxbase:0:精力`)}`,
       percentage: (era.get(`base:0:精力`) * 100) / era.get(`maxbase:0:精力`),
       type: 'progress',
-    },
-    {
-      config: { width: 2 },
-      content: '状态',
-      type: 'text',
-    },
-    {
-      config: { width: 22 },
-      content: status_list.length > 0 ? status_list : '正常',
-      type: 'text',
     },
   ];
 }
