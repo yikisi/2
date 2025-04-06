@@ -6,7 +6,6 @@ const {
   print,
   printAndWait,
   printInColRows,
-  println,
   set,
   setHorizontalAlign,
 } = require('#/era-electron');
@@ -150,10 +149,11 @@ async function page_trainer_office() {
   drawLine();
   const vehicle = get('flag:单人载具');
   print([
+    '【',
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了 ',
     location_name[location_enum.trainer],
-    '……',
+    '】',
   ]);
   const loc_characters = new LocCharacters();
   let trainer_list = loc_characters.get(location_enum.trainer);
@@ -270,13 +270,12 @@ async function page_trainer_office() {
       }
     }
     drawLine();
-    await printAndWait('回去了……');
+    await printAndWait('【折返了】');
   } else {
     drawLine();
-    await printAndWait('没有人在的样子……回去了……');
+    await printAndWait('【没有人在的样子……折返了】');
   }
   loc_characters.set(location_enum.trainer, trainer_list);
-  println();
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.trainer,
   });

@@ -25,8 +25,9 @@ async function page_clinic() {
   era.drawLine();
   const vehicle = era.get('flag:单人载具');
   era.print([
+    '【',
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了保健室……',
+    '抵达了保健室】',
   ]);
   const loc_chara = new LocCharacters(),
     celebration = get_celebration(),
@@ -67,11 +68,10 @@ async function page_clinic() {
     }
   }
   era.drawLine();
-  await era.printAndWait('回去了……');
+  await era.printAndWait('【折返了】');
   if (!sys_check_awake(chara.id)) {
     loc_chara.set(location_enum.clinic, []);
   }
-  era.println();
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.clinic,
   });

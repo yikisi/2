@@ -41,8 +41,9 @@ async function page_chairman_office() {
   era.drawLine();
   const vehicle = era.get('flag:单人载具');
   era.print([
+    '【',
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了理事长办公室……',
+    '抵达了理事长办公室】',
   ]);
   const loc_characters = new LocCharacters(),
     celebration = get_celebration(),
@@ -335,11 +336,10 @@ async function page_chairman_office() {
     }
   }
   era.drawLine();
-  await era.printAndWait('回去了……');
+  await era.printAndWait('【折返了】');
   if (!sys_check_awake(chara.id)) {
     loc_characters.set(location_enum.chairman, []);
   }
-  era.println();
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.chairman,
   });

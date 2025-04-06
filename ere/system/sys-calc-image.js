@@ -46,6 +46,7 @@ module.exports = {
         ret.push(`${base}_私`, `${base}_夏`);
         break;
       case location_enum.gate:
+      case location_enum.mejiro:
         if (holiday === 0) {
           ret = [`${base}_春`];
         } else if (holiday === 39) {

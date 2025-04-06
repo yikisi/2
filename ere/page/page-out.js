@@ -165,18 +165,17 @@ async function out_page() {
                     { type: 'divider' },
                     {
                       content: [
-                        '和 ',
+                        '【和 ',
                         temp.chara.get_colored_name(),
                         ' 一起',
                         vehicle
                           ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}`
                           : '',
-                        `前往 ${positions[aim - 1].n}……`,
+                        `前往 ${positions[aim - 1].n}】`,
                       ],
                       type: 'text',
                     },
                   ]);
-                  era.println();
                   sys_handle_action(
                     sys_get_move_cost(positions[aim - 1].l, 301),
                     301,
@@ -237,27 +236,28 @@ async function out_page() {
       case 999:
         break;
       default:
-        vehicle = chara_id
-          ? era.get('flag:多人载具')
-          : era.get('flag:多人载具') || era.get('flag:单人载具');
+        vehicle =
+          chara_id > 0
+            ? era.get('flag:多人载具')
+            : era.get('flag:多人载具') || era.get('flag:单人载具');
         era.printMultiColumns([
           {
             type: 'divider',
           },
           {
             content: [
-              ...(chara_id
+              '【',
+              ...(chara_id > 0
                 ? ['和 ', get_chara_talk(chara_id).get_colored_name(), ' 一起']
                 : ['独自']),
               vehicle
                 ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}`
                 : '',
-              `前往 ${positions[aim - 1].n}……`,
+              `前往 ${positions[aim - 1].n}】`,
             ],
             type: 'text',
           },
         ]);
-        era.println();
         sys_handle_action(
           sys_get_move_cost(positions[aim - 1].l, chara_id),
           chara_id,
@@ -271,8 +271,7 @@ async function out_page() {
         era.set('flag:当前位置', location_enum.gate);
     }
     era.drawLine();
-    await era.printAndWait('回去了……');
-    era.println();
+    await era.printAndWait('【折返了】');
     await sys_get_random_event(event_hooks.back_school)({
       loc: positions[aim - 1]?.l,
     });

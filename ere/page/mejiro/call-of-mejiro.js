@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const page_header = require('#/page/components/page-header');
 const MejiroCity = require('#/page/mejiro/mejiro-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -73,48 +74,71 @@ class CallOfMejiro extends MejiroCity {
   }
 
   async page(chara_id) {
-    const chara = get_chara_talk(chara_id);
-    if (era.get('item:「恩宠」') === 0) {
-      await this.misty(chara, get_chara_talk(0));
-    } else {
-      await this.city(chara, get_chara_talk(0));
-    }
-  }
-
-  /**
-   * 外场：正常的目白城，消耗恩宠购买服务
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   */
-  async city(chara, me) {
+    const chara = get_chara_talk(chara_id),
+      me = get_chara_talk(0);
     await era.printAndWait([
       me.get_colored_name(),
       ' 和 ',
       chara.get_colored_name(),
-      ' 站在干净的街道上。',
+      ' 一同进入了目白城……',
     ]);
-    await era.printAndWait('明媚的阳光下，出双入对的人们穿行在大街小巷。');
+    if (era.get('item:「恩宠」') === 0) {
+      await era.printAndWait([
+        '……然后迷雾吞没了 ',
+        me.get_couple_title(),
+        '……',
+      ]);
+      await this.misty(chara, me);
+    } else {
+      await this.city(chara, me);
+    }
   }
 
   /**
-   * 内场：迷雾笼罩的目白城，需要逃离
+   * 外场：正常的目白城
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   */
+  async city(chara, me) {
+    let flag = true;
+    while (flag) {
+      await era.clear();
+      page_header();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 和 ',
+        chara.get_colored_name(),
+        ' 站在干净的街道上。',
+      ]);
+      await era.printAndWait('明媚的阳光下，出双入对的人们穿行在大街小巷。');
+    }
+  }
+
+  /**
+   * 内场：迷雾笼罩的目白城
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    */
   async misty(chara, me) {
+    let flag = true;
     let temp,
       difficulty = 1;
     if ((temp = era.get('item:「亏欠」')) > 0) {
       difficulty += Math.min(Math.floor(Math.log(temp + 9) / Math.log(10)), 5);
       era.set('item:「亏欠」', 0);
     }
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 和 ',
-      chara.get_colored_name(),
-      ' 身处迷雾笼罩的街道……',
-    ]);
     era.logger.debug(`亏欠=${temp} 难度=${difficulty}`);
+    while (flag) {
+      await era.clear();
+      page_header();
+      era.drawLine();
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 和 ',
+        chara.get_colored_name(),
+        ' 身处迷雾笼罩的街道……',
+      ]);
+    }
   }
 
   async next_week() {

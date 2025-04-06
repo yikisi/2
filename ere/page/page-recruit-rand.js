@@ -82,8 +82,9 @@ async function print_rec_page() {
   era.drawLine();
   const vehicle = era.get('flag:单人载具');
   era.print([
+    '【',
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了训练场……',
+    '抵达了训练场】',
   ]);
   await new GameGuides().recruit();
   flag_leave = await sys_get_random_event(event_hooks.recruit_start)();
