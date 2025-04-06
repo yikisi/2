@@ -21,7 +21,7 @@ const {
   get_trainer_title,
   get_trainer_train_buff,
 } = require('#/data/info-generator');
-const { location_enum, location_name } = require('#/data/locations');
+const { location_name } = require('#/data/locations');
 const { race_infos } = require('#/data/race/race-const');
 
 function get_progress_bar() {
@@ -77,29 +77,6 @@ function page_header(enable_race_info) {
   if (!cur_year) {
     era.drawLine();
     era.print('当前未加载存档', { align: 'center' });
-  } else if (era.get('flag:当前位置') === location_enum.basement) {
-    era.printInColRows(
-      [{ type: 'divider' }],
-      {
-        columns: get_progress_bar(),
-        config: { width: 16 },
-      },
-      {
-        columns: [
-          {
-            content: [
-              '位于 ',
-              {
-                content: '地下室',
-                fontWeight: 'bold',
-              },
-            ],
-            type: 'text',
-          },
-        ],
-        config: { width: 8 },
-      },
-    );
   } else {
     const celebration = get_celebration(),
       cur_coin = era.get('flag:当前马币'),
@@ -263,3 +240,4 @@ function page_header(enable_race_info) {
 }
 
 module.exports = page_header;
+module.exports.get_progress_bar = get_progress_bar;

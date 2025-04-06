@@ -21,7 +21,8 @@ const sys_next_week = require('#/system/sys-next-week');
 
 const print_curr_chara = require('#/page/components/cur-chara-info');
 const check_game_over = require('#/page/components/game-over');
-const print_page_header = require('#/page/components/page-header');
+const page_header = require('#/page/components/page-header');
+const basement = require('#/page/homepage/basement');
 const print_ero_page = require('#/page/page-ero');
 
 const basement_queue = require('#/event/basement-queue');
@@ -226,7 +227,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
 /** @type {Record<string,function(number,function(number,number,number):Promise,{after_select:boolean,homepage:boolean,week_start:boolean}):Promise<*>>} */
 const handlers = {};
 
-handlers[location_enum.basement] = require('#/page/homepage/basement');
+handlers[location_enum.basement] = basement;
 handlers[location_enum.beach] = require('#/page/homepage/beach');
 handlers[location_enum.guangzhou] =
   handlers[location_enum.hongkong] =
@@ -267,7 +268,7 @@ module.exports = async () => {
       if (cur_location === location_enum.basement) {
         era.set('flag:当前位置', location_enum.office);
       }
-      print_page_header();
+      page_header();
       if (await check_game_over()) {
         return;
       }
@@ -341,7 +342,7 @@ module.exports = async () => {
       if (cur_location === location_enum.basement) {
         era.set('flag:当前位置', location_enum.basement);
         await era.clear();
-        await print_page_header();
+        basement.page_header();
         my_life_marks.b_timer = get_random_value(
           Math.min(23, count + 6) * 60,
           24 * 60 - 1,
@@ -422,7 +423,7 @@ module.exports = async () => {
       sys_change_status_by_base(0);
       chara_id && sys_change_status_by_base(chara_id);
       await era.clear();
-      print_page_header(true);
+      page_header(true);
       print_curr_chara(chara_id);
       era.drawLine();
       let hook = -1;
