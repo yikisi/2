@@ -1,5 +1,6 @@
 ﻿const era = require('#/era-electron');
 
+const sys_get_status = require('#/system/chara/sys-get-status');
 const {
   sys_get_billings,
   sys_reg_race,
@@ -110,6 +111,7 @@ function page_header(enable_race_info) {
         }
       }
     });
+    const status_list = sys_get_status(0);
     era.printInColRows(
       [{ type: 'divider' }],
       {
@@ -180,6 +182,16 @@ function page_header(enable_race_info) {
             type: 'text',
           },
           ...get_progress_bar(),
+          {
+            config: { width: 2 },
+            content: '状态',
+            type: 'text',
+          },
+          {
+            config: { width: 22 },
+            content: status_list.length > 0 ? status_list : '正常',
+            type: 'text',
+          },
         ],
         config: { width: 16 },
       },
