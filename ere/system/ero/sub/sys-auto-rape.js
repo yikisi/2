@@ -435,8 +435,9 @@ async function sys_auto_rape(shown) {
     `raping done! ${(new Date().getTime() - current).toLocaleString()}ms`,
   );
   if (
-    ero_tagged_hooks[action] &&
+    ero_tagged_hooks[action] !== undefined &&
     !era.get(`talent:${master}:病娇`) &&
+    !era.get(`status:${master}:超马跳Z`) &&
     (master < 340 || master > 342)
   ) {
     const ero = era.get(`talent:${master}:工口意愿`),
