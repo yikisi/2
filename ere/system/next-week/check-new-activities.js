@@ -13,7 +13,7 @@ const {
 } = require('#/system/sys-calc-base-cflag');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
-const select_mejiro_city = require('#/page/mejiro/select-mejiro');
+const MejiroCity = require('#/page/mejiro/mejiro-common');
 
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
@@ -520,7 +520,7 @@ async function check_new_activities(cur_round, in_team_list) {
   if (era.get('flag:当前周') === 1) {
     new MyEduMarks().we_are_one = 0;
   }
-  await select_mejiro_city().next_week();
+  await MejiroCity.instance().next_week();
 }
 
 module.exports = check_new_activities;

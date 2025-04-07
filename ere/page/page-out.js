@@ -8,7 +8,7 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 const print_chara_info = require('#/page/components/cur-chara-info');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
-const select_mejiro_city = require('#/page/mejiro/select-mejiro');
+const MejiroCity = require('#/page/mejiro/mejiro-common');
 
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 const GameGuides = require('#/event/others/game-guides');
@@ -24,6 +24,9 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const YandereList = require('#/data/event/yandere-list');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+
+require('#/page/mejiro/free-mejiro');
+require('#/page/mejiro/call-of-mejiro');
 
 /**
  * @param {{s:number,d:boolean,l:number,n:string,[t]:string}[]} positions
@@ -65,7 +68,7 @@ async function out_page() {
   era.drawLine();
   if (!(await sys_get_random_event(event_hooks.out_start)())) {
     const event_marks = new EventMarks(chara_id);
-    let positions = select_mejiro_city().get_positions(
+    let positions = MejiroCity.instance().get_positions(
       chara_id,
       player_base,
       chara_base,
@@ -135,7 +138,7 @@ async function out_page() {
             },
             {
               async handle() {
-                const positions = select_mejiro_city().get_positions(
+                const positions = MejiroCity.instance().get_positions(
                   301,
                   {
                     stamina: era.get('base:0:体力'),
@@ -182,7 +185,7 @@ async function out_page() {
                   );
                   era.set('flag:当前位置', positions[aim - 1].l);
                   if (positions[aim - 1].l === location_enum.mejiro) {
-                    await select_mejiro_city().page(chara_id);
+                    await MejiroCity.instance().page(chara_id);
                   } else if (
                     !(await sys_get_random_event(positions[aim - 1].s)())
                   ) {
@@ -264,7 +267,7 @@ async function out_page() {
         );
         era.set('flag:当前位置', positions[aim - 1].l);
         if (positions[aim - 1].l === location_enum.mejiro) {
-          await select_mejiro_city().page(chara_id);
+          await MejiroCity.instance().page(chara_id);
         } else if (!(await sys_get_random_event(positions[aim - 1].s)())) {
           await run_custom_daily(chara_id, positions[aim - 1].s);
         }

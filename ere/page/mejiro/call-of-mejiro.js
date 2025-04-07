@@ -13,6 +13,11 @@ const { location_enum } = require('#/data/locations');
 const { vehicle_names } = require('#/data/move-const');
 
 class CallOfMejiro extends MejiroCity {
+  constructor() {
+    super();
+    MejiroCity.register(1, this);
+  }
+
   /**
    * 被呼唤的伴侣
    * @returns {number}
@@ -73,6 +78,12 @@ class CallOfMejiro extends MejiroCity {
         }
         mejiro_button.t += '麦吉罗并未呼唤此人……';
       }
+    } else if (chara_id >= 340 && chara_id <= 342) {
+      mejiro_button.d = true;
+      if (mejiro_button.t || (mejiro_button.t = '')) {
+        mejiro_button.t += '\n';
+      }
+      mejiro_button.t += '……';
     }
     return ret;
   }
@@ -86,12 +97,13 @@ class CallOfMejiro extends MejiroCity {
       chara.get_colored_name(),
       ' 一同进入了目白城……',
     ]);
-    if (era.get('item:「恩宠」') === 0) {
+    if (era.get('item:「恩宠」') === 0 || (this.called > 0 && this.san === 0)) {
       await era.printAndWait([
         '……然后迷雾吞没了 ',
         me.get_couple_title(),
         '……',
       ]);
+      this.called = 0;
       await this.misty(chara, me);
     } else {
       await this.city(chara, me);
@@ -209,7 +221,7 @@ class CallOfMejiro extends MejiroCity {
           me.get_colored_name(),
           ' 和 ',
           chara.get_colored_name(),
-          ' 被迷雾完全包围了，目光所及除了迷雾就是一对对疯狂做爱的情侣，但他们的面容依稀有着 ',
+          ' 被迷雾完全包围了，目光所及除了迷雾就是一对对疯狂做爱的情侣，他们的面容依稀有着 ',
           me.get_couple_title(),
           ' 的影子。性爱的声音盖过了其他所有，呼吸的空气中满是淫水和汗水的臭味……',
         ]);
@@ -285,6 +297,15 @@ class CallOfMejiro extends MejiroCity {
     } else {
       // TODO
       await era.printAndWait('逃离');
+      await era.printAndWait([
+        '自那以后，',
+        chara.get_colored_name(),
+        ' 就会时不时听到若有若无的低语……',
+      ]);
+      this.called = chara.id;
+      this.san = Math.floor(
+        era.get('item:「恩宠」') * get_random_value(0.5, 0.7),
+      );
     }
   }
 
@@ -303,4 +324,6 @@ class CallOfMejiro extends MejiroCity {
   }
 }
 
-module.exports = CallOfMejiro;
+new CallOfMejiro();
+
+module.exports = {};

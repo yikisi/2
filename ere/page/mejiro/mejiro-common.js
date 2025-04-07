@@ -8,10 +8,30 @@ const {
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 
+const dict = {};
+
 class MejiroCity {
+  /** @returns {MejiroCity} */
+  static instance() {
+    era.get('flag:目白城变量') || era.set('flag:目白城变量', {});
+    return dict[era.get('flag:目白城风格')];
+  }
+
+  static register(k, v) {
+    dict[k] = v;
+  }
+
   /** @returns {Record<string,any>} */
   get var() {
     return era.get('flag:目白城变量');
+  }
+
+  get_want_sex_buff() {
+    return false;
+  }
+
+  get_rape_buff() {
+    return 0;
   }
 
   /**

@@ -1,5 +1,12 @@
 const MejiroCity = require('#/page/mejiro/mejiro-common');
 
-class FreeMejiro extends MejiroCity {}
+class FreeMejiro extends MejiroCity {
+  constructor() {
+    super();
+    MejiroCity.register(0, this);
+  }
+}
 
-module.exports = FreeMejiro;
+new FreeMejiro();
+
+module.exports = {};
