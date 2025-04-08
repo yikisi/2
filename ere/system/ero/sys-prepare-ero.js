@@ -415,6 +415,7 @@ function init_ero(...ids) {
     }
   });
 }
+
 /** @param {number} ids */
 function begin_and_init_ero(...ids) {
   if (juel_names === undefined) {
@@ -625,21 +626,21 @@ function end_ero(skip_juels, log_juels, ids) {
     .forEach((v) => ids.forEach((id) => era.set(`gotjewel:${id}:${v}`, 0)));
 }
 
-/** @param {boolean} [skip_juels] */
-function end_ero_and_train(skip_juels) {
+/** @param {boolean} [skip_juels=false] */
+function end_ero_and_train(skip_juels = false) {
   clean_juels();
   clean_palams();
   end_ero(skip_juels === true, false, era.getCharactersInTrain());
   era.endTrain();
 }
 
-/** @param {boolean} [shown] */
-async function end_ero_and_show_result(shown) {
+/** @param {boolean} [shown=true] */
+async function end_ero_and_show_result(shown = true) {
   clean_juels();
   clean_palams();
   const chara_list = era.getCharactersInTrain();
-  end_ero(false, shown !== false, chara_list);
-  if (shown !== false) {
+  end_ero(false, shown, chara_list);
+  if (shown) {
     if (era.get('flag:马跳结果显示简报')) {
       for (const chara_id of chara_list) {
         const buffer = get_juel_result(chara_id, juel_names, tmp);

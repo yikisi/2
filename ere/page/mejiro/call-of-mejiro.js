@@ -1,9 +1,15 @@
 const era = require('#/era-electron');
 
-const sys_get_status = require('#/system/chara/sys-get-status');
+const {
+  begin_and_init_ero,
+  end_ero_and_show_result,
+  end_ero_and_train,
+} = require('#/system/ero/sys-prepare-ero');
 
 const { get_progress_bar } = require('#/page/components/page-header');
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const MejiroCity = require('#/page/mejiro/mejiro-common');
+const print_ero_page = require('#/page/page-ero');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
@@ -13,11 +19,6 @@ const { location_enum } = require('#/data/locations');
 const { vehicle_names } = require('#/data/move-const');
 
 class CallOfMejiro extends MejiroCity {
-  constructor() {
-    super();
-    MejiroCity.register(1, this);
-  }
-
   /**
    * 被呼唤的伴侣
    * @returns {number}
@@ -115,7 +116,6 @@ class CallOfMejiro extends MejiroCity {
    * @param {number} money
    */
   page_header(chara, money) {
-    const status_list = sys_get_status(0);
     const info = [];
     if (money > 0) {
       info.push(
@@ -135,16 +135,11 @@ class CallOfMejiro extends MejiroCity {
       {
         columns: [
           ...get_progress_bar(),
-          {
-            config: { width: 2 },
-            content: '状态',
+          ...info.map((e) => ({
+            config: { width: e.width },
+            content: e.content,
             type: 'text',
-          },
-          {
-            config: { width: 22 },
-            content: status_list.length > 0 ? status_list : '正常',
-            type: 'text',
-          },
+          })),
         ],
         config: { width: 16 },
       },
@@ -160,11 +155,6 @@ class CallOfMejiro extends MejiroCity {
             ],
             type: 'text',
           },
-          ...info.map((e) => ({
-            config: { width: e.width },
-            content: e.content,
-            type: 'text',
-          })),
         ],
         config: { width: 8 },
       },
@@ -208,6 +198,7 @@ class CallOfMejiro extends MejiroCity {
     }
     difficulty = difficulty * 2 + get_random_value(0, 5);
     temp = 0;
+    begin_and_init_ero(0, chara.id);
     while (flag) {
       await era.clear();
       this.page_header(chara, 0);
@@ -217,14 +208,55 @@ class CallOfMejiro extends MejiroCity {
         era.get(`base:${chara.id}:性欲`),
       );
       if (lust >= lust_border.want_sex) {
-        era.print([
+        await era.printAndWait([
           me.get_colored_name(),
           ' 和 ',
           chara.get_colored_name(),
-          ' 被迷雾完全包围了，目光所及除了迷雾就是一对对疯狂做爱的情侣，他们的面容依稀有着 ',
-          me.get_couple_title(),
-          ' 的影子。性爱的声音盖过了其他所有，呼吸的空气中满是淫水和汗水的臭味……',
+          ' 被迷雾完全包围了……',
         ]);
+        await era.printAndWait([
+          '目光所及除了迷雾就是一对对疯狂做爱的情侣，他们的面容依稀有着 ',
+          me.get_couple_title(),
+          ' 的影子。',
+        ]);
+        await era.printAndWait(
+          '性爱的声音盖过了其他所有，呼吸的空气中满是淫水和汗水的臭味……',
+        );
+        era.set(`status:${chara.id}:超马跳Z`, 1);
+        if (
+          await select_yes_or_no(
+            '',
+            '沉溺其中（「恩宠」+10）',
+            '试图冷静（体力+50%）',
+          )
+        ) {
+          await era.printAndWait([
+            me.get_colored_name(),
+            ' 看向 ',
+            chara.get_colored_name(),
+            '，那眼眸中暗波荡漾……',
+          ]);
+          await era.printAndWait([
+            me.get_colored_name(),
+            ' 主动踏入欲望的泥淖，',
+          ]);
+          await era.printAndWait(['伴随着', chara.sex, '一同下坠，下坠……']);
+          era.add('item:「恩宠」', 10);
+        } else {
+          await era.printAndWait([
+            me.get_colored_name(),
+            ' 看向 ',
+            chara.get_colored_name(),
+            '，那眼眸中暗波荡漾……',
+          ]);
+          await era.printAndWait([
+            me.get_colored_name(),
+            ' 惊慌地想抬腿离开欲望的泥淖，',
+          ]);
+          await era.printAndWait('脚步却越踩越深，直至坠落……');
+          era.add('base:0:体力', Math.floor(era.get('maxbase:0:体力') * 0.5));
+          await print_ero_page(chara.id, true);
+        }
         era.add('item:「恩宠」', temp * 5 + 20);
         flag = false;
         temp = false;
@@ -282,6 +314,7 @@ class CallOfMejiro extends MejiroCity {
       }
     }
     if (temp) {
+      end_ero_and_train();
       era.drawLine();
       const vehicle = era.get('flag:多人载具');
       await era.printAndWait([
@@ -295,10 +328,24 @@ class CallOfMejiro extends MejiroCity {
       await era.printAndWait('指向来路的路牌标着「目白城」的标志。');
       await era.printAndWait('耳边传来满足的笑声……');
     } else {
-      // TODO
-      await era.printAndWait('逃离');
+      await end_ero_and_show_result(true);
+      era.drawLine();
       await era.printAndWait([
-        '自那以后，',
+        '当 ',
+        me.get_colored_name(),
+        ' 清醒时，已出现在目白城外的长椅上，旁边是睡着的 ',
+        chara.get_colored_name(),
+        '。',
+      ]);
+      await era.printAndWait([
+        '在 ',
+        chara.sex,
+        ' 清醒过来后，',
+        me.get_couple_title(),
+        ' 在不知从何而来的满足笑声中离开了目白城……',
+      ]);
+      await era.printAndWait([
+        '……但是自那以后，',
         chara.get_colored_name(),
         ' 就会时不时听到若有若无的低语……',
       ]);
@@ -324,6 +371,6 @@ class CallOfMejiro extends MejiroCity {
   }
 }
 
-new CallOfMejiro();
+MejiroCity.register(1, new CallOfMejiro());
 
 module.exports = {};
