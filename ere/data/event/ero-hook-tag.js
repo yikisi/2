@@ -46,6 +46,7 @@ class EroHookTag {
       (chara_touch.owner === other_id && chara_touch.part === part_enum.mouth)
     );
   }
+
   /**
    * @param {number} chara_id
    * @param {number} other_id
@@ -55,6 +56,7 @@ class EroHookTag {
     const touch = era.get(`tcvar:${chara_id}:胸部接触部位`);
     return touch.owner === other_id && touch.part === part_enum.mouth;
   }
+
   /**
    * @param {number} chara_id
    * @param {number} other_id
@@ -67,6 +69,7 @@ class EroHookTag {
       touch.item === item_enum.gag
     );
   }
+
   /**
    * @param {number} chara_part
    * @returns {function(number):boolean}
@@ -82,6 +85,7 @@ class EroHookTag {
       );
     };
   }
+
   /**
    * @param {number} chara_part
    * @returns {function(number):boolean}
@@ -101,6 +105,7 @@ class EroHookTag {
       );
     };
   }
+
   /**
    * @param {number} chara_part
    * @param {number} other_part
@@ -120,6 +125,7 @@ class EroHookTag {
       );
     };
   }
+
   /**
    * @param {number} chara_id
    * @param {number} other_id
@@ -132,6 +138,7 @@ class EroHookTag {
       (touch.part === part_enum.mouth || touch.part === part_enum.hand)
     );
   }
+
   /**
    * @param {number} chara_id
    * @param {number} other_id
@@ -145,6 +152,7 @@ class EroHookTag {
       (touch.owner === other_id && touch.part === part_enum.body)
     );
   }
+
   /**
    * @param {number} chara_id
    * @param {number} other_id
@@ -152,6 +160,9 @@ class EroHookTag {
    */
   static npc_anal_sex_check(chara_id, other_id) {
     if (!chara_id) {
+      return true;
+    }
+    if (era.get(`status:${chara_id}:超马跳Z`) > 0) {
       return true;
     }
     if (era.get(`ex:${chara_id}:肛门撕裂`)) {
@@ -173,6 +184,7 @@ class EroHookTag {
       upper_border
     );
   }
+
   /**
    * @param {number} chara_id
    * @param {number} other_id
@@ -180,6 +192,9 @@ class EroHookTag {
    */
   static npc_virgin_sex_check(chara_id, other_id) {
     if (!chara_id) {
+      return true;
+    }
+    if (era.get(`status:${chara_id}:超马跳Z`) > 0) {
       return true;
     }
     if (era.get(`ex:${chara_id}:阴道撕裂`)) {
@@ -205,6 +220,7 @@ class EroHookTag {
       upper_border
     );
   }
+
   /**
    * @param {number} chara_id
    * @param {number} other_id
@@ -214,6 +230,7 @@ class EroHookTag {
     const touch = era.get(`tcvar:${chara_id}:肛门接触部位`);
     return touch.owner === other_id && touch.part === part_enum.penis;
   }
+
   /**
    * @param {number} chara_id
    * @param {number} other_id
@@ -223,6 +240,7 @@ class EroHookTag {
     const touch = era.get(`tcvar:${chara_id}:阴道接触部位`);
     return touch.owner === other_id && touch.part === part_enum.penis;
   }
+
   /**
    * @param {number} chara_id
    * @returns {boolean}
@@ -233,6 +251,7 @@ class EroHookTag {
       era.get(`tcvar:${chara_id}:口腔接触部位`) === -1
     );
   }
+
   /**
    * @param {number} chara_id
    * @param {number} other_id
