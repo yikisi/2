@@ -75,11 +75,11 @@ async function punish_unfaithful(chara_id, new_love) {
  * @param {number} target the id of the character whose relation will be changed
  * @param {number} aim the id of the character that the target will change the relation between them
  * @param {number} val change value of relation
- * @param {boolean} [to_be_shown] if shown
- * @param {number} [extra_love]
+ * @param {boolean} [shown=true] if shown
+ * @param {number} [extra_love=0]
  * @returns {boolean} if any output
  */
-function like_chara(target, aim, val, to_be_shown, extra_love) {
+function like_chara(target, aim, val, shown = true, extra_love = 0) {
   if (!target) {
     // 玩家对所有马娘好感默认最大
     return false;
@@ -155,13 +155,13 @@ function like_chara(target, aim, val, to_be_shown, extra_love) {
       _val = Math.ceil(temp);
     }
   }
-  love_flag = Math.max(love_flag, extra_love || 0);
-  let print_flag = false;
+  love_flag = Math.max(love_flag, extra_love);
+  let ret = false;
   if (_val !== 0) {
     const new_relation = era.set(`relation:${target}:${aim}`, relation + _val);
     const mark = get_relation_mark(new_relation, target);
-    print_flag ||= to_be_shown !== false;
-    print_flag &&
+    if (shown) {
+      ret = true;
       era.print([
         get_chara_talk(target).get_colored_name(),
         ' 对 ',
@@ -186,20 +186,21 @@ function like_chara(target, aim, val, to_be_shown, extra_love) {
           color: relation_colors[mark],
         },
       ]);
+    }
   }
-  if (love_flag) {
-    print_flag = love_uma(target, love_flag, to_be_shown) || print_flag;
+  if (love_flag > 0 && love_uma(target, love_flag, shown)) {
+    ret = true;
   }
-  return print_flag;
+  return ret;
 }
 
 /**
  * @param {number} chara_id
  * @param {number} val
- * @param {boolean} [to_be_shown]
+ * @param {boolean} [shown=true]
  * @returns {boolean}
  */
-function love_uma(chara_id, val, to_be_shown) {
+function love_uma(chara_id, val, shown = true) {
   const love = era.get(`love:${chara_id}`);
   if (
     chara_id === 0 ||
@@ -239,7 +240,8 @@ function love_uma(chara_id, val, to_be_shown) {
     hide = false;
     printed_new_val = Math.min(printed_new_val, 24);
   }
-  print_change(chara_id, love, printed_new_val, !hide && to_be_shown);
+  shown &&= !hide;
+  print_change(chara_id, love, printed_new_val, shown);
   if (
     love < 50 &&
     new_val >= 50 &&
@@ -253,16 +255,16 @@ function love_uma(chara_id, val, to_be_shown) {
     (new_val === 49 || new_val === 74 || new_val === 89 || new_val === 99) &&
     era.get(`cflag:${chara_id}:爱慕暂拒`) !== new_val
   ) {
-    (sys_check_hide_relation_and_love(chara_id) & 0b1) > 0 ||
-      hide ||
+    if ((sys_check_hide_relation_and_love(chara_id) & 0b1) === 0 && shown) {
       era.print([
         '和 ',
         get_chara_talk(chara_id).get_colored_name(),
         ' 的关系似乎可以更进一步了……',
       ]);
+    }
     get_custom_check(chara_id).check_love_events();
   }
-  return true;
+  return shown;
 }
 
 /**
@@ -285,11 +287,11 @@ function get_callname(_from, _to) {
  * @param {number} chara_id
  * @param {number} old_val
  * @param {number} new_val
- * @param {boolean} [to_be_shown]
+ * @param {boolean} [shown=true]
  * @returns {boolean|undefined}
  */
-function print_change(chara_id, old_val, new_val, to_be_shown) {
-  if (to_be_shown !== false && old_val !== new_val) {
+function print_change(chara_id, old_val, new_val, shown = true) {
+  if (shown && old_val !== new_val) {
     const mark = [
       get_love_mark(old_val, chara_id),
       get_love_mark(new_val, chara_id),

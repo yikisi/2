@@ -532,9 +532,9 @@ function print_milking(type, size) {
 
 /**
  * @param {number} [lover]
- * @param {boolean} [skip_start_end]
+ * @param {boolean} [skip_start_end=false]
  */
-async function page_ero(lover, skip_start_end) {
+async function page_ero(lover, skip_start_end = false) {
   const in_basement = era.get('flag:当前位置') === location_enum.basement,
     rape = era.get('tflag:强奸');
   let curr_lover =
@@ -754,7 +754,7 @@ async function page_ero(lover, skip_start_end) {
       filtered_ero_actions.map((e) => {
         const check_val = check_ero_enabled(curr_lover, curr_supporter, e);
         if (isNaN(check_val)) {
-          era.logger.debug(`${ero_hooks.keys[e]} ${check_val}`);
+          era.logger.error(`${ero_hooks.keys[e]} ${check_val}`);
         }
         const action_disabled =
           lost_mind > 0 ||
@@ -860,15 +860,14 @@ async function page_ero(lover, skip_start_end) {
         !era.get(`tcvar:${master}:脱力`) && !era.get(`tcvar:${master}:逃跑`);
     }
   }
-  era.println();
-  await era.printAndWait('性事结束了……');
+  era.drawLine();
+  await era.printAndWait('【性事结束了】');
   if (!skip_start_end) {
-    era.println();
     await get_custom_ero(curr_lover).ero_end(sys_handle_ero_act);
   }
-  era.drawLine();
+  era.println();
   let wait_flag = false;
-  const partner_list = get_characters_in_train().filter((e) => e);
+  const partner_list = get_characters_in_train().filter((e) => e > 0);
   for (const chara_id of partner_list) {
     if (sys_check_awake(chara_id)) {
       let temp;
