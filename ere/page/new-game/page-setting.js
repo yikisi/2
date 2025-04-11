@@ -715,6 +715,7 @@ async function page_settings() {
       //     ][v],
       // },
       {
+        disabled: true,
         key: '目白城风格',
         label: '目白城的风格',
         options: [

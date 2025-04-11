@@ -271,12 +271,12 @@ module.exports = {
   },
   /**
    * @param {{stamina:number,time:number}} cost
-   * @param {number} [chara_id]
+   * @param {number} [chara_id=0]
    */
-  sys_handle_action(cost, chara_id) {
+  sys_handle_action(cost, chara_id = 0) {
     era.add('base:0:体力', -cost.stamina);
     era.add('base:0:精力', -cost.time);
-    if (chara_id) {
+    if (chara_id > 0) {
       era.add(`base:${chara_id}:体力`, -cost.stamina);
       era.add(`base:${chara_id}:精力`, -cost.time);
     }

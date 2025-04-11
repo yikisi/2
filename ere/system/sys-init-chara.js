@@ -31,15 +31,13 @@ const { attr_names } = require('#/data/train-const');
 
 /**
  * @param {number} chara_id
- * @param {number} [src_chara_id]
+ * @param {number} [src=0]
  */
-function init_chara(chara_id, src_chara_id) {
+function init_chara(chara_id, src = 0) {
   const current = new Date().getTime();
   if (
     (era.get(`base:${chara_id}:速度`) !== undefined && chara_id > 0) ||
-    !era.addCharacter(
-      src_chara_id !== undefined ? [chara_id, src_chara_id] : chara_id,
-    )
+    !era.addCharacter(src > 0 ? [chara_id, src] : chara_id)
   ) {
     return;
   }
@@ -48,8 +46,8 @@ function init_chara(chara_id, src_chara_id) {
     .forEach((k) =>
       era.set(`cstr:${chara_id}:${k}`, era.get(`cstr:${chara_id}:${k}`) || ''),
     );
-  if (src_chara_id) {
-    era.set(`cflag:${chara_id}:模版角色`, src_chara_id);
+  if (src > 0) {
+    era.set(`cflag:${chara_id}:模版角色`, src);
     era.set(`cflag:${chara_id}:种族`, 1);
     era.set(`maxbase:${chara_id}:速度`, 1200);
     era.set(`maxbase:${chara_id}:耐力`, 1200);
