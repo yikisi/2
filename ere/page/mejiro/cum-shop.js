@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
+
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -7,7 +9,25 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { mark_colors } = require('#/data/const.json');
+const { penis_desc, skin_desc } = require('#/data/ero/status-const');
 const ExtraBase = require('#/data/extra-base');
+const { get_breast_cup, get_hair_color } = require('#/data/info-generator');
+const { check_chara_ero_image } = require('#/data/other-const');
+
+const hair_color_names = [
+  '白',
+  '橙',
+  '粉',
+  '黑',
+  '红棕',
+  '金',
+  '蓝',
+  '绿',
+  '浅棕',
+  '深棕',
+  '紫',
+];
+const body_color_names = ['枥栗', '栗', '芦', '青', '鹿', '黑鹿', '青鹿'];
 
 /**
  * @this {CallOfMejiro}
@@ -38,9 +58,297 @@ async function cum_shop(chara, me) {
       {
         c: '「美容院」',
         async h() {
-          // 增大胸部、缩小胸部、获得牛子（仅限女性）、增大牛子、缩小牛子、消除牛子（仅限FUTA）
           // 染发染毛
           // 人类改造成马娘
+          await mayor.say_as_unknown_and_wait(
+            '欢迎光临！请问是哪位要接受美容服务呢？',
+          );
+          const lines = era.getLineCount();
+          let _flag = true,
+            target = chara;
+          while (_flag) {
+            await era.clear(era.getLineCount() - lines);
+            print_money_divider();
+            const buttons = [];
+            if (target.sex_code !== 1) {
+              const delta =
+                  era.get(`cflag:${target.id}:胸围`) -
+                  era.get(`cflag:${target.id}:下胸围`),
+                cup = get_breast_cup(target.id);
+              buttons.push({
+                c: `增大胸部（5「恩宠」，目前是 ${cup} Cup）`,
+                ...(delta >= 22.5
+                  ? { d: true, t: '无法丰胸到 [爆乳] 以上' }
+                  : {}),
+                h() {
+                  money = era.add('item:「恩宠」', -5);
+                  era.add(`cflag:${target.id}:胸围`, 1);
+                },
+              });
+              buttons.push({
+                c: `缩小胸部（5「恩宠」，目前是 ${cup} Cup）`,
+                ...(delta <= 5 ? { d: true, t: '已经是飞机场了……' } : {}),
+                h() {
+                  money = era.add('item:「恩宠」', -5);
+                  era.add(`cflag:${target.id}:胸围`, -1);
+                },
+              });
+              const breast_size = era.get(`talent:${target.id}:乳头类型`);
+              if (breast_size === 0) {
+                buttons.push({
+                  c: '增加乳头色素累积（5「恩宠」）',
+                  h() {
+                    money = era.add('item:「恩宠」', -5);
+                    era.add(`talent:${target.id}:乳头类型`, 1);
+                  },
+                });
+              } else {
+                buttons.push({
+                  c: '清除乳头色素累积（5「恩宠」）',
+                  h() {
+                    money = era.add('item:「恩宠」', -5);
+                    era.add(`talent:${target.id}:乳头类型`, -1);
+                  },
+                });
+              }
+              const milk_status = era.get(`talent:${target.id}:泌乳`);
+              if (milk_status === 3) {
+                buttons.push({
+                  c: '消除 [母乳体质]（30「恩宠」）',
+                  h() {
+                    money = era.add('item:「恩宠」', -30);
+                    era.set(`talent:${target.id}:泌乳`, 0);
+                  },
+                });
+              } else if (milk_status === 0) {
+                buttons.push({
+                  c: '获得 [母乳体质]（30「恩宠」）',
+                  h() {
+                    money = era.add('item:「恩宠」', -30);
+                    era.set(`talent:${target.id}:泌乳`, 30);
+                  },
+                });
+              }
+            }
+            buttons.push(undefined);
+            if (
+              !era.get(`status:${target.id}:弗隆K`) &&
+              !era.get(`status:${target.id}:弗隆P`)
+            ) {
+              const penis_size = era.get(`cflag:${target.id}:阴茎尺寸`),
+                cur_desc = penis_desc[get_penis_size(target.id)];
+              buttons.push(
+                {
+                  c: `${target.sex_code === 0 ? 'FUTA 化（15' : '增大阴茎（10'}「恩宠」，目前是 ${cur_desc || '女性'}）`,
+                  ...(penis_size === 5
+                    ? { d: true, t: '已经不能继续增大了……' }
+                    : {}),
+                  h() {
+                    money = era.add('item:「恩宠」', -10);
+                    era.add(`cflag:${target.id}:阴茎尺寸`, 1);
+                    if (target.sex_code === 0) {
+                      money = era.add('item:「恩宠」', -5);
+                      era.set(
+                        `talent:${target.id}:早泄`,
+                        Math.max(
+                          era.get(`talent:${target.id}:早泄`),
+                          era.get(`talent:${target.id}:淫核`),
+                        ),
+                      );
+                      target.sex_code = era.set(`cflag:${target.id}:性别`, 10);
+                    }
+                  },
+                },
+                {
+                  c: `${target.sex_code === 10 && penis_size === 1 ? '女体化（15' : '缩小阴茎（10'}「恩宠」，目前是 ${cur_desc || '女性'}）`,
+                  ...((penis_size === 1 && target.sex_code === 1) ||
+                  penis_size === 0
+                    ? {
+                        d: true,
+                        t:
+                          penis_size === 0
+                            ? '本来无一物……'
+                            : '已经不能继续缩小了……',
+                      }
+                    : {}),
+                  h() {
+                    money = era.add('item:「恩宠」', -10);
+                    era.add(`cflag:${target.id}:阴茎尺寸`, -1);
+                    if (target.sex_code === 10 && penis_size === 1) {
+                      money = era.add('item:「恩宠」', -5);
+                      era.set(
+                        `talent:${target.id}:淫核`,
+                        Math.max(
+                          era.get(`talent:${target.id}:早泄`),
+                          era.get(`talent:${target.id}:淫核`),
+                        ),
+                      );
+                      target.sex_code = era.set(`cflag:${target.id}:性别`, 0);
+                    }
+                  },
+                },
+              );
+            }
+            const part = target.sex_code === 1 ? '阴茎' : '阴蒂',
+              clitoris_size = era.get(`talent:${target.id}:茎核类型`);
+            buttons.push(
+              {
+                c: `减轻${part}色素累积（5「恩宠」）`,
+                ...(clitoris_size === 0
+                  ? {
+                      d: true,
+                      t: `已经是粉色的${part}……`,
+                    }
+                  : {}),
+                h() {
+                  money = era.add('item:「恩宠」', -5);
+                  era.add(`talent:${target.id}:茎核类型`, -1);
+                },
+              },
+              {
+                c: `增加${part}色素累积（5「恩宠」）`,
+                ...(clitoris_size === 2
+                  ? {
+                      d: true,
+                      t: `已经是黝黑的${part}……`,
+                    }
+                  : {}),
+                h() {
+                  money = era.add('item:「恩宠」', -5);
+                  era.add(`talent:${target.id}:茎核类型`, 1);
+                },
+              },
+            );
+            buttons.push(undefined);
+            if (!check_chara_ero_image(target.id)) {
+              const skin_status = era.get(`cflag:${target.id}:肤色深度`);
+              buttons.push(
+                {
+                  c: `美白（5「恩宠」，现在是 ${skin_desc[skin_status + 1]}）`,
+                  ...(skin_status === -1
+                    ? {
+                        d: true,
+                        t: '肤色已经不能再白了……',
+                      }
+                    : {}),
+                  h() {
+                    money = era.add('item:「恩宠」', -5);
+                    era.add(`cflag:${target.id}:肤色深度`, -1);
+                  },
+                },
+                {
+                  c: `美黑（5「恩宠」，现在是 ${skin_desc[skin_status + 1]}）`,
+                  ...(skin_status === 2
+                    ? {
+                        d: true,
+                        t: '肤色已经不能再深了……',
+                      }
+                    : {}),
+                  h() {
+                    money = era.add('item:「恩宠」', -5);
+                    era.add(`cflag:${target.id}:肤色深度`, 1);
+                  },
+                },
+                {
+                  c: '染发',
+                  async h() {
+                    const curr_color = era.get(`cstr:${target.id}:发色`);
+                    mayor.say_as_unknown('要染成什么颜色？');
+                    era.printMultiColumns(
+                      hair_color_names.map((e, i) => ({
+                        accelerator: i + 1,
+                        config: { color: get_hair_color(e), width: 6 },
+                        content: e + (curr_color === e ? '（现发色）' : ''),
+                        type: 'button',
+                      })),
+                    );
+                    const ret = await era.input();
+                    era.set(
+                      `cstr:${target.id}:发色`,
+                      hair_color_names[ret - 1],
+                    );
+                  },
+                },
+              );
+            }
+            buttons.push(undefined);
+            if (era.get(`cflag:${target.id}:种族`) > 0) {
+              buttons.push({
+                c: '染毛（1「恩宠」）',
+                async h() {
+                  const curr_color = era.get(`cstr:${target.id}:毛色`);
+                  mayor.say_as_unknown('要染成什么颜色？');
+                  era.printMultiColumns(
+                    body_color_names.map((e, i) => ({
+                      accelerator: i + 1,
+                      config: { color: get_hair_color(e), width: 6 },
+                      content: e + (curr_color === e ? '（现毛色）' : ''),
+                      type: 'button',
+                    })),
+                  );
+                  const ret = await era.input();
+                  const final = era.set(
+                    `cstr:${target.id}:毛色`,
+                    body_color_names[ret - 1],
+                  );
+                  if (curr_color !== final) {
+                    money = era.add('item:「恩宠」', -1);
+                  }
+                },
+              });
+            } else {
+              buttons.push({
+                c:
+                  '转变为' +
+                  target.get_uma_sex_title() +
+                  '（100「恩宠」，不可逆！）',
+                h() {
+                  money = era.add('item:「恩宠」', -100);
+                  era.set(`cflag:${target.id}:种族`, 1);
+                  era.set(
+                    `cstr:${target.id}:毛色`,
+                    era.get(`cstr:${target.id}:毛色`) ||
+                      get_random_entry(body_color_names),
+                  );
+                  era.set(`cflag:${target.id}:可再次育成`, 1);
+                },
+              });
+            }
+
+            const filtered_buttons = buttons.filter((e) => e !== undefined);
+            filtered_buttons.forEach((e, i) => (e.a = i + 2));
+
+            era.printButton(`切换接受服务的角色，现在是 ${target.name}`, 1);
+            era.printMultiColumns(
+              buttons.map((e) =>
+                e !== undefined
+                  ? {
+                      accelerator: e.a,
+                      config: { disabled: e.d, title: e.t, width: 12 },
+                      content: e.c,
+                      type: 'button',
+                    }
+                  : { content: [], type: 'text' },
+              ),
+            );
+            era.printButton('离开', 99);
+            const ret = await era.input();
+            switch (ret) {
+              case 1:
+                target = target === chara ? me : chara;
+                break;
+              case 99:
+                _flag = false;
+                break;
+              default:
+                await filtered_buttons[ret - 2].h();
+                await mayor.say_as_unknown_and_wait(
+                  '好的，请放轻松，马上就好～',
+                );
+            }
+            _flag &&= money > 0;
+          }
+          await mayor.say_as_unknown_and_wait('下次再见～');
         },
       },
       {
@@ -210,7 +518,7 @@ async function cum_shop(chara, me) {
         },
       },
       {
-        c: '「抽奖站」',
+        c: '「抽奖箱」',
         async h() {
           mayor.say_as_unknown('欢迎来到目白城！要在这里试试手气吗？');
           print_money_divider();
@@ -241,7 +549,8 @@ async function cum_shop(chara, me) {
                     items.push(e);
                   }
                 });
-              } else {
+              }
+              if (items.length === 0) {
                 new Array(8).fill(0).forEach((_, i) => items.push(i));
                 new Array(11).fill(0).map((_, i) => items.push(i + 10));
                 new Array(3).fill(0).map((_, i) => items.push(i + 27));
@@ -395,8 +704,8 @@ async function cum_shop(chara, me) {
     era.drawLine();
     await (buttons.find((e) => e.a === ret) || buttons[ret - 100]).h();
     if (money <= 0) {
-      era.set('item:「亏欠」', -money);
       era.set('item:「恩宠」', 0);
+      era.set('item:「亏欠」', -money);
       era.drawLine();
       await era.printAndWait([
         me.get_couple_title(),
