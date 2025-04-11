@@ -34,6 +34,7 @@ const { get_trainer_title } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 function check_titles(...ids) {
   ids
@@ -409,6 +410,22 @@ module.exports = async () => {
                 era.get('flag:惩戒力度') === 0
               ) {
                 era.set('flag:声望不足替换', 0);
+              }
+            }
+            // TODO 目白城版本检查
+            if (version <= 1) {
+              if (era.get('flag:惩戒力度') >= 2) {
+                era.set('talent:0:调教度', 5);
+              }
+              if (
+                !(await select_yes_or_no(
+                  '请选择目白城风格',
+                  '「自由」',
+                  '「慈爱」',
+                ))
+              ) {
+                era.set('flag:目白城风格', 1);
+                era.set('flag:目白城变量', {});
               }
             }
             return true;

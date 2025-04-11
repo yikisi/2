@@ -10,6 +10,7 @@ const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 const { get_progress_bar } = require('#/page/components/page-header');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
+const cum_shop = require('#/page/mejiro/cum-shop');
 const MejiroCity = require('#/page/mejiro/mejiro-common');
 const print_ero_page = require('#/page/page-ero');
 
@@ -153,202 +154,7 @@ class CallOfMejiro extends MejiroCity {
    * @param {CharaTalk} me
    */
   async city(chara, me) {
-    const mayor = get_chara_talk(13);
-    let flag = true;
-    let money = era.get('item:「恩宠」');
-    const print_money_divider = () =>
-      era.drawLine({
-        content: `当前「恩宠」：${money.toLocaleString()}`,
-      });
-    while (flag) {
-      await era.clear();
-      this.page_header(chara);
-      era.drawLine();
-      era.print([
-        me.get_colored_name(),
-        ' 和 ',
-        chara.get_colored_name(),
-        ' 站在干净的街道上。',
-      ]);
-      era.print('明媚的阳光下，出双入对的人们穿行在大街小巷。');
-      era.drawLine();
-      const buttons = [
-        {
-          c: '「美容店」',
-          async h() {
-            // 增大胸部、缩小胸部、获得牛子（仅限女性）、增大牛子、缩小牛子、消除牛子（仅限FUTA）
-            // 染发染毛
-            // 人类改造成马娘
-          },
-        },
-        {
-          c: '「大药房」',
-          async h() {
-            // 玩家自己的体力上限精力上限
-          },
-        },
-        {
-          c: '「按摩店」',
-          async h() {
-            // 提升伴侣可获取的最高级敏感度的数量
-          },
-        },
-        {
-          c: '「图书馆」',
-          async h() {
-            // 获取/失去钢之意志
-          },
-        },
-        {
-          c: '「老虎机」',
-          async h() {
-            // 2恩宠抽道具
-          },
-        },
-        {
-          c: '「报社」',
-          async h() {
-            const menu = [1, 5, 10, 50];
-            let _flag = true;
-            await mayor.say_as_unknown_and_wait('欢迎光临～');
-            await mayor.say_as_unknown_and_wait(
-              '目白城报社可以帮您恢复名誉、传播名气。',
-            );
-            const lines = era.getLineCount();
-            while (_flag) {
-              await era.clear(era.getLineCount() - lines);
-              mayor.say_as_unknown('有什么可以帮您的？');
-              print_money_divider();
-              era.printMultiColumns(
-                menu.map((e, i) => ({
-                  accelerator: i + 1,
-                  content: `${e}「恩宠」 → ${e} 声望`,
-                  type: 'button',
-                  config: { width: 12 },
-                })),
-              );
-              era.printButton('离开', 99);
-              const ret = await era.input();
-              if (ret === 99) {
-                _flag = false;
-              } else {
-                await mayor.say_as_unknown_and_wait('好的，马上为您办理～');
-                era.add('flag:当前声望', menu[ret - 1]);
-                money = era.add('item:「恩宠」', -menu[ret - 1]);
-              }
-              _flag &&= money > 0;
-            }
-            await mayor.say_as_unknown_and_wait('谢谢惠顾！');
-          },
-        },
-        {
-          c: '「银行」',
-          async h() {
-            const menu = [1, 5, 10, 50];
-            let _flag = true;
-            await mayor.say_as_unknown_and_wait('欢迎光临～');
-            const lines = era.getLineCount();
-            while (_flag) {
-              await era.clear(era.getLineCount() - lines);
-              mayor.say_as_unknown('您要办理取款业务吗？');
-              print_money_divider();
-              era.printMultiColumns(
-                menu.map((e, i) => ({
-                  accelerator: i + 1,
-                  content: `${e}「恩宠」 → ${e}～${e * 10} 马币`,
-                  type: 'button',
-                  config: { width: 12 },
-                })),
-              );
-              era.printButton('离开', 99);
-              const ret = await era.input();
-              if (ret === 99) {
-                _flag = false;
-              } else {
-                const got = menu[ret - 1] * get_random_value(1, 10);
-                await mayor.say_as_unknown_and_wait(
-                  `好的，取款 ${got.toLocaleString()} 马币，马上为您办理～`,
-                );
-                era.add('flag:当前马币', got);
-                money = era.add('item:「恩宠」', -menu[ret - 1]);
-              }
-              _flag &&= money > 0;
-            }
-            await mayor.say_as_unknown_and_wait('请慢走～');
-          },
-        },
-        {
-          c: '「市政府」',
-          d: true,
-          async h() {
-            await mayor.say_as_unknown_and_wait('欢迎来到目白城。');
-            await mayor.say_as_unknown_and_wait('请问有什么可以帮您的？');
-            if (await select_yes_or_no('', '请放过我……', '没事')) {
-              await mayor.say_as_unknown_and_wait('这样啊……您确定吗？');
-              if (
-                await select_yes_or_no(
-                  [
-                    {
-                      color: 'red',
-                      content: '（此操作不可逆，将永久性改变目白城风格！）',
-                    },
-                  ],
-                  '确定',
-                  '不了',
-                )
-              ) {
-                await mayor.say_as_unknown_and_wait('我明白了。');
-                await mayor.say_as_unknown_and_wait(
-                  '您下次到访的时候，目白城会成为您希望的样子。',
-                );
-                await mayor.say_as_unknown_and_wait('再会。');
-                era.set('flag:目白城变量', {});
-                era.set('flag:目白城风格', 0);
-                era.set('item:「恩宠」', 0);
-              } else {
-                await mayor.say_as_unknown_and_wait(
-                  '祝您和您的同伴在目白城玩得开心～',
-                );
-              }
-            } else {
-              await mayor.say_as_unknown_and_wait(
-                '祝您和您的同伴在目白城玩得开心～',
-              );
-            }
-          },
-          t: '可切换目白城风格，暂未开放',
-        },
-        {
-          a: 999,
-          c: '离开',
-          async h() {
-            flag = false;
-          },
-        },
-      ];
-      era.printMultiColumns(
-        buttons.map((e, i) => ({
-          accelerator: e.a || 100 + i,
-          config: { disabled: e.d, title: e.t, width: e.a === 999 ? 24 : 6 },
-          content: e.c,
-          type: 'button',
-        })),
-      );
-      const ret = await era.input();
-      era.drawLine();
-      await (buttons.find((e) => e.a === ret) || buttons[ret - 100]).h();
-      if (money <= 0) {
-        era.set('item:「亏欠」', -money);
-        era.set('item:「恩宠」', 0);
-        era.drawLine();
-        await era.printAndWait([
-          me.get_couple_title(),
-          ' 走出店铺，眼前却已不是街道，而是郊景。',
-        ]);
-        await era.printAndWait('回头望时，目白城已再次为迷雾笼罩……');
-        flag = false;
-      }
-    }
+    await cum_shop.call(this, chara, me);
   }
 
   /**
@@ -361,7 +167,7 @@ class CallOfMejiro extends MejiroCity {
     let temp,
       difficulty = 1;
     if ((temp = era.get('item:「亏欠」')) > 0) {
-      difficulty += Math.min(Math.floor(Math.log(temp + 1) / Math.log(2)), 5);
+      difficulty += Math.min(Math.floor(Math.log(temp + 1) / Math.log(2)), 6);
       era.set('item:「亏欠」', 0);
     }
     difficulty = Math.max(difficulty * 2 + get_random_value(0, 5), 6);

@@ -199,6 +199,7 @@ async function game_over(again) {
             era.set('cflag:0:种族', 1);
             break;
           case 2:
+            era.set('talent:0:调教度', 5);
             new Array(3).fill(0).forEach((_, i) => {
               era.set(`talent:0:${i + 60}`, 2);
               era.set(`talent:0:${i + 64}`, 2);

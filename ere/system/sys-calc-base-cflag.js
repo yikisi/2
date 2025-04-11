@@ -10,6 +10,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const { attr_change_colors, motivation_colors } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const ExtraBase = require('#/data/extra-base');
 const { location_enum } = require('#/data/locations');
 const {
   attr_enum,
@@ -239,13 +240,16 @@ module.exports = {
       (era.get(`cflag:${chara_id}:妊娠阶段`) ===
         1 << pregnant_stage_enum.resume &&
         (era.get(`cflag:${chara_id}:妊娠回合计时`) - 1) * 100);
+    const extra_base =
+      chara_id === 0 ? new ExtraBase() : { stamina: 0, time: 0 };
     era.set(
       `maxbase:${chara_id}:体力`,
       Math.max(
         Math.floor(
           era.get(`staticbase:${src_chara_id}:体力`) +
             era.get(`base:${chara_id}:耐力`) / 2 +
-            maxbase_buff,
+            maxbase_buff +
+            extra_base.stamina,
         ),
         200,
       ),
@@ -256,7 +260,8 @@ module.exports = {
         Math.floor(
           era.get(`staticbase:${src_chara_id}:精力`) +
             era.get(`base:${chara_id}:智力`) / 2 +
-            maxbase_buff,
+            maxbase_buff +
+            extra_base.time,
         ),
         200,
       ),

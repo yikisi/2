@@ -201,7 +201,7 @@ module.exports = class extends MyPrivacyEvents {
       ...new Array(8).fill(0).map((_, i) => i),
       ...new Array(7).fill(0).map((_, i) => i + 10),
     ]);
-    await printAndWait(['得到了道具：[', get(`itemname:${item}`), ']！']);
+    await printAndWait(['获得了道具【', get(`itemname:${item}`), '】！']);
     add(`item:${item}`, 1);
     if (get('flag:极端行为限制') > 0) {
       add_event(hook.hook, event_object.set_arg('strange_day2'));
@@ -863,7 +863,7 @@ module.exports = class extends MyPrivacyEvents {
           i === med_list.length - 1 ? total : get_random_value(0, total);
         if (count > 0) {
           total -= count;
-          print(`- ${get(`itemname:${item_id}`)} × ${count}`);
+          print(`· ${get(`itemname:${item_id}`)} × ${count}`);
           add(`item:${item_id}`, count);
         }
       }

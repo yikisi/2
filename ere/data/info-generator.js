@@ -22,6 +22,7 @@ const {
   skin_colors,
 } = require('#/data/color-const');
 const { hair_colors } = require('#/data/const.json');
+const { mark_colors } = require('#/data/const.json');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
 const { lust_border } = require('#/data/ero/orgasm-const');
@@ -732,7 +733,13 @@ module.exports = {
       talent_list.push({
         color: el_success_color,
         content: '[绿帽癖]',
-        display: 'inline-block',
+      });
+    }
+    if (era.get(`talent:${chara_id}:钢之意志`)) {
+      talent_list.push({
+        color: mark_colors['钢'],
+        content: '[钢之意志]',
+        title: `[钢之意志]：${talent_desc['钢之意志']}`,
       });
     }
     talent_list.push(...new Array(3).fill(0).map((_, i) => i + 40));

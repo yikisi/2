@@ -97,7 +97,7 @@ function get_ero_marks(chara_id) {
     }
   });
   if (era.get(`talent:${chara_id}:钢之意志`)) {
-    status_list.push({ color: '#98ccfa', content: '[钢]' });
+    status_list.push({ color: mark_colors['钢'], content: '[钢]' });
   }
   return status_list.map((e) => {
     e.display = 'inline-block';
