@@ -15,7 +15,7 @@ const {
 const {
   check_erect,
   check_lubrication,
-  get_bust_size,
+  get_bust_delta,
   get_pregnant_ratio,
   orgasm_check_list,
 } = require('#/system/ero/sys-calc-ero-status');
@@ -154,9 +154,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                   ] *
                   (1 +
                     0.2 * (era.get(`tcvar:${chara_id}:余韵`) > 0) +
-                    (get_bust_size(chara_id, true) -
-                      era.get(`cflag:${chara_id}:下胸围`)) /
-                      50) *
+                    get_bust_delta(chara_id, true) / 50) *
                   times,
               );
             }
@@ -344,9 +342,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                     (curr - border) *
                     (1 +
                       0.2 * (era.get(`tcvar:${chara_id}:余韵`) > 0) +
-                      (get_bust_size(chara_id, true) -
-                        era.get(`cflag:${chara_id}:下胸围`)) /
-                        50)) /
+                      get_bust_delta(chara_id, true) / 50)) /
                     (max - border),
                 );
               }

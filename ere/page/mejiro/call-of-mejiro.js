@@ -64,6 +64,26 @@ class CallOfMejiro extends MejiroCity {
     }
   }
 
+  /**
+   * 每周出行限制
+   * @returns {number}
+   */
+  get limit() {
+    return this.var.limit || 0;
+  }
+
+  /**
+   * 每周出行限制
+   * @param {number} v
+   */
+  set limit(v) {
+    if (!v) {
+      delete this.var.limit;
+    } else {
+      this.var.limit = v;
+    }
+  }
+
   get_positions(chara_id, player_base, chara_base) {
     const ret = super.get_positions(chara_id, player_base, chara_base);
     const mejiro_button = ret.find((e) => e.l === location_enum.mejiro);
@@ -87,15 +107,23 @@ class CallOfMejiro extends MejiroCity {
       }
     } else if (chara_id >= 340 && chara_id <= 342) {
       mejiro_button.d = true;
-      if (mejiro_button.t || (mejiro_button.t = '')) {
+      if ((mejiro_button.t ||= '')) {
         mejiro_button.t += '\n';
       }
-      mejiro_button.t += '……';
+      mejiro_button.t += '麦吉罗也许不在三女神之下，但绝不在其之上……';
+    }
+    if (this.limit === 0) {
+      mejiro_button.d = true;
+      if ((mejiro_button.t ||= '')) {
+        mejiro_button.t += '\n';
+      }
+      mejiro_button.t += '本周内找不到目白城了……';
     }
     return ret;
   }
 
   async page(chara_id) {
+    this.limit--;
     const chara = get_chara_talk(chara_id),
       me = get_chara_talk(0);
     await era.printAndWait([
@@ -412,6 +440,7 @@ class CallOfMejiro extends MejiroCity {
   }
 
   async next_week() {
+    this.limit = 1;
     if (era.get('item:「恩宠」') > 0) {
       if (era.add('item:「恩宠」', -1) === 0) {
         await era.printAndWait('目白城再次为迷雾笼罩……');

@@ -4,7 +4,7 @@ const sys_get_item_status = require('#/system/chara/sys-get-item-status');
 const {
   check_erect,
   check_lubrication,
-  get_bust_size,
+  get_bust_delta,
   get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
 const {
@@ -122,13 +122,11 @@ const title_desc = ['训练员', '马娘', '性奴', '孕袋'];
 
 /**
  * @param {number} chara_id
- * @param {boolean} [show_true_bust]
+ * @param {boolean} [show_true_bust=false]
  * @returns {string}
  */
-function get_breast_cup(chara_id, show_true_bust) {
-  const delta =
-    get_bust_size(chara_id, show_true_bust) -
-    era.get(`cflag:${chara_id}:下胸围`);
+function get_breast_cup(chara_id, show_true_bust = false) {
+  const delta = get_bust_delta(chara_id, show_true_bust);
   if (delta < 0) {
     return '-';
   }

@@ -13,7 +13,7 @@ const {
 const { use_item } = require('#/system/ero/sys-calc-ero-item');
 const { change_part, clean_part } = require('#/system/ero/sys-calc-ero-part');
 const {
-  get_bust_size,
+  get_bust_delta,
   get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
@@ -143,12 +143,7 @@ function sys_do_sex(attacker, defender, item) {
       attack_extra_buff += era.get(`talent:${attacker.id}:淫乳`) === 2;
       // B罩杯以下有减成
       // 淫乳+5cm胸围，等效目标部位掌握+1
-      attack_extra_bonus =
-        ((get_bust_size(attacker.id, true) -
-          era.get(`cflag:${attacker.id}:下胸围`)) /
-          2.5 -
-          6) /
-        10;
+      attack_extra_bonus = (get_bust_delta(attacker.id, true) / 2.5 - 6) / 10;
       // 罩杯尺寸对乳交攻击的加成20%封顶，减成60%封顶
       attack_extra_bonus = attack_extra_bonus > 0.2 ? 0.2 : attack_extra_bonus;
       attack_extra_bonus =

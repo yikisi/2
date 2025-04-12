@@ -36,6 +36,17 @@ const body_color_names = ['枥栗', '栗', '芦', '青', '鹿', '黑鹿', '青�
  */
 async function cum_shop(chara, me) {
   const mayor = get_chara_talk(13);
+  const waiters = [
+    get_chara_talk(27),
+    get_chara_talk(59),
+    get_chara_talk(64),
+    get_chara_talk(71),
+    get_chara_talk(74),
+    get_chara_talk(86),
+  ];
+  const say_by_waiter = (v) => get_random_entry(waiters).say_as_unknown(v);
+  const say_by_waiter_and_wait = (v) =>
+    get_random_entry(waiters).say_as_unknown_and_wait(v);
   let flag = true;
   let money = era.get('item:「恩宠」');
   const print_money_divider = () =>
@@ -60,7 +71,7 @@ async function cum_shop(chara, me) {
         async h() {
           // 染发染毛
           // 人类改造成马娘
-          await mayor.say_as_unknown_and_wait(
+          await say_by_waiter_and_wait(
             '欢迎光临！请问是哪位要接受美容服务呢？',
           );
           const lines = era.getLineCount();
@@ -70,6 +81,54 @@ async function cum_shop(chara, me) {
             await era.clear(era.getLineCount() - lines);
             print_money_divider();
             const buttons = [];
+            const height = era.get(`cflag:${target.id}:身高`);
+            const change_height = (new_height) => {
+              era.set(`cflag:${target.id}:身高`, new_height);
+              era.set(
+                `cflag:${target.id}:腰围`,
+                (new_height * era.get(`cflag:${target.id}:腰围`)) / height,
+              );
+              era.set(
+                `cflag:${target.id}:臀围`,
+                (new_height * era.get(`cflag:${target.id}:臀围`)) / height,
+              );
+              if (target.sex_code === 1) {
+                era.set(
+                  `cflag:${target.id}:胸围`,
+                  (new_height * era.get(`cflag:${target.id}:胸围`)) / height,
+                );
+              } else {
+                era.set(
+                  `cflag:${target.id}:胸围`,
+                  era.get(`cflag:${target.id}:胸围`) -
+                    era.get(`cflag:${target.id}:下胸围`) +
+                    era.set(
+                      `cflag:${target.id}:下胸围`,
+                      (new_height * era.get(`cflag:${target.id}:下胸围`)) /
+                        height,
+                    ),
+                );
+              }
+            };
+            buttons.push(
+              {
+                c: `增高（10「恩宠」，目前是 ${height}cm）`,
+                ...(height === 229 ? { d: true, t: '不能再高了……' } : {}),
+                h() {
+                  money = era.add('item:「恩宠」', -10);
+                  change_height(height + 1);
+                },
+              },
+              {
+                c: `变矮（10「恩宠」，目前是 ${height}cm）`,
+                ...(height === 229 ? { d: true, t: '不能再矮了……' } : {}),
+                h() {
+                  money = era.add('item:「恩宠」', -10);
+                  change_height(height - 1);
+                },
+              },
+              undefined,
+            );
             if (target.sex_code !== 1) {
               const delta =
                   era.get(`cflag:${target.id}:胸围`) -
@@ -220,7 +279,8 @@ async function cum_shop(chara, me) {
               },
             );
             buttons.push(undefined);
-            if (!check_chara_ero_image(target.id)) {
+            const custom_enabled = !check_chara_ero_image(target.id);
+            if (custom_enabled) {
               const skin_status = era.get(`cflag:${target.id}:肤色深度`);
               buttons.push(
                 {
@@ -253,7 +313,7 @@ async function cum_shop(chara, me) {
                   c: '染发',
                   async h() {
                     const curr_color = era.get(`cstr:${target.id}:发色`);
-                    mayor.say_as_unknown('要染成什么颜色？');
+                    say_by_waiter('要染成什么颜色？');
                     era.printMultiColumns(
                       hair_color_names.map((e, i) => ({
                         accelerator: i + 1,
@@ -272,31 +332,7 @@ async function cum_shop(chara, me) {
               );
             }
             buttons.push(undefined);
-            if (era.get(`cflag:${target.id}:种族`) > 0) {
-              buttons.push({
-                c: '染毛（1「恩宠」）',
-                async h() {
-                  const curr_color = era.get(`cstr:${target.id}:毛色`);
-                  mayor.say_as_unknown('要染成什么颜色？');
-                  era.printMultiColumns(
-                    body_color_names.map((e, i) => ({
-                      accelerator: i + 1,
-                      config: { color: get_hair_color(e), width: 6 },
-                      content: e + (curr_color === e ? '（现毛色）' : ''),
-                      type: 'button',
-                    })),
-                  );
-                  const ret = await era.input();
-                  const final = era.set(
-                    `cstr:${target.id}:毛色`,
-                    body_color_names[ret - 1],
-                  );
-                  if (curr_color !== final) {
-                    money = era.add('item:「恩宠」', -1);
-                  }
-                },
-              });
-            } else {
+            if (era.get(`cflag:${target.id}:种族`) === 0) {
               buttons.push({
                 c:
                   '转变为' +
@@ -311,6 +347,29 @@ async function cum_shop(chara, me) {
                       get_random_entry(body_color_names),
                   );
                   era.set(`cflag:${target.id}:可再次育成`, 1);
+                },
+              });
+            } else if (custom_enabled) {
+              buttons.push({
+                c: '改变毛色（1「恩宠」）',
+                async h() {
+                  const curr_color = era.get(`cstr:${target.id}:毛色`);
+                  say_by_waiter('要染成什么颜色？');
+                  era.printMultiColumns(
+                    body_color_names.map((e, i) => ({
+                      accelerator: i + 1,
+                      config: { color: get_hair_color(e), width: 6 },
+                      content: e + (curr_color === e ? '（现毛色）' : ''),
+                      type: 'button',
+                    })),
+                  );
+                  const ret = await era.input();
+                  if (
+                    curr_color !==
+                    era.set(`cstr:${target.id}:毛色`, body_color_names[ret - 1])
+                  ) {
+                    money = era.add('item:「恩宠」', -1);
+                  }
                 },
               });
             }
@@ -342,24 +401,22 @@ async function cum_shop(chara, me) {
                 break;
               default:
                 await filtered_buttons[ret - 2].h();
-                await mayor.say_as_unknown_and_wait(
-                  '好的，请放轻松，马上就好～',
-                );
+                await say_by_waiter_and_wait('好的，请放轻松，马上就好～');
             }
             _flag &&= money > 0;
           }
-          await mayor.say_as_unknown_and_wait('下次再见～');
+          await say_by_waiter_and_wait('下次再见～');
         },
       },
       {
         c: '「大药房」',
         async h() {
-          await mayor.say_as_unknown_and_wait(
+          await say_by_waiter_and_wait(
             '这里是目白城大药房！头寒脑热、腰酸背痛、手震心疼、腿颤脚麻，我们全都——',
           );
-          await mayor.say_as_unknown_and_wait('……不包治哦……');
-          await mayor.say_as_unknown_and_wait('开个玩笑啦，有什么可以帮您的？');
-          await mayor.say_as_unknown_and_wait('所有药膏都是一周后见效～');
+          await say_by_waiter_and_wait('……不包治哦……');
+          await say_by_waiter_and_wait('开个玩笑啦，有什么可以帮您的？');
+          await say_by_waiter_and_wait('所有药膏都是一周后见效～');
           const lines = era.getLineCount();
           let _flag = true;
           while (_flag) {
@@ -395,7 +452,7 @@ async function cum_shop(chara, me) {
             era.printButton('离开', 99);
             switch (await era.input()) {
               case 1:
-                await mayor.say_as_unknown_and_wait('好的，「大力丸」一份～');
+                await say_by_waiter_and_wait('好的，「大力丸」一份～');
                 money = era.add(
                   'item:「恩宠」',
                   -(extra_base.stamina / 10 + 10),
@@ -403,7 +460,7 @@ async function cum_shop(chara, me) {
                 extra_base.stamina += 50;
                 break;
               case 2:
-                await mayor.say_as_unknown_and_wait('好的，「醒神膏」一份～');
+                await say_by_waiter_and_wait('好的，「醒神膏」一份～');
                 money = era.add('item:「恩宠」', -(extra_base.time / 10 + 10));
                 extra_base.time += 50;
                 break;
@@ -419,7 +476,7 @@ async function cum_shop(chara, me) {
         async h() {
           const max_limt = 4 + (era.get(`cflag:${chara.id}:性别`) > 0);
           let _flag = true;
-          await mayor.say_as_unknown_and_wait(
+          await say_by_waiter_and_wait(
             '这里提供精油按摩服务！要不要来放松一下呢？',
           );
           const lines = era.getLineCount();
@@ -453,14 +510,14 @@ async function cum_shop(chara, me) {
             }
             _flag &&= money > 0;
           }
-          await mayor.say_as_unknown_and_wait('请一路顺风～');
+          await say_by_waiter_and_wait('请一路顺风～');
         },
       },
       {
         c: '「图书馆」',
         async h() {
           let _flag = true;
-          await mayor.say_as_unknown_and_wait(
+          await say_by_waiter_and_wait(
             '欢迎来到目白城市立大图书馆！请问要借阅什么书籍呢？',
           );
           const lines = era.getLineCount();
@@ -514,19 +571,19 @@ async function cum_shop(chara, me) {
             }
             _flag &&= money > 0;
           }
-          await mayor.say_as_unknown_and_wait('欢迎下次光临～');
+          await say_by_waiter_and_wait('欢迎下次光临～');
         },
       },
       {
         c: '「抽奖箱」',
         async h() {
-          mayor.say_as_unknown('欢迎来到目白城！要在这里试试手气吗？');
+          say_by_waiter('欢迎来到目白城！要在这里试试手气吗？');
           print_money_divider();
           if (await select_yes_or_no('要使用 2「恩宠」抽奖吗？')) {
             const dice = Math.random();
             if (dice < 0.01) {
-              await mayor.say_as_unknown_and_wait('中～大～奖～啦～');
-              await mayor.say_as_unknown_and_wait('奖券金十倍奉上！');
+              await say_by_waiter_and_wait('中～大～奖～啦～');
+              await say_by_waiter_and_wait('奖券金十倍奉上！');
               await era.printAndWait('获得了20「恩宠」！');
               money = era.add('item:「恩宠」', 20);
             } else {
@@ -573,14 +630,14 @@ async function cum_shop(chara, me) {
         async h() {
           const menu = [1, 5, 10, 50];
           let _flag = true;
-          await mayor.say_as_unknown_and_wait('欢迎光临～');
-          await mayor.say_as_unknown_and_wait(
+          await say_by_waiter_and_wait('欢迎光临～');
+          await say_by_waiter_and_wait(
             '目白城报社可以帮您恢复名誉、传播名气。',
           );
           const lines = era.getLineCount();
           while (_flag) {
             await era.clear(era.getLineCount() - lines);
-            mayor.say_as_unknown('有什么可以帮您的？');
+            say_by_waiter('有什么可以帮您的？');
             print_money_divider();
             era.printMultiColumns(
               menu.map((e, i) => ({
@@ -596,7 +653,7 @@ async function cum_shop(chara, me) {
               _flag = false;
             } else {
               const delta = get_random_value(menu[ret - 1], menu[ret - 1] * 4);
-              await mayor.say_as_unknown_and_wait(
+              await say_by_waiter_and_wait(
                 `好的，${delta} 声望，马上为您办理～`,
               );
               era.add('flag:当前声望', delta);
@@ -604,7 +661,7 @@ async function cum_shop(chara, me) {
             }
             _flag &&= money > 0;
           }
-          await mayor.say_as_unknown_and_wait('谢谢惠顾！');
+          await say_by_waiter_and_wait('谢谢惠顾！');
         },
       },
       {
@@ -612,11 +669,11 @@ async function cum_shop(chara, me) {
         async h() {
           const menu = [1, 5, 10, 50];
           let _flag = true;
-          await mayor.say_as_unknown_and_wait('欢迎光临～');
+          await say_by_waiter_and_wait('欢迎光临～');
           const lines = era.getLineCount();
           while (_flag) {
             await era.clear(era.getLineCount() - lines);
-            mayor.say_as_unknown('要办理取款业务吗？');
+            say_by_waiter('要办理取款业务吗？');
             print_money_divider();
             era.printMultiColumns(
               menu.map((e, i) => ({
@@ -632,7 +689,7 @@ async function cum_shop(chara, me) {
               _flag = false;
             } else {
               const got = menu[ret - 1] * get_random_value(1, 10);
-              await mayor.say_as_unknown_and_wait(
+              await say_by_waiter_and_wait(
                 `好的，取款 ${got.toLocaleString()} 马币，马上为您办理～`,
               );
               era.add('flag:当前马币', got);
@@ -640,17 +697,17 @@ async function cum_shop(chara, me) {
             }
             _flag &&= money > 0;
           }
-          await mayor.say_as_unknown_and_wait('请慢走～');
+          await say_by_waiter_and_wait('请慢走～');
         },
       },
       {
         c: '「市政府」',
         d: true,
         async h() {
-          await mayor.say_as_unknown_and_wait('欢迎来到目白城。');
-          await mayor.say_as_unknown_and_wait('请问有什么可以帮您的？');
+          await mayor.say_and_wait('欢迎来到目白城。');
+          await mayor.say_and_wait('请问有什么可以帮您的？');
           if (await select_yes_or_no('', '请放过我……', '没事')) {
-            await mayor.say_as_unknown_and_wait('这样啊……您确定吗？');
+            await mayor.say_and_wait('这样啊……您确定吗？');
             if (
               await select_yes_or_no(
                 [
@@ -663,23 +720,19 @@ async function cum_shop(chara, me) {
                 '不了',
               )
             ) {
-              await mayor.say_as_unknown_and_wait('我明白了。');
-              await mayor.say_as_unknown_and_wait(
+              await mayor.say_and_wait('我明白了。');
+              await mayor.say_and_wait(
                 '您下次到访的时候，目白城会成为您希望的样子。',
               );
-              await mayor.say_as_unknown_and_wait('再会。');
+              await mayor.say_and_wait('再会。');
               era.set('flag:目白城变量', {});
               era.set('flag:目白城风格', 0);
               era.set('item:「恩宠」', 0);
             } else {
-              await mayor.say_as_unknown_and_wait(
-                '祝您和您的同伴在目白城玩得开心～',
-              );
+              await mayor.say_and_wait('祝您和您的同伴在目白城玩得开心～');
             }
           } else {
-            await mayor.say_as_unknown_and_wait(
-              '祝您和您的同伴在目白城玩得开心～',
-            );
+            await mayor.say_and_wait('祝您和您的同伴在目白城玩得开心～');
           }
         },
         t: '可切换目白城风格，暂未开放',
