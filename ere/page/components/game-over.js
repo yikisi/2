@@ -81,18 +81,9 @@ async function game_over(again) {
             era.set('cflag:0:阴茎尺寸', 1);
             era.set('cflag:0:阴道尺寸', 1);
             if (era.get('cflag:0:性别') === 1) {
-              era.set(
-                'cflag:0:胸围',
-                Math.floor(era.get('cflag:0:身高') * 0.51),
-              );
-              era.set(
-                'cflag:0:腰围',
-                Math.floor(era.get('cflag:0:身高') * 0.34),
-              );
-              era.set(
-                'cflag:0:臀围',
-                Math.floor(era.get('cflag:0:身高') * 0.542),
-              );
+              era.set('cflag:0:胸围', era.get('cflag:0:身高') * 0.51);
+              era.set('cflag:0:腰围', era.get('cflag:0:身高') * 0.34);
+              era.set('cflag:0:臀围', era.get('cflag:0:身高') * 0.542);
               era.set('cflag:0:下胸围', era.get('cflag:0:胸围') - 15);
             }
             era.set('cflag:0:性别', 10);
