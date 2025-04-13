@@ -512,7 +512,7 @@ module.exports = async () => {
                 ability_filter === -1 ||
                 s.ability_tags.indexOf(ability_filter) !== -1,
             ];
-            skill_page_size = enable_filter ? 66 : 84;
+            skill_page_size = enable_filter ? 63 : 84;
             const filtered_buffer = buffer.filter(
                 (e) =>
                   !enable_filter ||

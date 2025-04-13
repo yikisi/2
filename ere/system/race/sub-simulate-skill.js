@@ -752,11 +752,26 @@ function sub_simulate_skill(
                     skill.aims[i][j] = list_in_race.filter(
                       (e) => e.race.location > uma.race.location,
                     );
+                    if (skill.data.target_values[i][j] > 0) {
+                      skill.aims[i][j] = skill.aims[i][j].slice(
+                        Math.max(
+                          skill.aims[i][j].length -
+                            skill.data.target_values[i][j],
+                          0,
+                        ),
+                      );
+                    }
                     break;
                   case target_type_enum.SelfBehind:
                     skill.aims[i][j] = list_in_race.filter(
                       (e) => e.race.location < uma.race.location,
                     );
+                    if (skill.data.target_values[i][j] > 0) {
+                      skill.aims[i][j] = skill.aims[i][j].slice(
+                        0,
+                        skill.data.target_values[i][j],
+                      );
+                    }
                     break;
                   case target_type_enum.RunningStyleOtherSelf:
                     skill.aims[i][j] = list_in_race.filter(
@@ -769,6 +784,15 @@ function sub_simulate_skill(
                         e.race.location > uma.race.location &&
                         e.race.temptation > 0,
                     );
+                    if (skill.data.target_values[i][j] > 0) {
+                      skill.aims[i][j] = skill.aims[i][j].slice(
+                        Math.max(
+                          skill.aims[i][j].length -
+                            skill.data.target_values[i][j],
+                          0,
+                        ),
+                      );
+                    }
                     break;
                   case target_type_enum.SelfBehindTemptation:
                     skill.aims[i][j] = list_in_race.filter(
@@ -776,6 +800,12 @@ function sub_simulate_skill(
                         e.race.location < uma.race.location &&
                         e.race.temptation > 0,
                     );
+                    if (skill.data.target_values[i][j] > 0) {
+                      skill.aims[i][j] = skill.aims[i][j].slice(
+                        0,
+                        skill.data.target_values[i][j],
+                      );
+                    }
                     break;
                   case target_type_enum.RunningStyleTemptationOtherSelf:
                     skill.aims[i][j] = list_in_race.filter(
@@ -820,11 +850,11 @@ function sub_simulate_skill(
                   break;
                 case ability_type_enum.TemptationEndTime:
                   skill.aims[i][j].forEach((e) => {
-                    e.race.temptation = skill.values[i][j] * frame_rate;
-                    e.race.conditionParams.is_temptation = Number(
-                      skill.values[i][j] > 0,
-                    );
-                    if (e.race.conditionParams.is_temptation) {
+                    if (
+                      (e.race.conditionParams.is_temptation = +(
+                        skill.values[i][j] > 0
+                      )) > 0
+                    ) {
                       handle_temptation(uma, race_info);
                     } else {
                       uma.base.loc_mind_style = uma.style;
@@ -838,6 +868,7 @@ function sub_simulate_skill(
                         : race_event_enum.temp_end,
                       u: uma,
                     });
+                    e.race.temptation = skill.values[i][j] * frame_rate;
                   });
                   break;
                 case ability_type_enum.CurrentSpeed:

@@ -113,6 +113,7 @@ class ConditionParams {
   up_slope_random;
   visiblehorse;
   weather;
+  orgasm;
 }
 
 module.exports = ConditionParams;

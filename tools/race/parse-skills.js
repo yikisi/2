@@ -638,7 +638,8 @@ async function chara_skill() {
   let buffer =
       '/** @type {Record<string,number[]>} */\nconst chara_skill_dict={};\n/** @type {Record<string,UmaSkill>} */\nconst skills_dict = {};\n\n',
     buffer_common_skills = [
-      202051, 200791, 200801, 200811, 200821, 990011, 990021,
+      202051, 200791, 200801, 200811, 200821, 990011, 990021, 660011, 660012,
+      660021, 660022,
     ];
   for (const chara_id in dict) {
     buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
@@ -705,6 +706,10 @@ async function chara_skill() {
     }
   });
   skill_dict[910031] = 1;
+  skill_dict[660011] = 1;
+  skill_dict[660012] = 1;
+  skill_dict[660021] = 1;
+  skill_dict[660022] = 1;
   delete skill_dict[100601];
   delete skill_dict[102602211];
   delete skill_dict[900601];
@@ -877,7 +882,7 @@ async function chara_skill() {
     .forEach((k) => (buffer += `${k};`));
   writeFileSync(
     '../../ere/data/race/model/condition-params.js',
-    `${buffer}};\n\nmodule.exports = ConditionParams;`,
+    `${buffer};orgasm;};\n\nmodule.exports = ConditionParams;`,
   );
   console.log('条件参数', Object.keys(c_dict).length, '个');
 

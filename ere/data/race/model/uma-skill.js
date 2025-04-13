@@ -211,6 +211,7 @@ const ability_tag_enum = {
   hpRate: 5,
   temp: 1,
   laneMove: 1,
+  ero: 0,
 };
 Object.keys(ability_tag_enum).forEach((k, i) => (ability_tag_enum[k] = i));
 
@@ -226,9 +227,10 @@ ability_tag_names[ability_tag_enum.visible] = '视野';
 ability_tag_names[ability_tag_enum.targetSpeed] = '目标速度';
 ability_tag_names[ability_tag_enum.currentSpeed] = '即时速度';
 ability_tag_names[ability_tag_enum.accel] = '加速度';
-ability_tag_names[ability_tag_enum.hpRate] = '体力恢复';
+ability_tag_names[ability_tag_enum.hpRate] = '持久力';
 ability_tag_names[ability_tag_enum.temp] = '焦躁';
 ability_tag_names[ability_tag_enum.laneMove] = '突围';
+ability_tag_names[ability_tag_enum.ero] = '调教';
 
 class UmaSkill {
   static skill_name_enum = skill_name_enum;
