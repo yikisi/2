@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '若进行了冲刺比拼，比赛进入最后200m时稍微向前突进',
   20315,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [(args) => args.compete_fight_count > 0, () => true],

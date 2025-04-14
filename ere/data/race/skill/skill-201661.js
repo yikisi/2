@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '长时间有紧跟在自己身后的马娘则速度略微加快',
   20166,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

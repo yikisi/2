@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛中盘让前面的马娘困惑',
   20116,
   2,
-  UmaSkill.rarity_enum.gold,
   25,
   508,
   [() => true, () => true],

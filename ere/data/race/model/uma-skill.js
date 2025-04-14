@@ -30,21 +30,6 @@ skill_border_types[skill_border_enum.spe] = '独有';
 skill_border_types[skill_border_enum.evol] = '进化';
 skill_border_types[skill_border_enum.cheat] = 'ＧＭ';
 
-const rarity_enum = {
-  // 普通技能
-  normal: 1,
-  // 金技能
-  gold: 2,
-  // 低星初始固有
-  // spe_n_2: 3,
-  // 低星升星固有
-  spe_n_3: 4,
-  // 高星固有
-  spe_r: 5,
-  // 进化技能
-  evol: 6,
-};
-
 const ability_time_usage_enum = {
   normal: 1,
   top_distance: 2,
@@ -233,7 +218,6 @@ ability_tag_names[ability_tag_enum.laneMove] = '突围';
 class UmaSkill {
   static skill_name_enum = skill_name_enum;
   static skill_border_enum = skill_border_enum;
-  static rarity_enum = rarity_enum;
   static ability_time_usage_enum = ability_time_usage_enum;
   static ability_type_enum = ability_type_enum;
   static ability_usage_enum = ability_usage_enum;
@@ -368,7 +352,6 @@ class UmaSkill {
    * @param {string} desc
    * @param {number} group_id
    * @param {number} group_level
-   * @param {number} rarity
    * @param {number} category
    * @param {number} grade_value
    * @param {function[]} preconditions
@@ -396,7 +379,6 @@ class UmaSkill {
     desc,
     group_id,
     group_level,
-    rarity,
     category,
     grade_value,
     preconditions,
@@ -424,7 +406,6 @@ class UmaSkill {
     this.group_id = group_id;
     this.group_level = group_level;
     this.category = category;
-    this.rarity = rarity;
     this.grade_value = grade_value;
     this.preconditions = preconditions;
     this.conditions = conditions;

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '临近比赛终盘时位于中后方则一段时间内提升速度；若力量有十二分强劲则提升技能效果',
   10940111,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

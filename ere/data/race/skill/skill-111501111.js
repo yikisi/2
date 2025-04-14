@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '若是2000m以上的比赛则在最终冲刺时提升加速度',
   11150111,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘时位于队伍中后方则消耗少许耐力大幅提升速度',
   20335,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

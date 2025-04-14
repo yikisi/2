@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '临近终盘位于领头或是距离领头4马身以内时在终盘提升加速度，之后在最终直线稍微提升速度',
   40901,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [

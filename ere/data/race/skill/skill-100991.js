@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '泥地比赛时在中盘的弯道上竞争过后，在最后冲刺时处于好位置，加速度会略微上升，如果余力充足的话效果会上升',
   10099,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [

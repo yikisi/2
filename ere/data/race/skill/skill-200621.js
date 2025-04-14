@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛中盘积攒脚力，不容易疲劳',
   20062,
   2,
-  UmaSkill.rarity_enum.gold,
   9,
   508,
   [() => true, () => true],

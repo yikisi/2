@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛终盘的最终弯道后半，向着顶点进发，从中间集团开始提高速度',
   11050,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

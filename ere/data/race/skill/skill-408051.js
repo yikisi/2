@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛终盘加速度提升；之后比赛进入最后200m时速度稍微提升',
   40805,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

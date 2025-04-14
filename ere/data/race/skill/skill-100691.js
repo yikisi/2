@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '剩余300米处于有利位置且与前方赛马娘距离近时强烈的信念将绽放，提高速度',
   10069,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

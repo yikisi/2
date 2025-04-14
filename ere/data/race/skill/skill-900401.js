@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛后半程从队伍中团开始加速追赶前方时，速度会持续微量提升',
   90040,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

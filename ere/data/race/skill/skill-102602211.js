@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '起跑晚的时间小幅减少，并且所有基础能力稍微提升',
   10260221,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   461,
   [() => true, () => true],

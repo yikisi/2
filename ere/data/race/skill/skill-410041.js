@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '起跑时加速度提升；之后在最终冲刺的关键时刻稍微向前突进',
   41004,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   394,
   [() => true, () => true],

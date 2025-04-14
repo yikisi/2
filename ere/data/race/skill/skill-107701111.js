@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '力量和速度少量提升，若马场状态为「良」则大幅提升力量和速度',
   10770111,
   1,
-  UmaSkill.rarity_enum.evol,
   3,
   508,
   [() => true, () => true],

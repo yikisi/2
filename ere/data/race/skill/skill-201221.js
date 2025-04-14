@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘处于后方的话会略微夺走前方的持久力',
   20122,
   2,
-  UmaSkill.rarity_enum.gold,
   25,
   461,
   [() => true, () => true],

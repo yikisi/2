@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛后半段位于第三名开外时，一段时间内速度提升',
   10780122,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

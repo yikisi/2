@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘开始时在中段马群以下则稍微向前推进',
   20325,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

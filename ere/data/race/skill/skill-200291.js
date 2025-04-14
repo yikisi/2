@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '与人气第一的马娘选择相同出走策略时能力更容易发挥',
   20029,
   2,
-  UmaSkill.rarity_enum.normal,
   0,
   174,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘处于最终弯道且身处后方向前逼近时短时间内加速度提升，每次超越其他马娘都会增强效果并刷新时间，最多增强三次',
   10053,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

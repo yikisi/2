@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '保持冷静进入中盘并准备发力时或是在终盘胜负关键的弯道位于中部梯队时，加速能力会略微提高',
   90059,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘位于前方时，回复耐力并提升速度',
   20284,
   2,
-  UmaSkill.rarity_enum.gold,
   9,
   508,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘在后方时稍微不容易疲劳并提高一点加速度',
   20066,
   1,
-  UmaSkill.rarity_enum.normal,
   8,
   217,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘时开始时若身处中团以后的位置，则一段时间内加速度持续提升',
   10500221,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

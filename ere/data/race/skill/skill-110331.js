@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终弯道以后处在队伍中后方时提升加速度，若是2400m的比赛则大幅提升加速度',
   11033,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

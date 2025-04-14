@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛终盘，使前方马娘的视野变得狭窄',
   20123,
   2,
-  UmaSkill.rarity_enum.gold,
   25,
   334,
   [() => true, () => true],

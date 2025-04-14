@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘速度稍微提升；若距离头马8马身以上，则速度少量提升',
   20358,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最终弯道上略微容易突围',
   20058,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

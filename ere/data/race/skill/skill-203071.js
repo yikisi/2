@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '到达第3浪时前方有空位则稍微提升速度，发动技能时不在弯道则效果提升',
   20307,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '擅长直线赛道',
   20299,
   2,
-  UmaSkill.rarity_enum.normal,
   0,
   174,
   [() => true, () => true],

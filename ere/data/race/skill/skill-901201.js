@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '到达第4浪时若位于前方，则于短时间内稍微提升速度',
   90120,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

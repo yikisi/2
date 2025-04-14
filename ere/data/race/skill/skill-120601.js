@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在终盘的最终弯道及往后，自身位于中后方时，一段时间内速度大幅提升若是中距离比赛则改变效果，一段时间内迅速向前突进',
   12060,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

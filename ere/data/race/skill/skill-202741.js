@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '位于最终弯道前的第三弯道时，若在队伍前方则向前突进',
   20274,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

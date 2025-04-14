@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在即将耗尽体力时，恢复元气，并且提升速度',
   20076,
   2,
-  UmaSkill.rarity_enum.gold,
   9,
   508,
   [() => true, () => true],

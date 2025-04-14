@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在剩余200m的地点自身位于第二名与中间队伍之间的位置时，速度提升，且附近赛马娘数量达3人以上时再稍微向前突进',
   11051,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

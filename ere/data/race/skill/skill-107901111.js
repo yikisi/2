@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛中盘的直线上速度提升；若是泥地比赛则一段时间内速度提升',
   10790111,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],
