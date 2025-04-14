@@ -576,7 +576,7 @@ module.exports = async () => {
                         content: '技能类型',
                         type: 'text',
                       },
-                      ...['全部', '被动', '恢复', '增幅', '削弱'].map(
+                      ...['全部', '被动', '恢复', '增幅', '控制'].map(
                         (e, i) => ({
                           accelerator: 930 + i,
                           config: {
