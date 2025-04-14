@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '身处比赛中盘的直线时，稍微恢复持久力',
   20038,
   1,
-  UmaSkill.rarity_enum.normal,
   8,
   217,
   [() => true, () => true],

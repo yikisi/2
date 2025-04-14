@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘初段位于中后方时，提升加速度，若是2200m～2400m的比赛，则消耗少量体力在终盘初段更早时间内大幅提升加速度',
   10880121,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

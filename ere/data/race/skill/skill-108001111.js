@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛序盘发动多个技能时，提升加速度如果比赛为英里或中距离，则技能效果增加',
   10800111,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

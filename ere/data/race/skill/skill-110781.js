@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛剩余350m的位置位于前方时短时间内向前突进，若是英里比赛则额外稍微增加速度',
   11078,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

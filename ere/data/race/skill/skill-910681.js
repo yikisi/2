@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在终盘的弯道处位于前方，且距离终点尚远时，短时间内稍微向前突进并提升略微加速度',
   91068,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

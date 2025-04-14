@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛半程少量提升速度且在泥地比赛发动技能时，若不在第3弯道，则额外稍微提升速度',
   11099,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

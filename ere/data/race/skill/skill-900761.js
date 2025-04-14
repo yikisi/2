@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '如果在比赛半程处于中间梯队，速度会略微提升，若是长距离比赛，速度提升的持续时间将延长，并恢复少量体力',
   90076,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

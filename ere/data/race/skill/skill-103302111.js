@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘位于中后方时速度大幅提升，若是2400m的比赛则变为一段时间内速度大幅提升',
   10330211,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

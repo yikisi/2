@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '临近比赛中盘时，若位于后方则回复少量体力',
   20289,
   1,
-  UmaSkill.rarity_enum.normal,
   8,
   217,
   [() => true, () => true],

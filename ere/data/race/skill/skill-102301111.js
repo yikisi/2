@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '临近比赛中盘时若身处前方，则大幅回复持久力',
   10230111,
   1,
-  UmaSkill.rarity_enum.evol,
   11,
   633,
   [() => true, () => true],

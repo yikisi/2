@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛后半段发动两次技能时，少量提升速度',
   21013,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   174,
   [() => true, () => true],

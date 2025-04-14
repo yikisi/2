@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '中盘弯道位于前方集团时若检测到后方有其他马娘的话将稍微调整呼吸，加快速度',
   11026,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

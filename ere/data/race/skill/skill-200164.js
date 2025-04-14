@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '擅长「稍重」「重」「不良」的马场状态，速度与力量上升',
   20016,
   4,
-  UmaSkill.rarity_enum.gold,
   1,
   461,
   [() => true, () => true],

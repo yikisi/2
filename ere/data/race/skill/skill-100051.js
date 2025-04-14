@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛终盘位于前列并突围时，在距终点300米处会变得更加闪耀，大幅提升速度',
   10005,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [

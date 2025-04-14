@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '若是东京竞马场比赛，则在比赛终盘初段一段时间内向前突进，并略微提升加速度',
   10940121,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

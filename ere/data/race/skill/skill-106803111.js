@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛终盘初段若余力十足则向前突进，并之后在最终直线处稍微再向前突进',
   10680311,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

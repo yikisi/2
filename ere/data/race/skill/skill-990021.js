@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘时直接失速，并且想象着凌辱一般的嫌恶眼神快要去了；如果之前高潮过，则使所有选手一起失速',
   99002,
   1,
-  UmaSkill.rarity_enum.spe_r,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.debuff,
     UmaSkill.skill_border_enum.cheat,

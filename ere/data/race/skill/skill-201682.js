@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在赛程终盘略微冲刺调整姿态',
   20168,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   174,
   [() => true, () => true],

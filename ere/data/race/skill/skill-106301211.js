@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛中段消耗少量体力使速度极大提升',
   10630121,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

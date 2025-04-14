@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛终盘使其他的马娘略微产生动摇',
   20144,
   1,
-  UmaSkill.rarity_enum.normal,
   24,
   217,
   [() => true, () => true],

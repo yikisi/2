@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在直线一段时间内向前突进',
   10410221,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

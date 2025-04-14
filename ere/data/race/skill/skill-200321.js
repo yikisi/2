@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '对成为人气第一感到棘手',
   20032,
   -1,
-  UmaSkill.rarity_enum.normal,
   32,
   -129,
   [() => true, () => true],

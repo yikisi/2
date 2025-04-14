@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘进行名次争夺时速度提升，并且稍微回复持久力',
   10460211,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

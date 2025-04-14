@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最终直线上从后方赶超时，会使用末脚少量加快速度',
   10011,
   1,
-  UmaSkill.rarity_enum.spe_n_3,
   18,
   340,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛后半速度大幅上升但有时会很累',
   20203,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   334,
   [() => true, () => true],

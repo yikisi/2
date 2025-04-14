@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '身处直线时，速度大幅提升',
   10680121,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

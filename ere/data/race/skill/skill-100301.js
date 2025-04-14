@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛终盘完成超越并身处前方时，最终直线上会爆发出强烈的意志，使得速度提升',
   10030,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [

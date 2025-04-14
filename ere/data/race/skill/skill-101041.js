@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '第三弯道位于领头时，速度少量提升并回复少量体力，若是东京竞马场中距离比赛则增加技能持续时间',
   10104,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

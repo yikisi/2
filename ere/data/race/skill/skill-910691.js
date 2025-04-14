@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '如果在比赛中盘展开竞争且在剩下650m处处于好位置则稍微持续提升加速度',
   91069,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [

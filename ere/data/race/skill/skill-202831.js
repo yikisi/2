@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘发动技能时速度少量提升，之后在比赛终盘发动技能时，小幅向前突进',
   20283,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   633,
   [() => true, () => true],

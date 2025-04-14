@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '智力上升，稍微不容易变得焦躁',
   20216,
   1,
-  UmaSkill.rarity_enum.normal,
   0,
   217,
   [() => true, () => true],

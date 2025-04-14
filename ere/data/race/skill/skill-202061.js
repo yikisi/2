@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '背负期待的强烈感情转变为力量，最终弯道处提升速度',
   20206,
   1,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

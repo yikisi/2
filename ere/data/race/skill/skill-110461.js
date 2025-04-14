@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中段位于领头附近时，速度逐渐少量提升，在泥地比赛中额外回复少量持久力',
   11046,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

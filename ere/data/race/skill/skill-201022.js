@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛序盘处于后方的话，略微使前方的赛马娘焦躁和动作迟缓',
   20102,
   1,
-  UmaSkill.rarity_enum.normal,
   24,
   262,
   [() => true, () => true],

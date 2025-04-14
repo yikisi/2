@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '下坡时速度大幅提升，并使除自己外的队伍成员速度稍微提升',
   10510222,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

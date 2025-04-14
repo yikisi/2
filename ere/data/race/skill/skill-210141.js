@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '干劲是较佳或极佳时，少量提升耐力、根性、智力',
   21014,
   1,
-  UmaSkill.rarity_enum.normal,
   0,
   174,
   [() => true, () => true],

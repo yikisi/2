@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛后半程处于中间集团的话会略微提高速度，并且加速度也会略微提高',
   20212,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

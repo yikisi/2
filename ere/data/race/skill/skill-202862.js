@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '起跑时加速度稍微提升',
   20286,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

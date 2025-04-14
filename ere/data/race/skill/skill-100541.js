@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛后半段若从后方进行了超越，剩余150m后自身位于前方时，在短时间内速度大幅提升',
   10054,
   1,
-  UmaSkill.rarity_enum.spe_n_3,
   18,
   340,
   [

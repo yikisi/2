@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛初期对出走策略是先马的赛马娘进行牵制，使其略微容易变得疲劳',
   20086,
   1,
-  UmaSkill.rarity_enum.normal,
   24,
   217,
   [() => true, () => true],

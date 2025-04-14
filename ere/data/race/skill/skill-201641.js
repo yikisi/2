@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中只有自己抱有单枪匹马的觉悟时，能力少许上升',
   20164,
   1,
-  UmaSkill.rarity_enum.normal,
   0,
   129,
   [() => true, () => true],

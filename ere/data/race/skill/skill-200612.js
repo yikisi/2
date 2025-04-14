@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最终弯道从外道赶超时，速度略微加快',
   20061,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

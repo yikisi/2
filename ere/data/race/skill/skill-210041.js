@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛终盘燃烧青春之魂为脚部注入力量，参赛队友的毅力属性总和越高越能提升速度与加速度',
   21004,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   633,
   [() => true, () => true],

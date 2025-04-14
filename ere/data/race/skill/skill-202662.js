@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘初段位于队伍中间时，稍微向前突进',
   20266,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

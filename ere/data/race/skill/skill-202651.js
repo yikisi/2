@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '速度和力量都十分强劲时，提升速度和力量',
   20265,
   2,
-  UmaSkill.rarity_enum.gold,
   1,
   508,
   [() => true, () => true],

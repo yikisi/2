@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最终弯道从中后方赶超时，犹如女帝般的奔跑会使速度加快',
   10018,
   1,
-  UmaSkill.rarity_enum.spe_n_3,
   18,
   340,
   [() => true, () => true],
