@@ -14,14 +14,24 @@ skill_name_types[skill_name_enum.speed] = '加速';
 skill_name_types[skill_name_enum.control] = '控制';
 skill_name_types[skill_name_enum.debuff] = '劣势';
 
-const skill_border_enum = { normal: 0, advanced: 0, spe: 0, evol: 0, cheat: 0 };
+const skill_border_enum = {
+  normal: 0,
+  advanced: 0,
+  spe: 0,
+  evol: 0,
+  cheat: 0,
+  ero_normal: 0,
+  ero_advanced: 0,
+};
 Object.keys(skill_border_enum).forEach((k, i) => (skill_border_enum[k] = i));
 const skill_border_colors = [
   '#c6c5c5',
   '#eeb93f',
-  '#ffc0cb',
-  '#ee82ee',
+  '#71c2fe',
+  '#f6aacb',
   '#ff7373',
+  '#ee82ee',
+  '#cf00cf',
 ];
 const skill_border_types = [];
 skill_border_types[skill_border_enum.normal] = '普通';
@@ -29,6 +39,8 @@ skill_border_types[skill_border_enum.advanced] = '传说';
 skill_border_types[skill_border_enum.spe] = '独有';
 skill_border_types[skill_border_enum.evol] = '进化';
 skill_border_types[skill_border_enum.cheat] = 'ＧＭ';
+skill_border_types[skill_border_enum.ero_normal] = '普通 · 调教';
+skill_border_types[skill_border_enum.ero_advanced] = '强化 · 调教';
 
 const rarity_enum = {
   // 普通技能
@@ -227,7 +239,7 @@ ability_tag_names[ability_tag_enum.visible] = '视野';
 ability_tag_names[ability_tag_enum.targetSpeed] = '目标速度';
 ability_tag_names[ability_tag_enum.currentSpeed] = '即时速度';
 ability_tag_names[ability_tag_enum.accel] = '加速度';
-ability_tag_names[ability_tag_enum.hpRate] = '持久力';
+ability_tag_names[ability_tag_enum.hpRate] = '体力';
 ability_tag_names[ability_tag_enum.temp] = '焦躁';
 ability_tag_names[ability_tag_enum.laneMove] = '突围';
 ability_tag_names[ability_tag_enum.ero] = '调教';

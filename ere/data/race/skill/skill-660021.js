@@ -3,13 +3,13 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   660021,
   '喷射水流',
-  '高潮时稍微降低持久力，短时间内少量提高速度',
+  '高潮时稍微降低体力，短时间内少量提高速度',
   66002,
   1,
   UmaSkill.rarity_enum.advanced,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
+    UmaSkill.skill_border_enum.ero_normal,
   ),
   1,
   [() => true, () => true],

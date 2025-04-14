@@ -9,15 +9,11 @@ const prisma = new PrismaClient();
 const UmaSkill = require('../../ere/data/race/model/uma-skill');
 const legend_skill_sets = require('./custom-skill-sets');
 
-const rarity_names = {},
-  ability_time_usage_names = {},
+const ability_time_usage_names = {},
   ability_type_names = {},
   ability_type_usage_names = {},
   target_type_names = {};
 
-Object.entries(UmaSkill.rarity_enum).map(
-  ([key, value]) => (rarity_names[value] = key),
-);
 Object.entries(UmaSkill.ability_time_usage_enum).map(
   ([k, v]) => (ability_time_usage_names[v] = k),
 );
@@ -577,13 +573,6 @@ ability_tag_enum_names[UmaSkill.ability_type_enum.TemptationEndTime] =
 ability_tag_enum_names[UmaSkill.ability_type_enum.LaneMoveSpeed] =
   UmaSkill.ability_tag_enum.laneMove;
 
-function get_rarity(v) {
-  if (!rarity_names[v]) {
-    throw new Error(`undefined rarity: ${v}`);
-  }
-  return `UmaSkill.rarity_enum.${rarity_names[v]}`;
-}
-
 function get_ability_time_usage(v) {
   if (!ability_time_usage_names[v]) {
     throw new Error(`undefined ability_time_usage: ${v}`);
@@ -820,7 +809,6 @@ async function chara_skill() {
       sbuffer += `"${skill_text[id][48]}",`;
       sbuffer += `${e.group_id},`;
       sbuffer += `${e.group_level},`;
-      sbuffer += `${get_rarity(e.rarity)},`;
       sbuffer += `${e.category},`;
       sbuffer += `${e.grade_value},`;
       sbuffer += `[${parse_condition(e.precondition_1, true)},${parse_condition(e.precondition_2, true)}],`;

@@ -9,7 +9,7 @@ module.exports = new UmaSkill(
   UmaSkill.rarity_enum.advanced,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.control,
-    UmaSkill.skill_border_enum.advanced,
+    UmaSkill.skill_border_enum.ero_normal,
   ),
   1,
   [() => true, () => true],
