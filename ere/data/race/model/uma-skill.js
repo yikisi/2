@@ -10,7 +10,7 @@ const skill_name_colors = [
 const skill_name_types = [];
 skill_name_types[skill_name_enum.buff] = '常时';
 skill_name_types[skill_name_enum.heal] = '恢复';
-skill_name_types[skill_name_enum.speed] = '加速';
+skill_name_types[skill_name_enum.speed] = '增幅';
 skill_name_types[skill_name_enum.control] = '控制';
 skill_name_types[skill_name_enum.debuff] = '劣势';
 
