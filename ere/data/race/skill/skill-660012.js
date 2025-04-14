@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '高潮时略微降低自身速度，降低身后最多5名对手的速度，并使其他对手陷入焦躁',
   66001,
   2,
-  UmaSkill.rarity_enum.evol,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.control,
     UmaSkill.skill_border_enum.ero_advanced,

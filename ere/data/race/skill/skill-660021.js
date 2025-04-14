@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '高潮时稍微降低体力，短时间内少量提高速度',
   66002,
   1,
-  UmaSkill.rarity_enum.advanced,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.ero_normal,
