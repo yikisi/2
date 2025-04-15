@@ -1,12 +1,15 @@
 const era = require('#/era-electron');
 
+const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 const bad_events = require('#/event/others/mejiro-kindness/bad-events.kojo');
 const good_events = require('#/event/others/mejiro-kindness/good-events.kojo');
 const normal_events = require('#/event/others/mejiro-kindness/normal-events.kojo');
 
+const EroParticipant = require('#/data/ero/ero-participant');
 const { lust_border } = require('#/data/ero/orgasm-const');
+const { part_enum } = require('#/data/ero/part-const');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -89,12 +92,23 @@ class MejiroEvents {
       async h() {
         let my_lust;
         if (
-          (my_lust =
-            +(era.get('base:0:性欲') >= lust_border.itch) ||
-            Math.random() < 0.5) > 0
+          (my_lust = +(
+            era.get('base:0:性欲') >= lust_border.itch || Math.random() < 0.5
+          )) > 0
         ) {
+          era.logger.info(my_lust);
           era.add('base:0:性欲', get_random_value(0, 600));
+          await quick_make_love(
+            new EroParticipant(0, part_enum.hand),
+            new EroParticipant(this.chara.id, part_enum.anal),
+            false,
+          );
         }
+        await quick_make_love(
+          new EroParticipant(this.chara.id, part_enum.hand),
+          new EroParticipant(0, part_enum.anal),
+          false,
+        );
         era.add(`base:${this.chara.id}:性欲`, get_random_value(0, 300));
         await bad_events['摸屁股']({ ...this.dict, my_lust });
       },
