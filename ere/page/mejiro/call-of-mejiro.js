@@ -10,9 +10,11 @@ const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 const { get_progress_bar } = require('#/page/components/page-header');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
-const cum_shop = require('#/page/mejiro/cum-shop');
 const MejiroCity = require('#/page/mejiro/mejiro-common');
 const print_ero_page = require('#/page/page-ero');
+
+const cum_shop = require('#/event/others/mejiro-kindness/cum-shop');
+const MejiroEvents = require('#/event/others/mejiro-kindness/mejiro-events');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
@@ -201,14 +203,13 @@ class CallOfMejiro extends MejiroCity {
     difficulty = Math.max(difficulty * 2 + get_random_value(0, 5), 6);
     temp = 0;
     begin_and_init_ero(0, chara.id);
+    const events = new MejiroEvents(chara, me);
     while (flag) {
       await era.clear();
       this.page_header(chara);
       era.drawLine();
-      const lust = Math.max(
-        era.get('base:0:性欲'),
-        era.get(`base:${chara.id}:性欲`),
-      );
+      const my_lust = era.get('base:0:性欲');
+      const lust = Math.max(my_lust, era.get(`base:${chara.id}:性欲`));
       if (lust >= lust_border.want_sex) {
         await era.printAndWait([
           me.get_colored_name(),
@@ -224,39 +225,55 @@ class CallOfMejiro extends MejiroCity {
         await era.printAndWait(
           '性爱的声音盖过了其他所有，呼吸的空气中满是淫水和汗水的臭味……',
         );
-        if (
-          await select_yes_or_no(
-            '',
-            '沉溺其中（「恩宠」+10）',
-            '试图冷静（体力&精力+50%）',
-          )
-        ) {
+        if (my_lust >= lust_border.want_sex) {
           await era.printAndWait([
             me.get_colored_name(),
-            ' 看向 ',
+            ' 听到血液在脑中轰鸣，自控在绮念的进攻下分崩离析……',
+          ]);
+          await era.printAndWait([
+            '看到身边的 ',
             chara.get_colored_name(),
-            '，那眼眸中暗波荡漾……',
-          ]);
-          await era.printAndWait([
+            ' 也同样霞飞双颊，夹紧双腿，',
             me.get_colored_name(),
-            ' 主动踏入欲望的泥淖，',
+            ' 最终任由思想把自己控制……',
           ]);
-          await era.printAndWait(['伴随着', chara.sex, '一同下坠，下坠……']);
-          era.add('item:「恩宠」', 10);
+          era.add('base:0:体力', Math.floor(era.get('maxbase:0:体力') * 0.2));
+          era.add('base:0:精力', Math.floor(era.get('maxbase:0:精力') * 0.2));
         } else {
-          await era.printAndWait([
-            me.get_colored_name(),
-            ' 看向 ',
-            chara.get_colored_name(),
-            '，那眼眸中暗波荡漾……',
-          ]);
-          await era.printAndWait([
-            me.get_colored_name(),
-            ' 惊慌地想抬腿离开欲望的泥淖，',
-          ]);
-          await era.printAndWait('脚步却越踩越深，直至坠落……');
-          era.add('base:0:体力', Math.floor(era.get('maxbase:0:体力') * 0.5));
-          era.add('base:0:精力', Math.floor(era.get('maxbase:0:精力') * 0.5));
+          if (
+            await select_yes_or_no(
+              '',
+              '沉溺其中（「恩宠」+10）',
+              '试图冷静（体力&精力+50%）',
+            )
+          ) {
+            await era.printAndWait([
+              me.get_colored_name(),
+              ' 看向 ',
+              chara.get_colored_name(),
+              '，那眼眸中暗波荡漾……',
+            ]);
+            await era.printAndWait([
+              me.get_colored_name(),
+              ' 主动踏入欲望的泥淖，',
+            ]);
+            await era.printAndWait(['伴随着', chara.sex, '一同下坠，下坠……']);
+            era.add('item:「恩宠」', 10);
+          } else {
+            await era.printAndWait([
+              me.get_colored_name(),
+              ' 看向 ',
+              chara.get_colored_name(),
+              '，那眼眸中暗波荡漾……',
+            ]);
+            await era.printAndWait([
+              me.get_colored_name(),
+              ' 惊慌地想抬腿离开欲望的泥淖，',
+            ]);
+            await era.printAndWait('脚步却越踩越深，直至坠落……');
+            era.add('base:0:体力', Math.floor(era.get('maxbase:0:体力') * 0.5));
+            era.add('base:0:精力', Math.floor(era.get('maxbase:0:精力') * 0.5));
+          }
         }
         era.set(`status:${chara.id}:超马跳Z`, 1);
         era.set(`tcvar:${chara.id}:脱力`, 0);
@@ -271,6 +288,7 @@ class CallOfMejiro extends MejiroCity {
           `base:${chara.id}:精力`,
           Math.floor(era.get(`maxbase:${chara.id}:精力`) * 0.5),
         );
+        update_ero_status(0);
         update_ero_status(chara.id);
         await print_ero_page(chara.id, true);
         era.add('item:「恩宠」', temp * 5 + 5);
@@ -320,8 +338,11 @@ class CallOfMejiro extends MejiroCity {
             c: '谨慎前进（低风险，性欲+++，体力--）',
             d: stamina < 100,
             async h() {
+              era.add(`base:${chara.id}:性欲`, get_random_value(600, 1200));
+              era.add('base:0:性欲', get_random_value(300, 600));
               sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
               temp++;
+              await events.good_event();
             },
           },
           {
@@ -329,8 +350,11 @@ class CallOfMejiro extends MejiroCity {
             c: '正常前进（中风险，性欲++，体力--）',
             d: stamina < 100,
             async h() {
+              era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
+              era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
               temp++;
+              await events.normal_event();
             },
           },
           {
@@ -339,8 +363,10 @@ class CallOfMejiro extends MejiroCity {
             d: stamina < 100,
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(0, 600));
-              temp++;
+              era.add('base:0:性欲', get_random_value(0, 300));
               sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
+              temp++;
+              await events.bad_event();
             },
           },
           {
@@ -349,7 +375,9 @@ class CallOfMejiro extends MejiroCity {
             d: stamina < 150,
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
+              era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', -get_random_value(125, 175));
+              await events.good_event();
             },
           },
           {
@@ -358,7 +386,9 @@ class CallOfMejiro extends MejiroCity {
             d: stamina < 100,
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
+              era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
+              await events.normal_event();
             },
           },
           {
@@ -367,7 +397,9 @@ class CallOfMejiro extends MejiroCity {
             d: stamina < 50,
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
+              era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', -get_random_value(25, 75));
+              await events.bad_event();
             },
           },
           {
@@ -375,7 +407,9 @@ class CallOfMejiro extends MejiroCity {
             c: '停下休息（性欲++，体力+）',
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
+              era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', get_random_value(25, 75));
+              await events.avg_event();
             },
           },
         ];
