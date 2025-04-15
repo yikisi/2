@@ -90,27 +90,22 @@ class MejiroEvents {
         return era.get(`base:${this.chara.id}:性欲`) < lust_border.itch;
       },
       async h() {
-        let my_lust;
-        if (
-          (my_lust = +(
-            era.get('base:0:性欲') >= lust_border.itch || Math.random() < 0.5
-          )) > 0
-        ) {
-          era.logger.info(my_lust);
-          era.add('base:0:性欲', get_random_value(0, 600));
-          await quick_make_love(
-            new EroParticipant(0, part_enum.hand),
-            new EroParticipant(this.chara.id, part_enum.anal),
-            false,
-          );
-        }
         await quick_make_love(
           new EroParticipant(this.chara.id, part_enum.hand),
           new EroParticipant(0, part_enum.anal),
           false,
         );
         era.add(`base:${this.chara.id}:性欲`, get_random_value(0, 300));
-        await bad_events['摸屁股']({ ...this.dict, my_lust });
+        if ((await bad_events['摸屁股'](this.dict))[0] === 1) {
+          era.add('base:0:性欲', get_random_value(0, 600));
+          await quick_make_love(
+            new EroParticipant(0, part_enum.hand),
+            new EroParticipant(this.chara.id, part_enum.anal),
+            false,
+          );
+        } else {
+          era.add(`base:${this.chara.id}:性欲`, get_random_value(0, 300));
+        }
       },
     },
   ];
