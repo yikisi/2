@@ -13,9 +13,15 @@ const { part_enum } = require('#/data/ero/part-const');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-function get_random_event(events, _this) {
+/**
+ * @param {{f:function(number,number):boolean,h:function():Promise}[]} events
+ * @param {MejiroEvents} _this
+ * @param {number} progress
+ * @param {number} lust
+ */
+function get_random_event(events, _this, progress, lust) {
   return (
-    get_random_entry(events.filter((e) => e.f.call(_this))) || {
+    get_random_entry(events.filter((e) => e.f.call(_this, progress, lust))) || {
       async h() {},
     }
   ).h;
@@ -123,43 +129,63 @@ class MejiroEvents {
     this.dict['她'] = chara.sex;
   }
 
-  /** @param {number} percentages */
-  #get_event_by_category(...percentages) {
+  /**
+   * @param {number[]} percentages
+   * @param {number} progress
+   * @param {number} lust
+   */
+  #get_event_by_category(percentages, progress, lust) {
     const [good, normal] = percentages;
     let dice = Math.random();
     if (dice < good) {
-      return get_random_event(this.good_events, this);
+      return get_random_event(this.good_events, this, progress, lust);
     }
     dice -= good;
     if (dice <= normal) {
-      return get_random_event(this.normal_events, this);
+      return get_random_event(this.normal_events, this, progress, lust);
     }
-    return get_random_event(this.bad_events, this);
+    return get_random_event(this.bad_events, this, progress, lust);
   }
 
-  get good_event() {
-    return this.#get_event_by_category(0.3, 0.5).bind(
+  /**
+   * @param {number} progress
+   * @param {number} lust
+   */
+  good_event(progress, lust) {
+    return this.#get_event_by_category([0.3, 0.5], progress, lust).call(
       this,
       action_type_enum.good,
     );
   }
 
-  get normal_event() {
-    return this.#get_event_by_category(0.2, 0.5).bind(
+  /**
+   * @param {number} progress
+   * @param {number} lust
+   */
+  normal_event(progress, lust) {
+    return this.#get_event_by_category([0.2, 0.5], progress, lust).call(
       this,
       action_type_enum.normal,
     );
   }
 
-  get bad_event() {
-    return this.#get_event_by_category(0.1, 0.3).bind(
+  /**
+   * @param {number} progress
+   * @param {number} lust
+   */
+  bad_event(progress, lust) {
+    return this.#get_event_by_category([0.1, 0.3], progress, lust).call(
       this,
       action_type_enum.bad,
     );
   }
 
-  get avg_event() {
-    return this.#get_event_by_category(1 / 3, 1 / 3).bind(
+  /**
+   * @param {number} progress
+   * @param {number} lust
+   */
+  avg_event(progress, lust) {
+    return this.#get_event_by_category([1 / 3, 1 / 3], progress, lust).call(
       this,
       action_type_enum.avg,
     );

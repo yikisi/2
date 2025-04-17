@@ -320,11 +320,12 @@ class CallOfMejiro extends MejiroCity {
         } else if (lust >= 2000) {
           era.print('周围是影影绰绰的一对对旅客，偶尔能听见模糊的低语。');
         }
+        const progress = temp / difficulty;
         if (temp === difficulty - 1) {
           era.print('前面的迷雾正在消散，能看见明亮、干净的街区。');
-        } else if (temp / difficulty >= 0.66) {
+        } else if (progress >= 0.66) {
           era.print('前面的迷雾变得稀薄了一些，阳光穿过云层星星点点地照着。');
-        } else if (temp / difficulty >= 0.33) {
+        } else if (progress >= 0.33) {
           era.print('来路已经看不见了，似乎只能向前。');
         } else if (temp === 0) {
           era.print(
@@ -342,7 +343,7 @@ class CallOfMejiro extends MejiroCity {
               era.add('base:0:性欲', get_random_value(300, 600));
               sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
               temp++;
-              await events.good_event();
+              await events.good_event(progress, lust);
             },
           },
           {
@@ -354,7 +355,7 @@ class CallOfMejiro extends MejiroCity {
               era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
               temp++;
-              await events.normal_event();
+              await events.normal_event(progress, lust);
             },
           },
           {
@@ -366,7 +367,7 @@ class CallOfMejiro extends MejiroCity {
               era.add('base:0:性欲', get_random_value(0, 300));
               sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
               temp++;
-              await events.bad_event();
+              await events.bad_event(progress, lust);
             },
           },
           {
@@ -377,7 +378,7 @@ class CallOfMejiro extends MejiroCity {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
               era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', -get_random_value(125, 175));
-              await events.good_event();
+              await events.good_event(progress, lust);
             },
           },
           {
@@ -388,7 +389,7 @@ class CallOfMejiro extends MejiroCity {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
               era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
-              await events.normal_event();
+              await events.normal_event(progress, lust);
             },
           },
           {
@@ -399,7 +400,7 @@ class CallOfMejiro extends MejiroCity {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
               era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', -get_random_value(25, 75));
-              await events.bad_event();
+              await events.bad_event(progress, lust);
             },
           },
           {
@@ -409,7 +410,7 @@ class CallOfMejiro extends MejiroCity {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
               era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', get_random_value(25, 75));
-              await events.avg_event();
+              await events.avg_event(progress, lust);
             },
           },
         ];
