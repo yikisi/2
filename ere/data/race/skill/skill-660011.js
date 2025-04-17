@@ -1,6 +1,7 @@
+const UmaEroSkill = require('#/data/race/model/ero-skill');
 const UmaSkill = require('#/data/race/model/uma-skill');
 
-module.exports = new UmaSkill(
+module.exports = new UmaEroSkill(
   660011,
   '兴奋滴落',
   '高潮时稍微降低自身速度，略微降低身后最多5名对手的速度，并使身前最多5名对手陷入焦躁',

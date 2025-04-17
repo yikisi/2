@@ -441,7 +441,9 @@ class UmaSkill {
     this.ability_tags = ability_tags;
   }
 
-  get_colored_name() {
+  /** @param {PseudoUma} owner */
+  // eslint-disable-next-line no-unused-vars
+  get_colored_name(owner) {
     const border_color = skill_border_colors[this.category & 0b111],
       name_color = skill_name_colors[this.category >> 3];
     const title_list = [];
