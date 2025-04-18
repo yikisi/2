@@ -65,9 +65,7 @@ function get_train_bonus(chara_id, attr, between_weeks) {
       }
   }
   if (!between_weeks || between_weeks.teach_chara > 0) {
-    train_buff +=
-      10 * era.get(`talent:${chara_id}:训练`) +
-      get_trainer_train_buff(chara_id);
+    train_buff += get_trainer_train_buff(chara_id);
   }
   return Math.max(train_buff, -100);
 }
