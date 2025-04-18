@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 const {
   get_penis_size,
   orgasm_check_list,
@@ -60,31 +61,31 @@ function add_palam(id, part, _attack) {
     }
   }
   const chara_inmon = CharaInmon.get(id);
-  if (chara_inmon.check(plugin_enum.al_u1)) {
+  if (chara_inmon.has(plugin_enum.al_u1)) {
     coff += 0.5;
-  } else if (chara_inmon.check(plugin_enum.al_u2)) {
+  } else if (chara_inmon.has(plugin_enum.al_u2)) {
     coff += 1;
-  } else if (chara_inmon.check(plugin_enum.al_u3)) {
+  } else if (chara_inmon.has(plugin_enum.al_u3)) {
     coff += 2;
-  } else if (chara_inmon.check(plugin_enum.al_d1)) {
+  } else if (chara_inmon.has(plugin_enum.al_d1)) {
     coff -= 0.1;
-  } else if (chara_inmon.check(plugin_enum.al_d2)) {
+  } else if (chara_inmon.has(plugin_enum.al_d2)) {
     coff -= 0.3;
-  } else if (chara_inmon.check(plugin_enum.al_d3)) {
+  } else if (chara_inmon.has(plugin_enum.al_d3)) {
     coff -= 0.7;
   }
   const plug_key = part_enum.keys[part].substring(0, 2);
-  if (chara_inmon.check(plugin_enum[`${plug_key}_u1`])) {
+  if (chara_inmon.has(plugin_enum[`${plug_key}_u1`])) {
     coff += 1;
-  } else if (chara_inmon.check(plugin_enum[`${plug_key}_u2`])) {
+  } else if (chara_inmon.has(plugin_enum[`${plug_key}_u2`])) {
     coff += 2;
-  } else if (chara_inmon.check(plugin_enum[`${plug_key}_u3`])) {
+  } else if (chara_inmon.has(plugin_enum[`${plug_key}_u3`])) {
     coff += 4;
-  } else if (chara_inmon.check(plugin_enum[`${plug_key}_d1`])) {
+  } else if (chara_inmon.has(plugin_enum[`${plug_key}_d1`])) {
     coff -= 0.2;
-  } else if (chara_inmon.check(plugin_enum[`${plug_key}_d2`])) {
+  } else if (chara_inmon.has(plugin_enum[`${plug_key}_d2`])) {
     coff -= 0.4;
-  } else if (chara_inmon.check(plugin_enum[`${plug_key}_d3`])) {
+  } else if (chara_inmon.has(plugin_enum[`${plug_key}_d3`])) {
     coff -= 0.8;
   }
   attack *= coff;
@@ -140,7 +141,7 @@ function update_palam(chara_id, part, shown) {
   const palam_name = key + '快感';
   // 快感加成已在sys-calc-ero.js中计算，因子加成在sys-calc-juel.js中计算，不重复计算
   let attack = Math.ceil(
-    tmp[chara_id][key] * (1 + 0.1 * (era.get(`cflag:${chara_id}:气性`) === -3)),
+    tmp[chara_id][key] * (1 + 0.1 * (sys_get_chara(chara_id) === -3)),
   );
   switch (part) {
     case part_enum.sadism:

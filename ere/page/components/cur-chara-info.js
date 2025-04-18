@@ -1,5 +1,8 @@
 const era = require('#/era-electron');
 
+const {
+  sys_get_full_chara,
+} = require('#/system/chara/sys-calc-characteristic');
 const get_status = require('#/system/chara/sys-get-status');
 const { get_image } = require('#/system/sys-calc-image');
 
@@ -15,11 +18,7 @@ const {
   love_colors,
   relation_colors,
 } = require('#/data/const.json');
-const {
-  chara_desc,
-  chara_full_desc,
-  growth_stage,
-} = require('#/data/ero/status-const');
+const { growth_stage } = require('#/data/ero/status-const');
 const {
   get_love_info,
   get_relation_info,
@@ -109,8 +108,7 @@ function cur_chara_component(chara_id, type, location_npc) {
         growth >= 2 && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48,
       motivation = era.get(`cflag:${chara_id}:干劲`),
       out_of_train = era.get(`cflag:${chara_id}:殿堂`),
-      race = era.get(`cflag:${chara_id}:种族`),
-      characteristic = era.get(`cflag:${chara_id}:气性`);
+      race = era.get(`cflag:${chara_id}:种族`);
     /** @type {*[]} */
     const name_columns = ['当前角色：'];
     if (title) {
@@ -245,12 +243,7 @@ function cur_chara_component(chara_id, type, location_npc) {
                 },
                 {
                   config: { width: 4 },
-                  content: [
-                    {
-                      content: chara_desc[characteristic + 3],
-                      title: `[${chara_desc[characteristic + 3]}]：${chara_full_desc[characteristic + 3]}。`,
-                    },
-                  ],
+                  content: [sys_get_full_chara(chara_id)],
                   type: 'text',
                 },
               ]

@@ -24,7 +24,9 @@ const {
   adaptability_colors,
   celebration_color,
 } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -435,7 +437,8 @@ async function check_new_activities(cur_round, in_team_list) {
       era.set('cflag:0:位置', 0);
     }
   }
-  // 出差的理事长
+
+  // 特殊NPC是否会出现在地点
   let chairman = 0;
   if (
     era.get('cflag:302:育成回合计时') < 3 * 48 ||
@@ -518,6 +521,13 @@ async function check_new_activities(cur_round, in_team_list) {
   if (era.get('flag:当前周') === 1) {
     new MyEduMarks().we_are_one = 0;
   }
+
+  // 淫纹设置：恢复最大值
+  in_team_list.forEach((e) => {
+    if (CharaInmon.get(e).check(plugin_enum.rel_lock)) {
+      era.set(`relation:${e}:0`, 600);
+    }
+  });
 }
 
 module.exports = check_new_activities;

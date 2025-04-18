@@ -70,15 +70,15 @@ plugins[40211] = require('#/data/ero/plugin/plugin-40211');
 plugins[40221] = require('#/data/ero/plugin/plugin-40221');
 plugins[40222] = require('#/data/ero/plugin/plugin-40222');
 plugins[50111] = require('#/data/ero/plugin/plugin-50111');
-plugins[50111] = require('#/data/ero/plugin/plugin-50111');
-plugins[50111] = require('#/data/ero/plugin/plugin-50111');
+plugins[50112] = require('#/data/ero/plugin/plugin-50112');
+plugins[50113] = require('#/data/ero/plugin/plugin-50113');
 plugins[60111] = require('#/data/ero/plugin/plugin-60111');
 plugins[60112] = require('#/data/ero/plugin/plugin-60112');
 plugins[60113] = require('#/data/ero/plugin/plugin-60113');
 plugins[60114] = require('#/data/ero/plugin/plugin-60114');
 plugins[60115] = require('#/data/ero/plugin/plugin-60115');
-plugins[60115] = require('#/data/ero/plugin/plugin-60115');
-plugins[60115] = require('#/data/ero/plugin/plugin-60115');
+plugins[60116] = require('#/data/ero/plugin/plugin-60116');
+plugins[60117] = require('#/data/ero/plugin/plugin-60117');
 plugins[70111] = require('#/data/ero/plugin/plugin-70111');
 
 module.exports = {
@@ -219,27 +219,27 @@ module.exports = {
     // 保持距离: 爱慕获取-50%
     love_d1: 40221,
     // 只可在此: 爱慕获取-100%
-    love_2: 40222,
-    // 高潮操纵Ⅰ: 每隔一回合才允许高潮
+    love_d2: 40222,
+    // 高潮操纵Ⅰ: 每隔一回合允许高潮一回合
     org_c1: 50111,
-    // 高潮操纵Ⅱ: 每隔两回合才允许高潮
-    org_c2: 50111,
-    // 高潮操纵Ⅲ: 每隔四回合才允许高潮
-    org_c3: 50111,
+    // 高潮操纵Ⅱ: 每隔两回合允许高潮一回合
+    org_c2: 50112,
+    // 高潮操纵Ⅲ: 每隔四回合允许高潮一回合
+    org_c3: 50113,
     // 唯唯诺诺: 气性转换为「弱气」
     cha_0: 60111,
     // 畏首畏尾: 气性转换为「胆小」
     cha_1: 60112,
     // 一丝不苟: 气性转换为「认真」
     cha_2: 60113,
-    // 唯唯诺诺: 气性转换为「普通」
+    // 普普通通: 气性转换为「普通」
     cha_3: 60114,
     // 坚强不屈: 气性转换为「要强」
     cha_4: 60115,
     // 刚愎自用: 气性转换为「顽固」
-    cha_5: 60115,
+    cha_5: 60116,
     // 血气方刚: 气性转换为「热血」
-    cha_6: 60115,
+    cha_6: 60117,
     // 金枪鱼: 调教时不再做出反应
     tuna: 70111,
   },

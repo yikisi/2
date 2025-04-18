@@ -1,5 +1,8 @@
 ﻿const era = require('#/era-electron');
 
+const {
+  sys_get_chara_info,
+} = require('#/system/chara/sys-calc-characteristic');
 const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
 const {
   get_bust_size,
@@ -31,11 +34,7 @@ const {
 } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
 const title_desc = require('#/data/desc/title-desc.json');
-const {
-  chara_desc,
-  chara_full_desc,
-  sex_title,
-} = require('#/data/ero/status-const');
+const { sex_title } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
@@ -228,7 +227,6 @@ async function print_rec_page() {
         name = era.get(`static:${selected}:name`),
         body_hair_color = era.get(`cstr:${selected}:毛色`),
         hair_color = era.get(`cstr:${selected}:发色`),
-        characteristic = era.get(`cflag:${selected}:气性`),
         sex_code = era.get(`cflag:${selected}:性别`),
         talent_list = [];
       let hair = era.get(`cstr:${selected}:呆毛`);
@@ -294,10 +292,7 @@ async function print_rec_page() {
                 content: `${body_hair_color}毛`,
               },
               ' ',
-              {
-                content: chara_desc[characteristic + 3],
-                title: `[${chara_desc[characteristic + 3]}]：${chara_full_desc[characteristic + 3]}。`,
-              },
+              sys_get_chara_info(era.get(`cflag:${selected}:气性`)),
               ' ',
               sex_title[sex_code],
             ],

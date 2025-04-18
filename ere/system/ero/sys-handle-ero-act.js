@@ -114,8 +114,16 @@ async function next_turn(shown) {
   await check_orgasm(
     shown,
     ...chara_list_in_train.map((chara_id) => {
-      era.get(`tcvar:${chara_id}:高潮抑制`) &&
+      const inmon = CharaInmon.get(chara_id);
+      if (era.get(`tcvar:${chara_id}:高潮抑制`) > 0) {
         era.add(`tcvar:${chara_id}:高潮抑制`, -1);
+      } else if (inmon.check(plugin_enum.org_c1)) {
+        era.set(`tcvar:${chara_id}:高潮抑制`, 1);
+      } else if (inmon.check(plugin_enum.org_c2)) {
+        era.set(`tcvar:${chara_id}:高潮抑制`, 2);
+      } else if (inmon.check(plugin_enum.org_c3)) {
+        era.set(`tcvar:${chara_id}:高潮抑制`, 4);
+      }
       return chara_id;
     }),
   );
@@ -236,7 +244,7 @@ async function sys_handle_ero_act(command, filters, shown = true) {
       if (!era.get('tflag:主导权')) {
         era.set('tflag:前回行动', command);
         era.set('tflag:前回助手', supporter);
-        if (!CharaInmon.get(cur_lover).check(plugin_enum.tuna)) {
+        if (!CharaInmon.get(cur_lover).has(plugin_enum.tuna)) {
           await sys_auto_react(shown);
         }
       } else {

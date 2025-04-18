@@ -2,7 +2,7 @@ const InmonPlugin = require('#/data/ero/inmon-plugin');
 
 module.exports = new InmonPlugin(
   60114,
-  '唯唯诺诺',
+  '普普通通',
   601,
   2,
   4,

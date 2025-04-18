@@ -30,6 +30,16 @@ class CharaInmon {
       era.get(`equip:${id}:淫纹插件`) || era.set(`equip:${id}:淫纹插件`, {});
   }
 
+  get count() {
+    return Object.keys(this.obj).length;
+  }
+
+  get size() {
+    return Object.keys(this.obj)
+      .filter((e) => e[1] > 0)
+      .reduce((p, c) => p + inmon_plugin_dict[c].size, 0);
+  }
+
   /** @returns {number} */
   get slave() {
     return era.get(`equip:${this.id}:淫纹奴役`);
@@ -40,17 +50,19 @@ class CharaInmon {
     era.set(`equip:${this.id}:淫纹奴役`, v);
   }
 
-  get size() {
-    return Object.keys(this.obj)
-      .filter((e) => e[1] > 0)
-      .reduce((p, c) => p + inmon_plugin_dict[c].size, 0);
+  /**
+   * @param {number} plugin_id
+   * @returns {boolean}
+   */
+  check(plugin_id) {
+    return this.obj[plugin_id] !== undefined;
   }
 
   /**
    * @param {number} plugin_id
    * @returns {boolean}
    */
-  check(plugin_id) {
+  has(plugin_id) {
     return this.obj[plugin_id] > 0;
   }
 
