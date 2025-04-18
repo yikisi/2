@@ -18,7 +18,7 @@ const {
 
 const { get_custom_ero } = require('#/event/ero/ero-factory');
 
-const get_color = require('#/utils/gradient-color');
+const get_gradient_color = require('#/utils/gradient-color');
 
 const { mark_colors } = require('#/data/const.json');
 const { mark_enum } = require('#/data/ero/mark-const');
@@ -254,12 +254,20 @@ module.exports = async (
         ' 的 ',
         {
           content: `欢愉刻印 Lv.${pleasure_level}`,
-          color: get_color(undefined, mark_colors['欢愉'], pleasure_level / 3),
+          color: get_gradient_color(
+            undefined,
+            mark_colors['欢愉'],
+            pleasure_level / 3,
+          ),
         },
         ` 转换为 `,
         {
           content: `淫纹 Lv.${pleasure_level}`,
-          color: get_color(undefined, mark_colors['淫纹'], pleasure_level / 3),
+          color: get_gradient_color(
+            undefined,
+            mark_colors['淫纹'],
+            pleasure_level / 3,
+          ),
         },
         ` 吗？花费：`,
       ]);
@@ -273,12 +281,20 @@ module.exports = async (
         ' 的 ',
         {
           content: `淫纹 Lv.${sex_level}`,
-          color: get_color(undefined, mark_colors['淫纹'], sex_level / 3),
+          color: get_gradient_color(
+            undefined,
+            mark_colors['淫纹'],
+            sex_level / 3,
+          ),
         },
         ` 升级为 `,
         {
           content: `Lv.${sex_level + 1}`,
-          color: get_color(undefined, mark_colors['淫纹'], (sex_level + 1) / 3),
+          color: get_gradient_color(
+            undefined,
+            mark_colors['淫纹'],
+            (sex_level + 1) / 3,
+          ),
         },
         ` 吗？花费：`,
       ]);
@@ -301,9 +317,11 @@ module.exports = async (
           sex_level = era.set(`mark:${chara_id}:淫纹`, pleasure_level);
           total_delta.pleasure_delta = pleasure_level;
           total_delta.sex_delta = pleasure_level;
+          sys_change_fame(-100 * [1, 3, 6][sex_level - 1]);
         } else {
           sex_level = era.add(`mark:${chara_id}:淫纹`, 1);
           total_delta.sex_delta = (total_delta.sex_delta || 0) + 1;
+          sys_change_fame(-100 * sex_level);
         }
         await get_custom_ero(chara_id).get_mark(
           sex_level,
@@ -311,7 +329,6 @@ module.exports = async (
           ret === 6,
         );
         era.add(`juel:${chara_id}:顺从`, -sex_mark_price);
-        sys_change_fame(-100 * sex_level);
       }
     }
   } else {

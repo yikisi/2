@@ -137,7 +137,7 @@ module.exports = async (_id) => {
         type: 'text',
       });
     });
-    if (chara_id) {
+    if (chara_id > 0) {
       era.printMultiColumns(buffer, { horizontalAlign: 'space-between' });
       buffer = [];
       new Array(4).fill(0).forEach((_, i) => {

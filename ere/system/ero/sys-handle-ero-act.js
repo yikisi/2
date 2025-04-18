@@ -36,6 +36,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaInmon = require('#/data/ero/chara-inmon');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { tequip_parts } = require('#/data/ero/item-const');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
@@ -47,13 +48,13 @@ const {
   part_touch,
   pleasure_list,
 } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
 
-let shown = true;
-
-async function next_turn() {
+/** @param {boolean} shown */
+async function next_turn(shown) {
   era.add('tflag:回合', 1);
   const chara_list_in_train = get_characters_in_train();
   for (const chara_id of chara_list_in_train) {
@@ -155,11 +156,10 @@ async function next_turn() {
 /**
  * @param {number} command
  * @param {boolean[]} filters
- * @param {boolean} [_shown]
+ * @param {boolean} [shown=true]
  * @returns {Promise<boolean>}
  */
-async function sys_handle_ero_act(command, filters, _shown) {
-  shown = _shown !== false;
+async function sys_handle_ero_act(command, filters, shown = true) {
   const cur_lover = era.get('tflag:当前对手');
   const chara = get_chara_talk(cur_lover);
   const supporter = era.get('tflag:当前助手');
@@ -236,13 +236,15 @@ async function sys_handle_ero_act(command, filters, _shown) {
       if (!era.get('tflag:主导权')) {
         era.set('tflag:前回行动', command);
         era.set('tflag:前回助手', supporter);
-        await sys_auto_react(shown);
+        if (!CharaInmon.get(cur_lover).check(plugin_enum.tuna)) {
+          await sys_auto_react(shown);
+        }
       } else {
         era.set('tflag:对手行动', command);
         await sys_auto_rape(shown);
       }
       era.set('tflag:前回对手', cur_lover);
-      await next_turn();
+      await next_turn(shown);
     }
   } else if (command === 900) {
     let option_flag = 1;
@@ -293,7 +295,7 @@ async function sys_handle_ero_act(command, filters, _shown) {
       era.println();
       await sys_auto_rape(shown);
       era.set('tflag:前回对手', era.get('tflag:主导权'));
-      await next_turn();
+      await next_turn(shown);
     } else {
       return false;
     }

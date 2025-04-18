@@ -19,4 +19,9 @@ slavery_titles[slavery_enum.assistant] = '陪床用母马';
 
 const mark_enum = { pleasure: 0, ero: 1, meek: 2, pain: 3, shame: 4, hate: 5 };
 
-module.exports = { slavery_enum, slavery_titles, mark_enum };
+module.exports = {
+  inmon_limit: [0, 6, 16, 36],
+  mark_enum,
+  slavery_enum,
+  slavery_titles,
+};

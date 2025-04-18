@@ -23,6 +23,7 @@ const { action_type_enum } = require('#/data/basement-const');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const { trainer_salary } = require('#/data/const.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const BasementOwners = require('#/data/event/basement-owners');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
@@ -117,6 +118,7 @@ module.exports = async () => {
               ),
             ).load_talk();
           }
+          CharaInmon.clean();
           if (await era.loadData(ret)) {
             flag_load_game = false;
             sys_load_game();
