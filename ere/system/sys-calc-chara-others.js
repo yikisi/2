@@ -93,13 +93,12 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
       _val = Math.floor(
         Math.max(
           (_val *
-            (10 + era.get(`talent:${target}:好感`)) *
             (100 +
               era.get('flag:好感上升加成') -
               25 * sys_check_remote(target) -
               50 * (era.get(`status:${target}:讨厌药`) > 0) +
               get_custom_mec(target).get_relation_buff())) /
-            1000 +
+            100 +
             3 * era.get(`talent:${target}:自信程度`),
           1,
         ),
