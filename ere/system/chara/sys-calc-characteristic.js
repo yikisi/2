@@ -11,7 +11,7 @@ const { chara_desc, chara_full_desc } = require('#/data/ero/status-const');
 function get_chara(id) {
   const inmon = CharaInmon.get(id);
   for (let i = 0; i < 7; ++i) {
-    if (inmon.check(plugin_enum[`cha_${i}`])) {
+    if (inmon.on(plugin_enum[`cha_${i}`])) {
       return i - 3;
     }
   }

@@ -61,31 +61,31 @@ function add_palam(id, part, _attack) {
     }
   }
   const chara_inmon = CharaInmon.get(id);
-  if (chara_inmon.has(plugin_enum.al_u1)) {
+  if (chara_inmon.on(plugin_enum.al_u1)) {
     coff += 0.5;
-  } else if (chara_inmon.has(plugin_enum.al_u2)) {
+  } else if (chara_inmon.on(plugin_enum.al_u2)) {
     coff += 1;
-  } else if (chara_inmon.has(plugin_enum.al_u3)) {
+  } else if (chara_inmon.on(plugin_enum.al_u3)) {
     coff += 2;
-  } else if (chara_inmon.has(plugin_enum.al_d1)) {
+  } else if (chara_inmon.on(plugin_enum.al_d1)) {
     coff -= 0.1;
-  } else if (chara_inmon.has(plugin_enum.al_d2)) {
+  } else if (chara_inmon.on(plugin_enum.al_d2)) {
     coff -= 0.3;
-  } else if (chara_inmon.has(plugin_enum.al_d3)) {
+  } else if (chara_inmon.on(plugin_enum.al_d3)) {
     coff -= 0.7;
   }
   const plug_key = part_enum.keys[part].substring(0, 2);
-  if (chara_inmon.has(plugin_enum[`${plug_key}_u1`])) {
+  if (chara_inmon.on(plugin_enum[`${plug_key}_u1`])) {
     coff += 1;
-  } else if (chara_inmon.has(plugin_enum[`${plug_key}_u2`])) {
+  } else if (chara_inmon.on(plugin_enum[`${plug_key}_u2`])) {
     coff += 2;
-  } else if (chara_inmon.has(plugin_enum[`${plug_key}_u3`])) {
+  } else if (chara_inmon.on(plugin_enum[`${plug_key}_u3`])) {
     coff += 4;
-  } else if (chara_inmon.has(plugin_enum[`${plug_key}_d1`])) {
+  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d1`])) {
     coff -= 0.2;
-  } else if (chara_inmon.has(plugin_enum[`${plug_key}_d2`])) {
+  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d2`])) {
     coff -= 0.4;
-  } else if (chara_inmon.has(plugin_enum[`${plug_key}_d3`])) {
+  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d3`])) {
     coff -= 0.8;
   }
   attack *= coff;

@@ -1,5 +1,6 @@
-const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
 const era = require('#/era-electron');
+
+const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
 
 /** @type {Record<string,CharaInmon>} */
 const plugins = {};
@@ -54,7 +55,7 @@ class CharaInmon {
    * @param {number} plugin_id
    * @returns {boolean}
    */
-  check(plugin_id) {
+  has(plugin_id) {
     return this.obj[plugin_id] !== undefined;
   }
 
@@ -62,7 +63,7 @@ class CharaInmon {
    * @param {number} plugin_id
    * @returns {boolean}
    */
-  has(plugin_id) {
+  on(plugin_id) {
     return this.obj[plugin_id] > 0;
   }
 

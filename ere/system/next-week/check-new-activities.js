@@ -522,9 +522,9 @@ async function check_new_activities(cur_round, in_team_list) {
     new MyEduMarks().we_are_one = 0;
   }
 
-  // 淫纹设置：恢复最大值
+  // 淫纹「忠贞不二」：恢复最大值
   in_team_list.forEach((e) => {
-    if (CharaInmon.get(e).check(plugin_enum.rel_lock)) {
+    if (CharaInmon.get(e).on(plugin_enum.rel_lock)) {
       era.set(`relation:${e}:0`, 600);
     }
   });

@@ -95,15 +95,13 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
   }
   if (val > 0) {
     coff +=
-      100 * inmon.check(plugin_enum.rel_gu) -
-      50 * inmon.check(plugin_enum.rel_gd);
+      100 * inmon.on(plugin_enum.rel_gu) - 50 * inmon.on(plugin_enum.rel_gd);
     if (era.get(`status:${target}:生日`) > 0) {
       coff *= 2;
     }
   } else if (val < 0) {
     coff +=
-      100 * inmon.check(plugin_enum.rel_lu) -
-      50 * inmon.check(plugin_enum.rel_ld);
+      100 * inmon.on(plugin_enum.rel_lu) - 50 * inmon.on(plugin_enum.rel_ld);
   }
   if (!aim) {
     if (val > 0) {
@@ -227,9 +225,9 @@ function love_uma(chara_id, val, shown = true) {
     era.get('flag:爱慕上升加成') +
     50 * era.get(`status:${chara_id}:爱意克制`) +
     get_custom_mec(chara_id).get_love_buff() +
-    100 * inmon.check(plugin_enum.love_up) -
-    50 * inmon.check(plugin_enum.love_d1) -
-    100 * inmon.check(plugin_enum.love_d2);
+    100 * inmon.on(plugin_enum.love_up) -
+    50 * inmon.on(plugin_enum.love_d1) -
+    100 * inmon.on(plugin_enum.love_d2);
   val = Math.floor((val * coff) / 100);
   const force_limit = get_custom_mec(chara_id).get_love_limit(),
     border = force_limit || Math.max(get_love_border(chara_id), 50),
