@@ -204,13 +204,14 @@ async function sys_next_week() {
     cur_week = era.get('flag:当前周');
   cur_week++;
   const cur_round = era.add('flag:当前回合数', 1),
-    salary =
-      !your_race *
-      trainer_salary[get_trainer_title().substring(0, 2)] *
-      (1 + (cur_month === 12));
+    base_salary = trainer_salary[get_trainer_title().substring(0, 2)],
+    salary = !your_race * base_salary * (1 + (cur_month === 12));
   const billings = sys_get_billings()
     .map((e, i) => {
-      if (e.timer > 0) {
+      if (e.timer < 0) {
+        e.repay = base_salary / 4;
+      }
+      if (e.timer !== 0) {
         const money = sys_change_money(e.repay, -1);
         if (i > 0 && e.creditor === 0 && money > 0) {
           // 人类训练员有工资拿；马娘训练员？自己跑比赛去！
@@ -220,11 +221,13 @@ async function sys_next_week() {
             ' 马币',
           ]);
         }
-        e.timer--;
+        if (e.timer > 0) {
+          e.timer--;
+        }
       }
       return e;
     })
-    .filter((e, i) => i === 0 || e.timer > 0);
+    .filter((e, i) => i === 0 || e.timer !== 0);
   if (cur_week === 4) {
     billings.push({
       creditor: cur_month === 12 ? -1 : 0,

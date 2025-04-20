@@ -6,7 +6,7 @@ module.exports = new InmonPlugin(
   501,
   3,
   32,
-  '每隔四回合允许高潮一回合',
+  '每隔四回合允许高潮一回合。',
   (args) => args.id > 0,
   1780,
 );

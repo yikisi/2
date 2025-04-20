@@ -6,7 +6,7 @@ module.exports = new InmonPlugin(
   101,
   1,
   2,
-  '口腔快感获取-20%',
+  '口腔快感获取-20%。',
   () => true,
   160,
 );

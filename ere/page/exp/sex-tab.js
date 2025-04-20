@@ -84,7 +84,7 @@ module.exports = {
                     return {
                       content: `[${p.name}]`,
                       color: get_gradient_color('', sex_color, p.level / 3),
-                      title: `[${p.name}]：${p.description}。`,
+                      title: `[${p.name}]：${p.description}`,
                     };
                   }),
                   type: 'text',

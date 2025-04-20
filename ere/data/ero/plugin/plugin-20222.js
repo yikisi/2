@@ -6,7 +6,7 @@ module.exports = new InmonPlugin(
   202,
   2,
   6,
-  '受虐快感获取-40%',
+  '受虐快感获取-40%。',
   () => true,
   420,
 );

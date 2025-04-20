@@ -6,7 +6,7 @@ module.exports = new InmonPlugin(
   702,
   3,
   30,
-  '暂无效果',
+  '暂无效果。',
   (args) => args.id > 0,
   1680,
 );

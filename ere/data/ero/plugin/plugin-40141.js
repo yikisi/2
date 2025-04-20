@@ -6,7 +6,7 @@ module.exports = new InmonPlugin(
   401,
   2,
   10,
-  '对所有角色的好感度损失+100%',
+  '对所有角色的好感度损失+100%。',
   (args) => args.id > 0,
   620,
 );

@@ -6,7 +6,7 @@ module.exports = new InmonPlugin(
   601,
   2,
   4,
-  '气性转换为「热血」',
+  '气性转换为「热血」。',
   (args) => args.id > 0 && args.chara !== undefined && args.chara !== 3,
   320,
 );

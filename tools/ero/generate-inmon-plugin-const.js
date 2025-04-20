@@ -20,7 +20,7 @@ module.exports = new InmonPlugin(
   ${plug[1]},
   ${plug[3]},
   ${plug[4]},
-  '${plug[5]}',
+  '${plug[5].endsWith('。') ? plug[5] : plug[5] + '。'}',
   ${plug[6] ? `(args)=>${plug[6]}` : '() => true'},
   ${price * 50 + level * 60},
 );\n`;

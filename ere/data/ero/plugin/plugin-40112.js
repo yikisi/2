@@ -6,7 +6,7 @@ module.exports = new InmonPlugin(
   401,
   3,
   20,
-  '每周结束时好感度恢复最大值',
+  '每周结束时好感度恢复最大值。',
   (args) => args.id > 0,
   1180,
 );

@@ -6,6 +6,7 @@ const {
   begin_and_init_ero,
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
+const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
@@ -22,15 +23,18 @@ const get_gradient_color = require('#/utils/gradient-color');
 
 const { buff_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
+const { trainer_salary } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const {
   inmon_limit,
   mark_enum,
   slavery_descriptions,
+  slavery_enum,
   slavery_options,
   slavery_titles,
 } = require('#/data/ero/mark-const');
 const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
+const { get_trainer_title } = require('#/data/info-generator');
 
 /**
  * @param {CharaTalk} chara
@@ -294,7 +298,7 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
     ]);
     const is_confirmed = await print_price_and_confirm(
       chara.id,
-      JSON.parse(`{"${palam_name}":"${price_dict[ret]}"}`),
+      JSON.parse(`{"${palam_name}":${price_dict[ret]}}`),
       juel_dict,
     );
     if (is_confirmed) {
@@ -332,7 +336,7 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
     ]);
     const is_confirmed = await print_price_and_confirm(
       chara.id,
-      JSON.parse(`{"顺从":"${price_dict[ret]}"}`),
+      JSON.parse(`{"顺从":${price_dict[ret]}}`),
       juel_dict,
     );
     if (is_confirmed) {
@@ -426,7 +430,7 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
     era.drawLine({ content: '选择新淫纹词条' });
     era.printMultiColumns([
       { config: { width: 3 }, content: '词条', type: 'text' },
-      { config: { width: 3 }, content: '称号', type: 'text' },
+      { config: { width: 3 }, content: '别称', type: 'text' },
       { config: { width: 18 }, content: '效果', type: 'text' },
     ]);
     const disabled = juel_dict['顺从'] < 1000;
@@ -456,11 +460,11 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
       { isBr: true },
       '** 取消词条无任何花销',
     ]);
-    const ret = await era.input();
+    let ret = await era.input();
     if (ret < 99) {
       if (ret === 0) {
-        if (await select_yes_or_no('确定要取消词条吗？')) {
-          inmon.slave = 0;
+        if (!(await select_yes_or_no('确定要取消词条吗？'))) {
+          ret = -1;
         }
       } else {
         era.print([
@@ -481,8 +485,26 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
           )
         ) {
           era.add(`juel:${chara.id}:顺从`, -1000);
-          inmon.slave = ret;
+        } else {
+          ret = -1;
         }
+      }
+      if (ret >= 0) {
+        if (slave === slavery_enum.worker) {
+          era.set(
+            'flag:账单',
+            sys_get_billings().filter(
+              (e) => e.creditor === chara.id && e.timer === -1,
+            ),
+          );
+        } else if (ret === slavery_enum.worker) {
+          sys_get_billings().push({
+            creditor: chara.id,
+            repay: trainer_salary[get_trainer_title().substring(0, 2)] / 4,
+            timer: -1,
+          });
+        }
+        inmon.slave = ret;
       }
     }
   } else if (ret < 100) {
