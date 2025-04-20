@@ -76,8 +76,8 @@ class CustomizedRecruit {
 
   /** @protected */
   async recruit_end() {
+    era.println();
     await era.printAndWait([
-      { isBr: true },
       get_chara_talk(this.id).get_colored_name(),
       ' 加入了队伍！',
     ]);
