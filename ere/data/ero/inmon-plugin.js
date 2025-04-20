@@ -1,3 +1,7 @@
+const get_gradient_color = require('#/utils/gradient-color');
+
+const base_color = require('#/data/const.json').mark_colors['淫纹'];
+
 class InmonPlugin {
   id;
   name;
@@ -28,6 +32,18 @@ class InmonPlugin {
     this.description = description;
     this.condition = condition;
     this.price = price;
+  }
+
+  get title() {
+    return `【${this.name}】（等级 ${this.level} · ${this.size} 插槽）\n${this.description}`;
+  }
+
+  get colored_name() {
+    return {
+      color: get_gradient_color('', base_color, this.level / 3),
+      content: this.name,
+      title: this.title,
+    };
   }
 }
 

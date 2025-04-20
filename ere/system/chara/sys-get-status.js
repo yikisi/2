@@ -8,7 +8,11 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors, sex_colors } = require('#/data/color-const');
 const status_desc = require('#/data/desc/status-desc.json');
-const { slavery_titles } = require('#/data/ero/mark-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
+const {
+  slavery_descriptions,
+  slavery_titles,
+} = require('#/data/ero/mark-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const DarleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-340');
@@ -28,16 +32,19 @@ function sys_get_status(chara_id) {
       era.get(`cflag:${chara_id}:种族`) &&
       (chara_id === 0 || era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48);
   if (era.get(`mark:${chara_id}:淫纹`) === 3) {
-    const sex_equip = era.get(`equip:${chara_id}:淫纹奴役`),
+    const sex_equip = CharaInmon.get(chara_id).slave,
       obj = {
         color: buff_colors[2],
         content: slavery_titles[sex_equip],
         fontWeight: 'bold',
       };
     if (chara_id === 0) {
-      obj.title = sex_equip
-        ? '现役孕袋，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱、生下孩子时获得声望，子代参赛声望奖励+100%。'
-        : '现役性奴，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱时获得声望。';
+      obj.title =
+        sex_equip > 0
+          ? '现役孕袋，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱、生下孩子时获得声望，子代参赛声望奖励+100%。'
+          : '现役性奴，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱时获得声望。';
+    } else {
+      obj.title = sex_equip > 0 ? slavery_descriptions[sex_equip] : undefined;
     }
     status_list.push(obj);
   }

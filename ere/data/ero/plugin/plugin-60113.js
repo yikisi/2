@@ -7,6 +7,6 @@ module.exports = new InmonPlugin(
   2,
   4,
   '气性转换为「认真」',
-  (args) => args.chara !== -1,
+  (args) => args.chara !== undefined && args.chara !== -1,
   320,
 );

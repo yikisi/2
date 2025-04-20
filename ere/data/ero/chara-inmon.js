@@ -6,7 +6,7 @@ const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
 const plugins = {};
 
 class CharaInmon {
-  /** @type {Record<string,any>} */
+  /** @type {Record<string,0|1>} */
   obj;
 
   /**
@@ -35,10 +35,14 @@ class CharaInmon {
     return Object.keys(this.obj).length;
   }
 
+  get raw() {
+    return this.obj;
+  }
+
   get size() {
-    return Object.keys(this.obj)
+    return Object.entries(this.obj)
       .filter((e) => e[1] > 0)
-      .reduce((p, c) => p + inmon_plugin_dict[c].size, 0);
+      .reduce((p, c) => p + inmon_plugin_dict[c[0]].size, 0);
   }
 
   /** @returns {number} */
@@ -49,6 +53,13 @@ class CharaInmon {
   /** @param {number} v */
   set slave(v) {
     era.set(`equip:${this.id}:淫纹奴役`, v);
+  }
+
+  get to_list() {
+    return Object.entries(this.obj)
+      .filter((e) => e[1] > 0)
+      .map(([p]) => Number(p))
+      .sort();
   }
 
   /**

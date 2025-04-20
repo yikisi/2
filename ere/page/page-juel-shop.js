@@ -98,18 +98,12 @@ module.exports = async (_id) => {
   };
   while (page_pointer.flag) {
     await era.clear();
-    era.printInColRows({
-      columns: [
-        {
-          config: { width: 9 },
-          content: `${era.get('flag:当前年')} 年 ${era.get(
-            'flag:当前月',
-          )} 月 第 ${era.get('flag:当前周')} 周`,
-          type: 'text',
-        },
-      ],
-      config: { width: 16 },
-    });
+    era.drawLine();
+    era.print(
+      `${era.get('flag:当前年')} 年 ${era.get(
+        'flag:当前月',
+      )} 月 第 ${era.get('flag:当前周')} 周`,
+    );
     era.drawLine({
       content: `${display_name} 的 因子`,
     });

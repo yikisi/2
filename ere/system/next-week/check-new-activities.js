@@ -135,7 +135,7 @@ async function check_new_activities(cur_round, in_team_list) {
       no_preg:
         check_pregnant_unprotect(id) &&
         era.get(`cflag:${id}:妊娠回合计时`) <
-          (era.get(`equip:${id}:淫纹奴役`) === slavery_enum.pregnant ? 30 : 33),
+          (CharaInmon.get(id).slave === slavery_enum.pregnant ? 30 : 33),
     };
   });
   const event_weeks = (cur_round - 1) % 48 || 48,

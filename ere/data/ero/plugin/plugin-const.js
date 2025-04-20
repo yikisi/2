@@ -80,6 +80,7 @@ plugins[60115] = require('#/data/ero/plugin/plugin-60115');
 plugins[60116] = require('#/data/ero/plugin/plugin-60116');
 plugins[60117] = require('#/data/ero/plugin/plugin-60117');
 plugins[70111] = require('#/data/ero/plugin/plugin-70111');
+plugins[70211] = require('#/data/ero/plugin/plugin-70211');
 
 module.exports = {
   inmon_plugin_dict: plugins,
@@ -242,5 +243,7 @@ module.exports = {
     cha_6: 60117,
     // 金枪鱼: 调教时不再做出反应
     tuna: 70111,
+    // 常识转换: 暂无效果
+    slave: 70211,
   },
 };

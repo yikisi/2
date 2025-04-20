@@ -7,6 +7,6 @@ module.exports = new InmonPlugin(
   2,
   4,
   '气性转换为「普通」',
-  (args) => args.chara !== 0,
+  (args) => args.chara !== undefined && args.chara !== 0,
   320,
 );

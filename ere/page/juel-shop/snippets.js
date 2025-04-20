@@ -31,35 +31,28 @@ module.exports = {
    * @param {number} chara_id
    * @param {string} mark_name
    * @param {number} _level
-   * @param {boolean} [first]
+   * @returns {TextObject}
    */
-  get_mark_cols(chara_id, mark_name, _level, first) {
+  get_mark_cols(chara_id, mark_name, _level) {
     const level = Number(_level) || era.get(`mark:${chara_id}:${mark_name}`);
-    return [
-      {
-        config: {
-          align: 'center',
-          color: mark_colors[mark_name],
-          width: 2,
-          offset: Number(!first),
+    return {
+      config: {
+        align: 'center',
+        color: mark_colors[mark_name],
+        width: 4,
+      },
+      content: [
+        `${mark_name} Lv.${level} `,
+        {
+          content: new Array(level).fill('★').join(''),
+          color: get_color(undefined, mark_colors[mark_name], level / 3),
         },
-        content: `${mark_name} Lv.${level}`,
-        type: 'text',
-      },
-      {
-        config: { align: 'center', width: 2 },
-        content: [
-          {
-            content: new Array(level).fill('★').join(''),
-            color: get_color(undefined, mark_colors[mark_name], level / 3),
-          },
-          {
-            content: new Array(3 - level).fill('☆').join(''),
-          },
-        ],
-        type: 'text',
-      },
-    ];
+        {
+          content: new Array(3 - level).fill('☆').join(''),
+        },
+      ],
+      type: 'text',
+    };
   },
   /**
    * @param {number} chara_id

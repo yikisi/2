@@ -35,6 +35,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { money_color } = require('#/data/color-const');
 const { trainer_salary } = require('#/data/const.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const {
   baby_limit,
@@ -332,7 +333,7 @@ async function sys_next_week() {
     }
 
     const is_pregnant_slave =
-        era.get(`equip:${chara_id}:淫纹奴役`) === slavery_enum.pregnant,
+        CharaInmon.get(chara_id).slave === slavery_enum.pregnant,
       is_always_special = is_pregnant_slave;
     let pregnant_stage = era.get(`cflag:${chara_id}:妊娠阶段`);
     const life_marks = LifeEventMarks.get_marks(chara_id);
