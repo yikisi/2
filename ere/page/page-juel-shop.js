@@ -88,10 +88,6 @@ module.exports = async (_id) => {
   const chara_sex = era.get(`cflag:${chara_id}:性别`),
     chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
-  let display_name = chara.name;
-  if (chara.name !== chara.actual_name) {
-    display_name += ` (${chara.actual_name})`;
-  }
   const page_pointer = {
     flag: true,
     tab: 0,
@@ -105,7 +101,7 @@ module.exports = async (_id) => {
       )} 月 第 ${era.get('flag:当前周')} 周`,
     );
     era.drawLine({
-      content: `${display_name} 的 因子`,
+      content: `${chara.get_full_name()} 的 因子`,
     });
     let buffer = [];
     const juel_dict = {},
@@ -179,7 +175,7 @@ module.exports = async (_id) => {
     era.printMultiColumns(buffer, { horizontalAlign: 'space-between' });
     if (page_pointer.tab === 0) {
       era.drawLine({
-        content: `${display_name} 的 能力`,
+        content: `${chara.get_full_name()} 的 能力`,
       });
       buffer = [];
       const skill_dict = {};
@@ -321,7 +317,7 @@ module.exports = async (_id) => {
       }
     } else if (page_pointer.tab === 1) {
       era.drawLine({
-        content: `${display_name} 的 特性`,
+        content: `${chara.get_full_name()} 的 特性`,
       });
       const talent_dict = { slave_run: 0 };
       new Array(7).fill(0).forEach((_, i) => {
@@ -684,14 +680,7 @@ module.exports = async (_id) => {
         default_handler(ret, page_pointer);
       }
     } else if (page_pointer.tab === 2) {
-      await print_mark_tab(
-        chara_id,
-        chara,
-        display_name,
-        juel_dict,
-        total_delta,
-        page_pointer,
-      );
+      await print_mark_tab(chara, juel_dict, total_delta, page_pointer);
     } else {
       era.drawLine({ content: '采补之术' });
       era.printMultiColumns(

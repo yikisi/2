@@ -7,6 +7,6 @@ module.exports = new InmonPlugin(
   2,
   4,
   '气性转换为「弱气」',
-  (args) => args.chara !== undefined && args.chara !== -3,
+  (args) => args.id > 0 && args.chara !== undefined && args.chara !== -3,
   320,
 );

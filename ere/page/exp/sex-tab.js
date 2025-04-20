@@ -9,9 +9,12 @@ const {
 const CharaTalk = require('#/utils/chara-talk');
 const get_gradient_color = require('#/utils/gradient-color');
 
+const sex_color = require('#/data/const.json').mark_colors['淫纹'];
 const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { palam2juel } = require('#/data/ero/orgasm-const');
+const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
 const {
   abl_desc,
   growth_info,
@@ -65,6 +68,29 @@ module.exports = {
     } else if (!chara.id || flags.show_exp) {
       const in_train = era.get(`ex:${chara.id}:TotalEX`) !== undefined;
       if (in_train) {
+        const plugin_list = CharaInmon.get(chara.id).to_list;
+        const inmon_info =
+          plugin_list.length > 0
+            ? [
+                {
+                  config: { width: 2 },
+                  content: '淫纹',
+                  type: 'text',
+                },
+                {
+                  config: { width: 22 },
+                  content: plugin_list.map((e) => {
+                    const p = inmon_plugin_dict[e];
+                    return {
+                      content: `[${p.name}]`,
+                      color: get_gradient_color('', sex_color, p.level / 3),
+                      title: `[${p.name}]：${p.description}。`,
+                    };
+                  }),
+                  type: 'text',
+                },
+              ]
+            : [];
         sex_info_list.push(
           {
             config: { content: '身体尺寸', position: 'left' },
@@ -116,6 +142,7 @@ module.exports = {
             content: get_xp(chara.id),
             type: 'text',
           },
+          ...inmon_info,
         );
       } else {
         const sex_count = era.get(`exp:${chara.id}:性爱次数`),

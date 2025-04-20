@@ -7,6 +7,6 @@ module.exports = new InmonPlugin(
   2,
   10,
   '对所有角色的好感度获取+100%',
-  () => true,
+  (args) => args.id > 0,
   620,
 );

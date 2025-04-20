@@ -7,6 +7,6 @@ module.exports = new InmonPlugin(
   1,
   2,
   '调教时不再做出反应',
-  () => true,
+  (args) => args.id > 0,
   160,
 );
