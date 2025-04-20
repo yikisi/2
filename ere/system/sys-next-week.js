@@ -6,6 +6,7 @@ const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
+const check_inmon = require('#/system/next-week/check-inmon');
 const check_new_activities = require('#/system/next-week/check-new-activities');
 const randomly_interact = require('#/system/next-week/randomly-interact');
 const reset_status = require('#/system/next-week/reset-status');
@@ -684,6 +685,9 @@ async function sys_next_week() {
     }
   }
   await check_new_activities(cur_round, in_team_list);
+  await check_inmon(in_team_list);
+
+  // 床伴
   in_team_list = in_team_list.filter(
     (e) =>
       era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
@@ -691,7 +695,6 @@ async function sys_next_week() {
       (get_custom_mec(e).is_able_to_be_selected() ||
         (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) > 0),
   );
-
   if (!era.get('flag:当前互动角色') && in_team_list.length) {
     temp = era.get('flag:床伴');
     era.set(

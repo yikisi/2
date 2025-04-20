@@ -434,26 +434,29 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
       { config: { width: 18 }, content: '效果', type: 'text' },
     ]);
     const disabled = juel_dict['顺从'] < 1000;
-    slavery_options.forEach((e, i) => {
-      era.printMultiColumns([
-        {
-          accelerator: i,
-          config: { disabled: slave === i || (i > 0 && disabled), width: 3 },
-          content: slavery_options[i],
-          type: 'button',
-        },
-        {
-          config: { width: 3 },
-          content: slavery_titles[i],
-          type: 'text',
-        },
-        {
-          config: { width: 18 },
-          content: slavery_descriptions[i],
-          type: 'text',
-        },
-      ]);
-    });
+    const columns = slavery_options.map((e, i) => [
+      {
+        accelerator: i,
+        config: { disabled: slave === i || (i > 0 && disabled), width: 3 },
+        content: slavery_options[i],
+        type: 'button',
+      },
+      {
+        config: { width: 3 },
+        content: slavery_titles[i],
+        type: 'text',
+      },
+      {
+        config: { width: 18 },
+        content: slavery_descriptions[i],
+        type: 'text',
+      },
+    ]);
+    columns[slavery_enum.inherit][0].config.disabled ||=
+      era.get(`cflag:${chara.id}:种族`) === 0;
+    columns[slavery_enum.assistant][0].config.disabled ||=
+      era.get('flag:助手') > 0;
+    columns.forEach((e) => era.printMultiColumns(e));
     era.printButton('取消切换', 99);
     era.print([
       '* 切换词条需要 1,000 顺从因子',
@@ -490,19 +493,28 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
         }
       }
       if (ret >= 0) {
-        if (slave === slavery_enum.worker) {
-          era.set(
-            'flag:账单',
-            sys_get_billings().filter(
-              (e) => e.creditor === chara.id && e.timer === -1,
-            ),
-          );
-        } else if (ret === slavery_enum.worker) {
-          sys_get_billings().push({
-            creditor: chara.id,
-            repay: trainer_salary[get_trainer_title().substring(0, 2)] / 4,
-            timer: -1,
-          });
+        switch (slave) {
+          case slavery_enum.worker:
+            era.set(
+              'flag:账单',
+              sys_get_billings().filter(
+                (e) => e.creditor === chara.id && e.timer === -1,
+              ),
+            );
+            break;
+          case slavery_enum.assistant:
+            era.set('flag:助手', 0);
+        }
+        switch (ret) {
+          case slavery_enum.worker:
+            sys_get_billings().push({
+              creditor: chara.id,
+              repay: trainer_salary[get_trainer_title().substring(0, 2)] / 4,
+              timer: -1,
+            });
+            break;
+          case slavery_enum.assistant:
+            era.set('flag:助手', chara.id);
         }
         inmon.slave = ret;
       }

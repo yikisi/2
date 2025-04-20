@@ -33,9 +33,10 @@ slavery_descriptions[slavery_enum.pregnant] =
   '未怀孕时总是处于危险期，怀孕率+100%，怀孕速度+100%。';
 slavery_descriptions[slavery_enum.worker] = '每周提供一定马币。';
 slavery_descriptions[slavery_enum.inherit] = '每周提供一定继承因子。';
-slavery_descriptions[slavery_enum.furniture] = '每周额外回复一部分体力和精力。';
+slavery_descriptions[slavery_enum.furniture] =
+  '作为床伴时阻止所有睡奸和绑架，提高精力和体力恢复。';
 slavery_descriptions[slavery_enum.assistant] =
-  '作为默认助手加入与其他角色的性爱。';
+  '作为默认助手加入与其他角色的性爱。只能设定一个。';
 
 const mark_enum = { pleasure: 0, ero: 1, meek: 2, pain: 3, shame: 4, hate: 5 };
 
