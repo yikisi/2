@@ -615,6 +615,8 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
     if (chara.sex_code === 1) {
       columns[slavery_enum.milk][0].config.disabled = true;
       columns[slavery_enum.milk][0].title = '男性不能上贡乳汁……';
+      columns[slavery_enum.pregnant][0].config.disabled = true;
+      columns[slavery_enum.pregnant][0].title = '男性不能怀孕……';
     } else if (era.get(`talent:${chara.id}:泌乳`) !== 3) {
       columns[slavery_enum.milk][0].config.disabled = true;
       columns[slavery_enum.milk][0].config.title =
