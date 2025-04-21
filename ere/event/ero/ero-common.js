@@ -9,6 +9,7 @@
  */
 const era = require('#/era-electron');
 
+const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -853,7 +854,7 @@ class CustomizedEro {
           ' 的不忠产生了',
           like_betrayed
             ? '情欲'
-            : era.get(`cflag:${this.id}:气性`) >= 0
+            : sys_get_chara(this.id) >= 0
               ? '愤慨'
               : '悲伤',
           '的情绪……',
@@ -876,7 +877,7 @@ class CustomizedEro {
           ' 的不忠产生了',
           like_betrayed
             ? '情欲'
-            : era.get(`cflag:${this.id}:气性`) >= 0
+            : sys_get_chara(this.id) >= 0
               ? '愤慨'
               : '悲伤',
           '的情绪……',

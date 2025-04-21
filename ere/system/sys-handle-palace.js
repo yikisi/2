@@ -126,6 +126,7 @@ function sys_handle_palace(chara_id) {
     ),
     { blue, pink, white } = sys_count_juels(
       chara_id,
+      1,
       attr_list,
       adapt_list,
       aim_count / aim_check.length,

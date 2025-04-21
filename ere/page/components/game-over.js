@@ -16,6 +16,7 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const BasementOwners = require('#/data/event/basement-owners');
@@ -287,7 +288,7 @@ async function game_over(again) {
             sys_add_titles(0, { c: buff_colors[2], n: '万马骑' });
             break;
           case 3:
-            era.set('equip:0:淫纹奴役', slavery_enum.pregnant);
+            CharaInmon.get(0).slave = slavery_enum.pregnant;
             era.set('status:0:发情', 1);
             if (era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.no) {
               era.set('status:0:经期', 0);

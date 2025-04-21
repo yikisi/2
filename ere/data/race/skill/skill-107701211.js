@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛临近终盘时若在队伍前方则提升速度，并在之后最终冲刺时稍微提升加速度',
   10770121,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

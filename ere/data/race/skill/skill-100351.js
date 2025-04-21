@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终弯道之后进行名次争夺，在最终直线位于前方时，涌现出不服输的强烈求胜心，速度加快',
   10035,
   1,
-  UmaSkill.rarity_enum.spe_n_3,
   18,
   340,
   [

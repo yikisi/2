@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最终直线上仍保有余力且处于前列时，更容易保持优势',
   90014,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

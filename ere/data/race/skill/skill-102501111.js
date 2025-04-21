@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘时若位于中间集团之后，回复持久力，并稍微提升速度',
   10250111,
   1,
-  UmaSkill.rarity_enum.evol,
   11,
   633,
   [() => true, () => true],

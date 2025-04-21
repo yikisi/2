@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '擅长顺时针场地，速度和力量大幅提升',
   11190111,
   1,
-  UmaSkill.rarity_enum.evol,
   3,
   508,
   [() => true, () => true],

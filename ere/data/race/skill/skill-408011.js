@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '附近有很多马娘时速度大幅提升',
   40801,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

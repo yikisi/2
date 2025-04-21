@@ -92,7 +92,7 @@ function page_header(enable_race_info) {
     let billings = '月账单：',
       money_change = 0;
     sys_get_billings().forEach((e, i) => {
-      if (e.repay !== 0 && e.timer > 0) {
+      if (e.repay !== 0 && e.timer !== 0) {
         let delta = e.repay;
         if (delta > 0) {
           delta = Math.floor((e.repay * (100 + money_buff)) / 100);
@@ -107,7 +107,11 @@ function page_header(enable_race_info) {
             billings += ' (月工资)';
             break;
           default:
-            billings += ` (${era.get(`callname:${e.creditor}:-2`)}${i === 0 ? ' · 主要' : ''}${e.timer > 0 ? ` 余${e.timer}周` : ''})`;
+            if (e.timer > 0) {
+              billings += ` (${era.get(`callname:${e.creditor}:-2`)}${i === 0 ? ' · 主要' : ''} 余${e.timer}周)`;
+            } else {
+              billings += ` (${era.get(`callname:${e.creditor}:-2`)} 献金)`;
+            }
         }
       }
     });

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在终盘的最终直线上，稍微消耗体力，使速度极大提升',
   10710221,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

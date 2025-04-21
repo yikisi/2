@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘最终弯道及之后位置若对手发动加速技能，一小段时间内略微向前突进',
   20337,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

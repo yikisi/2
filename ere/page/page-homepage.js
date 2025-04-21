@@ -421,7 +421,9 @@ module.exports = async () => {
 
     if (cur_location !== location_enum.basement) {
       sys_change_status_by_base(0);
-      chara_id && sys_change_status_by_base(chara_id);
+      if (chara_id > 0) {
+        sys_change_status_by_base(chara_id);
+      }
       await era.clear();
       page_header(true);
       print_curr_chara(chara_id);

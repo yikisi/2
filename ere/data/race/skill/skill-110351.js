@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最终直线进行最后冲刺时位于中间集团往后则速度逐渐少量提升，效果持续中每发动一次技能提高一次速度，最大3次',
   11035,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

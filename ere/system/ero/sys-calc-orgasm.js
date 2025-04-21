@@ -208,7 +208,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                   if (ret === 2) {
                     // 体外成功，射到身上
                     if (other_part === part_enum.mouth) {
-                      other_part = Object.keys(part_enum).length;
+                      other_part = part_enum.keys.length;
                       clean_part(new EroParticipant(chara_id, part_enum.penis));
                     } else {
                       other_part = part_enum.body;
@@ -395,7 +395,7 @@ async function sys_calc_orgasm(shown, ...ids) {
           if (
             (last_action === ero_hooks.ask_double_blow_job ||
               last_action === ero_hooks.double_blow_job) &&
-            other_part === Object.keys(part_enum).length
+            other_part === part_enum.keys.length
           ) {
             other_part = 100;
           }

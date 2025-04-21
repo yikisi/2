@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最后冲刺阶段的直线若位于前方，则稍微提升加速度',
   20282,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '左右移动略微不容易产生疲劳',
   20114,
   1,
-  UmaSkill.rarity_enum.normal,
   8,
   217,
   [() => true, () => true],

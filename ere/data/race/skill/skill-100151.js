@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终弯道之后处于前列，和前面或者后面的马娘距离接近时，王者般的光辉会使速度加快',
   10015,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

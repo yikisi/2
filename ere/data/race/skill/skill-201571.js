@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '距离终点777m的时候，可以略微打起精神',
   20157,
   1,
-  UmaSkill.rarity_enum.normal,
   8,
   217,
   [() => true, () => true],

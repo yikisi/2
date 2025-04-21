@@ -7,13 +7,17 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const check_ero_enabled = require('#/system/ero/sys-check-ero-action');
 const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
-const { get_characters_in_train } = require('#/system/ero/sys-prepare-ero');
+const {
+  get_characters_in_train,
+  init_ero,
+} = require('#/system/ero/sys-prepare-ero');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const {
   sys_check_awake,
   sys_check_hide_relation_and_love,
   sys_check_limit_relation_and_love,
+  sys_check_remote,
 } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
@@ -532,24 +536,30 @@ function print_milking(type, size) {
 
 /**
  * @param {number} [lover]
- * @param {boolean} [skip_start_end]
+ * @param {boolean} [skip_start_end=false]
  */
-async function page_ero(lover, skip_start_end) {
+async function page_ero(lover, skip_start_end = false) {
   const in_basement = era.get('flag:当前位置') === location_enum.basement,
     rape = era.get('tflag:强奸');
-  let curr_lover =
-      lover || era.get('tflag:当前对手') || era.get('flag:当前互动角色'),
-    ero_flag = true;
-  era.set('tflag:当前对手', curr_lover);
+  lover ||= era.get('tflag:当前对手') || era.get('flag:当前互动角色');
+  let ero_flag = true;
+  let assistant = era.get('flag:助手');
+  assistant =
+    sys_check_awake(assistant) && !sys_check_remote(assistant) && assistant;
+  era.set('tflag:当前对手', lover);
+  if (era.getCharactersInTrain().length === 2 && assistant > 0) {
+    init_ero(assistant);
+    era.set('tflag:当前助手', assistant);
+  }
   if (!skip_start_end) {
     era.drawLine();
-    await get_custom_ero(curr_lover).ero_start(sys_handle_ero_act);
+    await get_custom_ero(lover).ero_start(sys_handle_ero_act);
   }
 
   while (ero_flag) {
     await era.clear();
 
-    curr_lover = era.get('tflag:当前对手');
+    lover = era.get('tflag:当前对手');
     let curr_supporter = era.get('tflag:当前助手');
 
     const filters = new Array(7)
@@ -557,9 +567,9 @@ async function page_ero(lover, skip_start_end) {
         .map((_, i) => era.get(`flag:${70 + i}`)),
       left_columns = [],
       lost_mind = era.get('tcvar:0:失神'),
-      love = get_love_info(curr_lover),
-      marks = get_ero_marks(curr_lover),
-      relation = get_relation_info(curr_lover);
+      love = get_love_info(lover),
+      marks = get_ero_marks(lover),
+      relation = get_relation_info(lover);
     left_columns.push(
       ...(era.get('flag:当前位置') === location_enum.basement
         ? []
@@ -589,7 +599,7 @@ async function page_ero(lover, skip_start_end) {
         content: [{ isBr: true }],
         type: 'text',
       },
-      ...get_chara_info(curr_lover),
+      ...get_chara_info(lover),
       {
         config: { width: 12 },
         content: [
@@ -648,7 +658,7 @@ async function page_ero(lover, skip_start_end) {
                 accelerator: id + 1000,
                 config: {
                   disabled: lost_mind > 0,
-                  buttonType: id !== curr_lover ? 'info' : 'warning',
+                  buttonType: id !== lover ? 'info' : 'warning',
                   offset: !i || i % 3 ? 0 : 6,
                   width: 6,
                 },
@@ -672,7 +682,7 @@ async function page_ero(lover, skip_start_end) {
               return {
                 accelerator: id + 2000,
                 config: {
-                  disabled: id === curr_lover || lost_mind > 0,
+                  disabled: id === lover || lost_mind > 0,
                   buttonType: id === curr_supporter ? 'warning' : 'info',
                   offset: !i || i % 3 ? 0 : 6,
                   width: 6,
@@ -698,14 +708,14 @@ async function page_ero(lover, skip_start_end) {
 
     const base_check =
         rape === -1 &&
-        sys_check_awake(curr_lover) &&
-        !era.get(`tcvar:${curr_lover}:脱力`) &&
-        !era.get(`tcvar:${curr_lover}:失神`) &&
-        !era.get(`status:${curr_lover}:超马跳Z`) &&
-        era.get(`mark:${curr_lover}:同心`) < 3 &&
-        era.get(`mark:${curr_lover}:欢愉`) < 3,
+        sys_check_awake(lover) &&
+        !era.get(`tcvar:${lover}:脱力`) &&
+        !era.get(`tcvar:${lover}:失神`) &&
+        !era.get(`status:${lover}:超马跳Z`) &&
+        era.get(`mark:${lover}:同心`) < 3 &&
+        era.get(`mark:${lover}:欢愉`) < 3,
       current = new Date().getTime(),
-      filtered_ero_actions = sys_filter_ero_act(0, curr_lover, filters),
+      filtered_ero_actions = sys_filter_ero_act(0, lover, filters),
       { last_action, lover_action } = master
         ? {
             last_action: era.get('tflag:对手行动'),
@@ -727,7 +737,7 @@ async function page_ero(lover, skip_start_end) {
           ? [
               {
                 config: { offset: 1, width: 18 },
-                names: get_image(curr_lover),
+                names: get_image(lover),
                 type: 'image.whole',
               },
               {
@@ -744,7 +754,7 @@ async function page_ero(lover, skip_start_end) {
                   offset: 1,
                   width: !master && characters_in_train.length > 2 ? 22 : 19,
                 },
-                names: get_image(curr_lover),
+                names: get_image(lover),
                 type: 'image.whole',
               },
             ],
@@ -752,13 +762,13 @@ async function page_ero(lover, skip_start_end) {
       },
       [{ type: 'divider' }],
       filtered_ero_actions.map((e) => {
-        const check_val = check_ero_enabled(curr_lover, curr_supporter, e);
+        const check_val = check_ero_enabled(lover, curr_supporter, e);
         if (isNaN(check_val)) {
-          era.logger.debug(`${ero_hooks.keys[e]} ${check_val}`);
+          era.logger.error(`${ero_hooks.keys[e]} ${check_val}`);
         }
         const action_disabled =
           lost_mind > 0 ||
-          (base_check && check_ero_enabled(curr_lover, curr_supporter, e) < 0);
+          (base_check && check_ero_enabled(lover, curr_supporter, e) < 0);
         all_action_disabled &&= action_disabled;
         return {
           accelerator: e,
@@ -791,8 +801,7 @@ async function page_ero(lover, skip_start_end) {
                 disabled:
                   lost_mind > 0 ||
                   (base_check &&
-                    check_ero_enabled(curr_lover, curr_supporter, last_action) <
-                      0),
+                    check_ero_enabled(lover, curr_supporter, last_action) < 0),
                 disableWarning: true,
                 width: 8,
               },
@@ -805,7 +814,7 @@ async function page_ero(lover, skip_start_end) {
           content:
             lover_action >= 0
               ? [
-                  get_chara_talk(curr_lover).get_colored_name(),
+                  get_chara_talk(lover).get_colored_name(),
                   ' 的行动：',
                   ero_action_names[lover_action],
                 ]
@@ -860,15 +869,14 @@ async function page_ero(lover, skip_start_end) {
         !era.get(`tcvar:${master}:脱力`) && !era.get(`tcvar:${master}:逃跑`);
     }
   }
-  era.println();
-  await era.printAndWait('性事结束了……');
-  if (!skip_start_end) {
-    era.println();
-    await get_custom_ero(curr_lover).ero_end(sys_handle_ero_act);
-  }
   era.drawLine();
+  await era.printAndWait('【性事结束了】');
+  if (!skip_start_end) {
+    await get_custom_ero(lover).ero_end(sys_handle_ero_act);
+  }
+  era.println();
   let wait_flag = false;
-  const partner_list = get_characters_in_train().filter((e) => e);
+  const partner_list = get_characters_in_train().filter((e) => e > 0);
   for (const chara_id of partner_list) {
     if (sys_check_awake(chara_id)) {
       let temp;

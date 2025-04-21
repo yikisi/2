@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘若在前方竞争，则比赛后半段短时间内速度稍微提升；若是大井、川崎或者船桥赛场，则变为速度持续稍微提升',
   90079,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [

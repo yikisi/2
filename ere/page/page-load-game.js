@@ -16,6 +16,7 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const { add_event, cb_enum, get: get_queue } = require('#/event/queue');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -23,6 +24,7 @@ const { action_type_enum } = require('#/data/basement-const');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const { trainer_salary } = require('#/data/const.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const BasementOwners = require('#/data/event/basement-owners');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
@@ -34,7 +36,6 @@ const { get_trainer_title } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');
-const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 function check_titles(...ids) {
   ids
@@ -118,6 +119,7 @@ module.exports = async () => {
               ),
             ).load_talk();
           }
+          CharaInmon.clean();
           if (await era.loadData(ret)) {
             flag_load_game = false;
             sys_load_game();
@@ -412,8 +414,12 @@ module.exports = async () => {
                 era.set('flag:声望不足替换', 0);
               }
             }
-            // TODO 目白城版本检查
-            if (version <= 1) {
+            if (version <= 1340) {
+              era
+                .getAddedCharacters()
+                .forEach((e) =>
+                  era.set(`equip:${e}:淫纹奴役`, era.get(`equip:${e}:10`)),
+                );
               if (era.get('flag:惩戒力度') >= 2) {
                 era.set('talent:0:调教度', 5);
               }

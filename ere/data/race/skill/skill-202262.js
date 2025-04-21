@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛接近终盘时，处于前方的话会稍微提升速度',
   20226,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

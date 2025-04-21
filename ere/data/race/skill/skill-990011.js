@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘时极大幅度提高速度并恢复体力',
   99001,
   1,
-  UmaSkill.rarity_enum.spe_r,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.cheat,

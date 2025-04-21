@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '枠号为7时稍微会有好事发生',
   20156,
   1,
-  UmaSkill.rarity_enum.normal,
   0,
   174,
   [() => true, () => true],

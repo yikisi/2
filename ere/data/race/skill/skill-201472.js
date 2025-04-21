@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '左右移动的时候能更好的把握状况，视野略微开阔',
   20147,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   85,
   [() => true, () => true],

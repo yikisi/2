@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘初期若位于中后方则速度大幅提升，并少量回复耐力',
   11150122,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   758,
   [() => true, () => true],

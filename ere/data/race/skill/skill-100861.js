@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '剩余1000m时若位于前方，则提高速度',
   10086,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

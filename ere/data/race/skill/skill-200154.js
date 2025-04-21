@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '变得擅长「良」马场状态力量和速度上升',
   20015,
   3,
-  UmaSkill.rarity_enum.gold,
   1,
   461,
   [() => true, () => true],

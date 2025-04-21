@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛终盘身处前方并完成超越时，能稍微向前突进，并且极少量提升加速度',
   90001,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

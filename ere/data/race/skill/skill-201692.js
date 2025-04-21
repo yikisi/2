@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛临近中盘时，若位于中团以后的位置，稍微恢复持久力',
   20169,
   1,
-  UmaSkill.rarity_enum.normal,
   8,
   217,
   [() => true, () => true],

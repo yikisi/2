@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛后半段身处前方的话，能发挥让自身成为第一的力量，提升速度和加速度',
   90009,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

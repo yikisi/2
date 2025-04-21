@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终弯道后完成超车，且在最后300米位于前方集团时，会燃起烈焰般的斗争心，略微提升速度',
   90072,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [

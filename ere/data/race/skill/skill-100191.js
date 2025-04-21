@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛终盘2次赶超的话，就会因近距离膜拜的马娘们过于神圣，不假思索地加快速度且路线选择变得更明智',
   10019,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

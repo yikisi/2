@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '进入中盘直线后回复持久力并向前推进',
   20324,
   2,
-  UmaSkill.rarity_enum.gold,
   9,
   633,
   [() => true, () => true],

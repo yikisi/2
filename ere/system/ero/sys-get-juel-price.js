@@ -43,11 +43,11 @@ module.exports = {
    */
   get_skill_price(chara_id, skill_name, level, is_auto_update) {
     const base_price = get_base_price(chara_id, { is_auto_update });
-    const ret_dict = {};
-    skill2juel[skill_name].forEach(
-      (e, _, l) => (ret_dict[e] = Math.floor((base_price * level) / l.length)),
-    );
-    return ret_dict;
+    const len = skill2juel[skill_name].length;
+    return skill2juel[skill_name].reduce((p, c) => {
+      p[c] = Math.floor((base_price * level) / len);
+      return p;
+    }, {});
   },
   /**
    * @param {number} chara_id
@@ -58,16 +58,15 @@ module.exports = {
   get_talent_price(chara_id, talent_name, delta) {
     const base_price = get_base_price(chara_id);
     const emotion_base_price = get_base_price(chara_id, { is_emotion: true });
-    const ret_dict = {};
-    talent2juel[talent_name].forEach(
-      (e, _, l) =>
-        (ret_dict[e] = Math.floor(
-          (4 *
-            ((e === '顺从' ? emotion_base_price : base_price) *
-              Math.abs(delta))) /
-            l.length,
-        )),
-    );
-    return ret_dict;
+    const len = talent2juel[talent_name].length;
+    return talent2juel[talent_name].reduce((p, c) => {
+      p[c] = Math.floor(
+        (4 *
+          ((c === '顺从' ? emotion_base_price : base_price) *
+            Math.abs(delta))) /
+          len,
+      );
+      return p;
+    }, {});
   },
 };

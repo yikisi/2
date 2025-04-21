@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '长时间跟随在前方赛马娘身后时，一段时间内速度持续提升',
   11000121,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

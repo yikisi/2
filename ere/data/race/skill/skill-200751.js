@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最终弯道处于内侧的话速度会上升',
   20075,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '剩余1000m的位置向前持续极小幅突进',
   90115,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

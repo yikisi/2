@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛中盘的弯道一段时间内向前小幅突进，之后在最终直线稍微向前突进',
   11170121,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

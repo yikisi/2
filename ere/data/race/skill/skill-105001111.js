@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘时若身处接近最后方的位置，则回复持久力，并稍微提升速度',
   10500111,
   1,
-  UmaSkill.rarity_enum.evol,
   11,
   633,
   [() => true, () => true],

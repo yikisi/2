@@ -28,11 +28,13 @@ const {
   buff_colors,
   palam_colors,
 } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { part_abbr } = require('#/data/ero/ero-alias.json');
 const {
   shop_result_type_enum,
   talent_button_names_and_check_dict,
 } = require('#/data/ero/juel-const');
+const { slavery_enum } = require('#/data/ero/mark-const');
 const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { skill_desc, talent_desc } = require('#/data/ero/shop-desc.json');
 const { trained_talent_names } = require('#/data/ero/status-const');
@@ -88,30 +90,21 @@ module.exports = async (_id) => {
   const chara_sex = era.get(`cflag:${chara_id}:性别`),
     chara = get_chara_talk(chara_id),
     me = get_chara_talk(0);
-  let display_name = chara.name;
-  if (chara.name !== chara.actual_name) {
-    display_name += ` (${chara.actual_name})`;
-  }
   const page_pointer = {
     flag: true,
+    sub: 0,
     tab: 0,
   };
   while (page_pointer.flag) {
     await era.clear();
-    era.printInColRows({
-      columns: [
-        {
-          config: { width: 9 },
-          content: `${era.get('flag:当前年')} 年 ${era.get(
-            'flag:当前月',
-          )} 月 第 ${era.get('flag:当前周')} 周`,
-          type: 'text',
-        },
-      ],
-      config: { width: 16 },
-    });
+    era.drawLine();
+    era.print(
+      `${era.get('flag:当前年')} 年 ${era.get(
+        'flag:当前月',
+      )} 月 第 ${era.get('flag:当前周')} 周`,
+    );
     era.drawLine({
-      content: `${display_name} 的 因子`,
+      content: `${chara.get_full_name()} 的 因子`,
     });
     let buffer = [];
     const juel_dict = {},
@@ -137,7 +130,7 @@ module.exports = async (_id) => {
         type: 'text',
       });
     });
-    if (chara_id) {
+    if (chara_id > 0) {
       era.printMultiColumns(buffer, { horizontalAlign: 'space-between' });
       buffer = [];
       new Array(4).fill(0).forEach((_, i) => {
@@ -185,7 +178,7 @@ module.exports = async (_id) => {
     era.printMultiColumns(buffer, { horizontalAlign: 'space-between' });
     if (page_pointer.tab === 0) {
       era.drawLine({
-        content: `${display_name} 的 能力`,
+        content: `${chara.get_full_name()} 的 能力`,
       });
       buffer = [];
       const skill_dict = {};
@@ -327,7 +320,7 @@ module.exports = async (_id) => {
       }
     } else if (page_pointer.tab === 1) {
       era.drawLine({
-        content: `${display_name} 的 特性`,
+        content: `${chara.get_full_name()} 的 特性`,
       });
       const talent_dict = { slave_run: 0 };
       new Array(7).fill(0).forEach((_, i) => {
@@ -605,6 +598,7 @@ module.exports = async (_id) => {
           await era.printAndWait(talent_desc[talent_index]);
         } else {
           if (talent_index >= 18) {
+            const inmon = CharaInmon.get(chara_id);
             era.print([
               '要',
               action === 100
@@ -616,7 +610,13 @@ module.exports = async (_id) => {
                 content: ` [${talent_name}] `,
                 color: buff_colors[2],
               },
-              '特性吗？花费：',
+              '特性吗？',
+              action === 200 &&
+              talent_index === 18 &&
+              inmon.slave === slavery_enum.milk
+                ? '会取消淫纹词条 [乳奴]！'
+                : '',
+              '花费：',
             ]);
             const price_dict = get_talent_price(
               chara_id,
@@ -631,6 +631,13 @@ module.exports = async (_id) => {
             if (is_confirmed) {
               if (talent_index === 18) {
                 era.set(`talent:${chara_id}:泌乳`, action === 100 ? 3 : 0);
+                if (
+                  action === 200 &&
+                  talent_index === 18 &&
+                  inmon.slave === slavery_enum.milk
+                ) {
+                  inmon.slave = 0;
+                }
               } else {
                 era.set(`talent:${chara_id}:乳头类型`, action === 100 ? 2 : 0);
               }
@@ -694,14 +701,7 @@ module.exports = async (_id) => {
         default_handler(ret, page_pointer);
       }
     } else if (page_pointer.tab === 2) {
-      await print_mark_tab(
-        chara_id,
-        chara,
-        display_name,
-        juel_dict,
-        total_delta,
-        page_pointer,
-      );
+      await print_mark_tab(chara, juel_dict, total_delta, page_pointer);
     } else {
       era.drawLine({ content: '采补之术' });
       era.printMultiColumns(

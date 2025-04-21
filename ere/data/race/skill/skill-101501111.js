@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终弯道时若身处前方则一段时间内速度持续提升',
   10150111,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

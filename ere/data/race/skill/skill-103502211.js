@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在终盘的最终直线若处于好位置，一段时间内速度提升',
   10350221,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

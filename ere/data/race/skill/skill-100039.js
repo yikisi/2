@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛终盘中幅提升速度，并恢复冷静',
   10003,
   1,
-  5,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.spe,

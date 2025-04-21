@@ -2,9 +2,9 @@ module.exports = {
   /**
    * @param {number} min
    * @param {number} max
-   * @param {boolean} [is_float]
+   * @param {boolean} [is_float=false]
    */
-  get_random_value(min, max, is_float) {
+  get_random_value(min, max, is_float = false) {
     if (min >= max) {
       return min;
     }
