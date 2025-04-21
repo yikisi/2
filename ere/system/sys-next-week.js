@@ -70,7 +70,6 @@ async function sys_next_week() {
     '招募状态',
     recruit_flags.yes,
   ).filter((e) => e);
-  let temp;
   era.set('status:0:沉睡', 1);
   era.set('status:0:熬夜', era.set('status:0:摸鱼', 0));
   era.set('cflag:0:子宫内精液', 0);
@@ -81,24 +80,26 @@ async function sys_next_week() {
   randomly_interact(in_team_list);
   const basement_cd =
     era.get('flag:地下室冷却') > 0 && era.add('flag:地下室冷却', -1) > 0;
+  const sex_partner = era.get('flag:床伴');
+  const has_furniture = sex_partner > 0 ? sex_partner : 0;
   // 极端事件判定
-  if (check_pregnant_unprotect(0)) {
+  if (check_pregnant_unprotect(0) && has_furniture > 0) {
     const basement_owners = new BasementOwners();
     /** @type {{chara_id:number,prison:boolean,[supporter]:number}[]} */
     let act_list = [];
     let prepared_list;
     if (
-      (temp = era.get('flag:床伴')) > 0 &&
-      era.get(`base:${temp}:体力`) &&
-      era.get(`base:${temp}:精力`) &&
-      sys_check_awake(temp)
+      sex_partner > 0 &&
+      era.get(`base:${sex_partner}:体力`) &&
+      era.get(`base:${sex_partner}:精力`) &&
+      sys_check_awake(sex_partner)
     ) {
-      prepared_list = [temp];
+      prepared_list = [sex_partner];
     } else if (era.get('flag:当前位置') === location_enum.basement) {
       prepared_list = basement_owners.get();
     } else {
       prepared_list = in_team_list.filter(
-        (chara_id) => chara_id !== temp && sys_check_awake(chara_id),
+        (chara_id) => chara_id !== sex_partner && sys_check_awake(chara_id),
       );
     }
     prepared_list.filter(check_pregnant_unprotect).forEach((chara_id) => {
@@ -265,6 +266,7 @@ async function sys_next_week() {
       out_race_list,
       me,
       cur_round,
+      has_furniture,
     );
   let hentai_punish = 0,
     hentai_reward = 0,
@@ -685,7 +687,7 @@ async function sys_next_week() {
     }
   }
   await check_new_activities(cur_round, in_team_list);
-  await check_inmon(in_team_list);
+  check_inmon(in_team_list);
 
   // 床伴
   in_team_list = in_team_list.filter(
@@ -696,10 +698,10 @@ async function sys_next_week() {
         (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) > 0),
   );
   if (!era.get('flag:当前互动角色') && in_team_list.length) {
-    temp = era.get('flag:床伴');
     era.set(
       'flag:当前互动角色',
-      (era.get(`cflag:${temp}:招募状态`) === recruit_flags.yes && temp) ||
+      (era.get(`cflag:${sex_partner}:招募状态`) === recruit_flags.yes &&
+        sex_partner) ||
         get_random_entry(
           in_team_list.filter((e) => sys_reg_race(e).curr.week === cur_round),
         ) ||

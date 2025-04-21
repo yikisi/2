@@ -35,6 +35,7 @@ const { attr_names } = require('#/data/train-const');
  * @param {number[]} out_race_list
  * @param {CharaTalk} me
  * @param {number} cur_round
+ * @param {number} has_furniture
  * @returns {Promise<number>}
  */
 async function reset_status(
@@ -43,6 +44,7 @@ async function reset_status(
   out_race_list,
   me,
   cur_round,
+  has_furniture,
 ) {
   const health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes;
   let ret = 0;
@@ -55,17 +57,47 @@ async function reset_status(
       sys_change_lust(chara_id, -get_random_value(0, 2000));
     }
     // 体力精力恢复
-    era.add(
-      `base:${chara_id}:体力`,
-      Math.floor(era.get(`maxbase:${chara_id}:体力`) * (0.6 - 0.2 * stay_up)),
-    );
-    era.add(
-      `base:${chara_id}:精力`,
-      Math.floor(era.get(`maxbase:${chara_id}:精力`) * (1 - 0.25 * stay_up)),
-    );
+    if (has_furniture > 0 && chara_id === 0) {
+      era.add('base:0:体力', Math.floor(era.get('maxbase:0:体力') * 0.8));
+      era.add('base:0:精力', era.get('maxbase:0:精力'));
+    } else if (has_furniture > 0 && chara_id === has_furniture) {
+      era.add(
+        `base:${chara_id}:体力`,
+        Math.floor(era.get(`maxbase:${chara_id}:体力`) * 0.4),
+      );
+      era.add(
+        `base:${chara_id}:精力`,
+        Math.floor(era.get(`maxbase:${chara_id}:精力`) * 0.75),
+      );
+    } else {
+      era.add(
+        `base:${chara_id}:体力`,
+        Math.floor(era.get(`maxbase:${chara_id}:体力`) * (0.6 - 0.2 * stay_up)),
+      );
+      era.add(
+        `base:${chara_id}:精力`,
+        Math.floor(era.get(`maxbase:${chara_id}:精力`) * (1 - 0.25 * stay_up)),
+      );
+    }
 
-    const chara = get_chara_talk(chara_id),
-      weight_delta = era.get(`base:${chara_id}:体重偏差`);
+    const chara = get_chara_talk(chara_id);
+
+    // 药物泌乳只维持一回合
+    if (era.get(`talent:${chara_id}:泌乳`) === 2) {
+      if (Math.random() < 0.05) {
+        era.set(`talent:${chara_id}:泌乳`, 3);
+        await era.printAndWait([
+          chara.get_colored_name(),
+          ' 在 [母乳药剂] 的影响下变成 ',
+          { color: buff_colors[2], content: '[母乳体质]' },
+          ' 了！',
+        ]);
+      } else {
+        era.set(`talent:${chara_id}:泌乳`, 0);
+      }
+    }
+
+    const weight_delta = era.get(`base:${chara_id}:体重偏差`);
     if (!era.get(`status:${chara_id}:发胖`) && weight_delta >= 4000) {
       era.set(`status:${chara_id}:发胖`, 1);
       era.print([
@@ -176,20 +208,6 @@ async function reset_status(
         ),
       );
     era.set(`status:${chara_id}:健康茶`, 0);
-    // 药物泌乳只维持一回合
-    if (era.get(`talent:${chara_id}:泌乳`) === 2) {
-      if (Math.random() < 0.05) {
-        era.set(`talent:${chara_id}:泌乳`, 3);
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 在 [母乳药剂] 的影响下变成 ',
-          { color: buff_colors[2], content: '[母乳体质]' },
-          ' 了！',
-        ]);
-      } else {
-        era.set(`talent:${chara_id}:泌乳`, 0);
-      }
-    }
 
     if (!isNaN(Number(era.get(`cflag:${chara_id}:育成回合计时`)))) {
       era.add(`cflag:${chara_id}:育成回合计时`, 1);

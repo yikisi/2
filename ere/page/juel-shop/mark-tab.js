@@ -452,10 +452,24 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
         type: 'text',
       },
     ]);
-    columns[slavery_enum.inherit][0].config.disabled ||=
-      era.get(`cflag:${chara.id}:种族`) === 0;
-    columns[slavery_enum.assistant][0].config.disabled ||=
-      era.get('flag:助手') > 0;
+    if (chara.sex_code === 1) {
+      columns[slavery_enum.milk][0].config.disabled = true;
+      columns[slavery_enum.milk][0].title = '男性不能上贡乳汁……';
+    } else if (era.get(`talent:${chara.id}:泌乳`) !== 3) {
+      columns[slavery_enum.milk][0].config.disabled = true;
+      columns[slavery_enum.milk][0].config.title =
+        '只有 [母乳体质] 才能上贡乳汁……';
+    }
+    if (era.get(`cflag:${chara.id}:种族`) === 0) {
+      columns[slavery_enum.inherit][0].config.disabled = true;
+      columns[slavery_enum.inherit][0].config.title =
+        '只有' + chara.get_uma_sex_title() + '能上贡因子……';
+    }
+    if (era.get('flag:助手') > 0) {
+      columns[slavery_enum.assistant][0].config.disabled = true;
+      columns[slavery_enum.assistant][0].config.title =
+        '已经有了一名' + slavery_options[slavery_enum.assistant] + '……';
+    }
     columns.forEach((e) => era.printMultiColumns(e));
     era.printButton('取消切换', 99);
     era.print([

@@ -34,7 +34,7 @@ slavery_descriptions[slavery_enum.pregnant] =
 slavery_descriptions[slavery_enum.worker] = '每周提供一定马币。';
 slavery_descriptions[slavery_enum.inherit] = '每周提供一定继承因子。';
 slavery_descriptions[slavery_enum.furniture] =
-  '作为床伴时阻止所有睡奸和绑架，提高精力和体力恢复。';
+  '作为床伴时阻止所有睡奸和绑架，提高休息的体力恢复。';
 slavery_descriptions[slavery_enum.assistant] =
   '作为默认助手加入与其他角色的性爱。只能设定一个。';
 

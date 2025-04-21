@@ -28,11 +28,13 @@ const {
   buff_colors,
   palam_colors,
 } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { part_abbr } = require('#/data/ero/ero-alias.json');
 const {
   shop_result_type_enum,
   talent_button_names_and_check_dict,
 } = require('#/data/ero/juel-const');
+const { slavery_enum } = require('#/data/ero/mark-const');
 const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { skill_desc, talent_desc } = require('#/data/ero/shop-desc.json');
 const { trained_talent_names } = require('#/data/ero/status-const');
@@ -591,6 +593,7 @@ module.exports = async (_id) => {
           await era.printAndWait(talent_desc[talent_index]);
         } else {
           if (talent_index >= 18) {
+            const inmon = CharaInmon.get(chara_id);
             era.print([
               '要',
               action === 100
@@ -602,7 +605,13 @@ module.exports = async (_id) => {
                 content: ` [${talent_name}] `,
                 color: buff_colors[2],
               },
-              '特性吗？花费：',
+              '特性吗？',
+              action === 200 &&
+              talent_index === 18 &&
+              inmon.slave === slavery_enum.milk
+                ? '会取消淫纹词条 [乳奴]！'
+                : '',
+              '花费：',
             ]);
             const price_dict = get_talent_price(
               chara_id,
@@ -617,6 +626,13 @@ module.exports = async (_id) => {
             if (is_confirmed) {
               if (talent_index === 18) {
                 era.set(`talent:${chara_id}:泌乳`, action === 100 ? 3 : 0);
+                if (
+                  action === 200 &&
+                  talent_index === 18 &&
+                  inmon.slave === slavery_enum.milk
+                ) {
+                  inmon.slave = 0;
+                }
               } else {
                 era.set(`talent:${chara_id}:乳头类型`, action === 100 ? 2 : 0);
               }
