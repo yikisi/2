@@ -159,8 +159,8 @@ csv.forEach((e) => {
 });
 
 try {
-  console.log(execSync('node generate-race-params.js'));
-  console.log(
+  process.stdout.write(execSync('node generate-race-params.js'));
+  process.stdout.write(
     execSync(
       'npx eslint --fix ./ere/data/race/g1 ./ere/data/race/g2 ./ere/data/race/g3 ./ere/data/race/op ./ere/data/race/race-const.js ./ere/data/race/race-params.js ./ere/data/race/race-attr-bonus.js',
       {
