@@ -34,7 +34,11 @@ const {
   slavery_options,
   slavery_titles,
 } = require('#/data/ero/mark-const');
-const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
+const {
+  inmon_plugin_dict,
+  plugin_enum,
+} = require('#/data/ero/plugin/plugin-const');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { get_trainer_title } = require('#/data/info-generator');
 
 /**
@@ -209,18 +213,20 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
 
   const inmon = CharaInmon.get(chara.id);
   const p_filter_param = {
-    id: chara.id,
     chara:
       era.get(`cflag:${chara.id}:种族`) > 0
         ? era.get(`cflag:${chara.id}:气性`)
         : undefined,
+    id: chara.id,
     sex: chara.sex_code,
+    pregnant:
+      inmon.slave === slavery_enum.pregnant ||
+      era.get(`cflag:${chara.id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no,
   };
   const plugins = Object.values(inmon_plugin_dict)
     .filter((e) => e.level <= sex_level && e.condition(p_filter_param))
     .map((e, i) => ({
       a: i + 10,
-      p: e,
       m: Math.floor(
         (e.price *
           (100 +
@@ -228,6 +234,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
             era.get(`talent:${chara.id}:工口好奇`) * 10)) /
           100,
       ),
+      p: e,
     }));
   const groups = plugins.reduce((p, c) => {
     (p[c.p.group] ||= []).push(c);
@@ -277,9 +284,9 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         buffer.push({
           config: {
             content: InmonPlugin.group_names[keys[1]],
+            offset: 1,
             position: 'left',
             width: 11,
-            offset: 1,
           },
           type: 'divider',
         });
@@ -302,7 +309,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
             limit,
             group_dict,
           );
-          temp[0].config.offset = 13;
+          temp[0].config.offset = 12;
           buffer.push(...temp);
         } else if (right === undefined) {
           buffer.push(
@@ -332,6 +339,10 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
             ...p_buffer,
             { content: size > 0 ? [{ isBr: true }] : [], type: 'text' },
             {
+              config: {
+                align: 'center',
+                color: mark_colors['淫纹'],
+              },
               content: [
                 ...new Array(size)
                   .fill('[·]')
@@ -346,10 +357,6 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
                 }
                 return p;
               }, []),
-              config: {
-                align: 'center',
-                color: mark_colors['淫纹'],
-              },
               type: 'text',
             },
             sex_mark_col,
@@ -420,7 +427,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
               config: {
                 align: 'right',
                 width: 4,
-                disabled: pointer.sub + 2 > Object.keys(groups).length,
+                disabled: pointer.sub + 2 >= Object.keys(groups).length,
               },
               content: '后一页',
               type: 'button',
@@ -614,13 +621,17 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
     ]);
     if (chara.sex_code === 1) {
       columns[slavery_enum.milk][0].config.disabled = true;
-      columns[slavery_enum.milk][0].title = '男性不能上贡乳汁……';
+      columns[slavery_enum.milk][0].config.title = '男性不能上贡乳汁……';
       columns[slavery_enum.pregnant][0].config.disabled = true;
-      columns[slavery_enum.pregnant][0].title = '男性不能怀孕……';
+      columns[slavery_enum.pregnant][0].config.title = '男性不能怀孕……';
     } else if (era.get(`talent:${chara.id}:泌乳`) !== 3) {
       columns[slavery_enum.milk][0].config.disabled = true;
       columns[slavery_enum.milk][0].config.title =
         '只有 [母乳体质] 才能上贡乳汁……';
+    }
+    if (inmon.on(plugin_enum.no_preg)) {
+      columns[slavery_enum.pregnant][0].config.disabled = true;
+      columns[slavery_enum.pregnant][0].config.title = '已受到不孕之加护……';
     }
     if (era.get(`cflag:${chara.id}:种族`) === 0) {
       columns[slavery_enum.inherit][0].config.disabled = true;

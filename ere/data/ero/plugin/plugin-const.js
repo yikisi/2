@@ -72,6 +72,9 @@ plugins[40222] = require('#/data/ero/plugin/plugin-40222');
 plugins[50111] = require('#/data/ero/plugin/plugin-50111');
 plugins[50112] = require('#/data/ero/plugin/plugin-50112');
 plugins[50113] = require('#/data/ero/plugin/plugin-50113');
+plugins[50211] = require('#/data/ero/plugin/plugin-50211');
+plugins[50212] = require('#/data/ero/plugin/plugin-50212');
+plugins[50213] = require('#/data/ero/plugin/plugin-50213');
 plugins[60111] = require('#/data/ero/plugin/plugin-60111');
 plugins[60112] = require('#/data/ero/plugin/plugin-60112');
 plugins[60113] = require('#/data/ero/plugin/plugin-60113');
@@ -228,6 +231,12 @@ module.exports = {
     org_c2: 50112,
     // 高潮操纵Ⅲ: 每隔四回合允许高潮一回合
     org_c3: 50113,
+    // 金身不坏: 不会伤病
+    no_pain: 50211,
+    // 不知疲倦: 不会疲惫及伤病
+    no_tired: 50212,
+    // 欢愉之骨: 不会疲惫、伤病或怀孕
+    no_preg: 50213,
     // 唯唯诺诺: 气性转换为「弱气」
     cha_0: 60111,
     // 畏首畏尾: 气性转换为「胆小」

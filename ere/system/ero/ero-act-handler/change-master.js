@@ -25,7 +25,9 @@ function change_master(without_me, shown) {
       e !== without_me &&
       sys_check_awake(e) &&
       check_satisfied(e) < 2 &&
-      (master === e || (inmon.slave === 0 && inmon.on(plugin_enum.tuna)))
+      (master === e ||
+        (inmon.slave === 0 &&
+          (inmon.on(plugin_enum.tuna) || inmon.on(plugin_enum.meek))))
     );
   });
   let new_master = master;

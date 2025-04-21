@@ -244,7 +244,8 @@ async function sys_handle_ero_act(command, filters, shown = true) {
       if (!era.get('tflag:主导权')) {
         era.set('tflag:前回行动', command);
         era.set('tflag:前回助手', supporter);
-        if (!CharaInmon.get(cur_lover).on(plugin_enum.tuna)) {
+        const inmon = CharaInmon.get(cur_lover);
+        if (!inmon.on(plugin_enum.tuna) && !inmon.on(plugin_enum.meek)) {
           await sys_auto_react(shown);
         }
       } else {

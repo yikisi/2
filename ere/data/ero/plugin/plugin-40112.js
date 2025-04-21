@@ -5,8 +5,8 @@ module.exports = new InmonPlugin(
   '忠贞不二',
   401,
   3,
-  20,
+  18,
   '每周结束时好感度恢复最大值。',
   (args) => args.id > 0,
-  1180,
+  1080,
 );

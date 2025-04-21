@@ -2,13 +2,23 @@ const era = require('#/era-electron');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
+
 /**
  * @param {number} chara_id
  * @param {number} num
  * @param {boolean} [shown]
  */
 function sys_hurt_uma(chara_id, num, shown) {
-  if (era.get('flag:可能伤病') && num > 0) {
+  const inmon = CharaInmon.get(chara_id);
+  if (
+    !inmon.on(plugin_enum.no_pain) &&
+    !inmon.on(plugin_enum.no_tired) &&
+    !inmon.on(plugin_enum.no_preg) &&
+    era.get('flag:可能伤病') > 0 &&
+    num > 0
+  ) {
     const a = era.add(`status:${chara_id}:伤病`, num),
       tired = era.get(`status:${chara_id}:疲惫`);
     if (tired > 0) {

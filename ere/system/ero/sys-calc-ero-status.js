@@ -6,12 +6,14 @@ const {
   height2anal_size,
   height2virgin_size,
 } = require('#/data/ero/battle-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const {
   baby_limit,
   erect_border,
   lust_border,
 } = require('#/data/ero/orgasm-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -346,7 +348,8 @@ module.exports = {
       era.get(`status:${chara_id}:经期`) ||
       (other_id !== undefined &&
         !era.get(`cflag:${other_id}:性别`) &&
-        !era.get(`status:${other_id}:弗隆P`))
+        !era.get(`status:${other_id}:弗隆P`)) ||
+      CharaInmon.get(chara_id).on(plugin_enum.no_preg)
     ) {
       return 0;
     }
