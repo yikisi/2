@@ -24,6 +24,11 @@ const {
 const { hair_colors } = require('#/data/const.json');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
+const {
+  slavery_descriptions,
+  slavery_titles,
+} = require('#/data/ero/mark-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
 const {
@@ -298,6 +303,18 @@ module.exports = {
     const sex_state = chara_id
       ? [penis_state.chara, virgin_state.chara]
       : [penis_state.player, virgin_state.player];
+    if (era.get(`mark:${chara_id}:淫纹`) === 3) {
+      const sex_equip = CharaInmon.get(chara_id).slave,
+        obj = {
+          color: buff_colors[2],
+          content: slavery_titles[sex_equip],
+          fontWeight: 'bold',
+        };
+      if (chara_id > 0 && sex_equip > 0) {
+        obj.title = `[${obj.content}]：${slavery_descriptions[sex_equip]}`;
+      }
+      status_list.push(obj);
+    }
     if (era.get('tflag:主导权') === chara_id) {
       status_list.push({ color: buff_colors[1], content: '主导' });
     }

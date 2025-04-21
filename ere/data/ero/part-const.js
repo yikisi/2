@@ -15,6 +15,7 @@
   masochism: 0,
 };
 Object.keys(part_enum).forEach((k, i) => (part_enum[k] = i));
+part_enum.keys = Object.keys(part_enum);
 
 /** @type {string[]} */
 const part_names = [];

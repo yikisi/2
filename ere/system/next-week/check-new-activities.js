@@ -24,6 +24,7 @@ const {
   adaptability_colors,
   celebration_color,
 } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const LocCharacters = require('#/data/event/loc-characters');
@@ -133,7 +134,7 @@ async function check_new_activities(cur_round, in_team_list) {
       no_preg:
         check_pregnant_unprotect(id) &&
         era.get(`cflag:${id}:妊娠回合计时`) <
-          (era.get(`equip:${id}:淫纹奴役`) === slavery_enum.pregnant ? 30 : 33),
+          (CharaInmon.get(id).slave === slavery_enum.pregnant ? 30 : 33),
     };
   });
   const event_weeks = (cur_round - 1) % 48 || 48,
@@ -435,7 +436,8 @@ async function check_new_activities(cur_round, in_team_list) {
       era.set('cflag:0:位置', 0);
     }
   }
-  // 出差的理事长
+
+  // 特殊NPC是否会出现在地点
   let chairman = 0;
   if (
     era.get('cflag:302:育成回合计时') < 3 * 48 ||

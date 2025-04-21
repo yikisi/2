@@ -6,6 +6,7 @@ const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
+const check_inmon = require('#/system/next-week/check-inmon');
 const check_new_activities = require('#/system/next-week/check-new-activities');
 const randomly_interact = require('#/system/next-week/randomly-interact');
 const reset_status = require('#/system/next-week/reset-status');
@@ -35,6 +36,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { money_color } = require('#/data/color-const');
 const { trainer_salary } = require('#/data/const.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const {
   baby_limit,
@@ -68,7 +70,6 @@ async function sys_next_week() {
     '招募状态',
     recruit_flags.yes,
   ).filter((e) => e);
-  let temp;
   era.set('status:0:沉睡', 1);
   era.set('status:0:熬夜', era.set('status:0:摸鱼', 0));
   era.set('cflag:0:子宫内精液', 0);
@@ -79,24 +80,26 @@ async function sys_next_week() {
   randomly_interact(in_team_list);
   const basement_cd =
     era.get('flag:地下室冷却') > 0 && era.add('flag:地下室冷却', -1) > 0;
+  const sex_partner = era.get('flag:床伴');
+  const has_furniture = sex_partner > 0 ? sex_partner : 0;
   // 极端事件判定
-  if (check_pregnant_unprotect(0)) {
+  if (check_pregnant_unprotect(0) && has_furniture > 0) {
     const basement_owners = new BasementOwners();
     /** @type {{chara_id:number,prison:boolean,[supporter]:number}[]} */
     let act_list = [];
     let prepared_list;
     if (
-      (temp = era.get('flag:床伴')) > 0 &&
-      era.get(`base:${temp}:体力`) &&
-      era.get(`base:${temp}:精力`) &&
-      sys_check_awake(temp)
+      sex_partner > 0 &&
+      era.get(`base:${sex_partner}:体力`) &&
+      era.get(`base:${sex_partner}:精力`) &&
+      sys_check_awake(sex_partner)
     ) {
-      prepared_list = [temp];
+      prepared_list = [sex_partner];
     } else if (era.get('flag:当前位置') === location_enum.basement) {
       prepared_list = basement_owners.get();
     } else {
       prepared_list = in_team_list.filter(
-        (chara_id) => chara_id !== temp && sys_check_awake(chara_id),
+        (chara_id) => chara_id !== sex_partner && sys_check_awake(chara_id),
       );
     }
     prepared_list.filter(check_pregnant_unprotect).forEach((chara_id) => {
@@ -203,13 +206,14 @@ async function sys_next_week() {
     cur_week = era.get('flag:当前周');
   cur_week++;
   const cur_round = era.add('flag:当前回合数', 1),
-    salary =
-      !your_race *
-      trainer_salary[get_trainer_title().substring(0, 2)] *
-      (1 + (cur_month === 12));
+    base_salary = trainer_salary[get_trainer_title().substring(0, 2)],
+    salary = !your_race * base_salary * (1 + (cur_month === 12));
   const billings = sys_get_billings()
     .map((e, i) => {
-      if (e.timer > 0) {
+      if (e.timer < 0) {
+        e.repay = base_salary / 4;
+      }
+      if (e.timer !== 0) {
         const money = sys_change_money(e.repay, -1);
         if (i > 0 && e.creditor === 0 && money > 0) {
           // 人类训练员有工资拿；马娘训练员？自己跑比赛去！
@@ -219,11 +223,13 @@ async function sys_next_week() {
             ' 马币',
           ]);
         }
-        e.timer--;
+        if (e.timer > 0) {
+          e.timer--;
+        }
       }
       return e;
     })
-    .filter((e, i) => i === 0 || e.timer > 0);
+    .filter((e, i) => i === 0 || e.timer !== 0);
   if (cur_week === 4) {
     billings.push({
       creditor: cur_month === 12 ? -1 : 0,
@@ -260,6 +266,7 @@ async function sys_next_week() {
       out_race_list,
       me,
       cur_round,
+      has_furniture,
     );
   let hentai_punish = 0,
     hentai_reward = 0,
@@ -332,7 +339,7 @@ async function sys_next_week() {
     }
 
     const is_pregnant_slave =
-        era.get(`equip:${chara_id}:淫纹奴役`) === slavery_enum.pregnant,
+        CharaInmon.get(chara_id).slave === slavery_enum.pregnant,
       is_always_special = is_pregnant_slave;
     let pregnant_stage = era.get(`cflag:${chara_id}:妊娠阶段`);
     const life_marks = LifeEventMarks.get_marks(chara_id);
@@ -680,6 +687,9 @@ async function sys_next_week() {
     }
   }
   await check_new_activities(cur_round, in_team_list);
+  check_inmon(in_team_list);
+
+  // 床伴
   in_team_list = in_team_list.filter(
     (e) =>
       era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
@@ -687,12 +697,11 @@ async function sys_next_week() {
       (get_custom_mec(e).is_able_to_be_selected() ||
         (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) > 0),
   );
-
   if (!era.get('flag:当前互动角色') && in_team_list.length) {
-    temp = era.get('flag:床伴');
     era.set(
       'flag:当前互动角色',
-      (era.get(`cflag:${temp}:招募状态`) === recruit_flags.yes && temp) ||
+      (era.get(`cflag:${sex_partner}:招募状态`) === recruit_flags.yes &&
+        sex_partner) ||
         get_random_entry(
           in_team_list.filter((e) => sys_reg_race(e).curr.week === cur_round),
         ) ||

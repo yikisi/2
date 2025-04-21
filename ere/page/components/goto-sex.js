@@ -123,8 +123,8 @@ async function goto_sex(chara_id, sex_loc) {
   if (await new GameGuides().office_sex()) {
     return;
   }
-  const chara = get_chara_talk(chara_id),
-    me = get_chara_talk(0);
+  const chara = get_chara_talk(chara_id);
+  const me = get_chara_talk(0);
   if (!sys_check_awake(chara_id)) {
     era.printMultiColumns([
       {

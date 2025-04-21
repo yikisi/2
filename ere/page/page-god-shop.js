@@ -29,6 +29,7 @@ const EventObject = require('#/data/event/event-object');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { location_enum } = require('#/data/locations');
 const { attr_names } = require('#/data/train-const');
+const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 
 const button_contents = [
   '「啊，请帮帮我吧女神大人——」',
@@ -89,7 +90,7 @@ async function common_pray_power(aim, me) {
  * @param {CharaTalk} me
  */
 function get_chara_desc(aim, me) {
-  switch (era.get(`cflag:${aim.id}:气性`)) {
+  switch (sys_get_chara(aim.id)) {
     case 1:
     case 3:
       return [
