@@ -431,7 +431,7 @@ module.exports = async () => {
                 ))
               ) {
                 era.set('flag:目白城风格', 1);
-                era.set('flag:目白城变量', {});
+                era.set('flag:目白城变量', { limit: 1 });
               }
             }
             return true;

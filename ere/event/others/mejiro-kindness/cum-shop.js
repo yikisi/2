@@ -9,6 +9,8 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { mark_colors } = require('#/data/const.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { slavery_enum } = require('#/data/ero/mark-const');
 const { penis_desc, skin_desc } = require('#/data/ero/status-const');
 const ExtraBase = require('#/data/extra-base');
 const { get_breast_cup, get_hair_color } = require('#/data/info-generator');
@@ -174,7 +176,18 @@ async function cum_shop(chara, me) {
               if (milk_status === 3) {
                 buttons.push({
                   c: '消除 [母乳体质]（30「恩宠」）',
-                  h() {
+                  async h() {
+                    const inmon = CharaInmon.get(target.id);
+                    if (inmon.slave === slavery_enum.milk) {
+                      say_by_waiter(
+                        '这会消除您作的那一点小小的修改，确定消除吗？',
+                      );
+                      if (await select_yes_or_no([])) {
+                        inmon.slave = 0;
+                      } else {
+                        return;
+                      }
+                    }
                     money = era.add('item:「恩宠」', -30);
                     era.set(`talent:${target.id}:泌乳`, 0);
                   },
@@ -184,7 +197,7 @@ async function cum_shop(chara, me) {
                   c: '获得 [母乳体质]（30「恩宠」）',
                   h() {
                     money = era.add('item:「恩宠」', -30);
-                    era.set(`talent:${target.id}:泌乳`, 30);
+                    era.set(`talent:${target.id}:泌乳`, 3);
                   },
                 });
               }
@@ -706,7 +719,7 @@ async function cum_shop(chara, me) {
         async h() {
           await mayor.say_and_wait('欢迎来到目白城。');
           await mayor.say_and_wait('请问有什么可以帮您的？');
-          if (await select_yes_or_no('', '请放过我……', '没事')) {
+          if (await select_yes_or_no([], '请放过我……', '没事')) {
             await mayor.say_and_wait('这样啊……您确定吗？');
             if (
               await select_yes_or_no(
