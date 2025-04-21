@@ -101,7 +101,7 @@ class CustomizedCheck {
   }
 
   check_next_week() {
-    if (this.id && era.get(`cflag:${this.id}:种族`)) {
+    if (this.id > 0 && era.get(`cflag:${this.id}:种族`)) {
       const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
       if (edu_weeks < 3 * 48) {
         if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
