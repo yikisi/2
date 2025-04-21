@@ -7,6 +7,6 @@ module.exports = new InmonPlugin(
   3,
   30,
   '暂无效果。',
-  (args) => args.id > 0,
+  (args) => args.id > 0 && false,
   1680,
 );
