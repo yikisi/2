@@ -279,7 +279,7 @@ class CustomizedCheck {
       common_no_action_check(this.id) ||
       check_want_to_escape(this.id) ||
       inmon.slave > 0 ||
-      inmon.on(plugin_enum.tuna)
+      inmon.on(plugin_enum.meek)
     ) {
       return false;
     }
@@ -335,7 +335,7 @@ class CustomizedCheck {
     if (
       common_no_action_check(this.id) ||
       check_want_to_escape(this.id) ||
-      inmon.on(plugin_enum.tuna)
+      inmon.on(plugin_enum.meek)
     ) {
       return 0;
     }

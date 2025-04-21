@@ -92,6 +92,7 @@ module.exports = async (_id) => {
     me = get_chara_talk(0);
   const page_pointer = {
     flag: true,
+    sub: 0,
     tab: 0,
   };
   while (page_pointer.flag) {

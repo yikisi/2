@@ -21,10 +21,11 @@ const { get_custom_ero } = require('#/event/ero/ero-factory');
 
 const get_gradient_color = require('#/utils/gradient-color');
 
-const { buff_colors } = require('#/data/color-const');
+const { attr_change_colors, buff_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
 const { trainer_salary } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
+const InmonPlugin = require('#/data/ero/inmon-plugin');
 const {
   inmon_limit,
   mark_enum,
@@ -37,12 +38,74 @@ const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
 const { get_trainer_title } = require('#/data/info-generator');
 
 /**
+ * @param {{a:number,m:number,p:InmonPlugin}} plugin_with_acc
+ * @param {CharaInmon} inmon
+ * @param {number} money
+ * @param {number} size
+ * @param {number} limit
+ * @param {Record<string,1>} group_dict
+ */
+function plugin_to_button(
+  plugin_with_acc,
+  inmon,
+  money,
+  size,
+  limit,
+  group_dict,
+) {
+  return [
+    {
+      accelerator: plugin_with_acc.a,
+      config: {
+        color: plugin_with_acc.p.color,
+        disabled:
+          (!inmon.on(plugin_with_acc.p.id) &&
+            (plugin_with_acc.p.size + size > limit ||
+              group_dict[plugin_with_acc.p.group] > 0)) ||
+          (!inmon.has(plugin_with_acc.p.id) && money < plugin_with_acc.m),
+        disableWarning: true,
+        title: plugin_with_acc.p.title,
+        width: 4,
+      },
+      content: plugin_with_acc.p.name,
+      type: 'button',
+    },
+    {
+      type: 'text',
+      content: `Lv. ${plugin_with_acc.p.level}`,
+      config: { width: 2 },
+    },
+    {
+      type: 'text',
+      content: `${plugin_with_acc.p.size} 插槽`,
+      config: { align: 'right', width: 2 },
+    },
+    {
+      type: 'text',
+      ...(inmon.has(plugin_with_acc.p.id)
+        ? {
+            config: {
+              align: 'right',
+              color: attr_change_colors.up,
+              width: 3,
+            },
+            content: '已解锁',
+          }
+        : {
+            config: { align: 'right', color: buff_colors[2], width: 3 },
+            content: `${plugin_with_acc.m.toLocaleString()} 顺从`,
+          }),
+    },
+  ];
+}
+
+/**
  * @param {CharaTalk} chara
  * @param {Record<string,number>} juel_dict
  * @param {Record<string,number>} total_delta
- * @param {{tab:number,flag:boolean}} page_pointer
+ * @param {{tab:number,flag:boolean,sub:number}} pointer
  */
-module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
+module.exports = async (chara, juel_dict, total_delta, pointer) => {
   let buffer = [];
   let sex_level = era.get(`mark:${chara.id}:淫纹`);
   const pleasure_level = era.get(`mark:${chara.id}:欢愉`),
@@ -155,46 +218,134 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
   };
   const plugins = Object.values(inmon_plugin_dict)
     .filter((e) => e.level <= sex_level && e.condition(p_filter_param))
-    .map((e, i) => ({ a: i + 10, p: e }));
+    .map((e, i) => ({
+      a: i + 10,
+      p: e,
+      m: Math.floor(
+        (e.price *
+          (100 +
+            era.get('flag:宝珠消耗量') +
+            era.get(`talent:${chara.id}:工口好奇`) * 10)) /
+          100,
+      ),
+    }));
+  const groups = plugins.reduce((p, c) => {
+    (p[c.p.group] ||= []).push(c);
+    return p;
+  }, {});
+  const money = price_dict['顺从'];
   const slave = inmon.slave;
   if (sex_level > 0 || (pleasure_level > 0 && meek_level > 0)) {
     era.drawLine({
-      content: `${chara.get_full_name()} 的 淫纹`,
+      content: chara.get_full_name() + ' 的 淫纹',
     });
     if (sex_level > 0) {
       const limit = inmon_limit[sex_level];
       const size = inmon.size;
-      const groups = {};
+      const group_dict = {};
       sex_mark_price = get_mark_price(chara.id, sex_level + 1, meek_level);
       const sex_mark_col = get_mark_cols(chara.id, '淫纹', sex_level);
       delete sex_mark_col.config.width;
       sex_mark_col.content.unshift({ isBr: true });
+      const p_buffer = inmon.to_list.map((e) => {
+        const p = inmon_plugin_dict[e];
+        group_dict[p.group] = 1;
+        const name = p.colored_name;
+        name.content += ` (${p.size})`;
+        return {
+          accelerator: plugins.find((e) => e.p.id === p.id).a,
+          config: {
+            align: 'center',
+            color: name.color,
+            title: name.title,
+          },
+          content: name.content,
+          type: 'button',
+        };
+      });
+      const buffer = [];
+      const keys = Object.keys(groups).slice(pointer.sub, pointer.sub + 2);
+      buffer.push({
+        config: {
+          content: InmonPlugin.group_names[keys[0]],
+          position: 'left',
+          width: 11,
+        },
+        type: 'divider',
+      });
+      if (keys[1] !== undefined) {
+        buffer.push({
+          config: {
+            content: InmonPlugin.group_names[keys[1]],
+            position: 'left',
+            width: 11,
+            offset: 1,
+          },
+          type: 'divider',
+        });
+      } else {
+        buffer.push({ content: [], type: 'text' });
+      }
+      const p_buttons = keys.map((e) => groups[e]);
+      if (p_buttons.length < 2) {
+        p_buttons.push([]);
+      }
+      for (let i = 0; i < Math.max(...p_buttons.map((e) => e.length)); ++i) {
+        const left = p_buttons[0][i];
+        const right = p_buttons[1][i];
+        if (left === undefined) {
+          const temp = plugin_to_button(
+            right,
+            inmon,
+            money,
+            size,
+            limit,
+            group_dict,
+          );
+          temp[0].config.offset = 13;
+          buffer.push(...temp);
+        } else if (right === undefined) {
+          buffer.push(
+            ...plugin_to_button(left, inmon, money, size, limit, group_dict),
+            { content: [], type: 'text' },
+          );
+        } else {
+          buffer.push(
+            ...plugin_to_button(left, inmon, money, size, limit, group_dict),
+          );
+          const temp = plugin_to_button(
+            right,
+            inmon,
+            money,
+            size,
+            limit,
+            group_dict,
+          );
+          temp[0].config.offset = 1;
+          buffer.push(...temp);
+        }
+      }
+      era.setVerticalAlign('middle');
       era.printInColRows(
         {
           columns: [
-            ...inmon.to_list.map((e) => {
-              const p = inmon_plugin_dict[e];
-              groups[p.group] = 1;
-              const name = p.colored_name;
-              name.content += ` [${p.size}]`;
-              return {
-                config: {
-                  align: 'center',
-                },
-                content: [name],
-                type: 'text',
-              };
-            }),
+            ...p_buffer,
+            { content: size > 0 ? [{ isBr: true }] : [], type: 'text' },
             {
               content: [
-                size > 0 ? { isBr: true } : '',
                 ...new Array(size)
                   .fill('[·]')
                   .map((e) => ({ content: e, display: 'inline-block' })),
                 ...new Array(limit - size)
                   .fill('[ ]')
                   .map((e) => ({ content: e, display: 'inline-block' })),
-              ],
+              ].reduce((p, c, i) => {
+                p.push(c);
+                if (i % 6 === 5) {
+                  p.push({ isBr: true });
+                }
+                return p;
+              }, []),
               config: {
                 align: 'center',
                 color: mark_colors['淫纹'],
@@ -253,26 +404,35 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
                     type: 'text',
                   },
                 ]),
-            { config: { content: '可用插件' }, type: 'divider' },
-            ...plugins.map((e) => ({
-              accelerator: e.a,
+            { config: { content: '可用插件', width: 15 }, type: 'divider' },
+            {
+              accelerator: 200,
               config: {
-                disabled:
-                  (!inmon.on(e.p.id) &&
-                    (e.p.size + size > limit || groups[e.p.group] > 0)) ||
-                  (!inmon.has(e.p.id) && juel_dict['顺从'] < e.p.price),
-                title: e.p.title,
+                align: 'right',
                 width: 4,
+                disabled: pointer.sub === 0,
               },
-              content: e.p.name,
+              content: '前一页',
               type: 'button',
-            })),
-            { content: '* 插件通过购买解锁后不再花费顺从因子', type: 'text' },
+            },
+            {
+              accelerator: 201,
+              config: {
+                align: 'right',
+                width: 4,
+                disabled: pointer.sub + 2 > Object.keys(groups).length,
+              },
+              content: '后一页',
+              type: 'button',
+            },
+            ...buffer,
+            { content: '\n* 插件通过购买解锁后不再花费顺从因子', type: 'text' },
             { content: '** 同类效果的插件一次只能装载一个', type: 'text' },
           ],
-          config: { width: 19 },
+          config: { verticalAlign: 'middle', width: 19 },
         },
       );
+      era.setVerticalAlign('top');
     } else {
       sex_mark_price = get_mark_price(chara.id, pleasure_level, meek_level);
       era.printButton('将欢愉刻印转换为淫纹', 6, {
@@ -282,7 +442,7 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
     }
   }
 
-  print_footer(chara.id, page_pointer.tab);
+  print_footer(chara.id, pointer.tab);
   const ret = await era.input();
   if (ret < 4) {
     const palam_name = era.get(`palamname:${ret + 10}`);
@@ -534,10 +694,33 @@ module.exports = async (chara, juel_dict, total_delta, page_pointer) => {
       }
     }
   } else if (ret < 100) {
-    // TODO
-    const p = plugins[ret - 10].p;
-    inmon.set(p.id, 1 - inmon.on(p.id));
+    const { p, m: cost } = plugins[ret - 10];
+    if (!inmon.has(p.id)) {
+      era.print([
+        '要为 ',
+        chara.get_colored_name(),
+        ' 解锁并装载 ',
+        p.colored_name,
+        ' 吗？花费：',
+      ]);
+      if (
+        await print_price_and_confirm(
+          chara.id,
+          JSON.parse(`{"顺从":${cost}}`),
+          juel_dict,
+        )
+      ) {
+        era.add(`juel:${chara.id}:顺从`, -cost);
+        inmon.set(p.id, 1 - inmon.on(p.id));
+      }
+    } else {
+      inmon.set(p.id, 1 - inmon.on(p.id));
+    }
+  } else if (ret === 200) {
+    pointer.sub -= 2;
+  } else if (ret === 201) {
+    pointer.sub += 2;
   } else {
-    default_handler(ret, page_pointer);
+    default_handler(ret, pointer);
   }
 };
