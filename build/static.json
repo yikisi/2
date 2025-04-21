@@ -847,9 +847,14 @@
       }
     },
     "equip": {
-      "10": {
+      "0": {
+        "n": "淫纹插件",
+        "k": "equip0",
+        "t": "number"
+      },
+      "1": {
         "n": "淫纹奴役",
-        "k": "equip10",
+        "k": "equip1",
         "t": "number"
       }
     },
@@ -1626,6 +1631,11 @@
       "36": {
         "n": "变态行为",
         "k": "flag36",
+        "t": "number"
+      },
+      "37": {
+        "n": "助手",
+        "k": "flag37",
         "t": "number"
       },
       "40": {
@@ -4421,7 +4431,8 @@
       "长子女经历": 52
     },
     "equip": {
-      "淫纹奴役": 10
+      "淫纹插件": 0,
+      "淫纹奴役": 1
     },
     "ex": {
       "口腔高潮": 0,
@@ -4582,6 +4593,7 @@
       "超得": 34,
       "惩戒力度": 35,
       "变态行为": 36,
+      "助手": 37,
       "病娇列表": 40,
       "地下室之主": 41,
       "地下室行动": 42,
@@ -4641,7 +4653,7 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 1340,
+      "version": 2000,
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",

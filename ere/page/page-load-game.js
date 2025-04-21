@@ -413,6 +413,13 @@ module.exports = async () => {
                 era.set('flag:声望不足替换', 0);
               }
             }
+            if (version <= 1340) {
+              era
+                .getAddedCharacters()
+                .forEach((e) =>
+                  era.set(`equip:${e}:淫纹奴役`, era.get(`equip:${e}:10`)),
+                );
+            }
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;
