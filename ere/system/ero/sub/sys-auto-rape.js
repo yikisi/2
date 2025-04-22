@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const use_item_by_character = require('#/system/ero/ero-act-handler/use-item-by-chara');
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
 const {
@@ -16,10 +17,8 @@ const { get_custom_ero, run_custom_ero } = require('#/event/ero/ero-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const CharaInmon = require('#/data/ero/chara-inmon');
 const { medicine_enum, tequip_parts } = require('#/data/ero/item-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
-const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
@@ -436,12 +435,9 @@ async function sys_auto_rape(shown) {
   era.logger.debug(
     `raping done! ${(new Date().getTime() - current).toLocaleString()}ms`,
   );
-  const inmon = CharaInmon.get(master);
   if (
     ero_tagged_hooks[action] !== undefined &&
-    (!era.get(`talent:${master}:病娇`) ||
-      inmon.on(plugin_enum.no_yand) ||
-      inmon.on(plugin_enum.ntr)) &&
+    !sys_check_yandere(master, (y) => y > 0) &&
     !era.get(`status:${master}:超马跳Z`) &&
     (master < 340 || master > 342)
   ) {

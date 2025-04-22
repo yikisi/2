@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
@@ -64,13 +65,8 @@ handlers[ero_hooks.become_lubrication] = (chara_id, _, extra_flag) => {
 };
 
 handlers[ero_hooks.prison] = (id) => {
-  const inmon = CharaInmon.get(id);
   const life_marks = LifeEventMarks.get_marks(id);
-  if (
-    era.get(`talent:${id}:病娇`) === 1 &&
-    !inmon.on(plugin_enum.no_yand) &&
-    !inmon.on(plugin_enum.ntr)
-  ) {
+  if (sys_check_yandere(id, (y) => y === 1)) {
     era.set(`talent:${id}:病娇`, 2);
     life_marks.yandere = get_random_value(
       2,

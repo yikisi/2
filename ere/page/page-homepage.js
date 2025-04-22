@@ -58,6 +58,7 @@ const { location_enum } = require('#/data/locations');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 
 let random_event,
   notes_index = 0;
@@ -109,30 +110,27 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
       era.set('tflag:主导权', lover);
     }
     const inmon = CharaInmon.get(lover);
-    const sex_3p =
-      era.get(`talent:${lover}:病娇`) !== 2 ||
-      inmon.on(plugin_enum.no_yand) ||
-      inmon.on(plugin_enum.ntr)
-        ? get_random_entry(
-            sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
-              .map((e) => {
-                return {
-                  id: e,
-                  check:
-                    e > 0 &&
-                    e !== lover &&
-                    sys_check_awake(e) &&
-                    (era.get(`relation:${e}:${lover}`) > 225 ||
-                      era.get(`base:${e}:性欲`) >= lust_border.absent_mind) &&
-                    get_custom_check(e).is_want_make_love(),
-                };
-              })
-              .filter((e) => e.check),
-          )
-        : undefined;
-    if (sex_3p !== undefined) {
+    const orgy = !sys_check_yandere(lover, (y) => y === 2, inmon)
+      ? get_random_entry(
+          sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
+            .map((e) => {
+              return {
+                id: e,
+                check:
+                  e > 0 &&
+                  e !== lover &&
+                  sys_check_awake(e) &&
+                  (era.get(`relation:${e}:${lover}`) > 225 ||
+                    era.get(`base:${e}:性欲`) >= lust_border.absent_mind) &&
+                  get_custom_check(e).is_want_make_love(),
+              };
+            })
+            .filter((e) => e.check),
+        )
+      : undefined;
+    if (orgy !== undefined) {
       era.drawLine();
-      const chara = get_chara_talk(sex_3p.id);
+      const chara = get_chara_talk(orgy.id);
       era.print([chara.get_colored_name(), ' 面色绯红地想要加入……接受吗？']);
       era.printButton('「你来的正是时候」', 1);
       era.printButton('还是别了……', 2);
@@ -144,43 +142,37 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
           get_chara_talk(0).get_colored_name(),
           ' 怀中……',
         ]);
-        init_ero(sex_3p.id);
+        init_ero(orgy.id);
         era.println();
         wait_flag =
-          sys_like_chara(sex_3p.id, 0, get_random_value(50, 150)) || wait_flag;
+          sys_like_chara(orgy.id, 0, get_random_value(50, 150)) || wait_flag;
         wait_flag =
-          sys_like_chara(sex_3p.id, lover, get_random_value(50, 150)) ||
+          sys_like_chara(orgy.id, lover, get_random_value(50, 150)) ||
           wait_flag;
-        if (inmon.on(plugin_enum.ntr)) {
+        const yandere = era.get(`talent:${lover}:病娇`);
+        if (
+          inmon.on(plugin_enum.ntr) ||
+          (!yandere && era.get(`talent:${lover}:绿帽癖`))
+        ) {
           wait_flag =
             sys_like_chara(lover, 0, get_random_value(10, 25)) || wait_flag;
-        } else if (!inmon.on(plugin_enum.no_yand)) {
           wait_flag =
-            sys_like_chara(
-              lover,
-              0,
-              -get_random_value(25, 75 + 25 * era.get(`talent:${lover}:病娇`)),
-            ) || wait_flag;
-        }
-        if (inmon.on(plugin_enum.ntr)) {
-          wait_flag =
-            sys_like_chara(lover, chara.id, get_random_value(0, 25)) ||
+            sys_like_chara(lover, orgy.id, get_random_value(0, 25)) ||
             wait_flag;
         } else if (
-          era.get(`relation:${lover}:${chara.id}`) <= 375 ||
-          (era.get(`talent:${lover}:病娇`) > 0 &&
-            !inmon.on(plugin_enum.no_yand))
+          !inmon.on(plugin_enum.no_yand) &&
+          era.get(`relation:${lover}:${orgy.id}`) > 375
         ) {
           wait_flag =
             sys_like_chara(
               lover,
-              chara.id,
-              -get_random_value(75, 100 + 25 * era.get(`talent:${lover}:病娇`)),
+              0,
+              -get_random_value(25, 75 + 25 * yandere),
             ) || wait_flag;
         }
-        era.set(`cflag:${sex_3p.id}:自主训练`, 0);
+        era.set(`cflag:${orgy.id}:自主训练`, 0);
       } else if (
-        sex_3p.check === 2 &&
+        orgy.check === 2 &&
         era.get(`relation:${lover}:${chara.id}`) > 375
       ) {
         await era.printAndWait([
@@ -191,12 +183,12 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
           get_chara_talk(0).get_colored_name(),
           ' 的抗议……',
         ]);
-        init_ero(sex_3p.id);
+        init_ero(orgy.id);
         era.println();
         wait_flag =
           sys_like_chara(
             lover,
-            sex_3p.id,
+            orgy.id,
             -get_random_value(0, 25 * era.get(`talent:${lover}:病娇`)),
           ) || wait_flag;
         wait_flag =
@@ -205,18 +197,15 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
             0,
             -get_random_value(50, 100 + 25 * era.get(`talent:${lover}:病娇`)),
           ) || wait_flag;
-        era.set(`cflag:${sex_3p.id}:自主训练`, 0);
+        era.set(`cflag:${orgy.id}:自主训练`, 0);
       } else {
         await era.printAndWait([chara.get_colored_name(), ' 掩面而去……']);
         era.println();
         wait_flag =
           sys_like_chara(
-            sex_3p.id,
+            orgy.id,
             0,
-            -get_random_value(
-              25,
-              50 + 25 * era.get(`talent:${sex_3p.id}:病娇`),
-            ),
+            -get_random_value(25, 50 + 25 * era.get(`talent:${orgy.id}:病娇`)),
           ) || wait_flag;
         wait_flag =
           sys_like_chara(

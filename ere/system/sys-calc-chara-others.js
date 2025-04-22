@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_hide_relation_and_love,
@@ -29,10 +30,10 @@ const {
 const LimitLoveStatus = require('#/data/love-limit-status');
 
 /**
- * @param {number} chara_id
+ * @param {number} id
  * @param {number} new_love
  */
-async function punish_unfaithful(chara_id, new_love) {
+async function punish_unfaithful(id, new_love) {
   const punish_option = era.get('flag:不忠惩罚') === 1,
     me = get_chara_talk(0),
     temp_chara_list = sys_filter_chara(
@@ -40,21 +41,18 @@ async function punish_unfaithful(chara_id, new_love) {
       '招募状态',
       recruit_flags.yes,
     ).filter((e) => {
-      const inmon = CharaInmon.get(e);
       return (
         e > 0 &&
-        e !== chara_id &&
+        e !== id &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
         era.get(`love:${e}`) >= 75 &&
         era.get(`talent:${e}:绿帽癖`) === 0 &&
-        !inmon.on(plugin_enum.no_yand) &&
-        !inmon.on(plugin_enum.ntr) &&
-        get_custom_mec(e).is_anger_for_unfaithful([chara_id]) &&
-        (punish_option || era.get(`talent:${e}:病娇`) > 0)
+        get_custom_mec(e).is_anger_for_unfaithful([id]) &&
+        sys_check_yandere(e, (y) => punish_option || y > 0)
       );
     });
   for (const c_id of temp_chara_list) {
-    get_custom_check(c_id).check_after_betrayed([chara_id]);
+    get_custom_check(c_id).check_after_betrayed([id]);
     era.print([
       me.get_colored_name(),
       ' 的不忠让 ',
@@ -258,9 +256,7 @@ function love_uma(id, val, shown = true) {
     love < 50 &&
     new_val >= 50 &&
     era.get(`cflag:${id}:种族`) &&
-    era.get(`talent:${id}:病娇`) === 1 &&
-    !inmon.on(plugin_enum.no_yand) &&
-    !inmon.on(plugin_enum.ntr)
+    sys_check_yandere(id, (y) => y === 1, inmon)
   ) {
     era.set(`status:${id}:爱意克制`, 1);
   }
@@ -384,13 +380,10 @@ module.exports = {
     ) {
       get_custom_mec(id).set_callname();
     }
-    const inmon = CharaInmon.get(id);
     if (
       new_val === 50 &&
       era.get(`cflag:${id}:种族`) &&
-      era.get(`talent:${id}:病娇`) === 1 &&
-      !inmon.on(plugin_enum.no_yand) &&
-      !inmon.on(plugin_enum.ntr)
+      sys_check_yandere(id, (y) => y === 1)
     ) {
       era.set(`status:${id}:爱意克制`, 1);
     }

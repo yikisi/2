@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
@@ -8,9 +9,7 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { log_600m2 } = require('#/utils/value-utils');
 
-const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
-const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { location_enum } = require('#/data/locations');
 const { location_move_cost, vehicle_influences } = require('#/data/move-const');
 const { track_enum } = require('#/data/race/model/race-info');
@@ -179,7 +178,6 @@ module.exports = {
    * @returns {number} 0b1：普通迷雾，隐藏好感爱慕；0b10：病娇迷雾，隐藏好感
    */
   sys_check_hide_relation_and_love(id) {
-    const inmon = CharaInmon.get(id);
     const hide_talent = era.get(`talent:${id}:捉摸不透`) > 0,
       not_in_basement = era.get('flag:当前位置') !== location_enum.basement,
       advanced_info = not_in_basement && era.get('status:0:马语者') > 0,
@@ -191,11 +189,7 @@ module.exports = {
           era.get(`talent:${id}:坦率程度`) === -1) &&
         (id === 32 || !glasses) &&
         era.get(`love:${id}`) < 75) +
-        0b10 *
-          (hide_talent &&
-            era.get(`talent:${id}:病娇`) === 2 &&
-            !inmon.on(plugin_enum.no_yand) &&
-            !inmon.on(plugin_enum.ntr))
+        0b10 * (hide_talent && sys_check_yandere(id, (y) => y === 2))
     );
   },
   /** @param {number} chara_id */

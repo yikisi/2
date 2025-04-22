@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const sys_change_tired = require('#/system/chara/sys-change-tired');
 const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
 const {
@@ -26,7 +27,6 @@ const {
 } = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
-const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -515,14 +515,7 @@ async function check_new_activities(cur_round, in_team_list) {
     sort_list(loc_visitors.get(location_enum.visitor), (e) => e, true),
   );
   new YandereList().set(
-    in_team_list.filter((e) => {
-      const inmon = CharaInmon.get(e);
-      return (
-        era.get(`talent:${e}:病娇`) > 0 &&
-        !inmon.on(plugin_enum.no_yand) &&
-        !inmon.on(plugin_enum.ntr)
-      );
-    }),
+    in_team_list.filter((e) => sys_check_yandere(e, (y) => y > 0)),
   );
 
   if (era.get('flag:当前周') === 1) {

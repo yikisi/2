@@ -627,12 +627,12 @@ module.exports = {
       const inmon = CharaInmon.get(id);
       if (inmon.on(plugin_enum.no_yand)) {
         delete temp.color;
+        delete temp.opacity;
         temp.title = '已缓和。';
-        temp.opacity = 0.5;
       } else if (inmon.on(plugin_enum.ntr)) {
         temp.color = el_success_color;
+        delete temp.opacity;
         temp.title = '已扭曲。';
-        temp.opacity = 0.5;
       }
       ret.push(temp);
     }

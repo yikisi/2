@@ -332,7 +332,6 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
           buffer.push(...temp);
         }
       }
-      era.setVerticalAlign('middle');
       era.printInColRows(
         {
           columns: [
@@ -439,7 +438,6 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
           config: { verticalAlign: 'middle', width: 19 },
         },
       );
-      era.setVerticalAlign('top');
     } else {
       sex_mark_price = get_mark_price(chara.id, pleasure_level, meek_level);
       era.printButton('将欢愉刻印转换为淫纹', 6, {
