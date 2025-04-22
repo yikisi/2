@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_hide_relation_and_love,
@@ -18,6 +19,8 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { love_colors, relation_colors } = require('#/data/const.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_love_border,
@@ -27,28 +30,29 @@ const {
 const LimitLoveStatus = require('#/data/love-limit-status');
 
 /**
- * @param {number} chara_id
+ * @param {number} id
  * @param {number} new_love
  */
-async function punish_unfaithful(chara_id, new_love) {
+async function punish_unfaithful(id, new_love) {
   const punish_option = era.get('flag:不忠惩罚') === 1,
     me = get_chara_talk(0),
     temp_chara_list = sys_filter_chara(
       'cflag',
       '招募状态',
       recruit_flags.yes,
-    ).filter(
-      (e) =>
+    ).filter((e) => {
+      return (
         e > 0 &&
-        e !== chara_id &&
+        e !== id &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
         era.get(`love:${e}`) >= 75 &&
         era.get(`talent:${e}:绿帽癖`) === 0 &&
-        get_custom_mec(e).is_anger_for_unfaithful([chara_id]) &&
-        (punish_option || era.get(`talent:${e}:病娇`) > 0),
-    );
+        get_custom_mec(e).is_anger_for_unfaithful([id]) &&
+        sys_check_yandere(e, (y) => punish_option || y > 0)
+      );
+    });
   for (const c_id of temp_chara_list) {
-    get_custom_check(c_id).check_after_betrayed([chara_id]);
+    get_custom_check(c_id).check_after_betrayed([id]);
     era.print([
       me.get_colored_name(),
       ' 的不忠让 ',
@@ -84,81 +88,87 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
     // 玩家对所有马娘好感默认最大
     return false;
   }
+  const inmon = CharaInmon.get(target);
   let relation = era.get(`relation:${target}:${aim}`);
-  relation = relation === undefined ? 75 : relation;
-  let _val = val;
-  let love_flag = 0;
+  let love = 0;
+  let coff = 100;
+  if (relation === undefined) {
+    relation = 75;
+  }
+  if (val > 0) {
+    coff +=
+      100 * inmon.on(plugin_enum.rel_gu) - 50 * inmon.on(plugin_enum.rel_gd);
+    if (era.get(`status:${target}:生日`) > 0) {
+      coff *= 2;
+    }
+  } else if (val < 0) {
+    coff +=
+      100 * inmon.on(plugin_enum.rel_lu) - 50 * inmon.on(plugin_enum.rel_ld);
+  }
   if (!aim) {
-    if (_val > 0) {
-      _val = Math.floor(
-        Math.max(
-          (_val *
-            (10 + era.get(`talent:${target}:好感`)) *
-            (100 +
-              era.get('flag:好感上升加成') -
-              25 * sys_check_remote(target) -
-              50 * (era.get(`status:${target}:讨厌药`) > 0) +
-              get_custom_mec(target).get_relation_buff())) /
-            1000 +
-            3 * era.get(`talent:${target}:自信程度`),
-          1,
-        ),
-      );
+    if (val > 0) {
+      coff +=
+        era.get('flag:好感上升加成') -
+        25 * sys_check_remote(target) -
+        50 * (era.get(`status:${target}:讨厌药`) > 0) +
+        get_custom_mec(target).get_relation_buff();
+    } else if (val < 0) {
+      coff +=
+        -era.get('flag:好感上升加成') +
+        50 * sys_check_remote(target) +
+        50 * (era.get(`status:${target}:讨厌药`) > 0);
+    }
+  }
+  if (coff >= 0) {
+    val *= coff / 100;
+  }
+  if (val > 0) {
+    val = Math.floor(
+      Math.max(val + 3 * era.get(`talent:${target}:自信程度`), 1),
+    );
+    let shield = 0;
+    if (relation + val > 600) {
+      shield = relation + val - 600;
+      val = 600 - relation;
+    }
+    if (!aim) {
       if (relation > 525) {
-        love_flag = Math.floor(_val / 10);
+        love = Math.floor(val / 10);
       } else if (relation > 375) {
-        love_flag = Math.floor(_val / 15);
+        love = Math.floor(val / 15);
       } else if (relation > 225) {
-        love_flag = Math.floor(_val / 20);
+        love = Math.floor(val / 20);
       }
-    } else if (_val < 0) {
-      _val = Math.floor(
-        Math.min(
-          (_val *
-            (100 -
-              era.get('flag:好感上升加成') +
-              50 * sys_check_remote(target) +
-              50 * (era.get(`status:${target}:讨厌药`) > 0))) /
-            100 +
-            3 * era.get(`talent:${target}:自信程度`),
-          -1,
-        ),
-      );
+      let temp = Math.floor(era.get(`cflag:${target}:好感盾`));
+      if (shield > 0) {
+        const love = era.get(`love:${target}`);
+        if (love > 50) {
+          shield *= (love - 50) / 50;
+        }
+        while (shield >= temp) {
+          shield -= temp;
+          temp = Math.floor(era.add(`cflag:${target}:好感盾`, 1));
+        }
+        era.add(`cflag:${target}:好感盾`, shield / temp);
+      } else if (val < 0) {
+        temp += val;
+        if (temp >= 0) {
+          era.set(`cflag:${target}:好感盾`, temp);
+        } else {
+          val = Math.ceil(temp);
+        }
+      }
+    }
+  } else if (val < 0) {
+    val = Math.floor(Math.min(val, -1));
+    if (relation + val < -200) {
+      val = -200 - relation;
     }
   }
-  if (era.get(`status:${target}:生日`)) {
-    _val *= 2;
-  }
-  let shield = 0;
-  if (relation + _val > 600) {
-    shield = relation + _val - 600;
-    _val = 600 - relation;
-  } else if (relation + _val < -200) {
-    _val = -200 - relation;
-  }
-  let temp = Math.floor(era.get(`cflag:${target}:好感盾`));
-  if (shield > 0) {
-    const love = era.get(`love:${target}`);
-    if (love > 50) {
-      shield *= (love - 50) / 50;
-    }
-    while (shield >= temp) {
-      shield -= temp;
-      temp = Math.floor(era.add(`cflag:${target}:好感盾`, 1));
-    }
-    era.add(`cflag:${target}:好感盾`, shield / temp);
-  } else if (_val < 0) {
-    temp += _val;
-    if (temp >= 0) {
-      era.set(`cflag:${target}:好感盾`, temp);
-    } else {
-      _val = Math.ceil(temp);
-    }
-  }
-  love_flag = Math.max(love_flag, extra_love);
+  love = Math.max(love, extra_love);
   let ret = false;
-  if (_val !== 0) {
-    const new_relation = era.set(`relation:${target}:${aim}`, relation + _val);
+  if (val !== 0) {
+    const new_relation = era.set(`relation:${target}:${aim}`, relation + val);
     const mark = get_relation_mark(new_relation, target);
     if (shown) {
       ret = true;
@@ -167,7 +177,7 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
         ' 对 ',
         get_chara_talk(aim).get_colored_name(),
         ' 的好感',
-        _val > 0
+        val > 0
           ? {
               color: attr_change_colors.up,
               content: ' 提高 ',
@@ -177,9 +187,7 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
               content: ' 降低 ',
             },
         {
-          content: `了 ${
-            mark === '？' ? '?' : _val > 0 ? _val : -_val
-          }！现在为：`,
+          content: `了 ${mark === '？' ? '?' : val > 0 ? val : -val}！现在为：`,
         },
         {
           content: `${mark} (${mark === '？' ? '?' : new_relation})`,
@@ -188,81 +196,83 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
       ]);
     }
   }
-  if (love_flag > 0 && love_uma(target, love_flag, shown)) {
+  if (love > 0 && love_uma(target, love, shown)) {
     ret = true;
   }
   return ret;
 }
 
 /**
- * @param {number} chara_id
+ * @param {number} id
  * @param {number} val
  * @param {boolean} [shown=true]
  * @returns {boolean}
  */
-function love_uma(chara_id, val, shown = true) {
-  const love = era.get(`love:${chara_id}`);
+function love_uma(id, val, shown = true) {
+  const love = era.get(`love:${id}`);
   if (
-    chara_id === 0 ||
+    id === 0 ||
     val === 0 ||
     (love === 0 &&
       !era.get('flag:后代爱慕限制') &&
-      era.get(`cflag:${chara_id}:父方角色`) >= 0) ||
-    era.get(`status:${chara_id}:讨厌药`) > 0 ||
-    !new LimitLoveStatus(chara_id).is_empty()
+      era.get(`cflag:${id}:父方角色`) >= 0) ||
+    era.get(`status:${id}:讨厌药`) > 0 ||
+    !new LimitLoveStatus(id).is_empty()
   ) {
     return false;
   }
-  let _val = Math.floor(
-    (val *
-      (100 +
-        era.get('flag:爱慕上升加成') +
-        50 * era.get(`status:${chara_id}:爱意克制`) +
-        get_custom_mec(chara_id).get_love_buff())) /
-      100,
-  );
-  const force_limit = get_custom_mec(chara_id).get_love_limit(),
-    border = force_limit || Math.max(get_love_border(chara_id), 50),
+  const inmon = CharaInmon.get(id);
+  const coff =
+    100 +
+    era.get('flag:爱慕上升加成') +
+    50 * era.get(`status:${id}:爱意克制`) +
+    get_custom_mec(id).get_love_buff() +
+    100 * inmon.on(plugin_enum.love_up) -
+    50 * inmon.on(plugin_enum.love_d1) -
+    100 * inmon.on(plugin_enum.love_d2);
+  val = Math.floor((val * coff) / 100);
+  const force_limit = get_custom_mec(id).get_love_limit(),
+    border = force_limit || Math.max(get_love_border(id), 50),
     love_limit = !era.get('flag:回合爱慕惩罚');
-  if ((love_limit || force_limit) && love + _val >= border) {
-    _val = border - 1 - love;
+  if ((love_limit || force_limit) && love + val >= border) {
+    val = border - 1 - love;
   }
-  if (love + _val > 100) {
-    _val = 100 - love;
+  if (love + val > 100) {
+    val = 100 - love;
   }
-  if (_val === 0) {
+  if (val === 0) {
     return false;
   }
-  let new_val = era.add(`love:${chara_id}`, _val);
+  let new_val = era.add(`love:${id}`, val);
   let printed_new_val = new_val;
-  let hide = sys_check_limit_relation_and_love(chara_id);
+  let hide = sys_check_limit_relation_and_love(id);
   if (hide && love < 24) {
     hide = false;
     printed_new_val = Math.min(printed_new_val, 24);
   }
   shown &&= !hide;
-  print_change(chara_id, love, printed_new_val, shown);
+  print_change(id, love, printed_new_val, shown);
   if (
     love < 50 &&
     new_val >= 50 &&
-    era.get(`cflag:${chara_id}:种族`) &&
-    era.get(`talent:${chara_id}:病娇`) === 1
+    era.get(`cflag:${id}:种族`) &&
+    sys_check_yandere(id, (y) => y === 1, inmon)
   ) {
-    era.set(`status:${chara_id}:爱意克制`, 1);
+    era.set(`status:${id}:爱意克制`, 1);
   }
   if (
     love_limit &&
     (new_val === 49 || new_val === 74 || new_val === 89 || new_val === 99) &&
-    era.get(`cflag:${chara_id}:爱慕暂拒`) !== new_val
+    era.get(`cflag:${id}:爱慕暂拒`) !== new_val
   ) {
-    if ((sys_check_hide_relation_and_love(chara_id) & 0b1) === 0 && shown) {
+    if ((sys_check_hide_relation_and_love(id) & 0b1) === 0 && shown) {
       era.print([
         '和 ',
-        get_chara_talk(chara_id).get_colored_name(),
+        get_chara_talk(id).get_colored_name(),
         ' 的关系似乎可以更进一步了……',
       ]);
     }
-    get_custom_check(chara_id).check_love_events();
+    get_custom_check(id).check_love_events();
   }
   return shown;
 }
@@ -356,38 +366,38 @@ module.exports = {
   sys_like_chara: like_chara,
   sys_love_uma: love_uma,
   /**
-   * @param {number} chara_id
+   * @param {number} id
    * @returns {Promise<boolean>}
    */
-  async sys_love_uma_in_event(chara_id) {
-    if (era.get('flag:回合爱慕惩罚') || chara_id === 0) {
+  async sys_love_uma_in_event(id) {
+    if (era.get('flag:回合爱慕惩罚') || id === 0) {
       return false;
     }
-    const new_val = era.add(`love:${chara_id}`, 1);
+    const new_val = era.add(`love:${id}`, 1);
     if (
-      typeof era.get(`callname:${chara_id}:0`) === 'string' &&
-      era.get(`callname:${chara_id}:0`).startsWith('训练员')
+      typeof era.get(`callname:${id}:0`) === 'string' &&
+      era.get(`callname:${id}:0`).startsWith('训练员')
     ) {
-      get_custom_mec(chara_id).set_callname();
+      get_custom_mec(id).set_callname();
     }
     if (
       new_val === 50 &&
-      era.get(`cflag:${chara_id}:种族`) &&
-      era.get(`talent:${chara_id}:病娇`) === 1
+      era.get(`cflag:${id}:种族`) &&
+      sys_check_yandere(id, (y) => y === 1)
     ) {
-      era.set(`status:${chara_id}:爱意克制`, 1);
+      era.set(`status:${id}:爱意克制`, 1);
     }
     if (
-      sys_check_hide_relation_and_love(chara_id) ||
-      sys_check_limit_relation_and_love(chara_id)
+      sys_check_hide_relation_and_love(id) ||
+      sys_check_limit_relation_and_love(id)
     ) {
       return false;
     }
     era.println();
-    print_change(chara_id, new_val - 1, new_val);
-    era.set(`cflag:${chara_id}:爱慕暂拒`, 0);
+    print_change(id, new_val - 1, new_val);
+    era.set(`cflag:${id}:爱慕暂拒`, 0);
     await get_chara_talk(0).say_and_wait('已经不能回头了……', true);
-    new_val >= 75 && (await punish_unfaithful(chara_id, new_val));
+    new_val >= 75 && (await punish_unfaithful(id, new_val));
     return true;
   },
   sys_punish_unfaithful: punish_unfaithful,

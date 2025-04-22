@@ -229,18 +229,19 @@ function update_juel_buff(...ids) {
     set_juel_buff(
       chara_id,
       '顺从',
-      lust_buff / 2 +
-        ((era.get(`talent:${chara_id}:自信程度`) +
-          era.get(`talent:${chara_id}:坦率程度`) +
-          era.get(`talent:${chara_id}:工口好奇`) +
-          era.get(`talent:${chara_id}:情感活动`)) *
-          3) /
-          10 +
-        pleasure_level / 10 +
-        Math.max(pain_level, shame_level) / 20 +
-        slave_level / 5 -
-        hate_level / 20 -
-        is_raping +
+      ((era.get(`talent:${chara_id}:自信程度`) +
+        era.get(`talent:${chara_id}:坦率程度`) +
+        era.get(`talent:${chara_id}:工口好奇`) +
+        era.get(`talent:${chara_id}:情感活动`)) *
+        3) /
+        10 +
+        (slave_level === 0
+          ? lust_buff / 2 +
+            pleasure_level / 10 +
+            Math.max(pain_level, shame_level) / 20 +
+            hate_level / 20 -
+            is_raping
+          : slave_level / 10 - 0.1) +
         !chara_id / 2,
     );
     set_juel_buff(
@@ -301,13 +302,15 @@ function update_juel_buff(...ids) {
           era.get(`talent:${chara_id}:坦率程度`) +
           era.get(`talent:${chara_id}:工口好奇`) +
           era.get(`talent:${chara_id}:情感活动`)) +
-        is_raping +
-        hate_level / 10 +
-        pain_level / 20 +
-        shame_level / 20 -
-        meek_level / 4 -
-        love_buff -
-        lust_buff / 2,
+        (slave_level < 3
+          ? is_raping +
+            hate_level / 10 +
+            pain_level / 20 +
+            shame_level / 20 -
+            meek_level / 4 -
+            love_buff -
+            lust_buff / 2
+          : 0),
     );
     set_juel_buff(
       chara_id,
@@ -368,7 +371,7 @@ function init_ero(...ids) {
           (temp = era.set(
             `base:${chara_id}:体力`,
             Math.floor(era.get(`base:${chara_id}:体力`)),
-          )) / 2,
+          )) * get_random_value(0.6, 0.8, true),
           temp - 100,
         ),
         1,
@@ -381,7 +384,7 @@ function init_ero(...ids) {
           (temp = era.set(
             `base:${chara_id}:精力`,
             era.get(`base:${chara_id}:精力`),
-          )) / 2,
+          )) * get_random_value(0.6, 0.8, true),
           temp - 100,
         ),
         1,
@@ -415,6 +418,7 @@ function init_ero(...ids) {
     }
   });
 }
+
 /** @param {number} ids */
 function begin_and_init_ero(...ids) {
   if (juel_names === undefined) {
@@ -625,20 +629,20 @@ function end_ero(skip_juels, log_juels, ids) {
     .forEach((v) => ids.forEach((id) => era.set(`gotjewel:${id}:${v}`, 0)));
 }
 
-/** @param {boolean} [skip_juels] */
-function end_ero_and_train(skip_juels) {
+/** @param {boolean} [skip_juels=false] */
+function end_ero_and_train(skip_juels = false) {
   clean_juels();
   clean_palams();
-  end_ero(skip_juels === true, false, era.getCharactersInTrain());
+  end_ero(skip_juels, false, era.getCharactersInTrain());
   era.endTrain();
 }
 
-/** @param {boolean} [shown] */
-async function end_ero_and_show_result(shown) {
+/** @param {boolean} [shown=true] */
+async function end_ero_and_show_result(shown = true) {
   clean_juels();
   clean_palams();
   const chara_list = era.getCharactersInTrain();
-  end_ero(false, shown !== false, chara_list);
+  end_ero(false, shown, chara_list);
   if (shown !== false) {
     if (era.get('flag:马跳结果显示简报')) {
       for (const chara_id of chara_list) {

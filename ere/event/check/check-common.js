@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const {
   check_pregnant_unprotect,
   check_want_to_escape,
@@ -16,7 +17,9 @@ const { log_600m4 } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { attr_change_colors } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const CrazyFans = require('#/data/event/crazy-fans');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -101,7 +104,7 @@ class CustomizedCheck {
   }
 
   check_next_week() {
-    if (this.id && era.get(`cflag:${this.id}:种族`)) {
+    if (this.id > 0 && era.get(`cflag:${this.id}:种族`)) {
       const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
       if (edu_weeks < 3 * 48) {
         if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
@@ -219,7 +222,8 @@ class CustomizedCheck {
       common_no_action_check(this.id) ||
       era.get('flag:当前位置') === location_enum.basement ||
       era.get('cflag:0:位置') !== 0 ||
-      !era.get(`cflag:${this.id}:种族`)
+      !era.get(`cflag:${this.id}:种族`) ||
+      era.get(`mark:${this.id}:淫纹`) === 3
     ) {
       return false;
     }
@@ -271,7 +275,13 @@ class CustomizedCheck {
 
   /** @returns {boolean} */
   is_rape_in_sleeping() {
-    if (common_no_action_check(this.id) || check_want_to_escape(this.id)) {
+    const inmon = CharaInmon.get(this.id);
+    if (
+      common_no_action_check(this.id) ||
+      check_want_to_escape(this.id) ||
+      inmon.slave > 0 ||
+      inmon.on(plugin_enum.meek)
+    ) {
       return false;
     }
     const love = era.get(`love:${this.id}`),
@@ -322,7 +332,12 @@ class CustomizedCheck {
 
   /** @returns {0|1|2} */
   is_want_make_love() {
-    if (common_no_action_check(this.id) || check_want_to_escape(this.id)) {
+    const inmon = CharaInmon.get(this.id);
+    if (
+      common_no_action_check(this.id) ||
+      check_want_to_escape(this.id) ||
+      inmon.on(plugin_enum.meek)
+    ) {
       return 0;
     }
     const love = era.get(`love:${this.id}`);
@@ -352,14 +367,17 @@ class CustomizedCheck {
       }(好色)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
     );
     if (ratio >= 1 || dice < ratio) {
+      if (inmon.slave > 0) {
+        return 1;
+      }
       const great_success =
         era.get(`talent:${this.id}:反抗意愿`) >= 0 &&
         (dice < 0.05 ||
           era.get('flag:惩戒力度') >= 2 ||
           era.get(`base:${this.id}:性欲`) >= lust_border.want_sex ||
           era.get(`base:${this.id}:压力`) >= pressure_border.apprehension ||
-          era.get(`talent:${this.id}:病娇`) === 2);
-      if (era.get(`status:${this.id}:爱意克制`)) {
+          sys_check_yandere(this.id, (e) => e === 2, inmon));
+      if (era.get(`status:${this.id}:爱意克制`) > 0) {
         if (!great_success) {
           return 0;
         }

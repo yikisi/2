@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
+
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -35,7 +37,7 @@ function sys_get_chara_pseudo(chara_id) {
       adapt_list.slice(0, 2).map((adapt) => adapt - debuff),
       new CharaSkills(chara_id).get().map((e) => skills_dict[e]),
     );
-  uma.chara = era.get(`cflag:${chara_id}:气性`);
+  uma.chara = sys_get_chara(chara_id);
   uma.base.winCount = new RaceHistory(chara_id)
     .get_values()
     .filter((e) => e.rank === 1).length;

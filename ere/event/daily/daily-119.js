@@ -10,6 +10,7 @@ const CustomizedDaily = require('#/event/daily/daily-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 module.exports = class extends CustomizedDaily {
@@ -46,6 +47,7 @@ module.exports = class extends CustomizedDaily {
       const dict = {};
       dict['你'] = get_chara_talk(0).name;
       dict['称呼'] = callname;
+      dict['代表色'] = get_chara_color(119);
       lines['good_morning'](dict);
     }
   }

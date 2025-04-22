@@ -1,5 +1,6 @@
 ﻿const era = require('#/era-electron');
 
+const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_get_succ_rate } = require('#/system/sys-calc-chara-param');
@@ -36,11 +37,11 @@ function get_train_bonus(chara_id, attr, between_weeks) {
   let train_buff =
     era.get(`cflag:${chara_id}:${attr_names[attr]}加成`) +
     era.get('flag:训练加成') +
-    (5 + (era.get(`cflag:${chara_id}:气性`) === 2)) *
+    (5 + (sys_get_chara(chara_id) === 2)) *
       (era.get(`status:${chara_id}:摸鱼`)
         ? -4
         : era.get(`cflag:${chara_id}:干劲`)) +
-    (era.get(`cflag:${chara_id}:气性`) === -3) -
+    (sys_get_chara(chara_id) === -3) -
     0.004 * era.get(`base:${chara_id}:压力`) +
     get_custom_mec(chara_id).get_train_buff();
   if (chara_loc > 0 && chara_loc !== location_enum.beach) {
@@ -65,9 +66,7 @@ function get_train_bonus(chara_id, attr, between_weeks) {
       }
   }
   if (!between_weeks || between_weeks.teach_chara > 0) {
-    train_buff +=
-      10 * era.get(`talent:${chara_id}:训练`) +
-      get_trainer_train_buff(chara_id);
+    train_buff += get_trainer_train_buff(chara_id);
   }
   return Math.max(train_buff, -100);
 }
@@ -143,7 +142,7 @@ function get_success_base_reward(
       train_cost.stamina = -train_cost.stamina / 4;
       changes.pt_change = 8;
   }
-  if (era.get(`cflag:${chara_id}:气性`) === -1) {
+  if (sys_get_chara(chara_id) === -1) {
     changes.attr_change = changes.attr_change.map((e) => e + (e > 0));
   }
   changes.pt_change += 1.25 * (train_level - 1);

@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 const {
   get_penis_size,
   orgasm_check_list,
@@ -10,6 +11,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 
 const { palam_colors } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const {
   lust_border,
   palam_from_orgasm,
@@ -20,20 +22,21 @@ const {
   part_names,
   pleasure_list,
 } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 
 let tmp = {};
 
 /**
- * @param {number} chara_id
+ * @param {number} id
  * @param {number} part
  * @param {number} _attack hurt value
  */
-function add_palam(chara_id, part, _attack) {
+function add_palam(id, part, _attack) {
   let attack = _attack;
   if (part === part_enum.breast) {
-    attack /= 1 + 0.2 * era.get(`talent:${chara_id}:乳房尺寸`);
+    attack /= 1 + 0.2 * era.get(`talent:${id}:乳房尺寸`);
   }
-  attack *= 1 - 0.2 * era.get(`talent:${chara_id}:贞洁看法`);
+  attack *= 1 - 0.2 * era.get(`talent:${id}:贞洁看法`);
   const key = part_names[part];
   if (!key) {
     return;
@@ -44,23 +47,51 @@ function add_palam(chara_id, part, _attack) {
   // 高潮抑制-10%快感累积
   let coff =
     1 +
-    0.25 * (era.get(`base:${chara_id}:性欲`) >= lust_border.want_sex) +
-    0.25 * era.get(`tcvar:${chara_id}:发情`) +
-    0.2 * (era.get(`tcvar:${chara_id}:余韵`) > 0) -
-    0.1 * (era.get(`tcvar:${chara_id}:高潮抑制`) > 0);
+    0.25 * (era.get(`base:${id}:性欲`) >= lust_border.want_sex) +
+    0.25 * era.get(`tcvar:${id}:发情`) +
+    0.2 * (era.get(`tcvar:${id}:余韵`) > 0) -
+    0.1 * (era.get(`tcvar:${id}:高潮抑制`) > 0);
   if (part === part_enum.penis) {
     // 不应期内阴茎快感提升-90%
-    if (era.get(`tcvar:${chara_id}:不应期`)) {
+    if (era.get(`tcvar:${id}:不应期`)) {
       coff -= 0.9;
-    } else if (era.get(`tcvar:${chara_id}:避孕套`)) {
+    } else if (era.get(`tcvar:${id}:避孕套`)) {
       // 避孕套-10%快感
       coff -= 0.1;
     }
   }
+  const chara_inmon = CharaInmon.get(id);
+  if (chara_inmon.on(plugin_enum.al_u1)) {
+    coff += 0.5;
+  } else if (chara_inmon.on(plugin_enum.al_u2)) {
+    coff += 1;
+  } else if (chara_inmon.on(plugin_enum.al_u3)) {
+    coff += 2;
+  } else if (chara_inmon.on(plugin_enum.al_d1)) {
+    coff -= 0.1;
+  } else if (chara_inmon.on(plugin_enum.al_d2)) {
+    coff -= 0.3;
+  } else if (chara_inmon.on(plugin_enum.al_d3)) {
+    coff -= 0.7;
+  }
+  const plug_key = part_enum.keys[part].substring(0, 2);
+  if (chara_inmon.on(plugin_enum[`${plug_key}_u1`])) {
+    coff += 1;
+  } else if (chara_inmon.on(plugin_enum[`${plug_key}_u2`])) {
+    coff += 2;
+  } else if (chara_inmon.on(plugin_enum[`${plug_key}_u3`])) {
+    coff += 4;
+  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d1`])) {
+    coff -= 0.2;
+  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d2`])) {
+    coff -= 0.4;
+  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d3`])) {
+    coff -= 0.8;
+  }
   attack *= coff;
-  tmp[chara_id][key] += attack;
+  tmp[id][key] += attack;
   // 自己拿自己的宝珠
-  add_juel(chara_id, `${key}快感`, attack);
+  add_juel(id, `${key}快感`, attack);
 }
 
 /**
@@ -110,7 +141,7 @@ function update_palam(chara_id, part, shown) {
   const palam_name = key + '快感';
   // 快感加成已在sys-calc-ero.js中计算，因子加成在sys-calc-juel.js中计算，不重复计算
   let attack = Math.ceil(
-    tmp[chara_id][key] * (1 + 0.1 * (era.get(`cflag:${chara_id}:气性`) === -3)),
+    tmp[chara_id][key] * (1 + 0.1 * (sys_get_chara(chara_id) === -3)),
   );
   switch (part) {
     case part_enum.sadism:

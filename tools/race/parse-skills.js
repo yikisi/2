@@ -874,24 +874,30 @@ async function chara_skill() {
   );
   console.log('条件参数', Object.keys(c_dict).length, '个');
 
-  execSync(
-    'npx eslint --fix ./ere/data/race/model/condition-params.js ./ere/data/race/skill',
-    {
-      cwd: join(process.cwd(), '../..'),
-    },
-  );
+  try {
+    process.stdout.write(
+      execSync(
+        'npx eslint --fix ./ere/data/race/model/condition-params.js ./ere/data/race/skill',
+        {
+          cwd: join(process.cwd(), '../..'),
+        },
+      ),
+    );
 
-  if (hasError) {
-    process.exit(1);
+    if (hasError) {
+      process.exit(1);
+    }
+
+    process.stdout.write(execSync('node parse-genes.js'));
+    process.stdout.write(execSync('node parse-contestants.js'));
+    process.stdout.write(
+      execSync('npx eslint --fix ./ere/data/race/gene', {
+        cwd: join(process.cwd(), '../..'),
+      }),
+    );
+  } catch (e) {
+    process.stdout.write(e.stdout);
   }
-
-  execSync('node parse-genes.js');
-
-  execSync('node parse-contestants.js');
-
-  execSync('npx eslint --fix ./ere/data/race/gene', {
-    cwd: join(process.cwd(), '../..'),
-  });
 }
 
 chara_skill().then();

@@ -847,9 +847,14 @@
       }
     },
     "equip": {
-      "10": {
+      "0": {
+        "n": "淫纹插件",
+        "k": "equip0",
+        "t": "number"
+      },
+      "1": {
         "n": "淫纹奴役",
-        "k": "equip10",
+        "k": "equip1",
         "t": "number"
       }
     },
@@ -1626,6 +1631,11 @@
       "36": {
         "n": "变态行为",
         "k": "flag36",
+        "t": "number"
+      },
+      "37": {
+        "n": "助手",
+        "k": "flag37",
         "t": "number"
       },
       "40": {
@@ -2817,16 +2827,6 @@
       "22": {
         "n": "绿帽癖",
         "k": "talent22",
-        "t": "number"
-      },
-      "25": {
-        "n": "好感",
-        "k": "talent25",
-        "t": "number"
-      },
-      "26": {
-        "n": "训练",
-        "k": "talent26",
         "t": "number"
       },
       "30": {
@@ -4431,7 +4431,8 @@
       "长子女经历": 52
     },
     "equip": {
-      "淫纹奴役": 10
+      "淫纹插件": 0,
+      "淫纹奴役": 1
     },
     "ex": {
       "口腔高潮": 0,
@@ -4592,6 +4593,7 @@
       "超得": 34,
       "惩戒力度": 35,
       "变态行为": 36,
+      "助手": 37,
       "病娇列表": 40,
       "地下室之主": 41,
       "地下室行动": 42,
@@ -4651,7 +4653,7 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 1340,
+      "version": 2000,
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",
@@ -4931,8 +4933,6 @@
       "捉摸不透": 20,
       "病娇": 21,
       "绿帽癖": 22,
-      "好感": 25,
-      "训练": 26,
       "童贞": 30,
       "处女": 31,
       "泌乳": 32,
@@ -15351,23 +15351,23 @@
           "16": -1,
           "17": 4,
           "18": 20,
-          "20": 124,
-          "21": 100,
-          "22": 96,
-          "23": 112,
-          "24": 118,
-          "25": 16,
-          "26": 9,
+          "20": 92,
+          "21": 142,
+          "22": 92,
+          "23": 120,
+          "24": 104,
+          "25": 0,
+          "26": 10,
           "27": 0,
-          "28": 3,
-          "29": 2,
+          "28": 20,
+          "29": 0,
           "30": 6,
           "31": 0,
           "32": 0,
           "33": 0,
           "34": 6,
           "35": 6,
-          "36": 5,
+          "36": 4,
           "37": 6,
           "38": 2,
           "39": 0,
@@ -15384,7 +15384,7 @@
           "5": "",
           "6": "未知",
           "10": "超常",
-          "11": "幻觉马娘"
+          "11": "漆黑的怪物"
         },
         "talent": {
           "32": 0,
@@ -26670,6 +26670,26 @@
       "posY": 0,
       "type": 0
     },
+    "舅舅2": {
+      "path": "res/race/chr_icon_1070_107002_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "舅舅2_半身": {
+      "path": "res/race/chara_stand_1070_107002.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "阿尔丹": {
       "path": "res/race/chr_icon_1071_107101_01.png",
       "x": 0,
@@ -26742,6 +26762,26 @@
     },
     "光明_半身": {
       "path": "res/race/chara_stand_1074_107401.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "灯皇": {
+      "path": "res/race/chr_icon_1075_107501_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "灯皇_半身": {
+      "path": "res/race/chara_stand_1075_107501.png",
       "x": 0,
       "y": 0,
       "width": 512,
@@ -29722,6 +29762,26 @@
     },
     "光明_运_半身": {
       "path": "res/sportswear/chara_stand_1074_000001.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "灯皇_运": {
+      "path": "res/sportswear/chr_icon_1075_000001_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "灯皇_运_半身": {
+      "path": "res/sportswear/chara_stand_1075_000001.png",
       "x": 0,
       "y": 0,
       "width": 512,
@@ -33040,6 +33100,16 @@
       "posY": 0,
       "type": 0
     },
+    "罗伯特_夏_半身": {
+      "path": "res/uniform-summer/chara_stand_1112_000002.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "bv_夏_半身": {
       "path": "res/uniform-summer/chara_stand_1114_000002.png",
       "x": 0,
@@ -33182,6 +33252,26 @@
     },
     "吹波_夏_半身": {
       "path": "res/uniform-summer/chara_stand_1124_000002.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "超常_夏": {
+      "path": "res/uniform-summer/chr_icon_1127_000002_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "超常_夏_半身": {
+      "path": "res/uniform-summer/chara_stand_1127_000002.png",
       "x": 0,
       "y": 0,
       "width": 512,
@@ -35562,6 +35652,26 @@
     },
     "吹波_冬_半身": {
       "path": "res/uniform-winter/chara_stand_1124_000005.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "超常_冬": {
+      "path": "res/uniform-winter/chr_icon_1127_000005_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "超常_冬_半身": {
+      "path": "res/uniform-winter/chara_stand_1127_000005.png",
       "x": 0,
       "y": 0,
       "width": 512,

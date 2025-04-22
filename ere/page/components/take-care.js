@@ -5,6 +5,8 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 /** @param {CharaTalk} chara */
@@ -73,11 +75,17 @@ async function take_care(chara) {
       get_chara_talk(ret).get_colored_name(),
       '……',
     ]);
-    sys_like_chara(
-      chara.id,
-      0,
-      -get_random_value(25, 50 + era.get(`talent:${ret}:病娇`) * 2),
-    ) && (await era.waitAnyKey());
+    const inmon = CharaInmon.get(chara.id);
+    if (inmon.on(plugin_enum.ntr)) {
+      sys_like_chara(chara.id, 0, get_random_value(10, 25)) &&
+        (await era.waitAnyKey());
+    } else if (!inmon.on(plugin_enum.no_yand)) {
+      sys_like_chara(
+        chara.id,
+        0,
+        -get_random_value(25, 50 + era.get(`talent:${ret}:病娇`) * 2),
+      ) && (await era.waitAnyKey());
+    }
     if (curr > 0) {
       era.set(`cflag:${curr}:照看`, 0);
     }

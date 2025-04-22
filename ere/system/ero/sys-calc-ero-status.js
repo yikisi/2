@@ -6,12 +6,14 @@ const {
   height2anal_size,
   height2virgin_size,
 } = require('#/data/ero/battle-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const {
   baby_limit,
   erect_border,
   lust_border,
 } = require('#/data/ero/orgasm-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -197,19 +199,17 @@ module.exports = {
         !era.get(`status:${chara_id}:经期`))
     );
   },
-  check_want_to_escape(chara_id) {
+  check_want_to_escape(id) {
     return (
-      !era.get(`status:${chara_id}:超马跳Z`) &&
+      !era.get(`status:${id}:超马跳Z`) &&
+      era.get(`mark:${id}:淫纹`) < 3 &&
       ((era.getCharactersInTrain().length > 0 &&
         !era.get('tflag:强奸') &&
-        get_sex_acceptable(chara_id) < 0) ||
-        Math.max(
-          era.get(`mark:${chara_id}:苦痛`),
-          era.get(`mark:${chara_id}:羞耻`),
-        ) -
-          era.get(`mark:${chara_id}:欢愉`) >=
-          1 ||
-        era.get(`mark:${chara_id}:反抗`) >= 2)
+        get_sex_acceptable(id) < 0) ||
+        Math.max(era.get(`mark:${id}:苦痛`), era.get(`mark:${id}:羞耻`)) -
+          era.get(`mark:${id}:欢愉`) <
+          Math.random() ||
+        era.get(`mark:${id}:反抗`) >= 2)
     );
   },
   get_action_base_check,
@@ -346,7 +346,8 @@ module.exports = {
       era.get(`status:${chara_id}:经期`) ||
       (other_id !== undefined &&
         !era.get(`cflag:${other_id}:性别`) &&
-        !era.get(`status:${other_id}:弗隆P`))
+        !era.get(`status:${other_id}:弗隆P`)) ||
+      CharaInmon.get(chara_id).on(plugin_enum.no_preg)
     ) {
       return 0;
     }
