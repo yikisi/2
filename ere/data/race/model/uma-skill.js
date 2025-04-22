@@ -99,6 +99,10 @@ const ability_type_enum = {
   Connect: 41,
   // 育成继承活动使用
   // ChallengeMatchBonusXXX: 50,
+  // 可以用性玩具
+  HasItem: 90,
+  // 性玩具带来 Buff
+  HasItemBuff: 91,
 };
 
 const ability_usage_enum = {
