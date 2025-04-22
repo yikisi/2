@@ -45,7 +45,9 @@ const {
   basement_status_enum,
 } = require('#/data/basement-const');
 const { buff_colors } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const BasementAction = require('#/data/event/basement-action');
 const BasementOwners = require('#/data/event/basement-owners');
 const event_hooks = require('#/data/event/event-hooks');
@@ -106,8 +108,11 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
       era.set('tflag:强奸', lover);
       era.set('tflag:主导权', lover);
     }
+    const inmon = CharaInmon.get(lover);
     const sex_3p =
-      era.get(`talent:${lover}:病娇`) !== 2
+      era.get(`talent:${lover}:病娇`) !== 2 ||
+      inmon.on(plugin_enum.no_yand) ||
+      inmon.on(plugin_enum.ntr)
         ? get_random_entry(
             sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
               .map((e) => {
@@ -146,15 +151,25 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
         wait_flag =
           sys_like_chara(sex_3p.id, lover, get_random_value(50, 150)) ||
           wait_flag;
-        wait_flag =
-          sys_like_chara(
-            lover,
-            0,
-            -get_random_value(25, 75 + 25 * era.get(`talent:${lover}:病娇`)),
-          ) || wait_flag;
-        if (
+        if (inmon.on(plugin_enum.ntr)) {
+          wait_flag =
+            sys_like_chara(lover, 0, get_random_value(10, 25)) || wait_flag;
+        } else if (!inmon.on(plugin_enum.no_yand)) {
+          wait_flag =
+            sys_like_chara(
+              lover,
+              0,
+              -get_random_value(25, 75 + 25 * era.get(`talent:${lover}:病娇`)),
+            ) || wait_flag;
+        }
+        if (inmon.on(plugin_enum.ntr)) {
+          wait_flag =
+            sys_like_chara(lover, chara.id, get_random_value(0, 25)) ||
+            wait_flag;
+        } else if (
           era.get(`relation:${lover}:${chara.id}`) <= 375 ||
-          era.get(`talent:${lover}:病娇`)
+          (era.get(`talent:${lover}:病娇`) > 0 &&
+            !inmon.on(plugin_enum.no_yand))
         ) {
           wait_flag =
             sys_like_chara(

@@ -39,16 +39,20 @@ async function punish_unfaithful(chara_id, new_love) {
       'cflag',
       '招募状态',
       recruit_flags.yes,
-    ).filter(
-      (e) =>
+    ).filter((e) => {
+      const inmon = CharaInmon.get(e);
+      return (
         e > 0 &&
         e !== chara_id &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
         era.get(`love:${e}`) >= 75 &&
         era.get(`talent:${e}:绿帽癖`) === 0 &&
+        !inmon.on(plugin_enum.no_yand) &&
+        !inmon.on(plugin_enum.ntr) &&
         get_custom_mec(e).is_anger_for_unfaithful([chara_id]) &&
-        (punish_option || era.get(`talent:${e}:病娇`) > 0),
-    );
+        (punish_option || era.get(`talent:${e}:病娇`) > 0)
+      );
+    });
   for (const c_id of temp_chara_list) {
     get_custom_check(c_id).check_after_betrayed([chara_id]);
     era.print([
@@ -201,36 +205,36 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
 }
 
 /**
- * @param {number} chara_id
+ * @param {number} id
  * @param {number} val
  * @param {boolean} [shown=true]
  * @returns {boolean}
  */
-function love_uma(chara_id, val, shown = true) {
-  const love = era.get(`love:${chara_id}`);
+function love_uma(id, val, shown = true) {
+  const love = era.get(`love:${id}`);
   if (
-    chara_id === 0 ||
+    id === 0 ||
     val === 0 ||
     (love === 0 &&
       !era.get('flag:后代爱慕限制') &&
-      era.get(`cflag:${chara_id}:父方角色`) >= 0) ||
-    era.get(`status:${chara_id}:讨厌药`) > 0 ||
-    !new LimitLoveStatus(chara_id).is_empty()
+      era.get(`cflag:${id}:父方角色`) >= 0) ||
+    era.get(`status:${id}:讨厌药`) > 0 ||
+    !new LimitLoveStatus(id).is_empty()
   ) {
     return false;
   }
-  const inmon = CharaInmon.get(chara_id);
+  const inmon = CharaInmon.get(id);
   const coff =
     100 +
     era.get('flag:爱慕上升加成') +
-    50 * era.get(`status:${chara_id}:爱意克制`) +
-    get_custom_mec(chara_id).get_love_buff() +
+    50 * era.get(`status:${id}:爱意克制`) +
+    get_custom_mec(id).get_love_buff() +
     100 * inmon.on(plugin_enum.love_up) -
     50 * inmon.on(plugin_enum.love_d1) -
     100 * inmon.on(plugin_enum.love_d2);
   val = Math.floor((val * coff) / 100);
-  const force_limit = get_custom_mec(chara_id).get_love_limit(),
-    border = force_limit || Math.max(get_love_border(chara_id), 50),
+  const force_limit = get_custom_mec(id).get_love_limit(),
+    border = force_limit || Math.max(get_love_border(id), 50),
     love_limit = !era.get('flag:回合爱慕惩罚');
   if ((love_limit || force_limit) && love + val >= border) {
     val = border - 1 - love;
@@ -241,36 +245,38 @@ function love_uma(chara_id, val, shown = true) {
   if (val === 0) {
     return false;
   }
-  let new_val = era.add(`love:${chara_id}`, val);
+  let new_val = era.add(`love:${id}`, val);
   let printed_new_val = new_val;
-  let hide = sys_check_limit_relation_and_love(chara_id);
+  let hide = sys_check_limit_relation_and_love(id);
   if (hide && love < 24) {
     hide = false;
     printed_new_val = Math.min(printed_new_val, 24);
   }
   shown &&= !hide;
-  print_change(chara_id, love, printed_new_val, shown);
+  print_change(id, love, printed_new_val, shown);
   if (
     love < 50 &&
     new_val >= 50 &&
-    era.get(`cflag:${chara_id}:种族`) &&
-    era.get(`talent:${chara_id}:病娇`) === 1
+    era.get(`cflag:${id}:种族`) &&
+    era.get(`talent:${id}:病娇`) === 1 &&
+    !inmon.on(plugin_enum.no_yand) &&
+    !inmon.on(plugin_enum.ntr)
   ) {
-    era.set(`status:${chara_id}:爱意克制`, 1);
+    era.set(`status:${id}:爱意克制`, 1);
   }
   if (
     love_limit &&
     (new_val === 49 || new_val === 74 || new_val === 89 || new_val === 99) &&
-    era.get(`cflag:${chara_id}:爱慕暂拒`) !== new_val
+    era.get(`cflag:${id}:爱慕暂拒`) !== new_val
   ) {
-    if ((sys_check_hide_relation_and_love(chara_id) & 0b1) === 0 && shown) {
+    if ((sys_check_hide_relation_and_love(id) & 0b1) === 0 && shown) {
       era.print([
         '和 ',
-        get_chara_talk(chara_id).get_colored_name(),
+        get_chara_talk(id).get_colored_name(),
         ' 的关系似乎可以更进一步了……',
       ]);
     }
-    get_custom_check(chara_id).check_love_events();
+    get_custom_check(id).check_love_events();
   }
   return shown;
 }
@@ -364,38 +370,41 @@ module.exports = {
   sys_like_chara: like_chara,
   sys_love_uma: love_uma,
   /**
-   * @param {number} chara_id
+   * @param {number} id
    * @returns {Promise<boolean>}
    */
-  async sys_love_uma_in_event(chara_id) {
-    if (era.get('flag:回合爱慕惩罚') || chara_id === 0) {
+  async sys_love_uma_in_event(id) {
+    if (era.get('flag:回合爱慕惩罚') || id === 0) {
       return false;
     }
-    const new_val = era.add(`love:${chara_id}`, 1);
+    const new_val = era.add(`love:${id}`, 1);
     if (
-      typeof era.get(`callname:${chara_id}:0`) === 'string' &&
-      era.get(`callname:${chara_id}:0`).startsWith('训练员')
+      typeof era.get(`callname:${id}:0`) === 'string' &&
+      era.get(`callname:${id}:0`).startsWith('训练员')
     ) {
-      get_custom_mec(chara_id).set_callname();
+      get_custom_mec(id).set_callname();
     }
+    const inmon = CharaInmon.get(id);
     if (
       new_val === 50 &&
-      era.get(`cflag:${chara_id}:种族`) &&
-      era.get(`talent:${chara_id}:病娇`) === 1
+      era.get(`cflag:${id}:种族`) &&
+      era.get(`talent:${id}:病娇`) === 1 &&
+      !inmon.on(plugin_enum.no_yand) &&
+      !inmon.on(plugin_enum.ntr)
     ) {
-      era.set(`status:${chara_id}:爱意克制`, 1);
+      era.set(`status:${id}:爱意克制`, 1);
     }
     if (
-      sys_check_hide_relation_and_love(chara_id) ||
-      sys_check_limit_relation_and_love(chara_id)
+      sys_check_hide_relation_and_love(id) ||
+      sys_check_limit_relation_and_love(id)
     ) {
       return false;
     }
     era.println();
-    print_change(chara_id, new_val - 1, new_val);
-    era.set(`cflag:${chara_id}:爱慕暂拒`, 0);
+    print_change(id, new_val - 1, new_val);
+    era.set(`cflag:${id}:爱慕暂拒`, 0);
     await get_chara_talk(0).say_and_wait('已经不能回头了……', true);
-    new_val >= 75 && (await punish_unfaithful(chara_id, new_val));
+    new_val >= 75 && (await punish_unfaithful(id, new_val));
     return true;
   },
   sys_punish_unfaithful: punish_unfaithful,

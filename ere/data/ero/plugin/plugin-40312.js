@@ -1,11 +1,12 @@
 const InmonPlugin = require('#/data/ero/inmon-plugin');
 
 module.exports = new InmonPlugin(
-  40322,
-  '只可在此',
+  40312,
+  '人之常情',
+  403,
   3,
-  20,
-  '爱慕获取-100%',
-  () => true,
-  1180,
+  32,
+  '乐于分享。',
+  (args) => args.id > 0,
+  1780,
 );

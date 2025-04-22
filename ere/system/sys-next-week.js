@@ -44,6 +44,7 @@ const {
   lust_border,
 } = require('#/data/ero/orgasm-const');
 const { part_enum, part_talents } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const BasementOwners = require('#/data/event/basement-owners');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
@@ -177,23 +178,27 @@ async function sys_next_week() {
       }
     }
   }
-  in_team_list.forEach((chara_id) => {
-    team_dict[chara_id] = 1;
-    if (era.get('flag:性技自主学习') && sys_check_awake(chara_id)) {
-      auto_update_ero_skills(chara_id);
+  in_team_list.forEach((id) => {
+    team_dict[id] = 1;
+    if (era.get('flag:性技自主学习') && sys_check_awake(id)) {
+      auto_update_ero_skills(id);
     }
-    if (era.get(`talent:${chara_id}:病娇`) === 2) {
-      const life_event_marks = LifeEventMarks.get_marks(chara_id);
-      if (era.get(`relation:${chara_id}:0`) > 525) {
-        if (--life_event_marks.yandere === 0) {
-          era.set(`talent:${chara_id}:病娇`, 1);
-          era.print([
-            get_chara_talk(chara_id).get_colored_name(),
-            ' 重新变得温和起来……',
-          ]);
-        }
+    if (era.get(`talent:${id}:病娇`) === 2) {
+      const life_event_marks = LifeEventMarks.get_marks(id);
+      const inmon = CharaInmon.get(id);
+      let heal = inmon.on(plugin_enum.no_yand) || inmon.on(plugin_enum.ntr);
+      if (era.get(`relation:${id}:0`) > 525) {
+        heal = --life_event_marks.yandere === 0;
       } else {
         life_event_marks.yandere = Math.min(life_event_marks.yandere + 1, 8);
+      }
+      if (heal) {
+        life_event_marks.yandere = 0;
+        era.set(`talent:${id}:病娇`, 1);
+        era.print([
+          get_chara_talk(id).get_colored_name(),
+          ' 重新变得温和起来……',
+        ]);
       }
     }
   });

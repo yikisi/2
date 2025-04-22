@@ -229,19 +229,19 @@ function update_juel_buff(...ids) {
     set_juel_buff(
       chara_id,
       '顺从',
-      lust_buff / 2 +
-        ((era.get(`talent:${chara_id}:自信程度`) +
-          era.get(`talent:${chara_id}:坦率程度`) +
-          era.get(`talent:${chara_id}:工口好奇`) +
-          era.get(`talent:${chara_id}:情感活动`)) *
-          3) /
-          10 +
+      ((era.get(`talent:${chara_id}:自信程度`) +
+        era.get(`talent:${chara_id}:坦率程度`) +
+        era.get(`talent:${chara_id}:工口好奇`) +
+        era.get(`talent:${chara_id}:情感活动`)) *
+        3) /
+        10 +
         (slave_level === 0
-          ? pleasure_level / 10 +
+          ? lust_buff / 2 +
+            pleasure_level / 10 +
             Math.max(pain_level, shame_level) / 20 +
             hate_level / 20 -
             is_raping
-          : 0) +
+          : slave_level / 10 - 0.1) +
         !chara_id / 2,
     );
     set_juel_buff(

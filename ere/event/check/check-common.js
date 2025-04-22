@@ -375,7 +375,9 @@ class CustomizedCheck {
           era.get('flag:惩戒力度') >= 2 ||
           era.get(`base:${this.id}:性欲`) >= lust_border.want_sex ||
           era.get(`base:${this.id}:压力`) >= pressure_border.apprehension ||
-          era.get(`talent:${this.id}:病娇`) === 2);
+          (era.get(`talent:${this.id}:病娇`) === 2 &&
+            !inmon.on(plugin_enum.no_yand) &&
+            !inmon.on(plugin_enum.ntr)));
       if (era.get(`status:${this.id}:爱意克制`) > 0) {
         if (!great_success) {
           return 0;
