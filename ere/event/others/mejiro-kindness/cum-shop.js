@@ -11,6 +11,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const { mark_colors } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { penis_desc, skin_desc } = require('#/data/ero/status-const');
 const ExtraBase = require('#/data/extra-base');
 const { get_breast_cup, get_hair_color } = require('#/data/info-generator');
@@ -228,6 +229,17 @@ async function cum_shop(chara, me) {
                         ),
                       );
                       target.sex_code = era.set(`cflag:${target.id}:性别`, 10);
+                      const inmon = CharaInmon.get(target.id);
+                      for (let i = 1; i <= 3; ++i) {
+                        if (inmon.on(plugin_enum[`cl_u${i}`])) {
+                          inmon.set(plugin_enum[`cl_u${i}`], 0);
+                          inmon.set(plugin_enum[`pe_u${i}`], 1);
+                        }
+                        if (inmon.on(plugin_enum[`cl_d${i}`])) {
+                          inmon.set(plugin_enum[`cl_d${i}`], 0);
+                          inmon.set(plugin_enum[`pe_d${i}`], 1);
+                        }
+                      }
                     }
                   },
                 },
@@ -256,6 +268,17 @@ async function cum_shop(chara, me) {
                         ),
                       );
                       target.sex_code = era.set(`cflag:${target.id}:性别`, 0);
+                      const inmon = CharaInmon.get(target.id);
+                      for (let i = 1; i <= 3; ++i) {
+                        if (inmon.on(plugin_enum[`pe_u${i}`])) {
+                          inmon.set(plugin_enum[`pe_u${i}`], 0);
+                          inmon.set(plugin_enum[`cl_u${i}`], 1);
+                        }
+                        if (inmon.on(plugin_enum[`pe_d${i}`])) {
+                          inmon.set(plugin_enum[`pe_d${i}`], 0);
+                          inmon.set(plugin_enum[`cl_d${i}`], 1);
+                        }
+                      }
                     }
                   },
                 },
