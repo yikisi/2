@@ -322,7 +322,7 @@ module.exports = async () => {
           type: 'text',
         },
         {
-          config: { align: 'left', width: 8 },
+          config: { align: 'left', width: 12 },
           content: [
             {
               content: 'EraUma游戏发布页',
@@ -337,6 +337,11 @@ module.exports = async () => {
             {
               content: 'ERA特雷森学园（Discord社区）',
               url: 'https://discord.gg/ake5SP3zUP',
+            },
+            { isBr: true },
+            {
+              content: 'Wiki（使用说明/游戏设定/口上写作指引……）',
+              url: 'https://gitgud.io/umaera/erauma/-/wikis',
             },
           ],
           type: 'text',
