@@ -4,6 +4,8 @@ const CustomizedMec = require('#/event/mec/mec-common');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
+const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
+const EtsukoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-303');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
@@ -71,24 +73,33 @@ module.exports = class extends CustomizedMec {
       });
     }
     if (era.get('cflag:301:招募状态') === recruit_flags.yes) {
+      const { buff } = new TokinoLifeMarks();
       ret_list.push({
         color: get_chara_color(301),
         content: '时刻相助',
-        title: '体力与精力消耗-10%。',
+        fontWeight: buff > 0 ? 'bold' : undefined,
+        title: `体力与精力消耗-${10 * (buff + 1)}%。`,
       });
     }
     if (era.get('cflag:303:招募状态') === recruit_flags.yes) {
+      let { buff } = new EtsukoLifeMarks();
+      buff += 1;
       ret_list.push({
         color: get_chara_color(303),
         content: '悦子相助',
-        title: '声望获取+10%，声望下降-10%。',
+        fontWeight: buff > 1 ? 'bold' : undefined,
+        title: `声望获取+${10 * buff}%，声望下降-${10 * buff}%。`,
       });
     }
     return ret_list;
   }
 
   get_action_debuff() {
-    return -0.1 * (era.get('cflag:301:招募状态') === recruit_flags.yes);
+    return (
+      -0.1 *
+      (new TokinoLifeMarks().buff + 1) *
+      (era.get('cflag:301:招募状态') === recruit_flags.yes)
+    );
   }
 
   init_love() {}

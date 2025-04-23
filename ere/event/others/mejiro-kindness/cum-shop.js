@@ -47,6 +47,7 @@ async function cum_shop(chara, me) {
     get_chara_talk(74),
     get_chara_talk(86),
   ];
+  const easter_egg = era.get('flag:彩蛋机制');
   const say_by_waiter = (v) => get_random_entry(waiters).say_as_unknown(v);
   const say_by_waiter_and_wait = (v) =>
     get_random_entry(waiters).say_as_unknown_and_wait(v);
@@ -383,6 +384,9 @@ async function cum_shop(chara, me) {
                       get_random_entry(body_color_names),
                   );
                   era.set(`cflag:${target.id}:可再次育成`, 1);
+                  if (easter_egg === 179 || easter_egg === 621) {
+                    era.set(`talent:${target.id}:病娇`, 1);
+                  }
                 },
               });
             } else if (custom_enabled) {

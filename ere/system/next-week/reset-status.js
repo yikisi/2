@@ -23,6 +23,7 @@ const CharaAvailableSkills = require('#/data/chara-available-skills');
 const CharaSkills = require('#/data/chara-skills');
 const { buff_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
+const SasamiLifeMarks = require('#/data/event/life-event-marks/life-event-marks-305');
 const recruit_flags = require('#/data/event/recruit-flags');
 const LoveLimitStatus = require('#/data/love-limit-status');
 const { gene_juel_names } = require('#/data/other-const');
@@ -46,7 +47,9 @@ async function reset_status(
   cur_round,
   has_furniture,
 ) {
-  const health_buff = era.get('cflag:305:招募状态') === recruit_flags.yes;
+  const health_buff =
+    (era.get('cflag:305:招募状态') === recruit_flags.yes) *
+    (new SasamiLifeMarks().buff + 1);
   let ret = 0;
   let temp;
   for (const chara_id of characters) {
@@ -187,26 +190,29 @@ async function reset_status(
     era.set(`status:${chara_id}:沉睡`, 0);
     era.set(`status:${chara_id}:短效避孕药`, 0);
     era.set(`status:${chara_id}:反避孕套`, 0);
-    era.get(`status:${chara_id}:长效避孕药`) &&
+    if (era.get(`status:${chara_id}:长效避孕药`) > 0) {
       era.add(`status:${chara_id}:长效避孕药`, -1);
-    era.get(`status:${chara_id}:疲惫`) &&
+    }
+    if (era.get(`status:${chara_id}:疲惫`) > 0) {
       era.set(
         `status:${chara_id}:疲惫`,
         Math.max(
           era.get(`status:${chara_id}:疲惫`) -
-            (1 + (health_buff && Math.random() < 0.5 ? 1 : 0)),
+            (1 + (Math.random() < health_buff * 0.5 - 0.2)),
           0,
         ),
       );
-    era.get(`status:${chara_id}:伤病`) &&
+    }
+    if (era.get(`status:${chara_id}:伤病`) > 0) {
       era.set(
         `status:${chara_id}:伤病`,
         Math.max(
           era.get(`status:${chara_id}:伤病`) -
-            (1 + (health_buff && Math.random() < 0.5 ? 1 : 0)),
+            (1 + (Math.random() < health_buff * 0.5 - 0.2)),
           0,
         ),
       );
+    }
     era.set(`status:${chara_id}:健康茶`, 0);
 
     if (!isNaN(Number(era.get(`cflag:${chara_id}:育成回合计时`)))) {

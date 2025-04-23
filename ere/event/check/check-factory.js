@@ -131,6 +131,7 @@ cons_dict[301] = require('#/event/check/check-301');
 cons_dict[302] = require('#/event/check/check-302');
 cons_dict[303] = require('#/event/check/check-303');
 cons_dict[304] = require('#/event/check/check-304');
+cons_dict[305] = require('#/event/check/check-305');
 cons_dict[306] = require('#/event/check/check-306');
 cons_dict[308] = require('#/event/check/check-308');
 cons_dict[343] = require('#/event/check/check-343');
