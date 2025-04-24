@@ -5,8 +5,6 @@ class KitaEduMarks extends EduEventMarks {
   beginning;
   // 紧急开店 · 小北按摩！
   kitasan_touch;
-  // 温泉旅行券
-  hot_spring;
   // 没有恶意的小小恶作剧
   classical_valentine;
   // 奖励
