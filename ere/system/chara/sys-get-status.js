@@ -18,6 +18,7 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const DarleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-340');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 const ByerleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-342');
+const LightLifeMarks = require('#/data/event/life-event-marks/life-event-marks-345');
 const recruit_flags = require('#/data/event/recruit-flags');
 const LoveLimitStatus = require('#/data/love-limit-status');
 const { pressure_border, train_buff_info } = require('#/data/train-const');
@@ -97,7 +98,7 @@ function sys_get_status(chara_id) {
       status_list.push({
         color: get_chara_color(340),
         content: '女神之望',
-        fontWeight: check ? 'bold' : '',
+        fontWeight: check ? 'bold' : undefined,
         title: `速度与力量训练效果+${check}%。`,
       });
     }
@@ -106,7 +107,7 @@ function sys_get_status(chara_id) {
       status_list.push({
         color: get_chara_color(341),
         content: '女神之爱',
-        fontWeight: check ? 'bold' : '',
+        fontWeight: check ? 'bold' : undefined,
         title: `智力与技能点数训练效果+${check}%。`,
       });
     }
@@ -115,8 +116,17 @@ function sys_get_status(chara_id) {
       status_list.push({
         color: get_chara_color(342),
         content: '女神之信',
-        fontWeight: check ? 'bold' : '',
+        fontWeight: check ? 'bold' : undefined,
         title: `耐力与根性训练效果+${check}%。`,
+      });
+    }
+    if (era.get('cflag:345:招募状态') === recruit_flags.yes) {
+      check = (new LightLifeMarks().buff + 1) * 25;
+      status_list.push({
+        color: get_chara_color(345),
+        content: '灯之协助',
+        fontWeight: check ? 'bold' : undefined,
+        title: `训练经验获取量+${check}%。`,
       });
     }
     const train_buff = era.get(`status:${chara_id}:练习X手`);

@@ -75,7 +75,6 @@ function init_chara(chara_id, src = 0) {
     case 10:
       era.set(`cflag:${chara_id}:阴茎尺寸`, get_random_value(1, 4));
       era.set(`cflag:${chara_id}:阴道尺寸`, 1);
-      break;
   }
   era.set(`talent:${chara_id}:童贞`, 1);
   era.set(`talent:${chara_id}:处女`, 1);

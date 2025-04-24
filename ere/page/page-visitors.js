@@ -37,9 +37,8 @@ const handlers = {};
 [204, 346, 347, 348].forEach(
   (e) =>
     (handlers[e] = () =>
-      get(`cflag:${e}:招募状态`) === recruit_flags.yes
-        ? {}
-        : {
+      get(`cflag:${e}:招募状态`) !== recruit_flags.yes
+        ? {
             name: '「请来帮助我吧！」（招募）',
             handle() {
               set(`cflag:${e}:招募状态`, recruit_flags.yes);
@@ -51,13 +50,13 @@ const handlers = {};
                 ' 加入了队伍！',
               ]);
             },
-          }),
+          }
+        : {}),
 );
 
 handlers[207] = () =>
-  get('cflag:207:招募状态') === recruit_flags.yes || get('love:207') < 25
-    ? {}
-    : {
+  get('cflag:207:招募状态') !== recruit_flags.yes && get('love:207') >= 40
+    ? {
         name: '「一起努力吧！」（招募）',
         handle() {
           set('callname:207:-2', '索侬艾尔菲');
@@ -70,22 +69,22 @@ handlers[207] = () =>
             ' 加入了队伍！',
           ]);
         },
-      };
+      }
+    : {};
 
 handlers[303] = () =>
-  get('cflag:303:招募状态') === recruit_flags.yes
-    ? {}
-    : {
+  get('cflag:303:招募状态') !== recruit_flags.yes
+    ? {
         name: '给予更多许可（招募）',
         handle() {
           return run_custom_rec(303, event_hooks.recruit);
         },
-      };
+      }
+    : {};
 
 handlers[308] = () =>
-  get('cflag:308:招募状态') === recruit_flags.yes || get('love:308') < 25
-    ? {}
-    : {
+  get('cflag:308:招募状态') !== recruit_flags.yes && get('love:308') >= 40
+    ? {
         name: '「一起努力吧！」（招募）',
         handle() {
           set('callname:308:-2', '光辉致意');
@@ -98,13 +97,13 @@ handlers[308] = () =>
             ' 加入了队伍！',
           ]);
         },
-      };
+      }
+    : {};
 
 handlers[343] = () =>
-  get('cflag:343:招募状态') === recruit_flags.yes ||
-  new MayLifeMarks().who_am_i !== 3
-    ? {}
-    : {
+  get('cflag:343:招募状态') !== recruit_flags.yes &&
+  new MayLifeMarks().who_am_i === 3
+    ? {
         name: '「一起努力吧！」（招募）',
         handle() {
           set('callname:343:-2', '佐岳五月');
@@ -117,12 +116,12 @@ handlers[343] = () =>
             ' 加入了队伍！',
           ]);
         },
-      };
+      }
+    : {};
 
 handlers[344] = () =>
-  get('cflag:344:招募状态') === recruit_flags.yes || get('love:344') < 25
-    ? {}
-    : {
+  get('cflag:344:招募状态') !== recruit_flags.yes && get('love:344') >= 40
+    ? {
         name: '「一起努力吧！」（招募）',
         handle() {
           set('callname:344:-2', '都留歧凉花');
@@ -132,12 +131,12 @@ handlers[344] = () =>
             ' 加入了队伍！',
           ]);
         },
-      };
+      }
+    : {};
 
 handlers[345] = () =>
-  get('cflag:345:招募状态') === recruit_flags.yes || get('love:345') < 25
-    ? {}
-    : {
+  get('cflag:345:招募状态') !== recruit_flags.yes && get('love:345') >= 40
+    ? {
         name: '「一起努力吧！」（招募）',
         handle() {
           set('callname:345:-2', '砂糖灯');
@@ -150,7 +149,8 @@ handlers[345] = () =>
             ' 加入了队伍！',
           ]);
         },
-      };
+      }
+    : {};
 
 async function page_visitors() {
   let flag_page = true,

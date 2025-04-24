@@ -47,7 +47,7 @@ async function page_clinic() {
       { loc: location_enum.clinic, name: '约会', print_out_page },
       { name: `庆祝 ${celebration}` },
       era.get('cflag:305:招募状态') !== recruit_flags.yes &&
-        era.get('love:305') >= 40
+        era.get('love:305') >= 25
         ? {
             name: '「一起努力吧！」（招募）',
             handle() {

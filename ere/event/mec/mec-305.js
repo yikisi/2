@@ -1,3 +1,5 @@
+const { get } = require('#/era-electron');
+
 const MecNpc = require('#/event/mec/mec-npc');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -8,7 +10,7 @@ module.exports = class extends MecNpc {
     return [
       {
         color: get_chara_color(this.id),
-        content: '针炙名师',
+        content: get(`staticcstr:${this.id}:称号`),
         fontWeight: new SasamiLifeMarks().buff > 0 ? 'bold' : undefined,
         title: '加快队伍成员偏头痛、伤病和疲惫恢复，且更不容易偏头痛。',
       },

@@ -1,6 +1,4 @@
-const { get, set } = require('#/era-electron');
-
-const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
+const { get } = require('#/era-electron');
 
 const MecNpc = require('#/event/mec/mec-npc');
 
@@ -9,16 +7,6 @@ const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends MecNpc {
-  init_love() {
-    set(
-      'love:301',
-      Math.min(
-        get('flag:马娘初始爱慕') + 30 * sys_personal_achievement.get(343) * 30,
-        30,
-      ),
-    );
-  }
-
   get_action_debuff() {
     return (
       0.1 *
