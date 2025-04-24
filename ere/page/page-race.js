@@ -288,14 +288,14 @@ async function race_page(race) {
     let rewards;
     let attr_change = new Array(5).fill(0);
     if (uma.rank.curr === 1) {
-      rewards = race_rewards[info.race_class][1];
+      rewards = race_rewards[info.race_class].r01;
       if (race === race_enum.begin_race) {
         attr_change = new Array(5).fill(3);
       }
     } else if (uma.rank.curr <= 5) {
-      rewards = race_rewards[info.race_class][5];
+      rewards = race_rewards[info.race_class].r05;
     } else if (uma.rank.curr <= 10) {
-      rewards = race_rewards[info.race_class][10];
+      rewards = race_rewards[info.race_class].r10;
     }
     const base_change = {};
     base_change['体力'] = -get_random_value(150, 250, true);
@@ -418,7 +418,7 @@ async function race_page(race) {
     is_pregnant_slave = era.get('flag:惩戒力度') === 3;
   let fame_reward;
   if (best_rank === 1) {
-    fame_reward = race_rewards[info.race_class][1].fame;
+    fame_reward = race_rewards[info.race_class].r01.fame;
     if (
       contestants.findIndex((e) => e.legend && e.name.startsWith('传奇')) !== -1
     ) {
@@ -427,11 +427,11 @@ async function race_page(race) {
       );
     }
   } else if (best_rank <= 5) {
-    fame_reward = race_rewards[info.race_class][5].fame;
+    fame_reward = race_rewards[info.race_class].r05.fame;
   } else if (best_rank <= 10) {
-    fame_reward = race_rewards[info.race_class][10].fame;
+    fame_reward = race_rewards[info.race_class].r10.fame;
   } else {
-    fame_reward = race_rewards[info.race_class][20].fame;
+    fame_reward = race_rewards[info.race_class].r20.fame;
   }
   if (is_grand_live) {
     if (

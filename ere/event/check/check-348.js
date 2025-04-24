@@ -17,7 +17,7 @@ module.exports = class extends CustomizedCheck {
       race_infos[extra_flag.race].race_class === class_enum.G1 &&
       extra_flag.rank === 1
     ) {
-      new HaiseikoEduMarks().fame += race_rewards[class_enum.G1][1].fame;
+      new HaiseikoEduMarks().fame += race_rewards[class_enum.G1].r01.fame;
     }
   }
 
