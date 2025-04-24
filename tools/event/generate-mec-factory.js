@@ -6,6 +6,7 @@ const mec_scripts = readdirSync('../../ere/event/mec')
       e.endsWith('.js') &&
       !e.endsWith('common.js') &&
       !e.endsWith('factory.js') &&
+      !e.endsWith('child.js') &&
       !e.endsWith('npc.js'),
   )
   .map((e) => e.substring(4).replace(/\.js$/, ''))
@@ -27,9 +28,10 @@ const mec_scripts = readdirSync('../../ere/event/mec')
     }
   });
 
-let output = `const era = require('#/era-electron');
+let output = `const { get } = require('#/era-electron');
 
-const common_cons = require('#/event/mec/mec-common');
+const MecChild = require('#/event/mec/mec-child');
+const CustomizedMec = require('#/event/mec/mec-common');
 const script_dict = require('#/event/script-dict.json');
 
 const { first_child_id } = require('#/data/other-const');
@@ -58,23 +60,27 @@ console.log(
   'ms',
 );
 
+/**
+ * @param {number} chara_id
+ * @returns {CustomizedMec}
+ */
+function get_custom_mec(chara_id) {
+  if (!obj_dict[chara_id]) {
+    const { n: script_name, c: cons } =
+      chara_id >= first_child_id
+        ? { n: get(\`callname:$\{chara_id}:-2\`), c: MecChild }
+        : { n: chara_id, c: CustomizedMec };
+    obj_dict[chara_id] = new (cons_dict[
+      script_dict[script_name] || script_name
+    ] || cons)(chara_id);
+  }
+  return obj_dict[chara_id].get_this();
+}
+
+CustomizedMec.get_custom_mec = get_custom_mec;
+
 module.exports = {
-  /**
-   * @param {number} chara_id
-   * @returns {CustomizedMec}
-   */
-  get_custom_mec(chara_id) {
-    if (obj_dict[chara_id]) {
-      return obj_dict[chara_id];
-    }
-    const script_name =
-        chara_id >= first_child_id
-          ? era.get(\`callname:$\{chara_id}:-2\`)
-          : chara_id,
-      class_const =
-        cons_dict[script_dict[script_name] || script_name] || common_cons;
-    return (obj_dict[chara_id] = new class_const(chara_id)).get_this();
-  },
+  get_custom_mec,
 };
 `;
 

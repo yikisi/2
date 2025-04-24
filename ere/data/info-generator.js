@@ -609,15 +609,6 @@ module.exports = {
   get_talent: (id) => {
     const yandere = era.get(`talent:${id}:病娇`),
       ret = get_custom_mec(id).get_talents();
-    if (
-      era.get(`cflag:${id}:父方角色`) === 308 ||
-      era.get(`cflag:${id}:母方角色`) === 308
-    ) {
-      ret.push({
-        color: buff_colors[1],
-        content: '梦之继承者',
-      });
-    }
     if (yandere === 2 || (yandere > 0 && era.get('status:0:马语者'))) {
       const temp = {
         color: buff_colors[3],
