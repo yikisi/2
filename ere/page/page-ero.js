@@ -222,7 +222,7 @@ function get_image(chara_id) {
       era.get(`mark:${chara_id}:苦痛`) >= 2 ||
       (recent_m === part_enum.abuse && !m_abused) ||
       recent_m === part_enum.hit ||
-      era.get(`ex:${chara_id}:破处标记`)
+      era.get(`ex:${chara_id}:破处`)
     ) {
       img_list.push(`${img_name}_头_泪`);
     }
@@ -310,7 +310,7 @@ function get_image(chara_id) {
     if (
       era.get(`ex:${chara_id}:寸止`) ||
       era.get(`tcvar:${chara_id}:接近高潮`) ||
-      era.get(`ex:${chara_id}:破处标记`)
+      era.get(`ex:${chara_id}:破处`)
     ) {
       img_list.push('通用_头_汗');
     }

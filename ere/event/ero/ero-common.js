@@ -25,9 +25,11 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { shop_result_type_enum } = require('#/data/ero/juel-const');
 const { mark_enum } = require('#/data/ero/mark-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const {
   breast_size,
   penis_desc,
@@ -838,7 +840,9 @@ class CustomizedEro {
   // eslint-disable-next-line no-unused-vars
   async after_betrayed(chara, me, callname, hook, extra_flag) {
     const race = era.get(`cflag:${this.id}:种族`),
-      like_betrayed = era.get(`talent:${this.id}:绿帽癖`);
+      like_betrayed =
+        era.get(`talent:${this.id}:绿帽癖`) > 0 ||
+        CharaInmon.get(this.id).on(plugin_enum.ntr);
     switch (era.get(`exp:${this.id}:被绿次数`) + 1) {
       case 1:
         era.drawLine();

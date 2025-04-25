@@ -239,19 +239,17 @@ module.exports = {
         !era.get(`status:${chara_id}:经期`))
     );
   },
-  check_want_to_escape(chara_id) {
+  check_want_to_escape(id) {
     return (
-      !era.get(`status:${chara_id}:超马跳Z`) &&
+      !era.get(`status:${id}:超马跳Z`) &&
+      era.get(`mark:${id}:淫纹`) < 3 &&
       ((era.getCharactersInTrain().length > 0 &&
         !era.get('tflag:强奸') &&
-        get_sex_acceptable(chara_id) < 0) ||
-        Math.max(
-          era.get(`mark:${chara_id}:苦痛`),
-          era.get(`mark:${chara_id}:羞耻`),
-        ) -
-          era.get(`mark:${chara_id}:欢愉`) >=
-          1 ||
-        era.get(`mark:${chara_id}:反抗`) >= 2)
+        get_sex_acceptable(id) < 0) ||
+        Math.max(era.get(`mark:${id}:苦痛`), era.get(`mark:${id}:羞耻`)) -
+          era.get(`mark:${id}:欢愉`) <
+          Math.random() ||
+        era.get(`mark:${id}:反抗`) >= 2)
     );
   },
   get_action_base_check,

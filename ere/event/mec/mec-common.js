@@ -10,6 +10,9 @@ const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 class CustomizedMec {
+  /** @type {function(number):CustomizedMec} */
+  static get_custom_mec;
+
   constructor(chara_id) {
     this.id = chara_id;
   }

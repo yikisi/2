@@ -114,18 +114,18 @@ async function fail(chara, me) {
 }
 
 /**
- * @param {number} chara_id
+ * @param {number} id
  * @param {number} sex_loc
  * @returns {Promise<boolean|number|undefined>} if skip the week
  */
-async function goto_sex(chara_id, sex_loc) {
+async function goto_sex(id, sex_loc) {
   era.drawLine();
   if (await new GameGuides().office_sex()) {
     return;
   }
-  const chara = get_chara_talk(chara_id);
+  const chara = get_chara_talk(id);
   const me = get_chara_talk(0);
-  if (!sys_check_awake(chara_id)) {
+  if (!sys_check_awake(id)) {
     era.printMultiColumns([
       {
         content: [
@@ -152,13 +152,12 @@ async function goto_sex(chara_id, sex_loc) {
     const ret = await era.input();
     if (!ret) {
       era.set('flag:当前位置', sex_loc);
-      begin_and_init_ero(0, chara_id);
-      await print_ero_page(chara_id);
+      begin_and_init_ero(0, id);
+      await print_ero_page(id);
       await end_ero_and_show_result(true);
     }
   } else {
-    const check =
-      era.get(`love:${chara_id}`) >= 50 ? get_sex_acceptable(chara_id) : -1;
+    const check = era.get(`love:${id}`) >= 50 ? get_sex_acceptable(id) : -1;
     let ret, dice;
     if (check >= 0) {
       era.printMultiColumns(
@@ -211,7 +210,7 @@ async function goto_sex(chara_id, sex_loc) {
       if (ret === 4) {
         return;
       } else if (ret === 1) {
-        era.set('flag:床伴', chara_id);
+        era.set('flag:床伴', id);
         return true;
       } else {
         era.set('flag:当前位置', sex_loc);
@@ -242,27 +241,24 @@ async function goto_sex(chara_id, sex_loc) {
             return;
           }
       }
-      begin_and_init_ero(0, chara_id);
+      begin_and_init_ero(0, id);
       if (is_rape === 1) {
         era.set('tflag:强奸', 0);
-        update_juel_buff(chara_id);
+        update_juel_buff(id);
       } else if (is_rape === 2) {
-        era.set('tflag:强奸', chara_id);
+        era.set('tflag:强奸', id);
       }
-      if (era.get(`status:${chara_id}:超马跳Z`) || is_rape === 2) {
-        era.set('tflag:主导权', chara_id);
+      if (era.get(`status:${id}:超马跳Z`) || is_rape === 2) {
+        era.set('tflag:主导权', id);
       }
-      await print_ero_page(chara_id);
+      await print_ero_page(id);
       await end_ero_and_show_result(true);
     } else {
       const pleasure_mark =
-          era.get(`mark:${chara_id}:欢愉`) -
-          Math.max(
-            era.get(`mark:${chara_id}:苦痛`),
-            era.get(`mark:${chara_id}:羞耻`),
-          ),
-        meek_mark =
-          era.get(`mark:${chara_id}:同心`) - era.get(`mark:${chara_id}:反抗`),
+          era.get(`mark:${id}:淫纹`) ||
+          era.get(`mark:${id}:欢愉`) -
+            Math.max(era.get(`mark:${id}:苦痛`), era.get(`mark:${id}:羞耻`)),
+        meek_mark = era.get(`mark:${id}:同心`) - era.get(`mark:${id}:反抗`),
         is_pleasure = pleasure_mark > meek_mark,
         accept = Math.max(pleasure_mark, meek_mark) / 3 > Math.random();
       if (accept) {
@@ -309,7 +305,7 @@ async function goto_sex(chara_id, sex_loc) {
         if (ret === 3) {
           return;
         } else if (ret === 1) {
-          era.set('flag:床伴', chara_id);
+          era.set('flag:床伴', id);
           return true;
         } else {
           era.set('flag:当前位置', sex_loc);
@@ -317,7 +313,7 @@ async function goto_sex(chara_id, sex_loc) {
         if (ret === 2 && (await ask_drink_medicine(chara))) {
           return;
         }
-        begin_and_init_ero(0, chara_id);
+        begin_and_init_ero(0, id);
       } else {
         era.printMultiColumns([
           {
@@ -360,17 +356,13 @@ async function goto_sex(chara_id, sex_loc) {
             -get_random_value(0, Math.min(era.get('base:0:体力'), 200)),
           );
           sys_change_attr_and_print(
-            chara_id,
+            id,
             '体力',
-            -get_random_value(
-              0,
-              Math.min(era.get(`base:${chara_id}:体力`), 200),
-            ),
+            -get_random_value(0, Math.min(era.get(`base:${id}:体力`), 200)),
           );
           if (
             !era.get('flag:强奸抵抗') ||
-            sys_get_strength_ratio_in_fight(0, chara_id) >
-              (dice = Math.random())
+            sys_get_strength_ratio_in_fight(0, id) > (dice = Math.random())
           ) {
             await era.printAndWait([
               me.get_colored_name(),
@@ -382,11 +374,11 @@ async function goto_sex(chara_id, sex_loc) {
               chara.get_colored_name(),
               ' 露出了惊恐的神情……',
             ]);
-            sys_like_chara(chara_id, 0, -400) && (await era.waitAnyKey());
+            sys_like_chara(id, 0, -400) && (await era.waitAnyKey());
             era.set('flag:当前位置', sex_loc);
-            begin_and_init_ero(0, chara_id);
+            begin_and_init_ero(0, id);
             era.set('tflag:强奸', 0);
-            update_juel_buff(chara_id);
+            update_juel_buff(id);
           } else {
             await era.printAndWait([
               me.get_colored_name(),
@@ -409,8 +401,7 @@ async function goto_sex(chara_id, sex_loc) {
           era.add(`item:${ret}`, -1);
           if (
             !era.get('flag:强奸抵抗') ||
-            sys_get_intelligence_ratio_in_fight(0, chara_id) >
-              (dice = Math.random())
+            sys_get_intelligence_ratio_in_fight(0, id) > (dice = Math.random())
           ) {
             await era.printAndWait([
               me.get_colored_name(),
@@ -423,9 +414,9 @@ async function goto_sex(chara_id, sex_loc) {
                 ? '然后沉沉睡去……'
                 : '然后被腾起的性欲烧灼了所有理智……',
             ]);
-            era.set(`status:${chara_id}:${ret}`, 1);
+            era.set(`status:${id}:${ret}`, 1);
             era.set('flag:当前位置', sex_loc);
-            begin_and_init_ero(0, chara_id);
+            begin_and_init_ero(0, id);
           } else {
             await era.printAndWait([
               chara.get_colored_name(),
@@ -435,54 +426,42 @@ async function goto_sex(chara_id, sex_loc) {
           }
         }
       }
-      if (era.get(`status:${chara_id}:超马跳Z`)) {
-        era.set('tflag:主导权', chara_id);
+      if (era.get(`status:${id}:超马跳Z`)) {
+        era.set('tflag:主导权', id);
       }
-      await print_ero_page(chara_id);
+      await print_ero_page(id);
       if (check < 0) {
-        if (era.get(`status:${chara_id}:超马跳Z`)) {
+        if (era.get(`status:${id}:超马跳Z`)) {
           await era.printAndWait([
             '虽然一时情动，但当 ',
             chara.get_colored_name(),
             ' 回过神来，一定会对此羞愤难当吧……',
           ]);
-          sys_like_chara(chara_id, 0, -400) && (await era.waitAnyKey());
-          if (
-            era.get(`mark:${chara_id}:羞耻`) < 3 &&
-            !era.get(`ex:${chara_id}:羞耻获取`)
-          ) {
-            era.set(`nowex:${chara_id}:羞耻获取`, 1);
+          sys_like_chara(id, 0, -400) && (await era.waitAnyKey());
+          if (era.get(`mark:${id}:羞耻`) < 3 && !era.get(`ex:${id}:羞耻获取`)) {
+            era.set(`nowex:${id}:羞耻获取`, 1);
           }
-          if (
-            era.get(`mark:${chara_id}:反抗`) < 3 &&
-            !era.get(`ex:${chara_id}:反抗获取`)
-          ) {
-            era.set(`nowex:${chara_id}:反抗获取`, 1);
+          if (era.get(`mark:${id}:反抗`) < 3 && !era.get(`ex:${id}:反抗获取`)) {
+            era.set(`nowex:${id}:反抗获取`, 1);
           }
-          await update_marks(true, chara_id);
+          await update_marks(true, id);
           if (dice < 0.95) {
-            era.add(`status:${chara_id}:疲惫`, 3 + (dice < 0.05));
+            era.add(`status:${id}:疲惫`, 3 + (dice < 0.05));
           }
-        } else if (era.get(`status:${chara_id}:马跳S`)) {
+        } else if (era.get(`status:${id}:马跳S`)) {
           if (dice < 0.95) {
-            era.add(`status:${chara_id}:疲惫`, 2 + (dice < 0.05));
+            era.add(`status:${id}:疲惫`, 2 + (dice < 0.05));
           }
         } else if (era.get('tflag:强奸') === 0) {
-          if (
-            era.get(`mark:${chara_id}:苦痛`) < 3 &&
-            !era.get(`ex:${chara_id}:苦痛获取`)
-          ) {
-            era.set(`nowex:${chara_id}:苦痛获取`, 1);
+          if (era.get(`mark:${id}:苦痛`) < 3 && !era.get(`ex:${id}:苦痛获取`)) {
+            era.set(`nowex:${id}:苦痛获取`, 1);
           }
-          if (
-            era.get(`mark:${chara_id}:反抗`) < 3 &&
-            !era.get(`ex:${chara_id}:反抗获取`)
-          ) {
-            era.set(`nowex:${chara_id}:反抗获取`, 1);
+          if (era.get(`mark:${id}:反抗`) < 3 && !era.get(`ex:${id}:反抗获取`)) {
+            era.set(`nowex:${id}:反抗获取`, 1);
           }
-          await update_marks(true, chara_id);
+          await update_marks(true, id);
           if (dice < 0.95) {
-            sys_hurt_uma(chara_id, 1 + (dice < 0.05));
+            sys_hurt_uma(id, 1 + (dice < 0.05));
           }
         }
       }

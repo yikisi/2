@@ -104,9 +104,9 @@ class CustomizedEdu extends ICustomizedEdu {
     era.println();
     const title = new CharaTitles(chara.id).get_colored_curr_title(),
       fame_reward =
-        (count.g1 * race_rewards[class_enum.G1][1].fame) / 2 +
-        (count.g2 * race_rewards[class_enum.G2][1].fame) / 2 +
-        (count.g3 * race_rewards[class_enum.G3][5].fame) / 2;
+        (count.g1 * race_rewards[class_enum.G1].r01.fame) / 2 +
+        (count.g2 * race_rewards[class_enum.G2].r01.fame) / 2 +
+        (count.g3 * race_rewards[class_enum.G3].r05.fame) / 2;
     if (check >= 6) {
       await era.printAndWait([
         `随着以${chara.sex}为蓝本的铜像揭幕，`,

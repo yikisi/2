@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const use_item_by_character = require('#/system/ero/ero-act-handler/use-item-by-chara');
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
 const {
@@ -436,7 +437,7 @@ async function sys_auto_rape(shown) {
   );
   if (
     ero_tagged_hooks[action] !== undefined &&
-    !era.get(`talent:${master}:病娇`) &&
+    !sys_check_yandere(master, (y) => y > 0) &&
     !era.get(`status:${master}:超马跳Z`) &&
     (master < 340 || master > 342)
   ) {

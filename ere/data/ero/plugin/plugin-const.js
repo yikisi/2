@@ -69,6 +69,8 @@ plugins[40141] = require('#/data/ero/plugin/plugin-40141');
 plugins[40211] = require('#/data/ero/plugin/plugin-40211');
 plugins[40221] = require('#/data/ero/plugin/plugin-40221');
 plugins[40222] = require('#/data/ero/plugin/plugin-40222');
+plugins[40311] = require('#/data/ero/plugin/plugin-40311');
+plugins[40312] = require('#/data/ero/plugin/plugin-40312');
 plugins[50111] = require('#/data/ero/plugin/plugin-50111');
 plugins[50112] = require('#/data/ero/plugin/plugin-50112');
 plugins[50113] = require('#/data/ero/plugin/plugin-50113');
@@ -225,6 +227,10 @@ module.exports = {
     love_d1: 40221,
     // 只可在此: 爱慕获取-100%
     love_d2: 40222,
+    // 有容乃大: 不再妒忌
+    no_yand: 40311,
+    // 人之常情: 乐于分享
+    ntr: 40312,
     // 高潮操纵Ⅰ: 每隔一回合允许高潮一回合
     org_c1: 50111,
     // 高潮操纵Ⅱ: 每隔两回合允许高潮一回合
