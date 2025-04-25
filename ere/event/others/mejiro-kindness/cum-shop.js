@@ -465,7 +465,7 @@ async function cum_shop(chara, me) {
             const extra_base = new ExtraBase();
             era.printButton(
               `「大力丸」（${
-                extra_base.stamina === 1000
+                extra_base.stamina >= 1000
                   ? 'MAX'
                   : `${
                       extra_base.stamina / 10 + 10
@@ -478,7 +478,7 @@ async function cum_shop(chara, me) {
             );
             era.printButton(
               `「醒神膏」（${
-                extra_base.time === 1000
+                extra_base.time >= 1000
                   ? 'MAX'
                   : `${
                       extra_base.time / 10 + 10

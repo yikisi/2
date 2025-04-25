@@ -50,9 +50,7 @@ output += `cons_dict[201] =
   cons_dict[202] =
   cons_dict[203] =
     require('#/event/mec/mec-npc-uma-common');
-cons_dict[207] =
-  cons_dict[344] =
-  cons_dict[346] =
+cons_dict[346] =
   cons_dict[347] =
   cons_dict[348] =
     require('#/event/mec/mec-npc');

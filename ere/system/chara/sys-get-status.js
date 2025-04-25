@@ -93,6 +93,16 @@ function sys_get_status(id) {
   } else if (pressure >= pressure_border.unhappy) {
     status_list.push({ color: buff_colors[3], content: '不快' });
   }
+  if (
+    pressure >= pressure_border.unhappy &&
+    era.get('cflag:344:招募状态') === recruit_flags.yes
+  ) {
+    status_list.push({
+      color: get_chara_color(344),
+      content: '凉花相助',
+      title: '消耗精力减压效果提高。',
+    });
+  }
   if (show_train_buff) {
     let check;
     if (era.get('cflag:340:招募状态') === recruit_flags.yes) {
@@ -100,7 +110,7 @@ function sys_get_status(id) {
       status_list.push({
         color: get_chara_color(340),
         content: '女神之望',
-        fontWeight: check ? 'bold' : undefined,
+        fontWeight: check > 50 ? 'bold' : undefined,
         title: `速度与力量训练效果+${check}%。`,
       });
     }
@@ -109,7 +119,7 @@ function sys_get_status(id) {
       status_list.push({
         color: get_chara_color(341),
         content: '女神之爱',
-        fontWeight: check ? 'bold' : undefined,
+        fontWeight: check > 50 ? 'bold' : undefined,
         title: `智力与技能点数训练效果+${check}%。`,
       });
     }
@@ -118,7 +128,7 @@ function sys_get_status(id) {
       status_list.push({
         color: get_chara_color(342),
         content: '女神之信',
-        fontWeight: check ? 'bold' : undefined,
+        fontWeight: check > 50 ? 'bold' : undefined,
         title: `耐力与根性训练效果+${check}%。`,
       });
     }
@@ -130,7 +140,7 @@ function sys_get_status(id) {
       status_list.push({
         color: get_chara_color(343),
         content: '佐岳相助',
-        fontWeight: check ? 'bold' : undefined,
+        fontWeight: check > 0 ? 'bold' : undefined,
         title: `海外远征的负面影响${check > 0 ? '减轻' : '减半'}。`,
       });
     }
@@ -139,7 +149,7 @@ function sys_get_status(id) {
       status_list.push({
         color: get_chara_color(345),
         content: '灯之相助',
-        fontWeight: check ? 'bold' : undefined,
+        fontWeight: check > 25 ? 'bold' : undefined,
         title: `训练经验获取量+${check}%。`,
       });
     }
@@ -193,6 +203,13 @@ function sys_get_status(id) {
   });
   if (era.get(`status:${id}:发胖`) > 0) {
     status_list.push({ color: buff_colors[0], content: '发胖' });
+    if (era.get('cflag:207:招募状态') === recruit_flags.yes) {
+      status_list.push({
+        color: get_chara_color(207),
+        content: '艾尔菲相助',
+        title: '运动减肥效果提高。',
+      });
+    }
   }
   const headache = era.get(`status:${id}:偏头痛`);
   if (headache > 0) {

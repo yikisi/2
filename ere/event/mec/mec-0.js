@@ -4,12 +4,21 @@ const CustomizedMec = require('#/event/mec/mec-common');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
+const ElfieLifeMarks = require('#/data/event/life-event-marks/life-event-marks-207');
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
 const EtsukoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-303');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedMec {
+  get_action_debuff() {
+    return (
+      -0.1 *
+      (new TokinoLifeMarks().buff + 1) *
+      (era.get('cflag:301:招募状态') === recruit_flags.yes)
+    );
+  }
+
   get_status() {
     const ret_list = [];
     if (era.get('flag:当前位置') === location_enum.basement) {
@@ -94,12 +103,11 @@ module.exports = class extends CustomizedMec {
     return ret_list;
   }
 
-  get_action_debuff() {
-    return (
-      -0.1 *
-      (new TokinoLifeMarks().buff + 1) *
-      (era.get('cflag:301:招募状态') === recruit_flags.yes)
-    );
+  get_maxbase_buff() {
+    if (new ElfieLifeMarks().buff > 0) {
+      return 200;
+    }
+    return super.get_maxbase_buff();
   }
 
   init_love() {}
