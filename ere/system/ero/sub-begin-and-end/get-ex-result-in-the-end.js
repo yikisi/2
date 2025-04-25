@@ -278,7 +278,7 @@ function get_ex_result_in_the_end(chara_id) {
     content: '在本次马儿跳中：',
     type: 'text',
   });
-  if (era.get(`ex:${chara_id}:失贞标记`)) {
+  if (era.get(`ex:${chara_id}:失贞`) > 0) {
     temp_buffer.push({
       config: { offset: 1, width: 23 },
       content: [
@@ -294,7 +294,7 @@ function get_ex_result_in_the_end(chara_id) {
       type: 'text',
     });
   }
-  if (era.get(`ex:${chara_id}:破处标记`)) {
+  if (era.get(`ex:${chara_id}:破处`) > 0) {
     temp_buffer.push({
       config: { offset: 1, width: 23 },
       content: [

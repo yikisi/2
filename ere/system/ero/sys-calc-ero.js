@@ -314,7 +314,7 @@ function sys_do_sex(attacker, defender, item) {
           if (attacker_virgin_status > 0) {
             set_stain(attacker.id, part_enum.virgin, stain_enum.virgin);
             handle_lost_virginity(defender.id, attacker.id);
-            era.set(`nowex:${attacker.id}:破处标记`, 1);
+            era.set(`nowex:${attacker.id}:破处`, 1);
           }
           if (
             // 无自觉非处女算破处
@@ -333,7 +333,7 @@ function sys_do_sex(attacker, defender, item) {
           }
           // 没干过人的肉棒算失童贞
           if (defender_virgin_status > 0) {
-            era.set(`nowex:${defender.id}:失贞标记`, 1);
+            era.set(`nowex:${defender.id}:失贞`, 1);
           }
           // 判断是不是睡奸
           if (is_defender_awake) {
@@ -502,7 +502,7 @@ function sys_do_sex(attacker, defender, item) {
           // 童贞没再生的说法
           // 没干过人的肉棒算失童贞
           if (attacker_virgin_status > 0) {
-            era.set(`nowex:${attacker.id}:失贞标记`, 1);
+            era.set(`nowex:${attacker.id}:失贞`, 1);
           }
           if (
             // 无自觉非童贞算失童贞
@@ -520,7 +520,7 @@ function sys_do_sex(attacker, defender, item) {
           if (defender_virgin_status > 0) {
             set_stain(defender.id, part_enum.virgin, stain_enum.virgin);
             handle_lost_virginity(attacker.id, defender.id);
-            era.set(`nowex:${defender.id}:破处标记`, 1);
+            era.set(`nowex:${defender.id}:破处`, 1);
           }
           // 睡奸判定
           if (is_defender_awake) {

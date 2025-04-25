@@ -321,11 +321,12 @@ async function sys_calc_orgasm(shown, ...ids) {
         // 淫系列特性使分泌液阈值减半
         if (part === part_enum.breast) {
           if (era.get(`cflag:${chara_id}:性别`) !== 1) {
-            const border =
-              (max * palam_border.breast) /
-              (1 +
-                0.5 * era.get(`talent:${chara_id}:淫乳`) +
-                0.5 * era.get(`tcvar:${chara_id}:发情`));
+            const talent = era.get(`talent:${chara_id}:淫乳`);
+            let border = 1 + 0.5 * era.get(`tcvar:${chara_id}:发情`);
+            if (talent > 0) {
+              border += 0.5 * talent;
+            }
+            border = (max * palam_border.breast) / border;
             if (curr >= border || era.get(`ex:${chara_id}:喷奶阻碍`) > 0) {
               if (
                 era.get(`talent:${chara_id}:乳头类型`) === 2 &&
@@ -353,13 +354,13 @@ async function sys_calc_orgasm(shown, ...ids) {
             }
           }
         } else if (part === part_enum.anal) {
-          if (
-            curr >=
-            (max * palam_border.anal) /
-              (1 +
-                0.5 * era.get(`talent:${chara_id}:淫臀`) +
-                0.5 * era.get(`tcvar:${chara_id}:发情`))
-          ) {
+          const talent = era.get(`talent:${chara_id}:淫臀`);
+          let border = 1 + 0.5 * era.get(`tcvar:${chara_id}:发情`);
+          if (talent > 0) {
+            border += 0.5 * talent;
+          }
+          border = (max * palam_border.anal) / border;
+          if (curr >= border) {
             era.add(
               `nowex:${chara_id}:肛门润滑`,
               Number(!check_lubrication(chara_id, part_enum.anal)),
