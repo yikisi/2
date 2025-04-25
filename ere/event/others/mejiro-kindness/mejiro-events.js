@@ -7,11 +7,12 @@ const bad_events = require('#/event/others/mejiro-kindness/bad-events.kojo');
 const good_events = require('#/event/others/mejiro-kindness/good-events.kojo');
 const normal_events = require('#/event/others/mejiro-kindness/normal-events.kojo');
 
+const { get_random_entry } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
+
 const EroParticipant = require('#/data/ero/ero-participant');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
-const { get_random_entry } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
 
 /**
  * @param {{f:function(number,number):boolean,h:function():Promise}[]} events
@@ -93,7 +94,7 @@ class MejiroEvents {
   bad_events = [
     {
       f() {
-        return era.get(`base:${this.chara.id}:性欲`) < lust_border.itch;
+        return era.get(`base:${this.chara.id}:性欲`) < lust_border.absent_mind;
       },
       async h() {
         await quick_make_love(
@@ -107,6 +108,24 @@ class MejiroEvents {
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
             new EroParticipant(this.chara.id, part_enum.anal),
+            false,
+          );
+        } else {
+          era.add(`base:${this.chara.id}:性欲`, get_random_value(0, 300));
+        }
+      },
+    },
+    {
+      f() {
+        return era.get(`base:${this.chara.id}:性欲`) > lust_border.itch;
+      },
+      async h() {
+        era.add(`base:${this.chara.id}:性欲`, get_random_value(0, 300));
+        if ((await bad_events['咖啡馆'](this.dict))[0] === 1) {
+          era.add('base:0:性欲', get_random_value(0, 600));
+          await quick_make_love(
+            new EroParticipant(0, part_enum.mouth),
+            new EroParticipant(this.chara.id, part_enum.mouth),
             false,
           );
         } else {
