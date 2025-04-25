@@ -29,6 +29,7 @@ const {
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
+const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const YandereList = require('#/data/event/yandere-list');
@@ -268,18 +269,14 @@ async function check_new_activities(cur_round, in_team_list) {
       }
       foreign_list.forEach((id) => era.set(`cflag:${id}:位置`, location.loc));
       if (era.get('cflag:343:招募状态') === recruit_flags.yes) {
+        let { buff } = new MayLifeMarks();
+        buff += 1;
         foreign_list.forEach((id) => {
-          era.set(
-            `status:${id}:语言不通`,
-            Math.ceil(era.get(`status:${id}:语言不通`) / 2),
-          );
-          era.set(
-            `status:${id}:水土不服`,
-            Math.ceil(era.get(`status:${id}:水土不服`) / 2),
-          );
-          era.set(
-            `status:${id}:客场作战`,
-            Math.ceil(era.get(`status:${id}:客场作战`) / 2),
+          ['语言不通', '水土不服', '客场作战'].forEach((s) =>
+            era.set(
+              `status:${id}:${s}`,
+              Math.ceil(Math.max(era.get(`status:${id}:${s}`) - 1, 0) / buff),
+            ),
           );
         });
       }

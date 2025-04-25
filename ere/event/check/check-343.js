@@ -9,6 +9,14 @@ const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedCheck {
+  check_and_get_titles(aim_check) {
+    const ret = super.check_and_get_titles(aim_check);
+    if (aim_check && ret.length > 0) {
+      new MayLifeMarks().buff = 1;
+    }
+    return ret;
+  }
+
   check_next_week() {
     if (era.get('flag:当前回合数') === 13) {
       add_event(
