@@ -586,10 +586,14 @@ module.exports = async (_id) => {
       }
       era.printMultiColumns(buffer);
 
-      era.print(
-        '\n* 点击特性名显示说明，或者点击之后的按钮升降感度/获取或消除特性\n' +
-          `** 角色身体部位的调教因子不足所需时，${me.name} 可以以两倍的因子补足差额`,
-      );
+      era.println();
+      era.print([
+        '* 点击特性名显示说明，或者点击之后的按钮升降感度/获取或消除特性',
+        { isBr: true },
+        `** 角色身体部位的调教因子不足所需时，${me.name} 可以以两倍的因子补足差额`,
+        { isBr: true },
+        `*** 可获取最高级敏感度的部位数量：${era.get(`talent:${chara_id}:调教度`) + 1}`,
+      ]);
       print_footer(chara_id, page_pointer.tab);
       const ret = await era.input();
       if (ret < 990) {

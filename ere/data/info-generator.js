@@ -4,7 +4,7 @@ const sys_get_item_status = require('#/system/chara/sys-get-item-status');
 const {
   check_erect,
   check_lubrication,
-  get_bust_size,
+  get_bust_delta,
   get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
 const {
@@ -22,6 +22,7 @@ const {
   skin_colors,
 } = require('#/data/color-const');
 const { hair_colors } = require('#/data/const.json');
+const { mark_colors } = require('#/data/const.json');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
@@ -127,13 +128,11 @@ const title_desc = ['训练员', '马娘', '性奴', '孕袋'];
 
 /**
  * @param {number} chara_id
- * @param {boolean} [show_true_bust]
+ * @param {boolean} [show_true_bust=false]
  * @returns {string}
  */
-function get_breast_cup(chara_id, show_true_bust) {
-  const delta =
-    get_bust_size(chara_id, show_true_bust) -
-    era.get(`cflag:${chara_id}:下胸围`);
+function get_breast_cup(chara_id, show_true_bust = false) {
+  const delta = get_bust_delta(chara_id, show_true_bust);
   if (delta < 0) {
     return '-';
   }
@@ -609,15 +608,6 @@ module.exports = {
   get_talent: (id) => {
     const yandere = era.get(`talent:${id}:病娇`),
       ret = get_custom_mec(id).get_talents();
-    if (
-      era.get(`cflag:${id}:父方角色`) === 308 ||
-      era.get(`cflag:${id}:母方角色`) === 308
-    ) {
-      ret.push({
-        color: buff_colors[1],
-        content: '梦之继承者',
-      });
-    }
     if (yandere === 2 || (yandere > 0 && era.get('status:0:马语者'))) {
       const temp = {
         color: buff_colors[3],
@@ -761,7 +751,13 @@ module.exports = {
       talent_list.push({
         color: el_success_color,
         content: '[绿帽癖]',
-        display: 'inline-block',
+      });
+    }
+    if (era.get(`talent:${id}:钢之意志`)) {
+      talent_list.push({
+        color: mark_colors['钢'],
+        content: '[钢之意志]',
+        title: `[钢之意志]：${talent_desc['钢之意志']}`,
       });
     }
     talent_list.push(...new Array(3).fill(0).map((_, i) => i + 40));

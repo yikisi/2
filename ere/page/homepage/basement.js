@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const sys_handle_prison_guides = require('#/system/basement/sys-handle-prison-guides');
 const sys_handle_time_in_basement = require('#/system/basement/sys-handle-time-in-basement');
+const sys_get_status = require('#/system/chara/sys-get-status');
 const sys_get_intelligence_ratio_in_fight = require('#/system/ero/fight/sys-get-intelligence-ratio');
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const {
@@ -74,10 +75,23 @@ function get_random_value(min, max, is_float) {
 }
 
 function page_header() {
+  const status_list = sys_get_status(0);
   era.printInColRows(
     [{ type: 'divider' }],
     {
-      columns: get_progress_bar(),
+      columns: [
+        ...get_progress_bar(),
+        {
+          config: { width: 2 },
+          content: '状态',
+          type: 'text',
+        },
+        {
+          config: { width: 22 },
+          content: status_list.length > 0 ? status_list : '正常',
+          type: 'text',
+        },
+      ],
       config: { width: 16 },
     },
     {

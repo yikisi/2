@@ -7,7 +7,7 @@ module.exports = class extends CustomizedMec {
   get_race_finish_report(uma, race_id) {
     if (
       race_id === race_enum.arim_kin &&
-      era.get('cflag:6:育成回合计时') > 96
+      era.get(`cflag:${this.id}:育成回合计时`) > 96
     ) {
       return [
         uma.get_colored_name(),

@@ -9,9 +9,9 @@ const print_ero_page = require('#/page/page-ero');
 
 /**
  * @param {number} chara_id
- * @param {boolean} [is_rape]
+ * @param {boolean} [is_rape=false]
  */
-async function quick_into_sex(chara_id, is_rape) {
+async function quick_into_sex(chara_id, is_rape = false) {
   begin_and_init_ero(0, chara_id);
   if (is_rape) {
     era.set('tflag:强奸', chara_id);

@@ -643,7 +643,7 @@ async function end_ero_and_show_result(shown = true) {
   clean_palams();
   const chara_list = era.getCharactersInTrain();
   end_ero(false, shown, chara_list);
-  if (shown !== false) {
+  if (shown) {
     if (era.get('flag:马跳结果显示简报')) {
       for (const chara_id of chara_list) {
         const buffer = get_juel_result(chara_id, juel_names, tmp);

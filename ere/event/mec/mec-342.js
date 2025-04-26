@@ -10,8 +10,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedMec {
   init_love() {
-    if (sys_personal_achievement.get(342)) {
-      set('love:342', 50);
+    if (sys_personal_achievement.get(this.id) > 0) {
+      set(`love:${this.id}`, 40);
     }
   }
 
@@ -21,7 +21,7 @@ module.exports = class extends CustomizedMec {
 
   get_ero_check(action) {
     if (new ByerleyLifeMarks().love === 2) {
-      return Math.min(40, 90 - get('love:342'));
+      return Math.min(40, 90 - get(`love:${this.id}`));
     }
     return super.get_ero_check(action);
   }
@@ -31,24 +31,24 @@ module.exports = class extends CustomizedMec {
   }
 
   get_talents() {
-    const title_check = new ByerleyLifeMarks().buff;
+    const { buff } = new ByerleyLifeMarks();
     return [
       {
         color: get_chara_color(this.id),
         content: '信',
-        fontWeight: title_check ? 'bold' : '',
-        title: `队伍成员耐力与根性训练效果+${title_check ? 100 : 50}%。`,
+        fontWeight: buff > 0 ? 'bold' : undefined,
+        title: `队伍成员耐力与根性训练效果+${50 * (buff + 1)}%。`,
       },
     ];
   }
 
   set_callname() {
-    set('callname:342:0', '训练员');
+    set(`callname:${this.id}:0`, '训练员');
   }
 
   set_foreign_debuff() {}
 
   set_my_sex() {
-    return get('flag:角色性别') === 99 ? 10 : set('cflag:342:性别', 0);
+    return set(`cflag:${this.id}:性别`, get('flag:角色性别') === 99 ? 10 : 0);
   }
 };

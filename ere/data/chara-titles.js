@@ -41,10 +41,10 @@ class CharaTitles {
   }
 
   /**
-   * @param {boolean} [has_desc]
+   * @param {boolean} [has_desc=false]
    * @returns {{color:string,[title]:string,content:string}|string}
    */
-  get_colored_curr_title(has_desc) {
+  get_colored_curr_title(has_desc = false) {
     const curr = this.get_curr_title();
     return curr
       ? {

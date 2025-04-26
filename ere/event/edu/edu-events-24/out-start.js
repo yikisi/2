@@ -58,7 +58,7 @@ module.exports = (handlers) => {
           '商店街人员',
           '天啊！恭喜────！！抽到特等奖『温泉旅游券』了～～～～！！',
         );
-        await era.printAndWait('获得了「温泉旅游券」。');
+        await era.printAndWait('获得了【温泉旅游券】。');
         await maya.say_and_wait('太棒了～～！！任务达成～！');
         era.printButton('「太好了！」', 1);
         await era.input();
@@ -108,7 +108,7 @@ module.exports = (handlers) => {
           '商店街人员',
           '恭喜抽到一等奖～！奖品是『上等胡萝卜汉堡排』！',
         );
-        await era.printAndWait('获得了「上等胡萝卜汉堡排」。');
+        await era.printAndWait('获得了【上等胡萝卜汉堡排】。');
         await maya.say_and_wait('哇！是一等奖！好棒！！');
         await maya.say_and_wait('啊，不是温泉旅游券～！！');
         era.printButton('「但抽到一等奖哦！」', 1);
@@ -163,7 +163,7 @@ module.exports = (handlers) => {
           '商店街人员',
           '二等奖～！！奖品是『一筐胡萝卜』！',
         );
-        await era.printAndWait('获得了「一筐胡萝卜」。');
+        await era.printAndWait('获得了【一筐胡萝卜】。');
         await maya.say_and_wait('哇！？满满的胡萝卜～！？');
         await say_by_passer_by_and_wait(
           '商店街人员',
@@ -219,7 +219,7 @@ module.exports = (handlers) => {
           '商店街人员',
           '三等奖～！奖品是『一根胡萝卜』！',
         );
-        await era.printAndWait('获得了「一根胡萝卜」。');
+        await era.printAndWait('获得了【一根胡萝卜】。');
         await maya.say_and_wait('咦～！？骗人的吧！');
         await maya.say_and_wait('叔叔，你是把特等奖看成其他奖了吧？对不对～？');
         await say_by_passer_by_and_wait('商店街人员', '嗯……是三等奖没错。');
@@ -253,7 +253,7 @@ module.exports = (handlers) => {
           '商店街人员',
           '很可惜，没抽中！参加奖是『卫生纸』哦～',
         );
-        await era.printAndWait('获得了「卫生纸」。');
+        await era.printAndWait('获得了【卫生纸】。');
         await maya.say_and_wait('咦────！？');
         await maya.say_and_wait('我还以为一定会抽中的！因为因为～！');
         await maya.say_and_wait([

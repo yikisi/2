@@ -16,6 +16,7 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const { add_event, cb_enum, get: get_queue } = require('#/event/queue');
 
+//const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -419,6 +420,19 @@ module.exports = async () => {
                 .forEach((e) =>
                   era.set(`equip:${e}:淫纹奴役`, era.get(`equip:${e}:10`)),
                 );
+              if (era.get('flag:惩戒力度') >= 2) {
+                era.set('talent:0:调教度', 5);
+              }
+              //              if (
+              //                !(await select_yes_or_no(
+              //                  '请选择目白城风格',
+              //                  '「自由」',
+              //                  '「慈爱」',
+              //                ))
+              //              ) {
+              era.set('flag:目白城风格', 1);
+              era.set('flag:目白城变量', { limit: 1 });
+              //              }
             }
             return true;
           } else {

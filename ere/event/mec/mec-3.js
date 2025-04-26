@@ -53,13 +53,13 @@ module.exports = class extends CustomizedMec {
   }
 
   get_race_finish_report(uma, race_id) {
-    if (race_id === race_enum.arim_kin && era.get('status:3:腿伤')) {
+    if (race_id === race_enum.arim_kin && era.get(`status:${this.id}:腿伤`)) {
       return [
         uma.get_colored_name(),
         { color: uma.color, content: '，奇迹的复活！' },
       ];
     } else if (
-      era.get('cflag:3:育成回合计时') > 96 &&
+      era.get(`cflag:${this.id}:育成回合计时`) > 96 &&
       race_infos[race_id]?.distance === distance_enum.long
     ) {
       return [

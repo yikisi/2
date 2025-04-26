@@ -10,6 +10,9 @@ const { get_random_value } = require('#/utils/value-utils');
 const { attr_change_colors, motivation_colors } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const RyokaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-344');
+const recruit_flags = require('#/data/event/recruit-flags');
+const ExtraBase = require('#/data/extra-base');
 const { location_enum } = require('#/data/locations');
 const {
   attr_enum,
@@ -91,21 +94,21 @@ function sys_change_pressure(chara_id, _val) {
   if (!_val) {
     return era.get(`base:${chara_id}:压力`);
   }
+  if (_val > 0) {
+    const { buff } = new RyokaLifeMarks();
+    _val *=
+      1 +
+      0.2 * era.get(`talent:${chara_id}:羞耻忍耐`) +
+      get_custom_mec(chara_id).get_pressure_buff() -
+      0.2 * buff;
+    if (era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48) {
+      _val /= 2;
+    }
+  }
   const ret =
     era.get('flag:压力获取') &&
     chara_id &&
-    era.add(
-      `base:${chara_id}:压力`,
-      _val > 0
-        ? Math.ceil(
-            (_val *
-              (1 +
-                0.2 * era.get(`talent:${chara_id}:羞耻忍耐`) +
-                get_custom_mec(chara_id).get_pressure_buff())) /
-              (1 + (era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48)),
-          )
-        : _val,
-    );
+    era.add(`base:${chara_id}:压力`, _val);
   sys_change_motivation(chara_id, 0);
   return ret;
 }
@@ -121,11 +124,11 @@ module.exports = {
     if (!change) {
       return [];
     }
-    const attr_name =
-        typeof attr_id_or_name === 'number'
-          ? attr_names[attr_id_or_name]
-          : attr_id_or_name,
-      val = era.get(`base:${chara_id}:${attr_name}`),
+    let attr_name = attr_id_or_name;
+    if (typeof attr_id_or_name === 'number') {
+      attr_name = attr_names[attr_id_or_name];
+    }
+    const val = era.get(`base:${chara_id}:${attr_name}`),
       max = era.get(`maxbase:${chara_id}:${attr_name}`),
       ret = [];
     if (typeof attr_id_or_name === 'string') {
@@ -135,34 +138,34 @@ module.exports = {
           (era.get('flag:当前位置') === location_enum.beach &&
             attr_id_or_name === '体力') *
             0.2;
-        change = Math.floor(change * (debuff > 10 ? 1 : debuff + 1));
+        if (debuff <= 10) {
+          change = Math.floor(change * (debuff + 1));
+        }
         if (attr_id_or_name === '体力') {
           let lose_weight =
-            change *
-            (1 -
-              0.4 * era.get(`status:${chara_id}:发胖`) +
-              era.get(`status:${chara_id}:健康茶`));
-          era.add(`base:${chara_id}:体重偏差`, Math.ceil(lose_weight));
+            1 -
+            0.4 * era.get(`status:${chara_id}:发胖`) +
+            era.get(`status:${chara_id}:健康茶`);
+          if (era.get('cflag:207:招募状态') === recruit_flags.yes) {
+            lose_weight += 0.5;
+          }
+          era.add(`base:${chara_id}:体重偏差`, lose_weight * change);
           sys_change_pressure(chara_id, get_random_value(change / 5, 0));
-          era.add(
-            `base:${chara_id}:耐力`,
-            Math.min(-change / 500, 1) +
-              (era.get(`base:${chara_id}:体力`) <
-                0.45 * era.get(`maxbase:${chara_id}:体力`))
-              ? Math.random()
-              : 0,
-          );
+          era.add(`base:${chara_id}:耐力`, Math.min(-change / 500, 1));
+          if (era.get(`base:${chara_id}:体力`) < 0.45 * max) {
+            era.add(`base:${chara_id}:耐力`, Math.random());
+          }
         } else {
           sys_change_lust(chara_id, get_random_value(change, 0) / 4);
-          sys_change_pressure(chara_id, get_random_value(change / 10, 0));
-          era.add(
-            `base:${chara_id}:智力`,
-            Math.min(-change / 500) +
-              (era.get(`base:${chara_id}:精力`) <
-                0.5 * era.get(`maxbase:${chara_id}:精力`))
-              ? Math.random()
-              : 0,
-          );
+          let lose_pressure = get_random_value(change / 10, 0);
+          if (era.get('cflag:344:招募状态') === recruit_flags.yes) {
+            lose_pressure *= 1.5;
+          }
+          sys_change_pressure(chara_id, lose_pressure);
+          era.add(`base:${chara_id}:智力`, Math.min(-change / 500, 1));
+          if (era.get(`base:${chara_id}:精力`) < 0.5 * max) {
+            era.add(`base:${chara_id}:智力`, Math.random());
+          }
         }
       }
       if (change > 0) {
@@ -239,13 +242,16 @@ module.exports = {
       (era.get(`cflag:${chara_id}:妊娠阶段`) ===
         1 << pregnant_stage_enum.resume &&
         (era.get(`cflag:${chara_id}:妊娠回合计时`) - 1) * 100);
+    const { stamina: extra_stamina, time: extra_time } =
+      chara_id === 0 ? new ExtraBase() : { stamina: 0, time: 0 };
     era.set(
       `maxbase:${chara_id}:体力`,
       Math.max(
         Math.floor(
           era.get(`staticbase:${src_chara_id}:体力`) +
             era.get(`base:${chara_id}:耐力`) / 2 +
-            maxbase_buff,
+            maxbase_buff +
+            extra_stamina,
         ),
         200,
       ),
@@ -256,7 +262,8 @@ module.exports = {
         Math.floor(
           era.get(`staticbase:${src_chara_id}:精力`) +
             era.get(`base:${chara_id}:智力`) / 2 +
-            maxbase_buff,
+            maxbase_buff +
+            extra_time,
         ),
         200,
       ),
@@ -271,12 +278,12 @@ module.exports = {
   },
   /**
    * @param {{stamina:number,time:number}} cost
-   * @param {number} [chara_id]
+   * @param {number} [chara_id=0]
    */
-  sys_handle_action(cost, chara_id) {
+  sys_handle_action(cost, chara_id = 0) {
     era.add('base:0:体力', -cost.stamina);
     era.add('base:0:精力', -cost.time);
-    if (chara_id) {
+    if (chara_id > 0) {
       era.add(`base:${chara_id}:体力`, -cost.stamina);
       era.add(`base:${chara_id}:精力`, -cost.time);
     }

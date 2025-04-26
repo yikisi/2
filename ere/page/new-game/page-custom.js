@@ -26,6 +26,11 @@ const {
 } = require('#/data/info-generator');
 const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 const { attr_names } = require('#/data/train-const');
+const {
+  get_bust_size,
+  get_hip_size,
+  get_waist_size,
+} = require('#/system/ero/sys-calc-ero-status');
 
 const body_hair_type = ['天生光滑', '普通类型', '生长快而硬'];
 const characteristic_type = [
@@ -120,14 +125,14 @@ function set_bust_size(size) {
 function set_height(height) {
   era.set('cflag:0:身高', height);
   if (era.get('cflag:0:性别') === 1) {
-    era.set('cflag:0:胸围', Math.floor(height * 0.48));
+    era.set('cflag:0:胸围', height * 0.48);
     era.set('cflag:0:下胸围', 200);
-    era.set('cflag:0:腰围', Math.floor(height * 0.47));
-    era.set('cflag:0:臀围', Math.floor(height * 0.51));
+    era.set('cflag:0:腰围', height * 0.47);
+    era.set('cflag:0:臀围', height * 0.51);
   } else {
-    era.set('cflag:0:下胸围', Math.floor(height * 0.51) - 15);
-    era.set('cflag:0:腰围', Math.floor(height * 0.34));
-    era.set('cflag:0:臀围', Math.floor(height * 0.542));
+    era.set('cflag:0:下胸围', height * 0.51 - 15);
+    era.set('cflag:0:腰围', height * 0.34);
+    era.set('cflag:0:臀围', height * 0.542);
   }
 }
 
@@ -731,11 +736,9 @@ async function page_custom() {
             human_sex_title[era.get('cflag:0:性别')],
             ` | 身高：${era.get('cflag:0:身高')}cm`,
             era.get('cflag:0:性别') - 1
-              ? ` | 三围：B${era.get('cflag:0:胸围')} (${get_breast_cup(
+              ? ` | 三围：B${get_bust_size(0, true)} (${get_breast_cup(
                   0,
-                )} Cup) · W${era.get('cflag:0:腰围')} · H${era.get(
-                  'cflag:0:臀围',
-                )}`
+                )} Cup) · W${get_waist_size(0)} · H${get_hip_size(0)}`
               : '',
             { isBr: true },
             '发型：',

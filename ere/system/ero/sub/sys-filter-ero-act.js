@@ -36,10 +36,10 @@ function check_tags(
 ) {
   const fail_index = tags.findIndex((tag) => {
     let ret;
-    if (typeof tag === 'number') {
-      ret = chara_tags_check[tag] === false || common_tags_check[tag] === false;
-    } else {
+    if (tag instanceof Function) {
       ret = !tag(chara_id, other_id);
+    } else {
+      ret = chara_tags_check[tag] === false || common_tags_check[tag] === false;
     }
     return ret;
   });

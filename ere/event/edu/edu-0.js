@@ -395,7 +395,7 @@ module.exports = class extends StrangeDayEvents {
         ...new Array(8).fill(0).map((_, i) => i),
         ...new Array(7).fill(0).map((_, i) => i + 10),
       ]);
-      print([`获得了奖品：[${get(`itemname:${item}`)}]！`]);
+      print(['获得了奖品【', get(`itemname:${item}`).toUpperCase(), '！']);
       add(`item:${item}`, 1);
       sys_like_chara(305, 0, get_random_value(0, 10));
       await waitAnyKey();
