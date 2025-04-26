@@ -120,16 +120,16 @@ class MejiroEvents {
         return era.get(`base:${this.chara.id}:性欲`) > lust_border.itch;
       },
       async h() {
-        era.add(`base:${this.chara.id}:性欲`, get_random_value(0, 300));
+        era.add(`base:${this.chara.id}:性欲`, get_random_value(150, 450));
         if ((await bad_events['咖啡馆'](this.dict))[0] === 1) {
-          era.add('base:0:性欲', get_random_value(0, 600));
+          era.add('base:0:性欲', get_random_value(300, 900));
           await quick_make_love(
             new EroParticipant(0, part_enum.mouth),
             new EroParticipant(this.chara.id, part_enum.mouth),
             false,
           );
         } else {
-          era.add(`base:${this.chara.id}:性欲`, get_random_value(0, 300));
+          era.add(`base:${this.chara.id}:性欲`, get_random_value(150, 450));
         }
       },
     },
