@@ -551,7 +551,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
       me.get_colored_name(),
       ' 连忙将身体完全缩进了温泉中，希望能靠着温泉的雾气稍微遮蔽一些不该被看到的部位',
     ]);
-    if (era.get('exp:32:性爱次数')) {
+    if (era.get('exp:32:性爱次数') > era.get('exp:32:睡奸次数')) {
       await tachyon.say_and_wait([
         callname,
         '—————怎么这么害羞的缩着身体呢？明明都已经看过那么多次了',

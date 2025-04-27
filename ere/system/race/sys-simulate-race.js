@@ -750,28 +750,32 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
       uma.race.acceleration += uma.race.accelerationBuff;
     });
     if (timer >= next_report) {
-      race_id !== undefined &&
+      if (
         (temp_report = sub_simulate_report(
           report_cache,
           list_in_race,
           race_info,
           race_id,
-        )) &&
+        )) !== undefined
+      ) {
         buffer.report.unshift(
           get_event_record(temp_report, timer_record, timer),
         );
+      }
       report_cache = [];
       next_report += get_report_internal();
     }
   }
-  race_id !== undefined &&
+  if (
     (temp_report = sub_simulate_report(
       report_cache,
       list_in_race,
       race_info,
       race_id,
-    )) &&
+    )) !== undefined
+  ) {
     buffer.report.unshift(get_event_record(temp_report, timer_record, timer));
+  }
   const duration = new Date().getTime() - current;
   logger.debug(
     `比赛模拟：${duration} ms / ${Math.ceil(timer * frame_rate)} 帧，平均 ${(duration / (timer * frame_rate)).toFixed(4)} ms/帧`,
