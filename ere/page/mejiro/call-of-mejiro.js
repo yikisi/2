@@ -86,6 +86,17 @@ class CallOfMejiro extends MejiroCity {
     }
   }
 
+  get_want_sex_buff(chara_id) {
+    return this.called === chara_id;
+  }
+
+  get_rape_buff(chara_id) {
+    if (chara_id === this.called) {
+      return 0.5;
+    }
+    return 0;
+  }
+
   get_positions(chara_id, player_base, chara_base) {
     const ret = super.get_positions(chara_id, player_base, chara_base);
     const mejiro_button = ret.find((e) => e.l === location_enum.mejiro);

@@ -26,11 +26,21 @@ class MejiroCity {
     return era.get('flag:目白城变量');
   }
 
-  get_want_sex_buff() {
+  /**
+   * @param {number} chara_id
+   * @returns {boolean}
+   */
+  // eslint-disable-next-line no-unused-vars
+  get_want_sex_buff(chara_id) {
     return false;
   }
 
-  get_rape_buff() {
+  /**
+   * @param {number} chara_id
+   * @returns {number}
+   */
+  // eslint-disable-next-line no-unused-vars
+  get_rape_buff(chara_id) {
     return 0;
   }
 

@@ -291,7 +291,8 @@ class CustomizedCheck {
       punish_level = era.get('flag:惩戒力度'),
       relation = era.get(`relation:${this.id}:0`) || 0,
       rape_buff =
-        0.5 * era.get('item:透明棉被') + MejiroCity.instance().get_rape_buff();
+        0.5 * era.get('item:透明棉被') +
+        MejiroCity.instance().get_rape_buff(this.id);
     let delta = love * raping_limit - relation;
     if (
       punish_level <= 1 &&
@@ -326,7 +327,9 @@ class CustomizedCheck {
       era.get(`base:${this.id}:性欲`) / 2000 - 5,
     )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
       0.05 * era.get(`talent:${this.id}:工口意愿`)
-    }(好色)+${0.5 * era.get('item:透明棉被')}(透明棉被)+${MejiroCity.instance().get_rape_buff()}(目白城)+${0.2 * era.get(`status:${this.id}:爱意克制`)}(爱意克制)-${
+    }(好色)+${0.5 * era.get('item:透明棉被')}(透明棉被)+${MejiroCity.instance().get_rape_buff(
+      this.id,
+    )}(目白城)+${0.2 * era.get(`status:${this.id}:爱意克制`)}(爱意克制)-${
       0.5 * get_action_debuff(this.id)
     }(行动debuff)`,
     );
