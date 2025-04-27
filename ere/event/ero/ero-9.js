@@ -25,7 +25,7 @@ module.exports = class extends CustomizedEro {
       !era.get('cflag:9:性别') &&
       era.get('love:9') >= 50 &&
       era.get('status:0:发情') &&
-      era.get('exp:9:性爱次数') === 1 &&
+      !era.get('exp:9:性爱次数') &&
       !era.get('status:9:弗隆K') &&
       !era.get('status:9:弗隆P') &&
       (era.get('item:弗隆K') || era.get('item:弗隆P'))

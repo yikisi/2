@@ -712,7 +712,7 @@ module.exports = {
       talent_list.push(breast_talent_names[breast_talent + 1]);
     }
     if (
-      id &&
+      id > 0 &&
       era.get(`exp:${id}:性爱次数`) === era.get(`exp:${id}:睡奸次数`) &&
       era.get('status:0:马语者') === 0 &&
       era.get('status:0:马跳次数镜片') === 0

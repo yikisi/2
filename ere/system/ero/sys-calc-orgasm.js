@@ -755,7 +755,9 @@ async function sys_calc_orgasm(shown, ...ids) {
       );
     }
   }
-  shown && era.println();
+  if (shown) {
+    era.println();
+  }
   await update_orgasms(shown, ...ids);
 }
 

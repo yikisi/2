@@ -198,7 +198,7 @@ async function update_orgasms(shown, ...ids) {
     }
     await run_custom_ero(chara_id, ero_hooks.orgasm, { shown });
     if (era.get(`nowex:${chara_id}:TotalEX`) > 0) {
-      if (shown !== false) {
+      if (shown) {
         await common_orgasm(chara_id);
       }
       era.set(`tcvar:${chara_id}:刚刚高潮`, true);
@@ -322,7 +322,9 @@ async function update_orgasms(shown, ...ids) {
     if (era.get(`tcvar:${chara_id}:肛门扩张`) > 0) {
       era.add(`tcvar:${chara_id}:肛门扩张`, -1);
     }
-    shown !== false && era.println();
+    if (shown) {
+      era.println();
+    }
   }
   for (const chara_id of ids) {
     era.add(
