@@ -8,10 +8,10 @@ const { get_random_value } = require('#/utils/value-utils');
 const BasementOwners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
-/** @param {boolean} [clear_chara] */
-function sys_handle_escape_basement(clear_chara) {
+/** @param {boolean} [clear_chara=true] */
+function sys_handle_escape_basement(clear_chara = true) {
   const basement_owners = new BasementOwners();
-  if (clear_chara !== false) {
+  if (clear_chara) {
     const release_chara = basement_owners.filter(
       (e) => LifeEventMarks.get_marks(e).b_escape === -1,
     )[0];

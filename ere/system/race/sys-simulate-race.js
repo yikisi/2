@@ -139,9 +139,9 @@ race_message_handlers.default = (info) => [
  * @param {PseudoUma[]} list_chara
  * @param {RaceInfo} race_info
  * @param {number} [race_id]
- * @param {boolean} [shown]
+ * @param {boolean} [shown=true]
  */
-function sys_sim_race(list_chara, race_info, race_id, shown) {
+function sys_sim_race(list_chara, race_info, race_id, shown = true) {
   const beginning_report =
       race_id === undefined
         ? ['正在检查马闸……', '正在检查令枪……', '选手入闸……', '开赛！']
@@ -181,7 +181,9 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
     )(race_info, top_pop);
   let flag_race_phase = 1;
   message_buffer.push(get_event_record(race_message));
-  shown !== false && printInColRows([{ type: 'divider' }, ...message_buffer]);
+  if (shown) {
+    printInColRows([{ type: 'divider' }, ...message_buffer]);
+  }
   beginning_report.unshift(top_pop_message);
 
   const start_delay = new Array(count_uma).fill(0);
@@ -495,8 +497,9 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
       message_buffer.push(
         get_event_record(beginning_report[flag_race_phase++ - 1]),
       );
-      shown !== false &&
+      if (shown) {
         replaceInColRows([{ type: 'divider' }, ...message_buffer]);
+      }
     }
 
     list_in_race.forEach((uma, i, l) => {
@@ -777,7 +780,9 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
     `阻挡&突围：${total_blocked - total_failed}(突围次数)/${total_blocked}(阻挡次数)=${(total_blocked - total_failed) / total_blocked}`,
   );
   message_buffer.push(get_event_record(beginning_report.at(-1)));
-  shown !== false && replaceInColRows([{ type: 'divider' }, ...message_buffer]);
+  if (shown) {
+    replaceInColRows([{ type: 'divider' }, ...message_buffer]);
+  }
   const speed_min = (22 - race_info.span / 1000) * 0.85;
   statistics.speed = statistics.speed.map((e) => {
     e.data = e.data.map((v) => Math.max(v, speed_min));
