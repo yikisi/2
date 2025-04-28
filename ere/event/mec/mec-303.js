@@ -10,7 +10,7 @@ module.exports = class extends MecNpc {
     return [
       {
         color: get_chara_color(this.id),
-        content: '彻底取材',
+        content: '专访记者',
         fontWeight: buff > 1 ? 'bold' : undefined,
         title: `声望获取+${10 * buff}%，声望下降-${10 * buff}%。`,
       },
