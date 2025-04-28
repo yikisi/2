@@ -31,13 +31,14 @@ module.exports = class extends CustomizedMec {
   }
 
   get_talents() {
-    const { buff } = new GodolphinLifeMarks();
+    let { buff } = new GodolphinLifeMarks();
+    buff += 1;
     return [
       {
         color: get_chara_color(this.id),
         content: '爱',
-        fontWeight: buff > 0 ? 'bold' : undefined,
-        title: `队伍成员智力与技能点数训练效果+${50 * (buff + 1)}%。`,
+        fontWeight: buff > 1 ? 'bold' : undefined,
+        title: `队伍成员智力训练效果+${50 * buff}%，从训练中获得的技能点数+${25 * buff}%。`,
       },
     ];
   }
