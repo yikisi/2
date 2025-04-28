@@ -97,10 +97,10 @@ function sys_get_debuff(chara_id) {
 
 /**
  * @param {number} location
- * @param {number} [chara_id]
+ * @param {number} [chara_id=0]
  * @returns {{stamina:*,time:*}}
  */
-function sys_get_move_cost(location, chara_id) {
+function sys_get_move_cost(location, chara_id = 0) {
   const move_cost = location_move_cost[location];
   const ret = {
     stamina: move_cost,
@@ -120,7 +120,7 @@ function sys_get_move_cost(location, chara_id) {
     case location_enum.trainer:
     case location_enum.visitor:
     case location_enum.clinic:
-      if (chara_id) {
+      if (chara_id > 0) {
         is_walk = true;
         speed = Math.min(speed, era.get(`base:${chara_id}:速度`));
       } else if ((temp = era.get('flag:单人载具'))) {
@@ -162,15 +162,23 @@ module.exports = {
   /**
    * @param {{stamina:number,time:number}} cost
    * @param {{stamina:number,time:number}} player_base
-   * @param {{stamina:number,time:number}} [chara_base]
+   * @param {{stamina:number,time:number}} [chara_base={}]
+   * @return {number}
    */
-  sys_check_act_disabled(cost, player_base, chara_base) {
-    return (
-      player_base.stamina < cost.stamina ||
-      player_base.time < cost.time ||
-      (chara_base &&
-        (chara_base.stamina < cost.stamina || chara_base.time < cost.time))
-    );
+  sys_check_act_disabled(cost, player_base, chara_base = {}) {
+    const checks = [
+      player_base.stamina < cost.stamina,
+      player_base.time < cost.time,
+      chara_base.stamina < cost.stamina,
+      chara_base.time < cost.time,
+    ];
+    let ret = 0;
+    for (let i = 0; i < 4; ++i) {
+      if (checks[i] === true) {
+        ret += 1 << i;
+      }
+    }
+    return ret;
   },
   sys_check_awake,
   /**
@@ -203,17 +211,17 @@ module.exports = {
   },
   /**
    * @param {number} chara_id
-   * @param {boolean} [between_weeks]
+   * @param {boolean} [between_weeks=false]
    * @returns {boolean}
    */
-  sys_check_race_ready(chara_id, between_weeks) {
+  sys_check_race_ready(chara_id, between_weeks = false) {
     let debuff = sys_get_debuff(chara_id);
     if (debuff >= 0.5) {
       debuff = 1000;
     }
     return (
       sys_check_train_enabled(chara_id) &&
-      (between_weeks === true || sys_check_awake(chara_id)) &&
+      (between_weeks || sys_check_awake(chara_id)) &&
       check_pregnant_unprotect(chara_id) &&
       era.get(`base:${chara_id}:体力`) >= 150 * (1 + debuff) &&
       era.get(`base:${chara_id}:精力`) >= 150 * (1 + debuff)

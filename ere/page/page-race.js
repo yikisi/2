@@ -49,6 +49,7 @@ const AfterRaceParams = require('#/data/event/extra-flag/after-race-params');
 const RaceEndParams = require('#/data/event/extra-flag/race-end-params');
 const RaceStartParams = require('#/data/event/extra-flag/race-start-params');
 const GrandLives = require('#/data/event/grand-lives');
+const HelloLifeMarks = require('#/data/event/life-event-marks/life-event-marks-308');
 const { get_trainer_level } = require('#/data/info-generator');
 const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -288,14 +289,14 @@ async function race_page(race) {
     let rewards;
     let attr_change = new Array(5).fill(0);
     if (uma.rank.curr === 1) {
-      rewards = race_rewards[info.race_class][1];
+      rewards = race_rewards[info.race_class].r01;
       if (race === race_enum.begin_race) {
         attr_change = new Array(5).fill(3);
       }
     } else if (uma.rank.curr <= 5) {
-      rewards = race_rewards[info.race_class][5];
+      rewards = race_rewards[info.race_class].r05;
     } else if (uma.rank.curr <= 10) {
-      rewards = race_rewards[info.race_class][10];
+      rewards = race_rewards[info.race_class].r10;
     }
     const base_change = {};
     base_change['体力'] = -get_random_value(150, 250, true);
@@ -418,7 +419,7 @@ async function race_page(race) {
     is_pregnant_slave = era.get('flag:惩戒力度') === 3;
   let fame_reward;
   if (best_rank === 1) {
-    fame_reward = race_rewards[info.race_class][1].fame;
+    fame_reward = race_rewards[info.race_class].r01.fame;
     if (
       contestants.findIndex((e) => e.legend && e.name.startsWith('传奇')) !== -1
     ) {
@@ -427,21 +428,28 @@ async function race_page(race) {
       );
     }
   } else if (best_rank <= 5) {
-    fame_reward = race_rewards[info.race_class][5].fame;
+    fame_reward = race_rewards[info.race_class].r05.fame;
   } else if (best_rank <= 10) {
-    fame_reward = race_rewards[info.race_class][10].fame;
+    fame_reward = race_rewards[info.race_class].r10.fame;
   } else {
-    fame_reward = race_rewards[info.race_class][20].fame;
+    fame_reward = race_rewards[info.race_class].r20.fame;
   }
-  if (is_grand_live) {
-    if (
-      mvp_id === 308 ||
-      (era.get(`cflag:${mvp_id}:父方角色`) ||
-        era.get(`cflag:${mvp_id}:母方角色`)) === 308
-    ) {
-      fame_reward = Math.max(fame_reward, 10) * 3;
-    } else if (fame_reward > 0) {
-      fame_reward *= 2;
+  if (is_grand_live > 0) {
+    if (fame_reward > 0) {
+      let times = 2;
+      if (
+        mvp_id === 308 ||
+        era.get(`cflag:${mvp_id}:父方角色`) === 308 ||
+        era.get(`cflag:${mvp_id}:母方角色`) === 308
+      ) {
+        times++;
+      }
+      if (new HelloLifeMarks().buff > 0) {
+        times++;
+      }
+      fame_reward = Math.max(fame_reward) * times;
+    } else {
+      fame_reward = 0;
     }
   }
   if (

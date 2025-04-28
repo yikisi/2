@@ -64,7 +64,7 @@ module.exports = class extends CustomizedLove {
       );
     }
     era.println();
-    if (era.get('exp:7:性爱次数')) {
+    if (era.get('exp:7:性爱次数') > 0) {
       await gold_ship.print_and_wait(
         `虽然是马后炮，但 ${me.actual_name} 确实能在床上为自己发烫的娇躯带来抚慰。`,
       );

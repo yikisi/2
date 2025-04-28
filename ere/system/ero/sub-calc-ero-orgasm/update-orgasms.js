@@ -198,38 +198,40 @@ async function update_orgasms(shown, ...ids) {
     }
     await run_custom_ero(chara_id, ero_hooks.orgasm, { shown });
     if (era.get(`nowex:${chara_id}:TotalEX`) > 0) {
-      if (shown !== false) {
+      if (shown) {
         await common_orgasm(chara_id);
       }
       era.set(`tcvar:${chara_id}:刚刚高潮`, true);
     }
-    era.get(`nowex:${chara_id}:失贞标记`) &&
-      (await run_custom_ero(chara_id, ero_hooks.lose_virginity, {
+    if (era.get(`nowex:${chara_id}:失贞`) > 0) {
+      await run_custom_ero(chara_id, ero_hooks.lose_virginity, {
         shown,
-      }));
-    era.get(`nowex:${chara_id}:破处标记`) &&
-      (await run_custom_ero(chara_id, ero_hooks.lose_virginity, {
+      });
+    }
+    if (era.get(`nowex:${chara_id}:破处`) > 0) {
+      await run_custom_ero(chara_id, ero_hooks.lose_virginity, {
         shown,
         virgin: true,
-      }));
-    if (era.get(`nowex:${chara_id}:阴道撕裂`)) {
+      });
+    }
+    if (era.get(`nowex:${chara_id}:阴道撕裂`) > 0) {
       await run_custom_ero(chara_id, ero_hooks.wound, {
         part: part_enum.virgin,
         shown,
       });
-    } else if (era.get(`ex:${chara_id}:阴道撕裂`)) {
+    } else if (era.get(`ex:${chara_id}:阴道撕裂`) > 0) {
       await run_custom_ero(chara_id, ero_hooks.wound, {
         continue: true,
         part: part_enum.virgin,
         shown,
       });
     }
-    if (era.get(`nowex:${chara_id}:肛门撕裂`)) {
+    if (era.get(`nowex:${chara_id}:肛门撕裂`) > 0) {
       await run_custom_ero(chara_id, ero_hooks.wound, {
         part: part_enum.anal,
         shown,
       });
-    } else if (era.get(`ex:${chara_id}:肛门撕裂`)) {
+    } else if (era.get(`ex:${chara_id}:肛门撕裂`) > 0) {
       await run_custom_ero(chara_id, ero_hooks.wound, {
         continue: true,
         part: part_enum.anal,
@@ -250,31 +252,35 @@ async function update_orgasms(shown, ...ids) {
         part: part_enum.penis,
       });
     }
-    era.get(`nowex:${chara_id}:乳突`) &&
-      (await run_custom_ero(chara_id, ero_hooks.become_erect, {
+    if (era.get(`nowex:${chara_id}:乳突`) > 0) {
+      await run_custom_ero(chara_id, ero_hooks.become_erect, {
         shown,
         part: part_enum.breast,
-      }));
-    if (era.get(`nowex:${chara_id}:喷奶量`)) {
+      });
+    }
+    if (era.get(`nowex:${chara_id}:喷奶量`) > 0) {
       await run_custom_ero(chara_id, ero_hooks.become_lubrication, {
         shown,
         part: part_enum.breast,
       });
       era.set(`ex:${chara_id}:喷奶阻碍`, 0);
     }
-    era.get(`nowex:${chara_id}:阴道润滑`) &&
-      (await run_custom_ero(chara_id, ero_hooks.become_lubrication, {
+    if (era.get(`nowex:${chara_id}:阴道润滑`) > 0) {
+      await run_custom_ero(chara_id, ero_hooks.become_lubrication, {
         shown,
         part: part_enum.virgin,
-      }));
-    era.get(`nowex:${chara_id}:肛门润滑`) &&
-      (await run_custom_ero(chara_id, ero_hooks.become_lubrication, {
+      });
+    }
+    if (era.get(`nowex:${chara_id}:肛门润滑`) > 0) {
+      await run_custom_ero(chara_id, ero_hooks.become_lubrication, {
         shown,
         part: part_enum.anal,
-      }));
-    era.get(`nowex:${chara_id}:脱力`) &&
-      (await run_custom_ero(chara_id, ero_hooks.zero_stamina, { shown }));
-    if (lost_mind) {
+      });
+    }
+    if (era.get(`nowex:${chara_id}:脱力`) > 0) {
+      await run_custom_ero(chara_id, ero_hooks.zero_stamina, { shown });
+    }
+    if (lost_mind > 0) {
       // 失神时间与根性相关，最少1回合
       era.set(
         `tcvar:${chara_id}:失神`,
@@ -295,10 +301,10 @@ async function update_orgasms(shown, ...ids) {
         );
       }
     }
-    if (era.get(`tcvar:${chara_id}:余韵`)) {
+    if (era.get(`tcvar:${chara_id}:余韵`) > 0) {
       era.add(`tcvar:${chara_id}:余韵`, -1);
     }
-    if (era.get(`tcvar:${chara_id}:不应期`)) {
+    if (era.get(`tcvar:${chara_id}:不应期`) > 0) {
       era.add(`tcvar:${chara_id}:不应期`, -1);
       // 射精之后如果进入不应期，拔出来
       const touched_part = era.get(`tcvar:${chara_id}:阴茎接触部位`);
@@ -310,13 +316,15 @@ async function update_orgasms(shown, ...ids) {
         clean_part_without_item(new EroParticipant(chara_id, part_enum.penis));
       }
     }
-    if (era.get(`tcvar:${chara_id}:阴道扩张`)) {
+    if (era.get(`tcvar:${chara_id}:阴道扩张`) > 0) {
       era.add(`tcvar:${chara_id}:阴道扩张`, -1);
     }
-    if (era.get(`tcvar:${chara_id}:肛门扩张`)) {
+    if (era.get(`tcvar:${chara_id}:肛门扩张`) > 0) {
       era.add(`tcvar:${chara_id}:肛门扩张`, -1);
     }
-    shown !== false && era.println();
+    if (shown) {
+      era.println();
+    }
   }
   for (const chara_id of ids) {
     era.add(
@@ -380,6 +388,7 @@ async function update_orgasms(shown, ...ids) {
     });
   }
 }
+
 update_orgasms.init = (_handler) => (run_custom_ero = _handler);
 
 module.exports = update_orgasms;

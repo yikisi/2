@@ -8,6 +8,8 @@ const {
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const MejiroCity = require('#/page/mejiro/mejiro-common');
+
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const get_action_debuff = require('#/event/check/snippets/get-action-debuff');
@@ -104,7 +106,7 @@ class CustomizedCheck {
   }
 
   check_next_week() {
-    if (this.id > 0 && era.get(`cflag:${this.id}:种族`)) {
+    if (this.id > 0 && era.get(`cflag:${this.id}:种族`) > 0) {
       const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
       if (edu_weeks < 3 * 48) {
         if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
@@ -287,15 +289,17 @@ class CustomizedCheck {
     const love = era.get(`love:${this.id}`),
       raping_limit = era.get('flag:极端行为限制') * 2,
       punish_level = era.get('flag:惩戒力度'),
-      relation = era.get(`relation:${this.id}:0`) || 0;
+      relation = era.get(`relation:${this.id}:0`) || 0,
+      rape_buff =
+        0.5 * era.get('item:透明棉被') +
+        MejiroCity.instance().get_rape_buff(this.id);
     let delta = love * raping_limit - relation;
     if (
       punish_level <= 1 &&
       !era.get(`status:${this.id}:爱意克制`) &&
       (era.get('flag:当前位置') === location_enum.basement ||
-        !raping_limit ||
         love < 50 ||
-        delta < 0)
+        (!rape_buff && (!raping_limit || delta < 0)))
     ) {
       return false;
     }
@@ -307,7 +311,7 @@ class CustomizedCheck {
       Math.pow(2, era.get(`base:${this.id}:性欲`) / 2000 - 5) *
         (0.7 + 0.1 * era.get(`mark:${this.id}:欢愉`)) +
       0.05 * era.get(`talent:${this.id}:工口意愿`) +
-      0.5 * era.get('item:透明棉被') +
+      rape_buff +
       0.2 * era.get(`status:${this.id}:爱意克制`) -
       0.5 * get_action_debuff(this.id);
     if (punish_level >= 2) {
@@ -323,9 +327,11 @@ class CustomizedCheck {
       era.get(`base:${this.id}:性欲`) / 2000 - 5,
     )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
       0.05 * era.get(`talent:${this.id}:工口意愿`)
-    }(好色)+${0.5 * era.get('item:透明棉被')}(透明棉被)+${
-      0.2 * era.get(`status:${this.id}:爱意克制`)
-    }(爱意克制)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
+    }(好色)+${0.5 * era.get('item:透明棉被')}(透明棉被)+${MejiroCity.instance().get_rape_buff(
+      this.id,
+    )}(目白城)+${0.2 * era.get(`status:${this.id}:爱意克制`)}(爱意克制)-${
+      0.5 * get_action_debuff(this.id)
+    }(行动debuff)`,
     );
     return ratio >= 1 || dice < ratio;
   }
@@ -371,12 +377,13 @@ class CustomizedCheck {
         return 1;
       }
       const great_success =
-        era.get(`talent:${this.id}:反抗意愿`) >= 0 &&
-        (dice < 0.05 ||
-          era.get('flag:惩戒力度') >= 2 ||
-          era.get(`base:${this.id}:性欲`) >= lust_border.want_sex ||
-          era.get(`base:${this.id}:压力`) >= pressure_border.apprehension ||
-          sys_check_yandere(this.id, (e) => e === 2, inmon));
+        MejiroCity.instance().get_want_sex_buff() ||
+        (era.get(`talent:${this.id}:反抗意愿`) >= 0 &&
+          (dice < 0.05 ||
+            era.get('flag:惩戒力度') >= 2 ||
+            era.get(`base:${this.id}:性欲`) >= lust_border.want_sex ||
+            era.get(`base:${this.id}:压力`) >= pressure_border.apprehension ||
+            sys_check_yandere(this.id, (e) => e === 2, inmon)));
       if (era.get(`status:${this.id}:爱意克制`) > 0) {
         if (!great_success) {
           return 0;

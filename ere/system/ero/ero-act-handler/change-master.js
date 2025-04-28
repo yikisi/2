@@ -15,9 +15,9 @@ const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 
 /**
  * @param {number} without_me
- * @param {boolean} [shown]
+ * @param {boolean} [shown=true]
  */
-function change_master(without_me, shown) {
+function change_master(without_me, shown = true) {
   const master = era.get('tflag:主导权');
   const candidate = get_characters_in_train().filter((e) => {
     const inmon = CharaInmon.get(e);
@@ -38,7 +38,7 @@ function change_master(without_me, shown) {
   }
   if (master !== new_master) {
     change_ero_master(new_master);
-    if (shown !== false) {
+    if (shown) {
       era.print([
         get_chara_talk(new_master).get_colored_name(),
         ' 取得了主导权……',

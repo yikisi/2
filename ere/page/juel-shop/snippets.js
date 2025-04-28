@@ -149,7 +149,9 @@ module.exports = {
               ),
             ).findIndex((e) => e[1] > juel_dict[e[0]]) !== -1 ||
             check_metric < (talent_bnc.metrics[level] || 0) ||
-            (accelerator < 7 && level === 1 && talent_dict.slave_run > 0),
+            (accelerator < 7 &&
+              level === 1 &&
+              talent_dict.slave_run > era.get(`talent:${chara_id}:调教度`)),
           width: 4,
         },
         content: talent_bnc.up,

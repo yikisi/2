@@ -38,8 +38,10 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const CharaInmon = require('#/data/ero/chara-inmon');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const EtsukoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-303');
@@ -501,7 +503,9 @@ async function check_race_events(race, info, team_contestants) {
     !sys_check_remote(mvp) &&
     best === 1 &&
     get(`love:${mvp}`) >= 75 &&
-    Math.random() * 100 < 20 + (get(`base:${mvp}:性欲`) * 16) / 1000
+    Math.random() * 100 < 20 + (get(`base:${mvp}:性欲`) * 16) / 1000 &&
+    !CharaInmon.get(mvp).on(plugin_enum.tuna) &&
+    !CharaInmon.get(mvp).on(plugin_enum.meek)
   ) {
     /** @author Mr.E. */
     handler = async () => {

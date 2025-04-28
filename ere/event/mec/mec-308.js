@@ -1,28 +1,20 @@
-const { get, set } = require('#/era-electron');
-
-const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
-
 const MecNpc = require('#/event/mec/mec-npc');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const HelloLifeMarks = require('#/data/event/life-event-marks/life-event-marks-308');
 
 module.exports = class extends MecNpc {
-  init_love() {
-    set(
-      'love:308',
-      Math.min(
-        get('flag:马娘初始爱慕') + sys_personal_achievement.get(308) * 20,
-        20,
-      ),
-    );
-  }
-
   get_talents() {
+    const { buff } = new HelloLifeMarks();
     return [
       {
         color: get_chara_color(this.id),
         content: '梦之开拓者',
-        title: '参加大舞台赛事时声望奖励+100%。',
+        fontWeight: buff > 0 ? 'bold' : undefined,
+        title:
+          buff > 0
+            ? '队伍成员参加大舞台赛事时声望奖励+100%，自身及后裔参赛时+200%。'
+            : '自身及后裔参加大舞台赛事时声望奖励+100%。',
       },
     ];
   }

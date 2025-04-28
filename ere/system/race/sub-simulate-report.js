@@ -153,12 +153,14 @@ let final_push_pop = undefined;
  * @property {number} [c]
  * @property {number} [t]
  */
+
 /**
  * @typedef ReportEventGroup
  * @property {number} e
  * @property {ReportEvent[]} p
  * @property {number} t
  */
+
 /**
  * @param {ReportEvent[][]} events
  * @param {PseudoUma[]} in_race_list
@@ -166,6 +168,9 @@ let final_push_pop = undefined;
  * @param {number} race_id
  */
 function sub_simulate_report(events, in_race_list, info, race_id) {
+  if (race_id === undefined) {
+    return undefined;
+  }
   /** @type {Record<string,ReportEventGroup>} */
   const dict = {};
   /** @type {ReportEventGroup[]} */

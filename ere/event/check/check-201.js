@@ -24,8 +24,10 @@ module.exports = class extends CustomizedCheck {
 
   check_next_week() {
     const edu_marks = new MeekEduMarks();
-    super.check_next_week();
-    if (edu_marks.all_round > 0) {
+    if (get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+      edu_marks.all_round = 0;
+      super.check_next_week();
+    } else if (edu_marks.all_round > 0) {
       if (--edu_marks.all_round === 0) {
         if (get('cflag:0:位置') > 0) {
           edu_marks.all_round = 1;

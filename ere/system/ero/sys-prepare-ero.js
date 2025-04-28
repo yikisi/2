@@ -351,16 +351,12 @@ function init_ero(...ids) {
   init_juels(...ids);
   reset_parts(...ids);
   sys_calc_ero_items.init_items(...ids);
-  const is_sex = era.getCharactersInTrain().length > 1;
-  const is_raping_in_sleep = is_sex && !sys_check_awake(0);
   ids.forEach((chara_id) => {
     era.set(
       `tcvar:${chara_id}:体重`,
       20 * (era.get(`cflag:${chara_id}:身高`) / 100) ** 2 +
         (era.get(`base:${chara_id}:体重偏差`) * 10) / 2000,
     );
-    is_sex && era.add(`exp:${chara_id}:性爱次数`, 1);
-    is_raping_in_sleep && era.add(`exp:${chara_id}:睡奸次数`, 1);
     era.set(`tcvar:${chara_id}:性欲缓存`, era.get(`base:${chara_id}:性欲`));
     era.set(`tcvar:${chara_id}:压力缓存`, era.get(`base:${chara_id}:压力`));
     let temp;
@@ -392,9 +388,6 @@ function init_ero(...ids) {
     );
     if (era.get(`status:${chara_id}:超马跳Z`)) {
       update_temp_base(chara_id, 0.4);
-    }
-    if (chara_id && is_sex && !era.get(`love:${chara_id}`)) {
-      era.set(`love:${chara_id}`, 1);
     }
     if (chara_id && era.get(`cflag:${chara_id}:种族`)) {
       let edu_phase = era.get(`cflag:${chara_id}:育成回合计时`);
@@ -432,29 +425,35 @@ function begin_and_init_ero(...ids) {
   init_ero(...ids);
 }
 
-let tmp;
-
 /**
  * @param {boolean} skip_juels
  * @param {boolean} log_juels
  * @param {number[]} ids
  */
 function end_ero(skip_juels, log_juels, ids) {
-  tmp = {};
+  let ret = {};
   sys_calc_ero_items.remove_all_items(...ids);
   clean_all_parts(...ids);
   const is_slave = ids.indexOf(0) !== -1 && era.get('flag:惩戒力度') >= 2;
-  ids.forEach((chara_id) => {
+  const is_sex = ids.length > 1;
+  const is_sleeping = is_sex && !sys_check_awake(0);
+  for (const id of ids) {
+    if (is_sex) {
+      era.add(`exp:${id}:性爱次数`, 1);
+    }
+    if (is_sleeping) {
+      era.add(`exp:${id}:睡奸次数`, 1);
+    }
     pleasure_list.forEach((part) => {
       const part_name = part_names[part];
       if (
-        era.get(`palam:${chara_id}:${part_name}快感`) >
-        era.get(`tcvar:${chara_id}:${part_name}快感上限`) * lust_palam_border
+        era.get(`palam:${id}:${part_name}快感`) >
+        era.get(`tcvar:${id}:${part_name}快感上限`) * lust_palam_border
       ) {
         let times = 1;
         const talent_name = part_talents[part];
         if (talent_name) {
-          switch (era.get(`talent:${chara_id}:${talent_name}`)) {
+          switch (era.get(`talent:${id}:${talent_name}`)) {
             case -4:
               times += 1;
               break;
@@ -465,34 +464,34 @@ function end_ero(skip_juels, log_juels, ids) {
               times += 0.5;
           }
         }
-        sys_change_lust(chara_id, lust_from_palam * times);
+        sys_change_lust(id, lust_from_palam * times);
       }
     });
     const got = new Array(13).fill(0),
       un_got = new Array(13).fill(0);
-    tmp[chara_id] = {};
+    ret[id] = {};
     for (let i = 12; i >= 0; --i) {
       got[i] = Math.floor(
-        era.get(`gotjuel:${chara_id}:${juel_names[i]}`) / palam2juel,
+        era.get(`gotjuel:${id}:${juel_names[i]}`) / palam2juel,
       );
       if (!skip_juels && i < 12) {
         un_got[i] = got[i + 1] + un_got[i + 1];
       }
     }
     const got_self_protect = Math.floor(
-      era.get(`gotjuel:${chara_id}:自卫`) / palam2juel,
+      era.get(`gotjuel:${id}:自卫`) / palam2juel,
     );
     let self_protect =
-      skip_juels || !chara_id
+      skip_juels || !id
         ? 0
         : Math.min(
-            era.get(`juel:${chara_id}:自卫`) + got_self_protect,
+            era.get(`juel:${id}:自卫`) + got_self_protect,
             un_got[0] + got[0],
           );
-    era.add(`juel:${chara_id}:自卫`, got_self_protect - self_protect);
+    era.add(`juel:${id}:自卫`, got_self_protect - self_protect);
     if (log_juels) {
-      tmp[chara_id]['自卫'] = got_self_protect;
-      tmp[chara_id]['-自卫'] = self_protect;
+      ret[id]['自卫'] = got_self_protect;
+      ret[id]['-自卫'] = self_protect;
     }
     juel_names.forEach((j_name, i) => {
       const lost = get_random_value(
@@ -501,103 +500,91 @@ function end_ero(skip_juels, log_juels, ids) {
       );
       got[i] -= lost;
       self_protect -= lost;
-      era.add(`juel:${chara_id}:${j_name}`, got[i]);
+      era.add(`juel:${id}:${j_name}`, got[i]);
       if (log_juels) {
-        tmp[chara_id][j_name] = got[i];
-        tmp[chara_id][`-${j_name}`] = lost;
+        ret[id][j_name] = got[i];
+        ret[id][`-${j_name}`] = lost;
       }
     });
-    const s_orgasm_count = era.get(`ex:${chara_id}:施虐高潮`),
-      m_orgasm_count = era.get(`ex:${chara_id}:受虐高潮`);
+    const s_orgasm_count = era.get(`ex:${id}:施虐高潮`),
+      m_orgasm_count = era.get(`ex:${id}:受虐高潮`);
     if (s_orgasm_count) {
       sys_change_pressure(
-        chara_id,
-        -100 * (1 + 3 * era.get(`talent:${chara_id}:抖S`)) * s_orgasm_count,
+        id,
+        -100 * (1 + 3 * era.get(`talent:${id}:抖S`)) * s_orgasm_count,
       );
     }
     if (m_orgasm_count) {
       sys_change_pressure(
-        chara_id,
+        id,
         -100 *
           (1 +
             3 *
-              (era.get(`talent:${chara_id}:喜欢责骂`) ||
-                era.get(`talent:${chara_id}:喜欢痛苦`))) *
+              (era.get(`talent:${id}:喜欢责骂`) ||
+                era.get(`talent:${id}:喜欢痛苦`))) *
           m_orgasm_count,
       );
     }
     sys_change_pressure(
-      chara_id,
-      -200 *
-        (era.get(`ex:${chara_id}:TotalEX`) - s_orgasm_count - m_orgasm_count),
+      id,
+      -200 * (era.get(`ex:${id}:TotalEX`) - s_orgasm_count - m_orgasm_count),
     );
     let temp;
-    if ((temp = era.get(`tcvar:${chara_id}:临时体力`))) {
-      era.add(`base:${chara_id}:体力`, -temp);
-      era.add(`maxbase:${chara_id}:体力`, -temp);
+    if ((temp = era.get(`tcvar:${id}:临时体力`))) {
+      era.add(`base:${id}:体力`, -temp);
+      era.add(`maxbase:${id}:体力`, -temp);
     }
-    if ((temp = era.get(`tcvar:${chara_id}:临时精力`))) {
-      era.add(`base:${chara_id}:精力`, -temp);
-      era.add(`maxbase:${chara_id}:精力`, -temp);
+    if ((temp = era.get(`tcvar:${id}:临时精力`))) {
+      era.add(`base:${id}:精力`, -temp);
+      era.add(`maxbase:${id}:精力`, -temp);
     }
-    era.get(`tcvar:${chara_id}:精力不济`) &&
-      era.set(`base:${chara_id}:精力`, 0);
+    era.get(`tcvar:${id}:精力不济`) && era.set(`base:${id}:精力`, 0);
     era.set(
-      `base:${chara_id}:体力`,
+      `base:${id}:体力`,
       Math.floor(
-        Math.min(
-          era.get(`base:${chara_id}:体力`),
-          era.get(`tcvar:${chara_id}:体力缓存`),
-        ),
+        Math.min(era.get(`base:${id}:体力`), era.get(`tcvar:${id}:体力缓存`)),
       ),
     );
     era.set(
-      `base:${chara_id}:精力`,
+      `base:${id}:精力`,
       Math.floor(
-        Math.min(
-          era.get(`base:${chara_id}:精力`),
-          era.get(`tcvar:${chara_id}:精力缓存`),
-        ),
+        Math.min(era.get(`base:${id}:精力`), era.get(`tcvar:${id}:精力缓存`)),
       ),
     );
-    if (chara_id && is_slave) {
+    if (id && is_slave) {
       sys_change_fame(
         Math.max(
-          era.get(`tcvar:${chara_id}:性欲缓存`) -
-            era.get(`base:${chara_id}:性欲`),
+          era.get(`tcvar:${id}:性欲缓存`) - era.get(`base:${id}:性欲`),
           0,
         ) /
           200 +
           Math.max(
-            era.get(`tcvar:${chara_id}:压力缓存`) -
-              era.get(`base:${chara_id}:压力`),
+            era.get(`tcvar:${id}:压力缓存`) - era.get(`base:${id}:压力`),
             0,
           ) /
             100,
       );
     }
     sys_change_attr_and_print(
-      chara_id,
+      id,
       attr_enum.speed,
-      era.get(`ex:${chara_id}:速度获取`) / get_random_value(4, 6),
+      era.get(`ex:${id}:速度获取`) / get_random_value(4, 6),
     );
     sys_change_attr_and_print(
-      chara_id,
+      id,
       attr_enum.strength,
-      era.get(`ex:${chara_id}:力量获取`) / get_random_value(4, 6),
+      era.get(`ex:${id}:力量获取`) / get_random_value(4, 6),
     );
     sys_change_attr_and_print(
-      chara_id,
+      id,
       attr_enum.toughness,
-      era.get(`ex:${chara_id}:根性获取`) / get_random_value(4, 6),
+      era.get(`ex:${id}:根性获取`) / get_random_value(4, 6),
     );
-  });
-  ids.forEach((chara_id) => {
-    if (chara_id && era.get(`cflag:${chara_id}:种族`)) {
-      let got = Math.floor(era.get(`tcvar:${chara_id}:获得因子`) / palam2juel),
-        juels = gene_juel_names.map((e) =>
-          era.get(`tcvar:${chara_id}:${e}因子`),
-        );
+  }
+  for (const id of ids) {
+    if (id > 0 && era.get(`cflag:${id}:种族`) > 0) {
+      let got = Math.floor(era.get(`tcvar:${id}:获得因子`) / palam2juel),
+        juels = gene_juel_names.map((e) => era.get(`tcvar:${id}:${e}因子`));
       if (got > 0) {
         if (got < juels.reduce((p, c) => p + c, 0)) {
           juels = juels.map((e, i, l) => {
@@ -610,23 +597,22 @@ function end_ero(skip_juels, log_juels, ids) {
           });
         }
         juels.forEach((e, i) => era.add(`gotjuel:0:${gene_juel_names[i]}`, e));
-        if (era.get(`cflag:${chara_id}:殿堂`) > 0) {
-          CharaAvailableGenes.merge_into_player(
-            new CharaAvailableGenes(chara_id),
-          );
+        if (era.get(`cflag:${id}:殿堂`) > 0) {
+          CharaAvailableGenes.merge_into_player(new CharaAvailableGenes(id));
         }
       }
     }
-  });
+  }
   gene_juel_names.forEach((e) =>
     era.add(`juel:0:${e}`, era.get(`gotjuel:0:${e}`)),
   );
   if (!log_juels) {
-    tmp = undefined;
+    ret = undefined;
   }
   era
     .get('paramkeys')
     .forEach((v) => ids.forEach((id) => era.set(`gotjewel:${id}:${v}`, 0)));
+  return ret;
 }
 
 /** @param {boolean} [skip_juels=false] */
@@ -642,11 +628,11 @@ async function end_ero_and_show_result(shown = true) {
   clean_juels();
   clean_palams();
   const chara_list = era.getCharactersInTrain();
-  end_ero(false, shown, chara_list);
-  if (shown !== false) {
+  const jewel_info = end_ero(false, shown, chara_list);
+  if (shown) {
     if (era.get('flag:马跳结果显示简报')) {
       for (const chara_id of chara_list) {
-        const buffer = get_juel_result(chara_id, juel_names, tmp);
+        const buffer = get_juel_result(chara_id, juel_names, jewel_info);
         era.printMultiColumns(buffer, { width: 18 });
         await era.waitAnyKey();
       }
@@ -681,7 +667,7 @@ async function end_ero_and_show_result(shown = true) {
         switch (page) {
           case 0:
             era.printMultiColumns(
-              get_juel_result(chara_list[chara_index], juel_names, tmp),
+              get_juel_result(chara_list[chara_index], juel_names, jewel_info),
               {
                 width: 18,
               },
@@ -760,7 +746,6 @@ async function end_ero_and_show_result(shown = true) {
         }
       }
     }
-    tmp = undefined;
   }
   era.endTrain();
 }
