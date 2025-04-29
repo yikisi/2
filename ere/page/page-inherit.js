@@ -559,7 +559,13 @@ async function print_inherit_page() {
             .filter((e) => gene_dict[e.id].type === gene_type_enum.skill)
             .map((e) => gene_dict[e.id].value),
         );
-        adaptability_names.forEach((e) => set(`cflag:0:${e}适性`, 0));
+        let _src = get('cflag:0:模版角色');
+        if (_src <= 0) {
+          _src = 0;
+        }
+        adaptability_names.forEach((e) =>
+          set(`cflag:0:${e}适性`, get(`cflag:${_src}:${e}适性`)),
+        );
         chara_genes.get_values().forEach((e) => {
           if (e.type === gene_type_enum.base) {
             add(`base:0:${gene_dict[e.id].type_value}`, -gene_dict[e.id].value);
