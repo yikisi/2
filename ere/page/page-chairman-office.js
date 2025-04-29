@@ -208,7 +208,7 @@ async function page_chairman_office() {
                           temp.push({
                             config: {
                               content: l[0].priority
-                                ? '使用专属口上的角色'
+                                ? '使用口上的角色'
                                 : '使用地文的角色',
                             },
                             type: 'divider',

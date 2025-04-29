@@ -179,7 +179,7 @@ async function print_rec_page() {
               { isBr: true },
               '* 招募按钮显示为',
               { color: el_danger_color, content: '红色' },
-              '的角色有专属口上',
+              '的角色有口上',
             ],
             type: 'text',
           },

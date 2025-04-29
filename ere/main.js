@@ -391,7 +391,7 @@ module.exports = async () => {
                 content: [
                   '* 带有',
                   { content: '*', fontWeight: 'bold' },
-                  '号后缀的角色有专属口上',
+                  '号后缀的角色有口上',
                   { isBr: true },
                   '** 只有完成了个人成就的角色才能进行扮演',
                   { isBr: true },
