@@ -5,19 +5,24 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
+const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
-const aim_races = {};
-aim_races[race_enum.begin_race] = 4;
-aim_races[get_aim_race_index(race_enum.kobe_hai, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
+/** @type {Record<string,number>} */
+const aim_races = {
+  [race_enum.begin_race]: 0b11,
+  [get_aim_race_index(race_enum.kobe_hai, 1)]: 0b100,
+  [get_aim_race_index(race_enum.kiku_sho, 1)]: 0b11,
+  [get_aim_race_index(race_enum.tenn_spr, 2)]: 0b11,
+  [get_aim_race_index(race_enum.takz_kin, 2)]: 0b11,
+  [get_aim_race_index(race_enum.arim_kin, 2)]: 0b11,
+};
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
@@ -35,6 +40,23 @@ module.exports = class extends CustomizedCheck {
       aim_check && sys_personal_achievement.set(this.id, 1);
     }
     return ret;
+  }
+
+  check_next_week() {
+    const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
+    if (edu_weeks < 3 * 48) {
+      const event_obj_s = new EventObject(this.id, cb_enum.edu, true).set_arg(
+        edu_weeks,
+      );
+      switch (edu_weeks) {
+        case 47 + 1:
+        case 47 + 6:
+        case 47 + 40:
+          add_event(event_hooks.week_start, event_obj_s);
+      }
+    } else {
+      return super.check_next_week();
+    }
   }
 
   get_aim_races() {

@@ -1,28 +1,32 @@
 选中互动对象:
   sync: true
   lines:
-  - random: true
+  - if: era.get('status:13:沉睡') === 0 && era.get('status:13:马跳S') === 0
+    random: true
     lines:
       - color: %代表色%
         content:
           - fontSize: bold
             content: 目白麦昆
           - 「今天的我，也为了延续目白家的荣光而在努力着。」
-  - random: true
+  - if: era.get('status:13:沉睡') === 0 && era.get('status:13:马跳S') === 0
+    random: true
     lines:
       - color: %代表色%
         content:
           - fontSize: bold
             content: 目白麦昆
           - 「今天的训练也请你多多关照，%称呼%。」
-  - random: true
+  - if: era.get('status:13:沉睡') === 0 && era.get('status:13:马跳S') === 0
+    random: true
     lines:
       - color: %代表色%
         content:
           - fontSize: bold
             content: 目白麦昆
           - 「你在找我吗，%称呼%？」
-  - random: true
+  - if: era.get('status:13:沉睡') > 0 || era.get('status:13:马跳S') > 0
+    random: true
     lines:
       - 「睡着了……」
       - 看着在训练员室内沉睡的麦昆，%你%的心情有些复杂。
@@ -72,7 +76,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「早上好，为了度过美好的一天，就让我们打起精神来吧。」
-  - if: era.get('status:13:熬夜')
+  - if: era.get('status:13:熬夜') > 0
     random: true
     lines:
       - color: %代表色%
@@ -80,7 +84,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「作为目白家的%马娘%，竟然熬夜而差点迟到了，真是羞愧啊。」
-  - if: era.get('status:13:熬夜')
+  - if: era.get('status:13:熬夜') > 0
     random: true
     lines:
       - color: %代表色%
@@ -88,7 +92,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「哈欠～说来昨天那个棒球比赛可真是精彩啊……我什么都没有说哦！真的没有！」
-  - if: era.get('status:13:熬夜')
+  - if: era.get('status:13:熬夜') > 0
     random: true
     lines:
       - color: %代表色%
@@ -100,10 +104,11 @@
 回合结束互动对话:
   sync: true
   lines:
-  - if: era.get('status:13:沉睡')
+  - if: era.get('status:13:沉睡') > 0 || era.get('status:13:马跳S') > 0
     random: true
     lines:
-      - 「真是喜欢勉强自己……」
+      - if: era.get('status:13:马跳S') === 0
+        content: 「真是喜欢勉强自己……」
       - %你%稍有些辛苦地把精力耗光的麦昆以公主抱的形式抱到了宿舍楼下。
       - 「总之就拜托你送%她%回去了。」
       - 宿舍长点了点头，小心地将麦昆接过去。
@@ -599,7 +604,7 @@
   - random: true
     lines:
       - 明明只是因为稍微有些困而休息了一下，结果却不小心睡着了。
-      - 察觉到肩膀的异样的%你%看了一下旁边，竟然是睡着的麦昆。
+      - 察觉到肩膀的异样的%你%看了一下旁边，竟然是睡着的 目白麦昆。
       - 于是%你%不禁又保持了这个模样几分钟。
   - random: true
     lines:

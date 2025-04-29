@@ -15,6 +15,14 @@ class RaceEventParams extends ExtraFlagsParams {
   love_change;
   /** @type {Record<string,number>} */
   base_change;
+  /** @type {number} */
+  race;
+
+  /** @param {number} race */
+  constructor(race) {
+    super();
+    this.race = race;
+  }
 }
 
 module.exports = RaceEventParams;

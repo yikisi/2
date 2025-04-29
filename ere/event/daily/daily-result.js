@@ -391,7 +391,7 @@ handlers[event_hooks.celebration] = async (chara_id) => {
   era.add('cflag:0:节日事件标记', 1);
   era.println();
   if ((era.get('flag:当前回合数') - 1) % 48 === 5) {
-    era.print('获得了【情人节巧克力】！');
+    era.print('获得了 [情人节巧克力]！');
     era.add('item:情人节巧克力', 1);
   }
   sys_change_pressure(chara_id, -get_random_value(500, 1000));

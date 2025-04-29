@@ -1,5 +1,5 @@
 // 随机事件用的钩子
-const hooks = {
+const event_hooks = {
   // 返回学园
   back_school: 0,
   // 地下室结局
@@ -95,22 +95,22 @@ const hooks = {
   // 回合开始
   week_start: 0,
 };
-Object.keys(hooks).forEach((k, i) => (hooks[k] = i));
+Object.keys(event_hooks).forEach((k, i) => (event_hooks[k] = i));
 
-hooks.keys = Object.keys(hooks);
+event_hooks.keys = Object.keys(event_hooks);
 
-hooks.no_yandere_punish = {};
-hooks.no_yandere_punish[hooks.basement_end] = 1;
-hooks.no_yandere_punish[hooks.crazy_fan_end] = 1;
-hooks.no_yandere_punish[hooks.borrow_money] = 1;
-hooks.no_yandere_punish[hooks.good_morning] = 1;
-hooks.no_yandere_punish[hooks.growth] = 1;
-hooks.no_yandere_punish[hooks.load_talk] = 1;
-hooks.no_yandere_punish[hooks.register_race] = 1;
-hooks.no_yandere_punish[hooks.select] = 1;
-hooks.no_yandere_punish[hooks.slave_end] = 1;
-hooks.no_yandere_punish[hooks.train] = 1;
-hooks.no_yandere_punish[hooks.train_fail] = 1;
-hooks.no_yandere_punish[hooks.train_success] = 1;
+event_hooks.no_yandere_punish = {};
+event_hooks.no_yandere_punish[event_hooks.basement_end] = 1;
+event_hooks.no_yandere_punish[event_hooks.crazy_fan_end] = 1;
+event_hooks.no_yandere_punish[event_hooks.borrow_money] = 1;
+event_hooks.no_yandere_punish[event_hooks.good_morning] = 1;
+event_hooks.no_yandere_punish[event_hooks.growth] = 1;
+event_hooks.no_yandere_punish[event_hooks.load_talk] = 1;
+event_hooks.no_yandere_punish[event_hooks.register_race] = 1;
+event_hooks.no_yandere_punish[event_hooks.select] = 1;
+event_hooks.no_yandere_punish[event_hooks.slave_end] = 1;
+event_hooks.no_yandere_punish[event_hooks.train] = 1;
+event_hooks.no_yandere_punish[event_hooks.train_fail] = 1;
+event_hooks.no_yandere_punish[event_hooks.train_success] = 1;
 
-module.exports = hooks;
+module.exports = event_hooks;
