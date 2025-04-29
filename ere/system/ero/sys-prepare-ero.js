@@ -302,7 +302,7 @@ function update_juel_buff(...ids) {
           era.get(`talent:${chara_id}:坦率程度`) +
           era.get(`talent:${chara_id}:工口好奇`) +
           era.get(`talent:${chara_id}:情感活动`)) +
-        (slave_level < 3
+        (slave_level === 0
           ? is_raping +
             hate_level / 10 +
             pain_level / 20 +
@@ -310,7 +310,7 @@ function update_juel_buff(...ids) {
             meek_level / 4 -
             love_buff -
             lust_buff / 2
-          : 0),
+          : slave_level * -0.33),
     );
     set_juel_buff(
       chara_id,
