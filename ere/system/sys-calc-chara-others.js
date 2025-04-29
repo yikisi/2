@@ -127,10 +127,6 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
       Math.max(val + 3 * era.get(`talent:${target}:自信程度`), 1),
     );
     let shield = 0;
-    if (relation + val > 600) {
-      shield = relation + val - 600;
-      val = 600 - relation;
-    }
     if (!aim) {
       if (relation > 525) {
         love = Math.floor(val / 10);
@@ -139,6 +135,12 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
       } else if (relation > 225) {
         love = Math.floor(val / 20);
       }
+    }
+    if (relation + val > 600) {
+      shield = relation + val - 600;
+      val = 600 - relation;
+    }
+    if (!aim) {
       let temp = Math.floor(era.get(`cflag:${target}:好感盾`));
       if (shield > 0) {
         const love = era.get(`love:${target}`);

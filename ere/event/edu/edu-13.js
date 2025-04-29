@@ -1,13 +1,17 @@
 const era = require('#/era-electron');
 
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_like_chara,
+} = require('#/system/sys-calc-chara-others');
 
 const lines = require('#/event/edu/edu-13.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event, cb_enum } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -33,9 +37,12 @@ module.exports = class extends CustomizedEdu {
       dict['她'] = '她';
       dict['姐妹'] = '姐妹';
     }
+    const ryan = get_chara_talk(27);
     dict['称呼'] = '训练员' + (era.get('cflag:0:性别') === 1 ? '先生' : '小姐');
-    dict['莱恩代表色'] = get_chara_color(27);
-    dict['莱恩'] = era.get('callname:27:-2');
+    dict['莱恩代表色'] = ryan.color;
+    dict['莱恩'] = ryan.name;
+    dict['麦昆称呼莱恩'] = sys_get_callname(this.id, 27);
+    dict['莱恩称呼麦昆'] = sys_get_callname(27, this.id);
     return dict;
   }
 
@@ -44,7 +51,7 @@ module.exports = class extends CustomizedEdu {
     let name;
     switch (extra_flag.race) {
       case race_enum.begin_race:
-        if (edu_weeks === 24) {
+        if (edu_weeks === 23) {
           name = '出道战前';
         }
         break;
@@ -87,12 +94,25 @@ module.exports = class extends CustomizedEdu {
     add_event(event_hooks.out_start, event_object.set_arg('mejiro_party'));
   }
 
-  /** @param {CharaTalk} mcqueen */
-  async mejiro_party(mcqueen) {
+  /**
+   * @param {CharaTalk} mcqueen
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async mejiro_party(mcqueen, me, callname, hook, extra_flag, event_object) {
+    const curr = era.get('flag:当前互动角色');
+    if (curr > 0 && curr !== this.id) {
+      add_event(hook.hook, event_object);
+      return;
+    }
     const name = '目白家的宴会';
     await print_event_name(name, mcqueen);
     await lines[name](this.dict);
     new McqueenEduMarks().love_89 = 1;
+    return true;
   }
 
   async race_end(mcqueen, me, callname, hook, extra_flag) {
@@ -157,7 +177,18 @@ module.exports = class extends CustomizedEdu {
       case 47 + 40:
         await print_event_name('万圣节', mcqueen);
         await lines['万圣节'](this.dict);
+        break;
+      case 'palace':
+        return await super.week_start(
+          mcqueen,
+          me,
+          callname,
+          hook,
+          extra_flag,
+          event_object,
+        );
     }
+    era.set(`cflag:${this.id}:节日事件标记`, 0);
     era.println();
     wait_flag =
       sys_like_chara(this.id, 0, get_random_value(0, 25)) || wait_flag;

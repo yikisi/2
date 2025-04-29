@@ -130,6 +130,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
     buffer.push(get_mark_cols(chara.id, '苦痛', pain_level));
     buffer.push(get_mark_cols(chara.id, '羞耻', shame_level));
     buffer.push(get_mark_cols(chara.id, '反抗', hate_level));
+    buffer.push({ content: [], type: 'text' });
     if (hate_level) {
       price_dict[0] = get_mark_price(chara.id, hate_level, meek_level / 2);
       price_dict[1] = price_dict[2] = get_mark_price(

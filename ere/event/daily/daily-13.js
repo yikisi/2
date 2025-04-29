@@ -9,24 +9,36 @@ const select_action_in_atrium = require('#/event/daily/snippets/select-action-in
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { get_chara_color } = require('#/data/chara-colors');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const McqueenLifeMarks = require('#/data/event/life-event-marks/life-event-marks-13');
 
 module.exports = class extends CustomizedDaily {
-  good_morning() {
+  get dict() {
     const dict = {};
     dict['代表色'] = get_chara_color(this.id);
     dict['称呼'] = sys_get_callname(this.id, 0);
-    dict['马娘'] = era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
-    lines['回合开始互动对话'](dict);
+    dict['你'] = era.get('callname:0:-2');
+    if (era.get('flag:角色性别') === 1) {
+      dict['她'] = '他';
+      dict['马娘'] = '马郎';
+      dict['大小姐'] = '大少爷';
+    } else {
+      dict['她'] = '她';
+      dict['马娘'] = '马娘';
+      dict['大小姐'] = '大小姐';
+    }
+    return dict;
+  }
+
+  good_morning() {
+    lines['回合开始互动对话'](this.dict);
   }
 
   good_night() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    dict['称呼'] = sys_get_callname(this.id, 0);
-    dict['她'] = era.get('flag:角色性别') === 1 ? '他' : '她';
-    lines['回合结束互动对话'](dict);
+    lines['回合结束互动对话'](this.dict);
   }
 
   async office_cook() {
@@ -169,6 +181,11 @@ module.exports = class extends CustomizedDaily {
     dict['代表色'] = get_chara_color(this.id);
     dict['称呼'] = sys_get_callname(this.id, 0);
     dict['马娘'] = era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
+    get_chara_talk(7);
+    get_chara_talk(63);
+    dict['麦昆称呼船'] = sys_get_callname(this.id, 7);
+    dict['麦昆称呼狄杜斯'] = sys_get_callname(this.id, 63);
+    dict.check = new McqueenLifeMarks().love_40;
     await lines['闲聊'](dict);
   }
 };

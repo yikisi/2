@@ -321,11 +321,12 @@ async function sys_handle_ero_act(command, filters, shown = true) {
   const master = era.get('tflag:主导权');
   if (master) {
     if (check_want_to_escape(master)) {
-      shown &&
-        (await era.printAndWait([
+      if (shown) {
+        await era.printAndWait([
           get_chara_talk(master).get_colored_name(),
           ' 逃离了……',
-        ]));
+        ]);
+      }
       era.set(`tcvar:${master}:逃跑`, 1);
     }
     if (cur_lover !== master) {

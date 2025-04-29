@@ -159,6 +159,15 @@ async function race_page(race) {
       team_list.indexOf(uma) !== -1
     ) {
       era.set(`cstr:${id}:决胜服`, 0);
+      uma.set_image(
+        get_image(uma.index_chara)
+          .map((_i) =>
+            era.get('flag:立绘类型') === 2
+              ? `${_i}_gif\t${_i}_半身`
+              : `${_i}_半身`,
+          )
+          .join('\t'),
+      );
     }
   });
   wait_flag && (await era.waitAnyKey());
@@ -412,11 +421,17 @@ async function race_page(race) {
       time_cost += 100;
     }
   }
-  await check_race_events(race, info, team_list);
-  era.drawLine();
   const best_rank = Math.min(...team_list.map((e) => e.rank.curr)),
     mvp_id = team_list.find((e) => e.rank.curr === best_rank).index_chara,
     is_pregnant_slave = era.get('flag:惩戒力度') === 3;
+  const { hentai_flag, new_title_dict } = sys_check_titles_after_race(
+    team_list,
+    race,
+    best_rank,
+    mvp_id,
+  );
+  await check_race_events(race, info, team_list);
+  era.drawLine();
   let fame_reward;
   if (best_rank === 1) {
     fame_reward = race_rewards[info.race_class].r01.fame;
@@ -460,12 +475,6 @@ async function race_page(race) {
   ) {
     fame_reward *= 2;
   }
-  const { hentai_flag, new_title_dict } = sys_check_titles_after_race(
-    team_list,
-    race,
-    best_rank,
-    mvp_id,
-  );
   fame_reward -= hentai_flag * 150;
   let race_title_reward = 0;
   wait_flag = false;

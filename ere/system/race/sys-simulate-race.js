@@ -685,7 +685,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
       // 阻挡计算
       const block_percent =
         uma.race.location >= 150 &&
-        uma.race.conditionParams.blocked_front &&
+        uma.race.conditionParams.blocked_front > 0 &&
         (uma.race.strength * get_random_value(0.7, 0.8, true)) /
           l[i - 1].race.strength +
           uma.race.lane_move_buff;

@@ -533,7 +533,7 @@ async function check_race_events(race, info, team_contestants) {
         sys_change_motivation(chara.id, -1) && (await waitAnyKey());
         sys_like_chara(chara.id, 0, 50) && (await waitAnyKey());
       } else {
-        await printAndWait(['下意识的反问调笑，却等到了意料之外的回答']);
+        await printAndWait(['下意识的反问调笑，却等到了意料之外的回答。']);
         println();
         await chara.say_and_wait([
           '我想成为 ',
@@ -546,7 +546,7 @@ async function check_race_events(race, info, team_contestants) {
           me.get_colored_name(),
           ' 的手往',
           chara.sex,
-          '的身上放',
+          '的身上放。',
         ]);
         println();
         await chara.say_and_wait([
@@ -558,7 +558,7 @@ async function check_race_events(race, info, team_contestants) {
         await printAndWait([
           '她用尾巴反锁上了门，一把抱住 ',
           me.get_colored_name(),
-          ' 冲向边上的沙发上',
+          ' 冲向边上的沙发上。',
         ]);
         println();
         await chara.say_and_wait(['扯下我的「头纱」，像对待妻子一样对我吧～']);
@@ -566,12 +566,12 @@ async function check_race_events(race, info, team_contestants) {
         await printAndWait([
           '在 ',
           me.get_colored_name(),
-          ' 意识过来的时候，一切都来不及了',
+          ' 意识过来的时候，一切都来不及了。',
         ]);
         println();
         printButton('「冷静一下，我想我们还有别的事情要做……」', 1);
         printButton(
-          '粗暴地扯下被当做头纱的浴巾，是时候让她知道谁才是床上的霸主了',
+          '粗暴地扯下被当做头纱的浴巾，是时候让她知道谁才是床上的霸主了！',
           2,
         );
         begin_and_init_ero(0, chara.id);

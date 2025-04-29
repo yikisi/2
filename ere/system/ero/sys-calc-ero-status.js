@@ -246,9 +246,10 @@ module.exports = {
       ((era.getCharactersInTrain().length > 0 &&
         !era.get('tflag:强奸') &&
         get_sex_acceptable(id) < 0) ||
-        Math.max(era.get(`mark:${id}:苦痛`), era.get(`mark:${id}:羞耻`)) -
-          era.get(`mark:${id}:欢愉`) <
-          Math.random() ||
+        Math.random() <
+          (Math.max(era.get(`mark:${id}:苦痛`), era.get(`mark:${id}:羞耻`)) -
+            era.get(`mark:${id}:欢愉`)) /
+            3 ||
         era.get(`mark:${id}:反抗`) >= 2)
     );
   },
