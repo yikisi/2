@@ -416,7 +416,7 @@ module.exports = class extends Love32Base {
     await tachyon.print_and_wait(
       '其实，也不只是谈自己那昵称为豚鼠的爱人的事，或者更准确来说，是与爱人之间的情事，直白一点来讲那便是，秀恩爱',
     );
-    if (era.get('exp:32:性爱次数')) {
+    if (era.get('exp:32:性爱次数') > era.get('exp:32:睡奸次数')) {
       await tachyon.print_and_wait([
         '如果说这样的话题只停留在情话及暧昧感情等级的话，那么想必身边人，最起码 ',
         get_chara_talk(9).get_colored_name(),

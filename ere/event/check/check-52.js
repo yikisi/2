@@ -78,6 +78,7 @@ race2fans_reward[race_enum.duba_cup] = 27000;
 race2fans_reward[race_enum.duba_sha] = 27000;
 race2fans_reward[race_enum.duba_cls] = 27000;
 race2fans_reward[race_enum.duba_tur] = 27000;
+race2fans_reward[race_enum.alqu_spr] = 27000;
 
 Object.values(race_enum)
   .filter(

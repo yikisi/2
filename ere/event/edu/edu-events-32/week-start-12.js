@@ -286,6 +286,7 @@ module.exports = (handlers) => {
     }
   };
 
+  /** @author 雞雞 */
   handlers.drug_notice = async (tachyon, me) => {
     new TachyonLifeMarks().drug_notice = get_random_value(12, 36);
     await print_event_name('学园通知・药物散播', tachyon);

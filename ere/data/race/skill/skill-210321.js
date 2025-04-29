@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终冲刺时向前突进；体重越轻，效果越好',
   21032,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   633,
   [() => true, () => true],

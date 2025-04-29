@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const sys_handle_prison_guides = require('#/system/basement/sys-handle-prison-guides');
 const sys_handle_time_in_basement = require('#/system/basement/sys-handle-time-in-basement');
+const sys_get_status = require('#/system/chara/sys-get-status');
 const sys_get_intelligence_ratio_in_fight = require('#/system/ero/fight/sys-get-intelligence-ratio');
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const {
@@ -13,7 +14,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { switch_image } = require('#/system/sys-calc-image');
 
 const print_cur_chara_info = require('#/page/components/cur-chara-info');
-const page_header = require('#/page/components/page-header');
+const { get_progress_bar } = require('#/page/components/page-header');
 const { print_chara_info } = require('#/page/page-exp');
 const print_load_page = require('#/page/page-load-game');
 const print_save_page = require('#/page/page-save-game');
@@ -71,6 +72,44 @@ function get_random_value(min, max, is_float) {
     return (value * (max - min)) / (max - min + 1);
   }
   return Math.floor(value);
+}
+
+function page_header() {
+  const status_list = sys_get_status(0);
+  era.printInColRows(
+    [{ type: 'divider' }],
+    {
+      columns: [
+        ...get_progress_bar(),
+        {
+          config: { width: 2 },
+          content: '状态',
+          type: 'text',
+        },
+        {
+          config: { width: 22 },
+          content: status_list.length > 0 ? status_list : '正常',
+          type: 'text',
+        },
+      ],
+      config: { width: 16 },
+    },
+    {
+      columns: [
+        {
+          content: [
+            '位于 ',
+            {
+              content: '地下室',
+              fontWeight: 'bold',
+            },
+          ],
+          type: 'text',
+        },
+      ],
+      config: { width: 8 },
+    },
+  );
 }
 
 sys_handle_time_in_basement.init(get_random_value);
@@ -545,3 +584,5 @@ module.exports = async (_, save_and_next_week, flags) => {
   }
   flags.after_select = true;
 };
+
+module.exports.page_header = page_header;

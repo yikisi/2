@@ -199,7 +199,7 @@ async function npc_common(
                 sys_get_move_cost(location_enum.gate, chara.id),
                 player_base,
                 chara_base,
-              ) ||
+              ) > 0 ||
               relation_check,
           },
           content: out_cb.name,

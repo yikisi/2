@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最后冲刺阶段的中段速度提升；训练员的声望越高，效果越好',
   21035,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   633,
   [() => true, () => true],

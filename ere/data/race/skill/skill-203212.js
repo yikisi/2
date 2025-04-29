@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最终直线上位于前三名时略微向前突进；若干劲为较佳或极佳则变为小幅向前突进',
   20321,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

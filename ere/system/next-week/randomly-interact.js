@@ -10,6 +10,7 @@ const {
   sys_get_debuff,
 } = require('#/system/sys-calc-chara-param');
 const {
+  add_train_exp,
   get_success_base_reward,
   update_train_level,
 } = require('#/system/sys-train-uma');
@@ -29,8 +30,10 @@ const {
 
 /** @param {number[]} in_team_list */
 function randomly_interact(in_team_list) {
-  const take_care_list = [],
-    self_list = {};
+  /** @type {Array<{chara:CharaTalk,level:number,stamina_ratio:number,teach_chara:number,train:number}>} */
+  const take_care_list = [];
+  /** @type {Record<string,Array<{chara:CharaTalk,level:number,train:number}>>} */
+  const self_list = {};
   // 回合结束结算
   for (const chara_id of in_team_list) {
     const stamina_ratio =
@@ -103,13 +106,15 @@ function randomly_interact(in_team_list) {
         sys_change_attr_and_print(e.chara.id, '体力', train_cost.stamina),
         sys_change_attr_and_print(e.chara.id, '精力', train_cost.time),
       ];
-    era.add(
-      `exp:${e.chara.id}:${attr_names[e.chara.id]}训练经验`,
+    add_train_exp(
+      e.chara.id,
+      e.train,
       100 + era.get(`cflag:${e.chara.id}:${attr_names[e.train]}加成`),
     );
     if (e.teach_chara > 0 && e.level < 5) {
-      let exp = era.add(
-        `exp:${e.chara.id}:${attr_names[e.train]}训练经验`,
+      let exp = add_train_exp(
+        e.chara.id,
+        e.train,
         Math.max(
           era.get(`cflag:${e.teach_chara}:${attr_names[e.train]}加成`) / 2,
           0,
@@ -118,7 +123,7 @@ function randomly_interact(in_team_list) {
       if (
         exp >= 800 &&
         exp >= e.level * 800 + get_random_value(0, 800) &&
-        update_train_level(e.chara_id, attr_names[e.train])
+        update_train_level(e.chara.id, attr_names[e.train])
       ) {
         cost_result.unshift([`${attr_names[e.train]}训练 变得更擅长了！`]);
       }

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '出闸时加速度稍微提升',
   20269,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

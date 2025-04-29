@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘消耗耐力使速度一段时间内大幅提升，若是东京竞马场则不消耗耐力并稍微回复耐力',
   10370321,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

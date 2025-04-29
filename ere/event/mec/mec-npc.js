@@ -1,8 +1,24 @@
-const { get } = require('#/era-electron');
+const { get, set } = require('#/era-electron');
+
+const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
 class MecNpc extends CustomizedMec {
+  init_love() {
+    if (get(`cflag:${this.id}:种族`) > 0) {
+      set(
+        `love:${this.id}`,
+        Math.min(
+          get('flag:马娘初始爱慕') + sys_personal_achievement.get(this.id) * 20,
+          30,
+        ),
+      );
+    } else {
+      set(`love:${this.id}`, sys_personal_achievement.get(this.id) * 20);
+    }
+  }
+
   is_able_to_be_selected() {
     return (
       get(`cflag:${this.id}:位置`) > 0 ||

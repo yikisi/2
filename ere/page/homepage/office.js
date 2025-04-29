@@ -378,7 +378,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 sys_check_act_disabled(
                   sys_get_move_cost(location_enum.playground),
                   player_base,
-                ),
+                ) > 0,
               width: 6,
             },
             content: '前往训练场 (招募)',
@@ -397,7 +397,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 sys_check_act_disabled(
                   sys_get_move_cost(location_enum.trainer),
                   player_base,
-                ) ||
+                ) > 0 ||
                 loc_chara.get(location_enum.trainer).length === 0,
               width: 6,
             },
@@ -419,7 +419,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 sys_check_act_disabled(
                   sys_get_move_cost(location_enum.clinic),
                   player_base,
-                ) ||
+                ) > 0 ||
                 loc_chara.get(location_enum.clinic).length === 0,
               width: 6,
             },
@@ -444,7 +444,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   sys_get_move_cost(location_enum.god),
                   player_base,
                   chara_base,
-                ) ||
+                ) > 0 ||
                 not_in_same_loc,
               width: 6,
             },
@@ -469,7 +469,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   sys_get_move_cost(location_enum.atrium, chara_id),
                   player_base,
                   chara_base,
-                ) ||
+                ) > 0 ||
                 not_in_same_loc,
               width: 6,
             },
@@ -494,7 +494,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   sys_get_move_cost(location_enum.rooftop, chara_id),
                   player_base,
                   chara_base,
-                ) ||
+                ) > 0 ||
                 not_in_same_loc,
               width: 6,
             },
@@ -514,7 +514,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 sys_check_act_disabled(
                   sys_get_move_cost(location_enum.chairman),
                   player_base,
-                ) ||
+                ) > 0 ||
                 loc_chara.get(location_enum.chairman).length === 0,
               width: 6,
             },
@@ -534,7 +534,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                 sys_check_act_disabled(
                   sys_get_move_cost(location_enum.visitor),
                   player_base,
-                ) ||
+                ) > 0 ||
                 (loc_chara.get(location_enum.visitor).length === 0 &&
                   !my_event_marks.check(event_hooks.school_visitors)),
               width: 6,
@@ -574,7 +574,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
                   sys_get_move_cost(location_enum.gate, chara_id),
                   player_base,
                   chara_base,
-                ) ||
+                ) > 0 ||
                 not_in_same_loc,
               width: 6,
             },
@@ -636,6 +636,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
     ],
   );
 
+  const chara = get_chara_talk(chara_id);
   let temp = await era.input();
   era.drawLine();
   switch (temp) {
@@ -666,6 +667,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.office_study)())) {
         era.drawLine();
+        era.print(['【指导了 ', chara.get_colored_name(), ' 的学习】']);
         await run_custom_daily(chara_id, event_hooks.office_study);
       }
       break;
@@ -673,27 +675,29 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.office_prepare)())) {
         era.drawLine();
+        era.print(['【帮助 ', chara.get_colored_name(), ' 进行了赛前准备】']);
         await run_custom_daily(chara_id, event_hooks.office_prepare);
       }
       break;
     case 203:
       era.drawLine();
+      era.print(['【和 ', chara.get_colored_name(), ' 搭话】']);
       await get_custom_daily(chara_id).talk();
       break;
     case 204:
       era.drawLine();
-      era.print([
-        '给 ',
-        get_chara_talk(chara_id).get_colored_name(),
-        ' 送上了一份小礼物……',
-      ]);
-      era.println();
+      era.print(['【给 ', chara.get_colored_name(), ' 送上了一份小礼物】']);
       await run_custom_daily(chara_id, event_hooks.office_gift);
       break;
     case 205:
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.office_cook)())) {
         era.drawLine();
+        era.print(
+          chara_id > 0
+            ? ['【和 ', chara.get_colored_name(), ' 一起做了饭加餐】']
+            : '【独自做了饭加餐】',
+        );
         await run_custom_daily(chara_id, event_hooks.office_cook);
       }
       break;
@@ -701,6 +705,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.office_rest)())) {
         era.drawLine();
+        era.print(
+          chara_id > 0
+            ? ['【和 ', chara.get_colored_name(), ' 一起休息了】']
+            : '【独自一人休息了】',
+        );
         await run_custom_daily(chara_id, event_hooks.office_rest);
       }
       break;
@@ -708,6 +717,11 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.office_game)())) {
         era.drawLine();
+        era.print(
+          chara_id > 0
+            ? ['【和 ', chara.get_colored_name(), ' 一起打了游戏】']
+            : '【独自一人玩了游戏】',
+        );
         await run_custom_daily(chara_id, event_hooks.office_game);
       }
       break;

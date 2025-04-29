@@ -5,12 +5,12 @@ good_morning:
     - random: true
       if: era.get('base:0:体力') < era.get('maxbase:0:体力') * 0.45
       lines:
-        - color: '#e7d8d2'
+        - color: %代表色%
           content:
             - fontWeight: bold
               content: 梦之旅
             - 「%称呼%……虽然工作很忙，但也请不要忘记休息。」
-        - color: '#e7d8d2'
+        - color: %代表色%
           content:
             - fontWeight: bold
               content: 梦之旅
@@ -18,12 +18,12 @@ good_morning:
     - random: true
       if: era.get('base:0:体力') < era.get('maxbase:0:体力') * 0.45
       lines:
-        - color: '#e7d8d2'
+        - color: %代表色%
           content:
             - fontWeight: bold
               content: 梦之旅
             - 「%称呼%，今天看上去精神不太好呢……如果有需要的话，工作上也请让我帮些忙吧？」
-        - color: '#e7d8d2'
+        - color: %代表色%
           content:
             - fontWeight: bold
               content: 梦之旅
@@ -31,17 +31,17 @@ good_morning:
     - random: true
       if: era.get('base:0:体力') < era.get('maxbase:0:体力') * 0.45
       lines:
-        - color: '#e7d8d2'
+        - color: %代表色%
           content:
             - fontWeight: bold
               content: 梦之旅
             - 「%称呼%……」
         - content:
-            - color: '#e7d8d2'
+            - color: %代表色%
               fontWeight: bold
               content: 梦之旅
             - ' 没有说话，只是温柔地为 %你% 按摩着。'
-        - color: '#e7d8d2'
+        - color: %代表色%
           content:
             - fontWeight: bold
               content: 梦之旅
@@ -50,12 +50,12 @@ good_morning:
     - random: true
       if: era.get('base:0:体力') >= era.get('maxbase:0:体力') * 0.45
       lines:
-        - color: '#e7d8d2'
+        - color: %代表色%
           content:
             - fontWeight: bold
               content: 梦之旅
             - 「%称呼% 今天精神也很好呢。」
-        - color: '#e7d8d2'
+        - color: %代表色%
           content:
             - fontWeight: bold
               content: 梦之旅
@@ -63,12 +63,12 @@ good_morning:
     - random: true
       if: era.get('base:0:体力') >= era.get('maxbase:0:体力') * 0.45
       lines:
-        - color: '#e7d8d2'
+        - color: %代表色%
           content:
             - fontWeight: bold
               content: 梦之旅
             - 「久等了，%称呼%……呵呵。」
-        - color: '#e7d8d2'
+        - color: %代表色%
           content:
             - fontWeight: bold
               content: 梦之旅

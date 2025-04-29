@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛迫近终盘时若自身位于前方，则速度小幅提升。在赛程为1600m~2000m间的比赛中发动时，若自身位于最前方或距最前方选手4马身以内，则速度大幅提升',
   10124,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

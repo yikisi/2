@@ -18,6 +18,7 @@ const current = new Date().getTime();
 cons_dict[0] = require('#/event/edu/edu-0');
 cons_dict[3] = require('#/event/edu/edu-3');
 cons_dict[7] = require('#/event/edu/edu-7');
+cons_dict[13] = require('#/event/edu/edu-13');
 cons_dict[17] = require('#/event/edu/edu-17');
 cons_dict[19] = require('#/event/edu/edu-19');
 cons_dict[24] = require('#/event/edu/edu-24');

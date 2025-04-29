@@ -384,7 +384,7 @@ module.exports = {
       case ability_usage_enum.MultiplyBlockedSideMaxContinueTimePhaseMiddleRun1:
         skill.values[i][j] =
           skill.data.ability_values[i][j] *
-          Math.min(uma.race.conditionParams.activate_count_all * 0.01, 0.15);
+          (Math.min(Math.floor(uma.race.middleBlockedContinueTime / 2), 3) + 1);
         break;
       case ability_usage_enum.MultiplyBaseSpeedForAcc:
         skill.values[i][j] = skill.data.ability_values[i][j];

@@ -197,6 +197,11 @@ function sub_simulate_skill(
           uma.race.conditionParams.blocked_side_continuetime = add_timer(
             uma.race.conditionParams.blocked_side_continuetime,
           );
+        if (uma.race.conditionParams.phase === 1) {
+          uma.race.middleBlockedContinueTime = add_timer(
+            uma.race.middleBlockedContinueTime,
+          );
+        }
       }
       if (uma.race.conditionParams.bashin_diff_behind <= 1) {
         uma.race.conditionParams.behind_near_lane_time = add_timer(
@@ -217,7 +222,7 @@ function sub_simulate_skill(
         }
       }
       uma.list_skill.forEach((e) => {
-        for (let i = 0; i < e.ability_time; ++i) {
+        for (let i = 0; i < e.ability_time.length; ++i) {
           if (
             e.ability_time[i] &&
             e.data.ability_time_usages[i] ===
@@ -225,6 +230,21 @@ function sub_simulate_skill(
             uma.race.order_change++ < 3
           ) {
             e.ability_time[i] += frame_rate;
+            for (let j = 0; j < e.values[i].length; ++j) {
+              e.values[i][j] += e.data.ability_values[i][j];
+              switch (e.data.ability_types[i][j]) {
+                case ability_type_enum.CurrentSpeed:
+                case ability_type_enum.CurrentSpeedWithNaturalDeceleration:
+                  uma.race.velocityIdealBuff += e.data.ability_values[i][j];
+                  uma.race.velocityReal += e.data.ability_values[i][j];
+                  break;
+                case ability_type_enum.TargetSpeed:
+                  uma.race.velocityIdealBuff += e.data.ability_values[i][j];
+                  break;
+                case ability_type_enum.Accel:
+                  uma.race.accelerationBuff += e.data.ability_values[i][j];
+              }
+            }
           }
         }
       });
@@ -678,6 +698,14 @@ function sub_simulate_skill(
               } else if (uma.race.stamina >= 2000) {
                 skill.ability_time[i] *= 1.5;
               }
+              break;
+            case ability_time_usage_enum.ability_time_usage_enum
+              .blocked_side_continuetime:
+              skill.ability_time[i] *=
+                Math.min(
+                  Math.floor(uma.race.middleBlockedContinueTime / 2),
+                  3,
+                ) + 1;
           }
           for (let j = 0; j < skill.data.ability_types[i].length; ++j) {
             if (skill.data.ability_types[i][j] > 0) {
@@ -700,6 +728,14 @@ function sub_simulate_skill(
                         Math.abs(e.race.location - uma.race.location) <
                           uma.race.visible_dis,
                     );
+                    break;
+                  case target_type_enum.TeamMember:
+                    skill.aims[i][j] =
+                      uma.base.total_attrs[0] > 0
+                        ? [uma]
+                        : list_in_race.filter(
+                            (e) => e !== uma && e.base.total_attrs[0] > 0,
+                          );
                     break;
                   case target_type_enum.OrderInfront:
                     temp = list_finished.length;

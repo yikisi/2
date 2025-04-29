@@ -338,10 +338,12 @@ class CustomizedLove {
    * @param {EventObject} event_object
    */
   async run(stage, extra_flag, event_object) {
-    let handler = this[event_object.arg];
-    if (event_object.arg instanceof Array) {
-      handler = this[event_object.arg[0]];
-    }
+    let handler =
+      this[
+        event_object.arg instanceof Array
+          ? event_object.arg[0]
+          : event_object.arg
+      ];
     if (handler !== undefined) {
       return await handler.call(
         this,

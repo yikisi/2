@@ -34,60 +34,54 @@ module.exports = async () => {
   let flagTitle = true;
   sys_personal_achievement.init();
 
-  era.printMultiColumns([
-    {
-      config: {
-        align: 'center',
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-        isParagraph: true,
+  era.printMultiColumns(
+    [
+      {
+        config: {
+          align: 'center',
+          fontSize: '1.5rem',
+          fontWeight: 'bold',
+          isParagraph: true,
+        },
+        content: '免责声明',
+        type: 'text',
       },
-      content: '免责声明',
-      type: 'text',
-    },
-    {
-      config: {
-        offset: 4,
-        width: 16,
+      {
+        content: [
+          '1. 本游戏仅为开发者自娱自乐及代码练习所用，开发它是因为开发者趣味低下，思想低俗所致，无任何经济收益和利益驱动。',
+          { isBr: true },
+          '2. 本游戏含有大量的R18色情内容，内容中可能会出现的有：多P、调教、轻度SM、非合意性行为、近亲相奸等，不会出现的有：强制NTR、重度SM、血腥、R18G等。',
+          { isBr: true },
+          '3. 本游戏在设计理念和游戏内容上缝合了大量era与其他各类作品，仅适合era系列玩家或文字黄油爱好者进行游玩，不适合普通玩家游玩，特别是严格禁止未成年人游玩。',
+          { isBr: true },
+          '4. 本游戏所使用的素材资源包括开发者自制、互联网收集与协力者提供，开发者与协力者来自于不同的世界、种族、国家和民族，彼此之间也不存在经济关系。',
+          { isBr: true },
+          '5. 本游戏目前没有官方的公开发布地址，且因为游戏本身的性质，禁止在任何未成年人可以接触到的公开场合展示或传播本游戏，更禁止任何人在任何商业活动（贩卖/附送等）和公开活动（直播等）中使用本游戏。',
+          { isBr: true },
+          '6. 在明确注明或保留游戏来源、不涉及任何商业目的和经济受益、并同样遵守本免责声明的情况下，允许他人基于本游戏进行修改或二次开发。该授权将直接赋予本游戏的所有玩家，不需要专门征求开发者的明确同意。',
+          { isBr: true },
+          '7. 本声明的解释权归开发者所有，且在版本更新中声明内容可能有所变更，请以最新版本为准。',
+          { isBr: true },
+          '8. 基于以上叠了这么多层buff，建议有大胆想法的人请现在关掉窗口并立刻删除游戏，只要不删就默认你已经理解并遵守该声明，在不遵守的情况下出现的任何事故和法律责任都和开发者没有任何关系。',
+        ],
+        type: 'text',
       },
-      content: [
-        '1. 本游戏仅为开发者自娱自乐及代码练习所用，开发它是因为开发者趣味低下，思想低俗所致，无任何经济收益和利益驱动。',
-        { isBr: true },
-        '2. 本游戏含有大量的R18色情内容，内容中可能会出现的有：多P、调教、轻度SM、非合意性行为、近亲相奸等，不会出现的有：强制NTR、重度SM、血腥、R18G等。',
-        { isBr: true },
-        '3. 本游戏在设计理念和游戏内容上缝合了大量era与其他各类作品，仅适合era系列玩家或文字黄油爱好者进行游玩，不适合普通玩家游玩，特别是严格禁止未成年人游玩。',
-        { isBr: true },
-        '4. 本游戏所使用的素材资源包括开发者自制、互联网收集与协力者提供，开发者与协力者来自于不同的世界、种族、国家和民族，彼此之间也不存在经济关系。',
-        { isBr: true },
-        '5. 本游戏目前没有官方的公开发布地址，且因为游戏本身的性质，禁止在任何未成年人可以接触到的公开场合展示或传播本游戏，更禁止任何人在任何商业活动（贩卖/附送等）和公开活动（直播等）中使用本游戏。',
-        { isBr: true },
-        '6. 在明确注明或保留游戏来源、不涉及任何商业目的和经济受益、并同样遵守本免责声明的情况下，允许他人基于本游戏进行修改或二次开发。该授权将直接赋予本游戏的所有玩家，不需要专门征求开发者的明确同意。',
-        { isBr: true },
-        '7. 本声明的解释权归开发者所有，且在版本更新中声明内容可能有所变更，请以最新版本为准。',
-        { isBr: true },
-        '8. 基于以上叠了这么多层buff，建议有大胆想法的人请现在关掉窗口并立刻删除游戏，只要不删就默认你已经理解并遵守该声明，在不遵守的情况下出现的任何事故和法律责任都和开发者没有任何关系。',
-      ],
-      type: 'text',
-    },
-    {
-      accelerator: 1,
-      config: {
-        offset: 4,
-        width: 16,
+      {
+        accelerator: 1,
+        content: '我读完并理解了以上8条，我对自己负责，我不删，我要玩。',
+        type: 'button',
       },
-      content: '我读完并理解了以上8条，我对自己负责，我不删，我要玩。',
-      type: 'button',
-    },
-    {
-      accelerator: 2,
-      config: {
-        offset: 4,
-        width: 16,
+      {
+        accelerator: 2,
+        content: '分男女搭配！不玩了！',
+        type: 'button',
       },
-      content: '分男女搭配！不玩了！',
-      type: 'button',
+    ],
+    {
+      offset: 4,
+      width: 16,
     },
-  ]);
+  );
   if ((await era.input()) === 2) {
     era.quit();
   }
@@ -105,12 +99,11 @@ module.exports = async () => {
     //   ],
     //   '雞雞',
     // ],
-    [[get_copyright_entry(13, '地下室')], '伊兰'],
-    // [[get_copyright_entry(13)], '伊兰'],
+    [[get_copyright_entry(13)], '伊兰'],
     [[get_copyright_entry(17)], '露娜俘虏'],
     [[get_copyright_entry(19)], '片手虾好评发售中！'],
     [[get_copyright_entry(24)], '黑奴二号'],
-    [[get_copyright_entry(25)], 'Necroz'],
+    [[get_copyright_entry(25)], ['Necroz', { isDivider: true }, 'Mr.E.']],
     [
       [
         get_copyright_entry(30),
@@ -183,18 +176,20 @@ module.exports = async () => {
       [
         '雞雞',
         { isDivider: true },
+        '天马闪光蹄',
+        { isDivider: true },
         'イーウィヤ',
         { isDivider: true },
         '幽白書',
-        { isDivider: true },
-        'KUN',
         { isBr: true },
+        'KUN',
+        { isDivider: true },
         '阿格尼斯数码公司',
         { isDivider: true },
         '念来过倒要你',
-        { isDivider: true },
-        'Mr.E.',
         { isBr: true },
+        'Mr.E.',
+        { isDivider: true },
         '无名黑奴',
       ],
     ],
@@ -237,6 +232,31 @@ module.exports = async () => {
     version = version.toFixed(1);
   }
 
+  const date = new Date(),
+    real_month = date.getMonth() + 1,
+    real_date = date.getDate();
+  const birthday = [];
+  era.getAllCharacters().forEach((e) => {
+    if (
+      e > 0 &&
+      e < 1000 &&
+      era.get(`staticcflag:${e}:种族`) > 0 &&
+      era.get(`staticcflag:${e}:出生月份`) === real_month &&
+      era.get(`staticcflag:${e}:出生日期`) === real_date
+    ) {
+      if (birthday.length > 0) {
+        birthday.push('，');
+      }
+      birthday.push({
+        color: get_chara_color(e),
+        content: era.get(`static:${e}:name`),
+        fontWeight: 'bold',
+      });
+    }
+  });
+  const b_index = birthday.findLastIndex((e) => e === '，');
+  birthday[b_index] = ' 和 ';
+
   while (flagTitle) {
     await era.clear();
     era.setAlign('center');
@@ -247,23 +267,27 @@ module.exports = async () => {
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
-            content: `版本号：v${version} (kuuga)`,
+            content: [
+              `版本号：v${version} (kuuga)`,
+              { isBr: true },
+              '雞雞',
+              { isDivider: true },
+              '无名路人',
+              { isDivider: true },
+              '无名黑奴',
+            ],
             type: 'text',
           },
         ],
         config: { offset: 6, verticalAlign: 'middle', width: 12 },
       },
+      birthday.length > 0
+        ? [
+            { type: 'divider' },
+            { type: 'text', content: ['今天是 ', ...birthday, ' 的诞生日'] },
+          ]
+        : [],
       [
-        {
-          content: [
-            '雞雞',
-            { isDivider: true },
-            '无名路人',
-            { isDivider: true },
-            '无名黑奴',
-          ],
-          type: 'text',
-        },
         { type: 'divider' },
         {
           accelerator: 1,
@@ -297,7 +321,7 @@ module.exports = async () => {
           type: 'text',
         },
         {
-          config: { align: 'left', width: 8 },
+          config: { align: 'left', width: 12 },
           content: [
             {
               content: 'EraUma游戏发布页',
@@ -312,6 +336,11 @@ module.exports = async () => {
             {
               content: 'ERA特雷森学园（Discord社区）',
               url: 'https://discord.gg/ake5SP3zUP',
+            },
+            { isBr: true },
+            {
+              content: 'Wiki（使用说明/游戏设定/口上写作指引……）',
+              url: 'https://gitgud.io/umaera/erauma/-/wikis',
             },
           ],
           type: 'text',

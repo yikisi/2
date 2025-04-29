@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const sys_change_tired = require('#/system/chara/sys-change-tired');
 const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
 const {
@@ -13,6 +14,8 @@ const {
 } = require('#/system/sys-calc-base-cflag');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
+const MejiroCity = require('#/page/mejiro/mejiro-common');
+
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
@@ -24,8 +27,10 @@ const {
   adaptability_colors,
   celebration_color,
 } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
+const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const LocCharacters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const YandereList = require('#/data/event/yandere-list');
@@ -133,7 +138,7 @@ async function check_new_activities(cur_round, in_team_list) {
       no_preg:
         check_pregnant_unprotect(id) &&
         era.get(`cflag:${id}:妊娠回合计时`) <
-          (era.get(`equip:${id}:淫纹奴役`) === slavery_enum.pregnant ? 30 : 33),
+          (CharaInmon.get(id).slave === slavery_enum.pregnant ? 30 : 33),
     };
   });
   const event_weeks = (cur_round - 1) % 48 || 48,
@@ -265,18 +270,14 @@ async function check_new_activities(cur_round, in_team_list) {
       }
       foreign_list.forEach((id) => era.set(`cflag:${id}:位置`, location.loc));
       if (era.get('cflag:343:招募状态') === recruit_flags.yes) {
+        let { buff } = new MayLifeMarks();
+        buff += 1;
         foreign_list.forEach((id) => {
-          era.set(
-            `status:${id}:语言不通`,
-            Math.ceil(era.get(`status:${id}:语言不通`) / 2),
-          );
-          era.set(
-            `status:${id}:水土不服`,
-            Math.ceil(era.get(`status:${id}:水土不服`) / 2),
-          );
-          era.set(
-            `status:${id}:客场作战`,
-            Math.ceil(era.get(`status:${id}:客场作战`) / 2),
+          ['语言不通', '水土不服', '客场作战'].forEach((s) =>
+            era.set(
+              `status:${id}:${s}`,
+              Math.ceil(Math.max(era.get(`status:${id}:${s}`) - 1, 0) / buff),
+            ),
           );
         });
       }
@@ -435,7 +436,8 @@ async function check_new_activities(cur_round, in_team_list) {
       era.set('cflag:0:位置', 0);
     }
   }
-  // 出差的理事长
+
+  // 特殊NPC是否会出现在地点
   let chairman = 0;
   if (
     era.get('cflag:302:育成回合计时') < 3 * 48 ||
@@ -512,12 +514,13 @@ async function check_new_activities(cur_round, in_team_list) {
     sort_list(loc_visitors.get(location_enum.visitor), (e) => e, true),
   );
   new YandereList().set(
-    in_team_list.filter((e) => era.get(`talent:${e}:病娇`) > 0),
+    in_team_list.filter((e) => sys_check_yandere(e, (y) => y > 0)),
   );
 
   if (era.get('flag:当前周') === 1) {
     new MyEduMarks().we_are_one = 0;
   }
+  await MejiroCity.instance().next_week();
 }
 
 module.exports = check_new_activities;

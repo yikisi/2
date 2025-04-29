@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘速度提升，并根据自身速度提升技能效果',
   10320221,
   1,
-  UmaSkill.rarity_enum.evol,
   19,
   633,
   [() => true, () => true],

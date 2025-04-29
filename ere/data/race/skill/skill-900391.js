@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最终直线进行名次争夺时，稍微提升速度',
   90039,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

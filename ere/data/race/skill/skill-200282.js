@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '很多马娘与自身同一出走策略时能力稍微容易发挥',
   20028,
   1,
-  UmaSkill.rarity_enum.normal,
   0,
   129,
   [() => true, () => true],

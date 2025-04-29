@@ -40,6 +40,7 @@ cons_dict[64] = require('#/event/ero/ero-64');
 cons_dict[94] = require('#/event/ero/ero-94');
 cons_dict[100] = require('#/event/ero/ero-100');
 cons_dict[117] = require('#/event/ero/ero-117');
+cons_dict[134] = require('#/event/ero/ero-134');
 cons_dict[205] = require('#/event/ero/ero-205');
 cons_dict[340] = require('#/event/ero/ero-340');
 cons_dict[341] = require('#/event/ero/ero-341');
@@ -104,14 +105,13 @@ function get_custom_ero(chara_id) {
 /**
  * @param {number} chara_id
  * @param {number} action
- * @param [extra_flag]
+ * @param [extra_flag={}]
  */
-async function run_custom_ero(chara_id, action, extra_flag) {
+async function run_custom_ero(chara_id, action, extra_flag = {}) {
   const handler = get_custom_ero(chara_id),
-    hook = new HookArg(action),
-    _extra = extra_flag || {};
+    hook = new HookArg(action);
   let ret;
-  if (_extra.shown !== false) {
+  if (extra_flag.shown !== false) {
     if (ero_action_names[action] !== undefined) {
       const master = get('tflag:主导权'),
         { attacker: _a, defender: _d } =
@@ -156,11 +156,11 @@ async function run_custom_ero(chara_id, action, extra_flag) {
         ret = await handler.normal.run(attacker, defender, hook, extra_flag);
       }
     } else {
-      ret = await handler.run(hook, _extra);
+      ret = await handler.run(hook, extra_flag);
     }
   }
   if (!hook.override) {
-    ret = (await ero_result(chara_id, hook, _extra)) || ret;
+    ret = (await ero_result(chara_id, hook, extra_flag)) || ret;
   }
   return ret;
 }

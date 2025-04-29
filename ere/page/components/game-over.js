@@ -16,6 +16,7 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const BasementOwners = require('#/data/event/basement-owners');
@@ -81,18 +82,9 @@ async function game_over(again) {
             era.set('cflag:0:阴茎尺寸', 1);
             era.set('cflag:0:阴道尺寸', 1);
             if (era.get('cflag:0:性别') === 1) {
-              era.set(
-                'cflag:0:胸围',
-                Math.floor(era.get('cflag:0:身高') * 0.51),
-              );
-              era.set(
-                'cflag:0:腰围',
-                Math.floor(era.get('cflag:0:身高') * 0.34),
-              );
-              era.set(
-                'cflag:0:臀围',
-                Math.floor(era.get('cflag:0:身高') * 0.542),
-              );
+              era.set('cflag:0:胸围', era.get('cflag:0:身高') * 0.51);
+              era.set('cflag:0:腰围', era.get('cflag:0:身高') * 0.34);
+              era.set('cflag:0:臀围', era.get('cflag:0:身高') * 0.542);
               era.set('cflag:0:下胸围', era.get('cflag:0:胸围') - 15);
             }
             era.set('cflag:0:性别', 10);
@@ -199,6 +191,7 @@ async function game_over(again) {
             era.set('cflag:0:种族', 1);
             break;
           case 2:
+            era.set('talent:0:调教度', 5);
             new Array(3).fill(0).forEach((_, i) => {
               era.set(`talent:0:${i + 60}`, 2);
               era.set(`talent:0:${i + 64}`, 2);
@@ -295,7 +288,7 @@ async function game_over(again) {
             sys_add_titles(0, { c: buff_colors[2], n: '万马骑' });
             break;
           case 3:
-            era.set('equip:0:淫纹奴役', slavery_enum.pregnant);
+            CharaInmon.get(0).slave = slavery_enum.pregnant;
             era.set('status:0:发情', 1);
             if (era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.no) {
               era.set('status:0:经期', 0);

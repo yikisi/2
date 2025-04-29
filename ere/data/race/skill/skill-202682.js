@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛中盘稍微提升速度，并略微回复体力',
   20268,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   263,
   [() => true, () => true],

@@ -16,6 +16,7 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const { add_event, cb_enum, get: get_queue } = require('#/event/queue');
 
+//const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -23,6 +24,7 @@ const { action_type_enum } = require('#/data/basement-const');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const { trainer_salary } = require('#/data/const.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const BasementOwners = require('#/data/event/basement-owners');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
@@ -117,6 +119,7 @@ module.exports = async () => {
               ),
             ).load_talk();
           }
+          CharaInmon.clean();
           if (await era.loadData(ret)) {
             flag_load_game = false;
             sys_load_game();
@@ -404,7 +407,32 @@ module.exports = async () => {
               );
             }
             if (version <= 1330) {
-              // TODO
+              if (
+                era.get('cflag:0:模版角色') > 0 &&
+                era.get('flag:惩戒力度') === 0
+              ) {
+                era.set('flag:声望不足替换', 0);
+              }
+            }
+            if (version <= 1340) {
+              era
+                .getAddedCharacters()
+                .forEach((e) =>
+                  era.set(`equip:${e}:淫纹奴役`, era.get(`equip:${e}:10`)),
+                );
+              if (era.get('flag:惩戒力度') >= 2) {
+                era.set('talent:0:调教度', 5);
+              }
+              //              if (
+              //                !(await select_yes_or_no(
+              //                  '请选择目白城风格',
+              //                  '「自由」',
+              //                  '「慈爱」',
+              //                ))
+              //              ) {
+              era.set('flag:目白城风格', 1);
+              era.set('flag:目白城变量', { limit: 1 });
+              //              }
             }
             return true;
           } else {

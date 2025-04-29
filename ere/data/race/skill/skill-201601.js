@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛初期发动多个技能时，加速度略微提高',
   20160,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

@@ -59,8 +59,9 @@ handlers[event_hooks.office_gift] = async (chara_id) => {
   era.println();
   sys_change_money(-10);
   sys_change_attr_and_print(0, '精力', -get_random_value(100, 200));
-  sys_like_chara(chara_id, 0, get_random_value(20, 40)) &&
-    (await era.waitAnyKey());
+  if (sys_like_chara(chara_id, 0, get_random_value(20, 40))) {
+    await era.waitAnyKey();
+  }
 };
 
 handlers[event_hooks.office_cook] = async (chara_id) => {
@@ -390,13 +391,18 @@ handlers[event_hooks.celebration] = async (chara_id) => {
   era.set(`cflag:${chara_id}:节日事件标记`, 0);
   era.add('cflag:0:节日事件标记', 1);
   era.println();
+  let wait_flag = false;
   if ((era.get('flag:当前回合数') - 1) % 48 === 5) {
     era.print('获得了【情人节巧克力】！');
     era.add('item:情人节巧克力', 1);
+    wait_flag = true;
   }
   sys_change_pressure(chara_id, -get_random_value(500, 1000));
-  sys_like_chara(chara_id, 0, get_random_value(40, 80)) &&
-    (await era.waitAnyKey());
+  wait_flag =
+    sys_like_chara(chara_id, 0, get_random_value(40, 80)) || wait_flag;
+  if (wait_flag) {
+    await era.waitAnyKey();
+  }
 };
 
 /**

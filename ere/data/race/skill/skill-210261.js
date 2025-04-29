@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛中盘进行名次争夺时，速度提升；习得的技能越多则效果越强',
   21026,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   633,
   [() => true, () => true],

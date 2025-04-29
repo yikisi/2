@@ -17,8 +17,11 @@ module.exports = class extends CustomizedMec {
   }
 
   get_race_finish_report(uma, race_id) {
-    if (race_id === race_enum.arim_kin && get('cflag:68:育成回合计时') > 96) {
-      return [{ color: uma.color, content: '但是！这就是！巨星的谢幕之际！' }];
+    if (
+      race_id === race_enum.arim_kin &&
+      get(`cflag:${this.id}:育成回合计时`) > 96
+    ) {
+      return [{ color: uma.color, content: '这就是！巨星的谢幕之际！' }];
     }
     return super.get_race_finish_report(uma, race_id);
   }

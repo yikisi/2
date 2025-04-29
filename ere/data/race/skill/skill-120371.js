@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '若在中距离比赛的最终弯道位于队伍中间，则向前突进；如果是东京竞马场的比赛，则大幅向前突进',
   12037,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

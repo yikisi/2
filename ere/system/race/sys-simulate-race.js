@@ -139,9 +139,9 @@ race_message_handlers.default = (info) => [
  * @param {PseudoUma[]} list_chara
  * @param {RaceInfo} race_info
  * @param {number} [race_id]
- * @param {boolean} [shown]
+ * @param {boolean} [shown=true]
  */
-function sys_sim_race(list_chara, race_info, race_id, shown) {
+function sys_sim_race(list_chara, race_info, race_id, shown = true) {
   const beginning_report =
       race_id === undefined
         ? ['正在检查马闸……', '正在检查令枪……', '选手入闸……', '开赛！']
@@ -181,7 +181,9 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
     )(race_info, top_pop);
   let flag_race_phase = 1;
   message_buffer.push(get_event_record(race_message));
-  shown !== false && printInColRows([{ type: 'divider' }, ...message_buffer]);
+  if (shown) {
+    printInColRows([{ type: 'divider' }, ...message_buffer]);
+  }
   beginning_report.unshift(top_pop_message);
 
   const start_delay = new Array(count_uma).fill(0);
@@ -495,8 +497,9 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
       message_buffer.push(
         get_event_record(beginning_report[flag_race_phase++ - 1]),
       );
-      shown !== false &&
+      if (shown) {
         replaceInColRows([{ type: 'divider' }, ...message_buffer]);
+      }
     }
 
     list_in_race.forEach((uma, i, l) => {
@@ -682,7 +685,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
       // 阻挡计算
       const block_percent =
         uma.race.location >= 150 &&
-        uma.race.conditionParams.blocked_front &&
+        uma.race.conditionParams.blocked_front > 0 &&
         (uma.race.strength * get_random_value(0.7, 0.8, true)) /
           l[i - 1].race.strength +
           uma.race.lane_move_buff;
@@ -747,28 +750,32 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
       uma.race.acceleration += uma.race.accelerationBuff;
     });
     if (timer >= next_report) {
-      race_id !== undefined &&
+      if (
         (temp_report = sub_simulate_report(
           report_cache,
           list_in_race,
           race_info,
           race_id,
-        )) &&
+        )) !== undefined
+      ) {
         buffer.report.unshift(
           get_event_record(temp_report, timer_record, timer),
         );
+      }
       report_cache = [];
       next_report += get_report_internal();
     }
   }
-  race_id !== undefined &&
+  if (
     (temp_report = sub_simulate_report(
       report_cache,
       list_in_race,
       race_info,
       race_id,
-    )) &&
+    )) !== undefined
+  ) {
     buffer.report.unshift(get_event_record(temp_report, timer_record, timer));
+  }
   const duration = new Date().getTime() - current;
   logger.debug(
     `比赛模拟：${duration} ms / ${Math.ceil(timer * frame_rate)} 帧，平均 ${(duration / (timer * frame_rate)).toFixed(4)} ms/帧`,
@@ -777,7 +784,9 @@ function sys_sim_race(list_chara, race_info, race_id, shown) {
     `阻挡&突围：${total_blocked - total_failed}(突围次数)/${total_blocked}(阻挡次数)=${(total_blocked - total_failed) / total_blocked}`,
   );
   message_buffer.push(get_event_record(beginning_report.at(-1)));
-  shown !== false && replaceInColRows([{ type: 'divider' }, ...message_buffer]);
+  if (shown) {
+    replaceInColRows([{ type: 'divider' }, ...message_buffer]);
+  }
   const speed_min = (22 - race_info.span / 1000) * 0.85;
   statistics.speed = statistics.speed.map((e) => {
     e.data = e.data.map((v) => Math.max(v, speed_min));

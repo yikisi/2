@@ -19,7 +19,7 @@ const {
   mod_attr_stamina_style,
   mod_velocity_final_adapt_distance,
   mod_velocity_style,
-} = require('#/data/race/race-sim-const.js');
+} = require('#/data/race/race-sim-const');
 const { attr_enum } = require('#/data/train-const');
 
 /**

@@ -1,6 +1,7 @@
-const era = require('#/era-electron');
+const { get } = require('#/era-electron');
 
-const common_cons = require('#/event/mec/mec-common');
+const MecChild = require('#/event/mec/mec-child');
+const CustomizedMec = require('#/event/mec/mec-common');
 const script_dict = require('#/event/script-dict.json');
 
 const { first_child_id } = require('#/data/other-const');
@@ -15,6 +16,7 @@ cons_dict[3] = require('#/event/mec/mec-3');
 cons_dict[6] = require('#/event/mec/mec-6');
 cons_dict[7] = require('#/event/mec/mec-7');
 cons_dict[12] = require('#/event/mec/mec-12');
+cons_dict[13] = require('#/event/mec/mec-13');
 cons_dict[17] = require('#/event/mec/mec-17');
 cons_dict[19] = require('#/event/mec/mec-19');
 cons_dict[21] = require('#/event/mec/mec-21');
@@ -44,6 +46,7 @@ cons_dict[121] = require('#/event/mec/mec-121');
 cons_dict[204] = require('#/event/mec/mec-204');
 cons_dict[205] = require('#/event/mec/mec-205');
 cons_dict[206] = require('#/event/mec/mec-206');
+cons_dict[207] = require('#/event/mec/mec-207');
 cons_dict[301] = require('#/event/mec/mec-301');
 cons_dict[302] = require('#/event/mec/mec-302');
 cons_dict[303] = require('#/event/mec/mec-303');
@@ -56,13 +59,17 @@ cons_dict[341] = require('#/event/mec/mec-341');
 cons_dict[342] = require('#/event/mec/mec-342');
 cons_dict[343] = require('#/event/mec/mec-343');
 cons_dict[344] = require('#/event/mec/mec-344');
+cons_dict[345] = require('#/event/mec/mec-345');
 cons_dict[400] = require('#/event/mec/mec-400');
 cons_dict['av-sister'] = require('#/event/mec/mec-av-sister');
 cons_dict[201] =
   cons_dict[202] =
   cons_dict[203] =
     require('#/event/mec/mec-npc-uma-common');
-cons_dict[207] = cons_dict[345] = require('#/event/mec/mec-npc');
+cons_dict[346] =
+  cons_dict[347] =
+  cons_dict[348] =
+    require('#/event/mec/mec-npc');
 
 console.log(
   '[mec-factory.js] constructor dictionary init done!',
@@ -70,21 +77,25 @@ console.log(
   'ms',
 );
 
+/**
+ * @param {number} chara_id
+ * @returns {CustomizedMec}
+ */
+function get_custom_mec(chara_id) {
+  if (!obj_dict[chara_id]) {
+    const { n: script_name, c: cons } =
+      chara_id >= first_child_id
+        ? { n: get(`callname:${chara_id}:-2`), c: MecChild }
+        : { n: chara_id, c: CustomizedMec };
+    obj_dict[chara_id] = new (cons_dict[
+      script_dict[script_name] || script_name
+    ] || cons)(chara_id);
+  }
+  return obj_dict[chara_id].get_this();
+}
+
+CustomizedMec.get_custom_mec = get_custom_mec;
+
 module.exports = {
-  /**
-   * @param {number} chara_id
-   * @returns {CustomizedMec}
-   */
-  get_custom_mec(chara_id) {
-    if (obj_dict[chara_id]) {
-      return obj_dict[chara_id];
-    }
-    const script_name =
-        chara_id >= first_child_id
-          ? era.get(`callname:${chara_id}:-2`)
-          : chara_id,
-      class_const =
-        cons_dict[script_dict[script_name] || script_name] || common_cons;
-    return (obj_dict[chara_id] = new class_const(chara_id)).get_this();
-  },
+  get_custom_mec,
 };

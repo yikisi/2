@@ -1,6 +1,6 @@
 ﻿const era = require('#/era-electron');
 
-const get_status = require('#/system/chara/sys-get-status');
+const sys_get_status = require('#/system/chara/sys-get-status');
 const {
   sys_get_billings,
   sys_reg_race,
@@ -21,11 +21,10 @@ const {
   get_trainer_title,
   get_trainer_train_buff,
 } = require('#/data/info-generator');
-const { location_enum, location_name } = require('#/data/locations');
+const { location_name } = require('#/data/locations');
 const { race_infos } = require('#/data/race/race-const');
 
 function get_progress_bar() {
-  const status_list = get_status(0);
   return [
     {
       config: { width: 2 },
@@ -57,16 +56,6 @@ function get_progress_bar() {
       percentage: (era.get(`base:0:精力`) * 100) / era.get(`maxbase:0:精力`),
       type: 'progress',
     },
-    {
-      config: { width: 2 },
-      content: '状态',
-      type: 'text',
-    },
-    {
-      config: { width: 22 },
-      content: status_list.length > 0 ? status_list : '正常',
-      type: 'text',
-    },
   ];
 }
 
@@ -77,29 +66,6 @@ function page_header(enable_race_info) {
   if (!cur_year) {
     era.drawLine();
     era.print('当前未加载存档', { align: 'center' });
-  } else if (era.get('flag:当前位置') === location_enum.basement) {
-    era.printInColRows(
-      [{ type: 'divider' }],
-      {
-        columns: get_progress_bar(),
-        config: { width: 16 },
-      },
-      {
-        columns: [
-          {
-            content: [
-              '位于 ',
-              {
-                content: '地下室',
-                fontWeight: 'bold',
-              },
-            ],
-            type: 'text',
-          },
-        ],
-        config: { width: 8 },
-      },
-    );
   } else {
     const celebration = get_celebration(),
       cur_coin = era.get('flag:当前马币'),
@@ -126,7 +92,7 @@ function page_header(enable_race_info) {
     let billings = '月账单：',
       money_change = 0;
     sys_get_billings().forEach((e, i) => {
-      if (e.repay !== 0 && e.timer > 0) {
+      if (e.repay !== 0 && e.timer !== 0) {
         let delta = e.repay;
         if (delta > 0) {
           delta = Math.floor((e.repay * (100 + money_buff)) / 100);
@@ -141,10 +107,15 @@ function page_header(enable_race_info) {
             billings += ' (月工资)';
             break;
           default:
-            billings += ` (${era.get(`callname:${e.creditor}:-2`)}${i === 0 ? ' · 主要' : ''}${e.timer > 0 ? ` 余${e.timer}周` : ''})`;
+            if (e.timer > 0) {
+              billings += ` (${era.get(`callname:${e.creditor}:-2`)}${i === 0 ? ' · 主要' : ''} 余${e.timer}周)`;
+            } else {
+              billings += ` (${era.get(`callname:${e.creditor}:-2`)} 献金)`;
+            }
         }
       }
     });
+    const status_list = sys_get_status(0);
     era.printInColRows(
       [{ type: 'divider' }],
       {
@@ -215,6 +186,16 @@ function page_header(enable_race_info) {
             type: 'text',
           },
           ...get_progress_bar(),
+          {
+            config: { width: 2 },
+            content: '状态',
+            type: 'text',
+          },
+          {
+            config: { width: 22 },
+            content: status_list.length > 0 ? status_list : '正常',
+            type: 'text',
+          },
         ],
         config: { width: 16 },
       },
@@ -263,3 +244,4 @@ function page_header(enable_race_info) {
 }
 
 module.exports = page_header;
+module.exports.get_progress_bar = get_progress_bar;

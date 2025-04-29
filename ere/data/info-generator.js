@@ -4,7 +4,7 @@ const sys_get_item_status = require('#/system/chara/sys-get-item-status');
 const {
   check_erect,
   check_lubrication,
-  get_bust_size,
+  get_bust_delta,
   get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
 const {
@@ -22,10 +22,17 @@ const {
   skin_colors,
 } = require('#/data/color-const');
 const { hair_colors } = require('#/data/const.json');
+const { mark_colors } = require('#/data/const.json');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
+const {
+  slavery_descriptions,
+  slavery_titles,
+} = require('#/data/ero/mark-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const {
   penis_state,
   pregnant_stage_enum,
@@ -121,13 +128,11 @@ const title_desc = ['训练员', '马娘', '性奴', '孕袋'];
 
 /**
  * @param {number} chara_id
- * @param {boolean} [show_true_bust]
+ * @param {boolean} [show_true_bust=false]
  * @returns {string}
  */
-function get_breast_cup(chara_id, show_true_bust) {
-  const delta =
-    get_bust_size(chara_id, show_true_bust) -
-    era.get(`cflag:${chara_id}:下胸围`);
+function get_breast_cup(chara_id, show_true_bust = false) {
+  const delta = get_bust_delta(chara_id, show_true_bust);
   if (delta < 0) {
     return '-';
   }
@@ -298,6 +303,18 @@ module.exports = {
     const sex_state = chara_id
       ? [penis_state.chara, virgin_state.chara]
       : [penis_state.player, virgin_state.player];
+    if (era.get(`mark:${chara_id}:淫纹`) === 3) {
+      const sex_equip = CharaInmon.get(chara_id).slave,
+        obj = {
+          color: buff_colors[2],
+          content: slavery_titles[sex_equip],
+          fontWeight: 'bold',
+        };
+      if (chara_id > 0 && sex_equip > 0) {
+        obj.title = `[${obj.content}]：${slavery_descriptions[sex_equip]}`;
+      }
+      status_list.push(obj);
+    }
     if (era.get('tflag:主导权') === chara_id) {
       status_list.push({ color: buff_colors[1], content: '主导' });
     }
@@ -588,26 +605,28 @@ module.exports = {
     }
     return colors[3] || `hsl(${colors[0]}deg ${colors[1]}% ${colors[2]}%)`;
   },
-  get_talent: (chara_id) => {
-    const yandere = era.get(`talent:${chara_id}:病娇`),
-      ret = get_custom_mec(chara_id).get_talents();
-    if (
-      era.get(`cflag:${chara_id}:父方角色`) === 308 ||
-      era.get(`cflag:${chara_id}:母方角色`) === 308
-    ) {
-      ret.push({
-        color: buff_colors[1],
-        content: '梦之继承者',
-      });
-    }
+  get_talent: (id) => {
+    const yandere = era.get(`talent:${id}:病娇`),
+      ret = get_custom_mec(id).get_talents();
     if (yandere === 2 || (yandere > 0 && era.get('status:0:马语者'))) {
-      ret.push({
+      const temp = {
         color: buff_colors[3],
         content: '病娇',
         opacity: yandere / 2,
-      });
+      };
+      const inmon = CharaInmon.get(id);
+      if (inmon.on(plugin_enum.no_yand)) {
+        delete temp.color;
+        delete temp.opacity;
+        temp.title = '已缓和。';
+      } else if (inmon.on(plugin_enum.ntr)) {
+        temp.color = el_success_color;
+        delete temp.opacity;
+        temp.title = '已扭曲。';
+      }
+      ret.push(temp);
     }
-    if (era.get(`talent:${chara_id}:捉摸不透`)) {
+    if (era.get(`talent:${id}:捉摸不透`)) {
       ret.push({ content: '捉摸不透' });
     }
     ret.push(
@@ -616,7 +635,7 @@ module.exports = {
         .map((_, i) => {
           return {
             id: i,
-            val: era.get(`talent:${chara_id}:${i}`),
+            val: era.get(`talent:${id}:${i}`),
           };
         })
         .filter((e) => e.val)
@@ -681,23 +700,20 @@ module.exports = {
     }
     return ret;
   },
-  get_xp(chara_id) {
-    if (era.get(`cflag:${chara_id}:成长阶段`) < 2) {
+  get_xp(id) {
+    if (era.get(`cflag:${id}:成长阶段`) < 2) {
       return ['……'];
     }
     const show_all_body =
-        !chara_id || era.get('status:0:马语者') || era.get('status:0:透视镜片'),
-      breast_talent = get_talent_bust_size(
-        get_breast_cup(chara_id, show_all_body),
-      ),
+        !id || era.get('status:0:马语者') || era.get('status:0:透视镜片'),
+      breast_talent = get_talent_bust_size(get_breast_cup(id, show_all_body)),
       talent_list = [];
     if (breast_talent_names[breast_talent + 1]) {
       talent_list.push(breast_talent_names[breast_talent + 1]);
     }
     if (
-      chara_id &&
-      era.get(`exp:${chara_id}:性爱次数`) ===
-        era.get(`exp:${chara_id}:睡奸次数`) &&
+      id > 0 &&
+      era.get(`exp:${id}:性爱次数`) === era.get(`exp:${id}:睡奸次数`) &&
       era.get('status:0:马语者') === 0 &&
       era.get('status:0:马跳次数镜片') === 0
     ) {
@@ -716,27 +732,36 @@ module.exports = {
         '……',
       ];
     }
-    const sex = era.get(`cflag:${chara_id}:性别`);
+    const sex = era.get(`cflag:${id}:性别`);
     if (sex - 1) {
-      if (era.get(`talent:${chara_id}:泌乳`) === 3) {
+      if (era.get(`talent:${id}:泌乳`) === 3) {
         talent_list.push('母乳体质');
       }
-      if (era.get(`talent:${chara_id}:乳头类型`) === 2) {
+      if (era.get(`talent:${id}:乳头类型`) === 2) {
         talent_list.push('凹陷乳头');
       }
-      if (era.get(`talent:${chara_id}:隐形巨乳`) && breast_talent > 0) {
+      if (era.get(`talent:${id}:隐形巨乳`) && breast_talent > 0) {
         talent_list.push('隐形巨乳');
       }
     }
-    if (era.get(`talent:${chara_id}:绿帽癖`)) {
+    if (
+      era.get(`talent:${id}:绿帽癖`) > 0 ||
+      CharaInmon.get(id).on(plugin_enum.ntr)
+    ) {
       talent_list.push({
         color: el_success_color,
         content: '[绿帽癖]',
-        display: 'inline-block',
+      });
+    }
+    if (era.get(`talent:${id}:钢之意志`)) {
+      talent_list.push({
+        color: mark_colors['钢'],
+        content: '[钢之意志]',
+        title: `[钢之意志]：${talent_desc['钢之意志']}`,
       });
     }
     talent_list.push(...new Array(3).fill(0).map((_, i) => i + 40));
-    const ero = era.get(`talent:${chara_id}:工口意愿`);
+    const ero = era.get(`talent:${id}:工口意愿`);
     if (ero) {
       talent_list.push(ero > 0 ? '好色' : '性保守');
     }
@@ -747,7 +772,7 @@ module.exports = {
         .map((id) => {
           return {
             id,
-            level: era.get(`talent:${chara_id}:${id}`),
+            level: era.get(`talent:${id}:${id}`),
           };
         })
         .filter((e) => e.level)
@@ -759,7 +784,7 @@ module.exports = {
     return talent_list
       .map((e) => {
         if (typeof e === 'number') {
-          return era.get(`talent:${chara_id}:${e}`)
+          return era.get(`talent:${id}:${e}`)
             ? era.get(`talentname:${e}`).toUpperCase()
             : '';
         }

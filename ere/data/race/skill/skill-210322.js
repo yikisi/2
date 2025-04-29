@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终冲刺时稍微向前突进',
   21032,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   263,
   [() => true, () => true],

@@ -6,12 +6,14 @@ const {
   height2anal_size,
   height2virgin_size,
 } = require('#/data/ero/battle-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const {
   baby_limit,
   erect_border,
   lust_border,
 } = require('#/data/ero/orgasm-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -79,6 +81,46 @@ function get_action_base_check(chara_id) {
     15 * era.get(`mark:${chara_id}:反抗`) -
     10 * era.get(`talent:${chara_id}:反抗意愿`)
   );
+}
+
+/**
+ * @param {number} chara_id
+ * @param {boolean} show_true_bust
+ * @returns {number}
+ */
+function get_float_breast_size(chara_id, show_true_bust) {
+  let nipple = era.get(`tcvar:${chara_id}:乳突`);
+  const down_size = era.get(`cflag:${chara_id}:下胸围`);
+  const chara_sex = era.get(`cflag:${chara_id}:性别`);
+  let ret =
+    era.get(`cflag:${chara_id}:胸围`) +
+    5 * (era.get(`talent:${chara_id}:淫乳`) === 2) +
+    3 * era.get(`status:${chara_id}:发情`) -
+    (era.get(`talent:${chara_id}:乳头类型`) === 2) +
+    (nipple || 0) +
+    era.get(`base:${chara_id}:体重偏差`) / 2000 +
+    LifeEventMarks.get_marks(chara_id).breast_buff;
+  // 母乳体质最小A
+  if (
+    chara_sex - 1 &&
+    era.get(`talent:${chara_id}:泌乳`) === 3 &&
+    ret < down_size + 10
+  ) {
+    ret = down_size + 10;
+  }
+  if (show_true_bust) {
+    return ret;
+  }
+  // 非调教状态隐形巨乳-5cm胸围
+  if (
+    nipple === undefined &&
+    chara_sex - 1 &&
+    era.get(`talent:${chara_id}:隐形巨乳`) &&
+    ret - down_size > 13
+  ) {
+    ret = down_size + 13;
+  }
+  return ret;
 }
 
 /**
@@ -197,60 +239,39 @@ module.exports = {
         !era.get(`status:${chara_id}:经期`))
     );
   },
-  check_want_to_escape(chara_id) {
+  check_want_to_escape(id) {
     return (
-      !era.get(`status:${chara_id}:超马跳Z`) &&
+      !era.get(`status:${id}:超马跳Z`) &&
+      era.get(`mark:${id}:淫纹`) < 3 &&
       ((era.getCharactersInTrain().length > 0 &&
         !era.get('tflag:强奸') &&
-        get_sex_acceptable(chara_id) < 0) ||
-        Math.max(
-          era.get(`mark:${chara_id}:苦痛`),
-          era.get(`mark:${chara_id}:羞耻`),
-        ) -
-          era.get(`mark:${chara_id}:欢愉`) >=
-          1 ||
-        era.get(`mark:${chara_id}:反抗`) >= 2)
+        get_sex_acceptable(id) < 0) ||
+        Math.random() <
+          (Math.max(era.get(`mark:${id}:苦痛`), era.get(`mark:${id}:羞耻`)) -
+            era.get(`mark:${id}:欢愉`)) /
+            3 ||
+        era.get(`mark:${id}:反抗`) >= 2)
     );
   },
   get_action_base_check,
   /**
    * @param {number} chara_id
-   * @param {boolean} [show_true_bust]
+   * @param {boolean} [show_true_bust=false]
    * @returns {number}
    */
-  get_bust_size(chara_id, show_true_bust) {
-    let nipple = era.get(`tcvar:${chara_id}:乳突`);
-    const down_size = era.get(`cflag:${chara_id}:下胸围`);
-    const chara_sex = era.get(`cflag:${chara_id}:性别`);
-    let ret =
-      era.get(`cflag:${chara_id}:胸围`) +
-      5 * (era.get(`talent:${chara_id}:淫乳`) === 2) +
-      3 * era.get(`status:${chara_id}:发情`) -
-      (era.get(`talent:${chara_id}:乳头类型`) === 2) +
-      (nipple || 0) +
-      Math.floor(era.get(`base:${chara_id}:体重偏差`) / 2000) +
-      LifeEventMarks.get_marks(chara_id).breast_buff;
-    // 母乳体质最小A
-    if (
-      chara_sex - 1 &&
-      era.get(`talent:${chara_id}:泌乳`) === 3 &&
-      ret < down_size + 10
-    ) {
-      ret = down_size + 10;
-    }
-    if (show_true_bust) {
-      return ret;
-    }
-    // 非调教状态隐形巨乳-5cm胸围
-    if (
-      nipple === undefined &&
-      chara_sex - 1 &&
-      era.get(`talent:${chara_id}:隐形巨乳`) &&
-      ret - down_size > 13
-    ) {
-      ret = down_size + 13;
-    }
-    return ret;
+  get_bust_delta(chara_id, show_true_bust = false) {
+    return (
+      get_float_breast_size(chara_id, show_true_bust) -
+      era.get(`cflag:${chara_id}:下胸围`)
+    );
+  },
+  /**
+   * @param {number} chara_id
+   * @param {boolean} [show_true_bust=false]
+   * @returns {number}
+   */
+  get_bust_size(chara_id, show_true_bust = false) {
+    return Math.floor(get_float_breast_size(chara_id, show_true_bust));
   },
   /**
    * get expansion coefficient
@@ -307,11 +328,11 @@ module.exports = {
    * @returns {number}
    */
   get_hip_size(chara_id) {
-    return (
+    return Math.floor(
       era.get(`cflag:${chara_id}:臀围`) +
-      5 * (era.get(`talent:${chara_id}:淫臀`) === 2) +
-      2 * era.get(`status:${chara_id}:发情`) +
-      Math.floor(era.get(`base:${chara_id}:体重偏差`) / 2000)
+        5 * (era.get(`talent:${chara_id}:淫臀`) === 2) +
+        2 * era.get(`status:${chara_id}:发情`) +
+        era.get(`base:${chara_id}:体重偏差`) / 2000,
     );
   },
   /**
@@ -346,7 +367,8 @@ module.exports = {
       era.get(`status:${chara_id}:经期`) ||
       (other_id !== undefined &&
         !era.get(`cflag:${other_id}:性别`) &&
-        !era.get(`status:${other_id}:弗隆P`))
+        !era.get(`status:${other_id}:弗隆P`)) ||
+      CharaInmon.get(chara_id).on(plugin_enum.no_preg)
     ) {
       return 0;
     }
@@ -384,10 +406,10 @@ module.exports = {
    * @returns {number}
    */
   get_waist_size(chara_id) {
-    return (
+    return Math.floor(
       era.get(`cflag:${chara_id}:腰围`) +
-      LifeEventMarks.get_marks(chara_id).waist_buff +
-      Math.floor(era.get(`base:${chara_id}:体重偏差`) / 1000)
+        LifeEventMarks.get_marks(chara_id).waist_buff +
+        era.get(`base:${chara_id}:体重偏差`) / 1000,
     );
   },
   /**

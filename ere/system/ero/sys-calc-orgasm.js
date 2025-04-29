@@ -15,7 +15,7 @@ const {
 const {
   check_erect,
   check_lubrication,
-  get_bust_size,
+  get_bust_delta,
   get_pregnant_ratio,
   orgasm_check_list,
 } = require('#/system/ero/sys-calc-ero-status');
@@ -154,9 +154,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                   ] *
                   (1 +
                     0.2 * (era.get(`tcvar:${chara_id}:余韵`) > 0) +
-                    (get_bust_size(chara_id, true) -
-                      era.get(`cflag:${chara_id}:下胸围`)) /
-                      50) *
+                    get_bust_delta(chara_id, true) / 50) *
                   times,
               );
             }
@@ -210,7 +208,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                   if (ret === 2) {
                     // 体外成功，射到身上
                     if (other_part === part_enum.mouth) {
-                      other_part = Object.keys(part_enum).length;
+                      other_part = part_enum.keys.length;
                       clean_part(new EroParticipant(chara_id, part_enum.penis));
                     } else {
                       other_part = part_enum.body;
@@ -321,11 +319,12 @@ async function sys_calc_orgasm(shown, ...ids) {
         // 淫系列特性使分泌液阈值减半
         if (part === part_enum.breast) {
           if (era.get(`cflag:${chara_id}:性别`) !== 1) {
-            const border =
-              (max * palam_border.breast) /
-              (1 +
-                0.5 * era.get(`talent:${chara_id}:淫乳`) +
-                0.5 * era.get(`tcvar:${chara_id}:发情`));
+            const talent = era.get(`talent:${chara_id}:淫乳`);
+            let border = 1 + 0.5 * era.get(`tcvar:${chara_id}:发情`);
+            if (talent > 0) {
+              border += 0.5 * talent;
+            }
+            border = (max * palam_border.breast) / border;
             if (curr >= border || era.get(`ex:${chara_id}:喷奶阻碍`) > 0) {
               if (
                 era.get(`talent:${chara_id}:乳头类型`) === 2 &&
@@ -344,22 +343,20 @@ async function sys_calc_orgasm(shown, ...ids) {
                     (curr - border) *
                     (1 +
                       0.2 * (era.get(`tcvar:${chara_id}:余韵`) > 0) +
-                      (get_bust_size(chara_id, true) -
-                        era.get(`cflag:${chara_id}:下胸围`)) /
-                        50)) /
+                      get_bust_delta(chara_id, true) / 50)) /
                     (max - border),
                 );
               }
             }
           }
         } else if (part === part_enum.anal) {
-          if (
-            curr >=
-            (max * palam_border.anal) /
-              (1 +
-                0.5 * era.get(`talent:${chara_id}:淫臀`) +
-                0.5 * era.get(`tcvar:${chara_id}:发情`))
-          ) {
+          const talent = era.get(`talent:${chara_id}:淫臀`);
+          let border = 1 + 0.5 * era.get(`tcvar:${chara_id}:发情`);
+          if (talent > 0) {
+            border += 0.5 * talent;
+          }
+          border = (max * palam_border.anal) / border;
+          if (curr >= border) {
             era.add(
               `nowex:${chara_id}:肛门润滑`,
               Number(!check_lubrication(chara_id, part_enum.anal)),
@@ -399,7 +396,7 @@ async function sys_calc_orgasm(shown, ...ids) {
           if (
             (last_action === ero_hooks.ask_double_blow_job ||
               last_action === ero_hooks.double_blow_job) &&
-            other_part === Object.keys(part_enum).length
+            other_part === part_enum.keys.length
           ) {
             other_part = 100;
           }
@@ -758,7 +755,9 @@ async function sys_calc_orgasm(shown, ...ids) {
       );
     }
   }
-  shown && era.println();
+  if (shown) {
+    era.println();
+  }
   await update_orgasms(shown, ...ids);
 }
 

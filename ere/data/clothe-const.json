@@ -288,6 +288,7 @@
       "_礼": "Fleur Enneigée"
     },
     "70": {
+      "2": "Louve stellaire",
       "": "Féroce"
     },
     "71": {
@@ -330,7 +331,8 @@
       "_万圣": "Jetblack Automaton"
     },
     "84": {
-      "": "身披雷霆"
+      "": "身披雷霆",
+      "_礼": "With a Twist"
     },
     "85": {
       "": "华丽的红玉",
@@ -386,7 +388,8 @@
       "": "Miracle Make-up!"
     },
     "107": {
-      "": "GLITTER!"
+      "": "GLITTER!",
+      "_礼": "Tap! Tap! Tap!"
     },
     "108": {
       "": "Red in Black"

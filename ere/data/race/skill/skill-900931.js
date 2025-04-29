@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '终盘初段的某处位于前方时，略微向前突进，若是短距离或英里比赛，则提升技能效果',
   90093,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '赛程中盘于前方开始进行发力时提升速度',
   11018,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

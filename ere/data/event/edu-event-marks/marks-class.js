@@ -4,6 +4,8 @@ const PersonalEventMarks = require('#/data/event/personal-event-marks');
 class EduEventMarks extends PersonalEventMarks {
   // 随机事件检查
   _r_e_check;
+  // 温泉指示器
+  hot_spring;
 
   /**
    * @param {number} chara_id
