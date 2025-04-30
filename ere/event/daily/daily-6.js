@@ -1,3 +1,7 @@
+/**
+ * @file 小栗帽 - 日常
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
 
 const lines = require('#/event/daily/daily-6.kojo');

@@ -1,3 +1,7 @@
+/**
+ * @file 小栗帽 - 爱慕
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');

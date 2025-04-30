@@ -1,3 +1,7 @@
+/**
+ * @file 小栗帽 - 招募
+ * @author 雞雞
+ */
 const era = require('#/era-electron');
 
 const {
