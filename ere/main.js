@@ -90,17 +90,10 @@ module.exports = async () => {
   const line_copyrights = [
     [[get_copyright_entry(3)], '天马闪光蹄'],
     // [[get_copyright_entry(4), { isDivider: true }, get_copyright_entry(46)], '黑奴一号'],
-    [[get_copyright_entry(7)], '雞雞'],
-    // [
-    //   [
-    //     get_copyright_entry(6),
-    //     { isDivider: true },
-    //     get_copyright_entry(7),
-    //     { isDivider: true },
-    //     get_copyright_entry(21),
-    //   ],
-    //   '雞雞',
-    // ],
+    [
+      [get_copyright_entry(7), { isDivider: true }, get_copyright_entry(21)],
+      '雞雞',
+    ],
     [[get_copyright_entry(13)], '伊兰'],
     [[get_copyright_entry(17)], '露娜俘虏'],
     [[get_copyright_entry(19)], '片手虾好评发售中！'],
