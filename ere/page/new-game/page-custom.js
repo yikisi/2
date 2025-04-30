@@ -150,7 +150,6 @@ function random_chara() {
     default:
       era.set('callname:0:-2', '你');
   }
-  CharaTalk.me = new CharaTalk(0);
   era.set('cstr:0:发色', get_random_entry(hair_color_names));
   era.set('cstr:0:呆毛', top_hairs[get_random_value(1, 5)] || '');
   era.set('cstr:0:前发', get_random_entry(front_hairs));
@@ -249,7 +248,6 @@ async function page_custom() {
     era.set('flag:彩蛋机制', 3);
     new CharaTitles(0).push({ c: buff_colors[2], n: '运动系爱好者', s: true });
   }
-  CharaTalk.me = new CharaTalk(0);
   while (flag_custom) {
     attr_names.forEach((v) => era.set(`base:0:${v}`, 25));
     await era.clear();
@@ -292,7 +290,6 @@ async function page_custom() {
       } else {
         era.set('callname:0:-2', '你');
       }
-      CharaTalk.me = new CharaTalk(0);
       random_talent();
     } else if (first_button === 3) {
       let flag_hair = true,
@@ -678,7 +675,6 @@ async function page_custom() {
               } while (temp.length > 6);
           }
       }
-      CharaTalk.me = new CharaTalk(0);
       await era.printAndWait([
         CharaTalk.me.get_colored_actual_name(),
         ' 训练员，旁白君从此就称您为 ',

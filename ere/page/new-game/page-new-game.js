@@ -13,7 +13,6 @@ const GameGuides = require('#/event/others/game-guides');
 const event_queue = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_random_value } = require('#/utils/value-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
@@ -214,7 +213,6 @@ module.exports = async (src_chara) => {
           era.set('talent:0:童贞', 1);
           era.set('talent:0:处女', 1);
           if (src_chara > 0) {
-            CharaTalk.me = new CharaTalk(0);
             init_chara(src_chara);
             era.set(`cflag:${src_chara}:随机招募`, 0);
           } else {

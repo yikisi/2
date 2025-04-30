@@ -9,6 +9,7 @@ const load_game = require('#/page/page-load-game');
 const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
+const CharaTalk = require('#/utils/chara-talk');
 
 const item_title_color =
   require('#/data/color-const').adaptability_colors.at(-1);
@@ -33,6 +34,7 @@ function get_copyright_entry(chara_id, _suffix) {
 module.exports = async () => {
   let flagTitle = true;
   sys_personal_achievement.init();
+  CharaTalk.me = new CharaTalk(0);
 
   era.printMultiColumns(
     [

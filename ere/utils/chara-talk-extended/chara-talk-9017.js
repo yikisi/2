@@ -1,13 +1,13 @@
 const CharaTalk = require('#/utils/chara-talk');
 
-const { chara_colors } = require('#/data/chara-colors');
+const luna_colors = require('#/data/chara-colors').chara_colors[17];
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 
 module.exports = class extends CharaTalk {
-  constructor() {
-    super(9017);
-    if (new LunaEduMarks().emperor) {
-      this.set_color(chara_colors[17][0]);
+  get color() {
+    if (new LunaEduMarks().emperor > 0) {
+      return luna_colors[0];
     }
+    return luna_colors[1];
   }
 };

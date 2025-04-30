@@ -4,9 +4,8 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
 
-const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const color_17 = require('#/data/chara-colors').chara_colors[17];
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 
@@ -80,7 +79,7 @@ module.exports = {
     );
     era.println();
     await era.printAndWait([
-      new CharaTalk(luna, color_17[0]).get_colored_name(),
+      get_chara_talk(luna).get_colored_name(),
       ' 的精神状态变得更糟了……',
     ]);
     if (!event_marks.wax_and_wane) {

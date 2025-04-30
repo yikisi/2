@@ -10,19 +10,7 @@ class CharaTalk {
 
   /** @type {number} */
   id;
-  /** @type {string} */
-  name;
-  /** @type {string} */
-  actual_name;
-  /** @type {string} */
-  color;
-  /**
-   * 角色的人称代词
-   * @type {string}
-   */
-  sex;
-  /** @type {number} */
-  sex_code;
+  _color;
 
   /**
    * 输出一句路人的台词
@@ -64,21 +52,52 @@ class CharaTalk {
    */
   constructor(id, color) {
     this.id = id;
-    this.name = era.get(`callname:${id}:-2`);
     if (this.name === '-') {
       CharaTalk.init_chara(id);
-      this.name = era.get(`callname:${id}:-2`);
     }
-    this.actual_name = era.get(`callname:${id}:-1`);
-    this.color = color || get_chara_color(id);
-    this.sex_code = era.get(`cflag:${this.id}:性别`);
-    this.sex = this.sex_code - 1 ? '她' : '他';
+    this._color = color;
+  }
+
+  /** @returns {string} */
+  get actual_name() {
+    return era.get(`callname:${this.id}:-1`);
+  }
+
+  /** @returns {string} */
+  get color() {
+    return this._color || get_chara_color(this.id);
+  }
+
+  /** @returns {string} */
+  get name() {
+    return era.get(`callname:${this.id}:-2`);
+  }
+
+  /**
+   * 角色的人称代词
+   * @returns {string}
+   */
+  get sex() {
+    return this.sex_code === 1 ? '他' : '她';
+  }
+
+  /** @returns {number} */
+  get sex_code() {
+    return era.get(`cflag:${this.id}:性别`);
   }
 
   get_colored_actual_name() {
     return {
       color: this.color,
       content: this.actual_name,
+      fontWeight: 'bold',
+    };
+  }
+
+  get_colored_full_name() {
+    return {
+      color: this.color,
+      content: this.get_full_name(),
       fontWeight: 'bold',
     };
   }
@@ -92,14 +111,6 @@ class CharaTalk {
     };
   }
 
-  get_colored_full_name() {
-    return {
-      color: this.color,
-      content: this.get_full_name(),
-      fontWeight: 'bold',
-    };
-  }
-
   get_colored_sex() {
     return {
       color: this.color,
@@ -108,10 +119,13 @@ class CharaTalk {
     };
   }
 
-  get_full_name = () =>
-    this.actual_name === this.name
-      ? this.name
-      : `${this.name} (${this.actual_name})`;
+  get_full_name() {
+    if (this.actual_name === this.name) {
+      return this.name;
+    } else {
+      return `${this.name} (${this.actual_name})`;
+    }
+  }
 
   /** 成人角色的称呼 */
   get_adult_sex_title = () => (this.sex_code - 1 ? '小姐' : '先生');
@@ -219,12 +233,6 @@ class CharaTalk {
   async say_as_unknown_and_wait(_content) {
     this.say_as_unknown(_content);
     await era.waitAnyKey();
-  }
-
-  /** @param {string} color */
-  set_color(color) {
-    this.color = color;
-    return this;
   }
 
   /**

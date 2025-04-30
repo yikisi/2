@@ -9,7 +9,6 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
@@ -18,8 +17,6 @@ const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-
-const color_17 = require('#/data/chara-colors').chara_colors[17];
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 2;
@@ -134,9 +131,9 @@ module.exports = class extends CustomizedCheck {
           const { luna, emperor } = event_marks.emperor
               ? { luna: 9017, emperor: 17 }
               : { luna: 17, emperor: 9017 },
-            aim_talk = new CharaTalk(
+            aim_talk = get_chara_talk(
               event_marks.want_emperor ? emperor : luna,
-            ).set_color(color_17[event_marks.want_emperor]),
+            ),
             chara = get_chara_talk(17);
           era.print(
             event_marks.want_emperor === event_marks.emperor

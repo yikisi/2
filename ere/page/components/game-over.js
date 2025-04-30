@@ -90,8 +90,9 @@ async function game_over(again) {
             era.set('cflag:0:性别', 10);
             era.set('cflag:0:育成回合计时', 0);
             era.set('flag:当前声望', era.get('global:初始声望增加量') + 100);
-            CharaTalk.me = new CharaTalk(0);
-            jpy > 0 && era.add('flag:当前马币', -Math.floor(jpy / 2));
+            if (jpy > 0) {
+              era.add('flag:当前马币', -Math.floor(jpy / 2));
+            }
             era
               .getAddedCharacters()
               .filter((e) => e)

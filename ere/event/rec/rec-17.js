@@ -8,6 +8,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
@@ -21,7 +22,7 @@ module.exports = class extends CustomizedRecruit {
         return false;
       }
       era.set('callname:17:-1', era.set('callname:17:-2', '露娜'));
-      const luna = new CharaTalk(17);
+      const luna = get_chara_talk(17);
       await era.printAndWait(
         `${CharaTalk.me.name} 挠了挠头，看着浴室里的积水好一会，随后摊了摊手。`,
       );
@@ -235,7 +236,7 @@ module.exports = class extends CustomizedRecruit {
         new EventObject(17, cb_enum.recruit),
       );
     } else if (stage === event_hooks.recruit_start) {
-      const chara_17 = new CharaTalk(17);
+      const chara_17 = get_chara_talk(17);
       era.drawLine();
       await era.printAndWait(
         `这接下来的好几天，${CharaTalk.me.name} 都陷入了失魂落魄的境地。`,
@@ -277,6 +278,7 @@ module.exports = class extends CustomizedRecruit {
         color: chara_17.color,
         fontSize: '3rem',
         fontWeight: 'bold',
+        isParagraph: true,
       });
       await era.printAndWait(
         `${CharaTalk.me.name} 颓然地坐在地上，由于没能及时打扫浴室，${CharaTalk.me.name} 刚买的裤子已经被积水浸透了。`,
