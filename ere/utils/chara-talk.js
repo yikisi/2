@@ -10,7 +10,6 @@ class CharaTalk {
 
   /** @type {number} */
   id;
-  _color;
 
   /**
    * 输出一句路人的台词
@@ -70,7 +69,12 @@ class CharaTalk {
 
   /** @returns {string} */
   get name() {
-    return era.get(`callname:${this.id}:-2`);
+    return this._name || era.get(`callname:${this.id}:-2`);
+  }
+
+  /** @param {string} v */
+  set name(v) {
+    this._name = v;
   }
 
   /**

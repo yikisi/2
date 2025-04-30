@@ -1,3 +1,7 @@
+/**
+ * @file 目白麦昆 - 招募
+ * @author 伊兰
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');

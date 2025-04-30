@@ -1,3 +1,7 @@
+/**
+ * @file 目白麦昆 - 爱慕
+ * @author 伊兰
+ */
 const era = require('#/era-electron');
 
 const {

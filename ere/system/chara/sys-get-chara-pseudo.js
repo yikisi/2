@@ -4,9 +4,9 @@ const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sort_list } = require('#/utils/list-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const CharaSkills = require('#/data/chara-skills');
 const { get_trainer_level } = require('#/data/info-generator');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
@@ -28,7 +28,7 @@ function sys_get_chara_pseudo(chara_id) {
     uma = new PseudoUma(
       chara_id,
       era.get(`callname:${chara_id}:-1`),
-      get_chara_talk(chara_id).color,
+      get_chara_color(chara_id),
       era.get(`cflag:${chara_id}:干劲`),
       attr_names.map((attr) => era.get(`base:${chara_id}:${attr}`)),
       era.get(`cflag:${chara_id}:跑法`),

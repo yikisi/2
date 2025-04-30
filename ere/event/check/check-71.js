@@ -7,8 +7,7 @@ const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-ge
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
+const { get_chara_color } = require('#/data/chara-colors');
 const ArdanEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-71');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
@@ -43,7 +42,7 @@ module.exports = class extends CustomizedCheck {
       check_aim_race(races, race_enum.tenn_sho, 2, 1)
     ) {
       titles.push({
-        c: get_chara_talk(71).color,
+        c: get_chara_color(this.id),
         n: '不碎的玻璃',
       });
       aim_check && sys_personal_achievement.set(71, 1);

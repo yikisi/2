@@ -1,3 +1,7 @@
+/**
+ * @file 目白麦昆 - 育成
+ * @author 伊兰
+ */
 const era = require('#/era-electron');
 
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');

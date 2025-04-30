@@ -9,8 +9,7 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
+const { get_chara_color } = require('#/data/chara-colors');
 const AcuteEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-100');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -50,7 +49,7 @@ module.exports = class extends CustomizedCheck {
       era.get('base:100:根性') >= 1200
     ) {
       titles.push({
-        c: get_chara_talk(100).color,
+        c: get_chara_color(this.id),
         n: '坚韧不拔的熏银',
       });
       aim_check && sys_personal_achievement.set(100, 1);

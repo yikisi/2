@@ -95,6 +95,7 @@ module.exports = class extends CustomizedDaily {
           await sky.say_and_wait(
             '喵哈哈，真巧呢，相遇即是有缘，就自己选一个拿走吧～',
           );
+          sky.name = undefined;
           era.println();
           await era.printAndWait([
             me.get_colored_name(),

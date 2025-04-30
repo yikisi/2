@@ -11,6 +11,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -63,7 +64,7 @@ module.exports = class extends CustomizedCheck {
       titles = [];
     if (is_invisible && !new LunaEduMarks().title_check) {
       titles.push({
-        c: get_chara_talk(17).color,
+        c: get_chara_color(this.id),
         n: this.get_personal_titles()[0],
       });
       aim_check && sys_personal_achievement.set(17, 1);
