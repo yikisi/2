@@ -89,7 +89,7 @@ module.exports = (handlers) => {
         '，',
         ...sys_change_attr_and_print(aim, '体力', 2000),
       ]);
-      era.add(`base:${aim}:药物残留`, 5);
+      era.add(`base:${aim}:药物残留`, 8);
       era.add('item:强化青汁', -1);
       return true;
     }
@@ -113,7 +113,7 @@ module.exports = (handlers) => {
         ...sys_change_attr_and_print(aim, '精力', val),
       ]);
       sys_change_motivation(aim, -1) && (await era.waitAnyKey());
-      era.add(`base:${aim}:药物残留`, 5);
+      era.add(`base:${aim}:药物残留`, 8);
       era.add('item:浓缩咖啡', -1);
       return true;
     }
@@ -146,7 +146,7 @@ module.exports = (handlers) => {
       }
       era.set(`status:${aim}:沉睡`, 0);
       era.set(`status:${aim}:马跳S`, 0);
-      era.add(`base:${aim}:药物残留`, 10);
+      era.add(`base:${aim}:药物残留`, 16);
       era.add('item:提神剂', -1);
       return true;
     }
@@ -162,7 +162,7 @@ module.exports = (handlers) => {
       await era.printAndWait([aim_chara.get_colored_name(), ' 的压力降低了……']);
       sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add(`base:${aim}:压力`, -2500);
-      era.add(`base:${aim}:药物残留`, 40);
+      era.add(`base:${aim}:药物残留`, 50);
       era.add('item:抗抑郁药', -1);
       return true;
     }
@@ -178,7 +178,7 @@ module.exports = (handlers) => {
       await era.printAndWait([aim_chara.get_colored_name(), ' 的性欲降低了……']);
       sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add(`base:${aim}:性欲`, -1500);
-      era.add(`base:${aim}:药物残留`, 40);
+      era.add(`base:${aim}:药物残留`, 50);
       era.add('item:镇静剂', -1);
       return true;
     }
@@ -228,7 +228,7 @@ module.exports = (handlers) => {
       ]);
       era.set(`status:${ret}:发胖`, 0);
       era.set(`base:${ret}:体重偏差`, 3200);
-      era.add(`base:${ret}:药物残留`, 50);
+      era.add(`base:${ret}:药物残留`, 60);
       era.add('item:速效减肥药', -1);
       return true;
     }
@@ -253,7 +253,7 @@ module.exports = (handlers) => {
             0.8,
         ),
       );
-      era.add(`base:${ret}:体重偏差`, 2000);
+      era.add(`base:${ret}:体重偏差`, 2400);
       era.add('item:头痛飞飞', -1);
       return true;
     }
@@ -296,7 +296,7 @@ module.exports = (handlers) => {
         ' 的好感开始消散……',
       ]);
       era.set(`status:${ret}:讨厌药`, 4);
-      era.add(`base:${ret}:药物残留`, 40);
+      era.add(`base:${ret}:药物残留`, 50);
       era.add('item:讨厌药', -1);
       return true;
     }
@@ -338,7 +338,7 @@ module.exports = (handlers) => {
         era.get('flag:当前回合数') + 4,
       );
       era.set(`love:${aim}`, 40);
-      era.add(`base:${aim}:药物残留`, 40);
+      era.add(`base:${aim}:药物残留`, 50);
       era.add('item:抑制药', -1);
       return true;
     }

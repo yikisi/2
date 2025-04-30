@@ -123,18 +123,18 @@ async function reset_status(
       race = era.get(`cflag:${chara_id}:种族`);
     let drug_delta = era.add(
       `base:${chara_id}:药物残留`,
-      ((15 * era.get(`status:${chara_id}:马跳Z`) +
-        25 * era.get(`status:${chara_id}:马跳S`) +
+      ((20 * era.get(`status:${chara_id}:马跳Z`) +
+        40 * era.get(`status:${chara_id}:马跳S`) +
         80 * era.get(`status:${chara_id}:超马跳Z`) +
-        25 * era.get(`status:${chara_id}:弗隆K`) +
-        30 * era.get(`status:${chara_id}:弗隆P`) +
-        16 * (era.get(`status:${chara_id}:长效避孕药`) > 0) +
-        15 * (era.get(`status:${chara_id}:短效避孕药`) > 0) +
-        10 * (era.get(`talent:${chara_id}:泌乳`) === 2)) *
+        40 * era.get(`status:${chara_id}:弗隆K`) +
+        50 * era.get(`status:${chara_id}:弗隆P`) +
+        26 * (era.get(`status:${chara_id}:长效避孕药`) > 0) +
+        25 * (era.get(`status:${chara_id}:短效避孕药`) > 0) +
+        16 * (era.get(`talent:${chara_id}:泌乳`) === 2)) *
         (10 - 2 * health_buff)) /
         10 -
         (5 + health_talent + health_buff) *
-          (1 + race + era.get(`status:${chara_id}:健康茶`)),
+          (1 + race + (era.get(`status:${chara_id}:健康茶`) > 0)),
     );
     if (
       !era.get(`status:${chara_id}:偏头痛`) &&

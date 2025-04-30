@@ -62,7 +62,7 @@ module.exports = (handlers) => {
           temp = 0.25;
           era.set(`status:${extra_flag.user}:马跳Z`, 1);
         } else {
-          era.add(`base:${extra_flag.user}:药物残留`, 15);
+          era.add(`base:${extra_flag.user}:药物残留`, get_random_value(20, 30));
         }
         era.add(
           `nowex:${extra_flag.user}:体力消耗`,
