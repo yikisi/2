@@ -68,7 +68,10 @@ module.exports = {
     }
     const teach_chara = era.get(`cflag:${chara.id}:照看`);
     if (teach_chara > 0) {
-      if (era.get(`cflag:${chara.id}:可再次育成`) > 0) {
+      if (
+        !era.get(`cflag:${chara.id}:种族`) ||
+        era.get(`cflag:${chara.id}:可再次育成`) > 0
+      ) {
         relation_info_list.push({
           content: [
             '照看 ',

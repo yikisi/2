@@ -246,12 +246,21 @@ module.exports = {
           attr,
         ),
       );
-      ret.attr && (changes.attr_change[attr] += ret.attr);
-      ret.stamina && (train_cost.stamina += ret.stamina);
-      ret.relation_change && (relation_change += ret.relation_change);
-      ret.pt_change && (changes.pt_change += ret.pt_change);
-      !id &&
-        (changes.attr_change[attr_enum.intelligence] += get_random_value(1, 2));
+      if (ret.attr !== 0) {
+        changes.attr_change[attr] += ret.attr;
+      }
+      if (ret.stamina !== 0) {
+        train_cost.stamina += ret.stamina;
+      }
+      if (ret.relation_change !== 0) {
+        relation_change += ret.relation_change;
+      }
+      if (ret.pt_change !== 0) {
+        changes.pt_change += ret.pt_change;
+      }
+      if (!id) {
+        changes.attr_change[attr_enum.intelligence] += get_random_value(1, 2);
+      }
 
       relation_change += 2;
 

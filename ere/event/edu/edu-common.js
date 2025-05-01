@@ -188,10 +188,7 @@ class CustomizedEdu extends ICustomizedEdu {
     }
   }
 
-  /**
-   * @param {CharaTalk} chara
-   * @returns {{content:string}}
-   */
+  /** @param {CharaTalk} chara */
   static get_chara_name(chara) {
     const name = chara.get_colored_name();
     if (chara.id === 0) {
