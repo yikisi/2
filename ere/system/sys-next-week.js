@@ -17,7 +17,10 @@ const {
   sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+const {
+  sys_check_awake,
+  sys_check_remote,
+} = require('#/system/sys-calc-chara-param');
 const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const filter_chara = require('#/system/sys-filter-chara');
 const { reset_chara } = require('#/system/sys-init-chara');
@@ -361,8 +364,9 @@ async function sys_next_week() {
       );
       const life_marks = LifeEventMarks.get_marks(chara_id);
       if (
-        life_marks.report &&
-        (era.get(`mark:${chara_id}:淫纹`) === 3 || timer >= 4)
+        life_marks.report > 0 &&
+        (era.get(`mark:${chara_id}:淫纹`) === 3 || timer >= 4) &&
+        !sys_check_remote(chara_id)
       ) {
         sys_change_pressure(
           chara_id,

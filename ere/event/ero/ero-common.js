@@ -110,11 +110,73 @@ class CustomizedEro {
   async ero_start(handle_ero_act) {}
 
   /**
+   * 睡奸惊醒
+   * @param {number} supporter
+   */
+  // eslint-disable-next-line no-unused-vars
+  async raping_start(supporter) {}
+
+  /**
    * 调教结束
    * @param {function(number,boolean[],boolean=):Promise<boolean>} handle_ero_act
    */
   // eslint-disable-next-line no-unused-vars
   async ero_end(handle_ero_act) {}
+
+  /**
+   * 加入3P
+   * @param {number} lover 主要床伴
+   * @returns {Promise<boolean>} 是否同意
+   */
+  // eslint-disable-next-line no-unused-vars
+  async join_3p(lover) {
+    const chara = get_chara_talk(this.id);
+    era.print([chara.get_colored_name(), ' 面色绯红地想要加入……接受吗？']);
+    era.printButton('「你来的正是时候」', 1);
+    era.printButton('还是别了……', 2);
+    return (await era.input()) === 1;
+  }
+
+  /**
+   * 加入3P同意
+   * @param {number} lover 主要床伴
+   */
+  // eslint-disable-next-line no-unused-vars
+  async join_3p_accept(lover) {
+    await era.printAndWait([
+      get_chara_talk(this.id).get_colored_name(),
+      ' 扑入 ',
+      get_chara_talk(0).get_colored_name(),
+      ' 怀中……',
+    ]);
+  }
+
+  /**
+   * 强行加入3P
+   * @param {number} lover 主要床伴
+   */
+  async join_3p_force(lover) {
+    await era.printAndWait([
+      get_chara_talk(this.id).get_colored_name(),
+      ' 征得 ',
+      get_chara_talk(lover).get_colored_name(),
+      ' 的同意后，华丽地无视了 ',
+      get_chara_talk(0).get_colored_name(),
+      ' 的抗议……',
+    ]);
+  }
+
+  /**
+   * 加入3P拒绝
+   * @param {number} lover 主要床伴
+   */
+  // eslint-disable-next-line no-unused-vars
+  async join_3p_reject(lover) {
+    await era.printAndWait([
+      get_chara_talk(this.id).get_colored_name(),
+      ' 掩面而去……',
+    ]);
+  }
 
   /**
    * 设置马娘偏好部位

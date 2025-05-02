@@ -109,6 +109,12 @@ _incoming_
 * 减少了调教时体力和精力的基础消耗
   * 现在每次调教至少消耗角色的 20%-40% 的体力和精力（从 50% 下调）
 * 上调了所有药物的药物残留上升量
+* （口上支持）增加一系列调教口上钩子
+  * CustomizedEro.raping_start：睡奸惊醒时的口上
+  * CustomizedEro.join_3p：要求加入3P时的口上（必须含有一组按钮，返回是否接受加入）
+  * CustomizedEro.join_3p_accept：玩家同意角色加入3P时的口上
+  * CustomizedEro.join_3p_force：玩家拒绝角色而角色强行加入3P时的口上
+  * CustomizedEro.join_3p_reject：玩家拒绝角色加入3P时的口上
 
 ## Fixed
 

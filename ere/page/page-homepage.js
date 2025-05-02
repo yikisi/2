@@ -1,6 +1,7 @@
 ﻿const era = require('#/era-electron');
 
 const sys_handle_escape_basement = require('#/system/basement/sys-handle-escape-basement');
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
@@ -30,6 +31,7 @@ const { common_no_action_check } = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { get_custom_edu } = require('#/event/edu/edu-factory');
+const { get_custom_ero } = require('#/event/ero/ero-factory');
 const GameGuides = require('#/event/others/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 
@@ -58,7 +60,6 @@ const { location_enum } = require('#/data/locations');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 
 let random_event,
   notes_index = 0;
@@ -130,18 +131,9 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
       : undefined;
     if (orgy !== undefined) {
       era.drawLine();
-      const chara = get_chara_talk(orgy.id);
-      era.print([chara.get_colored_name(), ' 面色绯红地想要加入……接受吗？']);
-      era.printButton('「你来的正是时候」', 1);
-      era.printButton('还是别了……', 2);
       let wait_flag = false;
-      if ((await era.input()) === 1) {
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 扑入 ',
-          get_chara_talk(0).get_colored_name(),
-          ' 怀中……',
-        ]);
+      if (await get_custom_ero(orgy.id).join_3p(lover)) {
+        await get_custom_ero(orgy.id).join_3p_accept(lover);
         init_ero(orgy.id);
         era.println();
         wait_flag =
@@ -173,16 +165,9 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
         era.set(`cflag:${orgy.id}:自主训练`, 0);
       } else if (
         orgy.check === 2 &&
-        era.get(`relation:${lover}:${chara.id}`) > 375
+        era.get(`relation:${lover}:${orgy.id}`) > 375
       ) {
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 征得 ',
-          get_chara_talk(lover).get_colored_name(),
-          ' 的同意后，华丽地无视了 ',
-          get_chara_talk(0).get_colored_name(),
-          ' 的抗议……',
-        ]);
+        await get_custom_ero(orgy.id).join_3p_force(lover);
         init_ero(orgy.id);
         era.println();
         wait_flag =
@@ -199,7 +184,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
           ) || wait_flag;
         era.set(`cflag:${orgy.id}:自主训练`, 0);
       } else {
-        await era.printAndWait([chara.get_colored_name(), ' 掩面而去……']);
+        await get_custom_ero(orgy.id).join_3p_reject(lover);
         era.println();
         wait_flag =
           sys_like_chara(
@@ -455,7 +440,7 @@ module.exports = async () => {
           },
         );
         const note = note_list[notes_index++ % note_list.length];
-        say_by_passer_by(note.title, note.content);
+        say_by_passer_by(...note);
       }
     }
 

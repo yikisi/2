@@ -339,25 +339,24 @@ class CustomizedCheck {
   /** @returns {0|1|2} */
   is_want_make_love() {
     const inmon = CharaInmon.get(this.id);
+    const love = era.get(`love:${this.id}`);
     if (
       common_no_action_check(this.id) ||
       check_want_to_escape(this.id) ||
-      inmon.on(plugin_enum.meek)
+      inmon.on(plugin_enum.meek) ||
+      love < 50
     ) {
       return 0;
     }
-    const love = era.get(`love:${this.id}`);
     let ratio = 0;
-    if (love >= 50) {
-      ratio =
-        Math.log(Math.max(6 * love - era.get(`relation:${this.id}:0`), 1)) /
-          log_600m4 +
-        Math.pow(2, era.get(`base:${this.id}:性欲`) / 1250 - 8) *
-          (0.7 + 0.1 * era.get(`mark:${this.id}:欢愉`)) +
-        0.05 * era.get(`talent:${this.id}:工口意愿`) -
-        0.5 * get_action_debuff(this.id);
-      ratio *= (3 - era.get(`mark:${this.id}:反抗`)) / 3;
-    }
+    ratio =
+      Math.log(Math.max(6 * love - era.get(`relation:${this.id}:0`), 1)) /
+        log_600m4 +
+      Math.pow(2, era.get(`base:${this.id}:性欲`) / 1250 - 8) *
+        (0.7 + 0.1 * era.get(`mark:${this.id}:欢愉`)) +
+      0.05 * era.get(`talent:${this.id}:工口意愿`) -
+      0.5 * get_action_debuff(this.id);
+    ratio *= (3 - era.get(`mark:${this.id}:反抗`)) / 3;
     const dice = Math.random();
     era.logger.debug(
       `角色 ${this.id} 求爱：${(ratio * 100).toFixed(2)}%；掷骰：${dice} 计算：${

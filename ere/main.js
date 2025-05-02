@@ -474,8 +474,8 @@ module.exports = async () => {
         era.drawLine();
         for (const note of notes.common
           .filter(() => true)
-          .sort((a, b) => (a.title > b.title ? 1 : -1))) {
-          say_by_passer_by(note.title, note.content);
+          .sort((a, b) => (a[0] > b[0] ? 1 : -1))) {
+          say_by_passer_by(...note);
         }
         await era.waitAnyKey();
         for (const id of Object.keys(notes)
@@ -484,12 +484,7 @@ module.exports = async () => {
           .sort((a, b) => a - b)) {
           for (const note of notes[id]) {
             era.print(
-              [
-                { content: note.title, fontWeight: 'bold' },
-                '「',
-                note.content,
-                '」',
-              ],
+              [{ content: note[0], fontWeight: 'bold' }, '「', note[1], '」'],
               { color: get_chara_color(Number(id)) },
             );
           }
