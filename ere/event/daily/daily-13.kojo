@@ -222,7 +222,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「%麦昆称呼船%……不知道为什么自从偶然的认识之后就一直缠着我。」
-  - if: era.get('cflag:13:招募状态') === 1
+  - if: era.get('cflag:63:招募状态') === 1
     random: true
     lines:
       - color: %代表色%

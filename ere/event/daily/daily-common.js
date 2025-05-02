@@ -23,6 +23,7 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { get_custom_check } = require('#/event/check/check-factory');
 const common_celebration = require('#/event/daily/common-lines/common-celebration');
 const common_out_shopping = require('#/event/daily/common-lines/out-shopping');
+const kojo = require('#/event/daily/daily-common.kojo');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
@@ -33,6 +34,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors, money_color } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_name } = require('#/data/locations');
@@ -42,6 +44,22 @@ const money_list = [0, 1500, 5000, 10000];
 class CustomizedDaily {
   constructor(chara_id) {
     this.id = chara_id;
+  }
+
+  get dict() {
+    const dict = {};
+    dict['角色名'] = era.get(`callname:${this.id}:-2`);
+    dict['代表色'] = get_chara_color(this.id);
+    dict['玩家名'] = era.get('callname:0:-2');
+    dict.id = this.id;
+    if (era.get(`cflag:${this.id}:性别`) === 1) {
+      dict['马娘'] = '马郎';
+      dict['她'] = '他';
+    } else {
+      dict['马娘'] = '马娘';
+      dict['她'] = '她';
+    }
+    return dict;
   }
 
   get_this() {
@@ -198,23 +216,9 @@ class CustomizedDaily {
 
   /** @author 雞雞 */
   good_morning() {
-    const buffer = [
-      [' 竖起了大拇指。'],
-      [' 正在专心地阅读着什么。'],
-      [' 正在与同学们愉快地聊天。'],
-      [' 看起来吃撑了，肚子变得圆鼓鼓的。'],
-    ];
-    if (!(era.get('cflag:301:育成回合计时') < 3 * 48)) {
-      buffer.push([
-        ' 正在接待处向 ',
-        sys_get_colored_callname(0, 301),
-        ' 查询着什么。',
-      ]);
-    }
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ...get_random_entry(buffer),
-    ]);
+    const dict = this.dict;
+    dict['骏川'] = era.get('callname:301:-2');
+    kojo['回合开始'](dict);
   }
 
   /**
