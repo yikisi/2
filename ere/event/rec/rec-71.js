@@ -1,11 +1,16 @@
+/**
+ * @file 目白阿尔丹 - 招募
+ * @author 洛洛
+ */
 const era = require('#/era-electron');
+
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const kojo = require('#/event/rec/rec-71.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 module.exports = class extends CustomizedRecruit {
   async recruit() {

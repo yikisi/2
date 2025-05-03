@@ -33,6 +33,7 @@ cons_dict[56] = require('#/event/daily/daily-56');
 cons_dict[60] = require('#/event/daily/daily-60');
 cons_dict[64] = require('#/event/daily/daily-64');
 cons_dict[68] = require('#/event/daily/daily-68');
+cons_dict[71] = require('#/event/daily/daily-71');
 cons_dict[85] = require('#/event/daily/daily-85');
 cons_dict[86] = require('#/event/daily/daily-86');
 cons_dict[100] = require('#/event/daily/daily-100');
