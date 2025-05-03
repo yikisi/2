@@ -40,7 +40,7 @@ module.exports = {
       family_info_list = [],
       my_src_chara = era.get('cflag:0:模版角色') || -1;
 
-    if (chara.id) {
+    if (chara.id > 0) {
       Object.entries(era.get(`relation:${chara.id}`)).forEach((e) => {
         const mark = get_relation_mark(e[1], chara.id),
           target = Number(e[0]);

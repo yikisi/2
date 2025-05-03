@@ -9,6 +9,7 @@ const {
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const kojo = require('#/event/daily/daily-64.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
@@ -18,14 +19,15 @@ const select_action_in_station = require('#/event/daily/snippets/select-action-i
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
-const { get_custom_check } = require('#/event/check/check-factory');
 
 module.exports = class extends CustomizedDaily {
   get #dict() {
     const dict = {};
     dict['善信'] = era.get(`callname:${this.id}:-2`);
     dict['称呼'] = sys_get_callname(this.id, 0);
+    dict['代表色'] = get_chara_color(this.id);
     if (era.get(`cflag:${this.id}:性别`) === 1) {
       dict['小姐'] = '先生';
       dict['她'] = '他';

@@ -569,7 +569,6 @@ class CustomizedEdu extends ICustomizedEdu {
       extra_flag.train,
       extra_flag.fumble,
     );
-    const chara_talk = get_chara_talk(this.id);
     era.println();
     extra_flag.args = extra_flag.fumble
       ? fumble_result.fumble
@@ -577,10 +576,10 @@ class CustomizedEdu extends ICustomizedEdu {
     if (extra_flag.train !== attr_enum.intelligence) {
       await print_event_name(
         extra_flag.fumble ? '在保健室……' : '在训练室……',
-        chara_talk,
+        chara,
       );
 
-      await era.printAndWait([chara_talk.get_colored_name(), ' 训练失败了……']);
+      await era.printAndWait([chara.get_colored_name(), ' 训练失败了……']);
       era.println();
       era.print('该怎么办呢？');
       era.println();
@@ -624,32 +623,9 @@ class CustomizedEdu extends ICustomizedEdu {
       if (sys_check_remote(this.id)) {
         hook.arg = true;
       } else {
-        /** @author 雞雞 */
         await era.waitAnyKey();
-        await print_event_name('热血的追加训练！', chara);
-        if (
-          await select_yes_or_no(
-            [chara.get_colored_name(), ' 似乎意犹未尽的样子，是想自主训练吗？'],
-            '许可！',
-            '会超出计划的……',
-          )
-        ) {
-          await era.printAndWait([
-            me.get_colored_name(),
-            ' 默许了 ',
-            chara.get_colored_name(),
-            ` 的自主训练，并称赞了${chara.sex}的干劲`,
-          ]);
-          hook.arg = true;
-        } else {
-          await era.printAndWait([
-            me.get_colored_name(),
-            ' 出言禁止了 ',
-            chara.get_colored_name(),
-            ' 的自主训练，并叮嘱要好好休息',
-          ]);
-          hook.arg = false;
-        }
+        await this.additional_train(chara, me, callname, hook, extra_flag);
+        era.println();
       }
     } else if (
       extra_flag.attr !== attr_enum.intelligence &&
@@ -737,6 +713,43 @@ class CustomizedEdu extends ICustomizedEdu {
           sys_change_lust(this.id, get_random_value(500, 1500));
         }
       }
+    }
+  }
+
+  /**
+   * @author 雞雞
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param {TrainSuccessParams} extra_flag
+   * @returns {Promise}
+   */
+  // eslint-disable-next-line no-unused-vars
+  async additional_train(chara, me, callname, hook, extra_flag) {
+    await print_event_name('热血的追加训练！', chara);
+    if (
+      await select_yes_or_no(
+        [chara.get_colored_name(), ' 似乎意犹未尽的样子，是想自主训练吗？'],
+        '许可！',
+        '会超出计划的……',
+      )
+    ) {
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 默许了 ',
+        chara.get_colored_name(),
+        ` 的自主训练，并称赞了${chara.sex}的干劲`,
+      ]);
+      hook.arg = true;
+    } else {
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 出言禁止了 ',
+        chara.get_colored_name(),
+        ' 的自主训练，并叮嘱要好好休息',
+      ]);
+      hook.arg = false;
     }
   }
 

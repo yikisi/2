@@ -17,13 +17,18 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 
-aim_races[get_aim_race_index(race_enum.hako_kin, 1)] = 4;
+aim_races[get_aim_race_index(race_enum.hako_kin, 1)] = 0b11;
 
-aim_races[get_aim_race_index(race_enum.nikk_hai, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
+aim_races[get_aim_race_index(race_enum.nikk_hai, 2)] = 0b11;
+aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 0b11;
+aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 0b11;
+aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 0b11;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 0b11;
+
+aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = -1;
+aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = -1;
+aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = -1;
+aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = -1;
 
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
@@ -41,35 +46,21 @@ module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
     const races = new RaceHistory(this.id),
       ret = [];
-    if (
-      (check_aim_race(
+    const takz_kin =
+      check_aim_race(
         races.get(),
         race_enum.takz_kin,
         1,
         1,
         (e) => e.st === 0,
       ) ||
-        check_aim_race(
-          races.get(),
-          race_enum.takz_kin,
-          2,
-          1,
-          (e) => e.st === 0,
-        )) &&
-      (check_aim_race(
-        races.get(),
-        race_enum.arim_kin,
-        1,
-        1,
-        (e) => e.st === 0,
-      ) ||
-        check_aim_race(
-          races.get(),
-          race_enum.arim_kin,
-          2,
-          1,
-          (e) => e.st === 0,
-        )) &&
+      check_aim_race(races.get(), race_enum.takz_kin, 2, 1, (e) => e.st === 0);
+    const arim_kin =
+      check_aim_race(races.get(), race_enum.arim_kin, 1, 1, (e) => e.st === 0) +
+      +check_aim_race(races.get(), race_enum.arim_kin, 2, 1, (e) => e.st === 0);
+    if (
+      takz_kin &&
+      arim_kin > 0 &&
       era.get(`base:${this.id}:速度`) >= 1200 &&
       era.get(`base:${this.id}:耐力`) >= 1200
     ) {
@@ -78,6 +69,7 @@ module.exports = class extends CustomizedCheck {
         n: this.get_personal_titles()[0],
       });
       if (
+        arim_kin === 2 &&
         races
           .get_entries()
           .filter(
