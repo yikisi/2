@@ -147,7 +147,7 @@ module.exports = async () => {
         '无名黑奴',
       ],
     ],
-    // [[get_copyright_entry(71)], '洛洛'],
+    [[get_copyright_entry(71)], '洛洛'],
     [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
     [[get_copyright_entry(89, '地下室')], '無奈'],
     // [[get_copyright_entry(89)], '無奈'],
