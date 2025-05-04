@@ -10,6 +10,8 @@ const kojo = require('#/event/rec/rec-71.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
@@ -25,11 +27,13 @@ module.exports = class extends CustomizedRecruit {
       dict['马娘'] = '马娘';
     }
     dict['称呼'] = sys_get_callname(this.id, 0);
+    const event_marks = new EventMarks(0);
     switch (era.get(`cflag:${this.id}:招募状态`)) {
       case recruit_flags.no:
         if ((await kojo['recruit_1'](dict))[2] === 1) {
           era.set('flag:物色对象', this.id);
           era.set(`cflag:${this.id}:招募状态`, -2);
+          event_marks.add(event_hooks.recruit);
         } else {
           era.set(`cflag:${this.id}:招募状态`, -1);
         }
@@ -38,10 +42,12 @@ module.exports = class extends CustomizedRecruit {
         if ((await kojo['recruit_2'](dict))[0] === 1) {
           era.set('flag:物色对象', this.id);
           era.set(`cflag:${this.id}:招募状态`, -2);
+          event_marks.add(event_hooks.recruit);
         }
         break;
       case -2:
         await kojo['recruit_3'](dict);
+        event_marks.sub(event_hooks.recruit);
         era.set('flag:物色对象', 0);
         era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
         await this.recruit_end();

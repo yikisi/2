@@ -12,10 +12,12 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const ArdanLifeMarks = require('#/data/event/life-event-marks/life-event-marks-71');
 
 module.exports = class extends CustomizedDaily {
   get #dict() {
@@ -25,8 +27,10 @@ module.exports = class extends CustomizedDaily {
     o['称呼'] = sys_get_callname(this.id, 0);
     if (era.get(`cflag:${this.id}:性别`) === 1) {
       o['她'] = '他';
+      o['马娘'] = '马郎';
     } else {
       o['她'] = '她';
+      o['马娘'] = '马娘';
     }
     return o;
   }
@@ -141,5 +145,44 @@ module.exports = class extends CustomizedDaily {
 
   async office_game() {
     await kojo['一起打游戏机'](this.#dict);
+  }
+
+  async celebration() {
+    let name;
+    switch (era.get('flag:当前回合数') % 48) {
+      case 1:
+        name = '新年';
+        break;
+      case 6:
+        name = '情人节';
+        break;
+      case 14:
+        name = '粉丝感谢祭';
+        break;
+      case 30:
+        name = '庙会';
+        break;
+      case 40:
+        name = '万圣节';
+        break;
+      case 0:
+        name = '圣诞节';
+    }
+    if (!name) {
+      return await super.celebration();
+    }
+    await print_event_name(name, get_chara_talk(this.id));
+    await kojo[name](this.#dict);
+  }
+
+  async birthday() {
+    await print_event_name('生日', get_chara_talk(this.id));
+    const life_marks = new ArdanLifeMarks();
+    if (era.get(`love:${this.id}`) >= 90 && !life_marks.birthday) {
+      life_marks.birthday = 1;
+      await kojo['特殊生日'](this.#dict);
+    } else {
+      await kojo['普通生日'](this.#dict);
+    }
   }
 };
