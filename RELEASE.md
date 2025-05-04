@@ -115,6 +115,9 @@ _incoming_
   * CustomizedEro.join_3p_accept：玩家同意角色加入3P时的口上
   * CustomizedEro.join_3p_force：玩家拒绝角色而角色强行加入3P时的口上
   * CustomizedEro.join_3p_reject：玩家拒绝角色加入3P时的口上
+* （口上支持）增加一个日常口上钩子
+  * CustomizedDaily.birthday：祝贺生日时的口上
+    * 生日算作一种独立的节日，具有更高的好感和压力值消除奖励，同时也会和节日一样消耗递增并在高爱慕忽略时受到好感惩罚
 
 ## Fixed
 

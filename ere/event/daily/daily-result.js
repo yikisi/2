@@ -405,6 +405,15 @@ handlers[event_hooks.celebration] = async (chara_id) => {
   }
 };
 
+handlers[event_hooks.birthday] = async (chara_id) => {
+  era.set(`status:${chara_id}:生日`, 1);
+  era.println();
+  sys_change_pressure(chara_id, -get_random_value(750, 1250));
+  if (sys_like_chara(chara_id, 0, get_random_value(50, 100))) {
+    await era.waitAnyKey();
+  }
+};
+
 /**
  * @param {number} chara_id
  * @param {HookArg} hook
