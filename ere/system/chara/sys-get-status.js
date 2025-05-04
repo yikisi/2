@@ -52,12 +52,13 @@ function sys_get_status(id) {
     status_list.push(obj);
   }
   status_list.push(...get_custom_mec(id).get_status(show_train_buff));
-  era.get(`status:${id}:生日`) &&
+  if (era.get(`status:${id}:生日`) > 0) {
     status_list.push({
       color: buff_colors[1],
       content: '生日！',
       title: status_desc['生日'],
     });
+  }
   era.get(`status:${id}:领域`) &&
     status_list.push({
       color: buff_colors[1],

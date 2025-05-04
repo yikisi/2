@@ -94,6 +94,8 @@ const event_hooks = {
   week_end: 0,
   // 回合开始
   week_start: 0,
+  // 生日
+  birthday: 0,
 };
 Object.keys(event_hooks).forEach((k, i) => (event_hooks[k] = i));
 

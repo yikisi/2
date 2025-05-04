@@ -144,7 +144,6 @@ class MejiroEvents {
     this.me = me;
     this.dict['你'] = me.name;
     this.dict['担当'] = chara.name;
-    this.dict['你们'] = me.get_couple_title();
     this.dict['她'] = chara.sex;
   }
 
