@@ -124,7 +124,7 @@ module.exports = class extends CustomizedRecruit {
       mcqueen = get_chara_talk(13),
       daiya = get_chara_talk(67),
       kita = get_chara_talk(68);
-    const event_marks = new EventMarks(0);
+    const event_marks = EventMarks.get(0);
     const event_object = new EventObject(67, cb_enum.recruit);
     let ret;
     if (stage === event_hooks.recruit) {

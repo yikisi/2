@@ -1,4 +1,4 @@
-﻿const era = require('#/era-electron');
+const era = require('#/era-electron');
 
 const get_status = require('#/system/chara/sys-get-status');
 const { sys_check_train_enabled } = require('#/system/sys-calc-chara-param');
@@ -323,7 +323,7 @@ async function select_target(type, page) {
           titles = new CharaTitles(chara_id),
           title = titles.get_colored_curr_title(true),
           event_counts =
-            type === undefined ? new EventMarks(chara_id).count() : 0;
+            type === undefined ? EventMarks.get(chara_id).count() : 0;
         buffer.push({
           accelerator: chara_id,
           config: {

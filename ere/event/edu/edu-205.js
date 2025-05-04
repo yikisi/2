@@ -291,7 +291,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(`为什么自己是 ${vp.name} 的训练员呢？`);
       await era.printAndWait(`${me.name} 不清楚该怎么走下去。`);
       new TreveEduMarks().tea = 0;
-      new EventMarks(0).sub(event_hooks.out_start);
+      EventMarks.get(0).sub(event_hooks.out_start);
       return true;
     }
   }

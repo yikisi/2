@@ -41,7 +41,7 @@ module.exports = async function (chara_id, save_and_next_week, flags) {
   const celebration = get_celebration(),
     celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1),
     cur_weeks = era.get('flag:当前回合数'),
-    event_marks = new EventMarks(chara_id),
+    event_marks = EventMarks.get(chara_id),
     growth_stage = era.get(`cflag:${chara_id}:成长阶段`),
     not_in_same_loc =
       era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置'),

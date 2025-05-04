@@ -87,7 +87,7 @@ module.exports = class extends CustomizedCheck {
             break;
           case 95 + 26:
             if (new TreveEduMarks().tea) {
-              new EventMarks(0).sub(event_hooks.out_start);
+              EventMarks.get(0).sub(event_hooks.out_start);
             }
             era.set('cflag:205:招募状态', recruit_flags.yes);
             if (!era.get('flag:当前互动角色')) {

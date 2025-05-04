@@ -53,7 +53,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
     celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1),
     cur_location = era.get('flag:当前位置'),
     cur_weeks = era.get('flag:当前回合数'),
-    event_marks = new EventMarks(chara_id),
+    event_marks = EventMarks.get(chara_id),
     registered_race = sys_reg_race(chara_id).curr,
     personal_action = get_custom_check(chara_id).get_personal_action(),
     player_base = {

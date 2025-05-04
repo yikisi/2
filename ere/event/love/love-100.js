@@ -43,7 +43,7 @@ module.exports = class extends CustomizedLove {
         ' 的话，就去中庭的枯树洞看看呢？',
       ]);
       add_event(event_hooks.school_atrium, event_object);
-      new EventMarks(0).add(event_hooks.school_atrium);
+      EventMarks.get(0).add(event_hooks.school_atrium);
     } else if (stage === event_hooks.school_atrium) {
       const cur_chara = era.get('flag:当前互动角色');
       if (cur_chara > 0 && cur_chara !== this.id) {
@@ -60,7 +60,7 @@ module.exports = class extends CustomizedLove {
         add_event(stage, event_object);
         return;
       }
-      new EventMarks(0).sub(event_hooks.school_atrium);
+      EventMarks.get(0).sub(event_hooks.school_atrium);
       await era.printAndWait('训练的闲余，一个人来到了中庭。');
       await era.printAndWait([
         '看到了 ',
@@ -667,7 +667,7 @@ module.exports = class extends CustomizedLove {
         me.get_colored_name(),
         ' 的到来。',
       ]);
-      new EventMarks(0).add(event_hooks.school_rooftop);
+      EventMarks.get(0).add(event_hooks.school_rooftop);
       add_event(event_hooks.school_rooftop, event_object);
     } else if (stage === event_hooks.school_rooftop) {
       const cur_chara = era.get('flag:当前互动角色');
@@ -681,7 +681,7 @@ module.exports = class extends CustomizedLove {
         ]);
         add_event(stage, event_object);
       }
-      new EventMarks(0).sub(event_hooks.school_rooftop);
+      EventMarks.get(0).sub(event_hooks.school_rooftop);
       await era.printAndWait('天边一声轰鸣，铁鸟留下了橘红色的飞行机云。');
       await era.printAndWait(
         '黄昏那耀眼的光辉即将落幕，而那之后是漆黑而幽明的月夜。',

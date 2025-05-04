@@ -69,7 +69,7 @@ module.exports = class extends CustomizedCheck {
         'black_treasure',
         event_hooks.out_shopping,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.out_shopping),
+        () => EventMarks.get(0).add(event_hooks.out_shopping),
       );
 
       let temp;

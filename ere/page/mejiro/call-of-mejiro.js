@@ -148,7 +148,7 @@ class CallOfMejiro extends MejiroCity {
     if (era.get('item:「恩宠」') === 0 || (this.called > 0 && this.san === 0)) {
       await era.printAndWait('……然后迷雾吞没了你们……');
       if (this.called > 0) {
-        new EventMarks(this.called).sub(event_hooks.out_mejiro);
+        EventMarks.get(this.called).sub(event_hooks.out_mejiro);
         this.called = 0;
       }
       await this.misty(chara, me);
@@ -491,7 +491,7 @@ class CallOfMejiro extends MejiroCity {
         get_chara_talk(this.called).get_colored_name(),
         ' 从耳边的低语中听到了麦吉罗的呼唤……',
       ]);
-      new EventMarks(this.called).add(event_hooks.out_mejiro);
+      EventMarks.get(this.called).add(event_hooks.out_mejiro);
     }
   }
 }

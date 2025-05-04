@@ -67,7 +67,7 @@ async function out_page() {
   print_chara_info(chara_id, chara_info_type.out, tokino_check && 301);
   era.drawLine();
   if (!(await sys_get_random_event(event_hooks.out_start)())) {
-    const event_marks = new EventMarks(chara_id);
+    const event_marks = EventMarks.get(chara_id);
     let positions = MejiroCity.instance().get_positions(
       chara_id,
       player_base,
@@ -158,7 +158,7 @@ async function out_page() {
                     ],
                     type: 'text',
                   },
-                  ...get_position_buttons(positions, new EventMarks(301)),
+                  ...get_position_buttons(positions, EventMarks.get(301)),
                   { accelerator: 999, content: '还是回去吧……', type: 'button' },
                 ]);
                 const aim = await era.input();

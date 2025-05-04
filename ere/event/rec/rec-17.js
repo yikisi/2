@@ -230,7 +230,7 @@ module.exports = class extends CustomizedRecruit {
       await era.printAndWait(
         `${CharaTalk.me.name} 分明清楚，${luna.sex}也认出了你。`,
       );
-      new EventMarks(0).add(event_hooks.recruit_start);
+      EventMarks.get(0).add(event_hooks.recruit_start);
       add_event(
         event_hooks.recruit_start,
         new EventObject(17, cb_enum.recruit),
@@ -307,7 +307,7 @@ module.exports = class extends CustomizedRecruit {
       era.set('status:9017:皇帝', 1);
       era.set('status:9017:心术', 1);
       era.set('cflag:17:招募状态', recruit_flags.yes);
-      new EventMarks(0).sub(event_hooks.recruit_start);
+      EventMarks.get(0).sub(event_hooks.recruit_start);
     }
     return true;
   }
