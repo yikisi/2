@@ -270,7 +270,7 @@ module.exports = async () => {
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
             content: [
-              `版本号：v${version} (kuuga)`,
+              `版本号：v${version} (agito)`,
               { isBr: true },
               '雞雞',
               { isDivider: true },
