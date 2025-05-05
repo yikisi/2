@@ -6,12 +6,14 @@ const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
+const { add_event, cb_enum } = require('#/event/queue');
 const kojo = require('#/event/rec/rec-71.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
+const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
@@ -51,6 +53,10 @@ module.exports = class extends CustomizedRecruit {
         era.set('flag:物色对象', 0);
         era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
         await this.recruit_end();
+        add_event(
+          event_hooks.week_start,
+          new EventObject(this.id, cb_enum.edu).set_arg('beginning'),
+        );
     }
     return true;
   }

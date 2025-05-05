@@ -18,14 +18,16 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
 const aim_races = {};
-aim_races[race_enum.begin_race] = 4;
-aim_races[get_aim_race_index(race_enum.aoba_sho, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.sank_hai, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.main_oka, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 4;
+aim_races[race_enum.begin_race] = 0b11;
+aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = -1;
+aim_races[get_aim_race_index(race_enum.aoba_sho, 1)] = 0b11;
+aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = 0b11;
+aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = -1;
+aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 0b11;
+aim_races[get_aim_race_index(race_enum.sank_hai, 2)] = 0b11;
+aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 0b11;
+aim_races[get_aim_race_index(race_enum.main_oka, 2)] = 0b11;
+aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 0b11;
 
 module.exports = class extends CustomizedCheck {
   check_after_race() {
