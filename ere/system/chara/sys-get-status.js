@@ -283,7 +283,7 @@ function sys_get_status(id) {
   if (era.get(`status:${id}:讨厌药`)) {
     status_list.push({ color: sex_colors[0], content: '讨厌药' });
   }
-  if (!new LoveLimitStatus(id).is_empty()) {
+  if (!LoveLimitStatus.get(id).is_empty()) {
     status_list.push({ color: sex_colors[0], content: '抑制药' });
   }
   if (

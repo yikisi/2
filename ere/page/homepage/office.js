@@ -46,15 +46,15 @@ const {
   get_custom_daily,
   run_custom_daily,
 } = require('#/event/daily/daily-factory');
-const GameGuides = require('#/event/others/game-guides');
+const game_guides = require('#/event/others/game-guides');
 const { shop_end, shop_start } = require('#/event/shop/tachyon-shop');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const BasementOwners = require('#/data/event/basement-owners');
+const basement_owners = require('#/data/event/basement-owners');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
-const LocCharacters = require('#/data/event/loc-characters');
+const loc_characters = require('#/data/event/loc-characters');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { pressure_border } = require('#/data/train-const');
@@ -91,7 +91,6 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             time: era.get(`base:${chara_id}:精力`),
           }
         : undefined,
-    loc_chara = new LocCharacters(),
     train_enabled = sys_check_train_enabled(chara_id);
   const chara = get_chara_talk(chara_id);
   /** @type {{[acc],[config]:Record<string,any>,content:string,h:function():Promise}[][]} */
@@ -442,7 +441,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
     if (
       chara_id > 0 &&
       !common_no_action_check(chara_id) &&
-      new BasementOwners().is_empty() &&
+      basement_owners.is_empty() &&
       era.get('flag:惩戒力度') >= 2 &&
       !era.get(`status:${chara_id}:伤病`) &&
       era.get(`base:${chara_id}:压力`) < pressure_border.depression
@@ -453,7 +452,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         },
         content: '乞求狂爱',
         async h() {
-          new BasementOwners().push(chara_id);
+          basement_owners.push(chara_id);
           await era.printAndWait([
             { content: '听了 ' },
             get_chara_talk(0).get_colored_name(),
@@ -504,12 +503,12 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
               sys_get_move_cost(location_enum.trainer),
               player_base,
             ) > 0 ||
-            loc_chara.get(location_enum.trainer).length === 0,
+            loc_characters.get(location_enum.trainer).length === 0,
         },
         content: '前往训练员办公室',
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.trainer));
-          if (!(await new GameGuides().school_trainer_office())) {
+          if (!(await game_guides.school_trainer_office())) {
             await page_trainer_office();
           }
         },
@@ -529,13 +528,13 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
               sys_get_move_cost(location_enum.clinic),
               player_base,
             ) > 0 ||
-            loc_chara.get(location_enum.clinic).length === 0,
+            loc_characters.get(location_enum.clinic).length === 0,
         },
         content: '前往保健室',
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.clinic));
           if (
-            !(await new GameGuides().school_clinic()) &&
+            !(await game_guides.school_clinic()) &&
             !(await sys_get_random_event(event_hooks.school_clinic)())
           ) {
             await page_clinic();
@@ -569,7 +568,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             chara_id,
           );
           if (
-            !(await new GameGuides().school_god()) &&
+            !(await game_guides.school_god()) &&
             !(await sys_get_random_event(event_hooks.school_god)())
           ) {
             if (
@@ -613,7 +612,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             sys_get_move_cost(location_enum.atrium, chara_id),
             chara_id,
           );
-          if (!(await new GameGuides().school_atrium())) {
+          if (!(await game_guides.school_atrium())) {
             await print_school_page(location_enum.atrium);
           }
         },
@@ -644,7 +643,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             sys_get_move_cost(location_enum.rooftop, chara_id),
             chara_id,
           );
-          if (!(await new GameGuides().school_rooftop())) {
+          if (!(await game_guides.school_rooftop())) {
             await print_school_page(location_enum.rooftop);
           }
         },
@@ -662,13 +661,13 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
               sys_get_move_cost(location_enum.chairman),
               player_base,
             ) > 0 ||
-            loc_chara.get(location_enum.chairman).length === 0,
+            loc_characters.get(location_enum.chairman).length === 0,
         },
         content: '前往理事长办公室',
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.chairman));
           if (
-            !(await new GameGuides().school_chairman()) &&
+            !(await game_guides.school_chairman()) &&
             !(await sys_get_random_event(event_hooks.school_chairman)())
           ) {
             await page_chairman_office();
@@ -688,13 +687,13 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
               sys_get_move_cost(location_enum.visitor),
               player_base,
             ) > 0 ||
-            (loc_chara.get(location_enum.visitor).length === 0 &&
+            (loc_characters.get(location_enum.visitor).length === 0 &&
               !my_event_marks.check(event_hooks.school_visitors)),
         },
         content: '前往访客接待室',
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.visitor));
-          if (!(await new GameGuides().school_visitors())) {
+          if (!(await game_guides.school_visitors())) {
             await page_visitors();
           }
         },

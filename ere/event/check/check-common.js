@@ -22,7 +22,7 @@ const { attr_change_colors } = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
-const CrazyFans = require('#/data/event/crazy-fans');
+const crazy_fans = require('#/data/event/crazy-fans');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { location_enum } = require('#/data/locations');
@@ -78,7 +78,7 @@ class CustomizedCheck {
     const ret = [];
     if (
       era.get(`cflag:${this.id}:模版角色`) === -1 &&
-      new RaceHistory(this.id)
+      RaceHistory.get(this.id)
         .get_values()
         .filter(
           (e) =>
@@ -128,23 +128,25 @@ class CustomizedCheck {
   /** @returns {{check:number,color:string,content:string}[]} */
   check_palace_and_get_aims() {
     if (era.get(`relation:${this.id}:0`) <= 0) {
-      new CrazyFans().push(this.id);
+      crazy_fans.push(this.id);
     } else {
       let g1_count = 0,
         g2_count = 0,
         other_count = 0;
-      new RaceHistory(this.id).get_values().forEach((e) => {
-        const info = race_infos[e.race];
-        if (info.race_class === RaceInfo.class_enum.G1) {
-          g1_count += e.rank <= 5;
-        } else if (info.race_class === RaceInfo.class_enum.G2) {
-          g2_count += e.rank <= 3;
-        } else if (e.race !== race_enum.begin_race) {
-          other_count += e.rank === 1;
-        }
-      });
+      RaceHistory.get(this.id)
+        .get_values()
+        .forEach((e) => {
+          const info = race_infos[e.race];
+          if (info.race_class === RaceInfo.class_enum.G1) {
+            g1_count += e.rank <= 5;
+          } else if (info.race_class === RaceInfo.class_enum.G2) {
+            g2_count += e.rank <= 3;
+          } else if (e.race !== race_enum.begin_race) {
+            other_count += e.rank === 1;
+          }
+        });
       if (!g1_count && g2_count < 3 && other_count < 5) {
-        new CrazyFans().push(this.id);
+        crazy_fans.push(this.id);
       }
     }
     return this.get_edu_aims();
@@ -160,7 +162,7 @@ class CustomizedCheck {
   /** @returns {{check:number,color:string,content:string}[]} */
   get_edu_aims() {
     const buffer = [];
-    const races = new RaceHistory(this.id);
+    const races = RaceHistory.get(this.id);
     buffer.push(check_aim_and_get_entry(races.get(), race_enum.begin_race));
     let g1_count = 0,
       g2_count = 0,
@@ -376,7 +378,7 @@ class CustomizedCheck {
         return 1;
       }
       const great_success =
-        MejiroCity.instance().get_want_sex_buff() ||
+        MejiroCity.instance().get_want_sex_buff(this.id) ||
         (era.get(`talent:${this.id}:反抗意愿`) >= 0 &&
           (dice < 0.05 ||
             era.get('flag:惩戒力度') >= 2 ||

@@ -26,7 +26,9 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
         race_infos[e.race].track === track_enum.morioka &&
         e.rank === 1,
     ) !== -1 &&
-    new CharaTitles(29).get().findIndex((e) => e.n.endsWith('三宝冠')) !== -1,
+    CharaTitles.get(29)
+      .get()
+      .findIndex((e) => e.n.endsWith('三宝冠')) !== -1,
   aim_races,
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));

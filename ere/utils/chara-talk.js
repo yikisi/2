@@ -51,9 +51,6 @@ class CharaTalk {
    */
   constructor(id, color) {
     this.id = id;
-    if (this.name === '-') {
-      CharaTalk.init_chara(id);
-    }
     this._color = color;
   }
 

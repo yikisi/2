@@ -55,6 +55,7 @@ module.exports = {
     if (id === 0) {
       return CharaTalk.me;
     }
+    CharaTalk.init_chara(id);
     if (!color && obj_dict[id] !== undefined) {
       return obj_dict[id];
     }

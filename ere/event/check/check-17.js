@@ -51,7 +51,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(17).get(),
+    const races = RaceHistory.get(17).get(),
       is_invisible =
         check_aim_race(races, race_enum.sats_sho, 1, 1) &&
         check_aim_race(races, race_enum.toky_yus, 1, 1) &&
@@ -82,7 +82,7 @@ module.exports = class extends CustomizedCheck {
       add_event(event_hooks.week_start, edu_object);
       if (
         edu_weeks === 47 + 41 &&
-        check_aim_race(new RaceHistory(17).get(), race_enum.kiku_sho, 1, 1)
+        check_aim_race(RaceHistory.get(17).get(), race_enum.kiku_sho, 1, 1)
       ) {
         add_event(event_hooks.week_end, edu_object_spe);
       } else if (edu_weeks === 95 + 1) {
@@ -101,7 +101,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(17).get();
+      races = RaceHistory.get(17).get();
 
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.saud_cup, 0, 5));

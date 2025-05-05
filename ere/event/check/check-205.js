@@ -32,7 +32,7 @@ aim_races[get_aim_race_index(race_enum.prix_lat, 2)] = 2;
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(205).get(),
+    const races = RaceHistory.get(205).get(),
       titles = [];
     if (
       check_aim_race(races, race_enum.prix_prb, 1, 1, (e) => e.pop === 1) &&
@@ -52,7 +52,7 @@ module.exports = class extends CustomizedCheck {
   check_next_week() {
     if (era.get('cflag:205:招募状态') !== 0) {
       const edu_weeks = era.get('cflag:205:育成回合计时');
-      const race_history = new RaceHistory(205).get();
+      const race_history = RaceHistory.get(205).get();
       if (edu_weeks < 3 * 48) {
         const event_object_special = new EventObject(
           this.id,
@@ -139,7 +139,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(205);
+      races = RaceHistory.get(205);
     buffer.push(check_aim_and_get_entry(races.get(), race_enum.prix_prb, 1, 1));
     buffer.push(check_aim_and_get_entry(races.get(), race_enum.prix_dia, 1, 1));
     buffer.push(check_aim_and_get_entry(races.get(), race_enum.prix_lat, 1, 1));

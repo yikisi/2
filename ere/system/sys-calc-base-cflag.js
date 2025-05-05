@@ -12,7 +12,7 @@ const { attr_colors } = require('#/data/const.json');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const RyokaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-344');
 const recruit_flags = require('#/data/event/recruit-flags');
-const ExtraBase = require('#/data/extra-base');
+const extra_base = require('#/data/extra-base');
 const { location_enum } = require('#/data/locations');
 const {
   attr_enum,
@@ -243,7 +243,7 @@ module.exports = {
         1 << pregnant_stage_enum.resume &&
         (era.get(`cflag:${chara_id}:妊娠回合计时`) - 1) * 100);
     const { stamina: extra_stamina, time: extra_time } =
-      chara_id === 0 ? new ExtraBase() : { stamina: 0, time: 0 };
+      chara_id === 0 ? extra_base : { stamina: 0, time: 0 };
     era.set(
       `maxbase:${chara_id}:体力`,
       Math.max(

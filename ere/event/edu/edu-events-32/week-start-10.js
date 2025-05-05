@@ -245,7 +245,7 @@ module.exports = (handlers) => {
       await say_by_passer_by_and_wait('书店老板', [
         '喔！这些杂志啊，我专门摆在这里的！',
       ]);
-      if (check_aim_race(new RaceHistory(32).get(), race_enum.prix_lat, 2, 1)) {
+      if (check_aim_race(RaceHistory.get(32).get(), race_enum.prix_lat, 2, 1)) {
         await say_by_passer_by_and_wait('书店老板', [
           '好不容易啊，日本',
           tachyon.get_uma_sex_title(),

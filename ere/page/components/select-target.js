@@ -78,7 +78,7 @@ function get_suffix(chara_id, type) {
     const chara_score = get_chara_score(chara_id),
       motivation = era.get(`cflag:${chara_id}:干劲`),
       chara_level = get_rank_level(chara_score),
-      races = new RaceHistory(chara_id).get_values(),
+      races = RaceHistory.get(chara_id).get_values(),
       wins = races.filter((e) => e.rank === 1).length;
     ret.push(
       {
@@ -320,7 +320,7 @@ async function select_target(type, page) {
       const cur_list = list_team.slice((page.curr - 1) * 10, page.curr * 10);
       cur_list.forEach((chara_id) => {
         const chara = get_chara_talk(chara_id),
-          titles = new CharaTitles(chara_id),
+          titles = CharaTitles.get(chara_id),
           title = titles.get_colored_curr_title(true),
           event_counts =
             type === undefined ? EventMarks.get(chara_id).count() : 0;
@@ -567,8 +567,9 @@ async function select_target(type, page) {
                 list_team = sort_list(
                   list_team,
                   (id) =>
-                    new RaceHistory(id).get_values().filter((e) => e.rank === 1)
-                      .length *
+                    RaceHistory.get(id)
+                      .get_values()
+                      .filter((e) => e.rank === 1).length *
                       1000 *
                       new_sort +
                     id,

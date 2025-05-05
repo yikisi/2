@@ -31,9 +31,9 @@ const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
-const LocCharacters = require('#/data/event/loc-characters');
+const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { expedition_weeks } = require('#/data/move-const');
@@ -453,16 +453,15 @@ async function check_new_activities(cur_round, in_team_list) {
   } else {
     chairman = 302;
   }
-  const loc_visitors = new LocCharacters();
-  loc_visitors.set(location_enum.chairman, [chairman]);
-  loc_visitors.set(location_enum.trainer, [
+  loc_characters.set(location_enum.chairman, [chairman]);
+  loc_characters.set(location_enum.trainer, [
     sys_check_npc_working(304) ? 304 : 0,
     chairman !== 306 && sys_check_npc_working(306) ? 306 : 0,
   ]);
-  loc_visitors.set(location_enum.clinic, [
+  loc_characters.set(location_enum.clinic, [
     sys_check_npc_working(305) ? 305 : 0,
   ]);
-  loc_visitors.set(location_enum.visitor, [
+  loc_characters.set(location_enum.visitor, [
     era.get('love:303') >= 25 && sys_check_npc_working(303) ? 303 : 0,
     era.get('flag:当前回合数') > 40 &&
     (era.get('love:308') >= 25 || era.get('flag:当前回合数') % 48 === 40) &&
@@ -478,7 +477,7 @@ async function check_new_activities(cur_round, in_team_list) {
   ]);
   [204, 346, 347, 348].forEach((e) => {
     if (era.get(`cflag:${e}:招募状态`) !== 0 && sys_check_npc_working(e)) {
-      loc_visitors.get(location_enum.visitor).push(e);
+      loc_characters.get(location_enum.visitor).push(e);
     }
   });
 
@@ -491,7 +490,7 @@ async function check_new_activities(cur_round, in_team_list) {
     uaf_list.push(207, 344);
   }
 
-  loc_visitors
+  loc_characters
     .get(location_enum.visitor)
     .push(
       ...uaf_list.filter(
@@ -507,13 +506,13 @@ async function check_new_activities(cur_round, in_team_list) {
       era.get('love:345') >= 30 ||
       Math.random() < 0.5)
   ) {
-    loc_visitors.get(location_enum.visitor).push(345);
+    loc_characters.get(location_enum.visitor).push(345);
   }
-  loc_visitors.set(
+  loc_characters.set(
     location_enum.visitor,
-    sort_list(loc_visitors.get(location_enum.visitor), (e) => e, true),
+    sort_list(loc_characters.get(location_enum.visitor), (e) => e, true),
   );
-  new YandereList().set(
+  yandere_list.set(
     in_team_list.filter((e) => sys_check_yandere(e, (y) => y > 0)),
   );
 

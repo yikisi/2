@@ -224,7 +224,7 @@ async function reset_status(
       if (
         registered_race.last.week > 0 &&
         registered_race.last.week < cur_round &&
-        !new RaceHistory(chara_id).get_result(
+        !RaceHistory.get(chara_id).get_result(
           era.get(`cflag:${chara_id}:育成回合计时`) - 1,
         )
       ) {
@@ -241,7 +241,7 @@ async function reset_status(
           sys_change_pressure(chara_id, get_random_value(1000, 2000));
         let status_hate = era.get(`status:${chara_id}:讨厌药`);
         status_hate && (status_hate = era.add(`status:${chara_id}:讨厌药`, -1));
-        const status_limit = new LoveLimitStatus(chara_id);
+        const status_limit = LoveLimitStatus.get(chara_id);
         if (
           !status_limit.is_empty() &&
           cur_round > status_limit.limit &&
@@ -280,7 +280,7 @@ async function reset_status(
             sys_love_uma(
               chara_id,
               (1 - (era.get(`status:${chara_id}:讨厌药`) > 0)) *
-                (1 - !new LoveLimitStatus(chara_id).is_empty()) *
+                (1 - !LoveLimitStatus.get(chara_id).is_empty()) *
                 temp,
               false,
             );
@@ -293,8 +293,8 @@ async function reset_status(
           await era.waitAnyKey();
         } else if (edu_weeks < 3 * 48) {
           if (edu_weeks > 0 && edu_weeks % 48 === 0) {
-            const skill_control = new CharaSkills(chara_id),
-              available_control = new CharaAvailableSkills(chara_id),
+            const skill_control = CharaSkills.get(chara_id),
+              available_control = CharaAvailableSkills.get(chara_id),
               to_get = available_control.get().slice(0, 2);
             if (to_get.length === 0) {
               era.add(`exp:${chara_id}:技能点数`, 400);

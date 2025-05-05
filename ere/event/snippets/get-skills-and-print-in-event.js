@@ -15,7 +15,7 @@ const { skills_dict } = require('#/data/race/skill/skill-const');
 function get_skills_and_print_in_event(
   id,
   skills,
-  skill_control = new CharaSkills(id),
+  skill_control = CharaSkills.get(id),
   shown = true,
 ) {
   let ret_flag = false;

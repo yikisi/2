@@ -37,7 +37,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       ret = [];
     if (
       new DonnaEduMarks().title_check &&
@@ -61,7 +61,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_edu_aims() {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       ret = [];
     ret.push(check_aim_and_get_entry(races, race_enum.begin_race));
     ret.push(check_aim_and_get_entry(races, race_enum.shin_kin, 1, 5));

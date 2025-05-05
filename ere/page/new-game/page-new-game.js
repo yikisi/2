@@ -9,7 +9,7 @@ const print_set_page = require('#/page/new-game/page-setting');
 
 const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
-const GameGuides = require('#/event/others/game-guides');
+const game_guides = require('#/event/others/game-guides');
 const event_queue = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
@@ -47,7 +47,7 @@ module.exports = async (src_chara) => {
     chara_colors[0] = get_chara_color(src_chara);
     init_chara(0, src_chara);
     player_name = era.get('callname:0:-1');
-    new CharaTitles(0).push(
+    CharaTitles.get(0).push(
       ...get_custom_check(src_chara)
         .get_personal_titles()
         .map((e) => ({ c: chara_colors[0], n: e })),
@@ -55,7 +55,7 @@ module.exports = async (src_chara) => {
     (chara_skill_dict[src_chara] || []).forEach((s) =>
       get_skills_and_print_in_event(0, [s], undefined, false),
     );
-    new CharaAvailableSkills(0).clear();
+    CharaAvailableSkills.get(0).clear();
     era.set('callname:0:-2', '你');
     era.set('cflag:0:成长阶段', 5);
     era.set('cstr:0:决胜服', 0);
@@ -185,7 +185,7 @@ module.exports = async (src_chara) => {
 
           if (era.get('flag:新手教学')) {
             era.set('flag:新手教学', {});
-            new GameGuides().init();
+            game_guides.init();
           }
 
           era.set('abl:0:速度训练等级', 1);

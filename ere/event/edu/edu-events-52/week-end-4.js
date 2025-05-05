@@ -39,7 +39,7 @@ function urara_say_in_lines(urara, content) {
 module.exports = (handlers) => {
   handlers[47 + 48] = async (urara, me, in_urara, callname, edu_marks) => {
     era.set('cflag:52:节日事件标记', 0);
-    if (new RaceHistory(52).get_result(47 + 48)) {
+    if (RaceHistory.get(52).get_result(47 + 48)) {
       await in_urara.say_as_unknown_and_wait([
         '请记住我最后的，训练员',
         me.get_adult_sex_title(),

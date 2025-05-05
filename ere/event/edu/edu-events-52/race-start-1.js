@@ -331,7 +331,7 @@ module.exports = (handlers) => {
       hook.override = true;
       await print_event_name('前进的决心！', urara);
       const best_mvp = Math.min(
-        ...new RaceHistory(52)
+        ...RaceHistory.get(52)
           .get_values()
           .filter((e) => race_infos[e.race].race_class <= class_enum.G3)
           .map((e) => e.rank),
@@ -806,7 +806,7 @@ module.exports = (handlers) => {
       race_infos[race_enum.negi_sta].get_colored_name(),
       '。',
     ]);
-    const race_history = new RaceHistory(52);
+    const race_history = RaceHistory.get(52);
     if (
       race_history
         .get_values()

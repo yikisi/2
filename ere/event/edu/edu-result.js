@@ -106,7 +106,7 @@ function learn_language(chara_id, lan_name) {
     era.get(`abl:${chara_id}:英语`) === 5 &&
     era.get(`abl:${chara_id}:法语`) === 5
   ) {
-    new CharaTitles(chara_id).push({
+    CharaTitles.get(chara_id).push({
       n: 'Hello world!',
       c: buff_colors[1],
     });

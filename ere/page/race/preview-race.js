@@ -70,9 +70,14 @@ function generate_attribute_info(chara) {
  * @param {RaceInfo} info
  * @param {PseudoUma[]} team_list
  * @param {PseudoUma[]} contestants
- * @param {number} [is_grand_live]
+ * @param {boolean} [is_grand_live=false]
  */
-async function preview_race(info, team_list, contestants, is_grand_live) {
+async function preview_race(
+  info,
+  team_list,
+  contestants,
+  is_grand_live = false,
+) {
   await era.clear();
   era.drawLine();
   const race_header = [

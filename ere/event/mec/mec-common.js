@@ -147,7 +147,7 @@ class CustomizedMec {
    * @returns {string|array}
    */
   get_race_finish_report(uma, race_id) {
-    const races = new RaceHistory(this.id),
+    const races = RaceHistory.get(this.id),
       invincible = races.get_values().findIndex((e) => e.rank !== 1) === -1;
     if (race_id === race_enum.tenn_spr) {
       return '春季的长距离之王诞生！';

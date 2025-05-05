@@ -114,7 +114,7 @@ module.exports = class extends CustomizedLove {
 
   async 89(mcqueen, me, callname, stage, extra_flag, event_object) {
     const tenn_spr_check = check_aim_race(
-      new RaceHistory(this.id).get(),
+      RaceHistory.get(this.id).get(),
       race_enum.tenn_spr,
       2,
       1,

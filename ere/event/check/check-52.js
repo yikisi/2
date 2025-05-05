@@ -172,7 +172,7 @@ module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
     const c = get_chara_color(52),
       titles = [];
-    const races = new RaceHistory(52).get();
+    const races = RaceHistory.get(52).get();
     if (new UraraEduMarks().fans >= 250000) {
       titles.push({
         c,
@@ -386,7 +386,7 @@ module.exports = class extends CustomizedCheck {
       check_and_register_aim_race(52, aim_races);
     } else if (edu_weeks === 143 + 1) {
       if (
-        new RaceHistory(52).get_result(95 + 48)?.race === race_enum.arim_kin
+        RaceHistory.get(52).get_result(95 + 48)?.race === race_enum.arim_kin
       ) {
         add_event(
           event_hooks.week_start,
@@ -454,7 +454,7 @@ module.exports = class extends CustomizedCheck {
   get_edu_aims() {
     const buffer = [],
       edu_weeks = era.get('cflag:52:育成回合计时'),
-      races = new RaceHistory(52).get();
+      races = RaceHistory.get(52).get();
     let { fans, fans1, fans2, fans3 } = new UraraEduMarks();
     if (edu_weeks < 47 + 27) {
       fans1 = fans;

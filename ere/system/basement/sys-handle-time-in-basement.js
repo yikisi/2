@@ -32,7 +32,7 @@ const {
   basement_status_enum,
 } = require('#/data/basement-const');
 const BasementAction = require('#/data/event/basement-action');
-const BasementOwners = require('#/data/event/basement-owners');
+const basement_owners = require('#/data/event/basement-owners');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { location_enum } = require('#/data/locations');
@@ -85,14 +85,14 @@ function handle_prison_again(my_marks, owner_marks, owner_id, is_back) {
       my_marks.b_enhance++;
     }
     if (my_marks.b_now < 0) {
-      new BasementOwners().for_each((e) => {
+      basement_owners.for_each((e) => {
         LifeEventMarks.get_marks(e).b_escape = 0;
         sys_like_chara(e, 0, -50 - 30 * (e === owner_id), false);
         sys_change_pressure(e, get_random_value(100, 500));
       });
       my_marks.b_now = 1;
     } else {
-      new BasementOwners().for_each((e) => {
+      basement_owners.for_each((e) => {
         LifeEventMarks.get_marks(e).b_escape = 0;
         sys_like_chara(e, 0, -20 - 30 * (e === owner_id), false);
         sys_change_pressure(e, get_random_value(100, 500));
@@ -240,7 +240,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
  * @param {BasementOwners} basement_owners
  */
 async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
-  new BasementOwners().for_each((e) => {
+  basement_owners.for_each((e) => {
     const life_marks = LifeEventMarks.get_marks(e);
     if (
       life_marks.b_status === 0 ||

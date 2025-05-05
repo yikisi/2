@@ -38,7 +38,7 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 1;
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(37).get(),
+    const races = RaceHistory.get(37).get(),
       titles = [];
     if (
       (check_aim_race(races, race_enum.japa_cup, 1, 1, (e) => e.st === 2) ||
@@ -88,7 +88,7 @@ module.exports = class extends CustomizedCheck {
           break;
         case 47 + 13: // 突如之灾
           if (
-            check_aim_race(new RaceHistory(37).get(), race_enum.keis_hai, 1, 5)
+            check_aim_race(RaceHistory.get(37).get(), race_enum.keis_hai, 1, 5)
           ) {
             add_event(event_hooks.week_start, event_obj_special);
           }
@@ -133,7 +133,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(37).get();
+      races = RaceHistory.get(37).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.keis_hai, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));

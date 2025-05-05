@@ -86,7 +86,7 @@ function sys_handle_palace(chara_id) {
   }
   const titles =
     get_custom_check(chara_id).check_and_get_titles(!aim_punish_count);
-  const races = new RaceHistory(chara_id).get_entries();
+  const races = RaceHistory.get(chara_id).get_entries();
   let g1_count = 0,
     pop_g1_count = 0;
   races.forEach((e) => {
@@ -164,7 +164,7 @@ function sys_handle_palace(chara_id) {
       genes.add(200003 + i * 10);
     }
   });
-  new CharaSkills(chara_id)
+  CharaSkills.get(chara_id)
     .get()
     .filter((e) => e < 200000)
     .forEach((e) => genes.add(e + 800000));

@@ -306,7 +306,7 @@ module.exports = (handlers) => {
       callname,
       '，这天气真的好热，训练的话，能不能尽量安排在水里面或者阴凉的地方，抱歉啊。',
     ]);
-    const race_history = new RaceHistory(400).get(),
+    const race_history = RaceHistory.get(400).get(),
       crowns =
         check_aim_race(race_history, race_enum.kent_der, 1, 1) +
         check_aim_race(race_history, race_enum.prea_sta, 1, 1) +

@@ -24,9 +24,9 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
-const LocCharacters = require('#/data/event/loc-characters');
+const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
@@ -43,7 +43,7 @@ const handlers = {};
             handle() {
               set(`cflag:${e}:招募状态`, recruit_flags.yes);
               if (get(`talent:${e}:病娇`)) {
-                new YandereList().push(e);
+                yandere_list.push(e);
               }
               return printAndWait([
                 get_chara_talk(e).get_colored_name(),
@@ -62,7 +62,7 @@ handlers[207] = () =>
           set('callname:207:-2', '索侬艾尔菲');
           set('cflag:207:招募状态', recruit_flags.yes);
           if (get('talent:207:病娇')) {
-            new YandereList().push(207);
+            yandere_list.push(207);
           }
           return printAndWait([
             get_chara_talk(207).get_colored_name(),
@@ -90,7 +90,7 @@ handlers[308] = () =>
           set('callname:308:-2', '光辉致意');
           set('cflag:308:招募状态', recruit_flags.yes);
           if (get('talent:308:病娇')) {
-            new YandereList().push(308);
+            yandere_list.push(308);
           }
           return printAndWait([
             get_chara_talk(308).get_colored_name(),
@@ -109,7 +109,7 @@ handlers[343] = () =>
           set('callname:343:-2', '佐岳五月');
           set('cflag:343:招募状态', recruit_flags.yes);
           if (get('talent:343:病娇')) {
-            new YandereList().push(343);
+            yandere_list.push(343);
           }
           return printAndWait([
             get_chara_talk(343).get_colored_name(),
@@ -142,7 +142,7 @@ handlers[345] = () =>
           set('callname:345:-2', '砂糖灯');
           set('cflag:345:招募状态', recruit_flags.yes);
           if (get('talent:345:病娇')) {
-            new YandereList().push(345);
+            yandere_list.push(345);
           }
           return printAndWait([
             get_chara_talk(345).get_colored_name(),
@@ -167,8 +167,7 @@ async function page_visitors() {
     location_name[location_enum.visitor],
     '】',
   ]);
-  const loc_visitors = new LocCharacters();
-  let visitor_list = loc_visitors.get(location_enum.visitor);
+  let visitor_list = loc_characters.get(location_enum.visitor);
   if (visitor_list.length > 0) {
     const celebration = get_celebration(),
       me = get_chara_talk(0);
@@ -197,7 +196,7 @@ async function page_visitors() {
       const chara_id = await input();
       if (chara_id !== 999) {
         const chara = get_chara_talk(chara_id),
-          title = new CharaTitles(chara.id).get_curr_title();
+          title = CharaTitles.get(chara.id).get_curr_title();
         flag_visitor = true;
         while (flag_visitor) {
           const temp_flag = await npc_common(
@@ -247,7 +246,7 @@ async function page_visitors() {
     drawLine();
     await printAndWait('【没有人在的样子……折返了】');
   }
-  loc_visitors.set(location_enum.visitor, visitor_list);
+  loc_characters.set(location_enum.visitor, visitor_list);
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.visitor,
   });

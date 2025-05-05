@@ -38,7 +38,7 @@ function cur_chara_component(chara_id, type, location_npc) {
     if (location_npc) {
       const relation = get_relation_info(location_npc),
         love = get_love_info(location_npc),
-        title = new CharaTitles(location_npc).get_colored_curr_title();
+        title = CharaTitles.get(location_npc).get_colored_curr_title();
       era.printInColRows(
         [{ type: 'divider' }],
         {
@@ -103,7 +103,7 @@ function cur_chara_component(chara_id, type, location_npc) {
     const relation = get_relation_info(chara_id),
       love = get_love_info(chara_id),
       growth = era.get(`cflag:${chara_id}:成长阶段`),
-      title = new CharaTitles(chara_id).get_colored_curr_title(true),
+      title = CharaTitles.get(chara_id).get_colored_curr_title(true),
       in_train =
         growth >= 2 && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48,
       motivation = era.get(`cflag:${chara_id}:干劲`),
@@ -136,7 +136,7 @@ function cur_chara_component(chara_id, type, location_npc) {
       name_columns.push(...race_indicator(chara_id));
     }
     location_npc &&
-      (temp = new CharaTitles(location_npc).get_colored_curr_title());
+      (temp = CharaTitles.get(location_npc).get_colored_curr_title());
     era.setVerticalAlign('middle');
     const image_switch = era.get('flag:立绘类型'),
       status_list = get_status(chara_id);

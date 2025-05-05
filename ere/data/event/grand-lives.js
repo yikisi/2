@@ -1,21 +1,23 @@
 const { get, set } = require('#/era-electron');
 
 class GrandLives {
-  /** @type {Record<string,1>[]} */
-  obj;
-
-  constructor() {
-    this.obj = get('flag:大舞台') || set('flag:大舞台', [{}]);
+  /** @returns  {[Record<string,1>,Record<string,1>]} */
+  get #obj() {
+    return get('flag:大舞台') || set('flag:大舞台', [{}]);
   }
 
   /** @type {number[]} l */
   add(l) {
-    if (this.obj.length === 0) {
-      this.obj.push({});
+    const obj = this.#obj;
+    if (obj.length === 0) {
+      obj.push({});
     }
-    const new_dict = {};
-    l.forEach((race) => (new_dict[race] = 1));
-    this.obj.push(new_dict);
+    obj.push(
+      l.reduce((p, c) => {
+        p[c] = 1;
+        return p;
+      }, {}),
+    );
   }
 
   /**
@@ -23,18 +25,22 @@ class GrandLives {
    * @param {0|1} [year]
    */
   check(race, year) {
+    const obj = this.#obj;
     const _year = year || 0;
-    if (_year >= this.obj.length) {
-      return 0;
+    if (_year >= obj.length) {
+      return false;
     }
-    return this.obj[_year][race];
+    return obj[_year][race] > 0;
   }
 
   shift() {
-    if (this.obj.length === 2) {
-      this.obj.shift();
+    const obj = this.#obj;
+    if (obj.length === 2) {
+      obj.shift();
     }
   }
 }
 
-module.exports = GrandLives;
+const grand_lives = new GrandLives();
+
+module.exports = grand_lives;

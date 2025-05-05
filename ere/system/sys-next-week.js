@@ -49,10 +49,10 @@ const {
 const { part_enum, part_talents } = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const BasementOwners = require('#/data/event/basement-owners');
+const basement_owners = require('#/data/event/basement-owners');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const GrandLives = require('#/data/event/grand-lives');
+const grand_lives = require('#/data/event/grand-lives');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
@@ -88,7 +88,6 @@ async function sys_next_week() {
   const has_furniture = sex_partner > 0 ? sex_partner : 0;
   // 极端事件判定
   if (check_pregnant_unprotect(0) && has_furniture > 0) {
-    const basement_owners = new BasementOwners();
     /** @type {{chara_id:number,prison:boolean,[supporter]:number}[]} */
     let act_list = [];
     let prepared_list;
@@ -259,7 +258,7 @@ async function sys_next_week() {
   if (cur_month === 13) {
     cur_month = 1;
     cur_year++;
-    new GrandLives().shift();
+    grand_lives.shift();
   }
   era.set('flag:当前年', cur_year);
   era.set('flag:当前月', cur_month);

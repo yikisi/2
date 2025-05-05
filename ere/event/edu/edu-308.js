@@ -15,7 +15,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { gacha, get_random_entry, sort_list } = require('#/utils/list-utils');
 
-const GrandLives = require('#/data/event/grand-lives');
+const grand_lives = require('#/data/event/grand-lives');
 const { class_enum, track_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -121,8 +121,7 @@ module.exports = class extends CustomizedEdu {
     const g3_dict = {},
       g2_dict = {},
       g1_dict = {},
-      race_list = [],
-      grand_lives = new GrandLives();
+      race_list = [];
     Object.values(race_enum)
       .slice(1)
       .filter(

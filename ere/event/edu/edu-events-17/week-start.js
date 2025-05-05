@@ -598,7 +598,7 @@ module.exports = class extends Edu17UntilRaceStart {
       await emperor_talk.say_and_wait(get_random_entry(talk_list));
     }
     let race_punish = false;
-    const race_history = new RaceHistory(17).get();
+    const race_history = RaceHistory.get(17).get();
 
     switch (edu_weeks) {
       case race_infos[race_enum.sats_sho].date + 48: // 五月第一周 皋月赏惩罚

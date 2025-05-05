@@ -18,7 +18,7 @@ const { sys_change_fame } = require('#/system/sys-calc-flag');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const print_ero_page = require('#/page/page-ero');
 
-const GameGuides = require('#/event/others/game-guides');
+const game_guides = require('#/event/others/game-guides');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
@@ -120,7 +120,7 @@ async function fail(chara, me) {
  */
 async function goto_sex(id, sex_loc) {
   era.drawLine();
-  if (await new GameGuides().office_sex()) {
+  if (await game_guides.office_sex()) {
     return;
   }
   const chara = get_chara_talk(id);

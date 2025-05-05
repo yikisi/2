@@ -395,7 +395,7 @@ module.exports = class extends CustomizedEdu {
       extra_flag.race === race_enum.prix_lat &&
       edu_weeks >= 96 &&
       extra_flag.rank === 1 &&
-      check_aim_race(new RaceHistory(205).get(), race_enum.prix_lat, 1, 1)
+      check_aim_race(RaceHistory.get(205).get(), race_enum.prix_lat, 1, 1)
     ) {
       await print_event_name('迈向巅峰再制胜', vp);
       const montjeu = get_chara_talk(204);

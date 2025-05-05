@@ -11,11 +11,9 @@ const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 class GameGuides {
-  /** @type {Record<string,1>} */
-  obj;
-
-  constructor() {
-    this.obj = era.get('flag:新手教学') || era.set('flag:新手教学', {});
+  /** @returns {Record<string,1>} */
+  get #obj() {
+    return era.get('flag:新手教学') || era.set('flag:新手教学', {});
   }
 
   /**
@@ -23,15 +21,16 @@ class GameGuides {
    * @returns {boolean}
    */
   check(con) {
-    if (this.obj[con]) {
-      delete this.obj[con];
+    const obj = this.#obj;
+    if (obj[con]) {
+      delete obj[con];
       return true;
     }
     return false;
   }
 
   init() {
-    this.obj[this.game_start.name] = 1;
+    this.#obj[this.game_start.name] = 1;
   }
 
   async game_start() {
@@ -102,7 +101,7 @@ class GameGuides {
       await tokino.say_and_wait('正好，特雷森学院里新来了不少有潜力的好苗子。');
       await tokino.say_and_wait('那么，一起去训练场看看吧？');
       EventMarks.get(0).add(event_hooks.recruit);
-      this.obj[this.recruit.name] = 1;
+      this.#obj[this.recruit.name] = 1;
     }
   }
 
@@ -134,7 +133,7 @@ class GameGuides {
       EventMarks.get(0)
         .sub(event_hooks.register_race)
         .add(event_hooks.school_trainer_office);
-      this.obj[this.school_trainer_office.name] = 1;
+      this.#obj[this.school_trainer_office.name] = 1;
     }
   }
 
@@ -182,7 +181,7 @@ class GameGuides {
         ' 流露出一丝苦涩的意味，但很快恢复了从容，露出一个有些勉强的微笑。',
       ]);
       EventMarks.get(0).sub(event_hooks.train).add(event_hooks.register_race);
-      this.obj[this.office_register.name] = 1;
+      this.#obj[this.office_register.name] = 1;
     }
   }
 
@@ -265,7 +264,7 @@ class GameGuides {
         ' 向训练场上的学生们走去。',
       ]);
       EventMarks.get(0).sub(event_hooks.recruit);
-      this.obj[this.recruit_end.name] = 1;
+      this.#obj[this.recruit_end.name] = 1;
     }
   }
 
@@ -329,7 +328,7 @@ class GameGuides {
         await era.printAndWait([me.get_couple_title(), '离开了训练场。']);
       }
       EventMarks.get(0).add(event_hooks.train);
-      this.obj[this.office_train.name] = 1;
+      this.#obj[this.office_train.name] = 1;
     }
   }
 
@@ -361,7 +360,7 @@ class GameGuides {
       EventMarks.get(0)
         .sub(event_hooks.school_atrium)
         .add(event_hooks.school_rooftop);
-      this.obj[this.school_rooftop.name] = 1;
+      this.#obj[this.school_rooftop.name] = 1;
       return true;
     }
   }
@@ -395,7 +394,7 @@ class GameGuides {
       EventMarks.get(0)
         .sub(event_hooks.school_chairman)
         .add(event_hooks.school_visitors);
-      this.obj[this.school_visitors.name] = 1;
+      this.#obj[this.school_visitors.name] = 1;
       return true;
     }
   }
@@ -419,7 +418,7 @@ class GameGuides {
       EventMarks.get(0)
         .sub(event_hooks.school_clinic)
         .add(event_hooks.school_god);
-      this.obj[this.school_god.name] = 1;
+      this.#obj[this.school_god.name] = 1;
       return true;
     }
   }
@@ -455,7 +454,7 @@ class GameGuides {
       EventMarks.get(0)
         .sub(event_hooks.school_god)
         .add(event_hooks.school_atrium);
-      this.obj[this.school_atrium.name] = 1;
+      this.#obj[this.school_atrium.name] = 1;
       return true;
     }
   }
@@ -472,7 +471,7 @@ class GameGuides {
       EventMarks.get(0)
         .sub(event_hooks.school_rooftop)
         .add(event_hooks.school_chairman);
-      this.obj[this.school_chairman.name] = 1;
+      this.#obj[this.school_chairman.name] = 1;
       return true;
     }
   }
@@ -495,7 +494,7 @@ class GameGuides {
       EventMarks.get(0)
         .sub(event_hooks.school_trainer_office)
         .add(event_hooks.school_clinic);
-      this.obj[this.school_clinic.name] = 1;
+      this.#obj[this.school_clinic.name] = 1;
       return true;
     }
   }
@@ -515,10 +514,12 @@ class GameGuides {
       EventMarks.get(0)
         .sub(event_hooks.school_visitors)
         .add(event_hooks.out_start);
-      this.obj[this.out.name] = 1;
+      this.#obj[this.out.name] = 1;
       return true;
     }
   }
 }
 
-module.exports = GameGuides;
+const game_guides = new GameGuides();
+
+module.exports = game_guides;

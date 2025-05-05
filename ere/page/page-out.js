@@ -11,7 +11,7 @@ const print_page_header = require('#/page/components/page-header');
 const MejiroCity = require('#/page/mejiro/mejiro-common');
 
 const { run_custom_daily } = require('#/event/daily/daily-factory');
-const GameGuides = require('#/event/others/game-guides');
+const game_guides = require('#/event/others/game-guides');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -21,7 +21,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
 const recruit_flags = require('#/data/event/recruit-flags');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
@@ -80,7 +80,7 @@ async function out_page() {
         `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}到达了学园大门……`,
       );
     }
-    await new GameGuides().out();
+    await game_guides.out();
     era.printMultiColumns([
       {
         content: [
@@ -112,7 +112,7 @@ async function out_page() {
         temp = {
           flag: true,
           chara: get_chara_talk(301),
-          title: new CharaTitles(301).get_colored_curr_title(),
+          title: CharaTitles.get(301).get_colored_curr_title(),
         };
         while (temp.flag) {
           const temp_flag = await npc_common(
@@ -209,7 +209,7 @@ async function out_page() {
                     era.set('callname:301:-2', '骏川缰绳');
                     era.set('cflag:301:招募状态', recruit_flags.yes);
                     if (era.get('talent:301:病娇')) {
-                      new YandereList().push(301);
+                      yandere_list.push(301);
                     }
                     return era.printAndWait([
                       temp.chara.get_colored_name(),

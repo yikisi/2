@@ -171,7 +171,7 @@ module.exports = (handlers) => {
 
   handlers[race_enum.prea_sta] = async (ss, me, callname, extra_flag) => {
     if (
-      !check_aim_race(new RaceHistory(400).get(), race_enum.kent_der, 1, 1) ||
+      !check_aim_race(RaceHistory.get(400).get(), race_enum.kent_der, 1, 1) ||
       extra_flag.rank !== 1
     ) {
       return true;
@@ -256,8 +256,8 @@ module.exports = (handlers) => {
 
   handlers[race_enum.belm_sta] = async (ss, me, callname, extra_flag) => {
     if (
-      !check_aim_race(new RaceHistory(400).get(), race_enum.kent_der, 1, 1) ||
-      !check_aim_race(new RaceHistory(400).get(), race_enum.prea_sta, 1, 1) ||
+      !check_aim_race(RaceHistory.get(400).get(), race_enum.kent_der, 1, 1) ||
+      !check_aim_race(RaceHistory.get(400).get(), race_enum.prea_sta, 1, 1) ||
       extra_flag.rank !== 1
     ) {
       return true;
@@ -492,7 +492,7 @@ module.exports = (handlers) => {
     if (
       era.get('cflag:400:育成回合计时') < 96 ||
       extra_flag.rank !== 1 ||
-      !check_aim_race(new RaceHistory(400).get(), race_enum.tenn_spr, 2, 1)
+      !check_aim_race(RaceHistory.get(400).get(), race_enum.tenn_spr, 2, 1)
     ) {
       return true;
     }
