@@ -487,6 +487,7 @@
             content: 目白麦昆
           - 「要不要我们做做看这样子……对，牵着手，总感觉有点紧张呢，如果在路上牵着手被粉丝认出来的话。」
   - if: era.get('love:13') >= 75
+    random: true
     lines:
       - color: %代表色%
         content:
