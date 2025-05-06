@@ -276,15 +276,16 @@ async function race_page(race) {
   sys_prepare_race(contestants, team_list, info);
   era.stopMusic();
   await page_race_result(contestants, info, race);
-  team_list.forEach((uma) => {
-    aim_race_dict[uma.index_chara] = get_custom_check(
-      uma.index_chara,
-    ).is_aim_race(
-      race,
-      era.get(`cflag:${uma.index_chara}:育成回合计时`),
-      uma.rank.curr,
-    );
-  });
+  team_list.forEach(
+    (uma) =>
+      (aim_race_dict[uma.index_chara] = get_custom_check(
+        uma.index_chara,
+      ).is_aim_race(
+        race,
+        era.get(`cflag:${uma.index_chara}:育成回合计时`),
+        uma.rank.curr,
+      )),
+  );
   const cur_year = era.get('flag:当前年');
   era.drawLine();
   sort_list(team_list, (e) => e.rank.curr, true).forEach((uma) => {
@@ -639,9 +640,11 @@ async function race_page(race) {
       wait_flag = true;
     }
   }
-  wait_flag && (await era.waitAnyKey());
+  if (wait_flag) {
+    await era.waitAnyKey();
+  }
   era.drawLine();
-  await era.printAndWait('回去了……');
+  await era.printAndWait('【折返了】');
   era.println();
   await sys_get_random_event(event_hooks.back_school)();
   era.set('flag:当前赛事', 0);
