@@ -176,7 +176,11 @@ async function check_new_activities(cur_round, in_team_list) {
         punish_list.push(id);
         return false;
       });
-      era.print([race_colored_name, ' 即将举办，参赛选手们要踏上远征之路了……']);
+      era.print([
+        '【',
+        race_colored_name,
+        ' 即将举办，参赛选手们要踏上远征之路了】',
+      ]);
       if (
         (era.get('cflag:343:招募状态') !== recruit_flags.yes ||
           (era.get('cflag:343:妊娠阶段') & 0b100001) > 0) &&
@@ -284,10 +288,11 @@ async function check_new_activities(cur_round, in_team_list) {
     } else {
       // 远征结束
       era.print([
+        '【',
         ...(era.get('cflag:0:位置') === location.loc
           ? []
           : ['远征 ', race_colored_name, ' 的人员']),
-        '回到特雷森了……',
+        '回到特雷森了】',
       ]);
       in_team_list.forEach((id) => {
         if (era.get(`cflag:${id}:位置`) === location.loc) {
@@ -328,7 +333,7 @@ async function check_new_activities(cur_round, in_team_list) {
       flag && era.set(`cflag:${id}:位置`, location_enum.beach);
       return flag;
     });
-    era.print('一年一度的夏合宿从本周开始……');
+    era.print('【一年一度的夏合宿从本周开始】');
     beach_group.length &&
       era.printMultiColumns([
         {
@@ -419,8 +424,9 @@ async function check_new_activities(cur_round, in_team_list) {
   } else if (event_weeks === 33 - 1) {
     // 夏合宿结束
     era.print([
+      '【',
       era.get('cflag:0:位置') ? '' : '前往夏合宿的人员',
-      '回到特雷森了……',
+      '回到特雷森了】',
     ]);
     in_team_list.forEach((id) => {
       if (era.get(`cflag:${id}:位置`)) {

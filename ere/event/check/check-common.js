@@ -214,7 +214,9 @@ class CustomizedCheck {
   // eslint-disable-next-line no-unused-vars
   is_aim_race(race, edu_weeks, rank) {
     return (
-      this.get_aim_races()[`${edu_weeks}_${race}`] || this.get_aim_races()[race]
+      this.get_aim_races()[`${edu_weeks}_${race}`] ||
+      this.get_aim_races()[race] ||
+      0
     );
   }
 

@@ -303,9 +303,6 @@ async function sys_next_week() {
         await era.waitAnyKey();
       }
     }
-    if (birthday > 0) {
-      era.set(`status:${id}:生日`, 0);
-    }
   }
   for (const id of all_characters) {
     if (id === 9017) {
@@ -318,6 +315,7 @@ async function sys_next_week() {
       );
     let growth_stage = era.get(`cflag:${id}:成长阶段`);
     const race = era.get(`cflag:${id}:种族`);
+    era.set(`status:${id}:生日`, 0);
 
     if (birth_week === cur_week && birth_month === cur_month) {
       era.set(`status:${id}:生日`, 2);

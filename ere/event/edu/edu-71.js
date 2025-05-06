@@ -129,6 +129,7 @@ module.exports = class extends CustomizedEdu {
     ) {
       await era.waitAnyKey();
     }
+    return true;
   }
 
   /** @param {CharaTalk} ardan */
@@ -145,6 +146,7 @@ module.exports = class extends CustomizedEdu {
     ) {
       await era.waitAnyKey();
     }
+    return true;
   }
 
   /** @param {CharaTalk} ardan */
@@ -158,7 +160,7 @@ module.exports = class extends CustomizedEdu {
           kojo,
           this.#cdict,
         )
-      ).at(-1) === 1
+      )[1] === 1
     ) {
       wait_flag = all_reward_in_event(this.id, {
         relation: 20,
@@ -224,9 +226,9 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.tenn_sho:
         if (edu_weeks < 96) {
-          name = '经典年天皇赏秋赛前';
+          name = '经典年秋季天皇赏赛前';
         } else {
-          name = '资深年天皇赏秋赛前';
+          name = '资深年秋季天皇赏赛前';
         }
         await kojo[name](this.#dict);
         extra_flag.relation_change = 10;
@@ -329,6 +331,7 @@ module.exports = class extends CustomizedEdu {
           extra_flag.love_change = 1;
           extra_flag.pt_change = 30;
         }
+        era.println();
         if (era.get(`talent:${this.id}:身体素质`) === -1) {
           era.print([ardan.get_colored_name(), ' 不再 [体弱多病] 了……']);
           era.set(`talent:${this.id}:身体素质`, 0);
@@ -358,14 +361,14 @@ module.exports = class extends CustomizedEdu {
       case race_enum.tenn_sho:
         if (edu_weeks < 96) {
           if (extra_flag.rank === 1) {
-            name = '经典年天皇赏秋1着';
+            name = '经典年秋季天皇赏1着';
             await kojo[name](this.#dict);
             extra_flag.attr_change = new Array(5).fill(5);
             extra_flag.relation_change = 20;
             extra_flag.love_change = 2;
             extra_flag.pt_change = 60;
           } else if (extra_flag.rank <= 3) {
-            name = '经典年天皇赏秋前三';
+            name = '经典年秋季天皇赏前三';
             await kojo[name](this.#dict);
             extra_flag.attr_change = new Array(5).fill(3);
             extra_flag.relation_change = 10;
@@ -373,7 +376,7 @@ module.exports = class extends CustomizedEdu {
             extra_flag.pt_change = 30;
           }
         } else if (extra_flag.rank === 1) {
-          name = '资深年天皇赏秋赛后';
+          name = '资深年秋季天皇赏赛后';
           await kojo[name](this.#dict);
           extra_flag.attr_change = new Array(5).fill(30);
           extra_flag.relation_change = 50;

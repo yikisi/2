@@ -57,7 +57,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async good_night() {
-    await kojo['回合结束'](this.#dict);
+    kojo['回合结束'](this.#dict);
   }
 
   async talk() {
@@ -178,7 +178,7 @@ module.exports = class extends CustomizedDaily {
   async birthday() {
     await print_event_name('生日', get_chara_talk(this.id));
     const life_marks = new ArdanLifeMarks();
-    if (era.get(`love:${this.id}`) >= 90 && !life_marks.birthday) {
+    if (era.get(`love:${this.id}`) === 100 && !life_marks.birthday) {
       life_marks.birthday = 1;
       await kojo['特殊生日'](this.#dict);
     } else {

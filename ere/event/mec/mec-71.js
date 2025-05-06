@@ -6,6 +6,8 @@ const CharaTalk = require('#/utils/chara-talk');
 
 const { buff_colors } = require('#/data/color-const');
 const ArdanEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-71');
+const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
+const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
   get_status(show_train_buff) {
@@ -18,6 +20,15 @@ module.exports = class extends CustomizedMec {
           title: '不能训练与参赛',
         },
       ];
+    }
+    return [];
+  }
+
+  get_race_contestants() {
+    switch (era.get('flag:当前赛事')) {
+      case race_enum.toky_yus:
+      case race_enum.sank_hai:
+        return [new LegendUmaSelector(69, 1.1), new LegendUmaSelector(72, 1.1)];
     }
     return [];
   }

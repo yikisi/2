@@ -34,8 +34,7 @@
       - fontWeight: bold
         content: 目白阿尔丹
       - （而且如果动作不端正的话就会被大家认为自己身体不舒服……）
-  - color: %代表色%
-    content:
+  - content:
       - （
       - fontWeight: bold
         content: 女佣
@@ -46,8 +45,7 @@
       - fontWeight: bold
         content: 目白阿尔丹
       - 「不是的，我只是稍微在想一些事情……」）
-  - color: %代表色%
-    content:
+  - content:
       - （
       - fontWeight: bold
         content: 女佣

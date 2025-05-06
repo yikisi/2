@@ -21,6 +21,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const ArdanLifeMarks = require('#/data/event/life-event-marks/life-event-marks-71');
 
 module.exports = class extends CustomizedLove {
   get #dict() {
@@ -54,6 +55,7 @@ module.exports = class extends CustomizedLove {
       add_event(stage, event_object);
       return;
     }
+    new ArdanLifeMarks().love_1 = 2;
     const name = '追求的是风度';
     await print_event_name(name, ardan);
     await kojo[name](this.#dict);
@@ -97,7 +99,11 @@ module.exports = class extends CustomizedLove {
     }
     const name = '旅行';
     await print_event_name(name, ardan);
-    await kojo[name](this.#dict);
+    const ret = await kojo[name](this.#dict);
+    if (ret[0] === 2) {
+      add_event(stage, event_object);
+      return;
+    }
     era.println();
     await add_juel_out_of_train(this.id, '顺从', 500);
     return true;
@@ -144,7 +150,7 @@ module.exports = class extends CustomizedLove {
     const name = '属于彼此的画作';
     await print_event_name(name, ardan);
     const ret = await kojo[name](this.#dict);
-    if (ret[3] === 1) {
+    if (ret[1] === 1) {
       await sys_love_uma_in_event(this.id);
     } else {
       era.set(`cflag:${this.id}:爱慕暂拒`, 89);

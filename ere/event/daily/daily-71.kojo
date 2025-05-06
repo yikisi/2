@@ -261,68 +261,70 @@
                 - 「昨晚身体不适让亲爱的辛苦了，午休的时候，要一起补会觉吗？」
 
 回合结束:
-  - if: era.get('status:71:沉睡') === 0 && era.get('status:71:马跳S') === 0
-    random: true
-    lines:
-      - if: era.get('love:71') < 75
-        random: true
-        lines:
-          - color: %代表色%
-            content:
-              - fontSize: bold
-                content: 目白阿尔丹
-              - 「今天也辛苦你了，%称呼%，明天见！」
-          - 和 目白阿尔丹 一天的训练结束后%你%站在宿舍楼门口外面，目送着阿尔丹回到宿舍。
-          - %你%看着微笑着挥手告别的的目白阿尔丹，也微笑着回以同样的动作。
-      - if: era.get('love:71') >= 75
-        random: true
-        lines:
-          - color: %代表色%
-            content:
-              - fontSize: bold
-                content: 目白阿尔丹
-              - 「今天也辛苦你了，亲爱的🎵 让我来给你做个按摩放松下吧？」
-          - 和 目白阿尔丹 一天的辛苦结束后，目白阿尔丹 来到了%你%的身后力度合适地按摩起来%你%的肩膀。
-          - 「多谢了，阿尔丹，你今天也很辛苦，等会换我来帮你按摩吧。」
-          - color: %代表色%
-            content:
-              - fontSize: bold
-                content: 目白阿尔丹
-              - 「那就拜托你咯，亲爱的🎵」
-  - if: era.get('status:71:沉睡') > 0 || era.get('status:71:马跳S') > 0
-    random: true
-    lines:
-      - if: era.get('love:71') < 75
-        random: true
-        lines:
-          - if: era.get('status:71:马跳S') === 0
-            content: 「看来今天让%她%有点努力过头了呢。」
-          - %你%轻轻拍了拍%她%的肩膀。
-          - color: %代表色%
-            content:
-              - fontSize: bold
-                content: 目白阿尔丹
-              - 「呜……～唉？我怎么不小心睡着了！」
-          - 「今天的训练结束了哦，辛苦了，我送你回去。」
-          - color: %代表色%
-            content:
-              - fontSize: bold
-                content: 目白阿尔丹
-              - 「谢谢您，%称呼%，麻烦你了。」
-          - %你%陪着偶尔打着哈欠的 目白阿尔丹 回到了%她%的宿舍楼，看到 樱花千代王 接手后才放心回去。
-      - if: era.get('love:71') >= 75
-        random: true
-        lines:
-          - if: era.get('status:71:马跳S') === 0
-            content: 「今天也辛苦你了呢，阿尔丹」
-          - 望着在%你%身旁安心熟睡的目白阿尔丹，%你%小声说道。
-          - 「愿你有一个好梦，晚安」
-          - %你%在%她%早就留好的位置旁躺下，目白阿尔丹感知到%你%躺下后很快就抱住了%你%。
-          - color: %代表色%
-            content:
-              - fontSize: bold
-                content: 目白阿尔丹
-              - 「晚安，女神们送给我的珍宝。」
+  sync: true
+  lines:
+    - if: era.get('status:71:沉睡') === 0 && era.get('status:71:马跳S') === 0
+      random: true
+      lines:
+        - if: era.get('love:71') < 75
+          random: true
+          lines:
+            - color: %代表色%
+              content:
+                - fontSize: bold
+                  content: 目白阿尔丹
+                - 「今天也辛苦你了，%称呼%，明天见！」
+            - 和 目白阿尔丹 一天的训练结束后%你%站在宿舍楼门口外面，目送着阿尔丹回到宿舍。
+            - %你%看着微笑着挥手告别的的目白阿尔丹，也微笑着回以同样的动作。
+        - if: era.get('love:71') >= 75
+          random: true
+          lines:
+            - color: %代表色%
+              content:
+                - fontSize: bold
+                  content: 目白阿尔丹
+                - 「今天也辛苦你了，亲爱的🎵 让我来给你做个按摩放松下吧？」
+            - 和 目白阿尔丹 一天的辛苦结束后，目白阿尔丹 来到了%你%的身后力度合适地按摩起来%你%的肩膀。
+            - 「多谢了，阿尔丹，你今天也很辛苦，等会换我来帮你按摩吧。」
+            - color: %代表色%
+              content:
+                - fontSize: bold
+                  content: 目白阿尔丹
+                - 「那就拜托你咯，亲爱的🎵」
+    - if: era.get('status:71:沉睡') > 0 || era.get('status:71:马跳S') > 0
+      random: true
+      lines:
+        - if: era.get('love:71') < 75
+          random: true
+          lines:
+            - if: era.get('status:71:马跳S') === 0
+              content: 「看来今天让%她%有点努力过头了呢。」
+            - %你%轻轻拍了拍%她%的肩膀。
+            - color: %代表色%
+              content:
+                - fontSize: bold
+                  content: 目白阿尔丹
+                - 「呜……～唉？我怎么不小心睡着了！」
+            - 「今天的训练结束了哦，辛苦了，我送你回去。」
+            - color: %代表色%
+              content:
+                - fontSize: bold
+                  content: 目白阿尔丹
+                - 「谢谢您，%称呼%，麻烦你了。」
+            - %你%陪着偶尔打着哈欠的 目白阿尔丹 回到了%她%的宿舍楼，看到 樱花千代王 接手后才放心回去。
+        - if: era.get('love:71') >= 75
+          random: true
+          lines:
+            - if: era.get('status:71:马跳S') === 0
+              content: 「今天也辛苦你了呢，阿尔丹」
+            - 望着在%你%身旁安心熟睡的目白阿尔丹，%你%小声说道。
+            - 「愿你有一个好梦，晚安」
+            - %你%在%她%早就留好的位置旁躺下，目白阿尔丹感知到%你%躺下后很快就抱住了%你%。
+            - color: %代表色%
+              content:
+                - fontSize: bold
+                  content: 目白阿尔丹
+                - 「晚安，女神们送给我的珍宝。」
 
 闲聊:
   - if: era.get('cflag:71:干劲') === 2
@@ -923,7 +925,7 @@
   - 晚上在家里举办一场盛大的生日派对，一直玩到了很晚。
 
 特殊生日:
-  #爱慕为依恋及以上
+  #爱慕为依存
   #限一次
   - acc: 1
     content: 「生日快乐，阿尔丹。」
