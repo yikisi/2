@@ -20,7 +20,7 @@ const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const McqueenLifeMarks = require('#/data/event/life-event-marks/life-event-marks-13');
 
 module.exports = class extends CustomizedDaily {
-  get dict() {
+  get #dict() {
     const dict = {};
     dict['代表色'] = get_chara_color(this.id);
     dict['称呼'] = sys_get_callname(this.id, 0);
@@ -38,11 +38,11 @@ module.exports = class extends CustomizedDaily {
   }
 
   good_morning() {
-    lines['回合开始互动对话'](this.dict);
+    lines['回合开始互动对话'](this.#dict);
   }
 
   good_night() {
-    lines['回合结束互动对话'](this.dict);
+    lines['回合结束互动对话'](this.#dict);
   }
 
   async office_cook() {

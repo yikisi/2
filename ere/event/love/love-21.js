@@ -49,7 +49,7 @@ module.exports = class extends CustomizedLove {
         return;
       }
       if (
-        (await print_name_and_show_kojo('思慕', tama, kojo, this.#dict))[0] ===
+        (await print_name_and_show_kojo('爱欲', tama, kojo, this.#dict))[0] ===
         1
       ) {
         await sys_love_uma_in_event(this.id);

@@ -1,37 +1,62 @@
 const era = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
+const {
+  sys_change_motivation,
+  sys_reg_race,
+} = require('#/system/sys-calc-base-cflag');
 
 const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
+const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
+const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
+const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { attr_change_colors } = require('#/data/color-const');
 const TamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-21');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
-const aim_races = {};
-aim_races[race_enum.begin_race] = 4;
-aim_races[get_aim_race_index(race_enum.hans_dai, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
+const auto_reg = [
+  get_aim_race_index(race_enum.juni_cup, 1),
+  get_aim_race_index(race_enum.waka_sta, 1),
+  get_aim_race_index(race_enum.viol_sta, 1),
+  get_aim_race_index(race_enum.arli_cup, 1),
+  get_aim_race_index(race_enum.naru_kin, 1),
+  get_aim_race_index(race_enum.niig_kin, 1),
+  get_aim_race_index(race_enum.kobe_hai, 1),
+];
+
+const aim_races = {
+  [race_enum.begin_race]: 0b10,
+  [get_aim_race_index(race_enum.sats_sho, 1)]: -2,
+  [get_aim_race_index(race_enum.toky_yus, 1)]: -1,
+  [get_aim_race_index(race_enum.kiku_sho, 1)]: -1,
+  [get_aim_race_index(race_enum.hans_dai, 2)]: 0b10,
+  [get_aim_race_index(race_enum.tenn_spr, 2)]: 0b10,
+  [get_aim_race_index(race_enum.takz_kin, 2)]: 0b11,
+  [get_aim_race_index(race_enum.tenn_sho, 2)]: 0b11,
+  [get_aim_race_index(race_enum.arim_kin, 2)]: 0b10,
+};
 
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
     const edu_marks = new TamaEduMarks();
-    if (
-      era.get('cflag:21:育成回合计时') <= 95 &&
-      race_infos[extra_flag.race].race_class <= class_enum.G3 &&
-      extra_flag.rank === 1 &&
-      edu_marks.aim_check < 4
-    ) {
-      edu_marks.aim_check++;
+    const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
+    if (extra_flag.rank === 1) {
+      const { race_class } = race_infos[extra_flag.race];
+      if (race_class <= class_enum.OP && edu_weeks <= 47 + 8) {
+        edu_marks.op_count++;
+      }
+      if (race_class <= class_enum.G3 && edu_weeks < 96) {
+        edu_marks.g3_count++;
+      }
     }
   }
 
@@ -57,6 +82,101 @@ module.exports = class extends CustomizedCheck {
     return ret;
   }
 
+  check_next_week() {
+    const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
+    if (edu_weeks < 3 * 48) {
+      const edu_event = new EventObject(this.id, cb_enum.edu);
+      const edu_marks = new TamaEduMarks();
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'whats_adult',
+        event_hooks.week_start,
+        edu_event,
+      );
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'gymnastics',
+        event_hooks.week_end,
+        edu_event,
+      );
+      if (era.get(`cflag:${this.id}:性别`) !== 1) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'clothe',
+          event_hooks.week_end,
+          edu_event,
+        );
+      }
+      edu_event.special = true;
+      switch (edu_weeks) {
+        case 28:
+          add_event(event_hooks.week_start, edu_event.set_arg('misfortune'));
+          break;
+        case 36:
+          add_event(event_hooks.week_start, edu_event.set_arg('cloudy1'));
+          break;
+        case 40:
+          edu_marks.heal = 0;
+          add_event(event_hooks.week_start, edu_event.set_arg('cloudy2'));
+          break;
+        case 41:
+          add_event(event_hooks.week_start, edu_event.set_arg('cloudy3'));
+          break;
+        case 47 + 1:
+          add_event(event_hooks.week_start, edu_event.set_arg('new_year'));
+          break;
+        case 47 + 9:
+          if (edu_marks.op_count >= 2) {
+            add_event(event_hooks.week_start, edu_event.set_arg('seems'));
+          }
+          if (era.get(`cflag:${this.id}:育成次数`) > 0) {
+            edu_marks.lightning = 0;
+          } else {
+            edu_marks.lightning = 3;
+          }
+          break;
+        case 47 + 15:
+          if (sys_reg_race(this.id).curr.race === race_enum.sats_sho) {
+            add_event(
+              event_hooks.week_start,
+              edu_event.set_arg('lightning_heart1'),
+            );
+          }
+          break;
+        case 47 + 29:
+        case 95 + 29:
+          add_event(event_hooks.week_start, edu_event.set_arg('summer'));
+          break;
+        case 95 + 1:
+          if (edu_marks.g3_count >= 4) {
+            add_event(
+              event_hooks.week_start,
+              edu_event.set_arg('spring_thunder'),
+            );
+          }
+          edu_marks.lightning = 0;
+          break;
+        case 95 + 14:
+          add_event(event_hooks.week_start, edu_event.set_arg('threaten'));
+          break;
+      }
+      if (edu_marks.heal === -1) {
+        sys_change_motivation(this.id, 1);
+      }
+      if (era.get(`cflag:${this.id}:育成次数`) > 0) {
+        auto_reg.forEach((e) => (aim_races[e] = -4));
+      } else {
+        auto_reg.forEach((e) => (aim_races[e] = 4));
+      }
+      check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
+    } else {
+      super.check_next_week();
+    }
+  }
+
   get_aim_races() {
     return aim_races;
   }
@@ -65,17 +185,48 @@ module.exports = class extends CustomizedCheck {
     const buffer = [],
       races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-    const { aim_check } = new TamaEduMarks();
+    const { op_count, g3_count } = new TamaEduMarks();
     buffer.push({
-      check: aim_check - 3,
-      color: aim_check >= 4 ? attr_change_colors.up : attr_change_colors.down,
-      content: `新秀年&经典年 四场重赏 前三名 ${aim_check}/4 ${aim_check >= 4 ? '✔' : '✘'}`,
+      check: Math.min(op_count - 1, 1),
+      color: op_count >= 2 ? attr_change_colors.up : attr_change_colors.down,
+      content: `经典年三月前 二场OP以上比赛 1着 ${op_count}/2 ${op_count >= 2 ? '✔' : '✘'}`,
+    });
+    buffer.push({
+      check: Math.min(g3_count - 3, 1),
+      color: g3_count >= 4 ? attr_change_colors.up : attr_change_colors.down,
+      content: `资深年前 四场G3以上比赛 1着 ${g3_count}/4 ${g3_count >= 4 ? '✔' : '✘'}`,
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.hans_dai, 2, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));
+    buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.tenn_sho, 2, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));
     return buffer;
+  }
+
+  is_aim_race(race, edu_weeks, rank) {
+    if (rank !== undefined && rank !== 1) {
+      return 0;
+    }
+    const history = RaceHistory.get(this.id).get();
+    switch (race) {
+      case race_enum.toky_yus:
+        if (
+          (rank !== undefined && rank !== 1) ||
+          !check_aim_race(history, race_enum.sats_sho, 1, 1)
+        ) {
+          return 0;
+        }
+        break;
+      case race_enum.kiku_sho:
+        if (
+          (rank !== undefined && rank !== 1) ||
+          !check_aim_race(history, race_enum.sats_sho, 1, 1) ||
+          !check_aim_race(history, race_enum.toky_yus, 1, 1)
+        ) {
+          return 0;
+        }
+    }
+    return super.is_aim_race(race, edu_weeks, rank);
   }
 };

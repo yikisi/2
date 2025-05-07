@@ -6,13 +6,44 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const kojo = require('#/event/ero/ero-21.kojo');
 const CustomizedEro = require('#/event/ero/ero-common');
+const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { mark_enum } = require('#/data/ero/mark-const');
+const TamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-21');
 
 module.exports = class extends CustomizedEro {
+  get #dict() {
+    const o = {};
+    o['你'] = get_chara_talk(0).name;
+    const tama = get_chara_talk(this.id);
+    o['她'] = tama.sex;
+    o['玉藻色'] = tama.color;
+    o['马娘'] = tama.get_uma_sex_title();
+    return o;
+  }
+
+  async ero_start() {
+    const edu_marks = new TamaEduMarks();
+    if (
+      !edu_marks.chained_heart &&
+      era.get(`love:${this.id}`) >= 50 &&
+      era.get(`cflag:${this.id}:性别`) !== 1 &&
+      era.get('tflag:强奸') !== 21
+    ) {
+      edu_marks.chained_heart = 1;
+      await print_name_and_show_kojo(
+        '紧缚的心',
+        get_chara_talk(this.id),
+        kojo,
+        this.#dict,
+      );
+    }
+  }
+
   async get_mark(level, type, _new) {
     const callname = sys_get_colored_callname(this.id, 0),
       tama = get_chara_talk(this.id);

@@ -329,7 +329,7 @@ async function race_page(race) {
     if (uma.rank.curr === 1 || race !== race_enum.begin_race) {
       RaceHistory.get(id).add_result(
         edu_weeks,
-        RaceHistory.get.RaceResult(
+        new RaceHistory.RaceResult(
           uma.pop[0],
           race,
           uma.rank.curr,

@@ -9,15 +9,20 @@ const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
   get_action_debuff() {
-    return 0.1 * (new TamaEduMarks().status === 1);
+    const edu_marks = new TamaEduMarks();
+    return (
+      0.1 * (edu_marks.lightning === 1) +
+      0.05 * (edu_marks.heal === 1) -
+      0.1 * (edu_marks.heal === -1)
+    );
   }
 
   get_maxbase_buff() {
-    return -200 * (new TamaEduMarks().status === 1);
+    return -200 * (new TamaEduMarks().lightning === 1);
   }
 
   get_pressure_buff() {
-    return 0.1 * (new TamaEduMarks().status === 1);
+    return 0.1 * (new TamaEduMarks().lightning === 1);
   }
 
   get_race_contestants(info) {
@@ -57,55 +62,66 @@ module.exports = class extends CustomizedMec {
   }
 
   get_status(show_train_buff) {
+    const ret = [];
     if (show_train_buff) {
-      switch (new TamaEduMarks().status) {
+      const { lightning, heal } = new TamaEduMarks();
+      switch (lightning) {
         default:
-          return [
-            {
-              color: get_chara_color(this.id),
-              content: '闪光',
-              title: '白色闪电，开放参与所有比赛',
-            },
-          ];
+          ret.push({
+            color: get_chara_color(this.id),
+            content: '闪光',
+            title: '白色闪电，开放参与所有比赛',
+          });
+          break;
         case 1:
-          return [
-            {
-              color: get_chara_color(this.id),
-              content: '雷殛',
-              fontWeight: 'bold',
-              title:
-                '电流衰弱；训练效果-20%，体力精力上限-200，消耗+10%，压力获取+10%',
-            },
-          ];
+          ret.push({
+            color: get_chara_color(this.id),
+            content: '雷殛',
+            fontWeight: 'bold',
+            title:
+              '电流衰弱；训练效果-20%，体力精力上限-200，消耗+10%，压力获取+10%',
+          });
+          break;
         case 2:
-          return [
-            {
-              color: get_chara_color(this.id),
-              content: '雷云',
-              fontWeight: 'bold',
-              title: '山雨欲来，目前只能参与OP级比赛',
-            },
-          ];
+          ret.push({
+            color: get_chara_color(this.id),
+            content: '雷云',
+            fontWeight: 'bold',
+            title: '山雨欲来，目前只能参与OP级比赛',
+          });
+          break;
         case 3:
-          return [
-            {
-              color: get_chara_color(this.id),
-              content: '先导',
-              fontWeight: 'bold',
-              title: '雷光初成，目前只能参与OP-G3级比赛',
-            },
-          ];
+          ret.push({
+            color: get_chara_color(this.id),
+            content: '先导',
+            fontWeight: 'bold',
+            title: '雷光初成，目前只能参与OP-G3级比赛',
+          });
+      }
+      if (heal === 1) {
+        ret.push({
+          color: get_chara_color(this.id),
+          content: '斯巴达式',
+          title: '训练效果+20%，体力精力消耗+5%',
+        });
+      } else if (heal === -1) {
+        ret.push({
+          color: get_chara_color(this.id),
+          content: '马娘优先',
+          title: '每回合自动提高干劲，体力精力消耗-10%',
+        });
       }
     }
-    return [];
+    return ret;
   }
 
   get_train_buff() {
-    return -20 * (new TamaEduMarks().status === 1);
+    const edu_marks = new TamaEduMarks();
+    return -20 * (edu_marks.lightning === 1) + 20 * (edu_marks.heal === 1);
   }
 
   is_race_register_enabled() {
-    return new TamaEduMarks().status < 2;
+    return new TamaEduMarks().lightning < 1;
   }
 
   set_callname() {

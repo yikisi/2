@@ -59,7 +59,7 @@ module.exports = class extends CustomizedLove {
       '最重要的追梦伙伴。',
     ]);
     if (life_marks.who_am_i !== 2) {
-      may.actual_name = era.set('callname:343:-1', '狄杜斯');
+      era.set('callname:343:-1', '狄杜斯');
       await era.printAndWait([
         '深深吸了口气，',
         may.sex,

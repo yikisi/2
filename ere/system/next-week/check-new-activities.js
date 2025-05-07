@@ -88,9 +88,9 @@ async function check_new_activities(cur_round, in_team_list) {
   const celebration = get_celebration(cur_round);
   if (celebration && era.get('flag:当前回合数') > 1) {
     era.print([
-      '本周有 ',
+      '【本周有 ',
       { content: celebration, color: celebration_color },
-      '，马娘们也许有什么活动需要你关注哦',
+      '，马娘们也许有什么活动需要你关注哦】',
     ]);
     era.set('cflag:0:节日事件标记', 0);
     in_team_list.forEach((id) =>
@@ -127,10 +127,11 @@ async function check_new_activities(cur_round, in_team_list) {
     const registered_race = sys_reg_race(id).curr;
     if (registered_race.week === cur_round) {
       era.print([
-        '本周有 ',
+        '【本周有 ',
         get_chara_talk(id).get_colored_name(),
         ' 报名参加的 ',
         race_infos[registered_race.race].get_colored_name_with_class(),
+        '】',
       ]);
     }
     in_team_status_dict[id] = {
@@ -522,8 +523,9 @@ async function check_new_activities(cur_round, in_team_list) {
     in_team_list.filter((e) => sys_check_yandere(e, (y) => y > 0)),
   );
 
-  if (era.get('flag:当前周') === 1) {
-    new MyEduMarks().we_are_one = 0;
+  const my_edu_marks = new MyEduMarks();
+  if (my_edu_marks.we_are_one > 0) {
+    my_edu_marks.we_are_one--;
   }
   await MejiroCity.instance().next_week();
 }

@@ -75,6 +75,6 @@ module.exports = class extends CustomizedRecruit {
 
   async recruit_result() {
     await super.recruit_result();
-    new TamaEduMarks().status = 2;
+    new TamaEduMarks().lightning = 2;
   }
 };
