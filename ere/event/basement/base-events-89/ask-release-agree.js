@@ -7,13 +7,13 @@ const {
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const BasementOwners = require('#/data/event/basement-owners');
+const basement_owners = require('#/data/event/basement-owners');
 const GrandLifeMarks = require('#/data/event/life-event-marks/life-event-marks-89');
 
 async function ask_release_agree() {
   const grand = get_chara_talk(89),
     me = get_chara_talk(0),
-    another = new BasementOwners().get().filter((e) => e !== 89)[0],
+    another = basement_owners.get().filter((e) => e !== 89)[0],
     callname = sys_get_colored_callname(89, 0);
   if (era.get('exp:89:监禁次数') === 1 && !new GrandLifeMarks().b_find_escape) {
     await grand.say_and_wait(['……嗯。']);

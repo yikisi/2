@@ -48,13 +48,14 @@ async function common_orgasm(chara_id) {
   } else if (era.get(`nowex:${chara_id}:多重高潮`)) {
     multi_orgasm = '多';
   }
-  multi_orgasm &&
+  if (multi_orgasm !== undefined) {
     era.print([
       chara.get_colored_name(),
       ' 发生了',
       { content: ` ${multi_orgasm}重高潮`, color: buff_colors[2] },
       '！',
     ]);
+  }
   orgasm_check_list.forEach((part) => {
     const part_name = part_names[part];
     const times =

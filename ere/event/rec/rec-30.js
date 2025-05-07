@@ -42,7 +42,7 @@ module.exports = class extends CustomizedRecruit {
           `就如 ${me.name} 预料的一样，${rice.sex}没有和朋友并跑，只身穿着运动服往校外跑去了。`,
         );
         await era.printAndWait('方向是……车站啊。');
-        new EventMarks(0).add(event_hooks.out_station);
+        EventMarks.get(0).add(event_hooks.out_station);
         add_event(
           event_hooks.out_station,
           new EventObject(30, cb_enum.recruit),
@@ -123,7 +123,7 @@ module.exports = class extends CustomizedRecruit {
           rice.sex,
           '真正的实力。',
         ]);
-        new EventMarks(0)
+        EventMarks.get(0)
           .sub(event_hooks.out_station)
           .add(event_hooks.recruit_start);
         add_event(event_hooks.recruit_start, event_object);
@@ -156,7 +156,7 @@ module.exports = class extends CustomizedRecruit {
           rice.get_colored_name(),
           ' 到最后也没有出现在那天的选拔会场上。',
         ]);
-        new EventMarks(0)
+        EventMarks.get(0)
           .add(event_hooks.school_atrium)
           .sub(event_hooks.recruit_start);
         add_event(event_hooks.school_atrium, event_object);
@@ -218,7 +218,7 @@ module.exports = class extends CustomizedRecruit {
         era.set('flag:物色对象', 0);
         era.set('cflag:30:招募状态', recruit_flags.yes);
         get_custom_mec(30).set_callname();
-        new EventMarks(0).sub(event_hooks.school_atrium);
+        EventMarks.get(0).sub(event_hooks.school_atrium);
         add_event(
           event_hooks.week_start,
           new EventObject(30, cb_enum.edu).set_arg('beginning'),

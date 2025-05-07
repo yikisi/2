@@ -90,17 +90,10 @@ module.exports = async () => {
   const line_copyrights = [
     [[get_copyright_entry(3)], '天马闪光蹄'],
     // [[get_copyright_entry(4), { isDivider: true }, get_copyright_entry(46)], '黑奴一号'],
-    [[get_copyright_entry(7)], '雞雞'],
-    // [
-    //   [
-    //     get_copyright_entry(6),
-    //     { isDivider: true },
-    //     get_copyright_entry(7),
-    //     { isDivider: true },
-    //     get_copyright_entry(21),
-    //   ],
-    //   '雞雞',
-    // ],
+    [
+      [get_copyright_entry(7), { isDivider: true }, get_copyright_entry(21)],
+      '雞雞',
+    ],
     [[get_copyright_entry(13)], '伊兰'],
     [[get_copyright_entry(17)], '露娜俘虏'],
     [[get_copyright_entry(19)], '片手虾好评发售中！'],
@@ -143,7 +136,7 @@ module.exports = async () => {
         '无名黑奴',
       ],
     ],
-    // [[get_copyright_entry(71)], '洛洛'],
+    [[get_copyright_entry(71)], '洛洛'],
     [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
     [[get_copyright_entry(89, '地下室')], '無奈'],
     // [[get_copyright_entry(89)], '無奈'],
@@ -266,7 +259,7 @@ module.exports = async () => {
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
             content: [
-              `版本号：v${version} (kuuga)`,
+              `版本号：v${version} (agito)`,
               { isBr: true },
               '雞雞',
               { isDivider: true },

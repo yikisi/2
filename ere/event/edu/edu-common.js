@@ -53,7 +53,7 @@ class CustomizedEdu extends ICustomizedEdu {
    */
   static async common_palace(chara, me) {
     const { check, count, buffer } = CustomizedEdu.get_palace_info(chara),
-      titles = new CharaTitles(chara.id).get();
+      titles = CharaTitles.get(chara.id).get();
     if (
       check >= 6 ||
       (check >= 4 &&
@@ -102,7 +102,7 @@ class CustomizedEdu extends ICustomizedEdu {
       await era.printAndWait(seg);
     }
     era.println();
-    const title = new CharaTitles(chara.id).get_colored_curr_title(),
+    const title = CharaTitles.get(chara.id).get_colored_curr_title(),
       fame_reward =
         (count.g1 * race_rewards[class_enum.G1].r01.fame) / 2 +
         (count.g2 * race_rewards[class_enum.G2].r01.fame) / 2 +
@@ -202,7 +202,7 @@ class CustomizedEdu extends ICustomizedEdu {
    * @returns {{count:{g1:number,g2:number,g3:number},check:number,buffer:*[]}}
    */
   static get_palace_info(chara) {
-    const races = new RaceHistory(chara.id).get_entries(),
+    const races = RaceHistory.get(chara.id).get_entries(),
       main_races = [],
       ret_buffer = [];
     let total_prize = 0,

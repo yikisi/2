@@ -15,7 +15,10 @@ const {
   sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+const {
+  sys_check_awake,
+  sys_check_remote,
+} = require('#/system/sys-calc-chara-param');
 const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
@@ -892,6 +895,29 @@ class CustomizedDaily {
    */
   // eslint-disable-next-line no-unused-vars
   async week_start(hook, extra_flag, event_object) {}
+
+  /** @param {HookArg} hook */
+  // eslint-disable-next-line no-unused-vars
+  async birthday(hook) {
+    const chara = get_chara_talk(this.id),
+      me = get_chara_talk(0);
+    if (sys_check_remote(this.id)) {
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 远程向 ',
+        chara.get_colored_name(),
+        ' 送上了生日祝福',
+      ]);
+    } else {
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 向 ',
+        chara.get_colored_name(),
+        ' 当面道了一声生日快乐。',
+      ]);
+    }
+    await era.printAndWait([chara.get_colored_name(), ' 显得很高兴。']);
+  }
 
   /**
    * @param {HookArg} hook

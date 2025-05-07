@@ -26,7 +26,7 @@ module.exports = {
   generate(chara) {
     const race_info_list = [];
     if (era.get(`cflag:${chara.id}:种族`)) {
-      const races = new RaceHistory(chara.id).get_entries();
+      const races = RaceHistory.get(chara.id).get_entries();
       const race_len = races.length,
         race_list = sort_list(
           races.filter((e) => e.race !== race_enum.begin_race),
@@ -98,7 +98,7 @@ module.exports = {
         config: { content: '专属称号', position: 'left' },
         type: 'divider',
       });
-      const titles = new CharaTitles(chara.id).get(),
+      const titles = CharaTitles.get(chara.id).get(),
         personal_titles = get_custom_check(chara.id).get_personal_titles();
       if (personal_titles.length) {
         personal_titles.map((e) => {

@@ -19,8 +19,8 @@ const { buff_colors } = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const BasementOwners = require('#/data/event/basement-owners');
-const CrazyFans = require('#/data/event/crazy-fans');
+const basement_owners = require('#/data/event/basement-owners');
+const crazy_fans = require('#/data/event/crazy-fans');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
@@ -34,8 +34,7 @@ const basement_saying_arr = [
 
 /** @param {boolean} [again] */
 async function game_over(again) {
-  const game_over = era.get('flag:游戏结束'),
-    basement_owners = new BasementOwners();
+  const game_over = era.get('flag:游戏结束');
   let end_talk = false,
     saying_arr,
     temp;
@@ -57,7 +56,7 @@ async function game_over(again) {
       '每一个被束缚的奴隶都可以靠着他自己的手脱掉锁链。——莎士比亚',
       '我已不再孤单，如今我生命中的挚爱与我如此靠近。——悲惨世界',
     ];
-  } else if ((temp = new CrazyFans().get()) && game_over) {
+  } else if ((temp = crazy_fans.get()) && game_over) {
     era.drawLine();
     await get_custom_edu(temp).crazy_fan_end();
     saying_arr = [

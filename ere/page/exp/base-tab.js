@@ -148,7 +148,7 @@ module.exports = {
       .map((e) => `${e}_半身`)
       .join('\t');
 
-    const titles = new CharaTitles(chara.id),
+    const titles = CharaTitles.get(chara.id),
       title_list = titles.get(),
       title_info_list = [],
       cur_title = titles.get_curr_title();

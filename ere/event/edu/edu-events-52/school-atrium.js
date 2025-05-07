@@ -27,7 +27,7 @@ module.exports = (handlers) => {
       add_event(event_hooks.school_atrium, event_object);
       return true;
     }
-    new EventMarks(0).sub(event_hooks.school_atrium);
+    EventMarks.get(0).sub(event_hooks.school_atrium);
     await print_event_name('掰手腕对决', urara);
     const sky = get_chara_talk(20),
       spe = get_chara_talk(1);

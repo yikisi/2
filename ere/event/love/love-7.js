@@ -20,7 +20,7 @@ const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const { buff_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 
 module.exports = class extends CustomizedLove {
   async 49(gold_ship, me, callname) {
@@ -552,7 +552,7 @@ module.exports = class extends CustomizedLove {
       ]);
     }
     if (ret[4] !== 3) {
-      new YandereList().push(7);
+      yandere_list.push(7);
     }
     await era.waitAnyKey();
     if (ret[1] === 2) {

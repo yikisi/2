@@ -32,7 +32,7 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { get_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_ero } = require('#/event/ero/ero-factory');
-const GameGuides = require('#/event/others/game-guides');
+const game_guides = require('#/event/others/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 
 const {
@@ -51,7 +51,7 @@ const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const BasementAction = require('#/data/event/basement-action');
-const BasementOwners = require('#/data/event/basement-owners');
+const basement_owners = require('#/data/event/basement-owners');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -241,7 +241,7 @@ module.exports = async () => {
     homepage: true,
     week_start: false,
   };
-  await new GameGuides().game_start();
+  await game_guides.game_start();
   while (flags.homepage) {
     await era.clear();
     let flag_skip_this_week = false;
@@ -336,8 +336,7 @@ module.exports = async () => {
           Math.min(23, count + 6) * 60,
           24 * 60 - 1,
         );
-        const basement_owners = new BasementOwners(),
-          owners = basement_owners.get(),
+        const owners = basement_owners.get(),
           owner = owners[0],
           owner_marks = LifeEventMarks.get_marks(owner);
         basement_owners.clear();

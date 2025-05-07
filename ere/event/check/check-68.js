@@ -11,7 +11,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
-const CrazyFans = require('#/data/event/crazy-fans');
+const crazy_fans = require('#/data/event/crazy-fans');
 const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -54,7 +54,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(68).get(),
+    const races = RaceHistory.get(68).get(),
       titles = [];
     if (
       (check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
@@ -146,13 +146,13 @@ module.exports = class extends CustomizedCheck {
 
   check_palace_and_get_aims() {
     if (
-      new RaceHistory(68)
+      RaceHistory.get(68)
         .get_values()
         .filter((e) => e.rank === 1 && e.race !== race_enum.begin_race).length <
       4
     ) {
       new KitaEduMarks().crazy_fan++;
-      new CrazyFans().push(68);
+      crazy_fans.push(68);
     } else {
       add_event(
         event_hooks.week_end,
@@ -172,7 +172,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(68).get();
+      races = RaceHistory.get(68).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.stli_kin, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));

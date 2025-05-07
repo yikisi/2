@@ -44,7 +44,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(this.id),
+    const races = RaceHistory.get(this.id),
       ret = [];
     const takz_kin =
       check_aim_race(
@@ -94,7 +94,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_edu_aims() {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       ret = [],
       { aim_check } = new PamaEduMarks();
     ret.push(check_aim_and_get_entry(races, race_enum.begin_race));

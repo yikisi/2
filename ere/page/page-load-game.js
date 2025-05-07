@@ -1,4 +1,4 @@
-﻿const era = require('#/era-electron');
+const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
 const {
@@ -25,7 +25,7 @@ const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const { trainer_salary } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
-const BasementOwners = require('#/data/event/basement-owners');
+const basement_owners = require('#/data/event/basement-owners');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -262,7 +262,7 @@ module.exports = async () => {
               if (era.get('cflag:56:招募状态') === recruit_flags.yes) {
                 const title_name =
                     get_custom_check(56).get_personal_titles()[0],
-                  personal_title = new CharaTitles(56)
+                  personal_title = CharaTitles.get(56)
                     .get()
                     .find((e) => e.n === title_name);
                 if (personal_title !== undefined) {
@@ -270,7 +270,7 @@ module.exports = async () => {
                 }
               }
               if (era.get('cflag:88:招募状态') === recruit_flags.yes) {
-                const personal_title = new CharaTitles(56)
+                const personal_title = CharaTitles.get(56)
                   .get()
                   .find((e) => e.n === '黑翠千里行');
                 if (personal_title !== undefined) {
@@ -385,7 +385,7 @@ module.exports = async () => {
             }
             if (version <= 1321) {
               if (era.get('flag:当前位置') === location_enum.basement) {
-                const owners = new BasementOwners().get();
+                const owners = basement_owners.get();
                 clean_actions(
                   (a, i, l) =>
                     (a.chara_id !== 0 &&

@@ -462,7 +462,7 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by_and_wait(
       '解说',
-      check_aim_race(new RaceHistory(56).get(), race_enum.kobe_hai, 1, 1)
+      check_aim_race(RaceHistory.get(56).get(), race_enum.kobe_hai, 1, 1)
         ? '冲线了！自神户之后！！！福气也来到了菊花的舞台！！！'
         : '冲线了！',
     );

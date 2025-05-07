@@ -801,7 +801,7 @@ module.exports = class extends CustomizedEdu {
           ),
         );
       }
-      if (check_aim_race(new RaceHistory(19).get(), race_enum.japa_dir, 1, 3)) {
+      if (check_aim_race(RaceHistory.get(19).get(), race_enum.japa_dir, 1, 3)) {
         buffer.push(() =>
           digital.say_and_wait('我要，作为一名选手，跑出不负于对手的比赛。'),
         );

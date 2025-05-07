@@ -32,7 +32,7 @@ const {
   escape_enum,
 } = require('#/data/basement-const');
 const BasementAction = require('#/data/event/basement-action');
-const BasementOwners = require('#/data/event/basement-owners');
+const basement_owners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 const basement_desc = [
@@ -122,7 +122,6 @@ sys_handle_time_in_basement.init(get_random_value);
 module.exports = async (_, save_and_next_week, flags) => {
   const my_life_marks = LifeEventMarks.get_marks(0),
     basement_info = [],
-    basement_owners = new BasementOwners(),
     me = get_chara_talk(0);
   if (flags.week_start) {
     my_life_marks.b_r_seed = (era.get('flag:随机种子') * 9301 + 49297) % 233280;

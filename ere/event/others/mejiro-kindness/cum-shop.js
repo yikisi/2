@@ -13,7 +13,7 @@ const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { penis_desc, skin_desc } = require('#/data/ero/status-const');
-const ExtraBase = require('#/data/extra-base');
+const extra_base = require('#/data/extra-base');
 const { get_breast_cup, get_hair_color } = require('#/data/info-generator');
 const { check_chara_ero_image } = require('#/data/other-const');
 
@@ -462,7 +462,6 @@ async function cum_shop(chara, me) {
           while (_flag) {
             await era.clear(era.getLineCount() - lines);
             print_money_divider();
-            const extra_base = new ExtraBase();
             era.printButton(
               `「大力丸」（${
                 extra_base.stamina >= 1000

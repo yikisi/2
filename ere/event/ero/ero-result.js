@@ -17,7 +17,7 @@ const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { part_names } = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
-const BasementOwners = require('#/data/event/basement-owners');
+const basement_owners = require('#/data/event/basement-owners');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
   ero_action_names,
@@ -77,7 +77,7 @@ handlers[ero_hooks.prison] = (id) => {
   }
   era.set(`status:${id}:爱意克制`, 0);
   era.set('flag:当前位置', location_enum.basement);
-  new BasementOwners().push(id);
+  basement_owners.push(id);
 };
 
 /**

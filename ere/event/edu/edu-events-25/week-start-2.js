@@ -486,7 +486,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
   /** @this CustomizedEdu */
   handlers.palace = async function (coffee, me, callname) {
     await CustomizedEdu.common_palace(coffee, me);
-    const races = new RaceHistory(25).get();
+    const races = RaceHistory.get(25).get();
     if (
       check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
       check_aim_race(races, race_enum.tenn_spr, 2, 1) &&

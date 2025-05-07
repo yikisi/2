@@ -10,6 +10,8 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 const date_indicator = require('#/page/components/date-indicator');
 const race_indicator = require('#/page/components/race-indicator');
 
+const { get_custom_mec } = require('#/event/mec/mec-factory');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { celebration_color, money_color } = require('#/data/color-const');
@@ -87,7 +89,7 @@ function page_header(enable_race_info) {
       money_buff = era.get('global:金钱加成'),
       rec_trainers = [304, 306]
         .filter((e) => era.get(`cflag:${e}:招募状态`) === recruit_flags.yes)
-        .map((e) => `[${era.get(`staticcstr:${e}:称号`)}]`)
+        .map((e) => `[${get_custom_mec(e).get_talents()[0].content}]`)
         .join('+');
     let billings = '月账单：',
       money_change = 0;

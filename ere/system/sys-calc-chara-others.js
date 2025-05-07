@@ -27,7 +27,7 @@ const {
   get_love_mark,
   get_relation_mark,
 } = require('#/data/info-generator');
-const LimitLoveStatus = require('#/data/love-limit-status');
+const LoveLimitStatus = require('#/data/love-limit-status');
 
 /**
  * @param {number} id
@@ -219,7 +219,7 @@ function love_uma(id, val, shown = true) {
       !era.get('flag:后代爱慕限制') &&
       era.get(`cflag:${id}:父方角色`) >= 0) ||
     era.get(`status:${id}:讨厌药`) > 0 ||
-    !new LimitLoveStatus(id).is_empty()
+    !LoveLimitStatus.get(id).is_empty()
   ) {
     return false;
   }

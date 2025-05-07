@@ -21,7 +21,7 @@ const { lust_border } = require('#/data/ero/orgasm-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
-const LimitLoveStatus = require('#/data/love-limit-status');
+const LoveLimitStatus = require('#/data/love-limit-status');
 const { attr_enum, pressure_border } = require('#/data/train-const');
 
 /** @param {Record<string,function(number):Promise>} handlers */
@@ -281,7 +281,7 @@ module.exports = (handlers) => {
       (id) =>
         id &&
         !era.get(`status:${id}:讨厌药`) &&
-        new LimitLoveStatus(id).is_empty(),
+        LoveLimitStatus.get(id).is_empty(),
     );
     if (ret !== undefined) {
       const chara = get_chara_talk(ret);
@@ -318,7 +318,7 @@ module.exports = (handlers) => {
           reject === 99) &&
         !era.get(`status:${id}:讨厌药`) &&
         !era.get(`status:${id}:爱意克制`) &&
-        new LimitLoveStatus(id).is_empty()
+        LoveLimitStatus.get(id).is_empty()
       );
     });
     if (aim !== undefined) {
@@ -333,7 +333,7 @@ module.exports = (handlers) => {
         get_chara_talk(0).get_colored_name(),
         ' 的恋心被抑制了……',
       ]);
-      new LimitLoveStatus(aim).set(
+      LoveLimitStatus.get(aim).set(
         era.get(`love:${aim}`),
         era.get('flag:当前回合数') + 4,
       );

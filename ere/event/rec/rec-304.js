@@ -30,7 +30,7 @@ module.exports = class extends CustomizedRecruit {
       me = get_chara_talk(0),
       meek = get_chara_talk(201);
     if (
-      new RaceHistory(201)
+      RaceHistory.get(201)
         .get_values()
         .findIndex(
           (e) =>

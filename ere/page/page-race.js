@@ -48,7 +48,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const AfterRaceParams = require('#/data/event/extra-flag/after-race-params');
 const RaceEndParams = require('#/data/event/extra-flag/race-end-params');
 const RaceStartParams = require('#/data/event/extra-flag/race-start-params');
-const GrandLives = require('#/data/event/grand-lives');
+const grand_lives = require('#/data/event/grand-lives');
 const HelloLifeMarks = require('#/data/event/life-event-marks/life-event-marks-308');
 const { get_trainer_level } = require('#/data/info-generator');
 const { gene_juel_names } = require('#/data/other-const');
@@ -62,7 +62,7 @@ const {
 
 /**
  * @param {RaceInfo} _info
- * @param {number} is_grand_live
+ * @param {boolean} is_grand_live
  */
 function page_race_header(_info, is_grand_live) {
   era.printInColRows(
@@ -136,7 +136,7 @@ async function race_page(race) {
   era.set('flag:当前赛事', race);
   const aim_race_dict = {};
   const team_list = (await select_contestants(race)).map(sys_get_chara_pseudo),
-    is_grand_live = new GrandLives().check(race);
+    is_grand_live = grand_lives.check(race);
   let wait_flag = false;
   const info = fill_race_weather_and_mess(race, team_list[0]);
   const contestants = sys_parse_for_race(team_list, race, info);
@@ -276,15 +276,16 @@ async function race_page(race) {
   sys_prepare_race(contestants, team_list, info);
   era.stopMusic();
   await page_race_result(contestants, info, race);
-  team_list.forEach((uma) => {
-    aim_race_dict[uma.index_chara] = get_custom_check(
-      uma.index_chara,
-    ).is_aim_race(
-      race,
-      era.get(`cflag:${uma.index_chara}:育成回合计时`),
-      uma.rank.curr,
-    );
-  });
+  team_list.forEach(
+    (uma) =>
+      (aim_race_dict[uma.index_chara] = get_custom_check(
+        uma.index_chara,
+      ).is_aim_race(
+        race,
+        era.get(`cflag:${uma.index_chara}:育成回合计时`),
+        uma.rank.curr,
+      )),
+  );
   const cur_year = era.get('flag:当前年');
   era.drawLine();
   sort_list(team_list, (e) => e.rank.curr, true).forEach((uma) => {
@@ -326,7 +327,7 @@ async function race_page(race) {
     era.println();
     const edu_weeks = era.get(`cflag:${id}:育成回合计时`);
     if (uma.rank.curr === 1 || race !== race_enum.begin_race) {
-      new RaceHistory(id).add_result(
+      RaceHistory.get(id).add_result(
         edu_weeks,
         new RaceHistory.RaceResult(
           uma.pop[0],
@@ -479,7 +480,7 @@ async function race_page(race) {
   let race_title_reward = 0;
   wait_flag = false;
   for (const { index_chara: id } of team_list) {
-    const titles = new CharaTitles(id),
+    const titles = CharaTitles.get(id),
       cur_count = titles.count();
     wait_flag = sys_add_titles(id, ...new_title_dict[id]) || wait_flag;
     if (titles.count() > cur_count) {
@@ -639,9 +640,11 @@ async function race_page(race) {
       wait_flag = true;
     }
   }
-  wait_flag && (await era.waitAnyKey());
+  if (wait_flag) {
+    await era.waitAnyKey();
+  }
   era.drawLine();
-  await era.printAndWait('回去了……');
+  await era.printAndWait('【折返了】');
   era.println();
   await sys_get_random_event(event_hooks.back_school)();
   era.set('flag:当前赛事', 0);

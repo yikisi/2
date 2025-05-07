@@ -727,7 +727,7 @@ module.exports = (handlers) => {
     await flash.say_and_wait(`……很抱歉，${callname}，但是我果然还是无法接受。`);
     await flash.say_and_wait('取消菊花赏的出走预定这件事情。');
     era.drawLine();
-    if (check_aim_race(new RaceHistory(37).get(), race_enum.toky_yus, 1, 1)) {
+    if (check_aim_race(RaceHistory.get(37).get(), race_enum.toky_yus, 1, 1)) {
       await era.printAndWait(
         '就在上个星期，荣进闪耀于日本德比的赛场上取得了傲人的战绩。',
       );

@@ -35,10 +35,12 @@ function sys_get_chara_pseudo(chara_id) {
       adapt_list.slice(6, 10),
       adapt_list.slice(2, 6).map((adapt) => adapt - debuff),
       adapt_list.slice(0, 2).map((adapt) => adapt - debuff),
-      new CharaSkills(chara_id).get().map((e) => skills_dict[e]),
+      CharaSkills.get(chara_id)
+        .get()
+        .map((e) => skills_dict[e]),
     );
   uma.chara = sys_get_chara(chara_id);
-  uma.base.winCount = new RaceHistory(chara_id)
+  uma.base.winCount = RaceHistory.get(chara_id)
     .get_values()
     .filter((e) => e.rank === 1).length;
   if (debuff) {

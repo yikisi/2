@@ -1,11 +1,9 @@
 const { get, set } = require('#/era-electron');
 
 class LocCharacters {
-  /** @type {Record<string,number[]>} */
-  obj;
-
-  constructor() {
-    this.obj = get('flag:NPC位置') || set('flag:NPC位置', {});
+  /** @returns {Record<string,number[]>} */
+  get #obj() {
+    return get('flag:NPC位置') || set('flag:NPC位置', {});
   }
 
   /**
@@ -13,7 +11,7 @@ class LocCharacters {
    * @returns {number[]}
    */
   get(loc) {
-    return (this.obj[loc] ||= []);
+    return (this.#obj[loc] ||= []);
   }
 
   /**
@@ -21,8 +19,10 @@ class LocCharacters {
    * @param {number[]} _visitors
    */
   set(loc, _visitors) {
-    this.obj[loc] = _visitors.filter((e) => e);
+    this.#obj[loc] = _visitors.filter((e) => e);
   }
 }
 
-module.exports = LocCharacters;
+const loc_characters = new LocCharacters();
+
+module.exports = loc_characters;

@@ -50,6 +50,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { class_enum, track_names } = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
+const { get_random_value } = require('#/utils/value-utils');
 
 const rec_list = {};
 [race_enum.prix_lat].forEach((e) => (rec_list[e] ||= []).push(204));
@@ -509,7 +510,7 @@ async function check_race_events(race, info, team_contestants) {
   ) {
     /** @author Mr.E. */
     handler = async () => {
-      my_edu_marks.we_are_one = 1;
+      my_edu_marks.we_are_one = get_random_value(4, 8);
       const chara = get_chara_talk(mvp),
         me = get_chara_talk(0);
       await print_event_name(['「」心「」体'], chara);

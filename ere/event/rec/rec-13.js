@@ -34,7 +34,7 @@ module.exports = class extends CustomizedRecruit {
           era.set('flag:物色对象', 13);
           era.set(`cflag:${this.id}:随机招募`, 0);
           era.set(`cflag:${this.id}:招募状态`, -2);
-          new EventMarks(0).add(event_hooks.recruit_start);
+          EventMarks.get(0).add(event_hooks.recruit_start);
           add_event(
             event_hooks.recruit_start,
             new EventObject(13, cb_enum.recruit).set_arg(2),
@@ -58,7 +58,7 @@ module.exports = class extends CustomizedRecruit {
         await lines['recruit_4'](dict);
         era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
         era.set('flag:物色对象', 0);
-        new EventMarks(0).sub(event_hooks.recruit_start);
+        EventMarks.get(0).sub(event_hooks.recruit_start);
     }
     return true;
   }

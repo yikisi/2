@@ -898,7 +898,9 @@ module.exports = (handlers) => {
       ' 会说出口的',
     ]);
     if (
-      new RaceHistory(32).get_values().findIndex((e) => e.rank !== 1) === -1
+      RaceHistory.get(32)
+        .get_values()
+        .findIndex((e) => e.rank !== 1) === -1
     ) {
       await era.printAndWait([
         '从未感受过败北的 ',

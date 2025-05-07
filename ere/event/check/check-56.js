@@ -97,7 +97,7 @@ module.exports = class extends CustomizedCheck {
 
   check_and_get_titles(aim_check) {
     const ret = [],
-      race_list = new RaceHistory(56).get_values(),
+      race_list = RaceHistory.get(56).get_values(),
       kiku_sho_index = race_list.findIndex(
         (e) => e.race === race_enum.kiku_sho,
       );
@@ -229,7 +229,7 @@ module.exports = class extends CustomizedCheck {
         // 菊花赏前后剧情
         case 47 + 41: // 神化
           if (
-            check_aim_race(new RaceHistory(56).get(), race_enum.kiku_sho, 1, 1)
+            check_aim_race(RaceHistory.get(56).get(), race_enum.kiku_sho, 1, 1)
           ) {
             add_event(event_hooks.week_start, event_obj_special);
           }
@@ -252,7 +252,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + 31: // 林中参拜
         case 95 + 37: // 每个人的天命
           if (
-            check_aim_race(new RaceHistory(56).get(), race_enum.kiku_sho, 1, 1)
+            check_aim_race(RaceHistory.get(56).get(), race_enum.kiku_sho, 1, 1)
           ) {
             add_event(event_hooks.week_start, event_obj_special);
           }
@@ -283,7 +283,7 @@ module.exports = class extends CustomizedCheck {
 
   check_palace_and_get_aims() {
     const edu_marks = new KitaruEduMarks(),
-      races = new RaceHistory(this.id).get();
+      races = RaceHistory.get(this.id).get();
     if (
       check_aim_race(races, race_enum.takz_kin, 2, 1) &&
       check_aim_race(races, race_enum.arim_kin, 2, 1) &&
@@ -302,7 +302,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(56).get();
+      races = RaceHistory.get(56).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.aoba_sho, 1, 20)); // 入着即可
     buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));

@@ -38,7 +38,7 @@ module.exports = class extends CustomizedCheck {
 
   check_and_get_titles(aim_check) {
     const ret = [],
-      races = new RaceHistory(this.id).get();
+      races = RaceHistory.get(this.id).get();
     if (
       new SuzukaEduMarks().max_wins >= 6 &&
       (check_aim_race(
@@ -71,7 +71,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(this.id).get();
+      races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.kobe_hai, 1, 3));

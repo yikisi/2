@@ -680,7 +680,7 @@ module.exports = (handlers) => {
     ]);
     era.println();
     const best_mvp = Math.min(
-      ...new RaceHistory(52)
+      ...RaceHistory.get(52)
         .get_values()
         .filter((e) => race_infos[e.race].race_class <= class_enum.G3)
         .map((e) => e.rank),
