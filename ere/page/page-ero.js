@@ -855,7 +855,7 @@ async function page_ero(lover, skip_start_end = false) {
     ero_flag =
       (await sys_handle_ero_act(ret, filters)) &&
       get_characters_in_train().length > 1;
-    if (era.get('tflag:投降')) {
+    if (era.get('tflag:投降') > 0) {
       era.set('tflag:投降', 0);
       while (era.get('tflag:主导权') && ero_flag) {
         await sys_handle_ero_act(ero_hooks.relax, filters);
