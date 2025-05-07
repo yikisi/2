@@ -691,6 +691,111 @@
   - 望着因为突破自己极限而欢欣的阿尔丹，看着%她%成长的%你%，由衷为%她%得到了应有的回报而高兴。
   #增加好感10和爱慕1，全属性+3，技能点+30，删除性格里身体虚弱，替换为坚强
 
+道路的分歧处:
+  #日本德比赛后
+  #开始训练时触发
+  - 当%你%在办公室忙着处理接下来的训练计划时，阿尔丹推开门走了进来。
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白阿尔丹
+      - 「%称呼%，我回来了。」
+  - acc: 1
+    content: 「怎么样？千代王同学应该没问题了吧？」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白阿尔丹
+      - 「是，%阿尔丹称呼千代王%一定会再次回到赛场上的。」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白阿尔丹
+      - 「而且回来的路上又和%阿尔丹称呼八重无敌%约下了再战的宣言。」
+  - %她%的紫色双眸深处闪烁着从未有过的坚定意志。
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白阿尔丹
+      - 「……我的心中不断涌现着新的感情。」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白阿尔丹
+      - 「到现在为止，我都是为了刻下我自己的光迹而不断锻炼，参加比赛——」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白阿尔丹
+      - 「但『现在』，我所追求的已经并不局限于此了，我想成为无愧于成为%她%们劲敌的存在。」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白阿尔丹
+      - 「……所以%称呼%，能请您，给予我指引吗？ 」
+  - acc: 1
+    content: 「菊花赏如何？和八重无敌同学在你并不擅长的距离上再一次拼搏吧。」
+    lines:
+      #育成目标定为菊花赏
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白阿尔丹
+          - 「……菊花赏，再一次和%阿尔丹称呼八重无敌%战斗呢。」
+      - acc: 1
+        content: 「会是场残酷的战斗呢。」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白阿尔丹
+          - 「是，但是我已经做好觉悟了。」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白阿尔丹
+          - 「是，我所选择的是『最为艰难且困苦的道路』，但正是这样，我的光芒才能在『现在』绽放光明。」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白阿尔丹
+          - 「……呼呼，下一次和%阿尔丹称呼八重无敌%一起奔跑，光是想想就心潮澎湃了。」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白阿尔丹
+          - 「%称呼，%接下来开始的练习，还请多多指教了。」
+  - acc: 2
+    content: 「天皇赏秋如何？那里有着『现在』被誉为最强的选手们 。」
+    lines:
+      #育成目标定为菊花赏
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白阿尔丹
+          - 「……天皇赏秋，在那里和『现在』被誉为最强的选手们战斗。」
+      - acc: 1
+        content: 「会是场残酷的战斗呢。」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白阿尔丹
+          - 「是，但是我已经做好觉悟了。」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白阿尔丹
+          - 「是，我所选择的是『最为艰难且困苦的道路』，但正是这样，我的光芒才能在『现在』绽放光明。」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白阿尔丹
+          - 「……呼呼，高年级的她们会以怎样的奔跑来应对，光是想想就心潮澎湃了。」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白阿尔丹
+          - 「%称呼%，接下来开始的练习，还请多多指教了。」
+
 菊花赏赛前:
   #赛前鼓励。
   - 这次的比赛是阿尔丹引以为豪的姐姐也没有跑过的，阿尔丹一脸严肃的观察着四周，看起来这里存在着非常强大的对手。

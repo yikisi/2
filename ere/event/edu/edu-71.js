@@ -179,6 +179,27 @@ module.exports = class extends CustomizedEdu {
     }
   }
 
+  /** @param {CharaTalk} ardan */
+  async separate_way(ardan) {
+    if (
+      (
+        await print_name_and_show_kojo('道路的分歧处', ardan, kojo, this.#cdict)
+      )[1] === 1
+    ) {
+      new ArdanEduMarks().kiku_sho = 1;
+    }
+    if (
+      all_reward_in_event(this.id, {
+        relation: 10,
+        love: 1,
+        attr: new Array(5).fill(3),
+        pt: 30,
+      })
+    ) {
+      await era.waitAnyKey();
+    }
+  }
+
   async train_fail(ardan, me, callname, hook, extra_flag) {
     const event_marks = new ArdanEduMarks();
     event_marks.train_fail++;
@@ -187,17 +208,18 @@ module.exports = class extends CustomizedEdu {
 
   async race_start(ardan, me, callname, hook, extra_flag) {
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
+    extra_flag.relation_change = 0;
     let name;
     switch (extra_flag.race) {
       case race_enum.begin_race:
         if (edu_weeks === 23) {
           name = '出道赛赛前';
           if ((await kojo[name](this.#dict))[0] === 1) {
-            extra_flag.motivation_change = 1;
-            extra_flag.love_change = 1;
+            extra_flag.love_change = 2;
           } else {
-            extra_flag.motivation_change = 1;
+            extra_flag.relation_change = 10;
           }
+          extra_flag.motivation_change = 1;
         }
         break;
       case race_enum.sats_sho:
@@ -275,8 +297,6 @@ module.exports = class extends CustomizedEdu {
           await kojo[name](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
-          extra_flag.relation_change = 20;
-          extra_flag.love_change = 2;
           edu_marks.sick = 1;
           add_event(
             event_hooks.out_start,
@@ -289,15 +309,11 @@ module.exports = class extends CustomizedEdu {
           name = '皋月赏1着';
           await kojo[name](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
-          extra_flag.relation_change = 20;
-          extra_flag.love_change = 2;
           extra_flag.pt_change = 60;
         } else if (extra_flag.rank <= 5) {
           name = '皋月赏入着';
           await kojo[name](this.#dict);
           extra_flag.attr_change = new Array(5).fill(3);
-          extra_flag.relation_change = 10;
-          extra_flag.love_change = 1;
           extra_flag.pt_change = 30;
         }
         break;
@@ -306,8 +322,6 @@ module.exports = class extends CustomizedEdu {
           name = '青叶赏赛后';
           await kojo[name](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
-          extra_flag.relation_change = 10;
-          extra_flag.love_change = 1;
           extra_flag.pt_change = 60;
           add_event(
             event_hooks.week_start,
@@ -320,15 +334,11 @@ module.exports = class extends CustomizedEdu {
           name = '日本德比1着';
           await kojo[name](this.#cdict);
           extra_flag.attr_change = new Array(5).fill(5);
-          extra_flag.relation_change = 30;
-          extra_flag.love_change = 3;
           extra_flag.pt_change = 60;
         } else if (extra_flag.rank <= 5) {
           name = '日本德比入着';
           await kojo[name](this.#cdict);
           extra_flag.attr_change = new Array(5).fill(3);
-          extra_flag.relation_change = 10;
-          extra_flag.love_change = 1;
           extra_flag.pt_change = 30;
         }
         era.println();
@@ -346,15 +356,11 @@ module.exports = class extends CustomizedEdu {
           name = '菊花赏1着';
           await kojo[name](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
-          extra_flag.relation_change = 20;
-          extra_flag.love_change = 2;
           extra_flag.pt_change = 60;
         } else if (extra_flag.rank <= 5) {
           name = '菊花赏入着';
           await kojo[name](this.#dict);
           extra_flag.attr_change = new Array(5).fill(3);
-          extra_flag.relation_change = 10;
-          extra_flag.love_change = 1;
           extra_flag.pt_change = 30;
         }
         break;
@@ -364,23 +370,17 @@ module.exports = class extends CustomizedEdu {
             name = '经典年秋季天皇赏1着';
             await kojo[name](this.#dict);
             extra_flag.attr_change = new Array(5).fill(5);
-            extra_flag.relation_change = 20;
-            extra_flag.love_change = 2;
             extra_flag.pt_change = 60;
           } else if (extra_flag.rank <= 3) {
             name = '经典年秋季天皇赏前三';
             await kojo[name](this.#dict);
             extra_flag.attr_change = new Array(5).fill(3);
-            extra_flag.relation_change = 10;
-            extra_flag.love_change = 1;
             extra_flag.pt_change = 30;
           }
         } else if (extra_flag.rank === 1) {
           name = '资深年秋季天皇赏赛后';
           await kojo[name](this.#dict);
           extra_flag.attr_change = new Array(5).fill(30);
-          extra_flag.relation_change = 50;
-          extra_flag.love_change = 5;
           extra_flag.pt_change = 150;
         }
         break;
@@ -389,8 +389,6 @@ module.exports = class extends CustomizedEdu {
           name = '大阪杯赛后';
           await kojo[name](this.#cdict);
           extra_flag.attr_change = new Array(5).fill(5);
-          extra_flag.relation_change = 20;
-          extra_flag.love_change = 2;
           extra_flag.pt_change = 60;
         }
         break;
@@ -399,8 +397,6 @@ module.exports = class extends CustomizedEdu {
           name = '宝冢纪念赛后';
           await kojo[name](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
-          extra_flag.relation_change = 20;
-          extra_flag.love_change = 2;
           extra_flag.pt_change = 60;
         }
         break;
@@ -409,8 +405,6 @@ module.exports = class extends CustomizedEdu {
           name = '每日王冠赛后';
           await kojo[name](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
-          extra_flag.relation_change = 20;
-          extra_flag.love_change = 2;
           extra_flag.pt_change = 60;
         }
         break;
@@ -419,16 +413,17 @@ module.exports = class extends CustomizedEdu {
       if (extra_flag.rank === 1) {
         name = '通用1着';
         extra_flag.attr_change = new Array(5).fill(3);
-        extra_flag.relation_change = 10;
-        extra_flag.love_change = 1;
         extra_flag.pt_change = 30;
       } else {
         name = '通用非1着';
         extra_flag.attr_change = new Array(5).fill(2);
-        extra_flag.relation_change = 0;
         extra_flag.pt_change = 15;
       }
+      extra_flag.relation_change = 10;
       await kojo[name](this.#dict);
+    } else {
+      extra_flag.relation_change = 10;
+      extra_flag.love_change = extra_flag.rank === 1 ? 2 : 1;
     }
   }
 };

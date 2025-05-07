@@ -2,8 +2,6 @@
  * @file 玉藻十字 - 日常
  * @author 雞雞
  */
-const era = require('#/era-electron');
-
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const kojo = require('#/event/daily/daily-21.kojo');
@@ -15,18 +13,16 @@ const select_action_in_station = require('#/event/daily/snippets/select-action-i
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_chara_color } = require('#/data/chara-colors');
-
 module.exports = class extends CustomizedDaily {
   get #dict() {
     const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
-      dict['她'] = '他';
-    } else {
-      dict['她'] = '她';
-    }
+    const tama = get_chara_talk(this.id);
+    dict['代表色'] = tama.color;
+    dict['她'] = tama.sex;
     dict['称呼'] = sys_get_callname(this.id, 0);
+    const me = get_chara_talk(0);
+    dict['玩家名'] = me.name;
+    dict['他'] = me.sex;
     return dict;
   }
 

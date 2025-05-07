@@ -77,15 +77,12 @@ module.exports = class extends CustomizedCheck {
     }
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
     if (edu_weeks < 3 * 48) {
-      //      const event_marks = new ArdanEduMarks();
-      //      // TODO
-      //      if (event_marks.kiku_sho > 0) {
-      //        aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 4;
-      //        aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 0;
-      //      } else {
-      //        aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 0;
-      //        aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 4;
-      //      }
+      if (edu_weeks === 47 + 20) {
+        add_event(
+          event_hooks.week_end,
+          new EventObject(this.id, cb_enum.edu, true).set_arg('separate_way'),
+        );
+      }
       check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
     } else {
       super.check_next_week();
@@ -105,64 +102,69 @@ module.exports = class extends CustomizedCheck {
   }
 
   is_aim_race(race, edu_weeks, rank) {
-    let ret = super.is_aim_race(race, edu_weeks, rank);
     if (rank !== undefined) {
       switch (race) {
         case race_enum.begin_race:
           if (rank !== 1) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.sats_sho:
           if (rank > 5) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.aoba_sho:
           if (rank > 5) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.toky_yus:
           if (rank > 5) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.kiku_sho:
           if (rank > 5) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.tenn_sho:
           if (edu_weeks < 96) {
             if (rank > 3) {
-              ret &= 0b100;
+              return 0;
             }
           } else if (rank > 1) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.sank_hai:
           if (rank > 3) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.takz_kin:
           if (rank > 3) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.main_oka:
           if (rank > 3) {
-            ret &= 0b100;
+            return 0;
           }
-          break;
       }
     }
-    return ret;
+    return super.is_aim_race(race, edu_weeks, rank);
   }
 
   get_aim_races() {
+    if (new ArdanEduMarks().kiku_sho > 0) {
+      aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 0b11;
+      aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = -1;
+    } else {
+      aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = -1;
+      aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 0b11;
+    }
     return aim_races;
   }
 
@@ -176,7 +178,7 @@ module.exports = class extends CustomizedCheck {
     buffer.push(
       check_aim_and_get_entry(
         races,
-        event_marks.kiku_sho ? race_enum.kiku_sho : race_enum.tenn_sho,
+        event_marks.kiku_sho > 0 ? race_enum.kiku_sho : race_enum.tenn_sho,
         1,
         3,
       ),
