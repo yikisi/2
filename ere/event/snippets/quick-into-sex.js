@@ -14,8 +14,9 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
  * @param {boolean} [is_rape=false]
  */
 async function quick_into_sex(chara_id, is_rape = false) {
-  if (era.get('flag:当前赛事') > 0) {
-    new MyEduMarks().we_are_one = 0;
+  const my_marks = new MyEduMarks();
+  if (era.get('flag:当前赛事') > 0 && my_marks.we_are_one === 0) {
+    my_marks.we_are_one = 1;
   }
   begin_and_init_ero(0, chara_id);
   if (is_rape) {

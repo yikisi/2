@@ -252,12 +252,13 @@ function update_juel_buff(...ids) {
         era.get(`talent:${chara_id}:情感活动`)) *
         3) /
         10 +
-        is_raping / 2 +
-        pain_level / 10 -
-        (meek_level * 3) / 20 -
-        hate_level / 20 -
-        love_buff / 2 -
-        lust_buff / 2,
+        (slave_level * -0.16 ||
+          is_raping / 2 +
+            pain_level / 10 -
+            (meek_level * 3) / 20 -
+            hate_level / 20 -
+            love_buff / 2 -
+            lust_buff / 2),
     );
     set_juel_buff(
       chara_id,
@@ -268,13 +269,14 @@ function update_juel_buff(...ids) {
         era.get(`talent:${chara_id}:情感活动`)) *
         3) /
         10 +
-        is_raping / 2 +
-        (era.get(`tequip:${chara_id}:眼罩`) === item_enum.blindfold) / 2 +
-        pain_level / 10 -
-        (meek_level * 3) / 20 -
-        hate_level / 20 -
-        love_buff / 2 -
-        lust_buff / 2,
+        (slave_level * -0.33 ||
+          is_raping / 2 +
+            (era.get(`tequip:${chara_id}:眼罩`) === item_enum.blindfold) / 2 +
+            pain_level / 10 -
+            (meek_level * 3) / 20 -
+            hate_level / 20 -
+            love_buff / 2 -
+            lust_buff / 2),
     );
     set_juel_buff(
       chara_id,
@@ -286,12 +288,13 @@ function update_juel_buff(...ids) {
         3) /
         10 +
         is_raping / 2 +
-        era.get('tflag:全身镜') / 2 +
-        shame_level / 10 -
-        (meek_level * 3) / 20 -
-        hate_level / 20 -
-        (love_buff * 4) / 5 -
-        lust_buff / 2,
+        (slave_level * 0.33 ||
+          era.get('tflag:全身镜') / 2 +
+            shame_level / 10 -
+            (meek_level * 3) / 20 -
+            hate_level / 20 -
+            (love_buff * 4) / 5 -
+            lust_buff / 2),
     );
     set_juel_buff(
       chara_id,
@@ -302,15 +305,14 @@ function update_juel_buff(...ids) {
           era.get(`talent:${chara_id}:坦率程度`) +
           era.get(`talent:${chara_id}:工口好奇`) +
           era.get(`talent:${chara_id}:情感活动`)) +
-        (slave_level === 0
-          ? is_raping +
+        (slave_level * -0.33 ||
+          is_raping +
             hate_level / 10 +
             pain_level / 20 +
             shame_level / 20 -
             meek_level / 4 -
             love_buff -
-            lust_buff / 2
-          : slave_level * -0.33),
+            lust_buff / 2),
     );
     set_juel_buff(
       chara_id,

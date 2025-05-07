@@ -623,7 +623,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
           } else {
             const timer_in_day = new_timer % minutes_in_a_day;
             let stay_flag = true;
-            if (is_vacation) {
+            if (is_vacation || era.get(`status:${e}:摸鱼`) > 0) {
               if (
                 timer_in_day >= 7 * 60 &&
                 timer_in_day < 16 * 60 &&
