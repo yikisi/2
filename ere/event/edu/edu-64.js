@@ -1,3 +1,7 @@
+/**
+ * @file 目白善信 - 育成
+ * @author KUN
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');

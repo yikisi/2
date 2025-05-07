@@ -15,17 +15,13 @@ const select_action_in_station = require('#/event/daily/snippets/select-action-i
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_chara_color } = require('#/data/chara-colors');
-
 module.exports = class extends CustomizedDaily {
   get #dict() {
     const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
-      dict['她'] = '他';
-    } else {
-      dict['她'] = '她';
-    }
+    const tama = get_chara_talk(this.id);
+    dict['代表色'] = tama.color;
+    dict['她'] = tama.sex;
+    dict['他'] = era.get('cflag:0:性别') === 1 ? '他' : '她';
     dict['称呼'] = sys_get_callname(this.id, 0);
     return dict;
   }

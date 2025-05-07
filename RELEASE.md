@@ -2,7 +2,7 @@
 
 _incoming_
 
-适配 [EraElectron v4.0.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.0.2)
+适配 [EraElectron v4.1.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.1.0)
 与 [ere.app v1.0.9 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.9) 及以上版本
 
 ## Added
@@ -10,7 +10,7 @@ _incoming_
 * 翻译实现以下角色的口上（以 .kojo 形式）：
   * 目白麦昆
   * 玉藻十字
-  * 目白善信（未开始）
+  * 目白善信
   * 目白阿尔丹
   * 高尚骏逸（WIP）
 * 新增外出地点：目白城
