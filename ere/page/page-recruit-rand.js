@@ -22,7 +22,11 @@ const game_guides = require('#/event/others/game-guides');
 const { check_rec_script, run_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
+const {
+  gacha,
+  get_random_entry,
+  join_to_string,
+} = require('#/utils/list-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const { get_chara_color } = require('#/data/chara-colors');
@@ -231,7 +235,7 @@ async function print_rec_page() {
         sex_code = era.get(`cflag:${selected}:性别`),
         talent_list = [];
       let hair = era.get(`cstr:${selected}:呆毛`);
-      hair = join_list(
+      hair = join_to_string(
         [
           hair ? `${hair}呆毛` : '',
           era.get(`cstr:${selected}:前发`),

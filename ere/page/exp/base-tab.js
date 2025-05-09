@@ -11,7 +11,7 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const { get_image } = require('#/system/sys-calc-image');
 
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const { clothe_names, race_clothe_list } = require('#/data/clothe-const.json');
@@ -62,7 +62,7 @@ module.exports = {
       growth = era.get(`cflag:${chara.id}:成长阶段`),
       race = era.get(`cflag:${chara.id}:种族`);
     let hair = era.get(`cstr:${chara.id}:呆毛`);
-    hair = join_list(
+    hair = join_to_string(
       [
         hair ? `${hair}呆毛` : '',
         era.get(`cstr:${chara.id}:前发`),

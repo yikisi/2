@@ -6,7 +6,7 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { sex_colors } = require('#/data/color-const');
 const { breast_size } = require('#/data/ero/status-const');
@@ -108,7 +108,7 @@ module.exports = {
             }
             if (tit_job_count || breast_semen) {
               breast_exp_list.push(
-                join_list(
+                join_to_string(
                   [
                     tit_job_count ? `抚慰过性器 ${tit_job_count} 次` : '',
                     breast_semen ? `沾染过 ${breast_semen}ml 精液` : '',
@@ -125,7 +125,7 @@ module.exports = {
           }
           if (milking_count || milk_amount) {
             breast_exp_list.push(
-              join_list(
+              join_to_string(
                 [
                   milking_count ? `进行授乳 ${milking_count} 次` : '',
                   milk_amount ? `产出了 ${milk_amount}ml 乳汁` : '',

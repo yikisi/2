@@ -6,7 +6,7 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { growth_info, unknown_info } = require('#/data/exp-const');
 
@@ -44,7 +44,7 @@ module.exports = {
         }
         if (in_stomach_semen) {
           mouth_exp_list.push(
-            join_list(
+            join_to_string(
               [
                 '唇边有着淡淡的白浊……',
                 flags.mark_level >= 3
@@ -119,7 +119,7 @@ module.exports = {
           }
           if (suck_count || blow_job_count) {
             mouth_exp_list.push(
-              join_list(
+              join_to_string(
                 [
                   suck_count ? `抚慰过 ${suck_count} 次身体` : '',
                   blow_job_count ? `吸吮过 ${blow_job_count} 次性器` : '',

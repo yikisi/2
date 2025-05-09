@@ -50,9 +50,9 @@ module.exports = {
    * @param {number} chara_id
    * @param {number} semen
    * @param {number} other_id
-   * @param {number} supporter_id
+   * @param {number} supporter_id=0
    */
-  update_breast_exp(chara_id, semen, other_id, supporter_id) {
+  update_breast_exp(chara_id, semen, other_id, supporter_id = 0) {
     const semen_list = [];
     if (supporter_id) {
       semen_list.push(Math.ceil(semen / 2));
@@ -82,9 +82,9 @@ module.exports = {
    * @param {number} chara_id
    * @param {number} semen
    * @param {number} other_id
-   * @param {number} supporter_id
+   * @param {number} supporter_id=0
    */
-  update_face_exp(date, chara_id, semen, other_id, supporter_id) {
+  update_face_exp(date, chara_id, semen, other_id, supporter_id = 0) {
     const semen_list = [];
     if (supporter_id) {
       semen_list.push(Math.ceil(semen / 2));

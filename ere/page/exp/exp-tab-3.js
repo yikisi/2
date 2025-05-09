@@ -6,7 +6,7 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { hair_desc } = require('#/data/ero/status-const');
 const { growth_info, unknown_info } = require('#/data/exp-const');
@@ -94,7 +94,7 @@ module.exports = {
           }
           if (body_fuck_count || body_semen) {
             body_exp_list.push(
-              join_list(
+              join_to_string(
                 [
                   body_fuck_count ? `抚慰性器 ${body_fuck_count} 次` : '',
                   body_semen ? `沾染过 ${body_semen}ml 精液` : '',

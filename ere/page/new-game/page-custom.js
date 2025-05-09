@@ -4,7 +4,11 @@ const sys_change_hair = require('#/system/chara/sys-change-hair');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const CharaTalk = require('#/utils/chara-talk');
-const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
+const {
+  gacha,
+  get_random_entry,
+  join_to_string,
+} = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
@@ -738,7 +742,7 @@ async function page_custom() {
               : '',
             { isBr: true },
             '发型：',
-            join_list(
+            join_to_string(
               [
                 era.get('cstr:0:呆毛') ? `${era.get('cstr:0:呆毛')}呆毛` : '',
                 era.get('cstr:0:前发'),

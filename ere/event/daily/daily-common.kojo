@@ -62,7 +62,7 @@
       random: true
       lines:
         - %角色名% 站在看台上，对训练场上其他%马娘%的跑法指指点点，做出带着个人看法的评价。
-    - if: era.get(`cflag:${d.id}:种族`) > 0 era.get(`talent:${d.id}:自信程度`) === -1
+    - if: era.get(`cflag:${d.id}:种族`) > 0 && era.get(`talent:${d.id}:自信程度`) === -1
       random: true
       lines:
         - %角色名% 发出叹息，感叹学园中没有能与其一较高下的对手。

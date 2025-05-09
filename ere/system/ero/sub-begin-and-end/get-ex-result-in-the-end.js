@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { buff_colors, palam_colors } = require('#/data/color-const');
 const { lust_palam_border } = require('#/data/ero/orgasm-const');
@@ -276,7 +276,7 @@ function get_ex_result_in_the_end(chara_id) {
     if (secretion > 0) {
       buffer.push({
         config: { offset: 1, width: 23 },
-        content: join_list(
+        content: join_to_string(
           [
             squirt > 0 ? `潮吹 ${squirt.toLocaleString()} 次` : void 0,
             secretion > 0 ? `分泌爱液 ${secretion.toLocaleString()}ml` : void 0,

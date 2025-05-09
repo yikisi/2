@@ -288,7 +288,7 @@ function update_juel_buff(...ids) {
         3) /
         10 +
         is_raping / 2 +
-        (slave_level * 0.33 ||
+        (slave_level * -0.33 ||
           era.get('tflag:全身镜') / 2 +
             shame_level / 10 -
             (meek_level * 3) / 20 -

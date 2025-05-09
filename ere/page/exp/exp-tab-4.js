@@ -6,7 +6,7 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { growth_info, unknown_info } = require('#/data/exp-const');
 
@@ -56,7 +56,7 @@ module.exports = {
           }
           if (handjob_count || touch_virgin_count || touch_anal_count) {
             hand_exp_list.push(
-              join_list(
+              join_to_string(
                 [
                   handjob_count ? `揉弄过 ${handjob_count} 次肉棒` : '',
                   touch_virgin_count
@@ -71,7 +71,7 @@ module.exports = {
         }
         if (touch_body_count || touch_breast_count) {
           hand_exp_list.push(
-            join_list(
+            join_to_string(
               [
                 touch_body_count ? `触摸过 ${touch_body_count} 次身体` : '',
                 touch_breast_count ? `揉弄过 ${touch_breast_count} 次乳房` : '',
@@ -96,7 +96,7 @@ module.exports = {
           }
           if (foot_job_count || step_on_virgin_count) {
             foot_exp_list.push(
-              join_list(
+              join_to_string(
                 [
                   foot_job_count ? `抚弄过 ${foot_job_count} 次肉棒` : '',
                   step_on_virgin_count

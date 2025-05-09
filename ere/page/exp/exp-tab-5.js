@@ -9,7 +9,7 @@ const {
 } = require('#/page/exp/snippets');
 
 const CharaTalk = require('#/utils/chara-talk');
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { sex_colors } = require('#/data/color-const');
 const {
@@ -98,7 +98,7 @@ module.exports = {
           }
           if (body_sex_count || virgin_sex_count || active_anal_sex_count) {
             penis_exp_list.push(
-              join_list(
+              join_to_string(
                 [
                   body_sex_count ? `戳弄身体 ${body_sex_count} 次` : '',
                   virgin_sex_count
@@ -126,7 +126,7 @@ module.exports = {
           }
           if (penis_orgasm_count) {
             penis_exp_list.push(
-              join_list(
+              join_to_string(
                 [
                   penis_orgasm_count ? `射精 ${penis_orgasm_count} 次` : '',
                   semen ? `共射出 ${semen}ml 精液` : '',

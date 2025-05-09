@@ -12,7 +12,7 @@ const {
 } = require('#/page/exp/snippets');
 
 const CharaTalk = require('#/utils/chara-talk');
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { sex_colors } = require('#/data/color-const');
 const { baby_limit } = require('#/data/ero/orgasm-const');
@@ -98,7 +98,7 @@ module.exports = {
         }
         if (in_womb_semen) {
           virgin_exp_list.push(
-            join_list(
+            join_to_string(
               [
                 '大腿内侧星星点点……',
                 flags.mark_level >= 3
@@ -154,7 +154,7 @@ module.exports = {
           }
           if (virgin_touched_count || penis_sex_count) {
             virgin_exp_list.push(
-              join_list(
+              join_to_string(
                 [
                   virgin_touched_count
                     ? `被玩弄过 ${virgin_touched_count} 次`
@@ -179,7 +179,7 @@ module.exports = {
           }
           if (clitoris_semen || virgin_semen) {
             virgin_exp_list.push(
-              join_list(
+              join_to_string(
                 [
                   clitoris_semen ? `沾染过 ${clitoris_semen}ml 精液` : '',
                   virgin_semen
@@ -210,7 +210,7 @@ module.exports = {
         }
         if (squirt > 0) {
           virgin_exp_list.push(
-            join_list(
+            join_to_string(
               [
                 clitoris_orgasm_count > 0
                   ? `因小豆豆高潮 ${clitoris_orgasm_count} 次`

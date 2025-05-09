@@ -6,7 +6,7 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { growth_info, unknown_info } = require('#/data/exp-const');
 
@@ -42,7 +42,7 @@ module.exports = {
         const in_intestine_semen = era.get(`cflag:${chara.id}:肠道内精液`);
         if (in_intestine_semen) {
           anal_exp_list.push(
-            join_list(
+            join_to_string(
               [
                 '裤子的后面变湿了……',
                 flags.mark_level >= 3
@@ -77,7 +77,7 @@ module.exports = {
           }
           if (anal_sex_count || cum_in_anal) {
             anal_exp_list.push(
-              join_list(
+              join_to_string(
                 [
                   anal_sex_count ? `抚慰性器 ${anal_sex_count} 次` : '',
                   cum_in_anal

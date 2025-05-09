@@ -251,26 +251,12 @@ class CustomizedEro {
    * @param {{part:number}} extra_flag
    */
   become_lubrication(chara, me, callname, hook, extra_flag) {
-    if (extra_flag.part === part_enum.breast) {
-      const amount = era.get(`nowex:${this.id}:喷奶量`);
-      if (amount > 0) {
-        era.print([
-          chara.get_colored_name(),
-          ' 的',
-          { content: ' 胸部 ', color: buff_colors[2] },
-          `${era.get(`ex:${this.id}:喷奶阻碍`) ? '猛然喷出了' : '分泌了'} `,
-          { content: `${amount}ml 乳汁`, color: buff_colors[2] },
-          '！',
-        ]);
-      }
-    } else {
-      era.print([
-        chara.get_colored_name(),
-        ' 的 ',
-        { content: part_names[extra_flag.part], color: buff_colors[2] },
-        ' 变得湿润了！',
-      ]);
-    }
+    era.print([
+      chara.get_colored_name(),
+      ' 的 ',
+      { content: part_names[extra_flag.part], color: buff_colors[2] },
+      ' 变得湿润了！',
+    ]);
   }
 
   /**

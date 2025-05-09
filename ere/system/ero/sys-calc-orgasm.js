@@ -423,25 +423,7 @@ async function sys_calc_orgasm(shown, ...ids) {
       // 分泌之后进行接触部位的污渍判定
       // 以及增加对方经历
       amount = Math.floor(amount * l_times);
-      console.log(chara_id, part_names[part], amount);
       if (amount > 0) {
-        if (part === part_enum.penis) {
-          if (
-            last_action === ero_hooks.ask_double_fuck ||
-            (last_action === ero_hooks.double_fuck &&
-              last_supporter === chara_id)
-          ) {
-            other_id = 0;
-            other_part = part_enum.virgin;
-          }
-          if (
-            (last_action === ero_hooks.ask_double_blow_job ||
-              last_action === ero_hooks.double_blow_job) &&
-            other_part === part_enum.keys.length
-          ) {
-            other_part = 100;
-          }
-        }
         if (part === part_enum.breast) {
           merge_stain(
             new EroParticipant(chara_id, part_enum.breast),
@@ -577,201 +559,257 @@ async function sys_calc_orgasm(shown, ...ids) {
               }
             }
           }
-        } else if (other_id !== -1 && other_part !== -1) {
-          if (part === part_enum.penis) {
-            // 避孕套避免精液沾染，所以优先判定
-            if (
-              !era.get(`tcvar:${chara_id}:避孕套`) ||
-              (other_part === part_enum.virgin &&
-                era.get(`status:${other_id}:反避孕套`))
-            ) {
-              merge_stain(
-                new EroParticipant(chara_id, part_enum.penis),
-                new EroParticipant(other_id, other_part),
-              );
-              if (other_part === part_enum.mouth) {
-                era.add(`exp:${other_id}:饮精量`, amount);
-                era.add(`nowex:${other_id}:饮精量`, amount);
-                if (!chara_id) {
-                  era.add(`tcvar:${other_id}:获得因子`, amount * 2.5);
-                } else if (!other_id) {
-                  era.add(`tcvar:${chara_id}:获得因子`, amount * 5);
-                }
-                if (!era.get(`cstr:${other_id}:初次吞精经历`)) {
-                  if (sys_check_awake(other_id)) {
-                    era.set(`cstr:${other_id}:初次吞精经历`, [
-                      `在 ${date} 第一次品尝了 `,
-                      { c: chara_id },
-                      ' 的精液，莫名地为那腥臭的味道而着迷',
-                    ]);
-                  } else if (!era.get(`cstr:${other_id}:无自觉初次吞精经历`)) {
-                    era.set(`cstr:${other_id}:无自觉初次吞精经历`, [
-                      `实际上，在 ${date}，就已经开始习惯 `,
-                      { c: chara_id },
-                      ' 精液的味道了',
-                    ]);
-                  }
-                }
-                update_juels_from_talent(other_id, '饮精成瘾');
-                update_palam_from_talent(
-                  other_id,
-                  '喉咙敏感',
-                  part_enum.mouth,
-                  part_enum.masochism,
-                );
-              } else if (other_part === part_enum.breast) {
-                update_breast_exp(
-                  chara_id,
-                  amount,
-                  other_id,
-                  (last_action === ero_hooks.ask_double_tit_job ||
-                    last_action === ero_hooks.double_tit_job) &&
-                    !chara_id
-                    ? last_supporter
-                    : 0,
-                );
-              } else if (
-                other_part === part_enum.hand ||
-                other_part === part_enum.foot ||
-                other_part === part_enum.body
-              ) {
-                era.add(`exp:${other_id}:身体沾染精液量`, amount);
-                update_juels_from_talent(other_id, '浴精成瘾');
-                update_palam_from_talent(other_id, '气味敏感', part_enum.body);
-              } else if (other_part === part_enum.clitoris) {
-                era.add(`exp:${other_id}:外阴沾染精液量`, amount);
-                update_juels_from_talent(other_id, '浴精成瘾');
-                update_palam_from_talent(
-                  other_id,
-                  '气味敏感',
-                  part_enum.clitoris,
-                );
-              } else if (other_part === part_enum.virgin) {
-                era.add(`exp:${other_id}:内射次数`, 1);
-                era.add(`exp:${other_id}:膣内精液量`, amount);
-                era.add(`nowex:${other_id}:膣内精液`, amount);
-                if (!chara_id) {
-                  era.add(`tcvar:${other_id}:获得因子`, amount * 3);
-                } else if (!other_id) {
-                  era.add(`tcvar:${chara_id}:获得因子`, amount * 6);
-                }
-                if (!era.get(`cstr:${chara_id}:初次内射经历`)) {
-                  if (sys_check_awake(chara_id)) {
-                    era.set(`cstr:${chara_id}:初次内射经历`, [
-                      '第一次向 ',
-                      { c: other_id },
-                      ` 的身体注入 ${amount}ml 种子，是在 ${date}`,
-                    ]);
-                  } else if (!era.get(`cstr:${chara_id}:无自觉初次内射经历`)) {
-                    era.set(`cstr:${chara_id}:无自觉初次内射经历`, [
-                      `实际上，在 ${date} 就被 `,
-                      { c: other_id },
-                      ` 淫乱的小穴榨取了 ${amount}ml 精液`,
-                    ]);
-                  }
-                }
-                if (!era.get(`cstr:${other_id}:初次被内射经历`)) {
-                  if (sys_check_awake(other_id)) {
-                    era.set(`cstr:${other_id}:初次被内射经历`, [
-                      '接纳了 ',
-                      { c: chara_id },
-                      ` 的 ${amount}ml 种子，是在 ${date}`,
-                    ]);
-                  } else if (
-                    !era.get(`cstr:${other_id}:无自觉初次被内射经历`)
-                  ) {
-                    era.set(`cstr:${other_id}:无自觉初次被内射经历`, [
-                      `实际上，宝贵的阴道和子宫在 ${date} 就受到 `,
-                      { c: chara_id },
-                      ` 的 ${amount}ml 精液洗礼`,
-                    ]);
-                  }
-                }
-                await run_custom_ero(
-                  other_id || chara_id,
-                  ero_hooks.cum_in_womb,
-                  { father_id: chara_id, mother_id: other_id, shown },
-                );
-                // 计算怀孕
-                const ratio = get_pregnant_ratio(other_id, chara_id);
-                era.logger.debug(
-                  `角色 ${other_id} 怀上角色 ${chara_id} 孩子的概率：${(
-                    ratio * 100
-                  ).toFixed(2)}%`,
-                );
-                if (
-                  (era.get(`cflag:${other_id}:妊娠阶段`) ===
-                    1 << pregnant_stage_enum.no &&
-                    ratio >= 1) ||
-                  (ratio > 0 && Math.random() < ratio)
-                ) {
-                  era.add(`exp:${chara_id}:授种次数`, 1);
-                  era.set(
-                    `cflag:${other_id}:妊娠阶段`,
-                    1 << pregnant_stage_enum.embryo,
-                  );
-                  era.set(`cflag:${other_id}:妊娠回合计时`, 0);
-                  const life_marks = LifeEventMarks.get_marks(other_id);
-                  life_marks.report = 1;
-                  life_marks.sperm = chara_id;
-                  life_marks.unexpected_pregnant =
-                    sys_check_awake(chara_id) - sys_check_awake(other_id);
-                  era.set(`status:${other_id}:排卵期`, 0);
-                  era.set(`status:${other_id}:经期`, 0);
-                  await run_custom_ero(
-                    other_id || chara_id,
-                    ero_hooks.be_pregnant,
-                    { father_id: chara_id, mother_id: other_id, shown },
-                  );
-                }
-                update_juels_from_talent(other_id, '榨精成瘾');
-                update_palam_from_talent(
-                  other_id,
-                  '子宫敏感',
-                  part_enum.virgin,
-                );
-              } else if (other_part === part_enum.anal) {
-                era.add(`exp:${other_id}:肠内射精次数`, 1);
-                era.add(`exp:${other_id}:肠内精液量`, amount);
-                era.set(`nowex:${other_id}:肠内精液`, amount);
-                if (!chara_id) {
-                  era.add(`tcvar:${chara_id}:获得因子`, amount * 2.5);
-                } else if (!other_id) {
-                  era.add(`tcvar:${other_id}:获得因子`, amount * 5);
-                }
-                update_juels_from_talent(other_id, '精液灌肠');
-                update_palam_from_talent(other_id, '肠道敏感', part_enum.anal);
-              } else if (other_part !== part_enum.item) {
-                // 颜射独立计算
-                // 颜射归身体大类，但与身体性交经验独立
+        } else if (part === part_enum.penis) {
+          if (
+            last_action === ero_hooks.ask_double_fuck ||
+            (last_action === ero_hooks.double_fuck &&
+              last_supporter === chara_id)
+          ) {
+            other_id = 0;
+            other_part = part_enum.virgin;
+          }
+          if (
+            (last_action === ero_hooks.ask_double_blow_job ||
+              last_action === ero_hooks.double_blow_job) &&
+            other_part === part_enum.keys.length
+          ) {
+            other_part = 100;
+          }
+          // 避孕套避免精液沾染，所以优先判定
+          if (
+            era.get(`tcvar:${chara_id}:避孕套`) > 0 &&
+            (other_part !== part_enum.virgin ||
+              era.get(`status:${other_id}:反避孕套`) === 0)
+          ) {
+            era.set(`tcvar:${chara_id}:射精位置`, { p: -1 });
+            era.set(
+              `nowex:${chara_id}:射精量`,
+              era.get(`nowex:${chara_id}:射精量`),
+            );
+          } else if (other_id !== -1 && other_part !== -1) {
+            merge_stain(
+              new EroParticipant(chara_id, part_enum.penis),
+              new EroParticipant(other_id, other_part),
+            );
+            if (other_part >= part_enum.keys.length) {
+              // 颜射归身体大类，但与身体性交经验独立
+              if (other_part === 100) {
                 update_face_exp(
                   date,
                   chara_id,
                   amount,
                   other_id,
-                  other_part === 100 ? last_supporter : 0,
+                  last_supporter,
                 );
+                era.set(`tcvar:${chara_id}:射精位置`, {
+                  c: [other_id, last_supporter],
+                  p: part_enum.keys.length,
+                });
+              } else {
+                update_face_exp(date, chara_id, amount, other_id);
+                era.set(`tcvar:${chara_id}:射精位置`, {
+                  c: [other_id],
+                  p: part_enum.keys.length,
+                });
               }
-            } else if (era.get(`tcvar:${chara_id}:避孕套`) > 0) {
-              era.set(
-                `nowex:${chara_id}:射精量`,
-                -era.get(`nowex:${chara_id}:射精量`),
-              );
+            } else {
+              let temp;
+              era.set(`tcvar:${chara_id}:射精位置`, {
+                c: other_id,
+                p: other_part,
+              });
+              switch (other_part) {
+                case part_enum.mouth:
+                  era.add(`exp:${other_id}:饮精量`, amount);
+                  era.add(`nowex:${other_id}:饮精量`, amount);
+                  if (!chara_id) {
+                    era.add(`tcvar:${other_id}:获得因子`, amount * 2.5);
+                  } else if (!other_id) {
+                    era.add(`tcvar:${chara_id}:获得因子`, amount * 5);
+                  }
+                  if (!era.get(`cstr:${other_id}:初次吞精经历`)) {
+                    if (sys_check_awake(other_id)) {
+                      era.set(`cstr:${other_id}:初次吞精经历`, [
+                        `在 ${date} 第一次品尝了 `,
+                        { c: chara_id },
+                        ' 的精液，莫名地为那腥臭的味道而着迷',
+                      ]);
+                    } else if (
+                      !era.get(`cstr:${other_id}:无自觉初次吞精经历`)
+                    ) {
+                      era.set(`cstr:${other_id}:无自觉初次吞精经历`, [
+                        `实际上，在 ${date}，就已经开始习惯 `,
+                        { c: chara_id },
+                        ' 精液的味道了',
+                      ]);
+                    }
+                  }
+                  update_juels_from_talent(other_id, '饮精成瘾');
+                  update_palam_from_talent(
+                    other_id,
+                    '喉咙敏感',
+                    part_enum.mouth,
+                    part_enum.masochism,
+                  );
+                  break;
+                case part_enum.breast:
+                  if (
+                    (last_action === ero_hooks.ask_double_tit_job ||
+                      last_action === ero_hooks.double_tit_job) &&
+                    !chara_id
+                  ) {
+                    update_breast_exp(
+                      chara_id,
+                      amount,
+                      other_id,
+                      last_supporter,
+                    );
+                  } else {
+                    update_breast_exp(chara_id, amount, other_id);
+                  }
+                  break;
+                case part_enum.hand:
+                case part_enum.foot:
+                case part_enum.body:
+                  era.add(`exp:${other_id}:身体沾染精液量`, amount);
+                  update_juels_from_talent(other_id, '浴精成瘾');
+                  update_palam_from_talent(
+                    other_id,
+                    '气味敏感',
+                    part_enum.body,
+                  );
+                  break;
+                case part_enum.clitoris:
+                  era.add(`exp:${other_id}:外阴沾染精液量`, amount);
+                  update_juels_from_talent(other_id, '浴精成瘾');
+                  update_palam_from_talent(
+                    other_id,
+                    '气味敏感',
+                    part_enum.clitoris,
+                  );
+                  break;
+                case part_enum.virgin:
+                  era.add(`exp:${other_id}:内射次数`, 1);
+                  era.add(`exp:${other_id}:膣内精液量`, amount);
+                  era.add(`nowex:${other_id}:膣内精液`, amount);
+                  if (!chara_id) {
+                    era.add(`tcvar:${other_id}:获得因子`, amount * 3);
+                  } else if (!other_id) {
+                    era.add(`tcvar:${chara_id}:获得因子`, amount * 6);
+                  }
+                  if (!era.get(`cstr:${chara_id}:初次内射经历`)) {
+                    if (sys_check_awake(chara_id)) {
+                      era.set(`cstr:${chara_id}:初次内射经历`, [
+                        '第一次向 ',
+                        { c: other_id },
+                        ` 的身体注入 ${amount}ml 种子，是在 ${date}`,
+                      ]);
+                    } else if (
+                      !era.get(`cstr:${chara_id}:无自觉初次内射经历`)
+                    ) {
+                      era.set(`cstr:${chara_id}:无自觉初次内射经历`, [
+                        `实际上，在 ${date} 就被 `,
+                        { c: other_id },
+                        ` 淫乱的小穴榨取了 ${amount}ml 精液`,
+                      ]);
+                    }
+                  }
+                  if (!era.get(`cstr:${other_id}:初次被内射经历`)) {
+                    if (sys_check_awake(other_id)) {
+                      era.set(`cstr:${other_id}:初次被内射经历`, [
+                        '接纳了 ',
+                        { c: chara_id },
+                        ` 的 ${amount}ml 种子，是在 ${date}`,
+                      ]);
+                    } else if (
+                      !era.get(`cstr:${other_id}:无自觉初次被内射经历`)
+                    ) {
+                      era.set(`cstr:${other_id}:无自觉初次被内射经历`, [
+                        `实际上，宝贵的阴道和子宫在 ${date} 就受到 `,
+                        { c: chara_id },
+                        ` 的 ${amount}ml 精液洗礼`,
+                      ]);
+                    }
+                  }
+                  await run_custom_ero(
+                    other_id || chara_id,
+                    ero_hooks.cum_in_womb,
+                    { father_id: chara_id, mother_id: other_id, shown },
+                  );
+                  // 计算怀孕
+                  temp = get_pregnant_ratio(other_id, chara_id);
+                  era.logger.debug(
+                    `角色 ${other_id} 怀上角色 ${chara_id} 孩子的概率：${(
+                      temp * 100
+                    ).toFixed(2)}%`,
+                  );
+                  if (
+                    (era.get(`cflag:${other_id}:妊娠阶段`) ===
+                      1 << pregnant_stage_enum.no &&
+                      temp >= 1) ||
+                    (temp > 0 && Math.random() < temp)
+                  ) {
+                    era.add(`exp:${chara_id}:授种次数`, 1);
+                    era.set(
+                      `cflag:${other_id}:妊娠阶段`,
+                      1 << pregnant_stage_enum.embryo,
+                    );
+                    era.set(`cflag:${other_id}:妊娠回合计时`, 0);
+                    const life_marks = LifeEventMarks.get_marks(other_id);
+                    life_marks.report = 1;
+                    life_marks.sperm = chara_id;
+                    life_marks.unexpected_pregnant =
+                      sys_check_awake(chara_id) - sys_check_awake(other_id);
+                    era.set(`status:${other_id}:排卵期`, 0);
+                    era.set(`status:${other_id}:经期`, 0);
+                    await run_custom_ero(
+                      other_id || chara_id,
+                      ero_hooks.be_pregnant,
+                      { father_id: chara_id, mother_id: other_id, shown },
+                    );
+                  }
+                  update_juels_from_talent(other_id, '榨精成瘾');
+                  update_palam_from_talent(
+                    other_id,
+                    '子宫敏感',
+                    part_enum.virgin,
+                  );
+                  break;
+                case part_enum.anal:
+                  era.add(`exp:${other_id}:肠内射精次数`, 1);
+                  era.add(`exp:${other_id}:肠内精液量`, amount);
+                  era.set(`nowex:${other_id}:肠内精液`, amount);
+                  if (!chara_id) {
+                    era.add(`tcvar:${chara_id}:获得因子`, amount * 2.5);
+                  } else if (!other_id) {
+                    era.add(`tcvar:${other_id}:获得因子`, amount * 5);
+                  }
+                  update_juels_from_talent(other_id, '精液灌肠');
+                  update_palam_from_talent(
+                    other_id,
+                    '肠道敏感',
+                    part_enum.anal,
+                  );
+              }
             }
-            if (era.get(`tcvar:${chara_id}:避孕套`) > 0) {
-              era.set(`tcvar:${chara_id}:避孕套`, 0);
-              rollback_penis_stain(chara_id);
-              set_stain(chara_id, part_enum.penis, stain_enum.semen);
-              clean_part_without_item(
-                new EroParticipant(chara_id, part_enum.penis),
-              );
-            }
-          } else if (part === part_enum.anal) {
-            merge_stain(
-              new EroParticipant(chara_id, part_enum.anal),
-              new EroParticipant(other_id, other_part),
+          }
+          if (era.get(`tcvar:${chara_id}:避孕套`) > 0) {
+            era.set(`tcvar:${chara_id}:避孕套`, 0);
+            rollback_penis_stain(chara_id);
+            set_stain(chara_id, part_enum.penis, stain_enum.semen);
+            clean_part_without_item(
+              new EroParticipant(chara_id, part_enum.penis),
             );
           }
+        } else if (
+          other_id !== -1 &&
+          other_part !== -1 &&
+          part === part_enum.anal
+        ) {
+          merge_stain(
+            new EroParticipant(chara_id, part_enum.anal),
+            new EroParticipant(other_id, other_part),
+          );
         }
       }
     }
