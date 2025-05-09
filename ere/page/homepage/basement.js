@@ -207,7 +207,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           ...(is_awake === 2
             ? [get_chara_talk(chara_list[1]).sex, '们']
             : [' ', get_chara_talk(chara_list[1]).get_colored_name()]),
-          '……】',
+          '】',
         ]);
         await get_custom_basement(chara_list[1]).flatter(
           is_awake === 2 ? chara_list[2] : undefined,

@@ -97,7 +97,7 @@ module.exports = {
       .forEach((c_id, i) => {
         era.add(`exp:${c_id}:颜射次数`, 1);
         era.add(`exp:${c_id}:颜射精液量`, semen_list[i]);
-        if (era.get(`exp:${c_id}:马跳S`) || era.get(`exp:${c_id}:沉睡`)) {
+        if (!sys_check_awake(c_id)) {
           if (!era.get(`cstr:${c_id}:无自觉初次颜射经历`)) {
             era.set(`cstr:${c_id}:无自觉初次颜射经历`, [
               `实际上，在 ${date} 就盖上了 `,
@@ -151,14 +151,14 @@ module.exports = {
   update_milk_exp(date, chara_id, amount, breast_desc, other_id, supporter_id) {
     if (!era.get(`cstr:${chara_id}:初次授乳经历`)) {
       era.set(`cstr:${chara_id}:初次授乳经历`, [
-        `${date}，第一次让 `,
+        `${date}，让 `,
         { c: other_id },
         ...(supporter_id > 0 ? [' 与 ', { c: supporter_id }] : []),
-        ` 品尝了自己那对 ${breast_desc} 乳房中内容物的味道`,
+        ` 第一次品尝了自己那对 ${breast_desc} 乳房中内容物的味道`,
       ]);
     }
     const milk_list = [amount];
-    if (supporter_id) {
+    if (supporter_id > 0) {
       const random_val = Math.random();
       let tmp_amount = amount;
       if (random_val < 0.3) {
@@ -192,7 +192,9 @@ module.exports = {
           era.set(`cstr:${c_id}:初次吸奶经历`, [
             `${date}，第一次并非因饥饿而吮吸了 `,
             { c: chara_id },
-            ` 那对 ${breast_desc} 的乳房，不知对味道是否满意呢？`,
+            ' 那对',
+            breast_desc,
+            '的乳房，不知对味道是否满意呢？',
           ]);
         }
       });
@@ -216,5 +218,49 @@ module.exports = {
         ' 虐待',
       ]);
     }
+  },
+  /**
+   * @param {string} date
+   * @param {number} chara_id
+   * @param {number} amount
+   * @param {number} other_id
+   * @param {number} supporter
+   */
+  update_virgin_exp(date, chara_id, amount, other_id, supporter) {
+    const amount_list = [amount];
+    if (supporter > 0) {
+      amount_list[0] = Math.ceil(amount / 2);
+      amount_list.push(amount - amount_list[0]);
+    }
+    console.log(other_id, amount_list);
+    [other_id.toString(), supporter]
+      .filter((e) => e)
+      .forEach((id, i) => {
+        set_stain(id, part_enum.mouth, stain_enum.virgin);
+        era.add(`nowex:${id}:饮爱液量`, amount_list[i]);
+        if (id === '0') {
+          era.add(`tcvar:${chara_id}:获得因子`, amount_list[i] / 10);
+        } else if (!chara_id) {
+          era.add(`tcvar:${id}:获得因子`, amount_list[i] / 15);
+        }
+        if (!sys_check_awake(id)) {
+          if (!era.get(`cstr:${id}:无自觉初次饮爱液经历`)) {
+            era.set(`cstr:${id}:无自觉初次饮爱液经历`, [
+              '实际上，在 ',
+              date,
+              ' 就被喂食了 ',
+              { c: chara_id },
+              ' 的淫液',
+            ]);
+          }
+        } else if (!era.get(`cstr:${id}:初次饮爱液经历`)) {
+          era.set(`cstr:${id}:初次饮爱液经历`, [
+            date,
+            '，从 ',
+            { c: chara_id },
+            ' 的风流穴中第一次采饮了欢愉的蜜液',
+          ]);
+        }
+      });
   },
 };

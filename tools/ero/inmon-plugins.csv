@@ -75,6 +75,9 @@
 50211,502,金身不坏,1,6,不会伤病,args.id>0&&args.chara!==undefined,no_pain
 50212,502,不知疲倦,2,14,不会疲惫及伤病,args.id>0&&args.chara!==undefined,no_tired
 50213,502,欢愉之骨,3,32,不会疲惫、伤病或怀孕,args.id>0&&args.sex!==1&&args.pregnant===false,no_preg
+50311,503,多汁,1,4,体液分泌+100%,,juicy
+50312,503,喷泉,2,8,体液分泌+200%,,fountain
+50313,503,水做的骨肉,3,16,体液分泌+400%,,woman
 60111,601,唯唯诺诺,2,4,气性转换为「弱气」,args.id>0&&args.chara!==undefined&&args.chara!==-3,cha_0
 60112,601,畏首畏尾,2,4,气性转换为「胆小」,args.id>0&&args.chara!==undefined&&args.chara!==-2,cha_1
 60113,601,一丝不苟,2,4,气性转换为「认真」,args.id>0&&args.chara!==undefined&&args.chara!==-1,cha_2

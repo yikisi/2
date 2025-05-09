@@ -415,11 +415,15 @@ module.exports = async () => {
               }
             }
             if (version <= 1340) {
-              era
-                .getAddedCharacters()
-                .forEach((e) =>
-                  era.set(`equip:${e}:淫纹奴役`, era.get(`equip:${e}:10`)),
-                );
+              era.getAddedCharacters().forEach((id) => {
+                era.set(`equip:${id}:淫纹奴役`, era.get(`equip:${id}:10`));
+                if (era.get(`exp:${id}:性爱次数`) > 0) {
+                  era.set(`cstr:${id}:初次潮吹经历`, []);
+                  era.set(`cstr:${id}:无自觉初次潮吹经历`, []);
+                  era.set(`cstr:${id}:初次饮爱液经历`, []);
+                  era.set(`cstr:${id}:无自觉初次饮爱液经历`, []);
+                }
+              });
               if (era.get('flag:惩戒力度') >= 2) {
                 era.set('talent:0:调教度', 5);
               }

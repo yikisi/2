@@ -58,24 +58,43 @@ module.exports = {
         push_link_break(mouth_exp_list);
       }
       if (flags.show_exp) {
-        const kiss_count = era.get(`exp:${chara.id}:接吻次数`),
-          suck_count = era.get(`exp:${chara.id}:舔吸次数`),
-          blow_job_count = era.get(`exp:${chara.id}:口交次数`),
-          mouth_orgasm_count = era.get(`exp:${chara.id}:口腔高潮次数`),
-          drunk_semen = era.get(`exp:${chara.id}:饮精量`),
-          drunk_milk = era.get(`exp:${chara.id}:吸奶量`),
-          drunk_semen_talent =
-            era.get(`talent:${chara.id}:饮精成瘾`) * 2 +
-            era.get(`talent:${chara.id}:喉咙敏感`);
-        const kiss_exp = era.get(`cstr:${chara.id}:初吻经历`),
-          unknown_kiss_exp = era.get(`cstr:${chara.id}:无自觉初吻经历`),
-          blow_job_exp = era.get(`cstr:${chara.id}:初次口交经历`),
-          unknown_blow_job_exp = era.get(`cstr:${chara.id}:无自觉初次口交经历`),
-          drunk_semen_exp = era.get(`cstr:${chara.id}:初次吞精经历`),
-          unknown_drunk_semen_exp = era.get(
-            `cstr:${chara.id}:无自觉初次吞精经历`,
-          ),
-          drunk_milk_exp = era.get(`cstr:${chara.id}:初次吸奶经历`);
+        const kiss_count = era.get(`exp:${chara.id}:接吻次数`);
+        const suck_count = era.get(`exp:${chara.id}:舔吸次数`);
+        const blow_job_count = era.get(`exp:${chara.id}:口交次数`);
+        const mouth_orgasm_count = era.get(`exp:${chara.id}:口腔高潮次数`);
+        const drunk_semen = era.get(`exp:${chara.id}:饮精量`);
+        const drunk_milk = era.get(`exp:${chara.id}:吸奶量`);
+        const drunk_semen_talent =
+          era.get(`talent:${chara.id}:饮精成瘾`) * 2 +
+          era.get(`talent:${chara.id}:喉咙敏感`);
+        const kiss_exp = era.get(`cstr:${chara.id}:初吻经历`);
+        const unknown_kiss_exp = era.get(`cstr:${chara.id}:无自觉初吻经历`);
+        const blow_job_exp = era.get(`cstr:${chara.id}:初次口交经历`);
+        const unknown_blow_job_exp = era.get(
+          `cstr:${chara.id}:无自觉初次口交经历`,
+        );
+        const drunk_semen_exp = era.get(`cstr:${chara.id}:初次吞精经历`);
+        const unknown_drunk_semen_exp = era.get(
+          `cstr:${chara.id}:无自觉初次吞精经历`,
+        );
+        const drunk_milk_exp = era.get(`cstr:${chara.id}:初次吸奶经历`);
+        let drunk_secretion_exp = era.get(`cstr:${chara.id}:初次饮爱液经历`);
+        if (
+          drunk_secretion_exp instanceof Array &&
+          drunk_secretion_exp.length === 0
+        ) {
+          drunk_secretion_exp = undefined;
+        }
+        let unknown_drunk_secretion_exp = era.get(
+          `cstr:${chara.id}:无自觉初次饮爱液经历`,
+        );
+        if (
+          unknown_drunk_secretion_exp instanceof Array &&
+          unknown_drunk_secretion_exp.length === 0
+        ) {
+          unknown_drunk_secretion_exp = undefined;
+        }
+        const drunk_secretion = era.get(`exp:${chara.id}:饮爱液量`);
         if (kiss_exp) {
           mouth_exp_list.push(get_filled_exp_str(kiss_exp, chara.id));
         }
@@ -121,14 +140,29 @@ module.exports = {
               get_filled_exp_str(unknown_drunk_semen_exp, chara.id),
             );
           }
-          if (drunk_semen) {
+          if (drunk_semen > 0) {
             mouth_exp_list.push(`饮用过 ${drunk_semen}ml 精液`);
           }
         }
-        if ((flags.mark_level >= 3 || drunk_semen) && drunk_semen_talent) {
+        if ((flags.mark_level >= 3 || drunk_semen > 0) && drunk_semen_talent) {
           mouth_exp_list.push(
             `每次饮下温热的精液，${drunk_semen_desc[drunk_semen_talent]}`,
           );
+        }
+        if (drunk_secretion_exp) {
+          mouth_exp_list.push(
+            get_filled_exp_str(drunk_secretion_exp, chara.id),
+          );
+        }
+        if (flags.show_all_exp || drunk_secretion_exp) {
+          if (unknown_drunk_secretion_exp) {
+            mouth_exp_list.push(
+              get_filled_exp_str(unknown_drunk_semen_exp, chara.id),
+            );
+          }
+          if (drunk_secretion > 0) {
+            mouth_exp_list.push(`饮用过 ${drunk_secretion}ml 爱液`);
+          }
         }
         if (drunk_milk_exp) {
           mouth_exp_list.push(

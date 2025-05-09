@@ -77,6 +77,9 @@ plugins[50113] = require('#/data/ero/plugin/plugin-50113');
 plugins[50211] = require('#/data/ero/plugin/plugin-50211');
 plugins[50212] = require('#/data/ero/plugin/plugin-50212');
 plugins[50213] = require('#/data/ero/plugin/plugin-50213');
+plugins[50311] = require('#/data/ero/plugin/plugin-50311');
+plugins[50312] = require('#/data/ero/plugin/plugin-50312');
+plugins[50313] = require('#/data/ero/plugin/plugin-50313');
 plugins[60111] = require('#/data/ero/plugin/plugin-60111');
 plugins[60112] = require('#/data/ero/plugin/plugin-60112');
 plugins[60113] = require('#/data/ero/plugin/plugin-60113');
@@ -243,6 +246,12 @@ module.exports = {
     no_tired: 50212,
     // 欢愉之骨: 不会疲惫、伤病或怀孕
     no_preg: 50213,
+    // 多汁: 体液分泌+100%
+    juicy: 50311,
+    // 喷泉: 体液分泌+200%
+    fountain: 50312,
+    // 水做的骨肉: 体液分泌+400%
+    woman: 50313,
     // 唯唯诺诺: 气性转换为「弱气」
     cha_0: 60111,
     // 畏首畏尾: 气性转换为「胆小」
