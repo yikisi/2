@@ -41,7 +41,7 @@
     - if: era.get(`talent:${d.id}:情感活动`) === -1
       random: true
       lines:
-        - %角色名% 似乎在和其他马娘谈论恋爱八卦，%玩家名% 看见 %角色名% 不停的追问正在恋爱的%马娘%问题，直到对方面红耳赤逃跑才罢休。
+        - %角色名% 似乎在和其他%马娘%谈论恋爱八卦，%玩家名% 看见 %角色名% 不停的追问正在恋爱的%马娘%问题，直到对方面红耳赤逃跑才罢休。
     - if: era.get(`talent:${d.id}:自信程度`) === 1
       random: true
       lines:
@@ -50,6 +50,10 @@
       random: true
       lines:
         - %玩家名% 和 %角色名% 打招呼的时候，莫名其妙的被 %角色名% 安慰了。
+    - if: era.get(`talent:${d.id}:自信程度`) === 1
+      random: true
+      lines:
+        - %玩家名% 摸了摸 %角色名% 的头，不知为何 %角色名% 却误会成了 %玩家名% 要责罚 %角色名%，战战兢兢的闭上了眼睛。
     - if: era.get(`talent:${d.id}:自信程度`) === -1
       random: true
       lines:
@@ -58,3 +62,35 @@
       random: true
       lines:
         - %角色名% 站在看台上，对训练场上其他%马娘%的跑法指指点点，做出带着个人看法的评价。
+    - if: era.get(`cflag:${d.id}:种族`) > 0 era.get(`talent:${d.id}:自信程度`) === -1
+      random: true
+      lines:
+        - %角色名% 发出叹息，感叹学园中没有能与其一较高下的对手。
+    - if: era.get(`talent:${d.id}:痛苦感受`) === 1
+      random: true
+      lines:
+        - %角色名% 摔了一跤，抬起头时 %玩家名% 看见%她%眼眶中含着泪水。
+    - if: era.get(`talent:${d.id}:痛苦感受`) === 1
+      random: true
+      lines:
+        - %角色名% 在和朋友玩耍，惩罚游戏是弹额头一下，%玩家名% 看到输了的 %角色名% 露出了害怕的神情。
+    - if: era.get(`talent:${d.id}:痛苦感受`) === 1
+      random: true
+      lines:
+        - %角色名% 在和朋友们聊电影，听见电影中血腥的剧情，%角色名% 的双耳不由得盖了下来。
+    - if: era.get(`talent:${d.id}:痛苦感受`) === -1
+      random: true
+      lines:
+        - %角色名% 重重摔了一跤，正当 %玩家名% 在担心 %角色名% 时，%角色名% 好像什么也没发生一样，拍了拍身子就爬起来了。
+    - if: era.get(`talent:${d.id}:痛苦感受`) === -1
+      random: true
+      lines:
+        - %角色名% 跌倒了，%玩家名% 帮 %角色名% 处理着伤口，处理好抬头一看，%角色名% 竟然不知不觉睡着了。
+    - if: era.get(`talent:${d.id}:痛苦感受`) === -1
+      random: true
+      lines:
+        - %角色名% 在分享着忍耐疼痛的诀窍……虽然是让人感到意义不明的主题，但似乎有蛮多人正认真的倾听并做着笔记。
+    - if: era.get(`talent:${d.id}:恐惧感受`) === 1
+      random: true
+      lines:
+        - %角色名% 躲在操场的角落，似乎不想与周围那些太过阳光的人有所接触。
