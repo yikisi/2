@@ -85,9 +85,12 @@ async function sys_next_week() {
   const basement_cd =
     era.get('flag:地下室冷却') > 0 && era.add('flag:地下室冷却', -1) > 0;
   const sex_partner = era.get('flag:床伴');
-  const has_furniture = sex_partner > 0 ? sex_partner : 0;
+  const has_furniture =
+    CharaInmon.get(sex_partner).slave === slavery_enum.furniture
+      ? sex_partner
+      : 0;
   // 极端事件判定
-  if (check_pregnant_unprotect(0) && has_furniture > 0) {
+  if (check_pregnant_unprotect(0) && has_furniture === 0) {
     /** @type {{chara_id:number,prison:boolean,[supporter]:number}[]} */
     let act_list = [];
     let prepared_list;

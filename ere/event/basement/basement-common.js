@@ -351,54 +351,32 @@ class CustomizedBase {
    * 因精力不足而昏睡
    * @author 无名黑奴
    */
-  deep_sleep() {
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 因精力不济昏睡了过去！',
-    ]);
-  }
+  deep_sleep() {}
 
   /**
    * 进食
    * @author 无名黑奴
    */
-  eat_something() {
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 肚子饿了，吃了点东西……',
-    ]);
-  }
+  eat_something() {}
 
   /**
    * 因精力不足而主动选择睡眠
    * @author 无名黑奴
    */
-  sleep() {
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 有点累了，躺在床上睡着了……',
-    ]);
-  }
+  sleep() {}
 
   /**
    * 角色主动调情
    * @author 无名黑奴
    */
-  lure() {
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 挑逗着 ',
-      get_chara_talk(0).get_colored_name(),
-      '……',
-    ]);
-  }
+  lure() {}
 
   /**
    * 选择雷普玩家
    * @author 无名黑奴
    */
   async rape(supporter) {
-    if (supporter) {
+    if (supporter > 0) {
       await era.printAndWait([
         '在 ',
         get_chara_talk(this.id).get_colored_name(),
@@ -422,20 +400,13 @@ class CustomizedBase {
    * 开始加固地下室
    * @author 无名黑奴
    */
-  start_fixing() {
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 开始加固地下室了……',
-    ]);
-  }
+  start_fixing() {}
 
   /**
    * 刚刚离开
    * @author 无名黑奴
    */
-  out() {
-    era.print([get_chara_talk(this.id).get_colored_name(), ' 要出去一趟……']);
-  }
+  out() {}
 
   /**
    * 请求对方释放，对方同意
