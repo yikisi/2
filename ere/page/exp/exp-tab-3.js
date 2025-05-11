@@ -75,9 +75,9 @@ module.exports = {
           }
           if (face_semen) {
             body_exp_list.push(
-              `被颜射了 ${face_semen} 次，沾染过 ${era.get(
-                `exp:${chara.id}:颜射精液量`,
-              )}ml 精液`,
+              `被颜射了 ${face_semen.toLocaleString().toLocaleString()} 次，沾染过 ${era
+                .get(`exp:${chara.id}:颜射精液量`)
+                .toLocaleString()}ml 精液`,
             );
           }
         }
@@ -96,8 +96,12 @@ module.exports = {
             body_exp_list.push(
               join_to_string(
                 [
-                  body_fuck_count ? `抚慰性器 ${body_fuck_count} 次` : '',
-                  body_semen ? `沾染过 ${body_semen}ml 精液` : '',
+                  body_fuck_count
+                    ? `抚慰性器 ${body_fuck_count.toLocaleString()} 次`
+                    : '',
+                  body_semen
+                    ? `沾染过 ${body_semen.toLocaleString()}ml 精液`
+                    : '',
                 ],
                 '，',
               ),
@@ -115,7 +119,9 @@ module.exports = {
         push_link_break(body_exp_list);
 
         if (body_orgasm_count) {
-          body_exp_list.push(`因为快感去了 ${body_orgasm_count} 次`);
+          body_exp_list.push(
+            `因为快感去了 ${body_orgasm_count.toLocaleString()} 次`,
+          );
         }
       } else {
         body_exp_list.push(unknown_info(chara.id));

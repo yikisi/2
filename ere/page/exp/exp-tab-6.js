@@ -102,7 +102,7 @@ module.exports = {
               [
                 '大腿内侧星星点点……',
                 flags.mark_level >= 3
-                  ? `小穴内大概还有 ${in_womb_semen}ml 精液呢……`
+                  ? `小穴内大概还有 ${in_womb_semen.toLocaleString()}ml 精液呢……`
                   : undefined,
               ],
               '',
@@ -157,9 +157,11 @@ module.exports = {
               join_to_string(
                 [
                   virgin_touched_count
-                    ? `被玩弄过 ${virgin_touched_count} 次`
-                    : '',
-                  penis_sex_count ? `被刺入过 ${penis_sex_count} 次` : '',
+                    ? `被玩弄过 ${virgin_touched_count.toLocaleString()} 次`
+                    : void 0,
+                  penis_sex_count
+                    ? `被刺入过 ${penis_sex_count.toLocaleString()} 次`
+                    : void 0,
                 ],
                 '，',
               ),
@@ -181,9 +183,11 @@ module.exports = {
             virgin_exp_list.push(
               join_to_string(
                 [
-                  clitoris_semen ? `沾染过 ${clitoris_semen}ml 精液` : '',
+                  clitoris_semen
+                    ? `沾染过 ${clitoris_semen.toLocaleString()}ml 精液`
+                    : '',
                   virgin_semen
-                    ? `承受过 ${cum_in_virgin} 次射精，被射入过 ${virgin_semen}ml 精液`
+                    ? `承受过 ${cum_in_virgin.toLocaleString()} 次射精，被射入过 ${virgin_semen.toLocaleString()}ml 精液`
                     : '',
                 ],
                 '，',
@@ -213,20 +217,20 @@ module.exports = {
             join_to_string(
               [
                 clitoris_orgasm_count > 0
-                  ? `因小豆豆高潮 ${clitoris_orgasm_count} 次`
+                  ? `因小豆豆高潮 ${clitoris_orgasm_count.toLocaleString()} 次`
                   : '',
                 virgin_orgasm_count > 0
-                  ? `因小穴高潮 ${virgin_orgasm_count} 次`
+                  ? `因小穴高潮 ${virgin_orgasm_count.toLocaleString()} 次`
                   : '',
               ],
               '，',
             ),
           );
           virgin_exp_list.push(
-            `共潮吹 ${squirt.toLocaleString()} 次，分泌爱液 ${secretion}ml`,
+            `共潮吹 ${squirt.toLocaleString().toLocaleString()} 次，分泌爱液 ${secretion.toLocaleString()}ml`,
           );
         } else if (secretion > 0) {
-          virgin_exp_list.push(`共分泌爱液 ${secretion}ml`);
+          virgin_exp_list.push(`共分泌爱液 ${secretion.toLocaleString()}ml`);
         }
         push_link_break(virgin_exp_list);
 
@@ -235,13 +239,13 @@ module.exports = {
             virgin_exp_list.push(
               `曾趁熟睡之机侵犯过${
                 chara.id ? ` ${CharaTalk.me.name}` : '他人'
-              }${fuck_sleep_penis > 1 ? ` ${fuck_sleep_penis} 次` : ''}`,
+              }${fuck_sleep_penis > 1 ? ` ${fuck_sleep_penis.toLocaleString()} 次` : ''}`,
             );
           }
           if (sleep_virgin) {
             virgin_exp_list.push(
               `曾被趁熟睡之机侵犯过${
-                sleep_virgin > 1 ? ` ${sleep_virgin} 次` : ''
+                sleep_virgin > 1 ? ` ${sleep_virgin.toLocaleString()} 次` : ''
               }且没有察觉`,
             );
           }

@@ -60,7 +60,7 @@ module.exports = {
             breast_exp_list.push(
               '如果前襟有些湿润………请不要怀疑，那只是汗液哦' +
                 (tmp && flags.mark_level === 3
-                  ? `；因为夹子的阻碍，现在蓄积了 ${tmp}ml 乳汁……乳头好痛……`
+                  ? `；因为夹子的阻碍，现在蓄积了 ${tmp.toLocaleString()}ml 乳汁……乳头好痛……`
                   : ''),
             );
           }
@@ -92,7 +92,9 @@ module.exports = {
               );
             }
             if (breast_touched_count) {
-              breast_exp_list.push(`被玩弄过 ${breast_touched_count} 次`);
+              breast_exp_list.push(
+                `被玩弄过 ${breast_touched_count.toLocaleString()} 次`,
+              );
             }
           }
           push_link_break(breast_exp_list);
@@ -110,8 +112,12 @@ module.exports = {
               breast_exp_list.push(
                 join_to_string(
                   [
-                    tit_job_count ? `抚慰过性器 ${tit_job_count} 次` : '',
-                    breast_semen ? `沾染过 ${breast_semen}ml 精液` : '',
+                    tit_job_count
+                      ? `抚慰过性器 ${tit_job_count.toLocaleString()} 次`
+                      : '',
+                    breast_semen
+                      ? `沾染过 ${breast_semen.toLocaleString()}ml 精液`
+                      : '',
                   ],
                   '，',
                 ),
@@ -127,8 +133,12 @@ module.exports = {
             breast_exp_list.push(
               join_to_string(
                 [
-                  milking_count ? `进行授乳 ${milking_count} 次` : '',
-                  milk_amount ? `产出了 ${milk_amount}ml 乳汁` : '',
+                  milking_count
+                    ? `进行授乳 ${milking_count.toLocaleString()} 次`
+                    : '',
+                  milk_amount
+                    ? `产出了 ${milk_amount.toLocaleString()}ml 乳汁`
+                    : '',
                 ],
                 '，',
               ),
@@ -137,7 +147,9 @@ module.exports = {
           push_link_break(breast_exp_list);
 
           if (breast_orgasm_count) {
-            breast_exp_list.push(`因为快感去了 ${breast_orgasm_count} 次`);
+            breast_exp_list.push(
+              `因为快感去了 ${breast_orgasm_count.toLocaleString()} 次`,
+            );
           }
         }
       } else {

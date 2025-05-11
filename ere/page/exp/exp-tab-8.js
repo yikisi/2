@@ -66,15 +66,19 @@ module.exports = {
           sm_exp_list.push(
             join_to_string(
               [
-                abuse_count ? `责骂他人 ${abuse_count} 次` : '',
-                hit_count ? `击打他人 ${hit_count} 次` : '',
+                abuse_count
+                  ? `责骂他人 ${abuse_count.toLocaleString()} 次`
+                  : '',
+                hit_count ? `击打他人 ${hit_count.toLocaleString()} 次` : '',
               ],
               '，',
             ),
           );
         }
         if (s_orgasm_count) {
-          sm_exp_list.push(`因施虐感而高潮了 ${s_orgasm_count} 次`);
+          sm_exp_list.push(
+            `因施虐感而高潮了 ${s_orgasm_count.toLocaleString()} 次`,
+          );
         }
         push_link_break(sm_exp_list);
 
@@ -85,15 +89,21 @@ module.exports = {
           sm_exp_list.push(
             join_to_string(
               [
-                abused_count ? `被责骂 ${abused_count} 次` : '',
-                be_hit_count ? `被击打 ${be_hit_count} 次` : '',
+                abused_count
+                  ? `被责骂 ${abused_count.toLocaleString()} 次`
+                  : '',
+                be_hit_count
+                  ? `被击打 ${be_hit_count.toLocaleString()} 次`
+                  : '',
               ],
               '，',
             ),
           );
         }
         if (m_orgasm_count) {
-          sm_exp_list.push(`因受虐感而高潮了 ${m_orgasm_count} 次`);
+          sm_exp_list.push(
+            `因受虐感而高潮了 ${m_orgasm_count.toLocaleString()} 次`,
+          );
         }
       } else {
         sm_exp_list.push(unknown_info(chara.id));

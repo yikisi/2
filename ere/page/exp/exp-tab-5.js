@@ -100,12 +100,14 @@ module.exports = {
             penis_exp_list.push(
               join_to_string(
                 [
-                  body_sex_count ? `戳弄身体 ${body_sex_count} 次` : '',
+                  body_sex_count
+                    ? `戳弄身体 ${body_sex_count.toLocaleString()} 次`
+                    : '',
                   virgin_sex_count
-                    ? `戳弄阴核和小穴 ${virgin_sex_count} 次`
+                    ? `戳弄阴核和小穴 ${virgin_sex_count.toLocaleString()} 次`
                     : '',
                   active_anal_sex_count
-                    ? `戳弄屁穴 ${active_anal_sex_count} 次`
+                    ? `戳弄屁穴 ${active_anal_sex_count.toLocaleString()} 次`
                     : '',
                 ],
                 '，',
@@ -128,8 +130,10 @@ module.exports = {
             penis_exp_list.push(
               join_to_string(
                 [
-                  penis_orgasm_count ? `射精 ${penis_orgasm_count} 次` : '',
-                  semen ? `共射出 ${semen}ml 精液` : '',
+                  penis_orgasm_count
+                    ? `射精 ${penis_orgasm_count.toLocaleString()} 次`
+                    : '',
+                  semen ? `共射出 ${semen.toLocaleString()}ml 精液` : '',
                 ],
                 '，',
               ),
@@ -143,13 +147,13 @@ module.exports = {
             penis_exp_list.push(
               `曾趁熟睡之机侵犯过${
                 chara.id ? ` ${CharaTalk.me.name}` : '他人'
-              }${fuck_sleep_virgin > 1 ? ` ${fuck_sleep_virgin} 次` : ''}`,
+              }${fuck_sleep_virgin > 1 ? ` ${fuck_sleep_virgin.toLocaleString()} 次` : ''}`,
             );
           }
           if (sleep_penis) {
             penis_exp_list.push(
               `曾被趁熟睡之机侵犯过${
-                sleep_penis > 1 ? ` ${sleep_penis} 次` : ''
+                sleep_penis > 1 ? ` ${sleep_penis.toLocaleString()} 次` : ''
               }且没有察觉`,
             );
           }

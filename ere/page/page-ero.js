@@ -493,7 +493,7 @@ function print_milking(type, size) {
       '用榨乳器收集到了 ',
       {
         color: palam_colors.notifications[1],
-        content: `${milk}ml`,
+        content: `${milk.toLocaleString()}ml`,
         fontWeight: 'bold',
       },
       ' ',
