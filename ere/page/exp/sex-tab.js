@@ -8,6 +8,7 @@ const {
 
 const CharaTalk = require('#/utils/chara-talk');
 const get_gradient_color = require('#/utils/gradient-color');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const sex_color = require('#/data/const.json').mark_colors['淫纹'];
 const { attr_change_colors, palam_colors } = require('#/data/color-const');
@@ -308,8 +309,8 @@ module.exports = {
               juel.substring(0, 2),
               '：',
               {
-                color: num ? palam_colors.notifications[1] : '',
-                content: num.toLocaleString(),
+                color: num > 0 ? palam_colors.notifications[1] : '',
+                ...get_abbr_number(num),
               },
               ...(got_juel
                 ? [

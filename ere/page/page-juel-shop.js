@@ -22,6 +22,7 @@ const { get_custom_ero } = require('#/event/ero/ero-factory');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const {
   attr_change_colors,
@@ -152,11 +153,7 @@ module.exports = async (_id) => {
             '：',
             {
               color: j_count > 0 ? palam_colors.notifications[1] : undefined,
-              content:
-                j_count >= 10000
-                  ? `${Math.floor(j_count / 1000).toLocaleString()}K`
-                  : j_count.toLocaleString(),
-              title: j_count >= 10000 ? j_count.toLocaleString() : undefined,
+              ...get_abbr_number(j_count),
             },
           ],
           type: 'text',
