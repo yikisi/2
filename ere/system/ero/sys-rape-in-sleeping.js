@@ -49,7 +49,8 @@ async function sys_rape_in_sleeping(id, supporter = 0) {
         !era.get('status:0:马跳S') &&
         era.get('base:0:体力') > 0 &&
         (temp = era.get('ex:0:TotalEX')) > 0 &&
-        Math.random() < Math.min(temp, 5) * 0.05)
+        Math.random() < Math.min(temp, 5) * 0.05) ||
+      action_count > 66
     ) {
       flag_rape = false;
     }
