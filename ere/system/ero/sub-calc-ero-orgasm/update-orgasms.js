@@ -150,7 +150,6 @@ function get_squirt_info(chara_id) {
         actions.push('流出了 ');
     }
   }
-  console.log('小穴', era.get(`tcvar:${chara_id}:潮吹位置`));
   return [
     ...actions,
     {
@@ -328,7 +327,12 @@ function common_orgasm(chara_id) {
             } else if (semen_loc.p === part_enum.item) {
               era.print([
                 chara.get_colored_name(),
-                ' 在飞机杯中射出了',
+                ' 在 ',
+                {
+                  content: item_names[item_enum.artificial_virgin],
+                  color: buff_colors[2],
+                },
+                ' 中射出了',
                 semen,
                 '精液！',
               ]);

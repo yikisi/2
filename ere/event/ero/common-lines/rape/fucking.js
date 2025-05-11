@@ -256,7 +256,7 @@ async function common_doggy_style(attacker, defender, hook) {
       },
       '的发丝随之晃动。',
     ]);
-    if (era.get(`cflag:${defender.id}:种族`)) {
+    if (era.get(`cflag:${defender.id}:种族`) > 0) {
       await attacker.print_and_wait(['连尾巴也笔直的绷了起来……']);
     }
   } else {

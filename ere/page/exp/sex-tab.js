@@ -243,17 +243,17 @@ module.exports = {
         '身体耐性',
         '身体掌握',
       ];
-      if (chara.sex_code) {
+      if (chara.sex_code > 0) {
         skill_list.push('插入技巧', '阴茎耐性');
       }
       skill_list.push('阴茎掌握');
-      if (chara.sex_code - 1) {
+      if (chara.sex_code !== 1) {
         skill_list.push('性交技巧');
       }
-      if (!chara.sex_code) {
+      if (chara.sex_code === 0) {
         skill_list.push('外阴耐性');
       }
-      if (chara.sex_code - 1) {
+      if (chara.sex_code !== 1) {
         skill_list.push('阴道耐性');
       }
       skill_list.push(
@@ -350,18 +350,18 @@ module.exports = {
 
       const sex_level = era.get(`mark:${chara.id}:淫纹`);
 
-      if (sex_level || chara.id) {
+      if (sex_level > 0 || chara.id > 0) {
         sex_info_list.push({
           type: 'divider',
           config: { content: '刻印', position: 'left' },
         });
 
-        if (sex_level) {
+        if (sex_level > 0) {
           sex_info_list.push(get_mark_info(chara.id, '淫纹', sex_level));
-        } else if (chara.id) {
+        } else if (chara.id > 0) {
           sex_info_list.push(get_mark_info(chara.id, '欢愉'));
         }
-        if (chara.id) {
+        if (chara.id > 0) {
           era
             .get('marknames')
             .slice(2)

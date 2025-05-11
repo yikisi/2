@@ -10,7 +10,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 亲吻着沉睡的 ',
       defender.get_colored_name(),
-      '……】',
+      '】',
     ]);
 
   handlers[ero_hooks.french_kiss] = (attacker, defender) =>
@@ -19,6 +19,6 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 深吻着沉睡的 ',
       defender.get_colored_name(),
-      '……】',
+      '】',
     ]);
 };
