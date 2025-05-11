@@ -151,7 +151,7 @@ function get_sex_acceptable(chara_id) {
     get_custom_mec(chara_id).get_sex_acceptable() +
     get_action_base_check(chara_id) +
     Math.max(era.get(`base:${chara_id}:性欲`) - 5000, 0) / 200 +
-    10 * Math.max(era.get(`flag:惩戒力度`) - 1, 0) +
+    50 * (era.get('flag:惩戒力度') >= 2) +
     15 * era.get(`talent:${chara_id}:工口意愿`) -
     10 * era.get(`talent:${chara_id}:贞洁看法`) -
     50 +

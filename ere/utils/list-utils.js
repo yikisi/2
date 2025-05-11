@@ -113,9 +113,11 @@ module.exports = {
   },
   get_random_entry,
   /**
-   * @param {*[]} list
-   * @param separator
-   * @returns {*[]}
+   * @Template T1
+   * @Template T2
+   * @param {T1[]} list
+   * @param {T2} separator
+   * @returns {(T1|T2)[]}
    */
   join_list(list, separator) {
     if (list.length === 0) {

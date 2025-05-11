@@ -14,10 +14,10 @@ class CharaTalk {
   /**
    * 输出一句路人的台词
    * @param {string} name
-   * @param {string|({content:string,[color]:string}|string)[]} _content
+   * @param {TextContent} _content
    * @param {boolean} [mental]
    */
-  static say_by_passer_by(name, _content, mental) {
+  static say_by_passer_by(name, _content, mental = false) {
     const content = [
       {
         content: name,
@@ -37,10 +37,10 @@ class CharaTalk {
   /**
    * 输出一句路人的台词并等待
    * @param {string} name
-   * @param {string|({content:string,[color]:string}|string)[]} _content
+   * @param {TextContent} _content
    * @param {boolean} [mental]
    */
-  static async say_by_passer_by_and_wait(name, _content, mental) {
+  static async say_by_passer_by_and_wait(name, _content, mental = false) {
     CharaTalk.say_by_passer_by(name, _content, mental);
     await era.waitAnyKey();
   }
@@ -87,6 +87,7 @@ class CharaTalk {
     return era.get(`cflag:${this.id}:性别`);
   }
 
+  /** @returns {PrintedSpan} */
   get_colored_actual_name() {
     return {
       color: this.color,
@@ -95,6 +96,7 @@ class CharaTalk {
     };
   }
 
+  /** @returns {PrintedSpan} */
   get_colored_full_name() {
     return {
       color: this.color,
@@ -103,7 +105,10 @@ class CharaTalk {
     };
   }
 
-  /** 返回一个可以在isList模式下的print系指令中使用的content对象 */
+  /**
+   * 返回一个可以在isList模式下的print系指令中使用的content对象
+   * @returns {PrintedSpan}
+   */
   get_colored_name() {
     return {
       color: this.color,
@@ -112,6 +117,7 @@ class CharaTalk {
     };
   }
 
+  /** @returns {PrintedSpan} */
   get_colored_sex() {
     return {
       color: this.color,
@@ -160,7 +166,7 @@ class CharaTalk {
 
   /**
    * 事件从该角色视角展开时的旁白
-   * @param {string|({content:string,[color]:string}|string)[]} _content
+   * @param {TextContent} _content
    */
   print(_content) {
     era.print(_content, { color: this.color });
@@ -168,8 +174,7 @@ class CharaTalk {
 
   /**
    * 事件从该角色视角展开时的旁白，在输出后会等待玩家按任意键的版本
-   * @param {string|({content:string,[color]:string}|string)[]} content
-   * @returns {Promise<void>}
+   * @param {TextContent} content
    */
   async print_and_wait(content) {
     this.print(content);
@@ -178,10 +183,10 @@ class CharaTalk {
 
   /**
    * 输出一句该角色的台词
-   * @param {string|({content:string,[color]:string}|string)[]} _content
+   * @param {TextContent} _content
    * @param {boolean} [mental]
    */
-  say(_content, mental) {
+  say(_content, mental = false) {
     const content = [
       this.id ? this.get_colored_name() : '',
       `${mental ? '（' : '「'}`,
@@ -197,17 +202,17 @@ class CharaTalk {
 
   /**
    * 输出一句该角色的台词，在输出后会等待玩家按任意键的版本
-   * @param {string|({content:string,[color]:string}|string)[]} _content
-   * @param {boolean} [mental]
+   * @param {TextContent} _content
+   * @param {boolean} mental
    */
-  async say_and_wait(_content, mental) {
+  async say_and_wait(_content, mental = false) {
     this.say(_content, mental);
     await era.waitAnyKey();
   }
 
   /**
    * 以未知名输出一句该角色的台词
-   * @param {string|({content:string,[color]:string}|string)[]} _content
+   * @param {TextContent} _content
    */
   say_as_unknown(_content) {
     const content = [
@@ -229,7 +234,7 @@ class CharaTalk {
 
   /**
    * 以未知名输出一句该角色的台词并等待
-   * @param {string|({content:string,[color]:string}|string)[]} _content
+   * @param {TextContent} _content
    */
   async say_as_unknown_and_wait(_content) {
     this.say_as_unknown(_content);
@@ -238,10 +243,10 @@ class CharaTalk {
 
   /**
    * 输出一句该角色在回忆中的台词
-   * @param {string|({content:string,[color]:string}|string)[]} _content
-   * @param {boolean} [is_unknown]
+   * @param {TextContent} _content
+   * @param {boolean} [is_unknown=false]
    */
-  used_to_say(_content, is_unknown) {
+  used_to_say(_content, is_unknown = false) {
     const content = [];
     content.push('（');
     if (this.id) {
@@ -262,10 +267,10 @@ class CharaTalk {
 
   /**
    * 输出一句该角色在回忆中的台词，在输出后会等待玩家按任意键的版本
-   * @param {string|({content:string,[color]:string}|string)[]} content
-   * @param {boolean} [is_unknown]
+   * @param {TextContent} content
+   * @param {boolean} [is_unknown=false]
    */
-  async used_to_say_and_wait(content, is_unknown) {
+  async used_to_say_and_wait(content, is_unknown = false) {
     this.used_to_say(content, is_unknown);
     await era.waitAnyKey();
   }

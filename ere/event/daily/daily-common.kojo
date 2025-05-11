@@ -94,3 +94,71 @@
       random: true
       lines:
         - %角色名% 躲在操场的角落，似乎不想与周围那些太过阳光的人有所接触。
+    - if: era.get(`talent:${d.id}:恐惧感受`) === 1
+      random: true
+      lines:
+        - %角色名% 独自蜷缩在训练场阴影处，用树枝在地面画着重复的螺旋图案。
+    - if: era.get(`talent:${d.id}:恐惧感受`) === 1
+      random: true
+      lines:
+        - %玩家名% 发现 %角色名% 正对着自动贩卖机的反光玻璃低声自言自语。
+    - if: era.get(`talent:${d.id}:恐惧感受`) === -1
+      random: true
+      lines:
+        - %玩家名% 发现 %角色名% 偷偷把蒲公英种子吹向天空，转头露出恶作剧成功的灿烂笑容。
+    - if: era.get(`talent:${d.id}:恐惧感受`) === -1
+      random: true
+      lines:
+        - %角色名% 把训练用轮胎滚成巨大圆环，哼着走调的Live曲在草坪上推着轮胎奔跑。
+    - if: era.get(`talent:${d.id}:恐惧感受`) === -1
+      random: true
+      lines:
+        - %角色名% 抱着运动饮料边走边跳，头髮随风飞舞飘动。
+    - if: era.get(`talent:${d.id}:羞耻忍耐`) === 1
+      random: true
+      lines:
+        - %角色名% 躲在训练员室窗帘后翻阅图书，听到脚步声立即将书合拢抱在胸前。
+    - if: era.get(`talent:${d.id}:羞耻忍耐`) === 1
+      random: true
+      lines:
+        - %角色名% 反复调整自动贩卖机投币口的角度，确保硬币垂直落入时不会发出声响。
+    - if: era.get(`talent:${d.id}:羞耻忍耐`) === 1
+      random: true
+      lines:
+        - 训练员室的柜子后面微微晃动，%角色名% 正躲在后面换衣服，被 %玩家名% 发现后满脸通红。
+    - if: era.get(`talent:${d.id}:羞耻忍耐`) === -1
+      random: true
+      lines:
+        - %玩家名% 被 %角色名% 突然背起冲向训练场，说要让 %玩家名% 体验风速的快感。
+    - if: era.get(`talent:${d.id}:羞耻忍耐`) === -1
+      random: true
+      lines:
+        - %角色名% 将跳马拼在一起，召集训练场上的%马娘%们比赛谁能一次跳过最多的跳马。
+    - if: era.get(`talent:${d.id}:羞耻忍耐`) === -1
+      random: true
+      lines:
+        - %角色名% 坐在训练场的入口，让所有路过的%马娘%都要说一个冷笑话才准过。
+    - if: era.get(`talent:${d.id}:反感获取`) === 1
+      random: true
+      lines:
+        - %角色名% 瞪着路过的%马娘%，被%她%瞪到的孩子都发出了害怕的悲鸣。
+    - if: era.get(`talent:${d.id}:反感获取`) === 1
+      random: true
+      lines:
+        - %角色名% 用喷漆在障碍栏涂鸦，发现 %玩家名% 后挑衅地把沾到指尖的颜料涂在墙上。
+    - if: era.get(`talent:${d.id}:反感获取`) === 1
+      random: true
+      lines:
+        - 更衣室传来刺啦声响，%角色名% 正将制服袖口剪的坑坑洞洞，线头散落满地。
+    - if: era.get(`talent:${d.id}:反感获取`) === -1
+      random: true
+      lines:
+        - 器材室透出暖黄灯光，%角色名% 正用绷带给老旧杠铃片缠绕防撞缓冲带。
+    - if: era.get(`talent:${d.id}:反感获取`) === -1
+      random: true
+      lines:
+        - %角色名% 拿着许多瓶运动饮料站在训练场旁，看到训练得满头大汗的%马娘%就会向前递上。
+    - if: era.get(`talent:${d.id}:反感获取`) === -1
+      random: true
+      lines:
+        - %角色名% 清理着训练场上的碎石，以免有人跌倒时被尖锐的石头二次伤害。

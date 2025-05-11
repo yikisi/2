@@ -85,12 +85,10 @@ module.exports = {
    * @param {number} supporter_id=0
    */
   update_face_exp(date, chara_id, semen, other_id, supporter_id = 0) {
-    const semen_list = [];
-    if (supporter_id) {
-      semen_list.push(Math.ceil(semen / 2));
+    const semen_list = [semen];
+    if (supporter_id > 0) {
+      semen_list[0] = Math.ceil(semen / 2);
       semen_list.push(semen - semen_list[0]);
-    } else {
-      semen_list.push(semen);
     }
     [other_id.toString(), supporter_id]
       .filter((e) => e)
@@ -159,16 +157,11 @@ module.exports = {
     }
     const milk_list = [amount];
     if (supporter_id > 0) {
-      const random_val = Math.random();
-      let tmp_amount = amount;
-      if (random_val < 0.3) {
-        tmp_amount = Math.max(1, tmp_amount - 1);
-      } else if (random_val > 0.7) {
-        tmp_amount += 1;
-      }
-      milk_list.push(tmp_amount);
-      era.add(`nowex:${chara_id}:喷奶量`, tmp_amount);
-      era.add(`exp:${chara_id}:喷奶量`, tmp_amount);
+      const total = Math.ceil(amount * 1.2);
+      milk_list[0] = Math.ceil(total / 2);
+      milk_list.push(total - milk_list[0]);
+      era.add(`nowex:${chara_id}:喷奶量`, total - amount);
+      era.add(`exp:${chara_id}:喷奶量`, total - amount);
       merge_stain(
         new EroParticipant(chara_id, part_enum.breast),
         new EroParticipant(supporter_id, part_enum.mouth),
@@ -201,42 +194,21 @@ module.exports = {
   },
   /**
    * @param {string} date
-   * @param {number} attacker_id
-   * @param {number} defender_id
-   */
-  update_sm_exp(date, attacker_id, defender_id) {
-    if (!era.get(`cstr:${attacker_id}:初次施虐经历`)) {
-      era.set(`cstr:${attacker_id}:初次施虐经历`, [
-        `在 ${date} 初次虐待了 `,
-        { c: defender_id },
-      ]);
-    }
-    if (!era.get(`cstr:${defender_id}:初次受虐经历`)) {
-      era.set(`cstr:${defender_id}:初次受虐经历`, [
-        `在 ${date} 初次被 `,
-        { c: attacker_id },
-        ' 虐待',
-      ]);
-    }
-  },
-  /**
-   * @param {string} date
    * @param {number} chara_id
    * @param {number} amount
    * @param {number} other_id
    * @param {number} supporter
    */
-  update_virgin_exp(date, chara_id, amount, other_id, supporter) {
+  update_secretion_exp(date, chara_id, amount, other_id, supporter) {
     const amount_list = [amount];
     if (supporter > 0) {
       amount_list[0] = Math.ceil(amount / 2);
       amount_list.push(amount - amount_list[0]);
     }
-    console.log(other_id, amount_list);
     [other_id.toString(), supporter]
       .filter((e) => e)
       .forEach((id, i) => {
-        set_stain(id, part_enum.mouth, stain_enum.virgin);
+        set_stain(id, part_enum.mouth, stain_enum.secretion);
         era.add(`nowex:${id}:饮爱液量`, amount_list[i]);
         if (id === '0') {
           era.add(`tcvar:${chara_id}:获得因子`, amount_list[i] / 10);
@@ -262,5 +234,25 @@ module.exports = {
           ]);
         }
       });
+  },
+  /**
+   * @param {string} date
+   * @param {number} attacker_id
+   * @param {number} defender_id
+   */
+  update_sm_exp(date, attacker_id, defender_id) {
+    if (!era.get(`cstr:${attacker_id}:初次施虐经历`)) {
+      era.set(`cstr:${attacker_id}:初次施虐经历`, [
+        `在 ${date} 初次虐待了 `,
+        { c: defender_id },
+      ]);
+    }
+    if (!era.get(`cstr:${defender_id}:初次受虐经历`)) {
+      era.set(`cstr:${defender_id}:初次受虐经历`, [
+        `在 ${date} 初次被 `,
+        { c: attacker_id },
+        ' 虐待',
+      ]);
+    }
   },
 };

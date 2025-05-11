@@ -16,6 +16,7 @@ const { log_max_wp } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
+const { item_enum, item_names } = require('#/data/ero/item-const');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const {
   max_absent_mind_time,
@@ -49,24 +50,56 @@ const cum_loc_desc = {
 
 /**
  * @param {number} chara_id
- * @param {boolean} is_orgasm
+ * @param {boolean} [is_orgasm=false]
+ * @returns {TextContent}
  */
-function get_milk_info(chara_id, is_orgasm) {
+function get_milk_info(chara_id, is_orgasm = false) {
   const amount = era.get(`nowex:${chara_id}:喷奶量`);
   if (!amount) {
     return [];
   }
-  let action;
+  const loc = era.get(`tcvar:${chara_id}:喷奶位置`) || {};
+  const actions = [];
+  const chara = join_list(
+    (loc.c || [])
+      .filter((e) => e >= 0)
+      .map((e) => get_chara_talk(e).get_colored_name()),
+    ' 和 ',
+  );
+  switch (loc.p) {
+    case part_enum.mouth:
+      actions.push('在 ', ...chara, ' 的口中');
+      break;
+    case part_enum.hand:
+      actions.push('在 ', ...chara, ' 的指间');
+      break;
+    case part_enum.item:
+      if (loc.i === item_enum.milk_pump) {
+        actions.push(
+          '在 ',
+          { content: item_names[loc.i], color: buff_colors[2] },
+          ' 中',
+        );
+      }
+  }
   if (era.get(`ex:${chara_id}:喷奶阻碍`) > 0) {
-    action = '猛然喷出了 ';
+    actions.push('猛然喷出了 ');
   } else if (is_orgasm) {
-    action = '喷出了 ';
+    actions.push('喷出了 ');
   } else {
-    action = '流出了 ';
+    switch (loc.p) {
+      case part_enum.mouth:
+      case part_enum.hand:
+      case part_enum.item:
+        actions.push('泌出了 ');
+        break;
+      default:
+        actions.push('流出了 ');
+    }
   }
   era.set(`ex:${chara_id}:喷奶阻碍`, 0);
   return [
-    action,
+    ...actions,
     {
       content: ` ${amount.toLocaleString()}ml `,
       color: buff_colors[2],
@@ -75,14 +108,51 @@ function get_milk_info(chara_id, is_orgasm) {
   ];
 }
 
-/** @param {number} chara_id */
+/**
+ * @param {number} chara_id
+ * @returns {TextContent}
+ */
 function get_squirt_info(chara_id) {
   const squirt = era.get(`nowex:${chara_id}:爱液分泌`);
   if (!squirt) {
     return [];
   }
+  const loc = era.get(`tcvar:${chara_id}:潮吹位置`) || {};
+  const actions = [];
+  const chara = join_list(
+    (loc.c || [])
+      .filter((e) => e >= 0)
+      .map((e) => get_chara_talk(e).get_colored_name()),
+    ' 和 ',
+  );
+  switch (loc.p) {
+    case part_enum.mouth:
+      actions.push('向 ', ...chara, ' 的口中');
+      break;
+    case part_enum.hand:
+      actions.push('在 ', ...chara, ' 的指间');
+      break;
+    case part_enum.foot:
+      actions.push('在 ', ...chara, ' 的脚下');
+      break;
+    case 100:
+      actions.push('朝 ', ...chara, ' 的嘴唇');
+  }
+  if (era.get(`nowex:${chara_id}:潮吹`) > 0) {
+    actions.push('喷出了 ');
+  } else {
+    switch (loc.p) {
+      case part_enum.mouth:
+      case 100:
+        actions.push('溅出了 ');
+        break;
+      default:
+        actions.push('流出了 ');
+    }
+  }
+  console.log('小穴', era.get(`tcvar:${chara_id}:潮吹位置`));
   return [
-    era.get(`nowex:${chara_id}:潮吹`) > 0 ? '喷出了 ' : '流出了 ',
+    ...actions,
     {
       content: ` ${squirt.toLocaleString()}ml `,
       color: buff_colors[2],
@@ -156,7 +226,7 @@ function common_orgasm(chara_id) {
           buffer.push([
             chara.get_colored_name(),
             ' 的',
-            { color: buff_colors[2], content: ' 乳房 ' },
+            { color: buff_colors[2], content: ' 乳头 ' },
             ...milk,
           ]);
         }
@@ -367,10 +437,22 @@ async function update_orgasms(shown, ...ids) {
       }
       era.set(`tcvar:${chara_id}:刚刚高潮`, true);
     } else if (shown) {
+      const chara = get_chara_talk(chara_id);
+      const milk_info = get_milk_info(chara_id);
+      if (milk_info.length > 0) {
+        era.print([
+          chara.get_colored_name(),
+          ' 的 ',
+          { content: '乳头', color: buff_colors[2] },
+          ' ',
+          ...milk_info,
+          '！',
+        ]);
+      }
       const squirt_info = get_squirt_info(chara_id);
       if (squirt_info.length > 0) {
         era.print([
-          get_chara_talk(chara_id).get_colored_name(),
+          chara.get_colored_name(),
           ' 的 ',
           { content: '阴道', color: buff_colors[2] },
           ' ',

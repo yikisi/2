@@ -399,7 +399,7 @@ module.exports = {
     if (check_lubrication(chara_id, part_enum.anal)) {
       status_list.push({ color: buff_colors[2], content: '肛润滑' });
     }
-    if (era.get(`tcvar:${chara_id}:乳突`)) {
+    if (era.get(`tcvar:${chara_id}:乳突`) > 0) {
       status_list.push({
         color: buff_colors[2],
         content: '乳突！',

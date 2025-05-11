@@ -6,7 +6,7 @@ const {
   update_breast_exp,
   update_face_exp,
   update_milk_exp,
-  update_virgin_exp,
+  update_secretion_exp,
 } = require('#/system/ero/sys-calc-ero-exp');
 const {
   change_part,
@@ -463,21 +463,30 @@ async function sys_calc_orgasm(shown, ...ids) {
             update_palam_from_main_orgasm(chara_id, nipple_orgasm_times);
           }
           const cup = get_breast_cup(chara_id, true);
+          const loc = era.set(`tcvar:${chara_id}:喷奶位置`, {
+            c: [other_id],
+            p: other_part,
+          });
           if (other_part === part_enum.mouth) {
+            let supporter = 0;
+            if (
+              (last_action === ero_hooks.ask_double_suck_nipple &&
+                chara_id === era.get('tflag:主导权')) ||
+              (last_action === ero_hooks.double_suck_nipple &&
+                chara_id === era.get('tflag:前回对手'))
+            ) {
+              loc.c.push((supporter = last_supporter));
+            }
             update_milk_exp(
               date,
               chara_id,
               amount,
               breast_size[cup <= 'G' ? cup : 'G'],
               other_id,
-              (last_action === ero_hooks.ask_double_suck_nipple &&
-                chara_id === era.get('tflag:主导权')) ||
-                (last_action === ero_hooks.double_suck_nipple &&
-                  chara_id === era.get('tflag:前回对手'))
-                ? last_supporter
-                : 0,
+              supporter,
             );
           } else if (touched_part.item === item_enum.milk_pump) {
+            loc.i = touched_part.item;
             era.add(
               `tflag:${era.get(`cflag:${chara_id}:种族`) > 0 ? '马' : '人'}奶${
                 chara_id === 0 ? '可卖' : '产量'
@@ -491,6 +500,10 @@ async function sys_calc_orgasm(shown, ...ids) {
             new EroParticipant(other_id, other_part),
           );
           era.set(`nowex:${chara_id}:爱液分泌`, amount);
+          const loc = era.set(`tcvar:${chara_id}:潮吹位置`, {
+            c: [other_id],
+            p: other_part,
+          });
           let supporter = -1;
           if (other_part === part_enum.mouth) {
             if (
@@ -499,21 +512,26 @@ async function sys_calc_orgasm(shown, ...ids) {
               (last_action === ero_hooks.double_suck_virgin &&
                 chara_id === era.get('tflag:前回对手'))
             ) {
-              supporter = last_supporter;
+              loc.c.push((supporter = last_supporter));
             }
-            update_virgin_exp(date, chara_id, amount, other_id, supporter);
-          } else if (amount >= 2) {
+            update_secretion_exp(date, chara_id, amount, other_id, supporter);
+          } else {
             const c_part = era.get(`tcvar:${chara_id}:外阴接触部位`);
-            if (c_part.part === part_enum.mouth) {
+            if (c_part.part === part_enum.foot) {
+              loc.p = part_enum.foot;
+              loc.c = [c_part.owner];
+            } else if (c_part.part === part_enum.mouth && amount >= 2) {
+              loc.p = 100;
+              loc.c = [c_part.owner];
               if (
                 (last_action === ero_hooks.ask_double_cunnilingus &&
                   chara_id === era.get('tflag:主导权')) ||
                 (last_action === ero_hooks.double_cunnilingus &&
                   chara_id === era.get('tflag:前回对手'))
               ) {
-                supporter = last_supporter;
+                loc.c.push((supporter = last_supporter));
               }
-              update_virgin_exp(
+              update_secretion_exp(
                 date,
                 chara_id,
                 Math.ceil(amount / 2),
