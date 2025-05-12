@@ -319,7 +319,7 @@ module.exports = (handlers) => {
       '一上一下抽插着 ',
       defender.get_colored_name(),
       ' 的口穴与',
-      hook.hook === ero_hooks.ask_spit_roast ? '小穴' : '屁穴',
+      hook.hook === ero_hooks.spit_roast ? '小穴' : '屁穴',
       '】',
     ]);
 };

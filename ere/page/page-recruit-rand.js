@@ -556,7 +556,7 @@ async function print_rec_page() {
   }
   if (!flag_leave) {
     era.drawLine();
-    await era.printAndWait([me.get_colored_name(), ' 离开了训练场……']);
+    await era.printAndWait('【折返了】');
     await sys_get_random_event(event_hooks.recruit_end)();
   }
   await game_guides.recruit_end();
