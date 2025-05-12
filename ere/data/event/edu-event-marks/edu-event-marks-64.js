@@ -6,6 +6,11 @@ class PamaEduMarks extends EduEventMarks {
   // 依存心
   half_life;
 
+  // 蜗牛
+  snails;
+  // 电影院口交
+  movie_job;
+
   // 全育成第一次调教指令
   kiss;
   lure;

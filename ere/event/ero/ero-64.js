@@ -19,6 +19,7 @@ const PamaNormalFucking = require('#/event/ero/ero-lines-64/normal-fucking');
 const PamaNormalMakingOuts = require('#/event/ero/ero-lines-64/normal-making-outs');
 const PamaNormalSm = require('#/event/ero/ero-lines-64/normal-sm');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -61,6 +62,24 @@ module.exports = class extends CustomizedEro {
   }
 
   async ero_start(handle_ero_act) {
+    const edu_marks = new PamaEduMarks();
+    if (edu_marks.movie_job < 2) {
+      edu_marks.movie_job = 0;
+    }
+    const pama = get_chara_talk(this.id);
+    if (
+      !era.get(`exp:${this.id}:性爱次数`) &&
+      sys_check_awake(0) &&
+      sys_check_awake(this.id) &&
+      era.get('tflag:强奸') === -1 &&
+      era.get(`status:${this.id}:超马跳Z`) === 0 &&
+      era.get(`love:${this.id}`) >= 50 &&
+      pama.sex_code !== 1 &&
+      era.get('cflag:0:性别') > 0
+    ) {
+      await print_name_and_show_kojo('无法回头的领放', pama, kojo, this.#dict);
+      return;
+    }
     if (!sys_check_awake(this.id) || era.get(`status:${this.id}:超马跳Z`) > 0) {
       return super.ero_start(handle_ero_act);
     }

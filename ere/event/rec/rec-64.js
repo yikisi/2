@@ -26,9 +26,10 @@ module.exports = class extends CustomizedRecruit {
     const pama = get_chara_talk(this.id);
     dict['代表色'] = pama.color;
     dict['她'] = pama.sex;
-    dict['马娘'] = pama.get_uma_sex_title();
+    dict['马娘'] = pama.uma_sex_title;
     dict['你'] = era.get('callname:0:-2');
     dict['善信称呼骏川'] = sys_get_callname(this.id, 301);
+    dict['称呼'] = sys_get_callname(this.id, 0);
     if (era.get(`cflag:${this.id}:招募状态`) === 0) {
       let ret;
       switch (stage) {

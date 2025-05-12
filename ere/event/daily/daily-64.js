@@ -4,6 +4,15 @@
  */
 const era = require('#/era-electron');
 
+const next_turn = require('#/system/ero/calc-sex/next-turn');
+const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
+const sys_do_sex = require('#/system/ero/sys-calc-ero');
+const { remove_item } = require('#/system/ero/sys-calc-ero-item');
+const {
+  begin_and_init_ero,
+  end_ero_and_train,
+  set_palam_to_max,
+} = require('#/system/ero/sys-prepare-ero');
 const {
   sys_get_callname,
   sys_love_uma,
@@ -16,28 +25,28 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_chara_color } = require('#/data/chara-colors');
+const EroParticipant = require('#/data/ero/ero-participant');
+const { item_enum } = require('#/data/ero/item-const');
+const { part_enum } = require('#/data/ero/part-const');
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 
 module.exports = class extends CustomizedDaily {
   get #dict() {
     const dict = {};
-    dict['善信'] = era.get(`callname:${this.id}:-2`);
+    const pama = get_chara_talk(this.id);
+    dict['善信'] = pama.name;
     dict['称呼'] = sys_get_callname(this.id, 0);
-    dict['代表色'] = get_chara_color(this.id);
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
-      dict['小姐'] = '先生';
-      dict['她'] = '他';
-      dict['姐妹'] = '兄弟';
-    } else {
-      dict['小姐'] = '小姐';
-      dict['她'] = '她';
-      dict['姐妹'] = '姐妹';
-    }
-    dict['T'] = era.get('callname:0:-2');
+    dict['代表色'] = pama.color;
+    dict['小姐'] = pama.adult_sex_title;
+    dict['她'] = pama.sex;
+    dict['姐妹'] = pama.siblings_sex_title;
+    dict['马娘'] = pama.uma_sex_title;
+    const me = get_chara_talk(0);
+    dict['T'] = me.name;
     dict['T称呼善信'] = sys_get_callname(0, this.id);
     dict.half_life = new PamaEduMarks().half_life;
     return dict;
@@ -103,6 +112,52 @@ module.exports = class extends CustomizedDaily {
   }
 
   async school_atrium(hook) {
+    const edu_marks = new PamaEduMarks();
+    if (
+      era.get(`love:${this.id}`) >= 50 &&
+      era.get('item:肛塞') > 0 &&
+      era.get(`cflag:${this.id}:肠道内精液`) > 0 &&
+      !edu_marks.snails
+    ) {
+      edu_marks.snails = 1;
+      const pama = get_chara_talk(this.id);
+      const ret = await print_name_and_show_kojo(
+        '要变成蜗牛了///',
+        get_chara_talk(this.id),
+        kojo,
+        {
+          代表色: pama.color,
+          你: era.get(`callname:${this.id}:-2`),
+          她: pama.sex,
+          少女: pama.teen_sex_title,
+          称呼: sys_get_callname(this.id, 0),
+        },
+      );
+      begin_and_init_ero(0, this.id);
+      sys_do_sex(
+        new EroParticipant(0, part_enum.item),
+        new EroParticipant(this.id, part_enum.anal),
+        item_enum.butt_plug,
+      );
+      await next_turn(false);
+      if (ret[0] === 2) {
+        await quick_make_love(
+          new EroParticipant(0, part_enum.hand),
+          new EroParticipant(this.id, part_enum.virgin),
+          false,
+        );
+      }
+      set_palam_to_max(this.id, part_enum.virgin);
+      remove_item(this.id, part_enum.anal);
+      await quick_make_love(
+        new EroParticipant(0, part_enum.hand, -0.5),
+        new EroParticipant(this.id, part_enum.anal),
+        false,
+      );
+      end_ero_and_train();
+      hook.override = true;
+      return;
+    }
     if ((hook.arg = !(await select_action_in_atrium()))) {
       await kojo['枯树洞'](this.#dict);
     } else {

@@ -10,9 +10,13 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_color } = require('#/data/chara-colors');
 const { attr_change_colors } = require('#/data/color-const');
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
+const PamaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-64');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
+const { add_event, cb_enum } = require('#/event/queue');
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
@@ -87,6 +91,41 @@ module.exports = class extends CustomizedCheck {
       }
     }
     return ret;
+  }
+
+  check_next_week() {
+    const life_marks = new PamaLifeMarks();
+    const love = era.get(`love:${this.id}`);
+    if (love >= 24 && !life_marks.love_24) {
+      life_marks.love_24 = 1;
+      add_event(
+        event_hooks.out_river,
+        new EventObject(this.id, cb_enum.love).set_arg('distance'),
+      );
+    } else if (love >= 39 && life_marks.love_24 === 2 && !life_marks.love_39) {
+      life_marks.love_39 = 1;
+      add_event(
+        event_hooks.week_end,
+        new EventObject(this.id, cb_enum.love).set_arg('happy'),
+      );
+    }
+    const edu_marks = new PamaEduMarks();
+    if (
+      era.get(`cflag:${this.id}:性别`) !== 1 &&
+      era.get('cflag:0:性别') > 0 &&
+      edu_marks.movie_job < 2 &&
+      ++edu_marks.movie_job === 2
+    ) {
+      if (love >= 75) {
+        add_event(
+          event_hooks.week_end,
+          new EventObject(this.id, cb_enum.love).set_arg('here'),
+        );
+      } else {
+        edu_marks.movie_job = 1;
+      }
+    }
+    super.check_next_week();
   }
 
   get_aim_races() {
