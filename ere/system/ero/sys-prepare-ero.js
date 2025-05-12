@@ -577,7 +577,7 @@ function end_ero(skip_juels, log_juels, ids) {
     );
     let pt = era.get(`ex:${id}:技能点获取`);
     if (pt > 0) {
-      pt = Math.floor(pt / get_random_value(4, 6));
+      pt = Math.floor(pt / get_random_value(8, 12));
       ret.attr[id].push(`获得了 ${pt.toLocaleString()} 点技能点数`);
       era.add(`exp:${id}:技能点数`, pt);
     }

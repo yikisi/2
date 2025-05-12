@@ -730,6 +730,9 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       }
     } else {
       inmon.set(p.id, 1 - inmon.on(p.id));
+      if (p.id === plugin_enum.sex_2) {
+        era.set(`cflag:${chara.id}:自主训练`, 0);
+      }
     }
   } else if (ret === 200) {
     pointer.sub -= 2;

@@ -12,10 +12,10 @@ function add_attr_exp(chara_id, attr, val) {
     if (inmon.on(plugin_enum.sex_1)) {
       times += 4;
     } else if (inmon.on(plugin_enum.sex_2)) {
-      times += 14;
+      times += 9;
     }
     era.add(`nowex:${chara_id}:${attr_names[attr]}获取`, val * times);
-    if (in_edu) {
+    if (in_edu && times > 1) {
       era.add(`nowex:${chara_id}:技能点获取`, times);
     }
   }
