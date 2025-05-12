@@ -43,7 +43,7 @@ const {
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { gene_juel_names } = require('#/data/other-const');
-const { attr_enum } = require('#/data/train-const');
+const { attr_enum, attr_names } = require('#/data/train-const');
 
 let juel_names;
 
@@ -431,9 +431,10 @@ function begin_and_init_ero(...ids) {
  * @param {boolean} skip_juels
  * @param {boolean} log_juels
  * @param {number[]} ids
+ * @returns {{attr:Record<string,(PrintedSpan|string)[][]>,[jewel]:Record<string,Record<string,number>>}}
  */
 function end_ero(skip_juels, log_juels, ids) {
-  let ret = {};
+  let ret = { attr: {}, jewel: {} };
   sys_calc_ero_items.remove_all_items(...ids);
   clean_all_parts(...ids);
   const is_slave = ids.indexOf(0) !== -1 && era.get('flag:惩戒力度') >= 2;
@@ -471,7 +472,7 @@ function end_ero(skip_juels, log_juels, ids) {
     });
     const got = new Array(13).fill(0),
       un_got = new Array(13).fill(0);
-    ret[id] = {};
+    ret.jewel[id] = {};
     for (let i = 12; i >= 0; --i) {
       got[i] = Math.floor(
         era.get(`gotjuel:${id}:${juel_names[i]}`) / palam2juel,
@@ -492,8 +493,8 @@ function end_ero(skip_juels, log_juels, ids) {
           );
     era.add(`juel:${id}:自卫`, got_self_protect - self_protect);
     if (log_juels) {
-      ret[id]['自卫'] = got_self_protect;
-      ret[id]['-自卫'] = self_protect;
+      ret.jewel[id]['自卫'] = got_self_protect;
+      ret.jewel[id]['-自卫'] = self_protect;
     }
     juel_names.forEach((j_name, i) => {
       const lost = get_random_value(
@@ -504,8 +505,8 @@ function end_ero(skip_juels, log_juels, ids) {
       self_protect -= lost;
       era.add(`juel:${id}:${j_name}`, got[i]);
       if (log_juels) {
-        ret[id][j_name] = got[i];
-        ret[id][`-${j_name}`] = lost;
+        ret.jewel[id][j_name] = got[i];
+        ret.jewel[id][`-${j_name}`] = lost;
       }
     });
     const s_orgasm_count = era.get(`ex:${id}:施虐高潮`),
@@ -553,7 +554,7 @@ function end_ero(skip_juels, log_juels, ids) {
         Math.min(era.get(`base:${id}:精力`), era.get(`tcvar:${id}:精力缓存`)),
       ),
     );
-    if (id && is_slave) {
+    if (id > 0 && is_slave) {
       sys_change_fame(
         Math.max(
           era.get(`tcvar:${id}:性欲缓存`) - era.get(`base:${id}:性欲`),
@@ -567,21 +568,19 @@ function end_ero(skip_juels, log_juels, ids) {
             100,
       );
     }
-    sys_change_attr_and_print(
-      id,
-      attr_enum.speed,
-      era.get(`ex:${id}:速度获取`) / get_random_value(4, 6),
+    ret.attr[id] = Object.values(attr_enum).map((e) =>
+      sys_change_attr_and_print(
+        id,
+        e,
+        era.get(`ex:${id}:${attr_names[e]}获取`) / get_random_value(4, 6),
+      ),
     );
-    sys_change_attr_and_print(
-      id,
-      attr_enum.strength,
-      era.get(`ex:${id}:力量获取`) / get_random_value(4, 6),
-    );
-    sys_change_attr_and_print(
-      id,
-      attr_enum.toughness,
-      era.get(`ex:${id}:根性获取`) / get_random_value(4, 6),
-    );
+    let pt = era.get(`ex:${id}:技能点获取`);
+    if (pt > 0) {
+      pt = Math.floor(pt / get_random_value(4, 6));
+      ret.attr[id].push(`获得了 ${pt.toLocaleString()} 点技能点数`);
+      era.add(`exp:${id}:技能点数`, pt);
+    }
   }
   for (const id of ids) {
     if (id > 0 && era.get(`cflag:${id}:种族`) > 0) {
@@ -609,7 +608,7 @@ function end_ero(skip_juels, log_juels, ids) {
     era.add(`juel:0:${e}`, era.get(`gotjuel:0:${e}`)),
   );
   if (!log_juels) {
-    ret = undefined;
+    ret.jewel = undefined;
   }
   era
     .get('paramkeys')
@@ -630,11 +629,16 @@ async function end_ero_and_show_result(shown = true) {
   clean_juels();
   clean_palams();
   const chara_list = era.getCharactersInTrain();
-  const jewel_info = end_ero(false, shown, chara_list);
+  const info = end_ero(false, shown, chara_list);
   if (shown) {
-    if (era.get('flag:马跳结果显示简报')) {
+    if (era.get('flag:马跳结果显示简报') > 0) {
       for (const chara_id of chara_list) {
-        const buffer = get_juel_result(chara_id, juel_names, jewel_info);
+        const buffer = get_juel_result(
+          chara_id,
+          juel_names,
+          info.jewel[chara_id],
+          info.attr[chara_id],
+        );
         era.printMultiColumns(buffer, { width: 18 });
         await era.waitAnyKey();
       }
@@ -669,7 +673,12 @@ async function end_ero_and_show_result(shown = true) {
         switch (page) {
           case 0:
             era.printMultiColumns(
-              get_juel_result(chara_list[chara_index], juel_names, jewel_info),
+              get_juel_result(
+                chara_list[chara_index],
+                juel_names,
+                info.jewel[chara_list[chara_index]],
+                info.attr[chara_list[chara_index]],
+              ),
               {
                 width: 18,
               },

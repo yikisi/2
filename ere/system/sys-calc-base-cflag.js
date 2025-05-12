@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_get_debuff } = require('#/system/sys-calc-chara-param');
 
+const add_attr_exp = require('#/event/ero/snippets/add-attr-exp');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -118,7 +119,7 @@ module.exports = {
    * @param {number} chara_id
    * @param {string|number} attr_id_or_name
    * @param {number} change
-   * @returns {*[]}
+   * @returns {(PrintedSpan|string)[]}
    */
   sys_change_attr_and_print(chara_id, attr_id_or_name, change) {
     if (!change) {
@@ -133,6 +134,7 @@ module.exports = {
       ret = [];
     if (typeof attr_id_or_name === 'string') {
       if (change < 0) {
+        const in_train = era.get(`tcvar:${chara_id}:脱力`) !== undefined;
         let debuff =
           sys_get_debuff(chara_id) +
           (era.get('flag:当前位置') === location_enum.beach &&
@@ -151,9 +153,14 @@ module.exports = {
           }
           era.add(`base:${chara_id}:体重偏差`, lose_weight * change);
           sys_change_pressure(chara_id, get_random_value(change / 5, 0));
-          era.add(`base:${chara_id}:耐力`, Math.min(-change / 500, 1));
+          let delta = Math.min(-change / 500, 1);
           if (era.get(`base:${chara_id}:体力`) < 0.45 * max) {
-            era.add(`base:${chara_id}:耐力`, Math.random());
+            delta += Math.random();
+          }
+          if (in_train) {
+            add_attr_exp(chara_id, attr_enum.endurance, delta);
+          } else {
+            era.add(`base:${chara_id}:耐力`, delta);
           }
         } else {
           sys_change_lust(chara_id, get_random_value(change, 0) / 4);
@@ -162,9 +169,14 @@ module.exports = {
             lose_pressure *= 1.5;
           }
           sys_change_pressure(chara_id, lose_pressure);
-          era.add(`base:${chara_id}:智力`, Math.min(-change / 500, 1));
+          let delta = Math.min(-change / 500, 1);
           if (era.get(`base:${chara_id}:精力`) < 0.5 * max) {
-            era.add(`base:${chara_id}:智力`, Math.random());
+            delta += Math.random();
+          }
+          if (in_train) {
+            add_attr_exp(chara_id, attr_enum.intelligence, delta);
+          } else {
+            era.add(`base:${chara_id}:智力`, delta);
           }
         }
       }

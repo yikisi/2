@@ -37,6 +37,8 @@ const {
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const add_attr_exp = require('#/event/ero/snippets/add-attr-exp');
+
 const { get_random_value, log_max_wp } = require('#/utils/value-utils');
 
 const { attack_juel_reward } = require('#/data/ero/battle-const');
@@ -68,6 +70,7 @@ const { breast_size, pregnant_stage_enum } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
+const { attr_enum } = require('#/data/train-const');
 
 /** @type {function(number):CustomizedEro} */
 let get_custom_ero;
@@ -515,7 +518,7 @@ async function sys_calc_orgasm(shown, ...ids) {
               loc.c.push((supporter = last_supporter));
             }
             update_secretion_exp(date, chara_id, amount, other_id, supporter);
-          } else {
+          } else if (other_part === -1) {
             const c_part = era.get(`tcvar:${chara_id}:外阴接触部位`);
             if (c_part.part === part_enum.foot) {
               loc.p = part_enum.foot;
@@ -845,7 +848,11 @@ async function sys_calc_orgasm(shown, ...ids) {
           1,
         );
       }
-      era.add(`nowex:${chara_id}:根性获取`, limited_count * limited_count);
+      add_attr_exp(
+        chara_id,
+        attr_enum.toughness,
+        limited_count * limited_count,
+      );
       const multi_part_reward =
         1 - juel_reward + juel_reward * orgasm_part_count;
       add_juel(

@@ -218,11 +218,14 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       era.get(`cflag:${chara.id}:种族`) > 0
         ? era.get(`cflag:${chara.id}:气性`)
         : undefined,
+    edu:
+      era.get(`cflag:${chara.id}:种族`) > 0 &&
+      (!chara.id || era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48),
     id: chara.id,
-    sex: chara.sex_code,
     pregnant:
       inmon.slave === slavery_enum.pregnant ||
       era.get(`cflag:${chara.id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no,
+    sex: chara.sex_code,
   };
   const plugins = Object.values(inmon_plugin_dict)
     .filter((e) => e.level <= sex_level && e.condition(p_filter_param))

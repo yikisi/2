@@ -377,7 +377,7 @@ async function update_orgasms(shown, ...ids) {
   if (!ex_list) {
     ex_list = era
       .get('exentries')
-      .filter((e) => e[1] >= 20 && e[1] <= 52)
+      .filter((e) => e[1] >= 20 && e[1] < 65)
       .map((e) => e[0]);
   }
   for (const chara_id of ids) {

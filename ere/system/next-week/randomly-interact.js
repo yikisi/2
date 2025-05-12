@@ -20,6 +20,8 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { attr_colors } = require('#/data/const.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { location_enum } = require('#/data/locations');
 const {
   attr_enum,
@@ -317,7 +319,10 @@ function randomly_interact(in_team_list) {
       era.set(`status:${chara_id}:摸鱼`, 0);
     }
     // 育成结束的那周不再自主训练
-    if (era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 - 1) {
+    if (
+      era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 - 1 &&
+      !CharaInmon.get(chara_id).on(plugin_enum.sex_2)
+    ) {
       era.set(`cflag:${chara_id}:自主训练`, 1);
     }
   }

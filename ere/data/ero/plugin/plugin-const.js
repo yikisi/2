@@ -87,6 +87,8 @@ plugins[60114] = require('#/data/ero/plugin/plugin-60114');
 plugins[60115] = require('#/data/ero/plugin/plugin-60115');
 plugins[60116] = require('#/data/ero/plugin/plugin-60116');
 plugins[60117] = require('#/data/ero/plugin/plugin-60117');
+plugins[60211] = require('#/data/ero/plugin/plugin-60211');
+plugins[60212] = require('#/data/ero/plugin/plugin-60212');
 plugins[70111] = require('#/data/ero/plugin/plugin-70111');
 plugins[70112] = require('#/data/ero/plugin/plugin-70112');
 plugins[70211] = require('#/data/ero/plugin/plugin-70211');
@@ -266,6 +268,10 @@ module.exports = {
     cha_5: 60116,
     // 血气方刚: 气性转换为「热血」
     cha_6: 60117,
+    // 性爱训练法: 通过性爱获取的基础属性+400%，全训练加成-50%
+    sex_1: 60211,
+    // 吃禁果变强: 通过性爱获取的基础属性+1400%，不再自主训练且全训练加成降到最低
+    sex_2: 60212,
     // 金枪鱼: 调教时不再做出反应
     tuna: 70111,
     // 温顺: 不再主动求爱，调教时也不再做出反应
