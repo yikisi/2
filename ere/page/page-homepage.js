@@ -1,7 +1,10 @@
 ﻿const era = require('#/era-electron');
 
 const sys_handle_escape_basement = require('#/system/basement/sys-handle-escape-basement');
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
+const {
+  sys_check_cuckold,
+  sys_check_yandere,
+} = require('#/system/chara/sys-calc-cheat');
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
@@ -142,10 +145,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
           sys_like_chara(orgy.id, lover, get_random_value(50, 150)) ||
           wait_flag;
         const yandere = era.get(`talent:${lover}:病娇`);
-        if (
-          inmon.on(plugin_enum.ntr) ||
-          (!yandere && era.get(`talent:${lover}:绿帽癖`))
-        ) {
+        if (sys_check_cuckold(lover, inmon)) {
           wait_flag =
             sys_like_chara(lover, 0, get_random_value(10, 25)) || wait_flag;
           wait_flag =

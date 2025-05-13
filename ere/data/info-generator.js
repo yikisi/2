@@ -42,6 +42,7 @@ const {
 } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_names } = require('#/data/train-const');
+const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 
 const level_and_desc = {
   love: {
@@ -744,10 +745,7 @@ module.exports = {
         talent_list.push('隐形巨乳');
       }
     }
-    if (
-      era.get(`talent:${id}:绿帽癖`) > 0 ||
-      CharaInmon.get(id).on(plugin_enum.ntr)
-    ) {
+    if (sys_check_cuckold(id)) {
       talent_list.push({
         color: el_success_color,
         content: '[绿帽癖]',

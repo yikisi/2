@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
+const {
+  sys_check_cuckold,
+  sys_check_yandere,
+} = require('#/system/chara/sys-calc-cheat');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_hide_relation_and_love,
@@ -46,9 +49,9 @@ async function punish_unfaithful(id, new_love) {
         e !== id &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
         era.get(`love:${e}`) >= 75 &&
-        era.get(`talent:${e}:绿帽癖`) === 0 &&
         get_custom_mec(e).is_anger_for_unfaithful([id]) &&
-        sys_check_yandere(e, (y) => punish_option || y > 0)
+        sys_check_yandere(e, (y) => punish_option || y > 0) &&
+        !sys_check_cuckold(e)
       );
     });
   for (const c_id of temp_chara_list) {
@@ -72,7 +75,9 @@ async function punish_unfaithful(id, new_love) {
       ),
     );
   }
-  temp_chara_list.length && (await era.waitAnyKey());
+  if (temp_chara_list.length > 0) {
+    await era.waitAnyKey();
+  }
 }
 
 /**

@@ -10,6 +10,7 @@
 const era = require('#/era-electron');
 
 const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
+const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -893,9 +894,7 @@ class CustomizedEro {
   // eslint-disable-next-line no-unused-vars
   async after_betrayed(chara, me, callname, hook, extra_flag) {
     const race = era.get(`cflag:${this.id}:种族`),
-      like_betrayed =
-        era.get(`talent:${this.id}:绿帽癖`) > 0 ||
-        CharaInmon.get(this.id).on(plugin_enum.ntr);
+      like_betrayed = sys_check_cuckold(this.id);
     switch (era.get(`exp:${this.id}:被绿次数`) + 1) {
       case 1:
         era.drawLine();
