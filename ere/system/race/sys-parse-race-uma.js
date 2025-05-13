@@ -97,17 +97,21 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
             : era.get(`cflag:${e.index_chara}:育成回合计时`) + 1,
         ),
       ),
-      named_difficulty = [
-        named_level[0] +
-          ((named_level[1] - named_level[0]) * (edu_phase - 24)) / (144 - 24) -
-          1,
-        0,
-      ],
       passer_by_difficulty = [
         passer_by_level[0] +
           ((passer_by_level[1] - passer_by_level[0]) * (edu_phase - 24)) /
             (144 - 24) -
           1,
+        0,
+      ],
+      named_difficulty = [
+        Math.max(
+          named_level[0] +
+            ((named_level[1] - named_level[0]) * (edu_phase - 24)) /
+              (144 - 24) -
+            1,
+          passer_by_difficulty[0],
+        ),
         0,
       ];
     info.extra_attr = (max_extra_attr * (144 - edu_phase)) / (144 - 24);

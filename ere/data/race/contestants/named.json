@@ -3,38 +3,6 @@
     "adapt_distance": [
       6,
       5,
-      0,
-      0
-    ],
-    "adapt_ground": [
-      6,
-      6
-    ],
-    "adapt_style": [
-      0,
-      5,
-      6,
-      5
-    ],
-    "attrs": [
-      79,
-      51,
-      71,
-      144,
-      65
-    ],
-    "motivation": [
-      0,
-      2
-    ],
-    "skills": 0,
-    "id": 54,
-    "level": 264
-  },
-  {
-    "adapt_distance": [
-      6,
-      5,
       5,
       4
     ],

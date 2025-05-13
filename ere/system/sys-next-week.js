@@ -289,8 +289,8 @@ async function sys_next_week() {
     if (id > 0) {
       const relation_punish =
         (removed_specials[id] || 0) +
-        (era.get(`love:${id}`) >= 60) * era.get(`cflag:${id}:节日事件标记`) +
-        (birthday === 2);
+        (era.get(`love:${id}`) >= 60) *
+          (era.get(`cflag:${id}:节日事件标记`) + (birthday === 2));
       if (relation_punish) {
         era.print([
           '因为 ',

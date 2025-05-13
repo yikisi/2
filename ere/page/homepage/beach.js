@@ -26,11 +26,12 @@ const print_train_page = require('#/page/page-train');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /**
  * @param {number} chara_id
