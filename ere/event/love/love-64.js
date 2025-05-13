@@ -29,18 +29,20 @@ const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-lo
 const { add_event } = require('#/event/queue');
 const masturbate = require('#/event/snippets/masturbate');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const PamaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-64');
+const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedLove {
   get #dict() {
     const ret = {};
-    const pama = get_chara_talk(this.id),
-      me = get_chara_talk(0);
+    const pama = get_chara_talk(this.id);
+    const me = get_chara_talk(0);
     ret['代表色'] = pama.color;
     ret['你'] = me.name;
     ret['她'] = pama.sex;
@@ -224,5 +226,40 @@ module.exports = class extends CustomizedLove {
       false,
     );
     end_ero_and_train();
+  }
+
+  /** @param {CharaTalk} pama */
+  async escape(pama) {
+    const dict = this.#dict;
+    dict['自称'] = era.get('callname:64:64');
+    const ret = await print_name_and_show_kojo(
+      '和你一同逃去天涯海角',
+      pama,
+      kojo,
+      dict,
+    );
+    const l_cache = era.get('flag:当前位置');
+    let loc = -1;
+    if (era.get(`love:${this.id}`) >= 75) {
+      if (ret[1] === 1 && ret[5] === 2) {
+        if (ret[8] === 1) {
+          loc = location_enum.atrium;
+        } else {
+          loc = location_enum.love_hotel;
+        }
+      } else if (ret[1] === 2 && ret[3] === 2) {
+        loc = location_enum.office;
+      }
+    }
+    if (loc >= 0) {
+      era.set('flag:当前位置', loc);
+      await quick_into_sex(this.id);
+      if (loc !== location_enum.office) {
+        await kojo['情人节外出马跳结束'](dict);
+      } else {
+        await kojo['情人节办公室马跳结束'](dict);
+      }
+    }
+    era.set('flag:当前位置', l_cache);
   }
 };

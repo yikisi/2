@@ -2,7 +2,6 @@
   sync: true
   lines:
     - if: d.half_life === 1
-      random: true
       lines:
         - color: %代表色%
           content:
@@ -20,7 +19,6 @@
               content: %善信%
             - 「只要能在%称呼%身边……」
     - if: d.half_life === 0
-      random: true
       lines:
         - color: %代表色%
           content:
@@ -57,8 +55,7 @@
       - %善信% 似乎是理解了什么，流畅地解决了剩下的问题。
 
 加餐:
-  - if: d.half_life === 0
-    random: true
+  - if: d.half_life === 0 && era.get('love:64') < 50
     lines:
       - color: %代表色%
         content:
@@ -67,7 +64,6 @@
           - 「安心吧，善信%小姐%还是很擅长做饭的哦！」
       - %善信% 似乎很熟练的样子，朝 %T% 摆了摆手。
   - if: d.half_life === 0 && era.get('love:64') >= 50 && era.get('love:64') < 90
-    random: true
     lines:
       - 两个人不知不觉中搭配着做好了午饭，似乎自己也没有察觉到这天衣无缝的配合。
       - 直到都坐下准备开始享用的时候，两个人才想起来刚才的事情。
@@ -77,7 +73,6 @@
             content: %善信%
           - （总感觉……像是夫妇一样……错觉吗？）
   - if: d.half_life === 1
-    random: true
     lines:
       - color: %代表色%
         content:
@@ -151,10 +146,8 @@
 
 聊天:
   - if: era.get('status:64:沉睡') > 0 || era.get('status:64:马跳S') > 0
-    random: true
     lines:
       - if: d.half_life === 1
-        random: true
         lines:
           - color: %代表色%
             content:
@@ -167,7 +160,6 @@
                 content: %善信%
               - 「不会……让你走的哦……呼呼～」
       - if: d.half_life === 0
-        random: true
         lines:
           - random: true
             lines:
@@ -185,7 +177,6 @@
                     content: %善信%
                   - 「呼啊……%称呼% 的味道……嘿嘿……」
   - if: era.get('status:64:沉睡') === 0 && era.get('status:64:马跳S') === 0
-    random: true
     lines:
       - random: true
         lines:
@@ -467,7 +458,6 @@
 
 送礼物:
   - if: d.half_life === 0
-    random: true
     lines:
       - if: era.get('love:64') < 25
         random: true
@@ -502,7 +492,6 @@
               - 「这个礼物会是我想要的那种吗……不是！没有！我很高兴的！」
           - %善信% 有点扭扭捏捏的样子，只是没听见%她%刚才说的是什么。
   - if: d.half_life === 1
-    random: true
     lines:
       - color: %代表色%
         content:
@@ -520,7 +509,6 @@
   sync: true
   lines:
     - if: era.get('status:64:沉睡') === 0 && era.get('status:64:马跳S') === 0
-      random: true
       lines:
         - random: true
           lines:
@@ -583,7 +571,6 @@
                   content: %善信%
                 - 「%称呼%你会一直陪我的……对吧？」
     - if: era.get('status:64:沉睡') > 0 || era.get('status:64:马跳S') > 0
-      random: true
       lines:
         - random: true
           lines:
@@ -620,7 +607,6 @@
 
 中庭约会:
   - if: d.half_life === 0
-    random: true
     lines:
       - color: %代表色%
         content:
@@ -629,7 +615,6 @@
           - 「那个，约会的事情在这里还是有点……对吧？」
       - %善信% 似乎很在意的样子，不过拉着的手一点也没有松开的样子。
   - if: d.half_life === 1
-    random: true
     lines:
       - color: %代表色%
         content:
@@ -644,28 +629,7 @@
           - 「嗯哼～」
 
 天台:
-  - random: true
-    lines:
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: %善信%
-          - 「果然天台上的风景很好呢！」
-      - 在天台上一边看着风景，一边分享着自己的便当。
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: %善信%
-          - 「真好吃！%称呼%的手艺超厉害！」
-  - random: true
-    lines:
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: %善信%
-          - 「天台的风景很好对吧？我时不时就会上来散心哦！」
-  - if: era.get('love:64') >= 50
-    random: true
+  - if: d.check > 0
     lines:
       - color: %代表色%
         content:
@@ -696,6 +660,28 @@
                 content: %善信%
               - 「你，你说话呀，%称呼%！」
           - %善信% 鼓起红透的脸，小拳头猛砸着 %T% 的肩膀。
+  - if: !d.check
+    lines:
+      - random: true
+        lines:
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: %善信%
+              - 「果然天台上的风景很好呢！」
+          - 在天台上一边看着风景，一边分享着自己的便当。
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: %善信%
+              - 「真好吃！%称呼%的手艺超厉害！」
+      - random: true
+        lines:
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: %善信%
+              - 「天台的风景很好对吧？我时不时就会上来散心哦！」
 
 钓鱼:
   - random: true
@@ -873,7 +859,6 @@
   - %善信% 对着 %T% 点点头，转身对着神社合起了手。
   - 闭眼一阵后，拿起了签。
   - if: d.dice === 1
-    random: true
     lines:
       - 纸上字迹清晰的吉，像是在宣告今天的好运。
       - acc: 1
@@ -891,7 +876,6 @@
           - 「也要谢谢%称呼%呢……毕竟这应该是我们的好运嘛。」
       - 看着这张高兴的脸，不知不觉中 %T% 也跟着 %善信% 一起笑了起来。
   - if: d.dice === 0
-    random: true
     lines:
       - 翻开签纸，却没有看见大吉。
       - 看着纸上的凶，%善信% 有点尴尬的避开了 %T% 的眼神。
@@ -963,7 +947,6 @@
 
 车站约会:
   - if: d.half_life === 0
-    random: true
     lines:
       - random: true
         lines:
@@ -981,7 +964,6 @@
               - 「和%称呼%在一起的时候，不会感觉到害羞什么的呢……」
           - %善信%贴在 %T% 的身边，稍微朝着身旁歪头靠着 %T% 的肩膀。
       - if: era.get('cflag:64:性别') !== 1
-        random: true
         lines:
           - color: %代表色%
             content:
@@ -996,7 +978,6 @@
               - 「稍微过分一点……也不会有人发现的吧？」
           - 双手紧紧抓着手臂，压在 %善信% 软乎乎的胸脯上。
   - if: d.half_life === 1
-    random: true
     lines:
       - 不知为何，%善信% 一直紧紧抓着 %T% 的手，完全没有松开的意思。
       - 虽然一直享受着柔软的体感，完全没有难过的感觉。
@@ -1052,8 +1033,7 @@
       - %善信% 的眼睛里闪着光，似乎是完全没在意门禁的事情。
 
 晚安:
-  - if: era.get('status:0:沉睡') === 0 && era.get('status:64:沉睡') === 0 || era.get('status:64:马跳S') === 0
-    random: true
+  - if: era.get('status:0:沉睡') === 0 && era.get('status:64:沉睡') === 0 && era.get('status:64:马跳S') === 0
     lines:
       - if: d.check > 0
         random: true
@@ -1079,7 +1059,6 @@
             content: 「别那么任性。」
             lines:
               - if: d.check === 2
-                random: true
                 lines:
                   - color: %代表色%
                     content:
@@ -1094,7 +1073,6 @@
                         content: %善信%
                       - 「不去做的话，怎么叫做任性呢？」
               - if: d.check !== 2
-                random: true
                 lines:
                   - %善信% 的表情从期待变成了阴暗，把失落收进了下垂的刘海里。
                   - 转过身乖巧的走进了宿舍，却在门口又偷偷看了一眼 %T% 的身影，这才低着头消失在拐角里。
@@ -1117,18 +1095,15 @@
                 content: %善信%
               - 「嗯……好像稍微努力过度了点啊，嘿嘿～」
   - if: era.get('status:0:沉睡') === 0 && (era.get('status:64:沉睡') > 0 || era.get('status:64:马跳S') > 0)
-    random: true
     lines:
       - 陷入沉睡中的 %T% 在朦胧中似乎看见了 %善信% 想要动手却又犹豫不决的样子，最后留下的只有一声亲切又温柔的道别声。
   - if: era.get('status:0:沉睡') > 0
-    random: true
     lines:
       - 看着正在沉睡的 %善信%，完全做不到主动去叫醒%她%，只能辛苦一下把%她%送回宿舍了。
       - 这个时候耍坏的话，%她%会不会醒过来呢？
 
 读档对话:
   - if: (era.get('cflag:64:妊娠阶段') !== 2 && !era.get('cflag:64:扩展变量').report) || era.get('exp:64:生产次数') > 0
-    random: true
     lines:
       - color: %代表色%
         content:

@@ -33,6 +33,7 @@ const EroParticipant = require('#/data/ero/ero-participant');
 const { item_enum } = require('#/data/ero/item-const');
 const { part_enum } = require('#/data/ero/part-const');
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
+const PamaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-64');
 
 module.exports = class extends CustomizedDaily {
   get #dict() {
@@ -166,7 +167,13 @@ module.exports = class extends CustomizedDaily {
   }
 
   async school_rooftop() {
-    if ((await kojo['天台'](this.#dict))[0] === 2 && sys_love_uma(this.id, 1)) {
+    const dict = this.#dict;
+    const life_marks = new PamaLifeMarks();
+    if (era.get(`love:${this.id}`) >= 50 && !life_marks.love_rooftop) {
+      life_marks.love_rooftop = 1;
+      dict.check = 1;
+    }
+    if ((await kojo['天台'](dict))[0] === 2 && sys_love_uma(this.id, 1)) {
       await era.waitAnyKey();
     }
   }

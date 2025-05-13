@@ -1,9 +1,7 @@
 调教开始:
   - if: era.get('tflag:强奸') === 0
-    random: true
     lines:
       - if: era.get('love:64') < 50
-        random: true
         lines:
           - color: %代表色%
             content:
@@ -26,7 +24,6 @@
                 content: %善信%
               - 「啊！」
       - if: era.get('love:64') >= 50
-        random: true
         lines:
           - color: %代表色%
             content:
@@ -39,10 +36,8 @@
                 content: %善信%
               - 「不要过来……%称呼%❤」
   - if: era.get('tflag:强奸') === -1
-    random: true
     lines:
       - if: era.get('love:64') < 50
-        random: true
         lines:
           - color: %代表色%
             content:
@@ -55,7 +50,6 @@
                 content: %善信%
               - 「……不过我会听的啦，如果是命令的话……」
       - if: era.get('love:64') >= 50
-        random: true
         lines:
           - color: %代表色%
             content:
@@ -72,9 +66,6 @@
               - fontWeight: bold
                 content: %善信%
               - 「只要是%称呼%的话……」
-  - if: era.get('tflag:强奸') === 64
-    random: true
-    lines:
 
 加入房事:
   - color: %代表色%
@@ -118,7 +109,6 @@
         content: %善信%
       - 「哈啊，%称呼%，%称呼%……」
   - if: d.half_life === 1
-    random: true
     lines:
       - %善信% 伏在 %T% 的身上，身体随着本能在左右摆动着。
       - 手指轻轻的捏住 %T% 的脸，强硬的向着自己的方向拉住。
@@ -128,7 +118,6 @@
             content: %善信%
           - 「%称呼%，快点……满足我吧……❤」
   - if: d.half_life === 0
-    random: true
     lines:
       - %善信% 伏在 %T% 的身上，随着自己的感情和本能不断的摆动着身体。
 

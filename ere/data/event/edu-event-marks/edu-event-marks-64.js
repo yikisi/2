@@ -11,6 +11,9 @@ class PamaEduMarks extends EduEventMarks {
   // 电影院口交
   movie_job;
 
+  // 和你一同逃去天涯海角
+  escape;
+
   // 全育成第一次调教指令
   kiss;
   lure;

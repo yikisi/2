@@ -231,7 +231,6 @@
       - 「%称呼%，关于我们之间的关系……能和我好好谈谈吗？」
   -
   - if: era.get('exp:64:性爱次数') > era.get('exp:64:睡奸次数')
-    random: true
     lines:
       - 「……也是时候了，毕竟都做过了呢，这样那样的事」
       -
@@ -275,7 +274,6 @@
             content: 目白善信
           - 「如果……这样的关系可以更进一步的话？」
   - if: era.get('exp:64:性爱次数') === era.get('exp:64:睡奸次数')
-    random: true
     lines:
       - 「嗯……关于那天在训练室的事——」
       -
@@ -708,3 +706,309 @@
   -
   - 那是一根卷曲的黑色毛发，印记般黏在%少女%的嘴边
   - ……要不要告诉%她%呢？
+
+和你一同逃去天涯海角:
+  #爱慕＞49后，进入情人节触发
+  - 情人节当天，整个特雷森里到处都是桃色的气息
+  - 在正值青春时期的学生眼里这可是一个重要的日子，大部分的%马娘%都会在意义重大的这一天送出代表心意的礼物
+  - 比如现在学生会门前，已经排满了想送出巧克力的学生
+  - 不过相对的，正在办公室的 %你% 这边就有点安静了
+  - 毕竟大部分对教职工来说，收礼物可是很少见的
+  - 嗯，是大部分
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「哟！训练员！」
+  - acc: 1
+    content: 「善信？」
+  - 善信从门口探出头，尾巴有些不安的左右晃动，钻进了 %你% 的视野
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「可以稍微陪我出来一下吗？」
+  - acc: 1
+    content: 「好啊」
+    lines:
+      - 情人节的气氛很浓，从办公室里出来之后周围就一直有巧克力的气息
+      - 至于巧克力的内容和含义么，就先忽略好了
+      - 躲开周围的其他学生之后，两个人安心的漫步在小道上
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「情人节啊……大家都很热闹呢」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「跑道上也很少有训练的同学，和平时区别真大」
+      - 善信的眼神在周围左右来回了几圈，有点漫不经心
+      - acc: 1
+        content: 「大概是都在享受情人节吧」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「不过这都没关系啦～」
+      - acc: 1
+        content: 「心情很好嘛」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「那不是当然的嘛！大家都很高兴，而且我也有收到巧克力哦？」
+      - 善信小跑两步，在 %你% 的面前转了个身
+      - 双手背在身后，身体微微前倾，脚步也是慢慢倒退的样子
+      - 视线平静的看着 %你% 的眼睛，脸上微微的发红
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「不过……叫训练员你出来不是因为这些啦」
+      - 唐突的停下脚步，抬起一直藏在背后的双手带着一个黑盒子放在胸前
+      - 稍作停顿之后，朝着 %你% 递了过来
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「情人节快乐！……以及，这和回礼的巧克力不太一样哦？」
+      - 路人%马娘%「啊！是善信前辈！」
+      - 路人%马娘%「善信前辈！请收下我的巧克力」
+      - 善信的耳朵一下就跳了起来，有些惊慌的转头
+      - 毕竟在学校里善信的人气因为经常帮助别人而高的吓人
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「啊，那个，总之先过来！」
+      - 善信把巧克力推进 %你% 的怀里，拉起手就跑了起来
+      - 跑出学校再绕过好几个小道之后，才心有余悸的转头看向后方
+      - 不知不觉间，已经跑上学校的后山了
+      - 确定没有人跟上之后，才全身无力的松开了手
+      - acc: 1
+        content: 「善信，没事吧？」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「没事没事，只是有点累了……」
+      - 善信撑着膝盖，有些不自然的喘气
+      - 唯独尾巴一直在左右摇摆，轻轻扫到 %你% 的腿上
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「这里应该没问题，只有我们俩了呢，哈哈……」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「呼……深呼吸……」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「果然送特别的巧克力被别人看见了还是有点害羞的，哎嘿」
+      - 重新平缓气息之后，善信把刚才的巧克力又拿了出来
+      - acc: 1
+        content: 「特别的？」
+        lines:
+          - 接过了巧克力的 %你%，下意识的问出了一句
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「嗯，是特别的哦」
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「不是价格也不是外壳，而是……」
+          - 善信的话语在口中打转，思考着最后的用词
+          - 已经递出巧克力的双手在自己的胸口有些不安的交错，像是投影出心里杂乱的情绪一样
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「哈啊」
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「是%自称%……是我自己做的」
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「就是，本……」
+          - 虽然一开始的气势很足，但善信现在涨红的脸说明剩下的话已经说不出来了
+          - 不过，之后的话对两方都已经心知肚明了
+      - if: era.get('love:64') >= 75
+        acc: 2
+        content: 「是本命的对吧？」
+        lines:
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「嗯，是本命哦」
+          - 对于 %你% 的疑惑，一刻也没有疑惑的回答了
+          - 看着巧克力从自己手上被拿走，善信才解放了的双手收回身后
+          - 身体微微前倾，侧过脸看着身旁的风景
+          - 说是看风景，其实也没有在认真看
+          - 耳朵一跳一跳的，在等待接收%她%所期待的声音
+          - acc: 1
+            content: 「谢谢你，善信」
+          - 耳朵轻轻跳动，随后稍微往下落了一点
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「只是谢谢嘛……」
+          - acc: 1
+            content: 「以及，我也喜欢你，善信」
+          - 重新把脸再转回来的善信，已经是布满了害羞的绯红色
+          - 一点点挪动身体贴在 %你% 的身边，抱住了手臂
+          - 只是这个唯美的时刻，隆起的小帐篷不是很合适
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「……要做吗？」
+          - 善信的眼神有点退缩，双手却已经爬上了腰，悄悄的掐了一下 %你% 腰上的软肉
+          - acc: 1
+            content: 「就在这里？」
+          - acc: 2
+            content: 「还是去旅馆……」
+        # 马跳
+  - acc: 2
+    content: 「今天还有工作……」
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「没关系没关系！我可以等你的……那个，可以进来吗？」
+      - 虽然是在请求同意，但是已经人走进来了
+      - 走进办公室左右看了两眼，靠在办公桌的一旁
+      - 干净的桌子上除了私人物品以外，还放着有几块零散的巧克力
+      - 善信的眼神愣了一下，有点心虚
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「那个……这个巧克力是？」
+      - acc: 1
+        content: 「是骏川小姐发的」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「啊，是骏川小姐啊……」
+      - 善信捂着头，脸上浮出了一个微妙的笑脸
+      - 只是笑的时候，另一只手有点不安的在背后晃动
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「就是说，训练员还没有情人节礼物吗？」
+      - 身后的手有点颤抖的拿出来，拿着一盒精致的巧克力
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「这个是……总之就是那个啦，情人节的」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「要说的话就是本……本……」
+      - 善信的声音的有些发抖，原本要说的话卡在喉咙里说不出来
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「本来就是要给训练员的，所以……总之请收下！」
+      - 有些尴尬的接上自己的话之后，才把巧克力递向 %你% 的方向
+      - 而善信本人，则是转向其他方向，把脸藏了起来
+      - acc: 1
+        content: 接过巧克力
+      - if: era.get('love:64') >= 75
+        acc: 2
+        content: 「是本命吗？」
+        lines:
+          - 听见 %你% 的声音，善信重新把脸转了回来
+          - 原本清爽的脸现在却是大片的绯红色，耳朵不自然的一跳一跳着
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「本命什么的……意识到了再说出口很难为情的……」
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「我喜欢训练员……所以不知不觉就做好了」
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「刚才看见其他巧克力的时候，真的吓到了哦」
+          - 善信的声音很轻，但是却非常清晰
+          - 在只有两个人的办公室里，善信却显得有那么一点孤单
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「那个，训练员，情人节……能不能陪我呢？」
+          - acc: 1
+            content: 「当然可以啊」
+        # 马跳
+
+情人节外出马跳结束:
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「真大胆呢，训练员」
+  - 小心翼翼的整理好自己的衣服，善信才站起身
+  - 探出头左右看了两眼确定周围并没有其他人，这才敢放心走出来
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「真是的……明明今天只是准备送巧克力的」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「嘛，是训练员的话也不意外啦」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「毕竟是情人节呢，对吧？」
+
+情人节办公室马跳结束:
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「我说啊训练员，那个巧克力」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「那可是我一点一点的做出来的哦……所以一定要吃完哦？」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「啊，还有」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「情人节快乐！」
