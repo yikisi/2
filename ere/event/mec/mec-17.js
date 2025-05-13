@@ -25,7 +25,7 @@ module.exports = class extends CustomizedMec {
           new LegendUmaSelector(104, 1.1),
         ];
       case race_enum.arim_kin:
-        if (era.get('cflag:17:育成回合计时') < 96) {
+        if (era.get(`cflag:${this.id}:育成回合计时`) < 96) {
           return [
             new LegendUmaSelector(57, 1.1),
             new LegendUmaSelector(104, 1.1),
