@@ -96,6 +96,7 @@ cons_dict[86] = require('#/event/check/check-86');
 cons_dict[87] = require('#/event/check/check-87');
 cons_dict[88] = require('#/event/check/check-88');
 cons_dict[89] = require('#/event/check/check-89');
+cons_dict[90] = require('#/event/check/check-90');
 cons_dict[91] = require('#/event/check/check-91');
 cons_dict[93] = require('#/event/check/check-93');
 cons_dict[94] = require('#/event/check/check-94');
