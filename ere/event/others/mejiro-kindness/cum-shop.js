@@ -12,7 +12,11 @@ const { mark_colors } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
-const { penis_desc, skin_desc } = require('#/data/ero/status-const');
+const {
+  penis_desc,
+  skin_desc,
+  vp_status_enum,
+} = require('#/data/ero/status-const');
 const extra_base = require('#/data/extra-base');
 const { get_breast_cup, get_hair_color } = require('#/data/info-generator');
 const { check_chara_ero_image } = require('#/data/other-const');
@@ -200,6 +204,15 @@ async function cum_shop(chara, me) {
                   h() {
                     money = era.add('item:「恩宠」', -30);
                     era.set(`talent:${target.id}:泌乳`, 3);
+                  },
+                });
+              }
+              if (era.get(`talent:${target.id}:处女`) === vp_status_enum.no) {
+                buttons.push({
+                  c: '恢复处女（20「恩宠」）',
+                  h() {
+                    money = era.add('item:「恩宠」', -20);
+                    era.set(`talent:${target.id}:处女`, vp_status_enum.reborn);
                   },
                 });
               }
