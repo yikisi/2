@@ -7,7 +7,7 @@ const { get_random_entry, sort_list } = require('#/utils/list-utils');
 const { race_enum } = require('#/data/race/race-const');
 const { race_event_enum } = require('#/data/race/race-sim-const');
 
-/** @type {(function(PseudoUma,PseudoUma))[]} */
+/** @type {(function(PseudoUma,PseudoUma):TextContent)[]} */
 const overtake_handlers = [
   (top, over) => [
     over.get_colored_name(),
@@ -28,9 +28,10 @@ const overtake_handlers = [
     over.get_colored_name(),
     ' 的制胜时刻！',
   ],
+  (top) => [top.get_colored_name(), '领先！要锁定胜局了吗！'],
 ];
 
-/** @type {(function(PseudoUma,PseudoUma))[]} */
+/** @type {(function(PseudoUma,PseudoUma):TextContent)[]} */
 const battle_handlers = [
   (first, second) => [
     first.get_colored_name(),
@@ -51,15 +52,23 @@ const battle_handlers = [
     second.get_colored_name(),
     ' 都无法独善其身！',
   ],
+  (first, second) => [
+    '究竟会是 ',
+    first.get_colored_name(),
+    ' 还是 ',
+    second.get_colored_name(),
+    '！要到最后一刻才会揭晓悬念了吗！',
+  ],
 ];
 
-/** @type {(function(PseudoUma,PseudoUma))[]} */
+/** @type {(function(PseudoUma,PseudoUma):TextContent)[]} */
 const top_handlers = [
   (uma) => [uma.get_colored_name(), ' 牢牢把持着头位！'],
   (uma) => ['太快了太快了！', uma.get_colored_name(), ' 一骑绝尘！'],
   (uma) => [uma.get_colored_name(), ' 状态绝佳！要一路冲下去了吗！'],
   (uma) => ['持续领先！终盘的 ', uma.get_colored_name(), ' 似乎已无人能敌！'],
   (uma) => [uma.get_colored_name(), ' 即将迎来胜利！'],
+  (uma) => [uma.get_colored_name(), '！', uma.get_colored_name(), '！'],
 ];
 
 /** @type {Record<string,(function([]))[]>} */
@@ -80,7 +89,9 @@ other_handlers[race_event_enum.loc_mind_nige_ex] = [
 other_handlers[race_event_enum.loc_mind_other_ex] = [
   (names) => [...names, ' 大步奔向自己应处的位置！'],
   (names) => [
-    `这才不是${names.length > 1 ? '你' : '你们'}的位置！加油啊 `,
+    '这才不是',
+    names.length > 1 ? '你' : '你们',
+    '的位置！加油啊 ',
     ...names,
     '！',
   ],

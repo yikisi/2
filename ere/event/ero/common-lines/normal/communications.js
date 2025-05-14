@@ -149,7 +149,9 @@ class EroNormalCommunications extends EroCommunications {
     ) {
       await defender.say_and_wait('诶……？');
       await defender.print_and_wait([
-        '原本近在咫尺的恋人突然拉远了距离，被压在身下的 ',
+        '原本近在咫尺的 ',
+        sys_get_colored_callname(defender.id, attacker.id),
+        ' 突然拉远了距离，被压在身下的 ',
         defender.get_colored_name(),
         ' 眨着眼没能及时反应过来。',
       ]);

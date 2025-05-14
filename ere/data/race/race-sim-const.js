@@ -4,6 +4,7 @@
   lost_stamina: 0,
   final_push: 0,
   compete_fight: 0,
+  orgasm: 0,
   blocked: 0,
   temp_wrong_style: 0,
   loc_mind_nige_ex: 0,

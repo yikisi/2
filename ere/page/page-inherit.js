@@ -221,7 +221,7 @@ async function print_inherit_page() {
     edu_list = [],
     discount = get('flag:因子消耗量');
   sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach((e) => {
-    if (get(`cflag:${e}:育成回合计时`) < 3 * 48) {
+    if (e > 0 && get(`cflag:${e}:育成回合计时`) < 3 * 48) {
       edu_list.push(e);
     } else if (get(`cflag:${e}:殿堂`) > 0) {
       palace_list.push(e);

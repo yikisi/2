@@ -192,7 +192,7 @@ class CustomizedEro {
    * @returns {function(number): boolean}
    */
   filter_in_rape() {
-    if (era.get(`tcvar:${this.id}:孕袋卖奶`)) {
+    if (era.get(`tcvar:${this.id}:孕袋卖奶`) > 0) {
       return (e) =>
         (ero_tagged_hooks[e] || default_tags).attacker_tags.findIndex(
           (t) =>
@@ -203,6 +203,13 @@ class CustomizedEro {
         ) !== -1;
     }
     if (era.get('flag:惩戒力度') >= 2) {
+      if (
+        era.get('flag:惩戒力度') === 3 &&
+        era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.no
+      ) {
+        return (e) =>
+          e >= ero_hooks.missionary && e <= ero_hooks.stimulate_g_spot;
+      }
       return (e) => e >= ero_hooks.missionary && e <= ero_hooks.stimulate_womb;
     }
     return (e) =>

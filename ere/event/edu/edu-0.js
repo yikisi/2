@@ -568,7 +568,9 @@ module.exports = class extends StrangeDayEvents {
     if ((await input()) === 1) {
       for (const c of in_team_list) {
         if (get(`cflag:${c}:种族`) > 0) {
-          sys_change_motivation(c, 1) && (await waitAnyKey());
+          if (sys_change_motivation(c, 1)) {
+            await waitAnyKey();
+          }
         }
       }
     } else {

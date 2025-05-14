@@ -58,7 +58,7 @@ module.exports = class extends MyPrivacyEvents {
           : get_chara_talk(
               get_random_entry(
                 sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-                  (e) => e > 0 && e !== 32,
+                  (e) => e > 0 && e !== 32 && get(`cflag:${e}:成长阶段`) >= 2,
                 ),
               ),
             );

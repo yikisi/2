@@ -157,7 +157,9 @@ async function goto_sex(id, sex_loc) {
       await end_ero_and_show_result(true);
     }
   } else {
-    const check = era.get(`love:${id}`) >= 50 ? get_sex_acceptable(id) : -1;
+    const love_check = era.get(`love:${id}`) >= 50;
+    const check =
+      love_check || era.get('flag:惩戒力度') >= 2 ? get_sex_acceptable(id) : -1;
     let ret, dice;
     if (check >= 0) {
       era.printMultiColumns(
@@ -165,7 +167,7 @@ async function goto_sex(id, sex_loc) {
           {
             content: [
               chara.get_colored_name(),
-              ' 含情脉脉地看着 ',
+              love_check ? ' 含情脉脉地看着 ' : ' 略带轻浮地看着 ',
               me.get_colored_name(),
               '……',
               { isBr: true },
@@ -176,12 +178,12 @@ async function goto_sex(id, sex_loc) {
           {
             accelerator: 0,
             config: { align: 'center', width: 4 },
-            content: '正常求爱',
+            content: love_check ? '正常求爱' : '提议献身',
             type: 'button',
           },
           {
             accelerator: 1,
-            config: { align: 'center', width: 4 },
+            config: { align: 'center', disabled: !love_check, width: 4 },
             content: '邀请过夜',
             type: 'button',
           },
@@ -193,7 +195,7 @@ async function goto_sex(id, sex_loc) {
           },
           {
             accelerator: 3,
-            config: { align: 'center', width: 4 },
+            config: { align: 'center', disabled: !love_check, width: 4 },
             content: '情趣用药',
             type: 'button',
           },
@@ -219,7 +221,8 @@ async function goto_sex(id, sex_loc) {
       switch (ret) {
         case 2:
           if (
-            await select_yes_or_no('', `粗暴对待${chara.sex}`, '请粗暴对待我')
+            love_check &&
+            (await select_yes_or_no('', `粗暴对待${chara.sex}`, '请粗暴对待我'))
           ) {
             is_rape = 1;
             await era.printAndWait([
@@ -248,7 +251,7 @@ async function goto_sex(id, sex_loc) {
       } else if (is_rape === 2) {
         era.set('tflag:强奸', id);
       }
-      if (era.get(`status:${id}:超马跳Z`) || is_rape === 2) {
+      if (era.get(`status:${id}:超马跳Z`) > 0 || is_rape === 2 || !love_check) {
         era.set('tflag:主导权', id);
       }
       await print_ero_page(id);
