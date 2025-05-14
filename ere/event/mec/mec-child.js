@@ -35,6 +35,17 @@ class MecChild extends CustomizedMec {
     }
     return ret;
   }
+
+  init_love() {
+    if (
+      (era.get(`cflag:${this.id}:父方角色`) !== 0 &&
+        era.get(`cflag:${this.id}:母方角色`) !== 0) ||
+      era.get('flag:后代爱慕限制') > 0
+    ) {
+      return super.init_love();
+    }
+    era.set(`love:${this.id}`, 0);
+  }
 }
 
 module.exports = MecChild;

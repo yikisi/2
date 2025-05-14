@@ -210,7 +210,9 @@ class CustomizedEro {
         return (e) =>
           e >= ero_hooks.missionary && e <= ero_hooks.stimulate_g_spot;
       }
-      return (e) => e >= ero_hooks.missionary && e <= ero_hooks.stimulate_womb;
+      return (e) =>
+        (e >= ero_hooks.ask_blow_job && e <= ero_hooks.force_deep_blow_job) ||
+        (e >= ero_hooks.missionary && e <= ero_hooks.stimulate_womb);
     }
     return (e) =>
       e >= ero_hooks.missionary && e <= ero_hooks.ask_stimulate_womb;
