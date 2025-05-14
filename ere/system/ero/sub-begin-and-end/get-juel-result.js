@@ -223,7 +223,7 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
   const buffer3 = [];
   attr_info.forEach((c) => {
     if (c.length > 0) {
-      buffer3.push({ content: c, type: 'text' });
+      buffer3.push({ config: { width: 8 }, content: c, type: 'text' });
     }
   });
   if (buffer3.length > 0) {
