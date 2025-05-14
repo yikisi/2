@@ -296,7 +296,7 @@ class CallOfMejiro extends MejiroCity {
         update_ero_status(0);
         update_ero_status(chara.id);
         await print_ero_page(chara.id, true);
-        era.add('item:「恩宠」', temp * 5 + 5);
+        era.add('item:「恩宠」', Math.floor(temp * 5) / 2 + 2);
         flag = false;
         temp = false;
       } else {
