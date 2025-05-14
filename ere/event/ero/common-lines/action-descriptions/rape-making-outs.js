@@ -11,7 +11,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 强行将小豆豆压在 ',
         defender.get_colored_name(),
-        ' 的脸上……】',
+        ' 的脸上】',
       ]);
     }
     return era.printAndWait([
@@ -19,7 +19,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 强行用小豆豆摩擦 ',
       defender.get_colored_name(),
-      ' 的唇舌……】',
+      ' 的唇舌】',
     ]);
   };
 
@@ -30,7 +30,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 强行将小穴压在 ',
         defender.get_colored_name(),
-        ' 的嘴唇上……】',
+        ' 的嘴唇上】',
       ]);
     }
     return era.printAndWait([
@@ -38,7 +38,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 强行用小穴摩擦着 ',
       defender.get_colored_name(),
-      ' 的唇舌……】',
+      ' 的唇舌】',
     ]);
   };
 
@@ -49,7 +49,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 强行将肉棒插入 ',
         defender.get_colored_name(),
-        ' 的嘴唇……】',
+        ' 的嘴唇】',
       ]);
     }
     return era.printAndWait([
@@ -57,7 +57,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 强行用肉棒搅弄 ',
       defender.get_colored_name(),
-      ' 的唇舌……】',
+      ' 的唇舌】',
     ]);
   };
 
@@ -68,7 +68,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 强行将肉棒插入 ',
         defender.get_colored_name(),
-        ' 的喉咙深处……】',
+        ' 的喉咙深处】',
       ]);
     }
     return era.printAndWait([
@@ -76,7 +76,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 强行在 ',
       defender.get_colored_name(),
-      ' 喉咙深处搅弄着……】',
+      ' 喉咙深处搅弄着】',
     ]);
   };
 
@@ -87,7 +87,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 强行将肉棒伸到 ',
         defender.get_colored_name(),
-        ' 手中……】',
+        ' 手中】',
       ]);
     }
     return era.printAndWait([
@@ -95,7 +95,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 强行用肉棒蹭着 ',
       defender.get_colored_name(),
-      ' 的双手……】',
+      ' 的双手】',
     ]);
   };
 
@@ -106,7 +106,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 强行将肉棒挤开 ',
         defender.get_colored_name(),
-        ' 的双手插入口中……】',
+        ' 的双手插入口中】',
       ]);
     }
     return era.printAndWait([
@@ -116,7 +116,7 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' 的手一边搅弄着 ',
       defender.get_colored_name(),
-      ' 的唇舌……】',
+      ' 的唇舌】',
     ]);
   };
 
@@ -127,7 +127,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 强行将 ',
         defender.get_colored_name(),
-        ' 的乳房聚拢，夹住了肉棒……】',
+        ' 的乳房聚拢，夹住了肉棒】',
       ]);
     }
     return era.printAndWait([
@@ -135,7 +135,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 强行用肉棒摩擦着 ',
       defender.get_colored_name(),
-      ' 的胸部……】',
+      ' 的胸部】',
     ]);
   };
 
@@ -146,7 +146,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 强行用 ',
         defender.get_colored_name(),
-        ' 的头发缠住肉棒……】',
+        ' 的头发缠住肉棒】',
       ]);
     }
     return era.printAndWait([
@@ -154,7 +154,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 强行用肉棒摩擦 ',
       defender.get_colored_name(),
-      ' 的头发……】',
+      ' 的头发】',
     ]);
   };
 
@@ -164,7 +164,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 强行拉过 ',
       defender.get_colored_name(),
-      ' 的双足抚弄肉棒……】',
+      ' 的双足抚弄肉棒】',
     ]);
 
   handlers[ero_hooks.force_tail_job] = (attacker, defender) =>
@@ -173,6 +173,6 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 强行拉过 ',
       defender.get_colored_name(),
-      ' 的尾巴缠弄着肉棒……】',
+      ' 的尾巴缠弄着肉棒】',
     ]);
 };

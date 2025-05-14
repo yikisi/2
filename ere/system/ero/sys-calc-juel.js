@@ -5,6 +5,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { palam_colors } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { base_juel_reward } = require('#/data/ero/juel-const');
 const { palam2juel } = require('#/data/ero/orgasm-const');
 const {
@@ -12,6 +13,7 @@ const {
   part_names,
   pleasure_list,
 } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 
 let tmp = {};
 
@@ -219,47 +221,58 @@ module.exports = {
         ) {
           era.set(`nowex:${id}:同心获取`, 1);
         }
-        if ((got_pain_juels >= 15000 || pain_params >= 2750) && pain_mark < 3) {
-          era.set(`nowex:${id}:苦痛获取`, 3 - pain_mark);
-        } else if (
-          (got_pain_juels >= 11250 || pain_params >= 2000) &&
-          pain_mark < 2
-        ) {
-          era.set(`nowex:${id}:苦痛获取`, 2 - pain_mark);
-        } else if (
-          (got_pain_juels >= 7500 || pain_params >= 1250) &&
-          pain_mark < 1
-        ) {
-          era.set(`nowex:${id}:苦痛获取`, 1);
+        const inmon = CharaInmon.get(id);
+        if (!inmon.on(plugin_enum.meek)) {
+          if (
+            (got_pain_juels >= 15000 || pain_params >= 2750) &&
+            pain_mark < 3
+          ) {
+            era.set(`nowex:${id}:苦痛获取`, 3 - pain_mark);
+          } else if (
+            (got_pain_juels >= 11250 || pain_params >= 2000) &&
+            pain_mark < 2
+          ) {
+            era.set(`nowex:${id}:苦痛获取`, 2 - pain_mark);
+          } else if (
+            (got_pain_juels >= 7500 || pain_params >= 1250) &&
+            pain_mark < 1
+          ) {
+            era.set(`nowex:${id}:苦痛获取`, 1);
+          }
+          if (
+            (got_shame_juels >= 10000 || shame_params >= 2750) &&
+            shame_mark < 3
+          ) {
+            era.set(`nowex:${id}:羞耻获取`, 3 - shame_mark);
+          } else if (
+            (got_shame_juels >= 7500 || shame_params >= 2000) &&
+            shame_mark < 2
+          ) {
+            era.set(`nowex:${id}:羞耻获取`, 2 - shame_mark);
+          } else if (
+            (got_shame_juels >= 5000 || shame_params >= 1250) &&
+            shame_mark < 1
+          ) {
+            era.set(`nowex:${id}:羞耻获取`, 1);
+          }
         }
-        if (
-          (got_shame_juels >= 10000 || shame_params >= 2750) &&
-          shame_mark < 3
-        ) {
-          era.set(`nowex:${id}:羞耻获取`, 3 - shame_mark);
-        } else if (
-          (got_shame_juels >= 7500 || shame_params >= 2000) &&
-          shame_mark < 2
-        ) {
-          era.set(`nowex:${id}:羞耻获取`, 2 - shame_mark);
-        } else if (
-          (got_shame_juels >= 5000 || shame_params >= 1250) &&
-          shame_mark < 1
-        ) {
-          era.set(`nowex:${id}:羞耻获取`, 1);
-        }
-        if ((got_hate_juels >= 10000 || hate_juels >= 3200) && hate_mark < 3) {
-          era.set(`nowex:${id}:反抗获取`, 3 - hate_mark);
-        } else if (
-          (got_hate_juels >= 7500 || hate_juels >= 2400) &&
-          hate_mark < 2
-        ) {
-          era.set(`nowex:${id}:反抗获取`, 2 - hate_mark);
-        } else if (
-          (got_hate_juels >= 5000 || hate_juels >= 1600) &&
-          hate_mark < 1
-        ) {
-          era.set(`nowex:${id}:反抗获取`, 1);
+        if (!inmon.on(plugin_enum.meek) && !inmon.on(plugin_enum.rel_lock)) {
+          if (
+            (got_hate_juels >= 10000 || hate_juels >= 3200) &&
+            hate_mark < 3
+          ) {
+            era.set(`nowex:${id}:反抗获取`, 3 - hate_mark);
+          } else if (
+            (got_hate_juels >= 7500 || hate_juels >= 2400) &&
+            hate_mark < 2
+          ) {
+            era.set(`nowex:${id}:反抗获取`, 2 - hate_mark);
+          } else if (
+            (got_hate_juels >= 5000 || hate_juels >= 1600) &&
+            hate_mark < 1
+          ) {
+            era.set(`nowex:${id}:反抗获取`, 1);
+          }
         }
       }
     });

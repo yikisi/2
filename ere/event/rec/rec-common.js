@@ -103,10 +103,9 @@ class CustomizedRecruit {
         )
       ) {
         notes[this.id].forEach((e) =>
-          era.print(
-            [{ content: e.title, fontWeight: 'bold' }, '「', e.content, '」'],
-            { color: get_chara_color(this.id) },
-          ),
+          era.print([{ content: e[0], fontWeight: 'bold' }, '「', e[1], '」'], {
+            color: get_chara_color(this.id),
+          }),
         );
         await era.waitAnyKey();
       }

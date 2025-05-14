@@ -36,7 +36,7 @@ module.exports = class extends CustomizedEdu {
    */
   async annoyance1(taste) {
     new TasteLifeMarks().annoyance = -get_random_value(5, 12);
-    new EventMarks(0).sub(event_hooks.school_chairman);
+    EventMarks.get(0).sub(event_hooks.school_chairman);
     await print_event_name(
       [taste.get_teen_sex_title(), '理事长的烦恼之一'],
       taste,
@@ -74,7 +74,7 @@ module.exports = class extends CustomizedEdu {
    * @param {CharaTalk} taste
    */
   async annoyance2(taste) {
-    new EventMarks(0).sub(event_hooks.school_chairman);
+    EventMarks.get(0).sub(event_hooks.school_chairman);
     await print_event_name(
       [taste.get_teen_sex_title(), '理事长的烦恼之二'],
       taste,

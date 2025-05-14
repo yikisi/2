@@ -2,10 +2,29 @@ const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
+const { get_chara_color } = require('#/data/chara-colors');
+const TamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-21');
 const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
 const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
+  get_action_debuff() {
+    const edu_marks = new TamaEduMarks();
+    return (
+      0.1 * (edu_marks.lightning === 1) +
+      0.05 * (edu_marks.heal === 1) -
+      0.1 * (edu_marks.heal === -1)
+    );
+  }
+
+  get_maxbase_buff() {
+    return -200 * (new TamaEduMarks().lightning === 1);
+  }
+
+  get_pressure_buff() {
+    return 0.1 * (new TamaEduMarks().lightning === 1);
+  }
+
   get_race_contestants(info) {
     switch (era.get('flag:当前赛事')) {
       case race_enum.takz_kin:
@@ -40,6 +59,69 @@ module.exports = class extends CustomizedMec {
       ];
     }
     return super.get_race_finish_report(uma, race_id);
+  }
+
+  get_status(show_train_buff) {
+    const ret = [];
+    if (show_train_buff) {
+      const { lightning, heal } = new TamaEduMarks();
+      switch (lightning) {
+        default:
+          ret.push({
+            color: get_chara_color(this.id),
+            content: '闪光',
+            title: '白色闪电，开放参与所有比赛',
+          });
+          break;
+        case 1:
+          ret.push({
+            color: get_chara_color(this.id),
+            content: '雷殛',
+            fontWeight: 'bold',
+            title:
+              '电流衰弱；训练效果-20%，体力精力上限-200，消耗+10%，压力获取+10%',
+          });
+          break;
+        case 2:
+          ret.push({
+            color: get_chara_color(this.id),
+            content: '雷云',
+            fontWeight: 'bold',
+            title: '山雨欲来，目前只能参与OP级比赛',
+          });
+          break;
+        case 3:
+          ret.push({
+            color: get_chara_color(this.id),
+            content: '先导',
+            fontWeight: 'bold',
+            title: '雷光初成，目前只能参与OP-G3级比赛',
+          });
+      }
+      if (heal === 1) {
+        ret.push({
+          color: get_chara_color(this.id),
+          content: '斯巴达式',
+          title: '训练效果+20%，体力精力消耗+5%',
+        });
+      } else if (heal === -1) {
+        ret.push({
+          color: get_chara_color(this.id),
+          content: '马娘优先',
+          title: '每回合自动提高干劲，体力精力消耗-10%',
+        });
+      }
+    }
+    return ret;
+  }
+
+  get_train_buff() {
+    const edu_marks = new TamaEduMarks();
+    return -20 * (edu_marks.lightning === 1) + 20 * (edu_marks.heal === 1);
+  }
+
+  is_race_register_enabled() {
+    return new TamaEduMarks().lightning < 1;
   }
 
   set_callname() {

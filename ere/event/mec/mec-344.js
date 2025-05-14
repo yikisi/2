@@ -1,5 +1,3 @@
-const { get } = require('#/era-electron');
-
 const MecNpc = require('#/event/mec/mec-npc');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -16,7 +14,7 @@ module.exports = class extends MecNpc {
     return [
       {
         color: get_chara_color(this.id),
-        content: get(`staticcstr:${this.id}:称号`),
+        content: '光影捕手',
         fontWeight: buff > 0 ? 'bold' : undefined,
         title,
       },

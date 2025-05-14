@@ -86,6 +86,17 @@ class CallOfMejiro extends MejiroCity {
     }
   }
 
+  get_want_sex_buff(chara_id) {
+    return this.called === chara_id;
+  }
+
+  get_rape_buff(chara_id) {
+    if (chara_id === this.called) {
+      return 0.5;
+    }
+    return 0;
+  }
+
   get_positions(chara_id, player_base, chara_base) {
     const ret = super.get_positions(chara_id, player_base, chara_base);
     const mejiro_button = ret.find((e) => e.l === location_enum.mejiro);
@@ -135,13 +146,9 @@ class CallOfMejiro extends MejiroCity {
       ' 一同进入了目白城……',
     ]);
     if (era.get('item:「恩宠」') === 0 || (this.called > 0 && this.san === 0)) {
-      await era.printAndWait([
-        '……然后迷雾吞没了 ',
-        me.get_couple_title(),
-        '……',
-      ]);
+      await era.printAndWait('……然后迷雾吞没了你们……');
       if (this.called > 0) {
-        new EventMarks(this.called).sub(event_hooks.out_mejiro);
+        EventMarks.get(this.called).sub(event_hooks.out_mejiro);
         this.called = 0;
       }
       await this.misty(chara, me);
@@ -218,9 +225,7 @@ class CallOfMejiro extends MejiroCity {
           ' 被迷雾完全包围了……',
         ]);
         await era.printAndWait([
-          '目光所及除了迷雾就是一对对疯狂做爱的情侣，他们的面容依稀有着 ',
-          me.get_couple_title(),
-          ' 的影子。',
+          '目光所及除了迷雾就是一对对疯狂做爱的情侣，他们的面容依稀有着你们的影子。',
         ]);
         await era.printAndWait(
           '性爱的声音盖过了其他所有，呼吸的空气中满是淫水和汗水的臭味……',
@@ -486,7 +491,7 @@ class CallOfMejiro extends MejiroCity {
         get_chara_talk(this.called).get_colored_name(),
         ' 从耳边的低语中听到了麦吉罗的呼唤……',
       ]);
-      new EventMarks(this.called).add(event_hooks.out_mejiro);
+      EventMarks.get(this.called).add(event_hooks.out_mejiro);
     }
   }
 }

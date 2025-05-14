@@ -8,6 +8,7 @@ const {
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 
 const { buff_colors } = require('#/data/color-const');
@@ -242,13 +243,13 @@ module.exports = {
     );
   },
   /**
-   * @param {number} chara_id
+   * @param {number} id
    * @param {Record<string,number>} price_dict
    * @param {Record<string,number>} origin_dict
    * @returns {Promise<boolean>}
    */
-  async print_price_and_confirm(chara_id, price_dict, origin_dict) {
-    const chara_talk = new CharaTalk(chara_id);
+  async print_price_and_confirm(id, price_dict, origin_dict) {
+    const chara_talk = get_chara_talk(id);
     Object.keys(price_dict).forEach((juel_name) => {
       const buffer = [
         `${juel_name.substring(0, 2)}因子：`,

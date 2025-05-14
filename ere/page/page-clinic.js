@@ -11,7 +11,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
-const LocCharacters = require('#/data/event/loc-characters');
+const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
@@ -29,10 +29,9 @@ async function page_clinic() {
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了保健室】',
   ]);
-  const loc_chara = new LocCharacters(),
-    celebration = get_celebration(),
-    chara = get_chara_talk(loc_chara.get(location_enum.clinic)[0]),
-    title = new CharaTitles(chara.id).get_colored_curr_title();
+  const celebration = get_celebration(),
+    chara = get_chara_talk(loc_characters.get(location_enum.clinic)[0]),
+    title = CharaTitles.get(chara.id).get_colored_curr_title();
   while (flag_page) {
     const temp = await npc_common(
       chara,
@@ -70,7 +69,7 @@ async function page_clinic() {
   era.drawLine();
   await era.printAndWait('【折返了】');
   if (!sys_check_awake(chara.id)) {
-    loc_chara.set(location_enum.clinic, []);
+    loc_characters.set(location_enum.clinic, []);
   }
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.clinic,

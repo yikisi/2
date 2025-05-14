@@ -21,7 +21,7 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       ret = [];
     if (
       check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
@@ -42,7 +42,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_edu_aims() {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       ret = [];
     ret.push(check_aim_and_get_entry(races, race_enum.begin_race));
     ret.push(check_aim_and_get_entry(races, race_enum.kobe_hai, 1, 3));

@@ -136,7 +136,7 @@ module.exports = class extends CustomizedRecruit {
       await era.printAndWait('去天台抽根烟吧……');
       era.set('cflag:100:随机招募', 0);
       era.set('flag:物色对象', 100);
-      new EventMarks(0).add(event_hooks.school_rooftop);
+      EventMarks.get(0).add(event_hooks.school_rooftop);
       add_event(
         event_hooks.school_rooftop,
         new EventObject(100, cb_enum.recruit),
@@ -147,7 +147,7 @@ module.exports = class extends CustomizedRecruit {
         return;
       }
       era.set('flag:物色对象', 0);
-      new EventMarks(0).sub(event_hooks.school_rooftop);
+      EventMarks.get(0).sub(event_hooks.school_rooftop);
       await era.printAndWait(
         '黄昏的天台上，下意识地想要点上一根能让自己暂时忘记一切的香烟。',
       );

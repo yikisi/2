@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
+const {
+  sys_check_cuckold,
+  sys_check_yandere,
+} = require('#/system/chara/sys-calc-cheat');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_hide_relation_and_love,
@@ -27,7 +30,7 @@ const {
   get_love_mark,
   get_relation_mark,
 } = require('#/data/info-generator');
-const LimitLoveStatus = require('#/data/love-limit-status');
+const LoveLimitStatus = require('#/data/love-limit-status');
 
 /**
  * @param {number} id
@@ -46,9 +49,9 @@ async function punish_unfaithful(id, new_love) {
         e !== id &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
         era.get(`love:${e}`) >= 75 &&
-        era.get(`talent:${e}:绿帽癖`) === 0 &&
         get_custom_mec(e).is_anger_for_unfaithful([id]) &&
-        sys_check_yandere(e, (y) => punish_option || y > 0)
+        sys_check_yandere(e, (y) => punish_option || y > 0) &&
+        !sys_check_cuckold(e)
       );
     });
   for (const c_id of temp_chara_list) {
@@ -72,7 +75,9 @@ async function punish_unfaithful(id, new_love) {
       ),
     );
   }
-  temp_chara_list.length && (await era.waitAnyKey());
+  if (temp_chara_list.length > 0) {
+    await era.waitAnyKey();
+  }
 }
 
 /**
@@ -127,10 +132,6 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
       Math.max(val + 3 * era.get(`talent:${target}:自信程度`), 1),
     );
     let shield = 0;
-    if (relation + val > 600) {
-      shield = relation + val - 600;
-      val = 600 - relation;
-    }
     if (!aim) {
       if (relation > 525) {
         love = Math.floor(val / 10);
@@ -139,6 +140,12 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
       } else if (relation > 225) {
         love = Math.floor(val / 20);
       }
+    }
+    if (relation + val > 600) {
+      shield = relation + val - 600;
+      val = 600 - relation;
+    }
+    if (!aim) {
       let temp = Math.floor(era.get(`cflag:${target}:好感盾`));
       if (shield > 0) {
         const love = era.get(`love:${target}`);
@@ -217,7 +224,7 @@ function love_uma(id, val, shown = true) {
       !era.get('flag:后代爱慕限制') &&
       era.get(`cflag:${id}:父方角色`) >= 0) ||
     era.get(`status:${id}:讨厌药`) > 0 ||
-    !new LimitLoveStatus(id).is_empty()
+    !LoveLimitStatus.get(id).is_empty()
   ) {
     return false;
   }

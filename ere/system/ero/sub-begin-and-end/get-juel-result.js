@@ -9,9 +9,10 @@ const { gene_juel_names } = require('#/data/other-const');
 /**
  * @param {number} chara_id
  * @param {string[]} juel_names
- * @param {Record<string,Record<string,number>>} tmp
+ * @param {Record<string,number>} jewel_info
+ * @param {(PrintedSpan|string)[][]} attr_info
  */
-function get_juel_result(chara_id, juel_names, tmp) {
+function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
   const buffer = [];
   buffer.push({
     type: 'divider',
@@ -20,7 +21,7 @@ function get_juel_result(chara_id, juel_names, tmp) {
       position: 'left',
     },
   });
-  const self_protect = tmp[chara_id]['-自卫'];
+  const self_protect = jewel_info['-自卫'];
   if (self_protect) {
     buffer.push({
       content: [
@@ -35,8 +36,8 @@ function get_juel_result(chara_id, juel_names, tmp) {
   }
   juel_names.forEach((j_name) => {
     const val = era.get(`juel:${chara_id}:${j_name}`),
-      got = tmp[chara_id][j_name],
-      un_got = tmp[chara_id][`-${j_name}`];
+      got = jewel_info[j_name],
+      un_got = jewel_info[`-${j_name}`];
     if (got || un_got) {
       buffer.push(
         {
@@ -88,7 +89,7 @@ function get_juel_result(chara_id, juel_names, tmp) {
   });
   if (self_protect) {
     const val = era.get(`juel:${chara_id}:自卫`),
-      got = tmp[chara_id]['自卫'];
+      got = jewel_info['自卫'];
     buffer.push(
       {
         config: { width: 4 },
@@ -183,7 +184,7 @@ function get_juel_result(chara_id, juel_names, tmp) {
     buffer.push({ content: '无变化', type: 'text' });
   }
   const buffer2 = [];
-  if (chara_id) {
+  if (chara_id > 0) {
     buffer2.push({
       config: {
         content: `${era.get(`callname:${chara_id}:-2`)} 的刻印`,
@@ -215,11 +216,26 @@ function get_juel_result(chara_id, juel_names, tmp) {
         });
       }
     });
+    if (buffer2.length === 1) {
+      buffer2.push({ content: '无变化', type: 'text' });
+    }
   }
-  if (buffer2.length === 1) {
-    buffer2.push({ content: '无变化', type: 'text' });
+  const buffer3 = [];
+  attr_info.forEach((c) => {
+    if (c.length > 0) {
+      buffer3.push({ content: c, type: 'text' });
+    }
+  });
+  if (buffer3.length > 0) {
+    buffer3.unshift({
+      config: {
+        content: `${era.get(`callname:${chara_id}:-2`)} 的属性`,
+        position: 'left',
+      },
+      type: 'divider',
+    });
   }
-  return buffer.concat(buffer2);
+  return buffer.concat(buffer2).concat(buffer3);
 }
 
 module.exports = get_juel_result;

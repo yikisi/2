@@ -43,7 +43,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(60).get(),
+    const races = RaceHistory.get(60).get(),
       titles = [];
     if (
       new NNEduMarks().g1_count >= 4 &&
@@ -120,7 +120,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(60).get();
+      races = RaceHistory.get(60).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.waka_sta, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.koku_kin, 1, 3));

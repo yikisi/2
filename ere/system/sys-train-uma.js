@@ -11,6 +11,8 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const event_hooks = require('#/data/event/event-hooks');
 const TrainFailParams = require('#/data/event/extra-flag/train-fail-params');
 const TrainSuccessParams = require('#/data/event/extra-flag/train-success-params');
@@ -120,9 +122,9 @@ function get_success_base_reward(
     changes.attr_change = changes.attr_change.map((e) => e + (e > 0));
   }
   changes.pt_change += 1.25 * (train_level - 1);
-  if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
+  if (era.get('cflag:341:招募状态') === recruit_flags.yes) {
     changes.pt_change =
-      changes.pt_change * (1 + 0.5 * (1 + new GodolphinLifeMarks().buff));
+      changes.pt_change * (1 + 0.25 * (1 + new GodolphinLifeMarks().buff));
   }
   if (
     between_weeks !== undefined &&
@@ -141,6 +143,7 @@ function get_success_base_reward(
  */
 function get_train_bonus(id, attr, between_weeks) {
   const chara_loc = era.get(`cflag:${id}:位置`);
+  const inmon = CharaInmon.get(id);
   let train_buff =
     era.get(`cflag:${id}:${attr_names[attr]}加成`) +
     era.get('flag:训练加成') +
@@ -148,7 +151,9 @@ function get_train_bonus(id, attr, between_weeks) {
       (era.get(`status:${id}:摸鱼`) ? -4 : era.get(`cflag:${id}:干劲`)) +
     (sys_get_chara(id) === -3) -
     0.004 * era.get(`base:${id}:压力`) +
-    get_custom_mec(id).get_train_buff();
+    get_custom_mec(id).get_train_buff() -
+    50 * inmon.on(plugin_enum.sex_1) -
+    999 * inmon.on(plugin_enum.sex_2);
   if (chara_loc > 0 && chara_loc !== location_enum.beach) {
     train_buff -= 25;
   }
@@ -246,12 +251,21 @@ module.exports = {
           attr,
         ),
       );
-      ret.attr && (changes.attr_change[attr] += ret.attr);
-      ret.stamina && (train_cost.stamina += ret.stamina);
-      ret.relation_change && (relation_change += ret.relation_change);
-      ret.pt_change && (changes.pt_change += ret.pt_change);
-      !id &&
-        (changes.attr_change[attr_enum.intelligence] += get_random_value(1, 2));
+      if (ret.attr !== 0) {
+        changes.attr_change[attr] += ret.attr;
+      }
+      if (ret.stamina !== 0) {
+        train_cost.stamina += ret.stamina;
+      }
+      if (ret.relation_change !== 0) {
+        relation_change += ret.relation_change;
+      }
+      if (ret.pt_change !== 0) {
+        changes.pt_change += ret.pt_change;
+      }
+      if (!id) {
+        changes.attr_change[attr_enum.intelligence] += get_random_value(1, 2);
+      }
 
       relation_change += 2;
 
@@ -345,7 +359,7 @@ module.exports = {
     if (changes.pt_change) {
       buffer.push({
         config: { offset: 1, width: 23 },
-        content: `获得了 ${changes.pt_change} 点技能点数`,
+        content: `获得了 ${changes.pt_change.toLocaleString()} 点技能点数`,
         type: 'text',
       });
       era.add(`exp:${id}:技能点数`, changes.pt_change);

@@ -1,4 +1,4 @@
-﻿const era = require('#/era-electron');
+const era = require('#/era-electron');
 
 const {
   sys_get_chara_info,
@@ -18,11 +18,15 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 const print_page_header = require('#/page/components/page-header');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const GameGuides = require('#/event/others/game-guides');
+const game_guides = require('#/event/others/game-guides');
 const { check_rec_script, run_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
+const {
+  gacha,
+  get_random_entry,
+  join_to_string,
+} = require('#/utils/list-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const { get_chara_color } = require('#/data/chara-colors');
@@ -85,7 +89,7 @@ async function print_rec_page() {
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了训练场】',
   ]);
-  await new GameGuides().recruit();
+  await game_guides.recruit();
   flag_leave = await sys_get_random_event(event_hooks.recruit_start)();
   const flag_limit = sys_check_team_limit() >= 0;
   flag_recruit = !flag_leave;
@@ -179,7 +183,7 @@ async function print_rec_page() {
               { isBr: true },
               '* 招募按钮显示为',
               { color: el_danger_color, content: '红色' },
-              '的角色有专属口上',
+              '的角色有口上',
             ],
             type: 'text',
           },
@@ -231,7 +235,7 @@ async function print_rec_page() {
         sex_code = era.get(`cflag:${selected}:性别`),
         talent_list = [];
       let hair = era.get(`cstr:${selected}:呆毛`);
-      hair = join_list(
+      hair = join_to_string(
         [
           hair ? `${hair}呆毛` : '',
           era.get(`cstr:${selected}:前发`),
@@ -358,16 +362,20 @@ async function print_rec_page() {
     } else if (ret > 2000) {
       const selected = ret - 2000,
         name = era.get(`static:${selected}:name`),
-        skill_list = new CharaSkills(selected).get().map((e) => ({
-          config: { width: 5 },
-          content: skills_dict[e].get_colored_name(),
-          type: 'text',
-        })),
-        available_list = new CharaAvailableSkills(selected).get().map((e) => ({
-          config: { width: 5 },
-          content: skills_dict[e].get_colored_name(),
-          type: 'text',
-        })),
+        skill_list = CharaSkills.get(selected)
+          .get()
+          .map((e) => ({
+            config: { width: 5 },
+            content: skills_dict[e].get_colored_name(),
+            type: 'text',
+          })),
+        available_list = CharaAvailableSkills.get(selected)
+          .get()
+          .map((e) => ({
+            config: { width: 5 },
+            content: skills_dict[e].get_colored_name(),
+            type: 'text',
+          })),
         skill_buffer = [];
       skill_buffer.push({
         config: { width: 3 },
@@ -548,10 +556,10 @@ async function print_rec_page() {
   }
   if (!flag_leave) {
     era.drawLine();
-    await era.printAndWait([me.get_colored_name(), ' 离开了训练场……']);
+    await era.printAndWait('【折返了】');
     await sys_get_random_event(event_hooks.recruit_end)();
   }
-  await new GameGuides().recruit_end();
+  await game_guides.recruit_end();
   era.set('flag:当前位置', location_enum.office);
 }
 

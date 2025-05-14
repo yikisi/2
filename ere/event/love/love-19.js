@@ -451,6 +451,12 @@ module.exports = class extends CustomizedLove {
       digital.get_colored_name(),
       ' 一起在祭典里面尽情蹦跳！',
     ]);
+    teio.name = undefined;
+    opera.name = undefined;
+    dotou.name = undefined;
+    mcqueen.name = undefined;
+    palmer.name = undefined;
+    helios.name = undefined;
   }
 
   async shine(digital, me, callname) {

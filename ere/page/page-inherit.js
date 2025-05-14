@@ -553,13 +553,19 @@ async function print_inherit_page() {
       if (
         await select_yes_or_no('遗忘所有因子能力吗？已提高的属性上限不会消失')
       ) {
-        new CharaSkills(0).remove(
+        CharaSkills.get(0).remove(
           ...chara_genes
             .get_values()
             .filter((e) => gene_dict[e.id].type === gene_type_enum.skill)
             .map((e) => gene_dict[e.id].value),
         );
-        adaptability_names.forEach((e) => set(`cflag:0:${e}适性`, 0));
+        let _src = get('cflag:0:模版角色');
+        if (_src <= 0) {
+          _src = 0;
+        }
+        adaptability_names.forEach((e) =>
+          set(`cflag:0:${e}适性`, get(`cflag:${_src}:${e}适性`)),
+        );
         chara_genes.get_values().forEach((e) => {
           if (e.type === gene_type_enum.base) {
             add(`base:0:${gene_dict[e.id].type_value}`, -gene_dict[e.id].value);

@@ -26,8 +26,10 @@ let output = `const CharaTalk = require('#/utils/chara-talk');
 
 const cons_dict = {};
 
-const current = new Date().getTime();
+/** @type {Record<string,CharaTalk>} */
+const obj_dict = {};
 
+const current = new Date().getTime();
 
 `;
 
@@ -45,22 +47,27 @@ console.log(
 
 module.exports = {
   /**
-   * @param {number} chara_id
+   * @param {number} id
    * @param {string} [color]
    * @returns {CharaTalk}
    */
-  get_chara_talk(chara_id, color) {
-    if (!chara_id) {
+  get_chara_talk(id, color) {
+    if (id === 0) {
       return CharaTalk.me;
     }
-    if (cons_dict[chara_id]) {
-      return new cons_dict[chara_id](chara_id, color);
+    CharaTalk.init_chara(id);
+    if (!color && obj_dict[id] !== undefined) {
+      return obj_dict[id];
     }
-    return new CharaTalk(chara_id, color);
+    if (cons_dict[id] !== undefined) {
+      return (obj_dict[id] = new cons_dict[id](id, color));
+    }
+    return (obj_dict[id] = new CharaTalk(id, color));
   },
   say_by_passer_by: CharaTalk.say_by_passer_by,
   say_by_passer_by_and_wait: CharaTalk.say_by_passer_by_and_wait,
-};`;
+};
+`;
 
 writeFileSync('../../ere/utils/chara-talk-factory.js', output);
 

@@ -22,7 +22,7 @@ module.exports = (handlers) => {
     edu_marks,
     extra_flag,
   ) => {
-    const races = new RaceHistory(56).get();
+    const races = RaceHistory.get(56).get();
     if (!check_aim_race(races, race_enum.kiku_sho, 1, 1)) {
       return true;
     }

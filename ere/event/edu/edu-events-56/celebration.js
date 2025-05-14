@@ -107,7 +107,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
   era.set('cflag:56:节日事件标记', 0);
   if (
     edu_marks.begin_race_end === 10 &&
-    check_aim_race(new RaceHistory(56).get(), race_enum.arim_kin, 2, 1)
+    check_aim_race(RaceHistory.get(56).get(), race_enum.arim_kin, 2, 1)
   ) {
     // 差分，分为有马纪念未进行
     await print_event_name('名叫待兼福来的星星', kitaru);

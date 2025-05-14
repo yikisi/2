@@ -77,6 +77,9 @@ plugins[50113] = require('#/data/ero/plugin/plugin-50113');
 plugins[50211] = require('#/data/ero/plugin/plugin-50211');
 plugins[50212] = require('#/data/ero/plugin/plugin-50212');
 plugins[50213] = require('#/data/ero/plugin/plugin-50213');
+plugins[50311] = require('#/data/ero/plugin/plugin-50311');
+plugins[50312] = require('#/data/ero/plugin/plugin-50312');
+plugins[50313] = require('#/data/ero/plugin/plugin-50313');
 plugins[60111] = require('#/data/ero/plugin/plugin-60111');
 plugins[60112] = require('#/data/ero/plugin/plugin-60112');
 plugins[60113] = require('#/data/ero/plugin/plugin-60113');
@@ -84,6 +87,8 @@ plugins[60114] = require('#/data/ero/plugin/plugin-60114');
 plugins[60115] = require('#/data/ero/plugin/plugin-60115');
 plugins[60116] = require('#/data/ero/plugin/plugin-60116');
 plugins[60117] = require('#/data/ero/plugin/plugin-60117');
+plugins[60211] = require('#/data/ero/plugin/plugin-60211');
+plugins[60212] = require('#/data/ero/plugin/plugin-60212');
 plugins[70111] = require('#/data/ero/plugin/plugin-70111');
 plugins[70112] = require('#/data/ero/plugin/plugin-70112');
 plugins[70211] = require('#/data/ero/plugin/plugin-70211');
@@ -243,6 +248,12 @@ module.exports = {
     no_tired: 50212,
     // 欢愉之骨: 不会疲惫、伤病或怀孕
     no_preg: 50213,
+    // 多汁: 体液分泌+100%
+    juicy: 50311,
+    // 喷泉: 体液分泌+200%
+    fountain: 50312,
+    // 水做的骨肉: 体液分泌+400%
+    woman: 50313,
     // 唯唯诺诺: 气性转换为「弱气」
     cha_0: 60111,
     // 畏首畏尾: 气性转换为「胆小」
@@ -257,6 +268,10 @@ module.exports = {
     cha_5: 60116,
     // 血气方刚: 气性转换为「热血」
     cha_6: 60117,
+    // 性爱训练法: 通过性爱获取的基础属性+400%，可以获取技能点数，全训练加成-50%
+    sex_1: 60211,
+    // 吃禁果变强: 通过性爱获取的基础属性+1400%，可以获取技能点数，不再自主训练且全训练加成降到最低
+    sex_2: 60212,
     // 金枪鱼: 调教时不再做出反应
     tuna: 70111,
     // 温顺: 不再主动求爱，调教时也不再做出反应

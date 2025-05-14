@@ -25,9 +25,9 @@ const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
 const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-302');
-const LocCharacters = require('#/data/event/loc-characters');
+const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration, get_relation_mark } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
@@ -45,10 +45,9 @@ async function page_chairman_office() {
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了理事长办公室】',
   ]);
-  const loc_characters = new LocCharacters(),
-    celebration = get_celebration(),
+  const celebration = get_celebration(),
     chara = get_chara_talk(loc_characters.get(location_enum.chairman)[0]),
-    title = new CharaTitles(chara.id).get_colored_curr_title(),
+    title = CharaTitles.get(chara.id).get_colored_curr_title(),
     star_premium_draw = sys_get_star_premium_draw();
   let cost = star_premium_draw.cost;
   if (era.get('cflag:302:招募状态') === recruit_flags.yes) {
@@ -208,7 +207,7 @@ async function page_chairman_office() {
                           temp.push({
                             config: {
                               content: l[0].priority
-                                ? '使用专属口上的角色'
+                                ? '使用口上的角色'
                                 : '使用地文的角色',
                             },
                             type: 'divider',
@@ -239,11 +238,11 @@ async function page_chairman_office() {
                   await get_chara_talk(0).say_and_wait(
                     '将 军！无路可退了，来和我一起吧！',
                   );
-                  chara.name = era.set('callname:302:-2', '秋川弥生');
+                  era.set('callname:302:-2', '秋川弥生');
                   await chara.say_and_wait('啊吧啊吧啊吧啊吧……');
                   era.set('cflag:302:招募状态', recruit_flags.yes);
                   if (era.get('talent:302:病娇')) {
-                    new YandereList().push(302);
+                    yandere_list.push(302);
                   }
                   await era.printAndWait([
                     '恭 喜！',

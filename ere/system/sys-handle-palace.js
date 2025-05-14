@@ -17,6 +17,8 @@ const {
   buff_colors,
   sex_colors,
 } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
 const { get_chara_score } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -32,7 +34,10 @@ function sys_handle_palace(chara_id) {
   const miss_count = remove_edu_events(chara_id)[chara_id] || 0;
   /** @type {*[]} */
   const buffer = [
-    { content: [chara.get_colored_name(), ' 的育成结束了……'], type: 'text' },
+    {
+      content: ['【', chara.get_colored_name(), ' 的育成结束了】'],
+      type: 'text',
+    },
   ];
   const aim_check = get_custom_check(chara_id).check_palace_and_get_aims();
   let aim_punish_count = 0,
@@ -86,7 +91,7 @@ function sys_handle_palace(chara_id) {
   }
   const titles =
     get_custom_check(chara_id).check_and_get_titles(!aim_punish_count);
-  const races = new RaceHistory(chara_id).get_entries();
+  const races = RaceHistory.get(chara_id).get_entries();
   let g1_count = 0,
     pop_g1_count = 0;
   races.forEach((e) => {
@@ -164,7 +169,7 @@ function sys_handle_palace(chara_id) {
       genes.add(200003 + i * 10);
     }
   });
-  new CharaSkills(chara_id)
+  CharaSkills.get(chara_id)
     .get()
     .filter((e) => e < 200000)
     .forEach((e) => genes.add(e + 800000));
@@ -188,6 +193,12 @@ function sys_handle_palace(chara_id) {
     );
   }
   era.set(`cflag:${chara_id}:自主训练`, 0);
+  const inmon = CharaInmon.get(chara_id);
+  [plugin_enum.sex_1, plugin_enum.sex_2].forEach((p) => {
+    if (inmon.on(p)) {
+      inmon.set(p, 0);
+    }
+  });
 }
 
 module.exports = sys_handle_palace;

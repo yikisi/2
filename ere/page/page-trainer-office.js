@@ -31,7 +31,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaTitles = require('#/data/chara-titles');
 const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 const event_hooks = require('#/data/event/event-hooks');
-const LocCharacters = require('#/data/event/loc-characters');
+const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
@@ -155,7 +155,6 @@ async function page_trainer_office() {
     location_name[location_enum.trainer],
     '】',
   ]);
-  const loc_characters = new LocCharacters();
   let trainer_list = loc_characters.get(location_enum.trainer);
   if (trainer_list.length > 0) {
     const celebration = get_celebration(),
@@ -223,7 +222,7 @@ async function page_trainer_office() {
       const chara_id = await input();
       if (chara_id !== 999) {
         const chara = get_chara_talk(chara_id),
-          title = new CharaTitles(chara_id).get_curr_title();
+          title = CharaTitles.get(chara_id).get_curr_title();
         flag_trainer = true;
         while (flag_trainer) {
           const temp_flag = await npc_common(

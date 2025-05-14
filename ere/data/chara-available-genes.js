@@ -8,8 +8,8 @@ class CharaAvailableGenes {
   /** @param {CharaAvailableGenes} c */
   static merge_into_player(c) {
     const player_genes = new CharaAvailableGenes(0);
-    if (!player_genes.obj[`c${c.id}`]) {
-      player_genes.obj[`c${c.id}`] = 1;
+    if (!player_genes.obj[`c${c.#id}`]) {
+      player_genes.obj[`c${c.#id}`] = 1;
       Object.entries(c.get()).forEach((e) => {
         player_genes.obj[e[0]] || (player_genes.obj[e[0]] = 0);
         player_genes.obj[e[0]] += e[1];
@@ -24,7 +24,7 @@ class CharaAvailableGenes {
   }
 
   /** @type {number} */
-  id;
+  #id;
   /** @type {Record<string,number>} */
   obj;
   /** @type {{count:number,id:number}[]} */
@@ -33,7 +33,7 @@ class CharaAvailableGenes {
   summary_cache;
 
   constructor(chara_id) {
-    this.id = chara_id;
+    this.#id = chara_id;
     this.obj =
       get(`skill:${chara_id}:可继承因子`) ||
       set(`skill:${chara_id}:可继承因子`, {});
@@ -58,7 +58,7 @@ class CharaAvailableGenes {
   }
 
   clear() {
-    this.obj = set(`skill:${this.id}:可继承因子`, {});
+    this.obj = set(`skill:${this.#id}:可继承因子`, {});
     this.clean_cache();
   }
 
@@ -108,7 +108,7 @@ class CharaAvailableGenes {
    * @param {CharaAvailableGenes} b
    */
   merge(a, b) {
-    this.obj = set(`skill:${this.id}:可继承因子`, { ...a.get() });
+    this.obj = set(`skill:${this.#id}:可继承因子`, { ...a.get() });
     Object.entries(b.get()).forEach((e) => {
       this.obj[e[0]] || (this.obj[e[0]] = 0);
       this.obj[e[0]] += e[1];

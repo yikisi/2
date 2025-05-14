@@ -1,0 +1,13 @@
+const era = require('#/era-electron');
+
+const CustomizedInit = require('#/event/init/customized-init');
+
+module.exports = class extends CustomizedInit {
+  init(is_reset) {
+    if (!is_reset) {
+      if (era.get('flag:角色性别') === 1) {
+        era.set(`callname:${this.id}:71`, '哥哥');
+      }
+    }
+  }
+};

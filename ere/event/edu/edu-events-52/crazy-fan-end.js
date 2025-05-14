@@ -55,7 +55,7 @@ module.exports = async () => {
     me.get_colored_name(),
     '。',
   ]);
-  const race_history = new RaceHistory(52);
+  const race_history = RaceHistory.get(52);
   if (race_history.check_begin()) {
     await urara.say_and_wait([
       '没关系的，就算没办法再奔跑乌拉拉也会有办法的！倒是 ',

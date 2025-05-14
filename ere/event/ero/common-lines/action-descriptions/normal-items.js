@@ -25,7 +25,7 @@ module.exports = (handlers) => {
       },
       ' 的肉棒套上了',
       { color: attacker.color, content: '避孕套' },
-      '……】',
+      '】',
     ]);
 
   /**
@@ -40,7 +40,7 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' 的肉棒套上了',
       { color: attacker.color, content: '避孕套' },
-      '……】',
+      '】',
     ]);
 
   /**
@@ -70,7 +70,7 @@ module.exports = (handlers) => {
         color: buff_colors[2],
         content: part_names[extra_flag.part],
       },
-      '……】',
+      '】',
     ]);
   };
 
@@ -89,7 +89,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ' 喂食了 ',
         { color: buff_colors[2], content: medicine_names[extra_flag.item] },
-        '……】',
+        '】',
       ]);
     } else {
       return era.printAndWait([
@@ -97,7 +97,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 服用了 ',
         { color: buff_colors[2], content: medicine_names[extra_flag.item] },
-        '……】',
+        '】',
       ]);
     }
   };
@@ -123,7 +123,7 @@ module.exports = (handlers) => {
             part_names4item[extra_flag.part] || part_names[extra_flag.part],
           color: buff_colors[2],
         },
-        '……】',
+        '】',
       ]);
     } else if (extra_flag.item === item_enum.electric_stunner) {
       return era.printAndWait([
@@ -137,13 +137,13 @@ module.exports = (handlers) => {
             part_names4item[extra_flag.part] || part_names[extra_flag.part],
           color: buff_colors[2],
         },
-        '……】',
+        '】',
       ]);
     } else if (extra_flag.item === item_enum.mirror) {
       return era.printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' 立起了一面全身镜……】',
+        ' 立起了一面全身镜】',
       ]);
     } else if (extra_flag.part === 99) {
       return era.printAndWait([
@@ -153,7 +153,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ' 戴上了 ',
         { content: item_names[extra_flag.item], color: buff_colors[2] },
-        '……】',
+        '】',
       ]);
     } else {
       return era.printAndWait([
@@ -169,7 +169,7 @@ module.exports = (handlers) => {
         },
         `  ${get_item_action(extra_flag.item, extra_flag.part)}了 `,
         { content: item_names[extra_flag.item], color: buff_colors[2] },
-        '……】',
+        '】',
       ]);
     }
   };
@@ -190,7 +190,7 @@ module.exports = (handlers) => {
       return era.printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' 撤除了全身镜……】',
+        ' 撤除了全身镜】',
       ]);
     } else {
       let aim_colored_name = defender.get_colored_name();
@@ -213,7 +213,7 @@ module.exports = (handlers) => {
         },
         ' 取下了 ',
         { content: item_names[extra_flag.item], color: buff_colors[2] },
-        '……】',
+        '】',
       ]);
     }
   };

@@ -435,7 +435,7 @@ module.exports = (handlers) => {
     era.printButton('「因为速子答应了参赛……而我不觉得速子会败北」', 1);
     await era.input();
     const hope_sta_check = check_aim_race(
-      new RaceHistory(32).get(),
+      RaceHistory.get(32).get(),
       race_enum.hope_sta,
       0,
       1,

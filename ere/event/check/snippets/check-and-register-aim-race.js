@@ -23,7 +23,7 @@ function check_and_register_aim_race(chara_id, aim_races, _edu_weeks) {
   }
   const temp_key = `${edu_weeks}_`;
   let registered_race;
-  if (new RaceHistory(chara_id).check_begin()) {
+  if (RaceHistory.get(chara_id).check_begin()) {
     for (const e of Object.entries(aim_races)) {
       if (e[0].startsWith(temp_key)) {
         const race = Number(e[0].substring(temp_key.length)),

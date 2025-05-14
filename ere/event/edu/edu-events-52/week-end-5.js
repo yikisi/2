@@ -711,7 +711,7 @@ module.exports = (handlers) => {
     await urara.say_and_wait(
       '好！不准再想了！真是的，不可以再消沉下来了哦？明明好不容易才到圣诞节的！',
     );
-    if (new RaceHistory(52).get_result(47 + 48)?.race === race_enum.arim_kin) {
+    if (RaceHistory.get(52).get_result(47 + 48)?.race === race_enum.arim_kin) {
       await urara.say_and_wait(
         '哼哼～关于圣诞节礼物呢！虽然已经送过一次了，但乌拉拉觉得没问题！',
       );

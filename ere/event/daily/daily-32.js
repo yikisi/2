@@ -768,8 +768,9 @@ module.exports = class extends CustomizedDaily {
     const buffer = [],
       callname = sys_get_callname(32, 0),
       tachyon = get_chara_talk(32);
-    hook.arg = await select_action_in_shopping_street();
-    switch (hook.arg) {
+    const temp = await select_action_in_shopping_street();
+    hook.arg = temp <= 1;
+    switch (temp) {
       case 0:
         buffer.push(
           () =>

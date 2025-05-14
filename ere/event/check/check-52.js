@@ -172,7 +172,7 @@ module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
     const c = get_chara_color(52),
       titles = [];
-    const races = new RaceHistory(52).get();
+    const races = RaceHistory.get(52).get();
     if (new UraraEduMarks().fans >= 250000) {
       titles.push({
         c,
@@ -224,7 +224,7 @@ module.exports = class extends CustomizedCheck {
         'teach',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(52).add(event_hooks.out_shopping),
+        () => EventMarks.get(52).add(event_hooks.out_shopping),
       );
       check_and_add_event(
         edu_marks,
@@ -232,7 +232,7 @@ module.exports = class extends CustomizedCheck {
         'dance',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.back_school),
+        () => EventMarks.get(0).add(event_hooks.back_school),
       );
       check_and_add_event(
         edu_marks,
@@ -247,7 +247,7 @@ module.exports = class extends CustomizedCheck {
         'all_like',
         event_hooks.out_start,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.out_start),
+        () => EventMarks.get(0).add(event_hooks.out_start),
       );
       check_and_add_event(
         edu_marks,
@@ -262,7 +262,7 @@ module.exports = class extends CustomizedCheck {
         'stair',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.school_chairman),
+        () => EventMarks.get(0).add(event_hooks.school_chairman),
       );
       check_and_add_event(
         edu_marks,
@@ -270,7 +270,7 @@ module.exports = class extends CustomizedCheck {
         'mother',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.school_chairman),
+        () => EventMarks.get(0).add(event_hooks.school_chairman),
       );
       check_and_add_event(
         edu_marks,
@@ -278,7 +278,7 @@ module.exports = class extends CustomizedCheck {
         'vs',
         event_hooks.school_atrium,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.school_atrium),
+        () => EventMarks.get(0).add(event_hooks.school_atrium),
       );
       check_and_add_event(
         edu_marks,
@@ -309,7 +309,7 @@ module.exports = class extends CustomizedCheck {
         'challenge',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.back_school),
+        () => EventMarks.get(0).add(event_hooks.back_school),
       );
       check_and_add_event(
         edu_marks,
@@ -324,7 +324,7 @@ module.exports = class extends CustomizedCheck {
         'park',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(52).add(event_hooks.out_shopping),
+        () => EventMarks.get(52).add(event_hooks.out_shopping),
       );
       check_and_add_event(
         edu_marks,
@@ -386,7 +386,7 @@ module.exports = class extends CustomizedCheck {
       check_and_register_aim_race(52, aim_races);
     } else if (edu_weeks === 143 + 1) {
       if (
-        new RaceHistory(52).get_result(95 + 48)?.race === race_enum.arim_kin
+        RaceHistory.get(52).get_result(95 + 48)?.race === race_enum.arim_kin
       ) {
         add_event(
           event_hooks.week_start,
@@ -454,7 +454,7 @@ module.exports = class extends CustomizedCheck {
   get_edu_aims() {
     const buffer = [],
       edu_weeks = era.get('cflag:52:育成回合计时'),
-      races = new RaceHistory(52).get();
+      races = RaceHistory.get(52).get();
     let { fans, fans1, fans2, fans3 } = new UraraEduMarks();
     if (edu_weeks < 47 + 27) {
       fans1 = fans;

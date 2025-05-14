@@ -5,6 +5,7 @@
  */
 const era = require('#/era-electron');
 
+const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
@@ -24,7 +25,7 @@ module.exports = class extends CustomizedEro {
       sys_check_awake(0) &&
       era.getCharactersInTrain().indexOf(25) !== -1 &&
       era.getCharactersInTrain().indexOf(32) !== -1 &&
-      era.get('talent:32:绿帽癖') > 0
+      sys_check_cuckold(32)
     ) {
       const coffee = get_chara_talk(25),
         c_call_m = sys_get_colored_callname(25, 0),

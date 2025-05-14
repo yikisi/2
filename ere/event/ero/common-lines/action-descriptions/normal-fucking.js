@@ -12,7 +12,7 @@ module.exports = (handlers) => {
           attacker.get_colored_name(),
           ' 以正常位插入了 ',
           defender.get_colored_name(),
-          ` 的${hook.hook === ero_hooks.missionary ? '小穴' : '屁穴'}……】`,
+          ` 的${hook.hook === ero_hooks.missionary ? '小穴' : '屁穴'}】`,
         ]);
       } else {
         return era.printAndWait([
@@ -20,7 +20,7 @@ module.exports = (handlers) => {
           attacker.get_colored_name(),
           ' 以正常位抽插着 ',
           defender.get_colored_name(),
-          ` 的${hook.hook === ero_hooks.missionary ? '小穴' : '屁穴'}……】`,
+          ` 的${hook.hook === ero_hooks.missionary ? '小穴' : '屁穴'}】`,
         ]);
       }
     };
@@ -33,7 +33,7 @@ module.exports = (handlers) => {
           attacker.get_colored_name(),
           ' 以后背位插入了 ',
           defender.get_colored_name(),
-          ` 的${hook.hook === ero_hooks.doggy_style ? '小穴' : '屁穴'}……】`,
+          ` 的${hook.hook === ero_hooks.doggy_style ? '小穴' : '屁穴'}】`,
         ]);
       } else {
         return era.printAndWait([
@@ -41,7 +41,7 @@ module.exports = (handlers) => {
           attacker.get_colored_name(),
           ' 以后背位抽插着 ',
           defender.get_colored_name(),
-          ` 的${hook.hook === ero_hooks.doggy_style ? '小穴' : '屁穴'}……】`,
+          ` 的${hook.hook === ero_hooks.doggy_style ? '小穴' : '屁穴'}】`,
         ]);
       }
     };
@@ -59,7 +59,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ' 相对而坐，将肉棒插入了 ',
         defender.get_colored_name(),
-        ` 的${hook.hook === ero_hooks.sitting ? '小穴' : '屁穴'}……】`,
+        ` 的${hook.hook === ero_hooks.sitting ? '小穴' : '屁穴'}】`,
       ]);
     } else {
       return era.printAndWait([
@@ -69,7 +69,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ` 相对而坐，肉棒抽插着${
           hook.hook === ero_hooks.sitting ? '小穴' : '屁穴'
-        }……】`,
+        }】`,
       ]);
     }
   };
@@ -84,7 +84,7 @@ module.exports = (handlers) => {
           defender.get_colored_name(),
           ` 抱在怀里坐着，将肉棒插入了${
             hook.hook === ero_hooks.hug_sitting ? '小穴' : '屁穴'
-          }……】`,
+          }】`,
         ]);
       } else {
         return era.printAndWait([
@@ -94,7 +94,7 @@ module.exports = (handlers) => {
           defender.get_colored_name(),
           ` 坐着，肉棒抽插着${
             hook.hook === ero_hooks.hug_sitting ? '小穴' : '屁穴'
-          }……】`,
+          }】`,
         ]);
       }
     };
@@ -112,7 +112,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ` 面对面站着，将肉棒插入了${
           hook.hook === ero_hooks.standing ? '小穴' : '屁穴'
-        }……】`,
+        }】`,
       ]);
     } else {
       return era.printAndWait([
@@ -120,7 +120,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 面对面站着用肉棒抽插着 ',
         defender.get_colored_name(),
-        ` 的${hook.hook === ero_hooks.standing ? '小穴' : '屁穴'}……】`,
+        ` 的${hook.hook === ero_hooks.standing ? '小穴' : '屁穴'}】`,
       ]);
     }
   };
@@ -135,7 +135,7 @@ module.exports = (handlers) => {
           defender.get_colored_name(),
           ` 揽在怀中，将肉棒插入${
             hook.hook === ero_hooks.hug_standing ? '小穴' : '屁穴'
-          }……】`,
+          }】`,
         ]);
       } else {
         return era.printAndWait([
@@ -145,7 +145,7 @@ module.exports = (handlers) => {
           defender.get_colored_name(),
           ` 的${hook.hook === ero_hooks.hug_standing ? '小穴' : '屁穴'}，`,
           defender.get_colored_name(),
-          ' 以双手软软地撑着墙壁……】',
+          ' 以双手软软地撑着墙壁】',
         ]);
       }
     };
@@ -161,7 +161,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ` 抬起架住，将肉棒插入了${
           hook.hook === ero_hooks.suspended_congress ? '小穴' : '屁穴'
-        }……】`,
+        }】`,
       ]);
     } else {
       return era.printAndWait([
@@ -171,7 +171,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ` 的浮空${
           hook.hook === ero_hooks.suspended_congress ? '小穴' : '屁穴'
-        }……】`,
+        }】`,
       ]);
     }
   };
@@ -189,7 +189,7 @@ module.exports = (handlers) => {
         hook.hook === ero_hooks.fucked_suspended_congress ? '小穴' : '屁穴',
         '容纳了 ',
         defender.get_colored_name(),
-        ' 的肉棒……】',
+        ' 的肉棒】',
       ]);
     } else {
       return era.printAndWait([
@@ -199,7 +199,7 @@ module.exports = (handlers) => {
         hook.hook === ero_hooks.fucked_suspended_congress ? '阴道' : '肠道',
         ' 摩擦着 ',
         defender.get_colored_name(),
-        ' 的浮空肉棒……】',
+        ' 的浮空肉棒】',
       ]);
     }
   };
@@ -215,7 +215,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ` 背对着抬起架住，肉棒插入了${
           hook.hook === ero_hooks.hug_suspended_congress ? '小穴' : '屁穴'
-        }……】`,
+        }】`,
       ]);
     } else {
       return era.printAndWait([
@@ -225,7 +225,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ` 浮空的${
           hook.hook === ero_hooks.hug_suspended_congress ? '小穴' : '屁穴'
-        }……】`,
+        }】`,
       ]);
     }
   };
@@ -240,7 +240,7 @@ module.exports = (handlers) => {
           defender.get_colored_name(),
           ` 坐在身上，用${
             hook.hook === ero_hooks.ask_cowgirl ? '小穴' : '屁穴'
-          }吞没肉棒……】`,
+          }吞没肉棒】`,
         ]);
       } else {
         return era.printAndWait([
@@ -250,7 +250,7 @@ module.exports = (handlers) => {
           defender.get_colored_name(),
           ` 继续用${
             hook.hook === ero_hooks.ask_cowgirl ? '小穴' : '屁穴'
-          }套弄肉棒……】`,
+          }套弄肉棒】`,
         ]);
       }
     };
@@ -265,7 +265,7 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ` 用${
         hook.hook === ero_hooks.ask_stimulate_glans_by_virgin ? '小穴' : '屁穴'
-      }套弄肉棒……】`,
+      }套弄肉棒】`,
     ]);
 
   handlers[ero_hooks.stimulate_g_spot] = (attacker, defender) =>
@@ -274,7 +274,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 用肉棒戳弄着 ',
       defender.get_colored_name(),
-      ' 的G点……】',
+      ' 的G点】',
     ]);
 
   handlers[ero_hooks.stimulate_large_intestine] = (attacker, defender) =>
@@ -283,7 +283,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 用肉棒戳弄着 ',
       defender.get_colored_name(),
-      ' 的S状结肠……】',
+      ' 的S状结肠】',
     ]);
 
   handlers[ero_hooks.stimulate_womb] = (attacker, defender) =>
@@ -292,7 +292,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 用肉棒隔着屁穴戳弄着 ',
       defender.get_colored_name(),
-      ' 的子宫……】',
+      ' 的子宫】',
     ]);
 
   handlers[ero_hooks.ask_fuck] = handlers[ero_hooks.ask_fuck_anal] = async (
@@ -306,7 +306,7 @@ module.exports = (handlers) => {
         attacker.get_colored_name(),
         ' 请求 ',
         defender.get_colored_name(),
-        ` 插入自己的${hook.hook === ero_hooks.ask_fuck ? '小穴' : '屁穴'}……】`,
+        ` 插入自己的${hook.hook === ero_hooks.ask_fuck ? '小穴' : '屁穴'}】`,
       ]);
     } else {
       return era.printAndWait([
@@ -316,7 +316,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ` 继续抽插自己的${
           hook.hook === ero_hooks.ask_fuck ? '小穴' : '屁穴'
-        }……】`,
+        }】`,
       ]);
     }
   };
@@ -334,7 +334,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ` 身上，以${
           hook.hook === ero_hooks.cowgirl ? '小穴' : '屁穴'
-        }吞没肉棒……】`,
+        }吞没肉棒】`,
       ]);
     } else {
       return era.printAndWait([
@@ -344,7 +344,7 @@ module.exports = (handlers) => {
         defender.get_colored_name(),
         ` 身上，以自己的${
           hook.hook === ero_hooks.cowgirl ? '小穴' : '屁穴'
-        }套弄着肉棒……】`,
+        }套弄着肉棒】`,
       ]);
     }
   };
@@ -359,7 +359,7 @@ module.exports = (handlers) => {
         hook.hook === ero_hooks.stimulate_glans_by_virgin ? '小穴' : '屁穴'
       }套弄着 `,
       defender.get_colored_name(),
-      ' 的肉棒……】',
+      ' 的肉棒】',
     ]);
 
   handlers[ero_hooks.ask_stimulate_g_spot] = async (attacker, defender) =>
@@ -368,7 +368,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 请求 ',
       defender.get_colored_name(),
-      ' 用肉棒刺激G点……】',
+      ' 用肉棒刺激G点】',
     ]);
 
   handlers[ero_hooks.ask_stimulate_large_intestine] = async (
@@ -380,7 +380,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 请求 ',
       defender.get_colored_name(),
-      ' 用肉棒刺激S状结肠……】',
+      ' 用肉棒刺激S状结肠】',
     ]);
 
   handlers[ero_hooks.ask_stimulate_womb] = async (attacker, defender) =>
@@ -389,6 +389,6 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 请求 ',
       defender.get_colored_name(),
-      ' 用肉棒隔着屁穴刺激子宫……】',
+      ' 用肉棒隔着屁穴刺激子宫】',
     ]);
 };

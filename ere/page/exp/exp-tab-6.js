@@ -12,7 +12,7 @@ const {
 } = require('#/page/exp/snippets');
 
 const CharaTalk = require('#/utils/chara-talk');
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { sex_colors } = require('#/data/color-const');
 const { baby_limit } = require('#/data/ero/orgasm-const');
@@ -98,11 +98,11 @@ module.exports = {
         }
         if (in_womb_semen) {
           virgin_exp_list.push(
-            join_list(
+            join_to_string(
               [
                 '大腿内侧星星点点……',
                 flags.mark_level >= 3
-                  ? `小穴内大概还有 ${in_womb_semen}ml 精液呢……`
+                  ? `小穴内大概还有 ${in_womb_semen.toLocaleString()}ml 精液呢……`
                   : undefined,
               ],
               '',
@@ -112,22 +112,37 @@ module.exports = {
         push_link_break(virgin_exp_list);
       }
       if (flags.show_exp) {
-        const virgin_touched_count = era.get(`exp:${chara.id}:阴部玩弄次数`),
-          penis_sex_count = era.get(`exp:${chara.id}:性交次数`),
-          clitoris_orgasm_count = era.get(`exp:${chara.id}:外阴高潮次数`),
-          virgin_orgasm_count = era.get(`exp:${chara.id}:阴道高潮次数`),
-          clitoris_semen = era.get(`exp:${chara.id}:外阴沾染精液量`),
-          cum_in_virgin = era.get(`exp:${chara.id}:内射次数`),
-          virgin_semen = era.get(`exp:${chara.id}:膣内精液量`),
-          fuck_sleep_penis = era.get(`exp:${chara.id}:阴道睡奸`),
-          sleep_virgin = era.get(`exp:${chara.id}:阴道被睡奸`),
-          virgin_semen_talent =
-            era.get(`talent:${chara.id}:榨精成瘾`) * 2 +
-            era.get(`talent:${chara.id}:子宫敏感`);
-        const virgin_exp = era.get(`cstr:${chara.id}:破处经历`),
-          unknown_virgin_exp = era.get(`cstr:${chara.id}:无自觉破处经历`),
-          cummed_exp = era.get(`cstr:${chara.id}:初次被内射经历`),
-          unknown_cummed_exp = era.get(`cstr:${chara.id}:无自觉初次被内射经历`);
+        const virgin_touched_count = era.get(`exp:${chara.id}:阴部玩弄次数`);
+        const penis_sex_count = era.get(`exp:${chara.id}:性交次数`);
+        const clitoris_orgasm_count = era.get(`exp:${chara.id}:外阴高潮次数`);
+        const virgin_orgasm_count = era.get(`exp:${chara.id}:阴道高潮次数`);
+        const clitoris_semen = era.get(`exp:${chara.id}:外阴沾染精液量`);
+        const cum_in_virgin = era.get(`exp:${chara.id}:内射次数`);
+        const virgin_semen = era.get(`exp:${chara.id}:膣内精液量`);
+        const fuck_sleep_penis = era.get(`exp:${chara.id}:阴道睡奸`);
+        const sleep_virgin = era.get(`exp:${chara.id}:阴道被睡奸`);
+        const virgin_semen_talent =
+          era.get(`talent:${chara.id}:榨精成瘾`) * 2 +
+          era.get(`talent:${chara.id}:子宫敏感`);
+        const virgin_exp = era.get(`cstr:${chara.id}:破处经历`);
+        const unknown_virgin_exp = era.get(`cstr:${chara.id}:无自觉破处经历`);
+        const cummed_exp = era.get(`cstr:${chara.id}:初次被内射经历`);
+        const unknown_cummed_exp = era.get(
+          `cstr:${chara.id}:无自觉初次被内射经历`,
+        );
+        let squirt_exp = era.get(`cstr:${chara.id}:初次潮吹经历`);
+        if (squirt_exp instanceof Array && squirt_exp.length === 0) {
+          squirt_exp = undefined;
+        }
+        let unknown_squirt_exp = era.get(`cstr:${chara.id}:无自觉初次潮吹经历`);
+        if (
+          unknown_squirt_exp instanceof Array &&
+          unknown_squirt_exp.length === 0
+        ) {
+          unknown_squirt_exp = undefined;
+        }
+        const squirt = era.get(`exp:${chara.id}:潮吹次数`);
+        const secretion = era.get(`exp:${chara.id}:爱液分泌量`);
         if (virgin_exp) {
           virgin_exp_list.push(get_filled_exp_str(virgin_exp, chara.id));
         }
@@ -139,12 +154,14 @@ module.exports = {
           }
           if (virgin_touched_count || penis_sex_count) {
             virgin_exp_list.push(
-              join_list(
+              join_to_string(
                 [
                   virgin_touched_count
-                    ? `被玩弄过 ${virgin_touched_count} 次`
-                    : '',
-                  penis_sex_count ? `被刺入过 ${penis_sex_count} 次` : '',
+                    ? `被玩弄过 ${virgin_touched_count.toLocaleString()} 次`
+                    : void 0,
+                  penis_sex_count
+                    ? `被刺入过 ${penis_sex_count.toLocaleString()} 次`
+                    : void 0,
                 ],
                 '，',
               ),
@@ -164,11 +181,13 @@ module.exports = {
           }
           if (clitoris_semen || virgin_semen) {
             virgin_exp_list.push(
-              join_list(
+              join_to_string(
                 [
-                  clitoris_semen ? `沾染过 ${clitoris_semen}ml 精液` : '',
+                  clitoris_semen
+                    ? `沾染过 ${clitoris_semen.toLocaleString()}ml 精液`
+                    : '',
                   virgin_semen
-                    ? `承受过 ${cum_in_virgin} 次射精，被射入过 ${virgin_semen}ml 精液`
+                    ? `承受过 ${cum_in_virgin.toLocaleString()} 次射精，被射入过 ${virgin_semen.toLocaleString()}ml 精液`
                     : '',
                 ],
                 '，',
@@ -183,20 +202,35 @@ module.exports = {
         }
         push_link_break(virgin_exp_list);
 
-        if (clitoris_orgasm_count || virgin_orgasm_count) {
+        if (squirt_exp) {
+          virgin_exp_list.push(get_filled_exp_str(squirt_exp, chara.id));
+        }
+        if (flags.show_all_exp || squirt_exp) {
+          if (unknown_squirt_exp) {
+            virgin_exp_list.push(
+              get_filled_exp_str(unknown_squirt_exp, chara.id),
+            );
+          }
+        }
+        if (squirt > 0) {
           virgin_exp_list.push(
-            join_list(
+            join_to_string(
               [
-                clitoris_orgasm_count
-                  ? `因小豆豆高潮 ${clitoris_orgasm_count} 次`
+                clitoris_orgasm_count > 0
+                  ? `因小豆豆高潮 ${clitoris_orgasm_count.toLocaleString()} 次`
                   : '',
-                virgin_orgasm_count
-                  ? `因小穴高潮 ${virgin_orgasm_count} 次`
+                virgin_orgasm_count > 0
+                  ? `因小穴高潮 ${virgin_orgasm_count.toLocaleString()} 次`
                   : '',
               ],
               '，',
             ),
           );
+          virgin_exp_list.push(
+            `共潮吹 ${squirt.toLocaleString().toLocaleString()} 次，分泌爱液 ${secretion.toLocaleString()}ml`,
+          );
+        } else if (secretion > 0) {
+          virgin_exp_list.push(`共分泌爱液 ${secretion.toLocaleString()}ml`);
         }
         push_link_break(virgin_exp_list);
 
@@ -205,13 +239,13 @@ module.exports = {
             virgin_exp_list.push(
               `曾趁熟睡之机侵犯过${
                 chara.id ? ` ${CharaTalk.me.name}` : '他人'
-              }${fuck_sleep_penis > 1 ? ` ${fuck_sleep_penis} 次` : ''}`,
+              }${fuck_sleep_penis > 1 ? ` ${fuck_sleep_penis.toLocaleString()} 次` : ''}`,
             );
           }
           if (sleep_virgin) {
             virgin_exp_list.push(
               `曾被趁熟睡之机侵犯过${
-                sleep_virgin > 1 ? ` ${sleep_virgin} 次` : ''
+                sleep_virgin > 1 ? ` ${sleep_virgin.toLocaleString()} 次` : ''
               }且没有察觉`,
             );
           }

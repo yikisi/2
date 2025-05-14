@@ -218,9 +218,7 @@ module.exports = class extends StrangeDayEvents {
     const cur_weeks = get('flag:当前回合数'),
       next_year = Math.floor((cur_weeks + 47) / 48) * 48;
     new MyEduMarks().god = next_year + get_random_value(13, 40) - cur_weeks;
-    if (cur_weeks % 48 >= 13 && cur_weeks % 48 <= 40) {
-      await print_event_name('三女神雕像下的许愿池', me);
-    }
+    await print_event_name('三女神雕像下的许愿池', me);
     await printAndWait('投个硬币许个愿吧……');
     const dice = Math.random(),
       god = sys_get_random_uma_god();
@@ -267,6 +265,7 @@ module.exports = class extends StrangeDayEvents {
       await printAndWait('捡起来的时候变成了两枚！');
       sys_change_money(50);
     }
+    return true;
   }
 
   /**
@@ -395,7 +394,7 @@ module.exports = class extends StrangeDayEvents {
         ...new Array(8).fill(0).map((_, i) => i),
         ...new Array(7).fill(0).map((_, i) => i + 10),
       ]);
-      print(['获得了奖品【', get(`itemname:${item}`).toUpperCase(), '！']);
+      print(['获得了奖品【', get(`itemname:${item}`).toUpperCase(), '】！']);
       add(`item:${item}`, 1);
       sys_like_chara(305, 0, get_random_value(0, 10));
       await waitAnyKey();

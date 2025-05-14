@@ -130,6 +130,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
     buffer.push(get_mark_cols(chara.id, '苦痛', pain_level));
     buffer.push(get_mark_cols(chara.id, '羞耻', shame_level));
     buffer.push(get_mark_cols(chara.id, '反抗', hate_level));
+    buffer.push({ content: [], type: 'text' });
     if (hate_level) {
       price_dict[0] = get_mark_price(chara.id, hate_level, meek_level / 2);
       price_dict[1] = price_dict[2] = get_mark_price(
@@ -217,11 +218,14 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       era.get(`cflag:${chara.id}:种族`) > 0
         ? era.get(`cflag:${chara.id}:气性`)
         : undefined,
+    edu:
+      era.get(`cflag:${chara.id}:种族`) > 0 &&
+      (!chara.id || era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48),
     id: chara.id,
-    sex: chara.sex_code,
     pregnant:
       inmon.slave === slavery_enum.pregnant ||
       era.get(`cflag:${chara.id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no,
+    sex: chara.sex_code,
   };
   const plugins = Object.values(inmon_plugin_dict)
     .filter((e) => e.level <= sex_level && e.condition(p_filter_param))
@@ -726,6 +730,9 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       }
     } else {
       inmon.set(p.id, 1 - inmon.on(p.id));
+      if (p.id === plugin_enum.sex_2) {
+        era.set(`cflag:${chara.id}:自主训练`, 0);
+      }
     }
   } else if (ret === 200) {
     pointer.sub -= 2;

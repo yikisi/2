@@ -378,7 +378,9 @@ module.exports = (handlers) => {
     await era.printAndWait('脚后一撤，尾巴随之一抖——');
     await era.printAndWait('一切都灌注在这一击之中！');
     if (
-      new RaceHistory(100).get_values().filter((e) => e.rank === 1).length >= 5
+      RaceHistory.get(100)
+        .get_values()
+        .filter((e) => e.rank === 1).length >= 5
     ) {
       await era.printAndWait([
         acute.get_colored_name(),

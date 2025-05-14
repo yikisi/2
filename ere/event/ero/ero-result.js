@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
+const {
+  sys_check_cuckold,
+  sys_check_yandere,
+} = require('#/system/chara/sys-calc-cheat');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
@@ -12,12 +15,10 @@ const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
 
 const { get_random_value } = require('#/utils/value-utils');
 
-const CharaInmon = require('#/data/ero/chara-inmon');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { part_names } = require('#/data/ero/part-const');
-const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
-const BasementOwners = require('#/data/event/basement-owners');
+const basement_owners = require('#/data/event/basement-owners');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
   ero_action_names,
@@ -77,7 +78,7 @@ handlers[ero_hooks.prison] = (id) => {
   }
   era.set(`status:${id}:爱意克制`, 0);
   era.set('flag:当前位置', location_enum.basement);
-  new BasementOwners().push(id);
+  basement_owners.push(id);
 };
 
 /**
@@ -164,10 +165,7 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
 handlers[ero_hooks.after_betrayed] = async (id, _, { partners }) => {
   const rape = era.get('tflag:强奸');
   era.add(`exp:${id}:被绿次数`, 1);
-  if (
-    era.get(`talent:${id}:绿帽癖`) > 0 ||
-    CharaInmon.get(id).on(plugin_enum.ntr)
-  ) {
+  if (sys_check_cuckold(id)) {
     sys_change_pressure(id, -get_random_value(500, 1000) * (1 + (rape > 0)));
     let wait_flag = sys_like_chara(id, 0, get_random_value(10, 20));
     return partners.reduce(

@@ -317,7 +317,9 @@ async function task() {
   writeFileSync(
     '../../ere/data/race/contestants/named.json',
     JSON.stringify(
-      contestants.named.sort((a, b) => a.level - b.level),
+      contestants.named
+        .sort((a, b) => a.level - b.level)
+        .filter((e) => e.level <= contestants.unnamed[0].level),
       undefined,
       2,
     ),

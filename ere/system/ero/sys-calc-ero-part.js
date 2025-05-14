@@ -67,17 +67,20 @@ module.exports = {
   },
   /** @param {EroParticipant} participants */
   clean_part_without_item: (...participants) =>
-    participants.forEach(
-      (p) =>
+    participants.forEach((p) => {
+      if (
         era.get(`tcvar:${p.id}:${part_touch[p.part]}接触部位`).part !==
-          part_enum.item && set_part(p.id, p.part, -1, -1),
-    ),
+        part_enum.item
+      ) {
+        set_part(p.id, p.part, -1, -1);
+      }
+    }),
   /** @param {number} ids */
   reset_parts(...ids) {
-    ids.forEach((chara_id) => {
-      touch_list.forEach((part) => {
-        era.set(`tcvar:${chara_id}:${part_touch[part]}接触部位`, -1);
-      });
-    });
+    ids.forEach((chara_id) =>
+      touch_list.forEach((part) =>
+        era.set(`tcvar:${chara_id}:${part_touch[part]}接触部位`, -1),
+      ),
+    );
   },
 };

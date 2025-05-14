@@ -23,7 +23,7 @@ module.exports = new UmaSkill(
     [
       UmaSkill.ability_type_enum.CurrentSpeedWithNaturalDeceleration,
       UmaSkill.ability_type_enum.HpRate,
-      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.LaneMoveSpeed,
     ],
     [
       UmaSkill.ability_type_enum.no,
@@ -44,14 +44,14 @@ module.exports = new UmaSkill(
     ],
   ],
   [
-    [10, 1, 0],
+    [30, 1, 1],
     [0, 0, 0],
   ],
   [
     [
       UmaSkill.target_type_enum.Self,
       UmaSkill.target_type_enum.Self,
-      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.Self,
     ],
     [
       UmaSkill.target_type_enum.no,
