@@ -523,6 +523,9 @@ async function sys_calc_orgasm(shown, ...ids) {
             if (c_part.part === part_enum.foot) {
               loc.p = part_enum.foot;
               loc.c = [c_part.owner];
+            } else if (c_part.part === part_enum.penis) {
+              loc.p = 101;
+              loc.c = [c_part.owner];
             } else if (c_part.part === part_enum.mouth && amount >= 2) {
               loc.p = 100;
               loc.c = [c_part.owner];

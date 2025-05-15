@@ -40,7 +40,9 @@ class EventMarks {
       Object.entries(this.#obj)
         .filter(([k]) => Number(k) !== event_hooks.week_start)
         .map((e) => e[1])
-        .reduce((p, c) => p + c, 0) + era.get(`cflag:${this.#id}:节日事件标记`)
+        .reduce((p, c) => p + c, 0) +
+      era.get(`cflag:${this.#id}:节日事件标记`) +
+      (era.get(`status:${this.#id}:生日`) === 2)
     );
   }
 

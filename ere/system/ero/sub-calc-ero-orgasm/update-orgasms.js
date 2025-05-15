@@ -135,8 +135,22 @@ function get_squirt_info(chara_id) {
     case part_enum.foot:
       actions.push('在 ', ...chara, ' 的脚下');
       break;
+    case part_enum.penis:
+      return [
+        '将 ',
+        {
+          content: ` ${squirt.toLocaleString()}ml `,
+          color: buff_colors[2],
+        },
+        ' 爱液喷在了 ',
+        ...chara,
+        ' 的龟头上。',
+      ];
     case 100:
       actions.push('朝 ', ...chara, ' 的嘴唇');
+      break;
+    case 101:
+      actions.push('朝 ', ...chara, ' 的肉棒');
   }
   if (era.get(`nowex:${chara_id}:潮吹`) > 0) {
     actions.push('喷出了 ');

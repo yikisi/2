@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
+const { clean_part_without_item } = require('#/system/ero/sys-calc-ero-part');
 const {
   check_lubrication,
   get_nipple_buff,
@@ -463,10 +464,9 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.ask_tit_job] = (attacker, defender, _, extra_flag) => {
-    sys_do_sex(
-      new EroParticipant(defender, part_enum.breast),
-      new EroParticipant(attacker, part_enum.penis),
-    );
+    const breast = new EroParticipant(defender, part_enum.breast);
+    clean_part_without_item(breast);
+    sys_do_sex(breast, new EroParticipant(attacker, part_enum.penis));
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel_from_check(
       defender,
@@ -481,10 +481,9 @@ module.exports = (handlers) => {
     _,
     extra_flag,
   ) => {
-    sys_do_sex(
-      new EroParticipant(defender, part_enum.breast),
-      new EroParticipant(attacker, part_enum.penis),
-    );
+    const breast = new EroParticipant(defender, part_enum.breast);
+    clean_part_without_item(breast);
+    sys_do_sex(breast, new EroParticipant(attacker, part_enum.penis));
     sys_do_sex(
       new EroParticipant(defender, part_enum.mouth),
       new EroParticipant(attacker, part_enum.penis),
@@ -498,10 +497,9 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.fuck_tit] = (attacker, defender, _, extra_flag) => {
-    sys_do_sex(
-      new EroParticipant(attacker, part_enum.penis),
-      new EroParticipant(defender, part_enum.breast),
-    );
+    const breast = new EroParticipant(defender, part_enum.breast);
+    clean_part_without_item(breast);
+    sys_do_sex(new EroParticipant(attacker, part_enum.penis), breast);
     add_meek_or_hate(defender, extra_flag.check - 10, (c) => c / 10);
     add_juel_from_check(
       defender,
@@ -516,10 +514,9 @@ module.exports = (handlers) => {
     _,
     extra_flag,
   ) => {
-    sys_do_sex(
-      new EroParticipant(attacker, part_enum.penis, -0.3),
-      new EroParticipant(defender, part_enum.breast),
-    );
+    const breast = new EroParticipant(defender, part_enum.breast);
+    clean_part_without_item(breast);
+    sys_do_sex(new EroParticipant(attacker, part_enum.penis, -0.3), breast);
     sys_do_sex(
       new EroParticipant(attacker, part_enum.penis, -0.3),
       new EroParticipant(defender, part_enum.mouth),
@@ -533,10 +530,9 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.tit_job] = (attacker, defender, _, extra_flag) => {
-    sys_do_sex(
-      new EroParticipant(attacker, part_enum.breast),
-      new EroParticipant(defender, part_enum.penis),
-    );
+    const breast = new EroParticipant(attacker, part_enum.breast);
+    clean_part_without_item(breast);
+    sys_do_sex(breast, new EroParticipant(defender, part_enum.penis));
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(attacker, '顺从', base_emotion_juel);
   };

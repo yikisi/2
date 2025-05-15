@@ -355,7 +355,7 @@ module.exports = (handlers) => {
     if (hook.arg) {
       return era.printAndWait([
         '【',
-        attacker.geted_name(),
+        attacker.get_colored_name(),
         ' 请求 ',
         defender.get_colored_name(),
         ' 将肉棒握在手心】',
