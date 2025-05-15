@@ -155,6 +155,7 @@ module.exports = {
             `每次饮下温热的精液，${drunk_semen_desc[drunk_semen_talent]}`,
           );
         }
+        push_link_break(mouth_exp_list);
         if (drunk_secretion_exp) {
           mouth_exp_list.push(
             get_filled_exp_str(drunk_secretion_exp, chara.id),
@@ -172,6 +173,7 @@ module.exports = {
             );
           }
         }
+        push_link_break(mouth_exp_list);
         if (drunk_milk_exp) {
           mouth_exp_list.push(
             get_filled_exp_str(drunk_milk_exp, chara.id),

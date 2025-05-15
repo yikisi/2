@@ -4,6 +4,7 @@ const basement_queue = require('#/event/basement-queue');
 const basement_factory = require('#/event/basement/basement-factory');
 const check_factory = require('#/event/check/check-factory');
 const daily_factory = require('#/event/daily/daily-factory');
+const CustomizedEdu = require('#/event/edu/edu-common');
 const edu_factory = require('#/event/edu/edu-factory');
 const ero_factory = require('#/event/ero/ero-factory');
 const love_factory = require('#/event/love/love-factory');
@@ -27,5 +28,7 @@ function sys_load_game() {
   love_factory.clean();
   mec_factory.clean();
 }
+
+CustomizedEdu.load_game = sys_load_game;
 
 module.exports = sys_load_game;

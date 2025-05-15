@@ -44,6 +44,8 @@ const {
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
 class CustomizedEdu extends ICustomizedEdu {
+  /** @type {function} */
+  static load_game;
   static common_event_count = 0;
 
   /**
