@@ -1,17 +1,12 @@
-const { get } = require('#/era-electron');
-
 const CustomizedEdu = require('#/event/edu/edu-common');
 const edu_result = require('#/event/edu/edu-result');
-const script_dict = require('#/event/script-dict.json');
+const CommonKojoFactory = require('#/event/factory-common');
 const punish_by_yandere = require('#/event/snippets/punish-by-yandere');
 
 const HookArg = require('#/data/event/hook-arg');
-const { first_child_id } = require('#/data/other-const');
 
 /** @type {Record<string,CustomizedEdu>} */
 const cons_dict = {};
-/** @type {Record<string,CustomizedEdu>} */
-const obj_dict = {};
 
 const current = new Date().getTime();
 
@@ -54,25 +49,19 @@ console.log(
   'ms',
 );
 
-/**
- * @param {number} chara_id
- * @returns {CustomizedEdu}
- */
-function get_custom_edu(chara_id) {
-  if (!obj_dict[chara_id]) {
-    const { n: script_name } =
-      chara_id >= first_child_id
-        ? { n: get(`callname:${chara_id}:-2`) }
-        : { n: chara_id };
-    obj_dict[chara_id] = new (cons_dict[
-      script_dict[script_name] || script_name
-    ] || CustomizedEdu)(chara_id);
+class EduFactory extends CommonKojoFactory {
+  constructor() {
+    super(cons_dict, CustomizedEdu, CustomizedEdu);
   }
-  return obj_dict[chara_id].get_this();
-}
 
-module.exports = {
-  get_custom_edu,
+  /**
+   * @param {number} id
+   * @returns {CustomizedEdu}
+   */
+  get_custom_edu(id) {
+    return this.get(id);
+  }
+
   /**
    * @param {number} chara_id
    * @param {number} stage
@@ -82,13 +71,17 @@ module.exports = {
   async run_custom_edu(chara_id, stage, extra_flag, event_object) {
     const hook = new HookArg(stage),
       _extra = extra_flag || {};
-    let ret = await get_custom_edu(chara_id)
-      .get_this()
-      .run(hook, _extra, event_object);
+    let ret = await this.get(chara_id).run(hook, _extra, event_object);
     if (!hook.override) {
       ret = (await edu_result(chara_id, hook, _extra)) || ret;
     }
     await punish_by_yandere(chara_id, stage);
     return ret;
-  },
-};
+  }
+}
+
+const edu_factory = new EduFactory();
+edu_factory.get_custom_edu = edu_factory.get_custom_edu.bind(edu_factory);
+edu_factory.run_custom_edu = edu_factory.run_custom_edu.bind(edu_factory);
+
+module.exports = edu_factory;

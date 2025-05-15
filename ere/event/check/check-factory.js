@@ -1,12 +1,7 @@
-const { get } = require('#/era-electron');
+const CustomizedCheck = require('#/event/check/check-common');
+const CommonKojoFactory = require('#/event/factory-common');
 
-const common_cons = require('#/event/check/check-common');
-const script_dict = require('#/event/script-dict.json');
-
-const { first_child_id } = require('#/data/other-const');
-
-const cons_dict = {},
-  obj_dict = {};
+const cons_dict = {};
 
 const current = new Date().getTime();
 
@@ -155,19 +150,22 @@ console.log(
   'ms',
 );
 
-module.exports = {
+class CheckFactory extends CommonKojoFactory {
+  constructor() {
+    super(cons_dict, CustomizedCheck);
+  }
+
   /**
-   * @param {number} chara_id
+   * @param {number} id
    * @returns {CustomizedCheck}
    */
-  get_custom_check(chara_id) {
-    if (obj_dict[chara_id]) {
-      return obj_dict[chara_id];
-    }
-    const script_name =
-        chara_id >= first_child_id ? get(`callname:${chara_id}:-2`) : chara_id,
-      class_cons =
-        cons_dict[script_dict[script_name] || script_name] || common_cons;
-    return (obj_dict[chara_id] = new class_cons(chara_id)).get_this();
-  },
-};
+  get_custom_check(id) {
+    return this.get(id);
+  }
+}
+
+const check_factory = new CheckFactory();
+check_factory.get_custom_check =
+  check_factory.get_custom_check.bind(check_factory);
+
+module.exports = check_factory;

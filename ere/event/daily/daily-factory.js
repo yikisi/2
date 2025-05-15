@@ -1,18 +1,13 @@
-const { get } = require('#/era-electron');
-
 const DailyChild = require('#/event/daily/daily-child');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const daily_result = require('#/event/daily/daily-result');
-const script_dict = require('#/event/script-dict.json');
+const CommonKojoFactory = require('#/event/factory-common');
 const punish_by_yandere = require('#/event/snippets/punish-by-yandere');
 
 const HookArg = require('#/data/event/hook-arg');
-const { first_child_id } = require('#/data/other-const');
 
 /** @type {Record<string,CustomizedDaily>} */
 const cons_dict = {};
-/** @type {Record<string,CustomizedDaily>} */
-const obj_dict = {};
 
 const current = new Date().getTime();
 
@@ -53,25 +48,19 @@ console.log(
   'ms',
 );
 
-/**
- * @param {number} chara_id
- * @returns {CustomizedDaily}
- */
-function get_custom_daily(chara_id) {
-  if (!obj_dict[chara_id]) {
-    const { n: script_name, c: cons } =
-      chara_id >= first_child_id
-        ? { n: get(`callname:${chara_id}:-2`), c: DailyChild }
-        : { n: chara_id, c: CustomizedDaily };
-    obj_dict[chara_id] = new (cons_dict[
-      script_dict[script_name] || script_name
-    ] || cons)(chara_id);
+class DailyFactory extends CommonKojoFactory {
+  constructor() {
+    super(cons_dict, CustomizedDaily, DailyChild);
   }
-  return obj_dict[chara_id].get_this();
-}
 
-module.exports = {
-  get_custom_daily,
+  /**
+   * @param {number} id
+   * @returns {CustomizedDaily}
+   */
+  get_custom_daily(id) {
+    return this.get(id);
+  }
+
   /**
    * @param {number} chara_id
    * @param {number} stage
@@ -81,13 +70,19 @@ module.exports = {
   async run_custom_daily(chara_id, stage, extra_flag, event_object) {
     const hook = new HookArg(stage),
       _extra = extra_flag || {};
-    let ret = await get_custom_daily(chara_id)
-      .get_this()
-      .run(hook, _extra, event_object);
+    let ret = await this.get(chara_id).run(hook, _extra, event_object);
     if (!hook.override) {
       ret = (await daily_result(chara_id, hook, _extra)) || ret;
     }
     await punish_by_yandere(chara_id, stage);
     return ret;
-  },
-};
+  }
+}
+
+const daily_factory = new DailyFactory();
+daily_factory.get_custom_daily =
+  daily_factory.get_custom_daily.bind(daily_factory);
+daily_factory.run_custom_daily =
+  daily_factory.run_custom_daily.bind(daily_factory);
+
+module.exports = daily_factory;

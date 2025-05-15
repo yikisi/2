@@ -238,6 +238,9 @@ function love_uma(id, val, shown = true) {
     50 * inmon.on(plugin_enum.love_d1) -
     100 * inmon.on(plugin_enum.love_d2);
   val = Math.floor((val * coff) / 100);
+  if (val > 6) {
+    val = 6;
+  }
   const force_limit = get_custom_mec(id).get_love_limit(),
     border = force_limit || Math.max(get_love_border(id), 50),
     love_limit = !era.get('flag:回合爱慕惩罚');

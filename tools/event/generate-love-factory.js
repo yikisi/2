@@ -26,18 +26,13 @@ const love_scripts = readdirSync('../../ere/event/love')
     }
   });
 
-let output = `const { get } = require('#/era-electron');
-
-const CustomizedLove = require('#/event/love/love-common');
-const script_dict = require('#/event/script-dict.json');
+let output = `const CustomizedLove = require('#/event/love/love-common');
 const punish_by_yandere = require('#/event/snippets/punish-by-yandere');
 
-const { first_child_id } = require('#/data/other-const');
+const CommonKojoFactory = require('#/event/factory-common');
 
 /** @type {Record<string,CustomizedLove>} */
 const cons_dict = {};
-/** @type {Record<string,CustomizedLove>} */
-const love_dict = {};
 
 const current = new Date().getTime();
 
@@ -55,7 +50,11 @@ console.log(
   'ms',
 );
 
-module.exports = {
+class LoveFactory extends CommonKojoFactory {
+  constructor() {
+    super(cons_dict, CustomizedLove);
+  }
+
   /**
    * @param {number} chara_id
    * @param {number} stage
@@ -63,20 +62,16 @@ module.exports = {
    * @param {EventObject} event_object
    */
   async run_custom_love(chara_id, stage, extra_flag, event_object) {
-    if (!love_dict[chara_id]) {
-      const script_name =
-        chara_id >= first_child_id ? get(\`callname:\${chara_id}:-2\`) : chara_id;
-      love_dict[chara_id] = new (cons_dict[
-        script_dict[script_name] || script_name
-      ] || CustomizedLove)(chara_id);
-    }
-    const ret = await love_dict[chara_id]
-      .get_this()
-      .run(stage, extra_flag, event_object);
+    const ret = await this.get(chara_id).run(stage, extra_flag, event_object);
     await punish_by_yandere(chara_id, stage);
     return ret;
-  },
-};
+  }
+}
+
+const love_factory = new LoveFactory();
+love_factory.run_custom_love = love_factory.run_custom_love.bind(love_factory);
+
+module.exports = love_factory;
 `;
 
 writeFileSync('../../ere/event/love/love-factory.js', output);

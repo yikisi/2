@@ -78,10 +78,14 @@ const sex_mark_desc = [
 ];
 
 class CustomizedEro {
-  /** @type {CustomizedEro} */
-  static me;
+  /** @type {function(number):CustomizedEro} */
+  static get_custom_ero;
   /** @type {function(number,number,*?):Promise} */
   static run_custom_ero;
+
+  get_this() {
+    return this;
+  }
 
   /**
    * @param {number} chara_id
@@ -611,7 +615,9 @@ class CustomizedEro {
    */
   async report_pregnant_between_weeks(chara, me, callname, hook, extra_flag) {
     if (extra_flag.mother_id === 0) {
-      return await CustomizedEro.me.report_pregnant_between_weeks(
+      return await CustomizedEro.get_custom_ero(
+        0,
+      ).report_pregnant_between_weeks(
         get_chara_talk(extra_flag.father_id),
         me,
         callname,
@@ -735,7 +741,11 @@ class CustomizedEro {
    */
   async have_baby(father, mother, child) {
     if (mother.id === 0) {
-      return await CustomizedEro.me.have_baby(father, mother, child);
+      return await CustomizedEro.get_custom_ero(0).have_baby(
+        father,
+        mother,
+        child,
+      );
     }
     if (era.get(`love:${mother.id || father.id}`) < 90) {
       era.drawLine();
