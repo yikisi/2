@@ -64,6 +64,14 @@ class CharaTalk {
     return this._color || get_chara_color(this.id);
   }
 
+  get full_name() {
+    if (this.actual_name === this.name) {
+      return this.name;
+    } else {
+      return `${this.name} (${this.actual_name})`;
+    }
+  }
+
   /** @returns {string} */
   get name() {
     return this._name || era.get(`callname:${this.id}:-2`);
@@ -127,11 +135,7 @@ class CharaTalk {
   }
 
   get_full_name() {
-    if (this.actual_name === this.name) {
-      return this.name;
-    } else {
-      return `${this.name} (${this.actual_name})`;
-    }
+    return this.full_name;
   }
 
   /** 成人角色的称呼 */
