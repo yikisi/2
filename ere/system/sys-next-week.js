@@ -431,24 +431,26 @@ async function sys_next_week() {
           // 出生
           // 头两胎在生产后+2cm
           pregnant_times < 2 && era.add(`cflag:${id}:臀围`, 2);
-          life_marks.waist_buff = 8;
           pregnant_stage = era.set(
             `cflag:${id}:妊娠阶段`,
             1 << pregnant_stage_enum.resume,
           );
-          era.set(
-            `cflag:${id}:妊娠回合计时`,
-            era.get(`cflag:${id}:种族`) ? 4 : 12,
-          );
+          if (era.get(`cflag:${id}:种族`) > 0) {
+            life_marks.waist_buff = 8;
+            era.set(`cflag:${id}:妊娠回合计时`, 4);
+          } else {
+            life_marks.waist_buff = 12;
+            era.set(`cflag:${id}:妊娠回合计时`, 12);
+          }
           // 一年即48周内会泌乳
           // 本回合会马上进行判定，所以+1
-          era.get(`talent:${id}:泌乳`) === 1 &&
+          if (era.get(`talent:${id}:泌乳`) === 1) {
             era.set(`cflag:${id}:泌乳回合计时`, 48 + 1);
+          }
           await have_baby(id);
-          if (id) {
+          if (id > 0) {
             if (
               era.get(`cflag:${id}:招募状态`) === recruit_flags.yes &&
-              growth_stage >= 2 &&
               era.get(`cflag:${id}:育成回合计时`) < 3 * 48
             ) {
               hentai_punish += 100;
@@ -456,7 +458,7 @@ async function sys_next_week() {
             }
           } else if (punish_level === 3) {
             hentai_reward += 100;
-          } else if (race) {
+          } else if (race > 0) {
             hentai_punish += 100;
             hentai_marks[1] = true;
           } else {
@@ -469,8 +471,15 @@ async function sys_next_week() {
     } else if (pregnant_stage === 1 << pregnant_stage_enum.resume) {
       sys_change_lust(id, lust_border.itch / 20);
       const timer = era.add(`cflag:${id}:妊娠回合计时`, -1);
-      life_marks.waist_buff -= 2;
+      if (era.get(`cflag:${id}:种族`) > 0) {
+        life_marks.waist_buff -= 2;
+      } else {
+        life_marks.waist_buff -= 1;
+      }
       if (timer === 0) {
+        if (life_marks.waist_buff < 0) {
+          life_marks.waist_buff = 0;
+        }
         pregnant_stage = era.set(
           `cflag:${id}:妊娠阶段`,
           1 << pregnant_stage_enum.no,
