@@ -162,3 +162,68 @@
       random: true
       lines:
         - %角色名% 清理着训练场上的碎石，以免有人跌倒时被尖锐的石头二次伤害。
+
+生日:
+  # author: 阿格尼斯数码公司
+  - 为 %角色名% 筹备了一场盛大的生日派对！
+  - random: true
+    lines:
+      - %角色名% 作为生日的主角，非常高兴的样子
+  - random: true
+    lines:
+      - %角色名% 在摇曳的烛光中闭上眼睛，许下了今年的生日愿望
+  - random: true
+    lines:
+      - %角色名% 被大家的快乐所感染，脸上一直带着笑容
+  - if: era.get(`talent:${d.id}:社交态度`) === -1 && era.get(`exp:${d.id}:过生日次数`) === 0
+    random: true
+    lines:
+      - 经常客串各种各样聚会场景的 %角色名%，完全没有意料到%玩家名%会为%她%策划一个生日派对，只是在惊喜中和你们度过了欢快的一天
+  - if: era.get(`talent:${d.id}:社交态度`) === -1 && era.get(`exp:${d.id}:过生日次数`) > 0
+    random: true
+    lines:
+      - 话虽如此，%角色名% 在得知你的热情后，成功把%玩家名%为%她%筹划的生日派对变成了从未预料过的全校性生日庆典……！
+  - if: era.get(`talent:${d.id}:社交态度`) === -1 && era.get(`exp:${d.id}:过生日次数`) > 0
+    random: true
+    lines:
+      - 话虽如此，%角色名% 似乎自己为自己筹办了另外一半的生日派对，两场生日派对融合在一起，产生了巨大的规模拓展……！
+  - if: era.get(`talent:${d.id}:社交态度`) === 1 && era.get(`exp:${d.id}:过生日次数`) === 0
+    random: true
+    lines:
+      - %角色名% 似乎未曾预料会有这样一个派对，看到派对上出现的众人显得有些战战兢兢
+      - if: era.get(`cflag:${d.id}:种族`) > 0
+        content: 不过，尾巴摇得很快的样子
+      - if: era.get(`cflag:${d.id}:种族`) === 0
+        content: 不过，很高兴的样子
+  - if: era.get(`talent:${d.id}:社交态度`) === 1 && era.get(`exp:${d.id}:过生日次数`) > 0
+    random: true
+    lines:
+      - 这次 %角色名% 意料之外地在每一个环节都没有生怯，一起和大家唱着生日歌
+  - if: era.get(`talent:${d.id}:社交态度`) === 1 && era.get(`exp:${d.id}:过生日次数`) > 0
+    random: true
+    lines:
+      - %角色名% 依然显得有些怯生生的，但在收到礼物时，还是非常高兴的样子
+  - if: era.get(`talent:${d.id}:社交态度`) === 1 && era.get(`exp:${d.id}:过生日次数`) > 0
+    random: true
+    lines:
+      - if: era.get(`cflag:${d.id}:种族`) > 0
+        content: %角色名% 默默吃着生日蛋糕，抖动着耳朵，听着身边他人谈论有关%她%的种种往事
+      - if: era.get(`cflag:${d.id}:种族`) === 0
+        content: %角色名% 默默吃着生日蛋糕，微笑着，听着身边他人谈论有关%她%的种种往事
+  - if: era.get(`talent:${d.id}:坦率程度`) === 1 && era.get(`exp:${d.id}:过生日次数`) === 0
+    random: true
+    lines:
+      - %角色名% 显然没意料到会有这样一个活动，但还是用「早就注意到」之类的说辞搪塞了问及是否惊喜的问题
+  - if: era.get(`talent:${d.id}:坦率程度`) === 1 && era.get(`exp:${d.id}:过生日次数`) > 0
+    random: true
+    lines:
+      - if: era.get(`cflag:${d.id}:种族`) > 0
+        content: %角色名% 一边抱怨着生日派对让%她%不满意的地方，一边摇着尾巴吃着生日蛋糕
+      - if: era.get(`cflag:${d.id}:种族`) === 0
+        content: %角色名% 一边抱怨着生日派对让%她%不满意的地方，一边大口地吃着生日蛋糕
+  - if: era.get(`talent:${d.id}:坦率程度`) === 1 && era.get(`exp:${d.id}:过生日次数`) > 0
+    random: true
+    lines:
+      - 为 %角色名% 筹备了一场盛大的生日派对！
+      - %角色名% 之前所总结一百个%玩家名%办事不力的说辞此刻终于派上了用场
+      - 不过，意料之外地称赞了这次生日活动办得很好

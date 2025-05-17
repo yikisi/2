@@ -49,7 +49,7 @@ class CustomizedDaily {
     this.id = chara_id;
   }
 
-  get dict() {
+  get #dict() {
     const dict = {};
     dict['角色名'] = era.get(`callname:${this.id}:-2`);
     dict['代表色'] = get_chara_color(this.id);
@@ -219,7 +219,7 @@ class CustomizedDaily {
 
   /** @author 雞雞 */
   good_morning() {
-    const dict = this.dict;
+    const dict = this.#dict;
     dict['骏川'] = era.get('callname:301:-2');
     kojo['回合开始'](dict);
   }
@@ -908,15 +908,10 @@ class CustomizedDaily {
         chara.get_colored_name(),
         ' 送上了生日祝福',
       ]);
+      await era.printAndWait([chara.get_colored_name(), ' 显得很高兴。']);
     } else {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 向 ',
-        chara.get_colored_name(),
-        ' 当面道了一声生日快乐。',
-      ]);
+      await kojo['生日'](this.#dict);
     }
-    await era.printAndWait([chara.get_colored_name(), ' 显得很高兴。']);
   }
 
   /**
