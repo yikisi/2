@@ -54,22 +54,24 @@ async function npc_common(
   func_cb,
   back_cb,
 ) {
-  const relation = get_relation_info(chara.id),
-    celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1),
-    love = get_love_info(chara.id),
-    relation_check =
-      era.get(`relation:${chara.id}:0`) <= 225 &&
-      era.get(`love:${chara.id}`) < 50,
-    is_awake = sys_check_awake(chara.id),
-    player_base = {
-      stamina: era.get('base:0:体力'),
-      time: era.get('base:0:精力'),
-    },
-    chara_base = {
-      stamina: era.get(`base:${chara.id}:体力`),
-      time: era.get(`base:${chara.id}:精力`),
-    },
-    is_recruit = era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes;
+  const relation = get_relation_info(chara.id);
+  const celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1);
+  const love = get_love_info(chara.id);
+  const relation_check =
+    era.get(`relation:${chara.id}:0`) <= 225 &&
+    era.get(`love:${chara.id}`) < 50;
+  const is_awake = sys_check_awake(chara.id);
+  const player_base = {
+    stamina: era.get('base:0:体力'),
+    time: era.get('base:0:精力'),
+  };
+  const chara_base = {
+    stamina: era.get(`base:${chara.id}:体力`),
+    time: era.get(`base:${chara.id}:精力`),
+  };
+  const is_recruit =
+    era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes;
+  const image = era.get(`cstr:${chara.id}:头像`);
   era.setVerticalAlign('middle');
   era.printInColRows(
     [
@@ -86,7 +88,7 @@ async function npc_common(
         },
         {
           config: { width: 21 },
-          names: `${era.get(`cstr:${chara.id}:头像`)}_半身`,
+          names: `${image}_私_半身\t${image}_半身`,
           type: 'image.whole',
         },
       ],

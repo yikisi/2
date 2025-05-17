@@ -15,17 +15,35 @@ const file_name_index = header.findIndex((e) => e === '文件名'),
 
 const buffer = {
   others: '\ufeff',
-  race: '\ufeffdefault,chr_icon_0000.png,0,0,200,219\n',
+  race: `\ufeffdefault,chr_icon_0000.png,0,0,200,219
+砂糖,chr_icon_2008_200801_01.png,0,0,200,219
+砂糖_半身,chara_stand_2008_200801.png,0,0,512,512
+砂糖2,chr_icon_9045_904501_01.png,0,0,200,219
+砂糖2_半身,chara_stand_9045_904501.png,0,0,512,512
+砂糖_夏,chr_icon_9045_904501_01.png,0,0,200,219
+砂糖_夏_半身,chara_stand_9045_904501.png,0,0,512,512
+砂糖_冬,chr_icon_9045_904501_01.png,0,0,200,219
+砂糖_冬_半身,chara_stand_9045_904501.png,0,0,512,512
+砂糖_私,chr_icon_9045_904501_01.png,0,0,200,219
+砂糖_私_半身,chara_stand_9045_904501.png,0,0,512,512
+砂糖_运,chr_icon_2008_200801_01.png,0,0,200,219
+砂糖_运_半身,chara_stand_2008_200801.png,0,0,512,512
+`,
   sportswear: '\ufeff',
   'uniform-summer': '\ufeff',
   'uniform-winter': '\ufeff',
 };
 
-const chara_lines = lines.map((e) => {
-  const l = e.split(',');
-  console.log(l[file_name_index]);
-  return { id: l[file_name_index], alias: l[image_index].replace(/\s+$/, '') };
-});
+const chara_lines = lines
+  .map((e) => e.split(','))
+  .filter((l) => l[file_name_index] !== '9045')
+  .map((l) => {
+    console.log(l[file_name_index]);
+    return {
+      id: l[file_name_index],
+      alias: l[image_index].replace(/\s+$/, ''),
+    };
+  });
 
 function check_and_add_to_csv(file_name, img_name, img_regex) {
   const icon = `chr_icon_${img_regex}_01.png`;

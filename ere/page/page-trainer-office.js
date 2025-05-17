@@ -178,7 +178,7 @@ async function page_trainer_office() {
         '，今后为了中央特雷森的荣光一起努力吧。',
       ]);
       await trainer0.say_and_wait([
-        '啊，贵安，我是 ',
+        '贵安，我是 ',
         trainer0.get_colored_actual_name(),
         '，今后请您多多指教。',
       ]);

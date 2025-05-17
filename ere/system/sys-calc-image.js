@@ -52,7 +52,10 @@ module.exports = {
         } else if (holiday === 39) {
           ret = [`${base}_万圣`];
         }
-        ret.push(`${base}_私`, `${base}_${era.get('flag:季节') ? '夏' : '冬'}`);
+        ret.push(
+          `${base}_私`,
+          `${base}_${era.get('flag:季节') > 0 ? '夏' : '冬'}`,
+        );
         break;
       case location_enum.race:
         if (era.get(`cflag:${chara_id}:招募状态`) !== recruit_flags.yes) {
@@ -81,7 +84,7 @@ module.exports = {
         if (!(era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)) {
           ret.push(`${base}_私`);
         }
-        ret.push(`${base}_${era.get('flag:季节') ? '夏' : '冬'}`);
+        ret.push(`${base}_${era.get('flag:季节') > 0 ? '夏' : '冬'}`);
     }
     ret.push(base, 'default');
     return ret;

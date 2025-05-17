@@ -175,21 +175,24 @@ async function page_visitors() {
       setHorizontalAlign('space-around');
       printInColRows(
         [{ content: '要和谁交谈？', type: 'text' }],
-        ...visitor_list.map((e) => ({
-          columns: [
-            {
-              names: `${get(`cstr:${e}:头像`)}_半身`,
-              type: 'image.whole',
-            },
-            {
-              accelerator: e,
-              config: { align: 'center' },
-              content: get(`callname:${e}:-2`),
-              type: 'button',
-            },
-          ],
-          config: { width: 4 },
-        })),
+        ...visitor_list.map((e) => {
+          const image = get(`cstr:${e}:头像`);
+          return {
+            columns: [
+              {
+                names: `${image}_私_半身\t${image}_半身`,
+                type: 'image.whole',
+              },
+              {
+                accelerator: e,
+                config: { align: 'center' },
+                content: get(`callname:${e}:-2`),
+                type: 'button',
+              },
+            ],
+            config: { width: 4 },
+          };
+        }),
         [{ accelerator: 999, type: 'button', content: '离开' }],
       );
       setHorizontalAlign('start');
