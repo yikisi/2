@@ -45,16 +45,18 @@ const { location_name } = require('#/data/locations');
 const money_list = [0, 1500, 5000, 10000];
 
 class CustomizedDaily {
+  /** @type {number} */
+  id;
+
   constructor(chara_id) {
     this.id = chara_id;
   }
 
   get #dict() {
-    const dict = {};
+    const dict = { id: this.id };
     dict['角色名'] = era.get(`callname:${this.id}:-2`);
     dict['代表色'] = get_chara_color(this.id);
     dict['玩家名'] = era.get('callname:0:-2');
-    dict.id = this.id;
     if (era.get(`cflag:${this.id}:性别`) === 1) {
       dict['马娘'] = '马郎';
       dict['她'] = '他';
@@ -308,7 +310,9 @@ class CustomizedDaily {
   // eslint-disable-next-line no-unused-vars
   async growth(stage) {}
 
-  async load_talk() {}
+  async load_talk() {
+    await kojo['读档对话'](this.#dict);
+  }
 
   /** @author 雞雞 */
   async office_cook() {
