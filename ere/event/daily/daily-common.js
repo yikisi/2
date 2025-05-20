@@ -2,6 +2,7 @@
  * @file 日常地文
  * @author 雞雞
  * @author KUN
+ * @author 幽白書
  * @author 无名黑奴
  */
 const era = require('#/era-electron');

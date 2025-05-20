@@ -1,6 +1,7 @@
 回合开始:
   sync: true
   lines:
+    # @author 雞雞
     - random: true
       lines:
         - %角色名% 竖起了大拇指。
@@ -18,6 +19,7 @@
       random: true
       lines:
         - %角色名% 正在接待处向 %骏川% 查询着什么。
+    # @author 幽白書
     - if: era.get(`talent:${d.id}:情感活动`) === 1
       random: true
       lines:
@@ -162,9 +164,33 @@
       random: true
       lines:
         - %角色名% 清理着训练场上的碎石，以免有人跌倒时被尖锐的石头二次伤害。
+    - if: era.get(`talent:${d.id}:反抗意愿`) === 1
+      random: true
+      lines:
+        - %玩家名% 的日程表被 %角色名% 用马克笔划掉，改成了 %角色名% 安排的事情。
+    - if: era.get(`talent:${d.id}:反抗意愿`) === 1
+      random: true
+      lines:
+        - %玩家名% 的训练员室中被塞满了被 %角色名% 不由分说摆放在房间里的各式东西。
+    - if: era.get(`talent:${d.id}:反抗意愿`) === 1
+      random: true
+      lines:
+        - 明明没有事先说好，%角色名% 却一副理所当然的让 %玩家名% 今天放学后陪 %角色名% 去买东西。
+    - if: era.get(`talent:${d.id}:反抗意愿`) === -1
+      random: true
+      lines:
+        - %玩家名% 发现 %角色名% 站在训练员室门前反复抬手，却始终不敢敲响训练员室的门。
+    - if: era.get(`talent:${d.id}:反抗意愿`) === -1
+      random: true
+      lines:
+        - %角色名% 被突然启动的洒水器吓得跌坐在地，满脸错愕。
+    - if: era.get(`talent:${d.id}:反抗意愿`) === -1
+      random: true
+      lines:
+        - 训练员室里的储物柜轻微晃动着，%角色名% 正蜷缩在里面躲避突如其来的并跑邀请。
 
 生日:
-  # author: 阿格尼斯数码公司
+  # @author 阿格尼斯数码公司
   - 为 %角色名% 筹备了一场盛大的生日派对！
   - random: true
     lines:

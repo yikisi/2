@@ -218,6 +218,7 @@ module.exports = async () => {
     ],
     ['地下室地文', ['露娜俘虏', { isDivider: true }, '无名黑奴']],
     ['特殊角色（临时）', '无名黑奴'],
+    ['麦吉罗的呼唤', ['イーウィヤ', { isDivider: true }, '无名黑奴']],
   ];
   set_chara_ero_image();
   const gameBase = era.get('gamebase');

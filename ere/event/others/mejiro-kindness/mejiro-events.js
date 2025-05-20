@@ -1,3 +1,7 @@
+/**
+ * @file 麦吉罗的呼唤 随机事件
+ * @author イーウィヤ
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
