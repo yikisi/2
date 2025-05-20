@@ -34,7 +34,6 @@ cons_dict[341] = require('#/event/love/love-341');
 cons_dict[342] = require('#/event/love/love-342');
 cons_dict[343] = require('#/event/love/love-343');
 cons_dict[400] = require('#/event/love/love-400');
-cons_dict['emperor'] = require('#/event/love/love-emperor');
 
 console.log(
   '[love-factory.js] constructor dictionary init done!',
