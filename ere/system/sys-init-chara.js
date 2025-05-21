@@ -368,8 +368,8 @@ module.exports = {
       300 * sys_personal_achievement.get(chara_id);
     era.set(`relation:${chara_id}:0`, Math.min(relation, 600));
     if (
-      era.get(`cflag:${chara_id}:种族`) &&
-      era.get(`talent:${chara_id}:病娇`)
+      era.get(`cflag:${chara_id}:种族`) > 0 &&
+      era.get(`talent:${chara_id}:病娇`) > 0
     ) {
       yandere_list.push(chara_id);
     }

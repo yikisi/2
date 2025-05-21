@@ -63,6 +63,7 @@ const {
 const { location_enum } = require('#/data/locations');
 const { max_chara_id } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 
 async function sys_next_week() {
   const me = get_chara_talk(0),
@@ -188,7 +189,7 @@ async function sys_next_week() {
     if (era.get('flag:性技自主学习') && sys_check_awake(id)) {
       auto_update_ero_skills(id);
     }
-    if (era.get(`talent:${id}:病娇`) === 2) {
+    if (sys_check_yandere(id, (e) => e === 2)) {
       const life_event_marks = LifeEventMarks.get_marks(id);
       const inmon = CharaInmon.get(id);
       let heal = inmon.on(plugin_enum.no_yand) || inmon.on(plugin_enum.ntr);

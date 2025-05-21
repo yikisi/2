@@ -225,6 +225,7 @@ class CustomizedCheck {
   /** @returns {boolean} */
   is_prison() {
     if (
+      !era.get(`cflag:${this.id}:种族`) ||
       common_no_action_check(this.id) ||
       era.get('flag:当前位置') === location_enum.basement ||
       era.get('cflag:0:位置') !== 0 ||
@@ -283,6 +284,7 @@ class CustomizedCheck {
   is_rape_in_sleeping() {
     const inmon = CharaInmon.get(this.id);
     if (
+      !era.get(`cflag:${this.id}:种族`) ||
       common_no_action_check(this.id) ||
       check_want_to_escape(this.id) ||
       inmon.slave > 0 ||
@@ -352,8 +354,7 @@ class CustomizedCheck {
     ) {
       return 0;
     }
-    let ratio = 0;
-    ratio =
+    let ratio =
       Math.log(Math.max(6 * love - era.get(`relation:${this.id}:0`), 1)) /
         log_600m4 +
       Math.pow(2, era.get(`base:${this.id}:性欲`) / 1250 - 8) *

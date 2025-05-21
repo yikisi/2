@@ -42,7 +42,7 @@ const handlers = {};
             name: '「请来帮助我吧！」（招募）',
             handle() {
               set(`cflag:${e}:招募状态`, recruit_flags.yes);
-              if (get(`talent:${e}:病娇`)) {
+              if (get(`talent:${e}:病娇`) > 0) {
                 yandere_list.push(e);
               }
               return printAndWait([

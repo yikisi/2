@@ -13,10 +13,10 @@ module.exports = {
   },
   /**
    * @param {number} id
-   * @param {function(number):boolean} cb
+   * @param {function(number):boolean} [cb]
    * @param {CharaInmon} [inmon]
    */
-  sys_check_yandere(id, cb, inmon = CharaInmon.get(id)) {
+  sys_check_yandere(id, cb = (e) => e > 0, inmon = CharaInmon.get(id)) {
     return (
       cb(era.get(`talent:${id}:病娇`)) &&
       !inmon.on(plugin_enum.no_yand) &&

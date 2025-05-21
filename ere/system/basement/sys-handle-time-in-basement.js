@@ -31,11 +31,14 @@ const {
   action_type_enum,
   basement_status_enum,
 } = require('#/data/basement-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const BasementAction = require('#/data/event/basement-action');
 const basement_owners = require('#/data/event/basement-owners');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { location_enum } = require('#/data/locations');
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 
 const basement_just_status =
     (1 << basement_status_enum.just_back) +
@@ -391,11 +394,13 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         break;
       case action_type_enum.rescue:
         if (my_life_marks.b_now >= 0) {
-          const owner = basement_owners.get(0),
-            life_marks_o = LifeEventMarks.get_marks(owner),
-            relation_check =
-              (era.get('flag:极端行为限制') || 1) *
-                era.get(`love:${action.chara_id}`) -
+          const owner = basement_owners.get(0);
+          const life_marks_o = LifeEventMarks.get_marks(owner);
+          const inmon = CharaInmon.get(action.chara_id);
+          const relation_check =
+            !inmon.on(plugin_enum.meek) &&
+            (era.get('flag:极端行为限制') || 1) *
+              era.get(`love:${action.chara_id}`) -
               era.get(`relation:${action.chara_id}:0`);
           my_life_marks.b_now = Math.min(my_life_marks.b_now, 1);
           // 0-无事发生，1-趁人不备救援成功，2-趁人不备绑回地下室，3-同流合污，4-击败对方救援成功，5-击败对方绑回地下室
@@ -411,8 +416,8 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             era.get(`relation:${owner}:${action.chara_id}`) > 375 &&
             era.get(`relation:${action.chara_id}:${owner}`) > 75 &&
             relation_check > 0 &&
-            !era.get(`talent:${owner}:病娇`) &&
-            !era.get(`talent:${action.chara_id}:病娇`)
+            !sys_check_yandere(owner) &&
+            !sys_check_yandere(action.chara_id)
           ) {
             rescue_result_type = 3;
           } else if (
@@ -429,7 +434,7 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
             sys_change_pressure(action.chara_id, get_random_value(500, 1000));
           }
           const basement_scripts = get_custom_basement(action.chara_id);
-          era.print('【救援赶到】');
+          era.print('【救援到达】');
           switch (rescue_result_type) {
             case 0:
               await basement_scripts.rescue_fail(owner);
