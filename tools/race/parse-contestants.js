@@ -14,6 +14,7 @@ async function task() {
     skill_set_dict = {};
   [
     ...(await prisma.daily_race_npc.findMany()),
+    ...(await prisma.legend_race_boss_npc.findMany()),
     ...(await prisma.legend_race_npc.findMany()),
     ...(await prisma.single_mode_npc.findMany()),
   ].forEach((e) => {
@@ -319,7 +320,7 @@ async function task() {
     JSON.stringify(
       contestants.named
         .sort((a, b) => a.level - b.level)
-        .filter((e) => e.level <= contestants.unnamed[0].level),
+        .filter((e) => e.level >= contestants.unnamed[0].level),
       undefined,
       2,
     ),

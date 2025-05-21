@@ -318,6 +318,9 @@ function sub_simulate_skill(
       if (order_rate < 50) {
         uma.race.conditionParams.order_rate_out50_continue = 0;
       }
+      if (order_rate < 70) {
+        uma.race.conditionParams.order_rate_out70_continue = 0;
+      }
       if (order_rate > 80) {
         uma.race.conditionParams.order_rate_in80_continue = 0;
       }

@@ -73,6 +73,7 @@ class ConditionParams {
   order_rate_out20_continue;
   order_rate_out40_continue;
   order_rate_out50_continue;
+  order_rate_out70_continue;
   overtake_target_no_order_up_time;
   overtake_target_time;
   phase;

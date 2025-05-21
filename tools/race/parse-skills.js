@@ -635,6 +635,7 @@ async function chara_skill() {
   buffer += '\n\nconst skill_sets = {0:[],\n';
   const skill_sets = [
     ...(await prisma.daily_race_npc.findMany()),
+    ...(await prisma.legend_race_boss_npc.findMany()),
     ...(await prisma.legend_race_npc.findMany()),
     ...(await prisma.single_mode_npc.findMany()),
   ]
