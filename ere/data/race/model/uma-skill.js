@@ -128,7 +128,7 @@ const ability_usage_enum = {
   MultiplyUAFWins: 26,
   MultiplyCookingPt: 27,
   MultiplyResearchLv: 28,
-  FuckJap: 30,
+  Love: 30,
 };
 
 const target_type_enum = {

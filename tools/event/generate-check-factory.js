@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const relative_path = '../../ere/event/check';
+const relative_path = join(__dirname, '../../ere/event/check');
 
 const check_scripts = readdirSync(relative_path)
   .filter(
@@ -75,7 +76,7 @@ check_factory.get_custom_check =
 module.exports = check_factory;
 `;
 
-writeFileSync('../../ere/event/check/check-factory.js', output);
+writeFileSync(join(relative_path, 'check-factory.js'), output);
 
 console.log(
   `[generate-check-factory.js] registers ${check_scripts.length} check scripts`,

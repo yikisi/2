@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   101321,
   'Circulating Love♡',
-  '临近终盘的某个位置时速度稍微加快，中距离比赛时会根据从粉丝们那里收到的爱，最多增加3倍效果',
+  '临近终盘的某个位置时速度稍微加快，中距离比赛时会根据对训练员的爱，最多增加3倍效果',
   10132,
   1,
   18,
@@ -42,7 +42,7 @@ module.exports = new UmaSkill(
   ],
   [
     [
-      UmaSkill.ability_usage_enum.FuckJap,
+      UmaSkill.ability_usage_enum.Love,
       UmaSkill.ability_usage_enum.Direct,
       UmaSkill.ability_usage_enum.Direct,
     ],
