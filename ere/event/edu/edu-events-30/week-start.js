@@ -65,6 +65,7 @@ module.exports = (handlers) => {
       rice.get_colored_name(),
       ' 一起向闪耀系列发起的挑战开始了！',
     ]);
+    bourbon.name = undefined;
   };
 
   handlers[47 + 1] = async (rice, me, callname, self_name, flags) => {
@@ -357,6 +358,7 @@ module.exports = (handlers) => {
       ]);
       flags.wait_flag = get_attr_and_print_in_event(30, [0, 0, 0, 10], 0);
     }
+    bourbon.name = undefined;
   };
 
   handlers[95 + 6] = async (rice, me, callname, self_name) => {

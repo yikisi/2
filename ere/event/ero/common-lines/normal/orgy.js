@@ -23,7 +23,9 @@ async function common_ask_spit_roast(attacker, defender, supporter, hook) {
   if (hook.arg) {
     await era.printAndWait([
       attacker.get_colored_name(),
-      ` ${Math.random() < 0.5 ? '张开双腿' : '四肢着地'}摇晃着屁股，示意 `,
+      ' ',
+      Math.random() < 0.5 ? '张开双腿' : '四肢着地',
+      '摇晃着屁股，示意 ',
       defender.get_colored_name(),
       ' 插入自己的',
       part_name,
@@ -171,9 +173,14 @@ class EroNormalOrgy extends EroOrgy {
         ' 与 ',
         supporter.get_colored_name(),
         ' 中间，',
-        defender_penis === supporter_penis
-          ? `两根 ${penis_desc[defender_penis]} 的`
-          : `${penis_desc[defender_penis]} 与 ${penis_desc[supporter_penis]} `,
+        ...(defender_penis === supporter_penis
+          ? ['两根 ', penis_desc[defender_penis], ' 的']
+          : [
+              penis_desc[defender_penis],
+              ' 与 ',
+              penis_desc[supporter_penis],
+              ' ',
+            ]),
         ' 的肉棒交替被 ',
         attacker.get_colored_name(),
         ' 淫荡的小穴吞没',
@@ -258,11 +265,11 @@ class EroNormalOrgy extends EroOrgy {
         defender.get_colored_name(),
         ' 躺在床上与 ',
         supporter.get_colored_name(),
-        ` 互相舔舐对方的 ${
-          ['小穴', '肉棒和小穴', '小穴和肉棒', '肉棒'][
-            2 * !!get_penis_size(defender.id) + !!get_penis_size(supporter.id)
-          ]
-        }`,
+        ' 互相舔舐对方的 ',
+        ['小穴', '肉棒和小穴', '小穴和肉棒', '肉棒'][
+          2 * !!get_penis_size(defender.id) + !!get_penis_size(supporter.id)
+        ],
+        '，',
       ]);
       await era.printAndWait([
         attacker.get_colored_name(),

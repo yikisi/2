@@ -27,6 +27,8 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { run_custom_edu } = require('#/event/edu/edu-factory');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { get_celebration } = require('#/data/info-generator');
@@ -51,7 +53,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
     celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1),
     cur_location = era.get('flag:当前位置'),
     cur_weeks = era.get('flag:当前回合数'),
-    event_marks = new EventMarks(chara_id),
+    event_marks = EventMarks.get(chara_id),
     registered_race = sys_reg_race(chara_id).curr,
     personal_action = get_custom_check(chara_id).get_personal_action(),
     player_base = {
@@ -193,7 +195,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
         content: '旅行观光',
         type: 'button',
       },
-      chara_id && era.get(`cflag:${chara_id}:节日事件标记`)
+      chara_id > 0 && era.get(`cflag:${chara_id}:节日事件标记`) > 0
         ? {
             accelerator: 206,
             config: {
@@ -209,15 +211,31 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
             content: `一起庆祝 ${celebration}`,
             type: 'button',
           }
-        : { content: '', type: 'text' },
-      personal_action.name
+        : { content: [], type: 'text' },
+      chara_id > 0 && era.get(`status:${chara_id}:生日`) === 2
         ? {
             accelerator: 207,
+            config: {
+              buttonType: 'danger',
+              disabled:
+                !sys_check_awake(chara_id) ||
+                !sys_check_awake(0) ||
+                era.get(`base:${chara_id}:精力`) < 50 ||
+                era.get('base:0:精力') < celebration_cost,
+              width: 6,
+            },
+            content: '庆祝生日',
+            type: 'button',
+          }
+        : { content: [], type: 'text' },
+      personal_action.name
+        ? {
+            accelerator: 208,
             config: { width: 6 },
             content: personal_action.name,
             type: 'button',
           }
-        : { content: '', type: 'text' },
+        : { content: [], type: 'text' },
     ],
     [
       {
@@ -308,10 +326,28 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.celebration, chara_id)())) {
         era.drawLine();
+        era.print([
+          '【和 ',
+          get_chara_talk(chara_id).get_colored_name(),
+          ' 一起庆祝了 ',
+          celebration,
+          '】',
+        ]);
         await run_custom_daily(chara_id, event_hooks.celebration, {});
       }
       break;
     case 207:
+      era.drawLine();
+      sys_change_attr_and_print(0, '精力', -celebration_cost);
+      sys_change_attr_and_print(chara_id, '精力', -50);
+      era.print([
+        '【向 ',
+        get_chara_talk(chara_id).get_colored_name(),
+        ' 祝贺生日快乐】',
+      ]);
+      await run_custom_daily(chara_id, event_hooks.birthday, {});
+      break;
+    case 208:
       era.drawLine();
       await personal_action.handle();
       await era.waitAnyKey();
@@ -338,6 +374,7 @@ module.exports = async (chara_id, save_and_next_week, flags) => {
     case 999:
       flags.week_start = true;
   }
-  flags.week_start &&
-    (await save_and_next_week(chara_id, cur_location, location_enum.hotel));
+  if (flags.week_start) {
+    await save_and_next_week(chara_id, cur_location, location_enum.hotel);
+  }
 };

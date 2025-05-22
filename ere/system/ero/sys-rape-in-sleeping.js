@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const { check_satisfied } = require('#/system/ero/sys-calc-ero-status');
 const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
 const {
@@ -14,7 +15,7 @@ const page_ero = require('#/page/page-ero');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
+const { get_custom_ero } = require('#/event/ero/ero-factory');
 
 const debug = false;
 const default_my_filter = new Array(5).fill(false);
@@ -48,7 +49,8 @@ async function sys_rape_in_sleeping(id, supporter = 0) {
         !era.get('status:0:马跳S') &&
         era.get('base:0:体力') > 0 &&
         (temp = era.get('ex:0:TotalEX')) > 0 &&
-        Math.random() < Math.min(temp, 5) * 0.05)
+        Math.random() < Math.min(temp, 5) * 0.05) ||
+      action_count > 66
     ) {
       flag_rape = false;
     }
@@ -64,15 +66,16 @@ async function sys_rape_in_sleeping(id, supporter = 0) {
   if (wake_up) {
     era.set('status:0:沉睡', 0);
     await era.printAndWait([
-      '强烈的刺激使 ',
+      '【强烈的刺激使 ',
       get_chara_talk(0).get_colored_name(),
       ' 从睡梦中惊醒，发现 ',
       get_chara_talk(id).get_colored_name(),
       ...(supporter > 0
         ? [' 与 ', get_chara_talk(supporter).get_colored_name()]
         : []),
-      ' 伏在身上！',
+      ' 伏在身上！】',
     ]);
+    await get_custom_ero(id).raping_start(supporter);
     await page_ero(undefined, true);
   }
   await end_ero_and_show_result(wake_up);

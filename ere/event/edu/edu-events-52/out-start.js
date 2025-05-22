@@ -26,7 +26,7 @@ module.exports = async (urara, me, callname, hook, event_object) => {
     add_event(hook.hook, event_object);
     return false;
   }
-  new EventMarks(0).sub(event_hooks.out_start);
+  EventMarks.get(0).sub(event_hooks.out_start);
   await print_event_name('人见人爱', urara);
   await era.printAndWait([
     '结束了今天的工作后，',

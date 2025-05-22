@@ -611,7 +611,7 @@ module.exports = (handlers) => {
   /** @this CustomizedEdu */
   handlers.palace = async function (digital, me) {
     await CustomizedEdu.common_palace(digital, me);
-    const races = new RaceHistory(19).get();
+    const races = RaceHistory.get(19).get();
     if (
       check_aim_race(races, race_enum.hyac_sta, 1, 1) &&
       check_aim_race(races, race_enum.nhk_cup, 1, 1) &&

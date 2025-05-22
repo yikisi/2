@@ -39,7 +39,7 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(7).get(),
+    const races = RaceHistory.get(7).get(),
       c = get_chara_color(7),
       event_marks = new GoldShipEduMarks(),
       titles = [];
@@ -157,7 +157,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(7).get();
+      races = RaceHistory.get(7).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hope_sta, 0, 5));
 

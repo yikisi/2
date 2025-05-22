@@ -1,3 +1,7 @@
+/**
+ * @file 目白麦昆 - 育成
+ * @author 伊兰
+ */
 const era = require('#/era-electron');
 
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
@@ -21,7 +25,7 @@ const EventObject = require('#/data/event/event-object');
 const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedEdu {
-  get dict() {
+  get #dict() {
     const dict = {};
     dict['代表色'] = get_chara_color(this.id);
     dict['训练员'] = '你';
@@ -73,7 +77,7 @@ module.exports = class extends CustomizedEdu {
     }
     if (name !== undefined) {
       await print_event_name(name, mcqueen);
-      await lines[name](this.dict);
+      await lines[name](this.#dict);
     } else {
       return await super.race_start(mcqueen, me, callname, hook, extra_flag);
     }
@@ -90,7 +94,7 @@ module.exports = class extends CustomizedEdu {
   async mejiro_family(mcqueen, me, callname, hook, extra_flag, event_object) {
     const name = '来自目白家的邀请';
     await print_event_name(name, mcqueen);
-    await lines[name](this.dict);
+    await lines[name](this.#dict);
     add_event(event_hooks.out_start, event_object.set_arg('mejiro_party'));
   }
 
@@ -110,7 +114,7 @@ module.exports = class extends CustomizedEdu {
     }
     const name = '目白家的宴会';
     await print_event_name(name, mcqueen);
-    await lines[name](this.dict);
+    await lines[name](this.#dict);
     new McqueenEduMarks().love_89 = 1;
     return true;
   }
@@ -146,7 +150,7 @@ module.exports = class extends CustomizedEdu {
     }
     if (name !== undefined) {
       await print_event_name(name, mcqueen);
-      await lines[name](this.dict);
+      await lines[name](this.#dict);
     } else {
       return await super.race_end(mcqueen, me, callname, hook, extra_flag);
     }
@@ -161,11 +165,11 @@ module.exports = class extends CustomizedEdu {
     switch (event_object.arg) {
       case 47 + 1:
         await print_event_name('新年', mcqueen);
-        await lines['新年'](this.dict);
+        await lines['新年'](this.#dict);
         break;
       case 47 + 6:
         await print_event_name('情人节', mcqueen);
-        if ((await lines['情人节'](this.dict))[1] === 1) {
+        if ((await lines['情人节'](this.#dict))[1] === 1) {
           era.println();
           era.print('获得了【情人节巧克力】！');
           era.add('item:情人节巧克力', 1);
@@ -176,7 +180,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case 47 + 40:
         await print_event_name('万圣节', mcqueen);
-        await lines['万圣节'](this.dict);
+        await lines['万圣节'](this.#dict);
         break;
       case 'palace':
         return await super.week_start(

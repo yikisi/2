@@ -42,7 +42,7 @@ module.exports = async () => {
     me.get_colored_name(),
     ' 也会提前准备。',
   ]);
-  const result = new RaceHistory(52).get_result(47 + 48);
+  const result = RaceHistory.get(52).get_result(47 + 48);
   if (result?.race === race_enum.arim_kin) {
     await era.printAndWait(
       '但似乎是在有马上燃烧得过于厉害了，现在这只小马除了必要的活动外一直是懒洋洋的模式。',

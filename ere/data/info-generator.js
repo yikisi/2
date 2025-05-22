@@ -42,6 +42,7 @@ const {
 } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_names } = require('#/data/train-const');
+const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 
 const level_and_desc = {
   love: {
@@ -304,14 +305,14 @@ module.exports = {
       ? [penis_state.chara, virgin_state.chara]
       : [penis_state.player, virgin_state.player];
     if (era.get(`mark:${chara_id}:淫纹`) === 3) {
-      const sex_equip = CharaInmon.get(chara_id).slave,
+      const { slave } = CharaInmon.get(chara_id),
         obj = {
           color: buff_colors[2],
-          content: slavery_titles[sex_equip],
+          content: slavery_titles[slave],
           fontWeight: 'bold',
         };
-      if (chara_id > 0 && sex_equip > 0) {
-        obj.title = `[${obj.content}]：${slavery_descriptions[sex_equip]}`;
+      if (chara_id > 0 && slave > 0) {
+        obj.title = `[${obj.content}]：${slavery_descriptions[slave]}`;
       }
       status_list.push(obj);
     }
@@ -399,7 +400,7 @@ module.exports = {
     if (check_lubrication(chara_id, part_enum.anal)) {
       status_list.push({ color: buff_colors[2], content: '肛润滑' });
     }
-    if (era.get(`tcvar:${chara_id}:乳突`)) {
+    if (era.get(`tcvar:${chara_id}:乳突`) > 0) {
       status_list.push({
         color: buff_colors[2],
         content: '乳突！',
@@ -608,7 +609,7 @@ module.exports = {
   get_talent: (id) => {
     const yandere = era.get(`talent:${id}:病娇`),
       ret = get_custom_mec(id).get_talents();
-    if (yandere === 2 || (yandere > 0 && era.get('status:0:马语者'))) {
+    if (yandere === 2 || (yandere > 0 && era.get('status:0:马语者') > 0)) {
       const temp = {
         color: buff_colors[3],
         content: '病娇',
@@ -744,13 +745,11 @@ module.exports = {
         talent_list.push('隐形巨乳');
       }
     }
-    if (
-      era.get(`talent:${id}:绿帽癖`) > 0 ||
-      CharaInmon.get(id).on(plugin_enum.ntr)
-    ) {
+    if (sys_check_cuckold(id)) {
       talent_list.push({
         color: el_success_color,
         content: '[绿帽癖]',
+        title: `[绿帽癖]：${talent_desc['绿帽癖']}`,
       });
     }
     if (era.get(`talent:${id}:钢之意志`)) {

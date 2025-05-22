@@ -51,7 +51,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(19).get(),
+    const races = RaceHistory.get(19).get(),
       titles = [];
     if (
       check_aim_race(races, race_enum.japa_dir, 1, 1) &&
@@ -121,7 +121,7 @@ module.exports = class extends CustomizedCheck {
           break;
         case 95 + 48: // 圣诞节
           add_event(event_hooks.week_start, event_obj_special);
-          temp = new RaceHistory(19).get();
+          temp = RaceHistory.get(19).get();
           if (
             check_aim_race(temp, race_enum.hyac_sta, 1) &&
             (!check_aim_race(temp, race_enum.hyac_sta, 1, 1) ||
@@ -174,7 +174,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(19).get(),
+      races = RaceHistory.get(19).get(),
       { yuusha_fight } = new AgEduMarks();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hyac_sta, 1, 1));
@@ -202,13 +202,13 @@ module.exports = class extends CustomizedCheck {
       case race_enum.mile_cha:
         if (
           era.get('cflag:19:育成回合计时') >= 96 &&
-          !check_aim_race(new RaceHistory(19).get(), race, 1, 1)
+          !check_aim_race(RaceHistory.get(19).get(), race, 1, 1)
         ) {
           return -4;
         }
         break;
       case race_enum.yasu_kin:
-        if (!check_aim_race(new RaceHistory(19).get(), race, 1, 1)) {
+        if (!check_aim_race(RaceHistory.get(19).get(), race, 1, 1)) {
           return -4;
         } else {
           return 0;

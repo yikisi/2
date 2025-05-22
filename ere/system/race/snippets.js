@@ -1,7 +1,8 @@
-const { logger } = require('#/era-electron');
+const { get, logger } = require('#/era-electron');
 
 const { get_random_value } = require('#/utils/value-utils');
 
+const recruit_flags = require('#/data/event/recruit-flags');
 const { ability_usage_enum } = require('#/data/race/model/uma-skill');
 const { frame_rate } = require('#/data/race/race-sim-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
@@ -486,6 +487,19 @@ module.exports = {
           skill.values[i][j] *= 1.2;
         } else if (uma.base.research_lv >= 15) {
           skill.values[i][j] *= 1.1;
+        }
+        break;
+      case ability_usage_enum.Love:
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (get(`cflag:${uma.index_chara}:招募状态`) === recruit_flags.yes) {
+          temp = get(`love:${uma.index_chara}`);
+          if (temp >= 90) {
+            skill.values[i][j] *= 4;
+          } else if (temp >= 75) {
+            skill.values[i][j] *= 3;
+          } else if (temp >= 50) {
+            skill.values[i][j] *= 2;
+          }
         }
         break;
       default:

@@ -1,3 +1,7 @@
+/**
+ * @file 麦吉罗的呼唤 随机事件
+ * @author イーウィヤ
+ */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -36,7 +40,7 @@ class MejiroEvents {
   /** @type {CharaTalk} */
   me;
   /** @type {Record<string,any>} */
-  dict = {};
+  #dict = {};
   /** @type {Record<string,any>} */
   params = {};
   good_events = [
@@ -46,7 +50,7 @@ class MejiroEvents {
       },
       async h(type) {
         const key = '甘泉水';
-        const d = { ...this.dict, first: +!this.params[key] };
+        const d = { ...this.#dict, first: +!this.params[key] };
         this.params[key] = true;
         switch (type) {
           case action_type_enum.good:
@@ -70,7 +74,7 @@ class MejiroEvents {
         const key = '失物招领';
         const reward = get_random_value(1, 3);
         await good_events[key]({
-          ...this.dict,
+          ...this.#dict,
           first: +!this.params[key],
           reward,
         });
@@ -86,7 +90,7 @@ class MejiroEvents {
       },
       async h() {
         const key = '普通穿行';
-        await normal_events[key]({ ...this.dict, first: +!this.params[key] });
+        await normal_events[key]({ ...this.#dict, first: +!this.params[key] });
         this.params[key] = true;
       },
     },
@@ -103,7 +107,7 @@ class MejiroEvents {
           false,
         );
         era.add(`base:${this.chara.id}:性欲`, get_random_value(0, 300));
-        if ((await bad_events['摸屁股'](this.dict))[0] === 1) {
+        if ((await bad_events['摸屁股'](this.#dict))[0] === 1) {
           era.add('base:0:性欲', get_random_value(0, 600));
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
@@ -121,7 +125,7 @@ class MejiroEvents {
       },
       async h() {
         era.add(`base:${this.chara.id}:性欲`, get_random_value(150, 450));
-        if ((await bad_events['咖啡馆'](this.dict))[0] === 1) {
+        if ((await bad_events['咖啡馆'](this.#dict))[0] === 1) {
           era.add('base:0:性欲', get_random_value(300, 900));
           await quick_make_love(
             new EroParticipant(0, part_enum.mouth),
@@ -142,10 +146,9 @@ class MejiroEvents {
   constructor(chara, me) {
     this.chara = chara;
     this.me = me;
-    this.dict['你'] = me.name;
-    this.dict['担当'] = chara.name;
-    this.dict['你们'] = me.get_couple_title();
-    this.dict['她'] = chara.sex;
+    this.#dict['你'] = me.name;
+    this.#dict['担当'] = chara.name;
+    this.#dict['她'] = chara.sex;
   }
 
   /**

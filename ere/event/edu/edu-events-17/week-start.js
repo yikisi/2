@@ -15,6 +15,7 @@ const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const color_17 = require('#/data/chara-colors').chara_colors[17];
@@ -35,8 +36,8 @@ module.exports = class extends Edu17UntilRaceStart {
             emperor: 17,
           }
         : { luna: 17, emperor: 9017 },
-      luna_talk = new CharaTalk(luna).set_color(color_17[0]),
-      emperor_talk = new CharaTalk(emperor).set_color(color_17[1]),
+      luna_talk = get_chara_talk(luna),
+      emperor_talk = get_chara_talk(emperor),
       edu_weeks = era.get('cflag:17:育成回合计时');
     if (edu_weeks >= 144) {
       if (edu_weeks === 144 && !event_marks.good_end) {
@@ -564,7 +565,7 @@ module.exports = class extends Edu17UntilRaceStart {
       allow_transform = false;
       era.drawLine();
     }
-    if (event_marks.just_luna) {
+    if (event_marks.just_luna > 0) {
       event_marks.just_luna--;
       ret = 0;
       allow_transform = false;
@@ -573,25 +574,31 @@ module.exports = class extends Edu17UntilRaceStart {
       ret = event_marks.want_emperor;
     }
 
-    await print_event_name('日月交替', ret ? emperor_talk : luna_talk);
-    if (ret) {
+    await print_event_name('日月交替', ret > 0 ? emperor_talk : luna_talk);
+    if (ret > 0) {
       const talk_list = [
         '嗯……为了我们共同的愿望，我会忍受。',
         '……抱着我……我不想一个人面对……',
       ];
-      era.get('status:17:精神损伤') &&
+      if (era.get('status:17:精神损伤') > 0) {
         talk_list.push(`${CharaTalk.me.actual_name}，非这样做不可吗？`);
-      era.get(`status:${luna}:神经衰弱`) &&
+      }
+      if (era.get(`status:${luna}:神经衰弱`) > 0) {
         talk_list.push('…………………………………………我是谁？');
+      }
       await luna_talk.say_and_wait(get_random_entry(talk_list));
     } else {
       const talk_list = ['入梦之时……？', '大器必成，亦须磨砺。'];
-      era.get(`status:${luna}:精神损伤`) && talk_list.push('梦醒时刻。');
-      era.get(`status:${luna}:神经衰弱`) && talk_list.push('向伊甸进发！');
+      if (era.get(`status:${luna}:精神损伤`) > 0) {
+        talk_list.push('梦醒时刻。');
+      }
+      if (era.get(`status:${luna}:神经衰弱`) > 0) {
+        talk_list.push('向伊甸进发！');
+      }
       await emperor_talk.say_and_wait(get_random_entry(talk_list));
     }
     let race_punish = false;
-    const race_history = new RaceHistory(17).get();
+    const race_history = RaceHistory.get(17).get();
 
     switch (edu_weeks) {
       case race_infos[race_enum.sats_sho].date + 48: // 五月第一周 皋月赏惩罚
@@ -617,7 +624,9 @@ module.exports = class extends Edu17UntilRaceStart {
     }
     const total_punish =
       (ret > 0 && ++event_marks.break_down % 7 === 0) + race_punish;
-    total_punish && (await handle_debuff(event_marks, luna, total_punish));
+    if (total_punish > 0) {
+      await handle_debuff(event_marks, luna, total_punish);
+    }
     if (!ret !== !event_marks.emperor) {
       transform(event_marks);
     }

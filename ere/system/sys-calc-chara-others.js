@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
+const {
+  sys_check_cuckold,
+  sys_check_yandere,
+} = require('#/system/chara/sys-calc-cheat');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_hide_relation_and_love,
@@ -27,7 +30,7 @@ const {
   get_love_mark,
   get_relation_mark,
 } = require('#/data/info-generator');
-const LimitLoveStatus = require('#/data/love-limit-status');
+const LoveLimitStatus = require('#/data/love-limit-status');
 
 /**
  * @param {number} id
@@ -46,9 +49,9 @@ async function punish_unfaithful(id, new_love) {
         e !== id &&
         era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
         era.get(`love:${e}`) >= 75 &&
-        era.get(`talent:${e}:绿帽癖`) === 0 &&
         get_custom_mec(e).is_anger_for_unfaithful([id]) &&
-        sys_check_yandere(e, (y) => punish_option || y > 0)
+        sys_check_yandere(e, (y) => punish_option || y > 0) &&
+        !sys_check_cuckold(e)
       );
     });
   for (const c_id of temp_chara_list) {
@@ -72,7 +75,9 @@ async function punish_unfaithful(id, new_love) {
       ),
     );
   }
-  temp_chara_list.length && (await era.waitAnyKey());
+  if (temp_chara_list.length > 0) {
+    await era.waitAnyKey();
+  }
 }
 
 /**
@@ -219,7 +224,7 @@ function love_uma(id, val, shown = true) {
       !era.get('flag:后代爱慕限制') &&
       era.get(`cflag:${id}:父方角色`) >= 0) ||
     era.get(`status:${id}:讨厌药`) > 0 ||
-    !new LimitLoveStatus(id).is_empty()
+    !LoveLimitStatus.get(id).is_empty()
   ) {
     return false;
   }
@@ -233,6 +238,9 @@ function love_uma(id, val, shown = true) {
     50 * inmon.on(plugin_enum.love_d1) -
     100 * inmon.on(plugin_enum.love_d2);
   val = Math.floor((val * coff) / 100);
+  if (val > 6) {
+    val = 6;
+  }
   const force_limit = get_custom_mec(id).get_love_limit(),
     border = force_limit || Math.max(get_love_border(id), 50),
     love_limit = !era.get('flag:回合爱慕惩罚');
@@ -267,14 +275,18 @@ function love_uma(id, val, shown = true) {
     (new_val === 49 || new_val === 74 || new_val === 89 || new_val === 99) &&
     era.get(`cflag:${id}:爱慕暂拒`) !== new_val
   ) {
-    if ((sys_check_hide_relation_and_love(id) & 0b1) === 0 && shown) {
-      era.print([
-        '和 ',
-        get_chara_talk(id).get_colored_name(),
-        ' 的关系似乎可以更进一步了……',
-      ]);
+    if (era.get(`cflag:${id}:招募状态`) !== recruit_flags.no) {
+      if ((sys_check_hide_relation_and_love(id) & 0b1) === 0 && shown) {
+        era.print([
+          '和 ',
+          get_chara_talk(id).get_colored_name(),
+          ' 的关系似乎可以更进一步了……',
+        ]);
+      }
+      get_custom_check(id).check_love_events();
+    } else {
+      era.set(`cflag:${id}:爱慕暂拒`, new_val);
     }
-    get_custom_check(id).check_love_events();
   }
   return shown;
 }

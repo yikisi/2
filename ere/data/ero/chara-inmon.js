@@ -6,9 +6,6 @@ const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
 const plugins = {};
 
 class CharaInmon {
-  /** @type {Record<string,0|1>} */
-  obj;
-
   /**
    * @param {number} id
    * return {CharaInmon}
@@ -27,12 +24,18 @@ class CharaInmon {
   /** @param {number} id */
   constructor(id) {
     this.id = id;
-    this.obj =
-      era.get(`equip:${id}:淫纹插件`) || era.set(`equip:${id}:淫纹插件`, {});
   }
 
   get count() {
     return Object.keys(this.obj).length;
+  }
+
+  /** @type {Record<string,0|1>} */
+  get obj() {
+    return (
+      era.get(`equip:${this.id}:淫纹插件`) ||
+      era.set(`equip:${this.id}:淫纹插件`, {})
+    );
   }
 
   get raw() {

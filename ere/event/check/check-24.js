@@ -162,7 +162,7 @@ module.exports = class extends CustomizedCheck {
 
       if (
         edu_weeks ===
-        new RaceHistory(24)
+        RaceHistory.get(24)
           .get_entries()
           .findLast((e) => e.race === race_enum.begin_race)?.weeks +
           4
@@ -213,7 +213,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(24).get();
+      races = RaceHistory.get(24).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.kiku_sho, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 3));

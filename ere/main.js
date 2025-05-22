@@ -9,6 +9,7 @@ const load_game = require('#/page/page-load-game');
 const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
+const CharaTalk = require('#/utils/chara-talk');
 
 const item_title_color =
   require('#/data/color-const').adaptability_colors.at(-1);
@@ -33,6 +34,7 @@ function get_copyright_entry(chara_id, _suffix) {
 module.exports = async () => {
   let flagTitle = true;
   sys_personal_achievement.init();
+  CharaTalk.me = new CharaTalk(0);
 
   era.printMultiColumns(
     [
@@ -144,7 +146,7 @@ module.exports = async () => {
         '无名黑奴',
       ],
     ],
-    // [[get_copyright_entry(71)], '洛洛'],
+    [[get_copyright_entry(71)], '洛洛'],
     [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
     [[get_copyright_entry(89, '地下室')], '無奈'],
     // [[get_copyright_entry(89)], '無奈'],
@@ -222,6 +224,7 @@ module.exports = async () => {
     ],
     ['地下室地文', ['露娜俘虏', { isDivider: true }, '无名黑奴']],
     ['特殊角色（临时）', '无名黑奴'],
+    ['麦吉罗的呼唤', ['イーウィヤ', { isDivider: true }, '无名黑奴']],
   ];
   set_chara_ero_image();
   const gameBase = era.get('gamebase');
@@ -267,7 +270,7 @@ module.exports = async () => {
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
             content: [
-              `版本号：v${version} (kuuga)`,
+              `版本号：v${version} (agito)`,
               { isBr: true },
               '雞雞',
               { isDivider: true },
@@ -390,7 +393,7 @@ module.exports = async () => {
                 content: [
                   '* 带有',
                   { content: '*', fontWeight: 'bold' },
-                  '号后缀的角色有专属口上',
+                  '号后缀的角色有口上',
                   { isBr: true },
                   '** 只有完成了个人成就的角色才能进行扮演',
                   { isBr: true },
@@ -471,8 +474,8 @@ module.exports = async () => {
         era.drawLine();
         for (const note of notes.common
           .filter(() => true)
-          .sort((a, b) => (a.title > b.title ? 1 : -1))) {
-          say_by_passer_by(note.title, note.content);
+          .sort((a, b) => (a[0] > b[0] ? 1 : -1))) {
+          say_by_passer_by(...note);
         }
         await era.waitAnyKey();
         for (const id of Object.keys(notes)
@@ -481,12 +484,7 @@ module.exports = async () => {
           .sort((a, b) => a - b)) {
           for (const note of notes[id]) {
             era.print(
-              [
-                { content: note.title, fontWeight: 'bold' },
-                '「',
-                note.content,
-                '」',
-              ],
+              [{ content: note[0], fontWeight: 'bold' }, '「', note[1], '」'],
               { color: get_chara_color(Number(id)) },
             );
           }

@@ -6,7 +6,6 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const color_17 = require('#/data/chara-colors').chara_colors[17];
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -20,8 +19,8 @@ module.exports = class extends Edu17UntilRaceEnd {
             emperor: 9017,
             luna: 17,
           },
-      luna_talk = new CharaTalk(luna).set_color(color_17[0]),
-      emperor_talk = new CharaTalk(emperor).set_color(color_17[1]),
+      luna_talk = get_chara_talk(luna),
+      emperor_talk = get_chara_talk(emperor),
       chara_talk = get_chara_talk(17),
       edu_weeks = era.get('cflag:17:育成回合计时');
     if (

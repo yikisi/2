@@ -253,7 +253,7 @@ module.exports = (handlers) => {
       maya.sex,
       '吃了。',
     ]);
-    if (new RaceHistory(24).get_result(95)?.race === race_enum.arim_kin) {
+    if (RaceHistory.get(24).get_result(95)?.race === race_enum.arim_kin) {
       await amazon.say_and_wait([
         '之前在『',
         race_infos[race_enum.arim_kin].get_colored_name(),

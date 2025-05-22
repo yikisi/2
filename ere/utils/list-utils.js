@@ -113,11 +113,28 @@ module.exports = {
   },
   get_random_entry,
   /**
+   * @Template T1
+   * @Template T2
+   * @param {T1[]} list
+   * @param {T2} separator
+   * @returns {(T1|T2)[]}
+   */
+  join_list(list, separator) {
+    if (list.length === 0) {
+      return [];
+    }
+    const ret = [list[0]];
+    for (let i = 1; i < list.length; ++i) {
+      ret.push(separator, list[i]);
+    }
+    return ret;
+  },
+  /**
    * @param {*[]} list
    * @param {string} separator
    * @returns {string}
    */
-  join_list(list, separator) {
+  join_to_string(list, separator) {
     return list.filter((e) => e).join(separator);
   },
   /**

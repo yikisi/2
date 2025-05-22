@@ -40,7 +40,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const race_history = new RaceHistory(this.id),
+    const race_history = RaceHistory.get(this.id),
       races = race_history.get(),
       race_list = race_history.get_values(),
       titles = [];
@@ -69,7 +69,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(this.id).get();
+      races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.nhk_cup, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.mile_cha, 1, 3));

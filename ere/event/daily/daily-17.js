@@ -16,12 +16,7 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
-const color_17 = require('#/data/chara-colors').chara_colors[17];
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
-
-function get_luna_or_emperor() {
-  return new CharaTalk(17).set_color(color_17[new LunaEduMarks().emperor]);
-}
 
 module.exports = class extends CustomizedDaily {
   select() {
@@ -44,7 +39,7 @@ module.exports = class extends CustomizedDaily {
     } else {
       talk_list = ['嘶……呼……'];
     }
-    get_luna_or_emperor().say(get_random_entry(talk_list));
+    get_chara_talk(17).say(get_random_entry(talk_list));
   }
 
   good_morning() {
@@ -86,7 +81,7 @@ module.exports = class extends CustomizedDaily {
         );
       }
     }
-    get_luna_or_emperor().say(get_random_entry(talk_list));
+    get_chara_talk(17).say(get_random_entry(talk_list));
   }
 
   async talk() {
@@ -160,7 +155,7 @@ module.exports = class extends CustomizedDaily {
           }
       }
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
   }
 
   async office_gift() {
@@ -176,7 +171,7 @@ module.exports = class extends CustomizedDaily {
         '我们是有相同理想的『共犯』，完成目标前，我们都不能停下……抱歉，是不是有点太沉重了？',
       );
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
   }
 
   async office_cook() {
@@ -192,7 +187,7 @@ module.exports = class extends CustomizedDaily {
         '我趁上午的时间把学生会的工作都做完，这下可以专心投入了。',
       );
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
   }
 
   async office_study() {
@@ -208,7 +203,7 @@ module.exports = class extends CustomizedDaily {
         '训练员执照的考试，有些题还是我出的。',
       );
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
   }
 
   async office_rest() {
@@ -221,7 +216,7 @@ module.exports = class extends CustomizedDaily {
         '嘶……呼……',
       );
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
   }
 
   async office_prepare() {
@@ -237,7 +232,7 @@ module.exports = class extends CustomizedDaily {
         '为了我们共同的理想，我不会退缩。',
       );
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
   }
 
   async office_game() {
@@ -250,7 +245,7 @@ module.exports = class extends CustomizedDaily {
         '玩归玩，可不能浪费时间。',
       );
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
   }
 
   async school_atrium(hook) {
@@ -281,7 +276,7 @@ module.exports = class extends CustomizedDaily {
         );
       }
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
   }
 
   async school_rooftop() {
@@ -294,7 +289,7 @@ module.exports = class extends CustomizedDaily {
         '其实我对口味的要求不高。但如果摆盘精致、气味宜人，更能让我食指大动。',
       );
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
   }
 
   async out_river(hook, extra_flag) {
@@ -325,7 +320,7 @@ module.exports = class extends CustomizedDaily {
     if (!hook.arg) {
       extra_flag.jpy = 0;
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
   }
 
   async out_shopping(hook) {
@@ -382,12 +377,12 @@ module.exports = class extends CustomizedDaily {
           );
         }
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
     hook.arg = hook.arg <= 1;
   }
 
   async out_church(hook) {
-    const chara_talk = get_luna_or_emperor(),
+    const chara_talk = get_chara_talk(17),
       is_emperor = new LunaEduMarks().emperor;
     await era.printAndWait(
       `神社对于 ${CharaTalk.me.name} 和 ${chara_talk.name} 而言，并没有什么特别的地方。`,
@@ -495,7 +490,7 @@ module.exports = class extends CustomizedDaily {
           );
         }
     }
-    await get_luna_or_emperor().say_and_wait(get_random_entry(talk_list));
+    await get_chara_talk(17).say_and_wait(get_random_entry(talk_list));
   }
 
   async load_talk() {

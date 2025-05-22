@@ -1,12 +1,7 @@
-const { get } = require('#/era-electron');
+const CustomizedCheck = require('#/event/check/check-common');
+const CommonKojoFactory = require('#/event/factory-common');
 
-const common_cons = require('#/event/check/check-common');
-const script_dict = require('#/event/script-dict.json');
-
-const { first_child_id } = require('#/data/other-const');
-
-const cons_dict = {},
-  obj_dict = {};
+const cons_dict = {};
 
 const current = new Date().getTime();
 
@@ -96,6 +91,7 @@ cons_dict[86] = require('#/event/check/check-86');
 cons_dict[87] = require('#/event/check/check-87');
 cons_dict[88] = require('#/event/check/check-88');
 cons_dict[89] = require('#/event/check/check-89');
+cons_dict[90] = require('#/event/check/check-90');
 cons_dict[91] = require('#/event/check/check-91');
 cons_dict[93] = require('#/event/check/check-93');
 cons_dict[94] = require('#/event/check/check-94');
@@ -121,6 +117,7 @@ cons_dict[121] = require('#/event/check/check-121');
 cons_dict[124] = require('#/event/check/check-124');
 cons_dict[127] = require('#/event/check/check-127');
 cons_dict[131] = require('#/event/check/check-131');
+cons_dict[132] = require('#/event/check/check-132');
 cons_dict[201] = require('#/event/check/check-201');
 cons_dict[202] = require('#/event/check/check-202');
 cons_dict[203] = require('#/event/check/check-203');
@@ -154,19 +151,22 @@ console.log(
   'ms',
 );
 
-module.exports = {
+class CheckFactory extends CommonKojoFactory {
+  constructor() {
+    super(cons_dict, CustomizedCheck);
+  }
+
   /**
-   * @param {number} chara_id
+   * @param {number} id
    * @returns {CustomizedCheck}
    */
-  get_custom_check(chara_id) {
-    if (obj_dict[chara_id]) {
-      return obj_dict[chara_id];
-    }
-    const script_name =
-        chara_id >= first_child_id ? get(`callname:${chara_id}:-2`) : chara_id,
-      class_cons =
-        cons_dict[script_dict[script_name] || script_name] || common_cons;
-    return (obj_dict[chara_id] = new class_cons(chara_id)).get_this();
-  },
-};
+  get_custom_check(id) {
+    return this.get(id);
+  }
+}
+
+const check_factory = new CheckFactory();
+check_factory.get_custom_check =
+  check_factory.get_custom_check.bind(check_factory);
+
+module.exports = check_factory;

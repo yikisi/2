@@ -398,8 +398,8 @@ module.exports = (handlers) => {
     extra_flag,
   ) => {
     sys_do_sex(
-      new EroParticipant(defender, part_enum.anal, 0.2),
-      new EroParticipant(attacker, part_enum.penis, 0.8),
+      new EroParticipant(attacker, part_enum.anal, 0.2),
+      new EroParticipant(defender, part_enum.penis, 0.8),
     );
     add(`nowex:${attacker.id}:体力消耗`, get(`tcvar:${defender.id}:体重`) / 4);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);

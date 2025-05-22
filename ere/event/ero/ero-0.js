@@ -11,6 +11,7 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const common_pregnant_report_in_love = require('#/event/ero/common-lines/common-pregnant-report-in-love');
+const kojo = require('#/event/ero/ero-0.kojo');
 const CustomizedEro = require('#/event/ero/ero-common');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -385,7 +386,17 @@ module.exports = class extends CustomizedEro {
    */
   async have_baby(father, mother) {
     const is_slave = era.get('flag:惩戒力度') === 3;
-    if (era.get(`love:${father.id}`) < 90) {
+    if (
+      era.get(`cflag:${father.id}:母方角色`) === 0 &&
+      LifeEventMarks.get_marks(0).unexpected_pregnant !==
+        unexpected_pregnant_enum.mother_sleep &&
+      !is_slave
+    ) {
+      const dict = { id: father.id };
+      dict['玩家名'] = mother.name;
+      dict['角色名'] = father.name;
+      await kojo['乱伦生子'](dict);
+    } else if (era.get(`love:${father.id}`) < 90) {
       era.drawLine();
       await print_event_name('新生命', mother);
       await era.printAndWait([mother.get_colored_name(), ' 抱起了孩子——']);

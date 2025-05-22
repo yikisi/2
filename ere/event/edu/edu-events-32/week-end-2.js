@@ -706,9 +706,9 @@ module.exports = (handlers) => {
       ' 的训练员，应该对此做出回应吧',
     ]);
     const { winner, loser } =
-      (new RaceHistory(32).get_result(95 + race_infos[race_enum.takz_kin].date)
+      (RaceHistory.get(32).get_result(95 + race_infos[race_enum.takz_kin].date)
         ?.rank || 20) <
-      (new RaceHistory(25).get_result(95 + race_infos[race_enum.takz_kin].date)
+      (RaceHistory.get(25).get_result(95 + race_infos[race_enum.takz_kin].date)
         ?.rank || 20)
         ? { loser: '茶座', winner: '速子' }
         : { loser: '速子', winner: '茶座' };

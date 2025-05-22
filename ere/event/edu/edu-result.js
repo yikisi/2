@@ -6,15 +6,13 @@ const {
   sys_change_motivation,
   sys_change_pressure,
 } = require('#/system/sys-calc-base-cflag');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
@@ -106,7 +104,7 @@ function learn_language(chara_id, lan_name) {
     era.get(`abl:${chara_id}:英语`) === 5 &&
     era.get(`abl:${chara_id}:法语`) === 5
   ) {
-    new CharaTitles(chara_id).push({
+    CharaTitles.get(chara_id).push({
       n: 'Hello world!',
       c: buff_colors[1],
     });
@@ -135,7 +133,9 @@ handlers[event_hooks.foreign_rest] = async (chara_id) => {
   era.println();
   sys_change_money(-50, chara_id);
   handle_rest_cost(chara_id);
-  chara_id > 0 && handle_rest_cost(0);
+  if (chara_id > 0) {
+    handle_rest_cost(0);
+  }
   await era.waitAnyKey();
 };
 
@@ -214,31 +214,19 @@ handlers[event_hooks.race_start] = handlers[event_hooks.race_end] = async (
   _,
   extra_flag,
 ) => {
-  era.println();
-  let wait_flag = get_attr_and_print_in_event(
-    chara_id,
-    extra_flag.attr_change,
-    extra_flag.pt_change,
-    extra_flag.base_change,
-    true,
-  );
-  wait_flag =
-    get_skills_and_print_in_event(chara_id, extra_flag.skill_change) ||
-    wait_flag;
-  wait_flag =
-    sys_change_motivation(chara_id, extra_flag.motivation_change || 0) ||
-    wait_flag;
-  wait_flag =
-    sys_like_chara(
-      chara_id,
-      0,
-      extra_flag.relation_change === 0
-        ? 0
-        : extra_flag.relation_change || get_random_value(0, 25),
-      true,
-      extra_flag.love_change || 0,
-    ) || wait_flag;
-  wait_flag && (await era.waitAnyKey());
+  if (
+    all_reward_in_event(chara_id, {
+      attr: extra_flag.attr_change,
+      pt: extra_flag.pt_change,
+      base: extra_flag.base_change,
+      skills: extra_flag.skill_change,
+      motivation: extra_flag.motivation_change,
+      relation: extra_flag.relation_change,
+      love: extra_flag.love_change,
+    })
+  ) {
+    await era.waitAnyKey();
+  }
 };
 
 /**

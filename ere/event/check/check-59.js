@@ -29,7 +29,7 @@ aim_races[get_aim_race_index(race_enum.eliz_cup, 1)] = -4;
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       titles = [];
     if (
       check_aim_race(
@@ -88,7 +88,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(this.id).get();
+      races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hans_fil, 0, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.oka_sho, 1, 5));

@@ -64,7 +64,7 @@ module.exports = (handlers) => {
       '的努力的方式毫无疑问是错误的。',
     ]);
 
-    const race_history = new RaceHistory(52);
+    const race_history = RaceHistory.get(52);
     if (race_history.get_result(47 + 48)?.race === race_enum.arim_kin) {
       await era.printAndWait([
         '话说他们上次难道也用了这样的方式？而且这次还把 ',

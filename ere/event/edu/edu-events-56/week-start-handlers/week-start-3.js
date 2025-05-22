@@ -542,7 +542,7 @@ module.exports = (handlers) => {
     await era.input();
     await era.printAndWait('纯黑色的倒金字塔，突兀悬于空中。');
     era.println();
-    if (check_aim_race(new RaceHistory(56).get(), race_enum.kiku_sho, 1, 1)) {
+    if (check_aim_race(RaceHistory.get(56).get(), race_enum.kiku_sho, 1, 1)) {
       await typing(
         '非常好/保持预期，有资格/能力成为' + kitaru.sex + '的协助者/伴侣',
       );

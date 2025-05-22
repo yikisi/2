@@ -2,6 +2,10 @@ const get_gradient_color = require('#/utils/gradient-color');
 
 const base_color = require('#/data/const.json').mark_colors['淫纹'];
 
+const level_colors = new Array(3)
+  .fill(0)
+  .map((_, i) => get_gradient_color('', base_color, (i + 1) / 3));
+
 const group_names = {
   101: '口腔调教',
   102: '胸部调教',
@@ -18,7 +22,9 @@ const group_names = {
   403: '性格控制',
   501: '高潮控制',
   502: '身体控制',
+  503: '体液分泌',
   601: '气性转换',
+  602: '训练方式',
   701: '行为限制',
   702: '常识转换',
 };
@@ -58,7 +64,7 @@ class InmonPlugin {
   }
 
   get color() {
-    return get_gradient_color('', base_color, this.level / 3);
+    return level_colors[this.level - 1];
   }
 
   get title() {

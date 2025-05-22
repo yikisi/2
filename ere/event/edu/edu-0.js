@@ -536,7 +536,9 @@ module.exports = class extends StrangeDayEvents {
     sys_change_lust(chara_id, (get('cflag:0:种族') ? 800 : 300) * 2);
     set('flag:当前互动角色', chara_id);
     println();
-    sys_love_uma(chara_id, 1) && (await waitAnyKey());
+    if (sys_love_uma(chara_id, 1)) {
+      await waitAnyKey();
+    }
     add_event(hook.hook, event_object.set_arg('privacy_1'));
   }
 

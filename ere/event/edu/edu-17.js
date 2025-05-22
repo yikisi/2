@@ -268,9 +268,7 @@ module.exports = class extends Edu17UntilWeekStart {
 
   async week_end(_chara, me, callname, hook, extra_flag, event_object) {
     const event_marks = new LunaEduMarks(),
-      luna = new CharaTalk(event_marks.emperor ? 9017 : 17).set_color(
-        color_17[0],
-      ),
+      luna = get_chara_talk(event_marks.emperor ? 9017 : 17),
       event_arg = event_object?.arg;
     if (event_arg === 'wax_and_wane') {
       await print_event_name('阴晴圆缺', luna);

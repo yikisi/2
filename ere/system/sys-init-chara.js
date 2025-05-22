@@ -1,4 +1,4 @@
-﻿const era = require('#/era-electron');
+const era = require('#/era-electron');
 
 const sys_change_hair = require('#/system/chara/sys-change-hair');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
@@ -20,7 +20,7 @@ const { buff_colors } = require('#/data/color-const');
 const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 const {
   get_breast_cup,
   get_talent_bust_size,
@@ -136,7 +136,7 @@ function init_chara(chara_id, src = 0) {
     era.get(`abl:${chara_id}:英语`) === 5 &&
     era.get(`abl:${chara_id}:法语`) === 5
   ) {
-    new CharaTitles(chara_id).push({
+    CharaTitles.get(chara_id).push({
       n: 'Hello world!',
       c: buff_colors[1],
     });
@@ -313,11 +313,15 @@ function reset_chara(chara_id, from_init) {
     const src_chara = era.get(`cflag:${chara_id}:模版角色`),
       skill_set = chara_skill_dict[src_chara > 0 ? src_chara : chara_id] || [];
     era.set(`cflag:${chara_id}:殿堂`, 0);
-    new CharaSkills(chara_id).clear().add(...skill_set.slice(0, 4));
-    new CharaAvailableSkills(chara_id).clear().add(...skill_set.slice(4));
+    CharaSkills.get(chara_id)
+      .clear()
+      .add(...skill_set.slice(0, 4));
+    CharaAvailableSkills.get(chara_id)
+      .clear()
+      .add(...skill_set.slice(4));
     era.set(`exp:${chara_id}:技能点数`, 120 + 680 * (skill_set.length === 0));
     era.set(`cflag:${chara_id}:育成用变量`, {});
-    new RaceHistory(chara_id).reset();
+    RaceHistory.get(chara_id).reset();
     new CharaGenes(chara_id).clear();
     new CharaAvailableGenes(chara_id).clear();
   } else {
@@ -364,10 +368,10 @@ module.exports = {
       300 * sys_personal_achievement.get(chara_id);
     era.set(`relation:${chara_id}:0`, Math.min(relation, 600));
     if (
-      era.get(`cflag:${chara_id}:种族`) &&
-      era.get(`talent:${chara_id}:病娇`)
+      era.get(`cflag:${chara_id}:种族`) > 0 &&
+      era.get(`talent:${chara_id}:病娇`) > 0
     ) {
-      new YandereList().push(chara_id);
+      yandere_list.push(chara_id);
     }
   },
   reset_chara,

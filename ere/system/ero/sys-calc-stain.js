@@ -107,6 +107,7 @@ module.exports = {
   merge_stain(attacker, defender, item) {
     let use_item = false;
     const stain_keys = [attacker, defender]
+      .filter((e) => e.id !== -1 && e.part !== -1)
       .map((e) => {
         if (e.part === part_enum.item) {
           use_item =
@@ -119,7 +120,7 @@ module.exports = {
           return `stain:${e.id}:${part_touch[e.part]}`;
         }
       })
-      .filter((e) => e);
+      .filter((e) => e !== undefined);
     if (stain_keys.length === 2) {
       const stain = era.get(stain_keys[0]) | era.get(stain_keys[1]);
       era.set(stain_keys[0], stain);

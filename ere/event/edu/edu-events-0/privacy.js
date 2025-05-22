@@ -13,6 +13,9 @@ const {
 } = require('#/era-electron');
 
 const {
+  check_pregnant_unprotect,
+} = require('#/system/ero/sys-calc-ero-status');
+const {
   begin_and_init_ero,
   end_ero_and_show_result,
 } = require('#/system/ero/sys-prepare-ero');
@@ -264,7 +267,9 @@ module.exports = class extends CustomizedEdu {
       get('flag:当前位置') === location_enum.basement ||
       !sys_check_awake(0) ||
       !sys_check_awake(chara_id) ||
-      get('flag:床伴') > 0
+      get('flag:床伴') > 0 ||
+      !check_pregnant_unprotect(0) ||
+      !check_pregnant_unprotect(chara_id)
     ) {
       add_event(hook.hook, event_object);
       return;

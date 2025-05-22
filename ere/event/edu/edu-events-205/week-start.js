@@ -196,7 +196,7 @@ module.exports = async function (vp, me, event_object) {
       if (era.get('flag:当前互动角色') === 205) {
         era.set('flag:当前互动角色', 0);
       }
-      new EventMarks(0).add(event_hooks.out_start);
+      EventMarks.get(0).add(event_hooks.out_start);
       new TreveEduMarks().tea = 1;
       break;
     case 95 + 29:

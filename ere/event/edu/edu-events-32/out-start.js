@@ -211,7 +211,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
       tachyon.get_uma_sex_title(),
       '的 ',
       tachyon.get_colored_name(),
-      ...(check_aim_race(new RaceHistory(32).get(), race_enum.prix_lat, 2, 1)
+      ...(check_aim_race(RaceHistory.get(32).get(), race_enum.prix_lat, 2, 1)
         ? [
             '……不认识拿下了世界最高峰，凯旋门赏冠军的',
             tachyon.get_uma_sex_title(),

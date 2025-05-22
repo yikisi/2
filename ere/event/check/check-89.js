@@ -35,7 +35,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       ret = [];
     if (
       check_aim_race(races, race_enum.japa_cup, 1, 1) &&
@@ -58,7 +58,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const { goal } = new GrandEduMarks(),
-      races = new RaceHistory(this.id).get(),
+      races = RaceHistory.get(this.id).get(),
       ret = [];
     ret.push(check_aim_and_get_entry(races, race_enum.begin_race));
     ret.push({

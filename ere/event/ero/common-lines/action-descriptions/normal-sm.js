@@ -10,7 +10,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 辱骂着 ',
       defender.get_colored_name(),
-      '……】',
+      '】',
     ]);
 
   handlers[ero_hooks.ask_insult] = (attacker, defender, hook) =>
@@ -21,7 +21,7 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' ',
       !hook.arg ? '继续' : '',
-      '辱骂自己……】',
+      '辱骂自己】',
     ]);
 
   handlers[ero_hooks.hit_anal] = handlers[ero_hooks.hit_anal_hard] = (
@@ -36,7 +36,7 @@ module.exports = (handlers) => {
       hook.hook === ero_hooks.hit_anal_hard ? '用力' : '',
       '拍打着 ',
       defender.get_colored_name(),
-      ' 的臀部……】',
+      ' 的臀部】',
     ]);
 
   handlers[ero_hooks.ask_hit_anal] = (attacker, defender, hook) =>
@@ -47,7 +47,7 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' ',
       !hook.arg ? '继续' : '',
-      '拍打自己的臀部……】',
+      '拍打自己的臀部】',
     ]);
 
   handlers[ero_hooks.hit_breast] = handlers[ero_hooks.hit_breast_hard] = (
@@ -62,7 +62,7 @@ module.exports = (handlers) => {
       hook.hook === ero_hooks.hit_anal_hard ? '用力' : '',
       '拍打着 ',
       defender.get_colored_name(),
-      ' 的胸部……】',
+      ' 的胸部】',
     ]);
 
   handlers[ero_hooks.ask_hit_breast] = (attacker, defender, hook) =>
@@ -73,7 +73,7 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' ',
       !hook.arg ? '继续' : '',
-      '拍打自己的胸部……】',
+      '拍打自己的胸部】',
     ]);
 
   handlers[ero_hooks.hit_face] = handlers[ero_hooks.hit_face_hard] = (
@@ -88,7 +88,7 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' ',
       hook.hook === ero_hooks.hit_face_hard ? '用力' : '',
-      '甩了一记耳光……】',
+      '甩了一记耳光】',
     ]);
 
   handlers[ero_hooks.hit_face_by_penis] = (attacker, defender) =>
@@ -97,7 +97,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 用肉棒拍打 ',
       defender.get_colored_name(),
-      ' 的脸颊……】',
+      ' 的脸颊】',
     ]);
 
   handlers[ero_hooks.ask_hit_face] = (attacker, defender, hook) =>
@@ -108,7 +108,7 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' ',
       !hook.arg ? '再继续' : '',
-      '扇自己的耳光……】',
+      '扇自己的耳光】',
     ]);
 
   handlers[ero_hooks.virgin_foot_job] = (attacker, defender) =>
@@ -117,7 +117,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 践踏着 ',
       defender.get_colored_name(),
-      ' 的阴部……】',
+      ' 的阴部】',
     ]);
 
   handlers[ero_hooks.ask_virgin_foot_job] = (attacker, defender, hook) =>
@@ -128,6 +128,6 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' ',
       !hook.arg ? '继续' : '',
-      '践踏自己的阴部……】',
+      '践踏自己的阴部】',
     ]);
 };

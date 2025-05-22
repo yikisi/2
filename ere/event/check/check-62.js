@@ -27,7 +27,7 @@ module.exports = class extends CustomizedCheck {
 
   check_and_get_titles(aim_check) {
     const event_marks = new TanhuizaEduMarks(),
-      races = new RaceHistory(this.id).get(),
+      races = RaceHistory.get(this.id).get(),
       titles = [];
     if (
       check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
@@ -66,7 +66,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(this.id).get();
+      races = RaceHistory.get(this.id).get();
     const event_marks = new TanhuizaEduMarks();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push({

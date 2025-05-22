@@ -1,3 +1,7 @@
+/**
+ * @file 目白麦昆 - 爱慕
+ * @author 伊兰
+ */
 const era = require('#/era-electron');
 
 const {
@@ -14,7 +18,6 @@ const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const McqueenEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-13');
 const event_hooks = require('#/data/event/event-hooks');
 const McqueenLifeMarks = require('#/data/event/life-event-marks/life-event-marks-13');
@@ -22,12 +25,14 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedLove {
-  get dict() {
+  get #dict() {
     const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    dict['训练员'] = '你';
-    dict['麦昆'] = era.get(`callname:${this.id}:-2`);
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
+    const mcqueen = get_chara_talk(this.id),
+      me = get_chara_talk(0);
+    dict['代表色'] = mcqueen.color;
+    dict['训练员'] = me.name;
+    dict['麦昆'] = mcqueen.name;
+    if (mcqueen.sex_code === 1) {
       dict['马娘'] = '马郎';
       dict['大小姐'] = '大少爷';
       dict['她'] = '他';
@@ -48,7 +53,7 @@ module.exports = class extends CustomizedLove {
       dict['女孩'] = '女孩';
       dict['少女'] = '少女';
     }
-    if (era.get('cflag:0:性别') === 1) {
+    if (me.sex_code === 1) {
       dict['称呼'] = '训练员' + '先生';
       dict['他'] = '他';
     } else {
@@ -68,20 +73,21 @@ module.exports = class extends CustomizedLove {
   async movie(mcqueen) {
     const name = '银幕前的两人';
     await print_event_name(name, mcqueen);
-    await lines[name](this.dict);
+    await lines[name](this.#dict);
     new McqueenLifeMarks().love_20 = 2;
   }
 
   /** @param {CharaTalk} mcqueen */
   async baseball(mcqueen) {
-    await print_event_name('棒球与' + this.dict['大小姐'], mcqueen);
-    await lines['棒球与大小姐'](this.dict);
+    await print_event_name('棒球与' + this.#dict['大小姐'], mcqueen);
+    await lines['棒球与大小姐'](this.#dict);
+    new McqueenLifeMarks().love_40 = 2;
   }
 
   async 49(mcqueen) {
     const name = '心动';
     await print_event_name(name, mcqueen);
-    await lines[name](this.dict);
+    await lines[name](this.#dict);
     await sys_love_uma_in_event(this.id);
   }
 
@@ -101,7 +107,7 @@ module.exports = class extends CustomizedLove {
     }
     const name = '深夜时分的交心';
     await print_event_name(name, mcqueen);
-    if ((await lines[name](this.dict)).at(-1) === 1) {
+    if ((await lines[name](this.#dict)).at(-1) === 1) {
       await sys_love_uma_in_event(this.id);
     } else {
       await punish_rejecting_love(this.id);
@@ -110,7 +116,7 @@ module.exports = class extends CustomizedLove {
 
   async 89(mcqueen, me, callname, stage, extra_flag, event_object) {
     const tenn_spr_check = check_aim_race(
-      new RaceHistory(this.id).get(),
+      RaceHistory.get(this.id).get(),
       race_enum.tenn_spr,
       2,
       1,
@@ -139,7 +145,7 @@ module.exports = class extends CustomizedLove {
     } else if (tenn_spr_check && stage === event_hooks.week_end) {
       const name = '甜蜜期';
       await print_event_name(name, mcqueen);
-      const ret = await lines[name](this.dict);
+      const ret = await lines[name](this.#dict);
       if (ret[0] === 1) {
         if (ret[2] === 1) {
           await quick_into_sex(this.id);
@@ -163,7 +169,7 @@ module.exports = class extends CustomizedLove {
   async 99(mcqueen) {
     const name = '新的明天';
     await print_event_name(name, mcqueen);
-    await lines[name](this.dict);
+    await lines[name](this.#dict);
     await sys_love_uma_in_event(this.id);
   }
 };

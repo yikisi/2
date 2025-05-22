@@ -81,7 +81,7 @@ module.exports = class extends CustomizedCheck {
 
   check_and_get_titles(aim_check) {
     const event_marks = new TeioEduMarks(),
-      races = new RaceHistory(this.id).get(),
+      races = RaceHistory.get(this.id).get(),
       titles = [];
     let normal_title_check =
       check_aim_race(races, race_enum.sats_sho, 1, 1) &&
@@ -212,7 +212,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + 19: // 交涉
           if (
             !event_marks.give_up &&
-            new RaceHistory(3)
+            RaceHistory.get(3)
               .get_entries()
               .filter((e) => e.weeks >= 48 && e.weeks < 96 && e.rank === 1)
               .length >= 3
@@ -226,7 +226,7 @@ module.exports = class extends CustomizedCheck {
           break;
         case 95 + 25: // 春之帝王
           if (
-            new RaceHistory(3)
+            RaceHistory.get(3)
               .get_entries()
               .filter(
                 (e) =>
@@ -242,7 +242,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + race_infos[race_enum.tenn_spr].date + 1:
           if (
             !event_marks.give_up &&
-            new RaceHistory(3).get_result(
+            RaceHistory.get(3).get_result(
               95 + race_infos[race_enum.tenn_spr].date,
             )?.race === race_enum.tenn_spr &&
             !era.get(`status:${this.id}:腿伤`)
@@ -291,7 +291,7 @@ module.exports = class extends CustomizedCheck {
       }
       if (!event_marks.famous_in_famous && edu_weeks >= 96) {
         if (
-          new CharaTitles(this.id)
+          CharaTitles.get(this.id)
             .get()
             .findIndex((e) => e.n.endsWith('三冠')) !== -1
         ) {
@@ -313,7 +313,7 @@ module.exports = class extends CustomizedCheck {
 
   check_palace_and_get_aims() {
     if (era.get(`status:${this.id}:腿伤`)) {
-      const races = new RaceHistory(this.id).get();
+      const races = RaceHistory.get(this.id).get();
       if (
         check_aim_race(races, race_enum.japa_cup, 2, 1) &&
         check_aim_race(races, race_enum.arim_kin, 2, 1)
@@ -335,7 +335,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(this.id).get();
+      races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
 
     buffer.push(check_aim_and_get_entry(races, race_enum.waka_sta, 1, 3));

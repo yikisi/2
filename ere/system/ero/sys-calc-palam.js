@@ -202,14 +202,14 @@ module.exports = {
    * @param {number} orgasm_times
    */
   update_palam_from_main_orgasm(chara_id, orgasm_times) {
-    const times = orgasm_times <= 6 ? orgasm_times : 6;
+    const times = Math.min(orgasm_times, 6);
     // 次要部位高潮会增加主要部位快感，无任何加减成
     // 只有本人能获得次要部位高潮获取的快感宝珠
-    if (get_penis_size(chara_id)) {
+    if (get_penis_size(chara_id) > 0) {
       // 男性和扶她加牛子快感
       add_palam(chara_id, part_enum.penis, palam_from_orgasm * times);
     }
-    if (era.get(`cflag:${chara_id}:阴道尺寸`)) {
+    if (era.get(`cflag:${chara_id}:阴道尺寸`) > 0) {
       // 女性和扶她加浦西快感
       add_palam(chara_id, part_enum.virgin, palam_from_orgasm * times);
     }

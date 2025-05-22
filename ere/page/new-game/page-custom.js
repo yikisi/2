@@ -4,7 +4,11 @@ const sys_change_hair = require('#/system/chara/sys-change-hair');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const CharaTalk = require('#/utils/chara-talk');
-const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
+const {
+  gacha,
+  get_random_entry,
+  join_to_string,
+} = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
@@ -150,7 +154,6 @@ function random_chara() {
     default:
       era.set('callname:0:-2', '你');
   }
-  CharaTalk.me = new CharaTalk(0);
   era.set('cstr:0:发色', get_random_entry(hair_color_names));
   era.set('cstr:0:呆毛', top_hairs[get_random_value(1, 5)] || '');
   era.set('cstr:0:前发', get_random_entry(front_hairs));
@@ -230,7 +233,7 @@ async function page_custom() {
     era.set('flag:马娘初始好感', 300);
     era.set('flag:马娘初始爱慕', 50);
     era.set('flag:不忠惩罚', 0);
-    new CharaTitles(0).push({ c: buff_colors[2], n: '萝莉控', s: true });
+    CharaTitles.get(0).push({ c: buff_colors[2], n: '萝莉控', s: true });
   } else if (era.get('callname:0:-1').indexOf('渡鸦') !== -1) {
     era.set('flag:角色性别', 99);
     era.set('flag:游戏结束', 0);
@@ -240,16 +243,15 @@ async function page_custom() {
     era.set('flag:马娘初始好感', 300);
     era.set('flag:马娘初始爱慕', 50);
     era.set('flag:不忠惩罚', 0);
-    new CharaTitles(0).push({ c: buff_colors[2], n: '无法战胜', s: true });
+    CharaTitles.get(0).push({ c: buff_colors[2], n: '无法战胜', s: true });
   } else if (
     era.get('callname:0:-1').indexOf('天马闪光蹄') !== -1 &&
     sys_personal_achievement.get(3)
   ) {
     era.set('flag:角色性别', 0);
     era.set('flag:彩蛋机制', 3);
-    new CharaTitles(0).push({ c: buff_colors[2], n: '运动系爱好者', s: true });
+    CharaTitles.get(0).push({ c: buff_colors[2], n: '运动系爱好者', s: true });
   }
-  CharaTalk.me = new CharaTalk(0);
   while (flag_custom) {
     attr_names.forEach((v) => era.set(`base:0:${v}`, 25));
     await era.clear();
@@ -292,7 +294,6 @@ async function page_custom() {
       } else {
         era.set('callname:0:-2', '你');
       }
-      CharaTalk.me = new CharaTalk(0);
       random_talent();
     } else if (first_button === 3) {
       let flag_hair = true,
@@ -678,7 +679,6 @@ async function page_custom() {
               } while (temp.length > 6);
           }
       }
-      CharaTalk.me = new CharaTalk(0);
       await era.printAndWait([
         CharaTalk.me.get_colored_actual_name(),
         ' 训练员，旁白君从此就称您为 ',
@@ -742,7 +742,7 @@ async function page_custom() {
               : '',
             { isBr: true },
             '发型：',
-            join_list(
+            join_to_string(
               [
                 era.get('cstr:0:呆毛') ? `${era.get('cstr:0:呆毛')}呆毛` : '',
                 era.get('cstr:0:前发'),

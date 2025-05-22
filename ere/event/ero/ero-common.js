@@ -10,6 +10,7 @@
 const era = require('#/era-electron');
 
 const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
+const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -77,10 +78,14 @@ const sex_mark_desc = [
 ];
 
 class CustomizedEro {
-  /** @type {CustomizedEro} */
-  static me;
+  /** @type {function(number):CustomizedEro} */
+  static get_custom_ero;
   /** @type {function(number,number,*?):Promise} */
   static run_custom_ero;
+
+  get_this() {
+    return this;
+  }
 
   /**
    * @param {number} chara_id
@@ -110,11 +115,73 @@ class CustomizedEro {
   async ero_start(handle_ero_act) {}
 
   /**
+   * 睡奸惊醒
+   * @param {number} supporter
+   */
+  // eslint-disable-next-line no-unused-vars
+  async raping_start(supporter) {}
+
+  /**
    * 调教结束
    * @param {function(number,boolean[],boolean=):Promise<boolean>} handle_ero_act
    */
   // eslint-disable-next-line no-unused-vars
   async ero_end(handle_ero_act) {}
+
+  /**
+   * 加入3P
+   * @param {number} lover 主要床伴
+   * @returns {Promise<boolean>} 是否同意
+   */
+  // eslint-disable-next-line no-unused-vars
+  async join_3p(lover) {
+    const chara = get_chara_talk(this.id);
+    era.print([chara.get_colored_name(), ' 面色绯红地想要加入……接受吗？']);
+    era.printButton('「你来的正是时候」', 1);
+    era.printButton('还是别了……', 2);
+    return (await era.input()) === 1;
+  }
+
+  /**
+   * 加入3P同意
+   * @param {number} lover 主要床伴
+   */
+  // eslint-disable-next-line no-unused-vars
+  async join_3p_accept(lover) {
+    await era.printAndWait([
+      get_chara_talk(this.id).get_colored_name(),
+      ' 扑入 ',
+      get_chara_talk(0).get_colored_name(),
+      ' 怀中……',
+    ]);
+  }
+
+  /**
+   * 强行加入3P
+   * @param {number} lover 主要床伴
+   */
+  async join_3p_force(lover) {
+    await era.printAndWait([
+      get_chara_talk(this.id).get_colored_name(),
+      ' 征得 ',
+      get_chara_talk(lover).get_colored_name(),
+      ' 的同意后，华丽地无视了 ',
+      get_chara_talk(0).get_colored_name(),
+      ' 的抗议……',
+    ]);
+  }
+
+  /**
+   * 加入3P拒绝
+   * @param {number} lover 主要床伴
+   */
+  // eslint-disable-next-line no-unused-vars
+  async join_3p_reject(lover) {
+    await era.printAndWait([
+      get_chara_talk(this.id).get_colored_name(),
+      ' 掩面而去……',
+    ]);
+  }
 
   /**
    * 设置马娘偏好部位
@@ -167,7 +234,9 @@ class CustomizedEro {
       ]);
     } else if (extra_flag.part === part_enum.breast) {
       let cup = get_breast_cup(this.id);
-      cup > 'G' && (cup = 'G');
+      if (cup > 'G') {
+        cup = 'G';
+      }
       era.print([
         '深色的小樱桃在 ',
         chara.get_colored_name(),
@@ -187,25 +256,12 @@ class CustomizedEro {
    * @param {{part:number}} extra_flag
    */
   become_lubrication(chara, me, callname, hook, extra_flag) {
-    if (extra_flag.part === part_enum.breast) {
-      const amount = era.get(`nowex:${this.id}:喷奶量`);
-      amount &&
-        era.print([
-          chara.get_colored_name(),
-          ' 的',
-          { content: ' 胸部 ', color: buff_colors[2] },
-          `${era.get(`ex:${this.id}:喷奶阻碍`) ? '猛然喷出了' : '分泌了'} `,
-          { content: `${amount}ml 乳汁`, color: buff_colors[2] },
-          '！',
-        ]);
-    } else {
-      era.print([
-        chara.get_colored_name(),
-        ' 的 ',
-        { content: part_names[extra_flag.part], color: buff_colors[2] },
-        ' 变得湿润了！',
-      ]);
-    }
+    era.print([
+      chara.get_colored_name(),
+      ' 的 ',
+      { content: part_names[extra_flag.part], color: buff_colors[2] },
+      ' 变得湿润了！',
+    ]);
   }
 
   /**
@@ -217,28 +273,29 @@ class CustomizedEro {
    * @param {{continue:boolean,part:number}} extra_flag
    */
   wound(chara, me, callname, hook, extra_flag) {
-    era.print(
-      extra_flag.continue
-        ? [
-            chara.get_colored_name(),
-            ' 的 ',
-            { content: part_names[extra_flag.part], color: buff_colors[2] },
-            ' 还在',
-            { content: ' 流血 ', color: buff_colors[3] },
-            '！',
-          ]
-        : [
-            chara.get_colored_name(),
-            ' 的 ',
-            { content: part_names[extra_flag.part], color: buff_colors[2] },
-            ' 被',
-            { content: ' 撑裂 ', color: buff_colors[3] },
-            '了！',
-          ],
-    );
+    if (extra_flag.continue) {
+      era.print([
+        chara.get_colored_name(),
+        ' 的 ',
+        { content: part_names[extra_flag.part], color: buff_colors[2] },
+        ' 还在',
+        { content: ' 流血 ', color: buff_colors[3] },
+        '！',
+      ]);
+    } else {
+      era.print([
+        chara.get_colored_name(),
+        ' 的 ',
+        { content: part_names[extra_flag.part], color: buff_colors[2] },
+        ' 被',
+        { content: ' 撑裂 ', color: buff_colors[3] },
+        '了！',
+      ]);
+    }
   }
 
-  /** @author 无名黑奴
+  /**
+   * @author 无名黑奴
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -276,14 +333,7 @@ class CustomizedEro {
       ) {
         return 0;
       }
-      if (!stop_success) {
-        era.print([
-          me.get_colored_name(),
-          ' 在和 ',
-          chara.get_colored_name(),
-          ' 的竞速中失败了……',
-        ]);
-      } else {
+      if (stop_success) {
         era.print([
           me.get_colored_name(),
           ' 的 ',
@@ -295,6 +345,13 @@ class CustomizedEro {
           ' 的 ',
           touch.part === part_enum.mouth ? '俏脸' : '玉体',
           '……',
+        ]);
+      } else {
+        era.print([
+          me.get_colored_name(),
+          ' 在和 ',
+          chara.get_colored_name(),
+          ' 的竞速中失败了……',
         ]);
       }
       return 2;
@@ -393,11 +450,11 @@ class CustomizedEro {
     const father = get_chara_talk(extra_flag.father_id),
       mother = get_chara_talk(extra_flag.mother_id),
       talent_palam =
-        era.get(`talent:${mother.id}:子宫敏感`) ||
+        era.get(`talent:${mother.id}:子宫敏感`) > 0 ||
         era.get(`mark:${mother.id}:欢愉`) >= 2,
       talent_sex =
-        era.get(`talent:${mother.id}:淫乱`) ||
-        era.get(`talent:${mother.id}:榨精成瘾`),
+        era.get(`talent:${mother.id}:淫乱`) > 0 ||
+        era.get(`talent:${mother.id}:榨精成瘾`) > 0,
       sex_mark = era.get(`mark:${mother.id}:淫纹`) >= 2,
       is_awake = sys_check_awake(mother.id);
     let talent_check = talent_palam || talent_sex;
@@ -409,10 +466,11 @@ class CustomizedEro {
       ]);
     }
     if (
-      era.get(`status:${mother.id}:经期`) ||
+      era.get(`status:${mother.id}:经期`) > 0 ||
       era.get(`cflag:${mother.id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no ||
-      era.get(`status:${mother.id}:长效避孕药`) ||
-      era.get(`status:${mother.id}:短效避孕药`)
+      era.get(`status:${mother.id}:长效避孕药`) > 0 ||
+      era.get(`status:${mother.id}:短效避孕药`) > 0 ||
+      CharaInmon.get(mother.id).on(plugin_enum.no_preg)
     ) {
       if (is_awake && talent_check) {
         if (talent_palam) {
@@ -457,12 +515,12 @@ class CustomizedEro {
           mother.get_colored_name(),
           ' 毫无防备的卵子前进……',
         ]);
-        is_awake &&
-          !talent_check &&
-          (await era.printAndWait([
+        if (is_awake && !talent_check) {
+          await era.printAndWait([
             mother.get_colored_name(),
             ' 惊恐地意识到自己可能会怀孕的事实……',
-          ]));
+          ]);
+        }
       } else if (love < 90) {
         await era.printAndWait([
           father.get_colored_name(),
@@ -470,12 +528,12 @@ class CustomizedEro {
           mother.get_colored_name(),
           ' 卸下防备的卵子前进……',
         ]);
-        is_awake &&
-          !talent_check &&
-          (await era.printAndWait([
+        if (is_awake && !talent_check) {
+          await era.printAndWait([
             mother.get_colored_name(),
             ' 朦胧地意识到自己可能会怀孕的事实……',
-          ]));
+          ]);
+        }
       } else {
         if (
           era.get(`status:${mother.id}:反避孕套`) &&
@@ -557,7 +615,9 @@ class CustomizedEro {
    */
   async report_pregnant_between_weeks(chara, me, callname, hook, extra_flag) {
     if (extra_flag.mother_id === 0) {
-      return await CustomizedEro.me.report_pregnant_between_weeks(
+      return await CustomizedEro.get_custom_ero(
+        0,
+      ).report_pregnant_between_weeks(
         get_chara_talk(extra_flag.father_id),
         me,
         callname,
@@ -681,7 +741,11 @@ class CustomizedEro {
    */
   async have_baby(father, mother, child) {
     if (mother.id === 0) {
-      return await CustomizedEro.me.have_baby(father, mother, child);
+      return await CustomizedEro.get_custom_ero(0).have_baby(
+        father,
+        mother,
+        child,
+      );
     }
     if (era.get(`love:${mother.id || father.id}`) < 90) {
       era.drawLine();
@@ -840,9 +904,7 @@ class CustomizedEro {
   // eslint-disable-next-line no-unused-vars
   async after_betrayed(chara, me, callname, hook, extra_flag) {
     const race = era.get(`cflag:${this.id}:种族`),
-      like_betrayed =
-        era.get(`talent:${this.id}:绿帽癖`) > 0 ||
-        CharaInmon.get(this.id).on(plugin_enum.ntr);
+      like_betrayed = sys_check_cuckold(this.id);
     switch (era.get(`exp:${this.id}:被绿次数`) + 1) {
       case 1:
         era.drawLine();

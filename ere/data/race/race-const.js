@@ -345,6 +345,8 @@ const race_enum = {
   duba_tur: 0,
   // 阿乔斯短途锦标
   alqu_spr: 0,
+  // 芙蓉锦标
+  fuyo_sta: 0,
 };
 Object.keys(race_enum).forEach((e, i) => (race_enum[e] = i));
 
@@ -522,6 +524,7 @@ race_infos[race_enum.duba_sha] = require('#/data/race/g1/race-duba-sha');
 race_infos[race_enum.duba_cls] = require('#/data/race/g1/race-duba-cls');
 race_infos[race_enum.duba_tur] = require('#/data/race/g1/race-duba-tur');
 race_infos[race_enum.alqu_spr] = require('#/data/race/g1/race-alqu-spr');
+race_infos[race_enum.fuyo_sta] = require('#/data/race/op/race-fuyo-sta');
 
 race_infos.forEach((e) => {
   const param_id = e.param_id;

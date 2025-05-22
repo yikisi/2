@@ -34,7 +34,7 @@ module.exports = (handlers) => {
       race_infos[race_enum.arim_kin].get_colored_name(),
       '。',
     ]);
-    const rank = new RaceHistory(52).get_result(95 + 48)?.rank;
+    const rank = RaceHistory.get(52).get_result(95 + 48)?.rank;
     if (rank === 1) {
       await era.printAndWait([
         '也拜 ',

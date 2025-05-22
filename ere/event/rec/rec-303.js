@@ -98,7 +98,7 @@ module.exports = class extends CustomizedRecruit {
         }
       }
       set('cflag:303:招募状态', recruit_flags.yes);
-      etsuko.name = set('callname:303:-2', '乙名史悦子');
+      set('callname:303:-2', '乙名史悦子');
       await this.recruit_end();
     }
   }
