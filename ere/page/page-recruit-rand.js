@@ -18,6 +18,7 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 const print_page_header = require('#/page/components/page-header');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { check_edu_script } = require('#/event/edu/edu-factory');
 const game_guides = require('#/event/others/game-guides');
 const { check_rec_script, run_custom_rec } = require('#/event/rec/rec-factory');
 
@@ -154,7 +155,10 @@ async function print_rec_page() {
                 accelerator: chara_id,
                 config: {
                   align: 'center',
-                  buttonType: check_rec_script(chara_id) ? 'danger' : 'warning',
+                  buttonType:
+                    check_rec_script(chara_id) && check_edu_script(chara_id)
+                      ? 'danger'
+                      : 'warning',
                   disabled:
                     flag_limit || (cur_recruit && cur_recruit !== chara_id),
                 },

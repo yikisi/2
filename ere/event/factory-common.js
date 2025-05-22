@@ -17,6 +17,10 @@ class CommonKojoFactory {
     this.#child = child;
   }
 
+  check(id) {
+    return this.#cons[id] !== undefined;
+  }
+
   clean() {
     const keys = Object.keys(this.#dict).filter((e) => e >= first_child_id);
     for (const k of keys) {

@@ -49,6 +49,10 @@ class CustomizedRecruit {
     }
   }
 
+  get_this() {
+    return this;
+  }
+
   /**
    * @param {number} stage
    * @param {EventObject} event_object

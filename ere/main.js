@@ -6,6 +6,7 @@ const new_game = require('#/page/new-game/page-new-game');
 const homepage = require('#/page/page-homepage');
 const load_game = require('#/page/page-load-game');
 
+const { check_edu_script } = require('#/event/edu/edu-factory');
 const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
@@ -378,7 +379,7 @@ module.exports = async () => {
                     width: 6,
                   },
                   content: `${era.get(`static:${e}:name`)}${
-                    check_rec_script(e) ? '*' : ''
+                    check_rec_script(e) && check_edu_script(e) ? '*' : ''
                   }`,
                   type: 'button',
                 };

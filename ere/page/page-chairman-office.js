@@ -17,6 +17,7 @@ const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
 
+const { check_edu_script } = require('#/event/edu/edu-factory');
 const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -177,7 +178,9 @@ async function page_chairman_office() {
                     temp_list
                       .map((chara_id) => {
                         const color = get_chara_color(chara_id);
-                        const flag_script = check_rec_script(chara_id);
+                        const flag_script =
+                          check_rec_script(chara_id) &&
+                          check_edu_script(chara_id);
                         return {
                           accelerator: chara_id,
                           config: {

@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const rec_scripts = readdirSync('../../ere/event/rec')
+const rec_scripts = readdirSync(join(__dirname, '../../ere/event/rec'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
@@ -28,15 +29,14 @@ const rec_scripts = readdirSync('../../ere/event/rec')
 
 let output = `const { get } = require('#/era-electron');
 
-const common_cons = require('#/event/rec/rec-common');
+const CommonKojoFactory = require('#/event/factory-common');
+const CustomizedRec = require('#/event/rec/rec-common');
 const punish_by_yandere = require('#/event/snippets/punish-by-yandere');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 
 /** @type {Record<string,CustomizedRecruit>} */
 const cons_dict = {};
-/** @type {Record<string,CustomizedRecruit>} */
-const obj_dict = {};
 
 const current = new Date().getTime();
 
@@ -54,14 +54,19 @@ console.log(
   'ms',
 );
 
-module.exports = {
+class RecFactory extends CommonKojoFactory {
+  constructor() {
+    super(cons_dict, CustomizedRec);
+  }
+
   /**
    * @param {number} chara_id
    * @returns {boolean}
    */
   check_rec_script(chara_id) {
-    return cons_dict[chara_id] !== undefined;
-  },
+    return this.check(chara_id);
+  }
+
   /**
    * @param {number} chara_id
    * @param {number} stage
@@ -70,23 +75,27 @@ module.exports = {
    * @returns {Promise<boolean|void>}
    */
   run_custom_rec(chara_id, stage, _, event_object) {
-    if (!obj_dict[chara_id]) {
-      obj_dict[chara_id] = new (cons_dict[chara_id] || common_cons)(chara_id);
-    }
-    return obj_dict[chara_id].recruit(stage, event_object).then((r) => {
+    const kojo = this.get(chara_id);
+    return kojo.recruit(stage, event_object).then((r) => {
       if (get(\`cflag:\${chara_id}:招募状态\`) === recruit_flags.yes) {
-        return obj_dict[chara_id]
+        return kojo
           .recruit_result()
           .then(() => punish_by_yandere(chara_id, stage))
           .then(() => r);
       }
       return r;
     });
-  },
-};
+  }
+}
+
+const rec_factory = new RecFactory();
+rec_factory.check_rec_script = rec_factory.check_rec_script.bind(rec_factory);
+rec_factory.run_custom_rec = rec_factory.run_custom_rec.bind(rec_factory);
+
+module.exports = rec_factory;
 `;
 
-writeFileSync('../../ere/event/rec/rec-factory.js', output);
+writeFileSync(join(__dirname, '../../ere/event/rec/rec-factory.js'), output);
 
 console.log(
   `[generate-rec-factory.js] registers ${rec_scripts.length} recruit scripts`,

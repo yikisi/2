@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const base_scripts = readdirSync('../../ere/event/edu')
+const base_scripts = readdirSync(join(__dirname, '../../ere/event/edu'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
@@ -56,7 +57,15 @@ console.log(
 
 class EduFactory extends CommonKojoFactory {
   constructor() {
-    super(cons_dict, CustomizedEdu, CustomizedEdu);
+    super(cons_dict, CustomizedEdu);
+  }
+
+  /**
+   * @param {number} chara_id
+   * @returns {boolean}
+   */
+  check_edu_script(chara_id) {
+    return this.check(chara_id);
   }
 
   /**
@@ -86,13 +95,14 @@ class EduFactory extends CommonKojoFactory {
 }
 
 const edu_factory = new EduFactory();
+edu_factory.check_edu_script = edu_factory.check_edu_script.bind(edu_factory);
 edu_factory.get_custom_edu = edu_factory.get_custom_edu.bind(edu_factory);
 edu_factory.run_custom_edu = edu_factory.run_custom_edu.bind(edu_factory);
 
 module.exports = edu_factory;
 `;
 
-writeFileSync('../../ere/event/edu/edu-factory.js', output);
+writeFileSync(join(__dirname, '../../ere/event/edu/edu-factory.js'), output);
 
 console.log(
   `[generate-edu-factory.js] registers ${base_scripts.length} edu scripts`,
