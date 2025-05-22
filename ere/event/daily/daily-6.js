@@ -63,12 +63,6 @@ module.exports = class extends CustomizedDaily {
     dict['你'] = era.get('callname:0:-2');
     dict['玩家名'] = era.get('callname:0:-1');
     dict['她'] = era.get(`cflag:${this.id}:性别`) === 1 ? '他' : '她';
-    dict['你们'] =
-      dict['你'] === '你' || dict['你'] === '您'
-        ? '你们'
-        : era.get('cflag:0:性别') === 1 || dict['她'] === '他'
-          ? '他们'
-          : '她们';
     await lines['外出神社祈福'](dict);
   }
 

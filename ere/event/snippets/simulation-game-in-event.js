@@ -10,7 +10,7 @@ const { race_infos } = require('#/data/race/race-const');
 
 /**
  * @param {PseudoUma} chara
- * @param {PseudoUma[]} _contestants
+ * @param {(PseudoUma|LegendUmaSelector|LegendUmaFilter)[]} _contestants
  * @param {number} reference_race
  * @param {string} [race_name]
  */

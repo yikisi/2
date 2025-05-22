@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const base_scripts = readdirSync('../../ere/event/edu')
+const base_scripts = readdirSync(join(__dirname, '../../ere/event/edu'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
@@ -92,7 +93,7 @@ edu_factory.run_custom_edu = edu_factory.run_custom_edu.bind(edu_factory);
 module.exports = edu_factory;
 `;
 
-writeFileSync('../../ere/event/edu/edu-factory.js', output);
+writeFileSync(join(__dirname, '../../ere/event/edu/edu-factory.js'), output);
 
 console.log(
   `[generate-edu-factory.js] registers ${base_scripts.length} edu scripts`,

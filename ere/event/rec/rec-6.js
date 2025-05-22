@@ -13,11 +13,20 @@ const {
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
 
+const { add_event, cb_enum } = require('#/event/queue');
 const lines = require('#/event/rec/rec-6.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 
+const CharaAvailableSkills = require('#/data/chara-available-skills');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
+const RaceHistory = require('#/data/race/model/race-history');
+const { race_enum } = require('#/data/race/race-const');
+const { attr_names } = require('#/data/train-const');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
+const { get_random_value } = require('#/utils/value-utils');
 
 module.exports = class extends CustomizedRecruit {
   async recruit() {
@@ -31,11 +40,6 @@ module.exports = class extends CustomizedRecruit {
     dict['骏川缰绳'] = era.get('callname:301:-2');
     dict['玩家敬称'] = era.get('cflag:0:性别') === 1 ? '先生' : '小姐';
     dict['玩家名'] = era.get('callname:0:-1');
-    dict['你们'] = dict['你']
-      ? '你们'
-      : dict['玩家敬称'] === '先生' || dict['她'] === '他'
-        ? '他们'
-        : '她们';
     dict['训练员头衔'] = get_trainer_title().substring(0, 2);
     era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
     const ret = await lines['recruit'](dict);
@@ -56,6 +60,36 @@ module.exports = class extends CustomizedRecruit {
       sys_change_attr_and_print(0, '体力', -era.get('maxbase:0:体力') * 0.1);
     }
     wait_flag = sys_change_motivation(6, motivation_change) || wait_flag;
-    wait_flag && (await era.waitAnyKey());
+    if (wait_flag) {
+      await era.waitAnyKey();
+    }
+    add_event(
+      event_hooks.week_end,
+      new EventObject(this.id, cb_enum.edu).set_arg('beginning'),
+    );
+  }
+
+  async recruit_result() {
+    await super.recruit_result();
+    RaceHistory.get(this.id).add_result(
+      23,
+      new RaceHistory.RaceResult(
+        1,
+        race_enum.begin_race,
+        1,
+        1,
+        era.get('flag:当前年') - 1,
+      ),
+    );
+    era.add(`cflag:${this.id}:育成回合计时`, 48);
+    attr_names.forEach((e) => {
+      era.add(`abl:${this.id}:${e}训练等级`, 1);
+      era.add(`base:${this.id}:${e}`, get_random_value(125, 175));
+    });
+    era.add(`exp:${this.id}:技能点数`, 600);
+    const available_skills = CharaAvailableSkills.get(this.id);
+    const got_skills = available_skills.get().splice(0, 2);
+    get_skills_and_print_in_event(this.id, got_skills);
+    await era.waitAnyKey();
   }
 };

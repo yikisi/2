@@ -28,13 +28,14 @@ const { attr_enum } = require('#/data/train-const');
  * @param {[]} to_print
  */
 function print_attr_change(chara_id, to_print) {
-  to_print.length &&
+  if (to_print.length > 0) {
     era.print([
       get_chara_talk(chara_id).get_colored_name(),
       ' 的 ',
       ...to_print,
       '！',
     ]);
+  }
   return to_print.length > 0;
 }
 

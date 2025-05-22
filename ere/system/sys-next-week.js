@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const have_baby = require('#/system/ero/sub/sys-have-baby');
 const auto_update_ero_skills = require('#/system/ero/sys-auto-update');
 const {
@@ -63,7 +64,6 @@ const {
 const { location_enum } = require('#/data/locations');
 const { max_chara_id } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 
 async function sys_next_week() {
   const me = get_chara_talk(0),
