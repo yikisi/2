@@ -275,14 +275,18 @@ function love_uma(id, val, shown = true) {
     (new_val === 49 || new_val === 74 || new_val === 89 || new_val === 99) &&
     era.get(`cflag:${id}:爱慕暂拒`) !== new_val
   ) {
-    if ((sys_check_hide_relation_and_love(id) & 0b1) === 0 && shown) {
-      era.print([
-        '和 ',
-        get_chara_talk(id).get_colored_name(),
-        ' 的关系似乎可以更进一步了……',
-      ]);
+    if (era.get(`cflag:${id}:招募状态`) !== recruit_flags.no) {
+      if ((sys_check_hide_relation_and_love(id) & 0b1) === 0 && shown) {
+        era.print([
+          '和 ',
+          get_chara_talk(id).get_colored_name(),
+          ' 的关系似乎可以更进一步了……',
+        ]);
+      }
+      get_custom_check(id).check_love_events();
+    } else {
+      era.set(`cflag:${id}:爱慕暂拒`, new_val);
     }
-    get_custom_check(id).check_love_events();
   }
   return shown;
 }
