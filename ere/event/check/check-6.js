@@ -1,7 +1,6 @@
 const { get, set } = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
-const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 
 const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
@@ -117,19 +116,6 @@ module.exports = class extends CustomizedCheck {
           add_event(event_hooks.week_start, event_special.set_arg('elephant'));
       }
       check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
-      if (first_edu) {
-        const registered = sys_reg_race(this.id);
-        switch (registered.curr.race) {
-          case race_enum.sats_sho:
-          case race_enum.toky_yus:
-          case race_enum.kiku_sho:
-            registered.curr.race =
-              registered.curr.week =
-              registered.last.race =
-              registered.last.week =
-                -1;
-        }
-      }
     } else {
       super.check_next_week();
     }

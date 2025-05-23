@@ -227,7 +227,8 @@ async function reg_race_page() {
                     base_disabled_check ||
                     (is_foreign &&
                       race_infos[e].date + year_begin - cur_round <=
-                        expedition_weeks),
+                        expedition_weeks) ||
+                    get_custom_mec(chara_id).is_race_disabled(e),
                 },
                 content:
                   race_infos[e].get_colored_name_with_class().content +

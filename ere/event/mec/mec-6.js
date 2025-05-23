@@ -100,6 +100,18 @@ module.exports = class extends CustomizedMec {
     return 0;
   }
 
+  is_race_disabled(race) {
+    if (era.get(`cflag:${this.id}:育成次数`) === 0) {
+      switch (race) {
+        case race_enum.sats_sho:
+        case race_enum.toky_yus:
+        case race_enum.kiku_sho:
+          return true;
+      }
+    }
+    return false;
+  }
+
   set_callname() {
     if (!this.set_callname_from_src()) {
       era.set('callname:6:0', '训练员');

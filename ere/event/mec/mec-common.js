@@ -38,6 +38,12 @@ class CustomizedMec {
     return true;
   }
 
+  /** @param {number} race */
+  // eslint-disable-next-line no-unused-vars
+  is_race_disabled(race) {
+    return false;
+  }
+
   is_race_register_enabled() {
     return true;
   }
