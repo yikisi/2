@@ -88,7 +88,7 @@ async function page_race_result(contestants, info, race_id) {
           { fade: true, fadeInternal: 100 },
         );
       }
-      curr_line = (index ? era.replaceInColRows : era.printInColRows)(
+      curr_line = (index > 0 ? era.replaceInColRows : era.printInColRows)(
         ...result.dynamic_table[index],
         [{ content: [{ isBr: true }], type: 'text' }],
         {
@@ -210,7 +210,7 @@ async function page_race_result(contestants, info, race_id) {
                         '竞马场 ',
                         info.get_colored_name_with_class(),
                       ]
-                    : ['训练场 模拟赛']),
+                    : [`训练场 ${info.name_zh}`]),
                   { isBr: true },
                   { isBr: true },
                 ],

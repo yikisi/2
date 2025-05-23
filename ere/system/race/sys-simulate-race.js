@@ -137,15 +137,15 @@ race_message_handlers.default = (info) => [
 
 /**
  * @param {PseudoUma[]} list_chara
- * @param {RaceInfo} race_info
+ * @param {RaceInfo} info
  * @param {number} [race_id]
  * @param {boolean} [shown=true]
  */
-function sys_sim_race(list_chara, race_info, race_id, shown = true) {
+function sys_sim_race(list_chara, info, race_id, shown = true) {
   const beginning_report =
       race_id === undefined
         ? ['正在检查马闸……', '正在检查令枪……', '选手入闸……', '开赛！']
-        : get_random_entry(beginning_report_handlers)(race_info),
+        : get_random_entry(beginning_report_handlers)(info),
     current = new Date().getTime(),
     count_uma = list_chara.length,
     top_pop = list_chara.find((e) => e.pop[0] === 1),
@@ -163,22 +163,22 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
                 : '似乎一般',
             '！',
           ],
-    fron_header = new Array(Math.floor(race_info.span / 200) - 1)
+    fron_header = new Array(Math.floor(info.span / 200) - 1)
       .fill(0)
-      .map((_, i) => (race_info.span % 200) + (i + 1) * 200),
+      .map((_, i) => (info.span % 200) + (i + 1) * 200),
     fron_record_index = list_chara.map(() => 0),
     fron_records = list_chara.map(() => {
-      return new Array(Math.floor(race_info.span / 200)).fill('');
+      return new Array(Math.floor(info.span / 200)).fill('');
     }),
-    has_final_corner = race_info.lanes.find((e) => e.is_curve && e.is_last),
+    has_final_corner = info.lanes.find((e) => e.is_curve && e.is_last),
     message_buffer = [],
     mod_stamina_cost_mess =
-      race_info.ground === RaceInfo.ground_enum.grass
-        ? mod_stamina_cost_mess_grass[race_info.mess]
-        : mod_stamina_cost_mess_dirt[race_info.mess],
+      info.ground === RaceInfo.ground_enum.grass
+        ? mod_stamina_cost_mess_grass[info.mess]
+        : mod_stamina_cost_mess_dirt[info.mess],
     race_message = (
       race_message_handlers[race_id] || race_message_handlers.default
-    )(race_info, top_pop);
+    )(info, top_pop);
   let flag_race_phase = 1;
   message_buffer.push(get_event_record(race_message));
   if (shown) {
@@ -211,14 +211,14 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
       fron_header.slice(0, fron_cols),
       '0.0"',
       0,
-      race_info.span,
+      info.span,
       false,
     ),
   ]);
 
-  const lane = race_info.lanes[0],
-    slope = race_info.slopes[0]?.start === 0 ? race_info.slopes[0].slope : 0,
-    loc_mind_end = (race_info.span * 10) / 24;
+  const lane = info.lanes[0],
+    slope = info.slopes[0]?.start === 0 ? info.slopes[0].slope : 0,
+    loc_mind_end = (info.span * 10) / 24;
   sub_simulate_skill.init(lane, slope);
 
   // 出闸
@@ -413,8 +413,8 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
           uma.race.overtakeAim.to_be_overtaken = true;
         }
         uma.race.overtakeAim = l[j];
-        if (uma.race.location >= race_info.span) {
-          uma.race.location = race_info.span;
+        if (uma.race.location >= info.span) {
+          uma.race.location = info.span;
           list_finished.push(uma);
           uma.race.totalTime = timer_record;
           report_cache.at(-1).push({ e: race_event_enum.finish, u: uma });
@@ -442,7 +442,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
         fron_header.slice(fron_start, fron_end),
         timer_record,
         (list_in_race[0] || list_finished[0]).race.location,
-        race_info.span,
+        info.span,
         list_in_race.length === 0,
       ),
     ]);
@@ -479,7 +479,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
       list_chara,
       list_in_race,
       list_finished,
-      race_info,
+      info,
       timer,
       mod_stamina_cost_mess,
       dynamic_table,
@@ -520,7 +520,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
             switch (uma.race.loc_mind) {
               case 0:
                 if (prob_check) {
-                  if (check_nige_loc_mind_speed_up_mode(uma, i, l, race_info)) {
+                  if (check_nige_loc_mind_speed_up_mode(uma, i, l, info)) {
                     uma.race.loc_mind = 1;
                     report_cache.at(-1).push({
                       e:
@@ -529,9 +529,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
                           : race_event_enum.temp_wrong_style,
                       u: uma,
                     });
-                  } else if (
-                    check_nige_loc_mind_over_take_mode(uma, i, race_info)
-                  ) {
+                  } else if (check_nige_loc_mind_over_take_mode(uma, i, info)) {
                     uma.race.loc_mind = 2;
                     report_cache.at(-1).push({
                       e:
@@ -544,7 +542,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
                 }
                 break;
               case 1:
-                if (check_nige_loc_mind_over_take_mode(uma, i, race_info)) {
+                if (check_nige_loc_mind_over_take_mode(uma, i, info)) {
                   uma.race.loc_mind = 2;
                   report_cache.at(-1).push({
                     e:
@@ -554,13 +552,13 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
                     u: uma,
                   });
                 } else if (
-                  !check_nige_loc_mind_speed_up_mode(uma, i, l, race_info)
+                  !check_nige_loc_mind_speed_up_mode(uma, i, l, info)
                 ) {
                   uma.race.loc_mind = 0;
                 }
                 break;
               case 2:
-                if (check_nige_loc_mind_speed_up_mode(uma, i, l, race_info)) {
+                if (check_nige_loc_mind_speed_up_mode(uma, i, l, info)) {
                   uma.race.loc_mind = 1;
                   report_cache.at(-1).push({
                     e:
@@ -569,9 +567,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
                         : race_event_enum.temp_wrong_style,
                     u: uma,
                   });
-                } else if (
-                  !check_nige_loc_mind_over_take_mode(uma, i, race_info)
-                ) {
+                } else if (!check_nige_loc_mind_over_take_mode(uma, i, info)) {
                   uma.race.loc_mind = 0;
                 }
                 break;
@@ -596,7 +592,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
               if (prob_check) {
                 if (
                   uma.race.conditionParams.distance_diff_top >=
-                  race_info.loc_mind_diff.other_upper[uma.race.loc_mind - 1]
+                  info.loc_mind_diff.other_upper[uma.race.loc_mind - 1]
                 ) {
                   uma.race.loc_mind = 1;
                   report_cache.at(-1).push({
@@ -608,9 +604,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
                   });
                 } else if (
                   uma.race.conditionParams.distance_diff_top <=
-                    race_info.loc_mind_diff.other_lower[
-                      uma.race.loc_mind - 1
-                    ] &&
+                    info.loc_mind_diff.other_lower[uma.race.loc_mind - 1] &&
                   uma.race.velocityIdealBuff === 0
                 ) {
                   uma.race.loc_mind = 2;
@@ -627,7 +621,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
             case 1:
               if (
                 uma.race.conditionParams.distance_diff_top <=
-                  race_info.loc_mind_diff.other_lower[uma.race.loc_mind - 1] &&
+                  info.loc_mind_diff.other_lower[uma.race.loc_mind - 1] &&
                 uma.race.velocityIdealBuff === 0
               ) {
                 uma.race.loc_mind = 2;
@@ -650,7 +644,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
             case 2:
               if (
                 uma.race.conditionParams.distance_diff_top >=
-                race_info.loc_mind_diff.other_upper[uma.race.loc_mind - 1]
+                info.loc_mind_diff.other_upper[uma.race.loc_mind - 1]
               ) {
                 uma.race.loc_mind = 1;
                 report_cache.at(-1).push({
@@ -682,12 +676,15 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
       } else {
         uma.race.loc_mind = 0;
       }
+      const strength_coff =
+        uma.race.location >= info.phases[2]
+          ? get_random_value(0.9, 1, true)
+          : get_random_value(0.7, 0.8, true);
       // 阻挡计算
       const block_percent =
         uma.race.location >= 150 &&
         uma.race.conditionParams.blocked_front > 0 &&
-        (uma.race.strength * get_random_value(0.7, 0.9, true)) /
-          l[i - 1].race.strength +
+        (uma.race.strength * strength_coff) / l[i - 1].race.strength +
           uma.race.lane_move_buff;
       if (block_percent > 0 && block_percent < 1) {
         total_blocked++;
@@ -754,7 +751,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
         (temp_report = sub_simulate_report(
           report_cache,
           list_in_race,
-          race_info,
+          info,
           race_id,
         )) !== undefined
       ) {
@@ -770,7 +767,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
     (temp_report = sub_simulate_report(
       report_cache,
       list_in_race,
-      race_info,
+      info,
       race_id,
     )) !== undefined
   ) {
@@ -781,13 +778,16 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
     `比赛模拟：${duration} ms / ${Math.ceil(timer * frame_rate)} 帧，平均 ${(duration / (timer * frame_rate)).toFixed(4)} ms/帧`,
   );
   logger.debug(
-    `阻挡&突围：${total_blocked - total_failed}(突围次数)/${total_blocked}(阻挡次数)=${(total_blocked - total_failed) / total_blocked}`,
+    `阻挡&突围：${total_blocked - total_failed}(突围次数)/${total_blocked}(阻挡次数)=${(
+      ((total_blocked - total_failed) * 100) /
+      total_blocked
+    ).toFixed(2)}%`,
   );
   message_buffer.push(get_event_record(beginning_report.at(-1)));
   if (shown) {
     replaceInColRows([{ type: 'divider' }, ...message_buffer]);
   }
-  const speed_min = (22 - race_info.span / 1000) * 0.85;
+  const speed_min = (22 - info.span / 1000) * 0.85;
   statistics.speed = statistics.speed.map((e) => {
     e.data = e.data.map((v) => Math.max(v, speed_min));
     return e;

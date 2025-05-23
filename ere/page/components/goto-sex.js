@@ -157,7 +157,7 @@ async function goto_sex(id, sex_loc) {
       await end_ero_and_show_result(true);
     }
   } else {
-    const check = era.get(`love:${id}`) >= 50 ? get_sex_acceptable(id) : -1;
+    const check = get_sex_acceptable(id);
     let ret, dice;
     if (check >= 0) {
       era.printMultiColumns(

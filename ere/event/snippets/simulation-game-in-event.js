@@ -18,7 +18,7 @@ async function simulation_game_in_event(
   chara,
   _contestants,
   reference_race,
-  race_name,
+  race_name = '模拟赛',
 ) {
   const reference = race_infos[reference_race],
     info = fill_race_weather_and_mess(
@@ -26,7 +26,7 @@ async function simulation_game_in_event(
       chara,
       new RaceInfo(
         'Sim',
-        race_name || '模拟赛',
+        race_name,
         RaceInfo.class_enum.Spe,
         undefined,
         reference.ground,
