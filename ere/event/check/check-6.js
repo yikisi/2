@@ -22,11 +22,12 @@ const { pressure_border } = require('#/data/train-const');
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
+aim_races[get_aim_race_index(race_enum.arli_cup, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.nhk_cup, 1)] = 0b11;
 aim_races[get_aim_race_index(race_enum.mile_cha, 1)] = 0b11;
-aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
+aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 0b11;
+aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 0b11;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 0b11;
 
 aim_races[get_aim_race_index(race_enum.yasu_kin, 1)] = -4;
 aim_races[get_aim_race_index(race_enum.yasu_kin, 2)] = -4;

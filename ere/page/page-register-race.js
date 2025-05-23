@@ -222,7 +222,7 @@ async function reg_race_page() {
                 accelerator: e,
                 config: {
                   align: 'center',
-                  buttonType: is_aim_race > 0 ? 'danger' : 'warning',
+                  buttonType: is_aim_race !== 0 ? 'danger' : 'warning',
                   disabled:
                     base_disabled_check ||
                     (is_foreign &&

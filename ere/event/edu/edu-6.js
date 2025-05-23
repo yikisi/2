@@ -6,7 +6,6 @@ const era = require('#/era-electron');
 
 const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
 const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
-const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
   sys_like_chara,
   sys_love_uma,
@@ -132,8 +131,7 @@ module.exports = class extends CustomizedEdu {
     dict['皇帝色'] = chara_colors[17][1];
     dict['露娜色'] = chara_colors[17][0];
     await print_name_and_show_kojo('山高皇帝远', oguri, kojo, dict);
-    era.println();
-    if (sys_change_motivation(this.id, 1)) {
+    if (all_reward_in_event(this.id, { motivation: 1, relation: 10 })) {
       await era.waitAnyKey();
     }
   }
@@ -180,7 +178,7 @@ module.exports = class extends CustomizedEdu {
     if (all_reward_in_event(this.id, { love: 2, motivation: 1 })) {
       await era.waitAnyKey();
     }
-    add_event(event_hooks.week_end, event_object.set_arg('back_home2'));
+    add_event(event_hooks.week_start, event_object.set_arg('back_home2'));
   }
 
   /** @param {CharaTalk} oguri */
@@ -260,7 +258,7 @@ module.exports = class extends CustomizedEdu {
       dict['千代王色'] = get_chara_color(69);
       dict['千明色'] = get_chara_color(57);
       dict['天狼星色'] = get_chara_color(70);
-      dict['星王'] = '#ff45b5';
+      dict['星王色'] = '#ff45b5';
       dict['露娜色'] = get_chara_color(17);
       dict['黄金城色'] = get_chara_color(40);
       era.drawLine();
@@ -341,7 +339,7 @@ module.exports = class extends CustomizedEdu {
             ...this.#dict,
             sex: get_sex_acceptable(this.id) > 0,
           };
-          await print_name_and_show_kojo(name, oguri, kojo, dict);
+          await print_name_and_show_kojo('小栗森巴（下）', oguri, kojo, dict);
           if (dict.sex) {
             await quick_into_sex(this.id);
           }
