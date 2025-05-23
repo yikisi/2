@@ -78,7 +78,7 @@ function random_style(adapts) {
  * @param {PseudoUma[]} team_chara
  * @param {number} race
  * @param {RaceInfo} info
- * @param {PseudoUma[]} [contestants]
+ * @param {(PseudoUma|LegendUmaSelector|LegendUmaFilter)[]} [contestants]
  * @returns {PseudoUma[]}
  */
 function sys_parse_for_race(team_chara, race, info, contestants) {
@@ -86,34 +86,91 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
   let ret = [...team_chara],
     unnamed_index = -1;
   info.has_legend = false;
+  const edu_phase = Math.max(
+    ...team_chara.map((e) =>
+      e.index_chara === 0
+        ? 144
+        : era.get(`cflag:${e.index_chara}:育成回合计时`) + 1,
+    ),
+  );
+  const passer_by_difficulty = [
+    passer_by_level[0] +
+      ((passer_by_level[1] - passer_by_level[0]) * (edu_phase - 24)) /
+        (144 - 24) -
+      1,
+    0,
+  ];
+  const named_difficulty = [
+    Math.max(
+      named_level[0] +
+        ((named_level[1] - named_level[0]) * (edu_phase - 24)) / (144 - 24) -
+        1,
+      passer_by_difficulty[0],
+    ),
+    0,
+  ];
   if (contestants instanceof Array) {
-    ret.push(...contestants);
+    contestants.forEach((c) => {
+      if (c instanceof PseudoUma) {
+        ret.push(c);
+      } else {
+        const difficulty = named_difficulty[0] * c.buff;
+        if (c instanceof LegendUmaSelector) {
+          const uma = select_data_from_contestants(
+            named_list.filter((e) => e.id === c.id),
+            difficulty,
+          );
+          if (uma) {
+            ret.push(
+              new PseudoUma(
+                uma.id,
+                era.get(`static:${uma.id}:name`),
+                get_chara_color(uma.id),
+                get_random_value(...uma.motivation),
+                uma.attrs,
+                random_style(uma.adapt_style),
+                uma.adapt_style,
+                uma.adapt_distance,
+                uma.adapt_ground,
+                skill_sets[uma.skills].map((s) => skills_dict[s]),
+              ).set_legend(),
+            );
+            if (uma.dress !== undefined) {
+              ret
+                .at(-1)
+                .set_image(
+                  `${era.get(`staticcstr:${uma.id}:头像`)}${uma.dress}_半身`,
+                );
+            }
+          }
+        } else if (c instanceof LegendUmaFilter) {
+          const uma = select_data_from_contestants(
+            passer_by_list.filter(c.filter),
+            difficulty,
+          );
+          if (uma) {
+            ret.push(
+              new PseudoUma(
+                unnamed_index--,
+                c.name,
+                get_chara_color(undefined),
+                get_random_value(...uma.motivation),
+                uma.attrs,
+                random_style(uma.adapt_style),
+                uma.adapt_style,
+                uma.adapt_distance,
+                uma.adapt_ground,
+                skill_sets[c.skills || uma.skills].map((s) => skills_dict[s]),
+              )
+                .set_legend()
+                .set_image(c.image),
+            );
+          }
+        }
+      }
+    });
   } else {
-    const legends = info.legends,
-      edu_phase = Math.max(
-        ...team_chara.map((e) =>
-          e.index_chara === 0
-            ? 144
-            : era.get(`cflag:${e.index_chara}:育成回合计时`) + 1,
-        ),
-      ),
-      passer_by_difficulty = [
-        passer_by_level[0] +
-          ((passer_by_level[1] - passer_by_level[0]) * (edu_phase - 24)) /
-            (144 - 24) -
-          1,
-        0,
-      ],
-      named_difficulty = [
-        Math.max(
-          named_level[0] +
-            ((named_level[1] - named_level[0]) * (edu_phase - 24)) /
-              (144 - 24) -
-            1,
-          passer_by_difficulty[0],
-        ),
-        0,
-      ];
+    const legends = info.legends;
     info.extra_attr = (max_extra_attr * (144 - edu_phase)) / (144 - 24);
     const contestant_dict = {};
     team_chara.forEach((e) => (contestant_dict[e.index_chara] = 1));

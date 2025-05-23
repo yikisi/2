@@ -2,7 +2,7 @@ const { execSync } = require('child_process');
 const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
-const arr = readFileSync('./inmon-plugins.csv', 'utf-8')
+const arr = readFileSync(join(__dirname, './inmon-plugins.csv'), 'utf-8')
   .replace(/^\ufeff/, '')
   .split('\n')
   .map((e) => e.replace(/(^\s+)|(\s+$)/, '').split(','));
@@ -24,11 +24,14 @@ module.exports = new InmonPlugin(
   ${plug[6] ? `(args)=>${plug[6]}` : '() => true'},
   ${price * 50 + level * 60},
 );\n`;
-  writeFileSync(`../../ere/data/ero/plugin/plugin-${plug[0]}.js`, content);
+  writeFileSync(
+    join(__dirname, `../../ere/data/ero/plugin/plugin-${plug[0]}.js`),
+    content,
+  );
 }
 
 writeFileSync(
-  '../../ere/data/ero/plugin/plugin-const.js',
+  join(__dirname, '../../ere/data/ero/plugin/plugin-const.js'),
   `/** @type {Record<string,InmonPlugin>} */
 const plugins = {};
 
@@ -48,9 +51,11 @@ ${arr.map((e) => `    // ${e[2]}: ${e[5]}\n    ${e[7]}: ${e[0]},`).join('\n')}
 try {
   process.stdout.write(
     execSync('npx eslint --fix ./ere/data/ero/plugin', {
-      cwd: join(process.cwd(), '../..'),
+      cwd: join(__dirname, '../..'),
     }),
   );
 } catch (e) {
   process.stdout.write(e.stdout);
 }
+
+console.log('done!');

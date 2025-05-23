@@ -92,7 +92,13 @@ module.exports = async () => {
     [[get_copyright_entry(3)], '天马闪光蹄'],
     // [[get_copyright_entry(4), { isDivider: true }, get_copyright_entry(46)], '黑奴一号'],
     [
-      [get_copyright_entry(7), { isDivider: true }, get_copyright_entry(21)],
+      [
+        get_copyright_entry(6),
+        { isDivider: true },
+        get_copyright_entry(7),
+        { isDivider: true },
+        get_copyright_entry(21),
+      ],
       '雞雞',
     ],
     [[get_copyright_entry(13)], '伊兰'],

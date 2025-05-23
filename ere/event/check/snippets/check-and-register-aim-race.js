@@ -11,13 +11,13 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 /**
  * @param {number} chara_id
  * @param {Record<string,number>} aim_races
- * @param {number} [_edu_weeks]
+ * @param {number} edu_weeks
  */
-function check_and_register_aim_race(chara_id, aim_races, _edu_weeks) {
-  const edu_weeks =
-    _edu_weeks === undefined
-      ? era.get(`cflag:${chara_id}:育成回合计时`)
-      : _edu_weeks;
+function check_and_register_aim_race(
+  chara_id,
+  aim_races,
+  edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`),
+) {
   if (edu_weeks >= 3 * 48) {
     return;
   }
