@@ -144,7 +144,7 @@ function get_squirt_info(chara_id) {
         },
         ' 爱液喷在了 ',
         ...chara,
-        ' 的龟头上。',
+        ' 的龟头上',
       ];
     case 100:
       actions.push('朝 ', ...chara, ' 的嘴唇');

@@ -17,6 +17,8 @@ async function task() {
     ...(await prisma.legend_race_boss_npc.findMany()),
     ...(await prisma.legend_race_npc.findMany()),
     ...(await prisma.single_mode_npc.findMany()),
+    ...(await prisma.heroes_race_default_npc.findMany()),
+    ...(await prisma.challenge_match_boss_npc.findMany()),
   ].forEach((e) => {
     const tmp = {
       adapt_distance: [
@@ -60,7 +62,10 @@ async function task() {
       contestants.named.push(tmp);
     }
   });
-  (await prisma.ultimate_race_npc.findMany()).forEach((e) => {
+  [
+    ...(await prisma.ultimate_race_npc.findMany()),
+    ...(await prisma.heroes_race_mob_npc.findMany()),
+  ].forEach((e) => {
     const tmp = {
       adapt_distance: [
         e.proper_distance_short,

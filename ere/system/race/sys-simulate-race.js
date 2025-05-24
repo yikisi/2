@@ -1,4 +1,5 @@
 ﻿const {
+  drawLine,
   get,
   logger,
   printInColRows,
@@ -143,46 +144,47 @@ race_message_handlers.default = (info) => [
  */
 function sys_sim_race(list_chara, info, race_id, shown = true) {
   const beginning_report =
-      race_id === undefined
-        ? ['正在检查马闸……', '正在检查令枪……', '选手入闸……', '开赛！']
-        : get_random_entry(beginning_report_handlers)(info),
-    current = new Date().getTime(),
-    count_uma = list_chara.length,
-    top_pop = list_chara.find((e) => e.pop[0] === 1),
-    top_pop_message =
-      race_id === undefined
-        ? '选手检查蹄铁……'
-        : [
-            '第 1 人气，',
-            top_pop.get_colored_name(),
-            ' 今天看上去干劲',
-            top_pop.motivation > 0
-              ? '满满'
-              : top_pop.motivation < 0
-                ? '不是很好'
-                : '似乎一般',
-            '！',
-          ],
-    fron_header = new Array(Math.floor(info.span / 200) - 1)
-      .fill(0)
-      .map((_, i) => (info.span % 200) + (i + 1) * 200),
-    fron_record_index = list_chara.map(() => 0),
-    fron_records = list_chara.map(() => {
-      return new Array(Math.floor(info.span / 200)).fill('');
-    }),
-    has_final_corner = info.lanes.find((e) => e.is_curve && e.is_last),
-    message_buffer = [],
-    mod_stamina_cost_mess =
-      info.ground === RaceInfo.ground_enum.grass
-        ? mod_stamina_cost_mess_grass[info.mess]
-        : mod_stamina_cost_mess_dirt[info.mess],
-    race_message = (
-      race_message_handlers[race_id] || race_message_handlers.default
-    )(info, top_pop);
+    race_id === undefined
+      ? ['正在检查马闸……', '正在检查令枪……', '选手入闸……', '开赛！']
+      : get_random_entry(beginning_report_handlers)(info);
+  const current = new Date().getTime();
+  const count_uma = list_chara.length;
+  const top_pop = list_chara.find((e) => e.pop[0] === 1);
+  const top_pop_message =
+    race_id === undefined
+      ? '选手检查蹄铁……'
+      : [
+          '第 1 人气，',
+          top_pop.get_colored_name(),
+          ' 今天看上去干劲',
+          top_pop.motivation > 0
+            ? '满满'
+            : top_pop.motivation < 0
+              ? '不是很好'
+              : '似乎一般',
+          '！',
+        ];
+  const fron_header = new Array(Math.floor(info.span / 200) - 1)
+    .fill(0)
+    .map((_, i) => (info.span % 200) + (i + 1) * 200);
+  const fron_record_index = list_chara.map(() => 0);
+  const fron_records = list_chara.map(() => {
+    return new Array(Math.floor(info.span / 200)).fill('');
+  });
+  const has_final_corner = info.lanes.find((e) => e.is_curve && e.is_last);
+  const message_buffer = [];
+  const mod_stamina_cost_mess =
+    info.ground === RaceInfo.ground_enum.grass
+      ? mod_stamina_cost_mess_grass[info.mess]
+      : mod_stamina_cost_mess_dirt[info.mess];
+  const race_message = (
+    race_message_handlers[race_id] || race_message_handlers.default
+  )(info, top_pop);
   let flag_race_phase = 1;
   message_buffer.push(get_event_record(race_message));
   if (shown) {
-    printInColRows([{ type: 'divider' }, ...message_buffer]);
+    drawLine();
+    printInColRows(message_buffer);
   }
   beginning_report.unshift(top_pop_message);
 
@@ -498,7 +500,7 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
         get_event_record(beginning_report[flag_race_phase++ - 1]),
       );
       if (shown) {
-        replaceInColRows([{ type: 'divider' }, ...message_buffer]);
+        replaceInColRows(message_buffer);
       }
     }
 
@@ -785,7 +787,7 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
   );
   message_buffer.push(get_event_record(beginning_report.at(-1)));
   if (shown) {
-    replaceInColRows([{ type: 'divider' }, ...message_buffer]);
+    replaceInColRows(message_buffer);
   }
   const speed_min = (22 - info.span / 1000) * 0.85;
   statistics.speed = statistics.speed.map((e) => {

@@ -428,28 +428,39 @@ class UmaSkill {
     this.ability_tags = ability_tags;
   }
 
+  /** @returns {string[]} */
+  get tags() {
+    const ret = [];
+    let adapt = this.adapt_tags.map((e) => adapt_tag_names[e]).join('＞＜');
+    let ability = this.ability_tags
+      .map((e) => ability_tag_names[e])
+      .join('＞＜');
+    if (adapt) {
+      ret.push(`＜${adapt}＞`);
+    }
+    if (ability) {
+      ret.push(`＜${ability}＞`);
+    }
+    return ret;
+  }
+
   get_colored_name() {
-    const border_color = skill_border_colors[this.category & 0b111],
-      name_color = skill_name_colors[this.category >> 3];
-    const title_list = [];
-    title_list.push(
-      this.adapt_tags.map((e) => adapt_tag_names[e]).join('＞＜'),
-    );
-    title_list.push(
-      this.ability_tags.map((e) => ability_tag_names[e]).join('＞＜'),
-    );
+    const tags = this.tags;
+    const border_color = skill_border_colors[this.category & 0b111];
+    const name_color = skill_name_colors[this.category >> 3];
+    let title = `【${this.name}】（${skill_name_types[this.category >> 3]} · ${
+      skill_border_types[this.category & 0b111]
+    }）\n${this.desc}`;
+    if (tags.length > 0) {
+      title += `\n${tags.join('\n')}`;
+    }
     return [
       { content: '【', color: border_color },
       {
         color: name_color,
         content: this.name,
         fontWeight: 'bold',
-        title: `【${this.name}】（${skill_name_types[this.category >> 3]} · ${
-          skill_border_types[this.category & 0b111]
-        }）\n${this.desc}\n${title_list
-          .map((e) => (e === '' ? e : `＜${e}＞`))
-          .filter((e) => e)
-          .join('\n')}`,
+        title,
       },
       { content: '】', color: border_color },
     ];

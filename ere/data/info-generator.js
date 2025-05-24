@@ -768,10 +768,10 @@ module.exports = {
       ...new Array(4).fill(0).map((_, i) => i + 44),
       ...get_filtered_talents(sex, 50),
       ...get_filtered_talents(sex, 60)
-        .map((id) => {
+        .map((t) => {
           return {
-            id,
-            level: era.get(`talent:${id}:${id}`),
+            id: t,
+            level: era.get(`talent:${id}:${t}`),
           };
         })
         .filter((e) => e.level)

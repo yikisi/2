@@ -638,12 +638,15 @@ async function chara_skill() {
     ...(await prisma.legend_race_boss_npc.findMany()),
     ...(await prisma.legend_race_npc.findMany()),
     ...(await prisma.single_mode_npc.findMany()),
+    ...(await prisma.heroes_race_default_npc.findMany()),
+    ...(await prisma.challenge_match_boss_npc.findMany()),
   ]
     .filter((e) => e.chara_id < 9000)
     .map((e) => e.skill_set_id);
-  (await prisma.ultimate_race_npc.findMany()).forEach((e) =>
-    skill_sets.push(e.skill_set_id_1, e.skill_set_id_2),
-  );
+  [
+    ...(await prisma.ultimate_race_npc.findMany()),
+    ...(await prisma.heroes_race_mob_npc.findMany()),
+  ].forEach((e) => skill_sets.push(e.skill_set_id_1, e.skill_set_id_2));
   (
     await prisma.skill_set.findMany({
       where: {

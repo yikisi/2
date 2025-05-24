@@ -43,18 +43,17 @@ attr_names.forEach((e, i) => {
 skill_list
   .filter((e) => e.startsWith('skill-90') || e.startsWith('skill-910031'))
   .forEach((e) => {
-    const f = readFileSync(join(skill_path, e)).toString(),
-      skill_id = e.substring(6, 12),
-      info_arr = f.split('\n'),
-      skill_name = info_arr[4].substring(3).replace(/['"],\s*$/, ''),
-      skill_desc = info_arr[5].substring(3).replace(/['"],\s*$/, '');
+    const f = readFileSync(join(skill_path, e)).toString();
+    const skill_id = e.substring(6, 12);
+    const info_arr = f.split('\n');
+    const skill_name = info_arr[4].substring(3).replace(/['"],\s*$/, '');
     writeFileSync(
       join(gene_path, `gene-${skill_id}.js`),
       `const UmaGene = require('#/data/race/model/uma-gene');\n\nmodule.exports = new UmaGene(${
         skill_id
       },UmaGene.gene_rarity_enum.sr,"「${skill_name}」之回响","习得「${
         skill_name
-      }」\\n${skill_desc}",UmaGene.gene_type_enum.skill,-1,100,${skill_id});`,
+      }」",UmaGene.gene_type_enum.skill,-1,100,${skill_id});`,
     );
     output += `gene_dict[${skill_id}] = require('#/data/race/gene/gene-${skill_id}');\n`;
   });

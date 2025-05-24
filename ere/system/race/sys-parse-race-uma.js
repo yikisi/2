@@ -28,23 +28,23 @@ const { mod_acceleration_adapt_ground } = require('#/data/race/race-sim-const');
 const { skill_sets, skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
 
-const named_level = [named_list[0].level, named_list.at(-1).level],
-  passer_by_level = [passer_by_list[0].level, passer_by_list.at(-1).level];
+const named_level = [named_list[0].level, named_list.at(-1).level];
+const passer_by_level = [passer_by_list[0].level, passer_by_list.at(-1).level];
 
 function select_data_from_contestants(legends, difficulty) {
   if (legends.length > 0) {
     let i = 0,
-      j = legends.length - 2;
+      j = legends.length - 1;
     if (legends[0].level >= difficulty) {
       i = 0;
-    } else if (legends[j + 1].level <= difficulty) {
-      i = j + 1;
+    } else if (legends[j].level <= difficulty) {
+      i = j;
     } else {
       while (i < j - 1) {
         const m = Math.floor((i + j) / 2);
         if (
-          legends[m]?.level <= difficulty &&
-          legends[m + 1]?.level > difficulty
+          legends[m - 1]?.level <= difficulty &&
+          legends[m]?.level > difficulty
         ) {
           i = m;
           break;
