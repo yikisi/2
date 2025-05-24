@@ -5,7 +5,6 @@
 const era = require('#/era-electron');
 
 const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
-const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
 const {
   sys_like_chara,
   sys_love_uma,
@@ -337,10 +336,17 @@ module.exports = class extends CustomizedEdu {
             mvp: extra_flag.contestants.find((e) => e.rank.curr === 1)
               .index_chara,
             ...this.#dict,
-            sex: get_sex_acceptable(this.id) > 0,
           };
-          await print_name_and_show_kojo('小栗森巴（下）', oguri, kojo, dict);
-          if (dict.sex) {
+          if (
+            (
+              await print_name_and_show_kojo(
+                '小栗森巴（下）',
+                oguri,
+                kojo,
+                dict,
+              )
+            )[1] === 1
+          ) {
             await quick_into_sex(this.id);
           }
           return;
