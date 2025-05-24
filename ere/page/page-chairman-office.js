@@ -146,9 +146,9 @@ async function page_chairman_office() {
                   .get('chara')
                   .filter(
                     (chara_id) =>
-                      chara_id &&
+                      chara_id > 0 &&
                       (era.get(`cflag:${chara_id}:随机招募`) ||
-                        era.get(`staticcflag:${chara_id}:随机招募`)) &&
+                        era.get(`staticcflag:${chara_id}:随机招募`)) === 1 &&
                       era.get(`cflag:${chara_id}:招募状态`) !==
                         recruit_flags.yes &&
                       era.get('cflag:0:模版角色') !== chara_id,

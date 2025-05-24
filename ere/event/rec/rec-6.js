@@ -83,8 +83,8 @@ module.exports = class extends CustomizedRecruit {
     );
     era.add(`cflag:${this.id}:育成回合计时`, 48);
     attr_names.forEach((e) => {
-      era.add(`abl:${this.id}:${e}训练等级`, 1);
-      era.add(`base:${this.id}:${e}`, get_random_value(125, 175));
+      era.add(`abl:${this.id}:${e}训练等级`, 2);
+      era.add(`base:${this.id}:${e}`, get_random_value(400, 500));
     });
     era.add(`exp:${this.id}:技能点数`, 600);
     const available_skills = CharaAvailableSkills.get(this.id);
