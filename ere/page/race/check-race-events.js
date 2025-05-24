@@ -83,7 +83,7 @@ async function check_race_events(race, info, team_contestants) {
     my_edu_marks = new MyEduMarks();
   if (best === 1) {
     (rec_list[race] || []).forEach((e) => {
-      if (!get(`cflag:${e}:招募状态`) && !get(`cflag:${e}:随机招募`)) {
+      if (!get(`cflag:${e}:招募状态`) && get(`cflag:${e}:随机招募`) <= 0) {
         add(`cflag:${e}:随机招募`, -1);
       }
     });
