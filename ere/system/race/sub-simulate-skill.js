@@ -108,7 +108,7 @@ function sub_simulate_skill(
               : uma.race.slope < 0
                 ? '下坡'
                 : undefined,
-            uma.race.conditionParams.blocked_front ? '阻挡！' : '',
+            uma.race.conditionParams.blocked_front > 0 ? '阻挡！' : '',
             uma.race.temptation > 0 ? '焦躁！' : '',
             ')',
           ]
@@ -192,7 +192,7 @@ function sub_simulate_skill(
           uma.race.conditionParams.infront_near_lane_time,
         );
       }
-      if (uma.race.conditionParams.blocked_front) {
+      if (uma.race.conditionParams.blocked_front > 0) {
         uma.race.conditionParams.blocked_front_continuetime =
           uma.race.conditionParams.blocked_side_continuetime = add_timer(
             uma.race.conditionParams.blocked_side_continuetime,

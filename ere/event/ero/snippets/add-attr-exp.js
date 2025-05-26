@@ -5,7 +5,8 @@ const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { attr_names } = require('#/data/train-const');
 
 function add_attr_exp(chara_id, attr, val) {
-  const in_edu = era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48;
+  const in_edu =
+    era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 || !chara_id;
   if (in_edu || !era.get(`cflag:${chara_id}:种族`)) {
     const inmon = CharaInmon.get(chara_id);
     let times = 1;
