@@ -8,6 +8,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { buff_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
@@ -282,6 +283,7 @@ async function cum_shop(chara, me) {
                         ),
                       );
                       target.sex_code = era.set(`cflag:${target.id}:性别`, 0);
+                      era.set(`talent:${target.id}:凶器`, 0);
                       const inmon = CharaInmon.get(target.id);
                       for (let i = 1; i <= 3; ++i) {
                         if (inmon.on(plugin_enum[`pe_u${i}`])) {
@@ -532,33 +534,66 @@ async function cum_shop(chara, me) {
             '这里提供精油按摩服务！要不要来放松一下呢？',
           );
           const lines = era.getLineCount();
+          let target = chara;
           while (_flag) {
             await era.clear(era.getLineCount() - lines);
             const part_limit = era.get(`talent:${chara.id}:调教度`);
             print_money_divider();
-            era.printButton(
-              `增加 ${chara.name} 可调教为最高级敏感度的部位（${
-                part_limit === max_limt
-                  ? 'MAX'
-                  : `25「恩宠」：${part_limit + 1} 个部位 → ${part_limit + 2} 个部位`
-              }）`,
-              1,
-              {
-                disabled:
-                  era.get(`talent:${chara.id}:调教度`) ===
-                  4 + (era.get(`cflag:${chara.id}:性别`) > 0),
-              },
+            let talent_list = ['荡唇', '神之手', '神之足', '魔尻'];
+            if (target.sex_code !== 1) {
+              talent_list.push('妖乳', '名穴');
+            }
+            if (target.sex_code > 0) {
+              talent_list.push('凶器');
+            }
+            talent_list = talent_list.filter(
+              (e) => era.get(`talent:${target.id}:${e}`) === 0,
             );
+            era.printButton(`切换接受服务的角色，现在是 ${target.name}`, 1);
+            era.printButton(`增强一个部位的性能力（60「恩宠」）`, 2, {
+              disabled: talent_list.length === 0,
+            });
+            if (target.id > 0) {
+              era.printButton(
+                `增加 ${chara.name} 可调教为最高级敏感度的部位（${
+                  part_limit === max_limt
+                    ? 'MAX'
+                    : `25「恩宠」：${part_limit + 1} 个部位 → ${part_limit + 2} 个部位`
+                }）`,
+                3,
+                {
+                  disabled:
+                    era.get(`talent:${chara.id}:调教度`) ===
+                    4 + (era.get(`cflag:${chara.id}:性别`) > 0),
+                },
+              );
+            }
             era.printButton('离开', 99);
-            if ((await era.input()) === 99) {
-              _flag = false;
-            } else {
-              money = era.add('item:「恩宠」', -25);
-              await era.printAndWait([
-                chara.get_colored_name(),
-                ' 做完按摩后，身体变得更润滑了……',
-              ]);
-              era.add(`talent:${chara.id}:调教度`, 1);
+            const p = get_random_entry(talent_list);
+            switch (await era.input()) {
+              case 1:
+                target = target === chara ? me : chara;
+                break;
+              case 2:
+                money = era.add('item:「恩宠」', -60);
+                await era.printAndWait([
+                  target.get_colored_name(),
+                  ' 获得了 ',
+                  { color: buff_colors[2], content: `[${p}]` },
+                  '！',
+                ]);
+                era.set(`talent:${target.id}:${p}`, 1);
+                break;
+              case 3:
+                money = era.add('item:「恩宠」', -25);
+                await era.printAndWait([
+                  chara.get_colored_name(),
+                  ' 做完按摩后，身体变得更润滑了……',
+                ]);
+                era.add(`talent:${chara.id}:调教度`, 1);
+                break;
+              default:
+                _flag = false;
             }
             _flag &&= money > 0;
           }
@@ -671,7 +706,7 @@ async function cum_shop(chara, me) {
               await era.printAndWait([
                 '获得了道具【',
                 era.get(`itemname:${item}`).toUpperCase(),
-                '】',
+                '】！',
               ]);
             }
           }
