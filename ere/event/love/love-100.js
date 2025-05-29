@@ -680,6 +680,7 @@ module.exports = class extends CustomizedLove {
           ' 的到来。',
         ]);
         add_event(stage, event_object);
+        return;
       }
       EventMarks.get(0).sub(event_hooks.school_rooftop);
       await era.printAndWait('天边一声轰鸣，铁鸟留下了橘红色的飞行机云。');

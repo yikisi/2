@@ -375,7 +375,7 @@ module.exports = class extends StrangeDayEvents {
     ]);
     await printAndWait([
       '把海报摘下来一看，似乎是只面向训练员的',
-      get_random_entry(['短跑', '游泳', '登山）']),
+      get_random_entry(['短跑', '游泳', '登山']),
       '比赛，上面写着哪怕对体质没自信现场也会有官方支援的样子，要参加吗？',
     ]);
     printButton('（试试也不会少块肉？）（体力&精力-25%，可能获得奖品）', 1);
