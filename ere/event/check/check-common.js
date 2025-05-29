@@ -229,10 +229,7 @@ class CustomizedCheck {
   // eslint-disable-next-line no-unused-vars
   is_aware_unfaithful(partnet_list) {
     const is_yandere = sys_check_yandere(this.id, (y) => y > 0);
-    if (
-      era.get(`love:${this.id}`) < 75 ||
-      (era.get('flag:不忠惩罚') === 0 && !is_yandere)
-    ) {
+    if (era.get('flag:不忠惩罚') === 0 && !is_yandere) {
       return false;
     }
     let ratio = 0.75 - 0.25 * era.get(`talent:${this.id}:洁净重视`);

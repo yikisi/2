@@ -901,7 +901,10 @@ async function page_ero(lover, skip_start_end = false) {
       'cflag',
       '招募状态',
       recruit_flags.yes,
-    ).filter((e) => temp_chara_list.indexOf(e) === -1);
+    ).filter(
+      (cid) =>
+        temp_chara_list.indexOf(cid) === -1 && era.get(`love:${cid}`) >= 75,
+    );
     for (const cid of punish_list) {
       const is_aware =
         get_custom_mec(cid).is_anger_for_unfaithful(partner_list) &&
