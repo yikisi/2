@@ -896,27 +896,23 @@ async function page_ero(lover, skip_start_end = false) {
     }
   }
   if (!in_basement) {
-    const punish_option = era.get('flag:不忠惩罚') === 1;
     let temp_chara_list = era.getCharactersInTrain();
     const punish_list = sys_filter_chara(
       'cflag',
       '招募状态',
       recruit_flags.yes,
-    ).filter(
-      (e) =>
-        temp_chara_list.indexOf(e) === -1 &&
-        era.get(`love:${e}`) >= 75 &&
-        sys_check_awake(e) &&
-        era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
-        get_custom_mec(e).is_anger_for_unfaithful(partner_list) &&
-        (punish_option || era.get(`talent:${e}:病娇`) > 0),
-    );
-    for (const chara_id of punish_list) {
-      get_custom_check(chara_id).check_after_betrayed(partner_list);
-      wait_flag =
-        (await run_custom_ero(chara_id, ero_hooks.after_betrayed, {
-          partners: partner_list,
-        })) || wait_flag;
+    ).filter((e) => temp_chara_list.indexOf(e) === -1);
+    for (const cid of punish_list) {
+      const is_aware =
+        get_custom_mec(cid).is_anger_for_unfaithful(partner_list) &&
+        get_custom_check(cid).is_aware_unfaithful(partner_list);
+      get_custom_check(cid).check_after_betrayed(partner_list, is_aware);
+      if (is_aware) {
+        wait_flag =
+          (await run_custom_ero(cid, ero_hooks.after_betrayed, {
+            partners: partner_list,
+          })) || wait_flag;
+      }
     }
   }
   const size = 200 + 300 * !era.get('item:乳汁处理装置');

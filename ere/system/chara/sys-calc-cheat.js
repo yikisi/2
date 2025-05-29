@@ -19,6 +19,7 @@ module.exports = {
   sys_check_yandere(id, cb = (e) => e > 0, inmon = CharaInmon.get(id)) {
     return (
       cb(era.get(`talent:${id}:病娇`)) &&
+      era.get(`talent:${id}:绿帽癖`) === 0 &&
       !inmon.on(plugin_enum.no_yand) &&
       !inmon.on(plugin_enum.ntr)
     );

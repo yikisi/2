@@ -1,9 +1,6 @@
 const era = require('#/era-electron');
 
-const {
-  sys_check_cuckold,
-  sys_check_yandere,
-} = require('#/system/chara/sys-calc-cheat');
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_hide_relation_and_love,
@@ -43,37 +40,35 @@ async function punish_unfaithful(id, new_love) {
       'cflag',
       '招募状态',
       recruit_flags.yes,
-    ).filter((e) => {
-      return (
-        e > 0 &&
-        e !== id &&
-        era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置') &&
-        era.get(`love:${e}`) >= 75 &&
-        get_custom_mec(e).is_anger_for_unfaithful([id]) &&
-        sys_check_yandere(e, (y) => punish_option || y > 0) &&
-        !sys_check_cuckold(e)
-      );
+    ).filter((cid) => {
+      return cid > 0 && cid !== id && era.get(`love:${cid}`) >= 75;
     });
-  for (const c_id of temp_chara_list) {
-    get_custom_check(c_id).check_after_betrayed([id]);
-    era.print([
-      me.get_colored_name(),
-      ' 的不忠让 ',
-      get_chara_talk(c_id).get_colored_name(),
-      ' 无比愤怒……',
-    ]);
-    sys_change_pressure(c_id, get_random_value(1000, 2000));
-    like_chara(
-      c_id,
-      0,
-      -get_random_value(
-        100,
-        200 +
-          8 * (new_love - 75) +
-          8 * (era.get(`love:${c_id}`) - 75) +
-          100 * era.get(`talent:${c_id}:病娇`),
-      ),
-    );
+  for (const cid of temp_chara_list) {
+    const is_aware =
+      era.get(`cflag:${cid}:位置`) === era.get('cflag:0:位置') &&
+      get_custom_mec(cid).is_anger_for_unfaithful([id]) &&
+      sys_check_yandere(cid, (y) => punish_option || y > 0);
+    get_custom_check(cid).check_after_betrayed([id], is_aware);
+    if (is_aware) {
+      era.print([
+        me.get_colored_name(),
+        ' 的不忠让 ',
+        get_chara_talk(cid).get_colored_name(),
+        ' 无比愤怒……',
+      ]);
+      sys_change_pressure(cid, get_random_value(1000, 2000));
+      like_chara(
+        cid,
+        0,
+        -get_random_value(
+          100,
+          200 +
+            8 * (new_love - 75) +
+            8 * (era.get(`love:${cid}`) - 75) +
+            100 * era.get(`talent:${cid}:病娇`),
+        ),
+      );
+    }
   }
   if (temp_chara_list.length > 0) {
     await era.waitAnyKey();

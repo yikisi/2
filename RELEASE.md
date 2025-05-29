@@ -102,17 +102,34 @@ _incoming_
     * 招募条件是爱慕值的特殊角色，人类角色的招募条件统一为 25（暧昧）及以上，马娘角色的招募条件统一为 40（暧昧）及以上；
     * 除三女神之外的特殊角色，在已完成其专属成就的情况下开始新游戏，人类角色的初始爱慕值设置为 20（朦胧），马娘角色的初始爱慕值设置为 30（朦胧）
       * 无论是否完成成就，马娘特殊角色的初始爱慕值还受游戏选项中 [马娘初见爱慕] 的影响，但最大不会超过 30（朦胧）
-* （口上支持）增加一系列调教口上钩子
-  * CustomizedEro.raping_start：睡奸惊醒时的口上
-  * CustomizedEro.join_3p：要求加入3P时的口上（必须含有一组按钮，返回是否接受加入）
-  * CustomizedEro.join_3p_accept：玩家同意角色加入3P时的口上
-  * CustomizedEro.join_3p_force：玩家拒绝角色而角色强行加入3P时的口上
-  * CustomizedEro.join_3p_reject：玩家拒绝角色加入3P时的口上
-* （口上支持）增加一个日常口上钩子
-  * CustomizedDaily.birthday：祝贺生日时的口上
-    * 生日算作一种独立的节日，具有更高的好感和压力值消除奖励，同时也会和节日一样消耗递增并在高爱慕忽略时受到好感惩罚
-* （口上支持）增加一个机制口上钩子
-  * CustomizedMec.is_race_disabled：检查是否被禁止参赛
+* 不忠惩罚改动
+  * 现在角色对玩家出轨行为的发现将按以下公式计算概率：
+    * 若该角色爱慕值低于 75，概率为 0
+    * 若未开启不忠惩罚，且该角色为未缓和或扭曲的病娇，概率为 0
+    * 基础概率 75%
+    * 具有特性 [爱净] 时，+25%；具有特性 [不修边幅] 时，-25%
+    * 角色未清醒时，概率减半
+    * 角色未处于相同地点时，概率减半（可叠加）
+    * 角色具有未缓和或扭曲的病娇时，每级病娇增加一倍最终概率
+  * 无论是否触发不忠惩罚，总是调用 CustomizedCheck.check_after_betrayed，以使部分事件在未开启不忠惩罚时可触发
+* 口上支持
+  * 增加一个日常口上（daily-\*）钩子
+    * CustomizedDaily.birthday：祝贺生日时的口上
+      * 生日算作一种独立的节日，具有更高的好感和压力值消除奖励，同时也会和节日一样消耗递增并在高爱慕忽略时受到好感惩罚
+  * 增加一系列调教口上（ero-\*）钩子
+    * CustomizedEro.raping_start：睡奸惊醒时的口上
+    * CustomizedEro.join_3p：要求加入3P时的口上（必须含有一组按钮，返回是否接受加入）
+    * CustomizedEro.join_3p_accept：玩家同意角色加入3P时的口上
+    * CustomizedEro.join_3p_force：玩家拒绝角色而角色强行加入3P时的口上
+    * CustomizedEro.join_3p_reject：玩家拒绝角色加入3P时的口上
+  * 检查口上（check-\*）钩子改动
+    * CustomizedCheck.is_aware_unfaithful：检查是否发现出轨性行为
+      * 参数 partner_list：该次出轨性行为的角色 ID 数组
+      * 在 CustomizedMec.is_anger_for_unfaithful 之后检查
+    * CustomizedCheck.check_after_betrayed：在不忠行为发生后控制后续变量和事件
+      * 新增参数 is_aware：boolean 类型，这次不忠行为是否被发现
+  * 增加一个机制口上（mec-\*）钩子
+    * CustomizedMec.is_race_disabled：检查是否被禁止参赛
 * 现在具有阴道的角色会在外阴高潮或阴道受到一定程度的刺激后分泌爱液
   * 新增初次性经历：
     * 新增无自觉初次潮吹经历和初次潮吹经历：在外阴或阴道高潮时，角色会发生潮吹，喷出爱液

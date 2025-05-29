@@ -58,9 +58,12 @@ class CustomizedCheck {
     return this;
   }
 
-  /** @param {number[]} partners */
+  /**
+   * @param {number[]} partners
+   * @param {boolean} is_aware
+   */
   // eslint-disable-next-line no-unused-vars
-  check_after_betrayed(partners) {}
+  check_after_betrayed(partners, is_aware) {}
 
   /** @param {number} level */
   // eslint-disable-next-line no-unused-vars
@@ -220,6 +223,29 @@ class CustomizedCheck {
       this.get_aim_races()[race] ||
       0
     );
+  }
+
+  /** @returns {boolean} */
+  // eslint-disable-next-line no-unused-vars
+  is_aware_unfaithful(partnet_list) {
+    const is_yandere = sys_check_yandere(this.id, (y) => y > 0);
+    if (
+      era.get(`love:${this.id}`) < 75 ||
+      (era.get('flag:不忠惩罚') === 0 && !is_yandere)
+    ) {
+      return false;
+    }
+    let ratio = 0.75 - 0.25 * era.get(`talent:${this.id}:洁净重视`);
+    if (!sys_check_awake(this.id)) {
+      ratio /= 2;
+    }
+    if (era.get(`cflag:${this.id}:位置`) !== era.get('cflag:0:位置')) {
+      ratio /= 2;
+    }
+    if (is_yandere) {
+      ratio *= 1 + era.get(`talent:${this.id}:病娇`);
+    }
+    return ratio >= 1 || Math.random() < ratio;
   }
 
   /** @returns {boolean} */

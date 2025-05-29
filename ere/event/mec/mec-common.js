@@ -35,7 +35,7 @@ class CustomizedMec {
   /** @param {number[]} partners */
   // eslint-disable-next-line no-unused-vars
   is_anger_for_unfaithful(partners) {
-    return true;
+    return era.get('flag:不忠惩罚') === 1;
   }
 
   /** @param {number} race */
