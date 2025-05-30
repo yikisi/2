@@ -142,7 +142,7 @@ function get_squirt_info(chara_id) {
           content: ` ${squirt.toLocaleString()}ml `,
           color: buff_colors[2],
         },
-        ' 爱液喷在了 ',
+        ' 爱液浇在了 ',
         ...chara,
         ' 的龟头上',
       ];

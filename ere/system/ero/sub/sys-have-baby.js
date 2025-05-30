@@ -305,6 +305,10 @@ async function sys_have_baby(mother_id) {
   era.set(`cflag:${child_id}:出生月份`, cur_month);
   era.set(`cflag:${child_id}:出生日期`, birth_day);
   era.set(`cflag:${child_id}:育成回合计时`, 'x');
+  era.set(`cflag:${child_id}:可再次育成`, 0);
+  era.set(`jewel:${child_id}:粉`, 0);
+  era.set(`jewel:${child_id}:蓝`, 0);
+  era.set(`jewel:${child_id}:白`, 0);
   // 和玩家相关的新生儿自动进队
   // 无关的会在招募池子里
   era.set(
