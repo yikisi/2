@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const mec_scripts = readdirSync('../../ere/event/mec')
+const mec_scripts = readdirSync(join(__dirname, '../../ere/event/mec'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
@@ -81,7 +82,7 @@ CustomizedMec.get_custom_mec = mec_factory.get_custom_mec =
 module.exports = mec_factory;
 `;
 
-writeFileSync('../../ere/event/mec/mec-factory.js', output);
+writeFileSync(join(__dirname, '../../ere/event/mec/mec-factory.js'), output);
 
 console.log(
   `[generate-mec-factory.js] registers ${mec_scripts.length} mechanism scripts`,
