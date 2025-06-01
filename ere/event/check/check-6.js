@@ -28,13 +28,22 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 0b11;
 aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 0b11;
 aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 0b11;
 
+aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = -1;
+aim_races[get_aim_race_index(race_enum.toky_yus, 1)] = -1;
+aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = -1;
+
 aim_races[get_aim_race_index(race_enum.yasu_kin, 1)] = -4;
 aim_races[get_aim_race_index(race_enum.yasu_kin, 2)] = -4;
 
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
     const edu_marks = new OguriEduMarks();
-    if (
+    if (extra_flag.race === race_enum.sats_sho && extra_flag.rank === 1) {
+      add_event(
+        event_hooks.week_end,
+        new EventObject(this.id, cb_enum.edu).set_arg('nightmare'),
+      );
+    } else if (
       get(`cflag:${this.id}:育成回合计时`) >= 96 &&
       get(`cflag:${this.id}:育成回合计时`) <= 95 + 24 &&
       race_infos[extra_flag.race].race_class === class_enum.G1 &&
@@ -106,6 +115,11 @@ module.exports = class extends CustomizedCheck {
         case 47 + 29:
           add_event(event_hooks.week_start, event_special.set_arg('sea'));
           break;
+        case 47 + 39:
+          if (new OguriEduMarks().god === 1) {
+            add_event(event_hooks.week_start, event_special.set_arg('prepare'));
+          }
+          break;
         case 95 + 24:
           add_event(event_hooks.week_end, event_special.set_arg('four_clock'));
           break;
@@ -147,7 +161,14 @@ module.exports = class extends CustomizedCheck {
   }
 
   is_aim_race(race, edu_weeks, rank) {
-    if (rank !== undefined) {
+    if (
+      race === race_enum.toky_yus &&
+      !check_aim_race(RaceHistory.get(this.id).get(), race_enum.sats_sho, 1, 1)
+    ) {
+      return 0;
+    } else if (race === race_enum.kiku_sho && new OguriEduMarks().god === 0) {
+      return 0;
+    } else if (rank !== undefined) {
       switch (race) {
         case race_enum.nhk_cup:
           if (rank > 5) {
@@ -164,6 +185,9 @@ module.exports = class extends CustomizedCheck {
             return 0;
           }
           break;
+        case race_enum.sats_sho:
+        case race_enum.toky_yus:
+        case race_enum.kiku_sho:
         case race_enum.tenn_sho:
           if (rank !== 1) {
             return 0;

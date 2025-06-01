@@ -5,6 +5,8 @@ class OguriEduMarks extends EduEventMarks {
   aim_check;
   // 5回合100%训练加成
   train_buff;
+  // 三冠
+  god;
 
   constructor() {
     super(6);

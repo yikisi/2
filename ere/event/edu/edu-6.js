@@ -14,6 +14,8 @@ const kojo = require('#/event/edu/edu-6.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event, cb_enum } = require('#/event/queue');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
+const check_aim_race = require('#/event/snippets/check-aim-race');
+const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 const simulation_game_in_event = require('#/event/snippets/simulation-game-in-event');
@@ -27,6 +29,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { location_enum } = require('#/data/locations');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
+const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
@@ -277,12 +280,85 @@ module.exports = class extends CustomizedEdu {
     }
   }
 
+  /**
+   * @param {CharaTalk} oguri
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async nightmare(oguri, me, callname, hook, extra_flag, event_object) {
+    await print_name_and_show_kojo('噩梦', oguri, kojo, this.#dict);
+    era.println();
+    if (sys_like_chara(this.id, 0, 50)) {
+      await era.waitAnyKey();
+    }
+    add_event(event_hooks.week_start, event_object.set_arg('awake'));
+  }
+
+  /** @param {CharaTalk} oguri */
+  async awake(oguri) {
+    await print_name_and_show_kojo('苏醒', oguri, kojo, this.#dict);
+    era.println();
+    if (sys_like_chara(this.id, 0, 50)) {
+      await era.waitAnyKey();
+    }
+  }
+
+  /** @param {CharaTalk} oguri */
+  async truth(oguri) {
+    await print_name_and_show_kojo('真实', oguri, kojo, this.#dict);
+    era.println();
+    if (
+      [this.id, 340, 341, 342].reduce(
+        (p, c) => sys_like_chara(c, 0, 50) || p,
+        false,
+      )
+    ) {
+      await era.waitAnyKey();
+    }
+    new OguriEduMarks().god = 1;
+  }
+
+  /** @param {CharaTalk} oguri */
+  async prepare(oguri) {
+    await print_name_and_show_kojo('疾速备战', oguri, kojo, this.#dict);
+    era.println();
+    if (sys_like_chara(this.id, 0, 50)) {
+      await era.waitAnyKey();
+    }
+  }
+
   async race_start(oguri, me, callname, hook, extra_flag) {
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
     let name;
     switch (extra_flag.race) {
       case race_enum.nhk_cup:
         name = '决战一里（上）';
+        break;
+      case race_enum.sats_sho:
+        await print_event_name('皋月', oguri);
+        await kojo['皋月前'](this.#dict);
+        return;
+      case race_enum.toky_yus:
+        if (
+          check_aim_race(
+            RaceHistory.get(this.id).get(),
+            race_enum.sats_sho,
+            1,
+            1,
+          )
+        ) {
+          await print_event_name('优骏', oguri);
+          await kojo['优骏前'](this.#dict);
+          return;
+        }
+        break;
+      case race_enum.kiku_sho:
+        if (new OguriEduMarks().god === 1) {
+          name = '菊花';
+        }
         break;
       case race_enum.mile_cha:
         if (edu_weeks < 96) {
@@ -318,6 +394,37 @@ module.exports = class extends CustomizedEdu {
       case race_enum.nhk_cup:
         if (extra_flag.rank <= 5) {
           name = '决战一里（下）';
+        }
+        break;
+      case race_enum.sats_sho:
+        if (extra_flag.rank === 1) {
+          await print_event_name('皋月', oguri);
+          await kojo['皋月后'](this.#dict);
+          return;
+        }
+        break;
+      case race_enum.toky_yus:
+        if (
+          check_aim_race(
+            RaceHistory.get(this.id).get(),
+            race_enum.sats_sho,
+            1,
+            1,
+          ) &&
+          extra_flag.rank === 1
+        ) {
+          await print_event_name('优骏', oguri);
+          await kojo['优骏后'](this.#dict);
+          add_event(
+            event_hooks.school_god,
+            new EventObject(this.id, cb_enum.edu).set_arg('truth'),
+          );
+          return;
+        }
+        break;
+      case race_enum.kiku_sho:
+        if (new OguriEduMarks().god === 1 && extra_flag.rank === 1) {
+          name = '幻梦';
         }
         break;
       case race_enum.mile_cha:

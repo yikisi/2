@@ -16,6 +16,8 @@ module.exports = class extends CustomizedMec {
           return [new LegendUmaSelector(53, 1.1)];
         }
         break;
+      case race_enum.kiku_sho:
+        return [340, 341, 342].map((e) => new LegendUmaSelector(e, 1.2));
       case race_enum.arim_kin:
         if (edu_weeks < 96) {
           return [2, 21, 45, 63].map((e) => new LegendUmaSelector(e, 1.1));
