@@ -164,11 +164,11 @@ async function sys_calc_orgasm(shown, ...ids) {
               );
             }
           } else if (part === part_enum.penis) {
-            !era.get(`tcvar:${chara_id}:避孕套`) &&
+            if (!era.get(`tcvar:${chara_id}:避孕套`)) {
               set_stain(chara_id, part_enum.penis, stain_enum.semen);
+            }
             // 寸止判定
-            // 昏睡等失去控制时无法寸止
-            // 性奴和孕袋不能寸止
+            // 昏睡等失去控制时无法寸止，性奴和孕袋不能寸止
             if (
               shown &&
               sys_check_awake(0) &&

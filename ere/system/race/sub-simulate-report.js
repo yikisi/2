@@ -80,6 +80,12 @@ other_handlers[race_event_enum.lost_stamina] = [
   (names) => [...names, ' 速度变慢了！'],
   (names) => [...names, ' 到极限了吗！？'],
 ];
+other_handlers[race_event_enum.orgasm] = [
+  (names) => [...names, ' 脸色好红，是拼尽全力了吗……'],
+  (names) => ['蒸汽正从 ', ...names, ' 的身上不断冒出！'],
+  (names) => ['是什么让 ', ...names, ' 的决胜服如此湿润……？'],
+  (names) => [...names, ' 脚步踉跄了一下，所幸没有失速！'],
+];
 other_handlers[race_event_enum.loc_mind_nige_ex] = [
   (names) => ['逃马怎容他马在前！冲啊，', ...names, '！'],
   (names) => ['那不是你的位置！', ...names, ' 在用奔跑警告着！'],
@@ -389,6 +395,7 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
               ' 加快了自己的速度！',
             );
             break;
+          case race_event_enum.orgasm:
           case race_event_enum.loc_mind_nige_ex:
           case race_event_enum.loc_mind_other_ex:
           case race_event_enum.loc_mind_nige_over_take:

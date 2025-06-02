@@ -10,7 +10,7 @@ module.exports = new UmaSkill(
     UmaSkill.skill_name_enum.debuff,
     UmaSkill.skill_border_enum.cheat,
   ),
-  5000,
+  1,
   [(args) => args.phase < 2 && args.orgasm === 1, () => true],
   [(args) => args.phase === 2, (args) => args.phase === 2],
   [60, 60],
@@ -44,7 +44,7 @@ module.exports = new UmaSkill(
     ],
   ],
   [
-    [-1, -1, 0],
+    [-1, -0.8, 0],
     [-1, 0, 0],
   ],
   [

@@ -103,6 +103,8 @@ const ability_type_enum = {
   HasItem: 90,
   // 性玩具带来 Buff
   HasItemBuff: 91,
+  // 高潮时使其他角色获得快感
+  ShareOrgasm: 92,
 };
 
 const ability_usage_enum = {
@@ -182,6 +184,10 @@ const target_type_enum = {
   CharaId: 22,
   // 体力恢复的角色
   ActivateHealSkill: 23,
+  // 队友
+  Team: 98,
+  // 自身之外
+  Others: 99,
 };
 
 const adapt_tag_names = [
@@ -445,7 +451,7 @@ class UmaSkill {
     this.ability_tags = ability_tags;
   }
 
-  /** @param {PseudoUma} owner */
+  /** @param {PseudoUma} [owner] */
   // eslint-disable-next-line no-unused-vars
   get_colored_name(owner) {
     const border_color = skill_border_colors[this.category & 0b111],

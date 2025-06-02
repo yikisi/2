@@ -919,6 +919,13 @@ function sub_simulate_skill(
                   break;
                 case ability_type_enum.TargetLane:
                   break;
+                case ability_type_enum.ShareOrgasm:
+                  skill.aims[i][j].forEach((e) =>
+                    e.ero.main.forEach(
+                      (p) => (e.ero.param[p] += skill.values[i][j]),
+                    ),
+                  );
+                  break;
                 default:
                   logger.debug(
                     `不支持的效果类型：${skill.data.name} 第${i + 1}段 效果${j + 1} ${skill.data.ability_types[i][j]}`,

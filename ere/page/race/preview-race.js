@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
+
 const date_indicator = require('#/page/components/date-indicator');
 const print_race_track_chart = require('#/page/race/race-track-chart');
 
@@ -29,9 +31,9 @@ const pop_mark = ['➖', '◎', '◯', '▲', '△', '△'];
 function generate_attribute_info(chara) {
   const ret = [];
   chara.attrs.forEach((value, index) => {
-    const attr_buff_list = chara.attr_buffs[index],
-      rank = get_attr_rank(value),
-      rank_color = adaptability_colors[get_rank_level(rank)];
+    const attr_buff_list = chara.attr_buffs[index];
+    const rank = get_attr_rank(value);
+    const rank_color = adaptability_colors[get_rank_level(rank)];
     ret.push(
       {
         config: {
@@ -88,9 +90,9 @@ async function preview_race(
     },
     {
       config: { align: 'center' },
-      content: `${info.track ? RaceInfo.track_names[info.track] : '训练场'} ${adaptability_names[
+      content: `${info.track > 0 ? RaceInfo.track_names[info.track] : '训练场'} ${adaptability_names[
         info.ground
-      ].substring(0, 1)} ${info.span}m (${adaptability_names[
+      ].substring(0, 1)} ${info.span.toLocaleString()}m (${adaptability_names[
         info.distance + 2
       ].substring(
         0,
@@ -114,14 +116,24 @@ async function preview_race(
   }
   await era.clear();
   const skill_buffer = [];
-  let flag_prepare_race = true,
-    cur_chara = team_list[0],
-    uma_index = contestants.indexOf(cur_chara),
-    attribute_info = generate_attribute_info(cur_chara),
-    strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank),
-    flag_print = true;
+  const item_chara = team_list.filter(
+    (e) =>
+      !e.index_chara ||
+      (e.index_chara > 0 &&
+        !e.legend &&
+        era.get(`love:${e.index_chara}`) >= 50 &&
+        get_sex_acceptable(e.index_chara) &&
+        era.get(`exp:${e.index_chara}:性爱次数`) >
+          era.get(`exp:${e.index_chara}:睡奸次数`)),
+  );
+  let flag_prepare_race = true;
+  let cur_chara = team_list[0];
+  let uma_index = contestants.indexOf(cur_chara);
+  let attribute_info = generate_attribute_info(cur_chara);
+  let strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank);
+  let flag_print = true;
   cur_chara.list_skill.forEach((s) =>
-    skill_buffer.push(...s.data.get_colored_name()),
+    skill_buffer.push(...s.data.get_colored_name(cur_chara)),
   );
   while (flag_prepare_race) {
     era.setVerticalAlign('middle');
@@ -310,20 +322,24 @@ async function preview_race(
           { type: 'divider' },
           {
             accelerator: 100,
-            config: {
-              width: 12,
-              align: 'center',
-            },
+            config: { width: 8, align: 'center' },
             content: '出走！',
             type: 'button',
           },
           {
             accelerator: 110,
-            config: {
-              width: 12,
-              align: 'center',
-            },
+            config: { width: 8, align: 'center' },
             content: '赛场数据',
+            type: 'button',
+          },
+          {
+            accelerator: 120,
+            config: {
+              align: 'center',
+              disabed: item_chara.length === 0,
+              width: 8,
+            },
+            content: '使用玩具',
             type: 'button',
           },
         ],
@@ -336,25 +352,24 @@ async function preview_race(
     if (ret === 100) {
       await era.clear();
       flag_prepare_race = false;
-    } else {
-      if (ret === 110) {
-        await era.clear((await print_race_track_chart(info)) - line_num);
-      } else if (ret >= 21) {
-        cur_chara.style = era.set(
-          `cflag:${cur_chara.index_chara}:跑法`,
-          ret - 21,
-        );
-      } else if (ret <= 20) {
-        cur_chara = contestants[(uma_index = ret - 1)];
-        attribute_info = generate_attribute_info(cur_chara);
-        strategy_ability = cur_chara.adapt_style_list.map(
-          get_adaptability_rank,
-        );
-        skill_buffer.splice(0);
-        cur_chara.list_skill.forEach((s) =>
-          skill_buffer.push(...s.data.get_colored_name()),
-        );
-      }
+    } else if (ret === 110) {
+      await era.clear((await print_race_track_chart(info)) - line_num);
+    } else if (ret === 120) {
+      await era.printAndWait('SEX!');
+      await era.clear(1);
+    } else if (ret >= 21) {
+      cur_chara.style = era.set(
+        `cflag:${cur_chara.index_chara}:跑法`,
+        ret - 21,
+      );
+    } else if (ret <= 20) {
+      cur_chara = contestants[(uma_index = ret - 1)];
+      attribute_info = generate_attribute_info(cur_chara);
+      strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank);
+      skill_buffer.splice(0);
+      cur_chara.list_skill.forEach((s) =>
+        skill_buffer.push(...s.data.get_colored_name(cur_chara)),
+      );
     }
   }
 }

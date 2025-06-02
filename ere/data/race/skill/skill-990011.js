@@ -10,7 +10,7 @@ module.exports = new UmaSkill(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.cheat,
   ),
-  0,
+  1,
   [() => true, () => true],
   [(args) => args.phase >= 2, () => false],
   [60, 0],

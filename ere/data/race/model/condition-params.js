@@ -63,6 +63,7 @@ class ConditionParams {
   lane_type;
   last_straight_random;
   lastspurt;
+  milk;
   motivation;
   near_count;
   near_infront_count;
@@ -73,6 +74,7 @@ class ConditionParams {
   order_rate_out20_continue;
   order_rate_out40_continue;
   order_rate_out50_continue;
+  orgasm;
   overtake_target_no_order_up_time;
   overtake_target_time;
   phase;
@@ -113,7 +115,6 @@ class ConditionParams {
   up_slope_random;
   visiblehorse;
   weather;
-  orgasm;
 }
 
 module.exports = ConditionParams;

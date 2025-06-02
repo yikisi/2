@@ -242,6 +242,14 @@ class PseudoUma {
     // 下坡时进入状态的概率
     down: 0,
   };
+  // 带玩具比赛用的系数
+  ero = {
+    item: false,
+    param: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
+    buff: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
+    cost: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
+    main: ['sex'],
+  };
   /**
    * 传奇对手标记
    * @type {boolean|2}

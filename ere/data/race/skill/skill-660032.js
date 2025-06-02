@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaEroSkill(
   660032,
-  '欢愉之主在上',
+  '享乐天在上',
   '带玩具上场能够略微提高基础属性的发挥',
   66003,
   2,
