@@ -1,10 +1,11 @@
 const era = require('#/era-electron');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
-const { damage_buff } = require('#/data/ero/orgasm-const');
-const { frame_rate, race_event_enum } = require('#/data/race/race-sim-const');
 const { get_random_entry } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
+
+const { damage_buff, secretion_amount } = require('#/data/ero/orgasm-const');
+const { frame_rate, race_event_enum } = require('#/data/race/race-sim-const');
 
 const param_base = 10000 / (60 * frame_rate);
 
@@ -49,6 +50,10 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
       stamina_times += tmp * (1 + uma.ero.cost.breast);
       if (tmp > 0 && era.get(`talent:${cid}:泌乳`) > 0) {
         uma.race.conditionParams.milk = 1;
+        era.add(
+          `exp:${cid}:喷奶量`,
+          get_random_value(...secretion_amount.breast),
+        );
       }
       era.add(`exp:${cid}:胸部高潮次数`, tmp);
 
@@ -61,6 +66,10 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
       uma.ero.param.clitoris %= 10000;
       stamina_times += tmp * (1 + uma.ero.cost.clitoris);
       era.add(`exp:${cid}:外阴高潮次数`, tmp);
+      era.add(
+        `exp:${cid}:爱液分泌量`,
+        Math.floor(get_random_value(...secretion_amount.virgin) / 2),
+      );
 
       uma.ero.main.forEach((p) => (uma.ero.param[p] += orgasm * 1000));
 
@@ -68,11 +77,16 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
       uma.ero.param.penis %= 10000;
       stamina_times += tmp * (1 + uma.ero.cost.penis);
       era.add(`exp:${cid}:阴茎高潮次数`, tmp);
+      era.add(`exp:${cid}:射精量`, get_random_value(...secretion_amount.penis));
 
       orgasm += tmp = Math.floor(uma.ero.param.virgin / 10000);
       uma.ero.param.virgin %= 10000;
       stamina_times += tmp * (1 + uma.ero.cost.virgin);
       era.add(`exp:${cid}:阴道高潮次数`, tmp);
+      era.add(
+        `exp:${cid}:爱液分泌量`,
+        get_random_value(...secretion_amount.virgin),
+      );
     } else if (uma.ero.param.sex >= 10000) {
       stamina_times = orgasm = Math.floor(uma.ero.param.sex / 10000);
       uma.ero.param.sex %= 10000;

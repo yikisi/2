@@ -93,26 +93,7 @@ function sys_get_chara_pseudo(cid) {
       uma.attr_buffs.forEach((l) => l.push('-10%[孕晚期]'));
   }
   get_custom_mec(uma.index_chara).set_pseudo_uma(uma);
-  uma.attr_buffs = uma.attr_buffs.map((l, i) => {
-    const buffs = l.map((e) => {
-      const ret = { buff: e },
-        val_str = e.substring(0, e.indexOf('['));
-      if (val_str.endsWith('%')) {
-        ret.val = Number(val_str.substring(0, val_str.length - 1));
-        ret.p = true;
-      } else {
-        ret.val = Number(val_str);
-      }
-      return ret;
-    });
-    uma.attrs[i] *=
-      100 + buffs.filter((e) => e.p).reduce((p, c) => p + c.val, 0);
-    uma.attrs[i] = Math.floor(uma.attrs[i] / 100);
-    uma.attrs[i] += buffs.filter((e) => !e.p).reduce((p, c) => p + c.val, 0);
-    return sort_list(buffs, (e) => (e.p ? 10000 + e.val : e.val), false).map(
-      (e) => e.buff,
-    );
-  });
+  uma.calc_attrs();
   uma.adapt_ground_list = uma.adapt_ground_list.map((e) =>
     Math.min(Math.max(e, 0), 7),
   );

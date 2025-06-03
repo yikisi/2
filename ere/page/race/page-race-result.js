@@ -10,6 +10,7 @@ const sys_sim_race = require('#/system/race/sys-simulate-race');
 const { sort_list } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const { item_names } = require('#/data/ero/item-const');
 const { class_enum, track_names } = require('#/data/race/model/race-info');
 
 const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'],
@@ -382,6 +383,32 @@ async function page_race_result(contestants, info, race_id) {
     flag_charts = flag_charts !== 99 && (await era.input());
   }
   era.stopMusic();
+  for (const uma of contestants) {
+    const { cid } = uma;
+    if (uma.ero.item) {
+      let tmp;
+      if ((tmp = era.get(`equip:${cid}:胸部`)) > 0) {
+        era.set(`equip:${cid}:胸部`, 0);
+        era.add(`item:${item_names[tmp]}`, 2);
+      }
+      if ((tmp = era.get(`equip:${cid}:阴茎`)) > 0) {
+        era.set(`equip:${cid}:阴茎`, 0);
+        era.add(`item:${item_names[tmp]}`, 1);
+      }
+      if ((tmp = era.get(`equip:${cid}:阴蒂`)) > 0) {
+        era.set(`equip:${cid}:阴蒂`, 0);
+        era.add(`item:${item_names[tmp]}`, 1);
+      }
+      if ((tmp = era.get(`equip:${cid}:阴道`)) > 0) {
+        era.set(`equip:${cid}:阴道`, 0);
+        era.add(`item:${item_names[tmp]}`, 1);
+      }
+      if ((tmp = era.get(`equip:${cid}:肛门`)) > 0) {
+        era.set(`equip:${cid}:肛门`, 0);
+        era.add(`item:${item_names[tmp]}`, 1);
+      }
+    }
+  }
 }
 
 module.exports = page_race_result;
