@@ -472,6 +472,14 @@ async function preview_race(
             type: 'button',
           },
         ]);
+        if (item_chara.length > 1) {
+          era.printButton(`上一位 ${item_chara[index - 1]?.name ?? '-'}`, 10, {
+            disabled: index === 0,
+          });
+          era.printButton(`下一位 ${item_chara[index + 1]?.name ?? '-'}`, 11, {
+            disabled: index === item_chara.length - 1,
+          });
+        }
         era.printButton('结束', 99);
         let ret = await era.input();
         switch (ret) {
@@ -705,6 +713,12 @@ async function preview_race(
                 era.add(`item:${item_names[ret]}`, -1);
               }
             }
+            break;
+          case 10:
+            index--;
+            break;
+          case 11:
+            index++;
             break;
           case 99:
             flag = false;
