@@ -5266,6 +5266,16 @@ skills_dict[410011] = require('#/data/race/skill/skill-410011');
 skills_dict[410021] = require('#/data/race/skill/skill-410021');
 skills_dict[410031] = require('#/data/race/skill/skill-410031');
 skills_dict[410041] = require('#/data/race/skill/skill-410041');
+skills_dict[660011] = require('#/data/race/skill/skill-660011');
+skills_dict[660012] = require('#/data/race/skill/skill-660012');
+skills_dict[660021] = require('#/data/race/skill/skill-660021');
+skills_dict[660022] = require('#/data/race/skill/skill-660022');
+skills_dict[660031] = require('#/data/race/skill/skill-660031');
+skills_dict[660032] = require('#/data/race/skill/skill-660032');
+skills_dict[660041] = require('#/data/race/skill/skill-660041');
+skills_dict[660042] = require('#/data/race/skill/skill-660042');
+skills_dict[660051] = require('#/data/race/skill/skill-660051');
+skills_dict[660052] = require('#/data/race/skill/skill-660052');
 skills_dict[900011] = require('#/data/race/skill/skill-900011');
 skills_dict[900021] = require('#/data/race/skill/skill-900021');
 skills_dict[900031] = require('#/data/race/skill/skill-900031');
@@ -5547,7 +5557,8 @@ const common_skills = [
   210061, 210062, 210071, 210072, 210081, 210082, 210091, 210101, 210111,
   210121, 210131, 210141, 210261, 210262, 210271, 210272, 210281, 210282,
   210291, 210292, 210301, 210302, 210311, 210321, 210322, 210331, 210341,
-  210342, 210351, 210352, 990011, 990021,
+  210342, 210351, 210352, 660011, 660012, 660021, 660022, 660031, 660032,
+  660041, 660042, 660051, 660052, 990011, 990021,
 ];
 
 module.exports = { chara_skill_dict, common_skills, skills_dict, skill_sets };

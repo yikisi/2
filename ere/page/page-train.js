@@ -514,7 +514,7 @@ module.exports = async () => {
                 ability_filter === -1 ||
                 s.ability_tags.indexOf(ability_filter) !== -1,
             ];
-            skill_page_size = enable_filter ? 66 : 84;
+            skill_page_size = enable_filter ? 63 : 84;
             const filtered_buffer = buffer.filter(
                 (e) =>
                   !enable_filter ||
@@ -578,7 +578,7 @@ module.exports = async () => {
                         content: '技能类型',
                         type: 'text',
                       },
-                      ...['全部', '被动', '恢复', '增幅', '削弱'].map(
+                      ...['全部', '常时', '恢复', '增幅', '控制'].map(
                         (e, i) => ({
                           accelerator: 930 + i,
                           config: {

@@ -489,25 +489,42 @@ module.exports = class extends CustomizedEro {
             ]);
             era.println();
 
-            await era.printAndWait(
-              `早上被迫双腿岔开蹲坐，张口为没睡醒的${father.get_uma_sex_title()}处理晨勃，将${father.get_uma_sex_title()}一天的初精和初尿一同吞入腹中的经验`,
-            );
-            await era.printAndWait(
-              `傍晚，在训练场上就被训练结束的${father.get_uma_sex_title()}们恳求处理性欲，将那充满了一整天未能清理的汗臭和尿垢的肉棒含在口中，让${
-                father.sex
-              }们将训练的辛劳全数发泄在自己嘴里`,
-            );
+            await era.printAndWait([
+              '早上被迫双腿岔开蹲坐，张口为没睡醒的',
+              father.get_uma_sex_title(),
+              '处理晨勃，将',
+              father.get_uma_sex_title(),
+              '一天的初精和初尿一同吞入腹中的经验',
+            ]);
+            await era.printAndWait([
+              '傍晚，在训练场上就被训练结束的',
+              father.get_uma_sex_title(),
+              '们恳求处理性欲，将那充满了一整天未能清理的汗臭和尿垢的肉棒含在口中，让',
+              father.sex,
+              '们将训练的辛劳全数发泄在自己嘴里',
+            ]);
 
-            const diff_mark =
-              2 * (era.get('exp:0:生产次数') > 0) +
-                sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-                  (e) =>
-                    e &&
-                    era.get(`cflag:${e}:父方角色`) &&
-                    era.get(`cflag:${e}:母方角色`),
-                ).length >
-              0;
-            if (diff_mark > 0) {
+            const diff_mark = sys_filter_chara(
+              'cflag',
+              '招募状态',
+              recruit_flags.yes,
+            ).reduce(
+              (p, c) => {
+                if (c > 0 && era.get(`cflag:${c}:成长阶段`) >= 2) {
+                  if (
+                    era.get(`cflag:${c}:父方角色`) === 0 ||
+                    era.get(`cflag:${c}:母方角色`) === 0
+                  ) {
+                    p.c++;
+                  } else {
+                    p.s++;
+                  }
+                }
+                return p;
+              },
+              { c: 0, s: 0 },
+            );
+            if (diff_mark.s > 0 || diff_mark.c > 0) {
               await era.printAndWait([
                 { isBr: true },
                 mother.get_colored_name(),
@@ -515,7 +532,7 @@ module.exports = class extends CustomizedEro {
               ]);
               await era.printAndWait(
                 `哪怕自己的${
-                  diff_mark >= 2 ? '女儿' : `负责${father.get_uma_sex_title()}`
+                  diff_mark.c > 0 ? '女儿' : `负责${father.get_uma_sex_title()}`
                 }梦游到自己房中，半梦半醒间把自己的小穴灌满后再强行撑开自己正处于睡梦中的双唇进行清理，自己都没能醒过来的事`,
               );
               await era.printAndWait([
@@ -558,12 +575,7 @@ module.exports = class extends CustomizedEro {
               { isBr: true },
               era
                 .getAddedCharacters()
-                .filter(
-                  (e) =>
-                    (era.get(`cflag:${e}:父方角色`) ||
-                      era.get(`cflag:${e}:母方角色`)) &&
-                    era.get(`cflag:${e}:成长阶段`) >= 2,
-                ).length > 0
+                .filter((e) => era.get(`cflag:${e}:母方角色`) === 0).length > 1
                 ? '再一次，'
                 : '',
               '怀抱着空虚的梦想，',

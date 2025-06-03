@@ -244,7 +244,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
     (p[c.p.group] ||= []).push(c);
     return p;
   }, {});
-  const money = price_dict['顺从'];
+  const money = juel_dict['顺从'];
   const slave = inmon.slave;
   if (sex_level > 0 || (pleasure_level > 0 && meek_level > 0)) {
     era.drawLine({
@@ -396,18 +396,13 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
                   },
                 ]
               : [
-                  chara.id > 0
-                    ? {
-                        accelerator: 9,
-                        config: { width: 6 },
-                        content: `当前词条：${slavery_options[slave]}`,
-                        type: 'button',
-                      }
-                    : {
-                        config: { width: 6 },
-                        content: `当前词条：${slavery_options[slave]}`,
-                        type: 'text',
-                      },
+                  {
+                    config: { width: 6 },
+                    content: `当前词条：${slavery_options[slave]}`,
+                    ...(chara.id > 0
+                      ? { accelerator: 9, type: 'button' }
+                      : { type: 'content' }),
+                  },
                   {
                     config: { width: 18 },
                     content: `效果：${slavery_descriptions[slave]}`,

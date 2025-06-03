@@ -243,7 +243,7 @@ module.exports = {
     return (
       !era.get(`status:${id}:超马跳Z`) &&
       era.get(`mark:${id}:淫纹`) < 3 &&
-      ((era.getCharactersInTrain().length > 0 &&
+      ((era.getCharactersInTrain().length > 1 &&
         !era.get('tflag:强奸') &&
         get_sex_acceptable(id) < 0) ||
         Math.random() <

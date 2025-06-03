@@ -255,7 +255,7 @@ async function morning_sex() {
   ) {
     const buffer = [],
       love = get(`love:${chara_id}`);
-    if (love < 75 && get('flag:惩戒力度') >= 2) {
+    if (get('flag:惩戒力度') >= 2) {
       buffer.push(duty);
     } else if (love >= 75 || get(`mark:${chara_id}:欢愉`) >= 1) {
       if (get_custom_check(chara_id).is_want_make_love()) {

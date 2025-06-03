@@ -27,7 +27,7 @@ const {
  * @returns {boolean}
  */
 function sys_change_motivation(chara_id, val) {
-  if (!chara_id || era.get(`cflag:${chara_id}:育成回合计时`) >= 3 * 48) {
+  if (!chara_id || !(era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)) {
     return false;
   }
   if (val > 0 && era.get(`status:${chara_id}:偏头痛`)) {

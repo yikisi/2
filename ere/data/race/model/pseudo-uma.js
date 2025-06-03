@@ -1,3 +1,5 @@
+const { sort_list } = require('#/utils/list-utils');
+
 const ConditionParams = require('#/data/race/model/condition-params');
 const { attr_names } = require('#/data/train-const');
 
@@ -53,6 +55,8 @@ class PseudoUma {
    * @type {number[]}
    */
   attrs;
+  /** @type {number[]} */
+  o_attrs;
   /**
    * 本次使用的跑法
    * @type {number}
@@ -242,6 +246,14 @@ class PseudoUma {
     // 下坡时进入状态的概率
     down: 0,
   };
+  // 带玩具比赛用的系数
+  ero = {
+    item: false,
+    param: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
+    buff: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
+    cost: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
+    main: ['sex'],
+  };
   /**
    * 传奇对手标记
    * @type {boolean|2}
@@ -282,6 +294,7 @@ class PseudoUma {
     this.color = color;
     this.motivation = motivation;
     this.attrs = attrs;
+    this.o_attrs = [...this.attrs];
     this.style = style;
     this.adapt_style_list = adapt_style_list;
     this.adapt_distance_list = adapt_distance_list;
@@ -291,6 +304,29 @@ class PseudoUma {
     this.ground_buffs = [];
     this.dis_buffs = [];
     this.pop = new Array(4);
+  }
+
+  calc_attrs() {
+    this.attr_buffs = this.attr_buffs.map((l, i) => {
+      const buffs = l.map((e) => {
+        const ret = { buff: e },
+          val_str = e.substring(0, e.indexOf('['));
+        if (val_str.endsWith('%')) {
+          ret.val = Number(val_str.substring(0, val_str.length - 1));
+          ret.p = true;
+        } else {
+          ret.val = Number(val_str);
+        }
+        return ret;
+      });
+      this.attrs[i] = this.o_attrs[i];
+      this.attrs[i] *=
+        (100 + buffs.filter((e) => e.p).reduce((p, c) => p + c.val, 0)) / 100;
+      this.attrs[i] += buffs.filter((e) => !e.p).reduce((p, c) => p + c.val, 0);
+      return sort_list(buffs, (e) => (e.p ? 10000 + e.val : e.val), false).map(
+        (e) => e.buff,
+      );
+    });
   }
 
   /**

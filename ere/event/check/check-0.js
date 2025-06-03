@@ -111,7 +111,9 @@ module.exports = class extends CustomizedCheck {
       if (
         get('cflag:0:位置') === 0 &&
         get('flag:当前位置') !== location_enum.basement &&
-        sys_filter_chara('cflag', '招募状态', recruit_flags.yes).length > 1
+        sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+          (e) => get(`cflag:${e}:成长阶段`) >= 2 && e !== 32,
+        ).length > 1
       ) {
         add_event(
           event_hooks.week_start,

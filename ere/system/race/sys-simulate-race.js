@@ -18,6 +18,7 @@ const {
   progress_width,
   screen_size,
 } = require('#/system/race/snippets');
+const sub_simulate_ero = require('#/system/race/sub-simulate-ero');
 const sub_simulate_report = require('#/system/race/sub-simulate-report');
 const sub_simulate_skill = require('#/system/race/sub-simulate-skill');
 
@@ -27,8 +28,9 @@ const {
   median,
   sort_list,
 } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
+const { get_random_value, log_max_wp } = require('#/utils/value-utils');
 
+const { wp_coefficient } = require('#/data/ero/orgasm-const');
 const RaceInfo = require('#/data/race/model/race-info');
 const { ability_type_enum } = require('#/data/race/model/uma-skill');
 const { race_enum } = require('#/data/race/race-const');
@@ -196,8 +198,9 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
       stamina: [{ data: [] }],
     },
     buffer = { report: [], skill: [] };
-  let dynamic_table = [],
-    report_cache = [];
+  let dynamic_table = [];
+  /** @type {*[][]} */
+  let report_cache = [];
   Object.keys(statistics).forEach(
     (k) =>
       (statistics[k] = list_chara.map((uma) => ({
@@ -206,6 +209,13 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
         label: uma.name,
         stepped: false,
       }))),
+  );
+
+  list_chara.forEach(
+    (u) =>
+      (u.ero.cost.sex =
+        -(wp_coefficient * Math.log(u.attrs[attr_enum.toughness])) /
+        log_max_wp),
   );
 
   dynamic_table.push([
@@ -307,7 +317,7 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
   function get_report_internal() {
     return Math.max(
       Math.min(
-        (buffer.report.at(-1)?.speak * 3) / 20,
+        (buffer.report.find((e) => e.speak > 0)?.speak * 3) / 20,
         get_random_value(3.5, 4.5, true),
       ),
       get_random_value(1.5, 2.5, true),
@@ -476,6 +486,14 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
       flag_race = false;
       continue;
     }
+
+    sub_simulate_ero(
+      list_chara,
+      timer_record,
+      timer,
+      report_cache.at(-1),
+      buffer.report,
+    );
 
     sub_simulate_skill(
       list_chara,

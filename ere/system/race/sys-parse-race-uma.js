@@ -656,7 +656,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       )
       .forEach((skill) => {
         for (let i = 0; i < skill.data.pop_types.length; ++i) {
-          if (skill.data.pop_types[i]) {
+          if (skill.data.pop_types[i] > 0) {
             if (skill.data.is_random) {
               uma.tempPop[skill.data.pop_types[i] - 1] +=
                 uma.attrs[attr_enum.intelligence] < 56.25
