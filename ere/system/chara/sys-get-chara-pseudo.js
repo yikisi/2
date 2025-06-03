@@ -9,6 +9,7 @@ const { sort_list } = require('#/utils/list-utils');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaSkills = require('#/data/chara-skills');
 const CharaInmon = require('#/data/ero/chara-inmon');
+const { lust_border } = require('#/data/ero/orgasm-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { get_trainer_level } = require('#/data/info-generator');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
@@ -128,7 +129,11 @@ function sys_get_chara_pseudo(cid) {
   if (era.get(`talent:${cid}:钢之意志`) > 0) {
     uma.ero.buff.sex = -0.5;
   }
-  if (era.get(`status:${cid}:马跳Z`) > 0) {
+  if (
+    era.get(`status:${cid}:马跳Z`) > 0 ||
+    era.get(`base:${cid}:性欲`) >= lust_border.absent_mind ||
+    era.get(`status:${cid}:发情`) > 0
+  ) {
     uma.ero.buff.sex += 0.25;
   } else if (
     era.get(`status:${cid}:弗隆K`) > 0 ||

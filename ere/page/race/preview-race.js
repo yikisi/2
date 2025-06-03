@@ -123,7 +123,7 @@ async function preview_race(
   await era.clear();
   const skill_buffer = [];
   const item_chara = team_list.filter((e) => {
-    const { cid } = e;
+    const { index_chara: cid } = e;
     if (!cid) {
       return true;
     }

@@ -15,12 +15,18 @@ class RaceEventParams extends ExtraFlagsParams {
   love_change;
   /** @type {Record<string,number>} */
   base_change;
+  /** @type {PseudoUma} */
+  pseudo;
   /** @type {number} */
   race;
 
-  /** @param {number} race */
-  constructor(race) {
+  /**
+   * @param {PseudoUma} pseudo
+   * @param {number} race
+   */
+  constructor(pseudo, race) {
     super();
+    this.pseudo = pseudo;
     this.race = race;
   }
 }

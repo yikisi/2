@@ -256,17 +256,14 @@ async function race_page(race) {
       start_count = 0;
     } else {
       era.drawLine();
+      const uma = team_list.find((e) => e.index_chara === ret);
       await run_custom_edu(
         ret,
         event_hooks.race_start,
-        new RaceStartParams(race),
+        new RaceStartParams(uma, race),
       );
-      team_list.find((e) => e.index_chara === ret).motivation = era.get(
-        `cflag:${ret}:干劲`,
-      );
-      team_list.find(
-        (e) => e.index_chara === ret,
-      ).race.conditionParams.motivation = era.get(`cflag:${ret}:干劲`) + 3;
+      uma.motivation = era.get(`cflag:${ret}:干劲`);
+      uma.race.conditionParams.motivation = uma.motivation + 3;
       start_count--;
       race_start[ret] = true;
       sys_change_attr_and_print(0, '精力', -time_cost);
@@ -407,14 +404,11 @@ async function race_page(race) {
       end_count = 0;
     } else {
       era.drawLine();
+      const uma = team_list.find((e) => e.index_chara === ret);
       await run_custom_edu(
         ret,
         event_hooks.race_end,
-        new RaceEndParams(
-          contestants,
-          race,
-          team_list.find((e) => e.index_chara === ret).rank.curr,
-        ),
+        new RaceEndParams(uma, contestants, race, uma.rank.curr),
       );
       end_count--;
       race_end[ret] = true;
