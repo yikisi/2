@@ -385,7 +385,7 @@ async function page_race_result(contestants, info, race_id) {
   era.stopMusic();
   for (const uma of contestants) {
     const { cid } = uma;
-    if (uma.ero.item) {
+    if (uma.race.conditionParams.item === 1) {
       let tmp;
       if ((tmp = era.get(`equip:${cid}:胸部`)) > 0) {
         era.set(`equip:${cid}:胸部`, 0);

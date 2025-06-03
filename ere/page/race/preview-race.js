@@ -673,8 +673,8 @@ async function preview_race(
       await era.clear(era.getLineCount() - curr);
       item_chara.forEach((u) => {
         const { index_chara: cid } = u;
-        const o_has_item = u.ero.item;
-        u.ero.item = new Array(5)
+        const o_has_item = u.race.conditionParams.item;
+        u.race.conditionParams.item = +new Array(5)
           .fill(void 0)
           .reduce(
             (p, _, i) => p || era.get(`equip:${cid}:${i + 5}`) > 0,
@@ -687,9 +687,9 @@ async function preview_race(
         if (ero_skill_level === 2) {
           const has_buff =
             u.attr_buffs[0].findIndex((b) => b.endsWith('[欢愉赐福]')) !== -1;
-          if (u.ero.item && !has_buff) {
+          if (u.race.conditionParams.item === 1 && !has_buff) {
             u.attr_buffs.forEach((l) => l.push('+10%[欢愉赐福]'));
-          } else if (!u.ero.item && has_buff) {
+          } else if (!u.race.conditionParams.item && has_buff) {
             u.attr_buffs = u.attr_buffs.map((l) =>
               l.filter((b) => b !== '+10%[欢愉赐福]'),
             );
@@ -697,15 +697,15 @@ async function preview_race(
         } else if (era.get('flag:道具影响') !== 0 && ero_skill_level !== 1) {
           const has_debuff =
             u.attr_buffs[0].findIndex((b) => b.endsWith('[性玩具]')) !== -1;
-          if (u.ero.item && !has_debuff) {
+          if (u.race.conditionParams.item === 1 && !has_debuff) {
             u.attr_buffs.forEach((l) => l.push(`${item_inf}%[性玩具]`));
-          } else if (!u.ero.item && has_debuff) {
+          } else if (!u.race.conditionParams.item && has_debuff) {
             u.attr_buffs = u.attr_buffs.map((l) =>
               l.filter((b) => b !== `${item_inf}%[性玩具]`),
             );
           }
         }
-        if (u === cur_chara && o_has_item !== u.ero.item) {
+        if (u === cur_chara && o_has_item !== u.race.conditionParams.item) {
           skill_buffer.splice(0);
           cur_chara.list_skill.forEach((s) =>
             skill_buffer.push(...s.data.get_colored_name(cur_chara)),

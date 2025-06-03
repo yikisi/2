@@ -60,6 +60,7 @@ class ConditionParams {
   is_surrounded;
   is_temptation;
   is_used_skill_id;
+  item;
   lane_type;
   last_straight_random;
   lastspurt;

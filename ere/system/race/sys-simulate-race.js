@@ -209,19 +209,12 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
       }))),
   );
 
-  list_chara.forEach((u) => {
-    const { index_chara: cid } = u;
-    if (cid >= 0 && !u.legend) {
-      u.ero.item =
-        get(`equip:${cid}:胸部`) > 0 ||
-        get(`equip:${cid}:阴茎`) > 0 ||
-        get(`equip:${cid}:阴蒂`) > 0 ||
-        get(`equip:${cid}:阴道`) > 0 ||
-        get(`equip:${cid}:肛门`) > 0;
-    }
-    u.ero.cost.sex =
-      -(wp_coefficient * Math.log(u.attrs[attr_enum.toughness])) / log_max_wp;
-  });
+  list_chara.forEach(
+    (u) =>
+      (u.ero.cost.sex =
+        -(wp_coefficient * Math.log(u.attrs[attr_enum.toughness])) /
+        log_max_wp),
+  );
 
   dynamic_table.push([
     get_table_header(

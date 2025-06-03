@@ -13,7 +13,7 @@ module.exports = new UmaEroSkill(
   ),
   1,
   [() => true, () => true],
-  [() => true, () => false],
+  [(args) => args.item === 1, () => false],
   [-0.0001, 0],
   [0, 0],
   [

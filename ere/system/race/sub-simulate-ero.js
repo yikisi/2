@@ -28,7 +28,7 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
     const { index_chara: cid } = uma;
     let orgasm = 0;
     let stamina_times = 0;
-    if (uma.ero.item) {
+    if (uma.race.conditionParams.item === 1) {
       if (era.get(`equip:${cid}:胸部`) > 0) {
         uma.ero.param.breast += param_base * (1 + uma.ero.buff.breast);
       }
@@ -104,7 +104,7 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
       }
     } else {
       uma.race.conditionParams.orgasm = 0;
-      if (uma.ero.item && timer % 15 === 0) {
+      if (uma.race.conditionParams.item === 1 && timer % 15 === 0) {
         const chara = get_chara_talk(cid);
         reports.unshift({
           config: { align: 'left' },

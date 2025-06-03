@@ -867,7 +867,7 @@ async function chara_skill() {
     `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills.sort().join(',')}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
   );
   buffer = 'class ConditionParams { ';
-  c_dict['orgasm'] = c_dict['milk'] = 1;
+  c_dict['orgasm'] = c_dict['milk'] = c_dict['item'] = 1;
   Object.keys(c_dict)
     .sort()
     .forEach((k) => (buffer += `${k};`));
