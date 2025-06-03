@@ -9,7 +9,7 @@ class UmaEroSkill extends UmaSkill {
     return ret.map((e) => ({
       ...e,
       opacity: 0.5,
-      title: '（未启用）' + e.title,
+      title: e.title && '（未启用）' + e.title,
     }));
   }
 }

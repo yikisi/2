@@ -16,6 +16,7 @@ const {
 } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
 const { item_enum, item_names } = require('#/data/ero/item-const');
+const { vp_status_enum } = require('#/data/ero/status-const');
 const {
   get_adaptability_rank,
   get_attr_rank,
@@ -487,9 +488,18 @@ async function preview_race(
               { config: { width: 2 }, content: '跳蛋', type: 'text' },
               {
                 accelerator: 1,
-                config: { width: 22 },
+                config: { width: 4 },
                 content: b_item === item_enum.love_eggs ? '摘下' : '装上',
                 type: 'button',
+              },
+              {
+                config: { width: 18 },
+                content: [
+                  '还有 ',
+                  era.get('item:跳蛋').toLocaleString(),
+                  ' 件',
+                ],
+                type: 'text',
               },
               { accelerator: 9, content: '返回', type: 'button' },
             ]);
@@ -516,10 +526,19 @@ async function preview_race(
               { config: { width: 2 }, content: '飞机杯', type: 'text' },
               {
                 accelerator: 1,
-                config: { width: 22 },
+                config: { width: 4 },
                 content:
                   p_item === item_enum.artificial_virgin ? '摘下' : '装上',
                 type: 'button',
+              },
+              {
+                config: { width: 18 },
+                content: [
+                  '还有 ',
+                  era.get('item:飞机杯').toLocaleString(),
+                  ' 件',
+                ],
+                type: 'text',
               },
               { accelerator: 9, content: '返回', type: 'button' },
             ]);
@@ -544,6 +563,7 @@ async function preview_race(
               },
               { content: [], type: 'text' },
               ...[item_enum.clamps, item_enum.love_eggs].reduce((p, c) => {
+                const count = era.get(`item:${item_names[c]}`);
                 p.push(
                   {
                     config: { width: 2 },
@@ -553,12 +573,16 @@ async function preview_race(
                   {
                     accelerator: c,
                     config: {
-                      disabled:
-                        c_item !== c && era.get(`item:${item_names[c]}`) < 1,
-                      width: 22,
+                      disabled: c_item !== c && count < 1,
+                      width: 4,
                     },
                     content: c_item === c ? '摘下' : '装上',
                     type: 'button',
+                  },
+                  {
+                    config: { width: 18 },
+                    content: ['还有 ', count.toLocaleString(), ' 件'],
+                    type: 'text',
                   },
                 );
                 return p;
@@ -587,6 +611,10 @@ async function preview_race(
               },
               { content: [], type: 'text' },
               ...[item_enum.love_eggs, item_enum.dildo].reduce((p, c) => {
+                const check =
+                  c === item_enum.dildo &&
+                  era.get(`talent:${chara.id}:处女`) !== vp_status_enum.no;
+                const count = era.get(`item:${item_names[c]}`);
                 p.push(
                   {
                     config: { width: 2 },
@@ -596,12 +624,17 @@ async function preview_race(
                   {
                     accelerator: c,
                     config: {
-                      disabled:
-                        v_item !== c && era.get(`item:${item_names[c]}`) < 1,
-                      width: 22,
+                      disabled: check || (v_item !== c && count < 1),
+                      title: check ? '还是处女！' : void 0,
+                      width: 4,
                     },
                     content: v_item === c ? '摘下' : '装上',
                     type: 'button',
+                  },
+                  {
+                    config: { width: 18 },
+                    content: ['还有 ', count.toLocaleString(), ' 件'],
+                    type: 'text',
                   },
                 );
                 return p;
@@ -633,7 +666,9 @@ async function preview_race(
                 item_enum.dildo,
                 item_enum.butt_plug,
                 item_enum.anal_beads,
-              ].reduce((p, c) => {
+              ].reduce((p, c, i) => {
+                const check = era.get(`exp:${chara.id}:肛交次数`) < 10 - i * 5;
+                const count = era.get(`item:${item_names[c]}`);
                 p.push(
                   {
                     config: { width: 2 },
@@ -643,12 +678,17 @@ async function preview_race(
                   {
                     accelerator: c,
                     config: {
-                      disabled:
-                        a_item !== c && era.get(`item:${item_names[c]}`) < 1,
-                      width: 22,
+                      disabled: check || (a_item !== c && count < 1),
+                      title: check ? '肛交经验不足！' : void 0,
+                      width: 4,
                     },
                     content: a_item === c ? '摘下' : '装上',
                     type: 'button',
+                  },
+                  {
+                    config: { width: 18 },
+                    content: ['还有 ', count.toLocaleString(), ' 件'],
+                    type: 'text',
                   },
                 );
                 return p;
