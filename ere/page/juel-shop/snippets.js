@@ -243,13 +243,13 @@ module.exports = {
     );
   },
   /**
-   * @param {number} id
+   * @param {number} cid
    * @param {Record<string,number>} price_dict
    * @param {Record<string,number>} origin_dict
    * @returns {Promise<boolean>}
    */
-  async print_price_and_confirm(id, price_dict, origin_dict) {
-    const chara_talk = get_chara_talk(id);
+  async print_price_and_confirm(cid, price_dict, origin_dict) {
+    const chara_talk = get_chara_talk(cid);
     Object.keys(price_dict).forEach((juel_name) => {
       const buffer = [
         `${juel_name.substring(0, 2)}因子：`,

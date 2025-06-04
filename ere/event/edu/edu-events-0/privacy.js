@@ -332,7 +332,7 @@ module.exports = class extends CustomizedEdu {
         await chara.say_and_wait([
           '明明已经是',
           chara.get_uma_sex_title(),
-          '得所有物了。',
+          '的所有物了。',
         ]);
         await chara.say_and_wait('居然还以为自己对这副身体有处置权吗？');
         await chara.say_and_wait('看来有必要对你明确一下你的地位了。');

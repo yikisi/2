@@ -27,16 +27,16 @@ const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 let tmp = {};
 
 /**
- * @param {number} id
+ * @param {number} cid
  * @param {number} part
  * @param {number} _attack hurt value
  */
-function add_palam(id, part, _attack) {
+function add_palam(cid, part, _attack) {
   let attack = _attack;
   if (part === part_enum.breast) {
-    attack /= 1 + 0.2 * era.get(`talent:${id}:乳房尺寸`);
+    attack /= 1 + 0.2 * era.get(`talent:${cid}:乳房尺寸`);
   }
-  attack *= 1 - 0.2 * era.get(`talent:${id}:贞洁看法`);
+  attack *= 1 - 0.2 * era.get(`talent:${cid}:贞洁看法`);
   const key = part_names[part];
   if (!key) {
     return;
@@ -47,20 +47,20 @@ function add_palam(id, part, _attack) {
   // 高潮抑制-10%快感累积
   let coff =
     1 +
-    0.25 * (era.get(`base:${id}:性欲`) >= lust_border.want_sex) +
-    0.25 * era.get(`tcvar:${id}:发情`) +
-    0.2 * (era.get(`tcvar:${id}:余韵`) > 0) -
-    0.1 * (era.get(`tcvar:${id}:高潮抑制`) > 0);
+    0.25 * (era.get(`base:${cid}:性欲`) >= lust_border.want_sex) +
+    0.25 * era.get(`tcvar:${cid}:发情`) +
+    0.2 * (era.get(`tcvar:${cid}:余韵`) > 0) -
+    0.1 * (era.get(`tcvar:${cid}:高潮抑制`) > 0);
   if (part === part_enum.penis) {
     // 不应期内阴茎快感提升-90%
-    if (era.get(`tcvar:${id}:不应期`)) {
+    if (era.get(`tcvar:${cid}:不应期`)) {
       coff -= 0.9;
-    } else if (era.get(`tcvar:${id}:避孕套`)) {
+    } else if (era.get(`tcvar:${cid}:避孕套`)) {
       // 避孕套-10%快感
       coff -= 0.1;
     }
   }
-  const chara_inmon = CharaInmon.get(id);
+  const chara_inmon = CharaInmon.get(cid);
   if (chara_inmon.on(plugin_enum.al_u1)) {
     coff += 0.5;
   } else if (chara_inmon.on(plugin_enum.al_u2)) {
@@ -89,9 +89,9 @@ function add_palam(id, part, _attack) {
     coff -= 0.8;
   }
   attack *= coff;
-  tmp[id][key] += attack;
+  tmp[cid][key] += attack;
   // 自己拿自己的宝珠
-  add_juel(id, `${key}快感`, attack);
+  add_juel(cid, `${key}快感`, attack);
 }
 
 /**

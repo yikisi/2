@@ -606,16 +606,16 @@ module.exports = {
     }
     return colors[3] || `hsl(${colors[0]}deg ${colors[1]}% ${colors[2]}%)`;
   },
-  get_talent: (id) => {
-    const yandere = era.get(`talent:${id}:病娇`),
-      ret = get_custom_mec(id).get_talents();
+  get_talent: (cid) => {
+    const yandere = era.get(`talent:${cid}:病娇`),
+      ret = get_custom_mec(cid).get_talents();
     if (yandere === 2 || (yandere > 0 && era.get('status:0:马语者') > 0)) {
       const temp = {
         color: buff_colors[3],
         content: '病娇',
         opacity: yandere / 2,
       };
-      const inmon = CharaInmon.get(id);
+      const inmon = CharaInmon.get(cid);
       if (inmon.on(plugin_enum.no_yand)) {
         delete temp.color;
         delete temp.opacity;
@@ -627,7 +627,7 @@ module.exports = {
       }
       ret.push(temp);
     }
-    if (era.get(`talent:${id}:捉摸不透`)) {
+    if (era.get(`talent:${cid}:捉摸不透`)) {
       ret.push({ content: '捉摸不透' });
     }
     ret.push(
@@ -636,7 +636,7 @@ module.exports = {
         .map((_, i) => {
           return {
             id: i,
-            val: era.get(`talent:${id}:${i}`),
+            val: era.get(`talent:${cid}:${i}`),
           };
         })
         .filter((e) => e.val)

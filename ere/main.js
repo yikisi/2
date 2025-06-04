@@ -20,14 +20,14 @@ const notes = require('#/data/notes.json');
 const { first_child_id, set_chara_ero_image } = require('#/data/other-const');
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {string} [_suffix]
  */
-function get_copyright_entry(chara_id, _suffix) {
+function get_copyright_entry(cid, _suffix) {
   const suffix = _suffix ? `（${_suffix}）` : '';
   return {
-    color: get_chara_color(chara_id),
-    content: `${era.get(`static:${chara_id}:name`)}${suffix}`,
+    color: get_chara_color(cid),
+    content: `${era.get(`static:${cid}:name`)}${suffix}`,
     fontWeight: 'bold',
   };
 }
@@ -479,14 +479,14 @@ module.exports = async () => {
           say_by_passer_by(...note);
         }
         await era.waitAnyKey();
-        for (const id of Object.keys(notes)
+        for (const cid of Object.keys(notes)
           .filter((k) => k !== 'common')
           .map(Number)
           .sort((a, b) => a - b)) {
-          for (const note of notes[id]) {
+          for (const note of notes[cid]) {
             era.print(
               [{ content: note[0], fontWeight: 'bold' }, '「', note[1], '」'],
-              { color: get_chara_color(Number(id)) },
+              { color: get_chara_color(Number(cid)) },
             );
           }
           await era.waitAnyKey();

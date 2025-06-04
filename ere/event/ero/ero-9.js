@@ -244,7 +244,11 @@ module.exports = class extends CustomizedEro {
       const default_filter = new Array(5).fill(false);
       let flag_rape = true;
       while (flag_rape) {
-        await handle_ero_act(ero_hooks.relax, default_filter, false);
+        await handle_ero_act(
+          !era.get('tflag:主导权') ? ero_hooks.switch : ero_hooks.relax,
+          default_filter,
+          false,
+        );
         if (era.get('tcvar:9:脱力') || era.get('tcvar:9:逃跑')) {
           flag_rape = false;
         }

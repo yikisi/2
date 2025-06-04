@@ -583,10 +583,10 @@ function end_ero(skip_juels, log_juels, ids) {
       era.add(`exp:${cid}:技能点数`, pt);
     }
   }
-  for (const id of ids) {
-    if (id > 0 && era.get(`cflag:${id}:种族`) > 0) {
-      let got = Math.floor(era.get(`tcvar:${id}:获得因子`) / palam2juel),
-        juels = gene_juel_names.map((e) => era.get(`tcvar:${id}:${e}因子`));
+  for (const cid of ids) {
+    if (cid > 0 && era.get(`cflag:${cid}:种族`) > 0) {
+      let got = Math.floor(era.get(`tcvar:${cid}:获得因子`) / palam2juel),
+        juels = gene_juel_names.map((e) => era.get(`tcvar:${cid}:${e}因子`));
       if (got > 0) {
         if (got < juels.reduce((p, c) => p + c, 0)) {
           juels = juels.map((e, i, l) => {
@@ -599,8 +599,8 @@ function end_ero(skip_juels, log_juels, ids) {
           });
         }
         juels.forEach((e, i) => era.add(`gotjuel:0:${gene_juel_names[i]}`, e));
-        if (era.get(`cflag:${id}:殿堂`) > 0) {
-          CharaAvailableGenes.merge_into_player(new CharaAvailableGenes(id));
+        if (era.get(`cflag:${cid}:殿堂`) > 0) {
+          CharaAvailableGenes.merge_into_player(new CharaAvailableGenes(cid));
         }
       }
     }
@@ -613,7 +613,7 @@ function end_ero(skip_juels, log_juels, ids) {
   }
   era
     .get('paramkeys')
-    .forEach((v) => ids.forEach((id) => era.set(`gotjewel:${id}:${v}`, 0)));
+    .forEach((v) => ids.forEach((cid) => era.set(`gotjewel:${cid}:${v}`, 0)));
   return ret;
 }
 

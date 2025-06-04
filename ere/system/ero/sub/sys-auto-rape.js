@@ -376,8 +376,9 @@ async function sys_auto_rape(shown) {
     );
   }
   const second_filter = get_custom_ero(master).filter_in_rape();
-  if (Object.keys(poison_list.master).length) {
-    filters.push((e) => {
+  const temp_filters = [];
+  if (Object.keys(poison_list.master).length > 0) {
+    temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
         tags.attacker_tags.findIndex((t) => poison_list.master[t]) !== -1 &&
@@ -386,26 +387,32 @@ async function sys_auto_rape(shown) {
     });
   }
   if (Object.keys(sensitive_list.master).length) {
-    temp = (e) => {
+    temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
         tags.attacker_tags.findIndex((t) => sensitive_list.master[t]) === -1 ||
         tags.defender_tags.findIndex((t) => sensitive_list.lover[t]) === -1
       );
-    };
-    filters.push((e) => second_filter(e) && temp(e), temp);
+    });
   }
-  if (Object.keys(white_list).length + Object.keys(week_list).length) {
-    temp = (e) => {
+  if (Object.keys(white_list).length > 0 || Object.keys(week_list).length > 0) {
+    temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
         tags.attacker_tags.findIndex((t) => white_list[t]) !== -1 ||
         tags.defender_tags.findIndex((t) => week_list[t]) !== -1
       );
-    };
-    filters.push((e) => second_filter(e) && temp(e), temp);
+    });
   }
-  filters.push(second_filter);
+  if (temp_filters.length > 0) {
+    filters.push(
+      ...temp_filters.map((f) => (a) => second_filter(a) && f(a)),
+      second_filter,
+      ...temp_filters,
+    );
+  } else {
+    filters.push(second_filter);
+  }
   if (Object.keys(black_list).length) {
     filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;

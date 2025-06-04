@@ -199,8 +199,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
         legend_count = 0;
     }
 
-    team_chara.forEach(({ index_chara: id }) =>
-      get_custom_mec(id)
+    team_chara.forEach(({ index_chara: cid }) =>
+      get_custom_mec(cid)
         .get_race_contestants(info)
         .forEach((c) => {
           const difficulty = named_difficulty[0] * c.buff;
@@ -314,9 +314,9 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       gacha(
         list_history,
         Math.min(legend_count, info.gates - ret.length),
-      ).forEach((id) => {
+      ).forEach((cid) => {
         //对应json中存在幻影数据则优先读取
-        let uma = legends_history[id];
+        let uma = legends_history[cid];
         if (uma) {
           ret.push(
             new PseudoUma(
@@ -337,7 +337,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
           uma = get_random_entry(
             named_list.filter(
               (e) =>
-                e.id === id &&
+                e.id === cid &&
                 e.level >= named_difficulty - 200 &&
                 e.level <= named_difficulty + 400,
             ),
@@ -367,7 +367,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
           }
         }
         if (uma) {
-          contestant_dict[id] = 1;
+          contestant_dict[cid] = 1;
           legend_count--;
         }
       });

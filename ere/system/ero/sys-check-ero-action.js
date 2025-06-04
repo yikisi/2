@@ -23,13 +23,13 @@ console.log(
 );
 
 /**
- * @param {number} id
+ * @param {number} cid
  * @param {number} supporter
  * @param {number} action
  * @returns {number}
  */
-function sys_check_ero_allowed(id, supporter, action) {
-  const slave = era.get(`mark:${id}:淫纹`);
+function sys_check_ero_allowed(cid, supporter, action) {
+  const slave = era.get(`mark:${cid}:淫纹`);
   if (slave > 0) {
     return slave * 10 - 9;
   }
@@ -37,12 +37,12 @@ function sys_check_ero_allowed(id, supporter, action) {
   let ret = 0;
   if (handler) {
     ret =
-      handler(id, supporter) +
-      get_action_base_check(id) +
-      Math.max(era.get(`base:${id}:性欲`) - 5000, 0) / 200 -
+      handler(cid, supporter) +
+      get_action_base_check(cid) +
+      Math.max(era.get(`base:${cid}:性欲`) - 5000, 0) / 200 -
       7.5 * Math.max(era.get('flag:惩戒力度') - 1, 0);
   }
-  ret += get_custom_mec(id).get_ero_check(action) || 0;
+  ret += get_custom_mec(cid).get_ero_check(action) || 0;
   return ret;
 }
 

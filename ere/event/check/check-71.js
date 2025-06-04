@@ -14,6 +14,7 @@ const ArdanEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-71')
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const ArdanLifeMarks = require('#/data/event/life-event-marks/life-event-marks-71');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -58,21 +59,27 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const life_marks = new ArdanLifeMarks();
-    if (era.get('flag:回合爱慕惩罚') === 0) {
-      const love = era.get(`love:${this.id}`);
-      if (!life_marks.love_1 && love >= 1) {
-        life_marks.love_1 = 1;
-        add_event(
-          event_hooks.week_end,
-          new EventObject(this.id, cb_enum.love).set_arg('bearing'),
-        );
-      } else if (life_marks.love_1 === 2 && !life_marks.love_25 && love >= 25) {
-        life_marks.love_25 = 1;
-        add_event(
-          event_hooks.week_end,
-          new EventObject(this.id, cb_enum.love).set_arg('theater'),
-        );
+    if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+      const life_marks = new ArdanLifeMarks();
+      if (era.get('flag:回合爱慕惩罚') === 0) {
+        const love = era.get(`love:${this.id}`);
+        if (!life_marks.love_1 && love >= 1) {
+          life_marks.love_1 = 1;
+          add_event(
+            event_hooks.week_end,
+            new EventObject(this.id, cb_enum.love).set_arg('bearing'),
+          );
+        } else if (
+          life_marks.love_1 === 2 &&
+          !life_marks.love_25 &&
+          love >= 25
+        ) {
+          life_marks.love_25 = 1;
+          add_event(
+            event_hooks.week_end,
+            new EventObject(this.id, cb_enum.love).set_arg('theater'),
+          );
+        }
       }
     }
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);

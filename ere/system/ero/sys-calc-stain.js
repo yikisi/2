@@ -167,13 +167,13 @@ module.exports = {
     delete cache[chara_id];
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} part
    * @param {number} stain_type
    */
-  set_stain(chara_id, part, ...stain_type) {
-    let result = era.get(`stain:${chara_id}:${part_touch[part]}`);
+  set_stain(cid, part, ...stain_type) {
+    let result = era.get(`stain:${cid}:${part_touch[part]}`);
     stain_type.forEach((type) => (result |= 1 << type));
-    era.set(`stain:${chara_id}:${part_touch[part]}`, result);
+    era.set(`stain:${cid}:${part_touch[part]}`, result);
   },
 };

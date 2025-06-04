@@ -189,36 +189,33 @@ module.exports = {
   check_lubrication,
   check_pregnant_unprotect,
   /**
-   * @param chara_id
+   * @param cid
    * @returns {number} 0 - 完全没爽够，1 - 爽够了但是还想再爽，2 - 不能再爽了
    */
-  check_satisfied(chara_id) {
-    if (
-      era.get(`tcvar:${chara_id}:脱力`) ||
-      era.get(`tcvar:${chara_id}:失神`)
-    ) {
+  check_satisfied(cid) {
+    if (era.get(`tcvar:${cid}:脱力`) || era.get(`tcvar:${cid}:失神`)) {
       return 2;
     }
     if (
-      !chara_id ||
-      era.get(`status:${chara_id}:超马跳Z`) ||
-      era.get(`mark:${chara_id}:反抗`) >= 2 ||
-      era.get(`mark:${chara_id}:苦痛`) >= 2 ||
-      era.get(`mark:${chara_id}:羞耻`) >= 2
+      !cid ||
+      era.get(`status:${cid}:超马跳Z`) ||
+      era.get(`mark:${cid}:反抗`) >= 2 ||
+      era.get(`mark:${cid}:苦痛`) >= 2 ||
+      era.get(`mark:${cid}:羞耻`) >= 2
     ) {
       return 0;
     }
-    const lust = era.get(`base:${chara_id}:性欲`);
+    const lust = era.get(`base:${cid}:性欲`);
     if (
-      !era.get(`tcvar:${chara_id}:高潮满足`) ||
-      era.get(`tcvar:${chara_id}:接近高潮`) ||
+      !era.get(`tcvar:${cid}:高潮满足`) ||
+      era.get(`tcvar:${cid}:接近高潮`) ||
       lust >= lust_border.itch
     ) {
       return 0;
     }
     if (
       Math.random() <
-      (lust + era.get(`tcvar:${chara_id}:发情`) * 1000) / lust_border.itch
+      (lust + era.get(`tcvar:${cid}:发情`) * 1000) / lust_border.itch
     ) {
       return 1;
     }
@@ -227,30 +224,29 @@ module.exports = {
   /**
    * 检查角色是否能进行阴道性行为<br>
    * 必须有阴道&未经期&未处于孕期保护
-   * @param chara_id
+   * @param cid
    * @returns {boolean}
    */
-  check_virgin_enabled(chara_id) {
-    const virgin_size = era.get(`cflag:${chara_id}:阴道尺寸`);
+  check_virgin_enabled(cid) {
+    const virgin_size = era.get(`cflag:${cid}:阴道尺寸`);
     return (
       virgin_size > 0 &&
-      check_pregnant_unprotect(chara_id, virgin_size) &&
-      (era.get(`cflag:${chara_id}:种族`) > 0 ||
-        !era.get(`status:${chara_id}:经期`))
+      check_pregnant_unprotect(cid, virgin_size) &&
+      (era.get(`cflag:${cid}:种族`) > 0 || !era.get(`status:${cid}:经期`))
     );
   },
-  check_want_to_escape(id) {
+  check_want_to_escape(cid) {
     return (
-      !era.get(`status:${id}:超马跳Z`) &&
-      era.get(`mark:${id}:淫纹`) < 3 &&
+      !era.get(`status:${cid}:超马跳Z`) &&
+      era.get(`mark:${cid}:淫纹`) < 3 &&
       ((era.getCharactersInTrain().length > 1 &&
         !era.get('tflag:强奸') &&
-        get_sex_acceptable(id) < 0) ||
+        get_sex_acceptable(cid) < 0) ||
         Math.random() <
-          (Math.max(era.get(`mark:${id}:苦痛`), era.get(`mark:${id}:羞耻`)) -
-            era.get(`mark:${id}:欢愉`)) /
+          (Math.max(era.get(`mark:${cid}:苦痛`), era.get(`mark:${cid}:羞耻`)) -
+            era.get(`mark:${cid}:欢愉`)) /
             3 ||
-        era.get(`mark:${id}:反抗`) >= 2)
+        era.get(`mark:${cid}:反抗`) >= 2)
     );
   },
   get_action_base_check,

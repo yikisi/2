@@ -30,10 +30,10 @@ const {
 const LoveLimitStatus = require('#/data/love-limit-status');
 
 /**
- * @param {number} id
+ * @param {number} lover
  * @param {number} new_love
  */
-async function punish_unfaithful(id, new_love) {
+async function punish_unfaithful(lover, new_love) {
   const punish_option = era.get('flag:不忠惩罚') === 1,
     me = get_chara_talk(0),
     temp_chara_list = sys_filter_chara(
@@ -41,14 +41,14 @@ async function punish_unfaithful(id, new_love) {
       '招募状态',
       recruit_flags.yes,
     ).filter((cid) => {
-      return cid > 0 && cid !== id && era.get(`love:${cid}`) >= 75;
+      return cid > 0 && cid !== lover && era.get(`love:${cid}`) >= 75;
     });
   for (const cid of temp_chara_list) {
     const is_aware =
       era.get(`cflag:${cid}:位置`) === era.get('cflag:0:位置') &&
-      get_custom_mec(cid).is_anger_for_unfaithful([id]) &&
+      get_custom_mec(cid).is_anger_for_unfaithful([lover]) &&
       sys_check_yandere(cid, (y) => punish_option || y > 0);
-    get_custom_check(cid).check_after_betrayed([id], is_aware);
+    get_custom_check(cid).check_after_betrayed([lover], is_aware);
     if (is_aware) {
       era.print([
         me.get_colored_name(),
@@ -205,30 +205,30 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
 }
 
 /**
- * @param {number} id
+ * @param {number} cid
  * @param {number} val
  * @param {boolean} [shown=true]
  * @returns {boolean}
  */
-function love_uma(id, val, shown = true) {
-  const love = era.get(`love:${id}`);
+function love_uma(cid, val, shown = true) {
+  const love = era.get(`love:${cid}`);
   if (
-    id === 0 ||
+    cid === 0 ||
     val === 0 ||
     (love === 0 &&
       !era.get('flag:后代爱慕限制') &&
-      era.get(`cflag:${id}:父方角色`) >= 0) ||
-    era.get(`status:${id}:讨厌药`) > 0 ||
-    !LoveLimitStatus.get(id).is_empty()
+      era.get(`cflag:${cid}:父方角色`) >= 0) ||
+    era.get(`status:${cid}:讨厌药`) > 0 ||
+    !LoveLimitStatus.get(cid).is_empty()
   ) {
     return false;
   }
-  const inmon = CharaInmon.get(id);
+  const inmon = CharaInmon.get(cid);
   const coff =
     100 +
     era.get('flag:爱慕上升加成') +
-    50 * era.get(`status:${id}:爱意克制`) +
-    get_custom_mec(id).get_love_buff() +
+    50 * era.get(`status:${cid}:爱意克制`) +
+    get_custom_mec(cid).get_love_buff() +
     100 * inmon.on(plugin_enum.love_up) -
     50 * inmon.on(plugin_enum.love_d1) -
     100 * inmon.on(plugin_enum.love_d2);
@@ -236,8 +236,8 @@ function love_uma(id, val, shown = true) {
   if (val > 6) {
     val = 6;
   }
-  const force_limit = get_custom_mec(id).get_love_limit(),
-    border = force_limit || Math.max(get_love_border(id), 50),
+  const force_limit = get_custom_mec(cid).get_love_limit(),
+    border = force_limit || Math.max(get_love_border(cid), 50),
     love_limit = !era.get('flag:回合爱慕惩罚');
   if ((love_limit || force_limit) && love + val >= border) {
     val = border - 1 - love;
@@ -248,39 +248,39 @@ function love_uma(id, val, shown = true) {
   if (val === 0) {
     return false;
   }
-  let new_val = era.add(`love:${id}`, val);
+  let new_val = era.add(`love:${cid}`, val);
   let printed_new_val = new_val;
-  let hide = sys_check_limit_relation_and_love(id);
+  let hide = sys_check_limit_relation_and_love(cid);
   if (hide && love < 24) {
     hide = false;
     printed_new_val = Math.min(printed_new_val, 24);
   }
   shown &&= !hide;
-  print_change(id, love, printed_new_val, shown);
+  print_change(cid, love, printed_new_val, shown);
   if (
     love < 50 &&
     new_val >= 50 &&
-    era.get(`cflag:${id}:种族`) &&
-    sys_check_yandere(id, (y) => y === 1, inmon)
+    era.get(`cflag:${cid}:种族`) &&
+    sys_check_yandere(cid, (y) => y === 1, inmon)
   ) {
-    era.set(`status:${id}:爱意克制`, 1);
+    era.set(`status:${cid}:爱意克制`, 1);
   }
   if (
     love_limit &&
     (new_val === 49 || new_val === 74 || new_val === 89 || new_val === 99) &&
-    era.get(`cflag:${id}:爱慕暂拒`) !== new_val
+    era.get(`cflag:${cid}:爱慕暂拒`) !== new_val
   ) {
-    if (era.get(`cflag:${id}:招募状态`) !== recruit_flags.no) {
-      if ((sys_check_hide_relation_and_love(id) & 0b1) === 0 && shown) {
+    if (era.get(`cflag:${cid}:招募状态`) !== recruit_flags.no) {
+      if ((sys_check_hide_relation_and_love(cid) & 0b1) === 0 && shown) {
         era.print([
           '和 ',
-          get_chara_talk(id).get_colored_name(),
+          get_chara_talk(cid).get_colored_name(),
           ' 的关系似乎可以更进一步了……',
         ]);
       }
-      get_custom_check(id).check_love_events();
+      get_custom_check(cid).check_love_events();
     } else {
-      era.set(`cflag:${id}:爱慕暂拒`, new_val);
+      era.set(`cflag:${cid}:爱慕暂拒`, new_val);
     }
   }
   return shown;
@@ -375,38 +375,38 @@ module.exports = {
   sys_like_chara: like_chara,
   sys_love_uma: love_uma,
   /**
-   * @param {number} id
+   * @param {number} cid
    * @returns {Promise<boolean>}
    */
-  async sys_love_uma_in_event(id) {
-    if (era.get('flag:回合爱慕惩罚') || id === 0) {
+  async sys_love_uma_in_event(cid) {
+    if (era.get('flag:回合爱慕惩罚') || cid === 0) {
       return false;
     }
-    const new_val = era.add(`love:${id}`, 1);
+    const new_val = era.add(`love:${cid}`, 1);
     if (
-      typeof era.get(`callname:${id}:0`) === 'string' &&
-      era.get(`callname:${id}:0`).startsWith('训练员')
+      typeof era.get(`callname:${cid}:0`) === 'string' &&
+      era.get(`callname:${cid}:0`).startsWith('训练员')
     ) {
-      get_custom_mec(id).set_callname();
+      get_custom_mec(cid).set_callname();
     }
     if (
       new_val === 50 &&
-      era.get(`cflag:${id}:种族`) &&
-      sys_check_yandere(id, (y) => y === 1)
+      era.get(`cflag:${cid}:种族`) &&
+      sys_check_yandere(cid, (y) => y === 1)
     ) {
-      era.set(`status:${id}:爱意克制`, 1);
+      era.set(`status:${cid}:爱意克制`, 1);
     }
     if (
-      sys_check_hide_relation_and_love(id) ||
-      sys_check_limit_relation_and_love(id)
+      sys_check_hide_relation_and_love(cid) ||
+      sys_check_limit_relation_and_love(cid)
     ) {
       return false;
     }
     era.println();
-    print_change(id, new_val - 1, new_val);
-    era.set(`cflag:${id}:爱慕暂拒`, 0);
+    print_change(cid, new_val - 1, new_val);
+    era.set(`cflag:${cid}:爱慕暂拒`, 0);
     await get_chara_talk(0).say_and_wait('已经不能回头了……', true);
-    new_val >= 75 && (await punish_unfaithful(id, new_val));
+    new_val >= 75 && (await punish_unfaithful(cid, new_val));
     return true;
   },
   sys_punish_unfaithful: punish_unfaithful,
