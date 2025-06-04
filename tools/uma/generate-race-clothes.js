@@ -1,4 +1,5 @@
 const { writeFileSync } = require('fs');
+const { join } = require('path');
 
 const text_data = require('../../common/text_data.json')[14];
 const id2suffix = require('../../common/clothe-id2suffix');
@@ -38,6 +39,6 @@ for (let i = 1001; i < 2000; ++i) {
 output.clothe_names[345] = { '': 'ST2', 2: '从零到零' };
 
 writeFileSync(
-  '../../ere/data/clothe-const.json',
+  join(__dirname, '../../ere/data/clothe-const.json'),
   `${JSON.stringify(output, undefined, 2)}`,
 );

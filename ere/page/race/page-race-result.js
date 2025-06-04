@@ -182,7 +182,7 @@ async function page_race_result(contestants, info, race_id) {
             '揭示板',
             '相对位置统计',
             '速度统计',
-            '体力统计',
+            '持久力统计',
             '发动技能统计',
             '比赛日志',
           ].map((e, i) => ({
@@ -333,7 +333,7 @@ async function page_race_result(contestants, info, race_id) {
               align: 'center',
               fontSize: '1.5rem',
             },
-            content: '体力统计图',
+            content: '持久力统计图',
             type: 'text',
           },
         ]);
