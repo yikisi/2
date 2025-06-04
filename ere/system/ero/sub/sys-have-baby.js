@@ -31,7 +31,7 @@ async function name_baby(child_id, father_id, mother_id) {
   let ret, random_param;
   // chara_id一定是母亲
   // 虽然不是很情愿，但是还是留一下吧，只有玩家是孩子父亲或者母亲的情况下才拥有命名决定权
-  if (mother_id && father_id) {
+  if (mother_id > 0 && father_id > 0) {
     // 如果和玩家没关系，直接用母亲来命名
     random_param = mother_id;
   } else if (era.get('flag:惩戒力度') >= 2) {
@@ -48,10 +48,16 @@ async function name_baby(child_id, father_id, mother_id) {
       random_param = mother_id || father_id;
     } else {
       era.print('想给孩子起什么名字呢？');
-      ret = await era.input();
+      ret = '';
+      do {
+        if (ret.length > 0) {
+          era.print('孩子的名字不能超过 8 个字符！');
+        }
+        ret = (await era.input()).toString();
+      } while (ret.length > 8);
     }
   }
-  if (random_param) {
+  if (random_param > 0) {
     ret = get_random_name(random_param);
   }
   era.set(`callname:${child_id}:-2`, era.set(`callname:${child_id}:-1`, ret));
@@ -68,10 +74,14 @@ async function name_baby(child_id, father_id, mother_id) {
       '要重新取名吗？',
     ]))
   ) {
-    era.set(
-      `callname:${child_id}:-2`,
-      era.set(`callname:${child_id}:-1`, await era.input()),
-    );
+    ret = '';
+    do {
+      if (ret.length > 0) {
+        era.print('孩子的名字不能超过 8 个字符！');
+      }
+      ret = (await era.input()).toString();
+    } while (ret.length > 8);
+    era.set(`callname:${child_id}:-2`, era.set(`callname:${child_id}:-1`, ret));
   }
   await era.printAndWait([
     get_chara_talk(mother_id).get_colored_name(),
