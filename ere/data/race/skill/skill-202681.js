@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202681,
   '气☆氛↑嗨起来',
-  '在比赛中盘少量提升速度，并少量回复体力',
+  '在比赛中盘少量提升速度，并少量回复持久力',
   20268,
   2,
   17,

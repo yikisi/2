@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   106301211,
   '铁树银花',
-  '在比赛中段消耗少量体力使速度极大提升',
+  '在比赛中段消耗少量持久力使速度极大提升',
   10630121,
   1,
   19,

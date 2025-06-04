@@ -89,7 +89,7 @@ async function task() {
     };
     skill_set_dict[e.skill_set_id_1] = [];
     skill_set_dict[e.skill_set_id_2] = [];
-    if (e.mob_id > 0) {
+    if (e.mob_id) {
       contestants.unnamed.push({ ...tmp, skills: e.skill_set_id_1 });
       contestants.unnamed.push({ ...tmp, skills: e.skill_set_id_2 });
     } else {
@@ -336,4 +336,4 @@ async function task() {
   );
 }
 
-task().then();
+task().then().catch(console.error);

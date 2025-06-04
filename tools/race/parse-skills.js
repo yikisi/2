@@ -705,6 +705,10 @@ async function chara_skill() {
   skill_dict[660022] = 1;
   skill_dict[660031] = 1;
   skill_dict[660032] = 1;
+  skill_dict[660041] = 1;
+  skill_dict[660042] = 1;
+  skill_dict[660051] = 1;
+  skill_dict[660052] = 1;
   delete skill_dict[100601];
   delete skill_dict[102602211];
   delete skill_dict[900601];
@@ -741,21 +745,14 @@ async function chara_skill() {
   const c_dict = { is_used_skill_id: 1 };
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
-  buffer +=
-    'skills_dict[102602211]=require("#/data/race/skill/skill-102602211");' +
-    'skills_dict[100039]=require("#/data/race/skill/skill-100039");' +
-    'skills_dict[900039]=require("#/data/race/skill/skill-900039");' +
-    'skills_dict[100601]=require("#/data/race/skill/skill-100601");' +
-    'skills_dict[900601]=require("#/data/race/skill/skill-900601");' +
-    'skills_dict[101201]=require("#/data/race/skill/skill-101201");' +
-    'skills_dict[102041]=require("#/data/race/skill/skill-102041");' +
-    'skills_dict[902041]=require("#/data/race/skill/skill-902041");' +
-    'skills_dict[102051]=require("#/data/race/skill/skill-102051");' +
-    'skills_dict[902051]=require("#/data/race/skill/skill-902051");' +
-    'skills_dict[102061]=require("#/data/race/skill/skill-102061");' +
-    'skills_dict[902061]=require("#/data/race/skill/skill-902061");' +
-    'skills_dict[990011]=require("#/data/race/skill/skill-990011");' +
-    'skills_dict[990021]=require("#/data/race/skill/skill-990021");';
+  [
+    102602211, 100039, 900039, 100601, 900601, 101201, 102041, 902041, 102051,
+    902051, 102061, 902061, 990011, 990021, 660011, 660012, 660021, 660022,
+    660031, 660032, 660041, 660042, 660051, 660052,
+  ].forEach(
+    (s) =>
+      (buffer += `skills_dict[${s}]=require("#/data/race/skill/skill-${s}");`),
+  );
 
   function get_skill_group_level(skill) {
     if (skill.category >> 3 === 4) {

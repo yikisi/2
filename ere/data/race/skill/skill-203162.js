@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   203162,
   '奋不顾身',
-  '比赛中盘位于前方时，消耗少量体力，速度少量提升',
+  '比赛中盘位于前方时，消耗少量持久力，速度少量提升',
   20316,
   1,
   16,
