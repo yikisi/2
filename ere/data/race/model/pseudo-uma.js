@@ -134,7 +134,6 @@ class PseudoUma {
     // 比赛地语言等级
     language: 0,
     loc_mind_other_diff_random: [0, 0],
-    loc_mind_style: 0,
     skill_count: 0,
     stamina: 0,
     temptationSpan: 0,
@@ -172,6 +171,8 @@ class PseudoUma {
     staminaCost: 0,
     // 用于阻挡计算的实时力量
     strength: 0,
+    // 实际采取的跑法策略
+    style: 0,
     // 焦躁计时
     temptation: 0,
     totalTime: '',

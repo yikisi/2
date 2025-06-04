@@ -510,9 +510,9 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     // 由智力决定最终冲刺计划的选择概率
     uma.probs.planRush = 0.15 + 0.0005 * uma.attrs[attr_enum.intelligence];
 
-    uma.base.loc_mind_style = uma.style;
+    uma.race.style = uma.style;
 
-    if (uma.base.loc_mind_style > 0) {
+    if (uma.race.style > 0) {
       reset_loc_mind_other_diff(uma, race_info);
     }
   }

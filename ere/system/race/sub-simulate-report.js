@@ -1,3 +1,5 @@
+const era = require('#/era-electron');
+
 const { get_bashin_desc } = require('#/system/race/snippets');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
@@ -204,6 +206,20 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
   if (dict[race_event_enum.loc_change]) {
     loc_change = dict[race_event_enum.loc_change].p;
     delete dict[race_event_enum.loc_change];
+  }
+  const a = [
+    race_event_enum.loc_mind_nige_ex,
+    race_event_enum.loc_mind_nige_over_take,
+    race_event_enum.loc_mind_nige_speed_up,
+    race_event_enum.loc_mind_other_ex,
+    race_event_enum.loc_mind_other_quick,
+    race_event_enum.loc_mind_other_relax,
+  ]
+    .filter((e) => dict[e])
+    .map((e) => Object.keys(race_event_enum)[e])
+    .join(' ');
+  if (a) {
+    era.logger.debug(a);
   }
   if (dict[race_event_enum.finish]) {
     report_list.push(dict[race_event_enum.finish]);

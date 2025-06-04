@@ -43,12 +43,12 @@ function get_event_record(message, timer_record, timer) {
 function reset_loc_mind_other_diff(uma, race_info) {
   uma.base.loc_mind_other_diff_random = [
     get_random_value(
-      race_info.loc_mind_diff.other_lower[uma.base.loc_mind_style - 1],
-      race_info.loc_mind_diff.other_upper[uma.base.loc_mind_style - 1],
+      race_info.loc_mind_diff.other_lower[uma.race.style - 1],
+      race_info.loc_mind_diff.other_upper[uma.race.style - 1],
       true,
     ),
-    (race_info.loc_mind_diff.other_lower[uma.base.loc_mind_style - 1] +
-      race_info.loc_mind_diff.other_upper[uma.base.loc_mind_style - 1]) /
+    (race_info.loc_mind_diff.other_lower[uma.race.style - 1] +
+      race_info.loc_mind_diff.other_upper[uma.race.style - 1]) /
       2,
   ];
 }
@@ -301,20 +301,22 @@ module.exports = {
     let dice;
     switch (uma.style) {
       case 1:
-        uma.base.loc_mind_style = 0;
+        uma.race.style = 0;
         break;
       case 2:
-        uma.base.loc_mind_style = Number(Math.random() > 0.75);
+        uma.race.style = Number(Math.random() > 0.75);
         break;
       case 3:
         dice = Math.random();
         if (dice < 0.7) {
-          uma.base.loc_mind_style = 0;
+          uma.race.style = 0;
+        } else if (dice < 0.9) {
+          uma.race.style = 1;
         } else {
-          uma.base.loc_mind_style = 1 + Number(dice > 0.9);
+          uma.race.style = 2;
         }
     }
-    if (uma.base.loc_mind_style > 0) {
+    if (uma.race.style > 0) {
       reset_loc_mind_other_diff(uma, race_info);
     }
   },

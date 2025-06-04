@@ -160,7 +160,7 @@ function sub_simulate_skill(
         report_cache.at(-1).push({ e: race_event_enum.temp_end, u: uma });
         uma.race.temptation = 0;
         uma.race.conditionParams.is_temptation = 0;
-        uma.base.loc_mind_style = uma.style;
+        uma.race.style = uma.style;
         uma.race.loc_mind = 0;
         reset_loc_mind_other_diff(uma, race_info);
       }
@@ -861,7 +861,7 @@ function sub_simulate_skill(
                     ) {
                       handle_temptation(uma, race_info);
                     } else {
-                      uma.base.loc_mind_style = uma.style;
+                      uma.race.style = uma.style;
                       reset_loc_mind_other_diff(uma, race_info);
                     }
                     report_cache.at(-1).push({
