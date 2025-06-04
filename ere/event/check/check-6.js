@@ -21,7 +21,7 @@ const { pressure_border } = require('#/data/train-const');
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
-aim_races[get_aim_race_index(race_enum.arli_cup, 1)] = 4;
+aim_races[get_aim_race_index(race_enum.new_tro, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.nhk_cup, 1)] = 0b11;
 aim_races[get_aim_race_index(race_enum.mile_cha, 1)] = 0b11;
 aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 0b11;
@@ -143,7 +143,7 @@ module.exports = class extends CustomizedCheck {
     const buffer = [],
       races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-    buffer.push(check_aim_and_get_entry(races, race_enum.arli_cup, 1, 20));
+    buffer.push(check_aim_and_get_entry(races, race_enum.new_tro, 1, 20));
     buffer.push(check_aim_and_get_entry(races, race_enum.nhk_cup, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.mile_cha, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 1, 3));

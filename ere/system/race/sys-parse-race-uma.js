@@ -387,6 +387,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
           named_list
             .filter(
               (e) =>
+                // TODO 检查 named.json id 错误
+                e.id &&
                 !contestant_dict[e.id] &&
                 era.get(`cflag:${e.id}:招募状态`) !== recruit_flags.yes &&
                 e.adapt_ground[info.ground] >= 5 &&
