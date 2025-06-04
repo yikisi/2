@@ -440,23 +440,24 @@ function end_ero(skip_juels, log_juels, ids) {
   const is_slave = ids.indexOf(0) !== -1 && era.get('flag:惩戒力度') >= 2;
   const is_sex = ids.length > 1;
   const is_sleeping = is_sex && !sys_check_awake(0);
-  for (const id of ids) {
+  for (const cid of ids) {
     if (is_sex) {
-      era.add(`exp:${id}:性爱次数`, 1);
+      era.add(`exp:${cid}:性爱次数`, 1);
     }
     if (is_sleeping) {
-      era.add(`exp:${id}:睡奸次数`, 1);
+      era.add(`exp:${cid}:睡奸次数`, 1);
     }
+    era.add(`love:${cid}`, !era.get(`love:${cid}`));
     pleasure_list.forEach((part) => {
       const part_name = part_names[part];
       if (
-        era.get(`palam:${id}:${part_name}快感`) >
-        era.get(`tcvar:${id}:${part_name}快感上限`) * lust_palam_border
+        era.get(`palam:${cid}:${part_name}快感`) >
+        era.get(`tcvar:${cid}:${part_name}快感上限`) * lust_palam_border
       ) {
         let times = 1;
         const talent_name = part_talents[part];
         if (talent_name) {
-          switch (era.get(`talent:${id}:${talent_name}`)) {
+          switch (era.get(`talent:${cid}:${talent_name}`)) {
             case -4:
               times += 1;
               break;
@@ -467,34 +468,34 @@ function end_ero(skip_juels, log_juels, ids) {
               times += 0.5;
           }
         }
-        sys_change_lust(id, lust_from_palam * times);
+        sys_change_lust(cid, lust_from_palam * times);
       }
     });
     const got = new Array(13).fill(0),
       un_got = new Array(13).fill(0);
-    ret.jewel[id] = {};
+    ret.jewel[cid] = {};
     for (let i = 12; i >= 0; --i) {
       got[i] = Math.floor(
-        era.get(`gotjuel:${id}:${juel_names[i]}`) / palam2juel,
+        era.get(`gotjuel:${cid}:${juel_names[i]}`) / palam2juel,
       );
       if (!skip_juels && i < 12) {
         un_got[i] = got[i + 1] + un_got[i + 1];
       }
     }
     const got_self_protect = Math.floor(
-      era.get(`gotjuel:${id}:自卫`) / palam2juel,
+      era.get(`gotjuel:${cid}:自卫`) / palam2juel,
     );
     let self_protect =
-      skip_juels || !id
+      skip_juels || !cid
         ? 0
         : Math.min(
-            era.get(`juel:${id}:自卫`) + got_self_protect,
+            era.get(`juel:${cid}:自卫`) + got_self_protect,
             un_got[0] + got[0],
           );
-    era.add(`juel:${id}:自卫`, got_self_protect - self_protect);
+    era.add(`juel:${cid}:自卫`, got_self_protect - self_protect);
     if (log_juels) {
-      ret.jewel[id]['自卫'] = got_self_protect;
-      ret.jewel[id]['-自卫'] = self_protect;
+      ret.jewel[cid]['自卫'] = got_self_protect;
+      ret.jewel[cid]['-自卫'] = self_protect;
     }
     juel_names.forEach((j_name, i) => {
       const lost = get_random_value(
@@ -503,83 +504,83 @@ function end_ero(skip_juels, log_juels, ids) {
       );
       got[i] -= lost;
       self_protect -= lost;
-      era.add(`juel:${id}:${j_name}`, got[i]);
+      era.add(`juel:${cid}:${j_name}`, got[i]);
       if (log_juels) {
-        ret.jewel[id][j_name] = got[i];
-        ret.jewel[id][`-${j_name}`] = lost;
+        ret.jewel[cid][j_name] = got[i];
+        ret.jewel[cid][`-${j_name}`] = lost;
       }
     });
-    const s_orgasm_count = era.get(`ex:${id}:施虐高潮`),
-      m_orgasm_count = era.get(`ex:${id}:受虐高潮`);
+    const s_orgasm_count = era.get(`ex:${cid}:施虐高潮`),
+      m_orgasm_count = era.get(`ex:${cid}:受虐高潮`);
     if (s_orgasm_count) {
       sys_change_pressure(
-        id,
-        -100 * (1 + 3 * era.get(`talent:${id}:抖S`)) * s_orgasm_count,
+        cid,
+        -100 * (1 + 3 * era.get(`talent:${cid}:抖S`)) * s_orgasm_count,
       );
     }
     if (m_orgasm_count) {
       sys_change_pressure(
-        id,
+        cid,
         -100 *
           (1 +
             3 *
-              (era.get(`talent:${id}:喜欢责骂`) ||
-                era.get(`talent:${id}:喜欢痛苦`))) *
+              (era.get(`talent:${cid}:喜欢责骂`) ||
+                era.get(`talent:${cid}:喜欢痛苦`))) *
           m_orgasm_count,
       );
     }
     sys_change_pressure(
-      id,
-      -200 * (era.get(`ex:${id}:TotalEX`) - s_orgasm_count - m_orgasm_count),
+      cid,
+      -200 * (era.get(`ex:${cid}:TotalEX`) - s_orgasm_count - m_orgasm_count),
     );
     let temp;
-    if ((temp = era.get(`tcvar:${id}:临时体力`))) {
-      era.add(`base:${id}:体力`, -temp);
-      era.add(`maxbase:${id}:体力`, -temp);
+    if ((temp = era.get(`tcvar:${cid}:临时体力`))) {
+      era.add(`base:${cid}:体力`, -temp);
+      era.add(`maxbase:${cid}:体力`, -temp);
     }
-    if ((temp = era.get(`tcvar:${id}:临时精力`))) {
-      era.add(`base:${id}:精力`, -temp);
-      era.add(`maxbase:${id}:精力`, -temp);
+    if ((temp = era.get(`tcvar:${cid}:临时精力`))) {
+      era.add(`base:${cid}:精力`, -temp);
+      era.add(`maxbase:${cid}:精力`, -temp);
     }
-    era.get(`tcvar:${id}:精力不济`) && era.set(`base:${id}:精力`, 0);
+    era.get(`tcvar:${cid}:精力不济`) && era.set(`base:${cid}:精力`, 0);
     era.set(
-      `base:${id}:体力`,
+      `base:${cid}:体力`,
       Math.floor(
-        Math.min(era.get(`base:${id}:体力`), era.get(`tcvar:${id}:体力缓存`)),
+        Math.min(era.get(`base:${cid}:体力`), era.get(`tcvar:${cid}:体力缓存`)),
       ),
     );
     era.set(
-      `base:${id}:精力`,
+      `base:${cid}:精力`,
       Math.floor(
-        Math.min(era.get(`base:${id}:精力`), era.get(`tcvar:${id}:精力缓存`)),
+        Math.min(era.get(`base:${cid}:精力`), era.get(`tcvar:${cid}:精力缓存`)),
       ),
     );
-    if (id > 0 && is_slave) {
+    if (cid > 0 && is_slave) {
       sys_change_fame(
         Math.max(
-          era.get(`tcvar:${id}:性欲缓存`) - era.get(`base:${id}:性欲`),
+          era.get(`tcvar:${cid}:性欲缓存`) - era.get(`base:${cid}:性欲`),
           0,
         ) /
           200 +
           Math.max(
-            era.get(`tcvar:${id}:压力缓存`) - era.get(`base:${id}:压力`),
+            era.get(`tcvar:${cid}:压力缓存`) - era.get(`base:${cid}:压力`),
             0,
           ) /
             100,
       );
     }
-    ret.attr[id] = Object.values(attr_enum).map((e) =>
+    ret.attr[cid] = Object.values(attr_enum).map((e) =>
       sys_change_attr_and_print(
-        id,
+        cid,
         e,
-        era.get(`ex:${id}:${attr_names[e]}获取`) / get_random_value(4, 6),
+        era.get(`ex:${cid}:${attr_names[e]}获取`) / get_random_value(4, 6),
       ),
     );
-    let pt = era.get(`ex:${id}:技能点获取`);
+    let pt = era.get(`ex:${cid}:技能点获取`);
     if (pt > 0) {
       pt = Math.floor(pt / get_random_value(8, 12));
-      ret.attr[id].push(`获得了 ${pt.toLocaleString()} 点技能点数`);
-      era.add(`exp:${id}:技能点数`, pt);
+      ret.attr[cid].push(`获得了 ${pt.toLocaleString()} 点技能点数`);
+      era.add(`exp:${cid}:技能点数`, pt);
     }
   }
   for (const id of ids) {

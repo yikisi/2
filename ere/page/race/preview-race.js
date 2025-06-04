@@ -728,12 +728,15 @@ async function preview_race(
       item_chara.forEach((u) => {
         const { index_chara: cid } = u;
         const o_has_item = u.race.conditionParams.item;
-        u.race.conditionParams.item = +new Array(5)
-          .fill(void 0)
-          .reduce(
-            (p, _, i) => p || era.get(`equip:${cid}:${i + 5}`) > 0,
-            false,
-          );
+        u.ero.item.breast = era.get(`equip:${cid}:胸部`);
+        u.ero.item.penis = era.get(`equip:${cid}:阴茎`);
+        u.ero.item.clitoris = era.get(`equip:${cid}:阴蒂`);
+        u.ero.item.virgin = era.get(`equip:${cid}:阴道`);
+        u.ero.item.anal = era.get(`equip:${cid}:肛门`);
+        u.race.conditionParams.item = +Object.values(u.ero.item).reduce(
+          (p, c) => p || c > 0,
+          false,
+        );
         const ero_skill_level = u.list_skill.find(
           (s) => s.data.group_id === 66003,
         )?.data?.group_level;

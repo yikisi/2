@@ -353,7 +353,7 @@ module.exports = async () => {
               era.get(`relation:${owner}:0`)) /
               200,
           ),
-          0,
+          1,
         );
         my_life_marks.b_now = my_life_marks.b_enhance = Math.max(
           owner_marks.b_s_level + get_random_value(-1, 1),

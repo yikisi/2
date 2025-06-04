@@ -67,7 +67,7 @@ class UmaGene {
   get_colored_name() {
     const border_color = gene_rarity_colors[this.rarity];
     let title = `【${this.name}】（${gene_types[this.type]} · ${gene_rarities[this.rarity]}）\n${this.desc}`;
-    if (this.type === gene_type_enum.skill) {
+    if (skills_dict[this.id] !== undefined) {
       const { desc, tags } = skills_dict[this.id];
       title += `\n${desc}`;
       if (tags.length > 0) {

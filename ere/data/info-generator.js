@@ -701,20 +701,20 @@ module.exports = {
     }
     return ret;
   },
-  get_xp(id) {
-    if (era.get(`cflag:${id}:成长阶段`) < 2) {
+  get_xp(cid) {
+    if (era.get(`cflag:${cid}:成长阶段`) < 2) {
       return ['……'];
     }
     const show_all_body =
-        !id || era.get('status:0:马语者') || era.get('status:0:透视镜片'),
-      breast_talent = get_talent_bust_size(get_breast_cup(id, show_all_body)),
+        !cid || era.get('status:0:马语者') || era.get('status:0:透视镜片'),
+      breast_talent = get_talent_bust_size(get_breast_cup(cid, show_all_body)),
       talent_list = [];
     if (breast_talent_names[breast_talent + 1]) {
       talent_list.push(breast_talent_names[breast_talent + 1]);
     }
     if (
-      id > 0 &&
-      era.get(`exp:${id}:性爱次数`) === era.get(`exp:${id}:睡奸次数`) &&
+      cid > 0 &&
+      era.get(`exp:${cid}:性爱次数`) === era.get(`exp:${cid}:睡奸次数`) &&
       era.get('status:0:马语者') === 0 &&
       era.get('status:0:马跳次数镜片') === 0
     ) {
@@ -733,26 +733,26 @@ module.exports = {
         '……',
       ];
     }
-    const sex = era.get(`cflag:${id}:性别`);
+    const sex = era.get(`cflag:${cid}:性别`);
     if (sex - 1) {
-      if (era.get(`talent:${id}:泌乳`) === 3) {
+      if (era.get(`talent:${cid}:泌乳`) === 3) {
         talent_list.push('母乳体质');
       }
-      if (era.get(`talent:${id}:乳头类型`) === 2) {
+      if (era.get(`talent:${cid}:乳头类型`) === 2) {
         talent_list.push('凹陷乳头');
       }
-      if (era.get(`talent:${id}:隐形巨乳`) && breast_talent > 0) {
+      if (era.get(`talent:${cid}:隐形巨乳`) && breast_talent > 0) {
         talent_list.push('隐形巨乳');
       }
     }
-    if (sys_check_cuckold(id)) {
+    if (sys_check_cuckold(cid)) {
       talent_list.push({
         color: el_success_color,
         content: '[绿帽癖]',
         title: `[绿帽癖]：${talent_desc['绿帽癖']}`,
       });
     }
-    if (era.get(`talent:${id}:钢之意志`)) {
+    if (era.get(`talent:${cid}:钢之意志`)) {
       talent_list.push({
         color: mark_colors['钢'],
         content: '[钢之意志]',
@@ -760,7 +760,7 @@ module.exports = {
       });
     }
     talent_list.push(...new Array(3).fill(0).map((_, i) => i + 40));
-    const ero = era.get(`talent:${id}:工口意愿`);
+    const ero = era.get(`talent:${cid}:工口意愿`);
     if (ero) {
       talent_list.push(ero > 0 ? '好色' : '性保守');
     }
@@ -771,7 +771,7 @@ module.exports = {
         .map((t) => {
           return {
             id: t,
-            level: era.get(`talent:${id}:${t}`),
+            level: era.get(`talent:${cid}:${t}`),
           };
         })
         .filter((e) => e.level)
@@ -783,7 +783,7 @@ module.exports = {
     return talent_list
       .map((e) => {
         if (typeof e === 'number') {
-          return era.get(`talent:${id}:${e}`)
+          return era.get(`talent:${cid}:${e}`)
             ? era.get(`talentname:${e}`).toUpperCase()
             : '';
         }

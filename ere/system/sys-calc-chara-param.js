@@ -38,9 +38,9 @@ function sys_check_awake(chara_id) {
 function sys_check_train_enabled(chara_id) {
   const tmp = chara_id || 0;
   return (
-    (tmp || era.get(`cflag:${tmp}:种族`)) &&
+    era.get(`cflag:${tmp}:种族`) > 0 &&
     !era.get(`status:${tmp}:伤病`) &&
-    (era.get(`cflag:${tmp}:育成回合计时`) < 3 * 48 || !chara_id) &&
+    (era.get(`cflag:${tmp}:育成回合计时`) < 3 * 48 || !tmp) &&
     (!era.get(`status:${tmp}:摸鱼`) ||
       era.get('cflag:0:位置') === era.get(`cflag:${tmp}:位置`)) &&
     era.get(`base:${tmp}:压力`) < pressure_border.depression &&
