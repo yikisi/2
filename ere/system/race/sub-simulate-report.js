@@ -28,7 +28,7 @@ const overtake_handlers = [
     over.get_colored_name(),
     ' 的制胜时刻！',
   ],
-  (top) => [top.get_colored_name(), '领先！要锁定胜局了吗！'],
+  (top) => [top.get_colored_name(), ' 领先！要锁定胜局了吗！'],
 ];
 
 /** @type {(function(PseudoUma,PseudoUma):TextContent)[]} */

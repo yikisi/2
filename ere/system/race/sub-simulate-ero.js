@@ -133,6 +133,10 @@ const item_reports = [
 /** @type {{f:function(PseudoUma):boolean,c:string}[]} */
 const orgasm_reports = [
   {
+    f: () => true,
+    c: '（哦齁齁齁❤️❤️❤️齁齁齁齁❤️❤️❤️——）',
+  },
+  {
     f: (u) => u.ero.item.breast > 0,
     c: '（乳头变硬了……啊❤️❤️❤️身体在颤抖……）',
   },
