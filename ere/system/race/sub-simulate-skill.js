@@ -161,6 +161,7 @@ function sub_simulate_skill(
         uma.race.temptation = 0;
         uma.race.conditionParams.is_temptation = 0;
         uma.base.loc_mind_style = uma.style;
+        uma.race.loc_mind = 0;
         reset_loc_mind_other_diff(uma, race_info);
       }
     } else if (
