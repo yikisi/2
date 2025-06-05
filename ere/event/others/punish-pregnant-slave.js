@@ -52,6 +52,7 @@ async function punish_pregnant_slave() {
         [{ content: '孕袋职责之惩戒', color: buff_colors[3] }],
         me,
       );
+      let rape_list;
       if (!my_marks.p_slave_punish) {
         my_marks.p_slave_punish = 1;
         const yayoi = get_chara_talk(302),
@@ -221,7 +222,7 @@ async function punish_pregnant_slave() {
         await era.printAndWait([
           '…………哪怕，那只是在五秒后，下一根肉棒插入进来时便会遗忘的记忆。',
         ]);
-        let rape_list = [
+        rape_list = [
           301,
           302,
           ...gacha(
@@ -255,19 +256,6 @@ async function punish_pregnant_slave() {
           defender: 0,
           shown: false,
         });
-        set_palam_to_max(0, part_enum.virgin);
-        while (era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.no) {
-          rape_list = sort_list(rape_list, Math.random);
-          for (const chara_id of rape_list) {
-            set_palam_to_max(chara_id, part_enum.penis);
-            await quick_make_love(
-              new EroParticipant(chara_id, part_enum.penis),
-              new EroParticipant(0, part_enum.virgin),
-              false,
-            );
-          }
-        }
-        end_ero_and_train();
       } else {
         let base_list = sys_filter_chara(
           'cflag',
@@ -280,17 +268,18 @@ async function punish_pregnant_slave() {
             era.get(`cflag:${e}:种族`) > 0,
         );
         const is_teammate = base_list.length > 0;
-        if (!is_teammate) {
-          base_list = sys_filter_chara(
-            'cflag',
-            '招募状态',
-            recruit_flags.no,
-          ).filter(
-            (e) =>
-              ((e > 0 && e < 200) || e === 400) &&
-              e !== src_chara &&
-              era.get(`cflag:${e}:成长阶段`) >= 2 &&
-              era.get(`cflag:${e}:种族`) > 0,
+        if (base_list.length < 8) {
+          base_list.push(
+            ...gacha(
+              sys_filter_chara('cflag', '招募状态', recruit_flags.no).filter(
+                (e) =>
+                  ((e > 0 && e < 200) || e === 400) &&
+                  e !== src_chara &&
+                  era.get(`cflag:${e}:成长阶段`) >= 2 &&
+                  era.get(`cflag:${e}:种族`) > 0,
+              ),
+              8 - base_list.length,
+            ),
           );
         }
         await era.printAndWait(['啾啪……啾啪……']);
@@ -458,42 +447,42 @@ async function punish_pregnant_slave() {
             me.get_colored_name(),
             ' 送上了无声的祝福。',
           ]);
-          let rape_list = gacha(base_list, get_random_value(6, 8));
-          rape_list.forEach((e) => {
-            if (era.get(`cflag:${e}:性别`) === 0) {
-              era.set(`status:${e}:弗隆P`, 1);
-            }
-          });
-          begin_and_init_ero(0, ...rape_list);
-          await run_custom_ero(0, ero_hooks.use_item, {
-            item: item_enum.gag,
-            part: part_enum.mouth,
-            attacker: get_random_entry(rape_list),
-            defender: 0,
-            shown: false,
-          });
-          await run_custom_ero(0, ero_hooks.use_item, {
-            item: item_enum.blindfold,
-            part: 99,
-            attacker: get_random_entry(rape_list),
-            defender: 0,
-            shown: false,
-          });
-          set_palam_to_max(0, part_enum.virgin);
-          while (era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.no) {
-            rape_list = sort_list(rape_list, Math.random);
-            for (const chara_id of rape_list) {
-              set_palam_to_max(chara_id, part_enum.penis);
-              await quick_make_love(
-                new EroParticipant(chara_id, part_enum.penis),
-                new EroParticipant(0, part_enum.virgin),
-                false,
-              );
-            }
+        }
+        rape_list = gacha(base_list, get_random_value(6, 8));
+        rape_list.forEach((e) => {
+          if (era.get(`cflag:${e}:性别`) === 0) {
+            era.set(`status:${e}:弗隆P`, 1);
           }
-          end_ero_and_train();
+        });
+        begin_and_init_ero(0, ...rape_list);
+        await run_custom_ero(0, ero_hooks.use_item, {
+          item: item_enum.gag,
+          part: part_enum.mouth,
+          attacker: get_random_entry(rape_list),
+          defender: 0,
+          shown: false,
+        });
+        await run_custom_ero(0, ero_hooks.use_item, {
+          item: item_enum.blindfold,
+          part: 99,
+          attacker: get_random_entry(rape_list),
+          defender: 0,
+          shown: false,
+        });
+      }
+      set_palam_to_max(0, part_enum.virgin);
+      while (era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.no) {
+        rape_list = sort_list(rape_list, Math.random);
+        for (const chara_id of rape_list) {
+          set_palam_to_max(chara_id, part_enum.penis);
+          await quick_make_love(
+            new EroParticipant(chara_id, part_enum.penis),
+            new EroParticipant(0, part_enum.virgin),
+            false,
+          );
         }
       }
+      end_ero_and_train();
       era.set('status:0:马跳S', cache);
       era.drawLine();
     }

@@ -35,9 +35,8 @@ const {
  * @param {function(number):boolean} filters
  */
 function get_random_act(master, act_list, last_action, ...filters) {
-  const change_action = (last_action = ero_hooks.relax
-    ? 1
-    : era.get(`tcvar:${master}:变招`));
+  const change_action =
+    last_action === ero_hooks.relax ? 1 : era.get(`tcvar:${master}:变招`);
   let ret;
   filters.push(undefined);
   let filtered_list;
@@ -59,8 +58,14 @@ function get_random_act(master, act_list, last_action, ...filters) {
   era.logger.debug(
     'source: ' +
       act_list.map((e) => ero_action_names[e]).join(',') +
-      '\n\tfiltered: ' +
-      filtered_list.map((e) => ero_action_names[e]).join(','),
+      '\nfiltered: ' +
+      filtered_list.map((e) => ero_action_names[e]).join(',') +
+      '\nlast action: ' +
+      (ero_action_names[last_action] ?? 'null') +
+      '\nchange ratio: ' +
+      (change_action * 100).toFixed(2) +
+      '%\nselected: ' +
+      ero_action_names[ret],
   );
   return ret;
 }
@@ -432,9 +437,9 @@ async function sys_auto_rape(shown) {
       era.get(`love:${master}`) >= 75 ||
       (e !== ero_hooks.kiss && e !== ero_hooks.french_kiss),
   );
-  const last_action = era.get('tflag:前回行动'),
-    action = get_random_act(master, random_list, last_action, ...filters),
-    change_ratio = 0.16 - 0.08 * era.get(`talent:${master}:工口好奇`);
+  const last_action = era.get('tflag:前回行动');
+  const action = get_random_act(master, random_list, last_action, ...filters);
+  const change_ratio = 0.16 - 0.08 * era.get(`talent:${master}:工口好奇`);
   (last_action === action ? era.add : era.set)(
     `tcvar:${master}:变招`,
     change_ratio,

@@ -8,7 +8,8 @@ const HelloLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3
 class MecChild extends CustomizedMec {
   get_race_finish_report(uma, race_id) {
     let func = super.get_race_finish_report;
-    switch (era.get(`cflag:${this.id}:模版角色`)) {
+    const src_chara = era.get(`cflag:${this.id}:模版角色`);
+    switch (src_chara) {
       case 3:
       case 6:
       case 17:
@@ -17,7 +18,7 @@ class MecChild extends CustomizedMec {
       case 33:
       case 34:
       case 52:
-        func = CustomizedMec.get_custom_mec(3).get_race_finish_report;
+        func = CustomizedMec.get_custom_mec(src_chara).get_race_finish_report;
     }
     return func.call(this, uma, race_id);
   }
