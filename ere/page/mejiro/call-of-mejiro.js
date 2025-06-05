@@ -148,7 +148,9 @@ class CallOfMejiro extends MejiroCity {
     if (era.get('item:「恩宠」') === 0 || (this.called > 0 && this.san === 0)) {
       await era.printAndWait('……然后迷雾吞没了你们……');
       if (this.called > 0) {
-        EventMarks.get(this.called).sub(event_hooks.out_mejiro);
+        if (EventMarks.get(this.called).get(event_hooks.out_mejiro) > 0) {
+          EventMarks.get(this.called).sub(event_hooks.out_mejiro);
+        }
         this.called = 0;
       }
       await this.misty(chara, me);

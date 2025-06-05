@@ -62,7 +62,7 @@ class EventMarks {
   /** @param {number|string} hook */
   sub(hook) {
     const obj = this.#obj;
-    obj[hook] = (obj[hook] || 0) - 1;
+    obj[hook] = Math.max((obj[hook] || 0) - 1, 0);
     if (!obj[hook]) {
       delete obj[hook];
     }
