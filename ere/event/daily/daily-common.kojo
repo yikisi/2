@@ -171,7 +171,7 @@
     - if: era.get(`talent:${d.id}:反抗意愿`) === 1
       random: true
       lines:
-        - %玩家名% 的训练员室中被塞满了被 %角色名% 不由分说摆放在房间里的各式东西。
+        - %玩家名% 的训练员室中被塞满了 %角色名% 不由分说摆放在房间里的各式东西。
     - if: era.get(`talent:${d.id}:反抗意愿`) === 1
       random: true
       lines:
