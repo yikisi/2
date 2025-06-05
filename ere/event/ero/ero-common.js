@@ -493,7 +493,7 @@ class CustomizedEro {
             mother.get_colored_name(),
             ' 沉溺在快感之中……',
           ]);
-        } else if (era.get('tflag:强奸') !== mother.id) {
+        } else if (era.get('tflag:强奸') === father.id) {
           await era.printAndWait([
             mother.get_colored_name(),
             ' 在屈辱中感受到了身为 ',
@@ -577,7 +577,7 @@ class CustomizedEro {
         } else {
           await era.printAndWait([
             mother.get_colored_name(),
-            era.get('tflag:强奸') !== mother.id
+            era.get('tflag:强奸') !== father.id
               ? ' 在屈辱中感受到了身为 '
               : ' 欣喜地品尝着身为 ',
             {
