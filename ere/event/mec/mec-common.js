@@ -120,7 +120,7 @@ class CustomizedMec {
         case 28:
         case 30:
         case 31:
-          ret.push(`${base}_泳`, `${base}_夏`);
+          ret.push(`${base}_泳`, `${base}_夏私`);
           break;
         case 29:
           ret.push(`${base}_江户`);

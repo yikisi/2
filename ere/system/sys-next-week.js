@@ -675,6 +675,7 @@ async function sys_next_week() {
     sys_change_fame(-race_punish);
   }
   if (hentai_reward) {
+    era.drawLine();
     era.print([me.get_colored_name(), ' 履行了职责，作为孕袋的评价上升了……']);
     era.add('flag:当前声望', hentai_reward);
   }

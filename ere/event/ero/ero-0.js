@@ -198,8 +198,9 @@ module.exports = class extends CustomizedEro {
             );
           }
           if (
-            sys_filter_chara('cflag', '孩子母亲', 0).filter(
-              (e) => era.get(`cflag:${e}:成长阶段`) >= 2,
+            sys_filter_chara('cflag', '母方角色', 0).filter(
+              (e) =>
+                era.get(`exp:${e}:性爱次数`) > era.get(`exp:${e}:睡奸次数`),
             ).length > 0
           ) {
             await era.printAndWait(
@@ -255,7 +256,10 @@ module.exports = class extends CustomizedEro {
             '———每天就连上个厕所都会被五六根肉棒堵在门外，最后只能自己将混杂着潮水、精液以及失禁的尿液的地板仔细舔舐干净的生活，怀孕真的有那么难以想像吗？',
           );
           await era.printAndWait('孩子的父亲是谁呢？');
-          await era.printAndWait([mother.get_colored_name(), ' 又忍不住想到']);
+          await era.printAndWait([
+            mother.get_colored_name(),
+            ' 又忍不住想到——',
+          ]);
           await era.printAndWait(
             `是昨天那对关系看起来很好，连使用孕袋都是一起用的两名${father.get_uma_sex_title()}？`,
           );
@@ -270,40 +274,44 @@ module.exports = class extends CustomizedEro {
             ' 的心中莫名因孩子的未来感到恐惧和害怕',
           ]);
           if (
-            sys_filter_chara('cflag', '孩子母亲', 0).filter(
-              (e) => era.get(`cflag:${e}:成长阶段`) >= 2,
+            sys_filter_chara('cflag', '母方角色', 0).filter(
+              (e) =>
+                era.get(`exp:${e}:性爱次数`) > era.get(`exp:${e}:睡奸次数`),
             ).length > 0
           ) {
-            await era.printAndWait(
-              `\n想起那孩子小时候的事，仿佛才没过去多久，${
-                father.sex
-              }就已经从眼神纯真的幼儿，变成会以带着性欲的目光盯着自己诞生的洞口的${
-                father.sex_code - 1 ? '雌' : '雄'
-              }兽`,
-            );
+            era.println();
+            await era.printAndWait([
+              '想起那孩子小时候的事，仿佛才没过去多久，',
+              father.sex,
+              '就已经从眼神纯真的幼儿，变成会以带着性欲的目光盯着自己诞生的洞口的',
+              father.get_phy_sex_title()[0],
+              '兽',
+            ]);
             await era.printAndWait([
               mother.get_colored_name(),
-              ` 忍不住担心起，自己是否会再度被${
-                father.sex_code - 1 ? '女儿' : '儿子'
-              }玩弄成无法称为人母的羞耻模样`,
+              ' 忍不住担心起，自己是否会再度被',
+              father.sex_code === 1 ? '儿子' : '女儿',
+              '玩弄成无法称为人母的羞耻模样',
             ]);
           } else {
-            await era.printAndWait(
-              `\n将被生下来的这孩子，会不会变得像其他${father.get_uma_sex_title()}们一样，将自己当成孕袋`,
-            );
+            era.println();
+            await era.printAndWait([
+              '将被生下来的这孩子，会不会变得像其他',
+              father.get_uma_sex_title(),
+              '们一样，将自己当成孕袋……',
+            ]);
             await era.printAndWait(
               '……不行，必须要尽起职责，最起码，要好好将这孩子养育成材',
             );
           }
 
-          await era.printAndWait(
-            '\n由孕袋培养出的孩子，真的有办法正常成人吗？',
-          );
-          await era.printAndWait(
-            `天天看着自己的妈妈被各式各样的${
-              father.sex_code - 1 ? '姐姐' : '哥哥'
-            }肏到涕沫横流，毫无尊严的求饶的模样`,
-          );
+          era.println();
+          await era.printAndWait('由孕袋培养出的孩子，真的有办法正常成人吗？');
+          await era.printAndWait([
+            '天天看着自己的妈妈被各式各样的',
+            father.sex_code === 1 ? '哥哥' : '姐姐',
+            '肏到涕沫横流，毫无尊严的求饶的模样',
+          ]);
           await era.printAndWait(
             '这样的孩子，真的有可能不屈不挠的茁壮成长吗？',
           );

@@ -135,6 +135,7 @@ async function check_race_events(race, info, team_contestants) {
         me.get_colored_name(),
         ' 的队伍后续的表现。',
       ]);
+      set('cflag:303:招募状态', -1);
     };
   } else if (
     !new EtsukoLifeMarks().rape &&
@@ -456,7 +457,7 @@ async function check_race_events(race, info, team_contestants) {
       ]);
       println();
       await champion.say_and_wait(
-        '听到训练员就忽然夹的那么紧，你不会还觉得自己是什么优秀的训练员吧？只有在场上的时候你才是训练员，场下的妳不过是性处理用的母猪孕袋罢了，给我好好记清楚自己的身份啊！',
+        '听到训练员就忽然夹的那么紧，你不会还觉得自己是什么优秀的训练员吧？只有在场上的时候你才是训练员，场下的你不过是性处理用的母猪孕袋罢了，给我好好记清楚自己的身份啊！',
       );
       println();
       await printAndWait('随着斥责再度响起的是清脆的拍打声和沉闷的碰撞声。');
