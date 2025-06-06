@@ -114,8 +114,9 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
       era.set('tflag:主导权', lover);
     }
     const inmon = CharaInmon.get(lover);
-    const orgy = !sys_check_yandere(lover, (y) => y === 2, inmon)
-      ? get_random_entry(
+    const orgy = sys_check_yandere(lover, (y) => y === 2, inmon)
+      ? void 0
+      : get_random_entry(
           sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
             .map((e) => {
               return {
@@ -125,14 +126,14 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
                   e !== lover &&
                   sys_check_awake(e) &&
                   (era.get(`relation:${e}:${lover}`) > 225 ||
-                    era.get(`base:${e}:性欲`) >= lust_border.absent_mind) &&
+                    era.get(`base:${e}:性欲`) >= lust_border.absent_mind ||
+                    sys_check_cuckold(e)) &&
                   get_custom_check(e).is_want_make_love(),
               };
             })
             .filter((e) => e.check),
-        )
-      : undefined;
-    if (orgy !== undefined) {
+        );
+    if (orgy !== void 0) {
       era.drawLine();
       let wait_flag = false;
       if (await get_custom_ero(orgy.id).join_3p(lover)) {

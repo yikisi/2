@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
+const {
+  sys_check_cuckold,
+  sys_check_yandere,
+} = require('#/system/chara/sys-calc-cheat');
 const {
   check_pregnant_unprotect,
   check_want_to_escape,
@@ -384,6 +387,10 @@ class CustomizedCheck {
         (0.7 + 0.1 * era.get(`mark:${this.id}:欢愉`)) +
       0.05 * era.get(`talent:${this.id}:工口意愿`) -
       0.5 * get_action_debuff(this.id);
+    let is_cuckold = 0;
+    if (era.get('flag:床伴') > 0 && sys_check_cuckold(this.id, inmon)) {
+      ratio += is_cuckold = 0.5;
+    }
     ratio *= (3 - era.get(`mark:${this.id}:反抗`)) / 3;
     const dice = Math.random();
     era.logger.debug(
@@ -397,7 +404,7 @@ class CustomizedCheck {
         era.get(`base:${this.id}:性欲`) / 1250 - 8,
       )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
         0.05 * era.get(`talent:${this.id}:工口意愿`)
-      }(好色)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
+      }(好色)+${is_cuckold}(绿帽癖)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
     );
     if (ratio >= 1 || dice < ratio) {
       if (inmon.slave > 0) {
