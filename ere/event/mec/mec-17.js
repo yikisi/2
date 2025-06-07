@@ -86,7 +86,10 @@ module.exports = class extends CustomizedMec {
   }
 
   get_love_limit() {
-    return era.get('status:17:心术') ? 40 : 0;
+    if (era.get('status:17:心术') > 0) {
+      return 40;
+    }
+    return super.get_love_limit();
   }
 
   get_race_finish_report(uma, race_id) {

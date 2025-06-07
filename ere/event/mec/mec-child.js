@@ -47,6 +47,18 @@ class MecChild extends CustomizedMec {
     }
     era.set(`love:${this.id}`, 0);
   }
+
+  set_callname() {
+    let callname;
+    if (!era.get(`cflag:${this.id}:父方角色`)) {
+      callname = '爸爸';
+    } else if (!era.get(`cflag:${this.id}:母方角色`)) {
+      callname = '妈妈';
+    } else {
+      return super.set_callname();
+    }
+    era.set(`callname:${this.id}:0`, callname);
+  }
 }
 
 module.exports = MecChild;

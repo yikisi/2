@@ -69,29 +69,33 @@ let random_event,
 
 async function next_week() {
   era.drawLine();
-  era.print('时间开始流动……', { align: 'center', fontSize: '1.5rem' });
+  era.print('【时间开始流动】', {
+    align: 'center',
+    fontSize: '1.5rem',
+  });
+  era.println();
   await sys_next_week();
   era.drawLine();
-  await era.printAndWait('新的一周开始了……', {
+  await era.printAndWait('【新的一周开始了】', {
     align: 'center',
     fontSize: '1.5rem',
   });
 }
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} cur_loc
  * @param {number} rest_loc
  */
-async function save_and_next_week(chara_id, cur_loc, rest_loc) {
+async function save_and_next_week(cid, cur_loc, rest_loc) {
   await era.saveData(0, `${get_save_name()} (自动存档)`);
   era.drawLine();
   era.set('flag:当前互动角色', 0);
   era.set('flag:当前位置', rest_loc);
   let lover = Number(sys_check_awake(0) && era.get('flag:床伴'));
   era.set('flag:床伴', lover);
-  if (chara_id && !sys_check_remote(chara_id) && !lover) {
-    await run_custom_daily(chara_id, event_hooks.good_night);
+  if (cid > 0 && !sys_check_remote(cid) && !lover) {
+    await run_custom_daily(cid, event_hooks.good_night);
   }
   let continue_flag = true;
   if (era.get('flag:当前位置') !== location_enum.basement) {
@@ -101,7 +105,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
       (random_event = sys_get_random_event(event_hooks.week_end)) !== undefined
     ) {
       era.drawLine();
-      continue_flag = !(await random_event(chara_id));
+      continue_flag = !(await random_event(cid));
     }
     stop_machine_gun(event_hooks.week_end);
   }

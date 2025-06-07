@@ -36,7 +36,7 @@ async function take_care(chara) {
         const teach = curr === e ? chara.id : era.get(`cflag:${e}:照看`);
         return {
           accelerator: e,
-          config: { align: 'center', disabled: curr === e, width: 6 },
+          config: { align: 'center', disabled: curr === e, width: 8 },
           content:
             era.get(`callname:${e}:-2`) +
             (curr === e

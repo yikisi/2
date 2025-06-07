@@ -49,7 +49,7 @@ function add_train_exp(cid, attr, exp) {
 
 /**
  * 计算训练的基础奖励
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} attr
  * @param {number} train_level
  * @param {{stamina:number,time:number}} train_cost
@@ -57,7 +57,7 @@ function add_train_exp(cid, attr, exp) {
  * @param {{[buff]:number,[teach_chara]:number}} [between_weeks]
  */
 function get_success_base_reward(
-  chara_id,
+  cid,
   attr,
   train_level,
   train_cost,
@@ -67,8 +67,8 @@ function get_success_base_reward(
   let base_inc = train_level * 2 + get_random_value(3, 8);
 
   let train_buff =
-    get_train_bonus(chara_id, attr, between_weeks) +
-    10 * (era.get(`cflag:${chara_id}:位置`) === location_enum.beach);
+    get_train_bonus(cid, attr, between_weeks) +
+    10 * (era.get(`cflag:${cid}:位置`) === location_enum.beach);
   if (between_weeks !== undefined) {
     if (between_weeks.teach_chara > 0) {
       train_buff +=
@@ -79,7 +79,7 @@ function get_success_base_reward(
           0,
         ) +
         get_custom_mec(between_weeks.teach_chara).get_take_care_buff(
-          chara_id,
+          cid,
           attr,
         ) +
         50;
@@ -118,7 +118,7 @@ function get_success_base_reward(
       train_cost.stamina = -train_cost.stamina / 4;
       changes.pt_change = 8;
   }
-  if (sys_get_chara(chara_id) === -1) {
+  if (sys_get_chara(cid) === -1) {
     changes.attr_change = changes.attr_change.map((e) => e + (e > 0));
   }
   changes.pt_change += 1.25 * (train_level - 1);
@@ -312,8 +312,8 @@ module.exports = {
       }
     }
 
-    const chara_talk = get_chara_talk(cid),
-      me = cid === 0 ? chara_talk : get_chara_talk(0);
+    const chara = get_chara_talk(cid);
+    const me = cid === 0 ? chara : get_chara_talk(0);
     // 无论成功与否都会扣去精力（=时间）
     if (cid > 0) {
       // 训自己不额外消耗时间
@@ -329,7 +329,7 @@ module.exports = {
     ];
     era.print(
       [
-        chara_talk.get_colored_name(),
+        chara.get_colored_name(),
         ' 的 ',
         ...to_print[0],
         to_print[0].length && to_print[1].length ? '，' : undefined,
@@ -387,7 +387,7 @@ module.exports = {
           content: [
             { isBr: true },
             `经过训练，`,
-            chara_talk.get_colored_name(),
+            chara.get_colored_name(),
             ' 的属性有了如下变化：',
           ],
           type: 'text',

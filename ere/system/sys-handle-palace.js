@@ -26,12 +26,12 @@ const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
 const { adaptability_names, attr_names } = require('#/data/train-const');
 
-/** @param {number} chara_id */
-function sys_handle_palace(chara_id) {
-  era.set(`cflag:${chara_id}:殿堂`, 1);
-  era.add(`cflag:${chara_id}:育成次数`, 1);
-  const chara = get_chara_talk(chara_id);
-  const miss_count = remove_edu_events(chara_id)[chara_id] || 0;
+/** @param {number} cid */
+function sys_handle_palace(cid) {
+  era.set(`cflag:${cid}:殿堂`, 1);
+  era.add(`cflag:${cid}:育成次数`, 1);
+  const chara = get_chara_talk(cid);
+  const miss_count = remove_edu_events(cid)[cid] || 0;
   /** @type {*[]} */
   const buffer = [
     {
@@ -39,7 +39,7 @@ function sys_handle_palace(chara_id) {
       type: 'text',
     },
   ];
-  const aim_check = get_custom_check(chara_id).check_palace_and_get_aims();
+  const aim_check = get_custom_check(cid).check_palace_and_get_aims();
   let aim_punish_count = 0,
     aim_count = 0;
   if (aim_check.length) {
@@ -89,9 +89,8 @@ function sys_handle_palace(chara_id) {
       type: 'text',
     });
   }
-  const titles =
-    get_custom_check(chara_id).check_and_get_titles(!aim_punish_count);
-  const races = RaceHistory.get(chara_id).get_entries();
+  const titles = get_custom_check(cid).check_and_get_titles(!aim_punish_count);
+  const races = RaceHistory.get(cid).get_entries();
   let g1_count = 0,
     pop_g1_count = 0;
   races.forEach((e) => {
@@ -113,40 +112,37 @@ function sys_handle_palace(chara_id) {
     titles.push({ n: '傲视一切', c: adaptability_colors.at(-1) });
   }
   if (
-    era.get(`talent:${chara_id}:童贞`) === vp_status_enum.virgin &&
-    era.get(`talent:${chara_id}:处女`) === vp_status_enum.virgin
+    era.get(`talent:${cid}:童贞`) === vp_status_enum.virgin &&
+    era.get(`talent:${cid}:处女`) === vp_status_enum.virgin
   ) {
     titles.push({ n: '纯净之魂', c: sex_colors[1] });
     pop_g1_count >= 2 && titles.push({ n: '完美偶像', c: sex_colors[0] });
   }
   era.printMultiColumns(buffer);
-  sys_add_titles(chara_id, ...titles);
-  era.set(`cflag:${chara_id}:干劲`, 0);
-  sys_like_chara(chara_id, 0, -(miss_count + aim_punish_count) * 100);
+  sys_add_titles(cid, ...titles);
+  era.set(`cflag:${cid}:干劲`, 0);
+  sys_like_chara(cid, 0, -(miss_count + aim_punish_count) * 100);
   sys_like_chara(302, 0, -aim_punish_count * 20);
   era.println();
-  const attr_list = attr_names.map((e) => era.get(`base:${chara_id}:${e}`)),
+  const attr_list = attr_names.map((e) => era.get(`base:${cid}:${e}`)),
     adapt_list = adaptability_names.map((e) =>
-      era.get(`cflag:${chara_id}:${e}适性`),
+      era.get(`cflag:${cid}:${e}适性`),
     ),
     { blue, pink, white } = sys_count_juels(
-      chara_id,
+      cid,
       1,
       attr_list,
       adapt_list,
       aim_count / aim_check.length,
     ),
     score_times = Math.max(
-      2 ** ((get_chara_score(chara_id, true) - 20000) / 20000),
+      2 ** ((get_chara_score(cid, true) - 20000) / 20000),
       1,
     );
-  era.set(`juel:${chara_id}:粉`, Math.floor(Math.min(pink * score_times, 200)));
-  era.set(`juel:${chara_id}:蓝`, Math.floor(Math.min(blue * score_times, 268)));
-  era.set(
-    `juel:${chara_id}:白`,
-    Math.floor(Math.min(white * score_times, 256)),
-  );
-  const genes = new CharaAvailableGenes(chara_id);
+  era.set(`juel:${cid}:粉`, Math.floor(Math.min(pink * score_times, 200)));
+  era.set(`juel:${cid}:蓝`, Math.floor(Math.min(blue * score_times, 268)));
+  era.set(`juel:${cid}:白`, Math.floor(Math.min(white * score_times, 256)));
+  const genes = new CharaAvailableGenes(cid);
   genes.clear();
   adapt_list.forEach((e, i) => {
     if (e === 6) {
@@ -169,31 +165,31 @@ function sys_handle_palace(chara_id) {
       genes.add(200003 + i * 10);
     }
   });
-  CharaSkills.get(chara_id)
+  CharaSkills.get(cid)
     .get()
     .filter((e) => e < 200000)
     .forEach((e) => genes.add(e + 800000));
-  const gene_a = era.get(`cflag:${chara_id}:继承方1`);
+  const gene_a = era.get(`cflag:${cid}:继承方1`);
   if (gene_a > 0) {
     era.set(`cflag:${gene_a}:被继承`, 0);
-    era.set(`cflag:${era.get(`cflag:${chara_id}:继承方2`)}:被继承`, 0);
+    era.set(`cflag:${era.get(`cflag:${cid}:继承方2`)}:被继承`, 0);
   }
-  const teach_chara = era.get(`cflag:${chara_id}:照看`);
+  const teach_chara = era.get(`cflag:${cid}:照看`);
   if (teach_chara > 0) {
-    const teach_chara = era.get(`cflag:${chara_id}:照看`);
+    const teach_chara = era.get(`cflag:${cid}:照看`);
     if (teach_chara > 0) {
       era.set(`cflag:${teach_chara}:照看`, 0);
-      era.set(`cflag:${chara_id}:照看`, 0);
+      era.set(`cflag:${cid}:照看`, 0);
     }
   }
-  if (get_chara_score(chara_id).charAt(0) >= 'S') {
+  if (get_chara_score(cid).charAt(0) >= 'S') {
     era.set(
       'flag:初见重复育成',
       Number(era.get('flag:初见重复育成') || !era.get('flag:初见重复育成')),
     );
   }
-  era.set(`cflag:${chara_id}:自主训练`, 0);
-  const inmon = CharaInmon.get(chara_id);
+  era.set(`cflag:${cid}:自主训练`, 0);
+  const inmon = CharaInmon.get(cid);
   [plugin_enum.sex_1, plugin_enum.sex_2].forEach((p) => {
     if (inmon.on(p)) {
       inmon.set(p, 0);

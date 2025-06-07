@@ -270,18 +270,18 @@ function love_uma(cid, val, shown = true) {
     (new_val === 49 || new_val === 74 || new_val === 89 || new_val === 99) &&
     era.get(`cflag:${cid}:爱慕暂拒`) !== new_val
   ) {
-    if (era.get(`cflag:${cid}:招募状态`) !== recruit_flags.no) {
-      if ((sys_check_hide_relation_and_love(cid) & 0b1) === 0 && shown) {
-        era.print([
-          '和 ',
-          get_chara_talk(cid).get_colored_name(),
-          ' 的关系似乎可以更进一步了……',
-        ]);
-      }
-      get_custom_check(cid).check_love_events();
-    } else {
-      era.set(`cflag:${cid}:爱慕暂拒`, new_val);
+    if (
+      (sys_check_hide_relation_and_love(cid) & 0b1) === 0 &&
+      era.get(`cflag:${cid}:招募状态`) !== recruit_flags.yes &&
+      shown
+    ) {
+      era.print([
+        '和 ',
+        get_chara_talk(cid).get_colored_name(),
+        ' 的关系似乎可以更进一步了……',
+      ]);
     }
+    get_custom_check(cid).check_love_events();
   }
   return shown;
 }
@@ -303,20 +303,17 @@ function get_callname(_from, _to) {
 }
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} old_val
  * @param {number} new_val
  * @param {boolean} [shown=true]
  * @returns {boolean|undefined}
  */
-function print_change(chara_id, old_val, new_val, shown = true) {
+function print_change(cid, old_val, new_val, shown = true) {
   if (shown && old_val !== new_val) {
-    const mark = [
-      get_love_mark(old_val, chara_id),
-      get_love_mark(new_val, chara_id),
-    ];
+    const mark = [get_love_mark(old_val, cid), get_love_mark(new_val, cid)];
     era.print([
-      get_chara_talk(chara_id).get_colored_name(),
+      get_chara_talk(cid).get_colored_name(),
       ' 对 ',
       get_chara_talk(0).get_colored_name(),
       ' 的爱慕',
@@ -340,8 +337,10 @@ CustomizedCheck.like_chara = like_chara;
 CustomizedCheck.love_uma = love_uma;
 
 module.exports = {
-  sys_change_status_by_base(chara_id) {
-    !era.get(`base:${chara_id}:体力`) && era.set(`status:${chara_id}:沉睡`, 1);
+  sys_change_status_by_base(cid) {
+    if (!era.get(`base:${cid}:体力`)) {
+      era.set(`status:${cid}:沉睡`, 1);
+    }
   },
   sys_get_callname: get_callname,
   /**

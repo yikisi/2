@@ -27,7 +27,13 @@ module.exports = class extends CustomizedMec {
   }
 
   get_love_limit() {
-    return get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes ? 55 : 0;
+    if (!new GodolphinLifeMarks().love) {
+      return 50;
+    } else if (get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes) {
+      return 55;
+    } else {
+      return 0;
+    }
   }
 
   get_talents() {

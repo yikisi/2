@@ -61,6 +61,7 @@ cons_dict[344] = require('#/event/mec/mec-344');
 cons_dict[345] = require('#/event/mec/mec-345');
 cons_dict[400] = require('#/event/mec/mec-400');
 cons_dict['av-sister'] = require('#/event/mec/mec-av-sister');
+cons_dict['emperor'] = require('#/event/mec/mec-emperor');
 cons_dict[201] =
   cons_dict[202] =
   cons_dict[203] =
