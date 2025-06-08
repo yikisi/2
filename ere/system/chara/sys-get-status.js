@@ -116,12 +116,12 @@ function sys_get_status(cid) {
       });
     }
     if (era.get('cflag:341:招募状态') === recruit_flags.yes) {
-      check = (new GodolphinLifeMarks().buff + 1) * 50;
+      check = (new GodolphinLifeMarks().buff + 1) * 25;
       status_list.push({
         color: get_chara_color(341),
         content: '女神之爱',
-        fontWeight: check > 50 ? 'bold' : undefined,
-        title: `智力与技能点数训练效果+${check}%。`,
+        fontWeight: check > 25 ? 'bold' : undefined,
+        title: `智力训练效果+${check * 2}%，技能点数训练效果+${check}%。`,
       });
     }
     if (era.get('cflag:342:招募状态') === recruit_flags.yes) {

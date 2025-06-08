@@ -61,7 +61,7 @@ async function continue_fucking_common(attacker, defender) {
     );
     await defender.print_and_wait([
       '想更多地紧贴上 ',
-      attacker.get_colored_name(),
+      sys_get_colored_callname(defender.id, attacker.id),
       ' 的身体感受那份温度，想更多的，被 ',
       sys_get_colored_callname(defender.id, attacker.id),
       ' 教会更多下流的事情，想让这湿漉漉的发热身体能干脆地被玩弄成没法见人的害羞样子……',
