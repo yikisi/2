@@ -260,7 +260,7 @@ function love_uma(cid, val, shown = true) {
   if (
     love < 50 &&
     new_val >= 50 &&
-    era.get(`cflag:${cid}:种族`) &&
+    era.get(`cflag:${cid}:种族`) > 0 &&
     sys_check_yandere(cid, (y) => y === 1, inmon)
   ) {
     era.set(`status:${cid}:爱意克制`, 1);

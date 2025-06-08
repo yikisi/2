@@ -20,8 +20,11 @@ class CharaGenes {
     this.all_count = Object.values(this.obj).reduce((p, c) => p + c, 0);
   }
 
-  /** @type {number|string} gene */
+  /** @param {number|string} gene */
   add(gene) {
+    if (gene === 300000) {
+      return;
+    }
     this.obj[gene] || (this.obj[gene] = 0);
     this.obj[gene]++;
     this.clean_cache();

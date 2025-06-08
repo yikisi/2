@@ -3,8 +3,19 @@ const { get, set } = require('#/era-electron');
 const MecNpc = require('#/event/mec/mec-npc');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends MecNpc {
+  get_love_limit() {
+    if (get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes) {
+      if (get(`love:${this.id}`) >= 50) {
+        return 67;
+      }
+      return 50;
+    }
+    return super.get_love_limit();
+  }
+
   get_talents() {
     return [
       {
