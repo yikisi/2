@@ -108,16 +108,14 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.gargle] = (attacker, defender) => {
-    let remove_stains = [0, 0];
-    [attacker, defender].forEach((chara_id, i) => {
-      if (
-        sys_check_awake(chara_id) &&
-        era.get(`tequip:${chara_id}:口腔`) === -1
-      ) {
-        remove_stains[i] = clean_stain(chara_id, part_enum.mouth);
-        clean_part(new EroParticipant(chara_id, part_enum.mouth));
-        era.add(`nowex:${chara_id}:精力消耗`, 10);
+    let remove_stains = [attacker, defender].map((cid) => {
+      if (sys_check_awake(cid) && era.get(`tequip:${cid}:口腔`) === -1) {
+        const ret = clean_stain(cid, part_enum.mouth);
+        clean_part(new EroParticipant(cid, part_enum.mouth));
+        era.add(`nowex:${cid}:精力消耗`, 10);
+        return ret;
       }
+      return 0;
     });
     if (remove_stains[1]) {
       add_juel(defender, '顺从', base_emotion_juel / 2);
@@ -128,56 +126,54 @@ module.exports = (handlers) => {
 
   handlers[ero_hooks.wipe_body] = (attacker, defender) => {
     let removed_stains;
-    [attacker, defender].forEach((chara_id) => {
+    [attacker, defender].forEach((cid) => {
       removed_stains = 0;
-      if (era.get(`tcvar:${chara_id}:避孕套`)) {
-        era.set(`tcvar:${chara_id}:避孕套`, 0);
-        rollback_penis_stain(chara_id);
+      if (era.get(`tcvar:${cid}:避孕套`)) {
+        era.set(`tcvar:${cid}:避孕套`, 0);
+        rollback_penis_stain(cid);
       }
       const part_list = [part_enum.hand, part_enum.foot, part_enum.body];
       [part_enum.penis, part_enum.clitoris]
-        .filter(
-          (part) => era.get(`tequip:${chara_id}:${part_touch[part]}`) === -1,
-        )
+        .filter((part) => era.get(`tequip:${cid}:${part_touch[part]}`) === -1)
         .forEach((e) => part_list.push(e));
-      removed_stains += clean_stain(chara_id, ...part_list);
-      clean_part(...part_list.map((e) => new EroParticipant(chara_id, e)));
+      removed_stains += clean_stain(cid, ...part_list);
+      clean_part(...part_list.map((e) => new EroParticipant(cid, e)));
       era.add(`nowex:${attacker}:精力消耗`, 20);
       era.add(`nowex:${attacker}:体力消耗`, 10);
       removed_stains += clean_part_stain(
-        chara_id,
+        cid,
         part_enum.breast,
         stain_enum.milk,
       );
-      clean_part_without_item(new EroParticipant(chara_id, part_enum.breast));
-      if (era.get(`tequip:${chara_id}:阴道`) === -1) {
+      clean_part_without_item(new EroParticipant(cid, part_enum.breast));
+      if (era.get(`tequip:${cid}:阴道`) === -1) {
         removed_stains += clean_part_stain(
-          chara_id,
+          cid,
           part_enum.virgin,
           stain_enum.virgin,
           stain_enum.lubricant,
           stain_enum.secretion,
           stain_enum.semen,
         );
-        clean_part(new EroParticipant(chara_id, part_enum.virgin));
+        clean_part(new EroParticipant(cid, part_enum.virgin));
         era.add(`nowex:${attacker}:体力消耗`, 10);
       }
-      if (era.get(`tequip:${chara_id}:肛门`) === -1) {
+      if (era.get(`tequip:${cid}:肛门`) === -1) {
         removed_stains += clean_part_stain(
-          chara_id,
+          cid,
           part_enum.anal,
           stain_enum.lubricant,
           stain_enum.anal,
           stain_enum.semen,
         );
-        clean_part(new EroParticipant(chara_id, part_enum.anal));
+        clean_part(new EroParticipant(cid, part_enum.anal));
         era.add(`nowex:${attacker}:体力消耗`, 10);
       }
     });
     add_juel(
       defender,
       '顺从',
-      removed_stains
+      removed_stains > 0
         ? (base_emotion_juel * (Math.min(removed_stains, 6) + 4)) / 5
         : base_emotion_juel / 2,
     );
