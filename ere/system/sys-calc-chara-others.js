@@ -395,6 +395,9 @@ module.exports = {
     ) {
       era.set(`status:${cid}:爱意克制`, 1);
     }
+    if (era.get(`status:${cid}:爱意克制`) > 0 && new_val >= 75) {
+      era.set(`status:${cid}:爱意克制`, 0);
+    }
     if (
       sys_check_hide_relation_and_love(cid) ||
       sys_check_limit_relation_and_love(cid)

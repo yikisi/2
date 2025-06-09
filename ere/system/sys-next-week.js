@@ -409,7 +409,6 @@ async function sys_next_week() {
       } else {
         sys_change_pressure(id, get_random_value(100, 200));
         // 37周以后概率生，最晚42周
-        // 现实是40周，这里为了游戏性折叠了
         pregnant_stage = era.set(
           `cflag:${id}:妊娠阶段`,
           1 << pregnant_stage_enum.pre_birth,
