@@ -71,6 +71,10 @@ plugins[40221] = require('#/data/ero/plugin/plugin-40221');
 plugins[40222] = require('#/data/ero/plugin/plugin-40222');
 plugins[40311] = require('#/data/ero/plugin/plugin-40311');
 plugins[40312] = require('#/data/ero/plugin/plugin-40312');
+plugins[40401] = require('#/data/ero/plugin/plugin-40401');
+plugins[40402] = require('#/data/ero/plugin/plugin-40402');
+plugins[40403] = require('#/data/ero/plugin/plugin-40403');
+plugins[40404] = require('#/data/ero/plugin/plugin-40404');
 plugins[50111] = require('#/data/ero/plugin/plugin-50111');
 plugins[50112] = require('#/data/ero/plugin/plugin-50112');
 plugins[50113] = require('#/data/ero/plugin/plugin-50113');
@@ -236,6 +240,14 @@ module.exports = {
     no_yand: 40311,
     // 人之常情: 乐于分享
     ntr: 40312,
+    // 受虐狂: 将所有痛苦因子转换为受虐快感
+    tran_p: 40401,
+    // 惊悚爱好: 将所有恐惧因子转换为受虐快感
+    tran_f: 40402,
+    // 露出癖: 将所有羞耻因子转换为受虐快感
+    tran_s: 40403,
+    // 狂喜感知: 将所有负面情感因子转换为受虐快感
+    sls: 40404,
     // 高潮操纵Ⅰ: 每隔一回合允许高潮一回合
     org_c1: 50111,
     // 高潮操纵Ⅱ: 每隔两回合允许高潮一回合

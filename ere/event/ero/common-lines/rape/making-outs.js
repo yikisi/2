@@ -692,7 +692,7 @@ class EroRapeMakingOuts extends EroMakingOuts {
       ]);
       await attacker.print_and_wait([
         '名叫 ',
-        sys_get_colored_callname(attacker.id, defender.id),
+        defender.get_colored_name(),
         ' 的',
         era.get(`cflag:${defender.id}:种族`)
           ? defender.get_sex_slave_title()

@@ -357,8 +357,8 @@ function get_image(chara_id) {
 
 function get_palam_progress(chara_id, part, offset) {
   const part_name = part_names[part];
-  const palam = era.get(`palam:${chara_id}:${part_name}快感`),
-    limit = era.get(`tcvar:${chara_id}:${part_name}快感上限`);
+  const param = Math.floor(era.get(`param:${chara_id}:${part_name}快感`));
+  const limit = era.get(`tcvar:${chara_id}:${part_name}快感上限`);
   return [
     {
       config: { offset: offset || 0, width: 1 },
@@ -367,12 +367,12 @@ function get_palam_progress(chara_id, part, offset) {
     },
     {
       config: {
-        color: get_color(...palam_colors.progress, palam / limit),
+        color: get_color(...palam_colors.progress, param / limit),
         height: 22,
         width: 3,
       },
-      inContent: `${palam}/${limit}`,
-      percentage: (palam * 100) / limit,
+      inContent: `${param.toLocaleString()}/${limit.toLocaleString()}`,
+      percentage: (param * 100) / limit,
       type: 'progress',
     },
   ];

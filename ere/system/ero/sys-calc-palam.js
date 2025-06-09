@@ -138,11 +138,10 @@ function calc_pleasure(chara_id, part, attack, pass_transfer) {
  */
 function update_palam(chara_id, part, shown) {
   const key = part_names[part];
-  const palam_name = key + '快感';
+  const param_name = key + '快感';
   // 快感加成已在sys-calc-ero.js中计算，因子加成在sys-calc-juel.js中计算，不重复计算
-  let attack = Math.ceil(
-    tmp[chara_id][key] * (1 + 0.1 * (sys_get_chara(chara_id) === -3)),
-  );
+  let attack =
+    tmp[chara_id][key] * (1 + 0.1 * (sys_get_chara(chara_id) === -3));
   switch (part) {
     case part_enum.sadism:
       add_juel(chara_id, '羞耻', attack / 2);
@@ -165,25 +164,28 @@ function update_palam(chara_id, part, shown) {
       add_juel(chara_id, '顺从', attack / 2);
   }
   tmp[chara_id][key] = 0;
-  const new_val = era.add(`palam:${chara_id}:${palam_name}`, attack),
-    limit = era.get(`tcvar:${chara_id}:${palam_name}上限`);
-  shown &&
-    attack &&
+  const old_val = era.get(`param:${chara_id}:${param_name}`);
+  const new_val = era.add(`param:${chara_id}:${param_name}`, attack);
+  const _new = Math.floor(new_val);
+  const _old = Math.floor(old_val);
+  const limit = era.get(`tcvar:${chara_id}:${param_name}上限`);
+  if (shown && _new !== _old) {
     era.print([
       get_chara_talk(chara_id).get_colored_name(),
-      ` 的 ${palam_name} `,
+      ` 的 ${param_name} `,
       {
-        content: `+${attack}`,
+        content: `+${(_new - _old).toLocaleString()}`,
         color: palam_colors.notifications[1],
       },
       '！现在是 ',
       {
-        content: `${new_val}`,
+        content: `${_new.toLocaleString()}`,
         color: get_color(...palam_colors.notifications, new_val / limit),
       },
-      `/${limit}`,
+      `/${limit.toLocaleString()}`,
     ]);
-  return { curr: new_val, max: limit, old: new_val - attack };
+  }
+  return { curr: new_val, max: limit, old: old_val };
 }
 
 module.exports = {
