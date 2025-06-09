@@ -4,6 +4,7 @@
  */
 const era = require('#/era-electron');
 
+const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 const sys_get_random_uma_god = require('#/system/chara/sys-get-random-uma-god');
 const {
   sys_change_attr_and_print,
@@ -27,9 +28,9 @@ const { money_color } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { attr_names } = require('#/data/train-const');
-const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 
 const button_contents = [
   '「啊，请帮帮我吧女神大人——」',
@@ -126,15 +127,15 @@ function get_chara_desc(aim, me) {
 
 module.exports = async () => {
   era.set('flag:当前位置', location_enum.god);
-  let flag_god = 1,
-    relation = 0,
-    god_id = sys_get_random_uma_god(),
-    god = god_id ? get_chara_talk(god_id) : undefined;
-  const cur_id = era.get('flag:当前互动角色'),
-    aim = get_chara_talk(cur_id),
-    me = cur_id ? get_chara_talk(0) : aim,
-    life_marks = god_id ? LifeEventMarks.get_marks(god_id) : undefined,
-    common_uma_sex_title = era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
+  let flag_god = 1;
+  let relation = 0;
+  let god_id = sys_get_random_uma_god();
+  let god = god_id ? get_chara_talk(god_id) : undefined;
+  const cur_id = era.get('flag:当前互动角色');
+  const aim = get_chara_talk(cur_id);
+  const me = cur_id ? get_chara_talk(0) : aim;
+  const life_marks = god_id ? LifeEventMarks.get_marks(god_id) : undefined;
+  const common_uma_sex_title = era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
   while (flag_god > 0) {
     await era.clear();
     print_page_header();
@@ -142,7 +143,7 @@ module.exports = async () => {
       print_curr_chara(cur_id);
     }
     era.drawLine();
-    if (god_id) {
+    if (god_id > 0) {
       if (flag_god === 1) {
         if (cur_id === 0) {
           era.print([me.get_colored_name(), ' 独自一人来到了三女神像面前。']);
@@ -820,11 +821,12 @@ module.exports = async () => {
           .map((_, i) => 340 + i)
           .filter(
             (e) =>
+              era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
               sys_check_awake(e) &&
               era.get(`cflag:${e}:位置`) === era.get('cflag:0:位置'),
           ),
       );
-      if (god_id) {
+      if (god_id > 0) {
         god = get_chara_talk(god_id);
         await era.printAndWait([
           me.get_colored_name(),
