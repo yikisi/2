@@ -348,27 +348,27 @@ module.exports = {
   },
   get_penis_size,
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} [other_id]
    * @returns {number}
    */
-  get_pregnant_ratio(chara_id, other_id) {
+  get_pregnant_ratio(cid, other_id) {
     if (
       // 本格化后才能怀孕
-      era.get(`cflag:${chara_id}:成长阶段`) < 2 ||
+      era.get(`cflag:${cid}:成长阶段`) < 2 ||
       // 已怀孕or恢复期、经期不会怀孕
-      (era.get(`cflag:${chara_id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no &&
-        (era.get(`cflag:${chara_id}:妊娠回合计时`) ||
-          (chara_id > 0 && era.get(`mark:${chara_id}:淫纹`) >= 2))) ||
-      era.get(`status:${chara_id}:经期`) ||
+      (era.get(`cflag:${cid}:妊娠阶段`) !== 1 << pregnant_stage_enum.no &&
+        (era.get(`cflag:${cid}:妊娠回合计时`) ||
+          (cid > 0 && era.get(`mark:${cid}:淫纹`) >= 2))) ||
+      era.get(`status:${cid}:经期`) ||
       (other_id !== undefined &&
         !era.get(`cflag:${other_id}:性别`) &&
         !era.get(`status:${other_id}:弗隆P`)) ||
-      CharaInmon.get(chara_id).on(plugin_enum.no_preg)
+      CharaInmon.get(cid).on(plugin_enum.no_preg)
     ) {
       return 0;
     }
-    let ratio = get_custom_mec(chara_id).get_pregnant_ratio();
+    let ratio = get_custom_mec(cid).get_pregnant_ratio();
     if (ratio > 0) {
       return ratio;
     }
@@ -376,21 +376,21 @@ module.exports = {
     // 怀孕基础概率1%，排卵期+50%，发情期+25%，弗隆P+20%
     ratio = 0.05;
 
-    if (!chara_id || era.get(`exp:${chara_id}:生产次数`) < baby_limit) {
+    if (!cid || era.get(`exp:${cid}:生产次数`) < baby_limit) {
       ratio +=
-        0.5 * era.get(`status:${chara_id}:排卵期`) +
-        0.25 * era.get(`status:${chara_id}:发情`) +
-        0.1 * era.get(`status:${chara_id}:反避孕套`);
+        0.5 * era.get(`status:${cid}:排卵期`) +
+        0.25 * era.get(`status:${cid}:发情`) +
+        0.1 * era.get(`status:${cid}:反避孕套`);
       if (other_id !== undefined) {
         ratio += 0.2 * era.get(`status:${other_id}:弗隆P`);
       }
     }
     if (
       // 避孕药98%避孕
-      (era.get(`status:${chara_id}:短效避孕药`) ||
-        era.get(`status:${chara_id}:长效避孕药`)) &&
+      (era.get(`status:${cid}:短效避孕药`) ||
+        era.get(`status:${cid}:长效避孕药`)) &&
       // 避孕药对孕袋无效
-      (chara_id || era.get('flag:惩戒力度') !== 3)
+      (cid || era.get('flag:惩戒力度') !== 3)
     ) {
       ratio *= 0.02;
     }

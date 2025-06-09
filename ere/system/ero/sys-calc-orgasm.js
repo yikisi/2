@@ -761,18 +761,16 @@ async function sys_calc_orgasm(shown, ...ids) {
                     { father_id: chara_id, mother_id: other_id, shown },
                   );
                   // 计算怀孕
-                  temp = get_pregnant_ratio(other_id, chara_id);
+                  temp =
+                    era.get(`cflag:${other_id}:妊娠阶段`) ===
+                      1 << pregnant_stage_enum.no &&
+                    get_pregnant_ratio(other_id, chara_id);
                   era.logger.debug(
                     `角色 ${other_id} 怀上角色 ${chara_id} 孩子的概率：${(
                       temp * 100
                     ).toFixed(2)}%`,
                   );
-                  if (
-                    (era.get(`cflag:${other_id}:妊娠阶段`) ===
-                      1 << pregnant_stage_enum.no &&
-                      temp >= 1) ||
-                    (temp > 0 && Math.random() < temp)
-                  ) {
+                  if (temp >= 1 || (temp > 0 && Math.random() < temp)) {
                     era.add(`exp:${chara_id}:授种次数`, 1);
                     era.set(
                       `cflag:${other_id}:妊娠阶段`,

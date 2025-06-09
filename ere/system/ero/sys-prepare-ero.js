@@ -186,7 +186,7 @@ function update_temp_base(cid, ratio) {
 function set_juel_buff(cid, juel_name, val) {
   era.set(
     `tcvar:${cid}:${juel_name}因子加成`,
-    Math.min(Math.max(val, -0.999), 1),
+    Math.min(Math.max(val, -0.99), 1),
   );
 }
 
