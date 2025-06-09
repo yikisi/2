@@ -484,14 +484,14 @@ async function print_inherit_page() {
               set(`cflag:${selected}:继承方${i + 1}`, Number(e[0]));
               set(`cflag:${e[0]}:被继承`, selected);
             });
-          const juel_list = gene_juel_names.map(
+          const jewel_list = gene_juel_names.map(
             (e) =>
               get(`jewel:${gene_owner_list[0]}:${e}`) +
               get(`jewel:${gene_owner_list[1]}:${e}`),
           );
           switch (Math.floor(get(`cflag:${selected}:育成回合计时`) / 48)) {
             case 0:
-              juel_list.forEach((e, i) =>
+              jewel_list.forEach((e, i) =>
                 set(
                   `jewel:${selected}:${gene_juel_names[i]}`,
                   Math.floor(e * 0.3),
@@ -499,7 +499,7 @@ async function print_inherit_page() {
               );
               break;
             case 1:
-              juel_list.forEach((e, i) =>
+              jewel_list.forEach((e, i) =>
                 set(
                   `jewel:${selected}:${gene_juel_names[i]}`,
                   Math.floor(e * 0.3) + Math.floor(e * 0.4),
@@ -507,7 +507,7 @@ async function print_inherit_page() {
               );
               break;
             case 2:
-              juel_list.forEach((e, i) =>
+              jewel_list.forEach((e, i) =>
                 set(`jewel:${selected}:${gene_juel_names[i]}`, e),
               );
           }

@@ -310,7 +310,7 @@ async function reset_status(
               }
             });
           } else if (
-            edu_weeks % 48 === 9 &&
+            edu_weeks % 48 === 8 &&
             era.get(`cflag:${chara_id}:继承方1`) > 0
           ) {
             const a = era.get(`cflag:${chara_id}:继承方1`),
