@@ -178,14 +178,18 @@ module.exports = {
 
         const j_hate = get_buffed_jewel(cid, '反感');
         let got_j_hate;
-        print_jewel_change(
-          cid,
-          '反感',
-          era.get(`gotjewel:${cid}:反感`),
-          (got_j_hate = era.add(`gotjewel:${cid}:反感`, j_hate)),
-          shown,
-        );
-        add_juel(cid, '自卫', j_hate / 5);
+        if (inmon.on(plugin_enum.sls)) {
+          era.add(`param:${cid}:受虐快感`, j_hate / 10);
+        } else {
+          print_jewel_change(
+            cid,
+            '反感',
+            era.get(`gotjewel:${cid}:反感`),
+            (got_j_hate = era.add(`gotjewel:${cid}:反感`, j_hate)),
+            shown,
+          );
+          add_juel(cid, '自卫', j_hate / 5);
+        }
 
         print_jewel_change(
           cid,
@@ -203,8 +207,12 @@ module.exports = {
         const pleasure_params = body_jewels + spirit_jewels / 10;
         const total_ex = era.get(`ex:${cid}:TotalEX`);
         const pain_params = j_pain / 10 + j_fear / 10 - spirit_jewels / 25;
-        const shame_params =
-          body_jewels / 50 + j_shame / 2 + spirit_jewels / 25 - meek_juels / 5;
+        const shame_params = inmon.on(plugin_enum.sls)
+          ? 0
+          : body_jewels / 50 +
+            j_shame / 2 +
+            spirit_jewels / 25 -
+            meek_juels / 5;
         if (!ero_mark) {
           if ((pleasure_params >= 4500 || total_ex >= 6) && pleasure_mark < 3) {
             era.set(`nowex:${cid}:欢愉获取`, 3 - pleasure_mark);
