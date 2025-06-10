@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const sys_count_juels = require('#/system/chara/sys-count-juels');
 const get_ex_result_in_the_end = require('#/system/ero/sub-begin-and-end/get-ex-result-in-the-end');
 const get_juel_result = require('#/system/ero/sub-begin-and-end/get-juel-result');
@@ -42,6 +43,7 @@ const {
   pleasure_list,
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { gene_juel_names } = require('#/data/other-const');
 const { attr_enum, attr_names } = require('#/data/train-const');
 
@@ -378,7 +380,7 @@ function init_ero(...ids) {
     if (era.get(`status:${cid}:超马跳Z`)) {
       update_temp_base(cid, 0.4);
     }
-    if (cid && era.get(`cflag:${cid}:种族`)) {
+    if (cid > 0 && era.get(`cflag:${cid}:种族`) > 0) {
       let edu_phase = era.get(`cflag:${cid}:育成回合计时`);
       if (edu_phase < 3 * 48) {
         edu_phase = Math.floor(edu_phase / 48) / 3;
@@ -390,6 +392,19 @@ function init_ero(...ids) {
         gene_juel_names.forEach((e) =>
           era.set(`tcvar:${cid}:${e}因子`, era.get(`jewel:${cid}:${e}`)),
         );
+      }
+    }
+    if (
+      cid > 0 &&
+      era.get(`love:${cid}`) >= 90 &&
+      era.get(`cflag:${cid}:性别`) !== 1 &&
+      era.get(`status:${cid}:经期`) === 0 &&
+      era.get(`cflag:${cid}:妊娠阶段`) === 1 << pregnant_stage_enum.no &&
+      sys_check_yandere(cid, (y) => y > 0)
+    ) {
+      const yandere = era.get(`talent:${cid}:病娇`);
+      if (Math.random() < yandere * 0.4) {
+        era.set(`status:${cid}:反避孕套`, 1);
       }
     }
   }

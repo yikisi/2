@@ -2,7 +2,7 @@ const InmonPlugin = require('#/data/ero/inmon-plugin');
 
 module.exports = new InmonPlugin(
   60211,
-  '性爱训练法',
+  '性爱训练',
   602,
   1,
   6,

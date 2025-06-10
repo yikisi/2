@@ -545,8 +545,8 @@ class CustomizedEro {
         }
       } else {
         if (
-          era.get(`status:${mother.id}:反避孕套`) &&
-          era.get(`tcvar:${father.id}:避孕套`) &&
+          era.get(`status:${mother.id}:反避孕套`) > 0 &&
+          era.get(`tcvar:${father.id}:避孕套`) > 0 &&
           sys_check_awake(father.id)
         ) {
           await era.printAndWait([

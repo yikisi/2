@@ -16,7 +16,6 @@ const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
-  end_ero_and_train,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
@@ -118,7 +117,7 @@ async function blowjob(chara, me) {
       ),
       false,
     );
-    await end_ero_and_train();
+    await end_ero_and_show_result();
   }
 }
 
@@ -242,7 +241,7 @@ async function duty(chara, me) {
     set('tflag:强奸', chara.id);
   }
   await print_ero_page(chara.id, true);
-  await end_ero_and_train();
+  await end_ero_and_show_result();
 }
 
 async function morning_sex() {
@@ -310,7 +309,7 @@ async function naked_apron(chara, me) {
   if ((await input()) === 1) {
     begin_and_init_ero(0, chara.id);
     await print_ero_page(chara.id, true);
-    await end_ero_and_show_result(true);
+    await end_ero_and_show_result();
   } else {
     await printAndWait([
       me.get_colored_name(),

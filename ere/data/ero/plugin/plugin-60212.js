@@ -2,7 +2,7 @@ const InmonPlugin = require('#/data/ero/inmon-plugin');
 
 module.exports = new InmonPlugin(
   60212,
-  '吃禁果变强',
+  '禁果变强',
   602,
   3,
   16,

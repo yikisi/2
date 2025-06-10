@@ -44,17 +44,17 @@ const { penis_desc, vp_status_enum } = require('#/data/ero/status-const');
  */
 function sys_do_sex(attacker, defender, item) {
   let damage = {
-      defender: base_damage.base,
-      attacker: base_damage.self,
-    },
-    attacker_skill_part = part_skills[attacker.part],
-    attack_extra_buff = 0,
-    attack_extra_bonus = 0,
-    defender_part = defender.part,
-    attacker_virgin_status,
-    defender_virgin_status,
-    attacker_cost = action_cost.body,
-    defender_cost = action_cost.body;
+    defender: base_damage.base,
+    attacker: base_damage.self,
+  };
+  let attacker_skill_part = part_skills[attacker.part];
+  let attack_extra_buff = 0;
+  let attack_extra_bonus = 0;
+  let defender_part = defender.part;
+  let attacker_virgin_status;
+  let defender_virgin_status;
+  let attacker_cost = action_cost.body;
+  let defender_cost = action_cost.body;
 
   const date = `${era.get('flag:当前年')} 年 ${era.get(
       'flag:当前月',

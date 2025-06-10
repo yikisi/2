@@ -27,6 +27,48 @@ const { gene_juel_names } = require('#/data/other-const');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 const { adaptability_names } = require('#/data/train-const');
 
+const duplicate_names = {};
+duplicate_names['骏川缰绳'] = 1;
+duplicate_names['丰收时刻'] = 1;
+duplicate_names['傲视一切'] = 1;
+duplicate_names['秋川弥生'] = 1;
+duplicate_names['北方风味'] = 1;
+duplicate_names['佐岳五月'] = 1;
+duplicate_names['狄杜斯'] = 1;
+
+function check_duplicate(name) {
+  return (
+    duplicate_names[name] > 0 ||
+    era
+      .getAddedCharacters()
+      .findIndex((cid) => era.get(`callname:${cid}:-1`) === name) !== -1 ||
+    era
+      .getAllCharacters()
+      .findIndex((cid) => era.get(`static:${cid}:name`) === name) !== -1
+  );
+}
+
+async function rename() {
+  let w_length = false;
+  let w_duplicate = false;
+  let flag = true;
+  let ret = '';
+  while (flag) {
+    if (w_length) {
+      era.print('孩子的名字不能超过 8 个字符！');
+    }
+    if (w_duplicate) {
+      era.print(`已经有名为 ${ret} 的角色！`);
+    }
+    ret = (await era.input()).toString();
+    w_length = ret.length > 8;
+    w_duplicate = check_duplicate(ret);
+    if (!w_length && !w_duplicate) {
+      return ret;
+    }
+  }
+}
+
 async function name_baby(child_id, father_id, mother_id) {
   let ret, random_param;
   // chara_id一定是母亲
@@ -48,22 +90,18 @@ async function name_baby(child_id, father_id, mother_id) {
       random_param = mother_id || father_id;
     } else {
       era.print('想给孩子起什么名字呢？');
-      ret = '';
-      do {
-        if (ret.length > 0) {
-          era.print('孩子的名字不能超过 8 个字符！');
-        }
-        ret = (await era.input()).toString();
-      } while (ret.length > 8);
+      ret = await rename();
     }
   }
   if (random_param > 0) {
     ret = get_random_name(random_param);
   }
-  era.set(`callname:${child_id}:-2`, era.set(`callname:${child_id}:-1`, ret));
-  if (
+  if (check_duplicate(ret)) {
+    era.print(`已经有名为 ${ret} 的角色！请重新输入：`);
+    ret = await rename();
+  } else if (
     (!mother_id || !father_id) &&
-    random_param &&
+    random_param > 0 &&
     ret.replace(/\d+$/, '').length !== ret.length &&
     (await select_yes_or_no([
       get_chara_talk(mother_id).get_colored_name(),
@@ -74,15 +112,9 @@ async function name_baby(child_id, father_id, mother_id) {
       '要重新取名吗？',
     ]))
   ) {
-    ret = '';
-    do {
-      if (ret.length > 0) {
-        era.print('孩子的名字不能超过 8 个字符！');
-      }
-      ret = (await era.input()).toString();
-    } while (ret.length > 8);
-    era.set(`callname:${child_id}:-2`, era.set(`callname:${child_id}:-1`, ret));
+    ret = await rename();
   }
+  era.set(`callname:${child_id}:-2`, era.set(`callname:${child_id}:-1`, ret));
   await era.printAndWait([
     get_chara_talk(mother_id).get_colored_name(),
     ' 的孩子最终起名为 ',
