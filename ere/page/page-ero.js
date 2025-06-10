@@ -371,7 +371,7 @@ function get_palam_progress(chara_id, part, offset) {
         height: 22,
         width: 3,
       },
-      inContent: `${param.toLocaleString()}/${limit.toLocaleString()}`,
+      inContent: `${param}/${limit}`,
       percentage: (param * 100) / limit,
       type: 'progress',
     },

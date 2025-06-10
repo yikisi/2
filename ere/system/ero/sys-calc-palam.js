@@ -24,6 +24,22 @@ const {
 } = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 
+const temp = [
+  part_enum.mouth,
+  part_enum.breast,
+  part_enum.body,
+  part_enum.anal,
+  part_enum.sadism,
+  part_enum.masochism,
+];
+
+const active_p_l = [
+  undefined,
+  [...temp, part_enum.penis],
+  [...temp, part_enum.clitoris, part_enum.virgin],
+  [...temp, part_enum.penis, part_enum.virgin],
+];
+
 let tmp = {};
 
 /**
@@ -60,36 +76,42 @@ function add_palam(cid, part, _attack) {
       coff -= 0.1;
     }
   }
-  const chara_inmon = CharaInmon.get(cid);
-  if (chara_inmon.on(plugin_enum.al_u1)) {
+  const inmon = CharaInmon.get(cid);
+  if (inmon.on(plugin_enum.al_u1)) {
     coff += 0.5;
-  } else if (chara_inmon.on(plugin_enum.al_u2)) {
+  } else if (inmon.on(plugin_enum.al_u2)) {
     coff += 1;
-  } else if (chara_inmon.on(plugin_enum.al_u3)) {
+  } else if (inmon.on(plugin_enum.al_u3)) {
     coff += 2;
-  } else if (chara_inmon.on(plugin_enum.al_d1)) {
+  } else if (inmon.on(plugin_enum.al_d1)) {
     coff -= 0.1;
-  } else if (chara_inmon.on(plugin_enum.al_d2)) {
+  } else if (inmon.on(plugin_enum.al_d2)) {
     coff -= 0.3;
-  } else if (chara_inmon.on(plugin_enum.al_d3)) {
+  } else if (inmon.on(plugin_enum.al_d3)) {
     coff -= 0.7;
   }
   const plug_key = part_enum.keys[part].substring(0, 2);
-  if (chara_inmon.on(plugin_enum[`${plug_key}_u1`])) {
+  if (inmon.on(plugin_enum[`${plug_key}_u1`])) {
     coff += 1;
-  } else if (chara_inmon.on(plugin_enum[`${plug_key}_u2`])) {
+  } else if (inmon.on(plugin_enum[`${plug_key}_u2`])) {
     coff += 2;
-  } else if (chara_inmon.on(plugin_enum[`${plug_key}_u3`])) {
+  } else if (inmon.on(plugin_enum[`${plug_key}_u3`])) {
     coff += 4;
-  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d1`])) {
+  } else if (inmon.on(plugin_enum[`${plug_key}_d1`])) {
     coff -= 0.2;
-  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d2`])) {
+  } else if (inmon.on(plugin_enum[`${plug_key}_d2`])) {
     coff -= 0.4;
-  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d3`])) {
+  } else if (inmon.on(plugin_enum[`${plug_key}_d3`])) {
     coff -= 0.8;
   }
   attack *= coff;
-  tmp[cid][key] += attack;
+  if (inmon.on(plugin_enum.avg)) {
+    active_p_l[
+      (get_penis_size(cid) > 0) + (era.get(`cflag:${cid}:性别`) !== 1) * 2
+    ].forEach((p, _, l) => (tmp[cid][part_names[p]] += attack / l.length));
+  } else {
+    tmp[cid][key] += attack;
+  }
   // 自己拿自己的宝珠
   add_juel(cid, `${key}快感`, attack);
 }

@@ -64,7 +64,10 @@ module.exports = class extends CustomizedEro {
 
   filter_in_rape() {
     if (era.get('flag:惩戒力度') >= 2) {
-      return (e) => e === ero_hooks.bite_nipple || super.filter_in_rape()(e);
+      return (a) =>
+        a === ero_hooks.pet_breast ||
+        (a >= ero_hooks.ask_tit_job && a <= ero_hooks.fuck_tit_and_mouth) ||
+        (a >= ero_hooks.suck_nipple && a <= ero_hooks.ask_milk_and_hand_job);
     }
     return super.filter_in_rape();
   }

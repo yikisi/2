@@ -26,7 +26,7 @@ class EroNormalItems extends EroItems {
     switch (extra_flag.item) {
       case medicine_enum.fron_k:
       case medicine_enum.fron_p:
-        if (era.get(`cflag:${aim_chara.id}:性别`) - 1) {
+        if (era.get(`cflag:${aim_chara.id}:性别`) !== 1) {
           await era.printAndWait([
             aim_chara.get_colored_name(),
             ' 长出了 ',

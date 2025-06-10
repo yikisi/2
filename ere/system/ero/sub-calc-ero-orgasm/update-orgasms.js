@@ -39,7 +39,7 @@ let ex_list = undefined;
 const cum_loc_desc = {
   [part_enum.anal]: '屁穴中',
   [part_enum.body]: '身体上',
-  [part_enum.breast]: '胸脯上',
+  [part_enum.breast]: '乳穴中',
   [part_enum.clitoris]: '阴核上',
   [part_enum.foot]: '足穴中',
   [part_enum.hand]: '手中',

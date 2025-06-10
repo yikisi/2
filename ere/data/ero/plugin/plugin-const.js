@@ -75,6 +75,7 @@ plugins[40401] = require('#/data/ero/plugin/plugin-40401');
 plugins[40402] = require('#/data/ero/plugin/plugin-40402');
 plugins[40403] = require('#/data/ero/plugin/plugin-40403');
 plugins[40404] = require('#/data/ero/plugin/plugin-40404');
+plugins[40405] = require('#/data/ero/plugin/plugin-40405');
 plugins[50111] = require('#/data/ero/plugin/plugin-50111');
 plugins[50112] = require('#/data/ero/plugin/plugin-50112');
 plugins[50113] = require('#/data/ero/plugin/plugin-50113');
@@ -248,6 +249,8 @@ module.exports = {
     tran_s: 40403,
     // 狂喜感知: 将所有负面情感因子转换为受虐快感
     sls: 40404,
+    // 欢愉风暴: 受到的所有快感平均分散给所有感官
+    avg: 40405,
     // 高潮操纵Ⅰ: 每隔一回合允许高潮一回合
     org_c1: 50111,
     // 高潮操纵Ⅱ: 每隔两回合允许高潮一回合
