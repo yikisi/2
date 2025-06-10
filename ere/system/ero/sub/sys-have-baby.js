@@ -348,6 +348,14 @@ async function sys_have_baby(mother_id) {
   era.set(`cflag:${child_id}:出生日期`, birth_day);
   era.set(`cflag:${child_id}:育成回合计时`, 'x');
   era.set(`cflag:${child_id}:可再次育成`, 0);
+  era.set(`abl:${child_id}:粤语`, 0);
+  era.set(`abl:${child_id}:英语`, 0);
+  era.set(`abl:${child_id}:法语`, 0);
+  const random_language = get_random_value(5, 7);
+  era.set(
+    `abl:${child_id}:${random_language}`,
+    era.get(`abl:${mother_id}:${random_language}`),
+  );
   era.set(`jewel:${child_id}:粉`, 0);
   era.set(`jewel:${child_id}:蓝`, 0);
   era.set(`jewel:${child_id}:白`, 0);
