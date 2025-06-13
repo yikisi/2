@@ -58,13 +58,15 @@ async function next_turn(shown) {
   era.add('tflag:回合', 1);
   const chara_list_in_train = get_characters_in_train();
   for (const chara_id of chara_list_in_train) {
-    era.get(`tcvar:${chara_id}:刚刚受虐`) &&
+    if (era.get(`tcvar:${chara_id}:刚刚受虐`) > 0) {
       era.set(
         `tcvar:${chara_id}:刚刚受虐`,
         Math.max(0, era.get(`tcvar:${chara_id}:刚刚受虐`) - 100),
       );
-    era.get(`tcvar:${chara_id}:刚刚施虐`) &&
+    }
+    if (era.get(`tcvar:${chara_id}:刚刚施虐`) > 0) {
       era.add(`tcvar:${chara_id}:刚刚施虐`, -1);
+    }
     era.set(`tcvar:${chara_id}:刚刚高潮`, false);
     if (era.get(`ex:${chara_id}:阴道撕裂`)) {
       set_stain(chara_id, part_enum.virgin, stain_enum.wound);
@@ -164,7 +166,7 @@ async function next_turn(shown) {
 /**
  * @param {number} command
  * @param {boolean[]} filters
- * @param {boolean} [shown=true]
+ * @param {boolean} shown
  * @returns {Promise<boolean>}
  */
 async function sys_handle_ero_act(command, filters, shown = true) {

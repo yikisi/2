@@ -1,7 +1,10 @@
 const era = require('#/era-electron');
 
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
-const { clean_part } = require('#/system/ero/sys-calc-ero-part');
+const {
+  clean_all_parts_without_item,
+  clean_part,
+} = require('#/system/ero/sys-calc-ero-part');
 const { get_action_base_check } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { count_part_stain_in_range } = require('#/system/ero/sys-calc-stain');
@@ -346,6 +349,7 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.virgin_foot_job] = (attacker, defender) => {
+    clean_all_parts_without_item(attacker);
     sys_do_sex(
       new EroParticipant(attacker, part_enum.foot),
       new EroParticipant(defender, part_enum.clitoris),
@@ -380,6 +384,7 @@ module.exports = (handlers) => {
     _,
     extra_flag,
   ) => {
+    clean_all_parts_without_item(defender);
     sys_do_sex(
       new EroParticipant(defender, part_enum.foot),
       new EroParticipant(attacker, part_enum.clitoris),

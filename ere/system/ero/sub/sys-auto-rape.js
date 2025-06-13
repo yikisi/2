@@ -33,6 +33,7 @@ const {
  * @param {number[]} act_list
  * @param {number} last_action
  * @param {function(number):boolean} filters
+ * @returns {number}
  */
 function get_random_act(master, act_list, last_action, ...filters) {
   const change_action =
@@ -579,7 +580,9 @@ async function sys_auto_rape(shown) {
   }
   era.set('tflag:前回行动', action);
   era.set('tflag:前回助手', cur_supporter);
-  shown && era.println();
+  if (shown) {
+    era.println();
+  }
 }
 
 module.exports = sys_auto_rape;

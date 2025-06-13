@@ -86,7 +86,6 @@ module.exports = {
     return ret;
   },
   switch_image() {
-    const image_type = era.get('flag:立绘类型');
-    era.set('flag:立绘类型', (image_type + 1) % 3);
+    era.set('flag:立绘类型', (era.get('flag:立绘类型') + 1) % 3);
   },
 };

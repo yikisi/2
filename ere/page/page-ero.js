@@ -85,14 +85,14 @@ function get_chr(img_name) {
 }
 
 /**
- * @param chara_id
- * @returns {{color:string,content:string,display:'inline-block'}[]}
+ * @param cid
+ * @returns {PrintedSpan[]}
  */
-function get_ero_marks(chara_id) {
+function get_ero_marks(cid) {
   const status_list = [];
   new Array(6).fill(0).forEach((_, i) => {
     const mark_name = era.get(`markname:${i}`);
-    const mark = era.get(`mark:${chara_id}:${i}`);
+    const mark = era.get(`mark:${cid}:${i}`);
     if (mark) {
       status_list.push({
         color: get_color(undefined, mark_colors[mark_name], mark / 3),
@@ -100,7 +100,7 @@ function get_ero_marks(chara_id) {
       });
     }
   });
-  if (era.get(`talent:${chara_id}:钢之意志`)) {
+  if (era.get(`talent:${cid}:钢之意志`) > 0) {
     status_list.push({ color: mark_colors['钢'], content: '[钢]' });
   }
   return status_list.map((e) => {
@@ -110,21 +110,21 @@ function get_ero_marks(chara_id) {
 }
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} recent_s
  * @param {number} recent_m
  * @param {number} m_abused
  * @param {number} m_hit
  * @returns {boolean}
  */
-function check_excited(chara_id, recent_s, recent_m, m_abused, m_hit) {
+function check_excited(cid, recent_s, recent_m, m_abused, m_hit) {
   return (
-    era.get(`tcvar:${chara_id}:发情`) ||
-    era.get(`tcvar:${chara_id}:接近高潮`) ||
-    era.get(`tcvar:${chara_id}:余韵`) ||
-    era.get(`mark:${chara_id}:欢愉`) ||
-    era.get(`mark:${chara_id}:淫纹`) ||
-    era.get(`base:${chara_id}:性欲`) >= lust_border.itch ||
+    era.get(`tcvar:${cid}:发情`) ||
+    era.get(`tcvar:${cid}:接近高潮`) ||
+    era.get(`tcvar:${cid}:余韵`) ||
+    era.get(`mark:${cid}:欢愉`) ||
+    era.get(`mark:${cid}:淫纹`) ||
+    era.get(`base:${cid}:性欲`) >= lust_border.itch ||
     recent_s ||
     (recent_m === part_enum.abuse && m_abused) ||
     (recent_m === part_enum.hit && m_hit)
@@ -132,125 +132,118 @@ function check_excited(chara_id, recent_s, recent_m, m_abused, m_hit) {
 }
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @returns {({filter:string,names:string}|string)[]}
  */
-function get_image(chara_id) {
-  const img_list = [],
-    recent_s =
-      era.get(`tcvar:${chara_id}:刚刚施虐`) &&
-      (era.get(`talent:${chara_id}:抖S`) ||
-        era.get(`talent:${chara_id}:小恶魔`)),
-    recent_m = era.get(`tcvar:${chara_id}:刚刚受虐`),
-    m_abused =
-      era.get(`talent:${chara_id}:喜欢责骂`) ||
-      era.get(`talent:${chara_id}:变态`),
-    m_hit =
-      era.get(`talent:${chara_id}:喜欢痛苦`) ||
-      era.get(`talent:${chara_id}:变态`);
+function get_image(cid) {
+  const img_list = [];
+  const recent_s =
+    era.get(`tcvar:${cid}:刚刚施虐`) &&
+    (era.get(`talent:${cid}:抖S`) || era.get(`talent:${cid}:小恶魔`));
+  const recent_m = era.get(`tcvar:${cid}:刚刚受虐`);
+  const m_abused =
+    era.get(`talent:${cid}:喜欢责骂`) || era.get(`talent:${cid}:变态`);
+  const m_hit =
+    era.get(`talent:${cid}:喜欢痛苦`) || era.get(`talent:${cid}:变态`);
   img_list.push({
     borderRadius: 20,
     names: `位置_${location_name[era.get('flag:当前位置')]}`,
   });
-  if (check_chara_ero_image(chara_id)) {
-    const img_name = era.get(`cstr:${chara_id}:头像`);
-    if (era.get(`tcvar:${chara_id}:刚刚高潮`)) {
+  if (check_chara_ero_image(cid)) {
+    const img_name = era.get(`cstr:${cid}:头像`);
+    if (era.get(`tcvar:${cid}:刚刚高潮`)) {
       img_list.push(`${img_name}_裸_V\t${img_name}_裸`);
     } else {
       img_list.push(`${img_name}_裸`);
     }
-    if (era.get(`cflag:${chara_id}:腋毛`) >= 2) {
+    if (era.get(`cflag:${cid}:腋毛`) >= 2) {
       img_list.push(`${img_name}_裸_腋毛`);
     }
-    if (era.get(`cflag:${chara_id}:妊娠阶段`) >> pregnant_stage_enum.late > 0) {
+    if (era.get(`cflag:${cid}:妊娠阶段`) >> pregnant_stage_enum.late > 0) {
       img_list.push(`${img_name}_裸_孕`);
     }
-    if (era.get(`cflag:${chara_id}:阴毛`) >= 2) {
+    if (era.get(`cflag:${cid}:阴毛`) >= 2) {
       img_list.push(`${img_name}_裸_阴毛`);
     }
     if (
-      era.get(`ex:${chara_id}:寸止`) ||
-      era.get(`tcvar:${chara_id}:接近高潮`) ||
-      era.get(`tcvar:${chara_id}:余韵`)
+      era.get(`ex:${cid}:寸止`) ||
+      era.get(`tcvar:${cid}:接近高潮`) ||
+      era.get(`tcvar:${cid}:余韵`)
     ) {
       img_list.push(`${img_name}_裸_汗`);
     }
     img_list.push(`${img_name}_头`);
-    if (check_excited(chara_id, recent_s, recent_m, m_abused, m_hit)) {
+    if (check_excited(cid, recent_s, recent_m, m_abused, m_hit)) {
       img_list.push(`${img_name}_头_腮红`);
     }
-    if (
-      era.get(`ex:${chara_id}:寸止`) ||
-      era.get(`tcvar:${chara_id}:接近高潮`)
-    ) {
+    if (era.get(`ex:${cid}:寸止`) || era.get(`tcvar:${cid}:接近高潮`)) {
       img_list.push(`${img_name}_头_汗`);
     }
-    if (!sys_check_awake(chara_id) || era.get(`tcvar:${chara_id}:脱力`)) {
+    if (!sys_check_awake(cid) || era.get(`tcvar:${cid}:脱力`)) {
       img_list.push(`${img_name}_脸_睡`);
     } else if (
-      era.get(`tcvar:${chara_id}:刚刚高潮`) ||
-      era.get(`tcvar:${chara_id}:失神`)
+      era.get(`tcvar:${cid}:刚刚高潮`) ||
+      era.get(`tcvar:${cid}:失神`)
     ) {
       img_list.push(`${img_name}_脸_高潮`);
     } else if (
-      era.get(`mark:${chara_id}:反抗`) ||
+      era.get(`mark:${cid}:反抗`) ||
       (recent_m === part_enum.abuse && !m_abused) ||
       era.get('tflag:强奸') === 0
     ) {
       img_list.push(`${img_name}_脸_嫌恶`);
     } else if (
-      era.get(`mark:${chara_id}:苦痛`) ||
-      (recent_m === part_enum.hit &&
-        !m_hit &&
-        !era.get(`talent:${chara_id}:圣母`))
+      era.get(`mark:${cid}:苦痛`) ||
+      (recent_m === part_enum.hit && !m_hit && !era.get(`talent:${cid}:圣母`))
     ) {
       img_list.push(`${img_name}_脸_痛苦`);
     } else if (
-      (recent_m && !era.get(`talent:${chara_id}:圣母`)) ||
-      era.get('tflag:强奸') === chara_id ||
-      (recent_s && era.get(`talent:${chara_id}:抖S`))
+      (recent_m && !era.get(`talent:${cid}:圣母`)) ||
+      era.get('tflag:强奸') === cid ||
+      (recent_s && era.get(`talent:${cid}:抖S`))
     ) {
       img_list.push(`${img_name}_脸_兴奋`);
-    } else if (era.get(`mark:${chara_id}:羞耻`) || recent_s) {
+    } else if (era.get(`mark:${cid}:羞耻`) || recent_s) {
       img_list.push(`${img_name}_脸_害羞`);
     } else {
       img_list.push(`${img_name}_脸_一般`);
     }
     img_list.push(`${img_name}_头_发`);
     if (
-      era.get(`tcvar:${chara_id}:刚刚高潮`) ||
-      era.get(`mark:${chara_id}:苦痛`) >= 2 ||
+      era.get(`tcvar:${cid}:刚刚高潮`) ||
+      era.get(`mark:${cid}:苦痛`) >= 2 ||
       (recent_m === part_enum.abuse && !m_abused) ||
       recent_m === part_enum.hit ||
-      era.get(`ex:${chara_id}:破处`)
+      era.get(`ex:${cid}:破处`)
     ) {
       img_list.push(`${img_name}_头_泪`);
     }
-    if (era.get(`ex:${chara_id}:TotalEX`)) {
+    if (era.get(`ex:${cid}:TotalEX`)) {
       img_list.push(`${img_name}_裸_雾气`);
     }
   } else {
-    let body_hair_css_filter = era.get(`cflag:${chara_id}:种族`)
-        ? hair_colors[era.get(`cstr:${chara_id}:毛色`)] ||
-          hair_colors[era.get(`cstr:${chara_id}:发色`)] ||
+    let body_hair_css_filter =
+      era.get(`cflag:${cid}:种族`) > 0
+        ? hair_colors[era.get(`cstr:${cid}:毛色`)] ||
+          hair_colors[era.get(`cstr:${cid}:发色`)] ||
           ''
-        : '黑',
-      hair_css_filter = hair_colors[era.get(`cstr:${chara_id}:发色`)] || '',
-      temp;
+        : '黑';
+    let hair_css_filter = hair_colors[era.get(`cstr:${cid}:发色`)] || '';
+    let temp;
     if (body_hair_css_filter) {
       body_hair_css_filter = `hue-rotate(${body_hair_css_filter[0]}deg) saturate(${body_hair_css_filter[1]}%) brightness(${body_hair_css_filter[2]}%)`;
     }
     if (hair_css_filter) {
       hair_css_filter = `hue-rotate(${hair_css_filter[0]}deg) saturate(${hair_css_filter[1]}%) brightness(${hair_css_filter[2]}%)`;
     }
-    if (era.get(`cflag:${chara_id}:种族`)) {
+    if (era.get(`cflag:${cid}:种族`) > 0) {
       img_list.push({
         filter: body_hair_css_filter,
         names: '通用_裸_马尾',
       });
     }
     era
-      .get(`cstr:${chara_id}:后发`)
+      .get(`cstr:${cid}:后发`)
       .split('+')
       .forEach((e) =>
         img_list.push({
@@ -259,93 +252,91 @@ function get_image(chara_id) {
         }),
       );
     img_list.push('通用_裸');
-    if (era.get(`cflag:${chara_id}:腋毛`) >= 2) {
+    if (era.get(`cflag:${cid}:腋毛`) >= 2) {
       img_list.push({
         filter: body_hair_css_filter,
         names: '通用_裸_腋毛',
       });
     }
     let added = '';
-    if (era.get(`talent:${chara_id}:乳房尺寸`) >= 1) {
+    if (era.get(`talent:${cid}:乳房尺寸`) >= 1) {
       added += '巨';
     }
-    if (era.get(`cflag:${chara_id}:妊娠阶段`) >> pregnant_stage_enum.late > 0) {
+    if (era.get(`cflag:${cid}:妊娠阶段`) >> pregnant_stage_enum.late > 0) {
       added += '孕';
     }
     if (added) {
       img_list.push(`通用_裸_${added}`);
     }
-    if (era.get(`cflag:${chara_id}:阴毛`) >= 2) {
+    if (era.get(`cflag:${cid}:阴毛`) >= 2) {
       img_list.push({
         filter: body_hair_css_filter,
         names: '通用_裸_阴毛',
       });
     }
     if (
-      era.get(`ex:${chara_id}:寸止`) ||
-      era.get(`tcvar:${chara_id}:接近高潮`) ||
-      era.get(`tcvar:${chara_id}:余韵`)
+      era.get(`ex:${cid}:寸止`) ||
+      era.get(`tcvar:${cid}:接近高潮`) ||
+      era.get(`tcvar:${cid}:余韵`)
     ) {
       img_list.push(`通用_裸_汗`);
     }
-    if ((temp = era.get(`cstr:${chara_id}:中发`))) {
+    if ((temp = era.get(`cstr:${cid}:中发`))) {
       img_list.push({
         filter: hair_css_filter,
         names: `通用_中发_${temp}\t通用_后发_${temp}\t通用_后发_双马尾`,
       });
     }
     img_list.push('通用_头');
-    if (check_excited(chara_id, recent_s, recent_m, m_abused, m_hit)) {
+    if (check_excited(cid, recent_s, recent_m, m_abused, m_hit)) {
       img_list.push('通用_头_腮红');
     }
     if (
-      era.get(`mark:${chara_id}:反抗`) ||
+      era.get(`mark:${cid}:反抗`) ||
       era.get('tflag:强奸') >= 0 ||
-      era.get(`mark:${chara_id}:苦痛`) ||
+      era.get(`mark:${cid}:苦痛`) ||
       recent_m ||
-      (recent_s && era.get(`talent:${chara_id}:抖S`))
+      (recent_s && era.get(`talent:${cid}:抖S`))
     ) {
       img_list.push('通用_头_阴影');
     }
     if (
-      era.get(`ex:${chara_id}:寸止`) ||
-      era.get(`tcvar:${chara_id}:接近高潮`) ||
-      era.get(`ex:${chara_id}:破处`)
+      era.get(`ex:${cid}:寸止`) ||
+      era.get(`tcvar:${cid}:接近高潮`) ||
+      era.get(`ex:${cid}:破处`)
     ) {
       img_list.push('通用_头_汗');
     }
-    if (!sys_check_awake(chara_id) || era.get(`tcvar:${chara_id}:脱力`)) {
+    if (!sys_check_awake(cid) || era.get(`tcvar:${cid}:脱力`)) {
       img_list.push('通用_脸_微笑');
     } else if (
-      era.get(`tcvar:${chara_id}:刚刚高潮`) ||
-      era.get(`tcvar:${chara_id}:失神`)
+      era.get(`tcvar:${cid}:刚刚高潮`) ||
+      era.get(`tcvar:${cid}:失神`)
     ) {
       img_list.push('通用_脸_高潮');
     } else if (
-      era.get(`mark:${chara_id}:反抗`) ||
+      era.get(`mark:${cid}:反抗`) ||
       (recent_m === part_enum.abuse && !m_abused) ||
       era.get('tflag:强奸') === 0 ||
-      era.get(`mark:${chara_id}:苦痛`) ||
-      (recent_m === part_enum.hit &&
-        !m_hit &&
-        !era.get(`talent:${chara_id}:圣母`))
+      era.get(`mark:${cid}:苦痛`) ||
+      (recent_m === part_enum.hit && !m_hit && !era.get(`talent:${cid}:圣母`))
     ) {
       img_list.push('通用_脸_咬牙');
     } else if (
       recent_m ||
-      era.get('tflag:强奸') === chara_id ||
-      (recent_s && era.get(`talent:${chara_id}:抖S`))
+      era.get('tflag:强奸') === cid ||
+      (recent_s && era.get(`talent:${cid}:抖S`))
     ) {
       img_list.push('通用_脸_舔嘴');
     } else {
       img_list.push('通用_脸_微笑');
     }
-    const suffix = era.get(`cflag:${chara_id}:种族`) ? '_马' : '';
+    const suffix = era.get(`cflag:${cid}:种族`) > 0 ? '_马' : '';
     img_list.push({
       filter: hair_css_filter,
-      names: `通用_前发_${era.get(`cstr:${chara_id}:前发`)}${suffix}\t通用_前发_厚刘海${suffix}`,
+      names: `通用_前发_${era.get(`cstr:${cid}:前发`)}${suffix}\t通用_前发_厚刘海${suffix}`,
     });
-    if ((temp = era.get(`cstr:${chara_id}:呆毛`))) {
+    if ((temp = era.get(`cstr:${cid}:呆毛`))) {
       img_list.push({
         filter: hair_css_filter,
         names: `通用_呆毛_${temp}\t通用_呆毛_短`,
@@ -355,13 +346,19 @@ function get_image(chara_id) {
   return img_list;
 }
 
-function get_palam_progress(chara_id, part, offset) {
+/**
+ * @param {number} cid
+ * @param {number} part
+ * @param {number} offset
+ * @returns {[TextObject,ProgressObject]}
+ */
+function get_palam_progress(cid, part, offset = 0) {
   const part_name = part_names[part];
-  const param = Math.floor(era.get(`param:${chara_id}:${part_name}快感`));
-  const limit = era.get(`tcvar:${chara_id}:${part_name}快感上限`);
+  const param = Math.floor(era.get(`param:${cid}:${part_name}快感`));
+  const limit = era.get(`tcvar:${cid}:${part_name}快感上限`);
   return [
     {
-      config: { offset: offset || 0, width: 1 },
+      config: { offset, width: 1 },
       content: part_abbr[part_name],
       type: 'text',
     },
@@ -372,29 +369,31 @@ function get_palam_progress(chara_id, part, offset) {
         width: 3,
       },
       inContent: `${param}/${limit}`,
+      outContent: '',
       percentage: (param * 100) / limit,
       type: 'progress',
     },
   ];
 }
 
-function get_chara_info(chara_id) {
+/** @returns {ColumnObject[]} */
+function get_chara_info(cid) {
   /** @type {*[]} */
   const ret = [
     {
       config: { width: 4 },
-      content: [get_chara_talk(chara_id).get_colored_name()],
+      content: [get_chara_talk(cid).get_colored_name()],
       type: 'text',
     },
     {
       config: { width: 20 },
-      content: get_ero_status(chara_id),
+      content: get_ero_status(cid),
       type: 'text',
     },
   ];
   ['体力', '精力'].forEach((e) => {
-    const val = era.get(`base:${chara_id}:${e}`),
-      limit = era.get(`maxbase:${chara_id}:${e}`);
+    const val = era.get(`base:${cid}:${e}`),
+      limit = era.get(`maxbase:${cid}:${e}`);
     ret.push(
       { config: { width: 1 }, content: e.substring(0, 1), type: 'text' },
       {
@@ -405,13 +404,13 @@ function get_chara_info(chara_id) {
       },
     );
   });
-  const penis_size = get_penis_size(chara_id),
-    virgin_size = era.get(`cflag:${chara_id}:阴道尺寸`);
+  const penis_size = get_penis_size(cid);
+  const virgin_size = era.get(`cflag:${cid}:阴道尺寸`);
   const palam_list = [part_enum.mouth, part_enum.breast, part_enum.body];
-  if (penis_size) {
+  if (penis_size > 0) {
     palam_list.push(part_enum.penis);
   }
-  if (virgin_size) {
+  if (virgin_size > 0) {
     if (!penis_size) {
       palam_list.push(part_enum.clitoris);
     }
@@ -420,10 +419,10 @@ function get_chara_info(chara_id) {
   palam_list.push(part_enum.anal, part_enum.sadism, part_enum.masochism);
   palam_list
     .splice(0, 4)
-    .forEach((e) => ret.push(...get_palam_progress(chara_id, e)));
+    .forEach((e) => ret.push(...get_palam_progress(cid, e)));
   if (
-    (sys_check_hide_relation_and_love(chara_id) & 0b1) > 0 ||
-    sys_check_limit_relation_and_love(chara_id)
+    (sys_check_hide_relation_and_love(cid) & 0b1) > 0 ||
+    sys_check_limit_relation_and_love(cid)
   ) {
     const random_lust = get_random_value(0, lust_border.max) / lust_border.max;
     ret.push(
@@ -444,8 +443,8 @@ function get_chara_info(chara_id) {
       },
     );
   } else {
-    const lust = era.get(`base:${chara_id}:性欲`);
-    const lust_percentage = Math.min(lust / lust_border.max, 1);
+    const lust = era.get(`base:${cid}:性欲`);
+    const l_percent = Math.min(lust / lust_border.max, 1);
     ret.push(
       {
         config: { width: 1 },
@@ -454,21 +453,21 @@ function get_chara_info(chara_id) {
       },
       {
         config: {
-          color: get_color(...palam_colors.progress, lust_percentage),
+          color: get_color(...palam_colors.progress, l_percent),
           height: 22,
           width: 3,
         },
         inContent:
           lust === lust_border.limit
             ? '！'
-            : `${(lust_percentage * 100).toFixed(2)}%`,
-        percentage: lust_percentage * 100,
+            : `${(l_percent * 100).toFixed(2)}%`,
+        percentage: l_percent * 100,
         type: 'progress',
       },
     );
   }
-  ret.push(...get_palam_progress(chara_id, palam_list.shift(), 4));
-  palam_list.forEach((e) => ret.push(...get_palam_progress(chara_id, e)));
+  ret.push(...get_palam_progress(cid, palam_list.shift(), 4));
+  palam_list.forEach((e) => ret.push(...get_palam_progress(cid, e)));
   ret.push({
     config: { width: 9 * (10 - palam_list) },
     content: '',
@@ -877,21 +876,17 @@ async function page_ero(lover, skip_start_end = false) {
   era.println();
   let wait_flag = false;
   const partner_list = get_characters_in_train().filter((e) => e > 0);
-  for (const chara_id of partner_list) {
-    if (sys_check_awake(chara_id)) {
+  for (const cid of partner_list) {
+    if (sys_check_awake(cid)) {
       let temp;
-      if (!check_satisfied(chara_id)) {
-        sys_change_lust(chara_id, lust_from_palam / 2);
+      if (!check_satisfied(cid)) {
+        sys_change_lust(cid, lust_from_palam / 2);
         wait_flag =
-          sys_like_chara(chara_id, 0, -get_random_value(50, 100)) || wait_flag;
-      } else if ((temp = era.get(`talent:${chara_id}:病娇`)) > 0) {
+          sys_like_chara(cid, 0, -get_random_value(50, 100)) || wait_flag;
+      } else if ((temp = era.get(`talent:${cid}:病娇`)) > 0) {
         wait_flag =
-          sys_like_chara(
-            chara_id,
-            0,
-            get_random_value(25, 50) * temp,
-            temp === 2,
-          ) || wait_flag;
+          sys_like_chara(cid, 0, get_random_value(25, 50) * temp, temp === 2) ||
+          wait_flag;
       }
     }
   }
@@ -921,7 +916,9 @@ async function page_ero(lover, skip_start_end = false) {
   const size = 200 + 300 * !era.get('item:乳汁处理装置');
   wait_flag = print_milking('人奶', size) || wait_flag;
   wait_flag = print_milking('马奶', size) || wait_flag;
-  wait_flag && (await era.waitAnyKey());
+  if (wait_flag) {
+    await era.waitAnyKey();
+  }
 }
 
 module.exports = page_ero;
