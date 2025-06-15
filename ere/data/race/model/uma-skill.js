@@ -97,6 +97,7 @@ const ability_type_enum = {
   // ActivateRandomNormalAndRareSkill: 36,
   ActivateRandomRareSkill: 37,
   Connect: 41,
+  Genesis: 42,
   // 育成继承活动使用
   // ChallengeMatchBonusXXX: 50,
   // 可以用性玩具
