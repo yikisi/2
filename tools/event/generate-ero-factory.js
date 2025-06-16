@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const scripts = readdirSync('../../ere/event/ero')
+const scripts = readdirSync(join(__dirname, '../../ere/event/ero'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
@@ -189,7 +190,7 @@ update_marks.init(ero_factory.get_custom_ero);
 module.exports = ero_factory;
 `;
 
-writeFileSync('../../ere/event/ero/ero-factory.js', output);
+writeFileSync(join(__dirname, '../../ere/event/ero/ero-factory.js'), output);
 
 console.log(
   `[generate-ero-factory.js] registers ${scripts.length} ero scripts`,

@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const base_scripts = readdirSync('../../ere/event/daily')
+const base_scripts = readdirSync(join(__dirname, '../../ere/event/daily'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
@@ -100,7 +101,10 @@ daily_factory.run_custom_daily =
 module.exports = daily_factory;
 `;
 
-writeFileSync('../../ere/event/daily/daily-factory.js', output);
+writeFileSync(
+  join(__dirname, '../../ere/event/daily/daily-factory.js'),
+  output,
+);
 
 console.log(
   `[generate-daily-factory.js] registers ${base_scripts.length} daily scripts`,
