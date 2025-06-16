@@ -6,8 +6,8 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const { pet_leg, pet_tail } = require('#/event/ero/common-lines/ero-snippets');
 const EroMakingOuts = require('#/event/ero/common-lines/interface/ero-making-outs');
+const { pet_leg, pet_tail } = require('#/event/ero/common-lines/snippets');
 const {
   after_refusing_by_defender,
   ask_action,
