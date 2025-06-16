@@ -345,11 +345,16 @@ function init_ero(...ids) {
   reset_parts(...ids);
   sys_calc_ero_items.init_items(...ids);
   for (const cid of ids) {
+    const height = era.get(`cflag:${cid}:身高`);
     era.set(
       `tcvar:${cid}:体重`,
-      20 * (era.get(`cflag:${cid}:身高`) / 100) ** 2 +
-        (era.get(`base:${cid}:体重偏差`) * 10) / 2000,
+      20 * (height / 100) ** 2 + (era.get(`base:${cid}:体重偏差`) * 10) / 2000,
     );
+    era.set(`tcvar:${cid}:嘴唇位置`, height * 0.12);
+    era.set(`tcvar:${cid}:肩膀位置`, height * 0.2);
+    era.set(`tcvar:${cid}:乳房位置`, height * 0.28);
+    era.set(`tcvar:${cid}:会阴位置`, height * 0.5);
+    era.set(`tcvar:${cid}:臂长`, height * 0.4);
     era.set(`tcvar:${cid}:性欲缓存`, era.get(`base:${cid}:性欲`));
     era.set(`tcvar:${cid}:压力缓存`, era.get(`base:${cid}:压力`));
     let temp;

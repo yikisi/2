@@ -145,4 +145,20 @@ module.exports = {
     part_enum.sadism,
     part_enum.masochism,
   ],
+  motion_const: {
+    // 躺
+    lie: 0,
+    // 坐
+    sit: 1,
+    // 站
+    stand: 2,
+    // 反向躺
+    rev: 3,
+  },
+  towards_const: {
+    // 顺时针
+    right: 0,
+    // 逆时针
+    left: 1,
+  },
 };

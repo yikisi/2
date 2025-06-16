@@ -17,7 +17,11 @@ const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
-const { part_enum } = require('#/data/ero/part-const');
+const {
+  motion_const,
+  part_enum,
+  towards_const,
+} = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const { attr_enum } = require('#/data/train-const');
@@ -790,14 +794,14 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth),
       new EroParticipant(
         attacker,
-        get_penis_size(attacker) ? part_enum.penis : part_enum.clitoris,
+        get_penis_size(attacker) > 0 ? part_enum.penis : part_enum.clitoris,
       ),
     );
     sys_do_sex(
       new EroParticipant(attacker, part_enum.mouth),
       new EroParticipant(
         defender,
-        get_penis_size(defender) ? part_enum.penis : part_enum.clitoris,
+        get_penis_size(defender) > 0 ? part_enum.penis : part_enum.clitoris,
       ),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
@@ -806,6 +810,10 @@ module.exports = (handlers) => {
       '羞耻',
       base_emotion_juel * (1 - extra_flag.check / 10),
     );
+    era.set(`tcvar:${attacker}:体位`, motion_const.rev);
+    era.set(`tcvar:${defender}:体位`, motion_const.lie);
+    era.set(`tcvar:${attacker}:朝向`, towards_const.right);
+    era.set(`tcvar:${defender}:朝向`, towards_const.right);
   };
 
   handlers[ero_hooks.ask_hair_fuck] = (attacker, defender, _, extra_flag) => {
