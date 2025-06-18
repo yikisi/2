@@ -82,6 +82,8 @@ plugins[50113] = require('#/data/ero/plugin/plugin-50113');
 plugins[50211] = require('#/data/ero/plugin/plugin-50211');
 plugins[50212] = require('#/data/ero/plugin/plugin-50212');
 plugins[50213] = require('#/data/ero/plugin/plugin-50213');
+plugins[50221] = require('#/data/ero/plugin/plugin-50221');
+plugins[50222] = require('#/data/ero/plugin/plugin-50222');
 plugins[50311] = require('#/data/ero/plugin/plugin-50311');
 plugins[50312] = require('#/data/ero/plugin/plugin-50312');
 plugins[50313] = require('#/data/ero/plugin/plugin-50313');
@@ -263,6 +265,10 @@ module.exports = {
     no_tired: 50212,
     // 欢愉之骨: 不会疲惫、伤病或怀孕
     no_preg: 50213,
+    // 无暇思考: 不再有不应期
+    pe_up_0: 50221,
+    // 金枪不倒: 永远挺立
+    pe_up_1: 50222,
     // 多汁: 体液分泌+100%
     juicy: 50311,
     // 喷泉: 体液分泌+200%

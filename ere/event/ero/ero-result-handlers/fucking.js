@@ -7,6 +7,7 @@ const { add_palam } = require('#/system/ero/sys-calc-palam');
 const add_attr_exp = require('#/event/ero/snippets/add-attr-exp');
 const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
+const set_motion = require('#/event/ero/snippets/set-motion');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
@@ -43,8 +44,8 @@ function common_ask_cowgirl(attacker, defender, check) {
   add_meek_or_hate(defender, check, (c) => c / 10);
   add_juel(defender, '羞耻', base_emotion_juel);
   add_attr_exp(defender, attr_enum.strength, 1);
-  set(`tcvar:${attacker}:体位`, motion_const.rev);
-  set(`tcvar:${defender}:体位`, motion_const.sit);
+  set_motion(attacker, motion_const.rev, motion_const.sit);
+  set_motion(defender, motion_const.sit, motion_const.rev);
   set(`tcvar:${attacker}:朝向`, towards_const.left);
   set(`tcvar:${defender}:朝向`, towards_const.right);
 }
@@ -59,6 +60,8 @@ function common_cowgirl(attacker, defender, check) {
   add_juel(defender, '羞耻', base_emotion_juel);
   add_juel(attacker, '顺从', base_emotion_juel);
   add_attr_exp(defender, attr_enum.strength, 1);
+  set_motion(attacker, motion_const.sit, motion_const.lie);
+  set_motion(defender, motion_const.lie, motion_const.sit);
   set(`tcvar:${attacker}:体位`, motion_const.sit);
   set(`tcvar:${defender}:体位`, motion_const.lie);
   set(`tcvar:${attacker}:朝向`, towards_const.left);
@@ -77,7 +80,7 @@ module.exports = (handlers) => {
     );
     add_attr_exp(attacker, attr_enum.strength, 1);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    set(`tcvar:${attacker}:体位`, motion_const.sit);
+    set_motion(attacker, motion_const.sit, motion_const.lie);
     set(`tcvar:${defender}:体位`, motion_const.lie);
     set(`tcvar:${attacker}:朝向`, towards_const.left);
     set(`tcvar:${defender}:朝向`, towards_const.right);
@@ -100,7 +103,7 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(defender, '恐惧', base_emotion_juel / 4);
     add_juel(defender, '羞耻', base_emotion_juel / 4);
-    set(`tcvar:${attacker}:体位`, motion_const.sit);
+    set_motion(attacker, motion_const.sit, motion_const.lie);
     set(`tcvar:${defender}:体位`, motion_const.lie);
     set(`tcvar:${attacker}:朝向`, towards_const.left);
     set(`tcvar:${defender}:朝向`, towards_const.left);
@@ -398,7 +401,7 @@ module.exports = (handlers) => {
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_attr_exp(attacker, attr_enum.strength, 1);
-    set(`tcvar:${attacker}:体位`, motion_const.sit);
+    set_motion(attacker, motion_const.sit, motion_const.lie);
     set(`tcvar:${defender}:体位`, motion_const.lie);
     set(`tcvar:${attacker}:朝向`, towards_const.left);
     set(`tcvar:${defender}:朝向`, towards_const.right);

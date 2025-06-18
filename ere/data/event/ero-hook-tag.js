@@ -32,40 +32,40 @@ class EroHookTag {
   );
 
   /**
-   * @param {number} chara_id
-   * @param {number} other_id
+   * @param {number} cid
+   * @param {number} oid
    * @returns {boolean}
    */
-  static ask_blow_job_check(chara_id, other_id) {
-    const chara_touch = era.get(`tcvar:${chara_id}:阴茎接触部位`),
-      other_touch = era.get(`tcvar:${other_id}:口腔接触部位`);
+  static ask_blow_job_check(cid, oid) {
+    const chara_touch = era.get(`tcvar:${cid}:阴茎接触部位`),
+      other_touch = era.get(`tcvar:${oid}:口腔接触部位`);
     return (
-      era.get('tflag:主导权') === chara_id ||
+      era.get('tflag:主导权') === cid ||
       (chara_touch === -1 &&
         (other_touch === -1 || other_touch.item === item_enum.gag)) ||
-      (chara_touch.owner === other_id && chara_touch.part === part_enum.mouth)
+      (chara_touch.owner === oid && chara_touch.part === part_enum.mouth)
     );
   }
 
   /**
-   * @param {number} chara_id
-   * @param {number} other_id
+   * @param {number} cid
+   * @param {number} oid
    * @returns {boolean}
    */
-  static bite_nipple_check(chara_id, other_id) {
-    const touch = era.get(`tcvar:${chara_id}:胸部接触部位`);
-    return touch.owner === other_id && touch.part === part_enum.mouth;
+  static bite_nipple_check(cid, oid) {
+    const touch = era.get(`tcvar:${cid}:胸部接触部位`);
+    return touch.owner === oid && touch.part === part_enum.mouth;
   }
 
   /**
-   * @param {number} chara_id
-   * @param {number} other_id
+   * @param {number} cid
+   * @param {number} oid
    * @returns {boolean}
    */
-  static blow_job_check(chara_id, other_id) {
-    const touch = era.get(`tcvar:${chara_id}:口腔接触部位`);
+  static blow_job_check(cid, oid) {
+    const touch = era.get(`tcvar:${cid}:口腔接触部位`);
     return (
-      (touch.owner === other_id && touch.part === part_enum.penis) ||
+      (touch.owner === oid && touch.part === part_enum.penis) ||
       touch.item === item_enum.gag
     );
   }
@@ -270,13 +270,16 @@ class EroHookTag {
   /**
    * @param {(number|function(number,number):boolean)[]} attacker_tags
    * @param {(number|function(number,number):boolean)[]} defender_tags
-   * @param {number} [condition]
+   * @param {number} condition
    */
-  constructor(attacker_tags, defender_tags, condition) {
+  constructor(
+    attacker_tags,
+    defender_tags,
+    condition = EroHookTag.condition_type.active,
+  ) {
     this.attacker_tags = attacker_tags.filter((e, i, l) => l.indexOf(e) === i);
     this.defender_tags = defender_tags.filter((e, i, l) => l.indexOf(e) === i);
-    this.condition =
-      condition === undefined ? EroHookTag.condition_type.active : condition;
+    this.condition = condition;
   }
 }
 

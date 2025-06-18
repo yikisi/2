@@ -495,7 +495,6 @@ async function sys_have_baby(mother_id) {
         content: `${gene_juel_names[juel_index]}因子 × ${juel_num}`,
         color: gene_type_colors[juel_index],
       },
-      '。',
     ]);
   }
   new Array(3)

@@ -1,28 +1,29 @@
 const era = require('#/era-electron');
 
 const get_gradient_color = require('#/utils/gradient-color');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const { palam_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
 const { gene_juel_names } = require('#/data/other-const');
 
 /**
- * @param {number} chara_id
- * @param {string[]} juel_names
- * @param {Record<string,number>} jewel_info
- * @param {(PrintedSpan|string)[][]} attr_info
+ * @param {number} cid
+ * @param {string[]} j_names
+ * @param {Record<string,number>} j_info
+ * @param {(PrintedSpan|string)[][]} a_info
  */
-function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
+function get_jewel_result(cid, j_names, j_info, a_info) {
   const buffer = [];
   buffer.push({
     type: 'divider',
     config: {
-      content: `${era.get(`callname:${chara_id}:-2`)} 的因子`,
+      content: `${era.get(`callname:${cid}:-2`)} 的因子`,
       position: 'left',
     },
   });
-  const self_protect = jewel_info['-自卫'];
-  if (self_protect) {
+  const self_protect = j_info['-自卫'];
+  if (self_protect > 0) {
     buffer.push({
       content: [
         {
@@ -34,11 +35,11 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
       type: 'text',
     });
   }
-  juel_names.forEach((j_name) => {
-    const val = era.get(`juel:${chara_id}:${j_name}`),
-      got = jewel_info[j_name],
-      un_got = jewel_info[`-${j_name}`];
-    if (got || un_got) {
+  for (const j_name of j_names) {
+    const final = era.get(`juel:${cid}:${j_name}`);
+    const got = j_info[j_name];
+    const un_got = j_info[`-${j_name}`];
+    if (got > 0 || un_got > 0) {
       buffer.push(
         {
           config: { width: 4 },
@@ -47,7 +48,7 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
         },
         {
           config: { align: 'right', width: 5 },
-          content: `${(val - got).toLocaleString()} (具有) +`,
+          content: [get_abbr_number(final - got), ' (具有) +'],
           type: 'text',
         },
         {
@@ -55,7 +56,7 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
           content: [
             {
               color: palam_colors.notifications[1],
-              content: (got + un_got).toLocaleString(),
+              ...get_abbr_number(got + un_got),
             },
             ' (获得) -',
           ],
@@ -66,7 +67,7 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
           content: [
             {
               color: palam_colors.notifications[0],
-              content: un_got.toLocaleString(),
+              ...get_abbr_number(un_got),
             },
             ' (抵消) = ',
           ],
@@ -77,8 +78,8 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
           content: [
             {
               color: palam_colors.notifications[1],
-              content: val.toLocaleString(),
               fontWeight: 'bold',
+              ...get_abbr_number(final),
             },
             ' (总计)',
           ],
@@ -86,10 +87,10 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
         },
       );
     }
-  });
-  if (self_protect) {
-    const val = era.get(`juel:${chara_id}:自卫`),
-      got = jewel_info['自卫'];
+  }
+  if (self_protect > 0) {
+    const final = era.get(`juel:${cid}:自卫`),
+      got = j_info['自卫'];
     buffer.push(
       {
         config: { width: 4 },
@@ -98,7 +99,7 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
       },
       {
         config: { align: 'right', width: 5 },
-        content: `${(val - got + self_protect).toLocaleString()} (具有) +`,
+        content: [get_abbr_number(final - got + self_protect), ' (具有) +'],
         type: 'text',
       },
       {
@@ -106,7 +107,7 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
         content: [
           {
             color: palam_colors.notifications[1],
-            content: got.toLocaleString(),
+            ...get_abbr_number(got),
           },
           ' (获得) -',
         ],
@@ -117,7 +118,7 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
         content: [
           {
             color: palam_colors.notifications[0],
-            content: self_protect.toLocaleString(),
+            ...get_abbr_number(self_protect),
           },
           ' (抵消) = ',
         ],
@@ -128,8 +129,8 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
         content: [
           {
             color: palam_colors.notifications[1],
-            content: val.toLocaleString(),
             fontWeight: 'bold',
+            ...get_abbr_number(final),
           },
           ' (总计)',
         ],
@@ -137,20 +138,20 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
       },
     );
   }
-  if (!chara_id) {
-    gene_juel_names.forEach((j_name) => {
-      const val = era.get(`juel:${chara_id}:${j_name}`),
-        got = era.get(`gotjuel:${chara_id}:${j_name}`);
-      if (got) {
+  if (!cid) {
+    for (const g_name of gene_juel_names) {
+      const final = era.get(`juel:${cid}:${g_name}`);
+      const got = era.get(`gotjuel:${cid}:${g_name}`);
+      if (got > 0) {
         buffer.push(
           {
             config: { width: 4 },
-            content: `${j_name}因子：`,
+            content: `${g_name}因子：`,
             type: 'text',
           },
           {
             config: { align: 'right', width: 5 },
-            content: `${(val - got).toLocaleString()} (具有) + `,
+            content: [get_abbr_number(final - got), ' (具有) + '],
             type: 'text',
           },
           {
@@ -158,7 +159,7 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
             content: [
               {
                 color: palam_colors.notifications[1],
-                content: got.toLocaleString(),
+                ...get_abbr_number(got),
               },
               ' (获得) = ',
             ],
@@ -169,8 +170,8 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
             content: [
               {
                 color: palam_colors.notifications[1],
-                content: val.toLocaleString(),
                 fontWeight: 'bold',
+                ...get_abbr_number(final),
               },
               ' (总计)',
             ],
@@ -178,25 +179,25 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
           },
         );
       }
-    });
+    }
   }
   if (buffer.length === 1) {
     buffer.push({ content: '无变化', type: 'text' });
   }
   const buffer2 = [];
-  if (chara_id > 0) {
+  if (cid > 0) {
     buffer2.push({
       config: {
-        content: `${era.get(`callname:${chara_id}:-2`)} 的刻印`,
+        content: `${era.get(`callname:${cid}:-2`)} 的刻印`,
         position: 'left',
       },
       type: 'divider',
     });
     era.get('marknames').forEach((m_name) => {
-      const change = era.get(`ex:${chara_id}:${m_name}获取`),
-        now = era.get(`mark:${chara_id}:${m_name}`),
+      const change = era.get(`ex:${cid}:${m_name}获取`),
+        now = era.get(`mark:${cid}:${m_name}`),
         color = mark_colors[m_name];
-      if (change) {
+      if (change > 0) {
         buffer2.push({
           config: { width: 8 },
           content: [
@@ -221,7 +222,7 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
     }
   }
   const buffer3 = [];
-  attr_info.forEach((c) => {
+  a_info.forEach((c) => {
     if (c.length > 0) {
       buffer3.push({ config: { width: 8 }, content: c, type: 'text' });
     }
@@ -229,7 +230,7 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
   if (buffer3.length > 0) {
     buffer3.unshift({
       config: {
-        content: `${era.get(`callname:${chara_id}:-2`)} 的属性`,
+        content: `${era.get(`callname:${cid}:-2`)} 的属性`,
         position: 'left',
       },
       type: 'divider',
@@ -238,4 +239,4 @@ function get_juel_result(chara_id, juel_names, jewel_info, attr_info) {
   return buffer.concat(buffer2).concat(buffer3);
 }
 
-module.exports = get_juel_result;
+module.exports = get_jewel_result;

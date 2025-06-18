@@ -65,7 +65,7 @@ function print_jewel_change(cid, jewel_name, src, dst, shown) {
   if (shown && new_jewel !== jewel) {
     era.print([
       get_chara_talk(cid).get_colored_name(),
-      ` 获得了 ${jewel_name.substring(0, 2)}因子！${jewel.toLocaleString()} + `,
+      ` 获得了 ${jewel_name.substring(0, 2)}因子：${jewel.toLocaleString()} + `,
       {
         content: `${(new_jewel - jewel).toLocaleString()}`,
         color: palam_colors.notifications[1],

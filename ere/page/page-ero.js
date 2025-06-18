@@ -56,31 +56,27 @@ const { location_enum, location_name } = require('#/data/locations');
 const { check_chara_ero_image } = require('#/data/other-const');
 
 /**
- * @param {string} img_name
+ * @param {number} cid
  * @returns {string}
  */
-function get_chr(img_name) {
-  if (!img_name) {
-    return '';
+function get_chr(cid) {
+  if (!cid) {
+    return 'default';
   }
-  let ret;
+  const img = era.get(`cstr:${cid}:头像`);
+  const ret = [];
   switch (era.get('flag:当前位置')) {
     case location_enum.summer_home:
-      ret = [
-        `${img_name}_夏私`,
-        `${img_name}_泳`,
-        `${img_name}_私`,
-        `${img_name}`,
-        `${img_name}_夏`,
-      ];
+      ret.push(`${img}_夏私`, `${img}_泳`, `${img}_私`, `${img}`, `${img}_夏`);
       break;
     default:
-      ret = [
-        `${img_name}_私`,
-        `${img_name}`,
-        `${img_name}_${era.get('flag:季节') ? '夏' : '冬'}`,
-      ];
+      ret.push(
+        `${img}_私`,
+        `${img}`,
+        `${img}_${era.get('flag:季节') > 0 ? '夏' : '冬'}`,
+      );
   }
+  ret.push('\tdefault');
   return ret.join('\t');
 }
 
@@ -706,16 +702,17 @@ async function page_ero(lover, skip_start_end = false) {
     }
 
     const base_check =
-        rape === -1 &&
-        sys_check_awake(lover) &&
-        !era.get(`tcvar:${lover}:脱力`) &&
-        !era.get(`tcvar:${lover}:失神`) &&
-        !era.get(`status:${lover}:超马跳Z`) &&
-        era.get(`mark:${lover}:同心`) < 3 &&
-        era.get(`mark:${lover}:欢愉`) < 3,
-      current = new Date().getTime(),
-      filtered_ero_actions = sys_filter_ero_act(0, lover, filters),
-      { last_action, lover_action } = master
+      rape === -1 &&
+      sys_check_awake(lover) &&
+      !era.get(`tcvar:${lover}:脱力`) &&
+      !era.get(`tcvar:${lover}:失神`) &&
+      !era.get(`status:${lover}:超马跳Z`) &&
+      era.get(`mark:${lover}:同心`) < 3 &&
+      era.get(`mark:${lover}:欢愉`) < 3;
+    const current = new Date().getTime();
+    const filtered_ero_actions = sys_filter_ero_act(0, lover, filters);
+    const { last_action, lover_action } =
+      master > 0
         ? {
             last_action: era.get('tflag:对手行动'),
             lover_action: era.get('tflag:前回行动'),
@@ -724,7 +721,54 @@ async function page_ero(lover, skip_start_end = false) {
             last_action: era.get('tflag:前回行动'),
             lover_action: era.get('tflag:对手行动'),
           };
-    let all_action_disabled = true;
+    let all_action_disabled = lost_mind > 0;
+    const action_bar = [];
+    action_bar.push({
+      content:
+        last_action >= 0
+          ? [
+              get_chara_talk(0).get_colored_name(),
+              ' 的行动：',
+              ero_action_names[last_action],
+            ]
+          : [],
+      type: 'text',
+    });
+    if (filtered_ero_actions.indexOf(last_action) !== -1 && !master) {
+      action_bar.push({
+        accelerator: last_action,
+        config: {
+          disabled:
+            lost_mind > 0 ||
+            (base_check &&
+              check_ero_enabled(lover, curr_supporter, last_action) < 0),
+          disableWarning: true,
+        },
+        content: `再次 ${ero_action_names[last_action]}`,
+        type: 'button',
+      });
+    }
+    action_bar.push({
+      content:
+        lover_action >= 0
+          ? [
+              get_chara_talk(lover).get_colored_name(),
+              ' 的行动：',
+              ero_action_names[lover_action],
+            ]
+          : '',
+      type: 'text',
+    });
+    const setting_bar = [
+      '设置',
+      '身体接触',
+      '脏污检查',
+      '个人情报',
+      '目标情报',
+    ];
+    if (!master) {
+      setting_bar.unshift('转身');
+    }
     era.printInColRows(
       [{ type: 'divider' }],
       {
@@ -732,31 +776,30 @@ async function page_ero(lover, skip_start_end = false) {
         config: { width: 16, gutter: 10 },
       },
       {
-        columns: curr_supporter
-          ? [
-              {
-                config: { offset: 1, width: 18 },
-                names: get_image(lover),
-                type: 'image.whole',
-              },
-              {
-                config: { width: 5 },
-                names: `${get_chr(
-                  era.get(`cstr:${curr_supporter}:头像`),
-                )}\tdefault`,
-                type: 'image.whole',
-              },
-            ]
-          : [
-              {
-                config: {
-                  offset: 1,
-                  width: !master && characters_in_train.length > 2 ? 22 : 19,
+        columns:
+          curr_supporter > 0
+            ? [
+                {
+                  config: { offset: 1, width: 18 },
+                  names: get_image(lover),
+                  type: 'image.whole',
                 },
-                names: get_image(lover),
-                type: 'image.whole',
-              },
-            ],
+                {
+                  config: { width: 5 },
+                  names: get_chr(curr_supporter),
+                  type: 'image.whole',
+                },
+              ]
+            : [
+                {
+                  config: {
+                    offset: 1,
+                    width: !master && characters_in_train.length > 2 ? 22 : 19,
+                  },
+                  names: get_image(lover),
+                  type: 'image.whole',
+                },
+              ],
         config: { verticalAlign: 'bottom', width: 8 },
       },
       [{ type: 'divider' }],
@@ -765,9 +808,7 @@ async function page_ero(lover, skip_start_end = false) {
         if (isNaN(check_val)) {
           era.logger.error(`${ero_hooks.keys[e]} ${check_val}`);
         }
-        const action_disabled =
-          lost_mind > 0 ||
-          (base_check && check_ero_enabled(lover, curr_supporter, e) < 0);
+        const action_disabled = base_check && check_val < 0;
         all_action_disabled &&= action_disabled;
         return {
           accelerator: e,
@@ -780,56 +821,17 @@ async function page_ero(lover, skip_start_end = false) {
           type: 'button',
         };
       }),
-      [
-        {
-          config: { width: 8 },
-          content:
-            last_action >= 0
-              ? [
-                  get_chara_talk(0).get_colored_name(),
-                  ' 的行动：',
-                  ero_action_names[last_action],
-                ]
-              : '',
-          type: 'text',
-        },
-        filtered_ero_actions.indexOf(last_action) !== -1 && !master
-          ? {
-              accelerator: last_action,
-              config: {
-                disabled:
-                  lost_mind > 0 ||
-                  (base_check &&
-                    check_ero_enabled(lover, curr_supporter, last_action) < 0),
-                disableWarning: true,
-                width: 8,
-              },
-              content: `再次 ${ero_action_names[last_action]}`,
-              type: 'button',
-            }
-          : undefined,
-        {
-          config: { width: 8 },
-          content:
-            lover_action >= 0
-              ? [
-                  get_chara_talk(lover).get_colored_name(),
-                  ' 的行动：',
-                  ero_action_names[lover_action],
-                ]
-              : '',
-          type: 'text',
-        },
-      ].filter((e) => e),
-      [{ type: 'divider' }],
-      ['设置', '身体接触', '脏污检查', '个人情报', '目标情报'].map((e, i) => {
-        return {
-          accelerator: 900 + i,
-          config: { disabled: lost_mind > 0, width: 4 },
-          content: e,
-          type: 'button',
-        };
+      action_bar.map((e) => {
+        (e.config ||= {}).width = 8;
+        return e;
       }),
+      [{ type: 'divider' }],
+      setting_bar.map((e, i) => ({
+        accelerator: 900 + i + (master > 0),
+        config: { disabled: lost_mind > 0, width: 4 },
+        content: e,
+        type: 'button',
+      })),
       [
         {
           accelerator: 999,

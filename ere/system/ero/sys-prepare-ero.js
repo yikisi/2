@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const sys_count_juels = require('#/system/chara/sys-count-juels');
 const get_ex_result_in_the_end = require('#/system/ero/sub-begin-and-end/get-ex-result-in-the-end');
-const get_juel_result = require('#/system/ero/sub-begin-and-end/get-juel-result');
+const get_jewel_result = require('#/system/ero/sub-begin-and-end/get-jewel-result');
 const sys_calc_ero_items = require('#/system/ero/sys-calc-ero-item');
 const {
   clean_all_parts,
@@ -635,7 +635,7 @@ async function end_ero_and_show_result(shown = true) {
   if (shown) {
     if (era.get('flag:马跳结果显示简报') > 0) {
       for (const chara_id of chara_list) {
-        const buffer = get_juel_result(
+        const buffer = get_jewel_result(
           chara_id,
           jewel_names,
           info.jewel[chara_id],
@@ -675,7 +675,7 @@ async function end_ero_and_show_result(shown = true) {
         switch (page) {
           case 0:
             era.printMultiColumns(
-              get_juel_result(
+              get_jewel_result(
                 chara_list[chara_index],
                 jewel_names,
                 info.jewel[chara_list[chara_index]],

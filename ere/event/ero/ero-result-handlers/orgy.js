@@ -4,6 +4,8 @@ const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const { get_nipple_buff } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 
+const set_motion = require('#/event/ero/snippets/set-motion');
+
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const {
@@ -66,6 +68,8 @@ function set_double_lie(attacker, defender, supporter) {
  */
 function set_ask_double_fuck(attacker, defender, supporter) {
   era.set(`tcvar:${attacker}:体位`, motion_const.rev);
+  set_motion(defender, motion_const.sit, motion_const.rev);
+  set_motion(supporter, motion_const.sit, motion_const.rev);
   era.set(`tcvar:${defender}:体位`, motion_const.sit);
   era.set(`tcvar:${supporter}:体位`, motion_const.sit);
   set_ask_towards(attacker, defender, supporter);

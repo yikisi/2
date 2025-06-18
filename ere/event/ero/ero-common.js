@@ -782,26 +782,22 @@ class CustomizedEro {
    */
   // eslint-disable-next-line no-unused-vars
   async after_betrayed(chara, me, callname, hook, extra_flag) {
-    const race = era.get(`cflag:${this.id}:种族`),
-      like_betrayed = sys_check_cuckold(this.id);
+    const race = era.get(`cflag:${this.id}:种族`);
+    const cuckold = sys_check_cuckold(this.id);
     switch (era.get(`exp:${this.id}:被绿次数`) + 1) {
       case 1:
         era.drawLine();
         await era.printAndWait([
-          race ? chara.get_uma_sex_title() + '的鼻子十分灵敏，而 ' : '',
+          race > 0 ? chara.get_uma_sex_title() + '的鼻子十分灵敏，而 ' : '',
           me.get_colored_name(),
           ' 身上传来的淫臭味无时无刻不在向周遭宣布着自己刚才马儿跳过的事实。',
           { isBr: true },
-          race ? '嗅到气味的 ' : '察觉此事 ',
+          race > 0 ? '嗅到气味的 ' : '察觉此事 ',
           chara.get_colored_name(),
           ' 对 ',
           me.get_colored_name(),
           ' 的不忠产生了',
-          like_betrayed
-            ? '情欲'
-            : sys_get_chara(this.id) >= 0
-              ? '愤慨'
-              : '悲伤',
+          cuckold ? '情欲' : sys_get_chara(this.id) >= 0 ? '愤慨' : '悲伤',
           '的情绪……',
         ]);
         break;
@@ -815,21 +811,17 @@ class CustomizedEro {
           { isBr: true },
           '在一时性欲释放的背后，又有多少感情纠葛正在蔓延缠绕？',
           { isBr: true },
-          race ? '嗅到气味的 ' : '察觉此事 ',
+          race > 0 ? '嗅到气味的 ' : '察觉此事 ',
           chara.get_colored_name(),
           ' 对 ',
           me.get_colored_name(),
           ' 的不忠产生了',
-          like_betrayed
-            ? '情欲'
-            : sys_get_chara(this.id) >= 0
-              ? '愤慨'
-              : '悲伤',
+          cuckold ? '情欲' : sys_get_chara(this.id) >= 0 ? '愤慨' : '悲伤',
           '的情绪……',
         ]);
         break;
       default:
-        if (like_betrayed) {
+        if (cuckold) {
           await era.printAndWait([
             me.get_colored_name(),
             ' 的不忠让 ',

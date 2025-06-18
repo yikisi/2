@@ -32,11 +32,10 @@ class CharaAvailableGenes {
   /** @type {({content:string,color:string}|string)[]} */
   summary_cache;
 
-  constructor(chara_id) {
-    this.#id = chara_id;
+  constructor(cid) {
+    this.#id = cid;
     this.obj =
-      get(`skill:${chara_id}:可继承因子`) ||
-      set(`skill:${chara_id}:可继承因子`, {});
+      get(`skill:${cid}:可继承因子`) || set(`skill:${cid}:可继承因子`, {});
   }
 
   /**

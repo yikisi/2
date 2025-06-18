@@ -15,7 +15,11 @@ const {
   stimulate_glans_by_hole_2,
 } = require('#/event/ero/common-lines/snippets');
 
-const { part_enum } = require('#/data/ero/part-const');
+const {
+  motion_const,
+  part_enum,
+  towards_const,
+} = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /**
@@ -434,14 +438,18 @@ async function common_ask_fuck(attacker, defender, hook) {
       await after_refusing_by_attacker(attacker, defender, hook);
       return;
     }
+    const motion = era.get(`tcvar:${attacker}:体位`) === motion_const.rev;
+    const towards = era.get(`tcvar:${attacker}:朝向`) === towards_const.right;
     await attacker.print_and_wait('真是丢人……');
     await attacker.print_and_wait('为了乞求快感，居然能做出这种事……');
     await attacker.say_and_wait('哈……❤️');
-    await attacker.print_and_wait(
-      `投降似的把屁股高高抬起，用颤抖的手指把缩成一团的${
-        hook.hook === ero_hooks.ask_fuck ? '阴唇' : '屁穴'
-      }向外掰开，露出内里粉嫩的穴肉。`,
-    );
+    await attacker.print_and_wait([
+      '投降似的',
+      (motion ^ towards) > 0 ? '分开大腿' : '把屁股高高抬起',
+      '，用颤抖的手指把缩成一团的',
+      hook.hook === ero_hooks.ask_fuck ? '阴唇' : '屁穴',
+      '向外掰开，露出内里粉嫩的穴肉。',
+    ]);
     await attacker.say_and_wait('请，插进来……');
     await attacker.say_and_wait('把肉棒……插进来——');
   } else {

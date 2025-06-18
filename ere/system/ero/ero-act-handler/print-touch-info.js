@@ -12,6 +12,13 @@ const {
 } = require('#/data/ero/item-const');
 const { part_enum, part_touch, touch_list } = require('#/data/ero/part-const');
 
+const motion_info = [
+  ['朝向床头躺着', '朝向床头趴着'],
+  ['朝向床尾坐着', '朝向床头坐着'],
+  ['朝向床尾站着', '朝向床头站着'],
+  ['朝向床尾趴着', '朝向床头躺着'],
+];
+
 /**
  * @param {number} cid
  * @param {number} cpart
@@ -73,6 +80,12 @@ function print_touch_info(cid) {
             },
             type: 'divider',
           },
+          {
+            config: { align: 'center', width: 23 },
+            content:
+              motion_info[era.get('tcvar:0:体位')][era.get('tcvar:0:朝向')],
+            type: 'text',
+          },
         ],
         config: { width: 6 },
       },
@@ -86,6 +99,14 @@ function print_touch_info(cid) {
               width: 23,
             },
             type: 'divider',
+          },
+          {
+            config: { align: 'center', offset: 1, width: 23 },
+            content:
+              motion_info[era.get(`tcvar:${cid}:体位`)][
+                era.get(`tcvar:${cid}:朝向`)
+              ],
+            type: 'text',
           },
         ],
         config: { width: 6 },
@@ -121,18 +142,6 @@ function print_touch_info(cid) {
       },
     ],
   ];
-  if (era.isDebug()) {
-    temp[0][0].columns.push({
-      config: { width: 23 },
-      content: `体位：${era.get('tcvar:0:体位')}；朝向：${era.get('tcvar:0:朝向')}`,
-      type: 'text',
-    });
-    temp[0][1].columns.push({
-      config: { align: 'right', offset: 1, width: 23 },
-      content: `体位：${era.get(`tcvar:${cid}:体位`)}；朝向：${era.get(`tcvar:${cid}:朝向`)}`,
-      type: 'text',
-    });
-  }
   touch_list.forEach((part, part_index) => {
     const part_name = part_touch[part];
     const my_touch = get_part_touch(0, part);

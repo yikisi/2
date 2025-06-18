@@ -11,6 +11,7 @@ const EroOrgy = require('#/event/ero/common-lines/interface/ero-orgy');
 
 const { get_random_entry } = require('#/utils/list-utils');
 
+const { motion_const, towards_const } = require('#/data/ero/part-const');
 const { penis_desc } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
@@ -23,10 +24,11 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 async function common_ask_spit_roast(attacker, defender, supporter, hook) {
   const part_name = hook.hook === ero_hooks.ask_spit_roast ? '小穴' : '屁穴';
   if (hook.arg) {
+    const motion = era.get(`tcvar:${attacker}:体位`) === motion_const.rev;
+    const towards = era.get(`tcvar:${attacker}:朝向`) === towards_const.right;
     await era.printAndWait([
       attacker.get_colored_name(),
-      ' ',
-      Math.random() < 0.5 ? '张开双腿' : '四肢着地',
+      (motion ^ towards) > 0 ? ' 张开双腿' : ' 四肢着地',
       '摇晃着屁股，示意 ',
       defender.get_colored_name(),
       ' 插入自己的',
@@ -170,9 +172,12 @@ class EroNormalOrgy extends EroOrgy {
           ]);
         },
         async () => {
+          const motion = era.get(`tcvar:${attacker}:体位`) === motion_const.rev;
+          const towards =
+            era.get(`tcvar:${attacker}:朝向`) === towards_const.right;
           await era.printAndWait([
             attacker.get_colored_name(),
-            get_random_entry([' 张开双腿', ' 四肢着地']),
+            (motion ^ towards) > 0 ? ' 张开双腿' : ' 四肢着地',
             '摇晃着屁股，示意 ',
             defender.get_colored_name(),
             ' 与 ',

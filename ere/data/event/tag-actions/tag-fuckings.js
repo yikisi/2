@@ -134,10 +134,10 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.virgin,
       EroHookTag.npc_virgin_sex_check,
-      (chara_id, other_id) =>
-        era.get('tflag:主导权') === chara_id ||
-        (era.get(`tcvar:${chara_id}:阴道接触部位`) === -1 &&
-          era.get(`tcvar:${other_id}:阴茎接触部位`) === -1),
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        (era.get(`tcvar:${cid}:阴道接触部位`) === -1 &&
+          era.get(`tcvar:${oid}:阴茎接触部位`) === -1),
     ],
     [ero_action_tags.awake, ero_action_tags.insert],
     EroHookTag.condition_type.no,

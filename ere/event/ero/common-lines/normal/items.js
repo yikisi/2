@@ -4,8 +4,6 @@
  */
 const era = require('#/era-electron');
 
-const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
-
 const EroItems = require('#/event/ero/common-lines/interface/ero-items');
 
 const { buff_colors } = require('#/data/color-const');
@@ -26,14 +24,14 @@ class EroNormalItems extends EroItems {
     switch (extra_flag.item) {
       case medicine_enum.fron_k:
       case medicine_enum.fron_p:
-        if (era.get(`cflag:${aim_chara.id}:性别`) !== 1) {
+        if (era.get(`cflag:${aim_chara.id}:性别`) === 0) {
           await era.printAndWait([
             aim_chara.get_colored_name(),
             ' 长出了 ',
             { color: buff_colors[2], content: '凶恶的巨根' },
             '！',
           ]);
-        } else if (get_penis_size(aim_chara.id) <= 3) {
+        } else {
           await era.printAndWait([
             aim_chara.get_colored_name(),
             ' 的肉棒更形健硕了……',

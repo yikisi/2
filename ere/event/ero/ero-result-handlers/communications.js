@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { clean_parts_oor } = require('#/system/ero/sys-calc-distance');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
   clean_part,
@@ -19,19 +20,14 @@ const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
-const {
-  motion_const,
-  part_enum,
-  part_touch,
-  towards_const,
-} = require('#/data/ero/part-const');
+const { part_enum, part_touch } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
 /** @param {Record<string,function(number,number,HookArg,{check:number})>} handlers */
 module.exports = (handlers) => {
   handlers[ero_hooks.go_on] = () => {
-    return era.set('tflag:投降', 1);
+    era.set('tflag:投降', 1);
   };
 
   handlers[ero_hooks.kiss] = (attacker, defender, _, extra_flag) => {
@@ -40,6 +36,10 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
+    clean_parts_oor(attacker, defender, {
+      a: part_enum.mouth,
+      d: part_enum.mouth,
+    });
   };
 
   handlers[ero_hooks.french_kiss] = (attacker, defender, _, extra_flag) => {
@@ -48,6 +48,10 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth, 0.2),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
+    clean_parts_oor(attacker, defender, {
+      a: part_enum.mouth,
+      d: part_enum.mouth,
+    });
   };
 
   handlers[ero_hooks.relax] = (_, defender, hook) => {
@@ -97,9 +101,6 @@ module.exports = (handlers) => {
   handlers[ero_hooks.switch] = (a, d) => {
     change_ero_master(d);
     add_juel(d, '顺从', base_emotion_juel);
-    era.set(`tcvar:${a}:体位`, era.set(`tcvar:${d}:体位`, motion_const.lie));
-    era.set(`tcvar:${a}:朝向`, towards_const.right);
-    era.set(`tcvar:${d}:朝向`, towards_const.left);
   };
 
   /**
@@ -113,9 +114,6 @@ module.exports = (handlers) => {
     if (s_flag) {
       change_ero_master(a);
       add_juel(d, '恐惧', base_emotion_juel);
-      era.set(`tcvar:${a}:体位`, era.set(`tcvar:${d}:体位`, motion_const.lie));
-      era.set(`tcvar:${a}:朝向`, towards_const.left);
-      era.set(`tcvar:${d}:朝向`, towards_const.right);
     } else {
       add_juel(a, '恐惧', base_emotion_juel / 4);
     }

@@ -150,7 +150,7 @@ async function cum_in_womb(
             ? ' 在屈辱中感受到了身为 '
             : ' 欣喜地品尝着身为 ',
           {
-            content: era.get(`cflag:${mother.id}:性别`) ? '扶她' : '女性',
+            content: era.get(`cflag:${mother.id}:性别`) > 0 ? '扶她' : '女性',
             color: buff_colors[2],
           },
           ' 的极乐……',
