@@ -114,6 +114,9 @@ function check_distance(
   if (!main_parts) {
     return false;
   }
+  if (aim_parts.a === main_parts.a && aim_parts.d === main_parts.d) {
+    return true;
+  }
   const base =
     base_dict[motions.a][motions.d][towards.a][towards.d][
       era.get(`tcvar:${cid}:上下`)
@@ -122,14 +125,37 @@ function check_distance(
   let d_loc;
   switch (base) {
     case base_enum.same:
-      d_loc = get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
       if (aim_parts.a === part_enum.hand) {
         a_loc =
           era.get(`tcvar:${cid}:肩膀位置`) - get_part_len(cid, main_parts.a);
-        const aim_len = era.get(`tcvar:${cid}:臂长`);
-        return d_loc >= a_loc - aim_len && d_loc <= a_loc + aim_len;
+        d_loc =
+          get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
+        const arm_len = era.get(`tcvar:${cid}:臂长`);
+        return d_loc >= a_loc - arm_len && d_loc <= a_loc + arm_len;
+      } else if (aim_parts.d === part_enum.hand) {
+        a_loc =
+          get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
+        d_loc =
+          era.get(`tcvar:${oid}:肩膀位置`) - get_part_len(oid, main_parts.d);
+        const arm_len = era.get(`tcvar:${oid}:臂长`);
+        return a_loc >= d_loc - arm_len && a_loc <= d_loc + arm_len;
+      } else if (aim_parts.a === part_enum.foot) {
+        d_loc =
+          get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
+        const m_a_loc = get_part_len(cid, main_parts.a);
+        const v_loc = get_part_len(cid, part_enum.virgin);
+        const f_loc = get_part_len(cid, part_enum.foot);
+        return d_loc <= f_loc - m_a_loc && d_loc >= v_loc - m_a_loc;
+      } else if (aim_parts.d === part_enum.foot) {
+        a_loc =
+          get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
+        const m_d_loc = get_part_len(oid, main_parts.d);
+        const v_loc = get_part_len(oid, part_enum.virgin);
+        const f_loc = get_part_len(oid, part_enum.foot);
+        return a_loc <= f_loc - m_d_loc && a_loc >= v_loc - m_d_loc;
       }
       a_loc = get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
+      d_loc = get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
       return (
         a_loc !== 0 && a_loc * d_loc >= 0 && Math.abs(a_loc) >= Math.abs(d_loc)
       );
